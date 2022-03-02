@@ -46,6 +46,7 @@
 #      - Sharpless-308: The Dolphin Nebula; https://apod.nasa.gov/apod/ap200302.html
 #      - The Medulla Nebula Supernova Remnant; https://apod.nasa.gov/apod/ap210118.html
 #      - NGC 6188: The Dragons of Ara; https://apod.nasa.gov/apod/ap200728.html
+#      - NGC 2170: Angel Nebula; https://apod.nasa.gov/apod/ap160428.html
 #   HST:
 #      - Hubble offers a dazzling necklace; https://spacetelescope.org/images/potw1133a/
 #   ABIN: 
@@ -61,9 +62,12 @@
 #   AM:
 #      - Messier 55 "The Summer Rose Star"; http://cs.astronomy.com/asy/m/starclusters/489919.aspx
 #      - Open cluster Stock 2; https://cs.astronomy.com/asy/m/starclusters/491502.aspx
+#      - NGC 1664 - The Kite Cluster; https://cs.astronomy.com/asy/m/starclusters/491916.aspx
+#      - The Little Scorpion Cluster (NGC 1342); https://cs.astronomy.com/asy/m/starclusters/491498.aspx
 #   NASA:
 #      - Caldwell 22; https://www.nasa.gov/feature/goddard/caldwell-22
 #      - NASA Missions Explore a ‘TIE Fighter’ Active Galaxy; https://www.nasa.gov/feature/goddard/2020/nasa-missions-explore-a-tie-fighter-active-galaxy
+#      - NGC 4151: The 'Eye of Sauron'; https://www.nasa.gov/mission_pages/chandra/multimedia/11-029.html
 #   DSW: Deep-Sky Wonders: A Tour of the Universe with Sky and Telescope's Sue French, Firefly Books, 2011
 #   TSS: Treasures of the Southern Sky by Robert Gendler, Lars Lindberg Christensen and David Malin, Springer-Verlag New York, 2011; DOI: 10.1007/978-1-4614-0628-0
 #   BCH: Robert Burnham Jr., Burnham's Celestial Handbook: An Observer's Guide to the Universe Beyond the Solar System, Vol. 1-3, Dover Publications, 1978-1979
@@ -104,6 +108,7 @@
 #      - NGC2070: Great Looped Nebula; Results of astronomical observations made during the years 1834, 5, 6, 7, 8, at the Cape of Good Hope...
 #   ???: Source very much needed. Marked especially for objects which have a well-known name, where a new/alternative name does not help anybody.
 #   TBD:  ADD OTHERS HERE!
+#      - The Kite Cluster (NGC 1664); https://observing.skyhound.com/archives/dec/NGC_1664.html
 NGC  40              _("Bow-Tie Nebula") # ESKY, B500
 NGC  40              _("Scarab Nebula") # B500
 NGC  55              _("String of Pearls") # SG
@@ -188,13 +193,13 @@ NGC  1316            _("Fornax A") # NED, SIMBAD, TSS, SG, HT, WSG, PSA, B500
 NGC  1317            _("Fornax B") # SIMBAD
 NGC  1333            _("Embryo Nebula") # B500, HT
 NGC  1333            _("Phantom Tiara") # HT
-NGC  1342            _("Little Scorpion Cluster")
+NGC  1342            _("Little Scorpion Cluster") # AM
 NGC  1342            _("Stingray Cluster") # B500, SD
 NGC  1342            _("Sea Robin Cluster") # SD
 NGC  1350            _("The Colossal Cosmic Eye") # SG
 NGC  1360            _("Robin's Egg Nebula") # APOD
 NGC  1360            _("Comet Planetary Nebula") # B500, HT
-NGC  1365            _("Great Barred Spiral Galaxy") # TSS
+NGC  1365            _("Great Barred Spiral Galaxy") # TSS, WP
 NGC  1407            _("Eridanus A Group") # DSW
 NGC  1432            _("Maia Nebula") # SIMBAD, DSW, WSO, PSA
 NGC  1435            _("Merope Nebula") # SIMBAD, DSW, DWH, WSO, PSA, B500
@@ -228,6 +233,7 @@ NGC  1579            _("Northern Trifid Nebula") # DSW, SD, B500
 NGC  1595            _("Carafe Group")
 NGC  1598            _("Carafe Group")
 NGC  1647            _("Pirate Moon Cluster") # B500, HT
+NGC  1664            _("Kite Cluster") # AM, TBD
 NGC  1664            _("4-H cluster") # DWH
 NGC  1788            _("Cosmic Bat Nebula") # SD
 NGC  1788            _("Foxface Nebula") # SD
@@ -288,6 +294,7 @@ NGC  2169            _("The 37 Cluster") # HT, B500
 NGC  2169            _("The 'LE' Cluster")
 NGC  2169            _("Shopping Cart Cluster") # B500, HT
 NGC  2169            _("Little Pleiades") # HT
+NGC  2170            _("Angel Nebula") # APOD
 NGC  2170            _("Mon R2 IRS3") # SIMBAD
 NGC  2174            _("Monkey Head Nebula") # SIMBAD
 NGC  2232            _("Double Wedge Cluster") # DSW
@@ -309,8 +316,8 @@ NGC  2269            _("Head Hunter Cluster") # B500
 NGC  2269            _("Starfighter Cluster") # B500
 NGC  2281            _("Broken Heart Cluster") # B500, SD
 NGC  2287            _("Little Beehive Cluster") # MO, B500, CSOG-MSC
-NGC  2301            _("Hagrid's Dragon Cluster") # B500, HT
 NGC  2301            _("Great Bird Cluster") # SIMBAD, CSOG-MSC
+NGC  2301            _("Hagrid's Dragon Cluster") # B500, HT
 NGC  2301            _("Copeland's Golden Worm") # DSW
 NGC  2323            _("Heart-Shaped Cluster") # CSOG-MSC, B500
 NGC  2323            _("Coil Cluster") # DSW
@@ -463,6 +470,7 @@ NGC  4039            _("Snorter") # DSNI
 NGC  4039            _("Mosquito larvae") # B500
 NGC  4103            _("The Longtail") # SG
 NGC  4147            _("Kick the Can Cluster") # SD
+NGC  4151            _("Eye of Sauron") # NASA
 NGC  4169            _("The Box") # DSW, WSO, WSG
 NGC  4170            _("The Box") # DSW, WSO, WSG
 NGC  4174            _("The Box") # DSW, WSO, WSG
@@ -814,7 +822,7 @@ NGC  7789            _("Star Mist Cluster") # B500
 NGC  7789            _("Herschel's Spiral Cluster") # HT
 NGC  7789            _("Crab Cluster") # HT
 NGC  7789            _("Screaming Skull Cluster") # HT
-NGC  7790            _("The Widow's Web Cluster") # B500, SD                  	
+NGC  7790            _("The Widow's Web Cluster") # B500, SD
 NGC  7793            _("Bond's Galaxy") # HT, B500
 NGC  7814            _("The Little Sombrero Galaxy") # ESKY, B500
 NGC  7814            _("Electric Arc Galaxy") # B500
