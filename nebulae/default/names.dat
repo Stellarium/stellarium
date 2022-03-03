@@ -27,6 +27,7 @@
 #      - IC 4592: A Blue Horsehead; https://apod.nasa.gov/apod/ap090521.html
 #      - IC 4592: The Blue Horsehead Reflection Nebula; https://apod.nasa.gov/apod/ap130402.html
 #      - NGC 6979: Fleming's Triangular Wisp; https://apod.nasa.gov/apod/ap150917.html
+#      - NGC 6979: Pickering's Triangle; https://apod.nasa.gov/apod/ap150917.html
 #      - RCW 114: A Dragon's Heart in Ara; https://apod.nasa.gov/apod/ap180111.html
 #      - Barnard 228: The Dark Wolf Nebula in Lupus; https://apod.nasa.gov/apod/ap180726.html
 #      - NGC 1360: The Robin's Egg Nebula; https://apod.nasa.gov/apod/ap180511.html
@@ -123,6 +124,7 @@
 #      - IC2087 - Little Flame Nebula; https://delsaert.com/2018/12/02/barnard-22-and-the-little-flame-ic-2087/
 #      - Arp316 - Gamma Leonis Group; https://astronomy.com/observing/observing-podcasts/2016/04/the-eta-carinae-nebula-m95-and-the-gamma-leonis-group
 #      - B86 - Herschel's Hole in the Heavens; http://www.klima-luft.de/steinicke/Artikel/Herschel's%20Hole.pdf
+#      - CR89: 9-12 Geminorum Cluster; 1,001 Celestial Wonders to See Before You Die. P460.
 NGC  40              _("Bow-Tie Nebula") # ESKY, B500
 NGC  40              _("Scarab Nebula") # B500
 NGC  55              _("String of Pearls") # SG
@@ -227,7 +229,7 @@ NGC  1501            _("Oyster Nebula") # B500, DWH, HT, WP
 NGC  1501            _("Camel's Eye Nebula") # B500
 NGC  1501            _("Blue Oyster Nebula") # HT
 NGC  1502            _("Jolly Roger Cluster") # HT, B500
-NGC  1502            _("Golden Harp Cluster") # B500
+NGC  1502            _("Golden Harp Cluster") # B500, CSOG-BCH
 NGC  1514            _("Crystal Ball Nebula") # DSW, SD, B500
 NGC  1514            _("Pansy Nebula") # B500
 NGC  1528            _("m & m Double Cluster") # HT
@@ -772,7 +774,9 @@ NGC  6960            _("West Veil Nebula") # DSW, BCH, DWH, PAS
 NGC  6960            _("Cirrus Nebula") # SIMBAD
 NGC  6960            _("Witch's Broom Nebula") # WP, APOD
 NGC  6960            _("Veil Nebula") # PSA, CC, DN, B500
+# Fleming's Triangular Wisp/Pickering's Triangle lies 35' SW of NGC6979
 NGC  6979            _("Fleming's Triangular Wisp") # APOD
+NGC  6979            _("Pickering's Triangle") # APOD
 NGC  6979            _("Veil Nebula") # DN, B500
 NGC  6992            _("East Veil Nebula") # DSW, BCH, DWH, PAS
 NGC  6992            _("Veil Nebula") # WSO, PSA, DN, B500
@@ -877,6 +881,7 @@ IC   1805            _("Valentine Nebula") # B500
 IC   1805            _("AFGL 333 Cloud") # SIMBAD
 IC   2087            _("Little Flame Nebula") # TBD, CSOG-BCH
 IC   2118            _("Witch Head Nebula") # WK, DSW, TSS, PSA
+IC   2169            _("Dreyer's Nebula") # WP
 IC   2199            _("IC 2199 group") # WSG
 IC   2220            _("Toby Jug Nebula") # SIMBAD, TSS
 IC   2220            _("Butterfly Nebula")
@@ -972,6 +977,7 @@ CR   69              _("λ Ori Cluster") # HT
 CR   69              _("Aunt Margaret's Mirror") # HT
 CR   70              _("Orion Belt Cluster") # SD
 CR   70              _("Serpentine Column") # SD
+CR   89              _("9-12 Geminorum Cluster") # TBD
 CR   135             _("π Pup Cluster") # OGSC
 CR   140             _("Tuft in the Tail of the Dog Cluster")
 CR   205             _("Markarian 18 Cluster")
@@ -1230,6 +1236,7 @@ PK   331-01.1        _("Ant Nebula") # SIMBAD, DSNI
 PK   331-01.1        _("The Chamber of Horrors") # WP
 PK   331-12.1        _("Stingray Nebula") # WP, SIMBAD
 PK   340-03.1        _("Water Lily Nebula") # SIMBAD
+PNG  004.2+02.1      _("Silkworm Nebula") # SIMBAD
 PNG  010.4+04.4      _("Sakurai's Object") # SIMBAD
 PNG  054.2-03.4      _("Necklace Nebula") # HST
 PNG  126.6+01.3      _("Principes de Asturias Nebula") # SIMBAD
