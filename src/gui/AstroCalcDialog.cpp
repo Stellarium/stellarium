@@ -3195,16 +3195,8 @@ void AstroCalcDialog::generateSolarEclipses()
 							durationStr = QString("%1m 0%2s").arg(QString::number(durationMinute), QString::number(durationSecond));
 					}
 
-					if (withDecimalDegree)
-					{
-						latitudeStr = StelUtils::decDegToLatitudeStr(eclipseLatitude, false);
-						longitudeStr = StelUtils::decDegToLongitudeStr(eclipseLongitude, false);
-					}
-					else
-					{
-						latitudeStr = StelUtils::decDegToLatitudeStr(eclipseLatitude, true);
-						longitudeStr = StelUtils::decDegToLongitudeStr(eclipseLongitude, true);
-					}
+					latitudeStr = StelUtils::decDegToLatitudeStr(eclipseLatitude, !withDecimalDegree);
+					longitudeStr = StelUtils::decDegToLongitudeStr(eclipseLongitude, true, false, !withDecimalDegree);
 
 					ACSolarEclipseTreeWidgetItem* treeItem = new ACSolarEclipseTreeWidgetItem(ui->solareclipseTreeWidget);
 					treeItem->setText(SolarEclipseDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))); // local date and time
