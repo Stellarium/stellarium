@@ -48,3 +48,4 @@ ADD_SUBDIRECTORY( western_hlad )
 ADD_SUBDIRECTORY( western_SnT )
 # Exclude from standard package
 # ADD_SUBDIRECTORY( western_sternenkarten )
+ADD_SUBDIRECTORY( zulu )

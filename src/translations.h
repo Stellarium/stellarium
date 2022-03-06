@@ -455,7 +455,7 @@ class Translations
 		N_("Bright carbon stars");
 		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
 		N_("Bright barium stars");
-		
+	
 		// =====================================================================
 		// Landscape names
 		// TRANSLATORS: Name of landscape
