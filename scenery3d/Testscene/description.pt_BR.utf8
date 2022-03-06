@@ -1,12 +1,35 @@
 <h2>Cena de teste</h2>
 
-<p align="justify">Esta é uma cena de teste para o Stellarium e para o desenvolvimento do complemento Cenários 3D. Ela foi exportada pelo 
-SU8-Kerkythea-KT2OBJ.
+<p>Esta cena é mais útil quando usada como ensaio para seus próprios
+desenvolvimentos. Você deverá fazer uma cópia da pasta da cena e modificar à
+vontade, tente configurações materiais ou outros detalhes para descobrir
+como esta extensão se comporta. Então, construa e apresente seu próprio
+trabalho!</p>
 
-<p align="justify">Os pilares, como vistos do centro, proporcionam uma visão aproximada (mas não alta precisão!) das posições do nascer 
-e do pôr do Sol no solstício e no equinócio. Os pilares centrais formam uma linha que vai de leste a oeste. A rotação de 4,2 graus (teste de 
-convergência meridiana) precisa ser compensada! As coordenadas terrestres (Ctrl-R, T) mostram as coordenadas visíveis ao longo do borda sul e 
-oeste no solo. Este modelo também é utilizado para testar as capacidades gráficas do complemento e, por esse motivo, os parâmetros materiais 
-podem, às vezes, parecer estranhos.
+<h4>Coordenar e orientar testes</h4>
 
-<p align="justify">Autor: Georg Zotti, Georg.Zotti@univie.ac.at
+<p>Os pilares mostrados aqui, como visto no centro da estrutura, demonstram uma
+visão aproximada (sem precisão!) para as posições do solstício/equinócio
+nascer-do-sol/pôr-do-sol nas latitudes da Europa central. Os pilares
+centrais fornecem uma linha leste-oeste. A grade de coordenadas do
+levantamento visível no chão não se alinha com o norte geográfico. Uma
+rotação de -4,2 graus (teste para convergência meridiana) precisa ser
+compensada, por exemplo, enquanto os pilares centrais precisam sempre e
+unicamente apontar para o oeste-leste, as linhas da grade atingem levemente
+o horizonte norte (4,2 graus) a sua esquerda!</p>
+
+<p>Coordenadas para navegação no solo (Ctrl+R, T) deverão mostrar as
+coordenadas visíveis pelas bordas sul e oeste do solo.</p>
+
+<h4>Teste material</h4>
+
+<p>Este modelo também é usado para testar a capacidade gráfica de uma
+extensão. Você pode alterar os parâmetros dos materiais para criar efeitos
+cômicos como esferas semitransparentes ou com tijolos que brilham no escuro.</p>
+
+<p>Para testar os recursos temporais, os pilares e esferas são visíveis apenas
+entre os anos de 2000 e 2020. Edite o arquivo do material para alterar isto.</p>
+
+<h4>Modelo</h4>
+<p>Cena de teste para o desenvolvimento de Stellarium/scenery3d. Exporte de
+SU8-Kerkythea-KT2OBJ.</p>

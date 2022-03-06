@@ -28,6 +28,7 @@
 #include <QGuiApplication>
 #include <QStandardPaths>
 #include <QDir>
+#include <QRegularExpression>
 
 #include <cstdio>
 #include <iostream>
@@ -44,7 +45,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 	{
 		// Get the basename of binary
 		QString binName = argList.at(0);
-		binName.remove(QRegExp("^.*[/\\\\]"));
+		binName.remove(QRegularExpression("^.*[/\\\\]"));
 
 		std::cout << "Usage:\n"
 		          << "  "
@@ -227,18 +228,19 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 		// Over-ride the skyDatePart if the user specified the date using --sky-date
 		if (!skyDate.isEmpty())
 		{
-			// validate the argument format, we will tolerate yyyy-mm-dd by removing all -'s
-			QRegExp dateRx("\\d{8}");
-			if (dateRx.exactMatch(skyDate.remove("-")))
-				skyDatePart = QDate::fromString(skyDate, "yyyyMMdd").toJulianDay();
+			// validate the argument format, we will tolerate yyyy-mm-dd.
+			QRegularExpression dateRx("(-?\\d{4})-?(\\d{2})-?(\\d{2})");
+			QRegularExpressionMatch dateMatch=dateRx.match(skyDate);
+			if (dateMatch.hasMatch())
+			    StelUtils::getJDFromDate(&skyDatePart, dateMatch.captured(1).toInt(), dateMatch.captured(2).toInt(), dateMatch.captured(3).toInt(), 12, 0, 0);
 			else
-				qWarning() << "WARNING: --sky-date argument has unrecognised format  (I want yyyymmdd)";
+			    qWarning() << "WARNING: --sky-date argument has unrecognised format  (I want [-]yyyymmdd)" << skyDate.remove(QRegularExpression("\\b-"));
 		}
 
 		if (!skyTime.isEmpty())
 		{
-			QRegExp timeRx("\\d{1,2}:\\d{2}:\\d{2}");
-			if (timeRx.exactMatch(skyTime))
+			QRegularExpression timeRx("\\d{1,2}:\\d{2}:\\d{2}");
+			if (timeRx.match(skyTime).hasMatch())
 				skyTimePart = StelUtils::qTimeToJDFraction(QTime::fromString(skyTime, "hh:mm:ss"));
 			else
 				qWarning() << "WARNING: --sky-time argument has unrecognised format (I want hh:mm:ss)";

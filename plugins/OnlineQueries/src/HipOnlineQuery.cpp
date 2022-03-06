@@ -65,7 +65,7 @@ void HipOnlineReply::httpQueryFinished()
 	{
 		qDebug() << "HipOnlineReply::httpQueryFinished() has errors:" << reply->errorString();
 		currentStatus = HipQueryErrorOccured;
-		errorString = QString("%1: %2").arg(q_("Network error")).arg(reply->errorString());
+		errorString = QString("%1: %2").arg(q_("Network error"), reply->errorString());
 		emit statusChanged();
 		return;
 	}

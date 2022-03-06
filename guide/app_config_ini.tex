@@ -40,17 +40,23 @@ apparent\_magnitude\_algorithm     & string & Mallama2018 & Set algorithm for co
                                                    Possible values: \emph{Mallama2018}, \emph{ExpSup2013}, \emph{ExpSup1992}, \emph{AstrAlm1984}, \emph{Mueller1893} and \emph{Generic}.\\%\midrule
 nebula\_magnitude\_limit           & float  & 8.5  & Value of limiting magnitude for the deep-sky objects.\\%\midrule
 star\_magnitude\_limit             & float  & 6.5  & Value of limiting magnitude for the stars. Sometimes you don't want to display more stars when zooming in. \\%\midrule
-planet\_magnitude\_limit  		   & float  & 6.5  & Value of limiting magnitude for the planets. Sometimes you don't want to display more planets when zooming in. \\%\midrule
+planet\_magnitude\_limit           & float  & 6.5  & Value of limiting magnitude for the planets. Sometimes you don't want to display more planets when zooming in. \\%\midrule
 planets\_orbits\_color\_style      & string & one\_color & Set the style of orbits color. Possible values: \emph{one\_color}, \emph{groups} and \emph{max}.\\%\midrule
 flag\_nebula\_magnitude\_limit     & bool   & false & Set to \emph{true} to activate limit for showing deep-sky objects.\\%\midrule
 flag\_star\_magnitude\_limit       & bool   & false & Set to \emph{true} to activate limit for showing stars\\%\midrule
 flag\_planet\_magnitude\_limit     & bool   & false & Set to \emph{true} to activate limit for showing planets.\\\midrule
-extinction\_mode\_below\_horizon   & string & zero & Set extinction mode for atmosphere below horizon. Possible values: \emph{zero}, \emph{mirror} and \emph{major\_planets}.\\
+extinction\_mode\_below\_horizon   & string & zero & Set extinction mode for atmosphere below horizon. Possible values: \emph{zero}, \emph{mirror} and \emph{max}.\\
 twilight\_altitude                 & float  & -6.0 & Solar altitude for going to previous/next twilight.\\\midrule
 %
-flag\_stars                        & bool   & true  & Set to \emph{false} to hide the stars on start-up\\%\midrule
-flag\_star\_name                   & bool   & true  & Set to \emph{false} to hide the star labels on start-up\\%\midrule
-flag\_star\_additional\_names      & bool   & true  & Set \emph{true} to use additional names (also known as) for stars.\\%\midrule
+flag\_stars                        & bool   & true  & Set to \emph{false} to hide the stars on start-up\\
+flag\_star\_name                   & bool   & true  & Set to \emph{false} to hide the star labels on start-up\\
+flag\_star\_additional\_names      & bool   & true  & Set \emph{true} to use all available proper names for stars.\\\midrule
+%
+flag\_star\_designation\_usage     & bool   & false & If \emph{true}, use designations of stars on the sky (on-screen labels) instead of their common names.\\
+flag\_star\_designation\_dbl       & bool   & false & If \emph{true}, and star doesn't have common name and Bayer or Flamsteed designations then use first of traditional designations of double stars to the on-screen labels.\\
+flag\_star\_designation\_var       & bool   & false & If \emph{true}, and star doesn't have common name or Bayer, Flamsteed or double star designation then use designation of variable stars as the on-screen label.\\
+flag\_star\_designation\_hip       & bool   & false & If \emph{true}, use HIP designations of stars for the on-screen labels if common name or traditional designations do not exist for star.\\\midrule
+%
 flag\_planets                      & bool   & true  & Set to \emph{false} to hide the planet labels on start-up\\%\midrule
 flag\_planets\_hints               & bool   & true  & Set to \emph{false} to hide the planet hints on startup (names and circular highlights)\\%\midrule
 flag\_planets\_orbits              & bool   & false & Set to \emph{true} to show the planet orbits on startup\\%\midrule
@@ -90,7 +96,6 @@ flag\_dso\_designation\_usage      & bool   & false & If \emph{true}, use design
 flag\_dso\_outlines\_usage         & bool   & false & If \emph{true}, use outlines for big deep-sky objects on the sky instead of their hints.\\%\midrule
 flag\_dso\_additional\_names       & bool   & true  & Set \emph{true} to use additional names (also known as) for deep-sky objects.\\\midrule
 %
-flag\_grs\_custom                  & bool   & false & Turns on and off to using custom settings for calculation of position of Great Red Spot on Jupiter.\\%\midrule
 grs\_longitude                     & int    & 216   & Longitude (System II) of Great Red Spot on Jupiter in degrees.\\%\midrule
 grs\_drift                         & float  & 15.0  & Annual drift of Great Red Spot on Jupiter in degrees.\\%\midrule
 grs\_jd                            & float  & 2456901.5 & Initial JD for calculation of position of Great Red Spot on Jupiter.\\%\midrule
@@ -142,6 +147,7 @@ wut\_time\_interval            & int    & 0     & Identificator for time interva
 wut\_angular\_limit\_flag      & bool   & false & Set to \emph{true} to use the angular size filter.\\%\midrule
 wut\_angular\_limit\_min       & float  & 1.0   & Minimal allowed angular size, arcminutes.\\%\midrule
 wut\_angular\_limit\_max       & float  & 600.0 & Maximal allowed angular size, arcminutes.\\%\midrule
+wut\_altitude\_min             & float  & 0.0   & Minimal allowed altitude for compute rise and set times, degrees.\\%\midrule
 graphs\_celestial\_body        & string & Moon  & Default celestial body for draw of graphs.\\%\midrule
 graphs\_duration               & int    & 1     & How much years account into calculation of graphs.\\%\midrule
 graphs\_first\_id              & int    & 1     & Identificator for left graph (blue line).\\%\midrule
@@ -302,26 +308,30 @@ You can fine-tune the bits of information to display for the selected object in 
 
 \begin{longtable}{l|l|l}\toprule
 \emph{ID} & \emph{Type} & \emph{Description}\\\midrule
-flag\_show\_absolutemagnitude & bool & absolute magnitude for objects.\\%\midrule
-flag\_show\_altaz             & bool & horizontal coordinates for objects.\\%\midrule
-flag\_show\_catalognumber     & bool & catalog designations for objects.\\%\midrule
-flag\_show\_distance          & bool & distance to object.\\%\midrule
-flag\_show\_extra             & bool & extra info for object.\\%\midrule
-flag\_show\_hourangle         & bool & hour angle for object.\\%\midrule
-flag\_show\_magnitude         & bool & magnitude for object.\\%\midrule
-flag\_show\_name              & bool & common name for object.\\%\midrule
-flag\_show\_radecj2000        & bool & equatorial coordinates (J2000.0 frame) of object.\\%\midrule
-flag\_show\_radecofdate       & bool & equatorial coordinates (of date) of object.\\%\midrule
-flag\_show\_galcoord          & bool & galactic coordinates (System~II) of object.\\%\midrule
-flag\_show\_supergalcoord     & bool & supergalactic coordinates of object.\\%\midrule
-flag\_show\_eclcoordj2000     & bool & ecliptic coordinates (J2000.0 frame) of object.\\%\midrule
-flag\_show\_eclcoordofdate    & bool & ecliptic coordinates (of date) of object.\\%\midrule
-flag\_show\_type              & bool & type of object.\\%\midrule
-flag\_show\_size              & bool & size of object.\\%\midrule
-flag\_show\_sidereal\_time    & bool & sidereal time.\\%\midrule
-flag\_show\_rts\_time         & bool & rise, transit and set times.\\%\midrule
-flag\_show\_velocity          & bool & velocity of object.\\%\midrule
-flag\_show\_constellation     & bool & show 3-letter IAU\index{IAU} constellation label.\\\bottomrule
+flag\_show\_name              & bool & common name for object.\\
+flag\_show\_catalognumber     & bool & catalog designations for objects.\\
+flag\_show\_type              & bool & type of object.\\
+flag\_show\_magnitude         & bool & magnitude for object.\\
+flag\_show\_absolutemagnitude & bool & absolute magnitude for objects.\\
+flag\_show\_radecj2000        & bool & equatorial coordinates (J2000.0 frame) of object.\\
+flag\_show\_radecofdate       & bool & equatorial coordinates (of date) of object.\\
+flag\_show\_hourangle         & bool & hour angle for object.\\
+flag\_show\_altaz             & bool & horizontal coordinates for objects.\\
+flag\_show\_eclcoordj2000     & bool & ecliptic coordinates (J2000.0 frame) of object.\\
+flag\_show\_eclcoordofdate    & bool & ecliptic coordinates (of date) of object.\\
+flag\_show\_galcoord          & bool & galactic coordinates (System~II) of object.\\
+flag\_show\_supergalcoord     & bool & supergalactic coordinates of object.\\
+flag\_show\_othercoord        & bool & other coordinates of object (from plugins).\\
+flag\_show\_constellation     & bool & show 3-letter IAU\index{IAU} constellation label.\\
+flag\_show\_sidereal\_time    & bool & sidereal time.\\
+flag\_show\_elongation        & bool & elongation from the Sun for solar system objects.\\
+flag\_show\_distance          & bool & distance to object.\\
+flag\_show\_velocity          & bool & velocity of object.\\
+flag\_show\_propermotion      & bool & proper motion of object.\\
+flag\_show\_size              & bool & size of object.\\
+flag\_show\_rts\_time         & bool & rise, transit and set times.\\
+flag\_show\_solar\_lunar      & bool & horizontal coordinates for Sun and Moon.\\
+flag\_show\_extra             & bool & extra info for object.\\\bottomrule
 \end{longtable}
 
 \subsection{\big[custom\_time\_correction\big]}
@@ -480,8 +490,8 @@ flag\_show\_compass\_button            & bool  & false & Show a button to toggle
 flag\_show\_buttons\_background        & bool  & true  & If \emph{true}, use background under buttons on bottom bar.\\\midrule
 flag\_overwrite\_info\_color           & bool  & false & Set \emph{true} to use one color for test in info panel for all objects.\\\midrule
 %
-selected\_object\_info            & string & all  & Values: \emph{all}, \emph{short}, \emph{none}, 
-                                                    and \emph{custom} (since V0.12.0; see~\ref{sec:gui:configuration:info}).\\\midrule
+selected\_object\_info            & string & all  & Values: \emph{default}, \emph{all}, \emph{short}, \emph{none}, 
+                                                    and \emph{custom} (see~\ref{sec:gui:configuration:info}).\\\midrule
 custom\_marker\_size             & float   & 5.0 & Size of custom marker.\\%\midrule
 custom\_marker\_radius\_limit    & int   & 15 & Limit the click radius for mouse cursor position in any direction for removing of closest custom marker.\\\midrule
 %% NO LONGER HERE!
@@ -576,14 +586,15 @@ date\_display\_format & string & date display format: can be \emph{system\_defau
 \subsection{\big[main\big]}
 %\label{sec:config.ini:main}
 
-\begin{tabularx}{\textwidth}{l|l|X}\toprule
+\begin{longtable}{l|l|p{77mm}}\toprule
 \emph{ID}                 & \emph{Type} & \emph{Description}\\\midrule
 invert\_screenshots\_colors & bool   & If \emph{true}, Stellarium will saving the screenshorts with inverted colors.\\%\midrule
 screenshot\_dir             & string & Path for saving screenshots\\%\midrule
 screenshot\_format          & string & File format. One of \texttt{png|jpg|jpeg|tif|tiff| webp|pbm|pgm|ppm|xbm|xpm|ico}\\
 screenshot\_custom\_size    & bool   & \emph{true} if you want to specify particular dimensions next:\\
 screenshot\_custom\_width   & int    & custom width of screenshots. Max.\ available size is hardware dependent!\\
-screenshot\_custom\_height  & int    & custom height of screenshots. Max.\ available size is hardware dependent!\\\midrule
+screenshot\_custom\_height  & int    & custom height of screenshots. Max.\ available size is hardware dependent!\\
+screenshot\_dpi             & int    & DPI setting for screenshots. \\\midrule
 version                     & string & Version of Stellarium. This parameter may be used to detect necessary changes in config.ini file, do not edit.\\%\midrule
 use\_separate\_output\_file & bool   & Set to \emph{true} if you want to create a new file for script output for each start of Stellarium\\%\midrule
 restore\_defaults           & bool   & If \emph{true}, Stellarium will restore default settings at startup. 
@@ -593,7 +604,7 @@ check\_requirements         & bool   & Set to \emph{false} if you want to disabl
                                        Expect problems if hardware is below requirements!\\
 geoip\_api\_url             & string & URL for JSON interface of GeoIP service.\\
 \bottomrule
-\end{tabularx}
+\end{longtable}
 
 \subsection{\big[navigation\big]}
 %\label{sec:config.ini:navigation}
@@ -611,7 +622,8 @@ flag\_enable\_zoom\_keys        & bool   & Set to \emph{false} if you want to di
 flag\_manual\_zoom              & bool   & Set to \emph{false} for normal zoom behaviour as described in this guide. 
                                            When set to true, the auto zoom feature only moves in a small amount and must be pressed many times\\%\midrule
 flag\_enable\_move\_keys        & bool   & Set to \emph{false} if you want to disable the arrow keys\\%\midrule
-flag\_enable\_mouse\_navigation & bool   & Set to \emph{false} if you want to disable the mouse navigation.\\%\midrule
+flag\_enable\_mouse\_navigation & bool   & Set to \emph{false} if you want to disable the mouse pan (drag).\\%\midrule
+flag\_enable\_mouse\_zooming & bool   & Set to \emph{false} if you want to disable the mouse zooming (mousewheel).\\%\midrule
 init\_fov                       & float  & Initial field of view, in degrees. Typical value: ''60''.\\%\midrule
 min\_fov                        & float  & Minimal field of view, in degrees. Typical value: ''0.001389'' (5").\\%\midrule
 max\_fov                        & float  & Maximal field of view, in degrees. Typical value: ''360.0''.\\%\midrule

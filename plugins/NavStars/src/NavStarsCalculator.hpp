@@ -104,7 +104,7 @@ public:
 	QString lmstDegreesPrintable()
 	{
 		QString sign = lmst < 0. ? "-" : "+";
-		return QString("%1%2%3").arg(sign).arg(QString::number(lmst, 'f', 3)).arg("&deg;");
+		return QString("%1%2%3").arg(sign, QString::number(lmst, 'f', 3), "&deg;");
 	}
 	QString lmstPrintable() { return radToDm(lmst_rad); }
 
@@ -145,7 +145,7 @@ public:
 	}
 	QString gmstDegreesPrintable() {
 		QString sign = gmst < 0. ? "-" : "+";
-		return QString("%1%2%3").arg(sign).arg(QString::number(gmst, 'f', 3)).arg("&deg;");
+		return QString("%1%2%3").arg(sign, QString::number(gmst, 'f', 3), "&deg;");
 	}
 	QString gmstPrintable() { return radToDm(gmst_rad); }
 

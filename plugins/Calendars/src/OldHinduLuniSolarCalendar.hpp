@@ -21,6 +21,10 @@
 
 #include "OldHinduSolarCalendar.hpp"
 
+//! @class OldHinduLuniSolarCalendar
+//! Functions for the Old Hindu Lunisolar calendars described in CC:UE chapter 10.
+//! @author Georg Zotti
+//! @ingroup calendars
 //! The old Hindu Lunisolar calendar as given in CC.UE describes the South Indian version where months begin at New Moon (amanta scheme).
 //! The name of a lunar month depends on the solar month that begins during that lunar month.
 //! A month is leap and takes the following month’s name when no solar month begins within it.
@@ -52,8 +56,6 @@ public slots:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-	// static public Methods from CC
-public:
 	//! compute RD date from an Old Hindu Lunisolar date
 	//! parts={ year, month, leap, day}
 	static int fixedFromOldHinduLunar(QVector<int> parts);

@@ -30,6 +30,8 @@ class QToolButton;
 
 class AddRemoveLandscapesDialog;
 class AtmosphereDialog;
+class SkylightDialog;
+class TonemappingDialog;
 class GreatRedSpotDialog;
 class ConfigureDSOColorsDialog;
 class ConfigureOrbitColorsDialog;
@@ -59,19 +61,22 @@ private slots:
 	void changeLandscape(QListWidgetItem* item);
 	void landscapeChanged(QString id,QString name);
 	void updateZhrDescription(int zhr);
-	void setBortleScaleToolTip(int Bindex);
 	void setCurrentLandscapeAsDefault(void);
 	void setCurrentCultureAsDefault(void);
 	void updateDefaultSkyCulture();
 	void updateDefaultLandscape();
 
 	void showAddRemoveLandscapesDialog();
-        void showAtmosphereDialog();
+	// GZ I make this public to have it on a hotkey...
+public slots:
+	void showAtmosphereDialog();
+	void showSkylightDialog();
+	void showTonemappingDialog();
 	void showGreatRedSpotDialog();
 	void showConfigureDSOColorsDialog();
 	void showConfigureOrbitColorsDialog();
 
-	void populateLightPollution();
+private slots:
 	void populatePlanetMagnitudeAlgorithmsList();
 	void populatePlanetMagnitudeAlgorithmDescription();
 	void setPlanetMagnitudeAlgorithm(int algorithmID);
@@ -102,6 +107,8 @@ private:
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
 	AtmosphereDialog * atmosphereDialog;
+	SkylightDialog * skylightDialog;
+	TonemappingDialog * tonemappingDialog;
 	GreatRedSpotDialog * greatRedSpotDialog;
 	ConfigureDSOColorsDialog * configureDSOColorsDialog;
 	ConfigureOrbitColorsDialog * configureOrbitColorsDialog;

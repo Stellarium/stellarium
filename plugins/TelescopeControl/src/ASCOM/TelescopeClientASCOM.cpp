@@ -20,6 +20,7 @@
 
 #include <QDebug>
 #include <QMessageBox>
+#include <QRegularExpression>
 #include <cmath>
 #include <limits>
 
@@ -50,11 +51,12 @@ TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& p
 	: TelescopeClient(name)
 	, mEquinox(eq)
 {
-	QRegExp paramRx("^([^:]*):([^:]*)$");
-	if (paramRx.exactMatch(params))
+	QRegularExpression paramRx("^([^:]*):([^:]*)$");
+	QRegularExpressionMatch paramMatch=paramRx.match(params);
+	if (paramMatch.hasMatch())
 	{
-		mAscomDeviceId = paramRx.cap(1).trimmed();
-		mAscomUseDeviceEqCoordType = paramRx.cap(2).trimmed() == "true";
+		mAscomDeviceId = paramMatch.captured(1).trimmed();
+		mAscomUseDeviceEqCoordType = paramMatch.captured(2).trimmed() == "true";
 	}
 
 	qDebug() << "TelescopeClientASCOM::TelescopeClientASCOM with telescope name " << name << " and ascomDeviceId " << mAscomDeviceId;

@@ -131,36 +131,30 @@ void PulsarsDialog::createDialogContent()
 
 void PulsarsDialog::setAboutHtml(void)
 {
-	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Pulsars Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + PULSARS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + PULSARS_PLUGIN_LICENSE + "</td></tr>";
-	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf</td></tr>";
 	html += "</table>";
 
 	html += "<p>" + q_("This plugin plots the position of various pulsars, with object information about each one.") + "</p>";
 	html += "<p>" + QString(q_("Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) (%1astro-ph/0412641%2))."))
-			.arg("<a href=\"http://arxiv.org/abs/astro-ph/0412641\">")
-			.arg("</a>") + "</p>";
+			.arg("<a href=\"http://arxiv.org/abs/astro-ph/0412641\">", "</a>") + "</p>";
 	html += "<p>" + q_("Current catalog contains info about %1 pulsars.").arg(psr->getCountPulsars()) + "</p>";
-	html += "<p>" + QString("<strong>%1:</strong> %2")
-			.arg(q_("Note"))
-			.arg(q_("pulsar identifiers have the prefix 'PSR'")) + "</p>";
+	html += "<p>" + QString("<strong>%1:</strong> %2").arg(q_("Note"), q_("pulsar identifiers have the prefix 'PSR'")) + "</p>";
 	html += "<h3>" + q_("Acknowledgment") + "</h3>";
 	html += "<p>" + q_("We thank the following people for their contribution and valuable comments:") + "</p><ul>";
-	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)")
-			.arg(q_("Vladimir Samodourov"))
-			.arg("http://www.prao.ru/")
-			.arg(q_("Pushchino Radio Astronomy Observatory"))
-			.arg(q_("in Russia")) + "</li>";
-	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)")
-			.arg(q_("Maciej Serylak"))
-			.arg("http://www.obs-nancay.fr/")
-			.arg(q_("Nancay Radioastronomical Observatory"))
-			.arg(q_("in France")) + "</li>";
+	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)").arg(
+				 q_("Vladimir Samodourov"),
+				 "http://www.prao.ru/",
+				 q_("Pushchino Radio Astronomy Observatory"),
+				 q_("in Russia")) + "</li>";
+	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)").arg(
+				 q_("Maciej Serylak"),
+				 "http://www.obs-nancay.fr/",
+				 q_("Nancay Radioastronomical Observatory"),
+				 q_("in France")) + "</li>";
 	html += "</ul>";
 
 	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Pulsars plugin");
@@ -242,7 +236,7 @@ void PulsarsDialog::setFilteringEnabled(int checkState)
 
 void PulsarsDialog::setFilterValue(double v)
 {
-	psr->setFilterValue((float)v);
+	psr->setFilterValue(static_cast<float>(v));
 }
 
 void PulsarsDialog::setDisplayAtStartupEnabled(int checkState)

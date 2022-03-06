@@ -26,7 +26,7 @@
 #include <QString>
 #include <QStringList>
 #include <QDebug>
-#include <QRegExp>
+#include <QRegularExpression>
 
 #include "StelFileMgr.hpp"
 
@@ -37,7 +37,7 @@ void TestStelFileMgr::initTestCase()
 	partialPath1 = "testfilemgr/path1";
 	partialPath2 = "testfilemgr/path2";
 	workingDir = tempDir.path();
-	workingDir.replace(QRegExp("/+$"), "");  // sometimes the temp path will have / on the end... zap it.
+	workingDir.replace(QRegularExpression("/+$"), "");  // sometimes the temp path will have / on the end... zap it.
 	if (!QDir::setCurrent(workingDir))
 	{
 		QFAIL(qPrintable("could not set the working directory to: "+workingDir));

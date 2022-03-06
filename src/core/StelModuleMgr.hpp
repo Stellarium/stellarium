@@ -39,7 +39,7 @@ class StelModuleMgr : public QObject
 
 public:
 	StelModuleMgr();
-	~StelModuleMgr();
+	~StelModuleMgr() Q_DECL_OVERRIDE;
 
 	//! Regenerate calling lists if necessary
 	void update();
@@ -90,7 +90,7 @@ public:
 	//! Contains the information read from the module.ini file
 	struct PluginDescriptor
 	{
-		PluginDescriptor() : loadAtStartup(false), loaded(false), pluginInterface(Q_NULLPTR) {;}
+		PluginDescriptor() : loadAtStartup(false), loaded(false), pluginInterface(Q_NULLPTR) {}
 		//! The static info for the plugin.
 		StelPluginInfo info;
 		//! If true, the module is automatically loaded at startup

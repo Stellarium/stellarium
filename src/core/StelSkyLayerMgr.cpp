@@ -47,7 +47,7 @@ StelSkyLayerMgr::StelSkyLayerMgr(void) : flagShow(true)
 
 StelSkyLayerMgr::~StelSkyLayerMgr()
 {
-	for (auto* s : allSkyLayers)
+	for (auto* s : qAsConst(allSkyLayers))
 		delete s;
 }
 
@@ -170,7 +170,7 @@ void StelSkyLayerMgr::draw(StelCore* core)
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	sPainter.setBlending(true, GL_ONE, GL_ONE); //additive blending
-	for (auto* s : allSkyLayers)
+	for (auto* s : qAsConst(allSkyLayers))
 	{
 		if (s->show) 
 		{
@@ -180,7 +180,7 @@ void StelSkyLayerMgr::draw(StelCore* core)
 	}
 }
 
-void noDelete(StelSkyLayer*) {;}
+void noDelete(StelSkyLayer*) {}
 
 // Called when loading of data started or stopped for one collection
 void StelSkyLayerMgr::loadingStateChanged(bool b)
@@ -220,7 +220,7 @@ void StelSkyLayerMgr::percentLoadedChanged(int percentage)
 
 StelSkyLayerMgr::SkyLayerElem* StelSkyLayerMgr::skyLayerElemForLayer(const StelSkyLayer* t)
 {
-	for (auto* e : allSkyLayers)
+    for (auto* e : qAsConst(allSkyLayers))
 	{
 		if (e->layer==t)
 		{
@@ -236,7 +236,7 @@ QString StelSkyLayerMgr::keyForLayer(const StelSkyLayer* t)
 }
 
 StelSkyLayerMgr::SkyLayerElem::SkyLayerElem(StelSkyLayerP t, bool ashow) : layer(t), progressBar(Q_NULLPTR), show(ashow)
-{;}
+{}
 
 StelSkyLayerMgr::SkyLayerElem::~SkyLayerElem()
 {

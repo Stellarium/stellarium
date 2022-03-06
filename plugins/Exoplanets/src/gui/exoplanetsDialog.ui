@@ -330,6 +330,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="displayShowNumbersCheckBox">
+            <property name="text">
+             <string>Enable display number of exoplanets in the system</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="displayAtStartupCheckBox">
             <property name="text">
              <string>Enable display at startup</string>

@@ -38,7 +38,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QSettings>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QString>
 #include <QStringList>
 #include <QDir>
@@ -240,11 +240,11 @@ void AsterismMgr::loadLines(const QString &fileName)
 
 	int totalRecords=0;
 	QString record;
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 	while (!in.atEnd())
 	{
 		record = QString::fromUtf8(in.readLine());
-		if (!commentRx.exactMatch(record))
+		if (!commentRx.match(record).hasMatch())
 			totalRecords++;
 	}
 	in.seek(0);
@@ -263,7 +263,7 @@ void AsterismMgr::loadLines(const QString &fileName)
 	{
 		record = QString::fromUtf8(in.readLine());
 		currentLineNumber++;
-		if (commentRx.exactMatch(record))
+		if (commentRx.match(record).hasMatch())
 			continue;
 
 		aster = new Asterism;
@@ -413,13 +413,9 @@ void AsterismMgr::loadNames(const QString& namesFile)
 
 	// Now parse the file
 	// lines to ignore which start with a # or are empty
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
-	QRegExp recRx("^\\s*(\\w+)\\s+_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
-	QRegExp ctxRx("(.*)\",\\s*\"(.*)");
-
-	// Some more variables to use in the parsing
-	Asterism *aster;
-	QString record, shortName, ctxt;
+	QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
+	QRegularExpression recRx("^\\s*(\\w+)\\s+_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
+	QRegularExpression ctxRx("(.*)\",\\s*\"(.*)");
 
 	// keep track of how many records we processed.
 	int totalRecords=0;
@@ -427,31 +423,33 @@ void AsterismMgr::loadNames(const QString& namesFile)
 	int lineNumber=0;
 	while (!commonNameFile.atEnd())
 	{
-		record = QString::fromUtf8(commonNameFile.readLine());
+		QString record = QString::fromUtf8(commonNameFile.readLine());
 		lineNumber++;
 
 		// Skip comments
-		if (commentRx.exactMatch(record))
+		if (commentRx.match(record).hasMatch())
 			continue;
 
 		totalRecords++;
 
-		if (!recRx.exactMatch(record))
+		QRegularExpressionMatch recMatch=recRx.match(record);
+		if (!recMatch.hasMatch())
 		{
 			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in asterism names file" << QDir::toNativeSeparators(namesFile) << ":" << record;
 		}
 		else
 		{
-			shortName = recRx.cap(1);
-			aster = findFromAbbreviation(shortName);
+			QString shortName = recMatch.captured(1);
+			Asterism *aster = findFromAbbreviation(shortName);
 			// If the asterism exists, set the English name
 			if (aster != Q_NULLPTR)
 			{
-				ctxt = recRx.cap(2);
-				if (ctxRx.exactMatch(ctxt))
+				QString ctxt = recMatch.captured(2);
+				QRegularExpressionMatch ctxMatch=ctxRx.match(ctxt);
+				if (ctxMatch.hasMatch())
 				{
-					aster->englishName = ctxRx.cap(1);
-					aster->context = ctxRx.cap(2);
+					aster->englishName = ctxMatch.captured(1);
+					aster->context = ctxMatch.captured(2);
 				}
 				else
 				{

@@ -27,7 +27,7 @@
 #include <QTimeZone>
 #include <QStringList>
 
-const int StelLocation::DEFAULT_BORTLE_SCALE_INDEX = 2;
+const float StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE = StelCore::bortleScaleIndexToLuminance(2);
 
 int StelLocation::metaTypeId = initMetaType();
 int StelLocation::initMetaType()
@@ -41,19 +41,20 @@ int StelLocation::initMetaType()
 QString StelLocation::serializeToLine() const
 {
 	QString sanitizedTZ=StelLocationMgr::sanitizeTimezoneStringForLocationDB(ianaTimeZone);
-	return QString("%1\t%2\t%3\t%4\t%5\t%6\t%7\t%8\t%9\t%10\t%11\t%12")
-			.arg(name)
-			.arg(state)
-			.arg(region)
-			.arg(role)
-			.arg(population/1000)
-			.arg(latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6))
-			.arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6))
-			.arg(altitude)
-			.arg(bortleScaleIndex)
-			.arg(sanitizedTZ)
-			.arg(planetName)
-			.arg(landscapeKey);
+	return QString("%1\t%2\t%3\t%4\t%5\t%6\t%7\t%8\t%9\t%10\t%11\t%12").arg(
+			name,
+			state,
+			region,
+			role,
+			QString::number(population/1000),
+			latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6),
+			longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6),
+			QString::number(altitude),
+            QString::number(lightPollutionLuminance.isValid() ? lightPollutionLuminance.toFloat() : DEFAULT_LIGHT_POLLUTION_LUMINANCE)
+            ).arg(
+			sanitizedTZ,
+			planetName,
+			landscapeKey);
 }
 
 QString StelLocation::getID() const
@@ -62,7 +63,7 @@ QString StelLocation::getID() const
 		return QString("%1, %2").arg(latitude).arg(longitude);
 
 	if (!region.isEmpty())
-		return QString("%1, %2").arg(name).arg(region);
+		return QString("%1, %2").arg(name, region);
 	else
 		return name;
 }
@@ -70,13 +71,18 @@ QString StelLocation::getID() const
 // GZ TODO: These operators may require sanitizing for timezone names!
 QDataStream& operator<<(QDataStream& out, const StelLocation& loc)
 {
-	out << loc.name << loc.state << loc.region << loc.role << loc.population << loc.latitude << loc.longitude << loc.altitude << loc.bortleScaleIndex << loc.ianaTimeZone << loc.planetName << loc.landscapeKey << loc.isUserLocation;
+	const auto lum = loc.lightPollutionLuminance.toFloat();
+	const int bortleScaleIndex = loc.lightPollutionLuminance.isValid() ? StelCore::luminanceToBortleScaleIndex(lum) : -1;
+	out << loc.name << loc.state << loc.region << loc.role << loc.population << loc.latitude << loc.longitude << loc.altitude << bortleScaleIndex << loc.ianaTimeZone << loc.planetName << loc.landscapeKey << loc.isUserLocation;
 	return out;
 }
 
 QDataStream& operator>>(QDataStream& in, StelLocation& loc)
 {
-	in >> loc.name >> loc.state >> loc.region >> loc.role >> loc.population >> loc.latitude >> loc.longitude >> loc.altitude >> loc.bortleScaleIndex >> loc.ianaTimeZone >> loc.planetName >> loc.landscapeKey >> loc.isUserLocation;
+	int bortleScaleIndex;
+	in >> loc.name >> loc.state >> loc.region >> loc.role >> loc.population >> loc.latitude >> loc.longitude >> loc.altitude >> bortleScaleIndex >> loc.ianaTimeZone >> loc.planetName >> loc.landscapeKey >> loc.isUserLocation;
+	if(bortleScaleIndex > 0)
+		loc.lightPollutionLuminance = StelCore::bortleScaleIndexToLuminance(bortleScaleIndex);
 	return in;
 }
 
@@ -108,16 +114,16 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	loc.region = getRegionFromCode(splitline.at(2).trimmed());
 	loc.role    = splitline.at(3).at(0).toUpper();
 	if (loc.role.isNull())
-		loc.role = QChar(0x0058); // char 'X'
+		loc.role = 'X';
 	loc.population = static_cast<int> (splitline.at(4).toFloat()*1000);
 
 	const QString& latstring = splitline.at(5).trimmed();
-	loc.latitude = latstring.left(latstring.size() - 1).toFloat();
+	loc.latitude = latstring.leftRef(latstring.size() - 1).toFloat();
 	if (latstring.endsWith('S'))
 		loc.latitude=-loc.latitude;
 
 	const QString& lngstring = splitline.at(6).trimmed();
-	loc.longitude = lngstring.left(lngstring.size() - 1).toFloat();
+	loc.longitude = lngstring.leftRef(lngstring.size() - 1).toFloat();
 	if (lngstring.endsWith('W'))
 		loc.longitude=-loc.longitude;
 
@@ -126,12 +132,12 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	if (splitline.size()>8)
 	{
 		bool ok;
-		loc.bortleScaleIndex = splitline.at(8).toInt(&ok);
+		loc.lightPollutionLuminance = splitline.at(8).toFloat(&ok);
 		if (ok==false)
-			loc.bortleScaleIndex = DEFAULT_BORTLE_SCALE_INDEX;
+			loc.lightPollutionLuminance = DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 	}
 	else
-		loc.bortleScaleIndex = DEFAULT_BORTLE_SCALE_INDEX;
+		loc.lightPollutionLuminance = DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 
 	if (splitline.size()>9)
 	{

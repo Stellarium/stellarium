@@ -46,7 +46,7 @@ public:
 
 	//! @param id The official designation for a supernova, e.g. "SN 1054A"
 	Supernova(const QVariantMap& map);
-	~Supernova();
+	~Supernova() Q_DECL_OVERRIDE;
 
 	//! Get a QVariantMap which describes the supernova.  Could be used to create a duplicate.
 	//! - designation
@@ -59,12 +59,12 @@ public:
 	//! - distance
 	QVariantMap getMap(void) const;
 
-	virtual QString getType(void) const
+	virtual QString getType(void) const Q_DECL_OVERRIDE
 	{
 		return SUPERNOVA_TYPE;
 	}
 
-	virtual QString getID(void) const
+	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{
 		return designation;
 	}
@@ -72,25 +72,24 @@ public:
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
+	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getMap().
 	//! - sntype
 	//! - max-magnitude
 	//! - peakJD
 	//! - note
 	//! - distance
-	virtual QVariantMap getInfoMap(const StelCore *core) const;
-	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
-	virtual float getVMagnitude(const StelCore* core) const;
-	virtual double getAngularSize(const StelCore* core) const;
-	virtual QString getNameI18n(void) const;
-	virtual QString getEnglishName(void) const;
+	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
+	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
+	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const Q_DECL_OVERRIDE;
+	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
+	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
+	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
 
 	void update(double deltaTime);
 
 protected:
-	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const;
+	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const Q_DECL_OVERRIDE;
 
 private:
 	bool initialized;

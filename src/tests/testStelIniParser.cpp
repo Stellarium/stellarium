@@ -23,6 +23,7 @@
 #include <QDebug>
 #include <QBuffer>
 #include <QSettings>
+#include <QRegularExpression>
 
 #include "StelIniParser.hpp"
 #include "StelFileMgr.hpp"
@@ -32,7 +33,7 @@ QTEST_GUILESS_MAIN(TestStelIniParser);
 void TestStelIniParser::initTestCase()
 {
 	QString workingDir = tempDir.path();
-	workingDir.replace(QRegExp("/+$"), "");  // sometimes the temp path will have / on the end... zap it.
+	workingDir.replace(QRegularExpression("/+$"), "");  // sometimes the temp path will have / on the end... zap it.
 	if (!QDir::setCurrent(workingDir))
 	{
 		QFAIL(qPrintable("could not set the working directory to: " + workingDir));

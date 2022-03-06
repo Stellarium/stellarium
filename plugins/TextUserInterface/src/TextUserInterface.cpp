@@ -444,8 +444,8 @@ void TextUserInterface::init()
 	m6->setParent(this);
 	m5->setNextNode(m6);
 	TuiNode* m6_1 = new TuiNodeInt(N_("Light pollution:"),
-				       skyDrawer,
-				       SLOT(setBortleScaleIndex(int)),
+				       this,
+				       SLOT(setLightPollutionLevel(int)),
 				       skyDrawer->getBortleScaleIndex(), 1, 9, 1,
 	                               m6);
 	TuiNode* m6_2 = new TuiNodeEnum(N_("Landscape"),
@@ -787,6 +787,13 @@ void TextUserInterface::setSkyLanguage(QString lang)
 {
 	QString code = StelTranslator::nativeNameToIso639_1Code(lang);
 	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
+}
+
+void TextUserInterface::setLightPollutionLevel(const int level)
+{
+    const auto lum = StelCore::bortleScaleIndexToLuminance(level);
+    const auto core = StelApp::getInstance().getCore();
+    core->getSkyDrawer()->setLightPollutionLuminance(lum);
 }
 
 void TextUserInterface::saveDefaultSettings(void)

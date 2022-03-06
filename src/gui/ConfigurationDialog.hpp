@@ -71,9 +71,11 @@ private:
 	class StelProgressController* progressBar;
 
 private slots:
+	void updateSelectedInfoGui();
 	void setNoSelectedInfo();
 	void setAllSelectedInfo();
 	void setBriefSelectedInfo();
+	void setDefaultSelectedInfo();
 	void setCustomSelectedInfo();
 	//! Set the selected object info fields from the "Displayed Fields" boxes.
 	//! Called when any of the boxes has been clicked. Sets the
@@ -106,6 +108,13 @@ private slots:
 	//! value will be changed, but not saved to config file.
 	void browseForScreenshotDir();
 	void selectScreenshotDir();
+	//! Update tooltip of the dpi spinner to tell users the final print size at current dpi
+	//! This is called
+	//! - when DPI changes
+	//! - when custom size is toggled
+	//! - when window is resized
+	//! - when custom screenshot size is changed
+	void updateDpiTooltip();
 
 	//! Save the current viewing options including location and sky culture
 	//! This doesn't include the current viewing direction, landscape, time and FOV since those

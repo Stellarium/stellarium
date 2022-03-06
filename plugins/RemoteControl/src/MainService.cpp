@@ -276,7 +276,7 @@ void MainService::get(const QByteArray& operation, const APIParameters &paramete
 
 void MainService::post(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
-	Q_UNUSED(data);
+	Q_UNUSED(data)
 
 	if(operation == "time")
 	{

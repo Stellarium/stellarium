@@ -58,11 +58,11 @@ QStringList OlympicCalendar::getDateStrings() const
 QString OlympicCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-	return QString(q_("Day %1, month %2 in the year %3 of the %4th Olympiad"))
-			.arg(str.at(3)) // day
-			.arg(str.at(2)) // month, numerical
-			.arg(str.at(1)) // year
-			.arg(str.at(0));// olympiad
+	return QString(q_("Day %1, month %2 in the year %3 of the %4th Olympiad")).arg(
+			str.at(3), // day
+			str.at(2), // month, numerical
+			str.at(1), // year
+			str.at(0));// olympiad
 }
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
@@ -74,8 +74,8 @@ void OlympicCalendar::setDate(QVector<int> parts)
 {
 	if (parts.length()<4)
 	{
-		this->parts[0]=parts.at(0);
-		this->parts[1]=parts.at(1);
+		this->parts[0]=parts.value(0);
+		this->parts[1]=parts.value(1);
 	}
 	else
 		this->parts=parts;
@@ -92,8 +92,8 @@ void OlympicCalendar::setDate(QVector<int> parts)
 
 int OlympicCalendar::julianYearFromOlympiad(QVector<int>odate)
 {
-	int cycle=odate.at(0);
-	int year=odate.at(1);
+	int cycle=odate.value(0);
+	int year =odate.value(1);
 	int years=olympiadStart+4*(cycle-1)+year-1;
 	return (years < 0 ? years : years+1);
 }

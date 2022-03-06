@@ -38,7 +38,7 @@ class StelObjectModule : public StelModule
 	Q_OBJECT
 public:
 	StelObjectModule();
-	~StelObjectModule();
+	~StelObjectModule() Q_DECL_OVERRIDE;
 	
 	//! Search for StelObject in an area around a specified point.
 	//! The function searches in a disk of diameter limitFov centered on v.

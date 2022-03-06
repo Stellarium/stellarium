@@ -52,7 +52,6 @@ public slots:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-public:
 	//! returns true for leap years
 	static bool isLeap(int hYear);
 
@@ -79,6 +78,7 @@ public:
 	//! find date in the Hebrew calendar from RD number
 	static QVector<int> hebrewFromFixed(int rd);
 
+public:
 	static const int hebrewEpoch; //! RD of January 1, AD1.
 
 protected:

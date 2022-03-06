@@ -50,7 +50,6 @@ running in a network. See manual for detailed description.
 class RemoteSync : public StelModule
 {
 	Q_OBJECT
-	Q_ENUMS(SyncState ClientBehaviour)
 
 public:
 	enum SyncState
@@ -62,6 +61,7 @@ public:
 		CLIENT_CLOSING, //Plugin is disconnecting from the server
 		CLIENT_WAIT_RECONNECT //Plugin is waiting to try reconnecting again
 	};
+	Q_ENUM(SyncState)
 
 	//! Defines behavior when client connection is lost/server quits
 	enum ClientBehavior
@@ -70,6 +70,7 @@ public:
 		RECONNECT, //automatically try to reconnect
 		QUIT //quit the client
 	};
+	Q_ENUM(ClientBehavior)
 
 	RemoteSync();
 	virtual ~RemoteSync() Q_DECL_OVERRIDE;
@@ -102,8 +103,8 @@ public slots:
 	void setServerPort(const int port);
 	void setClientSyncOptions(SyncClient::SyncOptions options);
 	void setStelPropFilter(const QStringList& stelPropFilter);
-	void setConnectionLostBehavior(const ClientBehavior bh);
-	void setQuitBehavior(const ClientBehavior bh);
+	void setConnectionLostBehavior(const RemoteSync::ClientBehavior bh);
+	void setQuitBehavior(const RemoteSync::ClientBehavior bh);
 
 	//! Starts the plugin in server mode, on the port specified by the serverPort property.
 	//! If currently in a state other than IDLE, this call has no effect.
@@ -145,8 +146,8 @@ signals:
 	void serverPortChanged(const int port);
 	void clientSyncOptionsChanged(const SyncClient::SyncOptions options);
 	void stelPropFilterChanged(const QStringList& stelPropFilter);
-	void connectionLostBehaviorChanged(const ClientBehavior bh);
-	void quitBehaviorChanged(const ClientBehavior bh);
+	void connectionLostBehaviorChanged(const RemoteSync::ClientBehavior bh);
+	void quitBehaviorChanged(const RemoteSync::ClientBehavior bh);
 
 	void stateChanged(RemoteSync::SyncState state);
 

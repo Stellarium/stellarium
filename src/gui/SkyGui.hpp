@@ -41,7 +41,7 @@ class InfoPanel : public QGraphicsTextItem
 		//! Reads "gui/selected_object_info", etc from the configuration file.
 		//! @todo Bad idea to read from the configuration file in a constructor? --BM
 		InfoPanel(QGraphicsItem* parent);
-		~InfoPanel();
+		~InfoPanel() Q_DECL_OVERRIDE;
 		void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {infoTextFilters=aflags;}
 		const StelObject::InfoStringGroup& getInfoTextFilters(void) const {return infoTextFilters;}
 		void setTextFromObjects(const QList<StelObjectP>&);

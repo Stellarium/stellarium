@@ -24,6 +24,8 @@
 	<string>@PACKAGE_VERSION@</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>@PACKAGE_OSX_TARGET@</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>@STELLARIUM_COPYRIGHT@</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSHighResolutionCapable</key>

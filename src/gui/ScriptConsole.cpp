@@ -38,6 +38,7 @@
 #include <QDateTime>
 #include <QSyntaxHighlighter>
 #include <QTextDocumentFragment>
+#include <QRegularExpression>
 
 ScriptConsole::ScriptConsole(QObject *parent)
 	: StelDialog("ScriptConsole", parent)
@@ -122,8 +123,12 @@ void ScriptConsole::createDialogContent()
 	// get decent indentation
 	QFont font = ui->scriptEdit->font();
 	QFontMetrics fontMetrics = QFontMetrics(font);
-	int width = fontMetrics.width("0");
+	int width = fontMetrics.boundingRect("0").width();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+	ui->scriptEdit->setTabStopDistance(4*width); // 4 characters
+#else
 	ui->scriptEdit->setTabStopWidth(4*width); // 4 characters
+#endif
 	ui->scriptEdit->setFocus();
 
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -331,7 +336,7 @@ void ScriptConsole::scriptEnded()
 void ScriptConsole::appendLogLine(const QString& s)
 {
 	QString html = ui->logBrowser->toHtml();
-	html.replace(QRegExp("^\\s+"), "");
+	html.replace(QRegularExpression("^\\s+"), "");
 	html += s;
 	ui->logBrowser->setHtml(html);
 }
@@ -345,7 +350,7 @@ void ScriptConsole::appendOutputLine(const QString& s)
 	else
 	{
 		QString html = ui->outputBrowser->toHtml();
-		html.replace(QRegExp("^\\s+"), "");
+		html.replace(QRegularExpression("^\\s+"), "");
 		html += s;
 		ui->outputBrowser->setHtml(html);
 	}

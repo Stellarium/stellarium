@@ -62,7 +62,7 @@ public:
 	//! @param url The location of the survey.
 	//! @param releaseDate If known the UTC JD release date of the survey.  Used for cache busting.
 	HipsSurvey(const QString& url, double releaseDate=0.0);
-	virtual ~HipsSurvey();
+	virtual ~HipsSurvey() Q_DECL_OVERRIDE;
 
 	//! Get whether the survey is visible.
 	bool isVisible() const;

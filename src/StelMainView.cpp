@@ -51,6 +51,7 @@
 #include <QPluginLoader>
 #include <QScreen>
 #include <QSettings>
+#include <QRegularExpression>
 #include <QtPlugin>
 #include <QThread>
 #include <QTimer>
@@ -211,7 +212,7 @@ protected:
 		gl->glGetIntegerv(GL_FRAMEBUFFER_BINDING, &mainFBO);
 
 		double pixelRatio = paintDevice->devicePixelRatioF();
-		QSize size(paintDevice->width() * pixelRatio, paintDevice->height() * pixelRatio);
+		QSize size(static_cast<int>(paintDevice->width() * pixelRatio), static_cast<int>(paintDevice->height() * pixelRatio));
 		if (fbo && fbo->size() != size)
 		{
 			delete fbo;
@@ -334,8 +335,8 @@ public:
 protected:
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE
 	{
-		Q_UNUSED(option);
-		Q_UNUSED(widget);
+		Q_UNUSED(option)
+		Q_UNUSED(widget)
 
 		//a sanity check
 		Q_ASSERT(mainView->glContext() == QOpenGLContext::currentContext());
@@ -399,7 +400,11 @@ protected:
 	{
 		QPointF pos = event->scenePos();
 		pos.setY(rect.height() - 1 - pos.y());
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+		QWheelEvent newEvent(pos, event->screenPos(), QPoint(event->delta(), 0), QPoint(event->delta(), 0), event->buttons(), event->modifiers(), Qt::ScrollUpdate, false);
+#else
 		QWheelEvent newEvent(QPoint(static_cast<int>(pos.x()),static_cast<int>(pos.y())), event->delta(), event->buttons(), event->modifiers(), event->orientation());
+#endif
 		StelApp::getInstance().handleWheel(&newEvent);
 		event->setAccepted(newEvent.isAccepted());
 		if(newEvent.isAccepted())
@@ -440,7 +445,7 @@ protected:
 				break;
 			}
 			case QEvent::Gesture:
-				setAcceptedMouseButtons(Q_NULLPTR);
+				setAcceptedMouseButtons(Qt::NoButton);
 				r = gestureEvent(static_cast<QGestureEvent*>(e));
 				break;
 			default:
@@ -526,7 +531,7 @@ public:
 protected:
 	void resizeEvent(QGraphicsSceneResizeEvent* event) Q_DECL_OVERRIDE
 	{
-		Q_UNUSED(event);
+		Q_UNUSED(event)
 		//widget->setGeometry(0, 0, size().width(), size().height());
 		StelApp::getInstance().getGui()->forceRefreshGui();
 	}
@@ -547,6 +552,7 @@ StelMainView::StelMainView(QSettings* settings)
 	  flagUseCustomScreenshotSize(false),
 	  customScreenshotWidth(1024),
 	  customScreenshotHeight(768),
+	  screenshotDpi(72),
 	  customScreenshotMagnification(1.0f),
 	  screenShotPrefix("stellarium-"),
 	  screenShotFormat("png"),
@@ -662,6 +668,7 @@ void StelMainView::resizeEvent(QResizeEvent* event)
 		rootItem->setSize(sz);
 		if(guiItem)
 			guiItem->setGeometry(QRectF(0.0,0.0,sz.width(),sz.height()));
+		emit sizeChanged(sz);
 	}
 	QGraphicsView::resizeEvent(event);
 }
@@ -868,6 +875,7 @@ void StelMainView::init()
 	flagUseCustomScreenshotSize=configuration->value("main/screenshot_custom_size", false).toBool();
 	customScreenshotWidth=configuration->value("main/screenshot_custom_width", 1024).toInt();
 	customScreenshotHeight=configuration->value("main/screenshot_custom_height", 768).toInt();
+	screenshotDpi=configuration->value("main/screenshot_dpi", 72).toInt();
 	setFlagCursorTimeout(configuration->value("gui/flag_mouse_cursor_timeout", false).toBool());
 	setCursorTimeout(configuration->value("gui/mouse_cursor_timeout", 10.f).toDouble());
 	setMaxFps(configuration->value("video/maximum_fps",10000.f).toFloat());
@@ -882,9 +890,9 @@ void StelMainView::init()
 	stelApp->initScriptMgr();
 
 	// Set the global stylesheet, this is only useful for the tooltips.
-	StelGui* gui = dynamic_cast<StelGui*>(stelApp->getGui());
-	if (gui!=Q_NULLPTR)
-		setStyleSheet(gui->getStelStyle().qtStyleSheet);
+	StelGui* sgui = dynamic_cast<StelGui*>(stelApp->getGui());
+	if (sgui!=Q_NULLPTR)
+		setStyleSheet(sgui->getStelStyle().qtStyleSheet);
 	connect(stelApp, SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty(bool)));
 
 	// I doubt this will have any effect on framerate, but may cause problems elsewhere?
@@ -926,7 +934,7 @@ void StelMainView::init()
 		// Now we have a QMultiMap with (customShortcut, actionName). It may contain multiple keys!
 		QStringList allMapKeys=cstActionsMap.keys();
 		QStringList uniqueMapKeys=cstActionsMap.uniqueKeys();
-		for (auto key : uniqueMapKeys)
+		for (auto &key : uniqueMapKeys)
 			allMapKeys.removeOne(key);
 		conflicts << allMapKeys; // Add the remaining (duplicate) keys
 
@@ -1042,13 +1050,14 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	// If we have ANGLE, check esp. for insufficient ps_2 level.
 	if (isANGLE)
 	{
-		QRegExp angleVsPsRegExp(" vs_(\\d)_(\\d) ps_(\\d)_(\\d)");
-		int angleVSPSpos=angleVsPsRegExp.indexIn(glRenderer);
+		QRegularExpression angleVsPsRegExp(" vs_(\\d)_(\\d) ps_(\\d)_(\\d)");
+		int angleVSPSpos=glRenderer.indexOf(angleVsPsRegExp);
 
 		if (angleVSPSpos >-1)
 		{
-			float vsVersion=angleVsPsRegExp.cap(1).toFloat() + 0.1f*angleVsPsRegExp.cap(2).toFloat();
-			float psVersion=angleVsPsRegExp.cap(3).toFloat() + 0.1f*angleVsPsRegExp.cap(4).toFloat();
+			QRegularExpressionMatch match=angleVsPsRegExp.match(glRenderer);
+			float vsVersion=match.captured(1).toFloat() + 0.1f*match.captured(2).toFloat();
+			float psVersion=match.captured(3).toFloat() + 0.1f*match.captured(4).toFloat();
 			qDebug() << "VS Version Number detected: " << vsVersion;
 			qDebug() << "PS Version Number detected: " << psVersion;
 			if ((vsVersion<2.0f) || (psVersion<3.0f))
@@ -1095,12 +1104,12 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	// Do a similar test for MESA: Ensure we have at least Mesa 10, Mesa 9 on FreeBSD (used for hardware-acceleration of AMD IGP) was reported to lose the stars.
 	if (isMesa)
 	{
-		QRegExp mesaRegExp("Mesa (\\d+\\.\\d+)"); // we need only major version. Minor should always be here. Test?
-		int mesaPos=mesaRegExp.indexIn(glDriver);
+		QRegularExpression mesaRegExp("Mesa (\\d+\\.\\d+)"); // we need only major version. Minor should always be here. Test?
+		int mesaPos=glDriver.indexOf(mesaRegExp);
 
 		if (mesaPos >-1)
 		{
-			float mesaVersion=mesaRegExp.cap(1).toFloat();
+			float mesaVersion=mesaRegExp.match(glDriver).captured(1).toFloat();
 			qDebug() << "MESA Version Number detected: " << mesaVersion;
 			if ((mesaVersion<10.0f))
 			{
@@ -1149,14 +1158,14 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	// On these systems, we show a warning panel that can be suppressed by a config option which is automatically added on first run.
 	// Again, based on a sample size of one, Macs have been reported already to always work in this case.
 #ifndef Q_OS_MAC
-	QRegExp glslRegExp("^(\\d\\.\\d\\d)");
-	int pos=glslRegExp.indexIn(glslString);
+	QRegularExpression glslRegExp("^(\\d\\.\\d\\d)");
+	int pos=glslString.indexOf(glslRegExp);
 	// VC4 drivers on Raspberry Pi reports ES 1.0.16 or so, we must step down to one cipher after decimal.
-	QRegExp glslesRegExp("ES (\\d\\.\\d)");
-	int posES=glslesRegExp.indexIn(glslString);
+	QRegularExpression glslesRegExp("ES (\\d\\.\\d)");
+	int posES=glslString.indexOf(glslesRegExp);
 	if (pos >-1)
 	{
-		float glslVersion=glslRegExp.cap(1).toFloat();
+		float glslVersion=glslRegExp.match(glslString).captured(1).toFloat();
 		qDebug() << "GLSL Version Number detected: " << glslVersion;
 		if (glslVersion<1.3f)
 		{
@@ -1197,7 +1206,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	}
 	else if (posES >-1)
 	{
-		float glslesVersion=glslesRegExp.cap(1).toFloat();
+		float glslesVersion=glslesRegExp.match(glslString).captured(1).toFloat();
 		qDebug() << "GLSL ES Version Number detected: " << glslesVersion;
 		if (glslesVersion<1.0f) // TBD: is this possible at all?
 		{
@@ -1449,7 +1458,7 @@ bool StelMainView::needsMaxFPS() const
 
 void StelMainView::moveEvent(QMoveEvent * event)
 {
-	Q_UNUSED(event);
+	Q_UNUSED(event)
 
 	// We use the glWidget instead of the event, as we want the screen that shows most of the widget.
 	QWindow* win = glWidget->windowHandle();
@@ -1459,7 +1468,7 @@ void StelMainView::moveEvent(QMoveEvent * event)
 
 void StelMainView::closeEvent(QCloseEvent* event)
 {
-	Q_UNUSED(event);
+	Q_UNUSED(event)
 	stelApp->quit();
 }
 
@@ -1498,12 +1507,20 @@ void StelMainView::setScreenshotFormat(const QString filetype)
 		qDebug() << "Invalid filetype for screenshot: " << filetype;
 	}
 }
+
+void StelMainView::setScreenshotDpi(int dpi)
+{
+	screenshotDpi=dpi;
+	StelApp::getInstance().getSettings()->setValue("main/screenshot_dpi", dpi);
+	emit screenshotDpiChanged(dpi);
+}
+
 void StelMainView::saveScreenShot(const QString& filePrefix, const QString& saveDir, const bool overwrite)
 {
 	screenShotPrefix = filePrefix;
 	screenShotDir = saveDir;
 	flagOverwriteScreenshots=overwrite;
-	emit(screenshotRequested());
+	emit screenshotRequested();
 }
 
 void StelMainView::doScreenshot(void)
@@ -1515,9 +1532,9 @@ void StelMainView::doScreenshot(void)
 	// HiDPI screens interfere, and the viewing angle has to be maintained.
 	// First, image size:
 	glWidget->makeCurrent();
-	float pixelRatio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
-	int imgWidth =stelScene->width();
-	int imgHeight=stelScene->height();
+	float pixelRatio = static_cast<float>(QOpenGLContext::currentContext()->screen()->devicePixelRatio());
+	int imgWidth =static_cast<int>(stelScene->width());
+	int imgHeight=static_cast<int>(stelScene->height());
 	bool nightModeWasEnabled=nightModeEffect->isEnabled();
 	nightModeEffect->setEnabled(false);
 	if (flagUseCustomScreenshotSize)
@@ -1539,7 +1556,11 @@ void StelMainView::doScreenshot(void)
 #ifdef GL_RENDERBUFFER_FREE_MEMORY_ATI
 			GLint freeGLmemoryAMD[4];
 			context->functions()->glGetIntegerv(GL_RENDERBUFFER_FREE_MEMORY_ATI, freeGLmemoryAMD);
-			qCDebug(mainview)<<"Free GPU memory (AMD version):" << (uint)freeGLmemoryAMD[1]/1024 << "+" << (uint)freeGLmemoryAMD[3]/1024 << " of " << (uint)freeGLmemoryAMD[0]/1024 << "+" << (uint)freeGLmemoryAMD[2]/1024 << "kB -- we ask for " << customScreenshotWidth*customScreenshotHeight*8 / 1024 <<"kB";
+			qCDebug(mainview)<<"Free GPU memory (AMD version):" << static_cast<uint>(freeGLmemoryAMD[1])/1024 << "+"
+					  << static_cast<uint>(freeGLmemoryAMD[3])/1024 << " of "
+					  << static_cast<uint>(freeGLmemoryAMD[0])/1024 << "+"
+					  << static_cast<uint>(freeGLmemoryAMD[2])/1024 << "kB -- we ask for "
+					  << customScreenshotWidth*customScreenshotHeight*8 / 1024 <<"kB";
 #endif
 #endif
 			GLint texSize,viewportSize[2],rbSize;
@@ -1569,10 +1590,10 @@ void StelMainView::doScreenshot(void)
 	fbFormat.setInternalTextureFormat(isGLES ? GL_RGBA : GL_RGB); // try to avoid transparent background!
 	if(const auto multisamplingLevel = configuration->value("video/multisampling", 0).toInt())
         fbFormat.setSamples(multisamplingLevel);
-	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(imgWidth * pixelRatio, imgHeight * pixelRatio, fbFormat);
+	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(static_cast<int>(static_cast<float>(imgWidth) * pixelRatio), static_cast<int>(static_cast<float>(imgHeight) * pixelRatio), fbFormat);
 	fbObj->bind();
 	// Now the painter has to be convinced to paint to the potentially larger image frame.
-	QOpenGLPaintDevice fbObjPaintDev(imgWidth * pixelRatio, imgHeight * pixelRatio);
+	QOpenGLPaintDevice fbObjPaintDev(static_cast<int>(static_cast<float>(imgWidth) * pixelRatio), static_cast<int>(static_cast<float>(imgHeight) * pixelRatio));
 
 	// It seems the projector has its own knowledge about image size. We must adjust fov and image size, but reset afterwards.
 	StelProjector::StelProjectorParams pParams=StelApp::getInstance().getCore()->getCurrentStelProjectorParams();
@@ -1582,7 +1603,7 @@ void StelMainView::doScreenshot(void)
 	sParams.viewportXywh[3]=imgHeight;
 
 	// Configure a helper value to allow some modules to tweak their output sizes. Currently used by StarMgr, maybe solve font issues?
-	customScreenshotMagnification=static_cast<float>(imgHeight)/qApp->screens().at(qApp->desktop()->screenNumber())->geometry().height();
+	customScreenshotMagnification=static_cast<float>(imgHeight)/static_cast<float>(qApp->screens().at(qApp->desktop()->screenNumber())->geometry().height());
 
 	sParams.viewportCenter.set(0.0+(0.5+pParams.viewportCenterOffset.v[0])*imgWidth, 0.0+(0.5+pParams.viewportCenterOffset.v[1])*imgHeight);
 	sParams.viewportFovDiameter = qMin(imgWidth,imgHeight);
@@ -1649,7 +1670,10 @@ void StelMainView::doScreenshot(void)
 		QString screenshotDirSuffix = "/Stellarium";
 		QString screenshotDir;
 		if (!QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).isEmpty())
-			screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0].append(screenshotDirSuffix);
+		{
+			screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).constFirst();
+			screenshotDir.append(screenshotDirSuffix);
+		}
 		else
 			screenshotDir = StelFileMgr::getUserDir().append(screenshotDirSuffix);
 
@@ -1694,6 +1718,10 @@ void StelMainView::doScreenshot(void)
 				break;
 		}
 	}
+
+	// Set preferred image resolution (for some printing workflows)
+	im.setDotsPerMeterX(qRound(screenshotDpi*100./2.54));
+	im.setDotsPerMeterY(qRound(screenshotDpi*100./2.54));
 	qDebug() << "INFO Saving screenshot in file: " << QDir::toNativeSeparators(shotPath.filePath());
 	QImageWriter imageWriter(shotPath.filePath());
 	if (screenShotFormat=="tif")

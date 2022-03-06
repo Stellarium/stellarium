@@ -31,9 +31,9 @@
 //! Describe a vertex composing polygon contours, and whether it belongs to an edge or not.
 struct EdgeVertex
 {
-	EdgeVertex() : edgeFlag(false) {;}
-	EdgeVertex(bool b) : edgeFlag(b) {;}
-	EdgeVertex(const Vec3d& v, bool b) : vertex(v), edgeFlag(b) {;}
+	EdgeVertex() : edgeFlag(false) {}
+	EdgeVertex(bool b) : edgeFlag(b) {}
+	EdgeVertex(const Vec3d& v, bool b) : vertex(v), edgeFlag(b) {}
 	//! The normalized vertex direction.
 	Vec3d vertex;
 	//! Set to true if the vertex is part of at least one edge segment, i.e. it lies on the boundary of the polygon.
@@ -50,8 +50,8 @@ class SubContour : public QVector<EdgeVertex>
 public:
 	// Create a SubContour from a list of vertices
 	SubContour(const QVector<Vec3d>& vertices, bool closed=true);
-	SubContour() {;}
-	SubContour(int size, const EdgeVertex& v) : QVector<EdgeVertex>(size, v) {;}
+	SubContour() {}
+	SubContour(int size, const EdgeVertex& v) : QVector<EdgeVertex>(size, v) {}
 	SubContour reversed() const;
 	QString toJSON() const;
 };

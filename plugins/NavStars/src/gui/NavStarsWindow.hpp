@@ -33,13 +33,13 @@ class NavStarsWindow : public StelDialog
 
 public:
 	NavStarsWindow();
-	~NavStarsWindow();
+	~NavStarsWindow() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 
 protected:
-	void createDialogContent();
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 private:
 	Ui_navStarsWindowForm* ui;

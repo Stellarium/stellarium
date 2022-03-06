@@ -23,8 +23,6 @@
 #include "StelGeodesicGrid.hpp"
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
-#include "Planet.hpp"
-#include "StelUtils.hpp"
 
 #include <QDebug>
 #include <QFile>
@@ -239,8 +237,6 @@ bool ZoneArray::readFile(QFile& file, void *data, qint64 size)
 	{
 		part_size = 64*1024;
 	}
-	float i = 0.f;
-	i += 1.f;
 	while (size > 0)
 	{
 		const int to_read = (part_size < size) ? part_size : static_cast<int>(size);
@@ -248,7 +244,6 @@ bool ZoneArray::readFile(QFile& file, void *data, qint64 size)
 		if (read_rc != to_read) return false;
 		size -= read_rc;
 		data = (static_cast<char*>(data)) + read_rc;
-		i += 1.f;
 	}
 	return true;
 }
@@ -412,8 +407,9 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void)
 
 template<class Star>
 void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsideViewport, const RCMag* rcmag_table,
-				  int limitMagIndex, StelCore* core, int maxMagStarName, float names_brightness, bool designationUsage,
-				  const QVector<SphericalCap> &boundingCaps) const
+				  int limitMagIndex, StelCore* core, int maxMagStarName, float names_brightness,
+				  const QVector<SphericalCap> &boundingCaps,
+				  const bool withAberration, const Vec3f vel) const
 {
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 	Vec3f vf;
@@ -422,7 +418,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 
 	const Extinction& extinction=core->getSkyDrawer()->getExtinction();
 	const bool withExtinction=drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f;
-	const float k = 0.001f*mag_range/mag_steps; // from StarMgr.cpp line 654
+	const float k = 0.001f*static_cast<float>(mag_range)/static_cast<float>(mag_steps); // from StarMgr.cpp line 654
 	
 	// Allow artificial cutoff:
 	// find the (integer) mag at which is just bright enough to be drawn.
@@ -435,17 +431,6 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	}
 	Q_ASSERT(cutoffMagStep<RCMAG_TABLE_SIZE);
     
-	// prepare for aberration: Explan. Suppl. 2013, (7.38)
-	const bool withAberration=core->getUseAberration();
-	Vec3d vel(0.);
-	if (withAberration)
-	{
-		vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
-		StelCore::matVsop87ToJ2000.transfo(vel);
-		vel*=core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
-	}
-	const Vec3f velf=vel.toVec3f();
-
 	// Go through all stars, which are sorted by magnitude (bright stars first)
 	const SpecialZoneData<Star>* zoneToDraw = getZones() + index;
 	const Star* lastStar = zoneToDraw->getStars() + zoneToDraw->size;
@@ -468,7 +453,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		{
 			//Q_ASSERT_X(fabs(vf.lengthSquared()-1.0f)<0.0001f, "ZoneArray aberration", "vertex length not unity");
 			vf.normalize(); // required!
-			vf+=velf;
+			vf+=vel;
 			vf.normalize();
 		}
 		
@@ -511,7 +496,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			const float offset = tmpRcmag->radius*0.7f;
 			const Vec3f colorr = StelSkyDrawer::indexToColor(s->getBVIndex())*0.75f;
 			sPainter->setColor(colorr,names_brightness);
-			sPainter->drawText(vf.toVec3d(), designationUsage ? s->getDesignation() : s->getNameI18n(), 0, offset, offset, false);
+			sPainter->drawText(vf.toVec3d(), s->getScreenNameI18n(), 0, offset, offset, false);
 		}
 	}
 }

@@ -19,6 +19,7 @@
 #include "TelescopeClientINDI.hpp"
 
 #include <QDebug>
+#include <QRegularExpression>
 #include <cmath>
 #include <limits>
 
@@ -32,17 +33,18 @@ TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &par
 {
 	qDebug() << "TelescopeClientINDI::TelescopeClientINDI";
 
-	QRegExp paramRx("^([^:]*):(\\d+):([^:]*)$");
+	QRegularExpression paramRx("^([^:]*):(\\d+):([^:]*)$");
+	QRegularExpressionMatch paramMatch=paramRx.match(params);
 	QString host;
 	int port = 0;
-	if (paramRx.exactMatch(params))
+	if (paramMatch.hasMatch())
 	{
-		host = paramRx.cap(1).trimmed();
-		port = paramRx.cap(2).toInt();
-		mDevice = paramRx.cap(3).trimmed();
+		host = paramMatch.captured(1).trimmed();
+		port = paramMatch.captured(2).toInt();
+		mDevice = paramMatch.captured(3).trimmed();
 	}
 
-	mConnection.setServer(host.toStdString().c_str(), port);
+	mConnection.setServer(host.toStdString().c_str(), static_cast<unsigned int>(port));
 	mConnection.watchDevice(mDevice.toStdString().c_str());
 	mConnection.connectServer();
 }

@@ -64,7 +64,7 @@ public slots:
 protected:
 	//! Reimplementation of the filtering method.
 	bool filterAcceptsRow(int source_row,
-	                      const QModelIndex& source_parent) const;
+			      const QModelIndex& source_parent) const Q_DECL_OVERRIDE;
 	
 private:
 	SatFlag filterFlag;

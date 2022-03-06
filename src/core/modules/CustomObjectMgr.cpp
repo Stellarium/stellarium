@@ -88,7 +88,7 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 		CustomObjectP closest;
 		//Smallest valid radius will be at most `radiusLimit`, so radiusLimit + 10 is plenty as the default
 		float smallestRad = radiusLimit + 10;
-		for (const auto& cObj : customObjects)
+		for (const auto& cObj : qAsConst(customObjects))
 		{
 			//Get the position of the custom object
 			Vec3d a = cObj->getJ2000EquatorialPos(core);
@@ -214,7 +214,7 @@ void CustomObjectMgr::removeCustomObject(CustomObjectP obj)
 void CustomObjectMgr::removeCustomObject(QString englishName)
 {
 	setSelected("");
-	for (const auto& cObj : customObjects)
+	for (const auto& cObj : qAsConst(customObjects))
 	{
 		//If we have a match for the thing we want to delete
 		if(cObj && cObj->getEnglishName()==englishName && cObj->initialized)
@@ -228,7 +228,7 @@ void CustomObjectMgr::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 
-	for (const auto& cObj : customObjects)
+	for (const auto& cObj : qAsConst(customObjects))
 	{
 		if (cObj && cObj->initialized)
 			cObj->draw(core, &painter);

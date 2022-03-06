@@ -291,6 +291,8 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 			}
 			case StelCore::FrameObservercentricEclipticJ2000:
 			case StelCore::FrameObservercentricEclipticOfDate:
+			case StelCore::FrameGalactic:
+			case StelCore::FrameSupergalactic:
 			{
 				raAngle = d->raAngle;
 				if (raAngle<0.)
@@ -344,12 +346,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				if (withDecimalDegree)
 					text = StelUtils::radToDecDegStr(textAngle, 4, false, true);
 				else
-				{
-					if (d->frameType == StelCore::FrameGalactic || d->frameType == StelCore::FrameSupergalactic)
-						text = StelUtils::radToDmsStrAdapt(textAngle);
-					else
-						text = StelUtils::radToHmsStrAdapt(textAngle);
-				}
+					text = StelUtils::radToHmsStrAdapt(textAngle);
 			}
 		}
 	}
@@ -399,13 +396,13 @@ void SkyGrid::draw(const StelCore* core) const
 	const double gridStepParallelRad = M_PI_180*getClosestResolutionDMS(static_cast<double>(prj->getPixelPerRadAtCenter()));
 	double gridStepMeridianRad;
 	if (northPoleInViewport || southPoleInViewport)
-		gridStepMeridianRad = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic || frameType==StelCore::FrameSupergalactic) ? M_PI/180.* 10. : M_PI/180.* 15.;
+		gridStepMeridianRad = (frameType==StelCore::FrameAltAz) ? M_PI_180 * 10. : M_PI_180 * 15.;
 	else
 	{
-		const double closestResLon = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic || frameType==StelCore::FrameSupergalactic) ?
+		const double closestResLon = (frameType==StelCore::FrameAltAz) ?
 					getClosestResolutionDMS(static_cast<double>(prj->getPixelPerRadAtCenter())*std::cos(lat2)) :
 					getClosestResolutionHMS(static_cast<double>(prj->getPixelPerRadAtCenter())*std::cos(lat2));
-		gridStepMeridianRad = M_PI/180.* closestResLon;
+		gridStepMeridianRad = M_PI_180 * closestResLon;
 	}
 
 	// Get the bounding halfspace
@@ -1464,9 +1461,9 @@ void SkyPoint::updateLabel()
 			if (speed>0.)
 			{
 				const QString kms = qc_("km/s", "speed");
-				QString speedStr = QString(" (%1 %2)").arg(QString::number(speed, 'f', 2)).arg(kms);
+				QString speedStr = QString(" (%1 %2)").arg(QString::number(speed, 'f', 2), kms);
 				northernLabel += speedStr;
-				speedStr = QString(" (-%1 %2)").arg(QString::number(speed, 'f', 2)).arg(kms);
+				speedStr = QString(" (-%1 %2)").arg(QString::number(speed, 'f', 2), kms);
 				southernLabel += speedStr;
 			}
 			break;

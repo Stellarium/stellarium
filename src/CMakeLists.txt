@@ -163,6 +163,8 @@ SET(stellarium_lib_SRCS
      core/planetsephems/de440.hpp
      core/planetsephems/de441.cpp
      core/planetsephems/de441.hpp
+     core/planetsephems/htc20b.cpp
+     core/planetsephems/htc20b.hpp
      core/modules/Atmosphere.cpp
      core/modules/Atmosphere.hpp
      core/modules/Asterism.cpp
@@ -318,6 +320,10 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/DateTimeDialog.cpp
           gui/ViewDialog.hpp
           gui/ViewDialog.cpp
+          gui/LightPollutionWidget.hpp
+          gui/LightPollutionWidget.cpp
+          gui/LogarithmicSpinBox.hpp
+          gui/LogarithmicSpinBox.cpp
           gui/SearchDialog.hpp
           gui/SearchDialog.cpp
           gui/ConfigurationDialog.hpp
@@ -347,6 +353,12 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/StelDialog.hpp
           gui/StelDialog_p.hpp
           gui/StelDialog.cpp
+          gui/StelDialogSeparate.hpp
+          gui/StelDialogSeparate.cpp
+          gui/TonemappingDialog.hpp
+          gui/TonemappingDialog.cpp
+          gui/SkylightDialog.hpp
+          gui/SkylightDialog.cpp
      )
 
      ################# compiles .ui files ############
@@ -356,6 +368,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/shortcutsDialog.ui
           gui/dateTimeDialogGui.ui
           gui/viewDialog.ui
+          gui/lightPollutionWidget.ui
           gui/searchDialogGui.ui
           gui/configurationDialog.ui
           gui/atmosphereDialog.ui
@@ -369,6 +382,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/addRemoveLandscapesDialog.ui
           gui/dsoColorsDialog.ui
           gui/orbitColorsDialog.ui
+          gui/tonemappingDialog.ui
+          gui/skylightDialog.ui
      )
 
      IF(ENABLE_SCRIPTING)
@@ -448,7 +463,7 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
 ENDIF()
 
 # Setup Qt5 dependencies
-SET(STELLARIUM_QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Gui ${STEL_GLES_LIBS} Qt5::Network Qt5::Widgets)
+SET(STELLARIUM_QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Gui ${STEL_GLES_LIBS} Qt5::Network Qt5::Widgets Qt5::Charts)
 IF(ENABLE_MEDIA)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Multimedia Qt5::MultimediaWidgets)
 ENDIF()
@@ -736,15 +751,17 @@ IF(ENABLE_TESTING)
     ADD_TEST(testVecMath testVecMath)
     SET_TARGET_PROPERTIES(testVecMath PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testJavaScripting_SRCS
-        tests/testJavaScripting.hpp
-        tests/testJavaScripting.cpp
-    )
-    ADD_EXECUTABLE(testJavaScripting ${tests_testJavaScripting_SRCS})
-    TARGET_LINK_LIBRARIES(testJavaScripting ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testJavaScripting)
-    ADD_TEST(testJavaScripting testJavaScripting)
-    SET_TARGET_PROPERTIES(testJavaScripting PROPERTIES FOLDER "src/tests")
+    IF(ENABLE_SCRIPTING)
+        SET(tests_testJavaScripting_SRCS
+            tests/testJavaScripting.hpp
+            tests/testJavaScripting.cpp
+        )
+        ADD_EXECUTABLE(testJavaScripting ${tests_testJavaScripting_SRCS})
+        TARGET_LINK_LIBRARIES(testJavaScripting ${TESTS_LIBRARIES})
+        ADD_DEPENDENCIES(buildTests testJavaScripting)
+        ADD_TEST(testJavaScripting testJavaScripting)
+        SET_TARGET_PROPERTIES(testJavaScripting PROPERTIES FOLDER "src/tests")
+    ENDIF(ENABLE_SCRIPTING)
 	
     SET(tests_testStelProjector_SRCS
         tests/testStelProjector.hpp

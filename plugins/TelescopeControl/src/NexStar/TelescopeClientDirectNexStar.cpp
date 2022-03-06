@@ -32,7 +32,7 @@
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QStringList>
 
 TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, const QString &parameters, Equinox eq)
@@ -48,13 +48,14 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 	
 	//Extract parameters
 	//Format: "serial_port_name:time_delay"
-	QRegExp paramRx("^([^:]*):(\\d+)$");
+	QRegularExpression paramRx("^([^:]*):(\\d+)$");
+	QRegularExpressionMatch paramMatch=paramRx.match(parameters);
 	QString serialDeviceName;
-	if (paramRx.exactMatch(parameters))
+	if (paramMatch.hasMatch())
 	{
-		// This QRegExp only matches valid integers
-		serialDeviceName = paramRx.cap(1).trimmed();
-		time_delay       = paramRx.cap(2).toInt();
+		// This RegExp only matches valid integers
+		serialDeviceName = paramMatch.captured(1).trimmed();
+		time_delay       = paramMatch.captured(2).toInt();
 	}
 	else
 	{

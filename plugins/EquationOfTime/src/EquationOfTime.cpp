@@ -121,12 +121,12 @@ void EquationOfTime::draw(StelCore *core)
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	float ppx = static_cast<float>(params.devicePixelsPerPixel);
 
-	sPainter.setColor(textColor[0], textColor[1], textColor[2], 1.f);
+	sPainter.setColor(textColor, 1.f);
 	font.setPixelSize(getFontSize());
 	sPainter.setFont(font);
 
 	QString timeText;
-	double eqTime = core->getSolutionEquationOfTime(core->getJDE());
+	double eqTime = core->getSolutionEquationOfTime();
 
 	if (getFlagInvertedValue())
 		eqTime *= -1;

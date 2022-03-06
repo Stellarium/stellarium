@@ -52,7 +52,7 @@ friend class ScriptConsole;
 
 public:
 	StelScriptMgr(QObject *parent=Q_NULLPTR);
-	~StelScriptMgr();
+	~StelScriptMgr() Q_DECL_OVERRIDE;
 
 	QStringList getScriptList() const;
 
@@ -74,6 +74,11 @@ public:
 	
 	//! Add all the StelModules into the script engine
 	void addModules();
+
+	//! Add a single QObject as scripting object
+	//! The object must have set a name by QObject::setObjectName().
+	//! @note use this sparingly and with caution, and only add one object per class!
+	void addObject(QObject *obj);
 
     //! Define JS classes Vec3f, Vec3d
 	static void defVecClasses(QScriptEngine *engine);
@@ -161,6 +166,10 @@ public slots:
 	//! script directories are used (script/ in both user and install directory). Otherwise, the given directory is used.
 	//! @return false if the named script code could not be prepared or run, true otherwise
 	bool runScriptDirect(const QString scriptId, const QString& scriptCode, int &errLoc, const QString &includePath = QString());
+
+	//! Convenience method similar to runScriptDirect(const QString scriptId, const QString& scriptCode, int &errLoc, const QString &includePath = QString());
+	//! when scriptId and errLoc are not relevant. (Required e.g. in RemoteControl)
+	bool runScriptDirect(const QString& scriptCode, const QString &includePath = QString());
 
 	//! Runs preprocessed script code which has been generated using runPreprocessedScript().
 	//! In general, you do not want to use this method, use runScript() or runScriptDirect() instead.

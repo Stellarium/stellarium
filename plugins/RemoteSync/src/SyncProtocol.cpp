@@ -80,12 +80,12 @@ qint64 SyncMessage::createFullMessage(QByteArray &target) const
 
 void SyncMessage::serialize(QDataStream &stream) const
 {
-	Q_UNUSED(stream);
+	Q_UNUSED(stream)
 }
 
 bool SyncMessage::deserialize(QDataStream &stream, tPayloadSize dataSize)
 {
-	Q_UNUSED(stream);
+	Q_UNUSED(stream)
 	return dataSize == 0;
 }
 

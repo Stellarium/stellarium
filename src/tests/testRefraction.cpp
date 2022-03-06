@@ -32,6 +32,9 @@ void TestRefraction::initTestCase()
 	Vec3d v(1.,0.,0.);
 	refCls.forward(v);
 	QVERIFY(v[2]>=0);
+
+	pressure = 1010.f;
+	temperature = 10.f;
 }
 
 void TestRefraction::testSaemundssonEquation()
@@ -62,8 +65,10 @@ void TestRefraction::testSaemundssonEquation()
 	data << 85 << 0.087;
 	data << 89 << 0.016;
 
-	refCls.setPressure(1010);
-	refCls.setTemperature(10);
+	refCls.setPressure(pressure);
+	refCls.setTemperature(temperature);
+	QVERIFY(qFuzzyCompare(refCls.getPressure(), pressure));
+	QVERIFY(qFuzzyCompare(refCls.getTemperature(), temperature));
 
 	while(data.count() >= 2)
 	{
@@ -132,8 +137,10 @@ void TestRefraction::testBennettEquation()
 	data << 85 << 0.086;
 	data << 89 << 0.016;
 
-	refCls.setPressure(1010);
-	refCls.setTemperature(10);
+	refCls.setPressure(pressure);
+	refCls.setTemperature(temperature);
+	QVERIFY(qFuzzyCompare(refCls.getPressure(), pressure));
+	QVERIFY(qFuzzyCompare(refCls.getTemperature(), temperature));
 
 	while(data.count() >= 2)
 	{
@@ -202,8 +209,10 @@ void TestRefraction::testComplexRefraction()
 	data << 85 << 0.001;
 	data << 89 << 0.000;
 
-	refCls.setPressure(1010);
-	refCls.setTemperature(10);
+	refCls.setPressure(pressure);
+	refCls.setTemperature(temperature);
+	QVERIFY(qFuzzyCompare(refCls.getPressure(), pressure));
+	QVERIFY(qFuzzyCompare(refCls.getTemperature(), temperature));
 
 	while(data.count() >= 2)
 	{

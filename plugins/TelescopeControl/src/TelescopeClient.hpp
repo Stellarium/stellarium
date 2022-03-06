@@ -76,7 +76,6 @@ public:
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 	QString getType(void) const Q_DECL_OVERRIDE {return TELESCOPECLIENT_TYPE;}
 	QString getID() const Q_DECL_OVERRIDE {return name;}
-	virtual double getAngularSize(const StelCore*) const Q_DECL_OVERRIDE {Q_ASSERT(0); return 0;}	// TODO
 		
 	// Methods specific to telescope
 	virtual void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;

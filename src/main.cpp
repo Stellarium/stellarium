@@ -156,9 +156,10 @@ int main(int argc, char **argv)
 	}
 #endif
 
-	// Seed the PRNG
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+	// Seed the PRNG. Later Qt versions use qApp->randomGenerator
 	qsrand(QDateTime::currentMSecsSinceEpoch());
-
+#endif
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
@@ -236,7 +237,7 @@ int main(int argc, char **argv)
 	// OK we start the full program.
 	// Print the console splash and get on with loading the program
 	QString versionLine = QString("This is %1 - %2").arg(StelUtils::getApplicationName(), STELLARIUM_URL);
-	QString copyrightLine = QString("Copyright (C) %1 Fabien Chereau et al.").arg(COPYRIGHT_YEARS);
+	QString copyrightLine = STELLARIUM_COPYRIGHT;
 	int maxLength = qMax(versionLine.size(), copyrightLine.size());
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
 	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
@@ -295,7 +296,7 @@ int main(int argc, char **argv)
 				// Config versions less than 0.6.0 are not supported, otherwise we will try to use it
 				if (v1==0 && v2<6)
 				{
-					// The config file is too old to try an importation
+					// The config file is too old to try an import
 					qDebug() << "The current config file is from a version too old for parameters to be imported ("
 							 << (version.isEmpty() ? "<0.6.0" : version) << ").\n"
 							 << "It will be replaced by the default config file.";
@@ -306,7 +307,7 @@ int main(int argc, char **argv)
 					qDebug() << "Attempting to use an existing older config file.";
 					confSettings->setValue("main/version", QString(PACKAGE_VERSION)); // Upgrade version of config.ini
 					clearCache();
-					qDebug() << "Clear cache and update config.ini...";
+					qDebug() << "Cleared cache and updated config.ini...";
 				}
 			}
 		}
@@ -378,7 +379,7 @@ int main(int argc, char **argv)
 	QGuiApplication::setFont(tmpFont);
 
 	// Initialize translator feature
-	StelTranslator::init(StelFileMgr::getInstallationDir() + "/data/iso639-1.utf8");
+	StelTranslator::init(StelFileMgr::getInstallationDir() + "/data/languages.tab");
 	
 	// Use our custom translator for Qt translations as well
 	CustomQTranslator trans;

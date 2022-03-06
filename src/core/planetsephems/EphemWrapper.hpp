@@ -95,6 +95,9 @@ void get_rhea_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 void get_titan_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 void get_hyperion_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 void get_iapetus_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_helene_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_telesto_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_calypso_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 
 void get_miranda_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 void get_ariel_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);

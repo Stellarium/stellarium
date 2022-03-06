@@ -228,6 +228,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	QString datetimeGroup = N_("Date and Time");
 	QString windowsGroup = N_("Windows");
 	QString miscGroup = N_("Miscellaneous");
+	QString infoGroup = N_("Selected object information");
 	actionsMgr->addAction("actionQuit_Global", miscGroup, N_("Quit"), this, "quit()", "Ctrl+Q", "Ctrl+X");
 
 #ifdef ENABLE_SCRIPTING
@@ -268,6 +269,13 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	connect(scriptMgr, SIGNAL(scriptRunning()), this, SLOT(scriptStarted()));
 	connect(scriptMgr, SIGNAL(scriptStopped()), this, SLOT(scriptStopped()));
 #endif
+
+	actionsMgr->addAction("actionDisplayInfo_All",     infoGroup, N_("All available info"), this, "displayAllInfo()");
+	actionsMgr->addAction("actionDisplayInfo_Default", infoGroup, N_("Default info"), this, "displayDefaultInfo()");
+	actionsMgr->addAction("actionDisplayInfo_Short",   infoGroup, N_("Short info"), this, "displayShortInfo()");
+	actionsMgr->addAction("actionDisplayInfo_None",    infoGroup, N_("None info"), this, "displayNoneInfo()");
+	actionsMgr->addAction("actionDisplayInfo_Custom",  infoGroup, N_("Custom info"), this, "displayCustomInfo()");
+
 	// Put StelGui under the StelProperty system (simpler and more consistent GUI)
 	StelApp::getInstance().getStelPropertyManager()->registerObject(this);
 
@@ -601,6 +609,36 @@ void StelGui::update()
 		savedProgressBarSize=skyGui->progressBarMgr->boundingRect().size();
 		forceRefreshGui();
 	}
+}
+
+void StelGui::displayAllInfo()
+{
+	setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
+	emit infoStringChanged();
+}
+
+void StelGui::displayDefaultInfo()
+{
+	setInfoTextFilters(StelObject::InfoStringGroup(StelObject::DefaultInfo));
+	emit infoStringChanged();
+}
+
+void StelGui::displayShortInfo()
+{
+	setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
+	emit infoStringChanged();
+}
+
+void StelGui::displayNoneInfo()
+{
+	setInfoTextFilters(StelObject::InfoStringGroup(StelObject::None));
+	emit infoStringChanged();
+}
+
+void StelGui::displayCustomInfo()
+{
+	setInfoTextFilters(GETSTELMODULE(StelObjectMgr)->getCustomInfoStrings());
+	emit infoStringChanged();
 }
 
 #ifdef ENABLE_SCRIPTING

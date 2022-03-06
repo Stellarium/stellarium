@@ -101,6 +101,8 @@ struct TleData
 	//! Flag indicating whether this satellite should be added.
 	//! See Satellites::autoAddEnabled.
 	bool addThis;
+	//! Source of TLE (URL), can be used for assign satellites group
+	QString sourceURL;
 };
 
 //! @ingroup satellites
@@ -159,6 +161,7 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(int  orbitLineSegments        READ getOrbitLineSegments        WRITE setOrbitLineSegments        NOTIFY orbitLineSegmentsChanged)
 	Q_PROPERTY(int  orbitLineFadeSegments    READ getOrbitLineFadeSegments    WRITE setOrbitLineFadeSegments    NOTIFY orbitLineFadeSegmentsChanged)
 	Q_PROPERTY(int  orbitLineSegmentDuration READ getOrbitLineSegmentDuration WRITE setOrbitLineSegmentDuration NOTIFY orbitLineSegmentDurationChanged)
+	Q_PROPERTY(int  tleEpochAgeDays     READ getTleEpochAgeDays     WRITE setTleEpochAgeDays     NOTIFY tleEpochAgeDaysChanged)
 	Q_PROPERTY(Vec3f invisibleSatelliteColor READ getInvisibleSatelliteColor  WRITE setInvisibleSatelliteColor  NOTIFY invisibleSatelliteColorChanged)
 	Q_PROPERTY(Vec3f transitSatelliteColor   READ getTransitSatelliteColor    WRITE setTransitSatelliteColor    NOTIFY transitSatelliteColorChanged)
 	
@@ -223,6 +226,13 @@ public:
 	//! @param noradNumber search string in the format "NORAD XXXX".
 	//! @returns a null pointer if no such satellite is found.
 	StelObjectP searchByNoradNumber(const QString& noradNumber) const;
+
+	//! Return the satellite with the given International Designator.
+	//! Used as a helper function by searchByName() and
+	//! searchByNameI18n().
+	//! @param intlDesignator search string in the format "XXXX-XXXX".
+	//! @returns a null pointer if no such satellite is found.
+	StelObjectP searchByInternationalDesignator(const QString& intlDesignator) const;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -345,11 +355,10 @@ public:
 	//! \param openFile a reference to an \b open file.
 	//! @param[in,out] tleList a hash with satellite IDs as keys.
 	//! @param[in] addFlagValue value to be set to TleData::addThis for all.
+	//! @param[in] tleURL a URL of TLE's source (e.g. Celestrak URL)
 	//! @todo If this can accept a QIODevice, it will be able to read directly
 	//! QNetworkReply-s... --BM
-	static void parseTleFile(QFile& openFile,
-	                         TleDataHash& tleList,
-				 bool addFlagValue = false);
+	static void parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue = false, const QString& tleURL = "");
 
 	//! Insert a three line TLE into the hash array.
 	//! @param[in] line The second line from the TLE
@@ -381,6 +390,7 @@ signals:
 	void orbitLineSegmentsChanged(int i);
 	void orbitLineFadeSegmentsChanged(int i);
 	void orbitLineSegmentDurationChanged(int i);
+	void tleEpochAgeDaysChanged(int i);
 	void invisibleSatelliteColorChanged(Vec3f);
 	void transitSatelliteColorChanged(Vec3f);
 
@@ -503,6 +513,11 @@ public slots:
 	//! set duration of a single segments
 	void setOrbitLineSegmentDuration(int s);
 
+	//! return the valid age of TLE's epoch
+	int getTleEpochAgeDays() const { return Satellite::tleEpochAge; }
+	//! set the valid age of TLE's epoch
+	void setTleEpochAgeDays(int age);
+
 	void recalculateOrbitLines(void);
 
 	//! Display a message on the screen for a few seconds.
@@ -581,6 +596,8 @@ private:
 	//! place.)
 	static void translations();
 
+	void createSuperGroupsList();
+
 	//! Path to the satellite catalog file.
 	QString catalogPath;
 	//! Plug-in data directory.
@@ -654,6 +671,8 @@ private:
 #endif
 	// GUI
 	SatellitesDialog* configDialog;
+
+	QMultiMap<QString, QString> satSuperGroupsMap;
 
 	static QString SatellitesCatalogVersion;
 
