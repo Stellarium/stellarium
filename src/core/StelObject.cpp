@@ -738,7 +738,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 				else
 					res += QString("%1 (h=%2°): %3<br/>").arg(sETwilight, alt, StelUtils::hoursToHmsStr(hour, true));
 			}
-			double lengthOfDay = sunset - sunrise;
+			double lengthOfDay = StelUtils::fmodpos(sunset - sunrise, 24.);
 			if (lengthOfDay<24.)
 			{
 				QString sDay = q_("Daytime");
