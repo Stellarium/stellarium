@@ -738,8 +738,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 				else
 					res += QString("%1 (h=%2°): %3<br/>").arg(sETwilight, alt, StelUtils::hoursToHmsStr(hour, true));
 			}
-			double lengthOfDay = sunset - sunrise;
-			if (lengthOfDay<24.)
+			double lengthOfDay = StelUtils::fmodpos(sunset - sunrise, 24.); // prevent negative value
+			if (lengthOfDay<24. && rts[3]==0.) // avoid showing Daytime: 0h 00m
 			{
 				QString sDay = q_("Daytime");
 				if (withTables)
