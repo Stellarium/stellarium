@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-02-19 23:00+0700\n"
+"POT-Creation-Date: 2022-03-07 14:46+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -39,9 +39,9 @@ msgstr "пользовательский маркер"
 #: src/core/modules/Planet.cpp:533 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:266 src/core/modules/StarWrapper.cpp:269
 #: src/gui/AstroCalcDialog.cpp:961 src/gui/AstroCalcDialog.cpp:2512
-#: src/gui/AstroCalcDialog.cpp:2895 src/gui/AstroCalcDialog.cpp:3263
+#: src/gui/AstroCalcDialog.cpp:2895 src/gui/AstroCalcDialog.cpp:3255
 #: src/gui/ObsListDialog.cpp:149 src/gui/ObsListCreateEditDialog.cpp:157
-#: src/ui_configurationDialog.h:1793 plugins/Satellites/src/Satellite.cpp:305
+#: src/ui_configurationDialog.h:1808 plugins/Satellites/src/Satellite.cpp:305
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:524
 #: plugins/Supernovae/src/Supernova.cpp:144 plugins/Novae/src/Nova.cpp:150
 #: plugins/Quasars/src/Quasar.cpp:128 plugins/Pulsars/src/Pulsar.cpp:188
@@ -67,17 +67,17 @@ msgstr "астеризм"
 #: src/core/modules/NebulaMgr.cpp:475 src/core/modules/SolarSystem.cpp:299
 #: src/core/modules/MilkyWay.cpp:85 src/core/modules/ZodiacalLight.cpp:87
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:151
-#: src/core/StelApp.cpp:641 src/core/StelCore.cpp:267
+#: src/core/StelApp.cpp:643 src/core/StelCore.cpp:267
 #: src/core/StelSkyLayerMgr.cpp:85 src/core/StelSkyLayerMgr.cpp:86
-#: src/StelMainView.cpp:824
+#: src/StelMainView.cpp:826
 msgid "Display Options"
 msgstr "Параметры отображения"
 
-#: src/core/modules/AsterismMgr.cpp:99 src/ui_configurationDialog.h:1831
+#: src/core/modules/AsterismMgr.cpp:99 src/ui_configurationDialog.h:1846
 msgid "Asterism lines"
 msgstr "Линии астеризмов"
 
-#: src/core/modules/AsterismMgr.cpp:100 src/ui_configurationDialog.h:1861
+#: src/core/modules/AsterismMgr.cpp:100 src/ui_configurationDialog.h:1876
 msgid "Asterism labels"
 msgstr "Названия астеризмов"
 
@@ -107,12 +107,12 @@ msgstr "Изображения созвездий"
 msgid "Constellation labels"
 msgstr "Названия созвездий"
 
-#: src/core/modules/ConstellationMgr.cpp:137 src/ui_configurationDialog.h:1856
+#: src/core/modules/ConstellationMgr.cpp:137 src/ui_configurationDialog.h:1871
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Constellation boundaries"
 msgstr "Границы созвездий"
 
-#: src/core/modules/ConstellationMgr.cpp:138 src/ui_configurationDialog.h:1971
+#: src/core/modules/ConstellationMgr.cpp:138 src/ui_configurationDialog.h:1986
 msgid "Select single constellation"
 msgstr "Поштучный выбор созвездий"
 
@@ -196,9 +196,9 @@ msgstr "Первый вертикал"
 #. TRANSLATORS: Satellite altitude
 #: src/core/modules/GridLinesMgr.cpp:729 src/gui/SearchDialog.cpp:309
 #: src/gui/AstroCalcDialog.cpp:908 src/gui/AstroCalcDialog.cpp:1851
-#: src/gui/AstroCalcDialog.cpp:2239 src/gui/AstroCalcDialog.cpp:4452
-#: src/gui/AstroCalcDialog.cpp:5020 src/gui/AstroCalcDialog.cpp:5300
-#: src/gui/AstroCalcDialog.cpp:5302 src/ui_viewDialog.h:3615
+#: src/gui/AstroCalcDialog.cpp:2239 src/gui/AstroCalcDialog.cpp:4444
+#: src/gui/AstroCalcDialog.cpp:5012 src/gui/AstroCalcDialog.cpp:5292
+#: src/gui/AstroCalcDialog.cpp:5294 src/ui_viewDialog.h:3615
 #: plugins/Satellites/src/Satellite.cpp:328
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1383
 msgid "Altitude"
@@ -320,7 +320,7 @@ msgstr "Антиапекс"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1463 src/core/modules/Planet.cpp:664
-#: src/core/modules/Planet.cpp:1114 src/gui/AstroCalcDialog.cpp:7969
+#: src/core/modules/Planet.cpp:1114 src/gui/AstroCalcDialog.cpp:7961
 #: plugins/Satellites/src/Satellite.cpp:326
 #: plugins/Satellites/src/Satellite.cpp:385
 #: plugins/MeteorShowers/src/MeteorShower.cpp:554
@@ -387,12 +387,12 @@ msgstr "Экваториальная сетка J2000"
 msgid "Ecliptic J2000 grid"
 msgstr "Эклиптическая сетка J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1857 src/ui_configurationDialog.h:1851
+#: src/core/modules/GridLinesMgr.cpp:1857 src/ui_configurationDialog.h:1866
 msgid "Ecliptic grid"
 msgstr "Эклиптическая сетка"
 
 #: src/core/modules/GridLinesMgr.cpp:1858 src/ui_viewDialog.h:3763
-#: src/ui_configurationDialog.h:1843
+#: src/ui_configurationDialog.h:1858
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:394
 msgid "Galactic grid"
 msgstr "Галактическая сетка"
@@ -511,7 +511,7 @@ msgid "Rectangular marker of FOV"
 msgstr "Прямоугольный маркер ПЗ"
 
 #: src/core/modules/SpecialMarkersMgr.cpp:264 src/ui_viewDialog.h:3724
-#: src/ui_configurationDialog.h:1889
+#: src/ui_configurationDialog.h:1904
 msgid "Compass marks"
 msgstr "Компас"
 
@@ -620,7 +620,7 @@ msgid "Fog"
 msgstr "Дымка"
 
 #: src/core/modules/LandscapeMgr.cpp:568 src/ui_viewDialog.h:3522
-#: src/ui_configurationDialog.h:1873
+#: src/ui_configurationDialog.h:1888
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:314
 msgid "Cardinal points"
 msgstr "Стороны света"
@@ -676,7 +676,7 @@ msgstr "Циклическое изменение засветки"
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:127
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:455
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:215
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:178
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:183
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:182
 msgid "Author"
 msgstr "Автор"
@@ -710,10 +710,26 @@ msgstr "коэффициент экстинкции"
 msgid "Atmospheric conditions"
 msgstr "Атмосферные условия"
 
-#: src/core/modules/LandscapeMgr.cpp:1038
+#: src/core/modules/LandscapeMgr.cpp:1041
+msgid "cd/m<sup>2</sup>"
+msgstr "кд/м<sup>2</sup>"
+
+#: src/core/modules/LandscapeMgr.cpp:1045
+msgid "ncd/m<sup>2</sup>"
+msgstr "нкд/м<sup>2</sup>"
+
+#: src/core/modules/LandscapeMgr.cpp:1050
+msgid "&mu;cd/m<sup>2</sup>"
+msgstr "мккд/м<sup>2</sup>"
+
+#: src/core/modules/LandscapeMgr.cpp:1055
+msgid "mcd/m<sup>2</sup>"
+msgstr "мкд/м<sup>2</sup>"
+
+#: src/core/modules/LandscapeMgr.cpp:1057
 #, qt-format
-msgid "<b>Light pollution</b>: %1 cd/m<sup>2</sup>"
-msgstr "<b>Засветка</b>: %1 кд/м<sup>2</sup> (люкс)"
+msgid "<b>Light pollution</b>: %1 %2 (NELM: %3; Bortle class: %4)"
+msgstr "<b>Засветка</b>: %1 %2 (NELM: %3; класс Бортля: %4)"
 
 #: src/core/modules/NomenclatureItem.cpp:66
 msgctxt "landform"
@@ -764,7 +780,7 @@ msgstr "Диаметр"
 #: src/core/modules/Planet.cpp:645 src/core/modules/Planet.cpp:748
 #: src/core/modules/Planet.cpp:1430 src/core/modules/Comet.cpp:159
 #: src/core/modules/Comet.cpp:169 src/gui/StelGuiItems.cpp:847
-#: src/gui/AstroCalcDialog.cpp:3036 src/gui/AstroCalcDialog.cpp:7903
+#: src/gui/AstroCalcDialog.cpp:3036 src/gui/AstroCalcDialog.cpp:7895
 #: plugins/Satellites/src/Satellite.cpp:322
 #: plugins/Satellites/src/Satellite.cpp:378
 msgctxt "distance"
@@ -1481,7 +1497,7 @@ msgid "Subsolar"
 msgstr "Подсолнечная"
 
 #: src/core/modules/Nebula.cpp:149 src/core/StelObject.cpp:315
-#: src/gui/AstroCalcDialog.cpp:4846 src/gui/AstroCalcDialog.cpp:4904
+#: src/gui/AstroCalcDialog.cpp:4838 src/gui/AstroCalcDialog.cpp:4896
 #: src/gui/ObsListDialog.cpp:152 src/gui/ObsListCreateEditDialog.cpp:160
 #: plugins/Supernovae/src/Supernova.cpp:128
 msgid "Magnitude"
@@ -1553,7 +1569,7 @@ msgstr "угл. сек."
 msgid "Contrast index"
 msgstr "Контрастный индекс"
 
-#: src/core/modules/Nebula.cpp:274 src/ui_configurationDialog.h:1806
+#: src/core/modules/Nebula.cpp:274 src/ui_configurationDialog.h:1821
 msgid "Size"
 msgstr "Размер"
 
@@ -1576,8 +1592,8 @@ msgstr "св. лет"
 #: src/core/modules/Nebula.cpp:320 src/core/modules/Nebula.cpp:366
 #: src/core/modules/Planet.cpp:655 src/core/modules/StarWrapper.cpp:317
 #: src/core/modules/StarWrapper.cpp:319 src/gui/AstroCalcDialog.cpp:995
-#: src/gui/AstroCalcDialog.cpp:4857 src/gui/AstroCalcDialog.cpp:4915
-#: src/ui_configurationDialog.h:1778 plugins/Supernovae/src/Supernova.cpp:160
+#: src/gui/AstroCalcDialog.cpp:4849 src/gui/AstroCalcDialog.cpp:4907
+#: src/ui_configurationDialog.h:1793 plugins/Supernovae/src/Supernova.cpp:160
 #: plugins/Novae/src/Nova.cpp:165 plugins/Exoplanets/src/Exoplanet.cpp:296
 msgid "Distance"
 msgstr "Расстояние"
@@ -2059,7 +2075,7 @@ msgid "object of unknown nature"
 msgstr "объект неизвестной природы"
 
 #: src/core/modules/NebulaMgr.cpp:474 src/gui/AstroCalcDialog.cpp:1062
-#: src/gui/AstroCalcDialog.cpp:6944
+#: src/gui/AstroCalcDialog.cpp:6936
 msgid "Deep-sky objects"
 msgstr "Объекты глубокого космоса"
 
@@ -2068,7 +2084,7 @@ msgid "Toggle DSO type filter"
 msgstr "Переключить фильтр типа ОГК"
 
 #: src/core/modules/NebulaMgr.cpp:1380 src/gui/StelDialog.cpp:324
-#: src/StelMainView.cpp:951
+#: src/StelMainView.cpp:954
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:776
 msgid "Attention!"
 msgstr "Внимание!"
@@ -2131,8 +2147,8 @@ msgstr "в направлении"
 #: src/core/modules/Planet.cpp:618 src/gui/AstroCalcDialog.cpp:942
 #: src/gui/AstroCalcDialog.cpp:1251 src/gui/AstroCalcDialog.cpp:1593
 #: src/gui/AstroCalcDialog.cpp:1865 src/gui/AstroCalcDialog.cpp:1912
-#: src/gui/AstroCalcDialog.cpp:4825 src/gui/AstroCalcDialog.cpp:7929
-#: src/gui/AstroCalcDialog.cpp:7991 src/gui/AstroCalcDialog.cpp:8135
+#: src/gui/AstroCalcDialog.cpp:4817 src/gui/AstroCalcDialog.cpp:7921
+#: src/gui/AstroCalcDialog.cpp:7983 src/gui/AstroCalcDialog.cpp:8127
 #: plugins/Exoplanets/src/Exoplanet.cpp:325
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgctxt "distance, astronomical unit"
@@ -2143,7 +2159,7 @@ msgstr "а.е."
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
 #: src/core/modules/Planet.cpp:634 src/core/modules/Planet.cpp:652
-#: src/core/modules/Comet.cpp:161 src/gui/AstroCalcDialog.cpp:7905
+#: src/core/modules/Comet.cpp:161 src/gui/AstroCalcDialog.cpp:7897
 msgctxt "distance"
 msgid "M km"
 msgstr "млн. км"
@@ -2186,13 +2202,13 @@ msgid "Equatorial diameter"
 msgstr "Экваториальный диаметр"
 
 #: src/core/modules/Planet.cpp:805 src/core/modules/Planet.cpp:806
-#: src/core/modules/Planet.cpp:814 src/gui/AstroCalcDialog.cpp:4862
-#: src/gui/AstroCalcDialog.cpp:4920 src/ui_configurationDialog.h:1817
+#: src/core/modules/Planet.cpp:814 src/gui/AstroCalcDialog.cpp:4854
+#: src/gui/AstroCalcDialog.cpp:4912 src/ui_configurationDialog.h:1832
 msgid "Elongation"
 msgstr "Элонгация"
 
 #: src/core/modules/Planet.cpp:807 src/core/modules/Planet.cpp:816
-#: src/gui/AstroCalcDialog.cpp:4872 src/gui/AstroCalcDialog.cpp:4930
+#: src/gui/AstroCalcDialog.cpp:4864 src/gui/AstroCalcDialog.cpp:4922
 #: plugins/Satellites/src/Satellite.cpp:390
 msgid "Phase angle"
 msgstr "Фазовый угол"
@@ -2205,14 +2221,14 @@ msgstr "Освещено"
 msgid "Elong. in Ecl.Long."
 msgstr "Элонг. по эклип. долг."
 
-#: src/core/modules/Planet.cpp:830 src/gui/AstroCalcDialog.cpp:7992
-#: src/gui/AstroCalcDialog.cpp:8138 src/gui/AstroCalcDialog.cpp:8150
+#: src/core/modules/Planet.cpp:830 src/gui/AstroCalcDialog.cpp:7984
+#: src/gui/AstroCalcDialog.cpp:8130 src/gui/AstroCalcDialog.cpp:8142
 msgid "Angular distance"
 msgstr "Угловое расстояние"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:848 src/core/modules/StarWrapper.cpp:358
-#: src/gui/AstroCalcDialog.cpp:7940
+#: src/gui/AstroCalcDialog.cpp:7932
 msgctxt "duration"
 msgid "days"
 msgstr "дней"
@@ -2425,8 +2441,8 @@ msgid "Orthographic"
 msgstr "Ортографическая"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:300 src/gui/AstroCalcDialog.cpp:4132
-#: src/gui/AstroCalcDialog.cpp:6899 src/translations.h:63
+#: src/core/modules/SolarSystem.cpp:300 src/gui/AstroCalcDialog.cpp:4124
+#: src/gui/AstroCalcDialog.cpp:6891 src/translations.h:63
 msgid "Planets"
 msgstr "Планеты"
 
@@ -2559,7 +2575,7 @@ msgid "Position angle"
 msgstr "Позиционный угол"
 
 #: src/core/modules/StarWrapper.cpp:393 src/core/modules/StarWrapper.cpp:398
-#: src/gui/AstroCalcDialog.cpp:5323
+#: src/gui/AstroCalcDialog.cpp:5315
 msgid "Separation"
 msgstr "Разделение"
 
@@ -2579,146 +2595,146 @@ msgstr "Оцифрованный обзор неба (TOAST)"
 msgid "Toggle Hierarchical Progressive Surveys"
 msgstr "Переключить иерархические прогрессивные обзоры"
 
-#: src/core/StelApp.cpp:452
+#: src/core/StelApp.cpp:454
 msgid "Initializing textures..."
 msgstr "Инициализация текстур..."
 
-#: src/core/StelApp.cpp:456
+#: src/core/StelApp.cpp:458
 msgid "Initializing network access..."
 msgstr "Инициализация сетевого доступа..."
 
-#: src/core/StelApp.cpp:459
+#: src/core/StelApp.cpp:461
 msgid "Initializing network disk cache..."
 msgstr "Инициализация сетевого дискового кэша..."
 
-#: src/core/StelApp.cpp:473
+#: src/core/StelApp.cpp:475
 msgid "Initializing network proxy..."
 msgstr "Инициализация сетевого прокси..."
 
-#: src/core/StelApp.cpp:488
+#: src/core/StelApp.cpp:490
 msgid "Initializing Object Database..."
 msgstr "Инициализация базы объектов..."
 
-#: src/core/StelApp.cpp:494
+#: src/core/StelApp.cpp:496
 msgid "Initializing HiPS survey..."
 msgstr "Инициализация обзоров HiPS..."
 
-#: src/core/StelApp.cpp:500
+#: src/core/StelApp.cpp:502
 msgid "Initializing Solar System objects..."
 msgstr "Инициализация объектов Солнечной системы..."
 
-#: src/core/StelApp.cpp:506
+#: src/core/StelApp.cpp:508
 msgid "Initializing planetary nomenclature..."
 msgstr "Инициализация планетной номенклатуры..."
 
-#: src/core/StelApp.cpp:512
+#: src/core/StelApp.cpp:514
 msgid "Initializing stars..."
 msgstr "Инициализация звёзд..."
 
-#: src/core/StelApp.cpp:517
+#: src/core/StelApp.cpp:519
 msgid "Initializing core..."
 msgstr "Инициализация ядра..."
 
-#: src/core/StelApp.cpp:521
+#: src/core/StelApp.cpp:523
 msgid "Initializing deep-sky objects..."
 msgstr "Инициализация объектов глубокого космоса..."
 
-#: src/core/StelApp.cpp:527
+#: src/core/StelApp.cpp:529
 msgid "Initializing Milky Way..."
 msgstr "Инициализация Млечного пути..."
 
-#: src/core/StelApp.cpp:533
+#: src/core/StelApp.cpp:535
 msgid "Initializing zodiacal light..."
 msgstr "Инициализация зодиакального света..."
 
-#: src/core/StelApp.cpp:539
+#: src/core/StelApp.cpp:541
 msgid "Initializing sky image layer..."
 msgstr "Инициализация слоя изображений..."
 
-#: src/core/StelApp.cpp:545
+#: src/core/StelApp.cpp:547
 msgid "Initializing TOAST surveys..."
 msgstr "Инициализация обзоров TOAST..."
 
-#: src/core/StelApp.cpp:551
+#: src/core/StelApp.cpp:553
 msgid "Initializing audio..."
 msgstr "Инициализация звука..."
 
-#: src/core/StelApp.cpp:555
+#: src/core/StelApp.cpp:557
 msgid "Initializing video..."
 msgstr "Инициализация видео..."
 
-#: src/core/StelApp.cpp:561
+#: src/core/StelApp.cpp:563
 msgid "Initializing constellations..."
 msgstr "Инициализация созвездий..."
 
-#: src/core/StelApp.cpp:567
+#: src/core/StelApp.cpp:569
 msgid "Initializing asterisms..."
 msgstr "Инициализация астеризмов..."
 
-#: src/core/StelApp.cpp:573
+#: src/core/StelApp.cpp:575
 msgid "Initializing landscape..."
 msgstr "Инициализация ландшафта..."
 
-#: src/core/StelApp.cpp:578
+#: src/core/StelApp.cpp:580
 msgid "Initializing grid lines..."
 msgstr "Инициализация сеток..."
 
-#: src/core/StelApp.cpp:583
+#: src/core/StelApp.cpp:585
 msgid "Initializing special markers..."
 msgstr "Инициализация специальных маркеров..."
 
-#: src/core/StelApp.cpp:589
+#: src/core/StelApp.cpp:591
 msgid "Initializing sporadic meteors..."
 msgstr "Инициализация спорадических метеоров..."
 
-#: src/core/StelApp.cpp:595
+#: src/core/StelApp.cpp:597
 msgid "Initializing user labels..."
 msgstr "Инициализация пользовательских меток..."
 
-#: src/core/StelApp.cpp:600
+#: src/core/StelApp.cpp:602
 msgid "Initializing sky cultures..."
 msgstr "Инициализация культур неба..."
 
-#: src/core/StelApp.cpp:604
+#: src/core/StelApp.cpp:606
 msgid "Initializing user markers..."
 msgstr "Инициализация пользовательских маркеров..."
 
-#: src/core/StelApp.cpp:610
+#: src/core/StelApp.cpp:612
 msgid "Initializing custom objects..."
 msgstr "Инициализация пользовательских объектов..."
 
-#: src/core/StelApp.cpp:616
+#: src/core/StelApp.cpp:618
 msgid "Initializing highlights..."
 msgstr "Инициализация подсветок..."
 
-#: src/core/StelApp.cpp:624
+#: src/core/StelApp.cpp:626
 msgid "Initializing scripting..."
 msgstr "Инициализация движка сценариев..."
 
-#: src/core/StelApp.cpp:629
+#: src/core/StelApp.cpp:631
 msgid "Initializing color scheme..."
 msgstr "Инициализация схемы цветов..."
 
-#: src/core/StelApp.cpp:641 src/ui_configurationDialog.h:1885
+#: src/core/StelApp.cpp:643 src/ui_configurationDialog.h:1900
 msgid "Night mode"
 msgstr "Ночной режим"
 
-#: src/core/StelApp.cpp:668
+#: src/core/StelApp.cpp:670
 msgid "Initializing SPOUT sender..."
 msgstr "Инициализация отправителя SPOUT..."
 
-#: src/core/StelApp.cpp:678
+#: src/core/StelApp.cpp:680
 msgid "Cannot create Spout sender. See log for details."
 msgstr "Не могу создать отправитель Spout. Смотри подробности в журнале."
 
-#: src/core/StelApp.cpp:704
+#: src/core/StelApp.cpp:706
 msgid "Loading plugin"
 msgstr "Загрузка плагина"
 
 #: src/core/StelCore.cpp:265 src/core/StelObjectMgr.cpp:54
 #: src/gui/StelGui.cpp:228 src/gui/AstroCalcDialog.cpp:1845
 #: src/gui/AstroCalcDialog.cpp:2510 src/gui/AstroCalcDialog.cpp:2893
-#: src/gui/AstroCalcDialog.cpp:5316 src/ui_dateTimeDialogGui.h:373
+#: src/gui/AstroCalcDialog.cpp:5308 src/ui_dateTimeDialogGui.h:373
 #: src/ui_dateTimeDialogGui.h:376
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
@@ -3555,19 +3571,19 @@ msgstr "Видимое звёздное время"
 
 #. TRANSLATORS: time of transit
 #: src/core/StelObject.cpp:681 src/gui/AstroCalcDialog.cpp:955
-#: src/gui/AstroCalcDialog.cpp:2236 src/gui/AstroCalcDialog.cpp:7019
+#: src/gui/AstroCalcDialog.cpp:2236 src/gui/AstroCalcDialog.cpp:7011
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "Кульминация"
 
 #: src/core/StelObject.cpp:682 src/gui/AstroCalcDialog.cpp:2235
-#: src/gui/AstroCalcDialog.cpp:7018
+#: src/gui/AstroCalcDialog.cpp:7010
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "Восход"
 
 #: src/core/StelObject.cpp:683 src/gui/AstroCalcDialog.cpp:2237
-#: src/gui/AstroCalcDialog.cpp:7022
+#: src/gui/AstroCalcDialog.cpp:7014
 msgctxt "celestial event"
 msgid "Set"
 msgstr "Заход"
@@ -3639,7 +3655,7 @@ msgstr "Макс. зап. отступление"
 msgid "Parallactic Angle"
 msgstr "Параллактический угол"
 
-#: src/core/StelObject.cpp:859 src/gui/AstroCalcDialog.cpp:7116
+#: src/core/StelObject.cpp:859 src/gui/AstroCalcDialog.cpp:7108
 msgid "IAU Constellation"
 msgstr "Созвездие МАС"
 
@@ -3865,12 +3881,12 @@ msgid "No description"
 msgstr "Без описания"
 
 #: src/core/StelSkyCultureMgr.cpp:308
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:221
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:227
 msgid "References"
 msgstr "Ссылки"
 
 #: src/core/StelMovementMgr.cpp:231 src/gui/StelGui.cpp:230
-#: src/StelMainView.cpp:822 src/StelMainView.cpp:823
+#: src/StelMainView.cpp:824 src/StelMainView.cpp:825
 msgid "Miscellaneous"
 msgstr "Разное"
 
@@ -4253,26 +4269,39 @@ msgstr "Сообщить об ошибке и запросить новый фу
 msgid "Further information can be found in the {developer documentation}."
 msgstr "Дополнительную информацию можно найти в {документации разработчика}."
 
-#: src/gui/ConfigurationDialog.cpp:736
+#: src/gui/ConfigurationDialog.cpp:746
 msgid "Select screenshot directory"
 msgstr "Выберите папку для снимков экрана"
 
-#: src/gui/ConfigurationDialog.cpp:1191
+#: src/gui/ConfigurationDialog.cpp:776
+msgctxt "millimeters"
+msgid "mm"
+msgstr "мм"
+
+#: src/gui/ConfigurationDialog.cpp:791
+msgid "Dots per Inch (for image metadata)."
+msgstr "Точек на дюйм (для метаданных изображения)."
+
+#: src/gui/ConfigurationDialog.cpp:792
+msgid "Current designated print size"
+msgstr "Текущий назначенный размер печати"
+
+#: src/gui/ConfigurationDialog.cpp:1225
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Начальное поле зрения: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:1199
+#: src/gui/ConfigurationDialog.cpp:1233
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Начальное направление обзора аз/выс: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1268
+#: src/gui/ConfigurationDialog.cpp:1302
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
 msgid "Acknowledgments"
 msgstr "Благодарности"
 
-#: src/gui/ConfigurationDialog.cpp:1270
+#: src/gui/ConfigurationDialog.cpp:1304
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:709
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:154
@@ -4281,11 +4310,11 @@ msgstr "Благодарности"
 msgid "Authors"
 msgstr "Авторы"
 
-#: src/gui/ConfigurationDialog.cpp:1271
+#: src/gui/ConfigurationDialog.cpp:1305
 msgid "Contact"
 msgstr "Обратная связь"
 
-#: src/gui/ConfigurationDialog.cpp:1273 src/scripting/StelScriptMgr.cpp:477
+#: src/gui/ConfigurationDialog.cpp:1307 src/scripting/StelScriptMgr.cpp:477
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:97
 #: plugins/Oculars/src/gui/OcularDialog.cpp:597
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:707
@@ -4304,12 +4333,12 @@ msgstr "Обратная связь"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:220
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:213
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:176
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:181
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:180
 msgid "Version"
 msgstr "Версия"
 
-#: src/gui/ConfigurationDialog.cpp:1274 src/scripting/StelScriptMgr.cpp:472
+#: src/gui/ConfigurationDialog.cpp:1308 src/scripting/StelScriptMgr.cpp:472
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
 #: plugins/Oculars/src/gui/OcularDialog.cpp:598
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:708
@@ -4328,25 +4357,25 @@ msgstr "Версия"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:224
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:177
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:182
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:181
 msgid "License"
 msgstr "Лицензия"
 
-#: src/gui/ConfigurationDialog.cpp:1278
+#: src/gui/ConfigurationDialog.cpp:1312
 msgctxt "license"
 msgid "unknown"
 msgstr "неизвестная"
 
-#: src/gui/ConfigurationDialog.cpp:1386
+#: src/gui/ConfigurationDialog.cpp:1420
 msgid "Running script: "
 msgstr "Запущенный сценарий: "
 
-#: src/gui/ConfigurationDialog.cpp:1393
+#: src/gui/ConfigurationDialog.cpp:1427
 msgid "Running script: [none]"
 msgstr "Запущенный сценарий: [нет]"
 
-#: src/gui/ConfigurationDialog.cpp:1458
+#: src/gui/ConfigurationDialog.cpp:1492
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -4354,16 +4383,16 @@ msgstr ""
 "Загрузка новых каталогов звёзд завершена.\n"
 "Перезапустите Stellarium для их отображения."
 
-#: src/gui/ConfigurationDialog.cpp:1462
+#: src/gui/ConfigurationDialog.cpp:1496
 msgid "All available star catalogs have been installed."
 msgstr "Все доступные звёздные каталоги установлены."
 
-#: src/gui/ConfigurationDialog.cpp:1467
+#: src/gui/ConfigurationDialog.cpp:1501
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Получение каталога %1 из %2"
 
-#: src/gui/ConfigurationDialog.cpp:1474
+#: src/gui/ConfigurationDialog.cpp:1508
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -4372,7 +4401,7 @@ msgstr ""
 "Загрузка %1...\n"
 "(Вы можете закрыть это окно.)"
 
-#: src/gui/ConfigurationDialog.cpp:1481
+#: src/gui/ConfigurationDialog.cpp:1515
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -4383,7 +4412,7 @@ msgstr ""
 "Количество звёзд: %2 миллиона\n"
 "Диапазон звёздных величин: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1527 src/gui/ConfigurationDialog.cpp:1564
+#: src/gui/ConfigurationDialog.cpp:1561 src/gui/ConfigurationDialog.cpp:1598
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -4392,11 +4421,11 @@ msgstr ""
 "Ошибка при загрузке %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1617
+#: src/gui/ConfigurationDialog.cpp:1651
 msgid "Verifying file integrity..."
 msgstr "Проверка целостности файлов..."
 
-#: src/gui/ConfigurationDialog.cpp:1621
+#: src/gui/ConfigurationDialog.cpp:1655
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -4405,209 +4434,209 @@ msgstr ""
 "Ошибка при загрузке %1:\n"
 "Файл повреждён."
 
-#: src/gui/ConfigurationDialog.cpp:1696 src/gui/ConfigurationDialog.cpp:1705
-#: src/gui/ConfigurationDialog.cpp:1714 src/gui/ConfigurationDialog.cpp:1723
+#: src/gui/ConfigurationDialog.cpp:1730 src/gui/ConfigurationDialog.cpp:1739
+#: src/gui/ConfigurationDialog.cpp:1748 src/gui/ConfigurationDialog.cpp:1757
 msgid "Available"
 msgstr "Доступно"
 
-#: src/gui/ConfigurationDialog.cpp:1698 src/gui/ConfigurationDialog.cpp:1707
-#: src/gui/ConfigurationDialog.cpp:1716 src/gui/ConfigurationDialog.cpp:1725
+#: src/gui/ConfigurationDialog.cpp:1732 src/gui/ConfigurationDialog.cpp:1741
+#: src/gui/ConfigurationDialog.cpp:1750 src/gui/ConfigurationDialog.cpp:1759
 msgid "Not Available"
 msgstr "Недоступно"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1797
+#: src/gui/ConfigurationDialog.cpp:1831
 msgid "Algorithm of"
 msgstr "Алгоритм"
 
-#: src/gui/ConfigurationDialog.cpp:1810
+#: src/gui/ConfigurationDialog.cpp:1844
 msgid "Without correction"
 msgstr "Без коррекции"
 
-#: src/gui/ConfigurationDialog.cpp:1811
+#: src/gui/ConfigurationDialog.cpp:1845
 msgid "Schoch (1931)"
 msgstr "Шох (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1812
+#: src/gui/ConfigurationDialog.cpp:1846
 msgid "Clemence (1948)"
 msgstr "Клеменс (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1813
+#: src/gui/ConfigurationDialog.cpp:1847
 msgid "IAU (1952)"
 msgstr "МАС (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1814
+#: src/gui/ConfigurationDialog.cpp:1848
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Астрономические Эфемериды (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1815
+#: src/gui/ConfigurationDialog.cpp:1849
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Тукерман (1962, 1964) и Голдштейн (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1816
+#: src/gui/ConfigurationDialog.cpp:1850
 msgid "Muller & Stephenson (1975)"
 msgstr "Мюллер и Стивенсон (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1817
+#: src/gui/ConfigurationDialog.cpp:1851
 msgid "Stephenson (1978)"
 msgstr "Стивенсон (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1818
+#: src/gui/ConfigurationDialog.cpp:1852
 msgid "Schmadel & Zech (1979)"
 msgstr "Шмадель и Зах (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1819
+#: src/gui/ConfigurationDialog.cpp:1853
 msgid "Schmadel & Zech (1988)"
 msgstr "Шмадель и Зах (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1820
+#: src/gui/ConfigurationDialog.cpp:1854
 msgid "Morrison & Stephenson (1982)"
 msgstr "Моррисон и Стивенсон (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1821
+#: src/gui/ConfigurationDialog.cpp:1855
 msgid "Stephenson & Morrison (1984)"
 msgstr "Стивенсон и Моррисон (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1822
+#: src/gui/ConfigurationDialog.cpp:1856
 msgid "Stephenson & Houlden (1986)"
 msgstr "Стивенсон и Холден (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1823
+#: src/gui/ConfigurationDialog.cpp:1857
 msgid "Espenak (1987, 1989)"
 msgstr "Эспенак (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1824
+#: src/gui/ConfigurationDialog.cpp:1858
 msgid "Borkowski (1988)"
 msgstr "Борковски (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1825
+#: src/gui/ConfigurationDialog.cpp:1859
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Шапрон-Таузи и Шапрон (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1826
+#: src/gui/ConfigurationDialog.cpp:1860
 msgid "Stephenson & Morrison (1995)"
 msgstr "Стивенсон и Моррисон (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1827
+#: src/gui/ConfigurationDialog.cpp:1861
 msgid "Stephenson (1997)"
 msgstr "Стивенсон (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1829
+#: src/gui/ConfigurationDialog.cpp:1863
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Меёс (1998) (с Шапрон, Шапрон-Таузи и Франку (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1830
+#: src/gui/ConfigurationDialog.cpp:1864
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1831
+#: src/gui/ConfigurationDialog.cpp:1865
 msgid "Meeus & Simons (2000)"
 msgstr "Меёс и Симонс (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1832
+#: src/gui/ConfigurationDialog.cpp:1866
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Моррисон и Стивенсон (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1833
+#: src/gui/ConfigurationDialog.cpp:1867
 msgid "Stephenson, Morrison & Hohenkerk (2016, 2021)"
 msgstr "Стивенсон, Моррисон и Хункерк (2016, 2021)"
 
-#: src/gui/ConfigurationDialog.cpp:1835
+#: src/gui/ConfigurationDialog.cpp:1869
 msgid "Espenak & Meeus (2006)"
 msgstr "Эспенак и Меёс (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1838
+#: src/gui/ConfigurationDialog.cpp:1872
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Эспенак и Меёс (2006) без дополнительного ускорения Луны"
 
-#: src/gui/ConfigurationDialog.cpp:1840
+#: src/gui/ConfigurationDialog.cpp:1874
 msgid "Reijs (2006)"
 msgstr "Рьейс (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1841
+#: src/gui/ConfigurationDialog.cpp:1875
 msgid "Banjevic (2006)"
 msgstr "Банжевич (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1842
+#: src/gui/ConfigurationDialog.cpp:1876
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Монтенбрук и Пфлегер (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1843
+#: src/gui/ConfigurationDialog.cpp:1877
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
 msgstr "Рейнгольд и Дершовиц (2002, 2007, 2018)"
 
-#: src/gui/ConfigurationDialog.cpp:1844
+#: src/gui/ConfigurationDialog.cpp:1878
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Ислам, Садик и Куреши (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1845
+#: src/gui/ConfigurationDialog.cpp:1879
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Халид, Султана и Зайди (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1846
+#: src/gui/ConfigurationDialog.cpp:1880
 msgid "Henriksson (2017)"
 msgstr "Хенрикссон (2017)"
 
-#: src/gui/ConfigurationDialog.cpp:1847
+#: src/gui/ConfigurationDialog.cpp:1881
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Пользовательское уравнение %1T"
 
-#: src/gui/ConfigurationDialog.cpp:1895 src/gui/ConfigurationDialog.cpp:1932
+#: src/gui/ConfigurationDialog.cpp:1929 src/gui/ConfigurationDialog.cpp:1966
 #: src/gui/StelGuiItems.cpp:733 src/gui/LocationDialog.cpp:482
 msgid "System default"
 msgstr "Используемый системой"
 
-#: src/gui/ConfigurationDialog.cpp:1896
+#: src/gui/ConfigurationDialog.cpp:1930
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "гггг-мм-дд (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1897
+#: src/gui/ConfigurationDialog.cpp:1931
 msgid "dd-mm-yyyy"
 msgstr "дд-мм-гггг"
 
-#: src/gui/ConfigurationDialog.cpp:1898
+#: src/gui/ConfigurationDialog.cpp:1932
 msgid "mm-dd-yyyy"
 msgstr "мм-дд-гггг"
 
-#: src/gui/ConfigurationDialog.cpp:1899
+#: src/gui/ConfigurationDialog.cpp:1933
 msgid "ww, yyyy-mm-dd"
 msgstr "нн, гггг-мм-дд"
 
-#: src/gui/ConfigurationDialog.cpp:1900
+#: src/gui/ConfigurationDialog.cpp:1934
 msgid "ww, dd-mm-yyyy"
 msgstr "нн, дд-мм-гггг"
 
-#: src/gui/ConfigurationDialog.cpp:1901
+#: src/gui/ConfigurationDialog.cpp:1935
 msgid "ww, mm-dd-yyyy"
 msgstr "нн, мм-дд-гггг"
 
-#: src/gui/ConfigurationDialog.cpp:1933
+#: src/gui/ConfigurationDialog.cpp:1967
 msgid "12-hour format"
 msgstr "12-часовой формат"
 
-#: src/gui/ConfigurationDialog.cpp:1934
+#: src/gui/ConfigurationDialog.cpp:1968
 msgid "24-hour format"
 msgstr "24-часовой формат"
 
-#: src/gui/ConfigurationDialog.cpp:1960
+#: src/gui/ConfigurationDialog.cpp:1994
 msgctxt "disabled"
 msgid "None"
 msgstr "Отключено"
 
-#: src/gui/ConfigurationDialog.cpp:1961
+#: src/gui/ConfigurationDialog.cpp:1995
 msgid "5/6/5 bits"
 msgstr "5/6/5 бит"
 
-#: src/gui/ConfigurationDialog.cpp:1962
+#: src/gui/ConfigurationDialog.cpp:1996
 msgid "6/6/6 bits"
 msgstr "6/6/6 бит"
 
-#: src/gui/ConfigurationDialog.cpp:1963
+#: src/gui/ConfigurationDialog.cpp:1997
 msgid "8/8/8 bits"
 msgstr "8/8/8 бит"
 
-#: src/gui/ConfigurationDialog.cpp:1964
+#: src/gui/ConfigurationDialog.cpp:1998
 msgid "10/10/10 bits"
 msgstr "10/10/10 бит"
 
@@ -4956,8 +4985,8 @@ msgstr ""
 msgid "Windows"
 msgstr "Окна"
 
-#: src/gui/StelGui.cpp:231 src/ui_configurationDialog.h:1679
-#: src/ui_configurationDialog.h:1738
+#: src/gui/StelGui.cpp:231 src/ui_configurationDialog.h:1694
+#: src/ui_configurationDialog.h:1753
 msgid "Selected object information"
 msgstr "Информация о выбранном объекте"
 
@@ -5583,8 +5612,8 @@ msgstr "Эклиптическая (J2000.0)"
 msgid "Right ascension"
 msgstr "Прямое восхождение"
 
-#: src/gui/SearchDialog.cpp:298 src/gui/AstroCalcDialog.cpp:4895
-#: src/gui/AstroCalcDialog.cpp:4953 src/gui/ObsListDialog.cpp:151
+#: src/gui/SearchDialog.cpp:298 src/gui/AstroCalcDialog.cpp:4887
+#: src/gui/AstroCalcDialog.cpp:4945 src/gui/ObsListDialog.cpp:151
 #: src/gui/ObsListCreateEditDialog.cpp:159
 msgid "Declination"
 msgstr "Склонение"
@@ -5703,17 +5732,17 @@ msgid "Valid range"
 msgstr "Допустимый диапазон"
 
 #: src/gui/AstroCalcDialog.cpp:684 src/gui/AstroCalcDialog.cpp:871
-#: src/gui/AstroCalcDialog.cpp:873 src/gui/AstroCalcDialog.cpp:4451
-#: src/gui/AstroCalcDialog.cpp:5300 src/gui/AstroCalcDialog.cpp:5302
+#: src/gui/AstroCalcDialog.cpp:873 src/gui/AstroCalcDialog.cpp:4443
+#: src/gui/AstroCalcDialog.cpp:5292 src/gui/AstroCalcDialog.cpp:5294
 msgid "Local Time"
 msgstr "Местное время"
 
-#: src/gui/AstroCalcDialog.cpp:829 src/gui/AstroCalcDialog.cpp:4357
-#: src/gui/AstroCalcDialog.cpp:5171 src/gui/AstroCalcDialog.cpp:8261
+#: src/gui/AstroCalcDialog.cpp:829 src/gui/AstroCalcDialog.cpp:4349
+#: src/gui/AstroCalcDialog.cpp:5163 src/gui/AstroCalcDialog.cpp:8253
 msgid "Unnamed star"
 msgstr "Безымянная звезда"
 
-#: src/gui/AstroCalcDialog.cpp:864 src/gui/AstroCalcDialog.cpp:5277
+#: src/gui/AstroCalcDialog.cpp:864 src/gui/AstroCalcDialog.cpp:5269
 #, qt-format
 msgid "Now about %1"
 msgstr "Сейчас около %1"
@@ -5721,7 +5750,7 @@ msgstr "Сейчас около %1"
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:902 src/gui/AstroCalcDialog.cpp:989
 #: src/gui/AstroCalcDialog.cpp:1844 src/gui/AstroCalcDialog.cpp:2234
-#: src/gui/AstroCalcDialog.cpp:7007 src/ui_configurationDialog.h:1813
+#: src/gui/AstroCalcDialog.cpp:6999 src/ui_configurationDialog.h:1828
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:525
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:321
@@ -5740,13 +5769,13 @@ msgid "Dec (J2000)"
 msgstr "Скл. (J2000)"
 
 #. TRANSLATORS: opacity
-#: src/gui/AstroCalcDialog.cpp:920 src/gui/AstroCalcDialog.cpp:7016
+#: src/gui/AstroCalcDialog.cpp:920 src/gui/AstroCalcDialog.cpp:7008
 msgid "Opac."
 msgstr "Непрозр."
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:925 src/gui/AstroCalcDialog.cpp:1861
-#: src/gui/AstroCalcDialog.cpp:2241 src/gui/AstroCalcDialog.cpp:7011
+#: src/gui/AstroCalcDialog.cpp:2241 src/gui/AstroCalcDialog.cpp:7003
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
 msgid "Mag."
 msgstr "Зв. вел."
@@ -5758,7 +5787,7 @@ msgstr "У.Р."
 
 #. TRANSLATORS: separation, arc-seconds
 #. TRANSLATORS: separation
-#: src/gui/AstroCalcDialog.cpp:932 src/gui/AstroCalcDialog.cpp:7026
+#: src/gui/AstroCalcDialog.cpp:932 src/gui/AstroCalcDialog.cpp:7018
 msgid "Sep."
 msgstr "Раздел."
 
@@ -5793,7 +5822,7 @@ msgid "S.B."
 msgstr "П.Я."
 
 #. TRANSLATORS: elevation
-#: src/gui/AstroCalcDialog.cpp:957 src/gui/AstroCalcDialog.cpp:7021
+#: src/gui/AstroCalcDialog.cpp:957 src/gui/AstroCalcDialog.cpp:7013
 msgid "Elev."
 msgstr "Выс."
 
@@ -5810,7 +5839,7 @@ msgstr "Объекты Солнечной системы"
 msgid "Solar system objects: comets"
 msgstr "Объекты Солнечной системы: кометы"
 
-#: src/gui/AstroCalcDialog.cpp:1065 src/gui/AstroCalcDialog.cpp:4141
+#: src/gui/AstroCalcDialog.cpp:1065 src/gui/AstroCalcDialog.cpp:4133
 msgid "Solar system objects: minor bodies"
 msgstr "Объекты Солнечной системы: малые тела"
 
@@ -5853,18 +5882,18 @@ msgstr "звезда с высоким собственным движением
 
 #: src/gui/AstroCalcDialog.cpp:1481 src/gui/AstroCalcDialog.cpp:1710
 #: src/gui/AstroCalcDialog.cpp:2159 src/gui/AstroCalcDialog.cpp:2441
-#: src/gui/AstroCalcDialog.cpp:2822 src/gui/AstroCalcDialog.cpp:3646
-#: src/gui/AstroCalcDialog.cpp:3747 src/gui/AstroCalcDialog.cpp:5662
-#: src/gui/AstroCalcDialog.cpp:7786
+#: src/gui/AstroCalcDialog.cpp:2822 src/gui/AstroCalcDialog.cpp:3638
+#: src/gui/AstroCalcDialog.cpp:3739 src/gui/AstroCalcDialog.cpp:5654
+#: src/gui/AstroCalcDialog.cpp:7778
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1459
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "Электронная таблица Microsoft Excel Open XML"
 
 #: src/gui/AstroCalcDialog.cpp:1483 src/gui/AstroCalcDialog.cpp:1712
 #: src/gui/AstroCalcDialog.cpp:2161 src/gui/AstroCalcDialog.cpp:2443
-#: src/gui/AstroCalcDialog.cpp:2824 src/gui/AstroCalcDialog.cpp:3648
-#: src/gui/AstroCalcDialog.cpp:3749 src/gui/AstroCalcDialog.cpp:5664
-#: src/gui/AstroCalcDialog.cpp:7788
+#: src/gui/AstroCalcDialog.cpp:2824 src/gui/AstroCalcDialog.cpp:3640
+#: src/gui/AstroCalcDialog.cpp:3741 src/gui/AstroCalcDialog.cpp:5656
+#: src/gui/AstroCalcDialog.cpp:7780
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1461
 msgid "CSV (Comma delimited)"
 msgstr "CSV (разделители - запятые)"
@@ -5890,8 +5919,8 @@ msgid "Major planets"
 msgstr "Большие планеты"
 
 #. TRANSLATORS: phase
-#: src/gui/AstroCalcDialog.cpp:1863 src/gui/AstroCalcDialog.cpp:4852
-#: src/gui/AstroCalcDialog.cpp:4910
+#: src/gui/AstroCalcDialog.cpp:1863 src/gui/AstroCalcDialog.cpp:4844
+#: src/gui/AstroCalcDialog.cpp:4902
 msgid "Phase"
 msgstr "Фаза"
 
@@ -5903,11 +5932,11 @@ msgstr "Сохранить рассчитанные эфемериды как...
 msgid "Ephemeris"
 msgstr "Эфемериды"
 
-#: src/gui/AstroCalcDialog.cpp:2242 src/gui/AstroCalcDialog.cpp:5325
+#: src/gui/AstroCalcDialog.cpp:2242 src/gui/AstroCalcDialog.cpp:5317
 msgid "Solar Elongation"
 msgstr "Солнечная элонгация"
 
-#: src/gui/AstroCalcDialog.cpp:2243 src/gui/AstroCalcDialog.cpp:5326
+#: src/gui/AstroCalcDialog.cpp:2243 src/gui/AstroCalcDialog.cpp:5318
 msgid "Lunar Elongation"
 msgstr "Лунная элонгация"
 
@@ -5963,13 +5992,13 @@ msgid "Vis. Cond."
 msgstr "Усл. видим."
 
 #: src/gui/AstroCalcDialog.cpp:2677 src/gui/AstroCalcDialog.cpp:3111
-#: src/gui/AstroCalcDialog.cpp:3125 src/gui/AstroCalcDialog.cpp:3515
+#: src/gui/AstroCalcDialog.cpp:3125 src/gui/AstroCalcDialog.cpp:3507
 msgctxt "eclipse type"
 msgid "Total"
 msgstr "Полное"
 
 #: src/gui/AstroCalcDialog.cpp:2679 src/gui/AstroCalcDialog.cpp:3118
-#: src/gui/AstroCalcDialog.cpp:3525
+#: src/gui/AstroCalcDialog.cpp:3517
 msgctxt "eclipse type"
 msgid "Partial"
 msgstr "Частное"
@@ -6025,7 +6054,7 @@ msgstr "Невидимо"
 msgid "The greatest eclipse is invisible in current location"
 msgstr "Наибольшее затмение не видно из текущего местоположения"
 
-#: src/gui/AstroCalcDialog.cpp:2752 src/gui/AstroCalcDialog.cpp:3213
+#: src/gui/AstroCalcDialog.cpp:2752 src/gui/AstroCalcDialog.cpp:3205
 msgid ""
 "Saros series number of eclipse (each eclipse in a Saros is separated by an "
 "interval of 18 years 11.3 days)"
@@ -6055,7 +6084,7 @@ msgstr "Сохранить рассчитанные лунные затмени�
 msgid "Lunar Eclipses"
 msgstr "Лунные затмения"
 
-#: src/gui/AstroCalcDialog.cpp:2878 src/gui/AstroCalcDialog.cpp:3803
+#: src/gui/AstroCalcDialog.cpp:2878 src/gui/AstroCalcDialog.cpp:3795
 #: src/ui_astroCalcDialog.h:2261
 msgid ""
 "Note: Local circumstances for eclipses during thousands of years in the past"
@@ -6067,7 +6096,7 @@ msgstr ""
 "вращения Земли. "
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:2898 src/gui/AstroCalcDialog.cpp:3271
+#: src/gui/AstroCalcDialog.cpp:2898 src/gui/AstroCalcDialog.cpp:3263
 msgctxt "column name"
 msgid "Eclipse Magnitude"
 msgstr "Фаза затм."
@@ -6103,7 +6132,7 @@ msgid "Central Duration"
 msgstr "Длит. М. Ф."
 
 #: src/gui/AstroCalcDialog.cpp:3115 src/gui/AstroCalcDialog.cpp:3129
-#: src/gui/AstroCalcDialog.cpp:3139 src/gui/AstroCalcDialog.cpp:3521
+#: src/gui/AstroCalcDialog.cpp:3139 src/gui/AstroCalcDialog.cpp:3513
 msgctxt "eclipse type"
 msgid "Annular"
 msgstr "Кольцеобразное"
@@ -6113,102 +6142,102 @@ msgctxt "eclipse type"
 msgid "Hybrid"
 msgstr "Гибридное"
 
-#: src/gui/AstroCalcDialog.cpp:3217
+#: src/gui/AstroCalcDialog.cpp:3209
 msgid ""
 "Eclipse magnitude is the fraction of the Sun's diameter obscured by the Moon"
 msgstr "Фаза затмения - это часть диаметра Солнца, закрытая Луной. "
 
-#: src/gui/AstroCalcDialog.cpp:3224
+#: src/gui/AstroCalcDialog.cpp:3216
 msgid "Sun's altitude at greatest eclipse"
 msgstr "Высота Солнца при наибольшей фазе затмения"
 
-#: src/gui/AstroCalcDialog.cpp:3227
+#: src/gui/AstroCalcDialog.cpp:3219
 msgid "Width of the path of totality or annularity at greatest eclipse"
 msgstr "Ширина пути полного или кольцевого при наибольшей фазе затмении "
 
-#: src/gui/AstroCalcDialog.cpp:3229
+#: src/gui/AstroCalcDialog.cpp:3221
 msgid "Duration of total or annular phase at greatest eclipse"
 msgstr ""
 "Продолжительность наибольшей фазы полного или кольцеобразного затмения"
 
-#: src/gui/AstroCalcDialog.cpp:3262 src/gui/AstroCalcDialog.cpp:5019
+#: src/gui/AstroCalcDialog.cpp:3254 src/gui/AstroCalcDialog.cpp:5011
 #: src/gui/ObsListDialog.cpp:154 src/gui/ObsListCreateEditDialog.cpp:162
 msgid "Date"
 msgstr "Дата"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3265
+#: src/gui/AstroCalcDialog.cpp:3257
 msgctxt "column name"
 msgid "Partial Eclipse Begins"
 msgstr "Начало Ч. З."
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3267
+#: src/gui/AstroCalcDialog.cpp:3259
 msgctxt "column name"
 msgid "Central Eclipse Begins"
 msgstr "Начало Ц. З."
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3269
+#: src/gui/AstroCalcDialog.cpp:3261
 msgctxt "column name"
 msgid "Maximum Eclipse"
 msgstr "Максим. фаза"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3273
+#: src/gui/AstroCalcDialog.cpp:3265
 msgctxt "column name"
 msgid "Central Eclipse Ends"
 msgstr "Оконч. Ц. З."
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3275
+#: src/gui/AstroCalcDialog.cpp:3267
 msgctxt "column name"
 msgid "Partial Eclipse Ends"
 msgstr "Оконч. Ч. З."
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3277
+#: src/gui/AstroCalcDialog.cpp:3269
 msgctxt "column name"
 msgid "Duration"
 msgstr "Длительность"
 
-#: src/gui/AstroCalcDialog.cpp:3550
+#: src/gui/AstroCalcDialog.cpp:3542
 msgid "The time of first contact"
 msgstr "Время первого контакта"
 
-#: src/gui/AstroCalcDialog.cpp:3556
+#: src/gui/AstroCalcDialog.cpp:3548
 msgid "The time of second contact"
 msgstr "Время второго контакта"
 
-#: src/gui/AstroCalcDialog.cpp:3558
+#: src/gui/AstroCalcDialog.cpp:3550
 msgid "The time of greatest eclipse"
 msgstr "Время наибольшего затмения "
 
-#: src/gui/AstroCalcDialog.cpp:3564
+#: src/gui/AstroCalcDialog.cpp:3556
 msgid "The time of third contact"
 msgstr "Время третьего контакта"
 
-#: src/gui/AstroCalcDialog.cpp:3566
+#: src/gui/AstroCalcDialog.cpp:3558
 msgid "The time of fourth contact"
 msgstr "Время четвёртого контакта"
 
-#: src/gui/AstroCalcDialog.cpp:3571
+#: src/gui/AstroCalcDialog.cpp:3563
 msgid "Duration of total or annular eclipse"
 msgstr "Продолжительность полного или кольцеобразного затмения"
 
-#: src/gui/AstroCalcDialog.cpp:3619
+#: src/gui/AstroCalcDialog.cpp:3611
 msgid "Greatest eclipse’s point"
 msgstr "Точка наибольшего затмения"
 
-#: src/gui/AstroCalcDialog.cpp:3652 src/gui/AstroCalcDialog.cpp:3753
+#: src/gui/AstroCalcDialog.cpp:3644 src/gui/AstroCalcDialog.cpp:3745
 msgid "Save calculated solar eclipses as..."
 msgstr "Сохранить рассчитанные солнечные затмения как..."
 
-#: src/gui/AstroCalcDialog.cpp:3667 src/gui/AstroCalcDialog.cpp:3768
+#: src/gui/AstroCalcDialog.cpp:3659 src/gui/AstroCalcDialog.cpp:3760
 msgid "Solar Eclipses"
 msgstr "Солнечные затмения"
 
-#: src/gui/AstroCalcDialog.cpp:3702
+#: src/gui/AstroCalcDialog.cpp:3694
 msgid ""
 "Note: Path of eclipses during thousands of years in the past and future are "
 "not reliable due to uncertainty in ΔT which is caused by fluctuations in "
@@ -6217,376 +6246,376 @@ msgstr ""
 "Примечание: Траектории затмений за тысячи лет в прошлом и будущем ненадежны "
 "из-за неопределенности ΔT, вызванной колебаниями вращения Земли. "
 
-#: src/gui/AstroCalcDialog.cpp:3988
+#: src/gui/AstroCalcDialog.cpp:3980
 msgid "1 minute"
 msgstr "1 минута"
 
-#: src/gui/AstroCalcDialog.cpp:3988
+#: src/gui/AstroCalcDialog.cpp:3980
 msgid "10 minutes"
 msgstr "10 минут"
 
-#: src/gui/AstroCalcDialog.cpp:3988
+#: src/gui/AstroCalcDialog.cpp:3980
 msgid "30 minutes"
 msgstr "30 минут"
 
-#: src/gui/AstroCalcDialog.cpp:3988
+#: src/gui/AstroCalcDialog.cpp:3980
 msgid "1 hour"
 msgstr "1 час"
 
-#: src/gui/AstroCalcDialog.cpp:3988
+#: src/gui/AstroCalcDialog.cpp:3980
 msgid "6 hours"
 msgstr "6 часов"
 
-#: src/gui/AstroCalcDialog.cpp:3988
+#: src/gui/AstroCalcDialog.cpp:3980
 msgid "12 hours"
 msgstr "12 часов"
 
-#: src/gui/AstroCalcDialog.cpp:3989
+#: src/gui/AstroCalcDialog.cpp:3981
 msgid "1 solar day"
 msgstr "1 солнечный день"
 
-#: src/gui/AstroCalcDialog.cpp:3989
+#: src/gui/AstroCalcDialog.cpp:3981
 msgid "5 solar days"
 msgstr "5 солнечных дней"
 
-#: src/gui/AstroCalcDialog.cpp:3989
+#: src/gui/AstroCalcDialog.cpp:3981
 msgid "10 solar days"
 msgstr "10 солнечных дней"
 
-#: src/gui/AstroCalcDialog.cpp:3989
+#: src/gui/AstroCalcDialog.cpp:3981
 msgid "15 solar days"
 msgstr "15 солнечных дней"
 
-#: src/gui/AstroCalcDialog.cpp:3989
+#: src/gui/AstroCalcDialog.cpp:3981
 msgid "30 solar days"
 msgstr "30 солнечных дней"
 
-#: src/gui/AstroCalcDialog.cpp:3990
+#: src/gui/AstroCalcDialog.cpp:3982
 msgid "60 solar days"
 msgstr "60 солнечных дней"
 
-#: src/gui/AstroCalcDialog.cpp:3990
+#: src/gui/AstroCalcDialog.cpp:3982
 msgid "100 solar days"
 msgstr "100 солнечных дней"
 
-#: src/gui/AstroCalcDialog.cpp:3990
+#: src/gui/AstroCalcDialog.cpp:3982
 msgid "500 solar days"
 msgstr "500 солнечных дней"
 
-#: src/gui/AstroCalcDialog.cpp:3990
+#: src/gui/AstroCalcDialog.cpp:3982
 msgid "1 sidereal day"
 msgstr "1 звёздный день"
 
-#: src/gui/AstroCalcDialog.cpp:3990
+#: src/gui/AstroCalcDialog.cpp:3982
 msgid "5 sidereal days"
 msgstr "5 звёздных дней"
 
-#: src/gui/AstroCalcDialog.cpp:3991
+#: src/gui/AstroCalcDialog.cpp:3983
 msgid "10 sidereal days"
 msgstr "10 звёздных дней"
 
-#: src/gui/AstroCalcDialog.cpp:3991
+#: src/gui/AstroCalcDialog.cpp:3983
 msgid "15 sidereal days"
 msgstr "15 звёздных дней"
 
-#: src/gui/AstroCalcDialog.cpp:3991
+#: src/gui/AstroCalcDialog.cpp:3983
 msgid "30 sidereal days"
 msgstr "30 звёздных дней"
 
-#: src/gui/AstroCalcDialog.cpp:3991
+#: src/gui/AstroCalcDialog.cpp:3983
 msgid "60 sidereal days"
 msgstr "60 звёздных дней"
 
-#: src/gui/AstroCalcDialog.cpp:3991
+#: src/gui/AstroCalcDialog.cpp:3983
 msgid "100 sidereal days"
 msgstr "100 звёздных дней"
 
-#: src/gui/AstroCalcDialog.cpp:3992
+#: src/gui/AstroCalcDialog.cpp:3984
 msgid "500 sidereal days"
 msgstr "500 звёздных дней"
 
-#: src/gui/AstroCalcDialog.cpp:3992
+#: src/gui/AstroCalcDialog.cpp:3984
 msgid "1 sidereal year"
 msgstr "1 звёздный год"
 
-#: src/gui/AstroCalcDialog.cpp:3992
+#: src/gui/AstroCalcDialog.cpp:3984
 msgid "1 Julian day"
 msgstr "1 Юлианский день"
 
-#: src/gui/AstroCalcDialog.cpp:3992
+#: src/gui/AstroCalcDialog.cpp:3984
 msgid "5 Julian days"
 msgstr "5 Юлианских дней"
 
-#: src/gui/AstroCalcDialog.cpp:3992
+#: src/gui/AstroCalcDialog.cpp:3984
 msgid "10 Julian days"
 msgstr "10 Юлианских дней"
 
-#: src/gui/AstroCalcDialog.cpp:3993
+#: src/gui/AstroCalcDialog.cpp:3985
 msgid "15 Julian days"
 msgstr "15 Юлианских дней"
 
-#: src/gui/AstroCalcDialog.cpp:3993
+#: src/gui/AstroCalcDialog.cpp:3985
 msgid "30 Julian days"
 msgstr "30 Юлианских дней"
 
-#: src/gui/AstroCalcDialog.cpp:3993
+#: src/gui/AstroCalcDialog.cpp:3985
 msgid "60 Julian days"
 msgstr "60 Юлианских дней"
 
-#: src/gui/AstroCalcDialog.cpp:3993
+#: src/gui/AstroCalcDialog.cpp:3985
 msgid "100 Julian days"
 msgstr "100 Юлианских дней"
 
-#: src/gui/AstroCalcDialog.cpp:3993
+#: src/gui/AstroCalcDialog.cpp:3985
 msgid "1 Julian year"
 msgstr "1 Юлианский год"
 
-#: src/gui/AstroCalcDialog.cpp:3994
+#: src/gui/AstroCalcDialog.cpp:3986
 msgid "1 Gaussian year"
 msgstr "1 Гауссов год"
 
-#: src/gui/AstroCalcDialog.cpp:3994
+#: src/gui/AstroCalcDialog.cpp:3986
 msgid "1 synodic month"
 msgstr "1 лунный месяц"
 
-#: src/gui/AstroCalcDialog.cpp:3994
+#: src/gui/AstroCalcDialog.cpp:3986
 msgid "1 draconic month"
 msgstr "1 драконический месяц"
 
-#: src/gui/AstroCalcDialog.cpp:3994
+#: src/gui/AstroCalcDialog.cpp:3986
 msgid "1 mean tropical month"
 msgstr "1 средний тропический месяц"
 
-#: src/gui/AstroCalcDialog.cpp:3995
+#: src/gui/AstroCalcDialog.cpp:3987
 msgid "1 anomalistic month"
 msgstr "1 аномалистический месяц"
 
-#: src/gui/AstroCalcDialog.cpp:3995
+#: src/gui/AstroCalcDialog.cpp:3987
 msgid "1 anomalistic year"
 msgstr "1 аномалистический год"
 
-#: src/gui/AstroCalcDialog.cpp:3995
+#: src/gui/AstroCalcDialog.cpp:3987
 msgid "1 saros"
 msgstr "1 сарос"
 
-#: src/gui/AstroCalcDialog.cpp:3995
+#: src/gui/AstroCalcDialog.cpp:3987
 msgid "custom interval"
 msgstr "пользовательский интервал"
 
-#: src/gui/AstroCalcDialog.cpp:4132
+#: src/gui/AstroCalcDialog.cpp:4124
 msgid "Latest selected object"
 msgstr "Последний выбранный объект"
 
-#: src/gui/AstroCalcDialog.cpp:4132
+#: src/gui/AstroCalcDialog.cpp:4124
 msgid "Solar system"
 msgstr "Солнечная система"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4132 src/gui/AstroCalcDialog.cpp:6905
+#: src/gui/AstroCalcDialog.cpp:4124 src/gui/AstroCalcDialog.cpp:6897
 #: src/translations.h:67
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "Астероиды"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4133 src/gui/AstroCalcDialog.cpp:6907
+#: src/gui/AstroCalcDialog.cpp:4125 src/gui/AstroCalcDialog.cpp:6899
 #: src/translations.h:71
 msgid "Plutinos"
 msgstr "Плутино"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4133 src/gui/AstroCalcDialog.cpp:6906
+#: src/gui/AstroCalcDialog.cpp:4125 src/gui/AstroCalcDialog.cpp:6898
 #: src/translations.h:65
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "Кометы"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4133 src/gui/AstroCalcDialog.cpp:6908
+#: src/gui/AstroCalcDialog.cpp:4125 src/gui/AstroCalcDialog.cpp:6900
 #: src/translations.h:73
 msgid "Dwarf planets"
 msgstr "Карликовые планеты"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4133 src/gui/AstroCalcDialog.cpp:6909
+#: src/gui/AstroCalcDialog.cpp:4125 src/gui/AstroCalcDialog.cpp:6901
 #: src/translations.h:75
 msgid "Cubewanos"
 msgstr "Кьюбивано"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4134 src/gui/AstroCalcDialog.cpp:6910
+#: src/gui/AstroCalcDialog.cpp:4126 src/gui/AstroCalcDialog.cpp:6902
 #: src/translations.h:77
 msgid "Scattered disc objects"
 msgstr "Объекты рассеянного диска"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4134 src/gui/AstroCalcDialog.cpp:6911
+#: src/gui/AstroCalcDialog.cpp:4126 src/gui/AstroCalcDialog.cpp:6903
 #: src/translations.h:79
 msgid "Oort cloud objects"
 msgstr "Объекты облака Оорта"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4134 src/gui/AstroCalcDialog.cpp:6912
+#: src/gui/AstroCalcDialog.cpp:4126 src/gui/AstroCalcDialog.cpp:6904
 #: src/translations.h:81
 msgid "Sednoids"
 msgstr "Седноиды"
 
-#: src/gui/AstroCalcDialog.cpp:4135
+#: src/gui/AstroCalcDialog.cpp:4127
 #, qt-format
 msgid "Bright stars (<%1 mag)"
 msgstr "Яркие звёзды (ярче %1 зв. вел.)"
 
-#: src/gui/AstroCalcDialog.cpp:4135
+#: src/gui/AstroCalcDialog.cpp:4127
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
 msgstr "Яркие двойные звёзды (ярче %1 зв. вел.)"
 
-#: src/gui/AstroCalcDialog.cpp:4136
+#: src/gui/AstroCalcDialog.cpp:4128
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
 msgstr "Яркие переменные звёзды (ярче %1 зв. вел.)"
 
-#: src/gui/AstroCalcDialog.cpp:4136
+#: src/gui/AstroCalcDialog.cpp:4128
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
 msgstr "Яркие скопления звёзд (ярче %1 зв. вел.)"
 
-#: src/gui/AstroCalcDialog.cpp:4137
+#: src/gui/AstroCalcDialog.cpp:4129
 #, qt-format
 msgid "Planetary nebulae (<%1 mag)"
 msgstr "Планетарные туманности (ярче %1 зв. вел.)"
 
-#: src/gui/AstroCalcDialog.cpp:4137
+#: src/gui/AstroCalcDialog.cpp:4129
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
 msgstr "Яркие туманности (ярче %1 зв. вел.)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4137 src/gui/AstroCalcDialog.cpp:6902
+#: src/gui/AstroCalcDialog.cpp:4129 src/gui/AstroCalcDialog.cpp:6894
 #: src/translations.h:318 src/ui_viewDialog.h:3467
 #: src/ui_dsoColorsDialog.h:659
 msgid "Dark nebulae"
 msgstr "Тёмные туманности"
 
-#: src/gui/AstroCalcDialog.cpp:4138
+#: src/gui/AstroCalcDialog.cpp:4130
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
 msgstr "Яркие галактики (ярче %1 зв. вел.)"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4138 src/gui/AstroCalcDialog.cpp:6917
+#: src/gui/AstroCalcDialog.cpp:4130 src/gui/AstroCalcDialog.cpp:6909
 #: src/translations.h:368 src/ui_dsoColorsDialog.h:695
 msgid "Symbiotic stars"
 msgstr "Симбиотические звёзды"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4138 src/gui/AstroCalcDialog.cpp:6918
+#: src/gui/AstroCalcDialog.cpp:4130 src/gui/AstroCalcDialog.cpp:6910
 #: src/translations.h:370 src/ui_dsoColorsDialog.h:674
 msgid "Emission-line stars"
 msgstr "Звёзды с эмиссионной линией"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4139 src/gui/AstroCalcDialog.cpp:6923
+#: src/gui/AstroCalcDialog.cpp:4131 src/gui/AstroCalcDialog.cpp:6915
 #: src/translations.h:83
 msgid "Interstellar objects"
 msgstr "Межзвёздные объекты"
 
-#: src/gui/AstroCalcDialog.cpp:4139
+#: src/gui/AstroCalcDialog.cpp:4131
 msgid "Planets and Sun"
 msgstr "Планеты и Солнце"
 
-#: src/gui/AstroCalcDialog.cpp:4139
+#: src/gui/AstroCalcDialog.cpp:4131
 msgid "Sun, planets and moons of observer location"
 msgstr "Солнце, планеты и луны для местоположения наблюдателя"
 
-#: src/gui/AstroCalcDialog.cpp:4140
+#: src/gui/AstroCalcDialog.cpp:4132
 #, qt-format
 msgid "Bright Solar system objects (<%1 mag)"
 msgstr "Яркие объекты Солнечной системы (ярче %1 зв. вел.)"
 
-#: src/gui/AstroCalcDialog.cpp:4141
+#: src/gui/AstroCalcDialog.cpp:4133
 msgid "Moons of first body"
 msgstr "Луны первого тела"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4142 src/gui/AstroCalcDialog.cpp:6951
+#: src/gui/AstroCalcDialog.cpp:4134 src/gui/AstroCalcDialog.cpp:6943
 #: src/translations.h:455
 msgid "Bright carbon stars"
 msgstr "Яркие углеродные звёзды"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4142 src/gui/AstroCalcDialog.cpp:6952
+#: src/gui/AstroCalcDialog.cpp:4134 src/gui/AstroCalcDialog.cpp:6944
 #: src/translations.h:457
 msgid "Bright barium stars"
 msgstr "Яркие бариевые звёзды"
 
-#: src/gui/AstroCalcDialog.cpp:4774
+#: src/gui/AstroCalcDialog.cpp:4766
 msgid "Magnitude vs. Time"
 msgstr "Звёздная величина от времени"
 
-#: src/gui/AstroCalcDialog.cpp:4775
+#: src/gui/AstroCalcDialog.cpp:4767
 msgid "Phase vs. Time"
 msgstr "Фаза от времени"
 
-#: src/gui/AstroCalcDialog.cpp:4776
+#: src/gui/AstroCalcDialog.cpp:4768
 msgid "Distance vs. Time"
 msgstr "Расстояние от времени"
 
-#: src/gui/AstroCalcDialog.cpp:4777
+#: src/gui/AstroCalcDialog.cpp:4769
 msgid "Elongation vs. Time"
 msgstr "Элонгация от времени"
 
-#: src/gui/AstroCalcDialog.cpp:4778
+#: src/gui/AstroCalcDialog.cpp:4770
 msgid "Angular size vs. Time"
 msgstr "Угловой размер от времени"
 
-#: src/gui/AstroCalcDialog.cpp:4779
+#: src/gui/AstroCalcDialog.cpp:4771
 msgid "Phase angle vs. Time"
 msgstr "Фазовый угол от времени"
 
 #. TRANSLATORS: The phrase "Heliocentric distance" may be long in some
 #. languages and you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:4781
+#: src/gui/AstroCalcDialog.cpp:4773
 msgid "Heliocentric distance vs. Time"
 msgstr "Гелиоцентрическое расстояние от времени"
 
 #. TRANSLATORS: The phrase "Transit altitude" may be long in some languages
 #. and you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:4783
+#: src/gui/AstroCalcDialog.cpp:4775
 msgid "Transit altitude vs. Time"
 msgstr "Высота кульминации от времени"
 
 #. TRANSLATORS: The phrase "Right ascension" may be long in some languages and
 #. you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:4785
+#: src/gui/AstroCalcDialog.cpp:4777
 msgid "Right ascension vs. Time"
 msgstr "Прямое восхождение от времени"
 
-#: src/gui/AstroCalcDialog.cpp:4786
+#: src/gui/AstroCalcDialog.cpp:4778
 msgid "Declination vs. Time"
 msgstr "Склонение от времени"
 
 #. TRANSLATORS: Mega-meter (SI symbol: Mm; Mega-meter is a unit of length in
 #. the metric system,
 #. equal to one million meters)
-#: src/gui/AstroCalcDialog.cpp:4835
+#: src/gui/AstroCalcDialog.cpp:4827
 msgid "Mm"
 msgstr "Мм"
 
-#: src/gui/AstroCalcDialog.cpp:4867 src/gui/AstroCalcDialog.cpp:4925
+#: src/gui/AstroCalcDialog.cpp:4859 src/gui/AstroCalcDialog.cpp:4917
 msgid "Angular size"
 msgstr "Угловой размер"
 
 #. TRANSLATORS: The phrase "Heliocentric distance" may be long in some
 #. languages and you can abbreviate it.
-#: src/gui/AstroCalcDialog.cpp:4878
+#: src/gui/AstroCalcDialog.cpp:4870
 msgctxt "axis name"
 msgid "Heliocentric distance"
 msgstr "Гелиоцентр. расстояние"
 
 #. TRANSLATORS: The phrase "Transit altitude" may be long in some languages
 #. and you can abbreviate it.
-#: src/gui/AstroCalcDialog.cpp:4884
+#: src/gui/AstroCalcDialog.cpp:4876
 msgctxt "axis name"
 msgid "Transit altitude"
 msgstr "Высота кульминации"
@@ -6595,14 +6624,14 @@ msgstr "Высота кульминации"
 #. you can abbreviate it.
 #. TRANSLATORS: The phrase "Right ascension" may be long in some languages and
 #. you can short it.
-#: src/gui/AstroCalcDialog.cpp:4890 src/gui/AstroCalcDialog.cpp:4948
+#: src/gui/AstroCalcDialog.cpp:4882 src/gui/AstroCalcDialog.cpp:4940
 msgctxt "axis name"
 msgid "Right ascension"
 msgstr "Прямое восх."
 
 #. TRANSLATORS: hours.
-#: src/gui/AstroCalcDialog.cpp:4890 src/gui/AstroCalcDialog.cpp:4948
-#: src/gui/AstroCalcDialog.cpp:5061
+#: src/gui/AstroCalcDialog.cpp:4882 src/gui/AstroCalcDialog.cpp:4940
+#: src/gui/AstroCalcDialog.cpp:5053
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:799
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
 #: plugins/Novae/src/gui/NovaeDialog.cpp:172
@@ -6615,393 +6644,393 @@ msgstr "ч"
 
 #. TRANSLATORS: The phrase "Heliocentric distance" may be long in some
 #. languages and you can short it.
-#: src/gui/AstroCalcDialog.cpp:4936
+#: src/gui/AstroCalcDialog.cpp:4928
 msgid "Heliocentric distance"
 msgstr "Гелиоцентр. расстояние"
 
 #. TRANSLATORS: The phrase "Transit altitude" may be long in some languages
 #. and you can short it.
-#: src/gui/AstroCalcDialog.cpp:4942
+#: src/gui/AstroCalcDialog.cpp:4934
 msgid "Transit altitude"
 msgstr "Высота кульминации"
 
-#: src/gui/AstroCalcDialog.cpp:5282
+#: src/gui/AstroCalcDialog.cpp:5274
 #, qt-format
 msgid "Passage of meridian at approximately %1"
 msgstr "Прохождение меридиана примерно в %1"
 
-#: src/gui/AstroCalcDialog.cpp:5289
+#: src/gui/AstroCalcDialog.cpp:5281
 msgid "Line of civil twilight"
 msgstr "Линия гражданских сумерек"
 
-#: src/gui/AstroCalcDialog.cpp:5291
+#: src/gui/AstroCalcDialog.cpp:5283
 msgid "Line of nautical twilight"
 msgstr "Линия навигационных сумерек"
 
-#: src/gui/AstroCalcDialog.cpp:5293
+#: src/gui/AstroCalcDialog.cpp:5285
 msgid "Line of astronomical twilight"
 msgstr "Линия астрономических сумерек"
 
-#: src/gui/AstroCalcDialog.cpp:5315
+#: src/gui/AstroCalcDialog.cpp:5307
 msgid "Phenomenon"
 msgstr "Явление"
 
-#: src/gui/AstroCalcDialog.cpp:5317
+#: src/gui/AstroCalcDialog.cpp:5309
 msgid "Object 1"
 msgstr "Объект 1"
 
 #. TRANSLATORS: Magnitude of object 1
-#: src/gui/AstroCalcDialog.cpp:5319
+#: src/gui/AstroCalcDialog.cpp:5311
 msgid "Mag. 1"
 msgstr "З.в. 1"
 
-#: src/gui/AstroCalcDialog.cpp:5320
+#: src/gui/AstroCalcDialog.cpp:5312
 msgid "Object 2"
 msgstr "Объект 2"
 
 #. TRANSLATORS: Magnitude of object 2
-#: src/gui/AstroCalcDialog.cpp:5322
+#: src/gui/AstroCalcDialog.cpp:5314
 msgid "Mag. 2"
 msgstr "З.в. 2"
 
-#: src/gui/AstroCalcDialog.cpp:5324
+#: src/gui/AstroCalcDialog.cpp:5316
 msgid "Elevation"
 msgstr "Высота"
 
-#: src/gui/AstroCalcDialog.cpp:5353 src/gui/AstroCalcDialog.cpp:5791
-#: src/gui/AstroCalcDialog.cpp:6039
+#: src/gui/AstroCalcDialog.cpp:5345 src/gui/AstroCalcDialog.cpp:5783
+#: src/gui/AstroCalcDialog.cpp:6031
 msgid "Opposition"
 msgstr "Противостояние"
 
-#: src/gui/AstroCalcDialog.cpp:5668
+#: src/gui/AstroCalcDialog.cpp:5660
 msgid "Save calculated phenomena as..."
 msgstr "Сохранить рассчитанные явления как..."
 
-#: src/gui/AstroCalcDialog.cpp:5686 src/gui/AstroCalcDialog.cpp:5688
+#: src/gui/AstroCalcDialog.cpp:5678 src/gui/AstroCalcDialog.cpp:5680
 #: src/ui_astroCalcDialog.h:2029
 msgid "Phenomena"
 msgstr "Явления"
 
-#: src/gui/AstroCalcDialog.cpp:5743
+#: src/gui/AstroCalcDialog.cpp:5735
 msgid "Magnitude of first object"
 msgstr "Звёздная величина первого объекта"
 
-#: src/gui/AstroCalcDialog.cpp:5746
+#: src/gui/AstroCalcDialog.cpp:5738
 msgid "Magnitude of second object"
 msgstr "Звёздная величина второго объекта"
 
-#: src/gui/AstroCalcDialog.cpp:5752
+#: src/gui/AstroCalcDialog.cpp:5744
 msgid "Elevation of first object at moment of phenomena"
 msgstr "Высота первого объекта в момент явления"
 
-#: src/gui/AstroCalcDialog.cpp:5754 src/gui/AstroCalcDialog.cpp:5897
+#: src/gui/AstroCalcDialog.cpp:5746 src/gui/AstroCalcDialog.cpp:5889
 msgid "Angular distance from the Sun"
 msgstr "Угловое расстояние от Солнца"
 
-#: src/gui/AstroCalcDialog.cpp:5757 src/gui/AstroCalcDialog.cpp:5898
+#: src/gui/AstroCalcDialog.cpp:5749 src/gui/AstroCalcDialog.cpp:5890
 msgid "Angular distance from the Moon"
 msgstr "Угловое расстояние от Луны"
 
-#: src/gui/AstroCalcDialog.cpp:5775 src/gui/AstroCalcDialog.cpp:5950
-#: src/gui/AstroCalcDialog.cpp:6030
+#: src/gui/AstroCalcDialog.cpp:5767 src/gui/AstroCalcDialog.cpp:5942
+#: src/gui/AstroCalcDialog.cpp:6022
 msgid "Conjunction"
 msgstr "Соединение"
 
-#: src/gui/AstroCalcDialog.cpp:5784
+#: src/gui/AstroCalcDialog.cpp:5776
 msgid "Shadow transit"
 msgstr "Прохождение тени"
 
-#: src/gui/AstroCalcDialog.cpp:5787 src/gui/AstroCalcDialog.cpp:5794
-#: src/gui/AstroCalcDialog.cpp:5840 src/gui/AstroCalcDialog.cpp:5846
-#: src/gui/AstroCalcDialog.cpp:6042 src/gui/AstroCalcDialog.cpp:6058
-#: src/gui/AstroCalcDialog.cpp:6064
+#: src/gui/AstroCalcDialog.cpp:5779 src/gui/AstroCalcDialog.cpp:5786
+#: src/gui/AstroCalcDialog.cpp:5832 src/gui/AstroCalcDialog.cpp:5838
+#: src/gui/AstroCalcDialog.cpp:6034 src/gui/AstroCalcDialog.cpp:6050
+#: src/gui/AstroCalcDialog.cpp:6056
 msgid "Eclipse"
 msgstr "Затмение"
 
-#: src/gui/AstroCalcDialog.cpp:5803
+#: src/gui/AstroCalcDialog.cpp:5795
 msgid "Greatest eastern elongation"
 msgstr "Наибольшая восточная элонгация"
 
-#: src/gui/AstroCalcDialog.cpp:5806
+#: src/gui/AstroCalcDialog.cpp:5798
 msgid "Greatest western elongation"
 msgstr "Наибольшая западная элонгация"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:5813
+#: src/gui/AstroCalcDialog.cpp:5805
 msgid "Stationary (begin retrograde motion)"
 msgstr "Стояние (начало попятного движ.)"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:5818
+#: src/gui/AstroCalcDialog.cpp:5810
 msgid "Stationary (begin prograde motion)"
 msgstr "Стояние (начало прямого движ.)"
 
-#: src/gui/AstroCalcDialog.cpp:5824
+#: src/gui/AstroCalcDialog.cpp:5816
 msgid "Perihelion"
 msgstr "Перигелий"
 
-#: src/gui/AstroCalcDialog.cpp:5826
+#: src/gui/AstroCalcDialog.cpp:5818
 msgid "Aphelion"
 msgstr "Афелий"
 
-#: src/gui/AstroCalcDialog.cpp:5833 src/gui/AstroCalcDialog.cpp:6051
+#: src/gui/AstroCalcDialog.cpp:5825 src/gui/AstroCalcDialog.cpp:6043
 msgctxt "passage of the celestial body"
 msgid "Transit"
 msgstr "Прохождение"
 
-#: src/gui/AstroCalcDialog.cpp:5836 src/gui/AstroCalcDialog.cpp:5955
-#: src/gui/AstroCalcDialog.cpp:6054
+#: src/gui/AstroCalcDialog.cpp:5828 src/gui/AstroCalcDialog.cpp:5947
+#: src/gui/AstroCalcDialog.cpp:6046
 msgid "Occultation"
 msgstr "Покрытие"
 
-#: src/gui/AstroCalcDialog.cpp:5856 src/gui/AstroCalcDialog.cpp:5858
-#: src/gui/AstroCalcDialog.cpp:6077 src/gui/AstroCalcDialog.cpp:6079
+#: src/gui/AstroCalcDialog.cpp:5848 src/gui/AstroCalcDialog.cpp:5850
+#: src/gui/AstroCalcDialog.cpp:6069 src/gui/AstroCalcDialog.cpp:6071
 msgid "Superior conjunction"
 msgstr "Внешнее соединение"
 
-#: src/gui/AstroCalcDialog.cpp:5856 src/gui/AstroCalcDialog.cpp:5858
-#: src/gui/AstroCalcDialog.cpp:6077 src/gui/AstroCalcDialog.cpp:6079
+#: src/gui/AstroCalcDialog.cpp:5848 src/gui/AstroCalcDialog.cpp:5850
+#: src/gui/AstroCalcDialog.cpp:6069 src/gui/AstroCalcDialog.cpp:6071
 msgid "Inferior conjunction"
 msgstr "Внутреннее соединение"
 
-#: src/gui/AstroCalcDialog.cpp:5901
+#: src/gui/AstroCalcDialog.cpp:5893
 msgid "Angular distance from the Sun for second object"
 msgstr "Угловое расстояние от Солнца для второго объекта"
 
-#: src/gui/AstroCalcDialog.cpp:5902
+#: src/gui/AstroCalcDialog.cpp:5894
 msgid "Angular distance from the Moon for second object"
 msgstr "Угловое расстояние от Луны для второго объекта"
 
-#: src/gui/AstroCalcDialog.cpp:6816 src/gui/AstroCalcDialog.cpp:6820
+#: src/gui/AstroCalcDialog.cpp:6808 src/gui/AstroCalcDialog.cpp:6812
 #: src/ui_astroCalcDialog.h:2268
 msgid "Table of solar eclipses"
 msgstr "Таблица солнечных затмений"
 
-#: src/gui/AstroCalcDialog.cpp:6817
+#: src/gui/AstroCalcDialog.cpp:6809
 msgid "Table of solar eclipses visible in current location"
 msgstr "Таблица видимых из текущего места солнечных затмений"
 
-#: src/gui/AstroCalcDialog.cpp:6818
+#: src/gui/AstroCalcDialog.cpp:6810
 msgid "Table of lunar eclipses"
 msgstr "Таблица лунных затмений"
 
-#: src/gui/AstroCalcDialog.cpp:6877
+#: src/gui/AstroCalcDialog.cpp:6869
 msgctxt "Celestial object is observed..."
 msgid "In the Evening"
 msgstr "После заката"
 
-#: src/gui/AstroCalcDialog.cpp:6878
+#: src/gui/AstroCalcDialog.cpp:6870
 msgctxt "Celestial object is observed..."
 msgid "In the Morning"
 msgstr "Перед рассветом"
 
-#: src/gui/AstroCalcDialog.cpp:6879
+#: src/gui/AstroCalcDialog.cpp:6871
 msgctxt "Celestial object is observed..."
 msgid "Around Midnight"
 msgstr "Около полуночи"
 
-#: src/gui/AstroCalcDialog.cpp:6880
+#: src/gui/AstroCalcDialog.cpp:6872
 msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
 msgstr "В любое время ночи"
 
-#: src/gui/AstroCalcDialog.cpp:6900
+#: src/gui/AstroCalcDialog.cpp:6892
 msgid "Bright stars"
 msgstr "Яркие звёзды"
 
-#: src/gui/AstroCalcDialog.cpp:6901 src/ui_viewDialog.h:3466
+#: src/gui/AstroCalcDialog.cpp:6893 src/ui_viewDialog.h:3466
 msgid "Bright nebulae"
 msgstr "Яркие туманности"
 
-#: src/gui/AstroCalcDialog.cpp:6903 src/ui_viewDialog.h:3470
+#: src/gui/AstroCalcDialog.cpp:6895 src/ui_viewDialog.h:3470
 #: src/ui_dsoColorsDialog.h:595
 msgid "Galaxies"
 msgstr "Галактики"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6904 src/translations.h:310
+#: src/gui/AstroCalcDialog.cpp:6896 src/translations.h:310
 #: src/ui_viewDialog.h:3473 src/ui_dsoColorsDialog.h:599
 msgid "Open star clusters"
 msgstr "Рассеянные звёздные скопления"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6913 src/translations.h:316
+#: src/gui/AstroCalcDialog.cpp:6905 src/translations.h:316
 #: src/ui_viewDialog.h:3465 src/ui_dsoColorsDialog.h:588
 msgid "Planetary nebulae"
 msgstr "Планетарные туманности"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6914 src/translations.h:445
+#: src/gui/AstroCalcDialog.cpp:6906 src/translations.h:445
 msgid "Bright double stars"
 msgstr "Яркие двойные звёзды"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6915 src/translations.h:447
+#: src/gui/AstroCalcDialog.cpp:6907 src/translations.h:447
 msgid "Bright variable stars"
 msgstr "Яркие переменные звёзды"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6916 src/translations.h:449
+#: src/gui/AstroCalcDialog.cpp:6908 src/translations.h:449
 msgid "Bright stars with high proper motion"
 msgstr "Яркие звёзды с высоким собственным движением"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6919 src/translations.h:346
+#: src/gui/AstroCalcDialog.cpp:6911 src/translations.h:346
 #: src/ui_dsoColorsDialog.h:640
 msgid "Supernova candidates"
 msgstr "Кандидаты в сверхновые"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6920 src/translations.h:348
+#: src/gui/AstroCalcDialog.cpp:6912 src/translations.h:348
 #: src/ui_dsoColorsDialog.h:681
 msgid "Supernova remnant candidates"
 msgstr "Кандидаты в остатки сверхновых"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6921 src/translations.h:344
+#: src/gui/AstroCalcDialog.cpp:6913 src/translations.h:344
 #: src/ui_viewDialog.h:3472 src/ui_dsoColorsDialog.h:581
 msgid "Supernova remnants"
 msgstr "Остатки сверхновых"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6922 src/translations.h:372
+#: src/gui/AstroCalcDialog.cpp:6914 src/translations.h:372
 #: src/ui_viewDialog.h:3469 src/ui_dsoColorsDialog.h:694
 msgid "Clusters of galaxies"
 msgstr "Скопления галактик"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6924 src/translations.h:312
+#: src/gui/AstroCalcDialog.cpp:6916 src/translations.h:312
 #: src/ui_viewDialog.h:3475 src/ui_dsoColorsDialog.h:574
 msgid "Globular star clusters"
 msgstr "Шаровые звёздные скопления"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6925 src/translations.h:374
+#: src/gui/AstroCalcDialog.cpp:6917 src/translations.h:374
 #: src/ui_dsoColorsDialog.h:710
 msgid "Regions of the sky"
 msgstr "Области неба"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6926 src/translations.h:326
+#: src/gui/AstroCalcDialog.cpp:6918 src/translations.h:326
 #: src/ui_viewDialog.h:3464 src/ui_dsoColorsDialog.h:565
 msgid "Active galaxies"
 msgstr "Активные галактики"
 
-#: src/gui/AstroCalcDialog.cpp:6931 plugins/Pulsars/src/Pulsars.cpp:72
+#: src/gui/AstroCalcDialog.cpp:6923 plugins/Pulsars/src/Pulsars.cpp:72
 #: plugins/Pulsars/src/Pulsars.cpp:170 plugins/Pulsars/src/Pulsars.cpp:171
 msgid "Pulsars"
 msgstr "Пульсары"
 
-#: src/gui/AstroCalcDialog.cpp:6937
+#: src/gui/AstroCalcDialog.cpp:6929
 msgid "Exoplanetary systems"
 msgstr "Экзопланетные системы"
 
-#: src/gui/AstroCalcDialog.cpp:6940
+#: src/gui/AstroCalcDialog.cpp:6932
 msgid "Bright nova stars"
 msgstr "Яркие новые звёзды"
 
-#: src/gui/AstroCalcDialog.cpp:6942
+#: src/gui/AstroCalcDialog.cpp:6934
 msgid "Bright supernova stars"
 msgstr "Яркие сверхновые звёзды"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6943 src/translations.h:330
+#: src/gui/AstroCalcDialog.cpp:6935 src/translations.h:330
 #: src/ui_viewDialog.h:3471 src/ui_dsoColorsDialog.h:650
 msgid "Interacting galaxies"
 msgstr "Взаимодействующие галактики"
 
-#: src/gui/AstroCalcDialog.cpp:6945
+#: src/gui/AstroCalcDialog.cpp:6937
 msgid "Messier objects"
 msgstr "Объекты Мессье"
 
-#: src/gui/AstroCalcDialog.cpp:6946
+#: src/gui/AstroCalcDialog.cpp:6938
 msgid "NGC/IC objects"
 msgstr "Объекты NGC/IC"
 
-#: src/gui/AstroCalcDialog.cpp:6947
+#: src/gui/AstroCalcDialog.cpp:6939
 msgid "Caldwell objects"
 msgstr "Объекты Колдуэлла"
 
-#: src/gui/AstroCalcDialog.cpp:6948
+#: src/gui/AstroCalcDialog.cpp:6940
 msgid "Herschel 400 objects"
 msgstr "Объекты Гершель 400"
 
-#: src/gui/AstroCalcDialog.cpp:6949
+#: src/gui/AstroCalcDialog.cpp:6941
 msgid "Algol-type eclipsing systems"
 msgstr "Затменные системы типа Алголя"
 
-#: src/gui/AstroCalcDialog.cpp:6950
+#: src/gui/AstroCalcDialog.cpp:6942
 msgid "The classical cepheids"
 msgstr "Классические цефеиды"
 
 #. TRANSLATORS: angular size
-#: src/gui/AstroCalcDialog.cpp:7031
+#: src/gui/AstroCalcDialog.cpp:7023
 msgid "Ang. Size"
 msgstr "Угл. размер"
 
 #. TRANSLATORS: IAU Constellation
-#: src/gui/AstroCalcDialog.cpp:7034
+#: src/gui/AstroCalcDialog.cpp:7026
 msgctxt "IAU Constellation"
 msgid "Const."
 msgstr "Созв."
 
-#: src/gui/AstroCalcDialog.cpp:7152 src/ui_astroCalcDialog.h:2230
+#: src/gui/AstroCalcDialog.cpp:7144 src/ui_astroCalcDialog.h:2230
 msgid "Limit angular size:"
 msgstr "Ограничить угловой размер:"
 
-#: src/gui/AstroCalcDialog.cpp:7153 src/ui_astroCalcDialog.h:2228
+#: src/gui/AstroCalcDialog.cpp:7145 src/ui_astroCalcDialog.h:2228
 msgid "Set limits for angular size for visible celestial objects"
 msgstr ""
 "Установить ограничения на угловой размер для видимых небесных объектов"
 
-#: src/gui/AstroCalcDialog.cpp:7154 src/ui_astroCalcDialog.h:2232
+#: src/gui/AstroCalcDialog.cpp:7146 src/ui_astroCalcDialog.h:2232
 msgid "Minimal angular size for visible celestial objects"
 msgstr "Минимальный угловой размер для видимых небесных объектов"
 
-#: src/gui/AstroCalcDialog.cpp:7155 src/ui_astroCalcDialog.h:2235
+#: src/gui/AstroCalcDialog.cpp:7147 src/ui_astroCalcDialog.h:2235
 msgid "Maximum angular size for visible celestial objects"
 msgstr "Максимальный угловой размер для видимых небесных объектов"
 
-#: src/gui/AstroCalcDialog.cpp:7424
+#: src/gui/AstroCalcDialog.cpp:7416
 msgid "Limit angular separation:"
 msgstr "Ограничить угловое разделение:"
 
-#: src/gui/AstroCalcDialog.cpp:7425
+#: src/gui/AstroCalcDialog.cpp:7417
 msgid "Set limits for angular separation for visible double stars"
 msgstr ""
 "Установить ограничения на угловое разделение для видимых двойных звёзд"
 
-#: src/gui/AstroCalcDialog.cpp:7426
+#: src/gui/AstroCalcDialog.cpp:7418
 msgid "Minimal angular separation for visible double stars"
 msgstr "Минимальный угловое разделение для видимых двойных звёзд"
 
-#: src/gui/AstroCalcDialog.cpp:7427
+#: src/gui/AstroCalcDialog.cpp:7419
 msgid "Maximum angular separation for visible double stars"
 msgstr "Максимальное угловое разделение для видимых двойных звёзд"
 
-#: src/gui/AstroCalcDialog.cpp:7794
+#: src/gui/AstroCalcDialog.cpp:7786
 msgid "Save list of objects as..."
 msgstr "Сохранить список объектов как..."
 
-#: src/gui/AstroCalcDialog.cpp:7814 src/ui_astroCalcDialog.h:2035
+#: src/gui/AstroCalcDialog.cpp:7806 src/ui_astroCalcDialog.h:2035
 msgid "What's Up Tonight"
 msgstr "Что сегодня можно наблюдать"
 
 #. TRANSLATORS: Part of unit of measure for mean motion - degrees per day
-#: src/gui/AstroCalcDialog.cpp:7938
+#: src/gui/AstroCalcDialog.cpp:7930
 msgctxt "mean motion"
 msgid "day"
 msgstr "день"
 
-#: src/gui/AstroCalcDialog.cpp:7990 src/gui/AstroCalcDialog.cpp:8149
+#: src/gui/AstroCalcDialog.cpp:7982 src/gui/AstroCalcDialog.cpp:8141
 msgid "Days from today"
 msgstr "Дни с сегодняшнего дня"
 
-#: src/gui/AstroCalcDialog.cpp:7991 src/gui/AstroCalcDialog.cpp:8135
+#: src/gui/AstroCalcDialog.cpp:7983 src/gui/AstroCalcDialog.cpp:8127
 msgid "Linear distance"
 msgstr "Линейное расстояние"
 
-#: src/gui/AstroCalcDialog.cpp:8191
+#: src/gui/AstroCalcDialog.cpp:8183
 msgid "Angular distance between the Moon and selected object"
 msgstr "Угловое расстояние между Луной и выбранным объектом"
 
@@ -7084,7 +7113,7 @@ msgid "Localized Object Name"
 msgstr "Локализованное название объекта"
 
 #: src/gui/ObsListDialog.cpp:153 src/gui/ObsListCreateEditDialog.cpp:161
-#: src/ui_configurationDialog.h:1802
+#: src/ui_configurationDialog.h:1817
 msgid "Constellation"
 msgstr "Созвездие"
 
@@ -7163,7 +7192,7 @@ msgstr ""
 "Класс Бортля %1: %2\n"
 "Предельная звёздная величина для невооруженного глаза: %3"
 
-#: src/scripting/StelScriptMgr.cpp:372 src/ui_configurationDialog.h:1691
+#: src/scripting/StelScriptMgr.cpp:372 src/ui_configurationDialog.h:1706
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:497
 msgid "Scripts"
 msgstr "Сценарии"
@@ -7172,19 +7201,19 @@ msgstr "Сценарии"
 msgid "Shortcut"
 msgstr "Сочетание клавиш"
 
-#: src/StelMainView.cpp:822
+#: src/StelMainView.cpp:824
 msgid "Save screenshot"
 msgstr "Сохранить снимок экрана"
 
-#: src/StelMainView.cpp:823
+#: src/StelMainView.cpp:825
 msgid "Reload shaders (for development)"
 msgstr "Перезагрузить шейдеры (для разработки)"
 
-#: src/StelMainView.cpp:824
+#: src/StelMainView.cpp:826
 msgid "Full-screen mode"
 msgstr "Полноэкранный режим"
 
-#: src/StelMainView.cpp:951
+#: src/StelMainView.cpp:954
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
@@ -7192,7 +7221,7 @@ msgstr ""
 "Клавиатурные сокращения конфликтуют! Нажмите F7 после запуска программы и "
 "проверьте следующие клавиатурные сокращения"
 
-#: src/StelMainView.cpp:1030
+#: src/StelMainView.cpp:1033
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -7201,14 +7230,14 @@ msgstr ""
 "оборудование или используйте режим запуска с --angle-mode (или с --mesa-"
 "mode)."
 
-#: src/StelMainView.cpp:1033
+#: src/StelMainView.cpp:1036
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Недостаточная версия OpenGL. Пожалуйста, обновите драйверы или графическое "
 "оборудование."
 
-#: src/StelMainView.cpp:1076
+#: src/StelMainView.cpp:1079
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -7216,7 +7245,7 @@ msgstr ""
 "Ваша подсистема DirectX/OpenGL ES имеет проблемы. См. подробности в журнале.\n"
 "Игнорировать и не показывать это уведомление в будущем, и попытаться продолжить в ограниченном режиме в любом случае?"
 
-#: src/StelMainView.cpp:1127
+#: src/StelMainView.cpp:1130
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -7224,7 +7253,7 @@ msgstr ""
 "Ваша подсистема OpenGL/Mesa имеет проблемы. См. подробности в журнале.\n"
 "Игнорировать и не показывать это уведомление в будущем, и попытаться продолжить в ограниченном режиме в любом случае?"
 
-#: src/StelMainView.cpp:1187
+#: src/StelMainView.cpp:1190
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -7232,7 +7261,7 @@ msgstr ""
 "Ваша подсистема OpenGL имеет проблемы. См. подробности в журнале.\n"
 "Игнорировать и не показывать это уведомление в будущем, и попытаться продолжить в ограниченном режиме в любом случае?"
 
-#: src/StelMainView.cpp:1228
+#: src/StelMainView.cpp:1231
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -7240,7 +7269,7 @@ msgstr ""
 "Ваша подсистема OpenGL ES имеет проблемы. См. подробности в журнале.\n"
 "Игнорировать и не показывать это уведомление в будущем, и попытаться продолжить в ограниченном режиме в любом случае?"
 
-#: src/StelMainView.cpp:1340
+#: src/StelMainView.cpp:1343
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -8871,7 +8900,7 @@ msgstr "Папка"
 msgid "&Choose"
 msgstr "&Выбрать"
 
-#: src/translations.h:659 src/ui_configurationDialog.h:1902
+#: src/translations.h:659 src/ui_configurationDialog.h:1917
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:644
 msgid "Cancel"
 msgstr "Отмена"
@@ -10547,158 +10576,168 @@ msgstr "Египетская"
 
 #: skycultures/translations_skycultures.fab:42
 msgctxt "sky culture"
+msgid "Egyptian (Dendera)"
+msgstr "Египетская (Дендера)"
+
+#: skycultures/translations_skycultures.fab:44
+msgctxt "sky culture"
 msgid "Greek (Almagest)"
 msgstr "Греческая (Альмагест)"
 
-#: skycultures/translations_skycultures.fab:44
+#: skycultures/translations_skycultures.fab:46
 msgctxt "sky culture"
 msgid "Greek (Farnese + Almagest)"
 msgstr "Греческая (Фарнезе + Альмагест) "
 
-#: skycultures/translations_skycultures.fab:46
+#: skycultures/translations_skycultures.fab:48
 msgctxt "sky culture"
 msgid "Greek (Leiden Aratea + Almagest)"
 msgstr "Греческая (Лейденский Арат + Альмагест) "
 
-#: skycultures/translations_skycultures.fab:48
+#: skycultures/translations_skycultures.fab:50
 msgctxt "sky culture"
 msgid "Hawaiian Starlines"
 msgstr "Гавайские звёздные линии"
 
-#: skycultures/translations_skycultures.fab:50
+#: skycultures/translations_skycultures.fab:52
 msgctxt "sky culture"
 msgid "Inuit"
 msgstr "Эскимосская"
 
-#: skycultures/translations_skycultures.fab:52
+#: skycultures/translations_skycultures.fab:54
 msgctxt "sky culture"
 msgid "Indian Vedic"
 msgstr "Индийская ведическая"
 
-#: skycultures/translations_skycultures.fab:54
+#: skycultures/translations_skycultures.fab:56
 msgctxt "sky culture"
 msgid "Japanese Moon Stations"
 msgstr "Японские лунные стоянки"
 
-#: skycultures/translations_skycultures.fab:56
+#: skycultures/translations_skycultures.fab:58
 msgctxt "sky culture"
 msgid "Kamilaroi/Euahlayi"
 msgstr "Камиларои/Еуахлайи"
 
-#: skycultures/translations_skycultures.fab:58
+#: skycultures/translations_skycultures.fab:60
 msgctxt "sky culture"
 msgid "Korean"
 msgstr "Корейская"
 
-#: skycultures/translations_skycultures.fab:60
+#: skycultures/translations_skycultures.fab:62
 msgctxt "sky culture"
 msgid "Lokono"
 msgstr "Локоно"
 
-#: skycultures/translations_skycultures.fab:62
+#: skycultures/translations_skycultures.fab:64
 msgctxt "sky culture"
 msgid "Macedonian"
 msgstr "Македонская"
 
-#: skycultures/translations_skycultures.fab:64
+#: skycultures/translations_skycultures.fab:66
 msgctxt "sky culture"
 msgid "Maori"
 msgstr "Маори"
 
-#: skycultures/translations_skycultures.fab:66
+#: skycultures/translations_skycultures.fab:68
 msgctxt "sky culture"
 msgid "Maya"
 msgstr "Майя"
 
-#: skycultures/translations_skycultures.fab:68
+#: skycultures/translations_skycultures.fab:70
 msgctxt "sky culture"
 msgid "Mongolian"
 msgstr "Монгольская"
 
-#: skycultures/translations_skycultures.fab:70
+#: skycultures/translations_skycultures.fab:72
 msgctxt "sky culture"
 msgid "Navajo"
 msgstr "Навахо"
 
-#: skycultures/translations_skycultures.fab:72
+#: skycultures/translations_skycultures.fab:74
 msgctxt "sky culture"
 msgid "Norse"
 msgstr "Скандинавская"
 
-#: skycultures/translations_skycultures.fab:74
+#: skycultures/translations_skycultures.fab:76
 msgctxt "sky culture"
 msgid "Northern Andes"
 msgstr "Северные Анды"
 
-#: skycultures/translations_skycultures.fab:76
+#: skycultures/translations_skycultures.fab:78
 msgctxt "sky culture"
 msgid "Ojibwe"
 msgstr "Оджибве"
 
-#: skycultures/translations_skycultures.fab:78
+#: skycultures/translations_skycultures.fab:80
 msgctxt "sky culture"
 msgid "Romanian"
 msgstr "Румынская"
 
-#: skycultures/translations_skycultures.fab:80
+#: skycultures/translations_skycultures.fab:82
 msgctxt "sky culture"
 msgid "Russian (Siberian)"
 msgstr "Русская (Сибирская)"
 
-#: skycultures/translations_skycultures.fab:82
+#: skycultures/translations_skycultures.fab:84
 msgctxt "sky culture"
 msgid "Sami"
 msgstr "Саамская"
 
-#: skycultures/translations_skycultures.fab:84
+#: skycultures/translations_skycultures.fab:86
 msgctxt "sky culture"
 msgid "Sardinian"
 msgstr "Сардинская"
 
-#: skycultures/translations_skycultures.fab:86
+#: skycultures/translations_skycultures.fab:88
 msgctxt "sky culture"
 msgid "Tongan"
 msgstr "Тонганская"
 
-#: skycultures/translations_skycultures.fab:88
+#: skycultures/translations_skycultures.fab:90
 msgctxt "sky culture"
 msgid "Tukano"
 msgstr "Тукано"
 
-#: skycultures/translations_skycultures.fab:90
+#: skycultures/translations_skycultures.fab:92
 msgctxt "sky culture"
 msgid "Tupi-Guarani"
 msgstr "Тупи-гуарани"
 
-#: skycultures/translations_skycultures.fab:92
+#: skycultures/translations_skycultures.fab:94
 msgctxt "sky culture"
 msgid "Vanuatu (Netwar)"
 msgstr "Вануату (Нетвар)"
 
-#: skycultures/translations_skycultures.fab:94
+#: skycultures/translations_skycultures.fab:96
 msgctxt "sky culture"
 msgid "Western"
 msgstr "Западная"
 
-#: skycultures/translations_skycultures.fab:96
+#: skycultures/translations_skycultures.fab:98
 msgctxt "sky culture"
 msgid "Western (H.A. Rey)"
 msgstr "Западная (Г. Рей)"
 
-#: skycultures/translations_skycultures.fab:98
+#: skycultures/translations_skycultures.fab:100
 msgctxt "sky culture"
 msgid "Western (O.Hlad)"
 msgstr "Западная (О.Глад)"
 
-#: skycultures/translations_skycultures.fab:100
+#: skycultures/translations_skycultures.fab:102
 msgctxt "sky culture"
 msgid "Western (Sky & Telescope)"
 msgstr "Западная (Sky & Telescope)"
 
-#: skycultures/translations_skycultures.fab:102
+#: skycultures/translations_skycultures.fab:104
 msgctxt "sky culture"
 msgid "Western (Sternenkarten)"
 msgstr "Западная (Sternenkarten)"
+
+#: skycultures/translations_skycultures.fab:106
+msgctxt "sky culture"
+msgid "Zulu"
+msgstr "Зулусская"
 
 #: src/ui_dateTimeDialogGui.h:378 src/ui_dateTimeDialogGui.h:383
 msgid "Julian Day"
@@ -10722,7 +10761,7 @@ msgstr "О программе"
 msgid "Log"
 msgstr "Журнал"
 
-#: src/ui_helpDialogGui.h:251 src/ui_configurationDialog.h:2015
+#: src/ui_helpDialogGui.h:251 src/ui_configurationDialog.h:2030
 msgid "Edit keyboard shortcuts..."
 msgstr "Править клавиатурные сокращения..."
 
@@ -11048,8 +11087,8 @@ msgid "Max items to display:"
 msgstr "Максимальное количество показываемых элементов:"
 
 #: src/ui_searchDialogGui.h:952 src/ui_viewDialog.h:3946
-#: src/ui_viewDialog.h:3977 src/ui_configurationDialog.h:2060
-#: src/ui_configurationDialog.h:2071
+#: src/ui_viewDialog.h:3977 src/ui_configurationDialog.h:2079
+#: src/ui_configurationDialog.h:2090
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:336
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:436
 msgid "Options"
@@ -12351,76 +12390,76 @@ msgstr "Размер шрифта астеризмов"
 msgid "Use this sky culture as default"
 msgstr "Использовать эту культуру неба по умолчанию"
 
-#: src/ui_configurationDialog.h:1669
+#: src/ui_configurationDialog.h:1684
 msgid "Configuration"
 msgstr "Настройка"
 
-#: src/ui_configurationDialog.h:1675
+#: src/ui_configurationDialog.h:1690
 msgid "Main"
 msgstr "Основная"
 
-#: src/ui_configurationDialog.h:1677
+#: src/ui_configurationDialog.h:1692
 msgid "Information"
 msgstr "Информация"
 
-#: src/ui_configurationDialog.h:1682
+#: src/ui_configurationDialog.h:1697
 msgctxt "Additional settings for Graphical User Interface"
 msgid "Extras"
 msgstr "Дополнительные"
 
-#: src/ui_configurationDialog.h:1684
+#: src/ui_configurationDialog.h:1699
 msgid "Additional settings for Graphical User Interface"
 msgstr "Дополнительные настройки для графического интерфейса пользователя"
 
-#: src/ui_configurationDialog.h:1687
+#: src/ui_configurationDialog.h:1702
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1381
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
 msgid "Time"
 msgstr "Время"
 
-#: src/ui_configurationDialog.h:1689
+#: src/ui_configurationDialog.h:1704
 msgid "Tools"
 msgstr "Сервис"
 
-#: src/ui_configurationDialog.h:1693
+#: src/ui_configurationDialog.h:1708
 msgid "Plugins"
 msgstr "Плагины"
 
-#: src/ui_configurationDialog.h:1696
+#: src/ui_configurationDialog.h:1711
 msgid "Language settings"
 msgstr "Языковые настройки"
 
-#: src/ui_configurationDialog.h:1697
+#: src/ui_configurationDialog.h:1712
 msgid "Program Language"
 msgstr "Язык программы"
 
-#: src/ui_configurationDialog.h:1698
+#: src/ui_configurationDialog.h:1713
 msgid "Sky Culture Language"
 msgstr "Язык культуры неба"
 
-#: src/ui_configurationDialog.h:1700
+#: src/ui_configurationDialog.h:1715
 msgid "This feature has not been thoroughly tested yet!"
 msgstr "Эта функция ещё не была тщательно протестирована!"
 
-#: src/ui_configurationDialog.h:1702
+#: src/ui_configurationDialog.h:1717
 msgid "Ephemeris settings"
 msgstr "Настройки эфемерид"
 
-#: src/ui_configurationDialog.h:1704
+#: src/ui_configurationDialog.h:1719
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr ""
 "DE430 обеспечивает высокую точность только для диапазона 1550..2650 лет."
 
-#: src/ui_configurationDialog.h:1706
+#: src/ui_configurationDialog.h:1721
 msgid "Use DE430 (high accuracy)"
 msgstr "Использовать DE430 (высокая точность)"
 
-#: src/ui_configurationDialog.h:1707 src/ui_configurationDialog.h:1708
-#: src/ui_configurationDialog.h:1719 src/ui_configurationDialog.h:1720
+#: src/ui_configurationDialog.h:1722 src/ui_configurationDialog.h:1723
+#: src/ui_configurationDialog.h:1734 src/ui_configurationDialog.h:1735
 msgid "Not installed"
 msgstr "Не установлено"
 
-#: src/ui_configurationDialog.h:1710
+#: src/ui_configurationDialog.h:1725
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
@@ -12428,15 +12467,15 @@ msgstr ""
 "DE431 предоставляет позиционные данные в диапазоне -13000..+17000 лет. "
 "Только для специальных применений."
 
-#: src/ui_configurationDialog.h:1712
+#: src/ui_configurationDialog.h:1727
 msgid "Use DE431 (long-time data)"
 msgstr "Использовать DE431 (долгосрочные данные)"
 
-#: src/ui_configurationDialog.h:1713
+#: src/ui_configurationDialog.h:1728
 msgid "Use DE441 (long-time data)"
 msgstr "Использовать DE441 (долгосрочные данные)"
 
-#: src/ui_configurationDialog.h:1715
+#: src/ui_configurationDialog.h:1730
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
@@ -12444,32 +12483,32 @@ msgstr ""
 "Использование VSOP87 рекомендуется только в диапазоне -4000..+8000 лет, но "
 "она обеспечивает приемлемые позиционные данные и вне этого диапазона."
 
-#: src/ui_configurationDialog.h:1717
+#: src/ui_configurationDialog.h:1732
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
 "Когда они не установлены или не активированы используется "
 "VSOP87/ELP2000-82B."
 
-#: src/ui_configurationDialog.h:1718
+#: src/ui_configurationDialog.h:1733
 msgid "Use DE440 (high accuracy)"
 msgstr "Использовать DE440 (высокая точность)"
 
-#: src/ui_configurationDialog.h:1721
+#: src/ui_configurationDialog.h:1736
 msgid "Default options"
 msgstr "Опции по умолчанию"
 
-#: src/ui_configurationDialog.h:1722
+#: src/ui_configurationDialog.h:1737
 msgid "Save view"
 msgstr "Сохранить вид"
 
-#: src/ui_configurationDialog.h:1724
+#: src/ui_configurationDialog.h:1739
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr "Сохранить эти настройки для всех последующих сессий."
 
-#: src/ui_configurationDialog.h:1726
+#: src/ui_configurationDialog.h:1741
 #: plugins/Satellites/src/ui_satellitesDialog.h:1123
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:243
 #: plugins/NavStars/src/ui_navStarsWindow.h:295
@@ -12485,11 +12524,11 @@ msgstr "Сохранить эти настройки для всех после�
 msgid "Save settings"
 msgstr "Сохранить настройки"
 
-#: src/ui_configurationDialog.h:1728
+#: src/ui_configurationDialog.h:1743
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Первоначальные настройки"
 
-#: src/ui_configurationDialog.h:1730
+#: src/ui_configurationDialog.h:1745
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:342
 #: plugins/Satellites/src/ui_satellitesDialog.h:1122
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:263
@@ -12506,11 +12545,11 @@ msgstr "Первоначальные настройки"
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:446
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:318
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:747
-#: plugins/Calendars/src/ui_calendarsDialog.h:911
+#: plugins/Calendars/src/ui_calendarsDialog.h:946
 msgid "Restore defaults"
 msgstr "Первоначальные настройки"
 
-#: src/ui_configurationDialog.h:1731
+#: src/ui_configurationDialog.h:1746
 msgid ""
 "Save either the current FOV and direction of view or all the current options"
 " for use at next startup. Restoring default settings requires a restart of "
@@ -12520,196 +12559,196 @@ msgstr ""
 "параметров для использования при следующем запуске. Для восстановления "
 "настроек по умолчанию требуется перезапуск Stellarium. "
 
-#: src/ui_configurationDialog.h:1733
+#: src/ui_configurationDialog.h:1748
 msgid "The vertical field (height) of your view when Stellarium starts"
 msgstr "Вертикальное поле (высота) вашего вида, когда Stellarium запускается"
 
-#: src/ui_configurationDialog.h:1736
+#: src/ui_configurationDialog.h:1751
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Направление взгляда при старте Stellarium"
 
-#: src/ui_configurationDialog.h:1740
+#: src/ui_configurationDialog.h:1755
 msgid "Display user customized information"
 msgstr "Отобразить указанную пользователем информацию"
 
-#: src/ui_configurationDialog.h:1742
+#: src/ui_configurationDialog.h:1757
 msgctxt "info group name"
 msgid "Customized"
 msgstr "Пользовательская"
 
-#: src/ui_configurationDialog.h:1744
+#: src/ui_configurationDialog.h:1759
 msgid "Display all information available"
 msgstr "Отобразить всю известную информацию"
 
-#: src/ui_configurationDialog.h:1746
+#: src/ui_configurationDialog.h:1761
 msgctxt "info group name"
 msgid "All available"
 msgstr "Вся доступная"
 
-#: src/ui_configurationDialog.h:1748
+#: src/ui_configurationDialog.h:1763
 msgid "Display no information"
 msgstr "Не отображать информации"
 
-#: src/ui_configurationDialog.h:1750
+#: src/ui_configurationDialog.h:1765
 msgctxt "info group name"
 msgid "None"
 msgstr "Отключено"
 
-#: src/ui_configurationDialog.h:1752
+#: src/ui_configurationDialog.h:1767
 msgid "Display less information"
 msgstr "Отобразить краткую информацию"
 
-#: src/ui_configurationDialog.h:1754
+#: src/ui_configurationDialog.h:1769
 msgctxt "info group name"
 msgid "Short"
 msgstr "Краткая"
 
-#: src/ui_configurationDialog.h:1756
+#: src/ui_configurationDialog.h:1771
 msgid "Display a preconfigured set of information"
 msgstr "Отобразить преднастроенный набор информации"
 
-#: src/ui_configurationDialog.h:1758
+#: src/ui_configurationDialog.h:1773
 msgctxt "info group name"
 msgid "Default"
 msgstr "По умолчанию"
 
-#: src/ui_configurationDialog.h:1759
+#: src/ui_configurationDialog.h:1774
 msgid "Displayed fields"
 msgstr "Показываемые поля"
 
-#: src/ui_configurationDialog.h:1761 src/ui_configurationDialog.h:1781
+#: src/ui_configurationDialog.h:1776 src/ui_configurationDialog.h:1796
 msgid "Equatorial coordinates, equinox of date"
 msgstr "Экваториальные координаты, равноденствие на дату"
 
-#: src/ui_configurationDialog.h:1763
+#: src/ui_configurationDialog.h:1778
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:204
 msgid "Hour angle/Declination"
 msgstr "Часовой угол/Склонение"
 
-#: src/ui_configurationDialog.h:1765
+#: src/ui_configurationDialog.h:1780
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
 msgstr "Эклиптические координаты, равноденствие на дату (только для Земли)"
 
-#: src/ui_configurationDialog.h:1767
+#: src/ui_configurationDialog.h:1782
 msgid "Ecliptic coordinates (of date)"
 msgstr "Эклиптические координаты (на дату)"
 
-#: src/ui_configurationDialog.h:1769
+#: src/ui_configurationDialog.h:1784
 msgid "Equatorial coordinates, equinox of J2000.0"
 msgstr "Экваториальные координаты, равноденствие J2000.0"
 
-#: src/ui_configurationDialog.h:1771
+#: src/ui_configurationDialog.h:1786
 msgid "Right ascension/Declination (J2000)"
 msgstr "Прямое восхождение/Склонение (J2000)"
 
-#: src/ui_configurationDialog.h:1772
+#: src/ui_configurationDialog.h:1787
 msgid "Absolute magnitude"
 msgstr "Абсолютная звёздная величина"
 
-#: src/ui_configurationDialog.h:1773
+#: src/ui_configurationDialog.h:1788
 msgid "Supergalactic coordinates"
 msgstr "Супергалактические координаты"
 
-#: src/ui_configurationDialog.h:1775
+#: src/ui_configurationDialog.h:1790
 msgid "Ecliptic coordinates, equinox J2000.0"
 msgstr "Эклиптические координаты, равноденствие J2000.0"
 
-#: src/ui_configurationDialog.h:1777
+#: src/ui_configurationDialog.h:1792
 msgid "Ecliptic coordinates (J2000)"
 msgstr "Эклиптические координаты (J2000)"
 
-#: src/ui_configurationDialog.h:1779
+#: src/ui_configurationDialog.h:1794
 msgid "Velocity"
 msgstr "Скорость"
 
-#: src/ui_configurationDialog.h:1783
+#: src/ui_configurationDialog.h:1798
 msgid "Right ascension/Declination (of date)"
 msgstr "Прямое восхождение/Склонение (на дату)"
 
-#: src/ui_configurationDialog.h:1784
+#: src/ui_configurationDialog.h:1799
 msgid "Sidereal time"
 msgstr "Звёздное время"
 
-#: src/ui_configurationDialog.h:1786
+#: src/ui_configurationDialog.h:1801
 msgid "Annual proper motion (stars) or hourly motion (solar system objects)"
 msgstr ""
 "Годовое собственное движение (звёзды) или часовое движение (объекты "
 "Солнечной системы)"
 
-#: src/ui_configurationDialog.h:1788
+#: src/ui_configurationDialog.h:1803
 msgid "Proper Motion"
 msgstr "Собственное движение"
 
-#: src/ui_configurationDialog.h:1789
+#: src/ui_configurationDialog.h:1804
 msgid "Galactic coordinates"
 msgstr "Галактические координаты"
 
-#: src/ui_configurationDialog.h:1791
+#: src/ui_configurationDialog.h:1806
 msgid "The type of the object (star, planet, etc.)"
 msgstr "Тип объекта (звезда, планета и т.п.)"
 
-#: src/ui_configurationDialog.h:1794
+#: src/ui_configurationDialog.h:1809
 msgid "Additional coordinates (from plugins)"
 msgstr "Дополнительные координаты (из плагинов)"
 
-#: src/ui_configurationDialog.h:1796
+#: src/ui_configurationDialog.h:1811
 msgid "Show time of rise, transit and set of celestial object"
 msgstr "Показывать время восхода, кульминации и захода небесных светил"
 
-#: src/ui_configurationDialog.h:1798 src/ui_astroCalcDialog.h:2026
+#: src/ui_configurationDialog.h:1813 src/ui_astroCalcDialog.h:2026
 msgid "Rises, transits and sets"
 msgstr "Восходы, кульминации и заходы"
 
-#: src/ui_configurationDialog.h:1800
+#: src/ui_configurationDialog.h:1815
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
 msgid "3-letter IAU constellation abbreviation"
 msgstr "Трёхбуквенная аббревиатура созвездия МАС"
 
-#: src/ui_configurationDialog.h:1804
+#: src/ui_configurationDialog.h:1819
 msgid "Angular or physical size"
 msgstr "Угловой или физический размер"
 
-#: src/ui_configurationDialog.h:1807
+#: src/ui_configurationDialog.h:1822
 msgid "Visual magnitude"
 msgstr "Визуальная звёздная величина"
 
-#: src/ui_configurationDialog.h:1809
+#: src/ui_configurationDialog.h:1824
 msgid "Horizontal coordinates"
 msgstr "Горизонтальные координаты"
 
-#: src/ui_configurationDialog.h:1811
+#: src/ui_configurationDialog.h:1826
 msgid "Azimuth/Altitude"
 msgstr "Азимут/Высота"
 
-#: src/ui_configurationDialog.h:1812
+#: src/ui_configurationDialog.h:1827
 msgid "Catalog number(s)"
 msgstr "Номер(а) по каталогу"
 
-#: src/ui_configurationDialog.h:1815
+#: src/ui_configurationDialog.h:1830
 msgid "Elongation and phase angle"
 msgstr "Элонгация и фазовый угол"
 
-#: src/ui_configurationDialog.h:1819
+#: src/ui_configurationDialog.h:1834
 msgid "Spectral class, nebula type, etc."
 msgstr "Спектральный класс, тип туманности и т.д."
 
-#: src/ui_configurationDialog.h:1821
+#: src/ui_configurationDialog.h:1836
 msgid "Additional information"
 msgstr "Дополнительная информация"
 
-#: src/ui_configurationDialog.h:1823
+#: src/ui_configurationDialog.h:1838
 msgid "Show Solar and Lunar positions if observed from Earth"
 msgstr "Показывать местоположения Солнца и Луны при наблюдении с Земли"
 
-#: src/ui_configurationDialog.h:1825
+#: src/ui_configurationDialog.h:1840
 msgid "Solar and Lunar position"
 msgstr "Местоположение Солнца и Луны"
 
-#: src/ui_configurationDialog.h:1826
+#: src/ui_configurationDialog.h:1841
 msgid "Show additional buttons"
 msgstr "Показывать дополнительные кнопки"
 
-#: src/ui_configurationDialog.h:1828
+#: src/ui_configurationDialog.h:1843
 msgid ""
 "Toggle display of the button for the HiPS Surveys. Select a survey in the "
 "View settings."
@@ -12717,171 +12756,171 @@ msgstr ""
 "Переключить отображение кнопки для иерархических прогрессивных обзора неба. "
 "Выберите обзор в окне настроек."
 
-#: src/ui_configurationDialog.h:1830
+#: src/ui_configurationDialog.h:1845
 msgid "HiPS Surveys"
 msgstr "Обзоры HiPS"
 
-#: src/ui_configurationDialog.h:1833
+#: src/ui_configurationDialog.h:1848
 msgid "A button to toggle equatorial J2000 grid"
 msgstr "Кнопка для переключения экваториальной сетки J2000"
 
-#: src/ui_configurationDialog.h:1835
+#: src/ui_configurationDialog.h:1850
 msgid "ICRS grid"
 msgstr "Экваториальная сетка (J2000.0)"
 
-#: src/ui_configurationDialog.h:1837
+#: src/ui_configurationDialog.h:1852
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Кнопки переключения переворота по вертикали/горизонтали"
 
-#: src/ui_configurationDialog.h:1839
+#: src/ui_configurationDialog.h:1854
 msgid "Flip buttons"
 msgstr "Кнопки переворота"
 
-#: src/ui_configurationDialog.h:1841
+#: src/ui_configurationDialog.h:1856
 msgid "A button to toggle galactic grid"
 msgstr "Кнопка для переключения галактической сетки."
 
-#: src/ui_configurationDialog.h:1845
+#: src/ui_configurationDialog.h:1860
 msgid "Toggle display of the button for the Digitized Sky Survey."
 msgstr "Переключить отображение кнопки для оцифрованного обзора неба."
 
-#: src/ui_configurationDialog.h:1847
+#: src/ui_configurationDialog.h:1862
 msgid "DSS survey"
 msgstr "Обзор DSS"
 
-#: src/ui_configurationDialog.h:1849
+#: src/ui_configurationDialog.h:1864
 msgid "A button to toggle ecliptic grid of date"
 msgstr "Кнопка для переключения эклиптической сетки"
 
-#: src/ui_configurationDialog.h:1853
+#: src/ui_configurationDialog.h:1868
 msgid "Toggle display of nebula images."
 msgstr "Переключить отображение изображений туманностей."
 
-#: src/ui_configurationDialog.h:1855
+#: src/ui_configurationDialog.h:1870
 msgid "Nebula background"
 msgstr "Фон туманностей"
 
-#: src/ui_configurationDialog.h:1858
+#: src/ui_configurationDialog.h:1873
 msgid "Enable a feature to store favorite views."
 msgstr "Включить функцию хранения избранных видов."
 
-#: src/ui_configurationDialog.h:1860 src/ui_obsListDialog.h:248
+#: src/ui_configurationDialog.h:1875 src/ui_obsListDialog.h:248
 msgid "Observing lists"
 msgstr "Списки наблюдений"
 
-#: src/ui_configurationDialog.h:1863
+#: src/ui_configurationDialog.h:1878
 msgid "Toggle the usage of background under GUI buttons"
 msgstr "Переключить использование фона под кнопками графического интерфейса"
 
-#: src/ui_configurationDialog.h:1865
+#: src/ui_configurationDialog.h:1880
 msgid "Use buttons background"
 msgstr "Использовать фон кнопок"
 
-#: src/ui_configurationDialog.h:1867 src/ui_configurationDialog.h:1871
-#: src/ui_configurationDialog.h:1875 src/ui_configurationDialog.h:1879
-#: src/ui_configurationDialog.h:1883 src/ui_configurationDialog.h:1887
+#: src/ui_configurationDialog.h:1882 src/ui_configurationDialog.h:1886
+#: src/ui_configurationDialog.h:1890 src/ui_configurationDialog.h:1894
+#: src/ui_configurationDialog.h:1898 src/ui_configurationDialog.h:1902
 msgid "Show button in addition to keyboard shortcut?"
 msgstr "Показывать кнопку в дополнение к сочетанию клавиш?"
 
-#: src/ui_configurationDialog.h:1869
+#: src/ui_configurationDialog.h:1884
 msgid "Quit button"
 msgstr "Кнопка выхода"
 
-#: src/ui_configurationDialog.h:1877
+#: src/ui_configurationDialog.h:1892
 msgid "Fullscreen button"
 msgstr "Кнопка полного экрана"
 
-#: src/ui_configurationDialog.h:1881
+#: src/ui_configurationDialog.h:1896
 msgid "Centering button"
 msgstr "Кнопка центрирования"
 
-#: src/ui_configurationDialog.h:1890
+#: src/ui_configurationDialog.h:1905
 msgid "Star catalog updates"
 msgstr "Обновления каталога звёзд"
 
-#: src/ui_configurationDialog.h:1892
+#: src/ui_configurationDialog.h:1907
 msgid "Click here to start downloading"
 msgstr "Нажми тут для начала закачки"
 
-#: src/ui_configurationDialog.h:1894
+#: src/ui_configurationDialog.h:1909
 msgid "Download this file to view even more stars"
 msgstr "Загрузите этот файл, чтобы видеть больше звёзд"
 
-#: src/ui_configurationDialog.h:1896
+#: src/ui_configurationDialog.h:1911
 msgid "Restart the download"
 msgstr "Перезапустить закачку"
 
-#: src/ui_configurationDialog.h:1898
+#: src/ui_configurationDialog.h:1913
 msgid "Retry"
 msgstr "Повторить"
 
-#: src/ui_configurationDialog.h:1900
+#: src/ui_configurationDialog.h:1915
 msgid "Stop the download. You can always restart it later"
 msgstr "Остановка закачки. Вы можете запустить ее позже"
 
-#: src/ui_configurationDialog.h:1903
+#: src/ui_configurationDialog.h:1918
 msgid "Additional information settings"
 msgstr "Дополнительные настройки информации"
 
-#: src/ui_configurationDialog.h:1904
+#: src/ui_configurationDialog.h:1919
 msgid "Use short notation for unit of measurement of surface brightness"
 msgstr ""
 "Использовать краткую нотацию для единицы измерения поверхностной яркости"
 
-#: src/ui_configurationDialog.h:1905
+#: src/ui_configurationDialog.h:1920
 msgid "Use unit of measurement mag/arcsec^2 for surface brightness"
 msgstr ""
 "Использовать единицу измерения звёзд. вел./угл. сек.^2 для поверхностной "
 "яркости"
 
-#: src/ui_configurationDialog.h:1906
+#: src/ui_configurationDialog.h:1921
 msgid "Use formatting output for coordinates and time"
 msgstr "Использовать форматированный вывод для координат и времени"
 
-#: src/ui_configurationDialog.h:1907
+#: src/ui_configurationDialog.h:1922
 msgid "Use designations for celestial coordinate systems"
 msgstr "Использовать обозначения для небесных систем координат"
 
-#: src/ui_configurationDialog.h:1908
+#: src/ui_configurationDialog.h:1923
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
 msgstr "Начальные дата и время"
 
-#: src/ui_configurationDialog.h:1910
+#: src/ui_configurationDialog.h:1925
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Запустить Stellarium в указанный день и время"
 
-#: src/ui_configurationDialog.h:1912
+#: src/ui_configurationDialog.h:1927
 msgid "System date and time"
 msgstr "Системные дата и время"
 
-#: src/ui_configurationDialog.h:1914
+#: src/ui_configurationDialog.h:1929
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "Установить следующее время дня при запуске Stellarium"
 
-#: src/ui_configurationDialog.h:1916
+#: src/ui_configurationDialog.h:1931
 msgid "System date at:"
 msgstr "Системная дата в:"
 
-#: src/ui_configurationDialog.h:1918
+#: src/ui_configurationDialog.h:1933
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Использовать указанные дату и время при запуске Stellarium"
 
-#: src/ui_configurationDialog.h:1920
+#: src/ui_configurationDialog.h:1935
 msgid "Other:"
 msgstr "Другой:"
 
-#: src/ui_configurationDialog.h:1922
+#: src/ui_configurationDialog.h:1937
 msgid "Use current local date and time"
 msgstr "Использовать текущую местную дату и время"
 
-#: src/ui_configurationDialog.h:1924
+#: src/ui_configurationDialog.h:1939
 msgid "use current"
 msgstr "использовать текущие"
 
-#: src/ui_configurationDialog.h:1926
+#: src/ui_configurationDialog.h:1941
 msgid ""
 "These settings control the way time and date are displayed in the bottom "
 "bar."
@@ -12889,52 +12928,52 @@ msgstr ""
 "Эти настройки управляют способом отображения даты и времени  в нижней "
 "панели."
 
-#: src/ui_configurationDialog.h:1928
+#: src/ui_configurationDialog.h:1943
 msgid "Display formats of date and time"
 msgstr "Форматы отображения даты и времени"
 
-#: src/ui_configurationDialog.h:1929
+#: src/ui_configurationDialog.h:1944
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:472
 msgid "Date:"
 msgstr "Дата:"
 
-#: src/ui_configurationDialog.h:1930
+#: src/ui_configurationDialog.h:1945
 msgid "and time:"
 msgstr "и время:"
 
-#: src/ui_configurationDialog.h:1931
+#: src/ui_configurationDialog.h:1946
 msgid "Time correction"
 msgstr "Коррекция времени"
 
-#: src/ui_configurationDialog.h:1934
+#: src/ui_configurationDialog.h:1949
 msgid "Edit equation"
 msgstr "Редактирование уравнения"
 
-#: src/ui_configurationDialog.h:1936
+#: src/ui_configurationDialog.h:1951
 msgid "Planetarium options"
 msgstr "Параметры планетария"
 
-#: src/ui_configurationDialog.h:1938
+#: src/ui_configurationDialog.h:1953
 msgid "Allow mouse to pan (drag)"
 msgstr "Использовать мышь для перемещения (перетаскивание)"
 
-#: src/ui_configurationDialog.h:1940
+#: src/ui_configurationDialog.h:1955
 msgid "Enable mouse navigation"
 msgstr "Включить навигацию мышью"
 
-#: src/ui_configurationDialog.h:1942 src/ui_configurationDialog.h:1944
+#: src/ui_configurationDialog.h:1957 src/ui_configurationDialog.h:1959
 msgid "Info text color at daylight"
 msgstr "Цвет текста информации при дневном свете"
 
-#: src/ui_configurationDialog.h:1946
+#: src/ui_configurationDialog.h:1961
 msgid "Activate this option to calculate azimuth from south towards west."
 msgstr "Активируйте эту опцию для вычисления азимута с точки юга через запад."
 
-#: src/ui_configurationDialog.h:1948
+#: src/ui_configurationDialog.h:1963
 msgid "Azimuth from South"
 msgstr "Азимут с юга"
 
-#: src/ui_configurationDialog.h:1950
+#: src/ui_configurationDialog.h:1965
 msgid ""
 "Kinetic scrolling means dragging text panels directly instead of dragging "
 "window handles."
@@ -12942,30 +12981,30 @@ msgstr ""
 "Кинетическая прокрутка означает непосредственное перетаскивание текстовых "
 "панелей вместо перетаскивания оконных ручек."
 
-#: src/ui_configurationDialog.h:1952
+#: src/ui_configurationDialog.h:1967
 msgid "Use kinetic scrolling"
 msgstr "Использовать кинетическую прокрутку"
 
-#: src/ui_configurationDialog.h:1954
+#: src/ui_configurationDialog.h:1969
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 "Нутация - небольшие колебания земной оси в диапазоне нескольких угловых "
 "секунд."
 
-#: src/ui_configurationDialog.h:1956
+#: src/ui_configurationDialog.h:1971
 msgid "Include nutation"
 msgstr "Включить нутацию"
 
-#: src/ui_configurationDialog.h:1958
+#: src/ui_configurationDialog.h:1973
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Маскировать всё вне центрального круга поля зрения"
 
-#: src/ui_configurationDialog.h:1960
+#: src/ui_configurationDialog.h:1975
 msgid "Disc viewport"
 msgstr "Дисковое поле зрения"
 
-#: src/ui_configurationDialog.h:1962
+#: src/ui_configurationDialog.h:1977
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -12973,67 +13012,67 @@ msgstr ""
 "Если выбрано, клавиша автоотдаления также устанавливает первоначальное "
 "направление наблюдения"
 
-#: src/ui_configurationDialog.h:1964
+#: src/ui_configurationDialog.h:1979
 msgid "Auto-direction at zoom out"
 msgstr "Автонаправление при уменьшении"
 
-#: src/ui_configurationDialog.h:1966 src/ui_configurationDialog.h:1969
+#: src/ui_configurationDialog.h:1981 src/ui_configurationDialog.h:1984
 msgid "Hide other constellations when you click one"
 msgstr "Спрятать созвездия при клике"
 
-#: src/ui_configurationDialog.h:1973
+#: src/ui_configurationDialog.h:1988
 msgid "Use decimal degrees for coordinates"
 msgstr "Использовать десятичные градусы для координат"
 
-#: src/ui_configurationDialog.h:1975
+#: src/ui_configurationDialog.h:1990
 msgid "Use decimal degrees"
 msgstr "Использовать десятичные градусы"
 
-#: src/ui_configurationDialog.h:1976
+#: src/ui_configurationDialog.h:1991
 msgid "Dithering"
 msgstr "Псевдотонирование"
 
-#: src/ui_configurationDialog.h:1978
+#: src/ui_configurationDialog.h:1993
 msgid "Align labels with the screen center"
 msgstr "Выравнивать подписи по центру экрана"
 
-#: src/ui_configurationDialog.h:1980
+#: src/ui_configurationDialog.h:1995
 msgid "Gravity labels"
 msgstr "Негоризонтальные подписи объектов"
 
-#: src/ui_configurationDialog.h:1982
+#: src/ui_configurationDialog.h:1997
 msgid "Flash a short message when toggling mount mode."
 msgstr "Кратковременный показ сообщения при переключении режима монтировки."
 
-#: src/ui_configurationDialog.h:1984
+#: src/ui_configurationDialog.h:1999
 msgid "Indication for mount mode"
 msgstr "Индикация режима монтировки"
 
-#: src/ui_configurationDialog.h:1986
+#: src/ui_configurationDialog.h:2001
 msgid "Hides the mouse cursor when inactive"
 msgstr "Скрывать указатель мыши при отсутствии активности"
 
-#: src/ui_configurationDialog.h:1988
+#: src/ui_configurationDialog.h:2003
 msgid "Mouse cursor timeout:"
 msgstr "Время ожидания курсора мыши:"
 
-#: src/ui_configurationDialog.h:1990
+#: src/ui_configurationDialog.h:2005
 msgid "seconds"
 msgstr "секунды"
 
-#: src/ui_configurationDialog.h:1993
+#: src/ui_configurationDialog.h:2008
 msgid "Info text color for overwrite"
 msgstr "Цвет текста информации для перезаписи"
 
-#: src/ui_configurationDialog.h:1996
+#: src/ui_configurationDialog.h:2011
 msgid "Set one color for text in info panel for all objects"
 msgstr "Установить один цвет текста в панели информации для всех объектов"
 
-#: src/ui_configurationDialog.h:1998
+#: src/ui_configurationDialog.h:2013
 msgid "Overwrite text color"
 msgstr "Переписать цвет текста"
 
-#: src/ui_configurationDialog.h:2000
+#: src/ui_configurationDialog.h:2015
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
@@ -13041,11 +13080,11 @@ msgstr ""
 "Активировать для получения вида с поверхности планеты (рекомендуется). Если "
 "он выключен, показывается планетоцентрический вид."
 
-#: src/ui_configurationDialog.h:2002
+#: src/ui_configurationDialog.h:2017
 msgid "Topocentric coordinates"
 msgstr "Топоцентрические координаты"
 
-#: src/ui_configurationDialog.h:2004
+#: src/ui_configurationDialog.h:2019
 msgid ""
 "Annual aberration is an annual wobble in positions, amounting to max. about "
 "20 arcseconds for observers on Earth."
@@ -13053,23 +13092,23 @@ msgstr ""
 "Годовая аберрация - это ежегодное колебание местоположений, достигающее "
 "макс. около 20 угловых секунд для наблюдателей на Земле. "
 
-#: src/ui_configurationDialog.h:2006
+#: src/ui_configurationDialog.h:2021
 msgid "Include aberration"
 msgstr "Включить аберрацию"
 
-#: src/ui_configurationDialog.h:2008
+#: src/ui_configurationDialog.h:2023
 msgid "Exaggerate aberration (for didactic explanations)"
 msgstr "Чрезмерная аберрация (для дидактических объяснений) "
 
-#: src/ui_configurationDialog.h:2011
+#: src/ui_configurationDialog.h:2026
 msgid "Allow keyboard to pan and zoom"
 msgstr "Использовать клавиатуру для перемещения и увеличения"
 
-#: src/ui_configurationDialog.h:2013
+#: src/ui_configurationDialog.h:2028
 msgid "Enable keyboard navigation"
 msgstr "Включить навигацию с клавиатуры"
 
-#: src/ui_configurationDialog.h:2018
+#: src/ui_configurationDialog.h:2033
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -13077,19 +13116,19 @@ msgstr ""
 "Искажение сферического зеркала используется при проецировании Stellarium на "
 "сферическое зеркало в недорогих системах планетариев."
 
-#: src/ui_configurationDialog.h:2020
+#: src/ui_configurationDialog.h:2035
 msgid "Spheric mirror distortion"
 msgstr "Искажение сферического зеркала"
 
-#: src/ui_configurationDialog.h:2022
+#: src/ui_configurationDialog.h:2037
 msgid "Automatic change of landscape when planet is changed"
 msgstr "Автоматически изменять ландшафт когда изменяется планета"
 
-#: src/ui_configurationDialog.h:2024
+#: src/ui_configurationDialog.h:2039
 msgid "Auto select landscapes"
 msgstr "Автовыбор ландшафтов"
 
-#: src/ui_configurationDialog.h:2026
+#: src/ui_configurationDialog.h:2041
 msgid ""
 "Auto-enable atmosphere and landscape when selecting a celestial body in the "
 "location window."
@@ -13097,94 +13136,106 @@ msgstr ""
 "Авто-включение атмосферы и ландшафта при выборе небесного тела в окне "
 "местоположения."
 
-#: src/ui_configurationDialog.h:2028
+#: src/ui_configurationDialog.h:2043
 msgid "Auto-enabling for the environment"
 msgstr "Авто-включение для окружения"
 
-#: src/ui_configurationDialog.h:2029
+#: src/ui_configurationDialog.h:2044
 msgid "Font size: Screen"
 msgstr "Размер шрифта: экран"
 
-#: src/ui_configurationDialog.h:2031
+#: src/ui_configurationDialog.h:2046
 msgid "Base font size for on-screen text"
 msgstr "Базовый размер шрифта для экранного текста"
 
-#: src/ui_configurationDialog.h:2034
+#: src/ui_configurationDialog.h:2049
 msgid "Graphical user interface"
 msgstr "Графический интерфейс пользователя"
 
-#: src/ui_configurationDialog.h:2036
+#: src/ui_configurationDialog.h:2051
 msgctxt "abbreviation"
 msgid "GUI"
 msgstr "ГИП"
 
-#: src/ui_configurationDialog.h:2038
+#: src/ui_configurationDialog.h:2053
 msgid "Base font size for dialogs"
 msgstr "Базовый размер шрифта для диалогов"
 
-#: src/ui_configurationDialog.h:2041
+#: src/ui_configurationDialog.h:2056
 msgid "Pre-select fonts for a particular writing system"
 msgstr "Предвыбор шрифтов для конкретной системы письма"
 
-#: src/ui_configurationDialog.h:2044
+#: src/ui_configurationDialog.h:2059
 msgid "Application font"
 msgstr "Шрифт приложения"
 
-#: src/ui_configurationDialog.h:2047
+#: src/ui_configurationDialog.h:2062
 msgid "Allow mouse to zoom (mousewheel)"
 msgstr "Использовать мышь для масштабирования (колесо мыши)"
 
-#: src/ui_configurationDialog.h:2049
+#: src/ui_configurationDialog.h:2064
 msgid "Enable mouse zooming"
 msgstr "Включить масштабирование мышью"
 
-#: src/ui_configurationDialog.h:2051
+#: src/ui_configurationDialog.h:2066
 msgid "Force date/time tab and focus on day input when activating date panel"
 msgstr ""
 "Принудительная установка фокуса вкладки даты/времени на вводе дня при "
 "активации панели даты"
 
-#: src/ui_configurationDialog.h:2053
+#: src/ui_configurationDialog.h:2068
 msgid "Set keyboard focus to day input"
 msgstr "Установить фокус клавиатуры на ввод дней"
 
-#: src/ui_configurationDialog.h:2054
+#: src/ui_configurationDialog.h:2069
 msgid "Screenshots"
 msgstr "Снимки экрана"
 
-#: src/ui_configurationDialog.h:2055
+#: src/ui_configurationDialog.h:2070
 msgid "Screenshot Directory"
 msgstr "Папка снимков экрана"
 
-#: src/ui_configurationDialog.h:2057
+#: src/ui_configurationDialog.h:2072
 msgid "File format"
 msgstr "Формат файла"
 
-#: src/ui_configurationDialog.h:2058
+#: src/ui_configurationDialog.h:2073
 msgid "Invert colors"
 msgstr "Обратить цвета"
 
-#: src/ui_configurationDialog.h:2059
+#: src/ui_configurationDialog.h:2074
 msgid "Custom size"
 msgstr "Пользовательский размер"
 
-#: src/ui_configurationDialog.h:2062 src/ui_scriptConsole.h:416
+#: src/ui_configurationDialog.h:2075
+msgid "dpi"
+msgstr "DPI"
+
+#: src/ui_configurationDialog.h:2077
+msgid ""
+"Dots per Inch (for printing size computation in image metadata). Native "
+"print size in inches is then pixelSize/dpi."
+msgstr ""
+"Точек на дюйм (для вычисления размера печати в метаданных изображения). "
+"Собственный размер печати в дюймах равен pixelSize/dpi. "
+
+#: src/ui_configurationDialog.h:2081 src/ui_scriptConsole.h:416
 msgid "Close window when script runs"
 msgstr "Закрыть окно во время работы сценария"
 
-#: src/ui_configurationDialog.h:2064
+#: src/ui_configurationDialog.h:2083
 msgid "Run the selected script"
 msgstr "Запуск выбранного сценария"
 
-#: src/ui_configurationDialog.h:2068
+#: src/ui_configurationDialog.h:2087
 msgid "Stop a running script"
 msgstr "Остановить выполнение сценария"
 
-#: src/ui_configurationDialog.h:2072
+#: src/ui_configurationDialog.h:2091
 msgid "Load at startup"
 msgstr "Загрузить при запуске"
 
-#: src/ui_configurationDialog.h:2073
+#: src/ui_configurationDialog.h:2092
 msgid "configure"
 msgstr "настроить"
 
@@ -14806,7 +14857,7 @@ msgstr "Показывать измерения близ курсора мыши
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:477
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:321
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:819
-#: plugins/Calendars/src/ui_calendarsDialog.h:963
+#: plugins/Calendars/src/ui_calendarsDialog.h:998
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "О плагине"
@@ -14928,7 +14979,7 @@ msgstr "Поле зрения Telrad"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:103
 #: plugins/Scenery3d/src/Scenery3d.cpp:333
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:275
-#: plugins/Calendars/src/Calendars.cpp:173
+#: plugins/Calendars/src/Calendars.cpp:183
 msgid "Show settings dialog"
 msgstr "Показать диалог настройки"
 
@@ -20583,14 +20634,14 @@ msgstr "Этот плагин использует {HTTP сервер QtWebApp} 
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:160
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:214
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:220
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:195
 msgid "Publications"
 msgstr "Публикации"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:161
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:244
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:215
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:221
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:196
 msgid "If you use this plugin in your publications, please cite:"
 msgstr ""
@@ -26280,171 +26331,197 @@ msgstr "VTS"
 msgid "Allow to use Stellarium as a plugin in CNES VTS."
 msgstr "Разрешает использовать Stellarium в качестве плагина в CNES VTS."
 
-#: plugins/Calendars/src/Calendars.cpp:80
-#: plugins/Calendars/src/Calendars.cpp:171
-#: plugins/Calendars/src/Calendars.cpp:172
+#: plugins/Calendars/src/Calendars.cpp:84
+#: plugins/Calendars/src/Calendars.cpp:181
+#: plugins/Calendars/src/Calendars.cpp:182
 msgid "Calendars"
 msgstr "Календари"
 
-#: plugins/Calendars/src/Calendars.cpp:83
+#: plugins/Calendars/src/Calendars.cpp:87
 msgid "Calendars of the world"
 msgstr "Календари мира"
 
-#: plugins/Calendars/src/Calendars.cpp:309
-#: plugins/Calendars/src/ui_calendarsDialog.h:893
-#: plugins/Calendars/src/ui_calendarsDialog.h:922
+#: plugins/Calendars/src/Calendars.cpp:330
+#: plugins/Calendars/src/ui_calendarsDialog.h:923
+#: plugins/Calendars/src/ui_calendarsDialog.h:957
 msgctxt "calendar"
 msgid "Julian"
 msgstr "Юлианский"
 
-#: plugins/Calendars/src/Calendars.cpp:310
-#: plugins/Calendars/src/ui_calendarsDialog.h:899
-#: plugins/Calendars/src/ui_calendarsDialog.h:921
+#: plugins/Calendars/src/Calendars.cpp:331
+#: plugins/Calendars/src/ui_calendarsDialog.h:928
+#: plugins/Calendars/src/ui_calendarsDialog.h:956
 msgctxt "calendar"
 msgid "Gregorian"
 msgstr "Григорианский"
 
-#: plugins/Calendars/src/Calendars.cpp:311
-#: plugins/Calendars/src/ui_calendarsDialog.h:904
-#: plugins/Calendars/src/ui_calendarsDialog.h:923
+#: plugins/Calendars/src/Calendars.cpp:332
+#: plugins/Calendars/src/ui_calendarsDialog.h:933
+#: plugins/Calendars/src/ui_calendarsDialog.h:958
 msgctxt "calendar"
 msgid "Revised Julian"
 msgstr "Новоюлианский"
 
-#: plugins/Calendars/src/Calendars.cpp:312
+#: plugins/Calendars/src/Calendars.cpp:333
 msgctxt "calendar"
 msgid "ISO week"
 msgstr "Неделя ISO"
 
-#: plugins/Calendars/src/Calendars.cpp:313
-#: plugins/Calendars/src/ui_calendarsDialog.h:901
+#: plugins/Calendars/src/Calendars.cpp:334
+#: plugins/Calendars/src/ui_calendarsDialog.h:930
 msgctxt "calendar"
 msgid "Icelandic"
 msgstr "Исландский"
 
-#: plugins/Calendars/src/Calendars.cpp:314
-#: plugins/Calendars/src/ui_calendarsDialog.h:903
+#: plugins/Calendars/src/Calendars.cpp:335
+#: plugins/Calendars/src/ui_calendarsDialog.h:932
 msgctxt "calendar"
 msgid "Roman"
 msgstr "Римский"
 
-#: plugins/Calendars/src/Calendars.cpp:315
-#: plugins/Calendars/src/ui_calendarsDialog.h:892
+#: plugins/Calendars/src/Calendars.cpp:336
+#: plugins/Calendars/src/ui_calendarsDialog.h:922
 msgctxt "calendar"
 msgid "Olympic"
 msgstr "Олимпийский"
 
-#: plugins/Calendars/src/Calendars.cpp:316
-#: plugins/Calendars/src/ui_calendarsDialog.h:898
+#: plugins/Calendars/src/Calendars.cpp:337
+#: plugins/Calendars/src/ui_calendarsDialog.h:927
 msgctxt "calendar"
 msgid "Egyptian"
 msgstr "Египетский"
 
-#: plugins/Calendars/src/Calendars.cpp:317
-#: plugins/Calendars/src/ui_calendarsDialog.h:887
+#: plugins/Calendars/src/Calendars.cpp:338
+#: plugins/Calendars/src/ui_calendarsDialog.h:918
 msgctxt "calendar"
 msgid "Armenian"
 msgstr "Армянский"
 
-#: plugins/Calendars/src/Calendars.cpp:318
-#: plugins/Calendars/src/ui_calendarsDialog.h:900
+#: plugins/Calendars/src/Calendars.cpp:339
+#: plugins/Calendars/src/ui_calendarsDialog.h:929
 msgctxt "calendar"
 msgid "Zoroastrian"
 msgstr "Зороастрийский"
 
-#: plugins/Calendars/src/Calendars.cpp:319
-#: plugins/Calendars/src/ui_calendarsDialog.h:885
+#: plugins/Calendars/src/Calendars.cpp:340
+#: plugins/Calendars/src/ui_calendarsDialog.h:916
 msgctxt "calendar"
 msgid "Coptic"
 msgstr "Коптский"
 
-#: plugins/Calendars/src/Calendars.cpp:320
-#: plugins/Calendars/src/ui_calendarsDialog.h:881
+#: plugins/Calendars/src/Calendars.cpp:341
+#: plugins/Calendars/src/ui_calendarsDialog.h:912
 msgctxt "calendar"
 msgid "Ethiopic"
 msgstr "Эфиопский"
 
-#: plugins/Calendars/src/Calendars.cpp:321
+#: plugins/Calendars/src/Calendars.cpp:342
 msgctxt "calendar"
 msgid "French Rev. (Astron.)"
 msgstr "Французский револ. (астрон.)"
 
-#: plugins/Calendars/src/Calendars.cpp:322
+#: plugins/Calendars/src/Calendars.cpp:343
 msgctxt "calendar"
 msgid "French Rev. (Arithm.)"
 msgstr "Французский револ. (арифмет.)"
 
-#: plugins/Calendars/src/Calendars.cpp:323
-#: plugins/Calendars/src/ui_calendarsDialog.h:895
+#: plugins/Calendars/src/Calendars.cpp:344
+#: plugins/Calendars/src/ui_calendarsDialog.h:925
 msgctxt "calendar"
 msgid "Islamic"
 msgstr "Исламский"
 
-#: plugins/Calendars/src/Calendars.cpp:324
-#: plugins/Calendars/src/ui_calendarsDialog.h:905
+#: plugins/Calendars/src/Calendars.cpp:345
+#: plugins/Calendars/src/ui_calendarsDialog.h:934
 msgctxt "calendar"
 msgid "Hebrew"
 msgstr "Еврейский"
 
-#: plugins/Calendars/src/Calendars.cpp:325
+#: plugins/Calendars/src/Calendars.cpp:346
 msgctxt "calendar"
 msgid "Persian (Arithm.)"
 msgstr "Персидский (арифмет.)"
 
-#: plugins/Calendars/src/Calendars.cpp:326
+#: plugins/Calendars/src/Calendars.cpp:347
 msgctxt "calendar"
 msgid "Persian (Astron.)"
 msgstr "Персидский (астрон.)"
 
-#: plugins/Calendars/src/Calendars.cpp:327
-#: plugins/Calendars/src/ui_calendarsDialog.h:890
+#: plugins/Calendars/src/Calendars.cpp:348
+#: plugins/Calendars/src/ui_calendarsDialog.h:920
 msgctxt "calendar"
 msgid "Old Hindu Solar"
 msgstr "Древнеиндийский солнечный"
 
-#: plugins/Calendars/src/Calendars.cpp:328
+#: plugins/Calendars/src/Calendars.cpp:349
 msgctxt "calendar"
 msgid "Old Hindu Lunisolar"
 msgstr "Древнеиндийский лунно-солнечный"
 
-#: plugins/Calendars/src/Calendars.cpp:329
-#: plugins/Calendars/src/ui_calendarsDialog.h:910
+#: plugins/Calendars/src/Calendars.cpp:350
+#: plugins/Calendars/src/ui_calendarsDialog.h:941
+msgctxt "calendar"
+msgid "New Hindu Solar"
+msgstr "Новоиндийский солнечный"
+
+#: plugins/Calendars/src/Calendars.cpp:351
+msgctxt "calendar"
+msgid "New Hindu Lunisolar"
+msgstr "Новоиндийский лунно-солнечный"
+
+#: plugins/Calendars/src/Calendars.cpp:352
+msgctxt "calendar"
+msgid "New Hindu Panchang"
+msgstr "Новоиндийский панчанга"
+
+#: plugins/Calendars/src/Calendars.cpp:354
+msgctxt "calendar"
+msgid "Astro Hindu Solar"
+msgstr "Индийский астрон. солнечный"
+
+#: plugins/Calendars/src/Calendars.cpp:355
+msgctxt "calendar"
+msgid "Astro Hindu Lunisolar"
+msgstr "Индийский астрон. лунно-солнечный"
+
+#: plugins/Calendars/src/Calendars.cpp:356
+#: plugins/Calendars/src/ui_calendarsDialog.h:939
 msgctxt "calendar"
 msgid "Tibetan"
 msgstr "Тибетский"
 
-#: plugins/Calendars/src/Calendars.cpp:330
-#: plugins/Calendars/src/ui_calendarsDialog.h:897
+#: plugins/Calendars/src/Calendars.cpp:357
+#: plugins/Calendars/src/ui_calendarsDialog.h:926
 msgctxt "calendar"
 msgid "Maya Long Count"
 msgstr "Длинный счёт майя"
 
-#: plugins/Calendars/src/Calendars.cpp:331
-#: plugins/Calendars/src/ui_calendarsDialog.h:891
+#: plugins/Calendars/src/Calendars.cpp:358
+#: plugins/Calendars/src/ui_calendarsDialog.h:921
 msgctxt "calendar"
 msgid "Maya Haab"
 msgstr "Хааб майя"
 
-#: plugins/Calendars/src/Calendars.cpp:332
-#: plugins/Calendars/src/ui_calendarsDialog.h:883
+#: plugins/Calendars/src/Calendars.cpp:359
+#: plugins/Calendars/src/ui_calendarsDialog.h:914
 msgctxt "calendar"
 msgid "Maya Tzolkin"
 msgstr "Цолькин майя"
 
-#: plugins/Calendars/src/Calendars.cpp:333
-#: plugins/Calendars/src/ui_calendarsDialog.h:889
+#: plugins/Calendars/src/Calendars.cpp:360
+#: plugins/Calendars/src/ui_calendarsDialog.h:919
 msgctxt "calendar"
 msgid "Aztec Xihuitl"
 msgstr "Шиупоуалли ацтеков"
 
-#: plugins/Calendars/src/Calendars.cpp:334
-#: plugins/Calendars/src/ui_calendarsDialog.h:886
+#: plugins/Calendars/src/Calendars.cpp:361
+#: plugins/Calendars/src/ui_calendarsDialog.h:917
 msgctxt "calendar"
 msgid "Aztec Tonalpohualli"
 msgstr "Тональпоуалли ацтеков"
 
-#: plugins/Calendars/src/Calendars.cpp:336
-#: plugins/Calendars/src/ui_calendarsDialog.h:882
+#: plugins/Calendars/src/Calendars.cpp:363
+#: plugins/Calendars/src/ui_calendarsDialog.h:913
 msgctxt "calendar"
 msgid "Balinese Pawukon"
 msgstr "Балийский павукон"
@@ -28475,62 +28552,62 @@ msgid "A.H."
 msgstr "п.х."
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:38
-msgctxt "old Hindu month name"
+msgctxt "Hindu Lunar month name"
 msgid "Caitra"
 msgstr "Чайтра"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:39
-msgctxt "old Hindu month name"
+msgctxt "Hindu Lunar month name"
 msgid "Vaiśākha"
 msgstr "Вайшакха"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:40
-msgctxt "old Hindu month name"
+msgctxt "Hindu Lunar month name"
 msgid "Jyeṣṭha"
 msgstr "Джьештха"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:41
-msgctxt "old Hindu month name"
-msgid "Āṣāḑha"
+msgctxt "Hindu Lunar month name"
+msgid "Āṣāḍha"
 msgstr "Ашадха"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:42
-msgctxt "old Hindu month name"
+msgctxt "Hindu Lunar month name"
 msgid "Śrāvaṇa"
 msgstr "Шравана"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:43
-msgctxt "old Hindu month name"
+msgctxt "Hindu Lunar month name"
 msgid "Bhādrapada"
 msgstr "Бхадрапада"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:44
-msgctxt "old Hindu month name"
+msgctxt "Hindu Lunar month name"
 msgid "Āśvina"
 msgstr "Ашвина"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:45
-msgctxt "old Hindu month name"
+msgctxt "Hindu Lunar month name"
 msgid "Kārtika"
 msgstr "Картика"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:46
-msgctxt "old Hindu month name"
+msgctxt "Hindu Lunar month name"
 msgid "Mārgaśīrṣa"
 msgstr "Маргаширша"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:47
-msgctxt "old Hindu month name"
+msgctxt "Hindu Lunar month name"
 msgid "Pauṣa"
 msgstr "Пауша"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:48
-msgctxt "old Hindu month name"
+msgctxt "Hindu Lunar month name"
 msgid "Māgha"
 msgstr "Магха"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:49
-msgctxt "old Hindu month name"
+msgctxt "Hindu Lunar month name"
 msgid "Phālguna"
 msgstr "Пхальгуна"
 
@@ -29188,11 +29265,11 @@ msgctxt "epoch"
 msgid "A.P."
 msgstr "п.г."
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:175
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:180
 msgid "Calendars Plug-in"
 msgstr "Плагин \"Календари\""
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:182
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:187
 msgid ""
 "The Calendars plugin provides an interface to various calendars used around "
 "the world."
@@ -29200,99 +29277,107 @@ msgstr ""
 "Плагин \"Календари\" предоставляет интерфейс для различных календарей, "
 "используемых во всем мире."
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:183
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:188
 msgid "Julian Calendar"
 msgstr "Юлианский календарь"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:184
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:189
 msgid "Gregorian Calendar"
 msgstr "Григорианский календарь"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:185
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:190
 msgid "Revised Julian Calendar (Milankovi&#x107;)"
 msgstr "Новоюлианский календарь (Миланкович)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:186
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:191
 msgid "ISO Weeks"
 msgstr "Недели ISO"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:187
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:192
 msgid "Icelandic calendar"
 msgstr "Исландский календарь"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:188
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:193
 msgid "Roman (Julian) calendar"
 msgstr "Римский (Юлианский) календарь"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:189
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:194
 msgid "Olympiad calendar"
 msgstr "Олимпийский календарь"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:190
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:195
 msgid "Egyptian calendar"
 msgstr "Египетский календарь"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:191
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:196
 msgid "Armenian calendar"
 msgstr "Армянский календарь"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:192
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:197
 msgid "Zoroastrian calendar"
 msgstr "Зороастрийский календарь"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:193
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:198
 msgid "Coptic calendar"
 msgstr "Коптский календарь"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:194
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:199
 msgid "Ethiopic calendar"
 msgstr "Эфиопский календарь"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:196
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:201
 msgid "Islamic Calendar (algorithmic)"
 msgstr "Исламский календарь (алгоритмический)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:197
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:202
 msgid "Hebrew Calendar"
 msgstr "Еврейский календарь"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:198
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:203
 msgid "French Revolution calendar (astronomical version of 1793)"
 msgstr "Французский револ. календарь (астрон. версия 1793 г.)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:199
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:204
 msgid "French Revolution calendar (arithmetic version of 1795)"
 msgstr "Французский револ. календарь (арифмет. версия 1795 г.)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:200
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:205
 msgid "Persian calendar (arithmetic version)"
 msgstr "Персидский календарь (арифмет. версия)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:201
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:206
 msgid "Persian calendar (astronomical version)"
 msgstr "Персидский календарь (астрон. версия)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:204
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:209
 msgid "Old Hindu Solar and Lunar calendars"
 msgstr "Древнеиндийские солнечные и лунные календари"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:206
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:210
+msgid "New Hindu Solar and Lunar calendars"
+msgstr "Новоиндийские солнечные и лунные календари"
+
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:211
+msgid "Astronomically 'accurate' Hindu Solar and Lunar calendars"
+msgstr "Астрономически \"точные\" индийские солнечные и лунные календари"
+
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:212
 msgid "Tibetan (Phuglugs, Phug-pa, K&#x101;lacakra) calendar"
 msgstr "Тибетский календарь"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:207
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:213
 msgid "Maya calendars"
 msgstr "Календари майя"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:208
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:214
 msgid "Aztec calendars"
 msgstr "Ацтекские календари"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:209
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:215
 msgid "Balinese Pawukon calendar"
 msgstr "Календарь балийский павукон"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:211
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:217
 msgid ""
 "The plugin is in an early stage of development. Please cross-check results "
 "and report errors."
@@ -29300,7 +29385,7 @@ msgstr ""
 "Плагин находится на ранней стадии разработки. Пожалуйста, проверьте "
 "результаты и сообщите об ошибках."
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:212
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:218
 msgid ""
 "For some calendars, we welcome proper formatting suggestions by actual "
 "users."
@@ -29308,161 +29393,179 @@ msgstr ""
 "Для некоторых календарей мы приветствуем предложения по правильному "
 "форматированию от реальных пользователей."
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:222
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:228
 msgid "This plugin is based on:"
 msgstr "Этот плагин основан на:"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:878
+#: plugins/Calendars/src/ui_calendarsDialog.h:909
 msgid "Calendars Configuration"
 msgstr "Настройка календарей"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:879
+#: plugins/Calendars/src/ui_calendarsDialog.h:910
 msgid "Calendars Plug-in Configuration"
 msgstr "Настройка плагина \"Календари\""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:884
+#: plugins/Calendars/src/ui_calendarsDialog.h:915
 msgctxt "calendar"
 msgid "New Hindu Lunar"
 msgstr "Новоиндийский лунный"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:888
-msgctxt "calendar"
-msgid "New Hindu Solar"
-msgstr "Новоиндийский солнечный"
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:894
+#: plugins/Calendars/src/ui_calendarsDialog.h:924
+#: plugins/Calendars/src/ui_calendarsDialog.h:960
 msgctxt "calendar"
 msgid "Chinese"
 msgstr "Китайский"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:896
-msgctxt "calendar"
-msgid "Old Hindu Lunar"
-msgstr "Древнеиндийский лунный"
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:902
-#: plugins/Calendars/src/ui_calendarsDialog.h:915
+#: plugins/Calendars/src/ui_calendarsDialog.h:931
+#: plugins/Calendars/src/ui_calendarsDialog.h:950
 msgctxt "calendar"
 msgid "ISO Week"
 msgstr "неделя ISO"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:906
+#: plugins/Calendars/src/ui_calendarsDialog.h:935
 msgctxt "calendar"
 msgid "Persian (arithmetic)"
 msgstr "Персидский (арифметический)"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:907
+#: plugins/Calendars/src/ui_calendarsDialog.h:936
 msgctxt "calendar"
 msgid "Persian (astronomical)"
 msgstr "Персидский (астрономический)"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:908
+#: plugins/Calendars/src/ui_calendarsDialog.h:937
 msgctxt "calendar"
 msgid "French Revolution (arithmetic)"
 msgstr "Французский револ. (арифметический)"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:909
+#: plugins/Calendars/src/ui_calendarsDialog.h:938
 msgctxt "calendar"
 msgid "French Revolution (astronomical)"
 msgstr "Французский револ. (астрономический)"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:912
+#: plugins/Calendars/src/ui_calendarsDialog.h:940
+msgctxt "calendar"
+msgid "Old Hindu Lunar"
+msgstr "Древнеиндийский лунный"
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:942
+msgctxt "calendar"
+msgid "Hindu Astro Solar"
+msgstr "Индийский астрон. солнечный"
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:943
+msgctxt "calendar"
+msgid "Hindu Astro Lunar"
+msgstr "Индийский астрон. лунный"
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:945
+msgid "Override automatic text color"
+msgstr "Переопределить автоматический цвет текста"
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:947
 msgid "Display"
 msgstr "Отображать"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:913
+#: plugins/Calendars/src/ui_calendarsDialog.h:948
 msgid "Weekday"
 msgstr "День недели"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:914
+#: plugins/Calendars/src/ui_calendarsDialog.h:949
 msgid "Month"
 msgstr "Месяц"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:916
+#: plugins/Calendars/src/ui_calendarsDialog.h:951
 msgid "Year"
 msgstr "Год"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:917
+#: plugins/Calendars/src/ui_calendarsDialog.h:952
 msgid "Day"
 msgstr "День"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:919
+#: plugins/Calendars/src/ui_calendarsDialog.h:954
+msgctxt "calendar"
 msgid "Negative years here mark years B.C."
 msgstr "Отрицательные годы здесь отмечают годы до нашей эры"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:924
+#: plugins/Calendars/src/ui_calendarsDialog.h:959
 msgid "Lunisolar"
 msgstr "Лунно-солнечный"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:925
-msgid "Chinese"
-msgstr "Китайская"
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:926
+#: plugins/Calendars/src/ui_calendarsDialog.h:961
+msgctxt "calendar"
 msgid "Katun"
 msgstr "Катун"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:927
+#: plugins/Calendars/src/ui_calendarsDialog.h:962
+msgctxt "calendar"
 msgid "Xihuitl"
 msgstr "Шиупоуалли"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:928
+#: plugins/Calendars/src/ui_calendarsDialog.h:963
 msgctxt "calendar"
 msgid "Maya"
 msgstr "Майя"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:929
+#: plugins/Calendars/src/ui_calendarsDialog.h:964
+msgctxt "calendar"
 msgid "Haab"
 msgstr "Хааб"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:930
+#: plugins/Calendars/src/ui_calendarsDialog.h:965
+msgctxt "calendar"
 msgid "Tun"
 msgstr "Тун"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:931
+#: plugins/Calendars/src/ui_calendarsDialog.h:966
+msgctxt "calendar"
 msgid "Kin"
 msgstr "Кин"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:932
+#: plugins/Calendars/src/ui_calendarsDialog.h:967
+msgctxt "calendar"
 msgid "Uinal"
 msgstr "Уиналь"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:933
+#: plugins/Calendars/src/ui_calendarsDialog.h:968
+msgctxt "calendar"
 msgid "Baktun"
 msgstr "Бактун"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:934
+#: plugins/Calendars/src/ui_calendarsDialog.h:969
+msgctxt "calendar"
 msgid "Long Count"
 msgstr "Длинный счёт"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:936
-#: plugins/Calendars/src/ui_calendarsDialog.h:939
-#: plugins/Calendars/src/ui_calendarsDialog.h:954
-#: plugins/Calendars/src/ui_calendarsDialog.h:960
+#: plugins/Calendars/src/ui_calendarsDialog.h:971
+#: plugins/Calendars/src/ui_calendarsDialog.h:974
+#: plugins/Calendars/src/ui_calendarsDialog.h:989
+#: plugins/Calendars/src/ui_calendarsDialog.h:995
 msgid "Step forward"
 msgstr "Шаг вперёд"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:942
-#: plugins/Calendars/src/ui_calendarsDialog.h:945
-#: plugins/Calendars/src/ui_calendarsDialog.h:951
-#: plugins/Calendars/src/ui_calendarsDialog.h:957
+#: plugins/Calendars/src/ui_calendarsDialog.h:977
+#: plugins/Calendars/src/ui_calendarsDialog.h:980
+#: plugins/Calendars/src/ui_calendarsDialog.h:986
+#: plugins/Calendars/src/ui_calendarsDialog.h:992
 msgid "Step backward"
 msgstr "Шаг назад"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:947
+#: plugins/Calendars/src/ui_calendarsDialog.h:982
 msgctxt "calendar"
 msgid "Aztec"
 msgstr "Ацтекский"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:948
+#: plugins/Calendars/src/ui_calendarsDialog.h:983
+msgctxt "calendar"
 msgid "Tzolkin"
 msgstr "Цолькин"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:949
+#: plugins/Calendars/src/ui_calendarsDialog.h:984
+msgctxt "calendar"
 msgid "Tonalpohualli"
 msgstr "Тональпоуалли"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:962
+#: plugins/Calendars/src/ui_calendarsDialog.h:997
+msgctxt "calendar"
 msgid "Mesoamerica"
 msgstr "Мезоамерика"
 

@@ -5,16 +5,17 @@
 # 
 # Translators:
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2021
-# Víctor Vega <vegadark@protonmail.com>, 2021
+# cardinot <mcardinot@gmail.com>, 2022
+# Víctor Vega <vegadark@protonmail.com>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-01-24 19:59+0700\n"
+"POT-Creation-Date: 2022-03-07 19:14+0700\n"
 "PO-Revision-Date: 2020-01-06 16:35+0000\n"
-"Last-Translator: Víctor Vega <vegadark@protonmail.com>, 2021\n"
+"Last-Translator: Víctor Vega <vegadark@protonmail.com>, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/stellarium/teams/80998/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/anutan/description.en.utf8:1
 msgid "Anutan"
 msgstr "Anutan"
@@ -49,7 +50,7 @@ msgstr ""
 " ayudas para la navegación se denominan 'petuu vare' (tonto, común o no "
 "distinguido)."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/anutan/description.en.utf8:9
 #: ../../skycultures/tongan/description.en.utf8:43
 msgid "Nomenclature"
@@ -215,8 +216,9 @@ msgstr "Kaavei"
 msgid "Octopus Tentacle"
 msgstr "Tentáculo de pulpo"
 
-#. type: Content of: <table><tr>
+#. type: Content of: <p><table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:20
+#: ../../skycultures/egyptian_dendera/description.en.utf8:11
 msgid "Aries"
 msgstr "Aries"
 
@@ -415,6 +417,7 @@ msgstr "La estrella de la mañana"
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:83
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:377
 #: ../../skycultures/boorong/description.en.utf8:36
+#: ../../skycultures/egyptian_dendera/description.en.utf8:13
 #: ../../skycultures/lokono/description.en.utf8:26
 #: ../../skycultures/tongan/description.en.utf8:58
 msgid "Venus"
@@ -435,7 +438,7 @@ msgstr "La estrella de la mañana(?)"
 msgid "Venus(?)"
 msgstr "Venus(?)"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/anutan/description.en.utf8:37
 #: ../../skycultures/greek_almagest/description.en.utf8:486
 #: ../../skycultures/greek_farnese/description.en.utf8:293
@@ -468,7 +471,7 @@ msgstr ""
 "Niue, Samoa, Tokelau, Tonga, Tuvalu, Uvea, Outliers\" Archipelago Press, "
 "Universidad de California: ISBN 9780959378771."
 
-#. type: Content of: <p><h3>
+#. type: Content of: <p><h2>
 #: ../../skycultures/anutan/description.en.utf8:45
 #: ../../skycultures/arabic_al-sufi/description.en.utf8:69
 #: ../../skycultures/arabic_indigenous/description.en.utf8:32
@@ -502,7 +505,7 @@ msgstr ""
 #. type: Content of: <h1>
 #: ../../skycultures/arabic_al-sufi/description.en.utf8:1
 msgid "Arabic (Al-Sufi)"
-msgstr ""
+msgstr "Árabe (Al-Sufi)"
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic_al-sufi/description.en.utf8:2
@@ -805,6 +808,7 @@ msgstr ""
 #: ../../skycultures/arabic_al-sufi/description.en.utf8:66
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:522
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:464
+#: ../../skycultures/egyptian_dendera/description.en.utf8:44
 #: ../../skycultures/greek_almagest/description.en.utf8:496
 #: ../../skycultures/greek_farnese/description.en.utf8:299
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:288
@@ -833,7 +837,7 @@ msgstr ""
 "La cultura estelar del Libro de Estrellas Fijas fue compilada y agregada a "
 "Stellarium por Khalid Al-Ajaji: turath.alfalak@gmail.com"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/arabic_al-sufi/description.en.utf8:72
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:151
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:77
@@ -918,9 +922,9 @@ msgstr ""
 #. type: Content of: <h1>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:1
 msgid "Arabic (Arabian Peninsula)"
-msgstr ""
+msgstr "Árabe (Península Arábiga)"
 
-#. type: Content of: <h4>
+#. type: Content of: <h2>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:2
 #: ../../skycultures/arabic_indigenous/description.en.utf8:2
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:2
@@ -1134,12 +1138,13 @@ msgstr ""
 "Al-Ajaji, Khalid, Sharḥ Maʾthūrāt al-Ḫalāwī al-falakiyah, Explicación de los"
 " poemas astronómicos de al-Ḫalāwī, Riad, Arabia Saudita, 2018."
 
-#. type: Content of: <p><h3>
+#. type: Content of: <p><h2>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:35
 #: ../../skycultures/arabic_indigenous/description.en.utf8:24
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:69
 #: ../../skycultures/belarusian/description.en.utf8:8
 #: ../../skycultures/chinese_contemporary/description.en.utf8:5
+#: ../../skycultures/egyptian_dendera/description.en.utf8:23
 #: ../../skycultures/macedonian/description.en.utf8:4
 #: ../../skycultures/mongolian/description.en.utf8:15
 #: ../../skycultures/tupi/description.en.utf8:4
@@ -2808,7 +2813,7 @@ msgstr "al-Naʿāyem 2"
 msgid "al-Naayem 2"
 msgstr "al-Naayem 2"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:145
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:71
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:539
@@ -2816,6 +2821,7 @@ msgstr "al-Naayem 2"
 #: ../../skycultures/boorong/description.en.utf8:220
 #: ../../skycultures/chinese/description.en.utf8:2980
 #: ../../skycultures/dakota/description.en.utf8:57
+#: ../../skycultures/egyptian_dendera/description.en.utf8:47
 #: ../../skycultures/greek_almagest/description.en.utf8:505
 #: ../../skycultures/inuit/description.en.utf8:31
 #: ../../skycultures/lokono/description.en.utf8:377
@@ -2825,6 +2831,7 @@ msgstr "al-Naayem 2"
 #: ../../skycultures/ojibwe/description.en.utf8:48
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:59
 #: ../../skycultures/western_rey/description.en.utf8:78
+#: ../../skycultures/zulu/description.en.utf8:13
 msgid "Authors"
 msgstr "Autores"
 
@@ -2902,7 +2909,7 @@ msgstr ""
 #. type: Content of: <h1>
 #: ../../skycultures/arabic_indigenous/description.en.utf8:1
 msgid "Arabic (Indigenous)"
-msgstr ""
+msgstr "Árabe (Indígena)"
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic_indigenous/description.en.utf8:3
@@ -3113,7 +3120,7 @@ msgstr ""
 #. type: Content of: <h1>
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:1
 msgid "Arabic (Lunar Mansions)"
-msgstr ""
+msgstr "Árabe (Mansiones lunares)"
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:3
@@ -3777,7 +3784,7 @@ msgstr ""
 msgid "[12]: Laffitte, Roland, Le Ciel des Arabes, Geuthner, Paris 2012"
 msgstr "[12]: Laffitte, Roland, Le Ciel des Arabes, Geuthner, Paris 2012"
 
-#. type: Content of: <h3>
+#. type: Content of: <h1>
 #: ../../skycultures/aztec/description.en.utf8:1
 msgid "Aztec"
 msgstr "Azteca"
@@ -3870,7 +3877,7 @@ msgstr ""
 "Ahora, en este trabajo tenemos una explicación de algunas figuras estelares "
 "aztecas para Stellarium."
 
-#. type: Content of: <h4>
+#. type: Content of: <h3>
 #: ../../skycultures/aztec/description.en.utf8:10
 msgid "<em>Mamalhuaztli</em>"
 msgstr "<em>Mamalhuaztli</em>"
@@ -3890,7 +3897,7 @@ msgstr ""
 "llamados <em>toxiuh molpilia</em>, que significa unión de los años y "
 "coincidió con el comienzo del año nuevo llamado <em>xiuhtzitzquilo</em>."
 
-#. type: Content of: <h4>
+#. type: Content of: <h3>
 #: ../../skycultures/aztec/description.en.utf8:13
 msgid "<em>Tianquiztli</em>"
 msgstr "<em>Tianquiztli</em>"
@@ -3917,7 +3924,7 @@ msgstr ""
 "Actualmente, en México, el mercado informal o mercados callejeros se llaman "
 "<em>Tianguis</em>."
 
-#. type: Content of: <h4>
+#. type: Content of: <h3>
 #: ../../skycultures/aztec/description.en.utf8:17
 msgid "<em>Citlaltlachtli</em>"
 msgstr "<em>Citlaltlachtli</em>"
@@ -3936,7 +3943,7 @@ msgstr ""
 "movimiento de la pelota dentro del campo de juego se refiere al movimiento "
 "del sol y la luna."
 
-#. type: Content of: <h4>
+#. type: Content of: <h3>
 #: ../../skycultures/aztec/description.en.utf8:19
 msgid "<em>Xonecuilli</em>"
 msgstr "<em>Xonecuilli</em>"
@@ -3973,7 +3980,7 @@ msgstr ""
 msgid "<em>xonecuilli</em>"
 msgstr "<em>xonecuilli</em>"
 
-#. type: Content of: <h4>
+#. type: Content of: <h3>
 #: ../../skycultures/aztec/description.en.utf8:24
 msgid "<em>Citlalcolotl</em>"
 msgstr "<em>Citlalcolotl</em>"
@@ -4007,7 +4014,7 @@ msgstr ""
 "escorpión, en este códice los íconos muestran figuras de animales colgando "
 "del cuerpo del Dragón Celestial."
 
-#. type: Content of: <img><p><p><p><p><h3>
+#. type: Content of: <img><p><p><p><p><h2>
 #: ../../skycultures/aztec/description.en.utf8:29
 #: ../../skycultures/mongolian/description.en.utf8:237
 msgid "Conclusion"
@@ -4027,7 +4034,7 @@ msgstr ""
 "para preservar el conocimiento estelar y el significado de la cultura "
 "azteca."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/aztec/description.en.utf8:31
 #: ../../skycultures/belarusian/description.en.utf8:31
 #: ../../skycultures/chinese/description.en.utf8:2969
@@ -4289,8 +4296,9 @@ msgstr ""
 "intercalares para el calendario, reglas para el reloj de sol y reglas para "
 "omina."
 
-#. type: Content of: <h2>
+#. type: Content of: <h3>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:14
+#: ../../skycultures/egyptian_dendera/description.en.utf8:24
 msgid "Zodiac"
 msgstr "Zodíaco"
 
@@ -4347,9 +4355,10 @@ msgstr ""
 "esta cultura estelar; las constelaciones en el camino de la Luna no están "
 "resaltadas."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:31
 #: ../../skycultures/chinese_medieval/description.en.utf8:20
+#: ../../skycultures/egyptian_dendera/description.en.utf8:6
 msgid "Planets"
 msgstr "Planetas"
 
@@ -5173,6 +5182,7 @@ msgstr ""
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:382
+#: ../../skycultures/egyptian_dendera/description.en.utf8:16
 #: ../../skycultures/tongan/description.en.utf8:59
 msgid "Mars"
 msgstr "Marte"
@@ -5186,8 +5196,9 @@ msgstr ""
 "<sup>ESTRELLA</sup>OVEJA&middot;&quot;SALVAJE&middot;ESTABLE&quot;(<i>KAJJAM&#256;NU</i>,"
 " Saturno), cambia su lugar y cruza el cielo"
 
-#. type: Content of: <table><tbody><tr><td>
+#. type: Content of: <p><table><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:387
+#: ../../skycultures/egyptian_dendera/description.en.utf8:17
 msgid "Saturn"
 msgstr "Saturno"
 
@@ -5204,8 +5215,9 @@ msgstr ""
 " Oeste, donde sea que aparezca en el mes, donde sea que desaparezca en el "
 "mes"
 
-#. type: Content of: <table><tbody><tr><td>
+#. type: Content of: <p><table><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:393
+#: ../../skycultures/egyptian_dendera/description.en.utf8:15
 msgid "Mercury"
 msgstr "Mercurio"
 
@@ -5449,8 +5461,9 @@ msgstr ""
 "Assyriologique Internationale 2018). Vea el capítulo \"Lecturas "
 "adicionales\" a continuación."
 
-#. type: Content of: <h2>
+#. type: Content of: <p><p><h3>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:513
+#: ../../skycultures/egyptian_dendera/description.en.utf8:36
 msgid "Sources / Further Reading"
 msgstr "Fuentes/Otras lecturas"
 
@@ -6517,7 +6530,7 @@ msgstr ""
 msgid "<em>Susanne M Hoffmann: service@uhura-uraniae.com </em>"
 msgstr "<em>Susanne M Hoffmann: service@uhura-uraniae.com </em>"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/belarusian/description.en.utf8:1
 msgid "Belarusian"
 msgstr "Bielorruso"
@@ -6799,7 +6812,7 @@ msgstr ""
 "Stanbridge escribió en 1857 que \"se enorgullecen de saber más de Astronomía"
 " que cualquier otra tribu\"."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/boorong/description.en.utf8:11
 msgid "Constellations and other celestial objects"
 msgstr "Constelaciones y otros objetos celestes"
@@ -6956,6 +6969,7 @@ msgstr "Cacatúa blanca con cresta de azufre; levantando la luz del día"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:71
+#: ../../skycultures/egyptian_dendera/description.en.utf8:14
 #: ../../skycultures/lokono/description.en.utf8:46
 msgid "Jupiter"
 msgstr "Júpiter"
@@ -6973,6 +6987,7 @@ msgstr "Día; Sol"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:76
 #: ../../skycultures/chinese/description.en.utf8:66
+#: ../../skycultures/egyptian_dendera/description.en.utf8:11
 #: ../../skycultures/lokono/description.en.utf8:16
 #: ../../skycultures/mongolian/description.en.utf8:141
 #: ../../skycultures/tongan/description.en.utf8:53
@@ -7089,6 +7104,7 @@ msgstr "Quoll"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:116
 #: ../../skycultures/chinese/description.en.utf8:67
+#: ../../skycultures/egyptian_dendera/description.en.utf8:12
 #: ../../skycultures/lokono/description.en.utf8:21
 #: ../../skycultures/tongan/description.en.utf8:52
 msgid "Moon"
@@ -7395,7 +7411,7 @@ msgstr ""
 " y <i><a href=\"http://www.terrastro.com\" class='external text' "
 "title=\"http://www.terrastro.com\" rel=\"nofollow\">Alex Cherney</a></i>."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/chinese/description.en.utf8:1
 msgid "Chinese Traditional Sky Culture"
 msgstr "Cultura estelar tradicional china"
@@ -7496,7 +7512,7 @@ msgstr ""
 "agregada de acuerdo con <i>La Historia de la Observación Estelar en "
 "China</i>, pero no se puede certificar por completo."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/chinese/description.en.utf8:11
 msgid "Sun, Moon and Planets"
 msgstr "Sol, Luna y Planetas"
@@ -7541,7 +7557,7 @@ msgstr ""
 "El sol, la luna y los cinco planetas forman Siete Luminarias (chino: 七曜; "
 "pinyin: qīyào), que corresponden a los Cinco Elementos y Yin y Yang."
 
-#. type: Content of: <p><h3>
+#. type: Content of: <p><h2>
 #: ../../skycultures/chinese/description.en.utf8:17
 msgid "Xingguans"
 msgstr "Xingguans"
@@ -7666,7 +7682,7 @@ msgstr ""
 msgid "<em>Astronomical Map of Complete Studies of Astronomical (1757)</em>"
 msgstr "<em>Mapa astronómico de estudios completos de astronomía (1757)</em>"
 
-#. type: Content of: <p><h3>
+#. type: Content of: <p><h2>
 #: ../../skycultures/chinese/description.en.utf8:30
 msgid "Three Enclosures"
 msgstr "Tres recintos"
@@ -7775,7 +7791,7 @@ msgstr ""
 "<a href=\"https://en.wikipedia.org/wiki/Heavenly_Market_enclosure\">El "
 "Recinto del Mercado Celestial (Wikipedia)</a>"
 
-#. type: Content of: <p><h3>
+#. type: Content of: <p><h2>
 #: ../../skycultures/chinese/description.en.utf8:47
 msgid "Twenty-Eight Mansions"
 msgstr "Veintiocho mansiones"
@@ -7904,7 +7920,7 @@ msgstr ""
 "azul está en el este, la tortuga negra está en el norte y el tigre blanco "
 "está en el oeste."
 
-#. type: Content of: <p><h3>
+#. type: Content of: <p><h2>
 #: ../../skycultures/chinese/description.en.utf8:58
 msgid "The List of The Twenty-Eight Mansions (J2000)"
 msgstr "La lista de las veintiocho mansiones (J2000)"
@@ -9867,7 +9883,7 @@ msgstr ""
 "nota 2: El vasallo Xingguan no es un Xingguan separado, sino un vasallo del "
 "padre Xingguan."
 
-#. type: Content of: <p><h3>
+#. type: Content of: <p><h2>
 #: ../../skycultures/chinese/description.en.utf8:2901
 msgid "Deep Space Objects"
 msgstr "Objetos del espacio profundo"
@@ -10113,7 +10129,7 @@ msgstr ""
 " libro <i>Chinese and Western Contrast Star Chart and Catalog 1950.0</i> de "
 "Yi Shitong, y añade la descripción."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/chinese_contemporary/description.en.utf8:1
 msgid "Chinese Contemporary"
 msgstr "China contemporánea"
@@ -10147,10 +10163,13 @@ msgstr ""
 "estrellas brillantes, y no tienen el papel de dividir la esfera celeste en "
 "diferentes áreas, por lo que ya no son aplicables en astronomía."
 
-#. type: Content of: <h3>
+#. type: Content of: <p><h2>
 #: ../../skycultures/chinese_contemporary/description.en.utf8:9
-msgid "star names"
-msgstr "nombres de estrellas"
+#: ../../skycultures/greek_almagest/description.en.utf8:45
+#: ../../skycultures/western/description.en.utf8:7
+#: ../../skycultures/western_SnT/description.en.utf8:9
+msgid "Star names"
+msgstr "Nombres de estrellas"
 
 #. type: Content of: <p>
 #: ../../skycultures/chinese_contemporary/description.en.utf8:11
@@ -10254,7 +10273,7 @@ msgstr ""
 "líneas de asterismo y nombres de estrellas tradicionales chinas basadas en "
 "la <i>cultura estelar tradicional china del cielo para Stellarium</i>."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/chinese_medieval/description.en.utf8:1
 msgid "Chinese Medieval"
 msgstr "China medieval"
@@ -10278,7 +10297,7 @@ msgstr ""
 "para cada Xingguan que puede determinar la estrella determinante. Los "
 "límites de veintiocho mansiones lunares se basan en 1052 dC."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/chinese_medieval/description.en.utf8:5
 msgid "Medieval Xingguans"
 msgstr "Xingguans medievales"
@@ -10368,7 +10387,7 @@ msgstr ""
 msgid "<em>Xinyixiangfayao Star Map(1088 AD)</em>"
 msgstr "<em>Mapa estelar de Xinyixiangfayao (1088 dC)</em>"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/chinese_medieval/description.en.utf8:14
 msgid "Restore Sky Map"
 msgstr "Restaurar mapa estelar"
@@ -10531,7 +10550,7 @@ msgstr ""
 "<a href=\"http://wwt.china-vo.org/why/chineseheaven.htm\">(Chino) El cielo "
 "chino en la comunidad WWT Beijing</a>"
 
-#. type: Content of: <p><p><ul><h3>
+#. type: Content of: <p><p><ul><h2>
 #: ../../skycultures/chinese_medieval/description.en.utf8:38
 msgid "Reference"
 msgstr "Referencias"
@@ -10576,7 +10595,7 @@ msgstr ""
 "Shuwei</i> (孙 殳 玮). <a "
 "href=\"mailto:sunshuwei.hi@foxmail.com\">sunshuwei.hi@foxmail.com</a>"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/dakota/description.en.utf8:1
 msgid "Dakota"
 msgstr "Dakota"
@@ -10612,7 +10631,7 @@ msgstr ""
 "mapa estelar D(L) akota, los planisferios D(L) akota, el plan de estudios y "
 "otros recursos."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/dakota/description.en.utf8:12
 #: ../../skycultures/ojibwe/description.en.utf8:5
 msgid "Celestial Objects"
@@ -10874,7 +10893,7 @@ msgstr "Ilustraciones de constelaciones por A. Lee."
 msgid "Contact A. Lee at aslee@stcloudstate.edu for more information."
 msgstr "Contacte con A. Lee a aslee@stcloudstate.edu para más información."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/egyptian/description.en.utf8:1
 msgid "Egyptian"
 msgstr "Egipcia"
@@ -11006,6 +11025,317 @@ msgstr ""
 "Esta cultura estelar fue actualizada por misibacsi (nombres de los planetas)"
 
 #. type: Content of: <h1>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:1
+msgid "Egyptian &mdash; Dendera"
+msgstr "Egipcio &mdash; Dendera"
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:2
+msgid ""
+"The sculptured Dendera zodiac (or Denderah zodiac) is a widely known "
+"Egyptian bas-relief from the ceiling of the pronaos (or portico) of a chapel"
+" dedicated to Osiris in the Hathor temple at Dendera. This chapel was begun "
+"in the late Ptolemaic period when Egypt was ruled by (Greek) successors of "
+"Alexander the Great (305-30). Its <i>pronaos</i> (a hall in front of the "
+"holy chamber) was added by the Roman emperor Tiberius (14-37 CE). This led "
+"Jean-François Champollion (18th century) to date the relief to the Greco-"
+"Roman period (while most of his contemporaries believed it to be of a "
+"millennium earlier because of the Egyptian style of the figures - this is "
+"not believed anymore). Today, French archaeologists date it to exactly 54 "
+"BCE [1].  The relief is now on display at the Musée du Louvre, Paris "
+"(France)."
+msgstr ""
+"El zodíaco de Dendera esculpido (o zodíaco de Dendera) es un bajorrelieve "
+"egipcio muy conocido del techo del pronaos (o pórtico) de una capilla "
+"dedicada a Osiris en el templo de Hathor en Dendera. Esta capilla se inició "
+"a finales del período ptolemaico cuando Egipto estaba gobernado por los "
+"sucesores (griegos) de Alejandro Magno (305-30). Su <i>pronaos</i> (una sala"
+" frente a la cámara sagrada) fue añadida por el emperador romano Tiberio "
+"(14-37 EC). Esto llevó a Jean-François Champollion (siglo XVIII) a fechar el"
+" relieve en el período grecorromano (mientras que la mayoría de sus "
+"contemporáneos creían que era de un milenio antes debido al estilo egipcio "
+"de las figuras; esto ya no se cree). Hoy, los arqueólogos franceses lo "
+"fechan exactamente en el 54 a. C. [1]. El relieve se encuentra ahora en "
+"exhibición en el Musée du Louvre, París (Francia)."
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:3
+msgid ""
+"The temple in (today's) Egypt probably dates to the Roman (or Late Greek) "
+"time of Egypt and, thus, does not show the original Egyptian sky but a "
+"mixture of Greco-Roman, Egyptian and Babylonian figures, all drawn in an "
+"Egyptian style."
+msgstr ""
+"El templo en el (actual) Egipto probablemente data de la época romana (o "
+"griega tardía) de Egipto y, por lo tanto, no muestra el cielo egipcio "
+"original sino una mezcla de figuras grecorromanas, egipcias y babilónicas, "
+"todas dibujadas en estilo egipcio."
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:5
+msgid ""
+"<i>Photograph for the display in Musée du Louvre (Paris), Public Domain/ "
+"CC0. The plate is 255 x 253 cm in size.</i>"
+msgstr ""
+"<i>Fotografía para la exposición en Musée du Louvre (París), Dominio "
+"Público/ CC0. El plato tiene un tamaño de 255 x 253 cm.</i>"
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:7
+msgid ""
+"The planets are depicted as deities in their \"standard position\". As "
+"planets move, they can only be presented in the sky by defining fixed "
+"positions where the figurative representation is found in every celestial "
+"map, every star list and catalogue."
+msgstr ""
+"Los planetas se representan como deidades en su \"posición estándar\". A "
+"medida que los planetas se mueven, solo se pueden presentar en el cielo "
+"definiendo posiciones fijas donde la representación figurativa se encuentra "
+"en cada mapa celeste, cada lista de estrellas y catálogo."
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:9
+msgid "These standard positions:"
+msgstr "Estas posiciones estándar:"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:12
+msgid "Taurus"
+msgstr "Taurus"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:13
+msgid "Pisces"
+msgstr "Pisces"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:14
+msgid "Cancer (or betw. Cnc and Leo)"
+msgstr "Cáncer (o entre Cnc y Leo)"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:15
+msgid "Virgo"
+msgstr "Virgo"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:16
+msgid "Capricornus"
+msgstr "Capricornus"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:17
+msgid "Libra"
+msgstr "Libra"
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:19
+msgid ""
+"These positions are equal to the \"secret places\" in Babylonian astrology "
+"and the \"hypsomata\" (exaltation points) in Greek astrology."
+msgstr ""
+"Estas posiciones son iguales a los \"lugares secretos\" de la astrología "
+"babilónica ya los \"hypsomata\" (puntos de exaltación) de la astrología "
+"griega."
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:21
+msgid ""
+"Additionally, the equinoxes are marked with great disks: One in Libra and "
+"one Aries."
+msgstr ""
+"Además, los equinoccios están marcados con grandes discos: uno en Libra y "
+"otro en Aries."
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:25
+msgid ""
+"The zodiac came to Greece from Babylonian sources. It is unknown whether or "
+"not the Egyptians had similar figures: The origin of the zodiac is the path "
+"of the Moon and was, thus, important for the Egyptian calendar, too. "
+"However, the zodiac depicted in Dendera is definitely the Greek (partially "
+"misunderstood) interpretation of the Babylonian one."
+msgstr ""
+"El zodíaco llegó a Grecia desde fuentes babilónicas. Se desconoce si los "
+"egipcios tenían figuras similares o no: el origen del zodíaco es el camino "
+"de la Luna y, por lo tanto, también era importante para el calendario "
+"egipcio. Sin embargo, el zodíaco representado en Dendera es definitivamente "
+"la interpretación griega (parcialmente incomprendida) del babilónico."
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:26
+msgid ""
+"The Zodiac is the Babylonian one with the semi-exception of Pisces: Pisces "
+"are depicted as two fish which is never found in Babylon and only an "
+"analogon is known in Late Babylonian epoch in the city of Uruk. In Uruk, the"
+" constellation was changed to the constellation of the Swallow-Fish "
+"connecting a swallow and a fish. In contrast, in Babylon it has always been "
+"\"The Tails of the Giant Swallow\" (Steele 2018)."
+msgstr ""
+"El zodíaco es el babilónico con la semi-excepción de Piscis: Piscis se "
+"representa como dos peces que nunca se encuentran en Babilonia y solo se "
+"conoce un análogo en la época babilónica tardía en la ciudad de Uruk. En "
+"Uruk, la constelación se cambió a la constelación del pez golondrina que "
+"conecta una golondrina y un pez. En cambio, en Babilonia siempre ha sido "
+"“Las colas de la golondrina gigante” (Steele 2018)."
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:27
+msgid ""
+"The other constellations of the zodiac are the Babylonian versions, "
+"partially egyptized. Virgo is depicted as the Babylonian Goddess Shala with "
+"the Ear of Grain, Capricornus as a Goat-Fish accompanying the Babylonian god"
+" of witchcraft (Aquarius), Sagittarius as the Babylonian god Pabilsang. "
+"Scorpion, Aries and Cancer leave rather no room for interpretation. Leo is "
+"depicted as a usual lion but carries the Egyptian queen Berenice (whose name"
+" was given to the constellation Coma Berenices) at his tail. Gemini are not "
+"depicted as Twins but as a couple, the Bull is not halved."
+msgstr ""
+"Las otras constelaciones del zodíaco son las versiones babilónicas, "
+"parcialmente egiptizadas. Virgo se representa como la diosa babilónica Shala"
+" con la espiga de grano, Capricornio como un pez cabra que acompaña al dios "
+"babilónico de la brujería (Acuario), Sagitario como el dios babilónico "
+"Pabilsang. Escorpión, Aries y Cáncer no dejan más bien lugar a "
+"interpretaciones. Leo se representa como un león habitual pero lleva a la "
+"reina egipcia Berenice (cuyo nombre se le dio a la constelación Coma "
+"Berenices) en su cola. Los Géminis no se representan como Gemelos sino como "
+"pareja, el Toro no se reduce a la mitad."
+
+#. type: Content of: <p><p><h3>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:28
+msgid "Outside the Zodiac"
+msgstr "Fuera del Zodíaco"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:29
+msgid ""
+"The rest of the sky also shows a mixture of several cultures: The hippo "
+"goddess who guards the Ox Thigh is a clearly Egyptian constellation. "
+"Interestingly, there is a desert fox and a sheep next to the ox thigh which "
+"refers to same positions in the sky as the Babylonian constellations of the "
+"Fox and the Ewe."
+msgstr ""
+"El resto del cielo también muestra una mezcla de varias culturas: La diosa "
+"hipopótamo que custodia el Muslo de Buey es una constelación claramente "
+"egipcia. Curiosamente, hay un zorro del desierto y una oveja al lado del "
+"muslo de buey que se refiere a las mismas posiciones en el cielo que las "
+"constelaciones babilónicas del zorro y la oveja."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:30
+msgid ""
+"In contrast to these native Egyptian constellations, there are also native "
+"Sumerian ones that are depicted in an Egyptized way: This is marked in the "
+"\"Translation\" of the Stellarium labels."
+msgstr ""
+"En contraste con estas constelaciones nativas egipcias, también hay "
+"constelaciones nativas sumerias que se representan de forma egipcia: esto "
+"está marcado en la \"Traducción\" de las etiquetas Stellarium."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:31
+msgid ""
+"Interestingly, this depiction explains several Greek names of single stars: "
+"e.g. at the position of Capella, there is a whitish Goat in the Dendera "
+"ceiling, and at the position of the star Canopus whose name is already "
+"attested in Ptolemy's Almagest, there is a Horus-falcon on a canopy jar. It "
+"suggests that these were originally Egyptian images that have been "
+"transformed to star names in a later epoch in order to commemorate the "
+"outdated constellations."
+msgstr ""
+"Curiosamente, esta representación explica varios nombres griegos de "
+"estrellas individuales: p. en la posición de Capella, hay una Cabra "
+"blanquecina en el techo de Dendera, y en la posición de la estrella Canopus,"
+" cuyo nombre ya está atestiguado en el Almagesto de Ptolomeo, hay un halcón "
+"de Horus en una vasija con dosel. Sugiere que originalmente se trataba de "
+"imágenes egipcias que se transformaron en nombres de estrellas en una época "
+"posterior para conmemorar las constelaciones obsoletas."
+
+#. type: Content of: <h3>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:33
+#: ../../skycultures/sami/description.en.utf8:8
+#: ../../skycultures/russian_siberian/description.en.utf8:28
+#: ../../skycultures/tukano/description.en.utf8:43
+msgid "Sources"
+msgstr "Fuentes"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:34
+msgid ""
+"This <em>sky culture</em> is a mapping of historical figures onto the stars."
+" The figures are directly copied by hand from the digital photographs that "
+"are provided by the Louvre and the colours follow roughly the reconstruction"
+" by Alexandre N.Isis (wikicommons, 2013)."
+msgstr ""
+"Esta <em>cultura estelar</em> es un mapeo de figuras históricas en las "
+"estrellas. Las figuras están copiadas directamente a mano de las fotografías"
+" digitales proporcionadas por el Louvre y los colores siguen aproximadamente"
+" la reconstrucción de Alexandre N.Isis (wikicommons, 2013)."
+
+#. type: Content of: <p><p><ul><li>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:38
+msgid ""
+"<a "
+"href=\"https://collections.louvre.fr/en/ark:/53355/cl010028871#\">Photographs"
+" of the Louvre Collection</a>"
+msgstr ""
+"<a "
+"href=\"https://collections.louvre.fr/en/ark:/53355/cl010028871#\">Fotografías"
+" de la colección del Louvre</a>"
+
+#. type: Content of: <p><p><ul><li>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:39
+msgid ""
+"Aubourg, E. (1995), ‘La date de conception du zodiaque du temple d’Hathor à "
+"Dendera’, Bulletin de l’Institut Français d’Archéologie Orientale 95, 1–10"
+msgstr ""
+"Aubourg, E. (1995), ‘La date de conception du zodiaque du temple d’Hathor à "
+"Dendera’, Bulletin de l’Institut Français d’Archéologie Orientale 95, 1–10"
+
+#. type: Content of: <p><p><ul><li>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:40
+msgid ""
+"Biot, J.-B. (1846), ‘Mémoire sur le zodiaque circulaire de denderah.’, "
+"Mémoires de l’Institutnational de France16(2ème partie), 1–101"
+msgstr ""
+"Biot, J.-B. (1846), ‘Mémoire sur le zodiaque circulaire de denderah.’, "
+"Mémoires de l’Institutnational de France16(2ème partie), 1–101"
+
+#. type: Content of: <p><p><ul><li>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:41
+msgid ""
+"Steele (2018), The development of the Babylonian zodiac: Some preliminary "
+"observations.’, Mediterranean Archaeology and Archaeometry, 18, 4, 97-105"
+msgstr ""
+"Steele (2018), El desarrollo del zodíaco babilónico: algunas observaciones "
+"preliminares. Arqueología y arqueometría mediterráneas, 18, 4, 97-105"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:45
+msgid ""
+"This sky culture originates from research. We provide this for free but the "
+"authors of contributions certainly deserve to be cited according to the "
+"common rules. This sky culture is provided under CC BY-ND 4.0 International "
+"Public Licence (share-alike, do not change it without consulting the "
+"contributors, and cite the contributors). Thank you!"
+msgstr ""
+"Esta cultura estelar tiene su origen en la investigación. Proporcionamos "
+"esto de forma gratuita, pero los autores de las contribuciones ciertamente "
+"merecen ser citados de acuerdo con las reglas comunes. Esta cultura del "
+"cielo se proporciona bajo licencia pública internacional CC BY-ND 4.0 "
+"(compartir igual, no cambiarla sin consultar a los contribuyentes y citar a "
+"los contribuyentes). ¡Gracias!"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:48
+msgid ""
+"This Greco-Egyptian sky culture was painted and added to Stellarium by: "
+"<em>Susanne M. Hoffmann: service@uhura-uraniae.com</em>"
+msgstr ""
+"Esta cultura estelar greco-egipcia fue pintada y añadida a Stellarium por: "
+"<em>Susanne M. Hoffmann: service@uhura-uraniae.com</em>"
+
+#. type: Content of: <h1>
 #: ../../skycultures/greek_almagest/description.en.utf8:1
 msgid "Greek (Almagest)"
 msgstr "Griego (Almagesto)"
@@ -11104,13 +11434,6 @@ msgstr ""
 #: ../../skycultures/greek_almagest/description.en.utf8:43
 msgid "How this sky culture was made"
 msgstr "Cómo se hizo esta cultura estelar"
-
-#. type: Content of: <p><h3>
-#: ../../skycultures/greek_almagest/description.en.utf8:45
-#: ../../skycultures/western/description.en.utf8:7
-#: ../../skycultures/western_SnT/description.en.utf8:9
-msgid "Star names"
-msgstr "Nombres de estrellas"
 
 #. type: Content of: outside any tag (error?)
 #: ../../skycultures/greek_almagest/description.en.utf8:47
@@ -12849,7 +13172,7 @@ msgstr ""
 msgid "the authors"
 msgstr "los autores"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/hawaiian_starlines/description.en.utf8:1
 msgid "Hawaiian Starlines"
 msgstr "Líneas estelares hawaianas"
@@ -13230,7 +13553,7 @@ msgstr ""
 "Navegación Celestial en las Escuelas Kamehameha Kapalama, Honolulu, Hawai. "
 "Ilustraciones de Kealoha Kaneakua."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/indian/description.en.utf8:1
 msgid "Indian Vedic"
 msgstr "Védica india"
@@ -13390,7 +13713,7 @@ msgstr ""
 "significa (algunas personas proponen identificaciones alternativas para "
 "tales yogatārā-s)."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/indian/description.en.utf8:18
 msgid "Navagraha - Nine \"planets\""
 msgstr "Navagraha - Nueve \"planetas\""
@@ -13544,7 +13867,7 @@ msgstr "nodo lunar"
 msgid "-"
 msgstr "-"
 
-#. type: Content of: <h4>
+#. type: Content of: <h3>
 #: ../../skycultures/indian/description.en.utf8:36
 msgid "General"
 msgstr "General"
@@ -13593,7 +13916,7 @@ msgstr ""
 " class='external text'>\"Posible período del diseño de Nakshatras y "
 "Abhijit\"</a>"
 
-#. type: Content of: <h4>
+#. type: Content of: <h3>
 #: ../../skycultures/indian/description.en.utf8:44
 msgid "Mythology"
 msgstr "Mitología"
@@ -13662,7 +13985,7 @@ msgstr ""
 "text'>Molino de Hamlet: Ensayo sobre el mito y el marco del tiempo por "
 "Giorgio de Santillana, Hertha von Dechend</a>"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/indian/description.en.utf8:58
 msgid "Contributors"
 msgstr "Colaboradores"
@@ -13683,7 +14006,7 @@ msgstr ""
 " de codificadores en sánscrito</a> (esp <a "
 "href=\"https://github.com/vvasuki/\">Vishvas Vasuki</a>."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/inuit/description.en.utf8:1
 msgid "Inuit"
 msgstr "Inuit"
@@ -13740,7 +14063,7 @@ msgstr ""
 "Las ilustraciones son realizadas por Johan Meuris, publicado bajo la "
 "Licencia de Arte Libre."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/japanese_moon_stations/description.en.utf8:1
 msgid "Japanese Moon Stations"
 msgstr "Estaciones lunares japonesas"
@@ -14034,7 +14357,7 @@ msgstr "Las 7 estaciones lunares del \"sur\" o \"pájaro rojo\"."
 msgid "Ogre, Devil, perhaps Ghost"
 msgstr "Ogro, diablo, tal vez fantasma"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/japanese_moon_stations/description.en.utf8:246
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:25
 msgid "Stars"
@@ -14055,7 +14378,7 @@ msgstr "Carro cruzado, quizás cadenas de Koto"
 msgid "A Cultural History of Astronomy in Japan"
 msgstr "Una historia cultural de la astronomía en Japón"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/kamilaroi/description.en.utf8:1
 msgid "Kamilaroi/Euahlayi"
 msgstr "Kamilaroi/Euahlayi"
@@ -14387,12 +14710,12 @@ msgstr ""
 " Kamilaroi y Euahlayi en <a href=\"https://unsw.academia.edu/RobertFuller\" "
 "class=\"external\">https://unsw.academia.edu/RobertFuller</a>."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/korean/description.en.utf8:1
 msgid "Korean"
 msgstr "Coreana"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/korean/description.en.utf8:2
 msgid "Origin"
 msgstr "Origen"
@@ -14472,7 +14795,7 @@ msgstr ""
 "Esta cultura estelar fue aportada por el usuario de Stellarium <i><a "
 "href=\"http://user.chollian.net/~jtm71/\">Jeong, Tae-Min</a></i>"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/lokono/description.en.utf8:1
 msgid "Lokono (or Arawak)"
 msgstr "Lokono (o Arawak)"
@@ -17068,7 +17391,7 @@ msgstr ""
 " documento digitalizado. La imagen se redujo en tamaño, se recortó y se "
 "reprodujo aquí con el amable permiso de la American Philosophical Society."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/macedonian/description.en.utf8:1
 msgid "Sky Map of Macedonian People"
 msgstr "Mapa del cielo de los macedonios"
@@ -17471,7 +17794,7 @@ msgstr ""
 "Sociedad de Investigación de Macedonia, basada principalmente en el libro "
 "Cielo sobre Macedonia de Cenev G, 2004."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/maori/description.en.utf8:1
 msgid "Maori (New Zealand)"
 msgstr "Maorí (Nueva Zelanda)"
@@ -17524,7 +17847,7 @@ msgstr ""
 "Esta cultura estelar fue aportada por el usuario de Stellarium <i>Dan "
 "Smale</i>, d.smale(at)niwa.co.nz"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/maya/description.en.utf8:1
 msgid "Maya"
 msgstr "Maya"
@@ -18065,7 +18388,7 @@ msgstr ""
 "<a href=\"https://maya.nmai.si.edu/es/gallery/bonampak\">Bonampak, Viviendo "
 "el tiempo maya</a>"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/mongolian/description.en.utf8:1
 msgid "Mongolian"
 msgstr "Mongoles"
@@ -18118,7 +18441,7 @@ msgstr ""
 "Od</em> en mongol). Y Cassiopeia representa, en la imaginación mongol, la "
 "mujer de cinco estrellas (<em>Hun Tavan Od</em>)."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/mongolian/description.en.utf8:27
 msgid "Planets and Stars"
 msgstr "Planetas y estrellas"
@@ -18225,12 +18548,12 @@ msgstr ""
 "primero en medir con extrema precisión el período de revolución de Saturno "
 "(<em>Sanchir</em>) con un sextante de 40 metros de radio."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/mongolian/description.en.utf8:80
 msgid "Myths and Legends"
 msgstr "Mitos y leyendas"
 
-#. type: Content of: <h4>
+#. type: Content of: <h3>
 #: ../../skycultures/mongolian/description.en.utf8:82
 msgid "The Great Bear"
 msgstr "El Gran Oso"
@@ -18329,7 +18652,7 @@ msgstr ""
 " va en un movimiento de arriba abajo, es decir, Dubhe/Rata, Merak/Buey, ... "
 "Mizar/Serpiente, Alkaid/Caballo, Mizar/Cabra, ... Merak/Cerdo.]"
 
-#. type: Content of: <img><h4>
+#. type: Content of: <img><h3>
 #: ../../skycultures/mongolian/description.en.utf8:127
 msgid "Shooting stars"
 msgstr "Estrellas fugaces"
@@ -18349,7 +18672,7 @@ msgstr ""
 " acaba de morir. Mientras que los occidentales piden un deseo, los mongoles "
 "dicen: \"¡Uf, no soy yo!\""
 
-#. type: Content of: <img><h4>
+#. type: Content of: <img><h3>
 #: ../../skycultures/mongolian/description.en.utf8:135
 msgid "Neglected Legends"
 msgstr "Leyendas olvidadas"
@@ -18406,7 +18729,7 @@ msgstr ""
 "cultura mongol como todos los números impares. Traen suerte en la religión "
 "budista."
 
-#. type: Content of: <img><h5>
+#. type: Content of: <img><h4>
 #: ../../skycultures/mongolian/description.en.utf8:162
 msgid "Eclipses"
 msgstr "Eclipses"
@@ -18498,7 +18821,7 @@ msgstr ""
 "auténtico, no un espectáculo para los turistas. También tenga en cuenta la "
 "similitud de <em>Raah</em> con el indio <em>Rahu</em>."
 
-#. type: Content of: <img><h5>
+#. type: Content of: <img><h4>
 #: ../../skycultures/mongolian/description.en.utf8:205
 msgid "Cassiopeia (<em>Hun Tavan Od</em>)"
 msgstr "Cassiopeia (<em>Hun Tavan Od</em>)"
@@ -18534,7 +18857,7 @@ msgstr ""
 "cercanos por el resto de sus vidas y serían victoriosos en el momento de las"
 " guerras."
 
-#. type: Content of: <img><p><p><h4>
+#. type: Content of: <img><p><p><h2>
 #: ../../skycultures/mongolian/description.en.utf8:222
 msgid "Other Beliefs Linked to the Sky"
 msgstr "Otras creencias vinculadas al cielo"
@@ -18587,7 +18910,7 @@ msgstr ""
 "sobre esta cosmogonía, todas las observaciones, sugerencias o colaboraciones"
 " son bienvenidas!"
 
-#. type: Content of: <img><p><p><p><p><h3>
+#. type: Content of: <img><p><p><p><p><h2>
 #: ../../skycultures/mongolian/description.en.utf8:248
 msgid "Acknowledgements and Further Reading"
 msgstr "Agradecimientos y lecturas adicionales"
@@ -18666,7 +18989,7 @@ msgstr ""
 "class='external text' title=\"http://souslecieldemongolie.wordpress.com/\" "
 "rel=\"nofollow\">www.souslecieldemongolie.wordpress.com</a> (en francés)."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/navajo/description.en.utf8:1
 msgid "Navajo"
 msgstr "Navajo"
@@ -18741,7 +19064,7 @@ msgstr ""
 " Education Solutions, Inc. basada principalmente en el libro <b>Star Trails-"
 "Navajo</b> de Don Childrey."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/norse/description.en.utf8:1
 msgid "Norse"
 msgstr "Nórdica"
@@ -18764,7 +19087,7 @@ msgstr ""
 "Esta cultura estelar fue aportada por el usuario de Stellarium <i>Jonas "
 "Persson</i>, jonas.persson(at)mna.hkr.se"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/northern_andes/description.en.utf8:1
 msgid "Northern Andes"
 msgstr "Andes del Norte"
@@ -18830,7 +19153,7 @@ msgstr ""
 msgid "Here we tell what we found in the equatorial skies:"
 msgstr "Aquí contamos lo que encontramos en los cielos ecuatoriales:"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/northern_andes/description.en.utf8:11
 msgid "The Sun (Punchao o Wilca)"
 msgstr "El Sol (Punchao o Wilca)"
@@ -19155,7 +19478,7 @@ msgstr ""
 "\"Representaciones ancestrales y colores del cosmos\" (Ministerio de Cultura"
 " y Patrimonio del Ecuador)."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/ojibwe/description.en.utf8:1
 msgid "Ojibwe"
 msgstr "Ojibwe"
@@ -19396,7 +19719,7 @@ msgstr ""
 msgid "Constellation Paintings by A. Lee & W. Wilson."
 msgstr "Pinturas de la constelación por A. Lee y W. Wilson."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/romanian/description.en.utf8:1
 msgid "Romanian"
 msgstr "Rumana"
@@ -19458,7 +19781,7 @@ msgstr ""
 "<strong>Nota</strong>: en la constelación occidental de Orión hay cuatro "
 "constelaciones rumanas tradicionales que se superponen."
 
-#. type: Content of: <p><p><p><h3>
+#. type: Content of: <p><p><p><h2>
 #: ../../skycultures/romanian/description.en.utf8:12
 msgid "External links:"
 msgstr "Enlaces externos:"
@@ -19517,7 +19840,7 @@ msgstr "<a href=\"http://planetariubm.ro/\">PLANETARIUL BAIA MARE – MARAMURES<
 msgid "Thanks to Andrei Dorian Gheorghe and Alastair McBeth – SARM members"
 msgstr "Gracias a Andrei Dorian Gheorghe y Alastair McBeth - miembros de SARM"
 
-#. type: Content of: <p><p><p><h3>
+#. type: Content of: <p><p><p><h2>
 #: ../../skycultures/romanian/description.en.utf8:22
 msgid "Authors:"
 msgstr "Autores:"
@@ -19561,7 +19884,7 @@ msgstr ""
 "tradicionales se publican bajo Creative Commons Attribution-ShareAlike 3.0 "
 "Unported."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/sami/description.en.utf8:1
 msgid "Sami"
 msgstr "Sami"
@@ -19582,13 +19905,6 @@ msgstr ""
 "href=\"http://www.eng.samer.se/\">samer.se</a> y en el artículo de la <a "
 "href=\"http://en.wikipedia.org/wiki/Sami_people\">gente sami en "
 "Wikipedia</a>."
-
-#. type: Content of: <h3>
-#: ../../skycultures/sami/description.en.utf8:8
-#: ../../skycultures/russian_siberian/description.en.utf8:28
-#: ../../skycultures/tukano/description.en.utf8:43
-msgid "Sources"
-msgstr "Fuentes"
 
 #. type: Content of: <p>
 #: ../../skycultures/sami/description.en.utf8:10
@@ -19640,7 +19956,7 @@ msgstr ""
 "subárticas en Eurasia. Una similitud desafortunada es que gran parte de la "
 "cultura se perdió antes de que se registrara correctamente."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/sami/description.en.utf8:26
 msgid "Constellations and Stars"
 msgstr "Constelaciones y estrellas"
@@ -19751,7 +20067,7 @@ msgstr ""
 msgid "Jonas Persson (jonas.persson@physics.org)"
 msgstr "Jonas Persson (jonas.persson@physics.org)"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/sardinian/description.en.utf8:1
 msgid "Sardinian"
 msgstr "Sarda"
@@ -19807,7 +20123,7 @@ msgstr ""
 "Estas constelaciones han sido creadas por el usuario de Stellarium "
 "<i>Giuseppe Putzolu</i>, giuseppe.putzolu(at)gmail.com"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/sardinian/description.en.utf8:13
 msgid "Credits"
 msgstr "Créditos"
@@ -19821,7 +20137,7 @@ msgstr ""
 "Las constelaciones de la cultura sarda son el resultado de una investigación"
 " realizada por Tonino Bussu y Marco Puddu."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/russian_siberian/description.en.utf8:1
 msgid "Russian (Siberian)"
 msgstr "Ruso (siberiano)"
@@ -19923,7 +20239,7 @@ msgstr ""
 msgid "Karpenko, Ju.A. Nazvanija zvezdnogo neba. - M.: Nauka, 1981. - 184 s."
 msgstr "Karpenko, Ju.A. Nazvanija zvezdnogo neba. - M.: Nauka, 1981. - 184 s."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/tongan/description.en.utf8:1
 msgid "Tongan (Tonga)"
 msgstr "Tongano (Tonga)"
@@ -20795,7 +21111,7 @@ msgstr ""
 "Las exhibiciones fueron hechas por Antonio Gumercindo Taques dos Santos "
 "(Ticão) y Youssif Ganthous Filho (youssif@gmail.com)."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/tupi/description.en.utf8:1
 msgid "Tupi-Guarani"
 msgstr "Tupí-Guaraní"
@@ -20827,7 +21143,7 @@ msgstr ""
 "Tupí identificó unas treinta constelaciones, pero el libro solo detalla "
 "siete."
 
-#. type: Content of: <p><h4>
+#. type: Content of: <p><h3>
 #: ../../skycultures/tupi/description.en.utf8:8
 msgid "Ema"
 msgstr "Ema"
@@ -20854,7 +21170,7 @@ msgstr ""
 "visible en el cielo oriental por la noche, lo que indica el comienzo del "
 "invierno en el sur de Brasil y el comienzo de la estación seca en el norte."
 
-#. type: Content of: <p><h4>
+#. type: Content of: <p><h3>
 #: ../../skycultures/tupi/description.en.utf8:13
 msgid "Homem Velho (the Old Man)"
 msgstr "Homem Velho (el Anciano)"
@@ -20899,7 +21215,7 @@ msgstr ""
 "Esta cultura estelar fue aportada por el usuario de Stellarium <i>Paulo "
 "Marcelo Pontes</i>."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:1
 msgid "Vanuatu (Netwar)"
 msgstr "Vanuatu (Netwar)"
@@ -20924,7 +21240,7 @@ msgstr ""
 "similares con otros idiomas de Vanuatu, aunque los nombres y significados "
 "varían en cierta medida."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:4
 msgid "Solar system"
 msgstr "Sistema Solar"
@@ -21016,7 +21332,7 @@ msgstr "En general: Mahau"
 msgid "Aldebaran: Kapaumeta"
 msgstr "Aldebarán: Kapaumeta"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:31
 msgid "Constellations and deep-sky objects"
 msgstr "Constelaciones y objetos del espacio profundo"
@@ -21100,7 +21416,7 @@ msgstr ""
 "Pléyades: Nowaswas Lapnuman - 'jóvenes muchachos de Lapnuman'; también "
 "Neperawen Lapnuman - 'chicas jóvenes de Lapnuman'"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:45
 msgid "Names of objects with unknown position"
 msgstr "Nombres de objetos con posición desconocida"
@@ -21185,7 +21501,7 @@ msgstr ""
 "de Imapul, Nausien de Lamlu, Pierrot Nako Yaru de Lowanatom , Joe Natuman de"
 " Lowkweria."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/western/description.en.utf8:1
 msgid "Western"
 msgstr "Occidental"
@@ -21234,7 +21550,7 @@ msgstr ""
 "tradicionales, excepto en algunos casos donde los nombres tradicionales son "
 "más famosos que las designaciones."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/western/description.en.utf8:10
 msgid "Alternative asterism files for Stellarium"
 msgstr "Archivos de asterismos alternativos para Stellarium"
@@ -21299,7 +21615,7 @@ msgstr ""
 "Observatorio Naval de EE. UU. Y el Instituto de Ciencia del Telescopio "
 "Espacial. Grabados de Johannes Hevelius."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/western_SnT/description.en.utf8:1
 msgid "Sky & Telescope"
 msgstr "Cielo y Telescopio"
@@ -21362,7 +21678,7 @@ msgstr ""
 "title=\"http://www.iau.org/public/constellations\" "
 "rel=\"nofollow\">Información oficial de la constelación de la UAI</a>"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/western_hlad/description.en.utf8:1
 msgid "Western (O.Hlad)"
 msgstr "Occidental (O.Hlad)"
@@ -21439,7 +21755,7 @@ msgstr ""
 "parece al revés con respecto a una figura mitológica, pero HIP 29997, 33694 "
 "estrellas son realmente más brillantes."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/western_hlad/description.en.utf8:33
 msgid "Updates"
 msgstr "Actualizaciones"
@@ -21458,7 +21774,7 @@ msgstr ""
 "Las actualizaciones futuras deberían estar disponibles en <a "
 "href=\"http://sirrah.troja.mff.cuni.cz/~mira/souhvezdi/\">http://sirrah.troja.mff.cuni.cz/~mira/souhvezdi/</a>"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/western_rey/description.en.utf8:1
 msgid "Western: H.A. Rey"
 msgstr "Occidental: H.A. Rey"
@@ -21497,7 +21813,7 @@ msgstr ""
 "su respuesta a este problema en 1952 con el libro <em>Las estrellas: una "
 "nueva forma de verlos</em>."
 
-#. type: Content of: <h4>
+#. type: Content of: <h2>
 #: ../../skycultures/western_rey/description.en.utf8:22
 msgid "The Constellations"
 msgstr "Las Constelaciones"
@@ -21535,7 +21851,7 @@ msgstr ""
 "ortografía utilizada en su libro. Además, las estrellas nombradas aquí están"
 " limitadas a las incluidas en el libro."
 
-#. type: Content of: <h4>
+#. type: Content of: <h2>
 #: ../../skycultures/western_rey/description.en.utf8:37
 msgid "Rey's Figures and the Classic Constellations"
 msgstr "Las figuras de Rey y las constelaciones clásicas"
@@ -21640,3 +21956,133 @@ msgstr ""
 "complemento instalable por el usuario aportado por Mike Richards. Ha sido "
 "reelaborado después de la 41a reimpresión y completado con esta descripción "
 "por Georg Zotti."
+
+#. type: Content of: <h1>
+#: ../../skycultures/zulu/description.en.utf8:1
+msgid "Zulu"
+msgstr "Zulu"
+
+#. type: Content of: <p>
+#: ../../skycultures/zulu/description.en.utf8:2
+msgid ""
+"A wide spread African concept is that the sky is a solid dome, perhaps made "
+"of blue rock resting on the Earth, upon which the Sun moves."
+msgstr ""
+"Un concepto africano muy difundido es que el cielo es una cúpula sólida, "
+"quizás hecha de roca azul que descansa sobre la Tierra, sobre la cual se "
+"mueve el Sol."
+
+#. type: Content of: <h2>
+#: ../../skycultures/zulu/description.en.utf8:4
+msgid "Starlore"
+msgstr "Leyenda estelar"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:6
+msgid "<b>isiLimela &mdash; Pleiades:</b>"
+msgstr "<b>isiLimela &mdash; Pléyades:</b>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:6
+msgid ""
+"The Pleiades is a well-known cluster of stars, and normally six or seven "
+"bright ones can be seen. Many of the Southern African groups believe that "
+"when they first see the Pleiades in the early morning (August or early "
+"September), that the start of the planting season has come."
+msgstr ""
+"Las Pléyades es un cúmulo de estrellas bien conocido, y normalmente se "
+"pueden ver seis o siete brillantes. Muchos de los grupos del sur de África "
+"creen que cuando ven las Pléyades por primera vez temprano en la mañana "
+"(agosto o principios de septiembre), ha llegado el comienzo de la temporada "
+"de siembra."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:7
+msgid "<b>oNdwenjana &mdash; Orion&#8217;s Sword:</b>"
+msgstr "<b>oNdwenjana &mdash; Espada de Orión:</b>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:7
+msgid ""
+"One of the descriptions of Orion&#8217;s Sword is as a long-stemmed flower, "
+"such as a lily.  However the meaning of this group of stars isn't completely"
+" clear, because &#8220;oNdwenjana&#8221; could also be another tall object "
+"like a tree or a man."
+msgstr ""
+"Una de las descripciones de la Espada de Orión es como una flor de tallo "
+"largo, como un lirio. Sin embargo, el significado de este grupo de estrellas"
+" no está del todo claro, porque &#8220;oNdwenjana&#8221; también podría ser "
+"otro objeto alto como un árbol o un hombre."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:8
+msgid "<b>Impanbana &mdash; Orion&#8217;s Belt:</b>"
+msgstr "<b>Impanbana &mdash; Cinturón de Orión:</b>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:8
+msgid ""
+"Orion&#8217;s Belt is a combination of a crossing, dogs and wild hogs.  "
+"Seeing the stars of Orion&#8217;s Belt reminded hunters to be very careful "
+"during their hunting trips, as it marked the mating season of the wild hogs."
+msgstr ""
+"El cinturón de Orión es una combinación de cruce, perros y jabalíes. Ver las"
+" estrellas del Cinturón de Orión recordó a los cazadores que deben tener "
+"mucho cuidado durante sus viajes de caza, ya que marca la temporada de "
+"apareamiento de los jabalíes."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:9
+msgid "<b>isAndulela &mdash; Canopus:</b>"
+msgstr "<b>isAndulela &mdash; Canopus:</b>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:9
+msgid ""
+"Canopus is a bright star that appeared at harvest time and might also be "
+"connected to the Red-chested Cuckoo. It was also used as a guide for "
+"shepherds, marking the time to begin the journey to new grazing lands during"
+" the dry season."
+msgstr ""
+"Canopus es una estrella brillante que apareció en el momento de la cosecha y"
+" también podría estar conectado con el cuco de pecho rojo. También se usaba "
+"como guía para los pastores, marcando el momento de iniciar el viaje hacia "
+"nuevos pastizales durante la estación seca."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:10
+msgid "<b>Umthala Wezinkanyezi &mdash; The Milky Way:</b>"
+msgstr "<b>Umthala Wezinkanyezi &mdash; La Vía Láctea:</b>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:10
+msgid ""
+"Umthala Wezinkanyezi means &#8220;the stream of stars.&#8221; This is "
+"related to the way the Nguni people used to fight before Shaka Zulu&#8217;s "
+"revolutionary close-combat strategy. The strong warriors used to throw "
+"spears like javelin and the stream of spears would be seen in the air."
+msgstr ""
+"Umthala Wezinkanyezi significa &#8220;la corriente de estrellas.&#8221; Esto"
+" está relacionado con la forma en que el pueblo Nguni solía luchar antes de "
+"la revolucionaria estrategia de combate cuerpo a cuerpo de Shaka Zulu. Los "
+"fuertes guerreros solían arrojar lanzas como jabalinas y la corriente de "
+"lanzas se veía en el aire."
+
+#. type: Content of: <p>
+#: ../../skycultures/zulu/description.en.utf8:14
+msgid ""
+"This sky culture was created by Suki Lock for the South African Astronomical"
+" Observatory <a href=\"http://www.saao.ac.za/\">(SAAO)</a>, based on "
+"information supplied by Auke Slotegraaf.  They were modified using inputs "
+"and information from Themba Matomela, Thembela Mantungwa and Mdumiseni "
+"Nxumalo. The project was initiated by Sivuyile Manxoyi after having "
+"discussions with Prof Jarita Holbrook and Prof Kevin Snedegar on African "
+"Cultural astronomy."
+msgstr ""
+"Esta cultura del cielo fue creada por Suki Lock para el Observatorio "
+"Astronómico de Sudáfrica <a href=\"http://www.saao.ac.za/\">(SAAO)</a>, "
+"según la información proporcionada por Auke Slotegraaf. Se modificaron "
+"utilizando aportes e información de Themba Matomela, Thembela Mantungwa y "
+"Mdumiseni Nxumalo. El proyecto fue iniciado por Sivuyile Manxoyi después de "
+"tener conversaciones con el profesor Jarita Holbrook y el profesor Kevin "
+"Snedegar sobre astronomía cultural africana."

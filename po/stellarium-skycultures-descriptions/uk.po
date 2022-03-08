@@ -5,16 +5,17 @@
 # 
 # Translators:
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2021
-# Yuri Chornoivan <yurchor@ukr.net>, 2021
+# cardinot <mcardinot@gmail.com>, 2022
+# Yuri Chornoivan <yurchor@ukr.net>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-01-24 19:59+0700\n"
+"POT-Creation-Date: 2022-03-07 19:14+0700\n"
 "PO-Revision-Date: 2020-01-06 16:35+0000\n"
-"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2021\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/stellarium/teams/80998/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr ""
 "Language: uk\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/anutan/description.en.utf8:1
 msgid "Anutan"
 msgstr "Анутанська"
@@ -48,7 +49,7 @@ msgstr ""
 "паногра-порау». Зірки без навз, які не використовуються із метою навігації "
 "називають «петуу-варе» («оманливі», «невизначні» або «невиразні»)."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/anutan/description.en.utf8:9
 #: ../../skycultures/tongan/description.en.utf8:43
 msgid "Nomenclature"
@@ -214,8 +215,9 @@ msgstr "Каавей"
 msgid "Octopus Tentacle"
 msgstr "Щупальце восьминога"
 
-#. type: Content of: <table><tr>
+#. type: Content of: <p><table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:20
+#: ../../skycultures/egyptian_dendera/description.en.utf8:11
 msgid "Aries"
 msgstr "Овен"
 
@@ -414,6 +416,7 @@ msgstr "Ранкова зірка"
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:83
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:377
 #: ../../skycultures/boorong/description.en.utf8:36
+#: ../../skycultures/egyptian_dendera/description.en.utf8:13
 #: ../../skycultures/lokono/description.en.utf8:26
 #: ../../skycultures/tongan/description.en.utf8:58
 msgid "Venus"
@@ -434,7 +437,7 @@ msgstr "Ранкова зірка (?)"
 msgid "Venus(?)"
 msgstr "Венера (?)"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/anutan/description.en.utf8:37
 #: ../../skycultures/greek_almagest/description.en.utf8:486
 #: ../../skycultures/greek_farnese/description.en.utf8:293
@@ -467,7 +470,7 @@ msgstr ""
 " Tokelau, Tonga, Tuvalu, Uvea, Outliers\" Archipelago Press, the University "
 "of California : ISBN 9780959378771."
 
-#. type: Content of: <p><h3>
+#. type: Content of: <p><h2>
 #: ../../skycultures/anutan/description.en.utf8:45
 #: ../../skycultures/arabic_al-sufi/description.en.utf8:69
 #: ../../skycultures/arabic_indigenous/description.en.utf8:32
@@ -501,7 +504,7 @@ msgstr ""
 #. type: Content of: <h1>
 #: ../../skycultures/arabic_al-sufi/description.en.utf8:1
 msgid "Arabic (Al-Sufi)"
-msgstr ""
+msgstr "Арабська (Аль-Суфі)"
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic_al-sufi/description.en.utf8:2
@@ -793,6 +796,7 @@ msgstr ""
 #: ../../skycultures/arabic_al-sufi/description.en.utf8:66
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:522
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:464
+#: ../../skycultures/egyptian_dendera/description.en.utf8:44
 #: ../../skycultures/greek_almagest/description.en.utf8:496
 #: ../../skycultures/greek_farnese/description.en.utf8:299
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:288
@@ -821,7 +825,7 @@ msgstr ""
 "Картину зоряного неба «Книги нерухомих зірок» було створено і додано до "
 "Stellarium Халідом Аль-Аджаджі: turath.alfalak@gmail.com"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/arabic_al-sufi/description.en.utf8:72
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:151
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:77
@@ -904,9 +908,9 @@ msgstr ""
 #. type: Content of: <h1>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:1
 msgid "Arabic (Arabian Peninsula)"
-msgstr ""
+msgstr "Арабська (Аравійський півострів)"
 
-#. type: Content of: <h4>
+#. type: Content of: <h2>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:2
 #: ../../skycultures/arabic_indigenous/description.en.utf8:2
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:2
@@ -1116,12 +1120,13 @@ msgstr ""
 "Al-Ajaji, Khalid, Sharḥ Maʾthūrāt al-Ḫalāwī al-falakiyah, Explanation of al-"
 "Ḫalāwī astronomy poems, Riyadh, Saudi Arabia, 2018."
 
-#. type: Content of: <p><h3>
+#. type: Content of: <p><h2>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:35
 #: ../../skycultures/arabic_indigenous/description.en.utf8:24
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:69
 #: ../../skycultures/belarusian/description.en.utf8:8
 #: ../../skycultures/chinese_contemporary/description.en.utf8:5
+#: ../../skycultures/egyptian_dendera/description.en.utf8:23
 #: ../../skycultures/macedonian/description.en.utf8:4
 #: ../../skycultures/mongolian/description.en.utf8:15
 #: ../../skycultures/tupi/description.en.utf8:4
@@ -2767,7 +2772,7 @@ msgstr "al-Naʿāyem 2"
 msgid "al-Naayem 2"
 msgstr "al-Naayem 2"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:145
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:71
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:539
@@ -2775,6 +2780,7 @@ msgstr "al-Naayem 2"
 #: ../../skycultures/boorong/description.en.utf8:220
 #: ../../skycultures/chinese/description.en.utf8:2980
 #: ../../skycultures/dakota/description.en.utf8:57
+#: ../../skycultures/egyptian_dendera/description.en.utf8:47
 #: ../../skycultures/greek_almagest/description.en.utf8:505
 #: ../../skycultures/inuit/description.en.utf8:31
 #: ../../skycultures/lokono/description.en.utf8:377
@@ -2784,6 +2790,7 @@ msgstr "al-Naayem 2"
 #: ../../skycultures/ojibwe/description.en.utf8:48
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:59
 #: ../../skycultures/western_rey/description.en.utf8:78
+#: ../../skycultures/zulu/description.en.utf8:13
 msgid "Authors"
 msgstr "Автори"
 
@@ -2859,7 +2866,7 @@ msgstr ""
 #. type: Content of: <h1>
 #: ../../skycultures/arabic_indigenous/description.en.utf8:1
 msgid "Arabic (Indigenous)"
-msgstr ""
+msgstr "Арабська (тубільна)"
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic_indigenous/description.en.utf8:3
@@ -3064,7 +3071,7 @@ msgstr ""
 #. type: Content of: <h1>
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:1
 msgid "Arabic (Lunar Mansions)"
-msgstr ""
+msgstr "Арабська (місячні станції)"
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:3
@@ -3710,7 +3717,7 @@ msgstr ""
 msgid "[12]: Laffitte, Roland, Le Ciel des Arabes, Geuthner, Paris 2012"
 msgstr "[12]: Laffitte, Roland, Le Ciel des Arabes, Geuthner, Paris 2012"
 
-#. type: Content of: <h3>
+#. type: Content of: <h1>
 #: ../../skycultures/aztec/description.en.utf8:1
 msgid "Aztec"
 msgstr "Ацтецька"
@@ -3798,7 +3805,7 @@ msgstr ""
 "Тепер наведемо деякі пояснення щодо ацтецьких сузір’їв, які можна побачити у"
 " Stellarium."
 
-#. type: Content of: <h4>
+#. type: Content of: <h3>
 #: ../../skycultures/aztec/description.en.utf8:10
 msgid "<em>Mamalhuaztli</em>"
 msgstr "<em>Мамалуацтлі</em>"
@@ -3818,7 +3825,7 @@ msgstr ""
 "тобто «зв’язка років», і збігалося з початком нового року, який називався "
 "<em>зіухтцитцкуїло</em>/"
 
-#. type: Content of: <h4>
+#. type: Content of: <h3>
 #: ../../skycultures/aztec/description.en.utf8:13
 msgid "<em>Tianquiztli</em>"
 msgstr "<em>Тіанкуїцтлі</em>"
@@ -3844,7 +3851,7 @@ msgid ""
 msgstr ""
 "У сучасній Мексиці стихійний або вуличний ринок називають <em>Тіангіс</em>."
 
-#. type: Content of: <h4>
+#. type: Content of: <h3>
 #: ../../skycultures/aztec/description.en.utf8:17
 msgid "<em>Citlaltlachtli</em>"
 msgstr "<em>Читлалтлачтлі</em>"
@@ -3862,7 +3869,7 @@ msgstr ""
 "м’яч з природного каучуку. Казали, що рухові м’яча ігровим полем відповідає "
 "рух Сонця і Місяця."
 
-#. type: Content of: <h4>
+#. type: Content of: <h3>
 #: ../../skycultures/aztec/description.en.utf8:19
 msgid "<em>Xonecuilli</em>"
 msgstr "<em>Зонекуїллі</em>"
@@ -3898,7 +3905,7 @@ msgstr ""
 msgid "<em>xonecuilli</em>"
 msgstr "<em>зонекуїллі</em>"
 
-#. type: Content of: <h4>
+#. type: Content of: <h3>
 #: ../../skycultures/aztec/description.en.utf8:24
 msgid "<em>Citlalcolotl</em>"
 msgstr "<em>Читлалколотль</em>"
@@ -3932,7 +3939,7 @@ msgstr ""
 "також є зображення скорпіона. У цьому кодексі зображено фігури тварин, які "
 "звисають з тіла Небесного Дракона."
 
-#. type: Content of: <img><p><p><p><p><h3>
+#. type: Content of: <img><p><p><p><p><h2>
 #: ../../skycultures/aztec/description.en.utf8:29
 #: ../../skycultures/mongolian/description.en.utf8:237
 msgid "Conclusion"
@@ -3951,7 +3958,7 @@ msgstr ""
 "коментарям та/або доповненням, метою яких є збереження знань та суті "
 "ацтецької культури."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/aztec/description.en.utf8:31
 #: ../../skycultures/belarusian/description.en.utf8:31
 #: ../../skycultures/chinese/description.en.utf8:2969
@@ -4212,8 +4219,9 @@ msgstr ""
 "містяться правила доповнення календаря, правила для сонячного годинника і "
 "правила для оміни."
 
-#. type: Content of: <h2>
+#. type: Content of: <h3>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:14
+#: ../../skycultures/egyptian_dendera/description.en.utf8:24
 msgid "Zodiac"
 msgstr "Зодіак"
 
@@ -4269,9 +4277,10 @@ msgstr ""
 "MUL.APIN не показано у створених нами даних картини зоряного неба; сузір'я "
 "на шляху Місяця не позначено."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:31
 #: ../../skycultures/chinese_medieval/description.en.utf8:20
+#: ../../skycultures/egyptian_dendera/description.en.utf8:6
 msgid "Planets"
 msgstr "Планети"
 
@@ -5062,6 +5071,7 @@ msgstr ""
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:382
+#: ../../skycultures/egyptian_dendera/description.en.utf8:16
 #: ../../skycultures/tongan/description.en.utf8:59
 msgid "Mars"
 msgstr "Марс"
@@ -5075,8 +5085,9 @@ msgstr ""
 "<sup>ЗІРКА</sup>СТІЙКА&middot;&quot;ДИКА&middot;ВІВЦЯ&quot; "
 "(<i>КАДЖАМАНУ</i>, Сатурн), змінює своє місце і перетинає небо"
 
-#. type: Content of: <table><tbody><tr><td>
+#. type: Content of: <p><table><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:387
+#: ../../skycultures/egyptian_dendera/description.en.utf8:17
 msgid "Saturn"
 msgstr "Сатурн"
 
@@ -5092,8 +5103,9 @@ msgstr ""
 "Меркурій), називається на честь <sup>БОГА</sup>Нінурта, на сході або на "
 "заході, один місяць з'являється, один місяць зникає"
 
-#. type: Content of: <table><tbody><tr><td>
+#. type: Content of: <p><table><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:393
+#: ../../skycultures/egyptian_dendera/description.en.utf8:15
 msgid "Mercury"
 msgstr "Меркурій"
 
@@ -5328,8 +5340,9 @@ msgstr ""
 "Krebernik) для праць Rencontre Assyriologique Internationale 2018). Див. "
 "розділ «Інформація для подальшого ознайомлення», який наведено нижче."
 
-#. type: Content of: <h2>
+#. type: Content of: <p><p><h3>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:513
+#: ../../skycultures/egyptian_dendera/description.en.utf8:36
 msgid "Sources / Further Reading"
 msgstr "Джерела/Додаткова інформація"
 
@@ -6359,7 +6372,7 @@ msgstr "Автором приготування ліній вавилонськ�
 msgid "<em>Susanne M Hoffmann: service@uhura-uraniae.com </em>"
 msgstr "<em>Susanne M Hoffmann: service@uhura-uraniae.com </em>"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/belarusian/description.en.utf8:1
 msgid "Belarusian"
 msgstr "Білоруська"
@@ -6631,7 +6644,7 @@ msgstr ""
 "1857 році, що вони «горді з того, що знають астрономію краще за будь-яке "
 "інше плем’я»."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/boorong/description.en.utf8:11
 msgid "Constellations and other celestial objects"
 msgstr "Сузір’я та інші небесні об’єкти"
@@ -6788,6 +6801,7 @@ msgstr "Білий какаду із жовтим гребінцем; вишто
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:71
+#: ../../skycultures/egyptian_dendera/description.en.utf8:14
 #: ../../skycultures/lokono/description.en.utf8:46
 msgid "Jupiter"
 msgstr "Юпітер"
@@ -6805,6 +6819,7 @@ msgstr "День; Сонце"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:76
 #: ../../skycultures/chinese/description.en.utf8:66
+#: ../../skycultures/egyptian_dendera/description.en.utf8:11
 #: ../../skycultures/lokono/description.en.utf8:16
 #: ../../skycultures/mongolian/description.en.utf8:141
 #: ../../skycultures/tongan/description.en.utf8:53
@@ -6921,6 +6936,7 @@ msgstr "Кволл"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:116
 #: ../../skycultures/chinese/description.en.utf8:67
+#: ../../skycultures/egyptian_dendera/description.en.utf8:12
 #: ../../skycultures/lokono/description.en.utf8:21
 #: ../../skycultures/tongan/description.en.utf8:52
 msgid "Moon"
@@ -7227,7 +7243,7 @@ msgstr ""
 "href=\"http://www.terrastro.com\" class='external text' "
 "title=\"http://www.terrastro.com\" rel=\"nofollow\">Alex Cherney</a></i>."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/chinese/description.en.utf8:1
 msgid "Chinese Traditional Sky Culture"
 msgstr "Традиційна китайська картина зоряного неба"
@@ -7326,7 +7342,7 @@ msgstr ""
 "Якщо після назви зірки вказано «?», дані було додано за книгою <i>Історія "
 "спостереження неба у Китаї</i>, але їх не було належним чином перевірено."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/chinese/description.en.utf8:11
 msgid "Sun, Moon and Planets"
 msgstr "Сонце, Місяць і планети"
@@ -7371,7 +7387,7 @@ msgstr ""
 "Із Сонця, Місяця і п'яти планет складається перелік Сім Світил (китайською: "
 "七曜, піньїнь: qīyào), який відповідає п'яти базовим елементам та інь з янь."
 
-#. type: Content of: <p><h3>
+#. type: Content of: <p><h2>
 #: ../../skycultures/chinese/description.en.utf8:17
 msgid "Xingguans"
 msgstr "Сіньгуані"
@@ -7495,7 +7511,7 @@ msgstr ""
 "<em>Астрономічна карта із «Повного вивчення астрономічних інструментів» ( "
 "р.)"
 
-#. type: Content of: <p><h3>
+#. type: Content of: <p><h2>
 #: ../../skycultures/chinese/description.en.utf8:30
 msgid "Three Enclosures"
 msgstr "Три огорожі"
@@ -7604,7 +7620,7 @@ msgstr ""
 "<a href=\"https://en.wikipedia.org/wiki/Heavenly_Market_enclosure\">Огорожа "
 "Небесного Ринку (Вікіпедія)</a>"
 
-#. type: Content of: <p><h3>
+#. type: Content of: <p><h2>
 #: ../../skycultures/chinese/description.en.utf8:47
 msgid "Twenty-Eight Mansions"
 msgstr "Двадцять вісім станцій"
@@ -7727,7 +7743,7 @@ msgstr ""
 "перебуває на півдні, Лазуровий Дракон — на сході, Чорна Черепаха — на "
 "півночі, а Білий Тигр — на заході."
 
-#. type: Content of: <p><h3>
+#. type: Content of: <p><h2>
 #: ../../skycultures/chinese/description.en.utf8:58
 msgid "The List of The Twenty-Eight Mansions (J2000)"
 msgstr "Список двадцяти восьми областей (J2000)"
@@ -9690,7 +9706,7 @@ msgstr ""
 "Зауваження 2: васальні сіньгуані не є окремими сіньгуанями, а є частинами "
 "сіньгуанів, васалами яких вони є."
 
-#. type: Content of: <p><h3>
+#. type: Content of: <p><h2>
 #: ../../skycultures/chinese/description.en.utf8:2901
 msgid "Deep Space Objects"
 msgstr "Віддалені об’єкти"
@@ -9931,7 +9947,7 @@ msgstr ""
 "даних книги <i>Порівняння китайських і західноєвропейських зоряних карт і "
 "каталогів 1950.0</i>, автором якої є І Шитон."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/chinese_contemporary/description.en.utf8:1
 msgid "Chinese Contemporary"
 msgstr "Сучасна китайська"
@@ -9965,10 +9981,13 @@ msgstr ""
 "небесну сферу на окремі області, тому їх вже не використовують із "
 "астрономічною метою."
 
-#. type: Content of: <h3>
+#. type: Content of: <p><h2>
 #: ../../skycultures/chinese_contemporary/description.en.utf8:9
-msgid "star names"
-msgstr "назви зірок"
+#: ../../skycultures/greek_almagest/description.en.utf8:45
+#: ../../skycultures/western/description.en.utf8:7
+#: ../../skycultures/western_SnT/description.en.utf8:9
+msgid "Star names"
+msgstr "Назви зірок"
 
 #. type: Content of: <p>
 #: ../../skycultures/chinese_contemporary/description.en.utf8:11
@@ -10069,7 +10088,7 @@ msgstr ""
 "Лінії астеризмів та традиційні китайські назви зірок засновано на "
 "<i>Традиційній китайській картині зоряного неба для Stellarium</i>."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/chinese_medieval/description.en.utf8:1
 msgid "Chinese Medieval"
 msgstr "Середньовічна китайська"
@@ -10093,7 +10112,7 @@ msgstr ""
 " зірку, якщо таку визначено. Межі двадцяти восьми місячних областей "
 "визначено для 1052 р. н. е."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/chinese_medieval/description.en.utf8:5
 msgid "Medieval Xingguans"
 msgstr "Середньовічні сіньгуані"
@@ -10179,7 +10198,7 @@ msgstr ""
 msgid "<em>Xinyixiangfayao Star Map(1088 AD)</em>"
 msgstr "<em>Зоряну карту Сіньсяньфаяо (1088 р. н. е.)</em>"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/chinese_medieval/description.en.utf8:14
 msgid "Restore Sky Map"
 msgstr "Відновлена карта неба"
@@ -10340,7 +10359,7 @@ msgstr ""
 "<a href=\"http://wwt.china-vo.org/why/chineseheaven.htm\">Китайська картина "
 "неба у спільноті WWT, Пекін (китайською)</a>"
 
-#. type: Content of: <p><p><ul><h3>
+#. type: Content of: <p><p><ul><h2>
 #: ../../skycultures/chinese_medieval/description.en.utf8:38
 msgid "Reference"
 msgstr "Посилання"
@@ -10385,7 +10404,7 @@ msgstr ""
 "Сювея</i> (孙殳玮).  <a "
 "href=\"mailto:sunshuwei.hi@foxmail.com\">sunshuwei.hi@foxmail.com</a>"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/dakota/description.en.utf8:1
 msgid "Dakota"
 msgstr "Дакота"
@@ -10419,7 +10438,7 @@ msgstr ""
 "Star Knowledge</i></b>. Також ви можете знайти постери із картою зоряного "
 "неба д(л)акота, планісфери д(л)акота, календар та інші ресурси."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/dakota/description.en.utf8:12
 #: ../../skycultures/ojibwe/description.en.utf8:5
 msgid "Celestial Objects"
@@ -10677,7 +10696,7 @@ msgstr ""
 "Зв’яжіться із A. Lee (aslee@stcloudstate.edu), якщо вам потрібна додаткова "
 "інформація."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/egyptian/description.en.utf8:1
 msgid "Egyptian"
 msgstr "Єгипетська"
@@ -10807,6 +10826,311 @@ msgid "This sky culture was updated by misibacsi (names of planets)"
 msgstr "Цю картину зоряного неба було оновлено misibacsi (назви планет)"
 
 #. type: Content of: <h1>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:1
+msgid "Egyptian &mdash; Dendera"
+msgstr "Єгипетська — Дендера"
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:2
+msgid ""
+"The sculptured Dendera zodiac (or Denderah zodiac) is a widely known "
+"Egyptian bas-relief from the ceiling of the pronaos (or portico) of a chapel"
+" dedicated to Osiris in the Hathor temple at Dendera. This chapel was begun "
+"in the late Ptolemaic period when Egypt was ruled by (Greek) successors of "
+"Alexander the Great (305-30). Its <i>pronaos</i> (a hall in front of the "
+"holy chamber) was added by the Roman emperor Tiberius (14-37 CE). This led "
+"Jean-François Champollion (18th century) to date the relief to the Greco-"
+"Roman period (while most of his contemporaries believed it to be of a "
+"millennium earlier because of the Egyptian style of the figures - this is "
+"not believed anymore). Today, French archaeologists date it to exactly 54 "
+"BCE [1].  The relief is now on display at the Musée du Louvre, Paris "
+"(France)."
+msgstr ""
+"Вирізьблений Дендерський зодіак (або зодіак Дендери) — широковідомий "
+"єгипетський барельєф зі стел пронаоса (або портика) каплиці, яку присвячено "
+"Озірісу у храмі Хатор у Дендері. Будівництво каплиці було започатковано у "
+"період пізніх Птолемеїв, коли Єгиптом правили (грецькі) наступники "
+"Олександра Великого (305-30 рр. до н. е.). Його <i>пронаос</i> (передпокій "
+"перед священною кімнатою) було додано під час правління римського імператора"
+" Тиберія (14-37 н. е.). Жан-Франсуа Шамполіон (18-те ст.) датував рельєф "
+"греко-римським періодом (хоча більшість його сучасників вважали, що він на "
+"тисячоліття давніший через єгипетський стиль фігур — така думка втратила "
+"актуальність). Сьогодні, французькі археологи датують його точно 54 р. до н."
+" е. [1]. Рельєф можна побачити у музеї Лувру, Париж (Франція)."
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:3
+msgid ""
+"The temple in (today's) Egypt probably dates to the Roman (or Late Greek) "
+"time of Egypt and, thus, does not show the original Egyptian sky but a "
+"mixture of Greco-Roman, Egyptian and Babylonian figures, all drawn in an "
+"Egyptian style."
+msgstr ""
+"Храм у (сучасному) Єгипті, ймовірно, датується римською (або пізньогрецькою)"
+" добою в історії Єгипта, отже, там показано не власну єгипетську картину "
+"зоряного неба, а суміш греко-римських, єгипетських та вавилонських "
+"зображень, які намальовано в єгипетському стилі."
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:5
+msgid ""
+"<i>Photograph for the display in Musée du Louvre (Paris), Public Domain/ "
+"CC0. The plate is 255 x 253 cm in size.</i>"
+msgstr ""
+"<i>Фотографія для показу музеї Лувру (Париж), Public Domain/CC0. Пластина "
+"розміром 255 x 253 см.</i>"
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:7
+msgid ""
+"The planets are depicted as deities in their \"standard position\". As "
+"planets move, they can only be presented in the sky by defining fixed "
+"positions where the figurative representation is found in every celestial "
+"map, every star list and catalogue."
+msgstr ""
+"Планети зображень як божества у «стандартній позиції». Оскільки планети "
+"рухаються, зобразити їх на небі можна лише вибравши фіксовані позиції, де "
+"зображення у формі фігури буде показано на будь-якій карті неба, у будь-"
+"якому списку чи каталозі зірок."
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:9
+msgid "These standard positions:"
+msgstr "Стандартні позиції:"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:12
+msgid "Taurus"
+msgstr "Телець"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:13
+msgid "Pisces"
+msgstr "Риби"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:14
+msgid "Cancer (or betw. Cnc and Leo)"
+msgstr "Рак (або між Раком і Левом)"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:15
+msgid "Virgo"
+msgstr "Діва"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:16
+msgid "Capricornus"
+msgstr "Козоріг"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:17
+msgid "Libra"
+msgstr "Ваги"
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:19
+msgid ""
+"These positions are equal to the \"secret places\" in Babylonian astrology "
+"and the \"hypsomata\" (exaltation points) in Greek astrology."
+msgstr ""
+"Ці позиції збігаються із «таємними місцями» у вавилонській астрології та "
+"«гіпсоматами» (точками піднесення) у грецькій астрології."
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:21
+msgid ""
+"Additionally, the equinoxes are marked with great disks: One in Libra and "
+"one Aries."
+msgstr ""
+"Крім того, великими дисками позначено рівнодення — одне у Терезах і одне в "
+"Овні."
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:25
+msgid ""
+"The zodiac came to Greece from Babylonian sources. It is unknown whether or "
+"not the Egyptians had similar figures: The origin of the zodiac is the path "
+"of the Moon and was, thus, important for the Egyptian calendar, too. "
+"However, the zodiac depicted in Dendera is definitely the Greek (partially "
+"misunderstood) interpretation of the Babylonian one."
+msgstr ""
+"Зодіак потрапив до Греції з вавилонських джерел. Втім, невідомо, чи були у "
+"єгиптян подібні малюнки: зодіак походить від шляху Місяця, отже, був "
+"важливий також і для єгипетського календаря. Втім, зображений у Дендері "
+"зодіак є, очевидно, грецькою (частково помилковою) інтерпретацією "
+"вавилонського."
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:26
+msgid ""
+"The Zodiac is the Babylonian one with the semi-exception of Pisces: Pisces "
+"are depicted as two fish which is never found in Babylon and only an "
+"analogon is known in Late Babylonian epoch in the city of Uruk. In Uruk, the"
+" constellation was changed to the constellation of the Swallow-Fish "
+"connecting a swallow and a fish. In contrast, in Babylon it has always been "
+"\"The Tails of the Giant Swallow\" (Steele 2018)."
+msgstr ""
+"Зодіак є вавилонським за одним винятком у Рибах: Риби зображень як дві риби "
+"— такого ніде не трапляється у вавилонських джерелах. Єдиний аналог у "
+"пізньовавилонську епоху можна знайти у місті Урук. В Уруці сузір'я було "
+"змінено на сузір'я Ластівки-Риби, де ластівка поєднувалася із рибою. У "
+"Вавилоні ж це завжди були «Хвости Гігантської Ластівки» (Штееле, 2018 р.)."
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:27
+msgid ""
+"The other constellations of the zodiac are the Babylonian versions, "
+"partially egyptized. Virgo is depicted as the Babylonian Goddess Shala with "
+"the Ear of Grain, Capricornus as a Goat-Fish accompanying the Babylonian god"
+" of witchcraft (Aquarius), Sagittarius as the Babylonian god Pabilsang. "
+"Scorpion, Aries and Cancer leave rather no room for interpretation. Leo is "
+"depicted as a usual lion but carries the Egyptian queen Berenice (whose name"
+" was given to the constellation Coma Berenices) at his tail. Gemini are not "
+"depicted as Twins but as a couple, the Bull is not halved."
+msgstr ""
+"Інші сузір'я зодіаку є вавилонськими версіями, частково єгиптизованими. Діву"
+" зображено як вавилонську богиню Шалу із колоском пшениці, Козорога "
+"зображень як козлорибу, поряд з якою розташовано вавилонського бога чар "
+"(Водолія), Стрілець — вавилонський бог Пабілсанг. Зображення Скорпіон, Овен "
+"та Рак ідентифікуються однозначно. Лева зображено як звичайного лева, але на"
+" його хвості зображено єгипетську царівну Вероніку (ім'я якої носить сузір'я"
+" Волосся Вероніки). Близнюків зображень не як двійню, а як різностатеву "
+"пару, Бика не обрізано наполовину."
+
+#. type: Content of: <p><p><h3>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:28
+msgid "Outside the Zodiac"
+msgstr "Поза Зодіаком"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:29
+msgid ""
+"The rest of the sky also shows a mixture of several cultures: The hippo "
+"goddess who guards the Ox Thigh is a clearly Egyptian constellation. "
+"Interestingly, there is a desert fox and a sheep next to the ox thigh which "
+"refers to same positions in the sky as the Babylonian constellations of the "
+"Fox and the Ewe."
+msgstr ""
+"На решті нема показано суміш різних картин зоряного неба: богиня-гіпопотам, "
+"яка охороняє Стегно Бика, очевидно, є єгипетським сузір'ям. Цікаво, що поряд"
+" із стегном бика зображено пустельного лиса та вівцю, що збігається зі "
+"позиціями вавилонських сузір'їв Лисиці та Вівці."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:30
+msgid ""
+"In contrast to these native Egyptian constellations, there are also native "
+"Sumerian ones that are depicted in an Egyptized way: This is marked in the "
+"\"Translation\" of the Stellarium labels."
+msgstr ""
+"Окрім цих єгипетських сузір'їв, маємо шумерські, але зображені у єгипетський"
+" спосіб. Такі сузір'я позначено у «перекладі» міток Stellarium."
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:31
+msgid ""
+"Interestingly, this depiction explains several Greek names of single stars: "
+"e.g. at the position of Capella, there is a whitish Goat in the Dendera "
+"ceiling, and at the position of the star Canopus whose name is already "
+"attested in Ptolemy's Almagest, there is a Horus-falcon on a canopy jar. It "
+"suggests that these were originally Egyptian images that have been "
+"transformed to star names in a later epoch in order to commemorate the "
+"outdated constellations."
+msgstr ""
+"Цікаво, що у цих зображеннях можна знайти пояснення деяким грецьким назвам "
+"окремих зірок. Наприклад, у позиції Капелли на стелі каплиці у Дендері "
+"зображено білого Козла, а у позиції зірки Канопус, назву якої засвідчено вже"
+" у «Альмагесті» Птолемея, маємо Гора-сокола із глеком. Це вказує на те, що "
+"спочатку це були єгипетські зображення, які було перетворено на назви зірок "
+"у пізнішу епоху на згадку про вже застарілі сузір'я."
+
+#. type: Content of: <h3>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:33
+#: ../../skycultures/sami/description.en.utf8:8
+#: ../../skycultures/russian_siberian/description.en.utf8:28
+#: ../../skycultures/tukano/description.en.utf8:43
+msgid "Sources"
+msgstr "Джерела"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:34
+msgid ""
+"This <em>sky culture</em> is a mapping of historical figures onto the stars."
+" The figures are directly copied by hand from the digital photographs that "
+"are provided by the Louvre and the colours follow roughly the reconstruction"
+" by Alexandre N.Isis (wikicommons, 2013)."
+msgstr ""
+"Ця <em>картина зоряного неба</em> є відтворенням давніх зображень на карті. "
+"Малюнки було скопійовано вручну з цифрових фотографій, які було надано "
+"Лувром. Кольори приблизно збігаються із реконструкцією Александра Н. Ісіса "
+"(Alexandre N.Isis, wikicommons, 2013 р.)."
+
+#. type: Content of: <p><p><ul><li>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:38
+msgid ""
+"<a "
+"href=\"https://collections.louvre.fr/en/ark:/53355/cl010028871#\">Photographs"
+" of the Louvre Collection</a>"
+msgstr ""
+"<a "
+"href=\"https://collections.louvre.fr/en/ark:/53355/cl010028871#\">Фотографії"
+" з колекції Лувра</a>"
+
+#. type: Content of: <p><p><ul><li>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:39
+msgid ""
+"Aubourg, E. (1995), ‘La date de conception du zodiaque du temple d’Hathor à "
+"Dendera’, Bulletin de l’Institut Français d’Archéologie Orientale 95, 1–10"
+msgstr ""
+"Aubourg, E. (1995), ‘La date de conception du zodiaque du temple d’Hathor à "
+"Dendera’, Bulletin de l’Institut Français d’Archéologie Orientale 95, 1–10"
+
+#. type: Content of: <p><p><ul><li>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:40
+msgid ""
+"Biot, J.-B. (1846), ‘Mémoire sur le zodiaque circulaire de denderah.’, "
+"Mémoires de l’Institutnational de France16(2ème partie), 1–101"
+msgstr ""
+"Biot, J.-B. (1846), ‘Mémoire sur le zodiaque circulaire de denderah.’, "
+"Mémoires de l’Institutnational de France16(2ème partie), 1–101"
+
+#. type: Content of: <p><p><ul><li>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:41
+msgid ""
+"Steele (2018), The development of the Babylonian zodiac: Some preliminary "
+"observations.’, Mediterranean Archaeology and Archaeometry, 18, 4, 97-105"
+msgstr ""
+"Steele (2018), The development of the Babylonian zodiac: Some preliminary "
+"observations.’, Mediterranean Archaeology and Archaeometry, 18, 4, 97-105"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:45
+msgid ""
+"This sky culture originates from research. We provide this for free but the "
+"authors of contributions certainly deserve to be cited according to the "
+"common rules. This sky culture is provided under CC BY-ND 4.0 International "
+"Public Licence (share-alike, do not change it without consulting the "
+"contributors, and cite the contributors). Thank you!"
+msgstr ""
+"Записи цієї картини зоряного неба є результатом досліджень. Ці дані надано "
+"безкоштовно, але імена учасників розробки заслуговують на згадку за "
+"загальновизнаними правилами. Дані цієї картини зоряного неба "
+"розповсюджуються за умов дотримання міжнародної ліцензії CC BY-ND 4.0 (лише "
+"некомерційне використання, збереження сумісності ліцензування похідних "
+"творів, незмінність без узгодження із учасниками розробки та збереження "
+"списку учасників розробки). Дякуємо!"
+
+#. type: Content of: <p><p><p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:48
+msgid ""
+"This Greco-Egyptian sky culture was painted and added to Stellarium by: "
+"<em>Susanne M. Hoffmann: service@uhura-uraniae.com</em>"
+msgstr ""
+"Автором греко-єгипетської картини зоряного неба у Stellarium є <em>Сюзанна "
+"М. Гоффманн (Susanne M. Hoffmann): service@uhura-uraniae.com</em>"
+
+#. type: Content of: <h1>
 #: ../../skycultures/greek_almagest/description.en.utf8:1
 msgid "Greek (Almagest)"
 msgstr "Грецька (Альмагест)"
@@ -10902,13 +11226,6 @@ msgstr ""
 #: ../../skycultures/greek_almagest/description.en.utf8:43
 msgid "How this sky culture was made"
 msgstr "Як було створено цю картину неба"
-
-#. type: Content of: <p><h3>
-#: ../../skycultures/greek_almagest/description.en.utf8:45
-#: ../../skycultures/western/description.en.utf8:7
-#: ../../skycultures/western_SnT/description.en.utf8:9
-msgid "Star names"
-msgstr "Назви зірок"
 
 #. type: Content of: outside any tag (error?)
 #: ../../skycultures/greek_almagest/description.en.utf8:47
@@ -12617,7 +12934,7 @@ msgstr ""
 msgid "the authors"
 msgstr "Автори"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/hawaiian_starlines/description.en.utf8:1
 msgid "Hawaiian Starlines"
 msgstr "Гавайські зоряні лінії"
@@ -12996,7 +13313,7 @@ msgstr ""
 "навігації у Капаламській школі Камеамеги, Гонолулу, Гаваї. Художні роботи "
 "виконано Кеалогою Канеакуа (Kealoha Kaneakua)."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/indian/description.en.utf8:1
 msgid "Indian Vedic"
 msgstr "Індійська ведична"
@@ -13151,7 +13468,7 @@ msgstr ""
 "слід розв'язувати у інший спосіб (дехто пропонує альтернативну ідентифікацію"
 " для таких йогатар)."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/indian/description.en.utf8:18
 msgid "Navagraha - Nine \"planets\""
 msgstr "Наваграха — дев'ять «планет»"
@@ -13304,7 +13621,7 @@ msgstr "місячний вузол"
 msgid "-"
 msgstr "-"
 
-#. type: Content of: <h4>
+#. type: Content of: <h3>
 #: ../../skycultures/indian/description.en.utf8:36
 msgid "General"
 msgstr "Загальне"
@@ -13354,7 +13671,7 @@ msgstr ""
 "href=\"http://www.tifr.res.in/~archaeo/papers/Others/Possible%20period%20of%20the%20design%20of%20Nakshatras.pdf\""
 " class='external text'> Можливий період створення накшатр та абхджіту</a>"
 
-#. type: Content of: <h4>
+#. type: Content of: <h3>
 #: ../../skycultures/indian/description.en.utf8:44
 msgid "Mythology"
 msgstr "Міфологія"
@@ -13422,7 +13739,7 @@ msgstr ""
 "text'>«Млин Гамлета: Нарис щодо міфу та основа часу», автори — Джорджо де "
 "Сантільяна, Герта фон Дехенд</a>"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/indian/description.en.utf8:58
 msgid "Contributors"
 msgstr "Учасники розробки"
@@ -13443,7 +13760,7 @@ msgstr ""
 "sanskrit-coders</a> (особливо <a href=\"https://github.com/vvasuki/\">Вішвас"
 " Васукі</a>."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/inuit/description.en.utf8:1
 msgid "Inuit"
 msgstr "Ексімоська"
@@ -13500,7 +13817,7 @@ msgid ""
 msgstr ""
 "Ілюстрації створено Johan Meuris, за умов ліцензування Free Art License."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/japanese_moon_stations/description.en.utf8:1
 msgid "Japanese Moon Stations"
 msgstr "Японські місячні станції"
@@ -13785,7 +14102,7 @@ msgstr "7 місячних станцій «Півдня» або «Червон
 msgid "Ogre, Devil, perhaps Ghost"
 msgstr "Велетень, Демон, можливо Привид"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/japanese_moon_stations/description.en.utf8:246
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:25
 msgid "Stars"
@@ -13806,7 +14123,7 @@ msgstr "Перетинка колісниці, ймовірно струни К�
 msgid "A Cultural History of Astronomy in Japan"
 msgstr "Культурна історія астрономії у Японії"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/kamilaroi/description.en.utf8:1
 msgid "Kamilaroi/Euahlayi"
 msgstr "Каміларой/Еуахлаї"
@@ -14132,12 +14449,12 @@ msgstr ""
 "знайти тут: <a href=\"https://unsw.academia.edu/RobertFuller\" "
 "class=\"external\">https://unsw.academia.edu/RobertFuller</a>."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/korean/description.en.utf8:1
 msgid "Korean"
 msgstr "Корейська"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/korean/description.en.utf8:2
 msgid "Origin"
 msgstr "Походження"
@@ -14216,7 +14533,7 @@ msgstr ""
 "Записи цієї картини зоряного неба було створено користувачем Stellarium "
 "<i><a href=\"http://user.chollian.net/~jtm71/\">Jeong, Tae-Min</a></i>"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/lokono/description.en.utf8:1
 msgid "Lokono (or Arawak)"
 msgstr "Локоно (або аравацька)"
@@ -16750,7 +17067,7 @@ msgstr ""
 "cropped, and reproduced here with the kind permission of the American "
 "Philosophical Society."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/macedonian/description.en.utf8:1
 msgid "Sky Map of Macedonian People"
 msgstr "Картина зоряного неба македонського народу"
@@ -17142,7 +17459,7 @@ msgstr ""
 " <i>Джоре Ценєвим</i> з Македонської дослідницької спілки в основному на "
 "основі даних з книги <b>Небо над Македонією</b> Дж. Ценєва, 2004."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/maori/description.en.utf8:1
 msgid "Maori (New Zealand)"
 msgstr "Маорійська (Нова Зеландія)"
@@ -17195,7 +17512,7 @@ msgstr ""
 "Записи цієї картини зоряного неба було створено користувачем Stellarium "
 "<i>Dan Smale</i>, d.smale(at)niwa.co.nz"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/maya/description.en.utf8:1
 msgid "Maya"
 msgstr "Майя"
@@ -17728,7 +18045,7 @@ msgstr ""
 "<a href=\"https://maya.nmai.si.edu/es/gallery/bonampak\">Bonampak, Viviendo "
 "el tiempo maya</a>"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/mongolian/description.en.utf8:1
 msgid "Mongolian"
 msgstr "Монгольська"
@@ -17779,7 +18096,7 @@ msgstr ""
 "монгольською). А Кассіопея, в уяві монголів, — це П’ять Зоряних Жінок "
 "(<em>Хун Таван Од</em>)."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/mongolian/description.en.utf8:27
 msgid "Planets and Stars"
 msgstr "Планети і зірки"
@@ -17885,12 +18202,12 @@ msgstr ""
 "першому вдалося надзвичайно точно визначити період обертання Сатурна "
 "(<em>Санчіра</em>) за допомогою сектанта з радіусом у 40 метрів."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/mongolian/description.en.utf8:80
 msgid "Myths and Legends"
 msgstr "Міфи і легенди"
 
-#. type: Content of: <h4>
+#. type: Content of: <h3>
 #: ../../skycultures/mongolian/description.en.utf8:82
 msgid "The Great Bear"
 msgstr "Великий Ведмідь"
@@ -17986,7 +18303,7 @@ msgstr ""
 " вгору-вниз, тобто Дубхе/Щур, Мерак/Бик, ... Міцар/Змія, Алькаїд/Кінь, "
 "Міцар/Козел, ... Мерак/Свиня.]"
 
-#. type: Content of: <img><h4>
+#. type: Content of: <img><h3>
 #: ../../skycultures/mongolian/description.en.utf8:127
 msgid "Shooting stars"
 msgstr "Метеори"
@@ -18005,7 +18322,7 @@ msgstr ""
 "неба, і символізує когось, хто щойно помер. Коли люди на Заході загадують "
 "бажання, монголи кажуть: «Хух, добре, що це не я!»"
 
-#. type: Content of: <img><h4>
+#. type: Content of: <img><h3>
 #: ../../skycultures/mongolian/description.en.utf8:135
 msgid "Neglected Legends"
 msgstr "Забуті легенди"
@@ -18062,7 +18379,7 @@ msgstr ""
 " і усі непарні числа. Згідно із буддійськими віруваннями, такі числа "
 "приносять удачу."
 
-#. type: Content of: <img><h5>
+#. type: Content of: <img><h4>
 #: ../../skycultures/mongolian/description.en.utf8:162
 msgid "Eclipses"
 msgstr "Затемнення"
@@ -18155,7 +18472,7 @@ msgstr ""
 "Усе це здається природним, не показним для туристів. Крім того, зауважте "
 "подібність слова <em>Раах</em> до індійського <em>Раху</em>."
 
-#. type: Content of: <img><h5>
+#. type: Content of: <img><h4>
 #: ../../skycultures/mongolian/description.en.utf8:205
 msgid "Cassiopeia (<em>Hun Tavan Od</em>)"
 msgstr "Касіопея (<em>Хун Таван Од</em>)"
@@ -18189,7 +18506,7 @@ msgstr ""
 "вдалося б пройти випробування, п’ятеро братів залишалися б у єдності і "
 "близькості до кінця життя і перемагатимуть під час усіх воєн."
 
-#. type: Content of: <img><p><p><h4>
+#. type: Content of: <img><p><p><h2>
 #: ../../skycultures/mongolian/description.en.utf8:222
 msgid "Other Beliefs Linked to the Sky"
 msgstr "Інші вірування, пов’язані із небом"
@@ -18241,7 +18558,7 @@ msgstr ""
 "зберегти знання про цю космогонію будуть вартісними будь-яке спостереження, "
 "будь-яка пропозиція або співпраця!"
 
-#. type: Content of: <img><p><p><p><p><h3>
+#. type: Content of: <img><p><p><p><p><h2>
 #: ../../skycultures/mongolian/description.en.utf8:248
 msgid "Acknowledgements and Further Reading"
 msgstr "Подяки та інформація для подальшого ознайомлення"
@@ -18320,7 +18637,7 @@ msgstr ""
 "text' title=\"http://souslecieldemongolie.wordpress.com/\" "
 "rel=\"nofollow\">www.souslecieldemongolie.wordpress.com</a> (французькою)."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/navajo/description.en.utf8:1
 msgid "Navajo"
 msgstr "Навахо"
@@ -18396,7 +18713,7 @@ msgstr ""
 "Digitalis Education Solutions, Inc. в основному на основі даних книги "
 "<b>Star Trails-Navajo</b> , автор Дон Чилдрі (Don Childrey)."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/norse/description.en.utf8:1
 msgid "Norse"
 msgstr "Нордична"
@@ -18419,7 +18736,7 @@ msgstr ""
 "Записи цієї картини зоряного неба було створено користувачем Stellarium "
 "<i>Jonas Persson</i>, jonas.persson(at)mna.hkr.se"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/northern_andes/description.en.utf8:1
 msgid "Northern Andes"
 msgstr "Північні Анди"
@@ -18481,7 +18798,7 @@ msgstr ""
 msgid "Here we tell what we found in the equatorial skies:"
 msgstr "Ось, що ми знайшли на екваторіальному небі:"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/northern_andes/description.en.utf8:11
 msgid "The Sun (Punchao o Wilca)"
 msgstr "Сонце (Пунчао-о-Вілька)"
@@ -18794,7 +19111,7 @@ msgstr ""
 "«Ancestral Representations and Colors of the Cosmos» (Міністерство культури "
 "і спадку Еквадору)."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/ojibwe/description.en.utf8:1
 msgid "Ojibwe"
 msgstr "Оджибве"
@@ -19035,7 +19352,7 @@ msgstr ""
 msgid "Constellation Paintings by A. Lee & W. Wilson."
 msgstr "Малюнки сузір’їв створено A. Lee та W. Wilson."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/romanian/description.en.utf8:1
 msgid "Romanian"
 msgstr "Румунська"
@@ -19097,7 +19414,7 @@ msgstr ""
 "<strong>Зауваження</strong>: у західноєвропейському сузір’ї Оріон "
 "розташовано чотири традиційних румунських сузір’я, які перекриваються."
 
-#. type: Content of: <p><p><p><h3>
+#. type: Content of: <p><p><p><h2>
 #: ../../skycultures/romanian/description.en.utf8:12
 msgid "External links:"
 msgstr "Зовнішні посилання:"
@@ -19155,7 +19472,7 @@ msgstr "<a href=\"http://planetariubm.ro/\">PLANETARIUL BAIA MARE – MARAMURES<
 msgid "Thanks to Andrei Dorian Gheorghe and Alastair McBeth – SARM members"
 msgstr "Дякуємо Andrei Dorian Gheorghe та Alastair McBeth – членам SARM"
 
-#. type: Content of: <p><p><p><h3>
+#. type: Content of: <p><p><p><h2>
 #: ../../skycultures/romanian/description.en.utf8:22
 msgid "Authors:"
 msgstr "Автори:"
@@ -19198,7 +19515,7 @@ msgstr ""
 "розповсюджуються за умов ліцензування Creative Commons Attribution-"
 "ShareAlike 3.0 Unported."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/sami/description.en.utf8:1
 msgid "Sami"
 msgstr "Саамі"
@@ -19219,13 +19536,6 @@ msgstr ""
 "href=\"http://www.eng.samer.se/\">samer.se</a> та на <a "
 "href=\"http://uk.wikipedia.org/wiki/Саами\">сторінці щодо народу саами у "
 "Вікіпедії</a>."
-
-#. type: Content of: <h3>
-#: ../../skycultures/sami/description.en.utf8:8
-#: ../../skycultures/russian_siberian/description.en.utf8:28
-#: ../../skycultures/tukano/description.en.utf8:43
-msgid "Sources"
-msgstr "Джерела"
 
 #. type: Content of: <p>
 #: ../../skycultures/sami/description.en.utf8:10
@@ -19279,7 +19589,7 @@ msgstr ""
 " що значну частину культури саамів було втрачено ще до того, як її вдалося "
 "задокументувати належним чином."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/sami/description.en.utf8:26
 msgid "Constellations and Stars"
 msgstr "Сузір’я і зірки"
@@ -19387,7 +19697,7 @@ msgstr ""
 msgid "Jonas Persson (jonas.persson@physics.org)"
 msgstr "Jonas Persson (jonas.persson@physics.org)"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/sardinian/description.en.utf8:1
 msgid "Sardinian"
 msgstr "Сардинська"
@@ -19442,7 +19752,7 @@ msgstr ""
 "Дані для цих сузір’їв для Stellarium було створено користувачем <i>Giuseppe "
 "Putzolu</i>, giuseppe.putzolu(at)gmail.com"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/sardinian/description.en.utf8:13
 msgid "Credits"
 msgstr "Подяки"
@@ -19456,7 +19766,7 @@ msgstr ""
 "Збирання даних сузір’їв сардинської картини зоряного неба є результатом "
 "досліджень, проведених Тоnino Bussu і Маrco Puddu"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/russian_siberian/description.en.utf8:1
 msgid "Russian (Siberian)"
 msgstr "Російська (сибірська)"
@@ -19553,7 +19863,7 @@ msgstr ""
 msgid "Karpenko, Ju.A. Nazvanija zvezdnogo neba. - M.: Nauka, 1981. - 184 s."
 msgstr "Карпенко, Ю.А. Названия звёздного неба. - M.: Наука, 1981. - 184 с."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/tongan/description.en.utf8:1
 msgid "Tongan (Tonga)"
 msgstr "Тонганська (Тонга)"
@@ -20408,7 +20718,7 @@ msgstr ""
 "Малюнки було створено Antonio Gumercindo Taques dos Santos (Ticão) та "
 "Youssif Ganthous Filho (youssif@gmail.com)."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/tupi/description.en.utf8:1
 msgid "Tupi-Guarani"
 msgstr "Тупі-Гуарані"
@@ -20440,7 +20750,7 @@ msgstr ""
 "близько тридцяти сузір’їв, але у книзі подано назви лише семи таких "
 "сузір’їв."
 
-#. type: Content of: <p><h4>
+#. type: Content of: <p><h3>
 #: ../../skycultures/tupi/description.en.utf8:8
 msgid "Ema"
 msgstr "Ема"
@@ -20467,7 +20777,7 @@ msgstr ""
 "ввечері. Сузір’я позначало початок зими на півдні Бразилії і початок "
 "посушливого сезону на півночі."
 
-#. type: Content of: <p><h4>
+#. type: Content of: <p><h3>
 #: ../../skycultures/tupi/description.en.utf8:13
 msgid "Homem Velho (the Old Man)"
 msgstr "Гомем Велью (Старий чоловік)"
@@ -20511,7 +20821,7 @@ msgstr ""
 "Записи цієї картини зоряного неба було створено користувачем Stellarium "
 "<i>Пауло Марсело Понтешем (Paulo Marcelo Pontes)</i>"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:1
 msgid "Vanuatu (Netwar)"
 msgstr "Вануату (Нетвар)"
@@ -20536,7 +20846,7 @@ msgstr ""
 "подібними до сузір'їв інших племен Вануату, хоча назви і значення сузір'їв "
 "може бути певною мірою іншим."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:4
 msgid "Solar system"
 msgstr "Сонячна система"
@@ -20627,7 +20937,7 @@ msgstr "Загалом: Махау"
 msgid "Aldebaran: Kapaumeta"
 msgstr "Альдебаран: Капаумета"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:31
 msgid "Constellations and deep-sky objects"
 msgstr "Сузір’я та інші далекі об’єкти"
@@ -20708,7 +21018,7 @@ msgstr ""
 "Плеяди: Новасвас Лапнуман — «молоді хлопці Лапуману»; також Неперавен "
 "Лапнуман — «молоді дівчата Лапнуману»"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:45
 msgid "Names of objects with unknown position"
 msgstr "Назви об'єктів із невідомим розташуванням"
@@ -20794,7 +21104,7 @@ msgstr ""
 "Імапула, Наусєну з Ламлу, П'єро Нако Яру з Лованатома, Джоу Натуману з "
 "Ловкверії."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/western/description.en.utf8:1
 msgid "Western"
 msgstr "Західна"
@@ -20842,7 +21152,7 @@ msgstr ""
 "зоряних каталогів, хоча є декілька випадків, коли традиційні назви є "
 "популярнішими за позначення."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/western/description.en.utf8:10
 msgid "Alternative asterism files for Stellarium"
 msgstr "Альтернативні файли астеризмів для Stellarium"
@@ -20907,7 +21217,7 @@ msgstr ""
 " зображень сузір’їв</a>, військово-морська обсерваторія США та Інститут "
 "космічних телескопів. Кліше Йоганеса Гевелія (Johannes Hevelius)."
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/western_SnT/description.en.utf8:1
 msgid "Sky & Telescope"
 msgstr "Sky & Telescope"
@@ -20969,7 +21279,7 @@ msgstr ""
 "title=\"http://www.iau.org/public/constellations\" rel=\"nofollow\">Офіційні"
 " відомості щодо сузір'їв МАО</a>"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/western_hlad/description.en.utf8:1
 msgid "Western (O.Hlad)"
 msgstr "Західні (O.Hlad)"
@@ -21046,7 +21356,7 @@ msgstr ""
 "ведмедиці. Те саме стосується Близнюків. Традиційну міфологічну фігуру "
 "перевернуто, але зірки HIP 29997, 33694 є яскравішими."
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/western_hlad/description.en.utf8:33
 msgid "Updates"
 msgstr "Оновлення"
@@ -21065,7 +21375,7 @@ msgstr ""
 "Оновлення можна знайти на сайті <a "
 "href=\"http://sirrah.troja.mff.cuni.cz/~mira/souhvezdi/\">http://sirrah.troja.mff.cuni.cz/~mira/souhvezdi/</a>"
 
-#. type: Content of: <h2>
+#. type: Content of: <h1>
 #: ../../skycultures/western_rey/description.en.utf8:1
 msgid "Western: H.A. Rey"
 msgstr "Західні (H.A. Rey)"
@@ -21103,7 +21413,7 @@ msgstr ""
 "автор книг для дітей, американець німецького походження, у 1952 році "
 "звернувся до цієї проблеми у книзі <em>Зірки — Новий погляд на них</em>."
 
-#. type: Content of: <h4>
+#. type: Content of: <h2>
 #: ../../skycultures/western_rey/description.en.utf8:22
 msgid "The Constellations"
 msgstr "Сузір'я"
@@ -21140,7 +21450,7 @@ msgstr ""
 " перекладених назв, ви побачите ті самі назви, що і у книзі Рея. Крім того, "
 "перелік назв зірок обмежено тими зірками, які описано у книзі Рея."
 
-#. type: Content of: <h4>
+#. type: Content of: <h2>
 #: ../../skycultures/western_rey/description.en.utf8:37
 msgid "Rey's Figures and the Classic Constellations"
 msgstr "Малюнки Рея та класичні сузір’я"
@@ -21242,3 +21552,133 @@ msgstr ""
 "встановлення додатка, створеного Майком Річардсом (Mike Richards). Її було "
 "перероблено відповідно до 41-го видання книги і завершено цим описом Георгом"
 " Зотті (Georg Zotti)."
+
+#. type: Content of: <h1>
+#: ../../skycultures/zulu/description.en.utf8:1
+msgid "Zulu"
+msgstr "Зулуська"
+
+#. type: Content of: <p>
+#: ../../skycultures/zulu/description.en.utf8:2
+msgid ""
+"A wide spread African concept is that the sky is a solid dome, perhaps made "
+"of blue rock resting on the Earth, upon which the Sun moves."
+msgstr ""
+"Згідно з широко розповсюдженими в Африці уявленнями, небо є суцільним "
+"куполом, можливо, зробленим з синього каменю, який стоїть на землі і яким "
+"рухається Сонце."
+
+#. type: Content of: <h2>
+#: ../../skycultures/zulu/description.en.utf8:4
+msgid "Starlore"
+msgstr "Зіркова статистика"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:6
+msgid "<b>isiLimela &mdash; Pleiades:</b>"
+msgstr "<b>ісіЛімела — Плеяди:</b>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:6
+msgid ""
+"The Pleiades is a well-known cluster of stars, and normally six or seven "
+"bright ones can be seen. Many of the Southern African groups believe that "
+"when they first see the Pleiades in the early morning (August or early "
+"September), that the start of the planting season has come."
+msgstr ""
+"Плеяди є добре відомим зоряним скупченням. За звичайних умов можна "
+"спостерігати шість або сім найяскравіших зірок скупчення. Багато з "
+"південноафриканських племен вірять у те, що коли вперше можна бачити Плеяди "
+"вранці (у серпні або на початку вересня), настає час сіяти."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:7
+msgid "<b>oNdwenjana &mdash; Orion&#8217;s Sword:</b>"
+msgstr "<b>оНдвенджана — Меч Оріона:</b>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:7
+msgid ""
+"One of the descriptions of Orion&#8217;s Sword is as a long-stemmed flower, "
+"such as a lily.  However the meaning of this group of stars isn't completely"
+" clear, because &#8220;oNdwenjana&#8221; could also be another tall object "
+"like a tree or a man."
+msgstr ""
+"Одним із описів Меча Оріона є квітка із довгим стеблом, наприклад, лілія. "
+"Втім, значення, яке має назва цієї групи зірок, не однозначним, оскільки "
+"слово «оНдвенджана» можна також означати високий об'єкт, зокрема дерево або "
+"чоловіка."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:8
+msgid "<b>Impanbana &mdash; Orion&#8217;s Belt:</b>"
+msgstr "<b>Імпанбана — Пояс Оріона:</b>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:8
+msgid ""
+"Orion&#8217;s Belt is a combination of a crossing, dogs and wild hogs.  "
+"Seeing the stars of Orion&#8217;s Belt reminded hunters to be very careful "
+"during their hunting trips, as it marked the mating season of the wild hogs."
+msgstr ""
+"Пояс Оріона є поєднанням перехрестя, собак і диких свиней. Якщо на небі "
+"з'являлися зірки Поясу Оріона, мисливці мали бути обережнішими під час "
+"полювання, оскільки поява цих зірок означала початок сезону парування у "
+"диких свиней."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:9
+msgid "<b>isAndulela &mdash; Canopus:</b>"
+msgstr "<b>ісАндулела — Канопус:</b>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:9
+msgid ""
+"Canopus is a bright star that appeared at harvest time and might also be "
+"connected to the Red-chested Cuckoo. It was also used as a guide for "
+"shepherds, marking the time to begin the journey to new grazing lands during"
+" the dry season."
+msgstr ""
+"Канопус — яскрава зірка, яка з'являється на небі у пору збирання урожаю. Її "
+"можна також пов'язати із червоногорлою зозулею. Цю зірку також "
+"використовували як керівну для пастухів: її поява позначала час, коли слід "
+"розпочинатися перегін до нових пасовищ у посушливий сезон."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:10
+msgid "<b>Umthala Wezinkanyezi &mdash; The Milky Way:</b>"
+msgstr "<b>Умтала Везінканьєзі — Чумацький Шлях:</b>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/zulu/description.en.utf8:10
+msgid ""
+"Umthala Wezinkanyezi means &#8220;the stream of stars.&#8221; This is "
+"related to the way the Nguni people used to fight before Shaka Zulu&#8217;s "
+"revolutionary close-combat strategy. The strong warriors used to throw "
+"spears like javelin and the stream of spears would be seen in the air."
+msgstr ""
+"Умтхала Везінканьєзі означає «потік зірок». Назву пов'язано зі способом, "
+"який плем'я нгуні використовувало для битв до того, як Шака Зулу революційно"
+" змінив стратегію ближнього бою. Найсильніші воїни кидали списи або дротики,"
+" і потік таких списів можна було спостерігати у повітрі."
+
+#. type: Content of: <p>
+#: ../../skycultures/zulu/description.en.utf8:14
+msgid ""
+"This sky culture was created by Suki Lock for the South African Astronomical"
+" Observatory <a href=\"http://www.saao.ac.za/\">(SAAO)</a>, based on "
+"information supplied by Auke Slotegraaf.  They were modified using inputs "
+"and information from Themba Matomela, Thembela Mantungwa and Mdumiseni "
+"Nxumalo. The project was initiated by Sivuyile Manxoyi after having "
+"discussions with Prof Jarita Holbrook and Prof Kevin Snedegar on African "
+"Cultural astronomy."
+msgstr ""
+"Дані цієї картини зоряного неба було приготовано Сукі Лок (Suki Lock) для "
+"Південноафриканської астрономічної обсерваторії <a "
+"href=\"http://www.saao.ac.za/\">(SAAO)</a>, на основі даних, наданих Ауке "
+"Штолеграаф (Auke Slotegraaf). До них було внесено зміни на основі зауважень "
+"та даних Темби Матомели (Themba Matomela), Тембели Мантунгва (Thembela "
+"Mantungwa) та Мдумізені Нксумало (Mdumiseni Nxumalo). Ініціатор проєкту — "
+"Сивуїле Манксої (Sivuyile Manxoyi) після обговорення з професором Джарітою "
+"Голбрук (Jarita Holbrook) та професором Кевіном Снедегаром (Kevin Snedegar) "
+"щодо африканської культурної астрономії."
