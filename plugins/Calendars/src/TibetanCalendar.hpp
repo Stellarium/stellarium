@@ -22,14 +22,14 @@
 #include "Calendar.hpp"
 
 //! @class TibetanCalendar
-//! Functions for the Tibetan calendar
+//! Functions for the Tibetan (Phuglugs) calendar
 //! @author Georg Zotti
 //! @ingroup calendars
 //! The Tibetan Phuglugs/Phug-pa version of the Kalacakra (Wheel of Time) calendar is similar
-//! tot he Hindu Lunisolar calendars, described as between the arithmetic simplicity of the old Hindu and the
+//! to the Hindu Lunisolar calendars, described as between the arithmetic simplicity of the old Hindu and the
 //! astronomical complexity of the modern Hindu. Astronomical events are calculated in local time
 //! which may lead to regional deviations. Bhutan, Mongolian and Sherpa calendars are very similar.
-//! Months are lunar with lengths of 29 or 30 days. Leap months precede their "ordinary" months.
+//! Months are lunar with lengths of 29 or 30 days. Leap months precede their "ordinary" months, but leap days follow the "ordinary".
 //!
 //! Our implementation uses a 5-part QVector<int> {year, month, leap-month, day, leap-day}
 //!
