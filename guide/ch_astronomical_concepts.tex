@@ -593,10 +593,11 @@ temporal offset which amounts already to more than a minute in the 21st
 century. There have been many attempts to properly model $\Delta T$,
 and Stellarium offers several models you can choose from in the
 configuration dialog (see
-section~\ref{sec:gui:configuration:time}). The default, ``Espenak and
-Meeus (2006)'', is a widely accepted standard. But if you are a
-researcher and want to experiment with alternative models, you will
-hopefully like this feature. you can even specify your own data for
+section~\ref{sec:gui:configuration:time}). ``Espenak and
+Meeus (2006)'', is a widely accepted standard. The default, ``Modified Espenak and
+Meeus (2006)'', is created to make $\Delta T$ closely in line with observed and predicted
+values between the years 2005-2050. But if you are a researcher and want to experiment
+with alternative models, you will hopefully like this feature. you can even specify your own data for
 $a$, $b$, $c$, $y$ and the secular term for lunar acceleration $n$
 (actually $\dot{n}=dn/dt$ in units of
 $\mathrm{arcseconds}/\mathrm{century}^2$) if you can model $\Delta T$
@@ -746,8 +747,7 @@ The following list describes sources and a few details about the models for $\De
   values for 2016 and later deviate notably from current estimates, and should not be used for dates after 2015).
   Recommended range of usage: between years -720.0 and 2016.0 $\dot{n}=-25.82''/\cy^2$.
   
-\item[Espenak \& Meeus (2006).] This solution\footnote{This solution
-    is used by default.} by F. Espenak and J. Meeus, based on 
+\item[Espenak \& Meeus (2006).] This solution by F. Espenak and J. Meeus, based on 
 	\citet{2004JHA....35..327M} and a polynomial fit
   through tabulated values for 1600-2000, is used for the NASA Eclipse
   Web Site\footnote{\url{https://eclipse.gsfc.nasa.gov/eclipse.html}}
@@ -755,6 +755,11 @@ The following list describes sources and a few details about the models for $\De
   solar, lunar and planetary ephemeris program \program{SOLEX}. Valid
   range of usage: between years -1999 and
   3000. $\dot{n}=-25.858''/\cy^2$.
+
+\item[Modified Espenak \& Meeus (2006).] This solution\footnote{This solution
+  is used by default.} is a modification from Espenak \& Meeus (2006). Two formulae are developed to make $\Delta T$
+  closely in line with observed and predicted values by IERS and also connected with original values.
+  Valid range of usage: between years -1999 and 3000. $\dot{n}=-25.858''/\cy^2$.
 
 \item[Reijs (2006).] From the Length of Day (LOD; as determined by
   \citet{2004JHA....35..327M}), Victor Reijs
