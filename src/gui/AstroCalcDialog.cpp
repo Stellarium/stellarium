@@ -3499,7 +3499,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 							}
 							double C3altitude = eclipseData.altitude;
 
-							if (eclipseData.ce > 0. && ((C2altitude > 0.) || (C3altitude > 0.))) // Central eclipse occurs
+							if (eclipseData.ce > 0. && ((C2altitude > -.3) || (C3altitude > -.3))) // Central eclipse occurs
 							{
 								centraleclipse = true;
 								if (eclipseData.L2 < 0.)
@@ -3539,6 +3539,8 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 							treeItem->setData(SolarEclipseLocalDate, Qt::UserRole, JDmax);
 							treeItem->setText(SolarEclipseLocalType, eclipseTypeStr);
 							treeItem->setText(SolarEclipseLocalFirstContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD1)));
+							if (centraleclipse && JD2<JD1) // central eclipse  in progress at Sunrise
+								treeItem->setText(SolarEclipseLocalFirstContact, dash);
 							treeItem->setToolTip(SolarEclipseLocalFirstContact, q_("The time of first contact"));
 							
 							if (centraleclipse)
@@ -3555,6 +3557,8 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 								treeItem->setText(SolarEclipseLocal3rdContact, dash);
 							treeItem->setToolTip(SolarEclipseLocal3rdContact, q_("The time of third contact"));
 							treeItem->setText(SolarEclipseLocalLastContact, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD4)));
+							if (centraleclipse && JD3>JD4) // central eclipse in progress at Sunset
+								treeItem->setText(SolarEclipseLocalLastContact, dash);
 							treeItem->setToolTip(SolarEclipseLocalLastContact, q_("The time of fourth contact"));
 							if (centraleclipse)
 								treeItem->setText(SolarEclipseLocalDuration, durationStr);
