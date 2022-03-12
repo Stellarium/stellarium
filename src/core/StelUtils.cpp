@@ -1451,7 +1451,7 @@ double getDeltaTByEspenakMeeusModified(const double jDay)
 		double t = y - 2000;
 		r = ((((0.00002373599*t + 0.000651814)*t + 0.0017275)*t - 0.060374)*t + 0.3345)*t +63.86;
 	}
-	// WB: Fitted curve from IERS's DeltaT values during 2005-2021, including predicted values until 2032
+	// WB: Polynomial data fit from IERS's DeltaT values during 2005-2021, including predicted values until 2032
 	// Data: https://cddis.nasa.gov/archive/products/iers/deltat.data & https://cddis.nasa.gov/archive/products/iers/deltat.preds
 	// Last updated: 2022 Mar 11
 	else if (y < 2032)
@@ -1461,6 +1461,8 @@ double getDeltaTByEspenakMeeusModified(const double jDay)
 	}
 	// WB: Formula to create reasonable curve between final predicted year and 2050
 	// 93 is the predicted deltaT for 2050 (Espenak/Meeus)
+	// It looks more likely that this value is too high
+	// But we will follow it for now until we have a better model
 	// Small corrections (<0.2 sec) related to secular acceleration of the Moon are neglected
 	// Last updated: 2022 Mar 11
 	else if (y < 2050)
@@ -1469,11 +1471,10 @@ double getDeltaTByEspenakMeeusModified(const double jDay)
 		double finalPredictedDeltaT = 72.07;
 		double t = y - finalPredictedYear;
 		double diff = 2050.-finalPredictedYear;
-		r = finalPredictedDeltaT + ((93.-finalPredictedDeltaT)/(diff*diff)) * t * t;
+		r = finalPredictedDeltaT + (93.-finalPredictedDeltaT) * t * t/(diff*diff);
 	}
 	else if (y < 2150)
 	{
-		//r = (-20 + 32 * std::pow((y-1820)/100,2) - 0.5628 * (2150 - y));
 		// r has been precomputed before, just add the term patching the discontinuity
 		r -= 0.5628*(2150.0-y);
 	}
