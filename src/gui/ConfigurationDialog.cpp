@@ -283,8 +283,8 @@ void ConfigurationDialog::createDialogContent()
 	idx = ui->deltaTAlgorithmComboBox->findData(core->getCurrentDeltaTAlgorithmKey(), Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
-		// Use Espenak & Meeus (2006) as default
-		idx = ui->deltaTAlgorithmComboBox->findData(QVariant("EspenakMeeus"), Qt::UserRole, Qt::MatchCaseSensitive);
+		// Use Modified Espenak & Meeus (2006) as default
+		idx = ui->deltaTAlgorithmComboBox->findData(QVariant("EspenakMeeusModified"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->deltaTAlgorithmComboBox->setCurrentIndex(idx);
 	connect(ui->deltaTAlgorithmComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setDeltaTAlgorithm(int)));
@@ -1865,12 +1865,14 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Meeus & Simons (2000)"), "MeeusSimons");
 	algorithms->addItem(q_("Morrison & Stephenson (2004, 2005)"), "MorrisonStephenson2004");
 	algorithms->addItem(q_("Stephenson, Morrison & Hohenkerk (2016, 2021)"), "StephensonMorrisonHohenkerk2016");
-	// Espenak & Meeus (2006) used by default
-	algorithms->addItem(q_("Espenak & Meeus (2006)").append(" *"), "EspenakMeeus");
+	// Espenak & Meeus (2006)
+	algorithms->addItem(q_("Espenak & Meeus (2006)"), "EspenakMeeus");
 	// GZ: I want to try out some things. Something is still wrong with eclipses, see lp:1275092.
 	#ifndef NDEBUG
 	algorithms->addItem(q_("Espenak & Meeus (2006) no extra moon acceleration"), "EspenakMeeusZeroMoonAccel");
 	#endif
+	// Modified Espenak & Meeus (2006) used by default
+	algorithms->addItem(q_("Modified Espenak & Meeus (2006)").append(" *"), "EspenakMeeusModified");
 	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
 	algorithms->addItem(q_("Banjevic (2006)"), "Banjevic");
 	algorithms->addItem(q_("Montenbruck & Pfleger (2000)"), "MontenbruckPfleger");

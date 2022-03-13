@@ -1375,6 +1375,113 @@ double getDeltaTByEspenakMeeus(const double jDay)
 	return r;
 }
 
+// Implementation of algorithm by Espenak & Meeus (2006) with modified formulae for DeltaT computation
+double getDeltaTByEspenakMeeusModified(const double jDay)
+{
+	int year, month, day;	
+	getDateFromJulianDay(jDay, &year, &month, &day);
+
+	// Note: the method here is adapted from
+	// "Five Millennium Canon of Solar Eclipses" [Espenak and Meeus, 2006]
+	// A summary is described here:
+	// http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
+
+	double y = yearFraction(year, month, day);
+
+	// set the default value for Delta T
+	double u = (y-1820)/100.;
+	double r = (-20 + 32 * u * u);
+
+	if (y < -500)
+	{
+		// values are equal to defaults!
+	}
+	else if (y < 500)
+	{
+		u = y/100;
+		r = (((((0.0090316521*u + 0.022174192)*u - 0.1798452)*u - 5.952053)*u + 33.78311)*u -1014.41)*u +10583.6;
+	}
+	else if (y < 1600)
+	{
+		u = (y-1000)/100;
+		r = (((((0.0083572073*u - 0.005050998)*u -0.8503463)*u +0.319781)*u + 71.23472)*u -556.01)*u + 1574.2;
+	}
+	else if (y < 1700)
+	{
+		double t = y - 1600;
+		r = ((t/7129.0 - 0.01532)*t - 0.9808)*t +120.0;
+	}
+	else if (y < 1800)
+	{
+		double t = y - 1700;
+		r = (((-t/1174000.0 + 0.00013336)*t - 0.0059285)*t + 0.1603)*t +8.83;
+	}
+	else if (y < 1860)
+	{
+		double t = y - 1800;
+		r = ((((((.000000000875*t -.0000001699)*t + 0.0000121272)*t - 0.00037436)*t + 0.0041116)*t + 0.0068612)*t - 0.332447)*t +13.72;
+	}
+	else if (y < 1900)
+	{
+		double t = y - 1860;
+		r = ((((t/233174.0 -0.0004473624)*t + 0.01680668)*t - 0.251754)*t + 0.5737)*t + 7.62;
+	}
+	else if (y < 1920)
+	{
+		double t = y - 1900;
+		r = (((-0.000197*t + 0.0061966)*t - 0.0598939)*t + 1.494119)*t -2.79;
+	}
+	else if (y < 1941)
+	{
+		double t = y - 1920;
+		r = ((0.0020936*t - 0.076100)*t+ 0.84493)*t +21.20;
+	}
+	else if (y < 1961)
+	{
+		double t = y - 1950;
+		r = ((t/2547.0 -1.0/233.0)*t + 0.407)*t +29.07;
+	}
+	else if (y < 1986)
+	{
+		double t = y - 1975;
+		r = ((-t/718.0 -1/260.0)*t + 1.067)*t +45.45;
+	}
+	else if (y < 2005)
+	{
+		double t = y - 2000;
+		r = ((((0.00002373599*t + 0.000651814)*t + 0.0017275)*t - 0.060374)*t + 0.3345)*t +63.86;
+	}
+	// WB: Polynomial data fit from IERS's DeltaT values during 2005-2021, including predicted values until 2032
+	// Data: https://cddis.nasa.gov/archive/products/iers/deltat.data & https://cddis.nasa.gov/archive/products/iers/deltat.preds
+	// Last updated: 2022 Mar 11
+	else if (y < 2032)
+	{
+		double t = y - 2000;
+		r = (-0.00331233402*t + 0.404229283)*t + 62.48;
+	}
+	// WB: Formula to create reasonable curve between final predicted year and 2050
+	// 93 is the predicted deltaT for 2050 (Espenak/Meeus)
+	// It looks more likely that this value is too high
+	// But we will follow it for now until we have a better model
+	// Small corrections (<0.2 sec) related to secular acceleration of the Moon are neglected
+	// Last updated: 2022 Mar 11
+	else if (y < 2050)
+	{
+		double finalPredictedYear = 2032.;
+		double finalPredictedDeltaT = 72.07;
+		double t = y - finalPredictedYear;
+		double diff = 2050.-finalPredictedYear;
+		r = finalPredictedDeltaT + (93.-finalPredictedDeltaT) * t * t/(diff*diff);
+	}
+	else if (y < 2150)
+	{
+		// r has been precomputed before, just add the term patching the discontinuity
+		r -= 0.5628*(2150.0-y);
+	}
+
+	return r;
+}
+
 // Implementation of algorithm by Schoch (1931) for DeltaT computation
 double getDeltaTBySchoch(const double jDay)
 {

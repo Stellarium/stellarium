@@ -207,7 +207,7 @@ void StelCore::init()
 
 	// Delta-T stuff
 	// Define default algorithm for time correction (Delta T)
-	QString tmpDT = conf->value("navigation/time_correction_algorithm", "EspenakMeeus").toString();
+	QString tmpDT = conf->value("navigation/time_correction_algorithm", "EspenakMeeusModified").toString();
 	setCurrentDeltaTAlgorithmKey(tmpDT);
 
 	// Define variables of custom equation for calculation of Delta T
@@ -2199,6 +2199,13 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			deltaTstart	= -1999;
 			deltaTfinish	= 3000;
 			break;
+		case EspenakMeeusModified:
+			// Espenak & Meeus (2006) algorithm (with modified formulae) for DeltaT
+			deltaTnDot = -25.858; // n.dot = -25.858 "/cy/cy
+			deltaTfunc = StelUtils::getDeltaTByEspenakMeeusModified;
+			deltaTstart	= -1999;
+			deltaTfinish	= 3000;
+			break;
 		case EspenakMeeusZeroMoonAccel:
 			// This is a trying area. Something is wrong with DeltaT, maybe ndot is still not applied correctly.
 			// Espenak & Meeus (2006) algorithm for DeltaT
@@ -2372,7 +2379,10 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			description = q_("From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), Victor Reijs derived a %1T formula by using a Simplex optimisation with a cosine and square function. This is based on a possible periodicy described by Stephenson (%2). See for more info %3here%4.").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://www.iol.ie/~geniet/eng/DeltaTeval.htm'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case EspenakMeeus: // GENERAL SOLUTION
-			description = q_("This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson (2004) and a polynomial fit through tabulated values for 1600-2000, is used for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker)).append(" <em>").append(q_("Used by default.")).append("</em>");
+			description = q_("This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson (2004) and a polynomial fit through tabulated values for 1600-2000, is used for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
+			break;
+		case EspenakMeeusModified: // MODIFIED SOLUTION
+			description = q_("This solution is modified from F. Espenak and J. Meeus, based on Morrison & Stephenson (2004) and a polynomial fit through tabulated values for 1600-2000, is used for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the solar, lunar and planetary ephemeris program SOLEX. Formula for 2005-2050 is modified to match observed values and near-term predictions.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker)).append(" <em>").append(q_("Used by default.")).append("</em>");
 			break;
 		case EspenakMeeusZeroMoonAccel: // PATCHED SOLUTION. Experimental, it may not make sense to keep it in V1.0.
 			description = QString("%1 %2").arg(q_("PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION.")).arg(q_("This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson (2004) and a polynomial fit through tabulated values for 1600-2000, is used for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker)).append(" <em>").append("</em>"));
@@ -2440,7 +2450,8 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 		case ReingoldDershowitz:     // and
 		case MorrisonStephenson2004: // and
 		case Reijs:                  // and
-		case EspenakMeeus: // the default, range stated in the Canon, p. 14.  ... and
+		case EspenakMeeus:           // range stated in the Canon, p. 14.  ... and
+		case EspenakMeeusModified:   // the default, range stated in the Canon, p. 14.  ... and
 		case EspenakMeeusZeroMoonAccel: // and
 		case StephensonMorrisonHohenkerk2016: // and
 		case Henriksson2017:
