@@ -1788,6 +1788,8 @@ void AstroCalcDialog::selectCurrentHECPosition(const QModelIndex& modelIndex)
 {
 	// Find the object
 	QString nameI18n = modelIndex.sibling(modelIndex.row(), HECColumnName).data().toString();
+	if (nameI18n==core->getCurrentPlanet()->getNameI18n())
+		return;
 	bool found = (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n));
 
 	if (!found)
