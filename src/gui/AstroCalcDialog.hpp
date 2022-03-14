@@ -58,6 +58,14 @@ struct Ephemeris
 };
 Q_DECLARE_METATYPE(Ephemeris)
 
+struct HECPosition
+{
+	QString objectName;
+	double x;
+	double y;
+};
+Q_DECLARE_METATYPE(HECPosition)
+
 class AstroCalcDialog : public StelDialog
 {
 	Q_OBJECT
@@ -242,8 +250,10 @@ private slots:
 	void selectCurrentCelestialPosition(const QModelIndex &modelIndex);
 
 	void currentHECPositions();
+	void drawHECGraph(QString selectedObject = "");
 	void saveHECPositions();
 	void selectCurrentHECPosition(const QModelIndex &modelIndex);
+	void markCurrentHECPosition(const QModelIndex &modelIndex);
 
 	void saveCelestialPositionsMagnitudeLimit(double mag);
 	void saveCelestialPositionsHorizontalCoordinatesFlag(bool b);
@@ -400,6 +410,7 @@ private:
 	QTimer *currentTimeLine;
 	QHash<QString,int> wutCategories;
 	QPair<double, double> getLunarEclipseXY() const;
+	QList<HECPosition> hecObjects;
 
 	void saveTableAsCSV(const QString& fileName, QTreeWidget* tWidget, QStringList& headers);
 	void saveTableAsBookmarks(const QString& fileName, QTreeWidget* tWidget);

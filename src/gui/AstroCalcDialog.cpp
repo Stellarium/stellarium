@@ -321,6 +321,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(dsoMgr, SIGNAL(maxSizeLimitChanged(double)), this, SLOT(currentCelestialPositions()));
 
 	connect(ui->hecPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentHECPosition(QModelIndex)));
+	connect(ui->hecPositionsTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(markCurrentHECPosition(QModelIndex)));
 	connect(ui->hecPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentHECPositions()));
 	connect(ui->hecPositionsSaveButton, SIGNAL(clicked()), this, SLOT(saveHECPositions()));
 	connect(ui->tabWidgetPositions, SIGNAL(currentChanged(int)), this, SLOT(changePositionsTab(int)));
@@ -1599,15 +1600,14 @@ void AstroCalcDialog::fillHECPositionTable(QString objectName, QString latitude,
 void AstroCalcDialog::currentHECPositions()
 {
 	QPair<QString, QString> coordStrings;
+	hecObjects.clear();
 	initListHECPositions();
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	double distance, longitude, latitude, dl;
 	Vec3d pos;
 	bool sign;
-	QScatterSeries *seriesPlanets = new QScatterSeries();
-	QScatterSeries *seriesSun = new QScatterSeries();
-	seriesSun->append(0., -1.5);
+	HECPosition object;
 	const double JD = core->getJD();
 	ui->hecPositionsTimeLabel->setText(q_("Positions on %1").arg(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))));
 
@@ -1633,7 +1633,10 @@ void AstroCalcDialog::currentHECPositions()
 			}
 
 			fillHECPositionTable(planet->getNameI18n(), coordStrings.first, coordStrings.second, distance);
-			seriesPlanets->append(360.-dl, log(distance));
+			object.objectName = planet->getNameI18n();
+			object.x = 360.-dl;
+			object.y = log(distance);
+			hecObjects.append(object);
 		}
 	}
 
@@ -1641,11 +1644,29 @@ void AstroCalcDialog::currentHECPositions()
 	// sort-by-distance
 	ui->hecPositionsTreeWidget->sortItems(HECColumnDistance, Qt::AscendingOrder);
 
+	drawHECGraph();
+}
+
+void AstroCalcDialog::drawHECGraph(QString selectedObject)
+{
+	QScatterSeries *seriesPlanets = new QScatterSeries();
+	QScatterSeries *seriesSelectedPlanet = new QScatterSeries();
+	QScatterSeries *seriesSun = new QScatterSeries();
+	seriesSun->append(0., -1.5);
+
+	for (const auto& planet : qAsConst(hecObjects))
+	{
+		seriesPlanets->append(planet.x, planet.y);
+		if (!selectedObject.isEmpty() && planet.objectName==selectedObject)
+			seriesSelectedPlanet->append(planet.x, planet.y);
+	}
+
 	QColor axisColor(Qt::lightGray);
 	QColor labelColor(Qt::white);
 
 	QPolarChart *chart = new QPolarChart();
 	chart->addSeries(seriesPlanets);
+	chart->addSeries(seriesSelectedPlanet);
 	chart->addSeries(seriesSun);
 	chart->legend()->hide();
 	chart->setMargins(QMargins(0, 0, 0, 0));
@@ -1694,6 +1715,12 @@ void AstroCalcDialog::currentHECPositions()
 	seriesPlanets->setMarkerSize(5);
 	seriesPlanets->setColor(Qt::cyan);
 	seriesPlanets->setBorderColor(Qt::transparent);
+
+	seriesSelectedPlanet->attachAxis(angularAxis);
+	seriesSelectedPlanet->attachAxis(radialAxis);
+	seriesSelectedPlanet->setMarkerSize(7);
+	seriesSelectedPlanet->setColor(Qt::green);
+	seriesSelectedPlanet->setBorderColor(Qt::transparent);
 
 	seriesSun->attachAxis(angularAxis);
 	seriesSun->attachAxis(radialAxis);
@@ -1810,6 +1837,11 @@ void AstroCalcDialog::selectCurrentHECPosition(const QModelIndex& modelIndex)
 			mvMgr->setFlagTracking(true);
 		}
 	}
+}
+
+void AstroCalcDialog::markCurrentHECPosition(const QModelIndex& modelIndex)
+{
+	drawHECGraph(modelIndex.sibling(modelIndex.row(), HECColumnName).data().toString());
 }
 
 void AstroCalcDialog::selectCurrentEphemeride(const QModelIndex& modelIndex)
