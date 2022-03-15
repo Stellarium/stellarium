@@ -331,6 +331,9 @@ ENDIF()
 # Activate media support
 SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.")
 
+# Activate QtWebEngine support
+SET(ENABLE_QTWEBENGINE 1 CACHE BOOL "Define whether QtWebEngine module should be supported if it installed.")
+
 # Activate GPS support. Solution depends on operating system:
 # - Windows: Only directly-attached serial NMEA emitter.
 # - Other systems: libgps if possible and NMEA emitter as fallback.
