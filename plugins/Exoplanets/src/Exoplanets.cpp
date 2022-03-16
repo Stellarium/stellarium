@@ -294,19 +294,11 @@ StelObjectP Exoplanets::searchByName(const QString& englishName) const
 			return qSharedPointerCast<StelObject>(eps);
 
 		QStringList ppn = eps->getExoplanetsEnglishNames();
+		ppn << eps->getDesignations();
+		ppn << eps->getExoplanetsDesignations();
 		if (!ppn.isEmpty())
 		{
-			for (const auto& str : ppn)
-			{
-				if (str.toUpper() == englishName.toUpper())
-					return qSharedPointerCast<StelObject>(eps);
-			}
-		}
-
-		ppn = eps->getExoplanetsDesignations();
-		if (!ppn.isEmpty())
-		{
-		    for (const auto& str : qAsConst(ppn))
+			for (const auto& str : qAsConst(ppn))
 			{
 				if (str.toUpper() == englishName.toUpper())
 					return qSharedPointerCast<StelObject>(eps);
@@ -366,6 +358,7 @@ QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbI
 		names.append(eps->getExoplanetsNamesI18n());
 		names.append(eps->getEnglishName());
 		names.append(eps->getExoplanetsEnglishNames());
+		names.append(eps->getDesignations());
 	}
 
 	QString fullMatch = "";
@@ -542,6 +535,8 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
+	bool aberration = core->getUseAberration();
+	core->setUseAberration(false); // to avoid using the twice aberrated positions for the stars!
 	double ra, dec;
 	StelObjectP star;
 	ep.clear();
@@ -562,6 +557,18 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 
 		// Let's check existence the star (by designation) in our catalog...
 		star = smgr->searchByName(epsKey.trimmed());
+		if (star.isNull() && epsData.contains("starAltNames"))
+		{
+			QStringList designations = epsData.value("starAltNames").toString().split(", ");
+			QString hip;
+			for(int i=0; i<designations.size(); i++)
+			{
+				if (designations.at(i).trimmed().startsWith("HIP"))
+					hip = designations.at(i).trimmed();
+			}
+			if (!hip.isEmpty())
+				star = smgr->searchByName(hip);
+		}
 		if (!star.isNull())
 		{
 			// ...if exists, let's use our coordinates of star instead exoplanets.eu website data
@@ -593,6 +600,7 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 			EPCountPH += eps->getCountHabitableExoplanets();
 		}
 	}
+	core->setUseAberration(aberration);
 }
 
 int Exoplanets::getJsonFileFormatVersion(void) const

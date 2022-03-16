@@ -112,6 +112,7 @@ public:
 	bool isVMagnitudeDefined() const;
 
 	QString getDesignation(void) const;
+	QStringList getDesignations(void) const;
 	QStringList getExoplanetsEnglishNames(void) const;
 	QStringList getExoplanetsNamesI18n(void) const;
 	QStringList getExoplanetsDesignations(void) const;
@@ -177,6 +178,7 @@ private:
 	//! Variables for description of properties of exoplanets
 	QString designation;			//! The designation of the host star
 	QString starProperName;			//! The proper name of the host star
+	QString starAltNames;			//! The alternative names of the host star
 	double RA;				//! J2000 right ascension of host star // ALMOST USELESS AFTER CONSTRUCTOR!
 	double DE;				//! J2000 declination of host star     // ALMOST USELESS AFTER CONSTRUCTOR!   use XYZ
 	double distance;			//! Distance to star in pc
