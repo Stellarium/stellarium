@@ -585,7 +585,7 @@ void StelGui::update()
 	if (getAction("actionShow_Asterism_Labels")->isChecked() != flag)
 		getAction("actionShow_Asterism_Labels")->setChecked(flag);
 
-	flag = propMgr->getProperty("LandscapeMgr.cardinalsPointsDisplayed")->getValue().toBool();
+	flag = propMgr->getProperty("LandscapeMgr.cardinalPointsDisplayed")->getValue().toBool();
 	if (getAction("actionShow_Cardinal_Points")->isChecked() != flag)
 		getAction("actionShow_Cardinal_Points")->setChecked(flag);
 
