@@ -246,14 +246,14 @@ QString Exoplanet::getEnglishName(void) const
 
 QString Exoplanet::getDesignation(void) const
 {
-	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-	return trans.qtranslate(designation);
+	return designation;
 }
 
 QStringList Exoplanet::getDesignations(void) const
 {
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	QStringList designations;
-	designations << getDesignation();
+	designations << trans.qtranslate(designation);
 	if (!starAltNames.isEmpty())
 		designations << starAltNames.split(", ");
 	designations.removeDuplicates();
