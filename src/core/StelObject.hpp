@@ -35,9 +35,8 @@ class StelCore;
 //! @sa StelObjectP
 class StelObject : public StelRegionObject
 {
-	//Required for Q_FLAGS macro, this requires this header to be MOC'ed
+	//Required for Q_FLAG macro, this requires this header to be MOC'ed
 	Q_GADGET
-	Q_FLAGS(InfoStringGroupFlags InfoStringGroup)
 public:
 	//! Used as named bitfield flags as specifiers to
 	//! filter results of getInfoString. The precise definition of these should
@@ -77,18 +76,19 @@ public:
 		PlainText		= 0x08000000  //!< Strip HTML tags from output
 	};
 	Q_DECLARE_FLAGS(InfoStringGroup, InfoStringGroupFlags)
+	Q_FLAG(InfoStringGroup)
 
 	//! A pre-defined "all available" set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags AllInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
+	static constexpr InfoStringGroup AllInfo = static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
 									   Distance|Elongation|Size|Velocity|ProperMotion|Extra|HourAngle|AbsoluteMagnitude|
 									   GalacticCoord|SupergalacticCoord|OtherCoord|ObjectType|EclipticCoordJ2000|
 									   EclipticCoordOfDate|IAUConstellation|SiderealTime|RTSTime|SolarLunarPosition);
 	//! A pre-defined "default" set of specifiers for the getInfoString flags argument to getInfoString
 	//! It appears useful to propose this set as post-install settings and let users configure more on demand.
-	static const InfoStringGroupFlags DefaultInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecOfDate|HourAngle|AltAzi|OtherCoord|
+	static constexpr InfoStringGroup DefaultInfo = static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecOfDate|HourAngle|AltAzi|OtherCoord|
 											  Distance|Elongation|Size|Velocity|Extra|IAUConstellation|SiderealTime|RTSTime);
 	//! A pre-defined "shortest useful" set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags ShortInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000);
+	static constexpr InfoStringGroup ShortInfo = static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
 	virtual ~StelObject() Q_DECL_OVERRIDE {}
 
