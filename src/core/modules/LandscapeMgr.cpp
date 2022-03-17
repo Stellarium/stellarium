@@ -65,23 +65,6 @@ Cardinals::Cardinals()
 	// Draw the principal wind points even smaller.
 	font16WCR.setPixelSize(conf->value("viewing/16wcr_font_size", screenFontSize+2).toInt());
 
-	// Directions
-	rose4winds = {
-		{ dN, Vec3f(-1.f, 0.f, 0.f) }, { dS, Vec3f(1.f,  0.f, 0.f) },
-		{ dE, Vec3f( 0.f, 1.f, 0.f) }, { dW, Vec3f(0.f, -1.f, 0.f) }
-	};
-	rose8winds = {
-		{ dNE, Vec3f(-1.f,  1.f, 0.f) }, { dSE, Vec3f( 1.f,  1.f, 0.f) },
-		{ dSW, Vec3f( 1.f, -1.f, 0.f) }, { dNW, Vec3f(-1.f, -1.f, 0.f) }
-	};
-	static const float cp = 1.f/(1.f+sqrt(2.f));
-	static const float cn = -1.f*cp;
-	rose16winds = {
-		{ dNNE, Vec3f(-1.f,   cp, 0.f) }, { dENE, Vec3f(  cn,  1.f, 0.f) },
-		{ dESE, Vec3f(  cp,  1.f, 0.f) }, { dSSE, Vec3f( 1.f,   cp, 0.f) },
-		{ dSSW, Vec3f( 1.f,   cn, 0.f) }, { dWSW, Vec3f(  cp, -1.f, 0.f) },
-		{ dWNW, Vec3f(  cn, -1.f, 0.f) }, { dNNW, Vec3f(-1.f,   cn, 0.f) }
-	};
 	// English names for cardinals
 	labels = {
 		{   dN,  "N" }, {   dS,  "S" }, {   dE,  "E" }, {   dW,  "W" },
@@ -94,6 +77,21 @@ Cardinals::Cardinals()
 Cardinals::~Cardinals()
 {
 }
+
+const QMap<Cardinals::CompassDirection, Vec3f> Cardinals::rose4winds = {
+	{ Cardinals::dN, Vec3f(-1.f, 0.f, 0.f) }, { Cardinals::dS, Vec3f(1.f,  0.f, 0.f) },
+	{ Cardinals::dE, Vec3f( 0.f, 1.f, 0.f) }, { Cardinals::dW, Vec3f(0.f, -1.f, 0.f) }
+};
+const QMap<Cardinals::CompassDirection, Vec3f> Cardinals::rose8winds = {
+	{ Cardinals::dNE, Vec3f(-1.f,  1.f, 0.f) }, { Cardinals::dSE, Vec3f( 1.f,  1.f, 0.f) },
+	{ Cardinals::dSW, Vec3f( 1.f, -1.f, 0.f) }, { Cardinals::dNW, Vec3f(-1.f, -1.f, 0.f) }
+};
+const QMap<Cardinals::CompassDirection, Vec3f> Cardinals::rose16winds = {
+	{ dNNE, Vec3f(-1.f,   cp, 0.f) }, { dENE, Vec3f( -cp,  1.f, 0.f) },
+	{ dESE, Vec3f(  cp,  1.f, 0.f) }, { dSSE, Vec3f( 1.f,   cp, 0.f) },
+	{ dSSW, Vec3f( 1.f,  -cp, 0.f) }, { dWSW, Vec3f(  cp, -1.f, 0.f) },
+	{ dWNW, Vec3f( -cp, -1.f, 0.f) }, { dNNW, Vec3f(-1.f,  -cp, 0.f) }
+};
 
 void Cardinals::update(double deltaTime)
 {
@@ -129,20 +127,27 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 			vshift = static_cast<float>(screenFontSize + 12)*ppx;
 
 		Vec3f xy;
-		QString directionLabel;
 		sPainter.setColor(color, fader4WCR.getInterstate());
 		sPainter.setBlending(true);
 		QMapIterator<Cardinals::CompassDirection, Vec3f> it4w(rose4winds);
 		while(it4w.hasNext())
 		{
 			it4w.next();
-			directionLabel = labels.value(it4w.key(), "");
+			QString directionLabel = labels.value(it4w.key(), "");
 
 			if (flagMask)
 				sshift = ppx*static_cast<float>(sPainter.getFontMetrics().boundingRect(directionLabel).width())*0.5f;
 
 			if (prj->project(it4w.value(), xy))
-				sPainter.drawText(xy[0], xy[1], directionLabel, 0., -sshift, vshift, false);
+			{
+				Vec3f up(it4w.value()[0], it4w.value()[1], 1.*M_PI/180.);
+				Vec3f upPrj;
+				prj->project(up, upPrj);
+				double dx=upPrj[0]-xy[0];
+				double dy=upPrj[1]-xy[1];
+				float textAngle=static_cast<float>(atan2(dx, dy));
+				sPainter.drawText(xy[0], xy[1], directionLabel, -textAngle*180.f/M_PI, -sshift, vshift, true);
+			}
 		}
 
 		if (fader8WCR.getInterstate()>0.f)
@@ -155,13 +160,21 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 			while(it8w.hasNext())
 			{
 				it8w.next();
-				directionLabel = labels.value(it8w.key(), "");
+				QString directionLabel = labels.value(it8w.key(), "");
 
 				if (flagMask)
 					bshift = ppx*static_cast<float>(sPainter.getFontMetrics().boundingRect(directionLabel).width())*0.5f;
 
 				if (prj->project(it8w.value(), xy))
-					sPainter.drawText(xy[0], xy[1], directionLabel, 0., -bshift, vshift, false);
+				{
+					Vec3f up(it8w.value()[0], it8w.value()[1], 1.*M_PI/180.);
+					Vec3f upPrj;
+					prj->project(up, upPrj);
+					double dx=upPrj[0]-xy[0];
+					double dy=upPrj[1]-xy[1];
+					float textAngle=static_cast<float>(atan2(dx, dy));
+					sPainter.drawText(xy[0], xy[1], directionLabel, -textAngle*180.f/M_PI, -bshift, vshift, true);
+				}
 			}
 
 
@@ -174,13 +187,21 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 				while(it16w.hasNext())
 				{
 					it16w.next();
-					directionLabel = labels.value(it16w.key(), "");
+					QString directionLabel = labels.value(it16w.key(), "");
 
 					if (flagMask)
 						cshift = ppx*static_cast<float>(sPainter.getFontMetrics().boundingRect(directionLabel).width())*0.5f;
 
 					if (prj->project(it16w.value(), xy))
-						sPainter.drawText(xy[0], xy[1], directionLabel, 0., -cshift, vshift, true); // Try the other gravity
+					{
+						Vec3f up(it16w.value()[0], it16w.value()[1], 1.*M_PI/180.);
+						Vec3f upPrj;
+						prj->project(up, upPrj);
+						double dx=upPrj[0]-xy[0];
+						double dy=upPrj[1]-xy[1];
+						float textAngle=static_cast<float>(atan2(dx, dy));
+						sPainter.drawText(xy[0], xy[1], directionLabel, -textAngle*180.f/M_PI, -cshift, vshift, true);
+					}
 				}
 			}
 		}

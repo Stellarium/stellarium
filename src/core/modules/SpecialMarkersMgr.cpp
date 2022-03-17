@@ -189,8 +189,8 @@ void SpecialSkyMarker::draw(StelCore *core) const
 					double dx=screenTgt[0]-screenPos[0];
 					double dy=screenTgt[1]-screenPos[1];
 					float textAngle=static_cast<float>(atan2(dx, dy));
-					float wx =  ppx*sPainter.getFontMetrics().boundingRect(s).width() *0.5f;
-					float wy =  ppx*sPainter.getFontMetrics().height() *0.25f;
+					float wx = ppx*sPainter.getFontMetrics().boundingRect(s).width() *0.5f;
+					float wy = ppx*sPainter.getFontMetrics().height() *0.25f;
 
 					// Gravity labels look outright terrible here! Disable them.
 					sPainter.drawText(target, s, -textAngle*180.f/M_PI, -wx, wy, true);

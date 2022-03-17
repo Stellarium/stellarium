@@ -84,7 +84,8 @@ private:
     class StelPropertyMgr* propMgr;
     QFont font4WCR, font8WCR, font16WCR;
     Vec3f color;
-    QMap<Cardinals::CompassDirection, Vec3f> rose4winds, rose8winds, rose16winds;
+    static constexpr float cp = static_cast<float>(1./(1.+M_SQRT2)); // dimension for secondary intercardinals
+    static const QMap<Cardinals::CompassDirection, Vec3f> rose4winds, rose8winds, rose16winds;
     QMap<Cardinals::CompassDirection, QString> labels;
     LinearFader fader4WCR, fader8WCR, fader16WCR;
     int screenFontSize;
