@@ -178,13 +178,22 @@ void SpecialSkyMarker::draw(StelCore *core) const
 				double h = 6.; // height of tickmark endpoint, arcminutes
 				if (i % 15 == 0)
 				{
-					h = 60.;  // the size of the mark every 15 degrees
+					h = 15.;  // the size of the mark every 15 degrees remains small: it is labeled!
 
 					QString s = QString("%1°").arg((i+90+f)%360);
 
-					float shiftx = ppx*sPainter.getFontMetrics().boundingRect(s).width() *0.5f;
-					float shifty = ppx*sPainter.getFontMetrics().height() *0.5f;
-					sPainter.drawText(pos, s, 0, -shiftx, shifty);
+					Vec3d target(pos[0], pos[1], tan(h/60.*M_PI/180.)); target.normalize();
+					Vec3d screenPos, screenTgt;
+					prj->project(pos, screenPos);
+					prj->project(target, screenTgt);
+					double dx=screenTgt[0]-screenPos[0];
+					double dy=screenTgt[1]-screenPos[1];
+					float textAngle=static_cast<float>(atan2(dx, dy));
+					float wx =  ppx*sPainter.getFontMetrics().boundingRect(s).width() *0.5f;
+					float wy =  ppx*sPainter.getFontMetrics().height() *0.25f;
+
+					// Gravity labels look outright terrible here! Disable them.
+					sPainter.drawText(target, s, -textAngle*180.f/M_PI, -wx, wy, true);
 				}
 				else if (i % 5 == 0)
 				{
