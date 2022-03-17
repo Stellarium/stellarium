@@ -108,11 +108,6 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(bool horizonPartsLabeled		READ getFlagHorizonLabeled	WRITE setFlagHorizonLabeled		NOTIFY horizonPartsLabeledChanged)
 	Q_PROPERTY(Vec3f horizonLineColor		READ getColorHorizonLine	WRITE setColorHorizonLine		NOTIFY horizonLineColorChanged)
 
-	// compassMarks is basically the horizon line inverted to extend upwards, with no line.
-	Q_PROPERTY(bool compassMarksDisplayed	        READ getFlagCompassMarks        WRITE setFlagCompassMarks               NOTIFY compassMarksDisplayedChanged)
-	//Q_PROPERTY(bool compassMarksLabeled		READ getFlagCompassMarksLabeled	WRITE setFlagCompassMarksLabeled        NOTIFY compassMarksLabeledChanged)
-	Q_PROPERTY(Vec3f compassMarksLineColor	        READ getColorCompassMarks       WRITE setColorCompassMarks              NOTIFY compassMarksColorChanged)
-
 	Q_PROPERTY(bool galacticEquatorLineDisplayed	READ getFlagGalacticEquatorLine		WRITE setFlagGalacticEquatorLine	NOTIFY galacticEquatorLineDisplayedChanged)
 	Q_PROPERTY(bool galacticEquatorPartsDisplayed	READ getFlagGalacticEquatorParts	WRITE setFlagGalacticEquatorParts	NOTIFY galacticEquatorPartsDisplayedChanged)
 	Q_PROPERTY(bool galacticEquatorPartsLabeled	READ getFlagGalacticEquatorLabeled	WRITE setFlagGalacticEquatorLabeled	NOTIFY galacticEquatorPartsLabeledChanged)
@@ -1056,7 +1051,6 @@ private:
 	SkyLine * meridianLine;			// Meridian line
 	SkyLine * longitudeLine;			// Opposition/conjunction longitude line
 	SkyLine * horizonLine;			// Horizon line
-	SkyLine * compassLine;			// refactored compass marks: like Horizon line, but without the actual line, but marks labeled above the horizon.
 	SkyLine * galacticEquatorLine;	// line depicting the Galactic equator as defined by the IAU definition of Galactic coordinates (System II, 1958)
 	SkyLine * supergalacticEquatorLine;	// line depicting the Supergalactic equator
 	SkyLine * primeVerticalLine;		// Prime Vertical line

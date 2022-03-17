@@ -130,7 +130,6 @@ public:
 		PRECESSIONCIRCLE_S,
 		MERIDIAN,
 		HORIZON,
-		COMPASSMARKS,
 		GALACTICEQUATOR,
 		SUPERGALACTICEQUATOR,
 		LONGITUDE,
@@ -708,10 +707,6 @@ void SkyLine::updateLabel()
 			frameType = StelCore::FrameAltAz;
 			label = q_("Horizon");
 			break;
-		case COMPASSMARKS:
-			frameType = StelCore::FrameAltAz;
-			label = "";
-			break;
 		case GALACTICEQUATOR:
 			frameType = StelCore::FrameGalactic;
 			label = q_("Galactic Equator");
@@ -1075,16 +1070,12 @@ void SkyLine::draw(StelCore *core) const
 		const float lineThickness=sPainter.getLineWidth();
 		sPainter.setLineWidth(partThickness);
 
-		// TODO: Before drawing the lines themselves (and returning), draw the short partition lines
+		// Before drawing the lines themselves (and returning), draw the short partition lines
 		// Define short lines from "equator" a bit "southwards"
 		Vec3d part0 = fpt;
 		Vec3d partAxis(0,1,0);
 		Vec3d partZAxis = sphericalCap.n; // rotation axis for the 360 partitions
-		if (line_type==COMPASSMARKS)
-		{
-			partAxis.set(0,0,-1);
-		}
-		else if ((line_type==MERIDIAN) || (line_type==COLURE_1))
+		if ((line_type==MERIDIAN) || (line_type==COLURE_1))
 		{
 			partAxis.set(0,0,1);
 		}
@@ -1148,10 +1139,6 @@ void SkyLine::draw(StelCore *core) const
 							case HORIZON:
 								value=(360-i+(StelApp::getInstance().getFlagSouthAzimuthUsage() ? 0 : 180)) % 360;
 								extraTextAngle=90.f;
-								break;
-							case COMPASSMARKS:
-								value=(360-i+(StelApp::getInstance().getFlagSouthAzimuthUsage() ? 0 : 180)) % 360;
-								extraTextAngle=-90.f;
 								break;
 							case MERIDIAN:
 							case COLURE_1: // Equinoctial Colure
