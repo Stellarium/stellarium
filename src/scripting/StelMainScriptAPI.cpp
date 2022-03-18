@@ -1016,7 +1016,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		ssmgr->setFlagMoonScale(false);
 		ssmgr->setFlagMinorBodyScale(false);
 		ssmgr->setFlagTrails(false);
-		lmgr->setFlagCardinalsPoints(false);
+		lmgr->setFlagCardinalPoints(false);
 		amgr->setFlagLines(false);
 		amgr->setFlagLabels(false);
 		amgr->setFlagRayHelpers(false);
