@@ -1698,6 +1698,7 @@ double* interferometry_uv_coords_vector(double baseline_m, double wavelength, do
     uv[1] = baseline_m * target_vector[1] * target_vector[2];
     uv[0] *= AIRY / wavelength;
     uv[1] *= AIRY / wavelength;
+    free(vector);
     return uv;
 }
 
