@@ -7,13 +7,24 @@
 \label{ch:SkyCultures}
 \chapterauthor*{Georg Zotti, with additions by Alexander Wolf}
 
-Stellarium comes with a nice set of skycultures. For ethnographers or
+\begin{figure}[th]\centering
+\includegraphics[width=\textwidth]{stellarium-skycultures-map.jpg}
+\caption{World map showing Stellarium's built-in set of
+  skycultures. To avoid overcrowding, smaller European skycultures
+  which are mostly derivatives of the ``Western'' skyculture are not
+  shown. (Image: S. M. Hoffmann)}
+\label{fig:skycultures}
+\end{figure}
+
+
+\noindent Stellarium comes with a nice set of skycultures from all
+over the world (Fig.~\ref{fig:skycultures}). For ethnographers or
 historians of science it may be a worthwhile consideration to
 illustrate the sky culture of the people they are studying. It is not
 very hard to do so, but depending on your data, may require some
-skills in image processing. 
+skills in image processing.
 
-Some features regarding translation and multilingual have evolved
+Some features regarding translation and multilinguality have evolved
 over the years, and not all skycultures currently included in
 Stellarium adhere to the standards described in the following
 sections. Skycultures will also see continuous development in the
@@ -49,6 +60,7 @@ classification=personal
 \noindent (or what seems best for you). The name is used for the list entry in
 the Starlore tab in the View dialog (see \ref{sec:gui:view:starlore}).
 
+\paragraph{boundaries}
 The option ``boundaries'' is optional and may contain the follow values:
 \begin{description}
 \item[none] --- this value is enabled by default and it designates that this culture doesn't have boundaries of constellations.
@@ -56,6 +68,7 @@ The option ``boundaries'' is optional and may contain the follow values:
 \item[own] --- please use it for culture who has own set of boundaries for constellations.
 \end{description}
 
+\paragraph{classification}
 The option ``classification'' is also optional. \newFeature{0.19.0} It allows some form of quality control:
 \begin{description}
   \item[personal] -- this is a personally developed skyculture which

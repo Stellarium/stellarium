@@ -548,18 +548,18 @@ last\_location    & string & Coordinates of last used location in stellarium.\\\
 \begin{longtable}{l|l|p{68mm}}\toprule
 \emph{ID}                            & \emph{Type} & \emph{Description}\\\midrule
 atmosphere\_fade\_duration                 & float & Sets the time (seconds) it takes for the atmosphere to fade when de-selected\\%\midrule
-flag\_landscape                            & bool  & Set to \emph{false} if you don't want to see the landscape at all\\%\midrule
-flag\_fog                                  & bool  & Set to \emph{false} if you don't want to see fog on start-up\\%\midrule
-flag\_atmosphere                           & bool  & Set to \emph{false} if you don't want to see atmosphere on start-up\\%\midrule
-flag\_landscape\_sets\_location            & bool  & Set to \emph{true} if you want Stellarium to modify the observer location 
+flag\_landscape                            & bool  & Set \emph{false} if you don't want to see the landscape at start-up\\%\midrule
+flag\_fog                                  & bool  & Set \emph{false} if you don't want to see fog on start-up\\%\midrule
+flag\_atmosphere                           & bool  & Set \emph{false} if you don't want to see atmosphere on start-up\\%\midrule
+flag\_landscape\_sets\_location            & bool  & Set \emph{true} if you want Stellarium to modify the observer location 
                                                      when a new landscape is selected (changes planet and longitude/latitude/altitude 
                                                      if location data is available in the landscape.ini file)\\%\midrule
 minimal\_brightness                        & float & Set minimal brightness for landscapes. [0\ldots1] Typical value: \emph{0.01}\\%\midrule
-atmosphereybin						       & int   & Set atmosphere binning coefficient for axis Y.\\%\midrule
-flag\_minimal\_brightness                  & bool  & Set to \emph{true} to use minimal brightness for landscape.\\%\midrule
-flag\_landscape\_sets\_minimal\_brightness & bool  & Set to \emph{true} to use value for minimal brightness for landscape from landscape settings.\\%\midrule
-flag\_enable\_illumination\_layer          & bool  & Set to \emph{true} to use illumination layer for landscape.\\%\midrule
-flag\_enable\_labels                       & bool  & Set to \emph{true} to use landscape labels from gazetteer layer.\\%\midrule
+atmosphereybin		                   & int   & Atmosphere tessellation coefficient for Y axis. Default=44.\\%\midrule
+flag\_minimal\_brightness                  & bool  & Set \emph{true} to use minimal brightness for landscape.\\%\midrule
+flag\_landscape\_sets\_minimal\_brightness & bool  & Set \emph{true} to use value for minimal brightness for landscape from landscape settings.\\%\midrule
+flag\_enable\_illumination\_layer          & bool  & Set \emph{true} to use illumination layer for landscape.\\%\midrule
+flag\_enable\_labels                       & bool  & Set \emph{true} to use landscape labels from gazetteer layer.\\%\midrule
 atmospheric\_extinction\_coefficient       & float & Set atmospheric extinction coefficient $k$ [mag/airmass]\\%\midrule
 temperature\_C                             & float & Set atmospheric temperature [Celsius]\\%\midrule
 pressure\_mbar                             & float & Set atmospheric pressure [mbar]\\%\midrule
