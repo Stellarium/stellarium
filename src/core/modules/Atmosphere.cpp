@@ -136,21 +136,21 @@ void Atmosphere::computeColor(StelCore* core, const double JD, const Planet& cur
 		delete[] colorGrid;
 		delete [] posGrid;
 		skyResolutionY = StelApp::getInstance().getSettings()->value("landscape/atmosphereybin", 44).toUInt();
-		skyResolutionX = static_cast<unsigned int>(floorf(0.5f+skyResolutionY*(0.5f*sqrtf(3.0f))*prj->getViewportWidth()/prj->getViewportHeight()));
+		skyResolutionX = static_cast<unsigned int>(floorf(0.5f+static_cast<float>(skyResolutionY)*(0.5f*sqrtf(3.0f))*static_cast<float>(prj->getViewportWidth())/static_cast<float>(prj->getViewportHeight())));
 		posGrid = new Vec2f[static_cast<size_t>((1+skyResolutionX)*(1+skyResolutionY))];
 		colorGrid = new Vec4f[static_cast<size_t>((1+skyResolutionX)*(1+skyResolutionY))];
-		float stepX = static_cast<float>(prj->getViewportWidth()) / static_cast<float>(skyResolutionX-0.5f);
-		float stepY = static_cast<float>(prj->getViewportHeight()) / skyResolutionY;
-		float viewport_left = prj->getViewportPosX();
-		float viewport_bottom = prj->getViewportPosY();
+		float stepX = static_cast<float>(prj->getViewportWidth()) / (static_cast<float>(skyResolutionX)-0.5f);
+		float stepY = static_cast<float>(prj->getViewportHeight()) / static_cast<float>(skyResolutionY);
+		float viewport_left = static_cast<float>(prj->getViewportPosX());
+		float viewport_bottom = static_cast<float>(prj->getViewportPosY());
 		for (unsigned int x=0; x<=skyResolutionX; ++x)
 		{
 			for(unsigned int y=0; y<=skyResolutionY; ++y)
 			{
 				Vec2f &v(posGrid[y*(1+skyResolutionX)+x]);
 				v[0] = viewport_left + ((x == 0) ? 0.f :
-						(x == skyResolutionX) ? prj->getViewportWidth() : (x-0.5f*(y&1))*stepX);
-				v[1] = viewport_bottom+y*stepY;
+						(x == skyResolutionX) ? static_cast<float>(prj->getViewportWidth()) : (static_cast<float>(x)-0.5f*(y&1))*stepX);
+				v[1] = viewport_bottom+static_cast<float>(y)*stepY;
 			}
 		}
 		posGridBuffer.destroy();
@@ -355,7 +355,7 @@ void Atmosphere::computeColor(StelCore* core, const double JD, const Planet& cur
 	
 	// Update average luminance
 	if (!overrideAverageLuminance)
-		averageLuminance = sum_lum/((1+skyResolutionX)*(1+skyResolutionY));
+		averageLuminance = sum_lum/static_cast<float>((1+skyResolutionX)*(1+skyResolutionY));
 }
 
 // override computable luminance. This is for special operations only, e.g. for scripting of brightness-balanced image export.
