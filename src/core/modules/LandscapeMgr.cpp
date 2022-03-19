@@ -35,6 +35,7 @@
 #include "StelSkyDrawer.hpp"
 #include "StelPainter.hpp"
 #include "StelPropertyMgr.hpp"
+#include "StelUtils.hpp"
 #include "qzipreader.h"
 
 #include <QDebug>
@@ -121,7 +122,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 		const float ppx = static_cast<float>(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
 		StelPainter sPainter(prj);
 		sPainter.setFont(font4WCR);
-		float sshift=0.f, bshift=0.f, cshift=0.f, vshift=0.f;
+		float sshift=0.f, bshift=0.f, cshift=0.f, vshift=1.f;
 		bool flagMask = (core->getProjection(StelCore::FrameJ2000)->getMaskType() != StelProjector::MaskDisk);
 		if (propMgr->getProperty("SpecialMarkersMgr.compassMarksDisplayed")->getValue().toBool())
 			vshift = static_cast<float>(screenFontSize + 12)*ppx;
@@ -140,13 +141,13 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 
 			if (prj->project(it4w.value(), xy))
 			{
-				Vec3f up(it4w.value()[0], it4w.value()[1], 1.*M_PI/180.);
+				Vec3f up(it4w.value()[0], it4w.value()[1], 1.f*M_PI_180f);
 				Vec3f upPrj;
 				prj->project(up, upPrj);
-				double dx=upPrj[0]-xy[0];
-				double dy=upPrj[1]-xy[1];
-				float textAngle=static_cast<float>(atan2(dx, dy));
-				sPainter.drawText(xy[0], xy[1], directionLabel, -textAngle*180.f/M_PI, -sshift, vshift, true);
+				float dx=upPrj[0]-xy[0];
+				float dy=upPrj[1]-xy[1];
+				float textAngle=atan2(dx, dy);
+				sPainter.drawText(xy[0], xy[1], directionLabel, -textAngle*M_180_PIf, -sshift, vshift, true);
 			}
 		}
 
@@ -167,16 +168,15 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 
 				if (prj->project(it8w.value(), xy))
 				{
-					Vec3f up(it8w.value()[0], it8w.value()[1], 1.*M_PI/180.);
+					Vec3f up(it8w.value()[0], it8w.value()[1], 1.f*M_PI_180f);
 					Vec3f upPrj;
 					prj->project(up, upPrj);
-					double dx=upPrj[0]-xy[0];
-					double dy=upPrj[1]-xy[1];
-					float textAngle=static_cast<float>(atan2(dx, dy));
-					sPainter.drawText(xy[0], xy[1], directionLabel, -textAngle*180.f/M_PI, -bshift, vshift, true);
+					float dx=upPrj[0]-xy[0];
+					float dy=upPrj[1]-xy[1];
+					float textAngle=atan2(dx, dy);
+					sPainter.drawText(xy[0], xy[1], directionLabel, -textAngle*M_180_PIf, -bshift, vshift, true);
 				}
 			}
-
 
 			if (fader16WCR.getInterstate()>0.f)
 			{
@@ -194,13 +194,13 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 
 					if (prj->project(it16w.value(), xy))
 					{
-						Vec3f up(it16w.value()[0], it16w.value()[1], 1.*M_PI/180.);
+						Vec3f up(it16w.value()[0], it16w.value()[1], 1.f*M_PI_180f);
 						Vec3f upPrj;
 						prj->project(up, upPrj);
-						double dx=upPrj[0]-xy[0];
-						double dy=upPrj[1]-xy[1];
-						float textAngle=static_cast<float>(atan2(dx, dy));
-						sPainter.drawText(xy[0], xy[1], directionLabel, -textAngle*180.f/M_PI, -cshift, vshift, true);
+						float dx=upPrj[0]-xy[0];
+						float dy=upPrj[1]-xy[1];
+						float textAngle=atan2(dx, dy);
+						sPainter.drawText(xy[0], xy[1], directionLabel, -textAngle*M_180_PIf, -cshift, vshift, true);
 					}
 				}
 			}
