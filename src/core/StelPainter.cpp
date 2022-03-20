@@ -30,7 +30,6 @@
 #include <QDebug>
 #include <QString>
 #include <QSettings>
-#include <QLinkedList>
 #include <QPainter>
 #include <QMutex>
 #include <QVarLengthArray>
@@ -486,7 +485,7 @@ void StelPainter::sSphereMap(double radius, unsigned int slices, unsigned int st
 	const float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
 	const float* cos_sin_theta_p;
 
-	float drho = M_PIf / stacks;
+	float drho = M_PIf / static_cast<float>(stacks);
 	drho/=textureFov;
 
 	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
@@ -800,7 +799,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 }
 
 // Recursive method cutting a small circle in small segments
-inline void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, Vec3d& win1, Vec3d& win2, QLinkedList<Vec3d>& vertexList, const QLinkedList<Vec3d>::iterator& iter, double radius, const Vec3d& center, int nbI=0, bool checkCrossDiscontinuity=true)
+inline void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, Vec3d& win1, Vec3d& win2, std::list<Vec3d>& vertexList, const std::list<Vec3d>::const_iterator& iter, double radius, const Vec3d& center, int nbI=0, bool checkCrossDiscontinuity=true)
 {
 	const bool crossDiscontinuity = checkCrossDiscontinuity && prj->intersectViewportDiscontinuity(p1+center, p2+center);
 	if (crossDiscontinuity && nbI>=10)
@@ -883,11 +882,11 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 {
 	Q_ASSERT(smallCircleVertexArray.empty());
 
-	QLinkedList<Vec3d> tessArc;	// Contains the list of projected points from the tesselated arc
+	std::list<Vec3d> tessArc;	// Contains the list of projected points from the tesselated arc. (QLinkedList no longer available in Qt6.)
 	Vec3d win1, win2;
 	win1[2] = prj->project(start, win1) ? 1.0 : -1.;
 	win2[2] = prj->project(stop, win2) ? 1.0 : -1.;
-	tessArc.append(win1);
+	tessArc.push_back(win1);
 
 
 	if (rotCenter.lengthSquared()<1e-11)
@@ -905,8 +904,9 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 	}
 
 	// And draw.
-	QLinkedList<Vec3d>::ConstIterator i = tessArc.constBegin();
-	while (i+1 != tessArc.constEnd())
+	std::list<Vec3d>::const_iterator i = tessArc.cbegin();
+	//while (i<tessArc.cend())
+	while (std::next(i, 1) != tessArc.cend())
 	{
 		const Vec3d& p1 = *i;
 		const Vec3d& p2 = *(++i);
@@ -914,10 +914,10 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 		const bool p2InViewport = prj->checkInViewport(p2);
 		if ((p1[2]>0 && p1InViewport) || (p2[2]>0 && p2InViewport))
 		{
-			smallCircleVertexArray.append(Vec3f(static_cast<float>(p1[0]), static_cast<float>(p1[1]), static_cast<float>(p1[2])));
-			if (i+1==tessArc.constEnd())
+			smallCircleVertexArray.append(p1.toVec3f()); //Vec3f(static_cast<float>(p1[0]), static_cast<float>(p1[1]), static_cast<float>(p1[2])));
+			if (std::next(i,1)==tessArc.cend())
 			{
-				smallCircleVertexArray.append(Vec3f(static_cast<float>(p2[0]), static_cast<float>(p2[1]), static_cast<float>(p2[2])));
+				smallCircleVertexArray.append(p2.toVec3f()); //Vec3f(static_cast<float>(p2[0]), static_cast<float>(p2[1]), static_cast<float>(p2[2])));
 				drawSmallCircleVertexArray();
 			}
 			if (viewportEdgeIntersectCallback && p1InViewport!=p2InViewport)
