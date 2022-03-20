@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-07 19:14+0700\n"
+"POT-Creation-Date: 2022-03-11 10:44+0700\n"
 "PO-Revision-Date: 2020-01-06 16:35+0000\n"
 "Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2022\n"
 "Language-Team: Slovak (https://www.transifex.com/stellarium/teams/80998/sk/)\n"
@@ -216,7 +216,7 @@ msgstr "Chápadlo chobotnice"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:20
-#: ../../skycultures/egyptian_dendera/description.en.utf8:11
+#: ../../skycultures/egyptian_dendera/description.en.utf8:197
 msgid "Aries"
 msgstr "Aries"
 
@@ -415,7 +415,7 @@ msgstr "Zornička"
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:83
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:377
 #: ../../skycultures/boorong/description.en.utf8:36
-#: ../../skycultures/egyptian_dendera/description.en.utf8:13
+#: ../../skycultures/egyptian_dendera/description.en.utf8:199
 #: ../../skycultures/lokono/description.en.utf8:26
 #: ../../skycultures/tongan/description.en.utf8:58
 msgid "Venus"
@@ -791,7 +791,7 @@ msgstr ""
 #: ../../skycultures/arabic_al-sufi/description.en.utf8:66
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:522
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:464
-#: ../../skycultures/egyptian_dendera/description.en.utf8:44
+#: ../../skycultures/egyptian_dendera/description.en.utf8:232
 #: ../../skycultures/greek_almagest/description.en.utf8:496
 #: ../../skycultures/greek_farnese/description.en.utf8:299
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:288
@@ -1122,7 +1122,7 @@ msgstr ""
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:69
 #: ../../skycultures/belarusian/description.en.utf8:8
 #: ../../skycultures/chinese_contemporary/description.en.utf8:5
-#: ../../skycultures/egyptian_dendera/description.en.utf8:23
+#: ../../skycultures/egyptian_dendera/description.en.utf8:208
 #: ../../skycultures/macedonian/description.en.utf8:4
 #: ../../skycultures/mongolian/description.en.utf8:15
 #: ../../skycultures/tupi/description.en.utf8:4
@@ -2769,7 +2769,7 @@ msgstr "Al-Naayem 2"
 #: ../../skycultures/boorong/description.en.utf8:220
 #: ../../skycultures/chinese/description.en.utf8:2980
 #: ../../skycultures/dakota/description.en.utf8:57
-#: ../../skycultures/egyptian_dendera/description.en.utf8:47
+#: ../../skycultures/egyptian_dendera/description.en.utf8:236
 #: ../../skycultures/greek_almagest/description.en.utf8:505
 #: ../../skycultures/inuit/description.en.utf8:31
 #: ../../skycultures/lokono/description.en.utf8:377
@@ -4199,7 +4199,7 @@ msgstr ""
 
 #. type: Content of: <h3>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:14
-#: ../../skycultures/egyptian_dendera/description.en.utf8:24
+#: ../../skycultures/egyptian_dendera/description.en.utf8:209
 msgid "Zodiac"
 msgstr "Zvieratník"
 
@@ -4257,7 +4257,7 @@ msgstr ""
 #. type: Content of: <h2>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:31
 #: ../../skycultures/chinese_medieval/description.en.utf8:20
-#: ../../skycultures/egyptian_dendera/description.en.utf8:6
+#: ../../skycultures/egyptian_dendera/description.en.utf8:192
 msgid "Planets"
 msgstr "Planéty"
 
@@ -5060,7 +5060,7 @@ msgstr ""
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:382
-#: ../../skycultures/egyptian_dendera/description.en.utf8:16
+#: ../../skycultures/egyptian_dendera/description.en.utf8:202
 #: ../../skycultures/tongan/description.en.utf8:59
 msgid "Mars"
 msgstr "Mars"
@@ -5076,7 +5076,7 @@ msgstr ""
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:387
-#: ../../skycultures/egyptian_dendera/description.en.utf8:17
+#: ../../skycultures/egyptian_dendera/description.en.utf8:203
 msgid "Saturn"
 msgstr "Saturn"
 
@@ -5094,7 +5094,7 @@ msgstr ""
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:393
-#: ../../skycultures/egyptian_dendera/description.en.utf8:15
+#: ../../skycultures/egyptian_dendera/description.en.utf8:201
 msgid "Mercury"
 msgstr "Merkúr"
 
@@ -5293,9 +5293,10 @@ msgstr "<sup>HVIEZDA</sup><i>SU&#7722;URM&#256;&Scaron;U</i>(Kozo-ryba)"
 msgid "15 STAR<sup>s</sup> of <sup>GOD</sup>Ea"
 msgstr "15 HVIEZD <sup>BOHA</sup>Ea"
 
-#. type: Content of: <h3>
+#. type: Content of: <h2>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:503
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:12
+#: ../../skycultures/egyptian_dendera/description.en.utf8:218
 msgid "Source(s)"
 msgstr "Zdroje"
 
@@ -5332,9 +5333,9 @@ msgstr ""
 "Rencontre Assyriologique Internationale 2018). Viď kapitolu \"Ďalšie "
 "zdroje\" nižšie."
 
-#. type: Content of: <p><p><h3>
+#. type: Content of: <h2>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:513
-#: ../../skycultures/egyptian_dendera/description.en.utf8:36
+#: ../../skycultures/egyptian_dendera/description.en.utf8:221
 msgid "Sources / Further Reading"
 msgstr "Zdroje / Ďalšie čítanie"
 
@@ -5479,6 +5480,7 @@ msgstr ""
 
 #. type: Content of: <p>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:541
+#: ../../skycultures/egyptian_dendera/description.en.utf8:238
 msgid "<em>Susanne M. Hoffmann: service@uhura-uraniae.com </em>"
 msgstr "<em>Susanne M. Hoffmann: service@uhura-uraniae.com </em>"
 
@@ -5493,6 +5495,7 @@ msgstr ""
 
 #. type: Content of: <h5>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:543
+#: ../../skycultures/egyptian_dendera/description.en.utf8:239
 #: ../../skycultures/greek_farnese/description.en.utf8:305
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:294
 msgid "written in English:"
@@ -5500,6 +5503,7 @@ msgstr "napísané v angličtine:"
 
 #. type: Content of: <h5>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:543
+#: ../../skycultures/egyptian_dendera/description.en.utf8:239
 msgid "SMH"
 msgstr "SMH"
 
@@ -6793,7 +6797,7 @@ msgstr "Kakadu biely so žltým chocholom; Vychádzajúce svetlo"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:71
-#: ../../skycultures/egyptian_dendera/description.en.utf8:14
+#: ../../skycultures/egyptian_dendera/description.en.utf8:200
 #: ../../skycultures/lokono/description.en.utf8:46
 msgid "Jupiter"
 msgstr "Jupiter"
@@ -6811,7 +6815,7 @@ msgstr "Deň; Slnko"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:76
 #: ../../skycultures/chinese/description.en.utf8:66
-#: ../../skycultures/egyptian_dendera/description.en.utf8:11
+#: ../../skycultures/egyptian_dendera/description.en.utf8:197
 #: ../../skycultures/lokono/description.en.utf8:16
 #: ../../skycultures/mongolian/description.en.utf8:141
 #: ../../skycultures/tongan/description.en.utf8:53
@@ -6928,7 +6932,7 @@ msgstr "Quoll"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:116
 #: ../../skycultures/chinese/description.en.utf8:67
-#: ../../skycultures/egyptian_dendera/description.en.utf8:12
+#: ../../skycultures/egyptian_dendera/description.en.utf8:198
 #: ../../skycultures/lokono/description.en.utf8:21
 #: ../../skycultures/tongan/description.en.utf8:52
 msgid "Moon"
@@ -10795,26 +10799,26 @@ msgid ""
 "Egyptian bas-relief from the ceiling of the pronaos (or portico) of a chapel"
 " dedicated to Osiris in the Hathor temple at Dendera. This chapel was begun "
 "in the late Ptolemaic period when Egypt was ruled by (Greek) successors of "
-"Alexander the Great (305-30). Its <i>pronaos</i> (a hall in front of the "
-"holy chamber) was added by the Roman emperor Tiberius (14-37 CE). This led "
-"Jean-François Champollion (18th century) to date the relief to the Greco-"
-"Roman period (while most of his contemporaries believed it to be of a "
-"millennium earlier because of the Egyptian style of the figures - this is "
-"not believed anymore). Today, French archaeologists date it to exactly 54 "
-"BCE [1].  The relief is now on display at the Musée du Louvre, Paris "
-"(France)."
+"Alexander the Great (hellenistic Egypt: 305-30 BCE). Its <i>pronaos</i> (a "
+"hall in front of the holy chamber) was added by the Roman emperor Tiberius "
+"(14-37 CE). This led Jean-François Champollion (18th century) to date the "
+"relief to the Greco-Roman period (while most of his contemporaries believed "
+"it to be of a millennium earlier because of the Egyptian style of the "
+"figures - this is not believed anymore). Today, French archaeologists date "
+"it to exactly 54 BCE [1].  The relief is now on display at the Musée du "
+"Louvre, Paris (France)."
 msgstr ""
 "Súsošie Zvieratník z Dendery (alebo Denderah zodiac) je všeobecne známy "
 "egyptský stropný basreliéf z pronaosu (či portika) kaplnky venovanej "
 "Osirisovi v chráme Hathor v Dendere. Kaplnka bola postavená v neskorej "
-"ptolemaiovskej dobe počas vlády (gréckych) nástupcov Alexandra Veľkého "
-"(305-30) v Egypte. Jej <i>pronaos</i> (sieň pred posvätnou komorou) bol "
-"pridaný rímskym cisárom Tiberiom (14-37 n.l.). To viedlo Jean-Françoisa "
-"Champolliona (18. stor.) datovať reliéf do grécko-rímskej periódy (aj keď "
-"väčšina jeho súčasníkov verila, že by mal byť tisíc rokov starší, hlavne pre"
-" egyptský štýl postáv - to je však už vyvrátené). Dnes ho francúzski "
-"archeológovia datujú presne do roku 54 p.n.l. [1]. Reliéf je vystavený v "
-"Múzeu v Louvri, Paríži (Francúzsko)."
+"ptolemaiovskej dobe počas vlády (gréckych) nástupcov Alexandra Veľkého v "
+"Egypte (helenistický Egypt: 305-30 p.n.l.). Jej <i>pronaos</i> (sieň pred "
+"posvätnou komorou) bol pridaný rímskym cisárom Tiberiom (14-37 n.l.). To "
+"viedlo Jean-Françoisa Champolliona (18. stor.) datovať reliéf do grécko-"
+"rímskej doby (aj keď väčšina jeho súčasníkov verila, že by mal byť tisíc "
+"rokov starší, hlavne pre egyptský štýl postáv - to je však už vyvrátené). "
+"Dnes ho francúzski archeológovia datujú presne do roku 54 p.n.l. [1]. Reliéf"
+" je vystavený v Múzeu v Louvri, Paríži (Francúzsko)."
 
 #. type: Content of: <p>
 #: ../../skycultures/egyptian_dendera/description.en.utf8:3
@@ -10838,8 +10842,542 @@ msgstr ""
 "<i>Fotografia z výstavy v Musée du Louvre (Paríž), Public Domain/ CC0. "
 "Platňa má veľkosť 255 x 253 cm.</i>"
 
-#. type: Content of: <p>
+#. type: Content of: <h2>
 #: ../../skycultures/egyptian_dendera/description.en.utf8:7
+msgid "List of constellation figure"
+msgstr "Zoznam obrazcov súhvezdí"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:11
+#: ../../skycultures/egyptian_dendera/description.en.utf8:16
+#: ../../skycultures/egyptian_dendera/description.en.utf8:21
+#: ../../skycultures/egyptian_dendera/description.en.utf8:26
+#: ../../skycultures/egyptian_dendera/description.en.utf8:31
+#: ../../skycultures/egyptian_dendera/description.en.utf8:36
+#: ../../skycultures/egyptian_dendera/description.en.utf8:41
+#: ../../skycultures/egyptian_dendera/description.en.utf8:46
+#: ../../skycultures/egyptian_dendera/description.en.utf8:51
+#: ../../skycultures/egyptian_dendera/description.en.utf8:56
+#: ../../skycultures/egyptian_dendera/description.en.utf8:61
+#: ../../skycultures/egyptian_dendera/description.en.utf8:66
+msgid "zodiac"
+msgstr "zvieratník"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:12
+msgid "<b>Aries</b>"
+msgstr "<b>Baran</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:12
+msgid ""
+"a ram (not the Babylonian Hired Man, not the Roman ram that jumps through a "
+"ring)"
+msgstr ""
+"baran (nie babylonský Námedzný muž, nie rímsky baran skákajúci cez obruč)"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:17
+msgid "<b>Taurus</b>"
+msgstr "<b>Býk</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:17
+msgid "a bull (not the Babylonian halfed bull)"
+msgstr "býk (nie babylonský polovičný býk)"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:22
+msgid "<b>Gemini</b>"
+msgstr "<b>Blíženci</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:22
+msgid ""
+"a couple, i.e. a woman and a man (neither the Babylonian warriors nor the "
+"Greek heros)"
+msgstr "pár, t.j. žena a muž (nie babylonskí bojovníci, ani grécki hrdinovia)"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:27
+msgid "<b>Cancer</b>"
+msgstr "<b>Rak</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:27
+msgid "a crab (as usual)"
+msgstr "rak (ako zvyčajne)"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:32
+msgid "<b>Leo</b>"
+msgstr "<b>Lev</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:32
+msgid "a lion (as usual)"
+msgstr "lev (ako zvyčajne)"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:32
+msgid "with a woman whose head is at Coma Berenices"
+msgstr "so ženou, ktorej hlava je na mieste Vlasov Bereniky"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:37
+msgid "<b>Virgo</b>"
+msgstr "<b>Panna</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:37
+msgid ""
+"a maiden, depicted like the Babylonian goddess Shala (clay tablet AO 6448 "
+"from Uruk)"
+msgstr ""
+"panna, zobrazená ako babylonská bohyňa Šala (hlinená tabuľka AO 6448 z "
+"Uruku)"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:42
+msgid "<b>Libra</b>"
+msgstr "<b>Váhy</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:42
+msgid "a balance (as usual)"
+msgstr "váhy (ako zvyčajne)"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:47
+msgid "<b>Scorpius</b>"
+msgstr "<b>Škorpión</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:47
+msgid "a scorpion (as usual)"
+msgstr "škorpión (ako zvyčajne)"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:52
+msgid "<b>Sagittarius</b>"
+msgstr "<b>Strelec</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:52
+msgid ""
+"this figure is an egyptised version of the Babylonian god Pabilsang; the "
+"double-head indicates a mythical context"
+msgstr ""
+"táto postava je poegyptčená verzia babylonského boha Pabilsanga; dvojitá "
+"hlava má mýtický kontext"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:57
+msgid "<b>Capricornus</b>"
+msgstr "<b>Kozorožec</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:57
+msgid "a goat-fish (Babylonian)"
+msgstr "kozo-ryba (babylonská)"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:62
+msgid "<b>Aquarius</b>"
+msgstr "<b>Vodnár</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:62
+msgid "Egyptian god of the Nile, Hapi"
+msgstr "egyptský boh Nílu, Hapi"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:67
+msgid "<b>Pisces</b>"
+msgstr "<b>Ryby</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:67
+msgid ""
+"two fish (not the Babylonian \"tails of the Giant Swallow\" and not "
+"\"Swallow-Fish\")"
+msgstr ""
+"dve ryby (nie babylonské \"chvosty Obrovskej lastovičky\" a ani "
+"\"Lastovičko-Ryba\")"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:71
+#: ../../skycultures/egyptian_dendera/description.en.utf8:81
+#: ../../skycultures/egyptian_dendera/description.en.utf8:86
+#: ../../skycultures/egyptian_dendera/description.en.utf8:116
+#: ../../skycultures/egyptian_dendera/description.en.utf8:121
+#: ../../skycultures/egyptian_dendera/description.en.utf8:126
+#: ../../skycultures/egyptian_dendera/description.en.utf8:131
+#: ../../skycultures/egyptian_dendera/description.en.utf8:136
+#: ../../skycultures/egyptian_dendera/description.en.utf8:161
+#: ../../skycultures/egyptian_dendera/description.en.utf8:171
+#: ../../skycultures/egyptian_dendera/description.en.utf8:176
+#: ../../skycultures/egyptian_dendera/description.en.utf8:181
+#: ../../skycultures/egyptian_dendera/description.en.utf8:186
+msgid "north"
+msgstr "sever"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:72
+msgid "<b>Ursa Major</b>"
+msgstr "<b>Veľká medvedica</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:72
+msgid ""
+"the Ox Thigh is Egyptian (also depicted on diagonal star clocks, two "
+"millennia earlier), the Fox and the Sheep are at the places of the "
+"Babylonian asterisms \"Fox\" and \"Ewe\""
+msgstr ""
+"Volské stehno je egyptské (taktiež zobrazené na diagonálnych hviezdnych "
+"hodinách o dvetisíc rokov skôr), Líška a Ovca sú na miestach babylonských "
+"asterizmov \"Líška\" a \"Ovca\""
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:76
+#: ../../skycultures/egyptian_dendera/description.en.utf8:91
+#: ../../skycultures/egyptian_dendera/description.en.utf8:96
+#: ../../skycultures/egyptian_dendera/description.en.utf8:101
+#: ../../skycultures/egyptian_dendera/description.en.utf8:106
+#: ../../skycultures/egyptian_dendera/description.en.utf8:111
+#: ../../skycultures/egyptian_dendera/description.en.utf8:141
+#: ../../skycultures/egyptian_dendera/description.en.utf8:146
+#: ../../skycultures/egyptian_dendera/description.en.utf8:151
+#: ../../skycultures/egyptian_dendera/description.en.utf8:156
+#: ../../skycultures/egyptian_dendera/description.en.utf8:166
+msgid "south"
+msgstr "juh"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:77
+msgid "<b>Lupus</b>"
+msgstr "<b>Vlk</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:77
+msgid ""
+"the beast is at the place of the Babylonian \"Mad Dog\" (rabid dog) and the "
+"Greco-Roman Lupus"
+msgstr "šelma je na mieste babylonského \"Besného psa\" a grécko-rímskeho Vlka"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:82
+msgid "<b>Bootes, Corona Borealis and others</b>"
+msgstr "<b>Pastier, Severná koruna a iné</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:82
+msgid ""
+"the hippo goddess is an old Egyptian goddess who guards the celestial pole "
+"and the Ox Thigh (constellation)"
+msgstr ""
+"hrošia bohyňa je staroegyptskou strážkyňou nebeského pólu a (súhvezdia) "
+"Volské stehno"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:87
+msgid "<b>Hydra and Corvus</b>"
+msgstr "<b>Hydra a Havran</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:87
+msgid ""
+"the huge snake with the bird on its tail is the new interpretation of the "
+"Babylonian constellations Snake (Mush-Dragon) and Raven"
+msgstr ""
+"veľký had s vtákom na chvoste je novou interpretáciou babylonských súhvezdí "
+"Had (Mušhuššu) a Havran"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:92
+msgid "<b>Orion</b>"
+msgstr "<b>Orión</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:92
+msgid "Osiris is a deified Egyptian king"
+msgstr "Osiris je zbožštený egyptský kráľ"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:97
+msgid "<b>southwesternmost part of Argo plus Columba</b>"
+msgstr "<b>najjuhozápadnejšia časť Argo a Holubica</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:97
+msgid ""
+"a falcon sitting on a canopy - obviously an Egyptian constellation that "
+"remains today as a star name"
+msgstr ""
+"sokol sediaci na kanope - jednoznačné egyptské súhvezdie, ktoré dnes ostáva "
+"len ako meno hviezdy"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:102
+msgid "<b>Canis Major</b>"
+msgstr "<b>Veľký pes</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:102
+msgid ""
+"Sothis is the Egyptian name of a constellation around Sirius; in Babylon, "
+"there is a goddess with Bow and Arrow at this place"
+msgstr ""
+"Sothis je egyptské meno súhvezdia okolo Síria; v Babylone je na jeho mieste "
+"bohyňa s Lukom a Šípom"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:107
+msgid "<b>Canis Minor</b>"
+msgstr "<b>Malý pes</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:107
+msgid ""
+"as all other bright stars in the area are already decorated, this heavenly "
+"cow apparently needs to be placed on Procyon"
+msgstr ""
+"keďže všetky ostatné jasné hviezdy v tejto oblasti sú už ozdobené, takže "
+"táto nebeská krava musí byť umiestnená na Prokyóne"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:112
+msgid "<b>Lepus</b>"
+msgstr "<b>Zajac</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:112
+msgid ""
+"in Babylonian uranology, a rooster is placed below the Orion-constellation "
+"in the modern Lepus; this bird is apparently the Egyptian version of it"
+msgstr ""
+"v babylonskej nebeskej mytológii je kohút pod súhvezdím Orión v modernom "
+"Zajacovi; tento vták je očividne jeho egyptskou verziou"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:117
+msgid "<b>Pegasus area</b>"
+msgstr "<b>oblasť Pegasa</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:117
+msgid ""
+"the Babylonian constellation of The Field is a quadrilateral of bright "
+"stars. It looks like the Egyptian hieroglyph for \"water\" which makes sense"
+" in the neighbourhood of fish."
+msgstr ""
+"babylonské súhvezdie Pole je štoruholník jasných hviezd. Vyzerá ako egyptský"
+" hieroglyf pre \"vodu\", čo dáva zmysel, keďže je v susedstve ryby."
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:122
+msgid "<b>Aquila area</b>"
+msgstr "<b>oblasť Orla</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:122
+msgid ""
+"this small dark bird (a duck?) apparently is located in the area of Aquila. "
+"For the time being, I put it on the bright star (Altair)."
+msgstr ""
+"tento malý tmavý vták (kačka?) je očividne umiestnený v oblasti Orla. "
+"Nateraz ho umiestnim na jasnú hviezdu (Altair)."
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:127
+msgid "<b>Delphinus area</b>"
+msgstr "<b>oblasť Delfína</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:127
+msgid ""
+"next to this bird, there is a cadaver of an animal - interestingly at the "
+"place of the Babylonian constellation of \"the Corpse\""
+msgstr ""
+"vedľa tohto vtáka je zdochlina zvieraťa - zaujímavé, že na tomto mieste je "
+"babylonské súhvezdie \"Mŕtvola\""
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:132
+msgid "<b>Cygnus / Cepheus area</b>"
+msgstr "<b>oblasť Labute / Cefea</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:132
+#: ../../skycultures/egyptian_dendera/description.en.utf8:142
+#: ../../skycultures/egyptian_dendera/description.en.utf8:187
+msgid "?"
+msgstr "?"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:137
+msgid "<b>Lyra / Ophiuchus area</b>"
+msgstr "<b>oblasť Lýry / Hadonosa</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:137
+msgid ""
+"there is a huge Egyptian figure in the area of Lyra and Ophiuchus. In Lyra "
+"was the Babylonian constellation of the goddess of medicine, while Ophiuchus"
+" is the Greek equivalent. Thus, this might possibly be the Egyptian "
+"mythological founder of medicine, Imhotep."
+msgstr ""
+"v tejto oblasti je veľká egyptská postava Lýry a Hadonosa. V Lýre sa "
+"nachádzalo babylonské súhvezdie bohyne lekárstva, kým Hadonos je jeho grécky"
+" ekvivalent. Teda by to možno mohol byť egyptský mytologický zakladateľ "
+"lekárstva, Imhotep."
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:142
+msgid "<b>Cetus area</b>"
+msgstr "<b>oblasť Veľryby</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:147
+msgid "<b>Centaurus area</b>"
+msgstr "<b>oblasť Kentaura</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:147
+msgid ""
+"the Egyptian figure shows a landworker and at this place, there is the "
+"Babylonian god of agriculture and war (Ningirsu), so this might be a very "
+"strange depiction of the Egyptian god Min who was merged with Greek Pan in "
+"late epochs"
+msgstr ""
+"táto egyptská postava znázorňuje robotníka. Na jeho mieste je babylonský boh"
+" poľnohospodárstva a vojny (Ningirsu), takže by mohlo ísť o veľmi zvláštne "
+"zobrazenie egyptského boha Mina, ktorý bol spojený v neskorších dobách s "
+"gréckym Panom"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:152
+msgid "<b>eastern and southern Argo area</b>"
+msgstr "<b>západná a južná oblasť Argo</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:152
+msgid ""
+"the image shows a mother goddess, in Egyptian this is Isis and in Babylonian"
+" this would be Ninmakh (who is indeed positioned at this place)"
+msgstr ""
+"tento obrazec znázorňuje bohyňu-matku, v Egypte to je Isis a v Babylone by "
+"to bola Ninmach (ktorá sa naozaj na tomto mieste nachádza)"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:157
+msgid "<b>northwestern Argo area</b>"
+msgstr "<b>severozápadná oblasť Argo</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:157
+msgid ""
+"the hat of this woman resembles the Egyptian goddess Anuket, the goddess of "
+"the Nile flood. In Babylonian uranology of the middle first millennium, "
+"there is the goddess Nunki at this area: due to the sound of the names, an "
+"exchange or transfer is likely."
+msgstr ""
+"klobúk tejto ženy pripomína egyptskú bohyňu Anuket, bohyňu nílskych záplav. "
+"V babylonskej astronómii polovice prvého tisícročia je v tejto oblasti "
+"bohyňa Nunki. Pri podobne znejúcich menách je táto zámena pravdepodobná."
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:162
+msgid "<b>Auriga</b>"
+msgstr "<b>Povozník</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:162
+msgid ""
+"goat is at the position of the constellation Auriga (neither in Babylonian "
+"nor in Greek tradition, there is a goat at this place. Highly likely, the "
+"Roman star name Capella (the Goat) resembles this Egyptian constellation."
+msgstr ""
+"koza je na mieste súhvezdia Povozník (ani v babylonskej, ani v gréckej "
+"tradícii sa na tomto mieste koza nenachádza). Je veľmi pravdepodobné, že "
+"rímske meno hviezdy Capella (koza) pripomína práve egyptské súhvezdie."
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:167
+msgid "<b>alpha Centauri area</b>"
+msgstr "<b>oblasť alfa Centauri</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:167
+msgid ""
+"the ceiling clearly depicts an Egyptian Chenti Irti figure: this little "
+"creature should be positioned in the area around/ above the bright star "
+"alpha Centauri, and there is no Greek or Babylonian equivalent. The meaning "
+"of Chenti Irti is unclear but a suggestion is \"the sharp sighted one\" "
+"which could make sense for a bright star that is only roughly 5° above the "
+"horizon (2nd c. BCE in Egypt)"
+msgstr ""
+"strop zreteľne zobrazuje egyptskú postavu Čenti Irti: táto malá bytosť by sa"
+" mala nachádzať v oblasti okolo/nad jasnou hviezdou alfa Centauri a "
+"neexistuje k nej grécky ani babylonský ekvivalent. Význam Čenti Irti je "
+"nejasný, ale náznakom je \"bystrozraký\", čo by mohlo dávať zmysel pre jasnú"
+" hviezdu, ktorá je len asi 5° nad obzorom (v 2. stor. p.n.l. v Egypte)"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:172
+msgid "<b>\"above\" Aries</b>"
+msgstr "<b>\"nad\" Baranom</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:172
+msgid "the udjat eye in this context probably refers to the spring equinox"
+msgstr ""
+"Horovo oko v tomto kontexte pravdepodobne odkazuje na jarnú rovnodennosť"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:177
+msgid "<b>Perseus area</b>"
+msgstr "<b>oblasť Perzea</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:177
+msgid ""
+"the baboon is an attribute or representation of the Egyptian god Thoth and "
+"therefore worshipped"
+msgstr "pavián je zobrazením egyptského boha Thowta a preto uctievaný"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:182
+msgid "<b>Ursa Minor area</b>"
+msgstr "<b>oblasť Malej medvedice</b>"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:182
+msgid "a falcon (one of the many falcon deities)"
+msgstr "sokol (jedno z mnohých sokolích božstiev)"
+
+#. type: Content of: <p><table><tr><td>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:187
+msgid "<b>Cassiopeia area</b>"
+msgstr "<b>oblasť Kasiopeje</b>"
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:193
+msgid ""
+"In this sky culture, some Egyptian names are attached to the planets. "
+"Honestly, each planet had many names, sometimes depending on the context "
+"(e.g. Venus as morning star and evening star). We cannot include all names "
+"in the Stellarium name but they are stored in other database. On the Dendera"
+" ceiling, the planets are represented at fixed positions and as deities."
+msgstr ""
+"V tejto kultúre oblohy sú niektoré egyptské mená priradené planétam. "
+"Úprimne, každá planéta má mnoho mien, niekedy závisiacich na kontexte (napr."
+" Venuša ako Zornička a Večernica). Nemohli sme do Stellaria zaradiť všetky "
+"mená, ale sú uložené v inej databáze. Na strope z Dendery sú planéty "
+"zobrazené ako božstvá na pevných polohách."
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:194
 msgid ""
 "The planets are depicted as deities in their \"standard position\". As "
 "planets move, they can only be presented in the sky by defining fixed "
@@ -10852,42 +11390,42 @@ msgstr ""
 "hviezd a v katalógu."
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:9
+#: ../../skycultures/egyptian_dendera/description.en.utf8:195
 msgid "These standard positions:"
 msgstr "Tieto štandardné polohy:"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:12
+#: ../../skycultures/egyptian_dendera/description.en.utf8:198
 msgid "Taurus"
 msgstr "Býk"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:13
+#: ../../skycultures/egyptian_dendera/description.en.utf8:199
 msgid "Pisces"
 msgstr "Ryby"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:14
+#: ../../skycultures/egyptian_dendera/description.en.utf8:200
 msgid "Cancer (or betw. Cnc and Leo)"
 msgstr "Rak (alebo medzi Cnc a Leo)"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:15
+#: ../../skycultures/egyptian_dendera/description.en.utf8:201
 msgid "Virgo"
 msgstr "Panna"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:16
+#: ../../skycultures/egyptian_dendera/description.en.utf8:202
 msgid "Capricornus"
 msgstr "Kozorožec"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:17
+#: ../../skycultures/egyptian_dendera/description.en.utf8:203
 msgid "Libra"
 msgstr "Váhy"
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:19
+#: ../../skycultures/egyptian_dendera/description.en.utf8:205
 msgid ""
 "These positions are equal to the \"secret places\" in Babylonian astrology "
 "and the \"hypsomata\" (exaltation points) in Greek astrology."
@@ -10896,7 +11434,7 @@ msgstr ""
 "\"hypsomámi\" (povýšeniami) v gréckej astrológii."
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:21
+#: ../../skycultures/egyptian_dendera/description.en.utf8:206
 msgid ""
 "Additionally, the equinoxes are marked with great disks: One in Libra and "
 "one Aries."
@@ -10905,7 +11443,7 @@ msgstr ""
 "Baranovi."
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:25
+#: ../../skycultures/egyptian_dendera/description.en.utf8:210
 msgid ""
 "The zodiac came to Greece from Babylonian sources. It is unknown whether or "
 "not the Egyptians had similar figures: The origin of the zodiac is the path "
@@ -10920,7 +11458,7 @@ msgstr ""
 "babylonského."
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:26
+#: ../../skycultures/egyptian_dendera/description.en.utf8:211
 msgid ""
 "The Zodiac is the Babylonian one with the semi-exception of Pisces: Pisces "
 "are depicted as two fish which is never found in Babylon and only an "
@@ -10936,7 +11474,7 @@ msgstr ""
 " vždy šlo o \"Chvosty obrovskej lastovičky\" (Steele 2018)."
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:27
+#: ../../skycultures/egyptian_dendera/description.en.utf8:212
 msgid ""
 "The other constellations of the zodiac are the Babylonian versions, "
 "partially egyptized. Virgo is depicted as the Babylonian Goddess Shala with "
@@ -10955,13 +11493,13 @@ msgstr ""
 "kráľovnú Bereniku (ktorej meno dalo názov súhvezdiu Vlasy Bereniky). "
 "Blíženci nie sú zobrazení ako dvojičky, ale ako pár. Býk nie je rozpolený."
 
-#. type: Content of: <p><p><h3>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:28
+#. type: Content of: <h3>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:213
 msgid "Outside the Zodiac"
 msgstr "Mimo zvieratníka"
 
-#. type: Content of: <p><p><p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:29
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:214
 msgid ""
 "The rest of the sky also shows a mixture of several cultures: The hippo "
 "goddess who guards the Ox Thigh is a clearly Egyptian constellation. "
@@ -10974,8 +11512,8 @@ msgstr ""
 "vedľa Volského stehna sa nachádza púštna líška a ovca, ktoré sú na rovnakom "
 "mieste, ako babylonské Líška a ovca."
 
-#. type: Content of: <p><p><p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:30
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:215
 msgid ""
 "In contrast to these native Egyptian constellations, there are also native "
 "Sumerian ones that are depicted in an Egyptized way: This is marked in the "
@@ -10985,8 +11523,8 @@ msgstr ""
 " tiež zobrazené v egyptskom štýle. Toto je zaznačené aj v \"preklade\" "
 "názvov Stellaria."
 
-#. type: Content of: <p><p><p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:31
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:216
 msgid ""
 "Interestingly, this depiction explains several Greek names of single stars: "
 "e.g. at the position of Capella, there is a whitish Goat in the Dendera "
@@ -11003,29 +11541,24 @@ msgstr ""
 " boli pôvodne egyptské a premenili sa na meno hviezdy až v neskoršej epoche,"
 " aby pripomínali zastarané súhvezdia."
 
-#. type: Content of: <h3>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:33
-#: ../../skycultures/sami/description.en.utf8:8
-#: ../../skycultures/russian_siberian/description.en.utf8:28
-#: ../../skycultures/tukano/description.en.utf8:43
-msgid "Sources"
-msgstr "Zdroje"
-
-#. type: Content of: <p><p><p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:34
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:219
 msgid ""
 "This <em>sky culture</em> is a mapping of historical figures onto the stars."
 " The figures are directly copied by hand from the digital photographs that "
-"are provided by the Louvre and the colours follow roughly the reconstruction"
-" by Alexandre N.Isis (wikicommons, 2013)."
+"are provided by the Louvre and the <a "
+"href=\"https://en.wikipedia.org/wiki/File:Zodiaque_de_Denderah_aux_couleurs_d'origine.jpg\">colours"
+" follow roughly the reconstruction by Alexandre N.Isis (wikicommons, "
+"2013)</a>."
 msgstr ""
 "Táto <em>kultúra oblohy</em> je mapovaním historických obrazcov na hviezdy. "
 "Obrazce sú priamo ručne skopírované z digitálnych fotografií, ktoré poskytlo"
-" múzeum Louvre a farby sú hrubou rekonštrukciou Alexandrea N. Isisa "
-"(wikicommons, 2013)."
+" múzeum Louvre a <a "
+"href=\"https://en.wikipedia.org/wiki/File:Zodiaque_de_Denderah_aux_couleurs_d'origine.jpg\">farby"
+" sú hrubou rekonštrukciou Alexandrea N. Isisa (wikicommons, 2013)</a>."
 
-#. type: Content of: <p><p><ul><li>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:38
+#. type: Content of: <ul><li>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:223
 msgid ""
 "<a "
 "href=\"https://collections.louvre.fr/en/ark:/53355/cl010028871#\">Photographs"
@@ -11035,8 +11568,8 @@ msgstr ""
 "href=\"https://collections.louvre.fr/en/ark:/53355/cl010028871#\">Fotografie"
 " zo zbierok Louvru</a>"
 
-#. type: Content of: <p><p><ul><li>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:39
+#. type: Content of: <ul><li>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:224
 msgid ""
 "Aubourg, E. (1995), ‘La date de conception du zodiaque du temple d’Hathor à "
 "Dendera’, Bulletin de l’Institut Français d’Archéologie Orientale 95, 1–10"
@@ -11044,8 +11577,8 @@ msgstr ""
 "Aubourg, E. (1995), ‘La date de conception du zodiaque du temple d’Hathor à "
 "Dendera’, Bulletin de l’Institut Français d’Archéologie Orientale 95, 1–10"
 
-#. type: Content of: <p><p><ul><li>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:40
+#. type: Content of: <ul><li>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:225
 msgid ""
 "Biot, J.-B. (1846), ‘Mémoire sur le zodiaque circulaire de denderah.’, "
 "Mémoires de l’Institutnational de France16(2ème partie), 1–101"
@@ -11053,38 +11586,72 @@ msgstr ""
 "Biot, J.-B. (1846), ‘Mémoire sur le zodiaque circulaire de denderah.’, "
 "Mémoires de l’Institutnational de France16(2ème partie), 1–101"
 
-#. type: Content of: <p><p><ul><li>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:41
+#. type: Content of: <ul><li>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:226
 msgid ""
-"Steele (2018), The development of the Babylonian zodiac: Some preliminary "
-"observations.’, Mediterranean Archaeology and Archaeometry, 18, 4, 97-105"
+"Hoffmann, Susanne M. (2017), Hipparchs Himmelsglobus, Springer, Wiesbaden/ "
+"New York, Chapter 4.2.2"
 msgstr ""
-"Steele (2018), The development of the Babylonian zodiac: Some preliminary "
-"observations.’, Mediterranean Archaeology and Archaeometry, 18, 4, 97-105"
+"Hoffmann, Susanne M. (2017), Hipparchs Himmelsglobus, Springer, Wiesbaden/ "
+"New York, Chapter 4.2.2"
 
-#. type: Content of: <p><p><p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:45
+#. type: Content of: <ul><li>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:227
+msgid ""
+"Hoffmann, Susanne M. (2022), Preliminary Observations on the Dendera Zodiac "
+"(Egypt), in: Hoffmann and Wolfschmidt (ed.), Astronomy in Culture - Cultures"
+" of Astronomy, Nuncius Hamburgensis, Vol. 57, tredition, Hamburg"
+msgstr ""
+"Hoffmann, Susanne M. (2022), Preliminary Observations on the Dendera Zodiac "
+"(Egypt), in: Hoffmann and Wolfschmidt (ed.), Astronomy in Culture - Cultures"
+" of Astronomy, Nuncius Hamburgensis, Vol. 57, tredition, Hamburg"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:228
+msgid ""
+"Steele, John M. (2018), The development of the Babylonian zodiac: Some "
+"preliminary observations.’, Mediterranean Archaeology and Archaeometry, 18, "
+"4, 97-105"
+msgstr ""
+"Steele, John M. (2018), The development of the Babylonian zodiac: Some "
+"preliminary observations.’, Mediterranean Archaeology and Archaeometry, 18, "
+"4, 97-105"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:229
+msgid ""
+"<a href=\"https://en.wikipedia.org/wiki/Dendera_zodiac\">wikipedia</a> "
+"(manches falsch)"
+msgstr ""
+"<a href=\"https://en.wikipedia.org/wiki/Dendera_zodiac\">wikipedia</a> "
+"(niektoré nesprávne)"
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:233
 msgid ""
 "This sky culture originates from research. We provide this for free but the "
 "authors of contributions certainly deserve to be cited according to the "
-"common rules. This sky culture is provided under CC BY-ND 4.0 International "
-"Public Licence (share-alike, do not change it without consulting the "
-"contributors, and cite the contributors). Thank you!"
+"common rules."
 msgstr ""
-"Táto kultúra oblohy pochádza z výskumu. Poskytujeme ju zadarmo, ale autori "
-"si istotne zaslúžia byť citovaní podľa bežných pravidiel. Táto kultúra "
-"oblohy je poskytnutá pod medzinárodnou verejnou licenciou CC BY-ND 4.0 "
-"(možné zdieľať, nemeniť bez konzultácie s autormi a citovať prispievateľov)."
-" Ďakujeme!"
+"Táto kultúra oblohy je výsledkom výskumu. Poskytujeme ju zdarma, ale autori "
+"si určite zaslúžia byť citovaní podľa bežných pravidiel."
 
-#. type: Content of: <p><p><p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:48
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:234
 msgid ""
-"This Greco-Egyptian sky culture was painted and added to Stellarium by: "
-"<em>Susanne M. Hoffmann: service@uhura-uraniae.com</em>"
+"This sky culture is provided under CC BY-ND 4.0 International Public Licence"
+" (share-alike, do not change it without consulting the contributors, and "
+"cite the contributors). Thank you!"
 msgstr ""
-"Táto grécko-rímska kultúra oblohy bola namaľovaná a do Stellaria pridaná "
-"<em>Susanne M. Hoffmannovou: service@uhura-uraniae.com</em>"
+"Táto kultúra oblohy je poskytnutá pod licenciou CC BY-ND 4.0 International "
+"Public Licence (možné zdieľať, nemeniť bez konzultácie s autormi a citovať "
+"prispievateľov). Ďakujeme!"
+
+#. type: Content of: <p>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:237
+msgid ""
+"This Greco-Egyptian sky culture was painted and added to Stellarium by:"
+msgstr "Túto grécko-rímsku kultúru oblohy namaľoval a do Stellaria pridal:"
 
 #. type: Content of: <h1>
 #: ../../skycultures/greek_almagest/description.en.utf8:1
@@ -19345,6 +19912,13 @@ msgstr ""
 "href=\"http://en.wikipedia.org/wiki/Sami_people\">článku o národe Sami na "
 "Wikipédii</a>."
 
+#. type: Content of: <h3>
+#: ../../skycultures/sami/description.en.utf8:8
+#: ../../skycultures/russian_siberian/description.en.utf8:28
+#: ../../skycultures/tukano/description.en.utf8:43
+msgid "Sources"
+msgstr "Zdroje"
+
 #. type: Content of: <p>
 #: ../../skycultures/sami/description.en.utf8:10
 msgid ""
@@ -20052,15 +20626,17 @@ msgstr "Tukanské súhvezdia"
 #. type: Content of: <p>
 #: ../../skycultures/tukano/description.en.utf8:2
 msgid ""
-"Tukano is the common name for a group of indigenous tribes who live around "
-"the northwestern region of Brazil, near Colombia and Venezuela. The group "
-"shown in this work live on the banks of the Rio Tiquié within the Rio Negro "
-"bay in the Amazonas State, Brazil."
+"<a href=\"https://en.wikipedia.org/wiki/Tucano_people\">Tukano</a> is the "
+"common name for a group of indigenous tribes who live around the "
+"northwestern region of Brazil, near Colombia and Venezuela. The group shown "
+"in this work live on the banks of the Rio Tiquié within the Rio Negro bay in"
+" the Amazonas State, Brazil."
 msgstr ""
-"Tukanovia je spoločný názov pre skupinu domorodých kmeňov, ktoré žijú v "
-"severozápadnej Brazílii, blízko Kolumbie a Venezuely. Skupina, ktorá je v "
-"tejto práci prezentovaná, žije na brehoch rieky Rio Tiquié v zálive rieky "
-"Rio Negro v štáte Amazonas, Brazília."
+"<a href=\"https://en.wikipedia.org/wiki/Tucano_people\">Tukanovia</a> je "
+"spoločný názov pre skupinu domorodých kmeňov, ktoré žijú v severozápadnej "
+"Brazílii, blízko Kolumbie a Venezuely. Skupina, ktorá je v tejto práci "
+"prezentovaná, žije na brehoch rieky Rio Tiquié v zálive rieky Rio Negro v "
+"štáte Amazonas, Brazília."
 
 #. type: Content of: <h5>
 #: ../../skycultures/tukano/description.en.utf8:5
@@ -20496,8 +21072,19 @@ msgstr ""
 " západom a východom hlavných súhvezdí vytvorených severovýchodnými "
 "amazonskými Indiánmi."
 
+#. type: Content of: <p>
+#: ../../skycultures/tukano/description.en.utf8:47
+msgid ""
+"<a "
+"href=\"https://escholarship.org/content/qt7qn7t90d/qt7qn7t90d_noSplash_9570d6c8c98f36ee3070b0dd62580aec.pdf?t=oaw7e7\">scholarly"
+" Paper</a>"
+msgstr ""
+"<a "
+"href=\"https://escholarship.org/content/qt7qn7t90d/qt7qn7t90d_noSplash_9570d6c8c98f36ee3070b0dd62580aec.pdf?t=oaw7e7\">vedecké"
+" články</a>"
+
 #. type: Content of: <h4>
-#: ../../skycultures/tukano/description.en.utf8:48
+#: ../../skycultures/tukano/description.en.utf8:49
 msgid ""
 "Walmir Thomazi Cardoso gathered this information in a survey that is part of"
 " his PhD. Thesis of Ethnomathematics (walmir.astronomia@gmail.com)"
@@ -20506,7 +21093,7 @@ msgstr ""
 "časť jeho dizertačnej práce o Etnomatematike (walmir.astronomia@gmail.com)"
 
 #. type: Content of: <h4><br>
-#: ../../skycultures/tukano/description.en.utf8:48
+#: ../../skycultures/tukano/description.en.utf8:49
 msgid ""
 "Displays were made by Antonio Gumercindo Taques dos Santos (Ticão) and "
 "Youssif Ganthous Filho (youssif@gmail.com)."
