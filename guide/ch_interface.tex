@@ -1080,12 +1080,12 @@ This window \newFeature{0.15.0} provides advanced functionality, some of which i
 You can call it by pressing \key{F10} or the button \guibutton{0.6}{btd_astrocalc.png} on the left menu bar. 
 The Astronomical Calculations window shows eight tabs with different functionality.
 
-In version 0.18.3 \newFeature{0.18.3} we added exporting the data to XLSX files in addition to CSV files.
+Most tabs allow \newFeature{0.18.3} exporting computed data to XLSX (Excel) files in addition to CSV files.
 
 \subsection{The Positions Tab}
 \label{sec:gui:AstroCalc:Positions}
 
-This tab \newFeature{0.16.0} shows J2000.0 or horizontal positions, magnitudes and additional parameters 
+This tab \newFeature{0.16.0} shows equatorial J2000.0 or horizontal positions, magnitudes and additional parameters 
 (e.g.\ surface brightness for deep-sky objects or angular separation for double stars) for various 
 lists of celestial objects above the horizon at the simulated time, filtered by magnitude. 
 Double-clicking on an entry brings the object into focus (Fig.~\ref{fig:gui:AstroCalc:Positions}). 
@@ -1097,7 +1097,10 @@ You may also export the list of positions into an XLSX or CSV file.
 	\label{fig:gui:AstroCalc:Positions}
 \end{figure}
 
-In version 0.22.0\newFeature{0.22.0} this tab was splitted onto 2 subtabs: ``Seen now'' and ``Major planets''. The newly added ``Major planets'' subtab (Fig.~\ref{fig:gui:AstroCalc:Positions:MajorPlanets}) has table with heliocentric ecliptic positions of the major planets and graphical representation of these positions (in polar coordinates). You may also export the list of positions into an XLSX or CSV file.
+This tab \newFeature{0.22.0} is split into 2 subtabs: ``Seen now'' and ``Major planets''.
+The newly added ``Major planets'' subtab (Fig.~\ref{fig:gui:AstroCalc:Positions:MajorPlanets}) shows a table
+with heliocentric ecliptic positions of the major planets and a graphical representation of these positions
+(in polar coordinates). You may also export the list of positions into an XLSX or CSV file.
 
 \begin{figure}[htbp]
 	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_positions_mp_tab.png}
@@ -1172,12 +1175,11 @@ two objects at the same time and define custom time step for the ephemeris
 	\label{fig:gui:AstroCalc:RTS}
 \end{figure}
 
-\noindent This \newFeature{0.19.3} tab allows you to compute meridian transits of selected celestial object 
+\noindent This \newFeature{0.19.3} tab allows you to compute meridian transits and
+\newFeature{0.22.0} rising and setting times of selected celestial object 
 (except unnamed stars and artificial satellites) for a specific date range. 
-The tool is proposed for planning observations, and it suggests the best time and conditions 
+The tool is useful for planning observations, and it suggests the best time and conditions 
 for visual observations or astrophotography (Fig.~\ref{fig:gui:AstroCalc:RTS}). 
-
-In version 0.22.0\newFeature{0.22.0} we extended this tool by adding time of rising and setting and renamed onto RTS.
 
 You may also export the list of transits into an XLSX or CSV file.
 
@@ -1187,10 +1189,9 @@ You may also export the list of transits into an XLSX or CSV file.
 This tab allows you to compute phenomena like conjunctions, oppositions, 
 occultations and eclipses (in special cases) between planetary objects 
 (Fig.~\ref{fig:gui:AstroCalc:Phenomena}). 
-In version 0.19.3\newFeature{0.19.3} we added computation of greatest 
-elongations for the inner planets and stationary points for all planets in
-addition to the exist phenomena. For all Solar system bodies, except the moons, 
-we also compute perihelia and aphelia in addition to the other phenomena.
+In addition, \newFeature{0.19.3} it provides computation of greatest 
+elongations for the inner planets and stationary points for all planets, and,
+for all Solar system bodies except the moons, we also compute perihelia and aphelia.
 
 You can export the calculated phenomena into an XLSX or CSV file.
 
@@ -1345,9 +1346,8 @@ orbital resonances and orbital velocities.
 \label{fig:gui:AstroCalc:PC:Data}
 \end{figure}
 
-In version 0.18.2 \newFeature{0.18.2} we enhanced this tool with a
-new \emph{Graphs} tab (Fig.~\ref{fig:gui:AstroCalc:PC:Graphs}), where
-you may see the change in the linear and angular distances between
+The \emph{Graphs} tab \newFeature{0.18.2} (Fig.~\ref{fig:gui:AstroCalc:PC:Graphs})
+shows the change in the linear and angular distances between
 selected celestial bodies over a range of 600 days (centered on the
 current date) as graphs.
 
@@ -1357,17 +1357,22 @@ current date) as graphs.
 \label{fig:gui:AstroCalc:PC:Graphs}
 \end{figure}
 
-\subsection{The Eclipses Tab}
+\subsection{The ``Eclipses'' Tab}
 \label{sec:gui:AstroCalc:Eclipses}
 
-The Eclipses tool\newFeature{0.22.0} has been added in version 0.22.0 and has three subtabs --- ``All Solar Eclipses'', ``Local Solar Eclipses'' and ``Lunar Eclipses''. 
+The Eclipses tool\newFeature{0.22.0} has three subtabs: ``All Solar Eclipses'', ``Local Solar Eclipses'' and ``Lunar Eclipses''. 
 
 You can export the calculated eclipses into an XLSX or CSV file.
+
+\paragraph{Caution}
+Predicting eclipses, and in particular local circumstances, over thousands of years in the past and future
+is not reliable due to the principal unpredictability of $\Delta T$, caused by fluctuations of Earth's rotation. (See section \ref{sec:Concepts:DeltaT} for details.)
+
 
 \subsubsection{The ``All Solar Eclipses'' Subtab}
 \label{sec:gui:AstroCalc:Eclipses:AllSolarEclipses}
 
-This subtab (Fig.~\ref{fig:gui:AstroCalc:Eclipses:AllSolarEclipses}) contains data for all solar eclipses on the Earth in defined time range. 
+This subtab (Fig.~\ref{fig:gui:AstroCalc:Eclipses:AllSolarEclipses}) contains data for all solar eclipses on the Earth in the selected time range. 
 
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_eclipses_ase.jpg}
@@ -1375,9 +1380,10 @@ This subtab (Fig.~\ref{fig:gui:AstroCalc:Eclipses:AllSolarEclipses}) contains da
 \label{fig:gui:AstroCalc:Eclipses:AllSolarEclipses}
 \end{figure}
 
-Double click on the table row will be going to the location and time of greatest eclipse.
+Double click on a line in the table will set location and time of greatest eclipse.
 
-The quantity gamma is the minimum distance from the axis of lunar shadow cone to the center of Earth, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the axis of the shadow cone passes north or south of the Earth's center. Path of solar eclipses during thousands of years in the past and future are not reliable due to uncertainty in $\Delta T$ which is caused by fluctuations in Earth's rotation.
+The quantity gamma is the minimum distance of the lunar shadow cone axis to the center of the Earth, in units of Earth’s equatorial radius.
+This distance is positive or negative, depending on whether the axis of the shadow cone passes north or south of the Earth's center.
 
 \subsubsection{The ``Local Solar Eclipses'' Subtab}
 \label{sec:gui:AstroCalc:Eclipses:LocalSolarEclipses}
@@ -1390,9 +1396,8 @@ This subtab (Fig.~\ref{fig:gui:AstroCalc:Eclipses:LocalSolarEclipses}) contains 
 \label{fig:gui:AstroCalc:Eclipses:LocalSolarEclipses}
 \end{figure}
 
-Double click on the table row will be going to the time of greatest eclipse.
+Double click on a line in the table will set the time of greatest eclipse.
 
-Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in $\Delta T$ which is caused by fluctuations in Earth's rotation.
 
 \subsubsection{The ``Lunar Eclipses'' Subtab}
 \label{sec:gui:AstroCalc:Eclipses:LunarEclipses}
@@ -1405,16 +1410,18 @@ This subtab (Fig.~\ref{fig:gui:AstroCalc:Eclipses:LunarEclipses}) contains data 
 \label{fig:gui:AstroCalc:Eclipses:LunarEclipses}
 \end{figure}
 
-Double click on the table row will be going to the location and time of greatest eclipse.
+Double click on the table row will set time of greatest eclipse.
 
-The quantity gamma is the minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the Moon passes north or south of the shadow cone axis. Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in $\Delta T$ which is caused by fluctuations in Earth's rotation.
+The quantity gamma is the minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone, in units of Earth’s equatorial radius.
+This distance is positive or negative, depending on whether the Moon passes north or south of the shadow cone axis.
+
 
 The visibility conditions are based on the altitude of the Moon at greatest eclipse:
 \begin{description}
-  \item[Invisible] --- the greatest eclipse is invisible in current location (altitude is negative);
+  \item[Invisible] --- the greatest eclipse is invisible at the current location (altitude is negative);
   \item[Not obs.] --- not observable eclipse. Our rule of thumb is that a partial penumbral eclipse is detectable with the unaided eye if penumbral magnitude > 0.7;
   \item[Bad] --- bad visibility conditions for current location (altitude range is 0---30$\degree$);
-  \item[Good] --- good visibility conditions for current location (altitude range is 30---45$\degree$; e.g. since a ``photometric altitude'');
+  \item[Good] --- good visibility conditions for current location (altitude range is 30---45$\degree$; i.e., ``photometric altitude'');
   \item[Perfect] --- perfect visibility conditions for current location (altitude range is 45---90$\degree$).
 \end{description}
 
@@ -1442,7 +1449,7 @@ a browse of the information in this window.
 \end{figure}
 
 The About Tab (Fig.~\ref{fig:gui:help:about}) shows version and licensing information, and a list of people who helped to produce the program.
-Since version 0.18.3 \newFeature{0.18.3} this tab has tool to check for updates of Stellarium.
+This tab \newFeature{0.18.3} also provides a tool to check for updates of Stellarium.
 
 \subsection{The Log Tab}
 \label{sec:gui:help:log}
