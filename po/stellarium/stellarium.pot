@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-17 01:57+0700\n"
+"POT-Creation-Date: 2022-03-20 17:01+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,9 +54,9 @@ msgstr ""
 
 #: src/core/modules/AsterismMgr.cpp:98
 #: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:465
-#: src/core/modules/GridLinesMgr.cpp:1843
-#: src/core/modules/SpecialMarkersMgr.cpp:260
-#: src/core/modules/LandscapeMgr.cpp:565
+#: src/core/modules/GridLinesMgr.cpp:1844
+#: src/core/modules/SpecialMarkersMgr.cpp:265
+#: src/core/modules/LandscapeMgr.cpp:586
 #: src/core/modules/NomenclatureMgr.cpp:79 src/core/modules/NebulaMgr.cpp:474
 #: src/core/modules/NebulaMgr.cpp:475 src/core/modules/SolarSystem.cpp:299
 #: src/core/modules/MilkyWay.cpp:85 src/core/modules/ZodiacalLight.cpp:87
@@ -181,7 +181,7 @@ msgstr ""
 msgid "O./C. longitude"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:725 src/core/modules/GridLinesMgr.cpp:1864
+#: src/core/modules/GridLinesMgr.cpp:725 src/core/modules/GridLinesMgr.cpp:1865
 #: src/ui_viewDialog.h:3817
 msgid "Prime Vertical"
 msgstr ""
@@ -227,93 +227,93 @@ msgid "Projected Solar Equator"
 msgstr ""
 
 #. TRANSLATORS: North Celestial Pole
-#: src/core/modules/GridLinesMgr.cpp:1337
-#: src/core/modules/GridLinesMgr.cpp:1346
+#: src/core/modules/GridLinesMgr.cpp:1338
+#: src/core/modules/GridLinesMgr.cpp:1347
 msgid "NCP"
 msgstr ""
 
 #. TRANSLATORS: South Celestial Pole
-#: src/core/modules/GridLinesMgr.cpp:1339
-#: src/core/modules/GridLinesMgr.cpp:1348
+#: src/core/modules/GridLinesMgr.cpp:1340
+#: src/core/modules/GridLinesMgr.cpp:1349
 msgid "SCP"
 msgstr ""
 
 #. TRANSLATORS: Zenith
-#: src/core/modules/GridLinesMgr.cpp:1355
+#: src/core/modules/GridLinesMgr.cpp:1356
 msgctxt "zenith"
 msgid "Z"
 msgstr ""
 
 #. TRANSLATORS: Nadir
-#: src/core/modules/GridLinesMgr.cpp:1357
+#: src/core/modules/GridLinesMgr.cpp:1358
 msgctxt "nadir"
 msgid "Z'"
 msgstr ""
 
 #. TRANSLATORS: North Ecliptic Pole
-#: src/core/modules/GridLinesMgr.cpp:1364
-#: src/core/modules/GridLinesMgr.cpp:1373
+#: src/core/modules/GridLinesMgr.cpp:1365
+#: src/core/modules/GridLinesMgr.cpp:1374
 msgid "NEP"
 msgstr ""
 
 #. TRANSLATORS: South Ecliptic Pole
-#: src/core/modules/GridLinesMgr.cpp:1366
-#: src/core/modules/GridLinesMgr.cpp:1375
+#: src/core/modules/GridLinesMgr.cpp:1367
+#: src/core/modules/GridLinesMgr.cpp:1376
 msgid "SEP"
 msgstr ""
 
 #. TRANSLATORS: North Galactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1382
+#: src/core/modules/GridLinesMgr.cpp:1383
 msgid "NGP"
 msgstr ""
 
 #. TRANSLATORS: South Galactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1384
+#: src/core/modules/GridLinesMgr.cpp:1385
 msgid "SGP"
 msgstr ""
 
 #. TRANSLATORS: Galactic Center point
-#: src/core/modules/GridLinesMgr.cpp:1391
+#: src/core/modules/GridLinesMgr.cpp:1392
 msgid "GC"
 msgstr ""
 
 #. TRANSLATORS: Galactic Anticenter point
-#: src/core/modules/GridLinesMgr.cpp:1393
+#: src/core/modules/GridLinesMgr.cpp:1394
 msgid "GA"
 msgstr ""
 
 #. TRANSLATORS: North Supergalactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1400
+#: src/core/modules/GridLinesMgr.cpp:1401
 msgid "NSGP"
 msgstr ""
 
 #. TRANSLATORS: South Supergalactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1402
+#: src/core/modules/GridLinesMgr.cpp:1403
 msgid "SSGP"
 msgstr ""
 
 #. TRANSLATORS: Antisolar Point
-#: src/core/modules/GridLinesMgr.cpp:1437
+#: src/core/modules/GridLinesMgr.cpp:1438
 msgid "ASP"
 msgstr ""
 
 #. TRANSLATORS: Center of the umbra
-#: src/core/modules/GridLinesMgr.cpp:1444
+#: src/core/modules/GridLinesMgr.cpp:1445
 msgid "C.U."
 msgstr ""
 
 #. TRANSLATORS: Apex Point, where the observer planet is heading to
-#: src/core/modules/GridLinesMgr.cpp:1451
+#: src/core/modules/GridLinesMgr.cpp:1452
 msgid "Apex"
 msgstr ""
 
 #. TRANSLATORS: Antapex Point, where the observer planet is receding from
-#: src/core/modules/GridLinesMgr.cpp:1453
+#: src/core/modules/GridLinesMgr.cpp:1454
 msgid "Antapex"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1463 src/core/modules/Planet.cpp:664
+#: src/core/modules/GridLinesMgr.cpp:1464 src/core/modules/Planet.cpp:664
 #: src/core/modules/Planet.cpp:1114 src/gui/AstroCalcDialog.cpp:7999
 #: plugins/Satellites/src/Satellite.cpp:326
 #: plugins/Satellites/src/Satellite.cpp:385
@@ -322,340 +322,340 @@ msgctxt "speed"
 msgid "km/s"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1844
+#: src/core/modules/GridLinesMgr.cpp:1845
 msgid "Grids and lines"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1845
+#: src/core/modules/GridLinesMgr.cpp:1846
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Equatorial grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1846 src/ui_viewDialog.h:3838
+#: src/core/modules/GridLinesMgr.cpp:1847 src/ui_viewDialog.h:3838
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Azimuthal grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1847
+#: src/core/modules/GridLinesMgr.cpp:1848
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:357
 msgid "Ecliptic line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1848
+#: src/core/modules/GridLinesMgr.cpp:1849
 msgid "Ecliptic J2000 line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1849
+#: src/core/modules/GridLinesMgr.cpp:1850
 msgid "Invariable Plane line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1850
+#: src/core/modules/GridLinesMgr.cpp:1851
 msgid "Solar Equator Plane line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1851
+#: src/core/modules/GridLinesMgr.cpp:1852
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Equator line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1852
+#: src/core/modules/GridLinesMgr.cpp:1853
 msgid "Equator J2000 line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1853
+#: src/core/modules/GridLinesMgr.cpp:1854
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Meridian line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1854
+#: src/core/modules/GridLinesMgr.cpp:1855
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:389
 msgid "Horizon line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1855
+#: src/core/modules/GridLinesMgr.cpp:1856
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:347
 msgid "Equatorial J2000 grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1856
+#: src/core/modules/GridLinesMgr.cpp:1857
 msgid "Ecliptic J2000 grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1857 src/ui_configurationDialog.h:1866
+#: src/core/modules/GridLinesMgr.cpp:1858 src/ui_configurationDialog.h:1866
 msgid "Ecliptic grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1858 src/ui_viewDialog.h:3763
+#: src/core/modules/GridLinesMgr.cpp:1859 src/ui_viewDialog.h:3763
 #: src/ui_configurationDialog.h:1858
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:394
 msgid "Galactic grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1859 src/ui_viewDialog.h:3888
+#: src/core/modules/GridLinesMgr.cpp:1860 src/ui_viewDialog.h:3888
 msgid "Galactic equator"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1860 src/ui_viewDialog.h:3712
+#: src/core/modules/GridLinesMgr.cpp:1861 src/ui_viewDialog.h:3712
 msgid "Supergalactic grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1861 src/ui_viewDialog.h:3716
+#: src/core/modules/GridLinesMgr.cpp:1862 src/ui_viewDialog.h:3716
 msgid "Supergalactic equator"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1862
+#: src/core/modules/GridLinesMgr.cpp:1863
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:404
 msgid "Opposition/conjunction longitude line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1863
+#: src/core/modules/GridLinesMgr.cpp:1864
 msgid "Precession Circles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1865
+#: src/core/modules/GridLinesMgr.cpp:1866
 msgid "Current Vertical"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1866
+#: src/core/modules/GridLinesMgr.cpp:1867
 msgid "Colure Lines"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1867
+#: src/core/modules/GridLinesMgr.cpp:1868
 msgid "Circumpolar Circles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1868
+#: src/core/modules/GridLinesMgr.cpp:1869
 msgid "Umbra Circle"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1869
+#: src/core/modules/GridLinesMgr.cpp:1870
 msgid "Penumbra Circle"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1870
+#: src/core/modules/GridLinesMgr.cpp:1871
 msgid "Celestial J2000 poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1871
+#: src/core/modules/GridLinesMgr.cpp:1872
 msgid "Celestial poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1872
+#: src/core/modules/GridLinesMgr.cpp:1873
 msgid "Zenith and nadir"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1873
+#: src/core/modules/GridLinesMgr.cpp:1874
 msgid "Ecliptic J2000 poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1874
+#: src/core/modules/GridLinesMgr.cpp:1875
 msgid "Ecliptic poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1875 src/ui_viewDialog.h:3672
+#: src/core/modules/GridLinesMgr.cpp:1876 src/ui_viewDialog.h:3672
 msgid "Galactic poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1876 src/ui_viewDialog.h:3671
+#: src/core/modules/GridLinesMgr.cpp:1877 src/ui_viewDialog.h:3671
 msgid "Galactic center and anticenter"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1877 src/ui_viewDialog.h:3575
+#: src/core/modules/GridLinesMgr.cpp:1878 src/ui_viewDialog.h:3575
 msgid "Supergalactic poles"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1878
+#: src/core/modules/GridLinesMgr.cpp:1879
 msgid "Equinox J2000 points"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1879
+#: src/core/modules/GridLinesMgr.cpp:1880
 msgid "Equinox points"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1880
+#: src/core/modules/GridLinesMgr.cpp:1881
 msgid "Solstice J2000 points"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1881
+#: src/core/modules/GridLinesMgr.cpp:1882
 msgid "Solstice points"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1882 src/ui_viewDialog.h:3759
+#: src/core/modules/GridLinesMgr.cpp:1883 src/ui_viewDialog.h:3759
 msgid "Antisolar point"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1883
+#: src/core/modules/GridLinesMgr.cpp:1884
 msgid "The center of the Earth's umbra"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:1884 src/ui_viewDialog.h:3750
+#: src/core/modules/GridLinesMgr.cpp:1885 src/ui_viewDialog.h:3750
 msgid "Apex points"
 msgstr ""
 
-#: src/core/modules/SpecialMarkersMgr.cpp:261
+#: src/core/modules/SpecialMarkersMgr.cpp:266
 msgid "FOV Center marker"
 msgstr ""
 
-#: src/core/modules/SpecialMarkersMgr.cpp:262
+#: src/core/modules/SpecialMarkersMgr.cpp:267
 msgid "Circular marker of FOV"
 msgstr ""
 
-#: src/core/modules/SpecialMarkersMgr.cpp:263
+#: src/core/modules/SpecialMarkersMgr.cpp:268
 msgid "Rectangular marker of FOV"
 msgstr ""
 
-#: src/core/modules/SpecialMarkersMgr.cpp:264 src/ui_viewDialog.h:3724
+#: src/core/modules/SpecialMarkersMgr.cpp:269 src/ui_viewDialog.h:3724
 #: src/ui_configurationDialog.h:1904
 msgid "Compass marks"
 msgstr ""
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:195 src/core/modules/Planet.cpp:1236
+#: src/core/modules/LandscapeMgr.cpp:216 src/core/modules/Planet.cpp:1236
 msgctxt "compass direction"
 msgid "N"
 msgstr ""
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:197 src/core/modules/Planet.cpp:1228
+#: src/core/modules/LandscapeMgr.cpp:218 src/core/modules/Planet.cpp:1228
 msgctxt "compass direction"
 msgid "S"
 msgstr ""
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:199 src/core/modules/Planet.cpp:1240
+#: src/core/modules/LandscapeMgr.cpp:220 src/core/modules/Planet.cpp:1240
 msgctxt "compass direction"
 msgid "E"
 msgstr ""
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:201 src/core/modules/Planet.cpp:1232
+#: src/core/modules/LandscapeMgr.cpp:222 src/core/modules/Planet.cpp:1232
 msgctxt "compass direction"
 msgid "W"
 msgstr ""
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:203 src/core/modules/Planet.cpp:1238
+#: src/core/modules/LandscapeMgr.cpp:224 src/core/modules/Planet.cpp:1238
 msgctxt "compass direction"
 msgid "NE"
 msgstr ""
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:205 src/core/modules/Planet.cpp:1242
+#: src/core/modules/LandscapeMgr.cpp:226 src/core/modules/Planet.cpp:1242
 msgctxt "compass direction"
 msgid "SE"
 msgstr ""
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:207 src/core/modules/Planet.cpp:1230
+#: src/core/modules/LandscapeMgr.cpp:228 src/core/modules/Planet.cpp:1230
 msgctxt "compass direction"
 msgid "SW"
 msgstr ""
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:209 src/core/modules/Planet.cpp:1234
+#: src/core/modules/LandscapeMgr.cpp:230 src/core/modules/Planet.cpp:1234
 msgctxt "compass direction"
 msgid "NW"
 msgstr ""
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:211 src/core/modules/Planet.cpp:1237
+#: src/core/modules/LandscapeMgr.cpp:232 src/core/modules/Planet.cpp:1237
 msgctxt "compass direction"
 msgid "NNE"
 msgstr ""
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:213 src/core/modules/Planet.cpp:1239
+#: src/core/modules/LandscapeMgr.cpp:234 src/core/modules/Planet.cpp:1239
 msgctxt "compass direction"
 msgid "ENE"
 msgstr ""
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:215 src/core/modules/Planet.cpp:1241
+#: src/core/modules/LandscapeMgr.cpp:236 src/core/modules/Planet.cpp:1241
 msgctxt "compass direction"
 msgid "ESE"
 msgstr ""
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:217 src/core/modules/Planet.cpp:1243
+#: src/core/modules/LandscapeMgr.cpp:238 src/core/modules/Planet.cpp:1243
 msgctxt "compass direction"
 msgid "SSE"
 msgstr ""
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:219 src/core/modules/Planet.cpp:1229
+#: src/core/modules/LandscapeMgr.cpp:240 src/core/modules/Planet.cpp:1229
 msgctxt "compass direction"
 msgid "SSW"
 msgstr ""
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:221 src/core/modules/Planet.cpp:1231
+#: src/core/modules/LandscapeMgr.cpp:242 src/core/modules/Planet.cpp:1231
 msgctxt "compass direction"
 msgid "WSW"
 msgstr ""
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:223 src/core/modules/Planet.cpp:1233
+#: src/core/modules/LandscapeMgr.cpp:244 src/core/modules/Planet.cpp:1233
 msgctxt "compass direction"
 msgid "WNW"
 msgstr ""
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:225 src/core/modules/Planet.cpp:1235
+#: src/core/modules/LandscapeMgr.cpp:246 src/core/modules/Planet.cpp:1235
 msgctxt "compass direction"
 msgid "NNW"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:566
+#: src/core/modules/LandscapeMgr.cpp:587
 msgid "Atmosphere"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:567
+#: src/core/modules/LandscapeMgr.cpp:588
 msgid "Fog"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:568 src/ui_viewDialog.h:3522
+#: src/core/modules/LandscapeMgr.cpp:589 src/ui_viewDialog.h:3522
 #: src/ui_configurationDialog.h:1888
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:314
 msgid "Cardinal points"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:569
+#: src/core/modules/LandscapeMgr.cpp:590
 msgid "Ordinal (Intercardinal) points"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:570
+#: src/core/modules/LandscapeMgr.cpp:591
 msgid "Secondary Intercardinal points"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:571
+#: src/core/modules/LandscapeMgr.cpp:592
 msgid "Ground"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:572
+#: src/core/modules/LandscapeMgr.cpp:593
 msgid "Landscape illumination"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:573
+#: src/core/modules/LandscapeMgr.cpp:594
 msgid "Landscape labels"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:574
+#: src/core/modules/LandscapeMgr.cpp:595
 msgid "Light pollution data from locations database"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:576
+#: src/core/modules/LandscapeMgr.cpp:597
 msgid "Increase light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:577
+#: src/core/modules/LandscapeMgr.cpp:598
 msgid "Reduce light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:578
+#: src/core/modules/LandscapeMgr.cpp:599
 msgid "Cyclic change in light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:990 src/scripting/StelScriptMgr.cpp:467
+#: src/core/modules/LandscapeMgr.cpp:1011 src/scripting/StelScriptMgr.cpp:467
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Oculars/src/gui/OcularDialog.cpp:599
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
@@ -676,14 +676,14 @@ msgid "Author"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:996 src/gui/StelGuiItems.cpp:817
+#: src/core/modules/LandscapeMgr.cpp:1017 src/gui/StelGuiItems.cpp:817
 #: plugins/Satellites/src/Satellite.cpp:415
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1047
 msgctxt "distance"
 msgid "m"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:999 src/gui/ObsListDialog.cpp:155
+#: src/core/modules/LandscapeMgr.cpp:1020 src/gui/ObsListDialog.cpp:155
 #: src/gui/ObsListCreateEditDialog.cpp:163 src/ui_locationDialogGui.h:481
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
@@ -691,36 +691,36 @@ msgid "Location"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:1021
+#: src/core/modules/LandscapeMgr.cpp:1042
 msgctxt "pressure"
 msgid "hPa"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1031
+#: src/core/modules/LandscapeMgr.cpp:1052
 msgid "extinction coefficient"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1034
+#: src/core/modules/LandscapeMgr.cpp:1055
 msgid "Atmospheric conditions"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1041
+#: src/core/modules/LandscapeMgr.cpp:1062
 msgid "cd/m<sup>2</sup>"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1045
+#: src/core/modules/LandscapeMgr.cpp:1066
 msgid "ncd/m<sup>2</sup>"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1050
+#: src/core/modules/LandscapeMgr.cpp:1071
 msgid "&mu;cd/m<sup>2</sup>"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1055
+#: src/core/modules/LandscapeMgr.cpp:1076
 msgid "mcd/m<sup>2</sup>"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1057
+#: src/core/modules/LandscapeMgr.cpp:1078
 #, qt-format
 msgid "<b>Light pollution</b>: %1 %2 (NELM: %3; Bortle class: %4)"
 msgstr ""
@@ -4359,102 +4359,102 @@ msgstr ""
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1870
+#: src/gui/ConfigurationDialog.cpp:1869
 msgid "Espenak & Meeus (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1873
+#: src/gui/ConfigurationDialog.cpp:1872
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1876
+#: src/gui/ConfigurationDialog.cpp:1875
 msgid "Modified Espenak & Meeus (2006, 2022)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1877
+#: src/gui/ConfigurationDialog.cpp:1876
 msgid "Reijs (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1878
+#: src/gui/ConfigurationDialog.cpp:1877
 msgid "Banjevic (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1879
+#: src/gui/ConfigurationDialog.cpp:1878
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1880
+#: src/gui/ConfigurationDialog.cpp:1879
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1881
+#: src/gui/ConfigurationDialog.cpp:1880
 msgid "Stephenson, Morrison & Hohenkerk (2016, 2021)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1882
+#: src/gui/ConfigurationDialog.cpp:1881
 msgid "Henriksson (2017)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1883
+#: src/gui/ConfigurationDialog.cpp:1882
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1931 src/gui/ConfigurationDialog.cpp:1968
+#: src/gui/ConfigurationDialog.cpp:1930 src/gui/ConfigurationDialog.cpp:1967
 #: src/gui/StelGuiItems.cpp:733 src/gui/LocationDialog.cpp:482
 msgid "System default"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1932
+#: src/gui/ConfigurationDialog.cpp:1931
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1933
+#: src/gui/ConfigurationDialog.cpp:1932
 msgid "dd-mm-yyyy"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1934
+#: src/gui/ConfigurationDialog.cpp:1933
 msgid "mm-dd-yyyy"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1935
+#: src/gui/ConfigurationDialog.cpp:1934
 msgid "ww, yyyy-mm-dd"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1936
+#: src/gui/ConfigurationDialog.cpp:1935
 msgid "ww, dd-mm-yyyy"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1937
+#: src/gui/ConfigurationDialog.cpp:1936
 msgid "ww, mm-dd-yyyy"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1969
+#: src/gui/ConfigurationDialog.cpp:1968
 msgid "12-hour format"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1970
+#: src/gui/ConfigurationDialog.cpp:1969
 msgid "24-hour format"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1996
+#: src/gui/ConfigurationDialog.cpp:1995
 msgctxt "disabled"
 msgid "None"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1997
+#: src/gui/ConfigurationDialog.cpp:1996
 msgid "5/6/5 bits"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1998
+#: src/gui/ConfigurationDialog.cpp:1997
 msgid "6/6/6 bits"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1999
+#: src/gui/ConfigurationDialog.cpp:1998
 msgid "8/8/8 bits"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:2000
+#: src/gui/ConfigurationDialog.cpp:1999
 msgid "10/10/10 bits"
 msgstr ""
 
@@ -11996,11 +11996,13 @@ msgid "Additional coordinates (from plugins)"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1811
-msgid "Show time of rise, transit and set of celestial object"
+msgid ""
+"Show time of rising, transit and setting of celestial object. The rising and "
+"setting events are counting by upper limb of celestial body."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1813 src/ui_astroCalcDialog.h:2026
-msgid "Rises, transits and sets"
+#: src/ui_configurationDialog.h:1813
+msgid "Risings, transits, and settings"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1815
@@ -12740,6 +12742,10 @@ msgctxt "rise, transit, set"
 msgid "RTS"
 msgstr ""
 
+#: src/ui_astroCalcDialog.h:2026
+msgid "Risings, Transits, and Settings"
+msgstr ""
+
 #: src/ui_astroCalcDialog.h:2031 src/ui_astroCalcDialog.h:2213
 #: src/ui_astroCalcDialog.h:2252
 msgid "Graphs"
@@ -12942,7 +12948,8 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:2150
 msgid ""
-"Table of approximate rises, transits and sets for selected celestial object"
+"Table of approximate risings, transits, and settings for selected celestial "
+"object"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:2151
