@@ -184,7 +184,7 @@ the tool button \guibutton[0.35]{2}{btd_config.png} or \key{F2} to open.
 The Main tab in the configuration window (Fig.~\ref{fig:gui:configuration:main}) provides controls for
 changing separately the program and sky culture languages.
 
-The next setting group allows to enable using DE430/DE431 ephemeris files. 
+The next setting group allows to enable using DE430/DE431 and DE440/DE441 ephemeris files. 
 These files have to be installed separately. Most users do not require this. 
 See section~\ref{sec:ExtraData:ephemerides} if you are interested.
 
@@ -1056,15 +1056,9 @@ Example provided in section~\ref{sec:gui:SearchWindow:Object}.
 
 This window \newFeature{0.15.0} provides advanced functionality, some of which is still in an experimental phase.
 You can call it by pressing \key{F10} or the button \guibutton{0.6}{btd_astrocalc.png} on the left menu bar. 
-The Astronomical Calculations window shows six tabs with different functionality.
+The Astronomical Calculations window shows eight tabs with different functionality.
 
 In version 0.18.3 \newFeature{0.18.3} we added exporting the data to XLSX files in addition to CSV files.
-
-\begin{figure}[htbp]
-	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_positions_tab.png}
-	\caption{Astronomical Calculations (AstroCalc): Celestial positions}
-	\label{fig:gui:AstroCalc:Positions}
-\end{figure}
 
 \subsection{The Positions Tab}
 \label{sec:gui:AstroCalc:Positions}
@@ -1074,6 +1068,20 @@ This tab \newFeature{0.16.0} shows J2000.0 or horizontal positions, magnitudes a
 lists of celestial objects above the horizon at the simulated time, filtered by magnitude. 
 Double-clicking on an entry brings the object into focus (Fig.~\ref{fig:gui:AstroCalc:Positions}). 
 You may also export the list of positions into an XLSX or CSV file.
+
+\begin{figure}[htbp]
+	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_positions_tab.png}
+	\caption{Astronomical Calculations (AstroCalc): Celestial positions / Seen now}
+	\label{fig:gui:AstroCalc:Positions}
+\end{figure}
+
+In version 0.22.0\newFeature{0.22.0} this tab was splitted onto 2 subtabs: ``Seen now'' and ``Major planets''. The newly added ``Major planets'' subtab (Fig.~\ref{fig:gui:AstroCalc:Positions:MajorPlanets}) has table with heliocentric ecliptic positions of the major planets and graphical representation of these positions (in polar coordinates). You may also export the list of positions into an XLSX or CSV file.
+
+\begin{figure}[htbp]
+	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_positions_mp_tab.png}
+	\caption{Astronomical Calculations (AstroCalc): Celestial positions / Major Planets}
+	\label{fig:gui:AstroCalc:Positions:MajorPlanets}
+\end{figure}
 
 \subsection{The Ephemeris Tab}
 \label{sec:gui:AstroCalc:Ephemeris}
@@ -1133,19 +1141,21 @@ Since version 0.20.3\newFeature{0.20.3} we added ability to draw an ephemeris of
 two objects at the same time and define custom time step for the ephemeris 
 (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Asteroids}).
 
-\subsection{The Transits Tab}
-\label{sec:gui:AstroCalc:Transits}
+\subsection{The ``Rises, Transits and Sets'' (RTS) Tab}
+\label{sec:gui:AstroCalc:RTS}
 
 \begin{figure}[htbp]
 	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_transits_tab.png}
-	\caption{Astronomical Calculations (AstroCalc): Transits of selected celestial object}
-	\label{fig:gui:AstroCalc:Transits}
+	\caption{Astronomical Calculations (AstroCalc): Rises, transits and sets of selected celestial object}
+	\label{fig:gui:AstroCalc:RTS}
 \end{figure}
 
 \noindent This \newFeature{0.19.3} tab allows you to compute meridian transits of selected celestial object 
 (except unnamed stars and artificial satellites) for a specific date range. 
 The tool is proposed for planning observations, and it suggests the best time and conditions 
-for visual observations or astrophotography (Fig.~\ref{fig:gui:AstroCalc:Transits}).
+for visual observations or astrophotography (Fig.~\ref{fig:gui:AstroCalc:RTS}). 
+
+In version 0.22.0\newFeature{0.22.0} we extended this tool by adding time of rise and set and renamed onto RTS.
 
 You may also export the list of transits into an XLSX or CSV file.
 
@@ -1325,6 +1335,66 @@ current date) as graphs.
 \label{fig:gui:AstroCalc:PC:Graphs}
 \end{figure}
 
+\subsection{The Eclipses Tab}
+\label{sec:gui:AstroCalc:Eclipses}
+
+The Eclipses tool\newFeature{0.22.0} has been added in version 0.22.0 and has three subtabs --- ``All Solar Eclipses'', ``Local Solar Eclipses'' and ``Lunar Eclipses''. 
+
+You can export the calculated eclipses into an XLSX or CSV file.
+
+\subsubsection{The ``All Solar Eclipses'' Subtab}
+\label{sec:gui:AstroCalc:Eclipses:AllSolarEclipses}
+
+This subtab (Fig.~\ref{fig:gui:AstroCalc:Eclipses:AllSolarEclipses}) contains data for all solar eclipses on the Earth in defined time range. 
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_eclipses_ase.jpg}
+\caption{Astronomical Calculations (AstroCalc): Eclipses / All Solar Eclipses}
+\label{fig:gui:AstroCalc:Eclipses:AllSolarEclipses}
+\end{figure}
+
+Double click on the table row will be going to the location and time of greatest eclipse.
+
+The quantity gamma is the minimum distance from the axis of lunar shadow cone to the center of Earth, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the axis of the shadow cone passes north or south of the Earth's center. Path of solar eclipses during thousands of years in the past and future are not reliable due to uncertainty in $\Delta T$ which is caused by fluctuations in Earth's rotation.
+
+\subsubsection{The ``Local Solar Eclipses'' Subtab}
+\label{sec:gui:AstroCalc:Eclipses:LocalSolarEclipses}
+
+This subtab (Fig.~\ref{fig:gui:AstroCalc:Eclipses:LocalSolarEclipses}) contains data for solar eclipses for the current location (on the Earth!) in defined time range. 
+
+\begin{figure}[tbp]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_eclipses_lse.jpg}
+\caption{Astronomical Calculations (AstroCalc): Eclipses / Local Solar Eclipses}
+\label{fig:gui:AstroCalc:Eclipses:LocalSolarEclipses}
+\end{figure}
+
+Double click on the table row will be going to the time of greatest eclipse.
+
+Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in $\Delta T$ which is caused by fluctuations in Earth's rotation.
+
+\subsubsection{The ``Lunar Eclipses'' Subtab}
+\label{sec:gui:AstroCalc:Eclipses:LunarEclipses}
+
+This subtab (Fig.~\ref{fig:gui:AstroCalc:Eclipses:LunarEclipses}) contains data for all lunar eclipses on the Earth in defined time range.
+
+\begin{figure}[tbp]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_eclipses_le.jpg}
+\caption{Astronomical Calculations (AstroCalc): Eclipses / Lunar Eclipses}
+\label{fig:gui:AstroCalc:Eclipses:LunarEclipses}
+\end{figure}
+
+Double click on the table row will be going to the location and time of greatest eclipse.
+
+The quantity gamma is the minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the Moon passes north or south of the shadow cone axis. Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in $\Delta T$ which is caused by fluctuations in Earth's rotation.
+
+The visibility conditions are based on the altitude of the Moon at greatest eclipse:
+\begin{description}
+  \item[Invisible] --- the greatest eclipse is invisible in current location (altitude is negative);
+  \item[Not obs.] --- not observable eclipse. Our rule of thumb is that a partial penumbral eclipse is detectable with the unaided eye if penumbral magnitude > 0.7;
+  \item[Bad] --- bad visibility conditions for current location (altitude range is 0---30$\degree$);
+  \item[Good] --- good visibility conditions for current location (altitude range is 30---45$\degree$; e.g. since a ``photometric altitude'');
+  \item[Perfect] --- perfect visibility conditions for current location (altitude range is 45---90$\degree$).
+\end{description}
 
 \section{The Help Window}
 \label{sec:gui:help}
