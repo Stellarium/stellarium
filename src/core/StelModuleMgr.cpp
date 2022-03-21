@@ -212,7 +212,7 @@ void StelModuleMgr::generateCallingLists()
 		// Flush previous call orders
 		mc.value().clear();
 		// and init them with modules in creation order
-		for (auto* m : getAllModules())
+		for (auto& m : getAllModules())
 		{
 			mc.value().push_back(m);
 		}
@@ -232,7 +232,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 
 	// First list all static plugins.
 	// If a dynamic plugin with the same ID exists, it will take precedence on the static one.
-	for (auto* plugin : QPluginLoader::staticInstances())
+	for (auto& plugin : QPluginLoader::staticInstances())
 	{
 		StelPluginInterface* pluginInterface = qobject_cast<StelPluginInterface*>(plugin);
 		if (pluginInterface)

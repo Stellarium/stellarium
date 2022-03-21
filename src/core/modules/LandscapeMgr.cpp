@@ -985,12 +985,12 @@ QStringList LandscapeMgr::getAllLandscapeIDs() const
 QStringList LandscapeMgr::getUserLandscapeIDs() const
 {
 	QStringList result;
-	for (auto &id : getNameToDirMap().values())
+	QMapIterator<QString, QString> it(getNameToDirMap());
+	while (it.hasNext())
 	{
-		if(!packagedLandscapeIDs.contains(id))
-		{
-			result.append(id);
-		}
+		it.next();
+		if(!packagedLandscapeIDs.contains(it.value()))
+			result.append(it.value());
 	}
 	return result;
 }
