@@ -485,7 +485,7 @@ For example, using the option \texttt{-c\ my\_config.ini} would resolve to the f
 -\/-sky-date         & date       & The initial date in \texttt{yyyymmdd} format. \\
 -\/-sky-time         & time       & The initial time in \texttt{hh:mm:ss} format. \\\midrule
 -\/-startup-script   & script name & The name of a script to run after the program has started. [\file{startup.ssc}] \\\midrule
--\/-fov              & angle      & The initial vertical field of view in degrees. \\\midrule
+-\/-fov              & angle (degrees) & The initial vertical field of view in degrees. \\\midrule
 -\/-scale-gui        & scale factor & Scaling the GUI according to scale factor\\\midrule
 -\/-projection-type  & ptype      & The initial projection type (e.g. \texttt{perspective}). \\\midrule
 -\/-spout  or -S     & all or sky & Act as Spout sender (See section \ref{sec:CommandLineOptions:Special:Spout}).%
@@ -553,6 +553,32 @@ On a notebook with Nvidia Optimus technology, make sure to launch Stellarium on 
 For permanent setting, use the Nvidia configuration dialog to configure Stellarium explicitly to run always on the Nvidia card.
 
 Note that Spout use disables any multisampling setting (see Appendix~\ref{sec:config.ini:video}). 
+
+\subsection{Environment Variables}
+\label{sec:Environment}
+
+Some command-line options can be set permanently by storing them into
+environment variables. How to set them depends on the respective
+operating system. Calling the respective options on the command line
+still overrides an environment variable (apart from
+\texttt{STEL\_OPTS}).
+
+This may be especially helpful on Windows systems with older graphics
+cards which may not fully be compatible with OpenGL. Here we recommend
+you either use the program links using the ANGLE-related options, or
+you can set the environment variable once and forget about the
+problems.
+
+\begin{description}
+\item[STEL\_OPTS] may contain a default commandline with options in the syntax of the table above.
+\item[STEL\_USERDIR] may contain the path to a user data directory
+  deviating from the default (see section \ref{sec:Directories}).
+\item[QT\_OPENGL] (Windows only). May be one of \texttt{desktop} (native OpenGL for your GPU, recommended),
+  \texttt{angle} or \texttt{software}. The last activates pure software rendering using the MESA OpenGL library.
+\item[QT\_ANGLE\_PLATFORM] (Windows only). May be one of \texttt{d3d9} (DirectX~9) or \texttt{d3d11} (DirectX~11),
+  or \texttt{warp} for another software-only solution.
+\end{description}
+
 
 %%% Local Variables: 
 %%% mode: latex
