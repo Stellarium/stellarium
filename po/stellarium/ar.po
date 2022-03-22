@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-20 17:01+0700\n"
+"POT-Creation-Date: 2022-03-21 02:37+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Khalid AlAjaji, 2022\n"
 "Language-Team: Arabic (https://www.transifex.com/stellarium/teams/80998/ar/)\n"
@@ -713,24 +713,25 @@ msgstr "الظروف الجوية"
 
 #: src/core/modules/LandscapeMgr.cpp:1062
 msgid "cd/m<sup>2</sup>"
-msgstr ""
+msgstr "شمعة/متر<sup>2</sup>"
 
 #: src/core/modules/LandscapeMgr.cpp:1066
 msgid "ncd/m<sup>2</sup>"
-msgstr ""
+msgstr "نانو شمعة/متر<sup>2</sup>"
 
 #: src/core/modules/LandscapeMgr.cpp:1071
 msgid "&mu;cd/m<sup>2</sup>"
-msgstr ""
+msgstr "ميكرو شمعة/متر<sup>2</sup>"
 
 #: src/core/modules/LandscapeMgr.cpp:1076
 msgid "mcd/m<sup>2</sup>"
-msgstr ""
+msgstr "ميللي شمعة/متر<sup>2</sup>"
 
 #: src/core/modules/LandscapeMgr.cpp:1078
 #, qt-format
 msgid "<b>Light pollution</b>: %1 %2 (NELM: %3; Bortle class: %4)"
 msgstr ""
+"<b>التلوث الضوئي</b>: %1 %2 (حد اللمعان للعين المجردة: %3; مقياس بورتل: %4)"
 
 #: src/core/modules/NomenclatureItem.cpp:66
 msgctxt "landform"
@@ -3238,6 +3239,9 @@ msgid ""
 "1600-2000. Formula for 2005-2050 is modified to match observed values and "
 "near-term predictions."
 msgstr ""
+"هذا الحل معدل من F. Espenak and J. Meeus,مبني على Morrison & Stephenson "
+"(2004) مع تقريب لمتعددة الحدود من قيم جدول للسنين  1600-2000. المعادلة "
+"للسنين 2005-2050 معدلة لتتوافق مع القيم المرصودة والتوقعات قريبة المدى."
 
 #: src/core/StelCore.cpp:2385
 msgid "Used by default."
@@ -3252,6 +3256,8 @@ msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
 msgstr ""
+"هذا الحل معدل من F. Espenak and J. Meeus, مبني على Morrison & Stephenson "
+"(2004) مع تقريب لمتعددة الحدود من قيم جدول للسنين 1600-2000."
 
 #: src/core/StelCore.cpp:2391
 #, qt-format
@@ -4255,15 +4261,15 @@ msgstr "أختر مجلد حفظ لقطة الشاشة"
 #: src/gui/ConfigurationDialog.cpp:776
 msgctxt "millimeters"
 msgid "mm"
-msgstr ""
+msgstr "ملمتر"
 
 #: src/gui/ConfigurationDialog.cpp:791
 msgid "Dots per Inch (for image metadata)."
-msgstr ""
+msgstr "نقطة لكل إنش (لبيانات الصورة الوصفية)"
 
 #: src/gui/ConfigurationDialog.cpp:792
 msgid "Current designated print size"
-msgstr ""
+msgstr "حجم الطباعة الحالي"
 
 #: src/gui/ConfigurationDialog.cpp:1225
 #, qt-format
@@ -4534,7 +4540,7 @@ msgstr "Espenak & Meeus (2006) no extra moon acceleration"
 
 #: src/gui/ConfigurationDialog.cpp:1875
 msgid "Modified Espenak & Meeus (2006, 2022)"
-msgstr ""
+msgstr " المعدَّل Espenak & Meeus (2006, 2022)"
 
 #: src/gui/ConfigurationDialog.cpp:1876
 msgid "Reijs (2006)"
@@ -5921,23 +5927,23 @@ msgstr "الاستطالة القمرية"
 
 #: src/gui/AstroCalcDialog.cpp:2388
 msgid "Altitude of celestial object at transit"
-msgstr ""
+msgstr "ارتفاع الجرم السماوي حين التوسط"
 
 #: src/gui/AstroCalcDialog.cpp:2392
 msgid "Magnitude of celestial object at transit"
-msgstr ""
+msgstr "لمعان الجرم السماوي حين التوسط"
 
 #: src/gui/AstroCalcDialog.cpp:2395
 msgid "Celestial object's angular distance from the Sun at transit"
-msgstr ""
+msgstr "البعد الزاوي للجرم السماوي من الشمس حين التوسط"
 
 #: src/gui/AstroCalcDialog.cpp:2398
 msgid "Celestial object's angular distance from the Moon at transit"
-msgstr ""
+msgstr "البعد الزاوي للجرم السماوي من القمر حين التوسط"
 
 #: src/gui/AstroCalcDialog.cpp:2481
 msgid "Save calculated data as..."
-msgstr ""
+msgstr "احفظ الحسابات كـ ..."
 
 #: src/gui/AstroCalcDialog.cpp:2496
 msgid "Transits"
@@ -10531,7 +10537,7 @@ msgstr "المصري"
 #: skycultures/translations_skycultures.fab:42
 msgctxt "sky culture"
 msgid "Egyptian (Dendera)"
-msgstr ""
+msgstr "المصري (دندرة)"
 
 #: skycultures/translations_skycultures.fab:44
 msgctxt "sky culture"
@@ -10691,7 +10697,7 @@ msgstr "الغربي (خرائط النجوم)"
 #: skycultures/translations_skycultures.fab:106
 msgctxt "sky culture"
 msgid "Zulu"
-msgstr ""
+msgstr "الزولو"
 
 #: src/ui_dateTimeDialogGui.h:378 src/ui_dateTimeDialogGui.h:383
 msgid "Julian Day"
@@ -12606,12 +12612,14 @@ msgstr "إحداثيات إضافية (من البرامج الملحقة الم
 #: src/ui_configurationDialog.h:1811
 msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
-" setting events are counting by upper limb of celestial body."
+" setting events are defined with the upper limb of the celestial body."
 msgstr ""
+"عرض أوقات الطلوع والتوسط والغياب للأجرام السماوية. حالة الطلوع والغياب معرفة"
+" بالنسبة لقوس الجرم الأعلى."
 
-#: src/ui_configurationDialog.h:1813
-msgid "Risings, transits, and settings"
-msgstr ""
+#: src/ui_configurationDialog.h:1813 src/ui_astroCalcDialog.h:2026
+msgid "Risings, Transits, and Settings"
+msgstr "الطلوع والتوسط والغياب"
 
 #: src/ui_configurationDialog.h:1815
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
@@ -13114,13 +13122,15 @@ msgstr "حجم مخصص"
 
 #: src/ui_configurationDialog.h:2075
 msgid "dpi"
-msgstr ""
+msgstr "نقطة لكل إنش"
 
 #: src/ui_configurationDialog.h:2077
 msgid ""
 "Dots per Inch (for printing size computation in image metadata). Native "
 "print size in inches is then pixelSize/dpi."
 msgstr ""
+"نقطة لكل إنش (لحساب حجم الطباعة في بياوات الصورة). حجم الطباعة الأصلي بالإنش"
+" يكون حجم البكسل/نقطة لكل إنش pixelSize/dpi."
 
 #: src/ui_configurationDialog.h:2081 src/ui_scriptConsole.h:416
 msgid "Close window when script runs"
@@ -13372,11 +13382,7 @@ msgstr "الأجرام السماوية فوق الأفق"
 #: src/ui_astroCalcDialog.h:2024
 msgctxt "rise, transit, set"
 msgid "RTS"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:2026
-msgid "Risings, Transits, and Settings"
-msgstr ""
+msgstr "الطلوع والتوسط والغياب"
 
 #: src/ui_astroCalcDialog.h:2031 src/ui_astroCalcDialog.h:2213
 #: src/ui_astroCalcDialog.h:2252
@@ -13565,15 +13571,15 @@ msgstr "جميع الكواكب التي ترى بالعين المجردة"
 
 #: src/ui_astroCalcDialog.h:2143
 msgid "Cleanup data"
-msgstr ""
+msgstr "نظف البيانات"
 
 #: src/ui_astroCalcDialog.h:2144
 msgid "Export data..."
-msgstr ""
+msgstr "صدّر البيانات ..."
 
 #: src/ui_astroCalcDialog.h:2145
 msgid "Calculate"
-msgstr ""
+msgstr "احسب"
 
 #: src/ui_astroCalcDialog.h:2146
 msgid "Celestial object:"
@@ -13583,7 +13589,7 @@ msgstr "الجرم السماوي"
 msgid ""
 "Table of approximate risings, transits, and settings for selected celestial "
 "object"
-msgstr ""
+msgstr "جدول للطلوع والتوسط والغياب التقريبي للجرم السماوي المختار"
 
 #: src/ui_astroCalcDialog.h:2151
 msgid ""
@@ -26126,7 +26132,7 @@ msgstr "الأثيوبي"
 #: plugins/Calendars/src/Calendars.cpp:342
 msgctxt "calendar"
 msgid "French Rev. (Astron.)"
-msgstr ""
+msgstr "الثورة الفرنسية (فلكي)"
 
 #: plugins/Calendars/src/Calendars.cpp:343
 msgctxt "calendar"
@@ -26153,7 +26159,7 @@ msgstr "الفارسي (حسابي)"
 #: plugins/Calendars/src/Calendars.cpp:347
 msgctxt "calendar"
 msgid "Persian (Astron.)"
-msgstr ""
+msgstr "فارسي (فلكي)"
 
 #: plugins/Calendars/src/Calendars.cpp:348
 #: plugins/Calendars/src/ui_calendarsDialog.h:920
@@ -26170,33 +26176,33 @@ msgstr "الهندي القديم القمري الشمسي"
 #: plugins/Calendars/src/ui_calendarsDialog.h:941
 msgctxt "calendar"
 msgid "New Hindu Solar"
-msgstr ""
+msgstr "الهندي الجديد شمسي"
 
 #: plugins/Calendars/src/Calendars.cpp:351
 msgctxt "calendar"
 msgid "New Hindu Lunisolar"
-msgstr ""
+msgstr "الهندي الجديد شمسي قمري"
 
 #: plugins/Calendars/src/Calendars.cpp:352
 msgctxt "calendar"
 msgid "New Hindu Panchang"
-msgstr ""
+msgstr "الهندي الجديد بانشانج"
 
 #: plugins/Calendars/src/Calendars.cpp:354
 msgctxt "calendar"
 msgid "Astro Hindu Solar"
-msgstr ""
+msgstr "الهندي الفلكي شمسي"
 
 #: plugins/Calendars/src/Calendars.cpp:355
 msgctxt "calendar"
 msgid "Astro Hindu Lunisolar"
-msgstr ""
+msgstr "الهندي الفلكي قمري"
 
 #: plugins/Calendars/src/Calendars.cpp:356
 #: plugins/Calendars/src/ui_calendarsDialog.h:939
 msgctxt "calendar"
 msgid "Tibetan"
-msgstr ""
+msgstr "التبتي"
 
 #: plugins/Calendars/src/Calendars.cpp:357
 #: plugins/Calendars/src/ui_calendarsDialog.h:926
@@ -28262,62 +28268,62 @@ msgstr "هجرية"
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:38
 msgctxt "Hindu Lunar month name"
 msgid "Caitra"
-msgstr ""
+msgstr "كايترا"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:39
 msgctxt "Hindu Lunar month name"
 msgid "Vaiśākha"
-msgstr ""
+msgstr "فايساخا"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:40
 msgctxt "Hindu Lunar month name"
 msgid "Jyeṣṭha"
-msgstr ""
+msgstr "جييشثا"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:41
 msgctxt "Hindu Lunar month name"
 msgid "Āṣāḍha"
-msgstr ""
+msgstr "آساذها"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:42
 msgctxt "Hindu Lunar month name"
 msgid "Śrāvaṇa"
-msgstr ""
+msgstr "سرافانا"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:43
 msgctxt "Hindu Lunar month name"
 msgid "Bhādrapada"
-msgstr ""
+msgstr "بهادرابادا"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:44
 msgctxt "Hindu Lunar month name"
 msgid "Āśvina"
-msgstr ""
+msgstr "آسفينا"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:45
 msgctxt "Hindu Lunar month name"
 msgid "Kārtika"
-msgstr ""
+msgstr "كارتيكا"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:46
 msgctxt "Hindu Lunar month name"
 msgid "Mārgaśīrṣa"
-msgstr ""
+msgstr "مارجاسيرشا"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:47
 msgctxt "Hindu Lunar month name"
 msgid "Pauṣa"
-msgstr ""
+msgstr "باوشا"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:48
 msgctxt "Hindu Lunar month name"
 msgid "Māgha"
-msgstr ""
+msgstr "ماقها"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:49
 msgctxt "Hindu Lunar month name"
 msgid "Phālguna"
-msgstr ""
+msgstr "بهالجونا"
 
 #. TRANSLATORS: K.Y. stands for Kali Yuga
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:86
@@ -28994,7 +29000,7 @@ msgstr "التقويم الجريجوري"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:190
 msgid "Revised Julian Calendar (Milankovi&#x107;)"
-msgstr ""
+msgstr "التقويم اليولياني المراجع (Milankovi&#x107;)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:191
 msgid "ISO Weeks"
@@ -29042,7 +29048,7 @@ msgstr "التقويم العبري"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:203
 msgid "French Revolution calendar (astronomical version of 1793)"
-msgstr ""
+msgstr "تقويم الثورة الفرنسية (الإصدار الفلكي 1793)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:204
 msgid "French Revolution calendar (arithmetic version of 1795)"
@@ -29054,7 +29060,7 @@ msgstr "التقويم الفارسي (النسخة الحسابية)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:206
 msgid "Persian calendar (astronomical version)"
-msgstr ""
+msgstr "التقويم الفارسي (الفلكي)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:209
 msgid "Old Hindu Solar and Lunar calendars"
@@ -29062,15 +29068,15 @@ msgstr "التقاويم الهندية القمرية والشمسية القد
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:210
 msgid "New Hindu Solar and Lunar calendars"
-msgstr ""
+msgstr "التقاويم الهندية القمرية والشمسية الجديدة"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:211
 msgid "Astronomically 'accurate' Hindu Solar and Lunar calendars"
-msgstr ""
+msgstr "التقاويم الهندية القمرية والشمسية 'الدقيقة' فلكياً"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:212
 msgid "Tibetan (Phuglugs, Phug-pa, K&#x101;lacakra) calendar"
-msgstr ""
+msgstr "التقويم التبتي (Phuglugs, Phug-pa, K&#x101;lacakra)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:213
 msgid "Maya calendars"
@@ -29113,7 +29119,7 @@ msgstr "إعدادات التقاويم"
 #: plugins/Calendars/src/ui_calendarsDialog.h:915
 msgctxt "calendar"
 msgid "New Hindu Lunar"
-msgstr ""
+msgstr "الهندي الجديد قمري"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:924
 #: plugins/Calendars/src/ui_calendarsDialog.h:960
@@ -29130,41 +29136,41 @@ msgstr "الأسبوعي -المنظمة العالمية للمقاييس"
 #: plugins/Calendars/src/ui_calendarsDialog.h:935
 msgctxt "calendar"
 msgid "Persian (arithmetic)"
-msgstr ""
+msgstr "الفارسي (حسابي)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:936
 msgctxt "calendar"
 msgid "Persian (astronomical)"
-msgstr ""
+msgstr "الفارسي (فلكي)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:937
 msgctxt "calendar"
 msgid "French Revolution (arithmetic)"
-msgstr ""
+msgstr "الثورة الفرنسية (حسابي)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:938
 msgctxt "calendar"
 msgid "French Revolution (astronomical)"
-msgstr ""
+msgstr "الثورة الفرنسية (فلكي)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:940
 msgctxt "calendar"
 msgid "Old Hindu Lunar"
-msgstr ""
+msgstr "الهندي القديم قمري"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:942
 msgctxt "calendar"
 msgid "Hindu Astro Solar"
-msgstr ""
+msgstr "الهندي فلكي شمسي"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:943
 msgctxt "calendar"
 msgid "Hindu Astro Lunar"
-msgstr ""
+msgstr "الهندي فلكي قمري"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:945
 msgid "Override automatic text color"
-msgstr ""
+msgstr "غير لون النص التلقائي"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:947
 msgid "Display"
@@ -29189,7 +29195,7 @@ msgstr "يوم"
 #: plugins/Calendars/src/ui_calendarsDialog.h:954
 msgctxt "calendar"
 msgid "Negative years here mark years B.C."
-msgstr ""
+msgstr "السنوات بالسالب تعني السنين قبل الميلاد"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:959
 msgid "Lunisolar"
@@ -29198,12 +29204,12 @@ msgstr "القمري الشمسي"
 #: plugins/Calendars/src/ui_calendarsDialog.h:961
 msgctxt "calendar"
 msgid "Katun"
-msgstr ""
+msgstr "كاتون"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:962
 msgctxt "calendar"
 msgid "Xihuitl"
-msgstr ""
+msgstr "زيهويتل"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:963
 msgctxt "calendar"
@@ -29213,32 +29219,32 @@ msgstr "المايا"
 #: plugins/Calendars/src/ui_calendarsDialog.h:964
 msgctxt "calendar"
 msgid "Haab"
-msgstr ""
+msgstr "هآب"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:965
 msgctxt "calendar"
 msgid "Tun"
-msgstr ""
+msgstr "تون"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:966
 msgctxt "calendar"
 msgid "Kin"
-msgstr ""
+msgstr "كين"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:967
 msgctxt "calendar"
 msgid "Uinal"
-msgstr ""
+msgstr "أوينال"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:968
 msgctxt "calendar"
 msgid "Baktun"
-msgstr ""
+msgstr "باكتون"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:969
 msgctxt "calendar"
 msgid "Long Count"
-msgstr ""
+msgstr "العد الطويل"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:971
 #: plugins/Calendars/src/ui_calendarsDialog.h:974
@@ -29262,17 +29268,17 @@ msgstr "الأزتك"
 #: plugins/Calendars/src/ui_calendarsDialog.h:983
 msgctxt "calendar"
 msgid "Tzolkin"
-msgstr ""
+msgstr "تزولكين"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:984
 msgctxt "calendar"
 msgid "Tonalpohualli"
-msgstr ""
+msgstr "تونالبوهواللي"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:997
 msgctxt "calendar"
 msgid "Mesoamerica"
-msgstr ""
+msgstr "ميزوأمريكا"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:59
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:109

@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-20 17:01+0700\n"
+"POT-Creation-Date: 2022-03-21 02:37+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2022\n"
 "Language-Team: German (https://www.transifex.com/stellarium/teams/80998/de/)\n"
@@ -3780,27 +3780,27 @@ msgstr "Vorige Abenddämmerung"
 
 #: src/core/StelObjectMgr.cpp:73
 msgid "Selected object at altitude at next morning"
-msgstr "Ausgewähltes Objekt auf der Höhe am nächsten Morgen"
+msgstr "Ausgewähltes Objekt auf derselben Höhe am nächsten Morgen"
 
 #: src/core/StelObjectMgr.cpp:74
 msgid "Selected object at altitude this morning"
-msgstr "Ausgewähltes Objekt auf der Höhe an diesem Morgen"
+msgstr "Ausgewähltes Objekt auf derselben Höhe an diesem Morgen"
 
 #: src/core/StelObjectMgr.cpp:75
 msgid "Selected object at altitude at previous morning"
-msgstr "Ausgewähltes Objekt auf der Höhe am vorherigen Morgen"
+msgstr "Ausgewähltes Objekt auf derselben Höhe am vorherigen Morgen"
 
 #: src/core/StelObjectMgr.cpp:76
 msgid "Selected object at altitude at next evening"
-msgstr "Ausgewähltes Objekt auf der Höhe am nächsten Abend"
+msgstr "Ausgewähltes Objekt auf derselben Höhe am nächsten Abend"
 
 #: src/core/StelObjectMgr.cpp:77
 msgid "Selected object at altitude this evening"
-msgstr "Ausgewähltes Objekt auf der Höhe an diesem Abend"
+msgstr "Ausgewähltes Objekt auf derselben Höhe an diesem Abend"
 
 #: src/core/StelObjectMgr.cpp:78
 msgid "Selected object at altitude at previous evening"
-msgstr "Ausgewähltes Objekt auf der Höhe am vorherigen Abend"
+msgstr "Ausgewähltes Objekt auf derselben Höhe am vorherigen Abend"
 
 #: src/core/StelSkyLayerMgr.cpp:85
 msgid "Deep-sky objects background images"
@@ -5699,7 +5699,7 @@ msgstr "Breitengrad"
 #: src/gui/SearchDialog.cpp:493
 msgctxt "search tool"
 msgid "Default"
-msgstr "Standard"
+msgstr "Vorgabe"
 
 #: src/gui/SearchDialog.cpp:495
 msgctxt "search tool"
@@ -12751,12 +12751,15 @@ msgstr "Weitere Koordinaten (von Plugins)"
 #: src/ui_configurationDialog.h:1811
 msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
-" setting events are counting by upper limb of celestial body."
+" setting events are defined with the upper limb of the celestial body."
 msgstr ""
+"Zeige Uhrzeit von Aufgang, Meridiandurchgang und Untergang eines "
+"Himmelsobjekts. Die Auf- und Untergänge sind mit dem Oberrand des "
+"Himmelsobjekts definiert."
 
-#: src/ui_configurationDialog.h:1813
-msgid "Risings, transits, and settings"
-msgstr ""
+#: src/ui_configurationDialog.h:1813 src/ui_astroCalcDialog.h:2026
+msgid "Risings, Transits, and Settings"
+msgstr "Aufgänge, Durchgänge und Untergänge"
 
 #: src/ui_configurationDialog.h:1815
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
@@ -13535,10 +13538,6 @@ msgctxt "rise, transit, set"
 msgid "RTS"
 msgstr "ADU"
 
-#: src/ui_astroCalcDialog.h:2026
-msgid "Risings, Transits, and Settings"
-msgstr ""
-
 #: src/ui_astroCalcDialog.h:2031 src/ui_astroCalcDialog.h:2213
 #: src/ui_astroCalcDialog.h:2252
 msgid "Graphs"
@@ -13744,6 +13743,8 @@ msgid ""
 "Table of approximate risings, transits, and settings for selected celestial "
 "object"
 msgstr ""
+"Tabelle der ungefähren Auf-, Unter- und Meridiandurchgänge für das "
+"ausgewählte Objekt"
 
 #: src/ui_astroCalcDialog.h:2151
 msgid ""
@@ -17725,7 +17726,7 @@ msgstr "Letztes Schwenk-Kommando für Teleskop #%1 abbrechen"
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:197
 #, qt-format
 msgid "Centering screen by telescope coordinates #%1"
-msgstr "Den Bildschirm gemäß der Teleskopkoordinaten #%1 zentrieren"
+msgstr "Bildschirm auf Koordinaten von Teleskop #%1 zentrieren"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:206
 msgid "Move a telescope to a given set of coordinates"
@@ -21053,7 +21054,7 @@ msgstr "Neptunähnlich"
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1044
 msgid "Primary Transit"
-msgstr "Transit des Hauptsterns"
+msgstr "Primärtransit"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:1046
@@ -22336,15 +22337,15 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:436
 msgid "Citalá means River of stars in the native Nahuat language."
-msgstr "Citalá heißt »Sternenfluss« in der klassischen Nahuatl-Sprache."
+msgstr "Citalá heißt »Sternenfluss« in der örtlichen Nahuat-Sprache."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:437
 msgid ""
 "Cayahuanca means The rock looking at the stars in the native Nahuat "
 "language."
 msgstr ""
-"Cayahuanca heißt »der Fels, der zu den Sternen schaut« in der klassischen "
-"Nahuatl-Sprache."
+"Cayahuanca heißt »der Fels, der zu den Sternen schaut« in der örtlichen "
+"Nahuat-Sprache."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:438
 msgid ""
@@ -26454,7 +26455,7 @@ msgstr "Gregorianisch"
 #: plugins/Calendars/src/ui_calendarsDialog.h:958
 msgctxt "calendar"
 msgid "Revised Julian"
-msgstr "Reformiert Julianisch"
+msgstr "Julianisch Reformiert "
 
 #: plugins/Calendars/src/Calendars.cpp:333
 msgctxt "calendar"
@@ -26571,12 +26572,12 @@ msgstr "Neuer Hindu Panchang"
 #: plugins/Calendars/src/Calendars.cpp:354
 msgctxt "calendar"
 msgid "Astro Hindu Solar"
-msgstr "Hindu astr. Sonnenkal."
+msgstr "Hindu astr. Sonnenkalender"
 
 #: plugins/Calendars/src/Calendars.cpp:355
 msgctxt "calendar"
 msgid "Astro Hindu Lunisolar"
-msgstr "Hindu astr. Lunisolark."
+msgstr "Hindu astr. Lunisolarkalender"
 
 #: plugins/Calendars/src/Calendars.cpp:356
 #: plugins/Calendars/src/ui_calendarsDialog.h:939
@@ -29529,12 +29530,12 @@ msgstr "Persisch (astronomisch)"
 #: plugins/Calendars/src/ui_calendarsDialog.h:937
 msgctxt "calendar"
 msgid "French Revolution (arithmetic)"
-msgstr "Franz. Revolutionskalender (arithmetisch)"
+msgstr "Franz. Revolutionskalender (arithm.)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:938
 msgctxt "calendar"
 msgid "French Revolution (astronomical)"
-msgstr "Franz. Revolutionskalender (astronomisch)"
+msgstr "Franz. Revolutionskalender (astron.)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:940
 msgctxt "calendar"

@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-20 17:01+0700\n"
+"POT-Creation-Date: 2022-03-21 02:37+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Luigi Ghia <luigi.ghia@gmail.com>, 2022\n"
 "Language-Team: Italian (https://www.transifex.com/stellarium/teams/80998/it/)\n"
@@ -12767,12 +12767,15 @@ msgstr "Coordinate addizionali (da plugins)"
 #: src/ui_configurationDialog.h:1811
 msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
-" setting events are counting by upper limb of celestial body."
+" setting events are defined with the upper limb of the celestial body."
 msgstr ""
+"Mostra il tempo di ascesa, transito e tramonto dell'oggetto celeste. Gli "
+"eventi di sorgere e tramontare sono definiti dal lembo superiore del corpo "
+"celeste."
 
-#: src/ui_configurationDialog.h:1813
-msgid "Risings, transits, and settings"
-msgstr ""
+#: src/ui_configurationDialog.h:1813 src/ui_astroCalcDialog.h:2026
+msgid "Risings, Transits, and Settings"
+msgstr "Albe, Transiti e Tramonti"
 
 #: src/ui_configurationDialog.h:1815
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
@@ -13558,10 +13561,6 @@ msgctxt "rise, transit, set"
 msgid "RTS"
 msgstr "RTS"
 
-#: src/ui_astroCalcDialog.h:2026
-msgid "Risings, Transits, and Settings"
-msgstr ""
-
 #: src/ui_astroCalcDialog.h:2031 src/ui_astroCalcDialog.h:2213
 #: src/ui_astroCalcDialog.h:2252
 msgid "Graphs"
@@ -13773,6 +13772,8 @@ msgid ""
 "Table of approximate risings, transits, and settings for selected celestial "
 "object"
 msgstr ""
+"Tabella di valori appossimati di albe, transiti e tramonti per l'oggetto "
+"celeste selezionato"
 
 #: src/ui_astroCalcDialog.h:2151
 msgid ""
@@ -22929,6 +22930,9 @@ msgid ""
 " bride in the Amazigh language and it is associated with a heartbroken "
 "beautiful girl in an ancient local legend."
 msgstr ""
+"Tislit è il nome di un lago nelle montagne dell'Atlante del Marocco. "
+"Significa la sposa in lingua amazigh ed è associata a una bella ragazza dal "
+"cuore spezzato in un'antica leggenda locale."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:507
 msgid ""
@@ -22936,40 +22940,53 @@ msgid ""
 "groom in the Amazigh language and it is associated with a heartbroken "
 "handsome boy in an ancient local legend."
 msgstr ""
+"Isli è il nome di un lago nelle montagne dell'Atlante del Marocco. Significa"
+" lo sposo nella lingua amazigh ed è associato a un bel ragazzo dal cuore "
+"spezzato in un'antica leggenda locale."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:508
 msgid ""
 "Emiw represents love in the local Makhuwa language of the northern region of"
 " Mozambique."
 msgstr ""
+"Emiw rappresenta l'amore nella lingua locale Makhuwa della regione "
+"settentrionale del Mozambico."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:509
 msgid ""
 "Hairu represents unity in the local Makhuwa language of the northern region "
 "of Mozambique."
 msgstr ""
+"Hairu rappresenta l'unità nella lingua locale Makhuwa della regione "
+"settentrionale del Mozambico."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:510
 msgid "Ayeyarwady is the largest and most important river in Myanmar."
-msgstr ""
+msgstr "Ayeyarwady è il fiume più grande e importante del Myanmar."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:511
 msgid ""
 "Bagan is one of Myanmar's ancient cities that lies beside the Ayeyarwardy "
 "river."
 msgstr ""
+"Bagan è una delle antiche città del Myanmar che si trova accanto al fiume "
+"Ayeyarwady."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:512
 msgid ""
 "Sagarmatha is the Nepali name for the highest peak in the world (also known "
 "as Mount Everest) and symbol of national pride of Nepal."
 msgstr ""
+"Sagarmatha è il nome nepalese della vetta più alta del mondo (conosciuta "
+"anche come Monte Everest) e simbolo dell'orgoglio nazionale del Nepal."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:513
 msgid ""
 "Laligurans are the Nepali variation of the rhododendron flower and is the "
 "national flower of Nepal."
 msgstr ""
+"I Laligurani sono la variante nepalese del fiore di rododendro ed è il fiore"
+" nazionale del Nepal."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:514
 msgid ""
@@ -22977,6 +22994,9 @@ msgid ""
 "master Van Gogh that was painted in France in 1889 and now belongs to the "
 "permanent collection of New York's Museum of Modern Art."
 msgstr ""
+"La Sterrennacht (Notte stellata) è un dipinto di fama mondiale del grande "
+"maestro olandese Van Gogh dipinto in Francia nel 1889 e ora appartiene alla "
+"collezione permanente del Museum of Modern Art di New York."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:515
 msgid ""
@@ -22984,24 +23004,33 @@ msgid ""
 "master Rembrandt that was completed in 1642 and now belongs to the "
 "collection of the Rijksmuseum in Amsterdam."
 msgstr ""
+"Il Nachtwacht (Night Watch) è un dipinto di fama mondiale del grande maestro"
+" olandese Rembrandt che fu completato nel 1642 e ora appartiene alla "
+"collezione del Rijksmuseum di Amsterdam."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:516
 msgid ""
 "Karaka is the word in the Māori language for a plant endemic to New Zealand "
 "that produces a bright orange, fleshy fruit."
 msgstr ""
+"Karaka è la parola nella lingua Maori per una pianta endemica della Nuova "
+"Zelanda che produce un frutto carnoso di colore arancione brillante."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:517
 msgid ""
 "Kererū is the word in the Māori language for a large bush pigeon native to "
 "New Zealand."
 msgstr ""
+"Kererū è la parola nella lingua Maori per un grande piccione selvatico "
+"originario della Nuova Zelanda."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:518
 msgid ""
 "Cocibolca is the Nahualt name for the largest lake in Central America in "
 "Nicaragua."
 msgstr ""
+"Cocibolca è il nome Nahualt del lago più grande dell'America Centrale in "
+"Nicaragua."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:519
 msgid ""
@@ -23009,61 +23038,82 @@ msgid ""
 " from the Nahualt language of the indigenous tribe that settled in "
 "Nicaragua, which symbolises a native god and a refuge for animals."
 msgstr ""
+"Xolotlan è il nome del secondo lago più grande del Nicaragua e il suo nome "
+"deriva dalla lingua Nahualt della tribù indigena che si stabilì in "
+"Nicaragua, che simboleggia un dio nativo e un rifugio per gli animali."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:520
 msgid ""
 "Amadioha is the god of thunder in Igbo mythology. As well as representing "
 "justice, Amadioha is also a god of love, peace and unity."
 msgstr ""
+"Amadioha è il dio del tuono nella mitologia Igbo. Oltre a rappresentare la "
+"giustizia, Amadioha è anche un dio dell'amore, della pace e dell'unità."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:521
 msgid ""
 "Equiano was a writer and abolitionist from Ihiala, Nigeria who fought "
 "injustice and the elimination of the slave trade."
 msgstr ""
+"Equiano era uno scrittore e abolizionista di Ihiala, in Nigeria, che ha "
+"combattuto l'ingiustizia e l'eliminazione della tratta degli schiavi."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:522
 msgid "Násti means star in the Northern Sami language of Norway."
 msgstr ""
+"Násti significa stella nella lingua Sami Settentrionale della Norvegia."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:523
 msgid "Albmi means sky in the Northern Sami language of Norway."
 msgstr ""
+"Albmi significa cielo nella lingua sami settentrionale della Norvegia."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:524
 msgid ""
 "Shama is an Urdu literary term meaning a small lamp or flame, symbolic of "
 "the light of the star."
 msgstr ""
+"Shama è un termine letterario Urdu che significa una piccola lampada o "
+"fiamma, simbolo della luce della stella."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:525
 msgid ""
 "Perwana means moth in Urdu, alluding to the eternal love of an object "
 "circling the source of light (the lamp)."
 msgstr ""
+"Perwana significa falena in Urdu, alludendo all'amore eterno di un oggetto "
+"che ruota attorno alla fonte di luce (la lampada)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:526
 msgid ""
 "Moriah is an ancient name for the mountain within the Old City of Jerusalem."
 msgstr ""
+"Moriah è un antico nome per la montagna all'interno della Città Vecchia di "
+"Gerusalemme."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:527
 msgid ""
 "Jebus was the ancient name of Jerusalem in 2nd millennium BC when populated "
 "by the Canaanite tribe of Jebusites."
 msgstr ""
+"Jebus era l'antico nome di Gerusalemme nel 2° millennio a.C. quando era "
+"popolato dalla tribù cananea dei Gebusei."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:528
 msgid ""
 "Montuno is the traditional costume the man wears in the “El Punto”, a "
 "Panamanian dance in which a man and woman dance to the sound of drums."
 msgstr ""
+"Montuno è il costume tradizionale che l'uomo indossa nel “El Punto”, un "
+"ballo panamense in cui un uomo e una donna ballano al suono dei tamburi."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:529
 msgid ""
 "Pollera is the traditional costume the woman wears in the El Punto, a "
 "Panamanian dance in which a man and woman dance to the sound of drums."
 msgstr ""
+"Pollera è il costume tradizionale che la donna indossa nel \"El Punto\", una"
+" danza panamense in cui un uomo e una donna ballano al suono dei tamburi."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:530
 msgid ""
@@ -23071,6 +23121,9 @@ msgid ""
 "Paraguayan folklore that helped the supreme god Ñamandu to create the "
 "Universe."
 msgstr ""
+"Tupã è una delle quattro divinità principali della Cosmogonia Guarani nel "
+"popolare folklore paraguaiano che ha aiutato il dio supremo Ñamandu a creare"
+" l'Universo."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:531
 msgid ""
@@ -23078,18 +23131,26 @@ msgid ""
 " Universe, who is known as the Father of Wisdom in popular Paraguayan "
 "folklore."
 msgstr ""
+"Tume Arandu è figlio di Rupavê e Sypavê, l'uomo e la donna originari "
+"dell'Universo, conosciuto come il Padre della Saggezza nel folklore popolare"
+" paraguaiano."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:532
 msgid ""
 "Inquil was one half of the couple involved in the tragic love story Way to "
 "the Sun by famous Peruvian writer Abraham Valdelomar."
 msgstr ""
+"Inquil era una metà della coppia coinvolta nella tragica storia d'amore "
+"\"Way to the Sun\" del famoso scrittore peruviano Abraham Valdelomar."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:533
 msgid ""
 "Sumaj Majta was one half of the couple involved in a tragic love story Way "
 "to the Sun by famous Peruvian writer Abraham Valdelomar."
 msgstr ""
+"Sumaj Majta era una metà della coppia coinvolta in una tragica storia "
+"d'amore \"Way to the Sun\" del famoso scrittore peruviano Abraham "
+"Valdelomar."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:534
 msgid ""
@@ -23097,36 +23158,48 @@ msgid ""
 "mythology, and is the primordial deity of the ocean and protector of "
 "fisherman."
 msgstr ""
+"Aman Sinaya è una delle due divinità della trinità della mitologia Tagalog "
+"Filippina ed è la divinità primordiale dell'oceano e protettrice del "
+"pescatore."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:535
 msgid ""
 "Haik is the successor of the primordial Aman Sinaya as the God of the Sea of"
 " the Philippine's Tagalog mythology."
 msgstr ""
+"Haik è il successore del primordiale Aman Sinaya come Dio del Mare della "
+"mitologia tagalog delle Filippine."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:536
 msgid ""
 "Uklun means us or we in the Pitkern language of the people of Pitcairn "
 "Islands."
 msgstr ""
+"Uklun significa noi nella lingua Pitkern del popolo delle Isole Pitcairn."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:537
 msgid ""
 "Lekl Sullun means child or children in the Pitkern language of the people of"
 " Pitcairn Islands."
 msgstr ""
+"Lekl Sullun significa bambino o bambini nella lingua Pitkern della gente "
+"delle isole Pitcairn."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:538
 msgid ""
 "Solaris is the title of a 1961 science fiction novel about an ocean-covered "
 "exoplanet by Polish writer Stanislaw Lem."
 msgstr ""
+"Solaris è il titolo di un romanzo di fantascienza del 1961 su un esopianeta "
+"coperto dall'oceano dello scrittore polacco Stanislaw Lem."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:539
 msgid ""
 "Pirx is a fictional character from books by Polish science-fiction writer "
 "Stanisław Lem."
 msgstr ""
+"Pirx è un personaggio immaginario tratto dai libri dello scrittore di "
+"fantascienza polacco Stanisław Lem."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:540
 msgid ""
@@ -23134,36 +23207,50 @@ msgid ""
 "where the Lusitanian people lived and where most of modern-day Portugal is "
 "situated."
 msgstr ""
+"Lusitânia è l'antico nome della regione occidentale della penisola iberica "
+"dove viveva il popolo Lusitano e dove si trova la maggior parte del "
+"Portogallo moderno."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:541
 msgid ""
 "Viriato was a legendary leader of the Lusitanian people, a herdsman and "
 "hunter who led the resistance against Roman invaders during 2nd century B.C."
 msgstr ""
+"Viriato fu un leggendario condottiero del popolo Lusitano, pastore e "
+"cacciatore che guidò la resistenza contro gli invasori romani durante il II "
+"secolo a. C."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:542
 msgid ""
 "Koeia was the word for star in the language of the Taíno Indigenous People "
 "of the Caribbean."
 msgstr ""
+"Koeia era la parola indicante la stella nella lingua degli indigeni Taíno "
+"dei Caraibi."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:543
 msgid ""
 "Aumatex was the God of Wind in the mythology of the Taíno Indigenous People "
 "of the Caribbean."
 msgstr ""
+"Aumatex era il dio del vento nella mitologia del popolo indigeno Taino dei "
+"Caraibi."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:544
 msgid ""
 "Moldoveanu is the highest peak in Romania of the Făgăraș mountain range with"
 " an altitude of 2544 metres."
 msgstr ""
+"Moldoveanu è la vetta più alta della Romania della catena montuosa Făgăraș "
+"con un'altitudine di 2544 metri."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:545
 msgid ""
 "Negoiu is the second highest peak in Romania of the Făgăraș mountain range "
 "with an altitude of 2535 metres."
 msgstr ""
+"Negoiu è la seconda vetta più alta della Romania della catena montuosa "
+"Făgăraș con un'altitudine di 2535 metri."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:546
 msgid ""
@@ -23171,52 +23258,66 @@ msgid ""
 "by mountain forests and rich wildlife, including bears (as this star lies in"
 " the constellation Ursa Major, the great bear)."
 msgstr ""
+"Dombay è una regione turistica nelle montagne del Caucaso settentrionale che"
+" è racchiusa da foreste di montagna e una ricca fauna selvatica, inclusi gli"
+" orsi (poiché questa stella si trova nella costellazione dell'Orsa Maggiore,"
+" il grande orso)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:547
 msgid ""
 "Teberda is a mountain river in Dombay region with a rapid water flow, "
 "symbolising the planet's rapid motion around its host star."
 msgstr ""
+"Teberda è un fiume di montagna nella regione di Dombay con un rapido flusso "
+"d'acqua, che simboleggia il rapido movimento del pianeta attorno alla sua "
+"stella ospite."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:548
 msgid "Belel is a rare source of water in the north of Senegal."
-msgstr ""
+msgstr "Belel è una rara fonte d'acqua nel nord del Senegal."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:549
 msgid ""
 "Dopere is an expansive historical area in the north of Senegal where Belel "
 "was located."
 msgstr ""
+"Dopere è una vasta area storica nel nord del Senegal dove si trovava Belel."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:550
 msgid "Morava is the longest river system in Serbia."
-msgstr ""
+msgstr "Morava è il sistema fluviale più lungo della Serbia."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:551
 msgid ""
 "Vlasina is one of the most significant tributaries of the South Morava "
 "river."
 msgstr ""
+"Vlasina è uno degli affluenti più significativi del ramo Sud del fiume "
+"Morava."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:552
 msgid ""
 "Parumleo is a Latin term for little lion, symbolising Singapore's struggle "
 "for independence."
 msgstr ""
+"Parumleo è un termine latino che significa piccolo leone, che simboleggia la"
+" lotta per l'indipendenza di Singapore."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:553
 msgid ""
 "Viculus is a Latin term for little village, embodying the spirit of the "
 "Singaporean people."
 msgstr ""
+"Viculus è un termine latino che significa piccolo villaggio, che incarna lo "
+"spirito del popolo di Singapore."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:554
 msgid "Chasoň is an ancient Slovak term for Sun."
-msgstr ""
+msgstr "Chasoň è un antico termine slovacco per Sole."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:555
 msgid "Kráľomoc is an ancient Slovak term for the planet Jupiter."
-msgstr ""
+msgstr "Kráľomoc è un antico termine slovacco per indicare il pianeta Giove."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:556
 msgid ""
@@ -23224,6 +23325,9 @@ msgid ""
 " Ancient Grandfathers by Slovene writer Fran Saleški Finžgar. Irena is a "
 "woman of the court."
 msgstr ""
+"Irena è una protagonista del romanzo \"Sotto il Sole libero\": una storia "
+"degli antichi nonni dello scrittore sloveno Fran Saleški Finžgar. Irena è "
+"una donna di corte."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:557
 msgid ""
@@ -23231,6 +23335,9 @@ msgid ""
 " Ancient Grandfathers by Slovene writer Fran Saleški Finžgar. Iztok is a "
 "freedom fighter for the Slavic people."
 msgstr ""
+"Iztok è il personaggio principale nel romanzo \"Sotto il Sole libero\": una "
+"storia degli antichi nonni dello scrittore sloveno Fran Saleški Finžgar. "
+"Iztok è un combattente per la libertà per il popolo slavo."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:558
 msgid ""
@@ -23238,24 +23345,34 @@ msgid ""
 "typically given as a name to girls in the hope that they will bring light, "
 "joy and peace to their communities."
 msgstr ""
+"Naledi significa stella nelle lingue Sesotho, SeTswana e SePedi ed è "
+"tipicamente dato come nome alle ragazze nella speranza che portino luce, "
+"gioia e pace nelle loro comunità."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:559
 msgid ""
 "Krotoa is considered the Mother of Africa and member of the indigenous Khoi "
 "people, who was a community builder and educator during colonial times."
 msgstr ""
+"Krotoa è considerata la Madre dell'Africa e membro del popolo indigeno Khoi,"
+" che era un costruttore ed educatore di comunità durante il periodo "
+"coloniale."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:560
 msgid ""
 "Baekdu is the highest mountain on the Korean peninsula, situated in North "
 "Korea, and symbolises the national spirit of Korea."
 msgstr ""
+"Baekdu è la montagna più alta della penisola coreana, situata nella Corea "
+"del Nord, e simboleggia lo spirito nazionale della Corea."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:561
 msgid ""
 "Halla is the highest mountain in South Korea and is regarded as a sacred "
 "place in the region."
 msgstr ""
+"Halla è la montagna più alta della Corea del Sud ed è considerata un luogo "
+"sacro nella regione."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:562
 msgid ""
@@ -23263,20 +23380,25 @@ msgid ""
 " Spanish writer, whose pioneering work often referenced the night and "
 "celestial objects."
 msgstr ""
+"Rosalía de Castro era una figura significativa della cultura Galiziana e una"
+" importante scrittrice spagnola, il cui lavoro pionieristico faceva spesso "
+"riferimento alla notte e agli oggetti celesti."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:563
 msgid ""
 "Rio Sar is the name of a river that was present in much of the literary work"
 " of the pioneering Spanish author Rosalía de Castro."
 msgstr ""
+"Rio Sar è il nome di un fiume presente in gran parte dell'opera letteraria "
+"della pioniera scrittrice spagnola Rosalía de Castro."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:564
 msgid "Sāmaya means peace in the Sinhalese language."
-msgstr ""
+msgstr "Sāmaya significa pace nella lingua Singalese."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:565
 msgid "Samagiya means togetherness and unity in the Sinhalese language."
-msgstr ""
+msgstr "Samagiya significa stare insieme e unità nella lingua Singalese."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:566
 msgid ""

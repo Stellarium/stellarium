@@ -8,15 +8,16 @@
 # OmniBus <omnibus.syli@gmail.com>, 2018
 # cardinot <mcardinot@gmail.com>, 2022
 # 殳玮 孙 <itun@qq.com>, 2022
+# Thomas P C Chu, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-20 17:01+0700\n"
+"POT-Creation-Date: 2022-03-21 02:37+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: 殳玮 孙 <itun@qq.com>, 2022\n"
+"Last-Translator: Thomas P C Chu, 2022\n"
 "Language-Team: Chinese (Hong Kong) (https://www.transifex.com/stellarium/teams/80998/zh_HK/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -930,7 +931,7 @@ msgstr "峽"
 #: src/core/modules/NomenclatureItem.cpp:585
 msgctxt "landform"
 msgid "fossa"
-msgstr "塹溝"
+msgstr "槽溝"
 
 #. TRANSLATORS: Island (islands), an isolated land area (or group of such
 #. areas) surrounded by, or nearly surrounded by, a liquid area (sea or lake)
@@ -1009,7 +1010,7 @@ msgstr "海"
 #: src/core/modules/NomenclatureItem.cpp:609
 msgctxt "landform"
 msgid "mensa"
-msgstr "桌山"
+msgstr "方山"
 
 #. TRANSLATORS: Mountain
 #: src/core/modules/NomenclatureItem.cpp:611
@@ -7340,7 +7341,7 @@ msgstr "地質特徵：峽"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:138
 msgid "Geological features: fossae"
-msgstr "地質特徵：塹溝"
+msgstr "地質特徵 : 槽溝"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:140
@@ -7395,7 +7396,7 @@ msgstr "地質特徵：海"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:160
 msgid "Geological features: mensae"
-msgstr "地質特徵：桌山"
+msgstr "地質特徵：方山"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:162
@@ -12412,11 +12413,11 @@ msgstr "附加座標（外掛程式）"
 #: src/ui_configurationDialog.h:1811
 msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
-" setting events are counting by upper limb of celestial body."
+" setting events are defined with the upper limb of the celestial body."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1813
-msgid "Risings, transits, and settings"
+#: src/ui_configurationDialog.h:1813 src/ui_astroCalcDialog.h:2026
+msgid "Risings, Transits, and Settings"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1815
@@ -13158,10 +13159,6 @@ msgstr "地平綫以上天體"
 #: src/ui_astroCalcDialog.h:2024
 msgctxt "rise, transit, set"
 msgid "RTS"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:2026
-msgid "Risings, Transits, and Settings"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:2031 src/ui_astroCalcDialog.h:2213

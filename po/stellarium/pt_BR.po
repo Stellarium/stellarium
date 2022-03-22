@@ -27,7 +27,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-20 17:01+0700\n"
+"POT-Creation-Date: 2022-03-21 02:37+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Stu StellariumTranslator1, 2022\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/stellarium/teams/80998/pt_BR/)\n"
@@ -12719,11 +12719,11 @@ msgstr "Coordenadas adicionais (dos complementos)"
 #: src/ui_configurationDialog.h:1811
 msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
-" setting events are counting by upper limb of celestial body."
+" setting events are defined with the upper limb of the celestial body."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1813
-msgid "Risings, transits, and settings"
+#: src/ui_configurationDialog.h:1813 src/ui_astroCalcDialog.h:2026
+msgid "Risings, Transits, and Settings"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1815
@@ -13496,10 +13496,6 @@ msgstr "Corpos celestes acima do horizonte"
 #: src/ui_astroCalcDialog.h:2024
 msgctxt "rise, transit, set"
 msgid "RTS"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:2026
-msgid "Risings, Transits, and Settings"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:2031 src/ui_astroCalcDialog.h:2213

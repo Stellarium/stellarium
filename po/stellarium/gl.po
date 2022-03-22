@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-20 17:01+0700\n"
+"POT-Creation-Date: 2022-03-21 02:37+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales.gr@gmail.com>, 2022\n"
 "Language-Team: Galician (https://www.transifex.com/stellarium/teams/80998/gl/)\n"
@@ -12708,12 +12708,14 @@ msgstr "Coordenadas adicionais (para plugins)"
 #: src/ui_configurationDialog.h:1811
 msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
-" setting events are counting by upper limb of celestial body."
+" setting events are defined with the upper limb of the celestial body."
 msgstr ""
+"Mostra a hora de saída, tránsito e ocaso do obxecto celeste. Os eventos de "
+"saída e de ocaso están definidos co limbo superior do corpo celeste."
 
-#: src/ui_configurationDialog.h:1813
-msgid "Risings, transits, and settings"
-msgstr ""
+#: src/ui_configurationDialog.h:1813 src/ui_astroCalcDialog.h:2026
+msgid "Risings, Transits, and Settings"
+msgstr "Saídas, Tránsitos e Ocasos"
 
 #: src/ui_configurationDialog.h:1815
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
@@ -13487,10 +13489,6 @@ msgctxt "rise, transit, set"
 msgid "RTS"
 msgstr "RTS"
 
-#: src/ui_astroCalcDialog.h:2026
-msgid "Risings, Transits, and Settings"
-msgstr ""
-
 #: src/ui_astroCalcDialog.h:2031 src/ui_astroCalcDialog.h:2213
 #: src/ui_astroCalcDialog.h:2252
 msgid "Graphs"
@@ -13698,7 +13696,7 @@ msgstr "Obxecto celeste:"
 msgid ""
 "Table of approximate risings, transits, and settings for selected celestial "
 "object"
-msgstr ""
+msgstr "Táboa de saídas, tránsitos e ocasos do obxecto celeste seleccionado"
 
 #: src/ui_astroCalcDialog.h:2151
 msgid ""

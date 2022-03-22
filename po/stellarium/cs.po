@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-20 17:01+0700\n"
+"POT-Creation-Date: 2022-03-21 02:37+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/stellarium/teams/80998/cs/)\n"
@@ -3257,6 +3257,10 @@ msgid ""
 "1600-2000. Formula for 2005-2050 is modified to match observed values and "
 "near-term predictions."
 msgstr ""
+"Toto je modifikace řešení od F. Espenaka a J. Meeuse, které je založeno na "
+"práci Morrisona & Stephensona (2004) a na polynomiálním fitu tabulovanými "
+"hodnotami z let 1600-2000. Vzorec pro roky 2005-2050 je modifikovaný tak, "
+"aby souhlasil s pozorovanými hodnotami a krátkodobou předpovědí."
 
 #: src/core/StelCore.cpp:2385
 msgid "Used by default."
@@ -3271,6 +3275,9 @@ msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
 msgstr ""
+"Toto řešení F. Espenaka a J. Meeuse je založeno na práci Morrisona & "
+"Stephensona (2004) a na polynomiálním fitu tabulovanými hodnotami z let "
+"1600-2000."
 
 #: src/core/StelCore.cpp:2391
 #, qt-format
@@ -4562,7 +4569,7 @@ msgstr "Espenak & Meeus (2006) bez sekulárního zrychlení Měsíce"
 
 #: src/gui/ConfigurationDialog.cpp:1875
 msgid "Modified Espenak & Meeus (2006, 2022)"
-msgstr ""
+msgstr "Modifikovaný Espenak & Meeus (2006, 2022)"
 
 #: src/gui/ConfigurationDialog.cpp:1876
 msgid "Reijs (2006)"
@@ -12674,12 +12681,14 @@ msgstr "Další souřadnice (ze zásuvných modulů)"
 #: src/ui_configurationDialog.h:1811
 msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
-" setting events are counting by upper limb of celestial body."
+" setting events are defined with the upper limb of the celestial body."
 msgstr ""
+"Ukáže čas východu, kulminace a západu nebeského tělesa. Okamžiky východu a "
+"západu jsou určeny horním okrajem disku nebeského tělesa."
 
-#: src/ui_configurationDialog.h:1813
-msgid "Risings, transits, and settings"
-msgstr ""
+#: src/ui_configurationDialog.h:1813 src/ui_astroCalcDialog.h:2026
+msgid "Risings, Transits, and Settings"
+msgstr "Východy, kulminace a západy"
 
 #: src/ui_configurationDialog.h:1815
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
@@ -13453,10 +13462,6 @@ msgctxt "rise, transit, set"
 msgid "RTS"
 msgstr "VKZ"
 
-#: src/ui_astroCalcDialog.h:2026
-msgid "Risings, Transits, and Settings"
-msgstr ""
-
 #: src/ui_astroCalcDialog.h:2031 src/ui_astroCalcDialog.h:2213
 #: src/ui_astroCalcDialog.h:2252
 msgid "Graphs"
@@ -13664,6 +13669,7 @@ msgid ""
 "Table of approximate risings, transits, and settings for selected celestial "
 "object"
 msgstr ""
+"Tabulka přibližných východů, kulminací a západů pro vybrané nebeské těleso"
 
 #: src/ui_astroCalcDialog.h:2151
 msgid ""

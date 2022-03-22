@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-20 17:01+0700\n"
+"POT-Creation-Date: 2022-03-21 02:37+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Worachate Boonplod, 2022\n"
 "Language-Team: Thai (https://www.transifex.com/stellarium/teams/80998/th/)\n"
@@ -12614,12 +12614,12 @@ msgstr "พิกัดเพิ่มเติม (จากโปรแกร�
 #: src/ui_configurationDialog.h:1811
 msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
-" setting events are counting by upper limb of celestial body."
+" setting events are defined with the upper limb of the celestial body."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1813
-msgid "Risings, transits, and settings"
-msgstr ""
+#: src/ui_configurationDialog.h:1813 src/ui_astroCalcDialog.h:2026
+msgid "Risings, Transits, and Settings"
+msgstr "เวลาขึ้น ผ่านเมริเดียน และตก"
 
 #: src/ui_configurationDialog.h:1815
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
@@ -13380,10 +13380,6 @@ msgctxt "rise, transit, set"
 msgid "RTS"
 msgstr "เวลาขึ้น-ตก"
 
-#: src/ui_astroCalcDialog.h:2026
-msgid "Risings, Transits, and Settings"
-msgstr ""
-
 #: src/ui_astroCalcDialog.h:2031 src/ui_astroCalcDialog.h:2213
 #: src/ui_astroCalcDialog.h:2252
 msgid "Graphs"
@@ -13591,6 +13587,7 @@ msgid ""
 "Table of approximate risings, transits, and settings for selected celestial "
 "object"
 msgstr ""
+"ตารางแสดงเวลาขึ้น ผ่านเมริเดียน และตกโดยประมาณ สำหรับวัตถุท้องฟ้าที่เลือก"
 
 #: src/ui_astroCalcDialog.h:2151
 msgid ""
@@ -17499,13 +17496,15 @@ msgstr "หันกล้องโทรทรรศน์ไปยังพิ
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:258
 #, qt-format
 msgid "Center the screen on telescope #%1 coordinates"
-msgstr ""
+msgstr "ทำให้พิกัดจากกล้องโทรทรรศน์ #%1 มาอยู่กลางจอ"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:776
 msgid ""
 "The existing version of the configuration data for telescopes in the "
 "Telescope Control plugin is obsolete."
 msgstr ""
+"รุ่นของข้อมูลการปรับแต่งกล้องโทรทรรศน์ที่มีอยู่ "
+"สำหรับโปรแกรมเสริมควบคุมกล้องโทรทรรศน์ล้าสมัยแล้ว"
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1797
