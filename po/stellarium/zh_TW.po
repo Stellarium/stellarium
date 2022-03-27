@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-21 02:37+0700\n"
+"POT-Creation-Date: 2022-03-22 21:41+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: freemanli <freeman.tam@gmail.com>, 2022\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/stellarium/teams/80998/zh_TW/)\n"
@@ -3220,6 +3220,8 @@ msgid ""
 "1600-2000. Formula for 2005-2050 is modified to match observed values and "
 "near-term predictions."
 msgstr ""
+"這個解法是由 F. Espenak 和 J. Meeus 基於 Morrison & Stephenson (2004) 和 1600-2000 "
+"年區間的表格數值的最適多項式所作的修改。 並對 2005-2050 年的公式進行了修正，以匹配觀測值和近期預測。"
 
 #: src/core/StelCore.cpp:2385
 msgid "Used by default."
@@ -3234,6 +3236,8 @@ msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
 msgstr ""
+"這個解法是由 F. Espenak 和 J. Meeus 基於 Morrison & Stephenson (2004) 和 1600-2000 "
+"年區間的表格數值的最適多項式所作的修改。"
 
 #: src/core/StelCore.cpp:2391
 #, qt-format
@@ -4476,7 +4480,7 @@ msgstr "Espenak 與 Meeus (2006) 不含額外的月球加速"
 
 #: src/gui/ConfigurationDialog.cpp:1875
 msgid "Modified Espenak & Meeus (2006, 2022)"
-msgstr ""
+msgstr "修正過的 Espenak & Meeus (2006, 2022)"
 
 #: src/gui/ConfigurationDialog.cpp:1876
 msgid "Reijs (2006)"
@@ -10956,15 +10960,15 @@ msgstr "大氣可視化"
 msgid ""
 "Refraction/Extinction settings: pressure, temperature, extinction "
 "coefficient, etc."
-msgstr ""
+msgstr "折射/消光設置：壓力、溫度、消光係數等。"
 
 #: src/ui_viewDialog.h:3218
 msgid "Open skylight details (color tweaks for the atmosphere)"
-msgstr ""
+msgstr "開啟天空亮光的細節 (對大氣顏色的調整)"
 
 #: src/ui_viewDialog.h:3221
 msgid "Open tone mapping details."
-msgstr ""
+msgstr "開啟色調映射的細節"
 
 #: src/ui_viewDialog.h:3223
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:446
@@ -11155,17 +11159,17 @@ msgstr "隱藏觀察者對天體的命名"
 
 #: src/ui_viewDialog.h:3310
 msgid "Scale:"
-msgstr ""
+msgstr "比例:"
 
 #: src/ui_viewDialog.h:3311
 msgctxt "scale"
 msgid "Sun"
-msgstr ""
+msgstr "太陽"
 
 #: src/ui_viewDialog.h:3312
 msgctxt "scale"
 msgid "Moon"
-msgstr ""
+msgstr "月球"
 
 #: src/ui_viewDialog.h:3314
 msgid "Scale factor"
@@ -11174,12 +11178,12 @@ msgstr "放大倍數"
 #: src/ui_viewDialog.h:3316
 msgctxt "scale"
 msgid "Planets"
-msgstr ""
+msgstr "行星"
 
 #: src/ui_viewDialog.h:3317
 msgctxt "scale"
 msgid "Minor bodies"
-msgstr ""
+msgstr "小天體"
 
 #: src/ui_viewDialog.h:3320
 msgid "Color of planet labels"
@@ -11272,7 +11276,7 @@ msgstr "太陽的日冕"
 
 #: src/ui_viewDialog.h:3366
 msgid "Jupiter's Great Red Spot..."
-msgstr ""
+msgstr "木星大紅斑..."
 
 #: src/ui_viewDialog.h:3368
 msgid "GRS details..."
@@ -11280,11 +11284,11 @@ msgstr "大紅斑(GRS)細節..."
 
 #: src/ui_viewDialog.h:3369
 msgid "Solar System Editor..."
-msgstr ""
+msgstr "太陽系編輯器..."
 
 #: src/ui_viewDialog.h:3371
 msgid "Planets magnitude algorithm"
-msgstr ""
+msgstr "行星星等運算"
 
 #: src/ui_viewDialog.h:3373
 msgid "Planets magnitude algorithm:"
@@ -12424,11 +12428,11 @@ msgstr "額外的座標 (來自外掛程式)"
 msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
 " setting events are defined with the upper limb of the celestial body."
-msgstr ""
+msgstr "顯示天體的上升、過中天和落下時間。 上升和落下事件是由天體的上緣定義。"
 
 #: src/ui_configurationDialog.h:1813 src/ui_astroCalcDialog.h:2026
 msgid "Risings, Transits, and Settings"
-msgstr ""
+msgstr "出、中天、沒"
 
 #: src/ui_configurationDialog.h:1815
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
@@ -12679,7 +12683,7 @@ msgstr "星象儀選項"
 
 #: src/ui_configurationDialog.h:1953
 msgid "Allow mouse to pan (drag)"
-msgstr ""
+msgstr "允許滑鼠平移 (拖曳)"
 
 #: src/ui_configurationDialog.h:1955
 msgid "Enable mouse navigation"
@@ -12881,11 +12885,11 @@ msgstr "應用字型"
 
 #: src/ui_configurationDialog.h:2062
 msgid "Allow mouse to zoom (mousewheel)"
-msgstr ""
+msgstr "允許滑鼠縮放 (滑鼠滾輪)"
 
 #: src/ui_configurationDialog.h:2064
 msgid "Enable mouse zooming"
-msgstr ""
+msgstr "啟用滑鼠縮放"
 
 #: src/ui_configurationDialog.h:2066
 msgid "Force date/time tab and focus on day input when activating date panel"
@@ -12917,13 +12921,13 @@ msgstr "自訂大小"
 
 #: src/ui_configurationDialog.h:2075
 msgid "dpi"
-msgstr ""
+msgstr "dpi"
 
 #: src/ui_configurationDialog.h:2077
 msgid ""
 "Dots per Inch (for printing size computation in image metadata). Native "
 "print size in inches is then pixelSize/dpi."
-msgstr ""
+msgstr "每英吋點素 (用於計算圖檔列印尺寸的後設資料) ，以英吋表示原列印尺寸的大小的公式即為 像素尺寸/dpi。"
 
 #: src/ui_configurationDialog.h:2081 src/ui_scriptConsole.h:416
 msgid "Close window when script runs"
@@ -13029,7 +13033,7 @@ msgstr ""
 
 #: src/ui_atmosphereDialog.h:235
 msgid "Extinction Coefficient (k):"
-msgstr ""
+msgstr "消光係數 (k):"
 
 #: src/ui_atmosphereDialog.h:237
 msgid ""
@@ -13047,19 +13051,19 @@ msgstr "標準大氣"
 
 #: src/ui_atmosphereDialog.h:243
 msgid "Experimental"
-msgstr ""
+msgstr "實驗性的"
 
 #: src/ui_atmosphereDialog.h:244
 msgid "Suppress scattering (only refraction/extinction)"
-msgstr ""
+msgstr "抑制散射（僅折射/消光）"
 
 #: src/ui_atmosphereDialog.h:245
 msgid "T=25(k-0.16)+1 -- or T="
-msgstr ""
+msgstr "T=25(k-0.16)+1 -- 或 T="
 
 #: src/ui_atmosphereDialog.h:246
 msgid "T=2/5(default)/6 at k=0.16/0.32/0.36. "
-msgstr ""
+msgstr "T=2/5(預設值)/6 當 k=0.16/0.32/0.36 時。"
 
 #: src/ui_greatRedSpotDialog.h:170
 msgid "Great Red Spot Details"
@@ -13075,7 +13079,7 @@ msgstr "yyyy.MM.dd hh:mm"
 
 #: src/ui_greatRedSpotDialog.h:174
 msgid "Annual drift:"
-msgstr ""
+msgstr "年漂移:"
 
 #: src/ui_greatRedSpotDialog.h:176
 msgid "Jovigraphic longitude of Great Red Spot in System II"
@@ -13083,7 +13087,7 @@ msgstr "大紅斑在系統II的木[星表]面精度"
 
 #: src/ui_greatRedSpotDialog.h:178
 msgid "Longitude of GRS:"
-msgstr ""
+msgstr "大紅班的經度:"
 
 #: src/ui_greatRedSpotDialog.h:185
 msgid "Date and Time (UTC):"
@@ -13169,7 +13173,7 @@ msgstr "位於地平線上的天體"
 #: src/ui_astroCalcDialog.h:2024
 msgctxt "rise, transit, set"
 msgid "RTS"
-msgstr ""
+msgstr "RTS"
 
 #: src/ui_astroCalcDialog.h:2031 src/ui_astroCalcDialog.h:2213
 #: src/ui_astroCalcDialog.h:2252
@@ -13192,7 +13196,7 @@ msgstr "行星計算器"
 
 #: src/ui_astroCalcDialog.h:2043
 msgid "Eclipses"
-msgstr ""
+msgstr "食"
 
 #: src/ui_astroCalcDialog.h:2050 src/ui_astroCalcDialog.h:2220
 msgid "Show objects brighter than magnitude"
@@ -13221,7 +13225,7 @@ msgstr "匯出位置 ..."
 
 #: src/ui_astroCalcDialog.h:2063
 msgid "Seen now"
-msgstr ""
+msgstr "現在可見"
 
 #: src/ui_astroCalcDialog.h:2070
 msgid "Show connecting line between the ephemeris markers"
@@ -13357,15 +13361,15 @@ msgstr "所有裸眼可見行星"
 
 #: src/ui_astroCalcDialog.h:2143
 msgid "Cleanup data"
-msgstr ""
+msgstr "清空數據"
 
 #: src/ui_astroCalcDialog.h:2144
 msgid "Export data..."
-msgstr ""
+msgstr "匯出數據..."
 
 #: src/ui_astroCalcDialog.h:2145
 msgid "Calculate"
-msgstr ""
+msgstr "計算"
 
 #: src/ui_astroCalcDialog.h:2146
 msgid "Celestial object:"
@@ -13375,7 +13379,7 @@ msgstr "天體:"
 msgid ""
 "Table of approximate risings, transits, and settings for selected celestial "
 "object"
-msgstr ""
+msgstr "選取天體的出、中天、沒事件的大約時間表"
 
 #: src/ui_astroCalcDialog.h:2151
 msgid ""
@@ -13576,15 +13580,15 @@ msgstr "所選天體間的直線與角距離的變化"
 
 #: src/ui_astroCalcDialog.h:2253 src/ui_astroCalcDialog.h:2258
 msgid "Cleanup solar eclipses"
-msgstr ""
+msgstr "清空日食事件"
 
 #: src/ui_astroCalcDialog.h:2254 src/ui_astroCalcDialog.h:2259
 msgid "Export solar eclipses..."
-msgstr ""
+msgstr "匯出日食事件..."
 
 #: src/ui_astroCalcDialog.h:2255 src/ui_astroCalcDialog.h:2260
 msgid "Calculate solar eclipses"
-msgstr ""
+msgstr "計算日食事件"
 
 #: src/ui_astroCalcDialog.h:2256
 msgid ""
@@ -13596,14 +13600,16 @@ msgid ""
 "due to uncertainty in ΔT which is caused by fluctuations in Earth's "
 "rotation."
 msgstr ""
+"注：gamma值是月影錐軸到地球中心的最小距離，以地球赤道半徑為單位。 這個距離是正的還是負的，取決於陰影錐的軸是經過地球中心的北邊還是南邊。 "
+"由於地球自轉擾動引起 ΔT 值的不確定性，所以在過去和未來數千年的日食路徑的計算並不可靠。"
 
 #: src/ui_astroCalcDialog.h:2257
 msgid "All Solar Eclipses"
-msgstr ""
+msgstr "所有日食事件"
 
 #: src/ui_astroCalcDialog.h:2262
 msgid "Local Solar Eclipses"
-msgstr ""
+msgstr "本地日食事件"
 
 #: src/ui_astroCalcDialog.h:2263
 msgid ""
@@ -13615,26 +13621,28 @@ msgid ""
 "are not reliable due to uncertainty in ΔT which is caused by fluctuations in"
 " Earth's rotation."
 msgstr ""
+"注：gamma值是月影錐軸到地球中心的最小距離，以地球赤道半徑為單位。 這個距離是正的還是負的，取決於陰影錐的軸是經過地球中心的北邊還是南邊。 "
+"由於地球自轉擾動引起 ΔT 值的不確定性，所以在過去和未來數千年的當地日食情形的計算並不可靠。"
 
 #: src/ui_astroCalcDialog.h:2264
 msgid "Cleanup lunar eclipses"
-msgstr ""
+msgstr "清空月食事件"
 
 #: src/ui_astroCalcDialog.h:2265
 msgid "Export lunar eclipses..."
-msgstr ""
+msgstr "匯出月食事件..."
 
 #: src/ui_astroCalcDialog.h:2266
 msgid "Calculate lunar eclipses"
-msgstr ""
+msgstr "計算月食事件"
 
 #: src/ui_astroCalcDialog.h:2269
 msgid "From year"
-msgstr ""
+msgstr "開始年份"
 
 #: src/ui_astroCalcDialog.h:2270
 msgid "to the next"
-msgstr ""
+msgstr "到下次年份"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:195
 msgid "Extra options"
@@ -14164,122 +14172,122 @@ msgstr "天王星軌道的顏色"
 
 #: src/ui_skylightDialog.h:1193
 msgid "Skylight Details"
-msgstr ""
+msgstr "天空亮光細節"
 
 #: src/ui_skylightDialog.h:1195
 msgid "Skylight Settings"
-msgstr ""
+msgstr "天空亮光設置"
 
 #: src/ui_skylightDialog.h:1197
 msgid "switch parameters below by"
-msgstr ""
+msgstr "切換係數低於"
 
 #: src/ui_skylightDialog.h:1198
 msgid "Draw Sun after atmosphere (attempt better red ball effect)"
-msgstr ""
+msgstr "在大氣層後繪製太陽 (嘗試更佳的紅球效應)"
 
 #: src/ui_skylightDialog.h:1199
 msgid "Draw solar glare before Sun"
-msgstr ""
+msgstr "在太陽前方繪製太陽眩光"
 
 #: src/ui_skylightDialog.h:1201
 msgid ""
 "Reset all ABCDE values for zenith and distribution to those in Stellarium's "
 "original implementation paper"
-msgstr ""
+msgstr "將天頂和分佈的所有 ABCDE 值重置為 Stellarium 原始實施文件中的值。"
 
 #: src/ui_skylightDialog.h:1203
 msgid "Reset all xy (Stellarium)"
-msgstr ""
+msgstr "重置所有 xy (Stellarium)"
 
 #: src/ui_skylightDialog.h:1205
 msgid ""
 "Reset all ABCDE values for zenith and distribution to those in Preetham's "
 "1999 paper"
-msgstr ""
+msgstr "將天頂和分佈的所有 ABCDE 值重置為 Preetham 的 1999 年論文中實施的值。"
 
 #: src/ui_skylightDialog.h:1207
 msgid "Reset all xy (Preetham)"
-msgstr ""
+msgstr "重置所有 xy (Preetham)"
 
 #: src/ui_skylightDialog.h:1209
 msgid ""
 "Schaefer's skylight model is better than the result from the CIE skylight "
 "distribution."
-msgstr ""
+msgstr "Schaefer 的天空亮光模型比較優於 CIE 天空亮光分佈的結果。"
 
 #: src/ui_skylightDialog.h:1211
 msgid "Y from Schaefer, not Preetham sky"
-msgstr ""
+msgstr "Y 取自 Schaefer, 不是 Preetham 天空"
 
 #: src/ui_skylightDialog.h:1212
 msgid "[Preetham]"
-msgstr ""
+msgstr "[Preetham]"
 
 #: src/ui_skylightDialog.h:1213 src/ui_skylightDialog.h:1215
 #: src/ui_skylightDialog.h:1224 src/ui_skylightDialog.h:1226
 #: src/ui_skylightDialog.h:1228
 msgid "Reset: Stellarium"
-msgstr ""
+msgstr "重置: Stellarium"
 
 #: src/ui_skylightDialog.h:1214 src/ui_skylightDialog.h:1216
 #: src/ui_skylightDialog.h:1223 src/ui_skylightDialog.h:1225
 #: src/ui_skylightDialog.h:1227
 msgid "Reset: Preetham"
-msgstr ""
+msgstr "重置: Preetham"
 
 #: src/ui_skylightDialog.h:1217
 msgid ""
 "with zenith angle &theta;, solar zenith angle &theta;<sub>s</sub>, solar "
 "angle &gamma;"
-msgstr ""
+msgstr "含天頂角 &theta;, 太陽天頂角 &theta;<sub>s</sub>, 太陽夾角 &gamma;"
 
 #: src/ui_skylightDialog.h:1218
 msgid "Horizon bright/dark"
-msgstr ""
+msgstr "水平亮/暗"
 
 #: src/ui_skylightDialog.h:1219
 msgid "Hor.Gradient"
-msgstr ""
+msgstr "水平梯度"
 
 #: src/ui_skylightDialog.h:1220
 msgid "circumsolar Intensity"
-msgstr ""
+msgstr "日照強度"
 
 #: src/ui_skylightDialog.h:1221
 msgid "highlightSize"
-msgstr ""
+msgstr "高亮度尺寸"
 
 #: src/ui_skylightDialog.h:1222
 msgid "rel. backscatter"
-msgstr ""
+msgstr "相對的背向散射"
 
 #: src/ui_skylightDialog.h:1229
 msgid ""
 "Note: when the sky brightness (CIE Y) is set by Schaefer's model, the "
 "bottom-left settings will not visibly change anything."
-msgstr ""
+msgstr "注意：當天空亮度 (CIE Y) 是依據 Schaefer 的模型設置時，左下角的設置不會明顯改變任何東西。"
 
 #: src/ui_tonemappingDialog.h:180
 msgid "Tone Mapping Details"
-msgstr ""
+msgstr "色調映射細節"
 
 #: src/ui_tonemappingDialog.h:182
 msgid "Custom settings for Tone Mapping"
-msgstr ""
+msgstr "色調映射的自訂設置"
 
 #: src/ui_tonemappingDialog.h:184
 msgid ""
 "Maximum luminance of the display (see display data sheet). Default 100cd/m²"
-msgstr ""
+msgstr "顯示器的最大亮度（參見顯示器數據表）。 預設是 100cd/m²"
 
 #: src/ui_tonemappingDialog.h:186
 msgid "Display max luminance:"
-msgstr ""
+msgstr "顯示器的最大亮度:"
 
 #: src/ui_tonemappingDialog.h:188
 msgid "Reset to useful defaults"
-msgstr ""
+msgstr "重置為有效的預設值"
 
 #: src/ui_tonemappingDialog.h:190
 msgid "Reset"
@@ -14287,47 +14295,47 @@ msgstr "重置"
 
 #: src/ui_tonemappingDialog.h:192
 msgid "Relates to brightness surrounding the display. Default 50cd/m²"
-msgstr ""
+msgstr "有關顯示器周圍的亮度。 默認 50cd/m²"
 
 #: src/ui_tonemappingDialog.h:194
 msgid "Display adaptation luminance:"
-msgstr ""
+msgstr "顯示適應亮度:"
 
 #: src/ui_tonemappingDialog.h:196
 msgid "Display property. Default 100cd/m² for a CRT."
-msgstr ""
+msgstr "顯示屬性。 CRT 默認為 100cd/m²。"
 
 #: src/ui_tonemappingDialog.h:199
 msgid ""
 "Stellarium's original formulation may include a gamma term too much, but it "
 "looks better than without."
-msgstr ""
+msgstr "Stellarium 的原始公式可能包含過多的 gamma 項，但看起來總比沒有要好。"
 
 #: src/ui_tonemappingDialog.h:201
 msgid "Use extra Gamma term"
-msgstr ""
+msgstr "使用額外的 Gamma 項"
 
 #: src/ui_tonemappingDialog.h:203
 msgid ""
 "Assumed nonlinearity between input signal and output brightness. Default "
 "2.2222."
-msgstr ""
+msgstr "假設輸入信號和輸出亮度之間存在非線性。 默認 2.2222。"
 
 #: src/ui_tonemappingDialog.h:208
 msgid "Display Gamma:"
-msgstr ""
+msgstr "顯示器 Gamma:"
 
 #: src/ui_tonemappingDialog.h:210
 msgid "Use an XYZ->sRGB color transform matrix, not XYZ->Adobe RGB (1998)."
-msgstr ""
+msgstr "使用 XYZ->sRGB 的色彩轉換矩陣，而不是 XYZ->Adobe RGB (1998)."
 
 #: src/ui_tonemappingDialog.h:212
 msgid "Use sRGB"
-msgstr ""
+msgstr "使用 sRGB"
 
 #: src/ui_lightPollutionWidget.h:104
 msgid "automatic from locations database"
-msgstr ""
+msgstr "自動取自位置資料庫"
 
 #: src/ui_lightPollutionWidget.h:105
 msgid "manual"
@@ -14335,23 +14343,23 @@ msgstr "手動安裝"
 
 #: src/ui_lightPollutionWidget.h:106
 msgid "manual from SQM"
-msgstr ""
+msgstr "從 SQM 手動設置"
 
 #: src/ui_lightPollutionWidget.h:108 src/ui_lightPollutionWidget.h:113
 msgid "cd/m²"
-msgstr ""
+msgstr "cd/m²"
 
 #: src/ui_lightPollutionWidget.h:109
 msgid "mcd/m²"
-msgstr ""
+msgstr "mcd/m²"
 
 #: src/ui_lightPollutionWidget.h:110
 msgid "μcd/m²"
-msgstr ""
+msgstr "μcd/m²"
 
 #: src/ui_lightPollutionWidget.h:111
 msgid "mag/arcsec²"
-msgstr ""
+msgstr "mag/arcsec²"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:58
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:142
@@ -15683,7 +15691,7 @@ msgstr "衛星電視"
 #. http://www.celestrak.com/NORAD/elements/tle-new.txt
 #: plugins/Satellites/src/Satellites.cpp:2480
 msgid "tle-new"
-msgstr ""
+msgstr "tle-新"
 
 #. TRANSLATORS: Satellite group: Space stations
 #. TRANSLATORS: CelesTrak source [Space Stations]:
@@ -15704,14 +15712,14 @@ msgstr "可視的"
 #. http://www.celestrak.com/NORAD/elements/active.txt
 #: plugins/Satellites/src/Satellites.cpp:2489
 msgid "active"
-msgstr ""
+msgstr "活躍"
 
 #. TRANSLATORS: Satellite group: Analyst Satellites
 #. TRANSLATORS: CelesTrak source [Analyst Satellites]:
 #. http://www.celestrak.com/NORAD/elements/analyst.txt
 #: plugins/Satellites/src/Satellites.cpp:2492
 msgid "analyst"
-msgstr ""
+msgstr "分析者"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #. TRANSLATORS: CelesTrak source [Weather]:
@@ -15725,35 +15733,35 @@ msgstr "氣象"
 #. http://www.celestrak.com/NORAD/elements/noaa.txt
 #: plugins/Satellites/src/Satellites.cpp:2501
 msgid "noaa"
-msgstr ""
+msgstr "noaa"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GOES satellites
 #. TRANSLATORS: CelesTrak source [GOES]:
 #. http://www.celestrak.com/NORAD/elements/goes.txt
 #: plugins/Satellites/src/Satellites.cpp:2504
 msgid "goes"
-msgstr ""
+msgstr "goes"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
 #. TRANSLATORS: CelesTrak source [Earth Resources]:
 #. http://www.celestrak.com/NORAD/elements/resource.txt
 #: plugins/Satellites/src/Satellites.cpp:2507
 msgid "resource"
-msgstr ""
+msgstr "資源"
 
 #. TRANSLATORS: Satellite group: Search & Rescue (SARSAT) satellites
 #. TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]:
 #. http://www.celestrak.com/NORAD/elements/sarsat.txt
 #: plugins/Satellites/src/Satellites.cpp:2510
 msgid "sarsat"
-msgstr ""
+msgstr "搜索與救援"
 
 #. TRANSLATORS: Satellite group: Disaster Monitoring satellites
 #. TRANSLATORS: CelesTrak source [Disaster Monitoring]:
 #. http://www.celestrak.com/NORAD/elements/dmc.txt
 #: plugins/Satellites/src/Satellites.cpp:2513
 msgid "dmc"
-msgstr ""
+msgstr "災害監視"
 
 #. TRANSLATORS: Satellite group: The Tracking and Data Relay Satellite System
 #. (TDRSS) is a network of communications satellites and ground stations used
@@ -15769,7 +15777,7 @@ msgstr "跟踪與數據中繼衛星系統"
 #. http://www.celestrak.com/NORAD/elements/argos.txt
 #: plugins/Satellites/src/Satellites.cpp:2519
 msgid "argos"
-msgstr ""
+msgstr "argos"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Spire
 #. constellation (LEMUR satellites)
@@ -15784,21 +15792,21 @@ msgstr "Spire"
 #. http://www.celestrak.com/NORAD/elements/geo.txt
 #: plugins/Satellites/src/Satellites.cpp:2532
 msgid "geo"
-msgstr ""
+msgstr "地球同步軌道"
 
 #. TRANSLATORS: Satellite group: GEO Protected Zone
 #. TRANSLATORS: CelesTrak source [GEO Protected Zone]:
 #. http://www.celestrak.com/satcat/gpz.php
 #: plugins/Satellites/src/Satellites.cpp:2535
 msgid "gpz"
-msgstr ""
+msgstr "gpz"
 
 #. TRANSLATORS: Satellite group: GEO Protected Zone Plus
 #. TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]:
 #. http://www.celestrak.com/satcat/gpz-plus.php
 #: plugins/Satellites/src/Satellites.cpp:2538
 msgid "gpz-plus"
-msgstr ""
+msgstr "gpz-plus"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT
 #. satellites
@@ -15817,7 +15825,7 @@ msgstr "INTELSAT"
 #. http://www.celestrak.com/NORAD/elements/supplemental/ses.txt
 #: plugins/Satellites/src/Satellites.cpp:2546
 msgid "ses"
-msgstr ""
+msgstr "ses"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
@@ -15833,7 +15841,7 @@ msgstr "銥衛星"
 #. http://www.celestrak.com/NORAD/elements/iridium-NEXT.txt
 #: plugins/Satellites/src/Satellites.cpp:2552
 msgid "iridium-NEXT"
-msgstr ""
+msgstr "iridium-NEXT"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Starlink
 #. constellation (Starlink is a proper name)
@@ -15878,7 +15886,7 @@ msgstr "GLOBALSTAR"
 #. http://www.celestrak.com/NORAD/elements/swarm.txt
 #: plugins/Satellites/src/Satellites.cpp:2570
 msgid "swarm"
-msgstr ""
+msgstr "swarm"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #. TRANSLATORS: CelesTrak source [Amateur Radio]:
@@ -15892,14 +15900,14 @@ msgstr "業餘無線電"
 #. http://www.celestrak.com/NORAD/elements/x-comm.txt
 #: plugins/Satellites/src/Satellites.cpp:2576
 msgid "x-comm"
-msgstr ""
+msgstr "x-comm"
 
 #. TRANSLATORS: Satellite group: Other communication satellites
 #. TRANSLATORS: CelesTrak source [Other Comm]:
 #. http://www.celestrak.com/NORAD/elements/other-comm.txt
 #: plugins/Satellites/src/Satellites.cpp:2579
 msgid "other-comm"
-msgstr ""
+msgstr "other-comm"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the SatNOGS
 #. satellites
@@ -15907,7 +15915,7 @@ msgstr ""
 #. http://www.celestrak.com/NORAD/elements/satnogs.txt
 #: plugins/Satellites/src/Satellites.cpp:2582
 msgid "satnogs"
-msgstr ""
+msgstr "satnogs"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT
 #. satellites
@@ -15937,7 +15945,7 @@ msgstr "閃電號系列"
 #. http://www.celestrak.com/NORAD/elements/gnss.txt
 #: plugins/Satellites/src/Satellites.cpp:2597
 msgid "gnss"
-msgstr ""
+msgstr "gnss"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
@@ -15953,7 +15961,7 @@ msgstr "全球定位系統(gps)"
 #. http://www.celestrak.com/NORAD/elements/gps-ops.txt
 #: plugins/Satellites/src/Satellites.cpp:2603
 msgid "gps-ops"
-msgstr ""
+msgstr "gps-ops"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
@@ -15969,7 +15977,7 @@ msgstr "全球導航衛星系統(glonass)"
 #. http://www.celestrak.com/NORAD/elements/glo-ops.txt
 #: plugins/Satellites/src/Satellites.cpp:2609
 msgid "glo-ops"
-msgstr ""
+msgstr "glo-ops"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
@@ -15993,28 +16001,28 @@ msgstr "北斗衛星導航"
 #. (WAAS/EGNOS/MSAS)]: http://www.celestrak.com/NORAD/elements/sbas.txt
 #: plugins/Satellites/src/Satellites.cpp:2618
 msgid "sbas"
-msgstr ""
+msgstr "sbas"
 
 #. TRANSLATORS: Satellite group: Navy Navigation Satellite System (NNSS)
 #. TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]:
 #. http://www.celestrak.com/NORAD/elements/nnss.txt
 #: plugins/Satellites/src/Satellites.cpp:2621
 msgid "nnss"
-msgstr ""
+msgstr "nnss"
 
 #. TRANSLATORS: Satellite group: Russian LEO Navigation Satellites
 #. TRANSLATORS: CelesTrak source [Russian LEO Navigation]:
 #. http://www.celestrak.com/NORAD/elements/musson.txt
 #: plugins/Satellites/src/Satellites.cpp:2624
 msgid "musson"
-msgstr ""
+msgstr "musson"
 
 #. TRANSLATORS: Satellite group: Space & Earth Science satellites
 #. TRANSLATORS: CelesTrak source [Space & Earth Science]:
 #. http://www.celestrak.com/NORAD/elements/science.txt
 #: plugins/Satellites/src/Satellites.cpp:2630
 msgid "science"
-msgstr ""
+msgstr "科學"
 
 #. TRANSLATORS: Satellite group: Geodetic satellites
 #. TRANSLATORS: CelesTrak source [Geodetic]:
@@ -16028,7 +16036,7 @@ msgstr "測地衛星"
 #. http://www.celestrak.com/NORAD/elements/engineering.txt
 #: plugins/Satellites/src/Satellites.cpp:2636
 msgid "engineering"
-msgstr ""
+msgstr "工程"
 
 #. TRANSLATORS: Satellite group: Education satellites
 #. TRANSLATORS: CelesTrak source [Education]:
@@ -16049,49 +16057,49 @@ msgstr "軍用衛星"
 #. http://www.celestrak.com/NORAD/elements/radar.txt
 #: plugins/Satellites/src/Satellites.cpp:2648
 msgid "radar"
-msgstr ""
+msgstr "雷達"
 
 #. TRANSLATORS: Satellite group: CubeSats (Cube Satellites)
 #. TRANSLATORS: CelesTrak source [CubeSats]:
 #. http://www.celestrak.com/NORAD/elements/cubesat.txt
 #: plugins/Satellites/src/Satellites.cpp:2651
 msgid "cubesat"
-msgstr ""
+msgstr "cubesat"
 
 #. TRANSLATORS: Satellite group: Other satellites
 #. TRANSLATORS: CelesTrak source [Other]:
 #. http://www.celestrak.com/NORAD/elements/other.txt
 #: plugins/Satellites/src/Satellites.cpp:2654
 msgid "other"
-msgstr ""
+msgstr "其他"
 
 #. TRANSLATORS: Satellite group: Meteosat
 #. TRANSLATORS: CelesTrak supplemental source [METEOSAT TLEs]:
 #. http://www.celestrak.com/NORAD/elements/supplemental/meteosat.txt
 #: plugins/Satellites/src/Satellites.cpp:2661
 msgid "meteosat"
-msgstr ""
+msgstr "meteosat"
 
 #. TRANSLATORS: Satellite group: Telesat
 #. TRANSLATORS: CelesTrak supplemental source [Telesat TLEs]:
 #. http://www.celestrak.com/NORAD/elements/supplemental/telesat.txt
 #: plugins/Satellites/src/Satellites.cpp:2665
 msgid "telesat"
-msgstr ""
+msgstr "telesat"
 
 #. TRANSLATORS: Satellite group: ISS Segments
 #. TRANSLATORS: CelesTrak supplemental source [ISS TLEs]:
 #. http://www.celestrak.com/NORAD/elements/supplemental/iss.txt
 #: plugins/Satellites/src/Satellites.cpp:2668
 msgid "iss"
-msgstr ""
+msgstr "國際太空站"
 
 #. TRANSLATORS: Satellite group: CPF
 #. TRANSLATORS: CelesTrak supplemental source [CPF TLEs]:
 #. http://www.celestrak.com/NORAD/elements/supplemental/cpf.txt
 #: plugins/Satellites/src/Satellites.cpp:2671
 msgid "cpf"
-msgstr ""
+msgstr "cpf"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:2676
@@ -16173,7 +16181,7 @@ msgstr "ISS(曙光號功能貨艙)"
 #. TRANSLATORS: Satellite name: International Space Station
 #: plugins/Satellites/src/Satellites.cpp:2710
 msgid "ISS (NAUKA)"
-msgstr ""
+msgstr "國際太空站 (NAUKA)"
 
 #. TRANSLATORS: Satellite name: International Space Station
 #: plugins/Satellites/src/Satellites.cpp:2712
@@ -16743,11 +16751,11 @@ msgstr "[HGSO 人造衛星]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1029
 msgid "[outdated TLE]"
-msgstr ""
+msgstr "[過時的 TLE]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1030
 msgid "[all user defined]"
-msgstr ""
+msgstr "[所有使用者定義]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1031
 msgid "[all]"
@@ -17045,7 +17053,7 @@ msgstr "已顯示"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1190
 msgid "Do not update TLE of selected satellite(s)"
-msgstr ""
+msgstr "選取的人造衛星(們)不要更新 TLE"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1192
 msgid "Do not update"
@@ -17072,11 +17080,11 @@ msgstr "TLE 的曆元時刻"
 msgid ""
 "The valid time range for epoch of TLE in days, used in filtering of "
 "satellites"
-msgstr ""
+msgstr "對 TLE 時期的有效時間範圍，以天為單位，用於過濾衛星"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1201
 msgid "Age:"
-msgstr ""
+msgstr "年齡:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:1206
 msgid ""
@@ -17192,7 +17200,7 @@ msgstr "取消上次對 #%1 望遠鏡的轉動指令"
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:197
 #, qt-format
 msgid "Centering screen by telescope coordinates #%1"
-msgstr ""
+msgstr "以望遠鏡坐標 #%1 置中螢幕"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:206
 msgid "Move a telescope to a given set of coordinates"
@@ -17201,7 +17209,7 @@ msgstr "移動望遠鏡到設定的座標"
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:258
 #, qt-format
 msgid "Center the screen on telescope #%1 coordinates"
-msgstr ""
+msgstr "以望遠鏡 #%1 的坐標置中螢幕"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:776
 msgid ""
@@ -18169,7 +18177,7 @@ msgstr "這個功能相當於 {Stellarium 原本的望遠鏡控制功能} 下的
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
 msgctxt "numero sign"
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:523
 msgid "Status"
@@ -24937,7 +24945,7 @@ msgstr "格里曆"
 #: plugins/Calendars/src/ui_calendarsDialog.h:958
 msgctxt "calendar"
 msgid "Revised Julian"
-msgstr ""
+msgstr "儒略改革曆"
 
 #: plugins/Calendars/src/Calendars.cpp:333
 msgctxt "calendar"
@@ -24995,7 +25003,7 @@ msgstr "衣索比亞曆"
 #: plugins/Calendars/src/Calendars.cpp:342
 msgctxt "calendar"
 msgid "French Rev. (Astron.)"
-msgstr ""
+msgstr "法國共和曆 (Astron.)"
 
 #: plugins/Calendars/src/Calendars.cpp:343
 msgctxt "calendar"
@@ -25022,7 +25030,7 @@ msgstr "Persian (Arithm.)"
 #: plugins/Calendars/src/Calendars.cpp:347
 msgctxt "calendar"
 msgid "Persian (Astron.)"
-msgstr ""
+msgstr "波斯曆 (Astron.)"
 
 #: plugins/Calendars/src/Calendars.cpp:348
 #: plugins/Calendars/src/ui_calendarsDialog.h:920
@@ -25039,33 +25047,35 @@ msgstr "Old Hindu Lunisolar"
 #: plugins/Calendars/src/ui_calendarsDialog.h:941
 msgctxt "calendar"
 msgid "New Hindu Solar"
-msgstr ""
+msgstr "新印度陽曆"
 
 #: plugins/Calendars/src/Calendars.cpp:351
 msgctxt "calendar"
 msgid "New Hindu Lunisolar"
-msgstr ""
+msgstr "新印度陰陽曆"
 
 #: plugins/Calendars/src/Calendars.cpp:352
 msgctxt "calendar"
 msgid "New Hindu Panchang"
-msgstr ""
+msgstr "新印度 Panchang"
 
 #: plugins/Calendars/src/Calendars.cpp:354
+#: plugins/Calendars/src/ui_calendarsDialog.h:942
 msgctxt "calendar"
-msgid "Astro Hindu Solar"
-msgstr ""
+msgid "Hindu Astro Solar"
+msgstr "印度太空陽曆"
 
 #: plugins/Calendars/src/Calendars.cpp:355
+#: plugins/Calendars/src/ui_calendarsDialog.h:943
 msgctxt "calendar"
-msgid "Astro Hindu Lunisolar"
-msgstr ""
+msgid "Hindu Astro Lunisolar"
+msgstr "印度太空陰陽曆"
 
 #: plugins/Calendars/src/Calendars.cpp:356
 #: plugins/Calendars/src/ui_calendarsDialog.h:939
 msgctxt "calendar"
 msgid "Tibetan"
-msgstr ""
+msgstr "Tibetan"
 
 #: plugins/Calendars/src/Calendars.cpp:357
 #: plugins/Calendars/src/ui_calendarsDialog.h:926
@@ -27131,62 +27141,62 @@ msgstr "希吉拉之後"
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:38
 msgctxt "Hindu Lunar month name"
 msgid "Caitra"
-msgstr ""
+msgstr "Caitra"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:39
 msgctxt "Hindu Lunar month name"
 msgid "Vaiśākha"
-msgstr ""
+msgstr "Vaiśākha"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:40
 msgctxt "Hindu Lunar month name"
 msgid "Jyeṣṭha"
-msgstr ""
+msgstr "Jyeṣṭha"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:41
 msgctxt "Hindu Lunar month name"
 msgid "Āṣāḍha"
-msgstr ""
+msgstr "Āṣāḍha"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:42
 msgctxt "Hindu Lunar month name"
 msgid "Śrāvaṇa"
-msgstr ""
+msgstr "Śrāvaṇa"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:43
 msgctxt "Hindu Lunar month name"
 msgid "Bhādrapada"
-msgstr ""
+msgstr "Bhādrapada"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:44
 msgctxt "Hindu Lunar month name"
 msgid "Āśvina"
-msgstr ""
+msgstr "Āśvina"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:45
 msgctxt "Hindu Lunar month name"
 msgid "Kārtika"
-msgstr ""
+msgstr "Kārtika"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:46
 msgctxt "Hindu Lunar month name"
 msgid "Mārgaśīrṣa"
-msgstr ""
+msgstr "Mārgaśīrṣa"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:47
 msgctxt "Hindu Lunar month name"
 msgid "Pauṣa"
-msgstr ""
+msgstr "Pauṣa"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:48
 msgctxt "Hindu Lunar month name"
 msgid "Māgha"
-msgstr ""
+msgstr "Māgha"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:49
 msgctxt "Hindu Lunar month name"
 msgid "Phālguna"
-msgstr ""
+msgstr "Phālguna"
 
 #. TRANSLATORS: K.Y. stands for Kali Yuga
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:86
@@ -27862,7 +27872,7 @@ msgstr "格里曆"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:190
 msgid "Revised Julian Calendar (Milankovi&#x107;)"
-msgstr ""
+msgstr "儒略改革曆 (Milankovi&#x107;)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:191
 msgid "ISO Weeks"
@@ -27910,7 +27920,7 @@ msgstr "希伯來曆"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:203
 msgid "French Revolution calendar (astronomical version of 1793)"
-msgstr ""
+msgstr "法國共和曆 (1793年的天文版)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:204
 msgid "French Revolution calendar (arithmetic version of 1795)"
@@ -27922,7 +27932,7 @@ msgstr "波斯曆 (演算版)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:206
 msgid "Persian calendar (astronomical version)"
-msgstr ""
+msgstr "波斯曆 (天文版)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:209
 msgid "Old Hindu Solar and Lunar calendars"
@@ -27930,15 +27940,15 @@ msgstr "古印度陰陽曆"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:210
 msgid "New Hindu Solar and Lunar calendars"
-msgstr ""
+msgstr "新印度陰陽曆"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:211
 msgid "Astronomically 'accurate' Hindu Solar and Lunar calendars"
-msgstr ""
+msgstr "天文上「準確的」印度陰陽曆"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:212
 msgid "Tibetan (Phuglugs, Phug-pa, K&#x101;lacakra) calendar"
-msgstr ""
+msgstr "Tibetan (Phuglugs, Phug-pa, K&#x101;lacakra) 曆"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:213
 msgid "Maya calendars"
@@ -27979,7 +27989,7 @@ msgstr "日曆外掛程式設定"
 #: plugins/Calendars/src/ui_calendarsDialog.h:915
 msgctxt "calendar"
 msgid "New Hindu Lunar"
-msgstr ""
+msgstr "新印度陰曆"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:924
 #: plugins/Calendars/src/ui_calendarsDialog.h:960
@@ -27996,41 +28006,31 @@ msgstr "ISO週日曆"
 #: plugins/Calendars/src/ui_calendarsDialog.h:935
 msgctxt "calendar"
 msgid "Persian (arithmetic)"
-msgstr ""
+msgstr "波斯曆 (演算版)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:936
 msgctxt "calendar"
 msgid "Persian (astronomical)"
-msgstr ""
+msgstr "波斯曆 (天文版)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:937
 msgctxt "calendar"
 msgid "French Revolution (arithmetic)"
-msgstr ""
+msgstr "法國共和曆 (演算版)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:938
 msgctxt "calendar"
 msgid "French Revolution (astronomical)"
-msgstr ""
+msgstr "法國共和曆 (天文版)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:940
 msgctxt "calendar"
 msgid "Old Hindu Lunar"
-msgstr ""
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:942
-msgctxt "calendar"
-msgid "Hindu Astro Solar"
-msgstr ""
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:943
-msgctxt "calendar"
-msgid "Hindu Astro Lunar"
-msgstr ""
+msgstr "古印度陰曆"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:945
 msgid "Override automatic text color"
-msgstr ""
+msgstr "覆蓋自動文字顏色"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:947
 msgid "Display"
@@ -28055,7 +28055,7 @@ msgstr "天"
 #: plugins/Calendars/src/ui_calendarsDialog.h:954
 msgctxt "calendar"
 msgid "Negative years here mark years B.C."
-msgstr ""
+msgstr "此處的負數年標示為 B.C."
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:959
 msgid "Lunisolar"
@@ -28064,12 +28064,12 @@ msgstr "日月"
 #: plugins/Calendars/src/ui_calendarsDialog.h:961
 msgctxt "calendar"
 msgid "Katun"
-msgstr ""
+msgstr "卡盾"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:962
 msgctxt "calendar"
 msgid "Xihuitl"
-msgstr ""
+msgstr "太陽曆"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:963
 msgctxt "calendar"
@@ -28079,32 +28079,32 @@ msgstr "馬雅"
 #: plugins/Calendars/src/ui_calendarsDialog.h:964
 msgctxt "calendar"
 msgid "Haab"
-msgstr ""
+msgstr "哈布曆"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:965
 msgctxt "calendar"
 msgid "Tun"
-msgstr ""
+msgstr "Tun"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:966
 msgctxt "calendar"
 msgid "Kin"
-msgstr ""
+msgstr "Kin"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:967
 msgctxt "calendar"
 msgid "Uinal"
-msgstr ""
+msgstr "烏納"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:968
 msgctxt "calendar"
 msgid "Baktun"
-msgstr ""
+msgstr "伯克盾"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:969
 msgctxt "calendar"
 msgid "Long Count"
-msgstr ""
+msgstr "長紀曆"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:971
 #: plugins/Calendars/src/ui_calendarsDialog.h:974
@@ -28128,17 +28128,17 @@ msgstr "阿茲特克"
 #: plugins/Calendars/src/ui_calendarsDialog.h:983
 msgctxt "calendar"
 msgid "Tzolkin"
-msgstr ""
+msgstr "卓爾金曆"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:984
 msgctxt "calendar"
 msgid "Tonalpohualli"
-msgstr ""
+msgstr "神聖曆"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:997
 msgctxt "calendar"
 msgid "Mesoamerica"
-msgstr ""
+msgstr "美索美洲"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:59
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:109

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-21 02:37+0700\n"
+"POT-Creation-Date: 2022-03-22 21:41+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Víctor Vega <vegadark@protonmail.com>, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/stellarium/teams/80998/es/)\n"
@@ -12761,6 +12761,9 @@ msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
 " setting events are defined with the upper limb of the celestial body."
 msgstr ""
+"Mostrar la hora de salida, tránsito y puesta del objeto celeste. Los eventos"
+" de salida y puesta se definen con la extremidad superior del cuerpo "
+"celeste."
 
 #: src/ui_configurationDialog.h:1813 src/ui_astroCalcDialog.h:2026
 msgid "Risings, Transits, and Settings"
@@ -26629,13 +26632,15 @@ msgid "New Hindu Panchang"
 msgstr "Nuevo panchang hindú"
 
 #: plugins/Calendars/src/Calendars.cpp:354
+#: plugins/Calendars/src/ui_calendarsDialog.h:942
 msgctxt "calendar"
-msgid "Astro Hindu Solar"
+msgid "Hindu Astro Solar"
 msgstr "Astro solar hindú"
 
 #: plugins/Calendars/src/Calendars.cpp:355
+#: plugins/Calendars/src/ui_calendarsDialog.h:943
 msgctxt "calendar"
-msgid "Astro Hindu Lunisolar"
+msgid "Hindu Astro Lunisolar"
 msgstr "Astro lunisolar hindú"
 
 #: plugins/Calendars/src/Calendars.cpp:356
@@ -29600,16 +29605,6 @@ msgstr "Revolución Francesa (astronómico)"
 msgctxt "calendar"
 msgid "Old Hindu Lunar"
 msgstr "Viejo lunar hindú"
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:942
-msgctxt "calendar"
-msgid "Hindu Astro Solar"
-msgstr "Astro solar hindú"
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:943
-msgctxt "calendar"
-msgid "Hindu Astro Lunar"
-msgstr "Astro lunar hindú"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:945
 msgid "Override automatic text color"

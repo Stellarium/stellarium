@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-21 02:37+0700\n"
+"POT-Creation-Date: 2022-03-22 21:41+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: cardinot <mcardinot@gmail.com>, 2022\n"
 "Language-Team: English (Australia) (https://www.transifex.com/stellarium/teams/80998/en_AU/)\n"
@@ -24739,13 +24739,15 @@ msgid "New Hindu Panchang"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:354
+#: plugins/Calendars/src/ui_calendarsDialog.h:942
 msgctxt "calendar"
-msgid "Astro Hindu Solar"
+msgid "Hindu Astro Solar"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:355
+#: plugins/Calendars/src/ui_calendarsDialog.h:943
 msgctxt "calendar"
-msgid "Astro Hindu Lunisolar"
+msgid "Hindu Astro Lunisolar"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:356
@@ -27703,16 +27705,6 @@ msgstr ""
 #: plugins/Calendars/src/ui_calendarsDialog.h:940
 msgctxt "calendar"
 msgid "Old Hindu Lunar"
-msgstr ""
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:942
-msgctxt "calendar"
-msgid "Hindu Astro Solar"
-msgstr ""
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:943
-msgctxt "calendar"
-msgid "Hindu Astro Lunar"
 msgstr ""
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:945

@@ -16,15 +16,16 @@
 # cardinot <mcardinot@gmail.com>, 2022
 # Latein Lebt, 2022
 # Georg Zotti <Georg.Zotti@univie.ac.at>, 2022
+# Simon Hoffmann, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-21 02:37+0700\n"
+"POT-Creation-Date: 2022-03-22 21:41+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2022\n"
+"Last-Translator: Simon Hoffmann, 2022\n"
 "Language-Team: German (https://www.transifex.com/stellarium/teams/80998/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26570,14 +26571,16 @@ msgid "New Hindu Panchang"
 msgstr "Neuer Hindu Panchang"
 
 #: plugins/Calendars/src/Calendars.cpp:354
+#: plugins/Calendars/src/ui_calendarsDialog.h:942
 msgctxt "calendar"
-msgid "Astro Hindu Solar"
-msgstr "Hindu astr. Sonnenkalender"
+msgid "Hindu Astro Solar"
+msgstr "Hindu astr. Sonnenkal."
 
 #: plugins/Calendars/src/Calendars.cpp:355
+#: plugins/Calendars/src/ui_calendarsDialog.h:943
 msgctxt "calendar"
-msgid "Astro Hindu Lunisolar"
-msgstr "Hindu astr. Lunisolarkalender"
+msgid "Hindu Astro Lunisolar"
+msgstr "Hinduistischer Lunisolarkalender"
 
 #: plugins/Calendars/src/Calendars.cpp:356
 #: plugins/Calendars/src/ui_calendarsDialog.h:939
@@ -29541,16 +29544,6 @@ msgstr "Franz. Revolutionskalender (astron.)"
 msgctxt "calendar"
 msgid "Old Hindu Lunar"
 msgstr "Alter Hindu-Mondkalender"
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:942
-msgctxt "calendar"
-msgid "Hindu Astro Solar"
-msgstr "Hindu astr. Sonnenkal."
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:943
-msgctxt "calendar"
-msgid "Hindu Astro Lunar"
-msgstr "Hindu astr. Mondkal."
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:945
 msgid "Override automatic text color"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-21 02:37+0700\n"
+"POT-Creation-Date: 2022-03-22 21:41+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Worachate Boonplod, 2022\n"
 "Language-Team: Thai (https://www.transifex.com/stellarium/teams/80998/th/)\n"
@@ -828,7 +828,7 @@ msgstr "ภูมิลักษณ์ตามอัตราส่วนสะ
 #: src/core/modules/NomenclatureItem.cpp:551
 msgctxt "landform"
 msgid "arcus"
-msgstr ""
+msgstr "อาร์คัส"
 
 #. TRANSLATORS: Radial-patterned features on Venus
 #: src/core/modules/NomenclatureItem.cpp:553
@@ -1185,7 +1185,7 @@ msgstr "ภูมิลักษณ์รูปโค้ง"
 #. TRANSLATORS: Description for landform 'astrum'
 #: src/core/modules/NomenclatureItem.cpp:669
 msgid "Radial-patterned feature."
-msgstr ""
+msgstr "ภูมิลักษณ์ซึ่งมีรูปแบบของการแผ่รัศมีเป็นวง"
 
 #. TRANSLATORS: Description for landform 'catena'
 #: src/core/modules/NomenclatureItem.cpp:671
@@ -3215,6 +3215,11 @@ msgid ""
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
+"จากค่าความยาวนานของวัน (LOD; โดยผลการศึกษาของ Stephenson & Morrison (%2)), "
+"Victor Reijs ได้หาสมการ %1T "
+"โดยใช้การหาค่าเหมาะที่สุดแบบซิมเพล็กซ์ด้วยฟังก์ชันโคไซน์และกำลังสอง "
+"โดยมีสมมุติฐานว่าอาจมีคาบตามที่ Stephenson (%2) อธิบายไว้ "
+"ดู%3ที่นี่%4สำหรับข้อมูลเพิ่มเติม"
 
 #: src/core/StelCore.cpp:2382
 #, qt-format
@@ -3238,6 +3243,11 @@ msgid ""
 "1600-2000. Formula for 2005-2050 is modified to match observed values and "
 "near-term predictions."
 msgstr ""
+"วิธีการคำนวณนี้ดัดแปรจากวิธีของ F. Espenak และ J. Meeus "
+"โดยมีพื้นฐานจากผลงานของ Morrison & Stephenson (2004) "
+"และปรับสมการพหุนามให้เข้ากับค่าจริงในตารางสำหรับ ค.ศ. 1600-2000 "
+"สูตรการคำนวณในช่วง ค.ศ. 2005-2050 "
+"ได้ดัดแปรให้เข้ากับค่าที่วัดได้และผลการพยากรณ์ระยะสั้น"
 
 #: src/core/StelCore.cpp:2385
 msgid "Used by default."
@@ -3252,6 +3262,9 @@ msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
 msgstr ""
+"วิธีการคำนวณโดย F. Espenak และ J. Meeus โดยมีพื้นฐานจากผลงานของ Morrison & "
+"Stephenson (2004) และปรับสมการพหุนามให้เข้ากับค่าจริงในตารางสำหรับ ค.ศ. "
+"1600-2000"
 
 #: src/core/StelCore.cpp:2391
 #, qt-format
@@ -3297,6 +3310,13 @@ msgid ""
 "(modelled with a spline fit) it provides values from an approximate "
 "parabola."
 msgstr ""
+"วิธีการคำนวณโดย F. R. Stephenson, L. V. Morrison และ C. Y. Hohenkerk (2016) "
+"ตีพิมพ์ใน <em>Measurement of the Earth’s rotation: 720 BC to AD 2015</em> "
+"(%1) และปรับปรุงใน <em>Addendum 2020 to 'Measurement of the Earth's "
+"Rotation: 720 BC to AD 2015'</em> (Morrison, L. V., Stephenson, F.R., "
+"Hohenkerk, C.Y. และ Zawilski, M.; %2). ค่าที่อยู่นอกเหนือจากช่วงเวลาที่ระบุ "
+"(ซึ่งเป็นสมการเสมือนพหุนามที่เข้ากับค่าที่วัดได้) "
+"เป็นค่าประมาณจากเส้นโค้งพาราโบลา"
 
 #: src/core/StelCore.cpp:2403
 #, qt-format
@@ -5478,27 +5498,27 @@ msgstr "ลบเครื่องหมายบนหน้าจอ"
 #: src/gui/ScriptConsole.cpp:88
 msgctxt "command"
 msgid "clear map: natural"
-msgstr ""
+msgstr "ล้างแผนที่: ธรรมชาติ"
 
 #: src/gui/ScriptConsole.cpp:89
 msgctxt "command"
 msgid "clear map: starchart"
-msgstr ""
+msgstr "ล้างแผนที่: แผนที่ดาว"
 
 #: src/gui/ScriptConsole.cpp:90
 msgctxt "command"
 msgid "clear map: deepspace"
-msgstr ""
+msgstr "ล้างแผนที่: อวกาศห้วงลึก"
 
 #: src/gui/ScriptConsole.cpp:91
 msgctxt "command"
 msgid "clear map: galactic"
-msgstr ""
+msgstr "ล้างแผนที่: ดาราจักร"
 
 #: src/gui/ScriptConsole.cpp:92
 msgctxt "command"
 msgid "clear map: supergalactic"
-msgstr ""
+msgstr "ล้างแผนที่: มหาดาราจักร"
 
 #: src/gui/ScriptConsole.cpp:183 src/gui/ScriptConsole.cpp:253
 msgid "Caution!"
@@ -5721,7 +5741,7 @@ msgstr "ดาวที่ไม่มีชื่อ"
 #: src/gui/AstroCalcDialog.cpp:865 src/gui/AstroCalcDialog.cpp:5307
 #, qt-format
 msgid "Now about %1"
-msgstr ""
+msgstr "ขณะนี้ประมาณ %1"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:903 src/gui/AstroCalcDialog.cpp:990
@@ -8042,12 +8062,12 @@ msgstr "บัญชีเมลอตต์"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:392
 msgid "New General Catalogue"
-msgstr "New General Catalogue"
+msgstr "บัญชี NGC"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:394
 msgid "Index Catalogue"
-msgstr "Index Catalogue"
+msgstr "บัญชี IC"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:396
@@ -8062,47 +8082,47 @@ msgstr " บัญชีเนบิวลามืดของลินด์"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:400
 msgid "Cederblad Catalog"
-msgstr ""
+msgstr "บัญชีของ Cederblad"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:402
 msgid "The Catalogue of Peculiar Galaxies"
-msgstr ""
+msgstr "บัญชีดาราจักรแปลก Arp"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:404
 msgid "The Catalogue of Interacting Galaxies"
-msgstr ""
+msgstr "บัญชีดาราจักรที่มีอันตรกิริยาต่อกัน"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:406
 msgid "The Catalogue of Galactic Planetary Nebulae"
-msgstr ""
+msgstr "บัญชีเนบิวลาดาวเคราะห์ในดาราจักร"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:408
 msgid "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae"
-msgstr ""
+msgstr "บัญชีเนบิวลาดาวเคราะห์ของสทราซบูร์-อีเอสโอ"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:410
 msgid "A catalogue of Galactic supernova remnants"
-msgstr ""
+msgstr "บัญชีซากซูเปอร์โนวา"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:412
 msgid "A Catalog of Rich Clusters of Galaxies"
-msgstr ""
+msgstr "บัญชีกระจุกดาราจักรของ Abell"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:414
 msgid "Hickson Compact Group"
-msgstr ""
+msgstr "บัญชีดาราจักรแน่นของฮิกสัน - HCG"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:416
 msgid "ESO/Uppsala Survey of the ESO(B) Atlas"
-msgstr ""
+msgstr "แผนที่ ESO(B) จากการสำรวจโดย ESO/Uppsala"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:418
@@ -8137,7 +8157,7 @@ msgstr "บัญชีวัตถุท้องฟ้าห้วงลึก
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:430 src/ui_viewDialog.h:3388
 msgid "Trumpler Catalogue"
-msgstr ""
+msgstr "บัญชีทรัมเพลอร์"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:432 src/ui_viewDialog.h:3458
@@ -8919,7 +8939,7 @@ msgstr "ไม่ใช้"
 
 #: src/translations.h:671
 msgid "&Basic colors"
-msgstr ""
+msgstr "สีพื้&นฐาน"
 
 #: src/translations.h:672
 msgid "&Pick Screen Color"
@@ -8927,11 +8947,11 @@ msgstr ""
 
 #: src/translations.h:673
 msgid "&Custom colors"
-msgstr ""
+msgstr "สีที่กำ&หนดเอง"
 
 #: src/translations.h:674
 msgid "&Add to Custom Colors"
-msgstr ""
+msgstr "&เพิ่มไปยังสีที่กำหนดเอง"
 
 #: src/translations.h:675
 msgid "Hu&e:"
@@ -9007,27 +9027,27 @@ msgstr ""
 
 #: src/translations.h:691
 msgid "&Yes"
-msgstr ""
+msgstr "ใ&ช่"
 
 #: src/translations.h:692
 msgid "&No"
-msgstr ""
+msgstr "ไ&ม่ใช่"
 
 #: src/translations.h:693
 msgid "&Select All"
-msgstr ""
+msgstr "เลื&อกทั้งหมด"
 
 #: src/translations.h:694
 msgid "&Step up"
-msgstr ""
+msgstr "ขึ้&น"
 
 #: src/translations.h:695
 msgid "Step &down"
-msgstr ""
+msgstr "&ลง"
 
 #: src/translations.h:696
 msgid "&Rename"
-msgstr ""
+msgstr "เ&ปลี่ยนชื่อ"
 
 #: src/translations.h:697
 msgid "&Delete"
@@ -9206,12 +9226,12 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Caloris_Planitia
 #: src/translations_regions.h:113
 msgid "Caloris Planitia"
-msgstr ""
+msgstr "แอ่งคาโลริส"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:115
 msgid "Lugus Planitia"
-msgstr ""
+msgstr "แอ่งลูกัส"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:117
@@ -9222,7 +9242,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Odin_Planitia
 #: src/translations_regions.h:120
 msgid "Odin Planitia"
-msgstr ""
+msgstr "แอ่งโอดิน"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:122
@@ -9271,7 +9291,7 @@ msgstr ""
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:142
 msgid "Utaridi Planitia"
-msgstr ""
+msgstr "แอ่งอูทารีดี"
 
 #. TRANSLATORS: Name of region on Mercury
 #: src/translations_regions.h:144
@@ -9282,25 +9302,25 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Aphrodite_Terra
 #: src/translations_regions.h:147
 msgid "Aphrodite Terra"
-msgstr ""
+msgstr "ทวีปแอโฟรไดที"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ishtar_Terra
 #: src/translations_regions.h:150
 msgid "Ishtar Terra"
-msgstr ""
+msgstr "ทวีปอิชทาร์"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Lada_Terra
 #: src/translations_regions.h:153
 msgid "Lada Terra"
-msgstr ""
+msgstr "ทวีปลาดา"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Alpha_Regio
 #: src/translations_regions.h:156
 msgid "Alpha Regio"
-msgstr ""
+msgstr "ดินแดนแอลฟา"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Asteria_Regio
@@ -9320,20 +9340,20 @@ msgstr ""
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:165
 msgid "Bell Regio"
-msgstr ""
+msgstr "ดินแดนเบลล์"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Beta_Regio
 #: src/translations_regions.h:168
 msgid "Beta Regio"
-msgstr ""
+msgstr "ดินแดนบีตา"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:171
 msgid "Dione Regio"
-msgstr ""
+msgstr "ดินแดนไดโอนี"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
@@ -9394,7 +9414,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Phoebe_Regio
 #: src/translations_regions.h:198
 msgid "Phoebe Regio"
-msgstr ""
+msgstr "ดินแดนฟีบี"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
@@ -9436,7 +9456,7 @@ msgstr ""
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:216
 msgid "Aino Planitia"
-msgstr ""
+msgstr "แอ่งไอโน"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
@@ -9464,7 +9484,7 @@ msgstr ""
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:228
 msgid "Audra Planitia"
-msgstr ""
+msgstr "แอ่งออดรา"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
@@ -9505,14 +9525,14 @@ msgstr ""
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:246
 msgid "Gunda Planitia"
-msgstr ""
+msgstr "แอ่งกันดา"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:249
 msgid "Helen Planitia"
-msgstr ""
+msgstr "แอ่งเฮเลน"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
@@ -9554,14 +9574,14 @@ msgstr ""
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:267
 msgid "Lavinia Planitia"
-msgstr ""
+msgstr "แอ่งลาวิเนีย"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:270
 msgid "Leda Planitia"
-msgstr ""
+msgstr "แอ่งลีดา"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
@@ -9589,7 +9609,7 @@ msgstr ""
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:282
 msgid "Lowana Planitia"
-msgstr ""
+msgstr "แอ่งโลวานา"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
@@ -9610,7 +9630,7 @@ msgstr ""
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:291
 msgid "Niobe Planitia"
-msgstr ""
+msgstr "แอ่งไนโอบี"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
@@ -9637,7 +9657,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sedna_Planitia
 #: src/translations_regions.h:303
 msgid "Sedna Planitia"
-msgstr ""
+msgstr "แอ่งเซดนา"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
@@ -9651,7 +9671,7 @@ msgstr ""
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:309
 msgid "Sogolon Planitia"
-msgstr ""
+msgstr "แอ่งโซโกลอน"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
@@ -9686,14 +9706,14 @@ msgstr ""
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:324
 msgid "Vellamo Planitia"
-msgstr ""
+msgstr "แอ่งเวลลาโม"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Venus
 #: src/translations_regions.h:327
 msgid "Vinmara Planitia"
-msgstr ""
+msgstr "แอ่งวินมารา"
 
 #. TRANSLATORS: Name of region on Venus
 #. TRANSLATORS:
@@ -9761,7 +9781,7 @@ msgstr "ทะเลแห่งวิกฤติการณ์"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Fecunditatis
 #: src/translations_regions.h:357
 msgid "Sea of Fecundity"
-msgstr ""
+msgstr "ทะเลความอุดมสมบูรณ์"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9770,7 +9790,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Frigoris
 #: src/translations_regions.h:361
 msgid "Sea of Cold"
-msgstr ""
+msgstr "ทะเลความเย็น"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9797,7 +9817,7 @@ msgstr "ทะเลแห่งความชื้น"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Imbrium
 #: src/translations_regions.h:373
 msgid "Sea of Showers"
-msgstr ""
+msgstr "ทะเลฝน"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9806,7 +9826,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Ingenii
 #: src/translations_regions.h:377
 msgid "Sea of Cleverness"
-msgstr ""
+msgstr "ทะเลความฉลาด"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9833,7 +9853,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Moscoviense
 #: src/translations_regions.h:389
 msgid "Sea of Moscow"
-msgstr ""
+msgstr "ทะเลมอสโก"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9842,7 +9862,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Nectaris
 #: src/translations_regions.h:393
 msgid "Sea of Nectar"
-msgstr ""
+msgstr "ทะเลอมฤต"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9869,7 +9889,7 @@ msgstr "ทะเลตะวันออก"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Serenitatis
 #: src/translations_regions.h:405
 msgid "Sea of Serenity"
-msgstr ""
+msgstr "ทะเลความร่มเย็น"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9878,7 +9898,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Smythii
 #: src/translations_regions.h:409
 msgid "Smyth's Sea"
-msgstr ""
+msgstr "ทะเลของสมิธ"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9887,7 +9907,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Spumans
 #: src/translations_regions.h:413
 msgid "Foaming Sea"
-msgstr ""
+msgstr "ทะเลฟอง"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9896,7 +9916,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mare_Tranquillitatis
 #: src/translations_regions.h:417
 msgid "Sea of Tranquillity"
-msgstr ""
+msgstr "ทะเลความสงบ"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9931,7 +9951,7 @@ msgstr "ที่สูงทางเหนือ"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Montes_Jura
 #: src/translations_regions.h:432
 msgid "Jura mountains"
-msgstr ""
+msgstr "เทือกเขาฌูว์รา"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9939,7 +9959,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:435
 msgid "Alps province"
-msgstr ""
+msgstr "มณฑลแอลป์"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9947,7 +9967,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:438
 msgid "Caucasus province"
-msgstr ""
+msgstr "มณฑลคอเคซัส"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9965,7 +9985,7 @@ msgstr "ทะเลสาบแห่งความฝัน"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Montes_Taurus
 #: src/translations_regions.h:446
 msgid "Taurus mountains"
-msgstr ""
+msgstr "ภูเขาทอรัส"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9974,7 +9994,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sinus_Roris
 #: src/translations_regions.h:450
 msgid "Bay of Dew"
-msgstr ""
+msgstr "อ่าวน้ำค้าง"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9982,7 +10002,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:453
 msgid "Apennines province"
-msgstr ""
+msgstr "มณฑลแอเพนไนน์"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -9999,7 +10019,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sinus_Aestuum
 #: src/translations_regions.h:460
 msgid "Seething Bay"
-msgstr ""
+msgstr "อ่าวเดือด"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -10031,7 +10051,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:472
 msgid "Central crater province"
-msgstr ""
+msgstr "มณฑลหลุมตอนกลาง"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -10047,7 +10067,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:478
 msgid "Southeastern crater province"
-msgstr ""
+msgstr "มณฑลหลุมตะวันออกเฉียงใต้"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -10063,7 +10083,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:484
 msgid "Southwestern crater province"
-msgstr ""
+msgstr "มณฑลหลุมตะวันตกเฉียงใต้"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -10071,7 +10091,7 @@ msgstr ""
 #. _Geographicus_-_MoonPhysical-usgs-1961.jpg
 #: src/translations_regions.h:487
 msgid "Nectaris crater province"
-msgstr ""
+msgstr "มณฑลหลุมอมฤต"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -10113,7 +10133,7 @@ msgstr "อ่าวศูนบ์กลาง"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Palus_Epidemiarum
 #: src/translations_regions.h:504
 msgid "Marsh of Epidemics"
-msgstr ""
+msgstr "บึงแห่งโรคระบาด"
 
 #. TRANSLATORS: Name of region on the Moon
 #. TRANSLATORS: See also 1961 U.S.G.S. Physical Map of the Moon:
@@ -10164,7 +10184,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Arcadia_Planitia
 #: src/translations_regions.h:525
 msgid "Arcadia Planitia"
-msgstr ""
+msgstr "แอ่งอาร์คาเดีย"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -10191,7 +10211,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Elysium_Planitia
 #: src/translations_regions.h:537
 msgid "Elysium Planitia"
-msgstr ""
+msgstr "แอ่งอีลิเซียม"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -10200,7 +10220,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Eridania_Planitia
 #: src/translations_regions.h:541
 msgid "Eridania Planitia"
-msgstr ""
+msgstr "แอ่งอีริดาเนีย"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -10209,7 +10229,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Hellas_Planitia
 #: src/translations_regions.h:545
 msgid "Hellas Planitia"
-msgstr ""
+msgstr "แอ่งเฮลลัส"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -10227,7 +10247,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Utopia_Planitia
 #: src/translations_regions.h:553
 msgid "Utopia Planitia"
-msgstr ""
+msgstr "แอ่งยูโทเปีย"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -10245,7 +10265,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Arabia_Terra
 #: src/translations_regions.h:561
 msgid "Arabia Terra"
-msgstr ""
+msgstr "ทวีปอาระเบีย"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -10353,7 +10373,7 @@ msgstr "ทาร์ซิส"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Planum_Boreum
 #: src/translations_regions.h:609
 msgid "Planum Boreum"
-msgstr ""
+msgstr "ที่ราบทางเหนือ"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -10362,7 +10382,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Planum_Australe
 #: src/translations_regions.h:613
 msgid "Planum Australe"
-msgstr ""
+msgstr "ที่ราบทางใต้"
 
 #. TRANSLATORS: Name of region on Mars
 #. TRANSLATORS: See also MOLA global image showing boundaries of regional
@@ -10412,7 +10432,7 @@ msgstr "ซานาดู"
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:635
 msgid "Kraken Mare"
-msgstr ""
+msgstr "ทะเลคราเคน"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
@@ -10433,7 +10453,7 @@ msgstr ""
 #. https://en.wikipedia.org/wiki/List_of_geological_features_on_Titan
 #: src/translations_regions.h:644
 msgid "Concordia Regio"
-msgstr ""
+msgstr "ดินแดนคอนคอร์เดีย"
 
 #. TRANSLATORS: Name of region on Titan
 #. TRANSLATORS:
@@ -11526,7 +11546,7 @@ msgstr "บัญชีเนบิวลาฟุ้งสว่าง (Cederbl
 
 #: src/ui_viewDialog.h:3427
 msgid "Principal Galaxy Catalog"
-msgstr ""
+msgstr "บัญชีดาราจักร PGC"
 
 #: src/ui_viewDialog.h:3430
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
@@ -12616,6 +12636,8 @@ msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
 " setting events are defined with the upper limb of the celestial body."
 msgstr ""
+"แสดงเวลาขึ้น ผ่านเมริเดียน และตก ของวัตถุท้องฟ้า "
+"เวลาขึ้นและตกวัดจากขอบบนของวัตถุท้องฟ้า"
 
 #: src/ui_configurationDialog.h:1813 src/ui_astroCalcDialog.h:2026
 msgid "Risings, Transits, and Settings"
@@ -14893,15 +14915,15 @@ msgstr "หมุนรูปแบบของเส้นกรอบในเ
 
 #: plugins/Oculars/src/Oculars.cpp:1493
 msgid "Toggle sensor crop overlay"
-msgstr ""
+msgstr "สลับการแสดงตัวซ้อนทับกรอบเซนเซอร์"
 
 #: plugins/Oculars/src/Oculars.cpp:1494
 msgid "Toggle sensor pixel grid"
-msgstr ""
+msgstr "สลับการแสดงกริดจุดภาพตัวเซนเซอร์"
 
 #: plugins/Oculars/src/Oculars.cpp:1495
 msgid "Toggle focuser overlay"
-msgstr ""
+msgstr "สลับการแสดงส่วนซ้อนทับตัวโฟกัส"
 
 #: plugins/Oculars/src/Oculars.cpp:1717
 msgctxt "abbreviated in the plugin"
@@ -14976,7 +14998,7 @@ msgstr "กำลังขยาย: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:926
 #, qt-format
 msgid "Exit pupil: %1 mm"
-msgstr ""
+msgstr "รูม่านตาออก: %1 มม."
 
 #: plugins/Oculars/src/Oculars.cpp:2074
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:934
@@ -15216,7 +15238,7 @@ msgstr "มุมตำแหน่งของปริซึม: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:747
 msgid "Position angle of the off-axis guider' prism"
-msgstr ""
+msgstr "มุมตำแหน่งของปริซึมตัวนำนอกแกน"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:896
 msgid "Magnification provided by these binoculars"
@@ -15228,7 +15250,7 @@ msgstr "ขอบเขตภาพจริงจากกล้องสอง
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:898
 msgid "Exit pupil provided by these binoculars"
-msgstr ""
+msgstr "รูม่านตาออกจากกล้องสองตานี้"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:906
 msgid "Magnification provided by this ocular/lens/telescope combination"
@@ -15241,7 +15263,7 @@ msgstr "ขอบเขตภาพที่ได้จากทัศนูป
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:908
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
-msgstr ""
+msgstr "รูม่านตาออกที่ได้จากทัศนูปกรณ์นี้"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:951
 msgid "Rayleigh criterion"
@@ -15360,7 +15382,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:613
 msgid "You can choose to scale the image you see on the screen."
-msgstr ""
+msgstr "คุณสามารถเลือกมาตราส่วนของภาพที่มองเห็นบนหน้าจอ"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:614
 msgid ""
@@ -15397,12 +15419,18 @@ msgid ""
 "of 0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see "
 "with the naked eye through the Telrad (or similar) finder."
 msgstr ""
+"คุณสามารถสลับการใช้งานวงกลม Telrad โดยจะแสดงวงกลม 3 วง "
+"ที่มีจุดศูนย์กลางร่วมกัน แต่ละวงมีขนาด 0.5%1, 2.0%1, และ 4.0%1 "
+"ช่วยให้คุณสามารถคาดหมายได้ว่าจะเห็นเทห์ฟ้าใดบ้างเมื่อมองผ่าน Telrad finder "
+"(หรือเครื่องมืออื่นที่คล้ายกัน)"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:620
 msgid ""
 "You can adjust the diameters or even add a fourth circle if you have a "
 "different finder, or revert to the Telrad standard sizes."
 msgstr ""
+"คุณสามารถปรับเส้นผ่านศูนย์กลางหรือเพิ่มวงที่ 4 ถ้าคุณมีกล้องเล็งแบบอื่น "
+"หรือย้อนกลับไปใช้ขนาดมาตรฐานเดิมของวง Telrad"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:621
 msgid "If you find any issues, please let me know. Enjoy!"
@@ -15508,7 +15536,7 @@ msgstr "สีของข้อความ"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1463
 msgid "Show oculars button on toolbar"
-msgstr "แสดงปุ่มกล้องตาเดียวบนแถบเครื่องมือ"
+msgstr "แสดงปุ่มเลนส์ใกล้ตาบนแถบเครื่องมือ"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1466
 msgid ""
@@ -15561,7 +15589,7 @@ msgstr "จัดแนวของสายใยเล็ง"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1488
 msgid "In ocular mode, allow some visibility outside ocular circle."
-msgstr ""
+msgstr "ในโหมดเลนส์ใกล้ตา แสดงพื้นที่บริเวณที่อยู่นอกวงกลมเลนส์ใกล้ตาด้วย"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1490
 msgid "Use semi-transparent mask"
@@ -15603,7 +15631,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1505
 msgid "Show sensor crop overlay"
-msgstr ""
+msgstr "แสดงตัวซ้อนทับกรอบเซนเซอร์"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1507
 msgid ""
@@ -15617,7 +15645,7 @@ msgstr "เปิดใช้การสลับชนิดของฐาน
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1510
 msgid "Overlay size (px)"
-msgstr ""
+msgstr "ขนาดตัวซ้อนทับ (จุดภาพ)"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1512
 msgid "Horizontal size (width)"
@@ -15722,7 +15750,7 @@ msgstr "เลนส์"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1558
 msgid "Off-Axis guider"
-msgstr ""
+msgstr "ตัวนำนอกแกน"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1559
 msgid "Resolution y (pixels):"
@@ -15927,7 +15955,7 @@ msgstr "โทรทัศน์"
 #. http://www.celestrak.com/NORAD/elements/tle-new.txt
 #: plugins/Satellites/src/Satellites.cpp:2480
 msgid "tle-new"
-msgstr ""
+msgstr "วัตถุใหม่"
 
 #. TRANSLATORS: Satellite group: Space stations
 #. TRANSLATORS: CelesTrak source [Space Stations]:
@@ -15948,14 +15976,14 @@ msgstr "เห็นได้"
 #. http://www.celestrak.com/NORAD/elements/active.txt
 #: plugins/Satellites/src/Satellites.cpp:2489
 msgid "active"
-msgstr ""
+msgstr "ปฏิบัติงานอยู่"
 
 #. TRANSLATORS: Satellite group: Analyst Satellites
 #. TRANSLATORS: CelesTrak source [Analyst Satellites]:
 #. http://www.celestrak.com/NORAD/elements/analyst.txt
 #: plugins/Satellites/src/Satellites.cpp:2492
 msgid "analyst"
-msgstr ""
+msgstr "วิเคราะห์"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #. TRANSLATORS: CelesTrak source [Weather]:
@@ -15969,14 +15997,14 @@ msgstr "สภาพอากาศ"
 #. http://www.celestrak.com/NORAD/elements/noaa.txt
 #: plugins/Satellites/src/Satellites.cpp:2501
 msgid "noaa"
-msgstr ""
+msgstr "โนอา"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GOES satellites
 #. TRANSLATORS: CelesTrak source [GOES]:
 #. http://www.celestrak.com/NORAD/elements/goes.txt
 #: plugins/Satellites/src/Satellites.cpp:2504
 msgid "goes"
-msgstr ""
+msgstr "โกส"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
 #. TRANSLATORS: CelesTrak source [Earth Resources]:
@@ -15990,14 +16018,14 @@ msgstr "ทรัพยากร"
 #. http://www.celestrak.com/NORAD/elements/sarsat.txt
 #: plugins/Satellites/src/Satellites.cpp:2510
 msgid "sarsat"
-msgstr ""
+msgstr "ค้นหาและกู้ภัย"
 
 #. TRANSLATORS: Satellite group: Disaster Monitoring satellites
 #. TRANSLATORS: CelesTrak source [Disaster Monitoring]:
 #. http://www.celestrak.com/NORAD/elements/dmc.txt
 #: plugins/Satellites/src/Satellites.cpp:2513
 msgid "dmc"
-msgstr ""
+msgstr "ติดตามภัยพิบัติ"
 
 #. TRANSLATORS: Satellite group: The Tracking and Data Relay Satellite System
 #. (TDRSS) is a network of communications satellites and ground stations used
@@ -16013,7 +16041,7 @@ msgstr "ทีดีอาร์เอสเอส"
 #. http://www.celestrak.com/NORAD/elements/argos.txt
 #: plugins/Satellites/src/Satellites.cpp:2519
 msgid "argos"
-msgstr ""
+msgstr "อาร์กอส"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Spire
 #. constellation (LEMUR satellites)
@@ -16035,14 +16063,14 @@ msgstr "พ้องคาบโลก"
 #. http://www.celestrak.com/satcat/gpz.php
 #: plugins/Satellites/src/Satellites.cpp:2535
 msgid "gpz"
-msgstr ""
+msgstr "จีพีแซด"
 
 #. TRANSLATORS: Satellite group: GEO Protected Zone Plus
 #. TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]:
 #. http://www.celestrak.com/satcat/gpz-plus.php
 #: plugins/Satellites/src/Satellites.cpp:2538
 msgid "gpz-plus"
-msgstr ""
+msgstr "จีพีแซด-พลัส"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT
 #. satellites
@@ -16061,7 +16089,7 @@ msgstr "อินเทลแซต"
 #. http://www.celestrak.com/NORAD/elements/supplemental/ses.txt
 #: plugins/Satellites/src/Satellites.cpp:2546
 msgid "ses"
-msgstr ""
+msgstr "เซส"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
@@ -16122,7 +16150,7 @@ msgstr "โกลบอลสตาร์"
 #. http://www.celestrak.com/NORAD/elements/swarm.txt
 #: plugins/Satellites/src/Satellites.cpp:2570
 msgid "swarm"
-msgstr ""
+msgstr "สวอร์ม"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #. TRANSLATORS: CelesTrak source [Amateur Radio]:
@@ -16136,7 +16164,7 @@ msgstr "วิทยุสมัครเล่น"
 #. http://www.celestrak.com/NORAD/elements/x-comm.txt
 #: plugins/Satellites/src/Satellites.cpp:2576
 msgid "x-comm"
-msgstr ""
+msgstr "เอกซ์-คอมม์"
 
 #. TRANSLATORS: Satellite group: Other communication satellites
 #. TRANSLATORS: CelesTrak source [Other Comm]:
@@ -16151,7 +16179,7 @@ msgstr "สื่อสารอื่น ๆ"
 #. http://www.celestrak.com/NORAD/elements/satnogs.txt
 #: plugins/Satellites/src/Satellites.cpp:2582
 msgid "satnogs"
-msgstr ""
+msgstr "แซตนอกส์"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT
 #. satellites
@@ -16159,7 +16187,7 @@ msgstr ""
 #. http://www.celestrak.com/NORAD/elements/gorizont.txt
 #: plugins/Satellites/src/Satellites.cpp:2585
 msgid "gorizont"
-msgstr ""
+msgstr "กอริซอนต์"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
 #. TRANSLATORS: CelesTrak source [Raduga]:
@@ -16174,7 +16202,7 @@ msgstr ""
 #. http://www.celestrak.com/NORAD/elements/molniya.txt
 #: plugins/Satellites/src/Satellites.cpp:2591
 msgid "molniya"
-msgstr ""
+msgstr "โมลนียา"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GNSS satellites
 #. TRANSLATORS: CelesTrak source [GNSS]:
@@ -16244,7 +16272,7 @@ msgstr ""
 #. http://www.celestrak.com/NORAD/elements/nnss.txt
 #: plugins/Satellites/src/Satellites.cpp:2621
 msgid "nnss"
-msgstr ""
+msgstr "เอ็นเอ็นเอสเอส"
 
 #. TRANSLATORS: Satellite group: Russian LEO Navigation Satellites
 #. TRANSLATORS: CelesTrak source [Russian LEO Navigation]:
@@ -16300,7 +16328,7 @@ msgstr "เรดาร์"
 #. http://www.celestrak.com/NORAD/elements/cubesat.txt
 #: plugins/Satellites/src/Satellites.cpp:2651
 msgid "cubesat"
-msgstr ""
+msgstr "คิวบ์แซต"
 
 #. TRANSLATORS: Satellite group: Other satellites
 #. TRANSLATORS: CelesTrak source [Other]:
@@ -16335,7 +16363,7 @@ msgstr "สถานีอวกาศนานาชาติ"
 #. http://www.celestrak.com/NORAD/elements/supplemental/cpf.txt
 #: plugins/Satellites/src/Satellites.cpp:2671
 msgid "cpf"
-msgstr ""
+msgstr "ซีพีเอฟ"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:2676
@@ -16365,7 +16393,7 @@ msgstr "RadioAstron กล้องโทรทรรศน์วิทยุใ
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2686
 msgid "International Gamma-Ray Astrophysics Laboratory"
-msgstr ""
+msgstr "ห้องปฏิบัติการฟิสิกส์ดาราศาสตร์รังสีแกมมานานาชาติ"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2688
@@ -16375,12 +16403,12 @@ msgstr "หอดูดาวลอยฟ้ารังสีแกมมา"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2690
 msgid "The Microvariability and Oscillations of Stars telescope"
-msgstr ""
+msgstr "The Microvariability and Oscillations of Stars telescope"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2692
 msgid "The Interface Region Imaging Spectrograph"
-msgstr ""
+msgstr "The Interface Region Imaging Spectrograph"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2694
@@ -16388,6 +16416,8 @@ msgid ""
 "The Spectroscopic Planet Observatory for Recognition of Interaction of "
 "Atmosphere"
 msgstr ""
+"The Spectroscopic Planet Observatory for Recognition of Interaction of "
+"Atmosphere"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2698
@@ -16397,12 +16427,12 @@ msgstr "ดาวเทียมสำรวจอนุภาคของสส
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2700
 msgid "Arcsecond Space Telescope Enabling Research in Astrophysics"
-msgstr ""
+msgstr "Arcsecond Space Telescope Enabling Research in Astrophysics"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2702
 msgid "Reuven Ramaty High Energy Solar Spectroscopic Imager"
-msgstr ""
+msgstr "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2704
@@ -17553,7 +17583,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1811
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
-msgstr ""
+msgstr "กล้องโทรทรรศน์บางรุ่นจะใช้ฐานยึด The Sky-Watcher SynScan AZ GoTo"
 
 #: plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp:288
 msgid "Read-only telescope"
@@ -17609,7 +17639,7 @@ msgstr "ต่ำสุด"
 msgid ""
 "Can't slew a telescope which is parked. Unpark before performing any goto "
 "command."
-msgstr ""
+msgstr "ไม่สามารถหันกล้องที่กำลังพักอยู่ได้ ยกเลิกการพักก่อนจะส่งคำสั่งอื่น"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:41
 msgid "ASCOM Settings"
@@ -17645,7 +17675,7 @@ msgstr "ให้อุปกรณ์ ASCOM ตัดสินใจ"
 msgid ""
 "Use the coordinate system that is configured in the general telescope "
 "properties for this telescope."
-msgstr ""
+msgstr "ใช้ระบบพิกัดที่ได้ตั้งค่าไว้ในสมบัติทั่วไปสำหรับกล้องโทรทรรศน์นี้"
 
 #: plugins/TelescopeControl/src/ASCOM/TelescopeClientASCOMWidget.cpp:49
 msgid "Use Stellarium settings"
@@ -17656,6 +17686,8 @@ msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
 "Stellarium. Increase this value if the reticle is skipping."
 msgstr ""
+"เวลาโดยประมาณที่สัญญาณจากกล้องโทรทรรศน์จะมาถึง Stellarium "
+"เพิ่มค่านี้ถ้ามีการกระโดดของเส้นกรอบ"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:190
 msgid ""
@@ -17701,7 +17733,7 @@ msgstr "โปรแกรมเสริมควบคุมกล้องโ
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Plug-in and GUI programming"
-msgstr ""
+msgstr "โปรแกรมเสริมและการเขียนกุย (GUI)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "ASCOM Telescope Client"
@@ -17727,10 +17759,13 @@ msgid ""
 "Stellarium's code (the client side of Stellarium's original telescope "
 "control feature);"
 msgstr ""
+"คลาส Telescope, TelescopeDummy, TelescopeTcp และ TelescopeMgr "
+"ในรหัสคำสั่งภายในโปรแกรมของ Stellarium "
+"(ฝั่งลูกข่ายในสมบัติการควบคุมกล้องโทรทรรศน์แบบดั้งเดิมของ Stellarium);"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
 msgid "the telescope server core code (licensed under the LGPL)"
-msgstr ""
+msgstr "รหัสคำสั่งหลักของเครื่องบริการกล้องโทรทรรศน์ (ภายใต้สัญญาอนุญาต LGPL)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 msgid ""
@@ -17761,6 +17796,8 @@ msgid ""
 "A more complete and up-to-date documentation for this plug-in can be found "
 "on the {Telescope Control} page in the Stellarium Wiki."
 msgstr ""
+"เอกสารที่สมบูรณ์และทันสมัยสำหรับโปรแกรมเสริมนี้ "
+"อ่านได้ที่หน้า{การควบคุมกล้องโทรทรรศน์}ใน Stellarium Wiki"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
 msgid "Contents"
@@ -17852,6 +17889,8 @@ msgid ""
 "As of the current version, this plug-in doesn't allow satellite tracking, "
 "and is not very suitable for lunar or planetary observations."
 msgstr ""
+"สำหรับรุ่นปัจจุบัน โปรเสริมนี้ยังไม่สามารถติดตามดาวเทียมได้ "
+"และยังใช้กับการสังเกตดวงจันทร์หรือดาวเคราะห์ได้ไม่ดีนัก"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
 msgid ""
@@ -17877,6 +17916,10 @@ msgid ""
 "it is strongly recommended to avoid using the telescope control feature "
 "before sunset without appropriate protection."
 msgstr ""
+"แม้ว่าคุณจะไม่ได้ทำอย่างตั้งใจ, "
+"การหันกล้องโทรทรรศน์ในเวลากลางวันอาจทำให้กล้องหันไปหาดวงอาทิตย์ระหว่างที่กำลังทำงานอยู่"
+" ซึ่งอาจทำให้กล้องได้รับความเสียหายได้ "
+"ขอแนะนำให้หลีกเลี่ยงการใช้สมบัติการควบคุมกล้องโทรทรรศน์ในเวลาที่ดวงอาทิตย์ยังอยู่บนท้องฟ้าโดยไม่มีการป้องกันที่เหมาะสม"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
@@ -17948,6 +17991,9 @@ msgid ""
 "Most older telescopes use cables that connect to a {serial port} (RS-232), "
 "the newer ones use USB (Universal Serial Bus)."
 msgstr ""
+"กล้องโทรทรรศน์รุ่นเก่าส่วนใหญ่ใช้สายเคเบิลที่เชื่อมผ่าน "
+"{ช่องทางข้อมูลอนุกรม} (RS-232), รุ่นใหม่กว่ามักต่อผ่านยูเอสบี (Universal "
+"Serial Bus)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:337
 msgid ""
@@ -17974,10 +18020,12 @@ msgid ""
 "Telescope set-up (setting geographical coordinates, performing alignment, "
 "etc.) should be done before connecting the telescope to Stellarium."
 msgstr ""
+"การตั้งกล้องโทรทรรศน์ (ตั้งพิกัดทางภูมิศาสตร์ ปรับแนว ฯลฯ) "
+"ควรกระทำให้เสร็จก่อนการเชื่อมต่อกล้องโทรทรรศน์เข้ากับ Stellarium"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:344
 msgid "The plug-in's main window can be opened:"
-msgstr ""
+msgstr "หน้าต่างหลักของโปรแกรมเสริมสามารถเปิดได้:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:345
 msgid ""
@@ -18015,7 +18063,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:353
 msgid "The <b>Type</b> field indicates what kind of connection is this:"
-msgstr ""
+msgstr "เขตข้อความ <b>ชนิด</b> บ่งบอกชนิดของการเชื่อมต่อ:"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:356
@@ -18081,6 +18129,8 @@ msgid ""
 "<b>Name</b> is the label that will be displayed on the screen next to the "
 "telescope reticle."
 msgstr ""
+"<b>ชื่อ</b> คือป้ายข้อความที่จะแสดงบนหน้าจอ "
+"ด้านข้างเส้นกรอบของกล้องโทรทรรศน์"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
 msgid ""
@@ -18116,10 +18166,11 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:396
 msgid "<b>Serial port</b> sets the serial port used by the telescope."
 msgstr ""
+"<b>ช่องทางข้อมูลอนุกรม</b> ตั้งช่องทางข้อมูลอนุกรมที่กล้องโทรทรรศน์ใช้"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
 msgid "There is a pop-up box that suggests some default values:"
-msgstr ""
+msgstr "นี่คือกล่องแบบผุดขึ้นเพื่อแนะนำค่าปริยาย:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:398
 msgid "On Windows, serial ports COM1 to COM10;"
@@ -18144,6 +18195,8 @@ msgid ""
 "If you are using an USB cable, the default serial port of your telescope "
 "most probably is not in the list of suggestions."
 msgstr ""
+"ถ้าคุณใช้สายยูเอสบี "
+"ค่าปริยายของช่องทางข้อมูลอนุกรมของกล้องโทรทรรศน์ส่วนใหญ่จะไม่อยู่ในรายชื่อที่แนะนำ"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:402
 msgid ""
@@ -18230,6 +18283,8 @@ msgid ""
 "This can be used in combination with a {virtual telescope} to display a "
 "moving reticle with the Telrad circles."
 msgstr ""
+"สามารถใช้ร่วมกับ {กล้องโทรทรรศน์เสมือน} เพื่อแสดงการเคลื่อนของเส้นกรอบและวง "
+"Telrad"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:439
 msgid ""
@@ -18247,19 +18302,20 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:441
 msgid ""
 "The drop-down list contains the names of the currently connected devices."
-msgstr ""
+msgstr "รายการแบบหล่นลงแสดงชื่อของอุปกรณ์ที่กำลังเชื่อมต่อ"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:442
 msgid ""
 "If no devices are connected, it will remain empty, and the 'Slew' button "
 "will be disabled."
 msgstr ""
+"หากไม่มีอุปกรณ์เชื่อมต่อ, มันจะว่างเปล่า และปุ่ม 'หัน' จะไม่เปิดใช้งาน"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:443
 msgid ""
 "Pressing the <b>Slew</b> button slews the selected device to the selected "
 "set of coordinates."
-msgstr ""
+msgstr "กดปุ่ม <b>หัน</b> จะหันอุปกรณ์ที่เลือกไปยังพิกัดที่กำหนด"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:445
@@ -18267,6 +18323,8 @@ msgid ""
 "See the section about {keyboard commands} below for other ways of "
 "controlling the device."
 msgstr ""
+"ดูหัวข้อเกี่ยวกับ{คำสั่งแป้นพิมพ์}ที่ด้านล่าง "
+"สำหรับหนทางอื่นในการควบคุมอุปกรณ์"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
@@ -18274,12 +18332,15 @@ msgid ""
 "Pressing the <b>Configure telescopes...</b> button opens the {main window} "
 "of the plug-in."
 msgstr ""
+"กดปุ่ม <b>ตั้งค่ากล้องโทรทรรศน์...</b> จะเปิด{หน้าต่างหลัก}ของโปรแกรมเสริม"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:451
 msgid ""
 "<b>TIP:</b> Inside the 'Slew' window, underlined letters indicate that "
 "pressing 'Alt + underlined letter' can be used instead of clicking."
 msgstr ""
+"<b>เคล็ดลับ:</b> ในหน้าต่าง 'หัน', ตัวอักษรที่ขีดเส้นใต้แสดงว่าสามารถกดปุ่ม "
+"'Alt + ตัวอักษรที่ขีดเส้นใต้' แทนการคลิกได้"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:452
 msgid ""
@@ -18297,6 +18358,8 @@ msgid ""
 "telescope reticle labelled with the telescope's name on its current position"
 " in the sky."
 msgstr ""
+"เมื่อกล้องโทรทรรศน์เริ่มทำงานและเชื่อมต่อสำเร็จ Stellarium "
+"จะแสดงเส้นกรอบและชื่อของกล้องที่ตำแหน่งปัจจุบันบนท้องฟ้า"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:457
 msgid ""
@@ -18304,6 +18367,8 @@ msgid ""
 " with the mouse, it can be tracked and it appears as an object in the "
 "'Search' window."
 msgstr ""
+"เส้นกรอบถือเป็นวัตถุหนึ่ง เช่นเดียวกับวัตถุอื่นใน Stellarium - "
+"สามารถเลือกได้ด้วยเมาส์ ติดตาม และปรากฏในหน้าต่าง 'ค้นหา'"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:458
 msgid ""
@@ -18324,6 +18389,8 @@ msgid ""
 "<b>To point a device to the center of the view:</b> Press the number of the "
 "device while holding down the <b>Alt</b> key."
 msgstr ""
+"<b>เมื่อต้องการหันอุปกรณ์ไปยังจุดศูนย์กลางของมุมมอง:</b> "
+"กดปุ่มตัวเลขของอุปกรณ์ขณะกดปุ่ม <b>Alt</b> ค้างไว้"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:462
 msgid "For example, Alt+1 for telescope #1."
@@ -18395,7 +18462,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:485
 msgid ""
 "The Sky-Watcher SynScan AZ GoTo mount is used in a number of telescopes."
-msgstr ""
+msgstr "กล้องโทรทรรศน์บางรุ่นจะใช้ฐานยึด The Sky-Watcher SynScan AZ GoTo"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:486
 msgid ""
@@ -18430,6 +18497,10 @@ msgid ""
 "that will react in the same way as the reticle of a real telescope "
 "controlled by the plug-in."
 msgstr ""
+"หากคุณต้องการทดสอบโปรแกรมเสริมนี้โดยไม่ได้เชื่อมต่อกับกล้อง เลือก "
+"<b>ไม่ทำอะไร แค่จำลอง (โดยการเลื่อนเส้นกรอบ)</b> ในเขตข้อมูล "
+"<b>ควบคุมกล้องโทรทรรศน์โดย:</b> "
+"โปรแกรมจะแสดงเส้นกรอบของกล้องโทรทรรศน์ที่ตอบสนองเหมือนกับเป็นเส้นกรอบของกล้องโทรทรรศน์จริงที่โปรแกรมเสริมนี้ควบคุมอยู่"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:497
@@ -20261,10 +20332,13 @@ msgid ""
 "empty. </p><p>The password is transmitted over an insecure "
 "channel.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>หมายเหตุ: "
+"กล่องข้อความชื่อผู้ใช้ในเบราว์เซอร์ต้องว่างไว้ "
+"</p><p>รหัสผ่านจะถูกส่งในช่องทางที่ไม่ปลอดภัย</p></body></html>"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:275
 msgid "Enable CORS for the following origin"
-msgstr ""
+msgstr "เปิดใช้งาน CORS สำหรับแหล่งที่มาต่อไปนี้"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:276
 msgid ""
@@ -20491,7 +20565,7 @@ msgstr ""
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:500
 msgid "Excluded Properties"
-msgstr ""
+msgstr "สมบัติที่ละไว้"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:501
 msgid "Synchronized Properties"
@@ -20499,7 +20573,7 @@ msgstr "สมบัติการประสาน"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:502
 msgid "Additional excluded properties:"
-msgstr ""
+msgstr "สมบัติที่ละไว้เพิ่มเติม:"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:503
 msgid "Client settings"
@@ -20836,6 +20910,9 @@ msgid ""
 "temperature depending on the atmosphere of the planets, which are currently "
 "unknown (e.g. Earth mean global surface temperature is about 288 K or 15°C)."
 msgstr ""
+"อุณหภูมิพื้นผิวที่แท้จริงคาดว่าสูงกว่าอุณหภูมิที่สภาวะสมดุล "
+"โดยขึ้นกับบรรยากาศของดาวเคราะห์ ซึ่งไม่มีข้อมูลในขณะนี้ "
+"(อุณหภูมิเฉลี่ยของโลกมีค่าประมาณ 288 K หรือ 15°C)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:314
 msgid ""
@@ -20867,6 +20944,10 @@ msgid ""
 "that might be rocky and support surface liquid water. They are also known as"
 " warm terrans."
 msgstr ""
+"ดาวเคราะห์ในเขตเอื้ออาศัยที่มีรัศมีน้อยกว่า 1.5 รัศมีโลก หรือมีมวลน้อยกว่า 5"
+" เท่าของโลก เป็นดาวเคราะห์ที่มีโอกาสมากที่สุดที่จะเป็นดาวเคราะห์หิน "
+"และเอื้อต่อการมีอยู่ของน้ำในสถานะของเหลวบนพื้นผิว "
+"รู้จักกันว่าเป็นดาวที่อบอุ่น"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:322
 msgid "Optimistic Sample"
@@ -20957,6 +21038,8 @@ msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
 msgstr ""
+"ไดมิเดียมมาจากภาษาละติน มีความหมายว่า <em>ครึ่ง</em> "
+"ใช้เรียกเนื่องจากมวลของดาวเคราะห์ที่มีค่าอย่างน้อยครึ่งหนึ่งของดาวพฤหัสบดี"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:337
 msgid ""
@@ -21076,6 +21159,8 @@ msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
 msgstr ""
+"อินเตอร์ครัสมาจากภาษาละติน แปลว่า <em>ระหว่างขา</em> "
+"หมายถึงตำแหน่งดาวในกลุ่มดาวหมีใหญ่"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:354
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
@@ -21190,17 +21275,19 @@ msgid ""
 "Historians largely believe that the Albanians are descendants of the "
 "Illyrians, a term Albanians proudly call themselves."
 msgstr ""
+"นักประวัติศาสตร์ส่วนใหญ่เชื่อว่าชาวแอลเบเนียสืบเชื้อสายมาจากชาวอิลลีเรีย "
+"ซึ่งชาวแอลเบเนียมักเรียกตัวเองด้วยชื่อนี้ด้วยความภาคภูมิใจ"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:373
 msgid ""
 "Arber is the term for the inhabitants of Albania during the middle ages."
-msgstr ""
+msgstr "อาร์เบอร์เป็นชื่อเรียกชุมชนที่อาศัยอยู่บริเวณแอลเบเนียในยุคกลาง"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:374
 msgid ""
 "Hoggar is the name of the main mountain range in the Sahara Desert in "
 "southern Algeria."
-msgstr ""
+msgstr "ฮอกการ์เป็นชื่อเทือกเขาหลักในทะเลทรายสะฮารา ทางใต้ของแอลจีเรีย"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:375
 msgid ""
@@ -21657,11 +21744,13 @@ msgid ""
 "Mago is a National Park in Ethiopia noted for its giraffes. The star also "
 "happens to be in the constellation of Camelopardis (the giraffe)."
 msgstr ""
+"มาโกเป็นชื่ออุทยานแห่งชาติในเอธิโอเปียที่ขึ้นชื่อเรื่องยีราฟ "
+"ดาวฤกษ์ดวงนี้อยู่ในกลุ่มดาวยีราฟ (Camelopardis)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:449
 msgid ""
 "The Neri river in Ethiopia runs through parts of the Mago National park."
-msgstr ""
+msgstr "แม่น้ำเนรีไหลผ่านอุทยานแห่งชาติมาโกในเอธิโอเปีย"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:450
 msgid ""
@@ -21691,7 +21780,7 @@ msgstr ""
 msgid ""
 "Tojil is the name of one of the Mayan deities related to rain, storms, and "
 "fire."
-msgstr ""
+msgstr "โทจิลเป็นหนึ่งในเทพของชาวมายา เกี่ยวข้องกับฝน พายุ และไฟ"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:455
 msgid ""
@@ -21738,7 +21827,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:462
 msgid "Funi is an old Icelandic word meaning fire or blaze."
-msgstr ""
+msgstr "ฟูนีเป็นคำโบราณในภาษาไอซ์แลนด์ หมายถึงไฟหรือเปลวไฟ"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:463
 msgid "Fold is an old Icelandic word meaning earth or soil."
@@ -21758,7 +21847,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:466
 msgid "Dofida means our star in Nias language."
-msgstr ""
+msgstr "โดฟิดาหมายถึงดาวของเราในภาษานียัซ"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:467
 msgid ""
@@ -21895,6 +21984,8 @@ msgid ""
 "Phoenicia was an ancient thalassocratic civilisation of the Mediterranean "
 "that originated from the area of modern-day Lebanon."
 msgstr ""
+"ฟินิเชียเป็นหนึ่งในอารยธรรมภาคพื้นสมุทรของทะเลเมดิเตอร์เรเนียน "
+"ปัจจุบันเป็นที่ตั้งของประเทศเลบานอน"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:489
 msgid ""
@@ -21902,6 +21993,9 @@ msgid ""
 "was a Phoenician port. Beirut is now the capital and largest city of "
 "Lebanon."
 msgstr ""
+"เบรุตเป็นหนึ่งในเมืองเก่าแก่ของโลกที่มีคนอาศัยอยู่อย่างต่อเนื่อง "
+"เคยเป็นเมืองท่าของอารยธรรมฟินิเชีย "
+"ปัจจุบันเป็นเมืองหลวงและเมืองใหญ่ที่สุดของประเทศเลบานอน"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:490
 msgid ""
@@ -21918,7 +22012,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:492
 msgid "Taika means peace in the Lithuanian language."
-msgstr ""
+msgstr "ไทคาหมายถึงสันติภาพในภาษาลิทัวเนีย"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:493
 msgid "Vytis is the symbol of the Lithuanian coat of arms."
@@ -22118,7 +22212,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:526
 msgid ""
 "Moriah is an ancient name for the mountain within the Old City of Jerusalem."
-msgstr ""
+msgstr "โมไรอาห์เป็นชื่อโบราณของภูเขาในนครเก่าของเยรูซาเล็ม"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:527
 msgid ""
@@ -22194,6 +22288,9 @@ msgid ""
 "Solaris is the title of a 1961 science fiction novel about an ocean-covered "
 "exoplanet by Polish writer Stanislaw Lem."
 msgstr ""
+"โซลาริสเป็นชื่อนิยายวิทยาศาสตร์ที่แต่งขึ้นเมื่อ ค.ศ. 1961 "
+"เกี่ยวกับดาวเคราะห์ต่างระบบที่ปกคลุมด้วยมหาสมุทร ประพันธ์โดยสตาญิสวัฟ แลม "
+"นักเขียนชาวโปแลนด์"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:539
 msgid ""
@@ -22253,7 +22350,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:548
 msgid "Belel is a rare source of water in the north of Senegal."
-msgstr ""
+msgstr "เบเลลเป็นแหล่งน้ำหายากทางเหนือของเซเนกัล"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:549
 msgid ""
@@ -22269,7 +22366,7 @@ msgstr "โมราวาเป็นระบบแม่น้ำที่ย
 msgid ""
 "Vlasina is one of the most significant tributaries of the South Morava "
 "river."
-msgstr ""
+msgstr "วลาซินาเป็นหนึ่งในลำน้ำสาขาสำคัญของแม่น้ำโมราวาใต้"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:552
 msgid ""
@@ -22323,12 +22420,15 @@ msgid ""
 "Baekdu is the highest mountain on the Korean peninsula, situated in North "
 "Korea, and symbolises the national spirit of Korea."
 msgstr ""
+"แพ็กดูเป็นภูเขาสูงที่สุดในคาบสมุทรเกาหลี ตั้งอยู่ในเกาหลีเหนือ "
+"เป็นสัญลักษณ์ของจิตวิญญาณเกาหลี"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:561
 msgid ""
 "Halla is the highest mountain in South Korea and is regarded as a sacred "
 "place in the region."
 msgstr ""
+"ฮัลลาเป็นภูเขาสูงที่สุดในเกาหลีใต้ ถือเป็นสถานที่ศักดิ์สิทธิ์ในบริเวณนั้น"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:562
 msgid ""
@@ -24375,7 +24475,7 @@ msgstr "สลับการใช้งานภูมิทัศน์ 3 ม
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:334
 msgid "Show viewpoint dialog"
-msgstr ""
+msgstr "แสดงหน้าต่างมุมมอง"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:335
 msgid "Toggle shadows"
@@ -24417,7 +24517,7 @@ msgstr "กำลังแปลงแบบจำลอง..."
 #: plugins/Scenery3d/src/Scenery3d.cpp:479
 #: plugins/Scenery3d/src/Scenery3d.cpp:499
 msgid "Calculating collision map..."
-msgstr ""
+msgstr "กำลังคำนวณแผนที่การชนกัน..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:484
 msgid "Loading ground..."
@@ -24487,7 +24587,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:794
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
-msgstr ""
+msgstr "ไม่รองรับโหมดของ cubemap ที่เลือก, กำลังกลับไปที่ '6 Textures'"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:913
 #, qt-format
@@ -24504,7 +24604,7 @@ msgstr "ปิดการใช้งาน"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:986
 msgid "Cubemap size changed"
-msgstr ""
+msgstr "มีการเปลี่ยนแปลงขนาดของ Cubemap"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:988
 #, qt-format
@@ -24649,7 +24749,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:271
 msgid "Calculates shadows for each cubemap face separately."
-msgstr ""
+msgstr "คำนวณเงาในแต่ละหน้าของ cubemap โดยแยกกัน"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:272
 msgid ""
@@ -24671,12 +24771,12 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:276
 msgid "Saves energy and may increase subjective application performance."
-msgstr ""
+msgstr "ประหยัดพลังงาน และอาจเพิ่มประสิทธิภาพของโปรแกรม"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:277
 msgid ""
 "Note that the cubemap is always re-rendered when the view position changes."
-msgstr ""
+msgstr "โปรดทราบว่า cubemap จะถูกวาดขึ้นใหม่เสมอเมื่อเปลี่ยนมุมมอง"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:279
 msgid ""
@@ -24693,7 +24793,7 @@ msgstr ""
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:281
 msgid ""
 "This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
-msgstr ""
+msgstr "ไม่สามารถใช้ได้กับโหมดการทำ cubemap แบบ &quot;Geometry-Shader&quot;!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:283
 msgid ""
@@ -24732,7 +24832,7 @@ msgstr "ตั้งให้เป็นทิวทัศน์ปริยา
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Load/save viewpoints"
-msgstr ""
+msgstr "เรียก/บันทึกมุมมอง"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Torch strength:"
@@ -24765,7 +24865,7 @@ msgstr "วาดเส้นขอบฟ้าที่ฉากหน้า"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
 msgid "Visual options"
-msgstr ""
+msgstr "ตัวเลือกทัศนียภาพ"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Per-Pixel lighting"
@@ -24785,7 +24885,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "Cubemap size:"
-msgstr ""
+msgstr "ขนาดของ Cubemap:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:495
 msgid "Shadowmap size:"
@@ -24793,7 +24893,7 @@ msgstr "ขนาดของแผนที่เงา:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "Filtering Quality:"
-msgstr ""
+msgstr "คุณภาพการกรอง:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Hardware"
@@ -24821,11 +24921,11 @@ msgstr "PCSS"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:505
 msgid "Cubemapping mode:"
-msgstr ""
+msgstr "โหมดของ Cubemap:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:506
 msgid "Full cubemap shadows"
-msgstr ""
+msgstr "เงาของ cubemap แบบเต็ม"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:507
 msgid "Lazy cubemap re-rendering"
@@ -24845,7 +24945,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:511
 msgid "Quality/Performance settings"
-msgstr ""
+msgstr "การตั้งค่าคุณภาพต่อประสิทธิภาพ"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:209
 msgid "Stored views"
@@ -24865,7 +24965,7 @@ msgstr "เพิ่มมุมมองปัจจุบัน"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:214
 msgid "Load/store with date"
-msgstr ""
+msgstr "เรียกหรือเก็บพร้อมกับวันที่"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:215
 msgid "Title:"
@@ -25253,7 +25353,7 @@ msgstr "เลือกจากรายการตำแหน่งที่
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:789
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:793
 msgid "Pick..."
-msgstr ""
+msgstr "เลือก..."
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:796
 msgid "Custom Declination 2"
@@ -25435,14 +25535,16 @@ msgid "New Hindu Panchang"
 msgstr "ฮินดูปัญจางคะแบบใหม่"
 
 #: plugins/Calendars/src/Calendars.cpp:354
+#: plugins/Calendars/src/ui_calendarsDialog.h:942
 msgctxt "calendar"
-msgid "Astro Hindu Solar"
-msgstr "สุริยคติแบบฮินดู"
+msgid "Hindu Astro Solar"
+msgstr "สุริยคติแบบฮินดูเชิงดาราศาสตร์"
 
 #: plugins/Calendars/src/Calendars.cpp:355
+#: plugins/Calendars/src/ui_calendarsDialog.h:943
 msgctxt "calendar"
-msgid "Astro Hindu Lunisolar"
-msgstr "จันทรสุริยคติแบบฮินดู"
+msgid "Hindu Astro Lunisolar"
+msgstr "จันทรสุริยคติแบบฮินดูเชิงดาราศาสตร์"
 
 #: plugins/Calendars/src/Calendars.cpp:356
 #: plugins/Calendars/src/ui_calendarsDialog.h:939
@@ -25460,13 +25562,13 @@ msgstr "มายานับยาว"
 #: plugins/Calendars/src/ui_calendarsDialog.h:921
 msgctxt "calendar"
 msgid "Maya Haab"
-msgstr ""
+msgstr "ฮาบของมายา"
 
 #: plugins/Calendars/src/Calendars.cpp:359
 #: plugins/Calendars/src/ui_calendarsDialog.h:914
 msgctxt "calendar"
 msgid "Maya Tzolkin"
-msgstr ""
+msgstr "โซลคินของมายา"
 
 #: plugins/Calendars/src/Calendars.cpp:360
 #: plugins/Calendars/src/ui_calendarsDialog.h:919
@@ -27514,17 +27616,17 @@ msgstr "ฮ.ศ."
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:38
 msgctxt "Hindu Lunar month name"
 msgid "Caitra"
-msgstr ""
+msgstr " จิตรา"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:39
 msgctxt "Hindu Lunar month name"
 msgid "Vaiśākha"
-msgstr ""
+msgstr "วิศาขา"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:40
 msgctxt "Hindu Lunar month name"
 msgid "Jyeṣṭha"
-msgstr ""
+msgstr "เชษฐา"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:41
 msgctxt "Hindu Lunar month name"
@@ -27549,7 +27651,7 @@ msgstr ""
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:45
 msgctxt "Hindu Lunar month name"
 msgid "Kārtika"
-msgstr ""
+msgstr "กฤติกา"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:46
 msgctxt "Hindu Lunar month name"
@@ -27564,7 +27666,7 @@ msgstr ""
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:48
 msgctxt "Hindu Lunar month name"
 msgid "Māgha"
-msgstr ""
+msgstr "มาฆะ"
 
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:49
 msgctxt "Hindu Lunar month name"
@@ -27580,7 +27682,7 @@ msgstr "กลียุค"
 #: plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp:87
 msgctxt "short indicator for leap month"
 msgid "[leap]"
-msgstr ""
+msgstr "[อธิก]"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:43
 msgctxt "old Hindu day name"
@@ -27617,7 +27719,7 @@ msgstr "ศุกรวาร"
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:56
 msgctxt "old Hindu day name"
 msgid "Śanivāra"
-msgstr ""
+msgstr "ศนิวาร"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:50
 msgctxt "old Hindu day name"
@@ -27637,7 +27739,7 @@ msgstr "ภุมวาร"
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:53
 msgctxt "old Hindu day name"
 msgid "Saumyavāra"
-msgstr ""
+msgstr "โสรวาร"
 
 #: plugins/Calendars/src/OldHinduSolarCalendar.cpp:54
 msgctxt "old Hindu day name"
@@ -28403,16 +28505,6 @@ msgstr "การปฏิวัติฝรั่งเศส (ดาราศ�
 msgctxt "calendar"
 msgid "Old Hindu Lunar"
 msgstr "จันทรคติแบบฮินดูเก่า"
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:942
-msgctxt "calendar"
-msgid "Hindu Astro Solar"
-msgstr "สุริยคติแบบฮินดูเชิงดาราศาสตร์"
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:943
-msgctxt "calendar"
-msgid "Hindu Astro Lunar"
-msgstr "จันทรคติแบบฮินดูเชิงดาราศาสตร์"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:945
 msgid "Override automatic text color"

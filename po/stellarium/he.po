@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-21 02:37+0700\n"
+"POT-Creation-Date: 2022-03-22 21:41+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: חיים שלמה רוזנבך, 2022\n"
 "Language-Team: Hebrew (https://www.transifex.com/stellarium/teams/80998/he/)\n"
@@ -2731,11 +2731,11 @@ msgstr "Movement and Selection"
 
 #: src/core/StelCore.cpp:269
 msgid "Increase time speed"
-msgstr "הגדל את מהירות הזמן"
+msgstr "האץ את מהירות הזמן"
 
 #: src/core/StelCore.cpp:270
 msgid "Decrease time speed"
-msgstr "הפחת את מהירות הזמן"
+msgstr "האט את מהירות הזמן"
 
 #: src/core/StelCore.cpp:271
 msgid "Increase time speed (a little)"
@@ -5048,7 +5048,7 @@ msgstr ""
 
 #: src/gui/StelGuiItems.cpp:381 src/gui/StelGuiItems.cpp:1017
 msgid "Space"
-msgstr "מרחב"
+msgstr "רווח"
 
 #: src/gui/StelGuiItems.cpp:735
 msgid "Time zone"
@@ -25495,13 +25495,15 @@ msgid "New Hindu Panchang"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:354
+#: plugins/Calendars/src/ui_calendarsDialog.h:942
 msgctxt "calendar"
-msgid "Astro Hindu Solar"
+msgid "Hindu Astro Solar"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:355
+#: plugins/Calendars/src/ui_calendarsDialog.h:943
 msgctxt "calendar"
-msgid "Astro Hindu Lunisolar"
+msgid "Hindu Astro Lunisolar"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:356
@@ -28365,7 +28367,7 @@ msgstr "לוח שנה פרסי (גרסה מחושבת)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:206
 msgid "Persian calendar (astronomical version)"
-msgstr ""
+msgstr "לוח שנה פרסי (גרסה אסטרונומית)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:209
 msgid "Old Hindu Solar and Lunar calendars"
@@ -28373,7 +28375,7 @@ msgstr "לוחות שנה הינדיים שמשיים וירחיים ישנים"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:210
 msgid "New Hindu Solar and Lunar calendars"
-msgstr ""
+msgstr "לוחות שנה הינדיים שמשיים וירחיים חדשים"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:211
 msgid "Astronomically 'accurate' Hindu Solar and Lunar calendars"
@@ -28459,16 +28461,6 @@ msgstr ""
 #: plugins/Calendars/src/ui_calendarsDialog.h:940
 msgctxt "calendar"
 msgid "Old Hindu Lunar"
-msgstr ""
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:942
-msgctxt "calendar"
-msgid "Hindu Astro Solar"
-msgstr ""
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:943
-msgctxt "calendar"
-msgid "Hindu Astro Lunar"
 msgstr ""
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:945

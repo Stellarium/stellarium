@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-21 02:37+0700\n"
+"POT-Creation-Date: 2022-03-22 21:41+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Khalid AlAjaji, 2022\n"
 "Language-Team: Arabic (https://www.transifex.com/stellarium/teams/80998/ar/)\n"
@@ -26189,14 +26189,16 @@ msgid "New Hindu Panchang"
 msgstr "الهندي الجديد بانشانج"
 
 #: plugins/Calendars/src/Calendars.cpp:354
+#: plugins/Calendars/src/ui_calendarsDialog.h:942
 msgctxt "calendar"
-msgid "Astro Hindu Solar"
-msgstr "الهندي الفلكي شمسي"
+msgid "Hindu Astro Solar"
+msgstr "الهندي فلكي شمسي"
 
 #: plugins/Calendars/src/Calendars.cpp:355
+#: plugins/Calendars/src/ui_calendarsDialog.h:943
 msgctxt "calendar"
-msgid "Astro Hindu Lunisolar"
-msgstr "الهندي الفلكي قمري"
+msgid "Hindu Astro Lunisolar"
+msgstr "الهندي الفلكي القمري الشمسي"
 
 #: plugins/Calendars/src/Calendars.cpp:356
 #: plugins/Calendars/src/ui_calendarsDialog.h:939
@@ -29157,16 +29159,6 @@ msgstr "الثورة الفرنسية (فلكي)"
 msgctxt "calendar"
 msgid "Old Hindu Lunar"
 msgstr "الهندي القديم قمري"
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:942
-msgctxt "calendar"
-msgid "Hindu Astro Solar"
-msgstr "الهندي فلكي شمسي"
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:943
-msgctxt "calendar"
-msgid "Hindu Astro Lunar"
-msgstr "الهندي فلكي قمري"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:945
 msgid "Override automatic text color"
