@@ -251,6 +251,7 @@ void Calendars::init()
 	}
 }
 
+#ifdef ENABLE_SCRIPTING
 // Add calendar as scriptable object! Some scripting functions won't work though, as they use object types unknown to the scripting engine.
 void Calendars::makeCalendarsScriptable(StelScriptMgr *ssm)
 {
@@ -260,6 +261,7 @@ void Calendars::makeCalendarsScriptable(StelScriptMgr *ssm)
 		ssm->addObject(cal);
 	}
 }
+#endif
 
 void Calendars::loadSettings()
 {
