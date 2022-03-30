@@ -62,15 +62,15 @@ SET(RemoteControl_UIS
   gui/remoteControlDialog.ui
 )
 
-QT5_WRAP_UI(RemoteControl_UIS_H ${RemoteControl_UIS})
+QT_WRAP_UI(RemoteControl_UIS_H ${RemoteControl_UIS})
 
 ################# compiles resources files ############
 SET(RemoteControl_RES ../RemoteControl.qrc)
-QT5_ADD_RESOURCES(RemoteControl_RES_CXX ${RemoteControl_RES})
+QT_ADD_RESOURCES(RemoteControl_RES_CXX ${RemoteControl_RES})
 
 ADD_LIBRARY(RemoteControl-static STATIC ${RemoteControl_SRCS} ${RemoteControl_RES_CXX} ${RemoteControl_UIS_H} ${QtWebApp_SRCS})
 TARGET_INCLUDE_DIRECTORIES(RemoteControl-static PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../include)
-TARGET_LINK_LIBRARIES(RemoteControl-static Qt5::Core Qt5::Network Qt5::Widgets)
+TARGET_LINK_LIBRARIES(RemoteControl-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets)
 # The library target "RemoteControl-static" has a default OUTPUT_NAME of "RemoteControl-static", so change it.
 SET_TARGET_PROPERTIES(RemoteControl-static PROPERTIES OUTPUT_NAME "RemoteControl")
 SET_TARGET_PROPERTIES(RemoteControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")

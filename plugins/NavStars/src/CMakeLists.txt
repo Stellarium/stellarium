@@ -20,13 +20,13 @@ SET(NavStars_UIS
      gui/navStarsWindow.ui
 )
 
-QT5_WRAP_UI(NavStars_UIS_H ${NavStars_UIS})
+QT_WRAP_UI(NavStars_UIS_H ${NavStars_UIS})
 
 SET(NavStars_RES ../resources/NavStars.qrc)
-QT5_ADD_RESOURCES(NavStars_RES_CXX ${NavStars_RES})
+QT_ADD_RESOURCES(NavStars_RES_CXX ${NavStars_RES})
 
 ADD_LIBRARY(NavStars-static STATIC ${NavStars_SRCS} ${NavStars_RES_CXX} ${NavStars_UIS_H})
-TARGET_LINK_LIBRARIES(NavStars-static Qt5::Core Qt5::Widgets)
+TARGET_LINK_LIBRARIES(NavStars-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
 
 IF(ENABLE_TESTING)
     add_definitions("-DWITH_TESTING_ON")
