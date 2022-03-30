@@ -256,20 +256,21 @@ SET(stellarium_lib_SRCS
      translations_regions.h
 )
 
+## Block can be removed: Qt5.15 includes CMake 3.21.
 ### CMake < 3.0 does not AUTOMOC Q_GADGET which some files use, so we have to manually add it
 ### Wrap it in an IF to prevent some linker warnings about symbols defined twice (on MSVC13 at least)
 ### Q_GADGET is required force the Qt MOC to run on some specific files,
 ### because they do not contain QObjects, but require a MOC for Q_FLAG or similar
-IF("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 3.0)
-     QT5_WRAP_CPP(stellarium_lib_moc_SRCS
-         core/StelObject.hpp
-         core/StelRegionObject.hpp
-         core/modules/Nebula.hpp
-     )
-     SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
-          ${stellarium_lib_moc_SRCS}
-     )
-ENDIF()
+#####IF("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 3.0)
+#####     QT5_WRAP_CPP(stellarium_lib_moc_SRCS
+#####         core/StelObject.hpp
+#####         core/StelRegionObject.hpp
+#####         core/modules/Nebula.hpp
+#####     )
+#####     SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
+#####          ${stellarium_lib_moc_SRCS}
+#####     )
+#####ENDIF()
 
 IF(ENABLE_SCRIPTING)
      SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
@@ -290,8 +291,7 @@ SET(stellarium_exe_SRCS main.cpp)
 
 ################# compiles resources files ############
 SET(stellarium_RES ${CMAKE_SOURCE_DIR}/data/mainRes.qrc)
-QT5_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
-
+QT_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 #############################################################################################
 ############################# Standard GUI plugin compilation ###############################
 #############################################################################################
@@ -407,11 +407,19 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           ENDIF()
      ENDIF()
 
-     QT5_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
+     IF(${QT_VERSION_MAJOR} EQUAL "5")
+         QT5_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
+     ELSE()
+         QT_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
+    ENDIF()
 
      # compiles resources files
      SET(stellarium_gui_RES ${CMAKE_SOURCE_DIR}/data/gui/guiRes.qrc)
-     QT5_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
+     IF(${QT_VERSION_MAJOR} EQUAL "5")
+         QT5_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
+     ELSE()
+         QT_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
+     ENDIF()
 
      SET(stellarium_lib_SRCS ${stellarium_lib_SRCS} ${stellarium_gui_SRCS} ${stellarium_UIS_H} ${stellarium_gui_RES_CXX})
 ENDIF()
@@ -469,16 +477,16 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
      ENDIF()
 ENDIF()
 
-# Setup Qt5 dependencies
-SET(STELLARIUM_QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Gui ${STEL_GLES_LIBS} Qt5::Network Qt5::Widgets Qt5::Charts)
+# Setup Qt5/6 dependencies
+SET(STELLARIUM_QT_LIBRARIES Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Concurrent Qt${QT_VERSION_MAJOR}::Gui ${STEL_GLES_LIBS} Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts)
 IF(ENABLE_MEDIA)
-     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Multimedia Qt5::MultimediaWidgets)
+     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::Multimedia Qt${QT_VERSION_MAJOR}::MultimediaWidgets)
 ENDIF()
-IF(ENABLE_SCRIPTING)
+IF((ENABLE_SCRIPTING) AND (${QT_VERSION_MAJOR} EQUAL "5"))
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Script)
 ENDIF()
 IF(ENABLE_GPS)
-     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Positioning Qt5::SerialPort)
+     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::Positioning Qt${QT_VERSION_MAJOR}::SerialPort)
 ENDIF()
 
 IF(ENABLE_SPOUT AND SPOUT_LIBRARY_DLL)
@@ -553,7 +561,7 @@ IF(WIN32)
         "
          EXECUTE_PROCESS(
              COMMAND \"${WINDEPLOYQT_COMMAND}\"
-                     --dir \"\${CMAKE_INSTALL_PREFIX}/qt5stuff\"
+                     --dir \"\${CMAKE_INSTALL_PREFIX}/qt${QT_VERSION_MAJOR}stuff\"
                      --no-translations
                      --compiler-runtime
                      \"\${CMAKE_INSTALL_PREFIX}/bin/stellarium.exe\"
@@ -569,7 +577,7 @@ IF(WIN32)
              "
               EXECUTE_PROCESS(
                   COMMAND \"${WINDEPLOYQT_COMMAND}\"
-                          --dir \"\${CMAKE_INSTALL_PREFIX}/qt5stuff\"
+                          --dir \"\${CMAKE_INSTALL_PREFIX}/qt${QT_VERSION_MAJOR}stuff\"
                           --no-translations
                           --compiler-runtime
                           \"\${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"
@@ -591,7 +599,7 @@ SET_TARGET_PROPERTIES(stellarium PROPERTIES FOLDER "src")
 
 IF(ENABLE_TESTING)
 
-    SET(TESTS_LIBRARIES ${ZLIB_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Test stelMain)
+    SET(TESTS_LIBRARIES ${ZLIB_LIBRARIES} Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Test stelMain)
 
     # Custom target used to build all tests at once
     ADD_CUSTOM_TARGET(buildTests)

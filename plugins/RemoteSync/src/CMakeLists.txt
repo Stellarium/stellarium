@@ -26,14 +26,14 @@ SET(RemoteSync_UIS
   gui/remoteSyncDialog.ui
 )
 
-QT5_WRAP_UI(RemoteSync_UIS_H ${RemoteSync_UIS})
+QT_WRAP_UI(RemoteSync_UIS_H ${RemoteSync_UIS})
 
 ################# compiles resources files ############
 SET(RemoteSync_RES ../RemoteSync.qrc)
-QT5_ADD_RESOURCES(RemoteSync_RES_CXX ${RemoteSync_RES})
+QT_ADD_RESOURCES(RemoteSync_RES_CXX ${RemoteSync_RES})
 
 ADD_LIBRARY(RemoteSync-static STATIC ${RemoteSync_SRCS} ${RemoteSync_UIS_H} ${RemoteSync_RES_CXX})
-TARGET_LINK_LIBRARIES(RemoteSync-static Qt5::Core Qt5::Network Qt5::Widgets)
+TARGET_LINK_LIBRARIES(RemoteSync-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets)
 # The library target "RemoteSync-static" has a default OUTPUT_NAME of "RemoteSync-static", so change it.
 SET_TARGET_PROPERTIES(RemoteSync-static PROPERTIES OUTPUT_NAME "RemoteSync")
 SET_TARGET_PROPERTIES(RemoteSync-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")

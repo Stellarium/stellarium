@@ -52,8 +52,9 @@ ADD_DEFINITIONS(-DPACKAGE_VERSION="${PACKAGE_VERSION}")
 ADD_DEFINITIONS(-DCOPYRIGHT_YEARS="${COPYRIGHT_YEARS}")
 ADD_DEFINITIONS(-DSTELLARIUM_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
 
-# currently Qt 5.12 is recommended
-SET(MINIMAL_QT_VERSION "5.9.0")
+# Qt 5.15 is required as it provides version-less CMake functions (QT_WRAP_UI etc.)
+SET(MINIMAL_QT_VERSION "5.15.0")
+#SET(MINIMAL_QT_VERSION "6.2.0")
 # TODO: Check real minimal supported version of GPSD API
 SET(MINIMAL_GPS_API_VERSION "6.0")
 
@@ -242,7 +243,7 @@ SET(CMAKE_CXX_EXTENSIONS OFF)
 # NOTE: C_STANDARD 17 and 23 values added in CMake 3.21
 # https://gitlab.kitware.com/cmake/cmake/-/issues/22366
 # Ubuntu 18.04 have GCC 7.5 - so, C11 only
-SET(CMAKE_C_STANDARD 11)
+SET(CMAKE_C_STANDARD 17)
 SET(CMAKE_C_STANDARD_REQUIRED ON)
 SET(CMAKE_C_EXTENSIONS OFF)
 
@@ -321,6 +322,9 @@ ENDIF()
 #SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -ffunction-sections -flto")
 #SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--gc-sections -flto -ffunction-sections -fuse-linker-plugin")
 
+########### Detect Qt version
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
+
 ########### Others ###########
 # Activate translation
 SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be supported.")
@@ -385,14 +389,18 @@ IF(ENABLE_SPOUT)
      MARK_AS_ADVANCED(SPOUT_LIBRARY_DLL)
 ENDIF(ENABLE_SPOUT)
 
-SET(ENABLE_SCRIPTING 1 CACHE BOOL "Define whether scripting features should be activated.")
-IF(ENABLE_SCRIPTING)
-     ADD_DEFINITIONS(-DENABLE_SCRIPTING)
-     # (De-)Activate the script edit console
-     SET(ENABLE_SCRIPT_CONSOLE 1 CACHE BOOL "Define whether to build the script console feature.")
-     IF(ENABLE_SCRIPT_CONSOLE)
-          ADD_DEFINITIONS(-DENABLE_SCRIPT_CONSOLE)
+IF(${QT_VERSION_MAJOR} EQUAL 5)
+     SET(ENABLE_SCRIPTING 1 CACHE BOOL "Define whether scripting features should be activated.")
+     IF(ENABLE_SCRIPTING)
+          ADD_DEFINITIONS(-DENABLE_SCRIPTING)
+          # (De-)Activate the script edit console
+          SET(ENABLE_SCRIPT_CONSOLE 1 CACHE BOOL "Define whether to build the script console feature.")
+          IF(ENABLE_SCRIPT_CONSOLE)
+               ADD_DEFINITIONS(-DENABLE_SCRIPT_CONSOLE)
+          ENDIF()
      ENDIF()
+ELSE()
+     SET(ENABLE_SCRIPTING 0 CACHE BOOL "Define whether scripting features should be activated. Currently strictly no Scripting on Qt6!")
 ENDIF()
 
 SET(STELLARIUM_GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None")
@@ -407,15 +415,6 @@ IF(WIN32 AND NOT MSVC)
 ELSE()
      SET(GENERATE_STELMAINLIB 0)
 ENDIF()
-
-IF(ENABLE_TESTING)
-    ENABLE_TESTING()
-    ADD_DEFINITIONS(-DENABLE_TESTING)
-    FIND_PACKAGE(Qt5Test REQUIRED)
-    MESSAGE(STATUS "Unit tests support: enabled")
-ELSE(ENABLE_TESTING)
-    MESSAGE(STATUS "Unit tests support: disabled")
-ENDIF(ENABLE_TESTING)
 
 ########### User Guide ###############
 IF(EXISTS "${CMAKE_SOURCE_DIR}/guide/guide.pdf")
@@ -481,28 +480,35 @@ ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 SET_TARGET_PROPERTIES(AllStaticPlugins PROPERTIES FOLDER "plugins")
 
 ########### Find packages ###########
-FIND_PACKAGE(Qt5Core REQUIRED)
-GET_TARGET_PROPERTY(QMAKE_LOCATION Qt5::qmake LOCATION)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
+
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
+# GZ: Why bother about qmake at all?
+#GET_TARGET_PROPERTY(QMAKE_LOCATION Qt5::qmake LOCATION)
+IF(${QT_VERSION_MAJOR} EQUAL 5)
 IF(${Qt5Core_VERSION} VERSION_LESS MINIMAL_QT_VERSION)
-     MESSAGE(FATAL_ERROR "Found Qt5: ${QMAKE_LOCATION} (found unsuitable version ${Qt5Core_VERSION}, required is ${MINIMAL_QT_VERSION})")
+     MESSAGE(FATAL_ERROR "Found Qt${QT_VERSION_MAJOR}: ${QMAKE_LOCATION} (found unsuitable version ${Qt5Core_VERSION}, required is ${MINIMAL_QT_VERSION})")
 ELSE()
-     MESSAGE(STATUS "Found Qt5: ${QMAKE_LOCATION} (found suitable version ${Qt5Core_VERSION})")
+     MESSAGE(STATUS "Found Qt${QT_VERSION_MAJOR}: ${QMAKE_LOCATION} (found suitable version ${Qt5Core_VERSION})")
 ENDIF()
-FIND_PACKAGE(Qt5Concurrent REQUIRED)
-FIND_PACKAGE(Qt5Gui REQUIRED)
-FIND_PACKAGE(Qt5Network REQUIRED)
-FIND_PACKAGE(Qt5Widgets REQUIRED)
-FIND_PACKAGE(Qt5Charts REQUIRED)
+ENDIF()
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Concurrent REQUIRED)
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Gui REQUIRED)
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Network REQUIRED)
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Charts REQUIRED)
 IF(USE_PLUGIN_TELESCOPECONTROL OR ENABLE_GPS)
-     FIND_PACKAGE(Qt5SerialPort REQUIRED)
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS SerialPort REQUIRED)
 ENDIF()
 IF(WIN32)
-     FIND_PACKAGE(Qt5Svg REQUIRED)
-     FIND_PACKAGE(Qt5XmlPatterns REQUIRED)
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Svg REQUIRED)
+     IF(${QT_VERSION_MAJOR} EQUAL 5)
+          FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS XmlPatterns REQUIRED)
+     ENDIF()
 
      # Qt 5.9 (LTS) use OpenSSL 1.0* and Qt 5.12 (LTS) and newest version of Qt use OpenSSL 1.1*
      # Source: https://lists.qt-project.org/pipermail/releasing/2019-March/002614.html
-     IF(${Qt5Core_VERSION} VERSION_LESS "5.10")
+     IF((${QT_VERSION_MAJOR} EQUAL "5") AND (Qt5Core_VERSION VERSION_LESS "5.10"))
           # OK, it's Qt 5.9, let's try found OpenSSL 1.0.x DLL's on Windows
           FIND_FILE(OPENSSL_SSLEAY32_LIBRARY_DLL ssleay32.dll)
           FIND_FILE(OPENSSL_LIBEAY32_LIBRARY_DLL libeay32.dll)
@@ -579,13 +585,13 @@ ENDIF()
 IF(ENABLE_MEDIA)
      SET(USE_QTOPENGL 1)
      ADD_DEFINITIONS(-DENABLE_MEDIA)
-     FIND_PACKAGE(Qt5Multimedia REQUIRED)
-     FIND_PACKAGE(Qt5MultimediaWidgets REQUIRED)
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Multimedia REQUIRED)
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS MultimediaWidgets REQUIRED)
 ENDIF()
 
 IF(ENABLE_GPS)
      MESSAGE(STATUS "GPS: support by Qt's NMEA handling enabled.")
-     FIND_PACKAGE(Qt5Positioning REQUIRED)
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Positioning REQUIRED)
      ADD_DEFINITIONS(-DENABLE_GPS)
      IF(WIN32)
           SET(ENABLE_LIBGPS 0)
@@ -614,8 +620,17 @@ ENDIF(ENABLE_GPS)
 IF(USE_QTOPENGL)
      # QtOpenGL module is deprecated. After merging the QOpenGLWidget branch, we don't use this module directly anymore,
      # but the QtMultimediaWidgets module requires it internally, so we still have to package it.
-     FIND_PACKAGE(Qt5OpenGL REQUIRED)
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS OpenGL REQUIRED)
 ENDIF()
+
+IF(ENABLE_TESTING)
+    ENABLE_TESTING()
+    ADD_DEFINITIONS(-DENABLE_TESTING)
+    FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Test REQUIRED)
+    MESSAGE(STATUS "Unit tests support: enabled")
+ELSE(ENABLE_TESTING)
+    MESSAGE(STATUS "Unit tests support: disabled")
+ENDIF(ENABLE_TESTING)
 
 ### Zlib package
 FIND_PACKAGE(ZLIB QUIET) #quiet warnings about not found, we have our own version anyway

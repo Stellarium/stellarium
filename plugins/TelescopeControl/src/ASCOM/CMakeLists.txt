@@ -9,7 +9,7 @@ SET(TelescopeControl_ASCOM_UIS
     TelescopeClientASCOMWidget.ui
     )
 
-QT5_WRAP_UI(TelescopeControl_ASCOM_UIS_H ${TelescopeControl_ASCOM_UIS})
+QT_WRAP_UI(TelescopeControl_ASCOM_UIS_H ${TelescopeControl_ASCOM_UIS})
 
 add_library(TelescopeControl_ASCOM STATIC
     ASCOMDevice.hpp
@@ -22,8 +22,8 @@ add_library(TelescopeControl_ASCOM STATIC
     )
 
 target_link_libraries(TelescopeControl_ASCOM
-    Qt5::Core
-    Qt5::Network
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Network
     TelescopeControl_common
     ${CMAKE_THREAD_LIBS_INIT}
     )

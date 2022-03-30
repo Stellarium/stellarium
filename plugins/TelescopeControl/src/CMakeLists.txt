@@ -11,7 +11,7 @@ if(WIN32)
 endif(WIN32)
 
 SET(TelescopeControl_RES ../resources/TelescopeControl.qrc)
-QT5_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
+QT_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
 
 ADD_LIBRARY(TelescopeControl-static STATIC
     TelescopeControlGlobals.hpp
@@ -31,9 +31,9 @@ TARGET_LINK_LIBRARIES(TelescopeControl-static
     TelescopeControl_NexStar
     TelescopeControl_Rts2
     TelescopeControl_common
-    Qt5::Core
-    Qt5::Widgets
-    Qt5::SerialPort
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::SerialPort
     )
 
 IF(WIN32)

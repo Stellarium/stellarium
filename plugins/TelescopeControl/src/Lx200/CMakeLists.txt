@@ -11,9 +11,9 @@ add_library(TelescopeControl_Lx200 STATIC
     )
 
 target_link_libraries(TelescopeControl_Lx200
-    Qt5::Core
-    Qt5::Network
-    Qt5::Gui
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Network
+    Qt${QT_VERSION_MAJOR}::Gui
     TelescopeControl_common
     )
 

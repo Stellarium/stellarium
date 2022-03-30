@@ -8,7 +8,7 @@ SET(TelescopeControl_INDI_UIS
     INDIControlWidget.ui
     )
 
-QT5_WRAP_UI(TelescopeControl_INDI_UIS_H ${TelescopeControl_INDI_UIS})
+QT_WRAP_UI(TelescopeControl_INDI_UIS_H ${TelescopeControl_INDI_UIS})
 
 add_library(TelescopeControl_INDI STATIC
     INDIConnection.hpp
@@ -23,8 +23,8 @@ add_library(TelescopeControl_INDI STATIC
     )
 
 target_link_libraries(TelescopeControl_INDI
-    Qt5::Core
-    Qt5::Network
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Network
     indiclient
     TelescopeControl_common
     ${CMAKE_THREAD_LIBS_INIT}
