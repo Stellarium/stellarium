@@ -1711,10 +1711,14 @@ void StelMainView::doScreenshot(void)
 	}
 	else
 	{
+		// build filter for file list, so we only select Stellarium screenshot files (prefix*.format)
+		QString shotFilePattern = QString("%1*.%2").arg(screenShotPrefix, screenShotFormat);
+		QStringList fileNameFilters(shotFilePattern);
 		// get highest-numbered file in screenshot directory
 		QDir dir(shotDir.filePath());
-		QStringList existingFiles = dir.entryList();
+		QStringList existingFiles = dir.entryList(fileNameFilters);
 		QString lastFileName = existingFiles[existingFiles.size() - 1];
+
 		// extract number from highest-numbered file name
 		QString lastShotNumString = lastFileName.replace(screenShotPrefix, "").replace("." + screenShotFormat, "");
 		// new screenshot number = start at highest number
@@ -1728,6 +1732,7 @@ void StelMainView::doScreenshot(void)
 		// validate if new screenshot number is valid (non-existent)
 		while (shotPath.exists()) {
 			shotNum++;
+			shotNumString = QString::number(shotNum).rightJustified(3, '0');
 			shotPathString = QString("%1/%2%3.%4").arg(shotDir.filePath(), screenShotPrefix, shotNumString, screenShotFormat);
 			shotPath = QFileInfo(shotPathString);
 		}
