@@ -37,6 +37,23 @@ int StelLocation::initMetaType()
 	return id;
 }
 
+StelLocation::StelLocation(QString lName, QString lState, QString lRegion, float lng, float lat, int alt,
+						   int populationK, QString timeZone, int bortleIndex, QChar roleKey, QString landscapeID)
+	: name(lName)
+	, region(lRegion)
+	, state(lState)
+	, longitude(lng)
+	, latitude(lat)
+	, altitude(alt)
+	, lightPollutionLuminance(StelCore::bortleScaleIndexToLuminance(bortleIndex))
+	, landscapeKey(landscapeID)
+	, population(populationK)
+	, role(roleKey)
+	, ianaTimeZone(timeZone)
+	, isUserLocation(true)
+{
+}
+
 // Output the location as a string ready to be stored in the user_location file
 QString StelLocation::serializeToLine() const
 {
@@ -132,7 +149,9 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	if (splitline.size()>8)
 	{
 		bool ok;
-		loc.lightPollutionLuminance = splitline.at(8).toFloat(&ok);
+		const auto bortleScaleIndex = splitline.at(8).toInt(&ok);
+		if(bortleScaleIndex > 0)
+			loc.lightPollutionLuminance = StelCore::bortleScaleIndexToLuminance(bortleScaleIndex);
 		if (ok==false)
 			loc.lightPollutionLuminance = DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 	}
