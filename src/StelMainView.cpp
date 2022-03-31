@@ -1727,7 +1727,7 @@ void StelMainView::doScreenshot(void)
 		shotPath = QFileInfo(shotPathString);
 		// validate if new screenshot number is valid (non-existent)
 		while (shotPath.exists()) {
-			newShotNum++;
+			shotNum++;
 			shotPathString = QString("%1/%2%3.%4").arg(shotDir.filePath(), screenShotPrefix, shotNumString, screenShotFormat);
 			shotPath = QFileInfo(shotPathString);
 		}
