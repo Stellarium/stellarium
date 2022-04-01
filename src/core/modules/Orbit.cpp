@@ -23,8 +23,6 @@
 #include <cstring>
 #include <QDebug>
 
-using namespace std;
-
 #define EPSILON 1e-10
 //#define EPSILON 1e-4
 // Gaussian gravitation constant k, also used by Heafner, 5.3.12.

@@ -43,8 +43,6 @@
 #include <QStringList>
 #include <QDir>
 
-using namespace std;
-
 // constructor which loads all data from appropriate files
 AsterismMgr::AsterismMgr(StarMgr *_hip_stars)
 	: hipStarMgr(_hip_stars)

@@ -31,8 +31,6 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 #include <QByteArray>
 
-using namespace std;
-
 Lx200Command::Lx200Command(Server &server)
              : server(*static_cast<TelescopeClientDirectLx200*>(&server)),
                has_been_written_to_buffer(false)

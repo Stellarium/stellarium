@@ -36,11 +36,9 @@
 #include "ObsListCreateEditDialog.hpp"
 #include "ui_obsListCreateEditDialog.h"
 
-using namespace std;
-
 ObsListCreateEditDialog * ObsListCreateEditDialog::m_instance = nullptr;
 
-ObsListCreateEditDialog::ObsListCreateEditDialog ( string listUuid )
+ObsListCreateEditDialog::ObsListCreateEditDialog ( std::string listUuid )
 {
 	listUuid_ = listUuid;
 
@@ -61,7 +59,7 @@ ObsListCreateEditDialog::~ObsListCreateEditDialog()
 /**
  * Get instance of class
 */
-ObsListCreateEditDialog * ObsListCreateEditDialog::Instance ( string listUuid )
+ObsListCreateEditDialog * ObsListCreateEditDialog::Instance ( std::string listUuid )
 {
 	if ( m_instance == nullptr ) {
 		m_instance = new ObsListCreateEditDialog ( listUuid );
