@@ -111,7 +111,7 @@ protected:
 	}
 private:
 	virtual bool isInitialized(void) const {return true;}
-	float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE {Q_UNUSED(core); return -10.f;}
+	float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE {Q_UNUSED(core) return -10.f;}
 private:
 	QList<double> oculars; // fov of the oculars
 };

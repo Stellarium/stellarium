@@ -32,8 +32,8 @@ class INDIControlWidget : public QWidget
     Q_OBJECT
 
 public:
-	explicit INDIControlWidget(QSharedPointer<TelescopeClient> telescope, QWidget *parent = 0);
-    ~INDIControlWidget();
+	explicit INDIControlWidget(QSharedPointer<TelescopeClient> telescope, QWidget *parent = nullptr);
+    ~INDIControlWidget() override;
 
 private slots:
 	void onNorthButtonPressed();

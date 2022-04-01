@@ -200,7 +200,7 @@ TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Equinox e
 	// port       = 10000 (int)
 	// time_delay = 500000 (int)
 
-	QRegularExpression paramRx("^([^:]*):(\\d+):(\\d+)$");
+	static const QRegularExpression paramRx("^([^:]*):(\\d+):(\\d+)$");
 	QRegularExpressionMatch paramMatch=paramRx.match(params);
 	QString host;
 

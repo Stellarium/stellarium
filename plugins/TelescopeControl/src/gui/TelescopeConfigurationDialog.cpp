@@ -422,7 +422,7 @@ void TelescopeConfigurationDialog::toggleTypeConnection(bool isChecked)
 
 void TelescopeConfigurationDialog::toggleTypeVirtual(bool isChecked)
 {
-	Q_UNUSED(isChecked);
+	Q_UNUSED(isChecked)
 	ui->scrollArea->ensureWidgetVisible(ui->groupBoxTelescopeProperties);
 }
 

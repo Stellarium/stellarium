@@ -50,7 +50,7 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, con
 	
 	//Extract parameters
 	//Format: "serial_port_name:time_delay"
-	QRegularExpression paramRx("^([^:]*):(\\d+)$");
+	static const QRegularExpression paramRx("^([^:]*):(\\d+)$");
 	QRegularExpressionMatch paramMatch=paramRx.match(parameters);
 	QString serialDeviceName;
 	if (paramMatch.hasMatch())
@@ -77,7 +77,7 @@ TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, con
 	//end_of_timeout = -0x8000000000000000LL;
 	
 	#ifdef Q_OS_WIN
-	if(serialDeviceName.right(serialDeviceName.size() - 3).toInt() > 9)
+	if(serialDeviceName.rightRef(serialDeviceName.size() - 3).toInt() > 9)
 		serialDeviceName = "\\\\.\\" + serialDeviceName;//"\\.\COMxx", not sure if it will work
 	#endif //Q_OS_WIN
 	

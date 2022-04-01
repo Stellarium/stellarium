@@ -44,13 +44,13 @@ bool ASCOMSupport::isASCOMSupported()
 	// OLE Problem
 	if (FAILED(hResult) || !initResult) {
 		return false;
-	};
+	}
 	
 	hResult = OlePropertyGet(utilDispatch, &v1, const_cast<wchar_t*>(LPlatformVersion));
 	QString version = QString::fromStdWString(v1.bstrVal);
 	QString majorVersion = "";
 
-	QRegularExpression versionRx("^([^\\.]*)\\.([^\\.]*)$");
+	static const QRegularExpression versionRx("^([^\\.]*)\\.([^\\.]*)$");
 	QRegularExpressionMatch versionMatch=versionRx.match(version);
 	if (versionMatch.hasMatch())
 	{
