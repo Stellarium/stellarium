@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.10.0)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 
 # Fix behavior of CMAKE_CXX_STANDARD and CMAKE_C_STANDARD when targeting macOS.
@@ -266,10 +266,10 @@ IF(WIN32)
           # C4996: deprecated POSIX names (used in zlib)
           SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996")
           # Avoid type conflict with C++17 standard
-          SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_HAS_STD_BYTE=0")
+          # SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_HAS_STD_BYTE=0") # WHAT??? Required for Qt6. --> Just avoid "using namespace std" anywhere! https://developercommunity.visualstudio.com/t/error-c2872-byte-ambiguous-symbol/93889
           # Set minimal version of Windows
           SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_WIN32_WINNT=${MIN_WIN_VERSION}")
-          IF(MSVC_VERSION GREATER 1700)
+          #IF(MSVC_VERSION GREATER 1700) # MSVC2017 is 1910 and bare minimum.
                SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /MP")
 
                FOREACH(flag_var
@@ -277,7 +277,7 @@ IF(WIN32)
                     CMAKE_SHARED_LINKER_FLAGS_DEBUG CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO)
                     SET(${flag_var} "${${flag_var}} /DEBUG:FASTLINK")
                ENDFOREACH()
-          ENDIF()
+          #ENDIF(MSVC_VERSION GREATER 1700)
           SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_MSVC_FLAGS}")
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STEL_MSVC_FLAGS}")
           # Additional defines:
@@ -389,7 +389,7 @@ IF(ENABLE_SPOUT)
      MARK_AS_ADVANCED(SPOUT_LIBRARY_DLL)
 ENDIF(ENABLE_SPOUT)
 
-IF(${QT_VERSION_MAJOR} EQUAL 5)
+IF(${QT_VERSION_MAJOR} EQUAL "5")
      SET(ENABLE_SCRIPTING 1 CACHE BOOL "Define whether scripting features should be activated.")
      IF(ENABLE_SCRIPTING)
           ADD_DEFINITIONS(-DENABLE_SCRIPTING)
@@ -399,9 +399,9 @@ IF(${QT_VERSION_MAJOR} EQUAL 5)
                ADD_DEFINITIONS(-DENABLE_SCRIPT_CONSOLE)
           ENDIF()
      ENDIF()
-ELSE()
+ELSE(${QT_VERSION_MAJOR} EQUAL "5")
      SET(ENABLE_SCRIPTING 0 CACHE BOOL "Define whether scripting features should be activated. Currently strictly no Scripting on Qt6!")
-ENDIF()
+ENDIF(${QT_VERSION_MAJOR} EQUAL "5")
 
 SET(STELLARIUM_GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None")
 
@@ -575,6 +575,8 @@ ENDIF()
 
 # Tell CMake to run moc when necessary:
 SET(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON) # ?
+set(CMAKE_AUTOUIC ON) # ?
 # As moc files are generated in the binary dir, tell CMake to always look for includes there:
 SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 

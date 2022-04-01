@@ -37,9 +37,6 @@
 
 #include "ui_obsListDialog.h"
 
-using namespace std;
-
-
 ObsListDialog::ObsListDialog ( QObject* parent ) : StelDialog ( "Observing list", parent )
 {
 	ui = new Ui_obsListDialogForm();
