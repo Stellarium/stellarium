@@ -243,7 +243,7 @@ SET(CMAKE_CXX_EXTENSIONS OFF)
 # NOTE: C_STANDARD 17 and 23 values added in CMake 3.21
 # https://gitlab.kitware.com/cmake/cmake/-/issues/22366
 # Ubuntu 18.04 have GCC 7.5 - so, C11 only
-SET(CMAKE_C_STANDARD 17)
+SET(CMAKE_C_STANDARD 11)
 SET(CMAKE_C_STANDARD_REQUIRED ON)
 SET(CMAKE_C_EXTENSIONS OFF)
 
