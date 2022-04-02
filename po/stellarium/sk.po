@@ -3245,6 +3245,10 @@ msgid ""
 "1600-2000. Formula for 2005-2050 is modified to match observed values and "
 "near-term predictions."
 msgstr ""
+"Toto riešenie je modifikácia F. Espenaka a J. Meeusa, založená na práci "
+"Morrison a Stephenson (2004) a polynomickom preložení cez tabulované dáta "
+"pre roky 1600-2000. Vzorec pre 2005-2050 je upravený, aby vyhovoval "
+"pozorovaným hodnotám a predpovediam blízkej budúcnosti."
 
 #: src/core/StelCore.cpp:2385
 msgid "Used by default."
@@ -3259,6 +3263,9 @@ msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
 msgstr ""
+"Toto riešenie od F. Espenaka a J. Meeusa, založené na práci Morrison a "
+"Stephenson (2004) a polynomickom preložení cez tabulované dáta pre roky "
+"1600-2000."
 
 #: src/core/StelCore.cpp:2391
 #, qt-format
@@ -4551,7 +4558,7 @@ msgstr "Espenak a Meeus (2006) bez dodatočného zrýchlenia mesiaca"
 
 #: src/gui/ConfigurationDialog.cpp:1875
 msgid "Modified Espenak & Meeus (2006, 2022)"
-msgstr ""
+msgstr "Modifikovaný Espenak a Meeus (2006, 2022)"
 
 #: src/gui/ConfigurationDialog.cpp:1876
 msgid "Reijs (2006)"
@@ -12651,10 +12658,12 @@ msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
 " setting events are defined with the upper limb of the celestial body."
 msgstr ""
+"Ukazuje čas východu, prechodu a západu nebeského telesa. Východy a západy sú"
+" definované podľa horného okraja nebeského telesa."
 
 #: src/ui_configurationDialog.h:1813 src/ui_astroCalcDialog.h:2026
 msgid "Risings, Transits, and Settings"
-msgstr ""
+msgstr "Východy, prechody a západy"
 
 #: src/ui_configurationDialog.h:1815
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
@@ -13631,6 +13640,7 @@ msgid ""
 "Table of approximate risings, transits, and settings for selected celestial "
 "object"
 msgstr ""
+"Tabuľka približných východov, prechodov a západov vybraného nebeského telesa"
 
 #: src/ui_astroCalcDialog.h:2151
 msgid ""
@@ -26243,7 +26253,7 @@ msgstr "Hinduistický astronomický slnečný"
 #: plugins/Calendars/src/ui_calendarsDialog.h:943
 msgctxt "calendar"
 msgid "Hindu Astro Lunisolar"
-msgstr ""
+msgstr "Hinduistický astronomický lunisolárny"
 
 #: plugins/Calendars/src/Calendars.cpp:356
 #: plugins/Calendars/src/ui_calendarsDialog.h:939
