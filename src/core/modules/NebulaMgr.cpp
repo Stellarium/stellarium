@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
  * Copyright (C) 2011 Alexander Wolf
@@ -356,7 +356,7 @@ void NebulaMgr::init()
 
 	setFlagUseTypeFilters(conf->value("astro/flag_use_type_filter", false).toBool());
 
-	Nebula::CatalogGroup catalogFilters = Nebula::CatalogGroup(Q_NULLPTR);
+	Nebula::CatalogGroup catalogFilters = Nebula::CatalogGroup(Nebula::CatNone);
 
 	conf->beginGroup("dso_catalog_filters");
 	if (conf->value("flag_show_ngc", true).toBool())
@@ -424,7 +424,7 @@ void NebulaMgr::init()
 	// NB: nebula set loaded inside setter of catalog filter
 	setCatalogFilters(catalogFilters);
 
-	Nebula::TypeGroup typeFilters = Nebula::TypeGroup(Q_NULLPTR);
+	Nebula::TypeGroup typeFilters = Nebula::TypeGroup(Nebula::TypeNone);
 
 	conf->beginGroup("dso_type_filters");
 	if (conf->value("flag_show_galaxies", true).toBool())
