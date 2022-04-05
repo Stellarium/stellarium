@@ -1718,12 +1718,9 @@ void StelMainView::doScreenshot(void)
 		QDir dir(shotDir.filePath());
 		QStringList existingFiles = dir.entryList(fileNameFilters);
 
-		if (existingFiles.empty())
-		{
-			// empty screenshot dir, just name screenshot prefix-001.format
-			shotPath = QFileInfo(shotDir.filePath() + "/" + screenShotPrefix + "001." + screenShotFormat);
-		}
-		else
+		// screenshot number - default to 1 for empty directory
+		int shotNum = 1;
+		if (!existingFiles.empty())
 		{
 			// already have screenshots, find largest number
 			QString lastFileName = existingFiles[existingFiles.size() - 1];
@@ -1731,20 +1728,20 @@ void StelMainView::doScreenshot(void)
 			// extract number from highest-numbered file name
 			QString lastShotNumString = lastFileName.replace(screenShotPrefix, "").replace("." + screenShotFormat, "");
 			// new screenshot number = start at highest number
-			int shotNum = lastShotNumString.toInt() + 1;
+			shotNum = lastShotNumString.toInt() + 1;
+		}
 
-			// build new screenshot path: "path/prefix-num.format"
-			// num is at least 3 characters
-			QString shotNumString = QString::number(shotNum).rightJustified(3, '0');
-			QString shotPathString = QString("%1/%2%3.%4").arg(shotDir.filePath(), screenShotPrefix, shotNumString, screenShotFormat);
+		// build new screenshot path: "path/prefix-num.format"
+		// num is at least 3 characters
+		QString shotNumString = QString::number(shotNum).rightJustified(3, '0');
+		QString shotPathString = QString("%1/%2%3.%4").arg(shotDir.filePath(), screenShotPrefix, shotNumString, screenShotFormat);
+		shotPath = QFileInfo(shotPathString);
+		// validate if new screenshot number is valid (non-existent)
+		while (shotPath.exists()) {
+			shotNum++;
+			shotNumString = QString::number(shotNum).rightJustified(3, '0');
+			shotPathString = QString("%1/%2%3.%4").arg(shotDir.filePath(), screenShotPrefix, shotNumString, screenShotFormat);
 			shotPath = QFileInfo(shotPathString);
-			// validate if new screenshot number is valid (non-existent)
-			while (shotPath.exists()) {
-				shotNum++;
-				shotNumString = QString::number(shotNum).rightJustified(3, '0');
-				shotPathString = QString("%1/%2%3.%4").arg(shotDir.filePath(), screenShotPrefix, shotNumString, screenShotFormat);
-				shotPath = QFileInfo(shotPathString);
-			}
 		}
 	}
 
