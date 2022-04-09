@@ -110,6 +110,7 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	: StelDialog("AstroCalc", parent)
 	, extraEphemerisDialog(Q_NULLPTR)
 	, customStepsDialog(Q_NULLPTR)
+	, altVsTimeChart(Q_NULLPTR)
 	//, wutModel(Q_NULLPTR)
 	//, proxyModel(Q_NULLPTR)
 	, currentTimeLine(Q_NULLPTR)
@@ -132,11 +133,11 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	core = StelApp::getInstance().getCore();
 	solarSystem = GETSTELMODULE(SolarSystem);
 	dsoMgr = GETSTELMODULE(NebulaMgr);
-	objectMgr = GETSTELMODULE(StelObjectMgr);
 	starMgr = GETSTELMODULE(StarMgr);
+	objectMgr = GETSTELMODULE(StelObjectMgr);
+	localeMgr = &StelApp::getInstance().getLocaleMgr();
 	mvMgr = GETSTELMODULE(StelMovementMgr);
 	propMgr = StelApp::getInstance().getStelPropertyManager();
-	localeMgr = &StelApp::getInstance().getLocaleMgr();
 	conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(ephemerisHeader.isEmpty());
 	Q_ASSERT(phenomenaHeader.isEmpty());
@@ -159,6 +160,8 @@ AstroCalcDialog::~AstroCalcDialog()
 	delete ui;
 	delete extraEphemerisDialog;
 	delete customStepsDialog;
+	if (altVsTimeChart)
+		delete altVsTimeChart;
 }
 
 void AstroCalcDialog::retranslate()
@@ -1728,7 +1731,10 @@ void AstroCalcDialog::drawHECGraph(QString selectedObject)
 	seriesSun->setColor(Qt::yellow);
 	seriesSun->setBorderColor(Qt::red);
 
+	QChart* ch=ui->hecPositionsGraph->chart();
+
 	ui->hecPositionsGraph->setChart(chart);
+	if (ch) delete ch;
 	ui->hecPositionsGraph->setBackgroundBrush(graphBackgroundGradient);
 }
 
@@ -3058,8 +3064,8 @@ void AstroCalcDialog::generateSolarEclipses()
 		initListSolarEclipse();
 
 		const double currentJD = core->getJD();   // save current JD
-		double startyear = ui->eclipseFromYearSpinBox->value();
-		double years = ui->eclipseYearsSpinBox->value();
+		int startyear = ui->eclipseFromYearSpinBox->value();
+		int years = ui->eclipseYearsSpinBox->value();
 		double startJD, stopJD;
 		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 1);
 		StelUtils::getJDFromDate(&stopJD, startyear+years, 12, 31, 23, 59, 59);
@@ -3186,7 +3192,7 @@ void AstroCalcDialog::generateSolarEclipses()
 					int nd = ln + 105;
 					int s = 136 + 38 * nd;
 					int nx = -61 * nd;
-					int nc = floor(nx / 358. + 0.5 - nd / (12. * 358 * 358));
+					int nc = qFloor(nx / 358. + 0.5 - nd / (12. * 358 * 358));
 					int saros = 1 + ((s + nc * 223 - 1) % 223);
 					if ((s + nc * 223 - 1) < 0) saros -= 223;
 					if (saros < -223) saros += 223;
@@ -3217,7 +3223,7 @@ void AstroCalcDialog::generateSolarEclipses()
 						eclipseLongitude = lngDeg;
 						double centralDuration = abs(duration);
 						int durationMinute = int(centralDuration);
-						int durationSecond = round((centralDuration - durationMinute) * 60.);
+						int durationSecond = qRound((centralDuration - durationMinute) * 60.);
 						if (durationSecond>59)
 						{
 							durationMinute += 1;
@@ -3327,8 +3333,8 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 		initListSolarEclipseLocal();
 
 		const double currentJD = core->getJD();   // save current JD
-		double startyear = ui->eclipseFromYearSpinBox->value();
-		double years = ui->eclipseYearsSpinBox->value();
+		int startyear = ui->eclipseFromYearSpinBox->value();
+		int years = ui->eclipseYearsSpinBox->value();
 		double startJD, stopJD;
 		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 1);
 		StelUtils::getJDFromDate(&stopJD, startyear+years, 12, 31, 23, 59, 59);
@@ -3423,7 +3429,6 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 						double JD3 = JD;
 						double JD4 = JD;
 						// First contact
-						dt = 1.;
 						iteration = 0;
 						eclipseData = localSolarEclipse(JD1,-1,false);
 						dt = eclipseData.dt;
@@ -3436,7 +3441,6 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 							altitudeFirstcontact = eclipseData.altitude;
 						}
 						// Last contact
-						dt = 1.;
 						iteration = 0;
 						eclipseData = localSolarEclipse(JD4,1,false);
 						dt = eclipseData.dt;
@@ -3506,7 +3510,6 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 
 							// 2nd contact - start of totality/annularity
 							iteration = 0;
-							dt = 1.;
 							JD2 = JD;
 							eclipseData = localSolarEclipse(JD2,-1,true);
 							dt = eclipseData.dt;
@@ -3520,7 +3523,6 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 							double C2altitude = eclipseData.altitude;
 							// 3rd contact - end of totality/annularity
 							iteration = 0;
-							dt = 1.;
 							JD3 = JD;
 							eclipseData = localSolarEclipse(JD3,1,true);
 							dt = eclipseData.dt;
@@ -3556,7 +3558,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 							{
 								double duration = abs(JD3-JD2)*1440.;
 								int durationMinute = int(duration);
-								int durationSecond = round((duration - durationMinute) * 60.);
+								int durationSecond = qRound((duration - durationMinute) * 60.);
 								if (durationSecond>59)
 								{
 									durationMinute += 1;
@@ -3639,8 +3641,8 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 	// Find the Sun
 	QString name = "Sun";
 	double JD = modelIndex.sibling(modelIndex.row(), SolarEclipseDate).data(Qt::UserRole).toDouble();
-	double lat = modelIndex.sibling(modelIndex.row(), SolarEclipseLatitude).data(Qt::UserRole).toDouble();
-	double lon = modelIndex.sibling(modelIndex.row(), SolarEclipseLongitude).data(Qt::UserRole).toDouble();
+	float lat = modelIndex.sibling(modelIndex.row(), SolarEclipseLatitude).data(Qt::UserRole).toFloat();
+	float lon = modelIndex.sibling(modelIndex.row(), SolarEclipseLongitude).data(Qt::UserRole).toFloat();
 
 	StelLocation loc;
 	loc.latitude = lat;
@@ -4238,18 +4240,29 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 	if (!selectedObjects.isEmpty())
 	{
 		// X axis - time; Y axis - altitude
-		QList<double> aX, aY, sX, sY, sYn, sYa, sYc, mX, mY;
-		QVector<double> xs, ys, ysn, ysa, ysc, xm, ym;
+		QList<double>   aX, aY, // altitude of object
+				sX, sY, // Sun
+				sYn, sYa, sYc, // Twilight (naut/astro/civil)
+				mX, mY; // Moon
 
 		StelObjectP selectedObject = selectedObjects[0];
 		ui->altVsTimeTitle->setText(selectedObject->getNameI18n());
+
+		if (altVsTimeChart)
+		{
+			qDebug() << "deleting old chart";
+			delete altVsTimeChart;
+		}
+		qDebug() << "creating chart";
+		altVsTimeChart = new AstroCalcAltVsTimeChart();
+		altVsTimeChart->setTitle(selectedObject->getNameI18n());
+		qDebug() << "Chart has title:" << altVsTimeChart->title();
 		const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
 
 		const double currentJD = core->getJD();
 		const double shift = core->getUTCOffset(currentJD) / 24.0;
 		const double noon = static_cast<int>(currentJD + shift);
-		double az, alt, deg, ltime, JD;
-		bool sign;
+		double az, alt, ltime, JD;
 
 		double xMaxY = -100.;
 		int step = 180;
@@ -4286,15 +4299,17 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 				core->update(0.0);
 		
 			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
-			StelUtils::radToDecDeg(alt, sign, deg);
-			if (!sign) deg *= -1;
+			double deg=alt*M_180_PI;
 			aY.append(deg);
 			if (deg > xMaxY)
 			{
 				xMaxY = deg;
 				transitX = ltime;
 			}
+			// prepare QChart use:
+			altVsTimeChart->append(AstroCalcAltVsTimeChart::AltVsTime, ltime, deg);
 		}
+		altVsTimeChart->show(AstroCalcAltVsTimeChart::AltVsTime);
 
 		if (plotAltVsTimeSun)
 		{
@@ -4307,12 +4322,17 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 				core->setJD(JD);				 
 				core->update(0.0);
 				StelUtils::rectToSphe(&az, &alt, sun->getAltAzPosAuto(core));
-				StelUtils::radToDecDeg(alt, sign, deg);
-				if (!sign) deg *= -1;
+				double deg=alt*M_180_PI;
 				sY.append(deg);
 				sYc.append(deg + 6);
 				sYn.append(deg + 12);
 				sYa.append(deg + 18);
+
+				// QChart:
+				altVsTimeChart->append(AstroCalcAltVsTimeChart::SunElevation,     ltime, deg);
+				altVsTimeChart->append(AstroCalcAltVsTimeChart::CivilTwilight,    ltime, deg+6);
+				altVsTimeChart->append(AstroCalcAltVsTimeChart::NauticalTwilight, ltime, deg+12);
+				altVsTimeChart->append(AstroCalcAltVsTimeChart::AstroTwilight,    ltime, deg+18);
 			}
 		}
 
@@ -4327,26 +4347,21 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 				core->setJD(JD);
 				core->update(0.0);
 				StelUtils::rectToSphe(&az, &alt, moon->getAltAzPosAuto(core));
-				StelUtils::radToDecDeg(alt, sign, deg);
-				if (!sign) deg *= -1;
+				double deg=alt*M_180_PI;
 				mY.append(deg);
+				// QChart use:
+				altVsTimeChart->append(AstroCalcAltVsTimeChart::Moon, ltime, deg);
 			}
 		}
 
 		core->setJD(currentJD);
 
-		QVector<double> x = aX.toVector(), y = aY.toVector();
 		minY = *std::min_element(aY.begin(), aY.end()) - 2.0;
 		maxY = *std::max_element(aY.begin(), aY.end()) + 2.0;
 
 		// additional data: Sun + Twilight
 		if (plotAltVsTimeSun)
 		{
-			xs = sX.toVector();
-			ys = sY.toVector();
-			ysc = sYc.toVector();
-			ysn = sYn.toVector();
-			ysa = sYa.toVector();
 			double minYs = *std::min_element(sY.begin(), sY.end());
 			double maxYs = *std::max_element(sY.begin(), sY.end());
 
@@ -4357,8 +4372,6 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		// additional data: Moon
 		if (plotAltVsTimeMoon && onEarth)
 		{
-			xm = mX.toVector();
-			ym = mY.toVector();
 			double minYm = *std::min_element(mY.begin(), mY.end());
 			double maxYm = *std::max_element(mY.begin(), mY.end());
 
@@ -4371,6 +4384,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 
 		prepareAxesAndGraph();
 		drawCurrentTimeDiagram();
+
 
 		QString name = selectedObject->getNameI18n();
 		if (name.isEmpty())
@@ -4389,19 +4403,43 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 
 		drawTransitTimeDiagram();
 
-		ui->altVsTimePlot->graph(0)->setData(x, y);
+		ui->altVsTimePlot->graph(0)->setData(aX.toVector(), aY.toVector());
 		ui->altVsTimePlot->graph(0)->setName(name);
+		// QChart use:
+
 		if (plotAltVsTimeSun)
 		{
-			ui->altVsTimePlot->graph(3)->setData(xs, ys);
-			ui->altVsTimePlot->graph(4)->setData(xs, ysc);
-			ui->altVsTimePlot->graph(5)->setData(xs, ysn);
-			ui->altVsTimePlot->graph(6)->setData(xs, ysa);
+			QVector<double> xs = sX.toVector();
+			ui->altVsTimePlot->graph(3)->setData(xs, sY.toVector());
+			ui->altVsTimePlot->graph(4)->setData(xs, sYc.toVector());
+			ui->altVsTimePlot->graph(5)->setData(xs, sYn.toVector());
+			ui->altVsTimePlot->graph(6)->setData(xs, sYa.toVector());
+			qDebug() << "activate chart series...";
+			altVsTimeChart->show(AstroCalcAltVsTimeChart::SunElevation);
+			altVsTimeChart->show(AstroCalcAltVsTimeChart::CivilTwilight);
+			altVsTimeChart->show(AstroCalcAltVsTimeChart::NauticalTwilight);
+			altVsTimeChart->show(AstroCalcAltVsTimeChart::AstroTwilight);
+
 		}
 		if (plotAltVsTimeMoon && onEarth)
+		{
+			QVector<double> xm = mX.toVector();
+			QVector<double> ym = mY.toVector();
 			ui->altVsTimePlot->graph(7)->setData(xm, ym);
+			altVsTimeChart->show(AstroCalcAltVsTimeChart::Moon);
+		}
 
 		ui->altVsTimePlot->replot();
+		qDebug() << "create chart axes...";
+		//altVsTimeChart->createDefaultAxes(); // or
+		altVsTimeChart->setupAxes();
+		qDebug() << "set chart ...";
+		QChart *oldChart=ui->altVsTimeChartView->chart();
+		if (oldChart) oldChart->deleteLater();
+		ui->altVsTimeChartView->setChart(altVsTimeChart);
+		ui->altVsTimeChartView->setRenderHint(QPainter::Antialiasing);
+		qDebug() << "Chart done.";
+
 	}
 
 	// clean up the data when selection is removed
@@ -4415,6 +4453,17 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		ui->altVsTimePlot->graph(6)->data()->clear(); // additional data: Astronomical Twilight
 		ui->altVsTimePlot->graph(7)->data()->clear(); // additional data: Moon
 		ui->altVsTimePlot->replot();
+
+		if (altVsTimeChart)
+		{
+			altVsTimeChart->clear(AstroCalcAltVsTimeChart::AltVsTime);
+			altVsTimeChart->clear(AstroCalcAltVsTimeChart::TransitTime);
+			altVsTimeChart->clear(AstroCalcAltVsTimeChart::SunElevation);
+			altVsTimeChart->clear(AstroCalcAltVsTimeChart::CivilTwilight);
+			altVsTimeChart->clear(AstroCalcAltVsTimeChart::NauticalTwilight);
+			altVsTimeChart->clear(AstroCalcAltVsTimeChart::AstroTwilight);
+			altVsTimeChart->clear(AstroCalcAltVsTimeChart::Moon);
+		}
 	}
 }
 
@@ -4431,16 +4480,21 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 	if (now > 129600) now -= 86400;
 	if (now < 43200) now += 86400;
 
-	QList<double> ax, ay;
-	ax.append(now);
-	ax.append(now);
-	ay.append(-180.);
-	ay.append(360.);
-	QVector<double> x = ax.toVector(), y = ay.toVector();
+	QVector<double> x = {now, now};
+	QVector<double> y = {-180., 360.};
 	if (plotAltVsTime)
 	{
 		ui->altVsTimePlot->graph(1)->setData(x, y);
 		ui->altVsTimePlot->replot();
+		qDebug() << "Chart: append currentTime";
+		if (altVsTimeChart){
+			altVsTimeChart->append(AstroCalcAltVsTimeChart::CurrentTime, now, -180.);
+			altVsTimeChart->append(AstroCalcAltVsTimeChart::CurrentTime, now,  360.);
+			altVsTimeChart->show(AstroCalcAltVsTimeChart::CurrentTime);
+			qDebug() << "Chart: append currentTime...done";
+		}
+		else
+			qDebug() << "no chart to add CT line!";
 	}
 	if (plotAziVsTime)
 	{
@@ -4466,14 +4520,22 @@ void AstroCalcDialog::drawTransitTimeDiagram()
 	if (!plotAltVsTime)
 		return;
 
-	QList<double> ax, ay;
-	ax.append(transitX);
-	ax.append(transitX);
-	ay.append(minY);
-	ay.append(maxY);
-	QVector<double> x = ax.toVector(), y = ay.toVector();	
+	QVector<double> x = {transitX, transitX};
+	QVector<double> y = {minY, maxY};
 	ui->altVsTimePlot->graph(2)->setData(x, y);
 	ui->altVsTimePlot->replot();
+
+	// QChart use:
+	qDebug() << "Chart: append transitTime";
+	if (altVsTimeChart){
+		altVsTimeChart->append(AstroCalcAltVsTimeChart::TransitTime, transitX, minY);
+		altVsTimeChart->append(AstroCalcAltVsTimeChart::TransitTime, transitX, maxY);
+		altVsTimeChart->show(AstroCalcAltVsTimeChart::TransitTime);
+		qDebug() << "Chart: append transitTime...done";
+	}
+	else
+		qDebug() << "no chart to add TT line!";
+
 }
 
 void AstroCalcDialog::prepareAxesAndGraph()
@@ -4511,10 +4573,7 @@ void AstroCalcDialog::prepareAxesAndGraph()
 	ui->altVsTimePlot->graph(3)->setLineStyle(QCPGraph::lsLine);
 	ui->altVsTimePlot->graph(3)->setName("[Sun]");
 	// additional data: Civil Twilight
-	QPen pen;
-	pen.setStyle(Qt::DotLine);
-	pen.setWidth(1);
-	pen.setColor(Qt::blue);
+	QPen pen(Qt::blue, 1, Qt::DotLine);
 	ui->altVsTimePlot->addGraph();
 	ui->altVsTimePlot->graph(4)->setPen(pen);
 	ui->altVsTimePlot->graph(4)->setName("[Civil Twilight]");
