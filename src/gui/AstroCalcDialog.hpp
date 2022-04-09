@@ -29,6 +29,7 @@
 #include <QTimer>
 #include <QRegularExpression>
 
+#include "AstroCalcAltVsTimeChart.hpp"
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
 #include "Planet.hpp"
@@ -405,6 +406,7 @@ private:
 	class StelPropertyMgr* propMgr;
 	//QStringListModel* wutModel;
 	//QSortFilterProxyModel *proxyModel;
+	AstroCalcAltVsTimeChart *altVsTimeChart;
 	QSettings* conf;
 	QLinearGradient graphBackgroundGradient;
 	QTimer *currentTimeLine;
@@ -652,8 +654,8 @@ private:
 
 		if (column == AstroCalcDialog::CColumnName)
 		{
-			QRegularExpression dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
-			QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
+			static const QRegularExpression dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
+			static const QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
 			QRegularExpressionMatch dsoMatch=dso.match(text(column));
 			QRegularExpressionMatch mpMatch=mp.match(text(column));
 			QRegularExpressionMatch dsoOtherMatch=dso.match(other.text(column));
@@ -796,7 +798,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const
+	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -825,7 +827,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const
+	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -854,7 +856,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const
+	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -918,8 +920,8 @@ private:
 
 		if (column == AstroCalcDialog::WUTObjectName)
 		{
-			QRegularExpression dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
-			QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
+			static const QRegularExpression dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
+			static const QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
 			QRegularExpressionMatch dsoMatch=dso.match(text(column));
 			QRegularExpressionMatch mpMatch=mp.match(text(column));
 			QRegularExpressionMatch dsoOtherMatch=dso.match(other.text(column));
