@@ -55,7 +55,7 @@ TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QStr
 	// Example params:
 	// 1000:test:1234@localhost:8889/tel
 
-	QRegularExpression paramRx("^(\\d+):(.*)$");
+	static const QRegularExpression paramRx("^(\\d+):(.*)$");
 	QRegularExpressionMatch paramMatch=paramRx.match(params);
 	QString url;
 	if (paramMatch.hasMatch())
@@ -278,8 +278,8 @@ void TelescopeClientJsonRts2::timerEvent(QTimerEvent *event)
 
 QString TelescopeClientJsonRts2::getTelescopeInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
-	Q_UNUSED(core);
-	Q_UNUSED(flags);
+	Q_UNUSED(core)
+	Q_UNUSED(flags)
 	QString str;
 	QTextStream oss(&str);
 	

@@ -140,7 +140,8 @@ public:
 		ReingoldDershowitz,                 //!< Reingold & Dershowitz (2002, 2007) algorithm for DeltaT
 		MorrisonStephenson2004,	//!< Morrison & Stephenson (2004, 2005) algorithm for DeltaT
 		Reijs,					//!< Reijs (2006) algorithm for DeltaT
-		EspenakMeeus,				//!< Espenak & Meeus (2006) algorithm for DeltaT (Recommended, default)
+		EspenakMeeus,				//!< Espenak & Meeus (2006) algorithm for DeltaT
+		EspenakMeeusModified,				//!< Espenak & Meeus (2006) algorithm with modified formulae for DeltaT (Recommended, default)
 		EspenakMeeusZeroMoonAccel,	//!< Espenak & Meeus (2006) algorithm for DeltaT (but without additional Lunar acceleration. FOR TESTING ONLY, NONPUBLIC)
 		Banjevic,					//!< Banjevic (2006) algorithm for DeltaT
 		IslamSadiqQureshi,			//!< Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)

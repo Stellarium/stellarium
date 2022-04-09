@@ -129,7 +129,7 @@ QVector<int> Calendar::intersectWithRange(QVector<int>cand, QVector<int>range)
 // Crucial: Region MUST be full name - we cannot look up region codes in the tests!
 //                                       Name        country   region               long         lat           alt    popK  Timezone          Bortle Role
 const StelLocation Calendar::urbana   ("Urbana",    "Il",     "Northern America", -88.2f,        40.1f,        225,   250, "America/Chicago", 7, 'N');
-const StelLocation Calendar::greenwich("Greenwich", "London", "Northern Europe",    0.f,         51.4777815f,   46.9, 100, "Europe/London",   7, 'O');
+const StelLocation Calendar::greenwich("Greenwich", "London", "Northern Europe",    0.f,         51.4777815f,   47, 100, "Europe/London",   7, 'O');
 const StelLocation Calendar::mecca    ("MecKa",     "Mecca",  "Western Asia",      39.82333333f, 21.42333333f, 298,   200, "Asia/Riyadh", 9, 'R');
 // Keep here, or use only in Persian?
 const StelLocation Calendar::tehran   ( "Tehran",   "ir",     "Southern Asia",     51.42f,       35.68f,      1100,  7153, "Asia/Tehran", 9, 'C');

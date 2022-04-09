@@ -251,6 +251,7 @@ void Calendars::init()
 	}
 }
 
+#ifdef ENABLE_SCRIPTING
 // Add calendar as scriptable object! Some scripting functions won't work though, as they use object types unknown to the scripting engine.
 void Calendars::makeCalendarsScriptable(StelScriptMgr *ssm)
 {
@@ -260,6 +261,7 @@ void Calendars::makeCalendarsScriptable(StelScriptMgr *ssm)
 		ssm->addObject(cal);
 	}
 }
+#endif
 
 void Calendars::loadSettings()
 {
@@ -351,8 +353,8 @@ void Calendars::draw(StelCore* core)
 	if (flagShowNewHinduLunar)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("New Hindu Lunisolar",   "calendar"), getCal("NewHinduLunar")->getFormattedDateString());
 	if (flagShowNewHinduLunar)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("New Hindu Panchang",    "calendar"),
 												    static_cast<NewHinduLunarCalendar*>(getCal("NewHinduLunar"))->getFormattedPanchangString());
-	if (flagShowAstroHinduSolar)    oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Astro Hindu Solar",     "calendar"), getCal("AstroHinduSolar")->getFormattedDateString());
-	if (flagShowAstroHinduLunar)    oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Astro Hindu Lunisolar", "calendar"), getCal("AstroHinduLunar")->getFormattedDateString());
+	if (flagShowAstroHinduSolar)    oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Hindu Astro Solar",     "calendar"), getCal("AstroHinduSolar")->getFormattedDateString());
+	if (flagShowAstroHinduLunar)    oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Hindu Astro Lunisolar", "calendar"), getCal("AstroHinduLunar")->getFormattedDateString());
 	if (flagShowTibetan)            oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Tibetan",               "calendar"), getCal("Tibetan")->getFormattedDateString());
 	if (flagShowMayaLongCount)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Long Count",       "calendar"), getCal("MayaLongCount")->getFormattedDateString());
 	if (flagShowMayaHaab)           oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Haab",             "calendar"), getCal("MayaHaab")->getFormattedDateString());

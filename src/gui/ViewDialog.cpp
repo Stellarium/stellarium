@@ -469,7 +469,7 @@ void ViewDialog::createDialogContent()
 	connectColorButton(ui->colorFOVCenterMarker,		"SpecialMarkersMgr.fovCenterMarkerColor",	"color/fov_center_marker_color");
 	connectColorButton(ui->colorFOVCircularMarker,		"SpecialMarkersMgr.fovCircularMarkerColor",	"color/fov_circular_marker_color");
 	connectColorButton(ui->colorFOVRectangularMarker,	"SpecialMarkersMgr.fovRectangularMarkerColor",	"color/fov_rectangular_marker_color");
-	connectColorButton(ui->colorCardinalPoints,		"LandscapeMgr.cardinalsPointsColor",		"color/cardinal_color");
+	connectColorButton(ui->colorCardinalPoints,		"LandscapeMgr.cardinalPointsColor",		"color/cardinal_color");
 	connectColorButton(ui->colorCompassMarks,		"SpecialMarkersMgr.compassMarksColor",		"color/compass_marks_color");
 
 	connect(ui->showCardinalPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
@@ -624,13 +624,13 @@ void ViewDialog::updateHips()
 		if (props.contains("obs_copyright") && props.contains("obs_copyright_url"))
 		{
 			html += QString("<p>Copyright <a href='%2'>%1</a></p>\n")
-					.arg(props["obs_copyright"].toString()).arg(props["obs_copyright_url"].toString());
+					.arg(props["obs_copyright"].toString(), props["obs_copyright_url"].toString());
 		}
 		html += QString("<p>%1</p>\n").arg(props["obs_description"].toString());
 		html += "<h2>" + q_("properties") + "</h2>\n<ul>\n";
 		for (auto iter = props.constBegin(); iter != props.constEnd(); iter++)
 		{
-			html += QString("<li><b>%1</b> %2</li>\n").arg(iter.key()).arg(iter.value().toString());
+			html += QString("<li><b>%1</b> %2</li>\n").arg(iter.key(), iter.value().toString());
 		}
 		html += "</ul>\n";
 		if (gui)
@@ -707,15 +707,15 @@ void ViewDialog::updateTabBarListWidgetWidth()
 void ViewDialog::setSelectedCardinalCheckBoxes()
 {
 	StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
-	bool cardinals = propMgr->getProperty("LandscapeMgr.cardinalsPointsDisplayed")->getValue().toBool();
-	bool ordinals = propMgr->getProperty("LandscapeMgr.ordinalsPointsDisplayed")->getValue().toBool();
+	bool cardinals = propMgr->getProperty("LandscapeMgr.cardinalPointsDisplayed")->getValue().toBool();
+	bool ordinals = propMgr->getProperty("LandscapeMgr.ordinalPointsDisplayed")->getValue().toBool();
 	ui->showOrdinal8WRPointsCheckBox->setEnabled(cardinals);
 	ui->showOrdinal16WRPointsCheckBox->setEnabled(cardinals && ordinals);
 }
 
 void ViewDialog::setSelectedCatalogsFromCheckBoxes()
 {
-	Nebula::CatalogGroup flags(Q_NULLPTR);
+	Nebula::CatalogGroup flags(Nebula::CatNone);
 	if (ui->checkBoxNGC->isChecked())
 		flags |= Nebula::CatNGC;
 	if (ui->checkBoxIC->isChecked())
@@ -782,7 +782,7 @@ void ViewDialog::setSelectedCatalogsFromCheckBoxes()
 
 void ViewDialog::setSelectedTypesFromCheckBoxes()
 {
-	Nebula::TypeGroup flags(Q_NULLPTR);
+	Nebula::TypeGroup flags(Nebula::TypeNone);
 	if (ui->checkBoxGalaxiesType->isChecked())
 		flags |= Nebula::TypeGalaxies;
 	if (ui->checkBoxActiveGalaxiesType->isChecked())

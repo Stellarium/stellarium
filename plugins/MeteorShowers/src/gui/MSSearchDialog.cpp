@@ -142,7 +142,7 @@ void MSSearchDialog::searchEvents()
 		treeItem->setData(ColumnCode, Qt::UserRole, r.code);
 		treeItem->setData(ColumnName, Qt::UserRole, r.name);
 		treeItem->setData(ColumnDataType, Qt::UserRole, r.type);
-		treeItem->setData(ColumnPeak, Qt::UserRole, r.peak.dayOfYear());
+		treeItem->setData(ColumnPeak, Qt::UserRole, r.peak.toJulianDay());
 		treeItem->setData(ColumnZHR, Qt::UserRole, r.zhrMax);
 	}
 
@@ -163,9 +163,9 @@ void MSSearchDialog::selectEvent(const QModelIndex &modelIndex)
 		m_mgr->setEnablePlugin(true);
 
 	// Change date
-	StelCore *core = StelApp::getInstance().getCore();
-	QDate peak = modelIndex.sibling(modelIndex.row(), ColumnPeak).data(Qt::UserRole).toDate();
-	core->setJD(peak.toJulianDay());
+	StelCore *core = StelApp::getInstance().getCore();	
+	double JD = modelIndex.sibling(modelIndex.row(), ColumnPeak).data(Qt::UserRole).toDouble();
+	core->setJD(JD - core->getUTCOffset(JD)/24.);
 
 	// Find the object
 	QString nameI18n = modelIndex.sibling(modelIndex.row(), ColumnName).data().toString();

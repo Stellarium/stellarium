@@ -51,7 +51,7 @@ TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& p
 	: TelescopeClient(name)
 	, mEquinox(eq)
 {
-	QRegularExpression paramRx("^([^:]*):([^:]*)$");
+	static const QRegularExpression paramRx("^([^:]*):([^:]*)$");
 	QRegularExpressionMatch paramMatch=paramRx.match(params);
 	if (paramMatch.hasMatch())
 	{
@@ -153,7 +153,7 @@ ASCOMDevice::ASCOMCoordinates TelescopeClientASCOM::j2000PosToAscomCoord(const V
 
 void TelescopeClientASCOM::telescopeGoto(const Vec3d& j2000Pos, StelObjectP selectObject)
 {
-	Q_UNUSED(selectObject);
+	Q_UNUSED(selectObject)
 
 	if (!isConnected()) return;
 
@@ -170,7 +170,7 @@ void TelescopeClientASCOM::telescopeGoto(const Vec3d& j2000Pos, StelObjectP sele
 
 void TelescopeClientASCOM::telescopeSync(const Vec3d& j2000Pos, StelObjectP selectObject) 
 {
-	Q_UNUSED(selectObject);
+	Q_UNUSED(selectObject)
 	if (!isConnected()) return;
 
 	ASCOMDevice::ASCOMCoordinates coords = j2000PosToAscomCoord(j2000Pos);
@@ -196,6 +196,6 @@ bool TelescopeClientASCOM::hasKnownPosition() const
 
 void TelescopeClientASCOM::move(double angle, double speed)
 {
-	Q_UNUSED(angle);
-	Q_UNUSED(speed);
+	Q_UNUSED(angle)
+	Q_UNUSED(speed)
 }

@@ -74,7 +74,8 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 		
 	designation  = map.value("designation").toString();
-	starProperName = map.value("starProperName").toString();	
+	starProperName = map.value("starProperName").toString();
+	starAltNames = map.value("starAltNames").toString();
 	RA = StelUtils::getDecAngle(map.value("RA").toString());
 	DE = StelUtils::getDecAngle(map.value("DE").toString());
 	StelUtils::spheToRect(RA, DE, XYZ);	
@@ -180,6 +181,7 @@ QVariantMap Exoplanet::getMap(void) const
 	QVariantMap map;
 	map["designation"] = designation;
 	if (!starProperName.isEmpty()) map["starProperName"] = starProperName;
+	if (!starAltNames.isEmpty()) map["starAltNames"] = starAltNames;
 	map["RA"] = RA;
 	map["DE"] = DE;
 	map["distance"] = distance;
@@ -247,6 +249,22 @@ QString Exoplanet::getDesignation(void) const
 	return designation;
 }
 
+QStringList Exoplanet::getDesignations(void) const
+{
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	QStringList designations;
+	designations << trans.qtranslate(designation);
+	if (!starAltNames.isEmpty())
+		designations << starAltNames.split(", ");
+	designations.removeDuplicates();
+	if (!starProperName.isEmpty())
+	{
+		designations.removeAll(getNameI18n());
+		designations.removeAll(getEnglishName());
+	}
+	return designations;
+}
+
 QStringList Exoplanet::getExoplanetsEnglishNames() const
 {
 	return englishNames;
@@ -270,9 +288,37 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 
 	if (flags&Name)
 	{
-		QString systemName = getNameI18n();
+		QString altNames, systemName = getNameI18n();
+		QStringList designations = getDesignations();
+		int asize = designations.size();
+		if (asize>5) // Special case for many AKA (max - 6 items per line)
+		{
+			bool firstLine = true;
+			for(int i=0; i<asize; i++)
+			{
+				altNames.append(trans.qtranslate(designations.at(i).trimmed()));
+				if (i<asize-1)
+					altNames.append(" - ");
+
+				if (i>0)
+				{
+					if ((i % 4)==0 && firstLine)
+					{
+						altNames.append("<br />");
+						firstLine = false;
+					}
+					if (((i-4) % 6)==0 && !firstLine && i>5 && i<(asize-1))
+						altNames.append("<br />");
+				}
+			}
+		}
+		else
+			altNames = designations.join(" - ");
+
 		if (!starProperName.isEmpty())
-			systemName.append(QString(" (%1)").arg(designation));
+			systemName.append(QString(" (%1)").arg(altNames));
+		else
+			systemName = altNames;
 
 		oss << "<h2>" << systemName << "</h2>";
 	}
@@ -509,6 +555,7 @@ QVariantMap Exoplanet::getInfoMap(const StelCore *core) const
 
 	// Tentatively add a few more strings. Details are left to the plugin author.
 	if (!starProperName.isEmpty()) map["starProperName"] = starProperName;
+	if (!starAltNames.isEmpty()) map["starAltNames"] = starAltNames;
 	map["distance"] = distance;
 	map["stype"] = stype;
 	map["smass"] = smass;
@@ -562,7 +609,7 @@ bool Exoplanet::isDiscovered(const StelCore *core)
 	// This hack need for correct display of discovery mode of exoplanets.
 	StelUtils::getDateFromJulianDay(core->getJD()+0.5, &year, &month, &day);
 	discovery.clear();
-	for (const auto& p : exoplanets)
+	for (const auto& p : qAsConst(exoplanets))
 	{
 		if (p.discovered>0)
 		{

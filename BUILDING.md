@@ -339,6 +339,7 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 | ENABLE_SCRIPTING              | bool   | ON      | Enable the scripting feature
 | ENABLE_RELEASE_BUILD          | bool   | OFF     | This option flags the build as an official release
 | ENABLE_TESTING                | bool   | OFF     | Enable unit tests
+| ENABLE_QTWEBENGINE            | bool   | ON      | Enable QtWebEngine module support if it installed
 | USE_PLUGIN_ANGLEMEASURE       | bool   | ON      | Enable building the Angle Measure plugin
 | USE_PLUGIN_COMPASSMARKS       | bool   | ON      | Enable building the Compass Marks plugin
 | USE_PLUGIN_SATELLITES         | bool   | ON      | Enable building the Satellites plugin

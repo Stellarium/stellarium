@@ -33,7 +33,6 @@ class SyncRemotePeer;
 class SyncClient : public QObject
 {
 	Q_OBJECT
-	Q_FLAGS(SyncOptions)
 public:
 	//! Bitflag-enum which determines the message types the client instance reacts to,
 	//! and other boolean options
@@ -50,6 +49,7 @@ public:
 		ALL		= 0xFFFF
 	};
 	Q_DECLARE_FLAGS(SyncOptions, SyncOption)
+	Q_FLAG(SyncOptions)
 
 	SyncClient(SyncOptions options, const QStringList& excludeProperties, QObject* parent = Q_NULLPTR);
 	virtual ~SyncClient() Q_DECL_OVERRIDE;

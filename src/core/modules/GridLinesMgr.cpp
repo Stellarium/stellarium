@@ -57,14 +57,14 @@ public:
 	void setFadeDuration(float duration) {fader.setDuration(static_cast<int>(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
 	bool isDisplayed() const {return fader;}
-	void setLineThickness(const int thickness) {lineThickness = thickness;}
-	int getLineThickness() const {return lineThickness;}
+	void setLineThickness(const float thickness) {lineThickness = thickness;}
+	float getLineThickness() const {return lineThickness;}
 private:
 	Vec3f color;
 	StelCore::FrameType frameType;
 	QFont font;
 	LinearFader fader;
-	int lineThickness;
+	float lineThickness;
 };
 
 //! @class SkyPoint
@@ -161,10 +161,10 @@ public:
 	void setLabeled(const bool displayed){showLabel = displayed;}
 	bool isLabeled() const {return showLabel;}
 	void setFontSize(int newSize);
-	void setLineThickness(const int thickness) {lineThickness = thickness;}
-	int getLineThickness() const {return lineThickness;}
-	void setPartThickness(const int thickness) {partThickness = thickness;}
-	int getPartThickness() const {return partThickness;}
+	void setLineThickness(const float thickness) {lineThickness = thickness;}
+	float getLineThickness() const {return lineThickness;}
+	void setPartThickness(const float thickness) {partThickness = thickness;}
+	float getPartThickness() const {return partThickness;}
 	//! Re-translates the label and sets the frameType. Must be called in the constructor!
 	void updateLabel();
 	static void setSolarSystem(SolarSystem* ss);
@@ -176,8 +176,8 @@ private:
 	LinearFader fader;
 	QFont font;
 	QString label;
-	int lineThickness;
-	int partThickness;
+	float lineThickness;
+	float partThickness;
 	bool showPartitions;
 	bool showLabel;
 	static QMap<int, double> precessionPartitions;
@@ -271,12 +271,12 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 					lon = 0.;
 
 				const double delta = raAngle<M_PI ? M_PI : -M_PI;				
-				if (std::fabs(lon-raAngle) < 0.01 || (lon==0. && raAngle!=M_PI))					
+				if (std::fabs(lon-raAngle) < 0.01 || (lon==0. && !qFuzzyCompare(raAngle, M_PI)))
 					textAngle = raAngle;
 				else
 					textAngle = raAngle+delta;
 
-				if (raAngle==2*M_PI && delta==-M_PI)
+				if (qFuzzyCompare(raAngle, 2*M_PI) && qFuzzyCompare(delta, -M_PI))
 					textAngle = 0;
 
 				if (useOldAzimuth)
@@ -310,7 +310,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				else
 					textAngle = raAngle+delta;
 
-				if (raAngle==2*M_PI && delta==-M_PI)
+				if (qFuzzyCompare(raAngle, 2*M_PI) && qFuzzyCompare(delta, -M_PI))
 					textAngle = 0;
 
 				if (withDecimalDegree)
@@ -361,7 +361,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	if (angleDeg>90.f || angleDeg<-90.f)
 	{
 		angleDeg+=180.f;
-		xshift=-(d->sPainter->getFontMetrics().boundingRect(text).width() + xshift*ppx);
+		xshift=-(static_cast<float>(d->sPainter->getFontMetrics().boundingRect(text).width()) + xshift*ppx);
 	}
 
 	d->sPainter->drawText(static_cast<float>(screenPos[0]), static_cast<float>(screenPos[1]), text, angleDeg, xshift*ppx, yshift*ppx);
@@ -421,7 +421,7 @@ void SkyGrid::draw(const StelCore* core) const
 	// Initialize a painter and set OpenGL state
 	StelPainter sPainter(prj);
 	sPainter.setBlending(true);
-	if (lineThickness>1)
+	if (lineThickness>1.f)
 		sPainter.setLineWidth(lineThickness); // set line thickness
 	sPainter.setLineSmooth(true);
 
@@ -839,7 +839,7 @@ void SkyLine::draw(StelCore *core) const
 			// Special case for Umbra and Penumbra labels
 			Vec3d point(dist, 0.0, 0.0);
 			rot.transfo(point);
-			const float shift=sPainter.getProjector()->getPixelPerRadAtCenter()*(line_type==EARTH_UMBRA ? radii.first[0] : radii.second[0])*0.0000112f/M_PIf;
+			const float shift=static_cast<float>(sPainter.getProjector()->getPixelPerRadAtCenter()*(line_type==EARTH_UMBRA ? radii.first[0] : radii.second[0]))*0.0000112f/M_PIf;
 			sPainter.drawText(pos+point, (line_type==EARTH_UMBRA ? q_("Umbra") : q_("Penumbra")), 0.f, shift, shift, false);
 			return;
 		}
@@ -1070,7 +1070,7 @@ void SkyLine::draw(StelCore *core) const
 		const float lineThickness=sPainter.getLineWidth();
 		sPainter.setLineWidth(partThickness);
 
-		// TODO: Before drawing the lines themselves (and returning), draw the short partition lines
+		// Before drawing the lines themselves (and returning), draw the short partition lines
 		// Define short lines from "equator" a bit "southwards"
 		Vec3d part0 = fpt;
 		Vec3d partAxis(0,1,0);
@@ -1211,7 +1211,8 @@ void SkyLine::draw(StelCore *core) const
 						double dx=screenPosTgtL[0]-screenPosTgt[0];
 						double dy=screenPosTgtL[1]-screenPosTgt[1];
 						float textAngle=static_cast<float>(atan2(dy,dx));
-						sPainter.drawText(part30l, label, textAngle*M_180_PIf + extraTextAngle, shiftx, shifty, false);
+						// Gravity labels look outright terrible here! Disable them.
+						sPainter.drawText(part30l, label, textAngle*M_180_PIf + extraTextAngle, shiftx, shifty, true);
 					}
 				}
 
@@ -1791,8 +1792,8 @@ void GridLinesMgr::init()
 	setFlagApexPoints(conf->value("viewing/flag_apex_points").toBool());
 
 	// Set the line thickness for grids and lines
-	setLineThickness(conf->value("viewing/line_thickness", 1).toInt());
-	setPartThickness(conf->value("viewing/part_thickness", 1).toInt());
+	setLineThickness(conf->value("viewing/line_thickness", 1.f).toFloat());
+	setPartThickness(conf->value("viewing/part_thickness", 1.f).toFloat());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color", "0.5,0.5,0.7").toString();
@@ -3575,12 +3576,12 @@ void GridLinesMgr::setColorApexPoints(const Vec3f& newColor)
 	}
 }
 
-void GridLinesMgr::setLineThickness(const int thickness)
+void GridLinesMgr::setLineThickness(const float thickness)
 {
-	int lineThickness = equGrid->getLineThickness();
-	if (lineThickness!=thickness)
+	float lineThickness = equGrid->getLineThickness();
+	if (!qFuzzyCompare(lineThickness, thickness))
 	{
-		lineThickness=qBound(1, thickness, 5);
+		lineThickness=qBound(1.f, thickness, 5.f);
 		// Grids
 		equGrid->setLineThickness(lineThickness);
 		equJ2000Grid->setLineThickness(lineThickness);
@@ -3616,46 +3617,46 @@ void GridLinesMgr::setLineThickness(const int thickness)
 	}
 }
 
- int GridLinesMgr::getLineThickness() const
+float GridLinesMgr::getLineThickness() const
 {
 	return equGrid->getLineThickness();
 }
 
- void GridLinesMgr::setPartThickness(const int thickness)
- {
-	 int partThickness = equatorLine->getPartThickness();
-	 if (partThickness!=thickness)
-	 {
-		 partThickness=qBound(1, thickness, 5);
-		 // Lines
-		 equatorLine->setPartThickness(partThickness);
-		 equatorJ2000Line->setPartThickness(partThickness);
-		 eclipticLine->setPartThickness(partThickness);
-		 eclipticJ2000Line->setPartThickness(partThickness);
-		 //invariablePlaneLine->setPartThickness(partThickness);
-		 solarEquatorLine->setPartThickness(partThickness);
-		 precessionCircleN->setPartThickness(partThickness);
-		 precessionCircleS->setPartThickness(partThickness);
-		 meridianLine->setPartThickness(partThickness);
-		 longitudeLine->setPartThickness(partThickness);
-		 horizonLine->setPartThickness(partThickness);
-		 galacticEquatorLine->setPartThickness(partThickness);
-		 supergalacticEquatorLine->setPartThickness(partThickness);
-		 primeVerticalLine->setPartThickness(partThickness);
-		 currentVerticalLine->setPartThickness(partThickness);
-		 colureLine_1->setPartThickness(partThickness);
-		 colureLine_2->setPartThickness(partThickness);
-		 //circumpolarCircleN->setPartThickness(partThickness);
-		 //circumpolarCircleS->setPartThickness(partThickness);
+void GridLinesMgr::setPartThickness(const float thickness)
+{
+	float partThickness = equatorLine->getPartThickness();
+	if (!qFuzzyCompare(partThickness, thickness))
+	{
+		partThickness=qBound(1.f, thickness, 5.f);
+		// Lines
+		equatorLine->setPartThickness(partThickness);
+		equatorJ2000Line->setPartThickness(partThickness);
+		eclipticLine->setPartThickness(partThickness);
+		eclipticJ2000Line->setPartThickness(partThickness);
+		//invariablePlaneLine->setPartThickness(partThickness);
+		solarEquatorLine->setPartThickness(partThickness);
+		precessionCircleN->setPartThickness(partThickness);
+		precessionCircleS->setPartThickness(partThickness);
+		meridianLine->setPartThickness(partThickness);
+		longitudeLine->setPartThickness(partThickness);
+		horizonLine->setPartThickness(partThickness);
+		galacticEquatorLine->setPartThickness(partThickness);
+		supergalacticEquatorLine->setPartThickness(partThickness);
+		primeVerticalLine->setPartThickness(partThickness);
+		currentVerticalLine->setPartThickness(partThickness);
+		colureLine_1->setPartThickness(partThickness);
+		colureLine_2->setPartThickness(partThickness);
+		//circumpolarCircleN->setPartThickness(partThickness);
+		//circumpolarCircleS->setPartThickness(partThickness);
 
-		 emit partThicknessChanged(partThickness);
-	 }
- }
+		emit partThicknessChanged(partThickness);
+	}
+}
 
-  int GridLinesMgr::getPartThickness() const
- {
-	 return equatorLine->getPartThickness();
- }
+float GridLinesMgr::getPartThickness() const
+{
+	return equatorLine->getPartThickness();
+}
 
 void GridLinesMgr::setFontSizeFromApp(int size)
 {

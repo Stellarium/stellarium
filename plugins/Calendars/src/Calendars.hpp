@@ -145,8 +145,10 @@ public:
 	//! TODO: ADD HERE: Chinese, NewHinduSolar, NewHinduLunar, ...
 	Calendar* getCal(QString name);
 
+	#ifdef ENABLE_SCRIPTING
 	//! to be called after program startup, when StelScriptMgr has been set up.
 	void makeCalendarsScriptable(StelScriptMgr *ssm);
+	#endif
 
 signals:
 	//void jdChanged(double jd);

@@ -66,10 +66,10 @@ public:
 	Lx200CommandToggleFormat(Server &server) : Lx200Command(server) {}
 	
 private:
-	bool writeCommandToBuffer(char *&buff, char *end);
-	int readAnswerFromBuffer(const char*&, const char*) {return 1;}
-	bool needsNoAnswer(void) const {return true;}
-	void print(QTextStream &o) const;
+	virtual bool writeCommandToBuffer(char *&buff, char *end) Q_DECL_OVERRIDE;
+	virtual int readAnswerFromBuffer(const char*&, const char*) Q_DECL_OVERRIDE {return 1;}
+	virtual bool needsNoAnswer(void) const Q_DECL_OVERRIDE {return true;}
+	virtual void print(QTextStream &o) const Q_DECL_OVERRIDE;
 };
 
 //! Meade LX200 command: Stop the current slew.
@@ -80,10 +80,10 @@ public:
 	Lx200CommandStopSlew(Server &server) : Lx200Command(server) {}
 	
 private:
-	bool writeCommandToBuffer(char *&buff, char *end);
-	int readAnswerFromBuffer(const char*&, const char*) {return 1;}
-	bool needsNoAnswer(void) const {return true;}
-	void print(QTextStream &o) const;
+	virtual bool writeCommandToBuffer(char *&buff, char *end) Q_DECL_OVERRIDE;
+	virtual int readAnswerFromBuffer(const char*&, const char*) Q_DECL_OVERRIDE {return 1;}
+	virtual bool needsNoAnswer(void) const Q_DECL_OVERRIDE {return true;}
+	virtual void print(QTextStream &o) const Q_DECL_OVERRIDE;
 };
 
 //! Meade LX200 command: Set right ascension. LONG FORMAT ONLY!
@@ -92,9 +92,9 @@ class Lx200CommandSetSelectedRa : public Lx200Command
 public:
 	Lx200CommandSetSelectedRa(Server &server, int ra)
 	                         : Lx200Command(server), ra(ra) {}
-	bool writeCommandToBuffer(char *&buff, char *end);
-	int readAnswerFromBuffer(const char *&buff, const char *end);
-	void print(QTextStream &o) const;
+	virtual bool writeCommandToBuffer(char *&buff, char *end) Q_DECL_OVERRIDE;
+	virtual int readAnswerFromBuffer(const char *&buff, const char *end) Q_DECL_OVERRIDE;
+	virtual void print(QTextStream &o) const Q_DECL_OVERRIDE;
 	
 private:
 	const int ra;
@@ -106,9 +106,9 @@ class Lx200CommandSetSelectedDec : public Lx200Command
 public:
 	Lx200CommandSetSelectedDec(Server &server,int dec)
 	                          : Lx200Command(server), dec(dec) {}
-	bool writeCommandToBuffer(char *&buff, char *end);
-	int readAnswerFromBuffer(const char *&buff, const char *end);
-	void print(QTextStream &o) const;
+	virtual bool writeCommandToBuffer(char *&buff, char *end) Q_DECL_OVERRIDE;
+	virtual int readAnswerFromBuffer(const char *&buff, const char *end) Q_DECL_OVERRIDE;
+	virtual void print(QTextStream &o) const Q_DECL_OVERRIDE;
 	
 private:
 	const int dec;
@@ -120,11 +120,11 @@ class Lx200CommandGotoSelected : public Lx200Command
 public:
 	Lx200CommandGotoSelected(Server &server)
 	                        : Lx200Command(server), first_byte(256) {}
-	bool writeCommandToBuffer(char *&buff, char *end);
-	int readAnswerFromBuffer(const char *&buff, const char *end);
-	void print(QTextStream &o) const;
-	bool isCommandGotoSelected(void) const {return true;}
-	bool shortAnswerReceived(void) const {return (first_byte != 256);}
+	virtual bool writeCommandToBuffer(char *&buff, char *end) Q_DECL_OVERRIDE;
+	virtual int readAnswerFromBuffer(const char *&buff, const char *end) Q_DECL_OVERRIDE;
+	virtual void print(QTextStream &o) const Q_DECL_OVERRIDE;
+	virtual bool isCommandGotoSelected(void) const Q_DECL_OVERRIDE {return true;}
+	virtual bool shortAnswerReceived(void) const Q_DECL_OVERRIDE {return (first_byte != 256);}
 	
 private:
 	int first_byte;
@@ -135,11 +135,11 @@ class Lx200CommandSyncSelected : public Lx200Command
 public:
 	Lx200CommandSyncSelected(Server &server)
 				: Lx200Command(server), first_byte(256) {}
-	bool writeCommandToBuffer(char *&buff, char *end);
-	int readAnswerFromBuffer(const char *&buff, const char *end);
-	void print(QTextStream &o) const;
-	bool isCommandGotoSelected(void) const {return true;}
-	bool shortAnswerReceived(void) const {return (first_byte != 256);}
+	virtual bool writeCommandToBuffer(char *&buff, char *end) Q_DECL_OVERRIDE;
+	virtual int readAnswerFromBuffer(const char *&buff, const char *end) Q_DECL_OVERRIDE;
+	virtual void print(QTextStream &o) const Q_DECL_OVERRIDE;
+	virtual bool isCommandGotoSelected(void) const Q_DECL_OVERRIDE {return true;}
+	virtual bool shortAnswerReceived(void) const Q_DECL_OVERRIDE {return (first_byte != 256);}
 
 private:
 	int first_byte;
@@ -150,9 +150,9 @@ class Lx200CommandGetRa : public Lx200Command
 {
 public:
 	Lx200CommandGetRa(Server &server) : Lx200Command(server) {}
-	bool writeCommandToBuffer(char *&buff, char *end);
-	int readAnswerFromBuffer(const char *&buff, const char *end);
-	void print(QTextStream &o) const;
+	virtual bool writeCommandToBuffer(char *&buff, char *end) Q_DECL_OVERRIDE;
+	virtual int readAnswerFromBuffer(const char *&buff, const char *end) Q_DECL_OVERRIDE;
+	virtual void print(QTextStream &o) const Q_DECL_OVERRIDE;
 };
 
 //! Meade LX200 command: Get the current declination.
@@ -160,9 +160,9 @@ class Lx200CommandGetDec : public Lx200Command
 {
 public:
 	Lx200CommandGetDec(Server &server) : Lx200Command(server) {}
-	bool writeCommandToBuffer(char *&buff, char *end);
-	int readAnswerFromBuffer(const char *&buff, const char *end);
-	void print(QTextStream &o) const;
+	virtual bool writeCommandToBuffer(char *&buff, char *end) Q_DECL_OVERRIDE;
+	virtual int readAnswerFromBuffer(const char *&buff, const char *end) Q_DECL_OVERRIDE;
+	virtual void print(QTextStream &o) const Q_DECL_OVERRIDE;
 };
 
 #endif // LX200COMMAND_HPP

@@ -44,11 +44,7 @@ public:
 	//! @arg roleKey code for location role.
 	//! @arg landscapeID a fitting landscape
 	StelLocation(QString lName, QString lState, QString lRegion, float lng, float lat, int alt,
-		     int populationK, QString timeZone, int bortleIndex, QChar roleKey='X', QString landscapeID="")
-		: name(lName), region(lRegion), state(lState),
-		  longitude(lng), latitude(lat), altitude(alt),
-		  lightPollutionLuminance(bortleIndex), landscapeKey(landscapeID),
-		  population(populationK), role(roleKey), ianaTimeZone(timeZone), isUserLocation(true) {}
+				 int populationK, QString timeZone, int bortleIndex, QChar roleKey='X', QString landscapeID="");
 
 	//! Return a short string which can be used in a list view.
 	QString getID() const;

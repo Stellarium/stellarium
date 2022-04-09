@@ -98,8 +98,10 @@ private:
 	{
 		const int column = treeWidget()->sortColumn();
 
-		if (column == MSSearchDialog::ColumnZHR || column == MSSearchDialog::ColumnPeak)
+		if (column == MSSearchDialog::ColumnZHR)
 			return this->data(column, Qt::UserRole).toInt() < other.data(column, Qt::UserRole).toInt();
+		else if (column == MSSearchDialog::ColumnPeak)
+			return this->data(column, Qt::UserRole).toDouble() < other.data(column, Qt::UserRole).toDouble();
 		else
 			return text(column).toLower() < other.text(column).toLower();
 	}

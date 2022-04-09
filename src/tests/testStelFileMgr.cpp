@@ -68,7 +68,7 @@ void TestStelFileMgr::initTestCase()
 			  << partialPath2+"/landscapes/ls3/landscape.ini"
 			  << partialPath2+"/inboth.txt";
 
-	for (const auto& path : testDirs)
+	for (const auto& path : qAsConst(testDirs))
 	{
 		if (!QDir().mkdir(path))
 		{
@@ -77,7 +77,7 @@ void TestStelFileMgr::initTestCase()
 	}
 
 	// create test files as empty files...
-	for (const auto& path : testFiles)
+	for (const auto& path : qAsConst(testFiles))
 	{
 		QFile f(path);
 		if (!f.open(QIODevice::WriteOnly))
@@ -180,11 +180,11 @@ void TestStelFileMgr::testFindFileNew()
 	//QVERIFY(existsInBoth.isEmpty());
 
 	QVERIFY(!notExistsInOne.isEmpty());
-	QVERIFY(!QFileInfo(notExistsInOne).exists());
+	QVERIFY(!QFileInfo::exists(notExistsInOne));
 	QVERIFY(QFileInfo(notExistsInOne).fileName()=="config.ini");
 
 	QVERIFY(!notExistsInBoth.isEmpty());
-	QVERIFY(!QFileInfo(notExistsInBoth).exists());
+	QVERIFY(!QFileInfo::exists(notExistsInBoth));
 	QVERIFY(QFileInfo(notExistsInBoth).fileName()=="notexists");
 }
 
@@ -197,7 +197,7 @@ void TestStelFileMgr::testFindFileNewAbs()
 	QVERIFY(existsInBoth.isEmpty());
 
 	QVERIFY(!notExistsInOne.isEmpty());
-	QVERIFY(!QFileInfo(notExistsInOne).exists());
+	QVERIFY(!QFileInfo::exists(notExistsInOne));
 	QVERIFY(QFileInfo(notExistsInOne).fileName()=="config.ini");
 }
 

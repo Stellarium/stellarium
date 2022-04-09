@@ -392,7 +392,7 @@
 	     NGC4657, NGC5033, NGC5363, NGC7008, NGC7318, NGC7331, NGC7479,
 	     NGC7635, NGC7640, NGC7789, PGC1803573, Barnard 142, Barnard 173,
 	     Sh2-101, Sh2-188, LDN1235, Sadr region (Gamma Cygni), Medusa,
-	     Jones-Emberson 1
+	     Jones-Emberson 1, NGC2146
 	     from Peter Vasey, Plover Hill Observatory
 	     http://www.madpc.co.uk/~peterv/
 	4.26 Image of IC3568 from Howard Bond (Space Telescope Science Institute), Robin Ciardullo (Pennsylvania State University) and NASA

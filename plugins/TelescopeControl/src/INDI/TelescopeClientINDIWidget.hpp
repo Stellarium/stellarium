@@ -34,7 +34,7 @@ class TelescopeClientINDIWidget : public QWidget
 
 public:
 	explicit TelescopeClientINDIWidget(QWidget *parent = Q_NULLPTR);
-	~TelescopeClientINDIWidget();
+	~TelescopeClientINDIWidget() override;
 
 	QString host() const;
 	void setHost(const QString& host);

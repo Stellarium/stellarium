@@ -560,6 +560,14 @@ namespace StelUtils
 	double getDeltaTByEspenakMeeus(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
+	//! Note that this method is recommended for the year range:
+	//! -1999 to +3000. It gives details for -500...+2150.
+	//! Implementation of algorithm by Espenak & Meeus (2006) with modified formulae for DeltaT computation
+	//! @param jDay the date and time expressed as a Julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByEspenakMeeusModified(const double jDay);
+
+	//! Get Delta-T estimation for a given date.
 	//! Implementation of algorithm by Schoch (1931) for DeltaT computation,
 	//! outdated but may be useful for science-historical purposes.
 	//! Source: Schoch, C. (1931). Die sekulare Accelaration des Mondes und der Sonne.

@@ -33,7 +33,7 @@ TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &par
 {
 	qDebug() << "TelescopeClientINDI::TelescopeClientINDI";
 
-	QRegularExpression paramRx("^([^:]*):(\\d+):([^:]*)$");
+	static const QRegularExpression paramRx("^([^:]*):(\\d+):([^:]*)$");
 	QRegularExpressionMatch paramMatch=paramRx.match(params);
 	QString host;
 	int port = 0;

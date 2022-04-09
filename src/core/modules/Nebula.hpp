@@ -36,15 +36,14 @@ class Nebula : public StelObject
 {
 friend class NebulaMgr;
 
-	//Required for the correct working of the Q_FLAGS macro (which requires a MOC pass)
+	//Required for the correct working of the Q_FLAG macro (which requires a MOC pass)
 	Q_GADGET
-	Q_FLAGS(CatalogGroup)
-	Q_FLAGS(TypeGroup)
 public:
 	static const QString NEBULA_TYPE;
 
 	enum CatalogGroupFlags
 	{
+		CatNone		= 0x00000000, //!< Nothing selected
 		CatNGC		= 0x00000001, //!< New General Catalogue (NGC)
 		CatIC			= 0x00000002, //!< Index Catalogue (IC)
 		CatM			= 0x00000004, //!< Messier Catalog (M)
@@ -77,9 +76,11 @@ public:
 		CatOther		= 0x20000000  //!< without ID
 	};
 	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
+	Q_FLAG(CatalogGroup)
 
 	enum TypeGroupFlags
 	{
+		TypeNone                = 0x00000000, //!< Nothing selected
 		TypeGalaxies			= 0x00000001, //!< Galaxies
 		TypeActiveGalaxies		= 0x00000002, //!< Different Active Galaxies
 		TypeInteractingGalaxies	= 0x00000004, //!< Interacting Galaxies
@@ -94,10 +95,11 @@ public:
 		TypeOther				= 0x00000800  //!< Other objects
 	};
 	Q_DECLARE_FLAGS(TypeGroup, TypeGroupFlags)
+	Q_FLAG(TypeGroup)
 
 	//! A pre-defined set of specifiers for the catalogs filter
-	static const CatalogGroupFlags AllCatalogs = static_cast<CatalogGroupFlags>(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG|CatSNRG|CatACO|CatHCG|CatESO|CatVdBH|CatDWB|CatTr|CatSt|CatRu|CatOther);
-	static const TypeGroupFlags AllTypes = static_cast<TypeGroupFlags>(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeOpenStarClusters|TypeGlobularStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeGalaxyClusters|TypeOther);
+	static constexpr CatalogGroup AllCatalogs = static_cast<CatalogGroup>(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG|CatSNRG|CatACO|CatHCG|CatESO|CatVdBH|CatDWB|CatTr|CatSt|CatRu|CatOther);
+	static constexpr TypeGroup    AllTypes    = static_cast<TypeGroup>(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeOpenStarClusters|TypeGlobularStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeGalaxyClusters|TypeOther);
 
 	//! @enum NebulaType Nebula types
 	enum NebulaType

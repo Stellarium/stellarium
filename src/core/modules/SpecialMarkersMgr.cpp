@@ -40,7 +40,7 @@ public:
 		COMPASS_MARKS
 	};
 	SpecialSkyMarker(SKY_MARKER_TYPE _marker_type = FOV_CENTER);
-	virtual ~SpecialSkyMarker();
+	virtual ~SpecialSkyMarker(){}
 	void draw(StelCore* core) const;
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() const {return color;}
@@ -75,11 +75,6 @@ SpecialSkyMarker::SpecialSkyMarker(SKY_MARKER_TYPE _marker_type) : marker_type(_
 			frameType = StelCore::FrameAltAz;
 			break;
 	}
-}
-
-SpecialSkyMarker::~SpecialSkyMarker()
-{
-	//
 }
 
 void SpecialSkyMarker::draw(StelCore *core) const
@@ -178,28 +173,38 @@ void SpecialSkyMarker::draw(StelCore *core) const
 
 			for(int i=0; i<360; i++)
 			{
-				double a = i*M_PI/180;
+				double a = i*(M_PI/180);
 				pos.set(sin(a),cos(a), 0.);
-				double h = -0.002;
+				double h = 6.; // height of tickmark endpoint, arcminutes
 				if (i % 15 == 0)
 				{
-					h = -0.02;  // the size of the mark every 15 degrees
+					h = 15.;  // the size of the mark every 15 degrees remains small: it is labeled!
 
-					QString s = QString("%1").arg((i+90+f)%360);
+					QString s = QString("%1°").arg((i+90+f)%360);
 
-					float shiftx = ppx*sPainter.getFontMetrics().boundingRect(s).width() *0.5f;
-					float shifty = ppx*sPainter.getFontMetrics().height() *0.5f;
-					sPainter.drawText(pos, s, 0, -shiftx, shifty);
+					Vec3d target(pos[0], pos[1], tan(h/60.*M_PI/180.)); target.normalize();
+					Vec3d screenPos, screenTgt;
+					prj->project(pos, screenPos);
+					prj->project(target, screenTgt);
+					double dx=screenTgt[0]-screenPos[0];
+					double dy=screenTgt[1]-screenPos[1];
+					float textAngle=static_cast<float>(atan2(dx, dy));
+					float wx = ppx*sPainter.getFontMetrics().boundingRect(s).width() *0.5f;
+					float wy = ppx*sPainter.getFontMetrics().height() *0.25f;
+
+					// Gravity labels look outright terrible here! Disable them.
+					sPainter.drawText(target, s, -textAngle*180.f/M_PI, -wx, wy, true);
 				}
 				else if (i % 5 == 0)
 				{
-					h = -0.01;  // the size of the mark every 5 degrees
+					h = 30.;  // the size of the mark every 5 degrees
 				}
 
 				// Limit arcs to those that are visible for improved performance
 				if (prj->project(pos, screenPos) &&
 				     screenPos[0]>prj->getViewportPosX() && screenPos[0] < prj->getViewportPosX() + prj->getViewportWidth()) {
-					sPainter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), Q_NULLPTR);
+					Vec3d target(pos[0], pos[1], tan(h/60.*M_PI/180.)); target.normalize();
+					sPainter.drawGreatCircleArc(pos, target, Q_NULLPTR);
 				}
 			}
 		}
