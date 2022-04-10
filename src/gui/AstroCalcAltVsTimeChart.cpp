@@ -19,9 +19,9 @@
 
 #include "AstroCalcAltVsTimeChart.hpp"
 #include "StelTranslator.hpp"
-#include "qdebug.h"
+#include <QDebug>
 #include <QAbstractSeries>
-
+#include <QPen>
 
 
 AstroCalcAltVsTimeChart::AstroCalcAltVsTimeChart() : QChart()
@@ -51,14 +51,7 @@ AstroCalcAltVsTimeChart::AstroCalcAltVsTimeChart() : QChart()
 
 	qDebug() << "2";
 	// Do not add empty series here!
-	//addSeries(altVsTime);
-	//addSeries(currentTime);
-	//addSeries(transitTime);
-	//addSeries(sunElevation);
-	//addSeries(civilTwilight);
-	//addSeries(nauticalTwilight);
-	//addSeries(astroTwilight);
-	//addSeries(moon);
+	//addSeries(altVsTime); etc...
 
 	altVsTime       ->setName("alt"); // no name in old solution. Maybe remove again.
 	currentTime     ->setName("[Now]");
@@ -80,33 +73,49 @@ AstroCalcAltVsTimeChart::AstroCalcAltVsTimeChart() : QChart()
 AstroCalcAltVsTimeChart::~AstroCalcAltVsTimeChart()
 {
 	removeAllSeries(); // Also deletes!
-	//delete altVsTime;
-	//delete currentTime;
-	//delete transitTime;
-	//delete sunElevation;
-	//delete civilTwilight;
-	//delete nauticalTwilight;
-	//delete astroTwilight;
-	//delete moon;
-
 }
 
 //void AstroCalcAltVsTimeChart::retranslate(){}
 
 void AstroCalcAltVsTimeChart::append(Series s, qreal x, qreal y)
 {
-	map.value(s)->append(x, y);
+	if (map.value(s))
+		map.value(s)->append(x, y);
+	else
+		qDebug() << "Series " << s << "invalid!!";
+}
+
+void AstroCalcAltVsTimeChart::replace(Series s, int index, qreal x, qreal y)
+{
+	if (map.value(s))
+	{
+		if (map.value(s)->points().length() >= index+1)
+			map.value(s)->replace(index, x, y);
+		else
+			map.value(s)->append(x, y);
+
+	}
+	else
+		qDebug() << "Series " << s << "invalid!!";
 }
 
 void AstroCalcAltVsTimeChart::show(Series s)
 {
-	addSeries(map.value(s));
+	qDebug() << "About to add series " << s;
+	if (!series().contains(map.value(s)))
+		addSeries(map.value(s));
+	else
+		qDebug() << "series" << s << "already shown.";
 	// TODO: Adjust axis?
 }
 
 void AstroCalcAltVsTimeChart::clear(Series s)
 {
-	removeSeries(map.value(s));
+	qDebug() << "Clearing series " << s;
+	qDebug() << "Before remove it has " << map.value(s)->points().length() << "entries";
+//	if (series().contains(map.value(s)))
+//		removeSeries(map.value(s));
+	qDebug() << "clearing series with " << map.value(s)->points().length() << "entries";
 	map.value(s)->clear();
 }
 
@@ -119,31 +128,43 @@ void AstroCalcAltVsTimeChart::setupAxes()
 	QString xAxisStr = q_("Local Time");
 	QString yAxisStr = QString("%1, %2").arg(q_("Altitude"), QChar(0x00B0));
 
-	static const QColor axisColor(Qt::white);
-	QPen axisPen(axisColor, 1);
+	static const QPen axisPen(       Qt::white,      1, Qt::SolidLine);
+	static const QPen axisGridPen(   Qt::white,      1, Qt::DotLine);
+	static const QPen altPen(        Qt::red,        2, Qt::SolidLine);
+	static const QPen currentTimePen(Qt::darkGreen,  1, Qt::SolidLine);
+	static const QPen transitTimePen(Qt::cyan,       1, Qt::SolidLine);
+	static const QPen sunPen(        Qt::darkYellow, 2, Qt::SolidLine);
+	static const QPen civilPen(      Qt::darkBlue,   1, Qt::DashLine);
+	static const QPen nauticalPen(   Qt::darkBlue,   1, Qt::DashDotLine);
+	static const QPen astroPen(      Qt::darkBlue,   1, Qt::DashDotDotLine);
+	static const QPen moonPen(       Qt::darkGreen,  2, Qt::DashLine);
+
 
 	//xAxis->setLabel(xAxisStr);
 	//yAxis->setLabel(yAxisStr);
+	xAxis->setLinePen(axisPen);
+	//xAxis->setGridLinePen(axisGridPen);
 	xAxis->setRange(43200, 129600); // 24 hours since 12h00m (range in seconds)
-	xAxis->setTickCount(12); // step is 2 hours
+	xAxis->setTickCount(9); // step is 3 hours
+	xAxis->setMinorTickCount(2); // substep is 1 hours
 
-	yAxis->setRange(yMin, yMax);
-	//yAxis->setTickCount(10);
-	yAxis->applyNiceNumbers();
+	setYrange(yMin, yMax);
+	yAxis->setLinePen(axisPen);
+	//yAxis->setGridLinePen(axisGridPen);
 
 	addAxis(xAxis, Qt::AlignBottom);
 	addAxis(yAxis, Qt::AlignLeft);
 
 	const QList<QtCharts::QAbstractSeries *> ser=series();
 
-	if ((altVsTime)        && ser.contains(altVsTime))       { altVsTime->attachAxis(xAxis);         altVsTime->attachAxis(yAxis); }
-	if ((currentTime)      && ser.contains(currentTime))     { currentTime->attachAxis(xAxis);       currentTime->attachAxis(yAxis); }
-	if ((transitTime)      && ser.contains(transitTime))     { transitTime->attachAxis(xAxis);       transitTime->attachAxis(yAxis); }
-	if ((sunElevation)     && ser.contains(sunElevation))    { sunElevation->attachAxis(xAxis);      sunElevation->attachAxis(yAxis); }
-	if ((civilTwilight)    && ser.contains(civilTwilight))   { civilTwilight->attachAxis(xAxis);     civilTwilight->attachAxis(yAxis); }
-	if ((nauticalTwilight) && ser.contains(nauticalTwilight)){ nauticalTwilight->attachAxis(xAxis);  nauticalTwilight->attachAxis(yAxis); }
-	if ((astroTwilight)    && ser.contains(astroTwilight))   { astroTwilight->attachAxis(xAxis);     astroTwilight->attachAxis(yAxis); }
-	if ((moon)             && ser.contains(moon))            { moon->attachAxis(xAxis);              moon->attachAxis(yAxis); }
+	if ((altVsTime)        && ser.contains(altVsTime))       { altVsTime       ->setPen(altPen);         altVsTime->attachAxis(xAxis);         altVsTime->attachAxis(yAxis); }
+	if ((currentTime)      && ser.contains(currentTime))     { currentTime     ->setPen(currentTimePen); currentTime->attachAxis(xAxis);       currentTime->attachAxis(yAxis); }
+	if ((transitTime)      && ser.contains(transitTime))     { transitTime     ->setPen(transitTimePen); transitTime->attachAxis(xAxis);       transitTime->attachAxis(yAxis); }
+	if ((sunElevation)     && ser.contains(sunElevation))    { sunElevation    ->setPen(sunPen);         sunElevation->attachAxis(xAxis);      sunElevation->attachAxis(yAxis); }
+	if ((civilTwilight)    && ser.contains(civilTwilight))   { civilTwilight   ->setPen(civilPen);       civilTwilight->attachAxis(xAxis);     civilTwilight->attachAxis(yAxis); }
+	if ((nauticalTwilight) && ser.contains(nauticalTwilight)){ nauticalTwilight->setPen(nauticalPen);    nauticalTwilight->attachAxis(xAxis);  nauticalTwilight->attachAxis(yAxis); }
+	if ((astroTwilight)    && ser.contains(astroTwilight))   { astroTwilight   ->setPen(astroPen);       astroTwilight->attachAxis(xAxis);     astroTwilight->attachAxis(yAxis); }
+	if ((moon)             && ser.contains(moon))            { moon            ->setPen(moonPen);        moon->attachAxis(xAxis);              moon->attachAxis(yAxis); }
 	qDebug() << "setupAxes()...done";
 }
 
@@ -151,6 +172,13 @@ void AstroCalcAltVsTimeChart::setYrange(qreal min, qreal max)
 {
 	yMin=min;
 	yMax=max;
-	yAxis->setRange(yMin, yMax);
-	yAxis->applyNiceNumbers();
+
+	qreal rMin=floor(yMin/10);
+	qreal rMax=ceil(yMax/10);
+
+	qDebug() << "Setting yrange from" << min << "/" << max << "-->" << rMin*10 << "/" << rMax*10;
+	yAxis->setRange(rMin*10, rMax*10);
+	//yAxis->applyNiceNumbers();
+	yAxis->setTickCount(qRound((rMax*10-rMin*10)/10.)+1);
+	yAxis->setMinorTickCount(1);
 }
