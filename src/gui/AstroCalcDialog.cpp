@@ -635,6 +635,7 @@ void AstroCalcDialog::searchWutClear()
 
 void AstroCalcDialog::updateAstroCalcData()
 {
+	qDebug() << "updateAstroCalcData()";
 	drawAltVsTimeDiagram();
 	populateCelestialBodyList();
 	populatePlanetList();
@@ -4219,6 +4220,8 @@ void AstroCalcDialog::savePhenomenaAngularSeparation()
 
 void AstroCalcDialog::drawAltVsTimeDiagram()
 {
+	qDebug() << "AstrocalcDialog::drawAltVsTimeDiagram()...";
+	QMutexLocker locker(&altVsTimeChartMutex); // Avoid calling parallel from various sides. (called by signals/slots)
 	// Avoid crash!
 	if (core->getCurrentPlanet()->getEnglishName().contains("->")) // We are on the spaceship!
 		return;
@@ -4248,11 +4251,11 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		StelObjectP selectedObject = selectedObjects[0];
 		ui->altVsTimeTitle->setText(selectedObject->getNameI18n());
 
-		if (altVsTimeChart)
-		{
-			qDebug() << "deleting old chart";
-			delete altVsTimeChart;
-		}
+		//if (altVsTimeChart)
+		//{
+		//	qDebug() << "deleting old chart";
+		//	delete altVsTimeChart;
+		//}
 		qDebug() << "creating chart";
 		altVsTimeChart = new AstroCalcAltVsTimeChart();
 		altVsTimeChart->setTitle(selectedObject->getNameI18n());
@@ -4432,6 +4435,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		ui->altVsTimePlot->replot();
 		qDebug() << "create chart axes...";
 		//altVsTimeChart->createDefaultAxes(); // or
+		altVsTimeChart->setYrange(minY, maxY);
 		altVsTimeChart->setupAxes();
 		qDebug() << "set chart ...";
 		QChart *oldChart=ui->altVsTimeChartView->chart();
@@ -4439,7 +4443,6 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		ui->altVsTimeChartView->setChart(altVsTimeChart);
 		ui->altVsTimeChartView->setRenderHint(QPainter::Antialiasing);
 		qDebug() << "Chart done.";
-
 	}
 
 	// clean up the data when selection is removed
@@ -4465,6 +4468,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			altVsTimeChart->clear(AstroCalcAltVsTimeChart::Moon);
 		}
 	}
+	qDebug() << "AstrocalcDialog::drawAltVsTimeDiagram()...done";
 }
 
 // Added vertical line indicating "now"
@@ -4486,12 +4490,13 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 	{
 		ui->altVsTimePlot->graph(1)->setData(x, y);
 		ui->altVsTimePlot->replot();
-		qDebug() << "Chart: append currentTime";
+		qDebug() << "Chart: replace/append currentTime";
 		if (altVsTimeChart){
-			altVsTimeChart->append(AstroCalcAltVsTimeChart::CurrentTime, now, -180.);
-			altVsTimeChart->append(AstroCalcAltVsTimeChart::CurrentTime, now,  360.);
-			altVsTimeChart->show(AstroCalcAltVsTimeChart::CurrentTime);
-			qDebug() << "Chart: append currentTime...done";
+			//altVsTimeChart->clear(AstroCalcAltVsTimeChart::CurrentTime);
+			altVsTimeChart->replace(AstroCalcAltVsTimeChart::CurrentTime, 0, now, -180.);
+			altVsTimeChart->replace(AstroCalcAltVsTimeChart::CurrentTime, 1, now,  360.);
+			//altVsTimeChart->show(AstroCalcAltVsTimeChart::CurrentTime);
+			qDebug() << "Chart: replace/append currentTime...done";
 		}
 		else
 			qDebug() << "no chart to add CT line!";
@@ -4526,12 +4531,13 @@ void AstroCalcDialog::drawTransitTimeDiagram()
 	ui->altVsTimePlot->replot();
 
 	// QChart use:
-	qDebug() << "Chart: append transitTime";
+	qDebug() << "Chart: replace/append transitTime";
 	if (altVsTimeChart){
-		altVsTimeChart->append(AstroCalcAltVsTimeChart::TransitTime, transitX, minY);
-		altVsTimeChart->append(AstroCalcAltVsTimeChart::TransitTime, transitX, maxY);
-		altVsTimeChart->show(AstroCalcAltVsTimeChart::TransitTime);
-		qDebug() << "Chart: append transitTime...done";
+		//altVsTimeChart->clear(AstroCalcAltVsTimeChart::TransitTime);
+		altVsTimeChart->replace(AstroCalcAltVsTimeChart::TransitTime, 0, transitX, minY);
+		altVsTimeChart->replace(AstroCalcAltVsTimeChart::TransitTime, 1, transitX, maxY);
+		//altVsTimeChart->show(AstroCalcAltVsTimeChart::TransitTime);
+		qDebug() << "Chart: replace/append transitTime...done";
 	}
 	else
 		qDebug() << "no chart to add TT line!";
@@ -6807,6 +6813,7 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 		if (idx==0) // 'Alt. vs Time' is visible
 		{
 			plotAltVsTime = true;
+			qDebug() << "calling drawAltVsTimeDiagram() in changePage";
 			drawAltVsTimeDiagram(); // Is object already selected?
 		}
 
@@ -6872,6 +6879,8 @@ void AstroCalcDialog::changeGraphsTab(int index)
 	if (index==0) // Altitude vs. Time
 	{
 		plotAltVsTime = true;
+		qDebug() << "calling drawAltVsTimeDiagram() in changeGraphsTab";
+
 		drawAltVsTimeDiagram(); // Is object already selected?
 	}
 	if (index==1) // Azimuth vs. Time

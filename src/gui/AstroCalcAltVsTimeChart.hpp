@@ -45,6 +45,8 @@ public:
 
 	//! Append one pair of data values to series s.
 	void append(Series s, qreal x, qreal y);
+	//! Replace one pair of data values to series s at position index.
+	void replace(Series s, int index, qreal x, qreal y);
 	//! Reset (delete and create new empty) series s
 	void clear(Series s);
 

@@ -28,6 +28,7 @@
 #include <QVector>
 #include <QTimer>
 #include <QRegularExpression>
+#include <QMutex>
 
 #include "AstroCalcAltVsTimeChart.hpp"
 #include "StelDialog.hpp"
@@ -407,6 +408,7 @@ private:
 	//QStringListModel* wutModel;
 	//QSortFilterProxyModel *proxyModel;
 	AstroCalcAltVsTimeChart *altVsTimeChart;
+	mutable QMutex altVsTimeChartMutex;
 	QSettings* conf;
 	QLinearGradient graphBackgroundGradient;
 	QTimer *currentTimeLine;
