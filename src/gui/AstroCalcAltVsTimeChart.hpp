@@ -40,8 +40,6 @@ public:
 
 	AstroCalcAltVsTimeChart();
 	virtual ~AstroCalcAltVsTimeChart() Q_DECL_OVERRIDE;
-	//! Setup axes and appearance
-	void setupAxes();
 
 	//! Append one pair of data values to series s.
 	void append(Series s, qreal x, qreal y);
@@ -56,6 +54,9 @@ public:
 
 	//! set range of Y axis
 	void setYrange(qreal min, qreal max);
+
+	//! Setup axes and appearance. Call this at the end of drawing, just before display.
+	void setupAxes();
 
 public slots:
 	//virtual void retranslate();

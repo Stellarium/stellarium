@@ -4492,10 +4492,8 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 		ui->altVsTimePlot->replot();
 		qDebug() << "Chart: replace/append currentTime";
 		if (altVsTimeChart){
-			//altVsTimeChart->clear(AstroCalcAltVsTimeChart::CurrentTime);
-			altVsTimeChart->replace(AstroCalcAltVsTimeChart::CurrentTime, 0, now, -180.);
-			altVsTimeChart->replace(AstroCalcAltVsTimeChart::CurrentTime, 1, now,  360.);
-			//altVsTimeChart->show(AstroCalcAltVsTimeChart::CurrentTime);
+			altVsTimeChart->replace(AstroCalcAltVsTimeChart::CurrentTime, 0, now, minY-10);
+			altVsTimeChart->replace(AstroCalcAltVsTimeChart::CurrentTime, 1, now,  maxY+10);
 			qDebug() << "Chart: replace/append currentTime...done";
 		}
 		else
@@ -4533,10 +4531,8 @@ void AstroCalcDialog::drawTransitTimeDiagram()
 	// QChart use:
 	qDebug() << "Chart: replace/append transitTime";
 	if (altVsTimeChart){
-		//altVsTimeChart->clear(AstroCalcAltVsTimeChart::TransitTime);
-		altVsTimeChart->replace(AstroCalcAltVsTimeChart::TransitTime, 0, transitX, minY);
-		altVsTimeChart->replace(AstroCalcAltVsTimeChart::TransitTime, 1, transitX, maxY);
-		//altVsTimeChart->show(AstroCalcAltVsTimeChart::TransitTime);
+		altVsTimeChart->replace(AstroCalcAltVsTimeChart::TransitTime, 0, transitX, minY-10);
+		altVsTimeChart->replace(AstroCalcAltVsTimeChart::TransitTime, 1, transitX, maxY+10);
 		qDebug() << "Chart: replace/append transitTime...done";
 	}
 	else
@@ -6234,7 +6230,7 @@ double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringLi
 {
 	double step = (stopJD - startJD) / 16.0;
 	double limit = 24.8 * 365.25;
-	QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
+	static const QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
 
 	if (objects.contains("Moon", Qt::CaseInsensitive))
 		limit = 0.25;

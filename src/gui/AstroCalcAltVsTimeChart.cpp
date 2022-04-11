@@ -19,12 +19,13 @@
 
 #include "AstroCalcAltVsTimeChart.hpp"
 #include "StelTranslator.hpp"
+#include <math.h>
 #include <QDebug>
 #include <QAbstractSeries>
 #include <QPen>
 
 
-AstroCalcAltVsTimeChart::AstroCalcAltVsTimeChart() : QChart()
+AstroCalcAltVsTimeChart::AstroCalcAltVsTimeChart() : QChart(), yMin(-90), yMax(90.)
 {
 	qDebug() << "chart constructor";
 	altVsTime        = new QtCharts::QSplineSeries(this);
@@ -46,28 +47,24 @@ AstroCalcAltVsTimeChart::AstroCalcAltVsTimeChart() : QChart()
 		{AstroTwilight,    dynamic_cast<QtCharts::QLineSeries*>(astroTwilight)},
 		{Moon,             dynamic_cast<QtCharts::QLineSeries*>(moon)}
 	};
-//	setTitle(q_("Altitude vs. Time"));
 	setBackgroundBrush(QBrush(QColor(86, 87, 90)));
 
-	qDebug() << "2";
-	// Do not add empty series here!
-	//addSeries(altVsTime); etc...
+	altVsTime       ->setName(q_("Altitude")); // no name in old solution, but used for legend!
+	currentTime     ->setName(q_("Now"));
+	transitTime     ->setName(q_("Culmination"));
+	sunElevation    ->setName(q_("Sun"));
+	civilTwilight   ->setName(q_("Civil Twilight"));
+	nauticalTwilight->setName(q_("Nautical Twilight"));
+	astroTwilight   ->setName(q_("Astronomical Twilight"));
+	moon            ->setName(q_("Moon"));
 
-	altVsTime       ->setName("alt"); // no name in old solution. Maybe remove again.
-	currentTime     ->setName("[Now]");
-	transitTime     ->setName("[Transit]");
-	sunElevation    ->setName("[Sun]");
-	civilTwilight   ->setName("[Civil Twilight]");
-	nauticalTwilight->setName("[Nautical Twilight]");
-	astroTwilight   ->setName("[Astronomical Twilight]");
-	moon            ->setName("[Moon]");
-	//createDefaultAxes(); // Not sure if possible with empty series?
+	xAxis=new QtCharts::QValueAxis(this);
+	yAxis=new QtCharts::QValueAxis(this);
+	legend()->setAlignment(Qt::AlignBottom);
+	legend()->setLabelColor(Qt::white);
+	setTitleBrush(QBrush(Qt::white));
 
-	qDebug() << "3";
-
-	setupAxes();
 	qDebug() << "c'tor done";
-
 }
 
 AstroCalcAltVsTimeChart::~AstroCalcAltVsTimeChart()
@@ -82,7 +79,7 @@ void AstroCalcAltVsTimeChart::append(Series s, qreal x, qreal y)
 	if (map.value(s))
 		map.value(s)->append(x, y);
 	else
-		qDebug() << "Series " << s << "invalid!!";
+		qDebug() << "Series " << s << "invalid for append()!";
 }
 
 void AstroCalcAltVsTimeChart::replace(Series s, int index, qreal x, qreal y)
@@ -90,23 +87,40 @@ void AstroCalcAltVsTimeChart::replace(Series s, int index, qreal x, qreal y)
 	if (map.value(s))
 	{
 		if (map.value(s)->points().length() >= index+1)
+		{
+			//qDebug() << "Replacing: Series" << s << " point " << index << ":" << x << "/" << y;
 			map.value(s)->replace(index, x, y);
+		}
 		else
 			map.value(s)->append(x, y);
 
 	}
 	else
-		qDebug() << "Series " << s << "invalid!!";
+		qDebug() << "Series " << s << "invalid for replace()!";
+
+	// It seems we must remove/add series again to force a redraw.
+	if (index!=0)
+	{
+		//qDebug() << "replace force redraw...";
+		removeSeries(map.value(s));
+		addSeries(map.value(s));
+		map.value(s)->attachAxis(xAxis);
+		map.value(s)->attachAxis(yAxis);
+		//qDebug() << "replace force redraw...done";
+	}
 }
 
 void AstroCalcAltVsTimeChart::show(Series s)
 {
 	qDebug() << "About to add series " << s;
 	if (!series().contains(map.value(s)))
+	{
 		addSeries(map.value(s));
+		map.value(s)->attachAxis(xAxis);
+		map.value(s)->attachAxis(yAxis);
+	}
 	else
 		qDebug() << "series" << s << "already shown.";
-	// TODO: Adjust axis?
 }
 
 void AstroCalcAltVsTimeChart::clear(Series s)
@@ -123,34 +137,36 @@ void AstroCalcAltVsTimeChart::clear(Series s)
 void AstroCalcAltVsTimeChart::setupAxes()
 {
 	qDebug() << "setupAxes()...";
-	xAxis=new QtCharts::QValueAxis(this);
-	yAxis=new QtCharts::QValueAxis(this);
-	QString xAxisStr = q_("Local Time");
-	QString yAxisStr = QString("%1, %2").arg(q_("Altitude"), QChar(0x00B0));
 
-	static const QPen axisPen(       Qt::white,      1, Qt::SolidLine);
-	static const QPen axisGridPen(   Qt::white,      1, Qt::DotLine);
-	static const QPen altPen(        Qt::red,        2, Qt::SolidLine);
-	static const QPen currentTimePen(Qt::darkGreen,  1, Qt::SolidLine);
-	static const QPen transitTimePen(Qt::cyan,       1, Qt::SolidLine);
-	static const QPen sunPen(        Qt::darkYellow, 2, Qt::SolidLine);
-	static const QPen civilPen(      Qt::darkBlue,   1, Qt::DashLine);
-	static const QPen nauticalPen(   Qt::darkBlue,   1, Qt::DashDotLine);
-	static const QPen astroPen(      Qt::darkBlue,   1, Qt::DashDotDotLine);
-	static const QPen moonPen(       Qt::darkGreen,  2, Qt::DashLine);
+	static const QPen axisPen(       Qt::white,                         1,    Qt::SolidLine);
+	static const QPen axisGridPen(   Qt::white,                         0.5,  Qt::SolidLine);
+	static const QPen axisMinorGridPen(Qt::white,                       0.35, Qt::DotLine);
+	static const QPen altPen(        Qt::red,                           2, Qt::SolidLine);
+	static const QPen currentTimePen(Qt::yellow,                        2, Qt::SolidLine);
+	static const QPen transitTimePen(Qt::cyan,                          2, Qt::SolidLine);
+	static const QPen sunPen(        QColorConstants::Svg::orange,      2, Qt::SolidLine);
+	static const QPen civilPen(      QColorConstants::Svg::paleturquoise, 1, Qt::DashLine);
+	static const QPen nauticalPen(   QColorConstants::Svg::dodgerblue,   1, Qt::DashDotLine);
+	static const QPen astroPen(      Qt::darkBlue,                      1, Qt::DashDotDotLine);
+	static const QPen moonPen(       QColorConstants::Svg::springgreen, 2, Qt::DashLine);
 
-
-	//xAxis->setLabel(xAxisStr);
-	//yAxis->setLabel(yAxisStr);
+	xAxis->setTitleText(q_("Local Time"));
+	yAxis->setTitleText(QString("%1, %2").arg(q_("Altitude"), QChar(0x00B0)));
+	xAxis->setTitleBrush(Qt::white);
+	yAxis->setTitleBrush(Qt::white);
+	xAxis->setLabelsBrush(Qt::white);
+	yAxis->setLabelsBrush(Qt::white);
 	xAxis->setLinePen(axisPen);
-	//xAxis->setGridLinePen(axisGridPen);
+	xAxis->setGridLinePen(axisGridPen);
+	xAxis->setMinorGridLinePen(axisMinorGridPen);
 	xAxis->setRange(43200, 129600); // 24 hours since 12h00m (range in seconds)
 	xAxis->setTickCount(9); // step is 3 hours
 	xAxis->setMinorTickCount(2); // substep is 1 hours
 
 	setYrange(yMin, yMax);
 	yAxis->setLinePen(axisPen);
-	//yAxis->setGridLinePen(axisGridPen);
+	yAxis->setGridLinePen(axisGridPen);
+	yAxis->setMinorGridLinePen(axisMinorGridPen);
 
 	addAxis(xAxis, Qt::AlignBottom);
 	addAxis(yAxis, Qt::AlignLeft);
