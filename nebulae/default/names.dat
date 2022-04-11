@@ -22,6 +22,7 @@
 #   SEDS: A Collection of Some Common Names for Deep Sky Objects; http://messier.seds.org/xtra/supp/d-names.html
 #   SIMBAD: 2000,A&AS,143,9, "The SIMBAD astronomical database", Wenger et al.; http://simbad.u-strasbg.fr/simbad/
 #   WP: Wikipedia entries for the respective objects
+#      - Snowglobe Nebula; https://de.wikipedia.org/wiki/Liste_planetarischer_Nebel
 #   OGSC: Observer’s Guide to Star Clusters by Mike Inglis, Springer, 2013; https://books.google.ru/books?id=ewHABAAAQBAJ
 #   APOD: 
 #      - IC 4592: A Blue Horsehead; https://apod.nasa.gov/apod/ap090521.html
@@ -74,6 +75,7 @@
 #      - NGC 4151: The 'Eye of Sauron'; https://www.nasa.gov/mission_pages/chandra/multimedia/11-029.html
 #      - NGC1566 - Spanish Dancer Galaxy; https://science.nasa.gov/ngc-1566-spanish-dancer-spiral-galaxy
 #      - NGC7479 - Propeller Galaxy; https://www.nasa.gov/feature/goddard/caldwell-44
+#      - IC 1318 - Butterfly Nebula; https://science.nasa.gov/ic-1318-butterfly-nebula-gas-and-dust
 #   DSW: Deep-Sky Wonders: A Tour of the Universe with Sky and Telescope's Sue French, Firefly Books, 2011
 #   TSS: Treasures of the Southern Sky by Robert Gendler, Lars Lindberg Christensen and David Malin, Springer-Verlag New York, 2011; DOI: 10.1007/978-1-4614-0628-0
 #   BCH: Robert Burnham Jr., Burnham's Celestial Handbook: An Observer's Guide to the Universe Beyond the Solar System, Vol. 1-3, Dover Publications, 1978-1979
@@ -113,8 +115,7 @@
 #   JH: Sir John Herschel's note
 #      - NGC3199/h3239: Falcated Nebula; Results of astronomical observations made during the years 1834, 5, 6, 7, 8, at the Cape of Good Hope... P38, 20, 94; https://ngcicproject.observers.org/Historical_Record/Corwin/1847AO-1_JHerschelCapeObs.pdf
 #      - NGC2070: Great Looped Nebula; Results of astronomical observations made during the years 1834, 5, 6, 7, 8, at the Cape of Good Hope...
-#   ???: Source very much needed. Marked especially for objects which have a well-known name, where a new/alternative name does not help anybody.
-#   TBD:  ADD OTHERS HERE!
+#   MISC: Miscellaneous, unusual or unsorted source.
 #      - The Kite Cluster (NGC 1664); https://observing.skyhound.com/archives/dec/NGC_1664.html
 #      - NGC3310 - Bow and Arrow Galaxy; http://astroa.physics.metu.edu.tr/~umk/ccd_wshop_adelman/Astronom/GALAXY/NGC3310.HTM
 #      - NGC6559 - Chinese Dragon Nebula; https://noirlab.edu/public/images/gemini0509b/ https://skyandtelescope.org/astronomy-news/astro-image-in-the-newsdragon-in-the-sky/
@@ -124,6 +125,9 @@
 #      - Arp316 - Gamma Leonis Group; https://astronomy.com/observing/observing-podcasts/2016/04/the-eta-carinae-nebula-m95-and-the-gamma-leonis-group
 #      - B86 - Herschel's Hole in the Heavens; http://www.klima-luft.de/steinicke/Artikel/Herschel's%20Hole.pdf
 #      - CR89: 9-12 Geminorum Cluster; 1,001 Celestial Wonders to See Before You Die. P460.
+#      - NGC5694: Tombaugh's Globular Cluster; Stars: A Practical Guide to the Key Constellations by Mark Westmoquette, Page120; https://books.google.com.hk/books?id=6uACEAAAQBAJ
+#   ???: Source very much needed. Marked especially for objects which have a well-known name, where a new/alternative name does not help anybody.
+#   TBD:  ADD OTHERS HERE!
 NGC  40              _("Bow-Tie Nebula") # ESKY, B500
 NGC  40              _("Scarab Nebula") # B500
 NGC  55              _("String of Pearls") # SG
@@ -205,6 +209,7 @@ NGC  1232            _("Eye of God Galaxy") # B500, HT
 NGC  1245            _("Patrick Starfish Cluster") # B500, SD
 NGC  1269            _("Snow Collar Galaxy") # SG, HT
 NGC  1275            _("Perseus A") # NED, SIMBAD, BCH, PAS
+NGC  1277            _("Relic Galaxy") # WP
 NGC  1313            _("Topsy Turvy Galaxy") # WP
 NGC  1316            _("Fornax A") # NED, SIMBAD, TSS, SG, HT, WSG, PSA, B500
 NGC  1317            _("Fornax B") # SIMBAD
@@ -252,7 +257,7 @@ NGC  1579            _("Northern Trifid Nebula") # DSW, SD, B500
 NGC  1595            _("Carafe Group")
 NGC  1598            _("Carafe Group")
 NGC  1647            _("Pirate Moon Cluster") # B500, HT
-NGC  1664            _("Kite Cluster") # AM, TBD
+NGC  1664            _("Kite Cluster") # AM, MISC
 NGC  1664            _("4-H cluster") # DWH
 NGC  1788            _("Cosmic Bat Nebula") # SD
 NGC  1788            _("Foxface Nebula") # SD
@@ -434,6 +439,7 @@ NGC  3189            _("NGC 3190 Group") # BCH, SIMBAD
 NGC  3189            _("Leo Quartet") # WSG
 NGC  3193            _("Leo Quartet") # WSG
 NGC  3199            _("Falcated Nebula") # JH
+NGC  3199            _("Banana Nebula") # WP
 NGC  3228            _("Queen's Cache Cluster") # HT
 NGC  3242            _("Ghost of Jupiter Nebula") # WK, SIMBAD, DSW, BCH, DWH, WSO, PSA, CC, DN, B500, PAS, TLO
 NGC  3242            _("Eye Nebula") # DN
@@ -441,7 +447,7 @@ NGC  3242            _("Diamond Nebula") # B500
 NGC  3293            _("Gem Cluster") # OGSC, CSOG-MSC, TLO
 NGC  3293            _("Spider Spit Cluster") # SG, HT
 NGC  3293            _("Little Jewel Box") # SG, HT
-NGC  3310            _("Bow and Arrow Galaxy") # TBD, CSOG-BCH
+NGC  3310            _("Bow and Arrow Galaxy") # MISC, CSOG-BCH
 NGC  3324            _("The Gabriela Mistral Nebula") # WP
 NGC  3344            _("Sliced Onion Galaxy") # B500, HT
 NGC  3372            _("η Car Nebula") # WK, SIMBAD, TSS, BCH, SG, WSO, PSA, PAS
@@ -454,7 +460,7 @@ NGC  3532            _("Wishing Well Cluster") # OGSC, CSOG-MSC, TLO
 NGC  3532            _("Firefly Party Cluster") # OGSC
 NGC  3532            _("Pincushion Cluster") # OGSC
 NGC  3532            _("The Pin Cushion Cluster") # SG
-NGC  3556            _("Surfboard Galaxy")
+NGC  3556            _("Surfboard Galaxy") # SEDS
 NGC  3561            _("Ambartsumian's Knot") # NED, DSNI
 NGC  3561            _("The Guitar") # SIMBAD
 NGC  3576            _("Statue of Liberty Nebula") # APOD
@@ -479,7 +485,7 @@ NGC  3766            _("Rich Man's Jewel Box") # SG
 NGC  3918            _("Blue Planetary Nebula") # SG, PSA, DAN, DSNI
 NGC  3918            _("The Southerner") # SG
 NGC  3928            _("Miniature Spiral") # SIMBAD
-NGC  3992            _("Vacuum Cleaner Galaxy")
+NGC  3992            _("Vacuum Cleaner Galaxy") # SEDS
 NGC  4005            _("NGC 4005 group") # WSG
 NGC  4038            _("Antennae") # WK, DSW, TSS, DWH, WSO, WSG, PSA, DSNI, B500, PAS
 NGC  4038            _("Ring-Tail Galaxy") # BCH, DWH, WSG, DN, DSNI, B500
@@ -683,7 +689,7 @@ NGC  6543            _("Cat's Eye Nebula") # SIMBAD, DSW, DWH, WSO, CC, DN, B500
 NGC  6543            _("Sunflower Nebula") # SIMBAD
 NGC  6543            _("Snail Nebula") # SIMBAD
 NGC  6544            _("Starfish Cluster") # B500, HT
-NGC  6559            _("Chinese Dragon Nebula") # TBD, CSOG-BCH
+NGC  6559            _("Chinese Dragon Nebula") # MISC, CSOG-BCH
 NGC  6563            _("Southern Ring Nebula") # B500, SG, SD
 NGC  6572            _("Blue Racquetball Nebula") # DSW, B500
 NGC  6572            _("Emerald Nebula") # DSW, DN, B500
@@ -705,7 +711,6 @@ NGC  6633            _("Captain Hook Cluster") # HT
 NGC  6633            _("Wasp-Waist Cluster") # HT
 NGC  6642            _("Tadpole Cluster") # DSW
 NGC  6656            _("Great Sagittarius Cluster") # B500, SG, CSOG-MSC
-NGC  6656            _("Crackerjack Cluster") # MO, SG
 NGC  6664            _("Santa's Sleigh Cluster") # B500, SD
 NGC  6664            _("Teacup Cluster") # SD
 NGC  6705            _("Wild Duck Cluster") # OGSC, SIMBAD, DSW, TSS, WSO, PSA, CC, CSOG-MSC, B500, PAS, TLO
@@ -718,8 +723,8 @@ NGC  6723            _("Chandelier Cluster") # B500
 NGC  6729            _("R CrA Nebula") # PAS
 NGC  6741            _("Phantom Streak Nebula") # SIMBAD, ST3
 NGC  6745            _("Bird's Head")
-NGC  6751            _("Dandelion Puffball Nebula") # SD
-NGC  6751            _("Glowing Eye Nebula") # SD
+NGC  6751            _("Dandelion Puffball Nebula") # WP, SD
+NGC  6751            _("Glowing Eye Nebula") # WP, SD
 NGC  6752            _("Pavo Globular Cluster") # CSOG-MSC
 NGC  6752            _("The Starfish") # OGSC, SG
 NGC  6752            _("The Windmill") # OGSC, SG
@@ -727,8 +732,8 @@ NGC  6755            _("Possible Binary Cluster") # SD
 NGC  6756            _("Possible Binary Cluster") # SD
 NGC  6776            _("Pentagon") # SIMBAD
 NGC  6778            _("Son of M76") # SD
+NGC  6781            _("Snowglobe Nebula") # WP, B500
 NGC  6781            _("Ghost of the Moon Nebula") # SD, B500
-NGC  6781            _("The Snowglobe") # B500
 NGC  6781            _("Eagle's nest") # B500
 NGC  6804            _("Incredible Shrinking Nebula") # SD
 NGC  6804            _("Snowball Nebula") # SD, B500
@@ -871,11 +876,13 @@ IC   417             _("Spider Nebula") # SD
 IC   418             _("Spirograph Nebula") # HT, DN, B500
 IC   418             _("Raspberry Nebula") # B500, HT
 IC   418             _("Colored Contacts Nebula") # HT
-IC   423             _("Teardrop Nebula") # TBD, CSOG-BCH
+IC   423             _("Teardrop Nebula") # MISC, CSOG-BCH
 IC   443             _("Jellyfish Nebula") # APOD
 IC   443             _("Gemini A") # SIMBAD
 IC   708             _("Papillon")
 IC   1318            _("γ Cyg Nebula") # SIMBAD, SD
+IC   1318            _("Butterfly Nebula") # NASA
+IC   1318            _("Sadr Region") # WP
 IC   1365            _("ZW II 108 Group") # SIMBAD
 IC   1396            _("Elephant's Trunk Nebula") # WK
 IC   1396            _("The Misty Clover Cluster") # HT
@@ -884,7 +891,7 @@ IC   1805            _("Heart Nebula") # CSOG-MSC, B500
 IC   1805            _("The Running Dog Nebula") # B500
 IC   1805            _("Valentine Nebula") # B500
 IC   1805            _("AFGL 333 Cloud") # SIMBAD
-IC   2087            _("Little Flame Nebula") # TBD, CSOG-BCH
+IC   2087            _("Little Flame Nebula") # MISC, CSOG-BCH
 IC   2118            _("Witch Head Nebula") # WK, DSW, TSS, PSA
 IC   2169            _("Dreyer's Nebula") # WP
 IC   2199            _("IC 2199 group") # WSG
@@ -907,7 +914,7 @@ IC   3568            _("Theoretician's Nebula") # B500, HT
 IC   3568            _("Baby Eskimo Nebula") # B500, DSW
 IC   3568            _("Sliced Lime Nebula") # HT
 IC   4321            _("Seashell Galaxy") # NED
-IC   4406            _("Retina Nebula")
+IC   4406            _("Retina Nebula") # WP
 IC   4592            _("Blue Horsehead Nebula") # APOD, TSS
 IC   4593            _("White-eyed Pea Nebula") # DSW, SD, B500
 IC   4604            _("ρ Oph Nebula") # SIMBAD
@@ -961,7 +968,7 @@ B    72              _("The S Nebula") # WK, BCH
 B    78              _("Pipe (bowl)") # WK
 B    78              _("Pipe Nebula") # BCH, DN
 B    86              _("Ink Spot Nebula") # WK, DSW, CC, DN, B500
-B    86              _("Herschel's Hole in the Heavens") # CSOG-BCH, TBD
+B    86              _("Herschel's Hole in the Heavens") # CSOG-BCH, MISC
 B    87              _("Parrot's Head Nebula") # DSW
 B    92              _("Black Hole Nebula") # DSNI
 B    142             _("E Nebula") # WK, DSW
@@ -982,7 +989,7 @@ CR   69              _("λ Ori Cluster") # HT
 CR   69              _("Aunt Margaret's Mirror") # HT
 CR   70              _("Orion Belt Cluster") # SD
 CR   70              _("Serpentine Column") # SD
-CR   89              _("9-12 Geminorum Cluster") # TBD
+CR   89              _("9-12 Geminorum Cluster") # MISC
 CR   135             _("π Pup Cluster") # OGSC
 CR   140             _("Tuft in the Tail of the Dog Cluster")
 CR   205             _("Markarian 18 Cluster")
@@ -997,7 +1004,7 @@ CR   399             _("Al-Sufi's Nebula") # HT
 CR   399             _("The Snail") # HT
 CR   463             _("Loch Ness Moster Cluster") # SD
 CR   463             _("The Queen's Reflection") # SD
-CED  19D             _("Electra Nebula") # TBD, CSOG-BCH
+CED  19D             _("Electra Nebula") # MISC, CSOG-BCH
 CED  19O             _("Atlas Nebula") # DSNI
 CED  32C             _("Burnham's Nebula") # SIMBAD
 CED  32C             _("T Tauri Nebula")
@@ -1224,7 +1231,7 @@ UGC  11668           _("Egg Nebula") # SIMBAD, PSA, ST5
 UGC  11668           _("Cygnus Egg") # SIMBAD
 UGC  12613           _("Pegasus Dwarf Irregular Galaxy")
 ARP  133             _("Minkowski's Object") # WSG
-ARP  316             _("Gamma Leonis Group") # CSOG-BCH, TBD
+ARP  316             _("Gamma Leonis Group") # CSOG-BCH, MISC
 VV   786             _("Lemon Galaxy") # SIMBAD
 PK   010+18.2        _("Minkowski's Butterfly") # DSW
 PK   010+18.2        _("Twin Jet Nebula")
