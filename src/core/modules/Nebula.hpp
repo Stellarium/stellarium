@@ -36,16 +36,14 @@ class Nebula : public StelObject
 {
 friend class NebulaMgr;
 
-	//Required for the correct working of the Q_FLAGS macro (which requires a MOC pass)
+	//Required for the correct working of the Q_FLAG macro (which requires a MOC pass)
 	Q_GADGET
-	Q_FLAGS(CatalogGroup)
-	Q_FLAGS(TypeGroup)
-	Q_ENUMS(NebulaType)
 public:
 	static const QString NEBULA_TYPE;
 
 	enum CatalogGroupFlags
 	{
+		CatNone		= 0x00000000, //!< Nothing selected
 		CatNGC		= 0x00000001, //!< New General Catalogue (NGC)
 		CatIC			= 0x00000002, //!< Index Catalogue (IC)
 		CatM			= 0x00000004, //!< Messier Catalog (M)
@@ -78,9 +76,11 @@ public:
 		CatOther		= 0x20000000  //!< without ID
 	};
 	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
+	Q_FLAG(CatalogGroup)
 
 	enum TypeGroupFlags
 	{
+		TypeNone                = 0x00000000, //!< Nothing selected
 		TypeGalaxies			= 0x00000001, //!< Galaxies
 		TypeActiveGalaxies		= 0x00000002, //!< Different Active Galaxies
 		TypeInteractingGalaxies	= 0x00000004, //!< Interacting Galaxies
@@ -95,10 +95,11 @@ public:
 		TypeOther				= 0x00000800  //!< Other objects
 	};
 	Q_DECLARE_FLAGS(TypeGroup, TypeGroupFlags)
+	Q_FLAG(TypeGroup)
 
 	//! A pre-defined set of specifiers for the catalogs filter
-	static const CatalogGroupFlags AllCatalogs = static_cast<CatalogGroupFlags>(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG|CatSNRG|CatACO|CatHCG|CatESO|CatVdBH|CatDWB|CatTr|CatSt|CatRu|CatOther);
-	static const TypeGroupFlags AllTypes = static_cast<TypeGroupFlags>(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeOpenStarClusters|TypeGlobularStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeGalaxyClusters|TypeOther);
+	static constexpr CatalogGroup AllCatalogs = static_cast<CatalogGroup>(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG|CatSNRG|CatACO|CatHCG|CatESO|CatVdBH|CatDWB|CatTr|CatSt|CatRu|CatOther);
+	static constexpr TypeGroup    AllTypes    = static_cast<TypeGroup>(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeOpenStarClusters|TypeGlobularStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeGalaxyClusters|TypeOther);
 
 	//! @enum NebulaType Nebula types
 	enum NebulaType
@@ -141,9 +142,10 @@ public:
 		NebRegion		= 35,	//!< Region of the sky
 		NebUnknown		= 36		//!< m Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
+	Q_ENUM(NebulaType)
 
 	Nebula();
-	~Nebula();
+	~Nebula() Q_DECL_OVERRIDE;
 
 	//! Nebula support the following InfoStringGroup flags:
 	//! - Name
@@ -158,7 +160,7 @@ public:
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Nebula.
-	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 	//! In addition to the entries from StelObject::getInfoMap(), Nebula objects provide
 	//! - bmag (photometric B magnitude. 99 if unknown)
 	//! - morpho (longish description; translated!)
@@ -167,20 +169,20 @@ public:
 	//! A few entries are optional
 	//! - bV (B-V index)
 	//! - redshift
-	virtual QVariantMap getInfoMap(const StelCore *core) const;
-	virtual QString getType() const {return NEBULA_TYPE;}
-	virtual QString getID() const {return getDSODesignation(); } //this depends on the currently shown catalog flags, should this be changed?
-	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const;
-	virtual double getCloseViewFov(const StelCore* core = Q_NULLPTR) const;
-	virtual float getVMagnitude(const StelCore* core) const;
-	virtual float getSelectPriority(const StelCore* core) const;
-	virtual Vec3f getInfoColor() const;
-	virtual QString getNameI18n() const {return nameI18;}
-	virtual QString getEnglishName() const {return englishName;}
+	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
+	virtual QString getType() const Q_DECL_OVERRIDE {return NEBULA_TYPE;}
+	virtual QString getID() const Q_DECL_OVERRIDE {return getDSODesignation(); } //this depends on the currently shown catalog flags, should this be changed?
+	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const Q_DECL_OVERRIDE;
+	virtual double getCloseViewFov(const StelCore* core = Q_NULLPTR) const Q_DECL_OVERRIDE;
+	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
+	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
+	virtual Vec3f getInfoColor() const Q_DECL_OVERRIDE;
+	virtual QString getNameI18n() const Q_DECL_OVERRIDE {return nameI18;}
+	virtual QString getEnglishName() const Q_DECL_OVERRIDE {return englishName;}
 	QString getEnglishAliases() const;
 	QString getI18nAliases() const;
-	virtual double getAngularSize(const StelCore*) const;
-	virtual SphericalRegionP getRegion() const {return pointRegion;}
+	virtual double getAngularRadius(const StelCore*) const Q_DECL_OVERRIDE;
+	virtual SphericalRegionP getRegion() const Q_DECL_OVERRIDE {return pointRegion;}
 
 	// Methods specific to Nebula
 	void setLabelColor(const Vec3f& v) {labelColor = v;}
@@ -230,7 +232,7 @@ public:
 
 protected:
 	//! Format the magnitude info string for the object
-	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const;
+	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const Q_DECL_OVERRIDE;
 
 private:
 	friend struct DrawNebulaFuncObject;
@@ -240,7 +242,7 @@ private:
 	{
 		nameI18 = trans.qtranslate(englishName);
 		nameI18Aliases.clear();
-		for (auto alias : englishAliases)
+		for (auto &alias : englishAliases)
 			nameI18Aliases.append(trans.qtranslate(alias));
 	}	
 

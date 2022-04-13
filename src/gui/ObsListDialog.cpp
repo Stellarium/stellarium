@@ -47,7 +47,7 @@ ObsListDialog::ObsListDialog ( QObject* parent ) : StelDialog ( "Observing list"
 	objectMgr = GETSTELMODULE ( StelObjectMgr );
 	labelMgr = GETSTELMODULE ( LabelMgr );
 	obsListListModel = new QStandardItemModel ( 0,ColumnCount );
-	observingListJsonPath = StelFileMgr::findFile ( "data", ( StelFileMgr::Flags ) ( StelFileMgr::Directory|StelFileMgr::Writable ) ) + "/" + QString ( JSON_FILE_NAME );
+	observingListJsonPath = StelFileMgr::findFile ( "data", static_cast<StelFileMgr::Flags>( StelFileMgr::Directory|StelFileMgr::Writable ) ) + "/" + QString ( JSON_FILE_NAME );
 	createEditDialog_instance = Q_NULLPTR;
 	defaultListUuid_ = "";
 }
@@ -155,7 +155,7 @@ void ObsListDialog::setObservingListHeaderNames()
 		q_( "Location" ) // Hided column
 	};
 
-	obsListListModel->setHorizontalHeaderLabels ( headerStrings );;
+	obsListListModel->setHorizontalHeaderLabels ( headerStrings );
 }
 
 /*
@@ -215,7 +215,7 @@ void ObsListDialog::obsListHighLightAllButtonPressed()
 	QString color = hlMgr->getColor().toHtmlColor();
 	float distance = hlMgr->getMarkersSize();
 
-	for ( auto item : observingListItemCollection )
+	for ( const auto &item : qAsConst(observingListItemCollection) )
 	{
 		QString name	= item.name;
 		QString raStr	= item.ra.trimmed();
@@ -255,7 +255,7 @@ void ObsListDialog::obsListClearHighLightButtonPressed()
 	objectMgr->unSelect();
 	GETSTELMODULE ( HighlightMgr )->cleanHighlightList();
 	// Clear labels
-	for ( auto l : highlightLabelIDs )
+	for ( auto l : qAsConst(highlightLabelIDs) )
 		labelMgr->deleteLabel ( l );
 
 	highlightLabelIDs.clear();
@@ -362,7 +362,6 @@ void ObsListDialog::loadDefaultList()
 */
 void ObsListDialog::loadObservingList ( QString listUuid )
 {
-	QVariantMap map;
 	QVariantList listOfObjects;
 	QFile jsonFile ( observingListJsonPath );
 	if ( !jsonFile.open ( QIODevice::ReadOnly ) )
@@ -377,7 +376,7 @@ void ObsListDialog::loadObservingList ( QString listUuid )
 				ui->obsListClearHighlightButton->setEnabled ( true );
 				ui->obsListDeleteButton->setEnabled(true);
 
-				for ( QVariant object: listOfObjects )
+				for ( const QVariant &object: qAsConst(listOfObjects) )
 				{
 					QVariantMap objectMap;
 					if ( object.canConvert<QVariantMap>() )
@@ -399,7 +398,7 @@ void ObsListDialog::loadObservingList ( QString listUuid )
 
 								QString objectType = selectedObject[0]->getType();
 
-								float ra, dec;
+								double ra, dec;
 								StelUtils::rectToSphe ( &ra, &dec, selectedObject[0]->getJ2000EquatorialPos ( core ) );
 								objectRaStr = StelUtils::radToHmsStr ( ra, false ).trimmed();
 								objectDecStr = StelUtils::radToDmsStr ( dec, false ).trimmed();
@@ -425,7 +424,7 @@ void ObsListDialog::loadObservingList ( QString listUuid )
 								if ( loc.name.isEmpty() )
 									Location = QString ( "%1, %2" ).arg ( loc.latitude ).arg ( loc.longitude );
 								else
-									Location = QString ( "%1, %2" ).arg ( loc.name ).arg ( loc.region );
+									Location = QString ( "%1, %2" ).arg ( loc.name, loc.region );
 
 								addModelRow ( lastRow,objectUuid,objectName, objectNameI18n, objectType, objectRaStr, objectDecStr, objectMagnitudeStr, objectConstellation );
 
@@ -582,15 +581,10 @@ void ObsListDialog::selectAndGoToObject ( QModelIndex index )
 				candidates = GETSTELMODULE ( StarMgr )->searchAround ( pos, 0.5, core );
 			}
 
-			Vec3d winpos;
-			prj->project ( pos, winpos );
-			float xpos = winpos[0];
-			float ypos = winpos[1];
-			float best_object_value = 1000.f;
-			for ( const auto& obj : candidates )
+			double best_object_value = M_PI;
+			for ( const auto& obj : qAsConst(candidates) )
 			{
-				prj->project ( obj->getJ2000EquatorialPos ( core ), winpos );
-				float distance = std::sqrt ( ( xpos-winpos[0] ) * ( xpos-winpos[0] ) + ( ypos-winpos[1] ) * ( ypos-winpos[1] ) );
+				double distance=pos.angle(obj->getJ2000EquatorialPos(core));
 				if ( distance < best_object_value )
 				{
 					best_object_value = distance;

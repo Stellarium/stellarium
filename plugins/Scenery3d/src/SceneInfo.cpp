@@ -339,7 +339,7 @@ QStringList SceneInfo::getAllSceneIDs()
 	QStringList result;
 
 	// We just look over the map of names to IDs and extract the values
-	for (auto i : nameToDirMap.values())
+	for (auto &i : nameToDirMap.values())
 	{
 		result += i;
 	}
@@ -352,7 +352,7 @@ QStringList SceneInfo::getAllSceneNames()
 	QStringList result;
 
 	// We just look over the map of names to IDs and extract the keys
-	for (auto i : nameToDirMap.keys())
+	for (auto &i : nameToDirMap.keys())
 	{
 		result += i;
 	}
@@ -361,10 +361,9 @@ QStringList SceneInfo::getAllSceneNames()
 
 QMap<QString, QString> SceneInfo::getNameToIDMap()
 {
-	QSet<QString> scenery3dDirs;
 	QMap<QString, QString> result;
 
-	scenery3dDirs = StelFileMgr::listContents(SceneInfo::SCENES_PATH, StelFileMgr::Directory);
+	const QSet<QString> scenery3dDirs = StelFileMgr::listContents(SceneInfo::SCENES_PATH, StelFileMgr::Directory);
 
 	for (const auto& dir : scenery3dDirs)
 	{

@@ -296,7 +296,7 @@ private:
 	{
 		ButtonGroup() : leftMargin(0), rightMargin(0),
 						pixBackgroundLeft(Q_NULLPTR), pixBackgroundRight(Q_NULLPTR),
-						pixBackgroundMiddle(Q_NULLPTR), pixBackgroundSingle(Q_NULLPTR) {;}
+						pixBackgroundMiddle(Q_NULLPTR), pixBackgroundSingle(Q_NULLPTR) {}
 		//! Elements of the group
 		QList<StelButton*> elems;
 		//! Left margin size in pixel

@@ -1354,7 +1354,7 @@ struct ALViewportEdgeIntersectCallbackData
 {
 	ALViewportEdgeIntersectCallbackData(StelPainter* p)
 		: sPainter(p)
-	{;}
+	{}
 	StelPainter* sPainter;
 	//Vec4f textColor;
 	QString text;		// Label to display at the intersection of the lines and screen side

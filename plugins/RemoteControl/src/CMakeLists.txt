@@ -1,5 +1,5 @@
 INCLUDE_DIRECTORIES(. gui qtwebapp)
-LINK_DIRECTORIES(${BUILD_DIR}/src)
+LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 
 SET(QtWebApp_SRCS
   qtwebapp/httpserver/httpconnectionhandler.cpp

@@ -51,13 +51,13 @@ ScreenImage::ScreenImage(const QString& filename, qreal x, qreal y, bool show, q
 
 	anim = new QGraphicsItemAnimation();
 	moveTimer = new QTimeLine();
-	moveTimer->setCurveShape(QTimeLine::LinearCurve);
+	moveTimer->setEasingCurve(QEasingCurve(QEasingCurve::Linear));
 	anim->setTimeLine(moveTimer);
 	anim->setItem(tex);
 
 	scaleAnim = new QGraphicsItemAnimation();
 	scaleTimer = new QTimeLine();
-	scaleTimer->setCurveShape(QTimeLine::LinearCurve);
+	scaleTimer->setEasingCurve(QEasingCurve(QEasingCurve::Linear));
 	scaleAnim->setTimeLine(scaleTimer);
 	scaleAnim->setItem(tex);
 	// we must configure the end for proper rescaling
@@ -65,8 +65,8 @@ ScreenImage::ScreenImage(const QString& filename, qreal x, qreal y, bool show, q
 	scaleAnim->setScaleAt(1., 1., 1.);
 
 	fadeTimer = new QTimeLine();
-	fadeTimer->setCurveShape(QTimeLine::LinearCurve);
-	setFadeDuration(fadeDuration);
+	fadeTimer->setEasingCurve(QEasingCurve(QEasingCurve::Linear));
+	ScreenImage::setFadeDuration(fadeDuration);
 	connect(fadeTimer, SIGNAL(valueChanged(qreal)), this, SLOT(setOpacity(qreal)));
 
 	// set inital displayed state
@@ -156,7 +156,7 @@ void ScreenImage::setXY(qreal x, qreal y, float duration)
 		qreal dX = (x-sX) / 200.;
 		qreal dY = (y-sY) / 200.;
 		for(int i=0; i<200; i++)
-			anim->setPosAt(static_cast<qreal>(i/200.f), QPointF(sX+(dX*i), (sY+(dY*i))));
+			anim->setPosAt(static_cast<qreal>(static_cast<float>(i)/200.f), QPointF(sX+(dX*i), (sY+(dY*i))));
 		anim->setPosAt(1.0, QPointF(x, y));
 		moveTimer->start();
 	}
@@ -233,7 +233,7 @@ void ScreenImageMgr::init()
 
 void ScreenImageMgr::draw(StelCore* core)
 {
-	for (auto* m : allScreenImages)
+	for (auto* m : qAsConst(allScreenImages))
 		if (m!=Q_NULLPTR)
 			m->draw(core);
 }
@@ -276,7 +276,7 @@ void ScreenImageMgr::deleteImage(const QString& id)
 	
 void ScreenImageMgr::deleteAllImages()
 {
-	for (auto* m : allScreenImages)
+	for (auto* m : qAsConst(allScreenImages))
 	{
 		if (m!=Q_NULLPTR)
 		{
@@ -370,7 +370,7 @@ void ScreenImageMgr::setImageScale(const QString& id, qreal scaleX, qreal scaleY
 
 void ScreenImageMgr::update(double deltaTime)
 {
-	for (auto* m : allScreenImages)
+	for (auto* m : qAsConst(allScreenImages))
 		if (m!=Q_NULLPTR)
 			m->update(deltaTime);
 }

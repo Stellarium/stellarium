@@ -5,7 +5,7 @@ paths:
     - Did you remember to update screenshots to match new updates?
     - Did you remember to grammar check in changed part of documentation?
   "skycultures/**":
-    - Did you remember to update `po/stellarium-skycultures/POFILES.in` and `src/translations.h` files respectively to changes in sky cultures?
+    - Did you remember to update `po/stellarium-skycultures/POFILES.in` file respectively to changes in sky cultures?
     - Did you remember to update `skycultures/CMakeLists.txt` and `skycultures/YOUR-SKYCULTURE-FOLDER/CMakeLists.txt` files respectively to changes in sky cultures?
     - Did you remember to update `util/skycultures/po4a.config` file respectively to changes in sky cultures?
     - Did you remember to define classification parameter in sky cultures?

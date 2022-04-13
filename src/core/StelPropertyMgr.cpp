@@ -196,8 +196,8 @@ StelPropertyProxy::StelPropertyProxy(StelProperty *prop, QObject *parent)
 	connect(prop, &StelProperty::changed, this, &StelPropertyProxy::onPropertyChanged);
 }
 
-StelPropertyIntProxy::StelPropertyIntProxy(StelProperty *prop, QObject *parent)
-	: StelPropertyProxy(prop,parent)
+StelPropertyIntProxy::StelPropertyIntProxy(StelProperty *pr, QObject *parent)
+	: StelPropertyProxy(pr,parent)
 {
 }
 
@@ -206,8 +206,8 @@ void StelPropertyIntProxy::onPropertyChanged(const QVariant &value)
 	emit propertyChanged(value.toInt());
 }
 
-StelPropertyBoolProxy::StelPropertyBoolProxy(StelProperty *prop, QObject *parent)
-	: StelPropertyProxy(prop,parent)
+StelPropertyBoolProxy::StelPropertyBoolProxy(StelProperty *pr, QObject *parent)
+	: StelPropertyProxy(pr,parent)
 {
 }
 
@@ -216,8 +216,8 @@ void StelPropertyBoolProxy::onPropertyChanged(const QVariant &value)
 	emit propertyChanged(value.toBool());
 }
 
-StelPropertyDoubleProxy::StelPropertyDoubleProxy(StelProperty *prop, QObject *parent)
-	: StelPropertyProxy(prop,parent)
+StelPropertyDoubleProxy::StelPropertyDoubleProxy(StelProperty *pr, QObject *parent)
+	: StelPropertyProxy(pr,parent)
 {
 }
 
@@ -226,8 +226,8 @@ void StelPropertyDoubleProxy::onPropertyChanged(const QVariant &value)
 	emit propertyChanged(value.toDouble());
 }
 
-StelPropertyStringProxy::StelPropertyStringProxy(StelProperty *prop, QObject *parent)
-	: StelPropertyProxy(prop,parent)
+StelPropertyStringProxy::StelPropertyStringProxy(StelProperty *pr, QObject *parent)
+	: StelPropertyProxy(pr,parent)
 {
 }
 

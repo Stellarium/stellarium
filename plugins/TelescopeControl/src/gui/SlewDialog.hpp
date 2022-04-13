@@ -43,14 +43,14 @@ class SlewDialog : public StelDialog
 
 public:
 	SlewDialog();
-	virtual ~SlewDialog();
+	virtual ~SlewDialog() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	virtual void retranslate() Q_DECL_OVERRIDE;
 	
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	Ui_slewDialog* ui;
 	
 private slots:

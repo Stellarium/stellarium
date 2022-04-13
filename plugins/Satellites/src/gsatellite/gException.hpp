@@ -34,11 +34,11 @@ typedef unsigned int GEXCEPTIONTYPE;
 
 // Exception messages for GMatrix
 
-#define OPERATOR_X_INCOMPATIBLE_ORDER         "The matrix have incompatible order to calculate its verctorial product"
-#define OPERATOR_ADD_INCOMPATIBLE_ORDER       "The matrix have incompatible order to calculate the addition"
-#define OPERATOR_ADDEQUAL_INCOMPATIBLE_ORDER  "The matrix have incompatible order to calculate the addition"
-#define OPERATOR_DIFF_INCOMPATIBLE_ORDER      "The matrix have incompatible order to calculate the substraction"
-#define OPERATOR_DIFFEQUAL_INCOMPATIBLE_ORDER "The matrix have incompatible order to calculate the substraction"
-#define DET_INCOMPATIBLE_ORDER                "The matrix is not square, the determinant can't be calculate."
+#define OPERATOR_X_INCOMPATIBLE_ORDER         "The matrices have incompatible order to calculate its vectorial product"
+#define OPERATOR_ADD_INCOMPATIBLE_ORDER       "The matrices have incompatible order to calculate the addition"
+#define OPERATOR_ADDEQUAL_INCOMPATIBLE_ORDER  "The matrices have incompatible order to calculate the addition"
+#define OPERATOR_DIFF_INCOMPATIBLE_ORDER      "The matrices have incompatible order to calculate the subtraction"
+#define OPERATOR_DIFFEQUAL_INCOMPATIBLE_ORDER "The matrices have incompatible order to calculate the subtraction"
+#define DET_INCOMPATIBLE_ORDER                "The matrix is not square, the determinant can't be calculated."
 
 #endif // GEXCEPTION_HPP

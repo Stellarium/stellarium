@@ -77,7 +77,6 @@ private:
 	float K;            // Summary extinction coefficient
 	float C3;           // Term for moon brightness computation
 	float C4;           // Term for sky brightness computation
-	float SN;           // Snellen Ratio (20/20=1.0, good 20/10=2.0)
 
 	// Optimisation variables
 	float bNightTerm;

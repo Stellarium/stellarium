@@ -284,10 +284,9 @@ public:
 	static void corrOriLarissa(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE);
 	static void corrOriProteus(const double d, const double T, double* J2000NPoleRA, double* J2000NPoleDE);
 
-	static bool flagCustomGrsSettings;	//!< Use custom settings for calculation of position of Great Red Spot?
-	static double customGrsJD;		//!< Initial JD (epoch) for calculation of position of Great Red Spot
-	static double customGrsLongitude;	//!< Longitude of Great Red Spot at customGrsJD (System II, degrees)
-	static double customGrsDrift;		//!< Annual drift of Great Red Spot position (degrees)
+	static double grsJD;		//!< JD (epoch) for calculation of position of Great Red Spot
+	static double grsLongitude;	//!< Longitude of Great Red Spot at grsJD (System II, degrees)
+	static double grsDrift;		//!< Annual drift of Great Red Spot position (degrees)
 
 	//! Retrieve magnitude variation depending on angle Ls [radians].
 	//! Source: A. Mallama: The magnitude and albedo of Mars. Icarus 192(2007) 404-416.

@@ -70,10 +70,76 @@ void StelObjectMgr::init()
 	actionsMgr->addAction("actionPrevious_MorningTwilight", timeGroup, N_("Previous morning twilight"), this, "previousMorningTwilight()");
 	actionsMgr->addAction("actionPrevious_EveningTwilight", timeGroup, N_("Previous evening twilight"), this, "previousEveningTwilight()");
 
+	actionsMgr->addAction("actionNext_MorningAtAltitude",     timeGroup, N_("Selected object at altitude at next morning"),      this, "nextMorningAtAltitude()");
+	actionsMgr->addAction("actionToday_MorningAtAltitude",    timeGroup, N_("Selected object at altitude this morning"),         this, "todayMorningAtAltitude()");
+	actionsMgr->addAction("actionPrevious_MorningAtAltitude", timeGroup, N_("Selected object at altitude at previous morning"),  this, "previousMorningAtAltitude()");
+	actionsMgr->addAction("actionNext_EveningAtAltitude",     timeGroup, N_("Selected object at altitude at next evening"),      this, "nextEveningAtAltitude()");
+	actionsMgr->addAction("actionToday_EveningAtAltitude",    timeGroup, N_("Selected object at altitude this evening"),         this, "todayEveningAtAltitude()");
+	actionsMgr->addAction("actionPrevious_EveningAtAltitude", timeGroup, N_("Selected object at altitude at previous evening"),  this, "previousEveningAtAltitude()");
+
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	setFlagSelectedObjectPointer(conf->value("viewing/flag_show_selection_marker", true).toBool());
 	setTwilightAltitude(conf->value("astro/twilight_altitude", -6.).toDouble());
+}
+
+StelObject::InfoStringGroup StelObjectMgr::getCustomInfoStrings()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	StelObject::InfoStringGroup infoTextFilters = StelObject::InfoStringGroup(StelObject::None);
+
+	conf->beginGroup("custom_selected_info");
+	if (conf->value("flag_show_name", false).toBool())
+		infoTextFilters |= StelObject::Name;
+	if (conf->value("flag_show_catalognumber", false).toBool())
+		infoTextFilters |= StelObject::CatalogNumber;
+	if (conf->value("flag_show_magnitude", false).toBool())
+		infoTextFilters |= StelObject::Magnitude;
+	if (conf->value("flag_show_absolutemagnitude", false).toBool())
+		infoTextFilters |= StelObject::AbsoluteMagnitude;
+	if (conf->value("flag_show_radecj2000", false).toBool())
+		infoTextFilters |= StelObject::RaDecJ2000;
+	if (conf->value("flag_show_radecofdate", false).toBool())
+		infoTextFilters |= StelObject::RaDecOfDate;
+	if (conf->value("flag_show_hourangle", false).toBool())
+		infoTextFilters |= StelObject::HourAngle;
+	if (conf->value("flag_show_altaz", false).toBool())
+		infoTextFilters |= StelObject::AltAzi;
+	if (conf->value("flag_show_elongation", false).toBool())
+		infoTextFilters |= StelObject::Elongation;
+	if (conf->value("flag_show_distance", false).toBool())
+		infoTextFilters |= StelObject::Distance;
+	if (conf->value("flag_show_velocity", false).toBool())
+		infoTextFilters |= StelObject::Velocity;
+	if (conf->value("flag_show_propermotion", false).toBool())
+		infoTextFilters |= StelObject::ProperMotion;
+	if (conf->value("flag_show_size", false).toBool())
+		infoTextFilters |= StelObject::Size;
+	if (conf->value("flag_show_extra", false).toBool())
+		infoTextFilters |= StelObject::Extra;
+	if (conf->value("flag_show_type", false).toBool())
+		infoTextFilters |= StelObject::ObjectType;
+	if (conf->value("flag_show_galcoord", false).toBool())
+		infoTextFilters |= StelObject::GalacticCoord;
+	if (conf->value("flag_show_supergalcoord", false).toBool())
+		infoTextFilters |= StelObject::SupergalacticCoord;
+	if (conf->value("flag_show_othercoord", false).toBool())
+		infoTextFilters |= StelObject::OtherCoord;
+	if (conf->value("flag_show_eclcoordofdate", false).toBool())
+		infoTextFilters |= StelObject::EclipticCoordOfDate;
+	if (conf->value("flag_show_eclcoordj2000", false).toBool())
+		infoTextFilters |= StelObject::EclipticCoordJ2000;
+	if (conf->value("flag_show_constellation", false).toBool())
+		infoTextFilters |= StelObject::IAUConstellation;
+	if (conf->value("flag_show_sidereal_time", false).toBool())
+		infoTextFilters |= StelObject::SiderealTime;
+	if (conf->value("flag_show_rts_time", false).toBool())
+		infoTextFilters |= StelObject::RTSTime;
+	if (conf->value("flag_show_solar_lunar", false).toBool())
+	    infoTextFilters |= StelObject::SolarLunarPosition;
+	conf->endGroup();
+
+	return infoTextFilters;
 }
 
 void StelObjectMgr::setTwilightAltitude(double alt)
@@ -269,6 +335,116 @@ void StelObjectMgr::nextEveningTwilight()
 	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
 	if (rts[3]>-1000.)
 		core->setJD(rts[2]);
+}
+
+void StelObjectMgr::todayMorningAtAltitude()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		double az, alt, altitude;
+		bool sign;
+		StelCore* core = StelApp::getInstance().getCore();
+		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
+		StelUtils::radToDecDeg(alt, sign, altitude);
+		if (!sign) { altitude *= -1.; }
+		Vec4d rts = selected[0]->getRTSTime(core, altitude);
+		if (rts[3]>-1000.)
+			core->setJD(rts[0]);
+	}
+}
+
+void StelObjectMgr::nextMorningAtAltitude()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		double az, alt, altitude;
+		bool sign;
+		StelCore* core = StelApp::getInstance().getCore();
+		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
+		StelUtils::radToDecDeg(alt, sign, altitude);
+		if (!sign) { altitude *= -1.; }
+		core->addSolarDays(1.0);
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core, altitude);
+		if (rts[3]>-1000.)
+			core->setJD(rts[0]);
+	}
+}
+
+void StelObjectMgr::previousMorningAtAltitude()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		double az, alt, altitude;
+		bool sign;
+		StelCore* core = StelApp::getInstance().getCore();
+		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
+		StelUtils::radToDecDeg(alt, sign, altitude);
+		if (!sign) { altitude *= -1.; }
+		core->addSolarDays(-1.0);
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core, altitude);
+		if (rts[3]>-1000.)
+			core->setJD(rts[0]);
+	}
+}
+
+void StelObjectMgr::todayEveningAtAltitude()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		double az, alt, altitude;
+		bool sign;
+		StelCore* core = StelApp::getInstance().getCore();
+		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
+		StelUtils::radToDecDeg(alt, sign, altitude);
+		if (!sign) { altitude *= -1.; }
+		Vec4d rts = selected[0]->getRTSTime(core, altitude);
+		if (rts[3]>-1000.)
+			core->setJD(rts[2]);
+	}
+}
+
+void StelObjectMgr::nextEveningAtAltitude()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		double az, alt, altitude;
+		bool sign;
+		StelCore* core = StelApp::getInstance().getCore();
+		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
+		StelUtils::radToDecDeg(alt, sign, altitude);
+		if (!sign) { altitude *= -1.; }
+		core->addSolarDays(1.0);
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core, altitude);
+		if (rts[3]>-1000.)
+			core->setJD(rts[2]);
+	}
+}
+
+void StelObjectMgr::previousEveningAtAltitude()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		double az, alt, altitude;
+		bool sign;
+		StelCore* core = StelApp::getInstance().getCore();
+		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
+		StelUtils::radToDecDeg(alt, sign, altitude);
+		if (!sign) { altitude *= -1.; }
+		core->addSolarDays(-1.0);
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core, altitude);
+		if (rts[3]>-1000.)
+			core->setJD(rts[2]);
+	}
 }
 
 /*************************************************************************
@@ -516,6 +692,21 @@ StelObjectP StelObjectMgr::searchByName(const QString &name) const
 	return rval;
 }
 
+StelObjectP StelObjectMgr::searchByName(const QString &name, const QString &objType) const
+{
+	StelObjectP rval;
+	for (const auto* m : objectsModules)
+	{
+		if (m->getStelObjectType()==objType)
+		{
+			rval = m->searchByName(name);
+			if (rval)
+				return rval;
+		}
+	}
+	return rval;
+}
+
 StelObjectP StelObjectMgr::searchByID(const QString &type, const QString &id) const
 {
 	auto it = typeToModuleMap.constFind(type);
@@ -551,6 +742,15 @@ bool StelObjectMgr::findAndSelect(const QString &name, StelModule::StelModuleSel
 		return setSelectedObject(obj, action);
 }
 
+bool StelObjectMgr::findAndSelect(const QString &name, const QString &objtype, StelModule::StelModuleSelectAction action)
+{
+	// Then look for another object
+	StelObjectP obj = searchByName(name, objtype);
+	if (!obj)
+		return false;
+	else
+		return setSelectedObject(obj, action);
+}
 
 //! Find and select an object near given equatorial J2000 position
 bool StelObjectMgr::findAndSelect(const StelCore* core, const Vec3d& pos, StelModule::StelModuleSelectAction action)
@@ -585,7 +785,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 				static_cast<float>(core->getSkyDrawer()->getCustomStarMagnitudeLimit()) :
 				core->getSkyDrawer()->getLimitMagnitude();
 	QList<StelObjectP> tmp;
-	for (const auto& obj : candidates)
+	for (const auto& obj : qAsConst(candidates))
 	{
 		if (obj->getSelectPriority(core)<=limitMag)
 			tmp.append(obj);
@@ -600,7 +800,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 
 	StelObjectP sobj;
 	float best_object_value = 100000.f;
-	for (const auto& obj : candidates)
+	for (const auto& obj : qAsConst(candidates))
 	{
 		prj->project(obj->getJ2000EquatorialPos(core), winpos);
 		float distance = static_cast<float>(std::sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1])))*distanceWeight;
@@ -659,7 +859,7 @@ void StelObjectMgr::unSelect(void)
 	if(!lastSelectedObjects.isEmpty())
 	{
 		lastSelectedObjects.clear();
-		emit(selectedObjectChanged(StelModule::RemoveFromSelection));
+		emit selectedObjectChanged(StelModule::RemoveFromSelection);
 	}
 }
 
@@ -689,7 +889,7 @@ bool StelObjectMgr::setSelectedObject(const QList<StelObjectP>& objs, StelModule
 		lastSelectedObjects.append(objs);
 	else
 		lastSelectedObjects = objs;
-	emit(selectedObjectChanged(action));
+	emit selectedObjectChanged(action);
 	return true;
 }
 
@@ -803,7 +1003,7 @@ void StelObjectMgr::addToExtraInfoString(const StelObject::InfoStringGroup &flag
 {
 	// Avoid insertion of full duplicates!
 	if (!extraInfoStrings.contains(flags, str))
-		extraInfoStrings.insertMulti(flags, str);
+		extraInfoStrings.insert(flags, str);
 }
 
 QStringList StelObjectMgr::getExtraInfoStrings(const StelObject::InfoStringGroup& flags) const

@@ -36,30 +36,30 @@ TuiNodeResponse TuiNodeBool::handleEditingKey(int key)
 	{
 		editing = false;
 		response.accepted = true;
-		emit(setValue(state));
+		emit setValue(state);
 		return response;
 	}
 	else if (key==Qt::Key_Up || key==Qt::Key_Down || key==Qt::Key_Return)
 	{
 		state = !state;
 		response.accepted = true;
-		emit(setValue(state));
+		emit setValue(state);
 		return response;
 	}
 	else if (key==Qt::Key_1 || key==Qt::Key_Y || key==Qt::Key_T)
 	{
 		state = true;
-		emit(setValue(state));
+		emit setValue(state);
 		response.accepted = true;
-		emit(setValue(state));
+		emit setValue(state);
 		return response;
 	}
 	else if (key==Qt::Key_0 || key==Qt::Key_N || key==Qt::Key_F)
 	{
 		state = false;
-		emit(setValue(state));
+		emit setValue(state);
 		response.accepted = true;
-		emit(setValue(state));
+		emit setValue(state);
 		return response;
 	}
 	return response;

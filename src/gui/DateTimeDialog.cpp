@@ -216,7 +216,7 @@ void DateTimeDialog::mjdChanged(double nmjd)
 double DateTimeDialog::newJd()
 {
 	double cjd;
-	StelUtils::getJDFromDate(&cjd, year, month, day, hour, minute, second);
+	StelUtils::getJDFromDate(&cjd, year, month, day, hour, minute, static_cast<float>(second));
 	cjd -= (core->getUTCOffset(cjd)/24.0); // local tz -> UTC
 
 	return cjd;

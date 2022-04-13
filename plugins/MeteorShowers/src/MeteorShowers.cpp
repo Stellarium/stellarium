@@ -40,7 +40,7 @@ MeteorShowers::~MeteorShowers()
 void MeteorShowers::update(double deltaTime)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	for (const auto& ms : m_meteorShowers)
+	for (const auto& ms : qAsConst(m_meteorShowers))
 	{
 		ms->update(core, deltaTime);
 	}
@@ -48,7 +48,7 @@ void MeteorShowers::update(double deltaTime)
 
 void MeteorShowers::draw(StelCore* core)
 {
-	for (const auto& ms : m_meteorShowers)
+	for (const auto& ms : qAsConst(m_meteorShowers))
 	{
 		ms->draw(core);
 	}
@@ -83,10 +83,7 @@ void MeteorShowers::drawPointer(StelCore* core)
 	m_mgr->getPointerTexture()->bind();
 
 	painter.setBlending(true);
-
-	float size = static_cast<float>(obj->getAngularSize(core)) * M_PI_180f * static_cast<float>(painter.getProjector()->getPixelPerRadAtCenter());
-	size += 20.f + 10.f * sinf(2.f * static_cast<float>(StelApp::getInstance().getTotalRunTime()));
-
+	const float size = 20.f + 10.f * sinf(2.f * static_cast<float>(StelApp::getInstance().getTotalRunTime()));
 	painter.drawSprite2dMode(static_cast<float>(screenpos[0])-size/2, static_cast<float>(screenpos[1])-size/2, 10.f, 90);
 	painter.drawSprite2dMode(static_cast<float>(screenpos[0])-size/2, static_cast<float>(screenpos[1])+size/2, 10.f, 0);
 	painter.drawSprite2dMode(static_cast<float>(screenpos[0])+size/2, static_cast<float>(screenpos[1])+size/2, 10.f, -90);
@@ -97,7 +94,7 @@ void MeteorShowers::drawPointer(StelCore* core)
 void MeteorShowers::loadMeteorShowers(const QVariantMap& map)
 {
 	m_meteorShowers.clear();
-	for (auto msKey : map.keys())
+	for (auto &msKey : map.keys())
 	{
 		QVariantMap msData = map.value(msKey).toMap();
 		msData["showerID"] = msKey;

@@ -27,10 +27,10 @@
 #include <QDebug>
 
 // Also include the GRS corrections here
-bool RotationElements::flagCustomGrsSettings = false;
-double RotationElements::customGrsJD = 2456901.5;
-double RotationElements::customGrsLongitude = 216.;
-double RotationElements::customGrsDrift = 15.;
+//bool RotationElements::flagCustomGrsSettings = false; // OF COURSE this must become true forever...
+double RotationElements::grsJD = 2456901.5;
+double RotationElements::grsLongitude = 216.;
+double RotationElements::grsDrift = 15.;
 
 RotationElements::PlanetCorrections RotationElements::planetCorrections;
 
@@ -284,9 +284,9 @@ double RotationElements::corrWJupiter(const double d, const double T)
 	// than that used in this tool or 1 2/3 minutes early for every 1° less than the longitude in this tool.
 	// GRS longitude was at 2014-09-08 216d with a drift of 1.25d every month
 	// Updated 01/2021 noting LII=349 and drift 1.75 degrees/month.
-	double longitudeGRS = (flagCustomGrsSettings ?
-		customGrsLongitude + customGrsDrift*(JDE - customGrsJD)/365.25 :
-		349+1.75*(JDE - 2459216.)/30.);
+	double longitudeGRS =
+		// 349       + 1.75    *(JDE - 2459216.)/30.); // old fixed solution
+		grsLongitude + grsDrift*(JDE - grsJD   )/365.25;
 	return - longitudeGRS  +  ((187./512.)*360.-90.); // Last term is pixel position of GRS in texture, and a spherical coordinate offset for the texture.
 	// To verify:
 	// GRS at 2015-02-26 23:07 UT on picture at https://maximusphotography.files.wordpress.com/2015/03/jupiter-febr-26-2015.jpg

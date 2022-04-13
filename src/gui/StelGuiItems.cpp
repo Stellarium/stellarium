@@ -32,6 +32,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelProgressController.hpp"
+#include "StelPropertyMgr.hpp"
 #include "StelObserver.hpp"
 #include "SkyGui.hpp"
 #include "EphemWrapper.hpp"
@@ -46,7 +47,6 @@
 #include <QGraphicsTextItem>
 #include <QTimeLine>
 #include <QMouseEvent>
-#include <QRegExp>
 #include <QPixmapCache>
 #include <QProgressBar>
 #include <QGraphicsWidget>
@@ -61,7 +61,7 @@ QPixmap getTextPixmap(const QString& str, QFont font)
 {
 	// Render the text str into a QPixmap.
 	QRect strRect = QFontMetrics(font).boundingRect(str);
-	int w = strRect.width()+1+static_cast<int>(0.02f*strRect.width());
+	int w = strRect.width()+1+static_cast<int>(0.02f*static_cast<float>(strRect.width()));
 	int h = strRect.height();
 
 	QPixmap strPixmap(w, h);
@@ -108,7 +108,7 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	setShapeMode(QGraphicsPixmapItem::BoundingRectShape);	
 	setAcceptHoverEvents(true);
 	timeLine = new QTimeLine(250, this);
-	timeLine->setCurveShape(QTimeLine::EaseOutCurve);
+	timeLine->setEasingCurve(QEasingCurve(QEasingCurve::OutCurve));
 	connect(timeLine, SIGNAL(valueChanged(qreal)),
 	        this, SLOT(animValueChanged(qreal)));
 	connect(&StelMainView::getInstance(), SIGNAL(updateIconsRequested()), this, SLOT(updateIcon()));  // Not sure if this is ever called?
@@ -199,7 +199,7 @@ void StelButton::hoverEnterEvent(QGraphicsSceneHoverEvent*)
 	if (timeLine->state()!=QTimeLine::Running)
 		timeLine->start();
 
-	emit(hoverChanged(true));
+	emit hoverChanged(true);
 }
 
 void StelButton::hoverLeaveEvent(QGraphicsSceneHoverEvent*)
@@ -207,7 +207,7 @@ void StelButton::hoverLeaveEvent(QGraphicsSceneHoverEvent*)
 	timeLine->setDirection(QTimeLine::Backward);
 	if (timeLine->state()!=QTimeLine::Running)
 		timeLine->start();
-	emit(hoverChanged(false));
+	emit hoverChanged(false);
 }
 
 void StelButton::mousePressEvent(QGraphicsSceneMouseEvent* event)
@@ -219,8 +219,8 @@ void StelButton::mousePressEvent(QGraphicsSceneMouseEvent* event)
 		setChecked(toggleChecked(checked));
 		if (!triggerOnRelease)
 		{
-			emit(toggled(checked));
-			emit(triggered());
+			emit toggled(checked);
+			emit triggered();
 		}
 	}
 	else if  (event->button()==Qt::RightButton)
@@ -230,8 +230,8 @@ void StelButton::mousePressEvent(QGraphicsSceneMouseEvent* event)
 		//setChecked(toggleChecked(checked));
 		if (!triggerOnRelease)
 		{
-			//emit(toggled(checked));
-			emit(triggeredRight());
+			//emit toggled(checked);
+			emit triggeredRight();
 		}
 	}
 }
@@ -247,8 +247,8 @@ void StelButton::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 			StelMainView::getInstance().focusSky(); // Change the focus after clicking on button
 		if (triggerOnRelease)
 		{
-			emit(toggled(checked));
-			emit(triggered());
+			emit toggled(checked);
+			emit triggered();
 		}
 	}
 	else if  (event->button()==Qt::RightButton)
@@ -257,8 +257,8 @@ void StelButton::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 		//	StelMainView::getInstance().focusSky(); // Change the focus after clicking on button
 		if (triggerOnRelease)
 		{
-			//emit(toggled(checked));
-			emit(triggeredRight());
+			//emit toggled(checked);
+			emit triggeredRight();
 		}
 	}
 }
@@ -502,7 +502,7 @@ BottomStelBar::~BottomStelBar()
 	// Remove currently hidden buttons which are not deleted by a parent element
 	for (auto& group : buttonGroups)
 	{
-		for (auto* b : group.elems)
+		for (auto* b : qAsConst(group.elems))
 		{
 			if (b->parentItem()==Q_NULLPTR)
 			{
@@ -550,7 +550,7 @@ StelButton* BottomStelBar::hideButton(const QString& actionName)
 	for (auto iter = buttonGroups.begin(); iter != buttonGroups.end(); ++iter)
 	{
 		int i=0;
-		for (auto* b : iter.value().elems)
+		for (auto* b : qAsConst(iter.value().elems))
 		{
 			if (b->action && b->action->objectName()==actionName)
 			{
@@ -842,7 +842,7 @@ void BottomStelBar::updateText(bool updatePos)
 			lon *= -1;
 		}
 		lonStr = QString("%1%2%3").arg(pm).arg(lon).arg(QChar(0x00B0));
-		QString rho;
+		QString rho, weather;
 		if (core->getUseTopocentricCoordinates())
 			rho = QString("%1 %2 %3").arg(q_("planetocentric distance")).arg(core->getCurrentObserver()->getDistanceFromCenter() * AU).arg(qc_("km", "distance"));
 		else
@@ -851,7 +851,17 @@ void BottomStelBar::updateText(bool updatePos)
 		if (newLocation.contains("->")) // a spaceship
 			location->setToolTip(QString());
 		else
-			location->setToolTip(QString("%1 %2; %3").arg(latStr, lonStr, rho));
+		{
+			if (core->getCurrentPlanet()->hasAtmosphere())
+			{
+				const StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+				weather = QString("%1: %2 %3; %4: %5 °C").arg(q_("Atmospheric pressure"), QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.atmospherePressure").toDouble(), 'f', 2), qc_("mbar", "pressure unit"), q_("temperature"), QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.atmosphereTemperature").toDouble(), 'f', 1));
+				location->setToolTip(QString("<p style='white-space:pre'>%1 %2; %3<br>%4</p>").arg(latStr, lonStr, rho, weather));
+			}
+			else
+				location->setToolTip(QString("%1 %2; %3").arg(latStr, lonStr, rho));
+		}
+
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
 			locationPixmap->setPixmap(getTextPixmap(newLocation, location->font()));
@@ -967,7 +977,7 @@ QRectF BottomStelBar::boundingRectNoHelpLabel() const
 {
 	// Re-use original Qt code, just remove the help label
 	QRectF childRect;
-	for (auto* child : QGraphicsItem::childItems())
+	for (const auto* child : QGraphicsItem::childItems())
 	{
 		if ((child==helpLabel) || (child==helpLabelPixmap))
 			continue;

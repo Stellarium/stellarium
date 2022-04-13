@@ -35,9 +35,8 @@ class StelCore;
 //! @sa StelObjectP
 class StelObject : public StelRegionObject
 {
-	//Required for Q_FLAGS macro, this requires this header to be MOC'ed
+	//Required for Q_FLAG macro, this requires this header to be MOC'ed
 	Q_GADGET
-	Q_FLAGS(InfoStringGroupFlags InfoStringGroup)
 public:
 	//! Used as named bitfield flags as specifiers to
 	//! filter results of getInfoString. The precise definition of these should
@@ -70,20 +69,26 @@ public:
 		IAUConstellation        = 0x00100000, //!< Three-letter constellation code (And, Boo, Cas, ...)
 		SiderealTime		= 0x00200000, //!< Mean and Apparent Sidereal Time
 		RTSTime			= 0x00400000, //!< Time of rise, transit and set of celestial object
-		Script                  = 0x00800000, //!< Should be used by Scripts only which can inject extraInfoStrings.
-		DebugAid                = 0x01000000, //!< Can be used for development only, place messages into extraInfoStrings. Comment them away or delete for releases.
-		NoFont			= 0x02000000,
-		PlainText		= 0x04000000  //!< Strip HTML tags from output
+		SolarLunarPosition      = 0x00800000, //!< Show Solar and Lunar horizontal position (on Earth location only)
+		Script                  = 0x01000000, //!< Should be used by Scripts only which can inject extraInfoStrings.
+		DebugAid                = 0x02000000, //!< Can be used for development only, place messages into extraInfoStrings. Comment them away or delete for releases.
+		NoFont			= 0x04000000,
+		PlainText		= 0x08000000  //!< Strip HTML tags from output
 	};
 	Q_DECLARE_FLAGS(InfoStringGroup, InfoStringGroupFlags)
+	Q_FLAG(InfoStringGroup)
 
-	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags AllInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
+	//! A pre-defined "all available" set of specifiers for the getInfoString flags argument to getInfoString
+	static constexpr InfoStringGroup AllInfo = static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
 									   Distance|Elongation|Size|Velocity|ProperMotion|Extra|HourAngle|AbsoluteMagnitude|
 									   GalacticCoord|SupergalacticCoord|OtherCoord|ObjectType|EclipticCoordJ2000|
-									   EclipticCoordOfDate|IAUConstellation|SiderealTime|RTSTime);
-	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags ShortInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000);
+									   EclipticCoordOfDate|IAUConstellation|SiderealTime|RTSTime|SolarLunarPosition);
+	//! A pre-defined "default" set of specifiers for the getInfoString flags argument to getInfoString
+	//! It appears useful to propose this set as post-install settings and let users configure more on demand.
+	static constexpr InfoStringGroup DefaultInfo = static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecOfDate|HourAngle|AltAzi|OtherCoord|
+											  Distance|Elongation|Size|Velocity|Extra|IAUConstellation|SiderealTime|RTSTime);
+	//! A pre-defined "shortest useful" set of specifiers for the getInfoString flags argument to getInfoString
+	static constexpr InfoStringGroup ShortInfo = static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
 	virtual ~StelObject() Q_DECL_OVERRIDE {}
 
@@ -133,10 +138,10 @@ public:
 	//! - elatJ2000 : ecliptic latitude (Earth's J2000 frame) in decimal degrees
 	//! - vmag : visual magnitude
 	//! - vmage : visual magnitude (after atmospheric extinction)
-	//! - size: angular size in radians
-	//! - size-dd : angular size in decimal degrees
-	//! - size-deg : angular size in decimal degrees (formatted string)
-	//! - size-dms : angular size in DMS format
+	//! - size: angular size (diameter) in radians
+	//! - size-dd : angular size (diameter) in decimal degrees
+	//! - size-deg : angular size (diameter) in decimal degrees (formatted string)
+	//! - size-dms : angular size (diameter) in DMS format
 	//! - rise : time of rise in HM format
 	//! - rise-dhr : time of rise in decimal hours
 	//! - transit : time of transit in HM format
@@ -261,7 +266,8 @@ public:
 	//! Return the angular radius of a circle containing the object as seen from the observer
 	//! with the circle center assumed to be at getJ2000EquatorialPos().
 	//! @return radius in degree. This value is the apparent angular size of the object, and is independent of the current FOV.
-	virtual double getAngularSize(const StelCore* core) const = 0;
+	//! @note The default implementation just returns zero.
+	virtual double getAngularRadius(const StelCore* core) const {Q_UNUSED(core) Q_ASSERT(0); return 0;}
 
 	//! Return airmass value for the object (for atmosphere-dependent calculations)
 	//! @param core
@@ -307,6 +313,10 @@ protected:
 	//! @param flags
 	//! @param decimals significant digits after the comma.
 	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const;
+
+	//! Add a section to the InfoString with just horizontal data for the Sun and Moon, when observed from Earth.
+	//! The application of this is to have quick info while observing other objects.
+	QString getSolarLunarInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 
 	//! Apply post processing on the info string.
 	//! This also removes all extraInfoStrings possibly injected by modules (plugins) etc., except for Script and DebugAid types.

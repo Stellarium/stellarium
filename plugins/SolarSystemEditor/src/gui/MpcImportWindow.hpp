@@ -44,10 +44,10 @@ public:
 	                 };
 
 	MpcImportWindow();
-	virtual ~MpcImportWindow();
+	virtual ~MpcImportWindow() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 
 signals:
 	void objectsImported();
@@ -139,7 +139,7 @@ private:
 	void resetCountdown();
 
 protected:
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	Ui_mpcImportWindow * ui;
 };
 

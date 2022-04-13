@@ -70,7 +70,6 @@ typedef QSharedPointer<Exoplanet> ExoplanetP;
 class Exoplanets : public StelObjectModule
 {
 	Q_OBJECT
-	Q_ENUMS(TemperatureScale)
 	Q_PROPERTY(bool showExoplanets
 		   READ getFlagShowExoplanets
 		   WRITE setFlagShowExoplanets
@@ -96,6 +95,7 @@ public:
 		DownloadError,			//!< Error during download phase
 		OtherError				//!< Other error
 	};
+	Q_ENUM(UpdateState)
 	//! @enum TemperatureScale
 	//! Available temperature scales
 	enum TemperatureScale
@@ -104,7 +104,8 @@ public:
 		Celsius		= 1,
 		Fahrenheit	= 2
 	};
-	
+	Q_ENUM(TemperatureScale)
+
 	Exoplanets();
 	virtual ~Exoplanets() Q_DECL_OVERRIDE;
 
@@ -262,6 +263,13 @@ public slots:
 	//! @return true if it's visible
 	bool getFlagShowExoplanetsDesignations(void) const;
 
+	//! Enable/disable display of number of exoplanets in exoplanetary system
+	//! @param b boolean flag
+	void setFlagShowExoplanetsNumbers(bool b);
+	//! Get status to display of designations of exoplanets in exoplanetary system
+	//! @return true if it's visible
+	bool getFlagShowExoplanetsNumbers(void) const;
+
 	//! Define whether the button toggling exoplanets should be visible
 	void setFlagShowExoplanetsButton(bool b);
 	bool getFlagShowExoplanetsButton(void) const { return flagShowExoplanetsButton; }
@@ -335,12 +343,12 @@ public slots:
 	}
 
 	//! Set the temperature scale
-	void setCurrentTemperatureScale(TemperatureScale tscale)
+	void setCurrentTemperatureScale(Exoplanets::TemperatureScale tscale)
 	{
 		Exoplanet::temperatureScaleID = static_cast<int>(tscale);
 	}
 	//! Get the current temperature scale
-	TemperatureScale getCurrentTemperatureScale() const
+	Exoplanets::TemperatureScale getCurrentTemperatureScale() const
 	{
 		return static_cast<TemperatureScale>(Exoplanet::temperatureScaleID);
 	}

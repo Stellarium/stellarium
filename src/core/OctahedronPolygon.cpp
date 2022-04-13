@@ -180,9 +180,9 @@ void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 	
 	// Re-split the contours on the plan X=0
 	QVector<SubContour> splittedVertices2[4];
-	for (const auto& subContour : splittedContour1[0])
+	for (const auto& subContour : qAsConst(splittedContour1[0]))
 		splitContourByPlan(0, subContour, splittedVertices2);
-	for (const auto& subContour : splittedContour1[1])
+	for (const auto& subContour : qAsConst(splittedContour1[1]))
 		splitContourByPlan(0, subContour, splittedVertices2+2);
 
 	// Now complete the contours which cross the areas from one side to another by adding poles
@@ -212,7 +212,7 @@ void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 				Q_ASSERT(std::fabs(v[0])<0.0000001 || std::fabs(v[1])<0.0000001);
 			}
 		}
-		for (const auto& subContour : splittedVertices2[c])
+		for (const auto& subContour : qAsConst(splittedVertices2[c]))
 		{
 			splitContourByPlan(2, subContour, resultSides.data()+c*2);
 		}
@@ -328,7 +328,7 @@ void vertexTrianglesCallback(Vec3d* vertexData, OctTessTrianglesCallbackData* us
 	userData->result.append(*vertexData);
 }
 
-void noOpCallback(GLboolean) {;}
+void noOpCallback(GLboolean) {}
 
 void combineTrianglesCallback(double coords[3], Vec3d*[4], GLfloat[4], Vec3d** outData, OctTessTrianglesCallbackData* userData)
 {
@@ -383,7 +383,7 @@ void OctahedronPolygon::updateVertexArray()
 	// Use GLUES tesselation functions to transform the polygon into a list of triangles
 	GLUEStesselator* tess = gluesNewTess();
 #ifndef NDEBUG
-	gluesTessCallback(tess, GLUES_TESS_BEGIN, (GLvoid(*)()) &checkBeginTrianglesCallback);
+	gluesTessCallback(tess, GLUES_TESS_BEGIN,        reinterpret_cast<GLvoid(*)()> (&checkBeginTrianglesCallback));
 #endif
 	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA,  reinterpret_cast<GLvoid(*)()> (&vertexTrianglesCallback));
 	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG,    reinterpret_cast<GLvoid(*)()> (&noOpCallback));
@@ -417,13 +417,13 @@ void OctahedronPolygon::updateVertexArray()
 			else
 			{
 				//  Discard vertex..
-				//qDebug() << "Found a fucking CW triangle";
+				//qDebug() << "Found a CW triangle - discarding!";
 			}
 		}
 
 		// Now compute the outline contours, getting rid of non edge segments
 		EdgeVertex previous;
-		for (const auto& c : sides[sidenb])
+		for (const auto& c : qAsConst(sides[sidenb]))
 		{
 			Q_ASSERT(!c.isEmpty());
 			previous = c.first();
@@ -467,7 +467,7 @@ void OctahedronPolygon::updateVertexArray()
 		Q_ASSERT(SphericalConvexPolygon::checkValidContour(c));
 	}
 #else
-	// If I don't let this like that, the bahaviour will fail in Release mode!!!!
+	// If I don't let this like that, the behaviour will fail in Release mode!!!!
 	// It is either a bug in GCC either a memory problem which appears only when optimizations are activated.
 	QVector<Vec3d> c;
 	c.resize(3);
@@ -674,7 +674,7 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 	for (i=0;i<inputContour.size();++i)
 	{
 		currentVertex = inputContour.at(i);
-		if (currentVertex.vertex[onLine]==0)
+		if (qFuzzyCompare(currentVertex.vertex[onLine], 0.))
 			currentVertex.vertex[onLine]=1e-98;
 		currentQuadrant = getSide(currentVertex.vertex, onLine);
 		if (currentQuadrant==previousQuadrant)
@@ -716,7 +716,7 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 	for (;i<inputContour.size();++i)
 	{
 		currentVertex = inputContour.at(i);
-		if (currentVertex.vertex[onLine]==0)
+		if (qFuzzyCompare(currentVertex.vertex[onLine], 0.))
 			currentVertex.vertex[onLine]=1e-98;
 		currentQuadrant = getSide(currentVertex.vertex, onLine);
 		if (currentQuadrant==previousQuadrant)

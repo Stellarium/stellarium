@@ -40,7 +40,7 @@ void StelScriptSyntaxHighlighter::locateFunctions( const QMetaObject* metaObject
 			metaObject->method(i).access() == QMetaMethod::Public )
 		{
 			QString fn = metaObject->method(i).methodSignature();
-			fn.replace(QRegExp("\\(.*$"), ""); 
+			fn.replace(QRegularExpression("\\(.*$"), "");
 			funcs << fn;
 		}
 	}
@@ -51,30 +51,6 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 	: QSyntaxHighlighter(parent)
 {
 	setFormats();
-
-	// ECMAscript reserved words              // 2015
-	// display using keywordFormat
-	keywords = {
-		"break", "case", "catch",             // class, const
-		"continue",                           // debugger
-		"default", "delete", "do", "else",    // export, extends
-		"finally", "for", "function", "if",	  // import
-		"in", "instanceof", "new", "return",  // super
-		"switch", "this", "throw", "try",
-		"typeof", "var", "void", "while", "with" };
-
-	// ECMAscript predefined stuff (more in 2015)
- 	// display using predefFormat
-	predefineds = {
-		"false", "null", "true",              // constants
-		"undefined", "Infinity", "NaN",       // properties
-		"arguments", "get", "set",            // identifiers
-		"Array", "Boolean", "Date",           // types
-		"Function", "Math", "Number",
-		"Object", "RegExp", "String", 
-		"Error", "EvalError", "RangeError",   // errors
-		"ReferenceError", "SyntaxError",
-		"TypeError", "URIError" };
 
 	// Highlight object names which can be used in scripting.
 	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
@@ -90,25 +66,12 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 	// Special case #2: StelSkyDrawer
 	locateFunctions( StelApp::getInstance().getCore()->getSkyDrawer()->metaObject(), "StelSkyDrawer" );
 
-	// Identifier pattern
-	identPat = QRegExp("^\\b[A-Za-z_][A-Za-z_0-9]*\\b");
-
-	// Function call
-	functionPat = QRegExp("^\\s*\\(");
-
-	// A pattern to find a spot that warrants investigation.
-	alertPat = QRegExp( "[\"'/\\w_]" );
-
-	// multi-line commment start and end strings
-	multiLineStartPat = QRegExp( "^/\\*" );
-	multiLineEnd = "*/";
-	
 	// Collect simple rules into highlightingRules. They
 	// are well distinguished by their initial character.
 	HighlightingRule rule;
 
 	// decimal and hexadecimal numeric constants
-	rule.pattern = QRegExp("^\\b("
+	rule.pattern = QRegularExpression("\\b("
 			       "\\d+(?:\\.\\d+)?(?:[eE][+-]?(\\d+))?"
 			       "|"
 			       "0[xX][0-9a-fA-F]+"
@@ -116,21 +79,68 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 	rule.format = &literalFormat;
 	highlightingRules.append(rule);
 	
-	// String literals, both ways, and regular expression 
-	rule.pattern = QRegExp("^("
-			       "\"[^\"\\\\]*(\\\\.[^\"\\\\]*)*\""
-			       "|"
-			       "'[^'\\\\]*(\\\\.[^'\\\\]*)*'"
-			       "|"
-			       "/(?!/)[^/\\\\]*(\\\\.[^/\\\\]*)*/[a-z]*" // Negative lookahead!
-			       ")" );
+	// Three versions of String literals, both ways, and regular expression
+	rule.pattern = QRegularExpression("\"[^\"\\\\]*(\\\\.[^\"\\\\]*)*\"");
 	rule.format = &literalFormat;
 	highlightingRules.append(rule);
 
-	// Line comment
-	rule.pattern = QRegExp("^//[^\n]*");
+	rule.pattern = QRegularExpression("'[^'\\\\]*(\\\\.[^'\\\\]*)*'");
+	rule.format = &literalFormat;
+	highlightingRules.append(rule);
+
+	rule.pattern = QRegularExpression("/(?!/)[^/\\\\]*(\\\\.[^/\\\\]*)*/[a-z]*"); // Negative lookahead!
+	rule.format = &literalFormat;
+	highlightingRules.append(rule);
+
+
+	// Keywords and Predefineds
+	for (int i=0; i<keywords.length(); i++)
+	{
+	    rule.pattern = QRegularExpression(QString("\\b%1\\b").arg(keywords.at(i)));
+	    rule.format = &keywordFormat;
+	    highlightingRules.append(rule);
+	}
+	for (int i=0; i<predefineds.length(); i++)
+	{
+	    rule.pattern = QRegularExpression(QString("\\b%1\\b").arg(predefineds.at(i)));
+	    rule.format = &predefFormat;
+	    highlightingRules.append(rule);
+	}
+	// Our own functions: highlight bad method names, mark valid method names, then mark modules
+	QHashIterator<QString, QSet<QString>> hIt(mod2funcs);
+	while (hIt.hasNext())
+	{
+	    hIt.next();
+
+	    // bad method names
+	    rule.pattern = QRegularExpression(QString("\\b%1\\s*\\.\\s*\\w*\\b").arg(hIt.key()));
+	    rule.format = &noMethFormat;
+	    highlightingRules.append(rule);
+
+	    //qDebug() << hIt.key() << "has following values:";
+	    // valid method names
+	    if (hIt.value().count()>0)
+	    {
+		QSetIterator<QString>sIt(hIt.value());
+		while (sIt.hasNext()) {
+		    //qDebug() << "\t" << sIt.peekNext();
+		    rule.pattern = QRegularExpression(QString("\\b%1\\s*\\.\\s*%2\\b") .arg(hIt.key(), sIt.next()));
+		    rule.format = &methodFormat;
+		    highlightingRules.append(rule);
+		}
+	    }
+	    // modules
+	    rule.pattern = QRegularExpression(QString("\\b%1\\b").arg(hIt.key()));
+	    rule.format = &moduleFormat;
+	    highlightingRules.append(rule);
+	}
+
+	// Finally, line comments. If anything has been highlighted so far, this wins over all...
+	rule.pattern = QRegularExpression("//[^\n]*");
 	rule.format = &commentFormat;
 	highlightingRules.append(rule);
+
+	//qDebug() << "We have " << highlightingRules.length() << "Rules";
 }
 
 void StelScriptSyntaxHighlighter::setFormats(void)
@@ -164,14 +174,14 @@ void StelScriptSyntaxHighlighter::setFormats(void)
 	methodFormat.setFontItalic( true );
 
 	// literals
-	literalFormat.setFontWeight(QFont::Bold);
 	col = Vec3f(conf->value(section + "/script_console_constant_color", defaultColor).toString()).toQColor();
 	literalFormat.setForeground(col);
+	literalFormat.setFontWeight(QFont::Bold);
 
 	// function calls
-	functionFormat.setFontItalic(true);
 	col = Vec3f(conf->value(section + "/script_console_function_color", defaultColor).toString()).toQColor();
 	functionFormat.setForeground(col);
+	functionFormat.setFontItalic(true);
 
 	// call of an unknown method
 	QString unknownDefault = "1.0,0.0,0.0";
@@ -182,93 +192,75 @@ void StelScriptSyntaxHighlighter::setFormats(void)
 
 void StelScriptSyntaxHighlighter::highlightBlock(const QString &text)
 {
+	// Function call: detect valid identifier with opening bracket.
+	QRegularExpression functionPat("\\b[A-Za-z_][A-Za-z0-9_]*\\s*\\(");
+	QRegularExpressionMatchIterator it = functionPat.globalMatch(text);
+	while (it.hasNext())
+	{
+		QRegularExpressionMatch match = it.next();
+		setFormat(match.capturedStart(), match.capturedLength()-1, functionFormat);
+	}
+
+	// process rules which had been defined in the constructor.
+	for (const HighlightingRule &rule: qAsConst(highlightingRules))
+	{
+		it= rule.pattern.globalMatch(text);
+		while (it.hasNext())
+		{
+			QRegularExpressionMatch match=it.next();
+			setFormat(match.capturedStart(), match.capturedLength(), *rule.format);
+		}
+	}
+
+	// Finally, apply the Qt Example for a multiline comment block /*...*/
+	QRegularExpression startExpression("/\\*");
+	QRegularExpression endExpression("\\*/");
+
+	setCurrentBlockState(0);
 	int startIndex = 0;
-	QSet<QString> methods = QSet<QString>();
-	
-	// look for closing multiline comment
-	if( previousBlockState() == 1 )
+	if (previousBlockState() != 1)
+		startIndex = text.indexOf(startExpression);
+
+	while (startIndex >= 0)
 	{
-		startIndex = text.indexOf( multiLineEnd );
-		if( startIndex == -1 )
+		QRegularExpressionMatch endMatch;
+		int endIndex = text.indexOf(endExpression, startIndex, &endMatch);
+		int commentLength;
+		if (endIndex == -1)
 		{
-			setCurrentBlockState( 1 );
-			setFormat( 0, text.length(), commentFormat );
-			return;
+			setCurrentBlockState(1);
+			commentLength = text.length() - startIndex;
 		}
-		startIndex += multiLineEnd.length();
-		setFormat( 0, startIndex, commentFormat );
+		else
+		{
+			commentLength = endIndex - startIndex
+				    + endMatch.capturedLength();
 	}
-	setCurrentBlockState( 0 );
-
-	int mLen;
-	for( int iOff = startIndex; iOff < text.length(); iOff += mLen )
-	{
-		// Skip to an interesting offset.
-		iOff = alertPat.indexIn( text, iOff );
-		if( iOff == -1 ) break;
-
- 		mLen = 1;
-        // Identifier: keyword, predefined, stellarium module or method call
-		if( iOff == identPat.indexIn( text, iOff, QRegExp::CaretAtOffset ) )
-		{
-			QString ident = identPat.cap();
-			mLen = identPat.matchedLength();
-			if( keywords.contains( ident ) )
-			{
-				setFormat( iOff, mLen, keywordFormat );
-				continue;
-			}
-			else if( predefineds.contains( ident ) )
-			{
-				setFormat( iOff, mLen, predefFormat );
-				continue;
-			}
-			else if( mod2funcs.contains( ident ) )
-			{
-				methods = mod2funcs.value( ident );
-				setFormat( iOff, mLen, moduleFormat );
-				continue;
-			}
-		    if( iOff + mLen == functionPat.indexIn( text, iOff + mLen, QRegExp::CaretAtOffset ) )
-			{
-				if( ! methods.isEmpty() )
-				{
-					setFormat( iOff, mLen, methods.contains( ident ) ? methodFormat : noMethFormat );
-					methods = QSet<QString>();
-				} else {
-					setFormat( iOff, mLen, functionFormat );
-				}
-				mLen += functionPat.matchedLength();
-  		        continue;
-			}
-		}
-
-		// Multiline comment
-		if( iOff == multiLineStartPat.indexIn( text, iOff, QRegExp::CaretAtOffset ) )
-		{
-			mLen = multiLineStartPat.matchedLength();
-			// skip to end
-			startIndex = text.indexOf( multiLineEnd, iOff + mLen );
-			if( startIndex == -1 )
-			{
-				setCurrentBlockState( 1 );
-				setFormat( iOff, text.length() - iOff, commentFormat );
-				return;
-			}
-			mLen = startIndex - iOff  + multiLineEnd.length();
-			setFormat( iOff, mLen, commentFormat );
-			continue;
-		}
-
-		// Straightforward tokens
-		for (const HighlightingRule &rule: qAsConst(highlightingRules))
-		{
-			if( iOff == rule.pattern.indexIn( text, iOff, QRegExp::CaretAtOffset ) )
-			{
-				mLen = rule.pattern.matchedLength();
-				setFormat( iOff, mLen, *(rule.format) );
-				break;
-			}
-		}
-	}
+	setFormat(startIndex, commentLength, commentFormat);
+	startIndex = text.indexOf(startExpression, startIndex + commentLength);
+    }
 }
+
+// ECMAscript reserved words              // 2015
+// display using keywordFormat
+const QStringList StelScriptSyntaxHighlighter::keywords = {
+    "break", "case", "catch",             // class, const
+    "continue",                           // debugger
+    "default", "delete", "do", "else",    // export, extends
+    "finally", "for", "function", "if",	  // import
+    "in", "instanceof", "new", "return",  // super
+    "switch", "this", "throw", "try",
+    "typeof", "var", "void", "while", "with" };
+
+// ECMAscript predefined stuff (more in 2015)
+// display using predefFormat
+const QStringList StelScriptSyntaxHighlighter::predefineds = {
+    "false", "null", "true",              // constants
+    "undefined", "Infinity", "NaN",       // properties
+    "arguments", "get", "set",            // identifiers
+    "Array", "Boolean", "Date",           // types
+    "Function", "Math", "Number",
+    "Object", "RegExp", "String",
+    "Error", "EvalError", "RangeError",   // errors
+    "ReferenceError", "SyntaxError",
+    "TypeError", "URIError" };

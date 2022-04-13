@@ -61,14 +61,14 @@ public:
 #endif
 
 	SatellitesDialog();
-	~SatellitesDialog();
+	~SatellitesDialog() Q_DECL_OVERRIDE;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	void createDialogContent();
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 
 private slots:
 	void jumpToSourcesTab();
@@ -84,6 +84,7 @@ private slots:
 	//! multiple items.)
 	void updateSatelliteData();
 	void updateSatelliteAndSaveData();
+	void updateFilteredSatellitesList();
 	void saveSatellites(void);
 	void showUpdateState(Satellites::UpdateState state);
 	void showUpdateCompleted(int updated, int total, int added, int missing);

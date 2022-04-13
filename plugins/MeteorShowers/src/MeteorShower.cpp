@@ -301,7 +301,11 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 	float rate = mpf / static_cast<float>(maxMpf);
 	for (int i = 0; i < maxMpf; ++i)
 	{
+		#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+		float prob = StelApp::getInstance().getRandF();
+		#else
 		float prob = static_cast<float>(qrand()) / static_cast<float>(RAND_MAX);
+		#endif
 		if (prob < rate)
 		{
 			MeteorObj *m = new MeteorObj(core, m_speed, static_cast<float>(m_radiantAlpha), static_cast<float>(m_radiantDelta),
@@ -339,7 +343,11 @@ void MeteorShower::drawRadiant(StelCore *core)
 	painter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
 
 	Vec3f rgb;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+	float alpha = 0.85f + StelApp::getInstance().getRandF() / 10.f;
+#else
 	float alpha = 0.85f + (static_cast<float>(qrand()) / static_cast<float>(RAND_MAX)) / 10.f;
+#endif
 	switch(m_status)
 	{
 		case ACTIVE_CONFIRMED: //Active, confirmed data
@@ -350,8 +358,8 @@ void MeteorShower::drawRadiant(StelCore *core)
 			break;
 		default: //Inactive
 			rgb = m_mgr->getColorIR();
-	}	
-	painter.setColor(rgb[0], rgb[1], rgb[2], alpha);
+	}
+	painter.setColor(rgb, alpha);
 
 	// Hide the radiant markers at during day light and make it visible
 	// when first stars will shine on the sky.
@@ -366,9 +374,9 @@ void MeteorShower::drawRadiant(StelCore *core)
 
 		if (m_mgr->getEnableLabels())
 		{
+			painter.setColor(rgb);
 			painter.setFont(m_mgr->getFont());
-			const float size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PI_180f*static_cast<float>(painter.getProjector()->getPixelPerRadAtCenter());
-			const float shift = 8.f + size/1.8f;
+			const float shift = 8.f;
 			if ((mag+1.f)<mlimit)
 				painter.drawText(static_cast<float>(XY[0])+shift, static_cast<float>(XY[1])+shift, getNameI18n(), 0, 0, 0, false);
 		}
@@ -390,7 +398,7 @@ void MeteorShower::drawMeteors(StelCore *core)
 
 	// step through and draw all active meteors
 	StelPainter painter(core->getProjection(StelCore::FrameAltAz));
-	for (auto* m : m_activeMeteors)
+	for (auto* m : qAsConst(m_activeMeteors))
 	{
 		m->draw(core, painter);
 	}
@@ -551,7 +559,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 			oss << QString("%1: %2").arg(q_("The population index")).arg(m_pidx) << "<br />";
 
 		if (!m_parentObj.isEmpty())
-			oss << QString("%1: %2").arg(q_("Parent body")).arg(q_(m_parentObj)) << "<br />";
+			oss << QString("%1: %2").arg(q_("Parent body"), q_(m_parentObj)) << "<br />";
 
 		QString actStr = q_("Activity");
 		if(m_activity.start.month() == m_activity.finish.month())
@@ -574,7 +582,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		oss << "<br />";
 		oss << QString("%1: %2 %3").arg(qc_("Maximum","meteor shower activity")).arg(m_activity.peak.day())
 		       .arg(StelLocaleMgr::longGenitiveMonthName(m_activity.peak.month()));
-		oss << QString(" (%1 %2&deg;)").arg(q_("Solar longitude")).arg(getSolarLongitude(m_activity.peak)) << "<br />";
+		oss << QString(" (%1 %2&deg;)").arg(q_("Solar longitude"), getSolarLongitude(m_activity.peak)) << "<br />";
 
 		if(m_activity.zhr > 0)
 			oss << QString("ZHR<sub>max</sub>: %1").arg(m_activity.zhr) << "<br />";

@@ -73,7 +73,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 
 	// width of the not yet distorted image
 	newProjectorParams.devicePixelsPerPixel = 1;
-	newProjectorParams.viewportXywh[2] = conf.value("spheric_mirror/newProjectorParams.viewportXywh[2]idth", originalProjectorParams.viewportXywh[2] * params.devicePixelsPerPixel).toInt();
+	newProjectorParams.viewportXywh[2] = conf.value("spheric_mirror/newProjectorParams.viewportXywhWidth", originalProjectorParams.viewportXywh[2] * params.devicePixelsPerPixel).toInt();
 	if (newProjectorParams.viewportXywh[2] <= 0)
 	{
 		newProjectorParams.viewportXywh[2] = qRound(originalProjectorParams.viewportXywh[2] * params.devicePixelsPerPixel);
@@ -84,7 +84,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	}
 
 	// height of the not yet distorted image
-	newProjectorParams.viewportXywh[3] = conf.value("spheric_mirror/newProjectorParams.viewportXywh[3]eight", originalProjectorParams.viewportXywh[3] * params.devicePixelsPerPixel).toInt();
+	newProjectorParams.viewportXywh[3] = conf.value("spheric_mirror/newProjectorParams.viewportXywhHeight", originalProjectorParams.viewportXywh[3] * params.devicePixelsPerPixel).toInt();
 	if (newProjectorParams.viewportXywh[3] <= 0)
 	{
 		newProjectorParams.viewportXywh[3] = qRound(originalProjectorParams.viewportXywh[3] * params.devicePixelsPerPixel);
