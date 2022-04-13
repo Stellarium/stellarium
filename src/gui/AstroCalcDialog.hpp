@@ -30,7 +30,7 @@
 #include <QRegularExpression>
 #include <QMutex>
 
-#include "AstroCalcAltVsTimeChart.hpp"
+#include "AstroCalcChart.hpp"
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
 #include "Planet.hpp"
@@ -407,7 +407,7 @@ private:
 	class StelPropertyMgr* propMgr;
 	//QStringListModel* wutModel;
 	//QSortFilterProxyModel *proxyModel;
-	AstroCalcAltVsTimeChart *altVsTimeChart;
+	AstroCalcChart *altVsTimeChart;
 	mutable QMutex altVsTimeChartMutex;
 	QSettings* conf;
 	QLinearGradient graphBackgroundGradient;
