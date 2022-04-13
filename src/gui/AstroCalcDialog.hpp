@@ -409,6 +409,11 @@ private:
 	//QSortFilterProxyModel *proxyModel;
 	AstroCalcChart *altVsTimeChart;
 	mutable QMutex altVsTimeChartMutex;
+	AstroCalcChart *azVsTimeChart;
+	mutable QMutex azVsTimeChartMutex;
+	AstroCalcChart *monthlyElevationChart;
+	AstroCalcChart *curvesChart;
+	AstroCalcChart *lunarElongationChart;
 	QSettings* conf;
 	QLinearGradient graphBackgroundGradient;
 	QTimer *currentTimeLine;

@@ -46,7 +46,7 @@ public:
 		    };
 	Q_ENUM(Series)
 
-	AstroCalcChart(QList<AstroCalcChart::Series> which);
+	AstroCalcChart(QSet<AstroCalcChart::Series> which);
 	virtual ~AstroCalcChart() Q_DECL_OVERRIDE;
 
 	//! Append one pair of data values to series s.
@@ -62,9 +62,15 @@ public:
 
 	//! set range of Y axis
 	void setYrange(qreal min, qreal max);
+	//! set range of Y axis on the right side
+	void setYrangeR(qreal min, qreal max);
 
 	//! Setup axes and appearance. Call this at the end of drawing, just before display.
 	void setupAxes();
+
+	//! Draw a 2-point vertical line at x which extends over the whole graph
+	//! Note: This shall replace AstroCalcDialog::drawTransitTimeDiagram() and AstroCalcDialog::drawCurrentTimeDiagram()
+	void drawTrivialLine(Series s, const qreal x);
 
 public slots:
 	//virtual void retranslate();
@@ -78,6 +84,7 @@ private:
 	QtCharts::QValueAxis *yAxis; // running on the left side
 	QtCharts::QValueAxis *yAxisR; // running on the right side for some charts only
 	qreal yMin, yMax; // store range of Y values
+	qreal yMinR, yMaxR; // store range of Y values for right axis
 
 
 	//! The QMap holds enums and series for principally existing graphs. These can be made active by show(key)
