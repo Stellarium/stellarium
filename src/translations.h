@@ -551,6 +551,8 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Vanuatu (Netwar)");
 		// TRANSLATORS: Name of the sky culture
+		N_("Khoikhoi and San");
+    // TRANSLATORS: Name of the sky culture
 		N_("Xhosa");
     // TRANSLATORS: Name of the sky culture
 		N_("Zulu");
