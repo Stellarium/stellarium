@@ -130,25 +130,6 @@ public:
 		return PHEPCount;
 	}
 
-	QList<double> getData(int mode)
-	{
-		return QMap<int, QList<double>>{
-			{1, semiAxisList},
-			{2, massList},
-			{3, radiusList},
-			{4, periodList},
-			{5, angleDistanceList},
-			{6, effectiveTempHostStarList},
-			{7, yearDiscoveryList},
-			{8, metallicityHostStarList},
-			{9, vMagHostStarList},
-			{10, raHostStarList},
-			{11, decHostStarList},
-			{12, distanceHostStarList},
-			{13, massHostStarList},
-			{14, radiusHostStarList}}.value(mode,eccentricityList);
-	}
-
 private:
 	QString getPlanetaryClassI18n(QString ptype) const;
 
@@ -192,11 +173,6 @@ private:
 	QList<exoplanetData> exoplanets;	//! List of exoplanets
 
 	QStringList englishNames, translatedNames, exoplanetDesignations;
-
-	// Lists with various data for fast creating a diagrams of relations
-	QList<double> eccentricityList, semiAxisList, massList, radiusList, periodList, angleDistanceList,
-		      effectiveTempHostStarList, yearDiscoveryList, metallicityHostStarList, vMagHostStarList,
-		      raHostStarList, decHostStarList, distanceHostStarList, massHostStarList, radiusHostStarList;
 
 	LinearFader labelsFader;
 };

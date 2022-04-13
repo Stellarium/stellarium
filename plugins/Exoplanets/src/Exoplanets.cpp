@@ -541,12 +541,6 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 	StelObjectP star;
 	ep.clear();
 	PSCount = EPCountAll = EPCountPH = 0;
-	EPEccentricityAll.clear();
-	EPSemiAxisAll.clear();
-	EPMassAll.clear();
-	EPRadiusAll.clear();
-	EPPeriodAll.clear();
-	EPAngleDistanceAll.clear();
 	QVariantMap epsMap = map.value("stars").toMap();
 	for (auto &epsKey : epsMap.keys())
 	{
@@ -581,21 +575,6 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 		if (eps->initialized)
 		{
 			ep.append(eps);
-			EPEccentricityAll.append(eps->getData(0));
-			EPSemiAxisAll.append(eps->getData(1));
-			EPMassAll.append(eps->getData(2));
-			EPRadiusAll.append(eps->getData(3));
-			EPPeriodAll.append(eps->getData(4));
-			EPAngleDistanceAll.append(eps->getData(5));
-			EPEffectiveTempHostStarAll.append(eps->getData(6));
-			EPYearDiscoveryAll.append(eps->getData(7));
-			EPMetallicityHostStarAll.append(eps->getData(8));
-			EPVMagHostStarAll.append(eps->getData(9));
-			EPRAHostStarAll.append(eps->getData(10));
-			EPDecHostStarAll.append(eps->getData(11));
-			EPDistanceHostStarAll.append(eps->getData(12));
-			EPMassHostStarAll.append(eps->getData(13));
-			EPRadiusHostStarAll.append(eps->getData(14));
 			EPCountAll += eps->getCountExoplanets();
 			EPCountPH += eps->getCountHabitableExoplanets();
 		}

@@ -193,43 +193,6 @@ public:
 	//! Get the current updateState
 	UpdateState getUpdateState(void) const {return updateState;}
 
-	QList<double> getExoplanetsData(int mode) const
-	{
-		switch(mode)
-		{
-			case 1:
-				return EPSemiAxisAll;
-			case 2:
-				return EPMassAll;
-			case 3:
-				return EPRadiusAll;
-			case 4:
-				return EPPeriodAll;
-			case 5:
-				return EPAngleDistanceAll;
-			case 6:
-				return EPEffectiveTempHostStarAll;
-			case 7:
-				return EPYearDiscoveryAll;
-			case 8:
-				return EPMetallicityHostStarAll;
-			case 9:
-				return EPVMagHostStarAll;
-			case 10:
-				return EPRAHostStarAll;
-			case 11:
-				return EPDecHostStarAll;
-			case 12:
-				return EPDistanceHostStarAll;
-			case 13:
-				return EPMassHostStarAll;
-			case 14:
-				return EPRadiusHostStarAll;
-			default:
-				return EPEccentricityAll;
-		}
-	}
-
 	//! Get the list of all exoplanetary systems.
 	const QList<ExoplanetP>& getAllExoplanetarySystems() const {return ep;}
 
@@ -405,11 +368,6 @@ private:
 	int PSCount;	// Count of planetary systems
 	int EPCountAll;	// Count of exoplents
 	int EPCountPH;	// Count of exoplanets in habitable zone
-
-	// Lists of various data about exoplanets for quick plot of graphs
-	QList<double> EPEccentricityAll, EPSemiAxisAll, EPMassAll, EPRadiusAll, EPPeriodAll, EPAngleDistanceAll,
-		      EPEffectiveTempHostStarAll, EPYearDiscoveryAll, EPMetallicityHostStarAll, EPVMagHostStarAll,
-		      EPRAHostStarAll, EPDecHostStarAll, EPDistanceHostStarAll, EPMassHostStarAll, EPRadiusHostStarAll;
 
 	StelTextureSP texPointer;
 	QList<ExoplanetP> ep;

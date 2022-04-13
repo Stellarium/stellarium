@@ -93,24 +93,9 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	effectiveTemp = map.value("effectiveTemp").toInt();
 	hasHabitableExoplanets = map.value("hasHP", false).toBool();
 
-	eccentricityList.clear();
-	semiAxisList.clear();
-	massList.clear();
-	radiusList.clear();
-	periodList.clear();
-	angleDistanceList.clear();
 	englishNames.clear();
 	translatedNames.clear();
 	exoplanetDesignations.clear();
-	effectiveTempHostStarList.clear();
-	yearDiscoveryList.clear();
-	metallicityHostStarList.clear();
-	vMagHostStarList.clear();
-	raHostStarList.clear();
-	decHostStarList.clear();
-	distanceHostStarList.clear();
-	massHostStarList.clear();
-	radiusHostStarList.clear();
 	if (map.contains("exoplanets"))
 	{
 		for (const auto& expl : map.value("exoplanets").toList())
@@ -148,23 +133,6 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 			p.conservative = exoplanetMap.value("conservative", false).toBool();
 
 			exoplanets.append(p);
-
-			eccentricityList.append(qMax(0., p.eccentricity));
-			semiAxisList.append(qMax(0., p.semiAxis));
-			massList.append(qMax(0., p.mass));
-			radiusList.append(qMax(0., p.radius));
-			angleDistanceList.append(qMax(0., p.angleDistance));
-			periodList.append(qMax(0., p.period));
-			yearDiscoveryList.append(p.discovered);
-			effectiveTempHostStarList.append(effectiveTemp);
-			metallicityHostStarList.append(smetal);
-			if (Vmag<99)
-				vMagHostStarList.append(Vmag);
-			raHostStarList.append(RAdd);
-			decHostStarList.append(DEdd);
-			distanceHostStarList.append(distance);
-			massHostStarList.append(smass);
-			radiusHostStarList.append(sradius);
 		}
 	}
 
