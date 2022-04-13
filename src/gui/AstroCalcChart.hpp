@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef ASTROCALCALTVSTIMECHART_HPP
-#define ASTROCALCALTVSTIMECHART_HPP
+#ifndef ASTROCALCCHART_H
+#define ASTROCALCCHART_H
 
 
 #include <QChart>
@@ -30,7 +30,7 @@
 //! @class AstroCalcAltVsTimeChart
 //! This class encapsulates data for the Altitude vs. Time Chart in AstroCalc.
 //! The next iterations will try to re-use the chart in place of other plots.
-class AstroCalcAltVsTimeChart : public QtCharts::QChart
+class AstroCalcChart : public QtCharts::QChart
 {
 	Q_OBJECT
 
@@ -46,8 +46,8 @@ public:
 		    };
 	Q_ENUM(Series)
 
-	AstroCalcAltVsTimeChart(QList<AstroCalcAltVsTimeChart::Series> which);
-	virtual ~AstroCalcAltVsTimeChart() Q_DECL_OVERRIDE;
+	AstroCalcChart(QList<AstroCalcChart::Series> which);
+	virtual ~AstroCalcChart() Q_DECL_OVERRIDE;
 
 	//! Append one pair of data values to series s.
 	void append(Series s, qreal x, qreal y);
@@ -76,12 +76,13 @@ private:
 	QtCharts::QValueAxis *xAxis; // running along bottom
 	//QtCharts::QDateTimeAxis *xAxis; // Maybe change to use this!
 	QtCharts::QValueAxis *yAxis; // running on the left side
+	QtCharts::QValueAxis *yAxisR; // running on the right side for some charts only
 	qreal yMin, yMax; // store range of Y values
 
 
 	//! The QMap holds enums and series for principally existing graphs. These can be made active by show(key)
-	QMap<AstroCalcAltVsTimeChart::Series, QtCharts::QSplineSeries*> map;
-	static const QMap<AstroCalcAltVsTimeChart::Series, QPen> penMap;
+	QMap<AstroCalcChart::Series, QtCharts::QSplineSeries*> map;
+	static const QMap<AstroCalcChart::Series, QPen> penMap;
 };
 
-#endif // ASTROCALCALTVSTIMECHART_HPP
+#endif // ASTROCALCCHART_H

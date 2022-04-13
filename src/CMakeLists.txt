@@ -348,8 +348,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/AstroCalcExtraEphemerisDialog.cpp
           gui/AstroCalcCustomStepsDialog.hpp
           gui/AstroCalcCustomStepsDialog.cpp
-          gui/AstroCalcAltVsTimeChart.hpp
-          gui/AstroCalcAltVsTimeChart.cpp
+          gui/AstroCalcChart.hpp
+          gui/AstroCalcChart.cpp
           gui/ObsListDialog.hpp
           gui/ObsListDialog.cpp
           gui/ObsListCreateEditDialog.hpp

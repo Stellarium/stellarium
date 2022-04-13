@@ -4260,7 +4260,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		ui->altVsTimeTitle->setText(selectedObject->getNameI18n());
 
 		qDebug() << "creating chart";
-		altVsTimeChart = new AstroCalcAltVsTimeChart({AstroCalcAltVsTimeChart::AltVsTime, AstroCalcAltVsTimeChart::CurrentTime, AstroCalcAltVsTimeChart::TransitTime, AstroCalcAltVsTimeChart::SunElevation, AstroCalcAltVsTimeChart::CivilTwilight, AstroCalcAltVsTimeChart::NauticalTwilight, AstroCalcAltVsTimeChart::AstroTwilight, AstroCalcAltVsTimeChart::Moon});
+		altVsTimeChart = new AstroCalcChart({AstroCalcChart::AltVsTime, AstroCalcChart::CurrentTime, AstroCalcChart::TransitTime, AstroCalcChart::SunElevation, AstroCalcChart::CivilTwilight, AstroCalcChart::NauticalTwilight, AstroCalcChart::AstroTwilight, AstroCalcChart::Moon});
 		altVsTimeChart->setTitle(selectedObject->getNameI18n());
 		qDebug() << "Chart has title:" << altVsTimeChart->title();
 		const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
@@ -4313,9 +4313,9 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 				transitX = ltime;
 			}
 			// prepare QChart use:
-			altVsTimeChart->append(AstroCalcAltVsTimeChart::AltVsTime, ltime, deg);
+			altVsTimeChart->append(AstroCalcChart::AltVsTime, ltime, deg);
 		}
-		altVsTimeChart->show(AstroCalcAltVsTimeChart::AltVsTime);
+		altVsTimeChart->show(AstroCalcChart::AltVsTime);
 
 		if (plotAltVsTimeSun)
 		{
@@ -4335,10 +4335,10 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 				sYa.append(deg + 18);
 
 				// QChart:
-				altVsTimeChart->append(AstroCalcAltVsTimeChart::SunElevation,     ltime, deg);
-				altVsTimeChart->append(AstroCalcAltVsTimeChart::CivilTwilight,    ltime, deg+6);
-				altVsTimeChart->append(AstroCalcAltVsTimeChart::NauticalTwilight, ltime, deg+12);
-				altVsTimeChart->append(AstroCalcAltVsTimeChart::AstroTwilight,    ltime, deg+18);
+				altVsTimeChart->append(AstroCalcChart::SunElevation,     ltime, deg);
+				altVsTimeChart->append(AstroCalcChart::CivilTwilight,    ltime, deg+6);
+				altVsTimeChart->append(AstroCalcChart::NauticalTwilight, ltime, deg+12);
+				altVsTimeChart->append(AstroCalcChart::AstroTwilight,    ltime, deg+18);
 			}
 		}
 
@@ -4356,7 +4356,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 				double deg=alt*M_180_PI;
 				mY.append(deg);
 				// QChart use:
-				altVsTimeChart->append(AstroCalcAltVsTimeChart::Moon, ltime, deg);
+				altVsTimeChart->append(AstroCalcChart::Moon, ltime, deg);
 			}
 		}
 
@@ -4421,10 +4421,10 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			ui->altVsTimePlot->graph(5)->setData(xs, sYn.toVector());
 			ui->altVsTimePlot->graph(6)->setData(xs, sYa.toVector());
 			qDebug() << "activate chart series...";
-			altVsTimeChart->show(AstroCalcAltVsTimeChart::SunElevation);
-			altVsTimeChart->show(AstroCalcAltVsTimeChart::CivilTwilight);
-			altVsTimeChart->show(AstroCalcAltVsTimeChart::NauticalTwilight);
-			altVsTimeChart->show(AstroCalcAltVsTimeChart::AstroTwilight);
+			altVsTimeChart->show(AstroCalcChart::SunElevation);
+			altVsTimeChart->show(AstroCalcChart::CivilTwilight);
+			altVsTimeChart->show(AstroCalcChart::NauticalTwilight);
+			altVsTimeChart->show(AstroCalcChart::AstroTwilight);
 
 		}
 		if (plotAltVsTimeMoon && onEarth)
@@ -4432,7 +4432,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			QVector<double> xm = mX.toVector();
 			QVector<double> ym = mY.toVector();
 			ui->altVsTimePlot->graph(7)->setData(xm, ym);
-			altVsTimeChart->show(AstroCalcAltVsTimeChart::Moon);
+			altVsTimeChart->show(AstroCalcChart::Moon);
 		}
 
 		ui->altVsTimePlot->replot();
@@ -4462,13 +4462,13 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 
 		if (altVsTimeChart)
 		{
-			altVsTimeChart->clear(AstroCalcAltVsTimeChart::AltVsTime);
-			altVsTimeChart->clear(AstroCalcAltVsTimeChart::TransitTime);
-			altVsTimeChart->clear(AstroCalcAltVsTimeChart::SunElevation);
-			altVsTimeChart->clear(AstroCalcAltVsTimeChart::CivilTwilight);
-			altVsTimeChart->clear(AstroCalcAltVsTimeChart::NauticalTwilight);
-			altVsTimeChart->clear(AstroCalcAltVsTimeChart::AstroTwilight);
-			altVsTimeChart->clear(AstroCalcAltVsTimeChart::Moon);
+			altVsTimeChart->clear(AstroCalcChart::AltVsTime);
+			altVsTimeChart->clear(AstroCalcChart::TransitTime);
+			altVsTimeChart->clear(AstroCalcChart::SunElevation);
+			altVsTimeChart->clear(AstroCalcChart::CivilTwilight);
+			altVsTimeChart->clear(AstroCalcChart::NauticalTwilight);
+			altVsTimeChart->clear(AstroCalcChart::AstroTwilight);
+			altVsTimeChart->clear(AstroCalcChart::Moon);
 			altVsTimeChart->setTitle(q_("No object selected"));
 		}
 	}
@@ -4497,8 +4497,8 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 		ui->altVsTimePlot->replot();
 		qDebug() << "Chart: replace/append currentTime";
 		if (altVsTimeChart){
-			altVsTimeChart->replace(AstroCalcAltVsTimeChart::CurrentTime, 0, now, minY-10);
-			altVsTimeChart->replace(AstroCalcAltVsTimeChart::CurrentTime, 1, now,  maxY+10);
+			altVsTimeChart->replace(AstroCalcChart::CurrentTime, 0, now, minY-10);
+			altVsTimeChart->replace(AstroCalcChart::CurrentTime, 1, now,  maxY+10);
 			qDebug() << "Chart: replace/append currentTime...done";
 		}
 		else
@@ -4536,8 +4536,8 @@ void AstroCalcDialog::drawTransitTimeDiagram()
 	// QChart use:
 	qDebug() << "Chart: replace/append transitTime";
 	if (altVsTimeChart){
-		altVsTimeChart->replace(AstroCalcAltVsTimeChart::TransitTime, 0, transitX, minY-10);
-		altVsTimeChart->replace(AstroCalcAltVsTimeChart::TransitTime, 1, transitX, maxY+10);
+		altVsTimeChart->replace(AstroCalcChart::TransitTime, 0, transitX, minY-10);
+		altVsTimeChart->replace(AstroCalcChart::TransitTime, 1, transitX, maxY+10);
 		qDebug() << "Chart: replace/append transitTime...done";
 	}
 	else
