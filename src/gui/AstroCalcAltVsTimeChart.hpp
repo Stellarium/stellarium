@@ -29,16 +29,24 @@
 
 //! @class AstroCalcAltVsTimeChart
 //! This class encapsulates data for the Altitude vs. Time Chart in AstroCalc.
+//! The next iterations will try to re-use the chart in place of other plots.
 class AstroCalcAltVsTimeChart : public QtCharts::QChart
 {
 	Q_OBJECT
 
 public:
 	// Series names. Better than int numbers for the old plots.
-	enum Series {AltVsTime, CurrentTime, TransitTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight, Moon};
+	// This graph can be used in several scenarios. In 0.22 there are 6 plots which can be recreated by creating a chart which activates 1-2 lines of these:
+	enum Series {AltVsTime, CurrentTime, TransitTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight, Moon,
+		     AzVsTime,
+		     MonthlyElevation,
+		     AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1,
+		     AngularSize2, Declination2, Distance2, Elongation2, HeliocentricDistance2, Magnitude2, PhaseAngle2, Phase2, RightAscension2, TransitAltitude2,
+		     LunarDistance, DistanceLimit
+		    };
 	Q_ENUM(Series)
 
-	AstroCalcAltVsTimeChart();
+	AstroCalcAltVsTimeChart(QList<AstroCalcAltVsTimeChart::Series> which);
 	virtual ~AstroCalcAltVsTimeChart() Q_DECL_OVERRIDE;
 
 	//! Append one pair of data values to series s.
@@ -65,22 +73,15 @@ private slots:
 	//void setOptionStatus();
 
 private:
-	QtCharts::QSplineSeries *altVsTime;
-	QtCharts::QLineSeries *currentTime;
-	QtCharts::QLineSeries *transitTime;
-	QtCharts::QSplineSeries *sunElevation;
-	QtCharts::QSplineSeries *civilTwilight;
-	QtCharts::QSplineSeries *nauticalTwilight;
-	QtCharts::QSplineSeries *astroTwilight;
-	QtCharts::QSplineSeries *moon;
-
-	QtCharts::QValueAxis *xAxis;
+	QtCharts::QValueAxis *xAxis; // running along bottom
 	//QtCharts::QDateTimeAxis *xAxis; // Maybe change to use this!
-	QtCharts::QValueAxis *yAxis;
-	qreal yMin, yMax;
+	QtCharts::QValueAxis *yAxis; // running on the left side
+	qreal yMin, yMax; // store range of Y values
 
 
-	QMap<AstroCalcAltVsTimeChart::Series, QtCharts::QLineSeries*> map; //! Make access to series easier.
+	//! The QMap holds enums and series for principally existing graphs. These can be made active by show(key)
+	QMap<AstroCalcAltVsTimeChart::Series, QtCharts::QSplineSeries*> map;
+	static const QMap<AstroCalcAltVsTimeChart::Series, QPen> penMap;
 };
 
 #endif // ASTROCALCALTVSTIMECHART_HPP

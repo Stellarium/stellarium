@@ -23,40 +23,38 @@
 #include <QDebug>
 #include <QAbstractSeries>
 #include <QPen>
+#include <QColor>
 
 
-AstroCalcAltVsTimeChart::AstroCalcAltVsTimeChart() : QChart(), yMin(-90), yMax(90.)
+AstroCalcAltVsTimeChart::AstroCalcAltVsTimeChart(QList<Series> which) : QChart(), yMin(-90), yMax(90.)
 {
 	qDebug() << "chart constructor";
-	altVsTime        = new QtCharts::QSplineSeries(this);
-	currentTime      = new QtCharts::QLineSeries(this);
-	transitTime      = new QtCharts::QLineSeries(this);
-	sunElevation     = new QtCharts::QSplineSeries(this);
-	civilTwilight    = new QtCharts::QSplineSeries(this);
-	nauticalTwilight = new QtCharts::QSplineSeries(this);
-	astroTwilight    = new QtCharts::QSplineSeries(this);
-	moon             = new QtCharts::QSplineSeries(this);
 
-	map={
-		{AltVsTime,        dynamic_cast<QtCharts::QLineSeries*>(altVsTime)},
-		{CurrentTime,      currentTime},
-		{TransitTime,      transitTime},
-		{SunElevation,     dynamic_cast<QtCharts::QLineSeries*>(sunElevation)},
-		{CivilTwilight,    dynamic_cast<QtCharts::QLineSeries*>(civilTwilight)},
-		{NauticalTwilight, dynamic_cast<QtCharts::QLineSeries*>(nauticalTwilight)},
-		{AstroTwilight,    dynamic_cast<QtCharts::QLineSeries*>(astroTwilight)},
-		{Moon,             dynamic_cast<QtCharts::QLineSeries*>(moon)}
-	};
+	// Configure all series you want to potentially use later.
+	for (Series s: which)
+	{
+		map.insert(s,         new QtCharts::QSplineSeries(this));
+	}
+	//map.insert(AltVsTime,         new QtCharts::QSplineSeries(this));
+	//map.insert(CurrentTime,       new QtCharts::QSplineSeries(this));
+	//map.insert(TransitTime,       new QtCharts::QSplineSeries(this));
+	//map.insert(SunElevation,      new QtCharts::QSplineSeries(this));
+	//map.insert(CivilTwilight,     new QtCharts::QSplineSeries(this));
+	//map.insert(NauticalTwilight,  new QtCharts::QSplineSeries(this));
+	//map.insert(AstroTwilight,     new QtCharts::QSplineSeries(this));
+	//map.insert(Moon,              new QtCharts::QSplineSeries(this));
+
 	setBackgroundBrush(QBrush(QColor(86, 87, 90)));
 
-	altVsTime       ->setName(q_("Altitude")); // no name in old solution, but used for legend!
-	currentTime     ->setName(q_("Now"));
-	transitTime     ->setName(q_("Culmination"));
-	sunElevation    ->setName(q_("Sun"));
-	civilTwilight   ->setName(q_("Civil Twilight"));
-	nauticalTwilight->setName(q_("Nautical Twilight"));
-	astroTwilight   ->setName(q_("Astronomical Twilight"));
-	moon            ->setName(q_("Moon"));
+	// We need to configure every enum Series here!
+	if (map.contains(AltVsTime       )) map.value(AltVsTime       )->setName(q_("Altitude")); // no name in old solution, but used for legend!
+	if (map.contains(CurrentTime     )) map.value(CurrentTime     )->setName(q_("Now"));
+	if (map.contains(TransitTime     )) map.value(TransitTime     )->setName(q_("Culmination"));
+	if (map.contains(SunElevation    )) map.value(SunElevation    )->setName(q_("Sun"));
+	if (map.contains(CivilTwilight   )) map.value(CivilTwilight   )->setName(q_("Civil Twilight"));
+	if (map.contains(NauticalTwilight)) map.value(NauticalTwilight)->setName(q_("Nautical Twilight"));
+	if (map.contains(AstroTwilight   )) map.value(AstroTwilight   )->setName(q_("Astronomical Twilight"));
+	if (map.contains(Moon            )) map.value(Moon            )->setName(q_("Moon"));
 
 	xAxis=new QtCharts::QValueAxis(this);
 	yAxis=new QtCharts::QValueAxis(this);
@@ -73,6 +71,42 @@ AstroCalcAltVsTimeChart::~AstroCalcAltVsTimeChart()
 }
 
 //void AstroCalcAltVsTimeChart::retranslate(){}
+
+const QMap<AstroCalcAltVsTimeChart::Series, QPen> AstroCalcAltVsTimeChart::penMap=
+{
+	{AstroCalcAltVsTimeChart::AltVsTime,         QPen(Qt::red,                             2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::CurrentTime,       QPen(Qt::yellow,                          2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::TransitTime,       QPen(Qt::cyan,                            2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::SunElevation,      QPen(QColorConstants::Svg::orange,        2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::CivilTwilight,     QPen(QColorConstants::Svg::paleturquoise, 1, Qt::DashLine)},
+	{AstroCalcAltVsTimeChart::NauticalTwilight,  QPen(QColorConstants::Svg::dodgerblue,    1, Qt::DashDotLine)},
+	{AstroCalcAltVsTimeChart::AstroTwilight,     QPen(Qt::darkBlue,                        1, Qt::DashDotDotLine)},
+	{AstroCalcAltVsTimeChart::Moon,              QPen(QColorConstants::Svg::springgreen,   2, Qt::DashLine)},
+	{AstroCalcAltVsTimeChart::AzVsTime,               QPen(Qt::red,                        2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::MonthlyElevation,       QPen(Qt::red,                        2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::AngularSize1,           QPen(Qt::green,                      2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::Declination1,           QPen(Qt::green,                      2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::Distance1,              QPen(Qt::green,                      2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::Elongation1,            QPen(Qt::green,                      2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::HeliocentricDistance1,  QPen(Qt::green,                      2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::Magnitude1,             QPen(Qt::green,                      2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::PhaseAngle1,            QPen(Qt::green,                      2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::Phase1,                 QPen(Qt::green,                      2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::RightAscension1,        QPen(Qt::green,                      2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::TransitAltitude1,       QPen(Qt::green,                      2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::AngularSize2,           QPen(Qt::yellow,                     2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::Declination2,           QPen(Qt::yellow,                     2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::Distance2,              QPen(Qt::yellow,                     2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::Elongation2,            QPen(Qt::yellow,                     2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::HeliocentricDistance2,  QPen(Qt::yellow,                     2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::Magnitude2,             QPen(Qt::yellow,                     2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::PhaseAngle2,            QPen(Qt::yellow,                     2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::Phase2,                 QPen(Qt::yellow,                     2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::RightAscension2,        QPen(Qt::yellow,                     2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::TransitAltitude2,       QPen(Qt::yellow,                     2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::LunarDistance,          QPen(Qt::red,                        2, Qt::SolidLine)},
+	{AstroCalcAltVsTimeChart::DistanceLimit,          QPen(Qt::yellow,                     2, Qt::SolidLine)}
+};
 
 void AstroCalcAltVsTimeChart::append(Series s, qreal x, qreal y)
 {
@@ -131,6 +165,8 @@ void AstroCalcAltVsTimeChart::clear(Series s)
 //		removeSeries(map.value(s));
 	qDebug() << "clearing series with " << map.value(s)->points().length() << "entries";
 	map.value(s)->clear();
+	removeSeries(map.value(s)); // updates legend to not show entries
+
 }
 
 
@@ -141,14 +177,6 @@ void AstroCalcAltVsTimeChart::setupAxes()
 	static const QPen axisPen(       Qt::white,                         1,    Qt::SolidLine);
 	static const QPen axisGridPen(   Qt::white,                         0.5,  Qt::SolidLine);
 	static const QPen axisMinorGridPen(Qt::white,                       0.35, Qt::DotLine);
-	static const QPen altPen(        Qt::red,                           2, Qt::SolidLine);
-	static const QPen currentTimePen(Qt::yellow,                        2, Qt::SolidLine);
-	static const QPen transitTimePen(Qt::cyan,                          2, Qt::SolidLine);
-	static const QPen sunPen(        QColorConstants::Svg::orange,      2, Qt::SolidLine);
-	static const QPen civilPen(      QColorConstants::Svg::paleturquoise, 1, Qt::DashLine);
-	static const QPen nauticalPen(   QColorConstants::Svg::dodgerblue,   1, Qt::DashDotLine);
-	static const QPen astroPen(      Qt::darkBlue,                      1, Qt::DashDotDotLine);
-	static const QPen moonPen(       QColorConstants::Svg::springgreen, 2, Qt::DashLine);
 
 	xAxis->setTitleText(q_("Local Time"));
 	yAxis->setTitleText(QString("%1, %2").arg(q_("Altitude"), QChar(0x00B0)));
@@ -171,16 +199,18 @@ void AstroCalcAltVsTimeChart::setupAxes()
 	addAxis(xAxis, Qt::AlignBottom);
 	addAxis(yAxis, Qt::AlignLeft);
 
-	const QList<QtCharts::QAbstractSeries *> ser=series();
+	const QList<QtCharts::QAbstractSeries *> ser=series(); // currently shown series. These may be fewer than the series in our map!
 
-	if ((altVsTime)        && ser.contains(altVsTime))       { altVsTime       ->setPen(altPen);         altVsTime->attachAxis(xAxis);         altVsTime->attachAxis(yAxis); }
-	if ((currentTime)      && ser.contains(currentTime))     { currentTime     ->setPen(currentTimePen); currentTime->attachAxis(xAxis);       currentTime->attachAxis(yAxis); }
-	if ((transitTime)      && ser.contains(transitTime))     { transitTime     ->setPen(transitTimePen); transitTime->attachAxis(xAxis);       transitTime->attachAxis(yAxis); }
-	if ((sunElevation)     && ser.contains(sunElevation))    { sunElevation    ->setPen(sunPen);         sunElevation->attachAxis(xAxis);      sunElevation->attachAxis(yAxis); }
-	if ((civilTwilight)    && ser.contains(civilTwilight))   { civilTwilight   ->setPen(civilPen);       civilTwilight->attachAxis(xAxis);     civilTwilight->attachAxis(yAxis); }
-	if ((nauticalTwilight) && ser.contains(nauticalTwilight)){ nauticalTwilight->setPen(nauticalPen);    nauticalTwilight->attachAxis(xAxis);  nauticalTwilight->attachAxis(yAxis); }
-	if ((astroTwilight)    && ser.contains(astroTwilight))   { astroTwilight   ->setPen(astroPen);       astroTwilight->attachAxis(xAxis);     astroTwilight->attachAxis(yAxis); }
-	if ((moon)             && ser.contains(moon))            { moon            ->setPen(moonPen);        moon->attachAxis(xAxis);              moon->attachAxis(yAxis); }
+	for (Series s: {AltVsTime, CurrentTime, TransitTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight, Moon})
+	{
+		if ((map.value(s)) && ser.contains(map.value(s)))
+		{
+			map.value(s)->setPen(penMap.value(s));
+			map.value(s)->attachAxis(xAxis);
+			map.value(s)->attachAxis(yAxis);
+		}
+	}
+
 	qDebug() << "setupAxes()...done";
 }
 
