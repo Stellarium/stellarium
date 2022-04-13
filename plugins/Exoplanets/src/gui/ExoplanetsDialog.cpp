@@ -41,8 +41,6 @@
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
 
-#include "external/qcustomplot/qcustomplot.h"
-
 ExoplanetsDialog::ExoplanetsDialog()
 	: StelDialog("Exoplanets")
 	, ep(Q_NULLPTR)
@@ -74,7 +72,6 @@ void ExoplanetsDialog::retranslate()
 		setAboutHtml();
 		setInfoHtml();
 		setWebsitesHtml();
-		populateDiagramsList();
 		populateTemperatureScales();
 		fillExoplanetsTable();
 	}
@@ -133,7 +130,6 @@ void ExoplanetsDialog::createDialogContent()
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));	
-	connect(ui->plotDiagram, SIGNAL(clicked()), this, SLOT(drawDiagram()));
 
 	populateTemperatureScales();
 	int idx = ui->temperatureScaleComboBox->findData(ep->getCurrentTemperatureScaleKey(), Qt::UserRole, Qt::MatchCaseSensitive);
@@ -159,7 +155,6 @@ void ExoplanetsDialog::createDialogContent()
 		ui->websitesTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	}
 
-	populateDiagramsList();	
 	fillExoplanetsTable();
 	updateGuiFromSettings();
 }
@@ -275,7 +270,7 @@ void ExoplanetsDialog::setAboutHtml(void)
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf</td></tr></table>";
 
 	html += "<p>" + QString(q_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from \"%1The Extrasolar Planets Encyclopaedia%2\"")).arg("<a href=\"http://exoplanet.eu/\">", "</a>. ");
-	html += QString(q_("The list of potential habitable exoplanets and data about them were taken from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability Laboratory%3.")).arg("<a href=\"http://phl.upr.edu/projects/habitable-exoplanets-catalog\">").arg("<a href=\"http://phl.upr.edu/home\">").arg("</a>") + "</p>";
+	html += QString(q_("The list of potential habitable exoplanets and data about them were taken from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability Laboratory%3.")).arg("<a href=\"http://phl.upr.edu/projects/habitable-exoplanets-catalog\">", "<a href=\"http://phl.upr.edu/home\">", "</a>") + "</p>";
 
 	html += "<p>" + q_("The current catalog contains info about %1 planetary systems, which altogether have %2 exoplanets (including %3 potentially habitable exoplanets).").arg(ep->getCountPlanetarySystems()).arg(ep->getCountAllExoplanets()).arg(ep->getCountHabitableExoplanets()) + "</p>";
 
@@ -794,132 +789,6 @@ void ExoplanetsDialog::updateJSON(void)
 	{
 		ep->updateJSON();
 	}
-}
-
-void ExoplanetsDialog::drawDiagram()
-{
-	int currentAxisX = ui->comboAxisX->currentData(Qt::UserRole).toInt();
-	QString currentAxisXString = ui->comboAxisX->currentText();
-	int currentAxisY = ui->comboAxisY->currentData(Qt::UserRole).toInt();
-	QString currentAxisYString = ui->comboAxisY->currentText();
-
-	QList<double> aX = ep->getExoplanetsData(currentAxisX), aY = ep->getExoplanetsData(currentAxisY);
-	QVector<double> x = aX.toVector(), y = aY.toVector();
-
-	double minX = *std::min_element(aX.begin(), aX.end());
-	double minY = *std::min_element(aY.begin(), aY.end());
-	double maxX = *std::max_element(aX.begin(), aX.end());
-	double maxY = *std::max_element(aY.begin(), aY.end());
-
-	if (!ui->minX->text().isEmpty())
-		minX = ui->minX->text().toDouble();
-
-	if (!ui->maxX->text().isEmpty())
-		maxX = ui->maxX->text().toDouble();
-
-	if (!ui->minY->text().isEmpty())
-		minY = ui->minY->text().toDouble();
-
-	if (!ui->maxY->text().isEmpty())
-		maxY = ui->maxY->text().toDouble();
-
-	ui->customPlot->addGraph();	
-	ui->customPlot->graph(0)->setData(x, y);
-	ui->customPlot->graph(0)->setPen(QPen(Qt::blue));
-	ui->customPlot->graph(0)->setLineStyle(QCPGraph::lsNone);
-	ui->customPlot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssDisc, 4));
-	ui->customPlot->graph(0)->rescaleAxes(true);
-	ui->customPlot->xAxis->setLabel(currentAxisXString);
-	ui->customPlot->yAxis->setLabel(currentAxisYString);
-
-	ui->customPlot->xAxis->setRange(minX, maxX);
-	if (ui->checkBoxLogX->isChecked())
-	{
-		ui->customPlot->xAxis->setScaleType(QCPAxis::stLogarithmic);
-		ui->customPlot->xAxis->setScaleLogBase(10);
-	}
-	else
-		ui->customPlot->xAxis->setScaleType(QCPAxis::stLinear);
-
-	ui->customPlot->yAxis->setRange(minY, maxY);
-	if (ui->checkBoxLogY->isChecked())
-	{
-		ui->customPlot->yAxis->setScaleType(QCPAxis::stLogarithmic);
-		ui->customPlot->yAxis->setScaleLogBase(10);
-	}
-	else
-		ui->customPlot->yAxis->setScaleType(QCPAxis::stLinear);
-
-	ui->customPlot->replot();
-}
-
-void ExoplanetsDialog::populateDiagramsList()
-{
-	Q_ASSERT(ui->comboAxisX);
-	Q_ASSERT(ui->comboAxisY);
-
-	QColor axisColor(Qt::white);
-	QPen axisPen(axisColor, 1);
-
-	ui->customPlot->setBackground(QBrush(QColor(86, 87, 90)));
-	ui->customPlot->xAxis->setLabelColor(axisColor);
-	ui->customPlot->xAxis->setTickLabelColor(axisColor);
-	ui->customPlot->xAxis->setBasePen(axisPen);
-	ui->customPlot->xAxis->setTickPen(axisPen);
-	ui->customPlot->xAxis->setSubTickPen(axisPen);
-	ui->customPlot->yAxis->setLabelColor(axisColor);
-	ui->customPlot->yAxis->setTickLabelColor(axisColor);
-	ui->customPlot->yAxis->setBasePen(axisPen);
-	ui->customPlot->yAxis->setTickPen(axisPen);
-	ui->customPlot->yAxis->setSubTickPen(axisPen);
-
-	QComboBox* axisX = ui->comboAxisX;
-	QComboBox* axisY = ui->comboAxisY;
-
-	//Save the current selection to be restored later
-	axisX->blockSignals(true);
-	axisY->blockSignals(true);
-	int indexX = axisX->currentIndex();
-	int indexY = axisY->currentIndex();	
-	QVariant selectedAxisX = axisX->itemData(indexX);
-	QVariant selectedAxisY = axisY->itemData(indexY);
-	axisX->clear();
-	axisY->clear();
-
-	const QList<axisPair> axis = {
-	{ q_("Orbital Eccentricity"),          0},
-	{ q_("Orbit Semi-Major Axis, AU"),     1},
-	{ q_("Planetary Mass, Mjup"),          2},
-	{ q_("Planetary Radius, Rjup"),        3},
-	{ q_("Orbital Period, days"),          4},
-	{ q_("Angular Distance, arc-sec"),      5},
-	{ q_("Effective temperature of host star, K"), 6},
-	{ q_("Year of Discovery"),             7},
-	{ q_("Metallicity of host star"),      8},
-	{ q_("V magnitude of host star, mag"), 9},
-	{ q_("RA (J2000) of star, deg"),      10},
-	{ q_("Dec (J2000) of star, deg"),     11},
-	{ q_("Distance to star, pc"),         12},
-	{ q_("Mass of host star, Msol"),      13},
-	{ q_("Radius of host star, Rsol"),    14}};
-
-	for(int i=0; i<axis.size(); ++i)
-	{
-		axisX->addItem(axis.at(i).first, axis.at(i).second);
-		axisY->addItem(axis.at(i).first, axis.at(i).second);
-	}
-
-	//Restore the selection
-	indexX = axisX->findData(selectedAxisX, Qt::UserRole, Qt::MatchCaseSensitive);
-	if (indexX<0)
-		indexX = 1;
-	indexY = axisY->findData(selectedAxisY, Qt::UserRole, Qt::MatchCaseSensitive);
-	if (indexY<0)
-		indexY = 0;
-	axisX->setCurrentIndex(indexX);
-	axisY->setCurrentIndex(indexY);
-	axisX->blockSignals(false);
-	axisY->blockSignals(false);
 }
 
 void ExoplanetsDialog::populateTemperatureScales()

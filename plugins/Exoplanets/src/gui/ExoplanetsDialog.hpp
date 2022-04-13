@@ -84,8 +84,6 @@ private slots:
 	void restoreDefaults(void);
 	void saveSettings(void);
 	void updateJSON(void);
-	void drawDiagram(void);
-	void populateDiagramsList();
 
 	void populateTemperatureScales();
 	void setTemperatureScale(int tScaleID);
