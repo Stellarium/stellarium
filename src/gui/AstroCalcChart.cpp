@@ -25,7 +25,7 @@
 #include <QPen>
 #include <QColor>
 
-AstroCalcChart::AstroCalcChart(QList<Series> which) : QChart(), yAxisR(Q_NULLPTR), yMin(-90), yMax(90.)
+AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR), yMin(-90), yMax(90.)
 {
 	qDebug() << "chart constructor";
 
@@ -73,6 +73,10 @@ AstroCalcChart::AstroCalcChart(QList<Series> which) : QChart(), yAxisR(Q_NULLPTR
 
 	xAxis=new QtCharts::QValueAxis(this);
 	yAxis=new QtCharts::QValueAxis(this);
+	if (QSet<AstroCalcChart::Series>({AstroCalcChart::AngularSize2, AstroCalcChart::Declination2, AstroCalcChart::Distance2,
+					  AstroCalcChart::Elongation2, AstroCalcChart::HeliocentricDistance2, AstroCalcChart::Magnitude2,
+					  AstroCalcChart::PhaseAngle2, AstroCalcChart::Phase2, AstroCalcChart::RightAscension2, AstroCalcChart::TransitAltitude2}).intersect(which).count())
+		yAxisR=new QtCharts::QValueAxis(this);
 	legend()->setAlignment(Qt::AlignBottom);
 	legend()->setLabelColor(Qt::white);
 	setTitleBrush(QBrush(Qt::white));
@@ -159,6 +163,23 @@ void AstroCalcChart::replace(Series s, int index, qreal x, qreal y)
 	}
 }
 
+void AstroCalcChart::drawTrivialLine(Series s, const qreal x)
+{
+	if (map.value(s))
+	{
+		//replace(s, 0, x, yAxis->min());
+		//replace(s, 1, x, yAxis->max());
+		replace(s, 0, x, -180.);
+		replace(s, 1, x, 360.);
+		map.value(s)->setPen(penMap.value(s));
+		qDebug() << "Trivial line in " << s << "from " << yAxis->min() << "to" << yAxis->max();
+	}
+	else
+		qDebug() << "No series" << s << "to add trivial line";
+}
+
+
+
 void AstroCalcChart::show(Series s)
 {
 	qDebug() << "About to add series " << s;
@@ -166,7 +187,13 @@ void AstroCalcChart::show(Series s)
 	{
 		addSeries(map.value(s));
 		map.value(s)->attachAxis(xAxis);
-		map.value(s)->attachAxis(yAxis);
+
+		if (QList<AstroCalcChart::Series>({AstroCalcChart::AngularSize2, AstroCalcChart::Declination2, AstroCalcChart::Distance2,
+						  AstroCalcChart::Elongation2, AstroCalcChart::HeliocentricDistance2, AstroCalcChart::Magnitude2,
+						  AstroCalcChart::PhaseAngle2, AstroCalcChart::Phase2, AstroCalcChart::RightAscension2, AstroCalcChart::TransitAltitude2}).contains(s))
+				map.value(s)->attachAxis(yAxisR);
+		else
+				map.value(s)->attachAxis(yAxis);
 	}
 	else
 		qDebug() << "series" << s << "already shown.";
@@ -193,8 +220,13 @@ void AstroCalcChart::setupAxes()
 	static const QPen axisGridPen(   Qt::white,                         0.5,  Qt::SolidLine);
 	static const QPen axisMinorGridPen(Qt::white,                       0.35, Qt::DotLine);
 
+	// Maybe prefer to allow axis labeling from outside.
 	xAxis->setTitleText(q_("Local Time"));
-	yAxis->setTitleText(QString("%1, %2").arg(q_("Altitude"), QChar(0x00B0)));
+	if (map.contains(AstroCalcChart::AltVsTime))
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Altitude"), QChar(0x00B0)));
+	else
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Azimuth"), QChar(0x00B0)));
+
 	xAxis->setTitleBrush(Qt::white);
 	yAxis->setTitleBrush(Qt::white);
 	xAxis->setLabelsBrush(Qt::white);
@@ -213,10 +245,14 @@ void AstroCalcChart::setupAxes()
 
 	addAxis(xAxis, Qt::AlignBottom);
 	addAxis(yAxis, Qt::AlignLeft);
+	if (yAxisR)
+		addAxis(yAxisR, Qt::AlignRight);
 
 	const QList<QtCharts::QAbstractSeries *> ser=series(); // currently shown series. These may be fewer than the series in our map!
 
-	for (Series s: {AltVsTime, CurrentTime, TransitTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight, Moon})
+	for (Series s: {AltVsTime, CurrentTime, TransitTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight, Moon, AzVsTime, MonthlyElevation,
+	     AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1,
+	     LunarDistance, DistanceLimit})
 	{
 		if ((map.value(s)) && ser.contains(map.value(s)))
 		{
@@ -225,6 +261,17 @@ void AstroCalcChart::setupAxes()
 			map.value(s)->attachAxis(yAxis);
 		}
 	}
+	for (Series s: {AngularSize2, Declination2, Distance2, Elongation2, HeliocentricDistance2, Magnitude2, PhaseAngle2, Phase2, RightAscension2, TransitAltitude2})
+	{
+		if ((map.value(s)) && ser.contains(map.value(s)))
+		{
+			map.value(s)->setPen(penMap.value(s));
+			map.value(s)->attachAxis(xAxis);
+			map.value(s)->attachAxis(yAxisR);
+		}
+	}
+
+
 
 	qDebug() << "setupAxes()...done";
 }
@@ -237,9 +284,35 @@ void AstroCalcChart::setYrange(qreal min, qreal max)
 	qreal rMin=floor(yMin/10);
 	qreal rMax=ceil(yMax/10);
 
-	qDebug() << "Setting yrange from" << min << "/" << max << "-->" << rMin*10 << "/" << rMax*10;
-	yAxis->setRange(rMin*10, rMax*10);
+	if (rMax-rMin > 30)
+	{
+		qDebug() << "Setting yrange from" << min << "/" << max << "-->" << rMin*10 << "/" << rMax*10;
+		yAxis->setRange(rMin*10, rMax*10);
+		//yAxis->applyNiceNumbers();
+		yAxis->setTickCount(6+1);
+		yAxis->setMinorTickCount(2);
+	}
+	else
+	{
+		qDebug() << "Setting yrange from" << min << "/" << max << "-->" << rMin*10 << "/" << rMax*10;
+		yAxis->setRange(rMin*10, rMax*10);
+		//yAxis->applyNiceNumbers();
+		yAxis->setTickCount(qRound((rMax*10-rMin*10)/10.)+1);
+		yAxis->setMinorTickCount(1);
+	}
+}
+
+void AstroCalcChart::setYrangeR(qreal min, qreal max)
+{
+	yMinR=min;
+	yMaxR=max;
+
+	qreal rMin=floor(yMinR/10);
+	qreal rMax=ceil(yMaxR/10);
+
+	qDebug() << "Setting yrangeR from" << min << "/" << max << "-->" << rMin*10 << "/" << rMax*10;
+	yAxisR->setRange(rMin*10, rMax*10);
 	//yAxis->applyNiceNumbers();
-	yAxis->setTickCount(qRound((rMax*10-rMin*10)/10.)+1);
-	yAxis->setMinorTickCount(1);
+	yAxisR->setTickCount(qRound((rMax*10-rMin*10)/10.)+1);
+	yAxisR->setMinorTickCount(1);
 }

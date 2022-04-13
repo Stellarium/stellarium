@@ -736,9 +736,14 @@ void AstroCalcDialog::prepareAziVsTimeAxesAndGraph()
 
 void AstroCalcDialog::drawAziVsTimeDiagram()
 {
+	qDebug() << "AstrocalcDialog::drawAltVsTimeDiagram()...";
+	if (!azVsTimeChartMutex.tryLock()) return; // Avoid calling parallel from various sides. (called by signals/slots)
 	// Avoid crash!
 	if (core->getCurrentPlanet()->getEnglishName().contains("->")) // We are on the spaceship!
+	{
+		azVsTimeChartMutex.unlock();
 		return;
+	}
 
 	// special case - plot the graph when tab is visible
 	//..
@@ -747,12 +752,22 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 	if (!dialog->isVisible() && plotAziVsTime)
 	{
 		graphPlotNeedsRefresh = true;
+		azVsTimeChartMutex.unlock();
 		return;
 	}
 
-	if (!plotAziVsTime) return;
+	if (!plotAziVsTime)
+	{
+		azVsTimeChartMutex.unlock();
+		return;
+	}
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
+
+	qDebug() << "creating azVsTime chart";
+	azVsTimeChart = new AstroCalcChart({AstroCalcChart::AzVsTime, AstroCalcChart::CurrentTime});
+	azVsTimeChart->setYrange(0., 360.);
+	qDebug() << "Chart has title:" << azVsTimeChart->title();
 
 	if (!selectedObjects.isEmpty())
 	{
@@ -762,11 +777,11 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 
 		StelObjectP selectedObject = selectedObjects[0];
 		ui->aziVsTimeTitle->setText(selectedObject->getNameI18n());
+		azVsTimeChart->setTitle(selectedObject->getNameI18n());
 		double currentJD = core->getJD();
 		double shift = core->getUTCOffset(currentJD) / 24.0;
 		double noon = static_cast<int>(currentJD + shift);
 		double az, alt, deg;
-		bool sign;
 
 		int step = 180;
 		int limit = 485;
@@ -807,17 +822,21 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 			az = direction*M_PI - az;
 			if (az > M_PI*2)
 				az -= M_PI*2;
-			StelUtils::radToDecDeg(az, sign, deg);
-			aY.append(deg);			
-		}		
+			deg=az*M_180_PI;
+			aY.append(deg);
+			// prepare QChart use:
+			azVsTimeChart->append(AstroCalcChart::AzVsTime, ltime, deg);
+		}
+		azVsTimeChart->show(AstroCalcChart::AzVsTime);
 		core->setJD(currentJD);
 
 		QVector<double> x = aX.toVector(), y = aY.toVector();
-		minYaz = *std::min_element(aY.begin(), aY.end()) - 2.0;
-		maxYaz = *std::max_element(aY.begin(), aY.end()) + 2.0;
+		minYaz = qMax(*std::min_element(aY.begin(), aY.end()), 0.); // limit to 0..360.
+		maxYaz = qMin(*std::max_element(aY.begin(), aY.end()), 360.);
+		azVsTimeChart->setYrange(minYaz, maxYaz);
 
-		prepareAziVsTimeAxesAndGraph();
-		drawCurrentTimeDiagram();
+		prepareAziVsTimeAxesAndGraph(); // GZ TODO
+		drawCurrentTimeDiagram();       // GZ TODO
 
 		QString name = selectedObject->getNameI18n();
 		if (name.isEmpty())
@@ -834,19 +853,38 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
 
-		drawTransitTimeDiagram();
+
+		drawTransitTimeDiagram(); // GZ TBD: Why transit time? It does nothing.
+		// For chart, replace by:
+		//azVsTimeChart->drawTrivialLine(AstroCalcChart::TransitTime, transitX);
 
 		ui->aziVsTimePlot->graph(0)->setData(x, y);
 		ui->aziVsTimePlot->graph(0)->setName(name);
 		ui->aziVsTimePlot->replot();
 	}
+	qDebug() << "create chart axes...";
+	azVsTimeChart->setupAxes();
+	qDebug() << "set chart ...";
+	QChart *oldChart=ui->aziVsTimeChartView->chart();
+	if (oldChart) oldChart->deleteLater();
+	ui->aziVsTimeChartView->setChart(azVsTimeChart);
+	ui->aziVsTimeChartView->setRenderHint(QPainter::Antialiasing);
+	qDebug() << "Chart done.";
 
 	// clean up the data when selection is removed
 	if (!objectMgr->getWasSelected())
 	{
 		ui->aziVsTimePlot->graph(0)->data()->clear(); // main data: Azimuth vs. Time graph		
 		ui->aziVsTimePlot->replot();
+		if (azVsTimeChart)
+		{
+			azVsTimeChart->clear(AstroCalcChart::AzVsTime);
+			azVsTimeChart->setTitle(q_("No object selected"));
+		}
 	}
+	qDebug() << "AstrocalcDialog::drawAzVsTimeDiagram()...done";
+	azVsTimeChartMutex.unlock();
+
 }
 
 void AstroCalcDialog::mouseOverAziLine(QMouseEvent* event)
@@ -4248,6 +4286,10 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 
+	qDebug() << "creating chart";
+	altVsTimeChart = new AstroCalcChart({AstroCalcChart::AltVsTime, AstroCalcChart::CurrentTime, AstroCalcChart::TransitTime, AstroCalcChart::SunElevation, AstroCalcChart::CivilTwilight, AstroCalcChart::NauticalTwilight, AstroCalcChart::AstroTwilight, AstroCalcChart::Moon});
+	qDebug() << "Chart has title:" << altVsTimeChart->title();
+
 	if (!selectedObjects.isEmpty())
 	{
 		// X axis - time; Y axis - altitude
@@ -4258,11 +4300,8 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 
 		StelObjectP selectedObject = selectedObjects[0];
 		ui->altVsTimeTitle->setText(selectedObject->getNameI18n());
-
-		qDebug() << "creating chart";
-		altVsTimeChart = new AstroCalcChart({AstroCalcChart::AltVsTime, AstroCalcChart::CurrentTime, AstroCalcChart::TransitTime, AstroCalcChart::SunElevation, AstroCalcChart::CivilTwilight, AstroCalcChart::NauticalTwilight, AstroCalcChart::AstroTwilight, AstroCalcChart::Moon});
 		altVsTimeChart->setTitle(selectedObject->getNameI18n());
-		qDebug() << "Chart has title:" << altVsTimeChart->title();
+
 		const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
 
 		const double currentJD = core->getJD();
@@ -4408,6 +4447,8 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		}
 
 		drawTransitTimeDiagram();
+		// For chart, replace by:
+		//altVsTimeChart->drawTrivialLine(AstroCalcChart::TransitTime, transitX);
 
 		ui->altVsTimePlot->graph(0)->setData(aX.toVector(), aY.toVector());
 		ui->altVsTimePlot->graph(0)->setName(name);
@@ -4436,17 +4477,16 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		}
 
 		ui->altVsTimePlot->replot();
-		qDebug() << "create chart axes...";
-		//altVsTimeChart->createDefaultAxes(); // or
-		altVsTimeChart->setYrange(minY, maxY);
-		altVsTimeChart->setupAxes();
-		qDebug() << "set chart ...";
-		QChart *oldChart=ui->altVsTimeChartView->chart();
-		if (oldChart) oldChart->deleteLater();
-		ui->altVsTimeChartView->setChart(altVsTimeChart);
-		ui->altVsTimeChartView->setRenderHint(QPainter::Antialiasing);
-		qDebug() << "Chart done.";
 	}
+	qDebug() << "create chart axes...";
+	altVsTimeChart->setYrange(minY, maxY-2.); // TODO: reduce min/max back to real min/max values.
+	altVsTimeChart->setupAxes();
+	qDebug() << "set chart ...";
+	QChart *oldChart=ui->altVsTimeChartView->chart();
+	if (oldChart) oldChart->deleteLater();
+	ui->altVsTimeChartView->setChart(altVsTimeChart);
+	ui->altVsTimeChartView->setRenderHint(QPainter::Antialiasing);
+	qDebug() << "Chart done.";
 
 	// clean up the data when selection is removed
 	if (!objectMgr->getWasSelected())
@@ -4495,19 +4535,29 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 	{
 		ui->altVsTimePlot->graph(1)->setData(x, y);
 		ui->altVsTimePlot->replot();
-		qDebug() << "Chart: replace/append currentTime";
+		qDebug() << "Chart: replace/append currentTime in alt chart";
 		if (altVsTimeChart){
-			altVsTimeChart->replace(AstroCalcChart::CurrentTime, 0, now, minY-10);
-			altVsTimeChart->replace(AstroCalcChart::CurrentTime, 1, now,  maxY+10);
-			qDebug() << "Chart: replace/append currentTime...done";
+			//altVsTimeChart->replace(AstroCalcChart::CurrentTime, 0, now, minY-10);
+			//altVsTimeChart->replace(AstroCalcChart::CurrentTime, 1, now, maxY+10);
+			altVsTimeChart->drawTrivialLine(AstroCalcChart::CurrentTime, now);
+			qDebug() << "Chart: replace/append currentTime in alt chart...done";
 		}
 		else
-			qDebug() << "no chart to add CT line!";
+			qDebug() << "no alt chart to add CT line!";
 	}
 	if (plotAziVsTime)
 	{
 		ui->aziVsTimePlot->graph(1)->setData(x, y);
 		ui->aziVsTimePlot->replot();
+		qDebug() << "Chart: replace/append currentTime in azi chart";
+		if (azVsTimeChart){
+			//azVsTimeChart->replace(AstroCalcChart::CurrentTime, 0, now, minY-10);
+			//azVsTimeChart->replace(AstroCalcChart::CurrentTime, 1, now, maxY+10);
+			azVsTimeChart->drawTrivialLine(AstroCalcChart::CurrentTime, now);
+			qDebug() << "Chart: replace/append currentTime in azi chart...done";
+		}
+		else
+			qDebug() << "no azi chart to add CT line!";
 	}
 
 	// detect roll over graph day limits.
@@ -4534,15 +4584,13 @@ void AstroCalcDialog::drawTransitTimeDiagram()
 	ui->altVsTimePlot->replot();
 
 	// QChart use:
-	qDebug() << "Chart: replace/append transitTime";
+	qDebug() << "Alt Chart: replace/append transitTime";
 	if (altVsTimeChart){
-		altVsTimeChart->replace(AstroCalcChart::TransitTime, 0, transitX, minY-10);
-		altVsTimeChart->replace(AstroCalcChart::TransitTime, 1, transitX, maxY+10);
-		qDebug() << "Chart: replace/append transitTime...done";
+		altVsTimeChart->drawTrivialLine(AstroCalcChart::TransitTime, transitX);
+		qDebug() << "Alt Chart: replace/append transitTime...done";
 	}
 	else
 		qDebug() << "no chart to add TT line!";
-
 }
 
 void AstroCalcDialog::prepareAxesAndGraph()
