@@ -223,6 +223,9 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->satOrbitColorPickerButton,  SIGNAL(clicked(bool)), this, SLOT(askSatOrbitColor()));
 	connect(ui->satInfoColorPickerButton,   SIGNAL(clicked(bool)), this, SLOT(askSatInfoColor()));
 	connect(ui->descriptionTextEdit,        SIGNAL(textChanged()), this, SLOT(descriptionTextChanged()));
+	// Satellites tab / TLE group
+	connectIntProperty(ui->validAgeSpinBox, "Satellites.tleEpochAgeDays");
+	connect(ui->validAgeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateFilteredSatellitesList()));
 
 	connect(ui->groupsListWidget, SIGNAL(itemChanged(QListWidgetItem*)),
 		     this, SLOT(handleGroupChanges(QListWidgetItem*)));
@@ -285,7 +288,7 @@ void SatellitesDialog::askSatMarkerColor()
 	QColor c = QColorDialog::getColor(buttonMarkerColor, &StelMainView::getInstance(), "");
 	if (c.isValid())
 	{
-		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		Vec3f vColor = Vec3d(c.redF(), c.greenF(), c.blueF()).toVec3f();
 		SatelliteP sat;
 		// colourize all selected satellites
 		for (int i = 0; i < selection.size(); i++)
@@ -313,7 +316,7 @@ void SatellitesDialog::askSatOrbitColor()
 	QColor c = QColorDialog::getColor(buttonOrbitColor, &StelMainView::getInstance(), "");
 	if (c.isValid())
 	{
-		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		Vec3f vColor = Vec3d(c.redF(), c.greenF(), c.blueF()).toVec3f();
 		SatelliteP sat;
 		// colourize all selected satellites
 		for (int i = 0; i < selection.size(); i++)
@@ -341,7 +344,7 @@ void SatellitesDialog::askSatInfoColor()
 	QColor c = QColorDialog::getColor(buttonInfoColor, &StelMainView::getInstance(), "");
 	if (c.isValid())
 	{
-		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		Vec3f vColor = Vec3d(c.redF(), c.greenF(), c.blueF()).toVec3f();
 		SatelliteP sat;
 		// colourize all selected satellites
 		for (int i = 0; i < selection.size(); i++)
@@ -398,6 +401,8 @@ void SatellitesDialog::filterListByGroup(int index)
 		filterModel->setSecondaryFilters(QString(), SatNoFlags);
 	else if (groupId == "[displayed]")
 		filterModel->setSecondaryFilters(QString(), SatDisplayed);
+	else if (groupId == "[userdefined]")
+		filterModel->setSecondaryFilters(QString(), SatUser);
 	else if (groupId == "[undisplayed]")
 		filterModel->setSecondaryFilters(QString(), SatNotDisplayed);
 	else if (groupId == "[newlyadded]")
@@ -420,6 +425,8 @@ void SatellitesDialog::filterListByGroup(int index)
 		filterModel->setSecondaryFilters(QString(), SatHEO);
 	else if (groupId == "[HGSO]")
 		filterModel->setSecondaryFilters(QString(), SatHGSO);
+	else if (groupId == "[outdatedTLE]")
+		filterModel->setSecondaryFilters(QString(), SatOutdatedTLE);
 	else
 		filterModel->setSecondaryFilters(groupId, SatNoFlags);
 
@@ -434,6 +441,15 @@ void SatellitesDialog::filterListByGroup(int index)
 		first = ui->satellitesList->model()->index(0, 0);
 	selectionModel->setCurrentIndex(first, QItemSelectionModel::NoUpdate);
 	ui->satellitesList->scrollTo(first);
+}
+
+void SatellitesDialog::updateFilteredSatellitesList()
+{
+	QString groupId = ui->groupFilterCombo->currentData(Qt::UserRole).toString();
+	if (groupId == "[outdatedTLE]")
+	{
+		filterListByGroup(ui->groupFilterCombo->currentIndex());
+	}
 }
 
 void SatellitesDialog::updateSatelliteAndSaveData()
@@ -684,24 +700,18 @@ void SatellitesDialog::saveSatellites(void)
 
 void SatellitesDialog::populateAboutPage()
 {
-	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-
 	QString jsonFileName("<tt>satellites.json</tt>");
 	QString oldJsonFileName("<tt>satellites.json.old</tt>");
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Stellarium Satellites Plugin") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + "</strong></td><td>" + SATELLITES_PLUGIN_VERSION + "</td></td>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + SATELLITES_PLUGIN_LICENSE + "</td></tr>";
-	html += "<tr><td rowspan=2><strong>" + q_("Authors") + "</strong></td><td>Matthew Gates &lt;matthewg42@gmail.com&gt;</td></td>";
+	html += "<tr><td rowspan=\"2\"><strong>" + q_("Authors") + "</strong></td><td>Matthew Gates &lt;matthewg42@gmail.com&gt;</td></td>";
 	html += "<tr><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></tr>";
-	html += "<tr><td rowspan=4><strong>" + q_("Contributors") + "</strong></td><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt;</td></tr>";
-#if (SATELLITES_PLUGIN_IRIDIUM == 1)
-	html += "<tr><td>Nick Fedoseev &lt;nick.ut2uz@gmail.com&gt; (" + q_("Iridium flares") + ")</td></tr>";
-#else
+	html += "<tr><td rowspan=\"5\"><strong>" + q_("Contributors") + "</strong></td><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt;</td></tr>";
 	html += "<tr><td>Nick Fedoseev &lt;nick.ut2uz@gmail.com&gt;</td></tr>";
-#endif
-	html += "<tr><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr><td>Alexander Wolf</td></tr>";
+	html += "<tr><td>Alexander Duytschaever</td></tr>";
 	html += "<tr><td>Georg Zotti</td></tr></table>";
 
 	html += "<p>" + q_("The Satellites plugin predicts the positions of artificial satellites in Earth orbit.") + "</p>";
@@ -712,10 +722,7 @@ void SatellitesDialog::populateAboutPage()
 	html += "<li>" + q_("Orbital elements go out of date pretty quickly (over mere weeks, sometimes days).  To get useful data out, you need to update the TLE data regularly.") + "</li>";
 	// TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
 	QString resetSettingsText = QString(q_("Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to the default %3 file.  The old file will be backed up as %4.  This can be found in the user data directory, under \"modules/Satellites/\"."))
-			.arg(ui->restoreDefaultsButton->text())
-			.arg(ui->tabs->tabText(ui->tabs->indexOf(ui->settingsTab)))
-			.arg(jsonFileName)
-			.arg(oldJsonFileName);
+			.arg(ui->restoreDefaultsButton->text(), ui->tabs->tabText(ui->tabs->indexOf(ui->settingsTab)), jsonFileName, oldJsonFileName);
 	html += "<li>" + resetSettingsText + "</li>";
 	html += "<li>" + q_("The value of perigee and apogee altitudes compute for mean Earth radius.") + "</li>";
 	html += "<li>" + q_("The Satellites plugin is still under development.  Some features are incomplete, missing or buggy.") + "</li>";
@@ -1019,6 +1026,8 @@ void SatellitesDialog::populateFilterMenu()
 	ui->groupFilterCombo->insertItem(0, q_("[HEO satellites]"), QVariant("[HEO]"));
 	// TRANSLATORS: HGEO = High geosynchronous orbit
 	ui->groupFilterCombo->insertItem(0, q_("[HGSO satellites]"), QVariant("[HGSO]"));
+	ui->groupFilterCombo->insertItem(0, q_("[outdated TLE]"), QVariant("[outdatedTLE]"));
+	ui->groupFilterCombo->insertItem(0, q_("[all user defined]"), QVariant("[userdefined]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all]"), QVariant("all"));
 
 	// Restore current selection

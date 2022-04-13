@@ -66,25 +66,25 @@ class ZodiacalLight : public StelModule
 
 public:
 	ZodiacalLight();
-	virtual ~ZodiacalLight();
+	virtual ~ZodiacalLight() Q_DECL_OVERRIDE;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the class.  Here we load the texture for the Zodiacal Light and 
 	//! get the display settings from application settings, namely the flag which
 	//! determines if the Zodiacal Light is displayed or not, and the intensity setting.
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 
 	//! Draw the Zodiacal Light.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 	
 	//! Update and time-dependent state.  Updates the fade level while the 
 	//! Zodiacal Light rendering is being changed from on to off or off to on.
-	virtual void update(double deltaTime);
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
 	
 	//! Used to determine the order in which the various modules are drawn. MilkyWay=1, TOAST=7, we use 8.
 	//! Other actions return 0 for "nothing special".
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Setter and getters
@@ -93,7 +93,7 @@ public slots:
 	double getIntensity() const {return intensity;}
 	//! Set Zodiacal Light intensity. Default value: 1.
 	//! @param aintensity intensity of Zodiacal Light
-	void setIntensity(double aintensity) {if(aintensity!=intensity){intensity = aintensity; emit intensityChanged(intensity);}}
+	void setIntensity(double aintensity) {if(!qFuzzyCompare(aintensity, intensity)){intensity = aintensity; emit intensityChanged(intensity);}}
 	
 	//! Get the color used for rendering the Zodiacal Light. It is modulated by intensity, light pollution and atmospheric extinction.
 	Vec3f getColor() const {return color;}

@@ -66,7 +66,7 @@ void ShortcutLineEdit::setContents(QKeySequence ks)
 	clear();
 	for (int i = 0; i < ks.count(); ++i)
 	{
-		keys.append(ks[i]);
+		keys.append(ks[static_cast<uint>(i)]);
 	}
 	
 	// Show Ctrl button as Cmd on Mac

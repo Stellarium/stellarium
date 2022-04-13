@@ -23,6 +23,8 @@
 #include "ui_viewDialog.h"
 #include "AddRemoveLandscapesDialog.hpp"
 #include "AtmosphereDialog.hpp"
+#include "SkylightDialog.hpp"
+#include "TonemappingDialog.hpp"
 #include "GreatRedSpotDialog.hpp"
 #include "ConfigureDSOColorsDialog.hpp"
 #include "ConfigureOrbitColorsDialog.hpp"
@@ -63,6 +65,8 @@
 ViewDialog::ViewDialog(QObject* parent) : StelDialog("View", parent)
 	, addRemoveLandscapesDialog(Q_NULLPTR)
 	, atmosphereDialog(Q_NULLPTR)
+	, skylightDialog(Q_NULLPTR)
+	, tonemappingDialog(Q_NULLPTR)
 	, greatRedSpotDialog(Q_NULLPTR)
 	, configureDSOColorsDialog(Q_NULLPTR)
 	, configureOrbitColorsDialog(Q_NULLPTR)
@@ -78,6 +82,10 @@ ViewDialog::~ViewDialog()
 	addRemoveLandscapesDialog = Q_NULLPTR;
 	delete atmosphereDialog;
 	atmosphereDialog = Q_NULLPTR;
+	delete skylightDialog;
+	skylightDialog = Q_NULLPTR;
+	delete tonemappingDialog;
+	tonemappingDialog = Q_NULLPTR;
 	delete greatRedSpotDialog;
 	greatRedSpotDialog = Q_NULLPTR;
 	delete configureDSOColorsDialog;
@@ -96,7 +104,7 @@ void ViewDialog::retranslate()
 		populateToolTips();
 		populatePlanetMagnitudeAlgorithmsList();
 		populatePlanetMagnitudeAlgorithmDescription();
-		setBortleScaleToolTip(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
+		ui->lightPollutionWidget->retranslate();
 		populateHipsGroups();
 		updateHips();
 		//Hack to shrink the tabs to optimal size after language change
@@ -148,9 +156,15 @@ void ViewDialog::createDialogContent()
 
 	populateLists();
 	populateToolTips();
+	// fixed size for buttons
+	QSize bs = QSize(24, 24);
+	ui->pushButtonAtmosphereDetails->setFixedSize(bs);
+	ui->pushButtonSkylightDetails->setFixedSize(bs);
+	ui->tonemappingPushButton->setFixedSize(bs);
+	ui->pushButtonOrbitColors->setFixedSize(bs);
+
 
 	// TODOs after properties merge:
-	// New method: populateLightPollution may be useful. Make sure it is.
 	// Jupiter's GRS should become property, and recheck the other "from trunk" entries.
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)),&StelApp::getInstance().getSkyCultureMgr(),SLOT(setCurrentSkyCultureNameI18(QString)));
 	connect(&StelApp::getInstance().getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(skyCultureChanged()));
@@ -171,6 +185,9 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->starsLabelsHorizontalSlider,"StarMgr.labelsAmount",0.0,10.0);
 	connectBoolProperty(ui->checkBoxAdditionalNamesStars, "StarMgr.flagAdditionalNamesDisplayed");
 	connectBoolProperty(ui->checkBoxStarDesignationsOnlyUsage, "StarMgr.flagDesignationLabels");
+	connectBoolProperty(ui->dblStarsDesignationsCheckBox, "StarMgr.flagDblStarsDesignation");
+	connectBoolProperty(ui->varStarsDesignationsCheckBox, "StarMgr.flagVarStarsDesignation");
+	connectBoolProperty(ui->hipDesignationsCheckBox, "StarMgr.flagHIPDesignation");
 
 	// Sky section
 	connectBoolProperty(ui->milkyWayCheckBox, "MilkyWay.flagMilkyWayDisplayed");
@@ -181,19 +198,21 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->adaptationCheckbox, "StelSkyDrawer.flagLuminanceAdaptation");
 	connectDoubleProperty(ui->twilightAltitudeDoubleSpinBox, "StelObjectMgr.twilightAltitude");
 
-	// Light pollution
 	StelModule* lmgr = StelApp::getInstance().getModule("LandscapeMgr");
 	Q_ASSERT(lmgr);
-	StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
-	Q_ASSERT(drawer);
-	populateLightPollution();
-	connectBoolProperty(ui->useLightPollutionFromLocationDataCheckBox, "LandscapeMgr.flagUseLightPollutionFromDatabase");
-	connect(lmgr, SIGNAL(flagUseLightPollutionFromDatabaseChanged(bool)), this, SLOT(populateLightPollution()));
-	connectIntProperty(ui->lightPollutionSpinBox, "StelSkyDrawer.bortleScaleIndex");
-	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
+	// Light pollution
+	ui->lightPollutionWidget->setup();
 
 	// atmosphere details
 	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
+	// This has to be manually enabled by the user
+	StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
+	if (propMgr->getProperty("Skylight.flagGuiPublic")->getValue().toBool())
+		connect(ui->pushButtonSkylightDetails, SIGNAL(clicked()), this, SLOT(showSkylightDialog()));
+	else
+		ui->pushButtonSkylightDetails->hide();
+	// tonemapping details
+	connect(ui->tonemappingPushButton, SIGNAL(clicked()), this, SLOT(showTonemappingDialog()));
 
 	// Planets section
 	connectGroupBox(ui->planetsGroupBox, "actionShow_Planets");
@@ -255,10 +274,14 @@ void ViewDialog::createDialogContent()
 	populatePlanetMagnitudeAlgorithmDescription();
 
 	// GreatRedSpot (Jupiter)
-	connectBoolProperty(ui->customGrsSettingsCheckBox, "SolarSystem.flagCustomGrsSettings");
-	ui->pushButtonGrsDetails->setEnabled(ssmgr->getFlagCustomGrsSettings());
-	connect(ssmgr, SIGNAL(flagCustomGrsSettingsChanged(bool)), ui->pushButtonGrsDetails, SLOT(setEnabled(bool)));
 	connect(ui->pushButtonGrsDetails, SIGNAL(clicked()), this, SLOT(showGreatRedSpotDialog()));
+
+	// Link Solar System Editor button if available...
+	StelModule *sse=StelApp::getInstance().getModuleMgr().getModule("SolarSystemEditor");
+	if (sse)
+		connect(ui->pushButtonSSE, &QPushButton::clicked, [=]{sse->configureGui(true);});
+	else
+		ui->pushButtonSSE->hide();
 
 	// Shooting stars section
 	StelModule* mmgr = StelApp::getInstance().getModule("SporadicMeteorMgr");
@@ -446,7 +469,7 @@ void ViewDialog::createDialogContent()
 	connectColorButton(ui->colorFOVCenterMarker,		"SpecialMarkersMgr.fovCenterMarkerColor",	"color/fov_center_marker_color");
 	connectColorButton(ui->colorFOVCircularMarker,		"SpecialMarkersMgr.fovCircularMarkerColor",	"color/fov_circular_marker_color");
 	connectColorButton(ui->colorFOVRectangularMarker,	"SpecialMarkersMgr.fovRectangularMarkerColor",	"color/fov_rectangular_marker_color");
-	connectColorButton(ui->colorCardinalPoints,		"LandscapeMgr.cardinalsPointsColor",		"color/cardinal_color");
+	connectColorButton(ui->colorCardinalPoints,		"LandscapeMgr.cardinalPointsColor",		"color/cardinal_color");
 	connectColorButton(ui->colorCompassMarks,		"SpecialMarkersMgr.compassMarksColor",		"color/compass_marks_color");
 
 	connect(ui->showCardinalPointsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSelectedCardinalCheckBoxes()));
@@ -601,13 +624,13 @@ void ViewDialog::updateHips()
 		if (props.contains("obs_copyright") && props.contains("obs_copyright_url"))
 		{
 			html += QString("<p>Copyright <a href='%2'>%1</a></p>\n")
-					.arg(props["obs_copyright"].toString()).arg(props["obs_copyright_url"].toString());
+					.arg(props["obs_copyright"].toString(), props["obs_copyright_url"].toString());
 		}
 		html += QString("<p>%1</p>\n").arg(props["obs_description"].toString());
 		html += "<h2>" + q_("properties") + "</h2>\n<ul>\n";
 		for (auto iter = props.constBegin(); iter != props.constEnd(); iter++)
 		{
-			html += QString("<li><b>%1</b> %2</li>\n").arg(iter.key()).arg(iter.value().toString());
+			html += QString("<li><b>%1</b> %2</li>\n").arg(iter.key(), iter.value().toString());
 		}
 		html += "</ul>\n";
 		if (gui)
@@ -684,15 +707,15 @@ void ViewDialog::updateTabBarListWidgetWidth()
 void ViewDialog::setSelectedCardinalCheckBoxes()
 {
 	StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
-	bool cardinals = propMgr->getProperty("LandscapeMgr.cardinalsPointsDisplayed")->getValue().toBool();
-	bool ordinals = propMgr->getProperty("LandscapeMgr.ordinalsPointsDisplayed")->getValue().toBool();
+	bool cardinals = propMgr->getProperty("LandscapeMgr.cardinalPointsDisplayed")->getValue().toBool();
+	bool ordinals = propMgr->getProperty("LandscapeMgr.ordinalPointsDisplayed")->getValue().toBool();
 	ui->showOrdinal8WRPointsCheckBox->setEnabled(cardinals);
 	ui->showOrdinal16WRPointsCheckBox->setEnabled(cardinals && ordinals);
 }
 
 void ViewDialog::setSelectedCatalogsFromCheckBoxes()
 {
-	Nebula::CatalogGroup flags(Q_NULLPTR);
+	Nebula::CatalogGroup flags(Nebula::CatNone);
 	if (ui->checkBoxNGC->isChecked())
 		flags |= Nebula::CatNGC;
 	if (ui->checkBoxIC->isChecked())
@@ -759,7 +782,7 @@ void ViewDialog::setSelectedCatalogsFromCheckBoxes()
 
 void ViewDialog::setSelectedTypesFromCheckBoxes()
 {
-	Nebula::TypeGroup flags(Q_NULLPTR);
+	Nebula::TypeGroup flags(Nebula::TypeNone);
 	if (ui->checkBoxGalaxiesType->isChecked())
 		flags |= Nebula::TypeGalaxies;
 	if (ui->checkBoxActiveGalaxiesType->isChecked())
@@ -839,70 +862,6 @@ void ViewDialog::updateSelectedTypesCheckBoxes()
 	ui->checkBoxSupernovaRemnantsType->setChecked(flags & Nebula::TypeSupernovaRemnants);
 	ui->checkBoxGalaxyClustersType->setChecked(flags & Nebula::TypeGalaxyClusters);
 	ui->checkBoxOtherType->setChecked(flags & Nebula::TypeOther);
-}
-
-// 20160411. New function introduced with trunk merge. Not sure yet if useful or bad with property connections?.
-void ViewDialog::populateLightPollution()
-{
-	StelCore *core = StelApp::getInstance().getCore();
-	StelModule *lmgr = StelApp::getInstance().getModule("LandscapeMgr");
-	int bIdx = core->getSkyDrawer()->getBortleScaleIndex();
-	if (lmgr->property("flagUseLightPollutionFromDatabase").toBool())
-	{
-		StelLocation loc = core->getCurrentLocation();
-		bIdx = loc.bortleScaleIndex;
-		if (!loc.planetName.contains("Earth")) // location not on Earth...
-			bIdx = 1;
-		if (bIdx<1) // ...or it observatory, or it unknown location
-			bIdx = loc.DEFAULT_BORTLE_SCALE_INDEX;
-		ui->lightPollutionSpinBox->setEnabled(false);
-	}
-	else
-		ui->lightPollutionSpinBox->setEnabled(true);
-
-	ui->lightPollutionSpinBox->setValue(bIdx);
-	setBortleScaleToolTip(bIdx);
-}
-
-void ViewDialog::setBortleScaleToolTip(int Bindex)
-{
-	int i = Bindex-1;
-	QStringList list, nelm;
-	//TRANSLATORS: Short description for Class 1 of the Bortle scale
-	list.append(q_("Excellent dark-sky site"));
-	//TRANSLATORS: Short description for Class 2 of the Bortle scale
-	list.append(q_("Typical truly dark site"));
-	//TRANSLATORS: Short description for Class 3 of the Bortle scale
-	list.append(q_("Rural sky"));
-	//TRANSLATORS: Short description for Class 4 of the Bortle scale
-	list.append(q_("Rural/suburban transition"));
-	//TRANSLATORS: Short description for Class 5 of the Bortle scale
-	list.append(q_("Suburban sky"));
-	//TRANSLATORS: Short description for Class 6 of the Bortle scale
-	list.append(q_("Bright suburban sky"));
-	//TRANSLATORS: Short description for Class 7 of the Bortle scale
-	list.append(q_("Suburban/urban transition"));
-	//TRANSLATORS: Short description for Class 8 of the Bortle scale
-	list.append(q_("City sky"));
-	//TRANSLATORS: Short description for Class 9 of the Bortle scale
-	list.append(q_("Inner-city sky"));
-
-	nelm.append("7.6-8.0");
-	nelm.append("7.1-7.5");
-	nelm.append("6.6-7.0");
-	nelm.append("6.1-6.5");
-	nelm.append("5.6-6.0");
-	nelm.append("5.1-5.5");
-	nelm.append("4.6-5.0");
-	nelm.append("4.1-4.5");
-	nelm.append("4.0");
-
-	QString tooltip = QString("%1 (%2 %3)")
-			.arg(list.at(i))
-			.arg(q_("The naked-eye limiting magnitude is"))
-			.arg(nelm.at(i));
-
-	ui->lightPollutionSpinBox->setToolTip(tooltip);
 }
 
 void ViewDialog::populateToolTips()
@@ -1088,6 +1047,22 @@ void ViewDialog::showAtmosphereDialog()
 	atmosphereDialog->setVisible(true);
 }
 
+void ViewDialog::showSkylightDialog()
+{
+    if(skylightDialog == Q_NULLPTR)
+	skylightDialog = new SkylightDialog();
+
+    skylightDialog->setVisible(true);
+}
+
+void ViewDialog::showTonemappingDialog()
+{
+    if(tonemappingDialog == Q_NULLPTR)
+	tonemappingDialog = new TonemappingDialog();
+
+    tonemappingDialog->setVisible(true);
+}
+
 void ViewDialog::showGreatRedSpotDialog()
 {
 	if(greatRedSpotDialog == Q_NULLPTR)
@@ -1222,31 +1197,17 @@ void ViewDialog::setPlanetMagnitudeAlgorithm(int algorithmID)
 void ViewDialog::populatePlanetMagnitudeAlgorithmDescription()
 {
 	int currentAlgorithm = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::getApparentMagnitudeAlgorithm(), Qt::UserRole, Qt::MatchCaseSensitive);
-	if (currentAlgorithm==-1)
-	{
-		// Use Mallama&Hilton 2018 as default
+	if (currentAlgorithm==-1) // Use Mallama&Hilton 2018 as default
 		currentAlgorithm = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::MallamaHilton_2018, Qt::UserRole, Qt::MatchCaseSensitive);
-	}
-	QString info = "";
-	switch (currentAlgorithm) {
-		case Planet::AstronomicalAlmanac_1984:
-			info = q_("The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later) and gives V (instrumental) magnitudes (allegedly from D.L. Harris).");
-			break;
-		case Planet::Mueller_1893:
-			info = q_("The algorithm is based on visual observations 1877-1891 by G. Müller and was still republished in the <em>Explanatory Supplement to the Astronomical Ephemeris</em> (1961).");
-			break;
-		case Planet::ExplanatorySupplement_1992:
-			info = q_("The algorithm was published in the 2nd edition of the <em>Explanatory Supplement to the Astronomical Almanac</em> (1992).");
-			break;
-		case Planet::ExplanatorySupplement_2013:
-			info = q_("The algorithm was published in the 3rd edition of the <em>Explanatory Supplement to the Astronomical Almanac</em> (2013).");
-			break;
-		case Planet::MallamaHilton_2018:
-			info = q_("The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing apparent planetary magnitudes for the Astronomical Almanac.</em> Astronomy&Computing 25 (2018) 10-24.");
-			break;
-		default:
-			info = q_("Visual magnitude based on phase angle and albedo.");
-			break;
-	}
+
+	const QMap<int, QString>planetMagnitudeAlgorithmMap = {
+		{ Planet::AstronomicalAlmanac_1984, q_("The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later) and gives V (instrumental) magnitudes (allegedly from D.L. Harris).") },
+		{ Planet::Mueller_1893, q_("The algorithm is based on visual observations 1877-1891 by G. Müller and was still republished in the <em>Explanatory Supplement to the Astronomical Ephemeris</em> (1961).") },
+		{ Planet::ExplanatorySupplement_1992, q_("The algorithm was published in the 2nd edition of the <em>Explanatory Supplement to the Astronomical Almanac</em> (1992).") },
+		{ Planet::ExplanatorySupplement_2013, q_("The algorithm was published in the 3rd edition of the <em>Explanatory Supplement to the Astronomical Almanac</em> (2013).") },
+		{ Planet::MallamaHilton_2018, q_("The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing apparent planetary magnitudes for the Astronomical Almanac.</em> Astronomy&Computing 25 (2018) 10-24.") }
+	};
+
+	QString info = planetMagnitudeAlgorithmMap.value(currentAlgorithm, q_("Visual magnitude based on phase angle and albedo."));
 	ui->planetMagnitudeAlgorithmDescription->setText(QString("<small>%1</small>").arg(info));
 }

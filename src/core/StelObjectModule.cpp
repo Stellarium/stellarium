@@ -67,7 +67,7 @@ QStringList StelObjectModule::listMatchingObjects(const QString &objPrefix, int 
 
 QStringList StelObjectModule::listAllObjectsByType(const QString &objType, bool inEnglish) const
 {
-	Q_UNUSED(objType);
-	Q_UNUSED(inEnglish);
+	Q_UNUSED(objType)
+	Q_UNUSED(inEnglish)
 	return QStringList();
 }

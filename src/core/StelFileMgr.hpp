@@ -196,7 +196,7 @@ public:
 
 private:
 	//! No one can create an instance.
-	StelFileMgr() {;}
+	StelFileMgr() {}
 
 	//! Check if a (complete) path matches a set of flags
 	//! @param path a complete path

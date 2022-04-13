@@ -56,7 +56,7 @@
 #include <QVariant>
 #include <QDir>
 #include <QTemporaryFile>
-#include <QRegExp>
+#include <QRegularExpression>
 
 StelModule* SatellitesStelPluginInterface::getStelModule() const
 {
@@ -178,7 +178,7 @@ void Satellites::init()
 	}
 
 	// If the json file does not already exist, create it from the resource in the Qt resource
-	if(QFileInfo(catalogPath).exists())
+	if(QFileInfo::exists(catalogPath))
 	{
 		if (!checkJsonFileFormat() || readCatalogVersion() != SatellitesCatalogVersion)
 		{
@@ -196,6 +196,8 @@ void Satellites::init()
 
 	// create satellites according to content of satellites.json file
 	loadCatalog();
+	// create list of "supergroups" for satellites
+	createSuperGroupsList();
 
 	// Set up download manager and the update schedule
 	downloadMgr = new QNetworkAccessManager(this);
@@ -289,7 +291,7 @@ bool Satellites::backupCatalog(bool deleteOriginal)
 	}
 
 	QString backupPath = catalogPath + ".old";
-	if (QFileInfo(backupPath).exists())
+	if (QFileInfo::exists(backupPath))
 		QFile(backupPath).remove();
 
 	if (old.copy(backupPath))
@@ -371,6 +373,10 @@ StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 	if (result)
 		return result;
 
+	result = searchByInternationalDesignator(objw);
+	if (result)
+		return result;
+
 	for (const auto& sat : satellites)
 	{
 		if (sat->initialized && sat->displayed)
@@ -402,6 +408,10 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 	if (result)
 		return result;
 	
+	result = searchByInternationalDesignator(objw);
+	if (result)
+		return result;
+
 	for (const auto& sat : satellites)
 	{
 		if (sat->initialized && sat->displayed)
@@ -441,10 +451,11 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 		return Q_NULLPTR;
 	
 	// If the search string is a catalogue number...
-	QRegExp regExp("^(NORAD)\\s*(\\d+)\\s*$");
-	if (regExp.exactMatch(noradNumber))
+	QRegularExpression regExp("^(NORAD)\\s*(\\d+)\\s*$");
+	QRegularExpressionMatch match=regExp.match(noradNumber);
+	if (match.hasMatch())
 	{
-		QString numberString = regExp.cap(2);
+		QString numberString = match.captured(2);
 		
 		for (const auto& sat : satellites)
 		{
@@ -458,6 +469,40 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 	
 	return StelObjectP();
 }
+
+StelObjectP Satellites::searchByInternationalDesignator(const QString &intlDesignator) const
+{
+	if (!hintFader)
+		return Q_NULLPTR;
+
+	StelCore* core = StelApp::getInstance().getCore();
+
+	if (qAbs(core->getTimeRate())>=Satellite::timeRateLimit) // Do not show satellites when time rate is over limit
+		return Q_NULLPTR;
+
+	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
+		return Q_NULLPTR;
+
+	// If the search string is an international designator...
+	QRegularExpression regExp("^(\\d+)-(\\w*)\\s*$");
+	QRegularExpressionMatch match=regExp.match(intlDesignator);
+	if (match.hasMatch())
+	{
+		QString designator = QString("%1-%2").arg(match.captured(1), match.captured(2));
+
+		for (const auto& sat : satellites)
+		{
+			if (sat->initialized && sat->displayed)
+			{
+				if (sat->getInternationalDesignator() == designator)
+					return qSharedPointerCast<StelObject>(sat);
+			}
+		}
+	}
+
+	return StelObjectP();
+}
+
 
 QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
@@ -476,15 +521,22 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 	QString objw = objPrefix.toUpper();
 
 	QString numberPrefix;
-	QRegExp regExp("^(NORAD)\\s*(\\d+)\\s*$");
-	if (regExp.exactMatch(objw))
+	QRegularExpression regExp("^(NORAD)\\s*(\\d+)\\s*$");
+	QRegularExpressionMatch match=regExp.match(objw);
+	if (match.hasMatch())
 	{
-		QString numberString = regExp.cap(2);
+		QString numberString = match.captured(2);
 		bool ok;
 		/* int number = */ numberString.toInt(&ok);
 		if (ok)
 			numberPrefix = numberString;
 	}
+
+	QString designatorPrefix;
+	QRegularExpression regExp2("^(\\d+)-(\\w*)\\s*$");
+	QRegularExpressionMatch match2=regExp2.match(objw);
+	if (match2.hasMatch())
+		designatorPrefix = QString("%1-%2").arg(match2.captured(1), match2.captured(2));
 
 	QStringList names;
 	for (const auto& sobj : satellites)
@@ -496,6 +548,8 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 		names.append(sobj->getEnglishName());
 		if (!numberPrefix.isEmpty() && sobj->getCatalogNumberString().startsWith(numberPrefix))
 			names.append(QString("NORAD %1").arg(sobj->getCatalogNumberString()));
+		if (!designatorPrefix.isEmpty() && sobj->getInternationalDesignator().startsWith(designatorPrefix))
+			names.append(sobj->getInternationalDesignator());
 	}
 
 	QString fullMatch = "";
@@ -582,6 +636,7 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("orbit_line_segments", 90);
 	conf->setValue("orbit_fade_segments", 5);
 	conf->setValue("orbit_segment_duration", 20);
+	conf->setValue("valid_epoch_age", 30);
 	conf->setValue("iconic_mode_enabled", false);
 	
 	conf->endGroup(); // saveTleSources() opens it for itself
@@ -590,6 +645,8 @@ void Satellites::restoreDefaultSettings()
 	QStringList urls;
 	urls << "1,http://www.celestrak.com/NORAD/elements/visual.txt" // Auto-add ON!
 	     << "http://www.celestrak.com/NORAD/elements/tle-new.txt"
+	     << "http://www.celestrak.com/NORAD/elements/active.txt"
+	     << "http://www.celestrak.com/NORAD/elements/analyst.txt"
 	     << "1,http://www.celestrak.com/NORAD/elements/science.txt"
 	     << "http://www.celestrak.com/NORAD/elements/noaa.txt"
 	     << "http://www.celestrak.com/NORAD/elements/goes.txt"
@@ -629,14 +686,14 @@ void Satellites::restoreDefaultSettings()
 	     << "http://www.celestrak.com/NORAD/elements/oneweb.txt"
 	     << "http://www.celestrak.com/NORAD/elements/planet.txt"
 	     << "http://www.celestrak.com/NORAD/elements/spire.txt"
-	     << "1,https://www.prismnet.com/~mmccants/tles/classfd.zip";
+	     << "https://www.prismnet.com/~mmccants/tles/classfd.zip";
 
 	saveTleSources(urls);
 }
 
 void Satellites::restoreDefaultCatalog()
 {
-	if (QFileInfo(catalogPath).exists())
+    if (QFileInfo::exists(catalogPath))
 		backupCatalog(true);
 
 	QFile src(":/satellites/satellites.json");
@@ -671,11 +728,11 @@ void Satellites::loadSettings()
 	// Backward compatibility: try to detect and read an old-style array.
 	// TODO: Assume that the user hasn't modified their conf in a stupid way?
 //	if (conf->contains("tle_url0")) // This can skip some operations...
-	QRegExp keyRE("^tle_url\\d+$");
+	QRegularExpression keyRE("^tle_url\\d+$");
 	QStringList urls;
 	for (const auto& key : conf->childKeys())
 	{
-		if (keyRE.exactMatch(key))
+		if (keyRE.match(key).hasMatch())
 		{
 			QString url = conf->value(key).toString();
 			conf->remove(key); // Delete old-style keys
@@ -737,6 +794,7 @@ void Satellites::loadSettings()
 	setInvisibleSatelliteColor(Vec3f(conf->value("invisible_satellite_color", "0.2,0.2,0.2").toString()));
 	setTransitSatelliteColor(Vec3f(conf->value("transit_satellite_color", "0.0,0.0,0.0").toString()));
 	Satellite::timeRateLimit = conf->value("time_rate_limit", 1.0).toDouble();
+	Satellite::tleEpochAge = conf->value("valid_epoch_age", 30).toInt();
 
 	// iconic mode
 	setFlagIconicMode(conf->value("iconic_mode_enabled", false).toBool());
@@ -769,6 +827,8 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("orbit_line_segments", Satellite::orbitLineSegments);
 	conf->setValue("orbit_fade_segments", Satellite::orbitLineFadeSegments);
 	conf->setValue("orbit_segment_duration", Satellite::orbitLineSegmentDuration);
+
+	conf->setValue("valid_epoch_age", Satellite::tleEpochAge);
 
 	// iconic mode
 	conf->setValue("iconic_mode_enabled", getFlagIconicMode());
@@ -832,16 +892,18 @@ const QString Satellites::readCatalogVersion()
 	if (map.contains("version"))
 	{
 		QString version = map.value("version").toString();
-		QRegExp vRx("(\\d+\\.\\d+\\.\\d+)");
-		if (vRx.exactMatch(version))
-			jsonVersion = vRx.cap(1);
+		QRegularExpression vRx("(\\d+\\.\\d+\\.\\d+)");
+		QRegularExpressionMatch match=vRx.match(version);
+		if (match.hasMatch())
+			jsonVersion = match.captured(1);
 	}
 	else if (map.contains("creator"))
 	{
 		QString creator = map.value("creator").toString();
-		QRegExp vRx(".*(\\d+\\.\\d+\\.\\d+).*");
-		if (vRx.exactMatch(creator))
-			jsonVersion = vRx.cap(1);
+		QRegularExpression vRx(".*(\\d+\\.\\d+\\.\\d+).*");
+		QRegularExpressionMatch match=vRx.match(creator);
+		if (match.hasMatch())
+			jsonVersion = match.captured(1);
 	}
 
 	//qDebug() << "[Satellites] catalogue version from file:" << jsonVersion;
@@ -1163,7 +1225,7 @@ bool Satellites::add(const TleData& tleData)
 				satGroups.append("navigation");
 			}
 		}
-		if (tleData.name.startsWith("GSAT") && tleData.name.contains("PRN"))
+		if (tleData.name.startsWith("GSAT") && (tleData.name.contains("PRN") || tleData.name.contains("GALILEO")))
 		{
 			satGroups.append("galileo");
 			satGroups.append("navigation");
@@ -1188,6 +1250,25 @@ bool Satellites::add(const TleData& tleData)
 			satGroups.append("resupply");
 		if (tleData.status==Satellite::StatusNonoperational)
 			satGroups.append("non-operational");
+	}
+	if (tleData.sourceURL.contains("celestrak.com", Qt::CaseInsensitive))
+	{
+		// add groups, based on CelesTrak's groups
+		QString fileName = QUrl(tleData.sourceURL).fileName().toLower().replace(".txt", "");
+		if (!satGroups.contains(fileName))
+			satGroups.append(fileName);
+
+		// add "supergroups", based on CelesTrak's groups
+		QStringList superGroup = satSuperGroupsMap.values(fileName);
+		if (superGroup.size()>0)
+		{
+			for (int i=0; i<superGroup.size(); i++)
+			{
+				QString groupId = superGroup.at(i).toLocal8Bit().constData();
+				if (!satGroups.contains(groupId))
+					satGroups.append(groupId);
+			}
+		}
 	}
 	if (!satGroups.isEmpty())
 	{
@@ -1433,6 +1514,15 @@ void Satellites::setOrbitLineSegmentDuration(int s)
 	}
 }
 
+void Satellites::setTleEpochAgeDays(int age)
+{
+	if (age != Satellite::tleEpochAge)
+	{
+		Satellite::tleEpochAge=age;
+		emit tleEpochAgeDaysChanged(age);
+	}
+}
+
 void Satellites::setUpdateFrequencyHours(int hours)
 {
 	if (updateFrequencyHours != hours)
@@ -1486,7 +1576,7 @@ void Satellites::updateFromOnlineSources()
 	}
 
 	updateState = Satellites::Updating;
-	emit(updateStateChanged(updateState));
+	emit updateStateChanged(updateState);
 	updateSources.clear();
 	numberDownloadsComplete = 0;
 
@@ -1620,9 +1710,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			continue;
 		if (updateSources[i].file->open(QFile::ReadOnly|QFile::Text))
 		{
-			parseTleFile(*updateSources[i].file,
-			             newData,
-			             updateSources[i].addNew);
+			parseTleFile(*updateSources[i].file, newData, updateSources[i].addNew, updateSources[i].url.toString(QUrl::None));
 			updateSources[i].file->close();
 			delete updateSources[i].file;
 			updateSources[i].file = Q_NULLPTR;
@@ -1697,7 +1785,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	{
 		qWarning() << "[Satellites] update files contain no TLE sets!";
 		updateState = OtherError;
-		emit(updateStateChanged(updateState));
+		emit updateStateChanged(updateState);
 		return;
 	}
 	
@@ -1817,13 +1905,11 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	         << missingCount << "missing or removed."
 	         << sourceCount << "source entries parsed.";
 
-	emit(updateStateChanged(updateState));
-	emit(tleUpdateComplete(updatedCount, totalCount, addedCount, missingCount));
+	emit updateStateChanged(updateState);
+	emit tleUpdateComplete(updatedCount, totalCount, addedCount, missingCount);
 }
 
-void Satellites::parseTleFile(QFile& openFile,
-                              TleDataHash& tleList,
-                              bool addFlagValue)
+void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFlagValue, const QString &tleURL)
 {
 	if (!openFile.isOpen() || !openFile.isReadable())
 		return;
@@ -1831,7 +1917,6 @@ void Satellites::parseTleFile(QFile& openFile,
 	// Code mostly re-used from updateFromFiles()
 	int lineNumber = 0;
 	TleData lastData;
-	lastData.addThis = addFlagValue;
 
 	// Celestrak's "status code" list
 	const QMap<QString, Satellite::OptStatus> satOpStatusMap = {
@@ -1853,25 +1938,26 @@ void Satellites::parseTleFile(QFile& openFile,
 			// New entry in the list, so reset all fields
 			lastData = TleData();
 			lastData.addThis = addFlagValue;
+			lastData.sourceURL = tleURL;
 			
 			// The thing in square brackets after the name is actually
 			// Celestrak's "status code". Parse it!
-			QRegExp statusRx("\\s*\\[(\\D{1})\\]\\s*$");
-			statusRx.setMinimal(true);
-			if (statusRx.indexIn(line)>-1)
-				lastData.status = satOpStatusMap.value(statusRx.cap(1).toUpper(), Satellite::StatusUnknown);
+			QRegularExpression statusRx("\\s*\\[(\\D{1})\\]\\s*$", QRegularExpression::InvertedGreedinessOption );
+			QRegularExpressionMatch match;
+			if (line.indexOf(statusRx, 0, &match)>-1)
+				lastData.status = satOpStatusMap.value(match.captured(1).toUpper(), Satellite::StatusUnknown);
 
 			//TODO: We need to think of some kind of escaping these
 			//characters in the JSON parser. --BM
-			line.replace(QRegExp("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove "status code" from name
+			line.replace(QRegularExpression("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove "status code" from name
 			lastData.name = line;
 		}
 		else
 		{
 			// TODO: Yet another place suitable for a standard TLE regex. --BM
-			if (QRegExp("^1 .*").exactMatch(line))
+			if (QRegularExpression("^1 .*").match(line).hasMatch())
 				lastData.first = line;
-			else if (QRegExp("^2 .*").exactMatch(line))
+			else if (QRegularExpression("^2 .*").match(line).hasMatch())
 			{
 				lastData.second = line;
 				// The Satellite Catalogue Number is the second number
@@ -1915,7 +2001,7 @@ QString Satellites::getSatIdFromLine2(const QString& line)
 	if (!id.isEmpty())
 	{
 		// Strip any leading zeros as they should be unique ints as strings.
-		id.remove(QRegExp("^[0]*"));
+		id.remove(QRegularExpression("^[0]*"));
 	}
 	return id;
 }
@@ -2029,7 +2115,7 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 		painter.setBlending(true);
 
 		// Size on screen
-		double size = obj->getAngularSize(core)*M_PI/180.*static_cast<double>(prj->getPixelPerRadAtCenter());
+		double size = obj->getAngularRadius(core)*(2.*M_PI_180)*static_cast<double>(prj->getPixelPerRadAtCenter());
 		size += 12. + 3.*std::sin(2. * StelApp::getInstance().getTotalRunTime());
 		// size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 		painter.drawSprite2dMode(static_cast<float>(screenpos[0]-size/2), static_cast<float>(screenpos[1]-size/2), 20, 90);
@@ -2292,70 +2378,90 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 // close SATELLITES_PLUGIN_IRIDIUM
 #endif
 
+void Satellites::createSuperGroupsList()
+{
+	QString communications = "communications", navigation = "navigation", scientific = "scientific",
+		earthresources = "earth resources", gps = "gps", glonass = "glonass",
+		geostationary = "geostationary";
+	satSuperGroupsMap = {
+		{ "geo",	communications },
+		{ "geo",	geostationary },
+		{ "gpz",	communications },
+		{ "gpz",	geostationary },
+		{ "gpz-plus",	communications },
+		{ "gpz-plus",	geostationary },
+		{ "intelsat",	communications },
+		{ "ses",	communications },
+		{ "iridium",	communications },
+		{ "iridium-NEXT",	communications },
+		{ "starlink",	communications },
+		{ "oneweb",	communications },
+		{ "orbcomm",	communications },
+		{ "globalstar",	communications },
+		{ "swarm",	communications },
+		{ "amateur",	communications },
+		{ "x-comm",	communications },
+		{ "other-comm",	communications },
+		{ "satnogs",	communications },
+		{ "gorizont",	communications },
+		{ "raduga",	communications },
+		{ "raduga",	geostationary },
+		{ "molniya",	communications },
+		{ "gnss",	navigation },
+		{ "gps",	navigation },
+		{ "gps-ops",	navigation },
+		{ "gps-ops",	gps },
+		{ "glonass",	navigation },
+		{ "glo-ops",	navigation },
+		{ "glo-ops",	glonass },
+		{ "galileo",	navigation },
+		{ "beidou",	navigation },
+		{ "sbas",	navigation },
+		{ "nnss",	navigation },
+		{ "musson",	navigation },
+		{ "science",	scientific },
+		{ "geodetic",	scientific },
+		{ "engineering",	scientific },
+		{ "education",	scientific },
+		{ "goes",	scientific },
+		{ "goes",	earthresources },
+		{ "resource",	earthresources },
+		{ "sarsat",	earthresources },
+		{ "dmc",	earthresources },
+		{ "tdrss",	earthresources },
+		{ "argos",	earthresources },
+		{ "planet",	earthresources },
+		{ "spire",	earthresources }
+	};
+}
+
 void Satellites::translations()
 {
 #if 0
 	// Satellite groups
-	// TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-	N_("visual");
-	// TRANSLATORS: Satellite group: Scientific satellites
-	N_("scientific");
+	//
+	// *** Generic groups (not related to CelesTrak groups)
+	//
 	// TRANSLATORS: Satellite group: Communication satellites
 	N_("communications");
 	// TRANSLATORS: Satellite group: Navigation satellites
 	N_("navigation");
-	// TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-	N_("amateur");
-	// TRANSLATORS: Satellite group: Weather (meteorological) satellites
-	N_("weather");
+	// TRANSLATORS: Satellite group: Scientific satellites
+	N_("scientific");
 	// TRANSLATORS: Satellite group: Earth Resources satellites
 	N_("earth resources");
 	// TRANSLATORS: Satellite group: Satellites in geostationary orbit
 	N_("geostationary");
 	// TRANSLATORS: Satellite group: Satellites that are no longer functioning
 	N_("non-operational");
-	// TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-	N_("gps");
+	// TRANSLATORS: Satellite group: Satellites belonging to the space observatories
+	N_("observatory");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT constellation (Iridium is a proper name)
+	N_("iridium next");	
 	// TRANSLATORS: Satellite group: The Indian Regional Navigation Satellite System (IRNSS) is an autonomous regional satellite navigation system being developed by the Indian Space Research Organisation (ISRO) which would be under complete control of the Indian government.
 	N_("irnss");
 	// TRANSLATORS: Satellite group: The Quasi-Zenith Satellite System (QZSS), is a proposed three-satellite regional time transfer system and Satellite Based Augmentation System for the Global Positioning System, that would be receivable within Japan.
 	N_("qzss");
-	// TRANSLATORS: Satellite group: The Tracking and Data Relay Satellite System (TDRSS) is a network of communications satellites and ground stations used by NASA for space communications.
-	N_("tdrss");
-	// TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-	N_("glonass");
-	// TRANSLATORS: Satellite group: Satellites belonging to the BeiDou constellation (BeiDou Navigation Satellite System)
-	N_("beidou");
-	// TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-	N_("galileo");
-	// TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-	N_("iridium");
-	// TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT constellation (Iridium is a proper name)
-	N_("iridium next");
-	// TRANSLATORS: Satellite group: Satellites belonging to the Starlink constellation (Starlink is a proper name)
-	N_("starlink");	
-	// TRANSLATORS: Satellite group: Satellites belonging to the Spire constellation (LEMUR satellites)
-	N_("spire");
-	// TRANSLATORS: Satellite group: Satellites belonging to the OneWeb constellation (OneWeb is a proper name)
-	N_("oneweb");
-	// TRANSLATORS: Satellite group: Space stations
-	N_("stations");
-	// TRANSLATORS: Satellite group: Education satellites
-	N_("education");
-	// TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-	N_("observatory");
-	// TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT satellites
-	N_("intelsat");
-	// TRANSLATORS: Satellite group: Satellites belonging to the GLOBALSTAR satellites
-	N_("globalstar");
-	// TRANSLATORS: Satellite group: Satellites belonging to the ORBCOMM satellites
-	N_("orbcomm");
-	// TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT satellites
-	N_("gorizont");
-	// TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
-	N_("raduga");
-	// TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA satellites
-	N_("molniya");
 	// TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
 	N_("cosmos");
 	// TRANSLATORS: Satellite group: Debris of satellites
@@ -2366,11 +2472,204 @@ void Satellites::translations()
 	N_("resupply");
 	// TRANSLATORS: Satellite group: are known to broadcast TV signals
 	N_("tv");
-	// TRANSLATORS: Satellite group: military satellites
-	N_("military");
-	// TRANSLATORS: Satellite group: geodetic satellites
+	//
+	// *** Special-Interest Satellites [CelesTrak groups]
+	//
+	// TRANSLATORS: Satellite group: Last 30 Days' Launches
+	// TRANSLATORS: CelesTrak source [Last 30 Days' Launches]: http://www.celestrak.com/NORAD/elements/tle-new.txt
+	N_("tle-new");
+	// TRANSLATORS: Satellite group: Space stations	
+	// TRANSLATORS: CelesTrak source [Space Stations]: http://www.celestrak.com/NORAD/elements/stations.txt
+	N_("stations");
+	// TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
+	// TRANSLATORS: CelesTrak source [100 (or so) Brightest]: http://www.celestrak.com/NORAD/elements/visual.txt
+	N_("visual");
+	// TRANSLATORS: Satellite group: Active Satellites
+	// TRANSLATORS: CelesTrak source [Active Satellites]: http://www.celestrak.com/NORAD/elements/active.txt
+	N_("active");
+	// TRANSLATORS: Satellite group: Analyst Satellites
+	// TRANSLATORS: CelesTrak source [Analyst Satellites]: http://www.celestrak.com/NORAD/elements/analyst.txt
+	N_("analyst");
+	//
+	// *** Weather & Earth Resources Satellites [CelesTrak groups]
+	//
+	// TRANSLATORS: Satellite group: Weather (meteorological) satellites
+	// TRANSLATORS: CelesTrak source [Weather]: http://www.celestrak.com/NORAD/elements/weather.txt
+	N_("weather");
+	// TRANSLATORS: Satellite group: Satellites belonging to the NOAA satellites
+	// TRANSLATORS: CelesTrak source [NOAA]: http://www.celestrak.com/NORAD/elements/noaa.txt
+	N_("noaa");
+	// TRANSLATORS: Satellite group: Satellites belonging to the GOES satellites
+	// TRANSLATORS: CelesTrak source [GOES]: http://www.celestrak.com/NORAD/elements/goes.txt
+	N_("goes");
+	// TRANSLATORS: Satellite group: Earth Resources satellites
+	// TRANSLATORS: CelesTrak source [Earth Resources]: http://www.celestrak.com/NORAD/elements/resource.txt
+	N_("resource");
+	// TRANSLATORS: Satellite group: Search & Rescue (SARSAT) satellites
+	// TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]: http://www.celestrak.com/NORAD/elements/sarsat.txt
+	N_("sarsat");
+	// TRANSLATORS: Satellite group: Disaster Monitoring satellites
+	// TRANSLATORS: CelesTrak source [Disaster Monitoring]: http://www.celestrak.com/NORAD/elements/dmc.txt
+	N_("dmc");
+	// TRANSLATORS: Satellite group: The Tracking and Data Relay Satellite System (TDRSS) is a network of communications satellites and ground stations used by NASA for space communications.
+	// TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System (TDRSS)]: http://www.celestrak.com/NORAD/elements/tdrss.txt
+	N_("tdrss");
+	// TRANSLATORS: Satellite group: ARGOS Data Collection System satellites
+	// TRANSLATORS: CelesTrak source [ARGOS Data Collection System]: http://www.celestrak.com/NORAD/elements/argos.txt
+	N_("argos");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Planet satellites
+	// TRANSLATORS: CelesTrak source [Planet]: http://www.celestrak.com/NORAD/elements/planet.txt
+	// TRANSLATORS: CelesTrak supplemental source [Planet TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/planet.txt
+	N_("planet");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Spire constellation (LEMUR satellites)
+	// TRANSLATORS: CelesTrak source [Spire]: http://www.celestrak.com/NORAD/elements/spire.txt
+	N_("spire");	
+	//
+	// *** Communications Satellites [CelesTrak groups]
+	//
+	// TRANSLATORS: Satellite group: Active Geosynchronous Satellites
+	// TRANSLATORS: CelesTrak source [Active Geosynchronous]: http://www.celestrak.com/NORAD/elements/geo.txt
+	N_("geo");
+	// TRANSLATORS: Satellite group: GEO Protected Zone
+	// TRANSLATORS: CelesTrak source [GEO Protected Zone]: http://www.celestrak.com/satcat/gpz.php
+	N_("gpz");
+	// TRANSLATORS: Satellite group: GEO Protected Zone Plus
+	// TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]: http://www.celestrak.com/satcat/gpz-plus.php
+	N_("gpz-plus");
+	// TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT satellites
+	// TRANSLATORS: CelesTrak source [Intelsat]: http://www.celestrak.com/NORAD/elements/intelsat.txt
+	// TRANSLATORS: CelesTrak supplemental source [INTELSAT TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/intelsat.txt
+	N_("intelsat");
+	// TRANSLATORS: Satellite group: Satellites belonging to the SES satellites
+	// TRANSLATORS: CelesTrak source [SES]: http://www.celestrak.com/NORAD/elements/ses.txt
+	// TRANSLATORS: CelesTrak supplemental source [SES TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/ses.txt
+	N_("ses");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
+	// TRANSLATORS: CelesTrak source [Iridium]: http://www.celestrak.com/NORAD/elements/iridium.txt
+	N_("iridium");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT constellation (Iridium is a proper name)
+	// TRANSLATORS: CelesTrak source [Iridium NEXT]: http://www.celestrak.com/NORAD/elements/iridium-NEXT.txt
+	N_("iridium-NEXT");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Starlink constellation (Starlink is a proper name)
+	// TRANSLATORS: CelesTrak source [Starlink]: http://www.celestrak.com/NORAD/elements/starlink.txt
+	// TRANSLATORS: CelesTrak supplemental source [Starlink TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/starlink.txt
+	N_("starlink");
+	// TRANSLATORS: Satellite group: Satellites belonging to the OneWeb constellation (OneWeb is a proper name)
+	// TRANSLATORS: CelesTrak source [OneWeb]: http://www.celestrak.com/NORAD/elements/oneweb.txt
+	// TRANSLATORS: CelesTrak supplemental source [OneWeb TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/oneweb.txt
+	N_("oneweb");
+	// TRANSLATORS: Satellite group: Satellites belonging to the ORBCOMM satellites
+	// TRANSLATORS: CelesTrak source [Orbcomm]: http://www.celestrak.com/NORAD/elements/orbcomm.txt
+	// TRANSLATORS: CelesTrak supplemental source [ORBCOMM TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/orbcomm.txt
+	N_("orbcomm");
+	// TRANSLATORS: Satellite group: Satellites belonging to the GLOBALSTAR satellites
+	// TRANSLATORS: CelesTrak source [Globalstar]: http://www.celestrak.com/NORAD/elements/globalstar.txt
+	N_("globalstar");
+	// TRANSLATORS: Satellite group: Satellites belonging to the SWARM satellites
+	// TRANSLATORS: CelesTrak source [Swarm]: http://www.celestrak.com/NORAD/elements/swarm.txt
+	N_("swarm");
+	// TRANSLATORS: Satellite group: Amateur radio (ham) satellites
+	// TRANSLATORS: CelesTrak source [Amateur Radio]: http://www.celestrak.com/NORAD/elements/amateur.txt
+	N_("amateur");
+	// TRANSLATORS: Satellite group: Experimental communication satellites
+	// TRANSLATORS: CelesTrak source [Experimental]: http://www.celestrak.com/NORAD/elements/x-comm.txt
+	N_("x-comm");
+	// TRANSLATORS: Satellite group: Other communication satellites
+	// TRANSLATORS: CelesTrak source [Other Comm]: http://www.celestrak.com/NORAD/elements/other-comm.txt
+	N_("other-comm");
+	// TRANSLATORS: Satellite group: Satellites belonging to the SatNOGS satellites
+	// TRANSLATORS: CelesTrak source [SatNOGS]: http://www.celestrak.com/NORAD/elements/satnogs.txt
+	N_("satnogs");
+	// TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT satellites
+	// TRANSLATORS: CelesTrak source [Gorizont]: http://www.celestrak.com/NORAD/elements/gorizont.txt
+	N_("gorizont");
+	// TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
+	// TRANSLATORS: CelesTrak source [Raduga]: http://www.celestrak.com/NORAD/elements/raduga.txt
+	N_("raduga");
+	// TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA satellites
+	// TRANSLATORS: CelesTrak source [Molniya]: http://www.celestrak.com/NORAD/elements/molniya.txt
+	N_("molniya");	
+	//
+	// *** Navigation Satellites [CelesTrak groups]
+	//
+	// TRANSLATORS: Satellite group: Satellites belonging to the GNSS satellites
+	// TRANSLATORS: CelesTrak source [GNSS]: http://www.celestrak.com/NORAD/elements/gnss.txt
+	N_("gnss");
+	// TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
+	// TRANSLATORS: CelesTrak supplemental source [GPS TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/gps.txt
+	N_("gps");
+	// TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
+	// TRANSLATORS: CelesTrak source [GPS Operational]: http://www.celestrak.com/NORAD/elements/gps-ops.txt
+	N_("gps-ops");
+	// TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
+	// TRANSLATORS: CelesTrak supplemental source [GLONASS TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/glonass.txt
+	N_("glonass");
+	// TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
+	// TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]: http://www.celestrak.com/NORAD/elements/glo-ops.txt
+	N_("glo-ops");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
+	// TRANSLATORS: CelesTrak source [Galileo]: http://www.celestrak.com/NORAD/elements/galileo.txt
+	N_("galileo");
+	// TRANSLATORS: Satellite group: Satellites belonging to the BeiDou constellation (BeiDou Navigation Satellite System)
+	// TRANSLATORS: CelesTrak source [Beidou]: http://www.celestrak.com/NORAD/elements/beidou.txt
+	N_("beidou");
+	// TRANSLATORS: Satellite group: Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)
+	// TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)]: http://www.celestrak.com/NORAD/elements/sbas.txt
+	N_("sbas");
+	// TRANSLATORS: Satellite group: Navy Navigation Satellite System (NNSS)
+	// TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]: http://www.celestrak.com/NORAD/elements/nnss.txt
+	N_("nnss");
+	// TRANSLATORS: Satellite group: Russian LEO Navigation Satellites
+	// TRANSLATORS: CelesTrak source [Russian LEO Navigation]: http://www.celestrak.com/NORAD/elements/musson.txt
+	N_("musson");
+	//
+	// *** Scientific Satellites [CelesTrak groups]
+	//
+	// TRANSLATORS: Satellite group: Space & Earth Science satellites
+	// TRANSLATORS: CelesTrak source [Space & Earth Science]: http://www.celestrak.com/NORAD/elements/science.txt
+	N_("science");
+	// TRANSLATORS: Satellite group: Geodetic satellites
+	// TRANSLATORS: CelesTrak source [Geodetic]: http://www.celestrak.com/NORAD/elements/geodetic.txt
 	N_("geodetic");
-
+	// TRANSLATORS: Satellite group: Engineering satellites
+	// TRANSLATORS: CelesTrak source [Engineering]: http://www.celestrak.com/NORAD/elements/engineering.txt
+	N_("engineering");
+	// TRANSLATORS: Satellite group: Education satellites
+	// TRANSLATORS: CelesTrak source [Education]: http://www.celestrak.com/NORAD/elements/education.txt
+	N_("education");
+	//
+	// *** Miscellaneous Satellites [CelesTrak groups]
+	//
+	// TRANSLATORS: Satellite group: Military satellites
+	// TRANSLATORS: CelesTrak source [Miscellaneous Military]: http://www.celestrak.com/NORAD/elements/military.txt
+	N_("military");
+	// TRANSLATORS: Satellite group: Radar Calibration satellites
+	// TRANSLATORS: CelesTrak source [Radar Calibration]: http://www.celestrak.com/NORAD/elements/radar.txt
+	N_("radar");
+	// TRANSLATORS: Satellite group: CubeSats (Cube Satellites)
+	// TRANSLATORS: CelesTrak source [CubeSats]: http://www.celestrak.com/NORAD/elements/cubesat.txt
+	N_("cubesat");
+	// TRANSLATORS: Satellite group: Other satellites
+	// TRANSLATORS: CelesTrak source [Other]: http://www.celestrak.com/NORAD/elements/other.txt
+	N_("other");
+	//
+	// *** Supplemental Two-Line Element Sets [CelesTrak groups]
+	//
+	// Probably the meteorological satellites
+	// TRANSLATORS: Satellite group: Meteosat
+	// TRANSLATORS: CelesTrak supplemental source [METEOSAT TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/meteosat.txt
+	N_("meteosat");
+	// Probably the communications satellites
+	// TRANSLATORS: Satellite group: Telesat
+	// TRANSLATORS: CelesTrak supplemental source [Telesat TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/telesat.txt
+	N_("telesat");
+	// TRANSLATORS: Satellite group: ISS Segments
+	// TRANSLATORS: CelesTrak supplemental source [ISS TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/iss.txt
+	N_("iss");
+	// TRANSLATORS: Satellite group: CPF
+	// TRANSLATORS: CelesTrak supplemental source [CPF TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/cpf.txt
+	N_("cpf");
+	
 	// Satellite descriptions - bright and/or famous objects
 	// Just A FEW objects please! (I'm looking at you, Alex!)
 	// TRANSLATORS: Satellite description. "Hubble" is a person's name.
@@ -2407,6 +2706,8 @@ void Satellites::translations()
 	// Satellite names - a few famous objects only
 	// TRANSLATORS: Satellite name: International Space Station
 	N_("ISS (ZARYA)");
+	// TRANSLATORS: Satellite name: International Space Station
+	N_("ISS (NAUKA)");
 	// TRANSLATORS: Satellite name: International Space Station
 	N_("ISS");
 	// TRANSLATORS: Satellite name: Hubble Space Telescope

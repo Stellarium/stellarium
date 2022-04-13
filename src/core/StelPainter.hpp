@@ -255,6 +255,10 @@ public:
 	//! the StelPainter is destroyed.
 	void setBlending(bool enableBlending, GLenum blendSrc = GL_SRC_ALPHA, GLenum blendDst = GL_ONE_MINUS_SRC_ALPHA);
 
+	//! Retrieve current blending configuration
+	//! It is useful to preserve and restore these settings with setBlending() later.
+	bool getBlending(GLenum *src=Q_NULLPTR, GLenum *dst=Q_NULLPTR) const;
+
 	void setDepthTest(bool enable);
 
 	void setDepthMask(bool enable);

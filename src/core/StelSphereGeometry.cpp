@@ -767,7 +767,7 @@ SphericalRegionP SphericalPolygon::multiUnion(const QList<SphericalRegionP>& reg
 		static const double minOverlap = 0.2;
 		// Try to first split the set of regions into groups of intersecting regions
 		QList<QList<SphericalRegionP> > res;
-		QList<SphericalCap> groupReferenceCap;
+		QVector<SphericalCap> groupReferenceCap;
 		for (const auto& newReg : regions)
 		{
 			bool createNewGroup = true;
@@ -794,7 +794,7 @@ SphericalRegionP SphericalPolygon::multiUnion(const QList<SphericalRegionP>& reg
 		}
 		// res now contains n list of regions to union together		
 		QList<SphericalRegionP> mappedRegions;
-		for (const auto& l : res)
+		for (const auto& l : qAsConst(res))
 		{
 			mappedRegions.append(SphericalPolygon::multiUnion(l));
 		}
@@ -863,7 +863,7 @@ StelVertexArray SphericalConvexPolygon::getFillVertexArray(const Vec3d &observer
 	else
 	{
 		aberratedContour.clear();
-		for (const Vec3d &v: contour)
+		for (const Vec3d &v: qAsConst(contour))
 		{
 			Q_ASSERT(qAbs(v.lengthSquared()-1.0)<0.0001);
 			Vec3d vec=v+observerVelocityForAberration;
@@ -886,7 +886,7 @@ StelVertexArray SphericalConvexPolygon::getOutlineVertexArray(Vec3d observerVelo
 	else
 	{
 		aberratedContour.clear();
-		for (const Vec3d &v: contour)
+		for (const Vec3d &v: qAsConst(contour))
 		{
 			Q_ASSERT(qAbs(v.lengthSquared()-1.0)<0.0001);
 			Vec3d vec=v+observerVelocityForAberration;
@@ -1048,11 +1048,11 @@ void SphericalConvexPolygon::updateBoundingCap()
 	Q_ASSERT(contour.size()>2);
 	// Use this crapy algorithm instead
 	cachedBoundingCap.n.set(0,0,0);
-	for (const auto& v : contour)
+	for (const auto& v : qAsConst(contour))
 		cachedBoundingCap.n+=v;
 	cachedBoundingCap.n.normalize();
 	cachedBoundingCap.d = 1.;
-	for (const auto& v : contour)
+	for (const auto& v : qAsConst(contour))
 	{
 		if (cachedBoundingCap.n*v<cachedBoundingCap.d)
 			cachedBoundingCap.d = cachedBoundingCap.n*v;
@@ -1098,7 +1098,7 @@ StelVertexArray SphericalTexturedConvexPolygon::getFillVertexArray(const Vec3d &
 	else
 	{
 		aberratedContour.clear();
-		for (const Vec3d &v: contour)
+		for (const Vec3d &v: qAsConst(contour))
 		{
 			Q_ASSERT(qAbs(v.lengthSquared()-1.0)<0.0001);
 			Vec3d vec=v+observerVelocityForAberration;

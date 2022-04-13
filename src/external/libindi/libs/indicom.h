@@ -42,7 +42,9 @@
 #pragma once
 
 #if defined(_MSC_VER)
+#ifndef _USE_MATH_DEFINES
 #define _USE_MATH_DEFINES
+#endif
 #endif
 
 #define J2000       2451545.0

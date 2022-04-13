@@ -44,8 +44,8 @@ class StelMainScriptAPIProxy : public QObject
 	Q_OBJECT
 
 public:
-	StelMainScriptAPIProxy(QObject* parent=Q_NULLPTR) : QObject(parent) {;}
-	~StelMainScriptAPIProxy() {;}
+	StelMainScriptAPIProxy(QObject* parent=Q_NULLPTR) : QObject(parent) {}
+	~StelMainScriptAPIProxy() Q_DECL_OVERRIDE {}
 
 public slots:
 	void setDiskViewport(bool b);

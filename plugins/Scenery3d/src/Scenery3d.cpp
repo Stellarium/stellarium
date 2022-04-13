@@ -94,7 +94,7 @@ Scenery3d::Scenery3d() :
 Scenery3d::~Scenery3d()
 {
 	if(!cleanedUp)
-		deinit();
+		Scenery3d::deinit();
 
 	delete storedViewDialog;
 	delete scenery3dDialog;

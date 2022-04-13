@@ -86,7 +86,8 @@ enum SatFlag
 	SatMEO			= 0x0400,
 	SatGSO			= 0x0800,
 	SatHEO			= 0x1000,
-	SatHGSO			= 0x2000
+	SatHGSO			= 0x2000,
+	SatOutdatedTLE		= 0x4000
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
@@ -109,7 +110,6 @@ class Satellite : public StelObject
 	friend class SatellitesDialog;
 	friend class SatellitesListModel;
 
-	Q_ENUMS(OptStatus)
 public:
 	static const QString SATELLITE_TYPE;
 
@@ -117,36 +117,37 @@ public:
 	enum OptStatus
 	{
 		StatusOperational		= 1,
-		StatusNonoperational	= 2,
+		StatusNonoperational		= 2,
 		StatusPartiallyOperational	= 3,
 		StatusStandby			= 4,
 		StatusSpare			= 5,
-		StatusExtendedMission	= 6,
+		StatusExtendedMission		= 6,
 		StatusDecayed			= 7,
-		StatusUnknown		= 0
+		StatusUnknown			= 0
 	};
+	Q_ENUM(OptStatus)
 
 	//! \param identifier unique identifier (currently the Catalog Number)
 	//! \param data a QMap which contains the details of the satellite
 	//! (TLE set, description etc.)
 	Satellite(const QString& identifier, const QVariantMap& data);
-	~Satellite();
+	~Satellite() Q_DECL_OVERRIDE;
 
 	//! Get a QVariantMap which describes the satellite.  Could be used to
 	//! create a duplicate.
 	QVariantMap getMap(void);
 
-	virtual QString getType(void) const
+	virtual QString getType(void) const Q_DECL_OVERRIDE
 	{
 		return SATELLITE_TYPE;
 	}
 
-	virtual QString getID(void) const
+	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{
 		return id;
 	}
 
-	virtual float getSelectPriority(const StelCore* core) const;
+	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
@@ -155,7 +156,7 @@ public:
 	//! - Name: designation in large type with the description underneath
 	//! - RaDecJ2000, RaDecOfDate, HourAngle, AltAzi
 	//! - Extra: range, range rate and altitude of satellite above the Earth, comms frequencies, modulation types and so on.
-	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getInfoString().
 	//! - description
 	//! - catalog
@@ -180,19 +181,21 @@ public:
 	//! - operational-status
 	//! - visibility (descriptive string)
 	//! - comm (Radio information, optional, if available. There may be several comm entries!)
-	virtual QVariantMap getInfoMap(const StelCore *core) const;
-	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const;
-	virtual float getVMagnitude(const StelCore* core) const;
-	//! Get angular size, degrees
-	virtual double getAngularSize(const StelCore*) const;
-	virtual QString getNameI18n(void) const;
-	virtual QString getEnglishName(void) const
+	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
+	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
+	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const Q_DECL_OVERRIDE;
+	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
+	//! Get angular half-size, degrees
+	virtual double getAngularRadius(const StelCore*) const Q_DECL_OVERRIDE;
+	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
+	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE
 	{
 		return name;
 	}
 	//! Returns the (NORAD) catalog number. (For now, the ID string.)
 	QString getCatalogNumberString() const {return id;}
+	//! Returns the (COSPAR) International Designator.
+	QString getInternationalDesignator() const {return internationalDesignator;}
 
 	//! Set new tleElements.  This assumes the designation is already set, populates
 	//! the tleElements values and configures internal orbit parameters.
@@ -269,6 +272,8 @@ private:
 	QString internationalDesignator;
 	//! Epoch of the TLE
 	QString tleEpoch;
+	//! Epoch of the TLE (JD)
+	double tleEpochJD;
 	//! Julian date of Jan 1st of the launch year.
 	//! Used to hide satellites before their launch date.
 	//! Extracted from TLE set with parseInternationalDesignator().
@@ -276,6 +281,7 @@ private:
 	double jdLaunchYearJan1;
 	//! Standard visual magnitude of the satellite.
 	double stdMag;
+	//! Radar cross-section value of the satellite (in meters squared).
 	double RCS;
 	double perigee;
 	double apogee;
@@ -314,6 +320,7 @@ private:
 	static Vec3f transitSatelliteColor;
 
 	static double timeRateLimit;
+	static int tleEpochAge;
 
 	void draw(StelCore *core, StelPainter& painter);
 

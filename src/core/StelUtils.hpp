@@ -38,6 +38,12 @@
 #define SPEED_OF_LIGHT 299792.458
 // Ecliptic obliquity of J2000.0, degrees
 #define EPS_0 23.4392803055555555555556
+// Equatorial radius of the Earth in km
+#define EARTH_RADIUS 6378.1366
+// Equatorial radius of the Sun in km
+#define SUN_RADIUS 696000.
+// Equatorial radius of the Moon in km
+#define MOON_RADIUS 1738.
 
 // Add a few frequently used extra math-type literals
 #ifndef M_PI_180
@@ -187,6 +193,18 @@ namespace StelUtils
 	//! @param angle input angle in decimal degrees
 	QString decDegToDmsStr(const double angle);
 
+	//! Convert latitude in decimal degrees to a dms formatted string or use decimal values.
+	//! @param latitude in decimal degrees
+	//! @param dms set true to use DMS formatted string
+	QString decDegToLatitudeStr(const double latitude, bool dms = true);
+
+	//! Convert longitude in decimal degrees to a dms formatted string.
+	//! @param longitude in decimal degrees
+	//! @param eastPositive set true to counting East direction positive
+	//! @param semiSphere set true to use -180..180 degrees range (0..360 degrees otherwise)
+	//! @param dms set true to use DMS formatted string
+	QString decDegToLongitudeStr(const double longitude, bool eastPositive = true, bool semiSphere = true, bool dms = true);
+
 	//! Convert a dms formatted string to an angle in radian
 	//! @param s The input string
 	double dmsStrToRad(const QString& s);
@@ -266,6 +284,27 @@ namespace StelUtils
 		double r = static_cast<double>(v.length());
 		*lat = asin(static_cast<double>(v[2])/r);
 		*lng = atan2(static_cast<double>(v[1]),static_cast<double>(v[0]));
+	}
+
+	//! Convert from spherical coordinates (including distance) to Rectangular direction.
+	//! @param lng longitude in radian
+	//! @param lat latitude in radian
+	//! @param r length of radius vector (distance)
+	//! @param v the resulting 3D unit vector
+	inline void spheToRect(const double lng, const double lat, const double r, Vec3d& v){
+		const double cosLat = cos(lat);
+		v.set(cos(lng) * cosLat * r, sin(lng) * cosLat * r, sin(lat) * r);
+	}
+
+	//! Convert from Rectangular direction to spherical coordinate components (including distance).
+	//! @param lng double* to store longitude in radian [-pi, pi]
+	//! @param lat double* to store latitude in radian
+	//! @param r double*   length of radius vector (distance)
+	//! @param v the input 3D vector
+	inline void rectToSphe(double *lng, double *lat, double *r, const Vec3d& v){
+		*r = v.length();
+		*lat = asin(v[2] / *r);
+		*lng = atan2(v[1],v[0]);
 	}
 
 	//! Coordinate Transformation from equatorial to ecliptical
@@ -418,7 +457,7 @@ namespace StelUtils
 	//! Return a day number of week for date
 	//! @return number of day: 0 - sunday, 1 - monday,..
 	int getDayOfWeek(int year, int month, int day);
-	inline int getDayOfWeek(double JD){ double d= fmod(JD+1.5, 7); if (d<0) d+=7.0;
+	inline int getDayOfWeek(double JD){ double d= fmodpos(JD+1.5, 7);
 		return std::lround(floor(d));
 	}
 
@@ -519,6 +558,14 @@ namespace StelUtils
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByEspenakMeeus(const double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Note that this method is recommended for the year range:
+	//! -1999 to +3000. It gives details for -500...+2150.
+	//! Implementation of algorithm by Espenak & Meeus (2006) with modified formulae for DeltaT computation
+	//! @param jDay the date and time expressed as a Julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByEspenakMeeusModified(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation of algorithm by Schoch (1931) for DeltaT computation,
@@ -640,6 +687,8 @@ namespace StelUtils
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation of algorithm by Stephenson & Houlden (1986) for DeltaT computation
+	//! Source: STEPHENSON F.R and HOULDEN M.A. - Atlas of Historical Eclipse Maps - Cambridge Univ.Press. (1986)
+	//! [https://assets.cambridge.org/97805212/67236/frontmatter/9780521267236_frontmatter.pdf]
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds or 0 if year > 1600
 	double getDeltaTByStephensonHoulden(const double jDay);
@@ -774,10 +823,15 @@ namespace StelUtils
 	double getDeltaTByKhalidSultanaZaidi(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-	//! Implementation of a spline approximation for time period -720-2016.0 for DeltaT by Stephenson, Morrison and Hohenkerk (2016).
-	//! Source: Measurement of the Earth’s rotation: 720 BC to AD 2015
-	//! Proc. R. Soc. A 472: 20160404.
+	//! Implementation of a spline approximation for time period -720-2019.0 for DeltaT by Stephenson, Morrison and Hohenkerk (2016).
+	//! Source: Measurement of the Earth's rotation: 720 BC to AD 2015, published in 2016 in the Royal Society's
+	//! Proceedings A 472, and made freely available via Open Access, by Stephenson, F.R., Morrison, L.V. and
+	//! Hohenkerk, C.Y..
 	//! https://doi.org/10.1098/rspa.2016.0404
+	//! Addendum 2020 to "Measurement of the Earth's Rotation: 720 BC to AD 2015", published in 2021 February
+	//! in the Royal Society's Proceedings A 478, by Morrison, L. V., Stephenson, F.R., Hohenkerk, C.Y. and
+	//! M. Zawilski, M..
+	//! https://doi.org/10.1098/rspa.2020.0776
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds. For times outside the limits, return result from the fitting parabola.
 	double getDeltaTByStephensonMorrisonHohenkerk2016(const double jDay);
@@ -834,7 +888,7 @@ namespace StelUtils
 	//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
 	float* ComputeCosSinRhoZone(const float dRho, const unsigned int segments, const float minAngle);
 
-	//! Calculate fixed days (R.D.) from Gregorian date
+	//! Calculate fixed days (R.D.) from Gregorian date (proleptic Gregorian calendar)
 	//! @param year
 	//! @param month
 	//! @param day
@@ -913,8 +967,16 @@ namespace StelUtils
 	//! Interval test. This checks whether @param value is within [@param low, @param high]
 	template <typename T> bool isWithin(const T& value, const T& low, const T& high)
 	{
-	    return !(value < low) && !(high < value);
+		return !(value < low) && !(high < value);
 	}
+
+	template <class Arg1, class Arg2, class Result>
+	struct binary_function
+	{
+		typedef Arg1 first_argument_type;
+		typedef Arg2 second_argument_type;
+		typedef Result result_type;
+	};
 
 
 #ifdef _MSC_BUILD

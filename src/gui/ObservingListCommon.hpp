@@ -20,6 +20,8 @@
 #ifndef OBSERVINGLISTCOMMON_H
 #define OBSERVINGLISTCOMMON_H
 
+#include <QString>
+
 struct observingListItem {
     QString name;
     QString nameI18n;
@@ -69,7 +71,7 @@ static constexpr char const * SORTING_BY_TYPE = "type";
 static constexpr char const * SORTING_BY_RA = "right ascension";
 static constexpr char const * SORTING_BY_DEC = "declination";
 static constexpr char const * SORTING_BY_MAGNITUDE = "magnitude";
-static constexpr char const * SORTING_BY_CONSTTELLATION = "constellation";
+static constexpr char const * SORTING_BY_CONSTELLATION = "constellation";
 
 
-#endif // OBSLISTDIALOG_H
+#endif // OBSERVINGLISTCOMMON_H

@@ -548,9 +548,99 @@ void TestConversions::testDDToDMSStr()
 		QString DMS	= StelUtils::decDegToDmsStr(angle);
 
 		QVERIFY2(DMS==expDMS, qPrintable(QString("%1 degrees = %2 (expected %3)")
-						 .arg(QString::number(angle, 'f', 5))
-						 .arg(DMS)
-						 .arg(expDMS)));
+						 .arg(QString::number(angle, 'f', 5), DMS, expDMS)));
+	}
+}
+
+void TestConversions::testDDToLatitudeStr()
+{
+	QVariantList data;
+	// case 1
+	data << 0.	<< true  << "N0°00'00\"";
+	data << 10.	<< true  << "N10°00'00\"";
+	data << -13.5	<< true  << "S13°30'00\"";
+	data << -90.1	<< true  << "S90°06'00\"";
+	data << 360.6	<< true  << "N360°36'00\"";
+	data << -0.01	<< true  << "S0°00'36\"";
+	// case 2
+	data << 0.	<< false << "N0.0000°";
+	data << 10.	<< false << "N10.0000°";
+	data << -13.5	<< false << "S13.5000°";
+	data << -90.1	<< false << "S90.1000°";
+	data << 360.6	<< false << "N360.6000°";
+	data << -0.01	<< false << "S0.0100°";
+
+	while (data.count()>=3)
+	{
+		double angle	= data.takeFirst().toDouble();
+		bool useDMSfmt  = data.takeFirst().toBool();
+		QString expDMS	= data.takeFirst().toString();
+		QString DMS	= StelUtils::decDegToLatitudeStr(angle, useDMSfmt);
+
+		QVERIFY2(DMS==expDMS, qPrintable(QString("%1 degrees = %2 (expected %3)").arg(QString::number(angle, 'f', 5), DMS, expDMS)));
+	}
+}
+
+void TestConversions::testDDToLongitudeStr()
+{
+	QVariantList data;
+	// case 1
+	data << 0.	<< true  << true  << true  << "E0°00'00\"";
+	data << 10.	<< true  << true  << true  << "E10°00'00\"";
+	data << -13.5	<< true  << true  << true  << "W13°30'00\"";
+	data << -90.1	<< true  << true  << true  << "W90°06'00\"";
+	data << 270.6	<< true  << true  << true  << "W89°24'00\"";
+	data << 360.6	<< true  << true  << true  << "E0°36'00\"";
+	data << -0.01	<< true  << true  << true  << "W0°00'36\"";
+	// case 2
+	data << 0.	<< true  << true  << false << "E0.0000°";
+	data << 10.	<< true  << true  << false << "E10.0000°";
+	data << -13.5	<< true  << true  << false << "W13.5000°";
+	data << -90.1	<< true  << true  << false << "W90.1000°";
+	data << 270.6	<< true  << true  << false << "W89.4000°";
+	data << 360.6	<< true  << true  << false << "E0.6000°";
+	data << -0.01	<< true  << true  << false << "W0.0100°";
+	// case 3
+	data << 0.	<< false << true  << true  << "W0°00'00\"";
+	data << 10.	<< false << true  << true  << "W10°00'00\"";
+	data << -13.5	<< false << true  << true  << "E13°30'00\"";
+	data << -90.1	<< false << true  << true  << "E90°06'00\"";
+	data << 270.6	<< false << true  << true  << "E89°24'00\"";
+	data << 360.6	<< false << true  << true  << "W0°36'00\"";
+	data << -0.01	<< false << true  << true  << "E0°00'36\"";
+	// case 4
+	data << 0.	<< false << true  << false << "W0.0000°";
+	data << 10.	<< false << true  << false << "W10.0000°";
+	data << -13.5	<< false << true  << false << "E13.5000°";
+	data << -90.1	<< false << true  << false << "E90.1000°";
+	data << 270.6	<< false << true  << false << "E89.4000°";
+	data << 360.6	<< false << true  << false << "W0.6000°";
+	data << -0.01	<< false << true  << false << "E0.0100°";
+	// case 5
+	data << 0.	<< true  << false << true  << "E0°00'00\"";
+	data << 10.	<< true  << false << true  << "E10°00'00\"";
+	data << -13.5	<< true  << false << true  << "W13°30'00\"";
+	data << -90.1	<< true  << false << true  << "W90°06'00\"";
+	data << 270.6	<< true  << false << true  << "E270°36'00\"";
+	data << -0.01	<< true  << false << true  << "W0°00'36\"";
+	// case 6
+	data << 0.	<< true  << false << false << "E0.0000°";
+	data << 10.	<< true  << false << false << "E10.0000°";
+	data << -13.5	<< true  << false << false << "W13.5000°";
+	data << -90.1	<< true  << false << false << "W90.1000°";
+	data << 270.6	<< true  << false << false << "E270.6000°";
+	data << -0.01	<< true  << false << false << "W0.0100°";
+
+	while (data.count()>=5)
+	{
+		double angle	  = data.takeFirst().toDouble();
+		bool eastPositive = data.takeFirst().toBool();
+		bool semiSphere   = data.takeFirst().toBool();
+		bool useDMSfmt    = data.takeFirst().toBool();
+		QString expDMS 	  = data.takeFirst().toString();
+		QString DMS	  = StelUtils::decDegToLongitudeStr(angle, eastPositive, semiSphere, useDMSfmt);
+
+		QVERIFY2(DMS==expDMS, qPrintable(QString("%1 degrees = %2 (expected %3)").arg(QString::number(angle, 'f', 5), DMS, expDMS)));
 	}
 }
 
@@ -835,20 +925,22 @@ void TestConversions::testRadToHMSStr()
 {
 	QVariantList data;
 
-	data << 0.		<< "0h00m00.0s";
-	data << M_PI/36		<< "0h20m00.0s";
-	data << 7*M_PI/8	<< "10h30m00.0s";
-	data << 2*M_PI/5	<< "4h48m00.0s";
+	data << 0.		<< false << "0h00m00.0s";
+	data << M_PI/36		<< false << "0h20m00.0s";
+	data << 7*M_PI/8	<< false << "10h30m00.0s";
+	data << 2*M_PI/5	<< false << "4h48m00.0s";
+	data << M_PI/36		<< true  << "0h20m00.00s";
+	data << 7*M_PI/8	<< true  << "10h30m00.00s";
+	data << 2*M_PI/5	<< true  << "4h48m00.00s";
 
-	while (data.count()>=2)
+	while (data.count()>=3)
 	{
 		double rad = data.takeFirst().toDouble();
+		bool flag = data.takeFirst().toBool();
 		QString expectedHMS = data.takeFirst().toString();
-		QString hms = StelUtils::radToHmsStr(rad).trimmed();
+		QString hms = StelUtils::radToHmsStr(rad, flag).trimmed();
 		QVERIFY2(expectedHMS==hms, qPrintable(QString("%1 radians = %2 (expected %3)")
-						      .arg(rad)
-						      .arg(hms)
-						      .arg(expectedHMS)));
+			.arg(QString::number(rad, 'f', 5), hms, expectedHMS)));
 	}
 }
 
@@ -1184,6 +1276,50 @@ void TestConversions::testVec2fToStr()
 	}
 }
 
+void TestConversions::testVec2dToStr()
+{
+	QVariantList data;
+
+	data << "1.0000000000,1.0000000000" << 1. << 1.;
+	data << "1.0000000000,0.0000000000" << 1. << 0.;
+	data << "0.0000000000,1.0000000000" << 0. << 1.;
+	data << "0.0000000000,0.0000000000" << 0. << 0.;
+
+	while (data.count()>=3)
+	{
+		QString vec	= data.takeFirst().toString();
+		double v1	= data.takeFirst().toDouble();
+		double v2	= data.takeFirst().toDouble();
+		Vec2d srcVec	= Vec2d(v1, v2);
+		QString dstVec	= srcVec.toStr();
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+			.arg(srcVec.toString(), dstVec, vec)));
+	}
+}
+
+void TestConversions::testVec2iToStr()
+{
+	QVariantList data;
+
+	data << "1,1" << 1 << 1;
+	data << "1,0" << 1 << 0;
+	data << "0,1" << 0 << 1;
+	data << "0,0" << 0 << 0;
+
+	while (data.count()>=3)
+	{
+		QString vec	= data.takeFirst().toString();
+		int v1		= data.takeFirst().toInt();
+		int v2		= data.takeFirst().toInt();
+		Vec2i srcVec	= Vec2i(v1, v2);
+		QString dstVec	= srcVec.toStr();
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+			.arg(srcVec.toString(), dstVec, vec)));
+	}
+}
+
 void TestConversions::testStrToVec3f()
 {
 	QVariantList data;
@@ -1211,6 +1347,69 @@ void TestConversions::testStrToVec3f()
 	}
 }
 
+void TestConversions::testQColorToVec3i()
+{
+	QVariantList data;
+
+	data << 255 << 255 << 255;
+	data << 255 <<   0 << 255;
+	data <<   0 << 255 <<   0;
+	data <<   0 <<   0 <<   0;
+
+	while (data.count()>=3)
+	{
+		int v1		= data.takeFirst().toInt();
+		int v2		= data.takeFirst().toInt();
+		int v3		= data.takeFirst().toInt();
+		Vec3i vec	= Vec3i(v1, v2, v3);
+		Vec3i dstVec    = Vec3i(QColor(v1, v2, v3));
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2").arg(vec.toStr(), dstVec.toStr())));
+	}
+}
+
+void TestConversions::testQColorToVec3f()
+{
+	QVariantList data;
+
+	data << 1.f << 1.f << 1.f;
+	data << 1.f << 0.f << 1.f;
+	data << 0.f << 1.f << 0.f;
+	data << 0.f << 0.f << 0.f;
+
+	while (data.count()>=3)
+	{
+		float v1	= data.takeFirst().toFloat();
+		float v2	= data.takeFirst().toFloat();
+		float v3	= data.takeFirst().toFloat();
+		Vec3f vec	= Vec3f(v1, v2, v3);
+		Vec3f dstVec    = Vec3f(QColor().fromRgbF(v1, v2, v3));
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2").arg(vec.toStr(), dstVec.toStr())));
+	}
+}
+
+void TestConversions::testQColorToVec3d()
+{
+	QVariantList data;
+
+	data << 1. << 1. << 1.;
+	data << 1. << 0. << 1.;
+	data << 0. << 1. << 0.;
+	data << 0. << 0. << 0.;
+
+	while (data.count()>=3)
+	{
+		double v1	= data.takeFirst().toDouble();
+		double v2	= data.takeFirst().toDouble();
+		double v3	= data.takeFirst().toDouble();
+		Vec3d vec	= Vec3d(v1, v2, v3);
+		Vec3d dstVec    = Vec3d(QColor().fromRgbF(v1, v2, v3));
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2").arg(vec.toStr(), dstVec.toStr())));
+	}
+}
+
 void TestConversions::testVec3fToStr()
 {
 	QVariantList data;
@@ -1234,6 +1433,164 @@ void TestConversions::testVec3fToStr()
 							   .arg(srcVec.toString())
 							   .arg(dstVec)
 							   .arg(vec)));
+	}
+}
+
+void TestConversions::testVec3dToStr()
+{
+	QVariantList data;
+
+	data << "1.0000000000,1.0000000000,1.0000000000" << 1. << 1. << 1.;
+	data << "1.0000000000,0.0000000000,1.0000000000" << 1. << 0. << 1.;
+	data << "0.0000000000,1.0000000000,0.0000000000" << 0. << 1. << 0.;
+	data << "0.0000000000,0.0000000000,0.0000000000" << 0. << 0. << 0.;
+
+	while (data.count()>=4)
+	{
+		QString vec	= data.takeFirst().toString();
+		double v1	= data.takeFirst().toDouble();
+		double v2	= data.takeFirst().toDouble();
+		double v3	= data.takeFirst().toDouble();
+		Vec3d srcVec	= Vec3d(v1, v2, v3);
+		//QString dstVec	= StelUtils::vec3fToStr(srcVec);
+		QString dstVec	= srcVec.toStr();
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+			.arg(srcVec.toString(), dstVec, vec)));
+	}
+}
+
+void TestConversions::testVec3iToStr()
+{
+	QVariantList data;
+
+	data << "1,1,1" << 1 << 1 << 1;
+	data << "1,0,1" << 1 << 0 << 1;
+	data << "0,1,0" << 0 << 1 << 0;
+	data << "0,0,0" << 0 << 0 << 0;
+
+	while (data.count()>=4)
+	{
+		QString vec	= data.takeFirst().toString();
+		int v1		= data.takeFirst().toInt();
+		int v2		= data.takeFirst().toInt();
+		int v3		= data.takeFirst().toInt();
+		Vec3i srcVec	= Vec3i(v1, v2, v3);
+		QString dstVec	= srcVec.toStr();
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+			.arg(srcVec.toString(), dstVec, vec)));
+	}
+}
+
+void TestConversions::testVec3iToQColor()
+{
+	QVariantList data;
+
+	data << "255,255,255" << 255 << 255 << 255;
+	data << "255,0,255"   << 255 <<   0 << 255;
+	data << "0,255,0"     <<   0 << 255 <<   0;
+	data << "0,0,0"       <<   0 <<   0 <<   0;
+
+	while (data.count()>=4)
+	{
+		QStringList vec	= data.takeFirst().toString().split(",");
+		QColor color = QColor(vec.at(0).toInt(), vec.at(1).toInt(), vec.at(2).toInt());
+		int v1		= data.takeFirst().toInt();
+		int v2		= data.takeFirst().toInt();
+		int v3		= data.takeFirst().toInt();
+		Vec3i srcVec	= Vec3i(v1, v2, v3);
+		QColor dstColor	= srcVec.toQColor();
+
+		QVERIFY2(color==dstColor, qPrintable(QString("%1 = %2").arg(color.name(), dstColor.name())));
+	}
+}
+
+void TestConversions::testVec3fToQColor()
+{
+	QVariantList data;
+
+	data << "255,255,255" << 1.f << 1.f << 1.f;
+	data << "255,0,255"   << 1.f << 0.f << 1.f;
+	data << "0,255,0"     << 0.f << 1.f << 0.f;
+	data << "0,0,0"       << 0.f << 0.f << 0.f;
+
+	while (data.count()>=4)
+	{
+		QStringList vec	= data.takeFirst().toString().split(",");
+		QColor color = QColor(vec.at(0).toInt(), vec.at(1).toInt(), vec.at(2).toInt());
+		float v1	= data.takeFirst().toFloat();
+		float v2	= data.takeFirst().toFloat();
+		float v3	= data.takeFirst().toFloat();
+		Vec3f srcVec	= Vec3f(v1, v2, v3);
+		QColor dstColor	= srcVec.toQColor();
+
+		QVERIFY2(color==dstColor, qPrintable(QString("%1 = %2").arg(color.name(), dstColor.name())));
+	}
+}
+
+void TestConversions::testVec3dToQColor()
+{
+	QVariantList data;
+
+	data << "255,255,255" << 1. << 1. << 1.;
+	data << "255,0,255"   << 1. << 0. << 1.;
+	data << "0,255,0"     << 0. << 1. << 0.;
+	data << "0,0,0,0"     << 0. << 0. << 0.;
+
+	while (data.count()>=5)
+	{
+		QStringList vec	= data.takeFirst().toString().split(",");
+		QColor color = QColor(vec.at(0).toInt(), vec.at(1).toInt(), vec.at(2).toInt());
+		double v1	= data.takeFirst().toDouble();
+		double v2	= data.takeFirst().toDouble();
+		double v3	= data.takeFirst().toDouble();
+		Vec3d srcVec	= Vec3d(v1, v2, v3);
+		QColor dstColor	= srcVec.toQColor();
+
+		QVERIFY2(color==dstColor, qPrintable(QString("%1 = %2").arg(color.name(), dstColor.name())));
+	}
+}
+
+void TestConversions::testVec3fToQVector3D()
+{
+	QVariantList data;
+
+	data << 1.f << 1.f << 1.f;
+	data << 1.f << 0.f << 1.f;
+	data << 0.f << 1.f << 0.f;
+	data << 0.f << 0.f << 0.f;
+
+	while (data.count()>=3)
+	{
+		float v1	= data.takeFirst().toFloat();
+		float v2	= data.takeFirst().toFloat();
+		float v3	= data.takeFirst().toFloat();
+		QVector3D vec	= Vec3f(v1, v2, v3).toQVector3D();
+		QVector3D v3d	= QVector3D(v1, v2, v3);
+
+		QVERIFY(vec==v3d);
+	}
+}
+
+void TestConversions::testVec3dToQVector3D()
+{
+	QVariantList data;
+
+	data << 1. << 1. << 1.;
+	data << 1. << 0. << 1.;
+	data << 0. << 1. << 0.;
+	data << 0. << 0. << 0.;
+
+	while (data.count()>=3)
+	{
+		double v1	= data.takeFirst().toDouble();
+		double v2	= data.takeFirst().toDouble();
+		double v3	= data.takeFirst().toDouble();
+		QVector3D vec	= Vec3d(v1, v2, v3).toQVector3D();
+		QVector3D v3d	= QVector3D(v1, v2, v3);
+
+		QVERIFY(vec==v3d);
 	}
 }
 
@@ -1266,6 +1623,72 @@ void TestConversions::testStrToVec4d()
 	}
 }
 
+void TestConversions::testQColorToVec4i()
+{
+	QVariantList data;
+
+	data << 255 << 255 << 255 << 255;
+	data << 255 <<   0 << 255 <<   0;
+	data <<   0 << 255 <<   0 << 255;
+	data <<   0 <<   0 <<   0 <<   0;
+
+	while (data.count()>=4)
+	{
+		int v1		= data.takeFirst().toInt();
+		int v2		= data.takeFirst().toInt();
+		int v3		= data.takeFirst().toInt();
+		int v4		= data.takeFirst().toInt();
+		Vec4i vec	= Vec4i(v1, v2, v3, v4);
+		Vec4i dstVec    = Vec4i(QColor(v1, v2, v3, v4));
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2").arg(vec.toStr(), dstVec.toStr())));
+	}
+}
+
+void TestConversions::testQColorToVec4f()
+{
+	QVariantList data;
+
+	data << 1.f << 1.f << 1.f << 1.f;
+	data << 1.f << 0.f << 1.f << 0.f;
+	data << 0.f << 1.f << 0.f << 1.f;
+	data << 0.f << 0.f << 0.f << 0.f;
+
+	while (data.count()>=4)
+	{
+		float v1	= data.takeFirst().toFloat();
+		float v2	= data.takeFirst().toFloat();
+		float v3	= data.takeFirst().toFloat();
+		float v4	= data.takeFirst().toFloat();
+		Vec4f vec	= Vec4f(v1, v2, v3, v4);
+		Vec4f dstVec    = Vec4f(QColor().fromRgbF(v1, v2, v3, v4));
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2").arg(vec.toStr(), dstVec.toStr())));
+	}
+}
+
+void TestConversions::testQColorToVec4d()
+{
+	QVariantList data;
+
+	data << 1. << 1. << 1. << 1.;
+	data << 1. << 0. << 1. << 0.;
+	data << 0. << 1. << 0. << 1.;
+	data << 0. << 0. << 0. << 0.;
+
+	while (data.count()>=4)
+	{
+		double v1	= data.takeFirst().toDouble();
+		double v2	= data.takeFirst().toDouble();
+		double v3	= data.takeFirst().toDouble();
+		double v4	= data.takeFirst().toDouble();
+		Vec4d vec	= Vec4d(v1, v2, v3, v4);
+		Vec4d dstVec    = Vec4d(QColor().fromRgbF(v1, v2, v3, v4));
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2").arg(vec.toStr(), dstVec.toStr())));
+	}
+}
+
 void TestConversions::testVec4dToStr()
 {
 	QVariantList data;
@@ -1289,6 +1712,126 @@ void TestConversions::testVec4dToStr()
 							   .arg(srcVec.toString())
 							   .arg(dstVec)
 							   .arg(vec)));
+	}
+}
+
+void TestConversions::testVec4fToStr()
+{
+	QVariantList data;
+
+	data << "1.000000,1.000000,1.000000,1.000000" << 1.f << 1.f << 1.f << 1.f;
+	data << "1.000000,0.000000,1.000000,0.000000" << 1.f << 0.f << 1.f << 0.f;
+	data << "0.000000,1.000000,0.000000,1.000000" << 0.f << 1.f << 0.f << 1.f;
+	data << "0.000000,0.000000,0.000000,0.000000" << 0.f << 0.f << 0.f << 0.f;
+
+	while (data.count()>=5)
+	{
+		QString vec	= data.takeFirst().toString();
+		float v1	= data.takeFirst().toFloat();
+		float v2	= data.takeFirst().toFloat();
+		float v3	= data.takeFirst().toFloat();
+		float v4	= data.takeFirst().toFloat();
+		Vec4f srcVec	= Vec4f(v1, v2, v3, v4);
+		QString dstVec	= srcVec.toStr();
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+			.arg(srcVec.toString(), dstVec, vec)));
+	}
+}
+
+void TestConversions::testVec4iToStr()
+{
+	QVariantList data;
+
+	data << "1,1,1,1" << 1 << 1 << 1 << 1;
+	data << "1,0,1,0" << 1 << 0 << 1 << 0;
+	data << "0,1,0,1" << 0 << 1 << 0 << 1;
+	data << "0,0,0,0" << 0 << 0 << 0 << 0;
+
+	while (data.count()>=5)
+	{
+		QString vec	= data.takeFirst().toString();
+		int v1		= data.takeFirst().toInt();
+		int v2		= data.takeFirst().toInt();
+		int v3		= data.takeFirst().toInt();
+		int v4		= data.takeFirst().toInt();
+		Vec4i srcVec	= Vec4i(v1, v2, v3, v4);
+		QString dstVec	= srcVec.toStr();
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+			.arg(srcVec.toString(), dstVec, vec)));
+	}
+}
+
+void TestConversions::testVec4iToQColor()
+{
+	QVariantList data;
+
+	data << "255,255,255,255" << 255 << 255 << 255 << 255;
+	data << "255,0,255,0"     << 255 <<   0 << 255 <<   0;
+	data << "0,255,0,255"     <<   0 << 255 <<   0 << 255;
+	data << "0,0,0,0"         <<   0 <<   0 <<   0 <<   0;
+
+	while (data.count()>=5)
+	{
+		QStringList vec	= data.takeFirst().toString().split(",");
+		QColor color = QColor(vec.at(0).toInt(), vec.at(1).toInt(), vec.at(2).toInt(), vec.at(3).toInt());
+		int v1		= data.takeFirst().toInt();
+		int v2		= data.takeFirst().toInt();
+		int v3		= data.takeFirst().toInt();
+		int v4		= data.takeFirst().toInt();
+		Vec4i srcVec	= Vec4i(v1, v2, v3, v4);
+		QColor dstColor	= srcVec.toQColor();
+
+		QVERIFY2(color==dstColor, qPrintable(QString("%1 = %2").arg(color.name(), dstColor.name())));
+	}
+}
+
+void TestConversions::testVec4fToQColor()
+{
+	QVariantList data;
+
+	data << "255,255,255,255" << 1.f << 1.f << 1.f << 1.f;
+	data << "255,0,255,0"     << 1.f << 0.f << 1.f << 0.f;
+	data << "0,255,0,255"     << 0.f << 1.f << 0.f << 1.f;
+	data << "0,0,0,0"         << 0.f << 0.f << 0.f << 0.f;
+
+	while (data.count()>=5)
+	{
+		QStringList vec	= data.takeFirst().toString().split(",");
+		QColor color = QColor(vec.at(0).toInt(), vec.at(1).toInt(), vec.at(2).toInt(), vec.at(3).toInt());
+		float v1	= data.takeFirst().toFloat();
+		float v2	= data.takeFirst().toFloat();
+		float v3	= data.takeFirst().toFloat();
+		float v4	= data.takeFirst().toFloat();
+		Vec4f srcVec	= Vec4f(v1, v2, v3, v4);
+		QColor dstColor	= srcVec.toQColor();
+
+		QVERIFY2(color==dstColor, qPrintable(QString("%1 = %2").arg(color.name(), dstColor.name())));
+	}
+}
+
+void TestConversions::testVec4dToQColor()
+{
+	QVariantList data;
+
+	data << "255,255,255,255" << 1. << 1. << 1. << 1.;
+	data << "255,0,255,0"     << 1. << 0. << 1. << 0.;
+	data << "0,255,0,255"     << 0. << 1. << 0. << 1.;
+	data << "0,0,0,0"         << 0. << 0. << 0. << 0.;
+
+	while (data.count()>=5)
+	{
+		QStringList vec	= data.takeFirst().toString().split(",");
+		QColor color = QColor(vec.at(0).toInt(), vec.at(1).toInt(), vec.at(2).toInt(), vec.at(3).toInt());
+		double v1	= data.takeFirst().toDouble();
+		double v2	= data.takeFirst().toDouble();
+		double v3	= data.takeFirst().toDouble();
+		double v4	= data.takeFirst().toDouble();
+		Vec4d srcVec	= Vec4d(v1, v2, v3, v4);
+		QColor dstColor	= srcVec.toQColor();
+
+		QVERIFY2(color==dstColor, qPrintable(QString("%1 = %2").arg(color.name(), dstColor.name())));
 	}
 }
 
@@ -1316,11 +1859,51 @@ void TestConversions::testQDateTimeToJD()
 		 //qWarning() << i.value() << d.toString(format);
 		 double JD = StelUtils::qDateTimeToJd(QDateTime::fromString(i.value(), format));
 		 QVERIFY2(qAbs(i.key() - JD)<=ERROR_LIMIT, qPrintable(QString("JD: %1 Date: %2 Expected JD: %3")
-					 .arg(QString::number(JD, 'f', 5))
-					 .arg(i.value())
-					 .arg(QString::number(i.key(), 'f', 5))
+					 .arg(QString::number(JD, 'f', 5), i.value(), QString::number(i.key(), 'f', 5))
 					 ));
 	 }
+}
+
+void TestConversions::testJDToQDateTime()
+{
+	 QMap<double, QString> map;
+	 map[2454466.0] = "2007-12-31 12:00:00";
+	 map[2500000.0] = "2132-08-31 12:00:00";
+	 map[2454534.0] = "2008-03-08 12:00:00";
+	 map[2299161.0] = "1582-10-15 12:00:00";
+	 map[2454466.5] = "2008-01-01 00:00:00";
+	 map[2400000.0] = "1858-11-16 12:00:00";
+
+	 // See https://doc.qt.io/qt-5/qdate.html#details for restrictions and converion issues (qint64 -> double)
+	 QString format = "yyyy-MM-dd HH:mm:ss";
+	 for (QMap<double, QString>::ConstIterator i=map.constBegin();i!=map.constEnd();++i)
+	 {
+		 QDateTime edt = QDateTime::fromString(i.value(), format);
+		 QDateTime rdt = StelUtils::jdToQDateTime(i.key());
+		 QVERIFY2(edt==rdt, qPrintable(QString("JD: %1 Date: %2 Expected Date: %3")
+			.arg(QString::number(i.key(), 'f', 5), rdt.toString(format), i.value())));
+	 }
+}
+
+void TestConversions::testHoursFromJD()
+{
+	QVariantList data;
+	data << 2454466.0 << 12.; // 2007-12-31 12:00:00
+	data << 2500000.0 << 12.; // 2132-08-31 12:00:00
+	data << 2454534.0 << 12.; // 2008-03-08 12:00:00
+	data << 2299161.0 << 12.; // 1582-10-15 12:00:00
+	data << 2454466.5 << 0.;  // 2008-01-01 00:00:00
+	data << 2400000.0 << 12.; // 1858-11-16 12:00:00
+
+	while (data.count()>=2)
+	{
+		double JD	= data.takeFirst().toDouble();
+		double hours	= data.takeFirst().toDouble();
+		double hrs = StelUtils::getHoursFromJulianDay(JD);
+		QVERIFY2(qAbs(hours - hrs)<=ERROR_LIMIT, qPrintable(QString("JD: %1 Hours: %2 Expected Hours: %3")
+			.arg(QString::number(JD, 'f', 5), QString::number(hrs, 'f', 5), QString::number(hours, 'f', 5))
+			));
+	}
 }
 
 void TestConversions::testTrunc()
@@ -1337,13 +1920,13 @@ void TestConversions::testTrunc()
 	{
 		double res = StelUtils::trunc(i.key());
 		QVERIFY2(qAbs(i.value() - res)<=ERROR_LIMIT, qPrintable(QString("Result: %1 Expected: %2")
-					.arg(QString::number(res, 'f', 2))
-					.arg(QString::number(i.value(), 'f', 2))
+					.arg(QString::number(res, 'f', 2), QString::number(i.value(), 'f', 2))
 					));
 		float resf = StelUtils::trunc(static_cast<float>(i.key()));
 		QVERIFY2(qAbs(static_cast<float>(i.value()) - resf)<=ERROR_LIMIT, qPrintable(QString("Result: %1 Expected: %2")
-					.arg(QString::number(resf, 'f', 2))
-					.arg(QString::number(static_cast<float>(i.value()), 'f', 2))
+					.arg(QString::number(resf, 'f', 2), QString::number(static_cast<float>(i.value()), 'f', 2))
 					));
 	}
 }
+
+

@@ -27,7 +27,7 @@ template<class T, class F> std::pair<T, T> solveBisection(F f,
 
 	for (int i = 0; i < maxIter; i++)
 	{
-		x = (lower + upper) * (T) 0.5;
+		x = (lower + upper) * static_cast<T>(0.5);
 		if (upper - lower < 2 * err)
 			break;
 

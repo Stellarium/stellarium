@@ -38,7 +38,7 @@ TuiNodeResponse TuiNodeInt::handleEditingKey(int key)
 		editing = false;
 		typing = false;
 		response.accepted = true;
-		emit(setValue(value));
+		emit setValue(value);
 		return response;
 	}
 	else if (key==Qt::Key_Up)
@@ -48,7 +48,7 @@ TuiNodeResponse TuiNodeInt::handleEditingKey(int key)
 		if (value > maximum)
 			value = maximum;
 		response.accepted = true;
-		emit(setValue(value));
+		emit setValue(value);
 		return response;
 	}
 	else if (key==Qt::Key_Down)
@@ -58,7 +58,7 @@ TuiNodeResponse TuiNodeInt::handleEditingKey(int key)
 		if (value < minimum)
 			value = minimum;
 		response.accepted = true;
-		emit(setValue(value));
+		emit setValue(value);
 		return response;
 	}
 	else if (key>=Qt::Key_0 && key<=Qt::Key_9)
@@ -80,7 +80,7 @@ TuiNodeResponse TuiNodeInt::handleEditingKey(int key)
 		}
 		response.accepted = true;
 		response.newNode = this;
-		emit(setValue(value));
+		emit setValue(value);
 		return response;
 	}
 	else if (key==Qt::Key_Backspace)
@@ -106,7 +106,7 @@ TuiNodeResponse TuiNodeInt::handleEditingKey(int key)
 		}
 		response.accepted = true;
 		response.newNode = this;
-		emit(setValue(value));
+		emit setValue(value);
 		return response;
 	}
 	else if (key==Qt::Key_Minus)
@@ -116,7 +116,7 @@ TuiNodeResponse TuiNodeInt::handleEditingKey(int key)
 		if (i>=minimum && i<=maximum)
 			value = i;
 		response.accepted = true;
-		emit(setValue(value));
+		emit setValue(value);
 		return response;
 	}
 	return response;

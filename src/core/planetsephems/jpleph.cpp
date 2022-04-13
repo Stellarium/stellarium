@@ -458,8 +458,8 @@ static void swap_32_bit_val(void *ptr)
 {
    char *tptr = static_cast<char *>(ptr), tchar;
 
-   SWAP_MACRO(tptr[0], tptr[3], tchar);
-   SWAP_MACRO(tptr[1], tptr[2], tchar);
+   SWAP_MACRO(tptr[0], tptr[3], tchar)
+   SWAP_MACRO(tptr[1], tptr[2], tchar)
 }
 
 static void swap_64_bit_val(void *ptr, long count)
@@ -468,10 +468,10 @@ static void swap_64_bit_val(void *ptr, long count)
     
     while(count--)
     {
-      SWAP_MACRO(tptr[0], tptr[7], tchar);
-      SWAP_MACRO(tptr[1], tptr[6], tchar);
-      SWAP_MACRO(tptr[2], tptr[5], tchar);
-      SWAP_MACRO(tptr[3], tptr[4], tchar);
+      SWAP_MACRO(tptr[0], tptr[7], tchar)
+      SWAP_MACRO(tptr[1], tptr[6], tchar)
+      SWAP_MACRO(tptr[2], tptr[5], tchar)
+      SWAP_MACRO(tptr[3], tptr[4], tchar)
 
       tptr += 8;
     }
@@ -607,7 +607,7 @@ int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
 	{
 		eph->curr_cache_loc = nr;
 		/* Read two blocks ahead to account for header: */
-		if(FSeek(eph->ifile, (nr + 2) * eph->recsize, SEEK_SET)) // lgtm [cpp/integer-multiplication-cast-to-long]
+		if(FSeek(eph->ifile, static_cast<unsigned long>(nr + 2) * eph->recsize, SEEK_SET)) // lgtm [cpp/integer-multiplication-cast-to-long]
 		{
 			// GZ: Make sure we will try again on next call...
 			eph->curr_cache_loc=0;

@@ -166,7 +166,7 @@ HRESULT OleCreateInstance(LPCOLESTR lpszProgID, IDispatch** ppIDispatch)
 	if (FAILED(hResult)) return hResult;
 
 	hResult = CoCreateInstance(
-	  (REFCLSID)clsid, 0, CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER, (REFCLSID)IID_IDispatch, &p);
+	  static_cast<REFCLSID>(clsid), nullptr, CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER, static_cast<REFCLSID>(IID_IDispatch), &p);
 
 	if (FAILED(hResult)) return hResult;
 

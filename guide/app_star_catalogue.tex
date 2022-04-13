@@ -1218,70 +1218,576 @@ from \emph{The Cambridge Double Star Atlas}~\citep{2009cdsa.book, 2015cdsa.book.
 
 In version 0.21.1 we updated cross-identification data according to \emph{The Washington Double Star Catalog} data~\citep{2001AJ....122.3466M}.
 
-\begin{longtable}{l|l|l|p{35mm}}\toprule
-\emph{Obsolete ID} & \emph{Modern ID} & \emph{Observer} & \emph{Active period}\\\midrule
-H I to VI, H N		& H 1 to 6, H N  & W. Herschel 		  	& 1777---1821 \\
-$\Sigma$        	& STF 		 & F. Wilhelm von Struve        & 1814---1843 \\
-$\Sigma$ I, $\Sigma$ II & STFA, STFB 	 & \emph{(Supplemental catalogs)} & 1814---1843 \\
-h   	        	& HJ  		 & J. Herschel 		  	& 1820---1837 \\
-Sh   	        	& SHJ 		 & J. South and J. Herschel  	& 1821---1840 \\
-S  	  	        & S   		 & J. South 			& 1822---1825 \\
-Rmk 	  	        & RMK 		 & C. Rumker			& 1825---1837 \\
-$\Delta$		& DUN 		 & J. Dunlop 			& 1825---1846 \\
-Lal  		        & LAL 		 & J.-J. de Lalande		& 1825---1877 \\
-O$\Sigma$       	& STT 		 & O. von Struve		& 1832---1878 \\
-O$\Sigma\Sigma$ 	& STTA 		 & \emph{(Supplemental catalogs)} & 1832---1878 \\
-BrsO	        	& BSO 		 & \emph{Brisbane Observatory}	& 1834---1851 \\
-Jc   	        	& JC  		 & W.S. Jacob 			& 1836---1879 \\
-Dawes 	        	& DA  		 & W. Dawes 			& 1841---1858 \\
-Gli 	 	        & GLI 		 & J.M. Gilliss 		& 1850---1852 \\
-Knott  	        	& KNT 		 & G. Knott 			& c. 1865 \\
-Hd, HdO   	        & HDO 		 & \emph{Harvard Observatory} 	& 1866---1911 \\
-Stone  	       		& STN 		 & O. Stone			& 1867---1882 \\
-R   	        	& R   		 & H.C. Russell 		& 1870---1882 \\
-$\beta$   		& BU  		 & S. Burnham 			& 1870---1911 \\
-$\beta$ pm 		& BUP 		 & \emph{(Proper motion pairs)} & 1870---1911 \\
-Ho   	        	& HO  		 & G.W. Hough 			& 1873---1897 \\
-MlbO  	        	& MLO 		 & \emph{Melbourne Observatory} & 1873---1898 \\
-Howe   	        	& HWE 		 & H.A. Howe 			& 1875---1879 \\
-CapO	        	& CPO 		 & \emph{Cape Observatory} 	& 1880---1910 \\
-Es 	 	        & ES  		 & Rev. T.E. Espin 		& 1882---1931 \\
-CorO	   	     	& COO 		 & \emph{Cordoba Observatory} 	& 1883---1920 \\
-J   	        	& J   		 & R. Jonckheere		& 1885---1945 \\
-Slr   	        	& SLR 		 & R.P. Sellors 		& 1890---1896 \\
----		        & A   		 & R. Aitken 			& 1891---1926 \\
----   	        	& I   		 & R.T.A. Innes			& 1891---1927 \\
-$\lambda$   	        & SEE 		 & T.J.J. See 			& 1892---1897 \\
-Hu   	        	& HU  		 & W.J. Hussey 			& 1892---1914 \\
-$\delta$		& DAW 		 & B.H. Dawson 			& 1904---1924 \\
----		        & B   		 & W. van den Bos 		& 1903---1935 \\
-Rst   	    	    	& RST 		 & R.A. Rossiter 		& 1920---1946 \\
-$\phi$		    	& FIN 		 & W.S. Finsen			& 1920---1961 \\
-Cou 	        	& COU 		 & P. Couteau			& 1957---1991 \\
-Mlr			& MLR		 & P. Muller 			& 1966---1989 \\
----		        & HDS  		 & \emph{Hipparcos Catalog} 	& c. 1991 \\
-AC		        & AC  		 & A. Clark			&  \\
-AG		        & AG  		 & \emph{Astronomishe Gesellshaft Katalog} &  \\
-AGC		        & AGC 		 & A.G. Clark 			&  \\
-Arg		        & ARG 		 & F.W.A. Argelander		&  \\
-Dju  	        	& DJU 		 & P. Djurkovic			&  \\
-Don  	        	& DON 		 & H.F. Donner 			&  \\
-Doo  	        	& DOO 		 & E. Doolittle 		&  \\
-Erk  	   		& FRK 		 & W.S. Franks			&  \\
-Gale  	    	    	& GLE 		 & W.F. Gale 			&  \\
-Hld   	        	& HLD 		 & E.S. Holden 			&  \\
-Hrg   		        & HRG 		 & L. Hargrave 			&  \\
-Ku  		        & KU  		 & F. Kustner 			&  \\
-Kui  	        	& KUI 		 & Gerard P. Kuiper 		&  \\
-Pz  	 	        & PZ  		 & G. Piazzi 			&  \\
-Roe   	        	& ROE 		 & E.D. Roe 			&  \\
-Se  	 	        & SE  		 & A. Secchi 			&  \\
-Sei   		        & SEI 		 & J. Scheiner 			&  \\
-Smyth  	 	        & SMY 		 & W.H. Smyth 			&  \\
-Vou  	        	& VOU 		 & J.G.E.G. Voute		&  \\
-Webb  		        & WEB 		 & T.W. Webb 			&  \\
-Wnc  	        	& WNC 		 & F.A. Winnecke 		&  \\
-WNO  	     		& WNO 		 & \emph{US Naval Observatory}  &  \\\bottomrule
+\begin{longtable}{l|l|c|p{59mm}|l}\toprule
+\emph{Traditional ID} & \emph{Modern ID}\footnote{Latinized and capitalized version of traditional ID} & \emph{N.}\footnote{Note: * --- Stellarium uses traditional designation of double star} & \emph{Observer} & \emph{Active period} \\\midrule
+--- & A   	&   & R. G. Aitken & 1891---1937 \\
+--- & ABH &   & H.A. Abt & 1961---2006 \\
+--- & ABT &   & G. Abetti & 1911---1925 \\
+AC	& AC  &   & A. Clark & 1857---1864 \\
+---	& ACA &   & A.C. Ashcraft & 2005---2007 \\
+ACG	& ACG &   & \emph{Astrographic Catalog (Greenwich)} & \\
+--- & ADA &   & C. Adam & 2014 \\
+--- & ADM &   & E.R. Adams & 2012---2013\\
+--- & AG  &   & \emph{Astronomische Gesellschaft Katalog} & 1903 \\
+AGC & AGC &   & A.G. Clark & 1862 \\
+--- & AHD &   & A. Ahad & 2010---2020 \\
+--- & ALB &   & \emph{Albany Observatory} & 1910--1936 \\
+--- & ALC &   & C. Allen & 2000---2014 \\
+--- & ALD &   & H.L. Alden & 1924---1957 \\
+--- & ALI &   & A. Ali & 1949---1955 \\
+--- & ALL &   & R.M. Aller & 1930---1960 \\
+--- & ALP &   & P.R. Allen & 2007---2012 \\
+--- & AMM &   & M. Ammler-von Eiff & 2016 \\
+--- & AMS &   & A. Amosse & 2012---2020 \\
+--- & ANJ &   & J.A. Anderson & 1920 \\
+--- & ANT &   & R. Anton & 2001--- \\
+AOT & AOT &   & \emph{Astronomical Observatory Torino} & \\
+--- & ARA &   & S. Aravamudan & 1961---1963 \\
+Arg	& ARG &   & F.W.A. Argelander & 1857---1865 \\
+--- & ARI &   & E. Aristidi & 1997---1999 \\
+--- & ARN &   & D. Arnold & 2001---2013 \\
+--- & ARR &   & S. Arribas & 1998 \\
+--- & ARU &   & A.N. Argue & 1984---1992 \\
+--- & ARY &   & R.W. Argyle & 1977---2020 \\
+--- & AST &   & \emph{HST FGS Astrometry Science Team} & 1991--- \\
+--- & AZC &   & A.A. Azcona & 2012---2020 \\\midrule
+---	& B   &   & W.H. van den Bos & 1921---1968 \\
+--- & BAG &   & Yu.Yu. Balega & 1977---2015 \\
+--- & BAK &   & G.A. Bakos & 2006 \\
+--- & BAL &   & R. Baillaud & 1924---1944 \\
+--- & BAR &   & E.E. Barnard & 1884---1922 \\
+--- & BAS &   & M.A. Barstow & 2001 \\
+BAT & BAT &   & H. Batterman & \\
+--- & BAU &   & C. Bauer & 1994---2007 \\
+--- & BAZ &   & P. Baize & 1927---1994 \\
+--- & BDK &   & \emph{Brown Dwarf Kinematic Project Catalog} & 2010 \\
+--- & BDT &   & T.D. Brandt & 2014--- \\
+--- & BED &   & T.R. Bedding & 1993---1994 \\
+--- & BEU &   & J.-L. Beuzit & 2004 \\
+--- & BEW &   & U. Bastian, J. Eisloeffel, K. Wiese & 1988 \\
+--- & BGH &   & S. van den Bergh & 1958 \\
+--- & BGR &   & J.-P. Berger & 2011 \\
+--- & BHA &   & T.P. Bhaskaran & 1916---1938 \\
+--- & BHJ &   & A. Blaauw, W.A. Hiltner, H.L. Johnson & 1959 \\
+--- & BID &   & W.P. Bidelman & 1976---1980 \\
+Big & BIG &   & G. Bigourdan & 1883---1903 \\
+--- & BIL &   & B.A. Biller & 2006---2014 \\
+--- & BKO &   & E. Berko & 2002---2012 \\
+--- & BLA &   & A. Blazit & 1877---1987 \\
+--- & BLK &   & D.R. Blackmore & 1990 \\
+Bll & BLL &   & R.S. Ball & 1872---1884 \\
+--- & BLM &   & B.L. Morgan & 1978---1982 \\
+--- & BLO &   & M. Bloch & 1931 \\
+--- & BNK &   & A. Brandeker & 2001---2006 \\
+--- & BNS &   & D. Baines & 2006 \\
+--- & BNU &   & D. Bonneau & 1979---2011 \\
+--- & BNV &   & M. Bonavita & 2007---2020 \\
+--- & BNW &   & W.A. Baranov & 1909 \\
+--- & BOD &   & A.F. Boden & 1998---2012 \\
+--- & BOT &   & G. Boettger & 1958---1967 \\
+Bow & BOW &   & W.M. Bowyer & 1896---1921 \\
+--- & BPM &   & \emph{Bordeaux PM2000 catalogue} & 2010 \\
+--- & BRC &   & C. Briceno & 1998---2017 \\
+BRD & BRD &   & F. Bird & \\
+--- & BRF &   & F.L. Brown & 1916---1927 \\
+--- & BRG &   & C. Bergfors & 2010---2016 \\
+--- & BRH &   & W. Barth & 1994 \\
+--- & BRR &   & W. Brandner & 1995---2004 \\
+--- & BRT &   & S.G. Barton & 1926---1957 \\
+BrsO & BSO &   & \emph{Brisbane Observatory} & 1834---1851 \\
+--- & BTG &   & A. Bertoglio & 2007---2010 \\
+--- & BTM &   & M. Bottom & 2015 \\
+--- & BTZ &   & E. Bernewitz & 1920---1963 \\
+$\beta$ & BU  & * & S. Burnham & 1873---1918 \\
+$\beta$ pm & BUP & * & \emph{(Proper motion pairs)} & 1873---1918 \\
+--- & BVD &   & R. Benavides & 2003---2018 \\
+--- & BWL &   & B.P. Bowler & 2012---2018 \\
+--- & BYV &   & V. Bailey & 2014 \\\midrule
+--- & CAB &   & J.A. Caballero & 2005---2018 \\
+--- & CAN &   & S.M. Caballero-Nieves & 2014---2020 \\
+--- & CAR &   & M. Carbillet & 1996---1998 \\
+--- & CAT &   & C. Catala & 2006 \\
+--- & CBL &   & R. Caballero & 2008---2015 \\
+--- & CHE &   & Stanislas Chevalier & 1908---1925 \\
+--- & CHM &   & J. Chaname & 2004 \\
+--- & CHN &   & M. Cohen & 1979---1983 \\
+--- & CHR &   & \emph{Center for High Ang. Res. Astronomy (speckle interferometry systems)} & \\
+--- & CHT &   & A.C. Cheetham & 2015---2018 \\
+--- & CIA &   & \emph{Center for High Angular Resolution Astronomy (CHARA Interferometric Array)} & \\
+--- & CLL &   & J.L. Comellas & 2003 \\
+--- & CLO &   & L.P. Close & 1997---2014 \\
+--- & CLP &   & P. Clark & 2011 \\
+Cog & COG &   & W.A. Cogshall & 1896---1905 \\
+Com & COM &   & G.C. Comstock & 1894---1911 \\
+CorO & COO &   & \emph{Cordoba Observatory} & 1883---1920 \\
+Cop & COP &   & R. Copeland & 1875---1886 \\
+--- & COU &   & P. Couteau & 1952---1999 \\
+CpO, CapO & CPO &   & \emph{Cape Observatory} & 1822---1938 \\
+--- & CRB &   & J.-L. Carballo & 2009---2016 \\
+--- & CRC &   & M. Cortes-Contreras & 2014---2017 \\
+--- & CRE &   & T. Currie & 2010---2020 \\
+CRI & CRI &   & F. Crifo & \\
+--- & CRJ &   & J.P. Crepp & 2010---2015 \\
+Cru & CRU &   & L. Cruls & 1884 \\
+---	& CRZ &   & K.L. Cruz & 2007 \\
+--- & CSE &   & G. Csepany & 2015---2017 \\
+--- & CSI &   & Sz. Csizmadia & 2009 \\
+--- & CSN &   & J.C. Carson & 2005---2013 \\
+--- & CSR &   & I. Coster & 2006---2016 \\
+--- & CSU &   & O. Chesneau & 2014 \\
+--- & CTI &   & P.S. Conti & 1971---1980 \\
+--- & CTT &   & J.-F. Courtot & 1995--- \\
+--- & CTU &   & J.C. Christou & 2006---2009 \\
+--- & CUD &   & K.M. Cudworth & 1973 \\
+--- & CUS &   & F. Cusano & 2012 \\
+--- & CUY &   & J. Cuypers & 1997---1999 \\
+--- & CVE &   & Z. Cvetkovic & 2005---2020 \\
+--- & CVN &   & G. Chauvin & 2002---2015 \\
+--- & CVP &   & R.J. Cava and R.A. Pascal, Jr. & 2004 \\
+--- & CVR &   & J. Chivers & 2011---2015 \\\midrule
+D   & D   &   & H. Dembowski & 1856---1884 \\
+Dawes & DA  &   & W.R. Dawes & 1831---1867 \\
+--- & DAE &   & S. Daemgen & 2007---2015 \\
+--- & DAL &   & J.A. Daley & 1998---2018 \\
+--- & DAM &   & F. Damm & 2009--- \\
+--- & DAN &   & A. Danjon & 1937---1956 \\
+$\delta$ & DAW & * & B.H. Dawson &1918---1933 \\
+--- & DBK &   & M. De Becker & 2004---2012 \\
+--- & DCH &   & G. Duchene & 1999---2018 \\
+--- & DEA &   & N.R. Deacon & 2005---2020 \\
+--- & DEL &   & X. Delfosse & 1999---2000 \\
+--- & DIC &   & J. Dick & 1921---1963 \\
+--- & DJU &   & P. Djurkovic & 1953---1973 \\
+Dob & DOB &   & W.A. Doberck & 1875---1934 \\
+--- & DOM &   & J. Dommanget & 1949---1979 \\
+--- & DON &   & H.F. Donner & 1937---1964 \\
+--- & DOO &   & E. Doolittle & 1901---1923 \\
+--- & DOR &   & \emph{Dorpat Observatory} & \\
+--- & DRD &   & P. Durand & 1983---2011 \\
+--- & DRS &   & R.J. De Rosa & 2011---2019 \\
+--- & DSG &   & \emph{DSSI-Gemini} & 2012 \\
+$\Delta$ & DUN & * & J. Dunlop & 1825---1846 \\
+--- & DUQ &   & A. Duquennoy & 1987---1996 \\
+--- & DVG &   & M.J. del Valle Gonzalez & 2015--- \\
+DYR & DYR &   & E.R. Dyer, Jr. & \\\midrule
+--- & EBE &   & J. Ebersberger & 1979---1986 \\
+EDG & EDG &   & D.W. Edgecomb & \\
+Egb & EGB &   & H.V. Egbert & 1879---1906 \\
+--- & EGG &   & O.J. Eggen & 1945---1982 \\
+--- & EGN &   & P. Eggenberger & 2007---2008 \\
+--- & EHR &   & D. Ehrenreich & 2010 \\
+--- & EIS &   & T. Eisenbeiss & 2007 \\
+--- & ELP &   & P. Elliott & 2015---2016 \\
+Eng & ENG &   & R. Engelmann & 1865---1887 \\
+Enh & ENH &   & B. von Engelhardt & 1887---1895 \\
+--- & ENO &   & \emph{European Network Observations} & \\
+--- & ES  &   & T.E. Espin & 1901---1933 \\
+--- & ESG &   & S. Els & 2001 \\
+--- & EVS &   & N.R. Evans & 1993---2020 \\
+--- & EVT &   & T.M. Evans & 2012 \\\midrule
+--- & FAB &   & C. Fabricius & 2000 \\
+--- & FAL &   & J.L. Falin and F. Mignard & 1999 \\
+--- & FAR &   & J. Farihi & 2004---2013 \\
+--- & FGL &   & E.D. Feigelson & 1996---2006 \\
+--- & FGS &   & \emph{HST Fine Guide Sensor} & 2015 \\
+$\phi$ & FIN &   & W.S. Finsen & 1926---1978 \\
+--- & FLE &   & J. Fleckenstein & 1956---1958 \\
+--- & FMR &   & F.M. Rica Romero & 1996--- \\
+--- & FOR &   & L. Forgeron & 1911 \\
+--- & FOX &   & P. Fox & 1909---1946 \\
+--- & FRH &   & R. Furuhjelm & 1932 \\
+--- & FRK &   & W.S. Franks & 1914---1919 \\
+--- & FRT &   & W.J. Forrest & 1988---1990 \\
+--- & FYM &   & M. Fay & 2013---2017 \\\midrule
+--- & GAA &   & A. Gallenne & 2014---2019 \\
+--- & GAL &   & J. Gallo & 1912---1914 \\
+GAn & GAN &   & G. Anderson & 1888---1897 \\
+--- & GAT &   & G.D. Gatewood & 1973---2019 \\
+--- & GAU &   & P.L. Gauchet & 1923---1928 \\
+--- & GDM &   & B. Goldman & 2010 \\
+--- & GHE &   & A.M. Ghez & 1991---2016 \\
+--- & GIC &   & H. Giclas & 1961---1978 \\
+--- & GII &   & R. Gili & 1991---2020 \\
+--- & GIR &   & P.M. Girard & 1992---1994 \\
+--- & GIZ &   & J.E. Gizis & 2000---2006 \\
+--- & GJ  &   & W. Gliese and H. Jahreiss & 1988 \\
+--- & GKI &   & D.A. Golimowski & 1993---2004 \\
+Gale & GLE &   & W.F. Gale & 1897 \\
+Gli & GLI &   & J.M. Gilliss & 1850---1868 \\
+Glp & GLP &   & S. Glasenapp & 1888---1899 \\
+--- & GMC &   & G. Micello & 2011---2019 \\
+--- & GNS &   & C. Ginski & 2012---2016 \\
+GNT & GNT &   & Grant & \\
+--- & GOE &   & K.-D. Goecking & 1994 \\
+GOL & GOL &   & H. Goldschmidt & \\
+--- & GRB &   & S. Groombridge & 1913 \\
+--- & GRE &   & J. Gregorio-Hetem & 1992 \\
+--- & GRF &   & R.F. Griffin & 1975---2019 \\
+--- & GRV &   & J. Greaves & 2004--- \\
+--- & GRY &   & C.A. Grady & 2004 \\
+--- & GSH &   & J. Glaisher & 1906---1908 \\
+--- & GTB &   & K. Gottlieb & 1948 \\
+--- & GUE &   & E.W. Guenther & 2001---2005 \\
+--- & GUI &   & J. Guillaume & 1912---1931 \\
+--- & GUL &   & K. Gullikson & 2016 \\
+--- & GVT &   & \emph{GRAVITY collaboration} & 2018--- \\
+--- & GWP &   & \emph{Garraf Wide Pairs} & 2012---2016 \\
+--- & GYL &   & A.N. Goyal & 1958---1970 \\
+--- & GZA &   & B. Gauza & 2012---2015 \\\midrule
+H I to VI, H N & H 1 to 6, H N &   & W. Herschel & 1777---1821 \\
+--- & HAT &   & P. Hartigan & 1994---2003 \\
+--- & HAU &   & H. Haupt & 1964---1966 \\
+Hd, HdO & HDO &   & \emph{Harvard Observatory} & 1866---1911 \\
+--- & HDS &   & \emph{Hipparcos Double Star Catalog} & c. 1991 \\
+--- & HEG &   & E.K. Hege & 1983---1991 \\
+--- & HEI &   & W.D. Heintz & 1954---2001 \\
+--- & HEL &   & K. Helminiak & 2009---2016 \\
+--- & HER &   & G.H. Herbig & 1950---1998 \\
+h    & HJ  &   & J.F.W. Herschel & 1826---1870 \\
+--- & HJL &   & J.L. Halbwachs & 1981---2020 \\
+Hl  & HL  &   & A. Hall & 1866---1894 \\
+--- & HLA &   & L.A. Hirsch & 2019 \\
+Hld & HLD &   & E.S. Holden & 1874---1884 \\
+--- & HLG &   & G. Hill & 1970---1988 \\
+--- & HLM &   & E. Holmes & 1906 \\
+--- & HLN &   & F. Holden & 1963---1979 \\
+--- & HMM &   & C.A. Hummel & 2001---2017 \\
+--- & HNK &   & S. Hinkley & 2010---2015 \\
+Ho  & HO  &   & G.W. Hough & 1883---1907 \\
+--- & HOM &   & F. Hormuth & 2007 \\
+Hrg & HRG &   & L. Hargrave & 1871---1892 \\
+--- & HRS &   & D.L. Harris & 1947 \\
+--- & HSL &   & J.N. Heasley & 2002 \\
+--- & HSW &   & R. Harshaw & 1990---1993 \\
+HTG & HTG &   & C.S. Hastings & \\
+Hu  & HU  &   & W.J. Hussey & 1896---1914 \\
+--- & HUB &   & S. Hubrig & 2001 \\
+--- & HUE &   & N. Huelamo & 2009---2015 \\
+--- & HWD &   & A.W. Howard & 2010 \\
+Howe & HWE &   & H.A. Howe & 1876---1882 \\
+--- & HZE &   & A. Heinze & 2009---2010 \\
+--- & HZG &   & E. Hertzsprung & 1907---1958 \\\midrule
+--- & I   &   & R.T.A. Innes & 1895---1948 \\
+--- & INN &   & P.A. Ianna & 1974---1988 \\
+--- & IOT &   & \emph{IOTA Array} & 1995---2011 \\
+--- & ISO &   & S. Isobe & 1990---1992 \\
+--- & ITF &   & I.T. Falcon & 2011---2020 \\
+--- & ITO &   & Y. Itoh & 1999---2011 \\
+--- & ISM &   & R.M. Ismailov & 1998---2020 \\\midrule
+--- & J   &   & R. Jonckheere & 1908---1958 \\
+--- & JAY &   & R. Jayawardhana & 2001---2006 \\
+Jc  & JC  &   & W.S. Jacob & 1847---1860 \\
+JCT & JCT &   & J.-C. Thorel & \\
+--- & JEF &   & H.M. Jeffers & 1945---1978 \\
+--- & JKA &   & K.A. Janes & 2017 \\
+JKS & JKS &   & M.P. Jenniskens & \\
+--- & JNN &   & M. Janson & 2006---2020 \\
+--- & JOD &   & E. Jodar & 2013 \\
+--- & JOH &   & E.L. Johnson & 1916---1948 \\
+--- & JOY &   & A.H. Joy & 1941---1949 \\
+--- & JRN &   & A. Jorissen & 1988 \\
+--- & JSP &   & M.K. Jessup & 1937---1964 \\\midrule
+--- & KAL &   & P. Kalas & 2008 \\
+--- & KAM &   & P. van de Kamp & 1929---1969 \\
+--- & KAR &   & M. Karovska & 1986---1997 \\
+--- & KEL &   & A. Kellerer & 2007 \\
+--- & KIR &   & J.D. Kirkpatrick & 1995---2014 \\
+--- & KNG &   & B. Koenig & 2002---2005 \\
+--- & KNP &   & G.F.G. Knipe & 1959---1969 \\
+Knott & KNT &   & G. Knott & 1865---1881 \\
+Ko  & KO  &   & \emph{Koenigstuhl (Max Planck Institute)} & \\
+--- & KOE &   & L. Koechlin & 1979---1983 \\
+--- & KOH &   & R. Koehler & 1998---2016 \\
+--- & KOI &   & \emph{Kepler Object of Interest} & 2011---2018 \\
+--- & KON &   & Q.M. Konopacky & 2007---2010 \\
+--- & KOU &   & M.B.N. Kouwenhoven & 2005 \\
+--- & KPP &   & W. Knapp & 2015--- \\
+--- & KPR &   & K.W. Kamper & 1976---1992 \\
+--- & KR  &   & A. Kruger & \\
+KRO & KRO &   & G. Kron & \\
+--- & KRS &   & C.D. Koresko & 1991---2002 \\
+--- & KRU &   & E.C. Kruger & 1936---1937 \\
+--- & KRV &   & P. Kervella & 2009---2019 \\
+--- & KRW &   & Carlos A. Krawczenko & 2009---2020 \\
+--- & KSS &   & S. Kraus & 2007---2012 \\
+--- & KST &   & J.H. Kastner & 2012 \\
+Ku  & KU  &   & F. Kustner & 1884---1902 \\
+--- & KUI &   & G.P. Kuiper & 1929---1961 \\
+Kza & KZA &   & S.M. Kazeza & 1984 \\\midrule
+L   & L   &   & T. Lewis & 1891---1921 \\
+--- & LAB &   & A. Labeyrie & 1974 \\
+--- & LAD &   & T. Ladanyi & 2003---2007 \\
+--- & LAF &   & D. Lafreniere & 2007---2014 \\
+Lal & LAL &   & J.-J. de Lalande & 1825---1877 \\
+Lam & LAM &   & J. Lamont & 1849 \\
+--- & LAU &   & H.E. Lau & 1905---1917 \\
+--- & LAW &   & N.M. Law & 2006---2010 \\
+--- & LBZ &   & P. Labitzke & 1925---1929 \\
+Lcl & LCL &   & N.L. Lacaille & 1750 \\
+--- & LCS &   & P.W. Lucas & 2005 \\
+--- & LDS, LPM &   & \emph{Luyten p.m. catalog} & \\
+--- & LEC &   & J. Lecacheux & 2000---2007 \\
+LEE & LEE &   & O.J. Lee & \\
+--- & LEI &   & Ch. Leinert & 1986---2001 \\
+--- & LEO &   & F.C. Leonard & 1918---1943 \\
+--- & LEP &   & S. Lepine & 2001---2011 \\
+--- & LFR &   & L. Ferrero & 2009 \\
+--- & LGR &   & A.-M. Lagrange & 2006---2009 \\
+--- & LI  &   & W. Li & 1994 \\
+--- & LIC &   & G. Li Causi & 2013 \\
+--- & LIM &   & M.C. Liu & 1996---2012 \\
+--- & LIN &   & J.F. Ling & 1983---2020 \\
+--- & LLO &   & J.P. Lloyd & 2002---2007 \\
+--- & LMP &   & P. Lampens & 2001---2016 \\
+--- & LNA &   & A. Luna & 2020 \\
+--- & LOC &   & G. Locatelli & 2013---2019 \\
+--- & LOS &   & F. Losse & 2005---2010 \\
+--- & LOU &   & N.P. Loutrel & 2011 \\
+--- & LPL &   & N. La Palombara & 2012 \\
+LpO & LPO &   & \emph{La Plata Observatory} & \\
+--- & LSC &   & \emph{Lowell-Southern Connecticut Collaboration} & \\
+--- & LUH &   & K.L. Luhman & 2002---2013 \\
+--- & LUY &   & W.J. Luyten & 1933---1969 \\
+Lv  & LV  &   & F.P. Leavenworth & 1887---1930 \\
+--- & LWR &   & P.J. Lowrance & 1999---2005 \\
+--- & LYS &   & L. Louys & 1987 \\\midrule
+Mad & MAD &   & J.H. Maedler & 1835---1859 \\
+--- & MAJ &   & J. Manfroid & 1987 \\
+--- & MAM &   & E.E. Mamajek & 2010---2017 \\
+--- & MAR &   & C. Marois & 2008---2010 \\
+--- & MBA &   & B.A. Macintosh & 2001---2003 \\
+--- & MCA &   & H.A. McAlister & 1976---1996 \\
+--- & MCD &   & M. Michaud & 2012 \\
+--- & MCN &   & L. Maccarini & 2015---2019 \\
+--- & MCT &   & C. McCarthy & 2001 \\
+--- & MCY &   & D.W. McCarthy & 1982---1993 \\
+--- & MEL &   & E.L. Martin & 1998---2006 \\
+--- & MET &   & S.A. Metchev & 2003---2009 \\
+--- & MFL &   & F.L. Martinez & 2018---2019 \\
+--- & MGN &   & G.N. Mace & 2013 \\
+--- & MIL &   & J.A. Miller & 1903---1907 \\
+--- & MIU &   & N. Miura & 1992---1995 \\
+--- & MKR &   & V.V. Makarov & 2005---2010 \\
+--- & MKT &   & \emph{Mark III Interferometer} & 1988---2006 \\
+--- & MLB &   & W. Milburn & 1918---1939 \\
+--- & MLD &   & A. Meilland & 2008---2011 \\
+MlF & MLF &   & F. Muller & 1889 \\
+MlbO & MLO &   & \emph{Melbourne Observatory} & 1873---1898 \\
+--- & MLR &   & P. Muller & 1938---1997 \\
+--- & MOC &   & C. Moutou & 2017 \\
+--- & MRI &   & E.R. Masa Martin & 2005---2015 \\
+--- & MRN &   & L. Marion & 2014 \\
+--- & MRZ &   & W. Markowitz & 1956---1969 \\
+--- & MSH &   & T. Meshkat & 2015 \\
+--- & MUA &   & A. Muller & 2011 \\
+--- & MUG &   & M. Mugrauer & 2004---2020 \\
+--- & MWT &   & D. Mawet & 2011---2015 \\
+--- & MZA &   & J. Maiz-Apellaniz & 2007---2020 \\\midrule
+--- & NAJ &   & T. Nakajima & 1989---1995 \\
+--- & NHR &   & R. Neuhauser & 2000---2011 \\
+--- & NLS &   & E.L. Nielsen & 2010---2016 \\
+--- & NOI &   & \emph{Navy Prototype/Precision Optical Interferometer} & 1997---2019 \\
+--- & NOR &   & J.R. North & 2007 \\
+--- & NOV &   & B. Novakovic & 2005---2008 \\
+--- & NSE &   & P. Nisenson & 1985 \\
+--- & NSN &   & J. Nanson & 2013---2018 \\
+--- & NVL &   & I. Novalbos & 2009---2016 \\
+--- & NYS &   & O. Nys & 1963---1983 \\
+NZO & NZO &   & \emph{New Zealand Observatory} & 1911 \\\midrule
+--- & OCC &   & \emph{Occult. Doubles Cat.} & 1971--- \\
+--- & ODE &   & M. Odenkirchen & 1995---1997 \\
+--- & OL  &   & C.P. Olivier & 1907---1957 \\
+--- & OLE &   & D. Olevic & 1970---2006 \\
+--- & ONL &   & \emph{Occult. News Letters} & \\
+--- & OPI &   & E. Opik & 1927---1932 \\
+--- & ORL &   & V.G. Orlov & 2007--- \\
+--- & OSO &   & M.R. Zapatero Osorio & 2004---2010 \\
+--- & OSV &   & V. Osvalds & 1957---1964 \\
+--- & OSW &   & T.D. Oswalt & 1988---2012 \\
+--- & OUD &   & R.D. Oudmaijer & 2010 \\\midrule
+--- & PAR &   & J.A. Parkhurst & 1932 \\
+--- & PAT &   & J. Patience & 1998---2008 \\
+--- & PBL &   & T. Pribulla & 2006---2018 \\
+--- & PBS &   & T. Preibisch & 1999---2014 \\
+Pck & PCK &   & E. Pickering & 1879---1912 \\
+--- & PEA &   & F.G. Pease & 1925---1927 \\
+Per & PER &   & J. Perrotin & 1883---1887 \\
+--- & PES &   & S. Peretti & 2019 \\
+--- & PET &   & D. Peter & 2012 \\
+--- & PIC &   & W.H. Pickering & 1900---1937 \\
+--- & PIN &   & D.J. Pinfield & 2006---2012 \\
+--- & PKO &   & \emph{Pulkova Observatory} & 1965--- \\
+--- & PLQ &   & E. Paloque & 1923---1939 \\
+--- & PLT &   & L. Plaut & 1934---1940 \\
+--- & PNT &   & L.R. de Pont & 2012--- \\
+Pol & POL &   & J.A. Pollock & 1887 \\
+--- & POP &   & G.M. Popovic & 1967---2007 \\
+--- & POT &   & D. Potter & 2002 \\
+--- & POU &   & M.A. Pourteau & 1933 \\
+--- & PRB &   & R.G. Probst & 2006 \\
+Prn & PRN &   & C.D. Perrine & 1899---1900 \\
+PrO & PRO &   & \emph{Perth Observatory} & 1913 \\
+--- & PRU &   & J.-L. Prieur & 2001---2017 \\
+Pry & PRY &   & J.J.M. Perry & 1880---1886 \\
+--- & PRZ &   & E. Przbyllok & 1908---1926 \\
+--- & PSF &   & \emph{Project Sixteen Forty} & \\
+--- & PTI &   & \emph{Palomar Testbed Interferometer} & 2001---2004 \\
+--- & PTR &   & M.G. Petr & 1998 \\
+Pwl & PWL &   & E.B. Powell & 1854---1892 \\
+--- & PWS &   & T. Pauwels and P. Lampens & 1993 \\
+Pz  & PZ  &   & G. Piazzi & 1814 \\\midrule
+R   & R   &   & H.C. Russell & 1871---1892 \\
+--- & RAG &   & D. Raghavan & 2004---2010 \\
+--- & RAO &   & \emph{Robo AO project} & 2014---2020 \\
+--- & RAS &   & D.A. Rastegaev & 2007---2014 \\
+--- & RBR &   & L.C. Roberts, Jr. & 2002---2018 \\
+--- & RBT &   & J.G. Robertson & 1991---1999 \\
+--- & RCH &   & A. Richichi & 1994---2020 \\
+--- & RDR &   & D.R. Rodriguez & 2011---2015 \\
+--- & RED &   & I.N. Reid & 1982---2008 \\
+REI & REI &   & K. Reinmuth & \\
+--- & REP &   & B. Reipurth & 1986---2015 \\
+--- & REU &   & D. Reuyl & 1931---1945 \\
+--- & RGS &   & T.J. Rodigas & 2014---2016 \\
+Rhd & RHD &   & Father Richaud & 1729 \\
+--- & RIZ &   & A.C. Rizzuto & 2013---2020 \\
+--- & RJJ &   & J. Rajagopal & 2010 \\
+Rmk & RMK &   & C. Rumker & 1825---1837 \\
+--- & RMU &   & J. Rameau & 2013 \\
+--- & ROE &   & E.D. Roe & 1908---1919 \\
+--- & ROL &   & T. Roell & 2012 \\
+--- & RSS &   & J.M. Rousseau & 1996 \\
+--- & RST &   & R.A. Rossiter & 1933---1964 \\
+--- & RUC &   & S.M. Rucinski & 2007---2010 \\\midrule
+S   & S   &   & J. South & 1826---1825 \\
+--- & SAN &   & R.F. Sanford & 1921---1940 \\
+--- & SAO &   & \emph{Special Astrophysical Observatory} & 2017 \\
+--- & SBK &   & G.M. Seabroke & 1881---1910 \\
+--- & SBN &   & E. Serabyn & 2006---2010 \\
+--- & SCA &   & M. Scardia & 1979---2020 \\
+--- & SCE &   & A. Schneider & 2011 \\
+--- & SCJ &   & H. Schjellerup & 1906 \\
+--- & SCO &   & M. Scholler & 1996---2020 \\
+--- & SCP &   & C. Schnupp & 2010 \\
+--- & SCZ &   & A.B. Schultz & 1998 \\
+--- & SDK &   & N. Sanduleak & 1990 \\
+--- & SDR &   & W.L. Sanders & 1966 \\
+--- & SDT &   & T.O.B. Schmidt & 2008---2013 \\
+Se  & SE  &   & A. Secchi & 1855---1865 \\
+$\lambda$ & SEE & *  & T.J.J. See & 1892---1900 \\
+--- & SEI &   & J. Scheiner & 1908 \\
+Shb & SHB &   & J.M. Schaeberle & 1893---1897 \\
+Sh  & SHJ &   & J. South and J. Herschel & 1821---1840 \\
+--- & SHN &   & G. Schneider & 1993---2004 \\
+--- & SHT &   & N.I. Shatsky & 1998---2014 \\
+--- & SHY &   & E.J. Shaya & 2011 \\
+--- & SIN &   & D. Sinachopoulos & 1988---2007 \\
+--- & SKF &   & B.A. Skiff & 2000--- \\
+Ski & SKI &   & A.N. Skinner & 1872---1911 \\
+--- & SLE &   & G. Soulie & 1966---2007 \\
+Slr & SLR &   & R.P. Sellors & 1892---1910 \\
+--- & SMA &   & W.M. Smart & 1931---1932 \\
+--- & SMK &   & P.C. Schmidtke & 1984---2011 \\
+--- & SML &   & L.C. Smith & 2015 \\
+--- & SMR &   & J. Schlimmer & 2007--- \\
+--- & SMW &   & G.V. Simonov & 1937---1951 \\
+Smyth & SMY &   & W.H. Smyth & 1833---1860 \\
+--- & SNA &   & H. Sana & 2006---2014 \\
+--- & SOZ &   & R.-D. Scholz & 2003---2017 \\
+Sp  & SP  &   & J.V. Schiaparelli & 1876---1909 \\
+--- & SPM &   & \emph{Springbook Middle School} & 2021 \\
+--- & SRT &   & R. Shuart & 2005 \\
+--- & SRW &   & R.W. Sinnott & 1999 \\
+--- & SS  &   & S. Sharpless & 1954 \\
+--- & ST  &   & C.L. Stearns & 1936---1939 \\
+--- & STA &   & G.A. Starikova & 1962---1985 \\
+--- & STE &   & C.B. Stephenson & 1965---1988 \\
+$\Sigma$ & STF & *  & F. Wilhelm von Struve & 1814---1843 \\
+$\Sigma$ I, $\Sigma$ II & STFA, STFB & *  & \emph{(Supplemental catalogs)} & 1814---1843 \\
+--- & STG &   & G. Struve & 1932---1963 \\
+--- & STH &   & H. Struve & 1901---1913 \\
+--- & STI &   & J. Stein & 1926 \\
+--- & STJ &   & J. Serot & 2009---2019 \\
+Stone & STN &   & O. Stone & 1867---1882 \\
+O$\Sigma$ & STT & *  & O. von Struve & 1832---1878 \\
+O$\Sigma\Sigma$ & STTA & *  & \emph{(Supplemental catalogs)} & 1832---1878 \\
+--- & STU &   & K. Sturdy & 1984---1994 \\
+--- & STZ &   & M.F. Sterzik & 1997---2005 \\
+--- & SUB &   & J.P. Subasavage & 2005---2017 \\
+--- & SUN &   & G. Sun & 2020 \\
+SWI & SWI &   & L. Swift & \\
+--- & SWR &   & J. Stock & 1972---1997 \\
+SyO & SYO &   & \emph{Sydney Observatory} & 1927---1986 \\
+--- & SZA &   & T.B. Souza & 2020 \\\midrule
+--- & TAM &   & V.S. Tamazian & 1999---2008 \\
+Tar & TAR &   & K.J. Tarrant & 1886---1893 \\
+--- & TDS, TDT &   & \emph{Tycho Double Star} & \\
+--- & THA &   & C. Thalmann & 2009 \\
+--- & THB &   & F. Thiebaut & 1995 \\
+--- & THP &   & B. Thompson & 2006---2014 \\
+--- & TKA &   & V.V. Tel'nyuk-Adamchuk & 1966 \\
+--- & TNG &   & W.J. Tango & 1979---2009 \\
+--- & TNN &   & A.M. Tanner & 2010 \\
+--- & TOB &   & T. Tobal  & 2000---2016 \\
+--- & TOI &   & \emph{TOI Numbers} from Stassun et al. & 2010 \\
+--- & TOK &   & A.A. Tokovinin & 1979--- \\
+--- & TOR &   & \emph{Torino Observatory} & 1978---1992 \\
+--- & TRA &   & V. Trajkovska & 1999 \\
+--- & TRN &   & N.H. Turner & 1999---2010 \\
+--- & TRR &   & G. Torres & 1985---2020 \\
+Tuc & TUC &   & R.H. Tucker & 1893 \\
+--- & TVB &   & T.V. Bryant & 2014---2019 \\\midrule
+--- & UC  &   & \emph{USNO CCD Astrographic Catalog (UCAC1, UCAC2, UCAC3, UCAC4) } & 2013---2015 \\
+Upt & UPT &   & W. Upton & 1877---1878 \\
+--- & UR  &   & \emph{USNO Robotic Astrometric Telescope (URAT) } & 2015---2016 \\
+--- & USD &   & \emph{US Numbers} from Esplin et al. & 2005---2018 \\\midrule
+--- & VAS &   & G. Vaskuti & 2011---2012 \\
+--- & VBS &   & G. Van Biesbroeck & 1904---1965 \\
+--- & VDK &   & J. Vanderdonck & 1909---1944 \\
+--- & VGT &   & N. Vogt & 2012---2015 \\
+--- & VIG &   & A. Vigan & 2012---2016 \\
+--- & VKI &   & E. Vilkki & 1984---1989 \\
+--- & VLM &   & W. Vollmann & 2006---2016 \\
+--- & VOU &   & J.G. Voute & 1908---1956 \\
+--- & VSP &   & \emph{VLT + SPHERE} & 2019--- \\
+VVO & VVO &   & \emph{Van Vleck Observatory} & 1962---1993 \\
+--- & VVV &   & \emph{Vista Variables in Via Lactea} & \\
+--- & VYS &   & A.N. Vyssotsky & 1927---1956 \\\midrule
+--- & WAK &   & R.L. Walker & 1966---1985 \\
+--- & WAL &   & A. Wallenquist & 1934---1958 \\
+--- & WCK &   & W.C. Wickes & 1973---1975 \\
+--- & WDK &   & K. Patience Ward-Duong & 2015 \\
+Webb & WEB &   & T.W. Webb & \\
+--- & WEI &   & M. Weisse & 1906 \\
+--- & WFC &   & \emph{Washington Fundamental Cat. - astrographs} & 1939---1999 \\
+--- & WG  &   & R.W. Wrigley & 1911 \\
+--- & WGA &   & G.A.H. Walker & 1994 \\
+--- & WGK &   & K. Wagner & 2016---2018 \\
+--- & WGT &   & G.P. Weigelt & 1978---2002 \\
+WHC & WHC &   & H.C. Wilson & 1890 \\
+--- & WHI &   & G.L. White & 1991---2019 \\
+--- & WIL &   & J.C. Wilson & 2001 \\
+--- & WIR &   & C.A. Wirtanen & 1941---1981 \\
+--- & WIS &   & \emph{Wide-field Infrared Survey Explorer} & 2010---2016 \\
+--- & WLF &   & Wolf & 1913 \\
+Wnc & WNC &   & F.A. Winnecke & 1855---1909 \\
+WNO & WNO &   & \emph{Washington Naval Observatory} & 1866---1896 \\
+--- & WOR &   & C.E. Worley & 1956---2001 \\
+Wrd & WRD &   & I.W. Ward & 1876---1878 \\
+--- & WRH &   & R.H. Wilson & 1933---1982 \\
+--- & WRS &   & K. Wierzchos & 2017---2019 \\
+WS  & WS  &   & J.M. Wilson & 1875---1877 \\
+--- & WSI &   & \emph{Washington Speckle Interferometer} & 1997--- \\
+--- & WTT &   & J.M. Wittrock & 2016---2017 \\
+--- & WZ  &   & C. Wirtz & 1912---1923 \\\midrule
+--- & XMI &   & X. Miret & 2007---2016 \\\midrule
+Yng & YNG &   & C.A. Young & 1881---1887 \\
+--- & YR  &   & \emph{Yale-Rochester Collaboration} & \\
+--- & YSC &   & \emph{Yale-Southern Connecticut  Collaboration} & \\
+--- & YSJ  &   & \emph{Yale-San Juan Collaboration} & \\\midrule
+--- & ZHN &   & Z.H. Zhang & 2010---2013 \\
+---  & ZUC  &   & B. Zuckerman & 1992---2001 \\
+---  & ZUL  &   & D.J. Zulevic & 1967---2000 \\\bottomrule
 \caption{Additional designations for double stars}
 \label{tab:StarCatalogues:DoubleStars:Designations}
 \end{longtable}

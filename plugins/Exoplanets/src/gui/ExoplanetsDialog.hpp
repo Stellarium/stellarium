@@ -59,14 +59,14 @@ public:
 	};
 
 	ExoplanetsDialog();
-	~ExoplanetsDialog();
+	~ExoplanetsDialog() Q_DECL_OVERRIDE;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	void createDialogContent();
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 	void refreshUpdateValues(void);
 
 private slots:
@@ -78,6 +78,7 @@ private slots:
 	void setDisplayAtStartupEnabled(int checkState);
 	void setDisplayShowExoplanetsButton(int checkState);
 	void setDisplayShowExoplanetsDesignations(int checkState);
+	void setDisplayShowExoplanetsNumbers(int checkState);
 	void updateStateReceiver(Exoplanets::UpdateState state);
         void updateCompleteReceiver();
 	void restoreDefaults(void);
@@ -119,7 +120,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const
+	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
 	{
 		int column = treeWidget()->sortColumn();
 

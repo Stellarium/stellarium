@@ -74,6 +74,21 @@ public:
 	StelTextureSP tex;
 };
 
+// Class to calculate Besselian elements of solar eclipse
+class SolarEclipseBessel
+{
+public:
+	SolarEclipseBessel(double &besX, double &besY,
+		double &besDec, double &besTf1, double &besTf2, double &besL1, double &besL2, double &besMu);
+};
+
+// Class to calculate solar eclipse data at given time
+class SolarEclipseData
+{
+public:
+	SolarEclipseData(double JD, double &dRatio, double &latDeg, double &lngDeg, double &altitude,
+		double &pathWidth, double &duration, double &magnitude);
+};
 
 class Planet : public StelObject
 {
@@ -81,14 +96,11 @@ public:
 	static const QString PLANET_TYPE;
 	friend class SolarSystem;
 
-	Q_ENUMS(PlanetType)
-	Q_ENUMS(PlanetOrbitColorStyle)
-	Q_ENUMS(ApparentMagnitudeAlgorithm)
 	//! numeric typecodes for the type descriptions in ssystem.ini
-	// GZ: Until 0.13 QStrings were used for types.
-	// GZ: Enums are slightly faster than string comparisons in time-critical comparisons.
-	// GZ: If other types are introduced, add here and the string in init().
-	// GZ TODO for 0.19: Preferably convert this into a bitfield and allow several bits set:
+	// Until 0.13 QStrings were used for types.
+	// Enums are slightly faster than string comparisons in time-critical comparisons.
+	// If other types are introduced, add here and the string in init().
+	// TBD for 0.19 or later: Preferably convert this into a bitfield and allow several bits set:
 	// Cubewanos, SDO, OCO, Sednoids are Asteroids, Pluto is a Plutino and DwarfPlanet, Ceres is Asteroid and DwarfPlanet etc.!
 	// Maybe even add queries like Planet::isAsteroid() { return (planetType & Planet::isAsteroid);}
 	enum PlanetType
@@ -110,6 +122,7 @@ public:
 		isInterstellar, // ssystem.ini: type="interstellar object"
 		isUNDEFINED     // ssystem.ini: type=<anything else>. THIS IS ONLY IN CASE OF ERROR!
 	};
+	Q_ENUM(PlanetType)
 
 	enum PlanetOrbitColorStyle
 	{
@@ -117,6 +130,7 @@ public:
 		ocsGroups,		// Separate colors for each group of Solar system bodies
 		ocsMajorPlanets		// Separate colors for each of major planets of Solar system
 	};
+	Q_ENUM(PlanetOrbitColorStyle)
 
 	enum ApparentMagnitudeAlgorithm
 	{
@@ -128,6 +142,16 @@ public:
 		UndefinedAlgorithm,
 		Generic                     // Visual magnitude based on phase angle and albedo. The formula source for this is totally unknown!
 	};
+	Q_ENUM(ApparentMagnitudeAlgorithm)
+
+	//! enums to indicate for which purpose we check positional quality.
+	//! Objects on KeplerOrbits may be too far from their epoch to provide useful data.
+	enum PositionQuality
+	{
+		Position,                   // Good enough for positions.
+		OrbitPlotting		    // Good enough for orbitplotting?
+	};
+	Q_ENUM(PositionQuality)
 
 public:
 	Planet(const QString& englishName,
@@ -219,19 +243,23 @@ public:
 	QString getCommonEnglishName(void) const {return englishName;}
 	QString getCommonNameI18n(void) const {return nameI18;}
 	//! Get angular semidiameter, degrees. If planet display is artificially enlarged (e.g. Moon upscale), value will also be increased.
-	virtual double getAngularSize(const StelCore* core) const Q_DECL_OVERRIDE;
+	virtual double getAngularRadius(const StelCore* core) const Q_DECL_OVERRIDE;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
 	virtual bool hasHalo(void) {return halo;}
 	//! Returns whether planet positions are valid and useful for the current simulation time.
 	//! E.g. outdated orbital elements for Kepler orbits (beyond their orbit_good .ini file entries)
 	//! may lead to invalid positions which should better not be used.
+	//! @param purpose signal whether result should be good enough for observation of just for plotting orbit data.
+	//! For observation, date should be within the orbit_good value, or within 1 year from epoch of the orbital elements.
 	//! @note for major planets and moons this method will always return true
-	bool hasValidPositionalData(const double JDE);
-	//! Returns JDE dates of presumably valid data for positional calculation.
+	bool hasValidPositionalData(const double JDE, const PositionQuality purpose) const;
+	//! Returns JDE dates of presumably valid data for positional calculation or acceptable range for graphics.
 	//! For the major planets and moons, this is always (std::numeric_limits<double>::min(), std::numeric_limits<double>::max())
-	//! For planets with Keplerian orbits, this is (epoch-orbit_good, epoch+orbit_good)
-	Vec2d getValidPositionalDataRange();
-	float getAxisRotation(void) { return axisRotation;} //! return axisRotation last computed in computeTransMatrix().
+	//! For planets with Keplerian orbits, this is [epoch-orbit_good, epoch+orbit_good] or,
+	//! if purpose=Position, [epoch-min(orbit_good, 365), epoch+min(orbit_good, 365)].
+	//! This should help to detect and avoid using outdated orbital elements.
+	Vec2d getValidPositionalDataRange(const PositionQuality purpose) const;
+	float getAxisRotation(void) { return axisRotation;} //! return axisRotation last computed in computeTransMatrix(). [degrees]
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods of SolarSystem object
@@ -348,12 +376,23 @@ public:
 	//! This requires both flavours of JD in cases involving Earth.
 	void computeTransMatrix(double JD, double JDE);
 
+	//! Retrieve planetocentric rectangular coordinates of a location on the ellipsoid surface, or with altitude altMetres above the ellipsoid surface.
+	//! Meeus, Astr. Alg. 2nd ed, Ch.11.
+	//! @param longDeg longitude of location, degrees. (currently unused. Set to 0.)
+	//! @param latDeg planetographic latitude, degrees.
+	//! @param altMetres altitude above ellipsoid surface (metres)
+	//! @return [rhoCosPhiPrime*a, rhoSinPhiPrime*a, phiPrime, rho*a]
+	//! where a=equatorial radius [AU]
+	//! phiPrime=planetocentric latitude
+	//! rho*a=planetocentric distance of point [AU]
+	Vec4d getRectangularCoordinates(const double longDeg, const double latDeg, const double altMetres=0.) const;
+
 	//! Get the phase angle (radians) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getPhaseAngle(const Vec3d& obsPos) const;
 	//! Get the elongation angle (radians) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getElongation(const Vec3d& obsPos) const;
 	//! Get the angular radius (degrees) of the planet spheroid (i.e. without the rings)
-	double getSpheroidAngularSize(const StelCore* core) const;
+	double getSpheroidAngularRadius(const StelCore* core) const;
 	//! Get the planet phase (illuminated fraction of the planet disk, [0=dark..1=full]) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	float getPhase(const Vec3d& obsPos) const;
 	//! Get the position angle of the illuminated limb of a planet
@@ -364,8 +403,15 @@ public:
 	static float getPAsun(const Vec3d &sunPos, const Vec3d &objPos);
 
 	//! Get planetographic coordinates of subsolar and sub-observer points.
+	//! These are defined so that over time the longitude of the central meridian increases.
+	//! This means longitudes are counted positive towards the west for direct rotators and positive
+	//! towards the East for negative rotators (e.g. Venus). Other cartographic conventions may have
+	//! to be followed elsewhere in the program, though. (e.g. planetary feature nomenclature!)
 	//! Only meaningful for earth-bound observers.
 	//! Source: Explanatory Supplement 2013, 10.4.1
+	//! @param jupiterGraphical Jupiter requires special treatment because its LII coordinate system does not
+	//!                         stay in sync with the texture. (GRS is moving). Set this to true to return the
+	//!                         incorrect, graphics-only longitude.
 	//! first[0]  = 10.26 phi_e     [rad] Planetocentric latitude of sub-earth point
 	//! first[1]  = 10.26 phi'_e	[rad] Planetographic latitude of sub-earth point
 	//! first[2]  = 10.26 lambda'_e	[rad] Planetographic longitude of sub-earth point (0..2pi)
@@ -373,10 +419,10 @@ public:
 	//! second[0] = 10.26 phi_s	[rad] Planetocentric latitude of sub-solar point
 	//! second[1] = 10.26 phi'_s	[rad] Planetographic latitude of sub-solar point
 	//! second[2] = 10.26 lambda'_s	[rad] Planetographic longitude of sub-solar point (0..2pi)
-	//! Note: For the Moon, it is more common to give Libration angles, where L=-lambda'_e, B=phi'_e.
-	//! Note: For Jupiter, this returns central meridian in L_II.
-	//! Note: For Saturn, this returns central meridian in L_III (rotation of magnetic field).
-	QPair<Vec4d, Vec3d> getSubSolarObserverPoints(const StelCore *core) const;
+	//! @note: For the Moon, it is more common to give Libration angles, where L=-lambda'_e, B=phi'_e.
+	//! @note: For Jupiter, this returns central meridian in L_II.
+	//! @note: For Saturn, this returns central meridian in L_III (rotation of magnetic field).
+	QPair<Vec4d, Vec3d> getSubSolarObserverPoints(const StelCore *core, bool jupiterGraphical=false) const;
 
 	//! returns if planet has retrograde rotation
 	bool isRotatingRetrograde() const { return re.W1<0.; }
@@ -548,6 +594,9 @@ public:
 	//! @note This is based on Meeus, Astronomical Algorithms (2nd ed.), but deviates in details.
 	//! @note Limitation for efficiency: If this is a planet moon from another planet, we compute RTS for the parent planet instead!
 	virtual Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const Q_DECL_OVERRIDE;
+
+	void resetTextures();
+	void replaceTexture(const QString& texName);
 	
 protected:
 	// These components for getInfoString() can be overridden in subclasses
@@ -597,8 +646,8 @@ protected:
 
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
 
-	// Used in drawSphere() to compute shadows, and inside a function to derive eclipse sizes.
-	// For reasons currently unknown we must handle solar eclipses as special case.
+	//! Used in drawSphere() to compute shadows, and inside a function to derive eclipse sizes.
+	//! @param solarEclipseCase For reasons currently unknown we must handle solar eclipses as special case.
 	void computeModelMatrix(Mat4d &result, bool solarEclipseCase) const;
 
 	//! Update the orbit position values.
@@ -606,15 +655,17 @@ protected:
 
 	Vec3f getCurrentOrbitColor() const;
 	
-	// Return the information string "ready to print" :)
+	//! Return the information string "ready to print"
 	QString getPlanetLabel() const;
 
-	// Draw the 3d model. Call the proper functions if there are rings etc..
-	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing=false);
+	//! Draw the 3d model. Call the proper functions if there are rings etc..
+	//! @param screenRd radius in screen pixels
+	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenRd, bool drawOnlyRing=false);
 
-	// Draws the OBJ model, assuming it is available
-	// @return false if the model can currently not be drawn (not loaded)
-	bool drawObjModel(StelPainter* painter, float screenSz);
+	//! Draws the OBJ model, assuming it is available
+	//! @param screenRd radius in screen pixels.
+	//! @return false if the model can currently not be drawn (not loaded)
+	bool drawObjModel(StelPainter* painter, float screenRd);
 
 	bool drawObjShadowMap(StelPainter* painter, QMatrix4x4 &shadowMatrix);
 
@@ -622,13 +673,13 @@ protected:
 	//! Returns true when the OBJ is ready to draw
 	bool ensureObjLoaded();
 
-	// Draw the 3D sphere
-	void drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing=false);
+	//! Draw the 3D sphere
+	void drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing=false);
 
-	// Draw the Hips survey.
+	//! Draw the Hips survey.
 	void drawSurvey(StelCore* core, StelPainter* painter);
 
-	// Draw the circle and name of the Planet
+	//! Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, const QFont& planetNameFont);
     
 	PlanetOBJModel* loadObjModel() const;
@@ -721,6 +772,9 @@ protected:
 private:
 	class StelPropertyMgr* propMgr;
 	QString iauMoonNumber;
+	// File path for texture and normal map; both variables used for saving original names of files
+	QString texMapFileOrig;
+	QString normalMapFileOrig;
 
 	const QString getContextString() const;
 	QPair<double, double> getLunarEclipseMagnitudes() const;
@@ -746,6 +800,9 @@ private:
 		int skyBrightness;
 		int orenNayarParameters;
 		int outgasParameters;
+
+		// For Mars poles
+		int poleLat; // latitudes of edges of northern (x) and southern (y) polar cap [texture y, moving from 0 (S) to 1 (N)]. Only used for Mars, use [1, 0] for other objects.
 
 		// Moon-specific variables
 		int earthShadow;

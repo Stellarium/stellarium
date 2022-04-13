@@ -36,15 +36,15 @@ class ObsListDialog : public StelDialog
 
 public:
 	ObsListDialog ( QObject* parent );
-	virtual ~ObsListDialog();
+	virtual ~ObsListDialog() Q_DECL_OVERRIDE;
 
 	//! Notify that the application style changed
-	void styleChanged();
+	virtual void styleChanged() Q_DECL_OVERRIDE;
 
 protected:
 	Ui_obsListDialogForm *ui;
 	//! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 
 private:
 	QStandardItemModel * obsListListModel;
@@ -90,7 +90,7 @@ private:
 
 
 public slots:
-	void retranslate();
+	virtual void retranslate() Q_DECL_OVERRIDE;
 
 private slots:
 	void obsListHighLightAllButtonPressed();

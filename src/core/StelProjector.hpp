@@ -50,8 +50,8 @@ public:
 	class ModelViewTranform
 	{
 	public:
-		ModelViewTranform() {;}
-		virtual ~ModelViewTranform() {;}
+		ModelViewTranform() {}
+		virtual ~ModelViewTranform() {}
 		virtual void forward(Vec3d&) const =0;
 		virtual void backward(Vec3d&) const =0;
 		virtual void forward(Vec3f&) const =0;
@@ -67,13 +67,13 @@ public:
 	{
 	public:
         Mat4dTransform(const Mat4d& m);
-        void forward(Vec3d& v) const;
-        void backward(Vec3d& v) const;
-        void forward(Vec3f& v) const;
-        void backward(Vec3f& v) const;
-        void combine(const Mat4d& m);
-        Mat4d getApproximateLinearTransfo() const;
-        ModelViewTranformP clone() const;
+	void forward(Vec3d& v) const Q_DECL_OVERRIDE;
+	void backward(Vec3d& v) const Q_DECL_OVERRIDE;
+	void forward(Vec3f& v) const Q_DECL_OVERRIDE;
+	void backward(Vec3f& v) const Q_DECL_OVERRIDE;
+	void combine(const Mat4d& m) Q_DECL_OVERRIDE;
+	Mat4d getApproximateLinearTransfo() const Q_DECL_OVERRIDE;
+	ModelViewTranformP clone() const Q_DECL_OVERRIDE;
 
 	private:
 		//! transfo matrix and invert
@@ -107,7 +107,7 @@ public:
 			, flipHorz(false)
 			, flipVert(false)
 			, devicePixelsPerPixel(1)
-			, widthStretch(1) {;}
+			, widthStretch(1) {}
 
 		Vector4<int> viewportXywh;       //! posX, posY, width, height
 		float fov;                       //! FOV in degrees
@@ -229,6 +229,12 @@ public:
 	//! @return true if the projected coordinate is valid.
 	bool project(const Vec3f& v, Vec3f& win) const;
 
+	//! Project the vector v from the current frame into the viewport.
+	//! @param v the vector in the current frame.
+	//! @param win the projected vector in the viewport 2D frame.
+	//! @return true if the projected coordinate is valid.
+	bool project(const Vec3d& v, Vec3f& win) const;
+
 	virtual void project(int n, const Vec3d* in, Vec3f* out);
 
 	virtual void project(int n, const Vec3f* in, Vec3f* out);
@@ -299,7 +305,7 @@ protected:
 		  gravityLabels(true),
 		  defaultAngleForGravityText(0.f),
 		  devicePixelsPerPixel(1.),
-		  widthStretch(1.0) {;}
+		  widthStretch(1.0) {}
 
 	//! Return whether the projection presents discontinuities. Used for optimization.
 	virtual bool hasDiscontinuity() const =0;

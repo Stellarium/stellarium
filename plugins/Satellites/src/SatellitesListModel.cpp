@@ -127,13 +127,13 @@ bool SatellitesListModel::setData(const QModelIndex& index,
 
 int SatellitesListModel::rowCount(const QModelIndex& parent) const
 {
-	Q_UNUSED(parent);
+	Q_UNUSED(parent)
 	return satelliteList->count();
 }
 
 int SatellitesListModel::columnCount(const QModelIndex& parent) const
 {
-	Q_UNUSED(parent);
+	Q_UNUSED(parent)
 	return 1;
 	//TODO: For now...
 }

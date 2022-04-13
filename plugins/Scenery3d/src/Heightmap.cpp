@@ -68,10 +68,14 @@ void Heightmap::setMeshData(const IdxList &indexList, const PosList &posList, co
 	QElapsedTimer timer;
 	/*timer.start();
 	this->initQuadtree();
-	qDebug()<<"initQuadtree\t"<<qSetFieldWidth(12)<<right<<timer.nsecsElapsed();*/
+	qDebug()<<"initQuadtree\t"<<qSetFieldWidth(12)<< Qt::right <<timer.nsecsElapsed();*/
 	timer.start();
 	this->initGrid();
+#if QT_VERSION>=QT_VERSION_CHECK(5,14,0)
+	qDebug()<<"initGrid\t\t"<<qSetFieldWidth(12)<< Qt::right <<timer.nsecsElapsed();
+#else
 	qDebug()<<"initGrid\t\t"<<qSetFieldWidth(12)<<right<<timer.nsecsElapsed();
+#endif
 }
 
 /**
@@ -100,7 +104,7 @@ float Heightmap::getHeight(const float x, const float y) const
 		//qint64 gridTime = timer.nsecsElapsed();
 		//qDebug()<<"qt"<<qtTime<<"grid"<<gridTime;
 		//Q_ASSERT(height == h);
-		if (h == NO_HEIGHT)
+		if (qFuzzyCompare(h, NO_HEIGHT))
 		{
 			return nullHeight;
 		}

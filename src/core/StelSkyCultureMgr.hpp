@@ -33,8 +33,6 @@
 class StelSkyCulture
 {
 	Q_GADGET
-	Q_ENUMS(BOUNDARIES)
-	Q_ENUMS(CLASSIFICATION)
 public:
 	//! Possible values for boundary lines between constellations.
 	//! Most traditional skies do not have boundaries.
@@ -46,6 +44,8 @@ public:
 		IAU,
 		OWN
 	};
+	Q_ENUM(BOUNDARIES)
+
 	//! Since V0.19. A rough classification scheme that may allow filtering and at least some rough idea of quality control.
 	//! In future versions, this scheme could be refined or changed, and external reviewers
 	//! can probably provide more quality control. For now, we can at least highlight and discern
@@ -84,6 +84,7 @@ public:
 				//! sometimes will appear not to fit together well. This may be intended, to explain and highlight just those differences!
 				//! The description text must clearly explain and identify both sources and how these differences should be interpreted.
 	};
+	Q_ENUM(CLASSIFICATION)
 
 	//! English name
 	QString englishName;

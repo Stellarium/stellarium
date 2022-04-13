@@ -59,7 +59,7 @@ TuiNodeResponse TuiNodeEnum::handleEditingKey(int key)
 	}
 	else if (key==Qt::Key_Return)
 	{
-		emit(setValue(stringList.at(currentIdx)));
+		emit setValue(stringList.at(currentIdx));
 		response.accepted = true;
 		response.newNode = this;
 	}

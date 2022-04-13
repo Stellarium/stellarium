@@ -52,7 +52,6 @@ public slots:
 	//! get a formatted complete string for a date. Years are AUC.
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-public:
 	//! find RD number for date in the Roman calendar. Years are like in the Julian calendar.
 	static int fixedFromRoman(QVector<int> julian);
 	//! find date in the Roman calendar from RD number
@@ -68,9 +67,10 @@ public:
 	//! Convert between AUC and Julian year numbers
 	static int aucYearFromJulian(int julianYear);
 
-	//! return a Roman number (1...19)
+	//! return a Roman number (within int range). Uses multiplicative terms for num>5000.
 	static QString romanNumber(const int num);
 
+public:
 	constexpr static const int yearRomeFounded=-753;
 
 protected:

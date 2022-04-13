@@ -40,13 +40,13 @@ class ArchaeoLinesDialog : public StelDialog
 
 public:
 	ArchaeoLinesDialog();
-	~ArchaeoLinesDialog();
+	~ArchaeoLinesDialog() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 
 protected:
-	void createDialogContent();
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 private:
 	Ui_archaeoLinesDialog* ui;

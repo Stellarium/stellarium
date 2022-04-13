@@ -232,7 +232,9 @@ bool SkyMarker::draw(StelCore* core, StelPainter& sPainter)
 	}
 
 	Vec3d xyPos;
-	sPainter.getProjector()->project(point, xyPos);
+	// Compute 2D pos and return if outside screen
+	if (!sPainter.getProjector()->project(point, xyPos))
+		return false;
 
 	markerTexture->bind();
 
@@ -332,7 +334,7 @@ void MarkerMgr::init()
 void MarkerMgr::draw(StelCore* core)
 {
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	for (auto* m : allMarkers)
+	for (auto* m : qAsConst(allMarkers))
 	{
 		m->draw(core, sPainter);
 	}
@@ -341,7 +343,7 @@ void MarkerMgr::draw(StelCore* core)
 void MarkerMgr::markerDeleteTimeout()
 {
 	QObject* obj = QObject::sender();
-	for (auto* m : allMarkers)
+	for (auto* m : qAsConst(allMarkers))
 	{
 		if (m->timer == obj)
 		{
@@ -354,7 +356,7 @@ void MarkerMgr::markerDeleteTimeout()
 void MarkerMgr::markerVisibleTimeout()
 {
 	QObject* obj = QObject::sender();
-	for (auto* m : allMarkers)
+	for (auto* m : qAsConst(allMarkers))
 	{
 		if (m->timer == obj)
 		{
@@ -499,7 +501,7 @@ void MarkerMgr::deleteMarker(int id)
 	
 void MarkerMgr::update(double deltaTime)
 {
-	for (auto* m : allMarkers)
+	for (auto* m : qAsConst(allMarkers))
 		m->update(deltaTime);
 }
 	
@@ -513,7 +515,7 @@ double MarkerMgr::getCallOrder(StelModuleActionName actionName) const
 int MarkerMgr::deleteAllMarkers(void)
 {
 	int count=0;
-	for (auto* m : allMarkers)
+	for (auto* m : qAsConst(allMarkers))
 	{
 		delete m;
 		count++;

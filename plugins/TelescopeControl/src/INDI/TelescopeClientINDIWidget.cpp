@@ -72,7 +72,7 @@ void TelescopeClientINDIWidget::onConnectionButtonClicked()
 
 	QString host = ui->lineEditHostName->text();
 	QString port = ui->spinBoxTCPPort->text();
-	mConnection.setServer(host.toStdString().c_str(), port.toInt());
+	mConnection.setServer(host.toStdString().c_str(), port.toUInt());
 	mConnection.connectServer();
 }
 

@@ -10,6 +10,7 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/stellarium/stellarium/badge)](https://www.codefactor.io/repository/github/stellarium/stellarium)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/Stellarium/stellarium.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Stellarium/stellarium/alerts/)
 [![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/Stellarium/stellarium.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Stellarium/stellarium/context:cpp)
+[![DOI:10.1558/jsa.17822](http://img.shields.io/badge/DOI-10.1558/jsa.17822-blue.svg)](https://doi.org/10.1558/jsa.17822)
 
 Stellarium is a free open source planetarium for your computer. It shows a realistic sky
 in 3D, just like what you see with the naked eye, binoculars or a telescope.
@@ -18,11 +19,11 @@ If you are new to Stellarium, go to [www.stellarium.org](https://www.stellarium.
 
 ## Installation Instructions & Quick Start
 
-Please refer to the [User Guide, Getting Started section](https://github.com/Stellarium/stellarium/releases/download/v0.21.1/stellarium_user_guide-0.21.1-1.pdf).
+Please refer to the [User Guide, Getting Started section](https://github.com/Stellarium/stellarium/releases/download/v0.22.0/stellarium_user_guide-0.22.0-1.pdf).
 
 ## Get & build the code
 
-See instructions to [building Stellarium from source code](https://github.com/Stellarium/stellarium/blob/master/BUILDING.md).
+See instructions to [building Stellarium from source code](BUILDING.md).
 
 ## Full References and Credits
 
@@ -30,7 +31,7 @@ See the [full credit file](CREDITS.md).
 
 ## Contributing to Stellarium
 
-See the [contributing guideline](https://github.com/Stellarium/stellarium/blob/master/CONTRIBUTING.md).
+See the [contributing guideline](CONTRIBUTING.md).
 
 ## Contributors
 
@@ -38,4 +39,4 @@ This project exists thanks to all the people who contribute! List of contributor
 
 ## Our backers & sponsors
 
-Thank you to all [our backers and sponsors](https://github.com/Stellarium/stellarium/blob/master/BACKERS.md)!  Become a [backer](https://opencollective.com/stellarium#backer) or [sponsor](https://opencollective.com/stellarium#sponsor).
+Thank you to all [our backers and sponsors](BACKERS.md)!  Become a [backer](https://opencollective.com/stellarium#backer) or [sponsor](https://opencollective.com/stellarium#sponsor).
