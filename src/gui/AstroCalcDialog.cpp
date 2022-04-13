@@ -4221,10 +4221,13 @@ void AstroCalcDialog::savePhenomenaAngularSeparation()
 void AstroCalcDialog::drawAltVsTimeDiagram()
 {
 	qDebug() << "AstrocalcDialog::drawAltVsTimeDiagram()...";
-	QMutexLocker locker(&altVsTimeChartMutex); // Avoid calling parallel from various sides. (called by signals/slots)
+	if (!altVsTimeChartMutex.tryLock()) return; // Avoid calling parallel from various sides. (called by signals/slots)
 	// Avoid crash!
 	if (core->getCurrentPlanet()->getEnglishName().contains("->")) // We are on the spaceship!
+	{
+		altVsTimeChartMutex.unlock();
 		return;
+	}
 
 	// special case - plot the graph when tab is visible
 	//..
@@ -4233,10 +4236,15 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 	if (!dialog->isVisible() && plotAltVsTime)
 	{
 		graphPlotNeedsRefresh = true;
+		altVsTimeChartMutex.unlock();
 		return;
 	}
 
-	if (!plotAltVsTime) return;
+	if (!plotAltVsTime)
+	{
+		altVsTimeChartMutex.unlock();
+		return;
+	}
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 
@@ -4251,13 +4259,8 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		StelObjectP selectedObject = selectedObjects[0];
 		ui->altVsTimeTitle->setText(selectedObject->getNameI18n());
 
-		//if (altVsTimeChart)
-		//{
-		//	qDebug() << "deleting old chart";
-		//	delete altVsTimeChart;
-		//}
 		qDebug() << "creating chart";
-		altVsTimeChart = new AstroCalcAltVsTimeChart();
+		altVsTimeChart = new AstroCalcAltVsTimeChart({AstroCalcAltVsTimeChart::AltVsTime, AstroCalcAltVsTimeChart::CurrentTime, AstroCalcAltVsTimeChart::TransitTime, AstroCalcAltVsTimeChart::SunElevation, AstroCalcAltVsTimeChart::CivilTwilight, AstroCalcAltVsTimeChart::NauticalTwilight, AstroCalcAltVsTimeChart::AstroTwilight, AstroCalcAltVsTimeChart::Moon});
 		altVsTimeChart->setTitle(selectedObject->getNameI18n());
 		qDebug() << "Chart has title:" << altVsTimeChart->title();
 		const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
@@ -4466,9 +4469,11 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			altVsTimeChart->clear(AstroCalcAltVsTimeChart::NauticalTwilight);
 			altVsTimeChart->clear(AstroCalcAltVsTimeChart::AstroTwilight);
 			altVsTimeChart->clear(AstroCalcAltVsTimeChart::Moon);
+			altVsTimeChart->setTitle(q_("No object selected"));
 		}
 	}
 	qDebug() << "AstrocalcDialog::drawAltVsTimeDiagram()...done";
+	altVsTimeChartMutex.unlock();
 }
 
 // Added vertical line indicating "now"
