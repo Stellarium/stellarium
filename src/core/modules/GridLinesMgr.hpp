@@ -45,6 +45,9 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(bool equatorGridDisplayed		READ getFlagEquatorGrid		WRITE setFlagEquatorGrid		NOTIFY equatorGridDisplayedChanged)
 	Q_PROPERTY(Vec3f equatorGridColor		READ getColorEquatorGrid	WRITE setColorEquatorGrid		NOTIFY equatorGridColorChanged)
 
+	Q_PROPERTY(bool fixedEquatorGridDisplayed	READ getFlagFixedEquatorGrid	WRITE setFlagFixedEquatorGrid		NOTIFY fixedEquatorGridDisplayedChanged)
+	Q_PROPERTY(Vec3f fixedEquatorGridColor		READ getColorFixedEquatorGrid	WRITE setColorFixedEquatorGrid		NOTIFY fixedEquatorGridColorChanged)
+
 	Q_PROPERTY(bool equatorJ2000GridDisplayed	READ getFlagEquatorJ2000Grid	WRITE setFlagEquatorJ2000Grid		NOTIFY equatorJ2000GridDisplayedChanged)
 	Q_PROPERTY(Vec3f equatorJ2000GridColor		READ getColorEquatorJ2000Grid	WRITE setColorEquatorJ2000Grid		NOTIFY equatorJ2000GridColorChanged)
 
@@ -69,6 +72,11 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(bool equatorJ2000PartsDisplayed	READ getFlagEquatorJ2000Parts	WRITE setFlagEquatorJ2000Parts		NOTIFY equatorJ2000PartsDisplayedChanged)
 	Q_PROPERTY(bool equatorJ2000PartsLabeled	READ getFlagEquatorJ2000Labeled	WRITE setFlagEquatorJ2000Labeled	NOTIFY equatorJ2000PartsLabeledChanged)
 	Q_PROPERTY(Vec3f equatorJ2000LineColor		READ getColorEquatorJ2000Line	WRITE setColorEquatorJ2000Line		NOTIFY equatorJ2000LineColorChanged)
+
+	Q_PROPERTY(bool fixedEquatorLineDisplayed	READ getFlagFixedEquatorLine	WRITE setFlagFixedEquatorLine		NOTIFY fixedEquatorLineDisplayedChanged)
+	Q_PROPERTY(bool fixedEquatorPartsDisplayed	READ getFlagFixedEquatorParts	WRITE setFlagFixedEquatorParts		NOTIFY fixedEquatorPartsDisplayedChanged)
+	Q_PROPERTY(bool fixedEquatorPartsLabeled	READ getFlagFixedEquatorLabeled	WRITE setFlagFixedEquatorLabeled	NOTIFY fixedEquatorPartsLabeledChanged)
+	Q_PROPERTY(Vec3f fixedEquatorLineColor		READ getColorFixedEquatorLine	WRITE setColorFixedEquatorLine		NOTIFY fixedEquatorLineColorChanged)
 
 	Q_PROPERTY(bool eclipticLineDisplayed		READ getFlagEclipticLine	WRITE setFlagEclipticLine		NOTIFY eclipticLineDisplayedChanged)
 	Q_PROPERTY(bool eclipticPartsDisplayed		READ getFlagEclipticParts	WRITE setFlagEclipticParts		NOTIFY eclipticPartsDisplayedChanged)
@@ -258,6 +266,20 @@ public slots:
 	//! @endcode
 	void setColorEquatorGrid(const Vec3f& newColor);
 
+	//! Setter for displaying the Fixed Equatorial Grid (Hour angle/declination).
+	void setFlagFixedEquatorGrid(const bool displayed);
+	//! Accessor for displaying Fixed Equatorial Grid.
+	bool getFlagFixedEquatorGrid() const;
+	//! Get the current color of the Fixed Equatorial Grid.
+	Vec3f getColorFixedEquatorGrid() const;
+	//! Set the color of the FixedEquatorial Grid.
+	//! @param newColor The color of fixed equatorial grid
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorFixedEquatorGrid(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorFixedEquatorGrid(const Vec3f& newColor);
+
 	//! Setter for displaying Equatorial J2000 Grid.
 	void setFlagEquatorJ2000Grid(const bool displayed);
 	//! Accessor for displaying Equatorial J2000 Grid.
@@ -371,6 +393,28 @@ public slots:
 	//! GridLinesMgr.setColorEquatorJ2000Line(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setColorEquatorJ2000Line(const Vec3f& newColor);
+
+	//! Setter for displaying Fixed Equator Line.
+	void setFlagFixedEquatorLine(const bool displayed);
+	//! Accessor for displaying Fixed Equator Line.
+	bool getFlagFixedEquatorLine() const;
+	//! Setter for displaying Fixed Equator line partitions (hour angles).
+	void setFlagFixedEquatorParts(const bool displayed);
+	//! Accessor for displaying Fixed Equator (hour angles) line partitions.
+	bool getFlagFixedEquatorParts() const;
+	//! Setter for displaying Fixed Equator line partition labels.
+	void setFlagFixedEquatorLabeled(const bool displayed);
+	//! Accessor for displaying Fixed Equator line partition labels.
+	bool getFlagFixedEquatorLabeled() const;
+	//! Get the current color of the Fixed Equator Line.
+	Vec3f getColorFixedEquatorLine() const;
+	//! Set the color of the Fixed Equator Line (hour angles).
+	//! @param newColor The color of fixed equator line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorFixedEquatorLine(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorFixedEquatorLine(const Vec3f& newColor);
 
 	//! Setter for displaying Ecliptic of J2000 Line.
 	void setFlagEclipticJ2000Line(const bool displayed);
@@ -913,6 +957,8 @@ signals:
 	void azimuthalGridColorChanged(const Vec3f & newColor);
 	void equatorGridDisplayedChanged(const bool displayed);
 	void equatorGridColorChanged(const Vec3f & newColor);
+	void fixedEquatorGridDisplayedChanged(const bool displayed);
+	void fixedEquatorGridColorChanged(const Vec3f & newColor);
 	void equatorJ2000GridDisplayedChanged(const bool displayed);
 	void equatorJ2000GridColorChanged(const Vec3f & newColor);
 	void eclipticGridDisplayedChanged(const bool displayed);
@@ -931,6 +977,10 @@ signals:
 	void equatorJ2000PartsDisplayedChanged(const bool displayed);
 	void equatorJ2000PartsLabeledChanged(const bool displayed);
 	void equatorJ2000LineColorChanged(const Vec3f & newColor);
+	void fixedEquatorLineDisplayedChanged(const bool displayed);
+	void fixedEquatorPartsDisplayedChanged(const bool displayed);
+	void fixedEquatorPartsLabeledChanged(const bool displayed);
+	void fixedEquatorLineColorChanged(const Vec3f & newColor);
 	void eclipticLineDisplayedChanged(const bool displayed);
 	void eclipticPartsDisplayedChanged(const bool displayed);
 	void eclipticPartsLabeledChanged(const bool displayed);
@@ -1031,27 +1081,29 @@ private slots:
 	void setFontSizeFromApp(int size);
 
 private:
-	QSharedPointer<Planet> earth;	// shortcut Earth pointer. Must be reconnected whenever solar system has been reloaded.
-	bool gridlinesDisplayed;			// master switch to switch off all grids/lines. (useful for oculars plugin)
-	SkyGrid * equGrid;				// Equatorial grid
+	QSharedPointer<Planet> earth;		// shortcut Earth pointer. Must be reconnected whenever solar system has been reloaded.
+	bool gridlinesDisplayed;		// master switch to switch off all grids/lines. (useful for oculars plugin)
+	SkyGrid * equGrid;			// Equatorial grid
 	SkyGrid * equJ2000Grid;			// Equatorial J2000 grid
+	SkyGrid * fixedEquatorialGrid;		// Fixed Equatorial grid (hour angle/declination)
 	SkyGrid * galacticGrid;			// Galactic grid
 	SkyGrid * supergalacticGrid;		// Supergalactic grid
-	SkyGrid * eclGrid;				// Ecliptic of Date grid
+	SkyGrid * eclGrid;			// Ecliptic of Date grid
 	SkyGrid * eclJ2000Grid;			// Ecliptic J2000 grid
-	SkyGrid * aziGrid;				// Azimuthal grid
+	SkyGrid * aziGrid;			// Azimuthal grid
 	SkyLine * equatorLine;			// Celestial Equator line
 	SkyLine * equatorJ2000Line;		// Celestial Equator line of J2000
+	SkyLine * fixedEquatorLine;		// Fixed Celestial Equator line (hour angles)
 	SkyLine * eclipticLine;			// Ecliptic line
 	SkyLine * eclipticJ2000Line;		// Ecliptic line of J2000
-	SkyLine * invariablePlaneLine;	// Invariable Plane of the Solar System (WGCCRE2015 report)
+	SkyLine * invariablePlaneLine;		// Invariable Plane of the Solar System (WGCCRE2015 report)
 	SkyLine * solarEquatorLine;		// Projected Solar equator (WGCCRE2015 report)
 	SkyLine * precessionCircleN;		// Northern precession circle
 	SkyLine * precessionCircleS;		// Southern precession circle
 	SkyLine * meridianLine;			// Meridian line
-	SkyLine * longitudeLine;			// Opposition/conjunction longitude line
+	SkyLine * longitudeLine;		// Opposition/conjunction longitude line
 	SkyLine * horizonLine;			// Horizon line
-	SkyLine * galacticEquatorLine;	// line depicting the Galactic equator as defined by the IAU definition of Galactic coordinates (System II, 1958)
+	SkyLine * galacticEquatorLine;		// line depicting the Galactic equator as defined by the IAU definition of Galactic coordinates (System II, 1958)
 	SkyLine * supergalacticEquatorLine;	// line depicting the Supergalactic equator
 	SkyLine * primeVerticalLine;		// Prime Vertical line
 	SkyLine * currentVerticalLine;		// Vertical line for azimuth of display center. Most useful if altitudes labeled.
@@ -1061,17 +1113,17 @@ private:
 	SkyLine * circumpolarCircleS;		// Southern circumpolar circle
 	SkyLine * umbraCircle;			// Umbra circle (Earth shadow in Lunar distance)
 	SkyLine * penumbraCircle;		// Penumbra circle (Earth partial shadow in Lunar distance)
-	SkyPoint * celestialJ2000Poles;	// Celestial poles of J2000
+	SkyPoint * celestialJ2000Poles;		// Celestial poles of J2000
 	SkyPoint * celestialPoles;		// Celestial poles
 	SkyPoint * zenithNadir;			// Zenith and nadir
 	SkyPoint * eclipticJ2000Poles;		// Ecliptic poles of J2000
-	SkyPoint * eclipticPoles;			// Ecliptic poles
-	SkyPoint * galacticPoles;			// Galactic poles
+	SkyPoint * eclipticPoles;		// Ecliptic poles
+	SkyPoint * galacticPoles;		// Galactic poles
 	SkyPoint * galacticCenter;		// Galactic center and anticenter
-	SkyPoint * supergalacticPoles;	// Supergalactic poles
-	SkyPoint * equinoxJ2000Points;	// Equinox points of J2000
+	SkyPoint * supergalacticPoles;		// Supergalactic poles
+	SkyPoint * equinoxJ2000Points;		// Equinox points of J2000
 	SkyPoint * equinoxPoints;		// Equinox points
-	SkyPoint * solsticeJ2000Points;	// Solstice points of J2000
+	SkyPoint * solsticeJ2000Points;		// Solstice points of J2000
 	SkyPoint * solsticePoints;		// Solstice points
 	SkyPoint * antisolarPoint;		// Antisolar point
 	SkyPoint * umbraCenterPoint;		// The point of the center of umbra
