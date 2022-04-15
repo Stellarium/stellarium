@@ -76,9 +76,10 @@ public:
 		FrameObservercentricEclipticJ2000,	//!< Fixed-ecliptic reference frame centered on the Observer. GZ: was ObservercentricEcliptic, but renamed because it is Ecliptic of J2000!
 		FrameObservercentricEclipticOfDate,	//!< Moving ecliptic reference frame centered on the Observer. GZ new for V0.14: Ecliptic of date, i.e. includes the precession of the ecliptic.
 		FrameEquinoxEqu,			//!< Equatorial reference frame at the current equinox centered on the observer.
-								//!< The north pole follows the precession of the planet on which the observer is located.
-								//!< On Earth, this may include nutation if so configured. Has been corrected for V0.14 to really properly reflect ecliptical motion and precession (Vondrak 2011 model) and nutation.
+							//!< The north pole follows the precession of the planet on which the observer is located.
+							//!< On Earth, this may include nutation if so configured. Has been corrected for V0.14 to really properly reflect ecliptical motion and precession (Vondrak 2011 model) and nutation.
 		FrameJ2000,				//!< Equatorial reference frame at the J2000 equinox centered on the observer. This is also the ICRS reference frame.
+		FrameFixedEquatorial,			//!< Fixed equatorial frame (hour angle/declination). Note that hour angle is counted backwards here and must be treated specially for user I/O.
 		FrameGalactic,				//!< Galactic reference frame centered on observer.
 		FrameSupergalactic			//!< Supergalactic reference frame centered on observer.
 	};
@@ -269,6 +270,9 @@ public:
 
 	//! Get the modelview matrix for observer-centric equatorial at equinox drawing.
 	StelProjector::ModelViewTranformP getEquinoxEquModelViewTransform(RefractionMode refMode=RefractionAuto) const;
+
+	//! Get the modelview matrix for observer-centric fixed equatorial drawing.
+	StelProjector::ModelViewTranformP getFixedEquatorialModelViewTransform(RefractionMode refMode) const;
 
 	//! Get the modelview matrix for observer-centric altazimuthal drawing.
 	StelProjector::ModelViewTranformP getAltAzModelViewTransform(RefractionMode refMode=RefractionAuto) const;
@@ -822,6 +826,9 @@ signals:
 	void configurationDataSaved();
 	void updateSearchLists();
 
+private slots:
+	//! Call this whenever latitude changes. I.e., just connect it to the locationChanged() signal.
+	void updateFixedEquatorialTransformMatrices();
 private:
 	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device
 	StelSkyDrawer* skyDrawer;
@@ -840,6 +847,8 @@ private:
 	// Parameters to use when creating new instances of StelProjector
 	StelProjector::StelProjectorParams currentProjectorParams;
 
+	//! This is called in every frame to set rotation matrices for the various movable projection frames.
+	//! The rarely updated frame transform between AltAz and Fixed Equatorial is set in updateFixedEquatorialTransformMatrices() instead.
 	void updateTransformMatrices();
 	void updateTime(double deltaTime);
 	void updateMaximumFov();
@@ -853,6 +862,8 @@ private:
 	Mat4d matAltAzToHeliocentricEclipticJ2000; // Transform from topocentric (StelObserver) altazimuthal coordinate to heliocentric ecliptic Cartesian (VSOP87A)
 	Mat4d matAltAzToEquinoxEqu;                // Transform from topocentric altazimuthal coordinate to Earth Equatorial
 	Mat4d matEquinoxEquToAltAz;                // Transform from Earth Equatorial to topocentric (StelObserver) altazimuthal coordinate
+	Mat4d matAltAzToFixedEquatorial;           // Transform from topocentric altazimuthal coordinate to Fixed Equatorial system (hour angle/decl)
+	Mat4d matFixedEquatorialToAltAz;           // Transform from Fixed Equatorial (hour angle/decl) to topocentric (StelObserver) altazimuthal coordinate
 	Mat4d matHeliocentricEclipticToEquinoxEqu; // Transform from heliocentric ecliptic Cartesian (VSOP87A) to earth equatorial coordinate
 	Mat4d matEquinoxEquDateToJ2000;            // For Earth, this is almost the inverse precession matrix, =Rz(VSOPbias)Rx(eps0)Rz(-psiA)Rx(-omA)Rz(chiA)
 	Mat4d matJ2000ToEquinoxEqu;                // precession matrix

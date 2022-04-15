@@ -346,6 +346,7 @@ void ViewDialog::createDialogContent()
 	connectGroupBox(ui->celestialSphereGroupBox,				"actionShow_Gridlines");
 	connectCheckBox(ui->showEquatorLineCheckBox,			"actionShow_Equator_Line");
 	connectCheckBox(ui->showEquatorJ2000LineCheckBox,		"actionShow_Equator_J2000_Line");
+	connectCheckBox(ui->showFixedEquatorLineCheckBox,		"actionShow_Fixed_Equator_Line");
 	connectCheckBox(ui->showEclipticLineJ2000CheckBox,		"actionShow_Ecliptic_J2000_Line");
 	connectCheckBox(ui->showEclipticLineOfDateCheckBox,		"actionShow_Ecliptic_Line");
 	connectCheckBox(ui->showInvariablePlaneCheckBox,			"actionShow_Invariable_Plane_Line");
@@ -354,6 +355,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showLongitudeLineCheckBox,			"actionShow_Longitude_Line");
 	connectCheckBox(ui->showHorizonLineCheckBox,			"actionShow_Horizon_Line");
 	connectCheckBox(ui->showEquatorialGridCheckBox,			"actionShow_Equatorial_Grid");
+	connectCheckBox(ui->showFixedEquatorialGridCheckBox,		"actionShow_Fixed_Equatorial_Grid");
 	connectCheckBox(ui->showGalacticGridCheckBox,			"actionShow_Galactic_Grid");
 	connectCheckBox(ui->showGalacticEquatorLineCheckBox,		"actionShow_Galactic_Equator_Line");
 	connectCheckBox(ui->showSupergalacticGridCheckBox,		"actionShow_Supergalactic_Grid");
@@ -400,6 +402,7 @@ void ViewDialog::createDialogContent()
 	connectIntProperty(ui->partThicknessSpinBox,			"GridLinesMgr.partThickness");
 	connectBoolProperty(ui->equatorPartsCheckBox,			"GridLinesMgr.equatorPartsDisplayed");
 	connectBoolProperty(ui->equatorJ2000PartsCheckBox,	"GridLinesMgr.equatorJ2000PartsDisplayed");
+	connectBoolProperty(ui->fixedEquatorPartsCheckBox,		"GridLinesMgr.fixedEquatorPartsDisplayed");
 	connectBoolProperty(ui->eclipticPartsCheckBox,			"GridLinesMgr.eclipticPartsDisplayed");
 	connectBoolProperty(ui->eclipticJ2000PartsCheckBox,		"GridLinesMgr.eclipticJ2000PartsDisplayed");
 	connectBoolProperty(ui->solarEquatorPartsCheckBox,		"GridLinesMgr.solarEquatorPartsDisplayed");
@@ -414,6 +417,7 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->supergalacticEquatorPartsCheckBox,	"GridLinesMgr.supergalacticEquatorPartsDisplayed");
 	connectBoolProperty(ui->equatorLabelsCheckBox,		"GridLinesMgr.equatorPartsLabeled");
 	connectBoolProperty(ui->equatorJ2000LabelsCheckBox,	"GridLinesMgr.equatorJ2000PartsLabeled");
+	connectBoolProperty(ui->fixedEquatorLabelsCheckBox,	"GridLinesMgr.fixedEquatorPartsLabeled");
 	connectBoolProperty(ui->eclipticLabelsCheckBox,		"GridLinesMgr.eclipticPartsLabeled");
 	connectBoolProperty(ui->eclipticJ2000LabelsCheckBox,	"GridLinesMgr.eclipticJ2000PartsLabeled");
 	connectBoolProperty(ui->solarEquatorLabelsCheckBox,	"GridLinesMgr.solarEquatorPartsLabeled");
@@ -431,6 +435,7 @@ void ViewDialog::createDialogContent()
 	connectColorButton(ui->colorEclipticGridOfDate,		"GridLinesMgr.eclipticGridColor",		"color/ecliptical_color");
 	connectColorButton(ui->colorEquatorialJ2000Grid,	"GridLinesMgr.equatorJ2000GridColor",		"color/equatorial_J2000_color");
 	connectColorButton(ui->colorEquatorialGrid,		"GridLinesMgr.equatorGridColor",		"color/equatorial_color");
+	connectColorButton(ui->colorFixedEquatorialGrid,	"GridLinesMgr.fixedEquatorGridColor",		"color/fixed_equatorial_color");
 	connectColorButton(ui->colorGalacticGrid,		"GridLinesMgr.galacticGridColor",		"color/galactic_color");
 	connectColorButton(ui->colorSupergalacticGrid,		"GridLinesMgr.supergalacticGridColor",		"color/supergalactic_color");
 	connectColorButton(ui->colorAzimuthalGrid,		"GridLinesMgr.azimuthalGridColor",		"color/azimuthal_color");
@@ -440,6 +445,7 @@ void ViewDialog::createDialogContent()
 	connectColorButton(ui->colorSolarEquatorLine,		"GridLinesMgr.solarEquatorLineColor",		"color/solar_equator_color");
 	connectColorButton(ui->colorEquatorJ2000Line,		"GridLinesMgr.equatorJ2000LineColor",		"color/equator_J2000_color");
 	connectColorButton(ui->colorEquatorLine,		"GridLinesMgr.equatorLineColor",		"color/equator_color");
+	connectColorButton(ui->colorFixedEquatorLine,		"GridLinesMgr.fixedEquatorLineColor",		"color/fixed_equator_color");
 	connectColorButton(ui->colorGalacticEquatorLine,	"GridLinesMgr.galacticEquatorLineColor",	"color/galactic_equator_color");
 	connectColorButton(ui->colorSupergalacticEquatorLine,	"GridLinesMgr.supergalacticEquatorLineColor",	"color/supergalactic_equator_color");
 	connectColorButton(ui->colorHorizonLine,		"GridLinesMgr.horizonLineColor",		"color/horizon_color");

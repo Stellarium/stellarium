@@ -241,6 +241,8 @@ void StelCore::init()
 
 	// Compute transform matrices between coordinates systems
 	updateTransformMatrices();
+	updateFixedEquatorialTransformMatrices();
+	connect(this, SIGNAL(locationChanged(const StelLocation&)), this, SLOT(updateFixedEquatorialTransformMatrices()));
 
 	movementMgr = new StelMovementMgr(this);
 	movementMgr->init();
@@ -419,6 +421,8 @@ StelProjectorP StelCore::getProjection(FrameType frameType, RefractionMode refra
 			return getProjection(getObservercentricEclipticOfDateModelViewTransform(refractionMode));
 		case FrameEquinoxEqu:
 			return getProjection(getEquinoxEquModelViewTransform(refractionMode));
+		case FrameFixedEquatorial:
+			return getProjection(getFixedEquatorialModelViewTransform(refractionMode));
 		case FrameJ2000:
 			return getProjection(getJ2000ModelViewTransform(refractionMode));
 		case FrameGalactic:
@@ -877,6 +881,18 @@ StelProjector::ModelViewTranformP StelCore::getEquinoxEquModelViewTransform(Refr
 	return StelProjector::ModelViewTranformP(refr);
 }
 
+//! Get the modelview matrix for observer-centric fixed equatorial drawing
+StelProjector::ModelViewTranformP StelCore::getFixedEquatorialModelViewTransform(RefractionMode refMode) const
+{
+	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matFixedEquatorialToAltAz));
+	Refraction* refr = new Refraction(skyDrawer->getRefraction());
+	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
+	refr->setPreTransfoMat(matFixedEquatorialToAltAz);
+	refr->setPostTransfoMat(matAltAzModelView);
+	return StelProjector::ModelViewTranformP(refr);
+}
+
 //! Get the modelview matrix for observer-centric altazimuthal drawing
 StelProjector::ModelViewTranformP StelCore::getAltAzModelViewTransform(RefractionMode refMode) const
 {
@@ -989,6 +1005,12 @@ void StelCore::updateTransformMatrices()
 	}
 }
 
+// This avoids calling a costly operation every frame.
+void StelCore::updateFixedEquatorialTransformMatrices()
+{
+	matAltAzToFixedEquatorial = Mat4d::yrotation(M_PI_2-static_cast<double>(getCurrentLocation().latitude)*M_PI_180);
+	matFixedEquatorialToAltAz = matAltAzToFixedEquatorial.transpose();
+}
 // Return the observer heliocentric position
 Vec3d StelCore::getObserverHeliocentricEclipticPos() const
 {

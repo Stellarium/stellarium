@@ -891,12 +891,16 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_azimuthal_grid",			propMgr->getStelPropertyValue("GridLinesMgr.azimuthalGridDisplayed").toBool());
 	conf->setValue("viewing/flag_equatorial_grid",			propMgr->getStelPropertyValue("GridLinesMgr.equatorGridDisplayed").toBool());
 	conf->setValue("viewing/flag_equatorial_J2000_grid",		propMgr->getStelPropertyValue("GridLinesMgr.equatorJ2000GridDisplayed").toBool());
+	conf->setValue("viewing/flag_fixed_equatorial_grid",		propMgr->getStelPropertyValue("GridLinesMgr.fixedEquatorGridDisplayed").toBool());
 	conf->setValue("viewing/flag_equator_line",				propMgr->getStelPropertyValue("GridLinesMgr.equatorLineDisplayed").toBool());
 	conf->setValue("viewing/flag_equator_parts",			propMgr->getStelPropertyValue("GridLinesMgr.equatorPartsDisplayed").toBool());
 	conf->setValue("viewing/flag_equator_labels",			propMgr->getStelPropertyValue("GridLinesMgr.equatorPartsLabeled").toBool());
 	conf->setValue("viewing/flag_equator_J2000_line",		propMgr->getStelPropertyValue("GridLinesMgr.equatorJ2000LineDisplayed").toBool());
 	conf->setValue("viewing/flag_equator_J2000_parts",		propMgr->getStelPropertyValue("GridLinesMgr.equatorJ2000PartsDisplayed").toBool());
 	conf->setValue("viewing/flag_equator_J2000_labels",		propMgr->getStelPropertyValue("GridLinesMgr.equatorJ2000PartsLabeled").toBool());
+	conf->setValue("viewing/flag_fixed_equator_line",		propMgr->getStelPropertyValue("GridLinesMgr.fixedEquatorLineDisplayed").toBool());
+	conf->setValue("viewing/flag_fixed_equator_parts",		propMgr->getStelPropertyValue("GridLinesMgr.fixedEquatorPartsDisplayed").toBool());
+	conf->setValue("viewing/flag_fixed_equator_labels",		propMgr->getStelPropertyValue("GridLinesMgr.fixedEquatorPartsLabeled").toBool());
 	conf->setValue("viewing/flag_ecliptic_line",				propMgr->getStelPropertyValue("GridLinesMgr.eclipticLineDisplayed").toBool());
 	conf->setValue("viewing/flag_ecliptic_parts",			propMgr->getStelPropertyValue("GridLinesMgr.eclipticPartsDisplayed").toBool());
 	conf->setValue("viewing/flag_ecliptic_labels",			propMgr->getStelPropertyValue("GridLinesMgr.eclipticPartsLabeled").toBool());
