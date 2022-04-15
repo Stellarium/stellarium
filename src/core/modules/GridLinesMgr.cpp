@@ -343,6 +343,8 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 					textAngle = -raAngle-delta+M_PI;
 				}
 
+				if (d->frameType==StelCore::FrameFixedEquatorial)
+					textAngle=2.*M_PI-textAngle;
 
 				if (withDecimalDegree)
 					text = StelUtils::radToDecDegStr(textAngle, 4, false, true);
@@ -373,7 +375,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 //! Draw the sky grid in the current frame
 void SkyGrid::draw(const StelCore* core) const
 {
-	const StelProjectorP prj = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? StelCore::RefractionAuto : StelCore::RefractionOff);
+	const StelProjectorP prj = core->getProjection(frameType, (frameType!=StelCore::FrameAltAz && frameType!=StelCore::FrameFixedEquatorial) ? StelCore::RefractionAuto : StelCore::RefractionOff);
 	if (fader.getInterstate() <= 0.f)
 		return;
 
@@ -1617,7 +1619,7 @@ GridLinesMgr::GridLinesMgr()
 	SkyLine::init();
 
 	equGrid = new SkyGrid(StelCore::FrameEquinoxEqu);
-	fixedEquatorialGrid = new SkyGrid(StelCore::FrameEquinoxEqu);
+	fixedEquatorialGrid = new SkyGrid(StelCore::FrameFixedEquatorial);
 	equJ2000Grid = new SkyGrid(StelCore::FrameJ2000);
 	eclJ2000Grid = new SkyGrid(StelCore::FrameObservercentricEclipticJ2000);
 	eclGrid = new SkyGrid(StelCore::FrameObservercentricEclipticOfDate);
@@ -1973,12 +1975,10 @@ void GridLinesMgr::draw(StelCore* core)
 	if (!gridlinesDisplayed)
 		return;
 
-	galacticGrid->draw(core);
 	supergalacticGrid->draw(core);
+	galacticGrid->draw(core);
 	equJ2000Grid->draw(core);
 	equGrid->draw(core);
-	fixedEquatorialGrid->draw(core);
-	aziGrid->draw(core);
 	eclJ2000Grid->draw(core);
 	// While ecliptic of J2000 may be helpful to get a feeling of the Z=0 plane of VSOP87,
 	// ecliptic of date is related to Earth and does not make much sense for the other planets.
@@ -1999,33 +1999,36 @@ void GridLinesMgr::draw(StelCore* core)
 		longitudeLine->draw(core);
 		umbraCenterPoint->draw(core);
 	}
+	fixedEquatorialGrid->draw(core);
+	aziGrid->draw(core);
 
 	// Lines after grids, to be able to e.g. draw equators in different color!
-	galacticEquatorLine->draw(core);
+	// TODO: Draw equators right after corresponding grids, not after all other grids!
 	supergalacticEquatorLine->draw(core);
+	galacticEquatorLine->draw(core);
+	invariablePlaneLine->draw(core);
+	solarEquatorLine->draw(core);
 	eclipticJ2000Line->draw(core);	
 	equatorJ2000Line->draw(core);
 	equatorLine->draw(core);
 	fixedEquatorLine->draw(core);
-	invariablePlaneLine->draw(core);
-	solarEquatorLine->draw(core);
 	meridianLine->draw(core);
 	horizonLine->draw(core);
 	primeVerticalLine->draw(core);
-	currentVerticalLine->draw(core);
 	circumpolarCircleN->draw(core);
 	circumpolarCircleS->draw(core);
+	currentVerticalLine->draw(core);
+	supergalacticPoles->draw(core);
+	apexPoints->draw(core);
+	antisolarPoint->draw(core);
 	celestialJ2000Poles->draw(core);
-	celestialPoles->draw(core);
-	zenithNadir->draw(core);
-	eclipticJ2000Poles->draw(core);
+	equinoxJ2000Points->draw(core);
+	solsticeJ2000Points->draw(core);
 	galacticPoles->draw(core);
 	galacticCenter->draw(core);
-	supergalacticPoles->draw(core);
-	equinoxJ2000Points->draw(core);
-	solsticeJ2000Points->draw(core);	
-	apexPoints->draw(core);	
-	antisolarPoint->draw(core);	
+	celestialPoles->draw(core);
+	eclipticJ2000Poles->draw(core);
+	zenithNadir->draw(core);
 }
 
 void GridLinesMgr::updateLabels()
