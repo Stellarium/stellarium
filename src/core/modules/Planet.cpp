@@ -2904,7 +2904,7 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	GL(projectionMatrix = p->uniformLocation("projectionMatrix"));
 	GL(tex = p->uniformLocation("tex"));
 	GL(poleLat = p->uniformLocation("poleLat"));
-	GL(hasNoModel = p->uniformLocation("hasNoModel"));
+	GL(renderPolarCaps = p->uniformLocation("renderPolarCaps"));
 	GL(lightDirection = p->uniformLocation("lightDirection"));
 	GL(eyeDirection = p->uniformLocation("eyeDirection"));
 	GL(diffuseLight = p->uniformLocation("diffuseLight"));
@@ -3794,7 +3794,7 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	GL(shader->setUniformValue(shaderVars.outgasParameters, QVector2D(outgas_intensity_distanceScaled, outgas_falloff)));
 
 	// Do not render polar caps effect for celestial bodies, who have 3D models
-	GL(shader->setUniformValue(shaderVars.hasNoModel, objModelPath.isEmpty()));
+	GL(shader->setUniformValue(shaderVars.renderPolarCaps, objModelPath.isEmpty()));
 
 	return data;
 }

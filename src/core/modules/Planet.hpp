@@ -803,7 +803,7 @@ private:
 
 		// For Mars poles
 		int poleLat; // latitudes of edges of northern (x) and southern (y) polar cap [texture y, moving from 0 (S) to 1 (N)]. Only used for Mars, use [1, 0] for other objects.
-		int hasNoModel; // flag "has no 3D model" for celestial body
+		int renderPolarCaps;
 
 		// Moon-specific variables
 		int earthShadow;

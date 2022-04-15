@@ -26,7 +26,7 @@ varying highp vec3 P; //original vertex pos in model space
 
 uniform sampler2D tex;
 uniform mediump vec2 poleLat; //latitudes of pole caps, in terms of texture coordinate. x>0...north, y<1...south. 
-uniform bool hasNoModel;
+uniform bool renderPolarCaps;
 uniform mediump vec3 ambientLight;
 uniform mediump vec3 diffuseLight;
 uniform highp vec4 sunInfo;
@@ -302,7 +302,7 @@ void main()
     lowp vec4 texColor = texture2D(tex, texc);
 
     mediump vec4 finalColor = texColor;
-    if (hasNoModel)
+    if (renderPolarCaps)
     {
         // apply (currently only Martian) pole caps. texc.t=0 at south pole, 1 at north pole.
         if (texc.t>poleLat.x-0.01+0.001*sin(texc.s*18.*M_PI))
