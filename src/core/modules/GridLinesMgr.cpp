@@ -702,7 +702,7 @@ void SkyLine::updateLabel()
 			label = q_("Equator");
 			break;
 		case FIXED_EQUATOR:
-			frameType = StelCore::FrameAltAz; // Apparent Hour Angle is a non-refraction frame. We just have to rotate it by geographic latitude.
+			frameType = StelCore::FrameFixedEquatorial; // Apparent Hour Angle is a non-refraction frame.
 			label = q_("Hour Angle");
 			break;
 		case PRECESSIONCIRCLE_N:
@@ -772,7 +772,7 @@ void SkyLine::draw(StelCore *core) const
 	if (fader.getInterstate() <= 0.f)
 		return;
 
-	StelProjectorP prj = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? StelCore::RefractionAuto : StelCore::RefractionOff);
+	StelProjectorP prj = core->getProjection(frameType, (frameType!=StelCore::FrameAltAz && frameType!=StelCore::FrameFixedEquatorial) ? StelCore::RefractionAuto : StelCore::RefractionOff);
 
 	// Get the bounding halfspace
 	const SphericalCap& viewPortSphericalCap = prj->getBoundingCap();
@@ -1021,13 +1021,7 @@ void SkyLine::draw(StelCore *core) const
 	SphericalCap sphericalCap(Vec3d(0,0,1), 0);
 	Vec3d fpt(1,0,0); // First Point
 
-	if ((line_type==FIXED_EQUATOR))
-	{
-		Mat4d mat=Mat4d::yrotation(static_cast<double>(core->getCurrentLocation().latitude)*M_PI_180 - M_PI_2);
-		sphericalCap.n=mat*sphericalCap.n;
-		fpt=mat*fpt;
-	}
-	else if ((line_type==MERIDIAN) || (line_type==COLURE_1))
+	if ((line_type==MERIDIAN) || (line_type==COLURE_1))
 	{
 		sphericalCap.n.set(0,1,0);
 	}
