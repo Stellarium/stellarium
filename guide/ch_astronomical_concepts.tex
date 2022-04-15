@@ -240,6 +240,30 @@ equatorial coordinates use a system similar to the one referring to
 the Earth-based coordinates, but parallel to the planet's rotational
 axis.
 
+\subsection{Fixed Equatorial Coordinates}
+\label{sec:Concepts:FixedEquatorial}
+\index{Coordinate System!Fixed Equatorial}
+
+The celestial sphere with its stars and other objects located in
+equatorial coordinates seems to rotate around the celestial polar
+axis. When observing with a telescope, it proved useful to mount the
+instrument on an axis which is aimed to be parallel to the earth's
+axis, i.e., points to the celestial pole. In this case, after setting
+the objects's declination, it is enough to move the telescope around
+this polar axis to track its course over time and keep the object in
+the field of view. We can describe the \indexterm[[Coordinate
+    System!Fixed Equatorial]{Fixed Equatorial Coordinate System} as an
+  intermediate coordinate system which uses the same equator and
+  declination as the equatorial system, but does not rotate as time
+  goes by. The longitudinal coordinate is counted in hours from the
+  meridian towards the west and is aptly named \indexterm{Hour
+    Angle}. A star which has passed the meridian will reach hour angle
+  of 1~hour one sidereal hour later.
+
+Stellarium can display \newFeature{0.22.2} the fixed equatorial
+coordinates in the Markings dialog (\ref{sec:gui:view:markings}).
+
+
 \subsection{Ecliptical Coordinates}
 \label{sec:Concepts:Ecliptical}
 \index{Coordinate System!Ecliptical}
@@ -500,8 +524,10 @@ sidereal day is about 23 hours, 56 minutes and 4 seconds.
 It takes exactly one sidereal day for the celestial sphere to make one
 revolution in the sky. Astronomers find \indexterm{sidereal time}
 useful when observing. This is the Right Ascension which is currently
-passing the meridian line.  When visiting observatories, look out for
-doctored alarm clocks that have been set to run in sidereal time!
+passing the meridian line, or, equivalent, the \indexterm{Hour Angle}
+of the First Point of Aries \Aries.  When visiting observatories, look
+out for doctored alarm clocks that have been set to run faster and
+show sidereal time!
 
 \subsection{Julian Day Number}
 \label{sec:Concepts:JulianDay}
