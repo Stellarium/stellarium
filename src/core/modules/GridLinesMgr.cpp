@@ -1969,11 +1969,24 @@ void GridLinesMgr::draw(StelCore* core)
 	if (!gridlinesDisplayed)
 		return;
 
+	// Draw elements from the outside in.
+	// Lines after corresponding grids, to be able to e.g. draw equators in different color!
+	// Points should come last, to avoid text overdraw.
 	supergalacticGrid->draw(core);
 	galacticGrid->draw(core);
-	equJ2000Grid->draw(core);
-	equGrid->draw(core);
+	supergalacticEquatorLine->draw(core);
+	galacticEquatorLine->draw(core);
+	invariablePlaneLine->draw(core);
+	solarEquatorLine->draw(core);
+
 	eclJ2000Grid->draw(core);
+	eclipticJ2000Line->draw(core);
+
+	equJ2000Grid->draw(core);
+	equatorJ2000Line->draw(core);
+
+	equGrid->draw(core);
+	equatorLine->draw(core);
 	// While ecliptic of J2000 may be helpful to get a feeling of the Z=0 plane of VSOP87,
 	// ecliptic of date is related to Earth and does not make much sense for the other planets.
 	// Of course, orbital plane of respective planet would be better, but is not implemented.
@@ -1993,35 +2006,30 @@ void GridLinesMgr::draw(StelCore* core)
 		longitudeLine->draw(core);
 		umbraCenterPoint->draw(core);
 	}
-	fixedEquatorialGrid->draw(core);
-	aziGrid->draw(core);
+	circumpolarCircleN->draw(core);
+	circumpolarCircleS->draw(core);
 
-	// Lines after grids, to be able to e.g. draw equators in different color!
-	// TODO: Draw equators right after corresponding grids, not after all other grids!
-	supergalacticEquatorLine->draw(core);
-	galacticEquatorLine->draw(core);
-	invariablePlaneLine->draw(core);
-	solarEquatorLine->draw(core);
-	eclipticJ2000Line->draw(core);	
-	equatorJ2000Line->draw(core);
-	equatorLine->draw(core);
+	fixedEquatorialGrid->draw(core);
 	fixedEquatorLine->draw(core);
+
+	aziGrid->draw(core);
 	meridianLine->draw(core);
 	horizonLine->draw(core);
 	primeVerticalLine->draw(core);
-	circumpolarCircleN->draw(core);
-	circumpolarCircleS->draw(core);
+
 	currentVerticalLine->draw(core);
+
 	supergalacticPoles->draw(core);
-	apexPoints->draw(core);
-	antisolarPoint->draw(core);
-	celestialJ2000Poles->draw(core);
-	equinoxJ2000Points->draw(core);
-	solsticeJ2000Points->draw(core);
 	galacticPoles->draw(core);
 	galacticCenter->draw(core);
-	celestialPoles->draw(core);
+	apexPoints->draw(core);
+	antisolarPoint->draw(core);
 	eclipticJ2000Poles->draw(core);
+	equinoxJ2000Points->draw(core);
+	solsticeJ2000Points->draw(core);
+	celestialJ2000Poles->draw(core);
+	celestialPoles->draw(core);
+
 	zenithNadir->draw(core);
 }
 
@@ -2099,6 +2107,7 @@ void GridLinesMgr::setFlagAllLines(const bool displayed)
 {
 	setFlagColureLines(displayed);
 	setFlagEquatorLine(displayed);
+	setFlagFixedEquatorLine(displayed);
 	setFlagHorizonLine(displayed);
 	setFlagEclipticLine(displayed);
 	setFlagMeridianLine(displayed);
