@@ -305,6 +305,8 @@ Planet::Planet(const QString& englishName,
 			qWarning()<<"Cannot resolve path to model file"<<aobjModelName<<"of object"<<englishName;
 		}
 	}
+	else
+		objModelPath = QString();
 	if ((pType <= isDwarfPlanet) && (englishName!="Pluto")) // concentrate on "inner" objects, KBO etc. stay at 1/s recomputation.
 	{
 		deltaJDE = 0.001*StelCore::JD_SECOND;
@@ -2902,6 +2904,7 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	GL(projectionMatrix = p->uniformLocation("projectionMatrix"));
 	GL(tex = p->uniformLocation("tex"));
 	GL(poleLat = p->uniformLocation("poleLat"));
+	GL(hasNoModel = p->uniformLocation("hasNoModel"));
 	GL(lightDirection = p->uniformLocation("lightDirection"));
 	GL(eyeDirection = p->uniformLocation("eyeDirection"));
 	GL(diffuseLight = p->uniformLocation("diffuseLight"));
@@ -3789,6 +3792,9 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 
 	float outgas_intensity_distanceScaled=static_cast<float>(static_cast<double>(outgas_intensity)/getHeliocentricEclipticPos().lengthSquared()); // ad-hoc function: assume square falloff by distance.
 	GL(shader->setUniformValue(shaderVars.outgasParameters, QVector2D(outgas_intensity_distanceScaled, outgas_falloff)));
+
+	// Do not render polar caps effect for celestial bodies, who have 3D models
+	GL(shader->setUniformValue(shaderVars.hasNoModel, objModelPath.isEmpty()));
 
 	return data;
 }
