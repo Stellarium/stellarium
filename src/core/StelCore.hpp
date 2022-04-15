@@ -848,7 +848,7 @@ private:
 	StelProjector::StelProjectorParams currentProjectorParams;
 
 	//! This is called in every frame to set rotation matrices for the various movable projection frames.
-	//! The rarely updated frame transform between AltAz and Fixed Equatorial is set in updateFixedEquatorialFrame() instead.
+	//! The rarely updated frame transform between AltAz and Fixed Equatorial is set in updateFixedEquatorialTransformMatrices() instead.
 	void updateTransformMatrices();
 	void updateTime(double deltaTime);
 	void updateMaximumFov();
