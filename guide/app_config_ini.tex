@@ -192,6 +192,9 @@ equator\_color           				& \ccbox{0.3,0.5,1.0} &  equator line (of date). \\
 equatorial\_color        				& \ccbox{0.2,0.3,0.8} &  equatorial grid (of date). \\%\midrule
 celestial\_poles\_color					& \ccbox{0.3,0.5,1.0} &  celestial poles (of date). \\%\midrule
 circumpolar\_circles\_color 			& \ccbox{0.3,0.5,1.0} &  circumpolar circles. \\\midrule
+%% Fixed Equatorial: unspecified
+fixed\_equator\_color           			& \ccbox{0.5,0.5,0.7} &  fixed equator (hour angle) line. \\%\midrule
+fixed\_equatorial\_color        			& \ccbox{0.5,0.5,0.7} &  fixed equatorial grid. \\\midrule
 %% Galaxy: brownish, not too strong.
 galactic\_color          				& \ccbox{0.3,0.2,0.1} &  galactic grid. \\%\midrule
 galactic\_equator\_color 				& \ccbox{0.5,0.3,0.1} &  galactic equator line. \\%\midrule
@@ -850,7 +853,10 @@ multisampling    & int    & Sets the number of samples to use for multisampling 
 
 This section defines which objects, labels, lines, grids etc.\ you
 want to see on startup. Set those to \emph{true}. Most items can be
-toggled with hotkeys or switched in the GUI.
+toggled with hotkeys or switched in the GUI. Entries ending with
+\texttt{\_line} or \texttt{\ldots\_lines} usually also have entries
+\texttt{\ldots\_parts} and \texttt{\ldots\_labels} which govern
+partitions and labels, respectively.
 
 \begin{longtable}{l|l|p{77mm}}
 \toprule
@@ -870,7 +876,9 @@ flag\_isolated\_trails        & bool & Set to \emph{true} if you only want to se
 number\_isolated\_trails      & int  & Number of isolated trails for latest selected Solar system bodies [1..5].\\%\midrule
 max\_trail\_points            & int  & Limit maximum length of trails. Trails are drawn for 1 year or this number of computing steps.
                                        Default 5000, reduce if drawing trails slows down the program too much.\\
-flag\_isolated\_orbits        & bool & Set to \emph{true} if you want to see orbits only for selected planet and their moons.\\%\midrule
+flag\_isolated\_orbits        & bool & Set to \emph{true} if you want to see orbits only for selected planet and their moons.\\\midrule
+line\_thickness               & int  & Set the line thickness for grids and lines. Typical value: \emph{1}\\%\midrule
+part\_thickness               & int  & Set the line thickness for line partitions. Typical value: \emph{1}\\\midrule
 flag\_azimutal\_grid          & bool & Display azimuthal grid \\%\midrule
 flag\_equatorial\_grid        & bool & Display equatorial grid (of date) \\%\midrule
 flag\_equatorial\_J2000\_grid & bool & Display equatorial grid (J2000) \\%\midrule
@@ -878,26 +886,33 @@ flag\_ecliptic\_grid          & bool & Display ecliptic grid (of date) \\%\midru
 flag\_ecliptic\_J2000\_grid   & bool & Display ecliptic grid (J2000) \\%\midrule
 flag\_galactic\_grid          & bool & Display galactic grid (System~II)\\%\midrule
 flag\_galactic\_equator\_line & bool & Display galactic equator line \\%\midrule
+flag\_supergalactic\_grid          & bool & Display supergalactic grid\\%\midrule
+flag\_supergalactic\_equator\_line & bool & Display supergalactic equator line \\%\midrule
 flag\_equator\_line           & bool & Display celestial equator line (of date) \\%\midrule
+flag\_fixed\_equatorial\_grid & bool & Display fixed equatorial (hour angle) grid \\%\midrule
+flag\_fixed\_equator\_line    & bool & Display fixed equator (hour angle) line\\%\midrule
 flag\_equator\_J2000\_line    & bool & Display celestial equator line (J2000) \\%\midrule
 flag\_ecliptic\_line          & bool & Display ecliptic line (of date) \\%\midrule
 flag\_ecliptic\_J2000\_line   & bool & Display ecliptic line (J2000) \\%\midrule
 flag\_meridian\_line          & bool & Display meridian line \\%\midrule
 flag\_prime\_vertical\_line   & bool & Display Prime Vertical line (East-Zenith-West) \\%\midrule
-flag\_colure\_lines           & bool & Display colure lines (Celestial Pole-\Aries/\Cancer/\Libra/\Capricorn) \\%\midrule
-flag\_cardinal\_points        & bool & Display cardinal points\\\midrule
-flag\_ordinal\_points        & bool & Display intercardinal (or ordinal) points\\\midrule
-flag\_16wcr\_points        & bool & Display secondary intercardinal points\\\midrule
-line\_thickness               & int  & Set the line thickness for grids and lines. Typical value: \emph{1}\\%\midrule
-cardinal\_font\_size        & int  & Font size for cardinal points. Typical value: \emph{24}\\%\midrule
-ordinal\_font\_size          & int  & Font size for intercardinal (or )ordinal) points. Typical value: \emph{18}\\%\midrule
-16wcr\_font\_size           & int  & Font size for secondary intercardinal points. Typical value: \emph{16}\\%\midrule
+flag\_colure\_lines           & bool & Display colure lines (Celestial Pole-\Aries/\Cancer/\Libra/\Capricorn) \\\midrule
+flag\_cardinal\_points        & bool & Display cardinal points\\
+flag\_ordinal\_points         & bool & Display intercardinal (or ordinal) points\\
+flag\_16wcr\_points           & bool & Display secondary intercardinal points\\%\midrule
+cardinal\_font\_size          & int  & Font size for cardinal points. Typical value: \emph{24}\\%\midrule
+ordinal\_font\_size           & int  & Font size for intercardinal (or ordinal) points. Typical value: \emph{18}\\%\midrule
+16wcr\_font\_size             & int  & Font size for secondary intercardinal points. Typical value: \emph{16}\\\midrule
 % TODO: This should go into the projection group:
-flag\_gravity\_labels         & bool & Set to \emph{true} if you want labels to undergo gravity (top side of text points toward zenith). Useful with dome projection.\\\midrule
-flag\_moon\_scaled            & bool & Keep it \emph{false} if you want to see the real moon size \\%\midrule
+flag\_gravity\_labels         & bool  & Set to \emph{true} if you want labels to undergo gravity (top side of text points toward zenith). Useful with dome projection.\\
+\midrule
+flag\_moon\_scaled            & bool  & Keep it \emph{false} if you want to see the real moon size \\%\midrule
 moon\_scale                   & float & Sets the moon scale factor, sometimes useful to correlate to our perception of the moon's size. Typical value: \emph{4}\\
-
-flag\_minorbodies\_scaled     & bool & Set to \emph{true} if you want to see minor bodies enlarged \\
+flag\_planets\_scaled         & bool  & Keep it \emph{false} if you want to see the real planet size \\%\midrule
+planets\_scale                & float & Sets the planet scale factor, sometimes useful to show planets symbolically. Typical value: \emph{150}\\
+flag\_sun\_scaled             & bool  & Keep it \emph{false} if you want to see the real sun size \\%\midrule
+sun\_scale                    & float & Sets the sun scale factor, sometimes useful to correlate to our perception of the sun's size. Typical value: \emph{4}\\
+flag\_minorbodies\_scaled     & bool  & Set to \emph{true} if you want to see minor bodies enlarged \\
 minorbodies\_scale            & float & Set scale factor for minor bodies, to see them in unnatural detail. Typical value: \emph{10}\\
 \midrule
 flag\_draw\_moon\_halo           & bool  & Display halo around the Moon\\
