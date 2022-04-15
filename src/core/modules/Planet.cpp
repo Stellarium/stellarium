@@ -3774,6 +3774,7 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	GL(shader->setUniformValue(shaderVars.shadowData, data.shadowCandidatesData));
 	GL(shader->setUniformValue(shaderVars.sunInfo, static_cast<GLfloat>(data.mTarget[12]), static_cast<GLfloat>(data.mTarget[13]), static_cast<GLfloat>(data.mTarget[14]), static_cast<GLfloat>(sun->getEquatorialRadius())));
 	GL(shader->setUniformValue(shaderVars.skyBrightness, lmgr->getAtmosphereAverageLuminance()));
+	GL(shader->setUniformValue(shaderVars.poleLat, 1.1f, -0.1f)); // Avoid white objects. poleLat is only used for Mars.
 
 	if(shaderVars.orenNayarParameters>=0)
 	{
@@ -3947,8 +3948,6 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 		float tSouth=static_cast<float>((latS+90.)/180.);
 		GL(shader->setUniformValue(shaderVars->poleLat, tNorth, tSouth));
 	}
-	else
-		GL(shader->setUniformValue(shaderVars->poleLat, 1.1f, -0.1f)); // add some security margin.
 	GL(shader->setAttributeArray(shaderVars->vertex, static_cast<const GLfloat*>(projectedVertexArr.constData()), 3));
 	GL(shader->enableAttributeArray(shaderVars->vertex));
 	GL(shader->setAttributeArray(shaderVars->unprojectedVertex, static_cast<const GLfloat*>(model.vertexArr.constData()), 3));
@@ -4074,8 +4073,6 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 			GL(moonShaderProgram->setUniformValue(moonShaderVars.earthShadow, 3));
 		}
 	}
-
-	GL(shader->setUniformValue(shaderVars->poleLat, 1.1f, -0.1f)); // Avoid streaks across Mars
 
 	// Apply a rotation otherwize the hips surveys don't get rendered at the
 	// proper position.  Not sure why...
