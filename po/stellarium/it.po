@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-22 21:41+0700\n"
+"POT-Creation-Date: 2022-04-16 00:10+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Luigi Ghia <luigi.ghia@gmail.com>, 2022\n"
 "Language-Team: Italian (https://www.transifex.com/stellarium/teams/80998/it/)\n"
@@ -67,14 +67,14 @@ msgstr "asterismo"
 
 #: src/core/modules/AsterismMgr.cpp:98
 #: src/core/modules/ConstellationMgr.cpp:133 src/core/modules/StarMgr.cpp:465
-#: src/core/modules/GridLinesMgr.cpp:1844
+#: src/core/modules/GridLinesMgr.cpp:1863
 #: src/core/modules/SpecialMarkersMgr.cpp:265
 #: src/core/modules/LandscapeMgr.cpp:586
 #: src/core/modules/NomenclatureMgr.cpp:79 src/core/modules/NebulaMgr.cpp:474
 #: src/core/modules/NebulaMgr.cpp:475 src/core/modules/SolarSystem.cpp:299
 #: src/core/modules/MilkyWay.cpp:85 src/core/modules/ZodiacalLight.cpp:87
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:151
-#: src/core/StelApp.cpp:643 src/core/StelCore.cpp:267
+#: src/core/StelApp.cpp:643 src/core/StelCore.cpp:269
 #: src/core/StelSkyLayerMgr.cpp:85 src/core/StelSkyLayerMgr.cpp:86
 #: src/StelMainView.cpp:826
 msgid "Display Options"
@@ -135,7 +135,7 @@ msgstr "Seleziona tutte le constellazioni"
 msgid "Reload the sky culture"
 msgstr "Ricarcica lo sky culture"
 
-#: src/core/modules/StarMgr.cpp:466 src/ui_viewDialog.h:3244
+#: src/core/modules/StarMgr.cpp:466 src/ui_viewDialog.h:3280
 #: src/ui_dsoColorsDialog.h:703
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:254
 msgid "Stars"
@@ -153,180 +153,184 @@ msgstr "Incrementa il limite della magnitudine per le stelle"
 msgid "Reduce the magnitude limit for stars"
 msgstr "Reduci il limite della magnitudine per le stelle"
 
-#: src/core/modules/GridLinesMgr.cpp:683 src/ui_viewDialog.h:3643
+#: src/core/modules/GridLinesMgr.cpp:686 src/ui_viewDialog.h:3648
 msgid "Meridian"
 msgstr "Meridiano"
 
-#: src/core/modules/GridLinesMgr.cpp:687
+#: src/core/modules/GridLinesMgr.cpp:690
 msgid "Ecliptic of J2000.0"
 msgstr "Eclittica (J2000.0)"
 
-#: src/core/modules/GridLinesMgr.cpp:691
+#: src/core/modules/GridLinesMgr.cpp:694
 msgid "Ecliptic of Date"
 msgstr "Eclittica (data corrente)"
 
-#: src/core/modules/GridLinesMgr.cpp:695
+#: src/core/modules/GridLinesMgr.cpp:698
 msgid "Equator of J2000.0"
 msgstr "Equatore (J2000.0)"
 
-#: src/core/modules/GridLinesMgr.cpp:699
+#: src/core/modules/GridLinesMgr.cpp:702
 msgid "Equator"
 msgstr "Equatore"
 
-#: src/core/modules/GridLinesMgr.cpp:704
+#: src/core/modules/GridLinesMgr.cpp:706
+msgid "Hour Angle"
+msgstr ""
+
+#: src/core/modules/GridLinesMgr.cpp:711
 msgid "Precession Circle"
 msgstr "Cerchio di precessione"
 
-#: src/core/modules/GridLinesMgr.cpp:708 src/ui_viewDialog.h:3810
+#: src/core/modules/GridLinesMgr.cpp:715 src/ui_viewDialog.h:3630
 msgid "Horizon"
 msgstr "Orizzonte"
 
-#: src/core/modules/GridLinesMgr.cpp:712
+#: src/core/modules/GridLinesMgr.cpp:719
 msgid "Galactic Equator"
 msgstr "Equatore Galattico"
 
-#: src/core/modules/GridLinesMgr.cpp:716
+#: src/core/modules/GridLinesMgr.cpp:723
 msgid "Supergalactic Equator"
 msgstr "Equatore Supergalattico"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:721 src/ui_viewDialog.h:3583
+#: src/core/modules/GridLinesMgr.cpp:728 src/ui_viewDialog.h:3716
 msgid "O./C. longitude"
 msgstr "Longitudine Opp./Cong."
 
-#: src/core/modules/GridLinesMgr.cpp:725
-#: src/core/modules/GridLinesMgr.cpp:1865 src/ui_viewDialog.h:3817
+#: src/core/modules/GridLinesMgr.cpp:732
+#: src/core/modules/GridLinesMgr.cpp:1886 src/ui_viewDialog.h:3634
 msgid "Prime Vertical"
 msgstr "Primo verticale"
 
 #. TRANSLATORS: altitude
 #. TRANSLATORS: Satellite altitude
-#: src/core/modules/GridLinesMgr.cpp:729 src/gui/SearchDialog.cpp:309
+#: src/core/modules/GridLinesMgr.cpp:736 src/gui/SearchDialog.cpp:309
 #: src/gui/AstroCalcDialog.cpp:909 src/gui/AstroCalcDialog.cpp:1885
 #: src/gui/AstroCalcDialog.cpp:2273 src/gui/AstroCalcDialog.cpp:4482
 #: src/gui/AstroCalcDialog.cpp:5050 src/gui/AstroCalcDialog.cpp:5330
-#: src/gui/AstroCalcDialog.cpp:5332 src/ui_viewDialog.h:3615
+#: src/gui/AstroCalcDialog.cpp:5332 src/ui_viewDialog.h:3622
 #: plugins/Satellites/src/Satellite.cpp:328
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1383
 msgid "Altitude"
 msgstr "Altitudine"
 
-#: src/core/modules/GridLinesMgr.cpp:733
+#: src/core/modules/GridLinesMgr.cpp:740
 msgid "Equinoctial Colure"
 msgstr "Coluro equinoziale"
 
-#: src/core/modules/GridLinesMgr.cpp:737
+#: src/core/modules/GridLinesMgr.cpp:744
 msgid "Solstitial Colure"
 msgstr "Coluro solstiziale"
 
-#: src/core/modules/GridLinesMgr.cpp:742
+#: src/core/modules/GridLinesMgr.cpp:749
 msgid "Circumpolar Circle"
 msgstr "Cerchio circumpolare"
 
-#: src/core/modules/GridLinesMgr.cpp:746 src/core/modules/GridLinesMgr.cpp:843
+#: src/core/modules/GridLinesMgr.cpp:753 src/core/modules/GridLinesMgr.cpp:850
 msgid "Umbra"
 msgstr "Ombra"
 
-#: src/core/modules/GridLinesMgr.cpp:750 src/core/modules/GridLinesMgr.cpp:843
+#: src/core/modules/GridLinesMgr.cpp:757 src/core/modules/GridLinesMgr.cpp:850
 msgid "Penumbra"
 msgstr "Penombra"
 
-#: src/core/modules/GridLinesMgr.cpp:754
+#: src/core/modules/GridLinesMgr.cpp:761
 msgid "Invariable Plane"
 msgstr "Piano invariabile"
 
-#: src/core/modules/GridLinesMgr.cpp:758 src/ui_viewDialog.h:3944
+#: src/core/modules/GridLinesMgr.cpp:765 src/ui_viewDialog.h:3618
 msgid "Projected Solar Equator"
 msgstr "Equatore Solare Proiettato"
 
 #. TRANSLATORS: North Celestial Pole
-#: src/core/modules/GridLinesMgr.cpp:1338
 #: src/core/modules/GridLinesMgr.cpp:1347
+#: src/core/modules/GridLinesMgr.cpp:1356
 msgid "NCP"
 msgstr "PCN"
 
 #. TRANSLATORS: South Celestial Pole
-#: src/core/modules/GridLinesMgr.cpp:1340
 #: src/core/modules/GridLinesMgr.cpp:1349
+#: src/core/modules/GridLinesMgr.cpp:1358
 msgid "SCP"
 msgstr "PCS"
 
 #. TRANSLATORS: Zenith
-#: src/core/modules/GridLinesMgr.cpp:1356
+#: src/core/modules/GridLinesMgr.cpp:1365
 msgctxt "zenith"
 msgid "Z"
 msgstr "Z"
 
 #. TRANSLATORS: Nadir
-#: src/core/modules/GridLinesMgr.cpp:1358
+#: src/core/modules/GridLinesMgr.cpp:1367
 msgctxt "nadir"
 msgid "Z'"
 msgstr "Z'"
 
 #. TRANSLATORS: North Ecliptic Pole
-#: src/core/modules/GridLinesMgr.cpp:1365
 #: src/core/modules/GridLinesMgr.cpp:1374
+#: src/core/modules/GridLinesMgr.cpp:1383
 msgid "NEP"
 msgstr "NEP"
 
 #. TRANSLATORS: South Ecliptic Pole
-#: src/core/modules/GridLinesMgr.cpp:1367
 #: src/core/modules/GridLinesMgr.cpp:1376
+#: src/core/modules/GridLinesMgr.cpp:1385
 msgid "SEP"
 msgstr "SEP"
 
 #. TRANSLATORS: North Galactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1383
+#: src/core/modules/GridLinesMgr.cpp:1392
 msgid "NGP"
 msgstr "NGP"
 
 #. TRANSLATORS: South Galactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1385
+#: src/core/modules/GridLinesMgr.cpp:1394
 msgid "SGP"
 msgstr "SGP"
 
 #. TRANSLATORS: Galactic Center point
-#: src/core/modules/GridLinesMgr.cpp:1392
+#: src/core/modules/GridLinesMgr.cpp:1401
 msgid "GC"
 msgstr "CG"
 
 #. TRANSLATORS: Galactic Anticenter point
-#: src/core/modules/GridLinesMgr.cpp:1394
+#: src/core/modules/GridLinesMgr.cpp:1403
 msgid "GA"
 msgstr "GA"
 
 #. TRANSLATORS: North Supergalactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1401
+#: src/core/modules/GridLinesMgr.cpp:1410
 msgid "NSGP"
 msgstr "NSGP"
 
 #. TRANSLATORS: South Supergalactic Pole
-#: src/core/modules/GridLinesMgr.cpp:1403
+#: src/core/modules/GridLinesMgr.cpp:1412
 msgid "SSGP"
 msgstr "SSGP"
 
 #. TRANSLATORS: Antisolar Point
-#: src/core/modules/GridLinesMgr.cpp:1438
+#: src/core/modules/GridLinesMgr.cpp:1447
 msgid "ASP"
 msgstr "ASP"
 
 #. TRANSLATORS: Center of the umbra
-#: src/core/modules/GridLinesMgr.cpp:1445
+#: src/core/modules/GridLinesMgr.cpp:1454
 msgid "C.U."
 msgstr "C.U."
 
 #. TRANSLATORS: Apex Point, where the observer planet is heading to
-#: src/core/modules/GridLinesMgr.cpp:1452
+#: src/core/modules/GridLinesMgr.cpp:1461
 msgid "Apex"
 msgstr "Apex"
 
 #. TRANSLATORS: Antapex Point, where the observer planet is receding from
-#: src/core/modules/GridLinesMgr.cpp:1454
+#: src/core/modules/GridLinesMgr.cpp:1463
 msgid "Antapex"
 msgstr "Antapex"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1464 src/core/modules/Planet.cpp:664
+#: src/core/modules/GridLinesMgr.cpp:1473 src/core/modules/Planet.cpp:664
 #: src/core/modules/Planet.cpp:1114 src/gui/AstroCalcDialog.cpp:7999
 #: plugins/Satellites/src/Satellite.cpp:326
 #: plugins/Satellites/src/Satellite.cpp:385
@@ -335,173 +339,181 @@ msgctxt "speed"
 msgid "km/s"
 msgstr "km/s"
 
-#: src/core/modules/GridLinesMgr.cpp:1845
+#: src/core/modules/GridLinesMgr.cpp:1864
 msgid "Grids and lines"
 msgstr "Griglie e linee"
 
-#: src/core/modules/GridLinesMgr.cpp:1846
+#: src/core/modules/GridLinesMgr.cpp:1865
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Equatorial grid"
 msgstr "Griglia equatoriale"
 
-#: src/core/modules/GridLinesMgr.cpp:1847 src/ui_viewDialog.h:3838
+#: src/core/modules/GridLinesMgr.cpp:1866 src/ui_viewDialog.h:3969
+msgid "Fixed Equatorial grid"
+msgstr ""
+
+#: src/core/modules/GridLinesMgr.cpp:1867 src/ui_viewDialog.h:3626
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Azimuthal grid"
 msgstr "Griglia azimutale"
 
-#: src/core/modules/GridLinesMgr.cpp:1848
+#: src/core/modules/GridLinesMgr.cpp:1868
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:357
 msgid "Ecliptic line"
 msgstr "Linea dell'eclittica"
 
-#: src/core/modules/GridLinesMgr.cpp:1849
+#: src/core/modules/GridLinesMgr.cpp:1869
 msgid "Ecliptic J2000 line"
 msgstr "Eclittica (J2000)"
 
-#: src/core/modules/GridLinesMgr.cpp:1850
+#: src/core/modules/GridLinesMgr.cpp:1870
 msgid "Invariable Plane line"
 msgstr "Linea del Piano invariabile"
 
-#: src/core/modules/GridLinesMgr.cpp:1851
+#: src/core/modules/GridLinesMgr.cpp:1871
 msgid "Solar Equator Plane line"
 msgstr "linea dell'Equatore Solare"
 
-#: src/core/modules/GridLinesMgr.cpp:1852
+#: src/core/modules/GridLinesMgr.cpp:1872
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Equator line"
 msgstr "Linea dell'equatore"
 
-#: src/core/modules/GridLinesMgr.cpp:1853
+#: src/core/modules/GridLinesMgr.cpp:1873
 msgid "Equator J2000 line"
 msgstr "Equatore (J2000)"
 
-#: src/core/modules/GridLinesMgr.cpp:1854
+#: src/core/modules/GridLinesMgr.cpp:1874
+msgid "Fixed Equator line"
+msgstr ""
+
+#: src/core/modules/GridLinesMgr.cpp:1875
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Meridian line"
 msgstr "Linea del meridiano"
 
-#: src/core/modules/GridLinesMgr.cpp:1855
+#: src/core/modules/GridLinesMgr.cpp:1876
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:389
 msgid "Horizon line"
 msgstr "Linea dell'orizzonte"
 
-#: src/core/modules/GridLinesMgr.cpp:1856
+#: src/core/modules/GridLinesMgr.cpp:1877
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:347
 msgid "Equatorial J2000 grid"
 msgstr "Griglia equatoriale J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1857
+#: src/core/modules/GridLinesMgr.cpp:1878
 msgid "Ecliptic J2000 grid"
 msgstr "Griglia dell'eclittica J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1858 src/ui_configurationDialog.h:1866
+#: src/core/modules/GridLinesMgr.cpp:1879 src/ui_configurationDialog.h:1866
 msgid "Ecliptic grid"
 msgstr "Griglia dell'eclittica"
 
-#: src/core/modules/GridLinesMgr.cpp:1859 src/ui_viewDialog.h:3763
+#: src/core/modules/GridLinesMgr.cpp:1880 src/ui_viewDialog.h:3917
 #: src/ui_configurationDialog.h:1858
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:394
 msgid "Galactic grid"
 msgstr "Griglia galattica"
 
-#: src/core/modules/GridLinesMgr.cpp:1860 src/ui_viewDialog.h:3888
+#: src/core/modules/GridLinesMgr.cpp:1881 src/ui_viewDialog.h:3962
 msgid "Galactic equator"
 msgstr "Equatore galattico"
 
-#: src/core/modules/GridLinesMgr.cpp:1861 src/ui_viewDialog.h:3712
+#: src/core/modules/GridLinesMgr.cpp:1882 src/ui_viewDialog.h:3603
 msgid "Supergalactic grid"
 msgstr "Griglia supergalattica"
 
-#: src/core/modules/GridLinesMgr.cpp:1862 src/ui_viewDialog.h:3716
+#: src/core/modules/GridLinesMgr.cpp:1883 src/ui_viewDialog.h:3813
 msgid "Supergalactic equator"
 msgstr "Equatore supergalattico"
 
-#: src/core/modules/GridLinesMgr.cpp:1863
+#: src/core/modules/GridLinesMgr.cpp:1884
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:404
 msgid "Opposition/conjunction longitude line"
 msgstr "Linea della longitudine di opposizione/congiunzione"
 
-#: src/core/modules/GridLinesMgr.cpp:1864
+#: src/core/modules/GridLinesMgr.cpp:1885
 msgid "Precession Circles"
 msgstr "Cerchi di precessione"
 
-#: src/core/modules/GridLinesMgr.cpp:1866
+#: src/core/modules/GridLinesMgr.cpp:1887
 msgid "Current Vertical"
 msgstr "Verticale Corrente"
 
-#: src/core/modules/GridLinesMgr.cpp:1867
+#: src/core/modules/GridLinesMgr.cpp:1888
 msgid "Colure Lines"
 msgstr "Linee del coluro"
 
-#: src/core/modules/GridLinesMgr.cpp:1868
+#: src/core/modules/GridLinesMgr.cpp:1889
 msgid "Circumpolar Circles"
 msgstr "Cerchi circumpolari"
 
-#: src/core/modules/GridLinesMgr.cpp:1869
+#: src/core/modules/GridLinesMgr.cpp:1890
 msgid "Umbra Circle"
 msgstr "Cerchio d'Ombra"
 
-#: src/core/modules/GridLinesMgr.cpp:1870
+#: src/core/modules/GridLinesMgr.cpp:1891
 msgid "Penumbra Circle"
 msgstr "Cerchio di Penombra"
 
-#: src/core/modules/GridLinesMgr.cpp:1871
+#: src/core/modules/GridLinesMgr.cpp:1892
 msgid "Celestial J2000 poles"
 msgstr "Poli celesti J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1872
+#: src/core/modules/GridLinesMgr.cpp:1893
 msgid "Celestial poles"
 msgstr "Poli celesti"
 
-#: src/core/modules/GridLinesMgr.cpp:1873
+#: src/core/modules/GridLinesMgr.cpp:1894
 msgid "Zenith and nadir"
 msgstr "Zenit e nadir"
 
-#: src/core/modules/GridLinesMgr.cpp:1874
+#: src/core/modules/GridLinesMgr.cpp:1895
 msgid "Ecliptic J2000 poles"
 msgstr "Poli eclittici J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1875
+#: src/core/modules/GridLinesMgr.cpp:1896
 msgid "Ecliptic poles"
 msgstr "Poli eclittici"
 
-#: src/core/modules/GridLinesMgr.cpp:1876 src/ui_viewDialog.h:3672
+#: src/core/modules/GridLinesMgr.cpp:1897 src/ui_viewDialog.h:3879
 msgid "Galactic poles"
 msgstr "Poli galattici"
 
-#: src/core/modules/GridLinesMgr.cpp:1877 src/ui_viewDialog.h:3671
+#: src/core/modules/GridLinesMgr.cpp:1898 src/ui_viewDialog.h:3639
 msgid "Galactic center and anticenter"
 msgstr "Centro Galattico e Anticentro"
 
-#: src/core/modules/GridLinesMgr.cpp:1878 src/ui_viewDialog.h:3575
+#: src/core/modules/GridLinesMgr.cpp:1899 src/ui_viewDialog.h:3922
 msgid "Supergalactic poles"
 msgstr "Poli supergalattici"
 
-#: src/core/modules/GridLinesMgr.cpp:1879
+#: src/core/modules/GridLinesMgr.cpp:1900
 msgid "Equinox J2000 points"
 msgstr "Punti equinoziali J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1880
+#: src/core/modules/GridLinesMgr.cpp:1901
 msgid "Equinox points"
 msgstr "Punti equinoziali"
 
-#: src/core/modules/GridLinesMgr.cpp:1881
+#: src/core/modules/GridLinesMgr.cpp:1902
 msgid "Solstice J2000 points"
 msgstr "Punti di solstizio J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:1882
+#: src/core/modules/GridLinesMgr.cpp:1903
 msgid "Solstice points"
 msgstr "Punti di solstizio"
 
-#: src/core/modules/GridLinesMgr.cpp:1883 src/ui_viewDialog.h:3759
+#: src/core/modules/GridLinesMgr.cpp:1904 src/ui_viewDialog.h:3895
 msgid "Antisolar point"
 msgstr "Punto antisolare"
 
-#: src/core/modules/GridLinesMgr.cpp:1884
+#: src/core/modules/GridLinesMgr.cpp:1905
 msgid "The center of the Earth's umbra"
 msgstr "Il centro del cerchio d'ombra terrestre"
 
-#: src/core/modules/GridLinesMgr.cpp:1885 src/ui_viewDialog.h:3750
+#: src/core/modules/GridLinesMgr.cpp:1906 src/ui_viewDialog.h:3698
 msgid "Apex points"
 msgstr "Punti Apex"
 
@@ -517,7 +529,7 @@ msgstr "Marker circolare del FOV"
 msgid "Rectangular marker of FOV"
 msgstr "Marker rettangolare del FOV"
 
-#: src/core/modules/SpecialMarkersMgr.cpp:269 src/ui_viewDialog.h:3724
+#: src/core/modules/SpecialMarkersMgr.cpp:269 src/ui_viewDialog.h:3640
 #: src/ui_configurationDialog.h:1904
 msgid "Compass marks"
 msgstr "Punti cardinali"
@@ -626,7 +638,7 @@ msgstr "Atmosfera"
 msgid "Fog"
 msgstr "Nebbia"
 
-#: src/core/modules/LandscapeMgr.cpp:589 src/ui_viewDialog.h:3522
+#: src/core/modules/LandscapeMgr.cpp:589 src/ui_viewDialog.h:3828
 #: src/ui_configurationDialog.h:1888
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:314
 msgid "Cardinal points"
@@ -2471,7 +2483,7 @@ msgstr "Traiettorie pianeti"
 msgid "Planet trails reset"
 msgstr "Resetta la traiettoria del pianeta"
 
-#: src/core/modules/SolarSystem.cpp:306 src/ui_viewDialog.h:3364
+#: src/core/modules/SolarSystem.cpp:306 src/ui_viewDialog.h:3400
 msgid "Planet markers"
 msgstr "Marcatori pianeti"
 
@@ -2737,7 +2749,7 @@ msgstr "Impossibile creare il mittente Spout. Vedere i log per i dettagli."
 msgid "Loading plugin"
 msgstr "Caricando i plugin"
 
-#: src/core/StelCore.cpp:265 src/core/StelObjectMgr.cpp:54
+#: src/core/StelCore.cpp:267 src/core/StelObjectMgr.cpp:54
 #: src/gui/StelGui.cpp:228 src/gui/AstroCalcDialog.cpp:1879
 #: src/gui/AstroCalcDialog.cpp:2544 src/gui/AstroCalcDialog.cpp:2927
 #: src/gui/AstroCalcDialog.cpp:5346 src/ui_dateTimeDialogGui.h:373
@@ -2746,247 +2758,247 @@ msgstr "Caricando i plugin"
 msgid "Date and Time"
 msgstr "Data e ora"
 
-#: src/core/StelCore.cpp:266 src/core/StelMovementMgr.cpp:230
+#: src/core/StelCore.cpp:268 src/core/StelMovementMgr.cpp:230
 msgid "Movement and Selection"
 msgstr "Movimento e Selezione"
 
-#: src/core/StelCore.cpp:269
+#: src/core/StelCore.cpp:271
 msgid "Increase time speed"
 msgstr "Aumenta la velocità del tempo"
 
-#: src/core/StelCore.cpp:270
+#: src/core/StelCore.cpp:272
 msgid "Decrease time speed"
 msgstr "Diminuisci la velocità del tempo"
 
-#: src/core/StelCore.cpp:271
+#: src/core/StelCore.cpp:273
 msgid "Increase time speed (a little)"
 msgstr "Aumenta la velocità del tempo (un po')"
 
-#: src/core/StelCore.cpp:272
+#: src/core/StelCore.cpp:274
 msgid "Decrease time speed (a little)"
 msgstr "Riduci la velocità del tempo (un po')"
 
-#: src/core/StelCore.cpp:273
+#: src/core/StelCore.cpp:275
 msgid "Set normal time rate"
 msgstr "Velocità del tempo normale"
 
-#: src/core/StelCore.cpp:274
+#: src/core/StelCore.cpp:276
 msgid "Set time rate to zero"
 msgstr "Impoasta la velocità del tempo a zero"
 
-#: src/core/StelCore.cpp:275
+#: src/core/StelCore.cpp:277
 msgid "Set reverse time direction"
 msgstr "Impostare la direzione inversa del tempo"
 
-#: src/core/StelCore.cpp:276
+#: src/core/StelCore.cpp:278
 msgid "Set time to now"
 msgstr "Imposta l'ora attuale"
 
-#: src/core/StelCore.cpp:277
+#: src/core/StelCore.cpp:279
 msgid "Add 1 solar minute"
 msgstr "Aggiungere 1 minuto solare"
 
-#: src/core/StelCore.cpp:278
+#: src/core/StelCore.cpp:280
 msgid "Add 1 solar hour"
 msgstr "Aggiungi 1 ora solare"
 
-#: src/core/StelCore.cpp:279
+#: src/core/StelCore.cpp:281
 msgid "Add 1 solar day"
 msgstr "Aggiungi 1 giorno solare"
 
-#: src/core/StelCore.cpp:280
+#: src/core/StelCore.cpp:282
 msgid "Add 7 solar days"
 msgstr "Aggiungi 7 giorni solari"
 
-#: src/core/StelCore.cpp:281
+#: src/core/StelCore.cpp:283
 msgid "Subtract 1 solar minute"
 msgstr "Sottrarre 1 minuto solare"
 
-#: src/core/StelCore.cpp:282
+#: src/core/StelCore.cpp:284
 msgid "Subtract 1 solar hour"
 msgstr "Sottrai 1 ora solare"
 
-#: src/core/StelCore.cpp:283
+#: src/core/StelCore.cpp:285
 msgid "Subtract 1 solar day"
 msgstr "Sottrai 1 giorno solare"
 
-#: src/core/StelCore.cpp:284
+#: src/core/StelCore.cpp:286
 msgid "Subtract 7 solar days"
 msgstr "Sottrai 7 giorni solari"
 
-#: src/core/StelCore.cpp:285
+#: src/core/StelCore.cpp:287
 msgid "Add 1 sidereal day"
 msgstr "Aggiungi 1 giorno siderale"
 
-#: src/core/StelCore.cpp:286
+#: src/core/StelCore.cpp:288
 msgid "Add 7 sidereal days"
 msgstr "Aggiungi 7 giorni siderali"
 
-#: src/core/StelCore.cpp:287
+#: src/core/StelCore.cpp:289
 msgid "Add 1 sidereal year"
 msgstr "Aggiungi 1 anno siderale"
 
-#: src/core/StelCore.cpp:288
+#: src/core/StelCore.cpp:290
 msgid "Add 100 sidereal years"
 msgstr "Aggiungi 100 anni siderali"
 
-#: src/core/StelCore.cpp:289
+#: src/core/StelCore.cpp:291
 msgid "Add 1 synodic month"
 msgstr "Aggiungi 1 mese sinodico"
 
-#: src/core/StelCore.cpp:290
+#: src/core/StelCore.cpp:292
 msgid "Add 1 saros"
 msgstr "Aggiungi 1 saros"
 
-#: src/core/StelCore.cpp:291
+#: src/core/StelCore.cpp:293
 msgid "Add 1 draconic month"
 msgstr "Aggiungi 1 mese draconico"
 
-#: src/core/StelCore.cpp:292
+#: src/core/StelCore.cpp:294
 msgid "Add 1 draconic year"
 msgstr "Aggiungi un anno draconico"
 
-#: src/core/StelCore.cpp:293
+#: src/core/StelCore.cpp:295
 msgid "Add 1 anomalistic month"
 msgstr "Aggiungi 1 mese anomalistico"
 
-#: src/core/StelCore.cpp:294
+#: src/core/StelCore.cpp:296
 msgid "Add 1 anomalistic year"
 msgstr "Aggiungi 1 anno anomalistico"
 
-#: src/core/StelCore.cpp:295
+#: src/core/StelCore.cpp:297
 msgid "Add 100 anomalistic years"
 msgstr "Aggiungi 100 anni anomalistici"
 
-#: src/core/StelCore.cpp:296
+#: src/core/StelCore.cpp:298
 msgid "Add 1 mean tropical month"
 msgstr "Aggiungi 1 mese tropicale medio"
 
-#: src/core/StelCore.cpp:297
+#: src/core/StelCore.cpp:299
 msgid "Add 1 mean tropical year"
 msgstr "Aggiungi un anno tropicale medio"
 
-#: src/core/StelCore.cpp:298
+#: src/core/StelCore.cpp:300
 msgid "Add 100 mean tropical years"
 msgstr "Aggiungi 100 anni tropici medi"
 
-#: src/core/StelCore.cpp:299
+#: src/core/StelCore.cpp:301
 msgid "Add 1 tropical year"
 msgstr "Aggiungi 1 anno tropico"
 
-#: src/core/StelCore.cpp:300
+#: src/core/StelCore.cpp:302
 msgid "Add 1 Julian year"
 msgstr "Aggiungi 1 anno giuliano"
 
-#: src/core/StelCore.cpp:301
+#: src/core/StelCore.cpp:303
 msgid "Add 1 Julian century"
 msgstr "Aggiungi 1 secolo giuliano"
 
-#: src/core/StelCore.cpp:302
+#: src/core/StelCore.cpp:304
 msgid "Add 1 Gaussian year"
 msgstr "Aggiungi 1 anno gaussiano"
 
-#: src/core/StelCore.cpp:303
+#: src/core/StelCore.cpp:305
 msgid "Add 1 calendric month"
 msgstr "Aggiungi 1 mese calendrico"
 
-#: src/core/StelCore.cpp:304
+#: src/core/StelCore.cpp:306
 msgid "Subtract 1 sidereal day"
 msgstr "Sottrai 1 giorno siderale"
 
-#: src/core/StelCore.cpp:305
+#: src/core/StelCore.cpp:307
 msgid "Subtract 7 sidereal days"
 msgstr "Sottrai 7 giorni siderali"
 
-#: src/core/StelCore.cpp:306
+#: src/core/StelCore.cpp:308
 msgid "Subtract 1 sidereal year"
 msgstr "Sottrai 1 anno siderale"
 
-#: src/core/StelCore.cpp:307
+#: src/core/StelCore.cpp:309
 msgid "Subtract 100 sidereal years"
 msgstr "Sottrai 100 anni siderali"
 
-#: src/core/StelCore.cpp:308
+#: src/core/StelCore.cpp:310
 msgid "Subtract 1 synodic month"
 msgstr "Sottrai 1 mese sinodico"
 
-#: src/core/StelCore.cpp:309
+#: src/core/StelCore.cpp:311
 msgid "Subtract 1 saros"
 msgstr "Sottrai 1 saros"
 
-#: src/core/StelCore.cpp:310
+#: src/core/StelCore.cpp:312
 msgid "Subtract 1 draconic month"
 msgstr "Sottrai 1 mese draconico"
 
-#: src/core/StelCore.cpp:311
+#: src/core/StelCore.cpp:313
 msgid "Subtract 1 draconic year"
 msgstr "Sottrai 1 anno draconico"
 
-#: src/core/StelCore.cpp:312
+#: src/core/StelCore.cpp:314
 msgid "Subtract 1 anomalistic month"
 msgstr "Sottrai 1 mese anomalistico"
 
-#: src/core/StelCore.cpp:313
+#: src/core/StelCore.cpp:315
 msgid "Subtract 1 anomalistic year"
 msgstr "Sottrai 1 anno anomalistico"
 
-#: src/core/StelCore.cpp:314
+#: src/core/StelCore.cpp:316
 msgid "Subtract 100 anomalistic years"
 msgstr "Sottrai 100 anni anomalistici"
 
-#: src/core/StelCore.cpp:315
+#: src/core/StelCore.cpp:317
 msgid "Subtract 1 mean tropical month"
 msgstr "Sottrai 1 mese tropicale medio"
 
-#: src/core/StelCore.cpp:316
+#: src/core/StelCore.cpp:318
 msgid "Subtract 1 mean tropical year"
 msgstr "Sottrai 1 anno tropicale medio"
 
-#: src/core/StelCore.cpp:317
+#: src/core/StelCore.cpp:319
 msgid "Subtract 100 mean tropical years"
 msgstr "Sottrai 100 anni tropici medi"
 
-#: src/core/StelCore.cpp:318
+#: src/core/StelCore.cpp:320
 msgid "Subtract 1 tropical year"
 msgstr "Sottrai 1 anno tropico"
 
-#: src/core/StelCore.cpp:319
+#: src/core/StelCore.cpp:321
 msgid "Subtract 1 Julian year"
 msgstr "Sottrai 1 anno giuliano"
 
-#: src/core/StelCore.cpp:320
+#: src/core/StelCore.cpp:322
 msgid "Subtract 1 Julian century"
 msgstr "Sottrai 1 secolo giuliano"
 
-#: src/core/StelCore.cpp:321
+#: src/core/StelCore.cpp:323
 msgid "Subtract 1 Gaussian year"
 msgstr "Sottrai 1 anno gaussiano"
 
-#: src/core/StelCore.cpp:322
+#: src/core/StelCore.cpp:324
 msgid "Subtract 1 calendric month"
 msgstr "Sottri 1 mese calendrico"
 
-#: src/core/StelCore.cpp:324
+#: src/core/StelCore.cpp:326
 msgid "Set home planet to selected planet"
 msgstr "Imposta il pianeta selezionato come luogo di osservazione"
 
-#: src/core/StelCore.cpp:325
+#: src/core/StelCore.cpp:327
 msgid "Go to home"
 msgstr "Torna a casa"
 
-#: src/core/StelCore.cpp:327
+#: src/core/StelCore.cpp:329
 msgid "Flip scene horizontally"
 msgstr "Capovolgi la visuale orizzontalmente"
 
-#: src/core/StelCore.cpp:328
+#: src/core/StelCore.cpp:330
 msgid "Flip scene vertically"
 msgstr "Capovolgi la visuale verticalmente"
 
-#: src/core/StelCore.cpp:2304
+#: src/core/StelCore.cpp:2326
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "La correzione è disabilitata. Usala solo se sai cosa stai facendo!"
 
-#: src/core/StelCore.cpp:2307
+#: src/core/StelCore.cpp:2329
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -2997,7 +3009,7 @@ msgstr ""
 "Henriksson nel suo articolo <em>Einstein's Theory of Relativity Confirmed by"
 " Ancient Solar Eclipses</em> (%1). Guarda %2qui%3 per maggiori informazioni."
 
-#: src/core/StelCore.cpp:2310
+#: src/core/StelCore.cpp:2332
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -3006,7 +3018,7 @@ msgstr ""
 "Formula empirica pubblicata da G. M. Clarence nell'articolo <em>On the "
 "system of astronomical constants</em> (%1)."
 
-#: src/core/StelCore.cpp:2313
+#: src/core/StelCore.cpp:2335
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -3019,7 +3031,7 @@ msgstr ""
 "applicata da Jean Meeus in <em>Astronomical Formulae for Calculators</em> ed"
 " è utilizzata nel simulatore spaziale SunTracker Pro."
 
-#: src/core/StelCore.cpp:2317
+#: src/core/StelCore.cpp:2339
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
@@ -3029,7 +3041,7 @@ msgstr ""
 "<em>Astronomical Ephemeris</em> e in <em>Canon of Solar Eclipses</em> di "
 "Mucke e Meeus (1983)."
 
-#: src/core/StelCore.cpp:2321
+#: src/core/StelCore.cpp:2343
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -3041,7 +3053,7 @@ msgstr ""
 "DC. La stessa relazione è usata implicitamente nelle sizigie di Goldstine "
 "(1973)."
 
-#: src/core/StelCore.cpp:2325
+#: src/core/StelCore.cpp:2347
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -3052,7 +3064,7 @@ msgstr ""
 "<em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2328
+#: src/core/StelCore.cpp:2350
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -3061,7 +3073,7 @@ msgstr ""
 "Equazione pubblicata da F. R. Stephenson nell'articolo <em>Pre-Telescopic "
 "Astronomical Observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2331
+#: src/core/StelCore.cpp:2353
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -3075,7 +3087,7 @@ msgstr ""
 "pubblicati da Brouwer (1952); resa in seguito obsoleta dagli stessi autori "
 "(1988)."
 
-#: src/core/StelCore.cpp:2334
+#: src/core/StelCore.cpp:2356
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -3085,7 +3097,7 @@ msgstr ""
 "and Tables from -4000 to +2800</em> (1986) e nel simulatore spaziale "
 "RedShift."
 
-#: src/core/StelCore.cpp:2337
+#: src/core/StelCore.cpp:2359
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3096,7 +3108,7 @@ msgstr ""
 "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
 "1980</em> (%1)."
 
-#: src/core/StelCore.cpp:2340
+#: src/core/StelCore.cpp:2362
 #, qt-format
 msgid ""
 "This algorithm was published by F. R. Stephenson and M. A. Houlden in the "
@@ -3107,7 +3119,7 @@ msgstr ""
 "libro <em>Atlas of Historical Eclipse Maps</em> (%1). Questo algoritmo è "
 "utilizzato nella Guida 7 del programma PC planetario."
 
-#: src/core/StelCore.cpp:2343
+#: src/core/StelCore.cpp:2365
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -3117,7 +3129,7 @@ msgstr ""
 "Solar Eclipses: 1986-2035</em> (1987) e nel suo <em>Fifty Year Canon of "
 "Lunar Eclipses: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2346
+#: src/core/StelCore.cpp:2368
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -3126,7 +3138,7 @@ msgstr ""
 "Formula ricavata da K. M. Borkowski (%1) dall'analisi di 31 eclissi solari "
 "tra il 2137 AC e il 1715 DC."
 
-#: src/core/StelCore.cpp:2349
+#: src/core/StelCore.cpp:2371
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -3139,7 +3151,7 @@ msgstr ""
 "1800-1988</em> (%1) e basata sull'interpolazione di valori pubblicati da "
 "Stephenson e Morrison (1984)."
 
-#: src/core/StelCore.cpp:2352
+#: src/core/StelCore.cpp:2374
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -3149,7 +3161,7 @@ msgstr ""
 " sintetica della teoria lunare del ELP 2000-85 nel loro <em>Lunar Tables and"
 " Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:2355
+#: src/core/StelCore.cpp:2377
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3160,7 +3172,7 @@ msgstr ""
 "<em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:2358
+#: src/core/StelCore.cpp:2380
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -3169,7 +3181,7 @@ msgstr ""
 "Formula pubblicata da F. R. Stephenson in <em>Historical Eclipses and "
 "Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:2361
+#: src/core/StelCore.cpp:2383
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -3180,7 +3192,7 @@ msgstr ""
 "Chapront, Chapront-Touze & Francou (1997) per date fuori dell'intervallo "
 "1620..2000."
 
-#: src/core/StelCore.cpp:2364
+#: src/core/StelCore.cpp:2386
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -3189,7 +3201,7 @@ msgstr ""
 "Il \"JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory\""
 " usa questa formula nel suo sito web interattivo %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:2367
+#: src/core/StelCore.cpp:2389
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -3198,7 +3210,7 @@ msgstr ""
 "Coefficienti polinomiali pubblicati da J. Meeus e L. Simons nell'articolo "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:2370
+#: src/core/StelCore.cpp:2392
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -3208,7 +3220,7 @@ msgstr ""
 "Personal Computer</em> (2000) fornisce un semplice fit di dati polinomiali "
 "al 3o ordine per il passato recente."
 
-#: src/core/StelCore.cpp:2373
+#: src/core/StelCore.cpp:2395
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
@@ -3220,7 +3232,7 @@ msgstr ""
 "Calendarie</em> (2002). Basata su <em>Algoritmi Astronomici</em>di Jean "
 "Meeus  (1991)."
 
-#: src/core/StelCore.cpp:2376
+#: src/core/StelCore.cpp:2398
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -3231,7 +3243,7 @@ msgstr ""
 "Stephenson nell'articolo <em>Historical values of the Earth's clock error "
 "%1T and the calculation of eclipses</em> (%2) con appendice in (%3)."
 
-#: src/core/StelCore.cpp:2379
+#: src/core/StelCore.cpp:2401
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -3245,7 +3257,7 @@ msgstr ""
 " su una possibile periodicità, già descritta dallo stesso Stephenson (%2). "
 "Clicca %3qui%4 per maggiori informazioni."
 
-#: src/core/StelCore.cpp:2382
+#: src/core/StelCore.cpp:2404
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -3260,7 +3272,7 @@ msgstr ""
 "of Solar Eclipses: -1900 to +3000</em> (2006). Questa formula è utilizzata "
 "anche nel software per le effemeridi solari, lunari e planetarie SOLEX."
 
-#: src/core/StelCore.cpp:2385
+#: src/core/StelCore.cpp:2407
 msgid ""
 "This solution is modified from F. Espenak and J. Meeus, based on Morrison & "
 "Stephenson (2004) and a polynomial fit through tabulated values for "
@@ -3272,15 +3284,15 @@ msgstr ""
 "per gli anni 1600-2000. La formula per il 2005-2050 viene modificata per far"
 " corrispondere i valori osservati e le previsioni a breve termine."
 
-#: src/core/StelCore.cpp:2385
+#: src/core/StelCore.cpp:2407
 msgid "Used by default."
 msgstr "Utilizzata come predefinita."
 
-#: src/core/StelCore.cpp:2388
+#: src/core/StelCore.cpp:2410
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "VERSIONE MIGLIORATA SENZA ACCELERAZIONE AGGIUNTIVA DELLA LUNA"
 
-#: src/core/StelCore.cpp:2388
+#: src/core/StelCore.cpp:2410
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
@@ -3289,7 +3301,7 @@ msgstr ""
 "(2004) e un adattamento polinomiale attraverso valori tabulati per gli anni "
 "1600-2000."
 
-#: src/core/StelCore.cpp:2391
+#: src/core/StelCore.cpp:2413
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -3300,7 +3312,7 @@ msgstr ""
 "(1984), è stata pubblicata nell'articolo <em>Ancient eclipses and dating the"
 " fall of Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:2394
+#: src/core/StelCore.cpp:2416
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -3312,7 +3324,7 @@ msgstr ""
 "Minimization of Polynomial Approximation of deltaT</em> (%1) e rivisitata da"
 " Sana Islam nel 2013."
 
-#: src/core/StelCore.cpp:2397
+#: src/core/StelCore.cpp:2419
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -3323,7 +3335,7 @@ msgstr ""
 " Khalid, Mariam Sultana e Faheem Zaidi è pubblicata in <em>Delta T: "
 "Polynomial Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2400
+#: src/core/StelCore.cpp:2422
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -3342,7 +3354,7 @@ msgstr ""
 "dell'intervallo denominato (modellato con un adattamento spline) fornisce "
 "valori da una parabola approssimativa."
 
-#: src/core/StelCore.cpp:2403
+#: src/core/StelCore.cpp:2425
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -3353,7 +3365,7 @@ msgstr ""
 "Acceleration of the Moon and the Universe - the Mass of the Graviton</em> "
 "(%1) e basato sul C. Formula di Schoch (1931)."
 
-#: src/core/StelCore.cpp:2406
+#: src/core/StelCore.cpp:2428
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
@@ -3362,12 +3374,12 @@ msgstr ""
 "Questa è una formula quadratica per il calcolo di %1T con coefficienti "
 "definiti dall'utente."
 
-#: src/core/StelCore.cpp:2409 src/core/SimbadSearcher.cpp:173
+#: src/core/StelCore.cpp:2431 src/core/SimbadSearcher.cpp:173
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:92
 msgid "Error"
 msgstr "Errore"
 
-#: src/core/StelCore.cpp:2417
+#: src/core/StelCore.cpp:2439
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -3376,17 +3388,17 @@ msgstr ""
 "Il valore della soluzione %1 per %2 (accelerazione secolare della Luna) "
 "richiede un adattamento, consultare la Guida per i dettagli."
 
-#: src/core/StelCore.cpp:2461
+#: src/core/StelCore.cpp:2483
 msgid "with zero values outside this range"
 msgstr "con valori nulli al di fuori di questo invervallo"
 
-#: src/core/StelCore.cpp:2464
+#: src/core/StelCore.cpp:2486
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "con un'incertezza tipica di 1 secondo d'arco e con valori nulli al di fuori "
 "di questo intervallo"
 
-#: src/core/StelCore.cpp:2467
+#: src/core/StelCore.cpp:2489
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -3394,16 +3406,16 @@ msgstr ""
 "con un errore medio di meno di un secondo, massimo errore di 1.9s, e valori "
 "limite per gli anni fuori da questo intervallo"
 
-#: src/core/StelCore.cpp:2474
+#: src/core/StelCore.cpp:2496
 msgid "with values for the limit years outside this range"
 msgstr "con valori per gli anni limite al di fuori da questo intervallo"
 
-#: src/core/StelCore.cpp:2484
+#: src/core/StelCore.cpp:2506
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Intervallo valido utilizzabile: tra gli anni  %1 e %2, %3."
 
-#: src/core/StelCore.cpp:2486
+#: src/core/StelCore.cpp:2508
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Intervallo di validità: dall'anno %1 al %2."
@@ -4322,22 +4334,22 @@ msgstr "Punti per pollice (per i metadati dell'immagine)."
 msgid "Current designated print size"
 msgstr "Dimensione impostazione corrente per la stampa"
 
-#: src/gui/ConfigurationDialog.cpp:1225
+#: src/gui/ConfigurationDialog.cpp:1229
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "FOV di partenza: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:1233
+#: src/gui/ConfigurationDialog.cpp:1237
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Direzione di partenza della visualizzazione Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1302
+#: src/gui/ConfigurationDialog.cpp:1306
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
 msgid "Acknowledgments"
 msgstr "Riconoscimenti"
 
-#: src/gui/ConfigurationDialog.cpp:1304
+#: src/gui/ConfigurationDialog.cpp:1308
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:709
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:154
@@ -4346,11 +4358,11 @@ msgstr "Riconoscimenti"
 msgid "Authors"
 msgstr "Autori"
 
-#: src/gui/ConfigurationDialog.cpp:1305
+#: src/gui/ConfigurationDialog.cpp:1309
 msgid "Contact"
 msgstr "Contatto"
 
-#: src/gui/ConfigurationDialog.cpp:1307 src/scripting/StelScriptMgr.cpp:477
+#: src/gui/ConfigurationDialog.cpp:1311 src/scripting/StelScriptMgr.cpp:477
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:97
 #: plugins/Oculars/src/gui/OcularDialog.cpp:597
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:707
@@ -4374,7 +4386,7 @@ msgstr "Contatto"
 msgid "Version"
 msgstr "Versione"
 
-#: src/gui/ConfigurationDialog.cpp:1308 src/scripting/StelScriptMgr.cpp:472
+#: src/gui/ConfigurationDialog.cpp:1312 src/scripting/StelScriptMgr.cpp:472
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
 #: plugins/Oculars/src/gui/OcularDialog.cpp:598
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:708
@@ -4398,20 +4410,20 @@ msgstr "Versione"
 msgid "License"
 msgstr "Licenza"
 
-#: src/gui/ConfigurationDialog.cpp:1312
+#: src/gui/ConfigurationDialog.cpp:1316
 msgctxt "license"
 msgid "unknown"
 msgstr "sconosciuta"
 
-#: src/gui/ConfigurationDialog.cpp:1420
+#: src/gui/ConfigurationDialog.cpp:1424
 msgid "Running script: "
 msgstr "Script in esecuzione: "
 
-#: src/gui/ConfigurationDialog.cpp:1427
+#: src/gui/ConfigurationDialog.cpp:1431
 msgid "Running script: [none]"
 msgstr "Script in esecuzione: [nessuno]"
 
-#: src/gui/ConfigurationDialog.cpp:1492
+#: src/gui/ConfigurationDialog.cpp:1496
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -4419,16 +4431,16 @@ msgstr ""
 "Lo scaricamento dei nuovi cataloghi di stelle è completato!\n"
 "Riavviare Stellarium per visualizzarli."
 
-#: src/gui/ConfigurationDialog.cpp:1496
+#: src/gui/ConfigurationDialog.cpp:1500
 msgid "All available star catalogs have been installed."
 msgstr "Tutti i cataloghi stellari disponibili sono stati installati."
 
-#: src/gui/ConfigurationDialog.cpp:1501
+#: src/gui/ConfigurationDialog.cpp:1505
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Ricezione del catalogo %1 di %2"
 
-#: src/gui/ConfigurationDialog.cpp:1508
+#: src/gui/ConfigurationDialog.cpp:1512
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -4437,7 +4449,7 @@ msgstr ""
 "Scaricamento di %1 ...\n"
 "(È possibile chiudere questa finestra.)"
 
-#: src/gui/ConfigurationDialog.cpp:1515
+#: src/gui/ConfigurationDialog.cpp:1519
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -4448,7 +4460,7 @@ msgstr ""
 "Numero di stelle: %2 milioni\n"
 "Intervallo di magnitudine: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1561 src/gui/ConfigurationDialog.cpp:1598
+#: src/gui/ConfigurationDialog.cpp:1565 src/gui/ConfigurationDialog.cpp:1602
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -4457,11 +4469,11 @@ msgstr ""
 "Errore nello scaricamento di %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1651
+#: src/gui/ConfigurationDialog.cpp:1655
 msgid "Verifying file integrity..."
 msgstr "Verifica dell'integrità del file..."
 
-#: src/gui/ConfigurationDialog.cpp:1655
+#: src/gui/ConfigurationDialog.cpp:1659
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -4470,213 +4482,213 @@ msgstr ""
 "Errore nello scaricamento di %1:\n"
 "Il file è danneggiato."
 
-#: src/gui/ConfigurationDialog.cpp:1730 src/gui/ConfigurationDialog.cpp:1739
-#: src/gui/ConfigurationDialog.cpp:1748 src/gui/ConfigurationDialog.cpp:1757
+#: src/gui/ConfigurationDialog.cpp:1734 src/gui/ConfigurationDialog.cpp:1743
+#: src/gui/ConfigurationDialog.cpp:1752 src/gui/ConfigurationDialog.cpp:1761
 msgid "Available"
 msgstr "Disponibile"
 
-#: src/gui/ConfigurationDialog.cpp:1732 src/gui/ConfigurationDialog.cpp:1741
-#: src/gui/ConfigurationDialog.cpp:1750 src/gui/ConfigurationDialog.cpp:1759
+#: src/gui/ConfigurationDialog.cpp:1736 src/gui/ConfigurationDialog.cpp:1745
+#: src/gui/ConfigurationDialog.cpp:1754 src/gui/ConfigurationDialog.cpp:1763
 msgid "Not Available"
 msgstr "Non disponibile"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1831
+#: src/gui/ConfigurationDialog.cpp:1835
 msgid "Algorithm of"
 msgstr "Algoritmo di"
 
-#: src/gui/ConfigurationDialog.cpp:1844
+#: src/gui/ConfigurationDialog.cpp:1848
 msgid "Without correction"
 msgstr "Senza correzione"
 
-#: src/gui/ConfigurationDialog.cpp:1845
+#: src/gui/ConfigurationDialog.cpp:1849
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1846
+#: src/gui/ConfigurationDialog.cpp:1850
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1847
+#: src/gui/ConfigurationDialog.cpp:1851
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1848
+#: src/gui/ConfigurationDialog.cpp:1852
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1849
+#: src/gui/ConfigurationDialog.cpp:1853
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) e Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1850
+#: src/gui/ConfigurationDialog.cpp:1854
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1851
+#: src/gui/ConfigurationDialog.cpp:1855
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1852
+#: src/gui/ConfigurationDialog.cpp:1856
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1853
+#: src/gui/ConfigurationDialog.cpp:1857
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1854
+#: src/gui/ConfigurationDialog.cpp:1858
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1855
+#: src/gui/ConfigurationDialog.cpp:1859
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1856
+#: src/gui/ConfigurationDialog.cpp:1860
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1857
+#: src/gui/ConfigurationDialog.cpp:1861
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1858
+#: src/gui/ConfigurationDialog.cpp:1862
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1859
+#: src/gui/ConfigurationDialog.cpp:1863
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1860
+#: src/gui/ConfigurationDialog.cpp:1864
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1861
+#: src/gui/ConfigurationDialog.cpp:1865
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1863
+#: src/gui/ConfigurationDialog.cpp:1867
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (con Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1864
+#: src/gui/ConfigurationDialog.cpp:1868
 msgid "JPL Horizons"
 msgstr "Orizzonti JPL"
 
-#: src/gui/ConfigurationDialog.cpp:1865
+#: src/gui/ConfigurationDialog.cpp:1869
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1866
+#: src/gui/ConfigurationDialog.cpp:1870
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1867
+#: src/gui/ConfigurationDialog.cpp:1871
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
 msgstr "Reingold e Dershowitz (2002, 2007, 2018)"
 
-#: src/gui/ConfigurationDialog.cpp:1868
+#: src/gui/ConfigurationDialog.cpp:1872
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1869
+#: src/gui/ConfigurationDialog.cpp:1873
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1872
+#: src/gui/ConfigurationDialog.cpp:1876
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak & Meeus (2006) senza accelerazione aggiuntiva della luna"
 
-#: src/gui/ConfigurationDialog.cpp:1875
+#: src/gui/ConfigurationDialog.cpp:1879
 msgid "Modified Espenak & Meeus (2006, 2022)"
 msgstr "Modificati da Espenak e Meeus (2006, 2022)"
 
-#: src/gui/ConfigurationDialog.cpp:1876
+#: src/gui/ConfigurationDialog.cpp:1880
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1877
+#: src/gui/ConfigurationDialog.cpp:1881
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1878
+#: src/gui/ConfigurationDialog.cpp:1882
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1879
+#: src/gui/ConfigurationDialog.cpp:1883
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana & Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1880
+#: src/gui/ConfigurationDialog.cpp:1884
 msgid "Stephenson, Morrison & Hohenkerk (2016, 2021)"
 msgstr "Stephenson, Morrison e Hohenkerk (2016, 2021)"
 
-#: src/gui/ConfigurationDialog.cpp:1881
+#: src/gui/ConfigurationDialog.cpp:1885
 msgid "Henriksson (2017)"
 msgstr "Henriksson (2017)"
 
-#: src/gui/ConfigurationDialog.cpp:1882
+#: src/gui/ConfigurationDialog.cpp:1886
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Equazione personalizzata di %1T"
 
-#: src/gui/ConfigurationDialog.cpp:1930 src/gui/ConfigurationDialog.cpp:1967
+#: src/gui/ConfigurationDialog.cpp:1934 src/gui/ConfigurationDialog.cpp:1971
 #: src/gui/StelGuiItems.cpp:733 src/gui/LocationDialog.cpp:482
 msgid "System default"
 msgstr "Predefinito del sistema"
 
-#: src/gui/ConfigurationDialog.cpp:1931
+#: src/gui/ConfigurationDialog.cpp:1935
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "aaaa-mm-gg (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1932
+#: src/gui/ConfigurationDialog.cpp:1936
 msgid "dd-mm-yyyy"
 msgstr "gg-mm-aaaa"
 
-#: src/gui/ConfigurationDialog.cpp:1933
+#: src/gui/ConfigurationDialog.cpp:1937
 msgid "mm-dd-yyyy"
 msgstr "mm-gg-aaaa"
 
-#: src/gui/ConfigurationDialog.cpp:1934
+#: src/gui/ConfigurationDialog.cpp:1938
 msgid "ww, yyyy-mm-dd"
 msgstr "ww, yyyy-mm-dd"
 
-#: src/gui/ConfigurationDialog.cpp:1935
+#: src/gui/ConfigurationDialog.cpp:1939
 msgid "ww, dd-mm-yyyy"
 msgstr "ww, dd-mm-yyyy"
 
-#: src/gui/ConfigurationDialog.cpp:1936
+#: src/gui/ConfigurationDialog.cpp:1940
 msgid "ww, mm-dd-yyyy"
 msgstr "ww, mm-dd-yyyy"
 
-#: src/gui/ConfigurationDialog.cpp:1968
+#: src/gui/ConfigurationDialog.cpp:1972
 msgid "12-hour format"
 msgstr "formato di 12 ore"
 
-#: src/gui/ConfigurationDialog.cpp:1969
+#: src/gui/ConfigurationDialog.cpp:1973
 msgid "24-hour format"
 msgstr "formato di 24 ore"
 
-#: src/gui/ConfigurationDialog.cpp:1995
+#: src/gui/ConfigurationDialog.cpp:1999
 msgctxt "disabled"
 msgid "None"
 msgstr "Nessuno"
 
-#: src/gui/ConfigurationDialog.cpp:1996
+#: src/gui/ConfigurationDialog.cpp:2000
 msgid "5/6/5 bits"
 msgstr "5/6/5 bits"
 
-#: src/gui/ConfigurationDialog.cpp:1997
+#: src/gui/ConfigurationDialog.cpp:2001
 msgid "6/6/6 bits"
 msgstr "6/6/6 bits"
 
-#: src/gui/ConfigurationDialog.cpp:1998
+#: src/gui/ConfigurationDialog.cpp:2002
 msgid "8/8/8 bits"
 msgstr "8/8/8 bits"
 
-#: src/gui/ConfigurationDialog.cpp:1999
+#: src/gui/ConfigurationDialog.cpp:2003
 msgid "10/10/10 bits"
 msgstr "10/10/10 bits"
 
@@ -5229,24 +5241,24 @@ msgstr "Fotogrammi al secondo"
 msgid "Are you sure? This will delete your customized data."
 msgstr "Sei sicuro? Questo cancellerà ogni impostazione personalizzata."
 
-#: src/gui/ViewDialog.cpp:577
+#: src/gui/ViewDialog.cpp:583
 msgid "Loading ..."
 msgstr "Caricamento..."
 
-#: src/gui/ViewDialog.cpp:630
+#: src/gui/ViewDialog.cpp:636
 msgid "properties"
 msgstr "proprietà"
 
-#: src/gui/ViewDialog.cpp:651
+#: src/gui/ViewDialog.cpp:657
 msgid "Deep Sky"
 msgstr "Profondo Cielo"
 
-#: src/gui/ViewDialog.cpp:652
+#: src/gui/ViewDialog.cpp:658
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:274
 msgid "Solar System"
 msgstr "Sistema Solare"
 
-#: src/gui/ViewDialog.cpp:869
+#: src/gui/ViewDialog.cpp:875
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
@@ -5255,7 +5267,7 @@ msgstr ""
 "selezionati (piccole lune, asteroidi, comete) anziché un'approssimazione "
 "sferica"
 
-#: src/gui/ViewDialog.cpp:870
+#: src/gui/ViewDialog.cpp:876
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
@@ -5264,93 +5276,93 @@ msgstr ""
 "oggetti del sistema solare non convessi. Può ridurre la qualità della "
 "penombra su alcuni oggetti."
 
-#: src/gui/ViewDialog.cpp:905
+#: src/gui/ViewDialog.cpp:911
 msgid "Abbreviated"
 msgstr "abbreviato"
 
-#: src/gui/ViewDialog.cpp:906
+#: src/gui/ViewDialog.cpp:912
 msgid "Native"
 msgstr "Nativo"
 
-#: src/gui/ViewDialog.cpp:907
+#: src/gui/ViewDialog.cpp:913
 msgid "Translated"
 msgstr "Tradotto"
 
-#: src/gui/ViewDialog.cpp:1094
+#: src/gui/ViewDialog.cpp:1100
 msgid "No shooting stars"
 msgstr "Nessuna stella cadente"
 
-#: src/gui/ViewDialog.cpp:1096
+#: src/gui/ViewDialog.cpp:1102
 msgid "Normal rate"
 msgstr "Frequenza normale"
 
-#: src/gui/ViewDialog.cpp:1098
+#: src/gui/ViewDialog.cpp:1104
 msgid "Standard Orionids rate"
 msgstr "Frequenza standard delle Orionidi"
 
-#: src/gui/ViewDialog.cpp:1100
+#: src/gui/ViewDialog.cpp:1106
 msgid "Standard Perseids rate"
 msgstr "Frequenza standard delle Perseidi"
 
-#: src/gui/ViewDialog.cpp:1102
+#: src/gui/ViewDialog.cpp:1108
 msgid "Standard Geminids rate"
 msgstr "Tasso standard delle Geminidi"
 
-#: src/gui/ViewDialog.cpp:1104
+#: src/gui/ViewDialog.cpp:1110
 msgid "Exceptional Perseid rate"
 msgstr "Tasso eccezionale di Perseidi"
 
-#: src/gui/ViewDialog.cpp:1106
+#: src/gui/ViewDialog.cpp:1112
 msgid "Meteor storm rate"
 msgstr "Tasso di tempesta meteorica"
 
-#: src/gui/ViewDialog.cpp:1108
+#: src/gui/ViewDialog.cpp:1114
 msgid "Exceptional Draconid rate"
 msgstr "Tasso eccezionale di Draconidi"
 
-#: src/gui/ViewDialog.cpp:1110
+#: src/gui/ViewDialog.cpp:1116
 msgid "Exceptional Leonid rate"
 msgstr "Tasso eccezionale di Leonidi"
 
-#: src/gui/ViewDialog.cpp:1112
+#: src/gui/ViewDialog.cpp:1118
 msgid "Very high rate (1966 Leonids)"
 msgstr "Tasso molto elevato (1966 Leonidi)"
 
-#: src/gui/ViewDialog.cpp:1114
+#: src/gui/ViewDialog.cpp:1120
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Tasso più elevato di sempre (1966 Leonidi)"
 
-#: src/gui/ViewDialog.cpp:1177
+#: src/gui/ViewDialog.cpp:1183
 msgctxt "magnitude algorithm"
 msgid "G. Müller (1893)"
 msgstr "G. Müller (1893)"
 
-#: src/gui/ViewDialog.cpp:1178
+#: src/gui/ViewDialog.cpp:1184
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanac (1984)"
 msgstr "Almanacco Astronomico (1984)"
 
-#: src/gui/ViewDialog.cpp:1179
+#: src/gui/ViewDialog.cpp:1185
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "Supplemento Esplicativo (1992)"
 
-#: src/gui/ViewDialog.cpp:1180
+#: src/gui/ViewDialog.cpp:1186
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "Supplemento Esplicativo (2013)"
 
-#: src/gui/ViewDialog.cpp:1181
+#: src/gui/ViewDialog.cpp:1187
 msgctxt "magnitude algorithm"
 msgid "Mallama & Hilton (2018)"
 msgstr "Mallama & Hilton (2018)"
 
-#: src/gui/ViewDialog.cpp:1182
+#: src/gui/ViewDialog.cpp:1188
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "Generico"
 
-#: src/gui/ViewDialog.cpp:1204
+#: src/gui/ViewDialog.cpp:1210
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -5359,7 +5371,7 @@ msgstr ""
 "successivo) e fornisce V magnitudini (strumentali) (presumibilmente da D.L. "
 "Harris)."
 
-#: src/gui/ViewDialog.cpp:1205
+#: src/gui/ViewDialog.cpp:1211
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Müller and was"
 " still republished in the <em>Explanatory Supplement to the Astronomical "
@@ -5369,7 +5381,7 @@ msgstr ""
 "Müller ed è stato ripubblicato nel <em>Supplemento Esplicativo alle "
 "Effemeridi Astronomiche</em> (1961)"
 
-#: src/gui/ViewDialog.cpp:1206
+#: src/gui/ViewDialog.cpp:1212
 msgid ""
 "The algorithm was published in the 2nd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (1992)."
@@ -5377,7 +5389,7 @@ msgstr ""
 "Quest'algoritmo è stato pubblicato nella seconda edizione del "
 "<em>Supplemento Esplicativo all'Almanacco Astronomico</em> (1992)"
 
-#: src/gui/ViewDialog.cpp:1207
+#: src/gui/ViewDialog.cpp:1213
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -5385,7 +5397,7 @@ msgstr ""
 "L'algoritmo è stato pubblicato nella terza edizione del <em>Supplemento "
 "Esplicativo dell'Almanacco Astronomico</em> (2013)."
 
-#: src/gui/ViewDialog.cpp:1208
+#: src/gui/ViewDialog.cpp:1214
 msgid ""
 "The algorithm was published by A. Mallama & J. L. Hilton: <em>Computing "
 "apparent planetary magnitudes for the Astronomical Almanac.</em> "
@@ -5395,7 +5407,7 @@ msgstr ""
 " della magnitudo apparente planetaria per l'Almanacco Astronomico.</em> "
 "Astronomy&Computing 25 (2018) 10-24."
 
-#: src/gui/ViewDialog.cpp:1211
+#: src/gui/ViewDialog.cpp:1217
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Ampiezza visiva basata sull'angolo di fase e sull'albedo."
 
@@ -5876,7 +5888,7 @@ msgstr "Elev."
 msgid "Elong."
 msgstr "Elong."
 
-#: src/gui/AstroCalcDialog.cpp:1064 src/ui_viewDialog.h:3194
+#: src/gui/AstroCalcDialog.cpp:1064 src/ui_viewDialog.h:3230
 msgid "Solar system objects"
 msgstr "Oggetti del sistema solare"
 
@@ -6544,7 +6556,7 @@ msgstr "Nebulose luminose (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:4167 src/gui/AstroCalcDialog.cpp:6932
-#: src/translations.h:318 src/ui_viewDialog.h:3467
+#: src/translations.h:318 src/ui_viewDialog.h:3503
 #: src/ui_dsoColorsDialog.h:659
 msgid "Dark nebulae"
 msgstr "Nebulose oscure"
@@ -6890,24 +6902,24 @@ msgstr "A qualsiasi ora della notte"
 msgid "Bright stars"
 msgstr "Stelle luminose"
 
-#: src/gui/AstroCalcDialog.cpp:6931 src/ui_viewDialog.h:3466
+#: src/gui/AstroCalcDialog.cpp:6931 src/ui_viewDialog.h:3502
 msgid "Bright nebulae"
 msgstr "Nebulose luminose"
 
-#: src/gui/AstroCalcDialog.cpp:6933 src/ui_viewDialog.h:3470
+#: src/gui/AstroCalcDialog.cpp:6933 src/ui_viewDialog.h:3506
 #: src/ui_dsoColorsDialog.h:595
 msgid "Galaxies"
 msgstr "Galassie"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:6934 src/translations.h:310
-#: src/ui_viewDialog.h:3473 src/ui_dsoColorsDialog.h:599
+#: src/ui_viewDialog.h:3509 src/ui_dsoColorsDialog.h:599
 msgid "Open star clusters"
 msgstr "Ammassi aperti"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:6943 src/translations.h:316
-#: src/ui_viewDialog.h:3465 src/ui_dsoColorsDialog.h:588
+#: src/ui_viewDialog.h:3501 src/ui_dsoColorsDialog.h:588
 msgid "Planetary nebulae"
 msgstr "Nebulose planetarie"
 
@@ -6940,19 +6952,19 @@ msgstr "Candidati resti di Supernova"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:6951 src/translations.h:344
-#: src/ui_viewDialog.h:3472 src/ui_dsoColorsDialog.h:581
+#: src/ui_viewDialog.h:3508 src/ui_dsoColorsDialog.h:581
 msgid "Supernova remnants"
 msgstr "Resti di supernova"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:6952 src/translations.h:372
-#: src/ui_viewDialog.h:3469 src/ui_dsoColorsDialog.h:694
+#: src/ui_viewDialog.h:3505 src/ui_dsoColorsDialog.h:694
 msgid "Clusters of galaxies"
 msgstr "Ammassi di Galassie"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:6954 src/translations.h:312
-#: src/ui_viewDialog.h:3475 src/ui_dsoColorsDialog.h:574
+#: src/ui_viewDialog.h:3511 src/ui_dsoColorsDialog.h:574
 msgid "Globular star clusters"
 msgstr "Ammassi globulari"
 
@@ -6964,7 +6976,7 @@ msgstr "Regioni del cielo"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:6956 src/translations.h:326
-#: src/ui_viewDialog.h:3464 src/ui_dsoColorsDialog.h:565
+#: src/ui_viewDialog.h:3500 src/ui_dsoColorsDialog.h:565
 msgid "Active galaxies"
 msgstr "Galassie attive"
 
@@ -6987,7 +6999,7 @@ msgstr "Supernova luminose"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:6973 src/translations.h:330
-#: src/ui_viewDialog.h:3471 src/ui_dsoColorsDialog.h:650
+#: src/ui_viewDialog.h:3507 src/ui_dsoColorsDialog.h:650
 msgid "Interacting galaxies"
 msgstr "Galassie interagenti"
 
@@ -8077,12 +8089,12 @@ msgid "Protoplanetary Nebulae"
 msgstr "Nebulose protoplanetarie"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:376 src/ui_viewDialog.h:3376
+#: src/translations.h:376 src/ui_viewDialog.h:3412
 msgid "Messier Catalogue"
 msgstr "Catalogo di Messier"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:378 src/ui_viewDialog.h:3394
+#: src/translations.h:378 src/ui_viewDialog.h:3430
 msgid "Caldwell Catalogue"
 msgstr "Catalogo di Caldwell"
 
@@ -8212,17 +8224,17 @@ msgid "James Dunlop's southern deep sky catalogue"
 msgstr "Catalogo del cielo profondo del sud di James Dunlop"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:430 src/ui_viewDialog.h:3388
+#: src/translations.h:430 src/ui_viewDialog.h:3424
 msgid "Trumpler Catalogue"
 msgstr "Catalogo di Trumpler"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:432 src/ui_viewDialog.h:3458
+#: src/translations.h:432 src/ui_viewDialog.h:3494
 msgid "Stock Catalogue"
 msgstr "Catalogo di Stock"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:434 src/ui_viewDialog.h:3454
+#: src/translations.h:434 src/ui_viewDialog.h:3490
 msgid "Ruprecht Catalogue"
 msgstr "Catalogo di Ruprecht"
 
@@ -10681,120 +10693,130 @@ msgstr "Kamilaroi/Euahlayi"
 
 #: skycultures/translations_skycultures.fab:60
 msgctxt "sky culture"
+msgid "Khoikhoi and San"
+msgstr ""
+
+#: skycultures/translations_skycultures.fab:62
+msgctxt "sky culture"
 msgid "Korean"
 msgstr "Coreano"
 
-#: skycultures/translations_skycultures.fab:62
+#: skycultures/translations_skycultures.fab:64
 msgctxt "sky culture"
 msgid "Lokono"
 msgstr "Lokono"
 
-#: skycultures/translations_skycultures.fab:64
+#: skycultures/translations_skycultures.fab:66
 msgctxt "sky culture"
 msgid "Macedonian"
 msgstr "Macedone"
 
-#: skycultures/translations_skycultures.fab:66
+#: skycultures/translations_skycultures.fab:68
 msgctxt "sky culture"
 msgid "Maori"
 msgstr "Maori"
 
-#: skycultures/translations_skycultures.fab:68
+#: skycultures/translations_skycultures.fab:70
 msgctxt "sky culture"
 msgid "Maya"
 msgstr "Maya"
 
-#: skycultures/translations_skycultures.fab:70
+#: skycultures/translations_skycultures.fab:72
 msgctxt "sky culture"
 msgid "Mongolian"
 msgstr "Mongolo"
 
-#: skycultures/translations_skycultures.fab:72
+#: skycultures/translations_skycultures.fab:74
 msgctxt "sky culture"
 msgid "Navajo"
 msgstr "Navajo"
 
-#: skycultures/translations_skycultures.fab:74
+#: skycultures/translations_skycultures.fab:76
 msgctxt "sky culture"
 msgid "Norse"
 msgstr "Norse"
 
-#: skycultures/translations_skycultures.fab:76
+#: skycultures/translations_skycultures.fab:78
 msgctxt "sky culture"
 msgid "Northern Andes"
 msgstr "Ande del Nord"
 
-#: skycultures/translations_skycultures.fab:78
+#: skycultures/translations_skycultures.fab:80
 msgctxt "sky culture"
 msgid "Ojibwe"
 msgstr "Ojibwe"
 
-#: skycultures/translations_skycultures.fab:80
+#: skycultures/translations_skycultures.fab:82
 msgctxt "sky culture"
 msgid "Romanian"
 msgstr "Romena"
 
-#: skycultures/translations_skycultures.fab:82
+#: skycultures/translations_skycultures.fab:84
 msgctxt "sky culture"
 msgid "Russian (Siberian)"
 msgstr "Russo (siberiano)"
 
-#: skycultures/translations_skycultures.fab:84
+#: skycultures/translations_skycultures.fab:86
 msgctxt "sky culture"
 msgid "Sami"
 msgstr "Sami"
 
-#: skycultures/translations_skycultures.fab:86
+#: skycultures/translations_skycultures.fab:88
 msgctxt "sky culture"
 msgid "Sardinian"
 msgstr "Sardo"
 
-#: skycultures/translations_skycultures.fab:88
+#: skycultures/translations_skycultures.fab:90
 msgctxt "sky culture"
 msgid "Tongan"
 msgstr "Tongano"
 
-#: skycultures/translations_skycultures.fab:90
+#: skycultures/translations_skycultures.fab:92
 msgctxt "sky culture"
 msgid "Tukano"
 msgstr "Tucano"
 
-#: skycultures/translations_skycultures.fab:92
+#: skycultures/translations_skycultures.fab:94
 msgctxt "sky culture"
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
-#: skycultures/translations_skycultures.fab:94
+#: skycultures/translations_skycultures.fab:96
 msgctxt "sky culture"
 msgid "Vanuatu (Netwar)"
 msgstr "Vanuatu (Netwar)"
 
-#: skycultures/translations_skycultures.fab:96
+#: skycultures/translations_skycultures.fab:98
 msgctxt "sky culture"
 msgid "Western"
 msgstr "Occidentale"
 
-#: skycultures/translations_skycultures.fab:98
+#: skycultures/translations_skycultures.fab:100
 msgctxt "sky culture"
 msgid "Western (H.A. Rey)"
 msgstr "Occidentale (H.A. Rey)"
 
-#: skycultures/translations_skycultures.fab:100
+#: skycultures/translations_skycultures.fab:102
 msgctxt "sky culture"
 msgid "Western (O.Hlad)"
 msgstr "Occidentale (O. Hlad)"
 
-#: skycultures/translations_skycultures.fab:102
+#: skycultures/translations_skycultures.fab:104
 msgctxt "sky culture"
 msgid "Western (Sky & Telescope)"
 msgstr "Occidentale (Sky & Telescope)"
 
-#: skycultures/translations_skycultures.fab:104
+#: skycultures/translations_skycultures.fab:106
 msgctxt "sky culture"
 msgid "Western (Sternenkarten)"
 msgstr "Occidentale (Sternenkarten)"
 
-#: skycultures/translations_skycultures.fab:106
+#: skycultures/translations_skycultures.fab:108
+msgctxt "sky culture"
+msgid "Xhosa"
+msgstr ""
+
+#: skycultures/translations_skycultures.fab:110
 msgctxt "sky culture"
 msgid "Zulu"
 msgstr "Zulu"
@@ -11147,63 +11169,63 @@ msgstr "Ricerche recenti"
 msgid "Max items to display:"
 msgstr "Numero massimo di elementi da visualizzare:"
 
-#: src/ui_searchDialogGui.h:952 src/ui_viewDialog.h:3946
-#: src/ui_viewDialog.h:3977 src/ui_configurationDialog.h:2079
+#: src/ui_searchDialogGui.h:952 src/ui_viewDialog.h:4003
+#: src/ui_viewDialog.h:4034 src/ui_configurationDialog.h:2079
 #: src/ui_configurationDialog.h:2090
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:336
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:436
 msgid "Options"
 msgstr "Opzioni"
 
-#: src/ui_viewDialog.h:3184
+#: src/ui_viewDialog.h:3220
 msgid "View"
 msgstr "Visualizza"
 
-#: src/ui_viewDialog.h:3190 src/ui_viewDialog.h:3211
+#: src/ui_viewDialog.h:3226 src/ui_viewDialog.h:3247
 msgid "Sky"
 msgstr "Cielo"
 
-#: src/ui_viewDialog.h:3192
+#: src/ui_viewDialog.h:3228
 msgctxt "Solar system objects"
 msgid "SSO"
 msgstr "SSO"
 
-#: src/ui_viewDialog.h:3197
+#: src/ui_viewDialog.h:3233
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
 msgstr "DSO"
 
-#: src/ui_viewDialog.h:3199
+#: src/ui_viewDialog.h:3235
 msgid "Deep-Sky Objects"
 msgstr "Oggetti del cielo profondo"
 
-#: src/ui_viewDialog.h:3202
+#: src/ui_viewDialog.h:3238
 msgid "Markings"
 msgstr "Indicatori"
 
-#: src/ui_viewDialog.h:3204
+#: src/ui_viewDialog.h:3240
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:451
 msgid "Landscape"
 msgstr "Paesaggio"
 
-#: src/ui_viewDialog.h:3206
+#: src/ui_viewDialog.h:3242
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:230
 msgid "Starlore"
 msgstr "Tradizioni"
 
-#: src/ui_viewDialog.h:3208
+#: src/ui_viewDialog.h:3244
 msgid "Surveys"
 msgstr "Rilevamenti"
 
-#: src/ui_viewDialog.h:3212
+#: src/ui_viewDialog.h:3248
 msgid "Solar altitude for Twilight Finder:"
 msgstr "Altezza del Sole per trovare il Crepuscolo:"
 
-#: src/ui_viewDialog.h:3213
+#: src/ui_viewDialog.h:3249
 msgid "Atmosphere visualization"
 msgstr "Visualizzazione dell'atmosfera"
 
-#: src/ui_viewDialog.h:3215
+#: src/ui_viewDialog.h:3251
 msgid ""
 "Refraction/Extinction settings: pressure, temperature, extinction "
 "coefficient, etc."
@@ -11211,112 +11233,112 @@ msgstr ""
 "Impostazioni di rifrazione/estinzione: pressione, temperatura, coefficiente "
 "di estinzione, ecc."
 
-#: src/ui_viewDialog.h:3218
+#: src/ui_viewDialog.h:3254
 msgid "Open skylight details (color tweaks for the atmosphere)"
 msgstr ""
 "Aprire i dettagli per la luce del cielo (modifiche al colore per "
 "l'atmosfera)"
 
-#: src/ui_viewDialog.h:3221
+#: src/ui_viewDialog.h:3257
 msgid "Open tone mapping details."
 msgstr "Apri i dettagli sulla mappatura dei toni."
 
-#: src/ui_viewDialog.h:3223
+#: src/ui_viewDialog.h:3259
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:446
 msgid "Light pollution:"
 msgstr "Inquinamento luminoso:"
 
-#: src/ui_viewDialog.h:3225
+#: src/ui_viewDialog.h:3261
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Oscura le stelle deboli quando è visibile un oggetto molto luminoso"
 
-#: src/ui_viewDialog.h:3227
+#: src/ui_viewDialog.h:3263
 msgid "Dynamic eye adaptation"
 msgstr "Adattamento dinamico dell'occhio"
 
-#: src/ui_viewDialog.h:3229
+#: src/ui_viewDialog.h:3265
 msgid "Settings for sporadic meteors"
 msgstr "Impostazioni per meteore sporadiche"
 
-#: src/ui_viewDialog.h:3231
+#: src/ui_viewDialog.h:3267
 msgctxt "Zenithal Hourly Rate"
 msgid "Shooting stars:"
 msgstr "Stelle cadenti:"
 
-#: src/ui_viewDialog.h:3234 src/ui_viewDialog.h:3237
+#: src/ui_viewDialog.h:3270 src/ui_viewDialog.h:3273
 msgid "The zenithal hourly rate for the sporadic meteors"
 msgstr "La frequenza oraria zenitale delle meteore sporadiche"
 
-#: src/ui_viewDialog.h:3239
+#: src/ui_viewDialog.h:3275
 msgid "Milky Way brightness/saturation:"
 msgstr "Via Lattea luminosità/saturazione:"
 
-#: src/ui_viewDialog.h:3241
+#: src/ui_viewDialog.h:3277
 msgid ""
 "Changing saturation from totally unsaturated (0.00) to default (1.00) value."
 msgstr ""
 "Modifica il valore di saturazione da totalmente insaturo (0,00) a "
 "predefinito (1,00)."
 
-#: src/ui_viewDialog.h:3243
+#: src/ui_viewDialog.h:3279
 msgid "Zodiacal Light brightness:"
 msgstr "Luminosità della luce zodiacale:"
 
-#: src/ui_viewDialog.h:3245
+#: src/ui_viewDialog.h:3281
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:262
 msgid "Relative scale:"
 msgstr "Scala relativa:"
 
-#: src/ui_viewDialog.h:3247
+#: src/ui_viewDialog.h:3283
 msgid "Limit the magnitude of stars"
 msgstr "Limita la magnitudine delle stelle"
 
-#: src/ui_viewDialog.h:3249 src/ui_viewDialog.h:3329 src/ui_viewDialog.h:3488
+#: src/ui_viewDialog.h:3285 src/ui_viewDialog.h:3365 src/ui_viewDialog.h:3524
 msgid "Limit magnitude:"
 msgstr "Magnitudine limite:"
 
-#: src/ui_viewDialog.h:3251
+#: src/ui_viewDialog.h:3287
 msgid ""
 "Use designations of stars instead of their common names for screen labels"
 msgstr ""
 "Usa le designazioni delle stelle invece dei loro nomi comuni per le "
 "etichette sullo schermo"
 
-#: src/ui_viewDialog.h:3253 src/ui_viewDialog.h:3492
+#: src/ui_viewDialog.h:3289 src/ui_viewDialog.h:3528
 msgid "Use designations for screen labels"
 msgstr "Utilizzare denominazioni per le etichette a schermo"
 
-#: src/ui_viewDialog.h:3254 src/ui_viewDialog.h:3318 src/ui_viewDialog.h:3476
+#: src/ui_viewDialog.h:3290 src/ui_viewDialog.h:3354 src/ui_viewDialog.h:3512
 msgid "Labels and Markers"
 msgstr "Etichette e Indicatori"
 
-#: src/ui_viewDialog.h:3255
+#: src/ui_viewDialog.h:3291
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:274
 msgid "Twinkle:"
 msgstr "Scintillìo:"
 
-#: src/ui_viewDialog.h:3256
+#: src/ui_viewDialog.h:3292
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:268
 msgid "Absolute scale:"
 msgstr "Scala assoluta:"
 
-#: src/ui_viewDialog.h:3258
+#: src/ui_viewDialog.h:3294
 msgid "Show stars with pointed rays"
 msgstr "Mostra le stelle con raggi appuntiti"
 
-#: src/ui_viewDialog.h:3260
+#: src/ui_viewDialog.h:3296
 msgid "Spiky stars"
 msgstr "Stelle appuntite"
 
-#: src/ui_viewDialog.h:3262
+#: src/ui_viewDialog.h:3298
 msgid "Show all available proper names"
 msgstr "Mostra tutti i nomi propri disponibili"
 
-#: src/ui_viewDialog.h:3264
+#: src/ui_viewDialog.h:3300
 msgid "Show additional star names"
 msgstr "Mostra i nomi aggiuntive delle stelle "
 
-#: src/ui_viewDialog.h:3266
+#: src/ui_viewDialog.h:3302
 msgid ""
 "Show traditional designations of double stars if proper name, Bayer or "
 "Flamsteed designations do not exist for the star."
@@ -11324,12 +11346,12 @@ msgstr ""
 "Mostra le denominazioni tradizionali delle stelle doppie se non esistono "
 "nomi propri, Bayer o Flamsteed per la stella."
 
-#: src/ui_viewDialog.h:3268
+#: src/ui_viewDialog.h:3304
 msgctxt "double stars"
 msgid "Dbl. stars"
 msgstr "Stelle doppie"
 
-#: src/ui_viewDialog.h:3270
+#: src/ui_viewDialog.h:3306
 msgid ""
 "Show designations of variable stars if proper name, Bayer or Flamsteed "
 "designations, or designation of double star do not exist for the star."
@@ -11338,12 +11360,12 @@ msgstr ""
 "nomi propri dalle designazioni Bayer o Flamsteed o dalle designazioni di "
 "doppia stella."
 
-#: src/ui_viewDialog.h:3272
+#: src/ui_viewDialog.h:3308
 msgctxt "variable stars"
 msgid "Var. stars"
 msgstr "Stelle variabili"
 
-#: src/ui_viewDialog.h:3274
+#: src/ui_viewDialog.h:3310
 msgid ""
 "Show designations from Hipparcos catalog (HIP) if available and star doesn't"
 " have other traditional designations."
@@ -11351,115 +11373,115 @@ msgstr ""
 "Mostra le designazioni dal catalogo Hipparcos (HIP) se disponibili e se la "
 "stella non ha altre designazioni tradizionali."
 
-#: src/ui_viewDialog.h:3276
+#: src/ui_viewDialog.h:3312
 msgid "Projection"
 msgstr "Proiezione"
 
-#: src/ui_viewDialog.h:3277
+#: src/ui_viewDialog.h:3313
 msgid "Vertical viewport offset"
 msgstr "Compensazione finestra verticale"
 
-#: src/ui_viewDialog.h:3278
+#: src/ui_viewDialog.h:3314
 msgid "Custom FoV limit"
 msgstr "Limite FoV personalizzato"
 
-#: src/ui_viewDialog.h:3280
+#: src/ui_viewDialog.h:3316
 msgid "Additional custom limitation (e.g. for planetarium use)"
 msgstr "Limitazione personalizzata aggiuntiva (ad es. per uso planetario)"
 
-#: src/ui_viewDialog.h:3282
+#: src/ui_viewDialog.h:3318
 msgid "Solar System objects"
 msgstr "Oggetti del Sistema Solare"
 
-#: src/ui_viewDialog.h:3283
+#: src/ui_viewDialog.h:3319
 msgid "Show orbits"
 msgstr "Mostra orbite"
 
-#: src/ui_viewDialog.h:3285
+#: src/ui_viewDialog.h:3321
 msgid "Show orbit even if planet is off screen"
 msgstr "Mostra l'orbita anche se il pianeta è fuori dallo schermo"
 
-#: src/ui_viewDialog.h:3287
+#: src/ui_viewDialog.h:3323
 msgid "permanently"
 msgstr "permanentemente"
 
-#: src/ui_viewDialog.h:3289
+#: src/ui_viewDialog.h:3325
 msgid "Configure colors of orbit lines"
 msgstr "Configurare colori delle linee di orbita"
 
-#: src/ui_viewDialog.h:3292
+#: src/ui_viewDialog.h:3328
 msgid "Orbits thickness in pixels"
 msgstr "Spessore delle orbite in pixel"
 
-#: src/ui_viewDialog.h:3295
+#: src/ui_viewDialog.h:3331
 msgid "Color of trails"
 msgstr "Colore delle orbite"
 
-#: src/ui_viewDialog.h:3297
+#: src/ui_viewDialog.h:3333
 msgid "Show trails"
 msgstr "Mostra tracce"
 
-#: src/ui_viewDialog.h:3299
+#: src/ui_viewDialog.h:3335
 msgid "Trails thickness in pixels"
 msgstr "Spessore della traccia in pixel"
 
-#: src/ui_viewDialog.h:3302
+#: src/ui_viewDialog.h:3338
 msgid "Color of nomenclature labels"
 msgstr "Colore delle etichette della nomenclatura"
 
-#: src/ui_viewDialog.h:3306
+#: src/ui_viewDialog.h:3342
 msgid "Show hints and labels for planetary features"
 msgstr "Mostra suggerimenti ed etichette delle strutture planetarie"
 
-#: src/ui_viewDialog.h:3308
+#: src/ui_viewDialog.h:3344
 msgid "Show planetary nomenclature"
 msgstr "Mostra la nomenclatura planetaria"
 
-#: src/ui_viewDialog.h:3309
+#: src/ui_viewDialog.h:3345
 msgid "Hide nomenclature on the celestial body of observer"
 msgstr "Nascondi la nomenclatura sul corpo celeste dell'osservatore"
 
-#: src/ui_viewDialog.h:3310
+#: src/ui_viewDialog.h:3346
 msgid "Scale:"
 msgstr "Scala:"
 
-#: src/ui_viewDialog.h:3311
+#: src/ui_viewDialog.h:3347
 msgctxt "scale"
 msgid "Sun"
 msgstr "Sole"
 
-#: src/ui_viewDialog.h:3312
+#: src/ui_viewDialog.h:3348
 msgctxt "scale"
 msgid "Moon"
 msgstr "Luna"
 
-#: src/ui_viewDialog.h:3314
+#: src/ui_viewDialog.h:3350
 msgid "Scale factor"
 msgstr "Fattore di Scala"
 
-#: src/ui_viewDialog.h:3316
+#: src/ui_viewDialog.h:3352
 msgctxt "scale"
 msgid "Planets"
 msgstr "Pianeti"
 
-#: src/ui_viewDialog.h:3317
+#: src/ui_viewDialog.h:3353
 msgctxt "scale"
 msgid "Minor bodies"
 msgstr "Corpi minori"
 
-#: src/ui_viewDialog.h:3320
+#: src/ui_viewDialog.h:3356
 msgid "Color of planet labels"
 msgstr "Colore delle etichette del pianeta"
 
-#: src/ui_viewDialog.h:3325
+#: src/ui_viewDialog.h:3361
 msgid "Simulate self-shadowing"
 msgstr "Simula l'auto ombreggiatura"
 
-#: src/ui_viewDialog.h:3327
+#: src/ui_viewDialog.h:3363
 msgid "Limit the magnitude of solar system objects"
 msgstr "Limita la magnitudine degli oggetti del sistema solare"
 
-#: src/ui_viewDialog.h:3331
+#: src/ui_viewDialog.h:3367
 #, c-format
 msgid ""
 "Astronomical Almanac (default) has 2% enlargement, Danjon (1951) uses a "
@@ -11468,15 +11490,15 @@ msgstr ""
 "Almanacco astronomico (predefinito) ha un ingrandimento del 2%, Danjon "
 "(1951) usa un modello leggermente diverso"
 
-#: src/ui_viewDialog.h:3333
+#: src/ui_viewDialog.h:3369
 msgid "Earth shadow enlargement after Danjon"
 msgstr "Ingrandimento dell'ombra terrestre secondo Danjon"
 
-#: src/ui_viewDialog.h:3334
+#: src/ui_viewDialog.h:3370
 msgid "Only orbits of major planets"
 msgstr "Solo orbite dei pianeti maggiori"
 
-#: src/ui_viewDialog.h:3336
+#: src/ui_viewDialog.h:3372
 msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
@@ -11484,11 +11506,11 @@ msgstr ""
 "Disattiva questa opzione se vuoi vedere l'orbita del pianeta selezionato e "
 "delle sue lune."
 
-#: src/ui_viewDialog.h:3338
+#: src/ui_viewDialog.h:3374
 msgid "Only orbit for selected object"
 msgstr "Solo orbita dell'ogetto selezionato"
 
-#: src/ui_viewDialog.h:3340
+#: src/ui_viewDialog.h:3376
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
@@ -11496,15 +11518,15 @@ msgstr ""
 "Attivare questa opzione per simulare l'effetto della reale velocità della "
 "luce (raccomandato)."
 
-#: src/ui_viewDialog.h:3342
+#: src/ui_viewDialog.h:3378
 msgid "Simulate light speed"
 msgstr "Simula la velocità della luce"
 
-#: src/ui_viewDialog.h:3346
+#: src/ui_viewDialog.h:3382
 msgid "Use more accurate 3D models (where available)"
 msgstr "Utilizza modelli 3D più precisi (se disponibili)"
 
-#: src/ui_viewDialog.h:3348
+#: src/ui_viewDialog.h:3384
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
@@ -11512,65 +11534,65 @@ msgstr ""
 "Disattiva questa opzione se vuoi vedere le traiettorie di tutti i corpi del "
 "sistema solare."
 
-#: src/ui_viewDialog.h:3350
+#: src/ui_viewDialog.h:3386
 msgid "Only for N latest selected objects:"
 msgstr "Solo per N gli ultimi oggetti selezionati:"
 
-#: src/ui_viewDialog.h:3352
+#: src/ui_viewDialog.h:3388
 msgid "Toggle drawing Sun's glare"
 msgstr "Attiva/disattiva il disegno del bagliore del Sole"
 
-#: src/ui_viewDialog.h:3354
+#: src/ui_viewDialog.h:3390
 msgid "Sun's glare"
 msgstr "Bagliore del Sole"
 
-#: src/ui_viewDialog.h:3355 src/ui_astroCalcDialog.h:2068
+#: src/ui_viewDialog.h:3391 src/ui_astroCalcDialog.h:2068
 msgid "Show:"
 msgstr "Mostra:"
 
-#: src/ui_viewDialog.h:3357
+#: src/ui_viewDialog.h:3393
 msgid "Toggle drawing halo around the Moon"
 msgstr "Attiva/disattiva il disegno dell'alone attorno alla Luna"
 
-#: src/ui_viewDialog.h:3359
+#: src/ui_viewDialog.h:3395
 msgid "Moon's halo"
 msgstr "Alone della Luna"
 
-#: src/ui_viewDialog.h:3361
+#: src/ui_viewDialog.h:3397
 msgid "Toggle permanent drawing of Sun's corona when atmosphere is disabled"
 msgstr ""
 "Attiva/disattiva il disegno permanente della corona del Sole quando "
 "l'atmosfera è disabilitata"
 
-#: src/ui_viewDialog.h:3363
+#: src/ui_viewDialog.h:3399
 msgid "Sun's corona"
 msgstr "Corona solare"
 
-#: src/ui_viewDialog.h:3366
+#: src/ui_viewDialog.h:3402
 msgid "Jupiter's Great Red Spot..."
 msgstr "La grande macchia rossa di Giove..."
 
-#: src/ui_viewDialog.h:3368
+#: src/ui_viewDialog.h:3404
 msgid "GRS details..."
 msgstr "Dettagli Grandre Macchia Rossa"
 
-#: src/ui_viewDialog.h:3369
+#: src/ui_viewDialog.h:3405
 msgid "Solar System Editor..."
 msgstr "Editor del sistema solare..."
 
-#: src/ui_viewDialog.h:3371
+#: src/ui_viewDialog.h:3407
 msgid "Planets magnitude algorithm"
 msgstr "Algoritmo della magnitudine dei pianeti"
 
-#: src/ui_viewDialog.h:3373
+#: src/ui_viewDialog.h:3409
 msgid "Planets magnitude algorithm:"
 msgstr "Algoritmo della magnitudine dei pianeti:"
 
-#: src/ui_viewDialog.h:3374
+#: src/ui_viewDialog.h:3410
 msgid "Display objects from catalogs"
 msgstr "Visualizza gli oggetti dai cataloghi"
 
-#: src/ui_viewDialog.h:3379
+#: src/ui_viewDialog.h:3415
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, "
 "1960)"
@@ -11578,31 +11600,31 @@ msgstr ""
 "Un catalogo delle regioni a emissione Hα nella Via Lattea meridionale "
 "(Rodgers+, 1960)"
 
-#: src/ui_viewDialog.h:3382
+#: src/ui_viewDialog.h:3418
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
 msgstr "Un catalogo di resti di supernova galattica (Green, 2014)"
 
-#: src/ui_viewDialog.h:3385
+#: src/ui_viewDialog.h:3421
 msgid "The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001)"
 msgstr "Il Catalogo delle Galassie Interagenti (Vorontsov-Velyaminov+, 2001)"
 
-#: src/ui_viewDialog.h:3391
+#: src/ui_viewDialog.h:3427
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr "Catalogo di Barnard di 349 oggetti oscuri nel cielo (Barnard, 1927)"
 
-#: src/ui_viewDialog.h:3397
+#: src/ui_viewDialog.h:3433
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr "Il catalogo generale Uppsala delle galassie"
 
-#: src/ui_viewDialog.h:3400
+#: src/ui_viewDialog.h:3436
 msgid "Hickson Compact Group (Hickson+, 1982)"
 msgstr "Hickson Compact Group (Hickson+, 1982)"
 
-#: src/ui_viewDialog.h:3403
+#: src/ui_viewDialog.h:3439
 msgid "Catalogue of Reflection Nebulae (van den Bergh, 1966)"
 msgstr "Catalogo delle nebulose a riflessione (van den Bergh, 1966)"
 
-#: src/ui_viewDialog.h:3406
+#: src/ui_viewDialog.h:3442
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
@@ -11610,56 +11632,56 @@ msgstr ""
 "Catalogo di ammassi stellari presenti sulle lastre fotografiche di Franklin-"
 "Adams (Melotte, 1915)"
 
-#: src/ui_viewDialog.h:3409
+#: src/ui_viewDialog.h:3445
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr "Index Catalogue di nebulose e ammassi di stelle"
 
-#: src/ui_viewDialog.h:3412
+#: src/ui_viewDialog.h:3448
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr "Catalogo di Lynds delle nebulose luminose (Lynds, 1965)"
 
-#: src/ui_viewDialog.h:3415
+#: src/ui_viewDialog.h:3451
 msgid "Atlas of Peculiar Galaxies (Arp, 1966)"
 msgstr "Atlante delle Galassie Peculiari (Arp, 1966)"
 
-#: src/ui_viewDialog.h:3418
+#: src/ui_viewDialog.h:3454
 msgid ""
 "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)"
 msgstr ""
 "Il Catalogo Strasbourg-ESO delle Nebulose Planetarie Galattiche (Acker+, "
 "1992)"
 
-#: src/ui_viewDialog.h:3421
+#: src/ui_viewDialog.h:3457
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr "Catalogo delle regioni HII (Sharpless, 1959)"
 
-#: src/ui_viewDialog.h:3424
+#: src/ui_viewDialog.h:3460
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr "Catalogo di nebulose galattiche diffuse luminose (Cederblad, 1946)"
 
-#: src/ui_viewDialog.h:3427
+#: src/ui_viewDialog.h:3463
 msgid "Principal Galaxy Catalog"
 msgstr "Principal Galaxy Catalog"
 
-#: src/ui_viewDialog.h:3430
+#: src/ui_viewDialog.h:3466
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
 msgstr "Un Catalogo di Ammassi Ricchi di Galassie (Abell+, 1989)"
 
-#: src/ui_viewDialog.h:3433
+#: src/ui_viewDialog.h:3469
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr "Catalogo degli ammassi galattici aperti (Collinder, 1931)"
 
-#: src/ui_viewDialog.h:3436
+#: src/ui_viewDialog.h:3472
 msgid ""
 "Catalogue and distances of optically visible H II regions (Dickel+, 1969)"
 msgstr ""
 "Catalogo e distanze di regioni H II visibili otticamente (Dickel+, 1969)"
 
-#: src/ui_viewDialog.h:3439
+#: src/ui_viewDialog.h:3475
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr "Catalogo di Lynds delle nebulose oscure (Lynds, 1962)"
 
-#: src/ui_viewDialog.h:3442
+#: src/ui_viewDialog.h:3478
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh and "
 "Herbst, 1975)"
@@ -11667,24 +11689,24 @@ msgstr ""
 "Catalogo delle stelle meridionali incorporate nella nebulosità (van den "
 "Bergh e Herbst, 1975)"
 
-#: src/ui_viewDialog.h:3445
+#: src/ui_viewDialog.h:3481
 msgid "ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982)"
 msgstr "ESO/Uppsala Survey del ESO(B) Atlas (Lauberts, 1982)"
 
-#: src/ui_viewDialog.h:3448
+#: src/ui_viewDialog.h:3484
 msgid "The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)"
 msgstr "Il Catalogo delle Nebulose Galattiche Planetarie (Kohoutek, 2001)"
 
-#: src/ui_viewDialog.h:3451
+#: src/ui_viewDialog.h:3487
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr "New General Catalogue di nebulose e ammassi di stelle"
 
-#: src/ui_viewDialog.h:3456
+#: src/ui_viewDialog.h:3492
 msgctxt "other catalogs"
 msgid "Other"
 msgstr "Altro"
 
-#: src/ui_viewDialog.h:3461
+#: src/ui_viewDialog.h:3497
 msgid ""
 "van den Bergh-Hagen Catalogue (Uniform survey of clusters in the Southern "
 "Milky Way; van den Bergh and Hagen, 1975)"
@@ -11692,29 +11714,29 @@ msgstr ""
 "Catalogo van den Bergh-Hagen (Rilievo uniforme degli ammassi nella Via "
 "Lattea meridionale; van den Bergh e Hagen, 1975)"
 
-#: src/ui_viewDialog.h:3463
+#: src/ui_viewDialog.h:3499
 msgid "Filter by type"
 msgstr "Filtra per tipo"
 
-#: src/ui_viewDialog.h:3468 src/ui_dsoColorsDialog.h:636
+#: src/ui_viewDialog.h:3504 src/ui_dsoColorsDialog.h:636
 msgid "Hydrogen regions"
 msgstr "Zone di idrogeno"
 
-#: src/ui_viewDialog.h:3474
+#: src/ui_viewDialog.h:3510
 msgid "Other"
 msgstr "Altro"
 
-#: src/ui_viewDialog.h:3478
+#: src/ui_viewDialog.h:3514
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr ""
 "Usa suggerimenti proporzionali alla dimensione angolare degli oggetti del "
 "cielo profondo"
 
-#: src/ui_viewDialog.h:3480
+#: src/ui_viewDialog.h:3516
 msgid "Use proportional hints"
 msgstr "Usa suggerimenti proporzionali"
 
-#: src/ui_viewDialog.h:3482
+#: src/ui_viewDialog.h:3518
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
@@ -11722,17 +11744,17 @@ msgstr ""
 "Usa la luminosità superficiale degli oggetti del cielo profondo come scala "
 "della visibilità delle loro targhe ed etichette."
 
-#: src/ui_viewDialog.h:3484
+#: src/ui_viewDialog.h:3520
 msgid "Use surface brightness"
 msgstr "Usa luminosità superficiale"
 
-#: src/ui_viewDialog.h:3486
+#: src/ui_viewDialog.h:3522
 msgid "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
 "Limita la magnitudine degli oggetti del cielo profondo (per osservatori a "
 "occhio nudo o con binocolo)."
 
-#: src/ui_viewDialog.h:3490
+#: src/ui_viewDialog.h:3526
 msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
@@ -11740,155 +11762,500 @@ msgstr ""
 "Utilizzare le denominazioni degli oggetti del profondo cielo invece dei loro"
 " nomi comuni per le etichette a schermo"
 
-#: src/ui_viewDialog.h:3493 plugins/Satellites/src/ui_satellitesDialog.h:1087
+#: src/ui_viewDialog.h:3529 plugins/Satellites/src/ui_satellitesDialog.h:1087
 msgid "Labels"
 msgstr "Etichette"
 
-#: src/ui_viewDialog.h:3494
+#: src/ui_viewDialog.h:3530
 msgid "Hints"
 msgstr "Suggerimenti"
 
-#: src/ui_viewDialog.h:3495
+#: src/ui_viewDialog.h:3531
 msgid "Configure colors of markers"
 msgstr "Configura i colori dei marcatori"
 
-#: src/ui_viewDialog.h:3496
+#: src/ui_viewDialog.h:3532
 msgid "Use outlines for big deep-sky objects"
 msgstr "Utilizzare i contorni per i grandi oggetti del cielo profondo"
 
-#: src/ui_viewDialog.h:3500
+#: src/ui_viewDialog.h:3536
 msgid "Limit angular size (arcmin):"
 msgstr "Limire grandezza angolare (arcmin):"
 
-#: src/ui_viewDialog.h:3502
+#: src/ui_viewDialog.h:3538
 msgid "Minimal angular size in arcminutes for visible DSO"
 msgstr "Minima grandezza angolare in arcominuti per DSO visibili"
 
-#: src/ui_viewDialog.h:3505
+#: src/ui_viewDialog.h:3541
 msgid "Maximum angular size in arcminutes for visible DSO"
 msgstr "Massima grandezza angolare in arcominuti per DSO visibili"
 
-#: src/ui_viewDialog.h:3507
+#: src/ui_viewDialog.h:3543
 msgid "Use additional names of DSO"
 msgstr "Usa nomi aggiuntivi dei DSO"
 
-#: src/ui_viewDialog.h:3508
+#: src/ui_viewDialog.h:3544
 msgid "Celestial Sphere"
 msgstr "Sfera Celeste"
 
-#: src/ui_viewDialog.h:3510
-msgid "Color of circular marker of FOV"
-msgstr "Colore dell'indicatore circolare del FOV"
+#: src/ui_viewDialog.h:3546
+msgid ""
+"This circle represents the outermost rim of Earth's shadow in the distance "
+"of the Moon."
+msgstr ""
+"Questo cerchio rappresenta il bordo più esterno dell'ombra terrestre nella "
+"distanza dalla Luna."
 
-#: src/ui_viewDialog.h:3513
-msgid "Color of ecliptic poles (of date)"
-msgstr "Colore dei poli dell'eclittica (data corrente)"
+#: src/ui_viewDialog.h:3548
+msgid "Earth penumbra"
+msgstr "Penombra Terrestre"
 
-#: src/ui_viewDialog.h:3516
+#: src/ui_viewDialog.h:3550
+msgid "Color of galactic poles"
+msgstr "Colore dei poli galattici"
+
+#: src/ui_viewDialog.h:3553
+msgid "Color of antisolar point"
+msgstr "Colore del punto antisolare"
+
+#: src/ui_viewDialog.h:3557
+msgid "Show celestial poles of current planet and date."
+msgstr "Mostra poli celesti del pianeta e la data corrente."
+
+#: src/ui_viewDialog.h:3559
+msgid "Celestial poles (of date)"
+msgstr "Poli celesti (data corrente)"
+
+#: src/ui_viewDialog.h:3561
+msgid "Show meridian line."
+msgstr "Mostra la linea del meridiano"
+
+#: src/ui_viewDialog.h:3565
+msgid "Color of ecliptic (of date)"
+msgstr "Colore dell'eclittica (di data)"
+
+#: src/ui_viewDialog.h:3568 src/ui_viewDialog.h:3579 src/ui_viewDialog.h:3593
+#: src/ui_viewDialog.h:3616 src/ui_viewDialog.h:3620 src/ui_viewDialog.h:3628
+#: src/ui_viewDialog.h:3632 src/ui_viewDialog.h:3646 src/ui_viewDialog.h:3714
+#: src/ui_viewDialog.h:3747 src/ui_viewDialog.h:3811 src/ui_viewDialog.h:3850
+#: src/ui_viewDialog.h:3861 src/ui_viewDialog.h:3960 src/ui_viewDialog.h:3983
+msgid "Label partitions"
+msgstr "Etichette delle partizioni"
+
+#: src/ui_viewDialog.h:3570
+msgid "Precession circles"
+msgstr "Cerchi di precessione"
+
+#: src/ui_viewDialog.h:3572 src/ui_viewDialog.h:3586 src/ui_viewDialog.h:3678
+#: src/ui_viewDialog.h:3700 src/ui_viewDialog.h:3725 src/ui_viewDialog.h:3769
+#: src/ui_viewDialog.h:3783 src/ui_viewDialog.h:3787 src/ui_viewDialog.h:3804
+#: src/ui_viewDialog.h:3842 src/ui_viewDialog.h:3869 src/ui_viewDialog.h:3884
+#: src/ui_viewDialog.h:3919 src/ui_viewDialog.h:3948 src/ui_viewDialog.h:3991
+msgid "Show partitions"
+msgstr "Mostra partizioni"
+
+#: src/ui_viewDialog.h:3576
+msgid "Color of marker of center of FOV"
+msgstr "Colore dell'indicatore del centro del FOV"
+
+#: src/ui_viewDialog.h:3581
+msgid "Ecliptic (J2000)"
+msgstr "Eclittica (J2000)"
+
+#: src/ui_viewDialog.h:3583
+msgid "Color of precession circles"
+msgstr "Colore dei cerchi di precessione"
+
+#: src/ui_viewDialog.h:3590
+msgid "Color of galactic center and anticenter"
+msgstr "Colore del centro galattico e dell'anticentro"
+
+#: src/ui_viewDialog.h:3595
+msgid "Equator (of date)"
+msgstr "Equatore (data corrente)"
+
+#: src/ui_viewDialog.h:3597
+msgid "Color of altitude line"
+msgstr "Colore della linea di altezza"
+
+#: src/ui_viewDialog.h:3601
+msgid ""
+"Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
+"distribution of nearby galaxies."
+msgstr ""
+"Mostra le coordinate supergalattiche di Vaucouleurs (1976), definite dalla "
+"distribuzione delle galassie vicine."
+
+#: src/ui_viewDialog.h:3605
+msgid "Show ecliptic poles of current date."
+msgstr "Mostra i poli dell'eclittica per la data corrente"
+
+#: src/ui_viewDialog.h:3607
+msgid "Ecliptic poles (of date)"
+msgstr "Poli dell'eclittica (data corrente)"
+
+#: src/ui_viewDialog.h:3609
+msgid "Color of Prime Vertical"
+msgstr "Colore del Primo Verticale"
+
+#: src/ui_viewDialog.h:3612
+msgid "Show mathematical horizon line."
+msgstr "Mostra la linea matematica dell'orizzonte"
+
+#: src/ui_viewDialog.h:3624
+msgid "Altitudes and azimuth (counted from North towards East)."
+msgstr "Altitudini e azimut (contati da Nord verso Est)."
+
+#: src/ui_viewDialog.h:3636
+msgid "Show celestial equator of J2000.0."
+msgstr "Mostra l'equatore celeste (J2000.0)"
+
+#: src/ui_viewDialog.h:3642
+msgid "Color of penumbra circle"
+msgstr "Colore del cerchio di penombra"
+
+#: src/ui_viewDialog.h:3650
+msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
+msgstr ""
+"Mostra la linea dell'eclittica per J2000.0 (piano fondamentale VSOP87A)."
+
+#: src/ui_viewDialog.h:3654
+msgid "Color of the supergalactic grid"
+msgstr "Colore della griglia supergalattica"
+
+#: src/ui_viewDialog.h:3657
+msgid "Color of horizon"
+msgstr "Colore dell'orizzonte"
+
+#: src/ui_viewDialog.h:3659
+msgid "Solstices (of date)"
+msgstr "Solstizi (alla data)"
+
+#: src/ui_viewDialog.h:3661
+msgid "Color of equator (J2000.0)"
+msgstr "Colore dell'equatore (J2000.0)"
+
+#: src/ui_viewDialog.h:3664
+msgid "Color of the equinox points (of date)"
+msgstr "Colore dei punti di equinozio (alla data)"
+
+#: src/ui_viewDialog.h:3666
+msgid "Equinoxes (of date)"
+msgstr "Equinozi (alla data)"
+
+#: src/ui_viewDialog.h:3668
+msgid "Color of the equatorial grid (J2000.0)"
+msgstr "Colore della griglia equatoriale (J2000.0)"
+
+#: src/ui_viewDialog.h:3671
+msgid "Color of cardinal points"
+msgstr "Colore dei punti cardinali"
+
+#: src/ui_viewDialog.h:3674
+msgid "Solar equator projected into space."
+msgstr "Equatore Solare proiettato nello spazio"
+
+#: src/ui_viewDialog.h:3682
+msgid "Color of ecliptic (J2000.0)"
+msgstr "Colore dell'eclittica (J2000.0)"
+
+#: src/ui_viewDialog.h:3685
+msgid ""
+"Show a vertical line (with optional altitude marks) in the screen center."
+msgstr ""
+"Mostra una linea verticale (con contrassegni di altezza opzionali) nel "
+"centro dello schermo."
+
+#: src/ui_viewDialog.h:3689
+msgid "Show marker of center for field of view (FOV)"
+msgstr "Mostra l'indicatore del centro per il campo visivo (FOV)"
+
+#: src/ui_viewDialog.h:3691
+msgid "Center of FOV"
+msgstr "Centro del FOV"
+
+#: src/ui_viewDialog.h:3693
+msgid "Color of the celestial poles (J2000.0)"
+msgstr "Colore dei poli celesti (J2000.0)"
+
+#: src/ui_viewDialog.h:3696
+msgid ""
+"Apex and Antapex indicate where the observer's planet is heading to or "
+"receding from, respectively."
+msgstr ""
+"Apex e Antapex indicano da dove il pianeta dell'osservatore si sta dirigendo"
+" o allontanandosi rispettivamente."
+
+#: src/ui_viewDialog.h:3704
+msgid "Show circular marker of field of view (FOV)"
+msgstr "Mostra indicatore circolare del campo visivo (FOV)"
+
+#: src/ui_viewDialog.h:3706
+msgid "Circular FOV"
+msgstr "FOV circolare"
+
+#: src/ui_viewDialog.h:3708
+msgid "Field of view in degrees"
+msgstr "Campo di vista in gradi"
+
+#: src/ui_viewDialog.h:3711
+msgid "Color of supergalactic poles"
+msgstr "Colore dei poli supergalattici"
+
+#: src/ui_viewDialog.h:3718
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
 "Mostra i coluri (meridiani passanti per i poli celesti e per i punti "
 "solstiziali o equinoziali)."
 
-#: src/ui_viewDialog.h:3520
+#: src/ui_viewDialog.h:3722
+msgid "Color of supergalactic equator"
+msgstr "Colore dell'equatore supergalattico"
+
+#: src/ui_viewDialog.h:3729
+msgid "Color of the solstice points (J2000.0)"
+msgstr "Colore dei punti di solstizio (J2000.0)"
+
+#: src/ui_viewDialog.h:3733
+msgid "Color of the opposition/conjunction longitude line"
+msgstr "Colore della linea di longitudine opposizione/congiunzione"
+
+#: src/ui_viewDialog.h:3736
+msgid "Show celestial equator of current planet and date."
+msgstr "Mostra l'equatore celeste per la data e il pianeta correnti."
+
+#: src/ui_viewDialog.h:3740
+msgid "Color of the ecliptical grid (of date)"
+msgstr "Colore della griglia dell'eclittica (alla data)"
+
+#: src/ui_viewDialog.h:3743
+msgid "Equatorial coordinates of J2000.0."
+msgstr "Coordinate equatoriali (J2000.0)"
+
+#: src/ui_viewDialog.h:3745
+msgid "Equatorial grid (J2000)"
+msgstr "Griglia equatoriale (J2000)"
+
+#: src/ui_viewDialog.h:3749
+msgid "Equator (J2000)"
+msgstr "Equatore (J2000)"
+
+#: src/ui_viewDialog.h:3751
+msgid "Show Prime (East-West) Vertical."
+msgstr "Mostra il primo verticale (Est-Ovest)."
+
+#: src/ui_viewDialog.h:3755
+msgid "The line thickness for grids and lines"
+msgstr "Lo spessore della linea per griglie e linee"
+
+#: src/ui_viewDialog.h:3757
+msgid "Thickness: lines"
+msgstr "Spessore: linee"
+
+#: src/ui_viewDialog.h:3759 src/ui_viewDialog.h:4009 src/ui_viewDialog.h:4052
+#: src/ui_viewDialog.h:4062 src/ui_viewDialog.h:4069 src/ui_viewDialog.h:4077
+msgid "Thickness of line in pixels"
+msgstr "Spessore della linea in pixel"
+
+#: src/ui_viewDialog.h:3762
+msgid "The line thickness for circle partitions"
+msgstr "Lo spessore della linea per le partizioni del cerchio"
+
+#: src/ui_viewDialog.h:3764
+msgid "partitions"
+msgstr "partizioni"
+
+#: src/ui_viewDialog.h:3766
+msgid "Thickness of partitions in pixels"
+msgstr "Spessore delle partizioni in pixel"
+
+#: src/ui_viewDialog.h:3773
+msgid "Show ecliptic poles of J2000.0"
+msgstr "Mostra i poli dell'eclittica del J2000.0"
+
+#: src/ui_viewDialog.h:3775
+msgid "Ecliptic poles (J2000)"
+msgstr "Poli dell'eclittica (J2000.0)"
+
+#: src/ui_viewDialog.h:3777
+msgid "Color of the galactic grid"
+msgstr "Colore della griglia galattica"
+
+#: src/ui_viewDialog.h:3780
+msgid "Color of rectangular marker of FOV"
+msgstr "Colore dell'indicatore rettangolare del FOV"
+
+#: src/ui_viewDialog.h:3791
+msgid "Show rectangular marker of field of view (FOV)"
+msgstr "Mostra marcatore rettangolare del campo visivo (FOV)"
+
+#: src/ui_viewDialog.h:3793
+msgid "Rectangular FOV"
+msgstr "FOV rettangolare"
+
+#: src/ui_viewDialog.h:3795
+msgid "Width of rectangle, in degrees"
+msgstr "Larghezza del rettangolo, in gradi"
+
+#: src/ui_viewDialog.h:3798
+msgid "Height of rectangle, in degrees"
+msgstr "Altezza del rettangolo, in gradi"
+
+#: src/ui_viewDialog.h:3801
+msgid "Rotation angle of rectangle, in degrees"
+msgstr "Angolo di rotazione del rettangolo, in gradi"
+
+#: src/ui_viewDialog.h:3808
+msgid "Color of celestial poles (of date)"
+msgstr "Colore dei poli celesti (data corrente)"
+
+#: src/ui_viewDialog.h:3815
+msgid "Color of umbra circle"
+msgstr "Colore del cerchio d'ombra"
+
+#: src/ui_viewDialog.h:3818
+msgid "Solstices (J2000)"
+msgstr "Solstizi (J2000)"
+
+#: src/ui_viewDialog.h:3820
+msgid "Color of meridian"
+msgstr "Colore del meridiano"
+
+#: src/ui_viewDialog.h:3823
+msgid "Color of circular marker of FOV"
+msgstr "Colore dell'indicatore circolare del FOV"
+
+#: src/ui_viewDialog.h:3826
 msgid "Labels for the cardinal directions (4-wind compass rose)."
 msgstr "Etichette per le direzioni cardinali (Bussola a Rosa dei 4 venti)"
 
-#: src/ui_viewDialog.h:3524
+#: src/ui_viewDialog.h:3830
 msgid ""
 "Labels for the intercardinal (or ordinal) directions (8-wind compass rose)."
 msgstr ""
 "Etichette per le direzioni intercardinali (o ordinali) (Bussola a Rosa degli"
 " 8 venti)."
 
-#: src/ui_viewDialog.h:3528
+#: src/ui_viewDialog.h:3834
 msgid ""
 "Labels for the secondary intercardinal directions (16-wind compass rose)."
 msgstr ""
 "Etichette per le direzioni intercardinali secondarie (Bussola a Rosa dei 16 "
 "venti)."
 
-#: src/ui_viewDialog.h:3531
-msgid "Zenith and Nadir"
-msgstr "Zenith e Nadir"
+#: src/ui_viewDialog.h:3838
+msgid "Show celestial poles of J2000.0."
+msgstr "Mostra i poli celesti del J2000.0."
 
-#: src/ui_viewDialog.h:3533 src/ui_viewDialog.h:3589 src/ui_viewDialog.h:3593
-#: src/ui_viewDialog.h:3699 src/ui_viewDialog.h:3730 src/ui_viewDialog.h:3744
-#: src/ui_viewDialog.h:3752 src/ui_viewDialog.h:3756 src/ui_viewDialog.h:3769
-#: src/ui_viewDialog.h:3800 src/ui_viewDialog.h:3900 src/ui_viewDialog.h:3916
-#: src/ui_viewDialog.h:3924 src/ui_viewDialog.h:3931
-msgid "Show partitions"
-msgstr "Mostra partizioni"
+#: src/ui_viewDialog.h:3840
+msgid "Celestial poles (J2000)"
+msgstr "Poli celesti (J2000)"
 
-#: src/ui_viewDialog.h:3537
-msgid "Color of rectangular marker of FOV"
-msgstr "Colore dell'indicatore rettangolare del FOV"
+#: src/ui_viewDialog.h:3846
+msgid "Ecliptical coordinates for current date. Displayed on Earth only."
+msgstr ""
+"Coordinate eclittiche per la data corrente. Visualizzate solo per la Terra."
 
-#: src/ui_viewDialog.h:3540 src/ui_viewDialog.h:3581 src/ui_viewDialog.h:3605
-#: src/ui_viewDialog.h:3613 src/ui_viewDialog.h:3625 src/ui_viewDialog.h:3641
-#: src/ui_viewDialog.h:3692 src/ui_viewDialog.h:3703 src/ui_viewDialog.h:3714
-#: src/ui_viewDialog.h:3765 src/ui_viewDialog.h:3808 src/ui_viewDialog.h:3815
-#: src/ui_viewDialog.h:3886 src/ui_viewDialog.h:3942
-msgid "Label partitions"
-msgstr "Etichette delle partizioni"
+#: src/ui_viewDialog.h:3848
+msgid "Ecliptic grid (of date)"
+msgstr "Griglia dell'eclittica (data corrente)"
 
-#: src/ui_viewDialog.h:3542
-msgid "Precession circles"
-msgstr "Cerchi di precessione"
+#: src/ui_viewDialog.h:3852
+msgid "Colures"
+msgstr "Coluri"
 
-#: src/ui_viewDialog.h:3544
-msgid "Color of Prime Vertical"
-msgstr "Colore del Primo Verticale"
+#: src/ui_viewDialog.h:3854
+msgid "Color of colures"
+msgstr "Colore dei colures"
 
-#: src/ui_viewDialog.h:3547
-msgid "Show rectangular marker of field of view (FOV)"
-msgstr "Mostra marcatore rettangolare del campo visivo (FOV)"
-
-#: src/ui_viewDialog.h:3549
-msgid "Rectangular FOV"
-msgstr "FOV rettangolare"
-
-#: src/ui_viewDialog.h:3551
-msgid "Width of rectangle, in degrees"
-msgstr "Larghezza del rettangolo, in gradi"
-
-#: src/ui_viewDialog.h:3554
-msgid "Height of rectangle, in degrees"
-msgstr "Altezza del rettangolo, in gradi"
-
-#: src/ui_viewDialog.h:3557
-msgid "Rotation angle of rectangle, in degrees"
-msgstr "Angolo di rotazione del rettangolo, in gradi"
-
-#: src/ui_viewDialog.h:3560
+#: src/ui_viewDialog.h:3857
 msgid "Show Galactic equator line."
 msgstr "Mostra la linea dell'equatore galattico"
 
-#: src/ui_viewDialog.h:3564
+#: src/ui_viewDialog.h:3863
+msgid "Ecliptic (of date)"
+msgstr "Eclittica (data corrente)"
+
+#: src/ui_viewDialog.h:3865
+msgid "Ecliptical coordinates for J2000.0."
+msgstr "Coordinate eclittiche (J2000.0)"
+
+#: src/ui_viewDialog.h:3867
+msgid "Ecliptic grid (J2000)"
+msgstr "Griglia dell'eclittica (J2000)"
+
+#: src/ui_viewDialog.h:3873
+msgid "Color of Apex and Antapex points"
+msgstr "Colore dei punti Apex e Antapex"
+
+#: src/ui_viewDialog.h:3876
+msgid "Color of the solstice points (of date)"
+msgstr "Colore dei punti di solstizio (alla data)"
+
+#: src/ui_viewDialog.h:3881
+msgid "Color of compass marks"
+msgstr "Colore delle tacche della bussola"
+
+#: src/ui_viewDialog.h:3887
+msgid "Equinoxes (J2000)"
+msgstr "Equinozi (J2000)"
+
+#: src/ui_viewDialog.h:3889
 msgid ""
-"These circles delimit stars which stay always above (respectively below) the"
-" mathematical horizon."
+"Instantaneous circles of earth's axis on its motion around ecliptical poles."
+" Displayed on Earth only."
 msgstr ""
-"Questi cerchi delimitano le stelle che restano sempre sopra (rispettivamente"
-" sotto) l'orizzonte matematico."
+"Cerchi istantanei dell'asse terrestre nel suo movimento attorno ai poli "
+"eclittici. Visualizzati solo per la Terra."
 
-#: src/ui_viewDialog.h:3566
-msgid "Circumpolar circles"
-msgstr "Circoli circumpolari"
+#: src/ui_viewDialog.h:3893
+msgid "Color of galactic equator"
+msgstr "Colore dell'equatore galattico"
 
-#: src/ui_viewDialog.h:3568
-msgid "Color of antisolar point"
-msgstr "Colore del punto antisolare"
+#: src/ui_viewDialog.h:3897
+msgid "Color of the projected Solar equator line"
+msgstr "Colore della proiezione della linea dell'equatore solare"
 
-#: src/ui_viewDialog.h:3572
-msgid "Equatorial coordinates of J2000.0."
-msgstr "Coordinate equatoriali (J2000.0)"
+#: src/ui_viewDialog.h:3901
+msgid ""
+"This circle represents the size of Earth's central, deep shadow in the "
+"distance of the Moon."
+msgstr ""
+"Questo cerchio rappresenta la dimensione dell'ombra centrale e profonda "
+"della Terra nella distanza dalla Luna."
 
-#: src/ui_viewDialog.h:3574
-msgid "Equatorial grid (J2000)"
-msgstr "Griglia equatoriale (J2000)"
+#: src/ui_viewDialog.h:3903
+msgid "Earth umbra"
+msgstr "Ombra della Terra "
 
-#: src/ui_viewDialog.h:3577
+#: src/ui_viewDialog.h:3905
+msgid ""
+"Show point of Earth's center of deep shadow in the distance of the Moon."
+msgstr ""
+"Mostra il punto del centro di ombra profonda della Terra nella distanza "
+"dalla Luna."
+
+#: src/ui_viewDialog.h:3909
+msgid "Color of the equinox points (J2000.0)"
+msgstr "Colore dei punti di equinozio (J2000.0)"
+
+#: src/ui_viewDialog.h:3912
+msgid "Color of the ecliptic poles (J2000.0)"
+msgstr "Colore dei poli dell'eclittica (J2000.0)"
+
+#: src/ui_viewDialog.h:3915
+msgid "Galactic Coordinates, System II (IAU 1958)."
+msgstr "Coordinate galattiche, Sistema II (IAU 1958)."
+
+#: src/ui_viewDialog.h:3924
+msgid "Color of ecliptic poles (of date)"
+msgstr "Colore dei poli dell'eclittica (data corrente)"
+
+#: src/ui_viewDialog.h:3927
+msgid "Color of Zenith and Nadir"
+msgstr "Colore di Zenith e Nadir"
+
+#: src/ui_viewDialog.h:3930
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which"
 " passes through both ecliptic poles, the Sun and opposition point."
@@ -11897,568 +12264,240 @@ msgstr ""
 "longitudine eclittica che passa da entrambi i poli eclittici, dal Sole e dal"
 " punto di opposizione."
 
-#: src/ui_viewDialog.h:3585
-msgid "Color of the supergalactic grid"
-msgstr "Colore della griglia supergalattica"
-
-#: src/ui_viewDialog.h:3587
-msgid "Equinoxes (J2000)"
-msgstr "Equinozi (J2000)"
-
-#: src/ui_viewDialog.h:3597
-msgid "Show ecliptic poles of J2000.0"
-msgstr "Mostra i poli dell'eclittica del J2000.0"
-
-#: src/ui_viewDialog.h:3599
-msgid "Ecliptic poles (J2000)"
-msgstr "Poli dell'eclittica (J2000.0)"
-
-#: src/ui_viewDialog.h:3601
-msgid "Show ecliptic line of current date."
-msgstr "Mostra la linea dell'eclittica per la data corrente."
-
-#: src/ui_viewDialog.h:3607
-msgid "Colures"
-msgstr "Coluri"
-
-#: src/ui_viewDialog.h:3609
-msgid "Show Prime (East-West) Vertical."
-msgstr "Mostra il primo verticale (Est-Ovest)."
-
-#: src/ui_viewDialog.h:3617
-msgid ""
-"This circle represents the size of Earth's central, deep shadow in the "
-"distance of the Moon."
-msgstr ""
-"Questo cerchio rappresenta la dimensione dell'ombra centrale e profonda "
-"della Terra nella distanza dalla Luna."
-
-#: src/ui_viewDialog.h:3619
-msgid "Earth umbra"
-msgstr "Ombra della Terra "
-
-#: src/ui_viewDialog.h:3621
-msgid ""
-"Show point of Earth's center of deep shadow in the distance of the Moon."
-msgstr ""
-"Mostra il punto del centro di ombra profonda della Terra nella distanza "
-"dalla Luna."
-
-#: src/ui_viewDialog.h:3627
-msgid "Equator (of date)"
-msgstr "Equatore (data corrente)"
-
-#: src/ui_viewDialog.h:3629
-msgid "Show meridian line."
-msgstr "Mostra la linea del meridiano"
-
-#: src/ui_viewDialog.h:3633
-msgid ""
-"Instantaneous circles of earth's axis on its motion around ecliptical poles."
-" Displayed on Earth only."
-msgstr ""
-"Cerchi istantanei dell'asse terrestre nel suo movimento attorno ai poli "
-"eclittici. Visualizzati solo per la Terra."
-
-#: src/ui_viewDialog.h:3637
-msgid "Color of the solstice points (J2000.0)"
-msgstr "Colore dei punti di solstizio (J2000.0)"
-
-#: src/ui_viewDialog.h:3645
-msgid "Color of galactic equator"
-msgstr "Colore dell'equatore galattico"
-
-#: src/ui_viewDialog.h:3648
-msgid "Show ecliptic poles of current date."
-msgstr "Mostra i poli dell'eclittica per la data corrente"
-
-#: src/ui_viewDialog.h:3650
-msgid "Ecliptic poles (of date)"
-msgstr "Poli dell'eclittica (data corrente)"
-
-#: src/ui_viewDialog.h:3652
-msgid "Color of the solstice points (of date)"
-msgstr "Colore dei punti di solstizio (alla data)"
-
-#: src/ui_viewDialog.h:3656
-msgid "Color of ecliptic (of date)"
-msgstr "Colore dell'eclittica (di data)"
-
-#: src/ui_viewDialog.h:3659
-msgid "Color of the opposition/conjunction longitude line"
-msgstr "Colore della linea di longitudine opposizione/congiunzione"
-
-#: src/ui_viewDialog.h:3662
-msgid "Color of the galactic grid"
-msgstr "Colore della griglia galattica"
-
-#: src/ui_viewDialog.h:3665
-msgid "Color of compass marks"
-msgstr "Colore delle tacche della bussola"
-
-#: src/ui_viewDialog.h:3668
-msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
-msgstr ""
-"Mostra la linea dell'eclittica per J2000.0 (piano fondamentale VSOP87A)."
-
-#: src/ui_viewDialog.h:3674
-msgid "Color of galactic poles"
-msgstr "Colore dei poli galattici"
-
-#: src/ui_viewDialog.h:3677
-msgid "Show mathematical horizon line."
-msgstr "Mostra la linea matematica dell'orizzonte"
-
-#: src/ui_viewDialog.h:3681
-msgid "Show marker of center for field of view (FOV)"
-msgstr "Mostra l'indicatore del centro per il campo visivo (FOV)"
-
-#: src/ui_viewDialog.h:3683
-msgid "Center of FOV"
-msgstr "Centro del FOV"
-
-#: src/ui_viewDialog.h:3685
-msgid "Show circular marker of field of view (FOV)"
-msgstr "Mostra indicatore circolare del campo visivo (FOV)"
-
-#: src/ui_viewDialog.h:3687
-msgid "Circular FOV"
-msgstr "FOV circolare"
-
-#: src/ui_viewDialog.h:3689
-msgid "Field of view in degrees"
-msgstr "Campo di vista in gradi"
-
-#: src/ui_viewDialog.h:3694
-msgid "Ecliptic (of date)"
-msgstr "Eclittica (data corrente)"
-
-#: src/ui_viewDialog.h:3696
-msgid "Color of the celestial poles (J2000.0)"
-msgstr "Colore dei poli celesti (J2000.0)"
-
-#: src/ui_viewDialog.h:3705
-msgid "Ecliptic (J2000)"
-msgstr "Eclittica (J2000)"
-
-#: src/ui_viewDialog.h:3707
-msgid "Color of galactic center and anticenter"
-msgstr "Colore del centro galattico e dell'anticentro"
-
-#: src/ui_viewDialog.h:3710
-msgid ""
-"Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
-"distribution of nearby galaxies."
-msgstr ""
-"Mostra le coordinate supergalattiche di Vaucouleurs (1976), definite dalla "
-"distribuzione delle galassie vicine."
-
-#: src/ui_viewDialog.h:3718
-msgid ""
-"Show a vertical line (with optional altitude marks) in the screen center."
-msgstr ""
-"Mostra una linea verticale (con contrassegni di altezza opzionali) nel "
-"centro dello schermo."
-
-#: src/ui_viewDialog.h:3722
-msgid "Color of the ecliptic poles (J2000.0)"
-msgstr "Colore dei poli dell'eclittica (J2000.0)"
-
-#: src/ui_viewDialog.h:3726
-msgid "Ecliptical coordinates for J2000.0."
-msgstr "Coordinate eclittiche (J2000.0)"
-
-#: src/ui_viewDialog.h:3728
-msgid "Ecliptic grid (J2000)"
-msgstr "Griglia dell'eclittica (J2000)"
-
-#: src/ui_viewDialog.h:3733
-msgid "Solstices (J2000)"
-msgstr "Solstizi (J2000)"
-
-#: src/ui_viewDialog.h:3735
-msgid "Color of celestial poles (of date)"
-msgstr "Colore dei poli celesti (data corrente)"
-
-#: src/ui_viewDialog.h:3738
-msgid "Color of precession circles"
-msgstr "Colore dei cerchi di precessione"
-
-#: src/ui_viewDialog.h:3741
-msgid "Color of equator (of date)"
-msgstr "Colore dell'equatore (di data)"
-
-#: src/ui_viewDialog.h:3748
-msgid ""
-"Apex and Antapex indicate where the observer's planet is heading to or "
-"receding from, respectively."
-msgstr ""
-"Apex e Antapex indicano da dove il pianeta dell'osservatore si sta dirigendo"
-" o allontanandosi rispettivamente."
-
-#: src/ui_viewDialog.h:3761
-msgid "Galactic Coordinates, System II (IAU 1958)."
-msgstr "Coordinate galattiche, Sistema II (IAU 1958)."
-
-#: src/ui_viewDialog.h:3767
-msgid "Equator (J2000)"
-msgstr "Equatore (J2000)"
-
-#: src/ui_viewDialog.h:3773
-msgid "Color of cardinal points"
-msgstr "Colore dei punti cardinali"
-
-#: src/ui_viewDialog.h:3776
-msgid "Ecliptical coordinates for current date. Displayed on Earth only."
-msgstr ""
-"Coordinate eclittiche per la data corrente. Visualizzate solo per la Terra."
-
-#: src/ui_viewDialog.h:3778
-msgid "Ecliptic grid (of date)"
-msgstr "Griglia dell'eclittica (data corrente)"
-
-#: src/ui_viewDialog.h:3780
-msgid "Color of equator (J2000.0)"
-msgstr "Colore dell'equatore (J2000.0)"
-
-#: src/ui_viewDialog.h:3783
+#: src/ui_viewDialog.h:3934
 msgid "Color of the azimuthal grid"
 msgstr "Colore della griglia azimutale"
 
-#: src/ui_viewDialog.h:3786
-msgid "Color of ecliptic (J2000.0)"
-msgstr "Colore dell'eclittica (J2000.0)"
-
-#: src/ui_viewDialog.h:3789
-msgid "Color of supergalactic equator"
-msgstr "Colore dell'equatore supergalattico"
-
-#: src/ui_viewDialog.h:3792
-msgid "Show celestial equator of current planet and date."
-msgstr "Mostra l'equatore celeste per la data e il pianeta correnti."
-
-#: src/ui_viewDialog.h:3796
-msgid "Color of altitude line"
-msgstr "Colore della linea di altezza"
-
-#: src/ui_viewDialog.h:3804
-msgid "Color of the equatorial grid (of date)"
-msgstr "Colore della griglia equatoriale (alla data)"
-
-#: src/ui_viewDialog.h:3806
-msgid "Solstices (of date)"
-msgstr "Solstizi (alla data)"
-
-#: src/ui_viewDialog.h:3812
-msgid "Color of meridian"
-msgstr "Colore del meridiano"
-
-#: src/ui_viewDialog.h:3819
-msgid "The line thickness for grids and lines"
-msgstr "Lo spessore della linea per griglie e linee"
-
-#: src/ui_viewDialog.h:3821
-msgid "Thickness: lines"
-msgstr "Spessore: linee"
-
-#: src/ui_viewDialog.h:3823 src/ui_viewDialog.h:3952 src/ui_viewDialog.h:3995
-#: src/ui_viewDialog.h:4005 src/ui_viewDialog.h:4012 src/ui_viewDialog.h:4020
-msgid "Thickness of line in pixels"
-msgstr "Spessore della linea in pixel"
-
-#: src/ui_viewDialog.h:3826
-msgid "The line thickness for circle partitions"
-msgstr "Lo spessore della linea per le partizioni del cerchio"
-
-#: src/ui_viewDialog.h:3828
-msgid "partitions"
-msgstr "partizioni"
-
-#: src/ui_viewDialog.h:3830
-msgid "Thickness of partitions in pixels"
-msgstr "Spessore delle partizioni in pixel"
-
-#: src/ui_viewDialog.h:3833
-msgid "Color of Zenith and Nadir"
-msgstr "Colore di Zenith e Nadir"
-
-#: src/ui_viewDialog.h:3836
-msgid "Altitudes and azimuth (counted from North towards East)."
-msgstr "Altitudini e azimut (contati da Nord verso Est)."
-
-#: src/ui_viewDialog.h:3840
-msgid ""
-"This circle represents the outermost rim of Earth's shadow in the distance "
-"of the Moon."
-msgstr ""
-"Questo cerchio rappresenta il bordo più esterno dell'ombra terrestre nella "
-"distanza dalla Luna."
-
-#: src/ui_viewDialog.h:3842
-msgid "Earth penumbra"
-msgstr "Penombra Terrestre"
-
-#: src/ui_viewDialog.h:3844
-msgid "Show celestial poles of J2000.0."
-msgstr "Mostra i poli celesti del J2000.0."
-
-#: src/ui_viewDialog.h:3846
-msgid "Celestial poles (J2000)"
-msgstr "Poli celesti (J2000)"
-
-#: src/ui_viewDialog.h:3848
-msgid "Show celestial equator of J2000.0."
-msgstr "Mostra l'equatore celeste (J2000.0)"
-
-#: src/ui_viewDialog.h:3852
-msgid "Color of colures"
-msgstr "Colore dei colures"
-
-#: src/ui_viewDialog.h:3855
-msgid "Color of umbra circle"
-msgstr "Colore del cerchio d'ombra"
-
-#: src/ui_viewDialog.h:3859
-msgid "Color of the ecliptical grid (J2000.0)"
-msgstr "Colore della griglia dell'eclittica (J2000.0)"
-
-#: src/ui_viewDialog.h:3862
+#: src/ui_viewDialog.h:3937
 msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
 msgstr ""
 "Mostra l'equatore delle coordinate supergalattiche di Vaucouleurs (1976)."
 
-#: src/ui_viewDialog.h:3866
-msgid "Color of penumbra circle"
-msgstr "Colore del cerchio di penombra"
+#: src/ui_viewDialog.h:3941
+msgid "Color of the equatorial grid (of date)"
+msgstr "Colore della griglia equatoriale (alla data)"
 
-#: src/ui_viewDialog.h:3870
-msgid "Color of the equatorial grid (J2000.0)"
-msgstr "Colore della griglia equatoriale (J2000.0)"
-
-#: src/ui_viewDialog.h:3872
-msgid "Equinoxes (of date)"
-msgstr "Equinozi (alla data)"
-
-#: src/ui_viewDialog.h:3874
-msgid "Color of Apex and Antapex points"
-msgstr "Colore dei punti Apex e Antapex"
-
-#: src/ui_viewDialog.h:3877
-msgid "Color of the ecliptical grid (of date)"
-msgstr "Colore della griglia dell'eclittica (alla data)"
-
-#: src/ui_viewDialog.h:3880
-msgid "Color of circumpolar circles"
-msgstr "Colore dei cerchi circumpolari"
-
-#: src/ui_viewDialog.h:3883
-msgid "Color of the equinox points (of date)"
-msgstr "Colore dei punti di equinozio (alla data)"
-
-#: src/ui_viewDialog.h:3890
-msgid "Solar equator projected into space."
-msgstr "Equatore Solare proiettato nello spazio"
-
-#: src/ui_viewDialog.h:3894
-msgid "Color of marker of center of FOV"
-msgstr "Colore dell'indicatore del centro del FOV"
-
-#: src/ui_viewDialog.h:3897
-msgid "Color of horizon"
-msgstr "Colore dell'orizzonte"
-
-#: src/ui_viewDialog.h:3904
-msgid "Color of the projected Solar equator line"
-msgstr "Colore della proiezione della linea dell'equatore solare"
-
-#: src/ui_viewDialog.h:3908
-msgid "Color of the invariable plane of the Solar system"
-msgstr "Colore del piano invariabile del sistema solare"
-
-#: src/ui_viewDialog.h:3912
+#: src/ui_viewDialog.h:3944
 msgid "Equatorial coordinates of current date and planet."
 msgstr "Coordinate equatoriali per la data e il pianeta correnti."
 
-#: src/ui_viewDialog.h:3914
+#: src/ui_viewDialog.h:3946
 msgid "Equatorial grid (of date)"
 msgstr "Griglia equatoriale (data corrente)"
 
-#: src/ui_viewDialog.h:3920
-msgid "Show celestial poles of current planet and date."
-msgstr "Mostra poli celesti del pianeta e la data corrente."
+#: src/ui_viewDialog.h:3951
+msgid "Zenith and Nadir"
+msgstr "Zenith e Nadir"
 
-#: src/ui_viewDialog.h:3922
-msgid "Celestial poles (of date)"
-msgstr "Poli celesti (data corrente)"
+#: src/ui_viewDialog.h:3953
+msgid "Color of the ecliptical grid (J2000.0)"
+msgstr "Colore della griglia dell'eclittica (J2000.0)"
 
-#: src/ui_viewDialog.h:3928
-msgid "Color of supergalactic poles"
-msgstr "Colore dei poli supergalattici"
+#: src/ui_viewDialog.h:3956
+msgid "Show ecliptic line of current date."
+msgstr "Mostra la linea dell'eclittica per la data corrente."
 
-#: src/ui_viewDialog.h:3935
-msgid "Color of the equinox points (J2000.0)"
-msgstr "Colore dei punti di equinozio (J2000.0)"
+#: src/ui_viewDialog.h:3964
+msgid "Color of equator (of date)"
+msgstr "Colore dell'equatore (di data)"
 
-#: src/ui_viewDialog.h:3938
+#: src/ui_viewDialog.h:3967
+msgid ""
+"Fixed equatorial coordinates (hour angle/declination) of current planet."
+msgstr ""
+
+#: src/ui_viewDialog.h:3972
+msgid ""
+"These circles delimit stars which stay always above (respectively below) the"
+" mathematical horizon."
+msgstr ""
+"Questi cerchi delimitano le stelle che restano sempre sopra (rispettivamente"
+" sotto) l'orizzonte matematico."
+
+#: src/ui_viewDialog.h:3974
+msgid "Circumpolar circles"
+msgstr "Circoli circumpolari"
+
+#: src/ui_viewDialog.h:3976
+msgid "Color of circumpolar circles"
+msgstr "Colore dei cerchi circumpolari"
+
+#: src/ui_viewDialog.h:3979
+msgid "Color of fixed equator"
+msgstr ""
+
+#: src/ui_viewDialog.h:3985
+msgid "Fixed Equator"
+msgstr ""
+
+#: src/ui_viewDialog.h:3987
+msgid "Show fixed celestial equator (hour angles) of current planet."
+msgstr ""
+
+#: src/ui_viewDialog.h:3995
 msgid ""
 "A plane perpendicular to the angular momentum vector of the Solar system."
 msgstr ""
 "Un piano perpendicolare al vettore momento angolare del sistema solare."
 
-#: src/ui_viewDialog.h:3940
+#: src/ui_viewDialog.h:3997
 msgid "Invariable plane of the Solar system"
 msgstr "Piano invariabile del sistema solare"
 
-#: src/ui_viewDialog.h:3945
+#: src/ui_viewDialog.h:3999
+msgid "Color of the invariable plane of the Solar system"
+msgstr "Colore del piano invariabile del sistema solare"
+
+#: src/ui_viewDialog.h:4002
 msgid "Add/remove landscapes..."
 msgstr "Aggiungi/Rimuovi panorami..."
 
-#: src/ui_viewDialog.h:3948
+#: src/ui_viewDialog.h:4005
 msgid "Draw horizon polyline if one is defined."
 msgstr "Disegna la polilinea dell'orizzonte se ne è definita una."
 
-#: src/ui_viewDialog.h:3950
+#: src/ui_viewDialog.h:4007
 msgid "Draw only polygon"
 msgstr "Disegna solo poligoni"
 
-#: src/ui_viewDialog.h:3955
+#: src/ui_viewDialog.h:4012
 msgid "Set the planet and position as specified for the selected landscape"
 msgstr ""
 "Imposta il pianeta e la posizione come specificato per il paesaggio "
 "selezionato"
 
-#: src/ui_viewDialog.h:3957
+#: src/ui_viewDialog.h:4014
 msgid "Position from landscape"
 msgstr "Posizione dal paesaggio"
 
-#: src/ui_viewDialog.h:3958
+#: src/ui_viewDialog.h:4015
 msgid "Show landscape labels"
 msgstr "Mostra le etichette del paesaggio"
 
-#: src/ui_viewDialog.h:3960
+#: src/ui_viewDialog.h:4017
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr ""
 "Visualizza livello illuminazione (finestre illuminate, inquinamento "
 "luminoso)"
 
-#: src/ui_viewDialog.h:3962
+#: src/ui_viewDialog.h:4019
 msgid "Show illumination "
 msgstr "Mostra illuminazione "
 
-#: src/ui_viewDialog.h:3964
+#: src/ui_viewDialog.h:4021
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr "Usa la luminosità minima come può essere specificato in landscape.ini"
 
-#: src/ui_viewDialog.h:3966
+#: src/ui_viewDialog.h:4023
 msgid "from landscape, if given"
 msgstr "dal paesaggio, se fornito"
 
-#: src/ui_viewDialog.h:3968
+#: src/ui_viewDialog.h:4025
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
 "Utilizza la luminosità minima per fare in modo che lo sfondo sia visibile "
 "anche al buio."
 
-#: src/ui_viewDialog.h:3970
+#: src/ui_viewDialog.h:4027
 msgid "Minimal brightness:"
 msgstr "Luminosità minima:"
 
-#: src/ui_viewDialog.h:3972
+#: src/ui_viewDialog.h:4029
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
 "Limiti del valore 0..1 (il paesaggio è nero di notte - il paesaggio è "
 "pienamente luminoso)"
 
-#: src/ui_viewDialog.h:3974
+#: src/ui_viewDialog.h:4031
 msgid "Show fog"
 msgstr "Mostra nebbia"
 
-#: src/ui_viewDialog.h:3975
+#: src/ui_viewDialog.h:4032
 msgid "Show ground"
 msgstr "Mostra orizzonte"
 
-#: src/ui_viewDialog.h:3976
+#: src/ui_viewDialog.h:4033
 msgid "Use this landscape as default"
 msgstr "Usa questo paesaggio come predefinito"
 
-#: src/ui_viewDialog.h:3979
+#: src/ui_viewDialog.h:4036
 msgid "Use native names for planets from current culture"
 msgstr "Mostra i nomi locali dei pianeti della cultura selezionata"
 
-#: src/ui_viewDialog.h:3981
+#: src/ui_viewDialog.h:4038
 msgid "Use native names for planets"
 msgstr "Usa i nomi nativi per i pianeti"
 
-#: src/ui_viewDialog.h:3983
+#: src/ui_viewDialog.h:4040
 msgid "Color of constellation names"
 msgstr "Colore per i nomi delle costellazioni"
 
-#: src/ui_viewDialog.h:3985
+#: src/ui_viewDialog.h:4042
 msgid "Show labels"
 msgstr "Mostra etichette"
 
-#: src/ui_viewDialog.h:3987
+#: src/ui_viewDialog.h:4044
 msgid "Select if you want names abbreviated, original or translated"
 msgstr "Selezionare se si desiderano i nomi abbreviati, originali o tradotti"
 
-#: src/ui_viewDialog.h:3991
+#: src/ui_viewDialog.h:4048
 msgid "Color of asterism lines"
 msgstr "Colore delle linee degli asterismi"
 
-#: src/ui_viewDialog.h:3993
+#: src/ui_viewDialog.h:4050
 msgid "Show asterism lines"
 msgstr "Mostra le linee degli asterismi"
 
-#: src/ui_viewDialog.h:3998
+#: src/ui_viewDialog.h:4055
 msgid "Color of constellation boundaries"
 msgstr "Colore per i confini delle costellazioni"
 
-#: src/ui_viewDialog.h:4001
+#: src/ui_viewDialog.h:4058
 msgid "Show boundaries of constellations"
 msgstr "Mostra i confini delle costellazioni"
 
-#: src/ui_viewDialog.h:4003
+#: src/ui_viewDialog.h:4060
 msgid "Show boundaries"
 msgstr "Mostra confini"
 
-#: src/ui_viewDialog.h:4008
+#: src/ui_viewDialog.h:4065
 msgid "Color of ray helpers"
 msgstr "Colore dei ray helpers"
 
-#: src/ui_viewDialog.h:4010
+#: src/ui_viewDialog.h:4067
 msgid "Show ray helpers"
 msgstr "Visulaizza i ray helpers"
 
-#: src/ui_viewDialog.h:4014
+#: src/ui_viewDialog.h:4071
 msgid "Show art in brightness"
 msgstr "Mostra i disegni in luminosità"
 
-#: src/ui_viewDialog.h:4016
+#: src/ui_viewDialog.h:4073
 msgid "Color of constellation lines"
 msgstr "Colore delle linee delle costellazioni"
 
-#: src/ui_viewDialog.h:4018
+#: src/ui_viewDialog.h:4075
 msgid "Show constellation lines"
 msgstr "Mostra le linee delle costellazioni"
 
-#: src/ui_viewDialog.h:4023
+#: src/ui_viewDialog.h:4080
 msgid "Color of asterism names"
 msgstr "Colore dei nomi degli asterismi"
 
-#: src/ui_viewDialog.h:4025
+#: src/ui_viewDialog.h:4082
 msgid "Show asterism labels"
 msgstr "Mostra le etichette degli asterismi"
 
-#: src/ui_viewDialog.h:4026
+#: src/ui_viewDialog.h:4083
 msgid "Constellations font size"
 msgstr "Dimensione del carattere delle costellazioni"
 
-#: src/ui_viewDialog.h:4027
+#: src/ui_viewDialog.h:4084
 msgid "Asterisms font size"
 msgstr "Dimensione del carattere degli asterismi"
 
-#: src/ui_viewDialog.h:4028
+#: src/ui_viewDialog.h:4085
 msgid "Use this sky culture as default"
 msgstr "Utilizza questa cultura del cielo come predefinita"
 
@@ -26526,188 +26565,188 @@ msgstr "Calendari"
 msgid "Calendars of the world"
 msgstr "Calendari del mondo"
 
-#: plugins/Calendars/src/Calendars.cpp:330
+#: plugins/Calendars/src/Calendars.cpp:332
 #: plugins/Calendars/src/ui_calendarsDialog.h:923
 #: plugins/Calendars/src/ui_calendarsDialog.h:957
 msgctxt "calendar"
 msgid "Julian"
 msgstr "Giuliano"
 
-#: plugins/Calendars/src/Calendars.cpp:331
+#: plugins/Calendars/src/Calendars.cpp:333
 #: plugins/Calendars/src/ui_calendarsDialog.h:928
 #: plugins/Calendars/src/ui_calendarsDialog.h:956
 msgctxt "calendar"
 msgid "Gregorian"
 msgstr "Gregoriano"
 
-#: plugins/Calendars/src/Calendars.cpp:332
+#: plugins/Calendars/src/Calendars.cpp:334
 #: plugins/Calendars/src/ui_calendarsDialog.h:933
 #: plugins/Calendars/src/ui_calendarsDialog.h:958
 msgctxt "calendar"
 msgid "Revised Julian"
 msgstr "Giuliano riveduto"
 
-#: plugins/Calendars/src/Calendars.cpp:333
+#: plugins/Calendars/src/Calendars.cpp:335
 msgctxt "calendar"
 msgid "ISO week"
 msgstr "Settimana ISO"
 
-#: plugins/Calendars/src/Calendars.cpp:334
+#: plugins/Calendars/src/Calendars.cpp:336
 #: plugins/Calendars/src/ui_calendarsDialog.h:930
 msgctxt "calendar"
 msgid "Icelandic"
 msgstr "Islandese"
 
-#: plugins/Calendars/src/Calendars.cpp:335
+#: plugins/Calendars/src/Calendars.cpp:337
 #: plugins/Calendars/src/ui_calendarsDialog.h:932
 msgctxt "calendar"
 msgid "Roman"
 msgstr "Romano"
 
-#: plugins/Calendars/src/Calendars.cpp:336
+#: plugins/Calendars/src/Calendars.cpp:338
 #: plugins/Calendars/src/ui_calendarsDialog.h:922
 msgctxt "calendar"
 msgid "Olympic"
 msgstr "Olimpico"
 
-#: plugins/Calendars/src/Calendars.cpp:337
+#: plugins/Calendars/src/Calendars.cpp:339
 #: plugins/Calendars/src/ui_calendarsDialog.h:927
 msgctxt "calendar"
 msgid "Egyptian"
 msgstr "Egiziano"
 
-#: plugins/Calendars/src/Calendars.cpp:338
+#: plugins/Calendars/src/Calendars.cpp:340
 #: plugins/Calendars/src/ui_calendarsDialog.h:918
 msgctxt "calendar"
 msgid "Armenian"
 msgstr "Armeno"
 
-#: plugins/Calendars/src/Calendars.cpp:339
+#: plugins/Calendars/src/Calendars.cpp:341
 #: plugins/Calendars/src/ui_calendarsDialog.h:929
 msgctxt "calendar"
 msgid "Zoroastrian"
 msgstr "Zoroastriano"
 
-#: plugins/Calendars/src/Calendars.cpp:340
+#: plugins/Calendars/src/Calendars.cpp:342
 #: plugins/Calendars/src/ui_calendarsDialog.h:916
 msgctxt "calendar"
 msgid "Coptic"
 msgstr "Copto"
 
-#: plugins/Calendars/src/Calendars.cpp:341
+#: plugins/Calendars/src/Calendars.cpp:343
 #: plugins/Calendars/src/ui_calendarsDialog.h:912
 msgctxt "calendar"
 msgid "Ethiopic"
 msgstr "Etiopico"
 
-#: plugins/Calendars/src/Calendars.cpp:342
+#: plugins/Calendars/src/Calendars.cpp:344
 msgctxt "calendar"
 msgid "French Rev. (Astron.)"
 msgstr "Riv. Francese (Astron.)"
 
-#: plugins/Calendars/src/Calendars.cpp:343
+#: plugins/Calendars/src/Calendars.cpp:345
 msgctxt "calendar"
 msgid "French Rev. (Arithm.)"
 msgstr "Riv. Francese (Aritm.)"
 
-#: plugins/Calendars/src/Calendars.cpp:344
+#: plugins/Calendars/src/Calendars.cpp:346
 #: plugins/Calendars/src/ui_calendarsDialog.h:925
 msgctxt "calendar"
 msgid "Islamic"
 msgstr "Islamico"
 
-#: plugins/Calendars/src/Calendars.cpp:345
+#: plugins/Calendars/src/Calendars.cpp:347
 #: plugins/Calendars/src/ui_calendarsDialog.h:934
 msgctxt "calendar"
 msgid "Hebrew"
 msgstr "Ebraico"
 
-#: plugins/Calendars/src/Calendars.cpp:346
+#: plugins/Calendars/src/Calendars.cpp:348
 msgctxt "calendar"
 msgid "Persian (Arithm.)"
 msgstr "Persiano (aritm.)"
 
-#: plugins/Calendars/src/Calendars.cpp:347
+#: plugins/Calendars/src/Calendars.cpp:349
 msgctxt "calendar"
 msgid "Persian (Astron.)"
 msgstr "Persiano (Astron.)"
 
-#: plugins/Calendars/src/Calendars.cpp:348
+#: plugins/Calendars/src/Calendars.cpp:350
 #: plugins/Calendars/src/ui_calendarsDialog.h:920
 msgctxt "calendar"
 msgid "Old Hindu Solar"
 msgstr "Indù Solare Vecchio"
 
-#: plugins/Calendars/src/Calendars.cpp:349
+#: plugins/Calendars/src/Calendars.cpp:351
 msgctxt "calendar"
 msgid "Old Hindu Lunisolar"
 msgstr "Indù Luni-Solare Vecchio"
 
-#: plugins/Calendars/src/Calendars.cpp:350
+#: plugins/Calendars/src/Calendars.cpp:352
 #: plugins/Calendars/src/ui_calendarsDialog.h:941
 msgctxt "calendar"
 msgid "New Hindu Solar"
 msgstr "Indù Solare Nuovo"
 
-#: plugins/Calendars/src/Calendars.cpp:351
+#: plugins/Calendars/src/Calendars.cpp:353
 msgctxt "calendar"
 msgid "New Hindu Lunisolar"
 msgstr "Indù Luni-Solare Nuovo"
 
-#: plugins/Calendars/src/Calendars.cpp:352
+#: plugins/Calendars/src/Calendars.cpp:354
 msgctxt "calendar"
 msgid "New Hindu Panchang"
 msgstr "Indù Panchang Nuovo"
 
-#: plugins/Calendars/src/Calendars.cpp:354
+#: plugins/Calendars/src/Calendars.cpp:356
 #: plugins/Calendars/src/ui_calendarsDialog.h:942
 msgctxt "calendar"
 msgid "Hindu Astro Solar"
 msgstr "Indù Solare Astro"
 
-#: plugins/Calendars/src/Calendars.cpp:355
+#: plugins/Calendars/src/Calendars.cpp:357
 #: plugins/Calendars/src/ui_calendarsDialog.h:943
 msgctxt "calendar"
 msgid "Hindu Astro Lunisolar"
 msgstr "Indù Luni-Solare Astro"
 
-#: plugins/Calendars/src/Calendars.cpp:356
+#: plugins/Calendars/src/Calendars.cpp:358
 #: plugins/Calendars/src/ui_calendarsDialog.h:939
 msgctxt "calendar"
 msgid "Tibetan"
 msgstr "Tibetano"
 
-#: plugins/Calendars/src/Calendars.cpp:357
+#: plugins/Calendars/src/Calendars.cpp:359
 #: plugins/Calendars/src/ui_calendarsDialog.h:926
 msgctxt "calendar"
 msgid "Maya Long Count"
 msgstr "Maya Lungo Conto"
 
-#: plugins/Calendars/src/Calendars.cpp:358
+#: plugins/Calendars/src/Calendars.cpp:360
 #: plugins/Calendars/src/ui_calendarsDialog.h:921
 msgctxt "calendar"
 msgid "Maya Haab"
 msgstr "Maya Haab"
 
-#: plugins/Calendars/src/Calendars.cpp:359
+#: plugins/Calendars/src/Calendars.cpp:361
 #: plugins/Calendars/src/ui_calendarsDialog.h:914
 msgctxt "calendar"
 msgid "Maya Tzolkin"
 msgstr "Maya Tzolkin"
 
-#: plugins/Calendars/src/Calendars.cpp:360
+#: plugins/Calendars/src/Calendars.cpp:362
 #: plugins/Calendars/src/ui_calendarsDialog.h:919
 msgctxt "calendar"
 msgid "Aztec Xihuitl"
 msgstr "Azteco Xihuitl"
 
-#: plugins/Calendars/src/Calendars.cpp:361
+#: plugins/Calendars/src/Calendars.cpp:363
 #: plugins/Calendars/src/ui_calendarsDialog.h:917
 msgctxt "calendar"
 msgid "Aztec Tonalpohualli"
 msgstr "Azteco Tonalpohualli"
 
-#: plugins/Calendars/src/Calendars.cpp:363
+#: plugins/Calendars/src/Calendars.cpp:365
 #: plugins/Calendars/src/ui_calendarsDialog.h:913
 msgctxt "calendar"
 msgid "Balinese Pawukon"
@@ -27953,697 +27992,697 @@ msgstr "Chuen"
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:50
 msgctxt "Maya Tzolkin name"
 msgid "Eb"
-msgstr ""
+msgstr "Eb"
 
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:51
 msgctxt "Maya Tzolkin name"
 msgid "Ben"
-msgstr ""
+msgstr "Ben"
 
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:52
 msgctxt "Maya Tzolkin name"
 msgid "Ix"
-msgstr ""
+msgstr "Ix"
 
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:53
 msgctxt "Maya Tzolkin name"
 msgid "Men"
-msgstr ""
+msgstr "Men"
 
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:54
 msgctxt "Maya Tzolkin name"
 msgid "Cib"
-msgstr ""
+msgstr "Cib"
 
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:55
 msgctxt "Maya Tzolkin name"
 msgid "Caban"
-msgstr ""
+msgstr "Caban"
 
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:56
 msgctxt "Maya Tzolkin name"
 msgid "Eznab"
-msgstr ""
+msgstr "Eznab"
 
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:57
 msgctxt "Maya Tzolkin name"
 msgid "Cauac"
-msgstr ""
+msgstr "Cauac"
 
 #: plugins/Calendars/src/MayaTzolkinCalendar.cpp:58
 msgctxt "Maya Tzolkin name"
 msgid "Ahau"
-msgstr ""
+msgstr "Ahau"
 
 #: plugins/Calendars/src/OlympicCalendar.cpp:61
 #, qt-format
 msgid "Day %1, month %2 in the year %3 of the %4th Olympiad"
-msgstr ""
+msgstr "Giorno %1, mese %2 nell'anno %3 delle %4° Olimpiadi"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:36
 msgctxt "Roman month name (genitive)"
 msgid "Ianuarii"
-msgstr ""
+msgstr "Ianuarii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:37
 msgctxt "Roman month name (genitive)"
 msgid "Februarii"
-msgstr ""
+msgstr "Februarii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:38
 msgctxt "Roman month name (genitive)"
 msgid "Martii"
-msgstr ""
+msgstr "Martii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:39
 msgctxt "Roman month name (genitive)"
 msgid "Aprilis"
-msgstr ""
+msgstr "Aprilis"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:40
 msgctxt "Roman month name (genitive)"
 msgid "Maii"
-msgstr ""
+msgstr "Maii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:41
 msgctxt "Roman month name (genitive)"
 msgid "Iunii"
-msgstr ""
+msgstr "Iunii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:42
 msgctxt "Roman month name (genitive)"
 msgid "Iulii"
-msgstr ""
+msgstr "Iulii"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:43
 msgctxt "Roman month name (genitive)"
 msgid "Augusti"
-msgstr ""
+msgstr "Augusti"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:44
 msgctxt "Roman month name (genitive)"
 msgid "Septembris"
-msgstr ""
+msgstr "Septembris"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:45
 msgctxt "Roman month name (genitive)"
 msgid "Octobris"
-msgstr ""
+msgstr "Octobris"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:46
 msgctxt "Roman month name (genitive)"
 msgid "Novembris"
-msgstr ""
+msgstr "Novembris"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:47
 msgctxt "Roman month name (genitive)"
 msgid "Decembris"
-msgstr ""
+msgstr "Decembris"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:65
 msgctxt "Roman calendar term"
 msgid "Kalendae"
-msgstr ""
+msgstr "Kalendae"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:66
 msgctxt "Roman calendar term"
 msgid "Nones"
-msgstr ""
+msgstr "Nones"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:67
 msgctxt "Roman calendar term"
 msgid "Ides"
-msgstr ""
+msgstr "Ides"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:68
 msgctxt "Roman calendar term"
 msgid "Kal."
-msgstr ""
+msgstr "Kal."
 
 #: plugins/Calendars/src/RomanCalendar.cpp:69
 msgctxt "Roman calendar term"
 msgid "Non."
-msgstr ""
+msgstr "Non."
 
 #: plugins/Calendars/src/RomanCalendar.cpp:70
 msgctxt "Roman calendar term"
 msgid "Id."
-msgstr ""
+msgstr "Id."
 
 #: plugins/Calendars/src/RomanCalendar.cpp:86
 msgctxt "Roman calendar term"
 msgid "pridie"
-msgstr ""
+msgstr "pridie"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:88
 msgctxt "Roman calendar term"
 msgid "bis"
-msgstr ""
+msgstr "bis"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:89
 msgctxt "Roman calendar term"
 msgid "ante diem"
-msgstr ""
+msgstr "ante diem"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:104
 msgctxt "ab urbe condita"
 msgid "A.U.C."
-msgstr ""
+msgstr "A.U.C."
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:42
 msgctxt "Zoroastrian month name"
 msgid "Ferverdīn"
-msgstr ""
+msgstr "Ferverdīn"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:43
 msgctxt "Zoroastrian month name"
 msgid "Ardebehesht"
-msgstr ""
+msgstr "Ardebehesht"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:44
 msgctxt "Zoroastrian month name"
 msgid "Khordād"
-msgstr ""
+msgstr "Khordād"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:45
 msgctxt "Zoroastrian month name"
 msgid "Tīr"
-msgstr ""
+msgstr "Tīr"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:46
 msgctxt "Zoroastrian month name"
 msgid "Mordād"
-msgstr ""
+msgstr "Mordād"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:47
 msgctxt "Zoroastrian month name"
 msgid "Sharīr"
-msgstr ""
+msgstr "Sharīr"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:48
 msgctxt "Zoroastrian month name"
 msgid "Mihr"
-msgstr ""
+msgstr "Mihr"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:49
 msgctxt "Zoroastrian month name"
 msgid "Abān"
-msgstr ""
+msgstr "Abān"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:50
 msgctxt "Zoroastrian month name"
 msgid "Āder"
-msgstr ""
+msgstr "Āder"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:51
 msgctxt "Zoroastrian month name"
 msgid "Deï"
-msgstr ""
+msgstr "Deï"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:52
 msgctxt "Zoroastrian month name"
 msgid "Bahmen"
-msgstr ""
+msgstr "Bahmen"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:53
 msgctxt "Zoroastrian month name"
 msgid "Asfendārmed"
-msgstr ""
+msgstr "Asfendārmed"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:54
 msgctxt "Zoroastrian month name"
 msgid "(epagomenae)"
-msgstr ""
+msgstr "(epagomenae)"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:56
 msgctxt "Zoroastrian day name"
 msgid "Hormuz"
-msgstr ""
+msgstr "Hormuz"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:57
 msgctxt "Zoroastrian day name"
 msgid "Bahman"
-msgstr ""
+msgstr "Bahman"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:58
 msgctxt "Zoroastrian day name"
 msgid "Ordībehesht"
-msgstr ""
+msgstr "Ordībehesht"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:59
 msgctxt "Zoroastrian day name"
 msgid "Shahrīvar"
-msgstr ""
+msgstr "Shahrīvar"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:60
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:89
 msgctxt "Zoroastrian day name"
 msgid "Esfandārmud"
-msgstr ""
+msgstr "Esfandārmud"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:61
 msgctxt "Zoroastrian day name"
 msgid "Xordād"
-msgstr ""
+msgstr "Xordād"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:62
 msgctxt "Zoroastrian day name"
 msgid "Mordād"
-msgstr ""
+msgstr "Mordād"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:63
 msgctxt "Zoroastrian day name"
 msgid "Diy be Āzar"
-msgstr ""
+msgstr "Diy be Āzar"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:64
 msgctxt "Zoroastrian day name"
 msgid "Āzar"
-msgstr ""
+msgstr "Āzar"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:65
 msgctxt "Zoroastrian day name"
 msgid "Ābān"
-msgstr ""
+msgstr "Ābān"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:66
 msgctxt "Zoroastrian day name"
 msgid "Xor"
-msgstr ""
+msgstr "Xor"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:67
 msgctxt "Zoroastrian day name"
 msgid "Māh"
-msgstr ""
+msgstr "Māh"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:68
 msgctxt "Zoroastrian day name"
 msgid "Tīr"
-msgstr ""
+msgstr "Tīr"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:69
 msgctxt "Zoroastrian day name"
 msgid "Goosh"
-msgstr ""
+msgstr "Goosh"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:70
 msgctxt "Zoroastrian day name"
 msgid "Diy be Mehr"
-msgstr ""
+msgstr "Diy be Mehr"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:71
 msgctxt "Zoroastrian day name"
 msgid "Mehr"
-msgstr ""
+msgstr "Mehr"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:72
 msgctxt "Zoroastrian day name"
 msgid "Sorūsh"
-msgstr ""
+msgstr "Sorūsh"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:73
 msgctxt "Zoroastrian day name"
 msgid "Rashn"
-msgstr ""
+msgstr "Rashn"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:74
 msgctxt "Zoroastrian day name"
 msgid "Farvardīn"
-msgstr ""
+msgstr "Farvardīn"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:75
 msgctxt "Zoroastrian day name"
 msgid "Bahrām"
-msgstr ""
+msgstr "Bahrām"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:76
 msgctxt "Zoroastrian day name"
 msgid "Rām"
-msgstr ""
+msgstr "Rām"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:77
 msgctxt "Zoroastrian day name"
 msgid "Bād"
-msgstr ""
+msgstr "Bād"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:78
 msgctxt "Zoroastrian day name"
 msgid "Diy be Dīn"
-msgstr ""
+msgstr "Diy be Dīn"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:79
 msgctxt "Zoroastrian day name"
 msgid "Dīn"
-msgstr ""
+msgstr "Dīn"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:80
 msgctxt "Zoroastrian day name"
 msgid "Ard"
-msgstr ""
+msgstr "Ard"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:81
 msgctxt "Zoroastrian day name"
 msgid "Ashtād"
-msgstr ""
+msgstr "Ashtād"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:82
 msgctxt "Zoroastrian day name"
 msgid "Asmān"
-msgstr ""
+msgstr "Asmān"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:83
 msgctxt "Zoroastrian day name"
 msgid "Zāmyād"
-msgstr ""
+msgstr "Zāmyād"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:84
 msgctxt "Zoroastrian day name"
 msgid "Māresfand"
-msgstr ""
+msgstr "Māresfand"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:85
 msgctxt "Zoroastrian day name"
 msgid "Anīrān"
-msgstr ""
+msgstr "Anīrān"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:87
 msgctxt "Zoroastrian day name"
 msgid "Ahnad"
-msgstr ""
+msgstr "Ahnad"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:88
 msgctxt "Zoroastrian day name"
 msgid "Ashnad"
-msgstr ""
+msgstr "Ashnad"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:90
 msgctxt "Zoroastrian day name"
 msgid "Axshatar"
-msgstr ""
+msgstr "Axshatar"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:91
 msgctxt "Zoroastrian day name"
 msgid "Behesht"
-msgstr ""
+msgstr "Behesht"
 
 #: plugins/Calendars/src/ZoroastrianCalendar.cpp:132
 msgid "Jezdegerd Era"
-msgstr ""
+msgstr "Jezdegerd Era"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:41
 msgctxt "French Revolution Calendar day name"
 msgid "Primidi"
-msgstr ""
+msgstr "Primidi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:42
 msgctxt "French Revolution Calendar day name"
 msgid "Duodi"
-msgstr ""
+msgstr "Duodi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:43
 msgctxt "French Revolution Calendar day name"
 msgid "Tridi"
-msgstr ""
+msgstr "Tridi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:44
 msgctxt "French Revolution Calendar day name"
 msgid "Quartidi"
-msgstr ""
+msgstr "Quartidi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:45
 msgctxt "French Revolution Calendar day name"
 msgid "Quintidi"
-msgstr ""
+msgstr "Quintidi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:46
 msgctxt "French Revolution Calendar day name"
 msgid "Sextidi"
-msgstr ""
+msgstr "Sextidi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:47
 msgctxt "French Revolution Calendar day name"
 msgid "Septidi"
-msgstr ""
+msgstr "Septidi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:48
 msgctxt "French Revolution Calendar day name"
 msgid "Octidi"
-msgstr ""
+msgstr "Octidi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:49
 msgctxt "French Revolution Calendar day name"
 msgid "Nonidi"
-msgstr ""
+msgstr "Nonidi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:50
 msgctxt "French Revolution Calendar day name"
 msgid "Décadi"
-msgstr ""
+msgstr "Décadi"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:52
 msgctxt "French Revolution Calendar day name"
 msgid "Fête de la Vertu (Virtue Day)"
-msgstr ""
+msgstr "Fête de la Vertu (Festa della Virtù)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:53
 msgctxt "French Revolution Calendar day name"
 msgid "Fête du Génie (Genius Day)"
-msgstr ""
+msgstr "Fête du Génie (Festa del Genio)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:54
 msgctxt "French Revolution Calendar day name"
 msgid "Fête du Travail (Labour Day)"
-msgstr ""
+msgstr "Fête du Travail (Festa del Lavoro)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:55
 msgctxt "French Revolution Calendar day name"
 msgid "Fête de l'Opinion (Opinion Day)"
-msgstr ""
+msgstr "Fête de l'Opinion (Festa dell'Opinione)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:56
 msgctxt "French Revolution Calendar day name"
 msgid "Fête de la Récompense (Reward Day)"
-msgstr ""
+msgstr "Fête de la Récompense (Festa della Ricompensa)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:57
 msgctxt "French Revolution Calendar day name"
 msgid "Jour de la Révolution (Revolution Day)"
-msgstr ""
+msgstr "Jour de la Révolution (Giorno della Rivoluzione)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:59
 msgctxt "French Revolution Calendar month name"
 msgid "Vendémiaire (vintage)"
-msgstr ""
+msgstr "Vendémiaire (Vendemmiaio)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:60
 msgctxt "French Revolution Calendar month name"
 msgid "Brumaire (fog)"
-msgstr ""
+msgstr "Brumaire (Brumaio)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:61
 msgctxt "French Revolution Calendar month name"
 msgid "Frimaire (sleet)"
-msgstr ""
+msgstr "Frimaire (Frimaio)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:62
 msgctxt "French Revolution Calendar month name"
 msgid "Nivôse (snow)"
-msgstr ""
+msgstr "Nivôse (Nevoso)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:63
 msgctxt "French Revolution Calendar month name"
 msgid "Pluviôse (rain)"
-msgstr ""
+msgstr "Pluviôse (Piovoso)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:64
 msgctxt "French Revolution Calendar month name"
 msgid "Ventôse (wind)"
-msgstr ""
+msgstr "Ventôse (Ventoso)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:65
 msgctxt "French Revolution Calendar month name"
 msgid "Germinal (seed)"
-msgstr ""
+msgstr "Germinal (Germinale)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:66
 msgctxt "French Revolution Calendar month name"
 msgid "Floréal (blossom)"
-msgstr ""
+msgstr "Floréal (Fiorile)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:67
 msgctxt "French Revolution Calendar month name"
 msgid "Prairial (pasture)"
-msgstr ""
+msgstr "Prairial (Pratile)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:68
 msgctxt "French Revolution Calendar month name"
 msgid "Messidor (harvest)"
-msgstr ""
+msgstr "Messidor (Messidoro)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:69
 msgctxt "French Revolution Calendar month name"
 msgid "Thermidor (heat)"
-msgstr ""
+msgstr "Thermidor (Termidoro)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:70
 msgctxt "French Revolution Calendar month name"
 msgid "Fructidor (fruit)"
-msgstr ""
+msgstr "Fructidor (Fruttidoro)"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:71
 msgctxt "French Revolution Calendar month name"
 msgid "Sansculottides"
-msgstr ""
+msgstr "Sansculottides"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:104
 msgctxt "French Revolution Calendar 'week'"
 msgid "Décade"
-msgstr ""
+msgstr "Décade"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:115
 msgctxt "French Revolution Calendar: year"
 msgid "an"
-msgstr ""
+msgstr "an"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:117
 msgctxt "French Revolution Calendar: year"
 msgid "de la République Française"
-msgstr ""
+msgstr "de la République Française"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:122
 msgctxt "French Revolution Calendar 'week'"
 msgid "première"
-msgstr ""
+msgstr "première"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:123
 msgctxt "French Revolution Calendar 'week'"
 msgid "seconde"
-msgstr ""
+msgstr "seconde"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:124
 msgctxt "French Revolution Calendar 'week'"
 msgid "troisième"
-msgstr ""
+msgstr "troisième"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:126
 msgctxt "French Revolution Calendar: of the"
 msgid "de la"
-msgstr ""
+msgstr "de la"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:132
 msgctxt "French Revolution Calendar 'week'"
 msgid "décade"
-msgstr ""
+msgstr "décade"
 
 #: plugins/Calendars/src/FrenchArithmeticCalendar.cpp:134
 msgctxt "French Revolution Calendar: 'of'"
 msgid "du"
-msgstr ""
+msgstr "du"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:40
 msgctxt "Hebrew week day name"
 msgid "yom rishon (first day)"
-msgstr ""
+msgstr "yom rishon (primo giorno)"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:41
 msgctxt "Hebrew week day name"
 msgid "yom sheni (second day)"
-msgstr ""
+msgstr "yom sheni (secondo giorno)"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:42
 msgctxt "Hebrew week day name"
 msgid "yom shelishi (third day)"
-msgstr ""
+msgstr "yom shelishi (terzo giorno)"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:43
 msgctxt "Hebrew week day name"
 msgid "yom revi'i (fourth day)"
-msgstr ""
+msgstr "yom revi'i (quarto giorno)"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:44
 msgctxt "Hebrew week day name"
 msgid "yom ḥamishi (fifth day)"
-msgstr ""
+msgstr "yom ḥamishi (quinto giorno)"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:45
 msgctxt "Hebrew week day name"
 msgid "yom shishi (sixth day)"
-msgstr ""
+msgstr "yom shishi (sesto giorno)"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:46
 msgctxt "Hebrew week day name"
 msgid "yom shabbat (sabbath day)"
-msgstr ""
+msgstr "yom shabbat (Giorno sabbath)"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:48
 msgctxt "Hebrew month name"
 msgid "Nisan"
-msgstr ""
+msgstr "Nisan"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:49
 msgctxt "Hebrew month name"
 msgid "Iyyar"
-msgstr ""
+msgstr "Iyyar"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:50
 msgctxt "Hebrew month name"
 msgid "Sivan"
-msgstr ""
+msgstr "Sivan"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:51
 msgctxt "Hebrew month name"
 msgid "Tammuz"
-msgstr ""
+msgstr "Tammuz"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:52
 msgctxt "Hebrew month name"
 msgid "Av"
-msgstr ""
+msgstr "Av"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:53
 msgctxt "Hebrew month name"
 msgid "Elul"
-msgstr ""
+msgstr "Elul"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:54
 msgctxt "Hebrew month name"
 msgid "Tishri"
-msgstr ""
+msgstr "Tishri"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:55
 msgctxt "Hebrew month name"
 msgid "Marḥeshvan"
-msgstr ""
+msgstr "Marḥeshvan"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:56
 msgctxt "Hebrew month name"
 msgid "Kislev"
-msgstr ""
+msgstr "Kislev"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:57
 msgctxt "Hebrew month name"
 msgid "Tevet"
-msgstr ""
+msgstr "Tevet"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:58
 msgctxt "Hebrew month name"
 msgid "Shevat"
-msgstr ""
+msgstr "Shevat"
 
 #: plugins/Calendars/src/HebrewCalendar.cpp:59
 msgctxt "Hebrew month name"
 msgid "Adar"
-msgstr ""
+msgstr "Adar"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:39
 msgctxt "Islamic day name"
 msgid "yaum al-aḥad (first day)"
-msgstr ""
+msgstr "yaum al-aḥad (primo giorno)"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:40
 msgctxt "Islamic day name"
 msgid "yaum al-ithnaya (second day)"
-msgstr ""
+msgstr "yaum al-ithnaya (secondo giorno)"
 
 #: plugins/Calendars/src/IslamicCalendar.cpp:41
 msgctxt "Islamic day name"
@@ -29454,13 +29493,15 @@ msgstr ""
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:180
 msgid "Calendars Plug-in"
-msgstr ""
+msgstr "Plug-in Calendari"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:187
 msgid ""
 "The Calendars plugin provides an interface to various calendars used around "
 "the world."
 msgstr ""
+"Il plug-in Calendari fornisce un'interfaccia per vari calendari utilizzati "
+"in tutto il mondo."
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:188
 msgid "Julian Calendar"
@@ -29472,11 +29513,11 @@ msgstr "Calendario Gregoriano"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:190
 msgid "Revised Julian Calendar (Milankovi&#x107;)"
-msgstr ""
+msgstr "Calendario Giuliano Rivisto (Milankovi&#x107;)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:191
 msgid "ISO Weeks"
-msgstr ""
+msgstr "Settimana ISO"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:192
 msgid "Icelandic calendar"

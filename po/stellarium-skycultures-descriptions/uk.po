@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-31 22:02+0700\n"
+"POT-Creation-Date: 2022-04-15 13:10+0700\n"
 "PO-Revision-Date: 2020-01-06 16:35+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -2783,6 +2783,7 @@ msgstr "al-Naayem 2"
 #: ../../skycultures/egyptian_dendera/description.en.utf8:236
 #: ../../skycultures/greek_almagest/description.en.utf8:505
 #: ../../skycultures/inuit/description.en.utf8:31
+#: ../../skycultures/khoi-san/description.en.utf8:13
 #: ../../skycultures/lokono/description.en.utf8:377
 #: ../../skycultures/macedonian/description.en.utf8:73
 #: ../../skycultures/mongolian/description.en.utf8:259
@@ -2790,6 +2791,7 @@ msgstr "al-Naayem 2"
 #: ../../skycultures/ojibwe/description.en.utf8:48
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:59
 #: ../../skycultures/western_rey/description.en.utf8:78
+#: ../../skycultures/xhosa/description.en.utf8:16
 #: ../../skycultures/zulu/description.en.utf8:13
 msgid "Authors"
 msgstr "Автори"
@@ -6606,9 +6608,8 @@ msgstr ""
 msgid "Illustrations by Johan Meuris."
 msgstr "Ілюстрації створено Йоганом Мойрісом (Johan Meuris)."
 
-#. type: Content of: <table><tr><td>
+#. type: Content of: <h1>
 #: ../../skycultures/boorong/description.en.utf8:1
-#: ../../skycultures/boorong/description.en.utf8:24
 msgid "Boorong"
 msgstr "Австралійська"
 
@@ -6669,11 +6670,6 @@ msgid "<b>Celestial Clue</b>"
 msgstr "<b>Небесний ключ</b>"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:19
-msgid "Berm-berm-gle"
-msgstr "Берм-берм-ґле"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:20
 msgid "Red-kneed dotterel"
 msgstr "Червоноколінний хрустан"
@@ -6689,11 +6685,6 @@ msgid "Starry firmament at night"
 msgstr "Зоряне небесне склепіння вночі"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:29
-msgid "Bunya"
-msgstr "Буня"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:30
 msgid "Ring-tail possum"
 msgstr "Опосум із хвостом-кільцем"
@@ -6704,29 +6695,14 @@ msgid "Top star in Southern Cross"
 msgstr "Верхня зірка у Південному Хресті"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:34
-msgid "Chargee Gnowee"
-msgstr "Чарджі Гнові"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:35
 msgid "Elder sister, sister of the sun"
 msgstr "Старша сестра, сестра Сонця"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:39
-msgid "Bittur"
-msgstr "Біттур"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:40
 msgid "Larvae of the woodant"
 msgstr "Лялечка деревної мурахи"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:44
-msgid "Collenbitchick"
-msgstr "Колленбітчик"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:45
@@ -6739,11 +6715,6 @@ msgid "Double star in head of Capricornus"
 msgstr "Подвійна зірка перед Козорогом"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:49
-msgid "Collowgulloric War"
-msgstr "Колловґуллорська війна"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:50
 msgid "Female crow, wife of War"
 msgstr "Ворона, жінка Війни"
@@ -6752,11 +6723,6 @@ msgstr "Ворона, жінка Війни"
 #: ../../skycultures/boorong/description.en.utf8:51
 msgid "Eta Carinae"
 msgstr "Ета Кіля"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:54
-msgid "Colowgulloric Warepil"
-msgstr "Коловґуллорський Варепіл"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:55
@@ -6769,19 +6735,9 @@ msgid "Rigel In Orion"
 msgstr "Рігель у Оріоні"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:59
-msgid "Djuit"
-msgstr "Джуїт"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:60
 msgid "Red-rumped parrot"
 msgstr "Червонохвостий папуга"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:64
-msgid "Gellarlec"
-msgstr "Ґелларлек"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:65
@@ -6794,11 +6750,6 @@ msgid "Aldebaran"
 msgstr "Альдебарана"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:69
-msgid "Ginabongbearp"
-msgstr "Джінабонгберп"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:70
 msgid "Sulphur-crested white cockatoo; pulling up daylight"
 msgstr "Білий какаду із жовтим гребінцем; виштовхує денне світло"
@@ -6809,11 +6760,6 @@ msgstr "Білий какаду із жовтим гребінцем; вишто
 #: ../../skycultures/lokono/description.en.utf8:46
 msgid "Jupiter"
 msgstr "Юпітер"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:74
-msgid "Gnowee"
-msgstr "Гнові"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:75
@@ -6831,11 +6777,6 @@ msgid "Sun"
 msgstr "Сонце"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:79
-msgid "Karik Karik"
-msgstr "Карік-Карік"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:80
 msgid "Spear thrower; Australian Kestrel"
 msgstr "Метальник спису; австралійська постільга"
@@ -6844,11 +6785,6 @@ msgstr "Метальник спису; австралійська постіль
 #: ../../skycultures/boorong/description.en.utf8:81
 msgid "Two stars at end of Scorpius"
 msgstr "Дві зірки у кінці Скорпіона"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:84
-msgid "Kourt-chin"
-msgstr "Коурт-чин"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:85
@@ -6861,11 +6797,6 @@ msgid "Clouds of Magellan"
 msgstr "Магелланові Хмари"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:89
-msgid "Kulkanbulla"
-msgstr "Кулканбулла"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:90
 msgid "Two teenage boys"
 msgstr "Двоє юнаків"
@@ -6876,19 +6807,9 @@ msgid "Belt and Scabbard of Orion"
 msgstr "Пояс і піхви меча Оріона"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:94
-msgid "Lamankurrk"
-msgstr "Ламан-куррк"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:95
 msgid "Girls, young women"
 msgstr "Дівчата, молоді жінки"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:99
-msgid "Marpeankurrk"
-msgstr "Марпін-куррк"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:100
@@ -6902,11 +6823,6 @@ msgid "Arcturus"
 msgstr "Арктур"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:104
-msgid "Millee"
-msgstr "Мілі"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:105
 msgid "Murray River"
 msgstr "Річка Мюррей"
@@ -6918,19 +6834,9 @@ msgid "Part of the Milky Way"
 msgstr "Частина Чумацького Шляху"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:109
-msgid "Mindi"
-msgstr "Мінді"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:110
 msgid "The maned snake"
 msgstr "Гриваста змія"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:114
-msgid "Mityan"
-msgstr "Мітьян"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:115
@@ -6947,11 +6853,6 @@ msgid "Moon"
 msgstr "Місяць"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:119
-msgid "Neilloan"
-msgstr "Нейллоан"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:120
 msgid "Mallee fowl"
 msgstr "Очиста курка"
@@ -6960,11 +6861,6 @@ msgstr "Очиста курка"
 #: ../../skycultures/boorong/description.en.utf8:121
 msgid "Lyra"
 msgstr "Ліра"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:124
-msgid "Nurrumbunguttias"
-msgstr "Нуррумбунгуттіас"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:125
@@ -6977,19 +6873,9 @@ msgid "White aura of the Milky Way"
 msgstr "Біле світло Чумацького Шляху"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:129
-msgid "Otchocut"
-msgstr "Отчокат"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:130
 msgid "Great fish"
 msgstr "Велика риба"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:134
-msgid "Porkelong toute"
-msgstr "Поркелонг туте"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:135
@@ -7002,11 +6888,6 @@ msgid "Shooting star"
 msgstr "Метеорит"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:139
-msgid "Pupperimbul"
-msgstr "Пупперімбул"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:140
 msgid "Diamond firetail finch or shy hylacola"
 msgstr "Діамантовий вогнянохвостий зяблик або полохлива хайлакола"
@@ -7015,11 +6896,6 @@ msgstr "Діамантовий вогнянохвостий зяблик або 
 #: ../../skycultures/boorong/description.en.utf8:141
 msgid "Carried the emu egg to become the Sun"
 msgstr "Стереже яйце ему, яке стане Сонцем"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:144
-msgid "Purra"
-msgstr "Пурра"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:145
@@ -7032,11 +6908,6 @@ msgid "Capella"
 msgstr "Капелла"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:149
-msgid "Tchingal"
-msgstr "Чінгал"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:150
 msgid "The tall one; emu"
 msgstr "Високий; ему"
@@ -7047,11 +6918,6 @@ msgid "Dark space near Cross"
 msgstr "Темне місце, поруч із Хрестом"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:154
-msgid "Totyarguil"
-msgstr "Тотяргуїл"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:155
 msgid "Purple crowned lorikeet"
 msgstr "Пурпурно-коронний папужка лорі"
@@ -7060,11 +6926,6 @@ msgstr "Пурпурно-коронний папужка лорі"
 #: ../../skycultures/boorong/description.en.utf8:156
 msgid "Altair"
 msgstr "Альтаїр"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:159
-msgid "Tourchingboiongerra"
-msgstr "Торчинґбойонґерра"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:160
@@ -7078,11 +6939,6 @@ msgid "Coma Berenices"
 msgstr "Волосся Вероніки"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:164
-msgid "Tourte"
-msgstr "Турте"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:165
 msgid "Star"
 msgstr "Зірка"
@@ -7093,20 +6949,10 @@ msgid "Any star"
 msgstr "Будь-яка зірка"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:169
-msgid "Tyrille"
-msgstr "Тирілл"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:170
 #: ../../skycultures/boorong/description.en.utf8:171
 msgid "Space; night sky"
 msgstr "Простір; нічне небо"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:174
-msgid "Unurgunite"
-msgstr "Унургуніт"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:175
@@ -7119,11 +6965,6 @@ msgid "Sigma Canis Majoris"
 msgstr "Сигма Великого Пса"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:179
-msgid "Wanjel"
-msgstr "Ванджел"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:180
 msgid "Long-necked tortoise"
 msgstr "Довгошия черепаха"
@@ -7134,29 +6975,14 @@ msgid "Pollux"
 msgstr "Поллукс"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:184
-msgid "War"
-msgstr "Війна"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:185
 msgid "Crow"
 msgstr "Ворон"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:189
-msgid "Warepil"
-msgstr "Варепіл"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:190
 msgid "Wedge tailed eagle"
 msgstr "Клинохвостий орел"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:194
-msgid "Warring"
-msgstr "Кільце війни"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:195
@@ -7172,11 +6998,6 @@ msgid "Milky Way"
 msgstr "Чумацький Шлях"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:199
-msgid "Weetkurrk"
-msgstr "Віт-куррк"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:200
 msgid "Singing bushlark"
 msgstr "Жайворонок, що співає"
@@ -7185,11 +7006,6 @@ msgstr "Жайворонок, що співає"
 #: ../../skycultures/boorong/description.en.utf8:201
 msgid "Star in Bootes west of Arcturus"
 msgstr "Зірка у Волопасі, на захід від Арктура"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:204
-msgid "Won"
-msgstr "Вон"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:205
@@ -7203,11 +7019,6 @@ msgid "Corona Australis"
 msgstr "Південна Корона"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:209
-msgid "Yerredetkurrk"
-msgstr "Єрредет-куррк"
-
-#. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:210
 msgid "Owlet nightjar"
 msgstr "Молода дрімлюга"
@@ -7216,11 +7027,6 @@ msgstr "Молода дрімлюга"
 #: ../../skycultures/boorong/description.en.utf8:211
 msgid "Achernar"
 msgstr "Ахернар"
-
-#. type: Content of: <table><tr><td>
-#: ../../skycultures/boorong/description.en.utf8:214
-msgid "Yurree"
-msgstr "Юррі"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:215
@@ -10493,6 +10299,7 @@ msgstr ""
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/dakota/description.en.utf8:22
+#: ../../skycultures/ojibwe/description.en.utf8:15
 msgid "<i>Madoo'asinik</i>, Sweating Stones, Pleiades"
 msgstr "<i>Маду’ашінік</i> — Банні Камені, Плеяди"
 
@@ -10702,7 +10509,10 @@ msgstr ""
 
 #. type: Content of: <h2>
 #: ../../skycultures/dakota/description.en.utf8:62
+#: ../../skycultures/khoi-san/description.en.utf8:18
 #: ../../skycultures/ojibwe/description.en.utf8:53
+#: ../../skycultures/xhosa/description.en.utf8:21
+#: ../../skycultures/zulu/description.en.utf8:18
 msgid "Licence"
 msgstr "Ліцензування"
 
@@ -15052,6 +14862,136 @@ msgstr ""
 "Докладніший опис картини зоряного неба народів каміларой та еуахлаї можна "
 "знайти тут: <a href=\"https://unsw.academia.edu/RobertFuller\" "
 "class=\"external\">https://unsw.academia.edu/RobertFuller</a>."
+
+#. type: Content of: <h2>
+#: ../../skycultures/khoi-san/description.en.utf8:1
+msgid "Khoikhoi and San"
+msgstr "Койкой і сан"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/khoi-san/description.en.utf8:4
+msgid "<b>Stars&#8217; Road &mdash; Milky Way:</b>"
+msgstr "<b>Зоряна Дорога &mdash; Молочний Шлях:</b>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/khoi-san/description.en.utf8:4
+msgid ""
+"A strong-willed girl became so angry when her mother would not give her any "
+"of a delicious roasted root that she grabbed the roasting roots from the "
+"fire.  The girl threw the roots and ashes into the sky, where the red and "
+"white roots now glow as red and white stars, and the ashes are the Milky Way"
+" or Stars&#8217; road."
+msgstr ""
+"Уперта дівчинка розізлилася на те, що її матір не дала їй смачних смажених "
+"коренів, і витягла смажені корені з багаття. Дівчинка кинула корені і попіл "
+"у небо, де червоні і білі корені тепер сяють як червоні і білі зірки, а "
+"попіл став Молочним Шляхом або Зоряною Дорогою."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/khoi-san/description.en.utf8:6
+msgid "<b>Hunting trip &mdash; Pleiades, Aldebaran and Orion:</b>"
+msgstr "<b>Мисливська помилка &mdash; Плеяди, Альдебаран і Оріон:</b>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/khoi-san/description.en.utf8:6
+msgid ""
+"According to the Namaquas, the Pleiades were the daughters of the sky god. "
+"Their husband (Aldeberan) shot his arrow (Orion&#8217;s sword) at three "
+"zebras (Orion's belt), but missed.  Now he is stuck. He cannot go home "
+"because he had not supplied meat for his family, and he cannot fetch his "
+"arrow because of the fierce lion (Betelgueuse), watching the zebras."
+msgstr ""
+"За легендами народу нама Плеяди були дочками небесного бога. Їхній чоловік "
+"(Альдебаран) вистрілив своєю стрілою (Меч Оріона) у трьох зебр (Пояс "
+"Оріона), але не влучив. Тепер йому нікуди подітися. Він не може повернутися "
+"додому, оскільки немає м'яса для сім'ї, але і не може дістатися своєї стріли"
+" через лютого лева (Бетельгейзе), який спостерігає за зебрами."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/khoi-san/description.en.utf8:8
+msgid "<b>Other Legends</b>"
+msgstr "<b>Інші легенди</b>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/khoi-san/description.en.utf8:8
+msgid ""
+"The Xam Bushmen called Canopus the &#8220;ant-egg star&#8221;, while Vega "
+"was seen as a male steenbok by the Gwi Bushmen. The Nyae Naye Kung Bushmen "
+"refers to the Coalsack Nebula as the &#8220;old bag of the night.&#8221;"
+msgstr ""
+"Бушмени сам називають Канопус «зіркою мурашиного яйця», а бушмени гві "
+"називають Вегу «самець антилопи Штейнбока». Бушмени няе-нає-кунг називають "
+"туманність «Вугільний мішок» «станим мішком ночі»."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/khoi-san/description.en.utf8:9
+msgid ""
+"The bright reddish star Antares was called the &#8220;fire-finishing "
+"star&#8221; by the Xu Bushmen. Not only does it have the reddish colour, but"
+" at certain times of the year it sets very late at night, after camp fires "
+"had died down."
+msgstr ""
+"Яскраву червонясту зірку Антарес бушмени су називають «зіркою, що припиняє "
+"вогонь». Причиною цього є не лише червоний колір, але і те, що у певні пори "
+"року зірка сідає дуже пізно вночі, після того, як згасають багаття на "
+"стоянках."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/khoi-san/description.en.utf8:10
+msgid ""
+"Another Khoikhoi legend tells of some &#8220;great celestial beast&#8221; "
+"with the pointer stars of the Southern Cross referred to as Mura, &#8220;the"
+" eyes&#8221; of the beast."
+msgstr ""
+"Ще одна з легенд койкой повідомляє про «велику небесну потвору» із "
+"променистими очима у Південному Хресті. Очі називають Мура, «очі» потвори."
+
+#. type: Content of: <p>
+#: ../../skycultures/khoi-san/description.en.utf8:14
+#: ../../skycultures/xhosa/description.en.utf8:17
+#: ../../skycultures/zulu/description.en.utf8:14
+msgid ""
+"This sky culture was created by Suki Lock for the South African Astronomical"
+" Observatory <a href=\"http://www.saao.ac.za/\">(SAAO)</a>, based on "
+"information supplied by Auke Slotegraaf.  They were modified using inputs "
+"and information from Themba Matomela, Thembela Mantungwa and Mdumiseni "
+"Nxumalo. The project was initiated by Sivuyile Manxoyi after having "
+"discussions with Prof Jarita Holbrook and Prof Kevin Snedegar on African "
+"Cultural astronomy."
+msgstr ""
+"Дані цієї картини зоряного неба було приготовано Сукі Лок (Suki Lock) для "
+"Південноафриканської астрономічної обсерваторії <a "
+"href=\"http://www.saao.ac.za/\">(SAAO)</a>, на основі даних, наданих Ауке "
+"Штолеграаф (Auke Slotegraaf). До них було внесено зміни на основі зауважень "
+"та даних Темби Матомели (Themba Matomela), Тембели Мантунгва (Thembela "
+"Mantungwa) та Мдумізені Нксумало (Mdumiseni Nxumalo). Ініціатор проєкту — "
+"Сивуїле Манксої (Sivuyile Manxoyi) після обговорення з професором Джарітою "
+"Голбрук (Jarita Holbrook) та професором Кевіном Снедегаром (Kevin Snedegar) "
+"щодо африканської культурної астрономії."
+
+#. type: Content of: <p>
+#: ../../skycultures/khoi-san/description.en.utf8:19
+#: ../../skycultures/xhosa/description.en.utf8:22
+#: ../../skycultures/zulu/description.en.utf8:19
+msgid ""
+"This sky culture is provided under CC BY-ND 4.0 International Public Licence"
+" (you can use it for any commercial and noncommercial purpose but credit the"
+" authors and do not change it. Thanks!)."
+msgstr ""
+"Цю картину зоряного неба надано за умов дотримання міжнародної громадської "
+"ліцензії CC BY-ND 4.0 (ви можете використовувати її з будь-якою комерційною "
+"або некомерційною метою, але маєте подякувати авторам і не можете змінювати "
+"її. Дякуємо!)."
+
+#. type: Content of: <p>
+#: ../../skycultures/khoi-san/description.en.utf8:21
+#: ../../skycultures/xhosa/description.en.utf8:24
+msgid ""
+"Please credit the <a href=\"https://cfah.org.za\">Centre for Astronomical "
+"Heritage (CfAH)</a>."
+msgstr ""
+"Будь ласка, лишіть подяку <a href=\"https://cfah.org.za\">Центру "
+"астрономічного спадку (CfAH)</a>."
 
 #. type: Content of: <h1>
 #: ../../skycultures/korean/description.en.utf8:1
@@ -19749,164 +19689,159 @@ msgstr ""
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:7
 msgid ""
-"<i>Gaadidnaway,Mishi bizhiw</i>,Curly Tail, Great Panther, Leo & head of "
-"Hydra"
+"<i>Gaadidnaway, Mishi bizhiw</i>, Curly Tail, Great Panther, Leo and head of"
+" Hydra"
 msgstr ""
 "<i>Ґаадіднавай, Міші біжів</i> — Велика Пантера і Звивистий Хвіст, Лев і "
 "голова Гідри"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:8
-msgid "<i>Madoodiswan</i>,Sweat Lodge, Corona"
+msgid "<i>Madoodiswan</i>, Sweat Lodge, Corona"
 msgstr "<i>Мадуудісван</i> — Баня, Корона"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:9
 msgid ""
-"<i>Biboonkeonini</i>,Wintermaker, Orion with arms to Procyon & Aldebaran"
+"<i>Biboonkeonini</i>, Wintermaker, Orion with arms to Procyon and Aldebaran"
 msgstr ""
 "<i>Бібункеоніні</i> — Та, Що Приносить Зиму, Оріон із руками Проціоном та "
 "Альдебараном"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:10
-msgid "<i>Maang</i>,Loon, Ursa Minor (Little Dipper)"
+msgid "<i>Maang</i>, Loon, Ursa Minor (Little Dipper)"
 msgstr "<i>Маанґ</i> — Гагара, Мала Ведмедиця (Малий Ківш)"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:11
-msgid "<i>Ojiig</i>,Fisher, Ursa Major (Big Dipper)"
+msgid "<i>Ojiig</i>, Fisher, Ursa Major (Big Dipper)"
 msgstr "<i>Оджиіґ</i> — Рибалка, Велика Ведмедиця (Великий Ківш)"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:12
-msgid "<i>Giwedin’Anung</i>,North Star, Polaris"
+msgid "<i>Giwedin’Anung</i>, North Star, Polaris"
 msgstr "<i>Ґіведін’Анунґ</i> — Північна Зоря, Полярна"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:13
-msgid "<i>Mooz</i>,Moose, Pegasus & Lacerta"
+msgid "<i>Mooz</i>, Moose, Pegasus and Lacerta"
 msgstr "<i>Муз</i> — Олень, Пегас і Ящірка"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:14
-msgid "<i>Bugonagiizhig</i>,Hole in the Sky, Pleiades"
+msgid "<i>Bugonagiizhig</i>, Hole in the Sky, Pleiades"
 msgstr "<i>Буґонаґііжиґ</i> — Дірка У Небі, Плеяди"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/ojibwe/description.en.utf8:15
-msgid "<i>Madoo'asinik</i>,Sweating Stones, Pleiades"
-msgstr "<i>Маду’ашінік</i> — Банні Камені, Плеяди"
-
-#. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:16
-msgid "<i>Ajiijaak/Bineshi Okanin</i>,Crane/Skeleton Bird, Cygnus"
+msgid "<i>Ajiijaak/Bineshi Okanin</i>, Crane/Skeleton Bird, Cygnus"
 msgstr "<i>Аджііджаак/Пінеші Оканін</i>,Crane/Skeleton Bird, Cygnus"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:17
-msgid "<i>Noondeshin Bemaadizid</i>,Exhausted Bather, part of Hercules"
+msgid "<i>Noondeshin Bemaadizid</i>, Exhausted Bather, part of Hercules"
 msgstr ""
 "<i>Нундешин Бемаадізід</i> — Виснажений Купальник, частина сузір’я Геркулеса"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:18
-msgid "<i>Nanaboujou</i>,Nanaboujou, Scorpio"
+msgid "<i>Nanaboujou</i>, Nanaboujou, Scorpio"
 msgstr "<i>Нанабоужоу</i> — нанабоужоу, Скорпіон"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:19
-msgid "<i>Anung</i>,Star,"
+msgid "<i>Anung</i>, Star"
 msgstr "<i>Анунґ</i> — зірка"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:20
-msgid "<i>Anung aki</i>,Star World"
+msgid "<i>Anung aki</i>, Star World"
 msgstr "<i>Анунґ акі</i> — зоряний світ"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:21
-msgid "<i>Dibik-giizis (Night Sun)</i>,Moon"
+msgid "<i>Dibik-giizis (Night Sun)</i>, Moon"
 msgstr "<i>Дібік-ґіізіс (Нічне Сонце)</i> — Місяць"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:22
-msgid "<i>Giizis</i>,Sun"
+msgid "<i>Giizis</i>, Sun"
 msgstr "<i>Ґіізіс</i> — Сонце"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:23
-msgid "<i>Giizhig</i>,Sky"
+msgid "<i>Giizhig</i>, Sky"
 msgstr "<i>Ґііжиґ</i> — небо"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:24
-msgid "<i>Ikwe'anung (Women's Star)</i>,Venus"
+msgid "<i>Ikwe'anung (Women's Star)</i>, Venus"
 msgstr "<i>Ікве’анунґ (Жіноча зірка)</i> — Венера"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:25
-msgid "<i>Onaagoshi'anung</i>,Venus -Evening Star"
+msgid "<i>Onaagoshi'anung</i>, Venus - Evening Star"
 msgstr "<i>Онааґоші’анунґ</i> — Венера, Вечірня зірка"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:26
-msgid "<i>Waabun'anung</i>,Venus - Morning Star"
+msgid "<i>Waabun'anung</i>, Venus - Morning Star"
 msgstr "<i>Ваабун’анунґ</i> — Венера, Вранішня зірка"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:27
-msgid "<i>Maingan Mikan (Wolf Trail)</i>,Ecliptic"
+msgid "<i>Maingan Mikan (Wolf Trail)</i>, Ecliptic"
 msgstr "<i>Майнґан Мікан (Вовча доріжка)</i> — екліптика"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:28
-msgid "<i>Jiibaykona (Spirit Path)</i>,Milky Way"
+msgid "<i>Jiibaykona (Spirit Path)</i>, Milky Way"
 msgstr "<i>Джіібайкона (Шлях Духів)</i> — Чумацький Шлях"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:29
-msgid "<i>Jiibay Ziibi (River of Souls)</i>,Milky Way"
+msgid "<i>Jiibay Ziibi (River of Souls)</i>, Milky Way"
 msgstr "<i>Джіібай Зіібі (Ріка Душ)</i> — Чумацький Шлях"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:30
-msgid "<i>Bangishin anung</i>,Meteor/Falling star"
+msgid "<i>Bangishin anung</i>, Meteor/Falling star"
 msgstr "<i>Банґішин анунґ</i> — метеор"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:31
-msgid "<i>Gaagige Giizhig (Forever Sky)</i>,Universe"
+msgid "<i>Gaagige Giizhig (Forever Sky)</i>, Universe"
 msgstr "<i>Ґааґіґе Ґііжиґ (Вічне Небо)</i> — Всесвіт"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:32
-msgid "<i>Anung Nibwakawin</i>,Star Knowledge (Wisdom)"
+msgid "<i>Anung Nibwakawin</i>, Star Knowledge (Wisdom)"
 msgstr "<i>Анунґ Нібвакавін</i> — знання про зірки (мудрість)"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:33
-msgid "<i>Giizhig Anung Masinaaigan</i>,(Sky) Star map"
+msgid "<i>Giizhig Anung Masinaaigan</i>, (Sky) Star map"
 msgstr "<i>Ґііжиґ Анунґ Масінааїґан</i> — карта неба"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:34
-msgid "<i>Waabanong (Waaban)</i>,East"
+msgid "<i>Waabanong (Waaban)</i>, East"
 msgstr "<i>Ваабанонґ (Ваабан)</i> — схід"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:35
-msgid "<i>Ningabianong (Nigagbii'an)</i>,West"
+msgid "<i>Ningabianong (Nigagbii'an)</i>, West"
 msgstr "<i>Нінґабьянонґ (Ніґаґбіі’ан)</i> — захід"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:36
-msgid "<i>Giiwedinong (Giiwedinang/Giiwendin)</i>,North"
+msgid "<i>Giiwedinong (Giiwedinang/Giiwendin)</i>, North"
 msgstr "<i>Ґііведінонґ (Ґііведінанґ/Ґіівендін)</i> — північ"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/ojibwe/description.en.utf8:37
-msgid "<i>Zhaawanong (Zhaawan)</i>,South"
+msgid "<i>Zhaawanong (Zhaawan)</i>, South"
 msgstr "<i>Жааванонґ (Жааван)</i> — південь"
 
 #. type: Content of: <ul><li>
@@ -19953,7 +19888,7 @@ msgstr ""
 
 #. type: Content of: <p>
 #: ../../skycultures/ojibwe/description.en.utf8:50
-msgid "Constellation Paintings by A. Lee & W. Wilson."
+msgid "Constellation Paintings by A. Lee and W. Wilson."
 msgstr "Малюнки сузір’їв створено A. Lee та W. Wilson."
 
 #. type: Content of: <h1>
@@ -20056,7 +19991,7 @@ msgstr ""
 #. type: Content of: <p><p><p><ul><li>
 #: ../../skycultures/romanian/description.en.utf8:17
 msgid ""
-"<a h "
+"<a "
 "href=\"http://www.sarm.ro/newsite/index.php?id=1&zi=29&luna=12&an=2009&act=news\">Romanian"
 " peasants beliefs in stars and sky – Translation of texts adapted from Ion "
 "Ottescu</a>"
@@ -22177,6 +22112,156 @@ msgstr ""
 "перероблено відповідно до 41-го видання книги і завершено цим описом Георгом"
 " Зотті (Georg Zotti)."
 
+#. type: Content of: <h2>
+#: ../../skycultures/xhosa/description.en.utf8:1
+msgid "Xhosa"
+msgstr "Коса"
+
+#. type: Content of: <p>
+#: ../../skycultures/xhosa/description.en.utf8:2
+msgid ""
+"A wide spread African concept is that the sky is a solid dome, perhaps made "
+"of blue rock resting on the Earth, upon which the Sun moves. In Xhosa, a "
+"star is called &#8220;inkwenkwezi&#8221;."
+msgstr ""
+"Згідно з широко розповсюдженими в Африці уявленнями, небо є суцільним "
+"куполом, можливо, зробленим з синього каменю, який стоїть на землі і яким "
+"рухається Сонце. Коса називають зірку «інквенквезі»."
+
+#. type: Content of: <p>
+#: ../../skycultures/xhosa/description.en.utf8:3
+msgid ""
+"Although planets are &#8220;wanderers&#8221; of the night skies, and "
+"therefore vary their positions relative to the stars, they often feature in "
+"Xhosa starlore."
+msgstr ""
+"Хоча планети подорожують нічним небом і тому змінюють позицію відносно "
+"зірок, вони часто є відзначаються у картині зоряного неба коса."
+
+#. type: Content of: <p>
+#: ../../skycultures/xhosa/description.en.utf8:4
+msgid ""
+"Jupiter was interpreted as people around a fire. Venus, as the evening star,"
+" is associated with the time the boys milked the cows"
+msgstr ""
+"Про Юпітер згадують, як про людей навколо вогнища. Венеру, нічну зірку, "
+"пов'язують із часом, коли хлопчаки доять корів."
+
+#. type: Content of: <p>
+#: ../../skycultures/xhosa/description.en.utf8:5
+msgid ""
+"Venus was also called the dating star, &#8220;Madingeni&#8221;. Boys and "
+"girls were not allowed to date in public, but met at the fountain where the "
+"girls fetched water when Venus was visible in the evening."
+msgstr ""
+"Венеру також називають зіркою побачень, «Мадінгені». Хлопцям і дівчатам "
+"забороняють відкриті побачення, але вони можуть зустрічатися біля джерела, "
+"де дівчата беруть воду, коли Венера з'являється на небі ввечері."
+
+#. type: Content of: <h2>
+#: ../../skycultures/xhosa/description.en.utf8:7
+#: ../../skycultures/zulu/description.en.utf8:4
+msgid "Starlore"
+msgstr "Зіркова статистика"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/xhosa/description.en.utf8:9
+#: ../../skycultures/zulu/description.en.utf8:6
+msgid "<b>isiLimela &mdash; Pleiades:</b>"
+msgstr "<b>ісіЛімела — Плеяди:</b>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/xhosa/description.en.utf8:9
+msgid ""
+"The first sighting of &#8220;isiLimela&#8221; indicated the start of the "
+"Xhosa digging or planting season. It is also said that the month of the "
+"Digging Stars symbolised new life in a man for the coming-out ceremony of "
+"the Abakwetha circumcision school and it has always been a custom for Xhosa "
+"men to count their years of manhood from this time."
+msgstr ""
+"Перша поява «Ісілімели» означає початок сезону землеробства і садівництва у "
+"коса. Цей місяць також називають місяцем Зірок Копання, що символізують нове"
+" життя у чоловіці, проходження церемонії ініціалізації у вченні про "
+"обрізання абаквети. За традицією чоловіки коса лічать роки дорослого життя "
+"від цього періоду."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/xhosa/description.en.utf8:10
+msgid "<b>iQhawe &mdash; Sirius:</b>"
+msgstr "<b>Ікхаве &mdash; Сіріус:</b>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/xhosa/description.en.utf8:10
+msgid ""
+"Sirius is known as &#8220;iQhawe&#8221; in Xhosa, which means &#8220;the "
+"champion&#8221;, probably because it is the brightest star in the night sky."
+" It can also be seen as one of two suitors or rivals (along with Canopus, "
+"the second brightest star), but we cannot say for whose affections they are "
+"fighting."
+msgstr ""
+"Сіріус відомий коса як «Ікхаве», тобто «Переможець». Ймовірно, таку назву "
+"дано через те, що це найяскравіша зірка нічного неба. Також її розглядають "
+"як одного з двох прихильників або суперників (разом із Канопусом, другою "
+"найяскравішою зіркою). Втім, невідомо за чию прихильність вони сперечаються."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/xhosa/description.en.utf8:11
+msgid "<b>uCanzibe &mdash; Canopus:</b>"
+msgstr "<b>Уканзібе &mdash; Канопус:</b>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/xhosa/description.en.utf8:11
+msgid ""
+"Canopus is the second brightest star in the heavens and is referred to as "
+"&#8220;uCanzibe&#8221; in Xhosa, which means shining and sparkling. The star"
+" is seen as traditional Xhosa boys dancing, or sometimes as one of two "
+"suitors (Sirius, the brightest star, being the other), possibly rivals in "
+"their quest for affection."
+msgstr ""
+"Канопус є другою найяскравішою зіркою на небі. Його коса називають "
+"«Уканзібе», що означає «сяйво» та «іскри». Зірку вважають хлопчаками коса, "
+"які виконують традиційний танок, або одного з двох прихильників (іншим є "
+"Сіріус, найяскравіша зірка неба), можливими суперниками за предмет "
+"поклоніння."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/xhosa/description.en.utf8:12
+msgid "<b>umNyele &mdash; The Milky Way:</b>"
+msgstr "<b>Умнєле &mdash; Молочний Шлях:</b>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/xhosa/description.en.utf8:12
+msgid ""
+"&#8220;umNyele&#8221; is the Xhosa for the raised bristles along the back of"
+" the sky, like those on the back of an angry dog. It was told that the dog "
+"would rise up if you point to the heaven with straight fingers. This was a "
+"good deterrence and the people would remember to show respect for the god "
+"&#8220;Qamata&#8221; by always pointing to the sky with a bent finger."
+msgstr ""
+"«Умнєле» — термін коса для щетинок на спині неба, подібних до щетинок на "
+"спині злої собаки. За легендою, собака піднімається, коли хтось вказує на "
+"небо прямими пальцями. Це добре попередження, щоб люди пам'ятали про повагу "
+"до бога «Камати», завжди вказуючи на небо зігнутими пальцями."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/xhosa/description.en.utf8:13
+msgid "<b>amaKroza &mdash; Orion&#8217;s Belt:</b>"
+msgstr "<b>Амакроза &mdash; Пояс Оріона:</b>"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/xhosa/description.en.utf8:13
+msgid ""
+"In Xhosa the three stars of Orion&#8217;s Belt are known as the "
+"&#8220;amaKroza&#8221;, or &#8220;those in a queue&#8221;. These are the "
+"graves where ancestors rest peacefully, the heavens where their spirits roam"
+" and the most holy place beyond the starry heavens, the dwelling of the "
+"supreme god, &#8220;Qamata&#8221;."
+msgstr ""
+"Коса називають три зірки Пояса Оріона «Амакроза» або «ті, що у черзі». Це "
+"могили, де мирно спочивають предки, небеса, де покояться їхні духи, і "
+"найсвященніші місця у зоряних небесах, місце, де живе верховний бог, "
+"«Камата»."
+
 #. type: Content of: <h1>
 #: ../../skycultures/zulu/description.en.utf8:1
 msgid "Zulu"
@@ -22191,16 +22276,6 @@ msgstr ""
 "Згідно з широко розповсюдженими в Африці уявленнями, небо є суцільним "
 "куполом, можливо, зробленим з синього каменю, який стоїть на землі і яким "
 "рухається Сонце."
-
-#. type: Content of: <h2>
-#: ../../skycultures/zulu/description.en.utf8:4
-msgid "Starlore"
-msgstr "Зіркова статистика"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/zulu/description.en.utf8:6
-msgid "<b>isiLimela &mdash; Pleiades:</b>"
-msgstr "<b>ісіЛімела — Плеяди:</b>"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/zulu/description.en.utf8:6
@@ -22287,22 +22362,6 @@ msgstr ""
 " і потік таких списів можна було спостерігати у повітрі."
 
 #. type: Content of: <p>
-#: ../../skycultures/zulu/description.en.utf8:14
-msgid ""
-"This sky culture was created by Suki Lock for the South African Astronomical"
-" Observatory <a href=\"http://www.saao.ac.za/\">(SAAO)</a>, based on "
-"information supplied by Auke Slotegraaf.  They were modified using inputs "
-"and information from Themba Matomela, Thembela Mantungwa and Mdumiseni "
-"Nxumalo. The project was initiated by Sivuyile Manxoyi after having "
-"discussions with Prof Jarita Holbrook and Prof Kevin Snedegar on African "
-"Cultural astronomy."
-msgstr ""
-"Дані цієї картини зоряного неба було приготовано Сукі Лок (Suki Lock) для "
-"Південноафриканської астрономічної обсерваторії <a "
-"href=\"http://www.saao.ac.za/\">(SAAO)</a>, на основі даних, наданих Ауке "
-"Штолеграаф (Auke Slotegraaf). До них було внесено зміни на основі зауважень "
-"та даних Темби Матомели (Themba Matomela), Тембели Мантунгва (Thembela "
-"Mantungwa) та Мдумізені Нксумало (Mdumiseni Nxumalo). Ініціатор проєкту — "
-"Сивуїле Манксої (Sivuyile Manxoyi) після обговорення з професором Джарітою "
-"Голбрук (Jarita Holbrook) та професором Кевіном Снедегаром (Kevin Snedegar) "
-"щодо африканської культурної астрономії."
+#: ../../skycultures/zulu/description.en.utf8:21
+msgid "Please credit the Centre for Astronomical Heritage (CfAH)."
+msgstr "Будь ласка, лишіть подяку Центру астрономічного спадку (CfAH)."
