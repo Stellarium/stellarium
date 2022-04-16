@@ -886,10 +886,33 @@ double qTimeToJDFraction(const QTime& time)
 
 QTime jdFractionToQTime(const double jd)
 {
-	double decHours = std::fmod(jd+0.5, 1.0);
-	int hours = static_cast<int>(decHours/0.041666666666666666666);
-	int mins = static_cast<int>((decHours-(hours*0.041666666666666666666))/0.00069444444444444444444);
-	return QTime::fromString(QString("%1.%2").arg(hours).arg(mins), "h.m");
+	double decHours = std::fmod(jd+0.5, 1.0) * 24.;
+	int hours =int(std::floor(decHours));
+	double decMins = (decHours-hours)*60.;
+	int mins = int(std::floor(decMins));
+	double decSec = (decMins-mins)*60.;
+	int sec = int(std::floor(decSec));
+	double decMsec = (decSec-sec)*1000.;
+	int ms=int(std::round(decMsec));
+
+	if (ms>=1000){
+		ms-=1000;
+		sec+=1;
+	}
+	if (sec>=60){
+		sec-=60;
+		mins+=1;
+	}
+	if (mins>=60){
+		mins-=60;
+		hours+=1;
+	}
+	hours %= 24;
+
+	QTime tm=QTime(hours, mins, sec, ms);
+	if (!tm.isValid())
+		qDebug() << "Invalid QTime:" << hours << "/" << mins << "/" << sec << "/" << ms << "-->" << tm;
+	return tm;
 }
 
 // UTC !
