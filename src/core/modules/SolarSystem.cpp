@@ -278,6 +278,8 @@ void SolarSystem::init()
 	recreateTrails();
 	setFlagTrails(conf->value("astro/flag_object_trails", false).toBool());
 
+	setFlagDirectionalElongation(conf->value("viewing/flag_directional_elongation", false).toBool());
+
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
 	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
@@ -3056,6 +3058,17 @@ void SolarSystem::setFlagDrawSunHalo(bool b)
 bool SolarSystem::getFlagDrawSunHalo() const
 {
 	return Planet::drawSunHalo;
+}
+
+void SolarSystem::setFlagDirectionalElongation(bool b)
+{
+	Planet::flagDirectionalElongation=b;
+	emit flagDirectionalElongationChanged(b);
+}
+
+bool SolarSystem::getFlagDirectionalElongation() const
+{
+	return Planet::flagDirectionalElongation;
 }
 
 void SolarSystem::setFlagPermanentOrbits(bool b)

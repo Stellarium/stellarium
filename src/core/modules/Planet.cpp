@@ -91,6 +91,7 @@ StelTextureSP Planet::texEarthShadow;
 
 bool Planet::drawMoonHalo = true;
 bool Planet::drawSunHalo = true;
+bool Planet::flagDirectionalElongation = false;
 bool Planet::permanentDrawingOrbits = false;
 Planet::PlanetOrbitColorStyle Planet::orbitColorStyle = Planet::ocsOneColor;
 
@@ -782,21 +783,30 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 		StelUtils::rectToSphe(&ra, &de, getEquinoxEquatorialPos(core));
 		StelUtils::equToEcl(raSun, deSun, obl, &lSun, &bSun);
 		StelUtils::equToEcl(ra, de, obl, &ecLong, &ecLat);
-		double elongAlongEcliptic=StelUtils::fmodpos(ecLong-lSun, M_PI*2.);
+		double elongationDecDeg, elongAlongEcliptic = StelUtils::fmodpos(ecLong-lSun, M_PI*2.);
 		if (elongAlongEcliptic > M_PI) elongAlongEcliptic-=2.*M_PI;
 
 		QString pha, elo, dLam;
+		bool sign;
+		StelUtils::radToDecDeg(elongAlongEcliptic, sign, elongationDecDeg);
+		if (!sign) { elongationDecDeg *= -1.; }
 		if (withDecimalDegree)
 		{
 			pha  = StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true);
 			elo  = StelUtils::radToDecDegStr(elongation,4,false,true);
-			dLam = StelUtils::radToDecDegStr(elongAlongEcliptic,4,false,true);
+			if (flagDirectionalElongation)
+				dLam = StelUtils::decDegToLongitudeStr(elongationDecDeg, true, true, false);
+			else
+				dLam = StelUtils::radToDecDegStr(elongAlongEcliptic,4,false,true);
 		}
 		else
 		{
 			pha  = StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true);
 			elo  = StelUtils::radToDmsStr(elongation, true);
-			dLam = StelUtils::radToDmsStr(elongAlongEcliptic, true);
+			if (flagDirectionalElongation)
+				dLam = StelUtils::decDegToLongitudeStr(elongationDecDeg);
+			else
+				dLam = StelUtils::radToDmsStr(elongAlongEcliptic, true);
 		}
 
 		if (withTables)
