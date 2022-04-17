@@ -591,14 +591,14 @@ void StarMgr::setCheckFlag(const QString& catId, bool b)
 		if (checked==b)
 			return;
 		m["checked"]=b;
-		catalogsDescription[idx-1]=m;
-		starSettings["catalogs"]=catalogsDescription;
-		QFile tmp(starConfigFileFullPath);
-		if(tmp.open(QIODevice::WriteOnly))
-		{
-			StelJsonParser::write(starSettings, &tmp);
-			tmp.close();
-		}
+		catalogsDescription[idx-1]=m;		
+	}
+	starSettings["catalogs"]=catalogsDescription;
+	QFile tmp(starConfigFileFullPath);
+	if(tmp.open(QIODevice::WriteOnly))
+	{
+		StelJsonParser::write(starSettings, &tmp);
+		tmp.close();
 	}
 }
 
