@@ -1481,7 +1481,7 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		double elongation = getElongation(observerHelioPos);
 		map.insert("elongation", elongation);
 		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
-		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));		
+		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));
 		map.insert("velocity", getEclipticVelocity().toString());
 		map.insert("velocity-kms", QString::number(getEclipticVelocity().length()* AU/86400., 'f', 5));
 		map.insert("heliocentric-velocity", getHeliocentricEclipticVelocity().toString());
@@ -1491,7 +1491,6 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 	}
 	else
 	{
-		SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 		QPair<double, PlanetP> eclObj = ssystem->getSolarEclipseFactor(core);
 		const double eclipseObscuration = 100.*(1.-eclObj.first);
 		if (eclipseObscuration>1.e-7)
@@ -1538,6 +1537,24 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		map.insert("pa_axis", phys.first[3]*M_180_PI);
 		map.insert("subsolar_l", phys.second[2]*M_180_PI);
 		map.insert("subsolar_b", phys.second[1]*M_180_PI);
+		// some users require not "modern elongation" but just the DeltaLambda (GH:#1786)
+		double raSun, deSun, ra, de, lSun, ecLong, bSun, ecLat;
+		double obl=earth->getRotObliquity(core->getJDE());
+		if (core->getUseNutation())
+		{
+			double dEps, dPsi;
+			getNutationAngles(core->getJDE(), &dPsi, &dEps);
+			obl+=dEps;
+		}
+		StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+		StelUtils::rectToSphe(&ra, &de, getEquinoxEquatorialPos(core));
+		StelUtils::equToEcl(raSun, deSun, obl, &lSun, &bSun);
+		StelUtils::equToEcl(ra, de, obl, &ecLong, &ecLat);
+		double elongAlongEcliptic = StelUtils::fmodpos(ecLong-lSun, M_PI*2.);
+		if (elongAlongEcliptic > M_PI) elongAlongEcliptic-=2.*M_PI;
+		map.insert("modern-elongation", elongAlongEcliptic);
+		map.insert("modern-elongation-dms", StelUtils::radToDmsStr(elongAlongEcliptic));
+		map.insert("modern-elongation-deg", StelUtils::radToDecDegStr(elongAlongEcliptic));
 	}
 	return map;
 }
