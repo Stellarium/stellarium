@@ -215,6 +215,34 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlClassification() const
 	return html;
 }
 
+QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
+{
+	QString description, color;
+
+	if (currentSkyCulture.license.contains("GPL", Qt::CaseSensitive))
+	{
+		color = "#ffff00"; // "yellow" area
+		description = q_("This sky culture is provided under GNU Public License.");
+	}
+	else if (currentSkyCulture.license.contains("CC", Qt::CaseSensitive))
+	{
+		description = q_("This sky culture is provided under Creative Commons License.");
+		if (currentSkyCulture.license.contains("NC", Qt::CaseSensitive))
+			color = "#ff6633"; // "red" area
+		else if (currentSkyCulture.license.contains("ND", Qt::CaseSensitive))
+			color = "#ffff00"; // "yellow" area
+		else
+			color = "#33ff33"; // "green" area
+
+	}
+
+	QString html = QString();
+	if (!description.isEmpty()) // additional info for sky culture (metainfo): let's use italic
+		html = QString("<dl><dt><span style='color:%4;'>%5</span> <strong>%1: %2</strong></dt><dd><em>%3</em></dd></dl>").arg(q_("License"), currentSkyCulture.license, description, color, QChar(0x25CF));
+
+	return html;
+}
+
 bool StelSkyCultureMgr::setCurrentSkyCultureNameI18(const QString& cultureName)
 {
 	return setCurrentSkyCultureID(skyCultureI18ToDirectory(cultureName));
@@ -285,6 +313,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription() const
 	}
 
 	description.append(getCurrentSkyCultureHtmlReferences());
+	description.append(getCurrentSkyCultureHtmlLicense());
 	description.append(getCurrentSkyCultureHtmlClassification());
 
 	return description;
