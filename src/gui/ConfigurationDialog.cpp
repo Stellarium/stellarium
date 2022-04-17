@@ -325,7 +325,6 @@ void ConfigurationDialog::createDialogContent()
 
 	connectBoolProperty(ui->decimalDegreeCheckBox,				"StelApp.flagShowDecimalDegrees");
 	connectBoolProperty(ui->azimuthFromSouthcheckBox,			"StelApp.flagUseAzimuthFromSouth");
-	connectBoolProperty(ui->directionalElongationCheckBox,			"SolarSystem.flagDirectionalElongation");
 
 	connectBoolProperty(ui->mouseTimeoutCheckbox,				"MainView.flagCursorTimeout");
 	connectDoubleProperty(ui->mouseTimeoutSpinBox,				"MainView.cursorTimeout");
@@ -867,7 +866,6 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/planets_scale",				QString::number(propMgr->getStelPropertyValue("SolarSystem.planetScale").toDouble(), 'f', 2));
 	conf->setValue("viewing/flag_sun_scaled",				propMgr->getStelPropertyValue("SolarSystem.flagSunScale").toBool());
 	conf->setValue("viewing/sun_scale",					QString::number(propMgr->getStelPropertyValue("SolarSystem.sunScale").toDouble(), 'f', 2));
-	conf->setValue("viewing/flag_directional_elongation",			propMgr->getStelPropertyValue("SolarSystem.flagDirectionalElongation").toBool());
 	conf->setValue("astro/meteor_zhr",					propMgr->getStelPropertyValue("SporadicMeteorMgr.zhr").toInt());
 	conf->setValue("astro/flag_milky_way",					propMgr->getStelPropertyValue("MilkyWay.flagMilkyWayDisplayed").toBool());
 	conf->setValue("astro/milky_way_intensity",				QString::number(propMgr->getStelPropertyValue("MilkyWay.intensity").toDouble(), 'f', 2));

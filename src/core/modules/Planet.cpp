@@ -91,7 +91,6 @@ StelTextureSP Planet::texEarthShadow;
 
 bool Planet::drawMoonHalo = true;
 bool Planet::drawSunHalo = true;
-bool Planet::flagDirectionalElongation = false;
 bool Planet::permanentDrawingOrbits = false;
 Planet::PlanetOrbitColorStyle Planet::orbitColorStyle = Planet::ocsOneColor;
 
@@ -794,20 +793,15 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 		{
 			pha  = StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true);
 			elo  = StelUtils::radToDecDegStr(elongation,4,false,true);
-			if (flagDirectionalElongation)
-				dLam = StelUtils::decDegToLongitudeStr(elongationDecDeg, true, true, false);
-			else
-				dLam = StelUtils::radToDecDegStr(elongAlongEcliptic,4,false,true);
+			dLam = StelUtils::decDegToLongitudeStr(elongationDecDeg, true, true, false);
 		}
 		else
 		{
 			pha  = StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos), true);
 			elo  = StelUtils::radToDmsStr(elongation, true);
-			if (flagDirectionalElongation)
-				dLam = StelUtils::decDegToLongitudeStr(elongationDecDeg);
-			else
-				dLam = StelUtils::radToDmsStr(elongAlongEcliptic, true);
+			dLam = StelUtils::decDegToLongitudeStr(elongationDecDeg);
 		}
+		elo.replace("+","",Qt::CaseInsensitive); // remove sign
 
 		if (withTables)
 		{

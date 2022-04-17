@@ -765,7 +765,6 @@ protected:
 	static const QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
 	static bool drawMoonHalo;
 	static bool drawSunHalo;
-	static bool flagDirectionalElongation;
 	//! If true, planet orbits will be drawn even if planet is off screen.
 	static bool permanentDrawingOrbits;
 	static int orbitsThickness;
