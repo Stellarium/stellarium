@@ -23,7 +23,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Download static QEMU (${{ matrix.qarch }})
       run: |
@@ -31,7 +31,7 @@ jobs:
         chmod +x ${{ runner.temp }}/qemu-static
 
     - name: Build AppImage
-      uses: uraimo/run-on-arch-action@v2.1.1
+      uses: uraimo/run-on-arch-action@v2
       id: appimage
       with:
         arch: ${{ matrix.arch }}
@@ -84,7 +84,7 @@ jobs:
           cp ${{ github.workspace }}/builds/appimage/*.AppImage /artifact
 
     - name: Upload AppImage
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       if: success()
       with:
         name: 'Stellarium-edge-${{ matrix.arch }}'
