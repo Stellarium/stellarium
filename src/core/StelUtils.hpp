@@ -144,6 +144,7 @@ namespace StelUtils
 	//! @param rad input angle in radian
 	//! @param sign true if positive, false otherwise
 	//! @param deg decimal degree
+	Q_DECL_DEPRECATED_X("just use rad*M_180_PI instead")
 	void radToDecDeg(double rad, bool& sign, double& deg);
 
 	//! Convert an angle in radian to a decimal degree string.

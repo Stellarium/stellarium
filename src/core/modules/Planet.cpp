@@ -782,13 +782,12 @@ QString Planet::getInfoStringEloPhase(const StelCore *core, const InfoStringGrou
 		StelUtils::rectToSphe(&ra, &de, getEquinoxEquatorialPos(core));
 		StelUtils::equToEcl(raSun, deSun, obl, &lSun, &bSun);
 		StelUtils::equToEcl(ra, de, obl, &ecLong, &ecLat);
-		double elongationDecDeg, elongAlongEcliptic = StelUtils::fmodpos(ecLong-lSun, M_PI*2.);
+		double elongAlongEcliptic = StelUtils::fmodpos(ecLong-lSun, M_PI*2.);
 		if (elongAlongEcliptic > M_PI) elongAlongEcliptic-=2.*M_PI;
+		double elongationDecDeg=elongAlongEcliptic*M_180_PI;
 
 		QString pha, elo, dLam;
-		bool sign;
-		StelUtils::radToDecDeg(elongAlongEcliptic, sign, elongationDecDeg);
-		if (!sign) { elongationDecDeg *= -1.; }
+
 		if (withDecimalDegree)
 		{
 			pha  = StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true);
@@ -1552,9 +1551,9 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		StelUtils::equToEcl(ra, de, obl, &ecLong, &ecLat);
 		double elongAlongEcliptic = StelUtils::fmodpos(ecLong-lSun, M_PI*2.);
 		if (elongAlongEcliptic > M_PI) elongAlongEcliptic-=2.*M_PI;
-		map.insert("modern-elongation", elongAlongEcliptic);
-		map.insert("modern-elongation-dms", StelUtils::radToDmsStr(elongAlongEcliptic));
-		map.insert("modern-elongation-deg", StelUtils::radToDecDegStr(elongAlongEcliptic));
+		map.insert("ecl-elongation", elongAlongEcliptic);
+		map.insert("ecl-elongation-dms", StelUtils::radToDmsStr(elongAlongEcliptic));
+		map.insert("ecl-elongation-deg", StelUtils::radToDecDegStr(elongAlongEcliptic));
 	}
 	return map;
 }
