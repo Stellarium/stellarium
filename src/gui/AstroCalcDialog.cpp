@@ -1128,7 +1128,7 @@ void AstroCalcDialog::fillCelestialPositionTable(QString objectName, QString RA,
 	treeItem->setText(CColumnMaxElevation, maxElevation);
 	treeItem->setTextAlignment(CColumnMaxElevation, Qt::AlignRight);
 	treeItem->setToolTip(CColumnMaxElevation, q_("Elevation of object at moment of upper culmination"));
-	treeItem->setText(CColumnElongation, sElongation);
+	treeItem->setText(CColumnElongation, sElongation.replace("+","",Qt::CaseInsensitive)); // remove sign
 	treeItem->setTextAlignment(CColumnElongation, Qt::AlignRight);
 	treeItem->setToolTip(CColumnElongation, q_("Angular distance from the Sun at the moment of computation of position"));
 	treeItem->setText(CColumnType, objectType);
@@ -2134,7 +2134,7 @@ void AstroCalcDialog::generateEphemeris()
 			treeItem->setText(EphemerisDistance, QString::number(obj->getJ2000EquatorialPos(core).length(), 'f', 6));
 			treeItem->setTextAlignment(EphemerisDistance, Qt::AlignRight);
 			treeItem->setToolTip(EphemerisDistance, QString("%1, %2").arg(distanceInfo, distanceUM));
-			treeItem->setText(EphemerisElongation, elongStr);
+			treeItem->setText(EphemerisElongation, elongStr.replace("+","",Qt::CaseInsensitive)); // remove sign
 			treeItem->setTextAlignment(EphemerisElongation, Qt::AlignRight);
 
 			idxRow++;
@@ -2390,10 +2390,10 @@ void AstroCalcDialog::generateRTS()
 				treeItem->setText(RTSMagnitude, magStr);
 				treeItem->setTextAlignment(RTSMagnitude, Qt::AlignRight);
 				treeItem->setToolTip(RTSMagnitude, q_("Magnitude of celestial object at transit"));
-				treeItem->setText(RTSElongation, elongSStr);
+				treeItem->setText(RTSElongation, elongSStr.replace("+","",Qt::CaseInsensitive)); // remove sign
 				treeItem->setTextAlignment(RTSElongation, Qt::AlignRight);
 				treeItem->setToolTip(RTSElongation, q_("Celestial object's angular distance from the Sun at transit"));
-				treeItem->setText(RTSAngularDistance, elongLStr);
+				treeItem->setText(RTSAngularDistance, elongLStr.replace("+","",Qt::CaseInsensitive)); // remove sign
 				treeItem->setTextAlignment(RTSAngularDistance, Qt::AlignRight);
 				treeItem->setToolTip(RTSAngularDistance, q_("Celestial object's angular distance from the Moon at transit"));
 			}
@@ -5780,7 +5780,7 @@ void AstroCalcDialog::fillPhenomenaTableVis(QString phenomenType, double JD, QSt
 	treeItem->setText(PhenomenaElevation, elevation);
 	treeItem->setTextAlignment(PhenomenaElevation, Qt::AlignRight);
 	treeItem->setToolTip(PhenomenaElevation, q_("Elevation of first object at moment of phenomena"));
-	treeItem->setText(PhenomenaElongation, elongation);
+	treeItem->setText(PhenomenaElongation, elongation.replace("+","",Qt::CaseInsensitive)); // remove sign
 	treeItem->setToolTip(PhenomenaElongation, elongTooltip.isEmpty() ? q_("Angular distance from the Sun") : elongTooltip);
 	treeItem->setTextAlignment(PhenomenaElongation, Qt::AlignRight);
 	treeItem->setText(PhenomenaAngularDistance, angularDistance);

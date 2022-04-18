@@ -199,12 +199,15 @@ public:
 	//! - distance
 	//! - phase (result of getPhase)
 	//! - illumination (=100*phase)
-	//! - phase-angle
-	//! - phase-angle-dms (formatted string)
-	//! - phase-angle-deg (formatted string)
-	//! - elongation
-	//! - elongation-dms (formatted string)
-	//! - elongation-deg (formatted string)
+	//! - phase-angle (radians)
+	//! - phase-angle-dms (formatted string; DMS)
+	//! - phase-angle-deg (formatted string; degrees)
+	//! - elongation (radians)
+	//! - elongation-dms (formatted string; DMS)
+	//! - elongation-deg (formatted string; degrees)
+	//! - ecl-elongation (elongation in ecliptic longitude or Δλ; on Earth only; radians)
+	//! - ecl-elongation-dms (elongation in ecliptic longitude or Δλ; on Earth only; formatted string; DMS)
+	//! - ecl-elongation-deg (elongation in ecliptic longitude or Δλ; on Earth only; formatted string; degrees)
 	//! - type (object type description)
 	//! - velocity (formatted string)
 	//! - heliocentric-velocity (formatted string)
