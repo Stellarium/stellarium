@@ -222,7 +222,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 
 	if (license.contains("GPL", Qt::CaseSensitive))
 	{
-		color = "#ffff00"; // "yellow" area
+		color = "#33ff33"; // "green" area; free license
 		description = q_("This sky culture is provided under GNU Public License. You can use it for commercial and non-commercial purposes, freely adapt it and share adapted work.");
 	}
 	else if (license.startsWith("CC", Qt::CaseSensitive))
@@ -251,6 +251,8 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 
 		if (!details.at(0).startsWith("CC0", Qt::CaseInsensitive)) // No a public domain!
 			description.append(QString(" %1").arg(options.value(details.at(1), "")));
+		else
+			description = q_("This sky culture is distributed as public domain.");
 		if (!currentSkyCulture.credit.isEmpty())
 			description.append(QString(" %1 %2").arg(q_("Please credit the"), currentSkyCulture.credit));
 	}
