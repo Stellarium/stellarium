@@ -223,7 +223,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 	if (license.contains("GPL", Qt::CaseSensitive))
 	{
 		color = "#33ff33"; // "green" area; free license
-		description = q_("This sky culture is provided under GNU Public License. You can use it for commercial and non-commercial purposes, freely adapt it and share adapted work.");
+		description = q_("This sky culture is provided under GNU General Public License. You can use it for commercial and non-commercial purposes, freely adapt it and share adapted work.");
 	}
 	else if (license.startsWith("CC", Qt::CaseSensitive))
 	{
@@ -256,6 +256,9 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 		if (!currentSkyCulture.credit.isEmpty())
 			description.append(QString(" %1 %2").arg(q_("Please credit the"), currentSkyCulture.credit));
 	}
+
+	if (license.contains("FAL", Qt::CaseSensitive) || license.contains("Free Art License", Qt::CaseSensitive))
+		description.append(QString(" %1").arg(q_("Illustrations are provided under Free Art License that grants the right to they freely copy, distribute, and transform.")));
 
 	QString html = QString();
 	if (!description.isEmpty()) // additional info for sky culture (metainfo): let's use italic
