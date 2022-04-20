@@ -90,6 +90,8 @@ public:
 	QString englishName;
 	//! Name of the author
 	QString author;
+	//! Credits info, when it is not equal to author field (optional)
+	QString credit;
 	//! The license
 	QString license;
 	//! Type of the boundaries (enum)
