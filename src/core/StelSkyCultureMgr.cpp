@@ -222,8 +222,8 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 	if (license.isEmpty()) // License is not defined
 	{
 		color = "#2090ff"; // "blue" area
-		license = q_("undefined");
-		description = q_("This sky culture is provided under undefined license. Please ask author for details about this sky culture.");
+		license = q_("unknown");
+		description = q_("This sky culture is provided under unknown license. Please ask authors for details about this sky culture.");
 	}
 	else
 	{
