@@ -220,49 +220,58 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 {
 	QString description, color, license = currentSkyCulture.license.trimmed();
 
-	if (license.contains("GPL", Qt::CaseSensitive))
+	if (license.isEmpty()) // License is not defined
 	{
-		color = "#33ff33"; // "green" area; free license
-		description = q_("This sky culture is provided under GNU General Public License. You can use it for commercial and non-commercial purposes, freely adapt it and share adapted work.");
+		color = "#2090ff"; // "blue" area
+		license = q_("undefined");
+		description = q_("This sky culture is provided under undefined license. Please ask author for details about this sky culture.");
 	}
-	else if (license.startsWith("CC", Qt::CaseSensitive))
+	else
 	{
-		description = q_("This sky culture is provided under Creative Commons Public License.");
-		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-		QStringList details = license.split(" ", Qt::SkipEmptyParts);
-		#else
-		QStringList details = license.split(" ", QString::SkipEmptyParts);
-		#endif
+		if (license.contains("GPL", Qt::CaseSensitive))
+		{
+			color = "#33ff33"; // "green" area; free license
+			description = q_("This sky culture is provided under GNU General Public License. You can use it for commercial and non-commercial purposes, freely adapt it and share adapted work.");
+		}
+		else if (license.startsWith("CC", Qt::CaseSensitive) || license.contains("Creative Commons", Qt::CaseInsensitive))
+		{
+			description = q_("This sky culture is provided under Creative Commons License.");
+			#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+			QStringList details = license.split(" ", Qt::SkipEmptyParts);
+			#else
+			QStringList details = license.split(" ", QString::SkipEmptyParts);
+			#endif
 
-		const QMap<QString, QString>options = {
-			{ "BY",       q_("You may distribute, remix, adapt, and build upon this sky culture, even commercially, as long as you credit authors for the original creation.") },
-			{ "BY-SA",    q_("You may remix, adapt, and build upon this sky culture even for commercial purposes, as long as you credit authors and license the new creations under the identical terms. This license is often compared to “copyleft” free and open source software licenses.") },
-			{ "BY-ND",    q_("You may reuse this sky culture for any purpose, including commercially; however, adapted work cannot be shared with others, and credit must be provided by you.") },
-			{ "BY-NC",    q_("You may remix, adapt, and build upon this sky culture non-commercially, and although your new works must also acknowledge authors and be non-commercial, you don’t have to license your derivative works on the same terms.") },
-			{ "BY-NC-SA", q_("You may remix, adapt, and build upon this sky culture non-commercially, as long as you credit authors and license your new creations under the identical terms.") },
-			{ "BY-NC-ND", q_("You may use this sky culture and share them with others as long as you credit authors, but you can’t change it in any way or use it commercially.") },
-		};
+			const QMap<QString, QString>options = {
+				{ "BY",       q_("You may distribute, remix, adapt, and build upon this sky culture, even commercially, as long as you credit authors for the original creation.") },
+				{ "BY-SA",    q_("You may remix, adapt, and build upon this sky culture even for commercial purposes, as long as you credit authors and license the new creations under the identical terms. This license is often compared to “copyleft” free and open source software licenses.") },
+				{ "BY-ND",    q_("You may reuse this sky culture for any purpose, including commercially; however, adapted work cannot be shared with others, and credit must be provided by you.") },
+				{ "BY-NC",    q_("You may remix, adapt, and build upon this sky culture non-commercially, and although your new works must also acknowledge authors and be non-commercial, you don’t have to license your derivative works on the same terms.") },
+				{ "BY-NC-SA", q_("You may remix, adapt, and build upon this sky culture non-commercially, as long as you credit authors and license your new creations under the identical terms.") },
+				{ "BY-NC-ND", q_("You may use this sky culture and share them with others as long as you credit authors, but you can’t change it in any way or use it commercially.") },
+			};
 
-		color = "#33ff33"; // "green" area; free license
-		if (license.contains("ND", Qt::CaseSensitive))
-			color = "#ffff00"; // "yellow" area; nonfree license - weak restrictions
-		if (license.contains("NC", Qt::CaseSensitive))
-			color = "#ff6633"; // "red" area; nonfree license - strong restrictions
+			color = "#33ff33"; // "green" area; free license
+			if (license.contains("ND", Qt::CaseSensitive))
+				color = "#ffff00"; // "yellow" area; nonfree license - weak restrictions
+			if (license.contains("NC", Qt::CaseSensitive))
+				color = "#ff6633"; // "red" area; nonfree license - strong restrictions
 
-		if (!details.at(0).startsWith("CC0", Qt::CaseInsensitive)) // No a public domain!
-			description.append(QString(" %1").arg(options.value(details.at(1), "")));
-		else
-			description = q_("This sky culture is distributed as public domain.");
-		if (!currentSkyCulture.credit.isEmpty())
-			description.append(QString(" %1 %2").arg(q_("Please credit the"), currentSkyCulture.credit));
+			if (!details.at(0).startsWith("CC0", Qt::CaseInsensitive)) // No a public domain!
+				description.append(QString(" %1").arg(options.value(details.at(1), "")));
+			else
+				description = q_("This sky culture is distributed as public domain.");
+			if (!currentSkyCulture.credit.isEmpty())
+				description.append(QString(" %1 %2").arg(q_("Please credit the"), currentSkyCulture.credit));
+		}
+
+		if (license.contains("FAL", Qt::CaseSensitive) || license.contains("Free Art License", Qt::CaseSensitive))
+			description.append(QString(" %1").arg(q_("Illustrations are provided under Free Art License that grants the right to they freely copy, distribute, and transform.")));
 	}
-
-	if (license.contains("FAL", Qt::CaseSensitive) || license.contains("Free Art License", Qt::CaseSensitive))
-		description.append(QString(" %1").arg(q_("Illustrations are provided under Free Art License that grants the right to they freely copy, distribute, and transform.")));
 
 	QString html = QString();
 	if (!description.isEmpty()) // additional info for sky culture (metainfo): let's use italic
-		html = QString("<dl><dt><span style='color:%4;'>%5</span> <strong>%1: %2</strong></dt><dd><em>%3</em></dd></dl>").arg(q_("License"), currentSkyCulture.license, description, color, QChar(0x25CF));
+		html = QString("<dl><dt><span style='color:%4;'>%5</span> <strong>%1: %2</strong></dt><dd><em>%3</em></dd></dl>").arg(q_("License"), license, description, color, QChar(0x25CF));
 
 	return html;
 }
