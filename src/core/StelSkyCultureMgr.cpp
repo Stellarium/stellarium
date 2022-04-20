@@ -66,10 +66,10 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 			qDebug() << "Skyculture " << dir << "'s boundaries is given with deprecated 'generic'. Please edit info.ini and change to 'iau'";
 		}
 		else if (!boundariesMap.contains(boundariesStr.toLower()))
-			{
-				qDebug() << "Skyculture " << dir << "'s boundaries value unknown:" << boundariesStr;
-				qDebug() << "Please edit info.ini and change to a supported value. For now, this equals 'none'";
-			}
+		{
+			qDebug() << "Skyculture " << dir << "'s boundaries value unknown:" << boundariesStr;
+			qDebug() << "Please edit info.ini and change to a supported value. For now, this equals 'none'";
+		}
 		dirToNameEnglish[dir].boundaries = boundaries;
 		// Use 'traditional' as default
 		QString classificationStr = pd.value("info/classification", "traditional").toString();
