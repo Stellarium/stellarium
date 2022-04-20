@@ -51,8 +51,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		QSettings pd(pdFile, StelIniFormat);
 		dirToNameEnglish[dir].englishName = pd.value("info/name").toString();
 		dirToNameEnglish[dir].author = pd.value("info/author").toString();
-		dirToNameEnglish[dir].credit = pd.value("info/credit").toString();
-		// TODO: Define license info (+separate license info for artwork?) and use it in description of skyculture like for plugins and scripts
+		dirToNameEnglish[dir].credit = pd.value("info/credit").toString();		
 		dirToNameEnglish[dir].license = pd.value("info/license", "").toString();
 		QString boundariesStr = pd.value("info/boundaries", "none").toString();
 		static const QMap<QString, StelSkyCulture::BOUNDARIES>boundariesMap={
