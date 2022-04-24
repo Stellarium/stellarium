@@ -28,7 +28,7 @@
 #include "StelObjectModule.hpp"
 #include "StelLocationMgr.hpp"
 
-#define MS_CATALOG_VERSION 1
+#define MS_CATALOG_VERSION 2
 #define MS_CONFIG_PREFIX QString("MeteorShowers")
 
 class MeteorShowers;

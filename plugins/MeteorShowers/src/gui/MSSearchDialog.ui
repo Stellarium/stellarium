@@ -158,46 +158,17 @@
         <item>
          <widget class="QLabel" name="labelFrom">
           <property name="text">
-           <string>From:</string>
+           <string>Year:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QDateEdit" name="dateFrom">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+         <widget class="QSpinBox" name="fromYearSpinBox">
+          <property name="minimum">
+           <number>-1000</number>
           </property>
-          <property name="displayFormat">
-           <string notr="true">dd/MM/yyyy</string>
-          </property>
-          <property name="calendarPopup">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="labelTo">
-          <property name="text">
-           <string>To:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QDateEdit" name="dateTo">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="displayFormat">
-           <string notr="true">dd/MM/yyyy</string>
-          </property>
-          <property name="calendarPopup">
-           <bool>true</bool>
+          <property name="maximum">
+           <number>5000</number>
           </property>
          </widget>
         </item>
