@@ -72,8 +72,8 @@ AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR)
 	if (map.contains(Phase2               )) map.value(Phase2               )->setName(q_("Phase"));
 	if (map.contains(RightAscension2      )) map.value(RightAscension2      )->setName(q_("Right Ascension"));
 	if (map.contains(TransitAltitude2     )) map.value(TransitAltitude2     )->setName(q_("Transit Altitude"));
-	if (map.contains(LunarDistance        )) map.value(LunarDistance        )->setName(q_("Lunar Elongation"));
-	if (map.contains(DistanceLimit        )) map.value(DistanceLimit        )->setName(q_("Elongation Limit"));
+	if (map.contains(LunarElongation        )) map.value(LunarElongation        )->setName(q_("Lunar Elongation"));
+	if (map.contains(LunarElongationLimit        )) map.value(LunarElongationLimit        )->setName(q_("Elongation Limit"));
 
 	xAxis=new QtCharts::QDateTimeAxis(this);
 	yAxis=new QtCharts::QValueAxis(this);
@@ -127,8 +127,8 @@ const QMap<AstroCalcChart::Series, QPen> AstroCalcChart::penMap=
 	{AstroCalcChart::Phase2,                 QPen(Qt::yellow,                     2, Qt::SolidLine)},
 	{AstroCalcChart::RightAscension2,        QPen(Qt::yellow,                     2, Qt::SolidLine)},
 	{AstroCalcChart::TransitAltitude2,       QPen(Qt::yellow,                     2, Qt::SolidLine)},
-	{AstroCalcChart::LunarDistance,          QPen(Qt::red,                        2, Qt::SolidLine)},
-	{AstroCalcChart::DistanceLimit,          QPen(Qt::yellow,                     2, Qt::SolidLine)}
+	{AstroCalcChart::LunarElongation,        QPen(Qt::red,                        2, Qt::SolidLine)},
+	{AstroCalcChart::LunarElongationLimit,   QPen(Qt::yellow,                     2, Qt::SolidLine)}
 };
 
 void AstroCalcChart::append(Series s, qint64 x, qreal y)
@@ -167,7 +167,7 @@ void AstroCalcChart::replace(Series s, int index, qreal x, qreal y)
 	}
 }
 
-void AstroCalcChart::drawTrivialLine(Series s, const qreal x)
+void AstroCalcChart::drawTrivialLineX(Series s, const qreal x)
 {
 	if (map.value(s))
 	{
@@ -182,6 +182,20 @@ void AstroCalcChart::drawTrivialLine(Series s, const qreal x)
 		qDebug() << "No series" << s << "to add trivial line";
 }
 
+void AstroCalcChart::drawTrivialLineY(Series s, const qreal y)
+{
+	if (map.value(s))
+	{
+		//replace(s, 0, x, yAxis->min());
+		//replace(s, 1, x, yAxis->max());
+		replace(s, 0, StelUtils::jdToQDateTime(StelUtils::qDateTimeToJd(xAxis->min())).toMSecsSinceEpoch(), y);
+		replace(s, 1, StelUtils::jdToQDateTime(StelUtils::qDateTimeToJd(xAxis->max())).toMSecsSinceEpoch(), y);
+		map.value(s)->setPen(penMap.value(s));
+		qDebug() << "Trivial line in " << s << "at" << y << "from " << xAxis->min() << "to" << xAxis->max();
+	}
+	else
+		qDebug() << "No series" << s << "to add trivial line";
+}
 
 
 void AstroCalcChart::show(Series s)
@@ -231,7 +245,9 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 			startDate=QDateTime(QDate(year, 1, 1), QTime(0, 0)); // TODO Work out timezone stuff
 			endDate=QDateTime(QDate(year+1, 1, 1), QTime(0, 0)); // TODO Work out timezone stuff
 			break;
-		case AstroCalcChart::LunarDistance:
+		case AstroCalcChart::LunarElongation:
+			startDate=StelUtils::jdToQDateTime(JD-2);
+			endDate=StelUtils::jdToQDateTime(JD+30);
 			break;
 		default: // 2-curves page
 			break;
@@ -285,14 +301,15 @@ void AstroCalcChart::setupAxes(const double jd, const int periods)
 		//xAxis->setMinorTickCount(2); // substep is 1 hours
 		xRange=findXRange(jd, AstroCalcChart::MonthlyElevation, 1);
 	}
-	else if (map.contains(AstroCalcChart::LunarDistance))
+	else if (map.contains(AstroCalcChart::LunarElongation))
 	{
 		//s=map.value(AstroCalcChart::LunarDistance);
-		xAxis->setTitleText(q_("Days from today"));
+		xAxis->setTitleText(q_("Date")); // was Days from today, but real date is better. TODO: ticks on midnight.
 		//xAxis->setRange(-2, 32); // 24 hours since 12h00m (range in seconds)
-		xAxis->setTickCount(17); // step is 2 days
+		xAxis->setTickCount(17); // step is 2 days. 16 intervals.
 		//xAxis->setMinorTickCount(1); // substep is 1 day
-		xRange=findXRange(jd, AstroCalcChart::LunarDistance, 1);
+		xAxis->setFormat("dd.MM.");
+		xRange=findXRange(jd, AstroCalcChart::LunarElongation, 1);
 	}
 	else
 	{
@@ -310,7 +327,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods)
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Altitude"), QChar(0x00B0)));
 	else if (map.contains(AstroCalcChart::AzVsTime))
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Azimuth"), QChar(0x00B0)));
-	else if (map.contains(AstroCalcChart::LunarDistance))
+	else if (map.contains(AstroCalcChart::LunarElongation))
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Angular distance"), QChar(0x00B0)));
 	else if (map.contains(AstroCalcChart::AngularSize1))
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Angular size"), QChar(0x00B0)));
@@ -376,7 +393,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods)
 
 	for (Series s: {AltVsTime, CurrentTime, TransitTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight, Moon, AzVsTime, MonthlyElevation,
 	     AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1,
-	     LunarDistance, DistanceLimit})
+	     LunarElongation, LunarElongationLimit})
 	{
 		if ((map.value(s)) && ser.contains(map.value(s)))
 		{

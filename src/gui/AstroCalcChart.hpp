@@ -42,7 +42,7 @@ public:
 		     MonthlyElevation,
 		     AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1,
 		     AngularSize2, Declination2, Distance2, Elongation2, HeliocentricDistance2, Magnitude2, PhaseAngle2, Phase2, RightAscension2, TransitAltitude2,
-		     LunarDistance, DistanceLimit
+		     LunarElongation, LunarElongationLimit
 		    };
 	Q_ENUM(Series)
 
@@ -74,7 +74,11 @@ public:
 
 	//! Draw a 2-point vertical line at x which extends over the whole graph
 	//! Note: This shall replace AstroCalcDialog::drawTransitTimeDiagram() and AstroCalcDialog::drawCurrentTimeDiagram()
-	void drawTrivialLine(Series s, const qreal x);
+	void drawTrivialLineX(Series s, const qreal x);
+
+	//! Draw a 2-point horizontal line at y which extends over the whole graph
+	//! Note: This shall replace AstroCalcDialog::drawAngularDistanceLimitLine()
+	void drawTrivialLineY(Series s, const qreal y);
 
 public slots:
 	//virtual void retranslate();

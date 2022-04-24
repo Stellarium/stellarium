@@ -4450,7 +4450,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 
 		drawTransitTimeDiagram();
 		// For chart, replace by:
-		altVsTimeChart->drawTrivialLine(AstroCalcChart::TransitTime, StelUtils::jdToQDateTime(transitJD).toMSecsSinceEpoch());
+		altVsTimeChart->drawTrivialLineX(AstroCalcChart::TransitTime, StelUtils::jdToQDateTime(transitJD).toMSecsSinceEpoch());
 
 		ui->altVsTimePlot->graph(0)->setData(aX.toVector(), aY.toVector());
 		ui->altVsTimePlot->graph(0)->setName(name);
@@ -4541,7 +4541,7 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 		if (altVsTimeChart){
 			//altVsTimeChart->replace(AstroCalcChart::CurrentTime, 0, now, minY-10);
 			//altVsTimeChart->replace(AstroCalcChart::CurrentTime, 1, now, maxY+10);
-			altVsTimeChart->drawTrivialLine(AstroCalcChart::CurrentTime, StelUtils::jdToQDateTime(currentJD).toMSecsSinceEpoch());
+			altVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, StelUtils::jdToQDateTime(currentJD).toMSecsSinceEpoch());
 			qDebug() << "Chart: replace/append currentTime in alt chart...done";
 		}
 		else
@@ -4555,7 +4555,7 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 		if (azVsTimeChart){
 			//azVsTimeChart->replace(AstroCalcChart::CurrentTime, 0, now, minY-10);
 			//azVsTimeChart->replace(AstroCalcChart::CurrentTime, 1, now, maxY+10);
-			azVsTimeChart->drawTrivialLine(AstroCalcChart::CurrentTime, StelUtils::jdToQDateTime(currentJD).toMSecsSinceEpoch());
+			azVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, StelUtils::jdToQDateTime(currentJD).toMSecsSinceEpoch());
 			qDebug() << "Chart: replace/append currentTime in azi chart...done";
 		}
 		else
@@ -8377,10 +8377,15 @@ void AstroCalcDialog::prepareAngularDistanceAxesAndGraph()
 	ui->angularDistancePlot->graph(1)->rescaleAxes(true);
 }
 
+// TODO: Rename to LunarElongation*
 void AstroCalcDialog::drawAngularDistanceGraph()
 {
+	qDebug() << "AstrocalcDialog::drawAltVsTimeDiagram()...";
+	if (!lunarElongationChartMutex.tryLock()) return; // Avoid calling parallel from various sides. (called by signals/slots)
+
 	QString label = q_("Angular distance between the Moon and selected object");
 	ui->angularDistancePlot->setToolTip(label);
+	ui->lunarElongationChartView->setToolTip(label);
 
 	// special case - plot the graph when tab is visible
 	//..
@@ -8389,14 +8394,27 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 	if (!dialog->isVisible() && !plotAngularDistanceGraph)
 	{
 		graphPlotNeedsRefresh = true;
+		lunarElongationChartMutex.unlock();
 		return;
 	}
 
-	if (!plotAngularDistanceGraph) return;
+	if (!plotAngularDistanceGraph)
+	{
+		lunarElongationChartMutex.unlock();
+		return;
+	}
 
 	// special case - the tool is not applicable on non-Earth locations
 	if (core->getCurrentPlanet()!=solarSystem->getEarth())
+	{
+		lunarElongationChartMutex.unlock();
 		return;
+	}
+
+	qDebug() << "creating chart";
+	lunarElongationChart = new AstroCalcChart({AstroCalcChart::LunarElongation, AstroCalcChart::LunarElongationLimit});
+	lunarElongationChart->setTitle(label);
+	qDebug() << "Chart has title:" << lunarElongationChart->title();
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 	if (!selectedObjects.isEmpty())
@@ -8407,6 +8425,11 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 		{
 			ui->angularDistancePlot->graph(0)->clearData();
 			ui->angularDistancePlot->replot();
+			// Chart: Do something with the freshly generated but useless chart!
+			QChart *oldChart=ui->lunarElongationChartView->chart();
+			if (oldChart) oldChart->deleteLater();
+			ui->lunarElongationChartView->setChart(lunarElongationChart);
+			lunarElongationChartMutex.unlock();
 			return;
 		}
 
@@ -8415,17 +8438,18 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 		const double currentJD = core->getJD();
 		double JD, distance, dd;
 		bool sign;
-		for (int i = -5; i <= 35; i++)
+		for (int i = -3; i <= 32; i++) // TODO: With SplineSeries in charts, i+=3 may be enough!
 		{
 			JD = currentJD + i;
 			core->setJD(JD);
+			core->update(0.0);
 			moonPosition = moon->getJ2000EquatorialPos(core);
 			selectedObjectPosition = selectedObject->getJ2000EquatorialPos(core);
 			distance = moonPosition.angle(selectedObjectPosition);
 			StelUtils::radToDecDeg(distance, sign, dd);
 			aX.append(i);
 			aY.append(dd);
-			core->update(0.0);
+			lunarElongationChart->append(AstroCalcChart::LunarElongation, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), distance*M_180_PI);
 		}
 		core->setJD(currentJD);
 
@@ -8453,6 +8477,8 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 		}
 		ui->angularDistancePlot->setToolTip(QString("%1 (%2)").arg(label, name));
 		ui->angularDistanceTitle->setText(QString("%1 (%2)").arg(label, name));
+		ui->lunarElongationChartView->setToolTip(QString("%1 (%2)").arg(label, name));
+		lunarElongationChart->setTitle(QString("%1 (%2)").arg(label, name));
 
 		prepareAngularDistanceAxesAndGraph();
 
@@ -8461,13 +8487,35 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 		ui->angularDistancePlot->replot();
 	}
 
+	qDebug() << "create chart axes...";
+	lunarElongationChart->setYrange(minYadm+5., maxYadm-5.); // TODO: reduce min/max back to real min/max values.
+	lunarElongationChart->setupAxes(core->getJD(), 1);
+	lunarElongationChart->show(AstroCalcChart::LunarElongation);
+	qDebug() << "set chart ...";
+	QChart *oldChart=ui->lunarElongationChartView->chart();
+	if (oldChart) oldChart->deleteLater();
+	ui->lunarElongationChartView->setChart(lunarElongationChart);
+	ui->lunarElongationChartView->setRenderHint(QPainter::Antialiasing);
+	qDebug() << "Chart done.";
+
+
+
 	// clean up the data when selection is removed
 	if (!objectMgr->getWasSelected())
 	{
 		ui->angularDistancePlot->graph(0)->clearData();
 		ui->angularDistancePlot->replot();
+		if (lunarElongationChart)
+		{
+			lunarElongationChart->clear(AstroCalcChart::LunarElongation);
+			lunarElongationChart->setTitle(q_("No object selected"));
+		}
+
 	}
 	drawAngularDistanceLimitLine();
+
+	lunarElongationChartMutex.unlock();
+	qDebug() << "AstroCalcDialog::drawLunarElongationDiagram()...done";
 }
 
 void AstroCalcDialog::saveAngularDistanceLimit(int limit)
@@ -8487,6 +8535,12 @@ void AstroCalcDialog::drawAngularDistanceLimitLine()
 	QVector<double> y = {limit, limit};
 	ui->angularDistancePlot->graph(1)->setData(x, y);
 	ui->angularDistancePlot->replot();
+
+	if(lunarElongationChart)
+	{
+		lunarElongationChart->drawTrivialLineY(AstroCalcChart::LunarElongationLimit, limit);
+		lunarElongationChart->show(AstroCalcChart::LunarElongationLimit);
+	}
 }
 
 void AstroCalcDialog::saveTableAsCSV(const QString &fileName, QTreeWidget* tWidget, QStringList &headers)
