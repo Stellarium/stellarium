@@ -412,8 +412,11 @@ private:
 	AstroCalcChart *azVsTimeChart;
 	mutable QMutex azVsTimeChartMutex;
 	AstroCalcChart *monthlyElevationChart;
+	mutable QMutex monthlyElevationChartMutex;
 	AstroCalcChart *curvesChart;
+	mutable QMutex curvesChartMutex;
 	AstroCalcChart *lunarElongationChart;
+	mutable QMutex lunarElongationChartMutex;
 	QSettings* conf;
 	QLinearGradient graphBackgroundGradient;
 	QTimer *currentTimeLine;
