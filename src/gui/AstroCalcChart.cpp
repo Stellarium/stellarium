@@ -19,6 +19,10 @@
 
 #include "AstroCalcChart.hpp"
 #include "StelTranslator.hpp"
+#include "StelApp.hpp"
+#include "StelCore.hpp"
+#include "StelUtils.hpp"
+#include <QDateTime>
 #include <math.h>
 #include <QDebug>
 #include <QAbstractSeries>
@@ -71,7 +75,7 @@ AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR)
 	if (map.contains(LunarDistance        )) map.value(LunarDistance        )->setName(q_("Lunar Elongation"));
 	if (map.contains(DistanceLimit        )) map.value(DistanceLimit        )->setName(q_("Elongation Limit"));
 
-	xAxis=new QtCharts::QValueAxis(this);
+	xAxis=new QtCharts::QDateTimeAxis(this);
 	yAxis=new QtCharts::QValueAxis(this);
 	if (QSet<AstroCalcChart::Series>({AstroCalcChart::AngularSize2, AstroCalcChart::Declination2, AstroCalcChart::Distance2,
 					  AstroCalcChart::Elongation2, AstroCalcChart::HeliocentricDistance2, AstroCalcChart::Magnitude2,
@@ -127,7 +131,7 @@ const QMap<AstroCalcChart::Series, QPen> AstroCalcChart::penMap=
 	{AstroCalcChart::DistanceLimit,          QPen(Qt::yellow,                     2, Qt::SolidLine)}
 };
 
-void AstroCalcChart::append(Series s, qreal x, qreal y)
+void AstroCalcChart::append(Series s, qint64 x, qreal y)
 {
 	if (map.value(s))
 		map.value(s)->append(x, y);
@@ -211,8 +215,31 @@ void AstroCalcChart::clear(Series s)
 
 }
 
+QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Series series, const int periods)
+{
+	//QtCharts::QSplineSeries *s;
+	QDateTime startDate, endDate;
+	switch (series){
+		case AstroCalcChart::AltVsTime:
+		case AstroCalcChart::AzVsTime:
+			startDate=StelUtils::jdToQDateTime(JD);
+			endDate=StelUtils::jdToQDateTime(JD+1);
+			break;
+		case AstroCalcChart::MonthlyElevation:
+			int year, month, day;
+			StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+			startDate=QDateTime(QDate(year, 1, 1), QTime(0, 0)); // TODO Work out timezone stuff
+			endDate=QDateTime(QDate(year+1, 1, 1), QTime(0, 0)); // TODO Work out timezone stuff
+			break;
+		case AstroCalcChart::LunarDistance:
+			break;
+		default: // 2-curves page
+			break;
+	}
+	return QPair(startDate, endDate);
+}
 
-void AstroCalcChart::setupAxes()
+void AstroCalcChart::setupAxes(const double jd, const int periods)
 {
 	qDebug() << "setupAxes()...";
 
@@ -220,12 +247,112 @@ void AstroCalcChart::setupAxes()
 	static const QPen axisGridPen(   Qt::white,                         0.5,  Qt::SolidLine);
 	static const QPen axisMinorGridPen(Qt::white,                       0.35, Qt::DotLine);
 
+	const double shift = StelApp::getInstance().getCore()->getUTCOffset(jd) / 24.0;
+	qDebug() << "Why is thisshift not a full number of hours?: " << shift*24.;
+
+	// Variables for scaling x axis
+	//QtCharts::QSplineSeries *s;
+	//double jdMin=0., jdMax=0.;
+	//QDateTime startDate, endDate;
+	QPair<QDateTime, QDateTime>xRange;
 	// Maybe prefer to allow axis labeling from outside.
-	xAxis->setTitleText(q_("Local Time"));
-	if (map.contains(AstroCalcChart::AltVsTime))
-		yAxis->setTitleText(QString("%1, %2").arg(q_("Altitude"), QChar(0x00B0)));
+	if (map.contains(AstroCalcChart::AltVsTime) || map.contains(AstroCalcChart::AzVsTime))
+	{
+		//s=map.value(AstroCalcChart::AltVsTime, map.value(AstroCalcChart::AzVsTime));
+		xAxis->setTitleText(q_("Local Time"));
+		//xAxis->setRange(43200, 129600); // 24 hours since 12h00m (range in seconds)
+		const double noon=floor(jd+shift);
+		//double ltime=-5*180+43200;
+		//jdMin= noon-shift; // noon+ltime/86400.-shift-0.5;
+		//ltime=485*180+43200;
+		//jdMax= jdMin+1.; // noon+ltime/86400.-shift-0.5;
+
+		xAxis->setTickCount(13); // step is 2 hours
+		//xAxis->setMinorTickCount(1); // substep is 1 hours. Unfortunately this axis type has no subticks.
+		//xAxisRange=findXRange(jd, AstroCalcChart::AltVsTime, 1);
+		xAxis->setFormat("dd\nh:mm");
+		//setLocale(QLocale(localeMgr->getAppLanguage()));
+		xRange=findXRange(floor(jd+shift), AstroCalcChart::AltVsTime, 1);
+	}
+	else if (map.contains(AstroCalcChart::MonthlyElevation))
+	{
+		//s=map.value(AstroCalcChart::MonthlyElevation);
+		xAxis->setTitleText(q_("Date"));
+		//xAxis->setRange(s->at(0).x(), s->at(s->count()-1).x()); // TODO-range in unknown units
+		//qDebug() << "xAxis range is "  << s->at(0).x() << "/" << s->at(s->count()-1).x();
+		xAxis->setTickCount(13); // about monthly
+		xAxis->setFormat("dd.MM.");
+		//xAxis->setMinorTickCount(2); // substep is 1 hours
+		xRange=findXRange(jd, AstroCalcChart::MonthlyElevation, 1);
+	}
+	else if (map.contains(AstroCalcChart::LunarDistance))
+	{
+		//s=map.value(AstroCalcChart::LunarDistance);
+		xAxis->setTitleText(q_("Days from today"));
+		//xAxis->setRange(-2, 32); // 24 hours since 12h00m (range in seconds)
+		xAxis->setTickCount(17); // step is 2 days
+		//xAxis->setMinorTickCount(1); // substep is 1 day
+		xRange=findXRange(jd, AstroCalcChart::LunarDistance, 1);
+	}
 	else
+	{
+		xRange=findXRange(jd, AstroCalcChart::AngularSize1, periods);
+	}
+	//startDate.setMSecsSinceEpoch(s->at(0).x());
+	//endDate.setMSecsSinceEpoch(s->at(s->count()-1).x());
+	//xAxis->setRange(startDate, endDate); // 24 hours since 12h00m (range in seconds)
+	xAxis->setRange(xRange.first, xRange.second);
+//	qDebug() << "xAxis range is "  << s->at(0).x() << "/" << s->at(s->count()-1).x();
+//	qDebug() << "xAxis range is "  << jdMin << "/" << jdMax << "=" << StelUtils::julianDayToISO8601String(jdMin, true) << "/" << StelUtils::julianDayToISO8601String(jdMax, true);
+
+
+	if (map.contains(AstroCalcChart::AltVsTime) || map.contains(AstroCalcChart::MonthlyElevation))
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Altitude"), QChar(0x00B0)));
+	else if (map.contains(AstroCalcChart::AzVsTime))
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Azimuth"), QChar(0x00B0)));
+	else if (map.contains(AstroCalcChart::LunarDistance))
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Angular distance"), QChar(0x00B0)));
+	else if (map.contains(AstroCalcChart::AngularSize1))
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Angular size"), QChar(0x00B0)));
+	else if (map.contains(AstroCalcChart::Declination1))
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Declination"), QChar(0x00B0)));
+	else if (map.contains(AstroCalcChart::Distance1))
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Distance"), qc_("AU", "distance, astronomical unit")));
+	else if (map.contains(AstroCalcChart::Elongation1))
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Elongation"), QChar(0x00B0)));
+	else if (map.contains(AstroCalcChart::HeliocentricDistance1))
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Heliocentric distance"), qc_("AU", "distance, astronomical unit")));
+	else if (map.contains(AstroCalcChart::Magnitude1))
+		yAxis->setTitleText(q_("Magnitude"));
+	else if (map.contains(AstroCalcChart::PhaseAngle1))
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Phase angle"), QChar(0x00B0)));
+	else if (map.contains(AstroCalcChart::Phase1))
+		yAxis->setTitleText(QString("%1, %").arg(q_("Phase")));
+	else if (map.contains(AstroCalcChart::RightAscension1))
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Right ascension"), qc_("h", "time")));
+	else if (map.contains(AstroCalcChart::TransitAltitude1))
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Transit altitude"), QChar(0x00B0)));
+
+	if (map.contains(AstroCalcChart::AngularSize2))
+		yAxisR->setTitleText(QString("%1, %2").arg(q_("Angular size"), QChar(0x00B0)));
+	else if (map.contains(AstroCalcChart::Declination2))
+		yAxisR->setTitleText(QString("%1, %2").arg(q_("Declination"), QChar(0x00B0)));
+	else if (map.contains(AstroCalcChart::Distance2))
+		yAxisR->setTitleText(QString("%1, %2").arg(q_("Distance"), qc_("AU", "distance, astronomical unit")));
+	else if (map.contains(AstroCalcChart::Elongation2))
+		yAxisR->setTitleText(QString("%1, %2").arg(q_("Elongation"), QChar(0x00B0)));
+	else if (map.contains(AstroCalcChart::HeliocentricDistance2))
+		yAxisR->setTitleText(QString("%1, %2").arg(q_("Heliocentric distance"), qc_("AU", "distance, astronomical unit")));
+	else if (map.contains(AstroCalcChart::Magnitude2))
+		yAxisR->setTitleText(q_("Magnitude"));
+	else if (map.contains(AstroCalcChart::PhaseAngle2))
+		yAxisR->setTitleText(QString("%1, %2").arg(q_("Phase angle"), QChar(0x00B0)));
+	else if (map.contains(AstroCalcChart::Phase2))
+		yAxisR->setTitleText(QString("%1, %").arg(q_("Phase")));
+	else if (map.contains(AstroCalcChart::RightAscension2))
+		yAxisR->setTitleText(QString("%1, %2").arg(q_("Right ascension"), qc_("h", "time")));
+	else if (map.contains(AstroCalcChart::TransitAltitude2))
+		yAxisR->setTitleText(QString("%1, %2").arg(q_("Transit altitude"), QChar(0x00B0)));
 
 	xAxis->setTitleBrush(Qt::white);
 	yAxis->setTitleBrush(Qt::white);
@@ -234,9 +361,6 @@ void AstroCalcChart::setupAxes()
 	xAxis->setLinePen(axisPen);
 	xAxis->setGridLinePen(axisGridPen);
 	xAxis->setMinorGridLinePen(axisMinorGridPen);
-	xAxis->setRange(43200, 129600); // 24 hours since 12h00m (range in seconds)
-	xAxis->setTickCount(9); // step is 3 hours
-	xAxis->setMinorTickCount(2); // substep is 1 hours
 
 	setYrange(yMin, yMax);
 	yAxis->setLinePen(axisPen);

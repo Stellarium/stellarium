@@ -49,8 +49,8 @@ public:
 	AstroCalcChart(QSet<AstroCalcChart::Series> which);
 	virtual ~AstroCalcChart() Q_DECL_OVERRIDE;
 
-	//! Append one pair of data values to series s.
-	void append(Series s, qreal x, qreal y);
+	//! Append one pair of data values to series s. x must be some QDateTime.toMSecsSinceEpoch()
+	void append(Series s, qint64 x, qreal y);
 	//! Replace one pair of data values to series s at position index.
 	void replace(Series s, int index, qreal x, qreal y);
 	//! Reset (delete and create new empty) series s
@@ -65,8 +65,12 @@ public:
 	//! set range of Y axis on the right side
 	void setYrangeR(qreal min, qreal max);
 
+	//! Find range of dates for the respective series plot.
+	//! Valid vlues for series are AltVsTime, AzVsTime, MonthlyElevation, LunarDistance. All other values are interpreted as 2-curve plots extending over the current year.
+	//! @arg periods number of periods (defauts to 1; currently applicable for number of years in the 2-curves plot)
+	QPair<QDateTime, QDateTime>findXRange(const double JD, const Series series, const int periods=1);
 	//! Setup axes and appearance. Call this at the end of drawing, just before display.
-	void setupAxes();
+	void setupAxes(const double jd, const int periods);
 
 	//! Draw a 2-point vertical line at x which extends over the whole graph
 	//! Note: This shall replace AstroCalcDialog::drawTransitTimeDiagram() and AstroCalcDialog::drawCurrentTimeDiagram()
@@ -79,7 +83,7 @@ private slots:
 	//void setOptionStatus();
 
 private:
-	QtCharts::QValueAxis *xAxis; // running along bottom
+	QtCharts::QDateTimeAxis *xAxis; // running along bottom
 	//QtCharts::QDateTimeAxis *xAxis; // Maybe change to use this!
 	QtCharts::QValueAxis *yAxis; // running on the left side
 	QtCharts::QValueAxis *yAxisR; // running on the right side for some charts only
