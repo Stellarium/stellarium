@@ -147,7 +147,7 @@ QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGro
 		float mage = getVMagnitudeWithExtinction(core);
 		bool hasAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
 		QString tmag = q_("Magnitude");
-		if (nType == NebDn)
+		if (nType == NebDn || B_nb>0) // Dark nebulae or objects from Barnard catalog
 			tmag = q_("Opacity");
 
 		if (bMag < 50.f && vMag > 50.f)
@@ -163,7 +163,7 @@ QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGro
 		}
 
 		const float airmass = getAirmass(core);
-		if (nType != NebDn && airmass>-1.f) // Don't show extincted magnitude much below horizon where model is meaningless.
+		if (nType != NebDn && B_nb==0 && airmass>-1.f) // Don't show extincted magnitude much below horizon where model is meaningless.
 		{
 			emag = QString("%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(mage, 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
 			if (!bmag)

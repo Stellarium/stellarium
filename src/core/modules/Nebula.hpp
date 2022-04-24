@@ -216,7 +216,7 @@ public:
 	float getSurfaceArea(void) const;
 
 	void setProperName(QString name) { englishName = name; }
-	void addNameAlias(QString name) { englishAliases.append(name); }
+	void addNameAlias(QString name) { englishAliases.append(name); englishAliases.removeDuplicates(); }
 	void removeAllNames() { englishName=""; englishAliases.clear(); }
 
 	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, vdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, ESO, vdBH, DWB, Tr, St, Ru, vdB-Ha)

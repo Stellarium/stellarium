@@ -8,4 +8,5 @@ paths:
     - Did you remember to update `po/stellarium-skycultures/POFILES.in` file respectively to changes in sky cultures?
     - Did you remember to update `skycultures/CMakeLists.txt` and `skycultures/YOUR-SKYCULTURE-FOLDER/CMakeLists.txt` files respectively to changes in sky cultures?
     - Did you remember to update `util/skycultures/po4a.config` file respectively to changes in sky cultures?
-    - Did you remember to define classification parameter in sky cultures?
+    - Did you remember to define classification parameter in sky cultures (see `info.ini` file)?
+    - Did you remember to define license parameter in sky cultures (see `info.ini` file)?
