@@ -169,7 +169,7 @@ msgstr "Ecuador"
 
 #: src/core/modules/GridLinesMgr.cpp:706
 msgid "Hour Angle"
-msgstr ""
+msgstr "Ángulo horario"
 
 #: src/core/modules/GridLinesMgr.cpp:711
 msgid "Precession Circle"
@@ -344,7 +344,7 @@ msgstr "Cuadrícula ecuatorial"
 
 #: src/core/modules/GridLinesMgr.cpp:1866 src/ui_viewDialog.h:3969
 msgid "Fixed Equatorial grid"
-msgstr ""
+msgstr "Cuadrícula ecuatorial fija"
 
 #: src/core/modules/GridLinesMgr.cpp:1867 src/ui_viewDialog.h:3626
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
@@ -379,7 +379,7 @@ msgstr "Línea ecuador J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1874
 msgid "Fixed Equator line"
-msgstr ""
+msgstr "Línea ecuatorial fija"
 
 #: src/core/modules/GridLinesMgr.cpp:1875
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
@@ -10694,7 +10694,7 @@ msgstr "Kamilaroi/Euahlayi"
 #: skycultures/translations_skycultures.fab:60
 msgctxt "sky culture"
 msgid "Khoikhoi and San"
-msgstr ""
+msgstr "Khoikhoi y San"
 
 #: skycultures/translations_skycultures.fab:62
 msgctxt "sky culture"
@@ -10814,7 +10814,7 @@ msgstr "Occidental (Sternenkarten)"
 #: skycultures/translations_skycultures.fab:108
 msgctxt "sky culture"
 msgid "Xhosa"
-msgstr ""
+msgstr "Xhosa"
 
 #: skycultures/translations_skycultures.fab:110
 msgctxt "sky culture"
@@ -12299,6 +12299,8 @@ msgstr "Color del ecuador (de fecha)"
 msgid ""
 "Fixed equatorial coordinates (hour angle/declination) of current planet."
 msgstr ""
+"Coordenadas ecuatoriales fijas (ángulo horario/declinación) del planeta "
+"actual."
 
 #: src/ui_viewDialog.h:3972
 msgid ""
@@ -12318,15 +12320,16 @@ msgstr "Color de los círculos circumpolares"
 
 #: src/ui_viewDialog.h:3979
 msgid "Color of fixed equator"
-msgstr ""
+msgstr "Color del ecuador fijo"
 
 #: src/ui_viewDialog.h:3985
 msgid "Fixed Equator"
-msgstr ""
+msgstr "Ecuador fijo"
 
 #: src/ui_viewDialog.h:3987
 msgid "Show fixed celestial equator (hour angles) of current planet."
 msgstr ""
+"Mostrar el ecuador celeste fijo (ángulos horarios) del planeta actual."
 
 #: src/ui_viewDialog.h:3995
 msgid ""
