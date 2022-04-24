@@ -101,9 +101,8 @@ QString NavStarsCalculator::radToDm(double rad, const QString& pos, const QStrin
 	bool sign;	
 	if (useDecimalDegrees)
 	{
-		double dd;
-		StelUtils::radToDecDeg(rad, sign, dd);
-		rval = QString("%1%2&deg;").arg((sign ? pos : neg), QString::number(dd, 'f', useExtraDecimals ? 6 : 5));
+		double dd = rad * M_180_PI;
+		rval = QString("%1%2&deg;").arg((dd>=0. ? pos : neg), QString::number(dd, 'f', useExtraDecimals ? 6 : 5));
 	}
 	else
 	{

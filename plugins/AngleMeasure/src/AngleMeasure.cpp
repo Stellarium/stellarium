@@ -292,13 +292,10 @@ QString AngleMeasure::calculatePositionAngle(const Vec3d p1, const Vec3d p2) con
 	if (r<0)
 		r+= 2*M_PI;
 
-	unsigned int d, m;
 	double s;
-	bool sign;
-
 	if (withDecimalDegree)
 	{
-		StelUtils::radToDecDeg(r, sign, s);
+		s = std::abs(r * M_180_PI);
 		if (flagUseDmsFormat)
 			return QString("%1d").arg(s, 0, 'f', 5);
 		else
@@ -306,6 +303,8 @@ QString AngleMeasure::calculatePositionAngle(const Vec3d p1, const Vec3d p2) con
 	}
 	else
 	{
+		unsigned int d, m;
+		bool sign;
 		StelUtils::radToDms(r, sign, d, m, s);
 		if (flagUseDmsFormat)
 			return QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
@@ -434,14 +433,10 @@ void AngleMeasure::calculateEndsOneLine(const Vec3d &start, const Vec3d &end, Ve
 
 QString AngleMeasure::formatAngleString(double angle) const
 {
-	unsigned int d, m;
 	double s;
-	bool sign;
-
 	if (withDecimalDegree)
 	{
-		StelUtils::radToDecDeg(angle, sign, s);
-
+		s = std::abs(angle * M_180_PI);
 		if (flagUseDmsFormat)
 			return QString("%1d").arg(s, 0, 'f', 5);
 		else
@@ -449,6 +444,8 @@ QString AngleMeasure::formatAngleString(double angle) const
 	}
 	else
 	{
+		unsigned int d, m;
+		bool sign;
 		StelUtils::radToDms(angle, sign, d, m, s);
 
 		if (flagUseDmsFormat)

@@ -664,18 +664,13 @@ void TestConversions::testRadToDD()
 
 	while (data.count()>=2)
 	{
-		double angle, decimalValue, degree;
-		bool sign;
+		double angle, decimalValue, degree;		
 		angle		= data.takeFirst().toDouble();
 		decimalValue	= data.takeFirst().toDouble();
-		StelUtils::radToDecDeg(angle, sign, degree);
-		if (!sign)
-			decimalValue *= -1;
+		degree = angle * M_180_PI;
 
 		QVERIFY2(qAbs(degree-decimalValue)<=ERROR_LIMIT, qPrintable(QString("%1 radians = %2 degrees (expected %3 degrees)")
-									    .arg(QString::number(angle, 'f', 5))
-									    .arg(QString::number(degree, 'f', 2))
-									    .arg(QString::number(decimalValue, 'f', 2))));
+									    .arg(QString::number(angle, 'f', 5), QString::number(degree, 'f', 2), QString::number(decimalValue, 'f', 2))));
 	}
 }
 
