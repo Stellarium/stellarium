@@ -111,6 +111,11 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	, extraEphemerisDialog(Q_NULLPTR)
 	, customStepsDialog(Q_NULLPTR)
 	, altVsTimeChart(Q_NULLPTR)
+	, azVsTimeChart(Q_NULLPTR)
+	, monthlyElevationChart(Q_NULLPTR)
+	, curvesChart(Q_NULLPTR)
+	, lunarElongationChart(Q_NULLPTR)
+	, pcChart(Q_NULLPTR)
 	//, wutModel(Q_NULLPTR)
 	//, proxyModel(Q_NULLPTR)
 	, currentTimeLine(Q_NULLPTR)
@@ -5346,8 +5351,8 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 	}
 	qDebug() << "create chart axes...";
 	monthlyElevationChart->setYrange(minYme+2., maxYme-2.); // TODO: reduce min/max back to real min/max values.
-	monthlyElevationChart->setupAxes(core->getJD(), 1);
 	monthlyElevationChart->show(AstroCalcChart::MonthlyElevation);
+	monthlyElevationChart->setupAxes(core->getJD(), 1);
 	qDebug() << "set chart ...";
 	QChart *oldChart=ui->monthlyElevationChartView->chart();
 	if (oldChart) oldChart->deleteLater();
@@ -8234,9 +8239,23 @@ void AstroCalcDialog::prepareDistanceAxesAndGraph()
 
 void AstroCalcDialog::drawDistanceGraph()
 {
+	qDebug() << "AstrocalcDialog::drawDistanceGraph()...";
+	if (!pcChartMutex.tryLock()) return; // Avoid calling parallel from various sides. (called by signals/slots)
+
 	// special case - plot the graph when tab is visible
 	if (!plotDistanceGraph || !dialog->isVisible())
+	{
+		pcChartMutex.unlock();
 		return;
+	}
+
+	qDebug() << "creating pcChart";
+	pcChart = new AstroCalcChart({AstroCalcChart::pcDistanceAU, AstroCalcChart::pcDistanceDeg});
+	pcChart->setYrange(0., 10.); // start with something in case it remains empty.
+	pcChart->setYrangeR(0., 360.);
+	pcChart->setTitle(q_("Linear and angular distances between selected objects"));
+	qDebug() << "Chart has title:" << pcChart->title();
+
 
 	Q_ASSERT(ui->firstCelestialBodyComboBox);
 	Q_ASSERT(ui->secondCelestialBodyComboBox);
@@ -8253,6 +8272,8 @@ void AstroCalcDialog::drawDistanceGraph()
 		ui->pcDistanceGraphPlot->graph(0)->clearData();
 		ui->pcDistanceGraphPlot->graph(1)->clearData();
 		ui->pcDistanceGraphPlot->replot();
+		ui->pcChartView->setChart(pcChart);
+		pcChartMutex.unlock();
 		return;
 	}
 
@@ -8262,49 +8283,66 @@ void AstroCalcDialog::drawDistanceGraph()
 		limit = 151; step = 2;
 	}
 
+	// TODO for charts: use full calendar days, not offsets from current JD.
 	QList<double> aX, aY1, aY2;
 	const double currentJD = core->getJD();
-	for (int i = (-1*limit); i <= limit; i++)
+	for (int i = -limit; i <= limit; i++)
 	{
 		double JD = currentJD + i*step;
 		core->setJD(JD);
+		core->update(0.0);
 		Vec3d posFCB = firstCBId->getJ2000EquatorialPos(core);
 		Vec3d posSCB = secondCBId->getJ2000EquatorialPos(core);
 		double distanceAu = (posFCB - posSCB).length();
-		//r = std::acos(sin(posFCB.latitude()) * sin(posSCB.latitude()) + cos(posFCB.latitude()) * cos(posSCB.latitude()) * cos(posFCB.longitude() - posSCB.longitude()));
 		double r= posFCB.angle(posSCB);
-		double dd;
-		bool sign;
-		StelUtils::radToDecDeg(r, sign, dd);
+		double dd=r*M_180_PI;
 		aX.append(i*step);
 		aY1.append(distanceAu);
+		pcChart->append(AstroCalcChart::pcDistanceAU, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), distanceAu);
 		if (firstCBId != currentPlanet && secondCBId != currentPlanet)
+		{
 			aY2.append(dd);
-		core->update(0.0);
+			pcChart->append(AstroCalcChart::pcDistanceDeg, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), dd);
+		}
 	}
 	core->setJD(currentJD);
 
 	QVector<double> x = aX.toVector(), y1 = aY1.toVector(), y2;
 	minYld = *std::min_element(aY1.begin(), aY1.end());
 	maxYld = *std::max_element(aY1.begin(), aY1.end());
+	pcChart->setYrange(minYld, maxYld);
 
 	if (!aY2.isEmpty()) // mistake-proofing!
 	{
 		y2 = aY2.toVector();
 		minYad = *std::min_element(aY2.begin(), aY2.end());
 		maxYad = *std::max_element(aY2.begin(), aY2.end());
+		pcChart->setYrangeR(minYad, maxYad);
 	}
 
 	prepareDistanceAxesAndGraph();
 
 	ui->pcDistanceGraphPlot->graph(0)->setData(x, y1);
 	ui->pcDistanceGraphPlot->graph(0)->setName("[LD]");
+	pcChart->show(AstroCalcChart::pcDistanceAU);
 	if (!aY2.isEmpty()) // mistake-proofing!
 	{
 		ui->pcDistanceGraphPlot->graph(1)->setData(x, y2);
 		ui->pcDistanceGraphPlot->graph(1)->setName("[AD]");
+		pcChart->show(AstroCalcChart::pcDistanceDeg);
 	}
 	ui->pcDistanceGraphPlot->replot();
+
+	qDebug() << "create chart axes...";
+	pcChart->setupAxes(core->getJD(), 1);
+	qDebug() << "set chart ...";
+	QChart *oldChart=ui->pcChartView->chart();
+	if (oldChart) oldChart->deleteLater();
+	ui->pcChartView->setChart(pcChart);
+	ui->pcChartView->setRenderHint(QPainter::Antialiasing);
+	qDebug() << "Chart done.";
+
+	pcChartMutex.unlock();
 }
 
 void AstroCalcDialog::mouseOverDistanceGraph(QMouseEvent* event)
@@ -8489,8 +8527,8 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 
 	qDebug() << "create chart axes...";
 	lunarElongationChart->setYrange(minYadm+5., maxYadm-5.); // TODO: reduce min/max back to real min/max values.
-	lunarElongationChart->setupAxes(core->getJD(), 1);
 	lunarElongationChart->show(AstroCalcChart::LunarElongation);
+	lunarElongationChart->setupAxes(core->getJD(), 1);
 	qDebug() << "set chart ...";
 	QChart *oldChart=ui->lunarElongationChartView->chart();
 	if (oldChart) oldChart->deleteLater();

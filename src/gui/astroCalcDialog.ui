@@ -2555,16 +2555,6 @@
               <property name="bottomMargin">
                <number>0</number>
               </property>
-              <item row="2" column="0">
-               <widget class="QCustomPlot" name="pcDistanceGraphPlot" native="true">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-               </widget>
-              </item>
               <item row="0" column="0">
                <widget class="QLabel" name="pcDistanceGraphLabel">
                 <property name="font">
@@ -2579,6 +2569,19 @@
                  <set>Qt::AlignCenter</set>
                 </property>
                </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QCustomPlot" name="pcDistanceGraphPlot" native="true">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QChartView" name="pcChartView"/>
               </item>
              </layout>
             </widget>
