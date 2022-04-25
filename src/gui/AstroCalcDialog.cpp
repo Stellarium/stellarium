@@ -1651,9 +1651,6 @@ void AstroCalcDialog::currentHECPositions()
 	initListHECPositions();
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
-	double distance, longitude, latitude, dl;
-	Vec3d pos;
-	bool sign;
 	HECPosition object;
 	const double JD = core->getJD();
 	ui->hecPositionsTimeLabel->setText(q_("Positions on %1").arg(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))));
@@ -1663,11 +1660,12 @@ void AstroCalcDialog::currentHECPositions()
 	{
 		if (planet->getPlanetType() == Planet::isPlanet)
 		{
-			pos = planet->getHeliocentricEclipticPos();
-			distance = pos.length();
+			Vec3d pos = planet->getHeliocentricEclipticPos();
+			double distance = pos.length();
+			double longitude, latitude;
 			StelUtils::rectToSphe(&longitude, &latitude, pos);
 			if (longitude<0) longitude+=2.0*M_PI;
-			StelUtils::radToDecDeg(longitude, sign, dl);
+			double dl=longitude*M_180_PI;
 			if (withDecimalDegree)
 			{
 				coordStrings.first  = StelUtils::radToDecDegStr(latitude);
@@ -2671,9 +2669,8 @@ void AstroCalcDialog::generateLunarEclipses()
 		QString sarosStr, eclipseTypeStr, uMagStr, pMagStr, gammaStr, visibilityConditionsStr, visibilityConditionsTooltip;
 
 		const bool saveTopocentric = core->getUseTopocentricCoordinates();
-		const double approxJD = 2451550.09765;
-		const double synodicMonth = 29.530588853;
-		bool sign;
+		static const double approxJD = 2451550.09765;
+		static const double synodicMonth = 29.530588853;
 
 		static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 		PlanetP moon = ssystem->getMoon();
@@ -2694,7 +2691,7 @@ void AstroCalcDialog::generateLunarEclipses()
 				core->setUseTopocentricCoordinates(false);
 				core->update(0);
 
-				double az, alt, altitude;
+				double az, alt;
 
 				// Find exact time of closest approach between the Moon and shadow centre
 				double dt = 1.;
@@ -2766,7 +2763,7 @@ void AstroCalcDialog::generateLunarEclipses()
 
 					// Visibility conditions / Elevation of the Moon at max. phase of eclipse
 					StelUtils::rectToSphe(&az, &alt, moon->getAltAzPosAuto(core));
-					StelUtils::radToDecDeg(alt, sign, altitude);
+					double altitude=alt*M_180_PI;
 
 					if (altitude >= 45.) // Perfect conditions - 45+ degrees
 					{
@@ -2793,11 +2790,10 @@ void AstroCalcDialog::generateLunarEclipses()
 						visibilityConditionsTooltip = q_("Not observable eclipse");
 					}
 
-					if (!sign)
+					if (altitude<0.)
 					{
 						visibilityConditionsStr = qc_("Invisible", "visibility conditions");
 						visibilityConditionsTooltip = q_("The greatest eclipse is invisible in current location");
-						altitude *= -1.;
 					}
 
 					// Saros series calculations - useful to search for eclipses in the same Saros
@@ -4884,11 +4880,8 @@ double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const int graphT
 		case GraphTransitAltitudeVsTime:
 		{
 			double az, alt;
-			bool sign;
 			StelUtils::rectToSphe(&az, &alt, ssObj->getAltAzPosAuto(core));
-			StelUtils::radToDecDeg(alt, sign, value); // convert to degrees
-			if (!sign)
-				value *= -1;
+			value=alt*M_180_PI;
 			break;
 		}
 		case GraphRightAscensionVsTime:
@@ -4906,9 +4899,7 @@ double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const int graphT
 			double dec_equ, ra_equ;
 			bool sign;
 			StelUtils::rectToSphe(&ra_equ, &dec_equ, ssObj->getEquinoxEquatorialPos(core));
-			StelUtils::radToDecDeg(dec_equ, sign, value); // convert to degrees
-			if (!sign)
-				value *= -1;
+			value=dec_equ*M_180_PI;
 			break;
 		}
 	}
@@ -8103,15 +8094,14 @@ void AstroCalcDialog::computePlanetaryData()
 	QString distAU = QString::number(distanceAu, 'f', 5);
 	QString distKM = useKM ? QString::number(distanceKm, 'f', 3) : QString::number(distanceKm / 1.0e6, 'f', 3);
 
-	//const double r = std::acos(sin(posFCB.latitude()) * sin(posSCB.latitude()) + cos(posFCB.latitude()) * cos(posSCB.latitude()) * cos(posFCB.longitude() - posSCB.longitude()));
 	const double r= posFCB.angle(posSCB);
 
 	unsigned int d, m;
-	double s, dd;
+	double s;
 	bool sign;
 
 	StelUtils::radToDms(r, sign, d, m, s);
-	StelUtils::radToDecDeg(r, sign, dd);
+	double dd=r*M_180_PI;
 
 	double spcb1 = firstCBId->getSiderealPeriod();
 	double spcb2 = secondCBId->getSiderealPeriod();
@@ -8474,17 +8464,15 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 		QList<double> aX, aY;
 		Vec3d selectedObjectPosition, moonPosition;
 		const double currentJD = core->getJD();
-		double JD, distance, dd;
-		bool sign;
 		for (int i = -3; i <= 32; i++) // TODO: With SplineSeries in charts, i+=3 may be enough!
 		{
-			JD = currentJD + i;
+			double JD = currentJD + i;
 			core->setJD(JD);
 			core->update(0.0);
 			moonPosition = moon->getJ2000EquatorialPos(core);
 			selectedObjectPosition = selectedObject->getJ2000EquatorialPos(core);
-			distance = moonPosition.angle(selectedObjectPosition);
-			StelUtils::radToDecDeg(distance, sign, dd);
+			double distance = moonPosition.angle(selectedObjectPosition);
+			double dd=distance*M_180_PI;
 			aX.append(i);
 			aY.append(dd);
 			lunarElongationChart->append(AstroCalcChart::LunarElongation, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), distance*M_180_PI);

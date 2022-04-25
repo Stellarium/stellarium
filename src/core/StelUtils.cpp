@@ -173,34 +173,12 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 	}	
 }
 
-void radToDecDeg(double rad, bool &sign, double &deg)
-{
-	rad = std::fmod(rad,2.0*M_PI);
-	sign=true;
-	if (rad<0)
-	{
-		rad *= -1;
-		sign = false;
-	}
-	deg = rad*M_180_PI;
-}
-
-QString radToDecDegStr(const double angle, const int precision, const bool useD, const bool useC)
+QString radToDecDegStr(const double angle, const int precision, const bool useD, const bool positive)
 {
 	const QChar degsign = (useD ? 'd' : 0x00B0);
-	bool sign;
-	double deg;
-	StelUtils::radToDecDeg(angle, sign, deg);
-	QString str = QString("%1%2%3").arg((sign?"+":"-"), QString::number(deg, 'f', precision), degsign);
-	if (useC)
-	{
-		if (!sign)
-			deg = 360. - deg;
+	double deg = (positive ? fmodpos(angle, 2.0*M_PI) : std::fmod(angle, 2.0*M_PI)) * M_180_PI;
 
-		str = QString("+%1%2").arg(QString::number(deg, 'f', precision), degsign);
-	}
-
-	return str;
+	return QString("%1%2").arg(QString::number(deg, 'f', precision), degsign);
 }
 
 /*************************************************************************
