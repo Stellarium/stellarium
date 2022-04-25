@@ -284,11 +284,10 @@ void AstroCalcChart::setupAxes(const double jd, const int periods)
 	qDebug() << "Why is thisshift not a full number of hours?: " << shift*24.;
 
 	// Variables for scaling x axis
-	//QtCharts::QSplineSeries *s;
-	//double jdMin=0., jdMax=0.;
-	//QDateTime startDate, endDate;
 	QPair<QDateTime, QDateTime>xRange;
 	// Maybe prefer to allow axis labeling from outside.
+	xAxis->setTitleText(q_("Date")); // was Days from today, but real date is better. generally TODO: ticks on midnight, not "now".
+	xAxis->setFormat("dd.MM.");
 	if (map.contains(AstroCalcChart::AltVsTime) || map.contains(AstroCalcChart::AzVsTime))
 	{
 		//s=map.value(AstroCalcChart::AltVsTime, map.value(AstroCalcChart::AzVsTime));
@@ -309,38 +308,28 @@ void AstroCalcChart::setupAxes(const double jd, const int periods)
 	}
 	else if (map.contains(AstroCalcChart::MonthlyElevation))
 	{
-		xAxis->setTitleText(q_("Date"));
 		//xAxis->setRange(s->at(0).x(), s->at(s->count()-1).x()); // TODO-range in unknown units
 		//qDebug() << "xAxis range is "  << s->at(0).x() << "/" << s->at(s->count()-1).x();
 		xAxis->setTickCount(13); // about monthly
-		xAxis->setFormat("dd.MM.");
 		xRange=findXRange(jd, AstroCalcChart::MonthlyElevation, 1);
 	}
 	else if (map.contains(AstroCalcChart::LunarElongation))
 	{
-		xAxis->setTitleText(q_("Date")); // was Days from today, but real date is better. TODO: ticks on midnight.
 		xAxis->setTickCount(17); // step is 2 days. 16 intervals.
-		xAxis->setFormat("dd.MM.");
 		xRange=findXRange(jd, AstroCalcChart::LunarElongation, 1);
 	}
 	else if (map.contains(AstroCalcChart::pcDistanceAU))
 	{
-		xAxis->setTitleText(q_("Date")); // was Days from today, but real date is better. TODO: ticks on midnight.
 		xAxis->setTickCount(21); // step is 30 days. 20 intervals.
-		xAxis->setFormat("dd.MM.");
 		xRange=findXRange(jd, AstroCalcChart::pcDistanceAU, 1);
 	}
 	else
 	{
+		xAxis->setTickCount(12*periods+1); // step is ~30 days.
 		xRange=findXRange(jd, AstroCalcChart::AngularSize1, periods);
 	}
-	//startDate.setMSecsSinceEpoch(s->at(0).x());
-	//endDate.setMSecsSinceEpoch(s->at(s->count()-1).x());
-	//xAxis->setRange(startDate, endDate); // 24 hours since 12h00m (range in seconds)
 	xAxis->setRange(xRange.first, xRange.second);
-//	qDebug() << "xAxis range is "  << s->at(0).x() << "/" << s->at(s->count()-1).x();
-//	qDebug() << "xAxis range is "  << jdMin << "/" << jdMax << "=" << StelUtils::julianDayToISO8601String(jdMin, true) << "/" << StelUtils::julianDayToISO8601String(jdMax, true);
-
+//	qDebug() << "xAxis range is "  << xRange.first << "/" << xRange.second;
 
 	if (map.contains(AstroCalcChart::AltVsTime) || map.contains(AstroCalcChart::MonthlyElevation))
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Altitude"), QChar(0x00B0)));
