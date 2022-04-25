@@ -417,6 +417,9 @@ private:
 	mutable QMutex curvesChartMutex;
 	AstroCalcChart *lunarElongationChart;
 	mutable QMutex lunarElongationChartMutex;
+	AstroCalcChart *pcChart;
+	mutable QMutex pcChartMutex;
+
 	QSettings* conf;
 	QLinearGradient graphBackgroundGradient;
 	QTimer *currentTimeLine;

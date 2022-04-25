@@ -40,7 +40,28 @@ AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR)
 	}
 
 	setBackgroundBrush(QBrush(QColor(86, 87, 90)));
+	retranslate();
 
+	xAxis=new QtCharts::QDateTimeAxis(this);
+	yAxis=new QtCharts::QValueAxis(this);
+	if (QSet<AstroCalcChart::Series>({AstroCalcChart::AngularSize2, AstroCalcChart::Declination2, AstroCalcChart::Distance2,
+					  AstroCalcChart::Elongation2, AstroCalcChart::HeliocentricDistance2, AstroCalcChart::Magnitude2,
+					  AstroCalcChart::PhaseAngle2, AstroCalcChart::Phase2, AstroCalcChart::RightAscension2, AstroCalcChart::TransitAltitude2,
+					  AstroCalcChart::pcDistanceDeg}).intersect(which).count())
+		yAxisR=new QtCharts::QValueAxis(this);
+	legend()->setAlignment(Qt::AlignBottom);
+	legend()->setLabelColor(Qt::white);
+	setTitleBrush(QBrush(Qt::white));
+
+	qDebug() << "c'tor done";
+}
+
+AstroCalcChart::~AstroCalcChart()
+{
+	removeAllSeries(); // Also deletes!
+}
+
+void AstroCalcChart::retranslate(){
 	// We need to configure every enum Series here!
 	if (map.contains(AltVsTime            )) map.value(AltVsTime            )->setName(q_("Altitude")); // no name in old solution, but used for legend!
 	if (map.contains(CurrentTime          )) map.value(CurrentTime          )->setName(q_("Now"));
@@ -72,28 +93,11 @@ AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR)
 	if (map.contains(Phase2               )) map.value(Phase2               )->setName(q_("Phase"));
 	if (map.contains(RightAscension2      )) map.value(RightAscension2      )->setName(q_("Right Ascension"));
 	if (map.contains(TransitAltitude2     )) map.value(TransitAltitude2     )->setName(q_("Transit Altitude"));
-	if (map.contains(LunarElongation        )) map.value(LunarElongation        )->setName(q_("Lunar Elongation"));
-	if (map.contains(LunarElongationLimit        )) map.value(LunarElongationLimit        )->setName(q_("Elongation Limit"));
-
-	xAxis=new QtCharts::QDateTimeAxis(this);
-	yAxis=new QtCharts::QValueAxis(this);
-	if (QSet<AstroCalcChart::Series>({AstroCalcChart::AngularSize2, AstroCalcChart::Declination2, AstroCalcChart::Distance2,
-					  AstroCalcChart::Elongation2, AstroCalcChart::HeliocentricDistance2, AstroCalcChart::Magnitude2,
-					  AstroCalcChart::PhaseAngle2, AstroCalcChart::Phase2, AstroCalcChart::RightAscension2, AstroCalcChart::TransitAltitude2}).intersect(which).count())
-		yAxisR=new QtCharts::QValueAxis(this);
-	legend()->setAlignment(Qt::AlignBottom);
-	legend()->setLabelColor(Qt::white);
-	setTitleBrush(QBrush(Qt::white));
-
-	qDebug() << "c'tor done";
+	if (map.contains(LunarElongation      )) map.value(LunarElongation      )->setName(q_("Lunar Elongation"));
+	if (map.contains(LunarElongationLimit )) map.value(LunarElongationLimit )->setName(q_("Elongation Limit"));
+	if (map.contains(pcDistanceAU         )) map.value(pcDistanceAU         )->setName(q_("Distance, AU"));
+	if (map.contains(pcDistanceDeg        )) map.value(pcDistanceDeg        )->setName(q_("Distance, °"));
 }
-
-AstroCalcChart::~AstroCalcChart()
-{
-	removeAllSeries(); // Also deletes!
-}
-
-//void AstroCalcAltVsTimeChart::retranslate(){}
 
 const QMap<AstroCalcChart::Series, QPen> AstroCalcChart::penMap=
 {
@@ -128,13 +132,15 @@ const QMap<AstroCalcChart::Series, QPen> AstroCalcChart::penMap=
 	{AstroCalcChart::RightAscension2,        QPen(Qt::yellow,                     2, Qt::SolidLine)},
 	{AstroCalcChart::TransitAltitude2,       QPen(Qt::yellow,                     2, Qt::SolidLine)},
 	{AstroCalcChart::LunarElongation,        QPen(Qt::red,                        2, Qt::SolidLine)},
-	{AstroCalcChart::LunarElongationLimit,   QPen(Qt::yellow,                     2, Qt::SolidLine)}
+	{AstroCalcChart::LunarElongationLimit,   QPen(Qt::yellow,                     2, Qt::SolidLine)},
+	{AstroCalcChart::pcDistanceAU,           QPen(Qt::green,                      2, Qt::SolidLine)},
+	{AstroCalcChart::pcDistanceDeg,          QPen(Qt::yellow,                     2, Qt::SolidLine)}
 };
 
 void AstroCalcChart::append(Series s, qint64 x, qreal y)
 {
 	if (map.value(s))
-		map.value(s)->append(x, y);
+		map.value(s)->append(qreal(x), y);
 	else
 		qDebug() << "Series " << s << "invalid for append()!";
 }
@@ -249,6 +255,11 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 			startDate=StelUtils::jdToQDateTime(JD-2);
 			endDate=StelUtils::jdToQDateTime(JD+30);
 			break;
+		case AstroCalcChart::pcDistanceAU:
+		case AstroCalcChart::pcDistanceDeg:
+			startDate=StelUtils::jdToQDateTime(JD-300);
+			endDate=StelUtils::jdToQDateTime(JD+300);
+			break;
 		default: // 2-curves page
 			break;
 	}
@@ -259,9 +270,15 @@ void AstroCalcChart::setupAxes(const double jd, const int periods)
 {
 	qDebug() << "setupAxes()...";
 
-	static const QPen axisPen(       Qt::white,                         1,    Qt::SolidLine);
-	static const QPen axisGridPen(   Qt::white,                         0.5,  Qt::SolidLine);
-	static const QPen axisMinorGridPen(Qt::white,                       0.35, Qt::DotLine);
+	static const QPen axisPen(          Qt::white,      1,    Qt::SolidLine);
+	static const QPen axisGridPen(      Qt::white,      0.5,  Qt::SolidLine);
+	static const QPen axisMinorGridPen( Qt::white,      0.35, Qt::DotLine);
+	static const QPen axisPenL(         Qt::green,      1,    Qt::SolidLine);
+	static const QPen axisGridPenL(     Qt::green,      0.5,  Qt::SolidLine);
+	static const QPen axisMinorGridPenL(Qt::green,      0.35, Qt::DotLine);
+	static const QPen axisPenR(         Qt::yellow,     1,    Qt::SolidLine);
+	static const QPen axisGridPenR(     Qt::yellow,     0.5,  Qt::SolidLine);
+	static const QPen axisMinorGridPenR(Qt::yellow,     0.35, Qt::DotLine);
 
 	const double shift = StelApp::getInstance().getCore()->getUTCOffset(jd) / 24.0;
 	qDebug() << "Why is thisshift not a full number of hours?: " << shift*24.;
@@ -292,24 +309,26 @@ void AstroCalcChart::setupAxes(const double jd, const int periods)
 	}
 	else if (map.contains(AstroCalcChart::MonthlyElevation))
 	{
-		//s=map.value(AstroCalcChart::MonthlyElevation);
 		xAxis->setTitleText(q_("Date"));
 		//xAxis->setRange(s->at(0).x(), s->at(s->count()-1).x()); // TODO-range in unknown units
 		//qDebug() << "xAxis range is "  << s->at(0).x() << "/" << s->at(s->count()-1).x();
 		xAxis->setTickCount(13); // about monthly
 		xAxis->setFormat("dd.MM.");
-		//xAxis->setMinorTickCount(2); // substep is 1 hours
 		xRange=findXRange(jd, AstroCalcChart::MonthlyElevation, 1);
 	}
 	else if (map.contains(AstroCalcChart::LunarElongation))
 	{
-		//s=map.value(AstroCalcChart::LunarDistance);
 		xAxis->setTitleText(q_("Date")); // was Days from today, but real date is better. TODO: ticks on midnight.
-		//xAxis->setRange(-2, 32); // 24 hours since 12h00m (range in seconds)
 		xAxis->setTickCount(17); // step is 2 days. 16 intervals.
-		//xAxis->setMinorTickCount(1); // substep is 1 day
 		xAxis->setFormat("dd.MM.");
 		xRange=findXRange(jd, AstroCalcChart::LunarElongation, 1);
+	}
+	else if (map.contains(AstroCalcChart::pcDistanceAU))
+	{
+		xAxis->setTitleText(q_("Date")); // was Days from today, but real date is better. TODO: ticks on midnight.
+		xAxis->setTickCount(21); // step is 30 days. 20 intervals.
+		xAxis->setFormat("dd.MM.");
+		xRange=findXRange(jd, AstroCalcChart::pcDistanceAU, 1);
 	}
 	else
 	{
@@ -348,7 +367,9 @@ void AstroCalcChart::setupAxes(const double jd, const int periods)
 	else if (map.contains(AstroCalcChart::RightAscension1))
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Right ascension"), qc_("h", "time")));
 	else if (map.contains(AstroCalcChart::TransitAltitude1))
-		yAxis->setTitleText(QString("%1, %2").arg(q_("Transit altitude"), QChar(0x00B0)));
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Culmination altitude"), QChar(0x00B0))); // Better term than transit!
+	else if (map.contains(AstroCalcChart::pcDistanceAU))
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Linear Distance"), qc_("AU", "distance, astronomical unit")));
 
 	if (map.contains(AstroCalcChart::AngularSize2))
 		yAxisR->setTitleText(QString("%1, %2").arg(q_("Angular size"), QChar(0x00B0)));
@@ -369,7 +390,9 @@ void AstroCalcChart::setupAxes(const double jd, const int periods)
 	else if (map.contains(AstroCalcChart::RightAscension2))
 		yAxisR->setTitleText(QString("%1, %2").arg(q_("Right ascension"), qc_("h", "time")));
 	else if (map.contains(AstroCalcChart::TransitAltitude2))
-		yAxisR->setTitleText(QString("%1, %2").arg(q_("Transit altitude"), QChar(0x00B0)));
+		yAxisR->setTitleText(QString("%1, %2").arg(q_("Culmination altitude"), QChar(0x00B0))); // Better term than transit!
+	else if (map.contains(AstroCalcChart::pcDistanceDeg))
+		yAxisR->setTitleText(QString("%1, %2").arg(q_("Angular distance"), QChar(0x00B0)));
 
 	xAxis->setTitleBrush(Qt::white);
 	yAxis->setTitleBrush(Qt::white);
@@ -387,13 +410,26 @@ void AstroCalcChart::setupAxes(const double jd, const int periods)
 	addAxis(xAxis, Qt::AlignBottom);
 	addAxis(yAxis, Qt::AlignLeft);
 	if (yAxisR)
+	{
+		yAxisR->setTitleBrush(Qt::yellow);
+		yAxisR->setLabelsBrush(Qt::yellow);
 		addAxis(yAxisR, Qt::AlignRight);
+		yAxisR->setLinePen(axisPenR);
+		yAxisR->setGridLinePen(axisGridPenR);
+		yAxisR->setMinorGridLinePen(axisMinorGridPenR);
 
+		// If we have a right axis, we always have green/yellow graphs!
+		yAxis->setTitleBrush(Qt::green);
+		yAxis->setLabelsBrush(Qt::green);
+		yAxis->setLinePen(axisPenL);
+		yAxis->setGridLinePen(axisGridPenL);
+		yAxis->setMinorGridLinePen(axisMinorGridPenL);
+	}
 	const QList<QtCharts::QAbstractSeries *> ser=series(); // currently shown series. These may be fewer than the series in our map!
 
 	for (Series s: {AltVsTime, CurrentTime, TransitTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight, Moon, AzVsTime, MonthlyElevation,
 	     AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1,
-	     LunarElongation, LunarElongationLimit})
+	     LunarElongation, LunarElongationLimit, pcDistanceAU})
 	{
 		if ((map.value(s)) && ser.contains(map.value(s)))
 		{
@@ -402,7 +438,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods)
 			map.value(s)->attachAxis(yAxis);
 		}
 	}
-	for (Series s: {AngularSize2, Declination2, Distance2, Elongation2, HeliocentricDistance2, Magnitude2, PhaseAngle2, Phase2, RightAscension2, TransitAltitude2})
+	for (Series s: {AngularSize2, Declination2, Distance2, Elongation2, HeliocentricDistance2, Magnitude2, PhaseAngle2, Phase2, RightAscension2, TransitAltitude2, pcDistanceDeg})
 	{
 		if ((map.value(s)) && ser.contains(map.value(s)))
 		{
@@ -411,9 +447,6 @@ void AstroCalcChart::setupAxes(const double jd, const int periods)
 			map.value(s)->attachAxis(yAxisR);
 		}
 	}
-
-
-
 	qDebug() << "setupAxes()...done";
 }
 
@@ -422,23 +455,24 @@ void AstroCalcChart::setYrange(qreal min, qreal max)
 	yMin=min;
 	yMax=max;
 
-	qreal rMin=floor(yMin/10);
-	qreal rMax=ceil(yMax/10);
+	// We have to find a scaling that has steps in an appropriate range.
+	const double logYDiff=log10(yMax-yMin);
+	const double s=pow(10., floor(logYDiff)-1.);
 
-	if (rMax-rMin > 30)
+	qreal rMin=floor(yMin/s);
+	qreal rMax=ceil(yMax/s);
+
+	//qDebug() << "Setting yrange from" << min << "/" << max << "-->" << rMin*s << "/" << rMax*s;
+	yAxis->setRange(rMin*s, rMax*s);
+	//yAxis->applyNiceNumbers();
+	if (rMax-rMin > 3*s)
 	{
-		qDebug() << "Setting yrange from" << min << "/" << max << "-->" << rMin*10 << "/" << rMax*10;
-		yAxis->setRange(rMin*10, rMax*10);
-		//yAxis->applyNiceNumbers();
 		yAxis->setTickCount(6+1);
 		yAxis->setMinorTickCount(2);
 	}
 	else
 	{
-		qDebug() << "Setting yrange from" << min << "/" << max << "-->" << rMin*10 << "/" << rMax*10;
-		yAxis->setRange(rMin*10, rMax*10);
-		//yAxis->applyNiceNumbers();
-		yAxis->setTickCount(qRound((rMax*10-rMin*10)/10.)+1);
+		yAxis->setTickCount(qRound((rMax*s-rMin*s)/s)+1);
 		yAxis->setMinorTickCount(1);
 	}
 }
@@ -448,12 +482,25 @@ void AstroCalcChart::setYrangeR(qreal min, qreal max)
 	yMinR=min;
 	yMaxR=max;
 
-	qreal rMin=floor(yMinR/10);
-	qreal rMax=ceil(yMaxR/10);
+	// We have to find a scaling that has steps in an appropriate range.
+	const double logYDiff=log10(yMaxR-yMinR);
+	const double s=pow(10., floor(logYDiff)-1.);
 
-	qDebug() << "Setting yrangeR from" << min << "/" << max << "-->" << rMin*10 << "/" << rMax*10;
-	yAxisR->setRange(rMin*10, rMax*10);
-	//yAxis->applyNiceNumbers();
-	yAxisR->setTickCount(qRound((rMax*10-rMin*10)/10.)+1);
-	yAxisR->setMinorTickCount(1);
+	qreal rMin=floor(yMinR/s);
+	qreal rMax=ceil(yMaxR/s);
+
+	//qDebug() << "Setting yrangeR from" << min << "/" << max << "-->" << rMin*s << "/" << rMax*s;
+	yAxisR->setRange(rMin*s, rMax*s);
+	//yAxisR->applyNiceNumbers();
+	if (rMax-rMin > 3*s)
+	{
+		yAxis->setTickCount(6+1);
+		yAxis->setMinorTickCount(2);
+	}
+	else
+	{
+		yAxis->setTickCount(qRound((rMax*s-rMin*s)/s)+1);
+		yAxis->setMinorTickCount(1);
+	}
+
 }

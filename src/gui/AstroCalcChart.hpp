@@ -42,7 +42,8 @@ public:
 		     MonthlyElevation,
 		     AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1,
 		     AngularSize2, Declination2, Distance2, Elongation2, HeliocentricDistance2, Magnitude2, PhaseAngle2, Phase2, RightAscension2, TransitAltitude2,
-		     LunarElongation, LunarElongationLimit
+		     LunarElongation, LunarElongationLimit,
+		     pcDistanceAU, pcDistanceDeg // PlanetaryCalculator: distance between two SSO in AU and angle(degrees).
 		    };
 	Q_ENUM(Series)
 
@@ -81,7 +82,7 @@ public:
 	void drawTrivialLineY(Series s, const qreal y);
 
 public slots:
-	//virtual void retranslate();
+	virtual void retranslate();
 
 private slots:
 	//void setOptionStatus();
