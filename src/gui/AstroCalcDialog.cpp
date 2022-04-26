@@ -4694,14 +4694,14 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 		StelUtils::getJDFromDate(&startJD, year, 1, 1, 0, 0, 0);
 
 		int dYear = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()*graphsDuration) + 3;
-		int firstGraph = ui->graphsFirstComboBox->currentData().toInt();
-		int secondGraph = ui->graphsSecondComboBox->currentData().toInt();
+		AstroCalcChart::Series firstGraph  = AstroCalcChart::Series(ui->graphsFirstComboBox->currentData().toInt());
+		AstroCalcChart::Series secondGraph = AstroCalcChart::Series(ui->graphsSecondComboBox->currentData().toInt());
 
 		for (int i = -2; i <= dYear; i++)
 		{
 			JD = startJD + i;
 
-			if (firstGraph==GraphTransitAltitudeVsTime || secondGraph==GraphTransitAltitudeVsTime)
+			if (firstGraph==AstroCalcChart::TransitAltitude1 || secondGraph==AstroCalcChart::TransitAltitude2)
 			{
 				core->setJD(JD);
 				//UTCshift = core->getUTCOffset(JD) / 24.; // Fix DST shift...
@@ -4714,11 +4714,11 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 			aX.append(ltime);
 
 			core->setJD(JD);
+			core->update(0.0);
 
 			aY.append(computeGraphValue(ssObj, firstGraph));
 			bY.append(computeGraphValue(ssObj, secondGraph));
 
-			core->update(0.0);
 		}
 		core->setJD(currentJD);
 
@@ -4847,44 +4847,53 @@ void AstroCalcDialog::mouseOverGraphs(QMouseEvent* event)
 	ui->graphsPlot->replot();
 }
 
-double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const int graphType)
+double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const AstroCalcChart::Series graphType)
 {
 	double value = 0.;
 	switch (graphType)
 	{
-		case GraphMagnitudeVsTime:
+		case AstroCalcChart::Magnitude1:
+		case AstroCalcChart::Magnitude2:
 			value = static_cast<double>(ssObj->getVMagnitude(core));
 			break;
-		case GraphPhaseVsTime:
+		case AstroCalcChart::Phase1:
+		case AstroCalcChart::Phase2:
 			value = static_cast<double>(ssObj->getPhase(core->getObserverHeliocentricEclipticPos())) * 100.;
 			break;
-		case GraphDistanceVsTime:
+		case AstroCalcChart::Distance1:
+		case AstroCalcChart::Distance2:
 			value =  ssObj->getJ2000EquatorialPos(core).length();
 			break;
-		case GraphElongationVsTime:
+		case AstroCalcChart::Elongation1:
+		case AstroCalcChart::Elongation2:
 			value = ssObj->getElongation(core->getObserverHeliocentricEclipticPos()) * M_180_PI;
 			break;
-		case GraphAngularSizeVsTime:
+		case AstroCalcChart::AngularSize1:
+		case AstroCalcChart::AngularSize2:
 		{
 			value = ssObj->getAngularRadius(core) * (360. / M_PI);
 			if (value < 1.)
 				value *= 60.;
 			break;
 		}
-		case GraphPhaseAngleVsTime:
+		case AstroCalcChart::PhaseAngle1:
+		case AstroCalcChart::PhaseAngle2:
 			value = ssObj->getPhaseAngle(core->getObserverHeliocentricEclipticPos()) * M_180_PI;
 			break;
-		case GraphHDistanceVsTime:
+		case AstroCalcChart::HeliocentricDistance1:
+		case AstroCalcChart::HeliocentricDistance2:
 			value =  ssObj->getHeliocentricEclipticPos().length();
 			break;
-		case GraphTransitAltitudeVsTime:
+		case AstroCalcChart::TransitAltitude1:
+		case AstroCalcChart::TransitAltitude2:
 		{
 			double az, alt;
 			StelUtils::rectToSphe(&az, &alt, ssObj->getAltAzPosAuto(core));
 			value=alt*M_180_PI;
 			break;
 		}
-		case GraphRightAscensionVsTime:
+		case AstroCalcChart::RightAscension1:
+		case AstroCalcChart::RightAscension2:
 		{
 			double dec_equ, ra_equ;
 			StelUtils::rectToSphe(&ra_equ, &dec_equ, ssObj->getEquinoxEquatorialPos(core));
@@ -4894,14 +4903,16 @@ double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const int graphT
 				value -= 24.;
 			break;
 		}
-		case GraphDeclinationVsTime:
+		case AstroCalcChart::Declination1:
+		case AstroCalcChart::Declination2:
 		{
 			double dec_equ, ra_equ;
-			bool sign;
 			StelUtils::rectToSphe(&ra_equ, &dec_equ, ssObj->getEquinoxEquatorialPos(core));
 			value=dec_equ*M_180_PI;
 			break;
 		}
+		default:
+			qDebug() << "AstroCalc::computeGraphValue() Wrong call for " << graphType;
 	}
 	return value;
 }
@@ -4911,55 +4922,73 @@ void AstroCalcDialog::populateFunctionsList()
 	Q_ASSERT(ui->graphsFirstComboBox);
 	Q_ASSERT(ui->graphsSecondComboBox);
 
-	typedef QPair<QString, GraphsTypes> graph;
-	const QList<graph> functions = {
-		{ q_("Magnitude vs. Time"),    GraphMagnitudeVsTime},
-		{ q_("Phase vs. Time"),        GraphPhaseVsTime},
-		{ q_("Distance vs. Time"),     GraphDistanceVsTime},
-		{ q_("Elongation vs. Time"),   GraphElongationVsTime},
-		{ q_("Angular size vs. Time"), GraphAngularSizeVsTime},
-		{ q_("Phase angle vs. Time"),  GraphPhaseAngleVsTime},
+	typedef QPair<QString, AstroCalcChart::Series> graph;
+	const QList<graph> functionsF = {
+		{ q_("Magnitude vs. Time"),    AstroCalcChart::Magnitude1},
+		{ q_("Phase vs. Time"),        AstroCalcChart::Phase1},
+		{ q_("Distance vs. Time"),     AstroCalcChart::Distance1},
+		{ q_("Elongation vs. Time"),   AstroCalcChart::Elongation1},
+		{ q_("Angular size vs. Time"), AstroCalcChart::AngularSize1},
+		{ q_("Phase angle vs. Time"),  AstroCalcChart::PhaseAngle1},
 		// TRANSLATORS: The phrase "Heliocentric distance" may be long in some languages and you can short it to use in the drop-down list.
-		{ q_("Heliocentric distance vs. Time"), GraphHDistanceVsTime},
+		{ q_("Heliocentric distance vs. Time"), AstroCalcChart::HeliocentricDistance1},
 		// TRANSLATORS: The phrase "Transit altitude" may be long in some languages and you can short it to use in the drop-down list.
-		{ q_("Transit altitude vs. Time"), GraphTransitAltitudeVsTime},
+		{ q_("Transit altitude vs. Time"), AstroCalcChart::TransitAltitude1},
 		// TRANSLATORS: The phrase "Right ascension" may be long in some languages and you can short it to use in the drop-down list.
-		{ q_("Right ascension vs. Time"), GraphRightAscensionVsTime},
-		{ q_("Declination vs. Time"), GraphDeclinationVsTime}};
+		{ q_("Right ascension vs. Time"), AstroCalcChart::RightAscension1},
+		{ q_("Declination vs. Time"), AstroCalcChart::Declination1}};
+	const QList<graph> functionsS = {
+		{ q_("Magnitude vs. Time"),    AstroCalcChart::Magnitude2},
+		{ q_("Phase vs. Time"),        AstroCalcChart::Phase2},
+		{ q_("Distance vs. Time"),     AstroCalcChart::Distance2},
+		{ q_("Elongation vs. Time"),   AstroCalcChart::Elongation2},
+		{ q_("Angular size vs. Time"), AstroCalcChart::AngularSize2},
+		{ q_("Phase angle vs. Time"),  AstroCalcChart::PhaseAngle2},
+		// TRANSLATORS: The phrase "Heliocentric distance" may be long in some languages and you can short it to use in the drop-down list.
+		{ q_("Heliocentric distance vs. Time"), AstroCalcChart::HeliocentricDistance2},
+		// TRANSLATORS: The phrase "Transit altitude" may be long in some languages and you can short it to use in the drop-down list.
+		{ q_("Transit altitude vs. Time"), AstroCalcChart::TransitAltitude2},
+		// TRANSLATORS: The phrase "Right ascension" may be long in some languages and you can short it to use in the drop-down list.
+		{ q_("Right ascension vs. Time"), AstroCalcChart::RightAscension2},
+		{ q_("Declination vs. Time"), AstroCalcChart::Declination2}};
 
-	QComboBox* first = ui->graphsFirstComboBox;
-	QComboBox* second = ui->graphsSecondComboBox;
-	first->blockSignals(true);
-	second->blockSignals(true);
 
-	int indexF = first->currentIndex();
-	QVariant selectedFirstId = first->itemData(indexF);
-	int indexS = second->currentIndex();
-	QVariant selectedSecondId = second->itemData(indexS);
+	QComboBox* firstCB = ui->graphsFirstComboBox;
+	QComboBox* secondCB = ui->graphsSecondComboBox;
+	firstCB->blockSignals(true);
+	secondCB->blockSignals(true);
 
-	first->clear();
-	second->clear();
+	int indexF = firstCB->currentIndex();
+	QVariant selectedFirstId = firstCB->itemData(indexF);
+	int indexS = secondCB->currentIndex();
+	QVariant selectedSecondId = secondCB->itemData(indexS);
 
-	for (const auto& f : functions)
+	firstCB->clear();
+	secondCB->clear();
+
+	for (const auto& f : functionsF)
 	{
-		first->addItem(f.first, f.second);
-		second->addItem(f.first, f.second);
+		firstCB->addItem(f.first, f.second);
+	}
+	for (const auto& f : functionsS)
+	{
+		secondCB->addItem(f.first, f.second);
 	}
 
-	indexF = first->findData(selectedFirstId, Qt::UserRole, Qt::MatchCaseSensitive);
+	indexF = firstCB->findData(selectedFirstId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (indexF < 0)
-		indexF = first->findData(conf->value("astrocalc/graphs_first_id", GraphMagnitudeVsTime).toInt(), Qt::UserRole, Qt::MatchCaseSensitive);
-	first->setCurrentIndex(indexF);
-	first->model()->sort(0);
+		indexF = firstCB->findData(conf->value("astrocalc/graphs_first_id", AstroCalcChart::Magnitude1).toInt(), Qt::UserRole, Qt::MatchCaseSensitive);
+	firstCB->setCurrentIndex(indexF);
+	firstCB->model()->sort(0);
 
-	indexS = second->findData(selectedSecondId, Qt::UserRole, Qt::MatchCaseSensitive);
+	indexS = secondCB->findData(selectedSecondId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (indexS < 0)
-		indexS = second->findData(conf->value("astrocalc/graphs_second_id", GraphPhaseVsTime).toInt(), Qt::UserRole, Qt::MatchCaseSensitive);
-	second->setCurrentIndex(indexS);
-	second->model()->sort(0);
+		indexS = secondCB->findData(conf->value("astrocalc/graphs_second_id", AstroCalcChart::Phase2).toInt(), Qt::UserRole, Qt::MatchCaseSensitive);
+	secondCB->setCurrentIndex(indexS);
+	secondCB->model()->sort(0);
 
-	first->blockSignals(false);
-	second->blockSignals(false);
+	firstCB->blockSignals(false);
+	secondCB->blockSignals(false);
 }
 
 void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
@@ -4984,56 +5013,56 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 
 	switch (ui->graphsFirstComboBox->currentData().toInt())
 	{
-		case GraphMagnitudeVsTime:
+		case AstroCalcChart::Magnitude1:
 			yAxis1Legend = q_("Magnitude");
 			if (minY1 < -1000.) minY1 = 0.0;
 			if (maxY1 > 1000.) maxY1 = 6.0;
 			direction1 = true;
 			break;
-		case GraphPhaseVsTime:
+		case AstroCalcChart::Phase1:
 			yAxis1Legend = QString("%1, %").arg(q_("Phase"));
 			if (minY1 < -1000.) minY1 = 0.0;
 			if (maxY1 > 1000.) maxY1 = 100.0;
 			break;
-		case GraphDistanceVsTime:
+		case AstroCalcChart::Distance1:
 			yAxis1Legend = QString("%1, %2").arg(q_("Distance"), distMU);
 			if (minY1 < -1000.) minY1 = 0.0;
 			if (maxY1 > 1000.) maxY1 = 50.0;
 			break;
-		case GraphElongationVsTime:
+		case AstroCalcChart::Elongation1:
 			yAxis1Legend = QString("%1, %2").arg(q_("Elongation"), QChar(0x00B0));
 			if (minY1 < -1000.) minY1 = 0.0;
 			if (maxY1 > 1000.) maxY1 = 180.0;
 			break;
-		case GraphAngularSizeVsTime:
+		case AstroCalcChart::AngularSize1:
 			yAxis1Legend = QString("%1, %2").arg(q_("Angular size"), asMU);
 			if (minY1 < -1000.) minY1 = 0.0;
 			if (maxY1 > 1000.) maxY1 = 30.0;
 			break;
-		case GraphPhaseAngleVsTime:
+		case AstroCalcChart::PhaseAngle1:
 			yAxis1Legend = QString("%1, %2").arg(q_("Phase angle"), QChar(0x00B0));
 			if (minY1 < -1000.) minY1 = 0.0;
 			if (maxY1 > 1000.) maxY1 = 180.0;
 			break;
-		case GraphHDistanceVsTime:
+		case AstroCalcChart::HeliocentricDistance1:
 			// TRANSLATORS: The phrase "Heliocentric distance" may be long in some languages and you can abbreviate it.
 			yAxis1Legend = QString("%1, %2").arg(qc_("Heliocentric distance","axis name"), distMU);
 			if (minY1 < -1000.) minY1 = 0.0;
 			if (maxY1 > 1000.) maxY1 = 50.0;
 			break;
-		case GraphTransitAltitudeVsTime:
+		case AstroCalcChart::TransitAltitude1:
 			// TRANSLATORS: The phrase "Transit altitude" may be long in some languages and you can abbreviate it.
 			yAxis1Legend = QString("%1, %2").arg(qc_("Transit altitude","axis name"), QChar(0x00B0));
 			if (minY1 < -1000.) minY1 = 0.0;
 			if (maxY1 > 1000.) maxY1 = 90.0;
 			break;
-		case GraphRightAscensionVsTime:
+		case AstroCalcChart::RightAscension1:
 			// TRANSLATORS: The phrase "Right ascension" may be long in some languages and you can abbreviate it.
 			yAxis1Legend = QString("%1, %2").arg(qc_("Right ascension","axis name"), qc_("h","time"));
 			if (minY1 < -1000.) minY1 = 0.0;
 			if (maxY1 > 1000.) maxY1 = 24.0;
 			break;
-		case GraphDeclinationVsTime:
+		case AstroCalcChart::Declination1:
 			yAxis1Legend = QString("%1, %2").arg(q_("Declination"), QChar(0x00B0));
 			if (minY1 < -1000.) minY1 = -90.0;
 			if (maxY1 > 1000.) maxY1 = 90.0;
@@ -5042,56 +5071,56 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 
 	switch (ui->graphsSecondComboBox->currentData().toInt())
 	{
-		case GraphMagnitudeVsTime:
+		case AstroCalcChart::Magnitude2:
 			yAxis2Legend = q_("Magnitude");
 			if (minY2 < -1000.) minY2 = 0.0;
 			if (maxY2 > 1000.) maxY2 = 6.0;
 			direction2 = true;
 			break;
-		case GraphPhaseVsTime:
+		case AstroCalcChart::Phase2:
 			yAxis2Legend = QString("%1, %").arg(q_("Phase"));
 			if (minY2 < -1000.) minY2 = 0.0;
 			if (maxY2 > 1000.) maxY2 = 100.0;
 			break;
-		case GraphDistanceVsTime:
+		case AstroCalcChart::Distance2:
 			yAxis2Legend = QString("%1, %2").arg(q_("Distance"), distMU);
 			if (minY2 < -1000.) minY2 = 0.0;
 			if (maxY2 > 1000.) maxY2 = 50.0;
 			break;
-		case GraphElongationVsTime:
+		case AstroCalcChart::Elongation2:
 			yAxis2Legend = QString("%1, %2").arg(q_("Elongation"), QChar(0x00B0));
 			if (minY2 < -1000.) minY2 = 0.0;
 			if (maxY2 > 1000.) maxY2 = 180.0;
 			break;
-		case GraphAngularSizeVsTime:
+		case AstroCalcChart::AngularSize2:
 			yAxis2Legend = QString("%1, %2").arg(q_("Angular size"), asMU);
 			if (minY2 < -1000.) minY2 = 0.0;
 			if (maxY2 > 1000.) maxY2 = 30.0;
 			break;
-		case GraphPhaseAngleVsTime:
+		case AstroCalcChart::PhaseAngle2:
 			yAxis2Legend = QString("%1, %2").arg(q_("Phase angle"), QChar(0x00B0));
 			if (minY2 < -1000.) minY2 = 0.0;
 			if (maxY2 > 1000.) maxY2 = 180.0;
 			break;
-		case GraphHDistanceVsTime:
+		case AstroCalcChart::HeliocentricDistance2:
 			// TRANSLATORS: The phrase "Heliocentric distance" may be long in some languages and you can short it.
 			yAxis2Legend = QString("%1, %2").arg(q_("Heliocentric distance"), distMU);
 			if (minY2 < -1000.) minY2 = 0.0;
 			if (maxY2 > 1000.) maxY2 = 50.0;
 			break;
-		case GraphTransitAltitudeVsTime:
+		case AstroCalcChart::TransitAltitude2:
 			// TRANSLATORS: The phrase "Transit altitude" may be long in some languages and you can short it.
 			yAxis2Legend = QString("%1, %2").arg(q_("Transit altitude"), QChar(0x00B0));
 			if (minY2 < -1000.) minY2 = 0.0;
 			if (maxY2 > 1000.) maxY2 = 90.0;
 			break;
-		case GraphRightAscensionVsTime:
+		case AstroCalcChart::RightAscension2:
 			// TRANSLATORS: The phrase "Right ascension" may be long in some languages and you can short it.
 			yAxis2Legend = QString("%1, %2").arg(qc_("Right ascension","axis name"), qc_("h","time"));
 			if (minY2 < -1000.) minY2 = 0.0;
 			if (maxY2 > 1000.) maxY2 = 24.0;
 			break;
-		case GraphDeclinationVsTime:
+		case AstroCalcChart::Declination2:
 			yAxis2Legend = QString("%1, %2").arg(q_("Declination"), QChar(0x00B0));
 			if (minY2 < -1000.) minY2 = -90.0;
 			if (maxY2 > 1000.) maxY2 = 90.0;

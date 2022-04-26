@@ -167,21 +167,6 @@ public:
 		WUTCount                //! total number of columns
 	};
 
-	//! Defines the type of graphs
-	//! @enum GraphsTypes
-	enum GraphsTypes {
-		GraphMagnitudeVsTime        =  1,
-		GraphPhaseVsTime            =  2,
-		GraphDistanceVsTime         =  3,
-		GraphElongationVsTime       =  4,
-		GraphAngularSizeVsTime      =  5,
-		GraphPhaseAngleVsTime       =  6,
-		GraphHDistanceVsTime        =  7,
-		GraphTransitAltitudeVsTime  =  8,
-		GraphRightAscensionVsTime   =  9,
-		GraphDeclinationVsTime      = 10
-	};
-
 	//! Defines the number and the order of the columns in the lunar eclipse table
 	//! @enum LunarEclipseColumns
 	enum LunarEclipseColumns {
@@ -486,7 +471,7 @@ private:
 	void prepareAngularDistanceAxesAndGraph();
 	//! Populates the drop-down list of time intervals for WUT tool.
 	void populateTimeIntervalsList();	
-	double computeGraphValue(const PlanetP &ssObj, const int graphType);
+	double computeGraphValue(const PlanetP &ssObj, const AstroCalcChart::Series graphType);
 
 	void populateFunctionsList();	
 	double computeMaxElevation(StelObjectP obj);
