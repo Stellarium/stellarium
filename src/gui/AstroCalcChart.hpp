@@ -27,9 +27,8 @@
 #include <QDateTimeAxis>
 //using namespace QtCharts;
 
-//! @class AstroCalcAltVsTimeChart
-//! This class encapsulates data for the Altitude vs. Time Chart in AstroCalc.
-//! The next iterations will try to re-use the chart in place of other plots.
+//! @class AstroCalcChart
+//! This class encapsulates data for the Altitude vs. Time and the other line Charts in AstroCalc.
 class AstroCalcChart : public QtCharts::QChart
 {
 	Q_OBJECT
