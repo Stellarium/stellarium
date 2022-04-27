@@ -946,6 +946,11 @@ distributions where bright meteors are more frequent than average,
 while values above 3.0 mean that the share of faint meteors is larger
 than usual.
 
+\paragraph{Solar longitude}
+
+The \indexterm{solar longitude} (equinox J2000) gives the position of the Earth on its orbit.
+It is a more appropriate information on a meteor shower than the date.
+
 \subsection{Section \big[MeteorShowers\big] in config.ini file}
 %\label{sec:plugins:MeteorShowers:configuration}
 
@@ -977,65 +982,98 @@ colorIR                & R,G,B & Color for marker of inactive meteor showers \\\
 To add a new meteor shower, you just need to:
 \begin{enumerate}
 \item Copy the code of some valid meteor shower;
-\item Paste it in the line 6 (right after the ``showers'': \{) of the showers.json document;
+\item Paste it in the line 6 (right after the ``showers'': \{) of the MeteorShowers.json document;
 \item Replace the information according with your needs.
 \end{enumerate}
-Note commas and brackets, they are very important! For example, below is a record for \textit{Northern Taurids}:
+Note commas and brackets, they are very important!
+
+\begin{configfile}[\footnotesize]
+"Three-letter code":
+    {
+        "designation": "Name",
+        "IAUNo": "IAU shower number",
+        "activity":
+        [
+        {
+            "year": "generic",
+            "zhr": Maximum ZHR (-1 if variable),
+            "variable": "Minimum-maximum (if variable)",
+            "start": Solar longitude at start,
+            "finish": Solar longitude at finish,
+            "peak": Solar longitude at peak,
+            "disttype": Type of distribution function
+                        (0=Gauss, 1=Lorentz),
+            "b1": Slope of distribution function
+                  before peak,
+            "b2": Slope of distribution function
+                  after peak
+        }
+        ],
+        "speed": Geocentric speed (km/s),
+        "radiantAlpha": "Right Ascension (J2000) (degree)",
+        "radiantDelta": "Declination (J2000) (degree)",
+        "driftAlpha": "Radiant drift in Right Ascension",
+        "driftDelta": "Radiant drift in Declination",
+        "colors":
+        [
+        {
+            "color": "white",
+            "intensity": 70
+        },
+        {
+            "color": "blueGreen",
+            "intensity": 30
+        }
+        ],
+        "parentObj": "Parent object",
+        "pidx": population index
+    },
+\end{configfile}
+
+For example, below is a record for \textit{Northern Taurids}:
 
 \begin{configfile}[\footnotesize]
 "NTA":
-	{
-		"designation": "Northern Taurids",
-		"activity":
-		[
-		{
-			"year": "generic",
-			"zhr": 5,
-			"start": "09.25",
-			"finish": "11.25",
-			"peak": "11.12"
-		},
-		{
-			"year": "2014",
-			"start": "10.20",
-			"finish": "12.10"
-		},
-		{
-			"year": "2013",
-			"start": "10.20",
-			"finish": "12.10"
-		},
-		{
-			"year": "2012",
-			"start": "10.20",
-			"finish": "12.10"
-		},
-		{
-			"year": "2011",
-			"start": "10.20",
-			"finish": "12.10"
-		}
-		],
-		"speed": 29,
-		"radiantAlpha": "58",
-		"radiantDelta": "+22",
-		"driftAlpha": "5",
-		"driftDelta": "1",
-		"colors":
-		[
-		{
-			"color": "yellow",
-			"intensity": 80
-		},
-		{
-			"color": "white",
-			"intensity": 20
-		}
-		],
-		"parentObj": "Comet C/1917 F1 (Mellish)",
-		"pidx": 2.3
-	},
+    {
+        "designation": "Northern Taurids",
+        "IAUNo": "17",
+        "activity":
+        [
+        {
+            "year": "generic",
+            "zhr": 5,
+            "start": 206,
+            "finish": 258,
+            "peak": 230
+        }
+        ],
+        "speed": 29,
+        "radiantAlpha": "58",
+        "radiantDelta": "+22",
+        "driftAlpha": "1.03",
+        "driftDelta": "0.26",
+        "colors":
+        [
+        {
+            "color": "yellow",
+            "intensity": 80
+        },
+        {
+            "color": "white",
+            "intensity": 20
+        }
+        ],
+        "parentObj": "Comet 2P/Encke",
+        "pidx": 2.3
+    },
 \end{configfile}
+
+\subsection{Notes}
+\begin{itemize}
+\item This plugin uses two models \citep{1994A&A...287..990J} and \citep{1998Jenniskens} to calculate ZHR, assumming that the activity profile of meteor shower follows the double exponential shape.
+\item To predict the local hourly rate, altitude of radiant and limiting magnitude of the sky are taken into account. Moonlight can also reduce the hourly rate, but it doesn't take into account.
+\item Most of numerical data for past meteor outbursts (Leonids, etc.) come from \citep{2006Jenniskens.book}. There are wide-range reported values of maximum ZHR for 1833 and 1966 Leonids \citep{1999Brown}. We decided to use maximum number of 150,000 to demonstrate meteor outbursts with very high rate.
+\end{itemize}
 
 \subsection{Further Information}
 \label{sec:plugins:MeteorShowers:Further}
@@ -1044,10 +1082,11 @@ You can get more info about meteor showers here:
 \begin{itemize}
 \item Wikipedia about Meteor showers: \url{https://en.wikipedia.org/wiki/Meteor_Showers}
 \item International Meteor Organization: \url{https://www.imo.net/}
+\item IAU Meteor Data Center: \url{https://www.ta3.sk/IAUC22DB/MDC2007/}
 \end{itemize}
 
 \subsection*{Acknowledgements}
-This plugin was created as project of ESA Summer of Code in Space 2013\footnote{\url{http://sophia.estec.esa.int/socis2013/?q=about}}.
+This plugin was initially created as project of ESA Summer of Code in Space 2013\footnote{\url{http://sophia.estec.esa.int/socis2013/?q=about}}.
 
 
 \newpage
