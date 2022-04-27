@@ -230,12 +230,12 @@ void MSConfigDialog::setAboutHtml()
 		"</tr>"
 		"<tr>"
 			"<td><strong>" + q_("Contributors") + ":</strong></td>"
-			"<td>Alexander Wolf</td>"
+			"<td>Alexander Wolf<br />Worachate Boonplod</td>"
 		"</tr>"
 	"</table>"
 	"<p>"
 	+ q_(
-		"This plugin enables you to simulate periodic meteor showers and "
+		"This plugin enables you to simulate and predict periodic meteor showers and "
 		"to display a marker for each active and inactive radiant."
 	) +
 	"</p>"
@@ -243,8 +243,8 @@ void MSConfigDialog::setAboutHtml()
 	+ q_(
 		"By a single click on the radiant's marker, you can see all the "
 		"details about its position and activity. Most data used on this "
-		"plugin comes from the official <a href=\"http://imo.net\">International "
-		"Meteor Organization</a> catalog."
+		"plugin comes from the official <a href=\"https://imo.net\">International "
+		"Meteor Organization</a> catalog and <a href=\"https://www.ta3.sk/IAUC22DB/MDC2007/\">IAU Meteor Data Center</a>."
 	) +
 	"</p>"
 	+ q_(
@@ -269,7 +269,13 @@ void MSConfigDialog::setAboutHtml()
 			"</li>"
 		"</ul>"
 	"</p>"
-	) +
+	)
+	+ "<p>"
+	+ q_("This plugin uses two models to calculate ZHR, assumming that the activity profile of meteor "
+		"shower follows the double exponential shape. To predict the local hourly rate, altitude of "
+		"radiant and limiting magnitude of the sky are taken into account. "
+		"Moonlight can also reduce the hourly rate, but it doesn't take into account.") +
+	"</p>" +
 	"<h3>" + q_("Terms") + "</h3>"
 	"<p><b>" + q_("Meteor shower") + "</b>"
 		"<br />" +
@@ -295,7 +301,7 @@ void MSConfigDialog::setAboutHtml()
 		   "that shower.") +
 	"</p>"
 	"<p>" + q_("Many showers have a radiant point that changes position during the interval when it "
-		   "appears. For example, the radiant point for the Delta Aurigids drifts by more than a "
+		   "appears. For example, the radiant point for the October Delta Aurigids drifts by more than a "
 		   "degree per night.") +
 	"</p>"
 	"<p><b>" + q_("Zenithal Hourly Rate (ZHR)") + "</b>"
@@ -313,6 +319,10 @@ void MSConfigDialog::setAboutHtml()
 		   "than average, while values above 3.0 mean that the share of faint meteors is larger "
 		   "than usual.") +
 	"</p>"
+	"<p><b>" + q_("Solar longitude") + "</b>"
+		"<br />" +
+		q_("Solar longitude (equinox J2000) gives the position of the Earth on its orbit. "
+		   "It is a more appropriate information on a meteor shower than the date.") +
 	"<h3>" + q_("Notes") + "</h3>"
 	"<p>" + q_("This plugin was initially created as a project of the ESA Summer of Code in Space 2013.") + "</p>"
 	"<h3>" + q_("Info") + "</h3>"
@@ -321,7 +331,9 @@ void MSConfigDialog::setAboutHtml()
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	"<li>" + QString(q_("%1Meteor shower%2 - article in Wikipedia")).arg("<a href=\"https://en.wikipedia.org/wiki/Meteor_Showers\">", "</a>") + "</li>"
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	"<li>" + QString(q_("%1International Meteor Organization%2")).arg("<a href=\"http://www.imo.net/\">", "</a>") + "</li>"
+	"<li>" + QString(q_("%1International Meteor Organization%2")).arg("<a href=\"https://www.imo.net/\">", "</a>") + "</li>"
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	"<li>" + QString(q_("%1IAU Meteor Data Center%2")).arg("<a href=\"https://www.ta3.sk/IAUC22DB/MDC2007/\">", "</a>") + "</li>"
 	"</ul>";
 
 	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Meteor Showers plugin");
