@@ -1,12 +1,13 @@
 ﻿#
 # See https://github.com/marketplace/actions/auto-assign-action
 #
-name: 'Auto Assign'
+name: 'Auto Assign (SC)'
 on:
   pull_request_target:
     types: [opened, reopened, ready_for_review]
-    paths-ignore:
+    paths: 
       - 'skycultures/**'
+
 
 jobs:
   add-reviews:
@@ -14,3 +15,5 @@ jobs:
     name: Add reviews
     steps:
       - uses: kentaro-m/auto-assign-action@v1.2.1
+        with:
+          configuration-path: '.github/auto_assign_sc.yml'
