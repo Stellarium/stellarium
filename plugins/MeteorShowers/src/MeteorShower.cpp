@@ -50,7 +50,7 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 		|| !map.contains("radiantAlpha") || !map.contains("radiantDelta"))
 	{
 		qWarning() << "MeteorShower: INVALID meteor shower!" << map.value("showerID").toString();
-		qWarning() << "MeteorShower: Please, check your 'showers.json' catalog!";
+		qWarning() << "MeteorShower: Please, check your 'MeteorShowers.json' catalog!";
 		return;
 	}
 
@@ -116,7 +116,7 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 			if (!ok)
 			{
 				qWarning() << "[MeteorShower] INVALID data for " << m_showerID;
-				qWarning() << "[MeteorShower] Please, check your 'showers.json' catalog!";
+				qWarning() << "[MeteorShower] Please, check your 'MeteorShowers.json' catalog!";
 				return;
 			}
 		}
@@ -178,7 +178,7 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 		if (totalIntensity != 100) {
 			qWarning() << "[MeteorShower] INVALID data for "
 				   << m_showerID << "The total intensity must be equal to 100";
-			qWarning() << "[MeteorShower] Please, check your 'showers.json' catalog!";
+			qWarning() << "[MeteorShower] Please, check your 'MeteorShowers.json' catalog!";
 			m_colors.clear();
 		}
 	}
@@ -551,7 +551,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		}
 		if (m_showerID != "ANT")
 		{
-			oss << QString("%1: %2").arg(q_("IAU Number"), m_IAUNumber) << "<br />";
+			oss << QString("%1: %2").arg(q_("IAU shower number"), m_IAUNumber) << "<br />";
 			oss << QString("%1: %2/%3").arg(q_("Radiant drift (per solar longitude)"), sDriftRA, sDriftDE) << "<br />";
 		}
 
@@ -572,7 +572,6 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 			oss << QString("%1: %2").arg(q_("Parent body"), q_(m_parentObj)) << "<br />";
 
 		QString actStr = q_("Activity");
-		StelCore* core = StelApp::getInstance().getCore();
 		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 		double eclJ2000 = ssystem->getEarth()->getRotObliquity(2451545.0);
 		double ra_equ, dec_equ, currentLambda, beta, az, alt;
