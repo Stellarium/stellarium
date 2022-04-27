@@ -42,7 +42,7 @@ public:
 		QString name;
 		QString type;
 		double peak;
-		double peakyear;
+		int peakyear;
 		int zhrMax;
 		int zhrMin;
 	};
