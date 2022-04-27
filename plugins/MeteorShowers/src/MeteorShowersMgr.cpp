@@ -83,7 +83,7 @@ void MeteorShowersMgr::init()
 	StelFileMgr::makeSureDirExistsAndIsWritable(userDir);
 
 	// Loads the JSON catalog
-	m_catalogPath = userDir + "/showers.json";
+	m_catalogPath = userDir + "/MeteorShowers.json";
 	if (!loadCatalog(m_catalogPath))
 	{
 		displayMessage(q_("The current catalog of Meteor Showers is invalid!"), "#bb0000");
@@ -170,8 +170,12 @@ void MeteorShowersMgr::loadConfig()
 	setEnableMarker(m_conf->value(MS_CONFIG_PREFIX + "/flag_radiant_marker", true).toBool());
 	setUpdateFrequencyHours(m_conf->value(MS_CONFIG_PREFIX + "/update_frequency_hours", 720).toInt());
 	setEnableAutoUpdates(m_conf->value(MS_CONFIG_PREFIX + "/automatic_updates_enabled", true).toBool());
-	setUrl(m_conf->value(MS_CONFIG_PREFIX + "/url", "https://stellarium.org/json/showers.json").toString());
-	setLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update", "2015-07-01T00:00:00").toDateTime());
+	if (m_conf->contains(MS_CONFIG_PREFIX + "/url"))
+	{
+		m_conf->remove(MS_CONFIG_PREFIX + "/url");
+	}
+	setUrl(m_conf->value(MS_CONFIG_PREFIX + "/url", "https://stellarium.org/json/MeteorShowers.json").toString());
+	setLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update", "2022-04-27T00:00:00").toDateTime());
 	setStatusOfLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update_status", 0).toInt());	
 }
 
@@ -223,6 +227,7 @@ bool MeteorShowersMgr::loadCatalog(const QString& jsonPath)
 
 	QVariantMap map = json["showers"].toObject().toVariantMap();
 	m_meteorShowers->loadMeteorShowers(map);
+	qDebug() << "[MeteorShowersMgr] Version of the format of the catalog:" << json["version"].toInt();
 
 	return true;
 }
@@ -250,7 +255,7 @@ bool MeteorShowersMgr::restoreDefaultCatalog(const QString& destination)
 		return false;
 	}
 
-	QFile defaultJson(":/MeteorShowers/showers.json");
+	QFile defaultJson(":/MeteorShowers/MeteorShowers.json");
 	if (!defaultJson.copy(destination))
 	{
 		qWarning() << "[MeteorShowersMgr] Cannot copy the default catalog!";
@@ -642,7 +647,7 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Meteor Showers");
 	info.authors = "Marcos Cardinot";
 	info.contact = STELLARIUM_DEV_URL;
-	info.acknowledgements = N_("This plugin was created in the 2013 campaign of the ESA Summer of Code in Space programme.");
+	info.acknowledgements = N_("This plugin was initially created in the 2013 campaign of the ESA Summer of Code in Space programme.");
 	info.description = N_(
 	"<p>"
 		"This plugin enables you to simulate periodic meteor showers and "
@@ -652,7 +657,7 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 		"By a single click on the radiant's marker, you can see all the "
 		"details about its position and activity. Most data used on this "
 		"plugin comes from the official <a href=\"http://imo.net\">International "
-		"Meteor Organization</a> catalog."
+		"Meteor Organization</a> catalog and <a href=\"https://www.ta3.sk/IAUC22DB/MDC2007/\">IAU Meteor Data Center</a>."
 	"</p>"
 	"<p>"
 		"It has three types of markers:"
