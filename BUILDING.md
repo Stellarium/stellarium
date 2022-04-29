@@ -121,42 +121,46 @@ build without QtWebEngine support. The result is shown in the system web browser
 - Install the latest version of [Apple's Developer Tools](https://developer.apple.com/xcode/). 
 - Install [Homebrew](https://brew.sh/). 
 - Install required packages:
-```
-$ brew install cmake git gettext
-$ brew link gettext --force
-```
+  ```
+  $ brew install cmake git gettext
+  $ brew link gettext --force
+  ```
 
-#### OSX 11 and above
-If 
-```
-$ brew link gettext --force
-```
+  On MacOS 11 and above, if
+  ```
+  $ brew link gettext --force
+  ```
 
-failed due to :
-```
-Linking /usr/local/Cellar/gettext/0.21...
-Error: Could not symlink include/autosprintf.h
-/usr/local/include is not writable.
-```
-Try the following:
+  failed due to :
+  ```
+  Linking /usr/local/Cellar/gettext/0.21...
+  Error: Could not symlink include/autosprintf.h
+  /usr/local/include is not writable.
+  ```
+  Try the following:
 
-```
-$ sudo mkdir /usr/local/include
-$ sudo chown -R $(whoami) $(brew --prefix)/*
+  ```
+  $ sudo mkdir /usr/local/include
+  $ sudo chown -R $(whoami) $(brew --prefix)/*
 
-```
+  ```
 
-- Install latest Qt:
-```
-$ brew install qt
-```
-- Add Qt to your PATH environment variable, adding to your `.bash_profile` file the following line:
-```
-export PATH=/usr/local/opt/qt/bin:$PATH
-```
+- Install latest Qt 5:
+  ```
+  $ brew install qt@5
+  ```
+- Add Qt to your PATH environment variable  
+  Intel Mac: add the following line to `~/.bash_profile` (Bash) or `~/.zprofile` (Zsh):
+  ```
+  export PATH=/usr/local/opt/qt@5/bin:$PATH
+  ```
+  ARM-based (Apple Silicon) Mac: add the following line to `~/.bash_profile` (Bash) or `~/.zprofile` (Zsh):
+  ```
+  export PATH=/opt/homebrew/opt/qt@5/bin:$PATH
+  ```
 
-You may using the distribution from the Qt Company to install the [latest stable version](https://www.qt.io/download-qt-installer) 
-of Qt. In this case adding Qt to your PATH environment variable will to adding to your `.bash_profile` 
+You may using the distribution from the Qt Company to install the [latest stable version](https://www.qt.io/download-qt-installer)
+of Qt. In this case adding Qt to your PATH environment variable will to adding to your `~/.bash_profile` (Bash) or `~/.zprofile` (Zsh)
 file the following line (for example we installed Qt 5.12.12):
 ```
 export PATH=~/Qt/5.12/clang_64/bin:$PATH
@@ -164,7 +168,7 @@ export PATH=~/Qt/5.12/clang_64/bin:$PATH
 
 #### MacOS without QtWebEngine
 
-On the new ARM-based Macs, there is no support for QtWebEngine or it buggy (QtWebEngine in Qt 5.15.2). 
+On ARM-based (Apple Silicon) Macs, there is no support for QtWebEngine or it buggy (QtWebEngine in Qt 5.15.2). 
 The CMake script will check installed `QtWebEngine` libraries and if then is not in system then 
 Stellarium will build without QtWebEngine support. The result is shown in the system web browser.
 
@@ -453,6 +457,11 @@ $ make install
 ```
 
 You'll find now an application `Stellarium.app` with the correct icon in the build directory.
+
+On ARM-based (Apple Silicon) Macs, ARM application need to be code signed. To sign the application with an ad-hoc signature:
+```
+codesign --force --deep -s - Stellarium.app
+```
 
 To create the DMG file (Apple Disk Image) run:
 ```
