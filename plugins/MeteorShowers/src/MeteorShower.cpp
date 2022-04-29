@@ -58,17 +58,17 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 	m_designation  = map.value("designation").toString();
 	m_IAUNumber = map.value("IAUNo").toString();
 	m_speed = map.value("speed").toInt();
-	m_radiantAlpha = StelUtils::getDecAngle(map.value("radiantAlpha").toString());
-	m_radiantDelta = StelUtils::getDecAngle(map.value("radiantDelta").toString());
+	m_radiantAlpha = map.value("radiantAlpha").toFloat()*M_PI_180;
+	m_radiantDelta = map.value("radiantDelta").toFloat()*M_PI_180;
 	// initialize position to keep valgrind happy
 	StelUtils::spheToRect(m_radiantAlpha, m_radiantDelta, m_position);
 	m_parentObj = map.value("parentObj").toString();
 	m_pidx = map.value("pidx").toFloat();
 
-	// Rate of radiant drift from IAU MDC database (in degrees per solar longitude)
+	// Rate of radiant drift from IAU MDC database (degree per solar longitude)
 	// https://www.ta3.sk/IAUC22DB/MDC2007/
-	m_driftAlpha = static_cast<float>(StelUtils::getDecAngle(map.value("driftAlpha").toString()));
-	m_driftDelta = static_cast<float>(StelUtils::getDecAngle(map.value("driftDelta").toString()));
+	m_driftAlpha = static_cast<float>(map.value("driftAlpha").toFloat()*M_PI_180);
+	m_driftDelta = static_cast<float>(map.value("driftDelta").toFloat()*M_PI_180);
 
 	// Antihelion radiant
 	if (m_showerID == "ANT")
