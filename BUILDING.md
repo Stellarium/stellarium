@@ -458,6 +458,11 @@ $ make install
 
 You'll find now an application `Stellarium.app` with the correct icon in the build directory.
 
+On ARM-based (Apple Silicon) Macs, ARM application need to be code signed. To sign the application with an ad-hoc signature:
+```
+codesign --force --deep -s - Stellarium.app
+```
+
 To create the DMG file (Apple Disk Image) run:
 ```
 $ mkdir Stellarium
