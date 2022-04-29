@@ -136,6 +136,9 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 		d.disttype = activityMap.value("disttype").toInt();
 		d.b1 = activityMap.value("b1").toDouble();
 		d.b2 = activityMap.value("b2").toDouble();
+		// set default value if there is no value in the database
+		if (d.b1 == 0) d.b1 = 0.19;
+		if (d.b2 == 0) d.b2 = 0.19;
 
 		m_activities.append(d);
 	}
@@ -658,8 +661,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		// Jenniskens P. (1994), "Meteor stream activity I. The annual streams", Astron. Astrophys., 287, 990-1013.
 
 		double diffLong = (currentLambda / M_PI_180) - m_activity.peak;
-		double b = 0.19; // mean slope for some showers that we don't have this value
-	
+		double b;
 		if (m_activity.disttype == 0) // Gaussian distribution
 		{
 			if (diffLong<0.)
@@ -684,29 +686,32 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		if (m_activity.zhr > 0)
 		{
 			oss << QString("ZHR<sub>max</sub>: %1").arg(m_activity.zhr) << "<br />";
-			int currentZHR=0, localHR=0;
-			if (m_activity.disttype == 0)
+			if (m_status != INACTIVE)
 			{
-				// Gaussian ZHR-profile for normal meteor showers
-				currentZHR = qRound(m_activity.zhr * pow(10.,-(b * abs(diffLong))));
-			}
-			else
-			{
-				// Lorentz ZHR-profile (better for meteor outbursts with very high ZHR)
-				currentZHR = qRound(m_activity.zhr*(b*b/4.) / ((diffLong*diffLong)+(b*b/4.)));
-			} 
-			if (m_showerID == "ANT") currentZHR = 4;
+				int currentZHR=0, localHR=0;
+				if (m_activity.disttype == 0)
+				{
+					// Gaussian ZHR-profile for normal meteor showers
+					currentZHR = qRound(m_activity.zhr * pow(10.,-(b * abs(diffLong))));
+				}
+				else
+				{
+					// Lorentz ZHR-profile (better for meteor outbursts with very high ZHR)
+					currentZHR = qRound(m_activity.zhr*(b*b/4.) / ((diffLong*diffLong)+(b*b/4.)));
+				} 
+				if (m_showerID == "ANT") currentZHR = 4;
 
-			// Local hourly rate - radiant altitude and limiting magnitude are taken into account
-			// Jenniskens P. (1994), "Meteor stream activity I. The annual streams", Astron. Astrophys., 287, 990-1013.
-			localHR = qRound(currentZHR*sin(alt) / pow(m_pidx,6.5-mlimit));
-			if (localHR<0) localHR = 0;
-			oss << QString("%1: %2<br />")
-					.arg(q_("Current ZHR"))
-					.arg(currentZHR);
-			oss << QString("%1: %2<br />")
-					.arg(q_("Local hourly rate"))
-					.arg(localHR);
+				// Local hourly rate - radiant altitude and limiting magnitude are taken into account
+				// Jenniskens P. (1994), "Meteor stream activity I. The annual streams", Astron. Astrophys., 287, 990-1013.
+				localHR = qRound(currentZHR*sin(alt) / pow(m_pidx,6.5-mlimit));
+				if (localHR<0) localHR = 0;
+				oss << QString("%1: %2<br />")
+						.arg(q_("Current ZHR"))
+						.arg(currentZHR);
+				oss << QString("%1: %2<br />")
+						.arg(q_("Local hourly rate"))
+						.arg(localHR);
+			}
 		}
 		else
 		{
@@ -715,24 +720,27 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 				oss << QString("; %1-%2").arg(m_activity.variable.at(0)).arg(m_activity.variable.at(1));
 			oss << "<br />";
 
-			int minvarZHR = qRound(m_activity.variable.at(0) * pow(10.,-(b * abs(diffLong))));
-			int maxvarZHR = qRound(m_activity.variable.at(1) * pow(10.,-(b * abs(diffLong))));
-			if (maxvarZHR > 0)
+			if (m_status != INACTIVE)
 			{
-				oss << QString("%1: %2-%3<br />")
-					.arg(q_("Current ZHR"))
-					.arg(minvarZHR)
-					.arg(maxvarZHR);
-
-				int localminvarHR = qRound(minvarZHR*sin(alt) / pow(m_pidx,6.5-mlimit));
-				int localmaxvarHR = qRound(maxvarZHR*sin(alt) / pow(m_pidx,6.5-mlimit));
-
-				if (localmaxvarHR > 0)
+				int minvarZHR = qRound(m_activity.variable.at(0) * pow(10.,-(b * abs(diffLong))));
+				int maxvarZHR = qRound(m_activity.variable.at(1) * pow(10.,-(b * abs(diffLong))));
+				if (maxvarZHR > 0)
 				{
 					oss << QString("%1: %2-%3<br />")
-					.arg(q_("Local hourly rate"))
-					.arg(localminvarHR)
-					.arg(localmaxvarHR);
+						.arg(q_("Current ZHR"))
+						.arg(minvarZHR)
+						.arg(maxvarZHR);
+
+					int localminvarHR = qRound(minvarZHR*sin(alt) / pow(m_pidx,6.5-mlimit));
+					int localmaxvarHR = qRound(maxvarZHR*sin(alt) / pow(m_pidx,6.5-mlimit));
+
+					if (localmaxvarHR > 0)
+					{
+						oss << QString("%1: %2-%3<br />")
+						.arg(q_("Local hourly rate"))
+						.arg(localminvarHR)
+						.arg(localmaxvarHR);
+					}
 				}
 			}
 		}
