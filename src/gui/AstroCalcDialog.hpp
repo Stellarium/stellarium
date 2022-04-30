@@ -465,7 +465,7 @@ private:
 	//! Prepare graph settings
 	void prepareAxesAndGraph();
 	void prepareAziVsTimeAxesAndGraph();
-	void prepareXVsTimeAxesAndGraph();
+	void prepareXVsTimeAxesAndGraph(double minYLeft, double maxYLeft, double minYRight, double maxYRight);
 	void prepareMonthlyElevationAxesAndGraph();
 	void prepareDistanceAxesAndGraph();
 	void prepareAngularDistanceAxesAndGraph();
@@ -536,7 +536,7 @@ private:
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader;
 	static double brightLimit;
-	static double minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, minY1, maxY1, minY2, maxY2,
+	static double minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, // minYLeft, maxYLeft, minYRight, maxYRight,
 			     minYld, maxYld, minYad, maxYad, minYadm, maxYadm, minYaz, maxYaz;
 	static QString yAxis1Legend, yAxis2Legend;
 	static const QString dash, delimiter;
