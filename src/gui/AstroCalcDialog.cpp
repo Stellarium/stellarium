@@ -88,10 +88,10 @@ double AstroCalcDialog::minYsun = -90.;
 double AstroCalcDialog::maxYsun = 90.;
 double AstroCalcDialog::minYmoon = -90.;
 double AstroCalcDialog::maxYmoon = 90.;
-double AstroCalcDialog::minY1 = -1001.;
-double AstroCalcDialog::maxY1 = 1001.;
-double AstroCalcDialog::minY2 = -1001.;
-double AstroCalcDialog::maxY2 = 1001.;
+//double AstroCalcDialog::minYLeft = -1001.;
+//double AstroCalcDialog::maxYLeft = 1001.;
+//double AstroCalcDialog::minYRight = -1001.;
+//double AstroCalcDialog::maxYRight = 1001.;
 double AstroCalcDialog::transitX = -1.;
 double AstroCalcDialog::minYld = 0.;
 double AstroCalcDialog::maxYld = 90.;
@@ -193,7 +193,7 @@ void AstroCalcDialog::retranslate()
 		prepareAxesAndGraph();
 		prepareAziVsTimeAxesAndGraph();
 		populateFunctionsList();
-		prepareXVsTimeAxesAndGraph();
+		prepareXVsTimeAxesAndGraph(-1001., 1001., -1001., 1001.);
 		prepareMonthlyElevationAxesAndGraph();
 		prepareDistanceAxesAndGraph();
 		prepareAngularDistanceAxesAndGraph();
@@ -259,7 +259,7 @@ void AstroCalcDialog::createDialogContent()
 	prepareAziVsTimeAxesAndGraph();
 	// Graphs feature
 	populateFunctionsList();
-	prepareXVsTimeAxesAndGraph();
+	prepareXVsTimeAxesAndGraph(-1001., 1001., -1001., 1001.);
 	// Monthly Elevation
 	prepareMonthlyElevationAxesAndGraph();
 	// WUT
@@ -4684,18 +4684,21 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 	// added special case - the tool is not applicable on non-Earth locations
 	if (!ssObj.isNull() && core->getCurrentPlanet()==solarSystem->getEarth())
 	{
+		if (!curvesChartMutex.tryLock()) return;
+
 		// X axis - time; Y axis - altitude
 		QList<double> aX, aY, bY;
 
 		const double currentJD = core->getJD();
 		int year, month, day;
-		double startJD, JD, ltime, /*UTCshift,*/ width = 1.0;
+		double startJD, JD, ltime /*UTCshift,*/;
 		StelUtils::getDateFromJulianDay(currentJD, &year, &month, &day);
 		StelUtils::getJDFromDate(&startJD, year, 1, 1, 0, 0, 0);
 
 		int dYear = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()*graphsDuration) + 3;
 		AstroCalcChart::Series firstGraph  = AstroCalcChart::Series(ui->graphsFirstComboBox->currentData().toInt());
 		AstroCalcChart::Series secondGraph = AstroCalcChart::Series(ui->graphsSecondComboBox->currentData().toInt());
+		curvesChart = new AstroCalcChart({firstGraph, secondGraph});
 
 		for (int i = -2; i <= dYear; i++)
 		{
@@ -4718,32 +4721,34 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 
 			aY.append(computeGraphValue(ssObj, firstGraph));
 			bY.append(computeGraphValue(ssObj, secondGraph));
+			curvesChart->append(firstGraph,  StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), computeGraphValue(ssObj, firstGraph));
+			curvesChart->append(secondGraph, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), computeGraphValue(ssObj, secondGraph));
 
 		}
 		core->setJD(currentJD);
 
 		QVector<double> x = aX.toVector(), ya = aY.toVector(), yb = bY.toVector();
 
-		double minYa = *std::min_element(aY.begin(), aY.end());
-		double maxYa = *std::max_element(aY.begin(), aY.end());
+		double minY = *std::min_element(aY.begin(), aY.end());
+		double maxY = *std::max_element(aY.begin(), aY.end());
 
-		width = (maxYa - minYa) / 50.0;
-		minY1 = minYa - width;
-		maxY1 = maxYa + width;
+		double margin = (maxY - minY) / 50.0;
+		double minYLeft = minY - margin;
+		double maxYLeft = maxY + margin;
 
-		minYa = *std::min_element(bY.begin(), bY.end());
-		maxYa = *std::max_element(bY.begin(), bY.end());
+		minY = *std::min_element(bY.begin(), bY.end());
+		maxY = *std::max_element(bY.begin(), bY.end());
 
-		width = (maxYa - minYa) / 50.0;
-		minY2 = minYa - width;
-		maxY2 = maxYa + width;
+		margin = (maxY - minY) / 50.0;
+		double minYRight = minY - margin;
+		double maxYRight = maxY + margin;
 
-		prepareXVsTimeAxesAndGraph();
+		prepareXVsTimeAxesAndGraph(minYLeft, maxYLeft, minYRight, maxYRight);
 
 		ui->graphsPlot->clearGraphs();
+		ui->graphsPlot->setBackground(QBrush(QColor(86, 87, 90)));
 
 		ui->graphsPlot->addGraph(ui->graphsPlot->xAxis, ui->graphsPlot->yAxis);
-		ui->graphsPlot->setBackground(QBrush(QColor(86, 87, 90)));
 		ui->graphsPlot->graph(0)->setPen(QPen(Qt::green, 1));
 		ui->graphsPlot->graph(0)->setLineStyle(QCPGraph::lsLine);
 		ui->graphsPlot->graph(0)->rescaleAxes(true);
@@ -4751,13 +4756,13 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 		ui->graphsPlot->graph(0)->setName("[0]");
 
 		ui->graphsPlot->addGraph(ui->graphsPlot->xAxis, ui->graphsPlot->yAxis2);
-		ui->graphsPlot->setBackground(QBrush(QColor(86, 87, 90)));
 		ui->graphsPlot->graph(1)->setPen(QPen(Qt::yellow, 1));
 		ui->graphsPlot->graph(1)->setLineStyle(QCPGraph::lsLine);
 		ui->graphsPlot->graph(1)->rescaleAxes(true);
 		ui->graphsPlot->graph(1)->setData(x, yb);
 		ui->graphsPlot->graph(1)->setName("[1]");
 
+		// Given full date values, we can omit these vertical year separators from the QtChart version.
 		if (graphsDuration>1)
 		{
 			int JDshift = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod());
@@ -4768,8 +4773,8 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 				ltime = (JD - startJD) * StelCore::ONE_OVER_JD_SECOND;
 				axj.append(ltime);
 				axj.append(ltime);
-				ayj.append(minY1);
-				ayj.append(maxY1);
+				ayj.append(minYLeft);
+				ayj.append(maxYLeft);
 				QVector<double> xj = axj.toVector(), yj = ayj.toVector();
 				int j = 2 + i;
 				ui->graphsPlot->addGraph(ui->graphsPlot->xAxis, ui->graphsPlot->yAxis);
@@ -4783,13 +4788,34 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 		}
 
 		ui->graphsPlot->replot();
+
+		curvesChart->show(firstGraph);
+		curvesChart->show(secondGraph);
+		qDebug() << "create chart axes...";
+		curvesChart->setYrange(minYLeft, maxYLeft);
+		curvesChart->setYrangeR(minYRight, maxYRight);
+		curvesChart->setupAxes(core->getJD(), graphsDuration);
+		qDebug() << "set chart ...";
 	}
 	else
 	{
-		prepareXVsTimeAxesAndGraph();
+		prepareXVsTimeAxesAndGraph(-1001., 1001., -1001., 1001.);
 		ui->graphsPlot->clearGraphs();
 		ui->graphsPlot->replot();
+
+		qDebug() << "create chart axes...";
+		curvesChart->setYrange(0., 10.);
+		curvesChart->setYrangeR(0., 10.);
+		curvesChart->setupAxes(core->getJD(), graphsDuration);
+		qDebug() << "set chart ...";
 	}
+
+	QChart *oldChart=ui->twoGraphsChartView->chart();
+	if (oldChart) oldChart->deleteLater();
+	ui->twoGraphsChartView->setChart(curvesChart);
+	ui->twoGraphsChartView->setRenderHint(QPainter::Antialiasing);
+	curvesChartMutex.unlock();
+	qDebug() << "Chart done.";
 }
 
 void AstroCalcDialog::updateXVsTimeGraphs()
@@ -4991,7 +5017,7 @@ void AstroCalcDialog::populateFunctionsList()
 	secondCB->blockSignals(false);
 }
 
-void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
+void AstroCalcDialog::prepareXVsTimeAxesAndGraph(double minYLeft, double maxYLeft, double minYRight, double maxYRight)
 {
 	QString distMU = qc_("AU", "distance, astronomical unit");
 	QString asMU = QString("'");
@@ -5008,64 +5034,64 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 		if ((ssObj->getAngularRadius(core) * 360. / M_PI) < 1.) asMU = QString("\"");
 	}
 
-	bool direction1 = false;
-	bool direction2 = false;
+	bool invertAxis1 = false;
+	bool invertAxis2 = false;
 
 	switch (ui->graphsFirstComboBox->currentData().toInt())
 	{
 		case AstroCalcChart::Magnitude1:
 			yAxis1Legend = q_("Magnitude");
-			if (minY1 < -1000.) minY1 = 0.0;
-			if (maxY1 > 1000.) maxY1 = 6.0;
-			direction1 = true;
+			if (minYLeft < -1000.) minYLeft = 0.0;
+			if (maxYLeft > 1000.) maxYLeft = 6.0;
+			invertAxis1 = true;
 			break;
 		case AstroCalcChart::Phase1:
 			yAxis1Legend = QString("%1, %").arg(q_("Phase"));
-			if (minY1 < -1000.) minY1 = 0.0;
-			if (maxY1 > 1000.) maxY1 = 100.0;
+			if (minYLeft < -1000.) minYLeft = 0.0;
+			if (maxYLeft > 1000.) maxYLeft = 100.0;
 			break;
 		case AstroCalcChart::Distance1:
 			yAxis1Legend = QString("%1, %2").arg(q_("Distance"), distMU);
-			if (minY1 < -1000.) minY1 = 0.0;
-			if (maxY1 > 1000.) maxY1 = 50.0;
+			if (minYLeft < -1000.) minYLeft = 0.0;
+			if (maxYLeft > 1000.) maxYLeft = 50.0;
 			break;
 		case AstroCalcChart::Elongation1:
 			yAxis1Legend = QString("%1, %2").arg(q_("Elongation"), QChar(0x00B0));
-			if (minY1 < -1000.) minY1 = 0.0;
-			if (maxY1 > 1000.) maxY1 = 180.0;
+			if (minYLeft < -1000.) minYLeft = 0.0;
+			if (maxYLeft > 1000.) maxYLeft = 180.0;
 			break;
 		case AstroCalcChart::AngularSize1:
 			yAxis1Legend = QString("%1, %2").arg(q_("Angular size"), asMU);
-			if (minY1 < -1000.) minY1 = 0.0;
-			if (maxY1 > 1000.) maxY1 = 30.0;
+			if (minYLeft < -1000.) minYLeft = 0.0;
+			if (maxYLeft > 1000.) maxYLeft = 30.0;
 			break;
 		case AstroCalcChart::PhaseAngle1:
 			yAxis1Legend = QString("%1, %2").arg(q_("Phase angle"), QChar(0x00B0));
-			if (minY1 < -1000.) minY1 = 0.0;
-			if (maxY1 > 1000.) maxY1 = 180.0;
+			if (minYLeft < -1000.) minYLeft = 0.0;
+			if (maxYLeft > 1000.) maxYLeft = 180.0;
 			break;
 		case AstroCalcChart::HeliocentricDistance1:
 			// TRANSLATORS: The phrase "Heliocentric distance" may be long in some languages and you can abbreviate it.
 			yAxis1Legend = QString("%1, %2").arg(qc_("Heliocentric distance","axis name"), distMU);
-			if (minY1 < -1000.) minY1 = 0.0;
-			if (maxY1 > 1000.) maxY1 = 50.0;
+			if (minYLeft < -1000.) minYLeft = 0.0;
+			if (maxYLeft > 1000.) maxYLeft = 50.0;
 			break;
 		case AstroCalcChart::TransitAltitude1:
 			// TRANSLATORS: The phrase "Transit altitude" may be long in some languages and you can abbreviate it.
 			yAxis1Legend = QString("%1, %2").arg(qc_("Transit altitude","axis name"), QChar(0x00B0));
-			if (minY1 < -1000.) minY1 = 0.0;
-			if (maxY1 > 1000.) maxY1 = 90.0;
+			if (minYLeft < -1000.) minYLeft = 0.0;
+			if (maxYLeft > 1000.) maxYLeft = 90.0;
 			break;
 		case AstroCalcChart::RightAscension1:
 			// TRANSLATORS: The phrase "Right ascension" may be long in some languages and you can abbreviate it.
 			yAxis1Legend = QString("%1, %2").arg(qc_("Right ascension","axis name"), qc_("h","time"));
-			if (minY1 < -1000.) minY1 = 0.0;
-			if (maxY1 > 1000.) maxY1 = 24.0;
+			if (minYLeft < -1000.) minYLeft = 0.0;
+			if (maxYLeft > 1000.) maxYLeft = 24.0;
 			break;
 		case AstroCalcChart::Declination1:
 			yAxis1Legend = QString("%1, %2").arg(q_("Declination"), QChar(0x00B0));
-			if (minY1 < -1000.) minY1 = -90.0;
-			if (maxY1 > 1000.) maxY1 = 90.0;
+			if (minYLeft < -1000.) minYLeft = -90.0;
+			if (maxYLeft > 1000.) maxYLeft = 90.0;
 			break;
 	}
 
@@ -5073,57 +5099,57 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 	{
 		case AstroCalcChart::Magnitude2:
 			yAxis2Legend = q_("Magnitude");
-			if (minY2 < -1000.) minY2 = 0.0;
-			if (maxY2 > 1000.) maxY2 = 6.0;
-			direction2 = true;
+			if (minYRight < -1000.) minYRight = 0.0;
+			if (maxYRight > 1000.) maxYRight = 6.0;
+			invertAxis2 = true;
 			break;
 		case AstroCalcChart::Phase2:
 			yAxis2Legend = QString("%1, %").arg(q_("Phase"));
-			if (minY2 < -1000.) minY2 = 0.0;
-			if (maxY2 > 1000.) maxY2 = 100.0;
+			if (minYRight < -1000.) minYRight = 0.0;
+			if (maxYRight > 1000.) maxYRight = 100.0;
 			break;
 		case AstroCalcChart::Distance2:
 			yAxis2Legend = QString("%1, %2").arg(q_("Distance"), distMU);
-			if (minY2 < -1000.) minY2 = 0.0;
-			if (maxY2 > 1000.) maxY2 = 50.0;
+			if (minYRight < -1000.) minYRight = 0.0;
+			if (maxYRight > 1000.) maxYRight = 50.0;
 			break;
 		case AstroCalcChart::Elongation2:
 			yAxis2Legend = QString("%1, %2").arg(q_("Elongation"), QChar(0x00B0));
-			if (minY2 < -1000.) minY2 = 0.0;
-			if (maxY2 > 1000.) maxY2 = 180.0;
+			if (minYRight < -1000.) minYRight = 0.0;
+			if (maxYRight > 1000.) maxYRight = 180.0;
 			break;
 		case AstroCalcChart::AngularSize2:
 			yAxis2Legend = QString("%1, %2").arg(q_("Angular size"), asMU);
-			if (minY2 < -1000.) minY2 = 0.0;
-			if (maxY2 > 1000.) maxY2 = 30.0;
+			if (minYRight < -1000.) minYRight = 0.0;
+			if (maxYRight > 1000.) maxYRight = 30.0;
 			break;
 		case AstroCalcChart::PhaseAngle2:
 			yAxis2Legend = QString("%1, %2").arg(q_("Phase angle"), QChar(0x00B0));
-			if (minY2 < -1000.) minY2 = 0.0;
-			if (maxY2 > 1000.) maxY2 = 180.0;
+			if (minYRight < -1000.) minYRight = 0.0;
+			if (maxYRight > 1000.) maxYRight = 180.0;
 			break;
 		case AstroCalcChart::HeliocentricDistance2:
 			// TRANSLATORS: The phrase "Heliocentric distance" may be long in some languages and you can short it.
 			yAxis2Legend = QString("%1, %2").arg(q_("Heliocentric distance"), distMU);
-			if (minY2 < -1000.) minY2 = 0.0;
-			if (maxY2 > 1000.) maxY2 = 50.0;
+			if (minYRight < -1000.) minYRight = 0.0;
+			if (maxYRight > 1000.) maxYRight = 50.0;
 			break;
 		case AstroCalcChart::TransitAltitude2:
 			// TRANSLATORS: The phrase "Transit altitude" may be long in some languages and you can short it.
 			yAxis2Legend = QString("%1, %2").arg(q_("Transit altitude"), QChar(0x00B0));
-			if (minY2 < -1000.) minY2 = 0.0;
-			if (maxY2 > 1000.) maxY2 = 90.0;
+			if (minYRight < -1000.) minYRight = 0.0;
+			if (maxYRight > 1000.) maxYRight = 90.0;
 			break;
 		case AstroCalcChart::RightAscension2:
 			// TRANSLATORS: The phrase "Right ascension" may be long in some languages and you can short it.
 			yAxis2Legend = QString("%1, %2").arg(qc_("Right ascension","axis name"), qc_("h","time"));
-			if (minY2 < -1000.) minY2 = 0.0;
-			if (maxY2 > 1000.) maxY2 = 24.0;
+			if (minYRight < -1000.) minYRight = 0.0;
+			if (maxYRight > 1000.) maxYRight = 24.0;
 			break;
 		case AstroCalcChart::Declination2:
 			yAxis2Legend = QString("%1, %2").arg(q_("Declination"), QChar(0x00B0));
-			if (minY2 < -1000.) minY2 = -90.0;
-			if (maxY2 > 1000.) maxY2 = 90.0;
+			if (minYRight < -1000.) minYRight = -90.0;
+			if (maxYRight > 1000.) maxYRight = 90.0;
 			break;
 	}
 
@@ -5152,23 +5178,23 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 	ui->graphsPlot->xAxis->setAutoTicks(true);
 	ui->graphsPlot->xAxis->setAutoTickCount(20);
 
-	ui->graphsPlot->yAxis->setRange(minY1, maxY1);
+	ui->graphsPlot->yAxis->setRange(minYLeft, maxYLeft);
 	ui->graphsPlot->yAxis->setScaleType(QCPAxis::stLinear);
 	ui->graphsPlot->yAxis->setLabelColor(axisColorL);
 	ui->graphsPlot->yAxis->setTickLabelColor(axisColorL);
 	ui->graphsPlot->yAxis->setBasePen(axisPenL);
 	ui->graphsPlot->yAxis->setTickPen(axisPenL);
 	ui->graphsPlot->yAxis->setSubTickPen(axisPenL);
-	ui->graphsPlot->yAxis->setRangeReversed(direction1);
+	ui->graphsPlot->yAxis->setRangeReversed(invertAxis1);
 
-	ui->graphsPlot->yAxis2->setRange(minY2, maxY2);
+	ui->graphsPlot->yAxis2->setRange(minYRight, maxYRight);
 	ui->graphsPlot->yAxis2->setScaleType(QCPAxis::stLinear);
 	ui->graphsPlot->yAxis2->setLabelColor(axisColorR);
 	ui->graphsPlot->yAxis2->setTickLabelColor(axisColorR);
 	ui->graphsPlot->yAxis2->setBasePen(axisPenR);
 	ui->graphsPlot->yAxis2->setTickPen(axisPenR);
 	ui->graphsPlot->yAxis2->setSubTickPen(axisPenR);
-	ui->graphsPlot->yAxis2->setRangeReversed(direction2);
+	ui->graphsPlot->yAxis2->setRangeReversed(invertAxis2);
 	ui->graphsPlot->yAxis2->setVisible(true);
 
 	ui->graphsPlot->clearGraphs();
