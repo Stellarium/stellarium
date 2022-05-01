@@ -25,6 +25,7 @@
 #include "StelObjectMgr.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelUtils.hpp"
+#include "SolarSystem.hpp"
 
 MeteorShowers::MeteorShowers(MeteorShowersMgr* mgr)
 	: m_mgr(mgr)
@@ -107,45 +108,65 @@ void MeteorShowers::loadMeteorShowers(const QVariantMap& map)
 	}
 }
 
-QList<MeteorShowers::SearchResult> MeteorShowers::searchEvents(QDate dateFrom, QDate dateTo) const
+QList<MeteorShowers::SearchResult> MeteorShowers::searchEvents(int year) const
 {
 	QList<SearchResult> result;
 	bool found;
-	QDate date;
 	MeteorShower::Activity a;
 	SearchResult r;
+
+	StelCore* core = StelApp::getInstance().getCore();
+	static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+	double eclJ2000 = ssystem->getEarth()->getRotObliquity(2451545.0);
+	double ra_equ, dec_equ, solLong, solLongstart, beta;
+	const double currentJD = core->getJD(); // save current JD
+
 	for (const auto& ms : m_meteorShowers)
 	{
-		date = dateFrom;
-		while(date.operator <=(dateTo))
+		double JDstart;
+		StelUtils::getJDFromDate(&JDstart, year, 1, 1, 0, 0, 1);
+		core->setJD(JDstart);
+		core->update(0);
+		StelUtils::rectToSphe(&ra_equ,&dec_equ, ssystem->getSun()->getJ2000EquatorialPos(core));
+		StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &solLongstart, &beta);
+		solLongstart = StelUtils::fmodpos(solLongstart, 2.*M_PI) / M_PI_180;
+
+		solLong = 0.;
+		while(solLong < 360.)
 		{
 			found = false;
-			a = ms->hasConfirmedShower(date, found);
+			a = ms->hasConfirmedShower(StelUtils::fmodpos(solLongstart+solLong, 360.), found);
 			r.type = q_("Confirmed");
 			if (!found)
 			{
-				a = ms->hasGenericShower(date, found);
+				a = ms->hasGenericShower(StelUtils::fmodpos(solLongstart+solLong, 360.), found);
 				r.type = q_("Generic");
 			}
 
 			if (found)
 			{
 				r.code = ms->getID();
-				r.name = ms->getNameI18n();
-				r.peak = a.peak;
-				if (a.zhr == -1) {
-					r.zhrMin = a.variable.at(0);
-					r.zhrMax = a.variable.at(1);
-				} else {
-					r.zhrMin = a.zhr;
-					r.zhrMax = a.zhr;
+				if (r.code!="ANT")
+				{
+					r.name = ms->getNameI18n();
+					r.peak = a.peak;
+					r.peakyear = year;
+					if (a.zhr == -1) {
+						r.zhrMin = a.variable.at(0);
+						r.zhrMax = a.variable.at(1);
+					} else {
+						r.zhrMin = a.zhr;
+						r.zhrMax = a.zhr;
+					}
+					result.append(r);
 				}
-				result.append(r);
 				break;
 			}
-			date = date.addDays(1);
+			solLong += 1.;
 		}
 	}
+	core->setJD(currentJD);
+	core->update(0);
 	return result;
 }
 

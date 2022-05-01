@@ -41,7 +41,8 @@ public:
 		QString code;
 		QString name;
 		QString type;
-		QDate peak;
+		double peak;
+		int peakyear;
 		int zhrMax;
 		int zhrMin;
 	};
@@ -69,7 +70,7 @@ public:
 	//! @param dateFrom
 	//! @param dateTo
 	//! @return list
-	QList<SearchResult> searchEvents(QDate dateFrom, QDate dateTo) const;
+	QList<SearchResult> searchEvents(int year) const;
 
 	//
 	// Methods defined in StelObjectModule class

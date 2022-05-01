@@ -60,9 +60,6 @@ public slots:
 	void retranslate() Q_DECL_OVERRIDE;
 
 private slots:
-	//! Checks if the inputed dates are valid for use.
-	void checkDates();
-
 	//! Search events and fill the list.
 	void searchEvents();
 
