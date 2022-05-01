@@ -216,22 +216,11 @@ void MSConfigDialog::setAboutHtml()
 	QString html = "<html><head></head><body>"
 	"<h2>" + q_("Meteor Showers Plug-in") + "</h2>"
 	"<table width=\"90%\">"
-		"<tr width=\"30%\">"
-			"<td><strong>" + q_("Version") + ":</strong></td>"
-			"<td>" + METEORSHOWERS_PLUGIN_VERSION + "</td>"
-		"</tr>"
-		"<tr>"
-			"<td><strong>" + q_("License") + ":</strong></td>"
-			"<td>" + METEORSHOWERS_PLUGIN_LICENSE + "</td>"
-		"</tr>"
-		"<tr>"
-			"<td><strong>" + q_("Author") + ":</strong></td>"
-			"<td>Marcos Cardinot &lt;mcardinot@gmail.com&gt;</td>"
-		"</tr>"
-		"<tr>"
-			"<td><strong>" + q_("Contributors") + ":</strong></td>"
-			"<td>Alexander Wolf<br />Worachate Boonplod</td>"
-		"</tr>"
+		"<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + METEORSHOWERS_PLUGIN_VERSION + "</td></tr>"
+		"<tr><td><strong>" + q_("License") + ":</strong></td><td>" + METEORSHOWERS_PLUGIN_LICENSE + "</td></tr>"
+		"<tr><td><strong>" + q_("Author") + ":</strong></td><td>Marcos Cardinot &lt;mcardinot@gmail.com&gt;</td></tr>"
+		"<tr><td rowspan='2'><strong>" + q_("Contributors") + ":</strong></td><td>Alexander Wolf</td></tr>"
+		"<tr><td>Worachate Boonplod</td></tr>"
 	"</table>"
 	"<p>"
 	+ q_(
@@ -250,24 +239,21 @@ void MSConfigDialog::setAboutHtml()
 	+ q_(
 	"<p>"
 		"It has three types of markers:"
-		"<ul>"
-			"<li>"
-				"<b>Confirmed:</b> "
-				"the radiant is active and its data was confirmed."
+		"<dl>"
+			"<dt><strong>Confirmed</strong></dt><dd>"
+				"The radiant is active and its data was confirmed."
 				" Thus, this is a historical (really occurred in the past) or predicted"
 				" meteor shower."
-			"</li>"
-			"<li>"
-				"<b>Generic:</b> "
-				"the radiant is active, but its data was not confirmed."
+			"</dd>"
+			"<dt><strong>Generic</strong></dt><dd>"
+				"The radiant is active, but its data was not confirmed."
 				" It means that this can occur in real life, but that we do not have proper"
 				" data about its activity for the current year."
-			"</li>"
-			"<li>"
-				"<b>Inactive:</b> "
-				"the radiant is inactive for the current sky date."
-			"</li>"
-		"</ul>"
+			"</dd>"
+			"<dt><strong>Inactive</strong></dt><dd>"
+				"The radiant is inactive for the current sky date."
+			"</dt>"
+		"</dl>"
 	"</p>"
 	)
 	+ "<p>"
@@ -277,8 +263,7 @@ void MSConfigDialog::setAboutHtml()
 		"Moonlight can also reduce the hourly rate, but it doesn't take into account.") +
 	"</p>" +
 	"<h3>" + q_("Terms") + "</h3>"
-	"<p><b>" + q_("Meteor shower") + "</b>"
-		"<br />" +
+	"<dl><dt><strong>" + q_("Meteor shower") + "</strong></dt><dd>" +
 		q_("A meteor shower is a celestial event in which a number of meteors are observed to "
 		"radiate, or originate, from one point in the night sky. These meteors are caused by "
 		"streams of cosmic debris called meteoroids entering Earth's atmosphere at extremely "
@@ -286,14 +271,12 @@ void MSConfigDialog::setAboutHtml()
 		"so almost all of them disintegrate and never hit the Earth's surface. Intense or "
 		"unusual meteor showers are known as meteor outbursts and meteor storms, which may "
 		"produce greater than 1,000 meteors an hour.") +
-	"</p>"
-	"<p><b>" + q_("Radiant") + "</b>"
-		"<br />" +
+	"<br/></dd>"
+	"<dt><strong>" + q_("Radiant") + "</strong></dt><dd>" +
 		q_("The radiant or apparent radiant of a meteor shower is the point in the sky, from "
 		   "which (to a planetary observer) meteors appear to originate. The Perseids, for "
 		   "example, are meteors which appear to come from a point within the constellation "
-		   "of Perseus.") +
-	"</p>"
+		   "of Perseus.") +	
 	"<p>" +
 		q_("An observer might see such a meteor anywhere in the sky but the direction of motion, "
 		   "when traced back, will point to the radiant. A meteor that does not point back to the "
@@ -303,26 +286,34 @@ void MSConfigDialog::setAboutHtml()
 	"<p>" + q_("Many showers have a radiant point that changes position during the interval when it "
 		   "appears. For example, the radiant point for the October Delta Aurigids drifts by more than a "
 		   "degree per night.") +
-	"</p>"
-	"<p><b>" + q_("Zenithal Hourly Rate (ZHR)") + "</b>"
-		"<br />" +
+	"</p></dd>"
+	"<dt><strong>" + q_("Zenithal Hourly Rate (ZHR)") + "</strong></dt><dd>" +
 		q_("In astronomy, the Zenithal Hourly Rate (ZHR) of a meteor shower is the number of meteors "
 		   "a single observer would see in one hour under a clear, dark sky (limiting apparent "
 		   "magnitude of 6.5) if the radiant of the shower were at the zenith. The rate that can "
 		   "effectively be seen is nearly always lower and decreases the closer the radiant is to "
 		   "the horizon.") +
-	"</p>"
-	"<p><b>" + q_("Population index") + "</b>"
-		"<br />" +
+	"<br/></dd>"
+	"<dt><strong>" + q_("Population index") + "</strong></dt><dd>" +
 		q_("The population index indicates the magnitude distribution of the meteor showers. The "
 		   "values below 2.5 correspond to distributions where bright meteors are more frequent "
 		   "than average, while values above 3.0 mean that the share of faint meteors is larger "
 		   "than usual.") +
-	"</p>"
-	"<p><b>" + q_("Solar longitude") + "</b>"
-		"<br />" +
+	"<br/></dd>"
+	"<dt><strong>" + q_("Solar longitude") + "</strong></dt><dd>" +
 		q_("Solar longitude (equinox J2000) gives the position of the Earth on its orbit. "
 		   "It is a more appropriate information on a meteor shower than the date.") +
+	"<br/></dd>" +
+	"<dt><strong>" + q_("Local Hourly Rate") + "</strong></dt><dd>" +
+		q_("Hourly rate of a meteor shower for current location on Earth - altitude of radiant and limiting "
+		   "magnitude are both taken into account. Lower radiant altitude means fewer meteors are observable. "
+		   "This should give users a more realistic expected rate for each shower at any given date and time. "
+		   "It helps to determine which is the best night (and best time for some showers) to observe a meteor shower.") +
+	"<br/></dd>" +
+	"<dt><strong>" + q_("Current ZHR") + "</strong></dt><dd>" +
+		q_("This should give a better idea of how ZHR changes over time (lower than maximum ZHR when far away from the center of meteoroid stream). "
+		   "This plugin use Gaussian (for low ZHR) and Lorentz distribution (for high ZHR) with different slope values for the curve of each shower.") +
+	"</dd></dl>" +
 	"<h3>" + q_("Notes") + "</h3>"
 	"<p>" + q_("This plugin was initially created as a project of the ESA Summer of Code in Space 2013.") + "</p>"
 	"<h3>" + q_("Info") + "</h3>"
@@ -334,6 +325,8 @@ void MSConfigDialog::setAboutHtml()
 	"<li>" + QString(q_("%1International Meteor Organization%2")).arg("<a href=\"https://www.imo.net/\">", "</a>") + "</li>"
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	"<li>" + QString(q_("%1IAU Meteor Data Center%2")).arg("<a href=\"https://www.ta3.sk/IAUC22DB/MDC2007/\">", "</a>") + "</li>"
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+	"<li>" + QString(q_("%1Major Showers Observations%2")).arg("<a href=\"https://www.imo.net/observations/methods/visual-observation/major/\">", "</a>") + "</li>"
 	"</ul>";
 
 	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Meteor Showers plugin");
