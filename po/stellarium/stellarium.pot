@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-05-01 23:59+0700\n"
+"POT-Creation-Date: 2022-05-02 00:15+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22415,7 +22415,8 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:712
 #: plugins/MeteorShowers/src/MeteorShower.cpp:740
-msgid "Local hourly rate"
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
+msgid "Local Hourly Rate"
 msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:718
@@ -23034,10 +23035,6 @@ msgstr ""
 msgid ""
 "Solar longitude (equinox J2000) gives the position of the Earth on its "
 "orbit. It is a more appropriate information on a meteor shower than the date."
-msgstr ""
-
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
-msgid "Local Hourly Rate"
 msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:308

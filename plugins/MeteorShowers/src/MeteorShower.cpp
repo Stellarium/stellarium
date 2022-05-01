@@ -709,7 +709,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 						.arg(q_("Current ZHR"))
 						.arg(currentZHR);
 				oss << QString("%1: %2<br />")
-						.arg(q_("Local hourly rate"))
+						.arg(q_("Local Hourly Rate"))
 						.arg(localHR);
 			}
 		}
@@ -737,7 +737,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 					if (localmaxvarHR > 0)
 					{
 						oss << QString("%1: %2-%3<br />")
-						.arg(q_("Local hourly rate"))
+						.arg(q_("Local Hourly Rate"))
 						.arg(localminvarHR)
 						.arg(localmaxvarHR);
 					}
