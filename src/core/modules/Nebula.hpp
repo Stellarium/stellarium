@@ -98,7 +98,7 @@ public:
 	Q_FLAG(TypeGroup)
 
 	//! A pre-defined set of specifiers for the catalogs filter
-	static constexpr CatalogGroup AllCatalogs = static_cast<CatalogGroup>(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG|CatSNRG|CatACO|CatHCG|CatESO|CatVdBH|CatDWB|CatTr|CatSt|CatRu|CatOther);
+	static constexpr CatalogGroup AllCatalogs = static_cast<CatalogGroup>(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG|CatSNRG|CatACO|CatHCG|CatESO|CatVdBH|CatDWB|CatTr|CatSt|CatRu|CatVdBHa|CatOther);
 	static constexpr TypeGroup    AllTypes    = static_cast<TypeGroup>(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeOpenStarClusters|TypeGlobularStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeGalaxyClusters|TypeOther);
 
 	//! @enum NebulaType Nebula types
