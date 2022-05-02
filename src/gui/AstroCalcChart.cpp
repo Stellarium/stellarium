@@ -266,7 +266,7 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 	return QPair(startDate, endDate);
 }
 
-void AstroCalcChart::setupAxes(const double jd, const int periods)
+void AstroCalcChart::setupAxes(const double jd, const int periods, const QString &englishName)
 {
 	qDebug() << "setupAxes()...";
 
@@ -325,8 +325,9 @@ void AstroCalcChart::setupAxes(const double jd, const int periods)
 	}
 	else
 	{
-		xAxis->setTickCount(12*periods+1); // step is ~30 days.
+		xAxis->setTickCount(12+1); // step is ~30*periods days.
 		xRange=findXRange(jd, AstroCalcChart::AngularSize1, periods);
+		if (periods>1) xAxis->setFormat("dd.MM.yy");
 	}
 	xAxis->setRange(xRange.first, xRange.second);
 //	qDebug() << "xAxis range is "  << xRange.first << "/" << xRange.second;
@@ -338,17 +339,20 @@ void AstroCalcChart::setupAxes(const double jd, const int periods)
 	else if (map.contains(AstroCalcChart::LunarElongation))
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Angular distance"), QChar(0x00B0)));
 	else if (map.contains(AstroCalcChart::AngularSize1))
-		yAxis->setTitleText(QString("%1, %2").arg(q_("Angular size"), QChar(0x00B0)));
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Angular size"), (englishName=="Moon" || englishName=="Sun") ? QString("'") : QString("\"")));
 	else if (map.contains(AstroCalcChart::Declination1))
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Declination"), QChar(0x00B0)));
 	else if (map.contains(AstroCalcChart::Distance1))
-		yAxis->setTitleText(QString("%1, %2").arg(q_("Distance"), qc_("AU", "distance, astronomical unit")));
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Distance"), englishName=="Moon" ? qc_("Mm", "distance, Megameters") : qc_("AU", "distance, astronomical unit")));
 	else if (map.contains(AstroCalcChart::Elongation1))
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Elongation"), QChar(0x00B0)));
 	else if (map.contains(AstroCalcChart::HeliocentricDistance1))
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Heliocentric distance"), qc_("AU", "distance, astronomical unit")));
 	else if (map.contains(AstroCalcChart::Magnitude1))
+	{
 		yAxis->setTitleText(q_("Magnitude"));
+		yAxis->setReverse();
+	}
 	else if (map.contains(AstroCalcChart::PhaseAngle1))
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Phase angle"), QChar(0x00B0)));
 	else if (map.contains(AstroCalcChart::Phase1))
@@ -361,17 +365,20 @@ void AstroCalcChart::setupAxes(const double jd, const int periods)
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Linear Distance"), qc_("AU", "distance, astronomical unit")));
 
 	if (map.contains(AstroCalcChart::AngularSize2))
-		yAxisR->setTitleText(QString("%1, %2").arg(q_("Angular size"), QChar(0x00B0)));
+		yAxisR->setTitleText(QString("%1, %2").arg(q_("Angular size"), (englishName=="Moon" || englishName=="Sun") ? QString("'") : QString("\"")));
 	else if (map.contains(AstroCalcChart::Declination2))
 		yAxisR->setTitleText(QString("%1, %2").arg(q_("Declination"), QChar(0x00B0)));
 	else if (map.contains(AstroCalcChart::Distance2))
-		yAxisR->setTitleText(QString("%1, %2").arg(q_("Distance"), qc_("AU", "distance, astronomical unit")));
+		yAxisR->setTitleText(QString("%1, %2").arg(q_("Distance"), englishName=="Moon" ? qc_("Mm", "distance, Megameters") : qc_("AU", "distance, astronomical unit")));
 	else if (map.contains(AstroCalcChart::Elongation2))
 		yAxisR->setTitleText(QString("%1, %2").arg(q_("Elongation"), QChar(0x00B0)));
 	else if (map.contains(AstroCalcChart::HeliocentricDistance2))
 		yAxisR->setTitleText(QString("%1, %2").arg(q_("Heliocentric distance"), qc_("AU", "distance, astronomical unit")));
 	else if (map.contains(AstroCalcChart::Magnitude2))
+	{
 		yAxisR->setTitleText(q_("Magnitude"));
+		yAxisR->setReverse();
+	}
 	else if (map.contains(AstroCalcChart::PhaseAngle2))
 		yAxisR->setTitleText(QString("%1, %2").arg(q_("Phase angle"), QChar(0x00B0)));
 	else if (map.contains(AstroCalcChart::Phase2))
