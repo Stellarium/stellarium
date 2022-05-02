@@ -360,7 +360,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>4</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="stackedWidgetPage1">
          <layout class="QGridLayout" name="gridLayout_2">
@@ -1507,6 +1507,13 @@
                     </property>
                    </widget>
                   </item>
+                  <item>
+                   <widget class="QPushButton" name="exportAltVsTimePushButton">
+                    <property name="text">
+                     <string>Export graph...</string>
+                    </property>
+                   </widget>
+                  </item>
                  </layout>
                 </item>
                </layout>
@@ -1618,21 +1625,45 @@
                 </property>
                </widget>
               </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="aziVsTimeLabel">
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>30</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Please select object to plot its graph 'Azimuth vs. Time'.</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
+              <item row="2" column="1">
+               <layout class="QHBoxLayout" name="aziVsTimeHorizontalLayout">
+                <item>
+                 <widget class="QLabel" name="aziVsTimeLabel">
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Please select object to plot its graph 'Azimuth vs. Time'.</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="aziVsTimeHorizontalSpacer">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="exportAziVsTimePushButton">
+                  <property name="text">
+                   <string>Export graph...</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
               <item row="1" column="1">
                <widget class="QChartView" name="aziVsTimeChartView"/>
@@ -1769,6 +1800,13 @@
                   </property>
                  </widget>
                 </item>
+                <item>
+                 <widget class="QPushButton" name="exportMonthlyElevationPushButton">
+                  <property name="text">
+                   <string>Export graph...</string>
+                  </property>
+                 </widget>
+                </item>
                </layout>
               </item>
               <item row="1" column="0">
@@ -1805,6 +1843,13 @@
               </property>
               <item row="2" column="0" colspan="2">
                <layout class="QGridLayout" name="gridLayout_17">
+                <item row="1" column="0">
+                 <widget class="QLabel" name="graphsFirstLabel">
+                  <property name="text">
+                   <string>First graph:</string>
+                  </property>
+                 </widget>
+                </item>
                 <item row="2" column="1">
                  <widget class="QComboBox" name="graphsSecondComboBox">
                   <property name="sizePolicy">
@@ -1821,26 +1866,6 @@
                   </property>
                   <property name="sizeAdjustPolicy">
                    <enum>QComboBox::AdjustToContents</enum>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="2">
-                 <widget class="QPushButton" name="drawGraphsPushButton">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="text">
-                   <string>Draw graphs</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="graphsSecondLabel">
-                  <property name="text">
-                   <string>Second graph:</string>
                   </property>
                  </widget>
                 </item>
@@ -1897,10 +1922,16 @@
                   </item>
                  </layout>
                 </item>
-                <item row="1" column="0">
-                 <widget class="QLabel" name="graphsFirstLabel">
+                <item row="2" column="2">
+                 <widget class="QPushButton" name="drawGraphsPushButton">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="text">
-                   <string>First graph:</string>
+                   <string>Draw graphs</string>
                   </property>
                  </widget>
                 </item>
@@ -1930,6 +1961,20 @@
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="graphsSecondLabel">
+                  <property name="text">
+                   <string>Second graph:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="3">
+                 <widget class="QPushButton" name="exportGraphsPushButton">
+                  <property name="text">
+                   <string>Export graphs...</string>
                   </property>
                  </widget>
                 </item>
@@ -2061,6 +2106,13 @@
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="exportLunarElongationPushButton">
+                  <property name="text">
+                   <string>Export graph...</string>
                   </property>
                  </widget>
                 </item>
@@ -2555,6 +2607,16 @@
               <property name="bottomMargin">
                <number>0</number>
               </property>
+              <item row="2" column="0">
+               <widget class="QCustomPlot" name="pcDistanceGraphPlot" native="true">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
               <item row="0" column="0">
                <widget class="QLabel" name="pcDistanceGraphLabel">
                 <property name="font">
@@ -2570,18 +2632,32 @@
                 </property>
                </widget>
               </item>
-              <item row="2" column="0">
-               <widget class="QCustomPlot" name="pcDistanceGraphPlot" native="true">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-               </widget>
-              </item>
               <item row="2" column="1">
                <widget class="QChartView" name="pcChartView"/>
+              </item>
+              <item row="4" column="1">
+               <layout class="QHBoxLayout" name="lunarElongationGraphHorizontalLayout">
+                <item>
+                 <spacer name="horizontalSpacer_15">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="exportPCPushButton">
+                  <property name="text">
+                   <string>Export graph...</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </widget>
