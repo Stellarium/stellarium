@@ -71,7 +71,8 @@ public:
 	QPair<QDateTime, QDateTime>findXRange(const double JD, const Series series, const int periods=1);
 
 	//! Setup axes and appearance. Call this at the end of drawing, just before display but after all series have been activated with show().
-	void setupAxes(const double jd, const int periods);
+	//! @arg englishName used for details in the two-graph charts. Use an empty string otherwise.
+	void setupAxes(const double jd, const int periods, const QString &englishName);
 
 	//! Draw a 2-point vertical line at x which extends over the whole graph
 	//! Note: This shall replace AstroCalcDialog::drawTransitTimeDiagram() and AstroCalcDialog::drawCurrentTimeDiagram()

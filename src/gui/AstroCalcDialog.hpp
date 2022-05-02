@@ -465,7 +465,8 @@ private:
 	//! Prepare graph settings
 	void prepareAxesAndGraph();
 	void prepareAziVsTimeAxesAndGraph();
-	void prepareXVsTimeAxesAndGraph(double minYLeft, double maxYLeft, double minYRight, double maxYRight);
+	//! Prepare left and right Y axes depending on plot type for object with englishName. For an empty graph, use englishName=""
+	void prepareXVsTimeAxesAndGraph(double minYLeft, double maxYLeft, double minYRight, double maxYRight, QString englishName);
 	void prepareMonthlyElevationAxesAndGraph();
 	void prepareDistanceAxesAndGraph();
 	void prepareAngularDistanceAxesAndGraph();

@@ -193,7 +193,7 @@ void AstroCalcDialog::retranslate()
 		prepareAxesAndGraph();
 		prepareAziVsTimeAxesAndGraph();
 		populateFunctionsList();
-		prepareXVsTimeAxesAndGraph(-1001., 1001., -1001., 1001.);
+		prepareXVsTimeAxesAndGraph(-1001., 1001., -1001., 1001., "");
 		prepareMonthlyElevationAxesAndGraph();
 		prepareDistanceAxesAndGraph();
 		prepareAngularDistanceAxesAndGraph();
@@ -259,7 +259,7 @@ void AstroCalcDialog::createDialogContent()
 	prepareAziVsTimeAxesAndGraph();
 	// Graphs feature
 	populateFunctionsList();
-	prepareXVsTimeAxesAndGraph(-1001., 1001., -1001., 1001.);
+	prepareXVsTimeAxesAndGraph(-1001., 1001., -1001., 1001., "");
 	// Monthly Elevation
 	prepareMonthlyElevationAxesAndGraph();
 	// WUT
@@ -868,7 +868,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		ui->aziVsTimePlot->replot();
 	}
 	qDebug() << "create chart axes...";
-	azVsTimeChart->setupAxes(core->getJD(), 1);
+	azVsTimeChart->setupAxes(core->getJD(), 1, "");
 	qDebug() << "set chart ...";
 	QChart *oldChart=ui->aziVsTimeChartView->chart();
 	if (oldChart) oldChart->deleteLater();
@@ -4483,7 +4483,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 	}
 	qDebug() << "create chart axes...";
 	altVsTimeChart->setYrange(minY, maxY-2.); // TODO: reduce min/max back to real min/max values.
-	altVsTimeChart->setupAxes(core->getJD(), 1);
+	altVsTimeChart->setupAxes(core->getJD(), 1, "");
 	qDebug() << "set chart ...";
 	QChart *oldChart=ui->altVsTimeChartView->chart();
 	if (oldChart) oldChart->deleteLater();
@@ -4680,11 +4680,11 @@ void AstroCalcDialog::prepareAxesAndGraph()
 
 void AstroCalcDialog::drawXVsTimeGraphs()
 {
+	if (!curvesChartMutex.tryLock()) return;
 	PlanetP ssObj = solarSystem->searchByEnglishName(ui->graphsCelestialBodyComboBox->currentData().toString());	
 	// added special case - the tool is not applicable on non-Earth locations
 	if (!ssObj.isNull() && core->getCurrentPlanet()==solarSystem->getEarth())
 	{
-		if (!curvesChartMutex.tryLock()) return;
 
 		// X axis - time; Y axis - altitude
 		QList<double> aX, aY, bY;
@@ -4698,6 +4698,10 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 		int dYear = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()*graphsDuration) + 3;
 		AstroCalcChart::Series firstGraph  = AstroCalcChart::Series(ui->graphsFirstComboBox->currentData().toInt());
 		AstroCalcChart::Series secondGraph = AstroCalcChart::Series(ui->graphsSecondComboBox->currentData().toInt());
+
+		// It may be that we come from 0.22.1 for the first time. Apply some useful default graphs
+		if (firstGraph==AstroCalcChart::AltVsTime) firstGraph=AstroCalcChart::AngularSize1;
+		if (secondGraph==AstroCalcChart::AltVsTime) secondGraph=AstroCalcChart::Magnitude2;
 		curvesChart = new AstroCalcChart({firstGraph, secondGraph});
 
 		for (int i = -2; i <= dYear; i++)
@@ -4743,7 +4747,9 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 		double minYRight = minY - margin;
 		double maxYRight = maxY + margin;
 
-		prepareXVsTimeAxesAndGraph(minYLeft, maxYLeft, minYRight, maxYRight);
+		QString englishName=ui->graphsCelestialBodyComboBox->currentData().toString();
+		qDebug() << "Object name: " << englishName;
+		prepareXVsTimeAxesAndGraph(minYLeft, maxYLeft, minYRight, maxYRight, englishName);
 
 		ui->graphsPlot->clearGraphs();
 		ui->graphsPlot->setBackground(QBrush(QColor(86, 87, 90)));
@@ -4791,22 +4797,24 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 
 		curvesChart->show(firstGraph);
 		curvesChart->show(secondGraph);
-		qDebug() << "create chart axes...";
+		qDebug() << "create chart axes: " << minYLeft << "..." << maxYLeft << "(" << firstGraph << "), " << minYRight << "/" << maxYRight << "(" << secondGraph << ")";
 		curvesChart->setYrange(minYLeft, maxYLeft);
 		curvesChart->setYrangeR(minYRight, maxYRight);
-		curvesChart->setupAxes(core->getJD(), graphsDuration);
+		curvesChart->setupAxes(core->getJD(), graphsDuration, englishName);
 		qDebug() << "set chart ...";
 	}
 	else
 	{
-		prepareXVsTimeAxesAndGraph(-1001., 1001., -1001., 1001.);
+		curvesChart = new AstroCalcChart({AstroCalcChart::AngularSize1, AstroCalcChart::Magnitude2}); // May be wrong as it does not protect display from other planets...
+
+		prepareXVsTimeAxesAndGraph(-1001., 1001., -1001., 1001., "");
 		ui->graphsPlot->clearGraphs();
 		ui->graphsPlot->replot();
 
-		qDebug() << "create chart axes...";
+		qDebug() << "create default chart axes: ( no graphs )"; // << firstGraph << "/" << secondGraph << ")";
 		curvesChart->setYrange(0., 10.);
 		curvesChart->setYrangeR(0., 10.);
-		curvesChart->setupAxes(core->getJD(), graphsDuration);
+		curvesChart->setupAxes(core->getJD(), graphsDuration, "");
 		qDebug() << "set chart ...";
 	}
 
@@ -4889,6 +4897,8 @@ double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const AstroCalcC
 		case AstroCalcChart::Distance1:
 		case AstroCalcChart::Distance2:
 			value =  ssObj->getJ2000EquatorialPos(core).length();
+			if (ssObj->getEnglishName()=="Moon")
+				value*=(AU*0.001);
 			break;
 		case AstroCalcChart::Elongation1:
 		case AstroCalcChart::Elongation2:
@@ -5017,22 +5027,14 @@ void AstroCalcDialog::populateFunctionsList()
 	secondCB->blockSignals(false);
 }
 
-void AstroCalcDialog::prepareXVsTimeAxesAndGraph(double minYLeft, double maxYLeft, double minYRight, double maxYRight)
+void AstroCalcDialog::prepareXVsTimeAxesAndGraph(double minYLeft, double maxYLeft, double minYRight, double maxYRight, QString englishName)
 {
 	QString distMU = qc_("AU", "distance, astronomical unit");
-	QString asMU = QString("'");
-
-	PlanetP ssObj = solarSystem->searchByEnglishName(ui->graphsCelestialBodyComboBox->currentData().toString());
-	if (!ssObj.isNull())
-	{
-		if (ssObj->getJ2000EquatorialPos(core).length() < 0.1)
-		{
-			// TRANSLATORS: Mega-meter (SI symbol: Mm; Mega-meter is a unit of length in the metric system,
-			// equal to one million meters)
-			distMU = q_("Mm");
-		}
-		if ((ssObj->getAngularRadius(core) * 360. / M_PI) < 1.) asMU = QString("\"");
-	}
+	// TRANSLATORS: Mega-meter (SI symbol: Mm; Mega-meter is a unit of length in the metric system,
+	// equal to one million meters)
+	QString distMUMoon = q_("Mm");
+	QString asMU("\"");
+	if ((englishName=="Sun") || (englishName=="Moon")) asMU = QString("'");
 
 	bool invertAxis1 = false;
 	bool invertAxis2 = false;
@@ -5051,7 +5053,7 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph(double minYLeft, double maxYLef
 			if (maxYLeft > 1000.) maxYLeft = 100.0;
 			break;
 		case AstroCalcChart::Distance1:
-			yAxis1Legend = QString("%1, %2").arg(q_("Distance"), distMU);
+			yAxis1Legend = QString("%1, %2").arg(q_("Distance"), (englishName=="Moon" ? distMUMoon : distMU ));
 			if (minYLeft < -1000.) minYLeft = 0.0;
 			if (maxYLeft > 1000.) maxYLeft = 50.0;
 			break;
@@ -5109,7 +5111,7 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph(double minYLeft, double maxYLef
 			if (maxYRight > 1000.) maxYRight = 100.0;
 			break;
 		case AstroCalcChart::Distance2:
-			yAxis2Legend = QString("%1, %2").arg(q_("Distance"), distMU);
+			yAxis2Legend = QString("%1, %2").arg(q_("Distance"), (englishName=="Moon" ? distMUMoon : distMU ));
 			if (minYRight < -1000.) minYRight = 0.0;
 			if (maxYRight > 1000.) maxYRight = 50.0;
 			break;
@@ -5398,7 +5400,7 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 	qDebug() << "create chart axes...";
 	monthlyElevationChart->setYrange(minYme+2., maxYme-2.); // TODO: reduce min/max back to real min/max values.
 	monthlyElevationChart->show(AstroCalcChart::MonthlyElevation);
-	monthlyElevationChart->setupAxes(core->getJD(), 1);
+	monthlyElevationChart->setupAxes(core->getJD(), 1, "");
 	qDebug() << "set chart ...";
 	QChart *oldChart=ui->monthlyElevationChartView->chart();
 	if (oldChart) oldChart->deleteLater();
@@ -8379,7 +8381,7 @@ void AstroCalcDialog::drawDistanceGraph()
 	ui->pcDistanceGraphPlot->replot();
 
 	qDebug() << "create chart axes...";
-	pcChart->setupAxes(core->getJD(), 1);
+	pcChart->setupAxes(core->getJD(), 1, "");
 	qDebug() << "set chart ...";
 	QChart *oldChart=ui->pcChartView->chart();
 	if (oldChart) oldChart->deleteLater();
@@ -8571,7 +8573,7 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 	qDebug() << "create chart axes...";
 	lunarElongationChart->setYrange(minYadm+5., maxYadm-5.); // TODO: reduce min/max back to real min/max values.
 	lunarElongationChart->show(AstroCalcChart::LunarElongation);
-	lunarElongationChart->setupAxes(core->getJD(), 1);
+	lunarElongationChart->setupAxes(core->getJD(), 1, "");
 	qDebug() << "set chart ...";
 	QChart *oldChart=ui->lunarElongationChartView->chart();
 	if (oldChart) oldChart->deleteLater();
