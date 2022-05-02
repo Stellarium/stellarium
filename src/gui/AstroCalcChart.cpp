@@ -325,7 +325,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	}
 	else
 	{
-		xAxis->setTickCount(12+1); // step is ~30*periods days.
+		xAxis->setTickCount(12+1); // step is ~30*periods days. We cannot have more, due to space reasons.
 		xRange=findXRange(jd, AstroCalcChart::AngularSize1, periods);
 		if (periods>1) xAxis->setFormat("dd.MM.yy");
 	}
@@ -337,7 +337,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	else if (map.contains(AstroCalcChart::AzVsTime))
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Azimuth"), QChar(0x00B0)));
 	else if (map.contains(AstroCalcChart::LunarElongation))
-		yAxis->setTitleText(QString("%1, %2").arg(q_("Angular distance"), QChar(0x00B0)));
+		yAxis->setTitleText(QString("%1, %2").arg(q_("Lunar elongation"), QChar(0x00B0)));
 	else if (map.contains(AstroCalcChart::AngularSize1))
 		yAxis->setTitleText(QString("%1, %2").arg(q_("Angular size"), (englishName=="Moon" || englishName=="Sun") ? QString("'") : QString("\"")));
 	else if (map.contains(AstroCalcChart::Declination1))
