@@ -167,6 +167,16 @@ AstroCalcDialog::~AstroCalcDialog()
 	delete customStepsDialog;
 	if (altVsTimeChart)
 		delete altVsTimeChart;
+	if (azVsTimeChart)
+		delete azVsTimeChart;
+	if (monthlyElevationChart)
+		delete monthlyElevationChart;
+	if (curvesChart)
+		delete curvesChart;
+	if (lunarElongationChart)
+		delete lunarElongationChart;
+	if (pcChart)
+		delete pcChart;
 }
 
 void AstroCalcDialog::retranslate()
@@ -236,13 +246,19 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
-	// prepare default background gradient for all graphs
-	graphBackgroundGradient.setStart(QPointF(0, 0));
-	graphBackgroundGradient.setFinalStop(QPointF(0, 1));
-	// Colors for gradiaent taken from QSS's QWidget
+	// prepare default background gradient for all charts. This is used for the outer frame, not the actual chart!
+	QLinearGradient graphBackgroundGradient(QPointF(0, 0), QPointF(0, 1));
+	// Colors for gradient taken from QSS's QWidget
 	graphBackgroundGradient.setColorAt(0.0, QColor(90, 90, 90));
 	graphBackgroundGradient.setColorAt(1.0, QColor(70, 70, 70));
 	graphBackgroundGradient.setCoordinateMode(QGradient::ObjectBoundingMode);
+	ui->hecPositionsChartView->setBackgroundBrush(graphBackgroundGradient);
+	ui->aziVsTimeChartView->setBackgroundBrush(graphBackgroundGradient);
+	ui->altVsTimeChartView->setBackgroundBrush(graphBackgroundGradient);
+	ui->twoGraphsChartView->setBackgroundBrush(graphBackgroundGradient);
+	ui->pcChartView->setBackgroundBrush(graphBackgroundGradient);
+	ui->lunarElongationChartView->setBackgroundBrush(graphBackgroundGradient);
+	ui->monthlyElevationChartView->setBackgroundBrush(graphBackgroundGradient);
 
 	initListCelestialPositions();
 	initListHECPositions();
@@ -1711,8 +1727,8 @@ void AstroCalcDialog::currentHECPositions()
 
 			fillHECPositionTable(planet->getNameI18n(), coordStrings.first, coordStrings.second, distance);
 			object.objectName = planet->getNameI18n();
-			object.x = 360.-dl;
-			object.y = log(distance);
+			object.angle = 360.-dl;
+			object.dist = log(distance);
 			hecObjects.append(object);
 		}
 	}
@@ -1733,9 +1749,9 @@ void AstroCalcDialog::drawHECGraph(QString selectedObject)
 
 	for (const auto& planet : qAsConst(hecObjects))
 	{
-		seriesPlanets->append(planet.x, planet.y);
+		seriesPlanets->append(planet.angle, planet.dist);
 		if (!selectedObject.isEmpty() && planet.objectName==selectedObject)
-			seriesSelectedPlanet->append(planet.x, planet.y);
+			seriesSelectedPlanet->append(planet.angle, planet.dist);
 	}
 
 	QColor axisColor(Qt::lightGray);
@@ -1805,11 +1821,10 @@ void AstroCalcDialog::drawHECGraph(QString selectedObject)
 	seriesSun->setColor(Qt::yellow);
 	seriesSun->setBorderColor(Qt::red);
 
-	QChart* ch=ui->hecPositionsGraph->chart();
+	QChart* oldChart=ui->hecPositionsChartView->chart();
 
-	ui->hecPositionsGraph->setChart(chart);
-	if (ch) delete ch;
-	ui->hecPositionsGraph->setBackgroundBrush(graphBackgroundGradient);
+	ui->hecPositionsChartView->setChart(chart);
+	if (oldChart) delete oldChart;
 }
 
 void AstroCalcDialog::saveHECPositions()
@@ -4574,7 +4589,7 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 		if (altVsTimeChart){
 			//altVsTimeChart->replace(AstroCalcChart::CurrentTime, 0, now, minY-10);
 			//altVsTimeChart->replace(AstroCalcChart::CurrentTime, 1, now, maxY+10);
-			altVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, StelUtils::jdToQDateTime(currentJD).toMSecsSinceEpoch());
+			altVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, StelUtils::jdToQDateTime(currentJD+UTCOffset/24.).toMSecsSinceEpoch());
 			qDebug() << "Chart: replace/append currentTime in alt chart...done";
 		}
 		else
@@ -4588,7 +4603,7 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 		if (azVsTimeChart){
 			//azVsTimeChart->replace(AstroCalcChart::CurrentTime, 0, now, minY-10);
 			//azVsTimeChart->replace(AstroCalcChart::CurrentTime, 1, now, maxY+10);
-			azVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, StelUtils::jdToQDateTime(currentJD).toMSecsSinceEpoch());
+			azVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, StelUtils::jdToQDateTime(currentJD+UTCOffset/24.).toMSecsSinceEpoch());
 			qDebug() << "Chart: replace/append currentTime in azi chart...done";
 		}
 		else
