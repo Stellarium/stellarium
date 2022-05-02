@@ -66,7 +66,7 @@ public:
 	void setYrangeR(qreal min, qreal max);
 
 	//! Find range of dates for the respective series plot.
-	//! Valid values for series are AltVsTime, AzVsTime, MonthlyElevation, LunarDistance. All other values are interpreted as 2-curve plots extending over the current year.
+	//! Valid values for series are AltVsTime, AzVsTime, MonthlyElevation, LunarElongation. All other values are interpreted as 2-curve plots extending over the current year.
 	//! @arg periods number of periods (defaults to 1; currently applicable for number of years in the 2-curves plot)
 	QPair<QDateTime, QDateTime>findXRange(const double JD, const Series series, const int periods=1);
 
