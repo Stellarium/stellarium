@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-05-02 18:11+0700\n"
+"POT-Creation-Date: 2022-05-02 18:50+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14808,7 +14808,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularDialog.cpp:628
 #: plugins/Pulsars/src/Pulsar.cpp:303
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:596
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:317
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:320
 msgid "Notes"
 msgstr ""
 
@@ -16299,7 +16299,7 @@ msgstr ""
 #. TRANSLATORS: duration
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1055
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:337
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:340
 msgctxt "time unit"
 msgid " h"
 msgstr ""
@@ -22353,26 +22353,7 @@ msgid ""
 "position and activity. Most data used on this plugin comes from the official "
 "<a href=\"http://imo.net\">International Meteor Organization</a> catalog and "
 "<a href=\"https://www.ta3.sk/IAUC22DB/MDC2007/\">IAU Meteor Data Center</a>."
-"</p><p>It has three types of markers:<ul><li><b>Confirmed:</b> the radiant "
-"is active and its data was confirmed. Thus, this is a historical (really "
-"occurred in the past) or predicted meteor shower.</li><li><b>Generic:</b> "
-"the radiant is active, but its data was not confirmed. It means that this "
-"can occur in real life, but that we do not have proper data about its "
-"activity for the current year.</li><li><b>Inactive:</b> the radiant is "
-"inactive for the current sky date.</li></ul></p><p><b>Zenithal Hourly Rate "
-"(ZHR)</b> is the number of meteors a single observer would see in one hour "
-"under a clear, dark sky (limiting apparent magnitude of 6.5) if the radiant "
-"of the shower were at the zenith, directly overhead.</p><p><b>ZHR<sub>max</"
-"sub></b> is the maximum ZHR of a meteor shower at peak date and time when "
-"Earth passes through the densest region of meteoroid stream.</"
-"p><p><b>Current ZHR</b> is the ZHR at given time, assumming that the "
-"activity profile of meteor shower follows the double exponential shape.</"
-"p><p><b>Local hourly rate</b> is the number of meteors in one hour for "
-"current location, it is the actual expected rate , calculated by taking "
-"altitude of radiant (hourly rate decreases the closer the radiant is to the "
-"horizon) and limiting magnitude of the sky into account. It is nearly always "
-"lower than <i>current ZHR</i>. Moonlight can also reduce the hourly rate, "
-"but it doesn't take into account.</p>"
+"</p>"
 msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:139
@@ -22437,13 +22418,13 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:709
 #: plugins/MeteorShowers/src/MeteorShower.cpp:730
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:301
 msgid "Current ZHR"
 msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:712
 #: plugins/MeteorShowers/src/MeteorShower.cpp:740
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:304
 msgid "Local Hourly Rate"
 msgstr ""
 
@@ -23043,11 +23024,32 @@ msgid ""
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:297
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:298
+msgid ""
+"The maximum ZHR of a meteor shower at peak date and time when Earth passes "
+"through the densest region of meteoroid stream."
+msgstr ""
+
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:302
+msgid ""
+"the ZHR at given time, assumming that the activity profile of meteor shower "
+"follows the double exponential shape."
+msgstr ""
+
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
+msgid ""
+"The number of meteors in one hour for current location, it is the actual "
+"expected rate, calculated by taking altitude of radiant (hourly rate "
+"decreases the closer the radiant is to the horizon) and limiting magnitude "
+"of the sky into account. It is nearly always lower than <i>current ZHR</i>. "
+"Moonlight can also reduce the hourly rate, but it doesn't take into account.."
+msgstr ""
+
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:310
 msgid "Population index"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:298
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 msgid ""
 "The population index indicates the magnitude distribution of the meteor "
 "showers. The values below 2.5 correspond to distributions where bright "
@@ -23055,68 +23057,50 @@ msgid ""
 "share of faint meteors is larger than usual."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:303
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:316
 msgid "Solar longitude"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:304
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:317
 msgid ""
 "Solar longitude (equinox J2000) gives the position of the Earth on its "
 "orbit. It is a more appropriate information on a meteor shower than the date."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:308
-msgid ""
-"Hourly rate of a meteor shower for current location on Earth - altitude of "
-"radiant and limiting magnitude are both taken into account. Lower radiant "
-"altitude means fewer meteors are observable. This should give users a more "
-"realistic expected rate for each shower at any given date and time. It helps "
-"to determine which is the best night (and best time for some showers) to "
-"observe a meteor shower."
-msgstr ""
-
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:314
-msgid ""
-"This should give a better idea of how ZHR changes over time (lower than "
-"maximum ZHR when far away from the center of meteoroid stream). This plugin "
-"use Gaussian (for low ZHR) and Lorentz distribution (for high ZHR) with "
-"different slope values for the curve of each shower."
-msgstr ""
-
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:318
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:321
 msgid ""
 "This plugin was initially created as a project of the ESA Summer of Code in "
 "Space 2013."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:319
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:322
 msgid "Info"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:320
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:323
 msgid "Info about meteor showers you can get here:"
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:323
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:326
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:325
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:328
 #, qt-format
 msgid "%1International Meteor Organization%2"
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:327
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:330
 #, qt-format
 msgid "%1IAU Meteor Data Center%2"
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:329
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:332
 #, qt-format
 msgid "%1Major Showers Observations%2"
 msgstr ""

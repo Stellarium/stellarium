@@ -294,6 +294,19 @@ void MSConfigDialog::setAboutHtml()
 		   "effectively be seen is nearly always lower and decreases the closer the radiant is to "
 		   "the horizon.") +
 	"<br/></dd>"
+	"<dt><strong>ZHR<sub>max</sub></strong></dt><dd>" +
+		q_("The maximum ZHR of a meteor shower at peak date and time when Earth passes through the "
+		   "densest region of meteoroid stream.") +
+	"<br/></dd>" +
+	"<dt><strong>" + q_("Current ZHR") + "</strong></dt><dd>" +
+		q_("the ZHR at given time, assumming that the activity profile of meteor shower follows the double exponential shape.") +
+	"<br/></dd>" +
+	"<dt><strong>" + q_("Local Hourly Rate") + "</strong></dt><dd>" +
+		q_("The number of meteors in one hour for current location, it is the actual expected rate, calculated by "
+		   "taking altitude of radiant (hourly rate decreases the closer the radiant is to the horizon) and "
+		   "limiting magnitude of the sky into account. It is nearly always lower than <i>current ZHR</i>. "
+		   "Moonlight can also reduce the hourly rate, but it doesn't take into account..") +
+	"<br/></dd>" +
 	"<dt><strong>" + q_("Population index") + "</strong></dt><dd>" +
 		q_("The population index indicates the magnitude distribution of the meteor showers. The "
 		   "values below 2.5 correspond to distributions where bright meteors are more frequent "
@@ -303,16 +316,6 @@ void MSConfigDialog::setAboutHtml()
 	"<dt><strong>" + q_("Solar longitude") + "</strong></dt><dd>" +
 		q_("Solar longitude (equinox J2000) gives the position of the Earth on its orbit. "
 		   "It is a more appropriate information on a meteor shower than the date.") +
-	"<br/></dd>" +
-	"<dt><strong>" + q_("Local Hourly Rate") + "</strong></dt><dd>" +
-		q_("Hourly rate of a meteor shower for current location on Earth - altitude of radiant and limiting "
-		   "magnitude are both taken into account. Lower radiant altitude means fewer meteors are observable. "
-		   "This should give users a more realistic expected rate for each shower at any given date and time. "
-		   "It helps to determine which is the best night (and best time for some showers) to observe a meteor shower.") +
-	"<br/></dd>" +
-	"<dt><strong>" + q_("Current ZHR") + "</strong></dt><dd>" +
-		q_("This should give a better idea of how ZHR changes over time (lower than maximum ZHR when far away from the center of meteoroid stream). "
-		   "This plugin use Gaussian (for low ZHR) and Lorentz distribution (for high ZHR) with different slope values for the curve of each shower.") +
 	"</dd></dl>" +
 	"<h3>" + q_("Notes") + "</h3>"
 	"<p>" + q_("This plugin was initially created as a project of the ESA Summer of Code in Space 2013.") + "</p>"
