@@ -299,7 +299,7 @@ void MSConfigDialog::setAboutHtml()
 		   "densest region of meteoroid stream.") +
 	"<br/></dd>" +
 	"<dt><strong>" + q_("Current ZHR") + "</strong></dt><dd>" +
-		q_("the ZHR at given time, assumming that the activity profile of meteor shower follows the double exponential shape.") +
+		q_("The ZHR at given time, assumming that the activity profile of meteor shower follows the double exponential shape.") +
 	"<br/></dd>" +
 	"<dt><strong>" + q_("Local Hourly Rate") + "</strong></dt><dd>" +
 		q_("The number of meteors in one hour for current location, it is the actual expected rate, calculated by "
