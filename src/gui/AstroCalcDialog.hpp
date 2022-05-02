@@ -60,11 +60,12 @@ struct Ephemeris
 };
 Q_DECLARE_METATYPE(Ephemeris)
 
+// Intermediate data structure for the simple solar system map.
 struct HECPosition
 {
 	QString objectName;
-	double x;
-	double y;
+	double angle; // derived from heliocentric ecl. longitude
+	double dist;  // derived from helioc. distance
 };
 Q_DECLARE_METATYPE(HECPosition)
 
@@ -406,7 +407,6 @@ private:
 	mutable QMutex pcChartMutex;
 
 	QSettings* conf;
-	QLinearGradient graphBackgroundGradient;
 	QTimer *currentTimeLine;
 	QHash<QString,int> wutCategories;
 	QPair<double, double> getLunarEclipseXY() const;
