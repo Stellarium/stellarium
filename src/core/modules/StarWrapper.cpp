@@ -386,7 +386,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << QString("%1 (%3): %2°").arg(q_("Position angle"),
 							QString::number(wdsPA, 'f', 2),
 							QString::number(wdsObs)) << "<br />";
-			if (wdsSep>0.f) // A spectroscopic binary or not?
+			if (wdsSep>0.f && wdsSep<999.f) // A spectroscopic binary or not?
 			{
 				if (wdsSep>60.f) // A wide binary star?
 					oss << QString("%1 (%4): %2\" (%3)").arg(
