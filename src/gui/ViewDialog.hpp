@@ -89,6 +89,8 @@ private slots:
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 
 	void updateSelectedCatalogsCheckBoxes();
+	void selectAllCatalogs();
+	void selectNoneCatalogs();
 	void updateSelectedTypesCheckBoxes();
 
 	void updateHips();

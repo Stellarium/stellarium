@@ -295,6 +295,8 @@ void ViewDialog::createDialogContent()
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 	updateSelectedCatalogsCheckBoxes();
 	connect(nmgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(updateSelectedCatalogsCheckBoxes()));
+	connect(ui->selectAllCatalogs, SIGNAL(clicked()), this, SLOT(selectAllCatalogs()));
+	connect(ui->selectNoneCatalogs, SIGNAL(clicked()), this, SLOT(selectNoneCatalogs()));
 	connect(ui->buttonGroupDisplayedDSOCatalogs, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedCatalogsFromCheckBoxes()));
 	updateSelectedTypesCheckBoxes();
 	connect(nmgr, SIGNAL(typeFiltersChanged(Nebula::TypeGroup)), this, SLOT(updateSelectedTypesCheckBoxes()));
@@ -851,6 +853,16 @@ void ViewDialog::updateSelectedCatalogsCheckBoxes()
 	ui->checkBoxRu->setChecked(flags & Nebula::CatRu);
 	ui->checkBoxVdBHa->setChecked(flags & Nebula::CatVdBHa);
 	ui->checkBoxOther->setChecked(flags & Nebula::CatOther);	
+}
+
+void ViewDialog::selectAllCatalogs()
+{
+	GETSTELMODULE(NebulaMgr)->setCatalogFilters(Nebula::AllCatalogs);
+}
+
+void ViewDialog::selectNoneCatalogs()
+{
+	GETSTELMODULE(NebulaMgr)->setCatalogFilters(Nebula::CatNone);
 }
 
 void ViewDialog::updateSelectedTypesCheckBoxes()
