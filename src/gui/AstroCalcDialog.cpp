@@ -878,7 +878,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 			deg=az*M_180_PI;
 			aY.append(deg);
 			// prepare QChart use:
-			azVsTimeChart->append(AstroCalcChart::AzVsTime, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), deg);
+			azVsTimeChart->append(AstroCalcChart::AzVsTime, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg);
 		}
 		azVsTimeChart->show(AstroCalcChart::AzVsTime);
 		core->setJD(currentJD);
@@ -4402,7 +4402,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 				transitJD=JD;
 			}
 			// prepare QChart use:
-			altVsTimeChart->append(AstroCalcChart::AltVsTime, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), deg);
+			altVsTimeChart->append(AstroCalcChart::AltVsTime, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg);
 		}
 		altVsTimeChart->show(AstroCalcChart::AltVsTime);
 
@@ -4424,10 +4424,10 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 				sYa.append(deg + 18);
 
 				// QChart:
-				altVsTimeChart->append(AstroCalcChart::SunElevation,     StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), deg);
-				altVsTimeChart->append(AstroCalcChart::CivilTwilight,    StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), deg+6);
-				altVsTimeChart->append(AstroCalcChart::NauticalTwilight, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), deg+12);
-				altVsTimeChart->append(AstroCalcChart::AstroTwilight,    StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), deg+18);
+				altVsTimeChart->append(AstroCalcChart::SunElevation,     StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg);
+				altVsTimeChart->append(AstroCalcChart::CivilTwilight,    StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg+6);
+				altVsTimeChart->append(AstroCalcChart::NauticalTwilight, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg+12);
+				altVsTimeChart->append(AstroCalcChart::AstroTwilight,    StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg+18);
 			}
 		}
 
@@ -4445,7 +4445,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 				double deg=alt*M_180_PI;
 				mY.append(deg);
 				// QChart use:
-				altVsTimeChart->append(AstroCalcChart::Moon, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), deg);
+				altVsTimeChart->append(AstroCalcChart::Moon, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg);
 			}
 		}
 
@@ -4498,7 +4498,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 
 		drawTransitTimeDiagram();
 		// For chart, replace by:
-		altVsTimeChart->drawTrivialLineX(AstroCalcChart::TransitTime, StelUtils::jdToQDateTime(transitJD).toMSecsSinceEpoch());
+		altVsTimeChart->drawTrivialLineX(AstroCalcChart::TransitTime, StelUtils::jdToQDateTime(transitJD+shift).toMSecsSinceEpoch());
 
 		ui->altVsTimePlot->graph(0)->setData(aX.toVector(), aY.toVector());
 		ui->altVsTimePlot->graph(0)->setName(name);
