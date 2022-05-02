@@ -90,6 +90,7 @@ private slots:
 
 	void updateSelectedCatalogsCheckBoxes();
 	void selectAllCatalogs();
+	void selectStandardCatalogs();
 	void selectNoneCatalogs();
 	void updateSelectedTypesCheckBoxes();
 

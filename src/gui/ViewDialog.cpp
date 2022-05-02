@@ -161,8 +161,7 @@ void ViewDialog::createDialogContent()
 	ui->pushButtonAtmosphereDetails->setFixedSize(bs);
 	ui->pushButtonSkylightDetails->setFixedSize(bs);
 	ui->tonemappingPushButton->setFixedSize(bs);
-	ui->pushButtonOrbitColors->setFixedSize(bs);
-
+	ui->pushButtonOrbitColors->setFixedSize(bs);	
 
 	// TODOs after properties merge:
 	// Jupiter's GRS should become property, and recheck the other "from trunk" entries.
@@ -296,6 +295,7 @@ void ViewDialog::createDialogContent()
 	updateSelectedCatalogsCheckBoxes();
 	connect(nmgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(updateSelectedCatalogsCheckBoxes()));
 	connect(ui->selectAllCatalogs, SIGNAL(clicked()), this, SLOT(selectAllCatalogs()));
+	connect(ui->selectStandardCatalogs, SIGNAL(clicked()), this, SLOT(selectStandardCatalogs()));
 	connect(ui->selectNoneCatalogs, SIGNAL(clicked()), this, SLOT(selectNoneCatalogs()));
 	connect(ui->buttonGroupDisplayedDSOCatalogs, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedCatalogsFromCheckBoxes()));
 	updateSelectedTypesCheckBoxes();
@@ -857,7 +857,16 @@ void ViewDialog::updateSelectedCatalogsCheckBoxes()
 
 void ViewDialog::selectAllCatalogs()
 {
-	GETSTELMODULE(NebulaMgr)->setCatalogFilters(Nebula::AllCatalogs);
+	GETSTELMODULE(NebulaMgr)->setCatalogFilters(Nebula::CatAll);
+}
+
+void ViewDialog::selectStandardCatalogs()
+{
+	Nebula::CatalogGroup catalogs = Nebula::CatNone;
+	catalogs |= Nebula::CatNGC;
+	catalogs |= Nebula::CatIC;
+	catalogs |= Nebula::CatM;
+	GETSTELMODULE(NebulaMgr)->setCatalogFilters(catalogs);
 }
 
 void ViewDialog::selectNoneCatalogs()
