@@ -170,7 +170,6 @@ void AstroCalcChart::replace(Series s, int index, qreal x, qreal y)
 		}
 		else
 			map.value(s)->append(x, y);
-
 	}
 	else
 		qDebug() << "Series " << s << "invalid for replace()!";
@@ -285,7 +284,6 @@ void AstroCalcChart::clear(Series s)
 	qDebug() << "clearing series with " << map.value(s)->points().length() << "entries";
 	map.value(s)->clear();
 	removeSeries(map.value(s)); // updates legend to not show entries
-
 }
 
 QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Series series, const int periods)
@@ -551,5 +549,4 @@ void AstroCalcChart::setYrangeR(qreal min, qreal max)
 		yAxis->setTickCount(qRound((rMax*s-rMin*s)/s)+1);
 		yAxis->setMinorTickCount(1);
 	}
-
 }
