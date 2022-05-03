@@ -288,7 +288,6 @@ void AstroCalcChart::clear(Series s)
 
 QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Series series, const int periods)
 {
-	//QtCharts::QSplineSeries *s;
 	QDateTime startDate, endDate;
 	switch (series){
 		case AstroCalcChart::AltVsTime:
@@ -332,37 +331,26 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	static const QPen axisMinorGridPenR(Qt::yellow,     0.35, Qt::DotLine);
 
 	const double shift = StelApp::getInstance().getCore()->getUTCOffset(jd) / 24.0;
-	qDebug() << "Why is this shift not a full number of hours?: " << shift*24.;
+	//qDebug() << "Why is this shift not a full number of hours?: " << shift*24.;
 
 	// Variables for scaling x axis
 	QPair<QDateTime, QDateTime>xRange;
 	// Maybe prefer to allow axis labeling from outside.
 	xAxis->setTitleText(q_("Date")); // was Days from today, but real date is better. generally TODO: ticks on midnight, not "now".
-	xAxis->setFormat("dd.MM.");
+	xAxis->setFormat("<div style=\"text-align:center\">dd.MM.</div>");
 	if (map.contains(AstroCalcChart::AltVsTime) || map.contains(AstroCalcChart::AzVsTime))
 	{
-		//s=map.value(AstroCalcChart::AltVsTime, map.value(AstroCalcChart::AzVsTime));
 		xAxis->setTitleText(q_("Local Time"));
-		//xAxis->setRange(43200, 129600); // 24 hours since 12h00m (range in seconds)
-		const double noon=floor(jd+shift);
-		//double ltime=-5*180+43200;
-		//jdMin= noon-shift; // noon+ltime/86400.-shift-0.5;
-		//ltime=485*180+43200;
-		//jdMax= jdMin+1.; // noon+ltime/86400.-shift-0.5;
-
 		xAxis->setTickCount(13); // step is 2 hours
-		//xAxis->setMinorTickCount(1); // substep is 1 hours. Unfortunately this axis type has no subticks.
-		//xAxisRange=findXRange(jd, AstroCalcChart::AltVsTime, 1);
-		xAxis->setFormat("dd\nh:mm");
-		//setLocale(QLocale(localeMgr->getAppLanguage()));
+		//xAxis->setFormat("<div style=\"text-align:center\">dd.MM.<br/>hh:mm</div>"); // This sets C locale with AM/PM hours! :-O
+		xAxis->setFormat("dd.MM.<br/>hh:mm");
 		xRange=findXRange(floor(jd+shift), AstroCalcChart::AltVsTime, 1);
 	}
 	else if (map.contains(AstroCalcChart::MonthlyElevation))
 	{
-		//xAxis->setRange(s->at(0).x(), s->at(s->count()-1).x()); // TODO-range in unknown units
-		//qDebug() << "xAxis range is "  << s->at(0).x() << "/" << s->at(s->count()-1).x();
 		xAxis->setTickCount(13); // about monthly
 		xRange=findXRange(jd, AstroCalcChart::MonthlyElevation, 1);
+		xAxis->setFormat("<div style=\"text-align:center\">dd.<br/>MMM</div>");
 	}
 	else if (map.contains(AstroCalcChart::LunarElongation))
 	{
@@ -378,7 +366,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	{
 		xAxis->setTickCount(12+1); // step is ~30*periods days. We cannot have more, due to space reasons.
 		xRange=findXRange(jd, AstroCalcChart::AngularSize1, periods);
-		if (periods>1) xAxis->setFormat("dd.MM.yy");
+		if (periods>1) xAxis->setFormat("<div style=\"text-align:center\">dd.MM.<br/>yyyy</div>");
 	}
 	xAxis->setRange(xRange.first, xRange.second);
 //	qDebug() << "xAxis range is "  << xRange.first << "/" << xRange.second;
@@ -454,6 +442,14 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	yAxis->setGridLinePen(axisGridPen);
 	yAxis->setMinorGridLinePen(axisMinorGridPen);
 
+	// QChart axes are labeled bold by default. Set back to normal weight.
+	QFont font=xAxis->titleFont();
+	font.setBold(false);
+	xAxis->setTitleFont(font);
+	font=yAxis->titleFont();
+	font.setBold(false);
+	yAxis->setTitleFont(font);
+
 	addAxis(xAxis, Qt::AlignBottom);
 	addAxis(yAxis, Qt::AlignLeft);
 	if (yAxisR)
@@ -471,6 +467,10 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 		yAxis->setLinePen(axisPenL);
 		yAxis->setGridLinePen(axisGridPenL);
 		yAxis->setMinorGridLinePen(axisMinorGridPenL);
+
+		font=yAxisR->titleFont();
+		font.setBold(false);
+		yAxisR->setTitleFont(font);
 	}
 	const QList<QtCharts::QAbstractSeries *> ser=series(); // currently shown series. These may be fewer than the series in our map!
 
