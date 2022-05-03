@@ -4799,6 +4799,17 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 		double minYRight = minY - margin;
 		double maxYRight = maxY + margin;
 
+		if (firstGraph==AstroCalcChart::RightAscension1)
+		{
+			minYLeft=0.;
+			maxYLeft=24.;
+		}
+		if (secondGraph==AstroCalcChart::RightAscension2)
+		{
+			minYRight=0.;
+			maxYRight=24.;
+		}
+
 		QString englishName=ui->graphsCelestialBodyComboBox->currentData().toString();
 		qDebug() << "Object name: " << englishName;
 		prepareXVsTimeAxesAndGraph(minYLeft, maxYLeft, minYRight, maxYRight, englishName);
