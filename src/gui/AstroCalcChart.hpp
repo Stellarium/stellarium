@@ -37,7 +37,7 @@ public:
 	// Series names. Better than int numbers for the old plots.
 	// This graph can be used in several scenarios. In 0.22 there are 6 plots which can be recreated by creating a chart which activates 1-2 lines of these:
 	enum Series {AltVsTime, CurrentTime, TransitTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight, Moon,
-		     AzVsTime,
+		     AzVsTime, AzVsTimeCont,
 		     MonthlyElevation,
 		     AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1,
 		     AngularSize2, Declination2, Distance2, Elongation2, HeliocentricDistance2, Magnitude2, PhaseAngle2, Phase2, RightAscension2, TransitAltitude2,
@@ -55,6 +55,8 @@ public:
 	void replace(Series s, int index, qreal x, qreal y);
 	//! Reset (delete and create new empty) series s
 	void clear(Series s);
+	//! @return length of series s
+	int lengthOfSeries(Series s);
 
 	//! Activate series s. It must have been filled using append(s, ., .) before.
 	void show(Series s);

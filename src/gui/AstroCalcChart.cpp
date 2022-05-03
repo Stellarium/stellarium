@@ -26,6 +26,7 @@
 #include <math.h>
 #include <QDebug>
 #include <QAbstractSeries>
+#include <QLegendMarker>
 #include <QPen>
 #include <QColor>
 
@@ -110,6 +111,7 @@ const QMap<AstroCalcChart::Series, QPen> AstroCalcChart::penMap=
 	{AstroCalcChart::AstroTwilight,     QPen(Qt::darkBlue,                        1, Qt::DashDotDotLine)},
 	{AstroCalcChart::Moon,              QPen(QColorConstants::Svg::springgreen,   2, Qt::DashLine)},
 	{AstroCalcChart::AzVsTime,               QPen(Qt::red,                        2, Qt::SolidLine)},
+	{AstroCalcChart::AzVsTimeCont,           QPen(Qt::red,                        2, Qt::SolidLine)},
 	{AstroCalcChart::MonthlyElevation,       QPen(Qt::red,                        2, Qt::SolidLine)},
 	{AstroCalcChart::AngularSize1,           QPen(Qt::green,                      2, Qt::SolidLine)},
 	{AstroCalcChart::Declination1,           QPen(Qt::green,                      2, Qt::SolidLine)},
@@ -203,6 +205,13 @@ void AstroCalcChart::drawTrivialLineY(Series s, const qreal y)
 		qDebug() << "No series" << s << "to add trivial line";
 }
 
+int AstroCalcChart::lengthOfSeries(Series s)
+{
+	if (!(map.value(s)))
+		return -1;
+	else return map.value(s)->count();
+}
+
 
 void AstroCalcChart::show(Series s)
 {
@@ -221,6 +230,12 @@ void AstroCalcChart::show(Series s)
 	}
 	else
 		qDebug() << "series" << s << "already shown.";
+
+	// Hide one entry from the legend.
+	if (s==AstroCalcChart::AzVsTimeCont)
+	{
+		legend()->markers(map.value(s))[0]->setVisible(false);
+	}
 }
 
 void AstroCalcChart::clear(Series s)
@@ -281,7 +296,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	static const QPen axisMinorGridPenR(Qt::yellow,     0.35, Qt::DotLine);
 
 	const double shift = StelApp::getInstance().getCore()->getUTCOffset(jd) / 24.0;
-	qDebug() << "Why is thisshift not a full number of hours?: " << shift*24.;
+	qDebug() << "Why is this shift not a full number of hours?: " << shift*24.;
 
 	// Variables for scaling x axis
 	QPair<QDateTime, QDateTime>xRange;
@@ -423,7 +438,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	}
 	const QList<QtCharts::QAbstractSeries *> ser=series(); // currently shown series. These may be fewer than the series in our map!
 
-	for (Series s: {AltVsTime, CurrentTime, TransitTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight, Moon, AzVsTime, MonthlyElevation,
+	for (Series s: {AltVsTime, CurrentTime, TransitTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight, Moon, AzVsTime, AzVsTimeCont, MonthlyElevation,
 	     AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1,
 	     LunarElongation, LunarElongationLimit, pcDistanceAU})
 	{
