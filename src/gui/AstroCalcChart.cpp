@@ -106,11 +106,18 @@ const QMap<AstroCalcChart::Series, QPen> AstroCalcChart::penMap=
 	{AstroCalcChart::AltVsTime,         QPen(Qt::red,                             2, Qt::SolidLine)},
 	{AstroCalcChart::CurrentTime,       QPen(Qt::yellow,                          2, Qt::SolidLine)},
 	{AstroCalcChart::TransitTime,       QPen(Qt::cyan,                            2, Qt::SolidLine)},
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 	{AstroCalcChart::SunElevation,      QPen(QColorConstants::Svg::orange,        2, Qt::SolidLine)},
 	{AstroCalcChart::CivilTwilight,     QPen(QColorConstants::Svg::paleturquoise, 1, Qt::DashLine)},
 	{AstroCalcChart::NauticalTwilight,  QPen(QColorConstants::Svg::dodgerblue,    1, Qt::DashDotLine)},
-	{AstroCalcChart::AstroTwilight,     QPen(Qt::darkBlue,                        1, Qt::DashDotDotLine)},
 	{AstroCalcChart::Moon,              QPen(QColorConstants::Svg::springgreen,   2, Qt::DashLine)},
+#else
+	{AstroCalcChart::SunElevation,      QPen(QColor(0xffa500),                    2, Qt::SolidLine)},
+	{AstroCalcChart::CivilTwilight,     QPen(QColor(0xafeeee),                    1, Qt::DashLine)},
+	{AstroCalcChart::NauticalTwilight,  QPen(QColor(0x1e90ff),                    1, Qt::DashDotLine)},
+	{AstroCalcChart::Moon,              QPen(QColor(0x00ff7f),                    2, Qt::DashLine)},
+#endif
+	{AstroCalcChart::AstroTwilight,     QPen(Qt::darkBlue,                        1, Qt::DashDotDotLine)},
 	{AstroCalcChart::AzVsTime,               QPen(Qt::red,                        2, Qt::SolidLine)},
 	{AstroCalcChart::AzVsTimeCont,           QPen(Qt::red,                        2, Qt::SolidLine)},
 	{AstroCalcChart::MonthlyElevation,       QPen(Qt::red,                        2, Qt::SolidLine)},
