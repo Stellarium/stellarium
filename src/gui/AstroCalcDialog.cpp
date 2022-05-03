@@ -818,13 +818,13 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 
 	qDebug() << "creating azVsTime chart";
-	azVsTimeChart = new AstroCalcChart({AstroCalcChart::AzVsTime, AstroCalcChart::CurrentTime});
+	azVsTimeChart = new AstroCalcChart({AstroCalcChart::AzVsTime, AstroCalcChart::AzVsTimeCont, AstroCalcChart::CurrentTime});
 	azVsTimeChart->setYrange(0., 360.);
 	qDebug() << "Chart has title:" << azVsTimeChart->title();
 
 	if (!selectedObjects.isEmpty())
 	{
-		bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+		const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 		// X axis - time; Y axis - azimuth
 		QList<double> aX, aY;
 
@@ -836,8 +836,10 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		double noon = static_cast<int>(currentJD + shift);
 		double az, alt, deg;
 
+		double lastDeg=0.;
+
 		int step = 180;
-		int limit = 485;
+		int limit = 480;
 #ifdef USE_STATIC_PLUGIN_SATELLITES
 		bool isSatellite = false;
 
@@ -850,7 +852,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		}
 #endif
 
-		for (int i = -5; i <= limit; i++) // 24 hours + 15 minutes in both directions
+		for (int i = 0; i <= limit; i++) // 24 hours + 15 minutes in both directions
 		{
 			// A new point on the graph every 3 minutes with shift to right 12 hours
 			// to get midnight at the center of diagram (i.e. accuracy is 3 minutes)
@@ -869,18 +871,27 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 				core->update(0.0);
 
 			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
-			double direction = 3.; // N is zero, E is 90 degrees
-			if (useSouthAzimuth)
-				direction = 2.;
+			double direction = useSouthAzimuth ? 2. : 3.; // N is zero, E is 90 degrees
 			az = direction*M_PI - az;
 			if (az > M_PI*2)
 				az -= M_PI*2;
 			deg=az*M_180_PI;
 			aY.append(deg);
 			// prepare QChart use:
-			azVsTimeChart->append(AstroCalcChart::AzVsTime, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg);
+			bool needNewSeries=fabs(lastDeg-deg)>270.;
+
+			qDebug() << "lastDeg-deg=" << lastDeg-deg;
+
+			if ((needNewSeries && azVsTimeChart->lengthOfSeries(AstroCalcChart::AzVsTime)>0.) || azVsTimeChart->lengthOfSeries(AstroCalcChart::AzVsTimeCont)>0.)
+				azVsTimeChart->append(AstroCalcChart::AzVsTimeCont, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg);
+			else
+				azVsTimeChart->append(AstroCalcChart::AzVsTime, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg);
+			lastDeg=deg;
 		}
+		qDebug() << "Series lengths: " << azVsTimeChart->lengthOfSeries(AstroCalcChart::AzVsTime) << "/" << azVsTimeChart->lengthOfSeries(AstroCalcChart::AzVsTimeCont);
 		azVsTimeChart->show(AstroCalcChart::AzVsTime);
+		if (azVsTimeChart->lengthOfSeries(AstroCalcChart::AzVsTimeCont)>0.)
+			azVsTimeChart->show(AstroCalcChart::AzVsTimeCont);
 		core->setJD(currentJD);
 
 		QVector<double> x = aX.toVector(), y = aY.toVector();
