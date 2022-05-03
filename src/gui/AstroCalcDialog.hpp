@@ -308,7 +308,6 @@ private slots:
 	void saveSecondCelestialBody(int index);
 	void computePlanetaryData();
 	void drawDistanceGraph();
-	void mouseOverDistanceGraph(QMouseEvent *event);
 
 	void drawAngularDistanceGraph();
 	void drawAngularDistanceLimitLine();
@@ -468,7 +467,6 @@ private:
 	//! Prepare left and right Y axes depending on plot type for object with englishName. For an empty graph, use englishName=""
 	void prepareXVsTimeAxesAndGraph(double minYLeft, double maxYLeft, double minYRight, double maxYRight, QString englishName);
 	void prepareMonthlyElevationAxesAndGraph();
-	void prepareDistanceAxesAndGraph();
 	void prepareAngularDistanceAxesAndGraph();
 	//! Populates the drop-down list of time intervals for WUT tool.
 	void populateTimeIntervalsList();	
