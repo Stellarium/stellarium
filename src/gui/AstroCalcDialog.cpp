@@ -825,15 +825,15 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		StelObjectP selectedObject = selectedObjects[0];
 		ui->aziVsTimeTitle->setText(selectedObject->getNameI18n());
 		azVsTimeChart->setTitle(selectedObject->getNameI18n());
-		double currentJD = core->getJD();
-		double shift = core->getUTCOffset(currentJD) / 24.0;
-		double noon = static_cast<int>(currentJD + shift);
+		const double currentJD = core->getJD();
+		const double shift = core->getUTCOffset(currentJD) / 24.0;
+		const double noon = static_cast<int>(currentJD + shift);
 		double az, alt, deg;
 
 		double lastDeg=0.;
 
-		int step = 180;
-		int limit = 480;
+		static const int step = 180;
+		static const int limit = 480;
 #ifdef USE_STATIC_PLUGIN_SATELLITES
 		bool isSatellite = false;
 
@@ -846,7 +846,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		}
 #endif
 
-		for (int i = 0; i <= limit; i++) // 24 hours + 15 minutes in both directions
+		for (int i = 0; i <= limit; i++) // 24 hours
 		{
 			// A new point on the graph every 3 minutes with shift to right 12 hours
 			// to get midnight at the center of diagram (i.e. accuracy is 3 minutes)
@@ -4363,8 +4363,8 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		double az, alt, ltime, JD;
 
 		double xMaxY = -100.;
-		int step = 180; // seconds, i.e. 3 minutes stepwidth
-		int limit = 485;		
+		static const int step = 180; // seconds, i.e. 3 minutes stepwidth
+		static const int limit = 480;
 #ifdef USE_STATIC_PLUGIN_SATELLITES
 		bool isSatellite = false;
 
@@ -4378,7 +4378,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 #endif
 
 		double transitJD=-1.;
-		for (int i = -5; i <= limit; i++) // 24 hours + 15 minutes in both directions
+		for (int i = 0; i <= limit; i++) // 24 hours
 		{
 			// A new point on the graph every 3 minutes with shift to right 12 hours
 			// to get midnight at the center of diagram (i.e. accuracy is 3 minutes)
