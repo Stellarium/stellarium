@@ -316,6 +316,19 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 	return QPair(startDate, endDate);
 }
 
+QPair<double, double> AstroCalcChart::findYRange(const Series series)
+{
+	const QList<QPointF> points=map.value(series)->points();
+	double min=std::numeric_limits<double>::max(), max=std::numeric_limits<double>::min();
+	for (int i=0; i<points.count(); i++)
+	{
+		const double y=points.at(i).y();
+		if (y<min) min=y;
+		if (y>max) max=y;
+	}
+	return QPair<double, double>(min, max);
+}
+
 void AstroCalcChart::setupAxes(const double jd, const int periods, const QString &englishName)
 {
 	qDebug() << "setupAxes()...";
