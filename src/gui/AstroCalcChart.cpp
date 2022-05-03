@@ -73,6 +73,7 @@ void AstroCalcChart::retranslate(){
 	if (map.contains(AstroTwilight        )) map.value(AstroTwilight        )->setName(q_("Astronomical Twilight"));
 	if (map.contains(Moon                 )) map.value(Moon                 )->setName(q_("Moon"));
 	if (map.contains(AzVsTime             )) map.value(AzVsTime             )->setName(q_("Azimuth"));
+	if (map.contains(AzVsTimeCont         )) map.value(AzVsTimeCont         )->setName(q_("Azimuth"));
 	if (map.contains(MonthlyElevation     )) map.value(MonthlyElevation     )->setName(q_("Monthly Elevation"));
 	if (map.contains(AngularSize1         )) map.value(AngularSize1         )->setName(q_("Angular Size"));
 	if (map.contains(Declination1         )) map.value(Declination1         )->setName(q_("Declination"));
@@ -212,7 +213,6 @@ int AstroCalcChart::lengthOfSeries(Series s)
 	else return map.value(s)->count();
 }
 
-
 void AstroCalcChart::show(Series s)
 {
 	qDebug() << "About to add series " << s;
@@ -236,7 +236,34 @@ void AstroCalcChart::show(Series s)
 	{
 		legend()->markers(map.value(s))[0]->setVisible(false);
 	}
+
+	// Set up tooltips on hover for all series
+	connect(map.value(s), SIGNAL(hovered(const QPointF &, bool)), this, SLOT(showToolTip(const QPointF &, bool)));
 }
+
+void AstroCalcChart::showToolTip(const QPointF &point, bool show)
+{
+	QtCharts::QSplineSeries *series=dynamic_cast<QtCharts::QSplineSeries *>(sender());
+	AstroCalcChart::Series seriesCode=map.key(series);
+	QString units("°");
+	if (show)
+	{
+		QDateTime date=QDateTime::fromMSecsSinceEpoch(point.x());
+		// Change units where required. No units for distances, phases!
+		if (QList<AstroCalcChart::Series>({AstroCalcChart::CurrentTime, AstroCalcChart::TransitTime,
+						  AstroCalcChart::Distance1, AstroCalcChart::Distance2,
+						  AstroCalcChart::HeliocentricDistance1, AstroCalcChart::HeliocentricDistance2,
+						  AstroCalcChart::RightAscension1, AstroCalcChart::RightAscension2,
+						  AstroCalcChart::Phase1, AstroCalcChart::Phase2, AstroCalcChart::pcDistanceAU}).contains(seriesCode))
+		{
+			units="";
+		}
+		setToolTip(QString("%1\n%2: %3%4").arg(date.toString("yyyy.MM.dd hh:mm"), series->name(), QString::number(point.y(), 'f', 3), units));
+	}
+	else
+		setToolTip(QString());
+}
+
 
 void AstroCalcChart::clear(Series s)
 {
