@@ -205,7 +205,6 @@ void AstroCalcDialog::retranslate()
 		populateFunctionsList();
 		prepareXVsTimeAxesAndGraph(-1001., 1001., -1001., 1001., "");
 		prepareMonthlyElevationAxesAndGraph();
-		prepareDistanceAxesAndGraph();
 		prepareAngularDistanceAxesAndGraph();
 		drawAltVsTimeDiagram();
 		drawAziVsTimeDiagram();
@@ -276,8 +275,6 @@ void AstroCalcDialog::createDialogContent()
 	initListWUT();
 	populateTimeIntervalsList();
 	populateWutGroups();
-	// PC
-	prepareDistanceAxesAndGraph();
 	prepareAngularDistanceAxesAndGraph();
 
 	ui->genericMarkerColor->setText("1");
@@ -561,8 +558,7 @@ void AstroCalcDialog::createDialogContent()
 	currentTimeLine->start(1000); // Update 'now' line position every second
 
 	connect(ui->firstCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveFirstCelestialBody(int)));
-	connect(ui->secondCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveSecondCelestialBody(int)));	
-	connect(ui->pcDistanceGraphPlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverDistanceGraph(QMouseEvent*)));
+	connect(ui->secondCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveSecondCelestialBody(int)));
 	connect(core, SIGNAL(dateChanged()), this, SLOT(drawDistanceGraph()));
 
 	connect(solarSystem, SIGNAL(solarSystemDataReloaded()), this, SLOT(updateSolarSystemData()));
@@ -8291,62 +8287,6 @@ void AstroCalcDialog::computePlanetaryData()
 	ui->labelEquatorialRadiiRatioValue->setText(sizeRatio);
 }
 
-void AstroCalcDialog::prepareDistanceAxesAndGraph()
-{
-	QString xAxisStr = q_("Days from today");
-	QString yAxisLegend1 = QString("%1, %2").arg(q_("Linear distance"), qc_("AU", "distance, astronomical unit"));
-	QString yAxisLegend2 = QString("%1, %2").arg(q_("Angular distance"), QChar(0x00B0)); // decimal degrees
-
-	QColor axisColor(Qt::white);
-	QPen axisPen(axisColor, 1);
-	QColor axisColorL(Qt::green);
-	QPen axisPenL(axisColorL, 1);
-	QColor axisColorR(Qt::yellow);
-	QPen axisPenR(axisColorR, 1);
-
-	ui->pcDistanceGraphPlot->xAxis->setLabel(xAxisStr);
-	ui->pcDistanceGraphPlot->yAxis->setLabel(yAxisLegend1);
-	ui->pcDistanceGraphPlot->yAxis2->setLabel(yAxisLegend2);
-
-	ui->pcDistanceGraphPlot->xAxis->setRange(-300, 300);
-	ui->pcDistanceGraphPlot->xAxis->setScaleType(QCPAxis::stLinear);
-	ui->pcDistanceGraphPlot->xAxis->setLabelColor(axisColor);
-	ui->pcDistanceGraphPlot->xAxis->setTickLabelColor(axisColor);
-	ui->pcDistanceGraphPlot->xAxis->setBasePen(axisPen);
-	ui->pcDistanceGraphPlot->xAxis->setTickPen(axisPen);
-	ui->pcDistanceGraphPlot->xAxis->setSubTickPen(axisPen);
-	ui->pcDistanceGraphPlot->xAxis->setAutoTicks(true);
-	ui->pcDistanceGraphPlot->xAxis->setAutoTickCount(15);
-
-	ui->pcDistanceGraphPlot->yAxis->setRange(minYld, maxYld);
-	ui->pcDistanceGraphPlot->yAxis->setScaleType(QCPAxis::stLinear);
-	ui->pcDistanceGraphPlot->yAxis->setLabelColor(axisColorL);
-	ui->pcDistanceGraphPlot->yAxis->setTickLabelColor(axisColorL);
-	ui->pcDistanceGraphPlot->yAxis->setBasePen(axisPenL);
-	ui->pcDistanceGraphPlot->yAxis->setTickPen(axisPenL);
-	ui->pcDistanceGraphPlot->yAxis->setSubTickPen(axisPenL);
-
-	ui->pcDistanceGraphPlot->yAxis2->setRange(minYad, maxYad);
-	ui->pcDistanceGraphPlot->yAxis2->setScaleType(QCPAxis::stLinear);
-	ui->pcDistanceGraphPlot->yAxis2->setLabelColor(axisColorR);
-	ui->pcDistanceGraphPlot->yAxis2->setTickLabelColor(axisColorR);
-	ui->pcDistanceGraphPlot->yAxis2->setBasePen(axisPenR);
-	ui->pcDistanceGraphPlot->yAxis2->setTickPen(axisPenR);
-	ui->pcDistanceGraphPlot->yAxis2->setSubTickPen(axisPenR);
-	ui->pcDistanceGraphPlot->yAxis2->setVisible(true);
-
-	ui->pcDistanceGraphPlot->clearGraphs();
-	ui->pcDistanceGraphPlot->addGraph(ui->pcDistanceGraphPlot->xAxis, ui->pcDistanceGraphPlot->yAxis);
-	ui->pcDistanceGraphPlot->setBackground(QBrush(QColor(86, 87, 90)));
-	ui->pcDistanceGraphPlot->graph(0)->setPen(axisPenL);
-	ui->pcDistanceGraphPlot->graph(0)->setLineStyle(QCPGraph::lsLine);
-
-	ui->pcDistanceGraphPlot->addGraph(ui->pcDistanceGraphPlot->xAxis, ui->pcDistanceGraphPlot->yAxis2);
-	ui->pcDistanceGraphPlot->setBackground(QBrush(QColor(86, 87, 90)));
-	ui->pcDistanceGraphPlot->graph(1)->setPen(axisPenR);
-	ui->pcDistanceGraphPlot->graph(1)->setLineStyle(QCPGraph::lsLine);
-}
-
 void AstroCalcDialog::drawDistanceGraph()
 {
 	qDebug() << "AstrocalcDialog::drawDistanceGraph()...";
@@ -8364,8 +8304,6 @@ void AstroCalcDialog::drawDistanceGraph()
 	pcChart->setYrange(0., 10.); // start with something in case it remains empty.
 	pcChart->setYrangeR(0., 360.);
 	pcChart->setTitle(q_("Linear and angular distances between selected objects"));
-	qDebug() << "Chart has title:" << pcChart->title();
-
 
 	Q_ASSERT(ui->firstCelestialBodyComboBox);
 	Q_ASSERT(ui->secondCelestialBodyComboBox);
@@ -8379,9 +8317,6 @@ void AstroCalcDialog::drawDistanceGraph()
 
 	if (firstCBId==secondCBId)
 	{
-		ui->pcDistanceGraphPlot->graph(0)->clearData();
-		ui->pcDistanceGraphPlot->graph(1)->clearData();
-		ui->pcDistanceGraphPlot->replot();
 		ui->pcChartView->setChart(pcChart);
 		pcChartMutex.unlock();
 		return;
@@ -8394,7 +8329,6 @@ void AstroCalcDialog::drawDistanceGraph()
 	}
 
 	// TODO for charts: use full calendar days, not offsets from current JD.
-	QList<double> aX, aY1, aY2;
 	const double currentJD = core->getJD();
 	for (int i = -limit; i <= limit; i++)
 	{
@@ -8406,42 +8340,24 @@ void AstroCalcDialog::drawDistanceGraph()
 		double distanceAu = (posFCB - posSCB).length();
 		double r= posFCB.angle(posSCB);
 		double dd=r*M_180_PI;
-		aX.append(i*step);
-		aY1.append(distanceAu);
 		pcChart->append(AstroCalcChart::pcDistanceAU, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), distanceAu);
 		if (firstCBId != currentPlanet && secondCBId != currentPlanet)
 		{
-			aY2.append(dd);
 			pcChart->append(AstroCalcChart::pcDistanceDeg, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), dd);
 		}
 	}
 	core->setJD(currentJD);
 
-	QVector<double> x = aX.toVector(), y1 = aY1.toVector(), y2;
-	minYld = *std::min_element(aY1.begin(), aY1.end());
-	maxYld = *std::max_element(aY1.begin(), aY1.end());
-	pcChart->setYrange(minYld, maxYld);
-
-	if (!aY2.isEmpty()) // mistake-proofing!
-	{
-		y2 = aY2.toVector();
-		minYad = *std::min_element(aY2.begin(), aY2.end());
-		maxYad = *std::max_element(aY2.begin(), aY2.end());
-		pcChart->setYrangeR(minYad, maxYad);
-	}
-
-	prepareDistanceAxesAndGraph();
-
-	ui->pcDistanceGraphPlot->graph(0)->setData(x, y1);
-	ui->pcDistanceGraphPlot->graph(0)->setName("[LD]");
+	QPair<double, double>yRange=pcChart->findYRange(AstroCalcChart::pcDistanceAU);
+	pcChart->setYrange(yRange.first, yRange.second);
 	pcChart->show(AstroCalcChart::pcDistanceAU);
-	if (!aY2.isEmpty()) // mistake-proofing!
+
+	if (pcChart->lengthOfSeries(AstroCalcChart::pcDistanceDeg)>0) // mistake-proofing!
 	{
-		ui->pcDistanceGraphPlot->graph(1)->setData(x, y2);
-		ui->pcDistanceGraphPlot->graph(1)->setName("[AD]");
+		yRange=pcChart->findYRange(AstroCalcChart::pcDistanceDeg);
+		pcChart->setYrangeR(yRange.first, yRange.second);
 		pcChart->show(AstroCalcChart::pcDistanceDeg);
 	}
-	ui->pcDistanceGraphPlot->replot();
 
 	qDebug() << "create chart axes...";
 	pcChart->setupAxes(core->getJD(), 1, "");
@@ -8453,34 +8369,6 @@ void AstroCalcDialog::drawDistanceGraph()
 	qDebug() << "Chart done.";
 
 	pcChartMutex.unlock();
-}
-
-void AstroCalcDialog::mouseOverDistanceGraph(QMouseEvent* event)
-{
-	const double x = ui->pcDistanceGraphPlot->xAxis->pixelToCoord(event->pos().x());
-	const double y = ui->pcDistanceGraphPlot->yAxis->pixelToCoord(event->pos().y());
-	const double y2 = ui->pcDistanceGraphPlot->yAxis2->pixelToCoord(event->pos().y());
-
-	QCPAbstractPlottable* abstractGraph = ui->pcDistanceGraphPlot->plottableAt(event->pos(), false);
-	QCPGraph* graph = qobject_cast<QCPGraph*>(abstractGraph);
-
-	if (ui->pcDistanceGraphPlot->xAxis->range().contains(x) && ui->pcDistanceGraphPlot->yAxis->range().contains(y))
-	{
-		QString info;
-		if (graph)
-		{
-			const double currentJD = core->getJD();
-			if (graph->name()=="[LD]")
-				info = QString("%1<br />%2: %3%4").arg(StelUtils::julianDayToISO8601String(currentJD + x).replace("T", " "), q_("Linear distance"), QString::number(y), qc_("AU", "distance, astronomical unit"));
-
-			if (graph->name()=="[AD]")
-				info = QString("%1<br />%2: %3%4").arg(StelUtils::julianDayToISO8601String(currentJD + x).replace("T", " "), q_("Angular distance"), QString::number(y2), QChar(0x00B0));
-		}
-		ui->pcDistanceGraphPlot->setToolTip(info);
-	}
-
-	ui->pcDistanceGraphPlot->update();
-	ui->pcDistanceGraphPlot->replot();
 }
 
 void AstroCalcDialog::prepareAngularDistanceAxesAndGraph()
