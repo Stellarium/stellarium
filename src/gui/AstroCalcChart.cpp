@@ -22,6 +22,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
+#include <QGraphicsLayout>
 #include <QDateTime>
 #include <math.h>
 #include <QDebug>
@@ -53,6 +54,9 @@ AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR)
 	legend()->setAlignment(Qt::AlignBottom);
 	legend()->setLabelColor(Qt::white);
 	setTitleBrush(QBrush(Qt::white));
+	setMargins(QMargins(2, 2, 2, 2)); // set to 0/0/0/0 for max space usage. This is between the title/axis labels and the enclosing QChartView.
+	layout()->setContentsMargins(0, 0, 0, 0);
+	setBackgroundRoundness(0); // remove rounded corners
 
 	qDebug() << "c'tor done";
 }

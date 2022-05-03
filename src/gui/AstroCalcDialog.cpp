@@ -253,12 +253,6 @@ void AstroCalcDialog::createDialogContent()
 	graphBackgroundGradient.setColorAt(1.0, QColor(70, 70, 70));
 	graphBackgroundGradient.setCoordinateMode(QGradient::ObjectBoundingMode);
 	ui->hecPositionsChartView->setBackgroundBrush(graphBackgroundGradient);
-	ui->aziVsTimeChartView->setBackgroundBrush(graphBackgroundGradient);
-	ui->altVsTimeChartView->setBackgroundBrush(graphBackgroundGradient);
-	ui->twoGraphsChartView->setBackgroundBrush(graphBackgroundGradient);
-	ui->pcChartView->setBackgroundBrush(graphBackgroundGradient);
-	ui->lunarElongationChartView->setBackgroundBrush(graphBackgroundGradient);
-	ui->monthlyElevationChartView->setBackgroundBrush(graphBackgroundGradient);
 
 	initListCelestialPositions();
 	initListHECPositions();
