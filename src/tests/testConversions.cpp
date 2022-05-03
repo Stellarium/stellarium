@@ -943,19 +943,19 @@ void TestConversions::testRadToDecDegStr()
 {
 	QVariantList data;
 
-	data << 0.		<< "+0.00d";
-	data << M_PI/6		<< "+30.00d";
-	data << M_PI/4		<< "+45.00d";
-	data << M_PI/3		<< "+60.00d";
-	data << M_PI/2		<< "+90.00d";
-	data << 2*M_PI/3	<< "+120.00d";
-	data << M_PI		<< "+180.00d";
-	data << 3*M_PI/2	<< "+270.00d";
-	data << M_PI/360	<< "+0.50d";
-	data << 61*M_PI/360	<< "+30.50d";
-	data << -M_PI/36	<< "+355.00d";
-	data << -7*M_PI/8	<< "+202.50d";
-	data << -2*M_PI/5	<< "+288.00d";
+	data << 0.		<< "0.00d";
+	data << M_PI/6		<< "30.00d";
+	data << M_PI/4		<< "45.00d";
+	data << M_PI/3		<< "60.00d";
+	data << M_PI/2		<< "90.00d";
+	data << 2*M_PI/3	<< "120.00d";
+	data << M_PI		<< "180.00d";
+	data << 3*M_PI/2	<< "270.00d";
+	data << M_PI/360	<< "0.50d";
+	data << 61*M_PI/360	<< "30.50d";
+	data << -M_PI/36	<< "355.00d";
+	data << -7*M_PI/8	<< "202.50d";
+	data << -2*M_PI/5	<< "288.00d";
 
 	while (data.count()>=2)
 	{
