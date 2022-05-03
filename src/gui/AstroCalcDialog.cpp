@@ -871,7 +871,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 				core->update(0.0);
 
 			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
-			double direction = useSouthAzimuth ? 2. : 3.; // N is zero, E is 90 degrees
+			const double direction = useSouthAzimuth ? 2. : 3.; // N is zero, E is 90 degrees
 			az = direction*M_PI - az;
 			if (az > M_PI*2)
 				az -= M_PI*2;

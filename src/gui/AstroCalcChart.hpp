@@ -86,6 +86,9 @@ public:
 
 public slots:
 	virtual void retranslate();
+	//! A slot to connect the hovered signal from a series to. It shows the value of the series in a Tooltip on mouse-over.
+	//! @note it only shows values of a point where the mouse is over. The vertical lines for "now" and "transit" are currently unavailable.
+	void showToolTip(const QPointF &point, bool show);
 
 private slots:
 	//void setOptionStatus();
