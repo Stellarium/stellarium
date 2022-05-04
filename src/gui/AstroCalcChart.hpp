@@ -59,8 +59,8 @@ public:
 	int lengthOfSeries(Series s);
 
 	//! Activate series s. It must have been filled using append(s, ., .) before.
+	//! Make sure to call setupAxes() after calling show!
 	void show(Series s);
-
 
 	//! set range of Y axis
 	void setYrange(qreal min, qreal max);
@@ -74,7 +74,6 @@ public:
 
 	//! Find range of values for the respective series plot.
 	QPair<double, double>findYRange(const Series series);
-
 
 	//! Setup axes and appearance. Call this at the end of drawing, just before display but after all series have been activated with show().
 	//! @arg englishName used for details in the two-graph charts. Use an empty string otherwise.
@@ -103,7 +102,6 @@ private:
 	QtCharts::QValueAxis *yAxisR; // running on the right side for some charts only
 	qreal yMin, yMax; // store range of Y values
 	qreal yMinR, yMaxR; // store range of Y values for right axis
-
 
 	//! The QMap holds enums and series for principally existing graphs. These can be made active by show(key)
 	QMap<AstroCalcChart::Series, QtCharts::QLineSeries*> map;
