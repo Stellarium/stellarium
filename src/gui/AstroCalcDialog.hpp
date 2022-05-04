@@ -309,9 +309,9 @@ private slots:
 	void computePlanetaryData();
 	void drawDistanceGraph();
 
-	void drawAngularDistanceGraph();
-	void drawAngularDistanceLimitLine();
-	void saveAngularDistanceLimit(int limit);
+	void drawLunarElongationGraph();
+	void drawLunarElongationLimitLine();
+	void saveLunarElongationLimit(int limit);
 
 	//! Draw diagram 'Altitude vs. Time'
 	void drawAltVsTimeDiagram();
@@ -467,7 +467,6 @@ private:
 	//! Prepare left and right Y axes depending on plot type for object with englishName. For an empty graph, use englishName=""
 	void prepareXVsTimeAxesAndGraph(double minYLeft, double maxYLeft, double minYRight, double maxYRight, QString englishName);
 	void prepareMonthlyElevationAxesAndGraph();
-	void prepareAngularDistanceAxesAndGraph();
 	//! Populates the drop-down list of time intervals for WUT tool.
 	void populateTimeIntervalsList();	
 	double computeGraphValue(const PlanetP &ssObj, const AstroCalcChart::Series graphType);
@@ -531,12 +530,12 @@ private:
 	bool findPreciseOrbitalPoint(QPair<double, double>* out, PlanetP object1, double JD, double stopJD, double step, bool minimal);
 	inline double findHeliocentricDistance(double JD, PlanetP object1) const {return object1->getHeliocentricEclipticPos(JD+core->computeDeltaT(JD)/86400.).length();}
 
-	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime;
+	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotLunarElongationGraph, plotAziVsTime;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader;
 	static double brightLimit;
 	static double minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, // minYLeft, maxYLeft, minYRight, maxYRight,
-			     minYld, maxYld, minYad, maxYad, minYadm, maxYadm, minYaz, maxYaz;
+			     minYld, maxYld, minYad, maxYad, /* minYadm, maxYadm,*/ minYaz, maxYaz;
 	static QString yAxis1Legend, yAxis2Legend;
 	static const QString dash, delimiter;
 
