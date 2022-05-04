@@ -21,6 +21,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
+#include <QGraphicsSceneEvent>
 #include <QGraphicsLayout>
 #include <QDateTime>
 #include <math.h>
@@ -557,4 +558,27 @@ void AstroCalcChart::setYrangeR(qreal min, qreal max)
 		yAxis->setTickCount(qRound((rMax*s-rMin*s)/s)+1);
 		yAxis->setMinorTickCount(1);
 	}
+}
+
+void AstroCalcChart::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+
+	if (event->modifiers() != Qt::NoModifier)
+		return;
+	if (event->button() != Qt::LeftButton)
+		return;
+
+	// N.B. pos() and scenePos() give the same coords. Y counting top-down, X left-right, pixel positions.
+	//qDebug() << "mousePressEvent by" << event->buttons() << "at Pos" << event->pos() << "scenePos" << event->scenePos() << "screenPos" << event->screenPos();
+
+	const QPointF pt=mapToValue(event->pos());
+	const QDateTime dt=QDateTime::fromMSecsSinceEpoch(qint64(pt.x()));
+
+	//qDebug() << "This represents " << dt << "/" << pt.y() << "or" << mapToValue(event->scenePos());
+
+	StelCore *core=StelApp::getInstance().getCore();
+	const double jd=StelUtils::qDateTimeToJd(dt);
+	const double offset=core->getUTCOffset(jd)/24.;
+
+	core->setJD(jd-offset);
 }
