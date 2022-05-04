@@ -99,8 +99,8 @@ double AstroCalcDialog::minYad = 0.;
 double AstroCalcDialog::maxYad = 180.;
 //double AstroCalcDialog::minYadm = 0.;
 //double AstroCalcDialog::maxYadm = 180.;
-double AstroCalcDialog::minYaz = 0.;
-double AstroCalcDialog::maxYaz = 360.;
+//double AstroCalcDialog::minYaz = 0.;
+//double AstroCalcDialog::maxYaz = 360.;
 QString AstroCalcDialog::yAxis1Legend = "";
 QString AstroCalcDialog::yAxis2Legend = "";
 const QString AstroCalcDialog::dash = QChar(0x2014);
@@ -201,7 +201,6 @@ void AstroCalcDialog::retranslate()
 		currentCelestialPositions();
 		currentHECPositions();
 		prepareAxesAndGraph();
-		prepareAziVsTimeAxesAndGraph();
 		populateFunctionsList();
 		prepareXVsTimeAxesAndGraph(-1001., 1001., -1001., 1001., "");
 		prepareMonthlyElevationAxesAndGraph();
@@ -263,8 +262,6 @@ void AstroCalcDialog::createDialogContent()
 	// Altitude vs. Time feature
 	prepareAxesAndGraph();
 	drawCurrentTimeDiagram();
-	// Azimuth vs. Time feature
-	prepareAziVsTimeAxesAndGraph();
 	// Graphs feature
 	populateFunctionsList();
 	prepareXVsTimeAxesAndGraph(-1001., 1001., -1001., 1001., "");
@@ -428,11 +425,11 @@ void AstroCalcDialog::createDialogContent()
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));
 
 	connect(ui->altVsTimePlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(altTimeClick(QMouseEvent*)));
-	connect(ui->aziVsTimePlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(aziTimeClick(QMouseEvent*)));
+	//connect(ui->aziVsTimePlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(aziTimeClick(QMouseEvent*)));
 
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(handleVisibleEnabled()));
 
-	connect(ui->aziVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverAziLine(QMouseEvent*)));
+	//connect(ui->aziVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverAziLine(QMouseEvent*)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAziVsTimeDiagram()));
 
 	connect(core, SIGNAL(dateChanged()), this, SLOT(drawCurrentTimeDiagram()));
@@ -595,14 +592,12 @@ void AstroCalcDialog::createDialogContent()
 	ui->aziVsTimeLabel->setStyleSheet(style);
 	//ui->aziVsTimeTitle->setStyleSheet(style);
 	ui->monthlyElevationLabel->setStyleSheet(style);
-	//ui->monthlyElevationTitle->setStyleSheet(style);
 	ui->graphsFirstLabel->setStyleSheet(style);	
 	ui->graphsSecondLabel->setStyleSheet(style);	
 	ui->graphsDurationLabel->setStyleSheet(style);
 	ui->graphsYearsLabel->setStyleSheet(style);
 	ui->lunarElongationNote->setStyleSheet(style);
 	ui->lunarElongationLimitLabel->setStyleSheet(style);
-	//ui->angularDistanceTitle->setStyleSheet(style);
 	ui->graphsNoteLabel->setStyleSheet(style);
 	ui->rtsNotificationLabel->setStyleSheet(style);
 	ui->gammaNoteLabel->setStyleSheet(style);
@@ -725,59 +720,9 @@ void AstroCalcDialog::saveAltVsTimePositiveLimit(int limit)
 	}
 }
 
-void AstroCalcDialog::prepareAziVsTimeAxesAndGraph()
-{
-	QString xAxisStr = q_("Local Time");
-	QString yAxisStr = QString("%1, %2").arg(q_("Azimuth"), QChar(0x00B0));
-
-	QColor axisColor(Qt::white);
-	QPen axisPen(axisColor, 1);
-
-	ui->aziVsTimePlot->clearGraphs();
-
-	// main data: Azimuth vs. Time graph
-	ui->aziVsTimePlot->addGraph();
-	ui->aziVsTimePlot->setBackground(QBrush(QColor(86, 87, 90)));
-	ui->aziVsTimePlot->graph(0)->setPen(QPen(Qt::red, 1));
-	ui->aziVsTimePlot->graph(0)->setLineStyle(QCPGraph::lsLine);
-	ui->aziVsTimePlot->graph(0)->rescaleAxes(true);
-
-	// additional data: Current Time Diagram
-	ui->aziVsTimePlot->addGraph();
-	ui->aziVsTimePlot->graph(1)->setPen(QPen(Qt::yellow, 1));
-	ui->aziVsTimePlot->graph(1)->setLineStyle(QCPGraph::lsLine);
-	ui->aziVsTimePlot->graph(1)->setName("[Now]");
-
-	ui->aziVsTimePlot->xAxis->setLabel(xAxisStr);
-	ui->aziVsTimePlot->yAxis->setLabel(yAxisStr);
-
-	ui->aziVsTimePlot->xAxis->setRange(43200, 129600); // 24 hours since 12h00m (range in seconds)
-	ui->aziVsTimePlot->xAxis->setScaleType(QCPAxis::stLinear);
-	ui->aziVsTimePlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
-	ui->aziVsTimePlot->xAxis->setLabelColor(axisColor);
-	ui->aziVsTimePlot->xAxis->setTickLabelColor(axisColor);
-	ui->aziVsTimePlot->xAxis->setBasePen(axisPen);
-	ui->aziVsTimePlot->xAxis->setTickPen(axisPen);
-	ui->aziVsTimePlot->xAxis->setSubTickPen(axisPen);
-	ui->aziVsTimePlot->xAxis->setDateTimeFormat("H:mm");
-	ui->aziVsTimePlot->xAxis->setDateTimeSpec(Qt::UTC); // Qt::UTC + core->getUTCOffset() give local time
-	ui->aziVsTimePlot->xAxis->setAutoTickStep(false);
-	ui->aziVsTimePlot->xAxis->setTickStep(7200); // step is 2 hours (in seconds)
-	ui->aziVsTimePlot->xAxis->setAutoSubTicks(false);
-	ui->aziVsTimePlot->xAxis->setSubTickCount(7);
-
-	ui->aziVsTimePlot->yAxis->setRange(minYaz, maxYaz);
-	ui->aziVsTimePlot->yAxis->setScaleType(QCPAxis::stLinear);
-	ui->aziVsTimePlot->yAxis->setLabelColor(axisColor);
-	ui->aziVsTimePlot->yAxis->setTickLabelColor(axisColor);
-	ui->aziVsTimePlot->yAxis->setBasePen(axisPen);
-	ui->aziVsTimePlot->yAxis->setTickPen(axisPen);
-	ui->aziVsTimePlot->yAxis->setSubTickPen(axisPen);
-}
-
 void AstroCalcDialog::drawAziVsTimeDiagram()
 {
-	qDebug() << "AstrocalcDialog::drawAltVsTimeDiagram()...";
+	//qDebug() << "AstrocalcDialog::drawAltVsTimeDiagram()...";
 	if (!azVsTimeChartMutex.tryLock()) return; // Avoid calling parallel from various sides. (called by signals/slots)
 	// Avoid crash!
 	if (core->getCurrentPlanet()->getEnglishName().contains("->")) // We are on the spaceship!
@@ -805,23 +750,20 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 
-	qDebug() << "creating azVsTime chart";
+	//qDebug() << "creating azVsTime chart";
 	azVsTimeChart = new AstroCalcChart({AstroCalcChart::AzVsTime, AstroCalcChart::CurrentTime});
-	azVsTimeChart->setYrange(0., 360.);
 
 	if (!selectedObjects.isEmpty())
 	{
 		const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 		// X axis - time; Y axis - azimuth
-		QList<double> aX, aY;
+		//QList<double> aX, aY;
 
 		StelObjectP selectedObject = selectedObjects[0];
-		ui->aziVsTimeTitle->setText(selectedObject->getNameI18n());
 		azVsTimeChart->setTitle(selectedObject->getNameI18n());
 		const double currentJD = core->getJD();
 		const double shift = core->getUTCOffset(currentJD) / 24.0;
 		const double noon = static_cast<int>(currentJD + shift);
-		double az, alt, deg;
 
 		static const int step = 180;
 		static const int limit = 480;
@@ -842,7 +784,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 			// A new point on the graph every 3 minutes with shift to right 12 hours
 			// to get midnight at the center of diagram (i.e. accuracy is 3 minutes)
 			double ltime = i * step + 43200;
-			aX.append(ltime);
+			//aX.append(ltime);
 			double JD = noon + ltime / 86400 - shift - 0.5;
 			core->setJD(JD);
 			
@@ -855,26 +797,22 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 #endif
 				core->update(0.0);
 
+			double az, alt;
 			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
 			const double direction = useSouthAzimuth ? 2. : 3.; // N is zero, E is 90 degrees
 			az = direction*M_PI - az;
 			if (az > M_PI*2)
 				az -= M_PI*2;
-			deg=az*M_180_PI;
-			aY.append(deg);
 
-			azVsTimeChart->append(AstroCalcChart::AzVsTime, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg);
+			azVsTimeChart->append(AstroCalcChart::AzVsTime, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), az*M_180_PI);
 		}
 		azVsTimeChart->show(AstroCalcChart::AzVsTime);
 		core->setJD(currentJD);
 
-		QVector<double> x = aX.toVector(), y = aY.toVector();
-		minYaz = qMax(*std::min_element(aY.begin(), aY.end()), 0.); // limit to 0..360.
-		maxYaz = qMin(*std::max_element(aY.begin(), aY.end()), 360.);
-		azVsTimeChart->setYrange(minYaz, maxYaz);
+		QPair<double, double>yRange=azVsTimeChart->findYRange(AstroCalcChart::AzVsTime);
+		azVsTimeChart->setYrange(qMax(0., yRange.first), qMin(360., yRange.second));
 
-		prepareAziVsTimeAxesAndGraph(); // GZ TODO
-		drawCurrentTimeDiagram();       // GZ TODO
+		drawCurrentTimeDiagram();
 
 		QString name = selectedObject->getNameI18n();
 		if (name.isEmpty())
@@ -891,72 +829,33 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
 
-		drawTransitTimeDiagram(); // GZ TBD: Why transit time? It does nothing.
+		//drawTransitTimeDiagram(); // GZ TBD: Why transit time? It does nothing.
 		// For chart, replace by:
 		//azVsTimeChart->drawTrivialLine(AstroCalcChart::TransitTime, transitX);
-
-		ui->aziVsTimePlot->graph(0)->setData(x, y);
-		ui->aziVsTimePlot->graph(0)->setName(name);
-		ui->aziVsTimePlot->replot();
 	}
-	qDebug() << "create chart axes...";
+	else
+		azVsTimeChart->setYrange(0., 360.);
+
+	//qDebug() << "create chart axes...";
 	azVsTimeChart->setupAxes(core->getJD(), 1, "");
-	qDebug() << "set chart ...";
+	//qDebug() << "set chart ...";
 	QChart *oldChart=ui->aziVsTimeChartView->chart();
 	if (oldChart) oldChart->deleteLater();
 	ui->aziVsTimeChartView->setChart(azVsTimeChart);
 	ui->aziVsTimeChartView->setRenderHint(QPainter::Antialiasing);
-	qDebug() << "Chart done.";
+	//qDebug() << "Chart done.";
 
 	// clean up the data when selection is removed
 	if (!objectMgr->getWasSelected())
 	{
-		ui->aziVsTimePlot->graph(0)->data()->clear(); // main data: Azimuth vs. Time graph		
-		ui->aziVsTimePlot->replot();
 		if (azVsTimeChart)
 		{
 			azVsTimeChart->clear(AstroCalcChart::AzVsTime);
 			azVsTimeChart->setTitle(q_("No object selected"));
 		}
 	}
-	qDebug() << "AstrocalcDialog::drawAzVsTimeDiagram()...done";
+	//qDebug() << "AstrocalcDialog::drawAzVsTimeDiagram()...done";
 	azVsTimeChartMutex.unlock();
-}
-
-void AstroCalcDialog::mouseOverAziLine(QMouseEvent* event)
-{
-	double x = ui->aziVsTimePlot->xAxis->pixelToCoord(event->pos().x());
-	double y = ui->aziVsTimePlot->yAxis->pixelToCoord(event->pos().y());
-
-	QCPAbstractPlottable* abstractGraph = ui->aziVsTimePlot->plottableAt(event->pos(), false);
-	QCPGraph* graph = qobject_cast<QCPGraph*>(abstractGraph);
-
-	if (ui->aziVsTimePlot->xAxis->range().contains(x) && ui->aziVsTimePlot->yAxis->range().contains(y))
-	{
-		QString info = "";
-		if (graph)
-		{
-			double JD;
-			if (graph->name() == "[Now]")
-			{
-				JD = core->getJD();
-				info = q_("Now about %1").arg(StelUtils::jdToQDateTime(JD + core->getUTCOffset(JD)/24).toString("H:mm"));
-			}
-			else
-			{
-				JD = x / 86400.0 + static_cast<int>(core->getJD()) - 0.5;
-				QString LT = StelUtils::jdToQDateTime(JD - core->getUTCOffset(JD)).toString("H:mm");
-				if (StelApp::getInstance().getFlagShowDecimalDegrees())
-					info = QString("%1<br />%2: %3<br />%4: %5%6").arg(ui->aziVsTimePlot->graph(0)->name(), q_("Local Time"), LT, q_("Azimuth"), QString::number(y, 'f', 2), QChar(0x00B0));
-				else
-					info = QString("%1<br />%2: %3<br />%4: %5").arg(ui->aziVsTimePlot->graph(0)->name(), q_("Local Time"), LT, q_("Azimuth"), StelUtils::decDegToDmsStr(y));
-			}
-		}
-		ui->aziVsTimePlot->setToolTip(info);
-	}
-
-	ui->aziVsTimePlot->update();
-	ui->aziVsTimePlot->replot();
 }
 
 void AstroCalcDialog::initListCelestialPositions()
@@ -4569,7 +4468,7 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 		ui->altVsTimePlot->replot();
 		//qDebug() << "Chart: replace/append currentTime in alt chart";
 		if (altVsTimeChart){
-			altVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, StelUtils::jdToQDateTime(currentJD+UTCOffset/24.).toMSecsSinceEpoch());
+			altVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, qreal(StelUtils::jdToQDateTime(currentJD+UTCOffset/24.).toMSecsSinceEpoch()));
 			//qDebug() << "Chart: replace/append currentTime in alt chart...done";
 		}
 		else
@@ -4577,11 +4476,9 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 	}
 	if (plotAziVsTime)
 	{
-		ui->aziVsTimePlot->graph(1)->setData(x, y);
-		ui->aziVsTimePlot->replot();
 		//qDebug() << "Chart: replace/append currentTime in azi chart";
 		if (azVsTimeChart){
-			azVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, StelUtils::jdToQDateTime(currentJD+UTCOffset/24.).toMSecsSinceEpoch());
+			azVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, qreal(StelUtils::jdToQDateTime(currentJD+UTCOffset/24.).toMSecsSinceEpoch()));
 			//qDebug() << "Chart: replace/append currentTime in azi chart...done";
 		}
 		else
@@ -5476,22 +5373,6 @@ void AstroCalcDialog::altTimeClick(QMouseEvent* event)
 		setClickedTime(x);
 	}
 }
-
-// click inside AziVsTime graph area sets new current time
-void AstroCalcDialog::aziTimeClick(QMouseEvent* event)
-{
-	Qt::MouseButtons buttons = event->buttons();
-	if (!(buttons & Qt::LeftButton)) return;
-
-	double	x = ui->aziVsTimePlot->xAxis->pixelToCoord(event->pos().x());
-	double	y = ui->aziVsTimePlot->yAxis->pixelToCoord(event->pos().y());
-
-	if (ui->aziVsTimePlot->xAxis->range().contains(x) && ui->aziVsTimePlot->yAxis->range().contains(y))
-	{
-		setClickedTime(x);
-	}
-}
-
 
 void AstroCalcDialog::setClickedTime(double posx)
 {
@@ -8350,8 +8231,6 @@ void AstroCalcDialog::drawDistanceGraph()
 }
 
 
-
-// TODO: Rename to LunarElongation*
 void AstroCalcDialog::drawLunarElongationGraph()
 {
 	//qDebug() << "AstrocalcDialog::drawLunarElongationGraph()...";
