@@ -97,8 +97,8 @@ double AstroCalcDialog::minYld = 0.;
 double AstroCalcDialog::maxYld = 90.;
 double AstroCalcDialog::minYad = 0.;
 double AstroCalcDialog::maxYad = 180.;
-double AstroCalcDialog::minYadm = 0.;
-double AstroCalcDialog::maxYadm = 180.;
+//double AstroCalcDialog::minYadm = 0.;
+//double AstroCalcDialog::maxYadm = 180.;
 double AstroCalcDialog::minYaz = 0.;
 double AstroCalcDialog::maxYaz = 360.;
 QString AstroCalcDialog::yAxis1Legend = "";
@@ -126,7 +126,7 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	, plotMonthlyElevation(false)
 	, plotMonthlyElevationPositive(false)
 	, plotDistanceGraph(false)
-	, plotAngularDistanceGraph(false)
+	, plotLunarElongationGraph(false)
 	, plotAziVsTime(false)	
 	, altVsTimePositiveLimit(0)
 	, monthlyElevationPositiveLimit(0)
@@ -205,7 +205,6 @@ void AstroCalcDialog::retranslate()
 		populateFunctionsList();
 		prepareXVsTimeAxesAndGraph(-1001., 1001., -1001., 1001., "");
 		prepareMonthlyElevationAxesAndGraph();
-		prepareAngularDistanceAxesAndGraph();
 		drawAltVsTimeDiagram();
 		drawAziVsTimeDiagram();
 		populateTimeIntervalsList();
@@ -275,7 +274,6 @@ void AstroCalcDialog::createDialogContent()
 	initListWUT();
 	populateTimeIntervalsList();
 	populateWutGroups();
-	prepareAngularDistanceAxesAndGraph();
 
 	ui->genericMarkerColor->setText("1");
 	ui->secondaryMarkerColor->setText("2");
@@ -463,10 +461,10 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->graphsPlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverGraphs(QMouseEvent*)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(updateXVsTimeGraphs()));	
 
-	ui->angularDistanceLimitSpinBox->setValue(conf->value("astrocalc/angular_distance_limit", 40).toInt());
-	connect(ui->angularDistanceLimitSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveAngularDistanceLimit(int)));
-	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAngularDistanceGraph()));
-	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAngularDistanceGraph()));
+	ui->lunarElongationLimitSpinBox->setValue(conf->value("astrocalc/angular_distance_limit", 40).toInt());
+	connect(ui->lunarElongationLimitSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveLunarElongationLimit(int)));
+	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawLunarElongationGraph()));
+	connect(core, SIGNAL(dateChanged()), this, SLOT(drawLunarElongationGraph()));
 
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(handleVisibleEnabled()));
 
@@ -566,7 +564,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAltVsTimeDiagram()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawMonthlyElevationGraph()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawDistanceGraph()));
-	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAngularDistanceGraph()));
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawLunarElongationGraph()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(initEphemerisFlagNakedEyePlanets()));
 
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(changePage(QListWidgetItem*, QListWidgetItem*)));
@@ -602,8 +600,8 @@ void AstroCalcDialog::createDialogContent()
 	ui->graphsSecondLabel->setStyleSheet(style);	
 	ui->graphsDurationLabel->setStyleSheet(style);
 	ui->graphsYearsLabel->setStyleSheet(style);
-	ui->angularDistanceNote->setStyleSheet(style);
-	ui->angularDistanceLimitLabel->setStyleSheet(style);	
+	ui->lunarElongationNote->setStyleSheet(style);
+	ui->lunarElongationLimitLabel->setStyleSheet(style);
 	//ui->angularDistanceTitle->setStyleSheet(style);
 	ui->graphsNoteLabel->setStyleSheet(style);
 	ui->rtsNotificationLabel->setStyleSheet(style);
@@ -5527,8 +5525,8 @@ void AstroCalcDialog::handleVisibleEnabled()
 				drawCurrentTimeDiagram();
 			if (plotMonthlyElevation) 
 				drawMonthlyElevationGraph();
-			if (plotAngularDistanceGraph) 
-				drawAngularDistanceGraph();
+			if (plotLunarElongationGraph)
+				drawLunarElongationGraph();
 		}
 		else
 			drawCurrentTimeDiagram();
@@ -6969,7 +6967,7 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 	plotAltVsTime = false;
 	plotAziVsTime = false;
 	plotMonthlyElevation = false;
-	plotAngularDistanceGraph = false;
+	plotLunarElongationGraph = false;
 	plotDistanceGraph = false;
 
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
@@ -7019,8 +7017,8 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 
 		if(idx==4) // 'Angular distance' is visible
 		{
-			plotAngularDistanceGraph = true;
-			drawAngularDistanceGraph();
+			plotLunarElongationGraph = true;
+			drawLunarElongationGraph();
 		}		
 	}
 
@@ -7059,7 +7057,7 @@ void AstroCalcDialog::changeGraphsTab(int index)
 	plotAltVsTime = false;
 	plotAziVsTime = false;
 	plotMonthlyElevation = false;
-	plotAngularDistanceGraph = false;
+	plotLunarElongationGraph = false;
 
 	if (index==0) // Altitude vs. Time
 	{
@@ -7082,8 +7080,8 @@ void AstroCalcDialog::changeGraphsTab(int index)
 		updateXVsTimeGraphs();
 	if (index==4) // Angular Distance
 	{
-		plotAngularDistanceGraph = true;
-		drawAngularDistanceGraph(); // Is object already selected?
+		plotLunarElongationGraph = true;
+		drawLunarElongationGraph(); // Is object already selected?
 	}
 }
 
@@ -8351,70 +8349,29 @@ void AstroCalcDialog::drawDistanceGraph()
 	pcChartMutex.unlock();
 }
 
-void AstroCalcDialog::prepareAngularDistanceAxesAndGraph()
-{
-	QString xAxisStr = q_("Days from today");
-	QString yAxisLegend = QString("%1, %2").arg(q_("Angular distance"), QChar(0x00B0)); // decimal degrees
 
-	QColor axisColor(Qt::white);
-	QPen axisPen(axisColor, 1);
-
-	ui->angularDistancePlot->xAxis->setLabel(xAxisStr);
-	ui->angularDistancePlot->yAxis->setLabel(yAxisLegend);
-
-	ui->angularDistancePlot->xAxis->setRange(-2, 31);
-	ui->angularDistancePlot->xAxis->setScaleType(QCPAxis::stLinear);
-	ui->angularDistancePlot->xAxis->setLabelColor(axisColor);
-	ui->angularDistancePlot->xAxis->setTickLabelColor(axisColor);
-	ui->angularDistancePlot->xAxis->setBasePen(axisPen);
-	ui->angularDistancePlot->xAxis->setTickPen(axisPen);
-	ui->angularDistancePlot->xAxis->setSubTickPen(axisPen);
-	ui->angularDistancePlot->xAxis->setAutoTicks(true);
-
-	ui->angularDistancePlot->yAxis->setRange(minYadm, maxYadm);
-	ui->angularDistancePlot->yAxis->setScaleType(QCPAxis::stLinear);
-	ui->angularDistancePlot->yAxis->setLabelColor(axisColor);
-	ui->angularDistancePlot->yAxis->setTickLabelColor(axisColor);
-	ui->angularDistancePlot->yAxis->setBasePen(axisPen);
-	ui->angularDistancePlot->yAxis->setTickPen(axisPen);
-	ui->angularDistancePlot->yAxis->setSubTickPen(axisPen);
-
-	ui->angularDistancePlot->clearGraphs();
-	ui->angularDistancePlot->addGraph(ui->angularDistancePlot->xAxis, ui->angularDistancePlot->yAxis);
-	ui->angularDistancePlot->setBackground(QBrush(QColor(86, 87, 90)));
-	ui->angularDistancePlot->graph(0)->setPen(QPen(Qt::red, 1));
-	ui->angularDistancePlot->graph(0)->setLineStyle(QCPGraph::lsLine);
-	ui->angularDistancePlot->graph(0)->rescaleAxes(true);
-
-	ui->angularDistancePlot->addGraph(ui->angularDistancePlot->xAxis, ui->angularDistancePlot->yAxis);
-	ui->angularDistancePlot->setBackground(QBrush(QColor(86, 87, 90)));
-	ui->angularDistancePlot->graph(1)->setPen(QPen(Qt::yellow, 1));
-	ui->angularDistancePlot->graph(1)->setLineStyle(QCPGraph::lsLine);
-	ui->angularDistancePlot->graph(1)->rescaleAxes(true);
-}
 
 // TODO: Rename to LunarElongation*
-void AstroCalcDialog::drawAngularDistanceGraph()
+void AstroCalcDialog::drawLunarElongationGraph()
 {
-	qDebug() << "AstrocalcDialog::drawAltVsTimeDiagram()...";
+	//qDebug() << "AstrocalcDialog::drawLunarElongationGraph()...";
 	if (!lunarElongationChartMutex.tryLock()) return; // Avoid calling parallel from various sides. (called by signals/slots)
 
 	QString label = q_("Angular distance between the Moon and selected object");
-	ui->angularDistancePlot->setToolTip(label);
 	ui->lunarElongationChartView->setToolTip(label);
 
 	// special case - plot the graph when tab is visible
 	//..
 	// we got notified about a reason to redraw the plot, but dialog was
 	// not visible. which means we must redraw when becoming visible again!
-	if (!dialog->isVisible() && !plotAngularDistanceGraph)
+	if (!dialog->isVisible() && !plotLunarElongationGraph)
 	{
 		graphPlotNeedsRefresh = true;
 		lunarElongationChartMutex.unlock();
 		return;
 	}
 
-	if (!plotAngularDistanceGraph)
+	if (!plotLunarElongationGraph)
 	{
 		lunarElongationChartMutex.unlock();
 		return;
@@ -8427,10 +8384,11 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 		return;
 	}
 
-	qDebug() << "creating chart";
+	//qDebug() << "creating chart";
 	lunarElongationChart = new AstroCalcChart({AstroCalcChart::LunarElongation, AstroCalcChart::LunarElongationLimit});
 	lunarElongationChart->setTitle(label);
-	qDebug() << "Chart has title:" << lunarElongationChart->title();
+	//qDebug() << "Chart has title:" << lunarElongationChart->title();
+	QPair<double, double>yRange(0., 180.);
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 	if (!selectedObjects.isEmpty())
@@ -8439,43 +8397,27 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 		StelObjectP selectedObject = selectedObjects[0];
 		if (selectedObject==moon || selectedObject->getType() == "Satellite")
 		{
-			ui->angularDistancePlot->graph(0)->clearData();
-			ui->angularDistancePlot->replot();
-			// Chart: Do something with the freshly generated but useless chart!
+			// Chart: Do something with the freshly generated but useless chart?
 			QChart *oldChart=ui->lunarElongationChartView->chart();
 			if (oldChart) oldChart->deleteLater();
 			ui->lunarElongationChartView->setChart(lunarElongationChart);
 			lunarElongationChartMutex.unlock();
 			return;
 		}
-
-		QList<double> aX, aY;
-		Vec3d selectedObjectPosition, moonPosition;
 		const double currentJD = core->getJD();
 		for (int i = -3; i <= 32; i++) // TODO: With SplineSeries in charts, i+=3 may be enough!
 		{
 			double JD = currentJD + i;
 			core->setJD(JD);
 			core->update(0.0);
-			moonPosition = moon->getJ2000EquatorialPos(core);
-			selectedObjectPosition = selectedObject->getJ2000EquatorialPos(core);
+			const Vec3d moonPosition = moon->getJ2000EquatorialPos(core);
+			const Vec3d selectedObjectPosition = selectedObject->getJ2000EquatorialPos(core);
 			double distance = moonPosition.angle(selectedObjectPosition);
-			double dd=distance*M_180_PI;
-			aX.append(i);
-			aY.append(dd);
 			lunarElongationChart->append(AstroCalcChart::LunarElongation, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), distance*M_180_PI);
 		}
 		core->setJD(currentJD);
 
-		QVector<double> x = aX.toVector(), y = aY.toVector();
-		minYadm = *std::min_element(aY.begin(), aY.end()) - 5.0;
-		maxYadm = *std::max_element(aY.begin(), aY.end()) + 5.0;
-		int limit = ui->angularDistanceLimitSpinBox->value();
-		if (minYadm > limit)
-			minYadm = limit - 5.0;
-		if (maxYadm < limit)
-			maxYadm = limit + 5.0;
-
+		yRange=lunarElongationChart->findYRange(AstroCalcChart::LunarElongation);
 		QString name = selectedObject->getNameI18n();
 		if (name.isEmpty())
 		{
@@ -8489,36 +8431,24 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 			if (otype == "Star" || otype=="Pulsar")
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
-		ui->angularDistancePlot->setToolTip(QString("%1 (%2)").arg(label, name));
-		ui->angularDistanceTitle->setText(QString("%1 (%2)").arg(label, name));
 		ui->lunarElongationChartView->setToolTip(QString("%1 (%2)").arg(label, name));
 		lunarElongationChart->setTitle(QString("%1 (%2)").arg(label, name));
-
-		prepareAngularDistanceAxesAndGraph();
-
-		ui->angularDistancePlot->graph(0)->setData(x, y);
-		ui->angularDistancePlot->graph(0)->setName("[Angular distance]");
-		ui->angularDistancePlot->replot();
 	}
 
-	qDebug() << "create chart axes...";
-	lunarElongationChart->setYrange(minYadm+5., maxYadm-5.); // TODO: reduce min/max back to real min/max values.
+	//qDebug() << "create chart axes...";
+	lunarElongationChart->setYrange(yRange.first, yRange.second);
 	lunarElongationChart->show(AstroCalcChart::LunarElongation);
 	lunarElongationChart->setupAxes(core->getJD(), 1, "");
-	qDebug() << "set chart ...";
+	//qDebug() << "set chart ...";
 	QChart *oldChart=ui->lunarElongationChartView->chart();
 	if (oldChart) oldChart->deleteLater();
 	ui->lunarElongationChartView->setChart(lunarElongationChart);
 	ui->lunarElongationChartView->setRenderHint(QPainter::Antialiasing);
-	qDebug() << "Chart done.";
-
-
+	//qDebug() << "Chart done.";
 
 	// clean up the data when selection is removed
 	if (!objectMgr->getWasSelected())
 	{
-		ui->angularDistancePlot->graph(0)->clearData();
-		ui->angularDistancePlot->replot();
 		if (lunarElongationChart)
 		{
 			lunarElongationChart->clear(AstroCalcChart::LunarElongation);
@@ -8526,30 +8456,25 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 		}
 
 	}
-	drawAngularDistanceLimitLine();
+	drawLunarElongationLimitLine();
 
 	lunarElongationChartMutex.unlock();
-	qDebug() << "AstroCalcDialog::drawLunarElongationDiagram()...done";
+	//qDebug() << "AstroCalcDialog::drawLunarElongationDiagram()...done";
 }
 
-void AstroCalcDialog::saveAngularDistanceLimit(int limit)
+void AstroCalcDialog::saveLunarElongationLimit(int limit)
 {
 	conf->setValue("astrocalc/angular_distance_limit", limit);
-	drawAngularDistanceLimitLine();
+	drawLunarElongationLimitLine();
 }
 
-void AstroCalcDialog::drawAngularDistanceLimitLine()
+void AstroCalcDialog::drawLunarElongationLimitLine()
 {
 	// special case - plot the graph when tab is visible
-	if (!plotAngularDistanceGraph || !dialog->isVisible())
+	if (!plotLunarElongationGraph || !dialog->isVisible())
 		return;
 
-	double limit = ui->angularDistanceLimitSpinBox->value();
-	QVector<double> x = {-5, 35};
-	QVector<double> y = {limit, limit};
-	ui->angularDistancePlot->graph(1)->setData(x, y);
-	ui->angularDistancePlot->replot();
-
+	double limit = ui->lunarElongationLimitSpinBox->value();
 	if(lunarElongationChart)
 	{
 		lunarElongationChart->drawTrivialLineY(AstroCalcChart::LunarElongationLimit, limit);

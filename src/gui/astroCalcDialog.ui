@@ -2047,9 +2047,9 @@
               </item>
              </layout>
             </widget>
-            <widget class="QWidget" name="tabLunarDistance">
+            <widget class="QWidget" name="tabLunarElongation">
              <attribute name="title">
-              <string>Lunar Distance</string>
+              <string>Lunar Elongation</string>
              </attribute>
              <layout class="QGridLayout" name="gridLayout_13">
               <property name="leftMargin">
@@ -2064,19 +2064,19 @@
               <property name="bottomMargin">
                <number>4</number>
               </property>
-              <item row="3" column="0">
+              <item row="2" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_18">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_19">
                   <item>
-                   <widget class="QLabel" name="angularDistanceLimitLabel">
+                   <widget class="QLabel" name="lunarElongationLimitLabel">
                     <property name="text">
                      <string>Angular distance limit, degrees:</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QSpinBox" name="angularDistanceLimitSpinBox">
+                   <widget class="QSpinBox" name="lunarElongationLimitSpinBox">
                     <property name="maximumSize">
                      <size>
                       <width>100</width>
@@ -2094,7 +2094,20 @@
                  </layout>
                 </item>
                 <item>
-                 <widget class="QLabel" name="angularDistanceNote">
+                 <spacer name="horizontalSpacer_16">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lunarElongationNote">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                     <horstretch>0</horstretch>
@@ -2110,6 +2123,19 @@
                  </widget>
                 </item>
                 <item>
+                 <spacer name="horizontalSpacer_17">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
                  <widget class="QPushButton" name="exportLunarElongationPushButton">
                   <property name="text">
                    <string>Export graph...</string>
@@ -2118,32 +2144,7 @@
                 </item>
                </layout>
               </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="angularDistanceTitle">
-                <property name="font">
-                 <font>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Change of angular distance between the Moon and selected object</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QCustomPlot" name="angularDistancePlot" native="true">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
+              <item row="0" column="0" colspan="2">
                <widget class="QChartView" name="lunarElongationChartView"/>
               </item>
              </layout>
