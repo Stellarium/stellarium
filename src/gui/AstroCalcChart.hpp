@@ -96,6 +96,10 @@ public slots:
 private slots:
 	//void setOptionStatus();
 
+protected:
+	//! Override. This sets the time from the click point to the main application.
+	virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
+
 private:
 	QtCharts::QDateTimeAxis *xAxis; // running along bottom
 	QtCharts::QValueAxis *yAxis; // running on the left side
