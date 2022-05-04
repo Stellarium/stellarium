@@ -51,8 +51,15 @@ AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR)
 					  AstroCalcChart::PhaseAngle2, AstroCalcChart::Phase2, AstroCalcChart::RightAscension2, AstroCalcChart::TransitAltitude2,
 					  AstroCalcChart::pcDistanceDeg}).intersect(which).count())
 		yAxisR=new QtCharts::QValueAxis(this);
-	legend()->setAlignment(Qt::AlignBottom);
-	legend()->setLabelColor(Qt::white);
+	if (QSet<AstroCalcChart::Series>({AstroCalcChart::pcDistanceAU, AstroCalcChart::pcDistanceDeg}).intersect(which).count())
+	{
+		legend()->hide();
+	}
+	else
+	{
+		legend()->setAlignment(Qt::AlignBottom);
+		legend()->setLabelColor(Qt::white);
+	}
 	setTitleBrush(QBrush(Qt::white));
 	setMargins(QMargins(2, 2, 2, 2)); // set to 0/0/0/0 for max space usage. This is between the title/axis labels and the enclosing QChartView.
 	layout()->setContentsMargins(0, 0, 0, 0);
