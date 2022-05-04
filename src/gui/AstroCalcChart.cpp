@@ -32,12 +32,13 @@
 
 AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR), yMin(-90), yMax(90.)
 {
-	qDebug() << "chart constructor";
+	//qDebug() << "chart constructor";
 
 	// Configure all series you want to potentially use later.
 	for (Series s: which)
 	{
-		if (QList<Series>({CurrentTime, TransitTime, AzVsTime, RightAscension1, RightAscension2}).contains(s))
+		// To avoid "spline tremor" we need line series for azimuths (0/360° rollover) and magnitudes (in case of shadow transits)
+		if (QList<Series>({CurrentTime, TransitTime, AzVsTime, RightAscension1, RightAscension2, Magnitude1, Magnitude2}).contains(s))
 			map.insert(s, new QtCharts::QLineSeries(this));
 			else
 		map.insert(s,         new QtCharts::QSplineSeries(this));
@@ -67,7 +68,7 @@ AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR)
 	layout()->setContentsMargins(0, 0, 0, 0);
 	setBackgroundRoundness(0); // remove rounded corners
 
-	qDebug() << "c'tor done";
+	//qDebug() << "c'tor done";
 }
 
 AstroCalcChart::~AstroCalcChart()
@@ -177,32 +178,33 @@ void AstroCalcChart::replace(Series s, int index, qreal x, qreal y)
 		}
 		else
 			map.value(s)->append(x, y);
+
+		// It seems we must remove/add series again to force a redraw.
+		if (index!=0)
+		{
+			//qDebug() << "replace force redraw and attach axes: Removing series" << s << "at index" << index;
+			if (series().contains(map.value(s)))
+				removeSeries(map.value(s));
+			addSeries(map.value(s));
+			if (axes(Qt::Horizontal).contains(xAxis))
+				map.value(s)->attachAxis(xAxis);
+			if (axes(Qt::Vertical).contains(yAxis))
+				map.value(s)->attachAxis(yAxis);
+			//qDebug() << "replace force redraw and attach axes...done";
+		}
 	}
 	else
 		qWarning() << "Series " << s << "invalid for replace()!";
-
-	// It seems we must remove/add series again to force a redraw.
-	if (index!=0)
-	{
-		//qDebug() << "replace force redraw...";
-		removeSeries(map.value(s));
-		addSeries(map.value(s));
-		map.value(s)->attachAxis(xAxis);
-		map.value(s)->attachAxis(yAxis);
-		//qDebug() << "replace force redraw...done";
-	}
 }
 
 void AstroCalcChart::drawTrivialLineX(Series s, const qreal x)
 {
 	if (map.value(s))
 	{
-		replace(s, 0, x, yAxis->min());
-		replace(s, 1, x, yAxis->max());
-		//replace(s, 0, x, -180.);
-		//replace(s, 1, x, 360.);
+		replace(s, 0, x, -180.); // Good for alt and azi plots. axis values may not be available yet.
+		replace(s, 1, x, 360.);
 		map.value(s)->setPen(penMap.value(s));
-		qDebug() << "Trivial line in " << s << "from " << yAxis->min() << "to" << yAxis->max();
+		//qDebug() << "Trivial X line in" << s << "at" << x << "from" << yAxis->min() << "to" << yAxis->max();
 	}
 	else
 		qWarning() << "No series" << s << "to add trivial X line";
@@ -212,12 +214,10 @@ void AstroCalcChart::drawTrivialLineY(Series s, const qreal y)
 {
 	if (map.value(s))
 	{
-		//replace(s, 0, x, yAxis->min());
-		//replace(s, 1, x, yAxis->max());
 		replace(s, 0, qreal(StelUtils::jdToQDateTime(StelUtils::qDateTimeToJd(xAxis->min())).toMSecsSinceEpoch()), y);
 		replace(s, 1, qreal(StelUtils::jdToQDateTime(StelUtils::qDateTimeToJd(xAxis->max())).toMSecsSinceEpoch()), y);
 		map.value(s)->setPen(penMap.value(s));
-		qDebug() << "Trivial line in " << s << "at" << y << "from " << xAxis->min() << "to" << xAxis->max();
+		//qDebug() << "Trivial Y line in" << s << "at" << y << "from" << xAxis->min() << "to" << xAxis->max();
 	}
 	else
 		qWarning() << "No series" << s << "to add trivial Y line";
@@ -232,18 +232,10 @@ int AstroCalcChart::lengthOfSeries(Series s)
 
 void AstroCalcChart::show(Series s)
 {
-	qDebug() << "About to add series " << s;
+	//qDebug() << "About to add series " << s;
 	if (!series().contains(map.value(s)))
 	{
 		addSeries(map.value(s));
-		map.value(s)->attachAxis(xAxis);
-
-		if (QList<AstroCalcChart::Series>({AstroCalcChart::AngularSize2, AstroCalcChart::Declination2, AstroCalcChart::Distance2,
-						  AstroCalcChart::Elongation2, AstroCalcChart::HeliocentricDistance2, AstroCalcChart::Magnitude2,
-						  AstroCalcChart::PhaseAngle2, AstroCalcChart::Phase2, AstroCalcChart::RightAscension2, AstroCalcChart::TransitAltitude2}).contains(s))
-				map.value(s)->attachAxis(yAxisR);
-		else
-				map.value(s)->attachAxis(yAxis);
 	}
 	else
 		qDebug() << "series" << s << "already shown.";
@@ -254,11 +246,11 @@ void AstroCalcChart::show(Series s)
 
 void AstroCalcChart::showToolTip(const QPointF &point, bool show)
 {
-	QtCharts::QLineSeries *series=dynamic_cast<QtCharts::QLineSeries *>(sender());
-	AstroCalcChart::Series seriesCode=map.key(series);
-	QString units("°");
 	if (show)
 	{
+		QtCharts::QLineSeries *series=dynamic_cast<QtCharts::QLineSeries *>(sender());
+		AstroCalcChart::Series seriesCode=map.key(series);
+		QString units("°");
 		QDateTime date=QDateTime::fromMSecsSinceEpoch(qint64(point.x()));
 		// Change units where required. No units for distances, phases!
 		if (QList<AstroCalcChart::Series>({AstroCalcChart::CurrentTime, AstroCalcChart::TransitTime,
@@ -278,13 +270,15 @@ void AstroCalcChart::showToolTip(const QPointF &point, bool show)
 
 void AstroCalcChart::clear(Series s)
 {
-	qDebug() << "Clearing series " << s;
-	qDebug() << "Before remove it has " << map.value(s)->points().length() << "entries";
+	//qDebug() << "Clearing series " << s;
+	//qDebug() << "Before remove it has " << map.value(s)->points().length() << "entries";
 //	if (series().contains(map.value(s)))
 //		removeSeries(map.value(s));
-	qDebug() << "clearing series with " << map.value(s)->points().length() << "entries";
+	//qDebug() << "clearing series with " << map.value(s)->points().length() << "entries";
 	map.value(s)->clear();
-	removeSeries(map.value(s)); // updates legend to not show entries
+	//qDebug() << "clear(): Removing series " << s;
+	if (series().contains(map.value(s)))
+		removeSeries(map.value(s)); // updates legend to not show entries
 }
 
 QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Series series, const int periods)

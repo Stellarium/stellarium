@@ -810,7 +810,6 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 	qDebug() << "creating azVsTime chart";
 	azVsTimeChart = new AstroCalcChart({AstroCalcChart::AzVsTime, AstroCalcChart::CurrentTime});
 	azVsTimeChart->setYrange(0., 360.);
-	qDebug() << "Chart has title:" << azVsTimeChart->title();
 
 	if (!selectedObjects.isEmpty())
 	{
@@ -4322,7 +4321,6 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 
 	qDebug() << "creating chart";
 	altVsTimeChart = new AstroCalcChart({AstroCalcChart::AltVsTime, AstroCalcChart::CurrentTime, AstroCalcChart::TransitTime, AstroCalcChart::SunElevation, AstroCalcChart::CivilTwilight, AstroCalcChart::NauticalTwilight, AstroCalcChart::AstroTwilight, AstroCalcChart::Moon});
-	qDebug() << "Chart has title:" << altVsTimeChart->title();
 
 	if (!selectedObjects.isEmpty())
 	{
@@ -4561,7 +4559,7 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 
 	const double currentJD = core->getJD();
 	const double UTCOffset = core->getUTCOffset(currentJD);
-	double now = ((currentJD + 0.5 - static_cast<int>(currentJD)) * 86400.0) + UTCOffset * 3600.0;
+	double now = ((currentJD + 0.5 - floor(currentJD)) * 86400.0) + UTCOffset * 3600.0;
 	if (now > 129600) now -= 86400;
 	if (now < 43200) now += 86400;
 
@@ -4571,29 +4569,25 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 	{
 		ui->altVsTimePlot->graph(1)->setData(x, y);
 		ui->altVsTimePlot->replot();
-		qDebug() << "Chart: replace/append currentTime in alt chart";
+		//qDebug() << "Chart: replace/append currentTime in alt chart";
 		if (altVsTimeChart){
-			//altVsTimeChart->replace(AstroCalcChart::CurrentTime, 0, now, minY-10);
-			//altVsTimeChart->replace(AstroCalcChart::CurrentTime, 1, now, maxY+10);
 			altVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, StelUtils::jdToQDateTime(currentJD+UTCOffset/24.).toMSecsSinceEpoch());
-			qDebug() << "Chart: replace/append currentTime in alt chart...done";
+			//qDebug() << "Chart: replace/append currentTime in alt chart...done";
 		}
 		else
-			qDebug() << "no alt chart to add CT line!";
+			qWarning() << "no alt chart to add CT line!";
 	}
 	if (plotAziVsTime)
 	{
 		ui->aziVsTimePlot->graph(1)->setData(x, y);
 		ui->aziVsTimePlot->replot();
-		qDebug() << "Chart: replace/append currentTime in azi chart";
+		//qDebug() << "Chart: replace/append currentTime in azi chart";
 		if (azVsTimeChart){
-			//azVsTimeChart->replace(AstroCalcChart::CurrentTime, 0, now, minY-10);
-			//azVsTimeChart->replace(AstroCalcChart::CurrentTime, 1, now, maxY+10);
 			azVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, StelUtils::jdToQDateTime(currentJD+UTCOffset/24.).toMSecsSinceEpoch());
-			qDebug() << "Chart: replace/append currentTime in azi chart...done";
+			//qDebug() << "Chart: replace/append currentTime in azi chart...done";
 		}
 		else
-			qDebug() << "no azi chart to add CT line!";
+			qWarning() << "no azi chart to add CT line!";
 	}
 
 	// detect roll over graph day limits.
@@ -4607,7 +4601,7 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 	}
 }
 
-// Added vertical line indicating time of transit
+// Add vertical line indicating time of transit
 void AstroCalcDialog::drawTransitTimeDiagram()
 {
 	// special case - plot the graph when tab is visible
@@ -4744,6 +4738,7 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 			if (firstGraph==AstroCalcChart::TransitAltitude1 || secondGraph==AstroCalcChart::TransitAltitude2)
 			{
 				core->setJD(JD);
+				core->update(0.0);
 				//UTCshift = core->getUTCOffset(JD) / 24.; // Fix DST shift...
 				Vec4d rts = ssObj->getRTSTime(core);
 				//JD += (rts[1]/24. - UTCshift); // FIXME: New logic has JD, not hours, here.
