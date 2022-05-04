@@ -1601,31 +1601,6 @@
                <number>4</number>
               </property>
               <item row="1" column="0">
-               <widget class="QCustomPlot" name="aziVsTimePlot" native="true">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="aziVsTimeTitle">
-                <property name="font">
-                 <font>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Celestial body</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
                <layout class="QHBoxLayout" name="aziVsTimeHorizontalLayout">
                 <item>
                  <widget class="QLabel" name="aziVsTimeLabel">
@@ -1665,7 +1640,7 @@
                 </item>
                </layout>
               </item>
-              <item row="1" column="1">
+              <item row="0" column="0">
                <widget class="QChartView" name="aziVsTimeChartView"/>
               </item>
              </layout>

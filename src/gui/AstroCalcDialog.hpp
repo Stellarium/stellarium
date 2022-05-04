@@ -328,12 +328,9 @@ private slots:
 
 	//! Draw diagram 'Azimuth vs. Time'
 	void drawAziVsTimeDiagram();
-	//! Show info from graphs under mouse cursor
-	void mouseOverAziLine(QMouseEvent *event);
 
 	//! Set time by clicking inside graph areas
 	void altTimeClick(QMouseEvent* event);
-	void aziTimeClick(QMouseEvent* event);
 
 	//! handle events that are otherwise "lost" when dialog not visible
 	void handleVisibleEnabled();
@@ -463,7 +460,6 @@ private:
 	void populatePlanetList();
 	//! Prepare graph settings
 	void prepareAxesAndGraph();
-	void prepareAziVsTimeAxesAndGraph();
 	//! Prepare left and right Y axes depending on plot type for object with englishName. For an empty graph, use englishName=""
 	void prepareXVsTimeAxesAndGraph(double minYLeft, double maxYLeft, double minYRight, double maxYRight, QString englishName);
 	void prepareMonthlyElevationAxesAndGraph();
@@ -535,7 +531,7 @@ private:
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader;
 	static double brightLimit;
 	static double minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, // minYLeft, maxYLeft, minYRight, maxYRight,
-			     minYld, maxYld, minYad, maxYad, /* minYadm, maxYadm,*/ minYaz, maxYaz;
+			     minYld, maxYld, minYad, maxYad /*, minYadm, maxYadm, minYaz, maxYaz*/;
 	static QString yAxis1Legend, yAxis2Legend;
 	static const QString dash, delimiter;
 
