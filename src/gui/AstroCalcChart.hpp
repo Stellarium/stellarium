@@ -1,7 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2019 Alexander Wolf
- * Copyright (C) 2022 Georg Zotti (QtCustomPlot->QtChart and this new class)
+ * Copyright (C) 2022 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,6 +28,7 @@
 
 //! @class AstroCalcChart
 //! This class encapsulates data for the Altitude vs. Time and the other line Charts in AstroCalc.
+//! Most lines can be QSplineSeries, however the azimuth lines must use QLineSeries to avoid a "spline tremor" at the 0/360° transition.
 class AstroCalcChart : public QtCharts::QChart
 {
 	Q_OBJECT
@@ -37,7 +37,7 @@ public:
 	// Series names. Better than int numbers for the old plots.
 	// This graph can be used in several scenarios. In 0.22 there are 6 plots which can be recreated by creating a chart which activates 1-2 lines of these:
 	enum Series {AltVsTime, CurrentTime, TransitTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight, Moon,
-		     AzVsTime, AzVsTimeCont,
+		     AzVsTime,
 		     MonthlyElevation,
 		     AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1,
 		     AngularSize2, Declination2, Distance2, Elongation2, HeliocentricDistance2, Magnitude2, PhaseAngle2, Phase2, RightAscension2, TransitAltitude2,
@@ -55,7 +55,7 @@ public:
 	void replace(Series s, int index, qreal x, qreal y);
 	//! Reset (delete and create new empty) series s
 	void clear(Series s);
-	//! @return length of series s
+	//! @return length of series s. If chart does not contain s, returns -1.
 	int lengthOfSeries(Series s);
 
 	//! Activate series s. It must have been filled using append(s, ., .) before.
@@ -99,7 +99,6 @@ private slots:
 
 private:
 	QtCharts::QDateTimeAxis *xAxis; // running along bottom
-	//QtCharts::QDateTimeAxis *xAxis; // Maybe change to use this!
 	QtCharts::QValueAxis *yAxis; // running on the left side
 	QtCharts::QValueAxis *yAxisR; // running on the right side for some charts only
 	qreal yMin, yMax; // store range of Y values
@@ -107,7 +106,7 @@ private:
 
 
 	//! The QMap holds enums and series for principally existing graphs. These can be made active by show(key)
-	QMap<AstroCalcChart::Series, QtCharts::QSplineSeries*> map;
+	QMap<AstroCalcChart::Series, QtCharts::QLineSeries*> map;
 	static const QMap<AstroCalcChart::Series, QPen> penMap;
 };
 
