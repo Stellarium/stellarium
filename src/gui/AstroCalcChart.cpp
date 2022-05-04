@@ -1,7 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2019 Alexander Wolf
- * Copyright (C) 2022 Georg Zotti (QtCustomPlot->QtChart and this new class)
+ * Copyright (C) 2022 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,11 +37,14 @@ AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR)
 	// Configure all series you want to potentially use later.
 	for (Series s: which)
 	{
+		if (QList<Series>({CurrentTime, TransitTime, AzVsTime, RightAscension1, RightAscension2}).contains(s))
+			map.insert(s, new QtCharts::QLineSeries(this));
+			else
 		map.insert(s,         new QtCharts::QSplineSeries(this));
 	}
 
 	setBackgroundBrush(QBrush(QColor(86, 87, 90)));
-	retranslate();
+	AstroCalcChart::retranslate();
 
 	xAxis=new QtCharts::QDateTimeAxis(this);
 	yAxis=new QtCharts::QValueAxis(this);
@@ -51,7 +53,7 @@ AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR)
 					  AstroCalcChart::PhaseAngle2, AstroCalcChart::Phase2, AstroCalcChart::RightAscension2, AstroCalcChart::TransitAltitude2,
 					  AstroCalcChart::pcDistanceDeg}).intersect(which).count())
 		yAxisR=new QtCharts::QValueAxis(this);
-	if (QSet<AstroCalcChart::Series>({AstroCalcChart::pcDistanceAU, AstroCalcChart::pcDistanceDeg}).intersect(which).count())
+	if (QSet<AstroCalcChart::Series>({AstroCalcChart::pcDistanceAU, AstroCalcChart::pcDistanceDeg, AstroCalcChart::MonthlyElevation}).intersect(which).count())
 	{
 		legend()->hide();
 	}
@@ -84,7 +86,6 @@ void AstroCalcChart::retranslate(){
 	if (map.contains(AstroTwilight        )) map.value(AstroTwilight        )->setName(q_("Astronomical Twilight"));
 	if (map.contains(Moon                 )) map.value(Moon                 )->setName(q_("Moon"));
 	if (map.contains(AzVsTime             )) map.value(AzVsTime             )->setName(q_("Azimuth"));
-	if (map.contains(AzVsTimeCont         )) map.value(AzVsTimeCont         )->setName(q_("Azimuth"));
 	if (map.contains(MonthlyElevation     )) map.value(MonthlyElevation     )->setName(q_("Monthly Elevation"));
 	if (map.contains(AngularSize1         )) map.value(AngularSize1         )->setName(q_("Angular Size"));
 	if (map.contains(Declination1         )) map.value(Declination1         )->setName(q_("Declination"));
@@ -128,9 +129,8 @@ const QMap<AstroCalcChart::Series, QPen> AstroCalcChart::penMap=
 	{AstroCalcChart::NauticalTwilight,  QPen(QColor(0x1e90ff),                    1, Qt::DashDotLine)},
 	{AstroCalcChart::Moon,              QPen(QColor(0x00ff7f),                    2, Qt::DashLine)},
 #endif
-	{AstroCalcChart::AstroTwilight,     QPen(Qt::darkBlue,                        1, Qt::DashDotDotLine)},
+	{AstroCalcChart::AstroTwilight,          QPen(Qt::darkBlue,                   1, Qt::DashDotDotLine)},
 	{AstroCalcChart::AzVsTime,               QPen(Qt::red,                        2, Qt::SolidLine)},
-	{AstroCalcChart::AzVsTimeCont,           QPen(Qt::red,                        2, Qt::SolidLine)},
 	{AstroCalcChart::MonthlyElevation,       QPen(Qt::red,                        2, Qt::SolidLine)},
 	{AstroCalcChart::AngularSize1,           QPen(Qt::green,                      2, Qt::SolidLine)},
 	{AstroCalcChart::Declination1,           QPen(Qt::green,                      2, Qt::SolidLine)},
@@ -163,7 +163,7 @@ void AstroCalcChart::append(Series s, qint64 x, qreal y)
 	if (map.value(s))
 		map.value(s)->append(qreal(x), y);
 	else
-		qDebug() << "Series " << s << "invalid for append()!";
+		qWarning() << "Series " << s << "invalid for append()!";
 }
 
 void AstroCalcChart::replace(Series s, int index, qreal x, qreal y)
@@ -179,7 +179,7 @@ void AstroCalcChart::replace(Series s, int index, qreal x, qreal y)
 			map.value(s)->append(x, y);
 	}
 	else
-		qDebug() << "Series " << s << "invalid for replace()!";
+		qWarning() << "Series " << s << "invalid for replace()!";
 
 	// It seems we must remove/add series again to force a redraw.
 	if (index!=0)
@@ -197,15 +197,15 @@ void AstroCalcChart::drawTrivialLineX(Series s, const qreal x)
 {
 	if (map.value(s))
 	{
-		//replace(s, 0, x, yAxis->min());
-		//replace(s, 1, x, yAxis->max());
-		replace(s, 0, x, -180.);
-		replace(s, 1, x, 360.);
+		replace(s, 0, x, yAxis->min());
+		replace(s, 1, x, yAxis->max());
+		//replace(s, 0, x, -180.);
+		//replace(s, 1, x, 360.);
 		map.value(s)->setPen(penMap.value(s));
 		qDebug() << "Trivial line in " << s << "from " << yAxis->min() << "to" << yAxis->max();
 	}
 	else
-		qDebug() << "No series" << s << "to add trivial line";
+		qWarning() << "No series" << s << "to add trivial X line";
 }
 
 void AstroCalcChart::drawTrivialLineY(Series s, const qreal y)
@@ -214,13 +214,13 @@ void AstroCalcChart::drawTrivialLineY(Series s, const qreal y)
 	{
 		//replace(s, 0, x, yAxis->min());
 		//replace(s, 1, x, yAxis->max());
-		replace(s, 0, StelUtils::jdToQDateTime(StelUtils::qDateTimeToJd(xAxis->min())).toMSecsSinceEpoch(), y);
-		replace(s, 1, StelUtils::jdToQDateTime(StelUtils::qDateTimeToJd(xAxis->max())).toMSecsSinceEpoch(), y);
+		replace(s, 0, qreal(StelUtils::jdToQDateTime(StelUtils::qDateTimeToJd(xAxis->min())).toMSecsSinceEpoch()), y);
+		replace(s, 1, qreal(StelUtils::jdToQDateTime(StelUtils::qDateTimeToJd(xAxis->max())).toMSecsSinceEpoch()), y);
 		map.value(s)->setPen(penMap.value(s));
 		qDebug() << "Trivial line in " << s << "at" << y << "from " << xAxis->min() << "to" << xAxis->max();
 	}
 	else
-		qDebug() << "No series" << s << "to add trivial line";
+		qWarning() << "No series" << s << "to add trivial Y line";
 }
 
 int AstroCalcChart::lengthOfSeries(Series s)
@@ -248,24 +248,18 @@ void AstroCalcChart::show(Series s)
 	else
 		qDebug() << "series" << s << "already shown.";
 
-	// Hide one entry from the legend.
-	if (s==AstroCalcChart::AzVsTimeCont)
-	{
-		legend()->markers(map.value(s))[0]->setVisible(false);
-	}
-
 	// Set up tooltips on hover for all series
 	connect(map.value(s), SIGNAL(hovered(const QPointF &, bool)), this, SLOT(showToolTip(const QPointF &, bool)));
 }
 
 void AstroCalcChart::showToolTip(const QPointF &point, bool show)
 {
-	QtCharts::QSplineSeries *series=dynamic_cast<QtCharts::QSplineSeries *>(sender());
+	QtCharts::QLineSeries *series=dynamic_cast<QtCharts::QLineSeries *>(sender());
 	AstroCalcChart::Series seriesCode=map.key(series);
 	QString units("°");
 	if (show)
 	{
-		QDateTime date=QDateTime::fromMSecsSinceEpoch(point.x());
+		QDateTime date=QDateTime::fromMSecsSinceEpoch(qint64(point.x()));
 		// Change units where required. No units for distances, phases!
 		if (QList<AstroCalcChart::Series>({AstroCalcChart::CurrentTime, AstroCalcChart::TransitTime,
 						  AstroCalcChart::Distance1, AstroCalcChart::Distance2,
@@ -494,7 +488,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	}
 	const QList<QtCharts::QAbstractSeries *> ser=series(); // currently shown series. These may be fewer than the series in our map!
 
-	for (Series s: {AltVsTime, CurrentTime, TransitTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight, Moon, AzVsTime, AzVsTimeCont, MonthlyElevation,
+	for (Series s: {AltVsTime, CurrentTime, TransitTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight, Moon, AzVsTime, MonthlyElevation,
 	     AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1,
 	     LunarElongation, LunarElongationLimit, pcDistanceAU})
 	{

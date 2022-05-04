@@ -808,7 +808,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 
 	qDebug() << "creating azVsTime chart";
-	azVsTimeChart = new AstroCalcChart({AstroCalcChart::AzVsTime, AstroCalcChart::AzVsTimeCont, AstroCalcChart::CurrentTime});
+	azVsTimeChart = new AstroCalcChart({AstroCalcChart::AzVsTime, AstroCalcChart::CurrentTime});
 	azVsTimeChart->setYrange(0., 360.);
 	qDebug() << "Chart has title:" << azVsTimeChart->title();
 
@@ -825,8 +825,6 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		const double shift = core->getUTCOffset(currentJD) / 24.0;
 		const double noon = static_cast<int>(currentJD + shift);
 		double az, alt, deg;
-
-		double lastDeg=0.;
 
 		static const int step = 180;
 		static const int limit = 480;
@@ -867,21 +865,10 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 				az -= M_PI*2;
 			deg=az*M_180_PI;
 			aY.append(deg);
-			// prepare QChart use:
-			bool needNewSeries=fabs(lastDeg-deg)>270.;
 
-			qDebug() << "lastDeg-deg=" << lastDeg-deg;
-
-			if ((needNewSeries && azVsTimeChart->lengthOfSeries(AstroCalcChart::AzVsTime)>0.) || azVsTimeChart->lengthOfSeries(AstroCalcChart::AzVsTimeCont)>0.)
-				azVsTimeChart->append(AstroCalcChart::AzVsTimeCont, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg);
-			else
-				azVsTimeChart->append(AstroCalcChart::AzVsTime, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg);
-			lastDeg=deg;
+			azVsTimeChart->append(AstroCalcChart::AzVsTime, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg);
 		}
-		qDebug() << "Series lengths: " << azVsTimeChart->lengthOfSeries(AstroCalcChart::AzVsTime) << "/" << azVsTimeChart->lengthOfSeries(AstroCalcChart::AzVsTimeCont);
 		azVsTimeChart->show(AstroCalcChart::AzVsTime);
-		if (azVsTimeChart->lengthOfSeries(AstroCalcChart::AzVsTimeCont)>0.)
-			azVsTimeChart->show(AstroCalcChart::AzVsTimeCont);
 		core->setJD(currentJD);
 
 		QVector<double> x = aX.toVector(), y = aY.toVector();
@@ -906,7 +893,6 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 			if (otype == "Star" || otype=="Pulsar")
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
-
 
 		drawTransitTimeDiagram(); // GZ TBD: Why transit time? It does nothing.
 		// For chart, replace by:
@@ -938,7 +924,6 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 	}
 	qDebug() << "AstrocalcDialog::drawAzVsTimeDiagram()...done";
 	azVsTimeChartMutex.unlock();
-
 }
 
 void AstroCalcDialog::mouseOverAziLine(QMouseEvent* event)
