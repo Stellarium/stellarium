@@ -457,7 +457,6 @@ private:
 	void prepareAxesAndGraph();
 	//! Prepare left and right Y axes depending on plot type for object with englishName. For an empty graph, use englishName=""
 	void prepareXVsTimeAxesAndGraph(double minYLeft, double maxYLeft, double minYRight, double maxYRight, QString englishName);
-	void prepareMonthlyElevationAxesAndGraph();
 	//! Populates the drop-down list of time intervals for WUT tool.
 	void populateTimeIntervalsList();	
 	double computeGraphValue(const PlanetP &ssObj, const AstroCalcChart::Series graphType);
@@ -525,7 +524,7 @@ private:
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader;
 	static double brightLimit;
-	static double minY, maxY, minYme, maxYme, /*minYsun, maxYsun, minYmoon, maxYmoon, */ transitX // minYLeft, maxYLeft, minYRight, maxYRight,
+	static double minY, maxY, /*minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, */ transitX // minYLeft, maxYLeft, minYRight, maxYRight,
 			     /*minYld, maxYld, minYad, maxYad, minYadm, maxYadm, minYaz, maxYaz*/;
 //	static QString yAxis1Legend, yAxis2Legend;
 	static const QString dash, delimiter;
