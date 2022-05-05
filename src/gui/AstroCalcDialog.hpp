@@ -317,10 +317,8 @@ private slots:
 	void drawAltVsTimeDiagram();
 	//! Draw vertical line 'Now' on diagram 'Altitude vs. Time'
 	void drawCurrentTimeDiagram();
-	//! Draw vertical line of meridian passage time on diagram 'Altitude vs. Time'
-	void drawTransitTimeDiagram();	
 	//! Show info from graphs under mouse cursor
-	void mouseOverLine(QMouseEvent *event);
+	//void mouseOverLine(QMouseEvent *event);
 	void saveAltVsTimeSunFlag(bool state);
 	void saveAltVsTimeMoonFlag(bool state);
 	void saveAltVsTimePositiveFlag(bool state);
@@ -328,9 +326,6 @@ private slots:
 
 	//! Draw diagram 'Azimuth vs. Time'
 	void drawAziVsTimeDiagram();
-
-	//! Set time by clicking inside graph areas
-	void altTimeClick(QMouseEvent* event);
 
 	//! handle events that are otherwise "lost" when dialog not visible
 	void handleVisibleEnabled();
@@ -530,9 +525,9 @@ private:
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader;
 	static double brightLimit;
-	static double minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, // minYLeft, maxYLeft, minYRight, maxYRight,
-			     minYld, maxYld, minYad, maxYad /*, minYadm, maxYadm, minYaz, maxYaz*/;
-	static QString yAxis1Legend, yAxis2Legend;
+	static double minY, maxY, minYme, maxYme, /*minYsun, maxYsun, minYmoon, maxYmoon, */ transitX // minYLeft, maxYLeft, minYRight, maxYRight,
+			     /*minYld, maxYld, minYad, maxYad, minYadm, maxYadm, minYaz, maxYaz*/;
+//	static QString yAxis1Legend, yAxis2Legend;
 	static const QString dash, delimiter;
 
 	//! Make sure that no tabs icons are outside of the viewport.
