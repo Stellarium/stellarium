@@ -326,6 +326,7 @@ private:
 	QNetworkAccessManager * m_networkManager;
 	QNetworkReply * m_downloadReply;
 	class StelProgressController* m_progressBar;
+	QTimer* m_updateTimer;
 
 	void createActions();
 	void loadConfig();	

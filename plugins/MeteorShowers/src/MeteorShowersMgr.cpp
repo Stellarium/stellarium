@@ -50,7 +50,7 @@ MeteorShowersMgr::MeteorShowersMgr()
 	, m_enableMarker(true)
 	, m_showEnableButton(true)
 	, m_showSearchButton(true)
-	, m_enableAutoUpdates(false)
+	, m_enableAutoUpdates(true)
 	, m_updateFrequencyHours(0)
 	, m_updateState(CompleteNoUpdates)
 	, m_downloadReply(Q_NULLPTR)
@@ -91,7 +91,7 @@ void MeteorShowersMgr::init()
 	// Set up download manager and the update schedule
 	m_networkManager = StelApp::getInstance().getNetworkAccessManager();
 	m_updateState = CompleteNoUpdates;
-	QTimer* m_updateTimer = new QTimer(this);
+	m_updateTimer = new QTimer(this);
 	m_updateTimer->setSingleShot(false);   // recurring check for update
 	m_updateTimer->setInterval(300000);    // every 5 min, check if it's time to update
 	connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdates()));
