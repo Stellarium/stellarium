@@ -1630,7 +1630,7 @@
               </item>
              </layout>
             </widget>
-            <widget class="QWidget" name="tabMontlyElevation">
+            <widget class="QWidget" name="tabMonthlyElevation">
              <attribute name="title">
               <string>Monthly Elevation</string>
              </attribute>
@@ -1648,46 +1648,6 @@
                <number>4</number>
               </property>
               <item row="2" column="0">
-               <widget class="QLabel" name="monthlyElevationLabel">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>30</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Please select object to plot its 'Monthly Elevation' graph for the current year at selected time.</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-                <property name="wordWrap">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="monthlyElevationTitle">
-                <property name="font">
-                 <font>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Celestial body</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_10">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_21">
@@ -1761,6 +1721,19 @@
                  </widget>
                 </item>
                 <item>
+                 <spacer name="horizontalSpacer_19">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
                  <widget class="QPushButton" name="exportMonthlyElevationPushButton">
                   <property name="text">
                    <string>Export graph...</string>
@@ -1770,16 +1743,31 @@
                </layout>
               </item>
               <item row="1" column="0">
-               <widget class="QCustomPlot" name="monthlyElevationGraph" native="true">
+               <widget class="QLabel" name="monthlyElevationLabel">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Please select object to plot its 'Monthly Elevation' graph for the current year at selected time.</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
-              <item row="1" column="1">
+              <item row="0" column="0" colspan="2">
                <widget class="QChartView" name="monthlyElevationChartView"/>
               </item>
              </layout>

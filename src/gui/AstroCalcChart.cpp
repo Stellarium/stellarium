@@ -562,7 +562,6 @@ void AstroCalcChart::setYrangeR(qreal min, qreal max)
 
 void AstroCalcChart::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-
 	if (event->modifiers() != Qt::NoModifier)
 		return;
 	if (event->button() != Qt::LeftButton)

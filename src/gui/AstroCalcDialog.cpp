@@ -82,8 +82,8 @@ int AstroCalcDialog::DisplayedPositionIndex = -1;
 double AstroCalcDialog::brightLimit = 10.;
 double AstroCalcDialog::minY = -90.; // TODO: get rid of this and the next.
 double AstroCalcDialog::maxY = 90.;
-double AstroCalcDialog::minYme = -90.;
-double AstroCalcDialog::maxYme = 90.;
+//double AstroCalcDialog::minYme = -90.;
+//double AstroCalcDialog::maxYme = 90.;
 //double AstroCalcDialog::minYsun = -90.;
 //double AstroCalcDialog::maxYsun = 90.;
 //double AstroCalcDialog::minYmoon = -90.;
@@ -202,7 +202,6 @@ void AstroCalcDialog::retranslate()
 		currentHECPositions();
 		populateFunctionsList();
 		prepareXVsTimeAxesAndGraph(-1001., 1001., -1001., 1001., "");
-		prepareMonthlyElevationAxesAndGraph();
 		drawAltVsTimeDiagram();
 		drawAziVsTimeDiagram();
 		populateTimeIntervalsList();
@@ -263,8 +262,6 @@ void AstroCalcDialog::createDialogContent()
 	// Graphs feature
 	populateFunctionsList();
 	prepareXVsTimeAxesAndGraph(-1001., 1001., -1001., 1001., "");
-	// Monthly Elevation
-	prepareMonthlyElevationAxesAndGraph();
 	// WUT
 	initListWUT();
 	populateTimeIntervalsList();
@@ -411,6 +408,7 @@ void AstroCalcDialog::createDialogContent()
 	plotAltVsTimeSun = conf->value("astrocalc/altvstime_sun", false).toBool();
 	plotAltVsTimeMoon = conf->value("astrocalc/altvstime_moon", false).toBool();
 	plotAltVsTimePositive = conf->value("astrocalc/altvstime_positive_only", false).toBool();
+	altVsTimePositiveLimit = conf->value("astrocalc/altvstime_positive_limit", 0).toInt();
 	ui->sunAltitudeCheckBox->setChecked(plotAltVsTimeSun);
 	ui->moonAltitudeCheckBox->setChecked(plotAltVsTimeMoon);
 	ui->positiveAltitudeOnlyCheckBox->setChecked(plotAltVsTimePositive);
@@ -437,7 +435,8 @@ void AstroCalcDialog::createDialogContent()
 	// Monthly Elevation
 	plotMonthlyElevationPositive = conf->value("astrocalc/me_positive_only", false).toBool();
 	ui->monthlyElevationPositiveCheckBox->setChecked(plotMonthlyElevationPositive);
-	ui->monthlyElevationPositiveLimitSpinBox->setValue(conf->value("astrocalc/me_positive_limit", 0).toInt());
+	monthlyElevationPositiveLimit=(conf->value("astrocalc/me_positive_limit", 0).toInt());
+	ui->monthlyElevationPositiveLimitSpinBox->setValue(monthlyElevationPositiveLimit);
 	ui->monthlyElevationTime->setValue(conf->value("astrocalc/me_time", 0).toInt());
 	syncMonthlyElevationTime();
 	connect(ui->monthlyElevationTime, SIGNAL(valueChanged(int)), this, SLOT(updateMonthlyElevationTime()));
@@ -4419,7 +4418,8 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 	if (plotAziVsTime)
 	{
 		//qDebug() << "Chart: replace/append currentTime in azi chart";
-		if (azVsTimeChart){
+		if (azVsTimeChart)
+		{
 			azVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, qreal(StelUtils::jdToQDateTime(currentJD+UTCOffset/24.).toMSecsSinceEpoch()));
 			//qDebug() << "Chart: replace/append currentTime in azi chart...done";
 		}
@@ -4987,48 +4987,6 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph(double minYLeft, double maxYLef
 	ui->graphsPlot->graph(1)->rescaleAxes(true);
 }
 
-void AstroCalcDialog::prepareMonthlyElevationAxesAndGraph()
-{
-	QString xAxisStr = q_("Date");
-	QString yAxisStr = QString("%1, %2").arg(q_("Altitude"), QChar(0x00B0));
-
-	QColor axisColor(Qt::white);
-	QPen axisPen(axisColor, 1);
-
-	ui->monthlyElevationGraph->setLocale(QLocale(localeMgr->getAppLanguage()));
-	ui->monthlyElevationGraph->xAxis->setLabel(xAxisStr);
-	ui->monthlyElevationGraph->yAxis->setLabel(yAxisStr);
-
-	int dYear = (static_cast<int>(solarSystem->getEarth()->getSiderealPeriod()) + 1) * 86400;
-	ui->monthlyElevationGraph->xAxis->setRange(0, dYear);
-	ui->monthlyElevationGraph->xAxis->setScaleType(QCPAxis::stLinear);
-	ui->monthlyElevationGraph->xAxis->setTickLabelType(QCPAxis::ltDateTime);
-	ui->monthlyElevationGraph->xAxis->setLabelColor(axisColor);
-	ui->monthlyElevationGraph->xAxis->setTickLabelColor(axisColor);
-	ui->monthlyElevationGraph->xAxis->setBasePen(axisPen);
-	ui->monthlyElevationGraph->xAxis->setTickPen(axisPen);
-	ui->monthlyElevationGraph->xAxis->setSubTickPen(axisPen);
-	ui->monthlyElevationGraph->xAxis->setDateTimeFormat("d\nMMM");
-	ui->monthlyElevationGraph->xAxis->setDateTimeSpec(Qt::UTC);
-	ui->monthlyElevationGraph->xAxis->setAutoTicks(true);
-	ui->monthlyElevationGraph->xAxis->setAutoTickCount(15);
-
-	ui->monthlyElevationGraph->yAxis->setRange(minYme, maxYme);
-	ui->monthlyElevationGraph->yAxis->setScaleType(QCPAxis::stLinear);
-	ui->monthlyElevationGraph->yAxis->setLabelColor(axisColor);
-	ui->monthlyElevationGraph->yAxis->setTickLabelColor(axisColor);
-	ui->monthlyElevationGraph->yAxis->setBasePen(axisPen);
-	ui->monthlyElevationGraph->yAxis->setTickPen(axisPen);
-	ui->monthlyElevationGraph->yAxis->setSubTickPen(axisPen);
-
-	ui->monthlyElevationGraph->clearGraphs();
-	ui->monthlyElevationGraph->addGraph();
-	ui->monthlyElevationGraph->setBackground(QBrush(QColor(86, 87, 90)));
-	ui->monthlyElevationGraph->graph(0)->setPen(QPen(Qt::red, 1));
-	ui->monthlyElevationGraph->graph(0)->setLineStyle(QCPGraph::lsLine);
-	ui->monthlyElevationGraph->graph(0)->rescaleAxes(true);
-}
-
 void AstroCalcDialog::syncMonthlyElevationTime()
 {
 	ui->monthlyElevationTimeInfo->setText(QString("%1 %2").arg(QString::number(ui->monthlyElevationTime->value()), qc_("h", "time")));
@@ -5066,9 +5024,7 @@ void AstroCalcDialog::saveMonthlyElevationPositiveLimit(int limit)
 
 void AstroCalcDialog::drawMonthlyElevationGraph()
 {
-	ui->monthlyElevationGraph->setToolTip("");
-
-	qDebug() << "AstrocalcDialog::drawMonthlyElevationGraph()...";
+	//qDebug() << "AstrocalcDialog::drawMonthlyElevationGraph()...";
 	if (!monthlyElevationChartMutex.tryLock()) return; // Avoid calling parallel from various sides. (called by signals/slots)
 
 	// Avoid crash!
@@ -5097,59 +5053,48 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 
-	qDebug() << "creating Monthly Elevation chart";
+	//qDebug() << "creating Monthly Elevation chart";
 	monthlyElevationChart = new AstroCalcChart({AstroCalcChart::MonthlyElevation});
-	qDebug() << "Chart has title:" << monthlyElevationChart->title();
+	QPair<double, double>yRangeME(-90., 90.);
+	//qDebug() << "Chart has title:" << monthlyElevationChart->title();
 
 	if (!selectedObjects.isEmpty())
 	{
 		// X axis - time; Y axis - altitude
-		QList<double> aX, aY;
+		//QList<double> aX, aY;
 		StelObjectP selectedObject = selectedObjects[0];
-		ui->monthlyElevationTitle->setText(selectedObject->getNameI18n());
 		monthlyElevationChart->setTitle(selectedObject->getNameI18n());
 
 		if (selectedObject->getType() == "Satellite")
 		{
-			ui->monthlyElevationGraph->graph(0)->data()->clear();
-			ui->monthlyElevationGraph->replot();
 			monthlyElevationChart->clear(AstroCalcChart::MonthlyElevation);
 			monthlyElevationChartMutex.unlock();
 			return;
 		}
 
 		const double currentJD = core->getJD();
-		int hour = ui->monthlyElevationTime->value();
-		double az, alt, startJD, JD, ltime;
 		int year, month, day;		
 		StelUtils::getDateFromJulianDay(currentJD, &year, &month, &day);
+		int hour = ui->monthlyElevationTime->value();
+		double startJD;
 		StelUtils::getJDFromDate(&startJD, year, 1, 1, hour, 0, 0);
 		startJD -= core->getUTCOffset(startJD)/24; // Time zone correction
 		int dYear = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()/5.) + 3;
-		for (int i = -2; i <= dYear; i+=3)
+		for (int i = 0; i <= dYear; i+=3)
 		{
-			JD = startJD + i*5;
-			ltime = (JD - startJD) * StelCore::ONE_OVER_JD_SECOND;
-			aX.append(ltime);
+			double JD = startJD + i*5;
 			core->setJD(JD);
 			core->update(0.0);
+			double az, alt;
 			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
-			double deg=alt*M_180_PI;
-			aY.append(deg);
-			// prepare QChart use:
-			monthlyElevationChart->append(AstroCalcChart::MonthlyElevation, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), deg);
+			monthlyElevationChart->append(AstroCalcChart::MonthlyElevation, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), alt*M_180_PI); // TODO: add zone correction?
 			//qDebug() << "ME:" << StelUtils::jdToQDateTime(JD) << "/" << deg;
 		}
 		core->setJD(currentJD);
 
-		QVector<double> x = aX.toVector(), y = aY.toVector();
-		minYme = *std::min_element(aY.begin(), aY.end()) - 2.0;
-		maxYme = *std::max_element(aY.begin(), aY.end()) + 2.0;
-
-		if (plotMonthlyElevationPositive && minYme<monthlyElevationPositiveLimit)
-			minYme = monthlyElevationPositiveLimit;
-
-		prepareMonthlyElevationAxesAndGraph();
+		yRangeME=monthlyElevationChart->findYRange(AstroCalcChart::MonthlyElevation);
+		if (plotMonthlyElevationPositive && yRangeME.first<monthlyElevationPositiveLimit)
+			yRangeME.first = monthlyElevationPositiveLimit;
 
 		QString name = selectedObject->getNameI18n();
 		if (name.isEmpty())
@@ -5164,38 +5109,29 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 			if (otype == "Star" || otype=="Pulsar")
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
-		ui->monthlyElevationGraph->graph(0)->setData(x, y);
-		ui->monthlyElevationGraph->graph(0)->setName(name);
-		ui->monthlyElevationGraph->replot();
-		ui->monthlyElevationGraph->setToolTip(name);
 		monthlyElevationChart->setTitle(name);
-
 	}
-	qDebug() << "create chart axes...";
-	monthlyElevationChart->setYrange(minYme+2., maxYme-2.); // TODO: reduce min/max back to real min/max values.
+	//qDebug() << "create chart axes...";
+	monthlyElevationChart->setYrange(yRangeME.first, yRangeME.second); // TODO: reduce min/max back to real min/max values.
 	monthlyElevationChart->show(AstroCalcChart::MonthlyElevation);
 	monthlyElevationChart->setupAxes(core->getJD(), 1, "");
-	qDebug() << "set chart ...";
+	//qDebug() << "set chart ...";
 	QChart *oldChart=ui->monthlyElevationChartView->chart();
 	if (oldChart) oldChart->deleteLater();
 	ui->monthlyElevationChartView->setChart(monthlyElevationChart);
 	ui->monthlyElevationChartView->setRenderHint(QPainter::Antialiasing);
-	qDebug() << "Chart done.";
-
+	//qDebug() << "Chart done.";
 
 	// clean up the data when selection is removed
 	if (!objectMgr->getWasSelected())
 	{
-		ui->monthlyElevationGraph->graph(0)->data()->clear();
-		ui->monthlyElevationGraph->replot();
-
 		if (monthlyElevationChart)
 		{
 			monthlyElevationChart->clear(AstroCalcChart::MonthlyElevation);
 			monthlyElevationChart->setTitle(q_("No object selected"));
 		}
 	}
-	qDebug() << "AstroCalcDialog::drawMonthlyElevationGraph()...done";
+	//qDebug() << "AstroCalcDialog::drawMonthlyElevationGraph()...done";
 	monthlyElevationChartMutex.unlock();
 }
 
@@ -5238,7 +5174,6 @@ void AstroCalcDialog::handleVisibleEnabled()
 		else
 			drawCurrentTimeDiagram();
 	}
-
 	graphPlotNeedsRefresh = false;
 }
 
@@ -6647,34 +6582,31 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 	// special case - graphs
 	if (ui->stackListWidget->row(current) == 4)
 	{
-		int idx = ui->tabWidgetGraphs->currentIndex();
-		if (idx==0) // 'Alt. vs Time' is visible
-		{
-			plotAltVsTime = true;
-			qDebug() << "calling drawAltVsTimeDiagram() in changePage";
-			drawAltVsTimeDiagram(); // Is object already selected?
+		const int idx = ui->tabWidgetGraphs->currentIndex();
+		switch (idx){
+			case 0: // 'Alt. vs Time' is visible
+				plotAltVsTime = true;
+				qDebug() << "calling drawAltVsTimeDiagram() in changePage";
+				drawAltVsTimeDiagram(); // Is object already selected?
+				break;
+			case 1: //  'Azi. vs Time' is visible
+				plotAziVsTime = true;
+				drawAziVsTimeDiagram(); // Is object already selected?
+				break;
+			case 2: // 'Monthly Elevation' is visible
+				plotMonthlyElevation = true;
+				drawMonthlyElevationGraph(); // Is object already selected?
+				break;
+			case 3: // 'Graphs' is visible
+				updateXVsTimeGraphs();
+				break;
+			case 4: // 'Angular distance' is visible
+				plotLunarElongationGraph = true;
+				drawLunarElongationGraph();
+				break;
+			default:
+				qWarning() << "Bad index.";
 		}
-
-		if (idx==1) //  'Azi. vs Time' is visible
-		{
-			plotAziVsTime = true;
-			drawAziVsTimeDiagram(); // Is object already selected?
-		}
-
-		if (idx==2) // 'Monthly Elevation' is visible
-		{
-			plotMonthlyElevation = true;
-			drawMonthlyElevationGraph(); // Is object already selected?
-		}		
-
-		if (idx==3) // 'Graphs' is visible
-			updateXVsTimeGraphs();
-
-		if(idx==4) // 'Angular distance' is visible
-		{
-			plotLunarElongationGraph = true;
-			drawLunarElongationGraph();
-		}		
 	}
 
 	// special case (PCalc)
@@ -8004,7 +7936,6 @@ void AstroCalcDialog::drawDistanceGraph()
 	pcChartMutex.unlock();
 }
 
-
 void AstroCalcDialog::drawLunarElongationGraph()
 {
 	//qDebug() << "AstrocalcDialog::drawLunarElongationGraph()...";
@@ -8107,7 +8038,6 @@ void AstroCalcDialog::drawLunarElongationGraph()
 			lunarElongationChart->clear(AstroCalcChart::LunarElongation);
 			lunarElongationChart->setTitle(q_("No object selected"));
 		}
-
 	}
 	drawLunarElongationLimitLine();
 
