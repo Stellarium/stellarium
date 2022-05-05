@@ -59,12 +59,14 @@ class MeteorShowersMgr : public StelModule
 	Q_PROPERTY(bool enableLabels READ getEnableLabels WRITE setEnableLabels NOTIFY enableLabelsChanged)
 
 public:
-	//! @enum DownloadStatus
-	enum DownloadStatus {
-		OUTDATED,
-		UPDATING,
-		UPDATED,
-		FAILED
+	//! @enum UpdateState
+	//! Used for keeping for track of the download/update status
+	enum UpdateState {
+		Updating,			//!< Update in progress
+		CompleteNoUpdates,	//!< Update completed, there we no updates
+		CompleteUpdates,	//!< Update completed, there were updates
+		DownloadError,		//!< Error during download phase
+		OtherError			//!< Other error
 	};
 
 	//! Constructor.
@@ -107,9 +109,8 @@ public:
 	void setLastUpdate(const QDateTime& datetime);
 	QDateTime getLastUpdate() { return m_lastUpdate; }
 
-	//! Set the status of the last update
-	void setStatusOfLastUpdate(const int &downloadStatus);
-	DownloadStatus getStatusOfLastUpdate() { return m_statusOfLastUpdate; }
+	//! Get the current updateState
+	UpdateState getUpdateState(void) const {return updateState;}
 
 	//! Gets the date of the next update.
 	QDateTime getNextUpdate();
@@ -128,7 +129,11 @@ public:
 	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
 
 signals:
-	void downloadStatusChanged(MeteorShowersMgr::DownloadStatus);
+	//! @param state the new update state.
+	void updateStateChanged(MeteorShowersMgr::UpdateState state);
+
+	//! Emitted after a JSON update has run.
+	void jsonUpdateComplete(void);
 	void enablePluginChanged(bool b);
 	void enableLabelsChanged(bool b);
 
@@ -317,10 +322,11 @@ private:
 	int m_updateFrequencyHours;
 	QString m_url;
 	QDateTime m_lastUpdate;
-	DownloadStatus m_statusOfLastUpdate;
+	UpdateState updateState;
 	QNetworkAccessManager * m_networkManager;
 	QNetworkReply * m_downloadReply;
 	class StelProgressController* m_progressBar;
+	QTimer* m_updateTimer;
 
 	void createActions();
 	void loadConfig();	
