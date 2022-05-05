@@ -52,7 +52,7 @@ MeteorShowersMgr::MeteorShowersMgr()
 	, m_showSearchButton(true)
 	, m_enableAutoUpdates(false)
 	, m_updateFrequencyHours(0)
-	, updateState(CompleteNoUpdates)
+	, m_updateState(CompleteNoUpdates)
 	, m_downloadReply(Q_NULLPTR)
 	, m_progressBar(Q_NULLPTR)
 {
@@ -90,8 +90,8 @@ void MeteorShowersMgr::init()
 
 	// Set up download manager and the update schedule
 	m_networkManager = StelApp::getInstance().getNetworkAccessManager();
-	updateState = CompleteNoUpdates;
-	m_updateTimer = new QTimer(this);
+	m_updateState = CompleteNoUpdates;
+	QTimer* m_updateTimer = new QTimer(this);
 	m_updateTimer->setSingleShot(false);   // recurring check for update
 	m_updateTimer->setInterval(300000);    // every 5 min, check if it's time to update
 	connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdates()));
@@ -345,8 +345,8 @@ void MeteorShowersMgr::startDownload(QString urlString)
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
 	m_downloadReply = m_networkManager->get(request);
 	connect(m_downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
-	updateState = MeteorShowersMgr::Updating;
-	emit updateStateChanged(updateState);
+	m_updateState = MeteorShowersMgr::Updating;
+	emit updateStateChanged(m_updateState);
 }
 
 void MeteorShowersMgr::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
@@ -407,17 +407,17 @@ void MeteorShowersMgr::downloadComplete(QNetworkReply *reply)
 			jsonFile.close();
 		}
 
-		updateState = MeteorShowersMgr::CompleteUpdates;
+		m_updateState = MeteorShowersMgr::CompleteUpdates;
 		m_lastUpdate = QDateTime::currentDateTime();
 		m_conf->setValue("MeteorShowers/last_update", m_lastUpdate.toString(Qt::ISODate));
 	}
 	catch (std::runtime_error &e)
 	{
 		qWarning() << "[MeteorShowersMgr] Cannot write JSON data to file:" << e.what();
-		updateState = MeteorShowersMgr::DownloadError;
+		m_updateState = MeteorShowersMgr::DownloadError;
 	}
 
-	emit updateStateChanged(updateState);
+	emit updateStateChanged(m_updateState);
 	emit jsonUpdateComplete();
 	reply->deleteLater();
 	m_downloadReply = Q_NULLPTR;
@@ -425,7 +425,7 @@ void MeteorShowersMgr::downloadComplete(QNetworkReply *reply)
 
 void MeteorShowersMgr::updateCatalog()
 {
-	if (updateState==MeteorShowersMgr::Updating)
+	if (m_updateState==MeteorShowersMgr::Updating)
 	{
 		qWarning() << "[MeteorShowersMgr] already updating...  will not start again current update is complete.";
 		return;

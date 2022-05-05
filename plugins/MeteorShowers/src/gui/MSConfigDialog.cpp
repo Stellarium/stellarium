@@ -34,6 +34,12 @@ MSConfigDialog::MSConfigDialog(MeteorShowersMgr* mgr)
 
 MSConfigDialog::~MSConfigDialog()
 {
+	if (m_updateTimer)
+	{
+		m_updateTimer->stop();
+		delete m_updateTimer;
+		m_updateTimer = Q_NULLPTR;
+	}
 	delete m_ui;
 }
 
@@ -90,9 +96,9 @@ void MSConfigDialog::createDialogContent()
 	connect(m_ui->bUpdate, SIGNAL(clicked()), this, SLOT(refreshUpdateTab()));
 	connect(m_mgr, SIGNAL(updateStateChanged(MeteorShowersMgr::UpdateState)), this, SLOT(updateStateReceiver(MeteorShowersMgr::UpdateState)));
 	connect(m_mgr, SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));	
-	updateTimer = new QTimer(this);
-	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateTab()));
-	updateTimer->start(7000);
+	m_updateTimer = new QTimer(this);
+	connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateTab()));
+	m_updateTimer->start(7000); // Duration of time to display changing status in update tab
 
 	// About tab
 	setAboutHtml();
@@ -160,14 +166,14 @@ void MSConfigDialog::updateStateReceiver(MeteorShowersMgr::UpdateState state)
 	else if (state==MeteorShowersMgr::DownloadError || state==MeteorShowersMgr::OtherError)
 	{
 		m_ui->status->setText(q_("Update error"));
-		updateTimer->start();  // make sure message is displayed for a while...
+		m_updateTimer->start();  // make sure message is displayed for a while...
 	}
 }
 
 void MSConfigDialog::updateCompleteReceiver(void)
 {
 	m_ui->status->setText(QString(q_("Successfully updated")));
-	updateTimer->start();
+	m_updateTimer->start();
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateTab()));
 	setAboutHtml();

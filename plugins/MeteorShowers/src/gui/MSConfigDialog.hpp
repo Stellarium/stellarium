@@ -74,7 +74,7 @@ private slots:
 private:
 	MeteorShowersMgr* m_mgr;
 	Ui_MSConfigDialog* m_ui;
-	QTimer* updateTimer;
+	QTimer* m_updateTimer;
 	void setAboutHtml();
 	void updateGuiFromSettings(void);
 };

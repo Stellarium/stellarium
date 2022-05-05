@@ -110,7 +110,7 @@ public:
 	QDateTime getLastUpdate() { return m_lastUpdate; }
 
 	//! Get the current updateState
-	UpdateState getUpdateState(void) const {return updateState;}
+	UpdateState getUpdateState(void) const {return m_updateState;}
 
 	//! Gets the date of the next update.
 	QDateTime getNextUpdate();
@@ -322,11 +322,10 @@ private:
 	int m_updateFrequencyHours;
 	QString m_url;
 	QDateTime m_lastUpdate;
-	UpdateState updateState;
+	UpdateState m_updateState;
 	QNetworkAccessManager * m_networkManager;
 	QNetworkReply * m_downloadReply;
 	class StelProgressController* m_progressBar;
-	QTimer* m_updateTimer;
 
 	void createActions();
 	void loadConfig();	
