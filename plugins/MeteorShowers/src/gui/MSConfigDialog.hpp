@@ -54,6 +54,9 @@ private slots:
 	//! Refresh details about the last update
 	void refreshUpdateTab();
 
+	void updateStateReceiver(MeteorShowersMgr::UpdateState state);
+	void updateCompleteReceiver();
+
 	//! Refresh the color of all markers
 	void refreshMarkersColor();
 
@@ -71,8 +74,9 @@ private slots:
 private:
 	MeteorShowersMgr* m_mgr;
 	Ui_MSConfigDialog* m_ui;
-
+	QTimer* m_updateTimer;
 	void setAboutHtml();
+	void updateGuiFromSettings(void);
 };
 
 #endif // MSCONFIGDIALOG_HPP

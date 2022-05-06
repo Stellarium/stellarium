@@ -34,6 +34,12 @@ MSConfigDialog::MSConfigDialog(MeteorShowersMgr* mgr)
 
 MSConfigDialog::~MSConfigDialog()
 {
+	if (m_updateTimer)
+	{
+		m_updateTimer->stop();
+		delete m_updateTimer;
+		m_updateTimer = Q_NULLPTR;
+	}
 	delete m_ui;
 }
 
@@ -88,7 +94,11 @@ void MSConfigDialog::createDialogContent()
 	connect(m_ui->enableUpdates, SIGNAL(clicked()), this, SLOT(refreshUpdateTab()));
 	connect(m_ui->updateFrequency, SIGNAL(valueChanged(int)), this, SLOT(refreshUpdateTab()));
 	connect(m_ui->bUpdate, SIGNAL(clicked()), this, SLOT(refreshUpdateTab()));
-	connect(m_mgr, SIGNAL(downloadStatusChanged(DownloadStatus)), this, SLOT(refreshUpdateTab()));
+	connect(m_mgr, SIGNAL(updateStateChanged(MeteorShowersMgr::UpdateState)), this, SLOT(updateStateReceiver(MeteorShowersMgr::UpdateState)));
+	connect(m_mgr, SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));	
+	m_updateTimer = new QTimer(this);
+	connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateTab()));
+	m_updateTimer->start(7000); // Duration of time to display changing status in update tab
 
 	// About tab
 	setAboutHtml();
@@ -96,7 +106,7 @@ void MSConfigDialog::createDialogContent()
 	{
 		m_ui->about->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	}
-
+	updateGuiFromSettings();
 	init();
 }
 
@@ -138,26 +148,41 @@ void MSConfigDialog::refreshUpdateTab()
 	m_ui->lastUpdate->setDateTime(m_mgr->getLastUpdate());
 	m_ui->bUpdate->setEnabled(true);
 
-	QString msg;
-	MeteorShowersMgr::DownloadStatus s = m_mgr->getStatusOfLastUpdate();
-	if (s == MeteorShowersMgr::UPDATING)
-	{
-		msg = q_("Updating...");
-		m_ui->bUpdate->setEnabled(false);
-	}
-	else if (s == MeteorShowersMgr::UPDATED)
-	{
-		msg = q_("Successfully updated!");
-	}
-	else if (s == MeteorShowersMgr::FAILED)
-	{
-		msg = q_("Failed!");
-	}
+	QString nextUpdate = q_("Next update");
+	if (!m_mgr->getEnableAutoUpdates())
+		m_ui->status->setText(q_("Internet updates disabled"));
+	else if (m_mgr->getUpdateState() == MeteorShowersMgr::Updating)
+		m_ui->status->setText(q_("Updating..."));
 	else
 	{
-		msg = q_("Outdated!");
+		m_ui->status->setText("-");
 	}
-	m_ui->status->setText(msg);
+}
+
+void MSConfigDialog::updateStateReceiver(MeteorShowersMgr::UpdateState state)
+{
+	if (state==MeteorShowersMgr::Updating)
+		m_ui->status->setText(q_("Updating now..."));
+	else if (state==MeteorShowersMgr::DownloadError || state==MeteorShowersMgr::OtherError)
+	{
+		m_ui->status->setText(q_("Update error"));
+		m_updateTimer->start();  // make sure message is displayed for a while...
+	}
+}
+
+void MSConfigDialog::updateCompleteReceiver(void)
+{
+	m_ui->status->setText(QString(q_("Successfully updated")));
+	m_updateTimer->start();
+	QTimer *timer = new QTimer(this);
+	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateTab()));
+	setAboutHtml();
+}
+
+void MSConfigDialog::updateGuiFromSettings(void)
+{
+	m_ui->enableUpdates->setChecked(m_mgr->getEnableAutoUpdates());
+	refreshUpdateTab();
 }
 
 void MSConfigDialog::refreshMarkersColor()
