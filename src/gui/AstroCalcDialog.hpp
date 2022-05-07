@@ -520,13 +520,12 @@ private:
 	bool findPreciseOrbitalPoint(QPair<double, double>* out, PlanetP object1, double JD, double stopJD, double step, bool minimal);
 	inline double findHeliocentricDistance(double JD, PlanetP object1) const {return object1->getHeliocentricEclipticPos(JD+core->computeDeltaT(JD)/86400.).length();}
 
+	// Signal that a plot has to be redone
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotLunarElongationGraph, plotAziVsTime;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader;
 	static double brightLimit;
-	static double minY, maxY, /*minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, */ transitX // minYLeft, maxYLeft, minYRight, maxYRight,
-			     /*minYld, maxYld, minYad, maxYad, minYadm, maxYadm, minYaz, maxYaz*/;
-//	static QString yAxis1Legend, yAxis2Legend;
+	static double minY, maxY;
 	static const QString dash, delimiter;
 
 	//! Make sure that no tabs icons are outside of the viewport.

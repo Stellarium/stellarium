@@ -1647,7 +1647,10 @@
               <property name="bottomMargin">
                <number>4</number>
               </property>
-              <item row="2" column="0">
+              <item row="0" column="0" colspan="2">
+               <widget class="QChartView" name="monthlyElevationChartView"/>
+              </item>
+              <item row="1" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_10">
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_21">
@@ -1741,34 +1744,6 @@
                  </widget>
                 </item>
                </layout>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="monthlyElevationLabel">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>30</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Please select object to plot its 'Monthly Elevation' graph for the current year at selected time.</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-                <property name="wordWrap">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0" colspan="2">
-               <widget class="QChartView" name="monthlyElevationChartView"/>
               </item>
              </layout>
             </widget>

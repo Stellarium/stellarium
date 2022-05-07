@@ -41,8 +41,10 @@ AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR)
 		// To avoid "spline tremor" we need line series for azimuths (0/360° rollover) and magnitudes (in case of shadow transits)
 		if (QList<Series>({CurrentTime, TransitTime, AzVsTime, RightAscension1, RightAscension2, Magnitude1, Magnitude2}).contains(s))
 			map.insert(s, new QtCharts::QLineSeries(this));
-			else
-		map.insert(s,         new QtCharts::QSplineSeries(this));
+		else
+			map.insert(s, new QtCharts::QSplineSeries(this));
+	// TODO: REMOVE, this is DEV/DEBUG ONLY
+	map.value(s)->setPointsVisible(true);
 	}
 
 	setBackgroundBrush(QBrush(QColor(86, 87, 90)));
@@ -50,12 +52,13 @@ AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR)
 
 	xAxis=new QtCharts::QDateTimeAxis(this);
 	yAxis=new QtCharts::QValueAxis(this);
-	if (QSet<AstroCalcChart::Series>({AstroCalcChart::AngularSize2, AstroCalcChart::Declination2, AstroCalcChart::Distance2,
-					  AstroCalcChart::Elongation2, AstroCalcChart::HeliocentricDistance2, AstroCalcChart::Magnitude2,
-					  AstroCalcChart::PhaseAngle2, AstroCalcChart::Phase2, AstroCalcChart::RightAscension2, AstroCalcChart::TransitAltitude2,
-					  AstroCalcChart::pcDistanceDeg}).intersect(which).count())
+	if (QSet<AstroCalcChart::Series>({AngularSize2, Declination2,          Distance2,
+					  Elongation2,  HeliocentricDistance2, Magnitude2,
+					  PhaseAngle2,  Phase2,                RightAscension2, TransitAltitude2,
+					  pcDistanceDeg}).intersect(which).count())
 		yAxisR=new QtCharts::QValueAxis(this);
-	if (QSet<AstroCalcChart::Series>({AstroCalcChart::pcDistanceAU, AstroCalcChart::pcDistanceDeg, AstroCalcChart::MonthlyElevation}).intersect(which).count())
+	if (QSet<AstroCalcChart::Series>({pcDistanceAU, pcDistanceDeg, MonthlyElevation,
+					 AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1}).intersect(which).count())
 	{
 		legend()->hide();
 	}
@@ -65,7 +68,7 @@ AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR)
 		legend()->setLabelColor(Qt::white);
 	}
 	setTitleBrush(QBrush(Qt::white));
-	setMargins(QMargins(2, 2, 2, 2)); // set to 0/0/0/0 for max space usage. This is between the title/axis labels and the enclosing QChartView.
+	setMargins(QMargins(2, 1, 2, 1)); // set to 0/0/0/0 for max space usage. This is between the title/axis labels and the enclosing QChartView.
 	layout()->setContentsMargins(0, 0, 0, 0);
 	setBackgroundRoundness(0); // remove rounded corners
 
@@ -252,7 +255,12 @@ void AstroCalcChart::showToolTip(const QPointF &point, bool show)
 		QtCharts::QLineSeries *series=dynamic_cast<QtCharts::QLineSeries *>(sender());
 		AstroCalcChart::Series seriesCode=map.key(series);
 		QString units("°");
-		QDateTime date=QDateTime::fromMSecsSinceEpoch(qint64(point.x()));
+		QDateTime date=QDateTime::fromMSecsSinceEpoch(qint64(point.x()), Qt::UTC);
+		double jd=StelUtils::qDateTimeToJd(date);
+		double offset=StelApp::getInstance().getCore()->getUTCOffset(jd)/24;
+		QString dateStr=StelUtils::julianDayToISO8601String(jd+offset);
+		dateStr.replace('T', ' ');
+		//qDebug() << "JD clicked: " << jd;
 		// Change units where required. No units for distances, phases!
 		if (QList<AstroCalcChart::Series>({AstroCalcChart::CurrentTime, AstroCalcChart::TransitTime,
 						  AstroCalcChart::Distance1, AstroCalcChart::Distance2,
@@ -262,7 +270,13 @@ void AstroCalcChart::showToolTip(const QPointF &point, bool show)
 		{
 			units="";
 		}
-		setToolTip(QString("%1\n%2: %3%4").arg(date.toString("yyyy.MM.dd hh:mm"), series->name(), QString::number(point.y(), 'f', 3), units));
+		if (seriesCode==AstroCalcChart::MonthlyElevation)
+		{
+			//dateStr=StelUtils::julianDayToISO8601String(jd+offset);
+			dateStr.truncate(dateStr.indexOf(' ')); // discard displayed time.
+		}
+		//setToolTip(QString("%1\n%2: %3%4").arg(date.toString("yyyy.MM.dd hh:mm"), series->name(), QString::number(point.y(), 'f', 3), units));
+		setToolTip(QString("%1\n%2: %3%4").arg(dateStr, series->name(), QString::number(point.y(), 'f', 3), units));
 	}
 	else
 		setToolTip(QString());
@@ -284,7 +298,14 @@ void AstroCalcChart::clear(Series s)
 
 QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Series series, const int periods)
 {
+	//double midnightJD;
+	//int year, month, day;
+	//StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	//StelUtils::getJDFromDate(&midnightJD, year, month, day, 0, 0, 0.f);
+	const double utcOffset=StelApp::getInstance().getCore()->getUTCOffset(JD) / 24.;
+
 	QDateTime startDate, endDate;
+	double baseJD=std::floor(JD-utcOffset)+0.5; // midnight of "today" in Greenwich
 	switch (series){
 		case AstroCalcChart::AltVsTime:
 		case AstroCalcChart::AzVsTime:
@@ -294,17 +315,17 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 		case AstroCalcChart::MonthlyElevation:
 			int year, month, day;
 			StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
-			startDate=QDateTime(QDate(year, 1, 1), QTime(0, 0)); // TODO Work out timezone stuff
-			endDate=QDateTime(QDate(year+1, 1, 1), QTime(0, 0)); // TODO Work out timezone stuff
+			startDate=QDateTime(QDate(year, 1, 1), QTime(0, 0), Qt::UTC);
+			endDate=QDateTime(QDate(year+1, 1, 1), QTime(0, 0), Qt::UTC);
 			break;
 		case AstroCalcChart::LunarElongation:
-			startDate=StelUtils::jdToQDateTime(JD-2);
-			endDate=StelUtils::jdToQDateTime(JD+30);
+			startDate=StelUtils::jdToQDateTime(baseJD-2);
+			endDate=StelUtils::jdToQDateTime(baseJD+30);
 			break;
 		case AstroCalcChart::pcDistanceAU:
 		case AstroCalcChart::pcDistanceDeg:
-			startDate=StelUtils::jdToQDateTime(JD-300);
-			endDate=StelUtils::jdToQDateTime(JD+300);
+			startDate=StelUtils::jdToQDateTime(baseJD-300);
+			endDate=StelUtils::jdToQDateTime(baseJD+300);
 			break;
 		default: // 2-curves page
 			break;
@@ -324,6 +345,25 @@ QPair<double, double> AstroCalcChart::findYRange(const Series series)
 	}
 	return QPair<double, double>(min, max);
 }
+
+// find x/y values of maximum y
+QPair<double, double> AstroCalcChart::findYMax(const Series series)
+{
+	const QList<QPointF> points=map.value(series)->points();
+	double max=std::numeric_limits<double>::min();
+	double xForY=std::numeric_limits<double>::min();
+	for (int i=0; i<points.count(); i++)
+	{
+		const double y=points.at(i).y();
+		if (y>max)
+		{
+			max=y;
+			xForY=points.at(i).x();
+		}
+	}
+	return QPair<double, double>(xForY, max);
+}
+
 
 void AstroCalcChart::setupAxes(const double jd, const int periods, const QString &englishName)
 {
@@ -364,7 +404,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	else if (map.contains(AstroCalcChart::LunarElongation))
 	{
 		xAxis->setTickCount(17); // step is 2 days. 16 intervals.
-		xRange=findXRange(jd, AstroCalcChart::LunarElongation, 1);
+		xRange=findXRange(floor(jd)+0.5+shift, AstroCalcChart::LunarElongation, 1);
 	}
 	else if (map.contains(AstroCalcChart::pcDistanceAU))
 	{
@@ -571,13 +611,13 @@ void AstroCalcChart::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	//qDebug() << "mousePressEvent by" << event->buttons() << "at Pos" << event->pos() << "scenePos" << event->scenePos() << "screenPos" << event->screenPos();
 
 	const QPointF pt=mapToValue(event->pos());
-	const QDateTime dt=QDateTime::fromMSecsSinceEpoch(qint64(pt.x()));
+	const QDateTime dt=QDateTime::fromMSecsSinceEpoch(qint64(pt.x()), Qt::UTC);
 
 	//qDebug() << "This represents " << dt << "/" << pt.y() << "or" << mapToValue(event->scenePos());
 
-	StelCore *core=StelApp::getInstance().getCore();
-	const double jd=StelUtils::qDateTimeToJd(dt);
-	const double offset=core->getUTCOffset(jd)/24.;
+	static StelCore *core=StelApp::getInstance().getCore();
+	double jd=StelUtils::qDateTimeToJd(dt);
+	//const double offset=core->getUTCOffset(jd)/24.;
 
-	core->setJD(jd-offset);
+	core->setJD(jd);
 }
