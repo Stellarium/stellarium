@@ -959,7 +959,7 @@ QString Observability::formatAsDateRange(int startDay, int endDay)
 		range = formatString.arg(sDay)
 				    .arg(StelLocaleMgr::shortMonthName(sMonth))
 		                    .arg(eDay)
-				    .arg(StelLocaleMgr::shortMonthName(sMonth));
+				    .arg(StelLocaleMgr::shortMonthName(eMonth));
 	}
 
 	return range;
