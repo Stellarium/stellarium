@@ -1458,31 +1458,6 @@
                <number>4</number>
               </property>
               <item row="1" column="0">
-               <widget class="QLabel" name="altVsTimeLabel">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>30</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Please select object to plot its graph 'Altitude vs. Time'.</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-                <property name="wordWrap">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_14">
                 <item>
                  <widget class="QCheckBox" name="sunAltitudeCheckBox">
@@ -1587,22 +1562,6 @@
               </property>
               <item row="1" column="0">
                <layout class="QHBoxLayout" name="aziVsTimeHorizontalLayout">
-                <item>
-                 <widget class="QLabel" name="aziVsTimeLabel">
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>Please select object to plot its graph 'Azimuth vs. Time'.</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                 </widget>
-                </item>
                 <item>
                  <spacer name="aziVsTimeHorizontalSpacer">
                   <property name="orientation">

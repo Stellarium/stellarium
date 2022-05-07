@@ -563,8 +563,6 @@ void AstroCalcDialog::createDialogContent()
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->celestialPositionsTimeLabel->setStyleSheet(style);
 	ui->hecPositionsTimeLabel->setStyleSheet(style);
-	ui->altVsTimeLabel->setStyleSheet(style);
-	ui->aziVsTimeLabel->setStyleSheet(style);
 	ui->graphsFirstLabel->setStyleSheet(style);	
 	ui->graphsSecondLabel->setStyleSheet(style);	
 	ui->graphsDurationLabel->setStyleSheet(style);
@@ -794,7 +792,11 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		}
 	}
 	else
+	{
 		azVsTimeChart->setYrange(0., 360.);
+		azVsTimeChart->clear(AstroCalcChart::AzVsTime);
+		azVsTimeChart->setTitle(q_("Please select object to plot its graph 'Azimuth vs. Time'."));
+	}
 
 	azVsTimeChart->setupAxes(core->getJD(), 1, "");
 	QChart *oldChart=ui->aziVsTimeChartView->chart();
@@ -802,15 +804,6 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 	ui->aziVsTimeChartView->setChart(azVsTimeChart);
 	ui->aziVsTimeChartView->setRenderHint(QPainter::Antialiasing);
 
-	// clean up the data when selection is removed
-	if (!objectMgr->getWasSelected())
-	{
-		if (azVsTimeChart)
-		{
-			azVsTimeChart->clear(AstroCalcChart::AzVsTime);
-			azVsTimeChart->setTitle(q_("No object selected"));
-		}
-	}
 	azVsTimeChartMutex.unlock();
 }
 
@@ -4144,7 +4137,6 @@ void AstroCalcDialog::savePhenomenaAngularSeparation()
 
 void AstroCalcDialog::drawAltVsTimeDiagram()
 {
-	//qDebug() << "AstrocalcDialog::drawAltVsTimeDiagram()...";
 	if (!altVsTimeChartMutex.tryLock()) return; // Avoid calling parallel from various sides. (called by signals/slots)
 	// Avoid crash!
 	if (core->getCurrentPlanet()->getEnglishName().contains("->")) // We are on the spaceship!
@@ -4172,7 +4164,6 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 
-	//qDebug() << "creating chart";
 	altVsTimeChart = new AstroCalcChart({AstroCalcChart::AltVsTime, AstroCalcChart::CurrentTime, AstroCalcChart::TransitTime, AstroCalcChart::SunElevation, AstroCalcChart::CivilTwilight, AstroCalcChart::NauticalTwilight, AstroCalcChart::AstroTwilight, AstroCalcChart::Moon});
 	QPair<double, double>yRange(-90., 90.);
 
@@ -4238,42 +4229,29 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			}
 		}
 		altVsTimeChart->show(AstroCalcChart::AltVsTime);
-
+		// configure series shown and also find real limits for all plots.
+		yRange=altVsTimeChart->findYRange(AstroCalcChart::AltVsTime);
 		if (plotAltVsTimeSun)
 		{
 			altVsTimeChart->show(AstroCalcChart::SunElevation);
 			altVsTimeChart->show(AstroCalcChart::CivilTwilight);
 			altVsTimeChart->show(AstroCalcChart::NauticalTwilight);
 			altVsTimeChart->show(AstroCalcChart::AstroTwilight);
-		}
-
-		if (plotAltVsTimeMoon && onEarth)
-		{
-			altVsTimeChart->show(AstroCalcChart::Moon);
-		}
-		core->setJD(currentJD);
-
-		// find real limits for all plots.
-		yRange=altVsTimeChart->findYRange(AstroCalcChart::AltVsTime);
-
-		// additional data: Sun + Twilight
-		if (plotAltVsTimeSun)
-		{
 			QPair<double, double>yRangeSun=altVsTimeChart->findYRange(AstroCalcChart::SunElevation);
 			yRange.first =qMin(yRangeSun.first,  yRange.first);
 			yRange.second=qMax(yRangeSun.second, yRange.second);
 		}
-
-		// additional data: Moon
 		if (plotAltVsTimeMoon && onEarth)
 		{
+			altVsTimeChart->show(AstroCalcChart::Moon);
 			QPair<double, double>yRangeMoon=altVsTimeChart->findYRange(AstroCalcChart::Moon);
 			yRange.first =qMin(yRangeMoon.first,  yRange.first);
 			yRange.second=qMax(yRangeMoon.second, yRange.second);
 		}
-
 		if (plotAltVsTimePositive && yRange.first<altVsTimePositiveLimit)
 			yRange.first = altVsTimePositiveLimit;
+
+		core->setJD(currentJD);
 
 		drawCurrentTimeDiagram();
 
@@ -4287,41 +4265,33 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 				if (name.isEmpty())
 					name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC();
 			}
-
-			if (otype == "Star" || otype=="Pulsar")
-				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
+			else if (otype == "Star" || otype=="Pulsar")
+				name = (selectedObject->getID().isEmpty() ? q_("Unnamed star") : selectedObject->getID());
 		}
 
 		// Transit line
 		QPair<double, double>transit=altVsTimeChart->findYMax(AstroCalcChart::AltVsTime);
-		altVsTimeChart->drawTrivialLineX(AstroCalcChart::TransitTime, transit.first); // TODO FIX TIME, already ms!
+		altVsTimeChart->drawTrivialLineX(AstroCalcChart::TransitTime, transit.first);
 	}
-	//qDebug() << "create chart axes...";
+	else
+	{
+		altVsTimeChart->clear(AstroCalcChart::AltVsTime);
+		altVsTimeChart->clear(AstroCalcChart::TransitTime);
+		altVsTimeChart->clear(AstroCalcChart::SunElevation);
+		altVsTimeChart->clear(AstroCalcChart::CivilTwilight);
+		altVsTimeChart->clear(AstroCalcChart::NauticalTwilight);
+		altVsTimeChart->clear(AstroCalcChart::AstroTwilight);
+		altVsTimeChart->clear(AstroCalcChart::Moon);
+		altVsTimeChart->setTitle(q_("Please select object to plot its graph 'Altitude vs. Time'."));
+	}
+
 	altVsTimeChart->setYrange(yRange.first, yRange.second);
 	altVsTimeChart->setupAxes(core->getJD(), 1, "");
-	//qDebug() << "set chart ...";
 	QChart *oldChart=ui->altVsTimeChartView->chart();
 	if (oldChart) oldChart->deleteLater();
 	ui->altVsTimeChartView->setChart(altVsTimeChart);
 	ui->altVsTimeChartView->setRenderHint(QPainter::Antialiasing);
-	//qDebug() << "Chart done.";
 
-	// clean up the data when selection is removed
-	if (!objectMgr->getWasSelected())
-	{
-		if (altVsTimeChart)
-		{
-			altVsTimeChart->clear(AstroCalcChart::AltVsTime);
-			altVsTimeChart->clear(AstroCalcChart::TransitTime);
-			altVsTimeChart->clear(AstroCalcChart::SunElevation);
-			altVsTimeChart->clear(AstroCalcChart::CivilTwilight);
-			altVsTimeChart->clear(AstroCalcChart::NauticalTwilight);
-			altVsTimeChart->clear(AstroCalcChart::AstroTwilight);
-			altVsTimeChart->clear(AstroCalcChart::Moon);
-			altVsTimeChart->setTitle(q_("No object selected"));
-		}
-	}
-	//qDebug() << "AstrocalcDialog::drawAltVsTimeDiagram()...done";
 	altVsTimeChartMutex.unlock();
 }
 
