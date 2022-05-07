@@ -74,6 +74,8 @@ public:
 
 	//! Find range of values for the respective series plot.
 	QPair<double, double>findYRange(const Series series);
+	//! Find x/y values where y=max for the respective series plot.
+	QPair<double, double>findYMax(const Series series);
 
 	//! Setup axes and appearance. Call this at the end of drawing, just before display but after all series have been activated with show().
 	//! @arg englishName used for details in the two-graph charts. Use an empty string otherwise.

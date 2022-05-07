@@ -82,27 +82,6 @@ int AstroCalcDialog::DisplayedPositionIndex = -1;
 double AstroCalcDialog::brightLimit = 10.;
 double AstroCalcDialog::minY = -90.; // TODO: get rid of this and the next.
 double AstroCalcDialog::maxY = 90.;
-//double AstroCalcDialog::minYme = -90.;
-//double AstroCalcDialog::maxYme = 90.;
-//double AstroCalcDialog::minYsun = -90.;
-//double AstroCalcDialog::maxYsun = 90.;
-//double AstroCalcDialog::minYmoon = -90.;
-//double AstroCalcDialog::maxYmoon = 90.;
-//double AstroCalcDialog::minYLeft = -1001.;
-//double AstroCalcDialog::maxYLeft = 1001.;
-//double AstroCalcDialog::minYRight = -1001.;
-//double AstroCalcDialog::maxYRight = 1001.;
-double AstroCalcDialog::transitX = -1.;
-//double AstroCalcDialog::minYld = 0.;
-//double AstroCalcDialog::maxYld = 90.;
-//double AstroCalcDialog::minYad = 0.;
-//double AstroCalcDialog::maxYad = 180.;
-//double AstroCalcDialog::minYadm = 0.;
-//double AstroCalcDialog::maxYadm = 180.;
-//double AstroCalcDialog::minYaz = 0.;
-//double AstroCalcDialog::maxYaz = 360.;
-//QString AstroCalcDialog::yAxis1Legend = "";
-//QString AstroCalcDialog::yAxis2Legend = "";
 const QString AstroCalcDialog::dash = QChar(0x2014);
 const QString AstroCalcDialog::delimiter(", ");
 
@@ -585,10 +564,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->celestialPositionsTimeLabel->setStyleSheet(style);
 	ui->hecPositionsTimeLabel->setStyleSheet(style);
 	ui->altVsTimeLabel->setStyleSheet(style);
-	//ui->altVsTimeTitle->setStyleSheet(style);
 	ui->aziVsTimeLabel->setStyleSheet(style);
-	//ui->aziVsTimeTitle->setStyleSheet(style);
-	ui->monthlyElevationLabel->setStyleSheet(style);
 	ui->graphsFirstLabel->setStyleSheet(style);	
 	ui->graphsSecondLabel->setStyleSheet(style);	
 	ui->graphsDurationLabel->setStyleSheet(style);
@@ -719,7 +695,6 @@ void AstroCalcDialog::saveAltVsTimePositiveLimit(int limit)
 
 void AstroCalcDialog::drawAziVsTimeDiagram()
 {
-	//qDebug() << "AstrocalcDialog::drawAltVsTimeDiagram()...";
 	if (!azVsTimeChartMutex.tryLock()) return; // Avoid calling parallel from various sides. (called by signals/slots)
 	// Avoid crash!
 	if (core->getCurrentPlanet()->getEnglishName().contains("->")) // We are on the spaceship!
@@ -746,24 +721,17 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 	}
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
-
-	//qDebug() << "creating azVsTime chart";
 	azVsTimeChart = new AstroCalcChart({AstroCalcChart::AzVsTime, AstroCalcChart::CurrentTime});
 
 	if (!selectedObjects.isEmpty())
 	{
 		const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
-		// X axis - time; Y axis - azimuth
-		//QList<double> aX, aY;
-
 		StelObjectP selectedObject = selectedObjects[0];
 		azVsTimeChart->setTitle(selectedObject->getNameI18n());
 		const double currentJD = core->getJD();
 		const double shift = core->getUTCOffset(currentJD) / 24.0;
-		const double noon = static_cast<int>(currentJD + shift);
+		const double noon = std::floor(currentJD + shift); // Integral JD of this day
 
-		static const int step = 180;
-		static const int limit = 480;
 #ifdef USE_STATIC_PLUGIN_SATELLITES
 		bool isSatellite = false;
 
@@ -776,13 +744,11 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		}
 #endif
 
-		for (int i = 0; i <= limit; i++) // 24 hours
+		for (int i = 0; i <= 86400; i+=180) // 24 hours in 3-min steps
 		{
 			// A new point on the graph every 3 minutes with shift to right 12 hours
 			// to get midnight at the center of diagram (i.e. accuracy is 3 minutes)
-			double ltime = i * step + 43200;
-			//aX.append(ltime);
-			double JD = noon + ltime / 86400 - shift - 0.5;
+			double JD = noon + i / 86400. - shift;
 			core->setJD(JD);
 			
 #ifdef USE_STATIC_PLUGIN_SATELLITES
@@ -801,6 +767,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 			if (az > M_PI*2)
 				az -= M_PI*2;
 
+			// We must shift the JD value to trick the display into zone time.
 			azVsTimeChart->append(AstroCalcChart::AzVsTime, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), az*M_180_PI);
 		}
 		azVsTimeChart->show(AstroCalcChart::AzVsTime);
@@ -825,22 +792,15 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 			if (otype == "Star" || otype=="Pulsar")
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
-
-		//drawTransitTimeDiagram(); // GZ TBD: Why transit time? It does nothing.
-		// For chart, replace by:
-		//azVsTimeChart->drawTrivialLine(AstroCalcChart::TransitTime, transitX);
 	}
 	else
 		azVsTimeChart->setYrange(0., 360.);
 
-	//qDebug() << "create chart axes...";
 	azVsTimeChart->setupAxes(core->getJD(), 1, "");
-	//qDebug() << "set chart ...";
 	QChart *oldChart=ui->aziVsTimeChartView->chart();
 	if (oldChart) oldChart->deleteLater();
 	ui->aziVsTimeChartView->setChart(azVsTimeChart);
 	ui->aziVsTimeChartView->setRenderHint(QPainter::Antialiasing);
-	//qDebug() << "Chart done.";
 
 	// clean up the data when selection is removed
 	if (!objectMgr->getWasSelected())
@@ -851,7 +811,6 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 			azVsTimeChart->setTitle(q_("No object selected"));
 		}
 	}
-	//qDebug() << "AstrocalcDialog::drawAzVsTimeDiagram()...done";
 	azVsTimeChartMutex.unlock();
 }
 
@@ -4222,16 +4181,15 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		// X axis - time; Y axis - altitude
 		StelObjectP selectedObject = selectedObjects[0];
 		altVsTimeChart->setTitle(selectedObject->getNameI18n());
+		PlanetP sun = solarSystem->getSun();
+		PlanetP moon = solarSystem->getMoon();
 
 		const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
 		const double currentJD = core->getJD();
 		const double shift = core->getUTCOffset(currentJD) / 24.0;
-		const double noon = floor(currentJD + shift);
-		double az, alt, ltime, JD;
+		const double noon = std::floor(currentJD + shift); // Integral JD of this day
+		double az, alt;
 
-		double xMaxY = -100.;
-		static const int step = 180; // seconds, i.e. 3 minutes stepwidth
-		static const int limit = 480;
 #ifdef USE_STATIC_PLUGIN_SATELLITES
 		bool isSatellite = false;
 
@@ -4243,14 +4201,11 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			sat = GETSTELMODULE(Satellites)->getById(selectedObject.staticCast<Satellite>()->getCatalogNumberString());
 		}
 #endif
-
-		double transitJD=-1.;
-		for (int i = 0; i <= limit; i++) // 24 hours
+		for (int i = 0; i <= 86400; i+=600) // 24 hours in 600s steps
 		{
-			// A new point on the graph every 3 minutes with shift to right 12 hours
-			// to get midnight at the center of diagram (i.e. accuracy is 3 minutes)
-			ltime = i * step + 43200;
-			JD = noon + ltime / 86400 - shift - 0.5;
+			// A new point on the graph every 600s with shift to right 12 hours
+			// to get midnight at the center of diagram (i.e. accuracy is 10 minutes, but smoothed by Spline interpolation)
+			double JD = noon + i / 86400. - shift;
 			core->setJD(JD);
 			
 #ifdef USE_STATIC_PLUGIN_SATELLITES
@@ -4264,36 +4219,28 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 				core->update(0.0);
 		
 			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
+			altVsTimeChart->append(AstroCalcChart::AltVsTime, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), alt*M_180_PI);
+
+			if (plotAltVsTimeSun)
+{
+			StelUtils::rectToSphe(&az, &alt, sun->getAltAzPosAuto(core));
 			double deg=alt*M_180_PI;
-			if (deg > xMaxY)
+
+			altVsTimeChart->append(AstroCalcChart::SunElevation,     StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg);
+			altVsTimeChart->append(AstroCalcChart::CivilTwilight,    StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg+6);
+			altVsTimeChart->append(AstroCalcChart::NauticalTwilight, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg+12);
+			altVsTimeChart->append(AstroCalcChart::AstroTwilight,    StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg+18);
+}
+			if (plotAltVsTimeMoon && onEarth)
 			{
-				xMaxY = deg;
-				transitX = ltime;
-				transitJD=JD;
+				StelUtils::rectToSphe(&az, &alt, moon->getAltAzPosAuto(core));
+				altVsTimeChart->append(AstroCalcChart::Moon, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), alt*M_180_PI);
 			}
-			// prepare QChart use:
-			altVsTimeChart->append(AstroCalcChart::AltVsTime, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg);
 		}
 		altVsTimeChart->show(AstroCalcChart::AltVsTime);
 
 		if (plotAltVsTimeSun)
 		{
-			PlanetP sun = solarSystem->getSun();			
-			for (int i = -1; i <= 25; i++)
-			{
-				ltime = i * 3600 + 43200;
-				JD = noon + ltime / 86400 - shift - 0.5;
-				core->setJD(JD);				 
-				core->update(0.0);
-				StelUtils::rectToSphe(&az, &alt, sun->getAltAzPosAuto(core));
-				double deg=alt*M_180_PI;
-
-				// QChart:
-				altVsTimeChart->append(AstroCalcChart::SunElevation,     StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg);
-				altVsTimeChart->append(AstroCalcChart::CivilTwilight,    StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg+6);
-				altVsTimeChart->append(AstroCalcChart::NauticalTwilight, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg+12);
-				altVsTimeChart->append(AstroCalcChart::AstroTwilight,    StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg+18);
-			}
 			altVsTimeChart->show(AstroCalcChart::SunElevation);
 			altVsTimeChart->show(AstroCalcChart::CivilTwilight);
 			altVsTimeChart->show(AstroCalcChart::NauticalTwilight);
@@ -4302,20 +4249,6 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 
 		if (plotAltVsTimeMoon && onEarth)
 		{
-			PlanetP moon = solarSystem->getMoon();			
-			for (int i = -1; i <= 25; i++)
-			{
-				ltime = i * 3600 + 43200;
-				//mX.append(ltime);
-				JD = noon + ltime / 86400 - shift - 0.5;
-				core->setJD(JD);
-				core->update(0.0);
-				StelUtils::rectToSphe(&az, &alt, moon->getAltAzPosAuto(core));
-				double deg=alt*M_180_PI;
-				//mY.append(deg);
-				// QChart use:
-				altVsTimeChart->append(AstroCalcChart::Moon, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg);
-			}
 			altVsTimeChart->show(AstroCalcChart::Moon);
 		}
 		core->setJD(currentJD);
@@ -4359,9 +4292,9 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
 		}
 
-		//drawTransitTimeDiagram();
-		// For chart, replace by:
-		altVsTimeChart->drawTrivialLineX(AstroCalcChart::TransitTime, StelUtils::jdToQDateTime(transitJD+shift).toMSecsSinceEpoch());
+		// Transit line
+		QPair<double, double>transit=altVsTimeChart->findYMax(AstroCalcChart::AltVsTime);
+		altVsTimeChart->drawTrivialLineX(AstroCalcChart::TransitTime, transit.first); // TODO FIX TIME, already ms!
 	}
 	//qDebug() << "create chart axes...";
 	altVsTimeChart->setYrange(yRange.first, yRange.second);
@@ -4401,9 +4334,6 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 
 	const double currentJD = core->getJD();
 	const double UTCOffset = core->getUTCOffset(currentJD);
-	double now = ((currentJD + 0.5 - floor(currentJD)) * 86400.0) + UTCOffset * 3600.0;
-	if (now > 129600) now -= 86400;
-	if (now < 43200) now += 86400;
 
 	if (plotAltVsTime)
 	{
@@ -4445,7 +4375,6 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 	// added special case - the tool is not applicable on non-Earth locations
 	if (!ssObj.isNull() && core->getCurrentPlanet()==solarSystem->getEarth())
 	{
-
 		// X axis - time; Y axis - altitude
 		QList<double> aX, aY, bY;
 
@@ -4760,7 +4689,6 @@ void AstroCalcDialog::populateFunctionsList()
 		{ q_("Right ascension vs. Time"), AstroCalcChart::RightAscension2},
 		{ q_("Declination vs. Time"), AstroCalcChart::Declination2}};
 
-
 	QComboBox* firstCB = ui->graphsFirstComboBox;
 	QComboBox* secondCB = ui->graphsSecondComboBox;
 	firstCB->blockSignals(true);
@@ -5024,7 +4952,6 @@ void AstroCalcDialog::saveMonthlyElevationPositiveLimit(int limit)
 
 void AstroCalcDialog::drawMonthlyElevationGraph()
 {
-	//qDebug() << "AstrocalcDialog::drawMonthlyElevationGraph()...";
 	if (!monthlyElevationChartMutex.tryLock()) return; // Avoid calling parallel from various sides. (called by signals/slots)
 
 	// Avoid crash!
@@ -5053,15 +4980,12 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 
-	//qDebug() << "creating Monthly Elevation chart";
 	monthlyElevationChart = new AstroCalcChart({AstroCalcChart::MonthlyElevation});
 	QPair<double, double>yRangeME(-90., 90.);
-	//qDebug() << "Chart has title:" << monthlyElevationChart->title();
 
 	if (!selectedObjects.isEmpty())
 	{
 		// X axis - time; Y axis - altitude
-		//QList<double> aX, aY;
 		StelObjectP selectedObject = selectedObjects[0];
 		monthlyElevationChart->setTitle(selectedObject->getNameI18n());
 
@@ -5078,7 +5002,8 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		int hour = ui->monthlyElevationTime->value();
 		double startJD;
 		StelUtils::getJDFromDate(&startJD, year, 1, 1, hour, 0, 0);
-		startJD -= core->getUTCOffset(startJD)/24; // Time zone correction
+		const double utOffset=core->getUTCOffset(startJD)/24;
+		startJD -= utOffset; // Time zone correction
 		int dYear = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()/5.) + 3;
 		for (int i = 0; i <= dYear; i+=3)
 		{
@@ -5087,14 +5012,12 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 			core->update(0.0);
 			double az, alt;
 			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
-			monthlyElevationChart->append(AstroCalcChart::MonthlyElevation, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), alt*M_180_PI); // TODO: add zone correction?
+			// The first point shall be plotted at the sharp edge date of Jan1 at midnight. The plot should more correctly be a point plot, but the spline is good enough.
+			monthlyElevationChart->append(AstroCalcChart::MonthlyElevation, StelUtils::jdToQDateTime(JD-hour/24.+utOffset).toMSecsSinceEpoch(), alt*M_180_PI);
 			//qDebug() << "ME:" << StelUtils::jdToQDateTime(JD) << "/" << deg;
 		}
 		core->setJD(currentJD);
-
 		yRangeME=monthlyElevationChart->findYRange(AstroCalcChart::MonthlyElevation);
-		if (plotMonthlyElevationPositive && yRangeME.first<monthlyElevationPositiveLimit)
-			yRangeME.first = monthlyElevationPositiveLimit;
 
 		QString name = selectedObject->getNameI18n();
 		if (name.isEmpty())
@@ -5111,27 +5034,19 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		}
 		monthlyElevationChart->setTitle(name);
 	}
-	//qDebug() << "create chart axes...";
-	monthlyElevationChart->setYrange(yRangeME.first, yRangeME.second); // TODO: reduce min/max back to real min/max values.
+	else
+		monthlyElevationChart->setTitle(q_("Please select object to plot its 'Monthly Elevation' graph for the current year at selected time."));
+
+	if (plotMonthlyElevationPositive && yRangeME.first<monthlyElevationPositiveLimit)
+		yRangeME.first = monthlyElevationPositiveLimit;
+	monthlyElevationChart->setYrange(yRangeME.first, yRangeME.second);
 	monthlyElevationChart->show(AstroCalcChart::MonthlyElevation);
 	monthlyElevationChart->setupAxes(core->getJD(), 1, "");
-	//qDebug() << "set chart ...";
 	QChart *oldChart=ui->monthlyElevationChartView->chart();
 	if (oldChart) oldChart->deleteLater();
 	ui->monthlyElevationChartView->setChart(monthlyElevationChart);
 	ui->monthlyElevationChartView->setRenderHint(QPainter::Antialiasing);
-	//qDebug() << "Chart done.";
 
-	// clean up the data when selection is removed
-	if (!objectMgr->getWasSelected())
-	{
-		if (monthlyElevationChart)
-		{
-			monthlyElevationChart->clear(AstroCalcChart::MonthlyElevation);
-			monthlyElevationChart->setTitle(q_("No object selected"));
-		}
-	}
-	//qDebug() << "AstroCalcDialog::drawMonthlyElevationGraph()...done";
 	monthlyElevationChartMutex.unlock();
 }
 
@@ -6646,29 +6561,28 @@ void AstroCalcDialog::changeGraphsTab(int index)
 	plotMonthlyElevation = false;
 	plotLunarElongationGraph = false;
 
-	if (index==0) // Altitude vs. Time
-	{
-		plotAltVsTime = true;
-		qDebug() << "calling drawAltVsTimeDiagram() in changeGraphsTab";
-
-		drawAltVsTimeDiagram(); // Is object already selected?
-	}
-	if (index==1) // Azimuth vs. Time
-	{
-		plotAziVsTime = true;
-		drawAziVsTimeDiagram(); // Is object already selected?
-	}
-	if (index==2) // Monthly Elevation
-	{
-		plotMonthlyElevation = true;
-		drawMonthlyElevationGraph(); // Is object already selected?
-	}
-	if (index==3) // Graphs
-		updateXVsTimeGraphs();
-	if (index==4) // Angular Distance
-	{
-		plotLunarElongationGraph = true;
-		drawLunarElongationGraph(); // Is object already selected?
+	switch (index){
+		case 0: // Altitude vs. Time
+			plotAltVsTime = true;
+			drawAltVsTimeDiagram(); // Is object already selected?
+			break;
+		case 1: // Azimuth vs. Time
+			plotAziVsTime = true;
+			drawAziVsTimeDiagram(); // Is object already selected?
+			break;
+		case 2: // Monthly Elevation
+			plotMonthlyElevation = true;
+			drawMonthlyElevationGraph(); // Is object already selected?
+			break;
+		case 3: // Graphs
+			updateXVsTimeGraphs();
+			break;
+		case 4: // Angular Distance
+			plotLunarElongationGraph = true;
+			drawLunarElongationGraph(); // Is object already selected?
+			break;
+		default:
+			qWarning() << "AstroCalc::changeGraphTab(): illegal index";
 	}
 }
 
@@ -7895,20 +7809,21 @@ void AstroCalcDialog::drawDistanceGraph()
 
 	// TODO for charts: use full calendar days, not offsets from current JD.
 	const double currentJD = core->getJD();
+	const double utcOffset=core->getUTCOffset(currentJD)/24.;
+	const double baseJD=std::floor(currentJD)+0.5-utcOffset;
 	for (int i = -limit; i <= limit; i++)
 	{
-		double JD = currentJD + i*step;
+		double JD = baseJD + i*step;
 		core->setJD(JD);
 		core->update(0.0);
 		Vec3d posFCB = firstCBId->getJ2000EquatorialPos(core);
 		Vec3d posSCB = secondCBId->getJ2000EquatorialPos(core);
 		double distanceAu = (posFCB - posSCB).length();
-		double r= posFCB.angle(posSCB);
-		double dd=r*M_180_PI;
 		pcChart->append(AstroCalcChart::pcDistanceAU, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), distanceAu);
 		if (firstCBId != currentPlanet && secondCBId != currentPlanet)
 		{
-			pcChart->append(AstroCalcChart::pcDistanceDeg, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), dd);
+			double r= posFCB.angle(posSCB);
+			pcChart->append(AstroCalcChart::pcDistanceDeg, StelUtils::jdToQDateTime(JD+utcOffset).toMSecsSinceEpoch(), r*M_180_PI);
 		}
 	}
 	core->setJD(currentJD);
@@ -7938,10 +7853,9 @@ void AstroCalcDialog::drawDistanceGraph()
 
 void AstroCalcDialog::drawLunarElongationGraph()
 {
-	//qDebug() << "AstrocalcDialog::drawLunarElongationGraph()...";
 	if (!lunarElongationChartMutex.tryLock()) return; // Avoid calling parallel from various sides. (called by signals/slots)
 
-	QString label = q_("Angular distance between the Moon and selected object");
+	const QString label = q_("Angular distance between the Moon and selected object");
 	ui->lunarElongationChartView->setToolTip(label);
 
 	// special case - plot the graph when tab is visible
@@ -7968,10 +7882,8 @@ void AstroCalcDialog::drawLunarElongationGraph()
 		return;
 	}
 
-	//qDebug() << "creating chart";
 	lunarElongationChart = new AstroCalcChart({AstroCalcChart::LunarElongation, AstroCalcChart::LunarElongationLimit});
 	lunarElongationChart->setTitle(label);
-	//qDebug() << "Chart has title:" << lunarElongationChart->title();
 	QPair<double, double>yRange(0., 180.);
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
@@ -7989,19 +7901,23 @@ void AstroCalcDialog::drawLunarElongationGraph()
 			return;
 		}
 		const double currentJD = core->getJD();
-		for (int i = -3; i <= 32; i++) // TODO: With SplineSeries in charts, i+=3 may be enough!
+		int day, month, year;
+		StelUtils::getDateFromJulianDay(currentJD, &year, &month, &day);
+		double firstJD;
+		StelUtils::getJDFromDate(&firstJD, year, month, day, 0, 0, 0.f);
+		const double utcOffset=core->getUTCOffset(firstJD)/24.;
+		for (int i = -1; i <= 32; i+=2) // TBD: With SplineSeries in charts, i+=3 may be enough!
 		{
-			double JD = currentJD + i;
+			double JD = firstJD + i - utcOffset;
 			core->setJD(JD);
 			core->update(0.0);
 			const Vec3d moonPosition = moon->getJ2000EquatorialPos(core);
 			const Vec3d selectedObjectPosition = selectedObject->getJ2000EquatorialPos(core);
 			double distance = moonPosition.angle(selectedObjectPosition);
-			lunarElongationChart->append(AstroCalcChart::LunarElongation, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), distance*M_180_PI);
+			lunarElongationChart->append(AstroCalcChart::LunarElongation, StelUtils::jdToQDateTime(JD+utcOffset).toMSecsSinceEpoch(), distance*M_180_PI);
 		}
 		core->setJD(currentJD);
 
-		yRange=lunarElongationChart->findYRange(AstroCalcChart::LunarElongation);
 		QString name = selectedObject->getNameI18n();
 		if (name.isEmpty())
 		{
@@ -8017,32 +7933,26 @@ void AstroCalcDialog::drawLunarElongationGraph()
 		}
 		ui->lunarElongationChartView->setToolTip(QString("%1 (%2)").arg(label, name));
 		lunarElongationChart->setTitle(QString("%1 (%2)").arg(label, name));
+
+		yRange=lunarElongationChart->findYRange(AstroCalcChart::LunarElongation);
+	}
+	else
+	{
+		lunarElongationChart->clear(AstroCalcChart::LunarElongation);
+		lunarElongationChart->setTitle(label);
 	}
 
-	//qDebug() << "create chart axes...";
 	lunarElongationChart->setYrange(yRange.first, yRange.second);
 	lunarElongationChart->show(AstroCalcChart::LunarElongation);
 	lunarElongationChart->setupAxes(core->getJD(), 1, "");
-	//qDebug() << "set chart ...";
 	QChart *oldChart=ui->lunarElongationChartView->chart();
 	if (oldChart) oldChart->deleteLater();
 	ui->lunarElongationChartView->setChart(lunarElongationChart);
 	ui->lunarElongationChartView->setRenderHint(QPainter::Antialiasing);
-	//qDebug() << "Chart done.";
 
-	// clean up the data when selection is removed
-	if (!objectMgr->getWasSelected())
-	{
-		if (lunarElongationChart)
-		{
-			lunarElongationChart->clear(AstroCalcChart::LunarElongation);
-			lunarElongationChart->setTitle(q_("No object selected"));
-		}
-	}
 	drawLunarElongationLimitLine();
 
 	lunarElongationChartMutex.unlock();
-	//qDebug() << "AstroCalcDialog::drawLunarElongationDiagram()...done";
 }
 
 void AstroCalcDialog::saveLunarElongationLimit(int limit)
