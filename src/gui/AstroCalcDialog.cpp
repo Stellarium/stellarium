@@ -431,7 +431,6 @@ void AstroCalcDialog::createDialogContent()
 	ui->graphsDurationSpinBox->setValue(graphsDuration);
 	connect(ui->graphsDurationSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateGraphsDuration(int)));
 	connect(ui->drawGraphsPushButton, SIGNAL(clicked()), this, SLOT(drawXVsTimeGraphs()));
-	connect(ui->graphsPlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverGraphs(QMouseEvent*)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(updateXVsTimeGraphs()));	
 
 	ui->lunarElongationLimitSpinBox->setValue(conf->value("astrocalc/angular_distance_limit", 40).toInt());
@@ -4307,17 +4306,14 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 
 	if (plotAltVsTime)
 	{
-		//qDebug() << "Chart: replace/append currentTime in alt chart";
 		if (altVsTimeChart){
 			altVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, qreal(StelUtils::jdToQDateTime(currentJD+UTCOffset/24.).toMSecsSinceEpoch()));
-			//qDebug() << "Chart: replace/append currentTime in alt chart...done";
 		}
 		else
 			qWarning() << "no alt chart to add CT line!";
 	}
 	if (plotAziVsTime)
 	{
-		//qDebug() << "Chart: replace/append currentTime in azi chart";
 		if (azVsTimeChart)
 		{
 			azVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, qreal(StelUtils::jdToQDateTime(currentJD+UTCOffset/24.).toMSecsSinceEpoch()));
@@ -4468,11 +4464,11 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 
 		curvesChart->show(firstGraph);
 		curvesChart->show(secondGraph);
-		qDebug() << "create chart axes: " << minYLeft << "..." << maxYLeft << "(" << firstGraph << "), " << minYRight << "/" << maxYRight << "(" << secondGraph << ")";
+		//qDebug() << "create chart axes: " << minYLeft << "..." << maxYLeft << "(" << firstGraph << "), " << minYRight << "/" << maxYRight << "(" << secondGraph << ")";
 		curvesChart->setYrange(minYLeft, maxYLeft);
 		curvesChart->setYrangeR(minYRight, maxYRight);
 		curvesChart->setupAxes(core->getJD(), graphsDuration, englishName);
-		qDebug() << "set chart ...";
+		//qDebug() << "set chart ...";
 	}
 	else
 	{
@@ -4482,11 +4478,11 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 		ui->graphsPlot->clearGraphs();
 		ui->graphsPlot->replot();
 
-		qDebug() << "create default chart axes: ( no graphs )"; // << firstGraph << "/" << secondGraph << ")";
+		//qDebug() << "create default chart axes: ( no graphs )"; // << firstGraph << "/" << secondGraph << ")";
 		curvesChart->setYrange(0., 10.);
 		curvesChart->setYrangeR(0., 10.);
 		curvesChart->setupAxes(core->getJD(), graphsDuration, "");
-		qDebug() << "set chart ...";
+		//qDebug() << "set chart ...";
 	}
 
 	QChart *oldChart=ui->twoGraphsChartView->chart();
@@ -4494,7 +4490,7 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 	ui->twoGraphsChartView->setChart(curvesChart);
 	ui->twoGraphsChartView->setRenderHint(QPainter::Antialiasing);
 	curvesChartMutex.unlock();
-	qDebug() << "Chart done.";
+	//qDebug() << "Chart done.";
 }
 
 void AstroCalcDialog::updateXVsTimeGraphs()
@@ -4516,40 +4512,6 @@ void AstroCalcDialog::updateXVsTimeGraphs()
 
 	if (ui->tabWidgetGraphs->currentIndex()==3)
 		drawXVsTimeGraphs();
-}
-
-void AstroCalcDialog::mouseOverGraphs(QMouseEvent* event)
-{
-	double x = ui->graphsPlot->xAxis->pixelToCoord(event->pos().x());
-	double y = ui->graphsPlot->yAxis->pixelToCoord(event->pos().y());
-	double y2 = ui->graphsPlot->yAxis2->pixelToCoord(event->pos().y());
-
-	QCPAbstractPlottable* abstractGraph = ui->graphsPlot->plottableAt(event->pos(), false);
-	QCPGraph* graph = qobject_cast<QCPGraph*>(abstractGraph);
-
-	int year, month, day;
-	double startJD, ltime;
-	StelUtils::getDateFromJulianDay(core->getJD(), &year, &month, &day);
-	StelUtils::getJDFromDate(&startJD, year, 1, 1, 0, 0, 0);
-
-	if (ui->graphsPlot->xAxis->range().contains(x) && ui->graphsPlot->yAxis->range().contains(y))
-	{
-		QString info = "";
-		if (graph)
-		{
-			ltime = (x / StelCore::ONE_OVER_JD_SECOND) + startJD;
-
-			if (graph->name() == "[0]")
-				info = QString("%1<br />%2: %3").arg(StelUtils::julianDayToISO8601String(ltime).replace("T", " "), ui->graphsPlot->yAxis->label() , QString::number(y, 'f', 2));
-
-			if (graph->name() == "[1]")
-				info = QString("%1<br />%2: %3").arg(StelUtils::julianDayToISO8601String(ltime).replace("T", " "), ui->graphsPlot->yAxis2->label() , QString::number(y2, 'f', 2));
-		}
-		ui->graphsPlot->setToolTip(info);
-	}
-
-	ui->graphsPlot->update();
-	ui->graphsPlot->replot();
 }
 
 double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const AstroCalcChart::Series graphType)
@@ -5040,8 +5002,7 @@ void AstroCalcDialog::setClickedTime(double posx)
 	}
 }
 
-// When dialog becomes visible: check if there is a
-// graph plot to refresh
+// When dialog becomes visible: check if there is a graph plot to refresh
 void AstroCalcDialog::handleVisibleEnabled()
 {
 	if (dialog->isVisible())
@@ -7738,7 +7699,6 @@ void AstroCalcDialog::computePlanetaryData()
 
 void AstroCalcDialog::drawDistanceGraph()
 {
-	qDebug() << "AstrocalcDialog::drawDistanceGraph()...";
 	if (!pcChartMutex.tryLock()) return; // Avoid calling parallel from various sides. (called by signals/slots)
 
 	// special case - plot the graph when tab is visible
@@ -7748,7 +7708,6 @@ void AstroCalcDialog::drawDistanceGraph()
 		return;
 	}
 
-	qDebug() << "creating pcChart";
 	pcChart = new AstroCalcChart({AstroCalcChart::pcDistanceAU, AstroCalcChart::pcDistanceDeg});
 	pcChart->setYrange(0., 10.); // start with something in case it remains empty.
 	pcChart->setYrangeR(0., 360.);
@@ -7777,7 +7736,7 @@ void AstroCalcDialog::drawDistanceGraph()
 		limit = 151; step = 2;
 	}
 
-	// TODO for charts: use full calendar days, not offsets from current JD.
+	// use full calendar days, not offsets from current JD.
 	const double currentJD = core->getJD();
 	const double utcOffset=core->getUTCOffset(currentJD)/24.;
 	const double baseJD=std::floor(currentJD)+0.5-utcOffset;
@@ -7809,14 +7768,11 @@ void AstroCalcDialog::drawDistanceGraph()
 		pcChart->show(AstroCalcChart::pcDistanceDeg);
 	}
 
-	qDebug() << "create chart axes...";
 	pcChart->setupAxes(core->getJD(), 1, "");
-	qDebug() << "set chart ...";
 	QChart *oldChart=ui->pcChartView->chart();
 	if (oldChart) oldChart->deleteLater();
 	ui->pcChartView->setChart(pcChart);
 	ui->pcChartView->setRenderHint(QPainter::Antialiasing);
-	qDebug() << "Chart done.";
 
 	pcChartMutex.unlock();
 }
