@@ -4346,9 +4346,11 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 
 		const double currentJD = core->getJD();
 		int year, month, day;
-		double startJD, JD, ltime /*UTCshift,*/;
+		double startJD, JD, ltime;
 		StelUtils::getDateFromJulianDay(currentJD, &year, &month, &day);
 		StelUtils::getJDFromDate(&startJD, year, 1, 1, 0, 0, 0);
+		const double utcOffset = core->getUTCOffset(startJD);
+		startJD-=utcOffset;
 
 		int dYear = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()*graphsDuration) + 3;
 		AstroCalcChart::Series firstGraph  = AstroCalcChart::Series(ui->graphsFirstComboBox->currentData().toInt());
@@ -4381,8 +4383,8 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 
 			aY.append(computeGraphValue(ssObj, firstGraph));
 			bY.append(computeGraphValue(ssObj, secondGraph));
-			curvesChart->append(firstGraph,  StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), computeGraphValue(ssObj, firstGraph));
-			curvesChart->append(secondGraph, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), computeGraphValue(ssObj, secondGraph));
+			curvesChart->append(firstGraph,  StelUtils::jdToQDateTime(JD+utcOffset).toMSecsSinceEpoch(), computeGraphValue(ssObj, firstGraph));
+			curvesChart->append(secondGraph, StelUtils::jdToQDateTime(JD+utcOffset).toMSecsSinceEpoch(), computeGraphValue(ssObj, secondGraph));
 
 		}
 		core->setJD(currentJD);
