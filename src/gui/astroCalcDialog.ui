@@ -1732,22 +1732,27 @@
                   </property>
                  </widget>
                 </item>
-                <item row="2" column="1">
-                 <widget class="QComboBox" name="graphsSecondComboBox">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
+                <item row="0" column="0" colspan="3">
+                 <widget class="QLabel" name="graphsNoteLabel">
+                  <property name="text">
+                   <string>Important note: this tool works on Earth only!</string>
                   </property>
-                  <property name="editable">
-                   <bool>true</bool>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
                   </property>
-                  <property name="insertPolicy">
-                   <enum>QComboBox::NoInsert</enum>
+                 </widget>
+                </item>
+                <item row="3" column="0">
+                 <widget class="QLabel" name="graphsSecondLabel">
+                  <property name="text">
+                   <string>Second graph:</string>
                   </property>
-                  <property name="sizeAdjustPolicy">
-                   <enum>QComboBox::AdjustToContents</enum>
+                 </widget>
+                </item>
+                <item row="3" column="3">
+                 <widget class="QPushButton" name="exportGraphsPushButton">
+                  <property name="text">
+                   <string>Export graphs...</string>
                   </property>
                  </widget>
                 </item>
@@ -1804,19 +1809,6 @@
                   </item>
                  </layout>
                 </item>
-                <item row="2" column="2">
-                 <widget class="QPushButton" name="drawGraphsPushButton">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="text">
-                   <string>Draw graphs</string>
-                  </property>
-                 </widget>
-                </item>
                 <item row="1" column="1">
                  <widget class="QComboBox" name="graphsFirstComboBox">
                   <property name="sizePolicy">
@@ -1836,29 +1828,54 @@
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="0" colspan="3">
-                 <widget class="QLabel" name="graphsNoteLabel">
-                  <property name="text">
-                   <string>Important note: this tool works on Earth only!</string>
+                <item row="3" column="1">
+                 <widget class="QComboBox" name="graphsSecondComboBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
                   </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                  <property name="editable">
+                   <bool>true</bool>
+                  </property>
+                  <property name="insertPolicy">
+                   <enum>QComboBox::NoInsert</enum>
+                  </property>
+                  <property name="sizeAdjustPolicy">
+                   <enum>QComboBox::AdjustToContents</enum>
                   </property>
                  </widget>
                 </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="graphsSecondLabel">
-                  <property name="text">
-                   <string>Second graph:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="3">
-                 <widget class="QPushButton" name="exportGraphsPushButton">
-                  <property name="text">
-                   <string>Export graphs...</string>
-                  </property>
-                 </widget>
+                <item row="3" column="2">
+                 <layout class="QHBoxLayout" name="drawGraphHorizontalLayout">
+                  <item>
+                   <widget class="QPushButton" name="drawGraphsPushButton">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="text">
+                     <string>Draw graphs</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_20">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
                 </item>
                </layout>
               </item>
@@ -1912,19 +1929,6 @@
                </layout>
               </item>
               <item row="1" column="0" colspan="2">
-               <widget class="QCustomPlot" name="graphsPlot" native="true">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="toolTip">
-                 <string/>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
                <widget class="QChartView" name="twoGraphsChartView"/>
               </item>
              </layout>
@@ -2848,11 +2852,6 @@
    <class>AngleSpinBox</class>
    <extends>QSpinBox</extends>
    <header>AngleSpinBox.hpp</header>
-  </customwidget>
-  <customwidget>
-   <class>QCustomPlot</class>
-   <extends>QWidget</extends>
-   <header>external/qcustomplot/qcustomplot.h</header>
   </customwidget>
   <customwidget>
    <class>QChartView</class>
