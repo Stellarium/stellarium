@@ -548,6 +548,8 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 
 void AstroCalcChart::setYrange(qreal min, qreal max)
 {
+	// TODO: Decide, per-case, buffer values and true limits (0...360, 0..24, -90..+90, etc.)
+
 	yMin=min;
 	yMax=max;
 

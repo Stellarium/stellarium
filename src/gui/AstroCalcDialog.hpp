@@ -454,8 +454,6 @@ private:
 	void populatePlanetList();
 	//! Prepare graph settings
 	void prepareAxesAndGraph();
-	//! Prepare left and right Y axes depending on plot type for object with englishName. For an empty graph, use englishName=""
-	void prepareXVsTimeAxesAndGraph(double minYLeft, double maxYLeft, double minYRight, double maxYRight, QString englishName);
 	//! Populates the drop-down list of time intervals for WUT tool.
 	void populateTimeIntervalsList();	
 	double computeGraphValue(const PlanetP &ssObj, const AstroCalcChart::Series graphType);
