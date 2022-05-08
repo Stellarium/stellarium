@@ -4197,17 +4197,14 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			// to get midnight at the center of diagram (i.e. accuracy is 10 minutes, but smoothed by Spline interpolation)
 			double JD = noon + i / 86400. - shift;
 			core->setJD(JD);
-			
+			core->update(0.0);
 #ifdef USE_STATIC_PLUGIN_SATELLITES
 			if (isSatellite)
 			{
 				// update data for that single satellite only
 				sat->update(0.0);
 			}
-			else
 #endif
-				core->update(0.0);
-		
 			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
 			altVsTimeChart->append(AstroCalcChart::AltVsTime, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), alt*M_180_PI);
 
