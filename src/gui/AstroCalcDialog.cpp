@@ -7582,7 +7582,7 @@ void AstroCalcDialog::drawLunarElongationGraph()
 		double firstJD;
 		StelUtils::getJDFromDate(&firstJD, year, month, day, 0, 0, 0.f);
 		const double utcOffset=core->getUTCOffset(firstJD)/24.;
-		for (int i = -1; i <= 32; i+=2) // TBD: With SplineSeries in charts, i+=3 may be enough!
+		for (int i = -2; i <= 32; i+=2) // TBD: With SplineSeries in charts, i+=3 may be enough!
 		{
 			double JD = firstJD + i - utcOffset;
 			core->setJD(JD);
