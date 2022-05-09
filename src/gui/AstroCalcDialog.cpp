@@ -4665,18 +4665,11 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 	monthlyElevationChart = new AstroCalcChart({AstroCalcChart::MonthlyElevation});
 	QPair<double, double>yRangeME(-90., 90.);
 
-	if (!selectedObjects.isEmpty())
+	if (!selectedObjects.isEmpty() && (selectedObjects[0]->getType() != "Satellite"))
 	{
 		// X axis - time; Y axis - altitude
 		StelObjectP selectedObject = selectedObjects[0];
 		monthlyElevationChart->setTitle(selectedObject->getNameI18n());
-
-		if (selectedObject->getType() == "Satellite")
-		{
-			monthlyElevationChart->clear(AstroCalcChart::MonthlyElevation);
-			monthlyElevationChartMutex.unlock();
-			return;
-		}
 
 		const double currentJD = core->getJD();
 		int year, month, day;		
@@ -6263,7 +6256,7 @@ void AstroCalcDialog::changeGraphsTab(int index)
 			drawLunarElongationGraph(); // Is object already selected?
 			break;
 		default:
-			qWarning() << "AstroCalc::changeGraphTab(): illegal index";
+			qWarning() << "AstroCalc::changeGraphsTab(): illegal index";
 	}
 }
 
