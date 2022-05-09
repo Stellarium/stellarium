@@ -127,6 +127,36 @@
    <item row="1" column="0">
     <widget class="QWidget" name="widget" native="true">
      <layout class="QGridLayout" name="gridLayout">
+      <item row="6" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayoutLineEdit_2">
+        <item>
+         <widget class="QLabel" name="labelDescription">
+          <property name="text">
+           <string>Description:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>62</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="descriptionLineEdit"/>
+        </item>
+       </layout>
+      </item>
       <item row="12" column="0">
        <widget class="QFrame" name="frame">
         <property name="sizePolicy">
@@ -134,6 +164,9 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="mouseTracking">
+         <bool>false</bool>
         </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
@@ -147,7 +180,7 @@
            <item>
             <widget class="QCheckBox" name="obsListRaCheckBox">
              <property name="toolTip">
-              <string>Right ascension</string>
+              <string>Add right ascension</string>
              </property>
              <property name="toolTipDuration">
               <number>3</number>
@@ -160,7 +193,7 @@
            <item>
             <widget class="QCheckBox" name="obsListDecCheckBox">
              <property name="toolTip">
-              <string>Declination</string>
+              <string>Add declination</string>
              </property>
              <property name="toolTipDuration">
               <number>3</number>
@@ -173,7 +206,7 @@
            <item>
             <widget class="QCheckBox" name="obsListFovCheckBox">
              <property name="toolTip">
-              <string>Fiel Of View</string>
+              <string>Add field of view</string>
              </property>
              <property name="toolTipDuration">
               <number>3</number>
@@ -291,36 +324,6 @@
         </layout>
        </widget>
       </item>
-      <item row="6" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayoutLineEdit_2">
-        <item>
-         <widget class="QLabel" name="labelDescription">
-          <property name="text">
-           <string>Description:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>67</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="descriptionLineEdit"/>
-        </item>
-       </layout>
-      </item>
       <item row="8" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
@@ -341,6 +344,49 @@
          <number>-1</number>
         </property>
        </widget>
+      </item>
+      <item row="7" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayoutCheckBoxDefault">
+        <item>
+         <widget class="QCheckBox" name="obsListDefaultListCheckBox">
+          <property name="toolTip">
+           <string>Set the list as default</string>
+          </property>
+          <property name="toolTipDuration">
+           <number>3</number>
+          </property>
+          <property name="text">
+           <string>Set list as default</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="obsListLandscapeCheckBox">
+          <property name="toolTip">
+           <string>Add landscape</string>
+          </property>
+          <property name="toolTipDuration">
+           <number>3</number>
+          </property>
+          <property name="text">
+           <string>Landscape</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item row="5" column="0">
        <layout class="QHBoxLayout" name="horizontalLayoutLineEdit_1">
@@ -369,23 +415,6 @@
         </item>
         <item>
          <widget class="QLineEdit" name="nameOfListLineEdit"/>
-        </item>
-       </layout>
-      </item>
-      <item row="7" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayoutCheckBoxDefault">
-        <item>
-         <widget class="QCheckBox" name="obsListDefaultListCheckBox">
-          <property name="toolTip">
-           <string>Set the list as default</string>
-          </property>
-          <property name="toolTipDuration">
-           <number>3</number>
-          </property>
-          <property name="text">
-           <string>Set list as default</string>
-          </property>
-         </widget>
         </item>
        </layout>
       </item>

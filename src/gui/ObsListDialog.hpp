@@ -36,23 +36,24 @@ class ObsListDialog : public StelDialog
     Q_OBJECT
 
 public:
-    ObsListDialog ( QObject* parent );
-    virtual ~ObsListDialog();
+    explicit ObsListDialog ( QObject* parent );
+    ~ObsListDialog() override;
 
     //! Notify that the application style changed
-    void styleChanged();
+    void styleChanged() override;
     
-    void setVisible ( bool v );
+    void setVisible ( bool v ) override;
 
 protected:
     Ui_obsListDialogForm *ui;
     //! Initialize the dialog widgets and connect the signals/slots.
-    virtual void createDialogContent();
+    void createDialogContent() override;
 
 private:
     QStandardItemModel * obsListListModel;
     class StelCore* core;
     class StelObjectMgr* objectMgr;
+    class LandscapeMgr* landscapeMgr;
     class LabelMgr* labelMgr;
     std::string selectedObservingListUuid;
     QString observingListJsonPath;
@@ -79,37 +80,40 @@ private:
     //! @param dec declination of the object
     //! @param magnitude magnitude of the object
     //! @param constellation constellation in which the object is located
-    void addModelRow (int number, QString olud, QString name, QString nameI18n, QString type, QString ra, QString dec, QString magnitude, QString constellation );
+    void addModelRow (int number, const QString& olud, const QString& name, const QString& nameI18n, const QString& type, const QString& ra, const QString& dec, const QString& magnitude, const QString& constellation );
 
-    //! Load the selected observing list
+    //! Load the selected observing list from Json file into dialog.
     //! @param listOlud the olud (id) of the list
-    void loadObservingList ( QString listOlud );
+    void loadSelectedObservingListFromJsonFile (QString listOlud );
 
-    //! Load the lists names to populate the combo box and get the default list olud
-    void loadListsName();
+    //! Load the lists names from Json file to populate the combo box and get the default list olud
+    void loadListsNameFromJsonFile();
     
     //! Load the default list
     void loadDefaultList();
     
     //! Load the bookmarks of bookmarks.json file into observing lists file
     void loadBookmarksInObservingList();
-    void saveBookmarks(QHash<QString, bookmark> bookmarksCollection);
-    bool checkIfBookmarksListExists(QVariantMap allListsMap);
+    void saveBookmarksInObsListJsonFile(const QHash<QString, bookmark>& bookmarksCollection);
+    auto checkIfBookmarksListExists(QVariantMap allListsMap) -> bool;
     
     //! Load list from JSON file
-    QVariantList loadListFromJson(QVariantMap map, QString listOlud);
+    auto loadListFromJson(const QVariantMap& map, QString listOlud) -> QVariantList;
     
     //! Populate list names into combo box
     void populateListNameInComboBox(QVariantMap map);
     
     //! Populate data into combo box
-    void populateDataInComboBox(QVariantMap map, QString defaultListOlud);
+    void populateDataInComboBox(QVariantMap map, const QString& defaultListOlud);
     
     //! Sort the obsListTreeView by the column name given in parameter
     void sortObsListTreeViewByColumnName(QString columnName);
     
     //! Clear highlights
     void clearHighlight();
+
+    //! get the defaultListOlud from Json file
+    QString extractDefaultListOludFromJsonFile();
 
 
 public slots:

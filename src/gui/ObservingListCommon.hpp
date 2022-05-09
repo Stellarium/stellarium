@@ -44,7 +44,7 @@ struct bookmark
 	QString ra;
 	QString dec;
 	bool isVisibleMarker;
-	QString jd;
+	double jd;
 	QString location;
 	double fov;
 
@@ -69,7 +69,7 @@ enum ObsListColumns {
 // à vérifier après la V2
 
 static constexpr char const * JSON_FILE_NAME = "observingList.json";
-static constexpr char const * FILE_VERSION = "1.0";
+static constexpr char const * FILE_VERSION = "2.0";
 
 static constexpr char const * JSON_BOOKMARKS_FILE_NAME = "bookmarks.json";
 static constexpr char const * BOOKMARKS_LIST_NAME = "bookmarks list";
@@ -78,6 +78,7 @@ static constexpr char const * SHORT_NAME_VALUE = "Observing list for Stellarium"
 
 static constexpr char const * KEY_DEFAULT_LIST_OLUD = "defaultListOlud";
 static constexpr char const * KEY_OBSERVING_LISTS = "observingLists";
+static constexpr char const * KEY_CREATION_DATE = "creation date";
 static constexpr char const * KEY_BOOKMARKS = "bookmarks";
 static constexpr char const * KEY_NAME = "name";
 static constexpr char const * KEY_NAME_I18N = "nameI18n";
@@ -86,6 +87,7 @@ static constexpr char const * KEY_RA = "ra";
 static constexpr char const * KEY_DEC = "dec";
 static constexpr char const * KEY_FOV = "fov";
 static constexpr char const * KEY_DESCRIPTION = "description";
+static constexpr char const * KEY_LANDSCAPE_ID = "landscape id";
 static constexpr char const * KEY_OBJECTS = "objects";
 static constexpr char const * KEY_OBJECTS_TYPE = "objtype";
 static constexpr char const * KEY_DESIGNATION = "designation";
