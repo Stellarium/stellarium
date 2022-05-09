@@ -29,6 +29,18 @@
 //! @class AstroCalcChart
 //! This class encapsulates data for the Altitude vs. Time and the other line Charts in AstroCalc.
 //! Most lines can be QSplineSeries, however the azimuth lines must use QLineSeries to avoid a "spline tremor" at the 0/360° transition.
+//!
+//! The correct sequence of use:
+//! - create with the possible series you are going to use
+//! - fill the series with values with append(). The X value is milliseconds from Epoch (1970).
+//! - add horizontal/vertical lines with addTrivial[YX]Line(series)
+//! - call show(series)
+//! - scale the Y axes:
+//! -- You can retrieve the actual min/max values from findYRange(series). Apply any manual limits last.
+//! -- call setYrange(series, min, max) and setYrangeR(series, min, max) where needed. Use real min/max. A series-dependent buffer will be added.
+//! - call setupAxes()
+//! - use setChart() to display chart in a chartView. A previous chart must be retrieved and deleted!
+//!
 class AstroCalcChart : public QtCharts::QChart
 {
 	Q_OBJECT
@@ -56,26 +68,27 @@ public:
 	//! Reset (delete and create new empty) series s
 	void clear(Series s);
 	//! @return length of series s. If chart does not contain s, returns -1.
-	int lengthOfSeries(Series s);
+	int lengthOfSeries(Series s) const;
 
 	//! Activate series s. It must have been filled using append(s, ., .) before.
 	//! Make sure to call setupAxes() after calling show!
 	void show(Series s);
 
-	//! set range of Y axis
-	void setYrange(qreal min, qreal max);
-	//! set range of Y axis on the right side
-	void setYrangeR(qreal min, qreal max);
-
-	//! Find range of dates for the respective series plot.
-	//! Valid values for series are AltVsTime, AzVsTime, MonthlyElevation, LunarElongation. All other values are interpreted as 2-curve plots extending over the current year.
-	//! @arg periods number of periods (defaults to 1; currently applicable for number of years in the 2-curves plot)
-	QPair<QDateTime, QDateTime>findXRange(const double JD, const Series series, const int periods=1);
+	//! Set range of Y axis required by the Y values of series. Do not set buffers or logical limits here, these are determined in this function.
+	//! @arg strictMin: The altVsTime plot may require strict minimum setting without buffer. Use false (default) for other plots.
+	void setYrange(Series series, qreal min, qreal max, bool strictMin=false);
+	//! Convenience function
+	void setYrange(Series series, QPair<double, double> yRange, bool strictMin=false){setYrange(series, yRange.first, yRange.second, strictMin);}
+	//! Set range of Y axis on the right side required by the Y values of series. Do not set buffers or logical limits here, these are determined in this function.
+	void setYrangeR(Series series, qreal min, qreal max);
+	//! Convenience function
+	void setYrangeR(Series series, QPair<double, double> yRangeR){setYrangeR(series, yRangeR.first, yRangeR.second);}
 
 	//! Find range of values for the respective series plot.
-	QPair<double, double>findYRange(const Series series);
+	QPair<double, double>findYRange(const Series series) const;
+
 	//! Find x/y values where y=max for the respective series plot.
-	QPair<double, double>findYMax(const Series series);
+	QPair<double, double>findYMax(const Series series) const;
 
 	//! Setup axes and appearance. Call this at the end of drawing, just before display but after all series have been activated with show().
 	//! @arg englishName used for details in the two-graph charts. Use an empty string otherwise.
@@ -103,6 +116,16 @@ protected:
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
 
 private:
+	//! Find range of dates for the respective series plot.
+	//! Valid values for series are AltVsTime, AzVsTime, MonthlyElevation, LunarElongation. All other values are interpreted as 2-curve plots extending over the current year.
+	//! @arg periods number of periods (defaults to 1; currently applicable for number of years in the 2-curves plot)
+	QPair<QDateTime, QDateTime>findXRange(const double JD, const Series series, const int periods=1);
+
+	//! Apply buffer to the determined required Y range of series
+	//! This should add some space so that overshooting spline curves are not clipped off.
+	//! @arg strictMin: The altVsTime plot may require strict minimum setting without buffer. Use false (default) for other plots.
+	void bufferYrange(Series series, double *min, double *max, bool strictMin=false);
+
 	QtCharts::QDateTimeAxis *xAxis; // running along bottom
 	QtCharts::QValueAxis *yAxis; // running on the left side
 	QtCharts::QValueAxis *yAxisR; // running on the right side for some charts only
