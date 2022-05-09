@@ -769,7 +769,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		core->setJD(currentJD);
 
 		QPair<double, double>yRange=azVsTimeChart->findYRange(AstroCalcChart::AzVsTime);
-		azVsTimeChart->setYrange(qMax(0., yRange.first), qMin(360., yRange.second));
+		azVsTimeChart->setYrange(AstroCalcChart::AzVsTime, yRange);
 
 		drawCurrentTimeDiagram();
 
@@ -790,7 +790,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 	}
 	else
 	{
-		azVsTimeChart->setYrange(0., 360.);
+		azVsTimeChart->setYrange(AstroCalcChart::AzVsTime, 0., 360.);
 		azVsTimeChart->clear(AstroCalcChart::AzVsTime);
 		azVsTimeChart->setTitle(q_("Please select object to plot its graph 'Azimuth vs. Time'."));
 	}
@@ -4141,7 +4141,6 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		altVsTimeChartMutex.unlock();
 		return;
 	}
-
 	// special case - plot the graph when tab is visible
 	//..
 	// we got notified about a reason to redraw the plot, but dialog was
@@ -4178,8 +4177,8 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		const double noon = std::floor(currentJD + shift); // Integral JD of this day
 		double az, alt;
 
-#ifdef USE_STATIC_PLUGIN_SATELLITES
 		bool isSatellite = false;
+#ifdef USE_STATIC_PLUGIN_SATELLITES
 
 		SatelliteP sat;		
 		if (selectedObject->getType() == "Satellite") 
@@ -4189,7 +4188,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			sat = GETSTELMODULE(Satellites)->getById(selectedObject.staticCast<Satellite>()->getCatalogNumberString());
 		}
 #endif
-		for (int i = 0; i <= 86400; i+=600) // 24 hours in 600s steps
+		for (int i = 0; i <= 86400; i+= isSatellite? 600 : 3600) // 24 hours in hourly or 600s steps
 		{
 			// A new point on the graph every 600s with shift to right 12 hours
 			// to get midnight at the center of diagram (i.e. accuracy is 10 minutes, but smoothed by Spline interpolation)
@@ -4207,15 +4206,15 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			altVsTimeChart->append(AstroCalcChart::AltVsTime, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), alt*M_180_PI);
 
 			if (plotAltVsTimeSun)
-{
-			StelUtils::rectToSphe(&az, &alt, sun->getAltAzPosAuto(core));
-			double deg=alt*M_180_PI;
+			{
+				StelUtils::rectToSphe(&az, &alt, sun->getAltAzPosAuto(core));
+				double deg=alt*M_180_PI;
 
-			altVsTimeChart->append(AstroCalcChart::SunElevation,     StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg);
-			altVsTimeChart->append(AstroCalcChart::CivilTwilight,    StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg+6);
-			altVsTimeChart->append(AstroCalcChart::NauticalTwilight, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg+12);
-			altVsTimeChart->append(AstroCalcChart::AstroTwilight,    StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg+18);
-}
+				altVsTimeChart->append(AstroCalcChart::SunElevation,     StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg);
+				altVsTimeChart->append(AstroCalcChart::CivilTwilight,    StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg+6);
+				altVsTimeChart->append(AstroCalcChart::NauticalTwilight, StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg+12);
+				altVsTimeChart->append(AstroCalcChart::AstroTwilight,    StelUtils::jdToQDateTime(JD+shift).toMSecsSinceEpoch(), deg+18);
+			}
 			if (plotAltVsTimeMoon && onEarth)
 			{
 				StelUtils::rectToSphe(&az, &alt, moon->getAltAzPosAuto(core));
@@ -4242,8 +4241,6 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			yRange.first =qMin(yRangeMoon.first,  yRange.first);
 			yRange.second=qMax(yRangeMoon.second, yRange.second);
 		}
-		if (plotAltVsTimePositive && yRange.first<altVsTimePositiveLimit)
-			yRange.first = altVsTimePositiveLimit;
 
 		core->setJD(currentJD);
 
@@ -4279,7 +4276,9 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		altVsTimeChart->setTitle(q_("Please select object to plot its graph 'Altitude vs. Time'."));
 	}
 
-	altVsTimeChart->setYrange(yRange.first, yRange.second);
+	if (plotAltVsTimePositive && yRange.first<altVsTimePositiveLimit)
+		yRange.first = altVsTimePositiveLimit;
+	altVsTimeChart->setYrange(AstroCalcChart::AltVsTime, yRange, plotAltVsTimePositive && qFuzzyCompare(yRange.first, altVsTimePositiveLimit));
 	altVsTimeChart->setupAxes(core->getJD(), 1, "");
 	QChart *oldChart=ui->altVsTimeChartView->chart();
 	if (oldChart) oldChart->deleteLater();
@@ -4297,12 +4296,12 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 	if (!dialog->isVisible() || (!plotAltVsTime && !plotAziVsTime)) return;
 
 	const double currentJD = core->getJD();
-	const double UTCOffset = core->getUTCOffset(currentJD);
+	const double UTCOffset = core->getUTCOffset(currentJD)/24.;
 
 	if (plotAltVsTime)
 	{
 		if (altVsTimeChart){
-			altVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, qreal(StelUtils::jdToQDateTime(currentJD+UTCOffset/24.).toMSecsSinceEpoch()));
+			altVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, qreal(StelUtils::jdToQDateTime(currentJD+UTCOffset).toMSecsSinceEpoch()));
 		}
 		else
 			qWarning() << "no alt chart to add CT line!";
@@ -4311,8 +4310,7 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 	{
 		if (azVsTimeChart)
 		{
-			azVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, qreal(StelUtils::jdToQDateTime(currentJD+UTCOffset/24.).toMSecsSinceEpoch()));
-			//qDebug() << "Chart: replace/append currentTime in azi chart...done";
+			azVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, qreal(StelUtils::jdToQDateTime(currentJD+UTCOffset).toMSecsSinceEpoch()));
 		}
 		else
 			qWarning() << "no azi chart to add CT line!";
@@ -4320,7 +4318,7 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 
 	// detect roll over graph day limits.
 	// if so, update the graph
-	int graphJD = static_cast<int>(currentJD + UTCOffset / 24.);
+	int graphJD = static_cast<int>(currentJD + UTCOffset);
 	if (oldGraphJD != graphJD || graphPlotNeedsRefresh)
 	{
 		oldGraphJD = graphJD;
@@ -4381,29 +4379,6 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 		QPair<double, double>yRangeLeft  = curvesChart->findYRange(firstGraph);
 		QPair<double, double>yRangeRight = curvesChart->findYRange(secondGraph);
 
-		double margin = (yRangeLeft.second - yRangeLeft.first) / 50.0;
-		yRangeLeft.first-=margin; yRangeLeft.second+=margin;
-
-		margin = (yRangeRight.second - yRangeRight.first) / 50.0;
-		yRangeRight.first-=margin; yRangeRight.second+=margin;
-
-		if (firstGraph==AstroCalcChart::RightAscension1) // TODO: Move those to chart code.
-		{
-			yRangeLeft.first=0; yRangeLeft.second=24.;
-		}
-		else if (firstGraph==AstroCalcChart::Elongation1)
-		{
-			yRangeLeft.first=qMax(yRangeLeft.first, 0.); yRangeLeft.second=qMin(yRangeLeft.second, 180.);
-		}
-		if (secondGraph==AstroCalcChart::RightAscension2)
-		{
-			yRangeRight.first=0; yRangeRight.second=24.;
-		}
-		else if (secondGraph==AstroCalcChart::Elongation2)
-		{
-			yRangeRight.first=qMax(yRangeRight.first, 0.); yRangeRight.second=qMin(yRangeRight.second, 180.);
-		}
-
 		QString englishName=ui->graphsCelestialBodyComboBox->currentData().toString();
 		qDebug() << "Object name: " << englishName;
 
@@ -4435,21 +4410,17 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 
 		curvesChart->show(firstGraph);
 		curvesChart->show(secondGraph);
-		//qDebug() << "create chart axes: " << minYLeft << "..." << maxYLeft << "(" << firstGraph << "), " << minYRight << "/" << maxYRight << "(" << secondGraph << ")";
-		curvesChart->setYrange(yRangeLeft.first, yRangeLeft.second);
-		curvesChart->setYrangeR(yRangeRight.first, yRangeRight.second);
+		curvesChart->setYrange(firstGraph, yRangeLeft);
+		curvesChart->setYrangeR(secondGraph, yRangeRight);
 		curvesChart->setupAxes(core->getJD(), graphsDuration, englishName);
-		//qDebug() << "set chart ...";
 	}
 	else
 	{
-		curvesChart = new AstroCalcChart({AstroCalcChart::AngularSize1, AstroCalcChart::Magnitude2}); // May be wrong as it does not protect display from other planets...
+		curvesChart = new AstroCalcChart({AstroCalcChart::AngularSize1, AstroCalcChart::Distance2}); // May be wrong as it does not protect display from other planets...
 
-		//qDebug() << "create default chart axes: ( no graphs )"; // << firstGraph << "/" << secondGraph << ")";
-		curvesChart->setYrange(0., 10.);
-		curvesChart->setYrangeR(0., 10.);
+		curvesChart->setYrange(AstroCalcChart::AngularSize1, 0., 10.);
+		curvesChart->setYrangeR(AstroCalcChart::Magnitude2, 0., 10.);
 		curvesChart->setupAxes(core->getJD(), graphsDuration, "");
-		//qDebug() << "set chart ...";
 	}
 
 	QChart *oldChart=ui->twoGraphsChartView->chart();
@@ -4548,7 +4519,7 @@ double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const AstroCalcC
 			break;
 		}
 		default:
-			qDebug() << "AstroCalc::computeGraphValue() Wrong call for " << graphType;
+			qWarning() << "AstroCalc::computeGraphValue() Wrong call for " << graphType;
 	}
 	return value;
 }
@@ -4750,8 +4721,8 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 
 	if (plotMonthlyElevationPositive && yRangeME.first<monthlyElevationPositiveLimit)
 		yRangeME.first = monthlyElevationPositiveLimit;
-	monthlyElevationChart->setYrange(yRangeME.first, yRangeME.second);
 	monthlyElevationChart->show(AstroCalcChart::MonthlyElevation);
+	monthlyElevationChart->setYrange(AstroCalcChart::MonthlyElevation, yRangeME, plotMonthlyElevationPositive && qFuzzyCompare(yRangeME.first, monthlyElevationPositiveLimit));
 	monthlyElevationChart->setupAxes(core->getJD(), 1, "");
 	QChart *oldChart=ui->monthlyElevationChartView->chart();
 	if (oldChart) oldChart->deleteLater();
@@ -7488,8 +7459,8 @@ void AstroCalcDialog::drawDistanceGraph()
 	}
 
 	pcChart = new AstroCalcChart({AstroCalcChart::pcDistanceAU, AstroCalcChart::pcDistanceDeg});
-	pcChart->setYrange(0., 10.); // start with something in case it remains empty.
-	pcChart->setYrangeR(0., 360.);
+	pcChart->setYrange(AstroCalcChart::pcDistanceAU, 0., 10.); // start with something in case it remains empty.
+	pcChart->setYrangeR(AstroCalcChart::pcDistanceDeg, 0., 180.);
 	pcChart->setTitle(q_("Linear and angular distances between selected objects"));
 
 	Q_ASSERT(ui->firstCelestialBodyComboBox);
@@ -7537,13 +7508,13 @@ void AstroCalcDialog::drawDistanceGraph()
 	core->setJD(currentJD);
 
 	QPair<double, double>yRange=pcChart->findYRange(AstroCalcChart::pcDistanceAU);
-	pcChart->setYrange(yRange.first, yRange.second);
+	pcChart->setYrange(AstroCalcChart::pcDistanceAU, yRange);
 	pcChart->show(AstroCalcChart::pcDistanceAU);
 
 	if (pcChart->lengthOfSeries(AstroCalcChart::pcDistanceDeg)>0) // mistake-proofing!
 	{
 		yRange=pcChart->findYRange(AstroCalcChart::pcDistanceDeg);
-		pcChart->setYrangeR(yRange.first, yRange.second);
+		pcChart->setYrangeR(AstroCalcChart::pcDistanceDeg, yRange);
 		pcChart->show(AstroCalcChart::pcDistanceDeg);
 	}
 
@@ -7647,7 +7618,7 @@ void AstroCalcDialog::drawLunarElongationGraph()
 		lunarElongationChart->setTitle(label);
 	}
 
-	lunarElongationChart->setYrange(yRange.first, yRange.second);
+	lunarElongationChart->setYrange(AstroCalcChart::LunarElongation, yRange);
 	lunarElongationChart->show(AstroCalcChart::LunarElongation);
 	lunarElongationChart->setupAxes(core->getJD(), 1, "");
 	QChart *oldChart=ui->lunarElongationChartView->chart();

@@ -227,7 +227,7 @@ void AstroCalcChart::drawTrivialLineY(Series s, const qreal y)
 		qWarning() << "No series" << s << "to add trivial Y line";
 }
 
-int AstroCalcChart::lengthOfSeries(Series s)
+int AstroCalcChart::lengthOfSeries(Series s) const
 {
 	if (!(map.value(s)))
 		return -1;
@@ -236,7 +236,6 @@ int AstroCalcChart::lengthOfSeries(Series s)
 
 void AstroCalcChart::show(Series s)
 {
-	//qDebug() << "About to add series " << s;
 	if (!series().contains(map.value(s)))
 	{
 		addSeries(map.value(s));
@@ -287,8 +286,6 @@ void AstroCalcChart::clear(Series s)
 {
 	//qDebug() << "Clearing series " << s;
 	//qDebug() << "Before remove it has " << map.value(s)->points().length() << "entries";
-//	if (series().contains(map.value(s)))
-//		removeSeries(map.value(s));
 	//qDebug() << "clearing series with " << map.value(s)->points().length() << "entries";
 	map.value(s)->clear();
 	//qDebug() << "clear(): Removing series " << s;
@@ -333,10 +330,11 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 	return QPair(startDate, endDate);
 }
 
-QPair<double, double> AstroCalcChart::findYRange(const Series series)
+QPair<double, double> AstroCalcChart::findYRange(const Series series) const
 {
 	const QList<QPointF> points=map.value(series)->points();
-	double min=std::numeric_limits<double>::max(), max=std::numeric_limits<double>::min();
+	double min=std::numeric_limits<double>::max();
+	double max=std::numeric_limits<double>::min();
 	for (int i=0; i<points.count(); i++)
 	{
 		const double y=points.at(i).y();
@@ -347,7 +345,7 @@ QPair<double, double> AstroCalcChart::findYRange(const Series series)
 }
 
 // find x/y values of maximum y
-QPair<double, double> AstroCalcChart::findYMax(const Series series)
+QPair<double, double> AstroCalcChart::findYMax(const Series series) const
 {
 	const QList<QPointF> points=map.value(series)->points();
 	double max=std::numeric_limits<double>::min();
@@ -367,7 +365,7 @@ QPair<double, double> AstroCalcChart::findYMax(const Series series)
 
 void AstroCalcChart::setupAxes(const double jd, const int periods, const QString &englishName)
 {
-	qDebug() << "setupAxes()...";
+	//qDebug() << "setupAxes()...";
 
 	static const QPen axisPen(          Qt::white,      1,    Qt::SolidLine);
 	static const QPen axisGridPen(      Qt::white,      0.5,  Qt::SolidLine);
@@ -380,7 +378,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	static const QPen axisMinorGridPenR(Qt::yellow,     0.35, Qt::DotLine);
 
 	const double shift = StelApp::getInstance().getCore()->getUTCOffset(jd) / 24.0;
-	//qDebug() << "Why is this shift not a full number of hours?: " << shift*24.;
+	//qDebug() << "Check that this shift is a full number of hours: " << shift*24.;
 
 	// Variables for scaling x axis
 	QPair<QDateTime, QDateTime>xRange;
@@ -486,7 +484,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	xAxis->setGridLinePen(axisGridPen);
 	xAxis->setMinorGridLinePen(axisMinorGridPen);
 
-	setYrange(yMin, yMax);
+	//setYrange(yMin, yMax);
 	yAxis->setLinePen(axisPen);
 	yAxis->setGridLinePen(axisGridPen);
 	yAxis->setMinorGridLinePen(axisMinorGridPen);
@@ -521,7 +519,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 		font.setBold(false);
 		yAxisR->setTitleFont(font);
 	}
-	const QList<QtCharts::QAbstractSeries *> ser=series(); // currently shown series. These may be fewer than the series in our map!
+	const QList<QtCharts::QAbstractSeries *> ser=series(); // currently shown series. These may be fewer than the series principally enabled in our map!
 
 	for (Series s: {AltVsTime, CurrentTime, TransitTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight, Moon, AzVsTime, MonthlyElevation,
 	     AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1,
@@ -543,26 +541,25 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 			map.value(s)->attachAxis(yAxisR);
 		}
 	}
-	qDebug() << "setupAxes()...done";
+	//qDebug() << "setupAxes()...done";
 }
 
-void AstroCalcChart::setYrange(qreal min, qreal max)
+void AstroCalcChart::setYrange(Series series, qreal min, qreal max, bool strictMin)
 {
-	// TODO: Decide, per-case, buffer values and true limits (0...360, 0..24, -90..+90, etc.)
-
+	bufferYrange(series, &min, &max, strictMin);
 	yMin=min;
 	yMax=max;
 
 	// We have to find a scaling that has steps in an appropriate range.
 	const double logYDiff=log10(yMax-yMin);
-	const double s=pow(10., floor(logYDiff)-1.);
+	const double s=pow(10., floor(logYDiff)-1.); // A power of 10 that should provide not too much buffer above/below
 
-	qreal rMin=floor(yMin/s);
-	qreal rMax=ceil(yMax/s);
+	qreal rMin=floor(yMin/s)*s;
+	qreal rMax=ceil(yMax/s)*s;
 
-	//qDebug() << "Setting yrange from" << min << "/" << max << "-->" << rMin*s << "/" << rMax*s;
-	yAxis->setRange(rMin*s, rMax*s);
-	//yAxis->applyNiceNumbers();
+
+	//qDebug() << "Setting yrange from" << min << "/" << max << "-->" << rMin << "/" << rMax;
+	yAxis->setRange(rMin, rMax);
 	if (rMax-rMin > 3*s)
 	{
 		yAxis->setTickCount(6+1);
@@ -575,8 +572,9 @@ void AstroCalcChart::setYrange(qreal min, qreal max)
 	}
 }
 
-void AstroCalcChart::setYrangeR(qreal min, qreal max)
+void AstroCalcChart::setYrangeR(Series series, qreal min, qreal max)
 {
+	bufferYrange(series, &min, &max);
 	yMinR=min;
 	yMaxR=max;
 
@@ -589,16 +587,74 @@ void AstroCalcChart::setYrangeR(qreal min, qreal max)
 
 	//qDebug() << "Setting yrangeR from" << min << "/" << max << "-->" << rMin*s << "/" << rMax*s;
 	yAxisR->setRange(rMin*s, rMax*s);
-	//yAxisR->applyNiceNumbers();
 	if (rMax-rMin > 3*s)
 	{
-		yAxis->setTickCount(6+1);
-		yAxis->setMinorTickCount(2);
+		yAxisR->setTickCount(6+1);
+		yAxisR->setMinorTickCount(2);
 	}
 	else
 	{
-		yAxis->setTickCount(qRound((rMax*s-rMin*s)/s)+1);
-		yAxis->setMinorTickCount(1);
+		yAxisR->setTickCount(qRound((rMax*s-rMin*s)/s)+1);
+		yAxisR->setMinorTickCount(1);
+	}
+}
+
+void AstroCalcChart::bufferYrange(Series series, double *min, double *max, bool strictMin)
+{
+	// Decide, per-case, buffer values and true limits (0...360, 0..24, -90..+90, etc.)
+	// Most curves are Splines which may exceed the actual X/Y point range somewhat, requiring a buffer. A better algorithm should compute the actual max values for the spline!
+
+	// Go over all "main" series of the charts.
+	switch (series){
+		case AltVsTime:
+		case MonthlyElevation:
+		case Declination1:
+		case Declination2:
+		case TransitAltitude1:
+		case TransitAltitude2:
+			*min=qMax(-90., *min-(strictMin ? 0. : 5.));
+			*max=qMin( 90., *max+5.);
+			break;
+		case AzVsTime:
+			*min=qMax(  0., *min);
+			*max=qMin(360., *max);
+			break;
+		case RightAscension1:
+		case RightAscension2:
+			*min=qMax( 0., *min);
+			*max=qMin(24., *max);
+			break;
+		case AngularSize1:
+		case AngularSize2:
+		case Distance1:
+		case Distance2:
+		case HeliocentricDistance1:
+		case HeliocentricDistance2:
+		case pcDistanceAU:
+			*min=qMax( 0., *min);
+			*max*=1.05;
+			break;
+		case Elongation1:
+		case Elongation2:
+		case PhaseAngle1:
+		case PhaseAngle2:
+		case LunarElongation:
+		case pcDistanceDeg:
+			*min=qMax(  0., *min-0.05*(*max-*min));
+			*max=qMin(180., *max+0.05*(*max-*min));
+			break;
+		case Magnitude1:
+		case Magnitude2:
+			*min=*min-0.05*(*max-*min);
+			*max=*max+0.05*(*max-*min);
+			break;
+		case Phase1:
+		case Phase2:
+			*min=qMax(0., *min-0.05*(*max-*min));
+			*max=qMin(1., *max+0.05*(*max-*min));
+			break;
+		default: // 8 other series which should not influence chart scaling
+			break;
 	}
 }
 
