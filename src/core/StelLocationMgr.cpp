@@ -40,6 +40,7 @@
 #include <QTimeZone>
 #include <QTimer>
 #include <QApplication>
+#include <QRegularExpression>
 
 TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
 
@@ -222,7 +223,7 @@ void LibGPSLookupHelper::query()
 	if (verbose)
 		qDebug() << "GPSD location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
 
-	loc.bortleScaleIndex=StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
+	loc.lightPollutionLuminance=StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 	// Usually you don't leave your time zone with GPS.
 	loc.ianaTimeZone=StelApp::getInstance().getCore()->getCurrentTimeZone();
 	loc.isUserLocation=true;
@@ -384,7 +385,7 @@ void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 		loc.altitude=( qIsNaN(coord.altitude()) ? 0 : static_cast<int>(floor(coord.altitude())));
 		if (verbose)
 			qDebug() << "Location in progress: Long=" << loc.longitude << " Lat=" << loc.latitude << " Alt" << loc.altitude;
-		loc.bortleScaleIndex=StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
+		loc.lightPollutionLuminance=StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 		// Usually you don't leave your time zone with GPS.
 		loc.ianaTimeZone=core->getCurrentTimeZone();
 		loc.isUserLocation=true;
@@ -466,6 +467,8 @@ StelLocationMgr::StelLocationMgr()
 		locationDBToIANAtranslations.insert("Asia/Atyrau",     "UTC+05:00"); // no DST; https://www.zeitverschiebung.net/en/timezone/asia--atyrau
 		locationDBToIANAtranslations.insert("Asia/Famagusta",  "Asia/Nicosia"); // Asia/Nicosia has no DST, but Asia/Famagusta has DST!
 		locationDBToIANAtranslations.insert("America/Punta_Arenas",  "UTC-03:00"); // no DST; https://www.zeitverschiebung.net/en/timezone/america--punta_arenas
+		// Missing on Qt5.15.2/Win10
+		locationDBToIANAtranslations.insert("America/Nuuk",      "America/Godthab");
 		// N.B. Further missing TZ names will be printed out in the log.txt. Resolve these by adding into this list.
 		// TODO later: create a text file in user data directory, and auto-update it weekly.
 	}
@@ -479,8 +482,11 @@ StelLocationMgr::StelLocationMgr()
 		generateBinaryLocationFile("data/base_locations.txt", false, "data/base_locations.bin");
 
 	locations = loadCitiesBin("data/base_locations.bin.gz");
+#if QT_VERSION >= QT_VERSION_CHECK(5,15,0)
+	locations.insert(loadCities("data/user_locations.txt", true));
+#else
 	locations.unite(loadCities("data/user_locations.txt", true));
-	
+#endif
 	// Init to Paris France because it's the center of the world.
 	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, Western Europe").toString());
 }
@@ -663,16 +669,20 @@ static float parseAngle(const QString& s, bool* ok)
 	ret = s.toFloat(ok);
 	if (*ok) return ret;
 	// Try GPS coordinate like +121°33'38.28"
-	QRegExp reg("([+-]?[\\d.]+)°(?:([\\d.]+)')?(?:([\\d.]+)\")?");
-	if (reg.exactMatch(s))
+	QRegularExpression reg("([+-]?[\\d.]+)°(?:([\\d.]+)')?(?:([\\d.]+)\")?");
+	QRegularExpressionMatch match=reg.match(s);
+	if (match.hasMatch())
 	{
-		float deg = reg.cap(1).toFloat(ok);
+		float deg = match.captured(1).toFloat(ok);
 		if (!*ok) return 0;
-		float min = reg.cap(2).isEmpty()? 0 : reg.cap(2).toFloat(ok);
+		float min = match.captured(2).isEmpty()? 0 : match.captured(2).toFloat(ok);
 		if (!*ok) return 0;
-		float sec = reg.cap(3).isEmpty()? 0 : reg.cap(3).toFloat(ok);
+		float sec = match.captured(3).isEmpty()? 0 : match.captured(3).toFloat(ok);
 		if (!*ok) return 0;
-		return deg + min / 60 + sec / 3600;
+		if (deg < 0)
+			return deg - min / 60 - sec / 3600;
+		else
+			return deg + min / 60 + sec / 3600;
 	}
 	return 0;
 }
@@ -685,13 +695,14 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 		return iter.value();
 	}
 	// Maybe this is a city and country names (old format of the data)?
-	QRegExp cnreg("(.+),\\s+(.+)$");
-	if (cnreg.exactMatch(s))
+	QRegularExpression cnreg("(.+),\\s+(.+)$");
+	QRegularExpressionMatch cnMatch=cnreg.match(s);
+	if (cnMatch.hasMatch())
 	{
 		// NOTE: This method will give wrong data for some Russians and U.S. locations
 		//       (Asian locations for Russia and for locations on Hawaii for U.S.)
-		QString city = cnreg.cap(1).trimmed();
-		QString country = cnreg.cap(2).trimmed();
+		QString city = cnMatch.captured(1).trimmed();
+		QString country = cnMatch.captured(2).trimmed();
 		auto iter = locations.find(QString("%1, %2").arg(city, pickRegionFromCountry(country)));
 		if (iter!=locations.end())
 		{
@@ -700,32 +711,34 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	}
 	StelLocation ret;
 	// Maybe it is a coordinate set with elevation?
-	QRegExp csreg("(.+),\\s*(.+),\\s*(.+)");
-	if (csreg.exactMatch(s))
+	QRegularExpression csreg("(.+),\\s*(.+),\\s*(.+)");
+	QRegularExpressionMatch csMatch=csreg.match(s);
+	if (csMatch.hasMatch())
 	{
 		bool ok;
 		// We have a set of coordinates
-		ret.latitude = parseAngle(csreg.cap(1).trimmed(), &ok);
+		ret.latitude = parseAngle(csMatch.captured(1).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.longitude = parseAngle(csreg.cap(2).trimmed(), &ok);
+		ret.longitude = parseAngle(csMatch.captured(2).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.altitude = csreg.cap(3).trimmed().toInt(&ok);
+		ret.altitude = csMatch.captured(3).trimmed().toInt(&ok);
 		if (!ok) ret.role = '!';
 		ret.name = QString("%1, %2").arg(QString::number(ret.latitude, 'f', 2), QString::number(ret.longitude, 'f', 2));
 		ret.planetName = "Earth";
 		return ret;
 	}
 	// Maybe it is a coordinate set without elevation? (e.g. GPS 25.107363,121.558807 )
-	QRegExp reg("(?:(.+)\\s+)?(.+),\\s*(.+)"); // FIXME: Seems regexp is not very good
-	if (reg.exactMatch(s))
+	QRegularExpression reg("(?:(.+)\\s+)?(.+),\\s*(.+)"); // FIXME: Seems regexp is not very good
+	QRegularExpressionMatch match=reg.match(s);
+	if (match.hasMatch())
 	{
 		bool ok;
 		// We have a set of coordinates
-		ret.latitude = parseAngle(reg.cap(2).trimmed(), &ok);
+		ret.latitude = parseAngle(match.captured(2).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.longitude = parseAngle(reg.cap(3).trimmed(), &ok);
+		ret.longitude = parseAngle(match.captured(3).trimmed(), &ok);
 		if (!ok) ret.role = '!';
-		ret.name = reg.cap(1).trimmed();
+		ret.name = match.captured(1).trimmed();
 		ret.planetName = "Earth";
 		return ret;
 	}
@@ -737,12 +750,20 @@ const StelLocation StelLocationMgr::locationFromCLI() const
 {
 	StelLocation ret;
 	QSettings* conf = StelApp::getInstance().getSettings();
-	bool ok;
 	conf->beginGroup("location_run_once");
-	ret.latitude = parseAngle(StelUtils::radToDmsStr(conf->value("latitude").toDouble(), true), &ok);
-	if (!ok) ret.role = '!';
-	ret.longitude = parseAngle(StelUtils::radToDmsStr(conf->value("longitude").toDouble(), true), &ok);
-	if (!ok) ret.role = '!';
+
+	const auto latVar = conf->value("latitude");
+	if (latVar.isValid())
+		ret.latitude = 180/M_PI * latVar.toDouble();
+	else
+		ret.role = '!';
+
+	const auto lonVar = conf->value("longitude");
+	if (lonVar.isValid())
+		ret.longitude = 180/M_PI * lonVar.toDouble();
+	else
+		ret.role = '!';
+	bool ok;
 	ret.altitude = conf->value("altitude", 0).toInt(&ok);
 	ret.planetName = conf->value("home_planet", "Earth").toString();
 	ret.landscapeKey = conf->value("landscape_name", "guereins").toString();
@@ -1019,10 +1040,10 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			QString ipTimeZone = locMap.value("time_zone").toString();
 			if (ipTimeZone.isEmpty())
 				ipTimeZone = locMap.value("timezone").toString();
-			float latitude=locMap.value("latitude").toFloat();
-			float longitude=locMap.value("longitude").toFloat();
+			double latitude=locMap.value("latitude").toDouble();
+			double longitude=locMap.value("longitude").toDouble();
 
-			qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity).arg(ipRegion).arg(ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
+			qDebug() << "Got location" << QString("%1, %2, %3 (%4, %5; %6)").arg(ipCity, ipRegion, ipCountry).arg(latitude).arg(longitude).arg(ipTimeZone) << "for IP" << locMap.value("ip").toString();
 
 			StelLocation loc;
 			loc.name    = (ipCity.isEmpty() ? QString("%1, %2").arg(latitude).arg(longitude) : ipCity);
@@ -1030,10 +1051,10 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			loc.region = pickRegionFromCountryCode(ipCountryCode.isEmpty() ? "" : ipCountryCode.toLower());
 			loc.role    = QChar(0x0058); // char 'X'
 			loc.population = 0;
-			loc.latitude = latitude;
-			loc.longitude = longitude;
+			loc.latitude  = static_cast<float>(latitude);
+			loc.longitude = static_cast<float>(longitude);
 			loc.altitude = 0;
-			loc.bortleScaleIndex = StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
+			loc.lightPollutionLuminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
 			loc.ianaTimeZone = (ipTimeZone.isEmpty() ? "" : ipTimeZone);
 			loc.planetName = "Earth";
 			loc.landscapeKey = "";

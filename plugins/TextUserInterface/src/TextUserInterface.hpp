@@ -41,7 +41,6 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init() Q_DECL_OVERRIDE;
-	virtual void update(double) Q_DECL_OVERRIDE {;}
 	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 	virtual void handleKeys(class QKeyEvent* event) Q_DECL_OVERRIDE;
@@ -60,6 +59,8 @@ public slots:
 	void setTuiObjInfo(bool tObjInfo) { tuiObjInfo = tObjInfo; }
 	//! Set Gravity text for the TUI text
 	void setTuiGravityUi(bool tGravityUi) { tuiGravityUi = tGravityUi; }
+    //! Set light pollution level
+    void setLightPollutionLevel(int level);
 
 private slots:
 	void setHomePlanet(QString planetName);

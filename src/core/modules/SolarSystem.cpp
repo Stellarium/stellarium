@@ -48,7 +48,6 @@
 #include "AstroCalcDialog.hpp"
 #include "StelObserver.hpp"
 
-#include <functional>
 #include <algorithm>
 
 #include <QTextStream>
@@ -95,6 +94,7 @@ SolarSystem::SolarSystem() : StelObjectModule()
 	, ephemerisMagnitudesDisplayed(false)
 	, ephemerisHorizontalCoordinates(false)
 	, ephemerisLineDisplayed(false)
+	, ephemerisAlwaysOn(false)
 	, ephemerisLineThickness(1)
 	, ephemerisSkipDataDisplayed(false)
 	, ephemerisSkipMarkersDisplayed(false)
@@ -128,7 +128,7 @@ SolarSystem::~SolarSystem()
 	// release selected:
 	selected.clear();
 	selectedSSO.clear();
-	for (auto* orb : orbits)
+	for (auto* orb : qAsConst(orbits))
 	{
 		delete orb;
 		orb = Q_NULLPTR;
@@ -147,7 +147,7 @@ SolarSystem::~SolarSystem()
 	allTrails = Q_NULLPTR;
 
 	// Get rid of circular reference between the shared pointers which prevent proper destruction of the Planet objects.
-	for (const auto& p : systemPlanets)
+	for (const auto& p : qAsConst(systemPlanets))
 	{
 		p->satellites.clear();
 	}
@@ -157,7 +157,7 @@ SolarSystem::~SolarSystem()
 	Comet::tailTexture.clear();
 
 	//deinit of SolarSystem is NOT called at app end automatically
-	deinit();
+	SolarSystem::deinit();
 }
 
 /*************************************************************************
@@ -217,10 +217,10 @@ void SolarSystem::init()
 	setOrbitColorStyle(conf->value("astro/planets_orbits_color_style", "one_color").toString());
 
 	// Settings for calculation of position of Great Red Spot on Jupiter
-	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
-	setCustomGrsLongitude(conf->value("astro/grs_longitude", 216).toInt());
-	setCustomGrsDrift(conf->value("astro/grs_drift", 15.).toDouble());
-	setCustomGrsJD(conf->value("astro/grs_jd", 2456901.5).toDouble());
+//	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
+	setGrsLongitude(conf->value("astro/grs_longitude", 216).toInt());
+	setGrsDrift(conf->value("astro/grs_drift", 15.).toDouble());
+	setGrsJD(conf->value("astro/grs_jd", 2456901.5).toDouble());
 
 	setFlagEarthShadowEnlargementDanjon(conf->value("astro/shadow_enlargement_danjon", false).toBool());
 	setFlagPermanentSolarCorona(conf->value("viewing/flag_draw_sun_corona", true).toBool());
@@ -253,6 +253,7 @@ void SolarSystem::init()
 
 	// Ephemeris stuff
 	setFlagEphemerisMarkers(conf->value("astrocalc/flag_ephemeris_markers", true).toBool());
+	setFlagEphemerisAlwaysOn(conf->value("astrocalc/flag_ephemeris_alwayson", true).toBool());
 	setFlagEphemerisDates(conf->value("astrocalc/flag_ephemeris_dates", false).toBool());
 	setFlagEphemerisMagnitudes(conf->value("astrocalc/flag_ephemeris_magnitudes", false).toBool());
 	setFlagEphemerisHorizontalCoordinates(conf->value("astrocalc/flag_ephemeris_horizontal", false).toBool());
@@ -327,6 +328,32 @@ void SolarSystem::deinit()
 	Planet::deinitFBO();
 }
 
+void SolarSystem::resetTextures(const QString &planetName)
+{
+	if (planetName.isEmpty())
+	{
+		for (const auto& p : qAsConst(systemPlanets))
+		{
+			p->resetTextures();
+		}
+	}
+	else
+	{
+		PlanetP planet = searchByEnglishName(planetName);
+		if (!planet.isNull())
+			planet->resetTextures();
+	}
+}
+
+void SolarSystem::setTextureForPlanet(const QString& planetName, const QString& texName)
+{
+	PlanetP planet = searchByEnglishName(planetName);
+	if (!planet.isNull())
+		planet->replaceTexture(texName);
+	else
+		qWarning() << "The planet" << planetName << "was not found. Please check the name.";
+}
+
 void SolarSystem::recreateTrails()
 {
 	// Create a trail group containing all the planets orbiting the sun (not including satellites)
@@ -348,7 +375,7 @@ void SolarSystem::recreateTrails()
 	}
 	else
 	{
-		for (const auto& p : getSun()->satellites)
+		for (const auto& p : qAsConst(getSun()->satellites))
 		{
 			if (p->getPlanetType() != Planet::isObserver)
 				allTrails->addObject(static_cast<QSharedPointer<StelObject>>(p), &trailsColor);
@@ -359,7 +386,7 @@ void SolarSystem::recreateTrails()
 		if (obs)
 		{
 			const QSharedPointer<Planet> planet=obs->getHomePlanet();
-			for (const auto& m : planet->satellites)
+			for (const auto& m : qAsConst(planet->satellites))
 				if (m->getPlanetType() != Planet::isObserver)
 					allTrails->addObject(static_cast<QSharedPointer<StelObject>>(m), &trailsColor);
 		}
@@ -398,11 +425,11 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 
 	// Now parse the file
 	// lines to ignore which start with a # or are empty
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 
 	// lines which look like records - we use the RE to extract the fields
 	// which will be available in recRx.capturedTexts()
-	QRegExp recRx("^\\s*(\\w+)\\s+\"(.+)\"\\s+_[(]\"(.+)\"[)]\\n");
+	QRegularExpression recRx("^\\s*(\\w+)\\s+\"(.+)\"\\s+_[(]\"(.+)\"[)]\\n");
 
 	QString record, planetId, nativeName, nativeNameMeaning;
 
@@ -416,20 +443,21 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 		lineNumber++;
 
 		// Skip comments
-		if (commentRx.exactMatch(record))
+		if (commentRx.match(record).hasMatch())
 			continue;
 
 		totalRecords++;
 
-		if (!recRx.exactMatch(record))
+		QRegularExpressionMatch match=recRx.match(record);
+		if (!match.hasMatch())
 		{
 			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in planet names file" << QDir::toNativeSeparators(namesFile);
 		}
 		else
 		{
-			planetId = recRx.cap(1).trimmed();
-			nativeName = recRx.cap(2).trimmed();
-			nativeNameMeaning = recRx.cap(3).trimmed();
+			planetId          = match.captured(1).trimmed();
+			nativeName        = match.captured(2).trimmed();
+			nativeNameMeaning = match.captured(3).trimmed();
 			planetNativeNamesMap[planetId] = nativeName;
 			planetNativeNamesMeaningMap[planetId] = nativeNameMeaning;
 			readOk++;
@@ -466,7 +494,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		Vec3d screenpos;
+		Vec3f screenpos;
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos))
 			return;
@@ -474,23 +502,23 @@ void SolarSystem::drawPointer(const StelCore* core)
 		StelPainter sPainter(prj);
 		sPainter.setColor(getPointerColor());
 
-		double size = obj->getAngularSize(core)*M_PI_180*prj->getPixelPerRadAtCenter()*2.;
+		float screenSize = static_cast<float>(obj->getAngularRadius(core))*prj->getPixelPerRadAtCenter()*M_PI_180f*2.f;
 		
-		const double scale = prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio();
-		size+= scale * (45. + 10.*std::sin(2. * StelApp::getInstance().getAnimationTime()));
+		const float scale = static_cast<float>(prj->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio();
+		screenSize+= scale * (45.f + 10.f*std::sin(2.f * static_cast<float>(StelApp::getInstance().getAnimationTime())));
 
 		texPointer->bind();
 
 		sPainter.setBlending(true);
 
-		size*=0.5;
-		const double angleBase = StelApp::getInstance().getAnimationTime() * 10;
+		screenSize*=0.5f;
+		const float angleBase = static_cast<float>(StelApp::getInstance().getAnimationTime()) * 10;
 		// We draw 4 instances of the sprite at the corners of the pointer
 		for (int i = 0; i < 4; ++i)
 		{
-			const double angle = angleBase + i * 90;
-			const double x = screenpos[0] + size * cos(angle / 180 * M_PI);
-			const double y = screenpos[1] + size * sin(angle / 180 * M_PI);
+			const float angle = angleBase + i * 90;
+			const float x = screenpos[0] + screenSize * cos(angle * M_PI_180f);
+			const float y = screenpos[1] + screenSize * sin(angle * M_PI_180f);
 			sPainter.drawSprite2dMode(x, y, 10, angle);
 		}
 	}
@@ -550,7 +578,7 @@ void SolarSystem::loadPlanets()
 			//qCritical() << "We should not be here!";
 
 			qDebug() << "Removing minor bodies";
-			for (const auto& p : systemPlanets)
+			for (const auto& p : qAsConst(systemPlanets))
 			{
 				// We can only delete minor objects now!
 				if (p->pType >= Planet::isAsteroid)
@@ -566,7 +594,7 @@ void SolarSystem::loadPlanets()
 			//If the file is in the user data directory, rename it:
 			if (solarSystemFile.contains(StelFileMgr::getUserDir()))
 			{
-				QString newName = QString("%1/data/ssystem-%2.ini").arg(StelFileMgr::getUserDir()).arg(QDateTime::currentDateTime().toString("yyyyMMddThhmmss"));
+				QString newName = QString("%1/data/ssystem-%2.ini").arg(StelFileMgr::getUserDir(), QDateTime::currentDateTime().toString("yyyyMMddThhmmss"));
 				if (QFile::rename(solarSystemFile, newName))
 					qWarning() << "Invalid Solar System file" << QDir::toNativeSeparators(solarSystemFile) << "has been renamed to" << QDir::toNativeSeparators(newName);
 				else
@@ -741,7 +769,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 		else
 #endif
-		if ((coordFuncName=="kepler_orbit") || (coordFuncName=="comet_orbit") || (coordFuncName=="ell_orbit")) // ell_orbit used for planet moons. TODO in V0.21: remove non-kepler_orbit!
+		if ((coordFuncName=="kepler_orbit") || (coordFuncName=="comet_orbit") || (coordFuncName=="ell_orbit")) // ell_orbit used for planet moons. TBD in V1.0: remove non-kepler_orbit!
 		{
 			// ell_orbit was used for planet moons, comet_orbit for minor bodies. The only difference is that pericenter distance for moons is given in km, not AU.
 			// Read the orbital elements			
@@ -799,8 +827,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			}
 
 			double time_at_pericenter = pd.value(secname+"/orbit_TimeAtPericenter",-1e100).toDouble();
+			// In earlier times (up to 0.21.2) we did not care much to store orbital epoch for comets but silently assumed T for it in various places.
+			// However, the distinction is relevant to discern element sets for various valid ranges.
+			// Comet orbits epoch should default to T while planets or moons default to J2000.
+			const double epoch = pd.value(secname+"/orbit_Epoch", type=="comet" ? time_at_pericenter : J2000).toDouble();
 			if (time_at_pericenter <= -1e100) {
-				const double epoch = pd.value(secname+"/orbit_Epoch",J2000).toDouble();
 				double mean_anomaly = pd.value(secname+"/orbit_MeanAnomaly",-1e100).toDouble()*(M_PI/180.0);
 				if (mean_anomaly <= -1e10) {
 					double mean_longitude = pd.value(secname+"/orbit_MeanLongitude",-1e100).toDouble()*(M_PI/180.0);
@@ -851,18 +882,19 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				parent_rot_j2000_longitude = atan2(J2000NodeOrigin*OrbitAxis1,J2000NodeOrigin*OrbitAxis0);
 			}
 
-			const double orbitGoodDays=pd.value(secname+"/orbit_good", parent->englishName!="Sun" ? 0 : 1000).toDouble(); // "Moons" have permanently good orbits.
+			const double orbitGoodDays=pd.value(secname+"/orbit_good", parent->englishName!="Sun" ? 0. : -1.).toDouble(); // "Moons" have permanently good orbits.
 			const double inclination = pd.value(secname+"/orbit_Inclination", 0.0).toDouble()*(M_PI/180.0);
 
 			// Create a Keplerian orbit. This has been called CometOrbit before 0.20.
 			//qDebug() << "Creating KeplerOrbit for" << parent->englishName << "---" << englishName;
-			KeplerOrbit *orb = new KeplerOrbit(pericenterDistance,     // [AU]
+			KeplerOrbit *orb = new KeplerOrbit(epoch,                  // JDE
+							   pericenterDistance,     // [AU]
 							   eccentricity,           // 0..>1 (>>1 for Interstellar objects)
 							   inclination,            // [radians]
 							   ascending_node,         // [radians]
 							   arg_of_pericenter,      // [radians]
-							   time_at_pericenter,     // JD
-							   orbitGoodDays,          // orbitGoodDays. 0=always good.
+							   time_at_pericenter,     // JDE
+							   orbitGoodDays,          // orbitGoodDays. 0=always good, -1=compute_half_orbit_duration
 							   meanMotion,             // [radians/day]
 							   parentRotObliquity,     // [radians]
 							   parent_rot_asc_node,    // [radians]
@@ -942,8 +974,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			minorBodies << englishName;
 
 			Vec3f color = Vec3f(1.f, 1.f, 1.f);
-			const float bV = pd.value(secname+"/color_index_bv", 99.f).toFloat();
-			if (bV<99.f)
+			const double bV = pd.value(secname+"/color_index_bv", 99.).toDouble();
+			if (bV<99.)
 				color = skyDrawer->indexToColor(BvToColorIndex(bV))*0.75f; // see ZoneArray.cpp:L490
 			else
 				color = Vec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString());
@@ -979,7 +1011,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				mp->setAbsoluteMagnitudeAndSlope(magnitude, qBound(0.0f, slope, 1.0f));
 			}
 
-			mp->setColorIndexBV(bV);
+			mp->setColorIndexBV(static_cast<float>(bV));
 			mp->setSpectralType(pd.value(secname+"/spec_t", "").toString(), pd.value(secname+"/spec_b", "").toString());
 			if (semi_major_axis>0)
 				mp->deltaJDE = 2.0*semi_major_axis*StelCore::JD_SECOND;
@@ -1271,7 +1303,8 @@ void SolarSystem::computeTransMatrices(double dateJDE, const Vec3d& observerPos)
 }
 
 // And sort them from the furthest to the closest to the observer
-struct biggerDistance : public std::binary_function<PlanetP, PlanetP, bool>
+// NOTE: std::binary_function is deprecated in C++11 and removed in C++17
+struct biggerDistance : public StelUtils::binary_function<PlanetP, PlanetP, bool>
 {
 	bool operator()(PlanetP p1, PlanetP p2)
 	{
@@ -1283,6 +1316,9 @@ struct biggerDistance : public std::binary_function<PlanetP, PlanetP, bool>
 // We are supposed to be in heliocentric coordinate
 void SolarSystem::draw(StelCore* core)
 {
+	// AstroCalcDialog
+	drawEphemerisItems(core);
+
 	if (!flagShow)
 		return;
 
@@ -1295,7 +1331,7 @@ void SolarSystem::draw(StelCore* core)
 	}
 
 	// And sort them from the furthest to the closest
-	sort(systemPlanets.begin(),systemPlanets.end(),biggerDistance());
+	std::sort(systemPlanets.begin(),systemPlanets.end(),biggerDistance());
 
 	if (trailFader.getInterstate()>0.0000001f)
 	{
@@ -1317,18 +1353,24 @@ void SolarSystem::draw(StelCore* core)
 	// Draw the elements
 	for (const auto& p : qAsConst(systemPlanets))
 	{
-		p->draw(core, maxMagLabel, planetNameFont);
+		if ( (p->getEnglishName() != "Sun") ||
+				((p->getEnglishName() == "Sun") && !(core->getSkyDrawer()->getFlagDrawSunAfterAtmosphere())))
+			p->draw(core, maxMagLabel, planetNameFont);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagPointer())
 		drawPointer(core);
+}
 
-	// AstroCalcDialog
-	if (getFlagEphemerisMarkers())
-		drawEphemerisMarkers(core);		
-
-	if (getFlagEphemerisLine())
-		drawEphemerisLine(core);
+void SolarSystem::drawEphemerisItems(const StelCore* core)
+{
+	if (flagShow || (!flagShow && getFlagEphemerisAlwaysOn()))
+	{
+		if (getFlagEphemerisMarkers())
+			drawEphemerisMarkers(core);
+		if (getFlagEphemerisLine())
+			drawEphemerisLine(core);
+	}
 }
 
 Vec3f SolarSystem::getEphemerisMarkerColor(int index) const
@@ -1377,7 +1419,6 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 		if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisList[i].coord, win)))
 			continue;
 
-		float solarAngle=0.f; // Angle to possibly rotate the texture. Degrees.
 		QString debugStr; // Used temporarily for development
 		const bool isComet=AstroCalcDialog::EphemerisList[i].isComet;
 		if (i == AstroCalcDialog::DisplayedPositionIndex)
@@ -1403,17 +1444,18 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 			if ((showDates || showMagnitudes) && showSkippedData && ((i + 1)%dataStep)!=1 && dataStep!=1)
 				continue;
 		}
-		Vec3d win;
+		Vec3f win;
+		float solarAngle=0.f; // Angle to possibly rotate the texture. Degrees.
 		if (prj->project(AstroCalcDialog::EphemerisList[i].coord, win))
 		{
 			if (isComet)
 			{
 				// compute solarAngle in screen space.
-				Vec3d sunWin;
+				Vec3f sunWin;
 				prj->project(AstroCalcDialog::EphemerisList[i].sunCoord, sunWin);
 				// TODO: In some projections, we may need to test result and flip/mirror the angle, or deal with wrap-around effects.
 				// E.g., in cylindrical mode, the comet icon will flip as soon as the corresponding sun position wraps around the screen edge.
-				solarAngle=M_180_PIf*static_cast<float>(atan2(-(win[1]-sunWin[1]), win[0]-sunWin[0]));
+				solarAngle=M_180_PIf*(atan2(-(win[1]-sunWin[1]), win[0]-sunWin[0]));
 				// This will show projected positions and angles usable in labels.
 				debugStr = QString("Sun: %1/%2 Obj: %3/%4 -->%5").arg(QString::number(sunWin[0]), QString::number(sunWin[1]), QString::number(win[0]), QString::number(win[1]), QString::number(solarAngle));
 			}
@@ -1737,7 +1779,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 		equPos = p->getJ2000EquatorialPos(core);
 		equPos.normalize();
 
-		cosAngularSize = std::cos(p->getSpheroidAngularSize(core) * M_PI/180.);
+		cosAngularSize = std::cos(p->getSpheroidAngularRadius(core) * M_PI/180.);
 
 		if (equPos*v>=std::min(cosLimFov, cosAngularSize) && p->getEnglishName()!=weAreHere)
 		{
@@ -1979,7 +2021,7 @@ bool SolarSystem::nearLunarEclipse() const
 	Vec3d shadow = en * (e.length() + m.length());
 
 	// find shadow radii in AU
-	double r_penumbra = shadow.length()*702378.1/AU/e.length() - 696000./AU;
+	double r_penumbra = shadow.length()*702378.1/AU/e.length() - SUN_RADIUS/AU;
 
 	// modify shadow location for scaled moon
 	Vec3d mdist = shadow - mh;
@@ -2088,6 +2130,21 @@ void SolarSystem::setFlagEphemerisLine(bool b)
 bool SolarSystem::getFlagEphemerisLine() const
 {
 	return ephemerisLineDisplayed;
+}
+
+bool SolarSystem::getFlagEphemerisAlwaysOn() const
+{
+	return ephemerisAlwaysOn;
+}
+
+void SolarSystem::setFlagEphemerisAlwaysOn(bool b)
+{
+	if (b != ephemerisAlwaysOn)
+	{
+		ephemerisAlwaysOn = b;
+		conf->setValue("astrocalc/flag_ephemeris_alwayson", b); // Immediate saving of state
+		emit ephemerisAlwaysOnChanged(b);
+	}
 }
 
 void SolarSystem::setFlagEphemerisHorizontalCoordinates(bool b)
@@ -2953,14 +3010,15 @@ void SolarSystem::reloadPlanets()
 	setFlagOrbits(flagOrbits);
 	setFlagNativePlanetNames(flagNative);
 
+	// Restore translations
+	updateI18n();
+
 	if (hasSelection)
 	{
 		// Restore selection...
-		objMgr->setSelectedObject(selectedObject);
+		StelObjectP obj = selectedObject[0];
+		objMgr->findAndSelect(obj->getEnglishName(), obj->getType());
 	}
-
-	// Restore translations
-	updateI18n();
 
 	emit solarSystemDataReloaded();
 }
@@ -3022,57 +3080,43 @@ int SolarSystem::getOrbitsThickness() const
 	return Planet::orbitsThickness;
 }
 
-
-void SolarSystem::setFlagCustomGrsSettings(bool b)
+void SolarSystem::setGrsLongitude(int longitude)
 {
-	RotationElements::flagCustomGrsSettings=b;
-	// automatic saving of the setting
-	conf->setValue("astro/flag_grs_custom", b);
-	emit flagCustomGrsSettingsChanged(b);
-}
-
-bool SolarSystem::getFlagCustomGrsSettings() const
-{
-	return RotationElements::flagCustomGrsSettings;
-}
-
-void SolarSystem::setCustomGrsLongitude(int longitude)
-{
-	RotationElements::customGrsLongitude = longitude;
+	RotationElements::grsLongitude = longitude;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_longitude", longitude);
-	emit customGrsLongitudeChanged(longitude);
+	emit grsLongitudeChanged(longitude);
 }
 
-int SolarSystem::getCustomGrsLongitude() const
+int SolarSystem::getGrsLongitude() const
 {
-	return RotationElements::customGrsLongitude;
+	return static_cast<int>(RotationElements::grsLongitude);
 }
 
-void SolarSystem::setCustomGrsDrift(double drift)
+void SolarSystem::setGrsDrift(double drift)
 {
-	RotationElements::customGrsDrift = drift;
+	RotationElements::grsDrift = drift;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_drift", drift);
-	emit customGrsDriftChanged(drift);
+	emit grsDriftChanged(drift);
 }
 
-double SolarSystem::getCustomGrsDrift() const
+double SolarSystem::getGrsDrift() const
 {
-	return RotationElements::customGrsDrift;
+	return RotationElements::grsDrift;
 }
 
-void SolarSystem::setCustomGrsJD(double JD)
+void SolarSystem::setGrsJD(double JD)
 {
-	RotationElements::customGrsJD = JD;
+	RotationElements::grsJD = JD;
 	// automatic saving of the setting
 	conf->setValue("astro/grs_jd", JD);
-	emit customGrsJDChanged(JD);
+	emit grsJDChanged(JD);
 }
 
-double SolarSystem::getCustomGrsJD()
+double SolarSystem::getGrsJD()
 {
-	return RotationElements::customGrsJD;
+	return RotationElements::grsJD;
 }
 
 void SolarSystem::setFlagEarthShadowEnlargementDanjon(bool b)

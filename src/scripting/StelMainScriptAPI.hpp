@@ -42,7 +42,7 @@ class StelMainScriptAPI : public QObject
 
 public:
 	StelMainScriptAPI(QObject *parent = Q_NULLPTR);
-	~StelMainScriptAPI();
+	~StelMainScriptAPI() Q_DECL_OVERRIDE;
 
 // These functions will be available in scripts
 public slots:
@@ -221,6 +221,9 @@ public slots:
 	//! - elongation : elongation of object in radians (for Solar system objects only!)
 	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
 	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
+	//! - ecl-elongation : elongation (difference in ecliptical longitude) of object in radians (for Solar system objects and from Earth only!)
+	//! - ecl-elongation-dms : elongation (difference in ecliptical longitude) of object in DMS (for Solar system objects and from Earth only!)
+	//! - ecl-elongation-deg : elongation (difference in ecliptical longitude) of object in decimal degrees (for Solar system objects and from Earth only!)
 	//! - velocity: the planet velocity around the parent planet in ecliptical coordinates in AU/d (for Solar system objects only!)
 	//! - velocity-kms: the planet velocity around the parent planet in km/s (for Solar system objects only!)
 	//! - heliocentric-velocity: the planet's heliocentric velocity in the solar system in ecliptical coordinates in AU/d (for Solar system objects only!)
@@ -538,8 +541,7 @@ public slots:
 	//! @todo allow alpha in images?
 	//! @param id a string ID to be used when referring to this
 	//! image (e.g. when changing the displayed status or deleting it.
-	//! @param filename the file name of the image.  If a relative
-	//! path is specified, "scripts/" will be prefixed before the
+	//! @param filename the file name of the image. "scripts/" will be prefixed before the
 	//! image is searched for using StelFileMgr.
 	//! @param lon0 The right ascension/longitude/azimuth of the first corner of the image in degrees (bottom left)
 	//! @param lat0 The declination/latitude/altitude of the first corner of the image in degrees (bottom left)
@@ -763,7 +765,7 @@ public slots:
 	static void pauseScript();
 
 	//! Set the amount of selected object information to display
-	//! @param level can be "AllInfo", "ShortInfo", "None"
+	//! @param level can be "AllInfo", "DefaultInfo", "ShortInfo", "None", "Custom"
 	static void setSelectedObjectInfo(const QString& level);
 
 	//! Stop the script
@@ -881,6 +883,40 @@ public slots:
 	//! Get the current status of media playback support.
 	//! @return The current status of media playback support.
 	static bool isMediaPlaybackSupported(void);
+
+	//! Experimental. Allow setting physical display properties for tonemapping.
+	//! The standard value is 100cd/m^2, appropriate for CRTs. More modern screens often have more.
+	//! Increasing the value makes most of the sky darker, to allow saving the highest tones for the brightest lights (esp. the Sun).
+	//! @note This is experimental and may not be available in later versions.
+	static void setDisplayMaxLuminance(double cdPerSqM);
+	//! Experimental.
+	//! @return configured physical display luminance for tonemapping.
+	//! The standard value is 100cd/m^2, appropriate for CRTs. More modern screens often have more.
+	//! @note This is experimental and may not be available in later versions.
+	static double getDisplayMaxLuminance();
+	//! Experimental. Allow setting physical display adaptation luminance for tonemapping.
+	//! The standard value is 50cd/m^2, appropriate for CRTs in dimly lit office environments.
+	//! TBD true?: Increasing the value makes most of the sky darker, to allow saving the highest tones for the brightest lights (esp. the Sun).
+	//! @note This is experimental and may not be available in later versions.
+	static void setDisplayAdaptationLuminance(double cdPerSqM);
+	//! Experimental.
+	//! @return configured physical display adaptation luminance for tonemapping.
+	//! The standard value is 50cd/m^2, appropriate for CRTs in dimly lit office environments.
+	//! @note This is experimental and may not be available in later versions.
+	static double getDisplayAdaptationLuminance();
+	//! Experimental: Set the display gamma
+	//! @param gamma the gamma. Initial default value is 2.2222 (for a CRT), and
+	//! sRGB LCD (and similar modern) panels try to reproduce that. This method allows overriding for other sky tones.
+	//! Higher gamma makes the sky brighter.
+	//! @note It may be technically an error to deviate from the defaults!
+	//! @note Only the blue-sky (atmosphere) model is influenced, not the foreground (landscape)
+	//! @note This is experimental and may not be available in later versions.
+	static void setDisplayGamma(double gamma);
+	//! Experimental: Get the display gamma. Initial default value is 2.2222 (for a CRT), and
+	//! sRGB LCD (and similar modern) panels try to reproduce that.
+	//! Higher gamma makes the sky brighter.
+	//! @note This is experimental and may not be available in later versions.
+	static double getDisplayGamma();
 
 signals:
 	void requestLoadSkyImage(const QString& id, const QString& filename,

@@ -45,7 +45,12 @@ inline GLuint makeBayerPatternTexture(QOpenGLFunctions& gl)
 		15/64.f, 47/64.f,  7/64.f, 39/64.f, 13/64.f, 45/64.f,  5/64.f, 37/64.f,
 		63/64.f, 31/64.f, 55/64.f, 23/64.f, 61/64.f, 29/64.f, 53/64.f, 21/64.f
 	};
+// OpenGL ES has different defined formats. However, the shader will use the red channel, so this should work:
+#if defined(QT_OPENGL_ES_2)
+	gl.glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 8, 8, 0, GL_LUMINANCE, GL_FLOAT, bayerPattern);
+#else
 	gl.glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, 8, 8, 0, GL_RED, GL_FLOAT, bayerPattern);
+#endif
 	return tex;
 }
 

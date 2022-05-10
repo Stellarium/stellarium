@@ -54,7 +54,7 @@ public:
 	//!        In order to get a small image on screen which you might want to grow later, load with this scale=1 and setScale() later.
 	//! @param fadeDuration the time it takes for screen images to fade in/out/change alpha in seconds.
 	ScreenImage(const QString& filename, qreal x, qreal y, bool show=false, qreal scale=1., qreal alpha=1., float fadeDuration=1.);
-	virtual ~ScreenImage();
+	virtual ~ScreenImage() Q_DECL_OVERRIDE;
 
 	//! Draw the image.
 	//! @param core the StelCore object
@@ -128,16 +128,16 @@ class ScreenImageMgr : public StelModule
 public:
 	//! Construct a ScreenImageMgr object.
 	ScreenImageMgr(); 
-	virtual ~ScreenImageMgr();
+	virtual ~ScreenImageMgr() Q_DECL_OVERRIDE;
  
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init();
-	virtual void draw(StelCore* core);
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 	//! Update time-dependent parts of the module.
-	virtual void update(double deltaTime);
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
 	//! Defines the order in which the various modules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 public slots:
 	//! Create an image from a file and display on the screen at x,y coordinates.

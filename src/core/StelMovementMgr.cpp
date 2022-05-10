@@ -94,6 +94,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, isMouseMovingVert(false)
 	, flagEnableMoveAtScreenEdge(false)
 	, flagEnableMouseNavigation(true)
+	, flagEnableMouseZooming(true)
 	, mouseZoomSpeed(30)
 	, flagEnableZoomKeys(true)
 	, flagEnableMoveKeys(true)
@@ -165,6 +166,7 @@ void StelMovementMgr::init()
 	flagManualZoom = conf->value("navigation/flag_manual_zoom").toBool();
 	flagAutoZoomOutResetsDirection = conf->value("navigation/auto_zoom_out_resets_direction", true).toBool();
 	flagEnableMouseNavigation = conf->value("navigation/flag_enable_mouse_navigation",true).toBool();
+	flagEnableMouseZooming = conf->value("navigation/flag_enable_mouse_zooming",true).toBool();
 	flagIndicationMountMode = conf->value("gui/flag_indication_mount_mode", false).toBool();
 
 	minFov = conf->value("navigation/min_fov",0.001389).toDouble(); // default: minimal FOV = 5"
@@ -517,7 +519,7 @@ void StelMovementMgr::handleKeys(QKeyEvent* event)
 //! Handle mouse wheel events.
 void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 {
-	if (flagEnableMouseNavigation==false)
+	if (flagEnableMouseZooming==false)
 		return;
 
 	// This managed only vertical wheel events.
@@ -534,7 +536,7 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 			StelUtils::getDateFromJulianDay(jdNow, &year, &month, &day);
 			StelUtils::getTimeFromJulianDay(jdNow, &hour, &min, &sec, &millis);
 			double jdNew;
-			StelUtils::getJDFromDate(&jdNew, year+qRound(numSteps), month, day, hour, min, sec);
+			StelUtils::getJDFromDate(&jdNew, year+qRound(numSteps), month, day, hour, min, static_cast<float>(sec));
 			core->setJD(jdNew);
 			emit core->dateChanged();			
 			emit core->dateChangedByYear();
@@ -580,7 +582,7 @@ void StelMovementMgr::addTimeDragPoint(int x, int y)
 bool StelMovementMgr::handlePinch(qreal scale, bool started)
 {
 #ifdef Q_OS_WIN
-	if (flagEnableMouseNavigation == false)
+	if (flagEnableMouseNavigation == false || flagEnableMouseZooming==false)
 		return true;
 #endif
 

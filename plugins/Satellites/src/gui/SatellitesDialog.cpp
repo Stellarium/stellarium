@@ -223,6 +223,9 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->satOrbitColorPickerButton,  SIGNAL(clicked(bool)), this, SLOT(askSatOrbitColor()));
 	connect(ui->satInfoColorPickerButton,   SIGNAL(clicked(bool)), this, SLOT(askSatInfoColor()));
 	connect(ui->descriptionTextEdit,        SIGNAL(textChanged()), this, SLOT(descriptionTextChanged()));
+	// Satellites tab / TLE group
+	connectIntProperty(ui->validAgeSpinBox, "Satellites.tleEpochAgeDays");
+	connect(ui->validAgeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateFilteredSatellitesList()));
 
 	connect(ui->groupsListWidget, SIGNAL(itemChanged(QListWidgetItem*)),
 		     this, SLOT(handleGroupChanges(QListWidgetItem*)));
@@ -285,7 +288,7 @@ void SatellitesDialog::askSatMarkerColor()
 	QColor c = QColorDialog::getColor(buttonMarkerColor, &StelMainView::getInstance(), "");
 	if (c.isValid())
 	{
-		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		Vec3f vColor = Vec3d(c.redF(), c.greenF(), c.blueF()).toVec3f();
 		SatelliteP sat;
 		// colourize all selected satellites
 		for (int i = 0; i < selection.size(); i++)
@@ -313,7 +316,7 @@ void SatellitesDialog::askSatOrbitColor()
 	QColor c = QColorDialog::getColor(buttonOrbitColor, &StelMainView::getInstance(), "");
 	if (c.isValid())
 	{
-		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		Vec3f vColor = Vec3d(c.redF(), c.greenF(), c.blueF()).toVec3f();
 		SatelliteP sat;
 		// colourize all selected satellites
 		for (int i = 0; i < selection.size(); i++)
@@ -341,7 +344,7 @@ void SatellitesDialog::askSatInfoColor()
 	QColor c = QColorDialog::getColor(buttonInfoColor, &StelMainView::getInstance(), "");
 	if (c.isValid())
 	{
-		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		Vec3f vColor = Vec3d(c.redF(), c.greenF(), c.blueF()).toVec3f();
 		SatelliteP sat;
 		// colourize all selected satellites
 		for (int i = 0; i < selection.size(); i++)
@@ -398,6 +401,8 @@ void SatellitesDialog::filterListByGroup(int index)
 		filterModel->setSecondaryFilters(QString(), SatNoFlags);
 	else if (groupId == "[displayed]")
 		filterModel->setSecondaryFilters(QString(), SatDisplayed);
+	else if (groupId == "[userdefined]")
+		filterModel->setSecondaryFilters(QString(), SatUser);
 	else if (groupId == "[undisplayed]")
 		filterModel->setSecondaryFilters(QString(), SatNotDisplayed);
 	else if (groupId == "[newlyadded]")
@@ -420,6 +425,8 @@ void SatellitesDialog::filterListByGroup(int index)
 		filterModel->setSecondaryFilters(QString(), SatHEO);
 	else if (groupId == "[HGSO]")
 		filterModel->setSecondaryFilters(QString(), SatHGSO);
+	else if (groupId == "[outdatedTLE]")
+		filterModel->setSecondaryFilters(QString(), SatOutdatedTLE);
 	else
 		filterModel->setSecondaryFilters(groupId, SatNoFlags);
 
@@ -434,6 +441,15 @@ void SatellitesDialog::filterListByGroup(int index)
 		first = ui->satellitesList->model()->index(0, 0);
 	selectionModel->setCurrentIndex(first, QItemSelectionModel::NoUpdate);
 	ui->satellitesList->scrollTo(first);
+}
+
+void SatellitesDialog::updateFilteredSatellitesList()
+{
+	QString groupId = ui->groupFilterCombo->currentData(Qt::UserRole).toString();
+	if (groupId == "[outdatedTLE]")
+	{
+		filterListByGroup(ui->groupFilterCombo->currentIndex());
+	}
 }
 
 void SatellitesDialog::updateSatelliteAndSaveData()
@@ -684,9 +700,6 @@ void SatellitesDialog::saveSatellites(void)
 
 void SatellitesDialog::populateAboutPage()
 {
-	// Regexp to replace {text} with an HTML link.
-	//QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-
 	QString jsonFileName("<tt>satellites.json</tt>");
 	QString oldJsonFileName("<tt>satellites.json.old</tt>");
 	QString html = "<html><head></head><body>";
@@ -697,7 +710,7 @@ void SatellitesDialog::populateAboutPage()
 	html += "<tr><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></tr>";
 	html += "<tr><td rowspan=\"5\"><strong>" + q_("Contributors") + "</strong></td><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt;</td></tr>";
 	html += "<tr><td>Nick Fedoseev &lt;nick.ut2uz@gmail.com&gt;</td></tr>";
-	html += "<tr><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr><td>Alexander Wolf</td></tr>";
 	html += "<tr><td>Alexander Duytschaever</td></tr>";
 	html += "<tr><td>Georg Zotti</td></tr></table>";
 
@@ -1013,6 +1026,8 @@ void SatellitesDialog::populateFilterMenu()
 	ui->groupFilterCombo->insertItem(0, q_("[HEO satellites]"), QVariant("[HEO]"));
 	// TRANSLATORS: HGEO = High geosynchronous orbit
 	ui->groupFilterCombo->insertItem(0, q_("[HGSO satellites]"), QVariant("[HGSO]"));
+	ui->groupFilterCombo->insertItem(0, q_("[outdated TLE]"), QVariant("[outdatedTLE]"));
+	ui->groupFilterCombo->insertItem(0, q_("[all user defined]"), QVariant("[userdefined]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all]"), QVariant("all"));
 
 	// Restore current selection

@@ -5,10 +5,12 @@ name: 'Auto Assign'
 on:
   pull_request_target:
     types: [opened, reopened, ready_for_review]
+    paths-ignore:
+      - 'skycultures/**'
 
 jobs:
   add-reviews:
     runs-on: ubuntu-latest
     name: Add reviews
     steps:
-      - uses: kentaro-m/auto-assign-action@v1.2.0
+      - uses: kentaro-m/auto-assign-action@v1.2.1

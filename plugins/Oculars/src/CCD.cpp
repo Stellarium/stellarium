@@ -71,31 +71,24 @@ static QMap<int, QString> mapping;
 QMap<int, QString> CCD::propertyMap()
 {
 	if(mapping.isEmpty()) {
-		mapping = QMap<int, QString>();
-		mapping[0] = "name";
-		mapping[1] = "chipHeight";
-		mapping[2] = "chipWidth";
-		mapping[3] = "resolutionX";
-		mapping[4] = "resolutionY";
-		mapping[5] = "chipRotAngle";
-		mapping[6] = "binningX";
-		mapping[7] = "binningY";
-		mapping[8] = "hasOAG";
-		mapping[9] = "prismHeight";
-		mapping[10] = "prismWidth";
-		mapping[11] = "prismDistance";
-		mapping[12] = "prismPosAngle";
+	mapping = {
+		{0 , "name"},
+		{1 , "chipHeight"},
+		{2 , "chipWidth"},
+		{3 , "resolutionX"},
+		{4 , "resolutionY"},
+		{5 , "chipRotAngle"},
+		{6 , "binningX"},
+		{7 , "binningY"},
+		{8 , "hasOAG"},
+		{9 , "prismHeight"},
+		{10, "prismWidth"},
+		{11, "prismDistance"},
+		{12, "prismPosAngle"}};
 	}
 	return mapping;
 }
 
-
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Instance Methods
-#endif
-/* ********************************************************************* */
 QString CCD::name() const
 {
 	return m_name;
@@ -286,12 +279,7 @@ void CCD::writeToSettings(QSettings * settings, const int index)
 	settings->setValue(prefix + "prism_distance", this->prismDistance());
 	settings->setValue(prefix + "prism_pos_angle", this->prismPosAngle());	
 }
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Static Methods
-#endif
-/* ********************************************************************* */
+
 CCD* CCD::ccdFromSettings(QSettings* settings, int ccdIndex)
 {
 	CCD* ccd = new CCD();

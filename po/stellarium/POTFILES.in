@@ -56,6 +56,7 @@ src/gui/ObsListCreateEditDialog.cpp
 src/gui/ConfigureDSOColorsDialog.cpp
 src/gui/ConfigureOrbitColorsDialog.cpp
 src/gui/DateTimeDialog.cpp
+src/gui/LightPollutionWidget.cpp
 src/scripting/StelScriptMgr.cpp
 src/main.cpp
 src/StelMainView.cpp
@@ -84,6 +85,9 @@ src/ui_obsListDialog.h
 src/ui_obsListCreateEditDialog.h
 src/ui_dsoColorsDialog.h
 src/ui_orbitColorsDialog.h
+src/ui_skylightDialog.h
+src/ui_tonemappingDialog.h
+src/ui_lightPollutionWidget.h
 
 # Plug-in translations
 # NOTE: Plugins should be enabled for building
@@ -199,6 +203,7 @@ plugins/Calendars/src/GregorianCalendar.cpp
 plugins/Calendars/src/ISOCalendar.cpp
 plugins/Calendars/src/IcelandicCalendar.cpp
 plugins/Calendars/src/JulianCalendar.cpp
+plugins/Calendars/src/RevisedJulianCalendar.cpp
 plugins/Calendars/src/MayaLongCountCalendar.cpp
 plugins/Calendars/src/MayaHaabCalendar.cpp
 plugins/Calendars/src/MayaTzolkinCalendar.cpp

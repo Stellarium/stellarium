@@ -20,6 +20,7 @@
 #ifndef STELSKYDRAWER_HPP
 #define STELSKYDRAWER_HPP
 
+#include "StelApp.hpp"
 #include "RefractionExtinction.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
@@ -28,6 +29,7 @@
 
 #include <QObject>
 #include <QImage>
+#include <QSettings>
 
 class StelToneReproducer;
 class StelCore;
@@ -54,7 +56,7 @@ class StelSkyDrawer : public QObject, protected QOpenGLFunctions
 	Q_PROPERTY(double absoluteStarScale READ getAbsoluteStarScale WRITE setAbsoluteStarScale NOTIFY absoluteStarScaleChanged)
 	Q_PROPERTY(double twinkleAmount READ getTwinkleAmount WRITE setTwinkleAmount NOTIFY twinkleAmountChanged)
 	Q_PROPERTY(bool flagStarTwinkle READ getFlagTwinkle WRITE setFlagTwinkle NOTIFY flagTwinkleChanged)
-	Q_PROPERTY(int bortleScaleIndex READ getBortleScaleIndex WRITE setBortleScaleIndex NOTIFY bortleScaleIndexChanged)
+	Q_PROPERTY(double lightPollutionLuminance READ getLightPollutionLuminance WRITE setLightPollutionLuminance NOTIFY lightPollutionLuminanceChanged)
 	Q_PROPERTY(bool flagDrawBigStarHalo READ getFlagDrawBigStarHalo WRITE setFlagDrawBigStarHalo NOTIFY flagDrawBigStarHaloChanged)
 	Q_PROPERTY(bool flagStarSpiky READ getFlagStarSpiky WRITE setFlagStarSpiky NOTIFY flagStarSpikyChanged)
 
@@ -73,11 +75,16 @@ class StelSkyDrawer : public QObject, protected QOpenGLFunctions
 	Q_PROPERTY(double atmosphereTemperature READ getAtmosphereTemperature WRITE setAtmosphereTemperature NOTIFY atmosphereTemperatureChanged)
 	Q_PROPERTY(double atmospherePressure READ getAtmospherePressure WRITE setAtmospherePressure NOTIFY atmospherePressureChanged)
 
+	Q_PROPERTY(bool flagDrawSunAfterAtmosphere READ getFlagDrawSunAfterAtmosphere WRITE setFlagDrawSunAfterAtmosphere NOTIFY flagDrawSunAfterAtmosphereChanged)
+	Q_PROPERTY(bool flagEarlySunHalo READ getFlagEarlySunHalo WRITE setFlagEarlySunHalo NOTIFY flagEarlySunHaloChanged)
+	Q_PROPERTY(bool flagTfromK READ getFlagTfromK WRITE setFlagTfromK NOTIFY flagTfromKChanged)
+	Q_PROPERTY(double turbidity READ getT WRITE setT NOTIFY turbidityChanged)
+
 public:
 	//! Constructor
 	StelSkyDrawer(StelCore* core);
 	//! Destructor
-	~StelSkyDrawer();
+	~StelSkyDrawer() Q_DECL_OVERRIDE;
 
 	//! Init parameters from config file
 	void init();
@@ -120,7 +127,8 @@ public:
 	//! @param illuminatedArea the illuminated area in arcmin^2
 	//! @param mag the source integrated magnitude
 	//! @param color the object halo RGB color
-	void postDrawSky3dModel(StelPainter* p, const Vec3f& v, float illuminatedArea, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f));
+	//! @param isSun the object is the sun (will be drawn with different texture)
+	void postDrawSky3dModel(StelPainter* p, const Vec3f& v, float illuminatedArea, float mag, const Vec3f& color = Vec3f(1.f,1.f,1.f), const bool isSun=false);
 
 	//! Compute RMag and CMag from magnitude.
 	//! @param mag the object integrated V magnitude
@@ -187,36 +195,14 @@ public slots:
 	//! @note option for planetariums
 	bool getFlagForcedTwinkle() const {return flagForcedTwinkle;}
 
-	//! Set the parameters so that the stars disappear at about the limit given by the bortle scale
+	//! Set the parameters so that the stars disappear at about the naked-eye limiting magnitude corresponding
+	//! to the given zenith luminance at moonless night.
 	//! The limit is valid only at a given zoom level (around 60 deg)
-	//! @see https://en.wikipedia.org/wiki/Bortle_scale
-	void setBortleScaleIndex(int index);
-	//! Get the current Bortle scale index
-	//! @see https://en.wikipedia.org/wiki/Bortle_scale
-	int getBortleScaleIndex() const {return bortleScaleIndex;}
-	//! Get the average Naked-Eye Limiting Magnitude (NELM) for current Bortle scale index:
-	//! Class 1 = NELM 7.6-8.0; average NELM is 7.8
-	//! Class 2 = NELM 7.1-7.5; average NELM is 7.3
-	//! Class 3 = NELM 6.6-7.0; average NELM is 6.8
-	//! Class 4 = NELM 6.1-6.5; average NELM is 6.3
-	//! Class 5 = NELM 5.6-6.0; average NELM is 5.8
-	//! Class 6 = NELM 5.1-5.5; average NELM is 5.3
-	//! Class 7 = NELM 4.6-5.0; average NELM is 4.8
-	//! Class 8 = NELM 4.1-4.5; average NELM is 4.3
-	//! Class 9 = NELM 4.0
-	float getNELMFromBortleScale() const;
-	//! Get the average Naked-Eye Limiting Magnitude (NELM) for given Bortle scale index [1..9]
-	//! Class 1 = NELM 7.6-8.0; average NELM is 7.8
-	//! Class 2 = NELM 7.1-7.5; average NELM is 7.3
-	//! Class 3 = NELM 6.6-7.0; average NELM is 6.8
-	//! Class 4 = NELM 6.1-6.5; average NELM is 6.3
-	//! Class 5 = NELM 5.6-6.0; average NELM is 5.8
-	//! Class 6 = NELM 5.1-5.5; average NELM is 5.3
-	//! Class 7 = NELM 4.6-5.0; average NELM is 4.8
-	//! Class 8 = NELM 4.1-4.5; average NELM is 4.3
-	//! Class 9 = NELM 4.0
-	//! @arg idx Bortle Scale Index (valid: 1..9, will be forced to valid range)
-	static float getNELMFromBortleScale(int idx);
+	void setLightPollutionLuminance(double luminance);
+	//! Get the current zenith luminance at moonless night.
+	double getLightPollutionLuminance() const {return lightPollutionLuminance;}
+
+	Q_DECL_DEPRECATED int getBortleScaleIndex() const;
 
 	//! Set flag for drawing a halo around bright stars.
 	void setFlagDrawBigStarHalo(bool b) {if(b!=flagDrawBigStarHalo){ flagDrawBigStarHalo=b; emit flagDrawBigStarHaloChanged(b);}}
@@ -313,6 +299,44 @@ public slots:
 	float getBig3dModelHaloRadius() const {return big3dModelHaloRadius;}
 	//! Set the radius of the big halo texture used when a 3d model is very bright.
 	void setBig3dModelHaloRadius(float r) {big3dModelHaloRadius=r;}
+
+	// GZ These are to find out the best sky parameters. Maybe keep this as program feature for debugging/expert mode?
+	// These will be connected from AtmosphereDialog and forward the settings to SkyLight class.
+
+	void setFlagDrawSunAfterAtmosphere(bool val){
+		flagDrawSunAfterAtmosphere=val;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		 conf->setValue("landscape/draw_sun_after_atmosphere",val);
+		 conf->sync();
+		 emit flagDrawSunAfterAtmosphereChanged(val);
+		}
+	bool getFlagDrawSunAfterAtmosphere() const {return flagDrawSunAfterAtmosphere;}
+	void setFlagEarlySunHalo(bool val){
+		flagEarlySunHalo= val;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->setValue("landscape/early_solar_halo", val);
+		conf->sync();
+		emit flagEarlySunHaloChanged(val);
+		}
+	bool getFlagEarlySunHalo() const {return flagEarlySunHalo;}
+
+	bool getFlagTfromK(void) const {return flagTfromK;}
+	void setFlagTfromK(bool val){
+		flagTfromK=val;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->setValue("landscape/use_T_from_k", val);
+		conf->sync();
+		emit flagTfromKChanged(val);
+		}
+
+		double getT(void) const {return static_cast<double>(turbidity);}
+	void setT(double newT){
+	    turbidity=static_cast<float>(newT);
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->setValue("landscape/turbidity", newT);
+		emit turbidityChanged(newT);
+		}
+
 signals:
 	//! Emitted whenever the relative star scale changed
 	void relativeStarScaleChanged(double b);
@@ -322,8 +346,8 @@ signals:
 	void twinkleAmountChanged(double b);
 	//! Emitted whenever the twinkle flag is toggled
 	void flagTwinkleChanged(bool b);
-	//! Emitted whenever the Bortle scale index changed
-	void bortleScaleIndexChanged(int index);
+	//! Emitted whenever light pollution luminance changed
+	void lightPollutionLuminanceChanged(double luminance);
 	//! Emitted when flag to draw big halo around stars changed
 	void flagDrawBigStarHaloChanged(bool b);
 	//! Emitted on change of star texture
@@ -351,7 +375,13 @@ signals:
 	void extinctionCoefficientChanged(double coeff);
 	void atmosphereTemperatureChanged(double celsius);
 	void atmospherePressureChanged(double mbar);
-	
+
+	// GZ atmosphere tweaks
+	void flagTfromKChanged(bool b);
+	void flagDrawSunAfterAtmosphereChanged(bool b);
+	void flagEarlySunHaloChanged(bool b);
+	void turbidityChanged(double t);
+
 private:
 	// Debug
 	float reverseComputeRCMag(float rmag) const;
@@ -465,8 +495,8 @@ private:
 	//! Contains the list of colors matching a given B-V index
 	static Vec3f colorTable[128];
 
-	//! The current Bortle Scale index
-	int bortleScaleIndex;
+	//! The current light pollution luminance
+	double lightPollutionLuminance;
 
 	//! The scaling applied to input luminance before they are converted by the StelToneReproducer
 	float inScale;
@@ -517,6 +547,11 @@ private:
 	double daylightLabelThreshold;
 
 	float big3dModelHaloRadius;
+	// Settings for Atmospheric tweaks:
+	bool flagDrawSunAfterAtmosphere;
+	bool flagEarlySunHalo; // Used to select if solar halo is plotted before (true) or after (default, false) the 3D sphere.
+	bool flagTfromK; // true to compute T from extinction k
+	float turbidity; // atmospheric turbidity: Preetham sky usable for 2<T<6, best at T=5.
 };
 
 #endif // STELSKYDRAWER_HPP

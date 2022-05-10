@@ -55,13 +55,13 @@ void GreatRedSpotDialog::createDialogContent()
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	SolarSystem* ss = GETSTELMODULE(SolarSystem);
-	connectIntProperty(ui->longitudeSpinBox, "SolarSystem.customGrsLongitude");
-	connectDoubleProperty(ui->driftDoubleSpinBox, "SolarSystem.customGrsDrift");
+	connectIntProperty(ui->longitudeSpinBox, "SolarSystem.grsLongitude");
+	connectDoubleProperty(ui->driftDoubleSpinBox, "SolarSystem.grsDrift");
 
 	const StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
 	QString fmt = QString("%1 hh:mm").arg(locmgr.getQtDateFormatStr());
 	ui->jdDateTimeEdit->setDisplayFormat(fmt);
-	ui->jdDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(ss->getCustomGrsJD()));
+	ui->jdDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(ss->getGrsJD()));
 	connect(ui->jdDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(setGrsJD(QDateTime)));
 
 	connect(ui->recentGrsMeasurementPushButton, SIGNAL(clicked(bool)), this, SLOT(openRecentGrsMeasurement()));
@@ -69,7 +69,7 @@ void GreatRedSpotDialog::createDialogContent()
 
 void GreatRedSpotDialog::setGrsJD(QDateTime dt)
 {
-	GETSTELMODULE(SolarSystem)->setCustomGrsJD(StelUtils::qDateTimeToJd(dt));
+	GETSTELMODULE(SolarSystem)->setGrsJD(StelUtils::qDateTimeToJd(dt));
 }
 
 void GreatRedSpotDialog::openRecentGrsMeasurement()

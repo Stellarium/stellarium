@@ -79,7 +79,7 @@ ShortcutsDialog::~ShortcutsDialog()
 void ShortcutsDialog::drawCollisions()
 {
 	QBrush brush(Qt::red);
-	for (auto* item : collisionItems)
+	for (auto* item : qAsConst(collisionItems))
 	{
 		// change colors of all columns for better visibility
 		item->setForeground(brush);
@@ -92,8 +92,8 @@ void ShortcutsDialog::drawCollisions()
 void ShortcutsDialog::resetCollisions()
 {
 	QBrush brush =
-	        ui->shortcutsTreeView->palette().brush(QPalette::Foreground);
-	for (auto* item : collisionItems)
+		ui->shortcutsTreeView->palette().brush(QPalette::Foreground);
+	for (auto* item : qAsConst(collisionItems))
 	{
 		item->setForeground(brush);
 		QModelIndex index = item->index();
@@ -151,7 +151,7 @@ bool ShortcutsDialog::prefixMatchKeySequence(const QKeySequence& ks1,
 	{
 		return false;
 	}
-	for (int i = 0; i < qMin(ks1.count(), ks2.count()); ++i)
+	for (uint i = 0; i < static_cast<uint>(qMin(ks1.count(), ks2.count())); ++i)
 	{
 		if (ks1[i] != ks2[i])
 		{
@@ -491,12 +491,12 @@ void ShortcutsDialog::restoreDefaultShortcuts()
 void ShortcutsDialog::updateTreeData()
 {
 	// Create shortcuts tree
-	QStringList groups = actionMgr->getGroupList();
+	const QStringList groups = actionMgr->getGroupList();
 	for (const auto& group : groups)
 	{
 		updateGroup(group);
 		// display group's shortcuts
-		QList<StelAction*> actions = actionMgr->getActionList(group);
+		const QList<StelAction*> actions = actionMgr->getActionList(group);
 		for (auto* action : actions)
 		{
 			updateShortcutsItem(action);

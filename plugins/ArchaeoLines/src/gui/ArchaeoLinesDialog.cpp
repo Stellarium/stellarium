@@ -17,6 +17,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QRegularExpression>
+
 #include "ArchaeoLines.hpp"
 #include "ArchaeoLinesDialog.hpp"
 #include "ui_archaeoLinesDialog.h"
@@ -132,8 +134,8 @@ void ArchaeoLinesDialog::createDialogContent()
 	setDisplayFormatForSpins(StelApp::getInstance().getFlagShowDecimalDegrees());
 	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setDisplayFormatForSpins(bool)));
 
-	connect(ui->geographicLocation1PickPushButton, &QPushButton::clicked, [=](){locationsDialog->setVisible(true); locationsDialog->setModalContext(1);});
-	connect(ui->geographicLocation2PickPushButton, &QPushButton::clicked, [=](){locationsDialog->setVisible(true); locationsDialog->setModalContext(2);});
+	connect(ui->geographicLocation1PickPushButton, &QPushButton::clicked, this, [=](){locationsDialog->setVisible(true); locationsDialog->setModalContext(1);});
+	connect(ui->geographicLocation2PickPushButton, &QPushButton::clicked, this, [=](){locationsDialog->setVisible(true); locationsDialog->setModalContext(2);});
 
 	connectBoolProperty(ui->geographicLocation1CheckBox,                 "ArchaeoLines.flagShowGeographicLocation1");
 	connectBoolProperty(ui->geographicLocation2CheckBox,                 "ArchaeoLines.flagShowGeographicLocation2");
@@ -204,7 +206,7 @@ void ArchaeoLinesDialog::createDialogContent()
 void ArchaeoLinesDialog::setAboutHtml(void)
 {
 	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
+	QRegularExpression a_rx("[{]([^{]*)[}]");
 
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("ArchaeoLines Plug-in") + "</h2><table width=\"90%\">";

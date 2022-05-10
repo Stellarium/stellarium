@@ -131,7 +131,7 @@ void StelProjector::init(const StelProjectorParams& params)
 
 QString StelProjector::getHtmlSummary() const
 {
-	return QString("<h3>%1</h3><p>%2</p><b>%3</b>%4").arg(getNameI18()).arg(getDescriptionI18()).arg(q_("Maximum FOV: ")).arg(static_cast<double>(getMaxFov()))+QChar(0x00B0);
+	return QString("<h3>%1</h3><p>%2</p><b>%3</b>%4°").arg(getNameI18(), getDescriptionI18(), q_("Maximum FOV: "), QString::number(static_cast<double>(getMaxFov())));
 }
 
 bool StelProjector::intersectViewportDiscontinuity(const Vec3d& p1, const Vec3d& p2) const

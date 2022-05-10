@@ -25,6 +25,7 @@
 
 #include <atlcomcli.h>
 #include <comdef.h>
+#include <QRegularExpression>
 
 #endif // Q_OS_WIN
 
@@ -43,16 +44,17 @@ bool ASCOMSupport::isASCOMSupported()
 	// OLE Problem
 	if (FAILED(hResult) || !initResult) {
 		return false;
-	};
+	}
 	
 	hResult = OlePropertyGet(utilDispatch, &v1, const_cast<wchar_t*>(LPlatformVersion));
 	QString version = QString::fromStdWString(v1.bstrVal);
 	QString majorVersion = "";
 
-	QRegExp versionRx("^([^\\.]*)\\.([^\\.]*)$");
-	if (versionRx.exactMatch(version))
+	static const QRegularExpression versionRx("^([^\\.]*)\\.([^\\.]*)$");
+	QRegularExpressionMatch versionMatch=versionRx.match(version);
+	if (versionMatch.hasMatch())
 	{
-		majorVersion = versionRx.cap(1).trimmed();
+		majorVersion = versionMatch.captured(1).trimmed();
 	}
 
 	// Check ASCOM Platform version to be 6 or greater

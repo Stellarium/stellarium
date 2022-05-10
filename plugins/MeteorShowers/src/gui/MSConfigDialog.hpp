@@ -38,21 +38,24 @@ public:
 	MSConfigDialog(MeteorShowersMgr *mgr);
 
 	//! Destructor
-	~MSConfigDialog();
+	~MSConfigDialog() Q_DECL_OVERRIDE;
 
 	//! Initializes the components based on the current settings
 	void init();
 
 protected:
 	//! Initializes the dialog and connect the signals/slots
-	void createDialogContent();
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 
 private slots:
 	//! Refresh details about the last update
 	void refreshUpdateTab();
+
+	void updateStateReceiver(MeteorShowersMgr::UpdateState state);
+	void updateCompleteReceiver();
 
 	//! Refresh the color of all markers
 	void refreshMarkersColor();
@@ -71,8 +74,9 @@ private slots:
 private:
 	MeteorShowersMgr* m_mgr;
 	Ui_MSConfigDialog* m_ui;
-
+	QTimer* m_updateTimer;
 	void setAboutHtml();
+	void updateGuiFromSettings(void);
 };
 
 #endif // MSCONFIGDIALOG_HPP

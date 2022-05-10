@@ -36,13 +36,13 @@ StelActionService::StelActionService(QObject *parent) : AbstractAPIService(paren
 
 void StelActionService::get(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
-	Q_UNUSED(parameters);
+	Q_UNUSED(parameters)
 
 	if(operation=="list")
 	{
 		//list all registered StelActions, this should be thread safe
 		QJsonObject groupObject;
-		for (auto group : actionMgr->getGroupList())
+		for (auto &group : actionMgr->getGroupList())
 		{
 			QJsonArray itemArray;
 			for (const auto* action : actionMgr->getActionList(group))
@@ -69,7 +69,7 @@ void StelActionService::get(const QByteArray& operation, const APIParameters &pa
 
 void StelActionService::post(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
-	Q_UNUSED(data);
+	Q_UNUSED(data)
 
 	if(operation == "do")
 	{

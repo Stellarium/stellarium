@@ -36,21 +36,19 @@ class Nebula : public StelObject
 {
 friend class NebulaMgr;
 
-	//Required for the correct working of the Q_FLAGS macro (which requires a MOC pass)
+	//Required for the correct working of the Q_FLAG macro (which requires a MOC pass)
 	Q_GADGET
-	Q_FLAGS(CatalogGroup)
-	Q_FLAGS(TypeGroup)
-	Q_ENUMS(NebulaType)
 public:
 	static const QString NEBULA_TYPE;
 
 	enum CatalogGroupFlags
 	{
+		CatNone		= 0x00000000, //!< Nothing selected
 		CatNGC		= 0x00000001, //!< New General Catalogue (NGC)
-		CatIC			= 0x00000002, //!< Index Catalogue (IC)
-		CatM			= 0x00000004, //!< Messier Catalog (M)
-		CatC			= 0x00000008, //!< Caldwell Catalogue (C)
-		CatB			= 0x00000010, //!< Barnard Catalogue (B)
+		CatIC		= 0x00000002, //!< Index Catalogue (IC)
+		CatM		= 0x00000004, //!< Messier Catalog (M)
+		CatC		= 0x00000008, //!< Caldwell Catalogue (C)
+		CatB		= 0x00000010, //!< Barnard Catalogue (B)
 		CatSh2		= 0x00000020, //!< Sharpless Catalogue (Sh 2)
 		CatLBN		= 0x00000040, //!< Lynds' Catalogue of Bright Nebulae (LBN)
 		CatLDN		= 0x00000080, //!< Lynds' Catalogue of Dark Nebulae (LDN)
@@ -71,34 +69,37 @@ public:
 		CatESO		= 0x00400000, //!< ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982) (ESO)
 		CatVdBH		= 0x00800000, //!< Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975) (vdBH)
 		CatDWB		= 0x01000000, //!< Catalogue and distances of optically visible H II regions (Dickel+, 1969) (DWB)
-		CatTr			= 0x02000000, //!< Trumpler Catalogue (Tr)
+		CatTr		= 0x02000000, //!< Trumpler Catalogue (Tr)
 		CatSt		= 0x04000000, //!< Stock Catalogue (St)
 		CatRu		= 0x08000000, //!< Ruprecht Catalogue (Ru)
-		CatVdBHa		= 0x10000000, //!< van den Bergh-Hagen Catalogue (vdB-Ha)
-		CatOther		= 0x20000000  //!< without ID
+		CatVdBHa	= 0x10000000, //!< van den Bergh-Hagen Catalogue (vdB-Ha)
+		CatOther		= 0x20000000, //!< without ID
+		CatAll              = 0xFFFFFFFF  //!< All catalogs selected
 	};
 	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
+	Q_FLAG(CatalogGroup)
 
 	enum TypeGroupFlags
 	{
-		TypeGalaxies			= 0x00000001, //!< Galaxies
+		TypeNone				= 0x00000000, //!< Nothing selected
+		TypeGalaxies				= 0x00000001, //!< Galaxies
 		TypeActiveGalaxies		= 0x00000002, //!< Different Active Galaxies
 		TypeInteractingGalaxies	= 0x00000004, //!< Interacting Galaxies
-		TypeOpenStarClusters	= 0x00000008, //!< Open Star Clusters
+		TypeOpenStarClusters		= 0x00000008, //!< Open Star Clusters
 		TypeGlobularStarClusters	= 0x00000010, //!< Globular Star Clusters
-		TypeHydrogenRegions	= 0x00000020, //!< Hydrogen Regions
-		TypeBrightNebulae		= 0x00000040, //!< Bright Nebulae
-		TypeDarkNebulae		= 0x00000080, //!< Dark Nebulae
-		TypePlanetaryNebulae	= 0x00000100, //!< Planetary Nebulae
+		TypeHydrogenRegions		= 0x00000020, //!< Hydrogen Regions
+		TypeBrightNebulae			= 0x00000040, //!< Bright Nebulae
+		TypeDarkNebulae			= 0x00000080, //!< Dark Nebulae
+		TypePlanetaryNebulae		= 0x00000100, //!< Planetary Nebulae
 		TypeSupernovaRemnants	= 0x00000200, //!< Supernova Remnants
 		TypeGalaxyClusters		= 0x00000400, //!< Galaxy Clusters
 		TypeOther				= 0x00000800  //!< Other objects
 	};
 	Q_DECLARE_FLAGS(TypeGroup, TypeGroupFlags)
+	Q_FLAG(TypeGroup)
 
 	//! A pre-defined set of specifiers for the catalogs filter
-	static const CatalogGroupFlags AllCatalogs = static_cast<CatalogGroupFlags>(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatArp|CatVV|CatPK|CatPNG|CatSNRG|CatACO|CatHCG|CatESO|CatVdBH|CatDWB|CatTr|CatSt|CatRu|CatOther);
-	static const TypeGroupFlags AllTypes = static_cast<TypeGroupFlags>(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeOpenStarClusters|TypeGlobularStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeGalaxyClusters|TypeOther);
+	static constexpr TypeGroup    AllTypes    = static_cast<TypeGroup>(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeOpenStarClusters|TypeGlobularStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeGalaxyClusters|TypeOther);
 
 	//! @enum NebulaType Nebula types
 	enum NebulaType
@@ -141,6 +142,7 @@ public:
 		NebRegion		= 35,	//!< Region of the sky
 		NebUnknown		= 36		//!< m Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
+	Q_ENUM(NebulaType)
 
 	Nebula();
 	~Nebula() Q_DECL_OVERRIDE;
@@ -179,7 +181,7 @@ public:
 	virtual QString getEnglishName() const Q_DECL_OVERRIDE {return englishName;}
 	QString getEnglishAliases() const;
 	QString getI18nAliases() const;
-	virtual double getAngularSize(const StelCore*) const Q_DECL_OVERRIDE;
+	virtual double getAngularRadius(const StelCore*) const Q_DECL_OVERRIDE;
 	virtual SphericalRegionP getRegion() const Q_DECL_OVERRIDE {return pointRegion;}
 
 	// Methods specific to Nebula
@@ -214,7 +216,7 @@ public:
 	float getSurfaceArea(void) const;
 
 	void setProperName(QString name) { englishName = name; }
-	void addNameAlias(QString name) { englishAliases.append(name); }
+	void addNameAlias(QString name) { englishAliases.append(name); englishAliases.removeDuplicates(); }
 	void removeAllNames() { englishName=""; englishAliases.clear(); }
 
 	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, vdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, ESO, vdBH, DWB, Tr, St, Ru, vdB-Ha)
@@ -240,7 +242,7 @@ private:
 	{
 		nameI18 = trans.qtranslate(englishName);
 		nameI18Aliases.clear();
-		for (auto alias : englishAliases)
+		for (auto &alias : englishAliases)
 			nameI18Aliases.append(trans.qtranslate(alias));
 	}	
 

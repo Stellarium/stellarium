@@ -43,9 +43,18 @@ StelVideoMgr::StelVideoMgr() : StelModule()
 #ifdef ENABLE_MEDIA
 StelVideoMgr::~StelVideoMgr()
 {
-	for (const auto& id : videoObjects.keys())
+	QMutableMapIterator<QString, StelVideoMgr::VideoPlayer*>it(videoObjects);
+	while (it.hasNext())
 	{
-		dropVideo(id);
+		it.next();
+		if (it.value()!=Q_NULLPTR)
+		{
+			it.value()->player->stop();
+			StelMainView::getInstance().scene()->removeItem(it.value()->videoItem);
+			delete it.value()->player;
+			delete it.value()->videoItem;
+			it.remove();
+		}
 	}
 }
 
@@ -240,7 +249,7 @@ void StelVideoMgr::playVideoPopout(const QString& id, float fromX, float fromY, 
 				qDebug() << "StelVideoMgr::playVideoPopout()" << id << ": size (resolution) not yet determined, cannot resize with -1 argument. Sorry, command stops here...";
 				return;
 			}
-			float aspectRatio=(float)videoSize.width()/(float)videoSize.height();
+			float aspectRatio=static_cast<float>(videoSize.width())/static_cast<float>(videoSize.height());
 			if (verbose)
 				qDebug() << "StelVideoMgr::playVideoPopout(): computed aspect ratio:" << aspectRatio;
 			if (finalSizeX!=-1.0f && finalSizeY!=-1.0f)
@@ -264,9 +273,9 @@ void StelVideoMgr::playVideoPopout(const QString& id, float fromX, float fromY, 
 
 			// (2) start position:
 			if (fromX>0 && fromX<1)
-				fromX *= viewportWidth;
+				fromX *= static_cast<float>(viewportWidth);
 			if (fromY>0 && fromY<1)
-				fromY *= viewportHeight;
+				fromY *= static_cast<float>(viewportHeight);
 			videoObjects[id]->popupOrigin= QPointF(fromX, fromY); // Pixel coordinates of popout point.
 			if (verbose)
 				qDebug() << "StelVideoMgr::playVideoPopout(): Resetting start position to :" << fromX << "/" << fromY;
@@ -274,9 +283,9 @@ void StelVideoMgr::playVideoPopout(const QString& id, float fromX, float fromY, 
 
 			// (3) center of target frame
 			if (atCenterX>0 && atCenterX<1)
-				atCenterX *= viewportWidth;
+				atCenterX *= static_cast<float>(viewportWidth);
 			if (atCenterY>0 && atCenterY<1)
-				atCenterY *= viewportHeight;
+				atCenterY *= static_cast<float>(viewportHeight);
 			videoObjects[id]->popupTargetCenter= QPointF(atCenterX, atCenterY); // Pixel coordinates of frame center
 			if (verbose)
 				qDebug() << "StelVideoMgr::playVideoPopout(): Resetting target position to :" << atCenterX << "/" << atCenterY;
@@ -391,9 +400,9 @@ void StelVideoMgr::setVideoXY(const QString& id, const float x, const float y, c
 			float newX=x;
 			float newY=y;
 			if (x>-1 && x<1)
-				newX *= viewportWidth;
+				newX *= static_cast<float>(viewportWidth);
 			if (y>-1 && y<1)
-				newY *= viewportHeight;
+				newY *= static_cast<float>(viewportHeight);
 			if (relative)
 			{
 				QPointF pos = videoObjects[id]->videoItem->pos();
@@ -433,9 +442,9 @@ void StelVideoMgr::resizeVideo(const QString& id, float w, float h)
 			int viewportHeight=StelMainView::getInstance().size().height();
 
 			if (w>0 && w<=1)
-				w*=viewportWidth;
+				w*=static_cast<float>(viewportWidth);
 			if (h>0 && h<=1)
-				h*=viewportHeight;
+				h*=static_cast<float>(viewportHeight);
 
 			QSize videoSize=videoObjects[id]->resolution;
 			if (verbose)
@@ -450,7 +459,7 @@ void StelVideoMgr::resizeVideo(const QString& id, float w, float h)
 				videoObjects[id]->targetFrameSize=QSizeF(w, h); // w|h can be -1 or >1, no longer 0<(w|h)<1.
 				return;
 			}
-			float aspectRatio=(float)videoSize.width()/(float)videoSize.height();
+			float aspectRatio=static_cast<float>(videoSize.width())/static_cast<float>(videoSize.height());
 			if (verbose)
 				qDebug() << "aspect ratio:" << aspectRatio; // 1 for invalid size.
 			if (w!=-1.0f && h!=-1.0f)
@@ -460,8 +469,8 @@ void StelVideoMgr::resizeVideo(const QString& id, float w, float h)
 				videoObjects[id]->videoItem->setAspectRatioMode(Qt::KeepAspectRatio);
 				if (w==-1.0f && h==-1.0f)
 				{
-					h=videoSize.height();
-					w=videoSize.width();
+					h=static_cast<float>(videoSize.height());
+					w=static_cast<float>(videoSize.width());
 				}
 				else if (h==-1.0f)
 					h=w/aspectRatio;
@@ -746,7 +755,7 @@ void StelVideoMgr::handleMetaDataChanged()
 	{
 		if (verbose)
 			qDebug() << "StelVideoMgr: " << id << ":  Following metadata are available:";
-		QStringList metadataList=videoObjects[id]->player->availableMetaData();
+		const QStringList metadataList=videoObjects[id]->player->availableMetaData();
 		for (const auto& md : metadataList)
 		{
 			QString key = md.toLocal8Bit().constData();

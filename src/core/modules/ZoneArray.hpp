@@ -92,7 +92,7 @@ public:
 	unsigned int getNrOfStars() const { return nr_of_stars; }
 
 	//! Dummy method that does nothing. See subclass implementation.
-	virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {Q_UNUSED(hipIndex);}
+	virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {Q_UNUSED(hipIndex)}
 
 	//! Pure virtual method. See subclass implementation.
 	virtual void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
@@ -101,7 +101,7 @@ public:
 	//! Pure virtual method. See subclass implementation.
 	virtual void draw(StelPainter* sPainter, int index,bool is_inside,
 					  const RCMag* rcmag_table, int limitMagIndex, StelCore* core,
-					  int maxMagStarName, float names_brightness, bool designationUsage,
+					  int maxMagStarName, float names_brightness,
 					  const QVector<SphericalCap>& boundingCaps,
 					  const bool withAberration, const Vec3f vel) const = 0;
 
@@ -179,14 +179,13 @@ protected:
 	//! @param limitMagIndex index from rcmag_table at which stars are not visible anymore
 	//! @param core core to use for drawing
 	//! @param maxMagStarName magnitude limit of stars that display labels
-	//! @param names_brightness brightness of labels
-	//! @param designationUsage
+	//! @param names_brightness brightness of labels	
 	//! @param boundingCaps
 	//! @param withAberration true if aberration to be applied
 	//! @param vel velocity vector of observer planet
 	virtual void draw(StelPainter* sPainter, int index, bool isInsideViewport,
 			  const RCMag *rcmag_table, int limitMagIndex, StelCore* core,
-			  int maxMagStarName, float names_brightness, bool designationUsage,
+			  int maxMagStarName, float names_brightness,
 			  const QVector<SphericalCap>& boundingCaps,
 			  const bool withAberration, const Vec3f vel) const Q_DECL_OVERRIDE;
 
@@ -212,7 +211,7 @@ public:
 
 	//! Add Hipparcos information for all stars in this catalog into @em hipIndex.
 	//! @param hipIndex array of Hipparcos info structs
-	void updateHipIndex(HipIndexStruct hipIndex[]) const;
+	void updateHipIndex(HipIndexStruct hipIndex[]) const Q_DECL_OVERRIDE;
 };
 
 #endif // ZONEARRAY_HPP

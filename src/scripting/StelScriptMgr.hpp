@@ -52,7 +52,7 @@ friend class ScriptConsole;
 
 public:
 	StelScriptMgr(QObject *parent=Q_NULLPTR);
-	~StelScriptMgr();
+	~StelScriptMgr() Q_DECL_OVERRIDE;
 
 	QStringList getScriptList() const;
 
@@ -74,6 +74,11 @@ public:
 	
 	//! Add all the StelModules into the script engine
 	void addModules();
+
+	//! Add a single QObject as scripting object
+	//! The object must have set a name by QObject::setObjectName().
+	//! @note use this sparingly and with caution, and only add one object per class!
+	void addObject(QObject *obj);
 
     //! Define JS classes Vec3f, Vec3d
 	static void defVecClasses(QScriptEngine *engine);

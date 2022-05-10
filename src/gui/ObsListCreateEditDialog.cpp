@@ -375,6 +375,24 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
 }
 
 /*
+ * Slot for button obsListAddObjectButton
+*/
+void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
+{
+	const QList<StelObjectP>& selectedObject = objectMgr->getSelectedObject();
+	if ( !selectedObject.isEmpty() )
+	{
+		// No duplicate item in the same list
+		bool is_already_in_list = false;
+		QHash<QString,observingListItem>::const_iterator i;
+		for ( i = observingListItemCollection.constBegin(); i != observingListItemCollection.constEnd(); i++ )
+		{
+			if ( i.value().name.compare ( selectedObject[0]->getEnglishName() ) == 0 )
+			{
+				is_already_in_list = true;
+				break;
+			}
+		}
  * Slot for button obsListRemoveObjectButton
  */
 void ObsListCreateEditDialog::obsListRemoveObjectButtonPressed() {

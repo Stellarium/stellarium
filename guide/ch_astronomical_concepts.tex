@@ -240,6 +240,30 @@ equatorial coordinates use a system similar to the one referring to
 the Earth-based coordinates, but parallel to the planet's rotational
 axis.
 
+\subsection{Fixed Equatorial Coordinates}
+\label{sec:Concepts:FixedEquatorial}
+\index{Coordinate System!Fixed Equatorial}
+
+The celestial sphere with its stars and other objects located in
+equatorial coordinates seems to rotate around the celestial polar
+axis. When observing with a telescope, it proved useful to mount the
+instrument on an axis which is aimed to be parallel to the earth's
+axis, i.e., points to the celestial pole. In this case, after setting
+the objects's declination, it is enough to move the telescope around
+this polar axis to track its course over time and keep the object in
+the field of view. We can describe the \indexterm[[Coordinate
+    System!Fixed Equatorial]{Fixed Equatorial Coordinate System} as an
+  intermediate coordinate system which uses the same equator and
+  declination as the equatorial system, but does not rotate as time
+  goes by. The longitudinal coordinate is counted in hours from the
+  meridian towards the west and is aptly named \indexterm{Hour
+    Angle}. A star which has passed the meridian will reach hour angle
+  of 1~hour one sidereal hour later.
+
+Stellarium can display \newFeature{0.22.2} the fixed equatorial
+coordinates in the Markings dialog (\ref{sec:gui:view:markings}).
+
+
 \subsection{Ecliptical Coordinates}
 \label{sec:Concepts:Ecliptical}
 \index{Coordinate System!Ecliptical}
@@ -500,8 +524,10 @@ sidereal day is about 23 hours, 56 minutes and 4 seconds.
 It takes exactly one sidereal day for the celestial sphere to make one
 revolution in the sky. Astronomers find \indexterm{sidereal time}
 useful when observing. This is the Right Ascension which is currently
-passing the meridian line.  When visiting observatories, look out for
-doctored alarm clocks that have been set to run in sidereal time!
+passing the meridian line, or, equivalent, the \indexterm{Hour Angle}
+of the First Point of Aries \Aries.  When visiting observatories, look
+out for doctored alarm clocks that have been set to run faster and
+show sidereal time!
 
 \subsection{Julian Day Number}
 \label{sec:Concepts:JulianDay}
@@ -593,10 +619,11 @@ temporal offset which amounts already to more than a minute in the 21st
 century. There have been many attempts to properly model $\Delta T$,
 and Stellarium offers several models you can choose from in the
 configuration dialog (see
-section~\ref{sec:gui:configuration:time}). The default, ``Espenak and
-Meeus (2006)'', is a widely accepted standard. But if you are a
-researcher and want to experiment with alternative models, you will
-hopefully like this feature. you can even specify your own data for
+section~\ref{sec:gui:configuration:time}). ``Espenak and
+Meeus (2006)'', is a widely accepted standard. The default, ``Modified Espenak and
+Meeus (2006)'', is created to make $\Delta T$ closely in line with observed and predicted
+values between the years 2005-2050. But if you are a researcher and want to experiment
+with alternative models, you will hopefully like this feature. you can even specify your own data for
 $a$, $b$, $c$, $y$ and the secular term for lunar acceleration $n$
 (actually $\dot{n}=dn/dt$ in units of
 $\mathrm{arcseconds}/\mathrm{century}^2$) if you can model $\Delta T$
@@ -737,17 +764,17 @@ The following list describes sources and a few details about the models for $\De
   addendum~\citep{2005JHA....36..339M}. Valid range of usage: between
   years -1000 and 2000. $\dot{n}=-26.0''/\cy^2$.
 
-\item[Stephenson, Morrison \& Hohenkerk (2016).] This important new solution was published 
+\item[Stephenson, Morrison \& Hohenkerk (2016, 2021).] This important new solution was published 
   %by F. R. Stephenson,  L. V. Morrison and C. Y. Hohenkerk in the article 
   %``Measurement of the Earth’s rotation: 720 BC to AD 2015''~
   in \citetp{StephensonMorrisonHohenkerk:2016}. 
   The solution combines a spline fit to observations (used between the given limits) 
   with a parabolic fit (used as fallback outside the range, but without smooth transitions at the limits, i.e., 
   values for 2016 and later deviate notably from current estimates, and should not be used for dates after 2015).
-  Recommended range of usage: between years -720.0 and 2016.0 $\dot{n}=-25.82''/\cy^2$.
+  The solution was updated in \citetp{StephensonMorrisonHohenkerk:2021}.
+  Recommended range of usage: between years -720.0 and 2019.0 $\dot{n}=-25.82''/\cy^2$.
   
-\item[Espenak \& Meeus (2006).] This solution\footnote{This solution
-    is used by default.} by F. Espenak and J. Meeus, based on 
+\item[Espenak \& Meeus (2006).] This solution by F. Espenak and J. Meeus, based on 
 	\citet{2004JHA....35..327M} and a polynomial fit
   through tabulated values for 1600-2000, is used for the NASA Eclipse
   Web Site\footnote{\url{https://eclipse.gsfc.nasa.gov/eclipse.html}}
@@ -755,6 +782,11 @@ The following list describes sources and a few details about the models for $\De
   solar, lunar and planetary ephemeris program \program{SOLEX}. Valid
   range of usage: between years -1999 and
   3000. $\dot{n}=-25.858''/\cy^2$.
+
+\item[Modified Espenak \& Meeus (2006).] This solution\footnote{This solution
+  is used by default.} is a modification from Espenak \& Meeus (2006). Two formulae are developed to make $\Delta T$
+  closely in line with observed and predicted values by IERS and also connected with original values.
+  Valid range of usage: between years -1999 and 3000. $\dot{n}=-25.858''/\cy^2$.
 
 \item[Reijs (2006).] From the Length of Day (LOD; as determined by
   \citet{2004JHA....35..327M}), Victor Reijs

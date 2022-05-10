@@ -38,6 +38,7 @@
 #include <QDateTime>
 #include <QSyntaxHighlighter>
 #include <QTextDocumentFragment>
+#include <QRegularExpression>
 
 ScriptConsole::ScriptConsole(QObject *parent)
 	: StelDialog("ScriptConsole", parent)
@@ -335,7 +336,7 @@ void ScriptConsole::scriptEnded()
 void ScriptConsole::appendLogLine(const QString& s)
 {
 	QString html = ui->logBrowser->toHtml();
-	html.replace(QRegExp("^\\s+"), "");
+	html.replace(QRegularExpression("^\\s+"), "");
 	html += s;
 	ui->logBrowser->setHtml(html);
 }
@@ -349,7 +350,7 @@ void ScriptConsole::appendOutputLine(const QString& s)
 	else
 	{
 		QString html = ui->outputBrowser->toHtml();
-		html.replace(QRegExp("^\\s+"), "");
+		html.replace(QRegularExpression("^\\s+"), "");
 		html += s;
 		ui->outputBrowser->setHtml(html);
 	}

@@ -23,6 +23,7 @@
 #include "StelWebEngineView.hpp"
 
 #include <QPushButton>
+#include <QDesktopServices>
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
@@ -40,6 +41,7 @@ OnlineQueriesDialog::OnlineQueriesDialog(QObject* parent) :
 OnlineQueriesDialog::~OnlineQueriesDialog()
 {
 	delete ui;
+	if (view) delete view;
 }
 
 void OnlineQueriesDialog::retranslate()
@@ -58,7 +60,22 @@ void OnlineQueriesDialog::createDialogContent()
 
 	//load UI from form file
 	ui->setupUi(dialog);
-	view=ui->webEngineView; Q_ASSERT(view);
+	// Given possible unavailability of QtWebEngine on some platforms,
+	// we must add this dynamically here. In addition, there are platforms where QtWebEngine appears to be available,
+	// but fails to initialize properly at runtime. We therefore can only add this as QWidget.
+	// If manually disabled, we use a QTextBrowser.
+	if (plugin->webEngineDisabled())
+	{
+		view = new QTextBrowser();
+	}
+	else
+	{
+		view = new StelWebEngineView();
+	}
+	Q_ASSERT(view);
+	view->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+	view->setMinimumSize(0, 180);
+	ui->verticalLayout->addWidget(view);
 
 	//hook up retranslate event
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -67,7 +84,7 @@ void OnlineQueriesDialog::createDialogContent()
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// Kinetic scrolling and style sheet for output
-	kineticScrollingList << ui->webEngineView;
+	kineticScrollingList << view;
 	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)
 	{
@@ -108,25 +125,56 @@ void OnlineQueriesDialog::createDialogContent()
 		ui->custom3PushButton->setText(qc_("(Custom 3)", "GUI label"));
 		ui->custom3PushButton->setEnabled(false);
 	}
-	connect(ui->backPushButton,    &QPushButton::clicked, [=]{view->triggerPageAction(QWebEnginePage::Back);});
-	connect(ui->forwardPushButton, &QPushButton::clicked, [=]{view->triggerPageAction(QWebEnginePage::Forward);});
+
+#ifdef WITH_QTWEBENGINE
+	if (plugin->webEngineDisabled())
+	{
+		ui->backPushButton->hide();
+		ui->forwardPushButton->hide();
+	}
+	else
+	{
+		connect(ui->backPushButton,    &QPushButton::clicked, this, [=]{static_cast<StelWebEngineView*>(view)->triggerPageAction(QWebEnginePage::Back);});
+		connect(ui->forwardPushButton, &QPushButton::clicked, this, [=]{static_cast<StelWebEngineView*>(view)->triggerPageAction(QWebEnginePage::Forward);});
+	}
+#else
+	ui->backPushButton->hide();
+	ui->forwardPushButton->hide();
+#endif
 }
 
 void OnlineQueriesDialog::setOutputHtml(QString html) const
 {
-    view->setHtml(html);
+	if (plugin->webEngineDisabled())
+	{
+		static_cast<QTextBrowser*>(view)->setHtml(html);
+	}
+	else
+	{
+		static_cast<StelWebEngineView*>(view)->setHtml(html);
+	}
 }
 
 void OnlineQueriesDialog::setOutputUrl(QUrl url) const
 {
-    view->setUrl(url);
+#ifdef WITH_QTWEBENGINE
+	if (plugin->webEngineDisabled())
+	{
+		QDesktopServices::openUrl(url);
+		static_cast<QTextBrowser*>(view)->setHtml(QString("<p>" + qc_("Opened %1 in your web browser", "OnlineQueries") + "</p>").arg(url.host()));
+	}
+	else
+	{
+		static_cast<StelWebEngineView*>(view)->setUrl(url);
+	}
+#else
+	QDesktopServices::openUrl(url);
+	static_cast<StelWebEngineView*>(view)->setHtml(QString("<p>" + qc_("Opened %1 in your web browser", "OnlineQueries") + "</p>").arg(url.host()));
+#endif
 }
 
 void OnlineQueriesDialog::setAboutHtml()
 {
-	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("OnlineQueries Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + ONLINEQUERIES_PLUGIN_VERSION + "</td></tr>";

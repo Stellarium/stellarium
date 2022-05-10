@@ -13,14 +13,16 @@
 #	longitude of center of planetary feature : float (decimal degrees)
 #	size of planetary feature		 : float (kilometers)
 #
-# TRANSLATORS: (Amalthea); Greek mother earth goddess who brought Zeus to Crete.
-Amalthea	2053	_("Gaea","crater")	AA	-80.000000	270.000000	80
 # TRANSLATORS: (Amalthea); Greek; goat-god, son of Amalthea and Hermes in some legends, also Zeus' foster brother.
 Amalthea	4569	_("Pan","crater")	AA	55.000000	325.000000	100
-# TRANSLATORS: (Amalthea); Greek; area in Crete where Zeus was raised.
-Amalthea	3528	_("Lyctos Facula","facula")	FA	-20.000000	190.000000	25
+# TRANSLATORS: (Amalthea); Greek mother earth goddess who brought Zeus to Crete.
+Amalthea	2053	_("Gaea","crater")	AA	-80.000000	270.000000	80
 # TRANSLATORS: (Amalthea); Greek; mountain where Zeus played as a child.
 Amalthea	2646	_("Ida Facula","facula")	FA	20.000000	185.000000	50
+# TRANSLATORS: (Amalthea); Greek; area in Crete where Zeus was raised.
+Amalthea	3528	_("Lyctos Facula","facula")	FA	-20.000000	190.000000	25
+# TRANSLATORS: (Ariel); Spirit that brings day.
+Ariel	6638	_("Yangoor","crater")	AA	-68.700000	279.700000	78
 # TRANSLATORS: (Ariel); Good spirit who fills Italian children's stockings with toys on twelfth night.
 Ariel	661	_("Befana","crater")	AA	-17.000000	31.900000	21
 # TRANSLATORS: (Ariel); Spirit in Spenser's "Fairy Queene."
@@ -53,8 +55,10 @@ Ariel	3823	_("Melusine","crater")	AA	-52.900000	8.900000	50
 Ariel	4471	_("Oonagh","crater")	AA	-21.900000	244.400000	39
 # TRANSLATORS: (Ariel); Spirit in Hudson's "Green Mansions."
 Ariel	5036	_("Rima","crater")	AA	-18.300000	260.800000	41
-# TRANSLATORS: (Ariel); Spirit that brings day.
-Ariel	6638	_("Yangoor","crater")	AA	-68.700000	279.700000	78
+# TRANSLATORS: (Ariel); British air spirits who influence the temperaments man.
+Ariel	5790	_("Sylph Chasma","chasma")	CM	-48.600000	353.000000	349
+# TRANSLATORS: (Ariel); British spirits that live in rocks.
+Ariel	4744	_("Pixie Chasma","chasma")	CM	-20.400000	5.100000	278
 # TRANSLATORS: (Ariel); German good spirits who live in woods.
 Ariel	895	_("Brownie Chasma","chasma")	CM	-16.000000	337.600000	343
 # TRANSLATORS: (Ariel); Pueblo (USA) good spirits who bring rain or other blessings.
@@ -65,10 +69,6 @@ Ariel	2996	_("Kewpie Chasma","chasma")	CM	-28.300000	326.900000	467
 Ariel	3110	_("Kra Chasma","chasma")	CM	-32.100000	354.200000	142
 # TRANSLATORS: (Ariel); French wind spirits who cure diseases.
 Ariel	3093	_("Korrigan Chasma","chasma")	CM	-27.600000	347.500000	365
-# TRANSLATORS: (Ariel); British air spirits who influence the temperaments man.
-Ariel	5790	_("Sylph Chasma","chasma")	CM	-48.600000	353.000000	349
-# TRANSLATORS: (Ariel); British spirits that live in rocks.
-Ariel	4744	_("Pixie Chasma","chasma")	CM	-20.400000	5.100000	278
 # TRANSLATORS: (Ariel); Earth spirits.
 Ariel	5671	_("Sprite Vallis","vallis")	VA	-14.900000	340.000000	305
 # TRANSLATORS: (Ariel); Spirits or dwarfs.
@@ -783,22 +783,10 @@ Charon	15737	_("Clarke Montes","mons")	MO	-5.120000	7.050000	74.6
 Dactyl	39	_("Acmon","crater")	AA	-39.000000	138.000000	0.3
 # TRANSLATORS: (Dactyl); One of the original three Dactyls.
 Dactyl	1097	_("Celmis","crater")	AA	-46.000000	220.000000	0.2
-# TRANSLATORS: (Deimos); Francios-Marie Arouet; French writer (1694-1778).
-Deimos	6431	_("Voltaire","crater")	AA	22.000000	356.500000	1.9
 # TRANSLATORS: (Deimos); Jonathan; British writer (1667-1745).
 Deimos	5789	_("Swift","crater")	AA	12.500000	1.800000	1
-# TRANSLATORS: (Dione); Pilot of Aeneas' fleet.
-Dione	4555	_("Palinurus","crater")	AA	-3.300000	297.000000	11.9
-# TRANSLATORS: (Dione); Mythical founder of Rome in 754 or 753 B.C., son of Mars by Ilia (Rhea Silvia).
-Dione	5180	_("Romulus","crater")	AA	-8.150000	333.150000	90.7
-# TRANSLATORS: (Dione); He and his brother Romulus founded Rome.
-Dione	4991	_("Remus","crater")	AA	-13.580000	328.100000	62
-# TRANSLATORS: (Dione); A Trojan. He fought at the side of Aeneas during Troy's last night.
-Dione	5153	_("Ripheus","crater")	AA	-56.470000	323.200000	34
-# TRANSLATORS: (Dione); Fabled ancestor of the Sabines.
-Dione	5259	_("Sabinus","crater")	AA	-43.650000	173.340000	88
-# TRANSLATORS: (Dione); Rutililan king; Aeneas' rival for hand of Lavinia.
-Dione	6145	_("Turnus","crater")	AA	15.590000	14.690000	101
+# TRANSLATORS: (Deimos); Francios-Marie Arouet; French writer (1694-1778).
+Deimos	6431	_("Voltaire","crater")	AA	22.000000	356.500000	1.9
 # TRANSLATORS: (Dione); Soldier of Turnus, brother of Lucagus.
 Dione	14358	_("Liger","crater")	AA	24.000000	233.370000	53
 # TRANSLATORS: (Dione); Soldier of Turnus, brother of Liger.
@@ -935,16 +923,24 @@ Dione	3290	_("Latagus","crater")	AA	14.650000	333.540000	41
 Dione	3587	_("Magus","crater")	AA	18.440000	335.650000	45.8
 # TRANSLATORS: (Dione); An Etruscan ally of Aeneas.
 Dione	3743	_("Massicus","crater")	AA	-35.000000	304.610000	39
+# TRANSLATORS: (Dione); Pilot of Aeneas' fleet.
+Dione	4555	_("Palinurus","crater")	AA	-3.300000	297.000000	11.9
+# TRANSLATORS: (Dione); Mythical founder of Rome in 754 or 753 B.C., son of Mars by Ilia (Rhea Silvia).
+Dione	5180	_("Romulus","crater")	AA	-8.150000	333.150000	90.7
+# TRANSLATORS: (Dione); He and his brother Romulus founded Rome.
+Dione	4991	_("Remus","crater")	AA	-13.580000	328.100000	62
+# TRANSLATORS: (Dione); A Trojan. He fought at the side of Aeneas during Troy's last night.
+Dione	5153	_("Ripheus","crater")	AA	-56.470000	323.200000	34
+# TRANSLATORS: (Dione); Fabled ancestor of the Sabines.
+Dione	5259	_("Sabinus","crater")	AA	-43.650000	173.340000	88
+# TRANSLATORS: (Dione); Rutililan king; Aeneas' rival for hand of Lavinia.
+Dione	6145	_("Turnus","crater")	AA	15.590000	14.690000	101
 # TRANSLATORS: (Dione); A Lydian river said to carry gold dust after King Midas washed off his golden touch in its waters.
 Dione	14374	_("Pactolus Catena","catena")	CA	8.790000	32.850000	180
 # TRANSLATORS: (Dione); River of Sicily.
 Dione	14375	_("Pantagias Catenae","catena")	CA	-15.300000	218.300000	200
 # TRANSLATORS: (Dione); River in the Apulian territory of Diomedes, now called the Ofanto.
 Dione	14373	_("Aufidus Catena","catena")	CA	-78.000000	63.600000	275
-# TRANSLATORS: (Dione); One of the Seven Hills of Rome.
-Dione	4553	_("Palatine Chasmata","chasma")	CM	-48.000000	44.000000	1100
-# TRANSLATORS: (Dione); Ancient town of Italy (modern name Tivoli) not far from Rome on the river Anio.
-Dione	5993	_("Tibur Chasmata","chasma")	CM	60.000000	290.700000	156
 # TRANSLATORS: (Dione); City in northern Italy founded by Antenor.
 Dione	14384	_("Padua Chasmata","chasma")	CM	17.700000	112.830000	1025
 # TRANSLATORS: (Dione); An old town in Campania.
@@ -959,10 +955,12 @@ Dione	14378	_("Eurotas Chasmata","chasma")	CM	18.000000	90.000000	1200
 Dione	3281	_("Larissa Chasma","chasma")	CM	28.980000	290.500000	150
 # TRANSLATORS: (Dione); The Trojans' promised land in Italy.
 Dione	3291	_("Latium Chasma","chasma")	CM	20.000000	296.070000	360
+# TRANSLATORS: (Dione); One of the Seven Hills of Rome.
+Dione	4553	_("Palatine Chasmata","chasma")	CM	-48.000000	44.000000	1100
+# TRANSLATORS: (Dione); Ancient town of Italy (modern name Tivoli) not far from Rome on the river Anio.
+Dione	5993	_("Tibur Chasmata","chasma")	CM	60.000000	290.700000	156
 # TRANSLATORS: (Dione); Hill across the Tiber river from Rome.
 Dione	14379	_("Janiculum Dorsa","dorsum")	DO	24.600000	215.900000	900
-# TRANSLATORS: (Dione); A Punic (Phoenician) city in North Africa.
-Dione	14385	_("Carthage Fossae","fossa")	FO	11.930000	23.250000	500
 # TRANSLATORS: (Dione); Town in Apulia (now Puglia, southern Italy) founded after the Trojan war by Diomedes.
 Dione	14380	_("Arpi Fossae","fossa")	FO	47.470000	229.200000	330
 # TRANSLATORS: (Dione); One of the twelve chief cities of Etruria, situated on the river Clanis.
@@ -979,6 +977,8 @@ Dione	14816	_("Himella Fossa","fossa")	FO	-45.600000	23.450000	147
 Dione	14814	_("Argiletum Fossae","fossa")	FO	65.180000	327.900000	224
 # TRANSLATORS: (Dione); Town in Apulia (now Puglia, southern Italy) founded after the Trojan war by Diomedes.
 Dione	14380	_("Arpi Fossae","fossa")	FO	52.000000	241.000000	425
+# TRANSLATORS: (Dione); A Punic (Phoenician) city in North Africa.
+Dione	14385	_("Carthage Fossae","fossa")	FO	11.930000	23.250000	500
 # TRANSLATORS: (Enceladus); King whom Shahrazad beguiles with the tales of a thousand nights and a night.
 Enceladus	5453	_("Shahryar","crater")	AA	57.709300	133.310400	24
 # TRANSLATORS: (Enceladus); Fictional king of Persian city in the tale "The Tale of the Vizier and the Sage Duban."
@@ -993,6 +993,8 @@ Enceladus	5452	_("Shahrazad","crater")	AA	46.495800	158.400800	19.911
 Enceladus	14603	_("Ajib","crater")	AA	61.678000	120.608800	15.675
 # TRANSLATORS: (Enceladus); Shayk who guides Musa and Talib to the mountains in "The City of Brass".
 Enceladus	5288	_("Samad","crater")	AA	61.692400	358.771700	14.981
+# TRANSLATORS: (Enceladus); Character in the tale "Hassan of Bassorah."
+Enceladus	14232	_("Hassan","crater")	AA	-31.574500	171.089300	15.266
 # TRANSLATORS: (Enceladus); Father of benevolent prince Al-Mustansir in "The Hunchback’s Tale."
 Enceladus	14226	_("Al-Mustazi","crater")	AA	-21.090600	158.248900	9.983
 # TRANSLATORS: (Enceladus); Voyager who had many marvelous adventures on seven voyages.
@@ -1003,8 +1005,6 @@ Enceladus	14231	_("Ghanim","crater")	AA	38.737000	79.224000	14.176
 Enceladus	14223	_("Sharrkan","crater")	AA	16.420100	58.089900	4.3
 # TRANSLATORS: (Enceladus); The barber's second brother in "The Hunchback’s Tale."
 Enceladus	14224	_("Al-Haddar","crater")	AA	50.482200	159.222200	15.082
-# TRANSLATORS: (Enceladus); Character in the tale "Hassan of Bassorah."
-Enceladus	14232	_("Hassan","crater")	AA	-31.574500	171.089300	15.266
 # TRANSLATORS: (Enceladus); Wife of King Khusrau in the tale "Khusrau and Shirin and the Fisherman."
 Enceladus	14240	_("Shirin","crater")	AA	-2.269200	187.180000	8.838
 # TRANSLATORS: (Enceladus); The barber's third brother in "The Hunchback’s Tale."
@@ -1149,10 +1149,10 @@ Enceladus	14251	_("Cashmere Sulci","sulcus")	SU	-52.070000	63.940000	260
 Enceladus	14631	_("Al-Medinah Sulci","sulcus")	SU	-50.700000	1.400000	117.5
 # TRANSLATORS: (Enceladus); Place in the tale "Story of the Chief of the Bulak Police."
 Enceladus	14634	_("Bulak Sulcus","sulcus")	SU	16.667000	250.683500	49.421
-# TRANSLATORS: (Epimetheus); Greek; sister of Phoibe, daughter of Leukippos.
-Epimetheus	2502	_("Hilairea","crater")	AA	0.000000	360.000000	0
 # TRANSLATORS: (Epimetheus); Latin name for Polydeukes, Castor's twin.
 Epimetheus	4783	_("Pollux","crater")	AA	0.000000	360.000000	0
+# TRANSLATORS: (Epimetheus); Greek; sister of Phoibe, daughter of Leukippos.
+Epimetheus	2502	_("Hilairea","crater")	AA	0.000000	360.000000	0
 # TRANSLATORS: (Eros); Lover of Genji in "The Tale of Genji" by Murasaki Sikibu, first modern novel (Japan, c.1000).
 Eros	2036	_("Fujitsubo","crater")	AA	-3.700000	297.300000	1.7
 # TRANSLATORS: (Eros); Peter; French philosopher, lover of Heloise (1079-1142).
@@ -1261,10 +1261,10 @@ Europa	1246	_("Cliodhna","crater")	AA	-2.500000	283.600000	3
 Europa	2263	_("Gráinne","crater")	AA	-59.700000	260.600000	13.5
 # TRANSLATORS: (Europa); Celtic poet, one of the children of the mother goddess Don.
 Europa	2296	_("Gwydion","crater")	AA	-60.500000	278.400000	5
-# TRANSLATORS: (Europa); Celtic sea god.
-Europa	3435	_("Llyr","crater")	AA	-1.800000	138.200000	1.1
 # TRANSLATORS: (Europa); Celtic hero.
 Europa	3569	_("Mael Dúin","crater")	AA	-16.800000	162.100000	2
+# TRANSLATORS: (Europa); Celtic sea god.
+Europa	3435	_("Llyr","crater")	AA	-1.800000	138.200000	1.1
 # TRANSLATORS: (Europa); Mythological Irish queen of Connacht province.
 Europa	3571	_("Maeve","crater")	AA	58.800000	281.100000	21.3
 # TRANSLATORS: (Europa); Irish sea and fertility god.
@@ -1319,14 +1319,14 @@ Europa	6967	_("Bress","crater")	AA	37.640000	261.340000	10
 Europa	6968	_("Dagda","crater")	AA	37.350000	191.260000	9.8
 # TRANSLATORS: (Europa); In Celtic mythology, a cold sea where the children of Lir (Llyr), transformed into swans, were forced to spend three hundred years.
 Europa	15825	_("Moyle Cavus","cavus")	CB	-25.000000	192.000000	145
+# TRANSLATORS: (Europa); Seat of Mongan, a son of the sea god Manannán.
+Europa	14305	_("Rathmore Chaos","chaos")	CH	25.400000	285.000000	57
 # TRANSLATORS: (Europa); Chief court of Pwyll; he first saw his future wife Rhiannon at a nearby mound.
 Europa	14304	_("Narberth Chaos","chaos")	CH	-26.000000	87.000000	20
 # TRANSLATORS: (Europa); Rugged part of western Ireland named for Conmac, son of the Queen of Connacht.
 Europa	1282	_("Conamara Chaos","chaos")	CH	9.700000	87.300000	143.7
 # TRANSLATORS: (Europa); Island where Manannán had a palace.
 Europa	14303	_("Arran Chaos","chaos")	CH	13.400000	279.500000	26
-# TRANSLATORS: (Europa); Seat of Mongan, a son of the sea god Manannán.
-Europa	14305	_("Rathmore Chaos","chaos")	CH	25.400000	285.000000	57
 # TRANSLATORS: (Europa); One of the four great cities of the Tuatha Dé Danann (the people of the goddess Danu, the wizards) in Irish Celtic myths.
 Europa	4074	_("Murias Chaos","chaos")	CH	22.400000	276.200000	116
 # TRANSLATORS: (Europa); Place on Crete where Zeus brought Europa.
@@ -1395,6 +1395,8 @@ Europa	1708	_("Echion Linea","linea")	LI	-11.600000	174.800000	1026
 Europa	3861	_("Merrivale Linea","linea")	LI	-41.000000	60.500000	1600
 # TRANSLATORS: (Europa); Daughter of Harmonia and Cadmus.
 Europa	2699	_("Ino Linea","linea")	LI	-1.700000	185.400000	1515
+# TRANSLATORS: (Europa); Stone row in England.
+Europa	5681	_("Staldon Linea","linea")	LI	-0.800000	332.600000	1525
 # TRANSLATORS: (Europa); Greek; son of Europa and Zeus.
 Europa	3915	_("Minos Linea","linea")	LI	47.200000	164.800000	2170
 # TRANSLATORS: (Europa); Survivor of the men Cadmus sowed with dragon's teeth, a founder of Thebes.
@@ -1411,8 +1413,6 @@ Europa	4465	_("Onga Linea","linea")	LI	-38.700000	148.700000	870
 Europa	4643	_("Pelorus Linea","linea")	LI	-19.800000	171.700000	1535
 # TRANSLATORS: (Europa); Peninsula between Black and Marmara Seas, where Phineus sought Europa.
 Europa	5989	_("Thynia Linea","linea")	LI	-59.200000	205.500000	412.6
-# TRANSLATORS: (Europa); Stone row in England.
-Europa	5681	_("Staldon Linea","linea")	LI	-0.800000	332.600000	1525
 # TRANSLATORS: (Europa); Stone row in England.
 Europa	5473	_("Sharpitor Linea","linea")	LI	65.400000	188.300000	1650
 # TRANSLATORS: (Europa); Europa's mother.
@@ -1477,6 +1477,132 @@ Europa	14292	_("Balgatan Regio","regio")	RE	-50.000000	330.000000	2500
 Europa	14293	_("Dyfed Regio","regio")	RE	10.000000	110.000000	1750
 # TRANSLATORS: (Europa); Traditional name of the Welsh Otherworld where sparkling wine is the normal beverage, and age and sickness are unknown.
 Europa	14291	_("Annwn Regio","regio")	RE	20.000000	40.000000	2300
+# TRANSLATORS: (Ganymede); Minor Babylonian goddess of wisdom; Gilgamesh's mother.
+Ganymede	4299	_("Ninsum","crater")	AA	-14.345100	219.447800	88
+# TRANSLATORS: (Ganymede); Assyrian supreme deity.
+Ganymede	6692	_("Zakar","crater")	AA	31.276300	26.325800	170
+# TRANSLATORS: (Ganymede); Land east of Egypt where Bes originated. Changed from Punt Facula.
+Ganymede	4869	_("Punt","crater")	AA	-24.889000	120.147200	135
+# TRANSLATORS: (Ganymede); Akkadian youthful god of vegetation; Ishtar's son.
+Ganymede	5847	_("Tammuz","crater")	AA	13.450000	129.240100	51
+# TRANSLATORS: (Ganymede); Assyro-Babylonian goddess who invented writing with her husband Nabu.
+Ganymede	5879	_("Tashmetum","crater")	AA	-39.719700	95.459400	135
+# TRANSLATORS: (Ganymede); Greek; father of Ganymede.
+Ganymede	6091	_("Tros","crater")	AA	11.141800	332.736800	94
+# TRANSLATORS: (Ganymede); Phoenician; Byblos god.
+Ganymede	5242	_("Ruti","crater")	AA	13.227500	51.353300	16
+# TRANSLATORS: (Ganymede); Wife of Khnum, Egyptian god of the Cataracts.
+Ganymede	5336	_("Sati","crater")	AA	30.836800	347.197800	95
+# TRANSLATORS: (Ganymede); Assyro-Babylonian; torch of the gods.
+Ganymede	5317	_("Sapas","crater")	AA	57.452200	326.009400	56
+# TRANSLATORS: (Ganymede); Egyptian god of the dead at Memphis.
+Ganymede	5414	_("Seker","crater")	AA	-39.156100	14.624700	103
+# TRANSLATORS: (Ganymede); Egyptian healing god.
+Ganymede	5436	_("Serapis","crater")	AA	-12.400000	315.886800	169
+# TRANSLATORS: (Ganymede); Egyptian god of air.
+Ganymede	5503	_("Shu","crater")	AA	43.160200	3.158800	44
+# TRANSLATORS: (Ganymede); Babylonian moon god.
+Ganymede	5545	_("Sin","crater")	AA	52.942600	2.535700	19
+# TRANSLATORS: (Ganymede); Egyptian moon god; invented all arts and sciences.
+Ganymede	5981	_("Thoth","crater")	AA	-43.222000	212.748400	102
+# TRANSLATORS: (Ganymede); Jackal-headed warrior god, god of the dead.
+Ganymede	6232	_("Upuant","crater")	AA	46.404100	40.458800	17
+# TRANSLATORS: (Ganymede); Assyro-Babylonian; Sin's messenger who brought dreams to men.
+Ganymede	6701	_("Zaqar","crater")	AA	58.161000	322.585400	33
+# TRANSLATORS: (Ganymede); Assyro-Babylonian; Carthaginian goddess.
+Ganymede	5855	_("Tanit","crater")	AA	57.491800	323.376600	26
+# TRANSLATORS: (Ganymede); Ancient Egyptian jackal deity.
+Ganymede	6520	_("Wepwawet","crater")	AA	-69.889000	300.186800	86
+# TRANSLATORS: (Ganymede); Gushkin-Banda, Sumerian patron god of goldsmiths.
+Ganymede	15497	_("Gushkin","crater")	AA	20.747700	314.024400	40.5
+# TRANSLATORS: (Ganymede); In Greek mythology, legendary king of Troy, nephew (or possibly father) of Ganymede.
+Ganymede	15813	_("Laomedon","crater")	AA	20.900000	282.100000	64
+# TRANSLATORS: (Ganymede); Egyptian ram-headed god.
+Ganymede	2480	_("Hershef","crater")	AA	47.389000	90.619200	120
+# TRANSLATORS: (Ganymede); Akkadian god from whom the hero Atra-hasis was created.
+Ganymede	6503	_("We-ila","crater")	AA	-12.362100	69.652700	36
+# TRANSLATORS: (Ganymede); Theban king of gods.
+Ganymede	238	_("Amon","crater")	AA	33.693900	139.385700	102
+# TRANSLATORS: (Ganymede); Assyro-babylonian god of water, wisdom, and the earth.
+Ganymede	1701	_("Ea","crater")	AA	17.716500	211.269000	20
+# TRANSLATORS: (Ganymede); Phoenician; divinity of Tyre.
+Ganymede	3820	_("Melkart","crater")	AA	-9.858200	173.928600	105
+# TRANSLATORS: (Ganymede); Assyro-Babylonian god of law.
+Ganymede	3925	_("Misharu","crater")	AA	-4.305500	24.108200	88
+# TRANSLATORS: (Ganymede); Tutelary goddess who guarded intestines of the dead.
+Ganymede	5419	_("Selket","crater")	AA	15.028600	254.295600	168
+# TRANSLATORS: (Ganymede); First Sumerian sky god.
+Ganymede	2660	_("Ilah","crater")	AA	22.002200	199.375800	76
+# TRANSLATORS: (Ganymede); Ganymede's brother.
+Ganymede	2671	_("Ilus","crater")	AA	-13.455500	249.568200	90
+# TRANSLATORS: (Ganymede); Assyro-Babylonian; sought immortality after Enkidu died.
+Ganymede	2161	_("Gilgamesh","crater")	AA	-62.843800	235.170700	153
+# TRANSLATORS: (Ganymede); Sumerian god of summer heat.
+Ganymede	2175	_("Gir","crater")	AA	34.047300	214.253300	73
+# TRANSLATORS: (Ganymede); Sumerian goddess of underworld, seen by Enkidu in a dream.
+Ganymede	2719	_("Irkalla","crater")	AA	-32.517600	245.160500	117
+# TRANSLATORS: (Ganymede); Egyptian moon god.
+Ganymede	3012	_("Khonsu","crater")	AA	-37.513700	169.169800	80
+# TRANSLATORS: (Ganymede); Assyro-Babylonian; terrestrial progenitor goddess.
+Ganymede	3054	_("Kishar","crater")	AA	72.699400	10.540100	78
+# TRANSLATORS: (Ganymede); Sumerian vegetation god.
+Ganymede	4290	_("Ningishzida","crater")	AA	14.106100	170.161500	32
+# TRANSLATORS: (Ganymede); Sumerian goddess of brewing.
+Ganymede	4295	_("Ninkasi","crater")	AA	59.206100	311.147800	81
+# TRANSLATORS: (Ganymede); Assyro-Babylonian god of justice.
+Ganymede	3058	_("Kittu","crater")	AA	0.400000	25.395100	15
+# TRANSLATORS: (Ganymede); Original divine son of the Memphis triad, son of Ptah.
+Ganymede	4191	_("Nefertum","crater")	AA	44.350000	38.962900	29
+# TRANSLATORS: (Ganymede); Elamite god of light and justice.
+Ganymede	4109	_("Nah-Hunte","crater")	AA	-17.757400	274.737400	47
+# TRANSLATORS: (Ganymede); Assyro-Babylonian plague demon.
+Ganymede	4132	_("Namtar","crater")	AA	-58.341200	19.302200	50
+# TRANSLATORS: (Ganymede); Assyro-Babylonian; god of the fields, war god.
+Ganymede	4263	_("Nigirsu","crater")	AA	-58.255500	39.431300	53
+# TRANSLATORS: (Ganymede); Greek river god; father of Callirrhoe, Ganymede's mother.
+Ganymede	33	_("Achelous","crater")	AA	61.902200	348.223100	40
+# TRANSLATORS: (Ganymede); Consort to Ea, Babylonian god of water.
+Ganymede	4296	_("Ninki","crater")	AA	-8.365900	239.209900	194
+# TRANSLATORS: (Ganymede); Egyptian crocodile god.
+Ganymede	5400	_("Sebek","crater")	AA	61.254400	3.224100	61
+# TRANSLATORS: (Ganymede); Mother goddess of the Arameans.
+Ganymede	5412	_("Seima","crater")	AA	17.094500	144.025300	38
+# TRANSLATORS: (Ganymede); Egyptian god of the sense of sight.
+Ganymede	3546	_("Maa","crater")	AA	1.299200	156.369000	31
+# TRANSLATORS: (Ganymede); Assyro-Babylonian god of thunder.
+Ganymede	42	_("Adad","crater")	AA	57.426700	1.977600	39
+# TRANSLATORS: (Ganymede); Egyptian; first god of Busirus.
+Ganymede	262	_("Andjeti","crater")	AA	-52.750000	198.895100	52
+# TRANSLATORS: (Ganymede); Sumerian-Akkadian god of power, of heavens.
+Ganymede	302	_("Anu","crater")	AA	65.236300	15.752700	55
+# TRANSLATORS: (Ganymede); Babylonian moon god.
+Ganymede	1795	_("En-zu","crater")	AA	11.594900	191.600100	5
+# TRANSLATORS: (Ganymede); Assyro-Babylonian; nature god of the air, hurricanes, and nature.
+Ganymede	1806	_("Enlil","crater")	AA	55.363700	47.904100	34.6
+# TRANSLATORS: (Ganymede); Egyptian lion-headed goddess; Anhur's wife.
+Ganymede	3804	_("Mehit","crater")	AA	28.954700	195.613500	47
+# TRANSLATORS: (Ganymede); Friend of Gilgamesh.
+Ganymede	1805	_("Enkidu","crater")	AA	-26.606100	34.874700	122
+# TRANSLATORS: (Ganymede); Egyptian god of the Nile.
+Ganymede	2358	_("Hapi","crater")	AA	-30.572000	147.337400	96
+# TRANSLATORS: (Ganymede); Spirit of the harvest, one of the sons of El.
+Ganymede	4051	_("Mot","crater")	AA	9.933500	194.050500	23
+# TRANSLATORS: (Ganymede); Sumerian male deity; upper parts are human, lower parts a serpent.
+Ganymede	4078	_("Mush","crater")	AA	-15.117000	245.225800	99
+# TRANSLATORS: (Ganymede); Phoenician god.
+Ganymede	1816	_("Epigeus","crater")	AA	22.961400	179.349600	343
+# TRANSLATORS: (Ganymede); Egyptian goddess of joy and love.
+Ganymede	2383	_("Hathor","crater")	AA	-66.904900	91.261000	173
+# TRANSLATORS: (Ganymede); Assyro-Babylonian; asked the eagle for an herb to give him an heir.
+Ganymede	1856	_("Etana","crater")	AA	74.743900	19.645600	46
+# TRANSLATORS: (Ganymede); "Horus of the Two Horizons", form of Egyptian god Horus who represents the path of the sun.
+Ganymede	2359	_("Harakhtes","crater")	AA	35.949400	259.742300	108
+# TRANSLATORS: (Ganymede); Assyro-babylonian king of the underworld.
+Ganymede	4215	_("Nergal","crater")	AA	38.584900	159.669100	9.6
+# TRANSLATORS: (Ganymede); Egyptian childbirth goddess.
+Ganymede	5809	_("Ta-urt","crater")	AA	27.658800	55.801100	94
+# TRANSLATORS: (Ganymede); Elamite god of the tempest.
+Ganymede	5935	_("Teshub","crater")	AA	-68.297300	80.715300	188
 # TRANSLATORS: (Ganymede); Assyro-Babylonian goddess of dew.
 Ganymede	251	_("Anat","crater")	AA	-4.100000	232.000000	2.9
 # TRANSLATORS: (Ganymede); Assyro-Babylonian; lost immortality when, at Ea's advice, he refused food of life.
@@ -1609,140 +1735,14 @@ Ganymede	15165	_("Ombos","crater")	AA	4.751600	123.835700	177
 Ganymede	4509	_("Osiris","crater")	AA	-38.000600	193.691700	107
 # TRANSLATORS: (Ganymede); Sovereign god of Memphis; patron of artisans.
 Ganymede	4858	_("Ptah","crater")	AA	-65.900000	142.947800	30
-# TRANSLATORS: (Ganymede); Minor Babylonian goddess of wisdom; Gilgamesh's mother.
-Ganymede	4299	_("Ninsum","crater")	AA	-14.345100	219.447800	88
-# TRANSLATORS: (Ganymede); Assyrian supreme deity.
-Ganymede	6692	_("Zakar","crater")	AA	31.276300	26.325800	170
-# TRANSLATORS: (Ganymede); Land east of Egypt where Bes originated. Changed from Punt Facula.
-Ganymede	4869	_("Punt","crater")	AA	-24.889000	120.147200	135
-# TRANSLATORS: (Ganymede); Akkadian youthful god of vegetation; Ishtar's son.
-Ganymede	5847	_("Tammuz","crater")	AA	13.450000	129.240100	51
-# TRANSLATORS: (Ganymede); Assyro-Babylonian goddess who invented writing with her husband Nabu.
-Ganymede	5879	_("Tashmetum","crater")	AA	-39.719700	95.459400	135
-# TRANSLATORS: (Ganymede); Greek; father of Ganymede.
-Ganymede	6091	_("Tros","crater")	AA	11.141800	332.736800	94
-# TRANSLATORS: (Ganymede); Phoenician; Byblos god.
-Ganymede	5242	_("Ruti","crater")	AA	13.227500	51.353300	16
-# TRANSLATORS: (Ganymede); Wife of Khnum, Egyptian god of the Cataracts.
-Ganymede	5336	_("Sati","crater")	AA	30.836800	347.197800	95
-# TRANSLATORS: (Ganymede); Assyro-Babylonian; torch of the gods.
-Ganymede	5317	_("Sapas","crater")	AA	57.452200	326.009400	56
-# TRANSLATORS: (Ganymede); Egyptian god of the dead at Memphis.
-Ganymede	5414	_("Seker","crater")	AA	-39.156100	14.624700	103
-# TRANSLATORS: (Ganymede); Egyptian healing god.
-Ganymede	5436	_("Serapis","crater")	AA	-12.400000	315.886800	169
-# TRANSLATORS: (Ganymede); Egyptian god of air.
-Ganymede	5503	_("Shu","crater")	AA	43.160200	3.158800	44
-# TRANSLATORS: (Ganymede); Babylonian moon god.
-Ganymede	5545	_("Sin","crater")	AA	52.942600	2.535700	19
-# TRANSLATORS: (Ganymede); Egyptian moon god; invented all arts and sciences.
-Ganymede	5981	_("Thoth","crater")	AA	-43.222000	212.748400	102
-# TRANSLATORS: (Ganymede); Jackal-headed warrior god, god of the dead.
-Ganymede	6232	_("Upuant","crater")	AA	46.404100	40.458800	17
-# TRANSLATORS: (Ganymede); Assyro-Babylonian; Sin's messenger who brought dreams to men.
-Ganymede	6701	_("Zaqar","crater")	AA	58.161000	322.585400	33
-# TRANSLATORS: (Ganymede); Assyro-Babylonian; Carthaginian goddess.
-Ganymede	5855	_("Tanit","crater")	AA	57.491800	323.376600	26
-# TRANSLATORS: (Ganymede); Ancient Egyptian jackal deity.
-Ganymede	6520	_("Wepwawet","crater")	AA	-69.889000	300.186800	86
-# TRANSLATORS: (Ganymede); Gushkin-Banda, Sumerian patron god of goldsmiths.
-Ganymede	15497	_("Gushkin","crater")	AA	20.747700	314.024400	40.5
-# TRANSLATORS: (Ganymede); In Greek mythology, legendary king of Troy, nephew (or possibly father) of Ganymede.
-Ganymede	15813	_("Laomedon","crater")	AA	20.900000	282.100000	64
-# TRANSLATORS: (Ganymede); Egyptian ram-headed god.
-Ganymede	2480	_("Hershef","crater")	AA	47.389000	90.619200	120
-# TRANSLATORS: (Ganymede); Akkadian god from whom the hero Atra-hasis was created.
-Ganymede	6503	_("We-ila","crater")	AA	-12.362100	69.652700	36
-# TRANSLATORS: (Ganymede); Theban king of gods.
-Ganymede	238	_("Amon","crater")	AA	33.693900	139.385700	102
-# TRANSLATORS: (Ganymede); Assyro-babylonian god of water, wisdom, and the earth.
-Ganymede	1701	_("Ea","crater")	AA	17.716500	211.269000	20
-# TRANSLATORS: (Ganymede); Phoenician; divinity of Tyre.
-Ganymede	3820	_("Melkart","crater")	AA	-9.858200	173.928600	105
-# TRANSLATORS: (Ganymede); Assyro-Babylonian god of law.
-Ganymede	3925	_("Misharu","crater")	AA	-4.305500	24.108200	88
-# TRANSLATORS: (Ganymede); Tutelary goddess who guarded intestines of the dead.
-Ganymede	5419	_("Selket","crater")	AA	15.028600	254.295600	168
-# TRANSLATORS: (Ganymede); First Sumerian sky god.
-Ganymede	2660	_("Ilah","crater")	AA	22.002200	199.375800	76
-# TRANSLATORS: (Ganymede); Ganymede's brother.
-Ganymede	2671	_("Ilus","crater")	AA	-13.455500	249.568200	90
-# TRANSLATORS: (Ganymede); Assyro-Babylonian; sought immortality after Enkidu died.
-Ganymede	2161	_("Gilgamesh","crater")	AA	-62.843800	235.170700	153
-# TRANSLATORS: (Ganymede); Sumerian god of summer heat.
-Ganymede	2175	_("Gir","crater")	AA	34.047300	214.253300	73
-# TRANSLATORS: (Ganymede); Sumerian goddess of underworld, seen by Enkidu in a dream.
-Ganymede	2719	_("Irkalla","crater")	AA	-32.517600	245.160500	117
-# TRANSLATORS: (Ganymede); Egyptian moon god.
-Ganymede	3012	_("Khonsu","crater")	AA	-37.513700	169.169800	80
-# TRANSLATORS: (Ganymede); Assyro-Babylonian; terrestrial progenitor goddess.
-Ganymede	3054	_("Kishar","crater")	AA	72.699400	10.540100	78
-# TRANSLATORS: (Ganymede); Sumerian vegetation god.
-Ganymede	4290	_("Ningishzida","crater")	AA	14.106100	170.161500	32
-# TRANSLATORS: (Ganymede); Sumerian goddess of brewing.
-Ganymede	4295	_("Ninkasi","crater")	AA	59.206100	311.147800	81
-# TRANSLATORS: (Ganymede); Assyro-Babylonian god of justice.
-Ganymede	3058	_("Kittu","crater")	AA	0.400000	25.395100	15
-# TRANSLATORS: (Ganymede); Original divine son of the Memphis triad, son of Ptah.
-Ganymede	4191	_("Nefertum","crater")	AA	44.350000	38.962900	29
-# TRANSLATORS: (Ganymede); Elamite god of light and justice.
-Ganymede	4109	_("Nah-Hunte","crater")	AA	-17.757400	274.737400	47
-# TRANSLATORS: (Ganymede); Assyro-Babylonian plague demon.
-Ganymede	4132	_("Namtar","crater")	AA	-58.341200	19.302200	50
-# TRANSLATORS: (Ganymede); Assyro-Babylonian; god of the fields, war god.
-Ganymede	4263	_("Nigirsu","crater")	AA	-58.255500	39.431300	53
-# TRANSLATORS: (Ganymede); Greek river god; father of Callirrhoe, Ganymede's mother.
-Ganymede	33	_("Achelous","crater")	AA	61.902200	348.223100	40
-# TRANSLATORS: (Ganymede); Consort to Ea, Babylonian god of water.
-Ganymede	4296	_("Ninki","crater")	AA	-8.365900	239.209900	194
-# TRANSLATORS: (Ganymede); Egyptian crocodile god.
-Ganymede	5400	_("Sebek","crater")	AA	61.254400	3.224100	61
-# TRANSLATORS: (Ganymede); Mother goddess of the Arameans.
-Ganymede	5412	_("Seima","crater")	AA	17.094500	144.025300	38
-# TRANSLATORS: (Ganymede); Egyptian god of the sense of sight.
-Ganymede	3546	_("Maa","crater")	AA	1.299200	156.369000	31
-# TRANSLATORS: (Ganymede); Assyro-Babylonian god of thunder.
-Ganymede	42	_("Adad","crater")	AA	57.426700	1.977600	39
-# TRANSLATORS: (Ganymede); Egyptian; first god of Busirus.
-Ganymede	262	_("Andjeti","crater")	AA	-52.750000	198.895100	52
-# TRANSLATORS: (Ganymede); Sumerian-Akkadian god of power, of heavens.
-Ganymede	302	_("Anu","crater")	AA	65.236300	15.752700	55
-# TRANSLATORS: (Ganymede); Babylonian moon god.
-Ganymede	1795	_("En-zu","crater")	AA	11.594900	191.600100	5
-# TRANSLATORS: (Ganymede); Assyro-Babylonian; nature god of the air, hurricanes, and nature.
-Ganymede	1806	_("Enlil","crater")	AA	55.363700	47.904100	34.6
-# TRANSLATORS: (Ganymede); Egyptian lion-headed goddess; Anhur's wife.
-Ganymede	3804	_("Mehit","crater")	AA	28.954700	195.613500	47
-# TRANSLATORS: (Ganymede); Friend of Gilgamesh.
-Ganymede	1805	_("Enkidu","crater")	AA	-26.606100	34.874700	122
-# TRANSLATORS: (Ganymede); Egyptian god of the Nile.
-Ganymede	2358	_("Hapi","crater")	AA	-30.572000	147.337400	96
-# TRANSLATORS: (Ganymede); Spirit of the harvest, one of the sons of El.
-Ganymede	4051	_("Mot","crater")	AA	9.933500	194.050500	23
-# TRANSLATORS: (Ganymede); Sumerian male deity; upper parts are human, lower parts a serpent.
-Ganymede	4078	_("Mush","crater")	AA	-15.117000	245.225800	99
-# TRANSLATORS: (Ganymede); Phoenician god.
-Ganymede	1816	_("Epigeus","crater")	AA	22.961400	179.349600	343
-# TRANSLATORS: (Ganymede); Egyptian goddess of joy and love.
-Ganymede	2383	_("Hathor","crater")	AA	-66.904900	91.261000	173
-# TRANSLATORS: (Ganymede); Assyro-Babylonian; asked the eagle for an herb to give him an heir.
-Ganymede	1856	_("Etana","crater")	AA	74.743900	19.645600	46
-# TRANSLATORS: (Ganymede); "Horus of the Two Horizons", form of Egyptian god Horus who represents the path of the sun.
-Ganymede	2359	_("Harakhtes","crater")	AA	35.949400	259.742300	108
-# TRANSLATORS: (Ganymede); Assyro-babylonian king of the underworld.
-Ganymede	4215	_("Nergal","crater")	AA	38.584900	159.669100	9.6
-# TRANSLATORS: (Ganymede); Egyptian childbirth goddess.
-Ganymede	5809	_("Ta-urt","crater")	AA	27.658800	55.801100	94
-# TRANSLATORS: (Ganymede); Elamite god of the tempest.
-Ganymede	5935	_("Teshub","crater")	AA	-68.297300	80.715300	188
-# TRANSLATORS: (Ganymede); Egyptian creation god.
-Ganymede	3010	_("Khnum Catena","catena")	CA	32.902000	10.731200	66
 # TRANSLATORS: (Ganymede); Goddess of springs and canals, daughter of Enki.
 Ganymede	4145	_("Nanshe Catena","catena")	CA	15.400000	7.100000	103.8
 # TRANSLATORS: (Ganymede); Principal water god of the Apsu.
 Ganymede	1804	_("Enki Catena","catena")	CA	38.837100	346.143800	160
 # TRANSLATORS: (Ganymede); Phoenician moon god who battled with Keret in Negeb.
 Ganymede	5923	_("Terah Catena","catena")	CA	7.100000	82.400000	283
+# TRANSLATORS: (Ganymede); Egyptian creation god.
+Ganymede	3010	_("Khnum Catena","catena")	CA	32.902000	10.731200	66
 # TRANSLATORS: (Ganymede); Egyptian town where Hatmenit and Osiris were worshipped.
 Ganymede	5939	_("Tettu Facula","facula")	FA	37.600000	199.040000	189
 # TRANSLATORS: (Ganymede); Egyptian town where Osiris was worshipped.
@@ -1799,22 +1799,6 @@ Ganymede	4662	_("Perrine Regio","regio")	RE	34.000000	332.000000	3800
 Ganymede	2076	_("Galileo Regio","regio")	RE	45.000000	233.000000	4439
 # TRANSLATORS: (Ganymede); Philibert Jacques; British astronomer (1880-1961).
 Ganymede	15153	_("Melotte Regio","regio")	RE	-12.000000	115.000000	4100
-# TRANSLATORS: (Ganymede); Where Marduk's statue was carried each year.
-Ganymede	134	_("Akitu Sulcus","sulcus")	SU	39.000000	166.000000	365
-# TRANSLATORS: (Ganymede); Ancient Babylonian town.
-Ganymede	5573	_("Sippar Sulcus","sulcus")	SU	-19.900000	189.800000	3260
-# TRANSLATORS: (Ganymede); Sumerian mountain where winds dwell.
-Ganymede	2588	_("Hursag Sulcus","sulcus")	SU	-9.493900	111.538100	2183
-# TRANSLATORS: (Ganymede); Greek; where Ganymede was abducted by Zeus disguised as an eagle.
-Ganymede	1413	_("Dardanus Sulcus","sulcus")	SU	-31.500000	347.300000	1500
-# TRANSLATORS: (Ganymede); Assyro-Babylonian town on the banks of the Euphrates River where the gods planned the great flood.
-Ganymede	5508	_("Shuruppak Sulcus","sulcus")	SU	-19.618300	128.250000	2730
-# TRANSLATORS: (Ganymede); Sumerian town.
-Ganymede	3283	_("Larsa Sulci","sulcus")	SU	2.000000	100.000000	1130
-# TRANSLATORS: (Ganymede); Assyrian town where Ishtar was worshipped.
-Ganymede	345	_("Arbela Sulcus","sulcus")	SU	-34.000000	356.000000	3850
-# TRANSLATORS: (Ganymede); Greek; where Ganymede was abducted an eagle.
-Ganymede	2371	_("Harpagia Sulcus","sulcus")	SU	-11.800000	46.500000	1400
 # TRANSLATORS: (Ganymede); Greek; where Ganymede was abducted by an eagle.
 Ganymede	4089	_("Mysia Sulci","sulcus")	SU	-7.000000	352.200000	5066
 # TRANSLATORS: (Ganymede); Assyro-Babylonian; terrestrial-world home of Lakhmu and Lakhamu.
@@ -1869,6 +1853,22 @@ Ganymede	904	_("Bubastis Sulci","sulcus")	SU	-81.000000	135.000000	2730
 Ganymede	6234	_("Ur Sulcus","sulcus")	SU	49.500000	182.500000	1145
 # TRANSLATORS: (Ganymede); Egyptian; chaos; primordial ocean; held germ of all things.
 Ganymede	4356	_("Nun Sulci","sulcus")	SU	49.500000	43.600000	1500
+# TRANSLATORS: (Ganymede); Where Marduk's statue was carried each year.
+Ganymede	134	_("Akitu Sulcus","sulcus")	SU	39.000000	166.000000	365
+# TRANSLATORS: (Ganymede); Ancient Babylonian town.
+Ganymede	5573	_("Sippar Sulcus","sulcus")	SU	-19.900000	189.800000	3260
+# TRANSLATORS: (Ganymede); Sumerian mountain where winds dwell.
+Ganymede	2588	_("Hursag Sulcus","sulcus")	SU	-9.493900	111.538100	2183
+# TRANSLATORS: (Ganymede); Greek; where Ganymede was abducted by Zeus disguised as an eagle.
+Ganymede	1413	_("Dardanus Sulcus","sulcus")	SU	-31.500000	347.300000	1500
+# TRANSLATORS: (Ganymede); Assyro-Babylonian town on the banks of the Euphrates River where the gods planned the great flood.
+Ganymede	5508	_("Shuruppak Sulcus","sulcus")	SU	-19.618300	128.250000	2730
+# TRANSLATORS: (Ganymede); Sumerian town.
+Ganymede	3283	_("Larsa Sulci","sulcus")	SU	2.000000	100.000000	1130
+# TRANSLATORS: (Ganymede); Assyrian town where Ishtar was worshipped.
+Ganymede	345	_("Arbela Sulcus","sulcus")	SU	-34.000000	356.000000	3850
+# TRANSLATORS: (Ganymede); Greek; where Ganymede was abducted an eagle.
+Ganymede	2371	_("Harpagia Sulcus","sulcus")	SU	-11.800000	46.500000	1400
 # TRANSLATORS: (Gaspra); Spa in France.
 Gaspra	120	_("Aix","crater")	AA	47.900000	199.700000	0.6
 # TRANSLATORS: (Gaspra); Spa on Kyushu, Japan.
@@ -1937,26 +1937,16 @@ Gaspra	1665	_("Dunne Regio","regio")	RE	15.000000	345.000000	0
 Gaspra	4224	_("Neujmin Regio","regio")	RE	2.000000	280.000000	0
 # TRANSLATORS: (Gaspra); Clayne; Galileo Project manager.
 Gaspra	6647	_("Yeates Regio","regio")	RE	65.000000	285.000000	0
+# TRANSLATORS: (Hyperion); The Moon; maker of girl babies.
+Hyperion	556	_("Bahloo","crater")	AA	36.000000	164.000000	0
 # TRANSLATORS: (Hyperion); Greek sun god; son of Hyperion.
 Hyperion	2427	_("Helios","crater")	AA	71.000000	228.000000	0
 # TRANSLATORS: (Hyperion); East Slavic god of the sun, fertility and love.
 Hyperion	2805	_("Jarilo","crater")	AA	61.000000	177.000000	0
 # TRANSLATORS: (Hyperion); Bororo folk hero; the sun.
 Hyperion	3852	_("Meri","crater")	AA	3.000000	189.000000	0
-# TRANSLATORS: (Hyperion); The Moon; maker of girl babies.
-Hyperion	556	_("Bahloo","crater")	AA	36.000000	164.000000	0
 # TRANSLATORS: (Hyperion); G.P. Bond (American) and William Lassell (British); discovered Hyperion on the same night in 1848.
 Hyperion	812	_("Bond-Lassell Dorsum","dorsum")	DO	48.000000	216.500000	0
-# TRANSLATORS: (Iapetus); Dane who led 3rd column in Charlemagne's army against Baligant's forces.
-Iapetus	4412	_("Ogier","crater")	AA	42.500000	84.900000	100
-# TRANSLATORS: (Iapetus); One of twelve peers; guarded French dead while Charlemagne pursued Saracen forces; sixth column leader.
-Iapetus	4522	_("Othon","crater")	AA	33.300000	12.200000	86
-# TRANSLATORS: (Iapetus); Charlemagne's nephew; led rear guard of French forces; hero in song of Roland.
-Iapetus	5173	_("Roland","crater")	AA	73.300000	334.800000	144
-# TRANSLATORS: (Iapetus); Archbishop of Rheims in Song of Roland.
-Iapetus	6146	_("Turpin","crater")	AA	47.700000	358.600000	87
-# TRANSLATORS: (Iapetus); A Saracen lord, killed by Archbishop Turpin.
-Iapetus	15164	_("Abisme","crater")	AA	37.529300	267.082000	767.737
 # TRANSLATORS: (Iapetus); Escremiz of Valterne; volunteered to fight at Roncevaux Pass; killed by Engelier in the first battle.
 Iapetus	14464	_("Escremiz","crater")	AA	1.600000	186.500000	0.06
 # TRANSLATORS: (Iapetus); French count; stepfather of Roland; brother-in-law of Roland’s uncle Charlemagne; betrays Roland and the French rear guard to Marsilion.
@@ -2063,6 +2053,16 @@ Iapetus	3470	_("Lorant","crater")	AA	65.200000	200.200000	44
 Iapetus	3722	_("Marsilion","crater")	AA	39.200000	183.900000	136
 # TRANSLATORS: (Iapetus); Guarded French dead while Charlemagne pursued Saracen forces.
 Iapetus	3905	_("Milon","crater")	AA	67.900000	89.800000	119
+# TRANSLATORS: (Iapetus); Dane who led 3rd column in Charlemagne's army against Baligant's forces.
+Iapetus	4412	_("Ogier","crater")	AA	42.500000	84.900000	100
+# TRANSLATORS: (Iapetus); One of twelve peers; guarded French dead while Charlemagne pursued Saracen forces; sixth column leader.
+Iapetus	4522	_("Othon","crater")	AA	33.300000	12.200000	86
+# TRANSLATORS: (Iapetus); Charlemagne's nephew; led rear guard of French forces; hero in song of Roland.
+Iapetus	5173	_("Roland","crater")	AA	73.300000	334.800000	144
+# TRANSLATORS: (Iapetus); Archbishop of Rheims in Song of Roland.
+Iapetus	6146	_("Turpin","crater")	AA	47.700000	358.600000	87
+# TRANSLATORS: (Iapetus); A Saracen lord, killed by Archbishop Turpin.
+Iapetus	15164	_("Abisme","crater")	AA	37.529300	267.082000	767.737
 # TRANSLATORS: (Iapetus); Spanish town whose walls Roland had shattered.
 Iapetus	14492	_("Gayne Mons","mons")	MO	0.000000	184.000000	65
 # TRANSLATORS: (Iapetus); Place in Spain near which Basan and Basilie were murdered by Marsilion.
@@ -2083,10 +2083,10 @@ Iapetus	14498	_("Valterne Mons","mons")	MO	0.000000	189.400000	50
 Iapetus	14497	_("Tortelosa Montes","mons")	MO	0.000000	295.300000	294
 # TRANSLATORS: (Iapetus); Italian-French astronomer who discovered Iapetus in 1671, Rhea in 1672, Tethys and Dione in 1684 (1625-1712).
 Iapetus	1047	_("Cassini Regio","regio")	RE	-28.100000	267.400000	0
-# TRANSLATORS: (Iapetus); Pass where Roland and his forces were ambushed by the Saracens.
-Iapetus	5181	_("Roncevaux Terra","terra")	TA	37.000000	120.500000	1284
 # TRANSLATORS: (Iapetus); Town held by Marsilion, eventually taken by the French.
 Iapetus	14499	_("Saragossa Terra","terra")	TA	-45.000000	180.000000	2300
+# TRANSLATORS: (Iapetus); Pass where Roland and his forces were ambushed by the Saracens.
+Iapetus	5181	_("Roncevaux Terra","terra")	TA	37.000000	120.500000	1284
 # TRANSLATORS: (Ida); Cave in Russia.
 Ida	75	_("Afon","crater")	AA	-6.500000	0.000000	0.8
 # TRANSLATORS: (Ida); Cave in the Muller Range of Papua New Guinea.
@@ -2701,6 +2701,58 @@ Lutetia	14849	_("Rhodanus Rimae","rima")	RI	53.000000	39.000000	10.8
 Lutetia	14852	_("Rhenus Rupes","rupes")	RU	20.000000	262.000000	11.8
 # TRANSLATORS: (Lutetia); River at the time of Lutetia, present-day Glonn River in Germany.
 Lutetia	14851	_("Glana Rupes","rupes")	RU	11.000000	124.000000	9.8
+# TRANSLATORS: (Mars); Town in Tunisia.
+Mars	5834	_("Tala","crater")	AA	-20.337600	112.790700	8.51241
+# TRANSLATORS: (Mars); Town in Latvia.
+Mars	5840	_("Talsi","crater")	AA	-41.525500	310.632000	9.58707
+# TRANSLATORS: (Mars); Town in Colombia.
+Mars	5843	_("Tame","crater")	AA	-22.725000	252.011300	13.8035
+# TRANSLATORS: (Mars); Town in Alabama, USA.
+Mars	6149	_("Tuscaloosa","crater")	AA	-0.023900	28.733900	59.6648
+# TRANSLATORS: (Mars); Town in Alabama, USA.
+Mars	6152	_("Tuskegee","crater")	AA	-2.803300	323.911000	62.8796
+# TRANSLATORS: (Mars); John; British physicist (1820-1893).
+Mars	6168	_("Tyndall","crater")	AA	39.733000	169.973300	83.0494
+# TRANSLATORS: (Mars); Town in Aruba.
+Mars	14794	_("Noord","crater")	AA	-19.272100	348.733400	7.8
+# TRANSLATORS: (Mars); Town in Macedonia.
+Mars	14795	_("Resen","crater")	AA	-27.937100	108.867900	7.4
+# TRANSLATORS: (Mars); Town in Slovakia.
+Mars	14857	_("Lipany","crater")	AA	-0.219000	79.669400	50.1
+# TRANSLATORS: (Mars); Valdemar Axel; English astronomer (1910-1981).
+Mars	14782	_("Firsoff","crater")	AA	2.734500	350.625500	90
+# TRANSLATORS: (Mars); Town in New Caledonia.
+Mars	14793	_("Canala","crater")	AA	24.354200	279.923600	12
+# TRANSLATORS: (Mars); Town in the Republic of San Marino.
+Mars	14856	_("Dogana","crater")	AA	-10.010500	306.334200	41.2
+# TRANSLATORS: (Mars); American station in Antarctica.
+Mars	3784	_("McMurdo","crater")	AA	-84.383500	0.587700	26.8979
+# TRANSLATORS: (Mars); David John; astrogeologist (1932-2002).
+Mars	15118	_("Roddy","crater")	AA	-21.645800	320.611300	85.821
+# TRANSLATORS: (Mars); Town in the Republic of Equatorial Guinea.
+Mars	15119	_("Luba","crater")	AA	-18.255800	323.003500	38.327
+# TRANSLATORS: (Mars); Town in the United Arab Emirates.
+Mars	15121	_("Kalba","crater")	AA	-5.885200	154.832500	14.148
+# TRANSLATORS: (Mars); Town in Brunei.
+Mars	15115	_("Muara","crater")	AA	24.321300	340.686200	3.826
+# TRANSLATORS: (Mars); Town in the Republic of Gambia.
+Mars	15120	_("Gunjur","crater")	AA	-0.168900	146.663100	26.848
+# TRANSLATORS: (Mars); Town in the Republic of Sao Tome and Principe.
+Mars	15122	_("Neves","crater")	AA	-3.392700	151.307700	22.134
+# TRANSLATORS: (Mars); Town in the Republic of Djibouti.
+Mars	15123	_("Obock","crater")	AA	-2.007400	150.527500	14.451
+# TRANSLATORS: (Mars); Town in Lesotho.
+Mars	15124	_("Quthing","crater")	AA	0.398900	149.285600	15.587
+# TRANSLATORS: (Mars); Town in Kuwait.
+Mars	15126	_("Wafra","crater")	AA	4.246900	148.539000	30.195
+# TRANSLATORS: (Mars); Town in Cape Verde.
+Mars	15116	_("Tarrafal","crater")	AA	24.264300	340.817200	4.893
+# TRANSLATORS: (Mars); Village in Tuvalu.
+Mars	15125	_("Asau","crater")	AA	-3.630300	154.680500	25.05
+# TRANSLATORS: (Mars); Konstantin Iosifovich; Russian cosmophysicist (1918–1993).
+Mars	15150	_("Gringauz","crater")	AA	-20.673500	324.296400	71.016
+# TRANSLATORS: (Mars); Town in Saint Lucia.
+Mars	14890	_("Micoud","crater")	AA	50.563200	16.338300	51.846
 # TRANSLATORS: (Mars); Town in Belize.
 Mars	14871	_("Corozal","crater")	AA	-38.788600	159.422600	8.334
 # TRANSLATORS: (Mars); Merton Edward; American engineer, planetary geodesist (1917-2001).
@@ -2823,10 +2875,14 @@ Mars	15771	_("Alofi","crater")	AA	9.840000	359.980000	43
 Mars	15768	_("Kaporo","crater")	AA	-0.120000	14.350000	42.7
 # TRANSLATORS: (Mars); Town in Mexico.
 Mars	15770	_("Yelapa","crater")	AA	3.830000	1.130000	29
+# TRANSLATORS: (Mars); Town in China.
+Mars	16038	_("Zhengji","crater")	AA	24.812000	109.939000	0.48
 # TRANSLATORS: (Mars); Town in Italy.
 Mars	15778	_("Cagli","crater")	AA	4.730000	356.450000	28.162
 # TRANSLATORS: (Mars); Town in Vietnam.
 Mars	15473	_("Prao","crater")	AA	-11.164200	56.605100	20
+# TRANSLATORS: (Mars); Town in China.
+Mars	16037	_("Huxiang","crater")	AA	24.887000	109.825000	0.46
 # TRANSLATORS: (Mars); Village in Angola.
 Mars	15440	_("Catota","crater")	AA	51.668000	333.024900	1.3
 # TRANSLATORS: (Mars); Town in Benin.
@@ -2843,6 +2899,8 @@ Mars	15486	_("Bunnik","crater")	AA	-38.070000	217.900000	29
 Mars	15487	_("Nqutu","crater")	AA	-38.040000	169.550000	21
 # TRANSLATORS: (Mars); Town in England.
 Mars	15849	_("Kilkhampton","crater")	AA	17.520000	336.700000	16
+# TRANSLATORS: (Mars); Kalpathy Ramakrishna; Indian physicist and meteorologist (1893-1984).
+Mars	16039	_("Ramanathan","crater")	AA	28.090000	27.900000	89
 # TRANSLATORS: (Mars); Town in California, USA.
 Mars	15850	_("Tehachapi","crater")	AA	36.570000	329.580000	26
 # TRANSLATORS: (Mars); Town on Réunion Island.
@@ -2917,10 +2975,48 @@ Mars	15984	_("Roemer","crater")	AA	-27.460000	8.090000	120
 Mars	15985	_("Kozova","crater")	AA	3.900000	359.040000	50
 # TRANSLATORS: (Mars); Wolfgang; American volcanologist and planetary geologist (1928-2016).
 Mars	15987	_("Elston","crater")	AA	-15.390000	119.180000	75
+# TRANSLATORS: (Mars); Town in Pakistan.
+Mars	16009	_("Mastung","crater")	AA	31.400000	95.950000	2.3
 # TRANSLATORS: (Mars); Town in Tanzania.
 Mars	15998	_("Mikumi","crater")	AA	2.470000	359.960000	16.123
+# TRANSLATORS: (Mars); Town in Indonesia.
+Mars	16010	_("Longboh","crater")	AA	31.320000	95.100000	2
 # TRANSLATORS: (Mars); Town in Italy.
 Mars	16002	_("Piscinas","crater")	AA	4.480000	358.550000	13.393
+# TRANSLATORS: (Mars); Town in Australia.
+Mars	16012	_("Karratha","crater")	AA	-15.690000	203.600000	10
+# TRANSLATORS: (Mars); Town in Australia.
+Mars	16014	_("Dampier","crater")	AA	-15.730000	203.630000	27
+# TRANSLATORS: (Mars); Town in Mongolia.
+Mars	16013	_("Khujirt","crater")	AA	-16.290000	203.030000	38
+# TRANSLATORS: (Mars); Town in China.
+Mars	16015	_("Pingle","crater")	AA	25.977400	110.696800	8.199
+# TRANSLATORS: (Mars); Town in China.
+Mars	16016	_("Xibaipo","crater")	AA	25.660000	110.110000	2
+# TRANSLATORS: (Mars); Town in China.
+Mars	16024	_("Gutian","crater")	AA	24.956000	110.232000	0.71
+# TRANSLATORS: (Mars); Town in China.
+Mars	16026	_("Yangliuqing","crater")	AA	24.890000	110.064000	0.5
+# TRANSLATORS: (Mars); Town in China.
+Mars	16017	_("Wenjiashi","crater")	AA	25.220000	109.440000	18
+# TRANSLATORS: (Mars); Town in China.
+Mars	16018	_("Yaodian","crater")	AA	25.030000	109.700000	2
+# TRANSLATORS: (Mars); Town in China.
+Mars	16019	_("Gujiang","crater")	AA	24.984000	109.897000	0.5
+# TRANSLATORS: (Mars); Town in China.
+Mars	16020	_("Zhouzhuang","crater")	AA	24.870000	109.800000	0.46
+# TRANSLATORS: (Mars); Town in China (Jiangsu Province).
+Mars	16021	_("Qidu","crater")	AA	25.108000	110.258000	1.5
+# TRANSLATORS: (Mars); Town in China.
+Mars	16022	_("Tianzhushan","crater")	AA	25.074000	109.927000	0.23
+# TRANSLATORS: (Mars); Town in China.
+Mars	16023	_("Maji","crater")	AA	25.039000	109.905000	0.28
+# TRANSLATORS: (Mars); Town in China.
+Mars	16025	_("Wuxing","crater")	AA	24.914000	110.103000	0.35
+# TRANSLATORS: (Mars); Town in China.
+Mars	16027	_("Lukeqin","crater")	AA	24.826000	110.133000	0.7
+# TRANSLATORS: (Mars); Town in China.
+Mars	16028	_("Mohe","crater")	AA	24.767000	110.136000	0.9
 # TRANSLATORS: (Mars); Town in the municipality of Pirot, Serbia.
 Mars	15528	_("Krupac","crater")	AA	-7.791700	86.007200	10
 # TRANSLATORS: (Mars); Village in Armenia.
@@ -4921,58 +5017,6 @@ Mars	5812	_("Tabou","crater")	AA	-45.103600	324.960200	7.67663
 Mars	5819	_("Taejin","crater")	AA	-35.204900	85.657600	28.0633
 # TRANSLATORS: (Mars); Town in Thailand.
 Mars	5829	_("Tak","crater")	AA	-26.023400	331.347100	5.20957
-# TRANSLATORS: (Mars); Town in Tunisia.
-Mars	5834	_("Tala","crater")	AA	-20.337600	112.790700	8.51241
-# TRANSLATORS: (Mars); Town in Latvia.
-Mars	5840	_("Talsi","crater")	AA	-41.525500	310.632000	9.58707
-# TRANSLATORS: (Mars); Town in Colombia.
-Mars	5843	_("Tame","crater")	AA	-22.725000	252.011300	13.8035
-# TRANSLATORS: (Mars); Town in Alabama, USA.
-Mars	6149	_("Tuscaloosa","crater")	AA	-0.023900	28.733900	59.6648
-# TRANSLATORS: (Mars); Town in Alabama, USA.
-Mars	6152	_("Tuskegee","crater")	AA	-2.803300	323.911000	62.8796
-# TRANSLATORS: (Mars); John; British physicist (1820-1893).
-Mars	6168	_("Tyndall","crater")	AA	39.733000	169.973300	83.0494
-# TRANSLATORS: (Mars); Town in Aruba.
-Mars	14794	_("Noord","crater")	AA	-19.272100	348.733400	7.8
-# TRANSLATORS: (Mars); Town in Macedonia.
-Mars	14795	_("Resen","crater")	AA	-27.937100	108.867900	7.4
-# TRANSLATORS: (Mars); Town in Slovakia.
-Mars	14857	_("Lipany","crater")	AA	-0.219000	79.669400	50.1
-# TRANSLATORS: (Mars); Valdemar Axel; English astronomer (1910-1981).
-Mars	14782	_("Firsoff","crater")	AA	2.734500	350.625500	90
-# TRANSLATORS: (Mars); Town in New Caledonia.
-Mars	14793	_("Canala","crater")	AA	24.354200	279.923600	12
-# TRANSLATORS: (Mars); Town in the Republic of San Marino.
-Mars	14856	_("Dogana","crater")	AA	-10.010500	306.334200	41.2
-# TRANSLATORS: (Mars); American station in Antarctica.
-Mars	3784	_("McMurdo","crater")	AA	-84.383500	0.587700	26.8979
-# TRANSLATORS: (Mars); David John; astrogeologist (1932-2002).
-Mars	15118	_("Roddy","crater")	AA	-21.645800	320.611300	85.821
-# TRANSLATORS: (Mars); Town in the Republic of Equatorial Guinea.
-Mars	15119	_("Luba","crater")	AA	-18.255800	323.003500	38.327
-# TRANSLATORS: (Mars); Town in the United Arab Emirates.
-Mars	15121	_("Kalba","crater")	AA	-5.885200	154.832500	14.148
-# TRANSLATORS: (Mars); Town in Brunei.
-Mars	15115	_("Muara","crater")	AA	24.321300	340.686200	3.826
-# TRANSLATORS: (Mars); Town in the Republic of Gambia.
-Mars	15120	_("Gunjur","crater")	AA	-0.168900	146.663100	26.848
-# TRANSLATORS: (Mars); Town in the Republic of Sao Tome and Principe.
-Mars	15122	_("Neves","crater")	AA	-3.392700	151.307700	22.134
-# TRANSLATORS: (Mars); Town in the Republic of Djibouti.
-Mars	15123	_("Obock","crater")	AA	-2.007400	150.527500	14.451
-# TRANSLATORS: (Mars); Town in Lesotho.
-Mars	15124	_("Quthing","crater")	AA	0.398900	149.285600	15.587
-# TRANSLATORS: (Mars); Town in Kuwait.
-Mars	15126	_("Wafra","crater")	AA	4.246900	148.539000	30.195
-# TRANSLATORS: (Mars); Town in Cape Verde.
-Mars	15116	_("Tarrafal","crater")	AA	24.264300	340.817200	4.893
-# TRANSLATORS: (Mars); Village in Tuvalu.
-Mars	15125	_("Asau","crater")	AA	-3.630300	154.680500	25.05
-# TRANSLATORS: (Mars); Konstantin Iosifovich; Russian cosmophysicist (1918–1993).
-Mars	15150	_("Gringauz","crater")	AA	-20.673500	324.296400	71.016
-# TRANSLATORS: (Mars); Town in Saint Lucia.
-Mars	14890	_("Micoud","crater")	AA	50.563200	16.338300	51.846
 # TRANSLATORS: (Mars); "Lucky journey or lucky return"; i.e., infernal regions beyond Elysium.
 Mars	1869	_("Eunostos","albedo feature")	AL	22.000000	140.000000	0
 # TRANSLATORS: (Mars); Biblical land to which King Solomon sent naval expedition; probably India.
@@ -5199,12 +5243,12 @@ Mars	5734	_("Styx","albedo feature")	AL	29.707900	160.000000	0
 Mars	5850	_("Tanais","albedo feature")	AL	49.666600	290.000000	0
 # TRANSLATORS: (Mars); "Land of Agelessness."
 Mars	6182	_("Uchronia","albedo feature")	AL	69.781600	100.000000	0
+# TRANSLATORS: (Mars); "Land of sweet-scented perfumes"; South Yemen or India.
+Mars	5988	_("Thymiamata","albedo feature")	AL	9.885000	350.000000	0
 # TRANSLATORS: (Mars); Greek valley south of Mt. Olympus noted for its beauty.
 Mars	5912	_("Tempe","albedo feature")	AL	39.667200	290.000000	0
 # TRANSLATORS: (Mars); Connecting link between East and West; ancient Spanish town Tartessus.
 Mars	5947	_("Tharsis","albedo feature")	AL	0.000000	260.000000	0
-# TRANSLATORS: (Mars); "Land of sweet-scented perfumes"; South Yemen or India.
-Mars	5988	_("Thymiamata","albedo feature")	AL	9.885000	350.000000	0
 # TRANSLATORS: (Mars); "Crossroad of Charon"; meeting place of several netherworld Canals.
 Mars	6088	_("Trivium Charontis","albedo feature")	AL	19.783600	162.000000	0
 # TRANSLATORS: (Mars); "Tithonian Lake"; Tithonus received from his wife Eos eternal life but not eternal youth.
@@ -5225,18 +5269,6 @@ Mars	6596	_("Xanthe","albedo feature")	AL	9.885000	310.000000	0
 Mars	6639	_("Yaonis Regio","albedo feature")	AL	-39.667200	40.000000	0
 # TRANSLATORS: (Mars); Land of the west wind.
 Mars	6719	_("Zephyria","albedo feature")	AL	0.000000	165.000000	0
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	6030	_("Tithoniae Catenae","catena")	CA	-5.495700	278.175600	562
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	2598	_("Hyblaeus Catena","catena")	CA	21.596700	140.618400	10.4857
-# TRANSLATORS: (Mars); From albedo feature at 30N, 200W.
-Mars	5732	_("Stygis Catena","catena")	CA	23.252600	150.567300	65.3808
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	6074	_("Tractus Catena","catena")	CA	26.999100	257.208300	910.572
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	1301	_("Coprates Catena","catena")	CA	-15.003900	297.912700	302.058
-# TRANSLATORS: (Mars); Named for classical albedo feature at 35N, 140W.
-Mars	34	_("Acheron Catena","catena")	CA	37.474000	259.203500	421.77
 # TRANSLATORS: (Mars); Classical albedo name.
 Mars	157	_("Alba Catena","catena")	CA	35.044400	245.422600	144.861
 # TRANSLATORS: (Mars); Albedo feature name.
@@ -5257,6 +5289,36 @@ Mars	1357	_("Cyane Catena","catena")	CA	36.254400	241.696700	204.064
 Mars	4698	_("Phlegethon Catena","catena")	CA	38.825100	256.723800	399.685
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	4474	_("Ophir Catenae","catena")	CA	-9.460000	300.600000	509
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	6030	_("Tithoniae Catenae","catena")	CA	-5.495700	278.175600	562
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	2598	_("Hyblaeus Catena","catena")	CA	21.596700	140.618400	10.4857
+# TRANSLATORS: (Mars); From albedo feature at 30N, 200W.
+Mars	5732	_("Stygis Catena","catena")	CA	23.252600	150.567300	65.3808
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	6074	_("Tractus Catena","catena")	CA	26.999100	257.208300	910.572
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	1301	_("Coprates Catena","catena")	CA	-15.003900	297.912700	302.058
+# TRANSLATORS: (Mars); Named for classical albedo feature at 35N, 140W.
+Mars	34	_("Acheron Catena","catena")	CA	37.474000	259.203500	421.77
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	6960	_("Amenthes Cavi","cavus")	CB	16.231000	114.520100	1330.5
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	2095	_("Ganges Cavus","cavus")	CB	-10.091700	308.553700	43.1062
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	4475	_("Ophir Cavus","cavus")	CB	-9.886000	304.959900	36.717
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	4650	_("Peraea Cavus","cavus")	CB	-29.606700	95.427700	56.2369
+# TRANSLATORS: (Mars); Named for albedo feature at 10S, 195W.
+Mars	503	_("Avernus Cavi","cavus")	CB	-3.717300	172.519100	115
+# TRANSLATORS: (Mars); Albedo name.
+Mars	370	_("Argyre Cavi","cavus")	CB	-48.307000	319.878400	72.3277
+# TRANSLATORS: (Mars); Albedo name.
+Mars	4398	_("Octantis Cavi","cavus")	CB	-52.572400	314.030100	71.214
+# TRANSLATORS: (Mars); Albedo feature Ausonia.
+Mars	480	_("Ausonia Cavus","cavus")	CB	-31.920100	96.553600	49.4975
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	1088	_("Cavi Angusti","cavus")	CB	-78.163600	285.252700	640.037
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	5579	_("Sisyphi Cavi","cavus")	CB	-72.200000	353.700000	423.63
 # TRANSLATORS: (Mars); Classical albedo feature name.
@@ -5295,44 +5357,6 @@ Mars	2612	_("Hyperborei Cavi","cavus")	CB	79.914500	310.302700	92.8092
 Mars	5355	_("Scandia Cavi","cavus")	CB	77.553000	209.651800	663.795
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	14592	_("Ismenius Cavus","cavus")	CB	33.898100	17.075000	90.611
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	6960	_("Amenthes Cavi","cavus")	CB	16.231000	114.520100	1330.5
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	2095	_("Ganges Cavus","cavus")	CB	-10.091700	308.553700	43.1062
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	4475	_("Ophir Cavus","cavus")	CB	-9.886000	304.959900	36.717
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	4650	_("Peraea Cavus","cavus")	CB	-29.606700	95.427700	56.2369
-# TRANSLATORS: (Mars); Named for albedo feature at 10S, 195W.
-Mars	503	_("Avernus Cavi","cavus")	CB	-3.717300	172.519100	115
-# TRANSLATORS: (Mars); Albedo name.
-Mars	370	_("Argyre Cavi","cavus")	CB	-48.307000	319.878400	72.3277
-# TRANSLATORS: (Mars); Albedo name.
-Mars	4398	_("Octantis Cavi","cavus")	CB	-52.572400	314.030100	71.214
-# TRANSLATORS: (Mars); Albedo feature Ausonia.
-Mars	480	_("Ausonia Cavus","cavus")	CB	-31.920100	96.553600	49.4975
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	1088	_("Cavi Angusti","cavus")	CB	-78.163600	285.252700	640.037
-# TRANSLATORS: (Mars); After Caralis Fons, classical albedo feature named after Caralis Lacus, now Beysehir Gölü, in Isauria (Asia Minor).
-Mars	15253	_("Caralis Chaos","chaos")	CH	-37.200400	178.604800	103.352
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	15271	_("Hydrae Chaos","chaos")	CH	-5.902300	300.026200	66
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	15761	_("Aeolis Chaos","chaos")	CH	-7.130000	150.600000	201
-# TRANSLATORS: (Mars); Classical albedo feature name, Nia.
-Mars	15536	_("Nia Chaos","chaos")	CH	-6.741500	292.623700	48
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	2603	_("Hydaspis Chaos","chaos")	CH	3.087500	333.071000	336.041
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14161	_("Xanthe Chaos","chaos")	CH	11.874000	317.783100	34.3662
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14386	_("Chryse Chaos","chaos")	CH	9.864600	322.810400	658.887
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	2605	_("Hydraotes Chaos","chaos")	CH	1.117900	324.708500	419.044
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	4533	_("Oxia Chaos","chaos")	CH	0.220500	320.132400	24.1169
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	2065	_("Galaxias Chaos","chaos")	CH	33.827600	146.518300	234.483
 # TRANSLATORS: (Mars); From albedo feature Echus Lacus at 1N, 90W.
 Mars	1711	_("Echus Chaos","chaos")	CH	10.787900	285.281000	480.512
 # TRANSLATORS: (Mars); From classical albedo feature at 10N, 56W.
@@ -5373,20 +5397,26 @@ Mars	14325	_("Erythraeum Chaos","chaos")	CH	-21.844700	347.622400	147.626
 Mars	457	_("Atlantis Chaos","chaos")	CH	-34.275700	182.691000	181.368
 # TRANSLATORS: (Mars); Named for albedo feature Hellas.
 Mars	2430	_("Hellas Chaos","chaos")	CH	-47.121200	64.408100	590.623
+# TRANSLATORS: (Mars); After Caralis Fons, classical albedo feature named after Caralis Lacus, now Beysehir Gölü, in Isauria (Asia Minor).
+Mars	15253	_("Caralis Chaos","chaos")	CH	-37.200400	178.604800	103.352
 # TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	15364	_("Hellas Chasma","chasma")	CM	-34.637200	65.466000	148
+Mars	15271	_("Hydrae Chaos","chaos")	CH	-5.902300	300.026200	66
 # TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	1000	_("Candor Chasma","chasma")	CM	-6.532800	289.220700	810.609
+Mars	15761	_("Aeolis Chaos","chaos")	CH	-7.130000	150.600000	201
+# TRANSLATORS: (Mars); Classical albedo feature name, Nia.
+Mars	15536	_("Nia Chaos","chaos")	CH	-6.741500	292.623700	48
 # TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	1302	_("Coprates Chasma","chasma")	CM	-13.365400	299.261500	958.311
-# TRANSLATORS: (Mars); Albedo name.
-Mars	4618	_("Pavonis Chasma","chasma")	CM	2.733600	248.976000	45.9418
+Mars	2603	_("Hydaspis Chaos","chaos")	CH	3.087500	333.071000	336.041
 # TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	1712	_("Echus Chasma","chasma")	CM	2.471600	280.038200	391.095
-# TRANSLATORS: (Mars); Albedo name.
-Mars	393	_("Arsia Chasmata","chasma")	CM	-7.469100	240.653900	97.0571
-# TRANSLATORS: (Mars); Classical albedo name.
-Mars	415	_("Ascraeus Chasmata","chasma")	CM	8.765400	254.371900	105.198
+Mars	14161	_("Xanthe Chaos","chaos")	CH	11.874000	317.783100	34.3662
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14386	_("Chryse Chaos","chaos")	CH	9.864600	322.810400	658.887
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	2605	_("Hydraotes Chaos","chaos")	CH	1.117900	324.708500	419.044
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	4533	_("Oxia Chaos","chaos")	CH	0.220500	320.132400	24.1169
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	2065	_("Galaxias Chaos","chaos")	CH	33.827600	146.518300	234.483
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	2096	_("Ganges Chasma","chasma")	CM	-7.955200	312.114900	574.075
 # TRANSLATORS: (Mars); Classical albedo feature name.
@@ -5424,6 +5454,28 @@ Mars	6205	_("Ultimum Chasma","chasma")	CM	-81.097200	151.367700	322.088
 # TRANSLATORS: (Mars); Albedo feature name.
 Mars	1781	_("Elysium Chasma","chasma")	CM	22.385200	141.514200	130
 # TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	15364	_("Hellas Chasma","chasma")	CM	-34.637200	65.466000	148
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	1000	_("Candor Chasma","chasma")	CM	-6.532800	289.220700	810.609
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	1302	_("Coprates Chasma","chasma")	CM	-13.365400	299.261500	958.311
+# TRANSLATORS: (Mars); Albedo name.
+Mars	4618	_("Pavonis Chasma","chasma")	CM	2.733600	248.976000	45.9418
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	1712	_("Echus Chasma","chasma")	CM	2.471600	280.038200	391.095
+# TRANSLATORS: (Mars); Albedo name.
+Mars	393	_("Arsia Chasmata","chasma")	CM	-7.469100	240.653900	97.0571
+# TRANSLATORS: (Mars); Classical albedo name.
+Mars	415	_("Ascraeus Chasmata","chasma")	CM	8.765400	254.371900	105.198
+# TRANSLATORS: (Mars); Classical albedo feature at 13N, 294W.
+Mars	356	_("Arena Colles","collis")	CO	24.627600	82.930500	580.125
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14152	_("Chryse Colles","collis")	CO	8.150700	318.135900	48.659
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	375	_("Ariadnes Colles","collis")	CO	-34.497800	172.775400	188.006
+# TRANSLATORS: (Mars); From albedo feature at 2N, 183W.
+Mars	5874	_("Tartarus Colles","collis")	CO	21.245000	175.189000	1672.69
+# TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	15034	_("Candor Colles","collis")	CO	-6.633100	284.433700	37.38
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	15017	_("Ulysses Colles","collis")	CO	6.141500	236.913300	84.812
@@ -5459,38 +5511,6 @@ Mars	4534	_("Oxia Colles","collis")	CO	21.237300	333.728600	595.237
 Mars	436	_("Astapus Colles","collis")	CO	35.458500	88.080300	597
 # TRANSLATORS: (Mars); Albedo feature name.
 Mars	2066	_("Galaxias Colles","collis")	CO	36.802200	147.481500	610.338
-# TRANSLATORS: (Mars); Classical albedo feature at 13N, 294W.
-Mars	356	_("Arena Colles","collis")	CO	24.627600	82.930500	580.125
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14152	_("Chryse Colles","collis")	CO	8.150700	318.135900	48.659
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	375	_("Ariadnes Colles","collis")	CO	-34.497800	172.775400	188.006
-# TRANSLATORS: (Mars); From albedo feature at 2N, 183W.
-Mars	5874	_("Tartarus Colles","collis")	CO	21.245000	175.189000	1672.69
-# TRANSLATORS: (Mars); From classical albedo feature Iamunae Sinus.
-Mars	2626	_("Iamuna Dorsa","dorsum")	DO	20.970900	309.600300	38.1822
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	15019	_("Aeolis Dorsa","dorsum")	DO	-5.046500	152.634500	459.165
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	15239	_("Aram Dorsum","dorsum")	DO	7.798600	348.762800	83.312
-# TRANSLATORS: (Mars); Named for nearby Arago crater; Dominique F.; French astronomer (1786-1853).
-Mars	15999	_("Arago Dorsa","dorsum")	DO	9.740000	29.390000	27
-# TRANSLATORS: (Mars); From nearby albedo feature Cantabras, at 10N, 5W.
-Mars	16001	_("Cantabras Dorsum","dorsum")	DO	9.500000	354.720000	91
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	6708	_("Zea Dorsa","dorsum")	DO	-48.870800	80.539500	249.019
-# TRANSLATORS: (Mars); Named for classical albedo feature at 25N, 270W.
-Mars	2734	_("Isidis Dorsa","dorsum")	DO	12.923900	88.212100	1074.7
-# TRANSLATORS: (Mars); Named for classical albedo feature at 45N, 120W.
-Mars	347	_("Arcadia Dorsa","dorsum")	DO	55.896100	222.439900	1952.65
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	2222	_("Gordii Dorsum","dorsum")	DO	4.106900	215.857800	481.561
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	1868	_("Eumenides Dorsum","dorsum")	DO	4.792100	203.602200	569.26
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	2487	_("Hesperia Dorsa","dorsum")	DO	-22.801400	113.155500	818.255
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	6597	_("Xanthe Dorsa","dorsum")	DO	35.899500	325.956900	0
 # TRANSLATORS: (Mars); From albedo feature at 45N, 205W.
 Mars	69	_("Aesacus Dorsum","dorsum")	DO	36.817700	153.147100	276.689
 # TRANSLATORS: (Mars); From albedo feature at 20N, 67W.
@@ -5539,12 +5559,104 @@ Mars	4282	_("Nilus Dorsa","dorsum")	DO	20.682700	280.935500	292.901
 Mars	4602	_("Pasithea Dorsum","dorsum")	DO	-55.138100	318.423100	282.199
 # TRANSLATORS: (Mars); One of the Graces.
 Mars	4681	_("Phaenna Dorsum","dorsum")	DO	-53.786900	316.708000	164.165
+# TRANSLATORS: (Mars); From classical albedo feature Iamunae Sinus.
+Mars	2626	_("Iamuna Dorsa","dorsum")	DO	20.970900	309.600300	38.1822
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	15019	_("Aeolis Dorsa","dorsum")	DO	-5.046500	152.634500	459.165
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	15239	_("Aram Dorsum","dorsum")	DO	7.798600	348.762800	83.312
+# TRANSLATORS: (Mars); Named for nearby Arago crater; Dominique F.; French astronomer (1786-1853).
+Mars	15999	_("Arago Dorsa","dorsum")	DO	9.740000	29.390000	27
+# TRANSLATORS: (Mars); From nearby albedo feature Cantabras, at 10N, 5W.
+Mars	16001	_("Cantabras Dorsum","dorsum")	DO	9.500000	354.720000	91
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	6708	_("Zea Dorsa","dorsum")	DO	-48.870800	80.539500	249.019
+# TRANSLATORS: (Mars); Named for classical albedo feature at 25N, 270W.
+Mars	2734	_("Isidis Dorsa","dorsum")	DO	12.923900	88.212100	1074.7
+# TRANSLATORS: (Mars); Named for classical albedo feature at 45N, 120W.
+Mars	347	_("Arcadia Dorsa","dorsum")	DO	55.896100	222.439900	1952.65
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	2222	_("Gordii Dorsum","dorsum")	DO	4.106900	215.857800	481.561
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	1868	_("Eumenides Dorsum","dorsum")	DO	4.792100	203.602200	569.26
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	2487	_("Hesperia Dorsa","dorsum")	DO	-22.801400	113.155500	818.255
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	6597	_("Xanthe Dorsa","dorsum")	DO	35.899500	325.956900	0
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	15195	_("Zephyria Fluctus","fluctus")	FL	0.719400	155.525400	42
 # TRANSLATORS: (Mars); Albedo feature name.
 Mars	5859	_("Tantalus Fluctus","fluctus")	FL	35.926300	264.315800	794.342
 # TRANSLATORS: (Mars); Albedo feature name.
 Mars	2067	_("Galaxias Fluctūs","fluctus")	FL	30.956500	143.028700	607.03
+# TRANSLATORS: (Mars); Albedo name.
+Mars	4619	_("Pavonis Fossae","fossa")	FO	4.148600	248.714400	156.081
+# TRANSLATORS: (Mars); Classical albedo feature name
+Mars	1105	_("Ceraunius Fossae","fossa")	FO	27.003700	249.852200	1166.63
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	4271	_("Nili Fossae","fossa")	FO	22.018200	76.694800	727.906
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	6236	_("Uranius Fossae","fossa")	FO	25.288300	269.870500	394.115
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	1713	_("Echus Fossae","fossa")	FO	2.611200	283.253500	421.031
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	4275	_("Nilokeras Fossa","fossa")	FO	24.594600	302.171500	267
+# TRANSLATORS: (Mars); Previously named feature at 30N, 75W; expanded coordinates.
+Mars	3191	_("Labeatis Fossae","fossa")	FO	24.576200	275.471900	1496.36
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	5267	_("Sacra Fossae","fossa")	FO	20.361100	289.999100	950
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	6722	_("Zephyrus Fossae","fossa")	FO	23.928100	144.188700	306.188
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	2457	_("Hephaestus Fossae","fossa")	FO	20.835800	122.847000	633.319
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	3795	_("Medusae Fossae","fossa")	FO	-2.166300	195.804400	278.521
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	2601	_("Hyblaeus Fossae","fossa")	FO	21.437700	137.055700	375
+# TRANSLATORS: (Mars); Classical albedo feature at 10S, 96W.
+Mars	4323	_("Noctis Fossae","fossa")	FO	-2.693400	261.151800	712.728
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	3814	_("Melas Fossae","fossa")	FO	-26.283000	288.478000	568.181
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	4184	_("Nectaris Fossae","fossa")	FO	-23.085000	302.843200	623.072
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	2157	_("Gigas Fossae","fossa")	FO	3.550800	230.436100	190
+# TRANSLATORS: (Mars); Classical albedo name.
+Mars	6031	_("Tithoniae Fossae","fossa")	FO	-4.319800	276.961100	838
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	4243	_("Nia Fossae","fossa")	FO	-14.733100	288.225500	379.556
+# TRANSLATORS: (Mars); From albedo feature at 44S, 130W.
+Mars	2640	_("Icaria Fossae","fossa")	FO	-48.088800	234.838300	2115.45
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	1230	_("Claritas Fossae","fossa")	FO	-27.887300	255.762300	2030.64
+# TRANSLATORS: (Mars); From albedo feature at 46S, 87W.
+Mars	1305	_("Coracis Fossae","fossa")	FO	-35.815900	279.137000	748.958
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	5953	_("Thaumasia Fossae","fossa")	FO	-47.750300	268.951000	996.182
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	5575	_("Sirenum Fossae","fossa")	FO	-35.573900	197.261800	2731.21
+# TRANSLATORS: (Mars); From albedo feature at 20N, 205W.
+Mars	165	_("Albor Fossae","fossa")	FO	18.089100	150.776100	155
+# TRANSLATORS: (Mars); From albedo feature at 10n, 212W. Changed from Cerberus Rupes.
+Mars	1109	_("Cerberus Fossae","fossa")	FO	11.276600	166.373800	1235
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	79	_("Aganippe Fossa","fossa")	FO	-8.488500	233.997300	537.163
+# TRANSLATORS: (Mars); The son of Ares and Astynome.
+Mars	981	_("Calydon Fossa","fossa")	FO	-7.434100	272.018400	351.246
+# TRANSLATORS: (Mars); Albedo name.
+Mars	1123	_("Chalce Fossa","fossa")	FO	-51.665400	320.412800	33.9728
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	1782	_("Elysium Fossae","fossa")	FO	24.076000	146.142800	1044
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	1839	_("Erythraea Fossa","fossa")	FO	-27.270400	329.057300	155.19
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	2068	_("Galaxias Fossae","fossa")	FO	36.633600	142.000800	552
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	5733	_("Stygis Fossae","fossa")	FO	26.915300	149.833600	385
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	4393	_("Oceanidum Fossa","fossa")	FO	-61.579700	330.488600	167.159
+# TRANSLATORS: (Mars); From albedo feature at 17N, 134W.
+Mars	4452	_("Olympica Fossae","fossa")	FO	24.853100	246.078100	420
 # TRANSLATORS: (Mars); Named for nearby valles.
 Mars	3627	_("Mangala Fossa","fossa")	FO	-17.274000	214.116300	695
 # TRANSLATORS: (Mars); Classical albedo name.
@@ -5555,6 +5667,10 @@ Mars	14924	_("Sinai Fossae","fossa")	FO	-14.081600	281.331600	589.154
 Mars	15243	_("Atrax Fossa","fossa")	FO	38.189200	271.022700	34.423
 # TRANSLATORS: (Mars); Classical martian albedo feature, Pyrrhae.
 Mars	15472	_("Pyrrhae Fossae","fossa")	FO	-29.200000	336.200000	430
+# TRANSLATORS: (Mars); Named for nearby crater, Yaodian.
+Mars	16029	_("Yaodian Fossae","fossa")	FO	25.120000	109.840000	15
+# TRANSLATORS: (Mars); Named for nearby crater, Qidu.
+Mars	16030	_("Qidu Fossae","fossa")	FO	25.080000	110.070000	12
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	3827	_("Memnonia Fossae","fossa")	FO	-23.626900	206.178900	1585.28
 # TRANSLATORS: (Mars); Classical albedo feature name.
@@ -5595,78 +5711,6 @@ Mars	4883	_("Pyramus Fossae","fossa")	FO	50.394800	66.312900	298.183
 Mars	6075	_("Tractus Fossae","fossa")	FO	25.893800	258.717300	403.055
 # TRANSLATORS: (Mars); From albedo feature name.
 Mars	6210	_("Ulysses Fossae","fossa")	FO	9.947400	236.932800	849.943
-# TRANSLATORS: (Mars); Albedo name.
-Mars	4619	_("Pavonis Fossae","fossa")	FO	4.148600	248.714400	156.081
-# TRANSLATORS: (Mars); Classical albedo feature name
-Mars	1105	_("Ceraunius Fossae","fossa")	FO	27.003700	249.852200	1166.63
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	4271	_("Nili Fossae","fossa")	FO	22.018200	76.694800	727.906
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	6236	_("Uranius Fossae","fossa")	FO	25.288300	269.870500	394.115
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	1713	_("Echus Fossae","fossa")	FO	2.611200	283.253500	421.031
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	4275	_("Nilokeras Fossa","fossa")	FO	24.594600	302.171500	267
-# TRANSLATORS: (Mars); Previously named feature at 30N, 75W; expanded coordinates.
-Mars	3191	_("Labeatis Fossae","fossa")	FO	24.576200	275.471900	1496.36
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	5267	_("Sacra Fossae","fossa")	FO	20.361100	289.999100	950
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	6722	_("Zephyrus Fossae","fossa")	FO	23.928100	144.188700	306.188
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	2457	_("Hephaestus Fossae","fossa")	FO	20.835800	122.847000	633.319
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	3795	_("Medusae Fossae","fossa")	FO	-2.166300	195.804400	278.521
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	2601	_("Hyblaeus Fossae","fossa")	FO	21.437700	137.055700	375
-# TRANSLATORS: (Mars); Classical albedo feature at 10S, 96W.
-Mars	4323	_("Noctis Fossae","fossa")	FO	-2.693400	261.151800	712.728
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	3814	_("Melas Fossae","fossa")	FO	-26.283000	288.478000	568.181
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	2157	_("Gigas Fossae","fossa")	FO	3.550800	230.436100	190
-# TRANSLATORS: (Mars); Classical albedo name.
-Mars	6031	_("Tithoniae Fossae","fossa")	FO	-4.319800	276.961100	838
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	4184	_("Nectaris Fossae","fossa")	FO	-23.085000	302.843200	623.072
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	4243	_("Nia Fossae","fossa")	FO	-14.733100	288.225500	379.556
-# TRANSLATORS: (Mars); From albedo feature at 44S, 130W.
-Mars	2640	_("Icaria Fossae","fossa")	FO	-48.088800	234.838300	2115.45
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	1230	_("Claritas Fossae","fossa")	FO	-27.887300	255.762300	2030.64
-# TRANSLATORS: (Mars); From albedo feature at 46S, 87W.
-Mars	1305	_("Coracis Fossae","fossa")	FO	-35.815900	279.137000	748.958
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	5953	_("Thaumasia Fossae","fossa")	FO	-47.750300	268.951000	996.182
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	5575	_("Sirenum Fossae","fossa")	FO	-35.573900	197.261800	2731.21
-# TRANSLATORS: (Mars); From albedo feature at 20N, 205W.
-Mars	165	_("Albor Fossae","fossa")	FO	18.089100	150.776100	155
-# TRANSLATORS: (Mars); From albedo feature at 10n, 212W. Changed from Cerberus Rupes.
-Mars	1109	_("Cerberus Fossae","fossa")	FO	11.276600	166.373800	1235
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	79	_("Aganippe Fossa","fossa")	FO	-8.488500	233.997300	537.163
-# TRANSLATORS: (Mars); The son of Ares and Astynome.
-Mars	981	_("Calydon Fossa","fossa")	FO	-7.434100	272.018400	351.246
-# TRANSLATORS: (Mars); Albedo name.
-Mars	1123	_("Chalce Fossa","fossa")	FO	-51.665400	320.412800	33.9728
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	1782	_("Elysium Fossae","fossa")	FO	24.076000	146.142800	1044
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	1839	_("Erythraea Fossa","fossa")	FO	-27.270400	329.057300	155.19
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	2068	_("Galaxias Fossae","fossa")	FO	36.633600	142.000800	552
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	5733	_("Stygis Fossae","fossa")	FO	26.915300	149.833600	385
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	4393	_("Oceanidum Fossa","fossa")	FO	-61.579700	330.488600	167.159
-# TRANSLATORS: (Mars); From albedo feature at 17N, 134W.
-Mars	4452	_("Olympica Fossae","fossa")	FO	24.853100	246.078100	420
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	15035	_("Ceti Labes","labes")	LA	-6.777600	284.266900	11.05
-# TRANSLATORS: (Mars); Classical albedo feature, Baetis.
-Mars	15537	_("Baetis Labēs","labes")	LA	-3.672100	288.542800	88
 # TRANSLATORS: (Mars); From albedo feature at 14S, 65W.
 Mars	1303	_("Coprates Labes","labes")	LA	-11.820300	292.209800	61.974
 # TRANSLATORS: (Mars); From classical albedo feature at 5N, 75W.
@@ -5678,6 +5722,14 @@ Mars	2758	_("Ius Labes","labes")	LA	-7.473600	281.537500	61.1806
 # TRANSLATORS: (Mars); From albedo feature at 10S, 65W.
 Mars	4477	_("Ophir Labes","labes")	LA	-11.010500	291.721100	92.5259
 # TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	15035	_("Ceti Labes","labes")	LA	-6.777600	284.266900	11.05
+# TRANSLATORS: (Mars); Classical albedo feature, Baetis.
+Mars	15537	_("Baetis Labēs","labes")	LA	-3.672100	288.542800	88
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	4324	_("Noctis Labyrinthus","labyrinthus")	LB	-6.362500	258.811100	1190.31
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14177	_("Angustus Labyrinthus","labyrinthus")	LB	-81.621800	296.609900	67.5236
+# TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	7024	_("Tyrrhenus Labyrinthus","labyrinthus")	LB	-16.181700	101.115500	102.677
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	2614	_("Hyperboreus Labyrinthus","labyrinthus")	LB	80.283800	300.249100	111.972
@@ -5686,65 +5738,17 @@ Mars	1366	_("Cydonia Labyrinthus","labyrinthus")	LB	41.290700	347.943400	344.051
 # TRANSLATORS: (Mars); Classical albedo feature name; "A River of Diamonds"; today's River Sarbarnarekha in India.
 Mars	45	_("Adamas Labyrinthus","labyrinthus")	LB	35.703500	105.116600	853
 # TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	4324	_("Noctis Labyrinthus","labyrinthus")	LB	-6.362500	258.811100	1190.31
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14177	_("Angustus Labyrinthus","labyrinthus")	LB	-81.621800	296.609900	67.5236
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14287	_("Gemina Lingula","lingula")	LN	81.870000	2.590000	772.89
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14155	_("Hyperborea Lingula","lingula")	LN	80.318000	306.461800	124.8
-# TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	6203	_("Ultima Lingula","lingula")	LN	-76.321900	142.562800	551.281
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	484	_("Australe Lingula","lingula")	LN	-84.052700	68.559300	436.331
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	4831	_("Promethei Lingula","lingula")	LN	-82.796900	119.892000	571.627
 # TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14287	_("Gemina Lingula","lingula")	LN	81.870000	2.590000	772.89
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14155	_("Hyperborea Lingula","lingula")	LN	80.318000	306.461800	124.8
+# TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	15705	_("Olympus Maculae","macula")	MA	17.360000	217.160000	124
-# TRANSLATORS: (Mars); Classical albedo feature name, Chrysas.
-Mars	15538	_("Chrysas Mensa","mensa")	MN	-6.766200	289.902400	167
-# TRANSLATORS: (Mars); Albedo feature Ceti Lacus.
-Mars	1115	_("Ceti Mensa","mensa")	MN	-5.893900	283.978000	133.951
-# TRANSLATORS: (Mars); Classical albedo feature name, Juventae Fons
-Mars	15316	_("Juventae Mensa","mensa")	MN	-7.930000	294.374500	116
-# TRANSLATORS: (Mars); Classical albedo feature name, Nia
-Mars	15317	_("Nia Mensa","mensa")	MN	-7.721900	292.684800	95
-# TRANSLATORS: (Mars); Classical martian albedo feature, Coprates.
-Mars	15438	_("Coprates Mensa","mensa")	MN	-12.200400	288.836500	240
-# TRANSLATORS: (Mars); Classical martian albedo feature, Ius.
-Mars	15439	_("Ius Mensa","mensa")	MN	-8.602600	284.682100	160
-# TRANSLATORS: (Mars); Classical martian albedo feature, Melas.
-Mars	15437	_("Melas Mensa","mensa")	MN	-10.723200	285.847800	245
-# TRANSLATORS: (Mars); Named for nearby crater Izola.
-Mars	15897	_("Izola Mensa","mensa")	MN	-25.890000	54.290000	10.8
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	15173	_("Ophir Mensa","mensa")	MN	-3.994500	286.509200	103.331
-# TRANSLATORS: (Mars); From albedo feature at 48S, 290W.
-Mars	15970	_("Peneus Mensa","mensa")	MN	-45.460000	55.100000	30
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	485	_("Australe Mensa","mensa")	MN	-86.876000	357.240000	172
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	3192	_("Labeatis Mensa","mensa")	MN	25.504200	285.533800	124.674
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	5268	_("Sacra Mensa","mensa")	MN	24.642000	291.784800	577
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	3517	_("Lunae Mensa","mensa")	MN	23.910800	297.499500	114.751
-# TRANSLATORS: (Mars); From classical albedo feature name.
-Mars	37	_("Acidalia Mensa","mensa")	MN	46.693800	334.657600	226.861
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14158	_("Olympia Mensae","mensa")	MN	78.001600	119.975100	335.417
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14160	_("Tenuis Mensa","mensa")	MN	81.127300	267.040900	120.919
-# TRANSLATORS: (Mars); From albedo feature at 50N, 355W.
-Mars	1367	_("Cydonia Mensae","mensa")	MN	34.561800	347.666700	764.957
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	4276	_("Nilokeras Mensae","mensa")	MN	30.480600	308.051300	450.884
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	4279	_("Nilosyrtis Mensae","mensa")	MN	34.774900	68.470400	676.025
-# TRANSLATORS: (Mars); From albedo feature at 35N, 355W.
-Mars	1509	_("Deuteronilus Mensae","mensa")	MN	45.109500	23.918400	919.167
-# TRANSLATORS: (Mars); From albedo feature at 42N, 315W.
-Mars	4852	_("Protonilus Mensae","mensa")	MN	43.869400	48.863600	1033.97
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	14147	_("Abalos Mensa","mensa")	MN	81.169900	284.395900	129.183
 # TRANSLATORS: (Mars); Classical albedo name.
@@ -5775,6 +5779,106 @@ Mars	66	_("Aeolis Mensae","mensa")	MN	-3.253200	140.630700	785.089
 Mars	1811	_("Eos Mensa","mensa")	MN	-11.009000	317.839100	346.67
 # TRANSLATORS: (Mars); Albedo feature name.
 Mars	481	_("Ausonia Mensa","mensa")	MN	-30.015600	97.720300	102.515
+# TRANSLATORS: (Mars); Classical albedo feature name, Chrysas.
+Mars	15538	_("Chrysas Mensa","mensa")	MN	-6.766200	289.902400	167
+# TRANSLATORS: (Mars); Albedo feature Ceti Lacus.
+Mars	1115	_("Ceti Mensa","mensa")	MN	-5.893900	283.978000	133.951
+# TRANSLATORS: (Mars); Classical albedo feature name, Juventae Fons
+Mars	15316	_("Juventae Mensa","mensa")	MN	-7.930000	294.374500	116
+# TRANSLATORS: (Mars); Classical albedo feature name, Nia
+Mars	15317	_("Nia Mensa","mensa")	MN	-7.721900	292.684800	95
+# TRANSLATORS: (Mars); Classical martian albedo feature, Coprates.
+Mars	15438	_("Coprates Mensa","mensa")	MN	-12.200400	288.836500	240
+# TRANSLATORS: (Mars); Classical martian albedo feature, Ius.
+Mars	15439	_("Ius Mensa","mensa")	MN	-8.602600	284.682100	160
+# TRANSLATORS: (Mars); Classical martian albedo feature, Melas.
+Mars	15437	_("Melas Mensa","mensa")	MN	-10.723200	285.847800	245
+# TRANSLATORS: (Mars); Named for nearby crater Izola.
+Mars	15897	_("Izola Mensa","mensa")	MN	-25.890000	54.290000	10.8
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	15173	_("Ophir Mensa","mensa")	MN	-3.994500	286.509200	103.331
+# TRANSLATORS: (Mars); From albedo feature at 48S, 290W.
+Mars	15970	_("Peneus Mensa","mensa")	MN	-45.460000	55.100000	30
+# TRANSLATORS: (Mars); Named for nearby crater, Wenjiashi.
+Mars	16034	_("Wenjiashi Mensa","mensa")	MN	24.810000	109.570000	4
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	485	_("Australe Mensa","mensa")	MN	-86.876000	357.240000	172
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	3192	_("Labeatis Mensa","mensa")	MN	25.504200	285.533800	124.674
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	5268	_("Sacra Mensa","mensa")	MN	24.642000	291.784800	577
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	3517	_("Lunae Mensa","mensa")	MN	23.910800	297.499500	114.751
+# TRANSLATORS: (Mars); From classical albedo feature name.
+Mars	37	_("Acidalia Mensa","mensa")	MN	46.693800	334.657600	226.861
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14158	_("Olympia Mensae","mensa")	MN	78.001600	119.975100	335.417
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14160	_("Tenuis Mensa","mensa")	MN	81.127300	267.040900	120.919
+# TRANSLATORS: (Mars); From albedo feature at 50N, 355W.
+Mars	1367	_("Cydonia Mensae","mensa")	MN	34.561800	347.666700	764.957
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	4276	_("Nilokeras Mensae","mensa")	MN	30.480600	308.051300	450.884
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	4279	_("Nilosyrtis Mensae","mensa")	MN	34.774900	68.470400	676.025
+# TRANSLATORS: (Mars); From albedo feature at 35N, 355W.
+Mars	1509	_("Deuteronilus Mensae","mensa")	MN	45.109500	23.918400	919.167
+# TRANSLATORS: (Mars); From albedo feature at 42N, 315W.
+Mars	4852	_("Protonilus Mensae","mensa")	MN	43.869400	48.863600	1033.97
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14312	_("Uranius Mons","mons")	MO	26.898400	267.849700	265.17
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	1783	_("Elysium Mons","mons")	MO	25.023200	147.213800	401
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14310	_("Tyrrhenus Mons","mons")	MO	-21.629900	105.880900	269.768
+# TRANSLATORS: (Mars); Ascraeus Lacus-classical albedo feature name.
+Mars	417	_("Ascraeus Mons","mons")	MO	11.921600	255.919200	456.396
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	1714	_("Echus Montes","mons")	MO	7.814500	282.050000	397.061
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	6598	_("Xanthe Montes","mons")	MO	18.132000	305.081800	499.32
+# TRANSLATORS: (Mars); From albedo feature at 17N, 186W.
+Mars	2496	_("Hibes Montes","mons")	MO	3.790900	171.342900	140
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	5875	_("Tartarus Montes","mons")	MO	15.459300	167.543500	1086.46
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14573	_("Syria Mons","mons")	MO	-13.880400	255.728500	73.4697
+# TRANSLATORS: (Mars); From albedo feature Anseris Fons.
+Mars	288	_("Anseris Mons","mons")	MO	-29.805000	86.652500	52.5138
+# TRANSLATORS: (Mars); Classical albedo feature.
+Mars	2151	_("Geryon Montes","mons")	MO	-7.723500	278.383700	377.828
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	486	_("Australe Montes","mons")	MO	-80.186600	14.051800	411.672
+# TRANSLATORS: (Mars); Name change from Charitum Tholus.
+Mars	4394	_("Oceanidum Mons","mons")	MO	-54.926000	318.774100	33.395
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14307	_("Apollinaris Mons","mons")	MO	-9.171200	174.793000	275.395
+# TRANSLATORS: (Mars); Albedo name.
+Mars	1124	_("Chalce Montes","mons")	MO	-53.723400	322.347500	100
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	4214	_("Nereidum Montes","mons")	MO	-37.573200	316.788700	1142.58
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	4651	_("Peraea Mons","mons")	MO	-31.078200	86.114400	14.9404
+# TRANSLATORS: (Mars); Albedo name.
+Mars	4399	_("Octantis Mons","mons")	MO	-55.258800	317.147500	19.0859
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14309	_("Hadriacus Mons","mons")	MO	-31.293800	91.856700	450
+# TRANSLATORS: (Mars); Albedo feature Centauri Lacus.
+Mars	1100	_("Centauri Montes","mons")	MO	-38.671200	95.521900	271
+# TRANSLATORS: (Mars); Albedo feature Hellas.
+Mars	2431	_("Hellas Montes","mons")	MO	-37.634100	97.608700	159.649
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14180	_("Chronius Mons","mons")	MO	-61.493500	178.012400	56.1438
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14179	_("Thyles Montes","mons")	MO	-69.879800	126.537900	380
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	1873	_("Euripus Mons","mons")	MO	-44.823000	105.183500	88.9135
+# TRANSLATORS: (Mars); From albedo feature at 67S, 348W.
+Mars	5580	_("Sisyphi Montes","mons")	MO	-69.653500	13.079700	200
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	1315	_("Coronae Montes","mons")	MO	-34.309400	86.109400	247.396
+# TRANSLATORS: (Mars); Named for albedo feature Labeatis Lacus.
+Mars	3193	_("Labeatis Mons","mons")	MO	37.482400	284.144300	42.7801
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	15236	_("Argyre Mons","mons")	MO	-50.369000	311.906100	60.58
 # TRANSLATORS: (Mars); Classical martian albedo feature, Coprates
@@ -5842,59 +5946,7 @@ Mars	3391	_("Libya Montes","mons")	MO	1.442400	88.228400	1043.63
 # TRANSLATORS: (Mars); Classical albedo name.
 Mars	2069	_("Galaxius Mons","mons")	MO	34.763500	142.313000	22.2254
 # TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14312	_("Uranius Mons","mons")	MO	26.898400	267.849700	265.17
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	1783	_("Elysium Mons","mons")	MO	25.023200	147.213800	401
-# TRANSLATORS: (Mars); Ascraeus Lacus-classical albedo feature name.
-Mars	417	_("Ascraeus Mons","mons")	MO	11.921600	255.919200	456.396
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	1714	_("Echus Montes","mons")	MO	7.814500	282.050000	397.061
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	6598	_("Xanthe Montes","mons")	MO	18.132000	305.081800	499.32
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14310	_("Tyrrhenus Mons","mons")	MO	-21.629900	105.880900	269.768
-# TRANSLATORS: (Mars); From albedo feature at 17N, 186W.
-Mars	2496	_("Hibes Montes","mons")	MO	3.790900	171.342900	140
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	5875	_("Tartarus Montes","mons")	MO	15.459300	167.543500	1086.46
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14573	_("Syria Mons","mons")	MO	-13.880400	255.728500	73.4697
-# TRANSLATORS: (Mars); From albedo feature Anseris Fons.
-Mars	288	_("Anseris Mons","mons")	MO	-29.805000	86.652500	52.5138
-# TRANSLATORS: (Mars); Classical albedo feature.
-Mars	2151	_("Geryon Montes","mons")	MO	-7.723500	278.383700	377.828
-# TRANSLATORS: (Mars); Name change from Charitum Tholus.
-Mars	4394	_("Oceanidum Mons","mons")	MO	-54.926000	318.774100	33.395
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14307	_("Apollinaris Mons","mons")	MO	-9.171200	174.793000	275.395
-# TRANSLATORS: (Mars); Albedo name.
-Mars	1124	_("Chalce Montes","mons")	MO	-53.723400	322.347500	100
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	4214	_("Nereidum Montes","mons")	MO	-37.573200	316.788700	1142.58
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	4651	_("Peraea Mons","mons")	MO	-31.078200	86.114400	14.9404
-# TRANSLATORS: (Mars); Albedo name.
-Mars	4399	_("Octantis Mons","mons")	MO	-55.258800	317.147500	19.0859
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14309	_("Hadriacus Mons","mons")	MO	-31.293800	91.856700	450
-# TRANSLATORS: (Mars); Albedo feature Centauri Lacus.
-Mars	1100	_("Centauri Montes","mons")	MO	-38.671200	95.521900	271
-# TRANSLATORS: (Mars); Albedo feature Hellas.
-Mars	2431	_("Hellas Montes","mons")	MO	-37.634100	97.608700	159.649
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14180	_("Chronius Mons","mons")	MO	-61.493500	178.012400	56.1438
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	486	_("Australe Montes","mons")	MO	-80.186600	14.051800	411.672
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14179	_("Thyles Montes","mons")	MO	-69.879800	126.537900	380
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	1873	_("Euripus Mons","mons")	MO	-44.823000	105.183500	88.9135
-# TRANSLATORS: (Mars); From albedo feature at 67S, 348W.
-Mars	5580	_("Sisyphi Montes","mons")	MO	-69.653500	13.079700	200
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	1315	_("Coronae Montes","mons")	MO	-34.309400	86.109400	247.396
-# TRANSLATORS: (Mars); Named for albedo feature Labeatis Lacus.
-Mars	3193	_("Labeatis Mons","mons")	MO	37.482400	284.144300	42.7801
+Mars	15151	_("Hadriacus Palus","palus")	PA	-27.247300	77.296900	176.33
 # TRANSLATORS: (Mars); From classical albedo feature at 48S, 290W.
 Mars	15365	_("Peneus Palus","palus")	PA	-35.055800	56.710600	870
 # TRANSLATORS: (Mars); Classical albedo feature name, Echus Lacus.
@@ -5904,7 +5956,23 @@ Mars	15001	_("Aeolis Palus","palus")	PA	-4.465200	137.421500	111.628
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	14162	_("Cerberus Palus","palus")	PA	5.776500	148.145200	466.678
 # TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	15151	_("Hadriacus Palus","palus")	PA	-27.247300	77.296900	176.33
+Mars	737	_("Biblis Patera","patera")	PE	2.355800	236.182300	53.6451
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	6211	_("Ulysses Patera","patera")	PE	2.946200	238.579300	57.8627
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	6237	_("Uranius Patera","patera")	PE	26.316800	267.196000	114
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	4272	_("Nili Patera","patera")	PE	8.968800	67.167300	67.5145
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	4484	_("Orcus Patera","patera")	PE	14.133200	178.353800	387.636
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	323	_("Apollinaris Patera","patera")	PE	-8.574300	174.182500	89.6013
+# TRANSLATORS: (Mars); From albedo feature at 48S, 290W.
+Mars	4646	_("Peneus Patera","patera")	PE	-57.816600	52.645300	128.504
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	3604	_("Malea Patera","patera")	PE	-63.542800	51.585500	241.606
+# TRANSLATORS: (Mars); Classical albedo name.
+Mars	2745	_("Issedon Paterae","patera")	PE	38.126100	269.748000	5.31057
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	15038	_("Euphrates Patera","patera")	PE	38.429700	10.260200	20.268
 # TRANSLATORS: (Mars); Classical albedo feature name.
@@ -5944,23 +6012,15 @@ Mars	159	_("Alba Patera","patera")	PE	39.525800	250.824200	65.9752
 # TRANSLATORS: (Mars); Mare Amphitrites; classical albedo feature name.
 Mars	242	_("Amphitrites Patera","patera")	PE	-58.696200	60.867600	129.796
 # TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	737	_("Biblis Patera","patera")	PE	2.355800	236.182300	53.6451
+Mars	1203	_("Chryse Planitia","planitia")	PL	28.433300	319.692700	1542.44
 # TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	6211	_("Ulysses Patera","patera")	PE	2.946200	238.579300	57.8627
+Mars	1784	_("Elysium Planitia","planitia")	PL	2.979000	154.737200	3000.79
 # TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	6237	_("Uranius Patera","patera")	PE	26.316800	267.196000	114
+Mars	371	_("Argyre Planitia","planitia")	PL	-49.840600	316.690200	892.933
 # TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	4272	_("Nili Patera","patera")	PE	8.968800	67.167300	67.5145
+Mars	2432	_("Hellas Planitia","planitia")	PL	-42.430100	70.502500	2299.16
 # TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	4484	_("Orcus Patera","patera")	PE	14.133200	178.353800	387.636
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	323	_("Apollinaris Patera","patera")	PE	-8.574300	174.182500	89.6013
-# TRANSLATORS: (Mars); From albedo feature at 48S, 290W.
-Mars	4646	_("Peneus Patera","patera")	PE	-57.816600	52.645300	128.504
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	3604	_("Malea Patera","patera")	PE	-63.542800	51.585500	241.606
-# TRANSLATORS: (Mars); Classical albedo name.
-Mars	2745	_("Issedon Paterae","patera")	PE	38.126100	269.748000	5.31057
+Mars	14779	_("Eridania Planitia","planitia")	PL	-38.148500	122.214500	1062.13
 # TRANSLATORS: (Mars); Classical albedo feature name; home of the Amazons.
 Mars	220	_("Amazonis Planitia","planitia")	PL	25.746100	197.087200	2809.04
 # TRANSLATORS: (Mars); Classical albedo feature name.
@@ -5971,44 +6031,6 @@ Mars	38	_("Acidalia Planitia","planitia")	PL	49.760000	339.260000	3505
 Mars	348	_("Arcadia Planitia","planitia")	PL	49.020000	188.150000	2245
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	2735	_("Isidis Planitia","planitia")	PL	13.935700	88.377200	1224.58
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	1203	_("Chryse Planitia","planitia")	PL	28.433300	319.692700	1542.44
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	1784	_("Elysium Planitia","planitia")	PL	2.979000	154.737200	3000.79
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	371	_("Argyre Planitia","planitia")	PL	-49.840600	316.690200	892.933
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	2432	_("Hellas Planitia","planitia")	PL	-42.430100	70.502500	2299.16
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14779	_("Eridania Planitia","planitia")	PL	-38.148500	122.214500	1062.13
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	5581	_("Sisyphi Planum","planum")	PM	-69.641700	6.413500	1032.87
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	15366	_("Coronae Planum","planum")	PM	-32.682200	65.409200	265
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14281	_("Olympia Planum","planum")	PM	82.180000	188.810000	804.39
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	228	_("Amenthes Planum","planum")	PM	3.400000	105.920000	953
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	15821	_("Oxia Planum","planum")	PM	17.280000	334.290000	231.029
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	15880	_("Nili Planum","planum")	PM	18.600000	77.100000	128.547
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	3854	_("Meridiani Planum","planum")	PM	-0.040000	356.860000	1058.53
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	4754	_("Planum Boreum","planum")	PM	87.320000	54.960000	354.63
-# TRANSLATORS: (Mars); Classical albedo feature.
-Mars	4753	_("Planum Australe","planum")	PM	-83.350000	157.700000	1429.87
-# TRANSLATORS: (Mars); From albedo feature at 60S, 290W.
-Mars	3605	_("Malea Planum","planum")	PM	-65.821400	62.942900	872.466
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14164	_("Zephyria Planum","planum")	PM	-1.080700	153.729700	575.107
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	3519	_("Lunae Planum","planum")	PM	10.793300	294.487700	1817.66
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14572	_("Nepenthes Planum","planum")	PM	14.009700	113.792000	1650.14
-# TRANSLATORS: (Mars); Classical albedo name.
-Mars	419	_("Ascuris Planum","planum")	PM	40.592300	279.223500	617.662
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	14858	_("Oenotria Plana","planum")	PM	-8.142500	76.639500	61.2531
 # TRANSLATORS: (Mars); Albedo feature name; changed from Planitia to Planum.
@@ -6049,6 +6071,56 @@ Mars	4832	_("Promethei Planum","planum")	PM	-79.184100	88.360200	831.285
 Mars	4752	_("Planum Angustum","planum")	PM	-79.800700	276.797500	206.41
 # TRANSLATORS: (Mars); Albedo feature name.
 Mars	3506	_("Lucus Planum","planum")	PM	-4.990000	182.830000	899.868
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	5581	_("Sisyphi Planum","planum")	PM	-69.641700	6.413500	1032.87
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	15366	_("Coronae Planum","planum")	PM	-32.682200	65.409200	265
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14281	_("Olympia Planum","planum")	PM	82.180000	188.810000	804.39
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	228	_("Amenthes Planum","planum")	PM	3.400000	105.920000	953
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	15821	_("Oxia Planum","planum")	PM	17.280000	334.290000	231.029
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	15880	_("Nili Planum","planum")	PM	18.600000	77.100000	128.547
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	3854	_("Meridiani Planum","planum")	PM	-0.040000	356.860000	1058.53
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	4754	_("Planum Boreum","planum")	PM	87.320000	54.960000	354.63
+# TRANSLATORS: (Mars); Classical albedo feature.
+Mars	4753	_("Planum Australe","planum")	PM	-83.350000	157.700000	1429.87
+# TRANSLATORS: (Mars); From albedo feature at 60S, 290W.
+Mars	3605	_("Malea Planum","planum")	PM	-65.821400	62.942900	872.466
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14164	_("Zephyria Planum","planum")	PM	-1.080700	153.729700	575.107
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	3519	_("Lunae Planum","planum")	PM	10.793300	294.487700	1817.66
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14572	_("Nepenthes Planum","planum")	PM	14.009700	113.792000	1650.14
+# TRANSLATORS: (Mars); Classical albedo name.
+Mars	419	_("Ascuris Planum","planum")	PM	40.592300	279.223500	617.662
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	6212	_("Ulyxis Rupes","rupes")	RU	-68.776000	160.018100	383.088
+# TRANSLATORS: (Mars); From albedo feature Avernus at 10S, 195W.
+Mars	506	_("Avernus Rupes","rupes")	RU	-9.195400	172.795700	223.32
+# TRANSLATORS: (Mars); From albedo feature at 25S, 110W.
+Mars	1231	_("Claritas Rupes","rupes")	RU	-25.037000	254.739300	952.875
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	4416	_("Ogygis Rupes","rupes")	RU	-33.027900	305.473900	184.231
+# TRANSLATORS: (Mars); From albedo feature at 50S, 6W.
+Mars	1125	_("Chalcoporos Rupēs","rupes")	RU	-55.638200	20.565900	404.984
+# TRANSLATORS: (Mars); From albedo feature at 58S, 319W.
+Mars	4743	_("Pityusa Rupes","rupes")	RU	-63.955200	28.319700	430.14
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	835	_("Bosporos Rupes","rupes")	RU	-42.744700	302.446400	531.421
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	229	_("Amenthes Rupes","rupes")	RU	1.509300	110.675900	335.248
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	4697	_("Phison Rupes","rupes")	RU	26.703200	50.347200	203.072
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	4041	_("Morpheos Rupes","rupes")	RU	-35.999700	125.576500	404.148
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	4833	_("Promethei Rupes","rupes")	RU	-75.541600	90.243400	1379.21
 # TRANSLATORS: (Mars); Named for albedo feature at 2N, 183W.
 Mars	5876	_("Tartarus Rupes","rupes")	RU	-6.501800	175.714400	97.4555
 # TRANSLATORS: (Mars); Classical albedo feature name.
@@ -6080,40 +6152,6 @@ Mars	6261	_("Utopia Rupēs","rupes")	RU	43.532600	86.032600	2492.68
 # TRANSLATORS: (Mars); Named for classical albedo feature at 62N, 220W.
 Mars	4573	_("Panchaia Rupēs","rupes")	RU	64.371700	129.834500	1113.4
 # TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	6212	_("Ulyxis Rupes","rupes")	RU	-68.776000	160.018100	383.088
-# TRANSLATORS: (Mars); From albedo feature Avernus at 10S, 195W.
-Mars	506	_("Avernus Rupes","rupes")	RU	-9.195400	172.795700	223.32
-# TRANSLATORS: (Mars); From albedo feature at 25S, 110W.
-Mars	1231	_("Claritas Rupes","rupes")	RU	-25.037000	254.739300	952.875
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	4416	_("Ogygis Rupes","rupes")	RU	-33.027900	305.473900	184.231
-# TRANSLATORS: (Mars); From albedo feature at 50S, 6W.
-Mars	1125	_("Chalcoporos Rupēs","rupes")	RU	-55.638200	20.565900	404.984
-# TRANSLATORS: (Mars); From albedo feature at 58S, 319W.
-Mars	4743	_("Pityusa Rupes","rupes")	RU	-63.955200	28.319700	430.14
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	835	_("Bosporos Rupes","rupes")	RU	-42.744700	302.446400	531.421
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	229	_("Amenthes Rupes","rupes")	RU	1.509300	110.675900	335.248
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	4697	_("Phison Rupes","rupes")	RU	26.703200	50.347200	203.072
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	4041	_("Morpheos Rupes","rupes")	RU	-35.999700	125.576500	404.148
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	4833	_("Promethei Rupes","rupes")	RU	-75.541600	90.243400	1379.21
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	6599	_("Xanthe Scopulus","scopulus")	SC	19.375500	307.492700	59.4775
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	6204	_("Ultimi Scopuli","scopulus")	SC	-77.879100	179.044800	560.466
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14860	_("Oenotria Scopuli","scopulus")	SC	-6.620000	77.110000	1425
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	6965	_("Gemini Scopuli","scopulus")	SC	80.390000	26.100000	1000.36
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	6964	_("Boreales Scopuli","scopulus")	SC	88.880000	269.840000	873
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14148	_("Abalos Scopuli","scopulus")	SC	80.720600	283.439800	109.161
-# TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	1827	_("Eridania Scopulus","scopulus")	SC	-52.612700	141.794100	1017.66
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	487	_("Australe Scopuli","scopulus")	SC	-83.476800	247.062300	504.578
@@ -6128,6 +6166,18 @@ Mars	4277	_("Nilokeras Scopulus","scopulus")	SC	31.715300	304.148100	901.477
 # TRANSLATORS: (Mars); From albedo feature at 19S, 320W.
 Mars	5397	_("Scylla Scopulus","scopulus")	SC	-25.219900	18.337200	476.907
 # TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	6599	_("Xanthe Scopulus","scopulus")	SC	19.375500	307.492700	59.4775
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	6204	_("Ultimi Scopuli","scopulus")	SC	-77.879100	179.044800	560.466
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14860	_("Oenotria Scopuli","scopulus")	SC	-6.620000	77.110000	1425
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	6965	_("Gemini Scopuli","scopulus")	SC	80.390000	26.100000	1000.36
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	6964	_("Boreales Scopuli","scopulus")	SC	88.880000	269.840000	873
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	14148	_("Abalos Scopuli","scopulus")	SC	80.720600	283.439800	109.161
+# TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	15031	_("Aeolis Serpens","serpens")	SE	-1.384300	149.567900	538.553
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	15793	_("Thymiamata Serpens","serpens")	SE	10.470000	352.170000	158
@@ -6137,16 +6187,6 @@ Mars	15794	_("Meridiani Serpentes","serpens")	SE	1.300000	8.100000	95
 Mars	16000	_("Cantabras Serpens","serpens")	SE	9.940000	355.250000	86
 # TRANSLATORS: (Mars); Named for nearby Piscinas crater.
 Mars	16003	_("Piscinas Serpentes","serpens")	SE	4.550000	358.840000	16
-# TRANSLATORS: (Mars); Albedo name.
-Mars	395	_("Arsia Sulci","sulcus")	SU	-6.285300	230.188000	500
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	2158	_("Gigas Sulci","sulcus")	SU	10.018800	232.271700	418.563
-# TRANSLATORS: (Mars); Albedo name.
-Mars	4621	_("Pavonis Sulci","sulcus")	SU	4.013500	242.631400	425.802
-# TRANSLATORS: (Mars); Albedo feature name; home of the Amazons.
-Mars	221	_("Amazonis Sulci","sulcus")	SU	-2.150700	216.290600	250.592
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	5752	_("Sulci Gordii","sulcus")	SU	19.024800	234.274100	400
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	15093	_("Candor Sulci","sulcus")	SU	-4.917400	283.151700	73.365
 # TRANSLATORS: (Mars); Classical albedo feature name.
@@ -6165,6 +6205,28 @@ Mars	3796	_("Medusae Sulci","sulcus")	SU	-5.042300	200.297100	191.52
 Mars	324	_("Apollinaris Sulci","sulcus")	SU	-11.064200	177.466300	188.636
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	488	_("Australe Sulci","sulcus")	SU	-84.985900	133.062000	357.908
+# TRANSLATORS: (Mars); Albedo name.
+Mars	395	_("Arsia Sulci","sulcus")	SU	-6.285300	230.188000	500
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	2158	_("Gigas Sulci","sulcus")	SU	10.018800	232.271700	418.563
+# TRANSLATORS: (Mars); Albedo name.
+Mars	4621	_("Pavonis Sulci","sulcus")	SU	4.013500	242.631400	425.802
+# TRANSLATORS: (Mars); Albedo feature name; home of the Amazons.
+Mars	221	_("Amazonis Sulci","sulcus")	SU	-2.150700	216.290600	250.592
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	5752	_("Sulci Gordii","sulcus")	SU	19.024800	234.274100	400
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	336	_("Arabia Terra","terra")	TA	21.249000	5.718500	4851.74
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	6600	_("Xanthe Terra","terra")	TA	1.595600	311.946600	1867.65
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	6175	_("Tyrrhena Terra","terra")	TA	-11.899000	88.835700	2470.14
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	3701	_("Margaritifer Terra","terra")	TA	-1.849700	335.077700	2733.22
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	311	_("Aonia Terra","terra")	TA	-60.203400	262.954700	3873.48
+# TRANSLATORS: (Mars); Classical albedo feature name.
+Mars	5932	_("Terra Sirenum","terra")	TA	-39.494600	205.847900	3635.18
 # TRANSLATORS: (Mars); From albedo feature at 40N, 70W.
 Mars	5916	_("Tempe Terra","terra")	TA	38.687700	289.385700	1954.94
 # TRANSLATORS: (Mars); Classical albedo feature name.
@@ -6176,17 +6238,15 @@ Mars	5930	_("Terra Cimmeria","terra")	TA	-32.679500	147.745800	5855.87
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	4835	_("Promethei Terra","terra")	TA	-64.370100	97.004400	3244.3
 # TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	336	_("Arabia Terra","terra")	TA	21.249000	5.718500	4851.74
+Mars	15094	_("Nia Tholus","tholus")	TH	-6.586600	285.052400	34.007
 # TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	6600	_("Xanthe Terra","terra")	TA	1.595600	311.946600	1867.65
+Mars	14168	_("Cerberus Tholi","tholus")	TH	4.481500	164.414000	698
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	325	_("Apollinaris Tholus","tholus")	TH	-17.637700	175.751800	32.3923
+# TRANSLATORS: (Mars); Albedo feature name.
+Mars	6721	_("Zephyria Tholus","tholus")	TH	-19.745800	172.922000	35.9486
 # TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	6175	_("Tyrrhena Terra","terra")	TA	-11.899000	88.835700	2470.14
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	3701	_("Margaritifer Terra","terra")	TA	-1.849700	335.077700	2733.22
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	5932	_("Terra Sirenum","terra")	TA	-39.494600	205.847900	3635.18
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	311	_("Aonia Terra","terra")	TA	-60.203400	262.954700	3873.48
+Mars	14178	_("Sisyphi Tholus","tholus")	TH	-75.684900	341.467200	27.5234
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	15241	_("Nili Tholus","tholus")	TH	9.148300	67.349600	7.001
 # TRANSLATORS: (Mars); Classical albedo feature name.
@@ -6199,6 +6259,12 @@ Mars	15934	_("Hesperus Tholus","tholus")	TH	-37.560000	138.720000	135
 Mars	15935	_("Sinai Tholus","tholus")	TH	-15.540000	279.970000	200
 # TRANSLATORS: (Mars); Classical albedo feature name, Noctis Lacus.
 Mars	15704	_("Noctis Tholus","tholus")	TH	-12.300000	261.800000	18
+# TRANSLATORS: (Mars); Named for nearby crater, Wenjiashi.
+Mars	16032	_("Wenjiashi Tholi","tholus")	TH	24.750000	109.770000	22.029
+# TRANSLATORS: (Mars); Named for nearby crater, Mohe.
+Mars	16033	_("Mohe Tholi","tholus")	TH	24.694300	110.129200	5.97
+# TRANSLATORS: (Mars); Named for nearby crater, Yaodian.
+Mars	16031	_("Yaodian Tholus","tholus")	TH	25.158000	109.856000	0.8
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	15163	_("Sirenum Tholus","tholus")	TH	-34.644100	215.213500	53.895
 # TRANSLATORS: (Mars); Classical albedo feature name.
@@ -6229,16 +6295,10 @@ Mars	14308	_("Biblis Tholus","tholus")	TH	2.523600	235.617300	168.6
 Mars	6238	_("Uranius Tholus","tholus")	TH	26.251200	262.429400	61.3864
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	14311	_("Ulysses Tholus","tholus")	TH	2.963000	238.497200	102.466
+# TRANSLATORS: (Mars); Classical albedo feature at 72N, 70W.
+Mars	5	_("Abalos Undae","unda")	UN	78.516700	272.500700	442.744
 # TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	15094	_("Nia Tholus","tholus")	TH	-6.586600	285.052400	34.007
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14168	_("Cerberus Tholi","tholus")	TH	4.481500	164.414000	698
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	325	_("Apollinaris Tholus","tholus")	TH	-17.637700	175.751800	32.3923
-# TRANSLATORS: (Mars); Albedo feature name.
-Mars	6721	_("Zephyria Tholus","tholus")	TH	-19.745800	172.922000	35.9486
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	14178	_("Sisyphi Tholus","tholus")	TH	-75.684900	341.467200	27.5234
+Mars	2611	_("Hyperboreae Undae","unda")	UN	79.965000	310.514500	463.646
 # TRANSLATORS: (Mars); Classical albedo feature name: Ogygis Regio.
 Mars	15370	_("Ogygis Undae","unda")	UN	-49.661600	293.788900	87.7
 # TRANSLATORS: (Mars); Classical albedo feature name.
@@ -6247,86 +6307,6 @@ Mars	4451	_("Olympia Undae","unda")	UN	81.160000	178.480000	1507.96
 Mars	14280	_("Siton Undae","unda")	UN	75.550900	297.280300	222.973
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	14279	_("Aspledon Undae","unda")	UN	73.055600	309.654000	215.205
-# TRANSLATORS: (Mars); Classical albedo feature at 72N, 70W.
-Mars	5	_("Abalos Undae","unda")	UN	78.516700	272.500700	442.744
-# TRANSLATORS: (Mars); Classical albedo feature name.
-Mars	2611	_("Hyperboreae Undae","unda")	UN	79.965000	310.514500	463.646
-# TRANSLATORS: (Mars); Lowell canal name.
-Mars	5769	_("Surius Vallis","vallis")	VA	-61.204200	311.275700	30.7613
-# TRANSLATORS: (Mars); Ancient name for present Segura River, Spain.
-Mars	5818	_("Tader Valles","vallis")	VA	-48.784300	207.700800	200
-# TRANSLATORS: (Mars); River in Spain.
-Mars	6021	_("Tinto Vallis","vallis")	VA	-3.968900	111.495200	191.972
-# TRANSLATORS: (Mars); Ancient European river (Great Britain).
-Mars	6340	_("Vedra Valles","vallis")	VA	19.119200	304.516500	118
-# TRANSLATORS: (Mars); River in Arizona, USA.
-Mars	6353	_("Verde Vallis","vallis")	VA	-0.501300	29.879700	133
-# TRANSLATORS: (Mars); Word for "Mars" in old English (West Germanic).
-Mars	6038	_("Tiu Valles","vallis")	VA	16.226200	325.138200	1720
-# TRANSLATORS: (Mars); Classical name for present Dniester River, Ukraine.
-Mars	6169	_("Tyras Vallis","vallis")	VA	8.329800	309.845400	99.129
-# TRANSLATORS: (Mars); Classical name for modern Allier River, France.
-Mars	1758	_("Elaver Vallis","vallis")	VA	-9.384600	310.476400	178.919
-# TRANSLATORS: (Mars); Malaysian word for Mars.
-Mars	14301	_("Marikh Vallis","vallis")	VA	-19.158300	4.319100	1147.22
-# TRANSLATORS: (Mars); River in China, also known as Songhua Jiang.
-Mars	14543	_("Sungari Vallis","vallis")	VA	-40.328400	88.501300	344.819
-# TRANSLATORS: (Mars); River in British Columbia and Alberta, Canada.
-Mars	15036	_("Peace Vallis","vallis")	VA	-4.205700	137.227300	35.236
-# TRANSLATORS: (Mars); River in Ecuador.
-Mars	15266	_("Napo Vallis","vallis")	VA	-25.968900	78.025700	87.5
-# TRANSLATORS: (Mars); River in Peru.
-Mars	15267	_("Huallaga Vallis","vallis")	VA	-26.666600	79.074600	92.5
-# TRANSLATORS: (Mars); River in Argentina.
-Mars	15330	_("Dulce Vallis","vallis")	VA	-4.818500	136.539500	32.464
-# TRANSLATORS: (Mars); River in Sierra Leone.
-Mars	15349	_("Moa Valles","vallis")	VA	35.620400	305.300400	265
-# TRANSLATORS: (Mars); River in Fiji.
-Mars	15363	_("Navua Valles","vallis")	VA	-33.935100	82.683800	500
-# TRANSLATORS: (Mars); River in Turkey.
-Mars	15571	_("Gediz Vallis","vallis")	VA	-4.853700	137.436200	8.295
-# TRANSLATORS: (Mars); River in Iran.
-Mars	15411	_("Kārūn Valles","vallis")	VA	-35.940000	174.099200	64
-# TRANSLATORS: (Mars); River in Bosnia and Herzegovina and Croatia.
-Mars	15878	_("Una Vallis","vallis")	VA	18.290000	77.070000	5
-# TRANSLATORS: (Mars); River in Bosnia and Herzegovina and Croatia.
-Mars	15879	_("Neretva Vallis","vallis")	VA	18.550000	77.200000	17
-# TRANSLATORS: (Mars); River in Bosnia and Herzegovina.
-Mars	15903	_("Pliva Vallis","vallis")	VA	18.670000	78.350000	30
-# TRANSLATORS: (Mars); River in Slovenia.
-Mars	15904	_("Sava Vallis","vallis")	VA	19.090000	77.130000	62
-# TRANSLATORS: (Mars); River in Turkey.
-Mars	15941	_("Sakarya Vallis","vallis")	VA	-5.100000	137.330000	26
-# TRANSLATORS: (Mars); Classical name for present Neckar River, Germany.
-Mars	4246	_("Nicer Vallis","vallis")	VA	-6.964300	201.809500	22.6023
-# TRANSLATORS: (Mars); River in Kenya.
-Mars	15091	_("Tana Vallis","vallis")	VA	4.777700	332.114000	56.512
-# TRANSLATORS: (Mars); River in Botswana.
-Mars	15071	_("Okavango Valles","vallis")	VA	38.097800	8.966500	285.118
-# TRANSLATORS: (Mars); Classical name for modern Doubs River, France.
-Mars	1653	_("Dubis Vallis","vallis")	VA	-5.157600	211.871600	45.4162
-# TRANSLATORS: (Mars); Classical name for modern Trebbia River, Italy.
-Mars	6078	_("Trebia Valles","vallis")	VA	32.084500	150.120900	179.796
-# TRANSLATORS: (Mars); Origin unknown.
-Mars	3194	_("Labou Vallis","vallis")	VA	-8.627700	205.576100	257.787
-# TRANSLATORS: (Mars); Word for "Mars" in Sumerian.
-Mars	5544	_("Simud Valles","vallis")	VA	19.086700	321.992500	987.992
-# TRANSLATORS: (Mars); Classical name for modern Hron River in Czechoslovakia.
-Mars	1355	_("Cusus Valles","vallis")	VA	14.045100	50.372400	250.241
-# TRANSLATORS: (Mars); River in Burma.
-Mars	14154	_("Daga Vallis","vallis")	VA	-12.070300	317.579000	49.8566
-# TRANSLATORS: (Mars); Modern river in Sarawak, Malaysia.
-Mars	6019	_("Tinjar Valles","vallis")	VA	37.538200	124.267900	400.585
-# TRANSLATORS: (Mars); Classical name for river in N.W. Ireland.
-Mars	4963	_("Ravius Valles","vallis")	VA	46.123500	249.825400	388.185
-# TRANSLATORS: (Mars); Classical name for Humber River in England.
-Mars	25	_("Abus Vallis","vallis")	VA	-5.492300	212.800700	60.9928
-# TRANSLATORS: (Mars); Name proposed by Soviets.
-Mars	5221	_("Runa Vallis","vallis")	VA	-28.343200	323.286400	36
-# TRANSLATORS: (Mars); River in Germany.
-Mars	14918	_("Havel Vallis","vallis")	VA	0.766500	302.544200	240.187
-# TRANSLATORS: (Mars); Ancient name for river on Corsica.
-Mars	3445	_("Locras Valles","vallis")	VA	8.843400	48.264400	351.315
 # TRANSLATORS: (Mars); River in Scotland.
 Mars	5942	_("Teviot Vallis","vallis")	VA	-43.365800	102.262900	143.888
 # TRANSLATORS: (Mars); River in Jordan.
@@ -6397,6 +6377,8 @@ Mars	352	_("Arda Valles","vallis")	VA	-20.403000	327.687200	173.674
 Mars	14449	_("Morava Valles","vallis")	VA	-13.566900	335.795900	364.097
 # TRANSLATORS: (Mars); River in Argentina.
 Mars	1179	_("Chico Valles","vallis")	VA	-66.768800	207.767700	446.354
+# TRANSLATORS: (Mars); Word for 'Mars' in Greek.
+Mars	358	_("Ares Vallis","vallis")	VA	10.292400	334.391700	1757.67
 # TRANSLATORS: (Mars); Word for 'Mars' in Persian.
 Mars	558	_("Bahram Vallis","vallis")	VA	20.421500	302.856100	269.68
 # TRANSLATORS: (Mars); Classical river in Hibernia; present Boyne River, Ireland.
@@ -6441,8 +6423,6 @@ Mars	2942	_("Kasei Valles","vallis")	VA	25.135700	297.121600	1580
 Mars	279	_("Anio Valles","vallis")	VA	37.750800	55.886200	54
 # TRANSLATORS: (Mars); Classical river in ancient Macedonia, present-day Greece.
 Mars	332	_("Apsus Vallis","vallis")	VA	34.911200	134.991300	121.556
-# TRANSLATORS: (Mars); Word for 'Mars' in Greek.
-Mars	358	_("Ares Vallis","vallis")	VA	10.292400	334.391700	1757.67
 # TRANSLATORS: (Mars); Classical and present day Arno River in Tuscany, Italy (previously named Arena Rupes).
 Mars	389	_("Arnus Vallis","vallis")	VA	13.967200	70.614900	311.606
 # TRANSLATORS: (Mars); River in Canada. (Changed from Athabasca Vallis.)
@@ -6559,6 +6539,82 @@ Mars	5430	_("Senus Vallis","vallis")	VA	-5.234500	213.039900	22.1818
 Mars	5434	_("Sepik Vallis","vallis")	VA	-1.005300	294.267500	58.9996
 # TRANSLATORS: (Mars); Word for "Mars" in Akkadian.
 Mars	5460	_("Shalbatana Vallis","vallis")	VA	7.327000	317.910100	1029
+# TRANSLATORS: (Mars); Lowell canal name.
+Mars	5769	_("Surius Vallis","vallis")	VA	-61.204200	311.275700	30.7613
+# TRANSLATORS: (Mars); Ancient name for present Segura River, Spain.
+Mars	5818	_("Tader Valles","vallis")	VA	-48.784300	207.700800	200
+# TRANSLATORS: (Mars); River in Spain.
+Mars	6021	_("Tinto Vallis","vallis")	VA	-3.968900	111.495200	191.972
+# TRANSLATORS: (Mars); Ancient European river (Great Britain).
+Mars	6340	_("Vedra Valles","vallis")	VA	19.119200	304.516500	118
+# TRANSLATORS: (Mars); River in Arizona, USA.
+Mars	6353	_("Verde Vallis","vallis")	VA	-0.501300	29.879700	133
+# TRANSLATORS: (Mars); Word for "Mars" in old English (West Germanic).
+Mars	6038	_("Tiu Valles","vallis")	VA	16.226200	325.138200	1720
+# TRANSLATORS: (Mars); Classical name for present Dniester River, Ukraine.
+Mars	6169	_("Tyras Vallis","vallis")	VA	8.329800	309.845400	99.129
+# TRANSLATORS: (Mars); Classical name for modern Allier River, France.
+Mars	1758	_("Elaver Vallis","vallis")	VA	-9.384600	310.476400	178.919
+# TRANSLATORS: (Mars); Malaysian word for Mars.
+Mars	14301	_("Marikh Vallis","vallis")	VA	-19.158300	4.319100	1147.22
+# TRANSLATORS: (Mars); River in China, also known as Songhua Jiang.
+Mars	14543	_("Sungari Vallis","vallis")	VA	-40.328400	88.501300	344.819
+# TRANSLATORS: (Mars); River in British Columbia and Alberta, Canada.
+Mars	15036	_("Peace Vallis","vallis")	VA	-4.205700	137.227300	35.236
+# TRANSLATORS: (Mars); River in Ecuador.
+Mars	15266	_("Napo Vallis","vallis")	VA	-25.968900	78.025700	87.5
+# TRANSLATORS: (Mars); River in Peru.
+Mars	15267	_("Huallaga Vallis","vallis")	VA	-26.666600	79.074600	92.5
+# TRANSLATORS: (Mars); River in Argentina.
+Mars	15330	_("Dulce Vallis","vallis")	VA	-4.818500	136.539500	32.464
+# TRANSLATORS: (Mars); River in Sierra Leone.
+Mars	15349	_("Moa Valles","vallis")	VA	35.620400	305.300400	265
+# TRANSLATORS: (Mars); River in Fiji.
+Mars	15363	_("Navua Valles","vallis")	VA	-33.935100	82.683800	500
+# TRANSLATORS: (Mars); River in Turkey.
+Mars	15571	_("Gediz Vallis","vallis")	VA	-4.853700	137.436200	8.295
+# TRANSLATORS: (Mars); River in Iran.
+Mars	15411	_("Kārūn Valles","vallis")	VA	-35.940000	174.099200	64
+# TRANSLATORS: (Mars); River in Bosnia and Herzegovina and Croatia.
+Mars	15878	_("Una Vallis","vallis")	VA	18.290000	77.070000	5
+# TRANSLATORS: (Mars); River in Bosnia and Herzegovina and Croatia.
+Mars	15879	_("Neretva Vallis","vallis")	VA	18.550000	77.200000	17
+# TRANSLATORS: (Mars); River in Bosnia and Herzegovina.
+Mars	15903	_("Pliva Vallis","vallis")	VA	18.670000	78.350000	30
+# TRANSLATORS: (Mars); River in Slovenia.
+Mars	15904	_("Sava Vallis","vallis")	VA	19.090000	77.130000	62
+# TRANSLATORS: (Mars); River in Turkey.
+Mars	15941	_("Sakarya Vallis","vallis")	VA	-5.100000	137.330000	26
+# TRANSLATORS: (Mars); Classical name for present Neckar River, Germany.
+Mars	4246	_("Nicer Vallis","vallis")	VA	-6.964300	201.809500	22.6023
+# TRANSLATORS: (Mars); River in Kenya.
+Mars	15091	_("Tana Vallis","vallis")	VA	4.777700	332.114000	56.512
+# TRANSLATORS: (Mars); River in Botswana.
+Mars	15071	_("Okavango Valles","vallis")	VA	38.097800	8.966500	285.118
+# TRANSLATORS: (Mars); Classical name for modern Doubs River, France.
+Mars	1653	_("Dubis Vallis","vallis")	VA	-5.157600	211.871600	45.4162
+# TRANSLATORS: (Mars); Classical name for modern Trebbia River, Italy.
+Mars	6078	_("Trebia Valles","vallis")	VA	32.084500	150.120900	179.796
+# TRANSLATORS: (Mars); Origin unknown.
+Mars	3194	_("Labou Vallis","vallis")	VA	-8.627700	205.576100	257.787
+# TRANSLATORS: (Mars); Word for "Mars" in Sumerian.
+Mars	5544	_("Simud Valles","vallis")	VA	19.086700	321.992500	987.992
+# TRANSLATORS: (Mars); Classical name for modern Hron River in Czechoslovakia.
+Mars	1355	_("Cusus Valles","vallis")	VA	14.045100	50.372400	250.241
+# TRANSLATORS: (Mars); River in Burma.
+Mars	14154	_("Daga Vallis","vallis")	VA	-12.070300	317.579000	49.8566
+# TRANSLATORS: (Mars); Modern river in Sarawak, Malaysia.
+Mars	6019	_("Tinjar Valles","vallis")	VA	37.538200	124.267900	400.585
+# TRANSLATORS: (Mars); Classical name for river in N.W. Ireland.
+Mars	4963	_("Ravius Valles","vallis")	VA	46.123500	249.825400	388.185
+# TRANSLATORS: (Mars); Classical name for Humber River in England.
+Mars	25	_("Abus Vallis","vallis")	VA	-5.492300	212.800700	60.9928
+# TRANSLATORS: (Mars); Name proposed by Soviets.
+Mars	5221	_("Runa Vallis","vallis")	VA	-28.343200	323.286400	36
+# TRANSLATORS: (Mars); River in Germany.
+Mars	14918	_("Havel Vallis","vallis")	VA	0.766500	302.544200	240.187
+# TRANSLATORS: (Mars); Ancient name for river on Corsica.
+Mars	3445	_("Locras Valles","vallis")	VA	8.843400	48.264400	351.315
 # TRANSLATORS: (Mars); Classical albedo feature name.
 Mars	6333	_("Vastitas Borealis","vastitas")	VS	87.729700	32.529800	2002.91
 # TRANSLATORS: (Mathilde); German coal basin.
@@ -10887,6 +10943,8 @@ Moon	15993	_("Song Yingxing","crater")	AA	42.340000	-49.650000	1.8
 Moon	15995	_("Xu Guangqi","crater")	AA	43.060000	-51.930000	0.4
 # TRANSLATORS: (Moon); Matthew; American polar explorer (1866-1955).
 Moon	16004	_("Henson","crater")	AA	-88.570000	-130.630000	43
+# TRANSLATORS: (Moon); Anna Isabel Jonas; American geologist (1881-1974).
+Moon	16011	_("Stose","crater")	AA	-86.380000	32.130000	16.7
 # TRANSLATORS: (Moon); Paul D.; American planetary geologist (1952-2018).
 Moon	16007	_("Spudis","crater")	AA	-89.510000	-84.610000	13
 # TRANSLATORS: (Moon); Ursula; American planetary geologist (1921-2018).
@@ -11525,6 +11583,8 @@ Moon	5136	_("Rimae Repsold","rima")	RI	50.736500	279.541300	152.054
 Moon	5063	_("Rima Gärtner","rima")	RI	58.844500	35.765400	42.7274
 # TRANSLATORS: (Moon); Named from nearby crater.
 Moon	5049	_("Rima Cauchy","rima")	RI	10.415100	38.074600	167
+# TRANSLATORS: (Moon); Within crater.
+Moon	5133	_("Rimae Posidonius","rima")	RI	32.031400	29.605600	78
 # TRANSLATORS: (Moon); Named from nearby crater.
 Moon	6898	_("Rimae Hase","rima")	RI	-34.708400	67.780600	257.236
 # TRANSLATORS: (Moon); Within crater.
@@ -11659,8 +11719,6 @@ Moon	5110	_("Rimae Grimaldi","rima")	RI	-6.181700	296.102200	162
 Moon	5102	_("Rimae Darwin","rima")	RI	-19.841600	293.343800	170
 # TRANSLATORS: (Moon); Named from nearby crater.
 Moon	5127	_("Rimae Parry","rima")	RI	-8.067100	343.482000	210
-# TRANSLATORS: (Moon); Within crater.
-Moon	5133	_("Rimae Posidonius","rima")	RI	32.031400	29.605600	78
 # TRANSLATORS: (Moon); Named from nearby crater.
 Moon	5112	_("Rimae Herigonius","rima")	RI	-13.921600	323.247100	180
 # TRANSLATORS: (Moon); Within crater.
@@ -25935,20 +25993,6 @@ Oberon	4521	_("Othello","crater")	AA	-66.000000	42.900000	114
 Oberon	5176	_("Romeo","crater")	AA	-28.700000	89.400000	159
 # TRANSLATORS: (Oberon); Spirit place, forest home of Oberon in "Midsummer Night's Dream."
 Oberon	3958	_("Mommur Chasma","chasma")	CM	-16.300000	323.500000	537
-# TRANSLATORS: (Phobos); Bevan P.; American astronomer (1904-1950).
-Phobos	5474	_("Sharpless","crater")	AA	-27.500000	206.000000	1.8
-# TRANSLATORS: (Phobos); Edouard; French astronomer (1820-1883).
-Phobos	5167	_("Roche","crater")	AA	53.000000	177.000000	2.3
-# TRANSLATORS: (Phobos); Angeline; wife of American astronomer A. Hall (1830-1892).
-Phobos	5707	_("Stickney","crater")	AA	1.000000	311.000000	9
-# TRANSLATORS: (Phobos); David; American astronomer (1855-1939).
-Phobos	6042	_("Todd","crater")	AA	-9.000000	207.000000	2.6
-# TRANSLATORS: (Phobos); Oliver C.; American astronomer (1845-1912).
-Phobos	6518	_("Wendell","crater")	AA	-1.000000	228.000000	1.7
-# TRANSLATORS: (Phobos); Treasurer of Lilliput in Jonathan Swift's novel "Gulliver's Travels."
-Phobos	14259	_("Flimnap","crater")	AA	60.000000	10.000000	1.5
-# TRANSLATORS: (Phobos); Iosif S., Soviet astronomer (1916-1985).
-Phobos	14866	_("Shklovsky","crater")	AA	24.000000	112.000000	2
 # TRANSLATORS: (Phobos); Ernst J., Estonian astronomer (1893-1985).
 Phobos	14865	_("Öpik","crater")	AA	-7.000000	63.000000	2
 # TRANSLATORS: (Phobos); Secretary for Private Affairs in Lilliput; Gulliver's friend in Jonathan Swift's novel "Gulliver's Travels."
@@ -25969,6 +26013,20 @@ Phobos	14258	_("Drunlo","crater")	AA	36.500000	268.000000	4.2
 Phobos	2328	_("Hall","crater")	AA	-80.000000	150.000000	5.4
 # TRANSLATORS: (Phobos); Heinrich L.; German/Danish astronomer (1822-1875).
 Phobos	1696	_("D'Arrest","crater")	AA	-39.000000	181.000000	2.1
+# TRANSLATORS: (Phobos); Bevan P.; American astronomer (1904-1950).
+Phobos	5474	_("Sharpless","crater")	AA	-27.500000	206.000000	1.8
+# TRANSLATORS: (Phobos); Edouard; French astronomer (1820-1883).
+Phobos	5167	_("Roche","crater")	AA	53.000000	177.000000	2.3
+# TRANSLATORS: (Phobos); Angeline; wife of American astronomer A. Hall (1830-1892).
+Phobos	5707	_("Stickney","crater")	AA	1.000000	311.000000	9
+# TRANSLATORS: (Phobos); David; American astronomer (1855-1939).
+Phobos	6042	_("Todd","crater")	AA	-9.000000	207.000000	2.6
+# TRANSLATORS: (Phobos); Oliver C.; American astronomer (1845-1912).
+Phobos	6518	_("Wendell","crater")	AA	-1.000000	228.000000	1.7
+# TRANSLATORS: (Phobos); Treasurer of Lilliput in Jonathan Swift's novel "Gulliver's Travels."
+Phobos	14259	_("Flimnap","crater")	AA	60.000000	10.000000	1.5
+# TRANSLATORS: (Phobos); Iosif S., Soviet astronomer (1916-1985).
+Phobos	14866	_("Shklovsky","crater")	AA	24.000000	112.000000	2
 # TRANSLATORS: (Phobos); Johannes; German astronomer (1571-1630).
 Phobos	2992	_("Kepler Dorsum","dorsum")	DO	-45.000000	4.000000	15
 # TRANSLATORS: (Phobos); Fictional city in Jonathan Swift's Gulliver's Travels, ruled by a tyrannical king from the flying island Laputa.
@@ -26097,6 +26155,8 @@ Pluto	15672	_("Al-Idrisi Montes","mons")	MO	33.990000	156.010000	383
 Pluto	15965	_("Zheng He Montes","mons")	MO	19.010000	160.570000	101
 # TRANSLATORS: (Pluto); Tenzing Norgay; Nepalese (Sherpa) mountaineer (1914–1986).
 Pluto	15670	_("Tenzing Montes","mons")	MO	-15.610000	177.380000	283
+# TRANSLATORS: (Pluto); Elizabeth “Bessie”; early American aviator and the first woman of African-American and Native American descent to earn a pilot’s license (1892-1926).
+Pluto	16036	_("Coleman Mons","mons")	MO	-24.170000	167.980000	32
 # TRANSLATORS: (Pluto); Korean traveler and scholar, who crossed the Asian continent from China to Arabia and back (724-727), and documented the journey in his journals (704–787).
 Pluto	15870	_("Hyecho Palus","palus")	PA	-17.430000	167.440000	322.559
 # TRANSLATORS: (Pluto); A series of US space probes sent to the Moon during 1961-1965. In 1964, Ranger 7 obtained the first close-up images of an extraterrestrial surface.
@@ -26111,6 +26171,8 @@ Pluto	15838	_("Lowell Regio","regio")	RE	86.000000	338.000000	1215
 Pluto	15668	_("Tombaugh Regio","regio")	RE	7.620000	183.220000	2300
 # TRANSLATORS: (Pluto); Ahmed Muhiddin, also known as Piri Reis, Ottoman navigator and cartographer (c. 1470–1553). Author of one of the earliest existing world maps in 1513. His “Book of the Sea” (1521), containing 290 maps, was one of the most famous cartographical work
 Pluto	15839	_("Piri Rupes","rupes")	RU	27.130000	108.900000	549
+# TRANSLATORS: (Pluto); Sally; American physicist, astronaut, and first American woman in space (1951-2012).
+Pluto	16035	_("Ride Rupes","rupes")	RU	-19.660000	163.190000	235
 # TRANSLATORS: (Pluto); Series of the Soviet Union’s 16 spacecraft sent to Venus in 1961–1983. The missions accomplished a number of firsts, including the first human made device to enter the atmosphere of another planet (Venera 3, 1966), to measure in situ atmosphere compo
 Pluto	15840	_("Venera Terra","terra")	TA	56.890000	117.620000	742
 # TRANSLATORS: (Pluto); A pair of the Soviet Union’s Vega 1 and Vega 2 spacecraft launched in 1984 that were the first ones to fly balloons on another planet (Venus, 1985) and then the first ones to image the nucleus of a comet (1P/Halley, 1986).
@@ -27205,6 +27267,10 @@ Titan	7007	_("Hobal Virga","virga")	VI	-35.000000	194.000000	1075
 Titan	7008	_("Kalseru Virga","virga")	VI	-36.000000	223.000000	630
 # TRANSLATORS: (Titan); Zuni rain god.
 Titan	7009	_("Shiwanni Virgae","virga")	VI	-25.000000	328.000000	1400
+# TRANSLATORS: (Triton); Māori fishing and sea god.
+Triton	5853	_("Tangaroa","crater")	AA	-25.000000	65.500000	0
+# TRANSLATORS: (Triton); Slavic water spirit.
+Triton	6423	_("Vodyanoy","crater")	AA	-17.000000	28.500000	0
 # TRANSLATORS: (Triton); Finnish fortune-telling fish god.
 Triton	4959	_("Ravgga","crater")	AA	-3.000000	71.500000	0
 # TRANSLATORS: (Triton); Chaga (Tanzania) mythical large fish.
@@ -27219,14 +27285,12 @@ Triton	1092	_("Cay","crater")	AA	-12.000000	44.000000	0
 Triton	2670	_("Ilomba","crater")	AA	-14.500000	57.000000	0
 # TRANSLATORS: (Triton); Vishnu in the form of a tortoise.
 Triton	3167	_("Kurma","crater")	AA	-16.500000	61.000000	0
-# TRANSLATORS: (Triton); Māori fishing and sea god.
-Triton	5853	_("Tangaroa","crater")	AA	-25.000000	65.500000	0
-# TRANSLATORS: (Triton); Slavic water spirit.
-Triton	6423	_("Vodyanoy","crater")	AA	-17.000000	28.500000	0
-# TRANSLATORS: (Triton); Norse giant sea monster.
-Triton	3112	_("Kraken Catena","catena")	CA	14.000000	35.500000	0
 # TRANSLATORS: (Triton); Egypian water monster; personification of evil.
 Triton	5439	_("Set Catena","catena")	CA	22.000000	33.500000	0
+# TRANSLATORS: (Triton); Norse giant sea monster.
+Triton	3112	_("Kraken Catena","catena")	CA	14.000000	35.500000	0
+# TRANSLATORS: (Triton); Hawaiian shark god.
+Triton	6196	_("Ukupanio Cavus","cavus")	CB	35.000000	23.000000	0
 # TRANSLATORS: (Triton); The god Prajapati as a tortoise (India).
 Triton	2952	_("Kasyapa Cavus","cavus")	CB	7.500000	358.000000	0
 # TRANSLATORS: (Triton); Frog symbolizing the sun on the horizon (India).
@@ -27245,16 +27309,20 @@ Triton	3144	_("Kulilu Cavus","cavus")	CB	41.000000	4.000000	0
 Triton	3588	_("Mah Cavus","cavus")	CB	38.000000	6.000000	0
 # TRANSLATORS: (Triton); Ila (Zambia) "the flooder."
 Triton	3629	_("Mangwe Cavus","cavus")	CB	-7.000000	343.000000	0
-# TRANSLATORS: (Triton); Hawaiian shark god.
-Triton	6196	_("Ukupanio Cavus","cavus")	CB	35.000000	23.000000	0
 # TRANSLATORS: (Triton); Nama Bushman word for rain.
 Triton	514	_("Awib Dorsa","dorsum")	DO	-7.000000	80.000000	0
-# TRANSLATORS: (Triton); Hindu river goddess.
-Triton	2864	_("Jumna Fossae","fossa")	FO	-13.500000	44.000000	0
 # TRANSLATORS: (Triton); Breton bay of souls.
 Triton	4969	_("Raz Fossae","fossa")	FO	8.000000	21.500000	0
 # TRANSLATORS: (Triton); Siberian mythical holy river.
 Triton	6654	_("Yenisey Fossa","fossa")	FO	3.000000	56.200000	0
+# TRANSLATORS: (Triton); Hindu river goddess.
+Triton	2864	_("Jumna Fossae","fossa")	FO	-13.500000	44.000000	0
+# TRANSLATORS: (Triton); Egyptian fish who wept fertilizing tears.
+Triton	4990	_("Rem Maculae","macula")	MA	13.000000	349.500000	0
+# TRANSLATORS: (Triton); Amour of Merlin (Welsh).
+Triton	6418	_("Viviane Macula","macula")	MA	-31.000000	36.500000	0
+# TRANSLATORS: (Triton); Niger water spirits.
+Triton	6739	_("Zin Maculae","macula")	MA	-24.500000	68.000000	0
 # TRANSLATORS: (Triton); Tortoise upholding the world (India).
 Triton	142	_("Akupara Maculae","macula")	MA	-27.500000	63.000000	0
 # TRANSLATORS: (Triton); Nanay mistress of fishing, Sea of Okhotsk.
@@ -27263,12 +27331,6 @@ Triton	1583	_("Doro Macula","macula")	MA	-27.500000	31.700000	0
 Triton	3029	_("Kikimora Maculae","macula")	MA	-31.000000	78.000000	0
 # TRANSLATORS: (Triton); Japanese mythic fish; maker of earthquakes.
 Triton	4125	_("Namazu Macula","macula")	MA	-25.500000	14.000000	0
-# TRANSLATORS: (Triton); Egyptian fish who wept fertilizing tears.
-Triton	4990	_("Rem Maculae","macula")	MA	13.000000	349.500000	0
-# TRANSLATORS: (Triton); Amour of Merlin (Welsh).
-Triton	6418	_("Viviane Macula","macula")	MA	-31.000000	36.500000	0
-# TRANSLATORS: (Triton); Niger water spirits.
-Triton	6739	_("Zin Maculae","macula")	MA	-24.500000	68.000000	0
 # TRANSLATORS: (Triton); Angolan sacred lake.
 Triton	1535	_("Dilolo Patera","patera")	PE	26.000000	24.500000	0
 # TRANSLATORS: (Triton); Tortuous sea; literally, "Serpent Bay" (Norse).
@@ -27297,12 +27359,22 @@ Triton	3789	_("Medamothi Planum","planum")	PM	3.500000	69.000000	0
 Triton	2504	_("Hili","plume")	PU	-57.000000	35.000000	0
 # TRANSLATORS: (Triton); Tonga sea spirit.
 Triton	3590	_("Mahilani","plume")	PU	-50.500000	359.500000	0
+# TRANSLATORS: (Triton); Zulu reed from which humanity sprang.
+Triton	6189	_("Uhlanga Regio","regio")	RE	-37.000000	357.000000	0
 # TRANSLATORS: (Triton); Island location of temple of Mukasa (Uganda).
 Triton	905	_("Bubembe Regio","regio")	RE	18.000000	335.000000	0
 # TRANSLATORS: (Triton); Chinese symbol of duality in nature.
 Triton	3961	_("Monad Regio","regio")	RE	20.000000	37.000000	0
-# TRANSLATORS: (Triton); Zulu reed from which humanity sprang.
-Triton	6189	_("Uhlanga Regio","regio")	RE	-37.000000	357.000000	0
+# TRANSLATORS: (Triton); Norse river through which dead pass.
+Triton	4496	_("Ormet Sulci","sulcus")	SU	17.000000	337.000000	0
+# TRANSLATORS: (Triton); Yoruba; river named for willful son of god.
+Triton	5857	_("Tano Sulci","sulcus")	SU	33.500000	337.000000	0
+# TRANSLATORS: (Triton); Norse river of daggers and spears.
+Triton	5598	_("Slidr Sulci","sulcus")	SU	23.500000	350.000000	0
+# TRANSLATORS: (Triton); Greatest of Elivagar rivers, a stream of ice.
+Triton	6391	_("Vimur Sulci","sulcus")	SU	-11.000000	59.000000	0
+# TRANSLATORS: (Triton); Japanese heavenly river; literally, "peace."
+Triton	6642	_("Yasu Sulci","sulcus")	SU	2.000000	347.000000	0
 # TRANSLATORS: (Triton); Yoruba; river named for obedient son of god.
 Triton	733	_("Bia Sulci","sulcus")	SU	-38.000000	3.000000	0
 # TRANSLATORS: (Triton); Celtic mythological river.
@@ -27317,16 +27389,6 @@ Triton	3089	_("Kormet Sulci","sulcus")	SU	23.000000	335.500000	0
 Triton	3437	_("Lo Sulci","sulcus")	SU	3.800000	321.000000	0
 # TRANSLATORS: (Triton); Mouth of this river is Ostiak entrance to underworld.
 Triton	4385	_("Ob Sulci","sulcus")	SU	-6.000000	328.000000	0
-# TRANSLATORS: (Triton); Norse river through which dead pass.
-Triton	4496	_("Ormet Sulci","sulcus")	SU	17.000000	337.000000	0
-# TRANSLATORS: (Triton); Yoruba; river named for willful son of god.
-Triton	5857	_("Tano Sulci","sulcus")	SU	33.500000	337.000000	0
-# TRANSLATORS: (Triton); Norse river of daggers and spears.
-Triton	5598	_("Slidr Sulci","sulcus")	SU	23.500000	350.000000	0
-# TRANSLATORS: (Triton); Greatest of Elivagar rivers, a stream of ice.
-Triton	6391	_("Vimur Sulci","sulcus")	SU	-11.000000	59.000000	0
-# TRANSLATORS: (Triton); Japanese heavenly river; literally, "peace."
-Triton	6642	_("Yasu Sulci","sulcus")	SU	2.000000	347.000000	0
 # TRANSLATORS: (Umbriel); Baramba (West Africa) devil spirit.
 Umbriel	6568	_("Wokolo","crater")	AA	-30.000000	1.800000	208
 # TRANSLATORS: (Umbriel); Troll who stole three wives of a man living in Englerup.
@@ -28267,12 +28329,12 @@ Venus	3302	_("Laurencin","crater")	AA	-15.400000	46.500000	29.8
 Venus	3719	_("Markham","crater")	AA	-4.100000	155.600000	71.8
 # TRANSLATORS: (Venus); Ukranian first name.
 Venus	3810	_("Melanka","crater")	AA	34.400000	19.200000	9
+# TRANSLATORS: (Venus); Wanda; Polish pianist (1877-1959).
+Venus	3266	_("Landowska","crater")	AA	84.600000	74.300000	33
 # TRANSLATORS: (Venus); Ngaio; New Zealand playwright, novelist (1899-1982).
 Venus	3721	_("Marsh","crater")	AA	-63.600000	46.600000	47.7
 # TRANSLATORS: (Venus); Selma; Swedish novelist (1858-1940).
 Venus	3232	_("Lagerlöf","crater")	AA	81.200000	285.200000	56
-# TRANSLATORS: (Venus); Wanda; Polish pianist (1877-1959).
-Venus	3266	_("Landowska","crater")	AA	84.600000	74.300000	33
 # TRANSLATORS: (Venus); Lillie; English actress (1853-1929).
 Venus	3274	_("Langtry","crater")	AA	-17.000000	155.000000	50.3
 # TRANSLATORS: (Venus); Latin first name.
@@ -28291,6 +28353,8 @@ Venus	3732	_("Marysya","crater")	AA	53.300000	75.100000	6.3
 Venus	3733	_("Marzhan","crater")	AA	-58.900000	248.300000	13.8
 # TRANSLATORS: (Venus); Latvian first name.
 Venus	3412	_("Lineta","crater")	AA	-5.000000	354.100000	15.6
+# TRANSLATORS: (Venus); First name from Greek.
+Venus	3531	_("Lydia","crater")	AA	10.700000	340.700000	15.2
 # TRANSLATORS: (Venus); Judith; Dutch painter (1609-1660).
 Venus	3374	_("Leyster","crater")	AA	1.000000	260.000000	45.8
 # TRANSLATORS: (Venus); Mongolian first name.
@@ -28339,8 +28403,6 @@ Venus	3429	_("Liv","crater")	AA	-21.100000	303.900000	11.2
 Venus	3438	_("Loan","crater")	AA	28.300000	60.000000	7.4
 # TRANSLATORS: (Venus); Belva; American lawyer, feminist (1830-1917).
 Venus	3442	_("Lockwood","crater")	AA	-32.900000	51.600000	22
-# TRANSLATORS: (Venus); First name from Greek.
-Venus	3531	_("Lydia","crater")	AA	10.700000	340.700000	15.2
 # TRANSLATORS: (Venus); Mary; American educator, college president (1797-1849).
 Venus	3536	_("Lyon","crater")	AA	-66.500000	270.600000	12.4
 # TRANSLATORS: (Venus); Sidnie; English zoologist (1902-1980) and Irene; botanist (1904-1988).
@@ -28371,6 +28433,8 @@ Venus	3707	_("Marie","crater")	AA	-21.700000	232.400000	14.2
 Venus	3787	_("Mead","crater")	AA	12.500000	57.200000	270
 # TRANSLATORS: (Venus); English first name.
 Venus	3851	_("Meredith","crater")	AA	-14.500000	278.900000	11.4
+# TRANSLATORS: (Venus); Egyptian queen, physician (c. 2700 B.C.).
+Venus	3856	_("Merit Ptah","crater")	AA	11.400000	115.600000	16.5
 # TRANSLATORS: (Venus); Hawaiian first name.
 Venus	3601	_("Makola","crater")	AA	-3.800000	106.700000	16.6
 # TRANSLATORS: (Venus); Margaret; American physicist (1860-1944).
@@ -28379,8 +28443,6 @@ Venus	3611	_("Maltby","crater")	AA	-23.300000	119.700000	36.6
 Venus	3616	_("Mamajan","crater")	AA	-65.100000	257.300000	2
 # TRANSLATORS: (Venus); Maria; Dutch entomologist (1647-1717).
 Venus	3853	_("Merian","crater")	AA	34.500000	76.300000	22.2
-# TRANSLATORS: (Venus); Egyptian queen, physician (c. 2700 B.C.).
-Venus	3856	_("Merit Ptah","crater")	AA	11.400000	115.600000	16.5
 # TRANSLATORS: (Venus); First name from Greek.
 Venus	3809	_("Melanie","crater")	AA	-62.800000	144.300000	12.3
 # TRANSLATORS: (Venus); Christine; Swedish opera singer, violinist (1843-1921).
@@ -28465,6 +28527,8 @@ Venus	4176	_("Ndella","crater")	AA	-15.900000	60.700000	5.9
 Venus	4185	_("Neda","crater")	AA	16.700000	313.500000	7.7
 # TRANSLATORS: (Venus); Nenets (Samoyed) first name.
 Venus	4186	_("Nedko","crater")	AA	-8.800000	317.600000	8.5
+# TRANSLATORS: (Venus); Emmuska; Hungarian novelist, playwright (1865-1947).
+Venus	4485	_("Orczy","crater")	AA	3.700000	52.300000	26.9
 # TRANSLATORS: (Venus); French first name.
 Venus	4252	_("Nicole","crater")	AA	48.400000	259.300000	6.4
 # TRANSLATORS: (Venus); Khmer first name.
@@ -28525,8 +28589,6 @@ Venus	4455	_("Oma","crater")	AA	-42.700000	329.100000	7.6
 Venus	4467	_("Onissya","crater")	AA	-25.600000	150.200000	8.2
 # TRANSLATORS: (Venus); Mandingo first name.
 Venus	4348	_("Nsele","crater")	AA	6.700000	64.200000	5.1
-# TRANSLATORS: (Venus); Emmuska; Hungarian novelist, playwright (1865-1947).
-Venus	4485	_("Orczy","crater")	AA	3.700000	52.300000	26.9
 # TRANSLATORS: (Venus); Nivkhi (Amur River area, E. Siberia) first name.
 Venus	4490	_("Orguk","crater")	AA	-23.500000	198.200000	11.7
 # TRANSLATORS: (Venus); Flannery; American novelist (1925-1964).
@@ -28547,22 +28609,22 @@ Venus	4525	_("Ottavia","crater")	AA	-47.500000	187.100000	12.9
 Venus	4529	_("Outi","crater")	AA	61.600000	267.700000	10.5
 # TRANSLATORS: (Venus); Italian first name.
 Venus	4549	_("Paige","crater")	AA	-1.200000	24.600000	6.8
+# TRANSLATORS: (Venus); Tonita (Quah Ah); Pueblo artist (1895-1949).
+Venus	4679	_("Peña","crater")	AA	-23.600000	190.600000	29.6
 # TRANSLATORS: (Venus); English first name.
 Venus	4568	_("Pamela","crater")	AA	11.000000	238.500000	14.2
 # TRANSLATORS: (Venus); Kurdian first name.
 Venus	4589	_("Parishan","crater")	AA	-0.200000	146.500000	6.8
 # TRANSLATORS: (Venus); Greek first name.
 Venus	4692	_("Philomena","crater")	AA	-40.700000	151.900000	14.8
+# TRANSLATORS: (Venus); First name from Greek.
+Venus	4680	_("Phaedra","crater")	AA	35.900000	252.700000	15.7
 # TRANSLATORS: (Venus); Chilean writer.
 Venus	4593	_("Parra","crater")	AA	20.500000	78.500000	42.4
 # TRANSLATORS: (Venus); Tajik first name.
 Venus	4598	_("Parvina","crater")	AA	-62.200000	153.000000	7
 # TRANSLATORS: (Venus); Russian first name.
 Venus	4601	_("Pasha","crater")	AA	42.700000	156.300000	7.2
-# TRANSLATORS: (Venus); Tonita (Quah Ah); Pueblo artist (1895-1949).
-Venus	4679	_("Peña","crater")	AA	-23.600000	190.600000	29.6
-# TRANSLATORS: (Venus); First name from Greek.
-Venus	4680	_("Phaedra","crater")	AA	35.900000	252.700000	15.7
 # TRANSLATORS: (Venus); Hindu first name.
 Venus	4947	_("Rani","crater")	AA	64.100000	160.400000	10.7
 # TRANSLATORS: (Venus); Bashkir first name.
@@ -28877,6 +28939,16 @@ Venus	6537	_("Whitney","crater")	AA	-30.200000	151.300000	42.5
 Venus	6542	_("Wieck","crater")	AA	-74.200000	244.800000	20.2
 # TRANSLATORS: (Venus); Laura Ingalls; American author (1867-1957).
 Venus	6546	_("Wilder","crater")	AA	17.400000	122.600000	35.1
+# TRANSLATORS: (Venus); English first name.
+Venus	6553	_("Wilma","crater")	AA	36.700000	1.700000	12.5
+# TRANSLATORS: (Venus); Modoc Indian heroine, peacemaker (c. 1848-1932).
+Venus	6558	_("Winema","crater")	AA	3.000000	168.600000	21.7
+# TRANSLATORS: (Venus); Sarah; Piute interpreter, activist (c. 1844-1891).
+Venus	6562	_("Winnemucca","crater")	AA	-15.400000	121.100000	30.3
+# TRANSLATORS: (Venus); Abenaki/Algonquin (Canada) first name.
+Venus	6567	_("Wiwi-yokpa","crater")	AA	-73.800000	228.400000	4.5
+# TRANSLATORS: (Venus); Mary; English author (1759-1797).
+Venus	6571	_("Wollstonecraft","crater")	AA	-39.100000	260.800000	44.1
 # TRANSLATORS: (Venus); Serbocroatian first name.
 Venus	6746	_("Zlata","crater")	AA	64.600000	333.900000	7
 # TRANSLATORS: (Venus); Polish first name.
@@ -28891,16 +28963,6 @@ Venus	6608	_("Xi Wang","crater")	AA	14.000000	208.000000	7.7
 Venus	6610	_("Xiao Hong","crater")	AA	-43.500000	101.700000	38.7
 # TRANSLATORS: (Venus); Portuguese first name.
 Venus	6613	_("Ximena","crater")	AA	-68.200000	243.600000	12.8
-# TRANSLATORS: (Venus); English first name.
-Venus	6553	_("Wilma","crater")	AA	36.700000	1.700000	12.5
-# TRANSLATORS: (Venus); Modoc Indian heroine, peacemaker (c. 1848-1932).
-Venus	6558	_("Winema","crater")	AA	3.000000	168.600000	21.7
-# TRANSLATORS: (Venus); Sarah; Piute interpreter, activist (c. 1844-1891).
-Venus	6562	_("Winnemucca","crater")	AA	-15.400000	121.100000	30.3
-# TRANSLATORS: (Venus); Abenaki/Algonquin (Canada) first name.
-Venus	6567	_("Wiwi-yokpa","crater")	AA	-73.800000	228.400000	4.5
-# TRANSLATORS: (Venus); Mary; English author (1759-1797).
-Venus	6571	_("Wollstonecraft","crater")	AA	-39.100000	260.800000	44.1
 # TRANSLATORS: (Venus); Virginia; British writer (1882-1941).
 Venus	6574	_("Woolf","crater")	AA	-37.700000	27.200000	24.5
 # TRANSLATORS: (Venus); Marie; French painter (1755-1842). Spelling changed from Vigier Lebrun.
@@ -28939,6 +29001,10 @@ Venus	6221	_("Unay","crater")	AA	53.500000	172.700000	11.4
 Venus	6224	_("Undset","crater")	AA	51.700000	60.800000	20
 # TRANSLATORS: (Venus); Eskimo (Chukotka) first name.
 Venus	6227	_("Unitkak","crater")	AA	40.800000	199.500000	8
+# TRANSLATORS: (Venus); Wife of Socrates (5th century B.C.).
+Venus	6601	_("Xantippe","crater")	AA	-10.900000	11.800000	40.4
+# TRANSLATORS: (Venus); English first name.
+Venus	6592	_("Wynne","crater")	AA	55.000000	53.600000	10
 # TRANSLATORS: (Venus); Russian first name.
 Venus	6250	_("Ustinya","crater")	AA	-41.200000	251.600000	11.8
 # TRANSLATORS: (Venus); Fanny; American mountaineer, author (1859-1925).
@@ -29015,10 +29081,6 @@ Venus	6669	_("Yonok","crater")	AA	-65.100000	234.100000	9.5
 Venus	6670	_("Yonsuk","crater")	AA	-34.000000	234.800000	8.5
 # TRANSLATORS: (Venus); Chinese astronomer, mathematician (18th century).
 Venus	6487	_("Wang Zhenyi","crater")	AA	13.200000	217.800000	23.4
-# TRANSLATORS: (Venus); Wife of Socrates (5th century B.C.).
-Venus	6601	_("Xantippe","crater")	AA	-10.900000	11.800000	40.4
-# TRANSLATORS: (Venus); English first name.
-Venus	6592	_("Wynne","crater")	AA	55.000000	53.600000	10
 # TRANSLATORS: (Venus); Karakalpak first name.
 Venus	6627	_("Yakyt","crater")	AA	2.100000	170.200000	13.8
 # TRANSLATORS: (Venus); Caroline; American educator of the deaf (1848-1933).
@@ -29033,6 +29095,10 @@ Venus	6646	_("Yazruk","crater")	AA	21.200000	160.200000	10.5
 Venus	6652	_("Yelya","crater")	AA	-47.500000	211.700000	8.6
 # TRANSLATORS: (Venus); Mari (Volga Finn) first name.
 Venus	6653	_("Yemysh","crater")	AA	11.900000	214.700000	6
+# TRANSLATORS: (Venus); Uzbek first name.
+Venus	6763	_("Zumrad","crater")	AA	32.100000	94.800000	12.9
+# TRANSLATORS: (Venus); Gypsy first name.
+Venus	6767	_("Zurka","crater")	AA	-12.800000	275.200000	5.5
 # TRANSLATORS: (Venus); Yoruba first name.
 Venus	6676	_("Ytunde","crater")	AA	49.900000	81.100000	6.1
 # TRANSLATORS: (Venus); Azeri first name.
@@ -29063,10 +29129,6 @@ Venus	6731	_("Zhilova","crater")	AA	66.300000	125.700000	53
 Venus	6734	_("Zhu Shuzhen","crater")	AA	-26.500000	356.500000	29.4
 # TRANSLATORS: (Venus); Romanian first name.
 Venus	6740	_("Zina","crater")	AA	41.900000	320.100000	9
-# TRANSLATORS: (Venus); Uzbek first name.
-Venus	6763	_("Zumrad","crater")	AA	32.100000	94.800000	12.9
-# TRANSLATORS: (Venus); Gypsy first name.
-Venus	6767	_("Zurka","crater")	AA	-12.800000	275.200000	5.5
 # TRANSLATORS: (Venus); Lithuanian first name.
 Venus	6945	_("Živile","crater")	AA	48.800000	113.100000	13.5
 # TRANSLATORS: (Venus); Adelina; Italian singer (1843-1919).
@@ -29115,6 +29177,8 @@ Venus	1661	_("Duncan","crater")	AA	68.100000	291.700000	40.3
 Venus	1721	_("Edgeworth","crater")	AA	32.200000	22.800000	29
 # TRANSLATORS: (Venus); M. A.; Spanish actress (18th century).
 Venus	1941	_("Fernandez","crater")	AA	76.200000	17.200000	23.7
+# TRANSLATORS: (Venus); Maori Moon goddess who controls the tides.
+Venus	15018	_("Rona Chasma","chasma")	CM	2.500000	288.000000	1520
 # TRANSLATORS: (Venus); Massai (Kenya, Tanzania) moon goddess.
 Venus	4431	_("Olapa Chasma","chasma")	CM	-42.000000	208.500000	650
 # TRANSLATORS: (Venus); Bali (Indonesia) moon goddess.
@@ -29239,8 +29303,6 @@ Venus	4031	_("Morana Chasma","chasma")	CM	68.900000	24.600000	317
 Venus	4588	_("Parga Chasmata","chasma")	CM	-20.000000	255.000000	11000
 # TRANSLATORS: (Venus); Hausa (W. Sudan) great huntress.
 Venus	1425	_("Daura Chasma","chasma")	CM	73.800000	53.800000	729
-# TRANSLATORS: (Venus); Maori Moon goddess who controls the tides.
-Venus	15018	_("Rona Chasma","chasma")	CM	2.500000	288.000000	1520
 # TRANSLATORS: (Venus); Yoruba (Nigeria) lagoon goddess.
 Venus	4445	_("Olosa Colles","collis")	CO	18.000000	353.300000	200
 # TRANSLATORS: (Venus); Saami-Lapp fishing goddess.
@@ -29595,6 +29657,8 @@ Venus	2538	_("Holde Corona","corona")	CR	53.500000	155.800000	200
 Venus	2543	_("Holla Corona","corona")	CR	-13.000000	237.700000	180
 # TRANSLATORS: (Venus); Finno-Ugraic harvest spirit.
 Venus	2651	_("Idem-Kuva Corona","corona")	CR	25.000000	358.000000	230
+# TRANSLATORS: (Venus); Greek Earth, nature, and foothills goddess.
+Venus	3079	_("Kolias Corona","corona")	CR	-16.500000	207.900000	200
 # TRANSLATORS: (Venus); Chinese Earth goddess.
 Venus	3346	_("Lengdin Corona","corona")	CR	2.500000	223.000000	525
 # TRANSLATORS: (Venus); Ibibio (Nigeria) fertility goddess.
@@ -29623,8 +29687,6 @@ Venus	3126	_("Krumine Corona","corona")	CR	-5.000000	261.500000	300
 Venus	3132	_("Kuan-Yin Corona","corona")	CR	-4.300000	10.000000	310
 # TRANSLATORS: (Venus); Hittite mother earth goddess.
 Venus	3135	_("Kubebe Corona","corona")	CR	15.500000	132.500000	125
-# TRANSLATORS: (Venus); Greek Earth, nature, and foothills goddess.
-Venus	3079	_("Kolias Corona","corona")	CR	-16.500000	207.900000	200
 # TRANSLATORS: (Venus); Arawakan (Brazil, Venezuela) creator goddess who created women.
 Venus	3145	_("Kulimina Corona","corona")	CR	-27.800000	261.900000	170
 # TRANSLATORS: (Venus); Mother goddess of Ibans, the Sea Dayaks of Borneo/Kalimantan, Indonesia.
@@ -29683,6 +29745,8 @@ Venus	4084	_("Muzamuza Corona","corona")	CR	65.600000	205.400000	163
 Venus	4086	_("Mykh-Imi Corona","corona")	CR	-73.000000	99.000000	150
 # TRANSLATORS: (Venus); Udmurt (Urals Finn, Russia) fertility goddess.
 Venus	4064	_("Mukylchin Corona","corona")	CR	-12.500000	46.000000	525
+# TRANSLATORS: (Venus); Dahomean world creator deity, both male and female.
+Venus	4135	_("Nana-Buluku Coronae","corona")	CR	39.400000	14.000000	230
 # TRANSLATORS: (Venus); Darghinan (Daghestan) childbirth deity.
 Venus	3959	_("Momu Coronae","corona")	CR	-21.000000	220.300000	260
 # TRANSLATORS: (Venus); Gikuyu (Kenya), the first woman, ancestor of nine tribes.
@@ -29701,8 +29765,6 @@ Venus	4195	_("Nei-Teukez Corona","corona")	CR	14.200000	258.800000	90
 Venus	4292	_("Ninhursag Corona","corona")	CR	-38.000000	23.500000	125
 # TRANSLATORS: (Venus); Teutonic fertility goddess.
 Venus	4193	_("Nehalennia Corona","corona")	CR	14.000000	10.000000	345
-# TRANSLATORS: (Venus); Dahomean world creator deity, both male and female.
-Venus	4135	_("Nana-Buluku Coronae","corona")	CR	39.400000	14.000000	230
 # TRANSLATORS: (Venus); Keresan Pueblo ancestor goddess, mother of all foreign (non-Keresan) people.
 Venus	4149	_("Naotsete Corona","corona")	CR	-58.300000	249.500000	200
 # TRANSLATORS: (Venus); Ganda (Uganda) goddess of childbirth.
@@ -29773,6 +29835,8 @@ Venus	4664	_("Persephone Corona","corona")	CR	-36.000000	304.600000	120
 Venus	4871	_("Purandhi Corona","corona")	CR	26.100000	343.500000	170
 # TRANSLATORS: (Venus); Celtic fertility goddess.
 Venus	5032	_("Rigatona Corona","corona")	CR	-33.500000	278.500000	300
+# TRANSLATORS: (Venus); Assyrian fertility goddess.
+Venus	5425	_("Semiramus Corona","corona")	CR	-37.000000	293.000000	375
 # TRANSLATORS: (Venus); Roman goddess of fruits.
 Venus	4790	_("Pomona Corona","corona")	CR	79.300000	299.400000	315
 # TRANSLATORS: (Venus); Zuni fertility goddess.
@@ -29825,8 +29889,6 @@ Venus	5250	_("Rzhanitsa Corona","corona")	CR	-17.600000	214.600000	450
 Venus	5309	_("Santa Corona","corona")	CR	-34.500000	288.000000	200
 # TRANSLATORS: (Venus); Babylonian fertility goddess.
 Venus	5328	_("Sarpanitum Corona","corona")	CR	-52.300000	14.600000	170
-# TRANSLATORS: (Venus); Assyrian fertility goddess.
-Venus	5425	_("Semiramus Corona","corona")	CR	-37.000000	293.000000	375
 # TRANSLATORS: (Venus); Ernestine; German singer (1861-1936). Name changed from Schumann-Heink Patera.
 Venus	5386	_("Schumann-Heink Corona","corona")	CR	74.300000	214.500000	122
 # TRANSLATORS: (Venus); Abkhazian goddess of corn milling.
@@ -29931,6 +29993,8 @@ Venus	6621	_("Ya-Yerv Corona","corona")	CR	-9.000000	214.000000	275
 Venus	6636	_("Yanbike Corona","corona")	CR	-1.500000	328.500000	200
 # TRANSLATORS: (Venus); Russian, wife of Price Igor; patiently waited for his return from captivity (12th century). Name changed from Yaroslavna Patera.
 Venus	6641	_("Yaroslavna Corona","corona")	CR	38.800000	21.200000	112
+# TRANSLATORS: (Venus); Polish goddess of life.
+Venus	6771	_("Zywie Corona","corona")	CR	-38.600000	291.200000	200
 # TRANSLATORS: (Venus); Persian earth goddess.
 Venus	6698	_("Zamin Corona","corona")	CR	31.500000	258.300000	315
 # TRANSLATORS: (Venus); Quechua (Peru) maize deity.
@@ -29943,8 +30007,6 @@ Venus	6716	_("Zemlika Corona","corona")	CR	-33.500000	50.000000	150
 Venus	6733	_("Zhivana Corona","corona")	CR	13.000000	287.500000	180
 # TRANSLATORS: (Venus); German harvest goddess.
 Venus	6745	_("Zisa Corona","corona")	CR	12.000000	221.000000	850
-# TRANSLATORS: (Venus); Polish goddess of life.
-Venus	6771	_("Zywie Corona","corona")	CR	-38.600000	291.200000	200
 # TRANSLATORS: (Venus); Lithuanian fertility goddess.
 Venus	6944	_("Žemina Corona","corona")	CR	-11.700000	186.000000	530
 # TRANSLATORS: (Venus); Iroquois corn spirit.
@@ -30091,6 +30153,8 @@ Venus	4868	_("Pulugu Dorsa","dorsum")	DO	-65.000000	225.000000	650
 Venus	4785	_("Poludnitsa Dorsa","dorsum")	DO	5.000000	179.500000	1500
 # TRANSLATORS: (Venus); E. Slavic night and dreams deity.
 Venus	5492	_("Shishimora Dorsa","dorsum")	DO	37.000000	297.000000	800
+# TRANSLATORS: (Venus); Ulchian (Siberia) sky goddess.
+Venus	5426	_("Semuni Dorsa","dorsum")	DO	75.900000	8.000000	514
 # TRANSLATORS: (Venus); Kachin (Burma/Myanmar) sun goddess.
 Venus	5532	_("Siksaup Dorsa","dorsum")	DO	-73.000000	228.000000	650
 # TRANSLATORS: (Venus); Estonian sky maiden.
@@ -30103,8 +30167,6 @@ Venus	5576	_("Sirona Dorsa","dorsum")	DO	-43.500000	193.500000	700
 Venus	5172	_("Rokapi Dorsa","dorsum")	DO	-55.000000	222.000000	2200
 # TRANSLATORS: (Venus); Latvian witch.
 Venus	5667	_("Spidola Dorsa","dorsum")	DO	-73.500000	325.000000	950
-# TRANSLATORS: (Venus); Ulchian (Siberia) sky goddess.
-Venus	5426	_("Semuni Dorsa","dorsum")	DO	75.900000	8.000000	514
 # TRANSLATORS: (Venus); Norse sun goddess.
 Venus	5764	_("Sunna Dorsa","dorsum")	DO	-53.000000	134.000000	500
 # TRANSLATORS: (Venus); Hindu sky goddess, bringer of rain.
@@ -30183,6 +30245,8 @@ Venus	4237	_("Ney-Anki Fluctus","fluctus")	FL	-37.000000	105.000000	950
 Venus	1627	_("Dotetem Fluctus","fluctus")	FL	-6.000000	177.500000	530
 # TRANSLATORS: (Venus); Irish earth mother.
 Venus	1832	_("Eriu Fluctus","fluctus")	FL	-37.000000	357.000000	600
+# TRANSLATORS: (Venus); Polynesian goddess of sharks.
+Venus	2878	_("Kaapaau Fluctus","fluctus")	FL	-66.500000	181.000000	350
 # TRANSLATORS: (Venus); Tonga (Polynesia) worm goddess.
 Venus	2661	_("Ilaheva Fluctus","fluctus")	FL	-42.500000	84.000000	900
 # TRANSLATORS: (Venus); Roman nymph of the brook in Lavinia, wife of Janus, mother of Fons.
@@ -30191,8 +30255,6 @@ Venus	2873	_("Juturna Fluctus","fluctus")	FL	-76.000000	350.000000	900
 Venus	2454	_("Henwen Fluctus","fluctus")	FL	-20.500000	179.900000	485
 # TRANSLATORS: (Venus); Tonga (Polynesia) underworld goddess.
 Venus	2501	_("Hikuleo Fluctus","fluctus")	FL	52.500000	208.000000	600
-# TRANSLATORS: (Venus); Polynesian goddess of sharks.
-Venus	2878	_("Kaapaau Fluctus","fluctus")	FL	-66.500000	181.000000	350
 # TRANSLATORS: (Venus); Chaco tribes/Guarani (Argentina) female rain spirit.
 Venus	2945	_("Kasogonaga Fluctus","fluctus")	FL	-18.000000	268.000000	850
 # TRANSLATORS: (Venus); Nicaraguan goddess of insects, stars, and planets.
@@ -30203,10 +30265,10 @@ Venus	3098	_("Koti Fluctus","fluctus")	FL	12.500000	318.000000	400
 Venus	2891	_("Kaiwan Fluctus","fluctus")	FL	-45.500000	358.000000	1200
 # TRANSLATORS: (Venus); Yakutian/Sakha goddess, wife of supreme god Yuryung.
 Venus	3160	_("Kunkubey Fluctus","fluctus")	FL	-50.000000	207.000000	350
-# TRANSLATORS: (Venus); Inca earthquake goddess.
-Venus	3617	_("Mamapacha Fluctus","fluctus")	FL	60.000000	185.000000	900
 # TRANSLATORS: (Venus); Adygan (N. Caucasus) beekeeping goddess.
 Venus	3855	_("Merisa Fluctus","fluctus")	FL	20.500000	9.000000	630
+# TRANSLATORS: (Venus); Inca earthquake goddess.
+Venus	3617	_("Mamapacha Fluctus","fluctus")	FL	60.000000	185.000000	900
 # TRANSLATORS: (Venus); Egyptian goddess of music and singing.
 Venus	3863	_("Mert Fluctus","fluctus")	FL	-50.500000	230.500000	250
 # TRANSLATORS: (Venus); Semitic mother goddess.
@@ -30531,10 +30593,10 @@ Venus	4466	_("Ongwuti Mons","mons")	MO	-2.000000	194.500000	500
 Venus	4538	_("Ozza Mons","mons")	MO	4.500000	201.000000	507
 # TRANSLATORS: (Venus); Yakima/Klickitat (NW Coast) mountain goddess.
 Venus	4548	_("Pahto Mons","mons")	MO	-64.500000	114.500000	300
-# TRANSLATORS: (Venus); Lakota (Sioux) White Buffalo Woman.
-Venus	4859	_("Ptesanwi Mons","mons")	MO	2.800000	45.400000	200
 # TRANSLATORS: (Venus); Canaanite (Phoenicia) storm goddess.
 Venus	5459	_("Shala Mons","mons")	MO	39.400000	208.000000	90
+# TRANSLATORS: (Venus); Lakota (Sioux) White Buffalo Woman.
+Venus	4859	_("Ptesanwi Mons","mons")	MO	2.800000	45.400000	200
 # TRANSLATORS: (Venus); Greek Titaness.
 Venus	5014	_("Rhea Mons","mons")	MO	32.400000	282.200000	217
 # TRANSLATORS: (Venus); Haida (NW Coast) Bear Mother deity.
@@ -30595,6 +30657,8 @@ Venus	6248	_("Ushas Mons","mons")	MO	-24.300000	324.600000	413
 Venus	6615	_("Xochiquetzal Mons","mons")	MO	3.500000	270.000000	80
 # TRANSLATORS: (Venus); Pawnee Mother Corn deity.
 Venus	6258	_("Uti Hiata Mons","mons")	MO	16.000000	69.000000	500
+# TRANSLATORS: (Venus); Anglo-Saxon weaving goddess.
+Venus	6593	_("Wyrd Mons","mons")	MO	14.000000	247.200000	150
 # TRANSLATORS: (Venus); Scandinavian love goddess.
 Venus	6321	_("Var Mons","mons")	MO	1.200000	316.200000	1000
 # TRANSLATORS: (Venus); Ancient Italian sea goddess.
@@ -30605,8 +30669,6 @@ Venus	6451	_("Vostrukha Mons","mons")	MO	-6.300000	299.400000	180
 Venus	6666	_("Yolkai-Estsan Mons","mons")	MO	17.000000	194.000000	600
 # TRANSLATORS: (Venus); Polynesian lizard goddess.
 Venus	6473	_("Waka Mons","mons")	MO	26.300000	207.700000	60
-# TRANSLATORS: (Venus); Anglo-Saxon weaving goddess.
-Venus	6593	_("Wyrd Mons","mons")	MO	14.000000	247.200000	150
 # TRANSLATORS: (Venus); Hopi prickly pear cactus maiden.
 Venus	6682	_("Yunya-mana Mons","mons")	MO	-18.000000	285.000000	500
 # TRANSLATORS: (Venus); Assyro-Babylonian goddess.
@@ -31127,14 +31189,14 @@ Venus	4582	_("Paoro Tholi","tholus")	TH	10.500000	268.000000	225
 Venus	4666	_("Perynya Tholus","tholus")	TH	-0.700000	353.200000	110
 # TRANSLATORS: (Venus); Armenian goddess of love.
 Venus	5464	_("Shamiram Tholus","tholus")	TH	-6.900000	335.200000	10
+# TRANSLATORS: (Venus); Frygian (Phoenician) Earth goddess.
+Venus	5422	_("Semele Tholi","tholus")	TH	64.300000	202.900000	194
 # TRANSLATORS: (Venus); Slavic weather goddess.
 Venus	4771	_("Podaga Tholus","tholus")	TH	-56.300000	2.000000	40
 # TRANSLATORS: (Venus); Chimalateco/Chinanteco (Mexico) mountain goddess.
 Venus	5191	_("Rosna Tholi","tholus")	TH	-25.500000	73.300000	130
 # TRANSLATORS: (Venus); Hindu cow goddess.
 Venus	5171	_("Rohina Tholus","tholus")	TH	-40.600000	295.400000	30
-# TRANSLATORS: (Venus); Frygian (Phoenician) Earth goddess.
-Venus	5422	_("Semele Tholi","tholus")	TH	64.300000	202.900000	194
 # TRANSLATORS: (Venus); E. Slavic underworld goddess.
 Venus	5759	_("Sumerla Tholi","tholus")	TH	-13.800000	252.200000	90
 # TRANSLATORS: (Venus); Aztec earthquake goddess.
@@ -31149,10 +31211,10 @@ Venus	6233	_("Upunusa Tholus","tholus")	TH	66.200000	252.400000	223
 Venus	6142	_("Turi Tholus","tholus")	TH	-66.900000	222.300000	15
 # TRANSLATORS: (Venus); Slavic dawn goddess.
 Venus	6752	_("Zorya Tholus","tholus")	TH	-9.400000	335.300000	22
-# TRANSLATORS: (Venus); Chuvash (Volga area) evil spirit causing lunar and solar eclipses.
-Venus	6457	_("Vupar Tholus","tholus")	TH	-13.500000	306.000000	100
 # TRANSLATORS: (Venus); Hatti (proto-Hittite) sun goddess and mother of gods.
 Venus	6589	_("Wurunsemu Tholus","tholus")	TH	40.600000	209.900000	83
+# TRANSLATORS: (Venus); Chuvash (Volga area) evil spirit causing lunar and solar eclipses.
+Venus	6457	_("Vupar Tholus","tholus")	TH	-13.500000	306.000000	100
 # TRANSLATORS: (Venus); Mordovian (Volga Finn) "home's mother" deity.
 Venus	6683	_("Yurt-Ava Tholus","tholus")	TH	-13.800000	341.500000	15
 # TRANSLATORS: (Venus); Lakota goddess of order, beauty, and happiness.

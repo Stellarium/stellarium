@@ -167,7 +167,7 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 	tex->fullPath = canPath;
 	if (!lazyLoading)
 	{
-		//use load() instead of bind() to prevent potential - if very unlikey - OpenGL errors
+		//use load() instead of bind() to prevent potential - if very unlikely - OpenGL errors
 		//because GL must be called in the main thread
 		tex->load();
 	}
@@ -178,10 +178,9 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 //! Create a texture from a QImage.
 StelTextureSP StelTextureMgr::createTexture(const QImage &image, const StelTexture::StelTextureParams& params)
 {
-	bool r;
 	StelTextureSP tex = StelTextureSP(new StelTexture(this));
 	tex->loadParams = params;
-	r = tex->glLoad(image);
+	bool r = tex->glLoad(image);
 	Q_ASSERT(r);
 	return tex;
 }

@@ -52,12 +52,12 @@ class StoredPointsDialog : public StelDialog
 
 public:
 	StoredPointsDialog();
-	~StoredPointsDialog();
+	~StoredPointsDialog() Q_DECL_OVERRIDE;
 
 	void populatePointsList(QVariantList list);
 
 public slots:
-	void retranslate();
+	virtual void retranslate() Q_DECL_OVERRIDE;
 
 private slots:
 	void buttonAddPressed();
@@ -74,7 +74,7 @@ signals:
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	Ui_StoredPoints *ui;
 private:
 	//! @enum ModelColumns This enum defines the number and the order of the columns in the table that lists points

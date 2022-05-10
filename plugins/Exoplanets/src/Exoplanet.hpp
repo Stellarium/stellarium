@@ -104,8 +104,6 @@ public:
 	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the visual magnitude
 	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
-	//! Get the angular size of host star
-	virtual double getAngularSize(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the localized name of host star
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
 	//! Get the english name
@@ -114,6 +112,7 @@ public:
 	bool isVMagnitudeDefined() const;
 
 	QString getDesignation(void) const;
+	QStringList getDesignations(void) const;
 	QStringList getExoplanetsEnglishNames(void) const;
 	QStringList getExoplanetsNamesI18n(void) const;
 	QStringList getExoplanetsDesignations(void) const;
@@ -165,11 +164,12 @@ private:
 	static bool habitableMode;
 	static bool showDesignations;
 	static bool showNumbers;
-	static int temperatureScaleID;
+	static int temperatureScaleID; //!< Magic number. 0: Kelvin; 1: Celsius; 2: Fahrenheit
 
 	void draw(StelCore* core, StelPainter *painter);
 
 	QString getTemperatureScaleUnit() const;
+	//! convert input temperature to Kelvin temperature, depending on the setting of temperatureScaleID
 	float getTemperature(float temperature) const;
 
 	int EPCount;
@@ -178,6 +178,7 @@ private:
 	//! Variables for description of properties of exoplanets
 	QString designation;			//! The designation of the host star
 	QString starProperName;			//! The proper name of the host star
+	QString starAltNames;			//! The alternative names of the host star
 	double RA;				//! J2000 right ascension of host star // ALMOST USELESS AFTER CONSTRUCTOR!
 	double DE;				//! J2000 declination of host star     // ALMOST USELESS AFTER CONSTRUCTOR!   use XYZ
 	double distance;			//! Distance to star in pc

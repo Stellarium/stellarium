@@ -87,43 +87,43 @@ public:
 	//! Constructor
 	AsterismMgr(StarMgr *stars);
 	//! Destructor
-	virtual ~AsterismMgr();
+	virtual ~AsterismMgr() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the AsterismMgr.
 	//! Reads from the asterism parser object and updates the loading bar
 	//! as asterism objects are loaded for the required sky culture.
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 
 	//! Draw asterism lines, art, names and boundaries.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 
 	//! Updates time-varying state for each asterism.
-	virtual void update(double deltaTime);
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
 
 	//! Return the value defining the order of call for the given action
 	//! @param actionName the name of the action for which we want the call order
 	//! @return the value defining the order. The closer to 0 the earlier the module's action will be called
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
 
 	//! Return the matching asterism object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensitive asterism name
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
 
 	//! Return the matching asterism if exists or Q_NULLPTR
 	//! @param name The case in-sensitive standard program name (three letter abbreviation)
-	virtual StelObjectP searchByName(const QString& name) const;
+	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
 
-	virtual StelObjectP searchByID(const QString &id) const;
+	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE;
 
-	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QString getName() const { return "Asterisms"; }
-	virtual QString getStelObjectType() const;
+	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
+	virtual QString getName() const Q_DECL_OVERRIDE { return "Asterisms"; }
+	virtual QString getStelObjectType() const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
@@ -225,16 +225,16 @@ public slots:
 	void selectAllAsterisms(void);
 
 signals:
-	void fontSizeChanged(const float newSize) const;
-	void linesColorChanged(const Vec3f & color) const;
-	void linesDisplayedChanged(const bool displayed) const;
-	void namesColorChanged(const Vec3f & color) const;
-	void namesDisplayedChanged(const bool displayed) const;
-	void asterismLineThicknessChanged(int thickness) const;
-	void rayHelpersColorChanged(const Vec3f & color) const;
-	void rayHelpersDisplayedChanged(const bool displayed) const;
-	void rayHelperThicknessChanged(int thickness) const;
-	void isolateAsterismSelectedChanged(const bool isolate) const;
+	void fontSizeChanged(const float newSize);
+	void linesColorChanged(const Vec3f & color);
+	void linesDisplayedChanged(const bool displayed);
+	void namesColorChanged(const Vec3f & color);
+	void namesDisplayedChanged(const bool displayed);
+	void asterismLineThicknessChanged(int thickness);
+	void rayHelpersColorChanged(const Vec3f & color);
+	void rayHelpersDisplayedChanged(const bool displayed);
+	void rayHelperThicknessChanged(int thickness);
+	void isolateAsterismSelectedChanged(const bool isolate);
 
 private slots:
 	//! Loads new asterism data and art if the SkyCulture has changed.

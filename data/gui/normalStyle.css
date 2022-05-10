@@ -27,6 +27,11 @@ QFrame {
 	border: none;
 }
 
+QFrame[frameShape="4"],   /* QFrame::HLine == 0x0004 */
+QFrame[frameShape="5"] { /* QFrame::VLine == 0x0005 */
+        border: 1px solid rgb(31, 31, 31);
+}
+
 QToolTip {
 	color: rgb(4, 5, 9);
 	font-size: 100%;

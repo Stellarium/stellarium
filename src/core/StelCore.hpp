@@ -49,10 +49,6 @@ class StelObserver;
 class StelCore : public QObject
 {
 	Q_OBJECT
-	Q_ENUMS(FrameType)
-	Q_ENUMS(ProjectionType)
-	Q_ENUMS(RefractionMode)
-	Q_ENUMS(DeltaTAlgorithm)
 	Q_PROPERTY(bool flipHorz READ getFlipHorz WRITE setFlipHorz NOTIFY flipHorzChanged)
 	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert NOTIFY flipVertChanged)
 	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation NOTIFY flagUseNutationChanged)
@@ -80,12 +76,14 @@ public:
 		FrameObservercentricEclipticJ2000,	//!< Fixed-ecliptic reference frame centered on the Observer. GZ: was ObservercentricEcliptic, but renamed because it is Ecliptic of J2000!
 		FrameObservercentricEclipticOfDate,	//!< Moving ecliptic reference frame centered on the Observer. GZ new for V0.14: Ecliptic of date, i.e. includes the precession of the ecliptic.
 		FrameEquinoxEqu,			//!< Equatorial reference frame at the current equinox centered on the observer.
-								//!< The north pole follows the precession of the planet on which the observer is located.
-								//!< On Earth, this may include nutation if so configured. Has been corrected for V0.14 to really properly reflect ecliptical motion and precession (Vondrak 2011 model) and nutation.
+							//!< The north pole follows the precession of the planet on which the observer is located.
+							//!< On Earth, this may include nutation if so configured. Has been corrected for V0.14 to really properly reflect ecliptical motion and precession (Vondrak 2011 model) and nutation.
 		FrameJ2000,				//!< Equatorial reference frame at the J2000 equinox centered on the observer. This is also the ICRS reference frame.
+		FrameFixedEquatorial,			//!< Fixed equatorial frame (hour angle/declination). Note that hour angle is counted backwards here and must be treated specially for user I/O.
 		FrameGalactic,				//!< Galactic reference frame centered on observer.
 		FrameSupergalactic			//!< Supergalactic reference frame centered on observer.
 	};
+	Q_ENUM(FrameType)
 
 	//! @enum ProjectionType
 	//! Available projection types. A value of 1000 indicates the default projection
@@ -102,6 +100,7 @@ public:
 		ProjectionMiller,		//!< Miller cylindrical projection
 		ProjectionCylinder,		//!< Cylinder projection
 	};
+	Q_ENUM(ProjectionType)
 
 	//! @enum RefractionMode
 	//! Available refraction mode.
@@ -111,6 +110,7 @@ public:
 		RefractionOn,		//!< Always add refraction (i.e. apparent coordinates)
 		RefractionOff		//!< Never add refraction (i.e. geometric coordinates)
 	};
+	Q_ENUM(RefractionMode)
 
 	//! @enum DeltaTAlgorithm
 	//! Available DeltaT algorithms
@@ -141,18 +141,20 @@ public:
 		ReingoldDershowitz,                 //!< Reingold & Dershowitz (2002, 2007) algorithm for DeltaT
 		MorrisonStephenson2004,	//!< Morrison & Stephenson (2004, 2005) algorithm for DeltaT
 		Reijs,					//!< Reijs (2006) algorithm for DeltaT
-		EspenakMeeus,				//!< Espenak & Meeus (2006) algorithm for DeltaT (Recommended, default)
+		EspenakMeeus,				//!< Espenak & Meeus (2006) algorithm for DeltaT
+		EspenakMeeusModified,				//!< Espenak & Meeus (2006) algorithm with modified formulae for DeltaT (Recommended, default)
 		EspenakMeeusZeroMoonAccel,	//!< Espenak & Meeus (2006) algorithm for DeltaT (but without additional Lunar acceleration. FOR TESTING ONLY, NONPUBLIC)
 		Banjevic,					//!< Banjevic (2006) algorithm for DeltaT
 		IslamSadiqQureshi,			//!< Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
 		KhalidSultanaZaidi,			//!< M. Khalid, Mariam Sultana and Faheem Zaidi polynomial approximation of time period 1620-2013 (2014)
-		StephensonMorrisonHohenkerk2016,    //!< Stephenson, Morrison, Hohenkerk (2016) RSPA paper provides spline fit to observations for -720..2016 and else parabolic fit.
+		StephensonMorrisonHohenkerk2016,    //!< Stephenson, Morrison, Hohenkerk (2016) RSPA paper provides spline fit to observations for -720..2019 and else parabolic fit.
 		Henriksson2017,			//!< Henriksson (2017) algorithm for DeltaT (The solution for Schoch formula for DeltaT (1931), but with ndot=-30.128"/cy^2)
 		Custom					//!< User defined coefficients for quadratic equation for DeltaT
 	};
+	Q_ENUM(DeltaTAlgorithm)
 
 	StelCore();
-	virtual ~StelCore();
+	virtual ~StelCore() Q_DECL_OVERRIDE;
 
 	//! Init and load all main core components.
 	void init();
@@ -269,6 +271,9 @@ public:
 	//! Get the modelview matrix for observer-centric equatorial at equinox drawing.
 	StelProjector::ModelViewTranformP getEquinoxEquModelViewTransform(RefractionMode refMode=RefractionAuto) const;
 
+	//! Get the modelview matrix for observer-centric fixed equatorial drawing.
+	StelProjector::ModelViewTranformP getFixedEquatorialModelViewTransform(RefractionMode refMode) const;
+
 	//! Get the modelview matrix for observer-centric altazimuthal drawing.
 	StelProjector::ModelViewTranformP getAltAzModelViewTransform(RefractionMode refMode=RefractionAuto) const;
 
@@ -368,8 +373,8 @@ public slots:
 	void moveObserverTo(const StelLocation& target, double duration=1., double durationIfPlanetChange=1.);
 
 	//! Set the current ProjectionType to use
-	void setCurrentProjectionType(ProjectionType type);
-	ProjectionType getCurrentProjectionType() const;
+	void setCurrentProjectionType(StelCore::ProjectionType type);
+	StelCore::ProjectionType getCurrentProjectionType() const;
 
 	//! Get the current Mapping used by the Projection
 	QString getCurrentProjectionTypeKey(void) const;
@@ -382,9 +387,9 @@ public slots:
 	QStringList getAllProjectionTypeKeys() const;
 
 	//! Set the current algorithm and nDot used therein for time correction (DeltaT)
-	void setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm);
+	void setCurrentDeltaTAlgorithm(StelCore::DeltaTAlgorithm algorithm);
 	//! Get the current algorithm for time correction (DeltaT)
-	DeltaTAlgorithm getCurrentDeltaTAlgorithm() const { return currentDeltaTAlgorithm; }
+	StelCore::DeltaTAlgorithm getCurrentDeltaTAlgorithm() const { return currentDeltaTAlgorithm; }
 	//! Get description of the current algorithm for time correction
 	QString getCurrentDeltaTAlgorithmDescription(void) const;
 	//! Get the current algorithm used by the DeltaT
@@ -470,11 +475,15 @@ public slots:
 	//! It is still frequently used in the literature.
 	double getJDE() const;
 
-	//! Get solution of equation of time
-	//! Source: J. Meeus "Astronomical Algorithms" (2nd ed., with corrections as of August 10, 2009) p.183-187.
+	//! Get solution of equation of time [minutes].
+	//! Source: J. Meeus "Astronomical Algorithms" (2nd ed., 1998) 28.3.
 	//! @param JDE JD in Dynamical Time (previously called Ephemeris Time)
 	//! @return time in minutes
 	double getSolutionEquationOfTime(const double JDE) const;
+	//! Get solution of equation of time [minutes] for the current time.
+	//! Source: J. Meeus "Astronomical Algorithms" (2nd ed., with corrections as of August 10, 2009) p.183-187.
+	//! @return time in minutes
+	double getSolutionEquationOfTime() const;
 
 	bool getUseDST() const;
 	void setUseDST(const bool b);
@@ -489,7 +498,7 @@ public slots:
 	//! Get the current date in Modified Julian Day (UT)
 	double getMJDay() const;
 
-	//! Compute DeltaT estimation for a given date.
+	//! Compute DeltaT estimation for a given date [seconds].
 	//! DeltaT is the accumulated effect of earth's rotation slowly getting slower, mostly caused by tidal braking by the Moon.
 	//! For accurate positioning of objects in the sky, we must compute earth-based clock-dependent things like earth rotation, hour angles etc.
 	//! using plain UT, but all orbital motions or rotation of the other planets must be computed in TT, which is a regular time frame.
@@ -750,6 +759,23 @@ public slots:
 	//! @param positionEqJnow position vector in rectangular equatorial coordinates of current epoch&equinox.
 	QString getIAUConstellation(const Vec3d positionEqJnow) const;
 
+	//! Returns naked-eye limiting magnitude corresponding to the given sky luminance in cd/m².
+	static float luminanceToNELM(float luminance);
+	//! Returns sky luminance in cd/m² corresponding to the given naked-eye limiting magnitude.
+	static float nelmToLuminance(float nelm);
+	//! Returns some representative naked-eye limiting magnitude for the given Bortle scale index.
+	static float bortleScaleIndexToNELM(int index);
+	//! Returns some representative value of zenith luminance in cd/m² for the given Bortle scale index.
+	static float bortleScaleIndexToLuminance(const int index) { return nelmToLuminance(bortleScaleIndexToNELM(index)); }
+	//! Classifies the sky using the Bortle scale using zenith naked-eye limiting magnitude as input.
+	static int nelmToBortleScaleIndex(float nelm);
+	//! Classifies the sky using the Bortle scale using zenith luminance in cd/m² as input.
+	static int luminanceToBortleScaleIndex(const float luminance) { return nelmToBortleScaleIndex(luminanceToNELM(luminance)); }
+	//! Converts luminance in cd/m² to magnitude/arcsec².
+	static float luminanceToMPSAS(const float cdm2) { return std::log10(cdm2/10.8e4f) / -0.4f; }
+	//! Converts magnitude/arcsec² to luminance in cd/m².
+	static float mpsasToLuminance(const float mag) { return 10.8e4f*std::pow(10.f, -0.4f*mag); }
+
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(const StelLocation&);
@@ -800,6 +826,9 @@ signals:
 	void configurationDataSaved();
 	void updateSearchLists();
 
+private slots:
+	//! Call this whenever latitude changes. I.e., just connect it to the locationChanged() signal.
+	void updateFixedEquatorialTransformMatrices();
 private:
 	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device
 	StelSkyDrawer* skyDrawer;
@@ -818,6 +847,8 @@ private:
 	// Parameters to use when creating new instances of StelProjector
 	StelProjector::StelProjectorParams currentProjectorParams;
 
+	//! This is called in every frame to set rotation matrices for the various movable projection frames.
+	//! The rarely updated frame transform between AltAz and Fixed Equatorial is set in updateFixedEquatorialTransformMatrices() instead.
 	void updateTransformMatrices();
 	void updateTime(double deltaTime);
 	void updateMaximumFov();
@@ -831,6 +862,8 @@ private:
 	Mat4d matAltAzToHeliocentricEclipticJ2000; // Transform from topocentric (StelObserver) altazimuthal coordinate to heliocentric ecliptic Cartesian (VSOP87A)
 	Mat4d matAltAzToEquinoxEqu;                // Transform from topocentric altazimuthal coordinate to Earth Equatorial
 	Mat4d matEquinoxEquToAltAz;                // Transform from Earth Equatorial to topocentric (StelObserver) altazimuthal coordinate
+	Mat4d matAltAzToFixedEquatorial;           // Transform from topocentric altazimuthal coordinate to Fixed Equatorial system (hour angle/decl)
+	Mat4d matFixedEquatorialToAltAz;           // Transform from Fixed Equatorial (hour angle/decl) to topocentric (StelObserver) altazimuthal coordinate
 	Mat4d matHeliocentricEclipticToEquinoxEqu; // Transform from heliocentric ecliptic Cartesian (VSOP87A) to earth equatorial coordinate
 	Mat4d matEquinoxEquDateToJ2000;            // For Earth, this is almost the inverse precession matrix, =Rz(VSOPbias)Rx(eps0)Rz(-psiA)Rx(-omA)Rz(chiA)
 	Mat4d matJ2000ToEquinoxEqu;                // precession matrix

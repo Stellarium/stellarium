@@ -143,7 +143,6 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 	//! Returns the module-specific style sheet.	
 	virtual void handleMouseClicks(class QMouseEvent* event) Q_DECL_OVERRIDE;
-	virtual void update(double) Q_DECL_OVERRIDE {}
 
 	QString getDimensionsString(double fovX, double fovY) const;
 	QString getFOVString(double fov) const;

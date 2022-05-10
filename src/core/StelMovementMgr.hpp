@@ -54,8 +54,6 @@ private:
 class StelMovementMgr : public StelModule
 {
 	Q_OBJECT
-	Q_ENUMS(MountMode)
-	Q_ENUMS(ZoomingMode)
 	Q_PROPERTY(bool equatorialMount
 		   READ getEquatorialMount
 		   WRITE setEquatorialMount
@@ -85,6 +83,10 @@ class StelMovementMgr : public StelModule
 		   READ getFlagEnableMouseNavigation
 		   WRITE setFlagEnableMouseNavigation
 		   NOTIFY flagEnableMouseNavigationChanged)
+	Q_PROPERTY(bool flagEnableMouseZooming
+		   READ getFlagEnableMouseZooming
+		   WRITE setFlagEnableMouseZooming
+		   NOTIFY flagEnableMouseZoomingChanged)
 	Q_PROPERTY(bool flagEnableMoveKeys
 		   READ getFlagEnableMoveKeys
 		   WRITE setFlagEnableMoveKeys
@@ -102,9 +104,11 @@ public:
 	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
 	// TODO: add others: MountEcliptical, MountEq2000, MountEcliptical2000 and implement proper variants.
 	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic, MountSupergalactic};
+	Q_ENUM(MountMode)
 
 	//! Named constants for zoom operations.
 	enum ZoomingMode { ZoomOut=-1, ZoomNone=0, ZoomIn=1};
+	Q_ENUM(ZoomingMode)
 
 	StelMovementMgr(StelCore* core);
 	virtual ~StelMovementMgr() Q_DECL_OVERRIDE;
@@ -128,7 +132,7 @@ public:
 			addTimeDragPoint(QCursor::pos().x(), QCursor::pos().y());
 	}
 	//! Implement required draw function.  Does nothing.
-	virtual void draw(StelCore*) Q_DECL_OVERRIDE {;}
+	virtual void draw(StelCore*) Q_DECL_OVERRIDE {}
 	//! Handle keyboard events.
 	virtual void handleKeys(QKeyEvent* event) Q_DECL_OVERRIDE;
 	//! Handle mouse movement events.
@@ -225,6 +229,11 @@ public slots:
 	//! Set whether mouse can control movement
 	void setFlagEnableMouseNavigation(bool b) {flagEnableMouseNavigation=b; emit flagEnableMouseNavigationChanged(b); }
 
+	//! Get whether mouse can control zooming
+	bool getFlagEnableMouseZooming() const {return flagEnableMouseZooming;}
+	//! Set whether mouse can control zooming
+	void setFlagEnableMouseZooming(bool b) {flagEnableMouseZooming=b; emit flagEnableMouseZoomingChanged(b); }
+
 	//! Get the state of flag for indication of mount mode
 	bool getFlagIndicationMountMode() const {return flagIndicationMountMode;}
 	//! Set the state of flag for indication of mount mode
@@ -245,7 +254,7 @@ public slots:
 	//!       J2000 positions, the x-axis points to 0h,0°, the y-axis to 6h,0° and the z-axis points to the
 	//!       celestial pole. You may use a constructor defining three components (x,y,z) or the
 	//!       format with just two angles, e.g., Vec3d("0h","0d").
-	void moveToJ2000(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
+	void moveToJ2000(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1., StelMovementMgr::ZoomingMode zooming = ZoomNone);
 
 	//! Move the view to a specified AltAzimuthal position.
 	//! @param aim The position to move to expressed as a vector in AltAz frame.
@@ -266,7 +275,7 @@ public slots:
 	//!       with azimuth angles running counter-clockwise, i.e., against the usual orientation.
 	//! @note Panic function made March 2016. It turned out that using moveToJ2000 for alt-az-based moves behaves odd for long moves during fast timelapse: end vector is linked to the sky!
 	//! As of March 2016: This call does nothing when mount frame is not AltAzi!
-	void moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1.f, ZoomingMode zooming = ZoomNone);
+	void moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1.f, StelMovementMgr::ZoomingMode zooming = ZoomNone);
 
 	//! Change the zoom level.
 	//! @param aimFov The desired field of view in degrees.
@@ -417,10 +426,10 @@ public slots:
 	void moveViewport(double offsetX, double offsetY, const float duration=0.f);
 
 	//! Set current mount type defining the reference frame in which head movements occur.
-	void setMountMode(MountMode m);
+	void setMountMode(StelMovementMgr::MountMode m);
 	//! Get current mount type defining the reference frame in which head movements occur.
-	MountMode getMountMode(void) const {return mountMode;}
-	bool getEquatorialMount(void) const {return mountMode == MountEquinoxEquatorial;}
+	StelMovementMgr::MountMode getMountMode(void) const {return mountMode;}
+	bool getEquatorialMount(void) const {return mountMode == StelMovementMgr::MountEquinoxEquatorial;}
 
 	//! Function designed only for scripting context. Put the function into the startup.ssc of your planetarium setup,
 	//! this will avoid any unwanted tracking.
@@ -448,6 +457,7 @@ signals:
 	void viewportHorizontalOffsetTargetChanged(double f);
 	void viewportVerticalOffsetTargetChanged(double f);
 	void flagEnableMouseNavigationChanged(bool b);
+	void flagEnableMouseZoomingChanged(bool b);
 	void flagEnableMoveKeysChanged(bool b);
 	void flagEnableZoomKeysChanged(bool b);
 	void userMaxFovChanged(double fov);
@@ -497,6 +507,7 @@ private:
 
 	bool flagEnableMoveAtScreenEdge; // allow mouse at edge of screen to move view
 	bool flagEnableMouseNavigation;
+	bool flagEnableMouseZooming;
 	double mouseZoomSpeed;
 
 	bool flagEnableZoomKeys;

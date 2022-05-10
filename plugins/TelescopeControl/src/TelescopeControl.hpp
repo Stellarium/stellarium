@@ -307,6 +307,13 @@ public slots:
 	//! @endcode
 	void abortTelescopeSlew(const int idx);
 
+	//! Centering screen by coordinates of a telescope at slot idx.
+	//! @code
+	//! // example of usage in scripts
+	//! TelescopeControl.centeringScreenByTelescope(1);
+	//! @endcode
+	void centeringScreenByTelescope(const int idx);
+
 	//! Used in the GUI
 	void setFlagUseTelescopeServerLogs(bool b) { useTelescopeServerLogs = b; }
 
@@ -424,6 +431,7 @@ private:
 	QString syncActionId;
 	QString abortSlewActionId;
 	QString moveToCenterActionId;
+	QString centeringScreenActionId;
 };
 
 #include "StelPluginInterface.hpp"

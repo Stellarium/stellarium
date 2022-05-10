@@ -257,7 +257,7 @@ SET(stellarium_lib_SRCS
 ### CMake < 3.0 does not AUTOMOC Q_GADGET which some files use, so we have to manually add it
 ### Wrap it in an IF to prevent some linker warnings about symbols defined twice (on MSVC13 at least)
 ### Q_GADGET is required force the Qt MOC to run on some specific files,
-### because they do not contain QObjects, but require a MOC for Q_FLAGS or similar
+### because they do not contain QObjects, but require a MOC for Q_FLAG or similar
 IF("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 3.0)
      QT5_WRAP_CPP(stellarium_lib_moc_SRCS
          core/StelObject.hpp
@@ -320,6 +320,10 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/DateTimeDialog.cpp
           gui/ViewDialog.hpp
           gui/ViewDialog.cpp
+          gui/LightPollutionWidget.hpp
+          gui/LightPollutionWidget.cpp
+          gui/LogarithmicSpinBox.hpp
+          gui/LogarithmicSpinBox.cpp
           gui/SearchDialog.hpp
           gui/SearchDialog.cpp
           gui/ConfigurationDialog.hpp
@@ -351,6 +355,10 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/StelDialog.cpp
           gui/StelDialogSeparate.hpp
           gui/StelDialogSeparate.cpp
+          gui/TonemappingDialog.hpp
+          gui/TonemappingDialog.cpp
+          gui/SkylightDialog.hpp
+          gui/SkylightDialog.cpp
      )
 
      ################# compiles .ui files ############
@@ -360,6 +368,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/shortcutsDialog.ui
           gui/dateTimeDialogGui.ui
           gui/viewDialog.ui
+          gui/lightPollutionWidget.ui
           gui/searchDialogGui.ui
           gui/configurationDialog.ui
           gui/atmosphereDialog.ui
@@ -373,6 +382,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/addRemoveLandscapesDialog.ui
           gui/dsoColorsDialog.ui
           gui/orbitColorsDialog.ui
+          gui/tonemappingDialog.ui
+          gui/skylightDialog.ui
      )
 
      IF(ENABLE_SCRIPTING)
@@ -452,7 +463,7 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
 ENDIF()
 
 # Setup Qt5 dependencies
-SET(STELLARIUM_QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Gui ${STEL_GLES_LIBS} Qt5::Network Qt5::Widgets)
+SET(STELLARIUM_QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Gui ${STEL_GLES_LIBS} Qt5::Network Qt5::Widgets Qt5::Charts)
 IF(ENABLE_MEDIA)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Multimedia Qt5::MultimediaWidgets)
 ENDIF()

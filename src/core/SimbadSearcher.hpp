@@ -32,7 +32,6 @@ class QNetworkAccessManager;
 class SimbadLookupReply : public QObject
 {
 	Q_OBJECT
-	Q_ENUMS(SimbadLookupStatus)
 
 	friend class SimbadSearcher;
 
@@ -45,8 +44,9 @@ public:
 		SimbadLookupFinished,		//!< The query is over. The reply can be deleted.
 		SimbadCoordinateLookupFinished  //!< A coordinate lookup is finished. The reply can be deleted.
 	};
+	Q_ENUM(SimbadLookupStatus)
 
-	~SimbadLookupReply();
+	~SimbadLookupReply() Q_DECL_OVERRIDE;
 
 	//! Get the result list of matching objectName/position.
 	QMap<QString, Vec3d> getResults() const {return resultPositions;}

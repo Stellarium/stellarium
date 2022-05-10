@@ -1,6 +1,6 @@
 INCLUDE_DIRECTORIES(. gui)
 
-LINK_DIRECTORIES(${BUILD_DIR}/src)
+LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 
 SET(Calendars_SRCS
     Calendars.hpp
@@ -19,6 +19,8 @@ SET(Calendars_SRCS
     ZoroastrianCalendar.cpp
     JulianCalendar.hpp
     JulianCalendar.cpp
+    RevisedJulianCalendar.hpp
+    RevisedJulianCalendar.cpp
     RomanCalendar.hpp
     RomanCalendar.cpp
     OlympicCalendar.hpp
@@ -41,6 +43,14 @@ SET(Calendars_SRCS
     OldHinduSolarCalendar.cpp
     OldHinduLuniSolarCalendar.hpp
     OldHinduLuniSolarCalendar.cpp
+    NewHinduCalendar.hpp
+    NewHinduCalendar.cpp
+    NewHinduLunarCalendar.hpp
+    NewHinduLunarCalendar.cpp
+    AstroHinduLunarCalendar.hpp
+    AstroHinduLunarCalendar.cpp
+    AstroHinduSolarCalendar.hpp
+    AstroHinduSolarCalendar.cpp
     MayaLongCountCalendar.hpp
     MayaLongCountCalendar.cpp
     MayaHaabCalendar.hpp
@@ -55,8 +65,14 @@ SET(Calendars_SRCS
     BalinesePawukonCalendar.cpp
     FrenchArithmeticCalendar.hpp
     FrenchArithmeticCalendar.cpp
+    FrenchAstronomicalCalendar.hpp
+    FrenchAstronomicalCalendar.cpp
     PersianArithmeticCalendar.hpp
     PersianArithmeticCalendar.cpp
+    PersianAstronomicalCalendar.hpp
+    PersianAstronomicalCalendar.cpp
+    TibetanCalendar.hpp
+    TibetanCalendar.cpp
 )
 
 SET(Calendars_UIS

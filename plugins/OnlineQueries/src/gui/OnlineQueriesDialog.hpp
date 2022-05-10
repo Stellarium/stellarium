@@ -25,7 +25,6 @@
 #include "ui_onlineQueriesDialog.h"
 
 class OnlineQueries;
-class StelWebEngineView;
 
 class OnlineQueriesDialog : public StelDialogSeparate
 {
@@ -46,7 +45,7 @@ protected:
 private:
 	Ui_onlineQueriesDialogForm* ui;
 	OnlineQueries* plugin;
-	StelWebEngineView *view;
+	QWidget *view;                  // Either a QWebengineView- or a QTextBrowser-like class.
 };
 
 #endif

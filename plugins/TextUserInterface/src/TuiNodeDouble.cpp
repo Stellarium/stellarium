@@ -40,7 +40,7 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 		editing = false;
 		response.accepted = true;
 		stringValue.setNum(value,'g',-1);
-		emit(setValue(value));
+		emit setValue(value);
 		return response;
 	}
 	else if (key==Qt::Key_Up)
@@ -52,7 +52,7 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 			value = maximum;
 		response.accepted = true;
 		stringValue.setNum(value,'g',-1);
-		emit(setValue(value));
+		emit setValue(value);
 		return response;
 	}
 	else if (key==Qt::Key_Down)
@@ -64,7 +64,7 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 			value = minimum;
 		response.accepted = true;
 		stringValue.setNum(value,'g',-1);
-		emit(setValue(value));
+		emit setValue(value);
 		return response;
 	}
 	else if (key==Qt::Key_Period)
@@ -102,7 +102,7 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 		}
 		response.accepted = true;
 		response.newNode = this;
-		emit(setValue(value));
+		emit setValue(value);
 		return response;
 	}
 	else if (key==Qt::Key_Backspace)
@@ -125,7 +125,7 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 			}
 		}
 		response.accepted = true;
-		emit(setValue(value));
+		emit setValue(value);
 		return response;
 	}
 	else if (key==Qt::Key_Minus)
@@ -136,7 +136,7 @@ TuiNodeResponse TuiNodeDouble::handleEditingKey(int key)
 			value = i;
 		stringValue.setNum(value,'g',-1);
 		response.accepted = true;
-		emit(setValue(value));
+		emit setValue(value);
 		return response;
 	}
 	return response;

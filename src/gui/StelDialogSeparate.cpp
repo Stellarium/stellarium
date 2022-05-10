@@ -58,8 +58,8 @@ protected:
 };
 
 
-StelDialogSeparate::StelDialogSeparate(QString dialogName, QObject* parent)
-	: StelDialog(dialogName, parent),
+StelDialogSeparate::StelDialogSeparate(QString dialogname, QObject* parent)
+	: StelDialog(dialogname, parent),
 	nightCover(Q_NULLPTR)
 {
 }
@@ -84,16 +84,6 @@ void StelDialogSeparate::setVisible(bool v)
 			if (gui)
 				dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 			dialog->show();
-			// If the main window has been resized, it is possible the dialog
-			// will be off screen.  Check for this and move it to a visible
-			// position if necessary
-			QPointF newPos = dialog->pos();
-			if (newPos.x()>=screenSize.width())
-				newPos.setX(screenSize.width() - dialog->size().width());
-			if (newPos.y()>=screenSize.height())
-				newPos.setY(screenSize.height() - dialog->size().height());
-			if (newPos != dialog->pos())
-				dialog->move(newPos.toPoint());
 		}
 		else
 		{
@@ -185,7 +175,7 @@ void StelDialogSeparate::updateNightModeProperty(bool n)
 {
 	StelDialog::updateNightModeProperty(n);
 	// It seems we cannot code a nightMode property for the QSizeGrip in the global QSS sheet :-(
-	QList<QSizeGrip*> grips=dialog->findChildren<QSizeGrip*>();
+	const QList<QSizeGrip*> grips=dialog->findChildren<QSizeGrip*>();
 	for (const auto &g: grips)
 	{
 		if (n)

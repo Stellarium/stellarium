@@ -45,8 +45,6 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init() Q_DECL_OVERRIDE;
-	virtual void draw(StelCore*) Q_DECL_OVERRIDE {;}
-	virtual void update(double) Q_DECL_OVERRIDE {;}
 
 	///////////////////////////////////////////////////////////////////////////
 	//! Add a new StelObject manager into the list of supported modules.
@@ -80,6 +78,13 @@ public:
 	//! @param name the case sensitive object translated name
 	//! @return true if a object with the passed name was found
 	bool findAndSelect(const QString &name, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
+
+	//! Find and select an object from its standard program name and object type name.
+	//! @param action define whether to add to, replace, or remove from the existing selection
+	//! @param name the case sensitive object translated name
+	//! @param objtype the type of the object
+	//! @return true if a object with the passed name was found
+	bool findAndSelect(const QString &name, const QString &objtype, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -127,6 +132,9 @@ public:
 	//! Find any kind of object by its standard program name.
 	StelObjectP searchByName(const QString &name) const;
 
+	//! Find any kind of object by its standard program name and its object type name.
+	StelObjectP searchByName(const QString &name, const QString &objType) const;
+
 	//! Find an object of the given type and ID
 	//! @param type the type of the object as given by StelObject::getType()
 	//! @param id the ID of the object as given by StelObject::getID()
@@ -148,10 +156,19 @@ public:
 	//! If obj is Q_NULLPTR, returns a 1-element map [["found", false]]
 	static QVariantMap getObjectInfo(const StelObjectP obj);
 
-public slots:
-	//! set twilight altitude [degrees]
-	void setTwilightAltitude(double alt);
+	//! Return a list of enabled fields (custom info strings)
+	StelObject::InfoStringGroup getCustomInfoStrings();
+
+	//! Get twilight altitude [degrees]
 	double getTwilightAltitude() const {return twilightAltitude;}
+
+	//! Retrieve an (unsorted) QStringList of all extra info strings that match flags.
+	//! Normally the order matches the order of addition, but this cannot be guaranteed.
+	QStringList getExtraInfoStrings(const StelObject::InfoStringGroup& flags) const;
+
+public slots:
+	//! Set twilight altitude [degrees]
+	void setTwilightAltitude(double alt);
 
 	//! Set simulation time to the time of next transit of selected object
 	void nextTransit();
@@ -199,11 +216,25 @@ public slots:
 	//! Set simulation time to the next day's evening when Sun reaches twilightAltitude
 	void nextEveningTwilight();
 
+	//! Set simulation time to this day's morning when selected object reaches current altitude
+	void todayMorningAtAltitude();
+	//! Set simulation time to the next morning when selected object reaches current altitude
+	void nextMorningAtAltitude();
+	//! Set simulation time to the previous morning when selected object reaches current altitude
+	void previousMorningAtAltitude();
+	//! Set simulation time to this day's evening when selected object reaches current altitude
+	void todayEveningAtAltitude();
+	//! Set simulation time to the next evening when selected object reaches current altitude
+	void nextEveningAtAltitude();
+	//! Set simulation time to the previous evening when selected object reaches current altitude
+	void previousEveningAtAltitude();
+
 	//! @note These functions were copied over from StelObject. Given that setExtraInfoString is non-const and some functions where these methods are useful are const, we can use the StelObjectMgr as "carrier object".
 	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
 	//! Hard-set this string group to a single str, or delete all messages when str==""
 	//! @note This should be used with caution. Usually you want to use addToExtraInfoString().
 	virtual void setExtraInfoString(const StelObject::InfoStringGroup& flags, const QString &str);
+
 	//! Add str to the extra string. This should be preferrable over hard setting.
 	//! Can be used by plugins to show extra info for the selected object, or for debugging.
 	//! The strings will be shown in the InfoString for the selected object, below the default fields per-flag.
@@ -212,9 +243,7 @@ public slots:
 	//! The line ending must be given explicitly, usually just end a line with "<br/>", except when it may end up in a Table or appended to a line.
 	//! See getCommonInfoString() or the respective getInfoString() in the subclasses for details of use.
 	virtual void addToExtraInfoString(const StelObject::InfoStringGroup& flags, const QString &str);
-	//! Retrieve an (unsorted) QStringList of all extra info strings that match flags.
-	//! Normally the order matches the order of addition, but this cannot be guaranteed.
-	QStringList getExtraInfoStrings(const StelObject::InfoStringGroup& flags) const;
+
 	//! Remove the extraInfoStrings with the given flags.
 	//! This is a finer-grained removal than just extraInfoStrings.remove(flags), as it allows a combination of flags.
 	//! After display, InfoPanel::setTextFromObjects() auto-clears the strings of the selected object using the AllInfo constant.
@@ -264,7 +293,6 @@ private:
 	//! This string map gets cleared by InfoPanel::setTextFromObjects(), with the exception of strings with Script or DebugAid flags,
 	//! which have been injected by scripts or for debugging (take care of those yourself!).
 	QMultiMap<StelObject::InfoStringGroup, QString> extraInfoStrings;
-
 };
 
 #endif // _SELECTIONMGR_HPP

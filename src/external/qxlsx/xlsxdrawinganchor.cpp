@@ -438,7 +438,7 @@ void DrawingAnchor::loadXmlObjectShape(QXmlStreamReader &reader)
 
     Q_ASSERT(reader.name() == QLatin1String("sp"));
 
-    bool hasoffext = false;
+    //bool hasoffext = false;
     while (!reader.atEnd())
     {
         reader.readNextStartElement();

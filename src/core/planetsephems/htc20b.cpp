@@ -210,10 +210,10 @@ int htc20( const double jd, const int sat_no, double *xyz, double *vxyz)
       const double sin_ang = sin( ang);
 
       for( i = 0; i < 3; ++i, rptr++)
-         {
-         xyz[i]     += (double)rptr[0] * cos_ang + (double)rptr[6] * sin_ang;
-         if( vxyz)
-            vxyz[i] += (double)rptr[3] * cos_ang + (double)rptr[9] * sin_ang;
+	  {
+	  xyz[i]     += static_cast<double>(rptr[0]) * cos_ang + static_cast<double>(rptr[6]) * sin_ang;
+	  if( vxyz)
+	     vxyz[i] += static_cast<double>(rptr[3]) * cos_ang + static_cast<double>(rptr[9]) * sin_ang;
          }
       iptr += 4;
       rptr += 9;

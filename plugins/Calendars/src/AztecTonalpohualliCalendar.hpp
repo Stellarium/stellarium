@@ -48,7 +48,6 @@ public slots:
 	//! dayNumber[1..13]-name
 	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
 
-public:
 	//! Return ordinal in Tonalpohualli cycle.
 	//! @arg tonalpohualli is a QVector<int> of {number, name} (typo in book...)
 	inline static int aztecTonalpohualliOrdinal(QVector<int> tonalpohualli) {return StelUtils::imod((tonalpohualli.at(0) - 1 + 39*(tonalpohualli.at(0)-tonalpohualli.at(1))), 260);}
@@ -56,11 +55,12 @@ public:
 	//! get 2-part vector of Tonalpohualli date from RD
 	static QVector<int> aztecTonalpohualliFromFixed(int rd);
 
+	static int aztecTonalpohualliOnOrBefore(QVector<int> tonalpohualli, int rd);
+public:
 	//! A constant to correlate calendars
 	static const int aztecTonalpohualliCorrelation;
 
 private:
-	static int aztecTonalpohualliOnOrBefore(QVector<int> tonalpohualli, int rd);
 	static QMap<int, QString> tonalpohualliNames;
 };
 

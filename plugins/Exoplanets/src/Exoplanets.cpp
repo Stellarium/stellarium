@@ -183,7 +183,7 @@ void Exoplanets::init()
 	}
 
 	// If the json file does not already exist, create it from the resource in the Qt resource
-	if(QFileInfo(jsonCatalogPath).exists())
+	if(QFileInfo::exists(jsonCatalogPath))
 	{
 		if (!checkJsonFileFormat() || getJsonFileFormatVersion()<CATALOG_FORMAT_VERSION)
 		{
@@ -224,7 +224,7 @@ void Exoplanets::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	for (const auto& eps : ep)
+	for (const auto& eps : qAsConst(ep))
 	{
 		if (eps && eps->initialized)
 			eps->draw(core, &painter);
@@ -294,19 +294,11 @@ StelObjectP Exoplanets::searchByName(const QString& englishName) const
 			return qSharedPointerCast<StelObject>(eps);
 
 		QStringList ppn = eps->getExoplanetsEnglishNames();
+		ppn << eps->getDesignations();
+		ppn << eps->getExoplanetsDesignations();
 		if (!ppn.isEmpty())
 		{
-			for (const auto& str : ppn)
-			{
-				if (str.toUpper() == englishName.toUpper())
-					return qSharedPointerCast<StelObject>(eps);
-			}
-		}
-
-		ppn = eps->getExoplanetsDesignations();
-		if (!ppn.isEmpty())
-		{
-			for (const auto& str : ppn)
+			for (const auto& str : qAsConst(ppn))
 			{
 				if (str.toUpper() == englishName.toUpper())
 					return qSharedPointerCast<StelObject>(eps);
@@ -366,6 +358,7 @@ QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbI
 		names.append(eps->getExoplanetsNamesI18n());
 		names.append(eps->getEnglishName());
 		names.append(eps->getExoplanetsEnglishNames());
+		names.append(eps->getDesignations());
 	}
 
 	QString fullMatch = "";
@@ -416,7 +409,7 @@ QStringList Exoplanets::listAllObjects(bool inEnglish) const
 */
 void Exoplanets::restoreDefaultJsonFile(void)
 {
-	if (QFileInfo(jsonCatalogPath).exists())
+    if (QFileInfo::exists(jsonCatalogPath))
 		backupJsonFile(true);
 
 	QFile src(":/Exoplanets/exoplanets.json");
@@ -453,7 +446,7 @@ bool Exoplanets::backupJsonFile(bool deleteOriginal) const
 	}
 
 	QString backupPath = jsonCatalogPath + ".old";
-	if (QFileInfo(backupPath).exists())
+	if (QFileInfo::exists(backupPath))
 		QFile(backupPath).remove();
 
 	if (old.copy(backupPath))
@@ -502,7 +495,8 @@ void Exoplanets::reloadCatalog(void)
 	if (hasSelection)
 	{
 		// Restore selection...
-		objMgr->setSelectedObject(selectedObject);
+		StelObjectP obj = selectedObject[0];
+		objMgr->findAndSelect(obj->getEnglishName(), obj->getType());
 	}
 }
 
@@ -541,6 +535,8 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
+	bool aberration = core->getUseAberration();
+	core->setUseAberration(false); // to avoid using the twice aberrated positions for the stars!
 	double ra, dec;
 	StelObjectP star;
 	ep.clear();
@@ -552,7 +548,7 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 	EPPeriodAll.clear();
 	EPAngleDistanceAll.clear();
 	QVariantMap epsMap = map.value("stars").toMap();
-	for (auto epsKey : epsMap.keys())
+	for (auto &epsKey : epsMap.keys())
 	{
 		QVariantMap epsData = epsMap.value(epsKey).toMap();
 		epsData["designation"] = epsKey;
@@ -561,6 +557,18 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 
 		// Let's check existence the star (by designation) in our catalog...
 		star = smgr->searchByName(epsKey.trimmed());
+		if (star.isNull() && epsData.contains("starAltNames"))
+		{
+			QStringList designations = epsData.value("starAltNames").toString().split(", ");
+			QString hip;
+			for(int i=0; i<designations.size(); i++)
+			{
+				if (designations.at(i).trimmed().startsWith("HIP"))
+					hip = designations.at(i).trimmed();
+			}
+			if (!hip.isEmpty())
+				star = smgr->searchByName(hip);
+		}
 		if (!star.isNull())
 		{
 			// ...if exists, let's use our coordinates of star instead exoplanets.eu website data
@@ -592,6 +600,7 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 			EPCountPH += eps->getCountHabitableExoplanets();
 		}
 	}
+	core->setUseAberration(aberration);
 }
 
 int Exoplanets::getJsonFileFormatVersion(void) const
@@ -927,7 +936,7 @@ void Exoplanets::startDownload(QString urlString)
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
 	updateState = Exoplanets::Updating;
-	emit(updateStateChanged(updateState));
+	emit updateStateChanged(updateState);
 }
 
 void Exoplanets::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
@@ -943,8 +952,8 @@ void Exoplanets::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = static_cast<qint64>(std::floor(bytesReceived / 1024.));
-			bytesTotal    = static_cast<qint64>(std::floor(bytesTotal / 1024.));
+			bytesReceived = static_cast<qint64>(std::floor(static_cast<double>(bytesReceived) / 1024.));
+		    bytesTotal    = static_cast<qint64>(std::floor(static_cast<double>(bytesTotal) / 1024.));
 		}
 		currentValue = static_cast<int>(bytesReceived);
 		endValue = static_cast<int>(bytesTotal);
@@ -999,8 +1008,8 @@ void Exoplanets::downloadComplete(QNetworkReply *reply)
 		updateState = Exoplanets::DownloadError;
 	}
 
-	emit(updateStateChanged(updateState));
-	emit(jsonUpdateComplete());
+	emit updateStateChanged(updateState);
+	emit jsonUpdateComplete();
 
 	reply->deleteLater();
 	downloadReply = Q_NULLPTR;
