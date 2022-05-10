@@ -257,7 +257,8 @@ void AstroCalcChart::showToolTip(const QPointF &point, bool show)
 		QDateTime date=QDateTime::fromMSecsSinceEpoch(qint64(point.x()), Qt::UTC);
 		double jd=StelUtils::qDateTimeToJd(date);
 		double offset=StelApp::getInstance().getCore()->getUTCOffset(jd)/24;
-		QString dateStr=StelUtils::julianDayToISO8601String(jd+offset);
+		//QString dateStr=StelUtils::julianDayToISO8601String(jd+offset); // NOO! The grid shall indeed display local time... 20220510
+		QString dateStr=StelUtils::julianDayToISO8601String(jd);
 		dateStr.replace('T', ' ');
 		//qDebug() << "JD clicked: " << jd;
 		// Change units where required. No units for distances, phases!
@@ -303,6 +304,7 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 
 	QDateTime startDate, endDate;
 	double baseJD=std::floor(JD-utcOffset)+0.5; // midnight of "today" in Greenwich
+	int year, month, day;
 	switch (series){
 		case AstroCalcChart::AltVsTime:
 		case AstroCalcChart::AzVsTime:
@@ -310,7 +312,6 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 			endDate=StelUtils::jdToQDateTime(JD+1);
 			break;
 		case AstroCalcChart::MonthlyElevation:
-			int year, month, day;
 			StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 			startDate=QDateTime(QDate(year, 1, 1), QTime(0, 0), Qt::UTC);
 			endDate=QDateTime(QDate(year+1, 1, 1), QTime(0, 0), Qt::UTC);
@@ -325,6 +326,9 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 			endDate=StelUtils::jdToQDateTime(baseJD+300);
 			break;
 		default: // 2-curves page
+			StelUtils::getDateFromJulianDay(baseJD, &year, &month, &day);
+			startDate=QDateTime(QDate(year, month, 1), QTime(0, 0), Qt::UTC);
+			endDate=startDate.addDays(30*periods);
 			break;
 	}
 	return QPair(startDate, endDate);
@@ -411,9 +415,11 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	}
 	else
 	{
-		xAxis->setTickCount(12+1); // step is ~30*periods days. We cannot have more, due to space reasons.
+		xAxis->setTickCount(15+1); // We cannot have more, due to space reasons. 15 intervals (together with 30-day months) ensures integer day partitions.
 		xRange=findXRange(jd, AstroCalcChart::AngularSize1, periods);
-		if (periods>1) xAxis->setFormat("<div style=\"text-align:center\">dd.MM.<br/>yyyy</div>");
+		int year1=xRange.first.date().year();
+		int year2=xRange.second.date().year();
+		if (year1!=year2) xAxis->setFormat("<div style=\"text-align:center\">dd.MM.<br/>yyyy</div>");
 	}
 	xAxis->setRange(xRange.first, xRange.second);
 //	qDebug() << "xAxis range is "  << xRange.first << "/" << xRange.second;
@@ -666,16 +672,17 @@ void AstroCalcChart::mousePressEvent(QGraphicsSceneMouseEvent *event)
 		return;
 
 	// N.B. pos() and scenePos() give the same coords. Y counting top-down, X left-right, pixel positions.
-	//qDebug() << "mousePressEvent by" << event->buttons() << "at Pos" << event->pos() << "scenePos" << event->scenePos() << "screenPos" << event->screenPos();
+	qDebug() << "mousePressEvent by" << event->buttons() << "at Pos" << event->pos() << "scenePos" << event->scenePos() << "screenPos" << event->screenPos();
 
 	const QPointF pt=mapToValue(event->pos());
 	const QDateTime dt=QDateTime::fromMSecsSinceEpoch(qint64(pt.x()), Qt::UTC);
 
-	//qDebug() << "This represents " << dt << "/" << pt.y() << "or" << mapToValue(event->scenePos());
+	qDebug() << "This represents " << dt << "/" << pt.y() << "or" << mapToValue(event->scenePos());
 
 	static StelCore *core=StelApp::getInstance().getCore();
 	double jd=StelUtils::qDateTimeToJd(dt);
-	//const double offset=core->getUTCOffset(jd)/24.;
+	const double offset=core->getUTCOffset(jd)/24.;
 
-	core->setJD(jd);
+	// 20220510: Bad coord in curves chart. Also elsewhere?
+	core->setJD(jd-offset);
 }

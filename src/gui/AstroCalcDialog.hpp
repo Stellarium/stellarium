@@ -334,6 +334,7 @@ private slots:
 	void saveGraphsFirstId(int index);
 	void saveGraphsSecondId(int index);
 	void updateGraphsDuration(int duration);
+	void updateGraphsStep(int step);
 	void drawXVsTimeGraphs();
 	void updateXVsTimeGraphs();
 
@@ -519,7 +520,7 @@ private:
 
 	// Signal that a plot has to be redone
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotLunarElongationGraph, plotAziVsTime;
-	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration;
+	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration, graphsStep;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader;
 	static double brightLimit;
 	static double minY, maxY;
