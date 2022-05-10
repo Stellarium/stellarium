@@ -110,6 +110,7 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	, altVsTimePositiveLimit(0)
 	, monthlyElevationPositiveLimit(0)
 	, graphsDuration(1)
+	, graphsStep(24)
 	, oldGraphJD(0)
 	, graphPlotNeedsRefresh(false)
 {
@@ -425,9 +426,12 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->graphsCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsCelestialBody(int)));
 	connect(ui->graphsFirstComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsFirstId(int)));
 	connect(ui->graphsSecondComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsSecondId(int)));
-	graphsDuration = qBound(1,conf->value("astrocalc/graphs_duration",1).toInt() ,30);
+	graphsDuration = qBound(1, conf->value("astrocalc/graphs_duration",1).toInt(), 600);
 	ui->graphsDurationSpinBox->setValue(graphsDuration);
 	connect(ui->graphsDurationSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateGraphsDuration(int)));
+	graphsStep = qBound(1, conf->value("astrocalc/graphs_step",1).toInt(), 240);
+	ui->graphsHourStepsSpinBox->setValue(graphsStep);
+	connect(ui->graphsHourStepsSpinBox, SIGNAL(valueChanged(int)), this, SLOT(updateGraphsStep(int)));
 	connect(ui->drawGraphsPushButton, SIGNAL(clicked()), this, SLOT(drawXVsTimeGraphs()));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(updateXVsTimeGraphs()));	
 
@@ -563,7 +567,8 @@ void AstroCalcDialog::createDialogContent()
 	ui->graphsFirstLabel->setStyleSheet(style);	
 	ui->graphsSecondLabel->setStyleSheet(style);	
 	ui->graphsDurationLabel->setStyleSheet(style);
-	ui->graphsYearsLabel->setStyleSheet(style);
+	ui->graphsMonthsLabel->setStyleSheet(style);
+	ui->graphsStepLabel->setStyleSheet(style);
 	ui->lunarElongationNote->setStyleSheet(style);
 	ui->lunarElongationLimitLabel->setStyleSheet(style);
 	ui->graphsNoteLabel->setStyleSheet(style);
@@ -3928,6 +3933,15 @@ void AstroCalcDialog::updateGraphsDuration(int duration)
 	}
 }
 
+void AstroCalcDialog::updateGraphsStep(int step)
+{
+	if (graphsStep!=step)
+	{
+		graphsStep = step;
+		conf->setValue("astrocalc/graphs_step", step);
+	}
+}
+
 void AstroCalcDialog::populateEphemerisTimeStepsList()
 {
 	typedef QPair<QString, QString> itemPairs;
@@ -4339,11 +4353,11 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 		int year, month, day;
 		double startJD;
 		StelUtils::getDateFromJulianDay(currentJD, &year, &month, &day);
-		StelUtils::getJDFromDate(&startJD, year, 1, 1, 0, 0, 0);
-		const double utcOffset = core->getUTCOffset(startJD);
-		startJD-=utcOffset;
+		StelUtils::getJDFromDate(&startJD, year, month, 1, 0, 0, 0);
+		const double utcOffset = core->getUTCOffset(startJD)/24.;
+		startJD+=utcOffset;
 
-		int dYear = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()*graphsDuration) + 3;
+		//int dYear = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()*graphsDuration) + 3;
 		AstroCalcChart::Series firstGraph  = AstroCalcChart::Series(ui->graphsFirstComboBox->currentData().toInt());
 		AstroCalcChart::Series secondGraph = AstroCalcChart::Series(ui->graphsSecondComboBox->currentData().toInt());
 
@@ -4352,9 +4366,11 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 		if (secondGraph==AstroCalcChart::AltVsTime) secondGraph=AstroCalcChart::Magnitude2;
 		curvesChart = new AstroCalcChart({firstGraph, secondGraph});
 
-		for (int i = -2; i <= dYear; i++)
+		// Our principal counter is now hours.
+		qDebug() << "X time range" << StelUtils::julianDayToISO8601String(startJD) << "to" << StelUtils::julianDayToISO8601String(startJD+(30*24)*graphsDuration/24.);
+		for (int i = -24; i <= (30*24)*graphsDuration+24; i+=graphsStep)
 		{
-			double JD = startJD + i;
+			double JD = startJD + i/24.;
 
 			if (firstGraph==AstroCalcChart::TransitAltitude1 || secondGraph==AstroCalcChart::TransitAltitude2)
 			{
@@ -4365,13 +4381,11 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 				//JD += (rts[1]/24. - UTCshift); // FIXME: New logic has JD, not hours, here.
 				JD = rts[1]; // Maybe that's all?
 			}
-
 			core->setJD(JD);
 			core->update(0.0);
 
-			curvesChart->append(firstGraph,  StelUtils::jdToQDateTime(JD+utcOffset).toMSecsSinceEpoch(), computeGraphValue(ssObj, firstGraph));
-			curvesChart->append(secondGraph, StelUtils::jdToQDateTime(JD+utcOffset).toMSecsSinceEpoch(), computeGraphValue(ssObj, secondGraph));
-
+			curvesChart->append(firstGraph,  StelUtils::jdToQDateTime(JD+2.*utcOffset).toMSecsSinceEpoch(), computeGraphValue(ssObj, firstGraph));
+			curvesChart->append(secondGraph, StelUtils::jdToQDateTime(JD+2.*utcOffset).toMSecsSinceEpoch(), computeGraphValue(ssObj, secondGraph));
 		}
 		core->setJD(currentJD);
 
@@ -4380,34 +4394,6 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 		QPair<double, double>yRangeRight = curvesChart->findYRange(secondGraph);
 
 		QString englishName=ui->graphsCelestialBodyComboBox->currentData().toString();
-		qDebug() << "Object name: " << englishName;
-
-
-//		// Given full date values, we can omit these vertical year separators from the QtChart version.
-//		if (graphsDuration>1)
-//		{
-//			int JDshift = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod());
-//			QList<double> axj, ayj;
-//			for (int i = 0; i < graphsDuration; i++)
-//			{
-//				JD = startJD + i*JDshift;
-//				ltime = (JD - startJD) * StelCore::ONE_OVER_JD_SECOND;
-//				axj.append(ltime);
-//				axj.append(ltime);
-//				ayj.append(minYLeft);
-//				ayj.append(maxYLeft);
-//				QVector<double> xj = axj.toVector(), yj = ayj.toVector();
-//				int j = 2 + i;
-//				ui->graphsPlot->addGraph(ui->graphsPlot->xAxis, ui->graphsPlot->yAxis);
-//				ui->graphsPlot->graph(j)->setPen(QPen(Qt::red, 1, Qt::DashLine));
-//				ui->graphsPlot->graph(j)->setLineStyle(QCPGraph::lsLine);
-//				ui->graphsPlot->graph(j)->setData(xj, yj);
-//				ui->graphsPlot->graph(j)->setName(QString("[%1]").arg(j));
-//				axj.clear();
-//				ayj.clear();
-//			}
-//		}
-
 		curvesChart->show(firstGraph);
 		curvesChart->show(secondGraph);
 		curvesChart->setYrange(firstGraph, yRangeLeft);
@@ -7491,7 +7477,7 @@ void AstroCalcDialog::drawDistanceGraph()
 		Vec3d posFCB = firstCBId->getJ2000EquatorialPos(core);
 		Vec3d posSCB = secondCBId->getJ2000EquatorialPos(core);
 		double distanceAu = (posFCB - posSCB).length();
-		pcChart->append(AstroCalcChart::pcDistanceAU, StelUtils::jdToQDateTime(JD).toMSecsSinceEpoch(), distanceAu);
+		pcChart->append(AstroCalcChart::pcDistanceAU, StelUtils::jdToQDateTime(JD+utcOffset).toMSecsSinceEpoch(), distanceAu);
 		if (firstCBId != currentPlanet && secondCBId != currentPlanet)
 		{
 			double r= posFCB.angle(posSCB);

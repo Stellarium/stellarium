@@ -1646,6 +1646,12 @@
                 </item>
                 <item>
                  <widget class="QSlider" name="monthlyElevationTime">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="toolTip">
                    <string>Local Time in hours</string>
                   </property>
@@ -1735,7 +1741,7 @@
                 <item row="0" column="0" colspan="3">
                  <widget class="QLabel" name="graphsNoteLabel">
                   <property name="text">
-                   <string>Important note: this tool works on Earth only!</string>
+                   <string>Notes: (1) This tool works on Earth only! (2) short steps and long duration may cause a long delay!</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -1771,7 +1777,7 @@
                   <item>
                    <widget class="QSpinBox" name="graphsDurationSpinBox">
                     <property name="toolTip">
-                     <string>How many years to display</string>
+                     <string>How many months to display</string>
                     </property>
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1780,14 +1786,43 @@
                      <number>1</number>
                     </property>
                     <property name="maximum">
-                     <number>50</number>
+                     <number>600</number>
+                    </property>
+                    <property name="value">
+                     <number>12</number>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLabel" name="graphsYearsLabel">
+                   <widget class="QLabel" name="graphsMonthsLabel">
                     <property name="text">
-                     <string comment="duration">years</string>
+                     <string comment="duration">months</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="graphsStepLabel">
+                    <property name="text">
+                     <string>Step</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="graphsHourStepsSpinBox">
+                    <property name="toolTip">
+                     <string>Step width for computation. Caution! Short steps cause slow graphs.</string>
+                    </property>
+                    <property name="suffix">
+                     <string extracomment="hours">h</string>
+                    </property>
+                    <property name="minimum">
+                     <number>1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>240</number>
+                    </property>
+                    <property name="value">
+                     <number>24</number>
                     </property>
                    </widget>
                   </item>
@@ -1812,7 +1847,7 @@
                 <item row="1" column="1">
                  <widget class="QComboBox" name="graphsFirstComboBox">
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
@@ -1831,7 +1866,7 @@
                 <item row="3" column="1">
                  <widget class="QComboBox" name="graphsSecondComboBox">
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
@@ -1852,7 +1887,7 @@
                   <item>
                    <widget class="QPushButton" name="drawGraphsPushButton">
                     <property name="sizePolicy">
-                     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                       <horstretch>0</horstretch>
                       <verstretch>0</verstretch>
                      </sizepolicy>
@@ -1900,7 +1935,7 @@
                 <item>
                  <widget class="QComboBox" name="graphsCelestialBodyComboBox">
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>

@@ -27,8 +27,12 @@
 //using namespace QtCharts;
 
 //! @class AstroCalcChart
-//! This class encapsulates data for the Altitude vs. Time and the other line Charts in AstroCalc.
-//! Most lines can be QSplineSeries, however the azimuth lines must use QLineSeries to avoid a "spline tremor" at the 0/360° transition.
+//! This class extends QChart and encapsulates data for the Altitude vs. Time and the other line Charts in AstroCalc.
+//! Most lines can be QSplineSeries, however the azimuth and magnitude lines must use QLineSeries to avoid a "spline tremor" at the 0/360° transition or where some moon enters the shadow of its planet.
+//!
+//! Additional features:
+//! - Mouse-over on series provides date/value information in a tooltip
+//! - Left mouse click sets date/time of click point.
 //!
 //! The correct sequence of use:
 //! - create with the possible series you are going to use
@@ -40,6 +44,10 @@
 //! -- call setYrange(series, min, max) and setYrangeR(series, min, max) where needed. Use real min/max. A series-dependent buffer will be added.
 //! - call setupAxes()
 //! - use setChart() to display chart in a chartView. A previous chart must be retrieved and deleted!
+//!
+//! The time coordinate is displayed using a QDateTimeAxis. Given slight differences between QDateTime and Stellarium's understanding of timezones etc.,
+//!  we must circumvent Qt's automatic handling of local timezones and work as if the time axis would display UTC dates, however, the actual data are in our own timezone frame.
+//! This requires manipulation of the x values: From the data which are computed in JD, plot them in UT+zoneOffset. Clicked time is delivered as "UT" and must add zoneOffset as well.
 //!
 class AstroCalcChart : public QtCharts::QChart
 {
@@ -118,7 +126,7 @@ protected:
 private:
 	//! Find range of dates for the respective series plot.
 	//! Valid values for series are AltVsTime, AzVsTime, MonthlyElevation, LunarElongation. All other values are interpreted as 2-curve plots extending over the current year.
-	//! @arg periods number of periods (defaults to 1; currently applicable for number of years in the 2-curves plot)
+	//! @arg periods number of periods (defaults to 1; currently applicable for number of months in the 2-curves plot)
 	QPair<QDateTime, QDateTime>findXRange(const double JD, const Series series, const int periods=1);
 
 	//! Apply buffer to the determined required Y range of series
