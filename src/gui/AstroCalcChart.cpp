@@ -314,7 +314,7 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 		case AstroCalcChart::MonthlyElevation:
 			StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 			startDate=QDateTime(QDate(year, 1, 1), QTime(0, 0), Qt::UTC);
-			endDate=QDateTime(QDate(year+1, 1, 1), QTime(0, 0), Qt::UTC);
+			endDate=startDate.addDays(372); // So that we have integral partitions that run along midnight!
 			break;
 		case AstroCalcChart::LunarElongation:
 			startDate=StelUtils::jdToQDateTime(baseJD-2);
