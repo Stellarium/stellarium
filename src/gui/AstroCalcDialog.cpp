@@ -4403,7 +4403,6 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 	else
 	{
 		curvesChart = new AstroCalcChart({AstroCalcChart::AngularSize1, AstroCalcChart::Distance2}); // May be wrong as it does not protect display from other planets...
-
 		curvesChart->setYrange(AstroCalcChart::AngularSize1, 0., 10.);
 		curvesChart->setYrangeR(AstroCalcChart::Magnitude2, 0., 10.);
 		curvesChart->setupAxes(core->getJD(), graphsDuration, "");
@@ -4663,7 +4662,7 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		int hour = ui->monthlyElevationTime->value();
 		double startJD;
 		StelUtils::getJDFromDate(&startJD, year, 1, 1, hour, 0, 0);
-		const double utOffset=core->getUTCOffset(startJD)/24;
+		const double utOffset=core->getUTCOffset(currentJD)/24;
 		startJD -= utOffset; // Time zone correction
 		int dYear = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()/5.) + 3;
 		for (int i = 0; i <= dYear; i+=3)
@@ -4674,7 +4673,7 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 			double az, alt;
 			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
 			// The first point shall be plotted at the sharp edge date of Jan1 at midnight. The plot should more correctly be a point plot, but the spline is good enough.
-			monthlyElevationChart->append(AstroCalcChart::MonthlyElevation, StelUtils::jdToQDateTime(JD-hour/24.+utOffset).toMSecsSinceEpoch(), alt*M_180_PI);
+			monthlyElevationChart->append(AstroCalcChart::MonthlyElevation, StelUtils::jdToQDateTime(JD-hour/24.+2.*utOffset).toMSecsSinceEpoch(), alt*M_180_PI);
 			//qDebug() << "ME:" << StelUtils::jdToQDateTime(JD) << "/" << deg;
 		}
 		core->setJD(currentJD);
