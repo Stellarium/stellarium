@@ -61,7 +61,7 @@ void GreatRedSpotDialog::createDialogContent()
 	const StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
 	QString fmt = QString("%1 hh:mm").arg(locmgr.getQtDateFormatStr());
 	ui->jdDateTimeEdit->setDisplayFormat(fmt);
-	ui->jdDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(ss->getGrsJD()));
+	ui->jdDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(ss->getGrsJD(), false)); // FIXME: false must become true! What are the consequences?
 	connect(ui->jdDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(setGrsJD(QDateTime)));
 
 	connect(ui->recentGrsMeasurementPushButton, SIGNAL(clicked(bool)), this, SLOT(openRecentGrsMeasurement()));

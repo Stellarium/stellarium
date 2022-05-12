@@ -1874,7 +1874,8 @@ void TestConversions::testJDToQDateTime()
 	 for (QMap<double, QString>::ConstIterator i=map.constBegin();i!=map.constEnd();++i)
 	 {
 		 QDateTime edt = QDateTime::fromString(i.value(), format);
-		 QDateTime rdt = StelUtils::jdToQDateTime(i.key());
+		 edt.setTimeSpec(Qt::UTC); // ESSENTIAL!
+		 QDateTime rdt = StelUtils::jdToQDateTime(i.key(), true); // Must be true.
 		 QVERIFY2(edt==rdt, qPrintable(QString("JD: %1 Date: %2 Expected Date: %3")
 			.arg(QString::number(i.key(), 'f', 5), rdt.toString(format), i.value())));
 	 }

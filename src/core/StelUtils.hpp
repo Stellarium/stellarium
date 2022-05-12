@@ -483,13 +483,17 @@ namespace StelUtils
 	//! @param dateTime the UTC QDateTime to convert
 	//! @result the matching decimal Julian Day
 	inline double qDateTimeToJd(const QDateTime& dateTime){
+		Q_ASSERT(dateTime.timeSpec()==Qt::UTC);
 		return dateTime.date().toJulianDay()+static_cast<double>(1./(24*60*60*1000))*QTime(0, 0, 0, 0).msecsTo(dateTime.time())-0.5;
 	}
 
 	//! Convert a julian day to a QDateTime.
 	//! @param jd to convert
+	//! @param forceUTC TEMPORARY SOLUTION for bugfixing: From 2008 to 2022-05 this converted to local time zone, not to UTC as specified and intended.
+	//!        The old behaviour is kept with this parameter set to false.
+	//! @todo  Locate all occurrences and handle properly with setting this parameter to true! Then remove parameter and keep forcing UTC.
 	//! @result the matching UTC QDateTime
-	QDateTime jdToQDateTime(const double& jd);
+	QDateTime jdToQDateTime(const double& jd, const bool forceUTC);
 
 	//! Compute Julian day number from calendar date.
 	//! Uses QDate functionality if possible, but also works for negative JD.
