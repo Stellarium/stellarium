@@ -587,11 +587,17 @@ int getBiggerPowerOfTwo(int value)
  Convert a QT QDateTime class to julian day
 *************************************************************************/
 
-QDateTime jdToQDateTime(const double& jd)
+// WARNING: Probably since its inception in 2008 (?) this has assumed LocalTimeZone!!!
+QDateTime jdToQDateTime(const double& jd, const bool forceUTC)
 {
 	int year, month, day;
 	getDateFromJulianDay(jd, &year, &month, &day);
 	QDateTime result = QDateTime::fromString(QString("%1.%2.%3").arg(year, 4, 10, QLatin1Char('0')).arg(month).arg(day), "yyyy.M.d");
+	qDebug() << "StelUtils::jdToDateTime(" << jd << ", " << forceUTC << ")-->" << result;
+	// NEW: Specify UTC. MAKE THIS BEING USED EVERYWHERE!
+	if (forceUTC)
+		result.setTimeSpec(Qt::UTC);
+	qDebug() << "StelUtils::jdToDateTime() finally" << result;
 	result.setTime(jdFractionToQTime(jd));
 	return result;
 }
