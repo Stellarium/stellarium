@@ -283,7 +283,7 @@ San Juan	San Juan	08	R	447.048	31.5375S	68.53639W	649	7	America/Argentina/San_Ju
 San Jose de Jachal	San Juan	08	N	21.018	30.24057S	68.74693W	1176	5	America/Argentina/San_Juan
 San Jorge	Santa Fe	08	N	16.873	31.89618S	61.85984W	109	5	America/Argentina/Cordoba
 San Francisco	Cordoba	08	N	59.062	31.42797S	62.08266W	118	6	America/Argentina/Cordoba
-San Fernando del Valle de Catamarca	Catamarca	08	R	188.812	28.46957S	65.78524W	545	7	America/Argentina/Catamarca
+Catamarca	Catamarca	08	R	188.812	28.46957S	65.78524W	545	7	America/Argentina/Catamarca
 San Antonio Oeste	Rio Negro	08	N	16.966	40.73193S	64.94769W	12	5	America/Argentina/Salta
 Salta	Salta	08	R	512.686	24.7859S	65.41166W	1183	8	America/Argentina/Salta
 Rufino	Santa Fe	08	N	18.361	34.26827S	62.71262W	118	5	America/Argentina/Cordoba
@@ -3029,7 +3029,7 @@ Zug	Zug	20	R	23.435	47.17242N	8.51745E	424	5	Europe/Zurich
 Yverdon-les-Bains	Vaud	20	N	23.702	46.77852N	6.64115E	438	5	Europe/Zurich
 Winterthur	Zurich	20	N	91.908	47.50564N	8.72413E	441	6	Europe/Zurich
 Wil	Saint Gallen	20	N	16.808	47.46152N	9.04552E	569	5	Europe/Zurich
-Wettingen	Aargau	20	N	18.191	47.47049N	8.31636E	386	5	Europe/Zurich
+Wettingen	Aargau	20	N	18.191	47.46606N	8.32663E	413	5	Europe/Zurich
 Vevey	Vaud	20	N	15.812	46.46299N	6.84345E	388	5	Europe/Zurich
 Vernier	Geneva	20	N	30.086	46.21702N	6.08497E	440	5	Europe/Zurich
 Uster	Zurich	20	N	23.279	47.34713N	8.72091E	469	5	Europe/Zurich
@@ -3348,7 +3348,7 @@ Qamdo	Tibet	13	N	86.28	31.1304N	97.17982E	3235	6	Asia/Shanghai
 Yingjiang	Yunnan	13	N	80.481	24.71022N	97.93671E	826	6	Asia/Shanghai
 Oytograk	Xinjiang	13	N	18.271	36.83333N	81.93333E	1460	5	Asia/Urumqi
 Nagqu	Tibet	13	N	30	31.47678N	92.05729E	4512	5	Asia/Shanghai
-Qaraqash	Xinjiang	13	N	54.664	37.27246N	79.73438E	1330	6	Asia/Urumqi
+Qaraqash	Xinjiang	13	N	66.541	37.27246N	79.73438E	1330	6	Asia/Urumqi
 Mengmao	Yunnan	13	N	112.578	24.00139N	97.86499E	754	7	Asia/Shanghai
 Menglang	Yunnan	13	N	86.877	22.56214N	99.91029E	1082	6	Asia/Shanghai
 Mangshi	Yunnan	13	N	46.353	24.45329N	98.57037E	885	5	Asia/Shanghai
@@ -3373,6 +3373,7 @@ Deqen	Tibet	13	N	62.4	29.96178N	90.71875E	3974	6	Asia/Shanghai
 Langgar	Xinjiang	13	N	19.524	36.7N	81.5E	1602	5	Asia/Urumqi
 Baoshan	Yunnan	13	N	935.618	25.11626N	99.16366E	1680	8	Asia/Shanghai
 Layka	Xinjiang	13	N	29.032	37.07694N	79.73167E	1421	5	Asia/Urumqi
+Saybag	Xinjiang	13	N	32.355	37.14972N	79.65833E	1362	5	Asia/Urumqi
 Arix	Xinjiang	13	N	17.941	36.75541N	81.60765E	1495	5	Asia/Urumqi
 Xambabazar	Xinjiang	13	N	19.796	36.88639N	81.50972E	1426	5	Asia/Urumqi
 Xinyuan	Xinjiang	13	N	282.718	43.42649N	83.24959E	953	7	Asia/Urumqi
@@ -3448,6 +3449,8 @@ Ziyang Chengguanzhen	Shaanxi	13	N	35.496	32.51917N	108.53232E	324	5	Asia/Shangha
 Ziyang	Sichuan	13	N	905.729	30.12108N	104.64811E	365	8	Asia/Shanghai
 Zigong	Sichuan	13	N	1262.064	29.34162N	104.77689E	306	9	Asia/Shanghai
 Zhuzhou	Hunan	13	N	1129.687	27.83333N	113.15E	54	9	Asia/Shanghai
+Zhuyang	Chongqing	13	N	26.335	29.06423N	105.94487E	227	5	Asia/Shanghai
+Zhuxi	Chongqing	13	N	34.113	29.53614N	105.66685E	324	5	Asia/Shanghai
 Zhumadian	Henan	13	N	721.67	32.97944N	114.02944E	89	8	Asia/Shanghai
 Zhujiajiao	Shanghai	13	N	60	31.10757N	121.05696E	9	6	Asia/Shanghai
 Shangqiu	Henan	13	N	1536.392	34.45N	115.65E	51	9	Asia/Shanghai
@@ -3458,6 +3461,7 @@ Zhuanghe	Liaoning	13	N	80.384	39.70083N	122.99111E	5	6	Asia/Shanghai
 Zhouzhuang	Jiangsu	13	N	22	31.11788N	120.84427E	6	5	Asia/Shanghai
 Zhouxi	Guizhou	13	N	16.859	26.48333N	107.91667E	759	5	Asia/Shanghai
 Zhoukou	Henan	13	N	505.171	33.63333N	114.63333E	54	8	Asia/Shanghai
+Zhoujia	Chongqing	13	N	32.562	30.41908N	107.53848E	431	5	Asia/Shanghai
 Zhoucun	Shandong	13	N	122.402	36.81667N	117.81667E	53	7	Asia/Shanghai
 Yuxi	Yunnan	13	N	103.829	24.355N	102.54222E	1638	7	Asia/Shanghai
 Zhongzhai	Gansu	13	N	19.641	33.19133N	104.42009E	1375	5	Asia/Shanghai
@@ -3466,6 +3470,7 @@ Zhongxin	Yunnan	13	N	51.866	26.61667N	101.27154E	1226	6	Asia/Shanghai
 Zhongshu	Yunnan	13	N	91.75	24.51667N	103.76667E	1701	6	Asia/Shanghai
 Gusong	Sichuan	13	N	87.882	28.3133N	105.2377E	474	6	Asia/Shanghai
 Zhongchao	Guizhou	13	N	22.129	26.1375N	109.22E	461	5	Asia/Shanghai
+Zhong'ao	Chongqing	13	N	31.118	29.765N	105.66645E	390	5	Asia/Shanghai
 Zhigou	Shandong	13	N	43.152	35.91667N	119.21667E	79	5	Asia/Shanghai
 Zhicheng	Zhejiang	13	N	63.753	31.00751N	119.90851E	12	6	Asia/Shanghai
 Zhicheng	Hubei	13	N	159.383	30.29556N	111.50472E	51	7	Asia/Shanghai
@@ -3474,6 +3479,7 @@ Zhenping Chengguanzhen	Henan	13	N	181.528	33.03314N	112.23321E	189	7	Asia/Shangh
 Zhenjiang	Jiangsu	13	N	950.516	32.21086N	119.45508E	26	8	Asia/Shanghai
 Zhaobaoshan	Zhejiang	13	N	61.979	29.9695N	121.68753E	3	6	Asia/Shanghai
 Zhengzhou	Henan	13	R	4253.913	34.75778N	113.64861E	104	9	Asia/Shanghai
+Zhengxing	Chongqing	13	N	27.804	29.45741N	106.12926E	360	5	Asia/Shanghai
 Zhengji	Jiangsu	13	N	43.021	34.43722N	117.03889E	39	5	Asia/Shanghai
 Zhengding	Hebei	13	N	193.524	38.13972N	114.55944E	74	7	Asia/Shanghai
 Zhelou	Guizhou	13	N	34.25	24.96667N	105.81667E	701	5	Asia/Shanghai
@@ -3499,8 +3505,9 @@ Zaoyang	Hubei	13	N	184.509	32.12722N	112.75417E	113	7	Asia/Shanghai
 Yuyao	Zhejiang	13	N	114.177	30.05N	121.14944E	59	7	Asia/Shanghai
 Yingchuan	Henan	13	N	87.961	34.16278N	113.46389E	126	6	Asia/Shanghai
 Yuxia	Shaanxi	13	N	60.206	34.06153N	108.62905E	428	6	Asia/Shanghai
-Kunshan	Jiangsu	13	N	1118.617	31.37762N	120.95431E	10	9	Asia/Shanghai
+Kunshan	Jiangsu	13	N	2092.496	31.37762N	120.95431E	10	9	Asia/Shanghai
 Yunyang	Henan	13	N	73.922	33.44743N	112.71422E	202	6	Asia/Shanghai
+Yuntai	Chongqing	13	N	40.328	30.13894N	107.20487E	390	5	Asia/Shanghai
 Yunshan	Gansu	13	N	16.22	34.76063N	105.79252E	1723	5	Asia/Shanghai
 Yunnanyi	Yunnan	13	N	93.671	25.4245N	100.689E	1978	6	Asia/Shanghai
 Yunmeng Chengguanzhen	Hubei	13	N	64.39	31.06251N	113.76545E	43	6	Asia/Shanghai
@@ -3515,12 +3522,17 @@ Wulingyuan	Hunan	13	N	52.712	29.34936N	110.54407E	327	6	Asia/Shanghai
 Yudong	Chongqing	13	N	81.408	29.385N	106.51944E	212	6	Asia/Shanghai
 Yuci	Shanxi	13	N	235.929	37.68028N	112.73194E	798	7	Asia/Shanghai
 Yucheng	Shandong	13	N	62.365	34.92889N	116.46528E	37	6	Asia/Shanghai
+Yuanyang	Chongqing	13	N	37.009	29.66572N	106.55749E	381	5	Asia/Shanghai
 Huaiyang	Hebei	13	N	81.861	37.74861N	114.50861E	72	6	Asia/Shanghai
+Yuanshang	Shandong	13	N	74.253	36.76833N	120.34556E	38	6	Asia/Shanghai
 Yuanping	Shanxi	13	N	82.883	38.71528N	112.7575E	797	6	Asia/Shanghai
 Qianjiang	Hubei	13	N	179.079	30.421N	112.8919E	36	7	Asia/Shanghai
 Heyuan	Guangdong	13	N	463.907	23.73333N	114.68333E	31	7	Asia/Shanghai
+Youxi	Chongqing	13	N	63.386	29.20936N	106.14428E	219	6	Asia/Shanghai
+Youting	Chongqing	13	N	44.363	29.43128N	105.73757E	402	5	Asia/Shanghai
 Yongzhou	Hunan	13	N	1020.715	26.42389N	111.61306E	101	9	Asia/Shanghai
 Yongxing	Gansu	13	N	22.079	34.20778N	105.32889E	1459	5	Asia/Shanghai
+Yongxing	Chongqing	13	N	32.535	28.98968N	106.17612E	252	5	Asia/Shanghai
 Yongqing	Gansu	13	N	55.595	34.74806N	106.12694E	1407	6	Asia/Shanghai
 Yongning	Yunnan	13	N	20.852	27.83333N	100.66667E	2770	5	Asia/Shanghai
 Yongfeng	Hunan	13	N	70.783	27.45493N	112.16943E	111	6	Asia/Shanghai
@@ -3540,7 +3552,7 @@ Yigou	Henan	13	N	59.073	35.81139N	114.31667E	90	6	Asia/Shanghai
 Qingzhou	Shandong	13	N	236.406	36.69667N	118.47972E	98	7	Asia/Shanghai
 Yichun	Jiangxi	13	N	1045.952	27.83333N	114.4E	99	9	Asia/Shanghai
 Yicheng	Hubei	13	N	61.027	31.70472N	112.25611E	63	6	Asia/Shanghai
-Yicheng	Jiangsu	13	N	95.53	31.36059N	119.82016E	8	6	Asia/Shanghai
+Yixing	Jiangsu	13	N	1285.785	31.36059N	119.82016E	8	9	Asia/Shanghai
 Yichang	Hubei	13	N	1350.15	30.71444N	111.28472E	63	9	Asia/Shanghai
 Yibin	Sichuan	13	N	836.34	28.7593N	104.63994E	323	8	Asia/Shanghai
 Yezhou	Hubei	13	N	104.839	30.60369N	109.72333E	557	7	Asia/Shanghai
@@ -3553,12 +3565,13 @@ Yanzibu	Jiangsu	13	N	25.714	34.50561N	117.70222E	30	5	Asia/Shanghai
 Yanzhou	Shandong	13	N	254.788	35.55278N	116.82861E	54	7	Asia/Shanghai
 Yantai	Shandong	13	N	2227.733	37.47649N	121.44081E	22	9	Asia/Shanghai
 Yanliang	Shaanxi	13	N	60.891	34.65918N	109.22921E	395	6	Asia/Shanghai
+Yanjia	Chongqing	13	N	72.825	29.82758N	106.99734E	275	6	Asia/Shanghai
 Yangzhou	Jiangsu	13	N	1584.237	32.39722N	119.43583E	14	9	Asia/Shanghai
 Yangzhou	Shaanxi	13	N	64.349	33.22192N	107.54267E	474	6	Asia/Shanghai
 Yanguan	Gansu	13	N	44.954	34.26389N	105.46389E	1502	5	Asia/Shanghai
 Yangtun	Jiangsu	13	N	53.417	34.88333N	116.88333E	36	6	Asia/Shanghai
 Yangshuo	Guangxi	13	N	300	24.78081N	110.48967E	116	7	Asia/Shanghai
-Zhangjiagang	Jiangsu	13	N	762.625	31.865N	120.53889E	13	8	Asia/Shanghai
+Zhangjiagang	Jiangsu	13	N	1432.044	31.865N	120.53889E	13	9	Asia/Shanghai
 Yangquan	Shanxi	13	N	731.228	37.8575N	113.56333E	722	8	Asia/Shanghai
 Yangliuqing	Tianjin	13	N	76.387	39.1375N	116.99972E	8	6	Asia/Shanghai
 Yanghe	Ningxia Hui Autonomous Region	13	N	67.901	38.27852N	106.24776E	1123	6	Asia/Shanghai
@@ -3600,20 +3613,24 @@ Xinshi	Hubei	13	N	98.422	31.04704N	113.14098E	115	6	Asia/Shanghai
 Xinji	Hebei	13	N	145.911	37.90278N	115.20361E	40	7	Asia/Shanghai
 Xining	Qinghai	13	R	1677.177	36.62554N	101.75739E	2275	9	Asia/Shanghai
 Shangmei	Hunan	13	N	75.233	27.74278N	111.29556E	179	6	Asia/Shanghai
+Xinhe	Shandong	13	N	69.884	36.925N	119.59306E	1	6	Asia/Shanghai
 Xingtai	Hebei	13	N	798.77	37.06306N	114.49417E	76	8	Asia/Shanghai
 Xingren	Guizhou	13	N	91.579	25.43333N	105.23333E	1445	6	Asia/Shanghai
+Xinglong	Chongqing	13	N	20.333	29.88931N	106.70622E	563	5	Asia/Shanghai
 Xingguo	Gansu	13	N	95.211	34.85861N	105.66861E	1219	6	Asia/Shanghai
 Ankang	Shaanxi	13	N	870.126	32.68N	109.01722E	273	8	Asia/Shanghai
 Xindian	Shandong	13	N	82.555	36.7975N	118.29444E	73	6	Asia/Shanghai
 Xindi	Hubei	13	N	175.761	29.81667N	113.46667E	27	7	Asia/Shanghai
 Feicheng	Shandong	13	N	77.606	36.24861N	116.76583E	115	6	Asia/Shanghai
 Xincheng	Gansu	13	N	20.535	34.67431N	103.5868E	2760	5	Asia/Shanghai
+Xinshi	Chongqing	13	N	21.578	29.95996N	107.10408E	353	5	Asia/Shanghai
 Xinyi	Jiangsu	13	N	300.511	34.38424N	118.34617E	31	7	Asia/Shanghai
 Sanshui	Guangdong	13	N	153.714	23.15486N	112.89161E	12	7	Asia/Shanghai
 Ximeicun	Fujian	13	N	94.326	24.98773N	118.3858E	28	6	Asia/Shanghai
 Wacheng	Henan	13	N	66.848	33.78333N	114.51667E	56	6	Asia/Shanghai
 Xihe	Hubei	13	N	90.422	31.68635N	113.46585E	64	6	Asia/Shanghai
 Xigang	Ningxia Hui Autonomous Region	13	N	112.061	38.55258N	106.34805E	1111	7	Asia/Shanghai
+Xiema	Chongqing	13	N	60.933	29.77415N	106.3688E	248	6	Asia/Shanghai
 Xichang	Sichuan	13	N	481.796	27.89642N	102.26341E	1558	7	Asia/Shanghai
 Xichang	Guangxi	13	N	80.064	21.63333N	108.95E	5	6	Asia/Shanghai
 Xiazhuang	Shandong	13	N	88.71	36.44917N	119.83556E	17	6	Asia/Shanghai
@@ -3643,14 +3660,16 @@ Xiangxiang	Hunan	13	N	87.592	27.73333N	112.53333E	46	6	Asia/Shanghai
 Xiangtan	Hunan	13	N	959.303	27.85N	112.9E	31	8	Asia/Shanghai
 Xiangyang	Hubei	13	N	1294.733	32.0422N	112.14479E	71	9	Asia/Shanghai
 Xiangcheng Chengguanzhen	Henan	13	N	65.833	33.84703N	113.4778E	85	6	Asia/Shanghai
+Xianfeng	Chongqing	13	N	48.586	29.21004N	106.30012E	370	5	Asia/Shanghai
 Xi'an	Shaanxi	13	R	9600	34.25833N	108.92861E	416	9	Asia/Shanghai
 Xiamen	Fujian	13	N	4617.251	24.47979N	118.08187E	12	9	Asia/Shanghai
+Xiagezhuang	Shandong	13	N	30.706	36.69306N	120.43472E	35	5	Asia/Shanghai
 Wuzhou	Guangxi	13	N	761.948	23.48054N	111.28848E	51	8	Asia/Shanghai
 Wuzhen	Zhejiang	13	N	60	30.74536N	120.4851E	8	6	Asia/Shanghai
 Wuyang	Anhui	13	N	79.07	31.9925N	116.24722E	33	6	Asia/Shanghai
 Wuxue	Hubei	13	N	220.661	29.85058N	115.5525E	23	7	Asia/Shanghai
 Wushan	Chongqing	13	N	98.743	31.07749N	109.87639E	291	6	Asia/Shanghai
-Wuxi	Jiangsu	13	N	3542.319	31.56887N	120.28857E	10	9	Asia/Shanghai
+Wuxi	Jiangsu	13	N	4396.835	31.56887N	120.28857E	10	9	Asia/Shanghai
 Wutongshu	Ningxia Hui Autonomous Region	13	N	20.506	38.18333N	106.28333E	1116	5	Asia/Shanghai
 Wushan	Gansu	13	N	68.643	34.72083N	104.88583E	1496	6	Asia/Shanghai
 Dongyang	Zhejiang	13	N	130.387	29.26778N	120.22528E	97	7	Asia/Shanghai
@@ -3661,6 +3680,7 @@ Wuhu	Anhui	13	N	1598.165	31.33728N	118.37351E	19	9	Asia/Shanghai
 Wuhan	Hubei	13	R	10392.693	30.58333N	114.26667E	20	9	Asia/Shanghai
 Wuhai	Inner Mongolia	13	N	218.427	39.68442N	106.81583E	1096	7	Asia/Shanghai
 Wugang	Hunan	13	N	132.457	26.7279N	110.63198E	319	7	Asia/Shanghai
+Wudong	Chongqing	13	N	17.19	30.2099N	107.34127E	397	5	Asia/Shanghai
 Wuda	Inner Mongolia	13	N	129.922	39.49944N	106.71167E	1129	7	Asia/Shanghai
 Wucheng	Anhui	13	N	60.212	29.60077N	118.17495E	149	6	Asia/Shanghai
 Wenzhou	Zhejiang	13	N	2650	27.99942N	120.66682E	10	9	Asia/Shanghai
@@ -3679,9 +3699,11 @@ Weifang	Shandong	13	N	2044.028	36.71N	119.10194E	30	9	Asia/Shanghai
 Wayaobu	Shaanxi	13	N	113.698	37.13611N	109.65972E	1110	7	Asia/Shanghai
 Wayao	Jiangsu	13	N	37.08	34.38333N	118.23333E	31	5	Asia/Shanghai
 Wanxian	Chongqing	13	N	188.98	30.81601N	108.37407E	232	7	Asia/Shanghai
+Wanshun	Chongqing	13	N	22.256	30.04006N	106.97159E	315	5	Asia/Shanghai
 Wanshui	Guizhou	13	N	17.141	26.73528N	107.98722E	600	5	Asia/Shanghai
 Wanning	Hainan	13	N	545.992	18.79931N	110.3841E	15	8	Asia/Shanghai
 Wangwu	Hainan	13	N	24.274	19.65623N	109.29071E	27	5	Asia/Shanghai
+Wangu	Chongqing	13	N	28.871	29.68242N	105.93551E	309	5	Asia/Shanghai
 Wangpu	Gansu	13	N	23.414	35.05712N	105.43585E	1916	5	Asia/Shanghai
 Wangji	Jiangsu	13	N	54.578	33.98333N	117.75E	28	6	Asia/Shanghai
 Yinzhu	Shandong	13	N	75.656	35.87861N	119.97528E	8	6	Asia/Shanghai
@@ -3695,8 +3717,11 @@ Tongzhou	Beijing	13	N	163.326	39.90395N	116.66183E	33	7	Asia/Shanghai
 Fuding	Fujian	13	N	192.352	27.32734N	120.21399E	13	7	Asia/Shanghai
 Tongren	Guizhou	13	N	90.593	27.71722N	109.18528E	263	6	Asia/Shanghai
 Tongling	Anhui	13	N	402.062	30.95N	117.78333E	7	7	Asia/Shanghai
+Tongjing	Chongqing	13	N	30.673	29.85653N	106.8448E	198	5	Asia/Shanghai
 Tongchuan	Sichuan	13	N	58.346	31.09407N	105.08731E	386	6	Asia/Shanghai
 Tiefu	Jiangsu	13	N	87.689	34.53333N	118.03333E	29	6	Asia/Shanghai
+Tiaoshi	Chongqing	13	N	28.825	29.27722N	106.6425E	346	5	Asia/Shanghai
+Tianzhuang	Shandong	13	N	64.957	36.79583N	119.73667E	21	6	Asia/Shanghai
 Tianshui	Gansu	13	N	1212.791	34.57952N	105.74238E	1153	9	Asia/Shanghai
 Tianpeng	Sichuan	13	N	60.797	30.98664N	103.93933E	611	6	Asia/Shanghai
 Tianliu	Shandong	13	N	67.165	37N	118.78333E	7	6	Asia/Shanghai
@@ -3717,7 +3742,9 @@ Tanggu	Tianjin	13	N	535.298	39.02111N	117.64694E	6	8	Asia/Shanghai
 Taizhou	Jiangsu	13	N	1607.108	32.49069N	119.90812E	10	9	Asia/Shanghai
 Taiyuan	Shanxi	13	R	4303.673	37.86944N	112.56028E	795	9	Asia/Shanghai
 Taixing	Jiangsu	13	N	79.655	32.16667N	120.01361E	9	6	Asia/Shanghai
+Taiping	Chongqing	13	N	24.393	30.26204N	107.29287E	421	5	Asia/Shanghai
 Taishan	Guangdong	13	N	145.44	22.25135N	112.7799E	3	7	Asia/Shanghai
+Taicang	Jiangsu	13	N	831.113	31.44778N	121.09389E	4	8	Asia/Shanghai
 Tai'an	Shandong	13	N	1735.425	36.18528N	117.12E	143	9	Asia/Shanghai
 Suzhou	Anhui	13	N	1647.642	33.63611N	116.97889E	34	9	Asia/Shanghai
 Suyangshan	Jiangsu	13	N	65.333	34.39278N	117.75556E	27	6	Asia/Shanghai
@@ -3738,9 +3765,11 @@ Simao	Yunnan	13	N	296.565	22.78863N	100.97481E	1331	7	Asia/Shanghai
 Sihu	Jiangsu	13	N	40.43	34.62625N	117.97139E	37	5	Asia/Shanghai
 Shunhe	Jiangsu	13	N	47.33	34.84184N	116.55722E	28	5	Asia/Shanghai
 Shuizhai	Guangdong	13	N	140.493	23.92961N	115.76499E	106	7	Asia/Shanghai
+Shuitu	Chongqing	13	N	44.551	29.78221N	106.4974E	209	5	Asia/Shanghai
 Shuikou	Guizhou	13	N	26.827	25.91278N	109.31361E	289	5	Asia/Shanghai
 Shuikou	Guangdong	13	N	62.321	23.98372N	115.89581E	114	6	Asia/Shanghai
-Laixi	Shandong	13	N	75.849	36.85917N	120.52694E	54	6	Asia/Shanghai
+Laixi	Shandong	13	N	341.47	36.85917N	120.52694E	54	7	Asia/Shanghai
+Shuanglong	Chongqing	13	N	29.213	29.95972N	107.20356E	418	5	Asia/Shanghai
 Shuangjiang	Guizhou	13	N	16.773	25.96667N	108.92417E	242	5	Asia/Shanghai
 Shuanggou	Jiangsu	13	N	45.697	34.03528N	117.57806E	29	5	Asia/Shanghai
 Shouxian	Jiangsu	13	N	76.03	34.84648N	116.45884E	35	6	Asia/Shanghai
@@ -3755,6 +3784,8 @@ Shiquan	Shaanxi	13	N	53.422	33.04083N	108.23639E	362	6	Asia/Shanghai
 Shiqiaozi	Shandong	13	N	58.538	36.16167N	119.26306E	68	6	Asia/Shanghai
 Shiqiao	Guangdong	13	N	135.308	22.9464N	113.35769E	11	7	Asia/Shanghai
 Shiqi	Guangdong	13	N	342.306	22.51682N	113.38521E	8	7	Asia/Shanghai
+Shimen	Chongqing	13	N	35.665	29.10037N	106.03304E	219	5	Asia/Shanghai
+Shima	Chongqing	13	N	22.82	29.63116N	105.83065E	388	5	Asia/Shanghai
 Shima	Fujian	13	N	68.375	24.44647N	117.81216E	11	6	Asia/Shanghai
 Shilong	Guangdong	13	N	109.733	23.11444N	113.84722E	14	7	Asia/Shanghai
 Tongchuanshi	Shaanxi	13	N	223.603	35.07474N	109.08495E	834	7	Asia/Shanghai
@@ -3762,12 +3793,15 @@ Shikang	Guangxi	13	N	64.818	21.76667N	109.31667E	15	6	Asia/Shanghai
 Shijiazhuang	Hebei	13	R	3938.513	38.04139N	114.47861E	77	9	Asia/Shanghai
 Shiji	Jiangsu	13	N	41.652	34.2N	118.48333E	19	5	Asia/Shanghai
 Shidui	Shandong	13	N	35.367	36.39333N	119.30861E	78	5	Asia/Shanghai
+Shichuan	Chongqing	13	N	39.645	29.76584N	106.82284E	265	5	Asia/Shanghai
 Shibuzi	Shandong	13	N	58.333	36.12389N	119.10278E	91	6	Asia/Shanghai
 Shenzhen	Guangdong	13	N	17494.398	22.54554N	114.0683E	4	9	Asia/Shanghai
 Yanta	Shandong	13	N	79.196	36.24111N	115.66722E	41	6	Asia/Shanghai
 Chentuan	Shandong	13	N	24.706	35.50472N	119.26694E	41	5	Asia/Shanghai
 Shenjiamen	Zhejiang	13	N	95.433	29.95763N	122.29802E	25	6	Asia/Shanghai
 Shawan	Gansu	13	N	21.551	33.62736N	104.5637E	1489	5	Asia/Shanghai
+Rensha	Chongqing	13	N	20.054	30.05305N	107.59409E	200	5	Asia/Shanghai
+Shaping	Chongqing	13	N	30.928	30.47463N	107.43587E	435	5	Asia/Shanghai
 Shaping	Guangdong	13	N	107.589	22.77019N	112.95776E	9	7	Asia/Shanghai
 Shaoxing	Zhejiang	13	N	2300	30.00237N	120.57864E	21	9	Asia/Shanghai
 Shaowu	Fujian	13	N	112.585	27.34089N	117.4831E	196	7	Asia/Shanghai
@@ -3787,6 +3821,7 @@ Shahecheng	Hebei	13	N	125.132	36.93833N	114.50583E	73	7	Asia/Shanghai
 Shagang	Guangxi	13	N	30.71	21.66667N	109.03333E	4	5	Asia/Shanghai
 Sanzhuang	Shandong	13	N	52.214	35.50333N	119.17167E	77	6	Asia/Shanghai
 Sanya	Hainan	13	N	1031.396	18.24306N	109.505E	11	9	Asia/Shanghai
+Sanqu	Chongqing	13	N	28.563	29.64157N	105.62161E	383	5	Asia/Shanghai
 Sanming	Fujian	13	N	602.166	26.24861N	117.61861E	126	8	Asia/Shanghai
 Sanmenxia	Henan	13	N	669.307	34.77472N	111.18139E	348	8	Asia/Shanghai
 Runing	Henan	13	N	60.202	33.00111N	114.35417E	56	6	Asia/Shanghai
@@ -3794,6 +3829,8 @@ Rui'an	Zhejiang	13	N	927.383	27.77605N	120.65859E	4	8	Asia/Shanghai
 Rongjiang	Yunnan	13	N	32.291	26.55N	101.25E	1180	5	Asia/Shanghai
 Fuqing	Fujian	13	N	67.397	25.7294N	119.37469E	17	6	Asia/Shanghai
 Jieyang	Guangdong	13	N	1899.394	23.5418N	116.36581E	7	9	Asia/Shanghai
+Rizhuang	Shandong	13	N	43.758	36.95083N	120.38306E	79	5	Asia/Shanghai
+Renzhao	Shandong	13	N	64.569	36.63861N	120.20361E	23	6	Asia/Shanghai
 Renqiu	Hebei	13	N	98.569	38.69889N	116.09361E	13	6	Asia/Shanghai
 Renhe	Yunnan	13	N	24.903	26.41667N	101.01667E	2125	5	Asia/Shanghai
 Quzhou	Zhejiang	13	N	902.767	28.95944N	118.86861E	77	8	Asia/Shanghai
@@ -3817,7 +3854,7 @@ Qingshanquan	Jiangsu	13	N	44.314	34.41639N	117.36306E	36	5	Asia/Shanghai
 Qingquan	Hubei	13	N	76.154	30.45113N	115.25593E	35	6	Asia/Shanghai
 Huai'an	Jiangsu	13	N	2494.013	33.58861N	119.01917E	14	9	Asia/Shanghai
 Qingfu	Sichuan	13	N	56.65	28.43701N	104.51622E	339	6	Asia/Shanghai
-Qingdao	Shandong	13	N	3718.835	36.06488N	120.38042E	16	9	Asia/Shanghai
+Qingdao	Shandong	13	N	7172.451	36.06488N	120.38042E	16	9	Asia/Shanghai
 Qingyuan	Guangdong	13	N	1738.424	23.7N	113.03333E	11	9	Asia/Shanghai
 Qincheng	Jiangxi	13	N	99.987	27.2127N	116.53008E	98	6	Asia/Shanghai
 Qina	Yunnan	13	N	36.823	26.30938N	100.62513E	1424	5	Asia/Shanghai
@@ -3830,6 +3867,7 @@ Qianliu	Yunnan	13	N	48.09	22.9N	100.2E	1416	5	Asia/Shanghai
 Puyang Chengguanzhen	Henan	13	N	104.994	35.70506N	115.01409E	56	7	Asia/Shanghai
 Puyang	Zhejiang	13	N	3590	29.45679N	119.88872E	76	9	Asia/Shanghai
 Putian	Fujian	13	N	1539.389	25.43944N	119.01028E	23	9	Asia/Shanghai
+Puji	Shandong	13	N	52.563	36.13194N	119.72111E	57	6	Asia/Shanghai
 Puqi	Hubei	13	N	132.891	29.71667N	113.88333E	40	7	Asia/Shanghai
 Yongning	Guangxi	13	N	61.69	22.76101N	108.48359E	82	6	Asia/Shanghai
 Pulandian	Liaoning	13	N	104.277	39.39528N	121.96694E	14	7	Asia/Shanghai
@@ -3843,7 +3881,7 @@ Pingshan	Guangdong	13	N	113.631	22.99376N	114.71311E	22	7	Asia/Shanghai
 Pingnan	Guangxi	13	N	62.483	23.5418N	110.38929E	39	6	Asia/Shanghai
 Pingliang	Gansu	13	N	504.848	35.53917N	106.68611E	1354	8	Asia/Shanghai
 Pingli	Shaanxi	13	N	45.493	32.38472N	109.34556E	488	5	Asia/Shanghai
-Pingdu	Shandong	13	N	91.077	36.78444N	119.94639E	59	6	Asia/Shanghai
+Pingdu	Shandong	13	N	542.234	36.78444N	119.94639E	59	8	Asia/Shanghai
 Pingdingshan	Henan	13	N	979.13	33.73847N	113.30119E	88	8	Asia/Shanghai
 Pianjiao	Yunnan	13	N	24.575	26.01667N	100.58333E	1475	5	Asia/Shanghai
 Pengcheng	Hebei	13	N	68.442	36.43111N	114.17E	147	6	Asia/Shanghai
@@ -3866,12 +3904,13 @@ Nanzhang Chengguanzhen	Hubei	13	N	83.604	31.78394N	111.82752E	130	6	Asia/Shangha
 Nanyang	Henan	13	N	1811.812	32.99472N	112.53278E	131	9	Asia/Shanghai
 Nanxi	Sichuan	13	N	96.061	28.84209N	104.97958E	274	6	Asia/Shanghai
 Nantong	Jiangsu	13	N	2273.326	32.03028N	120.87472E	6	9	Asia/Shanghai
+Nanshu	Shandong	13	N	40.188	37.02014N	120.33731E	111	5	Asia/Shanghai
 Pucheng	Fujian	13	N	59.832	27.92333N	118.53333E	235	6	Asia/Shanghai
 Nanping	Fujian	13	N	467.875	26.645N	118.17361E	102	7	Asia/Shanghai
 Nanning	Guangxi	13	R	3839.8	22.81667N	108.31667E	91	9	Asia/Shanghai
 Nanma	Shandong	13	N	74.406	36.18478N	118.15486E	283	6	Asia/Shanghai
 Nanlong	Sichuan	13	N	63.405	31.35333N	106.06309E	352	6	Asia/Shanghai
-Nanjing	Jiangsu	13	R	7400	32.06167N	118.77778E	22	9	Asia/Shanghai
+Nanjing	Jiangsu	13	R	9314.685	32.06167N	118.77778E	22	9	Asia/Shanghai
 Nanjian	Yunnan	13	N	50.083	25.04493N	100.51437E	1401	6	Asia/Shanghai
 Nanhu	Shandong	13	N	61.034	35.48778N	119.34583E	36	6	Asia/Shanghai
 Nangong	Hebei	13	N	82.386	37.35806N	115.37444E	29	6	Asia/Shanghai
@@ -3879,14 +3918,18 @@ Nanfeng	Guangdong	13	N	86.129	23.72695N	111.79723E	39	6	Asia/Shanghai
 Nanfeng	Hainan	13	N	23.669	19.41018N	109.55024E	197	5	Asia/Shanghai
 Nandu	Guangxi	13	N	61.881	22.8525N	110.82333E	88	6	Asia/Shanghai
 Nanding	Shandong	13	N	85.495	36.74833N	118.05583E	64	6	Asia/Shanghai
+Nancun	Shandong	13	N	124.21	36.53278N	120.13389E	18	7	Asia/Shanghai
 Nanchong	Sichuan	13	N	1858.875	30.79508N	106.08473E	287	9	Asia/Shanghai
 Nanchang	Jiangxi	13	R	2357.839	28.68396N	115.85306E	20	9	Asia/Shanghai
 Naliang	Guangxi	13	N	41.577	21.66667N	107.86667E	58	5	Asia/Shanghai
 Nada	Hainan	13	N	256.652	19.52257N	109.5786E	145	7	Asia/Shanghai
+Mu'er	Chongqing	13	N	23.157	29.80601N	106.64439E	406	5	Asia/Shanghai
+Mudong	Chongqing	13	N	36.704	29.57334N	106.83928E	201	5	Asia/Shanghai
 Miyang	Yunnan	13	N	72.485	24.40417N	103.44278E	1433	6	Asia/Shanghai
 Mingshui	Shandong	13	N	114.858	36.71667N	117.5E	73	7	Asia/Shanghai
 Mingguang	Anhui	13	N	68.351	32.78017N	117.96378E	16	6	Asia/Shanghai
 Minggang	Henan	13	N	67.945	32.45861N	114.04861E	78	6	Asia/Shanghai
+Mingcun	Shandong	13	N	53.926	36.75361N	119.64083E	13	6	Asia/Shanghai
 Micheng	Yunnan	13	N	89.144	25.34294N	100.48725E	1671	6	Asia/Shanghai
 Miaoyu	Chongqing	13	N	34.913	30.86868N	109.64614E	781	5	Asia/Shanghai
 Mianyang	Sichuan	13	N	1550	31.46784N	104.68168E	471	9	Asia/Shanghai
@@ -3900,6 +3943,7 @@ Wuchuan	Guangdong	13	N	104.168	21.45713N	110.76591E	7	7	Asia/Shanghai
 Mapo	Jiangsu	13	N	35.358	34.51667N	117.06667E	38	5	Asia/Shanghai
 Maoming	Guangdong	13	N	1307.802	21.66625N	110.91364E	31	9	Asia/Shanghai
 Maocun	Jiangsu	13	N	57.649	34.37667N	117.25056E	57	6	Asia/Shanghai
+Malianzhuang	Shandong	13	N	42.197	37.07484N	120.46251E	104	5	Asia/Shanghai
 Majie	Yunnan	13	N	131.696	25.0319N	102.638E	1894	7	Asia/Shanghai
 Zhijiang	Hubei	13	N	60.169	30.42139N	111.75333E	46	6	Asia/Shanghai
 Macheng	Hubei	13	N	126.366	31.18013N	115.02213E	57	7	Asia/Shanghai
@@ -3913,10 +3957,12 @@ Luoyang	Henan	13	N	1390.581	34.68361N	112.45361E	149	9	Asia/Shanghai
 Luoyang	Fujian	13	N	66.188	24.95938N	118.683E	17	6	Asia/Shanghai
 Luoyang	Guangdong	13	N	123.144	23.16244N	114.27342E	16	7	Asia/Shanghai
 Luorong	Guangxi	13	N	67.593	24.40583N	109.60861E	76	6	Asia/Shanghai
+Luoqi	Chongqing	13	N	36.862	29.72235N	106.93206E	197	5	Asia/Shanghai
 Luoping	Chongqing	13	N	24.859	31.20659N	110.08679E	1059	5	Asia/Shanghai
 Luomen	Gansu	13	N	89.998	34.75417N	105.02472E	1413	6	Asia/Shanghai
 Luolong	Sichuan	13	N	40.612	28.80557N	104.89906E	292	5	Asia/Shanghai
 Luojiang	Sichuan	13	N	212.186	31.30497N	104.50484E	509	7	Asia/Shanghai
+Luohuang	Chongqing	13	N	71.515	29.34662N	106.43514E	225	6	Asia/Shanghai
 Luohe	Henan	13	N	1294.974	33.56394N	114.04272E	62	9	Asia/Shanghai
 Luocheng	Sichuan	13	N	73.581	29.38481N	104.02862E	471	6	Asia/Shanghai
 Lulou	Jiangsu	13	N	63.704	34.71667N	116.76667E	40	6	Asia/Shanghai
@@ -3928,11 +3974,15 @@ Luancheng	Hebei	13	N	597.13	37.87917N	114.65167E	55	8	Asia/Shanghai
 Lu'an	Anhui	13	N	1644.344	31.73561N	116.51688E	81	9	Asia/Shanghai
 Loudi	Hunan	13	N	497.171	27.73444N	111.99444E	135	7	Asia/Shanghai
 Longyan	Fujian	13	N	1025.087	25.07485N	117.01775E	318	9	Asia/Shanghai
+Longxing	Chongqing	13	N	36.297	29.70199N	106.7911E	273	5	Asia/Shanghai
+Longshui	Chongqing	13	N	121.609	29.56555N	105.76205E	367	7	Asia/Shanghai
 Longshan	Gansu	13	N	37.976	35.03194N	106.08056E	1593	5	Asia/Shanghai
 Longquan	Yunnan	13	N	91.534	24.67193N	102.1613E	1591	6	Asia/Shanghai
+Longhua	Chongqing	13	N	27.849	29.21028N	106.20725E	217	5	Asia/Shanghai
 Longlin	Gansu	13	N	18.148	33.94278N	105.06739E	1316	5	Asia/Shanghai
 Longgang	Shandong	13	N	60.444	37.65181N	120.33063E	6	6	Asia/Shanghai
 Longgu	Jiangsu	13	N	59.086	34.90333N	116.80667E	37	6	Asia/Shanghai
+Longgang	Chongqing	13	N	74.605	29.69744N	105.71369E	375	6	Asia/Shanghai
 Longfeng	Hubei	13	N	61.862	30.38793N	109.50706E	448	6	Asia/Shanghai
 Long'e	Guizhou	13	N	16.928	25.80722N	109.2125E	210	5	Asia/Shanghai
 Longcheng	Gansu	13	N	25.055	35.00096N	105.97339E	1497	5	Asia/Shanghai
@@ -3940,15 +3990,17 @@ Longchang	Guizhou	13	N	18.563	26.66667N	107.91667E	999	5	Asia/Shanghai
 Licheng	Jiangsu	13	N	72.276	31.42813N	119.48353E	9	6	Asia/Shanghai
 Lixin	Gansu	13	N	16.753	34.91222N	105.08056E	1562	5	Asia/Shanghai
 Lixian	Gansu	13	N	58.3	34.19N	105.1725E	1418	6	Asia/Shanghai
+Liuyin	Chongqing	13	N	17.505	29.96207N	106.60996E	303	5	Asia/Shanghai
 Guankou	Hunan	13	N	1380	28.15861N	113.62709E	79	9	Asia/Shanghai
 Liuxin	Jiangsu	13	N	65.258	34.36861N	117.115E	38	6	Asia/Shanghai
 Liutuan	Shandong	13	N	48.469	36.93333N	119.38333E	7	5	Asia/Shanghai
 Puning	Guangdong	13	N	874.954	23.31072N	116.16869E	12	8	Asia/Shanghai
 Liuquan	Jiangsu	13	N	51.657	34.43417N	117.29833E	56	6	Asia/Shanghai
 Lishui	Zhejiang	13	N	451.418	28.46042N	119.91029E	72	7	Asia/Shanghai
+Lishi	Chongqing	13	N	66.62	29.07888N	106.262E	289	6	Asia/Shanghai
 Lintong	Shaanxi	13	N	75.882	34.37803N	109.20892E	425	6	Asia/Shanghai
 Liuzhou	Guangxi	13	N	1436.599	24.32405N	109.40698E	102	9	Asia/Shanghai
-Linyi	Shandong	13	N	2303.648	35.06306N	118.34278E	69	9	Asia/Shanghai
+Linyi	Shandong	13	N	2743.843	35.06306N	118.34278E	69	9	Asia/Shanghai
 Linxia Chengguanzhen	Gansu	13	N	274.466	35.60028N	103.20639E	1893	7	Asia/Shanghai
 Linxi	Hebei	13	N	100.316	39.71183N	118.44954E	46	7	Asia/Shanghai
 Linshui	Hebei	13	N	109.955	36.42472N	114.20472E	138	7	Asia/Shanghai
@@ -3962,12 +4014,16 @@ Linghe	Shandong	13	N	99.069	36.36417N	119.07694E	85	6	Asia/Shanghai
 Lingcheng	Jiangsu	13	N	53.841	33.81639N	118.11361E	20	6	Asia/Shanghai
 Beiliu	Guangxi	13	N	199.769	22.70722N	110.34917E	102	7	Asia/Shanghai
 Lincheng	Hainan	13	N	64.874	19.90778N	109.68583E	29	6	Asia/Shanghai
+Linfeng	Chongqing	13	N	23.868	29.891N	107.21971E	267	5	Asia/Shanghai
 Linfen	Shanxi	13	N	959.198	36.08889N	111.51889E	451	8	Asia/Shanghai
 Lincang	Yunnan	13	N	323.708	23.87972N	100.09455E	1483	7	Asia/Shanghai
 Xishan	Hunan	13	N	98.162	27.66667N	113.5E	69	6	Asia/Shanghai
 Liji	Jiangsu	13	N	39.691	33.76667N	117.78333E	25	5	Asia/Shanghai
+Ligezhuang	Shandong	13	N	65.714	36.35778N	120.14278E	7	6	Asia/Shanghai
 Lichuan	Hubei	13	N	120.587	30.3N	108.85E	1255	7	Asia/Shanghai
 Licheng	Guangdong	13	N	172.775	23.29549N	113.82465E	24	7	Asia/Shanghai
+Licha	Shandong	13	N	55.14	36.05722N	119.78333E	80	6	Asia/Shanghai
+Liaolan	Shandong	13	N	84.306	36.67444N	119.87528E	16	6	Asia/Shanghai
 Liaocheng	Shandong	13	N	1229.768	36.45064N	116.00247E	32	9	Asia/Shanghai
 Lianzhou	Guangdong	13	N	92.827	24.78186N	112.3712E	99	6	Asia/Shanghai
 Hepu	Guangxi	13	N	192.813	21.65921N	109.20011E	12	7	Asia/Shanghai
@@ -3976,6 +4032,7 @@ Wuwei	Gansu	13	N	1010.295	37.92672N	102.63202E	1542	9	Asia/Shanghai
 Liangzhai	Jiangsu	13	N	54.742	34.5N	116.75E	44	6	Asia/Shanghai
 Liangxiang	Beijing	13	N	76.744	39.73598N	116.13295E	47	6	Asia/Shanghai
 Liangshui	Gansu	13	N	27.281	33.43177N	104.80909E	1054	5	Asia/Shanghai
+Jiangbei	Chongqing	13	N	60.466	29.7283N	106.63506E	417	6	Asia/Shanghai
 Liancheng	Fujian	13	N	60.504	25.71826N	116.74892E	379	6	Asia/Shanghai
 Lianjiang	Guangdong	13	N	100.341	21.64673N	110.28172E	46	7	Asia/Shanghai
 Leshan	Sichuan	13	N	662.814	29.56227N	103.76386E	375	8	Asia/Shanghai
@@ -4011,6 +4068,7 @@ Jiyuan	Henan	13	N	242.143	35.09N	112.58E	152	7	Asia/Shanghai
 Jizhou	Hebei	13	N	362.013	37.56222N	115.55889E	22	7	Asia/Shanghai
 Jiushan	Shandong	13	N	44.42	36.19611N	118.465E	218	5	Asia/Shanghai
 Jiujiang	Jiangxi	13	N	1164.268	29.70475N	116.00206E	41	9	Asia/Shanghai
+Jiudian	Shandong	13	N	97.604	36.9918N	120.20412E	105	6	Asia/Shanghai
 Jishui	Henan	13	N	77.54	33.73333N	115.4E	41	6	Asia/Shanghai
 Qianzhou	Hunan	13	N	102.332	28.31925N	109.73346E	201	7	Asia/Shanghai
 Jinzhou	Liaoning	13	N	215.386	39.1N	121.71667E	8	7	Asia/Shanghai
@@ -4028,32 +4086,37 @@ Tianchang	Hebei	13	N	61.292	37.99806N	114.01556E	281	6	Asia/Shanghai
 Jingui	Ningxia Hui Autonomous Region	13	N	29.796	38.5N	106.41667E	1112	5	Asia/Shanghai
 Jingmen	Hubei	13	N	632.954	31.03361N	112.20472E	94	8	Asia/Shanghai
 Jingling	Hubei	13	N	224.871	30.65N	113.1E	30	7	Asia/Shanghai
+Jingguan	Chongqing	13	N	43.674	29.89545N	106.5639E	389	5	Asia/Shanghai
 Jingdezhen	Jiangxi	13	N	473.561	29.2947N	117.20789E	48	7	Asia/Shanghai
 Jinchang	Gansu	13	N	228.561	38.50062N	102.19379E	1553	7	Asia/Shanghai
 Jincheng	Shanxi	13	N	476.945	35.50222N	112.83278E	711	7	Asia/Shanghai
 Jinan	Shandong	13	R	4335.989	36.66833N	116.99722E	32	9	Asia/Shanghai
 Jimo	Shandong	13	N	70.733	36.38972N	120.46222E	25	6	Asia/Shanghai
-Jijiang	Chongqing	13	N	61.161	29.28993N	106.25001E	213	6	Asia/Shanghai
+Jijiang	Chongqing	13	N	196.787	29.28993N	106.25001E	213	7	Asia/Shanghai
 Jiexiu	Shanxi	13	N	77.178	37.02444N	111.9125E	756	6	Asia/Shanghai
 Jieshou	Anhui	13	N	141.993	33.26338N	115.36108E	42	7	Asia/Shanghai
 Jieshi	Guangdong	13	N	137.444	22.81027N	115.83058E	9	7	Asia/Shanghai
+Jielong	Chongqing	13	N	48.018	29.24946N	106.77663E	340	5	Asia/Shanghai
 Jiehu	Shandong	13	N	69.245	35.54278N	118.455E	117	6	Asia/Shanghai
 Jiazi	Guangdong	13	N	130.298	22.87932N	116.07318E	7	7	Asia/Shanghai
 Jiayue	Shandong	13	N	93.228	36.02361N	119.17611E	89	6	Asia/Shanghai
 Jiaxing	Zhejiang	13	N	1180	30.7522N	120.75E	8	9	Asia/Shanghai
 Jiawang	Jiangsu	13	N	133.861	34.43278N	117.44194E	31	7	Asia/Shanghai
+Jiasi	Chongqing	13	N	27.327	29.11569N	106.44691E	208	5	Asia/Shanghai
 Jiaozuo	Henan	13	N	865.413	35.23972N	113.23306E	138	8	Asia/Shanghai
 Jiaogong	Gansu	13	N	19.083	33.56547N	104.64637E	1196	5	Asia/Shanghai
-Jiaozhou	Shandong	13	N	165.026	36.28389N	120.00333E	10	7	Asia/Shanghai
+Jiaozhou	Shandong	13	N	619.266	36.28389N	120.00333E	10	8	Asia/Shanghai
 Ningde	Fujian	13	N	429.26	26.66167N	119.52278E	20	7	Asia/Shanghai
 Jian'ou	Fujian	13	N	59.187	27.04146N	118.31897E	116	6	Asia/Shanghai
 Jiangzhuang	Shandong	13	N	72.453	36.49444N	119.79417E	14	6	Asia/Shanghai
 Jiangyan	Jiangsu	13	N	70.375	32.50611N	120.14278E	9	6	Asia/Shanghai
 Jianguang	Jiangxi	13	N	61.469	28.19377N	115.7836E	31	6	Asia/Shanghai
+Jiangshan	Shandong	13	N	86.642	36.67806N	120.52917E	37	6	Asia/Shanghai
 Jiangping	Guangxi	13	N	42.985	21.6N	108.15E	4	5	Asia/Shanghai
 Jiangmen	Guangdong	13	N	1795.459	22.58333N	113.08333E	11	9	Asia/Shanghai
 Jiangluo	Gansu	13	N	19.204	33.90139N	105.82194E	1175	5	Asia/Shanghai
 Jiangkou	Fujian	13	N	59.902	25.48694N	119.19834E	10	6	Asia/Shanghai
+Jiangjia	Chongqing	13	N	16.518	29.39306N	106.81917E	324	5	Asia/Shanghai
 Yangjiang	Guangdong	13	N	1292.987	21.85563N	111.96272E	15	9	Asia/Shanghai
 Jiang'an	Sichuan	13	N	67.776	28.73335N	105.0683E	282	6	Asia/Shanghai
 Jianchang	Jiangxi	13	N	109.108	27.55831N	116.63978E	78	7	Asia/Shanghai
@@ -4103,6 +4166,7 @@ Honghe	Shandong	13	N	88.458	36.40278N	118.91806E	110	6	Asia/Shanghai
 Hezuo	Gansu	13	N	59.148	34.98556N	102.90944E	2898	6	Asia/Shanghai
 Heze	Shandong	13	N	1346.717	35.23929N	115.47358E	53	9	Asia/Shanghai
 Hechuan	Chongqing	13	N	97.575	29.99228N	106.26461E	222	6	Asia/Shanghai
+Hetoudian	Shandong	13	N	38.398	37.01837N	120.57372E	91	5	Asia/Shanghai
 Yiyang	Hunan	13	N	1249.807	28.58917N	112.32833E	25	9	Asia/Shanghai
 Hepo	Guangdong	13	N	131.238	23.43077N	115.82991E	41	7	Asia/Shanghai
 Hengyang	Hunan	13	N	1075.516	26.88946N	112.61888E	66	9	Asia/Shanghai
@@ -4112,6 +4176,7 @@ Hejiang	Sichuan	13	N	137.437	28.81161N	105.83359E	236	7	Asia/Shanghai
 Hefei	Anhui	13	R	5050	31.86389N	117.28083E	24	9	Asia/Shanghai
 Hede	Jiangsu	13	N	89.107	33.7722N	120.26176E	2	6	Asia/Shanghai
 Hecun	Hebei	13	N	83.009	36.53333N	114.11111E	247	6	Asia/Shanghai
+Hebian	Chongqing	13	N	20.037	29.65663N	106.19673E	332	5	Asia/Shanghai
 Hebi	Henan	13	N	634.721	35.89917N	114.1925E	138	8	Asia/Shanghai
 Heba	Gansu	13	N	32.538	33.93624N	105.21625E	1772	5	Asia/Shanghai
 Haomen	Qinghai	13	N	36.515	37.37575N	101.62199E	2865	5	Asia/Shanghai
@@ -4136,11 +4201,13 @@ Haikou	Yunnan	13	N	112.644	24.77985N	102.57548E	1909	7	Asia/Shanghai
 Haikou	Hainan	13	R	2873.358	20.04583N	110.34167E	14	9	Asia/Shanghai
 Guyuan	Ningxia Hui Autonomous Region	13	N	411.854	36.00667N	106.28083E	1740	7	Asia/Shanghai
 Guye	Hebei	13	N	41.484	39.73054N	118.44085E	44	5	Asia/Shanghai
+Guxian	Shandong	13	N	44.533	36.7341N	120.22558E	42	5	Asia/Shanghai
 Gupi	Jiangsu	13	N	48.748	34.11389N	117.88278E	26	5	Asia/Shanghai
 Guozhen	Shaanxi	13	N	85.415	34.36591N	107.35904E	551	6	Asia/Shanghai
 Gulin	Sichuan	13	N	116.527	28.04223N	105.81038E	506	7	Asia/Shanghai
 Guli	Zhejiang	13	N	536	28.88162N	120.03308E	121	8	Asia/Shanghai
 Guiyang	Guizhou	13	R	3037.159	26.58333N	106.71667E	1087	9	Asia/Shanghai
+Guixi	Chongqing	13	N	188.98	30.33355N	107.34545E	412	7	Asia/Shanghai
 Guiren	Jiangsu	13	N	57.446	33.66972N	118.18889E	22	6	Asia/Shanghai
 Guiping	Guangxi	13	N	71.066	23.39483N	110.07434E	50	6	Asia/Shanghai
 Guilin	Guangxi	13	N	1572.3	25.28022N	110.29639E	141	9	Asia/Shanghai
@@ -4154,7 +4221,9 @@ Guangshui	Hubei	13	N	154.771	31.6199N	113.9978E	83	7	Asia/Shanghai
 Guandu	Chongqing	13	N	42.766	30.95589N	109.84697E	309	5	Asia/Shanghai
 Gongmen	Gansu	13	N	23.1	34.94139N	106.29639E	1745	5	Asia/Shanghai
 Gongguan	Guangxi	13	N	96.492	21.8N	109.6E	21	6	Asia/Shanghai
+Gelan	Chongqing	13	N	55.938	30.03589N	107.11612E	334	6	Asia/Shanghai
 Gejiu	Yunnan	13	N	136.135	23.36085N	103.15372E	1708	7	Asia/Shanghai
+Gecheng	Chongqing	13	N	37.312	31.94856N	108.66073E	761	5	Asia/Shanghai
 Gaozuo	Jiangsu	13	N	43.419	33.90306N	118.03972E	20	5	Asia/Shanghai
 Gaozhou	Guangdong	13	N	292.164	21.91965N	110.85678E	28	7	Asia/Shanghai
 Gaoyou	Jiangsu	13	N	90.911	32.78933N	119.44182E	6	6	Asia/Shanghai
@@ -4162,7 +4231,9 @@ Gaoping	Sichuan	13	N	204.368	30.77576N	106.10294E	283	7	Asia/Shanghai
 Gaomi	Shandong	13	N	391.986	36.38333N	119.75278E	24	7	Asia/Shanghai
 Gaoliu	Shandong	13	N	67.339	36.8N	118.5E	41	6	Asia/Shanghai
 Gaoliu	Jiangsu	13	N	48.485	34.31667N	118.51667E	21	5	Asia/Shanghai
+Gaojia	Chongqing	13	N	43.944	30.02035N	107.86E	217	5	Asia/Shanghai
 Gaogou	Jiangsu	13	N	56.214	34.0175N	119.18861E	5	6	Asia/Shanghai
+Gao'an	Chongqing	13	N	49.218	30.29019N	107.46197E	398	5	Asia/Shanghai
 Ganzhou	Jiangxi	13	N	1977.253	25.84664N	114.9326E	117	9	Asia/Shanghai
 Gantang	Hunan	13	N	90	27.4375N	111.97306E	137	6	Asia/Shanghai
 Gantang	Hunan	13	N	24	26.71556N	109.76889E	321	5	Asia/Shanghai
@@ -4192,7 +4263,9 @@ Enshi	Hubei	13	N	279.185	30.3N	109.48333E	451	7	Asia/Shanghai
 Encheng	Guangdong	13	N	110.921	22.18659N	112.30424E	25	7	Asia/Shanghai
 Eman	Hainan	13	N	17.317	19.85723N	109.26271E	11	5	Asia/Shanghai
 Ehen Hudag	Inner Mongolia	13	N	16.798	39.21074N	101.66898E	1504	5	Asia/Shanghai
+Duzhou	Chongqing	13	N	51.888	29.87848N	107.0784E	320	6	Asia/Shanghai
 Duyun	Guizhou	13	N	198.516	26.26667N	107.51667E	815	7	Asia/Shanghai
+Dushi	Chongqing	13	N	26.879	29.15002N	106.53283E	275	5	Asia/Shanghai
 Dushan	Guizhou	13	N	80.045	25.83333N	107.53333E	992	6	Asia/Shanghai
 Duobao	Hubei	13	N	90.257	30.67N	112.68952E	36	6	Asia/Shanghai
 Dunhou	Jiangxi	13	N	94.445	27.05N	114.9E	65	6	Asia/Shanghai
@@ -4213,12 +4286,14 @@ Xinle	Hebei	13	N	99.347	38.34917N	114.66667E	80	6	Asia/Shanghai
 Dingzhou	Hebei	13	N	152.934	38.51306N	114.99556E	64	7	Asia/Shanghai
 Dingxi	Gansu	13	N	420.614	35.57088N	104.62303E	1908	7	Asia/Shanghai
 Dingtao	Shandong	13	N	58.206	35.07436N	115.56582E	53	6	Asia/Shanghai
+Dingjia	Chongqing	13	N	60.585	29.409N	106.14228E	339	6	Asia/Shanghai
 Dezhou	Shandong	13	N	679.535	37.44661N	116.36706E	25	8	Asia/Shanghai
 Deyang	Sichuan	13	N	735.07	31.13019N	104.38198E	501	8	Asia/Shanghai
 Deqing	Zhejiang	13	N	87.576	30.54485N	119.9599E	9	6	Asia/Shanghai
 Dengzhou	Shandong	13	N	85.279	37.80822N	120.75908E	23	6	Asia/Shanghai
 Dengzhou	Henan	13	N	285.032	32.68222N	112.08194E	119	7	Asia/Shanghai
 Songyang	Henan	13	N	62.375	34.45528N	113.02806E	379	6	Asia/Shanghai
+Degan	Chongqing	13	N	83.95	29.27846N	106.23157E	205	6	Asia/Shanghai
 Liping	Guizhou	13	N	82.71	26.23111N	109.13139E	563	6	Asia/Shanghai
 Dazhong	Jiangsu	13	N	84.323	33.19973N	120.4578E	7	6	Asia/Shanghai
 Zhangjiajie	Hunan	13	N	441.804	29.12944N	110.47833E	174	7	Asia/Shanghai
@@ -4240,12 +4315,15 @@ Dangjiang	Guangxi	13	N	45.408	21.65N	109.11667E	7	5	Asia/Shanghai
 Tanchang Chengguanzhen	Gansu	13	N	31.861	34.04462N	104.39464E	1722	5	Asia/Shanghai
 Xincheng	Henan	13	N	65.411	33.63333N	115.18333E	43	6	Asia/Shanghai
 Damiao	Jiangsu	13	N	77.179	34.26411N	117.36379E	36	6	Asia/Shanghai
+Dalu	Chongqing	13	N	48.145	29.72984N	106.2177E	387	5	Asia/Shanghai
 Daliang	Guangdong	13	N	210.411	22.84067N	113.2503E	4	7	Asia/Shanghai
 Dalian	Liaoning	13	N	4913.879	38.91222N	121.60222E	33	9	Asia/Shanghai
 Dali	Yunnan	13	N	235.305	25.58474N	100.21229E	1977	7	Asia/Shanghai
 Dahuangshan	Jiangsu	13	N	44.771	34.29341N	117.34436E	34	5	Asia/Shanghai
 Dafengdong	Guizhou	13	N	26.46	26.71194N	107.81139E	895	5	Asia/Shanghai
 Dachang	Chongqing	13	N	36.217	31.26861N	109.8021E	151	5	Asia/Shanghai
+Cuijiaji	Shandong	13	N	47.651	36.62528N	119.71333E	13	5	Asia/Shanghai
+Cizhu	Chongqing	13	N	22.996	29.9854N	106.73982E	758	5	Asia/Shanghai
 Chuzhou	Anhui	13	N	782.671	32.32194N	118.29778E	24	8	Asia/Shanghai
 Yangchun	Guangdong	13	N	153.547	22.16667N	111.78333E	22	7	Asia/Shanghai
 Yiwu	Zhejiang	13	N	1481.384	29.31506N	120.07676E	84	9	Asia/Shanghai
@@ -4256,7 +4334,9 @@ Chizhou	Anhui	13	N	615.274	30.66134N	117.47783E	21	8	Asia/Shanghai
 Chenzhou	Hunan	13	N	822.534	25.8N	113.03333E	180	8	Asia/Shanghai
 Chengyang	Shandong	13	N	66.588	35.57944N	118.83278E	112	6	Asia/Shanghai
 Chengxian Chengguanzhen	Gansu	13	N	69.427	33.74775N	105.73294E	964	6	Asia/Shanghai
-Jiangyin	Jiangsu	13	N	1013.67	31.91102N	120.26302E	7	9	Asia/Shanghai
+Chengxi	Chongqing	13	N	41.321	30.20921N	107.2589E	408	5	Asia/Shanghai
+Chengjiang	Chongqing	13	N	28.056	29.87194N	106.38467E	252	5	Asia/Shanghai
+Jiangyin	Jiangsu	13	N	1779.515	31.91102N	120.26302E	7	9	Asia/Shanghai
 Chenggu	Shaanxi	13	N	116.375	33.14917N	107.32583E	485	7	Asia/Shanghai
 Chengdu	Sichuan	13	R	13568.357	30.66667N	104.06667E	499	9	Asia/Shanghai
 Chenghua	Guangdong	13	N	152.453	23.46132N	116.77007E	13	7	Asia/Shanghai
@@ -4283,6 +4363,7 @@ Caoqiao	Jiangsu	13	N	65.243	34.3405N	118.11038E	32	6	Asia/Shanghai
 Caohe	Hubei	13	N	67.37	30.2297N	115.43346E	27	6	Asia/Shanghai
 Weining	Guizhou	13	N	56.744	26.85N	104.23333E	2169	6	Asia/Shanghai
 Cangzhou	Hebei	13	N	527.681	38.31667N	116.86667E	10	8	Asia/Shanghai
+Caijia	Chongqing	13	N	43.922	28.90889N	106.3404E	330	5	Asia/Shanghai
 Caidian	Hubei	13	N	71.891	30.58333N	114.03333E	24	6	Asia/Shanghai
 Buhe	Hubei	13	N	106.347	30.28757N	112.22979E	39	7	Asia/Shanghai
 Bozhou	Anhui	13	N	1409.436	33.87722N	115.77028E	40	9	Asia/Shanghai
@@ -4290,6 +4371,7 @@ Botou	Hebei	13	N	63.045	38.06667N	116.5666E	17	6	Asia/Shanghai
 Boshan	Shandong	13	N	153.596	36.48333N	117.83333E	368	7	Asia/Shanghai
 Baise	Guangxi	13	N	686.078	23.89013N	106.62684E	144	8	Asia/Shanghai
 Biyang	Anhui	13	N	36.905	29.92885N	117.94638E	203	5	Asia/Shanghai
+Bishan	Chongqing	13	N	204.702	29.59491N	106.22476E	283	7	Asia/Shanghai
 Binzhou	Shandong	13	N	682.717	37.36667N	118.01667E	14	8	Asia/Shanghai
 Bikou	Gansu	13	N	16.247	32.74583N	105.24139E	658	5	Asia/Shanghai
 Bijie	Guizhou	13	N	1137.383	27.30193N	105.28627E	1471	9	Asia/Shanghai
@@ -4303,22 +4385,26 @@ Beijing	Beijing	13	C	18960.744	39.9075N	116.39723E	49	9	Asia/Shanghai
 Beihai	Guangxi	13	N	525.329	21.48349N	109.11549E	-9999	8	Asia/Shanghai
 Beidao	Gansu	13	N	74.767	34.56861N	105.89333E	1087	6	Asia/Shanghai
 Beidaihehaibin	Hebei	13	N	66	39.82222N	119.51806E	29	6	Asia/Shanghai
-Beibei	Chongqing	13	N	112.019	29.82739N	106.43645E	237	7	Asia/Shanghai
+Beibei	Chongqing	13	N	247.702	29.82739N	106.43645E	237	7	Asia/Shanghai
 Bayiji	Jiangsu	13	N	65.83	34.26667N	117.68333E	27	6	Asia/Shanghai
 Bayan Hot	Inner Mongolia	13	N	94.445	38.83861N	105.66861E	1529	6	Asia/Shanghai
 Shuanglong	Chongqing	13	N	18.646	31.19494N	109.88054E	233	5	Asia/Shanghai
+Batang	Chongqing	13	N	23.851	29.83537N	106.29271E	310	5	Asia/Shanghai
 Basuo	Hainan	13	N	444.458	19.0939N	108.65456E	10	7	Asia/Shanghai
 Bashan	Jiangxi	13	N	103.748	27.76823N	116.05017E	63	7	Asia/Shanghai
 Baoying	Jiangsu	13	N	80.292	33.22917N	119.30917E	4	6	Asia/Shanghai
 Shaoyang	Hunan	13	N	753.194	27.23818N	111.46214E	243	8	Asia/Shanghai
 Langzhong	Sichuan	13	N	60.542	31.55037N	105.99381E	362	6	Asia/Shanghai
+Baoluan	Chongqing	13	N	21.417	29.76416N	107.67834E	543	5	Asia/Shanghai
 Baoding	Hebei	13	N	2739.887	38.85111N	115.49028E	17	9	Asia/Shanghai
 Balu	Jiangsu	13	N	38.894	34.18868N	117.91265E	23	5	Asia/Shanghai
 Baiyin	Gansu	13	N	294.4	36.54696N	104.17023E	1723	7	Asia/Shanghai
 Baixi	Sichuan	13	N	88.251	28.6997N	104.54917E	296	6	Asia/Shanghai
 Baituo	Gansu	13	N	15.555	34.85111N	106.00167E	1585	5	Asia/Shanghai
+Baisha	Chongqing	13	N	115.761	29.06226N	106.1189E	233	7	Asia/Shanghai
 Baisha	Guangxi	13	N	89.759	21.71667N	109.68333E	15	6	Asia/Shanghai
 Baimajing	Hainan	13	N	59.585	19.71195N	109.21801E	9	6	Asia/Shanghai
+Bailin	Chongqing	13	N	38.564	28.73599N	106.46043E	646	5	Asia/Shanghai
 Baihua	Sichuan	13	N	41.574	29.09422N	104.60852E	356	5	Asia/Shanghai
 Baihecun	Guangxi	13	N	63.629	22.11321N	107.23592E	131	6	Asia/Shanghai
 Shangyu	Zhejiang	13	N	770	30.01556N	120.87111E	13	8	Asia/Shanghai
@@ -4342,13 +4428,20 @@ Anbu	Guangdong	13	N	162.964	23.44895N	116.68092E	15	7	Asia/Shanghai
 Ahu	Jiangsu	13	N	55.298	34.37664N	118.60308E	29	6	Asia/Shanghai
 Zhonghe	Hainan	13	N	31.646	19.74276N	109.34492E	10	5	Asia/Shanghai
 Jiangyou	Sichuan	13	N	127.225	31.76667N	104.71667E	527	7	Asia/Shanghai
-Suzhou	Jiangsu	13	N	4330	31.30408N	120.59538E	10	9	Asia/Shanghai
+Suzhou	Jiangsu	13	N	6715.559	31.30408N	120.59538E	10	9	Asia/Shanghai
 Zhoushan	Zhejiang	13	N	882.932	29.98869N	122.20488E	2	8	Asia/Shanghai
 Dacheng	Hainan	13	N	84.62	19.50927N	109.39275E	133	6	Asia/Shanghai
 Wuduan	Jiangsu	13	N	41.803	34.57444N	117.09528E	35	5	Asia/Shanghai
 Guanshan	Jiangsu	13	N	51.086	33.79833N	117.86639E	21	6	Asia/Shanghai
 Mudu	Jiangsu	13	N	61.902	31.25597N	120.51857E	9	6	Asia/Shanghai
 Songling	Jiangsu	13	N	77.566	31.1933N	120.71758E	5	6	Asia/Shanghai
+Yongxi	Chongqing	13	N	15.213	29.73853N	105.97941E	274	5	Asia/Shanghai
+Caijiagang	Chongqing	13	N	35.564	29.74248N	106.47508E	356	5	Asia/Shanghai
+Tieshan	Chongqing	13	N	15.669	29.68947N	105.501E	397	5	Asia/Shanghai
+Baoxing	Chongqing	13	N	18.963	29.62173N	105.69265E	375	5	Asia/Shanghai
+Daxing	Chongqing	13	N	40.068	29.55605N	106.16002E	342	5	Asia/Shanghai
+Guangpu	Chongqing	13	N	18.002	29.33567N	106.14521E	272	5	Asia/Shanghai
+Wutan	Chongqing	13	N	29.206	29.25696N	106.0629E	254	5	Asia/Shanghai
 Kaitang	Guizhou	13	N	18.394	26.72028N	108.12972E	749	5	Asia/Shanghai
 Bibo	Guizhou	13	N	18.121	26.53083N	107.63139E	914	5	Asia/Shanghai
 Jiuchao	Guizhou	13	N	18.314	26.09083N	108.76528E	649	5	Asia/Shanghai
@@ -4375,7 +4468,22 @@ Xinxing	Gansu	13	N	97.483	34.77597N	105.32216E	1295	6	Asia/Shanghai
 Yebao	Gansu	13	N	30.091	34.93722N	105.64667E	1240	5	Asia/Shanghai
 Yongping	Gansu	13	N	18.279	34.28994N	105.27225E	1538	5	Asia/Shanghai
 Zhongshan	Gansu	13	N	27.147	34.93806N	105.8775E	1814	5	Asia/Shanghai
+Shima	Chongqing	13	N	69.881	28.98773N	105.92441E	407	6	Asia/Shanghai
+Banan	Chongqing	13	N	508.703	29.37861N	106.54E	216	8	Asia/Shanghai
+Dianbu	Shandong	13	N	52.613	36.70167N	120.35111E	38	6	Asia/Shanghai
+Yunshan	Shandong	13	N	52.249	36.82417N	120.22611E	53	6	Asia/Shanghai
 Xiasi	Sichuan	13	N	32.4	32.28998N	105.51326E	578	5	Asia/Shanghai
+Ciyun	Chongqing	13	N	18.551	29.07541N	106.2056E	290	5	Asia/Shanghai
+Xiaba	Chongqing	13	N	17.486	29.11684N	106.51006E	271	5	Asia/Shanghai
+Anlan	Chongqing	13	N	31.546	29.24722N	106.59417E	377	5	Asia/Shanghai
+Shilong	Chongqing	13	N	20.431	29.28222N	106.89806E	565	5	Asia/Shanghai
+Nanpeng	Chongqing	13	N	46.786	29.33472N	106.65222E	345	5	Asia/Shanghai
+Huimin	Chongqing	13	N	23.017	29.46194N	106.70472E	295	5	Asia/Shanghai
+Ersheng	Chongqing	13	N	16.461	29.46583N	106.77083E	287	5	Asia/Shanghai
+Yufengshan	Chongqing	13	N	23.917	29.71975N	106.72342E	568	5	Asia/Shanghai
+Tongjiaxi	Chongqing	13	N	21.82	29.68497N	106.44442E	207	5	Asia/Shanghai
+Dasheng	Chongqing	13	N	21.85	29.89029N	106.89727E	203	5	Asia/Shanghai
+Honghu	Chongqing	13	N	30.426	30.00043N	106.95204E	283	5	Asia/Shanghai
 Lanyang	Hainan	13	N	23.711	19.46141N	109.6604E	199	5	Asia/Shanghai
 Guangcun	Hainan	13	N	27.803	19.6405N	109.353E	37	5	Asia/Shanghai
 Sandu	Hainan	13	N	76.757	19.7894N	109.215E	28	6	Asia/Shanghai
@@ -4390,11 +4498,12 @@ Wuyishan	Fujian	13	N	137.133	27.75995N	118.03066E	224	7	Asia/Shanghai
 Yueyang	Hunan	13	N	991.465	29.37455N	113.09481E	43	8	Asia/Shanghai
 Bojia	Hunan	13	N	25	26.46722N	111.96806E	89	5	Asia/Shanghai
 Santangpu	Hunan	13	N	58	27.40556N	111.98694E	125	6	Asia/Shanghai
+Yantai	Chongqing	13	N	29.695	30.1467N	107.3196E	391	5	Asia/Shanghai
 Hedong	Guangdong	13	N	101.825	23.9196N	115.7801E	113	7	Asia/Shanghai
-Zhenlai	Jilin	13	N	67.76	45.84955N	123.2973E	135	6	Asia/Shanghai
+Zhenlai	Jilin	13	N	67.76	45.84963N	123.19791E	139	6	Asia/Shanghai
 Shuangliao	Jilin	13	N	93.666	43.51067N	123.50069E	115	6	Asia/Shanghai
 Zhaozhou	Heilongjiang	13	N	62.373	45.68333N	125.31667E	152	6	Asia/Shanghai
-Zhaoyuan	Heilongjiang	13	N	59.37	45.5N	125.13333E	127	6	Asia/Shanghai
+Zhaoyuan	Heilongjiang	13	N	59.37	45.51971N	125.07633E	129	6	Asia/Shanghai
 Zhaodong	Heilongjiang	13	N	154.406	46.05223N	125.9552E	143	7	Asia/Shanghai
 Zhangjiakou	Hebei	13	N	692.602	40.78341N	114.87139E	744	8	Asia/Shanghai
 Zhalantun	Inner Mongolia	13	N	132.224	48.00945N	122.73651E	320	7	Asia/Shanghai
@@ -4419,20 +4528,20 @@ Xiaoshi	Liaoning	13	N	68.994	41.29711N	124.12092E	206	6	Asia/Shanghai
 Wuchang	Heilongjiang	13	N	94.786	44.92754N	127.16039E	190	6	Asia/Shanghai
 Wangqing	Jilin	13	N	88.732	43.32179N	129.76342E	235	6	Asia/Shanghai
 Hepingjie	Jilin	13	N	65.298	42.05972N	126.91583E	730	6	Asia/Shanghai
-Wangkui	Heilongjiang	13	N	69.915	46.83283N	126.47768E	176	6	Asia/Shanghai
+Wangkui	Heilongjiang	13	N	69.915	46.83214N	126.47657E	178	6	Asia/Shanghai
 Ulanhot	Inner Mongolia	13	N	165.846	46.08333N	122.08333E	303	7	Asia/Shanghai
 Tumen	Jilin	13	N	78.719	42.96562N	129.84199E	98	6	Asia/Shanghai
 Tongliao	Inner Mongolia	13	N	261.11	43.6125N	122.26528E	182	7	Asia/Shanghai
 Tonghua	Jilin	13	N	510	41.71972N	125.92639E	375	8	Asia/Shanghai
 Tieling	Liaoning	13	N	333.907	42.29306N	123.84139E	64	7	Asia/Shanghai
-Tieli	Heilongjiang	13	N	109.636	46.98043N	128.04497E	214	7	Asia/Shanghai
+Tieli	Heilongjiang	13	N	109.636	46.97544N	128.04804E	209	7	Asia/Shanghai
 Guangming	Jilin	13	N	112.819	45.33333N	122.78333E	150	7	Asia/Shanghai
 Tailai	Heilongjiang	13	N	66.623	46.39004N	123.40849E	141	6	Asia/Shanghai
 Dorbod	Heilongjiang	13	N	55.316	46.86135N	124.442E	146	6	Asia/Shanghai
 Tahe	Heilongjiang	13	N	60.874	52.32148N	124.69761E	353	6	Asia/Shanghai
 Sujiatun	Liaoning	13	N	148.113	41.65917N	123.33917E	40	7	Asia/Shanghai
 Suiling	Heilongjiang	13	N	57.124	47.23489N	127.10769E	164	6	Asia/Shanghai
-Suihua	Heilongjiang	13	N	252.245	46.63954N	126.99508E	183	7	Asia/Shanghai
+Suihua	Heilongjiang	13	N	252.245	46.64814N	126.96656E	179	7	Asia/Shanghai
 Suifenhe	Heilongjiang	13	N	15.183	44.39982N	131.14775E	441	5	Asia/Shanghai
 Songjianghe	Jilin	13	N	67.672	42.1859N	127.47895E	737	6	Asia/Shanghai
 Siping	Jilin	13	N	555.609	43.16143N	124.37785E	176	8	Asia/Shanghai
@@ -4458,7 +4567,7 @@ Panshi	Jilin	13	N	80.2	42.94222N	126.05611E	323	6	Asia/Shanghai
 Panshan	Liaoning	13	N	625.04	41.18806N	122.04944E	9	8	Asia/Shanghai
 Nianzishan	Heilongjiang	13	N	62.131	47.51344N	122.88788E	231	6	Asia/Shanghai
 Nenjiang	Heilongjiang	13	N	87.236	49.17414N	125.21774E	229	6	Asia/Shanghai
-Nehe	Heilongjiang	13	N	108.253	48.48333N	124.83333E	197	7	Asia/Shanghai
+Nehe	Heilongjiang	13	N	108.253	48.4793N	124.87016E	206	7	Asia/Shanghai
 Nantai	Liaoning	13	N	56.478	40.9241N	122.80437E	34	6	Asia/Shanghai
 Nanpiao	Liaoning	13	N	157.044	41.09822N	120.74792E	98	7	Asia/Shanghai
 Lianhe	Heilongjiang	13	N	121.367	47.13333N	129.27426E	173	7	Asia/Shanghai
@@ -4473,7 +4582,7 @@ Longjing	Jilin	13	N	117.185	42.77131N	129.42307E	245	7	Asia/Shanghai
 Longjiang	Heilongjiang	13	N	106.384	47.33601N	123.196E	182	7	Asia/Shanghai
 Longfeng	Heilongjiang	13	N	152.074	46.53168N	125.1038E	147	7	Asia/Shanghai
 Liuhe	Jilin	13	N	66.975	42.28473N	125.74544E	355	6	Asia/Shanghai
-Lishu	Jilin	13	N	61.584	43.30472N	124.32778E	168	6	Asia/Shanghai
+Lishu	Jilin	13	N	61.584	43.30727N	124.33371E	165	6	Asia/Shanghai
 Linkou	Heilongjiang	13	N	77.754	45.2762N	130.27332E	286	6	Asia/Shanghai
 Linjiang	Jilin	13	N	69.149	41.80694N	126.90778E	339	6	Asia/Shanghai
 Lingyuan	Liaoning	13	N	91.418	41.24N	119.40111E	394	6	Asia/Shanghai
@@ -4481,7 +4590,7 @@ Lingdong	Heilongjiang	13	N	83.636	46.55428N	131.14493E	165	6	Asia/Shanghai
 Liaozhong	Liaoning	13	N	54.691	41.50611N	122.72417E	16	6	Asia/Shanghai
 Liaoyuan	Jilin	13	N	465.249	42.90361N	125.13583E	263	7	Asia/Shanghai
 Liaoyang	Liaoning	13	N	687.89	41.27194N	123.17306E	33	8	Asia/Shanghai
-Lanxi	Heilongjiang	13	N	72.528	46.25785N	126.28269E	164	6	Asia/Shanghai
+Lanxi	Heilongjiang	13	N	72.528	46.25773N	126.28065E	152	6	Asia/Shanghai
 Langxiang	Heilongjiang	13	N	57.318	46.94985N	128.86849E	266	6	Asia/Shanghai
 Langtoucun	Liaoning	13	N	59.046	40.04068N	124.33525E	7	6	Asia/Shanghai
 Kuandian	Liaoning	13	N	70.867	40.72861N	124.78472E	281	6	Asia/Shanghai
@@ -4503,7 +4612,7 @@ Jiagedaqi	Inner Mongolia	13	N	135.76	50.41667N	124.11667E	381	7	Asia/Shanghai
 Hushitai	Liaoning	13	N	61.979	41.94175N	123.50266E	70	6	Asia/Shanghai
 Hunchun	Jilin	13	N	77.028	42.8675N	130.35806E	42	6	Asia/Shanghai
 Hulan Ergi	Heilongjiang	13	N	265.344	47.20417N	123.63333E	152	7	Asia/Shanghai
-Hulan	Heilongjiang	13	N	109.104	45.98333N	126.6E	128	7	Asia/Shanghai
+Hulan	Heilongjiang	13	N	109.104	45.89326N	126.57836E	132	7	Asia/Shanghai
 Huinan	Jilin	13	N	66.315	42.6225N	126.26139E	315	6	Asia/Shanghai
 Huanren	Liaoning	13	N	66.147	41.26472N	125.36667E	269	6	Asia/Shanghai
 Huangnihe	Jilin	13	N	54.959	43.55833N	128.02389E	490	6	Asia/Shanghai
@@ -4573,7 +4682,7 @@ Baoqing	Heilongjiang	13	N	62.991	46.32452N	132.1897E	94	6	Asia/Shanghai
 Muling	Heilongjiang	13	N	66.17	44.91647N	130.51707E	259	6	Asia/Shanghai
 Baishishan	Jilin	13	N	56.992	43.58333N	127.56667E	348	6	Asia/Shanghai
 Baiquan	Heilongjiang	13	N	70.472	47.60659N	126.08231E	226	6	Asia/Shanghai
-Baicheng	Jilin	13	N	316.97	45.60746N	122.82076E	152	7	Asia/Shanghai
+Baicheng	Jilin	13	N	316.97	45.61751N	122.83302E	150	7	Asia/Shanghai
 Baishan	Jilin	13	N	183.88	41.93853N	126.41965E	471	7	Asia/Shanghai
 Anshan	Liaoning	13	N	1450	41.12361N	122.99E	55	9	Asia/Shanghai
 Anda	Heilongjiang	13	N	181.271	46.44867N	125.30161E	143	7	Asia/Shanghai
@@ -4590,7 +4699,7 @@ Panzhihua	Sichuan	13	N	787.177	26.58509N	101.71276E	1101	8	Asia/Shanghai
 Taifu	Sichuan	13	N	58.663	28.98198N	105.63702E	390	6	Asia/Shanghai
 Zhongshan	Guangdong	13	N	3841.873	22.52306N	113.37912E	9	9	Asia/Shanghai
 Tongchuan	Shaanxi	13	N	417.74	34.8988N	108.95056E	711	7	Asia/Shanghai
-Changshu	Jiangsu	13	N	1047.7	31.64615N	120.74221E	9	9	Asia/Shanghai
+Changshu	Jiangsu	13	N	1677.05	31.64615N	120.74221E	9	9	Asia/Shanghai
 Shixing	Guangdong	13	N	72.996	24.94824N	114.06572E	106	6	Asia/Shanghai
 Jiashan	Zhejiang	13	N	137.112	30.84918N	120.92583E	7	7	Asia/Shanghai
 Fenghuang	Hunan	13	N	370	27.93557N	109.59961E	449	7	Asia/Shanghai
@@ -4643,12 +4752,57 @@ Futian	Chongqing	13	N	32.34	31.22201N	109.71068E	313	5	Asia/Shanghai
 Baidi	Chongqing	13	N	25.965	31.05761N	109.59088E	196	5	Asia/Shanghai
 Caotang	Chongqing	13	N	29.647	31.09023N	109.62397E	259	5	Asia/Shanghai
 Taizhou	Zhejiang	13	N	1485.502	28.66266N	121.43312E	15	9	Asia/Shanghai
+Caohui	Chongqing	13	N	21.028	30.39733N	107.46953E	391	5	Asia/Shanghai
+Xinmin	Chongqing	13	N	28.033	30.39759N	107.3895E	402	5	Asia/Shanghai
+Changlong	Chongqing	13	N	16.605	30.30618N	107.41296E	386	5	Asia/Shanghai
+Yong'an	Chongqing	13	N	26.39	30.3531N	107.51289E	409	5	Asia/Shanghai
+Pushun	Chongqing	13	N	21.94	30.47241N	107.60326E	424	5	Asia/Shanghai
+Gangjia	Chongqing	13	N	19.072	30.22055N	107.50403E	403	5	Asia/Shanghai
+Gaofeng	Chongqing	13	N	20.747	30.21968N	107.40788E	376	5	Asia/Shanghai
+Pingshan	Chongqing	13	N	29.409	30.09655N	107.42439E	460	5	Asia/Shanghai
+Baijia	Chongqing	13	N	19.133	30.01704N	107.32576E	518	5	Asia/Shanghai
+Baohe	Chongqing	13	N	18.112	30.06084N	107.70172E	533	5	Asia/Shanghai
+Dongjia	Chongqing	13	N	18.727	30.22352N	107.70574E	447	5	Asia/Shanghai
+Huwei	Chongqing	13	N	16.951	29.90565N	107.63853E	566	5	Asia/Shanghai
+Sanhe	Chongqing	13	N	140.954	29.86864N	107.73027E	224	7	Asia/Shanghai
+Longkong	Chongqing	13	N	19.435	30.04477N	107.9149E	354	5	Asia/Shanghai
+Longhe	Chongqing	13	N	35.701	29.83957N	107.98508E	467	5	Asia/Shanghai
 Qianjiang	Chongqing	13	N	203.682	29.53284N	108.77478E	582	7	Asia/Shanghai
+Yunji	Chongqing	13	N	27.564	29.91943N	107.34041E	455	5	Asia/Shanghai
+Changshouhu	Chongqing	13	N	37.839	29.90536N	107.23789E	346	5	Asia/Shanghai
+Haitang	Chongqing	13	N	24.252	30.17173N	107.22991E	396	5	Asia/Shanghai
+Shiyan	Chongqing	13	N	48.193	30.08345N	107.17221E	396	5	Asia/Shanghai
+Longhe	Chongqing	13	N	35.561	30.01753N	107.18044E	405	5	Asia/Shanghai
+Fengcheng	Chongqing	13	N	175.576	29.82587N	107.06019E	260	7	Asia/Shanghai
+Jiangnan	Chongqing	13	N	21.509	29.79313N	107.03715E	207	5	Asia/Shanghai
+Bake	Chongqing	13	N	36.698	29.90059N	107.0229E	331	5	Asia/Shanghai
+Dawan	Chongqing	13	N	22.484	30.01963N	106.82023E	351	5	Asia/Shanghai
+Gulu	Chongqing	13	N	18.669	29.83885N	106.7426E	507	5	Asia/Shanghai
+Lijia	Chongqing	13	N	15.923	29.67878N	106.49312E	351	5	Asia/Shanghai
+Shuangfengqiao	Chongqing	13	N	67.717	29.71859N	106.62712E	449	6	Asia/Shanghai
+Huixing	Chongqing	13	N	186.972	29.68403N	106.61486E	463	7	Asia/Shanghai
+Cuiyun	Chongqing	13	N	18.636	29.68817N	106.58852E	432	5	Asia/Shanghai
+Wangjia	Chongqing	13	N	15.451	29.76716N	106.69812E	392	5	Asia/Shanghai
+Tianfu	Chongqing	13	N	30.98	29.87405N	106.49816E	470	5	Asia/Shanghai
+Fuxing	Chongqing	13	N	33.621	29.81905N	106.55714E	300	5	Asia/Shanghai
+Dongyang	Chongqing	13	N	40.143	29.83291N	106.45066E	212	5	Asia/Shanghai
+Longfeng	Chongqing	13	N	33.981	29.81527N	106.42906E	212	5	Asia/Shanghai
+Baoding	Chongqing	13	N	17.591	29.7488N	105.75843E	383	5	Asia/Shanghai
+Zhifeng	Chongqing	13	N	28.467	29.6544N	105.78416E	372	5	Asia/Shanghai
+Shiwan	Chongqing	13	N	16.103	29.61475N	105.89463E	285	5	Asia/Shanghai
+Yulong	Chongqing	13	N	16.072	29.54615N	105.81044E	380	5	Asia/Shanghai
+Shuanglu	Chongqing	13	N	26.582	29.48543N	105.7629E	389	5	Asia/Shanghai
+Tangxiang	Chongqing	13	N	66.325	29.70226N	105.72363E	378	6	Asia/Shanghai
+Qinggang	Chongqing	13	N	78.582	29.4677N	106.23618E	281	6	Asia/Shanghai
+Jianlong	Chongqing	13	N	18.151	29.3586N	106.18522E	276	5	Asia/Shanghai
+Shuangfu	Chongqing	13	N	47.962	29.41359N	106.27014E	356	5	Asia/Shanghai
+Zhiping	Chongqing	13	N	36.68	29.25831N	106.35856E	231	5	Asia/Shanghai
 Wenshan City	Yunnan	13	N	450	23.36306N	104.25047E	1257	7	Asia/Shanghai
 Tuanbao	Hubei	13	N	59.58	30.33675N	109.13465E	999	6	Asia/Shanghai
 Bole	Xinjiang	13	N	235.585	44.89334N	82.06993E	509	7	Asia/Shanghai
 Liupanshui	Guizhou	13	N	1320.825	26.59444N	104.83333E	1799	9	Asia/Shanghai
 Huanggang	Hubei	13	N	366.769	30.45143N	114.87035E	46	7	Asia/Shanghai
+Maliuzui	Chongqing	13	N	18.847	29.69286N	106.94399E	184	5	Asia/Shanghai
 Anxiang	Henan	13	N	38.345	38.38339N	114.54046E	101	5	Asia/Shanghai
 Mugala	Xinjiang	13	N	30.179	36.8576N	81.66844E	1432	5	Asia/Urumqi
 Xingning	Guangdong	13	N	274.499	24.1483N	115.72272E	122	7	Asia/Shanghai
@@ -4671,6 +4825,7 @@ Taoyuan	Yunnan	13	N	34.655	26.2283N	100.56E	1219	5	Asia/Shanghai
 Wanghong	Ningxia Hui Autonomous Region	13	N	30.943	38.2125N	106.225E	1117	5	Asia/Shanghai
 Hongguang Qidui	Ningxia Hui Autonomous Region	13	N	17.409	38.73322N	106.28721E	1117	5	Asia/Shanghai
 Linhe	Ningxia Hui Autonomous Region	13	N	16.723	38.3214N	106.368E	1122	5	Asia/Shanghai
+Sansheng	Chongqing	13	N	19.305	29.89256N	106.6265E	317	5	Asia/Shanghai
 Gongqingcheng	Jiangxi	13	N	47.284	29.24915N	115.80953E	30	5	Asia/Shanghai
 Xiping	Gansu	13	N	15.165	34.6057N	105.115E	2229	5	Asia/Shanghai
 Xuzhou	Jiangsu	13	N	1253.991	34.20442N	117.28386E	35	9	Asia/Shanghai
@@ -4820,6 +4975,27 @@ Buzhake	Xinjiang	13	N	27.137	37.06568N	79.79997E	1406	5	Asia/Urumqi
 Yisilamu'awati	Xinjiang	13	N	19.828	37.58491N	80.18401E	1247	5	Asia/Urumqi
 Akesalayi	Xinjiang	13	N	27.352	37.1692N	79.68984E	1352	5	Asia/Urumqi
 Jiahanbage	Xinjiang	13	N	24.524	37.19652N	79.70572E	1341	5	Asia/Urumqi
+Ka'ersai	Xinjiang	13	N	40.892	37.48419N	79.59562E	1284	5	Asia/Urumqi
+Kuiya	Xinjiang	13	N	43.212	37.29601N	79.63575E	1319	5	Asia/Urumqi
+Kuoyiqi	Xinjiang	13	N	26.346	37.35453N	79.72101E	1317	5	Asia/Urumqi
+Manglai	Xinjiang	13	N	23.408	37.27516N	79.67807E	1333	5	Asia/Urumqi
+Puqiakeqi	Xinjiang	13	N	35.142	37.31739N	79.70532E	1324	5	Asia/Urumqi
+Tuohula	Xinjiang	13	N	18.8	37.24227N	79.69283E	1334	5	Asia/Urumqi
+Tuwaite	Xinjiang	13	N	24.685	37.34488N	79.7681E	1320	5	Asia/Urumqi
+Wu'erqi	Xinjiang	13	N	16.4	37.32019N	79.55926E	1290	5	Asia/Urumqi
+Yawa	Xinjiang	13	N	33.949	37.4119N	79.51429E	1299	5	Asia/Urumqi
+Zhawa	Xinjiang	13	N	52.165	37.21421N	79.62897E	1335	6	Asia/Urumqi
+Dazeshan	Shandong	13	N	60.034	36.98874N	119.92224E	78	6	Asia/Shanghai
+Dianzi	Shandong	13	N	51.267	36.9011N	119.86572E	61	6	Asia/Shanghai
+Yanghe	Shandong	13	N	50.371	36.13806N	119.91353E	34	6	Asia/Shanghai
+Dongwenquan	Chongqing	13	N	29.134	29.45609N	106.85776E	266	5	Asia/Shanghai
+Jieshi	Chongqing	13	N	47.636	29.38958N	106.60783E	316	5	Asia/Shanghai
+Qitang	Chongqing	13	N	21.185	29.77851N	106.28512E	326	5	Asia/Shanghai
+Shuanglonghu	Chongqing	13	N	128.563	29.71617N	106.60684E	340	7	Asia/Shanghai
+Jiaping	Chongqing	13	N	18.883	28.99165N	106.34842E	230	5	Asia/Shanghai
+Xihu	Chongqing	13	N	38.386	29.10023N	106.39536E	199	5	Asia/Shanghai
+Zhongshan	Chongqing	13	N	20.509	28.85541N	106.33602E	306	5	Asia/Shanghai
+Mingshan	Chongqing	13	N	39.897	29.87832N	107.69921E	264	5	Asia/Shanghai
 Zipaquira	Cundinamarca	08	N	91.235	5.02208N	74.00481W	2607	6	America/Bogota
 Zarzal	Valle del Cauca	08	N	28.761	4.39462N	76.0715W	921	5	America/Bogota
 Zaragoza	Antioquia	08	N	18.795	7.48971N	74.86919W	66	5	America/Bogota
@@ -5848,7 +6024,7 @@ Kulmbach	Bavaria	20	N	27.565	50.10068N	11.45032E	330	5	Europe/Berlin
 Kronberg	Hesse	20	N	17.73	50.18424N	8.5232E	251	5	Europe/Berlin
 Kronach	Bavaria	20	N	18.248	50.23963N	11.33308E	313	5	Europe/Berlin
 Kreuztal	North Rhine-Westphalia	20	N	31.772	50.96775N	7.98848E	336	5	Europe/Berlin
-Bezirk Kreuzberg	Berlin	20	N	147.532	52.49973N	13.40338E	40	7	Europe/Berlin
+Kreuzberg	Berlin	20	N	147.532	52.49973N	13.40338E	40	7	Europe/Berlin
 Kreuzau	North Rhine-Westphalia	20	N	18.4	50.74699N	6.49069E	148	5	Europe/Berlin
 Krefeld	North Rhine-Westphalia	20	N	237.984	51.33645N	6.55381E	43	7	Europe/Berlin
 Koethen	Saxony-Anhalt	20	N	28.71	51.75185N	11.97093E	83	5	Europe/Berlin
@@ -6228,7 +6404,7 @@ Bornheim	North Rhine-Westphalia	20	N	48.523	50.76313N	6.99089E	62	5	Europe/Berli
 Borna	Saxony	20	N	18.806	51.12416N	12.49639E	142	5	Europe/Berlin
 Borken	North Rhine-Westphalia	20	N	40.876	51.84382N	6.85774E	48	5	Europe/Berlin
 Boppard	Rheinland-Pfalz	20	N	16.215	50.23085N	7.58992E	80	5	Europe/Berlin
-Bonn	North Rhine-Westphalia	20	N	313.125	50.73438N	7.09549E	64	7	Europe/Berlin
+Bonn	North Rhine-Westphalia	20	N	330.579	50.73438N	7.09549E	64	7	Europe/Berlin
 Bonen	North Rhine-Westphalia	20	N	19.393	51.6N	7.76667E	73	5	Europe/Berlin
 Bogenhausen	Bavaria	20	N	77.542	48.15221N	11.61585E	521	6	Europe/Berlin
 Bochum	North Rhine-Westphalia	20	N	385.729	51.48165N	7.21648E	102	7	Europe/Berlin
@@ -6818,46 +6994,53 @@ Paernu	Paernumaa	18	R	44.192	58.38588N	24.49711E	6	5	Europe/Tallinn
 Narva	Ida-Virumaa	18	N	66.98	59.37722N	28.19028E	30	6	Europe/Tallinn
 Maardu	Harjumaa	18	N	16.63	59.46529N	24.98215E	25	5	Europe/Tallinn
 Kohtla-Jaerve	Ida-Virumaa	18	N	46.06	59.39861N	27.27306E	66	5	Europe/Tallinn
-Zefta	Gharbia	01	N	92.667	30.7142N	31.24425E	16	6	Africa/Cairo
+Zefta	Gharbia	01	N	111.7	30.7142N	31.24425E	16	7	Africa/Cairo
 Tukh	Qalyubia	01	N	67.599	30.35487N	31.20105E	21	6	Africa/Cairo
-Tanta	Gharbia	01	R	404.901	30.78847N	31.00192E	18	7	Africa/Cairo
+Tima	Sohag	01	N	101.13	26.90843N	31.43469E	66	7	Africa/Cairo
+Tanta	Gharbia	01	R	576.648	30.78847N	31.00192E	18	8	Africa/Cairo
 Tamiyah	Faiyum	01	N	46.866	29.47639N	30.96119E	-6	5	Africa/Cairo
 Talkha	Dakahlia	01	N	157.737	31.0539N	31.37787E	7	7	Africa/Cairo
 Tala	Monufia	01	N	51.498	30.6798N	30.94364E	16	6	Africa/Cairo
-Tahta	Sohag	01	N	90.591	26.76866N	31.50198E	66	6	Africa/Cairo
+Tahta	Sohag	01	N	134.314	26.76866N	31.50198E	66	7	Africa/Cairo
 Sumusta as Sultani	Beni Suweif	01	N	37.26	28.91667N	30.85E	28	5	Africa/Cairo
-Sohag	Sohag	01	R	209.419	26.55695N	31.69478E	67	7	Africa/Cairo
+Sohag	Sohag	01	R	266.944	26.55695N	31.69478E	67	7	Africa/Cairo
+Sinnuris	Faiyum	01	N	133.532	29.41345N	30.86579E	14	7	Africa/Cairo
 Sidi Salim	Kafr el-Sheikh	01	N	47.998	31.27133N	30.78617E	6	5	Africa/Cairo
 Sidi Barani	Matruh	01	N	24.271	31.61166N	25.92539E	24	5	Africa/Cairo
+Shubra al Khaymah	Qalyubia	01	N	1240.289	30.12511N	31.25053E	26	9	Africa/Cairo
 Shirbin	Dakahlia	01	N	54.676	31.19688N	31.5243E	11	6	Africa/Cairo
 Shibin al Qanatir	Qalyubia	01	N	56.872	30.31269N	31.32018E	20	6	Africa/Cairo
-Shibin al Kawm	Monufia	01	R	186.345	30.55258N	31.00904E	23	7	Africa/Cairo
+Shibin al Kawm	Monufia	01	R	267.945	30.55258N	31.00904E	23	7	Africa/Cairo
 Samannud	Gharbia	01	N	54.98	30.9616N	31.24069E	12	6	Africa/Cairo
-Samalut	Minya	01	N	90.465	28.31214N	30.71007E	41	6	Africa/Cairo
-Rosetta	Beheira	01	N	64.481	31.39951N	30.41718E	15	6	Africa/Cairo
+Samalut	Minya	01	N	142.009	28.31214N	30.71007E	41	7	Africa/Cairo
+Rosetta	Beheira	01	N	125.778	31.39951N	30.41718E	15	7	Africa/Cairo
 Ras Gharib	Red Sea	01	N	32	28.35831N	33.07829E	16	5	Africa/Cairo
 Quwaysina	Monufia	01	N	42.708	30.56482N	31.15777E	15	5	Africa/Cairo
 Qutur	Gharbia	01	N	23.842	30.97225N	30.95614E	9	5	Africa/Cairo
 Qus	Qena	01	N	60.181	25.91544N	32.76287E	83	6	Africa/Cairo
-Qina	Qena	01	R	235.362	26.16418N	32.72671E	80	7	Africa/Cairo
-Qalyub	Qalyubia	01	N	100.495	30.17922N	31.2056E	22	7	Africa/Cairo
+Qina	Qena	01	R	252.883	26.16418N	32.72671E	80	7	Africa/Cairo
+Qalyub	Qalyubia	01	N	156.363	30.17922N	31.2056E	22	7	Africa/Cairo
 Naja' Hammadi	Qena	01	N	41.184	26.04949N	32.24142E	78	5	Africa/Cairo
+Mit Ghamr	Dakahlia	01	N	153.754	30.71524N	31.2592E	19	7	Africa/Cairo
 Minyat an Nasr	Dakahlia	01	N	56.951	31.12624N	31.64313E	4	6	Africa/Cairo
-Munuf	Monufia	01	N	83.651	30.46597N	30.93199E	20	6	Africa/Cairo
+Munuf	Monufia	01	N	125.707	30.46597N	30.93199E	20	7	Africa/Cairo
 Matay	Minya	01	N	45.215	28.41866N	30.77861E	38	5	Africa/Cairo
 Mashtul as Suq	Sharqia	01	N	45.798	30.36056N	31.3776E	15	5	Africa/Cairo
-Mersa Matruh	Matruh	01	R	62.042	31.3529N	27.23725E	7	6	Africa/Cairo
-Manfalut	Asyut	01	N	78.744	27.3126N	30.96987E	58	6	Africa/Cairo
-Mallawi	Minya	01	N	142.504	27.73264N	30.84129E	53	7	Africa/Cairo
-Madinat Sittah Uktubar	Giza	01	N	41.93	29.81667N	31.05E	126	5	Africa/Cairo
-Kawm Umbu	Aswan	01	N	59.787	24.47669N	32.94626E	108	6	Africa/Cairo
+Mersa Matruh	Matruh	01	R	176.498	31.3529N	27.23725E	7	7	Africa/Cairo
+Manfalut	Asyut	01	N	117.925	27.3126N	30.96987E	58	7	Africa/Cairo
+Mallawi	Minya	01	N	212.628	27.73264N	30.84129E	53	7	Africa/Cairo
+Maghaghah	Minya	01	N	118.223	28.64776N	30.841E	39	7	Africa/Cairo
+Madinat Sittah Uktubar	Giza	01	N	368.65	29.81667N	31.05E	126	7	Africa/Cairo
+Al 'Ashir min Ramadan	Sharqia	01	N	246.148	30.29636N	31.74633E	111	7	Africa/Cairo
+Kirdasah	Giza	01	N	137.588	30.03103N	31.11109E	20	7	Africa/Cairo
+Kawm Umbu	Aswan	01	N	116.293	24.47669N	32.94626E	108	7	Africa/Cairo
 Kawm Hamadah	Beheira	01	N	36.751	30.76128N	30.69972E	11	5	Africa/Cairo
 Kafr Saqr	Sharqia	01	N	34.967	30.79336N	31.62575E	11	5	Africa/Cairo
 Kafr az Zayyat	Gharbia	01	N	73.725	30.8248N	30.81805E	18	6	Africa/Cairo
-Kafr ash Shaykh	Kafr el-Sheikh	01	R	143.97	31.11174N	30.93991E	11	7	Africa/Cairo
+Kafr ash Shaykh	Kafr el-Sheikh	01	R	194.569	31.11174N	30.93991E	11	7	Africa/Cairo
 Kafr ad Dawwar	Beheira	01	N	267.37	31.13379N	30.12969E	5	7	Africa/Cairo
 Juhaynah	Sohag	01	N	47.821	26.67418N	31.49686E	65	5	Africa/Cairo
-Girga	Sohag	01	N	128.25	26.33721N	31.89295E	78	7	Africa/Cairo
+Girga	Sohag	01	N	151.256	26.33721N	31.89295E	78	7	Africa/Cairo
 `Izbat al Burj	Dakahlia	01	N	37.953	31.5084N	31.84106E	8	5	Africa/Cairo
 Itsa	Faiyum	01	N	45.269	29.2376N	30.78944E	20	5	Africa/Cairo
 Isna	Qena	01	N	69.335	25.29336N	32.55402E	86	6	Africa/Cairo
@@ -6870,33 +7053,34 @@ Hawsh `Isa	Beheira	01	N	85.352	30.9128N	30.29019E	6	6	Africa/Cairo
 Fuwwah	Kafr el-Sheikh	01	N	63.31	31.20365N	30.54908E	9	6	Africa/Cairo
 Farshut	Qena	01	N	53.851	26.05501N	32.16274E	77	6	Africa/Cairo
 Faraskur	Damietta	01	N	58.284	31.32977N	31.71507E	15	6	Africa/Cairo
-Faqus	Sharqia	01	N	62.821	30.72816N	31.79697E	15	6	Africa/Cairo
-Damietta	Damietta	01	R	76.839	31.41648N	31.81332E	16	6	Africa/Cairo
+Faqus	Sharqia	01	N	116.945	30.72816N	31.79697E	15	7	Africa/Cairo
+Damietta	Damietta	01	R	305.92	31.41648N	31.81332E	16	7	Africa/Cairo
 Diyarb Najm	Sharqia	01	N	51.841	30.75438N	31.44016E	10	6	Africa/Cairo
-Disuq	Kafr el-Sheikh	01	N	102.037	31.13259N	30.64784E	11	7	Africa/Cairo
+Disuq	Kafr el-Sheikh	01	N	149.291	31.13259N	30.64784E	11	7	Africa/Cairo
 Dishna	Qena	01	N	54.197	26.12242N	32.46749E	79	6	Africa/Cairo
 Dikirnis	Dakahlia	01	N	137.542	31.08898N	31.59478E	13	7	Africa/Cairo
-Dayrut	Asyut	01	N	67.788	27.55642N	30.81057E	51	6	Africa/Cairo
+Dayrut	Asyut	01	N	102.57	27.55642N	30.81057E	51	7	Africa/Cairo
 Dayr Mawas	Minya	01	N	40.609	27.64148N	30.85012E	51	5	Africa/Cairo
-Damanhur	Beheira	01	R	227.943	31.03408N	30.46823E	9	7	Africa/Cairo
-Bush	Beni Suweif	01	N	86.608	29.14816N	31.12733E	31	6	Africa/Cairo
-Port Said	Port Said	01	R	538.378	31.26531N	32.3019E	16	8	Africa/Cairo
+Damanhur	Beheira	01	R	318.207	31.03408N	30.46823E	9	7	Africa/Cairo
+Bush	Beni Suweif	01	N	136.441	29.14816N	31.12733E	31	7	Africa/Cairo
+Port Said	Port Said	01	R	780.515	31.26531N	32.3019E	16	8	Africa/Cairo
 Safaga	Red Sea	01	N	32.944	26.74906N	33.93891E	13	5	Africa/Cairo
-Bilqas	Dakahlia	01	N	103.596	31.21452N	31.35798E	13	7	Africa/Cairo
-Bilbays	Sharqia	01	N	129.211	30.42039N	31.56223E	17	7	Africa/Cairo
+Bilqas	Dakahlia	01	N	137.08	31.21452N	31.35798E	13	7	Africa/Cairo
+Bilbays	Sharqia	01	N	185.237	30.42039N	31.56223E	17	7	Africa/Cairo
 Basyun	Gharbia	01	N	55.523	30.93976N	30.81338E	12	6	Africa/Cairo
-Bani Suwayf	Beni Suweif	01	R	189.624	29.07441N	31.09785E	33	7	Africa/Cairo
-Bani Mazar	Minya	01	N	58.153	28.49456N	30.80526E	38	6	Africa/Cairo
-Banha	Qalyubia	01	R	167.029	30.45977N	31.1842E	20	7	Africa/Cairo
-Zagazig	Sharqia	01	R	285.097	30.58768N	31.502E	16	7	Africa/Cairo
+Bani Suwayf	Beni Suweif	01	R	273.151	29.07441N	31.09785E	33	7	Africa/Cairo
+Bani Mazar	Minya	01	N	115.759	28.49456N	30.80526E	38	7	Africa/Cairo
+Banha	Qalyubia	01	R	182.254	30.45977N	31.1842E	20	7	Africa/Cairo
+Zagazig	Sharqia	01	R	430.445	30.58768N	31.502E	16	7	Africa/Cairo
 Awsim	Giza	01	N	63.862	30.12303N	31.13571E	25	6	Africa/Cairo
 At Tall al Kabir	Sharqia	01	N	51.569	30.54323N	31.78504E	12	6	Africa/Cairo
-Asyut	Asyut	01	R	420.585	27.18096N	31.18368E	56	7	Africa/Cairo
-Aswan	Aswan	01	R	241.261	24.09082N	32.89942E	99	7	Africa/Cairo
-Suez	Suez	01	R	488.125	29.97371N	32.52627E	11	7	Africa/Cairo
+Asyut	Asyut	01	R	528.669	27.18096N	31.18368E	56	8	Africa/Cairo
+Aswan	Aswan	01	R	379.774	24.09082N	32.89942E	99	7	Africa/Cairo
+Suez	Suez	01	R	699.541	29.97371N	32.52627E	11	8	Africa/Cairo
+As Sinbillawayn	Dakahlia	01	N	124.02	30.88251N	31.46275E	13	7	Africa/Cairo
 As Saff	Giza	01	N	38.213	29.56472N	31.28111E	27	5	Africa/Cairo
 Ash Shuhada'	Monufia	01	N	48.06	30.59683N	30.89931E	13	5	Africa/Cairo
-Ashmun	Monufia	01	N	82.507	30.29735N	30.97641E	19	6	Africa/Cairo
+Ashmun	Monufia	01	N	124.483	30.29735N	30.97641E	19	7	Africa/Cairo
 Al Wasitah	Faiyum	01	N	37.453	29.33778N	31.20556E	33	5	Africa/Cairo
 Luxor	Luxor	01	R	422.407	25.69893N	32.6421E	89	7	Africa/Cairo
 Al Qusiyah	Asyut	01	N	68.394	27.44023N	30.81712E	54	6	Africa/Cairo
@@ -6904,42 +7088,44 @@ Al Qusayr	Red Sea	01	N	24.653	26.10611N	34.27716E	23	5	Africa/Cairo
 Al Qurayn	Sharqia	01	N	61.73	30.61618N	31.73514E	12	6	Africa/Cairo
 Al Qanayat	Sharqia	01	N	42.912	30.61927N	31.46165E	15	5	Africa/Cairo
 Al Qanatir al Khayriyah	Qalyubia	01	N	56.302	30.19327N	31.13703E	20	6	Africa/Cairo
-Cairo	Cairo	01	C	7734.614	30.06263N	31.24967E	23	9	Africa/Cairo
-Al Minya	Minya	01	R	227.15	28.09193N	30.75813E	52	7	Africa/Cairo
-Al Matariyah	Dakahlia	01	N	99.357	31.18287N	32.03108E	10	6	Africa/Cairo
-Al Manzalah	Dakahlia	01	N	67.486	31.15823N	31.936E	9	6	Africa/Cairo
-Al Mansurah	Dakahlia	01	R	420.195	31.03637N	31.38069E	15	7	Africa/Cairo
+Cairo	Cairo	01	C	9606.916	30.06263N	31.24967E	23	9	Africa/Cairo
+Al Minya	Minya	01	R	283.605	28.09193N	30.75813E	52	7	Africa/Cairo
+Al Matariyah	Dakahlia	01	N	162.045	31.18287N	32.03108E	10	7	Africa/Cairo
+Al Manzalah	Dakahlia	01	N	127.394	31.15823N	31.936E	9	7	Africa/Cairo
+Al Mansurah	Dakahlia	01	R	621.953	31.03637N	31.38069E	15	8	Africa/Cairo
 Al Minshah	Sohag	01	N	61.134	26.4775N	31.80394E	74	6	Africa/Cairo
-Al Mahallah al Kubra	Gharbia	01	N	431.052	30.97063N	31.1669E	17	7	Africa/Cairo
+Al Mahallah al Kubra	Gharbia	01	N	592.573	30.97063N	31.1669E	17	8	Africa/Cairo
+Al Khusus	Qalyubia	01	N	488.904	30.15293N	31.31501E	23	7	Africa/Cairo
 Al Kharjah	New Valley	01	R	67.7	25.45101N	30.54653E	81	6	Africa/Cairo
 Al Khankah	Qalyubia	01	N	62.434	30.21035N	31.36812E	19	6	Africa/Cairo
-Giza	Giza	01	R	2443.203	30.00944N	31.20861E	19	9	Africa/Cairo
+Giza	Giza	01	R	4367.343	30.00944N	31.20861E	19	9	Africa/Cairo
 Al Jammaliyah	Dakahlia	01	N	68.381	31.18065N	31.86497E	11	6	Africa/Cairo
-Ismailia	Ismailia	01	R	284.813	30.60427N	32.27225E	14	7	Africa/Cairo
-Alexandria	Alexandria	01	R	3811.516	31.20176N	29.91582E	9	9	Africa/Cairo
+Ismailia	Ismailia	01	R	429.465	30.60427N	32.27225E	14	7	Africa/Cairo
+Alexandria	Alexandria	01	R	5263.542	31.20176N	29.91582E	9	9	Africa/Cairo
 Al Ibrahimiyah	Sharqia	01	N	34.638	30.71877N	31.56299E	14	5	Africa/Cairo
-Al Hawamidiyah	Giza	01	N	106.841	29.9N	31.25E	23	7	Africa/Cairo
+Al Hawamidiyah	Giza	01	N	155.055	29.9N	31.25E	23	7	Africa/Cairo
 Al Hamul	Kafr el-Sheikh	01	N	45.798	31.31146N	31.14766E	5	5	Africa/Cairo
-Hurghada	Red Sea	01	R	95.622	27.25738N	33.81291E	11	6	Africa/Cairo
-Al Fayyum	Faiyum	01	R	306.393	29.30995N	30.8418E	29	7	Africa/Cairo
-Al Fashn	Beni Suweif	01	N	63.793	28.82306N	30.89903E	39	6	Africa/Cairo
+Hurghada	Red Sea	01	R	207.132	27.25738N	33.81291E	11	7	Africa/Cairo
+Al Fayyum	Faiyum	01	R	519.047	29.30995N	30.8418E	29	8	Africa/Cairo
+Al Fashn	Beni Suweif	01	N	112.999	28.82306N	30.89903E	39	7	Africa/Cairo
 Al Bawiti	Giza	01	N	20	28.34827N	28.86936E	131	5	Africa/Cairo
 Al Balyana	Sohag	01	N	48.801	26.23648N	32.00387E	74	5	Africa/Cairo
 Al Bajur	Monufia	01	N	36.633	30.43046N	31.03679E	15	5	Africa/Cairo
 Al Badari	Asyut	01	N	44.132	26.99306N	31.41605E	62	5	Africa/Cairo
 Al `Ayyat	Giza	01	N	34.796	29.61972N	31.2575E	25	5	Africa/Cairo
-Arish	North Sinai	01	R	128.855	31.13159N	33.79844E	15	7	Africa/Cairo
-Akhmim	Sohag	01	N	99.446	26.5622N	31.74566E	82	6	Africa/Cairo
+Arish	North Sinai	01	R	199.243	31.13159N	33.79844E	15	7	Africa/Cairo
+Akhmim	Sohag	01	N	151.43	26.5622N	31.74566E	82	7	Africa/Cairo
 Aja	Dakahlia	01	N	34.692	30.94162N	31.29039E	12	5	Africa/Cairo
 Ad Dilinjat	Beheira	01	N	40.386	30.82796N	30.53552E	6	5	Africa/Cairo
-Abu Tij	Asyut	01	N	71.257	27.04514N	31.31845E	70	6	Africa/Cairo
+Abu Tij	Asyut	01	N	105.418	27.04514N	31.31845E	70	7	Africa/Cairo
 Abu Qurqas	Minya	01	N	61.182	27.93043N	30.83826E	54	6	Africa/Cairo
-Abu Kabir	Sharqia	01	N	100.684	30.72508N	31.67148E	17	7	Africa/Cairo
+Abu Kabir	Sharqia	01	N	154.466	30.72508N	31.67148E	17	7	Africa/Cairo
 Abu al Matamir	Beheira	01	N	41.302	30.91018N	30.17438E	0	5	Africa/Cairo
-Abnub	Asyut	01	N	68.749	27.26881N	31.15232E	55	6	Africa/Cairo
+Abnub	Asyut	01	N	111.785	27.26881N	31.15232E	55	7	Africa/Cairo
 Az Zarqa	Damietta	01	N	40.01	31.20864N	31.63528E	4	5	Africa/Cairo
 Ain Sukhna	Suez	01	N	45.552	29.60018N	32.31671E	30	5	Africa/Cairo
-New Cairo	Cairo	01	N	200	30.03N	31.47E	271	7	Africa/Cairo
+New Cairo	Cairo	01	N	313.139	30.03N	31.47E	271	7	Africa/Cairo
+Al-'Ubur	Qalyubia	01	N	138.987	30.22886N	31.48149E	30	7	Africa/Cairo
 Laayoune		01	R	196.331	27.1418N	13.18797W	68	7	Africa/El_Aaiun
 Dakhla		01	R	75	23.68477N	15.95798W	6	6	Africa/El_Aaiun
 Massawa	Northern Red Sea	02	R	23.1	15.60811N	39.47455E	9	5	Africa/Asmara
@@ -7630,7 +7816,7 @@ Debre Birhan	Amhara	02	N	57.787	9.67954N	39.53262E	2830	6	Africa/Addis_Ababa
 Debark'	Amhara	02	N	24.7	13.15611N	37.89806E	2854	5	Africa/Addis_Ababa
 Butajira	SNNPR	02	N	30.502	8.11667N	38.36667E	2073	5	Africa/Addis_Ababa
 Bure	Amhara	02	N	22.038	10.7N	37.06667E	2058	5	Africa/Addis_Ababa
-Bonga	SNNPR	02	N	18.973	7.28333N	36.23333E	1596	5	Africa/Addis_Ababa
+Bonga	SNNPR	02	N	18.973	7.27235N	36.24162E	1655	5	Africa/Addis_Ababa
 Boditi	SNNPR	02	N	32.997	6.96667N	37.86667E	1998	5	Africa/Addis_Ababa
 Bichena	Amhara	02	N	16.411	10.45N	38.2E	2544	5	Africa/Addis_Ababa
 Bedesa	Oromiya	02	N	17.526	8.9N	40.78333E	1683	5	Africa/Addis_Ababa
@@ -11692,7 +11878,7 @@ Jevargi	Karnataka	15	N	20.157	17.01394N	76.77317E	411	5	Asia/Kolkata
 Jetpur	Gujarat	15	N	118.068	21.75482N	70.62347E	92	7	Asia/Kolkata
 Jeypore	Odisha	15	N	80.837	18.8563N	82.5716E	592	6	Asia/Kolkata
 Jainagar	Bihar	15	N	20.496	26.59048N	86.13791E	76	5	Asia/Kolkata
-Jaynagar Majilpur	West Bengal	15	N	25.922	22.17449N	88.41836E	9	5	Asia/Kolkata
+Jaynagar Majilpur	West Bengal	15	N	25.922	22.1752N	88.42008E	1	5	Asia/Kolkata
 Jayamkondacholapuram	Tamil Nadu	15	N	32.217	11.21266N	79.36369E	64	5	Asia/Kolkata
 Jawad	Madhya Pradesh	15	N	16.887	24.59916N	74.86261E	467	5	Asia/Kolkata
 Jaunpur	Uttar Pradesh	15	N	169.572	25.75356N	82.68689E	85	7	Asia/Kolkata
@@ -11715,7 +11901,7 @@ Jamui	Bihar	15	N	78.181	24.92606N	86.22531E	88	6	Asia/Kolkata
 Jamtara	Jharkhand	15	N	24.388	23.963N	86.80285E	199	5	Asia/Kolkata
 Jamshedpur	Jharkhand	15	N	1339.438	22.80278N	86.18545E	171	9	Asia/Kolkata
 Jamnagar	Gujarat	15	N	492.056	22.47292N	70.06673E	18	7	Asia/Kolkata
-Jammu	Jammu and Kashmir	15	N	465.567	32.73569N	74.86911E	379	7	Asia/Kolkata
+Jammu	Jammu and Kashmir	15	R	465.567	32.73528N	74.86167E	357	7	Asia/Kolkata
 Jammalamadugu	Andhra Pradesh	15	N	43.87	14.84677N	78.38314E	188	5	Asia/Kolkata
 Jamkhandi	Karnataka	15	N	61.69	16.50461N	75.29146E	563	6	Asia/Kolkata
 Jambusar	Gujarat	15	N	41.594	22.05236N	72.80074E	27	5	Asia/Kolkata
@@ -13856,7 +14042,7 @@ Otsuki	Yamanashi	13	N	31.226	35.61851N	138.97396E	360	5	Asia/Tokyo
 Otsu	Shiga	13	R	298.164	35N	135.86667E	131	7	Asia/Tokyo
 Otake	Hiroshima	13	N	30.151	34.20754N	132.22063E	72	5	Asia/Tokyo
 Ota	Gunma	13	N	152.104	36.3N	139.36667E	50	7	Asia/Tokyo
-Osaka	Osaka	13	R	2592.413	34.69374N	135.50218E	24	9	Asia/Tokyo
+Osaka	Osaka	13	R	2753.862	34.69374N	135.50218E	24	9	Asia/Tokyo
 Onomichi	Hiroshima	13	N	90.936	34.41667N	133.2E	52	6	Asia/Tokyo
 Onoda	Yamaguchi	13	N	44.295	34.00139N	131.18361E	1	5	Asia/Tokyo
 Ono	Fukui	13	N	37.469	35.98106N	136.48727E	175	5	Asia/Tokyo
@@ -14778,7 +14964,7 @@ Rudnyy	Qostanay	12	N	124	52.97244N	63.11055E	158	7	Asia/Qostanay
 Kyzylorda	Qyzylorda	12	R	300	44.85278N	65.50917E	128	7	Asia/Qyzylorda
 Kostanay	Qostanay	12	R	210	53.21435N	63.62463E	167	7	Asia/Qostanay
 Karatau	Zhambyl	12	N	37.881	43.17869N	70.46768E	521	5	Asia/Almaty
-Kapshagay	Almaty Oblysy	12	N	42.167	43.86681N	77.06304E	497	5	Asia/Almaty
+Konayev	Almaty Oblysy	12	N	42.167	43.86681N	77.06304E	497	5	Asia/Almaty
 Petropavl	North Kazakhstan	12	R	200.92	54.86667N	69.15E	142	7	Asia/Almaty
 Pavlodar	Pavlodar Region	12	R	329.002	52.28333N	76.96667E	133	7	Asia/Almaty
 Zharkent	Almaty Oblysy	12	N	34.422	44.1666N	80.00655E	636	5	Asia/Almaty
@@ -16294,7 +16480,7 @@ Sapele	Delta	05	N	161.686	5.89405N	5.67666E	9	7	Africa/Lagos
 Rijau	Niger	05	N	16.613	11.10389N	5.25556E	358	5	Africa/Lagos
 Rano	Kano	05	N	17.972	11.55684N	8.58065E	526	5	Africa/Lagos
 Potiskum	Yobe	05	N	86.002	11.71391N	11.08108E	427	6	Africa/Lagos
-Port Harcourt	Rivers	05	R	1148.665	4.77742N	7.0134E	16	9	Africa/Lagos
+Port Harcourt	Rivers	05	R	1865	4.77742N	7.0134E	16	9	Africa/Lagos
 Pindiga	Gombe	05	N	106.322	9.98433N	10.95229E	490	7	Africa/Lagos
 Patigi	Kwara	05	N	28.285	8.72851N	5.75561E	123	5	Africa/Lagos
 Pankshin	Plateau	05	N	31.516	9.32541N	9.4352E	1235	5	Africa/Lagos
@@ -16350,7 +16536,7 @@ Lere	Kaduna	05	N	93.29	10.38584N	8.57286E	753	6	Africa/Lagos
 Lekki	Lagos	05	N	401.272	6.40948N	4.09152E	48	7	Africa/Lagos
 Lapai	Niger	05	N	16.442	9.04439N	6.57089E	169	5	Africa/Lagos
 Lalupon	Oyo	05	N	81.13	7.46791N	4.06594E	221	6	Africa/Lagos
-Lagos	Lagos	05	N	9000	6.45407N	3.39467E	11	9	Africa/Lagos
+Lagos	Lagos	05	N	15388	6.45407N	3.39467E	11	9	Africa/Lagos
 Lafiagi	Kwara	05	N	102.779	8.85299N	5.41641E	116	7	Africa/Lagos
 Lafia	Nassarawa	05	R	127.236	8.4939N	8.51532E	179	7	Africa/Lagos
 Kwale	Delta	05	N	20.226	5.70773N	6.43402E	22	5	Africa/Lagos
@@ -16366,7 +16552,7 @@ Kaura Namoda	Zamfara	05	N	69.725	12.59371N	6.58648E	396	6	Africa/Lagos
 Katsina-Ala	Benue	05	N	36.722	7.16938N	9.28465E	152	5	Africa/Lagos
 Katsina	Katsina	05	R	432.149	12.99082N	7.60177E	519	7	Africa/Lagos
 Kari	Bauchi	05	N	18.812	11.2471N	10.561E	408	5	Africa/Lagos
-Kano	Kano	05	R	3626.068	12.00012N	8.51672E	484	9	Africa/Lagos
+Kano	Kano	05	R	4103	12.00012N	8.51672E	484	9	Africa/Lagos
 Kamba	Kebbi	05	N	25.568	11.85172N	3.65478E	177	5	Africa/Lagos
 Kaiama	Kwara	05	N	21.897	9.6053N	3.94101E	325	5	Africa/Lagos
 Kagoro	Kaduna	05	N	77.008	9.60776N	8.39043E	816	6	Africa/Lagos
@@ -16476,7 +16662,7 @@ Birnin Kebbi	Kebbi	05	R	108.164	12.45389N	4.1975E	234	7	Africa/Lagos
 Sofo-Birnin-Gwari	Kaduna	05	N	22.38	11.01537N	6.78036E	657	5	Africa/Lagos
 Billiri	Gombe	05	N	15.976	9.86545N	11.22624E	529	5	Africa/Lagos
 Bida	Niger	05	N	171.656	9.08044N	6.0099E	118	7	Africa/Lagos
-Benin City	Edo	05	R	1125.058	6.33815N	5.62575E	88	9	Africa/Lagos
+Benin City	Edo	05	R	1782	6.33815N	5.62575E	88	9	Africa/Lagos
 Bende	Abia	05	N	79.618	5.55874N	7.63359E	123	6	Africa/Lagos
 Beli	Taraba	05	N	17.467	7.85868N	10.97187E	183	5	Africa/Lagos
 Bauchi	Bauchi	05	R	316.149	10.31032N	9.84388E	623	7	Africa/Lagos
@@ -16504,7 +16690,7 @@ Agbor	Delta	05	N	67.61	6.25375N	6.1942E	130	6	Africa/Lagos
 Afikpo	Ebonyi	05	N	71.866	5.89258N	7.93534E	92	6	Africa/Lagos
 Ado-Odo	Ogun	05	N	15.442	6.59546N	2.94176E	25	5	Africa/Lagos
 Ado-Ekiti	Ekiti	05	R	424.34	7.62329N	5.22087E	439	7	Africa/Lagos
-Abuja	FCT	05	C	590.4	9.05785N	7.49508E	476	8	Africa/Lagos
+Abuja	FCT	05	C	1235.88	9.05785N	7.49508E	476	9	Africa/Lagos
 Abeokuta	Ogun	05	R	593.1	7.15571N	3.34509E	64	8	Africa/Lagos
 Abakaliki	Ebonyi	05	R	134.102	6.32485N	8.11368E	65	7	Africa/Lagos
 Aba	Abia	05	N	897.56	5.10658N	7.36667E	64	8	Africa/Lagos
@@ -17817,7 +18003,7 @@ Dajal	Punjab	15	N	17.63	29.55769N	70.37614E	124	5	Asia/Karachi
 Dadu	Sindh	15	N	139.784	26.73033N	67.7769E	45	7	Asia/Karachi
 Dadhar	Balochistan	15	N	15.09	29.47489N	67.65167E	160	5	Asia/Karachi
 Chunian	Punjab	15	N	57.312	30.96621N	73.97908E	195	6	Asia/Karachi
-Chuchar-kana Mandi	Punjab	15	N	69.321	31.75N	73.8E	206	6	Asia/Karachi
+Chuhar Kana	Punjab	15	N	69.321	31.75N	73.8E	206	6	Asia/Karachi
 Chhor	Sindh	15	N	16.301	25.5126N	69.78437E	6	5	Asia/Karachi
 Choa Saidan Shah	Punjab	15	N	15.344	32.71962N	72.98625E	625	5	Asia/Karachi
 Chishtian	Punjab	15	N	122.199	29.79713N	72.85772E	149	7	Asia/Karachi
@@ -18232,6 +18418,7 @@ Al Burayj	Gaza Strip	16	N	34.951	31.43944N	34.40306E	40	5	Asia/Gaza
 Yatta	West Bank	16	N	41.425	31.4459N	35.09443E	808	5	Asia/Hebron
 Tulkarm	West Bank	16	N	44.169	32.31156N	35.0269E	107	5	Asia/Hebron
 Tubas	West Bank	16	N	15.591	32.32091N	35.36989E	375	5	Asia/Hebron
+Surif City	West Bank	16	N	25.242	31.65078N	35.06439E	593	5	Asia/Hebron
 Sa`ir	West Bank	16	N	17.775	31.57855N	35.14017E	919	5	Asia/Hebron
 Ramallah	West Bank	16	N	24.599	31.89964N	35.20422E	879	5	Asia/Hebron
 Qalqilyah	West Bank	16	N	43.212	32.18966N	34.97063E	87	5	Asia/Hebron
@@ -18783,7 +18970,7 @@ Surkhakhi	Ingushetiya Republic	17	N	16.215	43.1875N	44.90194E	651	5	Europe/Mosco
 Sukhinichi	Kaluga	17	N	16.1	54.09989N	35.34254E	212	5	Europe/Moscow
 Stupino	Moscow Oblast	17	N	60.999	54.90083N	38.07083E	186	6	Europe/Moscow
 Strunino	Vladimir	17	N	15.483	56.37328N	38.58321E	169	5	Europe/Moscow
-Stroitel'	Belgorod Oblast	17	N	18.636	50.78543N	36.4831E	240	5	Europe/Moscow
+Stroitel'	Belgorod Oblast	17	N	18.636	50.78816N	36.47751E	244	5	Europe/Moscow
 Strogino	Moscow	17	N	152	55.81838N	37.41224E	125	7	Europe/Moscow
 Sterlitamak	Bashkortostan Republic	17	N	267.231	53.62462N	55.95015E	148	7	Asia/Yekaterinburg
 Stavropol'	Stavropol' Kray	17	R	363.064	45.0428N	41.9734E	575	7	Europe/Moscow
@@ -21284,7 +21471,7 @@ Sudak	Crimea	17	N	16.597	44.84924N	34.97471E	33	5	Europe/Simferopol
 Stryi	Lviv Oblast	17	N	61.404	49.26171N	23.84721E	297	6	Europe/Kiev
 Stebnyk	Lviv Oblast	17	N	20.398	49.30098N	23.55197E	334	5	Europe/Kiev
 Starokostyantyniv	Khmelnytskyi Oblast	17	N	34.571	49.75522N	27.21229E	267	5	Europe/Kiev
-Starobilsk	Luhansk	17	N	22	49.27832N	38.91069E	62	5	Europe/Zaporozhye
+Starobilsk	Luhansk	17	N	22	49.27719N	38.91673E	60	5	Europe/Zaporozhye
 Kadiyivka	Luhansk	17	N	84.425	48.56818N	38.64352E	217	6	Europe/Zaporozhye
 Sokal	Lviv Oblast	17	N	20.659	50.47438N	24.28288E	198	5	Europe/Kiev
 Snizhne	Donetsk Oblast	17	N	55.587	48.02612N	38.77225E	290	6	Europe/Kiev
@@ -21299,7 +21486,7 @@ Shpola	Cherkasy Oblast	17	N	16.674	49.01291N	31.3926E	153	5	Europe/Kiev
 Shostka	Sumy	17	N	85.432	51.86296N	33.4698E	154	6	Europe/Kiev
 Shepetivka	Khmelnytskyi Oblast	17	N	41.599	50.18118N	27.06517E	255	5	Europe/Kiev
 Shakhtarsk	Donetsk Oblast	17	N	71.7	48.05657N	38.43826E	227	6	Europe/Kiev
-Sevastopol	Sevastopol City	17	R	416.263	44.60795N	33.52134E	35	7	Europe/Simferopol
+Sevastopol	Sevastopol City	17	R	464.349	44.60795N	33.52134E	35	7	Europe/Simferopol
 Selydove	Donetsk Oblast	17	N	21.916	48.14708N	37.30032E	167	5	Europe/Kiev
 Sarny	Rivne	17	N	27.097	51.33795N	26.60191E	158	5	Europe/Kiev
 Sambir	Lviv Oblast	17	N	35.197	49.51631N	23.2006E	300	5	Europe/Kiev
@@ -21357,7 +21544,7 @@ Lyubotyn	Kharkiv	17	N	20.376	49.94691N	35.92907E	182	5	Europe/Kiev
 Lviv	Lviv Oblast	17	R	717.803	49.83826N	24.02324E	284	8	Europe/Kiev
 Lutuhyne	Luhansk	17	N	17.134	48.40507N	39.22675E	119	5	Europe/Zaporozhye
 Lutsk	Volyn	17	R	213.661	50.75932N	25.34244E	192	7	Europe/Kiev
-Luhansk	Luhansk	17	R	452	48.56705N	39.31706E	103	7	Europe/Zaporozhye
+Luhansk	Luhansk	17	R	452	48.56952N	39.32857E	69	7	Europe/Zaporozhye
 Lubny	Poltava Oblast	17	N	45.379	50.01413N	32.99975E	157	5	Europe/Kiev
 Lozova	Kharkiv	17	N	62.311	48.88937N	36.31755E	185	6	Europe/Kiev
 Lysychansk	Luhansk	17	N	95.031	48.90421N	38.44094E	179	6	Europe/Zaporozhye
