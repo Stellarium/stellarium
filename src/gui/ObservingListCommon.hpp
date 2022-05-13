@@ -20,8 +20,6 @@
 #ifndef OBSERVINGLISTCOMMON_H
 #define OBSERVINGLISTCOMMON_H
 
-#include <QString>
-
 struct observingListItem {
     QString name;
     QString nameI18n;
@@ -113,4 +111,7 @@ static constexpr int COLUMN_NUMBER_DEC = 5;
 static constexpr int COLUMN_NUMBER_MAGNITUDE = 6;
 static constexpr int COLUMN_NUMBER_CONSTELLATION = 7;
 
-#endif // OBSERVINGLISTCOMMON_H
+static constexpr char const * CUSTOM_OBJECT = "CustomObject";
+
+
+#endif // OBSLISTDIALOG_H

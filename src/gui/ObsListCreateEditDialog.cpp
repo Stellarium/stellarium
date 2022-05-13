@@ -23,6 +23,8 @@
 #include <QUuid>
 #include <StelTranslator.hpp>
 #include <utility>
+#include <Planet.hpp>
+#include <StelOBJ.hpp>
 
 #include "NebulaMgr.hpp"
 #include "StelCore.hpp"
@@ -260,6 +262,10 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
 
             // Object type
             QString objectType = selectedObject[0]->getType();
+            if(QString::compare(objectType, "Planet", Qt::CaseSensitive) == 0){
+                auto& r_planet = dynamic_cast<Planet&>(*selectedObject[0]);
+                objectType = r_planet.getPlanetTypeString();
+            }
 
             // Fov
             QString objectRaStr = "";
@@ -268,7 +274,8 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
             double fov = -1.0;
 
             // Ra & Dec
-            float ra, dec;
+            float ra = 0.0;
+            float dec = 0.0;
             StelUtils::rectToSphe(&ra, &dec, selectedObject[0]->getJ2000EquatorialPos(core));
             if (ui->obsListRaCheckBox->isChecked() || objectType == CUSTOM_OBJECT) {
                 objectRaStr = StelUtils::radToHmsStr(ra, false).trimmed();
@@ -276,9 +283,6 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
             if (ui->obsListDecCheckBox->isChecked() || objectType == CUSTOM_OBJECT) {
                 objectDecStr = StelUtils::radToDmsStr(dec, false).trimmed();
             }
-            //TODO delete after
-            qDebug() << "ra value" << objectRaStr;
-            qDebug() << "dec value" << objectDecStr;
 
             // Visible flag
             if (objectName.contains("marker", Qt::CaseInsensitive)) {
@@ -375,24 +379,6 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
 }
 
 /*
- * Slot for button obsListAddObjectButton
-*/
-void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
-{
-	const QList<StelObjectP>& selectedObject = objectMgr->getSelectedObject();
-	if ( !selectedObject.isEmpty() )
-	{
-		// No duplicate item in the same list
-		bool is_already_in_list = false;
-		QHash<QString,observingListItem>::const_iterator i;
-		for ( i = observingListItemCollection.constBegin(); i != observingListItemCollection.constEnd(); i++ )
-		{
-			if ( i.value().name.compare ( selectedObject[0]->getEnglishName() ) == 0 )
-			{
-				is_already_in_list = true;
-				break;
-			}
-		}
  * Slot for button obsListRemoveObjectButton
  */
 void ObsListCreateEditDialog::obsListRemoveObjectButtonPressed() {
