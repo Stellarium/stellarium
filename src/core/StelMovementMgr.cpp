@@ -533,8 +533,7 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 			// move time by years
 			double jdNow=core->getJD();
 			int year, month, day, hour, min, sec, millis;
-			StelUtils::getDateFromJulianDay(jdNow, &year, &month, &day);
-			StelUtils::getTimeFromJulianDay(jdNow, &hour, &min, &sec, &millis);
+			StelUtils::getDateTimeFromJulianDay(jdNow, &year, &month, &day, &hour, &min, &sec, &millis);
 			double jdNew;
 			StelUtils::getJDFromDate(&jdNew, year+qRound(numSteps), month, day, hour, min, static_cast<float>(sec));
 			core->setJD(jdNew);

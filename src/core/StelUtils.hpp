@@ -423,11 +423,19 @@ namespace StelUtils
 
 	///////////////////////////////////////////////////
 	// New Qt based General Calendar Functions.
-	//! Make from julianDay a year, month, day for the Julian Date julianDay represents.
+	//! Extract from julianDay a year, month, day for the Julian Date julianDay represents.
+	//! @attention Under rare circumstances with a rounded result where julianDay=*.49999999xyz this will still round off whereas the time is less than a fraction from midnight of the next day.
+	//! Depending on circumstances this may matter or not. If you need a full decoding of a Julian day number, prefer to use getDateTimeFromJulianDay()
 	void getDateFromJulianDay(const double julianDay, int *year, int *month, int *day);
 
-	//! Make from julianDay an hour, minute, second.
-	void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis=Q_NULLPTR);
+	//! Extract from julianDay an hour, minute, second.
+	//! @attention Under rare circumstances with a rounded result where julianDay=*.49999999xyz this will lead to a factual result for *.5000000abc, i.e. not 24 but 0 hours, and wrapDay will be true.
+	//! Depending on circumstances this may matter or not. If you need a full decoding of a Julian day number, prefer to use getDateTimeFromJulianDay()
+	void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis=Q_NULLPTR, bool *wrapDay=Q_NULLPTR);
+
+	//! Extract from julianDay a year, month, day, hour, minute, second and (optional) millisecond for the Julian Day julianDay represents.
+	//! This is the preferred method of complete decoding of a Julian day number.
+	void getDateTimeFromJulianDay(const double julianDay, int *year, int *month, int *day, int *hour, int *minute, int *second, int *millis=Q_NULLPTR);
 
 	//! Make hours (decimal format) from julianDay
 	double getHoursFromJulianDay(const double julianDay);
@@ -493,6 +501,7 @@ namespace StelUtils
 	//!        The old behaviour is kept with this parameter set to false.
 	//! @todo  Locate all occurrences and handle properly with setting this parameter to true! Then remove parameter and keep forcing UTC.
 	//! @result the matching UTC QDateTime
+	//! @note QDate has no year zero. This may limit the applicability of program parts which use this method to positive years.
 	QDateTime jdToQDateTime(const double& jd, const bool forceUTC);
 
 	//! Compute Julian day number from calendar date.
