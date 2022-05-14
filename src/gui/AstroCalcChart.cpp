@@ -691,7 +691,7 @@ void AstroCalcChart::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	const double offset=core->getUTCOffset(jd)/24.;
 
 	// 20220510: Bad coord in curves chart. Also elsewhere?
-#if QT_VERSION_CHECK(5, 14, 0)
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
 	QSet<Series> currentSeries(map.keyBegin(), map.keyEnd());
 #else
 	QSet<Series> currentSeries=map.keys().toSet();
