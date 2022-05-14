@@ -698,7 +698,7 @@ void AstroCalcChart::mousePressEvent(QGraphicsSceneMouseEvent *event)
 #endif
 	if (QSet({AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1,
 		  AngularSize2, Declination2, Distance2, Elongation2, HeliocentricDistance2, Magnitude2, PhaseAngle2, Phase2, RightAscension2, TransitAltitude2,
-		  LunarElongation}).intersects(currentSeries))
+		  LunarElongation, pcDistanceAU, pcDistanceDeg}).intersects(currentSeries))
 		core->setJD(jd-offset);
 	else
 		core->setJD(jd);
