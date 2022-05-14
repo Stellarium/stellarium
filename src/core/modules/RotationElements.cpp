@@ -27,7 +27,6 @@
 #include <QDebug>
 
 // Also include the GRS corrections here
-//bool RotationElements::flagCustomGrsSettings = false; // OF COURSE this must become true forever...
 double RotationElements::grsJD = 2456901.5;
 double RotationElements::grsLongitude = 216.;
 double RotationElements::grsDrift = 15.;
