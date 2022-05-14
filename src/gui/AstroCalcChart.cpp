@@ -218,8 +218,8 @@ void AstroCalcChart::drawTrivialLineY(Series s, const qreal y)
 {
 	if (map.value(s))
 	{
-		replace(s, 0, qreal(StelUtils::jdToQDateTime(StelUtils::qDateTimeToJd(xAxis->min())).toMSecsSinceEpoch()), y);
-		replace(s, 1, qreal(StelUtils::jdToQDateTime(StelUtils::qDateTimeToJd(xAxis->max())).toMSecsSinceEpoch()), y);
+		replace(s, 0, qreal(StelUtils::jdToQDateTime(StelUtils::qDateTimeToJd(xAxis->min()), true).toMSecsSinceEpoch()), y);
+		replace(s, 1, qreal(StelUtils::jdToQDateTime(StelUtils::qDateTimeToJd(xAxis->max()), true).toMSecsSinceEpoch()), y);
 		map.value(s)->setPen(penMap.value(s));
 		//qDebug() << "Trivial Y line in" << s << "at" << y << "from" << xAxis->min() << "to" << xAxis->max();
 	}
@@ -256,8 +256,13 @@ void AstroCalcChart::showToolTip(const QPointF &point, bool show)
 		QString units("°");
 		QDateTime date=QDateTime::fromMSecsSinceEpoch(qint64(point.x()), Qt::UTC);
 		double jd=StelUtils::qDateTimeToJd(date);
-		double offset=StelApp::getInstance().getCore()->getUTCOffset(jd)/24;
 		//QString dateStr=StelUtils::julianDayToISO8601String(jd+offset); // NOO! The grid shall indeed display local time... 20220510
+		if (QList<Series>({CurrentTime, TransitTime, AltVsTime, AzVsTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight}).contains(seriesCode))
+		{
+			double offset=StelApp::getInstance().getCore()->getUTCOffset(jd)/24;
+			jd+=offset;
+		}
+
 		QString dateStr=StelUtils::julianDayToISO8601String(jd);
 		dateStr.replace('T', ' ');
 		//qDebug() << "JD clicked: " << jd;
@@ -308,8 +313,8 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 	switch (series){
 		case AstroCalcChart::AltVsTime:
 		case AstroCalcChart::AzVsTime:
-			startDate=StelUtils::jdToQDateTime(JD);
-			endDate=StelUtils::jdToQDateTime(JD+1);
+			startDate=StelUtils::jdToQDateTime(JD-utcOffset, true);
+			endDate=startDate.addDays(1);
 			break;
 		case AstroCalcChart::MonthlyElevation:
 			StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
@@ -317,13 +322,13 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 			endDate=startDate.addDays(372); // So that we have integral partitions that run along midnight!
 			break;
 		case AstroCalcChart::LunarElongation:
-			startDate=StelUtils::jdToQDateTime(baseJD-2);
-			endDate=StelUtils::jdToQDateTime(baseJD+30);
+			startDate=StelUtils::jdToQDateTime(baseJD-2, true);
+			endDate=StelUtils::jdToQDateTime(baseJD+30, true);
 			break;
 		case AstroCalcChart::pcDistanceAU:
 		case AstroCalcChart::pcDistanceDeg:
-			startDate=StelUtils::jdToQDateTime(baseJD-300);
-			endDate=StelUtils::jdToQDateTime(baseJD+300);
+			startDate=StelUtils::jdToQDateTime(baseJD-300, true);
+			endDate=StelUtils::jdToQDateTime(baseJD+300, true);
 			break;
 		default: // 2-curves page
 			StelUtils::getDateFromJulianDay(baseJD, &year, &month, &day);
@@ -331,6 +336,7 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 			endDate=startDate.addDays(30*periods);
 			break;
 	}
+	qDebug() << "findXRange(): Date Range set for series " << series << ":" << startDate << " to " << endDate;
 	return QPair(startDate, endDate);
 }
 
@@ -405,8 +411,9 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	}
 	else if (map.contains(AstroCalcChart::LunarElongation))
 	{
-		xAxis->setTickCount(17); // step is 2 days. 16 intervals.
-		xRange=findXRange(floor(jd)+0.5+shift, AstroCalcChart::LunarElongation, 1);
+		xAxis->setTickCount(18+1); // step is 2 days. 16 intervals.
+		//xRange=findXRange(floor(jd)+0.5+shift, AstroCalcChart::LunarElongation, 1);
+		xRange=findXRange(jd, AstroCalcChart::LunarElongation, 1);
 	}
 	else if (map.contains(AstroCalcChart::pcDistanceAU))
 	{
@@ -684,5 +691,15 @@ void AstroCalcChart::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	const double offset=core->getUTCOffset(jd)/24.;
 
 	// 20220510: Bad coord in curves chart. Also elsewhere?
-	core->setJD(jd-offset);
+#if QT_VERSION_CHECK(5, 14, 0)
+	QSet<Series> currentSeries(map.keyBegin(), map.keyEnd());
+#else
+	QSet<Series> currentSeries=map.keys().toSet();
+#endif
+	if (QSet({AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1,
+		  AngularSize2, Declination2, Distance2, Elongation2, HeliocentricDistance2, Magnitude2, PhaseAngle2, Phase2, RightAscension2, TransitAltitude2,
+		  LunarElongation}).intersects(currentSeries))
+		core->setJD(jd-offset);
+	else
+		core->setJD(jd);
 }
