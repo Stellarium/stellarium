@@ -584,32 +584,32 @@ void AstroCalcDialog::createDialogContent()
 
 	// chartview exports:
 	connect(ui->exportAltVsTimePushButton, &QPushButton::clicked, this, [=]{
-		QString filename = QFileDialog::getSaveFileName(dialog, q_("Save file"), "", q_("Images (*.png)"));
+		QString filename = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save file"), "", q_("Images (*.png)"));
 		QPixmap p = ui->altVsTimeChartView->grab();
 		p.save(filename, "PNG");
 	});
 	connect(ui->exportAziVsTimePushButton, &QPushButton::clicked, this, [=]{
-		QString filename = QFileDialog::getSaveFileName(dialog, q_("Save file"), "", q_("Images (*.png)"));
+		QString filename = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save file"), "", q_("Images (*.png)"));
 		QPixmap p = ui->aziVsTimeChartView->grab();
 		p.save(filename, "PNG");
 	});
 	connect(ui->exportMonthlyElevationPushButton, &QPushButton::clicked, this, [=]{
-		QString filename = QFileDialog::getSaveFileName(dialog, q_("Save file"), "", q_("Images (*.png)"));
+		QString filename = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save file"), "", q_("Images (*.png)"));
 		QPixmap p = ui->monthlyElevationChartView->grab();
 		p.save(filename, "PNG");
 	});
 	connect(ui->exportGraphsPushButton, &QPushButton::clicked, this, [=]{
-		QString filename = QFileDialog::getSaveFileName(dialog, q_("Save file"), "", q_("Images (*.png)"));
+		QString filename = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save file"), "", q_("Images (*.png)"));
 		QPixmap p = ui->twoGraphsChartView->grab();
 		p.save(filename, "PNG");
 	});
 	connect(ui->exportLunarElongationPushButton, &QPushButton::clicked, this, [=]{
-		QString filename = QFileDialog::getSaveFileName(dialog, q_("Save file"), "", q_("Images (*.png)"));
+		QString filename = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save file"), "", q_("Images (*.png)"));
 		QPixmap p = ui->lunarElongationChartView->grab();
 		p.save(filename, "PNG");
 	});
 	connect(ui->exportPCPushButton, &QPushButton::clicked, this, [=]{
-		QString filename = QFileDialog::getSaveFileName(dialog, q_("Save file"), "", q_("Images (*.png)"));
+		QString filename = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save file"), "", q_("Images (*.png)"));
 		QPixmap p = ui->pcChartView->grab();
 		p.save(filename, "PNG");
 	});
