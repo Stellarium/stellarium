@@ -1438,7 +1438,7 @@
              <enum>QTabWidget::South</enum>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>3</number>
             </property>
             <widget class="QWidget" name="tabAltVsTime">
              <attribute name="title">
@@ -1731,34 +1731,22 @@
               </property>
               <item row="2" column="0" colspan="2">
                <layout class="QGridLayout" name="gridLayout_17">
-                <item row="1" column="0">
-                 <widget class="QLabel" name="graphsFirstLabel">
-                  <property name="text">
-                   <string>First graph:</string>
+                <item row="1" column="1">
+                 <widget class="QComboBox" name="graphsFirstComboBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
                   </property>
-                 </widget>
-                </item>
-                <item row="0" column="0" colspan="3">
-                 <widget class="QLabel" name="graphsNoteLabel">
-                  <property name="text">
-                   <string>Notes: (1) This tool works on Earth only! (2) short steps and long duration may cause a long delay!</string>
+                  <property name="editable">
+                   <bool>true</bool>
                   </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                  <property name="insertPolicy">
+                   <enum>QComboBox::NoInsert</enum>
                   </property>
-                 </widget>
-                </item>
-                <item row="3" column="0">
-                 <widget class="QLabel" name="graphsSecondLabel">
-                  <property name="text">
-                   <string>Second graph:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="3">
-                 <widget class="QPushButton" name="exportGraphsPushButton">
-                  <property name="text">
-                   <string>Export graphs...</string>
+                  <property name="sizeAdjustPolicy">
+                   <enum>QComboBox::AdjustToContents</enum>
                   </property>
                  </widget>
                 </item>
@@ -1801,9 +1789,25 @@
                    </widget>
                   </item>
                   <item>
+                   <spacer name="horizontalSpacer_20">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Fixed</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
                    <widget class="QLabel" name="graphsStepLabel">
                     <property name="text">
-                     <string>Step</string>
+                     <string>Step:</string>
                     </property>
                    </widget>
                   </item>
@@ -1811,6 +1815,9 @@
                    <widget class="QSpinBox" name="graphsHourStepsSpinBox">
                     <property name="toolTip">
                      <string>Step width for computation. Caution! Short steps cause slow graphs.</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                     </property>
                     <property name="suffix">
                      <string extracomment="hours">h</string>
@@ -1844,26 +1851,17 @@
                   </item>
                  </layout>
                 </item>
-                <item row="1" column="1">
-                 <widget class="QComboBox" name="graphsFirstComboBox">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="graphsSecondLabel">
+                  <property name="text">
+                   <string>Second graph:</string>
                   </property>
-                  <property name="editable">
-                   <bool>true</bool>
-                  </property>
-                  <property name="insertPolicy">
-                   <enum>QComboBox::NoInsert</enum>
-                  </property>
-                  <property name="sizeAdjustPolicy">
-                   <enum>QComboBox::AdjustToContents</enum>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                   </property>
                  </widget>
                 </item>
-                <item row="3" column="1">
+                <item row="2" column="1">
                  <widget class="QComboBox" name="graphsSecondComboBox">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -1882,7 +1880,27 @@
                   </property>
                  </widget>
                 </item>
-                <item row="3" column="2">
+                <item row="1" column="0">
+                 <widget class="QLabel" name="graphsFirstLabel">
+                  <property name="text">
+                   <string>First graph:</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0" colspan="3">
+                 <widget class="QLabel" name="graphsNoteLabel">
+                  <property name="text">
+                   <string>Notes: This tool works on Earth only! Short steps and long duration may cause a long delay!</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="2">
                  <layout class="QHBoxLayout" name="drawGraphHorizontalLayout">
                   <item>
                    <widget class="QPushButton" name="drawGraphsPushButton">
@@ -1898,17 +1916,11 @@
                    </widget>
                   </item>
                   <item>
-                   <spacer name="horizontalSpacer_20">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
+                   <widget class="QPushButton" name="exportGraphsPushButton">
+                    <property name="text">
+                     <string>Export graphs...</string>
                     </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -2831,6 +2843,9 @@
               </item>
               <item>
                <widget class="QSpinBox" name="eclipseFromYearSpinBox">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="minimum">
                  <number>-9999</number>
                 </property>
@@ -2852,6 +2867,9 @@
               </item>
               <item>
                <widget class="QSpinBox" name="eclipseYearsSpinBox">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="minimum">
                  <number>2</number>
                 </property>
