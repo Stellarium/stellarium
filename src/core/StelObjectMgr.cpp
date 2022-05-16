@@ -345,8 +345,7 @@ void StelObjectMgr::todayMorningAtAltitude()
 		double az, alt;
 		StelCore* core = StelApp::getInstance().getCore();
 		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
-		double altitude=alt*M_180_PI;
-		Vec4d rts = selected[0]->getRTSTime(core, altitude);
+		Vec4d rts = selected[0]->getRTSTime(core, alt*M_180_PI);
 		if (rts[3]>-1000.)
 			core->setJD(rts[0]);
 	}
@@ -360,10 +359,9 @@ void StelObjectMgr::nextMorningAtAltitude()
 		double az, alt;
 		StelCore* core = StelApp::getInstance().getCore();
 		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
-		double altitude=alt*M_180_PI;
 		core->addSolarDays(1.0);
 		core->update(0);
-		Vec4d rts = selected[0]->getRTSTime(core, altitude);
+		Vec4d rts = selected[0]->getRTSTime(core, alt*M_180_PI);
 		if (rts[3]>-1000.)
 			core->setJD(rts[0]);
 	}
@@ -377,10 +375,9 @@ void StelObjectMgr::previousMorningAtAltitude()
 		double az, alt;
 		StelCore* core = StelApp::getInstance().getCore();
 		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
-		double altitude=alt*M_180_PI;
 		core->addSolarDays(-1.0);
 		core->update(0);
-		Vec4d rts = selected[0]->getRTSTime(core, altitude);
+		Vec4d rts = selected[0]->getRTSTime(core, alt*M_180_PI);
 		if (rts[3]>-1000.)
 			core->setJD(rts[0]);
 	}
@@ -394,8 +391,7 @@ void StelObjectMgr::todayEveningAtAltitude()
 		double az, alt;
 		StelCore* core = StelApp::getInstance().getCore();
 		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
-		double altitude=alt*M_180_PI;
-		Vec4d rts = selected[0]->getRTSTime(core, altitude);
+		Vec4d rts = selected[0]->getRTSTime(core, alt*M_180_PI);
 		if (rts[3]>-1000.)
 			core->setJD(rts[2]);
 	}
@@ -409,10 +405,9 @@ void StelObjectMgr::nextEveningAtAltitude()
 		double az, alt;
 		StelCore* core = StelApp::getInstance().getCore();
 		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
-		double altitude=alt*M_180_PI;
 		core->addSolarDays(1.0);
 		core->update(0);
-		Vec4d rts = selected[0]->getRTSTime(core, altitude);
+		Vec4d rts = selected[0]->getRTSTime(core, alt*M_180_PI);
 		if (rts[3]>-1000.)
 			core->setJD(rts[2]);
 	}
@@ -426,10 +421,9 @@ void StelObjectMgr::previousEveningAtAltitude()
 		double az, alt;
 		StelCore* core = StelApp::getInstance().getCore();
 		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
-		double altitude=alt*M_180_PI;
 		core->addSolarDays(-1.0);
 		core->update(0);
-		Vec4d rts = selected[0]->getRTSTime(core, altitude);
+		Vec4d rts = selected[0]->getRTSTime(core, alt*M_180_PI);
 		if (rts[3]>-1000.)
 			core->setJD(rts[2]);
 	}
