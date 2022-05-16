@@ -61,8 +61,7 @@ void GreatRedSpotDialog::createDialogContent()
 	const StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
 	QString fmt = QString("%1 hh:mm").arg(locmgr.getQtDateFormatStr());
 	ui->jdDateTimeEdit->setDisplayFormat(fmt);
-	// qDebug() << "GRS: fmt:" << fmt << "datetime" << StelUtils::jdToQDateTime(ss->getGrsJD(), false); // was like that before. Wrong, zone time!
-	ui->jdDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(ss->getGrsJD(), true)); // Of course this is true/UTC!
+	ui->jdDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(ss->getGrsJD(), Qt::UTC));
 	connect(ui->jdDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(setGrsJD(QDateTime)));
 
 	connect(ui->recentGrsMeasurementPushButton, SIGNAL(clicked(bool)), this, SLOT(openRecentGrsMeasurement()));
