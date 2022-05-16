@@ -22,7 +22,6 @@
 #define CONFIGURESCREENSHOTSDIALOG_HPP
 
 #include "StelDialog.hpp"
-#include "StelCore.hpp"
 
 #include <QObject>
 
@@ -44,9 +43,6 @@ protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
 	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	Ui_configureScreenshotsDialogForm *ui;
-
-private:
-	StelCore* core;
 };
 
 #endif // CONFIGURESCREENSHOTSDIALOG_HPP

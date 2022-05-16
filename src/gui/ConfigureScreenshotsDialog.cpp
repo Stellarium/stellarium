@@ -27,7 +27,6 @@
 ConfigureScreenshotsDialog::ConfigureScreenshotsDialog() : StelDialog("ConfigureScreenshotsDialog")
 {
 	ui = new Ui_configureScreenshotsDialogForm;
-	core = StelApp::getInstance().getCore();
 }
 
 ConfigureScreenshotsDialog::~ConfigureScreenshotsDialog()
