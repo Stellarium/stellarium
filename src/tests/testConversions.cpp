@@ -1871,13 +1871,13 @@ void TestConversions::testJDToQDateTime()
 	 map[2454466.5] = "2008-01-01 00:00:00";
 	 map[2400000.0] = "1858-11-16 12:00:00";
 
-	 // See https://doc.qt.io/qt-5/qdate.html#details for restrictions and converion issues (qint64 -> double)
+	 // See https://doc.qt.io/qt-5/qdate.html#details for restrictions and conversion issues (qint64 -> double)
 	 QString format = "yyyy-MM-dd HH:mm:ss";
 	 for (QMap<double, QString>::ConstIterator i=map.constBegin();i!=map.constEnd();++i)
 	 {
 		 QDateTime edt = QDateTime::fromString(i.value(), format);
 		 edt.setTimeSpec(Qt::UTC); // ESSENTIAL!
-		 QDateTime rdt = StelUtils::jdToQDateTime(i.key(), true); // Must be true.
+		 QDateTime rdt = StelUtils::jdToQDateTime(i.key(), Qt::UTC);
 		 QVERIFY2(edt==rdt, qPrintable(QString("JD: %1 Date: %2 Expected Date: %3")
 			.arg(QString::number(i.key(), 'f', 5), rdt.toString(format), i.value())));
 	 }

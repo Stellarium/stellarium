@@ -218,8 +218,8 @@ void AstroCalcChart::drawTrivialLineY(Series s, const qreal y)
 {
 	if (map.value(s))
 	{
-		replace(s, 0, qreal(StelUtils::jdToQDateTime(StelUtils::qDateTimeToJd(xAxis->min()), true).toMSecsSinceEpoch()), y);
-		replace(s, 1, qreal(StelUtils::jdToQDateTime(StelUtils::qDateTimeToJd(xAxis->max()), true).toMSecsSinceEpoch()), y);
+		replace(s, 0, qreal(StelUtils::jdToQDateTime(StelUtils::qDateTimeToJd(xAxis->min()), Qt::UTC).toMSecsSinceEpoch()), y);
+		replace(s, 1, qreal(StelUtils::jdToQDateTime(StelUtils::qDateTimeToJd(xAxis->max()), Qt::UTC).toMSecsSinceEpoch()), y);
 		map.value(s)->setPen(penMap.value(s));
 		//qDebug() << "Trivial Y line in" << s << "at" << y << "from" << xAxis->min() << "to" << xAxis->max();
 	}
@@ -313,7 +313,7 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 	switch (series){
 		case AstroCalcChart::AltVsTime:
 		case AstroCalcChart::AzVsTime:
-			startDate=StelUtils::jdToQDateTime(JD-utcOffset, true);
+			startDate=StelUtils::jdToQDateTime(JD-utcOffset, Qt::UTC);
 			endDate=startDate.addDays(1);
 			break;
 		case AstroCalcChart::MonthlyElevation:
@@ -322,13 +322,13 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 			endDate=startDate.addDays(372); // So that we have integral partitions that run along midnight!
 			break;
 		case AstroCalcChart::LunarElongation:
-			startDate=StelUtils::jdToQDateTime(baseJD-2, true);
-			endDate=StelUtils::jdToQDateTime(baseJD+30, true);
+			startDate=StelUtils::jdToQDateTime(baseJD-2, Qt::UTC);
+			endDate=StelUtils::jdToQDateTime(baseJD+30, Qt::UTC);
 			break;
 		case AstroCalcChart::pcDistanceAU:
 		case AstroCalcChart::pcDistanceDeg:
-			startDate=StelUtils::jdToQDateTime(baseJD-300, true);
-			endDate=StelUtils::jdToQDateTime(baseJD+300, true);
+			startDate=StelUtils::jdToQDateTime(baseJD-300, Qt::UTC);
+			endDate=StelUtils::jdToQDateTime(baseJD+300, Qt::UTC);
 			break;
 		default: // 2-curves page
 			StelUtils::getDateFromJulianDay(baseJD, &year, &month, &day);

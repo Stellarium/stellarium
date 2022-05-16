@@ -254,7 +254,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->saturnMarkerColor->setText(QChar(0x2644));
 
 	const double JD = core->getJD() + core->getUTCOffset(core->getJD()) / 24;
-	QDateTime currentDT		= StelUtils::jdToQDateTime(JD, false); // TODO: false must become true. What are the consequences?
+	QDateTime currentDT = StelUtils::jdToQDateTime(JD, Qt::LocalTime);
 	ui->dateFromDateTimeEdit->setDateTime(currentDT);
 	ui->dateToDateTimeEdit->setDateTime(currentDT.addMonths(1));
 	ui->phenomenFromDateEdit->setDateTime(currentDT);
@@ -768,7 +768,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 				az -= M_PI*2;
 
 			// We must shift the JD value to trick the display into zone time.
-			azVsTimeChart->append(AstroCalcChart::AzVsTime, StelUtils::jdToQDateTime(JD, true).toMSecsSinceEpoch(), az*M_180_PI);
+			azVsTimeChart->append(AstroCalcChart::AzVsTime, StelUtils::jdToQDateTime(JD, Qt::UTC).toMSecsSinceEpoch(), az*M_180_PI);
 		}
 		azVsTimeChart->show(AstroCalcChart::AzVsTime);
 		core->setJD(currentJD);
@@ -4217,22 +4217,22 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			}
 #endif
 			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
-			altVsTimeChart->append(AstroCalcChart::AltVsTime, StelUtils::jdToQDateTime(JD, true).toMSecsSinceEpoch(), alt*M_180_PI);
+			altVsTimeChart->append(AstroCalcChart::AltVsTime, StelUtils::jdToQDateTime(JD, Qt::UTC).toMSecsSinceEpoch(), alt*M_180_PI);
 
 			if (plotAltVsTimeSun)
 			{
 				StelUtils::rectToSphe(&az, &alt, sun->getAltAzPosAuto(core));
 				double deg=alt*M_180_PI;
 
-				altVsTimeChart->append(AstroCalcChart::SunElevation,     StelUtils::jdToQDateTime(JD, true).toMSecsSinceEpoch(), deg);
-				altVsTimeChart->append(AstroCalcChart::CivilTwilight,    StelUtils::jdToQDateTime(JD, true).toMSecsSinceEpoch(), deg+6);
-				altVsTimeChart->append(AstroCalcChart::NauticalTwilight, StelUtils::jdToQDateTime(JD, true).toMSecsSinceEpoch(), deg+12);
-				altVsTimeChart->append(AstroCalcChart::AstroTwilight,    StelUtils::jdToQDateTime(JD, true).toMSecsSinceEpoch(), deg+18);
+				altVsTimeChart->append(AstroCalcChart::SunElevation,     StelUtils::jdToQDateTime(JD, Qt::UTC).toMSecsSinceEpoch(), deg);
+				altVsTimeChart->append(AstroCalcChart::CivilTwilight,    StelUtils::jdToQDateTime(JD, Qt::UTC).toMSecsSinceEpoch(), deg+6);
+				altVsTimeChart->append(AstroCalcChart::NauticalTwilight, StelUtils::jdToQDateTime(JD, Qt::UTC).toMSecsSinceEpoch(), deg+12);
+				altVsTimeChart->append(AstroCalcChart::AstroTwilight,    StelUtils::jdToQDateTime(JD, Qt::UTC).toMSecsSinceEpoch(), deg+18);
 			}
 			if (plotAltVsTimeMoon && onEarth)
 			{
 				StelUtils::rectToSphe(&az, &alt, moon->getAltAzPosAuto(core));
-				altVsTimeChart->append(AstroCalcChart::Moon, StelUtils::jdToQDateTime(JD, true).toMSecsSinceEpoch(), alt*M_180_PI);
+				altVsTimeChart->append(AstroCalcChart::Moon, StelUtils::jdToQDateTime(JD, Qt::UTC).toMSecsSinceEpoch(), alt*M_180_PI);
 			}
 		}
 		altVsTimeChart->show(AstroCalcChart::AltVsTime);
@@ -4315,7 +4315,7 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 	if (plotAltVsTime)
 	{
 		if (altVsTimeChart){
-			altVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, qreal(StelUtils::jdToQDateTime(currentJD, true).toMSecsSinceEpoch()));
+			altVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, qreal(StelUtils::jdToQDateTime(currentJD, Qt::UTC).toMSecsSinceEpoch()));
 		}
 		else
 			qWarning() << "no alt chart to add CT line!";
@@ -4324,7 +4324,7 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 	{
 		if (azVsTimeChart)
 		{
-			azVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, qreal(StelUtils::jdToQDateTime(currentJD, true).toMSecsSinceEpoch()));
+			azVsTimeChart->drawTrivialLineX(AstroCalcChart::CurrentTime, qreal(StelUtils::jdToQDateTime(currentJD, Qt::UTC).toMSecsSinceEpoch()));
 		}
 		else
 			qWarning() << "no azi chart to add CT line!";
@@ -4381,9 +4381,9 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 			core->setJD(JD);
 			core->update(0.0);
 
-			curvesChart->append(firstGraph,  StelUtils::jdToQDateTime(JD+utcOffset, true).toMSecsSinceEpoch(), computeGraphValue(ssObj, firstGraph));
-			curvesChart->append(secondGraph, StelUtils::jdToQDateTime(JD+utcOffset, true).toMSecsSinceEpoch(), computeGraphValue(ssObj, secondGraph));
-			//qDebug() << secondGraph << ": JD" << QString::number(JD+utcOffset, 'f', 18) << "=" << "=" << StelUtils::julianDayToISO8601String(JD+utcOffset) << StelUtils::jdToQDateTime(JD+utcOffset, true) << ":" << computeGraphValue(ssObj, secondGraph);
+			curvesChart->append(firstGraph,  StelUtils::jdToQDateTime(JD+utcOffset, Qt::UTC).toMSecsSinceEpoch(), computeGraphValue(ssObj, firstGraph));
+			curvesChart->append(secondGraph, StelUtils::jdToQDateTime(JD+utcOffset, Qt::UTC).toMSecsSinceEpoch(), computeGraphValue(ssObj, secondGraph));
+			//qDebug() << secondGraph << ": JD" << QString::number(JD+utcOffset, 'f', 18) << "=" << "=" << StelUtils::julianDayToISO8601String(JD+utcOffset) << StelUtils::jdToQDateTime(JD+utcOffset, Qt::UTC) << ":" << computeGraphValue(ssObj, secondGraph);
 		}
 		core->setJD(currentJD);
 
@@ -4671,8 +4671,8 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 			double az, alt;
 			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
 			// The first point shall be plotted at the sharp edge date of Jan1 at midnight. The plot should more correctly be a point plot, but the spline is good enough.
-			monthlyElevationChart->append(AstroCalcChart::MonthlyElevation, StelUtils::jdToQDateTime(JD-hour/24.+utOffset, true).toMSecsSinceEpoch(), alt*M_180_PI);
-			//qDebug() << "ME:" << StelUtils::jdToQDateTime(JD, true) << "/" << deg;
+			monthlyElevationChart->append(AstroCalcChart::MonthlyElevation, StelUtils::jdToQDateTime(JD-hour/24.+utOffset, Qt::UTC).toMSecsSinceEpoch(), alt*M_180_PI);
+			//qDebug() << "ME:" << StelUtils::jdToQDateTime(JD, Qt::UTC) << "/" << deg;
 		}
 		core->setJD(currentJD);
 		yRangeME=monthlyElevationChart->findYRange(AstroCalcChart::MonthlyElevation);
@@ -6142,7 +6142,7 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 	if (ui->stackListWidget->row(current) == 1)
 	{
 		double JD = core->getJD() + core->getUTCOffset(core->getJD()) / 24;
-		QDateTime currentDT = StelUtils::jdToQDateTime(JD, false); // TODO: false must become true! What are the consequences?
+		QDateTime currentDT = StelUtils::jdToQDateTime(JD, Qt::LocalTime);
 		ui->dateFromDateTimeEdit->setDateTime(currentDT);
 		ui->dateToDateTimeEdit->setDateTime(currentDT.addMonths(1));
 	}
@@ -7474,11 +7474,11 @@ void AstroCalcDialog::drawDistanceGraph()
 		Vec3d posFCB = firstCBId->getJ2000EquatorialPos(core);
 		Vec3d posSCB = secondCBId->getJ2000EquatorialPos(core);
 		double distanceAu = (posFCB - posSCB).length();
-		pcChart->append(AstroCalcChart::pcDistanceAU, StelUtils::jdToQDateTime(JD+utcOffset, true).toMSecsSinceEpoch(), distanceAu);
+		pcChart->append(AstroCalcChart::pcDistanceAU, StelUtils::jdToQDateTime(JD+utcOffset, Qt::UTC).toMSecsSinceEpoch(), distanceAu);
 		if (firstCBId != currentPlanet && secondCBId != currentPlanet)
 		{
 			double r= posFCB.angle(posSCB);
-			pcChart->append(AstroCalcChart::pcDistanceDeg, StelUtils::jdToQDateTime(JD+utcOffset, true).toMSecsSinceEpoch(), r*M_180_PI);
+			pcChart->append(AstroCalcChart::pcDistanceDeg, StelUtils::jdToQDateTime(JD+utcOffset, Qt::UTC).toMSecsSinceEpoch(), r*M_180_PI);
 		}
 	}
 	core->setJD(currentJD);
@@ -7568,7 +7568,7 @@ void AstroCalcDialog::drawLunarElongationGraph()
 			const Vec3d moonPosition = moon->getJ2000EquatorialPos(core);
 			const Vec3d selectedObjectPosition = selectedObject->getJ2000EquatorialPos(core);
 			double distance = moonPosition.angle(selectedObjectPosition);
-			lunarElongationChart->append(AstroCalcChart::LunarElongation, StelUtils::jdToQDateTime(JD+utcOffset, true).toMSecsSinceEpoch(), distance*M_180_PI);
+			lunarElongationChart->append(AstroCalcChart::LunarElongation, StelUtils::jdToQDateTime(JD+utcOffset, Qt::UTC).toMSecsSinceEpoch(), distance*M_180_PI);
 		}
 		core->setJD(currentJD);
 
