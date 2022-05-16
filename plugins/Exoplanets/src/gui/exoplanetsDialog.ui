@@ -135,7 +135,7 @@
    <item>
     <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="settingsTab">
       <attribute name="title">
@@ -514,7 +514,6 @@
                <widget class="QLabel" name="labelX">
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -589,7 +588,6 @@
                <widget class="QLabel" name="labelY">
                 <property name="font">
                  <font>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -665,6 +663,9 @@
           </item>
          </layout>
         </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QChartView" name="chartView"/>
        </item>
       </layout>
      </widget>
@@ -772,6 +773,11 @@
    <class>QCustomPlot</class>
    <extends>QWidget</extends>
    <header>external/qcustomplot/qcustomplot.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QChartView</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">qchartview.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -34,6 +34,8 @@
 #define AU_KMf (1.0f/149597870.691f)
 // Parsec (km)
 #define PARSEC 30.857e12
+// Parsec (LY)
+#define PARSEC_LY 3.261563777
 // speed of light (km/sec)
 #define SPEED_OF_LIGHT 299792.458
 // Ecliptic obliquity of J2000.0, degrees
