@@ -2372,6 +2372,18 @@
                  </property>
                 </widget>
                </item>
+               <item>
+                <widget class="QPushButton" name="pushButtonConfigureScreenshotsDialog">
+                 <property name="toolTip">
+                  <string>Rules for screenshot file naming</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/uibtSettings.png</normaloff>
+                   <disabledoff>:/graphicGui/uibtSettings.png</disabledoff>:/graphicGui/uibtSettings.png</iconset>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
              <item>

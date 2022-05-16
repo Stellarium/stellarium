@@ -340,6 +340,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/GreatRedSpotDialog.cpp
           gui/CustomDeltaTEquationDialog.hpp
           gui/CustomDeltaTEquationDialog.cpp
+          gui/ConfigureScreenshotsDialog.hpp
+          gui/ConfigureScreenshotsDialog.cpp
           gui/AstroCalcDialog.hpp
           gui/AstroCalcDialog.cpp
           gui/AstroCalcExtraEphemerisDialog.hpp
@@ -374,6 +376,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/atmosphereDialog.ui
           gui/greatRedSpotDialog.ui
           gui/customDeltaTEquationDialog.ui
+          gui/configureScreenshotsDialog.ui
           gui/astroCalcDialog.ui
           gui/astroCalcExtraEphemerisDialog.ui
           gui/astroCalcCustomStepsDialog.ui

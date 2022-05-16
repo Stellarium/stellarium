@@ -22,6 +22,7 @@
 #include "Dialog.hpp"
 #include "ConfigurationDialog.hpp"
 #include "CustomDeltaTEquationDialog.hpp"
+#include "ConfigureScreenshotsDialog.hpp"
 #include "StelMainView.hpp"
 #include "ui_configurationDialog.h"
 #include "StelApp.hpp"
@@ -89,6 +90,7 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	, progressBar(Q_NULLPTR)
 	, gui(agui)
 	, customDeltaTEquationDialog(Q_NULLPTR)
+	, configureScreenshotsDialog(Q_NULLPTR)
 	, savedProjectionType(StelApp::getInstance().getCore()->getCurrentProjectionType())
 {
 	ui = new Ui_configurationDialogForm;
@@ -100,6 +102,8 @@ ConfigurationDialog::~ConfigurationDialog()
 	ui = Q_NULLPTR;
 	delete customDeltaTEquationDialog;
 	customDeltaTEquationDialog = Q_NULLPTR;
+	delete configureScreenshotsDialog;
+	configureScreenshotsDialog = Q_NULLPTR;
 	delete currentDownloadFile;
 	currentDownloadFile = Q_NULLPTR;
 }
@@ -365,6 +369,7 @@ void ConfigurationDialog::createDialogContent()
 
 	// Screenshots
 	populateScreenshotFileformatsCombo();
+	connect(ui->pushButtonConfigureScreenshotsDialog, SIGNAL(clicked()), this, SLOT(showConfigureScreenshotsDialog()));
 	connectStringProperty(ui->screenshotFileFormatComboBox, "MainView.screenShotFormat");
 	ui->screenshotDirEdit->setText(StelFileMgr::getScreenshotDir());
 	connect(ui->screenshotDirEdit, SIGNAL(editingFinished()), this, SLOT(selectScreenshotDir()));
@@ -1196,6 +1201,8 @@ void ConfigurationDialog::saveAllSettings()
 
 	conf->setValue("main/screenshot_dir",				StelFileMgr::getScreenshotDir());
 	conf->setValue("main/invert_screenshots_colors",		propMgr->getStelPropertyValue("MainView.flagInvertScreenShotColors").toBool());
+	conf->setValue("main/screenshot_datetime_filename",		propMgr->getStelPropertyValue("MainView.flagScreenshotDateFileName").toBool());
+	conf->setValue("main/screenshot_datetime_filemask",		propMgr->getStelPropertyValue("MainView.screenShotFileMask").toString());
 	conf->setValue("main/screenshot_custom_size",			propMgr->getStelPropertyValue("MainView.flagUseCustomScreenshotSize").toBool());
 	conf->setValue("main/screenshot_custom_width",			propMgr->getStelPropertyValue("MainView.customScreenshotWidth").toInt());
 	conf->setValue("main/screenshot_custom_height",			propMgr->getStelPropertyValue("MainView.customScreenshotHeight").toInt());
@@ -1917,6 +1924,14 @@ void ConfigurationDialog::showCustomDeltaTEquationDialog()
 		customDeltaTEquationDialog = new CustomDeltaTEquationDialog();
 
 	customDeltaTEquationDialog->setVisible(true);
+}
+
+void ConfigurationDialog::showConfigureScreenshotsDialog()
+{
+	if (configureScreenshotsDialog == Q_NULLPTR)
+		configureScreenshotsDialog = new ConfigureScreenshotsDialog();
+
+	configureScreenshotsDialog->setVisible(true);
 }
 
 void ConfigurationDialog::populateDateFormatsList()
