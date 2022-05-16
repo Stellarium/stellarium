@@ -1076,11 +1076,12 @@ Example provided in section~\ref{sec:gui:SearchWindow:Object}.
 \section{The Astronomical Calculations Window}
 \label{sec:gui:AstroCalc}
 
-This window \newFeature{0.15.0} provides advanced functionality, some of which is still in an experimental phase.
+This window \newFeature{0.15.0} provides advanced functionality, some of which is still under development.
 You can call it by pressing \key{F10} or the button \guibutton{0.6}{btd_astrocalc.png} on the left menu bar. 
 The Astronomical Calculations window shows eight tabs with different functionality.
 
-Most tabs allow \newFeature{0.18.3} exporting computed data to XLSX (Excel) files in addition to CSV files.
+Most tabs allow \newFeature{0.18.3} exporting computed data to XLSX (Excel) files in addition to CSV files, and
+graphs can be exported \newFeature{0.22.2} as PNG files.
 
 \subsection{The Positions Tab}
 \label{sec:gui:AstroCalc:Positions}
@@ -1098,7 +1099,7 @@ You may also export the list of positions into an XLSX or CSV file.
 \end{figure}
 
 This tab \newFeature{0.22.0} is split into 2 subtabs: ``Seen now'' and ``Major planets''.
-The newly added ``Major planets'' subtab (Fig.~\ref{fig:gui:AstroCalc:Positions:MajorPlanets}) shows a table
+The ``Major planets'' subtab (Fig.~\ref{fig:gui:AstroCalc:Positions:MajorPlanets}) shows a table
 with heliocentric ecliptic positions of the major planets and a graphical representation of these positions
 (in polar coordinates). You may also export the list of positions into an XLSX or CSV file.
 
@@ -1214,17 +1215,17 @@ Four columns in the table may be helpful for planning observation of phenomena:
 \label{sec:gui:AstroCalc:Graphs}
 
 \begin{figure}[p]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_graphs_tab_altvstime.png}
+\centering\includegraphics[width=0.7\textwidth]{astrocalc_dialog_graphs_tab_altvstime.jpg}
 \caption{Astronomical Calculations (AstroCalc): Graphs / Altitude vs.\ Time}
 \label{fig:gui:AstroCalc:Graphs:AltVsTime}
 \end{figure}
 \begin{figure}[p]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_graphs_tab_azivstime.png}
+\centering\includegraphics[width=0.7\textwidth]{astrocalc_dialog_graphs_tab_azivstime.jpg}
 \caption{Astronomical Calculations (AstroCalc): Graphs / Azimuth vs.\ Time}
 \label{fig:gui:AstroCalc:Graphs:AziVsTime}
 \end{figure}
 \begin{figure}[p]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_graphs_tab_me.png}
+\centering\includegraphics[width=0.7\textwidth]{astrocalc_dialog_graphs_tab_me.jpg}
 \caption{Astronomical Calculations (AstroCalc): Graphs / Monthly Elevation}
 \label{fig:gui:AstroCalc:Graphs:ME}
 \end{figure}
@@ -1233,7 +1234,11 @@ Four columns in the table may be helpful for planning observation of phenomena:
 This tab\newFeature{0.18.3} provides on several sub-tabs
 \newFeature{0.19.0} graphs which are helpful for monthly observation
 planning of deep-sky objects and analysis of changes between objects
-or changes of their positions.
+or changes of their positions. Clicking \newFeature{0.22.2} in the
+graph sets the time at that point, and setting the mouse onto a graph
+displays values at this point. However, most graphs are intended for a
+rapid overview and are plotted using an interpolating spline through sparse samples,
+so do not expect highest accuracy. 
 
 \subsubsection{The ``Altitude vs.\ Time'' Subtab}
 \label{sec:gui:AstroCalc:Graphs:AltVsTime}
@@ -1259,13 +1264,13 @@ This tool was introduced for planning yearly observations (Fig.~\ref{fig:gui:Ast
 \label{sec:gui:AstroCalc:Graphs:Graphs}
     
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_graphs_tab_graphs.png}
+\centering\includegraphics[width=0.7\textwidth]{astrocalc_dialog_graphs_tab_graphs.jpg}
 \caption{Astronomical Calculations (AstroCalc): Graphs}
 \label{fig:gui:AstroCalc:Graphs:Graphs}
 \end{figure}
   
 This subtab \newFeature{0.16.0} can show two functions over time for
-the current year or for up to 30 years\newFeature{0.19.3} and draw graphs
+the current month or for up to 30 years\newFeature{0.19.3/0.22.2} and draw graphs
 for them in one screen (Fig.~\ref{fig:gui:AstroCalc:Graphs:Graphs}).
 You can select from
 \begin{itemize}
@@ -1283,19 +1288,24 @@ You can select from
 
 This tool may be very helpful for educational and statistics purposes.%
 	\footnote{The idea for this tool has been obtained from \program{SkytechX}: \url{http://www.skytechx.eu/}}
+For example, the magnitude curve for Jupiter's moons shows occasional dips where the moon is in Jupiter's shadow.
+However, while for most graphs a sampling interval of 24 hours should be sufficient (i.e., 1 value per day),
+for this graph you may want to reduce the sampling interval \newFeature{0.22.2} to 1 or 2 hours to avoid missing those eclipses by \indexterm{undersampling}.
+Of course, such high density takes much longer to compute, so you should avoid plotting this curve for many years,
+or expect a long delay where the program may seem unresponsive.
 	
-\subsubsection{The ``Lunar Distance'' Subtab}
-\label{sec:gui:AstroCalc:Graphs:LD}
+\subsubsection{The ``Lunar Elongation'' Subtab}
+\label{sec:gui:AstroCalc:Graphs:LE}
 
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_graphs_tab_ad.png}
-\caption{Astronomical Calculations (AstroCalc): Graphs / Lunar Distance}
-\label{fig:gui:AstroCalc:Graphs:LD}
+\centering\includegraphics[width=0.7\textwidth]{astrocalc_dialog_graphs_tab_ad.jpg}
+\caption{Astronomical Calculations (AstroCalc): Graphs / Lunar Elongation}
+\label{fig:gui:AstroCalc:Graphs:LE}
 \end{figure}
 
-This subtab (Fig.~\ref{fig:gui:AstroCalc:Graphs:LD})
-\newFeature{0.18.3} can show a ``Lunar Distance'' (formerly ``Angular
-Distance'') graph --- the change of angular distance between the Moon
+This subtab (Fig.~\ref{fig:gui:AstroCalc:Graphs:LE})
+\newFeature{0.18.3} can show a ``Lunar Elongation''
+graph --- the angular distance between the Moon
 and the selected object (for example some deep-sky object) for the
 nearest 30 days. This tool was introduced for planning monthly
 observations.
@@ -1352,7 +1362,7 @@ selected celestial bodies over a range of 600 days (centered on the
 current date) as graphs.
 
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_pc_graphs_tab.png}
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_pc_graphs_tab.jpg}
 \caption{Astronomical Calculations (AstroCalc): Planetary Calculator (PC), Graphs Tab}
 \label{fig:gui:AstroCalc:PC:Graphs}
 \end{figure}
