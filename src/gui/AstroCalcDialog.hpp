@@ -317,8 +317,6 @@ private slots:
 	void drawAltVsTimeDiagram();
 	//! Draw vertical line 'Now' on diagram 'Altitude vs. Time'
 	void drawCurrentTimeDiagram();
-	//! Show info from graphs under mouse cursor
-	//void mouseOverLine(QMouseEvent *event);
 	void saveAltVsTimeSunFlag(bool state);
 	void saveAltVsTimeMoonFlag(bool state);
 	void saveAltVsTimePositiveFlag(bool state);
@@ -523,7 +521,6 @@ private:
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration, graphsStep;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader;
 	static double brightLimit;
-	static double minY, maxY;
 	static const QString dash, delimiter;
 
 	//! Make sure that no tabs icons are outside of the viewport.
@@ -531,9 +528,6 @@ private:
 	void updateTabBarListWidgetWidth();
 
 	void enableAngularLimits(bool enable);
-
-	//! Set clicked time in AstroCalc AltVSTime/AziVsTime graphs
-	void setClickedTime(double posx);
 
 	//! Memorize day for detecting rollover to next/prev one
 	int oldGraphJD;

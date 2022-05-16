@@ -27,7 +27,7 @@
 //using namespace QtCharts;
 
 //! @class AstroCalcChart
-//! This class extends QChart and encapsulates data for the Altitude vs. Time and the other line Charts in AstroCalc.
+//! This class extends QChart and encapsulates data for the Altitude vs. Time and the other line Charts in AstroCalcDialog.
 //! Most lines can be QSplineSeries, however the azimuth and magnitude lines must use QLineSeries to avoid a "spline tremor" at the 0/360° transition or where some moon enters the shadow of its planet.
 //!
 //! Additional features:
@@ -49,13 +49,16 @@
 //!  we must circumvent Qt's automatic handling of local timezones and work as if the time axis would display UTC dates, however, the actual data are in our own timezone frame.
 //! This requires manipulation of the x values: From the data which are computed in JD, plot them in UT+zoneOffset. Clicked time is delivered as "UT" and must add zoneOffset as well.
 //!
+//! @note We are using QDateTime here. Currently we have no handling for years before 1AD. Qt has no year zero, we have it. Qt time scaling may also show use pf Proleptic Gregorian calendars.
+//! We must expect to see a few weird dates before 1AD or even before 1582.
+//!
 class AstroCalcChart : public QtCharts::QChart
 {
 	Q_OBJECT
 
 public:
-	// Series names. Better than int numbers for the old plots.
-	// This graph can be used in several scenarios. In 0.22 there are 6 plots which can be recreated by creating a chart which activates 1-2 lines of these:
+	// Series names.
+	// In 0.22 there are 6 charts created by activating 1-2 lines of these:
 	enum Series {AltVsTime, CurrentTime, TransitTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight, Moon,
 		     AzVsTime,
 		     MonthlyElevation,
@@ -142,6 +145,7 @@ private:
 
 	//! The QMap holds enums and series for principally existing graphs. These can be made active by show(key)
 	QMap<AstroCalcChart::Series, QtCharts::QLineSeries*> map;
+	//! A simple map for line properties.
 	static const QMap<AstroCalcChart::Series, QPen> penMap;
 };
 

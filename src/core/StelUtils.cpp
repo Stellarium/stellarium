@@ -584,7 +584,7 @@ int getBiggerPowerOfTwo(int value)
 }
 
 /*************************************************************************
- Convert a QT QDateTime class to julian day
+ Convert a Qt QDateTime class to Julian Day
 *************************************************************************/
 
 QDateTime jdToQDateTime(const double& jd, const Qt::TimeSpec timeSpec)
@@ -909,12 +909,12 @@ QTime jdFractionToQTime(const double jd)
 		hours+=1;
 	}
 	if (hours >= 24)
-		qDebug() << "WARNING: hour exceeds a full day!" << hours;
+		qDebug() << "WARNING: hours exceed a full day!" << hours;
 	hours %= 24;
 
 	QTime tm=QTime(hours, mins, sec, ms);
 	if (!tm.isValid())
-		qDebug() << "Invalid QTime:" << hours << "/" << mins << "/" << sec << "/" << ms << "-->" << tm;
+		qWarning() << "Invalid QTime:" << hours << "/" << mins << "/" << sec << "/" << ms << "-->" << tm;
 	Q_ASSERT(tm.isValid());
 	return tm;
 }
