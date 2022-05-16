@@ -816,6 +816,7 @@ void ExoplanetsDialog::drawDiagram()
 	QVector<double> x = aX.toVector(), y = aY.toVector();
 
 	QtCharts::QChart *chart=new QtCharts::QChart();
+	chart->setBackgroundBrush(QBrush(QColor(86, 87, 90)));
 	chart->setTitleBrush(QBrush(Qt::white));
 	chart->setMargins(QMargins(2, 1, 2, 1)); // set to 0/0/0/0 for max space usage. This is between the title/axis labels and the enclosing QChartView.
 	chart->layout()->setContentsMargins(0, 0, 0, 0);
@@ -827,6 +828,7 @@ void ExoplanetsDialog::drawDiagram()
 	for (int i=0; i<aX.length(); i++)
 	{
 		// build chartable series from the two lists. Exclude zeros to avoid issues with log charts.
+		// FIXME! If a series is orbital eccentricity, better apply a minimum value of 0.0001.
 		if ( (aX.at(i)!=0.) && (aY.at(i)!=0.))
 			series->append(aX.at(i), aY.at(i));
 	}
@@ -892,10 +894,30 @@ void ExoplanetsDialog::drawDiagram()
 	//chartXAxis->applyNiceNumbers();
 	chartXAxis->setTitleText(currentAxisXString);
 	chartYAxis->setTitleText(currentAxisYString);
+	QFont font=chartXAxis->titleFont();
+	font.setBold(false);
+	chartXAxis->setTitleFont(font);
+	font=chartYAxis->titleFont();
+	font.setBold(false);
+	chartYAxis->setTitleFont(font);
+
+	static const QPen axisPen(          Qt::white,      1,    Qt::SolidLine);
+	static const QPen axisGridPen(      Qt::white,      0.5,  Qt::SolidLine);
+	static const QPen axisMinorGridPen( Qt::white,      0.35, Qt::DotLine);
+
+	chartXAxis->setTitleBrush(Qt::white);
+	chartXAxis->setLabelsBrush(Qt::white);
+	chartXAxis->setLinePen(axisPen);
+	chartXAxis->setGridLinePen(axisGridPen);
+	chartXAxis->setMinorGridLinePen(axisMinorGridPen);
+	chartYAxis->setTitleBrush(Qt::white);
+	chartYAxis->setLabelsBrush(Qt::white);
+	chartYAxis->setLinePen(axisPen);
+	chartYAxis->setGridLinePen(axisGridPen);
+	chartYAxis->setMinorGridLinePen(axisMinorGridPen);
+
 	series->attachAxis(chartXAxis);
 	series->attachAxis(chartYAxis);
-
-
 
 	QChart *oldChart=ui->chartView->chart();
 	if (oldChart) oldChart->deleteLater();
