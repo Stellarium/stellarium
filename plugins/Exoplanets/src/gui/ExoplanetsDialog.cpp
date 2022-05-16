@@ -25,6 +25,10 @@
 #include <QUrl>
 #include <QFileDialog>
 #include <QColorDialog>
+#include <QtCharts/QtCharts>
+#include <QScatterSeries>
+#include <QValueAxis>
+#include <QLogValueAxis>
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -43,10 +47,13 @@
 
 #include "external/qcustomplot/qcustomplot.h"
 
+using namespace QtCharts;
+
 ExoplanetsDialog::ExoplanetsDialog()
 	: StelDialog("Exoplanets")
 	, ep(Q_NULLPTR)
 	, updateTimer(Q_NULLPTR)
+	, chart(Q_NULLPTR)
 {
         ui = new Ui_exoplanetsDialog;
 	exoplanetsHeader.clear();
@@ -61,6 +68,8 @@ ExoplanetsDialog::~ExoplanetsDialog()
 		updateTimer->stop();
 		delete updateTimer;
 		updateTimer = Q_NULLPTR;
+		if (chart)
+			delete chart;
 	}
 	delete ui;
 }
@@ -806,6 +815,22 @@ void ExoplanetsDialog::drawDiagram()
 	QList<double> aX = ep->getExoplanetsData(currentAxisX), aY = ep->getExoplanetsData(currentAxisY);
 	QVector<double> x = aX.toVector(), y = aY.toVector();
 
+	QtCharts::QChart *chart=new QtCharts::QChart();
+	chart->setTitleBrush(QBrush(Qt::white));
+	chart->setMargins(QMargins(2, 1, 2, 1)); // set to 0/0/0/0 for max space usage. This is between the title/axis labels and the enclosing QChartView.
+	chart->layout()->setContentsMargins(0, 0, 0, 0);
+	chart->setBackgroundRoundness(0); // remove rounded corners
+	chart->legend()->hide();
+
+	QtCharts::QScatterSeries *series=new QScatterSeries();
+	QAbstractAxis *chartXAxis, *chartYAxis;
+	for (int i=0; i<aX.length(); i++)
+	{
+		// build chartable series from the two lists. Exclude zeros to avoid issues with log charts.
+		if ( (aX.at(i)!=0.) && (aY.at(i)!=0.))
+			series->append(aX.at(i), aY.at(i));
+	}
+
 	double minX = *std::min_element(aX.begin(), aX.end());
 	double minY = *std::min_element(aY.begin(), aY.end());
 	double maxX = *std::max_element(aX.begin(), aX.end());
@@ -832,6 +857,13 @@ void ExoplanetsDialog::drawDiagram()
 	ui->customPlot->xAxis->setLabel(currentAxisXString);
 	ui->customPlot->yAxis->setLabel(currentAxisYString);
 
+	chart->addSeries(series);
+	series->setPen(QPen(Qt::blue));
+	series->setMarkerShape(QScatterSeries::MarkerShapeCircle);
+	series->setMarkerSize(4);
+	//series->rescaleAxes(true);
+
+
 	ui->customPlot->xAxis->setRange(minX, maxX);
 	if (ui->checkBoxLogX->isChecked())
 	{
@@ -851,6 +883,25 @@ void ExoplanetsDialog::drawDiagram()
 		ui->customPlot->yAxis->setScaleType(QCPAxis::stLinear);
 
 	ui->customPlot->replot();
+
+	// CHART: Define linear or log axes?
+	chartXAxis = ui->checkBoxLogX->isChecked() ? dynamic_cast<QAbstractAxis*>(new QLogValueAxis(chart)) : new QValueAxis(chart);
+	chartYAxis = ui->checkBoxLogY->isChecked() ? dynamic_cast<QAbstractAxis*>(new QLogValueAxis(chart)) : new QValueAxis(chart);
+	chart->addAxis(chartXAxis, Qt::AlignBottom);
+	chart->addAxis(chartYAxis, Qt::AlignLeft);
+	//chartXAxis->applyNiceNumbers();
+	chartXAxis->setTitleText(currentAxisXString);
+	chartYAxis->setTitleText(currentAxisYString);
+	series->attachAxis(chartXAxis);
+	series->attachAxis(chartYAxis);
+
+
+
+	QChart *oldChart=ui->chartView->chart();
+	if (oldChart) oldChart->deleteLater();
+	ui->chartView->setChart(chart);
+	ui->chartView->setRenderHint(QPainter::Antialiasing);
+
 }
 
 void ExoplanetsDialog::populateDiagramsList()

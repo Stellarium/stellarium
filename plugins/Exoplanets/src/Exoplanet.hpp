@@ -54,7 +54,7 @@ typedef struct
 class StelPainter;
 
 //! @class Exoplanet
-//! A exoplanet object represents one planetary system on the sky.
+//! An exoplanet object represents one extrasolar planetary system in the sky.
 //! Details about the exoplanets are passed using a QVariant which contains
 //! a map of data from the json file.
 //! @ingroup exoplanets
@@ -117,6 +117,7 @@ public:
 	QStringList getExoplanetsNamesI18n(void) const;
 	QStringList getExoplanetsDesignations(void) const;
 
+	//! @returns whether system has been discovered by the current year.
 	bool isDiscovered(const StelCore* core);
 
 	void update(double deltaTime);
