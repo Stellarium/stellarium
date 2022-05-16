@@ -33,9 +33,7 @@
 
 AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR), yMin(-90), yMax(90.)
 {
-	//qDebug() << "chart constructor";
-
-	// Configure all series you want to potentially use later.
+	// Configure with all series you want to potentially use later.
 	for (Series s: which)
 	{
 		// To avoid "spline tremor" we need line series for azimuths (0/360° rollover) and magnitudes (in case of shadow transits)
@@ -43,8 +41,7 @@ AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR)
 			map.insert(s, new QtCharts::QLineSeries(this));
 		else
 			map.insert(s, new QtCharts::QSplineSeries(this));
-	// TODO: REMOVE, this is DEV/DEBUG ONLY
-	map.value(s)->setPointsVisible(true);
+	// map.value(s)->setPointsVisible(true); // useful for debugging only.
 	}
 
 	setBackgroundBrush(QBrush(QColor(86, 87, 90)));
@@ -71,8 +68,6 @@ AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR)
 	setMargins(QMargins(2, 1, 2, 1)); // set to 0/0/0/0 for max space usage. This is between the title/axis labels and the enclosing QChartView.
 	layout()->setContentsMargins(0, 0, 0, 0);
 	setBackgroundRoundness(0); // remove rounded corners
-
-	//qDebug() << "c'tor done";
 }
 
 AstroCalcChart::~AstroCalcChart()
@@ -82,7 +77,7 @@ AstroCalcChart::~AstroCalcChart()
 
 void AstroCalcChart::retranslate(){
 	// We need to configure every enum Series here!
-	if (map.contains(AltVsTime            )) map.value(AltVsTime            )->setName(q_("Altitude")); // no name in old solution, but used for legend!
+	if (map.contains(AltVsTime            )) map.value(AltVsTime            )->setName(q_("Altitude"));
 	if (map.contains(CurrentTime          )) map.value(CurrentTime          )->setName(q_("Now"));
 	if (map.contains(TransitTime          )) map.value(TransitTime          )->setName(q_("Culmination"));
 	if (map.contains(SunElevation         )) map.value(SunElevation         )->setName(q_("Sun"));
@@ -256,7 +251,6 @@ void AstroCalcChart::showToolTip(const QPointF &point, bool show)
 		QString units("°");
 		QDateTime date=QDateTime::fromMSecsSinceEpoch(qint64(point.x()), Qt::UTC);
 		double jd=StelUtils::qDateTimeToJd(date);
-		//QString dateStr=StelUtils::julianDayToISO8601String(jd+offset); // NOO! The grid shall indeed display local time... 20220510
 		if (QList<Series>({CurrentTime, TransitTime, AltVsTime, AzVsTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight}).contains(seriesCode))
 		{
 			double offset=StelApp::getInstance().getCore()->getUTCOffset(jd)/24;
@@ -265,7 +259,6 @@ void AstroCalcChart::showToolTip(const QPointF &point, bool show)
 
 		QString dateStr=StelUtils::julianDayToISO8601String(jd);
 		dateStr.replace('T', ' ');
-		//qDebug() << "JD clicked: " << jd;
 		// Change units where required. No units for distances, phases!
 		if (QList<AstroCalcChart::Series>({AstroCalcChart::CurrentTime, AstroCalcChart::TransitTime,
 						  AstroCalcChart::Distance1, AstroCalcChart::Distance2,
@@ -277,34 +270,23 @@ void AstroCalcChart::showToolTip(const QPointF &point, bool show)
 		}
 		if (seriesCode==AstroCalcChart::MonthlyElevation)
 		{
-			//dateStr=StelUtils::julianDayToISO8601String(jd+offset);
 			dateStr.truncate(dateStr.indexOf(' ')); // discard displayed time.
 		}
-		//setToolTip(QString("%1\n%2: %3%4").arg(date.toString("yyyy.MM.dd hh:mm"), series->name(), QString::number(point.y(), 'f', 3), units));
 		setToolTip(QString("%1\n%2: %3%4").arg(dateStr, series->name(), QString::number(point.y(), 'f', 3), units));
 	}
 	else
 		setToolTip(QString());
 }
 
-
 void AstroCalcChart::clear(Series s)
 {
-	//qDebug() << "Clearing series " << s;
-	//qDebug() << "Before remove it has " << map.value(s)->points().length() << "entries";
-	//qDebug() << "clearing series with " << map.value(s)->points().length() << "entries";
 	map.value(s)->clear();
-	//qDebug() << "clear(): Removing series " << s;
 	if (series().contains(map.value(s)))
 		removeSeries(map.value(s)); // updates legend to not show entries
 }
 
 QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Series series, const int periods)
 {
-	//double midnightJD;
-	//int year, month, day;
-	//StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
-	//StelUtils::getJDFromDate(&midnightJD, year, month, day, 0, 0, 0.f);
 	const double utcOffset=StelApp::getInstance().getCore()->getUTCOffset(JD) / 24.;
 
 	QDateTime startDate, endDate;
@@ -336,7 +318,7 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 			endDate=startDate.addDays(30*periods);
 			break;
 	}
-	qDebug() << "findXRange(): Date Range set for series " << series << ":" << startDate << " to " << endDate;
+	//qDebug() << "findXRange(): Date Range set for series " << series << ":" << startDate << " to " << endDate;
 	return QPair(startDate, endDate);
 }
 
@@ -497,7 +479,6 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 	xAxis->setGridLinePen(axisGridPen);
 	xAxis->setMinorGridLinePen(axisMinorGridPen);
 
-	//setYrange(yMin, yMax);
 	yAxis->setLinePen(axisPen);
 	yAxis->setGridLinePen(axisGridPen);
 	yAxis->setMinorGridLinePen(axisMinorGridPen);
@@ -569,7 +550,6 @@ void AstroCalcChart::setYrange(Series series, qreal min, qreal max, bool strictM
 
 	qreal rMin=floor(yMin/s)*s;
 	qreal rMax=ceil(yMax/s)*s;
-
 
 	//qDebug() << "Setting yrange from" << min << "/" << max << "-->" << rMin << "/" << rMax;
 	yAxis->setRange(rMin, rMax);
@@ -679,18 +659,17 @@ void AstroCalcChart::mousePressEvent(QGraphicsSceneMouseEvent *event)
 		return;
 
 	// N.B. pos() and scenePos() give the same coords. Y counting top-down, X left-right, pixel positions.
-	qDebug() << "mousePressEvent by" << event->buttons() << "at Pos" << event->pos() << "scenePos" << event->scenePos() << "screenPos" << event->screenPos();
+	//qDebug() << "mousePressEvent by" << event->buttons() << "at Pos" << event->pos() << "scenePos" << event->scenePos() << "screenPos" << event->screenPos();
 
 	const QPointF pt=mapToValue(event->pos());
 	const QDateTime dt=QDateTime::fromMSecsSinceEpoch(qint64(pt.x()), Qt::UTC);
 
-	qDebug() << "This represents " << dt << "/" << pt.y() << "or" << mapToValue(event->scenePos());
+	//qDebug() << "This represents " << dt << "/" << pt.y() << "or" << mapToValue(event->scenePos());
 
 	static StelCore *core=StelApp::getInstance().getCore();
 	double jd=StelUtils::qDateTimeToJd(dt);
 	const double offset=core->getUTCOffset(jd)/24.;
 
-	// 20220510: Bad coord in curves chart. Also elsewhere?
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
 	QSet<Series> currentSeries(map.keyBegin(), map.keyEnd());
 #else

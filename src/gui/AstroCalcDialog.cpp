@@ -68,7 +68,6 @@ using namespace QtCharts;
 #include "AstroCalcCustomStepsDialog.hpp"
 #include "ui_astroCalcDialog.h"
 
-#include "external/qcustomplot/qcustomplot.h"
 #include "external/qxlsx/xlsxdocument.h"
 #include "external/qxlsx/xlsxchartsheet.h"
 #include "external/qxlsx/xlsxcellrange.h"
@@ -80,8 +79,6 @@ using namespace QXlsx;
 QVector<Ephemeris> AstroCalcDialog::EphemerisList;
 int AstroCalcDialog::DisplayedPositionIndex = -1;
 double AstroCalcDialog::brightLimit = 10.;
-double AstroCalcDialog::minY = -90.; // TODO: get rid of this and the next.
-double AstroCalcDialog::maxY = 90.;
 const QString AstroCalcDialog::dash = QChar(0x2014);
 const QString AstroCalcDialog::delimiter(", ");
 
@@ -395,20 +392,12 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->moonAltitudeCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveAltVsTimeMoonFlag(bool)));
 	connect(ui->positiveAltitudeOnlyCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveAltVsTimePositiveFlag(bool)));
 	connect(ui->positiveAltitudeLimitSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveAltVsTimePositiveLimit(int)));
-	//connect(ui->altVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverLine(QMouseEvent*)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));
-
-	//connect(ui->altVsTimePlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(altTimeClick(QMouseEvent*)));
-	//connect(ui->aziVsTimePlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(aziTimeClick(QMouseEvent*)));
-
-	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(handleVisibleEnabled()));
-
-	//connect(ui->aziVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverAziLine(QMouseEvent*)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAziVsTimeDiagram()));
-
 	connect(core, SIGNAL(dateChanged()), this, SLOT(drawCurrentTimeDiagram()));
 	connect(this, SIGNAL(graphDayChanged()), this, SLOT(drawAltVsTimeDiagram()));
 	connect(this, SIGNAL(graphDayChanged()), this, SLOT(drawAziVsTimeDiagram()));
+	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(handleVisibleEnabled()));
 
 	// Monthly Elevation
 	plotMonthlyElevationPositive = conf->value("astrocalc/me_positive_only", false).toBool();
@@ -644,7 +633,6 @@ void AstroCalcDialog::searchWutClear()
 
 void AstroCalcDialog::updateAstroCalcData()
 {
-	qDebug() << "updateAstroCalcData()";
 	drawAltVsTimeDiagram();
 	populateCelestialBodyList();
 	populatePlanetList();
@@ -4501,7 +4489,7 @@ double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const AstroCalcC
 			break;
 		}
 		default:
-			qWarning() << "AstroCalc::computeGraphValue() Wrong call for " << graphType;
+			qWarning() << "AstroCalcDialog::computeGraphValue() Wrong call for " << graphType;
 	}
 	return value;
 }
@@ -4672,7 +4660,6 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
 			// The first point shall be plotted at the sharp edge date of Jan1 at midnight. The plot should more correctly be a point plot, but the spline is good enough.
 			monthlyElevationChart->append(AstroCalcChart::MonthlyElevation, StelUtils::jdToQDateTime(JD-hour/24.+utOffset, Qt::UTC).toMSecsSinceEpoch(), alt*M_180_PI);
-			//qDebug() << "ME:" << StelUtils::jdToQDateTime(JD, Qt::UTC) << "/" << deg;
 		}
 		core->setJD(currentJD);
 		yRangeME=monthlyElevationChart->findYRange(AstroCalcChart::MonthlyElevation);
@@ -4706,26 +4693,6 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 	ui->monthlyElevationChartView->setRenderHint(QPainter::Antialiasing);
 
 	monthlyElevationChartMutex.unlock();
-}
-
-// TODO: This is now unused. Maybe integrate into the mouse click handler of the Chart.
-void AstroCalcDialog::setClickedTime(double posx)
-{
-	double JD = core->getJD();
-	double shift = core->getUTCOffset(JD) / 24;
-	int noonJD = static_cast<int>(JD + shift);
-	JD = posx / 86400.0 + noonJD - 0.5 - shift;
-
-	core->setRealTimeSpeed();
-	core->setJD(JD);
-	drawCurrentTimeDiagram();
-
-	// if object is tracked, we make our own (smoothed) movement
-	if (mvMgr->getFlagTracking())
-	{
-		StelObjectP obj = objectMgr->getSelectedObject()[0];
-		mvMgr->moveToObject(obj, 0.4f);
-	}
 }
 
 // When dialog becomes visible: check if there is a graph plot to refresh
