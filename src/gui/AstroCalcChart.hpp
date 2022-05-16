@@ -106,11 +106,9 @@ public:
 	void setupAxes(const double jd, const int periods, const QString &englishName);
 
 	//! Draw a 2-point vertical line at x which extends over the whole graph
-	//! Note: This shall replace AstroCalcDialog::drawTransitTimeDiagram() and AstroCalcDialog::drawCurrentTimeDiagram()
 	void drawTrivialLineX(Series s, const qreal x);
 
 	//! Draw a 2-point horizontal line at y which extends over the whole graph
-	//! Note: This shall replace AstroCalcDialog::drawAngularDistanceLimitLine()
 	void drawTrivialLineY(Series s, const qreal y);
 
 public slots:
@@ -118,9 +116,6 @@ public slots:
 	//! A slot to connect the hovered signal from a series to. It shows the value of the series in a Tooltip on mouse-over.
 	//! @note it only shows values of a point where the mouse is over. The vertical lines for "now" and "transit" are currently unavailable.
 	void showToolTip(const QPointF &point, bool show);
-
-private slots:
-	//void setOptionStatus();
 
 protected:
 	//! Override. This sets the time from the click point to the main application.

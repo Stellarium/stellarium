@@ -357,8 +357,6 @@ QPair<double, double> AstroCalcChart::findYMax(const Series series) const
 
 void AstroCalcChart::setupAxes(const double jd, const int periods, const QString &englishName)
 {
-	//qDebug() << "setupAxes()...";
-
 	static const QPen axisPen(          Qt::white,      1,    Qt::SolidLine);
 	static const QPen axisGridPen(      Qt::white,      0.5,  Qt::SolidLine);
 	static const QPen axisMinorGridPen( Qt::white,      0.35, Qt::DotLine);
@@ -535,7 +533,6 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 			map.value(s)->attachAxis(yAxisR);
 		}
 	}
-	//qDebug() << "setupAxes()...done";
 }
 
 void AstroCalcChart::setYrange(Series series, qreal min, qreal max, bool strictMin)
@@ -597,6 +594,7 @@ void AstroCalcChart::bufferYrange(Series series, double *min, double *max, bool 
 	// Decide, per-case, buffer values and true limits (0...360, 0..24, -90..+90, etc.)
 	// Most curves are Splines which may exceed the actual X/Y point range somewhat, requiring a buffer. A better algorithm should compute the actual max values for the spline!
 
+	const double range=*max-*min;
 	// Go over all "main" series of the charts.
 	switch (series){
 		case AltVsTime:
@@ -633,18 +631,18 @@ void AstroCalcChart::bufferYrange(Series series, double *min, double *max, bool 
 		case PhaseAngle2:
 		case LunarElongation:
 		case pcDistanceDeg:
-			*min=qMax(  0., *min-0.05*(*max-*min));
-			*max=qMin(180., *max+0.05*(*max-*min));
+			*min=qMax(  0., *min-0.05*range);
+			*max=qMin(180., *max+0.05*range);
 			break;
 		case Magnitude1:
 		case Magnitude2:
-			*min=*min-0.05*(*max-*min);
-			*max=*max+0.05*(*max-*min);
+			*min=*min-0.05*range;
+			*max=*max+0.05*range;
 			break;
 		case Phase1:
 		case Phase2:
-			*min=qMax(0., *min-0.05*(*max-*min));
-			*max=qMin(1., *max+0.05*(*max-*min));
+			*min=qMax(0., *min-0.05*range);
+			*max=qMin(1., *max+0.05*range);
 			break;
 		default: // 8 other series which should not influence chart scaling
 			break;
