@@ -418,17 +418,17 @@ signals:
 public slots:
 	//! get whether or not the plugin will try to update TLE data from the internet
 	//! @return true if updates are set to be done, false otherwise
-	bool getUpdatesEnabled(void) const {return updatesEnabled;}
+	bool getUpdatesEnabled(void) {return updatesEnabled;}
 	//! Set whether the plugin will try to download updates from the Internet.
 	//! Emits settingsChanged() if the value changes.
 	//! @param b if true, updates will be enabled, else they will be disabled.
 	void setUpdatesEnabled(bool enabled);
 	
-	bool isAutoAddEnabled() const { return autoAddEnabled; }
+	bool isAutoAddEnabled() { return autoAddEnabled; }
 	//! Emits settingsChanged() if the value changes.
 	void setAutoAddEnabled(bool enabled);
 	
-	bool isAutoRemoveEnabled() const { return autoRemoveEnabled; }
+	bool isAutoRemoveEnabled() { return autoRemoveEnabled; }
 	//! Emits settingsChanged() if the value changes.
 	void setAutoRemoveEnabled(bool enabled);
 	
@@ -436,36 +436,36 @@ public slots:
 	//! Note that hint visibility also applies to satellite labels.
 	//! Emits settingsChanged() if the value changes.
 	void setFlagHintsVisible(bool b);
-	bool getFlagHintsVisible() const {return hintFader;}
+	bool getFlagHintsVisible() {return hintFader;}
 
 	//! Set whether text labels should be displayed next to satellite hints.
 	//! Emits settingsChanged() if the value changes.
 	//! @todo Decide how to sync with "actionShow_Satellite_Labels".
 	void setFlagLabelsVisible(bool b);
-	bool getFlagLabelsVisible() const;
+	bool getFlagLabelsVisible();
 
 	//! Emits settingsChanged() if the value changes.
 	void setFlagIconicMode(bool b);
-	bool getFlagIconicMode() const;
+	bool getFlagIconicMode();
 
-	bool getFlagHideInvisible() const;
+	bool getFlagHideInvisible();
 	void setFlagHideInvisible(bool b);
 
 	//! Get color for invisible satellites
 	//! @return color
-	Vec3f getInvisibleSatelliteColor() const;
+	Vec3f getInvisibleSatelliteColor();
 	//! Set color for invisible satellites
 	void setInvisibleSatelliteColor(const Vec3f& c);
 
 	//! Get color for satellites in transit through the Sun or the Moon (color of markers)
 	//! @return color
-	Vec3f getTransitSatelliteColor() const;
+	Vec3f getTransitSatelliteColor();
 	//! Set color for satellites in transit through the Sun or the Moon (color of markers)
 	void setTransitSatelliteColor(const Vec3f& c);
 	
 	//! get the label font size.
 	//! @return the pixel size of the font
-	int getLabelFontSize() const {return labelFont.pixelSize();}
+	int getLabelFontSize() {return labelFont.pixelSize();}
 	//! set the label font size.
 	//! @param size the pixel size of the font
 	//! Emits settingsChanged() if the value changes.
@@ -496,25 +496,25 @@ public slots:
 	//! @param b - true to turn on orbit lines, false to turn off
 	void setFlagOrbitLines(bool b);
 	//! Get the current status of the orbit line rendering flag.
-	bool getFlagOrbitLines() const;
+	bool getFlagOrbitLines();
 
 	//! return number of segments for orbit lines
-	int getOrbitLineSegments() const {return Satellite::orbitLineSegments;}
+	int getOrbitLineSegments() {return Satellite::orbitLineSegments;}
 	//! set number of segments for orbit lines
 	void setOrbitLineSegments(int s);
 
 	//! return number of fading segments at end of orbit
-	int getOrbitLineFadeSegments() const {return Satellite::orbitLineFadeSegments;}
+	int getOrbitLineFadeSegments() {return Satellite::orbitLineFadeSegments;}
 	//! set number of fading segments at end of orbit
 	void setOrbitLineFadeSegments(int s);
 
 	//! return duration of a single segments
-	int getOrbitLineSegmentDuration() const {return Satellite::orbitLineSegmentDuration;}
+	int getOrbitLineSegmentDuration() {return Satellite::orbitLineSegmentDuration;}
 	//! set duration of a single segments
 	void setOrbitLineSegmentDuration(int s);
 
 	//! return the valid age of TLE's epoch
-	int getTleEpochAgeDays() const { return Satellite::tleEpochAge; }
+	int getTleEpochAgeDays() { return Satellite::tleEpochAge; }
 	//! set the valid age of TLE's epoch
 	void setTleEpochAgeDays(int age);
 

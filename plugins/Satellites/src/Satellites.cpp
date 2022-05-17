@@ -840,7 +840,7 @@ void Satellites::saveSettingsToConfig()
 	saveTleSources(updateUrls);
 }
 
-Vec3f Satellites::getInvisibleSatelliteColor() const
+Vec3f Satellites::getInvisibleSatelliteColor()
 {
 	return Satellite::invisibleSatelliteColor;
 }
@@ -851,7 +851,7 @@ void Satellites::setInvisibleSatelliteColor(const Vec3f &c)
 	emit invisibleSatelliteColorChanged(c);
 }
 
-Vec3f Satellites::getTransitSatelliteColor() const
+Vec3f Satellites::getTransitSatelliteColor()
 {
 	return Satellite::transitSatelliteColor;
 }
@@ -1388,7 +1388,7 @@ void Satellites::saveTleSources(const QStringList& urls)
 	conf->endGroup();
 }
 
-bool Satellites::getFlagLabelsVisible() const
+bool Satellites::getFlagLabelsVisible()
 {
 	return Satellite::showLabels;
 }
@@ -1423,12 +1423,12 @@ void Satellites::setAutoRemoveEnabled(bool enabled)
 	}
 }
 
-bool Satellites::getFlagIconicMode() const
+bool Satellites::getFlagIconicMode()
 {
 	return Satellite::iconicModeFlag;
 }
 
-bool Satellites::getFlagHideInvisible() const
+bool Satellites::getFlagHideInvisible()
 {
 	return Satellite::hideInvisibleSatellitesFlag;
 }
@@ -1731,7 +1731,7 @@ void Satellites::setFlagOrbitLines(bool b)
 	Satellite::orbitLinesFlag = b;
 }
 
-bool Satellites::getFlagOrbitLines() const
+bool Satellites::getFlagOrbitLines()
 {
 	return Satellite::orbitLinesFlag;
 }
