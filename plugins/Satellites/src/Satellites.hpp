@@ -161,9 +161,15 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(int  orbitLineSegments        READ getOrbitLineSegments        WRITE setOrbitLineSegments        NOTIFY orbitLineSegmentsChanged)
 	Q_PROPERTY(int  orbitLineFadeSegments    READ getOrbitLineFadeSegments    WRITE setOrbitLineFadeSegments    NOTIFY orbitLineFadeSegmentsChanged)
 	Q_PROPERTY(int  orbitLineSegmentDuration READ getOrbitLineSegmentDuration WRITE setOrbitLineSegmentDuration NOTIFY orbitLineSegmentDurationChanged)
-	Q_PROPERTY(int  tleEpochAgeDays     READ getTleEpochAgeDays     WRITE setTleEpochAgeDays     NOTIFY tleEpochAgeDaysChanged)
+	Q_PROPERTY(int  tleEpochAgeDays          READ getTleEpochAgeDays          WRITE setTleEpochAgeDays          NOTIFY tleEpochAgeDaysChanged)
 	Q_PROPERTY(Vec3f invisibleSatelliteColor READ getInvisibleSatelliteColor  WRITE setInvisibleSatelliteColor  NOTIFY invisibleSatelliteColorChanged)
 	Q_PROPERTY(Vec3f transitSatelliteColor   READ getTransitSatelliteColor    WRITE setTransitSatelliteColor    NOTIFY transitSatelliteColorChanged)
+	Q_PROPERTY(bool flagUmbraVisible         READ getFlagUmbraVisible         WRITE setFlagUmbraVisible         NOTIFY flagUmbraVisibleChanged)
+	Q_PROPERTY(bool flagUmbraAtFixedDistance READ getFlagUmbraAtFixedDistance WRITE setFlagUmbraAtFixedDistance NOTIFY flagUmbraAtFixedDistanceChanged)
+	Q_PROPERTY(int umbraDistance             READ getUmbraDistance            WRITE setUmbraDistance            NOTIFY umbraDistanceChanged)
+	Q_PROPERTY(Vec3f umbraColor              READ getUmbraColor               WRITE setUmbraColor               NOTIFY umbraColorChanged)
+	Q_PROPERTY(bool flagPenumbraVisible      READ getFlagPenumbraVisible      WRITE setFlagPenumbraVisible      NOTIFY flagPenumbraVisibleChanged)
+	Q_PROPERTY(Vec3f penumbraColor           READ getPenumbraColor            WRITE setPenumbraColor            NOTIFY penumbraColorChanged)
 	
 public:
 	//! @enum UpdateState
@@ -393,6 +399,12 @@ signals:
 	void tleEpochAgeDaysChanged(int i);
 	void invisibleSatelliteColorChanged(Vec3f);
 	void transitSatelliteColorChanged(Vec3f);
+	void flagUmbraVisibleChanged(bool b);
+	void flagUmbraAtFixedDistanceChanged(bool b);
+	void umbraColorChanged(Vec3f);
+	void umbraDistanceChanged(int d);
+	void flagPenumbraVisibleChanged(bool b);
+	void penumbraColorChanged(Vec3f);
 
 	//! Emitted when some of the plugin settings have been changed.
 	//! Used to communicate with the configuration window.
@@ -519,6 +531,39 @@ public slots:
 	void setTleEpochAgeDays(int age);
 
 	void recalculateOrbitLines(void);
+
+	//! Set whether ring of Earth's umbra should be displayed.
+	//! Emits settingsChanged() if the value changes.
+	void setFlagUmbraVisible(bool b);
+	bool getFlagUmbraVisible() { return flagUmbraVisible; }
+
+	//! Set whether ring of Earth's umbra should be displayed at fixed distance.
+	//! Emits settingsChanged() if the value changes.
+	void setFlagUmbraAtFixedDistance(bool b);
+	bool getFlagUmbraAtFixedDistance() { return flagUmbraAtFixedDistance; }
+
+	//! Get color for ring of Earth's umbra
+	//! @return color
+	Vec3f getUmbraColor() { return umbraColor; }
+	//! Set color for ring of Earth's umbra
+	void setUmbraColor(const Vec3f& c);
+
+	//! Get the fixed distance for center of visualized Earth's umbra
+	//! @return distance, km
+	int getUmbraDistance() { return umbraDistance; }
+	//! Set the fixed distance for center of visualized Earth's umbra
+	void setUmbraDistance(int d);
+
+	//! Set whether ring of Earth's penumbra should be displayed.
+	//! Emits settingsChanged() if the value changes.
+	void setFlagPenumbraVisible(bool b);
+	bool getFlagPenumbraVisible() { return flagPenumbraVisible; }
+
+	//! Get color for ring of Earth's penumbra
+	//! @return color
+	Vec3f getPenumbraColor() { return penumbraColor; }
+	//! Set color for ring of Earth's penumbra
+	void setPenumbraColor(const Vec3f& c);
 
 	//! Display a message on the screen for a few seconds.
 	//! This is used for plugin-specific warnings and such.
@@ -659,6 +704,20 @@ private:
 	bool autoRemoveEnabled;
 	QDateTime lastUpdate;
 	int updateFrequencyHours;
+	//@}
+
+	//! @name Umbra/penumbra module
+	//@{
+	//! Flag enabling visualization the Earth's umbra.
+	bool flagUmbraVisible;
+	//! Flag enabling visualization the Earth's umbra at fixed distance
+	bool flagUmbraAtFixedDistance;
+	Vec3f umbraColor;
+	//! The distance for center of visualized Earth's umbra in kilometers
+	int umbraDistance;
+	//! Flag enabling visualization the Earth's penumbra.
+	bool flagPenumbraVisible;
+	Vec3f penumbraColor;
 	//@}
 	
 	//! @name Screen message infrastructure

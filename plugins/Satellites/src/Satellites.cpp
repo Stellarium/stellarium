@@ -98,6 +98,12 @@ Satellites::Satellites()
 	, autoAddEnabled(false)
 	, autoRemoveEnabled(false)
 	, updateFrequencyHours(0)
+	, flagUmbraVisible(false)
+	, flagUmbraAtFixedDistance(false)
+	, umbraColor(1.0f, 0.0f, 0.0f)
+	, umbraDistance(1000)
+	, flagPenumbraVisible(false)
+	, penumbraColor(1.0f, 0.0f, 0.0f)
 	#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	, iridiumFlaresPredictionDepth(7)
 	#endif
@@ -796,6 +802,14 @@ void Satellites::loadSettings()
 	Satellite::timeRateLimit = conf->value("time_rate_limit", 1.0).toDouble();
 	Satellite::tleEpochAge = conf->value("valid_epoch_age", 30).toInt();
 
+	// umbra/penumbra
+	setFlagUmbraVisible(conf->value("umbra_flag", false).toBool());
+	setFlagUmbraAtFixedDistance(conf->value("umbra_fixed_distance_flag", false).toBool());
+	setUmbraColor(Vec3f(conf->value("umbra_color", "1.0,0.0,0.0").toString()));
+	setUmbraDistance(conf->value("umbra_fixed_distance", 1000).toInt());
+	setFlagPenumbraVisible(conf->value("penumbra_flag", false).toBool());
+	setPenumbraColor(Vec3f(conf->value("penumbra_color", "1.0,0.0,0.0").toString()));
+
 	// iconic mode
 	setFlagIconicMode(conf->value("iconic_mode_enabled", false).toBool());
 	setFlagHideInvisible(conf->value("hide_invisible_satellites", false).toBool());
@@ -829,6 +843,14 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("orbit_segment_duration", Satellite::orbitLineSegmentDuration);
 
 	conf->setValue("valid_epoch_age", Satellite::tleEpochAge);
+
+	// umbra/penumbra
+	conf->setValue("umbra_flag", getFlagUmbraVisible());
+	conf->setValue("umbra_fixed_distance_flag", getFlagUmbraAtFixedDistance());
+	conf->setValue("umbra_color", getUmbraColor().toStr());
+	conf->setValue("umbra_fixed_distance", getUmbraDistance());
+	conf->setValue("penumbra_flag", getFlagPenumbraVisible());
+	conf->setValue("penumbra_color", getPenumbraColor().toStr());
 
 	// iconic mode
 	conf->setValue("iconic_mode_enabled", getFlagIconicMode());
@@ -1473,6 +1495,55 @@ void Satellites::setFlagLabelsVisible(bool b)
 		emit flagLabelsVisibleChanged(b);
 	}
 }
+
+void Satellites::setFlagUmbraVisible(bool b)
+{
+	if (flagUmbraVisible != b)
+	{
+		flagUmbraVisible = b;
+		emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
+		emit flagUmbraVisibleChanged(b);
+	}
+}
+
+void Satellites::setFlagUmbraAtFixedDistance(bool b)
+{
+	if (flagUmbraAtFixedDistance != b)
+	{
+		flagUmbraAtFixedDistance = b;
+		emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
+		emit flagUmbraAtFixedDistanceChanged(b);
+	}
+}
+
+void Satellites::setUmbraColor(const Vec3f &c)
+{
+	umbraColor = c;
+	emit umbraColorChanged(c);
+}
+
+void Satellites::setUmbraDistance(int d)
+{
+	umbraDistance = d;
+	emit umbraDistanceChanged(d);
+}
+
+void Satellites::setFlagPenumbraVisible(bool b)
+{
+	if (flagPenumbraVisible != b)
+	{
+		flagPenumbraVisible = b;
+		emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
+		emit flagPenumbraVisibleChanged(b);
+	}
+}
+
+void Satellites::setPenumbraColor(const Vec3f &c)
+{
+	penumbraColor = c;
+	emit penumbraColorChanged(c);
+}
+
 
 void Satellites::setLabelFontSize(int size)
 {

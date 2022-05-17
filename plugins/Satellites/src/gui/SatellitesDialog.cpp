@@ -190,6 +190,16 @@ void SatellitesDialog::createDialogContent()
 	connectIntProperty(ui->orbitFadeSpin,     "Satellites.orbitLineFadeSegments");
 	connectIntProperty(ui->orbitDurationSpin, "Satellites.orbitLineSegmentDuration");
 
+	// Settings tab / umbra group
+	connectBoolProperty(ui->umbraGroup,       "Satellites.flagUmbraVisible");
+	connectColorButton(ui->umbraColor,        "Satellites.umbraColor", "Satellites/umbra_color");
+	connectBoolProperty(ui->umbraAtDistance,  "Satellites.flagUmbraAtFixedDistance");
+	connectIntProperty(ui->umbraDistance,     "Satellites.umbraDistance");
+	connectColorButton(ui->penumbraColor,     "Satellites.penumbraColor",   "Satellites/penumbra_color");
+	connectBoolProperty(ui->penumbraCheckBox, "Satellites.flagPenumbraVisible");
+	connect(ui->umbraAtDistance, SIGNAL(clicked(bool)), ui->umbraDistance, SLOT(setEnabled(bool)));
+	ui->umbraDistance->setEnabled(ui->umbraAtDistance->isChecked());
+
 	// Satellites tab
 	filterModel = new SatellitesListFilterModel(this);
 	filterModel->setSourceModel(plugin->getSatellitesListModel());
