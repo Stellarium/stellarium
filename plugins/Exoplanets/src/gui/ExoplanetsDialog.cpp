@@ -142,7 +142,7 @@ void ExoplanetsDialog::createDialogContent()
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));	
-	connect(ui->plotDiagram, SIGNAL(clicked()), this, SLOT(drawDiagram()));
+	connect(ui->plotDiagram, SIGNAL(clicked()), this, SLOT(drawDiagram())); // FIXME: Get rid of that button!
 
 	populateTemperatureScales();
 	int idx = ui->temperatureScaleComboBox->findData(ep->getCurrentTemperatureScaleKey(), Qt::UserRole, Qt::MatchCaseSensitive);
@@ -169,6 +169,15 @@ void ExoplanetsDialog::createDialogContent()
 	}
 
 	populateDiagramsList();	
+	drawDiagram();
+	connect(ui->comboAxisX, SIGNAL(currentIndexChanged(int)), this, SLOT(drawDiagram()));
+	connect(ui->comboAxisY, SIGNAL(currentIndexChanged(int)), this, SLOT(drawDiagram()));
+	connect(ui->checkBoxLogX, SIGNAL(toggled(bool)), this, SLOT(drawDiagram()));
+	connect(ui->checkBoxLogY, SIGNAL(toggled(bool)), this, SLOT(drawDiagram()));
+	connect(ui->minX, SIGNAL(textChanged(const QString &)), this, SLOT(drawDiagram()));
+	connect(ui->maxX, SIGNAL(textChanged(const QString &)), this, SLOT(drawDiagram()));
+	connect(ui->minY, SIGNAL(textChanged(const QString &)), this, SLOT(drawDiagram()));
+	connect(ui->maxY, SIGNAL(textChanged(const QString &)), this, SLOT(drawDiagram()));
 	fillExoplanetsTable();
 	updateGuiFromSettings();
 }
@@ -863,35 +872,51 @@ void ExoplanetsDialog::drawDiagram()
 	series->setPen(QPen(Qt::blue));
 	series->setMarkerShape(QScatterSeries::MarkerShapeCircle);
 	series->setMarkerSize(4);
-	//series->rescaleAxes(true);
-
 
 	ui->customPlot->xAxis->setRange(minX, maxX);
 	if (ui->checkBoxLogX->isChecked())
 	{
 		ui->customPlot->xAxis->setScaleType(QCPAxis::stLogarithmic);
 		ui->customPlot->xAxis->setScaleLogBase(10);
+
+		chartXAxis = new QLogValueAxis(chart);
+		chart->addAxis(chartXAxis, Qt::AlignBottom);
+		chartXAxis->setRange(minX, maxX);
+		dynamic_cast<QLogValueAxis*>(chartXAxis)->setMinorTickCount(-1);
 	}
 	else
+	{
 		ui->customPlot->xAxis->setScaleType(QCPAxis::stLinear);
+
+		chartXAxis = new QValueAxis(chart);
+		chart->addAxis(chartXAxis, Qt::AlignBottom);
+		chartXAxis->setRange(minX, maxX);
+		dynamic_cast<QValueAxis *>(chartXAxis)->applyNiceNumbers();
+		dynamic_cast<QValueAxis *>(chartXAxis)->setMinorTickCount(1);
+	}
 
 	ui->customPlot->yAxis->setRange(minY, maxY);
 	if (ui->checkBoxLogY->isChecked())
 	{
 		ui->customPlot->yAxis->setScaleType(QCPAxis::stLogarithmic);
 		ui->customPlot->yAxis->setScaleLogBase(10);
+		chartYAxis = new QLogValueAxis(chart);
+		chart->addAxis(chartYAxis, Qt::AlignLeft);
+		chartYAxis->setRange(minY, maxY);
+		dynamic_cast<QLogValueAxis*>(chartYAxis)->setMinorTickCount(-1);
 	}
 	else
+	{
 		ui->customPlot->yAxis->setScaleType(QCPAxis::stLinear);
+		chartYAxis = new QValueAxis(chart);
+		chart->addAxis(chartYAxis, Qt::AlignLeft);
+		chartYAxis->setRange(minY, maxY);
+		dynamic_cast<QValueAxis *>(chartYAxis)->applyNiceNumbers();
+		dynamic_cast<QValueAxis *>(chartYAxis)->setMinorTickCount(1);
+	}
 
 	ui->customPlot->replot();
 
-	// CHART: Define linear or log axes?
-	chartXAxis = ui->checkBoxLogX->isChecked() ? dynamic_cast<QAbstractAxis*>(new QLogValueAxis(chart)) : new QValueAxis(chart);
-	chartYAxis = ui->checkBoxLogY->isChecked() ? dynamic_cast<QAbstractAxis*>(new QLogValueAxis(chart)) : new QValueAxis(chart);
-	chart->addAxis(chartXAxis, Qt::AlignBottom);
-	chart->addAxis(chartYAxis, Qt::AlignLeft);
-	//chartXAxis->applyNiceNumbers();
 	chartXAxis->setTitleText(currentAxisXString);
 	chartYAxis->setTitleText(currentAxisYString);
 	QFont font=chartXAxis->titleFont();
