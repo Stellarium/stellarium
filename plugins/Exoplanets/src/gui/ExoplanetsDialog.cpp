@@ -142,7 +142,6 @@ void ExoplanetsDialog::createDialogContent()
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));	
-	connect(ui->plotDiagram, SIGNAL(clicked()), this, SLOT(drawDiagram())); // FIXME: Get rid of that button!
 
 	populateTemperatureScales();
 	int idx = ui->temperatureScaleComboBox->findData(ep->getCurrentTemperatureScaleKey(), Qt::UserRole, Qt::MatchCaseSensitive);
@@ -816,10 +815,12 @@ void ExoplanetsDialog::updateJSON(void)
 
 void ExoplanetsDialog::drawDiagram()
 {
-	int currentAxisX = ui->comboAxisX->currentData(Qt::UserRole).toInt();
-	QString currentAxisXString = ui->comboAxisX->currentText();
-	int currentAxisY = ui->comboAxisY->currentData(Qt::UserRole).toInt();
-	QString currentAxisYString = ui->comboAxisY->currentText();
+	const int currentAxisX = ui->comboAxisX->currentData(Qt::UserRole).toInt();
+	const QString currentAxisXString = ui->comboAxisX->currentText();
+	const bool axisXlog=ui->checkBoxLogX->isChecked();
+	const int currentAxisY = ui->comboAxisY->currentData(Qt::UserRole).toInt();
+	const QString currentAxisYString = ui->comboAxisY->currentText();
+	const bool axisYlog=ui->checkBoxLogY->isChecked();
 
 	QList<double> aX = ep->getExoplanetsData(currentAxisX), aY = ep->getExoplanetsData(currentAxisY);
 	QVector<double> x = aX.toVector(), y = aY.toVector();
@@ -836,16 +837,42 @@ void ExoplanetsDialog::drawDiagram()
 	QAbstractAxis *chartXAxis, *chartYAxis;
 	for (int i=0; i<aX.length(); i++)
 	{
-		// build chartable series from the two lists. Exclude zeros to avoid issues with log charts.
-		// FIXME! If a series is orbital eccentricity, better apply a minimum value of 0.0001.
-		if ( (aX.at(i)!=0.) && (aY.at(i)!=0.))
+		// build chartable series from the two lists. Exclude zeros and negative values to avoid issues with log charts.
+		if (axisXlog && axisYlog)
+		{
+			if ( (aX.at(i)>0.) && (aY.at(i)>0.))
+				series->append(aX.at(i), aY.at(i));
+		}
+		else if (axisXlog && !axisYlog)
+		{
+			if (aX.at(i)>0.)
+				series->append(aX.at(i), aY.at(i));
+		}
+		else if (!axisXlog && axisYlog)
+		{
+			if (aY.at(i)>0.)
+				series->append(aX.at(i), aY.at(i));
+		}
+		else
 			series->append(aX.at(i), aY.at(i));
+
 	}
 
-	double minX = *std::min_element(aX.begin(), aX.end());
-	double minY = *std::min_element(aY.begin(), aY.end());
-	double maxX = *std::max_element(aX.begin(), aX.end());
-	double maxY = *std::max_element(aY.begin(), aY.end());
+	// Find range of actually used values
+	const QList<QPointF>points=series->points();
+	auto compX=[](const QPointF &a, const QPointF &b){
+		return a.x() < b.x();
+	};
+	auto compY=[](const QPointF &a, const QPointF &b){
+		return a.y() < b.y();
+	};
+	auto [minXs, maxXs] = std::minmax_element(points.begin(), points.end(), compX);
+	auto [minYs, maxYs] = std::minmax_element(points.begin(), points.end(), compY);
+	//qDebug() << "Xmin" << *minXs << "Xmax" << *maxXs << "Ymin" << *minYs << "Ymax" << *maxYs;
+	double minX=minXs->x();
+	double maxX=maxXs->x();
+	double minY=minYs->y();
+	double maxY=maxYs->y();
 
 	if (!ui->minX->text().isEmpty())
 		minX = ui->minX->text().toDouble();
@@ -859,26 +886,13 @@ void ExoplanetsDialog::drawDiagram()
 	if (!ui->maxY->text().isEmpty())
 		maxY = ui->maxY->text().toDouble();
 
-	ui->customPlot->addGraph();	
-	ui->customPlot->graph(0)->setData(x, y);
-	ui->customPlot->graph(0)->setPen(QPen(Qt::blue));
-	ui->customPlot->graph(0)->setLineStyle(QCPGraph::lsNone);
-	ui->customPlot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssDisc, 4));
-	ui->customPlot->graph(0)->rescaleAxes(true);
-	ui->customPlot->xAxis->setLabel(currentAxisXString);
-	ui->customPlot->yAxis->setLabel(currentAxisYString);
-
 	chart->addSeries(series);
 	series->setPen(QPen(Qt::blue));
 	series->setMarkerShape(QScatterSeries::MarkerShapeCircle);
 	series->setMarkerSize(4);
 
-	ui->customPlot->xAxis->setRange(minX, maxX);
-	if (ui->checkBoxLogX->isChecked())
+	if (axisXlog)
 	{
-		ui->customPlot->xAxis->setScaleType(QCPAxis::stLogarithmic);
-		ui->customPlot->xAxis->setScaleLogBase(10);
-
 		chartXAxis = new QLogValueAxis(chart);
 		chart->addAxis(chartXAxis, Qt::AlignBottom);
 		chartXAxis->setRange(minX, maxX);
@@ -886,8 +900,6 @@ void ExoplanetsDialog::drawDiagram()
 	}
 	else
 	{
-		ui->customPlot->xAxis->setScaleType(QCPAxis::stLinear);
-
 		chartXAxis = new QValueAxis(chart);
 		chart->addAxis(chartXAxis, Qt::AlignBottom);
 		chartXAxis->setRange(minX, maxX);
@@ -895,11 +907,8 @@ void ExoplanetsDialog::drawDiagram()
 		dynamic_cast<QValueAxis *>(chartXAxis)->setMinorTickCount(1);
 	}
 
-	ui->customPlot->yAxis->setRange(minY, maxY);
-	if (ui->checkBoxLogY->isChecked())
+	if (axisYlog)
 	{
-		ui->customPlot->yAxis->setScaleType(QCPAxis::stLogarithmic);
-		ui->customPlot->yAxis->setScaleLogBase(10);
 		chartYAxis = new QLogValueAxis(chart);
 		chart->addAxis(chartYAxis, Qt::AlignLeft);
 		chartYAxis->setRange(minY, maxY);
@@ -907,15 +916,12 @@ void ExoplanetsDialog::drawDiagram()
 	}
 	else
 	{
-		ui->customPlot->yAxis->setScaleType(QCPAxis::stLinear);
 		chartYAxis = new QValueAxis(chart);
 		chart->addAxis(chartYAxis, Qt::AlignLeft);
 		chartYAxis->setRange(minY, maxY);
 		dynamic_cast<QValueAxis *>(chartYAxis)->applyNiceNumbers();
 		dynamic_cast<QValueAxis *>(chartYAxis)->setMinorTickCount(1);
 	}
-
-	ui->customPlot->replot();
 
 	chartXAxis->setTitleText(currentAxisXString);
 	chartYAxis->setTitleText(currentAxisYString);
@@ -956,20 +962,10 @@ void ExoplanetsDialog::populateDiagramsList()
 	Q_ASSERT(ui->comboAxisX);
 	Q_ASSERT(ui->comboAxisY);
 
-	QColor axisColor(Qt::white);
-	QPen axisPen(axisColor, 1);
+	//QColor axisColor(Qt::white);
+	//QPen axisPen(axisColor, 1);
 
-	ui->customPlot->setBackground(QBrush(QColor(86, 87, 90)));
-	ui->customPlot->xAxis->setLabelColor(axisColor);
-	ui->customPlot->xAxis->setTickLabelColor(axisColor);
-	ui->customPlot->xAxis->setBasePen(axisPen);
-	ui->customPlot->xAxis->setTickPen(axisPen);
-	ui->customPlot->xAxis->setSubTickPen(axisPen);
-	ui->customPlot->yAxis->setLabelColor(axisColor);
-	ui->customPlot->yAxis->setTickLabelColor(axisColor);
-	ui->customPlot->yAxis->setBasePen(axisPen);
-	ui->customPlot->yAxis->setTickPen(axisPen);
-	ui->customPlot->yAxis->setSubTickPen(axisPen);
+
 
 	QComboBox* axisX = ui->comboAxisX;
 	QComboBox* axisY = ui->comboAxisY;

@@ -153,9 +153,8 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 			yearDiscoveryList.append(p.discovered);
 			effectiveTempHostStarList.append(effectiveTemp);
 			metallicityHostStarList.append(smetal);
-			if (Vmag<99)
-				vMagHostStarList.append(Vmag);
-			raHostStarList.append(RA * M_180_PI);
+			vMagHostStarList.append(Vmag); // Vmag may be 99 as "invalid" marker. Still, append it!
+			raHostStarList.append(StelUtils::fmodpos(RA * M_180_PI, 360.)); // Fix some stars with negative RA
 			decHostStarList.append(DE * M_180_PI);
 			distanceHostStarList.append(distance);
 			massHostStarList.append(smass);
