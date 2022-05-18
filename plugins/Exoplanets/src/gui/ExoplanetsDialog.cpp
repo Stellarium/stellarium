@@ -788,7 +788,6 @@ void ExoplanetsDialog::drawDiagram()
 	const bool axisYlog=ui->checkBoxLogY->isChecked();
 
 	QList<double> aX = ep->getExoplanetsData(currentAxisX), aY = ep->getExoplanetsData(currentAxisY);
-	QVector<double> x = aX.toVector(), y = aY.toVector();
 
 	QtCharts::QChart *chart=new QtCharts::QChart();
 	chart->setBackgroundBrush(QBrush(QColor(86, 87, 90)));
@@ -820,7 +819,6 @@ void ExoplanetsDialog::drawDiagram()
 		}
 		else
 			series->append(aX.at(i), aY.at(i));
-
 	}
 
 	// Find range of actually used values
@@ -897,9 +895,9 @@ void ExoplanetsDialog::drawDiagram()
 	font.setBold(false);
 	chartYAxis->setTitleFont(font);
 
-	static const QPen axisPen(          Qt::white,      1,    Qt::SolidLine);
-	static const QPen axisGridPen(      Qt::white,      0.5,  Qt::SolidLine);
-	static const QPen axisMinorGridPen( Qt::white,      0.35, Qt::DotLine);
+	static const QPen axisPen(          Qt::white, 1,    Qt::SolidLine);
+	static const QPen axisGridPen(      Qt::white, 0.5,  Qt::SolidLine);
+	static const QPen axisMinorGridPen( Qt::white, 0.35, Qt::DotLine);
 
 	chartXAxis->setTitleBrush(Qt::white);
 	chartXAxis->setLabelsBrush(Qt::white);
@@ -919,18 +917,12 @@ void ExoplanetsDialog::drawDiagram()
 	if (oldChart) oldChart->deleteLater();
 	ui->chartView->setChart(chart);
 	ui->chartView->setRenderHint(QPainter::Antialiasing);
-
 }
 
 void ExoplanetsDialog::populateDiagramsList()
 {
 	Q_ASSERT(ui->comboAxisX);
 	Q_ASSERT(ui->comboAxisY);
-
-	//QColor axisColor(Qt::white);
-	//QPen axisPen(axisColor, 1);
-
-
 
 	QComboBox* axisX = ui->comboAxisX;
 	QComboBox* axisY = ui->comboAxisY;
