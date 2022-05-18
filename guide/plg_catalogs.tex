@@ -269,9 +269,9 @@ To add a new nova, open a new line after line 5 and paste the following, note co
 Encyclopaedia''\footnote{\url{http://exoplanet.eu/}}. List of
 potential habitable exoplanets and data about them were taken from
 ``The Habitable Exoplanets
-Catalog''\footnote{\url{http://phl.upr.edu/projects/habitable-exoplanets-catalog}}
+Catalog''\footnote{\url{https://phl.upr.edu/projects/habitable-exoplanets-catalog}}
 by the Planetary Habitability
-Laboratory\footnote{\url{http://phl.upr.edu/home}}.  If enabled (see
+Laboratory\footnote{\url{https://phl.upr.edu/home}}.  If enabled (see
 section~\ref{sec:Plugins:EnablingPlugins}), just click on the
 Exoplanet button \guibutton{0.6}{btExoplanets-off.png} on the bottom
 toolbar to display markers for the stars with known exoplanets. You
@@ -279,9 +279,15 @@ can then either click on such a marked star or find the stars with
 exoplanets by their designation (e.g., \emph{24 Sex}) in the \key{F3} dialog (see~\ref{sec:gui:search}).
 
 A large number of exoplanets was discovered by the \indexterm[Kepler, exoplanets]{Kepler} 
-space observatory mission which observed a small field in the Cyg/Lib/Dra area. Accordingly 
+space observatory mission (2009--18) which in its primary mission observed a small field in the Cyg/Lib/Dra area. Accordingly 
 you will find a huge concentration of exoplanets there. This should give us a hint about how many more must be out there.
+Its extended mission added many more exoplanet systems along the ecliptic.
 
+The second tab in the plugin's dialog shows a scatter plot relating
+two selectable properties.  In some cases a logarithmic axis is more
+useful, but if the original values can be negative only the positive
+data are shown in log plots. Additional entry fields allow filtering
+the data range.
 
 \subsection{Potential habitable exoplanets}
 \label{sec:plugins:Exoplanets:habitable}
@@ -300,7 +306,7 @@ This plugin can display potential habitable exoplanets (orange marker) and some 
   only by its parent star (assuming a 0.3 bond albedo). As example the
   planetary equilibrium temperature of Earth is -18.15\degree C (255~K).
 \item[Earth Similarity Index (ESI)] Similarity to
-  Earth\footnote{\url{http://phl.upr.edu/projects/earth-similarity-index-esi}}
+  Earth\footnote{\url{https://phl.upr.edu/projects/earth-similarity-index-esi}}
   on a scale from 0 to 1, with 1 being the most Earth-like. ESI
   depends on the planet's radius, density, escape velocity, and
   surface temperature.
@@ -678,7 +684,7 @@ To add a new exoplanet system, open a new line after line 5 and paste the follow
 \end{configfile}
 
 \noindent For example, the record for \textit{24 Sex} looks like:
-\begin{configfile}
+\begin{configfile}[\footnotesize]
 "24 Sex":
 {
 		"exoplanets":
