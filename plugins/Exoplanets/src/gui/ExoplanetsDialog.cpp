@@ -107,18 +107,9 @@ void ExoplanetsDialog::createDialogContent()
 	// Settings tab / updates group
 	ui->displayAtStartupCheckBox->setChecked(ep->getEnableAtStartup());
 	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
-	ui->displayModeCheckBox->setChecked(ep->getDisplayMode());
-	connect(ui->displayModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDistributionEnabled(int)));
 	ui->displayShowExoplanetsButton->setChecked(ep->getFlagShowExoplanetsButton());
 	connect(ui->displayShowExoplanetsButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowExoplanetsButton(int)));
-	ui->timelineModeCheckBox->setChecked(ep->getTimelineMode());
-	connect(ui->timelineModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setTimelineEnabled(int)));
-	ui->habitableModeCheckBox->setChecked(ep->getHabitableMode());
-	connect(ui->habitableModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setHabitableEnabled(int)));
-	ui->displayShowDesignationsCheckBox->setChecked(ep->getFlagShowExoplanetsDesignations());
-	connect(ui->displayShowDesignationsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowExoplanetsDesignations(int)));
-	ui->displayShowNumbersCheckBox->setChecked(ep->getFlagShowExoplanetsNumbers());
-	connect(ui->displayShowNumbersCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowExoplanetsNumbers(int)));
+
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
 	connect(ep, SIGNAL(updateStateChanged(Exoplanets::UpdateState)), this, SLOT(updateStateReceiver(Exoplanets::UpdateState)));
@@ -127,6 +118,12 @@ void ExoplanetsDialog::createDialogContent()
 	refreshUpdateValues(); // fetch values for last updated and so on
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
 	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
+
+	connectBoolProperty(ui->displayModeCheckBox,               "Exoplanets.flagDisplayMode");
+	connectBoolProperty(ui->timelineModeCheckBox,              "Exoplanets.flagTimelineMode");
+	connectBoolProperty(ui->habitableModeCheckBox,             "Exoplanets.flagHabitableMode");
+	connectBoolProperty(ui->displayShowDesignationsCheckBox,   "Exoplanets.flagShowExoplanetsDesignations");
+	connectBoolProperty(ui->displayShowNumbersCheckBox,        "Exoplanets.flagShowExoplanetsNumbers");
 
 	connectColorButton(ui->exoplanetMarkerColor,		"Exoplanets.markerColor",    "Exoplanets/exoplanet_marker_color");
 	connectColorButton(ui->habitableExoplanetMarkerColor,	"Exoplanets.habitableColor", "Exoplanets/habitable_exoplanet_marker_color");
@@ -699,36 +696,6 @@ void ExoplanetsDialog::setUpdateValues(int hours)
 {
 	ep->setUpdateFrequencyHours(hours);
 	refreshUpdateValues();
-}
-
-void ExoplanetsDialog::setDistributionEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ep->setDisplayMode(b);
-}
-
-void ExoplanetsDialog::setDisplayShowExoplanetsDesignations(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ep->setFlagShowExoplanetsDesignations(b);
-}
-
-void ExoplanetsDialog::setDisplayShowExoplanetsNumbers(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ep->setFlagShowExoplanetsNumbers(b);
-}
-
-void ExoplanetsDialog::setTimelineEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ep->setTimelineMode(b);
-}
-
-void ExoplanetsDialog::setHabitableEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ep->setHabitableMode(b);
 }
 
 void ExoplanetsDialog::setDisplayAtStartupEnabled(int checkState)
