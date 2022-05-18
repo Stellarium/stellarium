@@ -45,8 +45,6 @@
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
 
-#include "external/qcustomplot/qcustomplot.h"
-
 using namespace QtCharts;
 
 ExoplanetsDialog::ExoplanetsDialog()
