@@ -586,6 +586,8 @@ private slots:
 	void translateData();
 
 private:
+	//! Drawing the circles of Earth's umbra and penumbra
+	void drawCircles(StelCore* core);
 	//! Add to the current collection the satellite described by the data.
 	//! @warning Use only in other methods! Does not update satelliteListModel!
 	//! @todo This probably could be done easier if Satellite had a constructor
@@ -669,7 +671,7 @@ private:
 	//@{
 	StelButton* toolbarButton;	
 	//@}	
-	QSharedPointer<Planet> earth;
+	QSharedPointer<Planet> earth, sun;
 	Vec3f defaultHintColor;
 	QFont labelFont;
 	

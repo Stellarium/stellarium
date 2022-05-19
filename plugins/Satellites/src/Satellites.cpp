@@ -217,6 +217,7 @@ void Satellites::init()
 	updateTimer->start();
 
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
+	sun = GETSTELMODULE(SolarSystem)->getSun();
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	// Handle changes to the observer location or wide range of dates:
@@ -2164,6 +2165,9 @@ void Satellites::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
+
+	if (getFlagUmbraVisible())
+		drawCircles(core);
 }
 
 void Satellites::drawPointer(StelCore* core, StelPainter& painter)
@@ -2193,6 +2197,68 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 		painter.drawSprite2dMode(static_cast<float>(screenpos[0]-size/2), static_cast<float>(screenpos[1]+size/2), 20, 0);
 		painter.drawSprite2dMode(static_cast<float>(screenpos[0]+size/2), static_cast<float>(screenpos[1]+size/2), 20, -90);
 		painter.drawSprite2dMode(static_cast<float>(screenpos[0]+size/2), static_cast<float>(screenpos[1]-size/2), 20, -180);
+	}
+}
+
+void Satellites::drawCircles(StelCore* core)
+{
+	StelPainter sPainter(core->getProjection(StelCore::FrameHeliocentricEclipticJ2000, StelCore::RefractionAuto));
+
+	sPainter.setBlending(true);
+	sPainter.setLineSmooth(true);
+
+	const Vec3d pos = earth->getEclipticPos();
+	const Vec3d dir = - sun->getAberrationPush() + pos;
+	double lambda, beta, satDistance;
+	StelUtils::rectToSphe(&lambda, &beta, dir);
+	const Mat4d rot=Mat4d::zrotation(lambda)*Mat4d::yrotation(-beta);
+
+	SatelliteP sat = Q_NULLPTR;
+	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Satellite");
+	if (!newSelected.empty())
+		sat = getById(newSelected[0].staticCast<Satellite>()->getCatalogNumberString());
+
+	static const double sun2earth=sun->getEquatorialRadius() / earth->getEquatorialRadius();
+	if (flagUmbraAtFixedDistance)
+		satDistance = umbraDistance/AU; // Satellite distance [AU]
+	else if (!sat.isNull())
+		satDistance = sat->getInfoMap(core)["height"].toDouble()/AU;
+	else
+		return;
+
+	satDistance += earth->getEquatorialRadius();
+	const double earthDistance=earth->getHeliocentricEclipticPos().length(); // Earth distance [AU]
+
+	// Compute umbra radius at satellite distance.
+	const double lUmbra=earthDistance/(sun2earth-1.); // length of earth umbra [AU]
+	const double rUmbraAU=earth->getEquatorialRadius()*(lUmbra-satDistance)/lUmbra; // radius of earth shadow at satellite distance [AU]
+
+	StelVertexArray umbra(StelVertexArray::LineLoop);
+	for (int i=0; i<360; ++i)
+	{
+		Vec3d point(satDistance, cos(i*M_PI_180)*rUmbraAU, sin(i*M_PI_180)*rUmbraAU);
+		rot.transfo(point);
+		umbra.vertex.append(pos+point);
+	}
+	sPainter.setColor(getUmbraColor(), 1.f);
+	sPainter.drawStelVertexArray(umbra, false);
+
+	if (getFlagPenumbraVisible())
+	{
+		// Penumbra:
+		const double lPenumbra=earthDistance/(sun2earth + 1.); // distance between earth and point between sun and earth where penumbral border rays intersect
+		const double rPenumbraAU=earth->getEquatorialRadius()*(lPenumbra+satDistance)/lPenumbra; // radius of penumbra at satellite distance [AU]
+
+		StelVertexArray penumbra(StelVertexArray::LineLoop);
+		for (int i=0; i<360; ++i)
+		{
+			Vec3d point(satDistance, cos(i*M_PI_180)*rPenumbraAU, sin(i*M_PI_180)*rPenumbraAU);
+			rot.transfo(point);
+			penumbra.vertex.append(pos+point);
+		}
+
+		sPainter.setColor(getPenumbraColor(), 1.f);
+		sPainter.drawStelVertexArray(penumbra, false);
 	}
 }
 
