@@ -84,7 +84,7 @@ private:
 
     //! Load the selected observing list from Json file into dialog.
     //! @param listOlud the olud (id) of the list
-    void loadSelectedObservingListFromJsonFile (QString listOlud );
+    void loadSelectedObservingListFromJsonFile (const QString& listOlud );
 
     //! Load the lists names from Json file to populate the combo box and get the default list olud
     void loadListsNameFromJsonFile();

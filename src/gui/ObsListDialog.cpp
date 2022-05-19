@@ -35,6 +35,7 @@
 #include "StelUtils.hpp"
 #include "ObsListDialog.hpp"
 #include "LabelMgr.hpp"
+#include "Planet.hpp"
 
 #include "ui_obsListDialog.h"
 #include <QSortFilterProxyModel>
@@ -235,7 +236,7 @@ void ObsListDialog::obsListHighLightAllButtonPressed() {
         QString decStr = item.dec.trimmed();
 
         Vec3d pos;
-        bool status;
+        bool status = false;
         if (!raStr.isEmpty() && !decStr.isEmpty()) {
             StelUtils::spheToRect(StelUtils::getDecAngle(raStr), StelUtils::getDecAngle(decStr), pos);
             status = true;
@@ -365,7 +366,7 @@ void ObsListDialog::populateListNameInComboBox(QVariantMap map) {
 void ObsListDialog::populateDataInComboBox(QVariantMap map, const QString& defaultListOlud) {
     QMap<QString, QVariant>::iterator i;
     for (i = map.begin(); i != map.end(); ++i) {
-        QString listUuid = i.key();
+        const QString& listUuid = i.key();
         if (i.value().canConvert<QVariantMap>()) {
             QVariant var = i.value();
             QVariantMap data = var.value<QVariantMap>();
@@ -412,7 +413,7 @@ void ObsListDialog::loadDefaultList() {
 /*
  * Load the selected observing list in the combo box, from Json file into dialog.
 */
-void ObsListDialog::loadSelectedObservingListFromJsonFile(QString listOlud) {
+void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString& listOlud) {
     QVariantMap map;
     QVariantList listOfObjects;
     QFile jsonFile(observingListJsonPath);
@@ -460,7 +461,12 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(QString listOlud) {
                                 bool visibleFlag = false;
                                 double fov = -1.0;
 
+                                // TYPE
                                 QString objectType = selectedObject[0]->getType();
+                                if(QString::compare(objectType, "Planet", Qt::CaseSensitive) == 0){
+                                    auto& r_planet = dynamic_cast<Planet&>(*selectedObject[0]);
+                                    objectType = r_planet.getPlanetTypeString();
+                                }
 
                                 // RA & DEC
                                 QString objectRaStr = objectMap.value(QString(KEY_RA)).value<QString>();
@@ -641,8 +647,6 @@ void ObsListDialog::loadBookmarksInObservingList() {
                 QVariantMap bookmarkData = bookmarksMap.value(bookmarkKey).toMap();
                 bookmark item;
 
-                QString JDs = "";
-
                 item.name = bookmarkData.value(KEY_NAME).toString();
                 /// TODO vérifier si nameI18n est utilisé
                 QString nameI18n = bookmarkData.value(KEY_NAME_I18N).toString();
@@ -652,10 +656,10 @@ void ObsListDialog::loadBookmarksInObservingList() {
                     item.nameI18n = "";
                 }
 
-                // Creation date
-                QString JD = bookmarkData.value(KEY_JD).toString();
-                if (!JD.isEmpty()) {
-                    item.jd = JD.toDouble();
+                // JDs
+                QString JDs = bookmarkData.value(KEY_JD).toString();
+                if (!JDs.isEmpty()) {
+                    item.jd = JDs.toDouble();
                 } else {
                     item.jd = 0.0;
                 }
@@ -730,6 +734,8 @@ void ObsListDialog::saveBookmarksInObsListJsonFile(const QHash<QString, bookmark
 
         if (checkIfBookmarksListExists(allListsMap)) {
             //the bookmarks file is already loaded
+            // TODO le problème c'est que si le fichier de bookmark a été modifié entre temps les nouvelles
+            // TODO modifications ne seront pas prises en compte - à voir donc... !
             return;
         }
 
@@ -772,9 +778,7 @@ void ObsListDialog::saveBookmarksInObsListJsonFile(const QHash<QString, bookmark
             obl.insert(QString(KEY_FOV), item.fov);
 
             // JD
-            double jd = item.jd;
-            QString JDs = QString::number(jd);
-            obl.insert(QString(KEY_JD), JDs);
+            obl.insert(QString(KEY_JD), item.jd);
 
             // Location
             obl.insert(QString(KEY_LOCATION), item.location);
@@ -788,7 +792,12 @@ void ObsListDialog::saveBookmarksInObsListJsonFile(const QHash<QString, bookmark
             // Type
             if (objectMgr->findAndSelect(objectName)) {
                 const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
-                obl.insert(QString(KEY_OBJECTS_TYPE), selectedObject[0]->getType());
+                QString objectType = selectedObject[0]->getType();
+                if(QString::compare(objectType, "Planet", Qt::CaseSensitive) == 0){
+                    auto& r_planet = dynamic_cast<Planet&>(*selectedObject[0]);
+                    objectType = r_planet.getPlanetTypeString();
+                }
+                obl.insert(QString(KEY_OBJECTS_TYPE), objectType);
             }
 
             listOfObjects.push_back(obl);
@@ -1061,7 +1070,7 @@ QString ObsListDialog::extractDefaultListOludFromJsonFile() {
             QString defaultListOlud = map.value(KEY_DEFAULT_LIST_OLUD).toString();
             return defaultListOlud;
         } catch (std::runtime_error &e) {
-            qWarning() << "[ObservingList] File format is wrong! Error: " << e.what();
+            qWarning() << "[ObservingList] File format is wrong! Error: ()()" << e.what();
             return "";
         }
     }
