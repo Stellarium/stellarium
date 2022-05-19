@@ -167,38 +167,41 @@ void SatellitesDialog::createDialogContent()
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
 	updateTimer->start(7000);
 
-	// Settings tab / General settings group
-	connectBoolProperty(ui->labelsGroup,    "Satellites.flagLabelsVisible");
-	connectIntProperty(ui->fontSizeSpinBox, "Satellites.labelFontSize");
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
-	connect(ui->saveSettingsButton,    SIGNAL(clicked()), this, SLOT(saveSettings()));
-
-	// Settings tab / realistic mode group
-	connectBoolProperty(ui->iconicGroup,             "Satellites.flagIconicMode");
+	// Settings tab / Visualisation settings group
+	// Logic sub-group: Labels
+	connectBoolProperty(ui->labelsCheckBox,     "Satellites.flagLabelsVisible");
+	connectIntProperty(ui->fontSizeSpinBox,     "Satellites.labelFontSize");
+	connect(ui->labelsCheckBox, SIGNAL(clicked(bool)), ui->fontSizeSpinBox, SLOT(setEnabled(bool)));
+	ui->fontSizeSpinBox->setEnabled(ui->labelsCheckBox->isChecked());
+	// Logic sub-group: Orbit lines
+	connectBoolProperty(ui->orbitLinesCheckBox, "Satellites.flagOrbitLines");
+	connectIntProperty(ui->orbitSegmentsSpin,   "Satellites.orbitLineSegments");
+	connectIntProperty(ui->orbitFadeSpin,       "Satellites.orbitLineFadeSegments");
+	connectIntProperty(ui->orbitDurationSpin,   "Satellites.orbitLineSegmentDuration");
+	connect(ui->orbitLinesCheckBox, SIGNAL(clicked(bool)), this, SLOT(handleOrbitLinesGroup(bool)));
+	handleOrbitLinesGroup(ui->orbitLinesCheckBox->isChecked());
+	// Logic sub-group: Umbra
+	connectBoolProperty(ui->umbraCheckBox,      "Satellites.flagUmbraVisible");
+	connectBoolProperty(ui->umbraAtDistance,    "Satellites.flagUmbraAtFixedDistance");
+	connectIntProperty(ui->umbraDistance,       "Satellites.umbraDistance");
+	connect(ui->umbraCheckBox, SIGNAL(clicked(bool)), this, SLOT(handleUmbraGroup(bool)));
+	handleUmbraGroup(ui->umbraCheckBox->isChecked());
+	// Logic sub-group: Markers
+	connectBoolProperty(ui->iconicCheckBox,     "Satellites.flagIconicMode");
 	connectBoolProperty(ui->hideInvisibleSatellites, "Satellites.flagHideInvisible");
-
-	// Settings tab / colors group
+	connect(ui->iconicCheckBox, SIGNAL(clicked(bool)), ui->hideInvisibleSatellites, SLOT(setEnabled(bool)));
+	ui->hideInvisibleSatellites->setEnabled(ui->iconicCheckBox->isChecked());
+	// Logic sub-group: Colors
 	connectColorButton(ui->invisibleColorButton, "Satellites.invisibleSatelliteColor", "Satellites/invisible_satellite_color");
 	connectColorButton(ui->transitColorButton,   "Satellites.transitSatelliteColor",   "Satellites/transit_satellite_color");
+	connectColorButton(ui->umbraColor,           "Satellites.umbraColor",              "Satellites/umbra_color");
+	connectColorButton(ui->penumbraColor,        "Satellites.penumbraColor",           "Satellites/penumbra_color");
+	// Logic sub-group: Penumbra
+	connectBoolProperty(ui->penumbraCheckBox,    "Satellites.flagPenumbraVisible");
 
-	// Settings tab - populate all values
+	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
+	connect(ui->saveSettingsButton,    SIGNAL(clicked()), this, SLOT(saveSettings()));
 	updateSettingsPage();
-
-	// Settings tab / orbit lines group
-	connectBoolProperty(ui->orbitLinesGroup,  "Satellites.flagOrbitLines");
-	connectIntProperty(ui->orbitSegmentsSpin, "Satellites.orbitLineSegments");
-	connectIntProperty(ui->orbitFadeSpin,     "Satellites.orbitLineFadeSegments");
-	connectIntProperty(ui->orbitDurationSpin, "Satellites.orbitLineSegmentDuration");
-
-	// Settings tab / umbra group
-	connectBoolProperty(ui->umbraGroup,       "Satellites.flagUmbraVisible");
-	connectColorButton(ui->umbraColor,        "Satellites.umbraColor", "Satellites/umbra_color");
-	connectBoolProperty(ui->umbraAtDistance,  "Satellites.flagUmbraAtFixedDistance");
-	connectIntProperty(ui->umbraDistance,     "Satellites.umbraDistance");
-	connectColorButton(ui->penumbraColor,     "Satellites.penumbraColor",   "Satellites/penumbra_color");
-	connectBoolProperty(ui->penumbraCheckBox, "Satellites.flagPenumbraVisible");
-	connect(ui->umbraAtDistance, SIGNAL(clicked(bool)), ui->umbraDistance, SLOT(setEnabled(bool)));
-	ui->umbraDistance->setEnabled(ui->umbraAtDistance->isChecked());
 
 	// Satellites tab
 	filterModel = new SatellitesListFilterModel(this);
@@ -284,6 +287,24 @@ void SatellitesDialog::createDialogContent()
 
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->labelAutoAdd->setStyleSheet(style);
+	ui->labelTle->setStyleSheet(style);
+	ui->labelTleEpoch->setStyleSheet(style);
+	ui->labelTleEpochData->setStyleSheet(style);
+	ui->validAgeLabel->setStyleSheet(style);
+}
+
+void SatellitesDialog::handleOrbitLinesGroup(bool state)
+{
+	ui->orbitSegmentsSpin->setEnabled(state);
+	ui->orbitFadeSpin->setEnabled(state);
+	ui->orbitDurationSpin->setEnabled(state);
+}
+
+void SatellitesDialog::handleUmbraGroup(bool state)
+{
+	ui->umbraAtDistance->setEnabled(state);
+	ui->umbraDistance->setEnabled(state);
+	ui->penumbraCheckBox->setEnabled(state);
 }
 
 void SatellitesDialog::askSatMarkerColor()
@@ -977,6 +998,11 @@ void SatellitesDialog::restoreDefaults(void)
 		updateSettingsPage();
 		populateFilterMenu();
 		populateSourcesList();
+		// handle GUI elements
+		ui->fontSizeSpinBox->setEnabled(ui->labelsCheckBox->isChecked());
+		handleOrbitLinesGroup(ui->orbitLinesCheckBox->isChecked());
+		handleUmbraGroup(ui->umbraCheckBox->isChecked());
+		ui->hideInvisibleSatellites->setEnabled(ui->iconicCheckBox->isChecked());
 	}
 	else
 		qDebug() << "[Satellites] restore defaults is canceled...";
@@ -1060,9 +1086,9 @@ void SatellitesDialog::populateInfo()
 	// TRANSLATORS: duration
 	ui->orbitDurationSpin->setSuffix(qc_(" s","time unit"));
 	// TRANSLATORS: duration
-	ui->labelSegmentLength->setText(q_("Segment length:"));
-	// TRANSLATORS: duration
 	ui->updateFrequencySpinBox->setSuffix(qc_(" h","time unit"));
+	// TRANSLATORS: Unit of measure for distance - kilometers
+	ui->umbraDistance->setSuffix(qc_("km", "distance"));
 }
 
 void SatellitesDialog::populateSourcesList()
