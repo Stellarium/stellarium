@@ -1089,6 +1089,10 @@ void SatellitesDialog::populateInfo()
 	ui->updateFrequencySpinBox->setSuffix(qc_(" h","time unit"));
 	// TRANSLATORS: Unit of measure for distance - kilometers
 	ui->umbraDistance->setSuffix(qc_("km", "distance"));
+	ui->umbraDistance->setToolTip(QString("<p>%1. %2: %3-%4 %5</p>").arg(q_("Distance to the center of umbra from Earth's surface (height of imagined satellite)"), q_("Valid range"), QString::number(ui->umbraDistance->minimum()), QString::number(ui->umbraDistance->maximum()), qc_("km", "distance")));
+	ui->orbitSegmentsSpin->setToolTip(QString("<p>%1. %2: %3-%4</p>").arg(q_("Number of  segments: number of segments used to draw the line"), q_("Valid range"), QString::number(ui->orbitSegmentsSpin->minimum()), QString::number(ui->orbitSegmentsSpin->maximum())));
+	ui->orbitDurationSpin->setToolTip(QString("<p>%1. %2: %3-%4%5</p>").arg(q_("Segment length: duration of a single segment in seconds"), q_("Valid range"), QString::number(ui->orbitDurationSpin->minimum()), QString::number(ui->orbitDurationSpin->maximum()), qc_(" s","time unit")));
+	ui->orbitFadeSpin->setToolTip(QString("<p>%1. %2: %3-%4</p>").arg(q_("Fade length: number of segments used to draw each end of the line"), q_("Valid range"), QString::number(ui->orbitFadeSpin->minimum()), QString::number(ui->orbitFadeSpin->maximum())));
 }
 
 void SatellitesDialog::populateSourcesList()

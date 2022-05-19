@@ -485,7 +485,7 @@
             <item>
              <widget class="QSpinBox" name="orbitSegmentsSpin">
               <property name="toolTip">
-               <string>Number of  segments: number of segments used to draw the line</string>
+               <string/>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -504,7 +504,7 @@
             <item>
              <widget class="QSpinBox" name="orbitDurationSpin">
               <property name="toolTip">
-               <string>Segment length: duration of a single segment in seconds</string>
+               <string/>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -523,7 +523,7 @@
             <item>
              <widget class="QSpinBox" name="orbitFadeSpin">
               <property name="toolTip">
-               <string>Fade length: number of segments used to draw each end of the line</string>
+               <string/>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
