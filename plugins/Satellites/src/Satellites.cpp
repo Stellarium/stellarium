@@ -116,6 +116,7 @@ void Satellites::deinit()
 {
 	Satellite::hintTexture.clear();
 	texPointer.clear();
+	texCross.clear();
 }
 
 Satellites::~Satellites()
@@ -155,6 +156,7 @@ void Satellites::init()
 
 		// Load and find resources used in the plugin
 		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
+		texCross = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");
 		Satellite::hintTexture = StelApp::getInstance().getTextureManager().createTexture(":/satellites/hint.png");
 
 		// key bindings and other actions		
@@ -2204,12 +2206,14 @@ void Satellites::drawCircles(StelCore* core)
 {
 	StelPainter sPainter(core->getProjection(StelCore::FrameHeliocentricEclipticJ2000, StelCore::RefractionAuto));
 
-	sPainter.setBlending(true);
+	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	sPainter.setLineSmooth(true);
+	sPainter.setFont(labelFont);
 
+	double lambda, beta, satDistance;
+	// FIXME: This is topocentric calculations!
 	const Vec3d pos = earth->getEclipticPos();
 	const Vec3d dir = - sun->getAberrationPush() + pos;
-	double lambda, beta, satDistance;
 	StelUtils::rectToSphe(&lambda, &beta, dir);
 	const Mat4d rot=Mat4d::zrotation(lambda)*Mat4d::yrotation(-beta);
 
@@ -2227,6 +2231,8 @@ void Satellites::drawCircles(StelCore* core)
 		return;
 
 	satDistance += earth->getEquatorialRadius();
+	texCross->bind();
+	const float shift = 6.f + (0.00001f*M_PI_180f*sPainter.getProjector()->getPixelPerRadAtCenter())/1.8f;
 	const double earthDistance=earth->getHeliocentricEclipticPos().length(); // Earth distance [AU]
 
 	// Compute umbra radius at satellite distance.
@@ -2242,6 +2248,13 @@ void Satellites::drawCircles(StelCore* core)
 	}
 	sPainter.setColor(getUmbraColor(), 1.f);
 	sPainter.drawStelVertexArray(umbra, false);
+
+	Vec3d point(satDistance, 0.0, 0.0);
+	rot.transfo(point);
+	Vec3d coord = pos+point;
+	sPainter.drawSprite2dMode(coord, 5.f);
+	QString cuLabel = QString("%1: h=%2 %3").arg(q_("C.U."), QString::number(AU*(satDistance - earth->getEquatorialRadius()), 'f', 1), qc_("km","distance"));
+	sPainter.drawText(coord, cuLabel, 0, shift, shift, false);
 
 	if (getFlagPenumbraVisible())
 	{

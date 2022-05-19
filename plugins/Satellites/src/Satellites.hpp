@@ -665,7 +665,7 @@ private:
 	QSet<QString> groups;
 	
 	LinearFader hintFader;
-	StelTextureSP texPointer;
+	StelTextureSP texPointer, texCross;
 	
 	//! @name Bottom toolbar button
 	//@{
