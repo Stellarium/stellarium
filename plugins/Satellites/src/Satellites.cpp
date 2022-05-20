@@ -101,7 +101,7 @@ Satellites::Satellites()
 	, flagUmbraVisible(false)
 	, flagUmbraAtFixedDistance(false)
 	, umbraColor(1.0f, 0.0f, 0.0f)
-	, umbraDistance(1000)
+	, umbraDistance(1000.0)
 	, flagPenumbraVisible(false)
 	, penumbraColor(1.0f, 0.0f, 0.0f)
 	#if(SATELLITES_PLUGIN_IRIDIUM == 1)
@@ -647,6 +647,12 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("orbit_segment_duration", 20);
 	conf->setValue("valid_epoch_age", 30);
 	conf->setValue("iconic_mode_enabled", false);
+	conf->setValue("umbra_flag", false);
+	conf->setValue("umbra_fixed_distance_flag", false);
+	conf->setValue("umbra_color", "1.0,0.0,0.0");
+	conf->setValue("umbra_fixed_distance", 1000.0);
+	conf->setValue("penumbra_flag", false);
+	conf->setValue("penumbra_color", "1.0,0.0,0.0");
 	
 	conf->endGroup(); // saveTleSources() opens it for itself
 	
@@ -809,7 +815,7 @@ void Satellites::loadSettings()
 	setFlagUmbraVisible(conf->value("umbra_flag", false).toBool());
 	setFlagUmbraAtFixedDistance(conf->value("umbra_fixed_distance_flag", false).toBool());
 	setUmbraColor(Vec3f(conf->value("umbra_color", "1.0,0.0,0.0").toString()));
-	setUmbraDistance(conf->value("umbra_fixed_distance", 1000).toInt());
+	setUmbraDistance(conf->value("umbra_fixed_distance", 1000.0).toDouble());
 	setFlagPenumbraVisible(conf->value("penumbra_flag", false).toBool());
 	setPenumbraColor(Vec3f(conf->value("penumbra_color", "1.0,0.0,0.0").toString()));
 
@@ -1525,7 +1531,7 @@ void Satellites::setUmbraColor(const Vec3f &c)
 	emit umbraColorChanged(c);
 }
 
-void Satellites::setUmbraDistance(int d)
+void Satellites::setUmbraDistance(double d)
 {
 	umbraDistance = d;
 	emit umbraDistanceChanged(d);

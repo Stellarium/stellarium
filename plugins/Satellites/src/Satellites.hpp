@@ -166,7 +166,7 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(Vec3f transitSatelliteColor   READ getTransitSatelliteColor    WRITE setTransitSatelliteColor    NOTIFY transitSatelliteColorChanged)
 	Q_PROPERTY(bool flagUmbraVisible         READ getFlagUmbraVisible         WRITE setFlagUmbraVisible         NOTIFY flagUmbraVisibleChanged)
 	Q_PROPERTY(bool flagUmbraAtFixedDistance READ getFlagUmbraAtFixedDistance WRITE setFlagUmbraAtFixedDistance NOTIFY flagUmbraAtFixedDistanceChanged)
-	Q_PROPERTY(int umbraDistance             READ getUmbraDistance            WRITE setUmbraDistance            NOTIFY umbraDistanceChanged)
+	Q_PROPERTY(double umbraDistance          READ getUmbraDistance            WRITE setUmbraDistance            NOTIFY umbraDistanceChanged)
 	Q_PROPERTY(Vec3f umbraColor              READ getUmbraColor               WRITE setUmbraColor               NOTIFY umbraColorChanged)
 	Q_PROPERTY(bool flagPenumbraVisible      READ getFlagPenumbraVisible      WRITE setFlagPenumbraVisible      NOTIFY flagPenumbraVisibleChanged)
 	Q_PROPERTY(Vec3f penumbraColor           READ getPenumbraColor            WRITE setPenumbraColor            NOTIFY penumbraColorChanged)
@@ -402,7 +402,7 @@ signals:
 	void flagUmbraVisibleChanged(bool b);
 	void flagUmbraAtFixedDistanceChanged(bool b);
 	void umbraColorChanged(Vec3f);
-	void umbraDistanceChanged(int d);
+	void umbraDistanceChanged(double d);
 	void flagPenumbraVisibleChanged(bool b);
 	void penumbraColorChanged(Vec3f);
 
@@ -550,9 +550,9 @@ public slots:
 
 	//! Get the fixed distance for center of visualized Earth's umbra
 	//! @return distance, km
-	int getUmbraDistance() { return umbraDistance; }
+	double getUmbraDistance() { return umbraDistance; }
 	//! Set the fixed distance for center of visualized Earth's umbra
-	void setUmbraDistance(int d);
+	void setUmbraDistance(double d);
 
 	//! Set whether ring of Earth's penumbra should be displayed.
 	//! Emits settingsChanged() if the value changes.
@@ -716,7 +716,7 @@ private:
 	bool flagUmbraAtFixedDistance;
 	Vec3f umbraColor;
 	//! The distance for center of visualized Earth's umbra in kilometers
-	int umbraDistance;
+	double umbraDistance;
 	//! Flag enabling visualization the Earth's penumbra.
 	bool flagPenumbraVisible;
 	Vec3f penumbraColor;

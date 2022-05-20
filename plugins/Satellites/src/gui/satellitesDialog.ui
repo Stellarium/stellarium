@@ -578,7 +578,7 @@
              </spacer>
             </item>
             <item>
-             <widget class="QSpinBox" name="umbraDistance">
+             <widget class="QDoubleSpinBox" name="umbraDistance">
               <property name="minimumSize">
                <size>
                 <width>120</width>
@@ -588,11 +588,14 @@
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
+              <property name="decimals">
+               <number>1</number>
+              </property>
               <property name="minimum">
-               <number>75</number>
+               <double>75.000000000000000</double>
               </property>
               <property name="maximum">
-               <number>400000</number>
+               <double>400000.000000000000000</double>
               </property>
              </widget>
             </item>

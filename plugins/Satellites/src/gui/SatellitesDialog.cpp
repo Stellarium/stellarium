@@ -183,7 +183,7 @@ void SatellitesDialog::createDialogContent()
 	// Logic sub-group: Umbra
 	connectBoolProperty(ui->umbraCheckBox,      "Satellites.flagUmbraVisible");
 	connectBoolProperty(ui->umbraAtDistance,    "Satellites.flagUmbraAtFixedDistance");
-	connectIntProperty(ui->umbraDistance,       "Satellites.umbraDistance");
+	connectDoubleProperty(ui->umbraDistance,       "Satellites.umbraDistance");
 	connect(ui->umbraCheckBox, SIGNAL(clicked(bool)), this, SLOT(handleUmbraGroup(bool)));
 	handleUmbraGroup(ui->umbraCheckBox->isChecked());
 	// Logic sub-group: Markers
@@ -1091,7 +1091,7 @@ void SatellitesDialog::populateInfo()
 	// TRANSLATORS: Unit of measure for distance - kilometers
 	QString km = qc_("km", "distance");
 	ui->umbraDistance->setSuffix(QString(" %1").arg(km));
-	ui->umbraDistance->setToolTip(QString("<p>%1. %2: %3-%4 %5</p>").arg(q_("Distance to the center of umbra from Earth's surface (height of imagined satellite)"), q_("Valid range"), QString::number(ui->umbraDistance->minimum()), QString::number(ui->umbraDistance->maximum()), km));
+	ui->umbraDistance->setToolTip(QString("<p>%1. %2: %3-%4 %5</p>").arg(q_("Distance to the center of umbra from Earth's surface (height of imagined satellite)"), q_("Valid range"), QString::number(ui->umbraDistance->minimum(), 'f', 1), QString::number(ui->umbraDistance->maximum(), 'f', 1), km));
 	ui->orbitSegmentsSpin->setToolTip(QString("<p>%1. %2: %3-%4</p>").arg(q_("Number of  segments: number of segments used to draw the line"), q_("Valid range"), QString::number(ui->orbitSegmentsSpin->minimum()), QString::number(ui->orbitSegmentsSpin->maximum())));
 	ui->orbitDurationSpin->setToolTip(QString("<p>%1. %2: %3-%4%5</p>").arg(q_("Segment length: duration of a single segment in seconds"), q_("Valid range"), QString::number(ui->orbitDurationSpin->minimum()), QString::number(ui->orbitDurationSpin->maximum()), s));
 	ui->orbitFadeSpin->setToolTip(QString("<p>%1. %2: %3-%4</p>").arg(q_("Fade length: number of segments used to draw each end of the line"), q_("Valid range"), QString::number(ui->orbitFadeSpin->minimum()), QString::number(ui->orbitFadeSpin->maximum())));
