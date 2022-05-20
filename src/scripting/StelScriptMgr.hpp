@@ -29,7 +29,6 @@
 #include <QPair>
 #include <QSet>
 
-// class StelMainScriptAPI;
 #include "StelMainScriptAPI.hpp"
 
 class StelScriptEngineAgent;
@@ -243,9 +242,9 @@ signals:
 	//! Notification when a script has stopped running 
 	void scriptStopped();
 	//! Notification of a script event - warnings, current execution line etc.
-	void scriptDebug(const QString&) const;
+	void scriptDebug(const QString&);
 	//! Notification of a script event - output line.
-	void scriptOutput(const QString&) const;
+	void scriptOutput(const QString&);
 
 private:
 	// Utility functions for preprocessor
