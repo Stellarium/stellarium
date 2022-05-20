@@ -2252,7 +2252,7 @@ void Satellites::drawCircles(StelCore* core)
 	rot.transfo(point);
 	Vec3d coord = pos+point;
 	sPainter.drawSprite2dMode(coord, 5.f);
-	QString cuLabel = QString("%1: h=%2 %3").arg(q_("C.U."), QString::number(AU*(satDistance - earth->getEquatorialRadius()), 'f', 1), qc_("km","distance"));
+	QString cuLabel = QString("%1 (h=%2 %3)").arg(q_("C.U."), QString::number(AU*(satDistance - earth->getEquatorialRadius()), 'f', 1), qc_("km","distance"));
 	sPainter.drawText(coord, cuLabel, 0, shift, shift, false);
 
 	if (getFlagPenumbraVisible())

@@ -1084,14 +1084,16 @@ void SatellitesDialog::populateInfo()
 	ui->labelRCS->setToolTip(QString("<p>%1</p>").arg(q_("Radar cross-section (RCS) is a measure of how detectable an object is with a radar. A larger RCS indicates that an object is more easily detected.")));
 	ui->labelStdMagnitude->setToolTip(QString("<p>%1</p>").arg(q_("The standard magnitude of a satellite is defined as its apparent magnitude when at half-phase and at a distance 1000 km from the observer.")));
 	// TRANSLATORS: duration
-	ui->orbitDurationSpin->setSuffix(qc_(" s","time unit"));
+	QString s = qc_("s","time unit");
+	ui->orbitDurationSpin->setSuffix(QString(" %1").arg(s));
 	// TRANSLATORS: duration
-	ui->updateFrequencySpinBox->setSuffix(qc_(" h","time unit"));
+	ui->updateFrequencySpinBox->setSuffix(QString(" %1").arg(qc_("h","time unit")));
 	// TRANSLATORS: Unit of measure for distance - kilometers
-	ui->umbraDistance->setSuffix(qc_("km", "distance"));
-	ui->umbraDistance->setToolTip(QString("<p>%1. %2: %3-%4 %5</p>").arg(q_("Distance to the center of umbra from Earth's surface (height of imagined satellite)"), q_("Valid range"), QString::number(ui->umbraDistance->minimum()), QString::number(ui->umbraDistance->maximum()), qc_("km", "distance")));
+	QString km = qc_("km", "distance");
+	ui->umbraDistance->setSuffix(QString(" %1").arg(km));
+	ui->umbraDistance->setToolTip(QString("<p>%1. %2: %3-%4 %5</p>").arg(q_("Distance to the center of umbra from Earth's surface (height of imagined satellite)"), q_("Valid range"), QString::number(ui->umbraDistance->minimum()), QString::number(ui->umbraDistance->maximum()), km));
 	ui->orbitSegmentsSpin->setToolTip(QString("<p>%1. %2: %3-%4</p>").arg(q_("Number of  segments: number of segments used to draw the line"), q_("Valid range"), QString::number(ui->orbitSegmentsSpin->minimum()), QString::number(ui->orbitSegmentsSpin->maximum())));
-	ui->orbitDurationSpin->setToolTip(QString("<p>%1. %2: %3-%4%5</p>").arg(q_("Segment length: duration of a single segment in seconds"), q_("Valid range"), QString::number(ui->orbitDurationSpin->minimum()), QString::number(ui->orbitDurationSpin->maximum()), qc_(" s","time unit")));
+	ui->orbitDurationSpin->setToolTip(QString("<p>%1. %2: %3-%4%5</p>").arg(q_("Segment length: duration of a single segment in seconds"), q_("Valid range"), QString::number(ui->orbitDurationSpin->minimum()), QString::number(ui->orbitDurationSpin->maximum()), s));
 	ui->orbitFadeSpin->setToolTip(QString("<p>%1. %2: %3-%4</p>").arg(q_("Fade length: number of segments used to draw each end of the line"), q_("Valid range"), QString::number(ui->orbitFadeSpin->minimum()), QString::number(ui->orbitFadeSpin->maximum())));
 }
 
