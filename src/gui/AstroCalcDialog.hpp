@@ -29,6 +29,7 @@
 #include <QTimer>
 #include <QRegularExpression>
 #include <QMutex>
+#include <QtCharts>
 
 #include "AstroCalcChart.hpp"
 #include "StelDialog.hpp"
@@ -368,6 +369,8 @@ private slots:
 	void populateCelestialNames(QString);
 	void showExtraEphemerisDialog();
 	void showCustomStepsDialog();
+
+	void saveGraph(QtCharts::QChartView *graph);
 
 private:
 	class AstroCalcExtraEphemerisDialog* extraEphemerisDialog;

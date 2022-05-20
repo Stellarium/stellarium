@@ -532,6 +532,13 @@
                  </widget>
                 </item>
                 <item>
+                 <widget class="QPushButton" name="hecPositionsExportButton">
+                  <property name="text">
+                   <string>Export graph...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
                  <widget class="QPushButton" name="hecPositionsUpdateButton">
                   <property name="text">
                    <string>Update positions</string>
@@ -1438,7 +1445,7 @@
              <enum>QTabWidget::South</enum>
             </property>
             <property name="currentIndex">
-             <number>3</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="tabAltVsTime">
              <attribute name="title">

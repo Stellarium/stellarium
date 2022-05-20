@@ -572,36 +572,28 @@ void AstroCalcDialog::createDialogContent()
 	ui->monthlyElevationPositiveCheckBox->setStyleSheet(style);
 
 	// chartview exports:
-	connect(ui->exportAltVsTimePushButton, &QPushButton::clicked, this, [=]{
-		QString filename = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save file"), "", q_("Images (*.png)"));
-		QPixmap p = ui->altVsTimeChartView->grab();
+	connect(ui->hecPositionsExportButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->hecPositionsChartView); });
+	connect(ui->exportAltVsTimePushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->altVsTimeChartView); });
+	connect(ui->exportAziVsTimePushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->aziVsTimeChartView); });
+	connect(ui->exportMonthlyElevationPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->monthlyElevationChartView); });
+	connect(ui->exportGraphsPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->twoGraphsChartView); });
+	connect(ui->exportLunarElongationPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->lunarElongationChartView); });
+	connect(ui->exportPCPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->pcChartView); });
+}
+
+void AstroCalcDialog::saveGraph(QtCharts::QChartView *graph)
+{
+	QString dir = StelFileMgr::getScreenshotDir();
+	if (dir.isEmpty())
+		dir = StelFileMgr::getUserDir();
+	QString filter = q_("Images");
+	filter.append(" (*.png)");
+	QString filename = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save graph"), dir + "/stellarium-graph.png", filter);
+	if (!filename.isEmpty())
+	{
+		QPixmap p = graph->grab();
 		p.save(filename, "PNG");
-	});
-	connect(ui->exportAziVsTimePushButton, &QPushButton::clicked, this, [=]{
-		QString filename = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save file"), "", q_("Images (*.png)"));
-		QPixmap p = ui->aziVsTimeChartView->grab();
-		p.save(filename, "PNG");
-	});
-	connect(ui->exportMonthlyElevationPushButton, &QPushButton::clicked, this, [=]{
-		QString filename = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save file"), "", q_("Images (*.png)"));
-		QPixmap p = ui->monthlyElevationChartView->grab();
-		p.save(filename, "PNG");
-	});
-	connect(ui->exportGraphsPushButton, &QPushButton::clicked, this, [=]{
-		QString filename = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save file"), "", q_("Images (*.png)"));
-		QPixmap p = ui->twoGraphsChartView->grab();
-		p.save(filename, "PNG");
-	});
-	connect(ui->exportLunarElongationPushButton, &QPushButton::clicked, this, [=]{
-		QString filename = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save file"), "", q_("Images (*.png)"));
-		QPixmap p = ui->lunarElongationChartView->grab();
-		p.save(filename, "PNG");
-	});
-	connect(ui->exportPCPushButton, &QPushButton::clicked, this, [=]{
-		QString filename = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save file"), "", q_("Images (*.png)"));
-		QPixmap p = ui->pcChartView->grab();
-		p.save(filename, "PNG");
-	});
+	}
 }
 
 void AstroCalcDialog::populateCelestialNames(QString)
@@ -6125,7 +6117,7 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 		switch (idx){
 			case 0: // 'Alt. vs Time' is visible
 				plotAltVsTime = true;
-				qDebug() << "calling drawAltVsTimeDiagram() in changePage";
+				//qDebug() << "calling drawAltVsTimeDiagram() in changePage";
 				drawAltVsTimeDiagram(); // Is object already selected?
 				break;
 			case 1: //  'Azi. vs Time' is visible
