@@ -2211,7 +2211,6 @@ void Satellites::drawCircles(StelCore* core)
 	sPainter.setFont(labelFont);
 
 	double lambda, beta, satDistance;
-	// FIXME: This is topocentric calculations!
 	const Vec3d pos = earth->getEclipticPos();
 	const Vec3d dir = - sun->getAberrationPush() + pos;
 	StelUtils::rectToSphe(&lambda, &beta, dir);
