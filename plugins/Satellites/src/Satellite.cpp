@@ -995,33 +995,32 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 
 void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 {
-	Vec3d position, onscreen;
-	Vec3f drawColor;
 	int size = orbitPoints.size();
 
-	QVector<Vec3d> vertexArray;
-	QVector<Vec4f> colorArray;
-	StelProjectorP prj = painter.getProjector();
-
-	vertexArray.resize(size);
-	colorArray.resize(size);
-
-	//Rest of points
-	for (int i=1; i<size; i++)
+	if (size>0)
 	{
-		position = core->altAzToJ2000(orbitPoints[i].toVec3d(), StelCore::RefractionOff);
-		position.normalize();
-		if (prj->project(position, onscreen)) // check position on the screen
+		Vec3d position;
+		Vec3f drawColor;
+		QVector<Vec3d> vertexArray;
+		QVector<Vec4f> colorArray;
+		vertexArray.resize(size);
+		colorArray.resize(size);
+
+		//Rest of points
+		for (int i=0; i<size; i++)
 		{
-			vertexArray.append(position);
+			position = core->altAzToJ2000(orbitPoints[i].toVec3d(), StelCore::RefractionOff);
+			position.normalize();
+			vertexArray[i] = position;
 			drawColor = (visibilityPoints[i] == gSatWrapper::VISIBLE) ? orbitColor : invisibleSatelliteColor;
 			if (hideInvisibleSatellitesFlag && visibilityPoints[i] != gSatWrapper::VISIBLE)
-				colorArray.append(Vec4f(0.f,0.f,0.f,0.f)); // hide invisible part of orbit
+				colorArray[i] = Vec4f(0.f,0.f,0.f,0.f); // hide invisible part of orbit
 			else
-				colorArray.append(Vec4f(drawColor, hintBrightness * calculateOrbitSegmentIntensity(i)));
+				colorArray[i] = Vec4f(drawColor, hintBrightness * calculateOrbitSegmentIntensity(i));
 		}
+
+		painter.drawPath(vertexArray, colorArray); // (does client state switching as needed internally)
 	}
-	painter.drawPath(vertexArray, colorArray); // (does client state switching as needed internally)
 }
 
 float Satellite::calculateOrbitSegmentIntensity(int segNum)
