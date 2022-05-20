@@ -421,7 +421,7 @@ QString StelScriptMgr::runningScriptId() const
 	return scriptFileName;
 }
 
-QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText) const
+QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText)
 {
 	QFile file(StelFileMgr::findFile("scripts/" + s, StelFileMgr::File));
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -451,7 +451,7 @@ QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QS
 	return notFoundText;
 }
 
-QString StelScriptMgr::getHtmlDescription(const QString &s, bool generateDocumentTags) const
+QString StelScriptMgr::getHtmlDescription(const QString &s, bool generateDocumentTags)
 {
 	QString html;
 	if (generateDocumentTags)
@@ -492,33 +492,33 @@ QString StelScriptMgr::getHtmlDescription(const QString &s, bool generateDocumen
 	return html;
 }
 
-QString StelScriptMgr::getName(const QString& s) const
+QString StelScriptMgr::getName(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "Name", s);
 }
 
-QString StelScriptMgr::getAuthor(const QString& s) const
+QString StelScriptMgr::getAuthor(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "Author");
 }
 
-QString StelScriptMgr::getLicense(const QString& s) const
+QString StelScriptMgr::getLicense(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "License", "");
 }
 
-QString StelScriptMgr::getVersion(const QString& s) const
+QString StelScriptMgr::getVersion(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "Version", "");
 }
 
 
-QString StelScriptMgr::getShortcut(const QString& s) const
+QString StelScriptMgr::getShortcut(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "Shortcut", "");
 }
 
-QString StelScriptMgr::getDescription(const QString& s) const
+QString StelScriptMgr::getDescription(const QString& s)
 {
 	QFile file(StelFileMgr::findFile("scripts/" + s, StelFileMgr::File));
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -730,7 +730,7 @@ void StelScriptMgr::resumeScript()
 	agent->setPauseScript(false);
 }
 
-double StelScriptMgr::getScriptRate() const
+double StelScriptMgr::getScriptRate()
 {
 	return engine->globalObject().property("scriptRateReadOnly").toNumber();
 }
