@@ -2239,7 +2239,7 @@ void Satellites::drawCircles(StelCore* core)
 
 	satDistance += earth->getEquatorialRadius();
 	texCross->bind();
-	const float shift = 6.f + (0.00001f*M_PI_180f*sPainter.getProjector()->getPixelPerRadAtCenter())/1.8f;
+	const float shift = 8.f;
 	const double earthDistance=earth->getHeliocentricEclipticPos().length(); // Earth distance [AU]
 	const double sunHP = asin(earth->getEquatorialRadius()/earthDistance) * M_180_PI*3600.; // arcsec.
 	const double satHP = asin(earth->getEquatorialRadius()/satDistance) * M_180_PI*3600.; // arcsec.
