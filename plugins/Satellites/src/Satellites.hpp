@@ -584,6 +584,7 @@ private slots:
 	//! Call when button "Save settings" in main GUI are pressed
 	void saveSettings() { saveSettingsToConfig(); }	
 	void translateData();
+	void updateEarthShadowEnlargementFlag(bool state) { earthShadowEnlargementDanjon=state; }
 
 private:
 	//! Drawing the circles of Earth's umbra and penumbra
@@ -720,6 +721,8 @@ private:
 	//! Flag enabling visualization the Earth's penumbra.
 	bool flagPenumbraVisible;
 	Vec3f penumbraColor;
+	//! Used to track whether earth shadow enlargement shall be computed after Danjon (1951)
+	bool earthShadowEnlargementDanjon;
 	//@}
 	
 	//! @name Screen message infrastructure

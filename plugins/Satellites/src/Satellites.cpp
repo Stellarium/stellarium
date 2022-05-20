@@ -104,6 +104,7 @@ Satellites::Satellites()
 	, umbraDistance(1000.0)
 	, flagPenumbraVisible(false)
 	, penumbraColor(1.0f, 0.0f, 0.0f)
+	, earthShadowEnlargementDanjon(false)
 	#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	, iridiumFlaresPredictionDepth(7)
 	#endif
@@ -218,8 +219,9 @@ void Satellites::init()
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdate()));
 	updateTimer->start();
 
-	earth = GETSTELMODULE(SolarSystem)->getEarth();
-	sun = GETSTELMODULE(SolarSystem)->getSun();
+	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	earth = ssystem->getEarth();
+	sun = ssystem->getSun();
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	// Handle changes to the observer location or wide range of dates:
@@ -227,6 +229,7 @@ void Satellites::init()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
 	connect(core, SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateData()));
+	connect(ssystem, SIGNAL(earthShadowEnlargementDanjonChanged(bool)), this, SLOT(updateEarthShadowEnlargementFlag(bool)));
 
 	bindingGroups();
 }
@@ -2227,7 +2230,6 @@ void Satellites::drawCircles(StelCore* core)
 	if (!newSelected.empty())
 		sat = getById(newSelected[0].staticCast<Satellite>()->getCatalogNumberString());
 
-	static const double sun2earth=sun->getEquatorialRadius() / earth->getEquatorialRadius();
 	if (flagUmbraAtFixedDistance)
 		satDistance = umbraDistance/AU; // Satellite distance [AU]
 	else if (!sat.isNull())
@@ -2239,15 +2241,31 @@ void Satellites::drawCircles(StelCore* core)
 	texCross->bind();
 	const float shift = 6.f + (0.00001f*M_PI_180f*sPainter.getProjector()->getPixelPerRadAtCenter())/1.8f;
 	const double earthDistance=earth->getHeliocentricEclipticPos().length(); // Earth distance [AU]
+	const double sunHP = asin(earth->getEquatorialRadius()/earthDistance) * M_180_PI*3600.; // arcsec.
+	const double satHP = asin(earth->getEquatorialRadius()/satDistance) * M_180_PI*3600.; // arcsec.
+	const double sunSD = atan(sun->getEquatorialRadius()/earthDistance) * M_180_PI*3600.; // arcsec.
 
-	// Compute umbra radius at satellite distance.
-	const double lUmbra=earthDistance/(sun2earth-1.); // length of earth umbra [AU]
-	const double rUmbraAU=earth->getEquatorialRadius()*(lUmbra-satDistance)/lUmbra; // radius of earth shadow at satellite distance [AU]
+	//Classical Bessel elements instead
+	double f1, f2;
+	if (earthShadowEnlargementDanjon)
+	{
+		static const double danjonScale=1+1./85.-1./594.; // ~1.01, shadow magnification factor (see Espenak 5000 years Canon)
+		f1=danjonScale*satHP + sunHP + sunSD; // penumbra radius, arcsec
+		f2=danjonScale*satHP + sunHP - sunSD; // umbra radius, arcsec
+	}
+	else
+	{
+		const double mHP1=0.998340*satHP;
+		f1=1.02*(mHP1 + sunHP + sunSD); // penumbra radius, arcsec
+		f2=1.02*(mHP1 + sunHP - sunSD); // umbra radius, arcsec
+	}
+	const double f1_AU=tan(f1/3600.*M_PI_180)*satDistance;
+	const double f2_AU=tan(f2/3600.*M_PI_180)*satDistance;
 
 	StelVertexArray umbra(StelVertexArray::LineLoop);
 	for (int i=0; i<360; ++i)
 	{
-		Vec3d point(satDistance, cos(i*M_PI_180)*rUmbraAU, sin(i*M_PI_180)*rUmbraAU);
+		Vec3d point(satDistance, cos(i*M_PI_180)*f2_AU, sin(i*M_PI_180)*f2_AU);
 		rot.transfo(point);
 		umbra.vertex.append(pos+point);
 	}
@@ -2263,14 +2281,10 @@ void Satellites::drawCircles(StelCore* core)
 
 	if (getFlagPenumbraVisible())
 	{
-		// Penumbra:
-		const double lPenumbra=earthDistance/(sun2earth + 1.); // distance between earth and point between sun and earth where penumbral border rays intersect
-		const double rPenumbraAU=earth->getEquatorialRadius()*(lPenumbra+satDistance)/lPenumbra; // radius of penumbra at satellite distance [AU]
-
 		StelVertexArray penumbra(StelVertexArray::LineLoop);
 		for (int i=0; i<360; ++i)
 		{
-			Vec3d point(satDistance, cos(i*M_PI_180)*rPenumbraAU, sin(i*M_PI_180)*rPenumbraAU);
+			Vec3d point(satDistance, cos(i*M_PI_180)*f1_AU, sin(i*M_PI_180)*f1_AU);
 			rot.transfo(point);
 			penumbra.vertex.append(pos+point);
 		}
