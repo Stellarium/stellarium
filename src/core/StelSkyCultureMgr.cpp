@@ -223,7 +223,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 	{
 		color = "#2090ff"; // "blue" area
 		license = q_("unknown");
-		description = q_("This sky culture is provided under unknown license. Please ask authors for details about this sky culture.");
+		description = q_("This sky culture is provided under unknown license. Please ask authors for details about license for this sky culture.");
 	}
 	else
 	{
@@ -256,7 +256,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 			if (license.contains("NC", Qt::CaseSensitive))
 				color = "#ff6633"; // "red" area; nonfree license - strong restrictions
 
-			if (!details.at(0).startsWith("CC0", Qt::CaseInsensitive)) // No a public domain!
+			if (!details.at(0).startsWith("CC0", Qt::CaseInsensitive)) // Not public domain!
 				description.append(QString(" %1").arg(options.value(details.at(1), "")));
 			else
 				description = q_("This sky culture is distributed as public domain.");
@@ -265,7 +265,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 		}
 
 		if (license.contains("FAL", Qt::CaseSensitive) || license.contains("Free Art License", Qt::CaseSensitive))
-			description.append(QString(" %1").arg(q_("Illustrations are provided under Free Art License that grants the right to they freely copy, distribute, and transform.")));
+			description.append(QString(" %1").arg(q_("Illustrations are provided under Free Art License that grants the right to freely copy, distribute, and transform.")));
 	}
 
 	QString html = QString();
