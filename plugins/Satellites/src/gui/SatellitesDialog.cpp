@@ -408,11 +408,7 @@ void SatellitesDialog::descriptionTextChanged()
 	{
 		const QModelIndex& index = selection.at(i);
 		sat = SatellitesMgr->getById(index.data(Qt::UserRole).toString());
-
-		if (sat->description != newdesc)
-		{
-			sat->description = newdesc;
-		}
+		sat->description = newdesc;
 	}
 	saveSatellites();
 }
@@ -458,6 +454,8 @@ void SatellitesDialog::filterListByGroup(int index)
 		filterModel->setSecondaryFilters(QString(), SatHGSO);
 	else if (groupId == "[outdatedTLE]")
 		filterModel->setSecondaryFilters(QString(), SatOutdatedTLE);
+	else if (groupId == "[custom]")
+		filterModel->setSecondaryFilters(QString(), SatCustomFilter);
 	else
 		filterModel->setSecondaryFilters(groupId, SatNoFlags);
 
@@ -477,7 +475,7 @@ void SatellitesDialog::filterListByGroup(int index)
 void SatellitesDialog::updateFilteredSatellitesList()
 {
 	QString groupId = ui->groupFilterCombo->currentData(Qt::UserRole).toString();
-	if (groupId == "[outdatedTLE]")
+	if (groupId == "[outdatedTLE]" || groupId == "[custom]")
 	{
 		filterListByGroup(ui->groupFilterCombo->currentIndex());
 	}
@@ -1065,6 +1063,7 @@ void SatellitesDialog::populateFilterMenu()
 	ui->groupFilterCombo->insertItem(0, q_("[outdated TLE]"), QVariant("[outdatedTLE]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all user defined]"), QVariant("[userdefined]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all]"), QVariant("all"));
+	ui->groupFilterCombo->insertItem(0, q_("[custom filter]"), QVariant("[custom]"));
 
 	// Restore current selection
 	index = 0;
