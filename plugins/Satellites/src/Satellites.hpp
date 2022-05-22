@@ -161,9 +161,15 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(int  orbitLineSegments        READ getOrbitLineSegments        WRITE setOrbitLineSegments        NOTIFY orbitLineSegmentsChanged)
 	Q_PROPERTY(int  orbitLineFadeSegments    READ getOrbitLineFadeSegments    WRITE setOrbitLineFadeSegments    NOTIFY orbitLineFadeSegmentsChanged)
 	Q_PROPERTY(int  orbitLineSegmentDuration READ getOrbitLineSegmentDuration WRITE setOrbitLineSegmentDuration NOTIFY orbitLineSegmentDurationChanged)
-	Q_PROPERTY(int  tleEpochAgeDays     READ getTleEpochAgeDays     WRITE setTleEpochAgeDays     NOTIFY tleEpochAgeDaysChanged)
+	Q_PROPERTY(int  tleEpochAgeDays          READ getTleEpochAgeDays          WRITE setTleEpochAgeDays          NOTIFY tleEpochAgeDaysChanged)
 	Q_PROPERTY(Vec3f invisibleSatelliteColor READ getInvisibleSatelliteColor  WRITE setInvisibleSatelliteColor  NOTIFY invisibleSatelliteColorChanged)
 	Q_PROPERTY(Vec3f transitSatelliteColor   READ getTransitSatelliteColor    WRITE setTransitSatelliteColor    NOTIFY transitSatelliteColorChanged)
+	Q_PROPERTY(bool flagUmbraVisible         READ getFlagUmbraVisible         WRITE setFlagUmbraVisible         NOTIFY flagUmbraVisibleChanged)
+	Q_PROPERTY(bool flagUmbraAtFixedDistance READ getFlagUmbraAtFixedDistance WRITE setFlagUmbraAtFixedDistance NOTIFY flagUmbraAtFixedDistanceChanged)
+	Q_PROPERTY(double umbraDistance          READ getUmbraDistance            WRITE setUmbraDistance            NOTIFY umbraDistanceChanged)
+	Q_PROPERTY(Vec3f umbraColor              READ getUmbraColor               WRITE setUmbraColor               NOTIFY umbraColorChanged)
+	Q_PROPERTY(bool flagPenumbraVisible      READ getFlagPenumbraVisible      WRITE setFlagPenumbraVisible      NOTIFY flagPenumbraVisibleChanged)
+	Q_PROPERTY(Vec3f penumbraColor           READ getPenumbraColor            WRITE setPenumbraColor            NOTIFY penumbraColorChanged)
 	
 public:
 	//! @enum UpdateState
@@ -393,6 +399,12 @@ signals:
 	void tleEpochAgeDaysChanged(int i);
 	void invisibleSatelliteColorChanged(Vec3f);
 	void transitSatelliteColorChanged(Vec3f);
+	void flagUmbraVisibleChanged(bool b);
+	void flagUmbraAtFixedDistanceChanged(bool b);
+	void umbraColorChanged(Vec3f);
+	void umbraDistanceChanged(double d);
+	void flagPenumbraVisibleChanged(bool b);
+	void penumbraColorChanged(Vec3f);
 
 	//! Emitted when some of the plugin settings have been changed.
 	//! Used to communicate with the configuration window.
@@ -418,17 +430,17 @@ signals:
 public slots:
 	//! get whether or not the plugin will try to update TLE data from the internet
 	//! @return true if updates are set to be done, false otherwise
-	bool getUpdatesEnabled(void) const {return updatesEnabled;}
+	bool getUpdatesEnabled(void) {return updatesEnabled;}
 	//! Set whether the plugin will try to download updates from the Internet.
 	//! Emits settingsChanged() if the value changes.
 	//! @param b if true, updates will be enabled, else they will be disabled.
 	void setUpdatesEnabled(bool enabled);
 	
-	bool isAutoAddEnabled() const { return autoAddEnabled; }
+	bool isAutoAddEnabled() { return autoAddEnabled; }
 	//! Emits settingsChanged() if the value changes.
 	void setAutoAddEnabled(bool enabled);
 	
-	bool isAutoRemoveEnabled() const { return autoRemoveEnabled; }
+	bool isAutoRemoveEnabled() { return autoRemoveEnabled; }
 	//! Emits settingsChanged() if the value changes.
 	void setAutoRemoveEnabled(bool enabled);
 	
@@ -436,36 +448,36 @@ public slots:
 	//! Note that hint visibility also applies to satellite labels.
 	//! Emits settingsChanged() if the value changes.
 	void setFlagHintsVisible(bool b);
-	bool getFlagHintsVisible() const {return hintFader;}
+	bool getFlagHintsVisible() {return hintFader;}
 
 	//! Set whether text labels should be displayed next to satellite hints.
 	//! Emits settingsChanged() if the value changes.
 	//! @todo Decide how to sync with "actionShow_Satellite_Labels".
 	void setFlagLabelsVisible(bool b);
-	bool getFlagLabelsVisible() const;
+	bool getFlagLabelsVisible();
 
 	//! Emits settingsChanged() if the value changes.
 	void setFlagIconicMode(bool b);
-	bool getFlagIconicMode() const;
+	bool getFlagIconicMode();
 
-	bool getFlagHideInvisible() const;
+	bool getFlagHideInvisible();
 	void setFlagHideInvisible(bool b);
 
 	//! Get color for invisible satellites
 	//! @return color
-	Vec3f getInvisibleSatelliteColor() const;
+	Vec3f getInvisibleSatelliteColor();
 	//! Set color for invisible satellites
 	void setInvisibleSatelliteColor(const Vec3f& c);
 
 	//! Get color for satellites in transit through the Sun or the Moon (color of markers)
 	//! @return color
-	Vec3f getTransitSatelliteColor() const;
+	Vec3f getTransitSatelliteColor();
 	//! Set color for satellites in transit through the Sun or the Moon (color of markers)
 	void setTransitSatelliteColor(const Vec3f& c);
 	
 	//! get the label font size.
 	//! @return the pixel size of the font
-	int getLabelFontSize() const {return labelFont.pixelSize();}
+	int getLabelFontSize() {return labelFont.pixelSize();}
 	//! set the label font size.
 	//! @param size the pixel size of the font
 	//! Emits settingsChanged() if the value changes.
@@ -496,29 +508,62 @@ public slots:
 	//! @param b - true to turn on orbit lines, false to turn off
 	void setFlagOrbitLines(bool b);
 	//! Get the current status of the orbit line rendering flag.
-	bool getFlagOrbitLines() const;
+	bool getFlagOrbitLines();
 
 	//! return number of segments for orbit lines
-	int getOrbitLineSegments() const {return Satellite::orbitLineSegments;}
+	int getOrbitLineSegments() {return Satellite::orbitLineSegments;}
 	//! set number of segments for orbit lines
 	void setOrbitLineSegments(int s);
 
 	//! return number of fading segments at end of orbit
-	int getOrbitLineFadeSegments() const {return Satellite::orbitLineFadeSegments;}
+	int getOrbitLineFadeSegments() {return Satellite::orbitLineFadeSegments;}
 	//! set number of fading segments at end of orbit
 	void setOrbitLineFadeSegments(int s);
 
 	//! return duration of a single segments
-	int getOrbitLineSegmentDuration() const {return Satellite::orbitLineSegmentDuration;}
+	int getOrbitLineSegmentDuration() {return Satellite::orbitLineSegmentDuration;}
 	//! set duration of a single segments
 	void setOrbitLineSegmentDuration(int s);
 
 	//! return the valid age of TLE's epoch
-	int getTleEpochAgeDays() const { return Satellite::tleEpochAge; }
+	int getTleEpochAgeDays() { return Satellite::tleEpochAge; }
 	//! set the valid age of TLE's epoch
 	void setTleEpochAgeDays(int age);
 
 	void recalculateOrbitLines(void);
+
+	//! Set whether ring of Earth's umbra should be displayed.
+	//! Emits settingsChanged() if the value changes.
+	void setFlagUmbraVisible(bool b);
+	bool getFlagUmbraVisible() { return flagUmbraVisible; }
+
+	//! Set whether ring of Earth's umbra should be displayed at fixed distance.
+	//! Emits settingsChanged() if the value changes.
+	void setFlagUmbraAtFixedDistance(bool b);
+	bool getFlagUmbraAtFixedDistance() { return flagUmbraAtFixedDistance; }
+
+	//! Get color for ring of Earth's umbra
+	//! @return color
+	Vec3f getUmbraColor() { return umbraColor; }
+	//! Set color for ring of Earth's umbra
+	void setUmbraColor(const Vec3f& c);
+
+	//! Get the fixed distance for center of visualized Earth's umbra
+	//! @return distance, km
+	double getUmbraDistance() { return umbraDistance; }
+	//! Set the fixed distance for center of visualized Earth's umbra
+	void setUmbraDistance(double d);
+
+	//! Set whether ring of Earth's penumbra should be displayed.
+	//! Emits settingsChanged() if the value changes.
+	void setFlagPenumbraVisible(bool b);
+	bool getFlagPenumbraVisible() { return flagPenumbraVisible; }
+
+	//! Get color for ring of Earth's penumbra
+	//! @return color
+	Vec3f getPenumbraColor() { return penumbraColor; }
+	//! Set color for ring of Earth's penumbra
+	void setPenumbraColor(const Vec3f& c);
 
 	//! Display a message on the screen for a few seconds.
 	//! This is used for plugin-specific warnings and such.
@@ -539,8 +584,11 @@ private slots:
 	//! Call when button "Save settings" in main GUI are pressed
 	void saveSettings() { saveSettingsToConfig(); }	
 	void translateData();
+	void updateEarthShadowEnlargementFlag(bool state) { earthShadowEnlargementDanjon=state; }
 
 private:
+	//! Drawing the circles of Earth's umbra and penumbra
+	void drawCircles(StelCore* core);
 	//! Add to the current collection the satellite described by the data.
 	//! @warning Use only in other methods! Does not update satelliteListModel!
 	//! @todo This probably could be done easier if Satellite had a constructor
@@ -618,13 +666,13 @@ private:
 	QSet<QString> groups;
 	
 	LinearFader hintFader;
-	StelTextureSP texPointer;
+	StelTextureSP texPointer, texCross;
 	
 	//! @name Bottom toolbar button
 	//@{
 	StelButton* toolbarButton;	
 	//@}	
-	QSharedPointer<Planet> earth;
+	QSharedPointer<Planet> earth, sun;
 	Vec3f defaultHintColor;
 	QFont labelFont;
 	
@@ -659,6 +707,22 @@ private:
 	bool autoRemoveEnabled;
 	QDateTime lastUpdate;
 	int updateFrequencyHours;
+	//@}
+
+	//! @name Umbra/penumbra module
+	//@{
+	//! Flag enabling visualization the Earth's umbra.
+	bool flagUmbraVisible;
+	//! Flag enabling visualization the Earth's umbra at fixed distance
+	bool flagUmbraAtFixedDistance;
+	Vec3f umbraColor;
+	//! The distance for center of visualized Earth's umbra in kilometers
+	double umbraDistance;
+	//! Flag enabling visualization the Earth's penumbra.
+	bool flagPenumbraVisible;
+	Vec3f penumbraColor;
+	//! Used to track whether earth shadow enlargement shall be computed after Danjon (1951)
+	bool earthShadowEnlargementDanjon;
 	//@}
 	
 	//! @name Screen message infrastructure

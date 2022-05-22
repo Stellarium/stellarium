@@ -98,6 +98,13 @@ Satellites::Satellites()
 	, autoAddEnabled(false)
 	, autoRemoveEnabled(false)
 	, updateFrequencyHours(0)
+	, flagUmbraVisible(false)
+	, flagUmbraAtFixedDistance(false)
+	, umbraColor(1.0f, 0.0f, 0.0f)
+	, umbraDistance(1000.0)
+	, flagPenumbraVisible(false)
+	, penumbraColor(1.0f, 0.0f, 0.0f)
+	, earthShadowEnlargementDanjon(false)
 	#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	, iridiumFlaresPredictionDepth(7)
 	#endif
@@ -110,6 +117,7 @@ void Satellites::deinit()
 {
 	Satellite::hintTexture.clear();
 	texPointer.clear();
+	texCross.clear();
 }
 
 Satellites::~Satellites()
@@ -149,6 +157,7 @@ void Satellites::init()
 
 		// Load and find resources used in the plugin
 		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
+		texCross = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");
 		Satellite::hintTexture = StelApp::getInstance().getTextureManager().createTexture(":/satellites/hint.png");
 
 		// key bindings and other actions		
@@ -210,7 +219,9 @@ void Satellites::init()
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdate()));
 	updateTimer->start();
 
-	earth = GETSTELMODULE(SolarSystem)->getEarth();
+	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	earth = ssystem->getEarth();
+	sun = ssystem->getSun();
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	// Handle changes to the observer location or wide range of dates:
@@ -218,6 +229,7 @@ void Satellites::init()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
 	connect(core, SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateData()));
+	connect(ssystem, SIGNAL(earthShadowEnlargementDanjonChanged(bool)), this, SLOT(updateEarthShadowEnlargementFlag(bool)));
 
 	bindingGroups();
 }
@@ -638,6 +650,12 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("orbit_segment_duration", 20);
 	conf->setValue("valid_epoch_age", 30);
 	conf->setValue("iconic_mode_enabled", false);
+	conf->setValue("umbra_flag", false);
+	conf->setValue("umbra_fixed_distance_flag", false);
+	conf->setValue("umbra_color", "1.0,0.0,0.0");
+	conf->setValue("umbra_fixed_distance", 1000.0);
+	conf->setValue("penumbra_flag", false);
+	conf->setValue("penumbra_color", "1.0,0.0,0.0");
 	
 	conf->endGroup(); // saveTleSources() opens it for itself
 	
@@ -796,6 +814,14 @@ void Satellites::loadSettings()
 	Satellite::timeRateLimit = conf->value("time_rate_limit", 1.0).toDouble();
 	Satellite::tleEpochAge = conf->value("valid_epoch_age", 30).toInt();
 
+	// umbra/penumbra
+	setFlagUmbraVisible(conf->value("umbra_flag", false).toBool());
+	setFlagUmbraAtFixedDistance(conf->value("umbra_fixed_distance_flag", false).toBool());
+	setUmbraColor(Vec3f(conf->value("umbra_color", "1.0,0.0,0.0").toString()));
+	setUmbraDistance(conf->value("umbra_fixed_distance", 1000.0).toDouble());
+	setFlagPenumbraVisible(conf->value("penumbra_flag", false).toBool());
+	setPenumbraColor(Vec3f(conf->value("penumbra_color", "1.0,0.0,0.0").toString()));
+
 	// iconic mode
 	setFlagIconicMode(conf->value("iconic_mode_enabled", false).toBool());
 	setFlagHideInvisible(conf->value("hide_invisible_satellites", false).toBool());
@@ -830,6 +856,14 @@ void Satellites::saveSettingsToConfig()
 
 	conf->setValue("valid_epoch_age", Satellite::tleEpochAge);
 
+	// umbra/penumbra
+	conf->setValue("umbra_flag", getFlagUmbraVisible());
+	conf->setValue("umbra_fixed_distance_flag", getFlagUmbraAtFixedDistance());
+	conf->setValue("umbra_color", getUmbraColor().toStr());
+	conf->setValue("umbra_fixed_distance", getUmbraDistance());
+	conf->setValue("penumbra_flag", getFlagPenumbraVisible());
+	conf->setValue("penumbra_color", getPenumbraColor().toStr());
+
 	// iconic mode
 	conf->setValue("iconic_mode_enabled", getFlagIconicMode());
 	conf->setValue("hide_invisible_satellites", getFlagHideInvisible());
@@ -840,7 +874,7 @@ void Satellites::saveSettingsToConfig()
 	saveTleSources(updateUrls);
 }
 
-Vec3f Satellites::getInvisibleSatelliteColor() const
+Vec3f Satellites::getInvisibleSatelliteColor()
 {
 	return Satellite::invisibleSatelliteColor;
 }
@@ -851,7 +885,7 @@ void Satellites::setInvisibleSatelliteColor(const Vec3f &c)
 	emit invisibleSatelliteColorChanged(c);
 }
 
-Vec3f Satellites::getTransitSatelliteColor() const
+Vec3f Satellites::getTransitSatelliteColor()
 {
 	return Satellite::transitSatelliteColor;
 }
@@ -1388,7 +1422,7 @@ void Satellites::saveTleSources(const QStringList& urls)
 	conf->endGroup();
 }
 
-bool Satellites::getFlagLabelsVisible() const
+bool Satellites::getFlagLabelsVisible()
 {
 	return Satellite::showLabels;
 }
@@ -1423,12 +1457,12 @@ void Satellites::setAutoRemoveEnabled(bool enabled)
 	}
 }
 
-bool Satellites::getFlagIconicMode() const
+bool Satellites::getFlagIconicMode()
 {
 	return Satellite::iconicModeFlag;
 }
 
-bool Satellites::getFlagHideInvisible() const
+bool Satellites::getFlagHideInvisible()
 {
 	return Satellite::hideInvisibleSatellitesFlag;
 }
@@ -1473,6 +1507,55 @@ void Satellites::setFlagLabelsVisible(bool b)
 		emit flagLabelsVisibleChanged(b);
 	}
 }
+
+void Satellites::setFlagUmbraVisible(bool b)
+{
+	if (flagUmbraVisible != b)
+	{
+		flagUmbraVisible = b;
+		emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
+		emit flagUmbraVisibleChanged(b);
+	}
+}
+
+void Satellites::setFlagUmbraAtFixedDistance(bool b)
+{
+	if (flagUmbraAtFixedDistance != b)
+	{
+		flagUmbraAtFixedDistance = b;
+		emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
+		emit flagUmbraAtFixedDistanceChanged(b);
+	}
+}
+
+void Satellites::setUmbraColor(const Vec3f &c)
+{
+	umbraColor = c;
+	emit umbraColorChanged(c);
+}
+
+void Satellites::setUmbraDistance(double d)
+{
+	umbraDistance = d;
+	emit umbraDistanceChanged(d);
+}
+
+void Satellites::setFlagPenumbraVisible(bool b)
+{
+	if (flagPenumbraVisible != b)
+	{
+		flagPenumbraVisible = b;
+		emit settingsChanged(); // GZ IS THIS REQUIRED/USEFUL??
+		emit flagPenumbraVisibleChanged(b);
+	}
+}
+
+void Satellites::setPenumbraColor(const Vec3f &c)
+{
+	penumbraColor = c;
+	emit penumbraColorChanged(c);
+}
+
 
 void Satellites::setLabelFontSize(int size)
 {
@@ -1731,7 +1814,7 @@ void Satellites::setFlagOrbitLines(bool b)
 	Satellite::orbitLinesFlag = b;
 }
 
-bool Satellites::getFlagOrbitLines() const
+bool Satellites::getFlagOrbitLines()
 {
 	return Satellite::orbitLinesFlag;
 }
@@ -2093,6 +2176,9 @@ void Satellites::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
+
+	if (getFlagUmbraVisible())
+		drawCircles(core);
 }
 
 void Satellites::drawPointer(StelCore* core, StelPainter& painter)
@@ -2122,6 +2208,89 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 		painter.drawSprite2dMode(static_cast<float>(screenpos[0]-size/2), static_cast<float>(screenpos[1]+size/2), 20, 0);
 		painter.drawSprite2dMode(static_cast<float>(screenpos[0]+size/2), static_cast<float>(screenpos[1]+size/2), 20, -90);
 		painter.drawSprite2dMode(static_cast<float>(screenpos[0]+size/2), static_cast<float>(screenpos[1]-size/2), 20, -180);
+	}
+}
+
+void Satellites::drawCircles(StelCore* core)
+{
+	StelPainter sPainter(core->getProjection(StelCore::FrameHeliocentricEclipticJ2000, StelCore::RefractionAuto));
+
+	sPainter.setBlending(true, GL_ONE, GL_ONE);
+	sPainter.setLineSmooth(true);
+	sPainter.setFont(labelFont);
+
+	double lambda, beta, satDistance;
+	const Vec3d pos = earth->getEclipticPos();
+	const Vec3d dir = - sun->getAberrationPush() + pos;
+	StelUtils::rectToSphe(&lambda, &beta, dir);
+	const Mat4d rot=Mat4d::zrotation(lambda)*Mat4d::yrotation(-beta);
+
+	SatelliteP sat = Q_NULLPTR;
+	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Satellite");
+	if (!newSelected.empty())
+		sat = getById(newSelected[0].staticCast<Satellite>()->getCatalogNumberString());
+
+	if (flagUmbraAtFixedDistance)
+		satDistance = umbraDistance/AU; // Satellite distance [AU]
+	else if (!sat.isNull())
+		satDistance = sat->getInfoMap(core)["height"].toDouble()/AU;
+	else
+		return;
+
+	satDistance += earth->getEquatorialRadius();
+	texCross->bind();
+	const float shift = 8.f;
+	const double earthDistance=earth->getHeliocentricEclipticPos().length(); // Earth distance [AU]
+	const double sunHP = asin(earth->getEquatorialRadius()/earthDistance) * M_180_PI*3600.; // arcsec.
+	const double satHP = asin(earth->getEquatorialRadius()/satDistance) * M_180_PI*3600.; // arcsec.
+	const double sunSD = atan(sun->getEquatorialRadius()/earthDistance) * M_180_PI*3600.; // arcsec.
+
+	//Classical Bessel elements instead
+	double f1, f2;
+	if (earthShadowEnlargementDanjon)
+	{
+		static const double danjonScale=1+1./85.-1./594.; // ~1.01, shadow magnification factor (see Espenak 5000 years Canon)
+		f1=danjonScale*satHP + sunHP + sunSD; // penumbra radius, arcsec
+		f2=danjonScale*satHP + sunHP - sunSD; // umbra radius, arcsec
+	}
+	else
+	{
+		const double mHP1=0.998340*satHP;
+		f1=1.02*(mHP1 + sunHP + sunSD); // penumbra radius, arcsec
+		f2=1.02*(mHP1 + sunHP - sunSD); // umbra radius, arcsec
+	}
+	const double f1_AU=tan(f1/3600.*M_PI_180)*satDistance;
+	const double f2_AU=tan(f2/3600.*M_PI_180)*satDistance;
+
+	StelVertexArray umbra(StelVertexArray::LineLoop);
+	for (int i=0; i<360; ++i)
+	{
+		Vec3d point(satDistance, cos(i*M_PI_180)*f2_AU, sin(i*M_PI_180)*f2_AU);
+		rot.transfo(point);
+		umbra.vertex.append(pos+point);
+	}
+	sPainter.setColor(getUmbraColor(), 1.f);
+	sPainter.drawStelVertexArray(umbra, false);
+
+	Vec3d point(satDistance, 0.0, 0.0);
+	rot.transfo(point);
+	Vec3d coord = pos+point;
+	sPainter.drawSprite2dMode(coord, 5.f);
+	QString cuLabel = QString("%1 (h=%2 %3)").arg(q_("C.U."), QString::number(AU*(satDistance - earth->getEquatorialRadius()), 'f', 1), qc_("km","distance"));
+	sPainter.drawText(coord, cuLabel, 0, shift, shift, false);
+
+	if (getFlagPenumbraVisible())
+	{
+		StelVertexArray penumbra(StelVertexArray::LineLoop);
+		for (int i=0; i<360; ++i)
+		{
+			Vec3d point(satDistance, cos(i*M_PI_180)*f1_AU, sin(i*M_PI_180)*f1_AU);
+			rot.transfo(point);
+			penumbra.vertex.append(pos+point);
+		}
+
+		sPainter.setColor(getPenumbraColor(), 1.f);
+		sPainter.drawStelVertexArray(penumbra, false);
 	}
 }
 
