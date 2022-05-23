@@ -616,97 +616,97 @@ public slots:
 	void saveCatalog(QString path=QString());
 
 	//! Set whether custom filter 'known standard magnitude' enabled.
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setFlagCFKnownStdMagnitude(bool b);
 	bool getFlagCFKnownStdMagnitude() { return Satellite::flagCFKnownStdMagnitude; }
 
 	//! Set whether custom filter 'apogee' enabled.
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setFlagCFApogee(bool b);
 	bool getFlagCFApogee() { return Satellite::flagCFApogee; }
 
 	//! Set whether custom filter 'apogee' maximum value (in kilometers).
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setMaxCFApogee(double v);
 	double getMaxCFApogee() { return Satellite::maxCFApogee; }
 
 	//! Set whether custom filter 'apogee' minimum value (in kilometers).
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setMinCFApogee(double v);
 	double getMinCFApogee() { return Satellite::minCFApogee; }
 
 	//! Set whether custom filter 'perigee' enabled.
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setFlagCFPerigee(bool b);
 	bool getFlagCFPerigee() { return Satellite::flagCFPerigee; }
 
 	//! Set whether custom filter 'perigee' maximum value (in kilometers).
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setMaxCFPerigee(double v);
 	double getMaxCFPerigee() { return Satellite::maxCFPerigee; }
 
 	//! Set whether custom filter 'perigee' minimum value (in kilometers).
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setMinCFPerigee(double v);
 	double getMinCFPerigee() { return Satellite::minCFPerigee; }
 
 	//! Set whether custom filter 'eccentricity' enabled.
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setFlagCFEccentricity(bool b);
 	bool getFlagCFEccentricity() { return Satellite::flagCFEccentricity; }
 
 	//! Set whether custom filter 'eccentricity' maximum value.
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setMaxCFEccentricity(double v);
 	double getMaxCFEccentricity() { return Satellite::maxCFEccentricity; }
 
 	//! Set whether custom filter 'eccentricity' minimum value.
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setMinCFEccentricity(double v);
 	double getMinCFEccentricity() { return Satellite::minCFEccentricity; }
 
 	//! Set whether custom filter 'period' enabled.
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setFlagCFPeriod(bool b);
 	bool getFlagCFPeriod() { return Satellite::flagCFPeriod; }
 
 	//! Set whether custom filter 'period' maximum value (in minutes).
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setMaxCFPeriod(double v);
 	double getMaxCFPeriod() { return Satellite::maxCFPeriod; }
 
 	//! Set whether custom filter 'period' minimum value (in minutes).
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setMinCFPeriod(double v);
 	double getMinCFPeriod() { return Satellite::minCFPeriod; }
 
 	//! Set whether custom filter 'inclination' enabled.
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setFlagCFInclination(bool b);
 	bool getFlagCFInclination() { return Satellite::flagCFInclination; }
 
 	//! Set whether custom filter 'inclination' maximum value (in degrees).
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setMaxCFInclination(double v);
 	double getMaxCFInclination() { return Satellite::maxCFInclination; }
 
 	//! Set whether custom filter 'inclination' minimum value (in degrees).
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setMinCFInclination(double v);
 	double getMinCFInclination() { return Satellite::minCFInclination; }
 
 	//! Set whether custom filter 'rcs' enabled.
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setFlagCFRCS(bool b);
 	bool getFlagCFRCS() { return Satellite::flagCFRCS; }
 
 	//! Set whether custom filter 'rcs' maximum value (in square meters).
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setMaxCFRCS(double v);
 	double getMaxCFRCS() { return Satellite::maxCFRCS; }
 
 	//! Set whether custom filter 'rcs' minimum value (in square meters).
-	//! Emits customFilterChanged() if the value changes.
+	//! Emits customFilterChanged()
 	void setMinCFRCS(double v);
 	double getMinCFRCS() { return Satellite::minCFRCS; }
 
