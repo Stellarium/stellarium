@@ -155,7 +155,8 @@ void SatellitesDialog::createDialogContent()
 	ui->addSourceButton->setFixedSize(bs);
 	ui->deleteSourceButton->setFixedSize(bs);
 	ui->editSourceButton->setFixedSize(bs);
-	ui->saveSourceButton->setFixedSize(bs);	
+	ui->saveSourceButton->setFixedSize(bs);
+	ui->customFilterButton->setFixedSize(bs);
 
 	// Settings tab / updates group
 	// These controls are refreshed by updateSettingsPage(), which in
@@ -1077,9 +1078,9 @@ void SatellitesDialog::populateFilterMenu()
 	// TRANSLATORS: HGEO = High geosynchronous orbit
 	ui->groupFilterCombo->insertItem(0, q_("[HGSO satellites]"), QVariant("[HGSO]"));
 	ui->groupFilterCombo->insertItem(0, q_("[outdated TLE]"), QVariant("[outdatedTLE]"));
-	ui->groupFilterCombo->insertItem(0, q_("[all user defined]"), QVariant("[userdefined]"));
-	ui->groupFilterCombo->insertItem(0, q_("[all]"), QVariant("all"));
 	ui->groupFilterCombo->insertItem(0, q_("[custom filter]"), QVariant("[custom]"));
+	ui->groupFilterCombo->insertItem(0, q_("[all user defined]"), QVariant("[userdefined]"));
+	ui->groupFilterCombo->insertItem(0, q_("[all]"), QVariant("all"));	
 
 	// Restore current selection
 	index = 0;
