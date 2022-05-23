@@ -65,6 +65,23 @@ Vec3f Satellite::transitSatelliteColor = Vec3f(0.f,0.f,0.f);
 double Satellite::timeRateLimit = 1.0; // one JD per second by default
 int Satellite::tleEpochAge = 30; // default age of TLE's epoch to mark TLE as outdated (using for filters)
 
+bool Satellite::flagCFKnownStdMagnitude = false;
+bool Satellite::flagCFApogee = false;
+double Satellite::minCFApogee = 20000.;
+double Satellite::maxCFApogee = 55000.;
+bool Satellite::flagCFPerigee = false;
+double Satellite::minCFPerigee = 200.;
+double Satellite::maxCFPerigee = 1500.;
+bool Satellite::flagCFEccentricity = false;
+double Satellite::minCFEccentricity = 0.3;
+double Satellite::maxCFEccentricity = 0.9;
+bool Satellite::flagCFPeriod = false;
+double Satellite::minCFPeriod = 0.;
+double Satellite::maxCFPeriod = 150.;
+bool Satellite::flagCFInclination = false;
+double Satellite::minCFInclination = 120.;
+double Satellite::maxCFInclination = 360.;
+
 #if (SATELLITES_PLUGIN_IRIDIUM == 1)
 double Satellite::sunReflAngle = 180.;
 //double Satellite::timeShift = 0.;
@@ -854,6 +871,28 @@ SatFlags Satellite::getFlags() const
 		flags |= SatHGSO;
 	if (qAbs(StelApp::getInstance().getCore()->getJD() - tleEpochJD) > tleEpochAge)
 		flags |= SatOutdatedTLE;
+	// custom filters
+	bool cfa = true;
+	if (flagCFApogee)
+		cfa = (apogee>=minCFApogee && apogee<=maxCFApogee);
+	bool cfp = true;
+	if (flagCFPerigee)
+		cfp = (perigee>=minCFPerigee && perigee<=maxCFPerigee);
+	bool cfe = true;
+	if (flagCFEccentricity)
+		cfe = (eccentricity>=minCFEccentricity && eccentricity<=maxCFEccentricity);
+	bool cfm = true;
+	if (flagCFKnownStdMagnitude)
+		cfm = (stdMag<99.0);
+	bool cft = true;
+	if (flagCFPeriod)
+		cft = (orbitalPeriod>=minCFPeriod && orbitalPeriod<=maxCFPeriod);
+	bool cfi = true;
+	if (flagCFInclination)
+		cfi = (inclination>=minCFInclination && inclination<=maxCFInclination);
+	if (cfa && cfp && cfe && cfm && cft && cfi)
+		flags |= SatCustomFilter;
+
 	return flags;
 }
 

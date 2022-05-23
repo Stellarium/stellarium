@@ -36,6 +36,7 @@
 #include "ui_satellitesDialog.h"
 #include "SatellitesDialog.hpp"
 #include "SatellitesImportDialog.hpp"
+#include "SatellitesFilterDialog.hpp"
 #include "SatellitesListModel.hpp"
 #include "SatellitesListFilterModel.hpp"
 #include "Satellites.hpp"
@@ -66,6 +67,7 @@ SatellitesDialog::SatellitesDialog()
 	, satelliteModified(false)
 	, updateTimer(Q_NULLPTR)
 	, importWindow(Q_NULLPTR)
+	, filterWindow(Q_NULLPTR)
 	, filterModel(Q_NULLPTR)
 	, checkStateRole(Qt::UserRole)
 	, delimiter(", ")	
@@ -89,6 +91,12 @@ SatellitesDialog::~SatellitesDialog()
 	{
 		delete importWindow;
 		importWindow = Q_NULLPTR;
+	}
+
+	if (filterWindow)
+	{
+		delete filterWindow;
+		filterWindow = Q_NULLPTR;
 	}
 
 	delete ui;
@@ -251,6 +259,9 @@ void SatellitesDialog::createDialogContent()
 	connect(importWindow, SIGNAL(satellitesAccepted(TleDataList)), this,         SLOT(addSatellites(TleDataList)));
 	connect(ui->removeSatellitesButton, SIGNAL(clicked()),         this,         SLOT(removeSatellites()));
 
+	filterWindow = new SatellitesFilterDialog();
+	connect(ui->customFilterButton, SIGNAL(clicked()), filterWindow, SLOT(setVisible()));
+
 	// Sources tab
 	connect(ui->sourceList, SIGNAL(currentRowChanged(int)),			this, SLOT(updateButtonsProperties()));
 	connect(ui->sourceList, SIGNAL(itemChanged(QListWidgetItem*)),		this,	SLOT(saveSourceList()));
@@ -258,11 +269,12 @@ void SatellitesDialog::createDialogContent()
 	//FIXME: pressing Enter cause a call of addSourceRow() method...
 	//connect(ui->sourceEdit, SIGNAL(returnPressed()),	this,	SLOT(saveEditedSource()));
 	connect(ui->deleteSourceButton, SIGNAL(clicked()),	this, SLOT(deleteSourceRow()));
-	connect(ui->addSourceButton, SIGNAL(clicked()),	this, SLOT(addSourceRow()));
+	connect(ui->addSourceButton, SIGNAL(clicked()),	        this, SLOT(addSourceRow()));
 	connect(ui->editSourceButton, SIGNAL(clicked()),	this, SLOT(editSourceRow()));
 	connect(ui->saveSourceButton, SIGNAL(clicked()),	this, SLOT(saveEditedSource()));
-	connect(plugin, SIGNAL(satGroupVisibleChanged()), this, SLOT(updateSatelliteAndSaveData()));
-	connect(plugin, SIGNAL(settingsChanged()), this, SLOT(toggleCheckableSources()));
+	connect(plugin, SIGNAL(satGroupVisibleChanged()),       this, SLOT(updateSatelliteAndSaveData()));
+	connect(plugin, SIGNAL(settingsChanged()),              this, SLOT(toggleCheckableSources()));
+	connect(plugin, SIGNAL(customFilterChanged()),          this, SLOT(updateFilteredSatellitesList()));
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(ui->sourceList, SIGNAL(currentRowChanged(int)), ui->sourceList, SLOT(repaint()));
 	ui->editSourceButton->setEnabled(false);
@@ -423,6 +435,7 @@ void SatellitesDialog::filterListByGroup(int index)
 	if (index < 0)
 		return;
 
+	ui->customFilterButton->setEnabled(false);
 	QString groupId = ui->groupFilterCombo->itemData(index).toString();
 	if (groupId == "all")
 		filterModel->setSecondaryFilters(QString(), SatNoFlags);
@@ -455,7 +468,10 @@ void SatellitesDialog::filterListByGroup(int index)
 	else if (groupId == "[outdatedTLE]")
 		filterModel->setSecondaryFilters(QString(), SatOutdatedTLE);
 	else if (groupId == "[custom]")
+	{
+		ui->customFilterButton->setEnabled(true);
 		filterModel->setSecondaryFilters(QString(), SatCustomFilter);
+	}
 	else
 		filterModel->setSecondaryFilters(groupId, SatNoFlags);
 

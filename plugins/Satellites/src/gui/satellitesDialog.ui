@@ -793,14 +793,36 @@
          <widget class="QWidget" name="layoutWidgetSatList">
           <layout class="QVBoxLayout" name="satlist_layout" stretch="0,0,0,0">
            <item>
-            <widget class="QComboBox" name="groupFilterCombo">
-             <property name="editable">
-              <bool>true</bool>
-             </property>
-             <property name="insertPolicy">
-              <enum>QComboBox::NoInsert</enum>
-             </property>
-            </widget>
+            <layout class="QHBoxLayout" name="horizontalLayout_19">
+             <item>
+              <widget class="QComboBox" name="groupFilterCombo">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="editable">
+                <bool>true</bool>
+               </property>
+               <property name="insertPolicy">
+                <enum>QComboBox::NoInsert</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="customFilterButton">
+               <property name="toolTip">
+                <string>Settings of custom filter</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../../../../data/gui/guiRes.qrc">
+                 <normaloff>:/graphicGui/uibtSettings.png</normaloff>
+                 <normalon>:/graphicGui/uibtSettings.png</normalon>:/graphicGui/uibtSettings.png</iconset>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
             <widget class="QLineEdit" name="lineEditSearch">
@@ -1557,7 +1579,6 @@
   <tabstop>restoreDefaultsButton</tabstop>
   <tabstop>saveSettingsButton</tabstop>
   <tabstop>tabs</tabstop>
-  <tabstop>groupFilterCombo</tabstop>
   <tabstop>lineEditSearch</tabstop>
   <tabstop>satellitesList</tabstop>
   <tabstop>satMarkerColorPickerButton</tabstop>
