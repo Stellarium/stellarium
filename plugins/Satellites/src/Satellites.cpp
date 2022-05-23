@@ -875,6 +875,27 @@ void Satellites::loadSettings()
 	setMinVFMagnitude(conf->value("vf_magnitude_min", 8.).toDouble());
 	setMaxVFMagnitude(conf->value("vf_magnitude_max", -8.).toDouble());
 
+	// custom filter
+	setFlagCFKnownStdMagnitude(conf->value("cf_magnitude_flag", false).toBool());
+	setFlagCFApogee(conf->value("cf_apogee_flag", false).toBool());
+	setMinCFApogee(conf->value("cf_apogee_min", 20000.).toDouble());
+	setMaxCFApogee(conf->value("cf_apogee_max", 55000.).toDouble());
+	setFlagCFPerigee(conf->value("cf_perigee_flag", false).toBool());
+	setMinCFPerigee(conf->value("cf_perigee_min", 200.).toDouble());
+	setMaxCFPerigee(conf->value("cf_perigee_max", 1500.).toDouble());
+	setFlagCFEccentricity(conf->value("cf_eccentricity_flag", false).toBool());
+	setMinCFEccentricity(conf->value("cf_eccentricity_min", 0.3).toDouble());
+	setMaxCFEccentricity(conf->value("cf_eccentricity_max", 0.9).toDouble());
+	setFlagCFPeriod(conf->value("cf_period_flag", false).toBool());
+	setMinCFPeriod(conf->value("cf_period_min", 0.).toDouble());
+	setMaxCFPeriod(conf->value("cf_period_max", 150.).toDouble());
+	setFlagCFInclination(conf->value("cf_inclination_flag", false).toBool());
+	setMinCFInclination(conf->value("cf_inclination_min", 120.).toDouble());
+	setMaxCFInclination(conf->value("cf_inclination_max", 180.).toDouble());
+	setFlagCFRCS(conf->value("cf_rcs_flag", false).toBool());
+	setMinCFRCS(conf->value("cf_rcs_min", 0.1).toDouble());
+	setMaxCFRCS(conf->value("cf_rcs_max", 100.).toDouble());
+
 	conf->endGroup();
 }
 
@@ -946,6 +967,27 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("vf_magnitude_flag", getFlagVFMagnitude());
 	conf->setValue("vf_magnitude_min", getMinVFMagnitude());
 	conf->setValue("vf_magnitude_max", getMaxVFMagnitude());
+
+	// custom filter
+	conf->setValue("cf_magnitude_flag", getFlagCFKnownStdMagnitude());
+	conf->setValue("cf_apogee_flag", getFlagCFApogee());
+	conf->setValue("cf_apogee_min", getMinCFApogee());
+	conf->setValue("cf_apogee_max", getMaxCFApogee());
+	conf->setValue("cf_perigee_flag", getFlagCFPerigee());
+	conf->setValue("cf_perigee_min", getMinCFPerigee());
+	conf->setValue("cf_perigee_max", getMaxCFPerigee());
+	conf->setValue("cf_eccentricity_flag", getFlagCFEccentricity());
+	conf->setValue("cf_eccentricity_min", getMinCFEccentricity());
+	conf->setValue("cf_eccentricity_max", getMaxCFEccentricity());
+	conf->setValue("cf_period_flag", getFlagCFPeriod());
+	conf->setValue("cf_period_min", getMinCFPeriod());
+	conf->setValue("cf_period_max", getMaxCFPeriod());
+	conf->setValue("cf_inclination_flag", getFlagCFInclination());
+	conf->setValue("cf_inclination_min", getMinCFInclination());
+	conf->setValue("cf_inclination_max", getMaxCFInclination());
+	conf->setValue("cf_rcs_flag", getFlagCFRCS());
+	conf->setValue("cf_rcs_min", getMinCFRCS());
+	conf->setValue("cf_rcs_max", getMaxCFRCS());
 
 	conf->endGroup();
 	

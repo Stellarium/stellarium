@@ -284,6 +284,9 @@ void SatellitesDialog::createDialogContent()
 	commWindow = new SatellitesCommDialog();
 	connect(ui->commSatelliteButton, SIGNAL(clicked()), commWindow, SLOT(setVisible()));
 
+	filterWindow = new SatellitesFilterDialog();
+	connect(ui->customFilterButton, SIGNAL(clicked()), filterWindow, SLOT(setVisible()));
+
 	// Sources tab
 	connect(ui->sourceList, SIGNAL(currentRowChanged(int)),			this, SLOT(updateButtonsProperties()));
 	connect(ui->sourceList, SIGNAL(itemChanged(QListWidgetItem*)),		this,	SLOT(saveSourceList()));
