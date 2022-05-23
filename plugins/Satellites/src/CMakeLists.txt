@@ -39,11 +39,14 @@ SET(Satellites_SRCS
      gui/SatellitesDialog.cpp
      gui/SatellitesImportDialog.hpp
      gui/SatellitesImportDialog.cpp
+     gui/SatellitesFilterDialog.hpp
+     gui/SatellitesFilterDialog.cpp
 )
 
 SET(SatellitesDialog_UIS
      gui/satellitesDialog.ui
      gui/satellitesImportDialog.ui
+     gui/satellitesFilterDialog.ui
 )
 QT5_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
 

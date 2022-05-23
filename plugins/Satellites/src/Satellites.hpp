@@ -148,29 +148,49 @@ typedef QList<IridiumFlaresPrediction> IridiumFlaresPredictionList;
 class Satellites : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool flagHintsVisible         READ getFlagHintsVisible         WRITE setFlagHintsVisible         NOTIFY flagHintsVisibleChanged)
-	Q_PROPERTY(bool flagLabelsVisible        READ getFlagLabelsVisible        WRITE setFlagLabelsVisible        NOTIFY flagLabelsVisibleChanged)
-	Q_PROPERTY(int  labelFontSize            READ getLabelFontSize            WRITE setLabelFontSize            NOTIFY labelFontSizeChanged)
-	Q_PROPERTY(bool autoAddEnabled           READ isAutoAddEnabled            WRITE setAutoAddEnabled           NOTIFY autoAddEnabledChanged)
-	Q_PROPERTY(bool autoRemoveEnabled        READ isAutoRemoveEnabled         WRITE setAutoRemoveEnabled        NOTIFY autoRemoveEnabledChanged)
-	Q_PROPERTY(bool flagIconicMode           READ getFlagIconicMode           WRITE setFlagIconicMode           NOTIFY flagIconicModeChanged)
-	Q_PROPERTY(bool flagHideInvisible        READ getFlagHideInvisible        WRITE setFlagHideInvisible        NOTIFY flagHideInvisibleChanged)
-	Q_PROPERTY(bool flagOrbitLines           READ getFlagOrbitLines           WRITE setFlagOrbitLines           NOTIFY flagOrbitLinesChanged)
-	Q_PROPERTY(bool updatesEnabled           READ getUpdatesEnabled           WRITE setUpdatesEnabled           NOTIFY updatesEnabledChanged)
-	Q_PROPERTY(int  updateFrequencyHours     READ getUpdateFrequencyHours     WRITE setUpdateFrequencyHours     NOTIFY updateFrequencyHoursChanged)
-	Q_PROPERTY(int  orbitLineSegments        READ getOrbitLineSegments        WRITE setOrbitLineSegments        NOTIFY orbitLineSegmentsChanged)
-	Q_PROPERTY(int  orbitLineFadeSegments    READ getOrbitLineFadeSegments    WRITE setOrbitLineFadeSegments    NOTIFY orbitLineFadeSegmentsChanged)
-	Q_PROPERTY(int  orbitLineSegmentDuration READ getOrbitLineSegmentDuration WRITE setOrbitLineSegmentDuration NOTIFY orbitLineSegmentDurationChanged)
-	Q_PROPERTY(int  tleEpochAgeDays          READ getTleEpochAgeDays          WRITE setTleEpochAgeDays          NOTIFY tleEpochAgeDaysChanged)
-	Q_PROPERTY(Vec3f invisibleSatelliteColor READ getInvisibleSatelliteColor  WRITE setInvisibleSatelliteColor  NOTIFY invisibleSatelliteColorChanged)
-	Q_PROPERTY(Vec3f transitSatelliteColor   READ getTransitSatelliteColor    WRITE setTransitSatelliteColor    NOTIFY transitSatelliteColorChanged)
-	Q_PROPERTY(bool flagUmbraVisible         READ getFlagUmbraVisible         WRITE setFlagUmbraVisible         NOTIFY flagUmbraVisibleChanged)
-	Q_PROPERTY(bool flagUmbraAtFixedDistance READ getFlagUmbraAtFixedDistance WRITE setFlagUmbraAtFixedDistance NOTIFY flagUmbraAtFixedDistanceChanged)
-	Q_PROPERTY(double umbraDistance          READ getUmbraDistance            WRITE setUmbraDistance            NOTIFY umbraDistanceChanged)
-	Q_PROPERTY(Vec3f umbraColor              READ getUmbraColor               WRITE setUmbraColor               NOTIFY umbraColorChanged)
-	Q_PROPERTY(bool flagPenumbraVisible      READ getFlagPenumbraVisible      WRITE setFlagPenumbraVisible      NOTIFY flagPenumbraVisibleChanged)
-	Q_PROPERTY(Vec3f penumbraColor           READ getPenumbraColor            WRITE setPenumbraColor            NOTIFY penumbraColorChanged)
-	
+	Q_PROPERTY(bool flagHintsVisible		READ getFlagHintsVisible		WRITE setFlagHintsVisible		NOTIFY flagHintsVisibleChanged)
+	Q_PROPERTY(bool flagLabelsVisible		READ getFlagLabelsVisible		WRITE setFlagLabelsVisible		NOTIFY flagLabelsVisibleChanged)
+	Q_PROPERTY(int  labelFontSize			READ getLabelFontSize			WRITE setLabelFontSize			NOTIFY labelFontSizeChanged)
+	Q_PROPERTY(bool autoAddEnabled			READ isAutoAddEnabled			WRITE setAutoAddEnabled			NOTIFY autoAddEnabledChanged)
+	Q_PROPERTY(bool autoRemoveEnabled		READ isAutoRemoveEnabled		WRITE setAutoRemoveEnabled		NOTIFY autoRemoveEnabledChanged)
+	Q_PROPERTY(bool flagIconicMode			READ getFlagIconicMode			WRITE setFlagIconicMode			NOTIFY flagIconicModeChanged)
+	Q_PROPERTY(bool flagHideInvisible		READ getFlagHideInvisible		WRITE setFlagHideInvisible		NOTIFY flagHideInvisibleChanged)
+	Q_PROPERTY(bool flagOrbitLines			READ getFlagOrbitLines			WRITE setFlagOrbitLines			NOTIFY flagOrbitLinesChanged)
+	Q_PROPERTY(bool updatesEnabled			READ getUpdatesEnabled			WRITE setUpdatesEnabled			NOTIFY updatesEnabledChanged)
+	Q_PROPERTY(int  updateFrequencyHours		READ getUpdateFrequencyHours		WRITE setUpdateFrequencyHours		NOTIFY updateFrequencyHoursChanged)
+	Q_PROPERTY(int  orbitLineSegments		READ getOrbitLineSegments		WRITE setOrbitLineSegments		NOTIFY orbitLineSegmentsChanged)
+	Q_PROPERTY(int  orbitLineFadeSegments		READ getOrbitLineFadeSegments		WRITE setOrbitLineFadeSegments		NOTIFY orbitLineFadeSegmentsChanged)
+	Q_PROPERTY(int  orbitLineSegmentDuration	READ getOrbitLineSegmentDuration	WRITE setOrbitLineSegmentDuration	NOTIFY orbitLineSegmentDurationChanged)
+	Q_PROPERTY(int  tleEpochAgeDays			READ getTleEpochAgeDays			WRITE setTleEpochAgeDays		NOTIFY tleEpochAgeDaysChanged)
+	Q_PROPERTY(Vec3f invisibleSatelliteColor	READ getInvisibleSatelliteColor		WRITE setInvisibleSatelliteColor	NOTIFY invisibleSatelliteColorChanged)
+	Q_PROPERTY(Vec3f transitSatelliteColor		READ getTransitSatelliteColor		WRITE setTransitSatelliteColor		NOTIFY transitSatelliteColorChanged)
+	Q_PROPERTY(bool flagUmbraVisible		READ getFlagUmbraVisible		WRITE setFlagUmbraVisible		NOTIFY flagUmbraVisibleChanged)
+	Q_PROPERTY(bool flagUmbraAtFixedDistance	READ getFlagUmbraAtFixedDistance	WRITE setFlagUmbraAtFixedDistance	NOTIFY flagUmbraAtFixedDistanceChanged)
+	Q_PROPERTY(double umbraDistance			READ getUmbraDistance			WRITE setUmbraDistance			NOTIFY umbraDistanceChanged)
+	Q_PROPERTY(Vec3f umbraColor			READ getUmbraColor			WRITE setUmbraColor			NOTIFY umbraColorChanged)
+	Q_PROPERTY(bool flagPenumbraVisible		READ getFlagPenumbraVisible		WRITE setFlagPenumbraVisible		NOTIFY flagPenumbraVisibleChanged)
+	Q_PROPERTY(Vec3f penumbraColor			READ getPenumbraColor			WRITE setPenumbraColor			NOTIFY penumbraColorChanged)
+	// custom filter
+	Q_PROPERTY(bool flagCFKnownStdMagnitude		READ getFlagCFKnownStdMagnitude		WRITE setFlagCFKnownStdMagnitude	NOTIFY flagCFKnownStdMagnitudeChanged)
+	Q_PROPERTY(bool flagCFApogee			READ getFlagCFApogee			WRITE setFlagCFApogee			NOTIFY flagCFApogeeChanged)
+	Q_PROPERTY(double minCFApogee			READ getMinCFApogee			WRITE setMinCFApogee			NOTIFY minCFApogeeChanged)
+	Q_PROPERTY(double maxCFApogee			READ getMaxCFApogee			WRITE setMaxCFApogee			NOTIFY maxCFApogeeChanged)
+	Q_PROPERTY(bool flagCFPerigee			READ getFlagCFPerigee			WRITE setFlagCFPerigee			NOTIFY flagCFPerigeeChanged)
+	Q_PROPERTY(double minCFPerigee			READ getMinCFPerigee			WRITE setMinCFPerigee			NOTIFY minCFPerigeeChanged)
+	Q_PROPERTY(double maxCFPerigee			READ getMaxCFPerigee			WRITE setMaxCFPerigee			NOTIFY maxCFPerigeeChanged)
+	Q_PROPERTY(bool flagCFEccentricity		READ getFlagCFEccentricity		WRITE setFlagCFEccentricity		NOTIFY flagCFEccentricityChanged)
+	Q_PROPERTY(double minCFEccentricity		READ getMinCFEccentricity		WRITE setMinCFEccentricity		NOTIFY minCFEccentricityChanged)
+	Q_PROPERTY(double maxCFEccentricity		READ getMaxCFEccentricity		WRITE setMaxCFEccentricity		NOTIFY maxCFEccentricityChanged)
+	Q_PROPERTY(bool flagCFPeriod			READ getFlagCFPeriod			WRITE setFlagCFPeriod			NOTIFY flagCFPeriodChanged)
+	Q_PROPERTY(double minCFPeriod			READ getMinCFPeriod			WRITE setMinCFPeriod			NOTIFY minCFPeriodChanged)
+	Q_PROPERTY(double maxCFPeriod			READ getMaxCFPeriod			WRITE setMaxCFPeriod			NOTIFY maxCFPeriodChanged)
+	Q_PROPERTY(bool flagCFInclination		READ getFlagCFInclination		WRITE setFlagCFInclination		NOTIFY flagCFInclinationChanged)
+	Q_PROPERTY(double minCFInclination		READ getMinCFInclination		WRITE setMinCFInclination		NOTIFY minCFInclinationChanged)
+	Q_PROPERTY(double maxCFInclination		READ getMaxCFInclination		WRITE setMaxCFInclination		NOTIFY maxCFInclinationChanged)
+	Q_PROPERTY(bool flagCFRCS			READ getFlagCFRCS			WRITE setFlagCFRCS			NOTIFY flagCFRCSChanged)
+	Q_PROPERTY(double minCFRCS			READ getMinCFRCS			WRITE setMinCFRCS			NOTIFY minCFRCSChanged)
+	Q_PROPERTY(double maxCFRCS			READ getMaxCFRCS			WRITE setMaxCFRCS			NOTIFY maxCFRCSChanged)
+
 public:
 	//! @enum UpdateState
 	//! Used for keeping track of the download/update status
@@ -405,10 +425,33 @@ signals:
 	void umbraDistanceChanged(double d);
 	void flagPenumbraVisibleChanged(bool b);
 	void penumbraColorChanged(Vec3f);
+	void flagCFKnownStdMagnitudeChanged(bool b);
+	void flagCFApogeeChanged(bool b);
+	void minCFApogeeChanged(double v);
+	void maxCFApogeeChanged(double v);
+	void flagCFPerigeeChanged(bool b);
+	void minCFPerigeeChanged(double v);
+	void maxCFPerigeeChanged(double v);
+	void flagCFEccentricityChanged(bool b);
+	void minCFEccentricityChanged(double v);
+	void maxCFEccentricityChanged(double v);
+	void flagCFPeriodChanged(bool b);
+	void minCFPeriodChanged(double v);
+	void maxCFPeriodChanged(double v);
+	void flagCFInclinationChanged(bool b);
+	void minCFInclinationChanged(double v);
+	void maxCFInclinationChanged(double v);
+	void flagCFRCSChanged(bool b);
+	void minCFRCSChanged(double v);
+	void maxCFRCSChanged(double v);
 
 	//! Emitted when some of the plugin settings have been changed.
 	//! Used to communicate with the configuration window.
 	void settingsChanged();
+
+	//! Emitted when custom filters of the plugin have been changed.
+	//! Used to communicate with the configuration window.
+	void customFilterChanged();
 	
 	//! emitted when the update status changes, e.g. when 
 	//! an update starts, completes and so on.  Note that
@@ -572,6 +615,101 @@ public slots:
 	//! Save the current satellite catalog to disk.
 	void saveCatalog(QString path=QString());
 
+	//! Set whether custom filter 'known standard magnitude' enabled.
+	//! Emits customFilterChanged()
+	void setFlagCFKnownStdMagnitude(bool b);
+	bool getFlagCFKnownStdMagnitude() { return Satellite::flagCFKnownStdMagnitude; }
+
+	//! Set whether custom filter 'apogee' enabled.
+	//! Emits customFilterChanged()
+	void setFlagCFApogee(bool b);
+	bool getFlagCFApogee() { return Satellite::flagCFApogee; }
+
+	//! Set whether custom filter 'apogee' maximum value (in kilometers).
+	//! Emits customFilterChanged()
+	void setMaxCFApogee(double v);
+	double getMaxCFApogee() { return Satellite::maxCFApogee; }
+
+	//! Set whether custom filter 'apogee' minimum value (in kilometers).
+	//! Emits customFilterChanged()
+	void setMinCFApogee(double v);
+	double getMinCFApogee() { return Satellite::minCFApogee; }
+
+	//! Set whether custom filter 'perigee' enabled.
+	//! Emits customFilterChanged()
+	void setFlagCFPerigee(bool b);
+	bool getFlagCFPerigee() { return Satellite::flagCFPerigee; }
+
+	//! Set whether custom filter 'perigee' maximum value (in kilometers).
+	//! Emits customFilterChanged()
+	void setMaxCFPerigee(double v);
+	double getMaxCFPerigee() { return Satellite::maxCFPerigee; }
+
+	//! Set whether custom filter 'perigee' minimum value (in kilometers).
+	//! Emits customFilterChanged()
+	void setMinCFPerigee(double v);
+	double getMinCFPerigee() { return Satellite::minCFPerigee; }
+
+	//! Set whether custom filter 'eccentricity' enabled.
+	//! Emits customFilterChanged()
+	void setFlagCFEccentricity(bool b);
+	bool getFlagCFEccentricity() { return Satellite::flagCFEccentricity; }
+
+	//! Set whether custom filter 'eccentricity' maximum value.
+	//! Emits customFilterChanged()
+	void setMaxCFEccentricity(double v);
+	double getMaxCFEccentricity() { return Satellite::maxCFEccentricity; }
+
+	//! Set whether custom filter 'eccentricity' minimum value.
+	//! Emits customFilterChanged()
+	void setMinCFEccentricity(double v);
+	double getMinCFEccentricity() { return Satellite::minCFEccentricity; }
+
+	//! Set whether custom filter 'period' enabled.
+	//! Emits customFilterChanged()
+	void setFlagCFPeriod(bool b);
+	bool getFlagCFPeriod() { return Satellite::flagCFPeriod; }
+
+	//! Set whether custom filter 'period' maximum value (in minutes).
+	//! Emits customFilterChanged()
+	void setMaxCFPeriod(double v);
+	double getMaxCFPeriod() { return Satellite::maxCFPeriod; }
+
+	//! Set whether custom filter 'period' minimum value (in minutes).
+	//! Emits customFilterChanged()
+	void setMinCFPeriod(double v);
+	double getMinCFPeriod() { return Satellite::minCFPeriod; }
+
+	//! Set whether custom filter 'inclination' enabled.
+	//! Emits customFilterChanged()
+	void setFlagCFInclination(bool b);
+	bool getFlagCFInclination() { return Satellite::flagCFInclination; }
+
+	//! Set whether custom filter 'inclination' maximum value (in degrees).
+	//! Emits customFilterChanged()
+	void setMaxCFInclination(double v);
+	double getMaxCFInclination() { return Satellite::maxCFInclination; }
+
+	//! Set whether custom filter 'inclination' minimum value (in degrees).
+	//! Emits customFilterChanged()
+	void setMinCFInclination(double v);
+	double getMinCFInclination() { return Satellite::minCFInclination; }
+
+	//! Set whether custom filter 'rcs' enabled.
+	//! Emits customFilterChanged()
+	void setFlagCFRCS(bool b);
+	bool getFlagCFRCS() { return Satellite::flagCFRCS; }
+
+	//! Set whether custom filter 'rcs' maximum value (in square meters).
+	//! Emits customFilterChanged()
+	void setMaxCFRCS(double v);
+	double getMaxCFRCS() { return Satellite::maxCFRCS; }
+
+	//! Set whether custom filter 'rcs' minimum value (in square meters).
+	//! Emits customFilterChanged()
+	void setMinCFRCS(double v);
+	double getMinCFRCS() { return Satellite::minCFRCS; }
+
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	//! Set depth of prediction for Iridium flares
 	//! @param depth in days
@@ -724,7 +862,7 @@ private:
 	//! Used to track whether earth shadow enlargement shall be computed after Danjon (1951)
 	bool earthShadowEnlargementDanjon;
 	//@}
-	
+
 	//! @name Screen message infrastructure
 	//@{
 	QList<int> messageIDs;

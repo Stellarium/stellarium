@@ -656,6 +656,25 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("umbra_fixed_distance", 1000.0);
 	conf->setValue("penumbra_flag", false);
 	conf->setValue("penumbra_color", "1.0,0.0,0.0");
+	conf->setValue("cf_magnitude_flag", false);
+	conf->setValue("cf_apogee_flag", false);
+	conf->setValue("cf_apogee_min", 20000.);
+	conf->setValue("cf_apogee_max", 55000.);
+	conf->setValue("cf_perigee_flag", false);
+	conf->setValue("cf_perigee_min", 200.);
+	conf->setValue("cf_perigee_max", 1500.);
+	conf->setValue("cf_eccentricity_flag", false);
+	conf->setValue("cf_eccentricity_min", 0.3);
+	conf->setValue("cf_eccentricity_max", 0.9);
+	conf->setValue("cf_period_flag", false);
+	conf->setValue("cf_period_min", 0.);
+	conf->setValue("cf_period_max", 150.);
+	conf->setValue("cf_inclination_flag", false);
+	conf->setValue("cf_inclination_min", 120.);
+	conf->setValue("cf_inclination_max", 180.);
+	conf->setValue("cf_rcs_flag", false);
+	conf->setValue("cf_rcs_min", 0.1);
+	conf->setValue("cf_rcs_max", 100.);
 	
 	conf->endGroup(); // saveTleSources() opens it for itself
 	
@@ -826,6 +845,27 @@ void Satellites::loadSettings()
 	setFlagIconicMode(conf->value("iconic_mode_enabled", false).toBool());
 	setFlagHideInvisible(conf->value("hide_invisible_satellites", false).toBool());
 
+	// custom filter
+	setFlagCFKnownStdMagnitude(conf->value("cf_magnitude_flag", false).toBool());
+	setFlagCFApogee(conf->value("cf_apogee_flag", false).toBool());
+	setMinCFApogee(conf->value("cf_apogee_min", 20000.).toDouble());
+	setMaxCFApogee(conf->value("cf_apogee_max", 55000.).toDouble());
+	setFlagCFPerigee(conf->value("cf_perigee_flag", false).toBool());
+	setMinCFPerigee(conf->value("cf_perigee_min", 200.).toDouble());
+	setMaxCFPerigee(conf->value("cf_perigee_max", 1500.).toDouble());
+	setFlagCFEccentricity(conf->value("cf_eccentricity_flag", false).toBool());
+	setMinCFEccentricity(conf->value("cf_eccentricity_min", 0.3).toDouble());
+	setMaxCFEccentricity(conf->value("cf_eccentricity_max", 0.9).toDouble());
+	setFlagCFPeriod(conf->value("cf_period_flag", false).toBool());
+	setMinCFPeriod(conf->value("cf_period_min", 0.).toDouble());
+	setMaxCFPeriod(conf->value("cf_period_max", 150.).toDouble());
+	setFlagCFInclination(conf->value("cf_inclination_flag", false).toBool());
+	setMinCFInclination(conf->value("cf_inclination_min", 120.).toDouble());
+	setMaxCFInclination(conf->value("cf_inclination_max", 180.).toDouble());
+	setFlagCFRCS(conf->value("cf_rcs_flag", false).toBool());
+	setMinCFRCS(conf->value("cf_rcs_min", 0.1).toDouble());
+	setMaxCFRCS(conf->value("cf_rcs_max", 100.).toDouble());
+
 	conf->endGroup();
 }
 
@@ -867,6 +907,27 @@ void Satellites::saveSettingsToConfig()
 	// iconic mode
 	conf->setValue("iconic_mode_enabled", getFlagIconicMode());
 	conf->setValue("hide_invisible_satellites", getFlagHideInvisible());
+
+	// custom filter
+	conf->setValue("cf_magnitude_flag", getFlagCFKnownStdMagnitude());
+	conf->setValue("cf_apogee_flag", getFlagCFApogee());
+	conf->setValue("cf_apogee_min", getMinCFApogee());
+	conf->setValue("cf_apogee_max", getMaxCFApogee());
+	conf->setValue("cf_perigee_flag", getFlagCFPerigee());
+	conf->setValue("cf_perigee_min", getMinCFPerigee());
+	conf->setValue("cf_perigee_max", getMaxCFPerigee());
+	conf->setValue("cf_eccentricity_flag", getFlagCFEccentricity());
+	conf->setValue("cf_eccentricity_min", getMinCFEccentricity());
+	conf->setValue("cf_eccentricity_max", getMaxCFEccentricity());
+	conf->setValue("cf_period_flag", getFlagCFPeriod());
+	conf->setValue("cf_period_min", getMinCFPeriod());
+	conf->setValue("cf_period_max", getMaxCFPeriod());
+	conf->setValue("cf_inclination_flag", getFlagCFInclination());
+	conf->setValue("cf_inclination_min", getMinCFInclination());
+	conf->setValue("cf_inclination_max", getMaxCFInclination());
+	conf->setValue("cf_rcs_flag", getFlagCFRCS());
+	conf->setValue("cf_rcs_min", getMinCFRCS());
+	conf->setValue("cf_rcs_max", getMaxCFRCS());
 
 	conf->endGroup();
 	
@@ -1556,6 +1617,159 @@ void Satellites::setPenumbraColor(const Vec3f &c)
 	emit penumbraColorChanged(c);
 }
 
+void Satellites::setFlagCFKnownStdMagnitude(bool b)
+{
+	if (Satellite::flagCFKnownStdMagnitude != b)
+	{
+		Satellite::flagCFKnownStdMagnitude = b;
+		emit customFilterChanged();
+		emit flagCFKnownStdMagnitudeChanged(b);
+	}
+}
+
+void Satellites::setFlagCFApogee(bool b)
+{
+	if (Satellite::flagCFApogee != b)
+	{
+		Satellite::flagCFApogee = b;
+		emit customFilterChanged();
+		emit flagCFApogeeChanged(b);
+	}
+}
+
+void Satellites::setMinCFApogee(double v)
+{
+	Satellite::minCFApogee = v;
+	emit customFilterChanged();
+	emit minCFApogeeChanged(v);
+}
+
+void Satellites::setMaxCFApogee(double v)
+{
+	Satellite::maxCFApogee = v;
+	emit customFilterChanged();
+	emit maxCFApogeeChanged(v);
+}
+
+void Satellites::setFlagCFPerigee(bool b)
+{
+	if (Satellite::flagCFPerigee != b)
+	{
+		Satellite::flagCFPerigee = b;
+		emit customFilterChanged();
+		emit flagCFPerigeeChanged(b);
+	}
+}
+
+void Satellites::setMinCFPerigee(double v)
+{
+	Satellite::minCFPerigee = v;
+	emit customFilterChanged();
+	emit minCFPerigeeChanged(v);
+}
+
+void Satellites::setMaxCFPerigee(double v)
+{
+	Satellite::maxCFPerigee = v;
+	emit customFilterChanged();
+	emit maxCFPerigeeChanged(v);
+}
+
+void Satellites::setFlagCFEccentricity(bool b)
+{
+	if (Satellite::flagCFEccentricity != b)
+	{
+		Satellite::flagCFEccentricity = b;
+		emit customFilterChanged();
+		emit flagCFEccentricityChanged(b);
+	}
+}
+
+void Satellites::setMinCFEccentricity(double v)
+{
+	Satellite::minCFEccentricity = v;
+	emit customFilterChanged();
+	emit minCFEccentricityChanged(v);
+}
+
+void Satellites::setMaxCFEccentricity(double v)
+{
+	Satellite::maxCFEccentricity = v;
+	emit customFilterChanged();
+	emit maxCFEccentricityChanged(v);
+}
+
+void Satellites::setFlagCFPeriod(bool b)
+{
+	if (Satellite::flagCFPeriod != b)
+	{
+		Satellite::flagCFPeriod = b;
+		emit customFilterChanged();
+		emit flagCFPeriodChanged(b);
+	}
+}
+
+void Satellites::setMinCFPeriod(double v)
+{
+	Satellite::minCFPeriod = v;
+	emit customFilterChanged();
+	emit minCFPeriodChanged(v);
+}
+
+void Satellites::setMaxCFPeriod(double v)
+{
+	Satellite::maxCFPeriod = v;
+	emit customFilterChanged();
+	emit maxCFPeriodChanged(v);
+}
+
+void Satellites::setFlagCFInclination(bool b)
+{
+	if (Satellite::flagCFInclination != b)
+	{
+		Satellite::flagCFInclination = b;
+		emit customFilterChanged();
+		emit flagCFInclinationChanged(b);
+	}
+}
+
+void Satellites::setMinCFInclination(double v)
+{
+	Satellite::minCFInclination = v;
+	emit customFilterChanged();
+	emit minCFInclinationChanged(v);
+}
+
+void Satellites::setMaxCFInclination(double v)
+{
+	Satellite::maxCFInclination = v;
+	emit customFilterChanged();
+	emit maxCFInclinationChanged(v);
+}
+
+void Satellites::setFlagCFRCS(bool b)
+{
+	if (Satellite::flagCFRCS != b)
+	{
+		Satellite::flagCFRCS = b;
+		emit customFilterChanged();
+		emit flagCFRCSChanged(b);
+	}
+}
+
+void Satellites::setMinCFRCS(double v)
+{
+	Satellite::minCFRCS = v;
+	emit customFilterChanged();
+	emit minCFRCSChanged(v);
+}
+
+void Satellites::setMaxCFRCS(double v)
+{
+	Satellite::maxCFRCS = v;
+	emit customFilterChanged();
+	emit maxCFRCSChanged(v);
+}
 
 void Satellites::setLabelFontSize(int size)
 {

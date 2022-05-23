@@ -72,22 +72,23 @@ typedef QSet<QString> GroupSet;
 //! @ingroup satellites
 enum SatFlag
 {
-	SatNoFlags		= 0x0000,
-	SatDisplayed		= 0x0001,
-	SatNotDisplayed		= 0x0002,
-	SatUser			= 0x0004,
-	SatOrbit		= 0x0008,
-	SatNew			= 0x0010,
-	SatError		= 0x0020,
-	SatSmallSize		= 0x0040,
-	SatMediumSize		= 0x0080,
-	SatLargeSize		= 0x0100,
-	SatLEO			= 0x0200,
-	SatMEO			= 0x0400,
-	SatGSO			= 0x0800,
-	SatHEO			= 0x1000,
-	SatHGSO			= 0x2000,
-	SatOutdatedTLE		= 0x4000
+	SatNoFlags	= 0x0000,
+	SatDisplayed	= 0x0001,
+	SatNotDisplayed	= 0x0002,
+	SatUser		= 0x0004,
+	SatOrbit	= 0x0008,
+	SatNew		= 0x0010,
+	SatError	= 0x0020,
+	SatSmallSize	= 0x0040,
+	SatMediumSize	= 0x0080,
+	SatLargeSize	= 0x0100,
+	SatLEO		= 0x0200,
+	SatMEO		= 0x0400,
+	SatGSO		= 0x0800,
+	SatHEO		= 0x1000,
+	SatHGSO		= 0x2000,
+	SatOutdatedTLE	= 0x4000,
+	SatCustomFilter	= 0x8000
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
@@ -116,11 +117,11 @@ public:
 	//! @enum OptStatus operational statuses
 	enum OptStatus
 	{
-		StatusOperational		= 1,
+		StatusOperational			= 1,
 		StatusNonoperational		= 2,
 		StatusPartiallyOperational	= 3,
 		StatusStandby			= 4,
-		StatusSpare			= 5,
+		StatusSpare				= 5,
 		StatusExtendedMission		= 6,
 		StatusDecayed			= 7,
 		StatusUnknown			= 0
@@ -321,6 +322,26 @@ private:
 
 	static double timeRateLimit;
 	static int tleEpochAge;
+
+	static bool flagCFKnownStdMagnitude;
+	static bool flagCFApogee;
+	static double minCFApogee;
+	static double maxCFApogee;
+	static bool flagCFPerigee;
+	static double minCFPerigee;
+	static double maxCFPerigee;
+	static bool flagCFEccentricity;
+	static double minCFEccentricity;
+	static double maxCFEccentricity;
+	static bool flagCFPeriod;
+	static double minCFPeriod;
+	static double maxCFPeriod;
+	static bool flagCFInclination;
+	static double minCFInclination;
+	static double maxCFInclination;
+	static bool flagCFRCS;
+	static double minCFRCS;
+	static double maxCFRCS;
 
 	void draw(StelCore *core, StelPainter& painter);
 
