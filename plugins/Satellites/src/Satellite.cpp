@@ -313,11 +313,9 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	{
 		QString catalogNumbers;
 		if (internationalDesignator.isEmpty())
-			catalogNumbers = QString("NORAD %1")
-					 .arg(id);
+			catalogNumbers = QString("NORAD %1").arg(id);
 		else
-			catalogNumbers = QString("NORAD %1; %2 (COSPAR/NSSDC): %3")
-					 .arg(id, q_("International Designator"), internationalDesignator);
+			catalogNumbers = QString("NORAD %1; %2 (COSPAR/NSSDC): %3").arg(id, q_("International Designator"), internationalDesignator);
 		oss << catalogNumbers << "<br/><br/>";
 	}
 
@@ -346,10 +344,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << QString("%1: %2 %3").arg(q_("Range rate")).arg(rangeRate, 5, 'f', 3).arg(qc_("km/s", "speed")) << "<br/>";
 		// TRANSLATORS: Satellite altitude
 		oss << QString("%1: %2 %3").arg(q_("Altitude")).arg(qRound(height)).arg(km) << "<br/>";
-		oss << QString("%1: %2 %3 / %4 %5").arg(q_("Perigee/apogee altitudes"))
-		       .arg(qRound(perigee)).arg(km)
-		       .arg(qRound(apogee)).arg(km)
-		<< "<br/>";
+		oss << QString("%1: %2 %3 / %4 %5").arg(q_("Perigee/apogee altitudes")).arg(qRound(perigee)).arg(km).arg(qRound(apogee)).arg(km) << "<br/>";
 	}
 
 	if (flags&Size && RCS>0.)
@@ -378,29 +373,16 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			       .arg(1440.0/orbitalPeriod, 9, 'f', 5).arg(rpd) << "<br/>";
 		}
 		double inclination = pSatWrapper->getOrbitalInclination();
-		oss << QString("%1: %2 (%3%4)")
-		       .arg(q_("Inclination"), StelUtils::decDegToDmsStr(inclination),
-			    QString::number(inclination, 'f', 4), degree)
-		<< "<br/>";
-		oss << QString("%1: %2&deg;/%3&deg;")
-		       .arg(q_("SubPoint (Lat./Long.)"))
-		       .arg(latLongSubPointPosition[0], 5, 'f', 2)		       
-		       .arg(latLongSubPointPosition[1], 5, 'f', 3);
-		oss << "<br/>";
+		oss << QString("%1: %2 (%3%4)").arg(q_("Inclination"), StelUtils::decDegToDmsStr(inclination), QString::number(inclination, 'f', 4), degree) << "<br/>";
+		oss << QString("%1: %2&deg;/%3&deg;").arg(q_("SubPoint (Lat./Long.)")).arg(latLongSubPointPosition[0], 5, 'f', 2).arg(latLongSubPointPosition[1], 5, 'f', 3) << "<br/>";
 		
 		//TODO: This one can be done better
 		const char* xyz = "<b>X:</b> %1, <b>Y:</b> %2, <b>Z:</b> %3";
-		QString temeCoords = QString(xyz)
-			.arg(qRound(position[0]))
-			.arg(qRound(position[1]))
-			.arg(qRound(position[2]));
+		QString temeCoords = QString(xyz).arg(qRound(position[0])).arg(qRound(position[1])).arg(qRound(position[2]));
 		// TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered inertial coordinate system
 		oss << QString("%1: %2 %3").arg(q_("TEME coordinates"), temeCoords, qc_("km", "distance")) << "<br/>";
 		
-		QString temeVel = QString(xyz)
-		        .arg(velocity[0], 5, 'f', 2)
-		        .arg(velocity[1], 5, 'f', 2)
-		        .arg(velocity[2], 5, 'f', 2);
+		QString temeVel = QString(xyz).arg(velocity[0], 5, 'f', 2).arg(velocity[1], 5, 'f', 2).arg(velocity[2], 5, 'f', 2);
 		// TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered inertial coordinate system
 		oss << QString("%1: %2 %3").arg(q_("TEME velocity"), temeVel, qc_("km/s", "speed")) << "<br/>";
 
@@ -469,8 +451,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 				if (!c.modulation.isEmpty() && c.modulation != "") oss << "  " << c.modulation;
 				if (!c.description.isEmpty() && c.description != "") oss << "  " << c.description;
 				if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << ": ";
-				oss << QString("%1 %2 (%3%4 %5)").arg(QString::number(c.frequency, 'f', 3), qc_("MHz", "frequency"), sign, QString::number(ddop, 'f', 3), qc_("kHz", "frequency"));
-				oss << "<br/>";
+				oss << QString("%1 %2 (%3%4 %5)").arg(QString::number(c.frequency, 'f', 3), qc_("MHz", "frequency"), sign, QString::number(ddop, 'f', 3), qc_("kHz", "frequency")) << "<br/>";
 			}
 		}
 	}
