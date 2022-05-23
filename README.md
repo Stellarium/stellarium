@@ -3,6 +3,7 @@
 [![GitHub Release Date](https://img.shields.io/github/release-date/Stellarium/stellarium.svg)](https://github.com/Stellarium/stellarium/releases/latest)
 [![Github All Releases](https://img.shields.io/github/downloads/Stellarium/stellarium/total.svg)](https://github.com/Stellarium/stellarium/releases)
 [![Backers and sponsors](https://img.shields.io/opencollective/all/stellarium.svg?style=flat)](https://opencollective.com/stellarium)
+[![CI](https://github.com/Stellarium/stellarium/actions/workflows/ci.yml/badge.svg)](https://github.com/Stellarium/stellarium/actions/workflows/ci.yml)
 [![Build status](https://ci.appveyor.com/api/projects/status/sw8j9l8q95ejkalo?svg=true)](https://ci.appveyor.com/project/alex-w/stellarium)
 [![Coverage Status](https://coveralls.io/repos/github/Stellarium/stellarium/badge.svg)](https://coveralls.io/github/Stellarium/stellarium)
 [![CodeFactor](https://www.codefactor.io/repository/github/stellarium/stellarium/badge)](https://www.codefactor.io/repository/github/stellarium/stellarium)
