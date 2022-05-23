@@ -672,6 +672,9 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("cf_inclination_flag", false);
 	conf->setValue("cf_inclination_min", 120.);
 	conf->setValue("cf_inclination_max", 180.);
+	conf->setValue("cf_rcs_flag", false);
+	conf->setValue("cf_rcs_min", 0.1);
+	conf->setValue("cf_rcs_max", 100.);
 	
 	conf->endGroup(); // saveTleSources() opens it for itself
 	
@@ -859,6 +862,9 @@ void Satellites::loadSettings()
 	setFlagCFInclination(conf->value("cf_inclination_flag", false).toBool());
 	setMinCFInclination(conf->value("cf_inclination_min", 120.).toDouble());
 	setMaxCFInclination(conf->value("cf_inclination_max", 180.).toDouble());
+	setFlagCFRCS(conf->value("cf_rcs_flag", false).toBool());
+	setMinCFRCS(conf->value("cf_rcs_min", 0.1).toDouble());
+	setMaxCFRCS(conf->value("cf_rcs_max", 100.).toDouble());
 
 	conf->endGroup();
 }
@@ -919,6 +925,9 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("cf_inclination_flag", getFlagCFInclination());
 	conf->setValue("cf_inclination_min", getMinCFInclination());
 	conf->setValue("cf_inclination_max", getMaxCFInclination());
+	conf->setValue("cf_rcs_flag", getFlagCFRCS());
+	conf->setValue("cf_rcs_min", getMinCFRCS());
+	conf->setValue("cf_rcs_max", getMaxCFRCS());
 
 	conf->endGroup();
 	
@@ -1736,6 +1745,30 @@ void Satellites::setMaxCFInclination(double v)
 	Satellite::maxCFInclination = v;
 	emit customFilterChanged();
 	emit maxCFInclinationChanged(v);
+}
+
+void Satellites::setFlagCFRCS(bool b)
+{
+	if (Satellite::flagCFRCS != b)
+	{
+		Satellite::flagCFRCS = b;
+		emit customFilterChanged();
+		emit flagCFRCSChanged(b);
+	}
+}
+
+void Satellites::setMinCFRCS(double v)
+{
+	Satellite::minCFRCS = v;
+	emit customFilterChanged();
+	emit minCFRCSChanged(v);
+}
+
+void Satellites::setMaxCFRCS(double v)
+{
+	Satellite::maxCFRCS = v;
+	emit customFilterChanged();
+	emit maxCFRCSChanged(v);
 }
 
 void Satellites::setLabelFontSize(int size)

@@ -339,6 +339,9 @@ private:
 	static bool flagCFInclination;
 	static double minCFInclination;
 	static double maxCFInclination;
+	static bool flagCFRCS;
+	static double minCFRCS;
+	static double maxCFRCS;
 
 	void draw(StelCore *core, StelPainter& painter);
 

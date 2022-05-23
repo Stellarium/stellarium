@@ -45,6 +45,7 @@ private slots:
 	void updateMinMaxPerigee(bool state);
 	void updateMinMaxPeriod(bool state);
 	void updateMinMaxEccentricity(bool state);
+	void updateMinMaxRCS(bool state);
 	
 private:
 	void createDialogContent() Q_DECL_OVERRIDE;

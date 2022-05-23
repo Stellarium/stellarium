@@ -70,6 +70,9 @@ void SatellitesFilterDialog::createDialogContent()
 	connectBoolProperty(ui->perigeeCheckBox,      "Satellites.flagCFPerigee");
 	connectDoubleProperty(ui->minPerigee,         "Satellites.minCFPerigee");
 	connectDoubleProperty(ui->maxPerigee,         "Satellites.maxCFPerigee");
+	connectBoolProperty(ui->rcsCheckBox,          "Satellites.flagCFRCS");
+	connectDoubleProperty(ui->minRCS,             "Satellites.minCFRCS");
+	connectDoubleProperty(ui->maxRCS,             "Satellites.maxCFRCS");
 	connectBoolProperty(ui->stdMagnitudeCheckBox, "Satellites.flagCFKnownStdMagnitude");
 
 	updateMinMaxInclination(ui->inclinationCheckBox->isChecked());
@@ -82,6 +85,8 @@ void SatellitesFilterDialog::createDialogContent()
 	connect(ui->periodCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxPeriod(bool)));
 	updateMinMaxEccentricity(ui->eccentricityCheckBox->isChecked());
 	connect(ui->eccentricityCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxEccentricity(bool)));
+	updateMinMaxRCS(ui->rcsCheckBox->isChecked());
+	connect(ui->rcsCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxRCS(bool)));
 
 	populateTexts();
 }
@@ -116,10 +121,17 @@ void SatellitesFilterDialog::updateMinMaxEccentricity(bool state)
 	ui->maxEccentricity->setEnabled(state);
 }
 
+void SatellitesFilterDialog::updateMinMaxRCS(bool state)
+{
+	ui->minRCS->setEnabled(state);
+	ui->maxRCS->setEnabled(state);
+}
+
 void SatellitesFilterDialog::populateTexts()
 {
 	QString km = qc_("km", "distance");
 	QString m = qc_("m", "time");
+	QString sm = qc_("m", "distance");
 	ui->minApogee->setSuffix(QString(" %1").arg(km));
 	ui->maxApogee->setSuffix(QString(" %1").arg(km));
 	ui->minPerigee->setSuffix(QString(" %1").arg(km));
@@ -128,4 +140,7 @@ void SatellitesFilterDialog::populateTexts()
 	ui->maxPeriod->setSuffix(QString(" %1").arg(m));
 	ui->minInclination->setSuffix("°");
 	ui->maxInclination->setSuffix("°");
+	ui->rcsCheckBox->setToolTip(q_("Radar cross-section"));
+	ui->minRCS->setSuffix(QString(" %1%2").arg(sm, "²"));
+	ui->maxRCS->setSuffix(QString(" %1%2").arg(sm, "²"));
 }

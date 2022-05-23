@@ -187,6 +187,9 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(bool flagCFInclination		READ getFlagCFInclination		WRITE setFlagCFInclination		NOTIFY flagCFInclinationChanged)
 	Q_PROPERTY(double minCFInclination		READ getMinCFInclination		WRITE setMinCFInclination		NOTIFY minCFInclinationChanged)
 	Q_PROPERTY(double maxCFInclination		READ getMaxCFInclination		WRITE setMaxCFInclination		NOTIFY maxCFInclinationChanged)
+	Q_PROPERTY(bool flagCFRCS			READ getFlagCFRCS			WRITE setFlagCFRCS			NOTIFY flagCFRCSChanged)
+	Q_PROPERTY(double minCFRCS			READ getMinCFRCS			WRITE setMinCFRCS			NOTIFY minCFRCSChanged)
+	Q_PROPERTY(double maxCFRCS			READ getMaxCFRCS			WRITE setMaxCFRCS			NOTIFY maxCFRCSChanged)
 
 public:
 	//! @enum UpdateState
@@ -438,6 +441,9 @@ signals:
 	void flagCFInclinationChanged(bool b);
 	void minCFInclinationChanged(double v);
 	void maxCFInclinationChanged(double v);
+	void flagCFRCSChanged(bool b);
+	void minCFRCSChanged(double v);
+	void maxCFRCSChanged(double v);
 
 	//! Emitted when some of the plugin settings have been changed.
 	//! Used to communicate with the configuration window.
@@ -688,6 +694,21 @@ public slots:
 	//! Emits customFilterChanged() if the value changes.
 	void setMinCFInclination(double v);
 	double getMinCFInclination() { return Satellite::minCFInclination; }
+
+	//! Set whether custom filter 'rcs' enabled.
+	//! Emits customFilterChanged() if the value changes.
+	void setFlagCFRCS(bool b);
+	bool getFlagCFRCS() { return Satellite::flagCFRCS; }
+
+	//! Set whether custom filter 'rcs' maximum value (in square meters).
+	//! Emits customFilterChanged() if the value changes.
+	void setMaxCFRCS(double v);
+	double getMaxCFRCS() { return Satellite::maxCFRCS; }
+
+	//! Set whether custom filter 'rcs' minimum value (in square meters).
+	//! Emits customFilterChanged() if the value changes.
+	void setMinCFRCS(double v);
+	double getMinCFRCS() { return Satellite::minCFRCS; }
 
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	//! Set depth of prediction for Iridium flares

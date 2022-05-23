@@ -81,6 +81,9 @@ double Satellite::maxCFPeriod = 150.;
 bool Satellite::flagCFInclination = false;
 double Satellite::minCFInclination = 120.;
 double Satellite::maxCFInclination = 360.;
+bool Satellite::flagCFRCS = false;
+double Satellite::minCFRCS = 0.1;
+double Satellite::maxCFRCS = 100.;
 
 #if (SATELLITES_PLUGIN_IRIDIUM == 1)
 double Satellite::sunReflAngle = 180.;
@@ -890,7 +893,10 @@ SatFlags Satellite::getFlags() const
 	bool cfi = true;
 	if (flagCFInclination)
 		cfi = (inclination>=minCFInclination && inclination<=maxCFInclination);
-	if (cfa && cfp && cfe && cfm && cft && cfi)
+	bool cfr = true;
+	if (flagCFRCS)
+		cfr = (RCS>=minCFRCS && RCS<=maxCFRCS);
+	if (cfa && cfp && cfe && cfm && cft && cfi && cfr)
 		flags |= SatCustomFilter;
 
 	return flags;
