@@ -1239,7 +1239,7 @@ file URLs.
 To calculate satellite positions, the plugin uses an implementation of
 the SGP4/SDP4 algorithms (J.L. Canales' \program{gsat} library), using
 as its input data in NORAD's two-line element set
-(TLE\footnote{TLE: \url{https://en.wikipedia.org/wiki/Two-line_element_set}})
+(\indexterm[TLE, two-line element]{TLE}\footnote{TLE: \url{https://en.wikipedia.org/wiki/Two-line_element_set}})
 format. Lists with TLEs for hundreds of satellites are available
 online and are regularly updated. The plugin downloads the lists
 prepared by \url{https://celestrak.com} to keep itself up-to-date, but the users can
@@ -1281,32 +1281,44 @@ selected satellite, or at a fixed distance from Earth's surface.
 \end{figure}
 
 \begin{description}
-\item[Name] Each satellite has a name. It's displayed as a label of the satellite hint and in the list of satellites. Names are not unique though, so they are used only
-for presentation purposes.
-
-\item[Catalog number] In the \emph{Satellite Catalog} satellites are uniquely identified by their NORAD number, which is encoded in TLEs.
-
-\item[I.D. (The International Designator)] In the \emph{Satellite Catalog} satellites are also uniquely identified by their International Designator also known as COSPAR ID, which is encoded in TLEs.
-
-\item[Standard magnitude] The standard magnitude may be an estimate based on the mean cross-
-sectional area derived from its dimensions, or it may be a mean value derived from visual observations.\footnote{The standard magnitude and RCS data was obtained from Mike McCants' quicksat catalog with his permissions.}
-
-\item[RCS] The Radar Cross Section is a median value derived from the last several years of values in the Satellite Situation Report. The units of the RCS are square meters.
-
-\item[Perigee] The perigee is the nearest point respectively of a satellite's direct orbit around the Earth. The units of perigee are kilometers.
-
-\item[Apogee] The apogee is the farthest point respectively of a satellite's direct orbit around the Earth. The units of apogee are kilometers.
-
-\item[Period] The orbital period is simply how long an orbiting satellite takes to complete one orbit. The units of period are minutes.
-
-\item[Displayed] In the \emph{Satellite Catalog} satellites this property whether the selected satellite should be displayed on the sky.
-
-\item[Orbit] In the \emph{Satellite Catalog} satellites this property whether the orbit of the selected satellite should be displayed on the sky.
-
-\item[Do not update] In the \emph{Satellite Catalog} satellites this property mark satellites, which TLE should not be updated.
-
-\item[Description] The used defined notes to the selected satellite.
-
+\item[Name] Each satellite has a name. It's displayed as a label of
+  the satellite hint and in the list of satellites. Names are not
+  unique though, so they are used only for presentation purposes.
+\item[Catalog number] In the \emph{Satellite Catalog} satellites are
+  uniquely identified by their NORAD number, which is encoded in
+  \indexterm[TLE, two-line element]{TLE}s.
+\item[I.D. (The International Designator)] In the \emph{Satellite
+  Catalog} satellites are also uniquely identified by their
+  International Designator also known as \indexterm[COSPAR ID (satellite ID)]{COSPAR ID}, which is encoded
+  in TLEs.
+\item[Standard magnitude] The \indexterm[standard magnitude
+  (satellites)]{standard magnitude} may be an estimate based on the
+  mean cross-sectional area derived from its dimensions, or it may be
+  a mean value derived from visual observations.\footnote{The standard
+    magnitude and RCS data were obtained from Mike McCants' quicksat
+    catalog with his permissions.}
+\item[RCS] The \indexterm[RCS, Radar Cross Section]{Radar Cross
+  Section} is a median value derived from the last several years of
+  values in the Satellite Situation Report. The units of the RCS are
+  square meters.
+\item[Perigee] The \indexterm{perigee} is the nearest point respectively of a
+  satellite's direct orbit around the Earth. The unit of perigee is
+  kilometers.
+\item[Apogee] The \indexterm{apogee} is the farthest point
+  respectively of a satellite's direct orbit around the Earth. The
+  unit of apogee is kilometers.
+\item[Period] The orbital period is simply how long an orbiting
+  satellite takes to complete one orbit. The unit of period is
+  minutes.
+\item[Displayed] In the \emph{Satellite Catalog} tab this property
+  controls whether the selected satellite should be displayed on the
+  sky.
+\item[Orbit] In the \emph{Satellite Catalog} tab this property
+  controls whether the orbit of the selected satellite should be
+  displayed in the sky.
+\item[Do not update] In the \emph{Satellite Catalog} tab this property
+  marks satellites for which TLE should not be updated.
+\item[Description] The user-defined notes for the selected satellite.
 \item[Groups]
 A satellite can belong to one or more groups such as ``amateur'',
 ``geostationary'' or ``navigation''. They have no other function but
@@ -1317,14 +1329,25 @@ grouping. A satellite may also not belong to any group at all.
 
 By convention, group names are in lowercase. The GUI translates some of the groups used in the default catalog.
 
-The group names also using as an additional filters for filtering the satellites (see UI elements on the left side).
+The group names also can be used as an additional filters for the satellites (see UI elements on the left side).
 
-\item[TLE set] The raw TLE data of selected satellite. A two-line element set (TLE) is a data format encoding a list of orbital elements of an Earth-orbiting object for a given point in time, the epoch. Using a suitable prediction formula, the state (position and velocity) at any point in the past or future can be estimated to some accuracy.
+\item[TLE set] The raw TLE data of selected satellite. A two-line
+  element set (TLE) is a data format encoding a list of orbital
+  elements of an Earth-orbiting object for a given point in time, the
+  epoch. Using a suitable prediction model, the state (position and
+  velocity) at any point in the past or future can be estimated to
+  some accuracy.
 
 \item[Epoch of the TLE] Human-readable epoch of current set of the TLE.
 \end{description}
 
-On the left side of this tab you may see tools for filtering the satellites. In upper side UI has drop-down list with many predefined filters. Some filters are connected to user defined groups to quick get a list of satellites in some group, such as all satellites from group ``navigation''. Some filters are connected to orbital properties of satellites, such selecting the filter ``[LEO]'' will show all low-orbital satellites.
+On the left side of this tab you may see tools for filtering the
+satellites. The upper part shows a drop-down list with many predefined
+filters. Some filters are connected to user defined groups to quickly
+get a list of satellites in some group, such as all satellites from
+group ``navigation''. Some filters are connected to orbital properties
+of satellites, e.g., selecting the filter ``[LEO]'' will show all
+low-orbital satellites.
 
 \begin{figure}[ht]
 	\centering\includegraphics[width=0.6\textwidth]{satellites_plugin_filters.jpg}
@@ -1332,7 +1355,13 @@ On the left side of this tab you may see tools for filtering the satellites. In 
 	\label{fig:plugins:Satellites:Configuration:SatellitesFilter}
 \end{figure}
 
-You can display \newFeature{0.22.2} list of satellites by specific collection of they properties, when filter ``[custom filter]'' will be selected (see \ref{fig:plugins:Satellites:Configuration:SatellitesFilter}). The settings of this filter available through button \guibutton{0.6}{uibtSettings.png}, wich located at right of drop-down list.
+You can display \newFeature{0.22.2} a list of satellites by specific
+selection of their properties, when filter ``[custom filter]'' has
+been selected (see
+\ref{fig:plugins:Satellites:Configuration:SatellitesFilter}). The
+settings of this filter available through button
+\guibutton{0.6}{uibtSettings.png}, which is located at the right of
+the drop-down list.
 
 \subsection{Satellite Catalog}
 \label{sec:plugins:Satellites:catalog}
