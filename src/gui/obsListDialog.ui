@@ -150,43 +150,7 @@
         </item>
        </layout>
       </item>
-      <item row="11" column="0">
-       <widget class="QLabel" name="obsListTextEditLabel">
-        <property name="text">
-         <string>Observing list description:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="10" column="0">
-       <widget class="QTreeView" name="obsListTreeView">
-        <property name="toolTipDuration">
-         <number>-1</number>
-        </property>
-       </widget>
-      </item>
-      <item row="12" column="0">
-       <widget class="QPlainTextEdit" name="obsListDescriptionTextEdit">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="13" column="0">
+      <item row="14" column="0">
        <widget class="QFrame" name="frame">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -300,6 +264,20 @@
         </layout>
        </widget>
       </item>
+      <item row="12" column="0">
+       <widget class="QLabel" name="obsListTextEditLabel">
+        <property name="text">
+         <string>Observing list description:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="0">
+       <widget class="QTreeView" name="obsListTreeView">
+        <property name="toolTipDuration">
+         <number>-1</number>
+        </property>
+       </widget>
+      </item>
       <item row="6" column="0">
        <layout class="QHBoxLayout" name="horizontalLayoutDate">
         <item>
@@ -375,6 +353,66 @@
            <bool>true</bool>
           </property>
          </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="13" column="0">
+       <widget class="QPlainTextEdit" name="obsListDescriptionTextEdit">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayoutLJdLocation">
+        <item>
+         <widget class="QLabel" name="useJdLocationLabel">
+          <property name="text">
+           <string>Use:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="obsListJdCheckBox">
+          <property name="text">
+           <string>Jd</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="obsListLocationCheckBox">
+          <property name="text">
+           <string>Location</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>
