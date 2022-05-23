@@ -276,7 +276,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->pushButtonGrsDetails, SIGNAL(clicked()), this, SLOT(showGreatRedSpotDialog()));
 
 	// Link Solar System Editor button if available...
-	StelModule *sse=StelApp::getInstance().getModuleMgr().getModule("SolarSystemEditor");
+	StelModule *sse=StelApp::getInstance().getModuleMgr().getModule("SolarSystemEditor", true);
 	if (sse)
 		connect(ui->pushButtonSSE, &QPushButton::clicked, [=]{sse->configureGui(true);});
 	else

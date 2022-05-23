@@ -406,7 +406,7 @@ void StelApp::initScriptMgr()
 	scriptMgr->addModules();
 
 #ifdef USE_STATIC_PLUGIN_CALENDARS
-	Calendars *cal=GETSTELMODULE(Calendars);
+	Calendars *cal=GETSTELMODULE_SILENT(Calendars);
 	if (cal)
 		cal->makeCalendarsScriptable(scriptMgr);
 #endif
