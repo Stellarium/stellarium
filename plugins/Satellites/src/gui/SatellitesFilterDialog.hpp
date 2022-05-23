@@ -40,6 +40,11 @@ public slots:
 
 private slots:
 	void populateTexts();
+	void updateMinMaxInclination(bool state);
+	void updateMinMaxApogee(bool state);
+	void updateMinMaxPerigee(bool state);
+	void updateMinMaxPeriod(bool state);
+	void updateMinMaxEccentricity(bool state);
 	
 private:
 	void createDialogContent() Q_DECL_OVERRIDE;

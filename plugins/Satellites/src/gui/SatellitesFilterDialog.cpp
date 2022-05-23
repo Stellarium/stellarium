@@ -72,7 +72,48 @@ void SatellitesFilterDialog::createDialogContent()
 	connectDoubleProperty(ui->maxPerigee,         "Satellites.maxCFPerigee");
 	connectBoolProperty(ui->stdMagnitudeCheckBox, "Satellites.flagCFKnownStdMagnitude");
 
+	updateMinMaxInclination(ui->inclinationCheckBox->isChecked());
+	connect(ui->inclinationCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxInclination(bool)));
+	updateMinMaxApogee(ui->apogeeCheckBox->isChecked());
+	connect(ui->apogeeCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxApogee(bool)));
+	updateMinMaxPerigee(ui->perigeeCheckBox->isChecked());
+	connect(ui->perigeeCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxPerigee(bool)));
+	updateMinMaxPeriod(ui->periodCheckBox->isChecked());
+	connect(ui->periodCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxPeriod(bool)));
+	updateMinMaxEccentricity(ui->eccentricityCheckBox->isChecked());
+	connect(ui->eccentricityCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxEccentricity(bool)));
+
 	populateTexts();
+}
+
+void SatellitesFilterDialog::updateMinMaxInclination(bool state)
+{
+	ui->minInclination->setEnabled(state);
+	ui->maxInclination->setEnabled(state);
+}
+
+void SatellitesFilterDialog::updateMinMaxApogee(bool state)
+{
+	ui->minApogee->setEnabled(state);
+	ui->maxApogee->setEnabled(state);
+}
+
+void SatellitesFilterDialog::updateMinMaxPerigee(bool state)
+{
+	ui->minPerigee->setEnabled(state);
+	ui->maxPerigee->setEnabled(state);
+}
+
+void SatellitesFilterDialog::updateMinMaxPeriod(bool state)
+{
+	ui->minPeriod->setEnabled(state);
+	ui->maxPeriod->setEnabled(state);
+}
+
+void SatellitesFilterDialog::updateMinMaxEccentricity(bool state)
+{
+	ui->minEccentricity->setEnabled(state);
+	ui->maxEccentricity->setEnabled(state);
 }
 
 void SatellitesFilterDialog::populateTexts()
