@@ -812,6 +812,9 @@
              </item>
              <item>
               <widget class="QPushButton" name="customFilterButton">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="toolTip">
                 <string>Settings of custom filter</string>
                </property>
