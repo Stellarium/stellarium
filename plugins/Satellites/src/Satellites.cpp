@@ -88,7 +88,7 @@ Satellites::Satellites()
 	: satelliteListModel(Q_NULLPTR)
 	, toolbarButton(Q_NULLPTR)
 	, earth(Q_NULLPTR)
-	, defaultHintColor(0.0f, 0.4f, 0.6f)	
+	, defaultHintColor(0.7f, 0.7f, 0.7f)
 	, updateState(CompleteNoUpdates)
 	, downloadMgr(Q_NULLPTR)
 	, progressBar(Q_NULLPTR)
@@ -639,7 +639,7 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("updates_enabled", true);
 	conf->setValue("auto_add_enabled", true);
 	conf->setValue("auto_remove_enabled", true);
-	conf->setValue("hint_color", "0.0,0.4,0.6");
+	conf->setValue("hint_color", "0.7,0.7,0.7");
 	conf->setValue("invisible_satellite_color", "0.2,0.2,0.2");
 	conf->setValue("transit_satellite_color", "0.0,0.0,0.0");
 	conf->setValue("hint_font_size", 10);

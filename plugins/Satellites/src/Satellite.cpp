@@ -1052,13 +1052,9 @@ float Satellite::calculateOrbitSegmentIntensity(int segNum)
 {
 	int endDist = (orbitLineSegments/2) - abs(segNum-1 - (orbitLineSegments/2) % orbitLineSegments);
 	if (endDist > orbitLineFadeSegments)
-	{
 		return 1.0;
-	}
 	else
-	{
 		return (endDist  + 1) / (orbitLineFadeSegments + 1.0);
-	}
 }
 
 void Satellite::computeOrbitPoints()
