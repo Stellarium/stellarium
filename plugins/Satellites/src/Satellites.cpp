@@ -1261,10 +1261,9 @@ bool Satellites::add(const TleData& tleData)
 			satProperties.insert("stdMag", 5.89);
 	}
 	// special case: oneweb satellites
-	// Source: Anthony Mallama. The Brightness of OneWeb Satellites; https://arxiv.org/abs/2012.05100
-	// The mean visual magnitude of OneWeb satellites at the standard satellite distance of 1,000 km is 7.18 +/-0.03
+	// Source: Anthony Mallama. OneWeb Satellite Brightness -- Characterized From 80,000 Visible Light Magnitudes; https://arxiv.org/pdf/2203.05513.pdf
 	if (!qsMagList.contains(sid) && tleData.name.startsWith("ONEWEB"))
-		satProperties.insert("stdMag", 7.18);
+		satProperties.insert("stdMag", 7.05);
 	if (tleData.status != Satellite::StatusUnknown)
 		satProperties.insert("status", tleData.status);
 	// Guess the group
