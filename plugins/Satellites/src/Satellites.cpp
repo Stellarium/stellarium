@@ -1252,7 +1252,19 @@ bool Satellites::add(const TleData& tleData)
 		satProperties.insert("rcs", rcsList[sid]);
 	// special case: starlink satellites; details: http://satobs.org/seesat/Apr-2020/0174.html
 	if (!rcsList.contains(sid) && tleData.name.startsWith("STARLINK"))
+	{
 		satProperties.insert("rcs", 22.68); // Starlink's solar array is 8.1 x 2.8 metres.
+		// Source: Anthony Mallama. Starlink Satellite Brightness -- Characterized From 100,000 Visible Light Magnitudes; https://arxiv.org/abs/2111.09735
+		if (tleData.name.contains("VISORSAT", Qt::CaseInsensitive))
+			satProperties.insert("stdMag", 7.21); // stdMag=6.84 previously: https://arxiv.org/abs/2109.07345
+		else
+			satProperties.insert("stdMag", 5.89);
+	}
+	// special case: oneweb satellites
+	// Source: Anthony Mallama. The Brightness of OneWeb Satellites; https://arxiv.org/abs/2012.05100
+	// The mean visual magnitude of OneWeb satellites at the standard satellite distance of 1,000 km is 7.18 +/-0.03
+	if (!qsMagList.contains(sid) && tleData.name.startsWith("ONEWEB"))
+		satProperties.insert("stdMag", 7.18);
 	if (tleData.status != Satellite::StatusUnknown)
 		satProperties.insert("status", tleData.status);
 	// Guess the group
