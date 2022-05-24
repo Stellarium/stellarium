@@ -335,8 +335,9 @@ void ScriptConsole::scriptEnded()
 
 void ScriptConsole::appendLogLine(const QString& s)
 {
+	static const QRegularExpression whitespaceExp("^\\s+");
 	QString html = ui->logBrowser->toHtml();
-	html.replace(QRegularExpression("^\\s+"), "");
+	html.replace(whitespaceExp, "");
 	html += s;
 	ui->logBrowser->setHtml(html);
 }
@@ -349,8 +350,9 @@ void ScriptConsole::appendOutputLine(const QString& s)
 	}
 	else
 	{
+		static const QRegularExpression whitespaceExp("^\\s+");
 		QString html = ui->outputBrowser->toHtml();
-		html.replace(QRegularExpression("^\\s+"), "");
+		html.replace(whitespaceExp, "");
 		html += s;
 		ui->outputBrowser->setHtml(html);
 	}
