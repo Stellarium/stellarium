@@ -225,9 +225,9 @@ QString radToHmsStr(const double angle, const bool decimal)
 {
 	unsigned int h,m;
 	double s;
-	StelUtils::radToHms(angle+0.005*M_PI/12/(60*60), h, m, s);
+	StelUtils::radToHms(angle, h, m, s);
 	int width, precision;
-	QString carry, r;
+	QString carry;
 	if (decimal)
 	{
 		width=5;
@@ -268,7 +268,7 @@ QString radToDmsStrAdapt(const double angle, const bool useD)
 	bool sign;
 	unsigned int d,m;
 	double s;
-	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s); // NOTE: WTF???
+	StelUtils::radToDms(angle, sign, d, m, s);
 	QString str;
 	QTextStream os(&str);
 

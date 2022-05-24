@@ -248,12 +248,12 @@ void TestConversions::testRadToDMSStrAdapt()
 	data << 61*M_PI/360		<< "+30°30'"		<< false;
 	data << M_PI/648000		<< "+0°0'1\""		<< false;
 	data << 1213*M_PI/2400		<< "+90°58'30\""	<< false;
-	data << 39599*M_PI/648000	<< "+10°59'59\""	<< false;
+	data << 39599*M_PI/648000	<< "+10°59'59.00\""	<< false;
 	data << -M_PI/36		<< "-5°"		<< false;
 	data << -7*M_PI/8		<< "-157°30'"		<< false;
 	data << -2*M_PI/5		<< "-72°"		<< false;
 	data << -M_PI			<< "-180°"		<< false;
-	data << -10*M_PI/648		<< "-2°46'40\""		<< false;
+	data << -10*M_PI/648		<< "-2°46'40.00\""	<< false;
 
 	data << 0.			<< "+0d"		<< true;
 	data << M_PI/6			<< "+30d"		<< true;
@@ -268,12 +268,12 @@ void TestConversions::testRadToDMSStrAdapt()
 	data << 61*M_PI/360		<< "+30d30'"		<< true;
 	data << M_PI/648000		<< "+0d0'1\""		<< true;
 	data << 1213*M_PI/2400		<< "+90d58'30\""	<< true;
-	data << 39599*M_PI/648000	<< "+10d59'59\""	<< true;
+	data << 39599*M_PI/648000	<< "+10d59'59.00\""	<< true;
 	data << -M_PI/36		<< "-5d"		<< true;
 	data << -7*M_PI/8		<< "-157d30'"		<< true;
 	data << -2*M_PI/5		<< "-72d"		<< true;
 	data << -M_PI			<< "-180d"		<< true;
-	data << -10*M_PI/648		<< "-2d46'40\""		<< true;
+	data << -10*M_PI/648		<< "-2d46'40.00\""	<< true;
 
 	while (data.count()>=3)
 	{
@@ -282,9 +282,7 @@ void TestConversions::testRadToDMSStrAdapt()
 		bool flag	= data.takeFirst().toBool();
 		QString rdms	= StelUtils::radToDmsStrAdapt(rad, flag);
 		QVERIFY2(rdms==edms, qPrintable(QString("%1 radians = %2 (expected %3) [flag: %4]")
-						.arg(QString::number(rad, 'f', 5))
-						.arg(rdms)
-						.arg(edms)
+						.arg(QString::number(rad, 'f', 5), rdms, edms)
 						.arg(flag)));
 	}
 }
@@ -381,9 +379,7 @@ void TestConversions::testRadToDMSStr()
 		bool useDF	= data.takeFirst().toBool();
 		QString rdms	= StelUtils::radToDmsStr(rad, decimalF, useDF);
 		QVERIFY2(rdms==edms, qPrintable(QString("%1 radians = %2 (expected %3) [flags: %4, %5]")
-						.arg(QString::number(rad, 'f', 5))
-						.arg(rdms)
-						.arg(edms)
+						.arg(QString::number(rad, 'f', 5), rdms, edms)
 						.arg(decimalF)
 						.arg(useDF)));
 	}
