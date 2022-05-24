@@ -3815,52 +3815,32 @@ void AstroCalcDialog::populateCelestialBodyList()
 	// Restore the selection
 	indexP = planets->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (indexP < 0)
-	{
-		indexP = planets->findData(conf->value("astrocalc/ephemeris_celestial_body", "Moon").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
-		if (indexP<0)
-			indexP = 0;
-	}
+		indexP = qMax(0, planets->findData(conf->value("astrocalc/ephemeris_celestial_body", "Moon").toString(), Qt::UserRole, Qt::MatchCaseSensitive));
 	planets->setCurrentIndex(indexP);
 	planets->model()->sort(0);
 
 	// Restore the selection
 	indexP2 = planets2->findData(selectedPlanet2Id, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (indexP2 < 0)
-	{
-		indexP2 = planets2->findData(conf->value("astrocalc/ephemeris_second_celestial_body", "none").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
-		if (indexP2<0)
-			indexP2 = 0;
-	}
+		indexP2 = qMax(0, planets2->findData(conf->value("astrocalc/ephemeris_second_celestial_body", "none").toString(), Qt::UserRole, Qt::MatchCaseSensitive));
 	planets2->setCurrentIndex(indexP2);
 	planets2->model()->sort(0);
 
 	indexG = graphsp->findData(selectedGraphsPId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (indexG < 0)
-	{
-		indexG = graphsp->findData(conf->value("astrocalc/graphs_celestial_body", "Moon").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
-		if (indexG<0)
-			indexG = 0;
-	}
+		indexG = qMax(0, graphsp->findData(conf->value("astrocalc/graphs_celestial_body", "Moon").toString(), Qt::UserRole, Qt::MatchCaseSensitive));
 	graphsp->setCurrentIndex(indexG);
 	graphsp->model()->sort(0);
 
 	indexFCB = firstCB->findData(selectedFirstCelestialBodyId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (indexFCB < 0)
-	{
-		indexFCB = firstCB->findData(conf->value("astrocalc/first_celestial_body", "Sun").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
-		if (indexFCB<0)
-			indexFCB = 0;
-	}
+		indexFCB = qMax(0, firstCB->findData(conf->value("astrocalc/first_celestial_body", "Sun").toString(), Qt::UserRole, Qt::MatchCaseSensitive));
 	firstCB->setCurrentIndex(indexFCB);
 	firstCB->model()->sort(0);
 
 	indexSCB = secondCB->findData(selectedSecondCelestialBodyId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (indexSCB < 0)
-	{
-		indexSCB = secondCB->findData(conf->value("astrocalc/second_celestial_body", "Earth").toString(), Qt::UserRole, Qt::MatchCaseSensitive);
-		if (indexSCB<0)
-			indexSCB = 0;
-	}
+		indexSCB = qMax(0, secondCB->findData(conf->value("astrocalc/second_celestial_body", "Earth").toString(), Qt::UserRole, Qt::MatchCaseSensitive));
 	secondCB->setCurrentIndex(indexSCB);
 	secondCB->model()->sort(0);
 
@@ -5536,26 +5516,36 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 
 double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringList objects)
 {
-	double step = (stopJD - startJD) / 16.0;
-	double limit = 24.8 * 365.25;
+	double limit, step = (stopJD - startJD) / 16.0;
 	static const QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
 
-	if (objects.contains("Moon", Qt::CaseInsensitive))
-		limit = 0.25;
-	else if (objects.contains("C/",Qt::CaseInsensitive) || objects.contains("P/",Qt::CaseInsensitive))
-		limit = 0.5;
-	else if (objects.contains("Earth",Qt::CaseInsensitive) || objects.contains("Sun", Qt::CaseInsensitive))
-		limit = 1.;
-	else if (objects.contains("Venus",Qt::CaseInsensitive) || objects.contains("Mercury", Qt::CaseInsensitive))
-		limit = 2.5;
-	else if (objects.contains("Mars",Qt::CaseInsensitive))
-		limit = 5.;
-	else if (objects.indexOf(mp)>=0)
-		limit = 10.;	
-	else if (objects.contains("Jupiter", Qt::CaseInsensitive) || objects.contains("Saturn", Qt::CaseInsensitive))
-		limit = 15.;
-	else if (objects.contains("Neptune", Qt::CaseInsensitive) || objects.contains("Uranus", Qt::CaseInsensitive) || objects.contains("Pluto",Qt::CaseInsensitive))
-		limit = 20.;
+	const QMap<QString, double> steps = {
+		{ "Moon",     0.25 },
+		{ "C/",       0.5  },
+		{ "P/",       0.5  },
+		{ "Earth",    1.0  },
+		{ "Sun",      1.0  },
+		{ "Venus",    2.5  },
+		{ "Mercury",  2.5  },
+		{ "Mars",     5.0  },
+		{ "Jupiter", 15.0  },
+		{ "Saturn",  15.0  },
+		{ "Neptune", 20.0  },
+		{ "Uranus",  20.0  },
+		{ "Pluto",   20.0  },
+	};
+
+	if (objects.indexOf(mp)>=0)
+		limit = 10.;
+	else
+	{
+		limit = 24.8 * 365.25;
+		for (const auto &step: steps.keys())
+		{
+			if (objects.contains(step, Qt::CaseInsensitive))
+				limit = qMin(steps.value(step), limit);
+		}
+	}
 
 	if (step > limit)
 		step = limit;
