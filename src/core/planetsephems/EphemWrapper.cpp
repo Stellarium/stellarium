@@ -426,7 +426,6 @@ void get_lunar_parent_coordsv(double jde, double xyz[3], double xyzdot[3], void*
 	lat+=-0.25/3600. * M_PI_180;
 	StelUtils::spheToRect(lng, lat, r, XYZ);
 	xyz[0]=XYZ.v[0]; xyz[1]=XYZ.v[1]; xyz[2]=XYZ.v[2];
-
 }
 
 void get_phobos_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
