@@ -29,16 +29,26 @@
 #include <QPair>
 #include <QSet>
 
-#include "StelMainScriptAPI.hpp"
-
+#ifdef ENABLE_SCRIPT_QML
+#include <QMutex>
+#include <QJSValue>
+class QJSEngine;
+#else
 class StelScriptEngineAgent;
 class QScriptEngine;
+#endif
+
+#include "StelMainScriptAPI.hpp"
+
 
 #ifdef ENABLE_SCRIPT_CONSOLE
 class ScriptConsole;
 #endif
 
 //! Manage scripting in Stellarium
+//! Notes on migration from QtScript to QJSEngine
+//! - The old engine had isEvaluating(). We must use a mutex for the same idea.
+//! - There is no script.pause() function. We can only stop a running script.
 class StelScriptMgr : public QObject
 {
 	Q_OBJECT
@@ -57,7 +67,11 @@ public:
 
 	//! Find out if a script is running
 	//! @return true if a script is running, else false
+	#ifdef ENABLE_SCRIPT_QML
+	bool scriptIsRunning();
+	#else
 	bool scriptIsRunning() const;
+	#endif
 	//! Get the ID (usually filename) of the currently running script
 	//! @return Empty string if no script is running, else the 
 	//! ID of the script which is running.
@@ -223,11 +237,13 @@ public slots:
 	//! @note For storing to absolute path names, set [scripts]/flag_script_allow_write_absolute_path=true.
 	void saveOutputAs(const QString &filename);
 
+#ifndef ENABLE_SCRIPT_QML
 	//! Pause a running script.
 	void pauseScript();
 
 	//! Resume a paused script.
 	void resumeScript();
+#endif
 
 private slots:
 	//! Called at the end of the running threa
@@ -264,8 +280,16 @@ private:
 	//! @return the text following the id and : on a comment line near the top of 
 	//! the script file (i.e. before there is a non-comment line).
 	QString getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText="");
+
+#ifdef ENABLE_SCRIPT_QML
+	QJSEngine *engine;
+	QMutex mutex; // we need to lock this while a script is running.
+	QJSValue result;
+#else
 	QScriptEngine* engine;
-	
+	//Script engine agent
+	StelScriptEngineAgent *agent;
+#endif
 	//! The thread in which scripts are run
 	StelMainScriptAPI *mainAPI;
 
@@ -274,8 +298,6 @@ private:
 	
 	QString scriptFileName;
 	
-	//Script engine agent
-	StelScriptEngineAgent *agent;
 
 	// Map line numbers of output to <path>:<line>
 	int outline;
