@@ -821,7 +821,7 @@
                <property name="icon">
                 <iconset resource="../../../../data/gui/guiRes.qrc">
                  <normaloff>:/graphicGui/uibtSettings.png</normaloff>
-                 <normalon>:/graphicGui/uibtSettings.png</normalon>:/graphicGui/uibtSettings.png</iconset>
+                 <disabledoff>:/graphicGui/uibtSettings.png</disabledoff>:/graphicGui/uibtSettings.png</iconset>
                </property>
               </widget>
              </item>
@@ -879,6 +879,19 @@
                 <iconset resource="../../../../data/gui/guiRes.qrc">
                  <normaloff>:/graphicGui/uibtRemove.png</normaloff>
                  <disabledoff>:/graphicGui/uibtRemove-disabled.png</disabledoff>:/graphicGui/uibtRemove.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="selectAllButton">
+               <property name="toolTip">
+                <string>Select all satellites in list</string>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normalon>:/graphicGui/uieCheckbox-checked-disabled.png</normalon>
+                 <disabledoff>:/graphicGui/uieCheckbox-checked-disabled.png</disabledoff>
+                </iconset>
                </property>
               </widget>
              </item>

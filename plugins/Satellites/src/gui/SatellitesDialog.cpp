@@ -147,8 +147,10 @@ void SatellitesDialog::createDialogContent()
 
 	// Set size of buttons
 	QSize bs = QSize(26, 26);
+	ui->customFilterButton->setFixedSize(bs);
 	ui->addSatellitesButton->setFixedSize(bs);
 	ui->removeSatellitesButton->setFixedSize(bs);
+	ui->selectAllButton->setFixedSize(bs);
 	ui->satMarkerColorPickerButton->setFixedSize(bs);
 	ui->satOrbitColorPickerButton->setFixedSize(bs);
 	ui->satInfoColorPickerButton->setFixedSize(bs);
@@ -156,7 +158,6 @@ void SatellitesDialog::createDialogContent()
 	ui->deleteSourceButton->setFixedSize(bs);
 	ui->editSourceButton->setFixedSize(bs);
 	ui->saveSourceButton->setFixedSize(bs);
-	ui->customFilterButton->setFixedSize(bs);
 
 	// Settings tab / updates group
 	// These controls are refreshed by updateSettingsPage(), which in
@@ -259,6 +260,7 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->addSatellitesButton, SIGNAL(clicked()),            importWindow, SLOT(setVisible()));
 	connect(importWindow, SIGNAL(satellitesAccepted(TleDataList)), this,         SLOT(addSatellites(TleDataList)));
 	connect(ui->removeSatellitesButton, SIGNAL(clicked()),         this,         SLOT(removeSatellites()));
+	connect(ui->selectAllButton, SIGNAL(clicked()),                this,         SLOT(selectFilteredSatellitesList()));
 
 	filterWindow = new SatellitesFilterDialog();
 	connect(ui->customFilterButton, SIGNAL(clicked()), filterWindow, SLOT(setVisible()));
@@ -496,6 +498,12 @@ void SatellitesDialog::updateFilteredSatellitesList()
 	{
 		filterListByGroup(ui->groupFilterCombo->currentIndex());
 	}
+}
+
+void SatellitesDialog::selectFilteredSatellitesList()
+{
+	ui->satellitesList->selectionModel()->clearSelection();
+	ui->satellitesList->selectAll();
 }
 
 void SatellitesDialog::updateSatelliteAndSaveData()

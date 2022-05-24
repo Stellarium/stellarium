@@ -86,6 +86,7 @@ private slots:
 	void updateSatelliteData();
 	void updateSatelliteAndSaveData();
 	void updateFilteredSatellitesList();
+	void selectFilteredSatellitesList();
 	void saveSatellites(void);
 	void showUpdateState(Satellites::UpdateState state);
 	void showUpdateCompleted(int updated, int total, int added, int missing);
