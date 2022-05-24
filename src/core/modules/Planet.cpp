@@ -351,7 +351,6 @@ void Planet::replaceTexture(const QString &texName)
 			texMap = StelApp::getInstance().getTextureManager().createTextureThread(texMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 		else
 			qWarning()<<"Cannot resolve path to texture file"<<texName<<"of object"<<englishName;
-
 	}
 }
 

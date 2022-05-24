@@ -249,7 +249,6 @@ QString StarMgr::getCrossIdentificationDesignations(QString hip)
 
 		if (crossIdData.sao>0)
 			designations << QString("SAO %1").arg(crossIdData.sao);
-
 	}
 
 	return designations.join(" - ");

@@ -225,7 +225,6 @@ void Atmosphere::computeColor(StelCore* core, const double JD, const Planet& cur
 
 		if(separation_angle < touch_angle)
 		{
-
 			double dark_angle = moon_angular_size - sun_angular_size;
 			double min = 0.0025; // 0.005f; // 0.0001f;  // so bright stars show up at total eclipse
 			if (dark_angle < 0.)
