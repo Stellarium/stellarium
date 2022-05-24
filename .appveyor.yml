@@ -38,7 +38,7 @@ environment:
 #    qtbin: msvc2019
 #    msvcname: Visual Studio 17 2022
 #    packaging: false
-#    suffix: Win32 
+#    suffix: Win32
 #    cmake_args: -A Win32
 
 before_build:
@@ -59,7 +59,7 @@ build:
   project: c:\stellarium\build-%qtver%-%qtbin%\Stellarium.sln
   parallel: true
   verbosity: minimal
-  
+
 test_script:
   - if [%PUBLISH_BINARY%]==[false] ctest --output-on-failure
 
