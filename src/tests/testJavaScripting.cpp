@@ -29,6 +29,20 @@
 
 QTEST_GUILESS_MAIN(TestJavaScripting)
 
+#ifdef ENABLE_SCRIPT_QML
+QString TestJavaScripting::runScript(QJSEngine *engine, QString script )
+{
+//	std::cout << "Script:" << std::endl << script.toStdString() << std::endl;
+	QJSValue result = engine->evaluate(script);
+	if (result.isError()) {
+//		int line = engine->uncaughtExceptionLineNumber();
+//		std::cout << "uncaught exception at line" << line << ": " <<
+//			result.toString().toStdString() << std::endl;
+		return "error";
+	}
+	return result.toString();
+}
+#else
 QString TestJavaScripting::runScript(QScriptEngine *engine, QString script )
 {
 //	std::cout << "Script:" << std::endl << script.toStdString() << std::endl;
@@ -41,11 +55,17 @@ QString TestJavaScripting::runScript(QScriptEngine *engine, QString script )
 	}
 	return result.toString();
 }
+#endif
 
 void TestJavaScripting::initTestCase()
 {
+#ifdef ENABLE_SCRIPT_QML
+	engine = new QJSEngine(this);
+	//StelScriptMgr::defVecClasses(engine); // FIXME
+#else
 	engine = new QScriptEngine(this);
 	StelScriptMgr::defVecClasses(engine);
+#endif
 }
 	
 void TestJavaScripting::testVec3fConstructor()

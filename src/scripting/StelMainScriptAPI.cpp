@@ -689,7 +689,11 @@ void StelMainScriptAPI::setScriptRate(double r)
 
 void StelMainScriptAPI::pauseScript()
 {
+#ifdef ENABLE_SCRIPT_QML
+	qDebug() << "NOTE: pauseScript() is no longer supported. Ignoring.";
+#else
 	return StelApp::getInstance().getScriptMgr().pauseScript();
+#endif
 }
 
 void StelMainScriptAPI::setSelectedObjectInfo(const QString& level)

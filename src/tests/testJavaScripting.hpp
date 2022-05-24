@@ -23,7 +23,11 @@
 #include <QObject>
 #include <QtTest>
 #include <QString>
+#ifdef ENABLE_SCRIPT_QML
+#include <QJSEngine>
+#else
 #include <QScriptEngine>
+#endif
 
 class TestJavaScripting : public QObject
 {
@@ -33,9 +37,14 @@ private slots:
 	void testVec3fConstructor();
 	void testVec3fConstructorFail();
 	void testVec3dConstructor();
+#ifdef ENABLE_SCRIPT_QML
+	QString runScript(QJSEngine *engine, QString script);
+private:
+	QJSEngine *engine;
+#else
 	QString runScript(QScriptEngine *engine, QString script);
-	
 private:
 	QScriptEngine *engine;
+#endif
 };
 #endif  // TESTJAVASCRIPTING_HPP

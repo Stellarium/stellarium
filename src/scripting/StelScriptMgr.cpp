@@ -39,6 +39,7 @@
 #include "StelSkyLayerMgr.hpp"
 #include "StelUtils.hpp"
 
+#include <QCoreApplication>
 #include <QDateTime>
 #include <QDebug>
 #include <QDir>
@@ -49,10 +50,15 @@
 #include <QStringList>
 #include <QTemporaryFile>
 #include <QVariant>
-#include <QtScript>
 
 #include <cmath>
 
+
+#ifdef ENABLE_SCRIPT_QML
+#include <QJSEngine>
+#else
+#include <QtScript>
+// TODO: Allow Vec3* in the QML script branch
 // 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f
 
 /***
@@ -323,10 +329,42 @@ void StelScriptMgr::defVecClasses(QScriptEngine *engine)
 	QScriptValue ctorVec3d = engine->newFunction(createVec3d);
 	engine->globalObject().setProperty("Vec3d", ctorVec3d);
 }
+#endif
 
 StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 {
 	waitEventLoop = new QEventLoop();
+#ifdef ENABLE_SCRIPT_QML
+	engine = new QJSEngine(this);
+	engine->installExtensions(QJSEngine::ConsoleExtension);
+	connect(&StelApp::getInstance(), SIGNAL(aboutToQuit()), this, SLOT(stopScript()), Qt::DirectConnection);
+
+	// Scripting images
+	ScreenImageMgr* scriptImages = new ScreenImageMgr();
+	scriptImages->init();
+	StelApp::getInstance().getModuleMgr().registerModule(scriptImages);
+
+	//defVecClasses(engine); // FIXME
+
+	// This is enough for a simple Array access for a QVector<int> input or return type (e.g. Calendars plugin)
+	//qScriptRegisterSequenceMetaType<QVector<int>>(engine);
+
+	// Add the core object to access methods related to core
+	mainAPI = new StelMainScriptAPI(this);
+	QJSValue objectValue = engine->newQObject(mainAPI);
+	engine->globalObject().setProperty("core", objectValue);
+
+	// Add other classes which we want to be directly accessible from scripts
+	if(StelSkyLayerMgr* smgr = GETSTELMODULE(StelSkyLayerMgr))
+		objectValue = engine->newQObject(smgr);
+
+	// For accessing star scale, twinkle etc.
+	objectValue = engine->newQObject(StelApp::getInstance().getCore()->getSkyDrawer());
+	engine->globalObject().setProperty("StelSkyDrawer", objectValue);
+
+	setScriptRate(1.0);
+
+#else
 	engine = new QScriptEngine(this);
 	connect(&StelApp::getInstance(), SIGNAL(aboutToQuit()), this, SLOT(stopScript()), Qt::DirectConnection);
 	// Scripting images
@@ -358,7 +396,7 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 
 	agent = new StelScriptEngineAgent(engine);
 	engine->setAgent(agent);
-
+#endif
 	initActions();
 }
 
@@ -377,6 +415,12 @@ void StelScriptMgr::initActions()
 
 StelScriptMgr::~StelScriptMgr()
 {
+#ifdef ENABLE_SCRIPT_QML
+	engine->collectGarbage();
+	delete engine;
+#else
+	delete engine; // We never did that before?
+#endif
 }
 
 void StelScriptMgr::addModules() 
@@ -386,14 +430,22 @@ void StelScriptMgr::addModules()
 	const QList allModules = mmgr->getAllModules();
 	for (auto* m : allModules)
 	{
-		QScriptValue objectValue = engine->newQObject(m);
+		#ifdef ENABLE_SCRIPT_QML
+			QJSValue objectValue = engine->newQObject(m);
+		#else
+			QScriptValue objectValue = engine->newQObject(m);
+		#endif
 		engine->globalObject().setProperty(m->objectName(), objectValue);
 	}
 }
 
 void StelScriptMgr::addObject(QObject *obj)
 {
-	QScriptValue objectValue = engine->newQObject(obj);
+	#ifdef ENABLE_SCRIPT_QML
+		QJSValue objectValue = engine->newQObject(obj);
+	#else
+		QScriptValue objectValue = engine->newQObject(obj);
+	#endif
 	engine->globalObject().setProperty(obj->objectName(), objectValue);
 }
 
@@ -411,9 +463,21 @@ QStringList StelScriptMgr::getScriptList() const
 	return scriptFiles;
 }
 
+#ifdef ENABLE_SCRIPT_QML
+bool StelScriptMgr::scriptIsRunning()
+{
+	if (mutex.tryLock())
+	{
+		mutex.unlock();
+		return false;
+	}
+	else
+		return true;
+#else
 bool StelScriptMgr::scriptIsRunning() const
 {
 	return engine->isEvaluating();
+#endif
 }
 
 QString StelScriptMgr::runningScriptId() const
@@ -573,7 +637,11 @@ QString StelScriptMgr::getDescription(const QString& s)
 
 bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript, const QString& scriptId)
 {
+#ifdef ENABLE_SCRIPT_QML
+	if (!mutex.tryLock())
+#else
 	if (engine->isEvaluating())
+#endif
 	{
 		QString msg = QString("ERROR: there is already a script running, please wait until it's over.");
 		emit scriptDebug(msg);
@@ -592,12 +660,20 @@ bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript, con
 	emit scriptRunning();
 	emit runningScriptIdChanged(scriptId);
 
+#ifdef ENABLE_SCRIPT_QML
+	engine->setInterrupted(false);
+	//QStringList stackTrace;
+	//result=engine->evaluate(preprocessedScript, QString(), 1, &stackTrace);
+	result=engine->evaluate(preprocessedScript, QString(), 1);
+	scriptEnded();
+#else
 	// run that script in a new context
 	QScriptContext *context = engine->pushContext();
 	engine->evaluate(preprocessedScript);
 	engine->popContext();
 	scriptEnded();
 	Q_UNUSED(context)
+#endif
 	return true;
 }
 
@@ -681,6 +757,20 @@ void StelScriptMgr::stopScript()
 		return;
 	}
 	
+#ifdef ENABLE_SCRIPT_QML
+	if (!mutex.tryLock())
+	{
+		engine->setInterrupted(true);
+		GETSTELMODULE(LabelMgr)->deleteAllLabels();
+		GETSTELMODULE(MarkerMgr)->deleteAllMarkers();
+		GETSTELMODULE(ScreenImageMgr)->deleteAllImages();
+		QString msg = QString("INFO: asking running script to exit");
+		emit scriptDebug(msg);
+		//qDebug() << msg;
+	}
+	else
+		mutex.unlock(); // all was OK, no script was running.
+#else
 	if (engine->isEvaluating())
 	{
 		GETSTELMODULE(LabelMgr)->deleteAllLabels();
@@ -695,22 +785,31 @@ void StelScriptMgr::stopScript()
 		engine->abortEvaluation();
 	}
 	// "Script finished..." is emitted after return from engine->evaluate().
+#endif
 }
 
 void StelScriptMgr::setScriptRate(double r)
 {
 	//qDebug() << "StelScriptMgr::setScriptRate(" << r << ")";
+#ifdef ENABLE_SCRIPT_QML
+	if (mutex.tryLock())
+	{
+		engine->globalObject().setProperty("scriptRateReadOnly", r);
+		mutex.unlock();
+		return;
+	}
+#else
 	if (!engine->isEvaluating())
 	{
 		engine->globalObject().setProperty("scriptRateReadOnly", r);
 		return;
 	}
-	
-	qsreal currentScriptRate = engine->globalObject().property("scriptRateReadOnly").toNumber();
+#endif
+	qreal currentScriptRate = engine->globalObject().property("scriptRateReadOnly").toNumber();
 	
 	// pre-calculate the new time rate in an effort to prevent there being much latency
 	// between setting the script rate and the time rate.
-	qsreal factor = r / currentScriptRate;
+	qreal factor = r / currentScriptRate;
 	
 	StelCore* core = StelApp::getInstance().getCore();
 	core->setTimeRate(core->getTimeRate() * factor);
@@ -719,6 +818,7 @@ void StelScriptMgr::setScriptRate(double r)
 	engine->globalObject().setProperty("scriptRateReadOnly", r);
 }
 
+#ifndef ENABLE_SCRIPT_QML
 void StelScriptMgr::pauseScript()
 {
 	emit scriptPaused();
@@ -729,6 +829,7 @@ void StelScriptMgr::resumeScript()
 {
 	agent->setPauseScript(false);
 }
+#endif
 
 double StelScriptMgr::getScriptRate()
 {
@@ -759,6 +860,19 @@ void StelScriptMgr::saveOutputAs(const QString &filename)
 
 void StelScriptMgr::scriptEnded()
 {
+#ifdef ENABLE_SCRIPT_QML
+	if (result.isError())
+	{
+		//int outputPos = engine->uncaughtExceptionLineNumber();
+		//QString realPos = lookup( outputPos );
+		//QString msg = QString("script error: \"%1\" @ line %2").arg(engine->uncaughtException().toString(), realPos);
+		// FIXME: Better error message?
+		QString msg = QString("script error: \"%1\" : %2").arg(result.errorType()).arg(result.toString());
+		emit scriptDebug(msg);
+		qWarning() << msg;
+	}
+	mutex.unlock();
+#else
 	if (engine->hasUncaughtException())
 	{
 		int outputPos = engine->uncaughtExceptionLineNumber();
@@ -767,7 +881,7 @@ void StelScriptMgr::scriptEnded()
 		emit scriptDebug(msg);
 		qWarning() << msg;
 	}
-
+#endif
 	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(1.0);
 	scriptFileName = QString();
 	emit runningScriptIdChanged(scriptFileName);
@@ -933,6 +1047,7 @@ QString StelScriptMgr::lookup( int outputPos )
 	return msg;
 }
 
+#ifndef ENABLE_SCRIPT_QML
 StelScriptEngineAgent::StelScriptEngineAgent(QScriptEngine *engine) 
 	: QScriptEngineAgent(engine)
 	, isPaused(false)
@@ -949,4 +1064,4 @@ void StelScriptEngineAgent::positionChange(qint64 scriptId, int lineNumber, int 
 		QCoreApplication::processEvents();
 	}
 }
-
+#endif
