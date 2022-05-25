@@ -127,9 +127,7 @@ void TestConversions::testDMSStrToRad()
 		double dms = StelUtils::dmsStrToRad(DMSStr);
 
 		QVERIFY2(qAbs(dms-radians)<=ERROR_LIMIT, qPrintable(QString("%1 = %2 radians (expected %3 radians)")
-								    .arg(DMSStr)
-								    .arg(QString::number(dms, 'f', 5))
-								    .arg(QString::number(radians, 'f', 5))));
+								    .arg(DMSStr, QString::number(dms, 'f', 5), QString::number(radians, 'f', 5))));
 	}
 }
 
