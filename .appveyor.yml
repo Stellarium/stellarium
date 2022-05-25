@@ -7,6 +7,10 @@ clone_folder: c:\stellarium
 clone_depth: 5
 # Do not build feature branch with open Pull Requests
 skip_branch_with_pr: true
+# Do not build on tags
+skip_tags: true
+# Maximum number of concurrent jobs for the project
+max_jobs: 4
 # environment variables
 environment:
   matrix:
@@ -32,14 +36,14 @@ environment:
     packaging: false
     suffix: Win64
     cmake_args: -A x64
-#  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-#    platform: Win32
-#    qtver: 5.15
-#    qtbin: msvc2019
-#    msvcname: Visual Studio 17 2022
-#    packaging: false
-#    suffix: Win32
-#    cmake_args: -A Win32
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+    platform: Win32
+    qtver: 5.15
+    qtbin: msvc2019
+    msvcname: Visual Studio 17 2022
+    packaging: false
+    suffix: Win32
+    cmake_args: -A Win32
 
 before_build:
   - set PUBLISH_BINARY=false
