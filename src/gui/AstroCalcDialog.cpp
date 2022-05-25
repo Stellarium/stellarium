@@ -2232,16 +2232,13 @@ void AstroCalcDialog::generateRTS()
 			}
 
 			const double currentJD = core->getJD();   // save current JD
-#if QT_VERSION >= QT_VERSION_CHECK(5,14,0)
-			// Note: It may even be possible to configure the time zone corrections into this call.
-			double startJD = StelUtils::qDateTimeToJd(ui->rtsFromDateEdit->date().startOfDay(Qt::UTC));
-			double stopJD = StelUtils::qDateTimeToJd(ui->rtsToDateEdit->date().startOfDay(Qt::UTC));
-#else
-			double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->rtsFromDateEdit->date()));
-			double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->rtsToDateEdit->date()));
-#endif
-			startJD = startJD - core->getUTCOffset(startJD) / 24.;
-			stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
+
+			double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->rtsFromDateEdit->date(), QTime(0, 0, 1, 0), Qt::UTC));
+			double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->rtsToDateEdit->date(), QTime(23, 59, 59, 0), Qt::UTC));
+
+			if (stopJD<startJD) // Stop warming atmosphere!..
+				return;
+
 			int elements = static_cast<int>((stopJD - startJD) / currentStep);
 			double JD, az, alt;
 			float magnitude;
@@ -4754,14 +4751,10 @@ void AstroCalcDialog::calculatePhenomena()
 
 	initListPhenomena();
 
-#if QT_VERSION >= QT_VERSION_CHECK(5,14,0)
-	double startJD = StelUtils::qDateTimeToJd(ui->phenomenFromDateEdit->date().startOfDay(Qt::UTC));
-	double stopJD = StelUtils::qDateTimeToJd(ui->phenomenFromDateEdit->date().addDays(1).startOfDay(Qt::UTC));
-#else
-	double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenFromDateEdit->date()));
-	double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenToDateEdit->date().addDays(1)));
-#endif
-	if (stopJD<=startJD) // Stop warming atmosphere!..
+	double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenFromDateEdit->date(), QTime(0, 0, 1, 0), Qt::UTC));
+	double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenToDateEdit->date(), QTime(23, 59, 59, 0), Qt::UTC));
+
+	if (stopJD<startJD) // Stop warming atmosphere!..
 		return;
 
 	QVector<PlanetP> objects;
