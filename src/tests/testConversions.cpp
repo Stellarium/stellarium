@@ -135,10 +135,10 @@ void TestConversions::testRadToHMS()
 {
 	QVariantList data;
 
-	data << 0. << 0 << 0 << 0.;
-	data << M_PI/36 << 0 << 19 << 59.9;
-	data << 7*M_PI/8 << 10 << 30 << 0.;
-	data << 2*M_PI/5 << 4 << 48 << 0.;
+	data <<         0.  <<  0 <<  0 <<  0.;
+	data <<    M_PI/36. <<  0 << 19 << 59.9;
+	data << 7.*M_PI/8.  << 10 << 30 <<  0.;
+	data << 2.*M_PI/5.  <<  4 << 48 <<  0.;
 
 	while (data.count()>=4)
 	{
@@ -152,7 +152,7 @@ void TestConversions::testRadToHMS()
 		t1 = s+m*60+h*3600;
 		StelUtils::radToHms(rad, ho, mo, so);
 		t2 = so+mo*60+ho*3600;
-		QVERIFY2(qAbs(t1-t2)<=0.1, qPrintable(QString("%1rad=%2h%3m%4s").arg(rad).arg(ho).arg(mo).arg(so)));
+		QVERIFY2(qAbs(t1-t2)<=0.1, qPrintable(QString("%1rad=%2h%3m%4s").arg(rad).arg(ho).arg(mo).arg(QString::number(so, 'f', 1))));
 	}
 }
 
