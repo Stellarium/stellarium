@@ -13,14 +13,14 @@ core.clear("natural");
 core.wait(1);
 
 LandscapeMgr.setCurrentLandscapeName("Guereins",1);
-LandscapeMgr.setFlagCardinalsPoints(true);
+LandscapeMgr.setFlagCardinalPoints(true);
 
 var TitleNow = tr("Messier Marathon");
 var MyLocation = core.getObserverLocationInfo();
 
 core.setTimezone("LMST");
 
-LandscapeMgr.setFlagCardinalsPoints(true);
+LandscapeMgr.setFlagCardinalPoints(true);
 
 LabelMgr.labelScreen(TitleNow,200,200,true,30,"#ff0000");
 core.wait(3);

@@ -73,7 +73,7 @@ function saveState(stateName)
 //	savedStates[stateName]["NebulaMgrFlagDisplayNoTexture"] = NebulaMgr.getFlagDisplayNoTexture();
 	savedStates[stateName]["NebulaMgrLabelsAmount"] = NebulaMgr.getLabelsAmount();
 	savedStates[stateName]["NebulaMgrHintsAmount"] = NebulaMgr.getHintsAmount();
-	savedStates[stateName]["LandscapeMgrFlagCardinalsPoints"] = LandscapeMgr.getFlagCardinalsPoints();
+	savedStates[stateName]["LandscapeMgrFlagCardinalPoints"] = LandscapeMgr.getFlagCardinalPoints();
 	savedStates[stateName]["LandscapeMgrFlagLandscape"] = LandscapeMgr.getFlagLandscape();
 	savedStates[stateName]["LandscapeMgrFlagAtmosphere"] = LandscapeMgr.getFlagAtmosphere();
 	savedStates[stateName]["LandscapeMgrFlagFog"] = LandscapeMgr.getFlagFog();
@@ -175,7 +175,7 @@ function restoreState(stateName, options)
 //	NebulaMgr.setFlagDisplayNoTexture(savedStates[stateName]["NebulaMgrFlagDisplayNoTexture"]);
 	NebulaMgr.setLabelsAmount(savedStates[stateName]["NebulaMgrLabelsAmount"]);
 	NebulaMgr.setHintsAmount(savedStates[stateName]["NebulaMgrHintsAmount"]);
-	LandscapeMgr.setFlagCardinalsPoints(savedStates[stateName]["LandscapeMgrFlagCardinalsPoints"]);
+	LandscapeMgr.setFlagCardinalPoints(savedStates[stateName]["LandscapeMgrFlagCardinalPoints"]);
 	LandscapeMgr.setFlagLandscape(savedStates[stateName]["LandscapeMgrFlagLandscape"]);
 	LandscapeMgr.setFlagAtmosphere(savedStates[stateName]["LandscapeMgrFlagAtmosphere"]);
 	LandscapeMgr.setFlagFog(savedStates[stateName]["LandscapeMgrFlagFog"]);
