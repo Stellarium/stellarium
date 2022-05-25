@@ -140,7 +140,7 @@ void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
 
 	h = static_cast<unsigned int>(angle);
 	m = static_cast<unsigned int>((angle-h)*60);
-	s = (angle-h)*3600.-60.*m;	
+	s = qAbs((angle-h)*3600.-60.*m);
 }
 
 /*************************************************************************
