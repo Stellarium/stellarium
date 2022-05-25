@@ -5934,7 +5934,7 @@ void AstroCalcDialog::calculatePhenomena()
 
 #if QT_VERSION >= QT_VERSION_CHECK(5,14,0)
 	double startJD = StelUtils::qDateTimeToJd(ui->phenomenFromDateEdit->date().startOfDay(Qt::UTC));
-	double stopJD = StelUtils::qDateTimeToJd(ui->phenomenToDateEdit->date().addDays(1).startOfDay(Qt::UTC));
+	double stopJD = StelUtils::qDateTimeToJd(ui->phenomenToDateEdit->date().endOfDay(Qt::UTC));
 #else
 	double startJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenFromDateEdit->date()));
 	double stopJD = StelUtils::qDateTimeToJd(QDateTime(ui->phenomenToDateEdit->date().addDays(1)));
