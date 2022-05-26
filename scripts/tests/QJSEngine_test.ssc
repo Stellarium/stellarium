@@ -1,0 +1,28 @@
+//
+// Name: QJSEngine test
+// License: GPL v2 or later
+// Version: 1.0
+// Author: Georg Zotti
+// Description: Test critical functions during Qt6 upgrades
+
+// Make sure infomaps are still available
+core.output(core.mapToString(core.getObjectInfo("Jupiter")));
+
+// Read a Vec3d
+core.output(StelMovementMgr.getViewDirectionJ2000());
+
+// Attempt to set and re-read a Vec3d. 
+// It seems setting does some bogus.
+// With the attempted String->Vec converter in StelCore this fails with an error message.
+StelMovementMgr.setViewDirectionJ2000([0.730694, 0.129957, 0.670222]);
+core.output(StelMovementMgr.getViewDirectionJ2000());
+
+// Try with an explicit QVector3D in the core object
+core.setViewDirection([0.730694, 0.129957, 0.670222]);
+// This output is suboptimal...
+core.output(core.getViewDirection());
+
+
+// Reset view direction to allow continuous operation
+StelMovementMgr.lookNorth(true);
+core.output(StelMovementMgr.getViewDirectionJ2000());
