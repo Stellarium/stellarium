@@ -4694,7 +4694,9 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 	if (loc.name.contains("->")) // a spaceship
 		return Vec4d(0., 0., 0., -1000.);
 
-	const double currentJD = core->getJD();
+	// Keep time in sync (method from line 592) to fix slow down of time when the moon is selected
+	const double currentJD = core->getJDOfLastJDUpdate();
+	const qint64 millis = core->getMilliSecondsOfLastJDUpdate();
 	const double currentJDE = core->getJDE();
 	double mr, ms, mt, flag=0.;
 
@@ -4758,7 +4760,7 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 			core1->setJD(currentJD+mt);
 			core1->update(0);
 			Theta2=obsPlanet->getSiderealTime(currentJD+mt, currentJDE+mt) * (M_PI/180.) + L;  // [radians]
-			StelUtils::rectToSphe(&ra, &de, ssystem->getMoon()->getEquinoxEquatorialPos(core));
+			StelUtils::rectToSphe(&ra, &de, ssystem->getMoon()->getEquinoxEquatorialPos(core1));
 			cosH0=(sin(ho)-sin(phi)*sin(de))/(cos(phi)*cos(de));
 			h2=StelUtils::fmodpos(Theta2-ra, 2.*M_PI); if (h2>M_PI) h2-=2.*M_PI; // Hour angle at currentJD. This should be [-pi, pi]
 			mt += -h2*(0.5*rotRate/M_PI);
@@ -4799,13 +4801,13 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 		{
 			core1->setJD(currentJD+ms);
 			core1->update(0);
-			ho = - getAngularRadius(core) * M_PI_180; // semidiameter;
+			ho = - getAngularRadius(core1) * M_PI_180; // semidiameter;
 			if (core1->getSkyDrawer()->getFlagHasAtmosphere())
 			ho += hoRefraction;
 			if (altitude != 0.)
 				ho = altitude*M_PI_180; // Not sure if we use refraction for off-zero settings?
 			Theta2=obsPlanet->getSiderealTime(currentJD+ms, currentJDE+ms) * (M_PI/180.) + L;  // [radians]
-			StelUtils::rectToSphe(&ra, &de, ssystem->getMoon()->getEquinoxEquatorialPos(core));
+			StelUtils::rectToSphe(&ra, &de, ssystem->getMoon()->getEquinoxEquatorialPos(core1));
 			cosH0=(sin(ho)-sin(phi)*sin(de))/(cos(phi)*cos(de));
 			h2=StelUtils::fmodpos(Theta2-ra, 2.*M_PI); if (h2>M_PI) h2-=2.*M_PI; // Hour angle at currentJD. This should be [-pi, pi]
 			flag=0.;
@@ -4825,6 +4827,7 @@ Vec4d Planet::getRTSTime(const StelCore *core, const double altitude) const
 			ms += ms2;
 		}
 		core1->setJD(currentJD);
+		core1->setMilliSecondsOfLastJDUpdate(millis); // restore millis.
 		core1->update(0); // enforce update
 	}
 	else
