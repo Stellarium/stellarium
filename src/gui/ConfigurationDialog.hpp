@@ -187,6 +187,8 @@ private:
 	ConfigureScreenshotsDialog * configureScreenshotsDialog;
 
 	int savedProjectionType;
+
+	void populateTooltips();
 	
 	//! Set the displayed fields checkboxes from the current displayed fields.
 	void updateSelectedInfoCheckBoxes();

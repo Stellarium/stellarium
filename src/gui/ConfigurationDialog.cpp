@@ -135,6 +135,8 @@ void ConfigurationDialog::retranslate()
 		populateDateFormatsList();
 		populateTimeFormatsList();
 
+		populateTooltips();
+
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
 		updateTabBarListWidgetWidth();
@@ -421,6 +423,7 @@ void ConfigurationDialog::createDialogContent()
 	populatePluginsList();
 
 	updateConfigLabels();
+	populateTooltips();
 	updateTabBarListWidgetWidth();
 }
 
@@ -1799,6 +1802,12 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxSiderealTime->setChecked(flags & StelObject::SiderealTime);
 	ui->checkBoxRTSTime->setChecked(flags & StelObject::RTSTime);
 	ui->checkBoxSolarLunarPosition->setChecked(flags & StelObject::SolarLunarPosition);
+}
+
+void ConfigurationDialog::populateTooltips()
+{
+	ui->checkBoxProperMotion->setToolTip(QString("<p>%1</p>").arg(q_("Annual proper motion (stars) or hourly motion (solar system objects)")));
+	ui->checkBoxRTSTime->setToolTip(QString("<p>%1</p>").arg(q_("Show time of rising, transit and setting of celestial object. The rising and setting events are defined with the upper limb of the celestial body.")));
 }
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()
