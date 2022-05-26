@@ -263,8 +263,8 @@ signals:
 	void scriptOutput(const QString&);
 
 private:
-	// Utility functions for preprocessor
-	QMap<QString, QString> mappify(const QStringList& args, bool lowerKey=false);
+	// Utility functions for preprocessor. DEAD CODE!
+	//QMap<QString, QString> mappify(const QStringList& args, bool lowerKey=false);
 	bool strToBool(const QString& str);
 	// The recursive preprocessing workhorse.
 	void expand(const QString fileName, const QString &input, QString &output, const QString &scriptDir, int &errLoc);

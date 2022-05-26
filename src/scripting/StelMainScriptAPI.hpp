@@ -23,6 +23,7 @@
 #include <QObject>
 #include <QVariant>
 #include <QStringList>
+#include <QVector3D>
 #include "StelObject.hpp"
 #include "StelCore.hpp"
 
@@ -46,6 +47,11 @@ public:
 
 // These functions will be available in scripts
 public slots:
+
+	//! Test how a QVector3D behaves: Forward these to StelMovementMgr.
+	static QVector3D getViewDirection();
+	static void setViewDirection(QVector3D dir);
+
 	//! Set the current date as Julian Day number
 	//! @param JD the Julian Day number
 	static void setJDay(double JD);
