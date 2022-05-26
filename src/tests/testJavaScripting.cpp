@@ -32,12 +32,13 @@ QTEST_GUILESS_MAIN(TestJavaScripting)
 #ifdef ENABLE_SCRIPT_QML
 QString TestJavaScripting::runScript(QJSEngine *engine, QString script )
 {
-//	std::cout << "Script:" << std::endl << script.toStdString() << std::endl;
+	std::cout << "Script:" << std::endl << script.toStdString() << std::endl;
 	QJSValue result = engine->evaluate(script);
 	if (result.isError()) {
 //		int line = engine->uncaughtExceptionLineNumber();
 //		std::cout << "uncaught exception at line" << line << ": " <<
 //			result.toString().toStdString() << std::endl;
+		qDebug() << result.toString();
 		return "error";
 	}
 	return result.toString();
@@ -102,7 +103,7 @@ void TestJavaScripting::testVec3fConstructor()
 		QString script = data.takeFirst().toString();
 		QString expect = data.takeFirst().toString();
 		QString result = TestJavaScripting::runScript(engine, script);
-		QVERIFY2( result == expect, qPrintable(QString("%1=%2").arg(script).arg(result)) );
+		QVERIFY2( result == expect, qPrintable(QString("%1=%2").arg(script, result)) );
 	}
 }
 
@@ -122,7 +123,7 @@ void TestJavaScripting::testVec3fConstructorFail()
 		QString script = data.takeFirst().toString();
 		QString expect = data.takeFirst().toString();
 		QString result = TestJavaScripting::runScript(engine, script);
-		QVERIFY2( result == expect, qPrintable(QString("%1=%2").arg(script).arg(result)) );
+		QVERIFY2( result == expect, qPrintable(QString("%1=%2").arg(script, result)) );
 	}
 }
 
@@ -155,6 +156,6 @@ void TestJavaScripting::testVec3dConstructor()
 		QString script = data.takeFirst().toString();
 		QString expect = data.takeFirst().toString();
 		QString result = TestJavaScripting::runScript(engine, script);
-		QVERIFY2( result == expect, qPrintable(QString("%1=%2").arg(script).arg(result)) );
+		QVERIFY2( result == expect, qPrintable(QString("%1=%2").arg(script, result)) );
 	}
 }

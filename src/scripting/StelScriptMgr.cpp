@@ -56,6 +56,139 @@
 
 #ifdef ENABLE_SCRIPT_QML
 #include <QJSEngine>
+// 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f
+
+/***
+The C++ type Vec3f is an array of three floats, used for representing
+colors according to the terms of the RGB color model. It is mapped to
+a JavaScript class with a constructor Vec3f, properties 'r', 'g' and 'b',
+and methods toString and toHex. The latter returns a string according to
+the pattern '#hhhhhh' (six hexadecimal digits). A second constructor,
+Color, is provided as a convenience. Both constructors may be called without
+argument to return  'white', a single argument which is either a color name
+or a '#hhhhhh' string, or three arguments, specifying the RGB values,
+floating point numbers between 0 and 1. Color names correspond to the names
+defined in https://www.w3.org/TR/SVG11/types.htm.
+***/
+
+/*
+// GZ These seem not to be portable to QJSEngine use
+// GZ Maybe we don't even need to port these functions given QVariant uses. Let's try.
+
+QJSValue vec3fToString(QScriptContext* context, QJSEngine *engine)
+{
+	Q_UNUSED(engine)
+	QJSValue that = context->thisObject();
+	QJSValue rVal = that.property( "r", QScriptValue::ResolveLocal );
+	QJSValue gVal = that.property( "g", QScriptValue::ResolveLocal );
+	QJSValue bVal = that.property( "b", QScriptValue::ResolveLocal );
+	return "[r:" + rVal.toString() + ", " + "g:" + gVal.toString() + ", " +
+	    "b:" + bVal.toString() + "]";
+}
+
+QJSValue vec3fToHex(QJSContext* context, QJSEngine *engine)
+{
+	Q_UNUSED(engine)
+	QJSValue that = context->thisObject();
+	QJSValue rVal = that.property( "r", QScriptValue::ResolveLocal );
+	QJSValue gVal = that.property( "g", QScriptValue::ResolveLocal );
+	QJSValue bVal = that.property( "b", QScriptValue::ResolveLocal );
+	return QString("#%1%2%3")
+		.arg(qMin(255, int(rVal.toNumber() * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(gVal.toNumber() * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(bVal.toNumber() * 255)), 2, 16, QChar('0'));
+}
+
+void vec3fFromScriptValue(const QJSValue& obj, Vec3f& c)
+{
+	c[0] = static_cast<float>(obj.property("r").toNumber());
+	c[1] = static_cast<float>(obj.property("g").toNumber());
+	c[2] = static_cast<float>(obj.property("b").toNumber());
+}
+
+QJSValue vec3fToScriptValue(QJSEngine *engine, const Vec3f& c)
+{
+	QJSValue obj = engine->newObject();
+	obj.setProperty("r", QJSValue(static_cast<qreal>(c[0])));
+	obj.setProperty("g", QJSValue(static_cast<qreal>(c[1])));
+	obj.setProperty("b", QJSValue(static_cast<qreal>(c[2])));
+	obj.setProperty("toString", engine->newFunction( vec3fToString ));
+	obj.setProperty("toHex",    engine->newFunction( vec3fToHex ));
+	return obj;
+}
+
+// Constructor Vec3f
+// Three arguments are r, g, b. One argument is "#hhhhhh", or, perhaps, a color name.
+QJSValue createVec3f(QJSContext* context, QJSEngine *engine)
+{
+	Vec3f c;
+	switch( context->argumentCount() )
+	{
+		case 0:
+			// no color: black or white? Let's say: white, against a black sky.
+			c.set( 1, 1, 1 );
+			break;
+		case 1:
+			// either '#hhhhhh' or a color name - let QColor do the work
+			if( context->argument(0).isString() )
+			{
+				QColor qcol = QColor( context->argument(0).toString() );
+				if( qcol.isValid() )
+				{
+					c.set( static_cast<float>(qcol.redF()), static_cast<float>(qcol.greenF()), static_cast<float>(qcol.blueF()) );
+					break;
+				}
+				else
+					context->throwError( QString("Color: invalid color name") );
+			}
+			else
+			{
+				// Let's hope: a Color/Vec3f object
+				return context->argument(0);
+			}
+			break;
+		case 3:
+			// r, g, b: between 0 and 1.
+			if( context->argument(0).isNumber() &&
+			    context->argument(1).isNumber() &&
+			    context->argument(2).isNumber() )
+			{
+				c[0] = static_cast<float>(context->argument(0).toNumber());
+				c[1] = static_cast<float>(context->argument(1).toNumber());
+				c[2] = static_cast<float>(context->argument(2).toNumber());
+				if( c[0] < 0 || 1 < c[0] ||
+				    c[1] < 0 || 1 < c[1] ||
+				    c[2] < 0 || 1 < c[2] )
+				{
+					context->throwError( QString("Color: RGB value out of range [0,1]") );
+				}
+			}
+			break;
+		default:
+			context->throwError( QString("Color: invalid number of arguments") );
+	}
+	return vec3fToScriptValue(engine, c);
+}
+
+QJSValue createColor(QScriptContext* context, QScriptEngine *engine)
+{
+	return engine->globalObject().property("Vec3f").construct(context->argumentsObject());
+}
+
+void StelScriptMgr::defVecClasses(QJSEngine *engine)
+{
+	// Allow Vec3f management in scripts
+	qRegisterMetaType(engine, vec3fToScriptValue, vec3fFromScriptValue);
+	QJSValue ctorVec3f = engine->newFunction(createVec3f);
+	engine->globalObject().setProperty("Vec3f", ctorVec3f);
+	engine->globalObject().setProperty("Color", engine->newFunction(createColor));
+
+	// Allow Vec3d management in scripts
+	qScriptRegisterMetaType(engine, vec3dToScriptValue, vec3dFromScriptValue);
+	QScriptValue ctorVec3d = engine->newFunction(createVec3d);
+	engine->globalObject().setProperty("Vec3d", ctorVec3d);
+}
+*/
 #else
 #include <QtScript>
 // TODO: Allow Vec3* in the QML script branch
@@ -344,10 +477,10 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	scriptImages->init();
 	StelApp::getInstance().getModuleMgr().registerModule(scriptImages);
 
-	//defVecClasses(engine); // FIXME
+	//defVecClasses(engine); // FIXME -- HELPME!
 
 	// This is enough for a simple Array access for a QVector<int> input or return type (e.g. Calendars plugin)
-	//qScriptRegisterSequenceMetaType<QVector<int>>(engine);
+	//qScriptRegisterSequenceMetaType<QVector<int>>(engine); // FIXME
 
 	// Add the core object to access methods related to core
 	mainAPI = new StelMainScriptAPI(this);
@@ -863,13 +996,18 @@ void StelScriptMgr::scriptEnded()
 #ifdef ENABLE_SCRIPT_QML
 	if (result.isError())
 	{
-		//int outputPos = engine->uncaughtExceptionLineNumber();
-		//QString realPos = lookup( outputPos );
-		//QString msg = QString("script error: \"%1\" @ line %2").arg(engine->uncaughtException().toString(), realPos);
-		// FIXME: Better error message?
-		QString msg = QString("script error: \"%1\" : %2").arg(result.errorType()).arg(result.toString());
+		static const QMap<QJSValue::ErrorType, QString>errorMap={
+			{QJSValue::GenericError, "Generic"},
+			{QJSValue::RangeError, "Range"},
+			{QJSValue::ReferenceError, "Reference"},
+			{QJSValue::SyntaxError, "Syntax"},
+			{QJSValue::TypeError, "Type"},
+			{QJSValue::URIError, "URI"}};
+		QString msg = QString("script error Type '%1'  @ line %2: %3").arg(errorMap.value(result.errorType()), result.property("lineNumber").toString(), result.toString());
 		emit scriptDebug(msg);
 		qWarning() << msg;
+		qWarning() << "Error name:" << result.property("name").toString() << "message" << result.property("message").toString()
+			   << "fileName" << result.property("fileName").toString() << "lineNumber" << result.property("lineNumber").toString() << "stack" << result.property("stack").toString();
 	}
 	mutex.unlock();
 #else
@@ -888,16 +1026,16 @@ void StelScriptMgr::scriptEnded()
 	emit scriptStopped();
 }
 
-QMap<QString, QString> StelScriptMgr::mappify(const QStringList& args, bool lowerKey)
-{
-	QMap<QString, QString> map;
-	for(int i=0; i+1<args.size(); i++)
-		if (lowerKey)
-			map[args.at(i).toLower()] = args.at(i+1);
-		else
-			map[args.at(i)] = args.at(i+1);
-	return map;
-}
+//QMap<QString, QString> StelScriptMgr::mappify(const QStringList& args, bool lowerKey)
+//{
+//	QMap<QString, QString> map;
+//	for(int i=0; i+1<args.size(); i++)
+//		if (lowerKey)
+//			map[args.at(i).toLower()] = args.at(i+1);
+//		else
+//			map[args.at(i)] = args.at(i+1);
+//	return map;
+//}
 
 bool StelScriptMgr::strToBool(const QString& str)
 {

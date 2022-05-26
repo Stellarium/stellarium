@@ -110,6 +110,17 @@ StelMainScriptAPI::~StelMainScriptAPI()
 {
 }
 
+//! Test how a QVector3D behaves: Forward these to StelMovementMgr.
+QVector3D StelMainScriptAPI::getViewDirection()
+{
+	return GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000().toQVector3D();
+}
+void StelMainScriptAPI::setViewDirection(QVector3D dir)
+{
+	GETSTELMODULE(StelMovementMgr)->setViewDirectionJ2000(Vec3d::fromQVector3D(dir));
+}
+
+
 //! Set the current date in Julian Day
 //! @param JD the Julian Date (UT)
 void StelMainScriptAPI::setJDay(double JD)
@@ -860,6 +871,7 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 void StelMainScriptAPI::wait(double t)
 {
 	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
+	QCoreApplication::processEvents();
 	QEventLoop* loop = scriptMgr->getWaitEventLoop();
 	QTimer::singleShot(qRound(1000*t), loop, SLOT(quit()));
 	if( loop->exec() != 0 )

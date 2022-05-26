@@ -31,6 +31,7 @@
 #include <QString>
 #include <QMatrix4x4>
 #include <QColor>
+#include <QRegularExpression>
 
 template<class T> class Vector2;
 template<class T> class Vector3;
@@ -159,6 +160,8 @@ public:
 
 	//! Formatted string with brackets
 	inline QString toString() const {return QString("[%1, %2]").arg(v[0]).arg(v[1]);}
+	//! converters to be registered in StelCore
+	static Vector2<T>fromBracketedString(QString s);
 	//! Compact comma-separated string without brackets and spaces.
 	//! The result can be restored into a Vector2 by the Vector2(QString s) constructors.
 	QString toStr() const;
@@ -253,6 +256,10 @@ public:
 
 	//! Formatted string with brackets
 	inline QString toString() const {return QString("[%1, %2, %3]").arg(v[0]).arg(v[1]).arg(v[2]);}
+	//! converters to be registered in StelCore (may not work!)
+	static Vector3<T>fromBracketedString(QString s);
+	//! convert from a QVector3D
+	static Vector3<T>fromQVector3D(QVector3D v);
 	//! Compact comma-separated string without brackets and spaces.
 	//! The result can be restored into a Vector2 by the Vector3(QString s) constructors.
 	QString toStr() const;
@@ -335,6 +342,8 @@ public:
 
 	//! Formatted string with brackets
 	inline QString toString() const {return QString("[%1, %2, %3, %4]").arg(v[0]).arg(v[1]).arg(v[2]).arg(v[3]);}
+	//! converters to be registered in StelCore
+	static Vector4<T>fromBracketedString(QString s);
 	//! Compact comma-separated string without brackets and spaces.
 	//! The result can be restored into a Vector4 by the Vector4(QString s) constructors.
 	QString toStr() const;
