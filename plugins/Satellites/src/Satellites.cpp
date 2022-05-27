@@ -650,6 +650,8 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("orbit_segment_duration", 20);
 	conf->setValue("valid_epoch_age", 30);
 	conf->setValue("iconic_mode_enabled", false);
+	conf->setValue("hide_invisible_satellites", false);
+	conf->setValue("colored_invisible_satellites", true);
 	conf->setValue("umbra_flag", false);
 	conf->setValue("umbra_fixed_distance_flag", false);
 	conf->setValue("umbra_color", "1.0,0.0,0.0");
@@ -844,6 +846,7 @@ void Satellites::loadSettings()
 	// iconic mode
 	setFlagIconicMode(conf->value("iconic_mode_enabled", false).toBool());
 	setFlagHideInvisible(conf->value("hide_invisible_satellites", false).toBool());
+	setFlagColoredInvisible(conf->value("colored_invisible_satellites", true).toBool());
 
 	// custom filter
 	setFlagCFKnownStdMagnitude(conf->value("cf_magnitude_flag", false).toBool());
@@ -907,6 +910,7 @@ void Satellites::saveSettingsToConfig()
 	// iconic mode
 	conf->setValue("iconic_mode_enabled", getFlagIconicMode());
 	conf->setValue("hide_invisible_satellites", getFlagHideInvisible());
+	conf->setValue("colored_invisible_satellites", getFlagColoredInvisible());
 
 	// custom filter
 	conf->setValue("cf_magnitude_flag", getFlagCFKnownStdMagnitude());
@@ -1534,11 +1538,6 @@ bool Satellites::getFlagIconicMode()
 	return Satellite::iconicModeFlag;
 }
 
-bool Satellites::getFlagHideInvisible()
-{
-	return Satellite::hideInvisibleSatellitesFlag;
-}
-
 void Satellites::setFlagIconicMode(bool b)
 {
 	if (Satellite::iconicModeFlag != b)
@@ -1549,6 +1548,11 @@ void Satellites::setFlagIconicMode(bool b)
 	}
 }
 
+bool Satellites::getFlagHideInvisible()
+{
+	return Satellite::hideInvisibleSatellitesFlag;
+}
+
 void Satellites::setFlagHideInvisible(bool b)
 {
 	if (Satellite::hideInvisibleSatellitesFlag != b)
@@ -1556,6 +1560,21 @@ void Satellites::setFlagHideInvisible(bool b)
 		Satellite::hideInvisibleSatellitesFlag = b;
 		emit settingsChanged();
 		emit flagHideInvisibleChanged(b);
+	}
+}
+
+bool Satellites::getFlagColoredInvisible()
+{
+	return Satellite::coloredInvisibleSatellitesFlag;
+}
+
+void Satellites::setFlagColoredInvisible(bool b)
+{
+	if (Satellite::coloredInvisibleSatellitesFlag != b)
+	{
+		Satellite::coloredInvisibleSatellitesFlag = b;
+		emit settingsChanged();
+		emit flagColoredInvisibleChanged(b);
 	}
 }
 

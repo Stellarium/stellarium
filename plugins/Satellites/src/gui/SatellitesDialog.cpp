@@ -197,7 +197,8 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->umbraCheckBox, SIGNAL(clicked(bool)), this, SLOT(handleUmbraGroup(bool)));
 	handleUmbraGroup(ui->umbraCheckBox->isChecked());
 	// Logic sub-group: Markers
-	connectBoolProperty(ui->iconicCheckBox,     "Satellites.flagIconicMode");
+	connectBoolProperty(ui->iconicCheckBox,		"Satellites.flagIconicMode");
+	connectBoolProperty(ui->coloredInvisibleSatellites, "Satellites.flagColoredInvisible");
 	connectBoolProperty(ui->hideInvisibleSatellites, "Satellites.flagHideInvisible");
 	connect(ui->iconicCheckBox, SIGNAL(clicked(bool)), ui->hideInvisibleSatellites, SLOT(setEnabled(bool)));
 	ui->hideInvisibleSatellites->setEnabled(ui->iconicCheckBox->isChecked());

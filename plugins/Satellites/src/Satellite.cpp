@@ -60,6 +60,7 @@ int Satellite::orbitLineSegmentDuration = 20;
 bool Satellite::orbitLinesFlag = true;
 bool Satellite::iconicModeFlag = false;
 bool Satellite::hideInvisibleSatellitesFlag = false;
+bool Satellite::coloredInvisibleSatellitesFlag = true;
 Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2f,0.2f,0.2f);
 Vec3f Satellite::transitSatelliteColor = Vec3f(0.f,0.f,0.f);
 double Satellite::timeRateLimit = 1.0; // one JD per second by default
@@ -1000,7 +1001,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 		}
 		else if (!(hideInvisibleSatellitesFlag && visibility != gSatWrapper::VISIBLE))
 		{
-			Vec3f drawColor = (visibility == gSatWrapper::VISIBLE) ? hintColor : invisibleSatelliteColor; // Use hintColor for visible satellites only
+			Vec3f drawColor = (coloredInvisibleSatellitesFlag && visibility != gSatWrapper::VISIBLE) ? invisibleSatelliteColor : hintColor; // Use hintColor for visible satellites only when coloredInvisibleSatellitesFlag is true
 			painter.setColor(drawColor*hintBrightness, hintBrightness);
 			if (XYZ.angle(moon->getJ2000EquatorialPos(core))*M_180_PI <= moon->getSpheroidAngularRadius(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*M_180_PI <= sun->getSpheroidAngularRadius(core))
 				painter.setColor(transitSatelliteColor, 1.f);

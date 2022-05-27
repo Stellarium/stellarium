@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>734</width>
+    <width>797</width>
     <height>536</height>
    </rect>
   </property>
@@ -499,71 +499,6 @@
             </item>
            </layout>
           </item>
-          <item row="2" column="2">
-           <layout class="QHBoxLayout" name="horizontalLayout_14">
-            <item>
-             <widget class="QCheckBox" name="penumbraCheckBox">
-              <property name="text">
-               <string>Show Earth's penumbra</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_9">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QToolButton" name="penumbraColor">
-              <property name="toolTip">
-               <string>The color of Earth's penumbra circle</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="1" column="2">
-           <layout class="QHBoxLayout" name="horizontalLayout_18">
-            <item>
-             <widget class="QCheckBox" name="hideInvisibleSatellites">
-              <property name="text">
-               <string>Hide invisible artificial satellites</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_5">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QToolButton" name="invisibleColorButton">
-              <property name="toolTip">
-               <string>Color of markers, labels and orbits for invisible satellites</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
           <item row="0" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_13">
             <item>
@@ -680,6 +615,81 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item row="3" column="2">
+           <layout class="QHBoxLayout" name="horizontalLayout_14">
+            <item>
+             <widget class="QCheckBox" name="penumbraCheckBox">
+              <property name="text">
+               <string>Show Earth's penumbra</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_9">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QToolButton" name="penumbraColor">
+              <property name="toolTip">
+               <string>The color of Earth's penumbra circle</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="2">
+           <layout class="QHBoxLayout" name="horizontalLayout_18">
+            <item>
+             <widget class="QCheckBox" name="coloredInvisibleSatellites">
+              <property name="toolTip">
+               <string>Use special color for all invisible satellites</string>
+              </property>
+              <property name="text">
+               <string>Set color for invisible satellites</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QToolButton" name="invisibleColorButton">
+              <property name="toolTip">
+               <string>Color of markers, labels and orbits for invisible satellites</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="2">
+           <widget class="QCheckBox" name="hideInvisibleSatellites">
+            <property name="text">
+             <string>Hide invisible artificial satellites</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

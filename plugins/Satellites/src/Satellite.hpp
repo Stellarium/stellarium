@@ -117,11 +117,11 @@ public:
 	//! @enum OptStatus operational statuses
 	enum OptStatus
 	{
-		StatusOperational			= 1,
+		StatusOperational		= 1,
 		StatusNonoperational		= 2,
 		StatusPartiallyOperational	= 3,
 		StatusStandby			= 4,
-		StatusSpare				= 5,
+		StatusSpare			= 5,
 		StatusExtendedMission		= 6,
 		StatusDecayed			= 7,
 		StatusUnknown			= 0
@@ -315,6 +315,7 @@ private:
 	static bool  orbitLinesFlag;
 	static bool  iconicModeFlag;
 	static bool  hideInvisibleSatellitesFlag;
+	static bool  coloredInvisibleSatellitesFlag;
 	//! Mask controlling which info display flags should be honoured.
 	static StelObject::InfoStringGroupFlags flagsMask;
 	static Vec3f invisibleSatelliteColor;
