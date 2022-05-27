@@ -260,9 +260,10 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 				description.append(QString(" %1").arg(options.value(details.at(1), "")));
 			else
 				description = q_("This sky culture is distributed as public domain.");
-			if (!currentSkyCulture.credit.isEmpty())
-				description.append(QString(" %1 %2").arg(q_("Please credit the"), currentSkyCulture.credit));
 		}
+
+		if (!currentSkyCulture.credit.isEmpty())
+			description.append(QString(" %1 %2.").arg(q_("Please credit:"), currentSkyCulture.credit));
 
 		if (license.contains("FAL", Qt::CaseSensitive) || license.contains("Free Art License", Qt::CaseSensitive))
 			description.append(QString(" %1").arg(q_("Illustrations are provided under Free Art License that grants the right to freely copy, distribute, and transform.")));
