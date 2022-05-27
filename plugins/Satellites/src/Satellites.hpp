@@ -179,6 +179,9 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(bool flagCFPerigee			READ getFlagCFPerigee			WRITE setFlagCFPerigee			NOTIFY flagCFPerigeeChanged)
 	Q_PROPERTY(double minCFPerigee			READ getMinCFPerigee			WRITE setMinCFPerigee			NOTIFY minCFPerigeeChanged)
 	Q_PROPERTY(double maxCFPerigee			READ getMaxCFPerigee			WRITE setMaxCFPerigee			NOTIFY maxCFPerigeeChanged)
+	Q_PROPERTY(bool flagCFAltitude			READ getFlagCFAltitude			WRITE setFlagCFAltitude			NOTIFY flagCFAltitudeChanged)
+	Q_PROPERTY(double minCFAltitude			READ getMinCFAltitude			WRITE setMinCFAltitude			NOTIFY minCFAltitudeChanged)
+	Q_PROPERTY(double maxCFAltitude			READ getMaxCFAltitude			WRITE setMaxCFAltitude			NOTIFY maxCFAltitudeChanged)
 	Q_PROPERTY(bool flagCFEccentricity		READ getFlagCFEccentricity		WRITE setFlagCFEccentricity		NOTIFY flagCFEccentricityChanged)
 	Q_PROPERTY(double minCFEccentricity		READ getMinCFEccentricity		WRITE setMinCFEccentricity		NOTIFY minCFEccentricityChanged)
 	Q_PROPERTY(double maxCFEccentricity		READ getMaxCFEccentricity		WRITE setMaxCFEccentricity		NOTIFY maxCFEccentricityChanged)
@@ -434,6 +437,9 @@ signals:
 	void flagCFPerigeeChanged(bool b);
 	void minCFPerigeeChanged(double v);
 	void maxCFPerigeeChanged(double v);
+	void flagCFAltitudeChanged(bool b);
+	void minCFAltitudeChanged(double v);
+	void maxCFAltitudeChanged(double v);
 	void flagCFEccentricityChanged(bool b);
 	void minCFEccentricityChanged(double v);
 	void maxCFEccentricityChanged(double v);
@@ -654,6 +660,21 @@ public slots:
 	//! Emits customFilterChanged()
 	void setMinCFPerigee(double v);
 	double getMinCFPerigee() { return Satellite::minCFPerigee; }
+
+	//! Set whether custom filter 'altitude' enabled.
+	//! Emits customFilterChanged()
+	void setFlagCFAltitude(bool b);
+	bool getFlagCFAltitude() { return Satellite::flagCFAltitude; }
+
+	//! Set whether custom filter 'altitude' maximum value (in kilometers).
+	//! Emits customFilterChanged()
+	void setMaxCFAltitude(double v);
+	double getMaxCFAltitude() { return Satellite::maxCFAltitude; }
+
+	//! Set whether custom filter 'altitude' minimum value (in kilometers).
+	//! Emits customFilterChanged()
+	void setMinCFAltitude(double v);
+	double getMinCFAltitude() { return Satellite::minCFAltitude; }
 
 	//! Set whether custom filter 'eccentricity' enabled.
 	//! Emits customFilterChanged()

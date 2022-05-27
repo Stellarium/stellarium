@@ -331,6 +331,9 @@ private:
 	static bool flagCFPerigee;
 	static double minCFPerigee;
 	static double maxCFPerigee;
+	static bool flagCFAltitude;
+	static double minCFAltitude;
+	static double maxCFAltitude;
 	static bool flagCFEccentricity;
 	static double minCFEccentricity;
 	static double maxCFEccentricity;

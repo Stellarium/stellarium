@@ -73,6 +73,9 @@ double Satellite::maxCFApogee = 55000.;
 bool Satellite::flagCFPerigee = false;
 double Satellite::minCFPerigee = 200.;
 double Satellite::maxCFPerigee = 1500.;
+bool Satellite::flagCFAltitude = false;
+double Satellite::minCFAltitude = 200.;
+double Satellite::maxCFAltitude = 1500.;
 bool Satellite::flagCFEccentricity = false;
 double Satellite::minCFEccentricity = 0.3;
 double Satellite::maxCFEccentricity = 0.9;
@@ -878,7 +881,10 @@ SatFlags Satellite::getFlags() const
 	bool cfr = true;
 	if (flagCFRCS)
 		cfr = (RCS>=minCFRCS && RCS<=maxCFRCS);
-	if (cfa && cfp && cfe && cfm && cft && cfi && cfr)
+	bool cfh = true;
+	if (flagCFAltitude)
+		cfh = ((perigee<=minCFAltitude && apogee>=minCFAltitude) || (perigee>=maxCFAltitude && apogee<=maxCFAltitude));
+	if (cfa && cfp && cfe && cfm && cft && cfi && cfr && cfh)
 		flags |= SatCustomFilter;
 
 	return flags;

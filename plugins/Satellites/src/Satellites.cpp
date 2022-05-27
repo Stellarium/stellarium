@@ -665,6 +665,9 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("cf_perigee_flag", false);
 	conf->setValue("cf_perigee_min", 200.);
 	conf->setValue("cf_perigee_max", 1500.);
+	conf->setValue("cf_altitude_flag", false);
+	conf->setValue("cf_altitude_min", 200.);
+	conf->setValue("cf_altitude_max", 1500.);
 	conf->setValue("cf_eccentricity_flag", false);
 	conf->setValue("cf_eccentricity_min", 0.3);
 	conf->setValue("cf_eccentricity_max", 0.9);
@@ -856,6 +859,9 @@ void Satellites::loadSettings()
 	setFlagCFPerigee(conf->value("cf_perigee_flag", false).toBool());
 	setMinCFPerigee(conf->value("cf_perigee_min", 200.).toDouble());
 	setMaxCFPerigee(conf->value("cf_perigee_max", 1500.).toDouble());
+	setFlagCFAltitude(conf->value("cf_altitude_flag", false).toBool());
+	setMinCFAltitude(conf->value("cf_altitude_min", 200.).toDouble());
+	setMaxCFAltitude(conf->value("cf_altitude_max", 1500.).toDouble());
 	setFlagCFEccentricity(conf->value("cf_eccentricity_flag", false).toBool());
 	setMinCFEccentricity(conf->value("cf_eccentricity_min", 0.3).toDouble());
 	setMaxCFEccentricity(conf->value("cf_eccentricity_max", 0.9).toDouble());
@@ -920,6 +926,9 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("cf_perigee_flag", getFlagCFPerigee());
 	conf->setValue("cf_perigee_min", getMinCFPerigee());
 	conf->setValue("cf_perigee_max", getMaxCFPerigee());
+	conf->setValue("cf_altitude_flag", getFlagCFAltitude());
+	conf->setValue("cf_altitude_min", getMinCFAltitude());
+	conf->setValue("cf_altitude_max", getMaxCFAltitude());
 	conf->setValue("cf_eccentricity_flag", getFlagCFEccentricity());
 	conf->setValue("cf_eccentricity_min", getMinCFEccentricity());
 	conf->setValue("cf_eccentricity_max", getMaxCFEccentricity());
@@ -1703,6 +1712,30 @@ void Satellites::setMaxCFPerigee(double v)
 	Satellite::maxCFPerigee = v;
 	emit customFilterChanged();
 	emit maxCFPerigeeChanged(v);
+}
+
+void Satellites::setFlagCFAltitude(bool b)
+{
+	if (Satellite::flagCFAltitude != b)
+	{
+		Satellite::flagCFAltitude = b;
+		emit customFilterChanged();
+		emit flagCFAltitudeChanged(b);
+	}
+}
+
+void Satellites::setMinCFAltitude(double v)
+{
+	Satellite::minCFAltitude = v;
+	emit customFilterChanged();
+	emit minCFAltitudeChanged(v);
+}
+
+void Satellites::setMaxCFAltitude(double v)
+{
+	Satellite::maxCFAltitude = v;
+	emit customFilterChanged();
+	emit maxCFAltitudeChanged(v);
 }
 
 void Satellites::setFlagCFEccentricity(bool b)

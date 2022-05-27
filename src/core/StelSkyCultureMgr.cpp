@@ -263,8 +263,10 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 		}
 
 		if (!currentSkyCulture.credit.isEmpty())
+		{
 			// TRANSLATORS: A phrase like "Please credit: XY Museum". The creditee is in a skyculture's info.ini.
 			description.append(QString(" %1 %2.").arg(q_("Please credit:"), currentSkyCulture.credit));
+		}
 
 		if (license.contains("FAL", Qt::CaseSensitive) || license.contains("Free Art License", Qt::CaseSensitive))
 			description.append(QString(" %1").arg(q_("Illustrations are provided under Free Art License that grants the right to freely copy, distribute, and transform.")));
