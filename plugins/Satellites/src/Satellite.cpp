@@ -883,7 +883,7 @@ SatFlags Satellite::getFlags() const
 		cfr = (RCS>=minCFRCS && RCS<=maxCFRCS);
 	bool cfh = true;
 	if (flagCFAltitude)
-		cfh = ((perigee<=minCFAltitude && apogee>=minCFAltitude) || (perigee>=maxCFAltitude && apogee<=maxCFAltitude));
+		cfh = ((perigee<=minCFAltitude && apogee>=maxCFAltitude) || (perigee>=minCFAltitude && apogee<=maxCFAltitude) || (perigee<=minCFAltitude && apogee>=minCFAltitude && apogee<=maxCFAltitude) || (perigee<=maxCFAltitude && perigee>=minCFAltitude && apogee>=maxCFAltitude));
 	if (cfa && cfp && cfe && cfm && cft && cfi && cfr && cfh)
 		flags |= SatCustomFilter;
 
