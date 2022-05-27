@@ -141,19 +141,20 @@ void SatellitesFilterDialog::updateMinMaxRCS(bool state)
 void SatellitesFilterDialog::populateTexts()
 {
 	QString km = qc_("km", "distance");
-	QString m = qc_("m", "time");
-	QString sm = qc_("m", "distance");
+	QString m = qc_("m", "distance");
+	QString min = qc_("m", "time");
 	ui->minApogee->setSuffix(QString(" %1").arg(km));
 	ui->maxApogee->setSuffix(QString(" %1").arg(km));
 	ui->minPerigee->setSuffix(QString(" %1").arg(km));
 	ui->maxPerigee->setSuffix(QString(" %1").arg(km));
+	ui->altitudeCheckBox->setToolTip(q_("The satellite can be located in selected range of altitudes"));
 	ui->minAltitude->setSuffix(QString(" %1").arg(km));
 	ui->maxAltitude->setSuffix(QString(" %1").arg(km));
-	ui->minPeriod->setSuffix(QString(" %1").arg(m));
-	ui->maxPeriod->setSuffix(QString(" %1").arg(m));
+	ui->minPeriod->setSuffix(QString(" %1").arg(min));
+	ui->maxPeriod->setSuffix(QString(" %1").arg(min));
 	ui->minInclination->setSuffix("°");
 	ui->maxInclination->setSuffix("°");
 	ui->rcsCheckBox->setToolTip(q_("Radar cross-section"));
-	ui->minRCS->setSuffix(QString(" %1%2").arg(sm, "²"));
-	ui->maxRCS->setSuffix(QString(" %1%2").arg(sm, "²"));
+	ui->minRCS->setSuffix(QString(" %1%2").arg(m, "²"));
+	ui->maxRCS->setSuffix(QString(" %1%2").arg(m, "²"));
 }
