@@ -40,17 +40,19 @@ other files with various extensions are text files.
 
 
 In \file{myculture\textbackslash{}info.ini}, change the entries to 
-\begin{configfile}
+\begin{configfile}[\scriptsize]
 [info]
 name=myCulture
 author=me
+credits=my institute (optional)
 boundaries=none
 classification=personal
 license=CC BY-SA 4.0 International Public License
 \end{configfile}
 
-\noindent (or what seems best for you). The name is used for the list entry in
-the Starlore tab in the View dialog (see \ref{sec:gui:view:starlore}).
+\noindent (or what seems best for you). The \texttt{name} is used for the list entry in
+the Starlore tab in the View dialog (see \ref{sec:gui:view:starlore}). \texttt{author} should be the actual author(s)' name(s). 
+The optional \texttt{credits} \newFeature{0.22.2} can be used to mention other involved parties. 
 
 \paragraph{boundaries}
 The option ``boundaries'' is optional and may contain the follow values:
