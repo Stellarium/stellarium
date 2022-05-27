@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-05-27 16:33+0700\n"
+"POT-Creation-Date: 2022-05-28 02:07+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -692,7 +692,7 @@ msgstr ""
 #: src/core/modules/LandscapeMgr.cpp:1017 src/gui/StelGuiItems.cpp:817
 #: plugins/Satellites/src/Satellite.cpp:421
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1108
-#: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:145
+#: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:144
 msgctxt "distance"
 msgid "m"
 msgstr ""
@@ -8702,141 +8702,162 @@ msgid "&Save"
 msgstr ""
 
 #: src/translations.h:667
-msgid "File &name:"
+msgid "Save"
 msgstr ""
 
 #: src/translations.h:668
-msgid "Copy &Link Location"
+msgid "Save As:"
 msgstr ""
 
 #: src/translations.h:669
-msgid "Abort"
+msgid "Tags:"
 msgstr ""
 
 #: src/translations.h:670
-msgid "Ignore"
+msgid "File &name:"
 msgstr ""
 
 #: src/translations.h:671
-msgid "&Basic colors"
+msgid "Copy &Link Location"
 msgstr ""
 
 #: src/translations.h:672
-msgid "&Pick Screen Color"
+msgid "Abort"
 msgstr ""
 
 #: src/translations.h:673
-msgid "&Custom colors"
+msgid "Ignore"
 msgstr ""
 
 #: src/translations.h:674
-msgid "&Add to Custom Colors"
+msgid "&Basic colors"
 msgstr ""
 
 #: src/translations.h:675
-msgid "Hu&e:"
+msgid "&Pick Screen Color"
 msgstr ""
 
 #: src/translations.h:676
-msgid "&Sat:"
+msgid "&Custom colors"
 msgstr ""
 
 #: src/translations.h:677
-msgid "&Val:"
+msgid "&Add to Custom Colors"
 msgstr ""
 
 #: src/translations.h:678
-msgid "&Red:"
+msgid "Hu&e:"
 msgstr ""
 
 #: src/translations.h:679
-msgid "&Green:"
+msgid "&Sat:"
 msgstr ""
 
 #: src/translations.h:680
-msgid "Bl&ue:"
+msgid "&Val:"
 msgstr ""
 
 #: src/translations.h:681
-msgid "Select Color"
+msgid "&Red:"
 msgstr ""
 
 #: src/translations.h:682
+msgid "&Green:"
+msgstr ""
+
+#: src/translations.h:683
+msgid "Bl&ue:"
+msgstr ""
+
+#: src/translations.h:684
+msgid "Select Color"
+msgstr ""
+
+#: src/translations.h:685
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr ""
 
-#: src/translations.h:683
+#: src/translations.h:686
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:243
 msgid "Back"
 msgstr ""
 
-#: src/translations.h:684
+#: src/translations.h:687
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:245
 msgid "Forward"
 msgstr ""
 
-#: src/translations.h:685
+#: src/translations.h:688
 msgid "Parent Directory"
 msgstr ""
 
-#: src/translations.h:686
+#: src/translations.h:689
 msgid "Create New Folder"
 msgstr ""
 
-#: src/translations.h:687
+#: src/translations.h:690
 msgid "List View"
 msgstr ""
 
-#: src/translations.h:688
+#: src/translations.h:691
 msgid "Detail View"
 msgstr ""
 
-#: src/translations.h:689
+#: src/translations.h:692
 msgid "Recent Places"
 msgstr ""
 
-#: src/translations.h:690
+#: src/translations.h:693
 #, qt-format
 msgid ""
 "%1 already exists.\n"
 "Do you want to replace it?"
 msgstr ""
 
-#: src/translations.h:691
+#: src/translations.h:694
 msgid "&Yes"
 msgstr ""
 
-#: src/translations.h:692
+#: src/translations.h:695
 msgid "&No"
 msgstr ""
 
-#: src/translations.h:693
+#: src/translations.h:696
 msgid "&Select All"
 msgstr ""
 
-#: src/translations.h:694
+#: src/translations.h:697
 msgid "&Step up"
 msgstr ""
 
-#: src/translations.h:695
+#: src/translations.h:698
 msgid "Step &down"
 msgstr ""
 
-#: src/translations.h:696
+#: src/translations.h:699
 msgid "&Rename"
 msgstr ""
 
-#: src/translations.h:697
+#: src/translations.h:700
 msgid "&Delete"
 msgstr ""
 
-#: src/translations.h:698
+#: src/translations.h:701
 msgid "&New Folder"
 msgstr ""
 
-#: src/translations.h:699
+#: src/translations.h:702
+msgid "New Folder"
+msgstr ""
+
+#: src/translations.h:703
 msgid "Show &hidden files"
+msgstr ""
+
+#: src/translations.h:704 plugins/MeteorShowers/src/ui_MSSearchDialog.h:180
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:182
+msgid "Search"
 msgstr ""
 
 #. TRANSLATORS: Name of region on Earth
@@ -16292,7 +16313,7 @@ msgstr ""
 
 #. TRANSLATORS: minutes.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:848
-#: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:144
+#: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:145
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:172
 #: plugins/Novae/src/gui/NovaeDialog.cpp:166
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
@@ -16537,7 +16558,11 @@ msgstr ""
 msgid "Catalog Number: %1"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:156
+#: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:150
+msgid "The satellite can be located in selected range of altitudes"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:157
 msgid "Radar cross-section"
 msgstr ""
 
@@ -16875,10 +16900,6 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:331
 msgid "Min."
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesFilterDialog.h:333
-msgid "The satellite can be located in selected range of altitudes"
 msgstr ""
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:80
@@ -23325,7 +23346,7 @@ msgid "Peak"
 msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:436
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:169
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:177
 msgid "Meteor Showers Configuration"
 msgstr ""
 
@@ -23401,20 +23422,15 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:170
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:178
 msgid "Meteor Showers: Search"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:172
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:174
-msgid "Search"
-msgstr ""
-
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:173
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:181
 msgid "Year:"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:175
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:183
 msgid "Results"
 msgstr ""
 
