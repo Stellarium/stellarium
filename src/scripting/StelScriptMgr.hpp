@@ -94,7 +94,11 @@ public:
 	void addObject(QObject *obj);
 
 	//! Define JS classes Vec3f, Vec3d
+	#ifdef ENABLE_SCRIPT_QML
+	static void defVecClasses(QJSEngine *engine);
+	#else
 	static void defVecClasses(QScriptEngine *engine);
+	#endif
 
 	//! Permit access to StelScriptMainAPI's methods
 	const QMetaObject * getMetaOfStelMainScriptAPI(){ return mainAPI->metaObject(); }
