@@ -174,9 +174,11 @@ QJSValue createColor(QScriptContext* context, QScriptEngine *engine)
 {
 	return engine->globalObject().property("Vec3f").construct(context->argumentsObject());
 }
-
+*/
 void StelScriptMgr::defVecClasses(QJSEngine *engine)
 {
+	qDebug() << "defVecClasses() not yet implemented";
+	/*
 	// Allow Vec3f management in scripts
 	qRegisterMetaType(engine, vec3fToScriptValue, vec3fFromScriptValue);
 	QJSValue ctorVec3f = engine->newFunction(createVec3f);
@@ -187,8 +189,9 @@ void StelScriptMgr::defVecClasses(QJSEngine *engine)
 	qScriptRegisterMetaType(engine, vec3dToScriptValue, vec3dFromScriptValue);
 	QScriptValue ctorVec3d = engine->newFunction(createVec3d);
 	engine->globalObject().setProperty("Vec3d", ctorVec3d);
+	*/
 }
-*/
+
 #else
 #include <QtScript>
 // TODO: Allow Vec3* in the QML script branch
@@ -470,49 +473,27 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 #ifdef ENABLE_SCRIPT_QML
 	engine = new QJSEngine(this);
 	engine->installExtensions(QJSEngine::ConsoleExtension);
-	connect(&StelApp::getInstance(), SIGNAL(aboutToQuit()), this, SLOT(stopScript()), Qt::DirectConnection);
-
-	// Scripting images
-	ScreenImageMgr* scriptImages = new ScreenImageMgr();
-	scriptImages->init();
-	StelApp::getInstance().getModuleMgr().registerModule(scriptImages);
-
-	//defVecClasses(engine); // FIXME -- HELPME!
-
-	// This is enough for a simple Array access for a QVector<int> input or return type (e.g. Calendars plugin)
-	//qScriptRegisterSequenceMetaType<QVector<int>>(engine); // FIXME
-
-	// Add the core object to access methods related to core
-	mainAPI = new StelMainScriptAPI(this);
-	QJSValue objectValue = engine->newQObject(mainAPI);
-	engine->globalObject().setProperty("core", objectValue);
-
-	// Add other classes which we want to be directly accessible from scripts
-	if(StelSkyLayerMgr* smgr = GETSTELMODULE(StelSkyLayerMgr))
-		objectValue = engine->newQObject(smgr);
-
-	// For accessing star scale, twinkle etc.
-	objectValue = engine->newQObject(StelApp::getInstance().getCore()->getSkyDrawer());
-	engine->globalObject().setProperty("StelSkyDrawer", objectValue);
-
-	setScriptRate(1.0);
-
 #else
 	engine = new QScriptEngine(this);
+	// This is enough for a simple Array access for a QVector<int> input or return type (e.g. Calendars plugin)
+	qScriptRegisterSequenceMetaType<QVector<int>>(engine); // no longer needed with QJSEngine!
+#endif
 	connect(&StelApp::getInstance(), SIGNAL(aboutToQuit()), this, SLOT(stopScript()), Qt::DirectConnection);
+
 	// Scripting images
 	ScreenImageMgr* scriptImages = new ScreenImageMgr();
 	scriptImages->init();
 	StelApp::getInstance().getModuleMgr().registerModule(scriptImages);
 
-	defVecClasses(engine);
-
-	// This is enough for a simple Array access for a QVector<int> input or return type (e.g. Calendars plugin)
-	qScriptRegisterSequenceMetaType<QVector<int>>(engine);
+	defVecClasses(engine); // FIXME -- HELPME!
 
 	// Add the core object to access methods related to core
 	mainAPI = new StelMainScriptAPI(this);
+#ifdef ENABLE_SCRIPT_QML
+	QJSValue objectValue = engine->newQObject(mainAPI);
+#else
 	QScriptValue objectValue = engine->newQObject(mainAPI);
+#endif
 	engine->globalObject().setProperty("core", objectValue);
 
 	// Add other classes which we want to be directly accessible from scripts
@@ -524,7 +505,8 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	engine->globalObject().setProperty("StelSkyDrawer", objectValue);
 
 	setScriptRate(1.0);
-	
+
+#ifndef ENABLE_SCRIPT_QML
 	engine->setProcessEventsInterval(1); // was 10, let's allow a smoother script execution
 
 	agent = new StelScriptEngineAgent(engine);
