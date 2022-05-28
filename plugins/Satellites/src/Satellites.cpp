@@ -659,7 +659,6 @@ void Satellites::restoreDefaultTleSources()
 	     << "https://www.prismnet.com/~mmccants/tles/classfd.zip";
 
 	saveTleSources(urls);
-	loadSettings();
 }
 
 void Satellites::restoreDefaultSettings()

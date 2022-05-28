@@ -1040,6 +1040,7 @@ void SatellitesDialog::restoreTleSources(void)
 	{
 		qDebug() << "[Satellites] restore TLE sources...";
 		GETSTELMODULE(Satellites)->restoreDefaultTleSources();
+		GETSTELMODULE(Satellites)->loadSettings();
 		populateSourcesList();
 	}
 	else
