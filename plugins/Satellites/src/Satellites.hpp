@@ -284,6 +284,8 @@ public:
 	//! main config.ini (if one already exists), and populating it with default values.  It also 
 	//! creates the default satellites.json file from the resource embedded in the plugin lib/dll file.
 	void restoreDefaults(void);
+	//! Delete TLE sources in main config.ini, then create with default values.
+	void restoreDefaultTleSources();
 
 	//! Read (or re-read) the plugin's settings from the configuration file.
 	//! This will be called from init() and also when restoring defaults

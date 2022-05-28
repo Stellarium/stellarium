@@ -158,6 +158,7 @@ void SatellitesDialog::createDialogContent()
 	ui->deleteSourceButton->setFixedSize(bs);
 	ui->editSourceButton->setFixedSize(bs);
 	ui->saveSourceButton->setFixedSize(bs);
+	ui->resetSourcesButton->setFixedSize(bs);
 
 	// Settings tab / updates group
 	// These controls are refreshed by updateSettingsPage(), which in
@@ -276,6 +277,7 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->addSourceButton, SIGNAL(clicked()),	        this, SLOT(addSourceRow()));
 	connect(ui->editSourceButton, SIGNAL(clicked()),	this, SLOT(editSourceRow()));
 	connect(ui->saveSourceButton, SIGNAL(clicked()),	this, SLOT(saveEditedSource()));
+	connect(ui->resetSourcesButton, SIGNAL(clicked()),	this, SLOT(restoreTleSources()));
 	connect(plugin, SIGNAL(satGroupVisibleChanged()),       this, SLOT(updateSatelliteAndSaveData()));
 	connect(plugin, SIGNAL(settingsChanged()),              this, SLOT(toggleCheckableSources()));
 	connect(plugin, SIGNAL(customFilterChanged()),          this, SLOT(updateFilteredSatellitesList()));
@@ -1030,6 +1032,18 @@ void SatellitesDialog::restoreDefaults(void)
 	}
 	else
 		qDebug() << "[Satellites] restore defaults is canceled...";
+}
+
+void SatellitesDialog::restoreTleSources(void)
+{
+	if (askConfirmation())
+	{
+		qDebug() << "[Satellites] restore TLE sources...";
+		GETSTELMODULE(Satellites)->restoreDefaultTleSources();
+		populateSourcesList();
+	}
+	else
+		qDebug() << "[Satellites] restore TLE sources is canceled...";
 }
 
 void SatellitesDialog::updateSettingsPage()

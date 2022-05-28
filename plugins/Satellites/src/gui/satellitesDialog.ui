@@ -1475,6 +1475,34 @@
            </property>
           </widget>
          </item>
+         <item>
+          <spacer name="horizontalSpacer_10">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="resetSourcesButton">
+           <property name="toolTip">
+            <string>Reset sources list to it defaults</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../../data/gui/guiRes.qrc">
+             <normaloff>:/graphicGui/uibtDownload.png</normaloff>
+             <disabledoff>:/graphicGui/uibtDownload-disabled.png</disabledoff>:/graphicGui/uibtDownload.png</iconset>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
       </layout>

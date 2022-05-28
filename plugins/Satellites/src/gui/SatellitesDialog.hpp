@@ -107,6 +107,7 @@ private slots:
 	//@}
 	
 	void restoreDefaults(void);
+	void restoreTleSources(void);
 	void saveSettings(void);
 	void addSatellites(const TleDataList& newSatellites);
 	void removeSatellites();

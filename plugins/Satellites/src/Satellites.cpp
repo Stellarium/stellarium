@@ -621,8 +621,44 @@ bool Satellites::configureGui(bool show)
 void Satellites::restoreDefaults(void)
 {
 	restoreDefaultSettings();
+	restoreDefaultTleSources();
 	restoreDefaultCatalog();	
 	loadCatalog();
+	loadSettings();
+}
+
+void Satellites::restoreDefaultTleSources()
+{
+	// Format: group name, auto-add flag
+	const QMap<QString, bool> celestrak={
+		{ "visual",		true  },	{ "stations",	true  },	{ "last-30-days",	false },	{ "active",		false },	{ "analyst",	false },
+		{ "science",	true  },	{ "noaa",		false },	{ "goes",		false },	{ "amateur",	true  },	{ "gnss",		true  },
+		{ "gps-ops",	true  },	{ "galileo",		true  },	{ "iridium",	false },	{ "iridium-NEXT", false },	{ "geo",		false },
+		{ "weather",	false },	{ "resource",	false },	{ "sarsat",		false },	{ "dmc",		false },	{ "tdrss",		false },
+		{ "argos",		false },	{ "intelsat",	false },	{ "gorizont",	false },	{ "raduga",	false },	{ "molniya",	false },
+		{ "orbcomm",	false },	{ "globalstar",	false },	{ "x-comm",	false },	{ "other-comm",	false },	{ "glo-ops",	true  },
+		{ "beidou",		true  },	{ "sbas",		false },	{ "nnss",		false },	{ "engineering",	false },	{ "education",	false },
+		{ "geodetic",	false },	{ "radar",		false },	{ "cubesat",	false },	{ "other",		false },	{ "oneweb",	true  },
+		{ "starlink",	true  },	{ "planet",		false },	{ "spire",		false }
+	};
+	// Details: https://www.celestrak.com/NORAD/documentation/gp-data-formats.php
+	QString celestrackBaseURL = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=%1&FORMAT=TLE";
+	QStringList urls;
+	// TLE sources from Celestrak
+	for (auto group = celestrak.begin(); group != celestrak.end(); ++group)
+	{
+		QString url = celestrackBaseURL.arg(group.key());
+		if (group.value()) // Auto-add ON!
+			urls << QString("1,%1").arg(url);
+		else
+			urls << url;
+	}
+	// Other sources and supplemental data from Celestrack
+	urls << "1,http://www.celestrak.com/NORAD/elements/supplemental/starlink.txt"
+	     << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
+	     << "https://www.prismnet.com/~mmccants/tles/classfd.zip";
+
+	saveTleSources(urls);
 	loadSettings();
 }
 
@@ -682,55 +718,6 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("cf_rcs_max", 100.);
 	
 	conf->endGroup(); // saveTleSources() opens it for itself
-	
-	// TLE update sources
-	QStringList urls;
-	urls << "1,http://www.celestrak.com/NORAD/elements/visual.txt" // Auto-add ON!
-	     << "http://www.celestrak.com/NORAD/elements/tle-new.txt"
-	     << "http://www.celestrak.com/NORAD/elements/active.txt"
-	     << "http://www.celestrak.com/NORAD/elements/analyst.txt"
-	     << "1,http://www.celestrak.com/NORAD/elements/science.txt"
-	     << "http://www.celestrak.com/NORAD/elements/noaa.txt"
-	     << "http://www.celestrak.com/NORAD/elements/goes.txt"
-	     << "1,http://www.celestrak.com/NORAD/elements/amateur.txt"
-	     << "1,http://www.celestrak.com/NORAD/elements/gps-ops.txt"
-	     << "1,http://www.celestrak.com/NORAD/elements/galileo.txt"
-	     << "http://www.celestrak.com/NORAD/elements/iridium.txt"
-	     << "http://www.celestrak.com/NORAD/elements/iridium-NEXT.txt"
-	     << "http://www.celestrak.com/NORAD/elements/geo.txt"
-	     << "1,http://www.celestrak.com/NORAD/elements/stations.txt"
-	     << "http://www.celestrak.com/NORAD/elements/weather.txt"
-	     << "http://www.celestrak.com/NORAD/elements/resource.txt"
-	     << "http://www.celestrak.com/NORAD/elements/sarsat.txt"
-	     << "http://www.celestrak.com/NORAD/elements/dmc.txt"
-	     << "http://www.celestrak.com/NORAD/elements/tdrss.txt"
-	     << "http://www.celestrak.com/NORAD/elements/argos.txt"
-	     << "http://www.celestrak.com/NORAD/elements/intelsat.txt"
-	     << "http://www.celestrak.com/NORAD/elements/gorizont.txt"
-	     << "http://www.celestrak.com/NORAD/elements/raduga.txt"
-	     << "http://www.celestrak.com/NORAD/elements/molniya.txt"
-	     << "http://www.celestrak.com/NORAD/elements/orbcomm.txt"
-	     << "http://www.celestrak.com/NORAD/elements/globalstar.txt"
-	     << "http://www.celestrak.com/NORAD/elements/x-comm.txt"
-	     << "http://www.celestrak.com/NORAD/elements/other-comm.txt"
-	     << "1,http://www.celestrak.com/NORAD/elements/glo-ops.txt"
-	     << "1,http://www.celestrak.com/NORAD/elements/beidou.txt"
-	     << "http://www.celestrak.com/NORAD/elements/sbas.txt"
-	     << "http://www.celestrak.com/NORAD/elements/nnss.txt"
-	     << "http://www.celestrak.com/NORAD/elements/engineering.txt"
-	     << "http://www.celestrak.com/NORAD/elements/education.txt"
-	     << "http://www.celestrak.com/NORAD/elements/geodetic.txt"
-	     << "http://www.celestrak.com/NORAD/elements/radar.txt"
-	     << "http://www.celestrak.com/NORAD/elements/cubesat.txt"
-	     << "http://www.celestrak.com/NORAD/elements/other.txt"	     
-	     << "1,http://www.celestrak.com/NORAD/elements/supplemental/starlink.txt"
-	     << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
-	     << "http://www.celestrak.com/NORAD/elements/oneweb.txt"
-	     << "http://www.celestrak.com/NORAD/elements/planet.txt"
-	     << "http://www.celestrak.com/NORAD/elements/spire.txt"
-	     << "https://www.prismnet.com/~mmccants/tles/classfd.zip";
-
-	saveTleSources(urls);
 }
 
 void Satellites::restoreDefaultCatalog()
@@ -1373,7 +1360,19 @@ bool Satellites::add(const TleData& tleData)
 	if (tleData.sourceURL.contains("celestrak.com", Qt::CaseInsensitive))
 	{
 		// add groups, based on CelesTrak's groups
-		QString fileName = QUrl(tleData.sourceURL).fileName().toLower().replace(".txt", "");
+		QString fileName;
+		if (tleData.sourceURL.contains(".txt", Qt::CaseInsensitive))
+			fileName = QUrl(tleData.sourceURL).fileName().toLower().replace(".txt", "");
+		else
+		{
+			// New format of source: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=GROUP_NAME&FORMAT=tle
+			QStringList query = QUrl(tleData.sourceURL).query().toLower().split("&");
+			for(int i=0; i<query.size(); i++)
+			{
+				if (query.at(i).trimmed().contains("group"))
+					fileName = query.at(i).trimmed().replace("group=", "");
+			}
+		}
 		if (!satGroups.contains(fileName))
 			satGroups.append(fileName);
 
@@ -2830,14 +2829,14 @@ void Satellites::createSuperGroupsList()
 		earthresources = "earth resources", gps = "gps", glonass = "glonass",
 		geostationary = "geostationary";
 	satSuperGroupsMap = {
-		{ "geo",	communications },
-		{ "geo",	geostationary },
-		{ "gpz",	communications },
-		{ "gpz",	geostationary },
+		{ "geo",		communications },
+		{ "geo",		geostationary },
+		{ "gpz",		communications },
+		{ "gpz",		geostationary },
 		{ "gpz-plus",	communications },
 		{ "gpz-plus",	geostationary },
 		{ "intelsat",	communications },
-		{ "ses",	communications },
+		{ "ses",		communications },
 		{ "iridium",	communications },
 		{ "iridium-NEXT",	communications },
 		{ "starlink",	communications },
@@ -2853,31 +2852,31 @@ void Satellites::createSuperGroupsList()
 		{ "raduga",	communications },
 		{ "raduga",	geostationary },
 		{ "molniya",	communications },
-		{ "gnss",	navigation },
-		{ "gps",	navigation },
+		{ "gnss",		navigation },
+		{ "gps",		navigation },
 		{ "gps-ops",	navigation },
 		{ "gps-ops",	gps },
 		{ "glonass",	navigation },
 		{ "glo-ops",	navigation },
 		{ "glo-ops",	glonass },
-		{ "galileo",	navigation },
-		{ "beidou",	navigation },
-		{ "sbas",	navigation },
-		{ "nnss",	navigation },
+		{ "galileo",		navigation },
+		{ "beidou",		navigation },
+		{ "sbas",		navigation },
+		{ "nnss",		navigation },
 		{ "musson",	navigation },
 		{ "science",	scientific },
 		{ "geodetic",	scientific },
 		{ "engineering",	scientific },
 		{ "education",	scientific },
-		{ "goes",	scientific },
-		{ "goes",	earthresources },
+		{ "goes",		scientific },
+		{ "goes",		earthresources },
 		{ "resource",	earthresources },
-		{ "sarsat",	earthresources },
-		{ "dmc",	earthresources },
-		{ "tdrss",	earthresources },
-		{ "argos",	earthresources },
-		{ "planet",	earthresources },
-		{ "spire",	earthresources }
+		{ "sarsat",		earthresources },
+		{ "dmc",		earthresources },
+		{ "tdrss",		earthresources },
+		{ "argos",		earthresources },
+		{ "planet",		earthresources },
+		{ "spire",		earthresources }
 	};
 }
 
