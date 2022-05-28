@@ -1299,6 +1299,7 @@ bool Satellites::add(const TleData& tleData)
 		if (tleData.name.startsWith("GPS"))
 		{
 			satGroups.append("gps");
+			satGroups.append("gnss");
 			satGroups.append("navigation");
 		}
 		if (tleData.name.startsWith("IRNSS"))
@@ -1319,6 +1320,7 @@ bool Satellites::add(const TleData& tleData)
 		if (tleData.name.startsWith("BEIDOU"))
 		{
 			satGroups.append("beidou");
+			satGroups.append("gnss");
 			satGroups.append("navigation");
 		}
 		if (tleData.name.startsWith("COSMOS"))
@@ -1327,12 +1329,14 @@ bool Satellites::add(const TleData& tleData)
 			if (tleData.name.contains("("))
 			{
 				satGroups.append("glonass");
+				satGroups.append("gnss");
 				satGroups.append("navigation");
 			}
 		}
 		if (tleData.name.startsWith("GSAT") && (tleData.name.contains("PRN") || tleData.name.contains("GALILEO")))
 		{
 			satGroups.append("galileo");
+			satGroups.append("gnss");
 			satGroups.append("navigation");
 		}
 		if (tleData.name.startsWith("INTELSAT") || tleData.name.startsWith("GLOBALSTAR") || tleData.name.startsWith("ORBCOMM") || tleData.name.startsWith("GORIZONT") || tleData.name.startsWith("RADUGA") || tleData.name.startsWith("MOLNIYA") || tleData.name.startsWith("DIRECTV") || tleData.name.startsWith("CHINASAT") || tleData.name.startsWith("YAMAL"))
@@ -1359,24 +1363,19 @@ bool Satellites::add(const TleData& tleData)
 	if (tleData.sourceURL.contains("celestrak.com", Qt::CaseInsensitive))
 	{
 		// add groups, based on CelesTrak's groups
-		QString fileName;
+		QString groupName;
 		if (tleData.sourceURL.contains(".txt", Qt::CaseInsensitive))
-			fileName = QUrl(tleData.sourceURL).fileName().toLower().replace(".txt", "");
+			groupName = QUrl(tleData.sourceURL).fileName().toLower().replace(".txt", "");
 		else
 		{
-			// New format of source: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=GROUP_NAME&FORMAT=tle
-			QStringList query = QUrl(tleData.sourceURL).query().toLower().split("&");
-			for(int i=0; i<query.size(); i++)
-			{
-				if (query.at(i).trimmed().contains("group"))
-					fileName = query.at(i).trimmed().replace("group=", "");
-			}
+			// New format of source: https://celestrak.com/NORAD/documentation/gp-data-formats.php
+			groupName = QUrl(tleData.sourceURL).query().toLower().split("&").filter("group=").join("").replace("group=", "");
 		}
-		if (!satGroups.contains(fileName))
-			satGroups.append(fileName);
+		if (!satGroups.contains(groupName))
+			satGroups.append(groupName);
 
 		// add "supergroups", based on CelesTrak's groups
-		QStringList superGroup = satSuperGroupsMap.values(fileName);
+		QStringList superGroup = satSuperGroupsMap.values(groupName);
 		if (superGroup.size()>0)
 		{
 			for (int i=0; i<superGroup.size(); i++)
