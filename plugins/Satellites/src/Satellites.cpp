@@ -1265,101 +1265,129 @@ bool Satellites::add(const TleData& tleData)
 		satProperties.insert("stdMag", 7.05);
 	if (tleData.status != Satellite::StatusUnknown)
 		satProperties.insert("status", tleData.status);
-	// Guess the group
+
+	// Guess the group for newly added satellites only
 	QVariantList groupList =  satProperties.value("groups", QVariantList()).toList();
-	QStringList satGroups;
 	if (groupList.isEmpty())
 	{
-		if (tleData.name.startsWith("STARLINK"))
+		QStringList satGroups = guessGroups(tleData);
+		if (!satGroups.isEmpty())
 		{
-			 satGroups.append("starlink");
-			 satGroups.append("communications");
-		}
-		if (tleData.name.startsWith("IRIDIUM"))
-		{
-			QStringList d = tleData.name.split(" ");
-			if (d.at(1).toInt()>=100)
-				satGroups.append("iridium next");
-			else
-				satGroups.append("iridium");
-			satGroups.append("communications");
-		}
-		if (tleData.name.startsWith("FLOCK") || tleData.name.startsWith("SKYSAT"))
-			satGroups.append("earth resources");
-		if (tleData.name.startsWith("ONEWEB"))
-		{
-			satGroups.append("oneweb");
-			satGroups.append("communications");
-		}
-		if (tleData.name.startsWith("LEMUR"))
-		{
-			satGroups.append("spire");
-			satGroups.append("earth resources");
-		}
-		if (tleData.name.startsWith("GPS"))
-		{
-			satGroups.append("gps");
-			satGroups.append("gnss");
-			satGroups.append("navigation");
-		}
-		if (tleData.name.startsWith("IRNSS"))
-		{
-			satGroups.append("irnss");
-			satGroups.append("navigation");
-		}
-		if (tleData.name.startsWith("QZS"))
-		{
-			satGroups.append("qzss");
-		}
-		if (tleData.name.startsWith("TDRS"))
-		{
-			satGroups.append("tdrss");
-			satGroups.append("communications");
-			satGroups.append("geostationary");
-		}
-		if (tleData.name.startsWith("BEIDOU"))
-		{
-			satGroups.append("beidou");
-			satGroups.append("gnss");
-			satGroups.append("navigation");
-		}
-		if (tleData.name.startsWith("COSMOS"))
-		{
-			satGroups.append("cosmos");
-			if (tleData.name.contains("("))
+			satProperties.insert("groups", satGroups);
+			for (const auto& str : qAsConst(satGroups))
 			{
-				satGroups.append("glonass");
-				satGroups.append("gnss");
-				satGroups.append("navigation");
+				if (!getGroupIdList().contains(str))
+					addGroup(str);
 			}
 		}
-		if (tleData.name.startsWith("GSAT") && (tleData.name.contains("PRN") || tleData.name.contains("GALILEO")))
+	}
+	
+	SatelliteP sat(new Satellite(tleData.id, satProperties));
+	if (sat->initialized)
+	{
+		qDebug() << "[Satellites] satellite added:" << tleData.id << tleData.name;
+		satellites.append(sat);
+		sat->setNew();		
+		return true;
+	}
+	return false;
+}
+
+QStringList Satellites::guessGroups(const TleData& tleData)
+{
+	QStringList satGroups;
+	// Guess the groups from names
+	if (tleData.name.startsWith("STARLINK"))
+	{
+		satGroups.append("starlink");
+		satGroups.append("communications");
+	}
+	if (tleData.name.startsWith("IRIDIUM"))
+	{
+		QStringList d = tleData.name.split(" ");
+		if (d.at(1).toInt()>=100)
+			satGroups.append("iridium next");
+		else
+			satGroups.append("iridium");
+		satGroups.append("communications");
+	}
+	if (tleData.name.startsWith("FLOCK") || tleData.name.startsWith("SKYSAT"))
+		satGroups.append("earth resources");
+	if (tleData.name.startsWith("ONEWEB"))
+	{
+		satGroups.append("oneweb");
+		satGroups.append("communications");
+	}
+	if (tleData.name.startsWith("LEMUR"))
+	{
+		satGroups.append("spire");
+		satGroups.append("earth resources");
+	}
+	if (tleData.name.startsWith("GPS"))
+	{
+		satGroups.append("gps");
+		satGroups.append("gnss");
+		satGroups.append("navigation");
+	}
+	if (tleData.name.startsWith("IRNSS"))
+	{
+		satGroups.append("irnss");
+		satGroups.append("navigation");
+	}
+	if (tleData.name.startsWith("QZS"))
+	{
+		satGroups.append("qzss");
+	}
+	if (tleData.name.startsWith("TDRS"))
+	{
+		satGroups.append("tdrss");
+		satGroups.append("communications");
+		satGroups.append("geostationary");
+	}
+	if (tleData.name.startsWith("BEIDOU"))
+	{
+		satGroups.append("beidou");
+		satGroups.append("gnss");
+		satGroups.append("navigation");
+	}
+	if (tleData.name.startsWith("COSMOS"))
+	{
+		satGroups.append("cosmos");
+		if (tleData.name.contains("("))
 		{
-			satGroups.append("galileo");
+			satGroups.append("glonass");
 			satGroups.append("gnss");
 			satGroups.append("navigation");
 		}
-		if (tleData.name.startsWith("INTELSAT") || tleData.name.startsWith("GLOBALSTAR") || tleData.name.startsWith("ORBCOMM") || tleData.name.startsWith("GORIZONT") || tleData.name.startsWith("RADUGA") || tleData.name.startsWith("MOLNIYA") || tleData.name.startsWith("DIRECTV") || tleData.name.startsWith("CHINASAT") || tleData.name.startsWith("YAMAL"))
-		{
-			QString satName = tleData.name.split(" ").at(0).toLower();
-			if (satName.contains("-"))
-				satName = satName.split("-").at(0);
-			satGroups.append(satName);
-			satGroups.append("communications");
-			if (satName.startsWith("INTELSAT") || satName.startsWith("RADUGA") || satName.startsWith("GORIZONT") || satName.startsWith("DIRECTV") || satName.startsWith("CHINASAT") || satName.startsWith("YAMAL"))
-				satGroups.append("geostationary");
-			if (satName.startsWith("INTELSAT") || satName.startsWith("DIRECTV") || satName.startsWith("YAMAL"))
-				satGroups.append("tv");
-		}
-		if (tleData.name.contains(" DEB"))
-			satGroups.append("debris");
-		if (tleData.name.startsWith("SOYUZ-MS"))
-			satGroups.append("crewed");
-		if (tleData.name.startsWith("PROGRESS-MS") || tleData.name.startsWith("CYGNUS NG"))
-			satGroups.append("resupply");
-		if (tleData.status==Satellite::StatusNonoperational)
-			satGroups.append("non-operational");
 	}
+	if (tleData.name.startsWith("GSAT") && (tleData.name.contains("PRN") || tleData.name.contains("GALILEO")))
+	{
+		satGroups.append("galileo");
+		satGroups.append("gnss");
+		satGroups.append("navigation");
+	}
+	if (tleData.name.startsWith("INTELSAT") || tleData.name.startsWith("GLOBALSTAR") || tleData.name.startsWith("ORBCOMM") || tleData.name.startsWith("GORIZONT") || tleData.name.startsWith("RADUGA") || tleData.name.startsWith("MOLNIYA") || tleData.name.startsWith("DIRECTV") || tleData.name.startsWith("CHINASAT") || tleData.name.startsWith("YAMAL"))
+	{
+		QString satName = tleData.name.split(" ").at(0).toLower();
+		if (satName.contains("-"))
+			satName = satName.split("-").at(0);
+		satGroups.append(satName);
+		satGroups.append("communications");
+		if (satName.startsWith("INTELSAT") || satName.startsWith("RADUGA") || satName.startsWith("GORIZONT") || satName.startsWith("DIRECTV") || satName.startsWith("CHINASAT") || satName.startsWith("YAMAL"))
+			satGroups.append("geostationary");
+		if (satName.startsWith("INTELSAT") || satName.startsWith("DIRECTV") || satName.startsWith("YAMAL"))
+			satGroups.append("tv");
+	}
+	if (tleData.name.contains(" DEB"))
+		satGroups.append("debris");
+	if (tleData.name.startsWith("SOYUZ-MS"))
+		satGroups.append("crewed");
+	if (tleData.name.startsWith("PROGRESS-MS") || tleData.name.startsWith("CYGNUS NG"))
+		satGroups.append("resupply");
+	if (tleData.status==Satellite::StatusNonoperational)
+		satGroups.append("non-operational");
+
+	// Guess the groups from CelesTrak's groups
 	if (tleData.sourceURL.contains("celestrak.com", Qt::CaseInsensitive))
 	{
 		// add groups, based on CelesTrak's groups
@@ -1386,25 +1414,8 @@ bool Satellites::add(const TleData& tleData)
 			}
 		}
 	}
-	if (!satGroups.isEmpty())
-	{
-		satProperties.insert("groups", satGroups);
-		for (const auto& str : qAsConst(satGroups))
-		{
-			if (!getGroupIdList().contains(str))
-				addGroup(str);
-		}
-	}
-	
-	SatelliteP sat(new Satellite(tleData.id, satProperties));
-	if (sat->initialized)
-	{
-		qDebug() << "[Satellites] satellite added:" << tleData.id << tleData.name;
-		satellites.append(sat);
-		sat->setNew();		
-		return true;
-	}
-	return false;
+
+	return satGroups;
 }
 
 void Satellites::add(const TleDataList& newSatellites)

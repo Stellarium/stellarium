@@ -761,6 +761,8 @@ private:
 	//! accepting TleData... --BM
 	//! @returns true if the addition was successful.
 	bool add(const TleData& tleData);
+	//! Guess the groups of satellites
+	QStringList guessGroups(const TleData& tleData);
 	
 	//! Delete Satellites section in main config.ini, then create with default values.
 	void restoreDefaultSettings();
