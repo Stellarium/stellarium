@@ -728,7 +728,7 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 
 	VertexCache vertCache;
 	CurrentParserState state = CurrentParserState();
-	const QRegularExpression separator("\\s");
+	static const QRegularExpression separator("\\s");
 	separator.optimize();
 
 	int lineNr=0;

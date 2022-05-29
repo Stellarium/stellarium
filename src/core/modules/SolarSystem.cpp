@@ -425,11 +425,11 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 
 	// Now parse the file
 	// lines to ignore which start with a # or are empty
-	QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
+	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 
 	// lines which look like records - we use the RE to extract the fields
 	// which will be available in recRx.capturedTexts()
-	QRegularExpression recRx("^\\s*(\\w+)\\s+\"(.+)\"\\s+_[(]\"(.+)\"[)]\\n");
+	static const QRegularExpression recRx("^\\s*(\\w+)\\s+\"(.+)\"\\s+_[(]\"(.+)\"[)]\\n");
 
 	QString record, planetId, nativeName, nativeNameMeaning;
 

@@ -229,7 +229,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 		if (!skyDate.isEmpty())
 		{
 			// validate the argument format, we will tolerate yyyy-mm-dd.
-			QRegularExpression dateRx("(-?\\d{4})-?(\\d{2})-?(\\d{2})");
+			static const QRegularExpression dateRx("(-?\\d{4})-?(\\d{2})-?(\\d{2})");
 			QRegularExpressionMatch dateMatch=dateRx.match(skyDate);
 			if (dateMatch.hasMatch())
 			    StelUtils::getJDFromDate(&skyDatePart, dateMatch.captured(1).toInt(), dateMatch.captured(2).toInt(), dateMatch.captured(3).toInt(), 12, 0, 0);
@@ -239,7 +239,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 
 		if (!skyTime.isEmpty())
 		{
-			QRegularExpression timeRx("\\d{1,2}:\\d{2}:\\d{2}");
+			static const QRegularExpression timeRx("\\d{1,2}:\\d{2}:\\d{2}");
 			if (timeRx.match(skyTime).hasMatch())
 				skyTimePart = StelUtils::qTimeToJDFraction(QTime::fromString(skyTime, "hh:mm:ss"));
 			else

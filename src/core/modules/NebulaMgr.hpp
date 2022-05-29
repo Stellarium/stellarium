@@ -387,7 +387,7 @@ public:
 	const QVector<NebulaP>& getAllDeepSkyObjects() const { return dsoArray; }
 
 	//! Get the list of deep-sky objects by type.
-	QList<NebulaP> getDeepSkyObjectsByType(const QString& objType) const;
+	const QList<NebulaP> getDeepSkyObjectsByType(const QString& objType) const;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters

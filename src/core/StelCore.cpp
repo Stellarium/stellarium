@@ -2712,7 +2712,7 @@ QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
 			return "err";
 		}
 		iau_constelspan span;
-		QRegularExpression emptyLine("^\\s*$");
+		static const QRegularExpression emptyLine("^\\s*$");
 		QTextStream in(&file);
 		while (!in.atEnd())
 		{

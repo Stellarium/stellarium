@@ -184,7 +184,7 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 		qWarning() << "Landscape Horizon line data file" << QDir::toNativeSeparators(lineFileName) << "not found.";
 		return;
 	}
-	QRegularExpression emptyLine("^\\s*$");
+	static const QRegularExpression emptyLine("^\\s*$");
 	QTextStream in(&file);
 	while (!in.atEnd())
 	{

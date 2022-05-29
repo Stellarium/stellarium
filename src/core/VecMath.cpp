@@ -96,7 +96,7 @@ template<> Vec3d::Vector3(QColor c) : Vector3{c.redF(), c.greenF(), c.blueF()}{}
 
 template<> Vec3i Vector3<int>::setFromHtmlColor(QString s)
 {
-	QRegularExpression re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
+	static const QRegularExpression re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
 	QRegularExpressionMatch reMatch=re.match(s);
 	if (reMatch.hasMatch())
 	{
@@ -115,7 +115,7 @@ template<> Vec3i Vector3<int>::setFromHtmlColor(QString s)
 
 template<> Vec3f Vector3<float>::setFromHtmlColor(QString s)
 {
-	QRegularExpression re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
+	static const QRegularExpression re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
 	QRegularExpressionMatch reMatch=re.match(s);
 	if (reMatch.hasMatch())
 	{
@@ -137,7 +137,7 @@ template<> Vec3f Vector3<float>::setFromHtmlColor(QString s)
 
 template<> Vec3d Vector3<double>::setFromHtmlColor(QString s)
 {
-	QRegularExpression re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
+	static const QRegularExpression re("^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$");
 	QRegularExpressionMatch reMatch=re.match(s);
 	if (reMatch.hasMatch())
 	{

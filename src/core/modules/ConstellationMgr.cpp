@@ -493,7 +493,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 
 	int totalRecords=0;
 	QString record;
-	QRegularExpression commentRx("^(\\s*#.*|\\s*)$"); // pure comment lines or empty lines
+	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$"); // pure comment lines or empty lines
 	while (!in.atEnd())
 	{
 		record = QString::fromUtf8(in.readLine());
@@ -814,13 +814,13 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 
 	// Now parse the file
 	// lines to ignore which start with a # or are empty
-	QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
+	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 
 	// lines which look like records - we use the RE to extract the fields
 	// which will be available in recRx.capturedTexts()
 	// abbreviation is allowed to start with a dot to mark as "hidden".
-	QRegularExpression recRx("^\\s*(\\.?\\w+)\\s+\"(.*)\"\\s+_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
-	QRegularExpression ctxRx("(.*)\",\\s*\"(.*)");
+	static const QRegularExpression recRx("^\\s*(\\.?\\w+)\\s+\"(.*)\"\\s+_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
+	static const QRegularExpression ctxRx("(.*)\",\\s*\"(.*)");
 
 	// keep track of how many records we processed.
 	int totalRecords=0;
@@ -915,11 +915,11 @@ void ConstellationMgr::loadSeasonalRules(const QString& rulesFile)
 
 	// Now parse the file
 	// lines to ignore which start with a # or are empty
-	QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
+	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 
 	// lines which look like records - we use the RE to extract the fields
 	// which will be available in recRx.capturedTexts()
-	QRegularExpression recRx("^\\s*(\\w+)\\s+(\\w+)\\s+(\\w+)\\n");
+	static const QRegularExpression recRx("^\\s*(\\w+)\\s+(\\w+)\\s+(\\w+)\\n");
 
 	// Some more variables to use in the parsing
 	Constellation *aster;
@@ -1367,7 +1367,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	unsigned int i = 0;
 
 	// Added support of comments for constellation_boundaries.dat file
-	QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
+	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 	while (!dataFile.atEnd())
 	{
 		// Read the line

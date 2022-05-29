@@ -369,7 +369,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlReferences() const
 		}
 		QString record;
 		// Allow empty and comment lines where first char (after optional blanks) is #
-		QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
+		static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 		reference = QString("<h2>%1</h2><ol>").arg(q_("References"));
 		int totalRecords=0;
 		int readOk=0;
@@ -382,10 +382,11 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlReferences() const
 				continue;
 
 			totalRecords++;
+			static const QRegularExpression refRx("\\|");
 			#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-			QStringList ref = record.split(QRegularExpression("\\|"), Qt::KeepEmptyParts);
+			QStringList ref = record.split(refRx, Qt::KeepEmptyParts);
 			#else
-			QStringList ref = record.split(QRegularExpression("\\|"), QString::KeepEmptyParts);
+			QStringList ref = record.split(refRx, QString::KeepEmptyParts);
 			#endif
 			// 1 - URID; 2 - Reference; 3 - URL (optional)
 			if (ref.count()<2)
