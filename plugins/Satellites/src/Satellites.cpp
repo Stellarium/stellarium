@@ -1300,7 +1300,7 @@ bool Satellites::add(const TleData& tleData)
 
 QString Satellites::getSatelliteDescription(int satID)
 {
-	// Format: NORAD ID, description
+	// Format: NORAD (SATCAT) ID, description
 	const QMap<int, QString> descriptions = {
 		{ 20580, "The Hubble Space Telescope" },
 		{ 25544, "The International Space Station" },
@@ -1313,7 +1313,22 @@ QString Satellites::getSatelliteDescription(int satID)
 		{ 39197, "The Interface Region Imaging Spectrograph" },
 		{ 39253, "The Spectroscopic Planet Observatory for Recognition of Interaction of Atmosphere" },
 		{ 41173, "The Dark Matter Particle Explorer" },
-		{ 48274, "Tiangong space station (Chinese large modular space station)" }
+		{ 48274, "Tiangong space station (Chinese large modular space station)" },
+		{ 28485, "Neil Gehrels Swift Observatory (Swift Gamma-Ray Burst Explorer)" },
+		{ 31135, "Astro‐Rivelatore Gamma a Immagini Leggero" },
+		{ 33053, "Fermi Gamma-ray Space Telescope" },
+		{ 36577, "Interplanetary Kite-craft Accelerated by Radiation Of the Sun" },
+		{ 25989, "High Throughput X-ray Spectroscopy Mission or X-ray Multi-Mirror Mission" },
+		{ 42758, "Hard X-ray Modulation Telescope" },
+		{ 44432, "Spectrum-X-Gamma" },
+		{ 49954, "Imaging X-ray Polarimetry Explorer" },
+		{ 39253, "Spectroscopic Planet Observatory for Recognition of Interaction of Atmosphere" },
+		{ 39089, "Near Earth Object Surveillance Satellite" },
+		{ 43435, "Transiting Exoplanet Survey Satellite" },
+		{ 44874, "Characterising Exoplanets Satellite" },
+		{ 36119, "Wide-field Infrared Survey Explorer" },
+		{ 50463, "James Webb Space Telescope" },
+		{ 41173, "Dark Matter Particle Explorer" }
 	};
 	return descriptions.value(satID, QString());
 }
@@ -3230,6 +3245,36 @@ void Satellites::translations()
 	N_("Reuven Ramaty High Energy Solar Spectroscopic Imager");
 	// TRANSLATORS: Satellite description.
 	N_("The Chandra X-ray Observatory");
+	// TRANSLATORS: Satellite description.
+	N_("Neil Gehrels Swift Observatory (Swift Gamma-Ray Burst Explorer)");
+	// TRANSLATORS: Satellite description.
+	N_("Astro‐Rivelatore Gamma a Immagini Leggero");
+	// TRANSLATORS: Satellite description.
+	N_("Fermi Gamma-ray Space Telescope");
+	// TRANSLATORS: Satellite description.
+	N_("Interplanetary Kite-craft Accelerated by Radiation Of the Sun");
+	// TRANSLATORS: Satellite description.
+	N_("High Throughput X-ray Spectroscopy Mission or X-ray Multi-Mirror Mission");
+	// TRANSLATORS: Satellite description.
+	N_("Hard X-ray Modulation Telescope");
+	// TRANSLATORS: Satellite description.
+	N_("Spectrum-X-Gamma");
+	// TRANSLATORS: Satellite description.
+	N_("Imaging X-ray Polarimetry Explorer");
+	// TRANSLATORS: Satellite description.
+	N_("Spectroscopic Planet Observatory for Recognition of Interaction of Atmosphere");
+	// TRANSLATORS: Satellite description.
+	N_("Near Earth Object Surveillance Satellite");
+	// TRANSLATORS: Satellite description.
+	N_("Transiting Exoplanet Survey Satellite");
+	// TRANSLATORS: Satellite description.
+	N_("Characterising Exoplanets Satellite");
+	// TRANSLATORS: Satellite description.
+	N_("Wide-field Infrared Survey Explorer");
+	// TRANSLATORS: Satellite description.
+	N_("James Webb Space Telescope");
+	// TRANSLATORS: Satellite description.
+	N_("Dark Matter Particle Explorer");
 
 	// Satellite names - a few famous objects only
 	// TRANSLATORS: Satellite name: International Space Station
@@ -3242,6 +3287,8 @@ void Satellites::translations()
 	N_("HST");
 	// TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
 	N_("SPEKTR-R");
+	// TRANSLATORS: Satellite name: Spektr-RG Space Observatory
+	N_("SPEKTR-RG");
 	// TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
 	N_("INTEGRAL");
 	// TRANSLATORS: Satellite name: China's first space station name
