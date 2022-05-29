@@ -1305,30 +1305,27 @@ QString Satellites::getSatelliteDescription(int satID)
 		{ 20580, "The Hubble Space Telescope" },
 		{ 25544, "The International Space Station" },
 		{ 25867, "The Chandra X-ray Observatory" },
+		{ 25989, "High Throughput X-ray Spectroscopy Mission or X-ray Multi-Mirror Mission" },
 		{ 27370, "Reuven Ramaty High Energy Solar Spectroscopic Imager" },
 		{ 27540, "International Gamma-Ray Astrophysics Laboratory" },
 		{ 27843, "The Microvariability and Oscillations of Stars telescope" },
-		{ 28485, "The Gamma-Ray Observatory" },
-		{ 38358, "Nuclear Spectroscopic Telescope Array" },
-		{ 39197, "The Interface Region Imaging Spectrograph" },
-		{ 39253, "The Spectroscopic Planet Observatory for Recognition of Interaction of Atmosphere" },
-		{ 41173, "The Dark Matter Particle Explorer" },
-		{ 48274, "Tiangong space station (Chinese large modular space station)" },
 		{ 28485, "Neil Gehrels Swift Observatory (Swift Gamma-Ray Burst Explorer)" },
 		{ 31135, "Astro‐Rivelatore Gamma a Immagini Leggero" },
 		{ 33053, "Fermi Gamma-ray Space Telescope" },
-		{ 36577, "Interplanetary Kite-craft Accelerated by Radiation Of the Sun" },
-		{ 25989, "High Throughput X-ray Spectroscopy Mission or X-ray Multi-Mirror Mission" },
-		{ 42758, "Hard X-ray Modulation Telescope" },
-		{ 44432, "Spectrum-X-Gamma" },
-		{ 49954, "Imaging X-ray Polarimetry Explorer" },
-		{ 39253, "Spectroscopic Planet Observatory for Recognition of Interaction of Atmosphere" },
-		{ 39089, "Near Earth Object Surveillance Satellite" },
-		{ 43435, "Transiting Exoplanet Survey Satellite" },
-		{ 44874, "Characterising Exoplanets Satellite" },
 		{ 36119, "Wide-field Infrared Survey Explorer" },
-		{ 50463, "James Webb Space Telescope" },
-		{ 41173, "Dark Matter Particle Explorer" }
+		{ 36577, "Interplanetary Kite-craft Accelerated by Radiation Of the Sun" },
+		{ 38358, "Nuclear Spectroscopic Telescope Array" },
+		{ 39089, "Near Earth Object Surveillance Satellite" },
+		{ 39197, "The Interface Region Imaging Spectrograph" },
+		{ 39253, "The Spectroscopic Planet Observatory for Recognition of Interaction of Atmosphere" },
+		{ 41173, "The Dark Matter Particle Explorer" },
+		{ 42758, "Hard X-ray Modulation Telescope" },
+		{ 43435, "Transiting Exoplanet Survey Satellite" },
+		{ 44432, "Spectrum-X-Gamma" },
+		{ 44874, "Characterising Exoplanets Satellite" },
+		{ 48274, "Tiangong space station (Chinese large modular space station)" },
+		{ 49954, "Imaging X-ray Polarimetry Explorer" },
+		{ 50463, "James Webb Space Telescope" }
 	};
 	return descriptions.value(satID, QString());
 }
@@ -3228,8 +3225,6 @@ void Satellites::translations()
 	// TRANSLATORS: Satellite description.
 	N_("International Gamma-Ray Astrophysics Laboratory");
 	// TRANSLATORS: Satellite description.
-	N_("The Gamma-Ray Observatory");
-	// TRANSLATORS: Satellite description.
 	N_("The Microvariability and Oscillations of Stars telescope");
 	// TRANSLATORS: Satellite description.
 	N_("The Interface Region Imaging Spectrograph");
@@ -3262,8 +3257,6 @@ void Satellites::translations()
 	// TRANSLATORS: Satellite description.
 	N_("Imaging X-ray Polarimetry Explorer");
 	// TRANSLATORS: Satellite description.
-	N_("Spectroscopic Planet Observatory for Recognition of Interaction of Atmosphere");
-	// TRANSLATORS: Satellite description.
 	N_("Near Earth Object Surveillance Satellite");
 	// TRANSLATORS: Satellite description.
 	N_("Transiting Exoplanet Survey Satellite");
@@ -3273,8 +3266,6 @@ void Satellites::translations()
 	N_("Wide-field Infrared Survey Explorer");
 	// TRANSLATORS: Satellite description.
 	N_("James Webb Space Telescope");
-	// TRANSLATORS: Satellite description.
-	N_("Dark Matter Particle Explorer");
 
 	// Satellite names - a few famous objects only
 	// TRANSLATORS: Satellite name: International Space Station
