@@ -19,8 +19,8 @@
 #include "SatellitesListFilterModel.hpp"
 
 SatellitesListFilterModel::SatellitesListFilterModel(QObject *parent) :
-    QSortFilterProxyModel(parent),
-    filterFlag(SatNoFlags)
+	QSortFilterProxyModel(parent),
+	filterFlag(SatNoFlags)
 {
 }
 

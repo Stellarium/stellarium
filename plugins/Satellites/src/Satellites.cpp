@@ -210,8 +210,7 @@ void Satellites::init()
 
 	// Set up download manager and the update schedule
 	downloadMgr = new QNetworkAccessManager(this);
-	connect(downloadMgr, SIGNAL(finished(QNetworkReply*)),
-	        this, SLOT(saveDownloadedUpdate(QNetworkReply*)));
+    connect(downloadMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(saveDownloadedUpdate(QNetworkReply*)));
 	updateState = CompleteNoUpdates;
 	updateTimer = new QTimer(this);
 	updateTimer->setSingleShot(false);   // recurring check for update
@@ -257,8 +256,7 @@ void Satellites::bindingGroups()
 	QString satGroup = N_("Satellites");
 	QString showSatGroup = q_("Show satellites from the group");
 	QString hideSatGroup = q_("Hide satellites from the group");
-	QStringList::const_iterator constIterator;
-	for (constIterator = groups.constBegin(); constIterator != groups.constEnd(); ++constIterator)
+    for (auto constIterator = groups.constBegin(); constIterator != groups.constEnd(); ++constIterator)
 	{
 		QString groupId = (*constIterator).toLocal8Bit().constData();
 		QString actionShowName = QString("actionShow_Satellite_Group_%1").arg(groupId);
@@ -630,16 +628,18 @@ void Satellites::restoreDefaults(void)
 void Satellites::restoreDefaultTleSources()
 {
 	// Format: group name, auto-add flag
-	const QMap<QString, bool> celestrak={
-		{ "visual",		true  },	{ "stations",	true  },	{ "last-30-days",	false },	{ "active",		false },	{ "analyst",	false },
-		{ "science",	true  },	{ "noaa",		false },	{ "goes",		false },	{ "amateur",	true  },	{ "gnss",		true  },
-		{ "gps-ops",	true  },	{ "galileo",		true  },	{ "iridium",	false },	{ "iridium-NEXT", false },	{ "geo",		false },
-		{ "weather",	false },	{ "resource",	false },	{ "sarsat",		false },	{ "dmc",		false },	{ "tdrss",		false },
-		{ "argos",		false },	{ "intelsat",	false },	{ "gorizont",	false },	{ "raduga",	false },	{ "molniya",	false },
-		{ "orbcomm",	false },	{ "globalstar",	false },	{ "x-comm",	false },	{ "other-comm",	false },	{ "glo-ops",	true  },
-		{ "beidou",		true  },	{ "sbas",		false },	{ "nnss",		false },	{ "engineering",	false },	{ "education",	false },
-		{ "geodetic",	false },	{ "radar",		false },	{ "cubesat",	false },	{ "other",		false },	{ "oneweb",	true  },
-		{ "starlink",	true  },	{ "planet",		false },	{ "spire",		false },	{ "swarm",	false }
+	const QMap<QString, bool> celestrak = {
+		{ "visual", true },      { "stations", true },      { "last-30-days", false }, { "active", false },
+		{ "analyst", false },    { "science", true },       { "noaa", false },         { "goes", false },
+		{ "amateur", true },     { "gnss", true },          { "gps-ops", true },       { "galileo", true },
+		{ "iridium", false },    { "iridium-NEXT", false }, { "geo", false },          { "weather", false },
+		{ "resource", false },   { "sarsat", false },       { "dmc", false },          { "tdrss", false },
+		{ "argos", false },      { "intelsat", false },     { "gorizont", false },     { "raduga", false },
+		{ "molniya", false },    { "orbcomm", false },      { "globalstar", false },   { "x-comm", false },
+		{ "other-comm", false }, { "glo-ops", true },       { "beidou", true },        { "sbas", false },
+		{ "nnss", false },       { "engineering", false },  { "education", false },    { "geodetic", false },
+		{ "radar", false },      { "cubesat", false },      { "other", false },        { "oneweb", true },
+		{ "starlink", true },    { "planet", false },       { "spire", false },        { "swarm", false }
 	};
 	// Details: https://www.celestrak.com/NORAD/documentation/gp-data-formats.php
 	QString celestrackBaseURL = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=%1&FORMAT=TLE";
@@ -2824,57 +2824,56 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 void Satellites::createSuperGroupsList()
 {
 	QString communications = "communications", navigation = "navigation", scientific = "scientific",
-		earthresources = "earth resources", gps = "gps", glonass = "glonass",
-		geostationary = "geostationary";
+		earthresources = "earth resources", gps = "gps", glonass = "glonass", geostationary = "geostationary";
 	satSuperGroupsMap = {
-		{ "geo",		communications },
-		{ "geo",		geostationary },
-		{ "gpz",		communications },
-		{ "gpz",		geostationary },
-		{ "gpz-plus",	communications },
-		{ "gpz-plus",	geostationary },
-		{ "intelsat",	communications },
-		{ "ses",		communications },
-		{ "iridium",	communications },
-		{ "iridium-NEXT",	communications },
-		{ "starlink",	communications },
-		{ "oneweb",	communications },
-		{ "orbcomm",	communications },
-		{ "globalstar",	communications },
-		{ "swarm",	communications },
-		{ "amateur",	communications },
-		{ "x-comm",	communications },
-		{ "other-comm",	communications },
-		{ "satnogs",	communications },
-		{ "gorizont",	communications },
-		{ "raduga",	communications },
-		{ "raduga",	geostationary },
-		{ "molniya",	communications },
-		{ "gnss",		navigation },
-		{ "gps",		navigation },
-		{ "gps-ops",	navigation },
-		{ "gps-ops",	gps },
-		{ "glonass",	navigation },
-		{ "glo-ops",	navigation },
-		{ "glo-ops",	glonass },
-		{ "galileo",		navigation },
-		{ "beidou",		navigation },
-		{ "sbas",		navigation },
-		{ "nnss",		navigation },
-		{ "musson",	navigation },
-		{ "science",	scientific },
-		{ "geodetic",	scientific },
-		{ "engineering",	scientific },
-		{ "education",	scientific },
-		{ "goes",		scientific },
-		{ "goes",		earthresources },
-		{ "resource",	earthresources },
-		{ "sarsat",		earthresources },
-		{ "dmc",		earthresources },
-		{ "tdrss",		earthresources },
-		{ "argos",		earthresources },
-		{ "planet",		earthresources },
-		{ "spire",		earthresources }
+		{ "geo", communications },
+		{ "geo", geostationary },
+		{ "gpz", communications },
+		{ "gpz", geostationary },
+		{ "gpz-plus", communications },
+		{ "gpz-plus", geostationary },
+		{ "intelsat", communications },
+		{ "ses", communications },
+		{ "iridium", communications },
+		{ "iridium-NEXT", communications },
+		{ "starlink", communications },
+		{ "oneweb", communications },
+		{ "orbcomm", communications },
+		{ "globalstar", communications },
+		{ "swarm", communications },
+		{ "amateur", communications },
+		{ "x-comm", communications },
+		{ "other-comm", communications },
+		{ "satnogs", communications },
+		{ "gorizont", communications },
+		{ "raduga", communications },
+		{ "raduga", geostationary },
+		{ "molniya", communications },
+		{ "gnss", navigation },
+		{ "gps", navigation },
+		{ "gps-ops", navigation },
+		{ "gps-ops", gps },
+		{ "glonass", navigation },
+		{ "glo-ops", navigation },
+		{ "glo-ops", glonass },
+		{ "galileo", navigation },
+		{ "beidou", navigation },
+		{ "sbas", navigation },
+		{ "nnss", navigation },
+		{ "musson", navigation },
+		{ "science", scientific },
+		{ "geodetic", scientific },
+		{ "engineering", scientific },
+		{ "education", scientific },
+		{ "goes", scientific },
+		{ "goes", earthresources },
+		{ "resource", earthresources },
+		{ "sarsat", earthresources },
+		{ "dmc", earthresources },
+		{ "tdrss", earthresources },
+		{ "argos", earthresources },
+		{ "planet", earthresources },
+		{ "spire", earthresources }
 	};
 }
 
