@@ -763,6 +763,7 @@ private:
 	bool add(const TleData& tleData);
 	//! Guess the groups of satellites
 	QStringList guessGroups(const TleData& tleData);
+	QString getSatelliteDescription(int satID);
 	
 	//! Delete Satellites section in main config.ini, then create with default values.
 	void restoreDefaultSettings();

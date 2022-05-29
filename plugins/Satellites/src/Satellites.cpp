@@ -1266,6 +1266,11 @@ bool Satellites::add(const TleData& tleData)
 	if (tleData.status != Satellite::StatusUnknown)
 		satProperties.insert("status", tleData.status);
 
+	// Add the description for newly added satellites
+	QString description = getSatelliteDescription(sid);
+	if (!satProperties.contains("description") && !description.isEmpty())
+		satProperties.insert("description", description);
+
 	// Guessing the groups for newly added satellites only
 	QVariantList groupList =  satProperties.value("groups", QVariantList()).toList();
 	if (groupList.isEmpty())
@@ -1291,6 +1296,26 @@ bool Satellites::add(const TleData& tleData)
 		return true;
 	}
 	return false;
+}
+
+QString Satellites::getSatelliteDescription(int satID)
+{
+	// Format: NORAD ID, description
+	const QMap<int, QString> descriptions = {
+		{ 20580, "The Hubble Space Telescope" },
+		{ 25544, "The International Space Station" },
+		{ 25867, "The Chandra X-ray Observatory" },
+		{ 27370, "Reuven Ramaty High Energy Solar Spectroscopic Imager" },
+		{ 27540, "International Gamma-Ray Astrophysics Laboratory" },
+		{ 27843, "The Microvariability and Oscillations of Stars telescope" },
+		{ 28485, "The Gamma-Ray Observatory" },
+		{ 38358, "Nuclear Spectroscopic Telescope Array" },
+		{ 39197, "The Interface Region Imaging Spectrograph" },
+		{ 39253, "The Spectroscopic Planet Observatory for Recognition of Interaction of Atmosphere" },
+		{ 41173, "The Dark Matter Particle Explorer" },
+		{ 48274, "Tiangong space station (Chinese large modular space station)" }
+	};
+	return descriptions.value(satID, QString());
 }
 
 QStringList Satellites::guessGroups(const TleData& tleData)
