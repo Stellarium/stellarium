@@ -1305,7 +1305,7 @@ QString Satellites::getSatelliteDescription(int satID)
 		{ 20580, "The Hubble Space Telescope" },
 		{ 25544, "The International Space Station" },
 		{ 25867, "The Chandra X-ray Observatory" },
-		{ 25989, "High Throughput X-ray Spectroscopy Mission or X-ray Multi-Mirror Mission" },
+		{ 25989, "X-ray Multi-Mirror Mission" },
 		{ 27370, "Reuven Ramaty High Energy Solar Spectroscopic Imager" },
 		{ 27540, "International Gamma-Ray Astrophysics Laboratory" },
 		{ 27843, "The Microvariability and Oscillations of Stars telescope" },
@@ -3249,7 +3249,7 @@ void Satellites::translations()
 	// TRANSLATORS: Satellite description.
 	N_("Interplanetary Kite-craft Accelerated by Radiation Of the Sun");
 	// TRANSLATORS: Satellite description.
-	N_("High Throughput X-ray Spectroscopy Mission or X-ray Multi-Mirror Mission");
+	N_("X-ray Multi-Mirror Mission");
 	// TRANSLATORS: Satellite description.
 	N_("Hard X-ray Modulation Telescope");
 	// TRANSLATORS: Satellite description.
