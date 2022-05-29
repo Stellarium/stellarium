@@ -93,7 +93,7 @@ QString getOperatingSystemInfo()
 
 double hmsStrToHours(const QString& s)
 {
-	QRegularExpression reg("(\\d+)h(\\d+)m(\\d+)s");
+	static const QRegularExpression reg("(\\d+)h(\\d+)m(\\d+)s");
 	QRegularExpressionMatch match=reg.match(s);
 	if (!match.hasMatch())
 		return 0.;
@@ -409,7 +409,7 @@ QString decDegToLongitudeStr(const double longitude, bool eastPositive, bool sem
 // Convert a dms formatted string to an angle in radian
 double dmsStrToRad(const QString& s)
 {
-	QRegularExpression reg("([\\+\\-])(\\d+)d(\\d+)'(\\d+)\"");
+	static const QRegularExpression reg("([\\+\\-])(\\d+)d(\\d+)'(\\d+)\"");
 	QRegularExpressionMatch match=reg.match(s);
 	if (!match.hasMatch())
 		return 0;
@@ -1174,7 +1174,7 @@ void debugQVariantMap(const QVariant& m, const QString& indent, const QString& k
 		qDebug() << indent + key + "(map):";
 		QList<QString> keys = m.toMap().keys();
 		std::sort(keys.begin(), keys.end());
-		for (auto k : keys)
+		for (auto &k : keys)
 		{
 			debugQVariantMap(m.toMap()[k], indent + "    ", k);
 		}
@@ -1182,7 +1182,8 @@ void debugQVariantMap(const QVariant& m, const QString& indent, const QString& k
 	else if (t == QVariant::List)
 	{
 		qDebug() << indent + key + "(list):";
-		for (const auto& item : m.toList())
+		const QList<QVariant> mList=m.toList();
+		for (const auto& item : mList)
 		{
 			debugQVariantMap(item, indent + "    ");
 		}

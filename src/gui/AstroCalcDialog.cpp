@@ -5545,10 +5545,12 @@ double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringLi
 	else
 	{
 		limit = 24.8 * 365.25;
-		for (const auto &step: steps.keys())
+		QMap<QString, double>::const_iterator it=steps.constBegin();
+		while (it != steps.constEnd())
 		{
-			if (objects.contains(step, Qt::CaseInsensitive))
-				limit = qMin(steps.value(step), limit);
+			if (objects.contains(it.key(), Qt::CaseInsensitive))
+				limit = qMin(it.value(), limit);
+			it++;
 		}
 	}
 
