@@ -12,8 +12,8 @@
 # bb4713398ff25b15ca398fdfd7cd6958_563a200 <e3e20db5fb3e1853af1e851959210c55_710271>, 2021
 # albert van de mosselaer <albert.doel@gmail.com>, 2021
 # cardinot <mcardinot@gmail.com>, 2022
-# Harry Mensch, 2022
 # alex <alex.a.nder.duy.tschaever@gmail.com>, 2022
+# Harry Mensch, 2022
 # Alex Rijckaert, 2022
 # 
 #, fuzzy
@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-05-25 00:09+0700\n"
+"POT-Creation-Date: 2022-05-29 02:23+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Alex Rijckaert, 2022\n"
 "Language-Team: Dutch (https://www.transifex.com/stellarium/teams/80998/nl/)\n"
@@ -46,10 +46,10 @@ msgstr "eigen markering"
 #: src/core/modules/Nebula.cpp:225 src/core/modules/Planet.cpp:529
 #: src/core/modules/Planet.cpp:532 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:266 src/core/modules/StarWrapper.cpp:269
-#: src/gui/AstroCalcDialog.cpp:870 src/gui/AstroCalcDialog.cpp:2454
-#: src/gui/AstroCalcDialog.cpp:2835 src/gui/AstroCalcDialog.cpp:3195
+#: src/gui/AstroCalcDialog.cpp:870 src/gui/AstroCalcDialog.cpp:2451
+#: src/gui/AstroCalcDialog.cpp:2832 src/gui/AstroCalcDialog.cpp:3192
 #: src/gui/ObsListDialog.cpp:149 src/gui/ObsListCreateEditDialog.cpp:157
-#: src/ui_configurationDialog.h:1814 plugins/Satellites/src/Satellite.cpp:323
+#: src/ui_configurationDialog.h:1814 plugins/Satellites/src/Satellite.cpp:327
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:524
 #: plugins/Supernovae/src/Supernova.cpp:144 plugins/Novae/src/Nova.cpp:150
 #: plugins/Quasars/src/Quasar.cpp:128 plugins/Pulsars/src/Pulsar.cpp:188
@@ -210,8 +210,9 @@ msgstr "Primaire verticaal"
 #: src/gui/AstroCalcDialog.cpp:817 src/gui/AstroCalcDialog.cpp:1793
 #: src/gui/AstroCalcDialog.cpp:2181 src/gui/AstroCalcChart.cpp:80
 #: src/gui/AstroCalcChart.cpp:415 src/ui_viewDialog.h:3688
-#: plugins/Satellites/src/Satellite.cpp:346
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1449
+#: plugins/Satellites/src/Satellite.cpp:350
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1465
+#: plugins/Satellites/src/ui_satellitesFilterDialog.h:335
 msgid "Altitude"
 msgstr "Hoogte"
 
@@ -316,7 +317,7 @@ msgstr "ASP"
 
 #. TRANSLATORS: Center of the umbra
 #: src/core/modules/GridLinesMgr.cpp:1455
-#: plugins/Satellites/src/Satellites.cpp:2504
+#: plugins/Satellites/src/Satellites.cpp:2554
 msgid "C.U."
 msgstr "C.K."
 
@@ -332,9 +333,9 @@ msgstr "Antapex"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/GridLinesMgr.cpp:1474 src/core/modules/Planet.cpp:663
-#: src/core/modules/Planet.cpp:1116 src/gui/AstroCalcDialog.cpp:7356
-#: plugins/Satellites/src/Satellite.cpp:344
-#: plugins/Satellites/src/Satellite.cpp:387
+#: src/core/modules/Planet.cpp:1116 src/gui/AstroCalcDialog.cpp:7349
+#: plugins/Satellites/src/Satellite.cpp:348
+#: plugins/Satellites/src/Satellite.cpp:391
 #: plugins/MeteorShowers/src/MeteorShower.cpp:567
 msgctxt "speed"
 msgid "km/s"
@@ -703,9 +704,9 @@ msgstr "Auteur"
 
 #. TRANSLATORS: Unit of measure for distance - meter
 #: src/core/modules/LandscapeMgr.cpp:1017 src/gui/StelGuiItems.cpp:817
-#: plugins/Satellites/src/Satellite.cpp:417
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1107
-#: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
+#: plugins/Satellites/src/Satellite.cpp:421
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1123
+#: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:144
 msgctxt "distance"
 msgid "m"
 msgstr "m"
@@ -801,12 +802,12 @@ msgstr "Diameter"
 #: src/core/modules/Planet.cpp:644 src/core/modules/Planet.cpp:747
 #: src/core/modules/Planet.cpp:1432 src/core/modules/Comet.cpp:159
 #: src/core/modules/Comet.cpp:169 src/gui/StelGuiItems.cpp:847
-#: src/gui/AstroCalcDialog.cpp:2976 src/gui/AstroCalcDialog.cpp:7291
-#: plugins/Satellites/src/Satellites.cpp:2504
-#: plugins/Satellites/src/Satellite.cpp:340
-#: plugins/Satellites/src/Satellite.cpp:383
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1116
-#: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:132
+#: src/gui/AstroCalcDialog.cpp:2973 src/gui/AstroCalcDialog.cpp:7284
+#: plugins/Satellites/src/Satellites.cpp:2554
+#: plugins/Satellites/src/Satellite.cpp:344
+#: plugins/Satellites/src/Satellite.cpp:387
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1132
+#: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:143
 msgctxt "distance"
 msgid "km"
 msgstr "km"
@@ -1543,17 +1544,17 @@ msgid "photometric passband"
 msgstr "fotometrische passband"
 
 #: src/core/modules/Nebula.cpp:168 src/core/StelObject.cpp:318
-#: plugins/Satellites/src/Satellite.cpp:331
+#: plugins/Satellites/src/Satellite.cpp:335
 msgid "reduced to"
 msgstr "gereduceerd tot"
 
 #: src/core/modules/Nebula.cpp:168 src/core/StelObject.cpp:318
-#: plugins/Satellites/src/Satellite.cpp:331
+#: plugins/Satellites/src/Satellite.cpp:335
 msgid "by"
 msgstr "door"
 
 #: src/core/modules/Nebula.cpp:168 src/core/StelObject.cpp:318
-#: plugins/Satellites/src/Satellite.cpp:331
+#: plugins/Satellites/src/Satellite.cpp:335
 msgid "Airmasses"
 msgstr "Luchtmassa's"
 
@@ -2104,7 +2105,7 @@ msgid "object of unknown nature"
 msgstr "object van onbekende aard"
 
 #: src/core/modules/NebulaMgr.cpp:474 src/gui/AstroCalcDialog.cpp:971
-#: src/gui/AstroCalcDialog.cpp:6332
+#: src/gui/AstroCalcDialog.cpp:6325
 msgid "Deep-sky objects"
 msgstr "Deepsky objecten"
 
@@ -2176,7 +2177,7 @@ msgstr "naar"
 #: src/core/modules/Planet.cpp:617 src/gui/AstroCalcDialog.cpp:851
 #: src/gui/AstroCalcDialog.cpp:1160 src/gui/AstroCalcDialog.cpp:1502
 #: src/gui/AstroCalcDialog.cpp:1807 src/gui/AstroCalcDialog.cpp:1854
-#: src/gui/AstroCalcDialog.cpp:7316 src/gui/AstroCalcChart.cpp:425
+#: src/gui/AstroCalcDialog.cpp:7309 src/gui/AstroCalcChart.cpp:425
 #: src/gui/AstroCalcChart.cpp:429 src/gui/AstroCalcChart.cpp:444
 #: src/gui/AstroCalcChart.cpp:451 src/gui/AstroCalcChart.cpp:455
 #: plugins/Exoplanets/src/Exoplanet.cpp:365
@@ -2189,7 +2190,7 @@ msgstr "AU"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
 #: src/core/modules/Planet.cpp:633 src/core/modules/Planet.cpp:651
-#: src/core/modules/Comet.cpp:161 src/gui/AstroCalcDialog.cpp:7293
+#: src/core/modules/Comet.cpp:161 src/gui/AstroCalcDialog.cpp:7286
 msgctxt "distance"
 msgid "M km"
 msgstr "M km"
@@ -2241,7 +2242,7 @@ msgstr "Elongatie"
 #: src/core/modules/Planet.cpp:809 src/core/modules/Planet.cpp:818
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
 #: src/gui/AstroCalcChart.cpp:436 src/gui/AstroCalcChart.cpp:462
-#: plugins/Satellites/src/Satellite.cpp:392
+#: plugins/Satellites/src/Satellite.cpp:396
 msgid "Phase angle"
 msgstr "Fasehoek"
 
@@ -2259,7 +2260,7 @@ msgstr "Hoekafstand"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:850 src/core/modules/StarWrapper.cpp:358
-#: src/gui/AstroCalcDialog.cpp:7327
+#: src/gui/AstroCalcDialog.cpp:7320
 msgctxt "duration"
 msgid "days"
 msgstr "dagen"
@@ -2472,8 +2473,8 @@ msgid "Orthographic"
 msgstr "Orthografisch"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:300 src/gui/AstroCalcDialog.cpp:4053
-#: src/gui/AstroCalcDialog.cpp:6287 src/translations.h:63
+#: src/core/modules/SolarSystem.cpp:300 src/gui/AstroCalcDialog.cpp:4050
+#: src/gui/AstroCalcDialog.cpp:6280 src/translations.h:63
 msgid "Planets"
 msgstr "Planeten"
 
@@ -2580,7 +2581,7 @@ msgid "Spectral Type"
 msgstr "Spectraaltype"
 
 #: src/core/modules/StarWrapper.cpp:358
-#: plugins/Satellites/src/ui_satellitesFilterDialog.h:300
+#: plugins/Satellites/src/ui_satellitesFilterDialog.h:330
 #: plugins/Exoplanets/src/Exoplanet.cpp:362
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid "Period"
@@ -2607,7 +2608,7 @@ msgid "Position angle"
 msgstr "Positiehoek"
 
 #: src/core/modules/StarWrapper.cpp:393 src/core/modules/StarWrapper.cpp:398
-#: src/gui/AstroCalcDialog.cpp:4702
+#: src/gui/AstroCalcDialog.cpp:4699
 msgid "Separation"
 msgstr "Separatie"
 
@@ -2765,8 +2766,8 @@ msgstr "Plug-in laden"
 
 #: src/core/StelCore.cpp:267 src/core/StelObjectMgr.cpp:54
 #: src/gui/StelGui.cpp:228 src/gui/AstroCalcDialog.cpp:1787
-#: src/gui/AstroCalcDialog.cpp:2452 src/gui/AstroCalcDialog.cpp:2833
-#: src/gui/AstroCalcDialog.cpp:4695 src/ui_dateTimeDialogGui.h:373
+#: src/gui/AstroCalcDialog.cpp:2449 src/gui/AstroCalcDialog.cpp:2830
+#: src/gui/AstroCalcDialog.cpp:4692 src/ui_dateTimeDialogGui.h:373
 #: src/ui_dateTimeDialogGui.h:376
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
@@ -3628,19 +3629,19 @@ msgstr "Schijnbare sterrentijd"
 
 #. TRANSLATORS: time of transit
 #: src/core/StelObject.cpp:681 src/gui/AstroCalcDialog.cpp:864
-#: src/gui/AstroCalcDialog.cpp:2178 src/gui/AstroCalcDialog.cpp:6407
+#: src/gui/AstroCalcDialog.cpp:2178 src/gui/AstroCalcDialog.cpp:6400
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "Doorgang"
 
 #: src/core/StelObject.cpp:682 src/gui/AstroCalcDialog.cpp:2177
-#: src/gui/AstroCalcDialog.cpp:6406
+#: src/gui/AstroCalcDialog.cpp:6399
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "Opkomst"
 
 #: src/core/StelObject.cpp:683 src/gui/AstroCalcDialog.cpp:2179
-#: src/gui/AstroCalcDialog.cpp:6410
+#: src/gui/AstroCalcDialog.cpp:6403
 msgctxt "celestial event"
 msgid "Set"
 msgstr "Ondergang"
@@ -3712,7 +3713,7 @@ msgstr "Max. west uitwijking"
 msgid "Parallactic Angle"
 msgstr "Parallactische hoek"
 
-#: src/core/StelObject.cpp:859 src/gui/AstroCalcDialog.cpp:6504
+#: src/core/StelObject.cpp:859 src/gui/AstroCalcDialog.cpp:6497
 msgid "IAU Constellation"
 msgstr "IAU sterrenbeeld"
 
@@ -3933,11 +3934,141 @@ msgstr "ongedefineerd"
 msgid "Classification"
 msgstr "Classificatie"
 
-#: src/core/StelSkyCultureMgr.cpp:275
+#: src/core/StelSkyCultureMgr.cpp:225
+msgid "unknown"
+msgstr "onbekend"
+
+#: src/core/StelSkyCultureMgr.cpp:226
+msgid ""
+"This sky culture is provided under unknown license. Please ask authors for "
+"details about license for this sky culture."
+msgstr ""
+"Deze hemel cultuur wordt verstrekt onder onbekende licentie. Vraag de "
+"auteurs naar details over de licentie voor deze hemel cultuur."
+
+#: src/core/StelSkyCultureMgr.cpp:233
+msgid ""
+"This sky culture is provided under GNU General Public License. You can use "
+"it for commercial and non-commercial purposes, freely adapt it and share "
+"adapted work."
+msgstr ""
+"Deze hemel cultuur wordt verstrekt onder GNU General Public License. U kunt "
+"het gebruiken voor commerciële en niet-commerciële doeleinden, vrij "
+"aanpassen en aangepast werk delen."
+
+#: src/core/StelSkyCultureMgr.cpp:237
+msgid "This sky culture is provided under Creative Commons License."
+msgstr "Deze hemel cultuur wordt verstrekt onder Creative Commons Licentie."
+
+#: src/core/StelSkyCultureMgr.cpp:245
+msgid ""
+"You may distribute, remix, adapt, and build upon this sky culture, even "
+"commercially, as long as you credit authors for the original creation."
+msgstr ""
+"Je mag deze skycultuur verspreiden, herwerken, aanpassen en erop "
+"voortbouwen, zelfs commercieel, zolang je de auteurs van de originele "
+"creatie vermeldt."
+
+#: src/core/StelSkyCultureMgr.cpp:246
+msgid ""
+"You may remix, adapt, and build upon this sky culture even for commercial "
+"purposes, as long as you credit authors and license the new creations under "
+"the identical terms. This license is often compared to “copyleft” free and "
+"open source software licenses."
+msgstr ""
+"Je mag deze hemelcultuur herwerken, aanpassen en erop voortbouwen, zelfs "
+"voor commerciële doeleinden, zolang je de auteurs vermeldt en de nieuwe "
+"creaties onder dezelfde voorwaarden licenseert. Deze licentie wordt vaak "
+"vergeleken met \"copyleft\" vrije en open source software licenties."
+
+#: src/core/StelSkyCultureMgr.cpp:247
+msgid ""
+"You may reuse this sky culture for any purpose, including commercially; "
+"however, adapted work cannot be shared with others, and credit must be "
+"provided by you."
+msgstr ""
+"Je mag deze hemelkweek voor elk doel hergebruiken, ook commercieel; "
+"aangepast werk mag echter niet met anderen worden gedeeld, en moet door jou "
+"met eer worden vermeld."
+
+#: src/core/StelSkyCultureMgr.cpp:248
+msgid ""
+"You may remix, adapt, and build upon this sky culture non-commercially, and "
+"although your new works must also acknowledge authors and be non-commercial,"
+" you don’t have to license your derivative works on the same terms."
+msgstr ""
+"Je mag deze hemelcultuur herwerken, aanpassen en erop voortbouwen op niet-"
+"commerciële basis, en hoewel je nieuwe werken ook de auteurs moeten erkennen"
+" en niet-commercieel moeten zijn, hoef je je afgeleide werken niet onder "
+"dezelfde voorwaarden te licenseren."
+
+#: src/core/StelSkyCultureMgr.cpp:249
+msgid ""
+"You may remix, adapt, and build upon this sky culture non-commercially, as "
+"long as you credit authors and license your new creations under the "
+"identical terms."
+msgstr ""
+"U mag deze hemelcultuur herwerken, aanpassen en er niet-commercieel op "
+"voortbouwen, zolang u de auteurs vermeldt en uw nieuwe creaties onder "
+"dezelfde voorwaarden licenseert."
+
+#: src/core/StelSkyCultureMgr.cpp:250
+msgid ""
+"You may use this sky culture and share them with others as long as you "
+"credit authors, but you can’t change it in any way or use it commercially."
+msgstr ""
+"U mag deze hemelcultuur gebruiken en met anderen delen zolang u de auteurs "
+"vermeldt, maar u mag het op geen enkele manier veranderen of commercieel "
+"gebruiken."
+
+#: src/core/StelSkyCultureMgr.cpp:262
+msgid "This sky culture is distributed as public domain."
+msgstr "Deze hemelcultuur wordt verspreid als publiek domein."
+
+#. TRANSLATORS: A phrase like "Please credit: XY Museum". The creditee is in a
+#. skyculture's info.ini.
+#: src/core/StelSkyCultureMgr.cpp:268
+msgid "Please credit:"
+msgstr "Graag de eer:"
+
+#: src/core/StelSkyCultureMgr.cpp:272
+msgid ""
+"Illustrations are provided under Free Art License that grants the right to "
+"freely copy, distribute, and transform."
+msgstr ""
+"Afbeeldingen worden geleverd onder Free Art License die het recht verleent "
+"om vrij te kopiëren, te verspreiden en te transformeren."
+
+#: src/core/StelSkyCultureMgr.cpp:277 src/gui/ConfigurationDialog.cpp:1322
+#: src/scripting/StelScriptMgr.cpp:475
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
+#: plugins/Oculars/src/gui/OcularDialog.cpp:598
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:765
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:153
+#: plugins/Novae/src/gui/NovaeDialog.cpp:119
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:137
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:206
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:88
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:247
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:182
+#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:181
+msgid "License"
+msgstr "Licentie"
+
+#: src/core/StelSkyCultureMgr.cpp:339
 msgid "No description"
 msgstr "Geen beschrijving"
 
-#: src/core/StelSkyCultureMgr.cpp:308
+#: src/core/StelSkyCultureMgr.cpp:373
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:227
 msgid "References"
 msgstr "Referenties"
@@ -4326,40 +4457,40 @@ msgstr "Foutmeldingen en functie-aanvragen kun je {hier} doen."
 msgid "Further information can be found in the {developer documentation}."
 msgstr "Meer informatie kun je vinden in de {ontwikkelaars documentatie}."
 
-#: src/gui/ConfigurationDialog.cpp:751
+#: src/gui/ConfigurationDialog.cpp:754
 msgid "Select screenshot directory"
 msgstr "Schermafbeelding map selecteren"
 
-#: src/gui/ConfigurationDialog.cpp:781
+#: src/gui/ConfigurationDialog.cpp:784
 msgctxt "millimeters"
 msgid "mm"
 msgstr "mm"
 
-#: src/gui/ConfigurationDialog.cpp:796
+#: src/gui/ConfigurationDialog.cpp:799
 msgid "Dots per Inch (for image metadata)."
 msgstr "DPI (beeld metadata)"
 
-#: src/gui/ConfigurationDialog.cpp:797
+#: src/gui/ConfigurationDialog.cpp:800
 msgid "Current designated print size"
 msgstr "Huidig aangewezen afdrukformaat"
 
-#: src/gui/ConfigurationDialog.cpp:1236
+#: src/gui/ConfigurationDialog.cpp:1239
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Gezichtsveld bij opstarten: %1 %2"
 
-#: src/gui/ConfigurationDialog.cpp:1244
+#: src/gui/ConfigurationDialog.cpp:1247
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Hor/Vert kijkrichting bij opstarten: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1313
+#: src/gui/ConfigurationDialog.cpp:1316
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
 msgid "Acknowledgments"
 msgstr "Dankbetuigingen"
 
-#: src/gui/ConfigurationDialog.cpp:1315
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:763
+#: src/gui/ConfigurationDialog.cpp:1318
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:766
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:154
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
@@ -4367,14 +4498,14 @@ msgstr "Dankbetuigingen"
 msgid "Authors"
 msgstr "Auteurs"
 
-#: src/gui/ConfigurationDialog.cpp:1316
+#: src/gui/ConfigurationDialog.cpp:1319
 msgid "Contact"
 msgstr "Contact"
 
-#: src/gui/ConfigurationDialog.cpp:1318 src/scripting/StelScriptMgr.cpp:480
+#: src/gui/ConfigurationDialog.cpp:1321 src/scripting/StelScriptMgr.cpp:480
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:97
 #: plugins/Oculars/src/gui/OcularDialog.cpp:597
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:761
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:764
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:235
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
@@ -4395,44 +4526,20 @@ msgstr "Contact"
 msgid "Version"
 msgstr "Versie"
 
-#: src/gui/ConfigurationDialog.cpp:1319 src/scripting/StelScriptMgr.cpp:475
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
-#: plugins/Oculars/src/gui/OcularDialog.cpp:598
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:762
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:153
-#: plugins/Novae/src/gui/NovaeDialog.cpp:119
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:137
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:206
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:88
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:247
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:182
-#: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:181
-msgid "License"
-msgstr "Licentie"
-
-#: src/gui/ConfigurationDialog.cpp:1323
+#: src/gui/ConfigurationDialog.cpp:1326
 msgctxt "license"
 msgid "unknown"
 msgstr "onbekend"
 
-#: src/gui/ConfigurationDialog.cpp:1431
+#: src/gui/ConfigurationDialog.cpp:1434
 msgid "Running script: "
 msgstr "Draaiend script: "
 
-#: src/gui/ConfigurationDialog.cpp:1438
+#: src/gui/ConfigurationDialog.cpp:1441
 msgid "Running script: [none]"
 msgstr "Draaiend script: [geen]"
 
-#: src/gui/ConfigurationDialog.cpp:1503
+#: src/gui/ConfigurationDialog.cpp:1506
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -4440,16 +4547,16 @@ msgstr ""
 "Klaar met het downloaden van nieuwe ster catalogi!\n"
 "Herstart Stellarium om ze weer te geven."
 
-#: src/gui/ConfigurationDialog.cpp:1507
+#: src/gui/ConfigurationDialog.cpp:1510
 msgid "All available star catalogs have been installed."
 msgstr "Alle beschikbare sterrencatalogi werden geïnstalleerd."
 
-#: src/gui/ConfigurationDialog.cpp:1512
+#: src/gui/ConfigurationDialog.cpp:1515
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Catalogus %1 van %2 ophalen"
 
-#: src/gui/ConfigurationDialog.cpp:1519
+#: src/gui/ConfigurationDialog.cpp:1522
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -4458,7 +4565,7 @@ msgstr ""
 "Downloaden %1...\n"
 "(U kunt dit venster sluiten.)"
 
-#: src/gui/ConfigurationDialog.cpp:1526
+#: src/gui/ConfigurationDialog.cpp:1529
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -4469,7 +4576,7 @@ msgstr ""
 "Aantal sterren: %2 miljoen\n"
 "Magnitudebereik: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1572 src/gui/ConfigurationDialog.cpp:1609
+#: src/gui/ConfigurationDialog.cpp:1575 src/gui/ConfigurationDialog.cpp:1612
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -4478,11 +4585,11 @@ msgstr ""
 "Fout bij het downloaden van %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1662
+#: src/gui/ConfigurationDialog.cpp:1665
 msgid "Verifying file integrity..."
 msgstr "Bestandsintegriteit verifiëren..."
 
-#: src/gui/ConfigurationDialog.cpp:1666
+#: src/gui/ConfigurationDialog.cpp:1669
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -4491,213 +4598,227 @@ msgstr ""
 "Fout bij het downloaden van %1:\n"
 "Bestand is corrupt."
 
-#: src/gui/ConfigurationDialog.cpp:1741 src/gui/ConfigurationDialog.cpp:1750
-#: src/gui/ConfigurationDialog.cpp:1759 src/gui/ConfigurationDialog.cpp:1768
+#: src/gui/ConfigurationDialog.cpp:1744 src/gui/ConfigurationDialog.cpp:1753
+#: src/gui/ConfigurationDialog.cpp:1762 src/gui/ConfigurationDialog.cpp:1771
 msgid "Available"
 msgstr "Beschikbaar"
 
-#: src/gui/ConfigurationDialog.cpp:1743 src/gui/ConfigurationDialog.cpp:1752
-#: src/gui/ConfigurationDialog.cpp:1761 src/gui/ConfigurationDialog.cpp:1770
+#: src/gui/ConfigurationDialog.cpp:1746 src/gui/ConfigurationDialog.cpp:1755
+#: src/gui/ConfigurationDialog.cpp:1764 src/gui/ConfigurationDialog.cpp:1773
 msgid "Not Available"
 msgstr "Niet beschikbaar"
 
+#: src/gui/ConfigurationDialog.cpp:1809
+msgid "Annual proper motion (stars) or hourly motion (solar system objects)"
+msgstr ""
+"Jaarlijkse eigen beweging (sterren) of beweging per uur (zonnestelsel "
+"objecten)"
+
+#: src/gui/ConfigurationDialog.cpp:1810
+msgid ""
+"Show time of rising, transit and setting of celestial object. The rising and"
+" setting events are defined with the upper limb of the celestial body."
+msgstr ""
+"Toon tijden van opkomst, doorgang en ondergang van objecten. Opkomst en "
+"ondergang zijn gebaseerd op de bovenkant van het object."
+
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1842
+#: src/gui/ConfigurationDialog.cpp:1851
 msgid "Algorithm of"
 msgstr "Algoritme van"
 
-#: src/gui/ConfigurationDialog.cpp:1855
+#: src/gui/ConfigurationDialog.cpp:1864
 msgid "Without correction"
 msgstr "Zonder correctie"
 
-#: src/gui/ConfigurationDialog.cpp:1856
+#: src/gui/ConfigurationDialog.cpp:1865
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1857
+#: src/gui/ConfigurationDialog.cpp:1866
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1858
+#: src/gui/ConfigurationDialog.cpp:1867
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1859
+#: src/gui/ConfigurationDialog.cpp:1868
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1860
+#: src/gui/ConfigurationDialog.cpp:1869
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) en Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1861
+#: src/gui/ConfigurationDialog.cpp:1870
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1862
+#: src/gui/ConfigurationDialog.cpp:1871
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1863
+#: src/gui/ConfigurationDialog.cpp:1872
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1864
+#: src/gui/ConfigurationDialog.cpp:1873
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1865
+#: src/gui/ConfigurationDialog.cpp:1874
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1866
+#: src/gui/ConfigurationDialog.cpp:1875
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1867
+#: src/gui/ConfigurationDialog.cpp:1876
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1868
+#: src/gui/ConfigurationDialog.cpp:1877
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1869
+#: src/gui/ConfigurationDialog.cpp:1878
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1870
+#: src/gui/ConfigurationDialog.cpp:1879
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze en Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1871
+#: src/gui/ConfigurationDialog.cpp:1880
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson en Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1872
+#: src/gui/ConfigurationDialog.cpp:1881
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1874
+#: src/gui/ConfigurationDialog.cpp:1883
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (met Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1875
+#: src/gui/ConfigurationDialog.cpp:1884
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1876
+#: src/gui/ConfigurationDialog.cpp:1885
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1877
+#: src/gui/ConfigurationDialog.cpp:1886
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1878
+#: src/gui/ConfigurationDialog.cpp:1887
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
 msgstr "Reingold & Dershowitz (2002, 2007, 2018)"
 
-#: src/gui/ConfigurationDialog.cpp:1879
+#: src/gui/ConfigurationDialog.cpp:1888
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1880
+#: src/gui/ConfigurationDialog.cpp:1889
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1883
+#: src/gui/ConfigurationDialog.cpp:1892
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak & Meeus (2006) geen extra maan acceleratie"
 
-#: src/gui/ConfigurationDialog.cpp:1886
+#: src/gui/ConfigurationDialog.cpp:1895
 msgid "Modified Espenak & Meeus (2006, 2022)"
 msgstr "Aangepast Espenak & Meeus (2006, 2022)"
 
-#: src/gui/ConfigurationDialog.cpp:1887
+#: src/gui/ConfigurationDialog.cpp:1896
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1888
+#: src/gui/ConfigurationDialog.cpp:1897
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1889
+#: src/gui/ConfigurationDialog.cpp:1898
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1890
+#: src/gui/ConfigurationDialog.cpp:1899
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana & Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1891
+#: src/gui/ConfigurationDialog.cpp:1900
 msgid "Stephenson, Morrison & Hohenkerk (2016, 2021)"
 msgstr "Stephenson, Morrison & Hohenkerk (2016, 2021)"
 
-#: src/gui/ConfigurationDialog.cpp:1892
+#: src/gui/ConfigurationDialog.cpp:1901
 msgid "Henriksson (2017)"
 msgstr "Henriksson (2017)"
 
-#: src/gui/ConfigurationDialog.cpp:1893
+#: src/gui/ConfigurationDialog.cpp:1902
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Aangepaste vergelijking voor %1T"
 
-#: src/gui/ConfigurationDialog.cpp:1949 src/gui/ConfigurationDialog.cpp:1986
+#: src/gui/ConfigurationDialog.cpp:1958 src/gui/ConfigurationDialog.cpp:1995
 #: src/gui/StelGuiItems.cpp:733 src/gui/LocationDialog.cpp:482
 msgid "System default"
 msgstr "Systeemstandaard"
 
-#: src/gui/ConfigurationDialog.cpp:1950
+#: src/gui/ConfigurationDialog.cpp:1959
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "jjjj-mm-dd (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1951
+#: src/gui/ConfigurationDialog.cpp:1960
 msgid "dd-mm-yyyy"
 msgstr "dd-mm-jjjj"
 
-#: src/gui/ConfigurationDialog.cpp:1952
+#: src/gui/ConfigurationDialog.cpp:1961
 msgid "mm-dd-yyyy"
 msgstr "mm-dd-jjjj"
 
-#: src/gui/ConfigurationDialog.cpp:1953
+#: src/gui/ConfigurationDialog.cpp:1962
 msgid "ww, yyyy-mm-dd"
 msgstr "ww, jjjj-mm-dd"
 
-#: src/gui/ConfigurationDialog.cpp:1954
+#: src/gui/ConfigurationDialog.cpp:1963
 msgid "ww, dd-mm-yyyy"
 msgstr "ww, dd-mm-jjjj"
 
-#: src/gui/ConfigurationDialog.cpp:1955
+#: src/gui/ConfigurationDialog.cpp:1964
 msgid "ww, mm-dd-yyyy"
 msgstr "ww, mm-dd-jjjj"
 
-#: src/gui/ConfigurationDialog.cpp:1987
+#: src/gui/ConfigurationDialog.cpp:1996
 msgid "12-hour format"
 msgstr "12-uur format"
 
-#: src/gui/ConfigurationDialog.cpp:1988
+#: src/gui/ConfigurationDialog.cpp:1997
 msgid "24-hour format"
 msgstr "24-uur format"
 
-#: src/gui/ConfigurationDialog.cpp:2014
+#: src/gui/ConfigurationDialog.cpp:2023
 msgctxt "disabled"
 msgid "None"
 msgstr "Geen"
 
-#: src/gui/ConfigurationDialog.cpp:2015
+#: src/gui/ConfigurationDialog.cpp:2024
 msgid "5/6/5 bits"
 msgstr "5/6/5 bits"
 
-#: src/gui/ConfigurationDialog.cpp:2016
+#: src/gui/ConfigurationDialog.cpp:2025
 msgid "6/6/6 bits"
 msgstr "6/6/6 bits"
 
-#: src/gui/ConfigurationDialog.cpp:2017
+#: src/gui/ConfigurationDialog.cpp:2026
 msgid "8/8/8 bits"
 msgstr "8/8/8 bits"
 
-#: src/gui/ConfigurationDialog.cpp:2018
+#: src/gui/ConfigurationDialog.cpp:2027
 msgid "10/10/10 bits"
 msgstr "10/10/10 bits"
 
@@ -4999,7 +5120,7 @@ msgstr "Tester: %1"
 #: src/gui/HelpDialog.cpp:505
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:600
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:765
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:768
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:272
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:238
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:140
@@ -5688,7 +5809,7 @@ msgstr "Declinatie"
 #: src/gui/SearchDialog.cpp:306 src/gui/AstroCalcDialog.cpp:815
 #: src/gui/AstroCalcDialog.cpp:1791 src/gui/AstroCalcChart.cpp:88
 #: src/gui/AstroCalcChart.cpp:417
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1450
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1466
 msgid "Azimuth"
 msgstr "Azimut"
 
@@ -5797,10 +5918,10 @@ msgid "Valid range years:"
 msgstr "Geldig bereik in jaren:"
 
 #: src/gui/AstroCalcDialog.cpp:367
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1118
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1119
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1120
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1121
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1134
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1135
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1136
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1137
 msgid "Valid range"
 msgstr "Geldig bereik"
 
@@ -5812,8 +5933,8 @@ msgstr "Afbeeldingen"
 msgid "Save graph"
 msgstr "Grafiek opslaan"
 
-#: src/gui/AstroCalcDialog.cpp:773 src/gui/AstroCalcDialog.cpp:4234
-#: src/gui/AstroCalcDialog.cpp:4650 src/gui/AstroCalcDialog.cpp:7535
+#: src/gui/AstroCalcDialog.cpp:773 src/gui/AstroCalcDialog.cpp:4231
+#: src/gui/AstroCalcDialog.cpp:4647 src/gui/AstroCalcDialog.cpp:7528
 msgid "Unnamed star"
 msgstr "Niet benoemde ster"
 
@@ -5824,7 +5945,7 @@ msgstr "Selecteer het object om de grafiek 'azimut t.o.v. tijd' te plotten."
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:811 src/gui/AstroCalcDialog.cpp:898
 #: src/gui/AstroCalcDialog.cpp:1786 src/gui/AstroCalcDialog.cpp:2176
-#: src/gui/AstroCalcDialog.cpp:6395 src/ui_configurationDialog.h:1834
+#: src/gui/AstroCalcDialog.cpp:6388 src/ui_configurationDialog.h:1834
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:525
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:361
@@ -5843,13 +5964,13 @@ msgid "Dec (J2000)"
 msgstr "Dec (J2000)"
 
 #. TRANSLATORS: opacity
-#: src/gui/AstroCalcDialog.cpp:829 src/gui/AstroCalcDialog.cpp:6404
+#: src/gui/AstroCalcDialog.cpp:829 src/gui/AstroCalcDialog.cpp:6397
 msgid "Opac."
 msgstr "Opac."
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:834 src/gui/AstroCalcDialog.cpp:1803
-#: src/gui/AstroCalcDialog.cpp:2183 src/gui/AstroCalcDialog.cpp:6399
+#: src/gui/AstroCalcDialog.cpp:2183 src/gui/AstroCalcDialog.cpp:6392
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid "Mag."
 msgstr "Mag."
@@ -5861,7 +5982,7 @@ msgstr "A.S."
 
 #. TRANSLATORS: separation, arc-seconds
 #. TRANSLATORS: separation
-#: src/gui/AstroCalcDialog.cpp:841 src/gui/AstroCalcDialog.cpp:6414
+#: src/gui/AstroCalcDialog.cpp:841 src/gui/AstroCalcDialog.cpp:6407
 msgid "Sep."
 msgstr "Sep."
 
@@ -5896,7 +6017,7 @@ msgid "S.B."
 msgstr "S.B."
 
 #. TRANSLATORS: elevation
-#: src/gui/AstroCalcDialog.cpp:866 src/gui/AstroCalcDialog.cpp:6409
+#: src/gui/AstroCalcDialog.cpp:866 src/gui/AstroCalcDialog.cpp:6402
 msgid "Elev."
 msgstr "Hgt."
 
@@ -5913,7 +6034,7 @@ msgstr "Zonnestelsel objecten"
 msgid "Solar system objects: comets"
 msgstr "Zonnestelsel objecten: kometen"
 
-#: src/gui/AstroCalcDialog.cpp:974 src/gui/AstroCalcDialog.cpp:4062
+#: src/gui/AstroCalcDialog.cpp:974 src/gui/AstroCalcDialog.cpp:4059
 msgid "Solar system objects: minor bodies"
 msgstr "Zonnestelsel objecten: kleinere hemellichamen"
 
@@ -5955,20 +6076,20 @@ msgid "star with high proper motion"
 msgstr "sterren met hoge eigenbeweging"
 
 #: src/gui/AstroCalcDialog.cpp:1390 src/gui/AstroCalcDialog.cpp:1645
-#: src/gui/AstroCalcDialog.cpp:2101 src/gui/AstroCalcDialog.cpp:2383
-#: src/gui/AstroCalcDialog.cpp:2762 src/gui/AstroCalcDialog.cpp:3578
-#: src/gui/AstroCalcDialog.cpp:3679 src/gui/AstroCalcDialog.cpp:5041
-#: src/gui/AstroCalcDialog.cpp:7174
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1525
+#: src/gui/AstroCalcDialog.cpp:2101 src/gui/AstroCalcDialog.cpp:2380
+#: src/gui/AstroCalcDialog.cpp:2759 src/gui/AstroCalcDialog.cpp:3575
+#: src/gui/AstroCalcDialog.cpp:3676 src/gui/AstroCalcDialog.cpp:5034
+#: src/gui/AstroCalcDialog.cpp:7167
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1541
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "Microsoft Excel Open XML Spreadsheet"
 
 #: src/gui/AstroCalcDialog.cpp:1392 src/gui/AstroCalcDialog.cpp:1647
-#: src/gui/AstroCalcDialog.cpp:2103 src/gui/AstroCalcDialog.cpp:2385
-#: src/gui/AstroCalcDialog.cpp:2764 src/gui/AstroCalcDialog.cpp:3580
-#: src/gui/AstroCalcDialog.cpp:3681 src/gui/AstroCalcDialog.cpp:5043
-#: src/gui/AstroCalcDialog.cpp:7176
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1527
+#: src/gui/AstroCalcDialog.cpp:2103 src/gui/AstroCalcDialog.cpp:2382
+#: src/gui/AstroCalcDialog.cpp:2761 src/gui/AstroCalcDialog.cpp:3577
+#: src/gui/AstroCalcDialog.cpp:3678 src/gui/AstroCalcDialog.cpp:5036
+#: src/gui/AstroCalcDialog.cpp:7169
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1543
 msgid "CSV (Comma delimited)"
 msgstr "CSV (gescheiden door komma's)"
 
@@ -6007,130 +6128,130 @@ msgstr "Berekende efemeriden opslaan als..."
 msgid "Ephemeris"
 msgstr "Efemeriden"
 
-#: src/gui/AstroCalcDialog.cpp:2184 src/gui/AstroCalcDialog.cpp:4704
+#: src/gui/AstroCalcDialog.cpp:2184 src/gui/AstroCalcDialog.cpp:4701
 msgid "Solar Elongation"
 msgstr "Elongatie"
 
-#: src/gui/AstroCalcDialog.cpp:2185 src/gui/AstroCalcDialog.cpp:4705
+#: src/gui/AstroCalcDialog.cpp:2185 src/gui/AstroCalcDialog.cpp:4702
 #: src/gui/AstroCalcChart.cpp:110 src/ui_astroCalcDialog.h:2248
 msgid "Lunar Elongation"
 msgstr "Maan elongatie"
 
-#: src/gui/AstroCalcDialog.cpp:2296
+#: src/gui/AstroCalcDialog.cpp:2293
 msgid "Altitude of celestial object at transit"
 msgstr "Hoogte bij meridiaandoorgang"
 
-#: src/gui/AstroCalcDialog.cpp:2300
+#: src/gui/AstroCalcDialog.cpp:2297
 msgid "Magnitude of celestial object at transit"
 msgstr "Magnitude bij meridiaandoorgang"
 
-#: src/gui/AstroCalcDialog.cpp:2303
+#: src/gui/AstroCalcDialog.cpp:2300
 msgid "Celestial object's angular distance from the Sun at transit"
 msgstr "Hoekafstand tot zon bij meridiaandoorgang"
 
-#: src/gui/AstroCalcDialog.cpp:2306
+#: src/gui/AstroCalcDialog.cpp:2303
 msgid "Celestial object's angular distance from the Moon at transit"
 msgstr "Hoekafstand tot maan bij meridiaandoorgang"
 
-#: src/gui/AstroCalcDialog.cpp:2389
+#: src/gui/AstroCalcDialog.cpp:2386
 msgid "Save calculated data as..."
 msgstr "Berekeningen opslaan ..."
 
-#: src/gui/AstroCalcDialog.cpp:2404
+#: src/gui/AstroCalcDialog.cpp:2401
 msgid "Transits"
 msgstr "Doorgangen"
 
-#: src/gui/AstroCalcDialog.cpp:2453 src/gui/AstroCalcDialog.cpp:2834
+#: src/gui/AstroCalcDialog.cpp:2450 src/gui/AstroCalcDialog.cpp:2831
 msgid "Saros"
 msgstr "Saros"
 
-#: src/gui/AstroCalcDialog.cpp:2455 src/gui/AstroCalcDialog.cpp:2836
+#: src/gui/AstroCalcDialog.cpp:2452 src/gui/AstroCalcDialog.cpp:2833
 msgid "Gamma"
 msgstr "Gamma"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:2457
+#: src/gui/AstroCalcDialog.cpp:2454
 msgctxt "column name"
 msgid "Penumbral eclipse magnitude"
 msgstr "Magnitude penumbrale maansverduistering"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:2459
+#: src/gui/AstroCalcDialog.cpp:2456
 msgctxt "column name"
 msgid "Umbral eclipse magnitude"
 msgstr "Magnitude van de kernschaduw"
 
 #. TRANSLATORS: Visibility conditions; the name of column in
 #. AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:2461
+#: src/gui/AstroCalcDialog.cpp:2458
 msgctxt "column name"
 msgid "Vis. Cond."
 msgstr "Zichtbaarheid"
 
-#: src/gui/AstroCalcDialog.cpp:2618 src/gui/AstroCalcDialog.cpp:3051
-#: src/gui/AstroCalcDialog.cpp:3065 src/gui/AstroCalcDialog.cpp:3443
+#: src/gui/AstroCalcDialog.cpp:2615 src/gui/AstroCalcDialog.cpp:3048
+#: src/gui/AstroCalcDialog.cpp:3062 src/gui/AstroCalcDialog.cpp:3440
 msgctxt "eclipse type"
 msgid "Total"
 msgstr "Totaal"
 
-#: src/gui/AstroCalcDialog.cpp:2620 src/gui/AstroCalcDialog.cpp:3058
-#: src/gui/AstroCalcDialog.cpp:3453
+#: src/gui/AstroCalcDialog.cpp:2617 src/gui/AstroCalcDialog.cpp:3055
+#: src/gui/AstroCalcDialog.cpp:3450
 msgctxt "eclipse type"
 msgid "Partial"
 msgstr "Partieel"
 
-#: src/gui/AstroCalcDialog.cpp:2622
+#: src/gui/AstroCalcDialog.cpp:2619
 msgctxt "eclipse type"
 msgid "Penumbral"
 msgstr "Bijschaduw"
 
-#: src/gui/AstroCalcDialog.cpp:2630
+#: src/gui/AstroCalcDialog.cpp:2627
 msgctxt "visibility conditions"
 msgid "Perfect"
 msgstr "Perfect"
 
-#: src/gui/AstroCalcDialog.cpp:2631
+#: src/gui/AstroCalcDialog.cpp:2628
 msgid "Perfect visibility conditions for current location"
 msgstr "Uitstekende zichtbaarheid voor de huidige locatie"
 
-#: src/gui/AstroCalcDialog.cpp:2635
+#: src/gui/AstroCalcDialog.cpp:2632
 msgctxt "visibility conditions"
 msgid "Good"
 msgstr "Goed"
 
-#: src/gui/AstroCalcDialog.cpp:2636
+#: src/gui/AstroCalcDialog.cpp:2633
 msgid "Good visibility conditions for current location"
 msgstr "Goede zichtbaarheid voor de huidige locatie"
 
-#: src/gui/AstroCalcDialog.cpp:2640
+#: src/gui/AstroCalcDialog.cpp:2637
 msgctxt "visibility conditions"
 msgid "Bad"
 msgstr "Slecht"
 
-#: src/gui/AstroCalcDialog.cpp:2641
+#: src/gui/AstroCalcDialog.cpp:2638
 msgid "Bad visibility conditions for current location"
 msgstr "Slechte zichtbaarheid voor de huidige locatie"
 
 #. TRANSLATORS: Not obs. = Not observable
-#: src/gui/AstroCalcDialog.cpp:2649
+#: src/gui/AstroCalcDialog.cpp:2646
 msgctxt "visibility conditions"
 msgid "Not obs."
 msgstr "Niet zichtb."
 
-#: src/gui/AstroCalcDialog.cpp:2650
+#: src/gui/AstroCalcDialog.cpp:2647
 msgid "Not observable eclipse"
 msgstr "Eclips is niet zichtbaar"
 
-#: src/gui/AstroCalcDialog.cpp:2655
+#: src/gui/AstroCalcDialog.cpp:2652
 msgctxt "visibility conditions"
 msgid "Invisible"
 msgstr "Onzichtbaar"
 
-#: src/gui/AstroCalcDialog.cpp:2656
+#: src/gui/AstroCalcDialog.cpp:2653
 msgid "The greatest eclipse is invisible in current location"
 msgstr "Grootste deel van de eclips is niet zichtbaar in de huidige locatie"
 
-#: src/gui/AstroCalcDialog.cpp:2692 src/gui/AstroCalcDialog.cpp:3145
+#: src/gui/AstroCalcDialog.cpp:2689 src/gui/AstroCalcDialog.cpp:3142
 msgid ""
 "Saros series number of eclipse (each eclipse in a Saros is separated by an "
 "interval of 18 years 11.3 days)"
@@ -6138,27 +6259,27 @@ msgstr ""
 "Saros reeksnummer van de eclips (eclipsen in een Saros zijn van elkaar "
 "verwijderd door een interval van 18 jaar 11.3 dagen)"
 
-#: src/gui/AstroCalcDialog.cpp:2696
+#: src/gui/AstroCalcDialog.cpp:2693
 msgid ""
 "Penumbral magnitude is the fraction of the Moon's diameter immersed in the "
 "penumbra"
 msgstr "Fractie van de diameter van de maan in de bijschaduw"
 
-#: src/gui/AstroCalcDialog.cpp:2699
+#: src/gui/AstroCalcDialog.cpp:2696
 msgid ""
 "Umbral magnitude is the fraction of the Moon's diameter immersed in the "
 "umbra"
 msgstr "Fractie van de diameter van de maan in de kernschaduw"
 
-#: src/gui/AstroCalcDialog.cpp:2768
+#: src/gui/AstroCalcDialog.cpp:2765
 msgid "Save calculated lunar eclipses as..."
 msgstr "Bewaar berekende maansverduisteringen als..."
 
-#: src/gui/AstroCalcDialog.cpp:2783 src/ui_astroCalcDialog.h:2298
+#: src/gui/AstroCalcDialog.cpp:2780 src/ui_astroCalcDialog.h:2298
 msgid "Lunar Eclipses"
 msgstr "Maansverduisteringen"
 
-#: src/gui/AstroCalcDialog.cpp:2818 src/gui/AstroCalcDialog.cpp:3735
+#: src/gui/AstroCalcDialog.cpp:2815 src/gui/AstroCalcDialog.cpp:3732
 #: src/ui_astroCalcDialog.h:2292
 msgid ""
 "Note: Local circumstances for eclipses during thousands of years in the past"
@@ -6170,147 +6291,147 @@ msgstr ""
 "in ΔT, een gevolg van fluctuaties in de rotatie van de Aarde."
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:2838 src/gui/AstroCalcDialog.cpp:3203
+#: src/gui/AstroCalcDialog.cpp:2835 src/gui/AstroCalcDialog.cpp:3200
 msgctxt "column name"
 msgid "Eclipse Magnitude"
 msgstr "Magnitude van de verduistering"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:2840
+#: src/gui/AstroCalcDialog.cpp:2837
 msgctxt "column name"
 msgid "Latitude"
 msgstr "Breedteligging"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:2842
+#: src/gui/AstroCalcDialog.cpp:2839
 msgctxt "column name"
 msgid "Longitude"
 msgstr "Lengteligging"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:2844
+#: src/gui/AstroCalcDialog.cpp:2841
 msgctxt "column name"
 msgid "Altitude"
 msgstr "Hoogte"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:2846
+#: src/gui/AstroCalcDialog.cpp:2843
 msgctxt "column name"
 msgid "Path Width"
 msgstr "Breedte"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:2848
+#: src/gui/AstroCalcDialog.cpp:2845
 msgctxt "column name"
 msgid "Central Duration"
 msgstr "Duur"
 
-#: src/gui/AstroCalcDialog.cpp:3055 src/gui/AstroCalcDialog.cpp:3069
-#: src/gui/AstroCalcDialog.cpp:3079 src/gui/AstroCalcDialog.cpp:3449
+#: src/gui/AstroCalcDialog.cpp:3052 src/gui/AstroCalcDialog.cpp:3066
+#: src/gui/AstroCalcDialog.cpp:3076 src/gui/AstroCalcDialog.cpp:3446
 msgctxt "eclipse type"
 msgid "Annular"
 msgstr "Ringvormig"
 
-#: src/gui/AstroCalcDialog.cpp:3075
+#: src/gui/AstroCalcDialog.cpp:3072
 msgctxt "eclipse type"
 msgid "Hybrid"
 msgstr "Gemengd"
 
-#: src/gui/AstroCalcDialog.cpp:3149
+#: src/gui/AstroCalcDialog.cpp:3146
 msgid ""
 "Eclipse magnitude is the fraction of the Sun's diameter obscured by the Moon"
 msgstr "Fractie van de diameter van de zon verduisterd door de maan"
 
-#: src/gui/AstroCalcDialog.cpp:3156
+#: src/gui/AstroCalcDialog.cpp:3153
 msgid "Sun's altitude at greatest eclipse"
 msgstr "Zonshoogte bij maximale verduistering"
 
-#: src/gui/AstroCalcDialog.cpp:3159
+#: src/gui/AstroCalcDialog.cpp:3156
 msgid "Width of the path of totality or annularity at greatest eclipse"
 msgstr "Breedte van de kernschaduw of ring bij maximale verduistering"
 
-#: src/gui/AstroCalcDialog.cpp:3161
+#: src/gui/AstroCalcDialog.cpp:3158
 msgid "Duration of total or annular phase at greatest eclipse"
 msgstr "Duur van de maximale verduistering"
 
-#: src/gui/AstroCalcDialog.cpp:3194 src/gui/AstroCalcChart.cpp:376
+#: src/gui/AstroCalcDialog.cpp:3191 src/gui/AstroCalcChart.cpp:376
 #: src/gui/ObsListDialog.cpp:154 src/gui/ObsListCreateEditDialog.cpp:162
 msgid "Date"
 msgstr "Datum"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3197
+#: src/gui/AstroCalcDialog.cpp:3194
 msgctxt "column name"
 msgid "Partial Eclipse Begins"
 msgstr "Intrede bijschaduw"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3199
+#: src/gui/AstroCalcDialog.cpp:3196
 msgctxt "column name"
 msgid "Central Eclipse Begins"
 msgstr "Intrede hoofdschaduw"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3201
+#: src/gui/AstroCalcDialog.cpp:3198
 msgctxt "column name"
 msgid "Maximum Eclipse"
 msgstr "Maximum"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3205
+#: src/gui/AstroCalcDialog.cpp:3202
 msgctxt "column name"
 msgid "Central Eclipse Ends"
 msgstr "Uittrede kernschaduw"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3207
+#: src/gui/AstroCalcDialog.cpp:3204
 msgctxt "column name"
 msgid "Partial Eclipse Ends"
 msgstr "Uittrede bijschaduw"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-#: src/gui/AstroCalcDialog.cpp:3209
+#: src/gui/AstroCalcDialog.cpp:3206
 msgctxt "column name"
 msgid "Duration"
 msgstr "Duur"
 
-#: src/gui/AstroCalcDialog.cpp:3480
+#: src/gui/AstroCalcDialog.cpp:3477
 msgid "The time of first contact"
 msgstr "Tijdstip van eerste contact"
 
-#: src/gui/AstroCalcDialog.cpp:3486
+#: src/gui/AstroCalcDialog.cpp:3483
 msgid "The time of second contact"
 msgstr "Tijdstip tweede contact"
 
-#: src/gui/AstroCalcDialog.cpp:3488
+#: src/gui/AstroCalcDialog.cpp:3485
 msgid "The time of greatest eclipse"
 msgstr "Tijdstip maximale verduistering"
 
-#: src/gui/AstroCalcDialog.cpp:3494
+#: src/gui/AstroCalcDialog.cpp:3491
 msgid "The time of third contact"
 msgstr "Tijdstip derde contact"
 
-#: src/gui/AstroCalcDialog.cpp:3498
+#: src/gui/AstroCalcDialog.cpp:3495
 msgid "The time of fourth contact"
 msgstr "tijdstip vierde contact"
 
-#: src/gui/AstroCalcDialog.cpp:3503
+#: src/gui/AstroCalcDialog.cpp:3500
 msgid "Duration of total or annular eclipse"
 msgstr "Duur van totale of annulaire verduistering"
 
-#: src/gui/AstroCalcDialog.cpp:3551
+#: src/gui/AstroCalcDialog.cpp:3548
 msgid "Greatest eclipse’s point"
 msgstr "Locatie van het centrum van de eclips"
 
-#: src/gui/AstroCalcDialog.cpp:3584 src/gui/AstroCalcDialog.cpp:3685
+#: src/gui/AstroCalcDialog.cpp:3581 src/gui/AstroCalcDialog.cpp:3682
 msgid "Save calculated solar eclipses as..."
 msgstr "Zonsverduisteringen opslaan als..."
 
-#: src/gui/AstroCalcDialog.cpp:3599 src/gui/AstroCalcDialog.cpp:3700
+#: src/gui/AstroCalcDialog.cpp:3596 src/gui/AstroCalcDialog.cpp:3697
 msgid "Solar Eclipses"
 msgstr "Zonsverduisteringen"
 
-#: src/gui/AstroCalcDialog.cpp:3634
+#: src/gui/AstroCalcDialog.cpp:3631
 msgid ""
 "Note: Path of eclipses during thousands of years in the past and future are "
 "not reliable due to uncertainty in ΔT which is caused by fluctuations in "
@@ -6320,366 +6441,366 @@ msgstr ""
 "toekomst zijn niet betrouwbaar als gevolg van foutmarges in ΔT, een gevolg "
 "van fluctuaties in de rotatie van de Aarde."
 
-#: src/gui/AstroCalcDialog.cpp:3909
+#: src/gui/AstroCalcDialog.cpp:3906
 msgid "1 minute"
 msgstr "1 minuut"
 
-#: src/gui/AstroCalcDialog.cpp:3909
+#: src/gui/AstroCalcDialog.cpp:3906
 msgid "10 minutes"
 msgstr "10 minuten"
 
-#: src/gui/AstroCalcDialog.cpp:3909
+#: src/gui/AstroCalcDialog.cpp:3906
 msgid "30 minutes"
 msgstr "30 minuten"
 
-#: src/gui/AstroCalcDialog.cpp:3909
+#: src/gui/AstroCalcDialog.cpp:3906
 msgid "1 hour"
 msgstr "1 uur"
 
-#: src/gui/AstroCalcDialog.cpp:3909
+#: src/gui/AstroCalcDialog.cpp:3906
 msgid "6 hours"
 msgstr "6 uur"
 
-#: src/gui/AstroCalcDialog.cpp:3909
+#: src/gui/AstroCalcDialog.cpp:3906
 msgid "12 hours"
 msgstr "12 uur"
 
-#: src/gui/AstroCalcDialog.cpp:3910
+#: src/gui/AstroCalcDialog.cpp:3907
 msgid "1 solar day"
 msgstr "1 zonnedag"
 
-#: src/gui/AstroCalcDialog.cpp:3910
+#: src/gui/AstroCalcDialog.cpp:3907
 msgid "5 solar days"
 msgstr "5 zonnedagen"
 
-#: src/gui/AstroCalcDialog.cpp:3910
+#: src/gui/AstroCalcDialog.cpp:3907
 msgid "10 solar days"
 msgstr "10 zonnedagen"
 
-#: src/gui/AstroCalcDialog.cpp:3910
+#: src/gui/AstroCalcDialog.cpp:3907
 msgid "15 solar days"
 msgstr "15 zonnedagen"
 
-#: src/gui/AstroCalcDialog.cpp:3910
+#: src/gui/AstroCalcDialog.cpp:3907
 msgid "30 solar days"
 msgstr "30 zonnedagen"
 
-#: src/gui/AstroCalcDialog.cpp:3911
+#: src/gui/AstroCalcDialog.cpp:3908
 msgid "60 solar days"
 msgstr "60 zonnedagen"
 
-#: src/gui/AstroCalcDialog.cpp:3911
+#: src/gui/AstroCalcDialog.cpp:3908
 msgid "100 solar days"
 msgstr "100 zonnedagen"
 
-#: src/gui/AstroCalcDialog.cpp:3911
+#: src/gui/AstroCalcDialog.cpp:3908
 msgid "500 solar days"
 msgstr "500 zonnedagen"
 
-#: src/gui/AstroCalcDialog.cpp:3911
+#: src/gui/AstroCalcDialog.cpp:3908
 msgid "1 sidereal day"
 msgstr "1 siderische dag"
 
-#: src/gui/AstroCalcDialog.cpp:3911
+#: src/gui/AstroCalcDialog.cpp:3908
 msgid "5 sidereal days"
 msgstr "5 siderische dagen"
 
-#: src/gui/AstroCalcDialog.cpp:3912
+#: src/gui/AstroCalcDialog.cpp:3909
 msgid "10 sidereal days"
 msgstr "10 siderische dagen"
 
-#: src/gui/AstroCalcDialog.cpp:3912
+#: src/gui/AstroCalcDialog.cpp:3909
 msgid "15 sidereal days"
 msgstr "15 siderische dagen"
 
-#: src/gui/AstroCalcDialog.cpp:3912
+#: src/gui/AstroCalcDialog.cpp:3909
 msgid "30 sidereal days"
 msgstr "30 siderische dagen"
 
-#: src/gui/AstroCalcDialog.cpp:3912
+#: src/gui/AstroCalcDialog.cpp:3909
 msgid "60 sidereal days"
 msgstr "60 siderische dagen"
 
-#: src/gui/AstroCalcDialog.cpp:3912
+#: src/gui/AstroCalcDialog.cpp:3909
 msgid "100 sidereal days"
 msgstr "100 siderische dagen"
 
-#: src/gui/AstroCalcDialog.cpp:3913
+#: src/gui/AstroCalcDialog.cpp:3910
 msgid "500 sidereal days"
 msgstr "500 siderische dagen"
 
-#: src/gui/AstroCalcDialog.cpp:3913
+#: src/gui/AstroCalcDialog.cpp:3910
 msgid "1 sidereal year"
 msgstr "1 siderisch jaar"
 
-#: src/gui/AstroCalcDialog.cpp:3913
+#: src/gui/AstroCalcDialog.cpp:3910
 msgid "1 Julian day"
 msgstr "1 Juliaanse dag"
 
-#: src/gui/AstroCalcDialog.cpp:3913
+#: src/gui/AstroCalcDialog.cpp:3910
 msgid "5 Julian days"
 msgstr "5 Juliaanse dagen"
 
-#: src/gui/AstroCalcDialog.cpp:3913
+#: src/gui/AstroCalcDialog.cpp:3910
 msgid "10 Julian days"
 msgstr "10 Juliaanse dagen"
 
-#: src/gui/AstroCalcDialog.cpp:3914
+#: src/gui/AstroCalcDialog.cpp:3911
 msgid "15 Julian days"
 msgstr "15 Juliaanse dagen"
 
-#: src/gui/AstroCalcDialog.cpp:3914
+#: src/gui/AstroCalcDialog.cpp:3911
 msgid "30 Julian days"
 msgstr "30 Juliaanse dagen"
 
-#: src/gui/AstroCalcDialog.cpp:3914
+#: src/gui/AstroCalcDialog.cpp:3911
 msgid "60 Julian days"
 msgstr "60 Juliaanse dagen"
 
-#: src/gui/AstroCalcDialog.cpp:3914
+#: src/gui/AstroCalcDialog.cpp:3911
 msgid "100 Julian days"
 msgstr "100 Juliaanse dagen"
 
-#: src/gui/AstroCalcDialog.cpp:3914
+#: src/gui/AstroCalcDialog.cpp:3911
 msgid "1 Julian year"
 msgstr "1 Juliaans jaar"
 
-#: src/gui/AstroCalcDialog.cpp:3915
+#: src/gui/AstroCalcDialog.cpp:3912
 msgid "1 Gaussian year"
 msgstr "1 Gaussiaans jaar"
 
-#: src/gui/AstroCalcDialog.cpp:3915
+#: src/gui/AstroCalcDialog.cpp:3912
 msgid "1 synodic month"
 msgstr "1 synodische maand"
 
-#: src/gui/AstroCalcDialog.cpp:3915
+#: src/gui/AstroCalcDialog.cpp:3912
 msgid "1 draconic month"
 msgstr "1 draconische maand"
 
-#: src/gui/AstroCalcDialog.cpp:3915
+#: src/gui/AstroCalcDialog.cpp:3912
 msgid "1 mean tropical month"
 msgstr "1 gemiddelde tropische maand"
 
-#: src/gui/AstroCalcDialog.cpp:3916
+#: src/gui/AstroCalcDialog.cpp:3913
 msgid "1 anomalistic month"
 msgstr "1 anomalistische maand"
 
-#: src/gui/AstroCalcDialog.cpp:3916
+#: src/gui/AstroCalcDialog.cpp:3913
 msgid "1 anomalistic year"
 msgstr "1 anomalistisch jaar"
 
-#: src/gui/AstroCalcDialog.cpp:3916
+#: src/gui/AstroCalcDialog.cpp:3913
 msgid "1 saros"
 msgstr "1 saros"
 
-#: src/gui/AstroCalcDialog.cpp:3916
+#: src/gui/AstroCalcDialog.cpp:3913
 msgid "custom interval"
 msgstr "Aangepaste interval"
 
-#: src/gui/AstroCalcDialog.cpp:4053
+#: src/gui/AstroCalcDialog.cpp:4050
 msgid "Latest selected object"
 msgstr "Laatst geselecteerde object"
 
-#: src/gui/AstroCalcDialog.cpp:4053
+#: src/gui/AstroCalcDialog.cpp:4050
 msgid "Solar system"
 msgstr "Zonnestelsel"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4053 src/gui/AstroCalcDialog.cpp:6293
+#: src/gui/AstroCalcDialog.cpp:4050 src/gui/AstroCalcDialog.cpp:6286
 #: src/translations.h:67
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "Asteroïden"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4054 src/gui/AstroCalcDialog.cpp:6295
+#: src/gui/AstroCalcDialog.cpp:4051 src/gui/AstroCalcDialog.cpp:6288
 #: src/translations.h:71
 msgid "Plutinos"
 msgstr "Plutinos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4054 src/gui/AstroCalcDialog.cpp:6294
+#: src/gui/AstroCalcDialog.cpp:4051 src/gui/AstroCalcDialog.cpp:6287
 #: src/translations.h:65
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "Kometen"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4054 src/gui/AstroCalcDialog.cpp:6296
+#: src/gui/AstroCalcDialog.cpp:4051 src/gui/AstroCalcDialog.cpp:6289
 #: src/translations.h:73
 msgid "Dwarf planets"
 msgstr "Dwergplaneten"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4054 src/gui/AstroCalcDialog.cpp:6297
+#: src/gui/AstroCalcDialog.cpp:4051 src/gui/AstroCalcDialog.cpp:6290
 #: src/translations.h:75
 msgid "Cubewanos"
 msgstr "Cubewanos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4055 src/gui/AstroCalcDialog.cpp:6298
+#: src/gui/AstroCalcDialog.cpp:4052 src/gui/AstroCalcDialog.cpp:6291
 #: src/translations.h:77
 msgid "Scattered disc objects"
 msgstr "Verspreide schijfobjecten"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4055 src/gui/AstroCalcDialog.cpp:6299
+#: src/gui/AstroCalcDialog.cpp:4052 src/gui/AstroCalcDialog.cpp:6292
 #: src/translations.h:79
 msgid "Oort cloud objects"
 msgstr "Oortwolkobjecten"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4055 src/gui/AstroCalcDialog.cpp:6300
+#: src/gui/AstroCalcDialog.cpp:4052 src/gui/AstroCalcDialog.cpp:6293
 #: src/translations.h:81
 msgid "Sednoids"
 msgstr "Sednoiden"
 
-#: src/gui/AstroCalcDialog.cpp:4056
+#: src/gui/AstroCalcDialog.cpp:4053
 #, qt-format
 msgid "Bright stars (<%1 mag)"
 msgstr "Heldere sterren (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:4056
+#: src/gui/AstroCalcDialog.cpp:4053
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
 msgstr "Heldere dubbelsterren (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:4057
+#: src/gui/AstroCalcDialog.cpp:4054
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
 msgstr "Heldere variabele sterren (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:4057
+#: src/gui/AstroCalcDialog.cpp:4054
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
 msgstr "Heldere sterclusters (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:4058
+#: src/gui/AstroCalcDialog.cpp:4055
 #, qt-format
 msgid "Planetary nebulae (<%1 mag)"
 msgstr "Planetaire nevel (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:4058
+#: src/gui/AstroCalcDialog.cpp:4055
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
 msgstr "Heldere nevels (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4058 src/gui/AstroCalcDialog.cpp:6290
+#: src/gui/AstroCalcDialog.cpp:4055 src/gui/AstroCalcDialog.cpp:6283
 #: src/translations.h:318 src/ui_viewDialog.h:3569
 #: src/ui_dsoColorsDialog.h:659
 msgid "Dark nebulae"
 msgstr "Donkere nevels"
 
-#: src/gui/AstroCalcDialog.cpp:4059
+#: src/gui/AstroCalcDialog.cpp:4056
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
 msgstr "Heldere sterrenstelsels (<%1 mag)"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4059 src/gui/AstroCalcDialog.cpp:6305
+#: src/gui/AstroCalcDialog.cpp:4056 src/gui/AstroCalcDialog.cpp:6298
 #: src/translations.h:368 src/ui_dsoColorsDialog.h:695
 msgid "Symbiotic stars"
 msgstr "Symbiotische sterren"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4059 src/gui/AstroCalcDialog.cpp:6306
+#: src/gui/AstroCalcDialog.cpp:4056 src/gui/AstroCalcDialog.cpp:6299
 #: src/translations.h:370 src/ui_dsoColorsDialog.h:674
 msgid "Emission-line stars"
 msgstr "Emissie-lijn sterren"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4060 src/gui/AstroCalcDialog.cpp:6311
+#: src/gui/AstroCalcDialog.cpp:4057 src/gui/AstroCalcDialog.cpp:6304
 #: src/translations.h:83
 msgid "Interstellar objects"
 msgstr "Interstellaire objecten"
 
-#: src/gui/AstroCalcDialog.cpp:4060
+#: src/gui/AstroCalcDialog.cpp:4057
 msgid "Planets and Sun"
 msgstr "Zon en planeten"
 
-#: src/gui/AstroCalcDialog.cpp:4060
+#: src/gui/AstroCalcDialog.cpp:4057
 msgid "Sun, planets and moons of observer location"
 msgstr "Lokale Zon, planeten en manen"
 
-#: src/gui/AstroCalcDialog.cpp:4061
+#: src/gui/AstroCalcDialog.cpp:4058
 #, qt-format
 msgid "Bright Solar system objects (<%1 mag)"
 msgstr "Heldere zonnestelsel objecten (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:4062
+#: src/gui/AstroCalcDialog.cpp:4059
 msgid "Moons of first body"
 msgstr "Manen van eerste object"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4063 src/gui/AstroCalcDialog.cpp:6339
+#: src/gui/AstroCalcDialog.cpp:4060 src/gui/AstroCalcDialog.cpp:6332
 #: src/translations.h:455
 msgid "Bright carbon stars"
 msgstr "Heldere carbon sterren"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4063 src/gui/AstroCalcDialog.cpp:6340
+#: src/gui/AstroCalcDialog.cpp:4060 src/gui/AstroCalcDialog.cpp:6333
 #: src/translations.h:457
 msgid "Bright barium stars"
 msgstr "Heldere bariumsterren"
 
-#: src/gui/AstroCalcDialog.cpp:4250
+#: src/gui/AstroCalcDialog.cpp:4247
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
 msgstr "Selecteer het object om de 'Hoogte t.o.v. tijd' grafiek te tekenen."
 
-#: src/gui/AstroCalcDialog.cpp:4476 src/gui/AstroCalcDialog.cpp:4490
+#: src/gui/AstroCalcDialog.cpp:4473 src/gui/AstroCalcDialog.cpp:4487
 msgid "Magnitude vs. Time"
 msgstr "Magnitude t.o.v. tijd"
 
-#: src/gui/AstroCalcDialog.cpp:4477 src/gui/AstroCalcDialog.cpp:4491
+#: src/gui/AstroCalcDialog.cpp:4474 src/gui/AstroCalcDialog.cpp:4488
 msgid "Phase vs. Time"
 msgstr "Fase t.o.v. tijd"
 
-#: src/gui/AstroCalcDialog.cpp:4478 src/gui/AstroCalcDialog.cpp:4492
+#: src/gui/AstroCalcDialog.cpp:4475 src/gui/AstroCalcDialog.cpp:4489
 msgid "Distance vs. Time"
 msgstr "Afstand t.o.v. tijd"
 
-#: src/gui/AstroCalcDialog.cpp:4479 src/gui/AstroCalcDialog.cpp:4493
+#: src/gui/AstroCalcDialog.cpp:4476 src/gui/AstroCalcDialog.cpp:4490
 msgid "Elongation vs. Time"
 msgstr "Elongatie t.o.v. tijd"
 
-#: src/gui/AstroCalcDialog.cpp:4480 src/gui/AstroCalcDialog.cpp:4494
+#: src/gui/AstroCalcDialog.cpp:4477 src/gui/AstroCalcDialog.cpp:4491
 msgid "Angular size vs. Time"
 msgstr "Hoekgrootte t.o.v. tijd"
 
-#: src/gui/AstroCalcDialog.cpp:4481 src/gui/AstroCalcDialog.cpp:4495
+#: src/gui/AstroCalcDialog.cpp:4478 src/gui/AstroCalcDialog.cpp:4492
 msgid "Phase angle vs. Time"
 msgstr "Fasehoek t.o.v. tijd"
 
 #. TRANSLATORS: The phrase "Heliocentric distance" may be long in some
 #. languages and you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:4483 src/gui/AstroCalcDialog.cpp:4497
+#: src/gui/AstroCalcDialog.cpp:4480 src/gui/AstroCalcDialog.cpp:4494
 msgid "Heliocentric distance vs. Time"
 msgstr "Heliocentrische afstand t.o.v. tijd"
 
 #. TRANSLATORS: The phrase "Transit altitude" may be long in some languages
 #. and you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:4485 src/gui/AstroCalcDialog.cpp:4499
+#: src/gui/AstroCalcDialog.cpp:4482 src/gui/AstroCalcDialog.cpp:4496
 msgid "Transit altitude vs. Time"
 msgstr "Doorgangshoogte t.o.v. tijd"
 
 #. TRANSLATORS: The phrase "Right ascension" may be long in some languages and
 #. you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:4487 src/gui/AstroCalcDialog.cpp:4501
+#: src/gui/AstroCalcDialog.cpp:4484 src/gui/AstroCalcDialog.cpp:4498
 msgid "Right ascension vs. Time"
 msgstr "Rechte klimming t.o.v. tijd"
 
-#: src/gui/AstroCalcDialog.cpp:4488 src/gui/AstroCalcDialog.cpp:4502
+#: src/gui/AstroCalcDialog.cpp:4485 src/gui/AstroCalcDialog.cpp:4499
 msgid "Declination vs. Time"
 msgstr "Declinatie t.o.v. tijd"
 
 #. TRANSLATORS: hours.
 #. TRANSLATORS: duration
 #. TRANSLATORS: hours.
-#: src/gui/AstroCalcDialog.cpp:4544 src/gui/AstroCalcChart.cpp:440
+#: src/gui/AstroCalcDialog.cpp:4541 src/gui/AstroCalcChart.cpp:440
 #: src/gui/AstroCalcChart.cpp:466
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:853
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1114
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:856
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1130
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:178
 #: plugins/Novae/src/gui/NovaeDialog.cpp:172
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:170
@@ -6689,7 +6810,7 @@ msgctxt "time"
 msgid "h"
 msgstr "u"
 
-#: src/gui/AstroCalcDialog.cpp:4655
+#: src/gui/AstroCalcDialog.cpp:4652
 msgid ""
 "Please select object to plot its 'Monthly Elevation' graph for the current "
 "year at selected time."
@@ -6697,362 +6818,362 @@ msgstr ""
 "Selecteer het object om de 'Maandelijkse elevatie' grafiek voor het huidige "
 "jaar te tekenen."
 
-#: src/gui/AstroCalcDialog.cpp:4694
+#: src/gui/AstroCalcDialog.cpp:4691
 msgid "Phenomenon"
 msgstr "Fenomeen"
 
-#: src/gui/AstroCalcDialog.cpp:4696
+#: src/gui/AstroCalcDialog.cpp:4693
 msgid "Object 1"
 msgstr "Object 1"
 
 #. TRANSLATORS: Magnitude of object 1
-#: src/gui/AstroCalcDialog.cpp:4698
+#: src/gui/AstroCalcDialog.cpp:4695
 msgid "Mag. 1"
 msgstr "Mag. 1"
 
-#: src/gui/AstroCalcDialog.cpp:4699
+#: src/gui/AstroCalcDialog.cpp:4696
 msgid "Object 2"
 msgstr "Object 2"
 
 #. TRANSLATORS: Magnitude of object 2
-#: src/gui/AstroCalcDialog.cpp:4701
+#: src/gui/AstroCalcDialog.cpp:4698
 msgid "Mag. 2"
 msgstr "Mag. 2"
 
-#: src/gui/AstroCalcDialog.cpp:4703
+#: src/gui/AstroCalcDialog.cpp:4700
 msgid "Elevation"
 msgstr "Hoogte"
 
-#: src/gui/AstroCalcDialog.cpp:4732 src/gui/AstroCalcDialog.cpp:5170
-#: src/gui/AstroCalcDialog.cpp:5418
+#: src/gui/AstroCalcDialog.cpp:4729 src/gui/AstroCalcDialog.cpp:5163
+#: src/gui/AstroCalcDialog.cpp:5411
 msgid "Opposition"
 msgstr "Oppositie"
 
-#: src/gui/AstroCalcDialog.cpp:5047
+#: src/gui/AstroCalcDialog.cpp:5040
 msgid "Save calculated phenomena as..."
 msgstr "Berekende fenomenen opslaan als..."
 
-#: src/gui/AstroCalcDialog.cpp:5065 src/gui/AstroCalcDialog.cpp:5067
+#: src/gui/AstroCalcDialog.cpp:5058 src/gui/AstroCalcDialog.cpp:5060
 #: src/ui_astroCalcDialog.h:2059
 msgid "Phenomena"
 msgstr "Fenomenen"
 
-#: src/gui/AstroCalcDialog.cpp:5122
+#: src/gui/AstroCalcDialog.cpp:5115
 msgid "Magnitude of first object"
 msgstr "Magnitude van het eerste object"
 
-#: src/gui/AstroCalcDialog.cpp:5125
+#: src/gui/AstroCalcDialog.cpp:5118
 msgid "Magnitude of second object"
 msgstr "Magnitude van het tweede object"
 
-#: src/gui/AstroCalcDialog.cpp:5131
+#: src/gui/AstroCalcDialog.cpp:5124
 msgid "Elevation of first object at moment of phenomena"
 msgstr "Hoogte van het eerste object op het moment van de verschijnselen"
 
-#: src/gui/AstroCalcDialog.cpp:5133 src/gui/AstroCalcDialog.cpp:5276
+#: src/gui/AstroCalcDialog.cpp:5126 src/gui/AstroCalcDialog.cpp:5269
 msgid "Angular distance from the Sun"
 msgstr "Hoekafstand tot de zon"
 
-#: src/gui/AstroCalcDialog.cpp:5136 src/gui/AstroCalcDialog.cpp:5277
+#: src/gui/AstroCalcDialog.cpp:5129 src/gui/AstroCalcDialog.cpp:5270
 msgid "Angular distance from the Moon"
 msgstr "Hoekafstand tot de maan"
 
-#: src/gui/AstroCalcDialog.cpp:5154 src/gui/AstroCalcDialog.cpp:5329
-#: src/gui/AstroCalcDialog.cpp:5409
+#: src/gui/AstroCalcDialog.cpp:5147 src/gui/AstroCalcDialog.cpp:5322
+#: src/gui/AstroCalcDialog.cpp:5402
 msgid "Conjunction"
 msgstr "Conjunctie"
 
-#: src/gui/AstroCalcDialog.cpp:5163
+#: src/gui/AstroCalcDialog.cpp:5156
 msgid "Shadow transit"
 msgstr "Schaduwovergang"
 
-#: src/gui/AstroCalcDialog.cpp:5166 src/gui/AstroCalcDialog.cpp:5173
-#: src/gui/AstroCalcDialog.cpp:5219 src/gui/AstroCalcDialog.cpp:5225
-#: src/gui/AstroCalcDialog.cpp:5421 src/gui/AstroCalcDialog.cpp:5437
-#: src/gui/AstroCalcDialog.cpp:5443
+#: src/gui/AstroCalcDialog.cpp:5159 src/gui/AstroCalcDialog.cpp:5166
+#: src/gui/AstroCalcDialog.cpp:5212 src/gui/AstroCalcDialog.cpp:5218
+#: src/gui/AstroCalcDialog.cpp:5414 src/gui/AstroCalcDialog.cpp:5430
+#: src/gui/AstroCalcDialog.cpp:5436
 msgid "Eclipse"
 msgstr "Verduistering"
 
-#: src/gui/AstroCalcDialog.cpp:5182
+#: src/gui/AstroCalcDialog.cpp:5175
 msgid "Greatest eastern elongation"
 msgstr "Grootste oostelijke elongatie"
 
-#: src/gui/AstroCalcDialog.cpp:5185
+#: src/gui/AstroCalcDialog.cpp:5178
 msgid "Greatest western elongation"
 msgstr "Grootste westelijke elongatie"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:5192
+#: src/gui/AstroCalcDialog.cpp:5185
 msgid "Stationary (begin retrograde motion)"
 msgstr "Stationair (begin retrograde beweging)"
 
 #. TRANSLATORS: The planet are stand still in the equatorial coordinates
-#: src/gui/AstroCalcDialog.cpp:5197
+#: src/gui/AstroCalcDialog.cpp:5190
 msgid "Stationary (begin prograde motion)"
 msgstr "Stationair (begin prograde beweging)"
 
-#: src/gui/AstroCalcDialog.cpp:5203
+#: src/gui/AstroCalcDialog.cpp:5196
 msgid "Perihelion"
 msgstr "Perihelium"
 
-#: src/gui/AstroCalcDialog.cpp:5205
+#: src/gui/AstroCalcDialog.cpp:5198
 msgid "Aphelion"
 msgstr "Aphelium"
 
-#: src/gui/AstroCalcDialog.cpp:5212 src/gui/AstroCalcDialog.cpp:5430
+#: src/gui/AstroCalcDialog.cpp:5205 src/gui/AstroCalcDialog.cpp:5423
 msgctxt "passage of the celestial body"
 msgid "Transit"
 msgstr "Doorgang"
 
-#: src/gui/AstroCalcDialog.cpp:5215 src/gui/AstroCalcDialog.cpp:5334
-#: src/gui/AstroCalcDialog.cpp:5433
+#: src/gui/AstroCalcDialog.cpp:5208 src/gui/AstroCalcDialog.cpp:5327
+#: src/gui/AstroCalcDialog.cpp:5426
 msgid "Occultation"
 msgstr "Verduistering"
 
-#: src/gui/AstroCalcDialog.cpp:5235 src/gui/AstroCalcDialog.cpp:5237
-#: src/gui/AstroCalcDialog.cpp:5456 src/gui/AstroCalcDialog.cpp:5458
+#: src/gui/AstroCalcDialog.cpp:5228 src/gui/AstroCalcDialog.cpp:5230
+#: src/gui/AstroCalcDialog.cpp:5449 src/gui/AstroCalcDialog.cpp:5451
 msgid "Superior conjunction"
 msgstr "Superieure conjunctie"
 
-#: src/gui/AstroCalcDialog.cpp:5235 src/gui/AstroCalcDialog.cpp:5237
-#: src/gui/AstroCalcDialog.cpp:5456 src/gui/AstroCalcDialog.cpp:5458
+#: src/gui/AstroCalcDialog.cpp:5228 src/gui/AstroCalcDialog.cpp:5230
+#: src/gui/AstroCalcDialog.cpp:5449 src/gui/AstroCalcDialog.cpp:5451
 msgid "Inferior conjunction"
 msgstr "Inferieure conjunctie"
 
-#: src/gui/AstroCalcDialog.cpp:5280
+#: src/gui/AstroCalcDialog.cpp:5273
 msgid "Angular distance from the Sun for second object"
 msgstr "Hoekafstand van de zon tot tweede object"
 
-#: src/gui/AstroCalcDialog.cpp:5281
+#: src/gui/AstroCalcDialog.cpp:5274
 msgid "Angular distance from the Moon for second object"
 msgstr "Hoekafstand van de maan tot tweede object"
 
-#: src/gui/AstroCalcDialog.cpp:6204 src/gui/AstroCalcDialog.cpp:6208
+#: src/gui/AstroCalcDialog.cpp:6197 src/gui/AstroCalcDialog.cpp:6201
 #: src/ui_astroCalcDialog.h:2299
 msgid "Table of solar eclipses"
 msgstr "Tabel van zonsverduisteringen"
 
-#: src/gui/AstroCalcDialog.cpp:6205
+#: src/gui/AstroCalcDialog.cpp:6198
 msgid "Table of solar eclipses visible in current location"
 msgstr ""
 "Tabel van zonsverduisteringen die zichtbaar zijn vanuit de huidige locatie"
 
-#: src/gui/AstroCalcDialog.cpp:6206
+#: src/gui/AstroCalcDialog.cpp:6199
 msgid "Table of lunar eclipses"
 msgstr "Tabel van maansverduisteringen"
 
-#: src/gui/AstroCalcDialog.cpp:6265
+#: src/gui/AstroCalcDialog.cpp:6258
 msgctxt "Celestial object is observed..."
 msgid "In the Evening"
 msgstr "'s Avonds"
 
-#: src/gui/AstroCalcDialog.cpp:6266
+#: src/gui/AstroCalcDialog.cpp:6259
 msgctxt "Celestial object is observed..."
 msgid "In the Morning"
 msgstr "'s Morgens"
 
-#: src/gui/AstroCalcDialog.cpp:6267
+#: src/gui/AstroCalcDialog.cpp:6260
 msgctxt "Celestial object is observed..."
 msgid "Around Midnight"
 msgstr "Rond middernacht"
 
-#: src/gui/AstroCalcDialog.cpp:6268
+#: src/gui/AstroCalcDialog.cpp:6261
 msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
 msgstr "Gedurende de nacht"
 
-#: src/gui/AstroCalcDialog.cpp:6288
+#: src/gui/AstroCalcDialog.cpp:6281
 msgid "Bright stars"
 msgstr "Heldere sterren"
 
-#: src/gui/AstroCalcDialog.cpp:6289 src/ui_viewDialog.h:3568
+#: src/gui/AstroCalcDialog.cpp:6282 src/ui_viewDialog.h:3568
 msgid "Bright nebulae"
 msgstr "Heldere nevels"
 
-#: src/gui/AstroCalcDialog.cpp:6291 src/ui_viewDialog.h:3572
+#: src/gui/AstroCalcDialog.cpp:6284 src/ui_viewDialog.h:3572
 #: src/ui_dsoColorsDialog.h:595
 msgid "Galaxies"
 msgstr "Sterrenstelsels"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6292 src/translations.h:310
+#: src/gui/AstroCalcDialog.cpp:6285 src/translations.h:310
 #: src/ui_viewDialog.h:3575 src/ui_dsoColorsDialog.h:599
 msgid "Open star clusters"
 msgstr "Open sterclusters"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6301 src/translations.h:316
+#: src/gui/AstroCalcDialog.cpp:6294 src/translations.h:316
 #: src/ui_viewDialog.h:3567 src/ui_dsoColorsDialog.h:588
 msgid "Planetary nebulae"
 msgstr "Planetaire nevels"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6302 src/translations.h:445
+#: src/gui/AstroCalcDialog.cpp:6295 src/translations.h:445
 msgid "Bright double stars"
 msgstr "Heldere dubbelsterren"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6303 src/translations.h:447
+#: src/gui/AstroCalcDialog.cpp:6296 src/translations.h:447
 msgid "Bright variable stars"
 msgstr "Heldere variabele sterren"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6304 src/translations.h:449
+#: src/gui/AstroCalcDialog.cpp:6297 src/translations.h:449
 msgid "Bright stars with high proper motion"
 msgstr "Heldere sterren met een hoge eigenbeweging"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6307 src/translations.h:346
+#: src/gui/AstroCalcDialog.cpp:6300 src/translations.h:346
 #: src/ui_dsoColorsDialog.h:640
 msgid "Supernova candidates"
 msgstr "Supernova kandidaten"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6308 src/translations.h:348
+#: src/gui/AstroCalcDialog.cpp:6301 src/translations.h:348
 #: src/ui_dsoColorsDialog.h:681
 msgid "Supernova remnant candidates"
 msgstr "Supernova restant kandidaten"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6309 src/translations.h:344
+#: src/gui/AstroCalcDialog.cpp:6302 src/translations.h:344
 #: src/ui_viewDialog.h:3574 src/ui_dsoColorsDialog.h:581
 msgid "Supernova remnants"
 msgstr "Supernova restanten"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6310 src/translations.h:372
+#: src/gui/AstroCalcDialog.cpp:6303 src/translations.h:372
 #: src/ui_viewDialog.h:3571 src/ui_dsoColorsDialog.h:694
 msgid "Clusters of galaxies"
 msgstr "Clusters van sterrenstelsels"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6312 src/translations.h:312
+#: src/gui/AstroCalcDialog.cpp:6305 src/translations.h:312
 #: src/ui_viewDialog.h:3577 src/ui_dsoColorsDialog.h:574
 msgid "Globular star clusters"
 msgstr "Bolvormige sterclusters"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6313 src/translations.h:374
+#: src/gui/AstroCalcDialog.cpp:6306 src/translations.h:374
 #: src/ui_dsoColorsDialog.h:710
 msgid "Regions of the sky"
 msgstr "Regio's van de hemel"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6314 src/translations.h:326
+#: src/gui/AstroCalcDialog.cpp:6307 src/translations.h:326
 #: src/ui_viewDialog.h:3566 src/ui_dsoColorsDialog.h:565
 msgid "Active galaxies"
 msgstr "Actieve sterrenstelsels"
 
-#: src/gui/AstroCalcDialog.cpp:6319 plugins/Pulsars/src/Pulsars.cpp:72
+#: src/gui/AstroCalcDialog.cpp:6312 plugins/Pulsars/src/Pulsars.cpp:72
 #: plugins/Pulsars/src/Pulsars.cpp:170 plugins/Pulsars/src/Pulsars.cpp:171
 msgid "Pulsars"
 msgstr "Pulsars"
 
-#: src/gui/AstroCalcDialog.cpp:6325
+#: src/gui/AstroCalcDialog.cpp:6318
 msgid "Exoplanetary systems"
 msgstr "Exo-planetaire  systemen"
 
-#: src/gui/AstroCalcDialog.cpp:6328
+#: src/gui/AstroCalcDialog.cpp:6321
 msgid "Bright nova stars"
 msgstr "Heldere nova sterren"
 
-#: src/gui/AstroCalcDialog.cpp:6330
+#: src/gui/AstroCalcDialog.cpp:6323
 msgid "Bright supernova stars"
 msgstr "Heldere supernova sterren"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:6331 src/translations.h:330
+#: src/gui/AstroCalcDialog.cpp:6324 src/translations.h:330
 #: src/ui_viewDialog.h:3573 src/ui_dsoColorsDialog.h:650
 msgid "Interacting galaxies"
 msgstr "Interagerende sterrenstelsels"
 
-#: src/gui/AstroCalcDialog.cpp:6333
+#: src/gui/AstroCalcDialog.cpp:6326
 msgid "Messier objects"
 msgstr "Messier objecten"
 
-#: src/gui/AstroCalcDialog.cpp:6334
+#: src/gui/AstroCalcDialog.cpp:6327
 msgid "NGC/IC objects"
 msgstr "NGC/IC objecten"
 
-#: src/gui/AstroCalcDialog.cpp:6335
+#: src/gui/AstroCalcDialog.cpp:6328
 msgid "Caldwell objects"
 msgstr "Caldwell objecten"
 
-#: src/gui/AstroCalcDialog.cpp:6336
+#: src/gui/AstroCalcDialog.cpp:6329
 msgid "Herschel 400 objects"
 msgstr "Herschel 400 objecten"
 
-#: src/gui/AstroCalcDialog.cpp:6337
+#: src/gui/AstroCalcDialog.cpp:6330
 msgid "Algol-type eclipsing systems"
 msgstr "Algol-sterren"
 
-#: src/gui/AstroCalcDialog.cpp:6338
+#: src/gui/AstroCalcDialog.cpp:6331
 msgid "The classical cepheids"
 msgstr "De klassieke cepheïden"
 
 #. TRANSLATORS: angular size
-#: src/gui/AstroCalcDialog.cpp:6419
+#: src/gui/AstroCalcDialog.cpp:6412
 msgid "Ang. Size"
 msgstr "Hoekgrootte"
 
 #. TRANSLATORS: IAU Constellation
-#: src/gui/AstroCalcDialog.cpp:6422
+#: src/gui/AstroCalcDialog.cpp:6415
 msgctxt "IAU Constellation"
 msgid "Const."
 msgstr "Const."
 
-#: src/gui/AstroCalcDialog.cpp:6540 src/ui_astroCalcDialog.h:2261
+#: src/gui/AstroCalcDialog.cpp:6533 src/ui_astroCalcDialog.h:2261
 msgid "Limit angular size:"
 msgstr "Hoekgrootte limiet:"
 
-#: src/gui/AstroCalcDialog.cpp:6541 src/ui_astroCalcDialog.h:2259
+#: src/gui/AstroCalcDialog.cpp:6534 src/ui_astroCalcDialog.h:2259
 msgid "Set limits for angular size for visible celestial objects"
 msgstr "Limieten instellen voor hoekgrootte van zichtbare hemelobjecten"
 
-#: src/gui/AstroCalcDialog.cpp:6542 src/ui_astroCalcDialog.h:2263
+#: src/gui/AstroCalcDialog.cpp:6535 src/ui_astroCalcDialog.h:2263
 msgid "Minimal angular size for visible celestial objects"
 msgstr "Minimale hoekgrootte voor zichtbare hemelobjecten"
 
-#: src/gui/AstroCalcDialog.cpp:6543 src/ui_astroCalcDialog.h:2266
+#: src/gui/AstroCalcDialog.cpp:6536 src/ui_astroCalcDialog.h:2266
 msgid "Maximum angular size for visible celestial objects"
 msgstr "Maximale hoekgrootte voor zichtbare hemelobjecten"
 
-#: src/gui/AstroCalcDialog.cpp:6812
+#: src/gui/AstroCalcDialog.cpp:6805
 msgid "Limit angular separation:"
 msgstr "Tussenruimte hoek limiet:"
 
-#: src/gui/AstroCalcDialog.cpp:6813
+#: src/gui/AstroCalcDialog.cpp:6806
 msgid "Set limits for angular separation for visible double stars"
 msgstr ""
 "Limieten instellen voor hoekscheiding tussen zichtbare dubbele sterren"
 
-#: src/gui/AstroCalcDialog.cpp:6814
+#: src/gui/AstroCalcDialog.cpp:6807
 msgid "Minimal angular separation for visible double stars"
 msgstr "Minimale hoekscheiding tussen zichtbare dubbele sterren"
 
-#: src/gui/AstroCalcDialog.cpp:6815
+#: src/gui/AstroCalcDialog.cpp:6808
 msgid "Maximum angular separation for visible double stars"
 msgstr "Maximale hoekscheiding tussen zichtbare dubbele sterren"
 
-#: src/gui/AstroCalcDialog.cpp:7182
+#: src/gui/AstroCalcDialog.cpp:7175
 msgid "Save list of objects as..."
 msgstr "Lijst met objecten opslaan als..."
 
-#: src/gui/AstroCalcDialog.cpp:7202 src/ui_astroCalcDialog.h:2065
+#: src/gui/AstroCalcDialog.cpp:7195 src/ui_astroCalcDialog.h:2065
 msgid "What's Up Tonight"
 msgstr "Wat is er deze nacht te zien"
 
 #. TRANSLATORS: Part of unit of measure for mean motion - degrees per day
-#: src/gui/AstroCalcDialog.cpp:7325
+#: src/gui/AstroCalcDialog.cpp:7318
 msgctxt "mean motion"
 msgid "day"
 msgstr "dag"
 
-#: src/gui/AstroCalcDialog.cpp:7389
+#: src/gui/AstroCalcDialog.cpp:7382
 msgid "Linear and angular distances between selected objects"
 msgstr "Lineaire en hoekafstanden tussen geselecteerde objecten"
 
-#: src/gui/AstroCalcDialog.cpp:7459
+#: src/gui/AstroCalcDialog.cpp:7452
 msgid "Angular distance between the Moon and selected object"
 msgstr "Hoekafstand tussen Maan en object"
 
@@ -7102,7 +7223,7 @@ msgstr "Heliocentrische afstand"
 
 #: src/gui/AstroCalcChart.cpp:98 src/gui/AstroCalcChart.cpp:108
 msgid "Right Ascension"
-msgstr "Rechtse Klimming"
+msgstr "Rechte Klimming"
 
 #: src/gui/AstroCalcChart.cpp:99 src/gui/AstroCalcChart.cpp:109
 msgid "Transit Altitude"
@@ -7110,7 +7231,7 @@ msgstr "Doorgangshoogte"
 
 #: src/gui/AstroCalcChart.cpp:111
 msgid "Elongation Limit"
-msgstr "Verlengingsgrens"
+msgstr "Elongatiegrens"
 
 #: src/gui/AstroCalcChart.cpp:112
 msgid "Distance, AU"
@@ -7126,7 +7247,7 @@ msgstr "Lokale tijd"
 
 #: src/gui/AstroCalcChart.cpp:419
 msgid "Lunar elongation"
-msgstr "Maanverlenging"
+msgstr "Maan elongatie"
 
 #: src/gui/AstroCalcChart.cpp:421 src/gui/AstroCalcChart.cpp:447
 msgid "Angular size"
@@ -7391,9 +7512,11 @@ msgstr "Stellarium %1"
 #. TRANSLATORS: Satellite group: Satellites belonging to the Planet satellites
 #. TRANSLATORS: CelesTrak source [Planet]:
 #. http://www.celestrak.com/NORAD/elements/planet.txt
+#. TRANSLATORS: CelesTrak source [Planet]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=planet&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [Planet TLEs]:
 #. http://www.celestrak.com/NORAD/elements/supplemental/planet.txt
-#: src/translations.h:37 plugins/Satellites/src/Satellites.cpp:2917
+#: src/translations.h:37 plugins/Satellites/src/Satellites.cpp:2983
 msgid "planet"
 msgstr "planeet"
 
@@ -9047,101 +9170,113 @@ msgid "&Save"
 msgstr "Op&slaan"
 
 #: src/translations.h:667
+msgid "Save"
+msgstr ""
+
+#: src/translations.h:668
+msgid "Save As:"
+msgstr ""
+
+#: src/translations.h:669
+msgid "Tags:"
+msgstr ""
+
+#: src/translations.h:670
 msgid "File &name:"
 msgstr "Bestands&naam:"
 
-#: src/translations.h:668
+#: src/translations.h:671
 msgid "Copy &Link Location"
 msgstr "Koppe&ling kopiëren"
 
-#: src/translations.h:669
+#: src/translations.h:672
 msgid "Abort"
 msgstr "Afbreken"
 
-#: src/translations.h:670
+#: src/translations.h:673
 msgid "Ignore"
 msgstr "Negeren"
 
-#: src/translations.h:671
+#: src/translations.h:674
 msgid "&Basic colors"
 msgstr "&Basis kleuren"
 
-#: src/translations.h:672
+#: src/translations.h:675
 msgid "&Pick Screen Color"
 msgstr "&Schermkleur overnemen"
 
-#: src/translations.h:673
+#: src/translations.h:676
 msgid "&Custom colors"
 msgstr "&Aangepaste kleuren"
 
-#: src/translations.h:674
+#: src/translations.h:677
 msgid "&Add to Custom Colors"
 msgstr "Aangepaste kleuren &toevoegen"
 
-#: src/translations.h:675
+#: src/translations.h:678
 msgid "Hu&e:"
 msgstr "&Tint:"
 
-#: src/translations.h:676
+#: src/translations.h:679
 msgid "&Sat:"
 msgstr "&Sat:"
 
-#: src/translations.h:677
+#: src/translations.h:680
 msgid "&Val:"
 msgstr "&Val:"
 
-#: src/translations.h:678
+#: src/translations.h:681
 msgid "&Red:"
 msgstr "&Rood:"
 
-#: src/translations.h:679
+#: src/translations.h:682
 msgid "&Green:"
 msgstr "&Groen:"
 
-#: src/translations.h:680
+#: src/translations.h:683
 msgid "Bl&ue:"
 msgstr "Bla&uw:"
 
-#: src/translations.h:681
+#: src/translations.h:684
 msgid "Select Color"
 msgstr "Kleur selecteren"
 
-#: src/translations.h:682
+#: src/translations.h:685
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Cursor op %1, %2 Druk ESC voor annuleren"
 
-#: src/translations.h:683
+#: src/translations.h:686
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:243
 msgid "Back"
 msgstr "Terug"
 
-#: src/translations.h:684
+#: src/translations.h:687
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:245
 msgid "Forward"
 msgstr "Vooruit"
 
-#: src/translations.h:685
+#: src/translations.h:688
 msgid "Parent Directory"
 msgstr "Bovenliggende map"
 
-#: src/translations.h:686
+#: src/translations.h:689
 msgid "Create New Folder"
 msgstr "Nieuwe map aanmaken"
 
-#: src/translations.h:687
+#: src/translations.h:690
 msgid "List View"
 msgstr "Lijst weergave"
 
-#: src/translations.h:688
+#: src/translations.h:691
 msgid "Detail View"
 msgstr "Detail weergave"
 
-#: src/translations.h:689
+#: src/translations.h:692
 msgid "Recent Places"
 msgstr "Recente plaatsen"
 
-#: src/translations.h:690
+#: src/translations.h:693
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -9150,41 +9285,50 @@ msgstr ""
 "%1 bestaat al.\n"
 "Wilt u het vervangen?"
 
-#: src/translations.h:691
+#: src/translations.h:694
 msgid "&Yes"
 msgstr "&Ja"
 
-#: src/translations.h:692
+#: src/translations.h:695
 msgid "&No"
 msgstr "&Nee"
 
-#: src/translations.h:693
+#: src/translations.h:696
 msgid "&Select All"
 msgstr "Alles &selecteren"
 
-#: src/translations.h:694
+#: src/translations.h:697
 msgid "&Step up"
 msgstr "&Stap omhoog"
 
-#: src/translations.h:695
+#: src/translations.h:698
 msgid "Step &down"
 msgstr "Stap &omlaag"
 
-#: src/translations.h:696
+#: src/translations.h:699
 msgid "&Rename"
 msgstr "&Hernoemen"
 
-#: src/translations.h:697
+#: src/translations.h:700
 msgid "&Delete"
 msgstr "&Uitwissen"
 
-#: src/translations.h:698
+#: src/translations.h:701
 msgid "&New Folder"
 msgstr "&Nieuwe map"
 
-#: src/translations.h:699
+#: src/translations.h:702
+msgid "New Folder"
+msgstr ""
+
+#: src/translations.h:703
 msgid "Show &hidden files"
 msgstr "Toon &verborgen bestanden"
+
+#: src/translations.h:704 plugins/MeteorShowers/src/ui_MSSearchDialog.h:180
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:182
+msgid "Search"
+msgstr "Zoeken"
 
 #. TRANSLATORS: Name of region on Earth
 #. TRANSLATORS: https://en.wikipedia.org/wiki/North_Africa
@@ -11824,7 +11968,7 @@ msgstr ""
 "Gebruik aanduidingen van deepsky objecten in plaats van hun gebruikelijke "
 "namen voor schermlabels"
 
-#: src/ui_viewDialog.h:3595 plugins/Satellites/src/ui_satellitesDialog.h:1184
+#: src/ui_viewDialog.h:3595 plugins/Satellites/src/ui_satellitesDialog.h:1196
 msgid "Labels"
 msgstr "Labels"
 
@@ -12577,7 +12721,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr "Aanvullende instellingen voor grafische gebruikersinterface"
 
 #: src/ui_configurationDialog.h:1708
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1447
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1463
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
 msgid "Time"
 msgstr "Tijd"
@@ -12675,7 +12819,7 @@ msgstr ""
 "hetzelfde zijn als u de volgende keer Stellarium opstart"
 
 #: src/ui_configurationDialog.h:1747
-#: plugins/Satellites/src/ui_satellitesDialog.h:1194
+#: plugins/Satellites/src/ui_satellitesDialog.h:1219
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:243
 #: plugins/NavStars/src/ui_navStarsWindow.h:295
 #: plugins/Novae/src/ui_novaeDialog.h:246
@@ -12696,7 +12840,7 @@ msgstr "Standaard instellingen van Stellarium terugzetten"
 
 #: src/ui_configurationDialog.h:1751
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:342
-#: plugins/Satellites/src/ui_satellitesDialog.h:1193
+#: plugins/Satellites/src/ui_satellitesDialog.h:1218
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:263
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:242
 #: plugins/NavStars/src/ui_navStarsWindow.h:294
@@ -12835,12 +12979,6 @@ msgstr "Rechte klimming/declinatie (van datum)"
 msgid "Sidereal time"
 msgstr "Gemiddelde sterrentijd"
 
-#: src/ui_configurationDialog.h:1807
-msgid "Annual proper motion (stars) or hourly motion (solar system objects)"
-msgstr ""
-"Jaarlijkse eigen beweging (sterren) of beweging per uur (zonnestelsel "
-"objecten)"
-
 #: src/ui_configurationDialog.h:1809
 msgid "Proper Motion"
 msgstr "Eigen beweging"
@@ -12856,14 +12994,6 @@ msgstr "Het type object (ster, planeet, enz.)"
 #: src/ui_configurationDialog.h:1815
 msgid "Additional coordinates (from plugins)"
 msgstr "Aanvullende coördinaten (uit plug-ins)"
-
-#: src/ui_configurationDialog.h:1817
-msgid ""
-"Show time of rising, transit and setting of celestial object. The rising and"
-" setting events are defined with the upper limb of the celestial body."
-msgstr ""
-"Toon tijden van opkomst, doorgang en ondergang van objecten. Opkomst en "
-"ondergang zijn gebaseerd op de bovenkant van het object."
 
 #: src/ui_configurationDialog.h:1819 src/ui_astroCalcDialog.h:2056
 msgid "Risings, Transits, and Settings"
@@ -13603,7 +13733,7 @@ msgid "Clear output before script runs"
 msgstr "Uitvoer wissen voordat het script wordt uitgevoerd"
 
 #: src/ui_scriptConsole.h:418
-#: plugins/Satellites/src/ui_satellitesDialog.h:1195
+#: plugins/Satellites/src/ui_satellitesDialog.h:1220
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:244
 #: plugins/NavStars/src/ui_navStarsWindow.h:286
 #: plugins/Novae/src/ui_novaeDialog.h:247
@@ -13783,7 +13913,7 @@ msgid "Export ephemeris..."
 msgstr "Ephemeriden exporteren..."
 
 #: src/ui_astroCalcDialog.h:2151 src/ui_astroCalcDialog.h:2194
-#: plugins/Satellites/src/ui_satellitesDialog.h:1302
+#: plugins/Satellites/src/ui_satellitesDialog.h:1330
 msgid "Calculations require time, please be patient"
 msgstr "Berekening benodigde tijd, momentje geduld"
 
@@ -14167,7 +14297,7 @@ msgid "Ephemeris line thickness:"
 msgstr "Efemeriden lijndikte:"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:204
-#: plugins/Satellites/src/ui_satellitesDialog.h:1188
+#: plugins/Satellites/src/ui_satellitesDialog.h:1200
 msgctxt "pixels"
 msgid "px"
 msgstr "px"
@@ -14274,7 +14404,7 @@ msgid "Name of the list:"
 msgstr "Naam van de lijst:"
 
 #: src/ui_obsListCreateEditDialog.h:268
-#: plugins/Satellites/src/ui_satellitesDialog.h:1270
+#: plugins/Satellites/src/ui_satellitesDialog.h:1295
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:216
 msgid "Description:"
 msgstr "Beschrijving:"
@@ -15029,7 +15159,7 @@ msgstr "Toon metingen naast de muis"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:344
 #: plugins/Oculars/src/ui_ocularDialog.h:1584
-#: plugins/Satellites/src/ui_satellitesDialog.h:1307
+#: plugins/Satellites/src/ui_satellitesDialog.h:1335
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:438
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:275
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:245
@@ -15122,8 +15252,8 @@ msgstr "&Rotatie resetten"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:119
 #: plugins/Oculars/src/gui/OcularDialog.cpp:136
 #: plugins/Oculars/src/gui/OcularDialog.cpp:153
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:894
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:901
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:897
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:904
 msgid "Warning!"
 msgstr "Opgelet!"
 
@@ -16035,7 +16165,7 @@ msgstr "Verrekijker"
 #: plugins/Oculars/src/ui_ocularDialog.h:1552
 #: plugins/Oculars/src/ui_ocularDialog.h:1562
 #: plugins/Oculars/src/ui_ocularDialog.h:1577
-#: plugins/Satellites/src/ui_satellitesDialog.h:1221
+#: plugins/Satellites/src/ui_satellitesDialog.h:1246
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:595
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:244
 msgid "Name:"
@@ -16150,7 +16280,7 @@ msgstr "Ondersteuning voor Oculus Rift"
 #: plugins/Satellites/src/Satellites.cpp:73
 #: plugins/Satellites/src/Satellites.cpp:164
 #: plugins/Satellites/src/Satellites.cpp:257
-#: plugins/Satellites/src/ui_satellitesDialog.h:1282
+#: plugins/Satellites/src/ui_satellitesDialog.h:1307
 msgid "Satellites"
 msgstr "Satellieten"
 
@@ -16186,44 +16316,44 @@ msgid "Hide satellites from the group"
 msgstr "Verberg satellieten uit groep"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2840
+#: plugins/Satellites/src/Satellites.cpp:2890
 msgid "communications"
 msgstr "communicaties"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2842
+#: plugins/Satellites/src/Satellites.cpp:2892
 msgid "navigation"
 msgstr "navigatie"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2844
+#: plugins/Satellites/src/Satellites.cpp:2894
 msgid "scientific"
 msgstr "wetenschappelijk"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#: plugins/Satellites/src/Satellites.cpp:2846
+#: plugins/Satellites/src/Satellites.cpp:2896
 msgid "earth resources"
 msgstr "aardonderzoek"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2848
+#: plugins/Satellites/src/Satellites.cpp:2898
 msgid "geostationary"
 msgstr "geostationair"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2850
+#: plugins/Satellites/src/Satellites.cpp:2900
 msgid "non-operational"
 msgstr "niet operationeel"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:2852
+#: plugins/Satellites/src/Satellites.cpp:2902
 msgid "observatory"
 msgstr "observatorium"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2854
+#: plugins/Satellites/src/Satellites.cpp:2904
 msgid "iridium next"
 msgstr "Iridium NEXT"
 
@@ -16231,7 +16361,7 @@ msgstr "Iridium NEXT"
 #. System (IRNSS) is an autonomous regional satellite navigation system being
 #. developed by the Indian Space Research Organisation (ISRO) which would be
 #. under complete control of the Indian government.
-#: plugins/Satellites/src/Satellites.cpp:2856
+#: plugins/Satellites/src/Satellites.cpp:2906
 msgid "irnss"
 msgstr "IRNSS"
 
@@ -16239,109 +16369,136 @@ msgstr "IRNSS"
 #. a proposed three-satellite regional time transfer system and Satellite
 #. Based Augmentation System for the Global Positioning System, that would be
 #. receivable within Japan.
-#: plugins/Satellites/src/Satellites.cpp:2858
+#: plugins/Satellites/src/Satellites.cpp:2908
 msgid "qzss"
 msgstr "QZSS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
-#: plugins/Satellites/src/Satellites.cpp:2860
+#: plugins/Satellites/src/Satellites.cpp:2910
 msgid "cosmos"
 msgstr "Kosmos"
 
 #. TRANSLATORS: Satellite group: Debris of satellites
-#: plugins/Satellites/src/Satellites.cpp:2862
+#: plugins/Satellites/src/Satellites.cpp:2912
 msgid "debris"
 msgstr "puin"
 
 #. TRANSLATORS: Satellite group: Crewed satellites
-#: plugins/Satellites/src/Satellites.cpp:2864
+#: plugins/Satellites/src/Satellites.cpp:2914
 msgid "crewed"
 msgstr "bemand"
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
-#: plugins/Satellites/src/Satellites.cpp:2866
+#: plugins/Satellites/src/Satellites.cpp:2916
 msgid "resupply"
 msgstr "herbevoorrading"
 
 #. TRANSLATORS: Satellite group: are known to broadcast TV signals
-#: plugins/Satellites/src/Satellites.cpp:2868
+#: plugins/Satellites/src/Satellites.cpp:2918
 msgid "tv"
 msgstr "TV"
 
 #. TRANSLATORS: Satellite group: Last 30 Days' Launches
 #. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]:
 #. http://www.celestrak.com/NORAD/elements/tle-new.txt
-#: plugins/Satellites/src/Satellites.cpp:2874
+#: plugins/Satellites/src/Satellites.cpp:2924
 msgid "tle-new"
 msgstr "nieuw"
+
+#. TRANSLATORS: Satellite group: Last 30 Days' Launches
+#. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:2927
+msgid "last-30-days"
+msgstr ""
 
 #. TRANSLATORS: Satellite group: Space stations
 #. TRANSLATORS: CelesTrak source [Space Stations]:
 #. http://www.celestrak.com/NORAD/elements/stations.txt
-#: plugins/Satellites/src/Satellites.cpp:2877
+#. TRANSLATORS: CelesTrak source [Space Stations]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=stations&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:2931
 msgid "stations"
 msgstr "ruimtestations"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #. TRANSLATORS: CelesTrak source [100 (or so) Brightest]:
 #. http://www.celestrak.com/NORAD/elements/visual.txt
-#: plugins/Satellites/src/Satellites.cpp:2880
+#. TRANSLATORS: CelesTrak source [100 (or so) Brightest]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=visual&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:2935
 msgid "visual"
 msgstr "zichtbaar"
 
 #. TRANSLATORS: Satellite group: Active Satellites
 #. TRANSLATORS: CelesTrak source [Active Satellites]:
 #. http://www.celestrak.com/NORAD/elements/active.txt
-#: plugins/Satellites/src/Satellites.cpp:2883
+#. TRANSLATORS: CelesTrak source [Active Satellites]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=active&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:2939
 msgid "active"
 msgstr "actief"
 
 #. TRANSLATORS: Satellite group: Analyst Satellites
 #. TRANSLATORS: CelesTrak source [Analyst Satellites]:
 #. http://www.celestrak.com/NORAD/elements/analyst.txt
-#: plugins/Satellites/src/Satellites.cpp:2886
+#. TRANSLATORS: CelesTrak source [Analyst Satellites]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=analyst&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:2943
 msgid "analyst"
 msgstr "analyst"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #. TRANSLATORS: CelesTrak source [Weather]:
 #. http://www.celestrak.com/NORAD/elements/weather.txt
-#: plugins/Satellites/src/Satellites.cpp:2892
+#. TRANSLATORS: CelesTrak source [Weather]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=weather&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:2950
 msgid "weather"
 msgstr "weer"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the NOAA satellites
 #. TRANSLATORS: CelesTrak source [NOAA]:
 #. http://www.celestrak.com/NORAD/elements/noaa.txt
-#: plugins/Satellites/src/Satellites.cpp:2895
+#. TRANSLATORS: CelesTrak source [NOAA]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=noaa&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:2954
 msgid "noaa"
 msgstr "NOAA"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GOES satellites
 #. TRANSLATORS: CelesTrak source [GOES]:
 #. http://www.celestrak.com/NORAD/elements/goes.txt
-#: plugins/Satellites/src/Satellites.cpp:2898
+#. TRANSLATORS: CelesTrak source [GOES]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=goes&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:2958
 msgid "goes"
 msgstr "GOES"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
 #. TRANSLATORS: CelesTrak source [Earth Resources]:
 #. http://www.celestrak.com/NORAD/elements/resource.txt
-#: plugins/Satellites/src/Satellites.cpp:2901
+#. TRANSLATORS: CelesTrak source [Earth Resources]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=resource&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:2962
 msgid "resource"
 msgstr "Aardobservatie"
 
 #. TRANSLATORS: Satellite group: Search & Rescue (SARSAT) satellites
 #. TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]:
 #. http://www.celestrak.com/NORAD/elements/sarsat.txt
-#: plugins/Satellites/src/Satellites.cpp:2904
+#. TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=sarsat&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:2966
 msgid "sarsat"
 msgstr "SARSAT"
 
 #. TRANSLATORS: Satellite group: Disaster Monitoring satellites
 #. TRANSLATORS: CelesTrak source [Disaster Monitoring]:
 #. http://www.celestrak.com/NORAD/elements/dmc.txt
-#: plugins/Satellites/src/Satellites.cpp:2907
+#. TRANSLATORS: CelesTrak source [Disaster Monitoring]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=dmc&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:2970
 msgid "dmc"
 msgstr "DMC"
 
@@ -16350,14 +16507,19 @@ msgstr "DMC"
 #. by NASA for space communications.
 #. TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System
 #. (TDRSS)]: http://www.celestrak.com/NORAD/elements/tdrss.txt
-#: plugins/Satellites/src/Satellites.cpp:2910
+#. TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System
+#. (TDRSS)]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=tdrss&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:2974
 msgid "tdrss"
 msgstr "TDRSS"
 
 #. TRANSLATORS: Satellite group: ARGOS Data Collection System satellites
 #. TRANSLATORS: CelesTrak source [ARGOS Data Collection System]:
 #. http://www.celestrak.com/NORAD/elements/argos.txt
-#: plugins/Satellites/src/Satellites.cpp:2913
+#. TRANSLATORS: CelesTrak source [ARGOS Data Collection System]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=argos&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:2978
 msgid "argos"
 msgstr "ARGOS"
 
@@ -16365,28 +16527,36 @@ msgstr "ARGOS"
 #. constellation (LEMUR satellites)
 #. TRANSLATORS: CelesTrak source [Spire]:
 #. http://www.celestrak.com/NORAD/elements/spire.txt
-#: plugins/Satellites/src/Satellites.cpp:2920
+#. TRANSLATORS: CelesTrak source [Spire]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=spire&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:2987
 msgid "spire"
 msgstr "Spire"
 
 #. TRANSLATORS: Satellite group: Active Geosynchronous Satellites
 #. TRANSLATORS: CelesTrak source [Active Geosynchronous]:
 #. http://www.celestrak.com/NORAD/elements/geo.txt
-#: plugins/Satellites/src/Satellites.cpp:2926
+#. TRANSLATORS: CelesTrak source [Active Geosynchronous]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=geo&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:2994
 msgid "geo"
 msgstr "geo"
 
 #. TRANSLATORS: Satellite group: GEO Protected Zone
 #. TRANSLATORS: CelesTrak source [GEO Protected Zone]:
 #. http://www.celestrak.com/satcat/gpz.php
-#: plugins/Satellites/src/Satellites.cpp:2929
+#. TRANSLATORS: CelesTrak source [GEO Protected Zone]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?SPECIAL=gpz&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:2998
 msgid "gpz"
 msgstr "GPZ"
 
 #. TRANSLATORS: Satellite group: GEO Protected Zone Plus
 #. TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]:
 #. http://www.celestrak.com/satcat/gpz-plus.php
-#: plugins/Satellites/src/Satellites.cpp:2932
+#. TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?SPECIAL=gpz-plus&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3002
 msgid "gpz-plus"
 msgstr "GPZ+"
 
@@ -16394,18 +16564,22 @@ msgstr "GPZ+"
 #. satellites
 #. TRANSLATORS: CelesTrak source [Intelsat]:
 #. http://www.celestrak.com/NORAD/elements/intelsat.txt
+#. TRANSLATORS: CelesTrak source [Intelsat]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=intelsat&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [INTELSAT TLEs]:
 #. http://www.celestrak.com/NORAD/elements/supplemental/intelsat.txt
-#: plugins/Satellites/src/Satellites.cpp:2936
+#: plugins/Satellites/src/Satellites.cpp:3007
 msgid "intelsat"
 msgstr "Intelsat"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the SES satellites
 #. TRANSLATORS: CelesTrak source [SES]:
 #. http://www.celestrak.com/NORAD/elements/ses.txt
+#. TRANSLATORS: CelesTrak source [SES]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=ses&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [SES TLEs]:
 #. http://www.celestrak.com/NORAD/elements/supplemental/ses.txt
-#: plugins/Satellites/src/Satellites.cpp:2940
+#: plugins/Satellites/src/Satellites.cpp:3012
 msgid "ses"
 msgstr "SAS"
 
@@ -16413,7 +16587,9 @@ msgstr "SAS"
 #. constellation (Iridium is a proper name)
 #. TRANSLATORS: CelesTrak source [Iridium]:
 #. http://www.celestrak.com/NORAD/elements/iridium.txt
-#: plugins/Satellites/src/Satellites.cpp:2943
+#. TRANSLATORS: CelesTrak source [Iridium]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=iridium&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3016
 msgid "iridium"
 msgstr "Iridium"
 
@@ -16421,7 +16597,10 @@ msgstr "Iridium"
 #. constellation (Iridium is a proper name)
 #. TRANSLATORS: CelesTrak source [Iridium NEXT]:
 #. http://www.celestrak.com/NORAD/elements/iridium-NEXT.txt
-#: plugins/Satellites/src/Satellites.cpp:2946
+#. TRANSLATORS: CelesTrak source [Iridium NEXT]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=iridium-
+#. NEXT&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3020
 msgid "iridium-NEXT"
 msgstr "Iridium-NEXT"
 
@@ -16429,9 +16608,11 @@ msgstr "Iridium-NEXT"
 #. constellation (Starlink is a proper name)
 #. TRANSLATORS: CelesTrak source [Starlink]:
 #. http://www.celestrak.com/NORAD/elements/starlink.txt
+#. TRANSLATORS: CelesTrak source [Starlink]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [Starlink TLEs]:
 #. http://www.celestrak.com/NORAD/elements/supplemental/starlink.txt
-#: plugins/Satellites/src/Satellites.cpp:2950
+#: plugins/Satellites/src/Satellites.cpp:3025
 msgid "starlink"
 msgstr "Starlink"
 
@@ -16439,9 +16620,11 @@ msgstr "Starlink"
 #. constellation (OneWeb is a proper name)
 #. TRANSLATORS: CelesTrak source [OneWeb]:
 #. http://www.celestrak.com/NORAD/elements/oneweb.txt
+#. TRANSLATORS: CelesTrak source [OneWeb]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=oneweb&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [OneWeb TLEs]:
 #. http://www.celestrak.com/NORAD/elements/supplemental/oneweb.txt
-#: plugins/Satellites/src/Satellites.cpp:2954
+#: plugins/Satellites/src/Satellites.cpp:3030
 msgid "oneweb"
 msgstr "OneWeb"
 
@@ -16449,9 +16632,11 @@ msgstr "OneWeb"
 #. satellites
 #. TRANSLATORS: CelesTrak source [Orbcomm]:
 #. http://www.celestrak.com/NORAD/elements/orbcomm.txt
+#. TRANSLATORS: CelesTrak source [Orbcomm]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=orbcomm&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [ORBCOMM TLEs]:
 #. http://www.celestrak.com/NORAD/elements/supplemental/orbcomm.txt
-#: plugins/Satellites/src/Satellites.cpp:2958
+#: plugins/Satellites/src/Satellites.cpp:3035
 msgid "orbcomm"
 msgstr "Orbcomm"
 
@@ -16459,35 +16644,45 @@ msgstr "Orbcomm"
 #. satellites
 #. TRANSLATORS: CelesTrak source [Globalstar]:
 #. http://www.celestrak.com/NORAD/elements/globalstar.txt
-#: plugins/Satellites/src/Satellites.cpp:2961
+#. TRANSLATORS: CelesTrak source [Globalstar]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=globalstar&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3039
 msgid "globalstar"
 msgstr "Globalstar"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the SWARM satellites
 #. TRANSLATORS: CelesTrak source [Swarm]:
 #. http://www.celestrak.com/NORAD/elements/swarm.txt
-#: plugins/Satellites/src/Satellites.cpp:2964
+#. TRANSLATORS: CelesTrak source [Swarm]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=swarm&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3043
 msgid "swarm"
 msgstr "SWARM"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #. TRANSLATORS: CelesTrak source [Amateur Radio]:
 #. http://www.celestrak.com/NORAD/elements/amateur.txt
-#: plugins/Satellites/src/Satellites.cpp:2967
+#. TRANSLATORS: CelesTrak source [Amateur Radio]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=amateur&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3047
 msgid "amateur"
 msgstr "amateur"
 
 #. TRANSLATORS: Satellite group: Experimental communication satellites
 #. TRANSLATORS: CelesTrak source [Experimental]:
 #. http://www.celestrak.com/NORAD/elements/x-comm.txt
-#: plugins/Satellites/src/Satellites.cpp:2970
+#. TRANSLATORS: CelesTrak source [Experimental]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=x-comm&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3051
 msgid "x-comm"
 msgstr "experimentele comm"
 
 #. TRANSLATORS: Satellite group: Other communication satellites
 #. TRANSLATORS: CelesTrak source [Other Comm]:
 #. http://www.celestrak.com/NORAD/elements/other-comm.txt
-#: plugins/Satellites/src/Satellites.cpp:2973
+#. TRANSLATORS: CelesTrak source [Other Comm]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=other-comm&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3055
 msgid "other-comm"
 msgstr "andere comm"
 
@@ -16495,7 +16690,9 @@ msgstr "andere comm"
 #. satellites
 #. TRANSLATORS: CelesTrak source [SatNOGS]:
 #. http://www.celestrak.com/NORAD/elements/satnogs.txt
-#: plugins/Satellites/src/Satellites.cpp:2976
+#. TRANSLATORS: CelesTrak source [SatNOGS]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=satnogs&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3059
 msgid "satnogs"
 msgstr "SatNOGS"
 
@@ -16503,14 +16700,18 @@ msgstr "SatNOGS"
 #. satellites
 #. TRANSLATORS: CelesTrak source [Gorizont]:
 #. http://www.celestrak.com/NORAD/elements/gorizont.txt
-#: plugins/Satellites/src/Satellites.cpp:2979
+#. TRANSLATORS: CelesTrak source [Gorizont]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=gorizont&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3063
 msgid "gorizont"
 msgstr "Gorizont"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
 #. TRANSLATORS: CelesTrak source [Raduga]:
 #. http://www.celestrak.com/NORAD/elements/raduga.txt
-#: plugins/Satellites/src/Satellites.cpp:2982
+#. TRANSLATORS: CelesTrak source [Raduga]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=raduga&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3067
 msgid "raduga"
 msgstr "Raduga"
 
@@ -16518,14 +16719,18 @@ msgstr "Raduga"
 #. satellites
 #. TRANSLATORS: CelesTrak source [Molniya]:
 #. http://www.celestrak.com/NORAD/elements/molniya.txt
-#: plugins/Satellites/src/Satellites.cpp:2985
+#. TRANSLATORS: CelesTrak source [Molniya]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=molniya&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3071
 msgid "molniya"
 msgstr "Molniya"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GNSS satellites
 #. TRANSLATORS: CelesTrak source [GNSS]:
 #. http://www.celestrak.com/NORAD/elements/gnss.txt
-#: plugins/Satellites/src/Satellites.cpp:2991
+#. TRANSLATORS: CelesTrak source [GNSS]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=gnss&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3078
 msgid "gnss"
 msgstr "GNSS"
 
@@ -16533,7 +16738,7 @@ msgstr "GNSS"
 #. (the Global Positioning System)
 #. TRANSLATORS: CelesTrak supplemental source [GPS TLEs]:
 #. http://www.celestrak.com/NORAD/elements/supplemental/gps.txt
-#: plugins/Satellites/src/Satellites.cpp:2994
+#: plugins/Satellites/src/Satellites.cpp:3081
 msgid "gps"
 msgstr "GPS"
 
@@ -16541,7 +16746,9 @@ msgstr "GPS"
 #. (the Global Positioning System)
 #. TRANSLATORS: CelesTrak source [GPS Operational]:
 #. http://www.celestrak.com/NORAD/elements/gps-ops.txt
-#: plugins/Satellites/src/Satellites.cpp:2997
+#. TRANSLATORS: CelesTrak source [GPS Operational]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=gps-ops&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3085
 msgid "gps-ops"
 msgstr "GPS ops"
 
@@ -16549,7 +16756,7 @@ msgstr "GPS ops"
 #. constellation (GLObal NAvigation Satellite System)
 #. TRANSLATORS: CelesTrak supplemental source [GLONASS TLEs]:
 #. http://www.celestrak.com/NORAD/elements/supplemental/glonass.txt
-#: plugins/Satellites/src/Satellites.cpp:3000
+#: plugins/Satellites/src/Satellites.cpp:3088
 msgid "glonass"
 msgstr "GLONASS"
 
@@ -16557,7 +16764,9 @@ msgstr "GLONASS"
 #. constellation (GLObal NAvigation Satellite System)
 #. TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]:
 #. http://www.celestrak.com/NORAD/elements/glo-ops.txt
-#: plugins/Satellites/src/Satellites.cpp:3003
+#. TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=glo-ops&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3092
 msgid "glo-ops"
 msgstr "GLONASS ops"
 
@@ -16565,7 +16774,9 @@ msgstr "GLONASS ops"
 #. constellation (global navigation satellite system by the European Union)
 #. TRANSLATORS: CelesTrak source [Galileo]:
 #. http://www.celestrak.com/NORAD/elements/galileo.txt
-#: plugins/Satellites/src/Satellites.cpp:3006
+#. TRANSLATORS: CelesTrak source [Galileo]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=galileo&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3096
 msgid "galileo"
 msgstr "Galileo"
 
@@ -16573,7 +16784,9 @@ msgstr "Galileo"
 #. constellation (BeiDou Navigation Satellite System)
 #. TRANSLATORS: CelesTrak source [Beidou]:
 #. http://www.celestrak.com/NORAD/elements/beidou.txt
-#: plugins/Satellites/src/Satellites.cpp:3009
+#. TRANSLATORS: CelesTrak source [Beidou]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=beidou&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3100
 msgid "beidou"
 msgstr "BeiDou"
 
@@ -16581,155 +16794,178 @@ msgstr "BeiDou"
 #. (WAAS/EGNOS/MSAS)
 #. TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System
 #. (WAAS/EGNOS/MSAS)]: http://www.celestrak.com/NORAD/elements/sbas.txt
-#: plugins/Satellites/src/Satellites.cpp:3012
+#. TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System
+#. (WAAS/EGNOS/MSAS)]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=sbas&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3104
 msgid "sbas"
 msgstr "SBAS"
 
 #. TRANSLATORS: Satellite group: Navy Navigation Satellite System (NNSS)
 #. TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]:
 #. http://www.celestrak.com/NORAD/elements/nnss.txt
-#: plugins/Satellites/src/Satellites.cpp:3015
+#. TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=nnss&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3108
 msgid "nnss"
 msgstr "NNSS"
 
 #. TRANSLATORS: Satellite group: Russian LEO Navigation Satellites
 #. TRANSLATORS: CelesTrak source [Russian LEO Navigation]:
 #. http://www.celestrak.com/NORAD/elements/musson.txt
-#: plugins/Satellites/src/Satellites.cpp:3018
+#. TRANSLATORS: CelesTrak source [Russian LEO Navigation]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=musson&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3112
 msgid "musson"
 msgstr "Musson"
 
 #. TRANSLATORS: Satellite group: Space & Earth Science satellites
 #. TRANSLATORS: CelesTrak source [Space & Earth Science]:
 #. http://www.celestrak.com/NORAD/elements/science.txt
-#: plugins/Satellites/src/Satellites.cpp:3024
+#. TRANSLATORS: CelesTrak source [Space & Earth Science]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=science&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3119
 msgid "science"
 msgstr "wetenschappelijk"
 
 #. TRANSLATORS: Satellite group: Geodetic satellites
 #. TRANSLATORS: CelesTrak source [Geodetic]:
 #. http://www.celestrak.com/NORAD/elements/geodetic.txt
-#: plugins/Satellites/src/Satellites.cpp:3027
+#. TRANSLATORS: CelesTrak source [Geodetic]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=geodetic&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3123
 msgid "geodetic"
 msgstr "landmeetkundig"
 
 #. TRANSLATORS: Satellite group: Engineering satellites
 #. TRANSLATORS: CelesTrak source [Engineering]:
 #. http://www.celestrak.com/NORAD/elements/engineering.txt
-#: plugins/Satellites/src/Satellites.cpp:3030
+#. TRANSLATORS: CelesTrak source [Engineering]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=engineering&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3127
 msgid "engineering"
 msgstr "engineering"
 
 #. TRANSLATORS: Satellite group: Education satellites
 #. TRANSLATORS: CelesTrak source [Education]:
 #. http://www.celestrak.com/NORAD/elements/education.txt
-#: plugins/Satellites/src/Satellites.cpp:3033
+#. TRANSLATORS: CelesTrak source [Education]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=education&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3131
 msgid "education"
 msgstr "educatie"
 
 #. TRANSLATORS: Satellite group: Military satellites
 #. TRANSLATORS: CelesTrak source [Miscellaneous Military]:
 #. http://www.celestrak.com/NORAD/elements/military.txt
-#: plugins/Satellites/src/Satellites.cpp:3039
+#. TRANSLATORS: CelesTrak source [Miscellaneous Military]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=military&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3138
 msgid "military"
 msgstr "militair"
 
 #. TRANSLATORS: Satellite group: Radar Calibration satellites
 #. TRANSLATORS: CelesTrak source [Radar Calibration]:
 #. http://www.celestrak.com/NORAD/elements/radar.txt
-#: plugins/Satellites/src/Satellites.cpp:3042
+#. TRANSLATORS: CelesTrak source [Radar Calibration]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=radar&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3142
 msgid "radar"
 msgstr "radar"
 
 #. TRANSLATORS: Satellite group: CubeSats (Cube Satellites)
 #. TRANSLATORS: CelesTrak source [CubeSats]:
 #. http://www.celestrak.com/NORAD/elements/cubesat.txt
-#: plugins/Satellites/src/Satellites.cpp:3045
+#. TRANSLATORS: CelesTrak source [CubeSats]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=cubesat&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3146
 msgid "cubesat"
 msgstr "CubeSat"
 
 #. TRANSLATORS: Satellite group: Other satellites
 #. TRANSLATORS: CelesTrak source [Other]:
 #. http://www.celestrak.com/NORAD/elements/other.txt
-#: plugins/Satellites/src/Satellites.cpp:3048
+#. TRANSLATORS: CelesTrak source [Other]:
+#. https://www.celestrak.com/NORAD/elements/gp.php?GROUP=other&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3150
 msgid "other"
 msgstr "andere"
 
 #. TRANSLATORS: Satellite group: Meteosat
 #. TRANSLATORS: CelesTrak supplemental source [METEOSAT TLEs]:
 #. http://www.celestrak.com/NORAD/elements/supplemental/meteosat.txt
-#: plugins/Satellites/src/Satellites.cpp:3055
+#: plugins/Satellites/src/Satellites.cpp:3157
 msgid "meteosat"
 msgstr "Meteosat"
 
 #. TRANSLATORS: Satellite group: Telesat
 #. TRANSLATORS: CelesTrak supplemental source [Telesat TLEs]:
 #. http://www.celestrak.com/NORAD/elements/supplemental/telesat.txt
-#: plugins/Satellites/src/Satellites.cpp:3059
+#: plugins/Satellites/src/Satellites.cpp:3161
 msgid "telesat"
 msgstr "Telesat"
 
 #. TRANSLATORS: Satellite group: ISS Segments
 #. TRANSLATORS: CelesTrak supplemental source [ISS TLEs]:
 #. http://www.celestrak.com/NORAD/elements/supplemental/iss.txt
-#: plugins/Satellites/src/Satellites.cpp:3062
+#: plugins/Satellites/src/Satellites.cpp:3164
 msgid "iss"
 msgstr "ISS"
 
 #. TRANSLATORS: Satellite group: CPF
 #. TRANSLATORS: CelesTrak supplemental source [CPF TLEs]:
 #. http://www.celestrak.com/NORAD/elements/supplemental/cpf.txt
-#: plugins/Satellites/src/Satellites.cpp:3065
+#: plugins/Satellites/src/Satellites.cpp:3167
 msgid "cpf"
 msgstr "CPF"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:3070
+#: plugins/Satellites/src/Satellites.cpp:3172
 msgid "The Hubble Space Telescope"
 msgstr "De Hubble Space Telescope"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3072
+#: plugins/Satellites/src/Satellites.cpp:3174
 msgid "The International Space Station"
 msgstr "Het Internationaal Ruimtestation"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3074
+#: plugins/Satellites/src/Satellites.cpp:3176
 msgid "China's first space station"
 msgstr "China's eerste ruimtestation"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3076
+#: plugins/Satellites/src/Satellites.cpp:3178
 msgid "Tiangong space station (Chinese large modular space station)"
 msgstr "Tiangong ruimtestation (China)"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3078
+#: plugins/Satellites/src/Satellites.cpp:3180
 msgid "The russian space radio telescope RadioAstron"
 msgstr "De Russische ruimteradiotelescoop RadioAstron"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3080
+#: plugins/Satellites/src/Satellites.cpp:3182
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "International Gamma-Ray Astrophysics Laboratory"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3082
+#: plugins/Satellites/src/Satellites.cpp:3184
 msgid "The Gamma-Ray Observatory"
 msgstr "Het Gamma-Ray Observatorium"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3084
+#: plugins/Satellites/src/Satellites.cpp:3186
 msgid "The Microvariability and Oscillations of Stars telescope"
 msgstr "De microvariatibiliteit en oscillaties van de sterren telescoop"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3086
+#: plugins/Satellites/src/Satellites.cpp:3188
 msgid "The Interface Region Imaging Spectrograph"
 msgstr "De Interface Regio Imaging Spectrograph"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3088
+#: plugins/Satellites/src/Satellites.cpp:3190
 msgid ""
 "The Spectroscopic Planet Observatory for Recognition of Interaction of "
 "Atmosphere"
@@ -16738,256 +16974,256 @@ msgstr ""
 "de atmosfeer"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3092
+#: plugins/Satellites/src/Satellites.cpp:3194
 msgid "The Dark Matter Particle Explorer"
 msgstr "De Dark Matter Particle Explorer"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3094
+#: plugins/Satellites/src/Satellites.cpp:3196
 msgid "Arcsecond Space Telescope Enabling Research in Astrophysics"
 msgstr "Arcsecond Space Telescope Enabling Research in Astrophysics"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3096
+#: plugins/Satellites/src/Satellites.cpp:3198
 msgid "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 msgstr "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3098
+#: plugins/Satellites/src/Satellites.cpp:3200
 msgid "The Chandra X-ray Observatory"
 msgstr "Het Chandra X-ray Observatory"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3102
+#: plugins/Satellites/src/Satellites.cpp:3204
 msgid "ISS (ZARYA)"
 msgstr "ISS (ZARYA)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3104
+#: plugins/Satellites/src/Satellites.cpp:3206
 msgid "ISS (NAUKA)"
 msgstr "ISS (NAUKA)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3106
+#: plugins/Satellites/src/Satellites.cpp:3208
 msgid "ISS"
 msgstr "ISS"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:3108
+#: plugins/Satellites/src/Satellites.cpp:3210
 msgid "HST"
 msgstr "HST"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:3110
+#: plugins/Satellites/src/Satellites.cpp:3212
 msgid "SPEKTR-R"
 msgstr "SPEKTR-R"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:3112
+#: plugins/Satellites/src/Satellites.cpp:3214
 msgid "INTEGRAL"
 msgstr "INTEGRAAL"
 
 #. TRANSLATORS: Satellite name: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:3114
+#: plugins/Satellites/src/Satellites.cpp:3216
 msgid "TIANGONG 1"
 msgstr "TIANGONG 1"
 
 #. TRANSLATORS: Satellite name: name of China's space station module
-#: plugins/Satellites/src/Satellites.cpp:3116
+#: plugins/Satellites/src/Satellites.cpp:3218
 msgid "TIANHE"
 msgstr "TIANHE"
 
 #. TRANSLATORS: Satellite name: China's space station name (with name of base
 #. module)
-#: plugins/Satellites/src/Satellites.cpp:3118
+#: plugins/Satellites/src/Satellites.cpp:3220
 msgid "TIANGONG (TIANHE)"
 msgstr "TIANGONG (TIANHE)"
 
-#: plugins/Satellites/src/Satellites.cpp:3121
+#: plugins/Satellites/src/Satellites.cpp:3223
 msgid "The satellite and the observer are in sunlight"
 msgstr "Satelliet en waarnemer zijn in zonlicht"
 
-#: plugins/Satellites/src/Satellites.cpp:3122
+#: plugins/Satellites/src/Satellites.cpp:3224
 msgid "The satellite is visible"
 msgstr "De satelliet is zichtbaar"
 
-#: plugins/Satellites/src/Satellites.cpp:3123
+#: plugins/Satellites/src/Satellites.cpp:3225
 msgid "The satellite is eclipsed"
 msgstr "De satelliet is onzichtbaar"
 
-#: plugins/Satellites/src/Satellites.cpp:3124
+#: plugins/Satellites/src/Satellites.cpp:3226
 msgid "The satellite is not visible"
 msgstr "De satelliet is niet zichtbaar"
 
-#: plugins/Satellites/src/Satellite.cpp:318
+#: plugins/Satellites/src/Satellite.cpp:322
 msgid "International Designator"
 msgstr "International Designator"
 
-#: plugins/Satellites/src/Satellite.cpp:323
+#: plugins/Satellites/src/Satellite.cpp:327
 msgid "artificial satellite"
 msgstr "kunstmaan"
 
-#: plugins/Satellites/src/Satellite.cpp:329
+#: plugins/Satellites/src/Satellite.cpp:333
 msgid "Approx. magnitude"
 msgstr "Magnitude ong."
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:342
+#: plugins/Satellites/src/Satellite.cpp:346
 msgid "Range"
 msgstr "Bereik"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:344
+#: plugins/Satellites/src/Satellite.cpp:348
 msgid "Range rate"
 msgstr "Verwijderingssnelheid"
 
-#: plugins/Satellites/src/Satellite.cpp:347
+#: plugins/Satellites/src/Satellite.cpp:351
 msgid "Perigee/apogee altitudes"
 msgstr "Perigeum/Apogeum hoogten"
 
-#: plugins/Satellites/src/Satellite.cpp:358
+#: plugins/Satellites/src/Satellite.cpp:362
 msgid "Approx. angular size"
 msgstr "Ca. hoekgrootte"
 
 #. TRANSLATORS: Revolutions per day - measurement of the frequency of a
 #. rotation
-#: plugins/Satellites/src/Satellite.cpp:367
+#: plugins/Satellites/src/Satellite.cpp:371
 msgctxt "frequency"
 msgid "rpd"
 msgstr "rpd"
 
 #. TRANSLATORS: minutes - orbital period for artificial satellites
-#: plugins/Satellites/src/Satellite.cpp:369
+#: plugins/Satellites/src/Satellite.cpp:373
 msgctxt "period"
 msgid "min"
 msgstr "min"
 
-#: plugins/Satellites/src/Satellite.cpp:371
+#: plugins/Satellites/src/Satellite.cpp:375
 msgid "Orbital period"
 msgstr "Omlooptijd"
 
-#: plugins/Satellites/src/Satellite.cpp:376
-#: plugins/Satellites/src/ui_satellitesFilterDialog.h:297
+#: plugins/Satellites/src/Satellite.cpp:380
+#: plugins/Satellites/src/ui_satellitesFilterDialog.h:323
 #: plugins/Exoplanets/src/Exoplanet.cpp:367
 msgid "Inclination"
 msgstr "Inclinatie"
 
-#: plugins/Satellites/src/Satellite.cpp:377
+#: plugins/Satellites/src/Satellite.cpp:381
 msgid "SubPoint (Lat./Long.)"
 msgstr "SubPoint (Lat./Long.)"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:383
+#: plugins/Satellites/src/Satellite.cpp:387
 msgid "TEME coordinates"
 msgstr "TEME coördinaten"
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:387
+#: plugins/Satellites/src/Satellite.cpp:391
 msgid "TEME velocity"
 msgstr "TEME snelheid"
 
-#: plugins/Satellites/src/Satellite.cpp:397
+#: plugins/Satellites/src/Satellite.cpp:401
 msgid "Sun reflection angle"
 msgstr "Zon reflectiehoek"
 
-#: plugins/Satellites/src/Satellite.cpp:405
-#: plugins/Satellites/src/Satellite.cpp:490
+#: plugins/Satellites/src/Satellite.cpp:409
+#: plugins/Satellites/src/Satellite.cpp:494
 msgctxt "unknown date"
 msgid "unknown"
 msgstr "onbekend"
 
-#: plugins/Satellites/src/Satellite.cpp:412
+#: plugins/Satellites/src/Satellite.cpp:416
 msgctxt "at time"
 msgid "at"
 msgstr "om"
 
-#: plugins/Satellites/src/Satellite.cpp:414
+#: plugins/Satellites/src/Satellite.cpp:418
 msgid "Last updated TLE"
 msgstr "TLE laatst aangepast"
 
-#: plugins/Satellites/src/Satellite.cpp:415
+#: plugins/Satellites/src/Satellite.cpp:419
 msgid "Epoch of the TLE"
 msgstr "Epoch van de TLE"
 
-#: plugins/Satellites/src/Satellite.cpp:417
+#: plugins/Satellites/src/Satellite.cpp:421
 msgid "Radar cross-section (RCS)"
 msgstr "Radardoel dwarsdoorsnede (RCS)"
 
-#: plugins/Satellites/src/Satellite.cpp:426
+#: plugins/Satellites/src/Satellite.cpp:430
 msgid "Group"
 msgstr "Groep"
 
-#: plugins/Satellites/src/Satellite.cpp:426
+#: plugins/Satellites/src/Satellite.cpp:430
 msgid "Groups"
 msgstr "Groepen"
 
-#: plugins/Satellites/src/Satellite.cpp:431
+#: plugins/Satellites/src/Satellite.cpp:435
 msgid "Operational status"
 msgstr "Operationele status"
 
-#: plugins/Satellites/src/Satellite.cpp:437
+#: plugins/Satellites/src/Satellite.cpp:441
 msgid "Radio communication"
 msgstr "Radio communicatie"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:454 plugins/Pulsars/src/Pulsar.cpp:289
+#: plugins/Satellites/src/Satellite.cpp:458 plugins/Pulsars/src/Pulsar.cpp:289
 msgctxt "frequency"
 msgid "MHz"
 msgstr "MHz"
 
-#: plugins/Satellites/src/Satellite.cpp:454
+#: plugins/Satellites/src/Satellite.cpp:458
 msgctxt "frequency"
 msgid "kHz"
 msgstr "kHz"
 
-#: plugins/Satellites/src/Satellite.cpp:717
+#: plugins/Satellites/src/Satellite.cpp:721
 msgctxt "operational status"
 msgid "operational"
 msgstr "operationeel"
 
-#: plugins/Satellites/src/Satellite.cpp:718
+#: plugins/Satellites/src/Satellite.cpp:722
 msgctxt "operational status"
 msgid "non-operational"
 msgstr "niet operationeel"
 
-#: plugins/Satellites/src/Satellite.cpp:719
+#: plugins/Satellites/src/Satellite.cpp:723
 msgctxt "operational status"
 msgid "partially operational"
 msgstr "gedeeltelijk operationeel"
 
-#: plugins/Satellites/src/Satellite.cpp:720
+#: plugins/Satellites/src/Satellite.cpp:724
 msgctxt "operational status"
 msgid "standby"
 msgstr "standby"
 
-#: plugins/Satellites/src/Satellite.cpp:721
+#: plugins/Satellites/src/Satellite.cpp:725
 msgctxt "operational status"
 msgid "spare"
 msgstr "reserve"
 
-#: plugins/Satellites/src/Satellite.cpp:722
+#: plugins/Satellites/src/Satellite.cpp:726
 msgctxt "operational status"
 msgid "extended mission"
 msgstr "uitgebreide missie"
 
-#: plugins/Satellites/src/Satellite.cpp:723
+#: plugins/Satellites/src/Satellite.cpp:727
 msgctxt "operational status"
 msgid "decayed"
 msgstr "vervalle"
 
-#: plugins/Satellites/src/Satellite.cpp:725
+#: plugins/Satellites/src/Satellite.cpp:729
 msgctxt "operational status"
 msgid "unknown"
 msgstr "onbekend"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:760
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:763
 msgid "Stellarium Satellites Plugin"
 msgstr "Stellarium satellieten plug-in"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:771
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:774
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
@@ -16995,18 +17231,18 @@ msgstr ""
 "De Satellieten plug-in voorspelt de posities van kunstmanen in een baan rond"
 " de Aarde."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:773
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:776
 msgid "Notes for users"
 msgstr "Notities van gebruikers"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:774
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:777
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
 "Satellieten en hun banen worden alleen weergegeven als de waarnemer zich op "
 "Aarde bevindt."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:775
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:778
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
@@ -17017,7 +17253,7 @@ msgstr ""
 "Wordt er gekeken naar gegevens buiten dit bereik dan kunnen erg vreemde "
 "waarden verwacht worden."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:776
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:779
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
@@ -17028,7 +17264,7 @@ msgstr ""
 #. TRANSLATORS: The translated names of the button and the tab are filled in
 #. automatically. You can check the original names in Stellarium. File names
 #. are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:778
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:781
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -17040,14 +17276,14 @@ msgstr ""
 "upt als %4. Het wordt opgeslagen in de gebruikers gegevensmap, onder "
 "\"modules/Satellites/\"."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:781
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:784
 msgid ""
 "The value of perigee and apogee altitudes compute for mean Earth radius."
 msgstr ""
 "De waarde van perigeum en apogeum hoogten, bereken voor gemiddelde straal "
 "van de Aarde."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:782
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:785
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
@@ -17055,11 +17291,11 @@ msgstr ""
 "De satellieten plug-in is nog in ontwikkeling. Sommige functies zijn "
 "incompleet, ontbreken of onbetrouwbaar."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:786
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:789
 msgid "Altitude classifications for geocentric orbits"
 msgstr "Classificatie volgens hoogte voor geocentrische banen"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:787
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:790
 msgid ""
 "Low Earth orbit (LEO): geocentric orbits with altitudes of apogee below 4400"
 " km, inclination of orbits in range 0-180 degrees and eccentricity below "
@@ -17068,7 +17304,7 @@ msgstr ""
 "Low Earth orbit (LEO): geocentrische banen met apogeum onder 4400 km, "
 "inclinatie in bereik 0-180 graden en eccentriciteit onder 0.25."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:788
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:791
 msgid ""
 "Medium Earth orbit (MEO): geocentric orbits with altitude of apogee at least"
 " 4400 km, inclination of orbits in range 0-180 degrees, eccentricity below "
@@ -17078,7 +17314,7 @@ msgstr ""
 "4400 km, inclinatie in bereik 0-180 graden, eccentriciteit onder 0.25 en "
 "periode van minstens 1100 minuten."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:789
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:792
 msgid ""
 "Geosynchronous orbit (GSO) and geostationary orbit (GEO) are orbits with "
 "inclination of orbits below 25 degrees, eccentricity below 0.25 and period "
@@ -17090,7 +17326,7 @@ msgstr ""
 "1100-2000 minuten (banen die overeenkomen met de sidereale rotatieperiode "
 "van de Aarde). "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:790
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:793
 msgid ""
 "Highly elliptical orbit (HEO): geocentric orbits with altitudes of perigee "
 "below 70000 km, inclination of orbits in range 0-180 degrees, eccentricity "
@@ -17100,7 +17336,7 @@ msgstr ""
 "km, inclinatie 0-180 graden, eccentriciteit tenminste 0.25 periode onder "
 "14000 minuten."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:791
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:794
 msgid ""
 "High geosynchronous orbit (HGSO): geocentric orbits above the altitude of "
 "geosynchronous orbit: inclination of orbits in range 25-180 degrees, "
@@ -17111,11 +17347,11 @@ msgstr ""
 "periode in bereik van 1100-2000 minuten."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:795
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:798
 msgid "TLE data updates"
 msgstr "TLE-gegevens updates"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:796
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:799
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more"
@@ -17125,7 +17361,7 @@ msgstr ""
 "Internet bronnen, en standaard doet de plug-in dat als de bestaande gegevens"
 " meer dan 72 uur oud zijn."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:797
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:800
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -17136,7 +17372,7 @@ msgstr ""
 "bestand op uw computer. Dan moet dit bestand hetzelfde format hebben als de "
 "Celestrak updates (zie %1 voor een voorbeeld)."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:798
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:801
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
@@ -17145,11 +17381,11 @@ msgstr ""
 "satelliet-naam tussen vierkante haken staat, verwijderd voordat de gegevens "
 "worden gebruikt."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:801
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:804
 msgid "Adding new satellites"
 msgstr "Nieuwe satellieten toevoegen"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:802
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:805
 msgid ""
 "Make sure the satellite(s) you wish to add are included in one of the URLs "
 "listed in the Sources tab of the satellites configuration dialog."
@@ -17157,7 +17393,7 @@ msgstr ""
 "Controleer of de satelliet(en) die u wilt toevoegen voorkomen in een van de "
 "URL's vermeld in de Bronnen tab van het satellieten configuratie scherm."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:803
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:806
 msgid ""
 "Go to the Satellites tab, and click the '+' button.  Select the satellite(s)"
 " you wish to add and select the 'add' button."
@@ -17165,11 +17401,11 @@ msgstr ""
 "Ga naar de Satellieten tab, en klik op de '+' toets. Selecteer de "
 "satelliet(en) die u wilt toevoegen en klik op de 'Toevoegen' toets."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:805
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:808
 msgid "Technical notes"
 msgstr "Technische notities"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:806
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:809
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data"
 " as the input."
@@ -17177,7 +17413,7 @@ msgstr ""
 "Posities worden berekend met behulp van de SGP4- en SDP4-methoden, met NORAD"
 " TLE-gegevens als invoer."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:807
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:810
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6)"
@@ -17185,7 +17421,7 @@ msgstr ""
 "De baanberekeningscode is geschreven door Jose Luis Canales volgens de "
 "herziene Spacetrack Report #3 (inclusief Spacetrack Report #6)."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:808
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:811
 msgid ""
 "To calculate an approximate visual magnitude of satellites we use data from "
 "Mike McCants' database (with permissions) of the radar cross-section (RCS) "
@@ -17195,7 +17431,7 @@ msgstr ""
 "we gegevens uit de database van Mike McCants (met machtigingen) van de "
 "radardwarsdoorsnede (RCS) en de standaard magnitudes."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:809
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:812
 msgid ""
 "Formula to calculate an approximate visual magnitude of satellites from the "
 "standard magnitude may be found at Mike McCants website"
@@ -17203,7 +17439,7 @@ msgstr ""
 "Formules om de geschatte visuele magnitude van satellieten te berekenen uit "
 "de standaard magnitude kan worden gevonden op de Mike McCants website"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:810
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:813
 msgid ""
 "We use a spherical shape of satellite to calculate an approximate visual "
 "magnitude from RCS values."
@@ -17211,13 +17447,13 @@ msgstr ""
 "We gebruiken een bolvormige satelliet om een geschatte visuele magnitude te "
 "berekenen op basis van RCS-waarden."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:811
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:814
 msgid "For modelling Starlink magnitudes we use Anthony Mallama's formula"
 msgstr ""
 "Om Starlink magnitudes te modelleren gebruiken we formules van Anthony "
 "Mallama"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:833
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
 #: plugins/Novae/src/gui/NovaeDialog.cpp:151
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:149
@@ -17227,7 +17463,7 @@ msgstr ""
 msgid "Next update"
 msgstr "Volgende update"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:835
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:838
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:163
 #: plugins/Novae/src/gui/NovaeDialog.cpp:157
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:155
@@ -17237,8 +17473,8 @@ msgstr "Volgende update"
 msgid "Internet updates disabled"
 msgstr "Internet updates uitgeschakeld"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:837
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:861
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:840
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:864
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:165
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:211
 #: plugins/Novae/src/gui/NovaeDialog.cpp:159
@@ -17253,7 +17489,7 @@ msgstr "Internet updates uitgeschakeld"
 msgid "Updating now..."
 msgstr "Nu updaten..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:842
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:845
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:167
 #: plugins/Novae/src/gui/NovaeDialog.cpp:161
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:159
@@ -17263,8 +17499,8 @@ msgid "< 1 minute"
 msgstr "< 1 minuut"
 
 #. TRANSLATORS: minutes.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:847
-#: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:133
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:850
+#: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:145
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:172
 #: plugins/Novae/src/gui/NovaeDialog.cpp:166
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
@@ -17275,7 +17511,7 @@ msgctxt "time"
 msgid "m"
 msgstr "m"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:864
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:867
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:214
 #: plugins/Novae/src/gui/NovaeDialog.cpp:208
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:230
@@ -17285,30 +17521,30 @@ msgstr "m"
 msgid "Update error"
 msgstr "Updatefout"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:877
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:880
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr "%1/%2 satelliet(en) vernieuwd; %3 toegevoegd; %4 verwijderd"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:879
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:882
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr "%1/%2 satelliet(en) vernieuwd; %3 toegevoegd; %4 afwezig"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:894
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:897
 msgid "Empty string - not saving"
 msgstr "Lege text - wordt niet opgeslagen"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:901
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:904
 msgid "Invalid URL - not saving"
 msgstr "Ongeldige URL - wordt niet opgeslagen"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:968
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:971
 msgid "[new source]"
 msgstr "[nieuwe bron]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1041
-#: plugins/Satellites/src/ui_satellitesDialog.h:1152
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1057
+#: plugins/Satellites/src/ui_satellitesDialog.h:1173
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:200
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/Novae/src/gui/NovaeDialog.cpp:194
@@ -17323,7 +17559,7 @@ msgstr "[nieuwe bron]"
 msgid "Update now"
 msgstr "Nu updaten"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1043
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1059
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:202
 #: plugins/Novae/src/gui/NovaeDialog.cpp:196
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:194
@@ -17332,81 +17568,81 @@ msgstr "Nu updaten"
 msgid "Update from files"
 msgstr "Update vanuit bestanden"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1071
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1087
 msgid "[orbit calculation error]"
 msgstr "[baanberekeningsfout]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1072
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1088
 msgid "[all newly added]"
 msgstr "{alle toegevoegde nieuwe]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1073
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1089
 msgid "[all not displayed]"
 msgstr "[alle niet weergegeven]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1074
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1090
 msgid "[all displayed]"
 msgstr "[alle weergegeven]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1075
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1091
 msgid "[small satellites]"
 msgstr "[kleine satellieten]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1076
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1092
 msgid "[medium satellites]"
 msgstr "[middelgrote satellieten]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1077
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1093
 msgid "[large satellites]"
 msgstr "[grote satellieten]"
 
 #. TRANSLATORS: LEO = Low Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1079
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1095
 msgid "[LEO satellites]"
 msgstr "[LEO satellieten]"
 
 #. TRANSLATORS: GEO = Geosynchronous equatorial orbit (Geostationary orbit)
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1081
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1097
 msgid "[GEO/GSO satellites]"
 msgstr "[GEO/GSO satellieten]"
 
 #. TRANSLATORS: MEO = Medium Earth orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1083
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1099
 msgid "[MEO satellites]"
 msgstr "[MEO satellieten]"
 
 #. TRANSLATORS: HEO = Highly elliptical orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1085
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1101
 msgid "[HEO satellites]"
 msgstr "[HEO satellieten]"
 
 #. TRANSLATORS: HGEO = High geosynchronous orbit
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1087
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1103
 msgid "[HGSO satellites]"
 msgstr "[HGSO satellieten]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1088
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1104
 msgid "[outdated TLE]"
 msgstr "[verouderde TLE]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1089
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1105
 msgid "[custom filter]"
-msgstr ""
+msgstr "[aangepast filter]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1090
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1106
 msgid "[all user defined]"
 msgstr "[niet actualiseren]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1091
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1107
 msgid "[all]"
 msgstr "[alle]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1107
-#: plugins/Satellites/src/ui_satellitesFilterDialog.h:303
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1123
+#: plugins/Satellites/src/ui_satellitesFilterDialog.h:324
 msgid "RCS"
 msgstr "RCS"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1108
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1124
 msgid ""
 "Radar cross-section (RCS) is a measure of how detectable an object is with a"
 " radar. A larger RCS indicates that an object is more easily detected."
@@ -17415,7 +17651,7 @@ msgstr ""
 "met een radar. Een grote RCS identificeert dat een object makkelijk "
 "detecteerbaar is."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1109
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1125
 msgid ""
 "The standard magnitude of a satellite is defined as its apparent magnitude "
 "when at half-phase and at a distance 1000 km from the observer."
@@ -17426,54 +17662,58 @@ msgstr ""
 
 #. TRANSLATORS: duration
 #. TRANSLATORS: seconds.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1111
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1127
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:227
 msgctxt "time"
 msgid "s"
 msgstr "s"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1118
-#: plugins/Satellites/src/ui_satellitesDialog.h:1190
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1134
+#: plugins/Satellites/src/ui_satellitesDialog.h:1202
 msgid ""
 "Distance to the center of umbra from Earth's surface (height of imagined "
 "satellite)"
 msgstr ""
+"Afstand tot het middelpunt van de umbra vanaf het aardoppervlak (hoogte van "
+"ingebeelde satelliet)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1119
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1135
 msgid "Number of  segments: number of segments used to draw the line"
-msgstr ""
+msgstr "Aantal segmenten: aantal segmenten gebruikt om de lijn te tekenen"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1120
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1136
 msgid "Segment length: duration of a single segment in seconds"
-msgstr ""
+msgstr "Segmentlengte: duur van één segment in seconden"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1121
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1137
 msgid "Fade length: number of segments used to draw each end of the line"
 msgstr ""
+"Vervagingslengte: aantal segmenten dat wordt gebruikt om elk uiteinde van de"
+" lijn te tekenen"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1152
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1168
 msgid "New group..."
 msgstr "Nieuwe groep..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1426
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1442
 msgid "Select TLE Update File"
 msgstr "TLE update bestand selecteren"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1448
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1464
 msgid "Brightness"
 msgstr "Helderheid"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1451
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1467
 msgid "Satellite"
 msgstr "Satelliet"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1531
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1547
 msgid "Save predicted Iridium flares as..."
 msgstr "Voorspelde Iridium-uitbarstingen opslaan als..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1576
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1578
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1592
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1594
 msgid "Predicted Iridium flares"
 msgstr "Voorspelde Iridiumflitsen"
 
@@ -17517,26 +17757,30 @@ msgstr "Gegevens ophalen"
 msgid "Catalog Number: %1"
 msgstr "Catalogusnummer: %1"
 
-#: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:143
-msgid "Radar cross-section"
-msgstr ""
+#: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:150
+msgid "The satellite can be located in selected range of altitudes"
+msgstr "De satelliet kan gelokaliseerd worden op bepaalde hoogtes"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1146
-#: plugins/Satellites/src/ui_satellitesDialog.h:1147
+#: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:157
+msgid "Radar cross-section"
+msgstr "Radar doorsnede"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1167
+#: plugins/Satellites/src/ui_satellitesDialog.h:1168
 msgid "Satellites Configuration"
 msgstr "Satellieten configuratie"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1149
+#: plugins/Satellites/src/ui_satellitesDialog.h:1170
 msgid "Updates"
 msgstr "Updates"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1150
+#: plugins/Satellites/src/ui_satellitesDialog.h:1171
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:570
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:469
 msgid "Update frequency:"
 msgstr "Update frequentie:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1151
+#: plugins/Satellites/src/ui_satellitesDialog.h:1172
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Novae/src/ui_novaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:296
@@ -17545,17 +17789,17 @@ msgstr "Update frequentie:"
 msgid "Last update:"
 msgstr "Laatste update:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1153
+#: plugins/Satellites/src/ui_satellitesDialog.h:1174
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr ""
 "Bij het bijwerken, voeg alle nieuwe satellieten van de geselecteerde "
 "bron(nen) toe"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1154
+#: plugins/Satellites/src/ui_satellitesDialog.h:1175
 msgid "Update satellite data from Internet sources"
 msgstr "Satellietgegevens updaten vanuit Internetbronnen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1155
+#: plugins/Satellites/src/ui_satellitesDialog.h:1176
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
@@ -17563,94 +17807,102 @@ msgstr ""
 "Aan het updaten, alle satellieten verwijderen die niet meer voorkomen in de "
 "update bron(nen)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1156
+#: plugins/Satellites/src/ui_satellitesDialog.h:1177
 msgid "Visualisation settings"
-msgstr ""
+msgstr "Visualisatie instellingen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1157
+#: plugins/Satellites/src/ui_satellitesDialog.h:1178
 msgid "Orbit lines"
 msgstr "Baanlijnen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1167
+#: plugins/Satellites/src/ui_satellitesDialog.h:1188
 msgid "Show satellites as markers"
 msgstr "Toon satellieten met een icoontje"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1169
+#: plugins/Satellites/src/ui_satellitesDialog.h:1190
 msgid "Color of markers for satellites in transit through the Sun or the Moon"
 msgstr ""
 "Kleur van markeringen voor satellieten die over de zon of de maan reizen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1171
+#: plugins/Satellites/src/ui_satellitesDialog.h:1192
 msgid "Show Earth's umbra"
-msgstr ""
+msgstr "Toon de umbra van de Aarde"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1173
+#: plugins/Satellites/src/ui_satellitesDialog.h:1194
 msgid "The color of Earth's umbra circle"
-msgstr ""
+msgstr "Kleur van de umbra cirkel van de Aarde"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1175
+#: plugins/Satellites/src/ui_satellitesDialog.h:1198
+msgid "Font size for labels"
+msgstr "Lettergrootte voor labels"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1204
+msgid "Show umbra at distance:"
+msgstr "Toon umbra op afstand:"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1205
 msgid "Show Earth's penumbra"
-msgstr ""
+msgstr "Toon de halfschaduw van de Aarde"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1177
+#: plugins/Satellites/src/ui_satellitesDialog.h:1207
 msgid "The color of Earth's penumbra circle"
-msgstr ""
+msgstr "De kleur van de halfcirkel van de Aarde"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1179
-msgid "Hide invisible artificial satellites"
-msgstr "Onzichtbare kunstmanen verbergen"
+#: plugins/Satellites/src/ui_satellitesDialog.h:1210
+msgid "Use special color for all invisible satellites"
+msgstr "Gebruik een speciale kleur voor alle onzichtbare satellieten"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1181
+#: plugins/Satellites/src/ui_satellitesDialog.h:1212
+msgid "Set color for invisible satellites"
+msgstr "Kleur instellen voor onzichtbare satellieten"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1214
 msgid "Color of markers, labels and orbits for invisible satellites"
 msgstr "Kleur van markeringen, labels en banen van onzichtbare satellieten"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1186
-msgid "Font size for labels"
-msgstr ""
+#: plugins/Satellites/src/ui_satellitesDialog.h:1217
+msgid "Hide invisible artificial satellites"
+msgstr "Onzichtbare kunstmanen verbergen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1192
-msgid "Show umbra at distance:"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:1197
-#: plugins/Satellites/src/ui_satellitesFilterDialog.h:294
+#: plugins/Satellites/src/ui_satellitesDialog.h:1222
+#: plugins/Satellites/src/ui_satellitesFilterDialog.h:322
 msgid "Settings of custom filter"
-msgstr ""
+msgstr "Instellingen van aangepast filter"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1199
+#: plugins/Satellites/src/ui_satellitesDialog.h:1224
 msgid "Search ..."
 msgstr "Zoeken ..."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1201
+#: plugins/Satellites/src/ui_satellitesDialog.h:1226
 msgid "Double-click a satellite to start tracking it."
 msgstr "Dubbelklik op een satelliet om het te volgen."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1204
+#: plugins/Satellites/src/ui_satellitesDialog.h:1229
 msgid "Add more satellites"
 msgstr "Meer satellieten toevoegen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1207
+#: plugins/Satellites/src/ui_satellitesDialog.h:1232
 msgid "Remove the selected satellites"
 msgstr "Geselecteerde satellieten verwijderen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1210
+#: plugins/Satellites/src/ui_satellitesDialog.h:1235
 msgid "Select all satellites in list"
-msgstr ""
+msgstr "Selecteer alle satellieten in de lijst"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1213
+#: plugins/Satellites/src/ui_satellitesDialog.h:1238
 msgid "Change markers color for selected satellites"
 msgstr "Markeerkleur voor geselecteerde satellieten wijzigen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1216
+#: plugins/Satellites/src/ui_satellitesDialog.h:1241
 msgid "Change orbits color for selected satellites"
 msgstr "Baankleur voor geselecteerde satellieten wijzigen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1219
+#: plugins/Satellites/src/ui_satellitesDialog.h:1244
 msgid "Change info color for selected satellites"
 msgstr "Info-kleur voor geselecteerde satellieten wijzigen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1223
-#: plugins/Satellites/src/ui_satellitesDialog.h:1227
+#: plugins/Satellites/src/ui_satellitesDialog.h:1248
+#: plugins/Satellites/src/ui_satellitesDialog.h:1252
 msgid ""
 "The Satellite Catalog Number (also known as NORAD (North American Aerospace "
 "Defense) Catalog Number, NORAD ID)"
@@ -17658,102 +17910,102 @@ msgstr ""
 "Het satelliet catalogusnummer (ook bekend als NORAD (North American "
 "Aerospace Defense) catalogusnummer, NORAD ID)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1225
+#: plugins/Satellites/src/ui_satellitesDialog.h:1250
 msgid "Catalog number:"
 msgstr "Catalogusnummer:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1230
-#: plugins/Satellites/src/ui_satellitesDialog.h:1234
+#: plugins/Satellites/src/ui_satellitesDialog.h:1255
+#: plugins/Satellites/src/ui_satellitesDialog.h:1259
 msgid "The International Designator, also known as COSPAR ID"
 msgstr "International Designator, ook gekend als COSPAR ID"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1232
+#: plugins/Satellites/src/ui_satellitesDialog.h:1257
 msgid "I.D.:"
 msgstr "ID:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1236
+#: plugins/Satellites/src/ui_satellitesDialog.h:1261
 msgid "Standard magnitude:"
 msgstr "Standaard magnitude:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1238
-#: plugins/Satellites/src/ui_satellitesDialog.h:1242
+#: plugins/Satellites/src/ui_satellitesDialog.h:1263
+#: plugins/Satellites/src/ui_satellitesDialog.h:1267
 msgid "Perigee altitude in kilometers"
 msgstr "Perigeumhoogte in kilometers"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1240
+#: plugins/Satellites/src/ui_satellitesDialog.h:1265
 msgid "Perigee:"
 msgstr "Perigeum"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1245
-#: plugins/Satellites/src/ui_satellitesDialog.h:1249
+#: plugins/Satellites/src/ui_satellitesDialog.h:1270
+#: plugins/Satellites/src/ui_satellitesDialog.h:1274
 msgid "Apogee altitude in kilometers"
 msgstr "Apogeumhoogte in kilometers"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1247
+#: plugins/Satellites/src/ui_satellitesDialog.h:1272
 msgid "Apogee:"
 msgstr "Apogeum"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1252
-#: plugins/Satellites/src/ui_satellitesDialog.h:1256
+#: plugins/Satellites/src/ui_satellitesDialog.h:1277
+#: plugins/Satellites/src/ui_satellitesDialog.h:1281
 msgid "Orbital period in minutes"
 msgstr "Omloopperiode in minuten"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1254
+#: plugins/Satellites/src/ui_satellitesDialog.h:1279
 msgid "Period:"
 msgstr "Periode:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1259
+#: plugins/Satellites/src/ui_satellitesDialog.h:1284
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr "Banen van de geselecteerde satelliet(en) weergeven"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1261
+#: plugins/Satellites/src/ui_satellitesDialog.h:1286
 msgid "Orbit"
 msgstr "Baan"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1263
+#: plugins/Satellites/src/ui_satellitesDialog.h:1288
 msgid "Display the selected satellite(s)"
 msgstr "Geselecteerde satelliet(en) weergeven"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1265
+#: plugins/Satellites/src/ui_satellitesDialog.h:1290
 msgid "Displayed"
 msgstr "Zichtbaar"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1267
+#: plugins/Satellites/src/ui_satellitesDialog.h:1292
 msgid "Do not update TLE of selected satellite(s)"
 msgstr "TLE van de geselecteerde satellieten niet actualiseren"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1269
+#: plugins/Satellites/src/ui_satellitesDialog.h:1294
 msgid "Do not update"
 msgstr "Niet actualiseren"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1271
+#: plugins/Satellites/src/ui_satellitesDialog.h:1296
 msgid "(add personal notes here)"
 msgstr "(eigen notities)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1272
+#: plugins/Satellites/src/ui_satellitesDialog.h:1297
 msgid "Groups:"
 msgstr "Groepen:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1273
+#: plugins/Satellites/src/ui_satellitesDialog.h:1298
 msgid "TLE set:"
 msgstr "TLE set:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1274
+#: plugins/Satellites/src/ui_satellitesDialog.h:1299
 msgid "Epoch of the TLE:"
 msgstr "Epoch van de TLE:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1276
-#: plugins/Satellites/src/ui_satellitesDialog.h:1280
+#: plugins/Satellites/src/ui_satellitesDialog.h:1301
+#: plugins/Satellites/src/ui_satellitesDialog.h:1305
 msgid ""
 "The valid time range for epoch of TLE in days, used in filtering of "
 "satellites"
 msgstr "Tijdspanne waarin de TLE aanvaardbaar is, in dagen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1278
+#: plugins/Satellites/src/ui_satellitesDialog.h:1303
 msgid "Age:"
 msgstr "Tijdspanne:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1283
+#: plugins/Satellites/src/ui_satellitesDialog.h:1308
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
@@ -17761,39 +18013,43 @@ msgstr ""
 "Satellieten in de gemarkeerde bronlijsten worden automatisch toegevoegd bij "
 "de volgende update als ze nog niet aanwezig zijn in de collectie."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1288
+#: plugins/Satellites/src/ui_satellitesDialog.h:1313
 msgid "Add new source"
 msgstr "Nieuwe bron toevoegen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1291
+#: plugins/Satellites/src/ui_satellitesDialog.h:1316
 msgid "Edit selected source"
 msgstr "Bewerk geselecteerde bron"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1294
+#: plugins/Satellites/src/ui_satellitesDialog.h:1319
 msgid "Save source"
 msgstr "Sla bron op"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1297
+#: plugins/Satellites/src/ui_satellitesDialog.h:1322
 msgid "Remove selected source"
 msgstr "Geselecteerde bron verwijderen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1299
+#: plugins/Satellites/src/ui_satellitesDialog.h:1325
+msgid "Reset sources list to it defaults"
+msgstr ""
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:1327
 msgid "Sources"
 msgstr "Bronnen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1300
+#: plugins/Satellites/src/ui_satellitesDialog.h:1328
 msgid "Flare prediction (days):"
 msgstr "Uitbarsting voorspelling (dagen)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1304
+#: plugins/Satellites/src/ui_satellitesDialog.h:1332
 msgid "Predict Iridium flares"
 msgstr "Iridium-flitsen voorspellen"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1305
+#: plugins/Satellites/src/ui_satellitesDialog.h:1333
 msgid "Save predictions..."
 msgstr "Uitbarstingen opslaan..."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:1306
+#: plugins/Satellites/src/ui_satellitesDialog.h:1334
 msgid "Iridium flares"
 msgstr "Iridium flitsen"
 
@@ -17829,34 +18085,34 @@ msgstr "Markeer er een"
 msgid "Discard"
 msgstr "Niet gebruiken"
 
-#: plugins/Satellites/src/ui_satellitesFilterDialog.h:292
+#: plugins/Satellites/src/ui_satellitesFilterDialog.h:320
 msgid "Satellites filter"
-msgstr ""
+msgstr "Satellieten filter"
 
-#: plugins/Satellites/src/ui_satellitesFilterDialog.h:295
-msgid "Known standard magnitude"
-msgstr ""
+#: plugins/Satellites/src/ui_satellitesFilterDialog.h:325
+msgid "Apogee"
+msgstr "Apogeum"
 
-#: plugins/Satellites/src/ui_satellitesFilterDialog.h:296
+#: plugins/Satellites/src/ui_satellitesFilterDialog.h:326
 #: plugins/Pulsars/src/Pulsar.cpp:252 plugins/Exoplanets/src/Exoplanet.cpp:366
 msgid "Eccentricity"
 msgstr "Eccentriciteit"
 
-#: plugins/Satellites/src/ui_satellitesFilterDialog.h:298
-msgid "Max."
-msgstr ""
+#: plugins/Satellites/src/ui_satellitesFilterDialog.h:327
+msgid "Known standard magnitude"
+msgstr "Bekende standaard lichtsterkte"
 
-#: plugins/Satellites/src/ui_satellitesFilterDialog.h:299
-msgid "Min."
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesFilterDialog.h:301
+#: plugins/Satellites/src/ui_satellitesFilterDialog.h:328
 msgid "Perigee"
-msgstr ""
+msgstr "Perigeum"
 
-#: plugins/Satellites/src/ui_satellitesFilterDialog.h:302
-msgid "Apogee"
-msgstr ""
+#: plugins/Satellites/src/ui_satellitesFilterDialog.h:329
+msgid "Max."
+msgstr "Max."
+
+#: plugins/Satellites/src/ui_satellitesFilterDialog.h:331
+msgid "Min."
+msgstr "Min."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:80
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:167
@@ -25476,7 +25732,7 @@ msgid "Peak"
 msgstr "Piek"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:436
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:169
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:177
 msgid "Meteor Showers Configuration"
 msgstr "Meteoorzwermen configuratie"
 
@@ -25552,20 +25808,15 @@ msgstr "Laatste mogelijkheid voor updaten"
 msgid "Update"
 msgstr "Update"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:170
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:178
 msgid "Meteor Showers: Search"
 msgstr "Meteoorzwermen: zoeken"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:172
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:174
-msgid "Search"
-msgstr "Zoeken"
-
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:173
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:181
 msgid "Year:"
 msgstr "Jaar:"
 
-#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:175
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:183
 msgid "Results"
 msgstr "Resultaten"
 
