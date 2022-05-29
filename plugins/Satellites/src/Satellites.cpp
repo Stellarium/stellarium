@@ -1266,7 +1266,7 @@ bool Satellites::add(const TleData& tleData)
 	if (tleData.status != Satellite::StatusUnknown)
 		satProperties.insert("status", tleData.status);
 
-	// Guess the group for newly added satellites only
+	// Guessing the groups for newly added satellites only
 	QVariantList groupList =  satProperties.value("groups", QVariantList()).toList();
 	if (groupList.isEmpty())
 	{
@@ -1296,7 +1296,7 @@ bool Satellites::add(const TleData& tleData)
 QStringList Satellites::guessGroups(const TleData& tleData)
 {
 	QStringList satGroups;
-	// Guess the groups from names
+	// Guessing the groups from the names of satellites
 	if (tleData.name.startsWith("STARLINK"))
 	{
 		satGroups.append("starlink");
@@ -1306,7 +1306,7 @@ QStringList Satellites::guessGroups(const TleData& tleData)
 	{
 		QStringList d = tleData.name.split(" ");
 		if (d.at(1).toInt()>=100)
-			satGroups.append("iridium next");
+			satGroups.append("iridium-NEXT");
 		else
 			satGroups.append("iridium");
 		satGroups.append("communications");
@@ -1387,7 +1387,7 @@ QStringList Satellites::guessGroups(const TleData& tleData)
 	if (tleData.status==Satellite::StatusNonoperational)
 		satGroups.append("non-operational");
 
-	// Guess the groups from CelesTrak's groups
+	// Guessing the groups from CelesTrak's groups (a "supergroups")
 	if (tleData.sourceURL.contains("celestrak.com", Qt::CaseInsensitive))
 	{
 		// add groups, based on CelesTrak's groups
@@ -2908,9 +2908,7 @@ void Satellites::translations()
 	// TRANSLATORS: Satellite group: Satellites that are no longer functioning
 	N_("non-operational");
 	// TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-	N_("observatory");
-	// TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT constellation (Iridium is a proper name)
-	N_("iridium next");	
+	N_("observatory");	
 	// TRANSLATORS: Satellite group: The Indian Regional Navigation Satellite System (IRNSS) is an autonomous regional satellite navigation system being developed by the Indian Space Research Organisation (ISRO) which would be under complete control of the Indian government.
 	N_("irnss");
 	// TRANSLATORS: Satellite group: The Quasi-Zenith Satellite System (QZSS), is a proposed three-satellite regional time transfer system and Satellite Based Augmentation System for the Global Positioning System, that would be receivable within Japan.
