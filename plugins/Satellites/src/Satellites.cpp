@@ -1111,10 +1111,7 @@ QVariantMap Satellites::createDataMap(void)
 		   << Satellite::roundToDp(defaultHintColor[1],3)
 		   << Satellite::roundToDp(defaultHintColor[2],3);
 
-	// TODO: Since v0.21 uncomment this line:
-	// map["creator"] = QString("Satellites plugin version %1").arg(SATELLITES_PLUGIN_VERSION);
-	// and remove this line:
-	map["creator"] = QString("Satellites plugin version %1").arg(SatellitesCatalogVersion);
+	map["creator"] = QString("Satellites plugin version %1").arg(SATELLITES_PLUGIN_VERSION);
 	map["version"] = QString("%1").arg(SatellitesCatalogVersion);
 	map["hintColor"] = defHintCol;
 	map["shortName"] = "satellite orbital data";
@@ -1338,7 +1335,7 @@ QString Satellites::getSatelliteDescription(int satID)
 QPair<double, double> Satellites::getStdMagRCS(const TleData& tleData)
 {
 	QPair<double, double> result;
-	double stdMag = 99., RCS = 0.;
+	double stdMag = 99., RCS = -1.;
 	int sid = tleData.id.toInt();
 	if (qsMagList.contains(sid))
 		stdMag = qsMagList[sid];

@@ -469,7 +469,10 @@ void SatellitesDialog::filterListByGroup(int index)
 	if (groupId == "[custom]")
 		ui->customFilterButton->setEnabled(true);
 
-	filterModel->setSecondaryFilters(QString(), secondaryFilter.value(groupId, SatNoFlags));
+	if (groupId.contains("[") || groupId=="all")
+		filterModel->setSecondaryFilters(QString(), secondaryFilter.value(groupId, SatNoFlags));
+	else
+		filterModel->setSecondaryFilters(groupId, SatNoFlags);
 
 	if (ui->satellitesList->model()->rowCount() <= 0)
 		return;
@@ -524,9 +527,9 @@ void SatellitesDialog::updateSatelliteData()
 	Vec3f mColor, oColor, iColor;
 
 	// set default
-	buttonMarkerColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
-	buttonOrbitColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
-	buttonInfoColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
+	buttonMarkerColor = QColor(QColor::fromRgbF(0.7f, 0.7f, 0.7f));
+	buttonOrbitColor = QColor(QColor::fromRgbF(0.7f, 0.7f, 0.7f));
+	buttonInfoColor = QColor(QColor::fromRgbF(0.7f, 0.7f, 0.7f));
 
 	if (selection.count() > 1)
 	{
@@ -563,9 +566,9 @@ void SatellitesDialog::updateSatelliteData()
 				// if there are, return grey
 				if (sat->hintColor != mColor || sat->orbitColor != oColor || sat->infoColor != iColor)
 				{
-					mColor = Vec3f(0.4f, 0.4f, 0.4f);
-					oColor = Vec3f(0.4f, 0.4f, 0.4f);
-					iColor = Vec3f(0.4f, 0.4f, 0.4f);
+					mColor = Vec3f(0.7f, 0.7f, 0.7f);
+					oColor = Vec3f(0.7f, 0.7f, 0.7f);
+					iColor = Vec3f(0.7f, 0.7f, 0.7f);
 					break;
 				}
 			}
@@ -1342,9 +1345,9 @@ void SatellitesDialog::setRightSideToROMode()
 	ui->periodLineEdit->setText(QString());
 
 	// set default
-	buttonMarkerColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
-	buttonOrbitColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
-	buttonInfoColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
+	buttonMarkerColor = QColor(QColor::fromRgbF(0.7f, 0.7f, 0.7f));
+	buttonOrbitColor = QColor(QColor::fromRgbF(0.7f, 0.7f, 0.7f));
+	buttonInfoColor = QColor(QColor::fromRgbF(0.7f, 0.7f, 0.7f));
 	ui->satMarkerColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonMarkerColor.name() + "; }");
 	ui->satOrbitColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonOrbitColor.name() + "; }");
 	ui->satInfoColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonInfoColor.name() + "; }");
