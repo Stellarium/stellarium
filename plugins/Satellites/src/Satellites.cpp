@@ -1244,30 +1244,18 @@ bool Satellites::add(const TleData& tleData)
 	//TODO: Decide if newly added satellites are visible by default --BM
 	satProperties.insert("visible", true);
 	satProperties.insert("orbitVisible", false);
-	int sid = tleData.id.toInt();
-	if (qsMagList.contains(sid))
-		satProperties.insert("stdMag", qsMagList[sid]);
-	if (rcsList.contains(sid))
-		satProperties.insert("rcs", rcsList[sid]);
-	// special case: starlink satellites; details: http://satobs.org/seesat/Apr-2020/0174.html
-	if (!rcsList.contains(sid) && tleData.name.startsWith("STARLINK"))
-	{
-		satProperties.insert("rcs", 22.68); // Starlink's solar array is 8.1 x 2.8 metres.
-		// Source: Anthony Mallama. Starlink Satellite Brightness -- Characterized From 100,000 Visible Light Magnitudes; https://arxiv.org/abs/2111.09735
-		if (tleData.name.contains("VISORSAT", Qt::CaseInsensitive))
-			satProperties.insert("stdMag", 7.21); // stdMag=6.84 previously: https://arxiv.org/abs/2109.07345
-		else
-			satProperties.insert("stdMag", 5.89);
-	}
-	// special case: oneweb satellites
-	// Source: Anthony Mallama. OneWeb Satellite Brightness -- Characterized From 80,000 Visible Light Magnitudes; https://arxiv.org/pdf/2203.05513.pdf
-	if (!qsMagList.contains(sid) && tleData.name.startsWith("ONEWEB"))
-		satProperties.insert("stdMag", 7.05);
+
+	QPair<double, double> stdMagRCS = getStdMagRCS(tleData);
+	if (stdMagRCS.first < 99.)
+		satProperties.insert("stdMag", stdMagRCS.first);
+	if (stdMagRCS.second > 0.)
+		satProperties.insert("rcs", stdMagRCS.second);
+
 	if (tleData.status != Satellite::StatusUnknown)
 		satProperties.insert("status", tleData.status);
 
-	// Add the description for newly added satellites
-	QString description = getSatelliteDescription(sid);
+	// Add the description for newly added satellites	
+	QString description = getSatelliteDescription(tleData.id.toInt());
 	if (!satProperties.contains("description") && !description.isEmpty())
 		satProperties.insert("description", description);
 
@@ -1285,6 +1273,23 @@ bool Satellites::add(const TleData& tleData)
 					addGroup(str);
 			}
 		}
+	}
+
+	QList<CommLink> comms = getCommunicationData(tleData);
+	if (!comms.isEmpty())
+	{
+		QVariantList communications;
+		for (const auto& comm : comms)
+		{
+			QVariantMap commData;
+			commData.insert("frequency", comm.frequency);
+			commData.insert("description", comm.description);
+			if (!comm.modulation.isEmpty()) // can be empty
+				commData.insert("modulation", comm.modulation);
+
+			communications.append(commData);
+		}
+		satProperties.insert("comms", communications);
 	}
 	
 	SatelliteP sat(new Satellite(tleData.id, satProperties));
@@ -1330,9 +1335,98 @@ QString Satellites::getSatelliteDescription(int satID)
 	return descriptions.value(satID, QString());
 }
 
+QPair<double, double> Satellites::getStdMagRCS(const TleData& tleData)
+{
+	QPair<double, double> result;
+	double stdMag = 99., RCS = 0.;
+	int sid = tleData.id.toInt();
+	if (qsMagList.contains(sid))
+		stdMag = qsMagList[sid];
+	if (rcsList.contains(sid))
+		RCS = rcsList[sid];
+
+	// special case: starlink satellites; details: http://satobs.org/seesat/Apr-2020/0174.html
+	if (!rcsList.contains(sid) && tleData.name.startsWith("STARLINK"))
+	{
+		RCS = 22.68; // Starlink's solar array is 8.1 x 2.8 metres.
+		// Source: Anthony Mallama. Starlink Satellite Brightness -- Characterized From 100,000 Visible Light Magnitudes; https://arxiv.org/abs/2111.09735
+		if (tleData.name.contains("VISORSAT", Qt::CaseInsensitive))
+			stdMag = 7.21; // stdMag=6.84 previously: https://arxiv.org/abs/2109.07345
+		else
+			stdMag = 5.89;
+	}
+
+	// special case: oneweb satellites
+	// Source: Anthony Mallama. OneWeb Satellite Brightness -- Characterized From 80,000 Visible Light Magnitudes; https://arxiv.org/pdf/2203.05513.pdf
+	if (!qsMagList.contains(sid) && tleData.name.startsWith("ONEWEB"))
+		stdMag = 7.05;
+
+	result.first	= stdMag;
+	result.second	= RCS;
+	return result;
+}
+
+QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
+{
+	QList<CommLink> comms;
+	CommLink c;
+
+	// Communication data for individual satellites
+	QVariantMap communications = satComms.value(tleData.id.toInt(), QVariantMap());
+	if (!communications.isEmpty())
+	{
+		for (const auto& comm : communications.value("comms").toList())
+		{
+			QVariantMap commMap = comm.toMap();
+			c.frequency = commMap.value("frequency").toDouble();
+			c.description = commMap.value("description").toString();
+			if (commMap.contains("modulation")) // can be empty
+				c.modulation = commMap.value("modulation").toString();
+			comms.append(c);
+		}
+	}
+
+	// Communication data for groups of satellites
+	QStringList groups;
+	if (tleData.name.startsWith("GPS"))
+		groups << "gps";
+
+	if (tleData.name.startsWith("COSMOS") && tleData.name.contains("("))
+		groups << "glonass";
+
+	for (const auto& name : qAsConst(groups))
+	{
+		QVariantMap communications = groupComms.value(name, QVariantMap());
+		if (!communications.isEmpty())
+		{
+			for (const auto& comm : communications.value("comms").toList())
+			{
+				QVariantMap commMap = comm.toMap();
+				c.frequency = commMap.value("frequency").toDouble();
+				c.description = commMap.value("description").toString();
+				if (commMap.contains("modulation")) // can be empty
+					c.modulation = commMap.value("modulation").toString();
+				comms.append(c);
+			}
+		}
+	}
+
+	return comms;
+}
+
 QStringList Satellites::guessGroups(const TleData& tleData)
 {
 	QStringList satGroups;
+	// Special case: ISS
+	if (tleData.id == "25544" || tleData.id == "49044")
+	{
+		satGroups.append("stations");
+		satGroups.append("scientific");
+		satGroups.append("amateur");
+		satGroups.append("visual");
+		satGroups.append("tdrss");
+	}
+
 	// Guessing the groups from the names of satellites
 	if (tleData.name.startsWith("STARLINK"))
 	{
@@ -2237,16 +2331,19 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 
 				// we reset this to "now" when we started the update.
 				sat->lastUpdated = lastUpdate;
+
+				QPair<double, double> stdMagRCS = getStdMagRCS(newTle);
+				if (stdMagRCS.first < 99.)
+					sat->stdMag = stdMagRCS.first;
+				if (stdMagRCS.second > 0.)
+					sat->RCS = stdMagRCS.second;
+
+				QList<CommLink> comms = getCommunicationData(newTle);
+				if (!comms.isEmpty())
+					sat->comms = comms;
+
 				updatedCount++;
 			}
-			int sid = id.toInt();
-			if (qsMagList.contains(sid))
-				sat->stdMag = qsMagList[sid];
-			if (rcsList.contains(sid))
-				sat->RCS = rcsList[sid];
-			// special case: starlink satellites; details: http://satobs.org/seesat/Apr-2020/0174.html
-			if (!rcsList.contains(sid) && sat->name.startsWith("STARLINK"))
-				sat->RCS = 22.68; // Starlink's solar array is 8.1 x 2.8 metres.
 
 			if (sat->status==Satellite::StatusNonoperational && !sat->groups.contains("non-operational"))
 				sat->groups.insert("non-operational");
@@ -2444,6 +2541,25 @@ void Satellites::loadExtraData()
 				rcsList.insert(id, srcs.toDouble());
 		}
 		rcsFile.close();
+	}
+
+	QFile commFile(":/satellites/communications.json");
+	if (commFile.open(QFile::ReadOnly))
+	{
+		satComms.clear();
+		groupComms.clear();
+		QVariantMap commMap = StelJsonParser::parse(&commFile).toMap();
+		commFile.close();
+
+		// Communications data for individial satellites
+		QVariantMap satellitesCommLink = commMap.value("satellites").toMap();
+		for (const auto& satId : satellitesCommLink.keys())
+			satComms.insert(satId.toInt(), satellitesCommLink.value(satId).toMap());
+
+		// Communications data for groups of satellites
+		QVariantMap groupsCommLink = commMap.value("groups").toMap();
+		for (const auto& groupId : groupsCommLink.keys())
+			groupComms.insert(groupId, groupsCommLink.value(groupId).toMap());
 	}
 }
 

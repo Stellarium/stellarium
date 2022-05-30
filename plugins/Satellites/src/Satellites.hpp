@@ -763,7 +763,11 @@ private:
 	bool add(const TleData& tleData);
 	//! Guess the groups of satellites
 	QStringList guessGroups(const TleData& tleData);
+	//! Get the standard magnitude and RCS data for satellite
+	//! @return standard magnitude, RCS
+	QPair<double, double> getStdMagRCS(const TleData& tleData);
 	QString getSatelliteDescription(int satID);
+	QList<CommLink> getCommunicationData(const TleData& tleData);
 	
 	//! Delete Satellites section in main config.ini, then create with default values.
 	void restoreDefaultSettings();
@@ -827,6 +831,8 @@ private:
 	SatellitesListModel* satelliteListModel;
 
 	QHash<int, double> qsMagList, rcsList;
+	QMap<int, QVariantMap> satComms;
+	QMap<QString, QVariantMap> groupComms;
 	
 	//! Union of the groups used by all loaded satellites - see @ref groups.
 	//! For simplicity, it can only grow until the plug-in is unloaded -
