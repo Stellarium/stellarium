@@ -1394,6 +1394,15 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 	if (tleData.name.startsWith("COSMOS") && tleData.name.contains("("))
 		groups << "glonass";
 
+	if (tleData.name.startsWith("BEIDOU"))
+		groups << "beidou";
+
+	if (tleData.name.startsWith("GSAT") && (tleData.name.contains("PRN") || tleData.name.contains("GALILEO")))
+		groups << "galileo";
+
+	if (tleData.name.startsWith("IRNSS"))
+		groups << "irnss";
+
 	for (const auto& name : qAsConst(groups))
 	{
 		QVariantMap communications = groupComms.value(name, QVariantMap());
@@ -1530,7 +1539,8 @@ QStringList Satellites::guessGroups(const TleData& tleData)
 			// New format of source: https://celestrak.com/NORAD/documentation/gp-data-formats.php
 			groupName = QUrl(tleData.sourceURL).query().toLower().split("&").filter("group=").join("").replace("group=", "");
 		}
-		if (!satGroups.contains(groupName))
+		groupName.remove("gp.php");
+		if (!satGroups.contains(groupName) && !groupName.isEmpty())
 			satGroups.append(groupName);
 
 		// add "supergroups", based on CelesTrak's groups
