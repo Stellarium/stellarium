@@ -1,0 +1,98 @@
+{
+    "satellites": {
+        "25338": {
+            "comms": [
+                {
+                    "description": "downlink",
+                    "frequency": 137.5,
+                    "modulation": "AM/APT"
+                }
+            ]
+        },
+        "25544": {
+            "comms": [
+                {
+                    "description": "ARISS voice uplink region 2 & 3",
+                    "frequency": 144.49
+                },
+                {
+                    "description": "ARISS packet downlink",
+                    "frequency": 145.825
+                },
+                {
+                    "description": "ARISS repeater uplink",
+                    "frequency": 437.9
+                },
+                {
+                    "description": "ARISS repeater downlink",
+                    "frequency": 145.8
+                },
+                {
+                    "description": "ARISS voice uplink region 1",
+                    "frequency": 145.2
+                },
+                {
+                    "description": "ARISS voice downlink",
+                    "frequency": 145.8
+                },
+                {
+                    "description": "ARISS packet uplink",
+                    "frequency": 145.825
+                }
+            ]
+        },
+        "27453": {
+            "comms": [
+                {
+                    "description": "downlink",
+                    "frequency": 137.62,
+                    "modulation": "AM/APT"
+                }
+            ]
+        },
+        "28654": {
+            "comms": [
+                {
+                    "description": "downlink",
+                    "frequency": 137.9125,
+                    "modulation": "AM/APT"
+                }
+            ]
+        },
+    },
+    "groups": {
+        "glonass": {
+            "comms": [
+                {
+                    "description": "L3OC",
+                    "frequency": 1202.025,
+                    "modulation": "BPSK"
+                },
+                {
+                    "description": "L1OC",
+                    "frequency": 1600.995,
+                    "modulation": "BPSK"
+                },
+                {
+                    "description": "L2OC",
+                    "frequency": 1248.06,
+                    "modulation": "BPSK"
+                }
+            ]
+        },
+        "gps": {
+            "comms": [
+                {
+                    "description": "L1",
+                    "frequency": 1575.42,
+                    "modulation": "QPSK"
+                },
+                {
+                    "description": "L2",
+                    "frequency": 1227.6,
+                    "modulation": "BPSK"
+                }
+            ]
+        }
+    }
+}
