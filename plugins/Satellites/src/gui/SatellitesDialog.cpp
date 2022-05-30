@@ -441,53 +441,35 @@ void SatellitesDialog::filterListByGroup(int index)
 	if (index < 0)
 		return;
 
+	const QMap<QString, SatFlag> secondaryFilter = {
+		{ "all",		SatNoFlags },
+		{ "[displayed]",	SatDisplayed },
+		{ "[userdefined]",	SatUser },
+		{ "[undisplayed]",	SatNotDisplayed },
+		{ "[newlyadded]",	SatNew },
+		{ "[orbiterror]",	SatError },
+		{ "[smallsize]",	SatSmallSize },
+		{ "[mediumsize]",	SatMediumSize },
+		{ "[largesize]",	SatLargeSize },
+		{ "[LEO]",		SatLEO },
+		{ "[GSO]",		SatGSO },
+		{ "[MEO]",		SatMEO },
+		{ "[HEO]",		SatHEO },
+		{ "[HGSO]",		SatHGSO },
+		{ "[polarorbit]",	SatPolarOrbit },
+		{ "[equatorialorbit]",	SatEquatOrbit },
+		{ "[PSSO]",		SatPSSO },
+		{ "[HEarthO]",		SatHEarthO },
+		{ "[outdatedTLE]",	SatOutdatedTLE },
+		{ "[custom]",		SatCustomFilter }
+	};
+
 	ui->customFilterButton->setEnabled(false);
 	QString groupId = ui->groupFilterCombo->itemData(index).toString();
-	if (groupId == "all")
-		filterModel->setSecondaryFilters(QString(), SatNoFlags);
-	else if (groupId == "[displayed]")
-		filterModel->setSecondaryFilters(QString(), SatDisplayed);
-	else if (groupId == "[userdefined]")
-		filterModel->setSecondaryFilters(QString(), SatUser);
-	else if (groupId == "[undisplayed]")
-		filterModel->setSecondaryFilters(QString(), SatNotDisplayed);
-	else if (groupId == "[newlyadded]")
-		filterModel->setSecondaryFilters(QString(), SatNew);
-	else if (groupId == "[orbiterror]")
-		filterModel->setSecondaryFilters(QString(), SatError);
-	else if (groupId == "[smallsize]")
-		filterModel->setSecondaryFilters(QString(), SatSmallSize);
-	else if (groupId == "[mediumsize]")
-		filterModel->setSecondaryFilters(QString(), SatMediumSize);
-	else if (groupId == "[largesize]")
-		filterModel->setSecondaryFilters(QString(), SatLargeSize);
-	else if (groupId == "[LEO]")
-		filterModel->setSecondaryFilters(QString(), SatLEO);
-	else if (groupId == "[GSO]")
-		filterModel->setSecondaryFilters(QString(), SatGSO);
-	else if (groupId == "[MEO]")
-		filterModel->setSecondaryFilters(QString(), SatMEO);
-	else if (groupId == "[HEO]")
-		filterModel->setSecondaryFilters(QString(), SatHEO);
-	else if (groupId == "[HGSO]")
-		filterModel->setSecondaryFilters(QString(), SatHGSO);
-	else if (groupId == "[polarorbit]")
-		filterModel->setSecondaryFilters(QString(), SatPolarOrbit);
-	else if (groupId == "[equatorialorbit]")
-		filterModel->setSecondaryFilters(QString(), SatEquatOrbit);
-	else if (groupId == "[PSSO]")
-		filterModel->setSecondaryFilters(QString(), SatPSSO);
-	else if (groupId == "[HEarthO]")
-		filterModel->setSecondaryFilters(QString(), SatHEarthO);
-	else if (groupId == "[outdatedTLE]")
-		filterModel->setSecondaryFilters(QString(), SatOutdatedTLE);
-	else if (groupId == "[custom]")
-	{
+	if (groupId == "[custom]")
 		ui->customFilterButton->setEnabled(true);
-		filterModel->setSecondaryFilters(QString(), SatCustomFilter);
-	}
-	else
-		filterModel->setSecondaryFilters(groupId, SatNoFlags);
+
+	filterModel->setSecondaryFilters(QString(), secondaryFilter.value(groupId, SatNoFlags));
 
 	if (ui->satellitesList->model()->rowCount() <= 0)
 		return;
