@@ -471,6 +471,14 @@ void SatellitesDialog::filterListByGroup(int index)
 		filterModel->setSecondaryFilters(QString(), SatHEO);
 	else if (groupId == "[HGSO]")
 		filterModel->setSecondaryFilters(QString(), SatHGSO);
+	else if (groupId == "[polarorbit]")
+		filterModel->setSecondaryFilters(QString(), SatPolarOrbit);
+	else if (groupId == "[equatorialorbit]")
+		filterModel->setSecondaryFilters(QString(), SatEquatOrbit);
+	else if (groupId == "[PSSO]")
+		filterModel->setSecondaryFilters(QString(), SatPSSO);
+	else if (groupId == "[HEarthO]")
+		filterModel->setSecondaryFilters(QString(), SatHEarthO);
 	else if (groupId == "[outdatedTLE]")
 		filterModel->setSecondaryFilters(QString(), SatOutdatedTLE);
 	else if (groupId == "[custom]")
@@ -792,6 +800,14 @@ void SatellitesDialog::populateAboutPage()
 	html += "<li>" + q_("Geosynchronous orbit (GSO) and geostationary orbit (GEO) are orbits with inclination of orbits below 25 degrees, eccentricity below 0.25 and period in range 1100-2000 minutes (orbits around Earth matching Earth's sidereal rotation period). ") + "</li>";
 	html += "<li>" + q_("Highly elliptical orbit (HEO): geocentric orbits with altitudes of perigee below 70000 km, inclination of orbits in range 0-180 degrees, eccentricity at least 0.25 and period below 14000 minutes.") + "</li>";
 	html += "<li>" + q_("High geosynchronous orbit (HGSO): geocentric orbits above the altitude of geosynchronous orbit: inclination of orbits in range 25-180 degrees, eccentricity below 0.25 and period in range 1100-2000 minutes.") + "</li>";
+	// Definition from WP: https://en.wikipedia.org/wiki/High_Earth_orbit
+	html += "<li>" + q_("High Earth orbit (HEO or HEO/E): a geocentric orbit with an altitude entirely above that of a geosynchronous orbit (35786 kilometres). The orbital periods of such orbits are greater than 24 hours, therefore satellites in such orbits have an apparent retrograde motion.") + "</li>";
+	html += "</ul></p>";
+
+	html += "<h3>" + q_("Inclination classifications for geocentric orbits") + "</h3><p><ul>";
+	html += "<li>" + q_("Equatorial orbit: an orbit whose inclination in reference to the equatorial plane is (or very close to) 0 degrees.") + "</li>";
+	html += "<li>" + q_("Polar orbit: a satellite that passes above or nearly above both poles of the planet on each revolution. Therefore it has an inclination of (or very close to) 90 degrees.") + "</li>";
+	html += "<li>" + q_("Polar sun-synchronous orbit (PSSO): A nearly polar orbit that passes the equator at the same local time on every pass. Useful for image-taking satellites because shadows will be the same on every pass. Typical Sun-synchronous orbits around Earth are about 600–800 km in altitude, with periods in the 96–100-minute range, and inclinations of around 98 degrees.") + "</li>";
 	html += "</ul></p>";
 
 	// TRANSLATORS: Title of a section in the About tab of the Satellites window
@@ -1101,6 +1117,12 @@ void SatellitesDialog::populateFilterMenu()
 	ui->groupFilterCombo->insertItem(0, q_("[HEO satellites]"), QVariant("[HEO]"));
 	// TRANSLATORS: HGEO = High geosynchronous orbit
 	ui->groupFilterCombo->insertItem(0, q_("[HGSO satellites]"), QVariant("[HGSO]"));
+	ui->groupFilterCombo->insertItem(0, q_("[polar orbit satellites]"), QVariant("[polarorbit]"));
+	ui->groupFilterCombo->insertItem(0, q_("[equatorial orbit satellites]"), QVariant("[equatorialorbit]"));
+	// TRANSLATORS: PSSO = Polar sun synchronous orbit
+	ui->groupFilterCombo->insertItem(0, q_("[PSSO satellites]"), QVariant("[PSSO]"));
+	// TRANSLATORS: HEO/E = High Earth orbit
+	ui->groupFilterCombo->insertItem(0, q_("[HEO/E satellites]"), QVariant("[HEarthO]"));
 	ui->groupFilterCombo->insertItem(0, q_("[outdated TLE]"), QVariant("[outdatedTLE]"));
 	ui->groupFilterCombo->insertItem(0, q_("[custom filter]"), QVariant("[custom]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all user defined]"), QVariant("[userdefined]"));

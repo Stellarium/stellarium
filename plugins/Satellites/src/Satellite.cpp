@@ -857,6 +857,15 @@ SatFlags Satellite::getFlags() const
 		flags |= SatHEO;
 	if (eccentricity < 0.25 && (inclination>=25. && inclination<=180.) && (orbitalPeriod>=1100. && orbitalPeriod<=2000.))
 		flags |= SatHGSO;
+	if (qAbs(inclination) >= 89.5 && qAbs(inclination) <= 90.5)
+		flags |= SatPolarOrbit;
+	if (qAbs(inclination) <= 0.5)
+		flags |= SatEquatOrbit;
+	if ((qAbs(inclination) >= 97.5 && qAbs(inclination) <= 98.5) && (orbitalPeriod>=96. && orbitalPeriod<=100.))
+		flags |= SatPSSO;
+	// definition: https://en.wikipedia.org/wiki/High_Earth_orbit
+	if (perigee>35786. && orbitalPeriod>1440.)
+		flags |= SatHEarthO;
 	if (qAbs(StelApp::getInstance().getCore()->getJD() - tleEpochJD) > tleEpochAge)
 		flags |= SatOutdatedTLE;
 	// custom filters

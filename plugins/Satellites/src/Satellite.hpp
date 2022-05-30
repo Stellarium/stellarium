@@ -72,23 +72,27 @@ typedef QSet<QString> GroupSet;
 //! @ingroup satellites
 enum SatFlag
 {
-	SatNoFlags	= 0x0000,
-	SatDisplayed	= 0x0001,
-	SatNotDisplayed	= 0x0002,
-	SatUser		= 0x0004,
-	SatOrbit	= 0x0008,
-	SatNew		= 0x0010,
-	SatError	= 0x0020,
-	SatSmallSize	= 0x0040,
-	SatMediumSize	= 0x0080,
-	SatLargeSize	= 0x0100,
-	SatLEO		= 0x0200,
-	SatMEO		= 0x0400,
-	SatGSO		= 0x0800,
-	SatHEO		= 0x1000,
-	SatHGSO		= 0x2000,
-	SatOutdatedTLE	= 0x4000,
-	SatCustomFilter	= 0x8000
+	SatNoFlags	= 0x00000,
+	SatDisplayed	= 0x00001,
+	SatNotDisplayed	= 0x00002,
+	SatUser		= 0x00004,
+	SatOrbit	= 0x00008,
+	SatNew		= 0x00010,
+	SatError	= 0x00020,
+	SatSmallSize	= 0x00040,
+	SatMediumSize	= 0x00080,
+	SatLargeSize	= 0x00100,
+	SatLEO		= 0x00200,
+	SatMEO		= 0x00400,
+	SatGSO		= 0x00800,
+	SatHEO		= 0x01000,
+	SatHGSO		= 0x02000,
+	SatPolarOrbit	= 0x04000,
+	SatEquatOrbit	= 0x08000,
+	SatPSSO		= 0x10000,
+	SatHEarthO	= 0x20000,
+	SatOutdatedTLE	= 0x40000,
+	SatCustomFilter	= 0x80000
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
