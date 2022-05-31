@@ -93,6 +93,8 @@ void SatellitesCommDialog::populateTexts()
 void SatellitesCommDialog::updateSatID(QString satID)
 {
 	satelliteID = satID;
+	ui->communicationsTreeWidget->clearSelection();
+	ui->communicationsTreeWidget->clearFocus();
 	getSatCommData();
 }
 
@@ -104,7 +106,7 @@ void SatellitesCommDialog::getSatCommData()
 		ui->satelliteLabel->setText("");
 	else
 	{
-		ui->satelliteLabel->setText(QString("%1; NORAD %2").arg(SatellitesMgr->searchByID(satelliteID)->getNameI18n(), satelliteID));
+		ui->satelliteLabel->setText(QString("%1 / NORAD %2").arg(SatellitesMgr->searchByID(satelliteID)->getNameI18n(), satelliteID));
 		communications = SatellitesMgr->getCommunicationData(satelliteID);
 		if (communications.count()>0)
 		{
@@ -148,6 +150,7 @@ void SatellitesCommDialog::initListCommunications()
 	setCommunicationsHeaderNames();
 	ui->communicationsTreeWidget->header()->setSectionsMovable(false);
 	ui->communicationsTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
+	//ui->communicationsTreeWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
 }
 
 void SatellitesCommDialog::fillCommunicationsTable(QString satID, QString description, double frequency, QString modulation)
