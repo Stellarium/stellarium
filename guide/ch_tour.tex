@@ -115,7 +115,7 @@ a rate (about one day every ten seconds!).
 \label{sec:tour:timeDrag}
 
 Another way to quickly change time is \indexterm{time dragging}. Press
-\keys{\ctrl} and slide the mouse along the direction of daily motion to go forward, 
+\keys{\ctrl}, press the left mouse button, and slide the mouse along the direction of daily motion to go forward, 
 or to the other direction to go backward.
 
 \newFeature{0.15.1}Similarly, pressing \keys{\ctrl} and scrolling the mouse wheel will 
@@ -125,8 +125,8 @@ and finally \keys{\ctrl+\shift+\Alt} by calendar years.
 
 
 Enough time travel for now. Wait until it's night time, and then click
-the real time speed button \guibutton{0.6}{bt_timerate_normal.png}. With a 
-little luck you will now be looking at the night sky.
+the real time speed button \guibutton{0.6}{bt_timerate_normal.png}.
+If all works as intended you will now be looking at the night sky.
 
 \section{Moving Around the Sky}
 \label{sec:tour:moving}
@@ -138,12 +138,19 @@ little luck you will now be looking at the night sky.
 Cursor keys \keys{\arrowkeyleft} \keys{\arrowkeyright} \keys{\arrowkeyup} \keys{\arrowkeydown} & Pan the view left, right, up and down \\
 \keyPageUp{}/\keyPageDown{}, \keys{\ctrl+\arrowkeyup}/\keys{\ctrl+\arrowkeydown} & Zoom in and out \\
 Left mouse button                  & Select an object in the sky \\
-Right mouse button                 & Clear selected object \\
+Right mouse button, \key{\ctrl+\space} & Clear selected object \\
 Centre mouse button (wheel press)  & Centre selected object and start tracking \\
 Mouse wheel                        & Zoom in and out \\ 
 \key{\space}                       & Centre view on selected object \\
 Forward-slash (\key{/})            & Auto-zoom in to selected object \\
-Backslash (\key{\textbackslash{}}) & Auto-zoom out to original field of view \\
+Backslash (\key{\textbackslash{}}) & Auto-zoom out to original field of view \\\midrule
+\key{\shift+N}                     & Look towards North (keep altitude)\\
+\key{\shift+E}                     & Look towards East (keep altitude)\\
+\key{\shift+S}                     & Look towards South (keep altitude)\\
+\key{\shift+W}                     & Look towards West (keep altitude)\\
+\key{\shift+Z}                     & Look towards Zenith (south down)\\
+\key{\Alt+\shift+N}                & Look towards North Celestial Pole\\
+\key{\Alt+\shift+S}                & Look towards South Celestial Pole\\
 \bottomrule
 \end{tabular}
 \caption{Moving Around the Sky}
