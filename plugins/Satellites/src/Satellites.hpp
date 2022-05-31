@@ -400,6 +400,8 @@ public:
 	//! for satellites.
 	//! @note We are having permissions for use this file from Mike McCants.	
 	void loadExtraData();
+
+	QList<CommLink> getCommunicationData(const QString& id);
 	
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	//! Get depth of prediction for Iridium flares

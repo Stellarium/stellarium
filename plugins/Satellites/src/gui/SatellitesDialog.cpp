@@ -37,6 +37,7 @@
 #include "SatellitesDialog.hpp"
 #include "SatellitesImportDialog.hpp"
 #include "SatellitesFilterDialog.hpp"
+#include "SatellitesCommDialog.hpp"
 #include "SatellitesListModel.hpp"
 #include "SatellitesListFilterModel.hpp"
 #include "Satellites.hpp"
@@ -68,6 +69,7 @@ SatellitesDialog::SatellitesDialog()
 	, updateTimer(Q_NULLPTR)
 	, importWindow(Q_NULLPTR)
 	, filterWindow(Q_NULLPTR)
+	, commWindow(Q_NULLPTR)
 	, filterModel(Q_NULLPTR)
 	, checkStateRole(Qt::UserRole)
 	, delimiter(", ")	
@@ -97,6 +99,12 @@ SatellitesDialog::~SatellitesDialog()
 	{
 		delete filterWindow;
 		filterWindow = Q_NULLPTR;
+	}
+
+	if (commWindow)
+	{
+		delete commWindow;
+		commWindow = Q_NULLPTR;
 	}
 
 	delete ui;
@@ -147,18 +155,12 @@ void SatellitesDialog::createDialogContent()
 
 	// Set size of buttons
 	QSize bs = QSize(26, 26);
-	ui->customFilterButton->setFixedSize(bs);
-	ui->addSatellitesButton->setFixedSize(bs);
-	ui->removeSatellitesButton->setFixedSize(bs);
-	ui->selectAllButton->setFixedSize(bs);
-	ui->satMarkerColorPickerButton->setFixedSize(bs);
-	ui->satOrbitColorPickerButton->setFixedSize(bs);
-	ui->satInfoColorPickerButton->setFixedSize(bs);
-	ui->addSourceButton->setFixedSize(bs);
-	ui->deleteSourceButton->setFixedSize(bs);
-	ui->editSourceButton->setFixedSize(bs);
-	ui->saveSourceButton->setFixedSize(bs);
-	ui->resetSourcesButton->setFixedSize(bs);
+	QList<QPushButton*> buttons;
+	buttons << ui->customFilterButton << ui->addSatellitesButton << ui->removeSatellitesButton << ui->selectAllButton
+		<< ui->satMarkerColorPickerButton << ui->satOrbitColorPickerButton << ui->satInfoColorPickerButton
+		<< ui->addSourceButton << ui->deleteSourceButton << ui->editSourceButton << ui->saveSourceButton
+		<< ui->resetSourcesButton << ui->commSatelliteButton;
+	for (auto btn: qAsConst(buttons)) { btn->setFixedSize(bs); }
 
 	// Settings tab / updates group
 	// These controls are refreshed by updateSettingsPage(), which in
@@ -266,6 +268,9 @@ void SatellitesDialog::createDialogContent()
 
 	filterWindow = new SatellitesFilterDialog();
 	connect(ui->customFilterButton, SIGNAL(clicked()), filterWindow, SLOT(setVisible()));
+
+	commWindow = new SatellitesCommDialog();
+	connect(ui->commSatelliteButton, SIGNAL(clicked()), commWindow, SLOT(setVisible()));
 
 	// Sources tab
 	connect(ui->sourceList, SIGNAL(currentRowChanged(int)),			this, SLOT(updateButtonsProperties()));
@@ -1312,6 +1317,7 @@ void SatellitesDialog::setFlags()
 void SatellitesDialog::setRightSideToROMode()
 {
 	ui->removeSatellitesButton->setEnabled(false);
+	ui->commSatelliteButton->setEnabled(false);
 	ui->displayedCheckbox->setEnabled(false);
 	ui->displayedCheckbox->setChecked(false);
 	ui->orbitCheckbox->setEnabled(false);
@@ -1369,6 +1375,7 @@ void SatellitesDialog::setRightSideToRWMode()
 	ui->stdMagnitudeLineEdit->setEnabled(true);
 	ui->rcsLineEdit->setEnabled(true);
 	ui->removeSatellitesButton->setEnabled(true);
+	ui->commSatelliteButton->setEnabled(true);
 	ui->perigeeLineEdit->setEnabled(true);
 	ui->apogeeLineEdit->setEnabled(true);
 	ui->periodLineEdit->setEnabled(true);

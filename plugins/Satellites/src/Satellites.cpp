@@ -1363,6 +1363,19 @@ QPair<double, double> Satellites::getStdMagRCS(const TleData& tleData)
 	return result;
 }
 
+QList<CommLink> Satellites::getCommunicationData(const QString &id)
+{
+	QList<CommLink> comms;
+
+	for (const auto& sat : qAsConst(satellites))
+	{
+		if (sat->initialized && sat->getID() == id)
+			comms = sat->comms;
+	}
+
+	return comms;
+}
+
 QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 {
 	QList<CommLink> comms;

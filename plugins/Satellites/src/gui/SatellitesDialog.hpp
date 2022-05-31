@@ -38,6 +38,7 @@ class QTimer;
 
 class SatellitesImportDialog;
 class SatellitesFilterDialog;
+class SatellitesCommDialog;
 class SatellitesListFilterModel;
 
 //! Main configuration window of the %Satellites plugin.
@@ -175,6 +176,7 @@ private:
 	
 	SatellitesImportDialog* importWindow;
 	SatellitesFilterDialog* filterWindow;
+	SatellitesCommDialog* commWindow;
 	
 	SatellitesListFilterModel* filterModel;
 	
