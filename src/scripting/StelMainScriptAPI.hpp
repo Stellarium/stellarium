@@ -48,7 +48,12 @@ public:
 // These functions will be available in scripts
 public slots:
 
-	//! Test how a QVector3D behaves: Forward these to StelMovementMgr.
+	static Vec3d vec3d(const double x, const double y, const double z); // Maybe bogus
+
+	static QVector3D vecToQVector3D(const QVector<double> &vec); // Maybe bogus
+	static Vec3d qVector3DToVec3d(const QVector3D &vec3d); // Maybe bogus
+
+	//! Test how a QVector3D behaves: Forward these to StelMovementMgr. Maybe bogus
 	static QVector3D getViewDirection();
 	static void setViewDirection(QVector3D dir);
 

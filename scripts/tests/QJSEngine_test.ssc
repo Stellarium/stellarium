@@ -10,6 +10,36 @@ core.output(core.mapToString(core.getObjectInfo("Jupiter")));
 
 // Read a Vec3d
 core.output(StelMovementMgr.getViewDirectionJ2000());
+core.output(typeof StelMovementMgr.getViewDirectionJ2000()); // this returns "object". Is it still a Vec3d?
+core.output(typeof StelMovementMgr.getViewDirectionJ2000().toQVector3D());
+
+var dir=StelMovementMgr.getViewDirectionJ2000().toQVector3D(); // does not work, functions of object Vec3d are unknown. (Vec3d not a QObject...)
+core.output(dir);
+core.output(typeof dir);
+
+
+var dir=StelMovementMgr.getViewDirectionJ2000(); 
+core.output(dir);
+core.output(typeof dir); // object
+var dirstr=""+dir;
+core.output(dirstr);
+core.output(typeof dirstr); // string
+var dirArray=JSON.parse(dir);
+core.output(dirArray);
+core.output(typeof dirArray); // object. May be an array now!
+core.output(dirArray[0]);
+core.output(dirArray[1]);
+core.output(dirArray[2]);
+
+
+
+
+
+core.output(StelMovementMgr.getViewDirectionJ2000()[0]);
+core.output(StelMovementMgr.getViewDirectionJ2000()[1]);
+core.output(StelMovementMgr.getViewDirectionJ2000()[2]);
+
+var dir3D=StelMovementMgr.getViewDirectionJ2000().toQVector3D();
 
 // Attempt to set and re-read a Vec3d. 
 // It seems setting does some bogus.
@@ -18,11 +48,36 @@ StelMovementMgr.setViewDirectionJ2000([0.730694, 0.129957, 0.670222]);
 core.output(StelMovementMgr.getViewDirectionJ2000());
 
 // Try with an explicit QVector3D in the core object
-core.setViewDirection([0.730694, 0.129957, 0.670222]);
+core.setViewDirection(core.vec3d(0.730694, 0.129957, 0.670222));
 // This output is suboptimal...
 core.output(core.getViewDirection());
 
+core.output(core.vec3d(0.730694, 0.129957, 0.670222));
+core.output(typeof core.vec3d(0.730694, 0.129957, 0.670222));
+
+core.output([12.3,45.6,78.9]);
+core.output(typeof [12.3,45.6,78.9]);
+core.output([12.3,45.6,78.9].name);
+core.output([12.3,45.6,78.9]);
 
 // Reset view direction to allow continuous operation
 StelMovementMgr.lookNorth(true);
+core.output(StelMovementMgr.getViewDirectionJ2000());
+
+
+console.log("blabla");
+
+var dir3D=StelMovementMgr.getViewDirectionJ2000();
+core.output(dir3D);
+
+// Attempt with the new V3d class which may act as intermediate thing. Not sure how to bring auto-conversion to work correctly! 
+var mydir=new V3d(0.730694, 0.129957, 0.670222);
+core.output(mydir);
+core.output(mydir.x());
+core.output(mydir.y());
+core.output(mydir.z());
+StelMovementMgr.setViewDirectionJ2000(mydir.toVec3d()); // This seems to work!!!!
+core.output(StelMovementMgr.getViewDirectionJ2000());
+
+StelMovementMgr.setViewDirectionJ2000(new V3d(0., 1., 0.).toVec3d()); // This seems to work!!!!
 core.output(StelMovementMgr.getViewDirectionJ2000());

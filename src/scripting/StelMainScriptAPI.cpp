@@ -104,11 +104,42 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestSetSkyCulture(QString)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureID(QString)));
 	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelApp::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));	
 	connect(this, SIGNAL(requestSetHomePosition()), StelApp::getInstance().getCore(), SLOT(returnToHome()));
+
+
+	QMetaType::registerConverter<QVector<double>, QVector3D>(&StelMainScriptAPI::vecToQVector3D);
+	QMetaType::registerConverter<QVector3D, Vec3d>(&StelMainScriptAPI::qVector3DToVec3d);
 }
 
 StelMainScriptAPI::~StelMainScriptAPI()
 {
 }
+
+Vec3d StelMainScriptAPI::vec3d(const double x, const double y, const double z)
+{
+	return Vec3d(x, y, z);
+}
+
+QVector3D StelMainScriptAPI::vecToQVector3D(const QVector<double> &vec)
+{
+	QVector3D res;
+	if (vec.length()>=3)
+	{
+		res[0]=vec[0];
+		res[1]=vec[1];
+		res[2]=vec[2];
+	}
+	return res;
+}
+
+Vec3d StelMainScriptAPI::qVector3DToVec3d(const QVector3D &vec3d)
+{
+	Vec3d res;
+		res[0]=vec3d[0];
+		res[1]=vec3d[1];
+		res[2]=vec3d[2];
+	return res;
+}
+
 
 //! Test how a QVector3D behaves: Forward these to StelMovementMgr.
 QVector3D StelMainScriptAPI::getViewDirection()
@@ -117,7 +148,8 @@ QVector3D StelMainScriptAPI::getViewDirection()
 }
 void StelMainScriptAPI::setViewDirection(QVector3D dir)
 {
-	GETSTELMODULE(StelMovementMgr)->setViewDirectionJ2000(Vec3d::fromQVector3D(dir));
+//	GETSTELMODULE(StelMovementMgr)->setViewDirectionJ2000(Vec3d::fromQVector3D(dir));
+	GETSTELMODULE(StelMovementMgr)->setViewDirectionJ2000(qVector3DToVec3d(dir));
 }
 
 

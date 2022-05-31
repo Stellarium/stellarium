@@ -56,6 +56,64 @@
 
 #ifdef ENABLE_SCRIPT_QML
 #include <QJSEngine>
+
+V3d::V3d(const V3d &other) // copy constructor
+{
+	m_x=other.x();
+	m_y=other.y();
+	m_z=other.z();
+}
+
+V3d & V3d::operator =(const V3d &v)
+{
+	m_x=v.x();
+	m_y=v.y();
+	m_z=v.z();
+	return *this;
+}
+
+V3d::V3d(QString &hexColor)
+{
+	QColor qcol = QColor( hexColor );
+	if( qcol.isValid() )
+	{
+		m_x = qcol.redF();
+		m_y = qcol.greenF();
+		m_z = qcol.blueF();
+	}
+	else
+	{
+		qWarning() << "Bad color string: " << hexColor;
+		m_x=m_y=m_z=0.;
+	}
+}
+
+void StelScriptMgr::defVecClasses(QJSEngine *engine)
+{
+	qDebug() << "defVecClasses() not yet complete";
+
+	qRegisterMetaType<V3d>();
+
+	QMetaType::registerConverter<V3d, Vec3d>(&V3d::toVec3d);
+	QMetaType::registerConverter<Vec3d, V3d>(&V3d::fromVec3d);
+
+	QJSValue v3dMetaObject = engine->newQMetaObject(&V3d::staticMetaObject);
+	engine->globalObject().setProperty("V3d", v3dMetaObject);
+
+	/*
+	// Allow Vec3f management in scripts
+	qRegisterMetaType(engine, vec3fToScriptValue, vec3fFromScriptValue);
+	QJSValue ctorVec3f = engine->newFunction(createVec3f);
+	engine->globalObject().setProperty("Vec3f", ctorVec3f);
+	engine->globalObject().setProperty("Color", engine->newFunction(createColor));
+
+	// Allow Vec3d management in scripts
+	qScriptRegisterMetaType(engine, vec3dToScriptValue, vec3dFromScriptValue);
+	QScriptValue ctorVec3d = engine->newFunction(createVec3d);
+	engine->globalObject().setProperty("Vec3d", ctorVec3d);
+	*/
+}
+
 // 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f
 
 /***
@@ -175,22 +233,6 @@ QJSValue createColor(QScriptContext* context, QScriptEngine *engine)
 	return engine->globalObject().property("Vec3f").construct(context->argumentsObject());
 }
 */
-void StelScriptMgr::defVecClasses(QJSEngine *engine)
-{
-	qDebug() << "defVecClasses() not yet implemented";
-	/*
-	// Allow Vec3f management in scripts
-	qRegisterMetaType(engine, vec3fToScriptValue, vec3fFromScriptValue);
-	QJSValue ctorVec3f = engine->newFunction(createVec3f);
-	engine->globalObject().setProperty("Vec3f", ctorVec3f);
-	engine->globalObject().setProperty("Color", engine->newFunction(createColor));
-
-	// Allow Vec3d management in scripts
-	qScriptRegisterMetaType(engine, vec3dToScriptValue, vec3dFromScriptValue);
-	QScriptValue ctorVec3d = engine->newFunction(createVec3d);
-	engine->globalObject().setProperty("Vec3d", ctorVec3d);
-	*/
-}
 
 #else
 #include <QtScript>
@@ -472,7 +514,7 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	waitEventLoop = new QEventLoop();
 #ifdef ENABLE_SCRIPT_QML
 	engine = new QJSEngine(this);
-	engine->installExtensions(QJSEngine::ConsoleExtension);
+	engine->installExtensions(QJSEngine::ConsoleExtension); // TODO: Maybe remove as unusable for us.
 #else
 	engine = new QScriptEngine(this);
 	// This is enough for a simple Array access for a QVector<int> input or return type (e.g. Calendars plugin)
