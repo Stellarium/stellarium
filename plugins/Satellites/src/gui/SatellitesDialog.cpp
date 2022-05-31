@@ -600,10 +600,14 @@ void SatellitesDialog::updateSatelliteData()
 
 			ui->descriptionTextEdit->setText(descText);
 		}
+
+		emit SatellitesMgr->satSelectionChanged("");
 	}
 	else
 	{
 		QModelIndex& index = selection.first();
+		QString id = index.data(Qt::UserRole).toString();
+
 		float stdMagnitude = index.data(SatStdMagnitudeRole).toFloat();
 		QString stdMagString = dash;
 		if (stdMagnitude<99.f)
@@ -625,7 +629,7 @@ void SatellitesDialog::updateSatelliteData()
 		if (period>0.f)
 			periodString = QString::number(period, 'f', 2);
 		ui->nameEdit->setText(index.data(Qt::DisplayRole).toString());
-		ui->noradNumberEdit->setText(index.data(Qt::UserRole).toString());
+		ui->noradNumberEdit->setText(id);
 		ui->cosparNumberEdit->setText(index.data(SatCosparIDRole).toString());
 		// NOTE: Description is deliberately displayed untranslated!
 		ui->descriptionTextEdit->setText(index.data(SatDescriptionRole).toString());
@@ -641,11 +645,12 @@ void SatellitesDialog::updateSatelliteData()
 		ui->labelTleEpochData->setText(index.data(SatTLEEpochRole).toString());
 
 		// get color of the one selected sat
-		QString id = index.data(Qt::UserRole).toString();
 		SatelliteP sat = SatellitesMgr->getById(id);
 		mColor = sat->hintColor;
 		oColor = sat->orbitColor;
 		iColor = sat->infoColor;
+
+		emit SatellitesMgr->satSelectionChanged(id);
 	}
 
 	// colourize the colorpicker button

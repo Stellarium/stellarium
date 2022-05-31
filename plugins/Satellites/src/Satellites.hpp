@@ -402,6 +402,7 @@ public:
 	void loadExtraData();
 
 	QList<CommLink> getCommunicationData(const QString& id);
+	QString getLastSelectedSatelliteID() { return lastSelectedSatellite; }
 	
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	//! Get depth of prediction for Iridium flares
@@ -481,6 +482,8 @@ signals:
 	void tleUpdateComplete(int updated, int total, int added, int missing);
 
 	void satGroupVisibleChanged();
+
+	void satSelectionChanged(QString satID);
 
 public slots:
 	//! get whether or not the plugin will try to update TLE data from the internet
@@ -907,6 +910,8 @@ private:
 	QList<int> messageIDs;
 	//@}
 
+	QString lastSelectedSatellite;
+
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	int iridiumFlaresPredictionDepth;
 #endif
@@ -932,6 +937,7 @@ private slots:
 	//! can be modified to read directly form QNetworkReply-s. --BM
 	void saveDownloadedUpdate(QNetworkReply* reply);
 	void updateObserverLocation(const StelLocation &loc);
+	void changeSelectedSatellite(QString id) { lastSelectedSatellite = id; }
 };
 
 

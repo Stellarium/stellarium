@@ -105,6 +105,7 @@ Satellites::Satellites()
 	, flagPenumbraVisible(false)
 	, penumbraColor(1.0f, 0.0f, 0.0f)
 	, earthShadowEnlargementDanjon(false)
+	, lastSelectedSatellite(QString())
 	#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	, iridiumFlaresPredictionDepth(7)
 	#endif
@@ -210,7 +211,7 @@ void Satellites::init()
 
 	// Set up download manager and the update schedule
 	downloadMgr = new QNetworkAccessManager(this);
-    connect(downloadMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(saveDownloadedUpdate(QNetworkReply*)));
+	connect(downloadMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(saveDownloadedUpdate(QNetworkReply*)));
 	updateState = CompleteNoUpdates;
 	updateTimer = new QTimer(this);
 	updateTimer->setSingleShot(false);   // recurring check for update
@@ -229,6 +230,8 @@ void Satellites::init()
 	connect(core, SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateData()));
 	connect(ssystem, SIGNAL(earthShadowEnlargementDanjonChanged(bool)), this, SLOT(updateEarthShadowEnlargementFlag(bool)));
+
+	connect(this, SIGNAL(satSelectionChanged(QString)), this, SLOT(changeSelectedSatellite(QString)));
 
 	bindingGroups();
 }

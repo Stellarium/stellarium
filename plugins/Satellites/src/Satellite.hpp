@@ -218,6 +218,8 @@ public:
 	
 	void setNew() {newlyAdded = true;}
 	bool isNew() const {return newlyAdded;}
+
+	void setCommData(QList<CommLink> comm) { comms = comm; }
 	
 	//! Get internal flags as a single value.
 	SatFlags getFlags() const;

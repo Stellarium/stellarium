@@ -54,6 +54,7 @@ void SatellitesFilterDialog::createDialogContent()
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	connectBoolProperty(ui->inclinationCheckBox,  "Satellites.flagCFInclination");
 	connectDoubleProperty(ui->minInclination,     "Satellites.minCFInclination");
