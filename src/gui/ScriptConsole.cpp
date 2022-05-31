@@ -314,7 +314,7 @@ void ScriptConsole::runScript()
 
 void ScriptConsole::scriptStarted()
 {
-	//prevent strating of scripts while any script is running
+	//prevent starting of scripts while any script is running
 	ui->quickrunCombo->setEnabled(false);
 	ui->runButton->setEnabled(false);
 	ui->stopButton->setEnabled(true);
@@ -382,6 +382,8 @@ void ScriptConsole::quickRun(int idx)
 
 	if (!scriptText.isEmpty())
 	{
+		if(clearOutput)
+			ui->outputBrowser->clear();
 		appendLogLine(QString("Running: %1").arg(scriptText));
 		int errLoc;
 		StelApp::getInstance().getScriptMgr().runScriptDirect( "<>", scriptText, errLoc );
