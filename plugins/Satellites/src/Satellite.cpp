@@ -957,7 +957,9 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 
 	if (flagVFAltitude)
 	{
-		// check valid altitudes range
+		// visual filter is activated!
+		// is satellite located in valid range of altitudes?
+		// yes, but... inverse the result and skip rendering!
 		if (!(minVFAltitude<=height && height<=maxVFAltitude))
 			return;
 	}
