@@ -170,6 +170,7 @@ void AstroCalcDialog::retranslate()
 		setLunarEclipseHeaderNames();
 		setSolarEclipseHeaderNames();
 		setSolarEclipseLocalHeaderNames();
+		setTransitHeaderNames();
 		populateCelestialBodyList();
 		populateCelestialCategoryList();
 		populateEphemerisTimeStepsList();
@@ -341,7 +342,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->rtsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentRTS(QModelIndex)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(setRTSCelestialBodyName()));
 
-	// Tab: Eclipses
+	// Tab: Eclipses and Transits
 	initListLunarEclipse();
 	connect(ui->lunareclipsesCalculateButton, SIGNAL(clicked()), this, SLOT(generateLunarEclipses()));
 	connect(ui->lunareclipsesCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupLunarEclipses()));
@@ -357,6 +358,11 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->solareclipseslocalCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupSolarEclipsesLocal()));
 	connect(ui->solareclipseslocalSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipsesLocal()));
 	connect(ui->solareclipselocalTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipseLocal(QModelIndex)));
+	initListTransit();
+	connect(ui->transitsCalculateButton, SIGNAL(clicked()), this, SLOT(generateTransits()));
+	connect(ui->transitsCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupTransits()));
+	connect(ui->transitsSaveButton, SIGNAL(clicked()), this, SLOT(saveTransits()));
+	connect(ui->transitTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentTransit(QModelIndex)));
 
 	// Let's use DMS and decimal degrees as acceptable values for "Maximum allowed separation" input box
 	ui->allowedSeparationSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
@@ -565,6 +571,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->gammaNoteLabel->setStyleSheet(style);
 	ui->gammaNoteSolarEclipseLabel->setStyleSheet(style);
 	ui->UncertaintiesNoteLabel->setStyleSheet(style);
+	ui->transitNoteLabel->setStyleSheet(style);
 	style = "QCheckBox { color: rgb(238, 238, 238); }";
 	ui->sunAltitudeCheckBox->setStyleSheet(style);
 	ui->moonAltitudeCheckBox->setStyleSheet(style);
@@ -3749,6 +3756,311 @@ void AstroCalcDialog::saveSolarEclipsesLocal()
 	}
 }
 
+void AstroCalcDialog::setTransitHeaderNames()
+{
+	transitHeader.clear();
+	transitHeader << q_("Date");
+	// TRANSLATORS: The name of column in AstroCalc/Transits tool
+	transitHeader << qc_("Planet", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Transits tool
+	transitHeader << qc_("Separation", "column name");
+	ui->transitTreeWidget->setHeaderLabels(transitHeader);
+
+	// adjust the column width
+	for (int i = 0; i < TransitCount; ++i)
+	{
+		ui->transitTreeWidget->resizeColumnToContents(i);
+	}
+}
+
+void AstroCalcDialog::initListTransit()
+{
+	ui->transitTreeWidget->clear();
+	ui->transitTreeWidget->setColumnCount(TransitCount);
+	setTransitHeaderNames();
+	ui->transitTreeWidget->header()->setSectionsMovable(false);
+	ui->transitTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
+}
+
+void AstroCalcDialog::TransitBessel(double &besX, double &besY, double &besL1, double &besL2, PlanetP object)
+{
+	// Besselian elements (adaped from solar eclipse)
+	// Source: Explanatory Supplement to the Astronomical Ephemeris 
+	// and the American Ephemeris and Nautical Almanac (1961)
+
+	StelCore* core = StelApp::getInstance().getCore();
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	core->setUseTopocentricCoordinates(false);
+	core->update(0);
+
+	double raPlanet, dePlanet, raSun, deSun;
+	StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+	StelUtils::rectToSphe(&raPlanet, &dePlanet, object->getEquinoxEquatorialPos(core));
+
+	double sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core).length();
+	const double earthRadius = ssystem->getEarth()->getEquatorialRadius()*AU;
+	// Planet's distance in Earth's radius
+	double pdistanceER = object->getEquinoxEquatorialPos(core).length() * AU / earthRadius;
+	// Avoid bug for special cases happen around Vernal Equinox
+	double raDiff = StelUtils::fmodpos(raPlanet-raSun, 2.*M_PI);
+	if (raDiff>M_PI) raDiff-=2.*M_PI;
+
+	constexpr double SunEarth = 109.12278; // ratio of Sun-Earth radius : 109.12278 = 696000/6378.1366
+	const double rss = sdistanceAu * 23454.7925; // from 1 AU/Earth's radius : 149597870.8/6378.1366
+	const double b = pdistanceER / rss;
+	const double a = raSun - ((b * cos(dePlanet) * raDiff) / ((1 - b) * cos(deSun)));
+	const double besD = deSun - (b * (dePlanet - deSun) / (1 - b));
+	besX = cos(dePlanet) * sin((raPlanet - a));
+	besX *= pdistanceER;
+	besY = cos(besD) * sin(dePlanet);
+	besY -= cos(dePlanet) * sin(besD) * cos((raPlanet - a));
+	besY *= pdistanceER;
+	double z = sin(dePlanet) * sin(besD);
+	z += cos(dePlanet) * cos(besD) * cos((raPlanet - a));
+	z *= pdistanceER;
+
+	// Ratio of Planet/Earth's radius (Venus with atmosphere)
+	double k;
+	if (object->getEnglishName().contains("Mercury"))
+		k = 0.3825096;
+	else
+		k = 0.9567984;
+	// Parameters of the shadow cone
+	const double f1 = asin((SunEarth + k) / (rss * (1. - b)));
+	const double f2 = asin((SunEarth - k) / (rss * (1. - b)));  
+	besL1 = z * tan(f1) + (k / cos(f1));
+	besL2 = z * tan(f2) - (k / cos(f2));
+}
+
+void AstroCalcDialog::generateTransits()
+{
+	const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
+	if (onEarth)
+	{
+		initListTransit();
+		const double currentJD = core->getJD(); // save current JD
+		const bool saveTopocentric = core->getUseTopocentricCoordinates();
+
+		for (int p = 0; p < 2; p++)
+		{
+			double startyear = ui->eclipseFromYearSpinBox->value();
+			double years = ui->eclipseYearsSpinBox->value();
+			double startJD, stopJD;
+			StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 1);
+			StelUtils::getJDFromDate(&stopJD, startyear+years, 12, 31, 23, 59, 59);
+			startJD = startJD - core->getUTCOffset(startJD) / 24.;
+			stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
+			QString planetStr, separationStr;
+			double approxJD, synodicPeriod;
+			if (p == 0)
+			{
+				approxJD = 2451612.023;
+				synodicPeriod = 115.8774771;
+			}
+			else
+			{
+				approxJD = 2451996.706;
+				synodicPeriod = 583.921361;
+			}
+			int elements = static_cast<int>((stopJD - startJD) / synodicPeriod);
+			// Find approximate JD of Inferior conjunction
+			double tmp = (startJD - approxJD - synodicPeriod) / synodicPeriod;
+			double InitJD = approxJD + int(tmp) * synodicPeriod;
+			
+			// Search for transits at each inferior conjunction
+			for (int i = 0; i <= elements+2; i++)
+			{
+				double JD = InitJD + synodicPeriod * i;
+				if (JD > startJD)
+				{
+					core->setUseTopocentricCoordinates(false);
+					core->update(0);
+
+					// Find exact time of minimum distance between Mercury/Venus and the Sun
+					double dt = 1.;
+					int iteration = 0;
+					PlanetP object;
+					if (p==0)
+					{
+						object = GETSTELMODULE(SolarSystem)->searchByEnglishName("Mercury");
+						planetStr = q_("Mercury");
+					}
+					else
+					{
+						object = GETSTELMODULE(SolarSystem)->searchByEnglishName("Venus");
+						planetStr = q_("Venus");
+					}
+
+					while (abs(dt)>(0.1/86400.) && (iteration < 20)) // 0.1 second of accuracy
+					{
+						core->setJD(JD);
+						core->update(0);
+						double x,y,L1,L2;
+						TransitBessel(x,y,L1,L2,object);
+
+						core->setJD(JD - 5./1440.);
+						core->update(0);
+						double x1,y1;
+						TransitBessel(x1,y1,L1,L2,object);
+
+						core->setJD(JD + 5./1440.);
+						core->update(0);
+						double x2,y2;
+						TransitBessel(x2,y2,L1,L2,object);
+
+						double xdot1 = (x - x1) * 12.;
+						double xdot2 = (x2 - x) * 12.;
+						double xdot = (xdot1 + xdot2) / 2.;
+						double ydot1 = (y - y1) * 12.;
+						double ydot2 = (y2 - y) * 12.;
+						double ydot = (ydot1 + ydot2) / 2.;
+						double n2 = xdot * xdot + ydot * ydot;
+						dt  = -(x * xdot + y * ydot) / n2;
+						JD += dt / 24.;
+						iteration += 1;
+					}
+					core->setJD(JD);
+					core->update(0);
+
+					double x,y,L1,L2;
+					TransitBessel(x,y,L1,L2,object);
+					double elongation = object->getElongation(core->getObserverHeliocentricEclipticPos());
+					separationStr = StelUtils::radToDmsStr(elongation, true);
+					double gamma = sqrt(x * x + y * y);
+					if (gamma <= (0.9972+L1) && (JD <= stopJD))
+					{
+						ACTransitTreeWidgetItem* treeItem = new ACTransitTreeWidgetItem(ui->transitTreeWidget);
+						// Note: if (gamma > (0.9972+L2)) the transit is a grazing event (non-central)
+						treeItem->setText(TransitDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))); // local date and time
+						treeItem->setData(TransitDate, Qt::UserRole, JD);
+						treeItem->setText(TransitPlanet, planetStr);
+						treeItem->setData(TransitPlanet, Qt::UserRole, planetStr);
+						treeItem->setText(TransitSeparation, separationStr);
+						treeItem->setToolTip(TransitSeparation, q_("Geocentric minimum angular distance of planet to Sun's center"));
+						treeItem->setTextAlignment(TransitDate, Qt::AlignRight);
+						treeItem->setTextAlignment(TransitPlanet, Qt::AlignRight);
+					}
+				}
+			}
+		}
+		core->setJD(currentJD);
+		core->setUseTopocentricCoordinates(saveTopocentric);
+		core->update(0); // enforce update
+
+		// adjust the column width
+		for (int i = 0; i < TransitCount; ++i)
+		{
+			ui->transitTreeWidget->resizeColumnToContents(i);
+		}
+
+		// sort-by-date
+		ui->transitTreeWidget->sortItems(TransitDate, Qt::AscendingOrder);
+	}
+	else
+		cleanupTransits();
+}
+
+void AstroCalcDialog::cleanupTransits()
+{
+	ui->transitTreeWidget->clear();
+}
+
+void AstroCalcDialog::selectCurrentTransit(const QModelIndex& modelIndex)
+{
+	// Find the planet
+	QString name = modelIndex.sibling(modelIndex.row(), TransitPlanet).data(Qt::UserRole).toString();
+	double JD = modelIndex.sibling(modelIndex.row(), TransitDate).data(Qt::UserRole).toDouble();
+
+	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
+	{
+		core->setJD(JD);
+		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+		if (!newSelected.empty())
+		{
+			// Can't point to home planet
+			if (newSelected[0]->getEnglishName() != core->getCurrentLocation().planetName)
+			{
+				mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
+				mvMgr->setFlagTracking(true);
+			}
+			else
+			{
+				GETSTELMODULE(StelObjectMgr)->unSelect();
+			}
+		}
+	}
+}
+
+void AstroCalcDialog::saveTransits()
+{
+	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
+	filter.append(" (*.xlsx);;");
+	filter.append(q_("CSV (Comma delimited)"));
+	filter.append(" (*.csv)");
+	QString defaultFilter("(*.xlsx)");
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save calculated transits as..."),
+							QDir::homePath() + "/transits.xlsx",
+							filter,
+							&defaultFilter);
+
+	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
+		saveTableAsCSV(filePath, ui->solareclipseTreeWidget, ephemerisHeader);
+	else
+	{
+		int count = ui->transitTreeWidget->topLevelItemCount();
+		int columns = transitHeader.size();
+		int *width = new int[static_cast<unsigned int>(columns)];
+		QString sData;
+
+		QXlsx::Document xlsx;
+		xlsx.setDocumentProperty("title", q_("Transits across the Sun"));
+		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
+		xlsx.addSheet("Transits across the Sun", AbstractSheet::ST_WorkSheet);
+
+		QXlsx::Format header;
+		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
+		header.setPatternBackgroundColor(Qt::yellow);
+		header.setBorderStyle(QXlsx::Format::BorderThin);
+		header.setBorderColor(Qt::black);
+		header.setFontBold(true);
+		for (int i = 0; i < columns; i++)
+		{
+			// Row 1: Names of columns
+			sData = transitHeader.at(i).trimmed();
+			xlsx.write(1, i + 1, sData, header);
+			width[i] = sData.size();
+		}
+
+		QXlsx::Format data;
+		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
+		for (int i = 0; i < count; i++)
+		{
+			for (int j = 0; j < columns; j++)
+			{
+				// Row 2 and next: the data
+				sData = ui->transitTreeWidget->topLevelItem(i)->text(j).trimmed();
+				xlsx.write(i + 2, j + 1, sData, data);
+				int w = sData.size();
+				if (w > width[j])
+				{
+					width[j] = w;
+				}
+			}
+		}
+
+		xlsx.write(count+3, 1, q_("Note: Transit times during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
+
+		for (int i = 0; i < columns; i++)
+		{
+			xlsx.setColumnWidth(i+1, width[i]+2);
+		}
+
+		delete[] width;
+		xlsx.saveAs(filePath);
+	}
+}
+
 void AstroCalcDialog::populateCelestialBodyList()
 {
 	Q_ASSERT(ui->celestialBodyComboBox);
@@ -6210,7 +6522,8 @@ void AstroCalcDialog::changeEclipsesTab(int index)
 	const QMap<int, QString> headermap = {
 		{0,	q_("Table of solar eclipses")},
 		{1,	q_("Table of solar eclipses visible in current location")},
-		{2,	q_("Table of lunar eclipses")}
+		{2,	q_("Table of lunar eclipses")},
+		{3,	q_("Transits of Mercury and Venus")}
 		};
 	ui->eclipseHeaderLabel->setText(headermap.value(index, q_("Table of solar eclipses")));
 }
