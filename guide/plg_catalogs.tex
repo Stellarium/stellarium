@@ -1357,11 +1357,18 @@ low-orbital satellites.
 
 You can display \newFeature{0.22.2} a list of satellites by specific
 selection of their properties, when filter ``[custom filter]'' has
-been selected (see
-\ref{fig:plugins:Satellites:Configuration:SatellitesFilter}). The
+been selected (\ref{fig:plugins:Satellites:Configuration:SatellitesFilter}). The
 settings of this filter available through button
 \guibutton{0.6}{uibtSettings.png}, which is located at the right of
 the drop-down list.
+
+\begin{figure}[ht]
+	\centering\includegraphics[width=0.6\textwidth]{satellites_plugin_comms.jpg}
+	\caption{Configuration of the Satellites plugin --- satellite communication data.}
+	\label{fig:plugins:Satellites:Configuration:SatellitesComms}
+\end{figure}
+
+The users can define communication data for individual satellites (\ref{fig:plugins:Satellites:Configuration:SatellitesComms}), where ``description'' and ``frequency'' are required fields and field ``modulation'' is optional. Some individual satellites and their groups already have the filled communication data in the default catalog.
 
 \subsection{Satellite Catalog}
 \label{sec:plugins:Satellites:catalog}
@@ -1416,6 +1423,9 @@ description field can accept HTML tags such as \texttt{<br/>} (new line), \textt
 \item[tle2]  required, line 2 of the TLE, must be contained in double quotes and begin with \texttt{"2~"}
 \item[visible]  required parameter, set to true if you want to see it, this can be toggled from the configuration window once the satellite is loaded. 
 \item[stdMag]  optional parameter, contained standard magnitude of satellite. 
+\item[rcs] optional parameter, contained the \indexterm[RCS, Radar Cross Section]{Radar Cross
+	Section} of satellite (The units of the RCS are
+square meters).
 \end{description}
 You can edit the tags for a satellite, modify the description and comms data, and even add new satellites. 
 
