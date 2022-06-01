@@ -293,13 +293,9 @@ QVariantMap Satellite::getMap(void)
 
 float Satellite::getSelectPriority(const StelCore*) const
 {
-	if (flagVFAltitude)
-	{
-		if (!(minVFAltitude<=height && height<=maxVFAltitude))
-			return 50.;
-		else
-			return -10.;
-	}
+	if (flagVFAltitude) // the visual filter is enabled
+		return (minVFAltitude<=height && height<=maxVFAltitude) ? -10. : 50.;
+
 	return -10.;
 }
 
