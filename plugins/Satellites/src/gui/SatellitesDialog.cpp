@@ -210,6 +210,12 @@ void SatellitesDialog::createDialogContent()
 	connectColorButton(ui->penumbraColor,        "Satellites.penumbraColor",           "Satellites/penumbra_color");
 	// Logic sub-group: Penumbra
 	connectBoolProperty(ui->penumbraCheckBox,    "Satellites.flagPenumbraVisible");
+	// Logic sub-group: Visual filter / Altitude range
+	connectBoolProperty(ui->altitudeCheckBox,     "Satellites.flagVFAltitude");
+	connectDoubleProperty(ui->minAltitude,        "Satellites.minVFAltitude");
+	connectDoubleProperty(ui->maxAltitude,        "Satellites.maxVFAltitude");
+	updateMinMaxAltitude(ui->altitudeCheckBox->isChecked());
+	connect(ui->altitudeCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxAltitude(bool)));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton,    SIGNAL(clicked()), this, SLOT(saveSettings()));
@@ -309,6 +315,12 @@ void SatellitesDialog::createDialogContent()
 	ui->labelTleEpoch->setStyleSheet(style);
 	ui->labelTleEpochData->setStyleSheet(style);
 	ui->validAgeLabel->setStyleSheet(style);
+}
+
+void SatellitesDialog::updateMinMaxAltitude(bool state)
+{
+	ui->minAltitude->setEnabled(state);
+	ui->maxAltitude->setEnabled(state);
 }
 
 void SatellitesDialog::handleOrbitLinesGroup(bool state)
@@ -1121,6 +1133,9 @@ void SatellitesDialog::populateInfo()
 	ui->updateFrequencySpinBox->setSuffix(QString(" %1").arg(qc_("h","time")));
 	// TRANSLATORS: Unit of measure for distance - kilometers
 	QString km = qc_("km", "distance");
+	ui->minAltitude->setSuffix(QString(" %1").arg(km));
+	ui->maxAltitude->setSuffix(QString(" %1").arg(km));
+	ui->altitudeCheckBox->setToolTip(QString("<p>%1</p>").arg(q_("Display satellites from range of altitudes only. This option suppress rendering orbit lines!")));
 	ui->umbraDistance->setSuffix(QString(" %1").arg(km));
 	ui->umbraDistance->setToolTip(QString("<p>%1. %2: %3-%4 %5</p>").arg(q_("Distance to the center of umbra from Earth's surface (height of imagined satellite)"), q_("Valid range"), QString::number(ui->umbraDistance->minimum(), 'f', 1), QString::number(ui->umbraDistance->maximum(), 'f', 1), km));
 	ui->orbitSegmentsSpin->setToolTip(QString("<p>%1. %2: %3-%4</p>").arg(q_("Number of  segments: number of segments used to draw the line"), q_("Valid range"), QString::number(ui->orbitSegmentsSpin->minimum()), QString::number(ui->orbitSegmentsSpin->maximum())));

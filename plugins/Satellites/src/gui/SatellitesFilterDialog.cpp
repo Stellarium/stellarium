@@ -70,9 +70,6 @@ void SatellitesFilterDialog::createDialogContent()
 	connectBoolProperty(ui->perigeeCheckBox,      "Satellites.flagCFPerigee");
 	connectDoubleProperty(ui->minPerigee,         "Satellites.minCFPerigee");
 	connectDoubleProperty(ui->maxPerigee,         "Satellites.maxCFPerigee");
-	connectBoolProperty(ui->altitudeCheckBox,     "Satellites.flagCFAltitude");
-	connectDoubleProperty(ui->minAltitude,        "Satellites.minCFAltitude");
-	connectDoubleProperty(ui->maxAltitude,        "Satellites.maxCFAltitude");
 	connectBoolProperty(ui->rcsCheckBox,          "Satellites.flagCFRCS");
 	connectDoubleProperty(ui->minRCS,             "Satellites.minCFRCS");
 	connectDoubleProperty(ui->maxRCS,             "Satellites.maxCFRCS");
@@ -84,8 +81,6 @@ void SatellitesFilterDialog::createDialogContent()
 	connect(ui->apogeeCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxApogee(bool)));
 	updateMinMaxPerigee(ui->perigeeCheckBox->isChecked());
 	connect(ui->perigeeCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxPerigee(bool)));
-	updateMinMaxAltitude(ui->altitudeCheckBox->isChecked());
-	connect(ui->altitudeCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxAltitude(bool)));
 	updateMinMaxPeriod(ui->periodCheckBox->isChecked());
 	connect(ui->periodCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxPeriod(bool)));
 	updateMinMaxEccentricity(ui->eccentricityCheckBox->isChecked());
@@ -112,12 +107,6 @@ void SatellitesFilterDialog::updateMinMaxPerigee(bool state)
 {
 	ui->minPerigee->setEnabled(state);
 	ui->maxPerigee->setEnabled(state);
-}
-
-void SatellitesFilterDialog::updateMinMaxAltitude(bool state)
-{
-	ui->minAltitude->setEnabled(state);
-	ui->maxAltitude->setEnabled(state);
 }
 
 void SatellitesFilterDialog::updateMinMaxPeriod(bool state)
@@ -147,9 +136,6 @@ void SatellitesFilterDialog::populateTexts()
 	ui->maxApogee->setSuffix(QString(" %1").arg(km));
 	ui->minPerigee->setSuffix(QString(" %1").arg(km));
 	ui->maxPerigee->setSuffix(QString(" %1").arg(km));
-	ui->altitudeCheckBox->setToolTip(q_("The satellite can be located in selected range of altitudes"));
-	ui->minAltitude->setSuffix(QString(" %1").arg(km));
-	ui->maxAltitude->setSuffix(QString(" %1").arg(km));
 	ui->minPeriod->setSuffix(QString(" %1").arg(min));
 	ui->maxPeriod->setSuffix(QString(" %1").arg(min));
 	ui->minInclination->setSuffix("°");
