@@ -1138,7 +1138,7 @@ void SatellitesDialog::populateInfo()
 	ui->minAltitude->setToolTip(QString("%1 %2..%3 %4").arg(vr, QString::number(ui->minAltitude->minimum(), 'f', 0), QString::number(ui->minAltitude->maximum(), 'f', 0), km));
 	ui->maxAltitude->setSuffix(QString(" %1").arg(km));
 	ui->maxAltitude->setToolTip(QString("%1 %2..%3 %4").arg(vr, QString::number(ui->maxAltitude->minimum(), 'f', 0), QString::number(ui->maxAltitude->maximum(), 'f', 0), km));
-	ui->altitudeCheckBox->setToolTip(QString("<p>%1</p>").arg(q_("Display satellites within selected range of altitudes only. This option suppresses rendering orbit lines!")));
+	ui->altitudeCheckBox->setToolTip(QString("<p>%1</p>").arg(q_("Display satellites within selected range of altitudes only. This option suppresses rendering of orbit lines!")));
 	ui->umbraDistance->setSuffix(QString(" %1").arg(km));
 	ui->umbraDistance->setToolTip(QString("<p>%1. %2 %3..%4 %5</p>").arg(q_("Distance to the center of umbra from Earth's surface (height of imagined satellite)"), vr, QString::number(ui->umbraDistance->minimum(), 'f', 1), QString::number(ui->umbraDistance->maximum(), 'f', 1), km));
 	ui->orbitSegmentsSpin->setToolTip(QString("<p>%1. %2 %3..%4</p>").arg(q_("Number of segments: number of segments used to draw the line"), vr, QString::number(ui->orbitSegmentsSpin->minimum()), QString::number(ui->orbitSegmentsSpin->maximum())));
