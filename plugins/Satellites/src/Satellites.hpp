@@ -669,11 +669,11 @@ public slots:
 	void setFlagVFAltitude(bool b);
 	bool getFlagVFAltitude() { return Satellite::flagVFAltitude; }
 
-	//! Set whether visual filter 'altitude' maximum value (in kilometers).
+	//! Set visual filter 'altitude' maximum value (in kilometers).
 	void setMaxVFAltitude(double v);
 	double getMaxVFAltitude() { return Satellite::maxVFAltitude; }
 
-	//! Set whether visual filter 'altitude' minimum value (in kilometers).
+	//! Set visual filter 'altitude' minimum value (in kilometers).
 	void setMinVFAltitude(double v);
 	double getMinVFAltitude() { return Satellite::minVFAltitude; }
 

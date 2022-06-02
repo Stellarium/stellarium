@@ -214,8 +214,8 @@ void SatellitesDialog::createDialogContent()
 	connectBoolProperty(ui->altitudeCheckBox,     "Satellites.flagVFAltitude");
 	connectDoubleProperty(ui->minAltitude,        "Satellites.minVFAltitude");
 	connectDoubleProperty(ui->maxAltitude,        "Satellites.maxVFAltitude");
-	updateMinMaxAltitude(ui->altitudeCheckBox->isChecked());
-	connect(ui->altitudeCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxAltitude(bool)));
+	enableMinMaxAltitude(ui->altitudeCheckBox->isChecked());
+	connect(ui->altitudeCheckBox, SIGNAL(clicked(bool)), this, SLOT(enableMinMaxAltitude(bool)));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton,    SIGNAL(clicked()), this, SLOT(saveSettings()));
@@ -1138,10 +1138,10 @@ void SatellitesDialog::populateInfo()
 	ui->minAltitude->setToolTip(QString("%1 %2..%3 %4").arg(vr, QString::number(ui->minAltitude->minimum(), 'f', 0), QString::number(ui->minAltitude->maximum(), 'f', 0), km));
 	ui->maxAltitude->setSuffix(QString(" %1").arg(km));
 	ui->maxAltitude->setToolTip(QString("%1 %2..%3 %4").arg(vr, QString::number(ui->maxAltitude->minimum(), 'f', 0), QString::number(ui->maxAltitude->maximum(), 'f', 0), km));
-	ui->altitudeCheckBox->setToolTip(QString("<p>%1</p>").arg(q_("Display satellites from range of altitudes only. This option suppress rendering orbit lines!")));
+	ui->altitudeCheckBox->setToolTip(QString("<p>%1</p>").arg(q_("Display satellites within selected range of altitudes only. This option suppresses rendering orbit lines!")));
 	ui->umbraDistance->setSuffix(QString(" %1").arg(km));
 	ui->umbraDistance->setToolTip(QString("<p>%1. %2 %3..%4 %5</p>").arg(q_("Distance to the center of umbra from Earth's surface (height of imagined satellite)"), vr, QString::number(ui->umbraDistance->minimum(), 'f', 1), QString::number(ui->umbraDistance->maximum(), 'f', 1), km));
-	ui->orbitSegmentsSpin->setToolTip(QString("<p>%1. %2 %3..%4</p>").arg(q_("Number of  segments: number of segments used to draw the line"), vr, QString::number(ui->orbitSegmentsSpin->minimum()), QString::number(ui->orbitSegmentsSpin->maximum())));
+	ui->orbitSegmentsSpin->setToolTip(QString("<p>%1. %2 %3..%4</p>").arg(q_("Number of segments: number of segments used to draw the line"), vr, QString::number(ui->orbitSegmentsSpin->minimum()), QString::number(ui->orbitSegmentsSpin->maximum())));
 	ui->orbitDurationSpin->setToolTip(QString("<p>%1. %2 %3..%4 %5</p>").arg(q_("Segment length: duration of a single segment in seconds"), vr, QString::number(ui->orbitDurationSpin->minimum()), QString::number(ui->orbitDurationSpin->maximum()), s));
 	ui->orbitFadeSpin->setToolTip(QString("<p>%1. %2 %3..%4</p>").arg(q_("Fade length: number of segments used to draw each end of the line"), vr, QString::number(ui->orbitFadeSpin->minimum()), QString::number(ui->orbitFadeSpin->maximum())));
 }
