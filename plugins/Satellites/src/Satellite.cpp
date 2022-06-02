@@ -73,9 +73,6 @@ double Satellite::maxCFApogee = 55000.;
 bool Satellite::flagCFPerigee = false;
 double Satellite::minCFPerigee = 200.;
 double Satellite::maxCFPerigee = 1500.;
-bool Satellite::flagCFAltitude = false;
-double Satellite::minCFAltitude = 200.;
-double Satellite::maxCFAltitude = 1500.;
 bool Satellite::flagCFEccentricity = false;
 double Satellite::minCFEccentricity = 0.3;
 double Satellite::maxCFEccentricity = 0.9;
@@ -88,6 +85,9 @@ double Satellite::maxCFInclination = 360.;
 bool Satellite::flagCFRCS = false;
 double Satellite::minCFRCS = 0.1;
 double Satellite::maxCFRCS = 100.;
+bool Satellite::flagVFAltitude = false;
+double Satellite::minVFAltitude = 200.;
+double Satellite::maxVFAltitude = 500.;
 
 #if (SATELLITES_PLUGIN_IRIDIUM == 1)
 double Satellite::sunReflAngle = 180.;
@@ -293,6 +293,9 @@ QVariantMap Satellite::getMap(void)
 
 float Satellite::getSelectPriority(const StelCore*) const
 {
+	if (flagVFAltitude) // the visual filter is enabled
+		return (minVFAltitude<=height && height<=maxVFAltitude) ? -10. : 50.;
+
 	return -10.;
 }
 
@@ -809,7 +812,7 @@ void Satellite::update(double)
 		phaseAngle = pSatWrapper->getPhaseAngle();
 
 		// Compute orbit points to draw orbit line.
-		if (orbitDisplayed) computeOrbitPoints();
+		if (orbitDisplayed && !flagVFAltitude) computeOrbitPoints();
 	}
 }
 
@@ -890,10 +893,7 @@ SatFlags Satellite::getFlags() const
 	bool cfr = true;
 	if (flagCFRCS)
 		cfr = (RCS>=minCFRCS && RCS<=maxCFRCS);
-	bool cfh = true;
-	if (flagCFAltitude)
-		cfh = ((perigee<=minCFAltitude && apogee>=maxCFAltitude) || (perigee>=minCFAltitude && apogee<=maxCFAltitude) || (perigee<=minCFAltitude && apogee>=minCFAltitude && apogee<=maxCFAltitude) || (perigee<=maxCFAltitude && perigee>=minCFAltitude && apogee>=maxCFAltitude));
-	if (cfa && cfp && cfe && cfm && cft && cfi && cfr && cfh)
+	if (cfa && cfp && cfe && cfm && cft && cfi && cfr)
 		flags |= SatCustomFilter;
 
 	return flags;
@@ -954,6 +954,15 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 	// 2) Do not show satellites when time rate is over limit (JD/sec)!
 	if (core->getJD()<jdLaunchYearJan1 || qAbs(core->getTimeRate())>=timeRateLimit)
 		return;
+
+	if (flagVFAltitude)
+	{
+		// visual filter is activated!
+		// is satellite located in valid range of altitudes?
+		// yes, but... inverse the result and skip rendering!
+		if (!(minVFAltitude<=height && height<=maxVFAltitude))
+			return;
+	}
 
 	Vec3d win;
 	if (painter.getProjector()->projectCheck(XYZ, win))
@@ -1030,7 +1039,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 		}
 	}
 
-	if (orbitDisplayed && Satellite::orbitLinesFlag && orbitValid)
+	if (orbitDisplayed && Satellite::orbitLinesFlag && orbitValid && !flagVFAltitude)
 		drawOrbit(core, painter);
 }
 

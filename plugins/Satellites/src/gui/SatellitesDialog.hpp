@@ -138,6 +138,8 @@ private slots:
 	void setRightSideToROMode();
 	void setRightSideToRWMode();
 
+	void enableMinMaxAltitude(bool state);
+
 private:
 	//! @todo find out if this is really necessary... --BM
 	void enableSatelliteDataForm(bool enabled);

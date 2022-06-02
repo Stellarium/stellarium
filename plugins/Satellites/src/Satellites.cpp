@@ -700,9 +700,6 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("cf_perigee_flag", false);
 	conf->setValue("cf_perigee_min", 200.);
 	conf->setValue("cf_perigee_max", 1500.);
-	conf->setValue("cf_altitude_flag", false);
-	conf->setValue("cf_altitude_min", 200.);
-	conf->setValue("cf_altitude_max", 1500.);
 	conf->setValue("cf_eccentricity_flag", false);
 	conf->setValue("cf_eccentricity_min", 0.3);
 	conf->setValue("cf_eccentricity_max", 0.9);
@@ -715,6 +712,9 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("cf_rcs_flag", false);
 	conf->setValue("cf_rcs_min", 0.1);
 	conf->setValue("cf_rcs_max", 100.);
+	conf->setValue("vf_altitude_flag", false);
+	conf->setValue("vf_altitude_min", 200.);
+	conf->setValue("vf_altitude_max", 1500.);
 	
 	conf->endGroup(); // saveTleSources() opens it for itself
 }
@@ -845,9 +845,6 @@ void Satellites::loadSettings()
 	setFlagCFPerigee(conf->value("cf_perigee_flag", false).toBool());
 	setMinCFPerigee(conf->value("cf_perigee_min", 200.).toDouble());
 	setMaxCFPerigee(conf->value("cf_perigee_max", 1500.).toDouble());
-	setFlagCFAltitude(conf->value("cf_altitude_flag", false).toBool());
-	setMinCFAltitude(conf->value("cf_altitude_min", 200.).toDouble());
-	setMaxCFAltitude(conf->value("cf_altitude_max", 1500.).toDouble());
 	setFlagCFEccentricity(conf->value("cf_eccentricity_flag", false).toBool());
 	setMinCFEccentricity(conf->value("cf_eccentricity_min", 0.3).toDouble());
 	setMaxCFEccentricity(conf->value("cf_eccentricity_max", 0.9).toDouble());
@@ -860,6 +857,11 @@ void Satellites::loadSettings()
 	setFlagCFRCS(conf->value("cf_rcs_flag", false).toBool());
 	setMinCFRCS(conf->value("cf_rcs_min", 0.1).toDouble());
 	setMaxCFRCS(conf->value("cf_rcs_max", 100.).toDouble());
+
+	// visual filter
+	setFlagVFAltitude(conf->value("vf_altitude_flag", false).toBool());
+	setMinVFAltitude(conf->value("vf_altitude_min", 200.).toDouble());
+	setMaxVFAltitude(conf->value("vf_altitude_max", 500.).toDouble());
 
 	conf->endGroup();
 }
@@ -912,9 +914,6 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("cf_perigee_flag", getFlagCFPerigee());
 	conf->setValue("cf_perigee_min", getMinCFPerigee());
 	conf->setValue("cf_perigee_max", getMaxCFPerigee());
-	conf->setValue("cf_altitude_flag", getFlagCFAltitude());
-	conf->setValue("cf_altitude_min", getMinCFAltitude());
-	conf->setValue("cf_altitude_max", getMaxCFAltitude());
 	conf->setValue("cf_eccentricity_flag", getFlagCFEccentricity());
 	conf->setValue("cf_eccentricity_min", getMinCFEccentricity());
 	conf->setValue("cf_eccentricity_max", getMaxCFEccentricity());
@@ -927,6 +926,11 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("cf_rcs_flag", getFlagCFRCS());
 	conf->setValue("cf_rcs_min", getMinCFRCS());
 	conf->setValue("cf_rcs_max", getMaxCFRCS());
+
+	// visual filter
+	conf->setValue("vf_altitude_flag", getFlagVFAltitude());
+	conf->setValue("vf_altitude_min", getMinVFAltitude());
+	conf->setValue("vf_altitude_max", getMaxVFAltitude());
 
 	conf->endGroup();
 	
@@ -1861,28 +1865,25 @@ void Satellites::setMaxCFPerigee(double v)
 	emit maxCFPerigeeChanged(v);
 }
 
-void Satellites::setFlagCFAltitude(bool b)
+void Satellites::setFlagVFAltitude(bool b)
 {
-	if (Satellite::flagCFAltitude != b)
+	if (Satellite::flagVFAltitude != b)
 	{
-		Satellite::flagCFAltitude = b;
-		emit customFilterChanged();
-		emit flagCFAltitudeChanged(b);
+		Satellite::flagVFAltitude = b;
+		emit flagVFAltitudeChanged(b);
 	}
 }
 
-void Satellites::setMinCFAltitude(double v)
+void Satellites::setMinVFAltitude(double v)
 {
-	Satellite::minCFAltitude = v;
-	emit customFilterChanged();
-	emit minCFAltitudeChanged(v);
+	Satellite::minVFAltitude = v;
+	emit minVFAltitudeChanged(v);
 }
 
-void Satellites::setMaxCFAltitude(double v)
+void Satellites::setMaxVFAltitude(double v)
 {
-	Satellite::maxCFAltitude = v;
-	emit customFilterChanged();
-	emit maxCFAltitudeChanged(v);
+	Satellite::maxVFAltitude = v;
+	emit maxVFAltitudeChanged(v);
 }
 
 void Satellites::setFlagCFEccentricity(bool b)

@@ -210,6 +210,12 @@ void SatellitesDialog::createDialogContent()
 	connectColorButton(ui->penumbraColor,        "Satellites.penumbraColor",           "Satellites/penumbra_color");
 	// Logic sub-group: Penumbra
 	connectBoolProperty(ui->penumbraCheckBox,    "Satellites.flagPenumbraVisible");
+	// Logic sub-group: Visual filter / Altitude range
+	connectBoolProperty(ui->altitudeCheckBox,     "Satellites.flagVFAltitude");
+	connectDoubleProperty(ui->minAltitude,        "Satellites.minVFAltitude");
+	connectDoubleProperty(ui->maxAltitude,        "Satellites.maxVFAltitude");
+	enableMinMaxAltitude(ui->altitudeCheckBox->isChecked());
+	connect(ui->altitudeCheckBox, SIGNAL(clicked(bool)), this, SLOT(enableMinMaxAltitude(bool)));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton,    SIGNAL(clicked()), this, SLOT(saveSettings()));
@@ -309,6 +315,12 @@ void SatellitesDialog::createDialogContent()
 	ui->labelTleEpoch->setStyleSheet(style);
 	ui->labelTleEpochData->setStyleSheet(style);
 	ui->validAgeLabel->setStyleSheet(style);
+}
+
+void SatellitesDialog::enableMinMaxAltitude(bool state)
+{
+	ui->minAltitude->setEnabled(state);
+	ui->maxAltitude->setEnabled(state);
 }
 
 void SatellitesDialog::handleOrbitLinesGroup(bool state)
@@ -1111,6 +1123,7 @@ void SatellitesDialog::populateFilterMenu()
 
 void SatellitesDialog::populateInfo()
 {
+	QString vr = q_("Valid range:");
 	ui->labelRCS->setText(QString("%1, %2<sup>2</sup>:").arg(q_("RCS"), qc_("m","distance")));
 	ui->labelRCS->setToolTip(QString("<p>%1</p>").arg(q_("Radar cross-section (RCS) is a measure of how detectable an object is with a radar. A larger RCS indicates that an object is more easily detected.")));
 	ui->labelStdMagnitude->setToolTip(QString("<p>%1</p>").arg(q_("The standard magnitude of a satellite is defined as its apparent magnitude when at half-phase and at a distance 1000 km from the observer.")));
@@ -1121,11 +1134,16 @@ void SatellitesDialog::populateInfo()
 	ui->updateFrequencySpinBox->setSuffix(QString(" %1").arg(qc_("h","time")));
 	// TRANSLATORS: Unit of measure for distance - kilometers
 	QString km = qc_("km", "distance");
+	ui->minAltitude->setSuffix(QString(" %1").arg(km));
+	ui->minAltitude->setToolTip(QString("%1 %2..%3 %4").arg(vr, QString::number(ui->minAltitude->minimum(), 'f', 0), QString::number(ui->minAltitude->maximum(), 'f', 0), km));
+	ui->maxAltitude->setSuffix(QString(" %1").arg(km));
+	ui->maxAltitude->setToolTip(QString("%1 %2..%3 %4").arg(vr, QString::number(ui->maxAltitude->minimum(), 'f', 0), QString::number(ui->maxAltitude->maximum(), 'f', 0), km));
+	ui->altitudeCheckBox->setToolTip(QString("<p>%1</p>").arg(q_("Display satellites within selected range of altitudes only. This option suppresses rendering of orbit lines!")));
 	ui->umbraDistance->setSuffix(QString(" %1").arg(km));
-	ui->umbraDistance->setToolTip(QString("<p>%1. %2: %3-%4 %5</p>").arg(q_("Distance to the center of umbra from Earth's surface (height of imagined satellite)"), q_("Valid range"), QString::number(ui->umbraDistance->minimum(), 'f', 1), QString::number(ui->umbraDistance->maximum(), 'f', 1), km));
-	ui->orbitSegmentsSpin->setToolTip(QString("<p>%1. %2: %3-%4</p>").arg(q_("Number of  segments: number of segments used to draw the line"), q_("Valid range"), QString::number(ui->orbitSegmentsSpin->minimum()), QString::number(ui->orbitSegmentsSpin->maximum())));
-	ui->orbitDurationSpin->setToolTip(QString("<p>%1. %2: %3-%4%5</p>").arg(q_("Segment length: duration of a single segment in seconds"), q_("Valid range"), QString::number(ui->orbitDurationSpin->minimum()), QString::number(ui->orbitDurationSpin->maximum()), s));
-	ui->orbitFadeSpin->setToolTip(QString("<p>%1. %2: %3-%4</p>").arg(q_("Fade length: number of segments used to draw each end of the line"), q_("Valid range"), QString::number(ui->orbitFadeSpin->minimum()), QString::number(ui->orbitFadeSpin->maximum())));
+	ui->umbraDistance->setToolTip(QString("<p>%1. %2 %3..%4 %5</p>").arg(q_("Distance to the center of umbra from Earth's surface (height of imagined satellite)"), vr, QString::number(ui->umbraDistance->minimum(), 'f', 1), QString::number(ui->umbraDistance->maximum(), 'f', 1), km));
+	ui->orbitSegmentsSpin->setToolTip(QString("<p>%1. %2 %3..%4</p>").arg(q_("Number of segments: number of segments used to draw the line"), vr, QString::number(ui->orbitSegmentsSpin->minimum()), QString::number(ui->orbitSegmentsSpin->maximum())));
+	ui->orbitDurationSpin->setToolTip(QString("<p>%1. %2 %3..%4 %5</p>").arg(q_("Segment length: duration of a single segment in seconds"), vr, QString::number(ui->orbitDurationSpin->minimum()), QString::number(ui->orbitDurationSpin->maximum()), s));
+	ui->orbitFadeSpin->setToolTip(QString("<p>%1. %2 %3..%4</p>").arg(q_("Fade length: number of segments used to draw each end of the line"), vr, QString::number(ui->orbitFadeSpin->minimum()), QString::number(ui->orbitFadeSpin->maximum())));
 }
 
 void SatellitesDialog::populateSourcesList()
