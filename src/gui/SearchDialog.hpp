@@ -196,6 +196,7 @@ private slots:
 	void gotoObject(const QModelIndex &modelIndex);
 
 	void searchListClear();
+	void refreshFocus(bool state);
 
 	//! Called when the user edit the manual position controls
 	void manualPositionChanged();
