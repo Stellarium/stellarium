@@ -609,10 +609,11 @@ void SatellitesDialog::updateSatelliteData()
 		QString apogeeString = (apogee>0) ? QString::number(apogee) : dash;
 		float period = index.data(SatPeriodRole).toFloat();
 		QString periodString = (period>0.f) ? QString::number(period, 'f', 2) : dash;
+		QString cosparID = index.data(SatCosparIDRole).toString();
 
 		ui->nameEdit->setText(index.data(Qt::DisplayRole).toString());
 		ui->noradNumberEdit->setText(index.data(Qt::UserRole).toString());
-		ui->cosparNumberEdit->setText(index.data(SatCosparIDRole).toString());
+		ui->cosparNumberEdit->setText(cosparID.isEmpty() ? dash : cosparID);
 		// NOTE: Description is deliberately displayed untranslated!
 		ui->descriptionTextEdit->setText(index.data(SatDescriptionRole).toString());
 		ui->stdMagnitudeLineEdit->setText(stdMagString);

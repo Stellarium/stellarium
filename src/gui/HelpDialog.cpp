@@ -361,7 +361,8 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
 	htmlText += "<tr><td>" + q_("Calculate ephemeris") + "</td>";
 	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
-	htmlText += "<tr><td>" + q_("Calculate transits") + "</td>";
+	// TRANSLATOR: RTS = rise, transit, set
+	htmlText += "<tr><td>" + q_("Calculate RTS") + "</td>";
 	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
 	htmlText += "<tr><td>" + q_("Calculate phenomena") + "</td>";
 	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";

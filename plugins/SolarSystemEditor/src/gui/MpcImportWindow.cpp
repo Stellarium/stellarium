@@ -737,7 +737,7 @@ void MpcImportWindow::sendQuery()
 	queryProgressBar = StelApp::getInstance().addProgressBar();
 	queryProgressBar->setValue(0);
 	queryProgressBar->setRange(0, 0);
-	queryProgressBar->setFormat("Searching...");
+	queryProgressBar->setFormat(q_("Searching..."));
 
 	//TODO: Better handling of the interface
 	enableInterface(false);
