@@ -30,51 +30,6 @@ class Translations
 		// Generate Gettext strings for traduction
 		Q_ASSERT(0);
 
-		// List of star types
-		// TRANSLATORS: Type of object
-		N_("eruptive variable star");
-		// TRANSLATORS: Type of object
-		N_("pulsating variable star");
-		// TRANSLATORS: Type of object
-		N_("rotating variable star");
-		// TRANSLATORS: Type of object
-		N_("cataclysmic variable star");
-		// TRANSLATORS: Type of object
-		N_("eclipsing binary system");
-		// TRANSLATORS: Type of object
-		N_("variable star");
-		// TRANSLATORS: Type of object
-		N_("double star");
-
-		// List of types solar system bodies
-		// TRANSLATORS: Type of object
-		N_("star");
-		// TRANSLATORS: Type of object
-		N_("planet");
-		// TRANSLATORS: Type of object
-		N_("comet");
-		// TRANSLATORS: Type of object
-		N_("asteroid");
-		// TRANSLATORS: Type of object
-		N_("moon");
-		// TRANSLATORS: Type of object
-		N_("plutino");
-		// TRANSLATORS: Type of object
-		N_("dwarf planet");
-		// TRANSLATORS: Type of object
-		N_("cubewano");
-		// TRANSLATORS: Type of object
-		N_("scattered disc object");
-		// TRANSLATORS: Type of object
-		N_("Oort cloud object");
-		// TRANSLATORS: Type of object
-		N_("sednoid");
-		// TRANSLATORS: Type of object
-		N_("interstellar object");
-		// TRANSLATORS: Type of object
-		N_("observer");
-		// TRANSLATORS: Type of object
-		N_("artificial");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Planets");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)

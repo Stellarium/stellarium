@@ -25,7 +25,6 @@
 #include "StelCore.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
-#include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelLocaleMgr.hpp"
@@ -318,7 +317,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	}
 	
 	if (flags&ObjectType)
-		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("planetary system")) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getObjectType())) << "<br />";
 
 	if (flags&Magnitude && isVMagnitudeDefined() && !distributionMode)
 		oss << getMagnitudeInfoString(core, flags, 2);

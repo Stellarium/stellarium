@@ -1,9 +1,12 @@
 # Core source files
 src/core/modules/CustomObject.cpp
+src/core/modules/CustomObject.hpp
 src/core/modules/CustomObjectMgr.cpp
 src/core/modules/Asterism.cpp
+src/core/modules/Asterism.hpp
 src/core/modules/AsterismMgr.cpp
 src/core/modules/Constellation.cpp
+src/core/modules/Constellation.hpp
 src/core/modules/ConstellationMgr.cpp
 src/core/modules/StarMgr.cpp
 src/core/modules/GridLinesMgr.cpp
@@ -103,6 +106,7 @@ plugins/Oculars/src/ui_ocularDialog.h
 plugins/Oculus/src/Oculus.cpp
 plugins/Satellites/src/Satellites.cpp
 plugins/Satellites/src/Satellite.cpp
+plugins/Satellites/src/Satellite.hpp
 plugins/Satellites/src/gui/SatellitesDialog.cpp
 plugins/Satellites/src/gui/SatellitesImportDialog.cpp
 plugins/Satellites/src/gui/SatellitesFilterDialog.cpp
@@ -136,6 +140,7 @@ plugins/SolarSystemEditor/src/ui_mpcImportWindow.h
 plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h
 plugins/Supernovae/src/Supernovae.cpp
 plugins/Supernovae/src/Supernova.cpp
+plugins/Supernovae/src/Supernova.hpp
 plugins/Supernovae/src/gui/SupernovaeDialog.cpp
 plugins/Supernovae/src/ui_supernovaeDialog.h
 plugins/NavStars/src/NavStars.cpp
@@ -143,14 +148,17 @@ plugins/NavStars/src/gui/NavStarsWindow.cpp
 plugins/NavStars/src/ui_navStarsWindow.h
 plugins/Novae/src/Novae.cpp
 plugins/Novae/src/Nova.cpp
+plugins/Novae/src/Nova.hpp
 plugins/Novae/src/gui/NovaeDialog.cpp
 plugins/Novae/src/ui_novaeDialog.h
 plugins/Quasars/src/Quasars.cpp
 plugins/Quasars/src/Quasar.cpp
+plugins/Quasars/src/Quasar.hpp
 plugins/Quasars/src/gui/QuasarsDialog.cpp
 plugins/Quasars/src/ui_quasarsDialog.h
 plugins/Pulsars/src/Pulsars.cpp
 plugins/Pulsars/src/Pulsar.cpp
+plugins/Pulsars/src/Pulsar.hpp
 plugins/Pulsars/src/gui/PulsarsDialog.cpp
 plugins/Pulsars/src/ui_pulsarsDialog.h
 plugins/RemoteControl/src/RemoteControl.cpp
@@ -161,18 +169,19 @@ plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp
 plugins/RemoteSync/src/ui_remoteSyncDialog.h
 plugins/Exoplanets/src/Exoplanets.cpp
 plugins/Exoplanets/src/Exoplanet.cpp
+plugins/Exoplanets/src/Exoplanet.hpp
 plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp
 plugins/Exoplanets/src/ui_exoplanetsDialog.h
 plugins/Observability/src/Observability.cpp
 plugins/Observability/src/gui/ObservabilityDialog.cpp
 plugins/Observability/src/ui_ObservabilityDialog.h
-plugins/NavStars/src/NavStars.cpp
 plugins/EquationOfTime/src/EquationOfTime.cpp
 plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp
 plugins/EquationOfTime/src/ui_equationOfTimeWindow.h
 plugins/MeteorShowers/src/MeteorShowersMgr.cpp
 plugins/MeteorShowers/src/MeteorShowers.cpp
 plugins/MeteorShowers/src/MeteorShower.cpp
+plugins/MeteorShowers/src/MeteorShower.hpp
 plugins/MeteorShowers/src/MeteorObj.cpp
 plugins/MeteorShowers/src/translations.h
 plugins/MeteorShowers/src/gui/MSConfigDialog.cpp

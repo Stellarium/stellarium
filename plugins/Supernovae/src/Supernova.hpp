@@ -29,6 +29,7 @@
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelFader.hpp"
+#include "StelTranslator.hpp"
 
 class StelPainter;
 
@@ -66,7 +67,7 @@ public:
 
 	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
 	{
-		return "supernova";
+		return N_("supernova");
 	}
 
 	virtual QString getID(void) const Q_DECL_OVERRIDE

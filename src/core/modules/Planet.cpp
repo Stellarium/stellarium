@@ -120,21 +120,21 @@ GLuint Planet::shadowTex = 0;
 
 const QMap<Planet::PlanetType, QString> Planet::pTypeMap = // Maps type to english name.
 {
-	{Planet::isStar,	"star"},
-	{Planet::isPlanet,	"planet"},
-	{Planet::isMoon,	"moon"},
-	{Planet::isObserver,	"observer"},
-	{Planet::isArtificial,	"artificial"},
-	{Planet::isAsteroid,	"asteroid"},
-	{Planet::isPlutino,	"plutino"},
-	{Planet::isComet,	"comet"},
-	{Planet::isDwarfPlanet,	"dwarf planet"},
-	{Planet::isCubewano,	"cubewano"},
-	{Planet::isSDO,		"scattered disc object"},
-	{Planet::isOCO,		"Oort cloud object"},
-	{Planet::isSednoid,	"sednoid"},
-	{Planet::isInterstellar,"interstellar object"},
-	{Planet::isUNDEFINED,	"UNDEFINED"} // something must be broken before we ever see this!
+	{ Planet::isStar,	N_("star") },
+	{ Planet::isPlanet,	N_("planet") },
+	{ Planet::isMoon,	N_("moon") },
+	{ Planet::isObserver,	N_("observer") },
+	{ Planet::isArtificial,	N_("artificial") },
+	{ Planet::isAsteroid,	N_("asteroid") },
+	{ Planet::isPlutino,	N_("plutino") },
+	{ Planet::isComet,	N_("comet") },
+	{ Planet::isDwarfPlanet,N_("dwarf planet") },
+	{ Planet::isCubewano,	N_("cubewano") },
+	{ Planet::isSDO,	N_("scattered disc object") },
+	{ Planet::isOCO,	N_("Oort cloud object") },
+	{ Planet::isSednoid,	N_("sednoid") },
+	{ Planet::isInterstellar,N_("interstellar object") },
+	{ Planet::isUNDEFINED,	N_("UNDEFINED") } // something must be broken before we ever see this!
 };
 
 const QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap =
@@ -1510,7 +1510,8 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 			map.insert("eclipse-magnitude", 0.0);
 		}
 	}
-	map.insert("type", getPlanetTypeString()); // replace existing "type=Planet" by something more detailed.
+	map.insert("type", getType());
+	map.insert("object-type", getObjectType());
 
 	if (onEarth && (getEnglishName()=="Moon"))
 	{

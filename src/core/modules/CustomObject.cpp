@@ -25,7 +25,6 @@
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTexture.hpp"
-#include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelUtils.hpp"
@@ -82,13 +81,7 @@ QString CustomObject::getInfoString(const StelCore* core, const InfoStringGroup&
 		oss << "<h2>" << getNameI18n() << "</h2>";
 
 	if (flags&ObjectType)
-	{
-		QString type = q_("custom object");
-		if (isMarker)
-			type = q_("custom marker");
-
-		oss << QString("%1: <b>%2</b>").arg(q_("Type"), type) << "<br />";
-	}
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getObjectType())) << "<br />";
 
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);

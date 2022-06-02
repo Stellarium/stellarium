@@ -31,6 +31,7 @@
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
+#include "StelTranslator.hpp"
 #include "gSatWrapper.hpp"
 #include "SolarSystem.hpp"
 
@@ -149,7 +150,7 @@ public:
 
 	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
 	{
-		return "artificial satellite";
+		return N_("artificial satellite");
 	}
 
 	virtual QString getID(void) const Q_DECL_OVERRIDE
