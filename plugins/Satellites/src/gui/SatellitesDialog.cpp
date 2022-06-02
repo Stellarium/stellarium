@@ -317,7 +317,7 @@ void SatellitesDialog::createDialogContent()
 	ui->validAgeLabel->setStyleSheet(style);
 }
 
-void SatellitesDialog::updateMinMaxAltitude(bool state)
+void SatellitesDialog::enableMinMaxAltitude(bool state)
 {
 	ui->minAltitude->setEnabled(state);
 	ui->maxAltitude->setEnabled(state);
