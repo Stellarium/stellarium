@@ -147,6 +147,11 @@ public:
 		return SATELLITE_TYPE;
 	}
 
+	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	{
+		return "artificial satellite";
+	}
+
 	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{
 		return id;

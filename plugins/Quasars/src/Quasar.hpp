@@ -66,6 +66,11 @@ public:
 		return QUASAR_TYPE;
 	}
 
+	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	{
+		return "quasar";
+	}
+
 	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{
 		return designation;

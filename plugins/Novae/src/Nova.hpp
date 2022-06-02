@@ -56,6 +56,11 @@ public:
 		return NOVA_TYPE;
 	}
 
+	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	{
+		return "nova";
+	}
+
 	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{
 		return getDesignation();

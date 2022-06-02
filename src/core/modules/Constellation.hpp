@@ -67,6 +67,7 @@ private:
 	//! Get the module/object type string.
 	//! @return "Constellation"
 	virtual QString getType() const Q_DECL_OVERRIDE {return CONSTELLATION_TYPE;}
+	virtual QString getObjectType() const Q_DECL_OVERRIDE {return "constellation";}
 	virtual QString getID() const Q_DECL_OVERRIDE { return abbreviation; }
 
 	//! observer centered J2000 coordinates.

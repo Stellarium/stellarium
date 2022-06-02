@@ -59,6 +59,7 @@ private:
 	//! Get the module/object type string.
 	//! @return "Asterism"
 	virtual QString getType() const Q_DECL_OVERRIDE {return ASTERISM_TYPE;}
+	virtual QString getObjectType() const Q_DECL_OVERRIDE {return "asterism";}
 	virtual QString getID() const Q_DECL_OVERRIDE { return abbreviation; }
 
 	//! observer centered J2000 coordinates.

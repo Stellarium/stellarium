@@ -80,6 +80,12 @@ public:
 		return EXOPLANET_TYPE;
 	}
 
+	//! Get the type of object
+	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	{
+		return "planetary system";
+	}
+
 	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{
 		return getDesignation();

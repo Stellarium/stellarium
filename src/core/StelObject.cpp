@@ -921,6 +921,7 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	bool useOldAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 
 	map.insert("type", getType());
+	map.insert("object-type", getObjectType());
 	// ra/dec
 	pos = getEquinoxEquatorialPos(core);
 	StelUtils::rectToSphe(&ra, &dec, pos);
