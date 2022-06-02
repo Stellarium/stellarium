@@ -192,7 +192,7 @@ void SatellitesCommDialog::addCommData()
 		getSatCommData();
 	}
 	else
-		QMessageBox::warning(&StelMainView::getInstance(), q_("Warning!"), q_("Please fill description and set the frequency!"), QMessageBox::Ok);
+		QMessageBox::warning(&StelMainView::getInstance(), q_("Nothing added"), q_("Please fill in description and add frequency before adding!"), QMessageBox::Ok);
 }
 
 void SatellitesCommDialog::removeCommData()
@@ -221,5 +221,5 @@ void SatellitesCommDialog::removeCommData()
 		getSatCommData();
 	}
 	else
-		QMessageBox::warning(&StelMainView::getInstance(), q_("Warning!"), q_("Please select the line of communication data."), QMessageBox::Ok);
+		QMessageBox::warning(&StelMainView::getInstance(), q_("Nothing deleted"), q_("Please select a line first!"), QMessageBox::Ok);
 }

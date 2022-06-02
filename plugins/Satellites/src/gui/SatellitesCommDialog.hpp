@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef COMMSATELLITESWINDOW_HPP
-#define COMMSATELLITESWINDOW_HPP
+#ifndef SATELLITESCOMMDIALOG_HPP
+#define SATELLITESCOMMDIALOG_HPP
 
 #include "StelDialog.hpp"
 #include "Satellites.hpp"
@@ -99,4 +99,4 @@ private:
 	}
 };
 
-#endif // COMMSATELLITESWINDOW_HPP
+#endif // SATELLITESCOMMDIALOG_HPP
