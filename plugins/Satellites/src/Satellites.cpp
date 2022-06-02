@@ -1402,7 +1402,8 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 
 	for (const auto& name : qAsConst(groups))
 	{
-		QVariantMap communications = groupComms.value(name, QVariantMap());
+		communications.clear();
+		communications = groupComms.value(name, QVariantMap());
 		if (!communications.isEmpty())
 		{
 			for (const auto& comm : communications.value("comms").toList())
