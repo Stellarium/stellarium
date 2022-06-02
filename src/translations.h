@@ -30,6 +30,22 @@ class Translations
 		// Generate Gettext strings for traduction
 		Q_ASSERT(0);
 
+		// List of star types
+		// TRANSLATORS: Type of object
+		N_("eruptive variable star");
+		// TRANSLATORS: Type of object
+		N_("pulsating variable star");
+		// TRANSLATORS: Type of object
+		N_("rotating variable star");
+		// TRANSLATORS: Type of object
+		N_("cataclysmic variable star");
+		// TRANSLATORS: Type of object
+		N_("eclipsing binary system");
+		// TRANSLATORS: Type of object
+		N_("variable star");
+		// TRANSLATORS: Type of object
+		N_("double star");
+
 		// List of types solar system bodies
 		// TRANSLATORS: Type of object
 		N_("star");

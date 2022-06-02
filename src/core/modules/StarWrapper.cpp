@@ -88,7 +88,7 @@ QString StarWrapper1::getObjectType() const
 	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
 	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
 	QString varstartype = "";
-	QString startype = "";
+	QString startype = (s->getComponentIds() || wdsObs>0) ? "double star" : "star";
 	if(!varType.isEmpty())
 	{
 		// see also http://www.sai.msu.su/gcvs/gcvs/vartype.htm
@@ -108,16 +108,11 @@ QString StarWrapper1::getObjectType() const
 			varstartype = "variable star";
 	}
 
-	if (s->getComponentIds() || wdsObs>0)
-		startype = "double star";
-	else
-		startype = "star";
-
 	if (!varType.isEmpty())
 	{
 		QString vtt = varstartype;
 		if (s->getComponentIds() || wdsObs>0)
-			vtt = QString("%1, %2").arg(varstartype, startype);
+			vtt = QString("%1, %2").arg(startype, varstartype);
 		return vtt;
 	}
 	else
@@ -267,47 +262,24 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << q_("Additional catalog numbers: ") << extraCat.join(", ") << "<br/>";
 	}
 
-	bool ebsFlag = false;
+	QString stype = getObjectType();
+	bool ebsFlag = stype.contains("eclipsing binary system");
 	if (flags&ObjectType)
 	{
-		QString varstartype = "";
-		QString startype = "";
-		if(!varType.isEmpty())
-		{
-			// see also http://www.sai.msu.su/gcvs/gcvs/vartype.htm
-			if (QString("BE FU GCAS I IA IB IN INA INB INT IT IN(YY) IS ISA ISB RCB RS SDOR UV UVN WR").contains(varType))
-				varstartype = q_("eruptive variable star");
-			else if (QString("ACYG BCEP BCEPS BLBOO CEP CEP(B) CW CWA CWB DCEP DCEPS DSCT DSCTC GDOR L LB LC LPB M PVTEL RPHS RR RR(B) RRAB RRC RV RVA RVB SR SRA SRB SRC SRD SXPHE ZZ ZZA ZZB ZZO").contains(varType))
-				varstartype = q_("pulsating variable star");
-			else if (QString("ACV, ACVO, BY, ELL, FKCOM, PSR, SXARI").contains(varType))
-				varstartype = q_("rotating variable star");
-			else if (QString("N NA NB NC NL NR SN SNI SNII UG UGSS UGSU UGZ ZAND").contains(varType))
-				varstartype = q_("cataclysmic variable star");
-			else if (QString("E EA EB EP EW GS PN RS WD WR AR D DM DS DW K KE KW SD E: E:/WR E/D E+LPB: EA/D EA/D+BY EA/RS EA/SD EA/SD: EA/GS EA/GS+SRC EA/DM EA/WR EA+LPB EA+LPB: EA+DSCT EA+BCEP: EA+ZAND EA+ACYG EA+SRD EB/GS EB/DM EB/KE EB/KE: EW/KE EA/AR/RS EA/GS/D EA/D/WR").contains(varType))
-			{
-				varstartype = q_("eclipsing binary system");
-				ebsFlag = true;
-			}
-			else
-			// XXX intense variable X-ray sources "AM, X, XB, XF, XI, XJ, XND, XNG, XP, XPR, XPRM, XM)"
-			// XXX other symbols "BLLAC, CST, GAL, L:, QSO, S,"
-				varstartype = q_("variable star");
-		}
-
-		if (s->getComponentIds() || wdsObs>0)
-			startype = q_("double star");
-		else
-			startype = q_("star");
-
 		if (!varType.isEmpty())
 		{
-			QString vtt = varstartype;
-			if (s->getComponentIds() || wdsObs>0)
-				vtt = QString("%1, %2").arg(varstartype, startype);
-			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), vtt, varType) << "<br />";
+			if (stype.contains(","))
+			{
+				QStringList stypesI18n, stypes = stype.split(",");
+				for (const auto &st: stypes) { stypesI18n << q_(st.trimmed()); }
+				oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), stypesI18n.join(", "), varType) << "<br />";
+			}
+			else
+				oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_(stype), varType) << "<br />";
 		}
 		else
-			oss << QString("%1: <b>%2</b>").arg(q_("Type"), startype) << "<br />";
+			oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(stype)) << "<br />";
+
 		oss << getExtraInfoStrings(flags&ObjectType).join("");
 	}
 
