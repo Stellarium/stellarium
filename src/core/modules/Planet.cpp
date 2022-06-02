@@ -134,7 +134,7 @@ const QMap<Planet::PlanetType, QString> Planet::pTypeMap = // Maps type to engli
 	{ Planet::isOCO,	N_("Oort cloud object") },
 	{ Planet::isSednoid,	N_("sednoid") },
 	{ Planet::isInterstellar,N_("interstellar object") },
-	{ Planet::isUNDEFINED,	N_("UNDEFINED") } // something must be broken before we ever see this!
+	{ Planet::isUNDEFINED,	"UNDEFINED" } // something must be broken before we ever see this!
 };
 
 const QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap =
