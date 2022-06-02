@@ -83,6 +83,47 @@ QString StarWrapper1::getID(void) const
 	return hip;
 }
 
+QString StarWrapper1::getObjectType() const
+{
+	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
+	const int wdsObs = StarMgr::getWdsLastObservation(s->getHip());
+	QString varstartype = "";
+	QString startype = "";
+	if(!varType.isEmpty())
+	{
+		// see also http://www.sai.msu.su/gcvs/gcvs/vartype.htm
+		if (QString("BE FU GCAS I IA IB IN INA INB INT IT IN(YY) IS ISA ISB RCB RS SDOR UV UVN WR").contains(varType))
+			varstartype = "eruptive variable star";
+		else if (QString("ACYG BCEP BCEPS BLBOO CEP CEP(B) CW CWA CWB DCEP DCEPS DSCT DSCTC GDOR L LB LC LPB M PVTEL RPHS RR RR(B) RRAB RRC RV RVA RVB SR SRA SRB SRC SRD SXPHE ZZ ZZA ZZB ZZO").contains(varType))
+			varstartype = "pulsating variable star";
+		else if (QString("ACV, ACVO, BY, ELL, FKCOM, PSR, SXARI").contains(varType))
+			varstartype = "rotating variable star";
+		else if (QString("N NA NB NC NL NR SN SNI SNII UG UGSS UGSU UGZ ZAND").contains(varType))
+			varstartype = "cataclysmic variable star";
+		else if (QString("E EA EB EP EW GS PN RS WD WR AR D DM DS DW K KE KW SD E: E:/WR E/D E+LPB: EA/D EA/D+BY EA/RS EA/SD EA/SD: EA/GS EA/GS+SRC EA/DM EA/WR EA+LPB EA+LPB: EA+DSCT EA+BCEP: EA+ZAND EA+ACYG EA+SRD EB/GS EB/DM EB/KE EB/KE: EW/KE EA/AR/RS EA/GS/D EA/D/WR").contains(varType))
+			varstartype = "eclipsing binary system";
+		else
+		// XXX intense variable X-ray sources "AM, X, XB, XF, XI, XJ, XND, XNG, XP, XPR, XPRM, XM)"
+		// XXX other symbols "BLLAC, CST, GAL, L:, QSO, S,"
+			varstartype = "variable star";
+	}
+
+	if (s->getComponentIds() || wdsObs>0)
+		startype = "double star";
+	else
+		startype = "star";
+
+	if (!varType.isEmpty())
+	{
+		QString vtt = varstartype;
+		if (s->getComponentIds() || wdsObs>0)
+			vtt = QString("%1, %2").arg(varstartype, startype);
+		return vtt;
+	}
+	else
+		return startype;
+}
+
 QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	QString str;

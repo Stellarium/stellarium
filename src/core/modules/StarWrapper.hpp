@@ -151,6 +151,7 @@ public:
 	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
 	virtual QString getID(void) const Q_DECL_OVERRIDE;
+	virtual QString getObjectType() const Q_DECL_OVERRIDE;
 };
 
 class StarWrapper2 : public StarWrapper<Star2>
