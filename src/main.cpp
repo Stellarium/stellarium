@@ -219,17 +219,6 @@ int main(int argc, char **argv)
 	// output, such as --help and --version
 	CLIProcessor::parseCLIArgsPreConfig(argList);
 
-	#ifdef Q_OS_WIN
-	if (qApp->property("onetime_angle_mode").isValid())
-	{
-		app.setAttribute(Qt::AA_UseOpenGLES, true);
-	}
-	if (qApp->property("onetime_mesa_mode").isValid())
-	{
-		app.setAttribute(Qt::AA_UseSoftwareOpenGL, true);
-	}
-	#endif
-
 	// Start logging.
 	StelLogger::init(StelFileMgr::getUserDir()+"/log.txt");
 	StelLogger::writeLog(argStr);

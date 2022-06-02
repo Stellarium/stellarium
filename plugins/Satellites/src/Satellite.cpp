@@ -324,7 +324,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	}
 
 	if (flags & ObjectType)
-		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("artificial satellite"))  << "<br/>";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getObjectType()))  << "<br/>";
 	
 	if ((flags & Magnitude) && (stdMag<99. || RCS>0.) && (visibility==gSatWrapper::VISIBLE))
 	{

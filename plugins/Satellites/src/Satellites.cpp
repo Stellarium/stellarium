@@ -1418,7 +1418,8 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 
 	for (const auto& name : qAsConst(groups))
 	{
-		QVariantMap communications = groupComms.value(name, QVariantMap());
+		communications.clear();
+		communications = groupComms.value(name, QVariantMap());
 		if (!communications.isEmpty())
 		{
 			for (const auto& comm : communications.value("comms").toList())
@@ -2107,7 +2108,8 @@ void Satellites::updateFromOnlineSources()
 
 	progressBar->setValue(0);
 	progressBar->setRange(0, updateUrls.size());
-	progressBar->setFormat("TLE download %v/%m");
+	// TRANSLATORS: The full phrase is 'TLE download %VALUE%/%MAX%' in progress bar
+	progressBar->setFormat(QString("%1 %v/%m").arg(q_("TLE download")));
 
 	for (auto url : qAsConst(updateUrls))
 	{

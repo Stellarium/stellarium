@@ -140,6 +140,10 @@ public:
 	{
 		return NOMENCLATURE_TYPE;
 	}
+	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	{
+		return getNomenclatureTypeLatinString(nType);
+	}
 
 	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{

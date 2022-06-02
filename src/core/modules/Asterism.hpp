@@ -21,6 +21,7 @@
 #define ASTERISM_HPP
 
 #include "StelObject.hpp"
+#include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "StelFader.hpp"
 #include "StelSphereGeometry.hpp"
@@ -59,6 +60,7 @@ private:
 	//! Get the module/object type string.
 	//! @return "Asterism"
 	virtual QString getType() const Q_DECL_OVERRIDE {return ASTERISM_TYPE;}
+	virtual QString getObjectType() const Q_DECL_OVERRIDE {return N_("asterism"); }
 	virtual QString getID() const Q_DECL_OVERRIDE { return abbreviation; }
 
 	//! observer centered J2000 coordinates.

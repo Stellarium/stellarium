@@ -740,7 +740,7 @@ QSurfaceFormat StelMainView::getDesiredGLFormat() const
 	}
 
 	// Note: this only works if --mesa-mode was given on the command line. Auto-switch to Mesa or the driver name apparently cannot be detected at this early stage.
-	bool isMesa= qApp->property("onetime_mesa_mode").isValid() && (qApp->property("onetime_mesa_mode")==true);
+	const bool isMesa= (QString(getenv("QT_OPENGL"))=="software");
 
 	//request some sane buffer formats
 	fmt.setRedBufferSize(8);

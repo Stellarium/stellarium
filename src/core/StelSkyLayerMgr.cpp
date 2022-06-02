@@ -194,9 +194,17 @@ void StelSkyLayerMgr::loadingStateChanged(bool b)
 		Q_ASSERT(elem->progressBar==Q_NULLPTR);
 		elem->progressBar = StelApp::getInstance().addProgressBar();
 		QString serverStr = elem->layer->getShortServerCredits();
-		if (!serverStr.isEmpty())
-			serverStr = " from "+serverStr;
-		elem->progressBar->setFormat("Loading "+elem->layer->getShortName()+serverStr);
+		QString shortName = elem->layer->getShortName();
+		if (serverStr.isEmpty())
+		{
+			// TRANSLATORS: The full phrase is "Loading '%SHORT_NAME%'" in progress bar
+			elem->progressBar->setFormat(q_("Loading '%1'").arg(shortName));
+		}
+		else
+		{
+			// TRANSLATORS: The full phrase is "Loading '%SHORT_NAME%' from %URL%" in progress bar
+			elem->progressBar->setFormat(q_("Loading '%1' from %2").arg(shortName, serverStr));
+		}
 		elem->progressBar->setRange(0,100);
 	}
 	else

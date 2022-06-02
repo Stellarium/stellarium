@@ -28,6 +28,7 @@
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelFader.hpp"
+#include "StelTranslator.hpp"
 
 class StelPainter;
 
@@ -48,6 +49,12 @@ public:
 	virtual QString getType(void) const Q_DECL_OVERRIDE
 	{
 		return CUSTOMOBJECT_TYPE;
+	}
+
+	//! Get the type of object
+	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	{
+		return (isMarker ? N_("custom marker") : N_("custom object"));
 	}
 
 	virtual QString getID(void) const Q_DECL_OVERRIDE

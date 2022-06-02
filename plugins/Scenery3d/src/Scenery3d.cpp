@@ -435,7 +435,7 @@ void Scenery3d::loadScene(const SceneInfo& scene)
 	// Loading may take a while...
 	showMessage(QString(q_("Loading scene. Please be patient!")));
 	progressBar = StelApp::getInstance().addProgressBar();
-	progressBar->setFormat(QString(q_("Loading scene '%1'")).arg(scene.name));
+	progressBar->setFormat(q_("Loading scene '%1'").arg(scene.name));
 	progressBar->setValue(0);
 
 	currentLoadScene = scene;

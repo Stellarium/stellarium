@@ -35,6 +35,7 @@
 
 #include "StelApp.hpp"
 #include "StelObject.hpp"
+#include "StelTranslator.hpp"
 #include "common/InterpolatedPosition.hpp"
 
 class StelCore;
@@ -75,6 +76,7 @@ public:
 	//! @return a QString containing an HMTL encoded description of the Telescope.
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 	QString getType(void) const Q_DECL_OVERRIDE {return TELESCOPECLIENT_TYPE;}
+	QString getObjectType(void) const Q_DECL_OVERRIDE {return N_("telescope");}
 	QString getID() const Q_DECL_OVERRIDE {return name;}
 		
 	// Methods specific to telescope

@@ -27,7 +27,6 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelTranslator.hpp"
 #include "ConstellationMgr.hpp"
 
 #include <algorithm>
@@ -287,7 +286,7 @@ QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup
 	}
 
 	if (flags&ObjectType)
-		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("constellation")) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getObjectType())) << "<br />";
 
 	getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);

@@ -609,28 +609,20 @@ void SatellitesDialog::updateSatelliteData()
 		QString id = index.data(Qt::UserRole).toString();
 
 		float stdMagnitude = index.data(SatStdMagnitudeRole).toFloat();
-		QString stdMagString = dash;
-		if (stdMagnitude<99.f)
-			stdMagString = QString::number(stdMagnitude, 'f', 2);
+		QString stdMagString = (stdMagnitude<99.f) ? QString::number(stdMagnitude, 'f', 2) : dash;
 		float rcs = index.data(SatRCSRole).toFloat();
-		QString rcsString = dash;
-		if (rcs > 0.f)
-			rcsString = QString::number(rcs, 'f', 3);
+		QString rcsString = (rcs > 0.f) ? QString::number(rcs, 'f', 3) : dash;
 		int perigee = qRound(index.data(SatPerigeeRole).toFloat());
-		QString perigeeString = dash;
-		if (perigee>0)
-			perigeeString = QString::number(perigee);
+		QString perigeeString = (perigee>0) ? QString::number(perigee) : dash;
 		int apogee = qRound(index.data(SatApogeeRole).toFloat());
-		QString apogeeString = dash;
-		if (apogee>0)
-			apogeeString = QString::number(apogee);
+		QString apogeeString = (apogee>0) ? QString::number(apogee) : dash;
 		float period = index.data(SatPeriodRole).toFloat();
-		QString periodString = dash;
-		if (period>0.f)
-			periodString = QString::number(period, 'f', 2);
+		QString periodString = (period>0.f) ? QString::number(period, 'f', 2) : dash;
+		QString cosparID = index.data(SatCosparIDRole).toString();
+
 		ui->nameEdit->setText(index.data(Qt::DisplayRole).toString());
 		ui->noradNumberEdit->setText(id);
-		ui->cosparNumberEdit->setText(index.data(SatCosparIDRole).toString());
+		ui->cosparNumberEdit->setText(cosparID.isEmpty() ? dash : cosparID);
 		// NOTE: Description is deliberately displayed untranslated!
 		ui->descriptionTextEdit->setText(index.data(SatDescriptionRole).toString());
 		ui->stdMagnitudeLineEdit->setText(stdMagString);
@@ -880,10 +872,7 @@ void SatellitesDialog::showUpdateState(Satellites::UpdateState state)
 	}
 }
 
-void SatellitesDialog::showUpdateCompleted(int updated,
-					   int total,
-					   int added,
-					   int missing)
+void SatellitesDialog::showUpdateCompleted(int updated, int total, int added, int missing)
 {
 	Satellites* plugin = GETSTELMODULE(Satellites);
 	QString message;
@@ -1124,13 +1113,8 @@ void SatellitesDialog::populateFilterMenu()
 	ui->groupFilterCombo->insertItem(0, q_("[all]"), QVariant("all"));	
 
 	// Restore current selection
-	index = 0;
-	if (!selectedId.isEmpty())
-	{
-		index = ui->groupFilterCombo->findData(selectedId);
-		if (index < 0)
-			index = 0;
-	}
+	index = (!selectedId.isEmpty()) ? qMax(0, ui->groupFilterCombo->findData(selectedId)) : 0;
+
 	ui->groupFilterCombo->setCurrentIndex(index);
 	ui->groupFilterCombo->blockSignals(false);
 }
