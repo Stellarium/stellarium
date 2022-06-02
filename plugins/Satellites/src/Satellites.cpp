@@ -2092,8 +2092,8 @@ void Satellites::updateFromOnlineSources()
 
 	progressBar->setValue(0);
 	progressBar->setRange(0, updateUrls.size());
-	// TRANSLATORS: The full phrase is 'TLE download %VALUE%/%MAX%' in progress bar
-	progressBar->setFormat(QString("%1 %v/%m").arg(q_("TLE download")));
+	// TRANSLATORS: The full phrase is 'Loading TLE %VALUE%/%MAX%' in progress bar
+	progressBar->setFormat(QString("%1 %v/%m").arg(q_("Loading TLE")));
 
 	for (auto url : qAsConst(updateUrls))
 	{
