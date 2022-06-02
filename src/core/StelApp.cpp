@@ -355,7 +355,7 @@ void StelApp::setupNetworkProxy()
 				// http://proxy.loc:3128/
 				// http://2001:62a:4:203:6ab5:99ff:fef2:560b:3128/
 				// http://foo:bar@2001:62a:4:203:6ab5:99ff:fef2:560b:3128/
-				QRegularExpression pre("^([^:]+://)?(?:([^:]+):([^@]*)@)?(.+):([\\d]+)");
+				static const QRegularExpression pre("^([^:]+://)?(?:([^:]+):([^@]*)@)?(.+):([\\d]+)");
 				QRegularExpressionMatch preMatch=pre.match(proxyString);
 				if (proxyString.indexOf(pre) >= 0)
 				{
@@ -406,7 +406,7 @@ void StelApp::initScriptMgr()
 	scriptMgr->addModules();
 
 #ifdef USE_STATIC_PLUGIN_CALENDARS
-	Calendars *cal=GETSTELMODULE(Calendars);
+	Calendars *cal=GETSTELMODULE_SILENT(Calendars);
 	if (cal)
 		cal->makeCalendarsScriptable(scriptMgr);
 #endif
@@ -699,7 +699,8 @@ void StelApp::initPlugIns()
 {
 	// Load dynamically all the modules found in the modules/ directories
 	// which are configured to be loaded at startup
-	for (const auto& i : moduleMgr->getPluginsList())
+	const QList<StelModuleMgr::PluginDescriptor> pluginList=moduleMgr->getPluginsList();
+	for (const auto& i : pluginList)
 	{
 		if (i.loadAtStartup==false)
 			continue;
@@ -1176,5 +1177,5 @@ void StelApp::setAppFont(QFont font)
 QString StelApp::getVersion() const
 {
 	QStringList ver = StelUtils::getApplicationVersion().split(".");
-	return QString("%1.%2.%3").arg(ver[0]).arg(ver[1]).arg(ver[2]);
+	return QString("%1.%2.%3").arg(ver[0], ver[1], ver[2]);
 }

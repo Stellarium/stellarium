@@ -171,6 +171,10 @@ public:
 	//! - redshift
 	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
 	virtual QString getType() const Q_DECL_OVERRIDE {return NEBULA_TYPE;}
+	virtual QString getObjectType() const Q_DECL_OVERRIDE
+	{
+		return typeEnglishStringMap.value(nType, "undocumented type");
+	}
 	virtual QString getID() const Q_DECL_OVERRIDE {return getDSODesignation(); } //this depends on the currently shown catalog flags, should this be changed?
 	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const Q_DECL_OVERRIDE;
 	virtual double getCloseViewFov(const StelCore* core = Q_NULLPTR) const Q_DECL_OVERRIDE;
@@ -338,6 +342,7 @@ private:
 	static Vec3f labelColor;				// The color of labels
 	static QMap<Nebula::NebulaType, Vec3f>hintColorMap;	// map for rapid lookup. Updated by NebulaMgr whenever a color changes.
 	static QMap<Nebula::NebulaType, QString> typeStringMap; // map that keeps type strings for NebulaType. Must be retranslated on language change.
+	static const QMap<Nebula::NebulaType, QString> typeEnglishStringMap;
 	static void buildTypeStringMap();			// (Re-)Fills typeStringMap. Called by NebulaMgr when required.
 
 	static bool drawHintProportional;     // scale hint with nebula size?

@@ -306,7 +306,8 @@ void HelpDialog::updateHelpText(void) const
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	typedef QPair<QString, QString> KeyDescription;
 	QVector<KeyDescription> groups;
-	for (const auto &group : actionMgr->getGroupList())
+	const QStringList groupList = actionMgr->getGroupList();
+	for (const auto &group : groupList)
 	{
 		groups.append(KeyDescription(q_(group), group));
 	}
@@ -315,7 +316,8 @@ void HelpDialog::updateHelpText(void) const
 	for (const auto &group : groups)
 	{
 		QVector<KeyDescription> descriptions;
-		for (auto* action : actionMgr->getActionList(group.second))
+		const QList<StelAction *>actionList = actionMgr->getActionList(group.second);
+		for (auto* action : actionList)
 		{
 			if (action->getShortcut().isEmpty())
 				continue;
@@ -367,7 +369,7 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "</table>";
 
 	// Regexp to replace {text} with an HTML link.
-	QRegularExpression a_rx("[{]([^{]*)[}]");
+	static const QRegularExpression a_rx("[{]([^{]*)[}]");
 
 	// WARNING! Section titles are re-used above!
 	htmlText += "<h2 id=\"links\">" + q_("Further Reading").toHtmlEscaped() + "</h2>\n";
@@ -453,7 +455,7 @@ void HelpDialog::updateAboutText(void) const
 	contributors.sort();
 
 	// Regexp to replace {text} with an HTML link.
-	QRegularExpression a_rx("[{]([^{]*)[}]");
+	static const QRegularExpression a_rx("[{]([^{]*)[}]");
 
 	// populate About tab
 	QString newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";

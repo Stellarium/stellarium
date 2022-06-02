@@ -149,12 +149,17 @@ public:
 	//! - set : time of set in HM format
 	//! - set-dhr : time of set in decimal hours
 	//! - name : english name of the object
-	//! - localized-name : localized name	
+	//! - localized-name : localized name
+	//! - type: type of object' class
+	//! - object-type: English lowercase name of the type of the object
 	//! @note Coordinate values may need modulo operation to bring them into ranges [0..360].
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 
 	//! Return object's type. It should be the name of the class.
 	virtual QString getType() const = 0;
+
+	//! Return object's type. It should be English lowercase name of the type of the object.
+	virtual QString getObjectType() const = 0;
 
 	//! Returns a unique identifier for this object.
 	//! The ID should be unique for all objects of the same type,

@@ -365,7 +365,8 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 void StelScriptMgr::initActions()
 {
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
-	for (const auto& script : getScriptList())
+	const QStringList scriptList = getScriptList();
+	for (const auto& script : scriptList)
 	{
 		QString shortcut = getShortcut(script);
 		QString actionId = "actionScript/" + script;
@@ -382,7 +383,8 @@ void StelScriptMgr::addModules()
 {
 	// Add all the StelModules into the script engine
 	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
-	for (auto* m : mmgr->getAllModules())
+	const QList allModules = mmgr->getAllModules();
+	for (auto* m : allModules)
 	{
 		QScriptValue objectValue = engine->newQObject(m);
 		engine->globalObject().setProperty(m->objectName(), objectValue);
@@ -400,7 +402,7 @@ QStringList StelScriptMgr::getScriptList() const
 	QStringList scriptFiles;
 
 	QSet<QString> files = StelFileMgr::listContents("scripts", StelFileMgr::File, true);
-	QRegularExpression fileRE("^.*\\.ssc$");
+	static const QRegularExpression fileRE("^.*\\.ssc$");
 	for (const auto& f : files)
 	{
 		if (fileRE.match(f).hasMatch())
@@ -419,7 +421,7 @@ QString StelScriptMgr::runningScriptId() const
 	return scriptFileName;
 }
 
-QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText) const
+QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText)
 {
 	QFile file(StelFileMgr::findFile("scripts/" + s, StelFileMgr::File));
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -449,7 +451,7 @@ QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QS
 	return notFoundText;
 }
 
-QString StelScriptMgr::getHtmlDescription(const QString &s, bool generateDocumentTags) const
+QString StelScriptMgr::getHtmlDescription(const QString &s, bool generateDocumentTags)
 {
 	QString html;
 	if (generateDocumentTags)
@@ -457,7 +459,8 @@ QString StelScriptMgr::getHtmlDescription(const QString &s, bool generateDocumen
 	html += "<h2>" + q_(getName(s).trimmed()) + "</h2>";
 	QString d = getDescription(s).trimmed();
 	d.replace("\n", "<br />");
-	d.replace(QRegularExpression("\\s{2,}"), " ");
+	static const QRegularExpression spaceExp("\\s{2,}");
+	d.replace(spaceExp, " ");
 	html += "<p>" + q_(d) + "</p>";
 	html += "<p>";
 
@@ -489,33 +492,33 @@ QString StelScriptMgr::getHtmlDescription(const QString &s, bool generateDocumen
 	return html;
 }
 
-QString StelScriptMgr::getName(const QString& s) const
+QString StelScriptMgr::getName(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "Name", s);
 }
 
-QString StelScriptMgr::getAuthor(const QString& s) const
+QString StelScriptMgr::getAuthor(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "Author");
 }
 
-QString StelScriptMgr::getLicense(const QString& s) const
+QString StelScriptMgr::getLicense(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "License", "");
 }
 
-QString StelScriptMgr::getVersion(const QString& s) const
+QString StelScriptMgr::getVersion(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "Version", "");
 }
 
 
-QString StelScriptMgr::getShortcut(const QString& s) const
+QString StelScriptMgr::getShortcut(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "Shortcut", "");
 }
 
-QString StelScriptMgr::getDescription(const QString& s) const
+QString StelScriptMgr::getDescription(const QString& s)
 {
 	QFile file(StelFileMgr::findFile("scripts/" + s, StelFileMgr::File));
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -532,9 +535,9 @@ QString StelScriptMgr::getDescription(const QString& s) const
 
 	QString desc = "";
 	bool inDesc = false;
-	QRegularExpression descExp("^\\s*//\\s*Description:\\s*([^\\s].+)\\s*$");
-	QRegularExpression descNewlineExp("^\\s*//\\s*$");
-	QRegularExpression descContExp("^\\s*//\\s*([^\\s].*)\\s*$");
+	static const QRegularExpression descExp("^\\s*//\\s*Description:\\s*([^\\s].+)\\s*$");
+	static const QRegularExpression descNewlineExp("^\\s*//\\s*$");
+	static const QRegularExpression descContExp("^\\s*//\\s*([^\\s].*)\\s*$");
 	while (!textStream.atEnd())
 	{
 		QString line = textStream.readLine();
@@ -727,7 +730,7 @@ void StelScriptMgr::resumeScript()
 	agent->setPauseScript(false);
 }
 
-double StelScriptMgr::getScriptRate() const
+double StelScriptMgr::getScriptRate()
 {
 	return engine->globalObject().property("scriptRateReadOnly").toNumber();
 }
@@ -817,7 +820,7 @@ bool StelScriptMgr::preprocessScript(const QString fileName, const QString &inpu
 	
 void StelScriptMgr::expand(const QString fileName, const QString &input, QString &output, const QString &scriptDir, int &errLoc){
 	QStringList lines = input.split("\n");
-	QRegularExpression includeRe("^include\\s*\\(\\s*\"([^\"]+)\"\\s*\\)\\s*;\\s*(//.*)?$");
+	static const QRegularExpression includeRe("^include\\s*\\(\\s*\"([^\"]+)\"\\s*\\)\\s*;\\s*(//.*)?$");
 	int curline = 0;
 	for (const auto& line : lines)
 	{

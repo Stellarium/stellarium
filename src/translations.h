@@ -664,6 +664,9 @@ class Translations
 		N_("Computer");
 		N_("&Open");
 		N_("&Save");
+		N_("Save");
+		N_("Save As:");
+		N_("Tags:");
 		N_("File &name:");
 		N_("Copy &Link Location");
 		N_("Abort");
@@ -696,6 +699,8 @@ class Translations
 		N_("&Rename");
 		N_("&Delete");
 		N_("&New Folder");
+		N_("New Folder");
 		N_("Show &hidden files");
+		N_("Search");
 	}
 };

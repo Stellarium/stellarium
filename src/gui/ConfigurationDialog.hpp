@@ -32,6 +32,7 @@ class QNetworkAccessManager;
 class QListWidgetItem;
 class StelGui;
 class CustomDeltaTEquationDialog;
+class ConfigureScreenshotsDialog;
 
 class ConfigurationDialog : public StelDialog
 {
@@ -137,6 +138,8 @@ private slots:
 	void setDeltaTAlgorithmDescription();
 	void showCustomDeltaTEquationDialog();
 
+	void showConfigureScreenshotsDialog();
+
 	void populateDateFormatsList();
 	void setDateFormat();
 
@@ -181,8 +184,11 @@ private:
 	StelGui* gui;
 
 	CustomDeltaTEquationDialog* customDeltaTEquationDialog;
+	ConfigureScreenshotsDialog * configureScreenshotsDialog;
 
 	int savedProjectionType;
+
+	void populateTooltips();
 	
 	//! Set the displayed fields checkboxes from the current displayed fields.
 	void updateSelectedInfoCheckBoxes();

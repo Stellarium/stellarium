@@ -33,7 +33,7 @@ bool readStelIniFile(QIODevice &device, QSettings::SettingsMap &map)
 	const QString& data = QString::fromUtf8(device.readAll().constData());
 
 	// Split by a RE which should match any platform's line breaking rules
-	QRegularExpression matchLbr("[\\n\\r]+");
+	static const QRegularExpression matchLbr("[\\n\\r]+");
 	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
 	const QStringList& lines = data.split(matchLbr, Qt::SkipEmptyParts);
 	#else
@@ -41,11 +41,11 @@ bool readStelIniFile(QIODevice &device, QSettings::SettingsMap &map)
 	#endif
 
 	QString currentSection = "";
-	QRegularExpression sectionRe("^\\[(.+)\\]$");
-	QRegularExpression keyRe("^([^=]+)\\s*=\\s*(.+)$");
-	QRegularExpression cleanComment("[#;].*$");
-	QRegularExpression initialWhiteSpace("^\\s+");
-	QRegularExpression appendedWhitespace("\\s+$");
+	static const QRegularExpression sectionRe("^\\[(.+)\\]$");
+	static const QRegularExpression keyRe("^([^=]+)\\s*=\\s*(.+)$");
+	static const QRegularExpression cleanComment("[#;].*$");
+	static const QRegularExpression initialWhiteSpace("^\\s+");
+	static const QRegularExpression appendedWhitespace("\\s+$");
 
 	for(int i=0; i<lines.size(); i++)
 	{
@@ -90,35 +90,41 @@ bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map)
 	const QString stelEndl = StelUtils::getEndLineChar();
 
 	int maxKeyWidth = 30;
-	QRegularExpression reKeyXt("^([^/]+)/(.+)$");  // for extracting keys/values
+	static const QRegularExpression reKeyXt("^([^/]+)/(.+)$");  // for extracting keys/values
 
 	// first go over map and find longest key length
-	for (auto &key : map.keys())
+	QSettings::SettingsMap::const_iterator it=map.constBegin();
+	while (it!=map.constEnd())
 	{
+		QString key=it.key();
 		QRegularExpressionMatch match=reKeyXt.match(key);
 		if (match.hasMatch())
 			key = match.captured(2);
 		if (key.size() > maxKeyWidth) maxKeyWidth = key.size();
+		it++;
 	}
 
 	// OK, this time actually write to the file - first non-section values
 	QString outputLine;
-	for (auto &key : map.keys())
+	it=map.constBegin();
+	while (it != map.constEnd())
 	{
-		QRegularExpressionMatch match=reKeyXt.match(key);
+		QRegularExpressionMatch match=reKeyXt.match(it.key());
 		if (!match.hasMatch())
 		{
 			// this is for those keys without a section
-			outputLine = QString("%1").arg(key,0-maxKeyWidth) + " = " + map[key].toString() + stelEndl;
+			outputLine = QString("%1 = %2").arg(it.key(),0-maxKeyWidth).arg(it.value().toString()) + stelEndl;
 			device.write(outputLine.toUtf8());
 		}
+		it++;
 	}
 
 	// Now those values with sections.
 	QString currentSection("");
-	for (auto &key : map.keys())
+	it=map.constBegin();
+	while (it != map.constEnd())
 	{
-		QRegularExpressionMatch match=reKeyXt.match(key);
+		QRegularExpressionMatch match=reKeyXt.match(it.key());
 		if (match.hasMatch())
 		{
 			QString section = match.captured(1); QString sectionKey = match.captured(2);
@@ -131,10 +137,10 @@ bool writeStelIniFile(QIODevice &device, const QSettings::SettingsMap &map)
 				outputLine = stelEndl + "[" + currentSection + "]" + stelEndl;
 				device.write(outputLine.toUtf8());
 			}
-			outputLine = QString("%1").arg(sectionKey,0-maxKeyWidth) + " = " + map[key].toString() + stelEndl;
+			outputLine = QString("%1 = %2").arg(sectionKey,0-maxKeyWidth).arg(it.value().toString()) + stelEndl;
 			device.write(outputLine.toUtf8());
 		}
+		it++;
 	}
 	return true;
 }
-

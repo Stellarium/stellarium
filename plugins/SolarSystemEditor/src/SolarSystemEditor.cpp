@@ -652,7 +652,6 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 		result.insert("orbit_ArgOfPericenter", argumentOfPerihelion);
 		result.insert("orbit_AscendingNode", longitudeOfTheAscendingNode);
 		result.insert("orbit_Inclination", inclination);
-
 	}
 	else
 	{

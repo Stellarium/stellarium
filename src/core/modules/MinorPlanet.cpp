@@ -255,7 +255,7 @@ void MinorPlanet::translateName(const StelTranslator &translator)
 
 QString MinorPlanet::renderProvisionalDesignationinHtml(QString plainTextName)
 {
-	QRegularExpression provisionalDesignationPattern("^(\\d{4}\\s[A-Z]{2})(\\d*)$");
+	static const QRegularExpression provisionalDesignationPattern("^(\\d{4}\\s[A-Z]{2})(\\d*)$");
 	QRegularExpressionMatch match=provisionalDesignationPattern.match(plainTextName);
 	if (plainTextName.indexOf(provisionalDesignationPattern) == 0)
 	{

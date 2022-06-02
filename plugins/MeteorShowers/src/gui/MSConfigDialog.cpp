@@ -25,10 +25,12 @@
 #include "StelModuleMgr.hpp"
 #include "ui_MSConfigDialog.h"
 #include "StelMainView.hpp"
+
 MSConfigDialog::MSConfigDialog(MeteorShowersMgr* mgr)
 	: StelDialog("MeteorShowers")
 	, m_mgr(mgr)
 	, m_ui(new Ui_MSConfigDialog)
+	, m_updateTimer(Q_NULLPTR)
 {
 }
 

@@ -78,9 +78,7 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	starAltNames = map.value("starAltNames").toString();
 	RA = StelUtils::getDecAngle(map.value("RA").toString());
 	DE = StelUtils::getDecAngle(map.value("DE").toString());
-	StelUtils::spheToRect(RA, DE, XYZ);		
-	double RAdd = RA * M_180_PI;
-	double DEdd = DE * M_180_PI;
+	StelUtils::spheToRect(RA, DE, XYZ);
 	distance = map.value("distance").toDouble();
 	stype = map.value("stype").toString();
 	smass = map.value("smass").toDouble();
@@ -155,10 +153,9 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 			yearDiscoveryList.append(p.discovered);
 			effectiveTempHostStarList.append(effectiveTemp);
 			metallicityHostStarList.append(smetal);
-			if (Vmag<99)
-				vMagHostStarList.append(Vmag);
-			raHostStarList.append(RAdd);
-			decHostStarList.append(DEdd);
+			vMagHostStarList.append(Vmag); // Vmag may be 99 as "invalid" marker. Still, append it!
+			raHostStarList.append(StelUtils::fmodpos(RA * M_180_PI, 360.)); // Fix some stars with negative RA
+			decHostStarList.append(DE * M_180_PI);
 			distanceHostStarList.append(distance);
 			massHostStarList.append(smass);
 			radiusHostStarList.append(sradius);
@@ -223,7 +220,7 @@ float Exoplanet::getSelectPriority(const StelCore *core) const
 
 QString Exoplanet::getNameI18n(void) const
 {
-	// Use SkyTranslator for translation star names
+	// Use SkyTranslator for translation of star names
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	QString name = trans.qtranslate(designation);
 	if (!starProperName.isEmpty())
@@ -336,7 +333,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	{
 		//TRANSLATORS: Unit of measure for distance - Light Years
 		QString ly = qc_("ly", "distance");
-		oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance/0.306601, 'f', 2), ly) << "<br />";
+		oss << QString("%1: %2 %3").arg(q_("Distance"), QString::number(distance*PARSEC_LY, 'f', 2), ly) << "<br />";
 	}
 
 	if (flags&Extra)
@@ -363,13 +360,13 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 			QString planetNameLabel = QString("<td style=\"%2\">%1</td>").arg(q_("Exoplanet"), qss);
 			QString planetProperNameLabel = QString("<td style=\"%2\">%1</td>").arg(q_("Name"), qss);
 			QString periodLabel = QString("<td style=\"%3\">%1 (%2)</td>").arg(q_("Period"), qc_("days", "period"),qss);
-			QString massLabel = QString("<td style=\"%3\">%1 (M<sub>%2</sub>)</td>").arg(q_("Mass"), QChar(0x2643), qss);
+			QString massLabel = QString("<td style=\"%3\">%1 (M<sub>%2</sub>)</td>").arg(q_("Mass"), QChar(0x2643), qss); // QChar 0x2643=Jupiter
 			QString radiusLabel = QString("<td style=\"%3\">%1 (R<sub>%2</sub>)</td>").arg(q_("Radius"), QChar(0x2643), qss);
 			QString semiAxisLabel = QString("<td style=\"%3\">%1 (%2)</td>").arg(q_("Semi-Major Axis"), qc_("AU", "distance, astronomical unit"), qss);
 			QString eccentricityLabel = QString("<td style=\"%2\">%1</td>").arg(q_("Eccentricity"), qss);
 			QString inclinationLabel = QString("<td style=\"%3\">%1 (%2)</td>").arg(q_("Inclination"), QChar(0x00B0), qss);
 			QString angleDistanceLabel = QString("<td style=\"%2\">%1 (\")</td>").arg(q_("Angle Distance"), qss);
-			QString discoveredLabel = QString("<td style=\"%2\">%1</td>").arg(q_("Discovered year"), qss);
+			QString discoveredLabel = QString("<td style=\"%2\">%1</td>").arg(q_("Discovery year"), qss);
 			QString detectionMethodLabel = QString("<td style=\"%2\">%1</td>").arg(q_("Detection method"), qss);
 			QString pClassLabel = QString("<td style=\"%2\">%1</td>").arg(q_("Planetary class"), qss);
 			//TRANSLATORS: Full phrase is "Equilibrium Temperature"
@@ -569,7 +566,7 @@ QVariantMap Exoplanet::getInfoMap(const StelCore *core) const
 QString Exoplanet::getPlanetaryClassI18n(QString ptype) const
 {
 	QString result = "";
-	QRegularExpression dataRx("^(\\w)-(\\w+)\\s(\\w+)$");
+	static const QRegularExpression dataRx("^(\\w)-(\\w+)\\s(\\w+)$");
 	QRegularExpressionMatch dataMatch=dataRx.match(ptype);
 	if (dataMatch.hasMatch())
 	{
@@ -613,10 +610,10 @@ bool Exoplanet::isDiscovered(const StelCore *core)
 			discovery.append(p.discovered);
 		}
 	}
-	std::sort(discovery.begin(), discovery.end());
 	if (!discovery.isEmpty()) 
 	{
-		if (discovery.at(0)<=year && discovery.at(0)>0)
+		const double minYear=*std::min_element(discovery.begin(), discovery.end());
+		if (minYear<=year && minYear>0)
 		{
 			return true;
 		}
@@ -654,7 +651,7 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 		painter->drawSprite2dMode(getJ2000EquatorialPos(core), distributionMode ? 4.f : 5.f);
 
 		float coeff = 4.5f + std::log10(static_cast<float>(sradius) + 0.1f);
-		StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
+		StarMgr* smgr = GETSTELMODULE(StarMgr); // It's needed for checking displaying of labels for stars
 		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+coeff)<mlimit && smgr->getFlagLabels())
 		{
 			if (showDesignations)

@@ -127,9 +127,7 @@ void TestConversions::testDMSStrToRad()
 		double dms = StelUtils::dmsStrToRad(DMSStr);
 
 		QVERIFY2(qAbs(dms-radians)<=ERROR_LIMIT, qPrintable(QString("%1 = %2 radians (expected %3 radians)")
-								    .arg(DMSStr)
-								    .arg(QString::number(dms, 'f', 5))
-								    .arg(QString::number(radians, 'f', 5))));
+								    .arg(DMSStr, QString::number(dms, 'f', 5), QString::number(radians, 'f', 5))));
 	}
 }
 
@@ -137,10 +135,10 @@ void TestConversions::testRadToHMS()
 {
 	QVariantList data;
 
-	data << 0. << 0 << 0 << 0.;
-	data << M_PI/36 << 0 << 19 << 59.9;
-	data << 7*M_PI/8 << 10 << 30 << 0.;
-	data << 2*M_PI/5 << 4 << 48 << 0.;
+	data <<         0.  <<  0 <<  0 <<  0.;
+	data <<    M_PI/36. <<  0 << 19 << 59.9;
+	data << 7.*M_PI/8.  << 10 << 30 <<  0.;
+	data << 2.*M_PI/5.  <<  4 << 48 <<  0.;
 
 	while (data.count()>=4)
 	{
@@ -154,7 +152,7 @@ void TestConversions::testRadToHMS()
 		t1 = s+m*60+h*3600;
 		StelUtils::radToHms(rad, ho, mo, so);
 		t2 = so+mo*60+ho*3600;
-		QVERIFY2(qAbs(t1-t2)<=0.1, qPrintable(QString("%1rad=%2h%3m%4s").arg(rad).arg(ho).arg(mo).arg(so)));
+		QVERIFY2(qAbs(t1-t2)<=0.1, qPrintable(QString("%1rad=%2h%3m%4s").arg(rad).arg(ho).arg(mo).arg(QString::number(so, 'f', 1))));
 	}
 }
 
@@ -248,12 +246,12 @@ void TestConversions::testRadToDMSStrAdapt()
 	data << 61*M_PI/360		<< "+30°30'"		<< false;
 	data << M_PI/648000		<< "+0°0'1\""		<< false;
 	data << 1213*M_PI/2400		<< "+90°58'30\""	<< false;
-	data << 39599*M_PI/648000	<< "+10°59'59\""	<< false;
+	data << 39599*M_PI/648000	<< "+10°59'59.00\""	<< false;
 	data << -M_PI/36		<< "-5°"		<< false;
 	data << -7*M_PI/8		<< "-157°30'"		<< false;
 	data << -2*M_PI/5		<< "-72°"		<< false;
 	data << -M_PI			<< "-180°"		<< false;
-	data << -10*M_PI/648		<< "-2°46'40\""		<< false;
+	data << -10*M_PI/648		<< "-2°46'40.00\""	<< false;
 
 	data << 0.			<< "+0d"		<< true;
 	data << M_PI/6			<< "+30d"		<< true;
@@ -268,12 +266,12 @@ void TestConversions::testRadToDMSStrAdapt()
 	data << 61*M_PI/360		<< "+30d30'"		<< true;
 	data << M_PI/648000		<< "+0d0'1\""		<< true;
 	data << 1213*M_PI/2400		<< "+90d58'30\""	<< true;
-	data << 39599*M_PI/648000	<< "+10d59'59\""	<< true;
+	data << 39599*M_PI/648000	<< "+10d59'59.00\""	<< true;
 	data << -M_PI/36		<< "-5d"		<< true;
 	data << -7*M_PI/8		<< "-157d30'"		<< true;
 	data << -2*M_PI/5		<< "-72d"		<< true;
 	data << -M_PI			<< "-180d"		<< true;
-	data << -10*M_PI/648		<< "-2d46'40\""		<< true;
+	data << -10*M_PI/648		<< "-2d46'40.00\""	<< true;
 
 	while (data.count()>=3)
 	{
@@ -282,9 +280,7 @@ void TestConversions::testRadToDMSStrAdapt()
 		bool flag	= data.takeFirst().toBool();
 		QString rdms	= StelUtils::radToDmsStrAdapt(rad, flag);
 		QVERIFY2(rdms==edms, qPrintable(QString("%1 radians = %2 (expected %3) [flag: %4]")
-						.arg(QString::number(rad, 'f', 5))
-						.arg(rdms)
-						.arg(edms)
+						.arg(QString::number(rad, 'f', 5), rdms, edms)
 						.arg(flag)));
 	}
 }
@@ -381,9 +377,7 @@ void TestConversions::testRadToDMSStr()
 		bool useDF	= data.takeFirst().toBool();
 		QString rdms	= StelUtils::radToDmsStr(rad, decimalF, useDF);
 		QVERIFY2(rdms==edms, qPrintable(QString("%1 radians = %2 (expected %3) [flags: %4, %5]")
-						.arg(QString::number(rad, 'f', 5))
-						.arg(rdms)
-						.arg(edms)
+						.arg(QString::number(rad, 'f', 5), rdms, edms)
 						.arg(decimalF)
 						.arg(useDF)));
 	}
@@ -943,19 +937,19 @@ void TestConversions::testRadToDecDegStr()
 {
 	QVariantList data;
 
-	data << 0.		<< "+0.00d";
-	data << M_PI/6		<< "+30.00d";
-	data << M_PI/4		<< "+45.00d";
-	data << M_PI/3		<< "+60.00d";
-	data << M_PI/2		<< "+90.00d";
-	data << 2*M_PI/3	<< "+120.00d";
-	data << M_PI		<< "+180.00d";
-	data << 3*M_PI/2	<< "+270.00d";
-	data << M_PI/360	<< "+0.50d";
-	data << 61*M_PI/360	<< "+30.50d";
-	data << -M_PI/36	<< "+355.00d";
-	data << -7*M_PI/8	<< "+202.50d";
-	data << -2*M_PI/5	<< "+288.00d";
+	data << 0.		<< "0.00d";
+	data << M_PI/6		<< "30.00d";
+	data << M_PI/4		<< "45.00d";
+	data << M_PI/3		<< "60.00d";
+	data << M_PI/2		<< "90.00d";
+	data << 2*M_PI/3	<< "120.00d";
+	data << M_PI		<< "180.00d";
+	data << 3*M_PI/2	<< "270.00d";
+	data << M_PI/360	<< "0.50d";
+	data << 61*M_PI/360	<< "30.50d";
+	data << -M_PI/36	<< "355.00d";
+	data << -7*M_PI/8	<< "202.50d";
+	data << -2*M_PI/5	<< "288.00d";
 
 	while (data.count()>=2)
 	{
@@ -1846,13 +1840,15 @@ void TestConversions::testQDateTimeToJD()
 	 //map[1721424.0] = "0001-01-01 12:00:00";
 	 //map[1721789.0] = "0002-01-01 12:00:00";
 
-	 // See https://doc.qt.io/qt-5/qdate.html#details for restrictions and converion issues (qint64 -> double)
+	 // See https://doc.qt.io/qt-5/qdate.html#details for restrictions and conversion issues (qint64 -> double)
 	 QString format = "yyyy-MM-dd HH:mm:ss";
 	 for (QMap<double, QString>::ConstIterator i=map.constBegin();i!=map.constEnd();++i)
 	 {
 		 //QDateTime d = QDateTime::fromString(i.value(), format);
 		 //qWarning() << i.value() << d.toString(format);
-		 double JD = StelUtils::qDateTimeToJd(QDateTime::fromString(i.value(), format));
+		 QDateTime qdt=QDateTime::fromString(i.value(), format);
+		 qdt.setTimeSpec(Qt::UTC);
+		 double JD = StelUtils::qDateTimeToJd(qdt);
 		 QVERIFY2(qAbs(i.key() - JD)<=ERROR_LIMIT, qPrintable(QString("JD: %1 Date: %2 Expected JD: %3")
 					 .arg(QString::number(JD, 'f', 5), i.value(), QString::number(i.key(), 'f', 5))
 					 ));
@@ -1869,12 +1865,13 @@ void TestConversions::testJDToQDateTime()
 	 map[2454466.5] = "2008-01-01 00:00:00";
 	 map[2400000.0] = "1858-11-16 12:00:00";
 
-	 // See https://doc.qt.io/qt-5/qdate.html#details for restrictions and converion issues (qint64 -> double)
+	 // See https://doc.qt.io/qt-5/qdate.html#details for restrictions and conversion issues (qint64 -> double)
 	 QString format = "yyyy-MM-dd HH:mm:ss";
 	 for (QMap<double, QString>::ConstIterator i=map.constBegin();i!=map.constEnd();++i)
 	 {
 		 QDateTime edt = QDateTime::fromString(i.value(), format);
-		 QDateTime rdt = StelUtils::jdToQDateTime(i.key());
+		 edt.setTimeSpec(Qt::UTC); // ESSENTIAL!
+		 QDateTime rdt = StelUtils::jdToQDateTime(i.key(), Qt::UTC);
 		 QVERIFY2(edt==rdt, qPrintable(QString("JD: %1 Date: %2 Expected Date: %3")
 			.arg(QString::number(i.key(), 'f', 5), rdt.toString(format), i.value())));
 	 }

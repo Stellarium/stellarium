@@ -3,6 +3,8 @@
  * 
  * Copyright (C) 2015 Alexander Wolf
  * Copyright (C) 2016 Nick Fedoseev (visualization of ephemeris)
+ * Copyright (C) 2022 Georg Zotti
+ * Copyright (C) 2022 Worachate Boonplod (Eclipses)
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +30,10 @@
 #include <QVector>
 #include <QTimer>
 #include <QRegularExpression>
+#include <QMutex>
+#include <QtCharts>
 
+#include "AstroCalcChart.hpp"
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
 #include "Planet.hpp"
@@ -58,11 +63,12 @@ struct Ephemeris
 };
 Q_DECLARE_METATYPE(Ephemeris)
 
+// Intermediate data structure for the simple solar system map.
 struct HECPosition
 {
 	QString objectName;
-	double x;
-	double y;
+	double angle; // derived from heliocentric ecl. longitude
+	double dist;  // derived from helioc. distance
 };
 Q_DECLARE_METATYPE(HECPosition)
 
@@ -163,21 +169,6 @@ public:
 		WUTAngularSize,         //! angular size
 		WUTConstellation,       //! IAU constellation
 		WUTCount                //! total number of columns
-	};
-
-	//! Defines the type of graphs
-	//! @enum GraphsTypes
-	enum GraphsTypes {
-		GraphMagnitudeVsTime        =  1,
-		GraphPhaseVsTime            =  2,
-		GraphDistanceVsTime         =  3,
-		GraphElongationVsTime       =  4,
-		GraphAngularSizeVsTime      =  5,
-		GraphPhaseAngleVsTime       =  6,
-		GraphHDistanceVsTime        =  7,
-		GraphTransitAltitudeVsTime  =  8,
-		GraphRightAscensionVsTime   =  9,
-		GraphDeclinationVsTime      = 10
 	};
 
 	//! Defines the number and the order of the columns in the lunar eclipse table
@@ -320,20 +311,15 @@ private slots:
 	void saveSecondCelestialBody(int index);
 	void computePlanetaryData();
 	void drawDistanceGraph();
-	void mouseOverDistanceGraph(QMouseEvent *event);
 
-	void drawAngularDistanceGraph();
-	void drawAngularDistanceLimitLine();
-	void saveAngularDistanceLimit(int limit);
+	void drawLunarElongationGraph();
+	void drawLunarElongationLimitLine();
+	void saveLunarElongationLimit(int limit);
 
 	//! Draw diagram 'Altitude vs. Time'
 	void drawAltVsTimeDiagram();
 	//! Draw vertical line 'Now' on diagram 'Altitude vs. Time'
 	void drawCurrentTimeDiagram();
-	//! Draw vertical line of meridian passage time on diagram 'Altitude vs. Time'
-	void drawTransitTimeDiagram();	
-	//! Show info from graphs under mouse cursor
-	void mouseOverLine(QMouseEvent *event);
 	void saveAltVsTimeSunFlag(bool state);
 	void saveAltVsTimeMoonFlag(bool state);
 	void saveAltVsTimePositiveFlag(bool state);
@@ -341,12 +327,6 @@ private slots:
 
 	//! Draw diagram 'Azimuth vs. Time'
 	void drawAziVsTimeDiagram();
-	//! Show info from graphs under mouse cursor
-	void mouseOverAziLine(QMouseEvent *event);
-
-	//! Set time by clicking inside graph areas
-	void altTimeClick(QMouseEvent* event);
-	void aziTimeClick(QMouseEvent* event);
 
 	//! handle events that are otherwise "lost" when dialog not visible
 	void handleVisibleEnabled();
@@ -355,9 +335,9 @@ private slots:
 	void saveGraphsFirstId(int index);
 	void saveGraphsSecondId(int index);
 	void updateGraphsDuration(int duration);
+	void updateGraphsStep(int step);
 	void drawXVsTimeGraphs();
 	void updateXVsTimeGraphs();
-	void mouseOverGraphs(QMouseEvent *event);
 
 	void drawMonthlyElevationGraph();
 	void updateMonthlyElevationTime();
@@ -392,6 +372,8 @@ private slots:
 	void showExtraEphemerisDialog();
 	void showCustomStepsDialog();
 
+	void saveGraph(QtCharts::QChartView *graph);
+
 private:
 	class AstroCalcExtraEphemerisDialog* extraEphemerisDialog;
 	class AstroCalcCustomStepsDialog* customStepsDialog;
@@ -405,8 +387,20 @@ private:
 	class StelPropertyMgr* propMgr;
 	//QStringListModel* wutModel;
 	//QSortFilterProxyModel *proxyModel;
+	AstroCalcChart *altVsTimeChart;
+	mutable QMutex altVsTimeChartMutex;
+	AstroCalcChart *azVsTimeChart;
+	mutable QMutex azVsTimeChartMutex;
+	AstroCalcChart *monthlyElevationChart;
+	mutable QMutex monthlyElevationChartMutex;
+	AstroCalcChart *curvesChart;
+	mutable QMutex curvesChartMutex;
+	AstroCalcChart *lunarElongationChart;
+	mutable QMutex lunarElongationChartMutex;
+	AstroCalcChart *pcChart;
+	mutable QMutex pcChartMutex;
+
 	QSettings* conf;
-	QLinearGradient graphBackgroundGradient;
 	QTimer *currentTimeLine;
 	QHash<QString,int> wutCategories;
 	QPair<double, double> getLunarEclipseXY() const;
@@ -464,14 +458,9 @@ private:
 	void populatePlanetList();
 	//! Prepare graph settings
 	void prepareAxesAndGraph();
-	void prepareAziVsTimeAxesAndGraph();
-	void prepareXVsTimeAxesAndGraph();
-	void prepareMonthlyElevationAxesAndGraph();
-	void prepareDistanceAxesAndGraph();
-	void prepareAngularDistanceAxesAndGraph();
 	//! Populates the drop-down list of time intervals for WUT tool.
 	void populateTimeIntervalsList();	
-	double computeGraphValue(const PlanetP &ssObj, const int graphType);
+	double computeGraphValue(const PlanetP &ssObj, const AstroCalcChart::Series graphType);
 
 	void populateFunctionsList();	
 	double computeMaxElevation(StelObjectP obj);
@@ -532,13 +521,11 @@ private:
 	bool findPreciseOrbitalPoint(QPair<double, double>* out, PlanetP object1, double JD, double stopJD, double step, bool minimal);
 	inline double findHeliocentricDistance(double JD, PlanetP object1) const {return object1->getHeliocentricEclipticPos(JD+core->computeDeltaT(JD)/86400.).length();}
 
-	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime;
-	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration;
+	// Signal that a plot has to be redone
+	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotLunarElongationGraph, plotAziVsTime;
+	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration, graphsStep;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader;
 	static double brightLimit;
-	static double minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, minY1, maxY1, minY2, maxY2,
-			     minYld, maxYld, minYad, maxYad, minYadm, maxYadm, minYaz, maxYaz;
-	static QString yAxis1Legend, yAxis2Legend;
 	static const QString dash, delimiter;
 
 	//! Make sure that no tabs icons are outside of the viewport.
@@ -546,9 +533,6 @@ private:
 	void updateTabBarListWidgetWidth();
 
 	void enableAngularLimits(bool enable);
-
-	//! Set clicked time in AstroCalc AltVSTime/AziVsTime graphs
-	void setClickedTime(double posx);
 
 	//! Memorize day for detecting rollover to next/prev one
 	int oldGraphJD;
@@ -652,8 +636,8 @@ private:
 
 		if (column == AstroCalcDialog::CColumnName)
 		{
-			QRegularExpression dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
-			QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
+			static const QRegularExpression dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
+			static const QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
 			QRegularExpressionMatch dsoMatch=dso.match(text(column));
 			QRegularExpressionMatch mpMatch=mp.match(text(column));
 			QRegularExpressionMatch dsoOtherMatch=dso.match(other.text(column));
@@ -796,7 +780,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const
+	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -825,7 +809,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const
+	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -854,7 +838,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const
+	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -918,8 +902,8 @@ private:
 
 		if (column == AstroCalcDialog::WUTObjectName)
 		{
-			QRegularExpression dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
-			QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
+			static const QRegularExpression dso("^(\\w+)\\s*(\\d+)\\s*(.*)$");
+			static const QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
 			QRegularExpressionMatch dsoMatch=dso.match(text(column));
 			QRegularExpressionMatch mpMatch=mp.match(text(column));
 			QRegularExpressionMatch dsoOtherMatch=dso.match(other.text(column));

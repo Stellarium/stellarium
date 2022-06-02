@@ -249,7 +249,6 @@ QString StarMgr::getCrossIdentificationDesignations(QString hip)
 
 		if (crossIdData.sao>0)
 			designations << QString("SAO %1").arg(crossIdData.sao);
-
 	}
 
 	return designations.join(" - ");
@@ -752,14 +751,14 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 	int lineNumber=0;
 	QString record;
 	// Allow empty and comment lines where first char (after optional blanks) is #
-	QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
+	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 	// record structure is delimited with a | character.  We will
 	// use a QRegularExpression to extract the fields. with white-space padding permitted
 	// (i.e. it will be stripped automatically) Example record strings:
 	// "   677|_("Alpheratz")"
 	// "113368|_("Fomalhaut")"
 	// Note: Stellarium doesn't support sky cultures made prior to version 0.10.6 now!
-	QRegularExpression recordRx("^\\s*(\\d+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
+	static const QRegularExpression recordRx("^\\s*(\\d+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
 
 	while(!cnFile.atEnd())
 	{
@@ -1520,13 +1519,13 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	QString objw = name.toUpper();
 
 	// Search by HP number if it's an HP formatted number
-	QRegularExpression rx("^\\s*(HP|HIP)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	static const QRegularExpression rx("^\\s*(HP|HIP)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
 	QRegularExpressionMatch match=rx.match(objw);
 	if (match.hasMatch())
 		return searchHP(match.captured(2).toInt());
 
 	// Search by SAO number if it's an SAO formatted number
-	QRegularExpression rx2("^\\s*(SAO)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	static const QRegularExpression rx2("^\\s*(SAO)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
 	match=rx2.match(objw);
 	if (match.hasMatch())
 	{
@@ -1536,7 +1535,7 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	}
 
 	// Search by HD number if it's an HD formatted number
-	QRegularExpression rx3("^\\s*(HD)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	static const QRegularExpression rx3("^\\s*(HD)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
 	match=rx3.match(objw);
 	if (match.hasMatch())
 	{
@@ -1546,7 +1545,7 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	}
 
 	// Search by HR number if it's an HR formatted number
-	QRegularExpression rx4("^\\s*(HR)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	static const QRegularExpression rx4("^\\s*(HR)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
 	match=rx4.match(objw);
 	if (match.hasMatch())
 	{
@@ -1848,7 +1847,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Add exact Hp catalogue numbers
-	QRegularExpression hpRx("^(HIP|HP)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	static const QRegularExpression hpRx("^(HIP|HP)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
 	QRegularExpressionMatch match=hpRx.match(objw);
 	if (match.hasMatch())
 	{
@@ -1866,7 +1865,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Add exact SAO catalogue numbers
-	QRegularExpression saoRx("^(SAO)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	static const QRegularExpression saoRx("^(SAO)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
 	match=saoRx.match(objw);
 	if (match.hasMatch())
 	{
@@ -1884,7 +1883,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Add exact HD catalogue numbers
-	QRegularExpression hdRx("^(HD)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	static const QRegularExpression hdRx("^(HD)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
 	match=hdRx.match(objw);
 	if (match.hasMatch())
 	{
@@ -1902,7 +1901,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Add exact HR catalogue numbers
-	QRegularExpression hrRx("^(HR)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	static const QRegularExpression hrRx("^(HR)\\s*(\\d+)\\s*$", QRegularExpression::CaseInsensitiveOption);
 	match=hrRx.match(objw);
 	if (match.hasMatch())
 	{
@@ -1920,7 +1919,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Add exact WDS catalogue numbers
-	QRegularExpression wdsRx("^(WDS)\\s*(\\S+)\\s*$", QRegularExpression::CaseInsensitiveOption);
+	static const QRegularExpression wdsRx("^(WDS)\\s*(\\S+)\\s*$", QRegularExpression::CaseInsensitiveOption);
 	if (wdsRx.match(objw).hasMatch())
 	{
 		for (auto wds = wdsStarsIndexI18n.lowerBound(objw); wds != wdsStarsIndexI18n.end(); ++wds)

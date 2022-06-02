@@ -34,13 +34,14 @@
 void StelScriptSyntaxHighlighter::locateFunctions( const QMetaObject* metaObject, QString scriptName )
 {
 	QSet<QString> funcs;
+	static const QRegularExpression trimFuncExp("\\(.*$");
 	for( int i = metaObject->methodOffset(); i < metaObject->methodCount(); ++i )
 	{
 		if( metaObject->method(i).methodType() == QMetaMethod::Slot &&
 			metaObject->method(i).access() == QMetaMethod::Public )
 		{
 			QString fn = metaObject->method(i).methodSignature();
-			fn.replace(QRegularExpression("\\(.*$"), "");
+			fn.replace(trimFuncExp, "");
 			funcs << fn;
 		}
 	}
@@ -54,7 +55,8 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 
 	// Highlight object names which can be used in scripting.
 	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
-	for( auto* m : mmgr->getAllModules() )
+	const QList allModules = mmgr->getAllModules();
+	for( auto* m : allModules )
 	{
 		locateFunctions( m->metaObject(), m->objectName() );
 	}
@@ -193,7 +195,7 @@ void StelScriptSyntaxHighlighter::setFormats(void)
 void StelScriptSyntaxHighlighter::highlightBlock(const QString &text)
 {
 	// Function call: detect valid identifier with opening bracket.
-	QRegularExpression functionPat("\\b[A-Za-z_][A-Za-z0-9_]*\\s*\\(");
+	static const QRegularExpression functionPat("\\b[A-Za-z_][A-Za-z0-9_]*\\s*\\(");
 	QRegularExpressionMatchIterator it = functionPat.globalMatch(text);
 	while (it.hasNext())
 	{
@@ -213,8 +215,8 @@ void StelScriptSyntaxHighlighter::highlightBlock(const QString &text)
 	}
 
 	// Finally, apply the Qt Example for a multiline comment block /*...*/
-	QRegularExpression startExpression("/\\*");
-	QRegularExpression endExpression("\\*/");
+	static const QRegularExpression startExpression("/\\*");
+	static const QRegularExpression endExpression("\\*/");
 
 	setCurrentBlockState(0);
 	int startIndex = 0;

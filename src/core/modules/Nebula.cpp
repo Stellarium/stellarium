@@ -78,6 +78,47 @@ bool Nebula::flagUseSizeLimits = false;
 double Nebula::minSizeLimit = 1.0;
 double Nebula::maxSizeLimit = 600.0;
 
+const QMap<Nebula::NebulaType, QString> Nebula::typeEnglishStringMap = // Maps type to english name.
+{
+	{ NebGx     , "galaxy" },
+	{ NebAGx    , "active galaxy" },
+	{ NebRGx    , "radio galaxy" },
+	{ NebIGx    , "interacting galaxy" },
+	{ NebQSO    , "quasar" },
+	{ NebCl     , "star cluster" },
+	{ NebOc     , "open star cluster" },
+	{ NebGc     , "globular star cluster" },
+	{ NebSA     , "stellar association" },
+	{ NebSC     , "star cloud" },
+	{ NebN      , "nebula" },
+	{ NebPn     , "planetary nebula" },
+	{ NebDn     , "dark nebula" },
+	{ NebRn     , "reflection nebula" },
+	{ NebBn     , "bipolar nebula" },
+	{ NebEn     , "emission nebula" },
+	{ NebCn     , "cluster associated with nebulosity" },
+	{ NebHII    , "HII region" },
+	{ NebSNR    , "supernova remnant" },
+	{ NebISM    , "interstellar matter" },
+	{ NebEMO    , "emission object" },
+	{ NebBLL    , "BL Lac object" },
+	{ NebBLA    , "blazar" },
+	{ NebMolCld , "molecular cloud" },
+	{ NebYSO    , "young stellar object" },
+	{ NebPossQSO, "possible quasar" },
+	{ NebPossPN , "possible planetary nebula" },
+	{ NebPPN    , "protoplanetary nebula" },
+	{ NebStar   , "star" },
+	{ NebSymbioticStar   , "symbiotic star" },
+	{ NebEmissionLineStar, "emission-line star" },
+	{ NebSNC    , "supernova candidate" },
+	{ NebSNRC   , "supernova remnant candidate" },
+	{ NebGxCl   , "cluster of galaxies" },
+	{ NebPartOfGx, "part of a galaxy" },
+	{ NebRegion , "region of the sky" },
+	{ NebUnknown, "object of unknown nature" }
+};
+
 Nebula::Nebula()
 	: StelObject()
 	, DSO_nb(0)
@@ -1124,7 +1165,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 	if (nType==NebGx || nType==NebAGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebPossQSO || nType==NebBLA || nType==NebBLL || nType==NebGxCl)
 		return QString();
 
-	QRegularExpression GlClRx("\\.*(I|II|III|IV|V|VI|VI|VII|VIII|IX|X|XI|XII)\\.*");
+	static const QRegularExpression GlClRx("\\.*(I|II|III|IV|V|VI|VI|VII|VIII|IX|X|XI|XII)\\.*");
 	int idx = mTypeString.indexOf(GlClRx);
 	if (idx>0)
 		m = mTypeString.mid(idx);
@@ -1176,7 +1217,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 		}
 	}
 
-	QRegularExpression OClRx("\\.*(I|II|III|IV)(\\d)(p|m|r)(n*|N*|u*|U*|e*|E*)\\.*");
+	static const QRegularExpression OClRx("\\.*(I|II|III|IV)(\\d)(p|m|r)(n*|N*|u*|U*|e*|E*)\\.*");
 	idx = mTypeString.indexOf(OClRx);
 	if (idx>0)
 		m = mTypeString.mid(idx);
@@ -1243,7 +1284,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 		r = rtxt.join(",<br />");
 	}
 
-	QRegularExpression VdBRx("\\.*(I|II|I-II|II P|P),\\s+(VBR|VB|BR|M|F|VF|:)\\.*");
+	static const QRegularExpression VdBRx("\\.*(I|II|I-II|II P|P),\\s+(VBR|VB|BR|M|F|VF|:)\\.*");
 	idx = mTypeString.indexOf(VdBRx);
 	if (idx>0)
 		m = mTypeString.mid(idx);
@@ -1312,7 +1353,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 	}
 
 
-	QRegularExpression HIIRx("\\.*(\\d+),\\s+(\\d+),\\s+(\\d+)\\.*");
+	static const QRegularExpression HIIRx("\\.*(\\d+),\\s+(\\d+),\\s+(\\d+)\\.*");
 	idx = mTypeString.indexOf(HIIRx);
 	if (idx>0)
 		m = mTypeString.mid(idx);

@@ -548,6 +548,7 @@ StelMainView::StelMainView(QSettings* settings)
 	  stelApp(Q_NULLPTR),
 	  updateQueued(false),
 	  flagInvertScreenShotColors(false),
+	  flagScreenshotDateFileName(false),
 	  flagOverwriteScreenshots(false),
 	  flagUseCustomScreenshotSize(false),
 	  customScreenshotWidth(1024),
@@ -556,6 +557,7 @@ StelMainView::StelMainView(QSettings* settings)
 	  customScreenshotMagnification(1.0f),
 	  screenShotPrefix("stellarium-"),
 	  screenShotFormat("png"),
+	  screenShotFileMask("yyyyMMdd-hhmmssz"),
 	  screenShotDir(""),
 	  flagCursorTimeout(false),
 	  lastEventTimeSec(0.0),
@@ -738,7 +740,7 @@ QSurfaceFormat StelMainView::getDesiredGLFormat() const
 	}
 
 	// Note: this only works if --mesa-mode was given on the command line. Auto-switch to Mesa or the driver name apparently cannot be detected at this early stage.
-	bool isMesa= qApp->property("onetime_mesa_mode").isValid() && (qApp->property("onetime_mesa_mode")==true);
+	const bool isMesa= (QString(getenv("QT_OPENGL"))=="software");
 
 	//request some sane buffer formats
 	fmt.setRedBufferSize(8);
@@ -872,6 +874,8 @@ void StelMainView::init()
 
 	flagInvertScreenShotColors = configuration->value("main/invert_screenshots_colors", false).toBool();
 	screenShotFormat = configuration->value("main/screenshot_format", "png").toString();
+	flagScreenshotDateFileName=configuration->value("main/screenshot_datetime_filename", false).toBool();
+	screenShotFileMask = configuration->value("main/screenshot_datetime_filemask", "yyyyMMdd-hhmmssz").toString();
 	flagUseCustomScreenshotSize=configuration->value("main/screenshot_custom_size", false).toBool();
 	customScreenshotWidth=configuration->value("main/screenshot_custom_width", 1024).toInt();
 	customScreenshotHeight=configuration->value("main/screenshot_custom_height", 768).toInt();
@@ -1050,7 +1054,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	// If we have ANGLE, check esp. for insufficient ps_2 level.
 	if (isANGLE)
 	{
-		QRegularExpression angleVsPsRegExp(" vs_(\\d)_(\\d) ps_(\\d)_(\\d)");
+		static const QRegularExpression angleVsPsRegExp(" vs_(\\d)_(\\d) ps_(\\d)_(\\d)");
 		int angleVSPSpos=glRenderer.indexOf(angleVsPsRegExp);
 
 		if (angleVSPSpos >-1)
@@ -1104,7 +1108,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	// Do a similar test for MESA: Ensure we have at least Mesa 10, Mesa 9 on FreeBSD (used for hardware-acceleration of AMD IGP) was reported to lose the stars.
 	if (isMesa)
 	{
-		QRegularExpression mesaRegExp("Mesa (\\d+\\.\\d+)"); // we need only major version. Minor should always be here. Test?
+		static const QRegularExpression mesaRegExp("Mesa (\\d+\\.\\d+)"); // we need only major version. Minor should always be here. Test?
 		int mesaPos=glDriver.indexOf(mesaRegExp);
 
 		if (mesaPos >-1)
@@ -1158,10 +1162,10 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	// On these systems, we show a warning panel that can be suppressed by a config option which is automatically added on first run.
 	// Again, based on a sample size of one, Macs have been reported already to always work in this case.
 #ifndef Q_OS_MAC
-	QRegularExpression glslRegExp("^(\\d\\.\\d\\d)");
+	static const QRegularExpression glslRegExp("^(\\d\\.\\d\\d)");
 	int pos=glslString.indexOf(glslRegExp);
 	// VC4 drivers on Raspberry Pi reports ES 1.0.16 or so, we must step down to one cipher after decimal.
-	QRegularExpression glslesRegExp("ES (\\d\\.\\d)");
+	static const QRegularExpression glslesRegExp("ES (\\d\\.\\d)");
 	int posES=glslString.indexOf(glslesRegExp);
 	if (pos >-1)
 	{
@@ -1508,6 +1512,20 @@ void StelMainView::setScreenshotFormat(const QString filetype)
 	}
 }
 
+void StelMainView::setFlagScreenshotDateFileName(bool b)
+{
+	flagScreenshotDateFileName=b;
+	StelApp::getInstance().getSettings()->setValue("main/screenshot_datetime_filename", b);
+	emit flagScreenshotDateFileNameChanged(b);
+}
+
+void StelMainView::setScreenshotFileMask(const QString filemask)
+{
+	screenShotFileMask = filemask;
+	StelApp::getInstance().getSettings()->setValue("main/screenshot_datetime_filemask", filemask);
+	emit screenshotFileMaskChanged(filemask);
+}
+
 void StelMainView::setScreenshotDpi(int dpi)
 {
 	screenshotDpi=dpi;
@@ -1711,37 +1729,48 @@ void StelMainView::doScreenshot(void)
 	}
 	else
 	{
-		// build filter for file list, so we only select Stellarium screenshot files (prefix*.format)
-		QString shotFilePattern = QString("%1*.%2").arg(screenShotPrefix, screenShotFormat);
-		QStringList fileNameFilters(shotFilePattern);
-		// get highest-numbered file in screenshot directory
-		QDir dir(shotDir.filePath());
-		QStringList existingFiles = dir.entryList(fileNameFilters);
-
-		// screenshot number - default to 1 for empty directory
-		int shotNum = 1;
-		if (!existingFiles.empty())
+		QString shotPathString;
+		if (flagScreenshotDateFileName)
 		{
-			// already have screenshots, find largest number
-			QString lastFileName = existingFiles[existingFiles.size() - 1];
-
-			// extract number from highest-numbered file name
-			QString lastShotNumString = lastFileName.replace(screenShotPrefix, "").replace("." + screenShotFormat, "");
-			// new screenshot number = start at highest number
-			shotNum = lastShotNumString.toInt() + 1;
+			// name screenshot files with current time
+			QString currentTime = QDateTime::currentDateTime().toString(screenShotFileMask);
+			shotPathString = QString("%1/%2%3.%4").arg(shotDir.filePath(), screenShotPrefix, currentTime, screenShotFormat);
+			shotPath = QFileInfo(shotPathString);
 		}
+		else
+		{
+			// build filter for file list, so we only select Stellarium screenshot files (prefix*.format)
+			QString shotFilePattern = QString("%1*.%2").arg(screenShotPrefix, screenShotFormat);
+			QStringList fileNameFilters(shotFilePattern);
+			// get highest-numbered file in screenshot directory
+			QDir dir(shotDir.filePath());
+			QStringList existingFiles = dir.entryList(fileNameFilters);
 
-		// build new screenshot path: "path/prefix-num.format"
-		// num is at least 3 characters
-		QString shotNumString = QString::number(shotNum).rightJustified(3, '0');
-		QString shotPathString = QString("%1/%2%3.%4").arg(shotDir.filePath(), screenShotPrefix, shotNumString, screenShotFormat);
-		shotPath = QFileInfo(shotPathString);
-		// validate if new screenshot number is valid (non-existent)
-		while (shotPath.exists()) {
-			shotNum++;
-			shotNumString = QString::number(shotNum).rightJustified(3, '0');
+			// screenshot number - default to 1 for empty directory
+			int shotNum = 1;
+			if (!existingFiles.empty())
+			{
+				// already have screenshots, find largest number
+				QString lastFileName = existingFiles[existingFiles.size() - 1];
+
+				// extract number from highest-numbered file name
+				QString lastShotNumString = lastFileName.replace(screenShotPrefix, "").replace("." + screenShotFormat, "");
+				// new screenshot number = start at highest number
+				shotNum = lastShotNumString.toInt() + 1;
+			}
+
+			// build new screenshot path: "path/prefix-num.format"
+			// num is at least 3 characters
+			QString shotNumString = QString::number(shotNum).rightJustified(3, '0');
 			shotPathString = QString("%1/%2%3.%4").arg(shotDir.filePath(), screenShotPrefix, shotNumString, screenShotFormat);
 			shotPath = QFileInfo(shotPathString);
+			// validate if new screenshot number is valid (non-existent)
+			while (shotPath.exists()) {
+				shotNum++;
+				shotNumString = QString::number(shotNum).rightJustified(3, '0');
+				shotPathString = QString("%1/%2%3.%4").arg(shotDir.filePath(), screenShotPrefix, shotNumString, screenShotFormat);
+				shotPath = QFileInfo(shotPathString);
+			}
 		}
 	}
 

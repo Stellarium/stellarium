@@ -1,0 +1,397 @@
+{
+    "satellites": {
+	"14781": {
+            "comms": [
+                {
+                    "description": "downlink",
+		    "frequency": 145.826,
+		    "modulation": "(V)FM (S)PSK"
+		},
+		{
+		    "description": "downlink",
+		    "frequency": 435.025,
+		    "modulation": "(V)FM (S)PSK"
+		},
+		{
+		    "description": "beacon",
+		    "frequency": 2401.500,
+		    "modulation": "(V)FM (S)PSK"
+		}
+            ]
+        },
+	"22825": {
+	    "comms": [
+		{
+		    "description": "downlink",
+		    "frequency": 436.795,
+		    "modulation": "AFSK FM"
+		},
+		{
+		    "description": "uplink",
+		    "frequency": 436.795,
+		    "modulation": "AFSK FM"
+		}
+	    ]
+	},
+	"25338": {
+	    "comms": [
+		{
+		    "description": "downlink",
+		    "frequency": 137.620,
+		    "modulation": "AM/APT"
+		},
+		{
+		    "description": "downlink",
+		    "frequency": 1702.500,
+		    "modulation": "HRPT"
+		}
+	    ]
+	},
+	"25397": {
+	    "comms": [
+		{
+		    "description": "downlink",
+		    "frequency": 435.225,
+		    "modulation": "FSK"
+		},
+		{
+		    "description": "downlink",
+		    "frequency": 435.325,
+		    "modulation": "FSK"
+		},
+		{
+		    "description": "uplink",
+		    "frequency": 145.850,
+		    "modulation": "FSK"
+		},
+		{
+		    "description": "uplink",
+		    "frequency": 145.930,
+		    "modulation": "FSK"
+		}
+	    ]
+	},
+        "25544": {
+            "comms": [
+                {
+                    "description": "ARISS voice uplink region 2 & 3",
+                    "frequency": 144.49
+                },
+                {
+                    "description": "ARISS packet downlink",
+                    "frequency": 145.825
+                },
+                {
+                    "description": "ARISS repeater uplink",
+                    "frequency": 437.9
+                },
+                {
+                    "description": "ARISS repeater downlink",
+                    "frequency": 145.8
+                },
+                {
+                    "description": "ARISS voice uplink region 1",
+                    "frequency": 145.2
+                },
+                {
+                    "description": "ARISS voice downlink",
+                    "frequency": 145.8
+                },
+                {
+                    "description": "ARISS packet uplink",
+                    "frequency": 145.825
+                }
+            ]
+        },
+	"26931": {
+            "comms": [
+                {
+                    "description": "downlink",
+		    "frequency": 145.827,
+		    "modulation": "AFSK"
+		},
+		{
+		    "description": "uplink",
+		    "frequency": 145.827,
+		    "modulation": "AFSK"
+		}
+            ]
+	},
+	"27453": {
+	    "comms": [
+		{
+		    "description": "downlink",
+		    "frequency": 137.50,
+		    "modulation": "AM/APT"
+		}
+	    ]
+	},
+	"27607": {
+	    "comms": [
+		{
+		    "description": "downlink",
+		    "frequency": 436.795,
+		    "modulation": "FM"
+		},
+		{
+		    "description": "uplink",
+		    "frequency": 145.850,
+		    "modulation": "FM"
+		}
+	    ]
+	},
+	"27844": {
+	    "comms": [
+		{
+		    "description": "downlink",
+		    "frequency": 437.470,
+		    "modulation": "AFSK CW"
+		},
+		{
+		    "description": "beacon",
+		    "frequency": 436.838,
+		    "modulation": "AFSK CW"
+		}
+	    ]
+	},
+	"27848": {
+	    "comms": [
+		{
+		    "description": "downlink",
+		    "frequency": 437.490,
+		    "modulation": "AFSK CW"
+		},
+		{
+		    "description": "beacon",
+		    "frequency": 436.848,
+		    "modulation": "AFSK CW"
+		}
+	    ]
+	},
+        "28654": {
+            "comms": [
+                {
+                    "description": "downlink",
+                    "frequency": 137.9125,
+                    "modulation": "AM/APT"
+		},
+		{
+		    "description": "downlink",
+		    "frequency": 1707.000,
+		    "modulation": "HRPT"
+		}
+            ]
+	},
+	"28895": {
+	    "comms": [
+		{
+		    "description": "downlink",
+		    "frequency": 437.345,
+		    "modulation": "AFSK CW"
+		},
+		{
+		    "description": "beacon",
+		    "frequency": 437.465,
+		    "modulation": "AFSK CW"
+		}
+	    ]
+	},
+	"30776": {
+	    "comms": [
+		{
+		    "description": "downlink",
+		    "frequency": 435.103,
+		    "modulation": "GMSK"
+		},
+		{
+		    "description": "uplink",
+		    "frequency": 145.840,
+		    "modulation": "GMSK"
+		}
+	    ]
+	},
+	"31130": {
+	    "comms": [
+		{
+		    "description": "downlink",
+		    "frequency": 435.245,
+		    "modulation": "AFSK"
+		}
+	    ]
+	},
+	"33591": {
+	    "comms": [
+		{
+		    "description": "downlink",
+		    "frequency": 137.100
+		},
+		{
+		    "description": "downlink",
+		    "frequency": 1698.000
+		}
+	    ]
+	},
+	"33493": {
+	    "comms": [
+		{
+		    "description": "downlink",
+		    "frequency": 437.425,
+		    "modulation": "1k2AFSK 9k6GMSK CW"
+		},
+		{
+		    "description": "beacon",
+		    "frequency": 437.250,
+		    "modulation": "1k2AFSK 9k6GMSK CW"
+		}
+	    ]
+	},
+	"52148": {
+	    "comms": [
+		{
+		    "description": "downlink",
+		    "frequency": 437.375,
+		    "modulation": "GMSK CW"
+		},
+		{
+		    "description": "beacon",
+		    "frequency": 400.960,
+		    "modulation": "GMSK CW"
+		}
+	    ]
+	},
+	"52160": {
+	    "comms": [
+		{
+		    "description": "downlink",
+		    "frequency": 437.100
+		},
+		{
+		    "description": "downlink",
+		    "frequency": 437.225
+		},
+		{
+		    "description": "uplink",
+		    "frequency": 437.225
+		}
+	    ]
+	},
+	"52175": {
+	    "comms": [
+		{
+		    "description": "downlink",
+		    "frequency": 145.850
+		},
+		{
+		    "description": "downlink",
+		    "frequency": 436.025
+		},
+		{
+		    "description": "beacon",
+		    "frequency": 436.025
+		}
+	    ]
+	}
+    },
+    "groups": {
+        "glonass": {
+            "comms": [
+                {
+                    "description": "L3OC",
+                    "frequency": 1202.025,
+                    "modulation": "BPSK"
+                },
+                {
+                    "description": "L1OC",
+                    "frequency": 1600.995,
+                    "modulation": "BPSK"
+                },
+                {
+                    "description": "L2OC",
+                    "frequency": 1248.06,
+                    "modulation": "BPSK"
+                }
+            ]
+        },
+        "gps": {
+            "comms": [
+                {
+                    "description": "L1",
+                    "frequency": 1575.42,
+                    "modulation": "QPSK"
+                },
+                {
+                    "description": "L2",
+                    "frequency": 1227.6,
+                    "modulation": "BPSK"
+                }
+            ]
+	},
+	"beidou": {
+	    "comms": [
+		{
+		    "description": "B1",
+		    "frequency": 1561.098,
+		    "modulation": "BPSK"
+		},
+		{
+		    "description": "B2",
+		    "frequency": 1207.14,
+		    "modulation": "BPSK"
+		},
+		{
+		    "description": "B3",
+		    "frequency": 1268.52,
+		    "modulation": "BPSK"
+		}
+	    ]
+	},
+	"galileo": {
+	    "comms": [
+		{
+		    "description": "E1-I",
+		    "frequency": 1575.42,
+		    "modulation": "CBOC"
+		},
+		{
+		    "description": "E1-Q",
+		    "frequency": 1575.42,
+		    "modulation": "BOCcos"
+		},
+		{
+		    "description": "E5a",
+		    "frequency": 1176.45,
+		    "modulation": "AltBOC"
+		},
+		{
+		    "description": "E5b",
+		    "frequency": 1207.14,
+		    "modulation": "AltBOC"
+		},
+		{
+		    "description": "E6-I",
+		    "frequency": 1278.75,
+		    "modulation": "BPSK"
+		},
+		{
+		    "description": "E6-Q",
+		    "frequency": 1278.75,
+		    "modulation": "BOCcos"
+		}
+	    ]
+	},
+	"irnss": {
+	    "comms": [
+		{
+		    "description": "L5",
+		    "frequency": 1176.45,
+		    "modulation": "BPSK"
+		},
+		{
+		    "description": "S",
+		    "frequency": 2492.028,
+		    "modulation": "BPSK"
+		}
+	    ]
+	}
+    }
+}

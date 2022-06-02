@@ -1251,8 +1251,7 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 double StelCore::getUTCOffset(const double JD) const
 {
 	int year, month, day, hour, minute, second;
-	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
-	StelUtils::getTimeFromJulianDay(JD, &hour, &minute, &second);
+	StelUtils::getDateTimeFromJulianDay(JD, &year, &month, &day, &hour, &minute, &second);
 	// as analogous to second statement in getJDFromDate, nkerr
 	if ( year <= 0 )
 	{
@@ -1578,8 +1577,7 @@ void StelCore::addCalendricMonth()
 {
 	double cjd = getJD();
 	int year, month, day, hour, minute, second;
-	StelUtils::getDateFromJulianDay(cjd, &year, &month, &day);
-	StelUtils::getTimeFromJulianDay(cjd, &hour, &minute, &second);
+	StelUtils::getDateTimeFromJulianDay(cjd, &year, &month, &day, &hour, &minute, &second);
 	month++;
 	if (month>12)
 	{
@@ -1710,8 +1708,7 @@ void StelCore::subtractCalendricMonth()
 {
 	double cjd = getJD();
 	int year, month, day, hour, minute, second;
-	StelUtils::getDateFromJulianDay(cjd, &year, &month, &day);
-	StelUtils::getTimeFromJulianDay(cjd, &hour, &minute, &second);
+	StelUtils::getDateTimeFromJulianDay(cjd, &year, &month, &day, &hour, &minute, &second);
 	month--;
 	if (month<1)
 	{
@@ -2715,7 +2712,7 @@ QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
 			return "err";
 		}
 		iau_constelspan span;
-		QRegularExpression emptyLine("^\\s*$");
+		static const QRegularExpression emptyLine("^\\s*$");
 		QTextStream in(&file);
 		while (!in.atEnd())
 		{

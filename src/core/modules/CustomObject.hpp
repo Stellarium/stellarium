@@ -50,6 +50,12 @@ public:
 		return CUSTOMOBJECT_TYPE;
 	}
 
+	//! Get the type of object
+	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	{
+		return (isMarker ? "custom marker" : "custom object");
+	}
+
 	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{
 		return designation;

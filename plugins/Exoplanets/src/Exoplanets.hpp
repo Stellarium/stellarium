@@ -70,21 +70,16 @@ typedef QSharedPointer<Exoplanet> ExoplanetP;
 class Exoplanets : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool showExoplanets
-		   READ getFlagShowExoplanets
-		   WRITE setFlagShowExoplanets
-		   NOTIFY flagExoplanetsVisibilityChanged
-		   )
-	Q_PROPERTY(Vec3f markerColor
-		   READ getMarkerColor
-		   WRITE setMarkerColor
-		   NOTIFY markerColorChanged
-		   )
-	Q_PROPERTY(Vec3f habitableColor
-		   READ getHabitableColor
-		   WRITE setHabitableColor
-		   NOTIFY habitableColorChanged
-		   )
+	Q_PROPERTY(bool showExoplanets    READ getFlagShowExoplanets   WRITE setFlagShowExoplanets NOTIFY flagExoplanetsVisibilityChanged)
+	Q_PROPERTY(Vec3f markerColor      READ getMarkerColor          WRITE setMarkerColor        NOTIFY markerColorChanged)
+	Q_PROPERTY(Vec3f habitableColor   READ getHabitableColor       WRITE setHabitableColor     NOTIFY habitableColorChanged)
+
+	Q_PROPERTY(bool flagDisplayMode   READ getDisplayMode          WRITE setDisplayMode        NOTIFY displayModeChanged)
+	Q_PROPERTY(bool flagTimelineMode  READ getTimelineMode         WRITE setTimelineMode       NOTIFY timelineModeChanged)
+	Q_PROPERTY(bool flagHabitableMode READ getHabitableMode        WRITE setHabitableMode      NOTIFY habitableModeChanged)
+	Q_PROPERTY(bool flagShowExoplanetsDesignations READ getFlagShowExoplanetsDesignations WRITE setFlagShowExoplanetsDesignations NOTIFY flagShowExoplanetsDesignationsChanged)
+	Q_PROPERTY(bool flagShowExoplanetsNumbers READ getFlagShowExoplanetsNumbers WRITE setFlagShowExoplanetsNumbers NOTIFY flagShowExoplanetsNumbersChanged)
+
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -243,6 +238,11 @@ signals:
 	void flagExoplanetsVisibilityChanged(bool b);
 	void markerColorChanged(Vec3f);
 	void habitableColorChanged(Vec3f);
+	void displayModeChanged(bool);
+	void timelineModeChanged(bool);
+	void habitableModeChanged(bool);
+	void flagShowExoplanetsDesignationsChanged(bool);
+	void flagShowExoplanetsNumbersChanged(bool);
 
 public slots:
 	//! Download JSON from web recources described in the module section of the

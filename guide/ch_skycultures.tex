@@ -40,16 +40,19 @@ other files with various extensions are text files.
 
 
 In \file{myculture\textbackslash{}info.ini}, change the entries to 
-\begin{configfile}
+\begin{configfile}[\scriptsize]
 [info]
 name=myCulture
 author=me
+credits=my institute (optional)
 boundaries=none
 classification=personal
+license=CC BY-SA 4.0 International Public License
 \end{configfile}
 
-\noindent (or what seems best for you). The name is used for the list entry in
-the Starlore tab in the View dialog (see \ref{sec:gui:view:starlore}).
+\noindent (or what seems best for you). The \texttt{name} is used for the list entry in
+the Starlore tab in the View dialog (see \ref{sec:gui:view:starlore}). \texttt{author} should be the actual author(s)' name(s). 
+The optional \texttt{credits} \newFeature{0.22.2} can be used to mention other involved parties. 
 
 \paragraph{boundaries}
 The option ``boundaries'' is optional and may contain the follow values:
@@ -87,7 +90,51 @@ The option ``classification'' is also optional. \newFeature{0.19.0} It allows so
     how these differences should be interpreted.
 \end{description}
 
-%The classification may show overlaps. Currently (V0.19.0) it is not displayed or evaluated, but will be used in future versions. 
+\paragraph{license}
+The option ``license'' \newFeature{0.22.2} is technically optional
+(for backward compatibility; it defaults to ``unknown''), but we
+highly recommend to define it for your sky culture, and it is
+mandatory if you want your skyculture to be distributed with
+Stellarium to prevent ``unexpected'' distribution of your content to other
+software out of our hands.  The license info will be decoded for human
+readable hints about allowed permissions for sky culture in the GUI.
+
+We recommend to use one of the following possible licenses in this section: 
+\begin{description}
+  \item[GNU GPL v2.0 (or later)] -- this is the most famous ``copyleft'' license for code and it may be acceptable also for text and data.
+  \item[CC0] (No Rights Reserved) -- this is a ``don't care'' license. Content may be freely distributed without attribution for all purposes. 
+  \item[CC BY] (Creative Commons Attribution License) -- this license lets others distribute, remix, adapt, and build upon your work, even commercially, as long as they credit you for the original creation.
+    This is the most accommodating of licenses offered. Recommended for maximum dissemination and use of licensed materials.
+  \item[CC BY-SA] (Creative Commons Attribution-ShareAlike License) -- this license lets others remix, adapt, and build upon your work even for commercial purposes, as long as they credit you and license their new creations under the identical terms.
+    This license is often compared to ``copyleft'' free and open source software licenses. All new works based on yours will carry the same license, so any derivatives will also allow commercial use.
+    This is the license used by Wikipedia, and is recommended for materials that would benefit from incorporating content from Wikipedia and similarly licensed projects.
+  \item[CC BY-ND] (Creative Commons Attribution-NoDerivatives License) -- this license lets others reuse the work for any purpose, including commercially; however, it cannot be shared with others in adapted form, and credit must be provided to you.
+  \item[CC BY-NC] (Creative Commons Attribution-NonCommercial License) -- this license lets others remix, adapt, and build upon your work non-commercially, and although their new works must also acknowledge you and be non-commercial, they don’t have to license their derivative works on the same terms.
+  \item[CC BY-NC-SA] (Creative Commons Attribution-NonCommercial-ShareAlike License) -- this license lets others remix, adapt, and build upon your work non-commercially, as long as they credit you and license their new creations under the identical terms.
+  \item[CC BY-NC-ND] (Creative Commons Attribution-NonCommercial-NoDerivatives License) -- this license is the most restrictive of the six main Creative Commons licenses, only allowing others to download your works and share them with others as long as they credit you, but they can’t change them in any way or use them commercially.
+  \item[FAL] For illustrations we also expect usage of the \textbf{Free Art License}\footnote{\url{https://artlibre.org/licence/lal/en/}} (in addition to any other licenses) ---
+    it is a ``copyleft'' license that grants the right to freely copy, distribute, and transform creative works. You can specify, e.g., ``GPL2, FAL'' to indicate that the images are additionally released under Free Art License.
+\end{description}
+
+Creative Commons provides a range of licenses\footnote{Creative
+  Commons License Chooser --
+  \url{https://creativecommons.org/choose/}}, each of which grants
+different rights to use the materials licensed under them. All of
+these licenses offer more permissions than ``all rights
+reserved''. Some of Creative Commons are free and some are
+non-free. For example you can apply only the most permissive of its
+licenses (\textbf{CC0}, \textbf{CC BY} and \textbf{CC BY-SA}) to
+material you create, to meets the Freedom Defined definition of a
+``Free Cultural Work''.\footnote{See Creative Commons website to
+  details ---
+  \url{https://creativecommons.org/share-your-work/public-domain/freeworks}}
+
+If you have used one of the keys above in your \texttt{license} entry,
+a short (unofficial!  Informative only) description of license
+conditions will be displayed. You can use other licenses as well, but
+please describe the conditions sufficiently well in a dedicated
+\texttt{h2} section close to the end of your
+\file{description.en.utf8}.
 
 \section{Skyculture Description Files}
 \label{sec:skycultures:description}
@@ -389,7 +436,7 @@ CC BY 4.0
 International\footnote{\url{https://creativecommons.org/licenses/by/4.0/}}
 or CC BY-SA 4.0
 International\footnote{\url{https://creativecommons.org/licenses/by-sa/4.0/}}
-licenses are best suited.
+licenses are best suited. See notes in section~\ref{sec:skycultures:info.ini} above. 
 
 
 %%% Local Variables: 

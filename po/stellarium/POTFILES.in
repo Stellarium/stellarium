@@ -49,6 +49,7 @@ src/gui/SearchDialog.cpp
 src/gui/ShortcutsDialog.cpp
 src/gui/CustomDeltaTEquationDialog.cpp
 src/gui/AstroCalcDialog.cpp
+src/gui/AstroCalcChart.cpp
 src/gui/AstroCalcExtraEphemerisDialog.cpp
 src/gui/AstroCalcCustomStepsDialog.cpp
 src/gui/ObsListDialog.cpp
@@ -88,6 +89,7 @@ src/ui_orbitColorsDialog.h
 src/ui_skylightDialog.h
 src/ui_tonemappingDialog.h
 src/ui_lightPollutionWidget.h
+src/ui_configureScreenshotsDialog.h
 
 # Plug-in translations
 # NOTE: Plugins should be enabled for building
@@ -103,8 +105,10 @@ plugins/Satellites/src/Satellites.cpp
 plugins/Satellites/src/Satellite.cpp
 plugins/Satellites/src/gui/SatellitesDialog.cpp
 plugins/Satellites/src/gui/SatellitesImportDialog.cpp
+plugins/Satellites/src/gui/SatellitesFilterDialog.cpp
 plugins/Satellites/src/ui_satellitesDialog.h
 plugins/Satellites/src/ui_satellitesImportDialog.h
+plugins/Satellites/src/ui_satellitesFilterDialog.h
 plugins/TelescopeControl/src/TelescopeControl.cpp
 plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp
 plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h

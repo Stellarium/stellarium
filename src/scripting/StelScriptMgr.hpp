@@ -29,7 +29,6 @@
 #include <QPair>
 #include <QSet>
 
-// class StelMainScriptAPI;
 #include "StelMainScriptAPI.hpp"
 
 class StelScriptEngineAgent;
@@ -80,21 +79,21 @@ public:
 	//! @note use this sparingly and with caution, and only add one object per class!
 	void addObject(QObject *obj);
 
-    //! Define JS classes Vec3f, Vec3d
+	//! Define JS classes Vec3f, Vec3d
 	static void defVecClasses(QScriptEngine *engine);
 
-    //! Permit access to StelScriptMainAPI's methods
+	//! Permit access to StelScriptMainAPI's methods
 	const QMetaObject * getMetaOfStelMainScriptAPI(){ return mainAPI->metaObject(); }
 
-    //! Accessor to QEventLoop
-    QEventLoop* getWaitEventLoop(){ return waitEventLoop; }
+	//! Accessor to QEventLoop
+	QEventLoop* getWaitEventLoop(){ return waitEventLoop; }
 
 public slots:
 	//! Returns a HTML description of the specified script.
 	//! Includes name, author, description...
 	//! @param s the file name of the script whose HTML description is to be returned.
 	//! @param generateDocumentTags if true, the main wrapping document tags (\<html\>\<body\>...\</body\>\</html\>) are also generated
-	QString getHtmlDescription(const QString& s, bool generateDocumentTags=true) const;
+	QString getHtmlDescription(const QString& s, bool generateDocumentTags=true);
 
 	//! Gets a single line name of the script. 
 	//! @param s the file name of the script whose name is to be returned.
@@ -102,7 +101,7 @@ public slots:
 	//! such comment is found, the file name will be returned.  If the file
 	//! is not found or cannot be opened for some reason, an Empty string
 	//! will be returned.
-	QString getName(const QString& s) const;
+	QString getName(const QString& s);
 
 	//! Gets the name of the script Author
 	//! @param s the file name of the script whose name is to be returned.
@@ -110,7 +109,7 @@ public slots:
 	//! such comment is found, "" is returned.  If the file
 	//! is not found or cannot be opened for some reason, an Empty string
 	//! will be returned.
-	QString getAuthor(const QString& s) const;
+	QString getAuthor(const QString& s);
 
 	//! Gets the licensing terms for the script
 	//! @param s the file name of the script whose name is to be returned.
@@ -118,7 +117,7 @@ public slots:
 	//! such comment is found, "" is returned.  If the file
 	//! is not found or cannot be opened for some reason, an Empty string
 	//! will be returned.
-	QString getLicense(const QString& s) const;
+	QString getLicense(const QString& s);
 
 	//! Gets the version of the script
 	//! @param s the file name of the script whose name is to be returned.
@@ -126,7 +125,7 @@ public slots:
 	//! such comment is found, "" is returned.  If the file
 	//! is not found or cannot be opened for some reason, an Empty string
 	//! will be returned.
-	QString getVersion(const QString& s) const;
+	QString getVersion(const QString& s);
 
 	//! Gets a description of the script.
 	//! @param s the file name of the script whose name is to be returned.
@@ -135,7 +134,7 @@ public slots:
 	//! is found.  If no such comment is found, QString("") is returned.
 	//! If the file is not found or cannot be opened for some reason, an 
 	//! Empty string will be returned.
-	QString getDescription(const QString& s) const;
+	QString getDescription(const QString& s);
 
 	//! Gets the default shortcut of the script.
 	//! @param s the file name of the script whose name is to be returned.
@@ -143,7 +142,7 @@ public slots:
 	//! If no such comment is found, QString("") is returned.
 	//! If the file is not found or cannot be opened for some reason, an
 	//! Empty string will be returned.
-	QString getShortcut(const QString& s) const;
+	QString getShortcut(const QString& s);
 
 	//! Run the script located in the given file. In essence, this calls prepareScript and runPreprocessedScript.
 	//! @note This is a blocking call! The event queue is held up by calls of QCoreApplication::processEvents().
@@ -205,7 +204,7 @@ public slots:
 	
 	//! Get the rate at which the script is running as a multiple of the normal
 	//! execution rate.
-	double getScriptRate() const;
+	double getScriptRate();
 
 	//! cause the emission of the scriptDebug signal. This is so that functions in
 	//! StelMainScriptAPI can explicitly send information to the ScriptConsole
@@ -243,9 +242,9 @@ signals:
 	//! Notification when a script has stopped running 
 	void scriptStopped();
 	//! Notification of a script event - warnings, current execution line etc.
-	void scriptDebug(const QString&) const;
+	void scriptDebug(const QString&);
 	//! Notification of a script event - output line.
-	void scriptOutput(const QString&) const;
+	void scriptOutput(const QString&);
 
 private:
 	// Utility functions for preprocessor
@@ -264,14 +263,14 @@ private:
 	//! @param notFoundText the text to be returned if the key is not found
 	//! @return the text following the id and : on a comment line near the top of 
 	//! the script file (i.e. before there is a non-comment line).
-	QString getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText="") const;
+	QString getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText="");
 	QScriptEngine* engine;
 	
 	//! The thread in which scripts are run
 	StelMainScriptAPI *mainAPI;
 
 	//! The QEventLoop for wait and waitFor
-    QEventLoop* waitEventLoop;
+	QEventLoop* waitEventLoop;
 	
 	QString scriptFileName;
 	

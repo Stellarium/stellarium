@@ -1125,12 +1125,12 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 	QString oType, mType, Ced, PK, PNG, SNRG, ACO, HCG, ESO, VdBH, ra, dec;
 	Nebula::NebulaType nType;
 
-	int readOk = 0;				// how many records weree rad without problems
+	int readOk = 0;				// how many records were read without problems
 	while (!dsoIn.atEnd())
 	{
 		record = QString::fromUtf8(dsoIn.readLine());
 
-		QRegularExpression version("ersion\\s+([\\d\\.]+)\\s+(\\w+)");
+		static const QRegularExpression version("ersion\\s+([\\d\\.]+)\\s+(\\w+)");
 		QRegularExpressionMatch versionMatch;
 		int vp = record.indexOf(version, 0, &versionMatch);
 		if (vp!=-1) // Version of catalog, a first line!
@@ -1418,7 +1418,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 	int readOk=0;
 	unsigned int nb;
 	NebulaP e;
-	QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
+	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 	while (!dsoNameFile.atEnd())
 	{
 		record = QString::fromUtf8(dsoNameFile.readLine());
@@ -1538,7 +1538,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 
 		if (!e.isNull())
 		{
-			QRegularExpression transRx("_[(]\"(.*)\"[)](\\s*#.*)?"); // optional comments after name.
+			static const QRegularExpression transRx("_[(]\"(.*)\"[)](\\s*#.*)?"); // optional comments after name.
 			QRegularExpressionMatch transMatch=transRx.match(name);
 			if (transMatch.hasMatch())
 			{
@@ -1584,7 +1584,7 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 	QString record, command, dso;
 	NebulaP e;
 	// Read the outlines data of the DSO
-	QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
+	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 	while (!dsoOutlineFile.atEnd())
 	{
 		record = QString::fromUtf8(dsoOutlineFile.readLine());
@@ -1681,11 +1681,11 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 
 		// Now parse the file
 		// lines to ignore which start with a # or are empty
-		QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
+		static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 
 		// lines which look like records - we use the RE to extract the fields
 		// which will be available in recMatch.capturedTexts()
-		QRegularExpression recRx("^\\s*([\\w\\s]+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
+		static const QRegularExpression recRx("^\\s*([\\w\\s]+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
 
 		QString record, dsoId, nativeName;
 		int totalRecords=0;
@@ -1803,7 +1803,7 @@ NebulaP NebulaMgr::searchByDesignation(const QString &designation) const
 	NebulaP n;
 	QString uname = designation.toUpper();
 	// If no match found, try search by catalog reference
-	static QRegularExpression catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC|ARP|VV|DWB|TR|TRUMPLER|ST|STOCK|RU|RUPRECHT|VDB-HA)\\s*(\\d+)$");
+	static const QRegularExpression catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC|ARP|VV|DWB|TR|TRUMPLER|ST|STOCK|RU|RUPRECHT|VDB-HA)\\s*(\\d+)$");
 	QRegularExpressionMatch catNumMatch=catNumRx.match(uname);
 	if (catNumMatch.hasMatch())
 	{
@@ -1830,7 +1830,7 @@ NebulaP NebulaMgr::searchByDesignation(const QString &designation) const
 		if (cat == "ST" || cat == "STOCK") n = searchSt(num);
 		if (cat == "RU" || cat == "RUPRECHT") n = searchRu(num);
 	}
-	static QRegularExpression dCatNumRx("^(SH)\\s*\\d-\\s*(\\d+)$");
+	static const QRegularExpression dCatNumRx("^(SH)\\s*\\d-\\s*(\\d+)$");
 	QRegularExpressionMatch dCatNumMatch=dCatNumRx.match(uname);
 	if (dCatNumMatch.hasMatch())
 	{
@@ -1839,7 +1839,7 @@ NebulaP NebulaMgr::searchByDesignation(const QString &designation) const
 
 		if (dcat == "SH") n = searchSh2(dnum);
 	}
-	static QRegularExpression sCatNumRx("^(CED|PK|ACO|ABELL|HCG|ESO|VDBH)\\s*(.+)$");
+	static const QRegularExpression sCatNumRx("^(CED|PK|ACO|ABELL|HCG|ESO|VDBH)\\s*(.+)$");
 	QRegularExpressionMatch sCatNumMatch=sCatNumRx.match(uname);
 	if (sCatNumMatch.hasMatch())
 	{
@@ -1853,7 +1853,7 @@ NebulaP NebulaMgr::searchByDesignation(const QString &designation) const
 		if (cat == "ESO") n = searchESO(num);
 		if (cat == "VDBH") n = searchVdBH(num);
 	}
-	static QRegularExpression gCatNumRx("^(PN|SNR)\\s*G(.+)$");
+	static const QRegularExpression gCatNumRx("^(PN|SNR)\\s*G(.+)$");
 	QRegularExpressionMatch gCatNumMatch=gCatNumRx.match(uname);
 	if (gCatNumMatch.hasMatch())
 	{
@@ -2702,7 +2702,7 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 	return result;
 }
 
-QList<NebulaP> NebulaMgr::getDeepSkyObjectsByType(const QString &objType) const
+const QList<NebulaP> NebulaMgr::getDeepSkyObjectsByType(const QString &objType) const
 {
 	QList<NebulaP> dso;
 	int type = objType.toInt();

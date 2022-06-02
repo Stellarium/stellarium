@@ -578,7 +578,6 @@ int NewHinduCalendar::fixedFromAstroHinduLunar(const QVector<int> parts)
 		  astroLunarDayFromMoment(altHinduSunrise(date)) != StelUtils::amod(day+1, 30) );
 
 	return (leapDay ? date+1 : date);
-
 }
 
 // 20.6 Holidays

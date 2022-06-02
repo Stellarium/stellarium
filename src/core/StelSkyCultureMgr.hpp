@@ -90,6 +90,8 @@ public:
 	QString englishName;
 	//! Name of the author
 	QString author;
+	//! Credits info, when it is not equal to author field (optional)
+	QString credit;
 	//! The license
 	QString license;
 	//! Type of the boundaries (enum)
@@ -163,6 +165,9 @@ public slots:
 
 	//! @return a localized HTML description of the classification for the current sky culture
 	QString getCurrentSkyCultureHtmlClassification() const;
+
+	//! @return a localized HTML description of the license for the current sky culture
+	QString getCurrentSkyCultureHtmlLicense() const;
 
 	//! @return a localized HTML description of the references for the current sky culture
 	QString getCurrentSkyCultureHtmlReferences() const;

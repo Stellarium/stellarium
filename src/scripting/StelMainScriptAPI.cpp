@@ -227,7 +227,7 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 			loc.planetName = ssObj->getEnglishName();
 	}
 
-	QRegularExpression cico( "^\\s*([^,]+),\\s*(\\S.*)$" );
+	static const QRegularExpression cico( "^\\s*([^,]+),\\s*(\\S.*)$" );
 	QRegularExpressionMatch match=cico.match(name);
 	if( match.hasMatch() )
 	{
@@ -790,7 +790,7 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	if (ok)
 		return jd;
 
-	QRegularExpression nowRe("(now)?"
+	static const QRegularExpression nowRe("(now)?"
 		      "\\s*([-+])"
 		      "\\s*(\\d+(?:\\.\\d+)?(?:[eE][-+]?\\d+)?)"
 		      "\\s*(second|minute|hour|day|sol|week|month|year)s?"

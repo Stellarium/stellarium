@@ -64,6 +64,11 @@ public:
 		return SUPERNOVA_TYPE;
 	}
 
+	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	{
+		return "supernova";
+	}
+
 	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{
 		return designation;

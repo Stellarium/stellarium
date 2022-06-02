@@ -22,6 +22,7 @@
 #include "Dialog.hpp"
 #include "ConfigurationDialog.hpp"
 #include "CustomDeltaTEquationDialog.hpp"
+#include "ConfigureScreenshotsDialog.hpp"
 #include "StelMainView.hpp"
 #include "ui_configurationDialog.h"
 #include "StelApp.hpp"
@@ -89,6 +90,7 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	, progressBar(Q_NULLPTR)
 	, gui(agui)
 	, customDeltaTEquationDialog(Q_NULLPTR)
+	, configureScreenshotsDialog(Q_NULLPTR)
 	, savedProjectionType(StelApp::getInstance().getCore()->getCurrentProjectionType())
 {
 	ui = new Ui_configurationDialogForm;
@@ -100,6 +102,8 @@ ConfigurationDialog::~ConfigurationDialog()
 	ui = Q_NULLPTR;
 	delete customDeltaTEquationDialog;
 	customDeltaTEquationDialog = Q_NULLPTR;
+	delete configureScreenshotsDialog;
+	configureScreenshotsDialog = Q_NULLPTR;
 	delete currentDownloadFile;
 	currentDownloadFile = Q_NULLPTR;
 }
@@ -130,6 +134,8 @@ void ConfigurationDialog::retranslate()
 		populateDeltaTAlgorithmsList();
 		populateDateFormatsList();
 		populateTimeFormatsList();
+
+		populateTooltips();
 
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
@@ -234,7 +240,7 @@ void ConfigurationDialog::createDialogContent()
 	ui->todayTimeSpinBox->setTime(core->getInitTodayTime());
 	connect(ui->todayTimeSpinBox, SIGNAL(timeChanged(QTime)), core, SLOT(setInitTodayTime(QTime)));
 	ui->fixedDateTimeEdit->setMinimumDate(QDate(100,1,1));
-	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(core->getPresetSkyTime()));
+	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(core->getPresetSkyTime(), Qt::LocalTime));
 	ui->fixedDateTimeEdit->setDisplayFormat("dd.MM.yyyy HH:mm");
 	connect(ui->fixedDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), core, SLOT(setPresetSkyTime(QDateTime)));
 
@@ -365,6 +371,7 @@ void ConfigurationDialog::createDialogContent()
 
 	// Screenshots
 	populateScreenshotFileformatsCombo();
+	connect(ui->pushButtonConfigureScreenshotsDialog, SIGNAL(clicked()), this, SLOT(showConfigureScreenshotsDialog()));
 	connectStringProperty(ui->screenshotFileFormatComboBox, "MainView.screenShotFormat");
 	ui->screenshotDirEdit->setText(StelFileMgr::getScreenshotDir());
 	connect(ui->screenshotDirEdit, SIGNAL(editingFinished()), this, SLOT(selectScreenshotDir()));
@@ -416,6 +423,7 @@ void ConfigurationDialog::createDialogContent()
 	populatePluginsList();
 
 	updateConfigLabels();
+	populateTooltips();
 	updateTabBarListWidgetWidth();
 }
 
@@ -1196,6 +1204,8 @@ void ConfigurationDialog::saveAllSettings()
 
 	conf->setValue("main/screenshot_dir",				StelFileMgr::getScreenshotDir());
 	conf->setValue("main/invert_screenshots_colors",		propMgr->getStelPropertyValue("MainView.flagInvertScreenShotColors").toBool());
+	conf->setValue("main/screenshot_datetime_filename",		propMgr->getStelPropertyValue("MainView.flagScreenshotDateFileName").toBool());
+	conf->setValue("main/screenshot_datetime_filemask",		propMgr->getStelPropertyValue("MainView.screenShotFileMask").toString());
 	conf->setValue("main/screenshot_custom_size",			propMgr->getStelPropertyValue("MainView.flagUseCustomScreenshotSize").toBool());
 	conf->setValue("main/screenshot_custom_width",			propMgr->getStelPropertyValue("MainView.customScreenshotWidth").toInt());
 	conf->setValue("main/screenshot_custom_height",			propMgr->getStelPropertyValue("MainView.customScreenshotHeight").toInt());
@@ -1439,7 +1449,7 @@ void ConfigurationDialog::setFixedDateTimeToCurrent(void)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	double JD = core->getJD();
-	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD+core->getUTCOffset(JD)/24));
+	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD+core->getUTCOffset(JD)/24, Qt::LocalTime));
 	ui->fixedTimeRadio->setChecked(true);
 	setStartupTimeMode();
 }
@@ -1794,6 +1804,12 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxSolarLunarPosition->setChecked(flags & StelObject::SolarLunarPosition);
 }
 
+void ConfigurationDialog::populateTooltips()
+{
+	ui->checkBoxProperMotion->setToolTip(QString("<p>%1</p>").arg(q_("Annual proper motion (stars) or hourly motion (solar system objects)")));
+	ui->checkBoxRTSTime->setToolTip(QString("<p>%1</p>").arg(q_("Show time of rising, transit and setting of celestial object. The rising and setting events are defined with the upper limb of the celestial body.")));
+}
+
 void ConfigurationDialog::updateTabBarListWidgetWidth()
 {
 	ui->stackListWidget->setWrapping(false);
@@ -1917,6 +1933,14 @@ void ConfigurationDialog::showCustomDeltaTEquationDialog()
 		customDeltaTEquationDialog = new CustomDeltaTEquationDialog();
 
 	customDeltaTEquationDialog->setVisible(true);
+}
+
+void ConfigurationDialog::showConfigureScreenshotsDialog()
+{
+	if (configureScreenshotsDialog == Q_NULLPTR)
+		configureScreenshotsDialog = new ConfigureScreenshotsDialog();
+
+	configureScreenshotsDialog->setVisible(true);
 }
 
 void ConfigurationDialog::populateDateFormatsList()

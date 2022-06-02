@@ -50,6 +50,8 @@ class StelMainView : public QGraphicsView
 	Q_OBJECT
 	Q_PROPERTY(bool fullScreen                 READ isFullScreen                  WRITE setFullScreen                 NOTIFY fullScreenChanged)
 	Q_PROPERTY(bool flagInvertScreenShotColors READ getFlagInvertScreenShotColors WRITE setFlagInvertScreenShotColors NOTIFY flagInvertScreenShotColorsChanged)
+	Q_PROPERTY(bool flagScreenshotDateFileName READ getFlagScreenshotDateFileName WRITE setFlagScreenshotDateFileName NOTIFY flagScreenshotDateFileNameChanged)
+	Q_PROPERTY(QString screenShotFileMask      READ getScreenshotFileMask         WRITE setScreenshotFileMask         NOTIFY screenshotFileMaskChanged)
 	Q_PROPERTY(bool flagOverwriteScreenshots   READ getFlagOverwriteScreenShots   WRITE setFlagOverwriteScreenShots   NOTIFY flagOverwriteScreenshotsChanged)
 	Q_PROPERTY(bool flagUseCustomScreenshotSize READ getFlagUseCustomScreenshotSize WRITE setFlagUseCustomScreenshotSize NOTIFY flagUseCustomScreenshotSizeChanged)
 	Q_PROPERTY(int  customScreenshotWidth      READ getCustomScreenshotWidth      WRITE setCustomScreenshotWidth      NOTIFY customScreenshotWidthChanged)
@@ -137,6 +139,13 @@ public slots:
 	bool getFlagInvertScreenShotColors() const {return flagInvertScreenShotColors;}
 	//! Set whether colors should be inverted when saving screenshot
 	void setFlagInvertScreenShotColors(bool b) {flagInvertScreenShotColors=b; emit flagInvertScreenShotColorsChanged(b);}
+
+	//! Get whether date and time should be used for screenshot naming
+	bool getFlagScreenshotDateFileName() const {return flagScreenshotDateFileName;}
+	//! Set whether date and time should be used for screenshot naming
+	void setFlagScreenshotDateFileName(bool b);
+	void setScreenshotFileMask(const QString filemask);
+	QString getScreenshotFileMask() const {return screenShotFileMask;}
 
 	//! Get whether existing files are overwritten when saving screenshot
 	bool getFlagOverwriteScreenShots() const {return flagOverwriteScreenshots;}
@@ -231,10 +240,12 @@ signals:
 	void flagInvertScreenShotColorsChanged(bool b);
 	void flagOverwriteScreenshotsChanged(bool b);
 	void flagUseCustomScreenshotSizeChanged(bool use);
+	void flagScreenshotDateFileNameChanged(bool flag);
 	void customScreenshotWidthChanged(int width);
 	void customScreenshotHeightChanged(int height);
 	void screenshotDpiChanged(int dpi);
 	void screenshotFormatChanged(QString format);
+	void screenshotFileMaskChanged(QString format);
 
 	void skyBackgroundColorChanged(Vec3f color);
 
@@ -291,6 +302,7 @@ private:
 
 	bool updateQueued;
 	bool flagInvertScreenShotColors;
+	bool flagScreenshotDateFileName; //! if set to true, screenshot is named by date and time format
 	bool flagOverwriteScreenshots; //! if set to true, screenshot is named exactly screenShotPrefix.png and overwrites existing file
 	bool flagUseCustomScreenshotSize; //! if true, the next 2 values are observed for screenshots.
 	int customScreenshotWidth;            //! used when flagCustomResolutionScreenshots==true
@@ -299,6 +311,7 @@ private:
 	float customScreenshotMagnification;  //! tracks the magnification factor customScreenshotHeight/NormalWindowHeight
 	QString screenShotPrefix;
 	QString screenShotFormat; //! file type like "png" or "jpg".
+	QString screenShotFileMask;
 	QString screenShotDir;
 
 	bool flagCursorTimeout;

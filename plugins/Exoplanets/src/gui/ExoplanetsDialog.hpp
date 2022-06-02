@@ -24,6 +24,8 @@
 #include <QObject>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
+#include <QtCharts/QtCharts>
+#include <QXYSeries>
 
 #include "StelDialog.hpp"
 #include "Exoplanets.hpp"
@@ -72,13 +74,8 @@ public slots:
 private slots:
 	void setUpdateValues(int hours);
 	void setUpdatesEnabled(int checkState);
-	void setDistributionEnabled(int checkState);
-	void setTimelineEnabled(int checkState);
-	void setHabitableEnabled(int checkState);
 	void setDisplayAtStartupEnabled(int checkState);
-	void setDisplayShowExoplanetsButton(int checkState);
-	void setDisplayShowExoplanetsDesignations(int checkState);
-	void setDisplayShowExoplanetsNumbers(int checkState);
+	void setDisplayShowExoplanetsButton(int checkState);		
 	void updateStateReceiver(Exoplanets::UpdateState state);
         void updateCompleteReceiver();
 	void restoreDefaults(void);
@@ -108,6 +105,7 @@ private:
 
 	QStringList exoplanetsHeader;
 	typedef QPair<QString, int> axisPair;
+	QtCharts::QChart *chart;
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug

@@ -7,6 +7,15 @@ clone_folder: c:\stellarium
 clone_depth: 5
 # Do not build feature branch with open Pull Requests
 skip_branch_with_pr: true
+# Do not build on tags
+skip_tags: true
+# Skipping commits
+skip_commits:
+  message: /(GHA|skip)/
+  files:
+    - guide/*
+# Maximum number of concurrent jobs for the project
+max_jobs: 4
 # environment variables
 environment:
   matrix:
@@ -38,7 +47,7 @@ environment:
 #    qtbin: msvc2019
 #    msvcname: Visual Studio 17 2022
 #    packaging: false
-#    suffix: Win32 
+#    suffix: Win32
 #    cmake_args: -A Win32
 
 before_build:
@@ -59,7 +68,7 @@ build:
   project: c:\stellarium\build-%qtver%-%qtbin%\Stellarium.sln
   parallel: true
   verbosity: minimal
-  
+
 test_script:
   - if [%PUBLISH_BINARY%]==[false] ctest --output-on-failure
 

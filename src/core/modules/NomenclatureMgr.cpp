@@ -134,7 +134,7 @@ void NomenclatureMgr::loadNomenclature()
 	nomenclatureItems.clear();	
 
 	// regular expression to find the comments and empty lines
-	QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
+	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 
 	// regular expression to find the nomenclature data
 	// Rules:
@@ -147,8 +147,8 @@ void NomenclatureMgr::loadNomenclature()
 	//	latitude of surface feature		: float (decimal degrees)
 	//	longitude of surface feature		: float (decimal degrees)
 	//	diameter of surface feature		: float (kilometers)
-	QRegularExpression recRx("^\\s*(\\w+)\\s+(\\d+)\\s+_[(]\"(.*)\"[)]\\s+(\\w+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)(.*)");
-	QRegularExpression ctxRx("(.*)\",\\s*\"(.*)");
+	static const QRegularExpression recRx("^\\s*(\\w+)\\s+(\\d+)\\s+_[(]\"(.*)\"[)]\\s+(\\w+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)(.*)");
+	static const QRegularExpression ctxRx("(.*)\",\\s*\"(.*)");
 
 	QString surfNamesFile = StelFileMgr::findFile("data/nomenclature.dat"); // compressed version of file nomenclature.fab
 	if (!surfNamesFile.isEmpty()) // OK, the file exists!

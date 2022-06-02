@@ -72,22 +72,27 @@ typedef QSet<QString> GroupSet;
 //! @ingroup satellites
 enum SatFlag
 {
-	SatNoFlags		= 0x0000,
-	SatDisplayed		= 0x0001,
-	SatNotDisplayed		= 0x0002,
-	SatUser			= 0x0004,
-	SatOrbit		= 0x0008,
-	SatNew			= 0x0010,
-	SatError		= 0x0020,
-	SatSmallSize		= 0x0040,
-	SatMediumSize		= 0x0080,
-	SatLargeSize		= 0x0100,
-	SatLEO			= 0x0200,
-	SatMEO			= 0x0400,
-	SatGSO			= 0x0800,
-	SatHEO			= 0x1000,
-	SatHGSO			= 0x2000,
-	SatOutdatedTLE		= 0x4000
+	SatNoFlags	= 0x00000,
+	SatDisplayed	= 0x00001,
+	SatNotDisplayed	= 0x00002,
+	SatUser		= 0x00004,
+	SatOrbit	= 0x00008,
+	SatNew		= 0x00010,
+	SatError	= 0x00020,
+	SatSmallSize	= 0x00040,
+	SatMediumSize	= 0x00080,
+	SatLargeSize	= 0x00100,
+	SatLEO		= 0x00200,
+	SatMEO		= 0x00400,
+	SatGSO		= 0x00800,
+	SatHEO		= 0x01000,
+	SatHGSO		= 0x02000,
+	SatPolarOrbit	= 0x04000,
+	SatEquatOrbit	= 0x08000,
+	SatPSSO		= 0x10000,
+	SatHEarthO	= 0x20000,
+	SatOutdatedTLE	= 0x40000,
+	SatCustomFilter	= 0x80000
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
@@ -140,6 +145,11 @@ public:
 	virtual QString getType(void) const Q_DECL_OVERRIDE
 	{
 		return SATELLITE_TYPE;
+	}
+
+	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	{
+		return "artificial satellite";
 	}
 
 	virtual QString getID(void) const Q_DECL_OVERRIDE
@@ -314,6 +324,7 @@ private:
 	static bool  orbitLinesFlag;
 	static bool  iconicModeFlag;
 	static bool  hideInvisibleSatellitesFlag;
+	static bool  coloredInvisibleSatellitesFlag;
 	//! Mask controlling which info display flags should be honoured.
 	static StelObject::InfoStringGroupFlags flagsMask;
 	static Vec3f invisibleSatelliteColor;
@@ -321,6 +332,29 @@ private:
 
 	static double timeRateLimit;
 	static int tleEpochAge;
+
+	static bool flagCFKnownStdMagnitude;
+	static bool flagCFApogee;
+	static double minCFApogee;
+	static double maxCFApogee;
+	static bool flagCFPerigee;
+	static double minCFPerigee;
+	static double maxCFPerigee;
+	static bool flagCFAltitude;
+	static double minCFAltitude;
+	static double maxCFAltitude;
+	static bool flagCFEccentricity;
+	static double minCFEccentricity;
+	static double maxCFEccentricity;
+	static bool flagCFPeriod;
+	static double minCFPeriod;
+	static double maxCFPeriod;
+	static bool flagCFInclination;
+	static double minCFInclination;
+	static double maxCFInclination;
+	static bool flagCFRCS;
+	static double minCFRCS;
+	static double maxCFRCS;
 
 	void draw(StelCore *core, StelPainter& painter);
 

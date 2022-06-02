@@ -232,6 +232,7 @@ public:
 	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
 	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
 	virtual QString getType(void) const Q_DECL_OVERRIDE {return PLANET_TYPE;}
+	virtual QString getObjectType(void) const Q_DECL_OVERRIDE { return getPlanetTypeString(); }
 	virtual QString getID(void) const Q_DECL_OVERRIDE { return englishName; }
 	//! A Planet's own eclipticPos is in VSOP87 ref. frame (practically equal to ecliptic of J2000 for us) coordinates relative to the parent body (sun, planet).
 	//! To get J2000 equatorial coordinates, we require heliocentric ecliptical positions (adding up parent positions) of observer and Planet.
@@ -285,8 +286,7 @@ public:
 	double getPolarRadius(void) const {return equatorialRadius*oneMinusOblateness;}
 	//! Get duration of sidereal day (earth days, may come from rot_periode or orbit_period (for moons) from ssystem_*.ini)
 	double getSiderealDay(void) const { if (re.W1!=0.) return 360.0/re.W1; else return static_cast<double>(re.period);} // I assume the more modern values are better.
-	//! Get duration of sidereal year
-	// must be virtual for Comets.
+	//! Get duration of sidereal year [earth days]
 	virtual double getSiderealPeriod(void) const { return siderealPeriod; }
 	//! set duration of sidereal year. Also sets deltaOrbitJDE and may set closeOrbit for Planet objects which have KeplerOrbits.
 	//! siderealPeriod [earth days] orbital duration.

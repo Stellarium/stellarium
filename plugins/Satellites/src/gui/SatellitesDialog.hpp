@@ -37,6 +37,7 @@ class QStandardItemModel;
 class QTimer;
 
 class SatellitesImportDialog;
+class SatellitesFilterDialog;
 class SatellitesListFilterModel;
 
 //! Main configuration window of the %Satellites plugin.
@@ -85,9 +86,12 @@ private slots:
 	void updateSatelliteData();
 	void updateSatelliteAndSaveData();
 	void updateFilteredSatellitesList();
+	void selectFilteredSatellitesList();
 	void saveSatellites(void);
 	void showUpdateState(Satellites::UpdateState state);
 	void showUpdateCompleted(int updated, int total, int added, int missing);
+	void handleOrbitLinesGroup(bool state);
+	void handleUmbraGroup(bool state);
 	
 	//! @name Sources Tab 
 	//@{
@@ -103,6 +107,7 @@ private slots:
 	//@}
 	
 	void restoreDefaults(void);
+	void restoreTleSources(void);
 	void saveSettings(void);
 	void addSatellites(const TleDataList& newSatellites);
 	void removeSatellites();
@@ -169,6 +174,7 @@ private:
 	QTimer* updateTimer;
 	
 	SatellitesImportDialog* importWindow;
+	SatellitesFilterDialog* filterWindow;
 	
 	SatellitesListFilterModel* filterModel;
 	

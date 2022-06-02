@@ -79,6 +79,12 @@ public:
 		return PULSAR_TYPE;
 	}
 
+	//! Get the type of object
+	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	{
+		return (glitch==0) ? "pulsar" : "pulsar with glitches";
+	}
+
 	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{
 		return designation;

@@ -214,9 +214,9 @@ void Atmosphere::computeColor(StelCore* core, const double JD, const Planet& cur
 
 		// Update the eclipse intensity factor to apply on atmosphere model
 		// these are for radii
-		const double sun_angular_size = atan(sun.getEquatorialRadius()/sunPos.length());
-		const double moon_angular_size = atan(moon->getEquatorialRadius()/moonPos.length());
-		const double touch_angle = sun_angular_size + moon_angular_size;
+		const double sun_angular_radius = atan(sun.getEquatorialRadius()/sunPos.length());
+		const double moon_angular_radius = atan(moon->getEquatorialRadius()/moonPos.length());
+		const double touch_angle = sun_angular_radius + moon_angular_radius;
 
 		// determine luminance falloff during solar eclipses
 		sunPos.normalize();
@@ -225,14 +225,13 @@ void Atmosphere::computeColor(StelCore* core, const double JD, const Planet& cur
 
 		if(separation_angle < touch_angle)
 		{
-
-			double dark_angle = moon_angular_size - sun_angular_size;
+			double dark_angle = moon_angular_radius - sun_angular_radius;
 			double min = 0.0025; // 0.005f; // 0.0001f;  // so bright stars show up at total eclipse
 			if (dark_angle < 0.)
 			{
 				// annular eclipse
-				double asun = sun_angular_size*sun_angular_size;
-				min = (asun - moon_angular_size*moon_angular_size)/asun;  // minimum proportion of sun uncovered
+				double asun = sun_angular_radius*sun_angular_radius;
+				min = (asun - moon_angular_radius*moon_angular_radius)/asun;  // minimum proportion of sun uncovered
 				dark_angle *= -1;
 			}
 
@@ -241,6 +240,8 @@ void Atmosphere::computeColor(StelCore* core, const double JD, const Planet& cur
 			else
 				eclipseFactor = static_cast<float>(min + (1.0-min)*(separation_angle-dark_angle)/(touch_angle-dark_angle));
 		}
+		else
+			eclipseFactor = 1.0f;
 	}
 	else
 	{

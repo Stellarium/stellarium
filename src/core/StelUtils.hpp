@@ -34,6 +34,8 @@
 #define AU_KMf (1.0f/149597870.691f)
 // Parsec (km)
 #define PARSEC 30.857e12
+// Parsec (LY)
+#define PARSEC_LY 3.261563777
 // speed of light (km/sec)
 #define SPEED_OF_LIGHT 299792.458
 // Ecliptic obliquity of J2000.0, degrees
@@ -151,8 +153,8 @@ namespace StelUtils
 	//! @param angle input angle in radian
 	//! @param precision
 	//! @param useD Define if letter "d" must be used instead of deg sign
-	//! @param useC Define if function should use 0-360 degrees
-	QString radToDecDegStr(const double angle, const int precision = 4, const bool useD=false, const bool useC=false);
+	//! @param positive Define if function should use 0-360 degrees
+	QString radToDecDegStr(const double angle, const int precision = 4, const bool useD=false, const bool positive=false);
 
 	//! Convert an angle in radian to a hms formatted string.
 	//! If the second, minute part is == 0, it is not output
@@ -423,11 +425,19 @@ namespace StelUtils
 
 	///////////////////////////////////////////////////
 	// New Qt based General Calendar Functions.
-	//! Make from julianDay a year, month, day for the Julian Date julianDay represents.
+	//! Extract from julianDay a year, month, day for the Julian Date julianDay represents.
+	//! @attention Under rare circumstances with a rounded result where julianDay=*.49999999xyz this will still round off whereas the time is less than a fraction from midnight of the next day.
+	//! Depending on circumstances this may matter or not. If you need a full decoding of a Julian day number, prefer to use getDateTimeFromJulianDay()
 	void getDateFromJulianDay(const double julianDay, int *year, int *month, int *day);
 
-	//! Make from julianDay an hour, minute, second.
-	void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis=Q_NULLPTR);
+	//! Extract from julianDay an hour, minute, second.
+	//! @attention Under rare circumstances with a rounded result where julianDay=*.49999999xyz this will lead to a factual result for *.5000000abc, i.e. not 24 but 0 hours, and wrapDay will be true.
+	//! Depending on circumstances this may matter or not. If you need a full decoding of a Julian day number, prefer to use getDateTimeFromJulianDay()
+	void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis=Q_NULLPTR, bool *wrapDay=Q_NULLPTR);
+
+	//! Extract from julianDay a year, month, day, hour, minute, second and (optional) millisecond for the Julian Day julianDay represents.
+	//! This is the preferred method of complete decoding of a Julian day number.
+	void getDateTimeFromJulianDay(const double julianDay, int *year, int *month, int *day, int *hour, int *minute, int *second, int *millis=Q_NULLPTR);
 
 	//! Make hours (decimal format) from julianDay
 	double getHoursFromJulianDay(const double julianDay);
@@ -483,13 +493,19 @@ namespace StelUtils
 	//! @param dateTime the UTC QDateTime to convert
 	//! @result the matching decimal Julian Day
 	inline double qDateTimeToJd(const QDateTime& dateTime){
+		Q_ASSERT(dateTime.timeSpec()==Qt::UTC);
 		return dateTime.date().toJulianDay()+static_cast<double>(1./(24*60*60*1000))*QTime(0, 0, 0, 0).msecsTo(dateTime.time())-0.5;
 	}
 
-	//! Convert a julian day to a QDateTime.
-	//! @param jd to convert
-	//! @result the matching UTC QDateTime
-	QDateTime jdToQDateTime(const double& jd);
+	//! Convert a Julian Day number to a QDateTime.
+	//! @param jd Julian Day number (with fractions) to convert
+	//! @param timeSpec a Qt::TimeSpec constant. Meaningful in this context seem only Qt::UTC (preferred) and Qt::LocalTime (useful in some GUI contexts).
+	//! @note From 2008 to 2022-05 this converted to local time zone, not to UTC as specified and intended.
+	//!        The old behaviour is kept with @param timeSpec set to Qt::LocalTime.
+	//! If you use Qt::LocalTime, you should add StelCore::getUTCOffset(jd)/24 to the current JD before calling this to have @param jd as a "local time zone corrected JD" before conversion.
+	//! @result the matching QDateTime
+	//! @note QDate has no year zero. This and other idiosyncrasies of QDateTime may limit the applicability of program parts which use this method to positive years or may cause other issues.
+	QDateTime jdToQDateTime(const double& jd, const Qt::TimeSpec timeSpec);
 
 	//! Compute Julian day number from calendar date.
 	//! Uses QDate functionality if possible, but also works for negative JD.

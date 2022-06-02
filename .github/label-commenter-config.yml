@@ -92,24 +92,24 @@ labels:
     labeled:
       issue:
         body: |
-          Thank you @{{ issue.user.login }}! In future please use Transifex to fix and improve translations: 
+          Thank you @{{ issue.user.login }}! In future please use Transifex to fix and improve translations:
           https://www.transifex.com/stellarium/stellarium/dashboard/
   - name: fix committed
     labeled:
       issue:
         body: |
-          Hello @{{ issue.user.login }}! Please check the fresh version (development snapshot) of Stellarium: 
+          Hello @{{ issue.user.login }}! Please check the fresh version (development snapshot) of Stellarium:
           https://github.com/Stellarium/stellarium-data/releases/tag/weekly-snapshot
       pr:
         body: |
-          Hello @{{ pull_request.user.login }}! Please check the fresh version (development snapshot) of Stellarium: 
+          Hello @{{ pull_request.user.login }}! Please check the fresh version (development snapshot) of Stellarium:
           https://github.com/Stellarium/stellarium-data/releases/tag/weekly-snapshot
     unlabeled:
       issue:
         body: |
-          Hello @{{ issue.user.login }}! Please check the latest stable version of Stellarium: 
+          Hello @{{ issue.user.login }}! Please check the latest stable version of Stellarium:
           https://github.com/Stellarium/stellarium/releases/latest
       pr:
         body: |
-          Hello @{{ pull_request.user.login }}! Please check the latest stable version of Stellarium: 
+          Hello @{{ pull_request.user.login }}! Please check the latest stable version of Stellarium:
           https://github.com/Stellarium/stellarium/releases/latest

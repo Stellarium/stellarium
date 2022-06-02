@@ -25,6 +25,10 @@
 #include <QUrl>
 #include <QFileDialog>
 #include <QColorDialog>
+#include <QtCharts/QtCharts>
+#include <QScatterSeries>
+#include <QValueAxis>
+#include <QLogValueAxis>
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -41,12 +45,13 @@
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
 
-#include "external/qcustomplot/qcustomplot.h"
+using namespace QtCharts;
 
 ExoplanetsDialog::ExoplanetsDialog()
 	: StelDialog("Exoplanets")
 	, ep(Q_NULLPTR)
 	, updateTimer(Q_NULLPTR)
+	, chart(Q_NULLPTR)
 {
         ui = new Ui_exoplanetsDialog;
 	exoplanetsHeader.clear();
@@ -61,6 +66,8 @@ ExoplanetsDialog::~ExoplanetsDialog()
 		updateTimer->stop();
 		delete updateTimer;
 		updateTimer = Q_NULLPTR;
+		if (chart)
+			delete chart;
 	}
 	delete ui;
 }
@@ -100,18 +107,9 @@ void ExoplanetsDialog::createDialogContent()
 	// Settings tab / updates group
 	ui->displayAtStartupCheckBox->setChecked(ep->getEnableAtStartup());
 	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
-	ui->displayModeCheckBox->setChecked(ep->getDisplayMode());
-	connect(ui->displayModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDistributionEnabled(int)));
 	ui->displayShowExoplanetsButton->setChecked(ep->getFlagShowExoplanetsButton());
 	connect(ui->displayShowExoplanetsButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowExoplanetsButton(int)));
-	ui->timelineModeCheckBox->setChecked(ep->getTimelineMode());
-	connect(ui->timelineModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setTimelineEnabled(int)));
-	ui->habitableModeCheckBox->setChecked(ep->getHabitableMode());
-	connect(ui->habitableModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setHabitableEnabled(int)));
-	ui->displayShowDesignationsCheckBox->setChecked(ep->getFlagShowExoplanetsDesignations());
-	connect(ui->displayShowDesignationsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowExoplanetsDesignations(int)));
-	ui->displayShowNumbersCheckBox->setChecked(ep->getFlagShowExoplanetsNumbers());
-	connect(ui->displayShowNumbersCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowExoplanetsNumbers(int)));
+
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
 	connect(ep, SIGNAL(updateStateChanged(Exoplanets::UpdateState)), this, SLOT(updateStateReceiver(Exoplanets::UpdateState)));
@@ -120,6 +118,12 @@ void ExoplanetsDialog::createDialogContent()
 	refreshUpdateValues(); // fetch values for last updated and so on
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
 	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
+
+	connectBoolProperty(ui->displayModeCheckBox,               "Exoplanets.flagDisplayMode");
+	connectBoolProperty(ui->timelineModeCheckBox,              "Exoplanets.flagTimelineMode");
+	connectBoolProperty(ui->habitableModeCheckBox,             "Exoplanets.flagHabitableMode");
+	connectBoolProperty(ui->displayShowDesignationsCheckBox,   "Exoplanets.flagShowExoplanetsDesignations");
+	connectBoolProperty(ui->displayShowNumbersCheckBox,        "Exoplanets.flagShowExoplanetsNumbers");
 
 	connectColorButton(ui->exoplanetMarkerColor,		"Exoplanets.markerColor",    "Exoplanets/exoplanet_marker_color");
 	connectColorButton(ui->habitableExoplanetMarkerColor,	"Exoplanets.habitableColor", "Exoplanets/habitable_exoplanet_marker_color");
@@ -133,7 +137,6 @@ void ExoplanetsDialog::createDialogContent()
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));	
-	connect(ui->plotDiagram, SIGNAL(clicked()), this, SLOT(drawDiagram()));
 
 	populateTemperatureScales();
 	int idx = ui->temperatureScaleComboBox->findData(ep->getCurrentTemperatureScaleKey(), Qt::UserRole, Qt::MatchCaseSensitive);
@@ -160,6 +163,15 @@ void ExoplanetsDialog::createDialogContent()
 	}
 
 	populateDiagramsList();	
+	drawDiagram();
+	connect(ui->comboAxisX, SIGNAL(currentIndexChanged(int)), this, SLOT(drawDiagram()));
+	connect(ui->comboAxisY, SIGNAL(currentIndexChanged(int)), this, SLOT(drawDiagram()));
+	connect(ui->checkBoxLogX, SIGNAL(toggled(bool)), this, SLOT(drawDiagram()));
+	connect(ui->checkBoxLogY, SIGNAL(toggled(bool)), this, SLOT(drawDiagram()));
+	connect(ui->minX, SIGNAL(textChanged(const QString &)), this, SLOT(drawDiagram()));
+	connect(ui->maxX, SIGNAL(textChanged(const QString &)), this, SLOT(drawDiagram()));
+	connect(ui->minY, SIGNAL(textChanged(const QString &)), this, SLOT(drawDiagram()));
+	connect(ui->maxY, SIGNAL(textChanged(const QString &)), this, SLOT(drawDiagram()));
 	fillExoplanetsTable();
 	updateGuiFromSettings();
 }
@@ -272,7 +284,8 @@ void ExoplanetsDialog::setAboutHtml(void)
 	html += "<h2>" + q_("Exoplanets Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + EXOPLANETS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + EXOPLANETS_PLUGIN_LICENSE + "</td></tr>";
-	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf</td></tr></table>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf</td></tr>";
+	html += "<tr><td><strong>" + q_("Contributors") + ":</strong></td><td>Georg Zotti</td></tr></table>";
 
 	html += "<p>" + QString(q_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from \"%1The Extrasolar Planets Encyclopaedia%2\"")).arg("<a href=\"http://exoplanet.eu/\">", "</a>. ");
 	html += QString(q_("The list of potential habitable exoplanets and data about them were taken from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability Laboratory%3.")).arg("<a href=\"http://phl.upr.edu/projects/habitable-exoplanets-catalog\">").arg("<a href=\"http://phl.upr.edu/home\">").arg("</a>") + "</p>";
@@ -686,36 +699,6 @@ void ExoplanetsDialog::setUpdateValues(int hours)
 	refreshUpdateValues();
 }
 
-void ExoplanetsDialog::setDistributionEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ep->setDisplayMode(b);
-}
-
-void ExoplanetsDialog::setDisplayShowExoplanetsDesignations(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ep->setFlagShowExoplanetsDesignations(b);
-}
-
-void ExoplanetsDialog::setDisplayShowExoplanetsNumbers(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ep->setFlagShowExoplanetsNumbers(b);
-}
-
-void ExoplanetsDialog::setTimelineEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ep->setTimelineMode(b);
-}
-
-void ExoplanetsDialog::setHabitableEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ep->setHabitableMode(b);
-}
-
 void ExoplanetsDialog::setDisplayAtStartupEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
@@ -798,18 +781,62 @@ void ExoplanetsDialog::updateJSON(void)
 
 void ExoplanetsDialog::drawDiagram()
 {
-	int currentAxisX = ui->comboAxisX->currentData(Qt::UserRole).toInt();
-	QString currentAxisXString = ui->comboAxisX->currentText();
-	int currentAxisY = ui->comboAxisY->currentData(Qt::UserRole).toInt();
-	QString currentAxisYString = ui->comboAxisY->currentText();
+	const int currentAxisX = ui->comboAxisX->currentData(Qt::UserRole).toInt();
+	const QString currentAxisXString = ui->comboAxisX->currentText();
+	const bool axisXlog=ui->checkBoxLogX->isChecked();
+	const int currentAxisY = ui->comboAxisY->currentData(Qt::UserRole).toInt();
+	const QString currentAxisYString = ui->comboAxisY->currentText();
+	const bool axisYlog=ui->checkBoxLogY->isChecked();
 
 	QList<double> aX = ep->getExoplanetsData(currentAxisX), aY = ep->getExoplanetsData(currentAxisY);
-	QVector<double> x = aX.toVector(), y = aY.toVector();
 
-	double minX = *std::min_element(aX.begin(), aX.end());
-	double minY = *std::min_element(aY.begin(), aY.end());
-	double maxX = *std::max_element(aX.begin(), aX.end());
-	double maxY = *std::max_element(aY.begin(), aY.end());
+	QtCharts::QChart *chart=new QtCharts::QChart();
+	chart->setBackgroundBrush(QBrush(QColor(86, 87, 90)));
+	chart->setTitleBrush(QBrush(Qt::white));
+	chart->setMargins(QMargins(2, 1, 2, 1)); // set to 0/0/0/0 for max space usage. This is between the title/axis labels and the enclosing QChartView.
+	chart->layout()->setContentsMargins(0, 0, 0, 0);
+	chart->setBackgroundRoundness(0); // remove rounded corners
+	chart->legend()->hide();
+
+	QtCharts::QScatterSeries *series=new QScatterSeries();
+	QAbstractAxis *chartXAxis, *chartYAxis;
+	for (int i=0; i<aX.length(); i++)
+	{
+		// build chartable series from the two lists. Exclude zeros and negative values to avoid issues with log charts.
+		if (axisXlog && axisYlog)
+		{
+			if ( (aX.at(i)>0.) && (aY.at(i)>0.))
+				series->append(aX.at(i), aY.at(i));
+		}
+		else if (axisXlog && !axisYlog)
+		{
+			if (aX.at(i)>0.)
+				series->append(aX.at(i), aY.at(i));
+		}
+		else if (!axisXlog && axisYlog)
+		{
+			if (aY.at(i)>0.)
+				series->append(aX.at(i), aY.at(i));
+		}
+		else
+			series->append(aX.at(i), aY.at(i));
+	}
+
+	// Find range of actually used values
+	const QList<QPointF>points=series->points();
+	auto compX=[](const QPointF &a, const QPointF &b){
+		return a.x() < b.x();
+	};
+	auto compY=[](const QPointF &a, const QPointF &b){
+		return a.y() < b.y();
+	};
+	auto [minXs, maxXs] = std::minmax_element(points.begin(), points.end(), compX);
+	auto [minYs, maxYs] = std::minmax_element(points.begin(), points.end(), compY);
+	//qDebug() << "Xmin" << *minXs << "Xmax" << *maxXs << "Ymin" << *minYs << "Ymax" << *maxYs;
+	double minX=minXs->x();
+	double maxX=maxXs->x();
+	double minY=minYs->y();
+	double maxY=maxYs->y();
 
 	if (!ui->minX->text().isEmpty())
 		minX = ui->minX->text().toDouble();
@@ -823,55 +850,80 @@ void ExoplanetsDialog::drawDiagram()
 	if (!ui->maxY->text().isEmpty())
 		maxY = ui->maxY->text().toDouble();
 
-	ui->customPlot->addGraph();	
-	ui->customPlot->graph(0)->setData(x, y);
-	ui->customPlot->graph(0)->setPen(QPen(Qt::blue));
-	ui->customPlot->graph(0)->setLineStyle(QCPGraph::lsNone);
-	ui->customPlot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssDisc, 4));
-	ui->customPlot->graph(0)->rescaleAxes(true);
-	ui->customPlot->xAxis->setLabel(currentAxisXString);
-	ui->customPlot->yAxis->setLabel(currentAxisYString);
+	chart->addSeries(series);
+	series->setPen(QPen(Qt::blue));
+	series->setMarkerShape(QScatterSeries::MarkerShapeCircle);
+	series->setMarkerSize(4);
 
-	ui->customPlot->xAxis->setRange(minX, maxX);
-	if (ui->checkBoxLogX->isChecked())
+	if (axisXlog)
 	{
-		ui->customPlot->xAxis->setScaleType(QCPAxis::stLogarithmic);
-		ui->customPlot->xAxis->setScaleLogBase(10);
+		chartXAxis = new QLogValueAxis(chart);
+		chart->addAxis(chartXAxis, Qt::AlignBottom);
+		chartXAxis->setRange(minX, maxX);
+		dynamic_cast<QLogValueAxis*>(chartXAxis)->setMinorTickCount(-1);
 	}
 	else
-		ui->customPlot->xAxis->setScaleType(QCPAxis::stLinear);
-
-	ui->customPlot->yAxis->setRange(minY, maxY);
-	if (ui->checkBoxLogY->isChecked())
 	{
-		ui->customPlot->yAxis->setScaleType(QCPAxis::stLogarithmic);
-		ui->customPlot->yAxis->setScaleLogBase(10);
+		chartXAxis = new QValueAxis(chart);
+		chart->addAxis(chartXAxis, Qt::AlignBottom);
+		chartXAxis->setRange(minX, maxX);
+		dynamic_cast<QValueAxis *>(chartXAxis)->applyNiceNumbers();
+		dynamic_cast<QValueAxis *>(chartXAxis)->setMinorTickCount(1);
+	}
+
+	if (axisYlog)
+	{
+		chartYAxis = new QLogValueAxis(chart);
+		chart->addAxis(chartYAxis, Qt::AlignLeft);
+		chartYAxis->setRange(minY, maxY);
+		dynamic_cast<QLogValueAxis*>(chartYAxis)->setMinorTickCount(-1);
 	}
 	else
-		ui->customPlot->yAxis->setScaleType(QCPAxis::stLinear);
+	{
+		chartYAxis = new QValueAxis(chart);
+		chart->addAxis(chartYAxis, Qt::AlignLeft);
+		chartYAxis->setRange(minY, maxY);
+		dynamic_cast<QValueAxis *>(chartYAxis)->applyNiceNumbers();
+		dynamic_cast<QValueAxis *>(chartYAxis)->setMinorTickCount(1);
+	}
 
-	ui->customPlot->replot();
+	chartXAxis->setTitleText(currentAxisXString);
+	chartYAxis->setTitleText(currentAxisYString);
+	QFont font=chartXAxis->titleFont();
+	font.setBold(false);
+	chartXAxis->setTitleFont(font);
+	font=chartYAxis->titleFont();
+	font.setBold(false);
+	chartYAxis->setTitleFont(font);
+
+	static const QPen axisPen(          Qt::white, 1,    Qt::SolidLine);
+	static const QPen axisGridPen(      Qt::white, 0.5,  Qt::SolidLine);
+	static const QPen axisMinorGridPen( Qt::white, 0.35, Qt::DotLine);
+
+	chartXAxis->setTitleBrush(Qt::white);
+	chartXAxis->setLabelsBrush(Qt::white);
+	chartXAxis->setLinePen(axisPen);
+	chartXAxis->setGridLinePen(axisGridPen);
+	chartXAxis->setMinorGridLinePen(axisMinorGridPen);
+	chartYAxis->setTitleBrush(Qt::white);
+	chartYAxis->setLabelsBrush(Qt::white);
+	chartYAxis->setLinePen(axisPen);
+	chartYAxis->setGridLinePen(axisGridPen);
+	chartYAxis->setMinorGridLinePen(axisMinorGridPen);
+
+	series->attachAxis(chartXAxis);
+	series->attachAxis(chartYAxis);
+
+	QChart *oldChart=ui->chartView->chart();
+	if (oldChart) oldChart->deleteLater();
+	ui->chartView->setChart(chart);
+	ui->chartView->setRenderHint(QPainter::Antialiasing);
 }
 
 void ExoplanetsDialog::populateDiagramsList()
 {
 	Q_ASSERT(ui->comboAxisX);
 	Q_ASSERT(ui->comboAxisY);
-
-	QColor axisColor(Qt::white);
-	QPen axisPen(axisColor, 1);
-
-	ui->customPlot->setBackground(QBrush(QColor(86, 87, 90)));
-	ui->customPlot->xAxis->setLabelColor(axisColor);
-	ui->customPlot->xAxis->setTickLabelColor(axisColor);
-	ui->customPlot->xAxis->setBasePen(axisPen);
-	ui->customPlot->xAxis->setTickPen(axisPen);
-	ui->customPlot->xAxis->setSubTickPen(axisPen);
-	ui->customPlot->yAxis->setLabelColor(axisColor);
-	ui->customPlot->yAxis->setTickLabelColor(axisColor);
-	ui->customPlot->yAxis->setBasePen(axisPen);
-	ui->customPlot->yAxis->setTickPen(axisPen);
-	ui->customPlot->yAxis->setSubTickPen(axisPen);
 
 	QComboBox* axisX = ui->comboAxisX;
 	QComboBox* axisY = ui->comboAxisY;

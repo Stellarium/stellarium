@@ -811,6 +811,7 @@ bool Exoplanets::getDisplayMode() const
 void Exoplanets::setDisplayMode(bool b)
 {
 	Exoplanet::distributionMode=b;
+	emit displayModeChanged(b);
 }
 
 bool Exoplanets::getFlagShowExoplanetsDesignations() const
@@ -821,6 +822,7 @@ bool Exoplanets::getFlagShowExoplanetsDesignations() const
 void Exoplanets::setFlagShowExoplanetsDesignations(bool b)
 {
 	Exoplanet::showDesignations=b;
+	emit flagShowExoplanetsDesignationsChanged(b);
 }
 
 bool Exoplanets::getFlagShowExoplanetsNumbers() const
@@ -831,6 +833,7 @@ bool Exoplanets::getFlagShowExoplanetsNumbers() const
 void Exoplanets::setFlagShowExoplanetsNumbers(bool b)
 {
 	Exoplanet::showNumbers=b;
+	emit flagShowExoplanetsNumbersChanged(b);
 }
 
 bool Exoplanets::getTimelineMode() const
@@ -841,6 +844,7 @@ bool Exoplanets::getTimelineMode() const
 void Exoplanets::setTimelineMode(bool b)
 {
 	Exoplanet::timelineMode=b;
+	emit timelineModeChanged(b);
 }
 
 bool Exoplanets::getHabitableMode() const
@@ -851,6 +855,7 @@ bool Exoplanets::getHabitableMode() const
 void Exoplanets::setHabitableMode(bool b)
 {
 	Exoplanet::habitableMode=b;
+	emit habitableModeChanged(b);
 }
 
 Vec3f Exoplanets::getMarkerColor() const

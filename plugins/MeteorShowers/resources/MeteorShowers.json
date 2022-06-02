@@ -130,6 +130,11 @@
 				"peak": 239.32
 			},
 			{
+				"year": "2022",
+				"zhr": -1,
+				"variable": "1-5"
+			},
+			{
 				"year": "1995",
 				"zhr": 500,
 				"peak": 239.322,
@@ -254,7 +259,7 @@
 			[
 			{
 				"year": "generic",
-				"zhr": 6,
+				"zhr": 10,
 				"start": 154,
 				"finish": 163,
 				"peak": 158.6,
@@ -485,6 +490,10 @@
 				"disttype": 0,
 				"b1": 0.08,
 				"b2": 0.08
+			},
+			{
+				"year": "2022",
+				"zhr": 50
 			}
 			],
 			"speed": 66,
@@ -521,6 +530,10 @@
 				"disttype": 0,
 				"b1": 0.39,
 				"b2": 0.72
+			},
+			{
+				"year": "2022",
+				"zhr": 150
 			}
 			],
 			"speed": 35,
@@ -655,6 +668,11 @@
 				"disttype": 0,
 				"b1": 0.39,
 				"b2": 0.39
+			},
+			{
+				"year": "2022",
+				"zhr": -1,
+				"variable": "10-15"
 			},
 			{
 				"year": "2002",
@@ -851,7 +869,8 @@
 			"radiantAlpha": 350,
 			"radiantDelta": 0,
 			"driftAlpha": 1.03,
-			"driftDelta": 0.13
+			"driftDelta": 0.13,
+			"pidx": 3.0
 		},
 		"NTA":
 		{
@@ -1074,6 +1093,10 @@
 				"disttype": 0,
 				"b1": 1.8,
 				"b2": 1.8
+			},
+			{
+				"year": "2022",
+				"zhr": 120
 			}
 			],
 			"speed": 41,
@@ -1103,7 +1126,7 @@
 			[
 			{
 				"year": "generic",
-				"zhr": 16,
+				"zhr": 25,
 				"start": 109,
 				"finish": 150,
 				"peak": 127,
@@ -1185,7 +1208,7 @@
 			"parentObj": "Comet 2P/Encke",
 			"pidx": 2.3
 		},
-		"THE":
+		"TAH":
 		{
 			"designation": "τ-Herculids",
 			"IAUNo": "61",
@@ -1198,14 +1221,26 @@
 				"start": 59,
 				"finish": 81,
 				"peak": 72.0
+			},
+			{
+				"year": "2022",
+				"zhr": -1,
+				"variable": "15-600",
+				"peak": 69.45
+			},
+			{
+				"year": "1930",
+				"zhr": 50,
+				"peak": 78
 			}
 			],
 			"speed": 15,
-			"radiantAlpha": 236,
-			"radiantDelta": 41,
+			"radiantAlpha": 209,
+			"radiantDelta": 28,
 			"driftAlpha": -0.1,
 			"driftDelta": 0.9,
-			"parentObj": "Comet 73P/Schwassmann-Wachmann 3"
+			"parentObj": "Comet 73P/Schwassmann-Wachmann 3",
+			"pidx": 3.0
 		},
 		"URS":
 		{
@@ -1223,6 +1258,10 @@
 				"disttype": 0,
 				"b1": 0.61,
 				"b2": 0.61
+			},
+			{
+				"year": "2022",
+				"zhr": 10
 			},
 			{
 				"year": "2000",
@@ -1273,7 +1312,8 @@
 			"radiantDelta": -11.9,
 			"driftAlpha": 0.86,
 			"driftDelta": 0.29,
-			"parentObj": "Comet C/1852 K1 (Chacornac)?"
+			"parentObj": "Comet C/1852 K1 (Chacornac)?",
+			"pidx": 3.0
 		},
 		"GUM":
 		{

@@ -144,7 +144,7 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
 			// Extract color from HTML.
-			QRegularExpression colorRegExp("<font color=(#[0-9a-f]{6,6})>");
+			static const QRegularExpression colorRegExp("<font color=(#[0-9a-f]{6,6})>");
 			int colorInt=s.indexOf(colorRegExp);
 			QString colorStr;
 

@@ -109,28 +109,28 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 
 	#ifdef Q_OS_WIN
 	if (argsGetOption(argList, "-s", "--safe-mode"))
-		qApp->setProperty("onetime_mesa_mode", true);
+		qputenv("QT_OPENGL", "software");
 
 	if (argsGetOption(argList, "-a", "--angle-mode"))
-		qApp->setProperty("onetime_angle_mode", true);
+		qputenv("QT_OPENGL", "angle");
 
 	if (argsGetOption(argList, "-9", "--angle-d3d9"))
 	{
+		qputenv("QT_OPENGL", "angle");
 		qputenv("QT_ANGLE_PLATFORM", "d3d9");
-		qApp->setProperty("onetime_angle_mode", true);
 	}
 	if (argsGetOption(argList, "", "--angle-d3d11"))
 	{
+		qputenv("QT_OPENGL", "angle");
 		qputenv("QT_ANGLE_PLATFORM", "d3d11");
-		qApp->setProperty("onetime_angle_mode", true);
 	}
 	if (argsGetOption(argList, "", "--angle-warp"))
 	{
+		qputenv("QT_OPENGL", "angle");
 		qputenv("QT_ANGLE_PLATFORM", "warp");
-		qApp->setProperty("onetime_angle_mode", true);
 	}
 	if (argsGetOption(argList, "-m", "--mesa-mode"))
-		qApp->setProperty("onetime_mesa_mode", true);
+		qputenv("QT_OPENGL", "software");
 
 	#endif
 	if (argsGetOption(argList, "", "--list-landscapes"))
@@ -229,7 +229,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 		if (!skyDate.isEmpty())
 		{
 			// validate the argument format, we will tolerate yyyy-mm-dd.
-			QRegularExpression dateRx("(-?\\d{4})-?(\\d{2})-?(\\d{2})");
+			static const QRegularExpression dateRx("(-?\\d{4})-?(\\d{2})-?(\\d{2})");
 			QRegularExpressionMatch dateMatch=dateRx.match(skyDate);
 			if (dateMatch.hasMatch())
 			    StelUtils::getJDFromDate(&skyDatePart, dateMatch.captured(1).toInt(), dateMatch.captured(2).toInt(), dateMatch.captured(3).toInt(), 12, 0, 0);
@@ -239,7 +239,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 
 		if (!skyTime.isEmpty())
 		{
-			QRegularExpression timeRx("\\d{1,2}:\\d{2}:\\d{2}");
+			static const QRegularExpression timeRx("\\d{1,2}:\\d{2}:\\d{2}");
 			if (timeRx.match(skyTime).hasMatch())
 				skyTimePart = StelUtils::qTimeToJDFraction(QTime::fromString(skyTime, "hh:mm:ss"));
 			else

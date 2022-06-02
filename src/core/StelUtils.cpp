@@ -39,19 +39,19 @@
 
 namespace StelUtils
 {
-//! Return the full name of stellarium, i.e. "stellarium 0.19.0"
+//! Return the full name of stellarium, e.g. "Stellarium 0.19.0"
 QString getApplicationName()
 {
 	return QString("Stellarium")+" "+StelUtils::getApplicationVersion();
 }
 
-//! Return the version of stellarium, i.e. "0.19.0"
+//! Return the version of stellarium, e.g. "0.19.0"
 QString getApplicationVersion()
 {
 #if defined(STELLARIUM_VERSION)
 	return QString(STELLARIUM_VERSION);
 #elif defined(GIT_REVISION)
-	return QString("%1-%2 [%3]").arg(PACKAGE_VERSION).arg(GIT_REVISION).arg(GIT_BRANCH);
+	return QString("%1-%2 [%3]").arg(PACKAGE_VERSION, GIT_REVISION, GIT_BRANCH);
 #else
 	return QString(PACKAGE_VERSION);
 #endif
@@ -93,7 +93,7 @@ QString getOperatingSystemInfo()
 
 double hmsStrToHours(const QString& s)
 {
-	QRegularExpression reg("(\\d+)h(\\d+)m(\\d+)s");
+	static const QRegularExpression reg("(\\d+)h(\\d+)m(\\d+)s");
 	QRegularExpressionMatch match=reg.match(s);
 	if (!match.hasMatch())
 		return 0.;
@@ -140,7 +140,7 @@ void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
 
 	h = static_cast<unsigned int>(angle);
 	m = static_cast<unsigned int>((angle-h)*60);
-	s = (angle-h)*3600.-60.*m;	
+	s = qAbs((angle-h)*3600.-60.*m);
 }
 
 /*************************************************************************
@@ -173,34 +173,12 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 	}	
 }
 
-void radToDecDeg(double rad, bool &sign, double &deg)
-{
-	rad = std::fmod(rad,2.0*M_PI);
-	sign=true;
-	if (rad<0)
-	{
-		rad *= -1;
-		sign = false;
-	}
-	deg = rad*M_180_PI;
-}
-
-QString radToDecDegStr(const double angle, const int precision, const bool useD, const bool useC)
+QString radToDecDegStr(const double angle, const int precision, const bool useD, const bool positive)
 {
 	const QChar degsign = (useD ? 'd' : 0x00B0);
-	bool sign;
-	double deg;
-	StelUtils::radToDecDeg(angle, sign, deg);
-	QString str = QString("%1%2%3").arg((sign?"+":"-"), QString::number(deg, 'f', precision), degsign);
-	if (useC)
-	{
-		if (!sign)
-			deg = 360. - deg;
+	double deg = (positive ? fmodpos(angle, 2.0*M_PI) : std::fmod(angle, 2.0*M_PI)) * M_180_PI;
 
-		str = QString("+%1%2").arg(QString::number(deg, 'f', precision), degsign);
-	}
-
-	return str;
+	return QString("%1%2").arg(QString::number(deg, 'f', precision), degsign);
 }
 
 /*************************************************************************
@@ -247,9 +225,9 @@ QString radToHmsStr(const double angle, const bool decimal)
 {
 	unsigned int h,m;
 	double s;
-	StelUtils::radToHms(angle+0.005*M_PI/12/(60*60), h, m, s);
+	StelUtils::radToHms(angle, h, m, s);
 	int width, precision;
-	QString carry, r;
+	QString carry;
 	if (decimal)
 	{
 		width=5;
@@ -290,7 +268,7 @@ QString radToDmsStrAdapt(const double angle, const bool useD)
 	bool sign;
 	unsigned int d,m;
 	double s;
-	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s); // NOTE: WTF???
+	StelUtils::radToDms(angle, sign, d, m, s);
 	QString str;
 	QTextStream os(&str);
 
@@ -431,7 +409,7 @@ QString decDegToLongitudeStr(const double longitude, bool eastPositive, bool sem
 // Convert a dms formatted string to an angle in radian
 double dmsStrToRad(const QString& s)
 {
-	QRegularExpression reg("([\\+\\-])(\\d+)d(\\d+)'(\\d+)\"");
+	static const QRegularExpression reg("([\\+\\-])(\\d+)d(\\d+)'(\\d+)\"");
 	QRegularExpressionMatch match=reg.match(s);
 	if (!match.hasMatch())
 		return 0;
@@ -606,15 +584,18 @@ int getBiggerPowerOfTwo(int value)
 }
 
 /*************************************************************************
- Convert a QT QDateTime class to julian day
+ Convert a Qt QDateTime class to Julian Day
 *************************************************************************/
 
-QDateTime jdToQDateTime(const double& jd)
+QDateTime jdToQDateTime(const double& jd, const Qt::TimeSpec timeSpec)
 {
-	int year, month, day;
-	getDateFromJulianDay(jd, &year, &month, &day);
-	QDateTime result = QDateTime::fromString(QString("%1.%2.%3").arg(year, 4, 10, QLatin1Char('0')).arg(month).arg(day), "yyyy.M.d");
-	result.setTime(jdFractionToQTime(jd));
+	Q_ASSERT((timeSpec==Qt::UTC) || (timeSpec==Qt::LocalTime));
+	int year, month, day, hour, minute, second, millis;
+	getDateTimeFromJulianDay(jd, &year, &month, &day, &hour, &minute, &second, &millis);
+	QDateTime result(QDate(year, month, day), QTime(hour, minute, second, millis), timeSpec);
+	if (!result.isValid())
+		qCritical() << "StelUtils::jdToQDateTime(): Invalid QDateTime:" << result;
+	Q_ASSERT(result.isValid());
 	return result;
 }
 
@@ -679,19 +660,40 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	}
 }
 
-void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis)
+void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis, bool *wrapDay)
 {
 	double frac = julianDay - (floor(julianDay));
 	double secs = frac * 24.0 * 60.0 * 60.0 + 0.0001; // add constant to fix floating-point truncation error
-	int s = static_cast<int>(floor(secs));
+	int s = int(floor(secs));
 
-	*hour = ((s / (60 * 60))+12)%24;
+	*hour = ((s / (60 * 60))+12);
+	if (*hour>=24)
+	{
+		*hour-=24;
+		if (*hour>=24)
+			qCritical() << "This is wrapping more than a day!";
+		Q_ASSERT(*hour < 24);
+		if (wrapDay) *wrapDay=true;
+	}
+	else
+		if (wrapDay) *wrapDay=false;
 	*minute = (s/(60))%60;
 	*second = s % 60;
 	if(millis)
 	{
-		*millis = static_cast<int>(floor((secs - floor(secs)) * 1000.0));
+		*millis = int(floor((secs - floor(secs)) * 1000.0));
 	}
+	//qDebug() << "getTimeFromJulianDay:" << QString::number(frac, 'f', 18) << QString::number(secs, 'f', 5) << "~" << s << *hour << *minute << *second;
+}
+
+void getDateTimeFromJulianDay(const double julianDay, int *year, int *month, int *day, int *hour, int *minute, int *second, int *millis)
+{
+	bool wrapDay;
+	getTimeFromJulianDay(julianDay, hour, minute, second, millis, &wrapDay);
+	if (wrapDay)
+		getDateFromJulianDay(julianDay+0.1, year, month, day);
+	else
+		getDateFromJulianDay(julianDay, year, month, day);
 }
 
 double getHoursFromJulianDay(const double julianDay)
@@ -705,8 +707,7 @@ double getHoursFromJulianDay(const double julianDay)
 QString julianDayToISO8601String(const double jd, bool addMS)
 {
 	int year, month, day, hour, minute, second, millis=0;
-	getDateFromJulianDay(jd, &year, &month, &day);
-	getTimeFromJulianDay(jd, &hour, &minute, &second, addMS ? &millis : Q_NULLPTR );
+	getDateTimeFromJulianDay(jd, &year, &month, &day, &hour, &minute, &second, addMS ? &millis : Q_NULLPTR );
 
 	QString res = QString("%1-%2-%3T%4:%5:%6")
 				 .arg((year >= 0 ? year : -1* year),4,10,QLatin1Char('0'))
@@ -871,7 +872,7 @@ int getDayOfWeek(int year, int month, int day)
 //! time is more than likely always going to be expressible by QDateTime.
 double getJDFromSystem()
 {
-	return qDateTimeToJd(QDateTime::currentDateTime().toUTC());
+	return qDateTimeToJd(QDateTime::currentDateTimeUtc());
 }
 
 double getJDFromBesselianEpoch(const double epoch)
@@ -886,10 +887,36 @@ double qTimeToJDFraction(const QTime& time)
 
 QTime jdFractionToQTime(const double jd)
 {
-	double decHours = std::fmod(jd+0.5, 1.0);
-	int hours = static_cast<int>(decHours/0.041666666666666666666);
-	int mins = static_cast<int>((decHours-(hours*0.041666666666666666666))/0.00069444444444444444444);
-	return QTime::fromString(QString("%1.%2").arg(hours).arg(mins), "h.m");
+	double decHours = std::fmod(jd+0.5, 1.0) * 24.;
+	int hours =int(std::floor(decHours));
+	double decMins = (decHours-hours)*60.;
+	int mins = int(std::floor(decMins));
+	double decSec = (decMins-mins)*60.;
+	int sec = int(std::floor(decSec));
+	double decMsec = (decSec-sec)*1000.;
+	int ms=int(std::round(decMsec));
+
+	if (ms>=1000){
+		ms-=1000;
+		sec+=1;
+	}
+	if (sec>=60){
+		sec-=60;
+		mins+=1;
+	}
+	if (mins>=60){
+		mins-=60;
+		hours+=1;
+	}
+	if (hours >= 24)
+		qDebug() << "WARNING: hours exceed a full day!" << hours;
+	hours %= 24;
+
+	QTime tm=QTime(hours, mins, sec, ms);
+	if (!tm.isValid())
+		qWarning() << "Invalid QTime:" << hours << "/" << mins << "/" << sec << "/" << ms << "-->" << tm;
+	Q_ASSERT(tm.isValid());
+	return tm;
 }
 
 // UTC !
@@ -1147,7 +1174,7 @@ void debugQVariantMap(const QVariant& m, const QString& indent, const QString& k
 		qDebug() << indent + key + "(map):";
 		QList<QString> keys = m.toMap().keys();
 		std::sort(keys.begin(), keys.end());
-		for (auto k : keys)
+		for (auto &k : keys)
 		{
 			debugQVariantMap(m.toMap()[k], indent + "    ", k);
 		}
@@ -1155,7 +1182,8 @@ void debugQVariantMap(const QVariant& m, const QString& indent, const QString& k
 	else if (t == QVariant::List)
 	{
 		qDebug() << indent + key + "(list):";
-		for (const auto& item : m.toList())
+		const QList<QVariant> mList=m.toList();
+		for (const auto& item : mList)
 		{
 			debugQVariantMap(item, indent + "    ");
 		}
@@ -1185,7 +1213,7 @@ double getJulianDayFromISO8601String(const QString& iso8601Date, bool* ok)
 bool getDateTimeFromISO8601String(const QString& iso8601Date, int* y, int* m, int* d, int* h, int* min, float* s)
 {
 	// Represents an ISO8601 complete date string.
-	QRegularExpression finalRe("^([+\\-]?\\d+)[:\\-](\\d\\d)[:\\-](\\d\\d)T(\\d?\\d):(\\d\\d):(\\d\\d(?:\\.\\d*)?)$");
+	static const QRegularExpression finalRe("^([+\\-]?\\d+)[:\\-](\\d\\d)[:\\-](\\d\\d)T(\\d?\\d):(\\d\\d):(\\d\\d(?:\\.\\d*)?)$");
 	QRegularExpressionMatch match=finalRe.match(iso8601Date);
 	if (match.hasMatch() && finalRe.captureCount()==6)
 	{

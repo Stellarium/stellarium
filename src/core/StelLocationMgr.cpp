@@ -669,7 +669,7 @@ static float parseAngle(const QString& s, bool* ok)
 	ret = s.toFloat(ok);
 	if (*ok) return ret;
 	// Try GPS coordinate like +121°33'38.28"
-	QRegularExpression reg("([+-]?[\\d.]+)°(?:([\\d.]+)')?(?:([\\d.]+)\")?");
+	static const QRegularExpression reg("([+-]?[\\d.]+)°(?:([\\d.]+)')?(?:([\\d.]+)\")?");
 	QRegularExpressionMatch match=reg.match(s);
 	if (match.hasMatch())
 	{
@@ -695,7 +695,7 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 		return iter.value();
 	}
 	// Maybe this is a city and country names (old format of the data)?
-	QRegularExpression cnreg("(.+),\\s+(.+)$");
+	static const QRegularExpression cnreg("(.+),\\s+(.+)$");
 	QRegularExpressionMatch cnMatch=cnreg.match(s);
 	if (cnMatch.hasMatch())
 	{
@@ -711,7 +711,7 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	}
 	StelLocation ret;
 	// Maybe it is a coordinate set with elevation?
-	QRegularExpression csreg("(.+),\\s*(.+),\\s*(.+)");
+	static const QRegularExpression csreg("(.+),\\s*(.+),\\s*(.+)");
 	QRegularExpressionMatch csMatch=csreg.match(s);
 	if (csMatch.hasMatch())
 	{
@@ -728,7 +728,7 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 		return ret;
 	}
 	// Maybe it is a coordinate set without elevation? (e.g. GPS 25.107363,121.558807 )
-	QRegularExpression reg("(?:(.+)\\s+)?(.+),\\s*(.+)"); // FIXME: Seems regexp is not very good
+	static const QRegularExpression reg("(?:(.+)\\s+)?(.+),\\s*(.+)"); // FIXME: Seems regexp is not very good
 	QRegularExpressionMatch match=reg.match(s);
 	if (match.hasMatch())
 	{

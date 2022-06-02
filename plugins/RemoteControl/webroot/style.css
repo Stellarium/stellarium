@@ -35,15 +35,15 @@
 
 /* Tab customization */
 .ui-tabs {
-    padding: 0px;
+    padding: 0;
     background: rgb(31,31,31);
-    border-width: 0px;
+    border-width: 0;
 }
 
 .ui-tabs .ui-widget-header {
     background: transparent;
     border: none;
-    border-radius: 0px;
+    border-radius: 0;
 }
 
 .ui-tabs .ui-widget-header .ui-state-default a {
@@ -56,14 +56,14 @@
 }
 
 div#srch_tab_object {
-    border-radius: 0px;
+    border-radius: 0;
 }
 
 .ui-tabs .ui-tabs-nav {
-    padding-left: 0px;
+    padding-left: 0;
     background: transparent;
-    border-width: 0px 0px 1px 0px;
-    border-radius: 0px;
+    border-width: 0 0 1px;
+    border-radius: 0;
 }
 
 .ui-tabs .ui-tabs-nav .ui-corner-top {
@@ -84,8 +84,8 @@ div#srch_tab_object {
 .ui-tabs .ui-tabs-panel {
     color: rgb(3,3,3);
     background: linear-gradient(rgb(86, 87, 90),rgb(48, 49, 52));
-    border-width: 0px;
-	border-radius: 0px;
+    border-width: 0;
+	border-radius: 0;
 }
 
 /* Large vertical spinners */
@@ -96,11 +96,11 @@ div#srch_tab_object {
     position: relative;
     vertical-align: middle;
 	background: linear-gradient(rgb(180, 180, 183),rgb(93, 95, 98));
-	border-radius: 0px;
+	border-radius: 0;
 }
 
 .ui-spinner-button {
-	border-radius: 0px;
+	border-radius: 0;
 }
 
 .ui-spinner a.ui-spinner-button {
@@ -169,7 +169,7 @@ div#srch_tab_object {
 
 span.ui-selectmenu-button.ui-state-default {
 	border: 1px solid black;
-	border-radius: 0px;
+	border-radius: 0;
 	color: rgb(3,3,3);
 	background: linear-gradient(#B4B4B7, #5D5F62);
 }
@@ -299,7 +299,7 @@ h2 {
 
 .block header h2 {
 	/* font-size: 14px; */
-	margin: 0px;
+	margin: 0;
 	display: inline-block;
 }
 
@@ -321,7 +321,7 @@ h2 {
 	top: 2px;
 	font-size: 12px;
 	font-weight: bold;
-	line-height: 0px;
+	line-height: 0;
 }
 
 .smallblock {
@@ -342,15 +342,15 @@ h2 {
 
 .smallblock > h3 {
 	/* vertical-align: middle; */
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 	display: block;
 	position: absolute;
 	left: 10px;
 	top: 4px;
 	font-size: 12px;
 	font-weight: bold;
-	/* line-height: 0px; */
+	/* line-height: 0; */
 }
 
 .relative {
@@ -483,7 +483,7 @@ header img {
 
 ul.buttonlist,
 ul.button32list {
-	padding: 0px;
+	padding: 0;
 	list-style: none;
 }
 
@@ -544,8 +544,8 @@ ul.button32list > li > button{
 	line-height: 32px;
 	vertical-align: middle;
 	overflow: hidden;
-	padding: 0px;
-	margin: 0px;
+	padding: 0;
+	margin: 0;
 	border-radius: 2px;
 	border: none;
 	-webkit-user-select: none;
@@ -597,7 +597,7 @@ button.button32:active {
 
 #timejumplist ul {
 	list-style: none;
-	padding: 0px;
+	padding: 0;
 	display: inline-block;
 	vertical-align: top;
 }
@@ -607,7 +607,7 @@ button.button32:active {
 }
 
 .scrollselect {
-	padding: 1px 0px;
+	padding: 1px 0;
 	min-height: 12em;
 	/* margin-left: auto; */
 	/* margin-right: auto; */
@@ -697,23 +697,23 @@ button.button32:active {
 	background: linear-gradient(#B4B4B7, #5D5F62);
 	overflow: hidden;
 	position: relative;
-	padding: 0px;
+	padding: 0;
 	vertical-align: middle;
 	display: inline-block;
 }
 .custom-combobox-toggle {
 	position: absolute;
-	margin: 0px;
+	margin: 0;
 	bottom: 0;
 	padding: 0;
 	display: block;
-	right: 0px;
+	right: 0;
 	height: 100%;
 	width: 16px;
 }
 .custom-combobox-input {
 	margin: 0.2em 22px 0.2em 0.4em;
-	padding: 0px;
+	padding: 0;
 	background: transparent;
 	border: none;
 }
@@ -726,7 +726,7 @@ button.button32:active {
 	padding-left: 10px;
 	padding-right: 5px;
 	background: none;
-	margin: 5px 0px;
+	margin: 5px 0;
 	border: 1px solid black;
 }
 
@@ -744,13 +744,13 @@ button.button32:active {
 
 #srch_greek button {
 	width: 32px;
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 	flex-grow: 1;
 }
 
 #srch_greek button .ui-button-text {
-	padding: 0px;
+	padding: 0;
 }
 
 #srch_list_objectlist {
@@ -809,11 +809,11 @@ button.button32:active {
 }
 
 #view_up {
-	background-position: -32px 0px;
+	background-position: -32px 0;
 }
 
 #view_left {
-	background-position: 0px -32px;
+	background-position: 0 -32px;
 }
 
 #view_center {
@@ -928,12 +928,12 @@ button.button32:active {
 
 .joystickbutton-up {
     left: 48px;
-    background-position: -48px 0px;
+    background-position: -48px 0;
 }
 
 .joystickbutton-left {
     top: 48px;
-    background-position: 0px -48px;
+    background-position: 0 -48px;
 }
 
 .joystickbutton-right {

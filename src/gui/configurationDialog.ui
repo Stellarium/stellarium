@@ -891,7 +891,7 @@
              <item row="6" column="1">
               <widget class="QCheckBox" name="checkBoxProperMotion">
                <property name="toolTip">
-                <string>Annual proper motion (stars) or hourly motion (solar system objects)</string>
+                <string/>
                </property>
                <property name="text">
                 <string>Proper Motion</string>
@@ -937,7 +937,7 @@
              <item row="11" column="1">
               <widget class="QCheckBox" name="checkBoxRTSTime">
                <property name="toolTip">
-                <string>Show time of rising, transit and setting of celestial object. The rising and setting events are defined with the upper limb of the celestial body.</string>
+                <string/>
                </property>
                <property name="text">
                 <string>Risings, Transits, and Settings</string>
@@ -2369,6 +2369,18 @@
                   <iconset resource="../../data/gui/guiRes.qrc">
                    <normaloff>:/graphicGui/uibtFolder.png</normaloff>
                    <disabledoff>:/graphicGui/uibtFolder-disabled.png</disabledoff>:/graphicGui/uibtFolder.png</iconset>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButtonConfigureScreenshotsDialog">
+                 <property name="toolTip">
+                  <string>Rules for screenshot file naming</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../../data/gui/guiRes.qrc">
+                   <normaloff>:/graphicGui/uibtSettings.png</normaloff>
+                   <disabledoff>:/graphicGui/uibtSettings.png</disabledoff>:/graphicGui/uibtSettings.png</iconset>
                  </property>
                 </widget>
                </item>

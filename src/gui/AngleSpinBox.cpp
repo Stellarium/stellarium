@@ -85,7 +85,8 @@ AngleSpinBox::AngleSpinboxSection AngleSpinBox::getCurrentSection() const
 	const QString str = lineEdit()->text();
 	
 	// Regexp must not have "+-" immediately behind "[" !
-	int cPosMin = str.indexOf(QRegularExpression("^["+q_("N")+q_("S")+q_("E")+q_("W")+"+-]"), 0);
+	static QRegularExpression cardExp("^["+q_("N")+q_("S")+q_("E")+q_("W")+"+-]");
+	int cPosMin = str.indexOf(cardExp, 0);
 	// without prefix (e.g. right ascension): avoid unwanted negating!
 	if ((cPosMin==-1) && (cursorPos==0)) {
 		return SectionDegreesHours;
@@ -97,19 +98,22 @@ AngleSpinBox::AngleSpinboxSection AngleSpinBox::getCurrentSection() const
 	}
 	
 	cPosMin = cPosMax;
-	cPosMax = str.indexOf(QRegularExpression("[dh°]"), 0)+1;
+	static const QRegularExpression dExp("[dh°]");
+	cPosMax = str.indexOf(dExp, 0)+1;
 	if (cursorPos >= cPosMin && cursorPos <= cPosMax) {
 		return SectionDegreesHours;
 	}
 	
 	cPosMin = cPosMax;
-	cPosMax = str.indexOf(QRegularExpression("[m']"), 0)+1;
+	static const QRegularExpression mExp("[m']");
+	cPosMax = str.indexOf(mExp, 0)+1;
 	if (cursorPos > cPosMin && cursorPos <= cPosMax) {
 		return SectionMinutes;
 	}
 	
 	cPosMin = cPosMax;
-	cPosMax = str.indexOf(QRegularExpression("[s\"]"), 0)+1;
+	static const QRegularExpression sExp("[s\"]");
+	cPosMax = str.indexOf(sExp, 0)+1;
 	if (cursorPos > cPosMin && cursorPos <= cPosMax) {
 		return SectionSeconds;
 	}
@@ -237,12 +241,12 @@ double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, Pre
 		input = input.mid(1);
 	}
 
-	QRegularExpression dmsRx("^\\s*(\\d+)\\s*[d°](\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$",
+	static const QRegularExpression dmsRx("^\\s*(\\d+)\\s*[d°](\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$",
 		  QRegularExpression::CaseInsensitiveOption);
-	QRegularExpression hmsRx("^\\s*(\\d+)\\s*h(\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$",
+	static const QRegularExpression hmsRx("^\\s*(\\d+)\\s*h(\\s*(\\d+(\\.\\d*)?)\\s*[m'](\\s*(\\d+(\\.\\d*)?)\\s*[s\"]\\s*)?)?$",
 		  QRegularExpression::CaseInsensitiveOption);
-	QRegularExpression decRx(u8"^(\\d+(\\.\\d*)?)(\\s*\u00b0\\s*)?$");
-	QRegularExpression badRx("[^hdms0-9 °'\"\\.]", QRegularExpression::CaseInsensitiveOption);
+	static const QRegularExpression decRx(u8"^(\\d+(\\.\\d*)?)(\\s*\u00b0\\s*)?$");
+	static const QRegularExpression badRx("[^hdms0-9 °'\"\\.]", QRegularExpression::CaseInsensitiveOption);
 	QRegularExpressionMatch dmsMatch=dmsRx.match(input);
 	QRegularExpressionMatch hmsMatch=hmsRx.match(input);
 	QRegularExpressionMatch decMatch=decRx.match(input);

@@ -1115,8 +1115,8 @@ void SkyLine::draw(StelCore *core) const
 
 		for (int i=0; i<i_max; ++i)
 		{
-			if ((line_type==CURRENT_VERTICAL && i>=i_min) || (line_type!=CURRENT_VERTICAL)){
-
+			if ((line_type==CURRENT_VERTICAL && i>=i_min) || (line_type!=CURRENT_VERTICAL))
+			{
 				if (i%30 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part30)))
 				{
 					sPainter.drawGreatCircleArc(part0, part30, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
@@ -1132,7 +1132,8 @@ void SkyLine::draw(StelCore *core) const
 						float shifty = - static_cast<float>(sPainter.getFontMetrics().height());
 						QString unit("°");
 						QString label;
-						switch (line_type) {
+						switch (line_type)
+						{
 							case EQUATOR_J2000:
 							case EQUATOR_OF_DATE:
 							case FIXED_EQUATOR:
