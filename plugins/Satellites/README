@@ -18,31 +18,6 @@ it works and I am lazy.
 TODO
 ====
 
-Things originally planned for 0.8.0 that didn't get finished:
-+ Fixing the main configuration file subkey format
-+ Editable satellite descriptions
-+ TLE set validation/parsing with regular expressions (I have partial. --BM)
-+ GUI for manual addition of satellites, including TLE entry
-+ GUI for manual addition of comm frequences
-+ Reuse of downloaded update files for the current mechanism of satellite adding
-  - Option to download fresh files
-+ Move the current satellite import from the GUI to the core class (makes easier
-plug-in GUI porting)
-
-+ extracting orbit epoch from TLE and adding an option to hide satellites
-outside a range around the epoch
-+ GUI: color-picker control
-+ picking default and individual hint color (and orbit color? was that
-a separate thing?)
-+? option which info fields to display (or at least, just for the "extra" fields)
-+? re-organize configuration file options? (group flags with a "flag_" prefix?)
-
-Matthew's notes:
-+ Rendering of the actual satellite, not just a hint/label
-  - calculation of brightness, eclipse etc.
-  - iridium flares?
-+ gravity labels
-
 Longer term:
 + proper 3d positions (when SolarSystem is refactored so we can see
   satellite cloud from the moon / other bodies.
