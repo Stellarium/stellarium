@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>797</width>
+    <width>861</width>
     <height>536</height>
    </rect>
   </property>
@@ -942,6 +942,18 @@
               </widget>
              </item>
              <item>
+              <widget class="QPushButton" name="commSatelliteButton">
+               <property name="toolTip">
+                <string>Edit communication data for the selected satellite</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../../resources/Satellites.qrc">
+                 <normaloff>:/satellites/bt_comms_sat.png</normaloff>
+                 <disabledoff>:/satellites/bt_comms_sat.png</disabledoff>:/satellites/bt_comms_sat.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QPushButton" name="selectAllButton">
                <property name="toolTip">
                 <string>Select all satellites in list</string>
@@ -1713,6 +1725,7 @@
   <tabstop>addSourceButton</tabstop>
  </tabstops>
  <resources>
+  <include location="../../resources/Satellites.qrc"/>
   <include location="../../../../data/gui/guiRes.qrc"/>
  </resources>
  <connections>
