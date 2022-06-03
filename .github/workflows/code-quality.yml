@@ -1,0 +1,22 @@
+name: Code Quality
+on: [push]
+
+jobs:
+  check-quality:
+    runs-on: ubuntu-latest
+    name: Codiga Check
+    steps:
+    - name: Check code meets quality standards
+      id: codiga
+      uses: codiga/github-action@master
+      with:
+        repo_token: ${{ secrets.TEMP_GITHUB_ACCESS_TOKEN }}
+        codiga_api_token: ${{ secrets.CODIGA_API_TOKEN }}
+        force_ref: 'none'
+        min_quality_grade: 'WARNING'
+        min_quality_score: '50'
+        max_defects_rate: '0.05'
+        max_complex_functions_rate: '0.05'
+        max_long_functions_rate: '0.05'
+        project_name: ''
+        max_timeout_sec: '1200'
