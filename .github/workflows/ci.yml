@@ -140,3 +140,24 @@ jobs:
       with:
         path-to-lcov: ${{ github.workspace }}/build/coverage.info
         github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  # Codiga Check
+  ci-cogita:
+    name: "Codiga Check"
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]')"
+
+    steps:
+    - name: Check code meets quality standards
+      id: codiga
+      uses: codiga/github-action@master
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        codiga_api_token: ${{ secrets.CODIGA_API_TOKEN }}
+        min_quality_grade: 'WARNING'
+        min_quality_score: '50'
+        max_defects_rate: '0.2'
+        max_complex_functions_rate: '0.0001'
+        max_long_functions_rate: '0.0001'
+        project_name: 'github-action-example'
+        max_timeout_sec: '600'
