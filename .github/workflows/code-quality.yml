@@ -1,10 +1,13 @@
-name: Code Quality
+#
+# See https://github.com/marketplace/actions/codiga-github-action
+#
+name: "Code Quality"
 on: [push]
 
 jobs:
   check-quality:
     runs-on: ubuntu-latest
-    name: Codiga Check
+    name: "Codiga Check"
     steps:
     - name: Check code meets quality standards
       id: codiga
