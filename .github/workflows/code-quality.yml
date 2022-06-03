@@ -15,9 +15,9 @@ jobs:
         force_ref: 'none'
         min_quality_grade: 'WARNING'
         min_quality_score: '50'
-        max_defects_rate: '0.001'
-        max_complex_functions_rate: '0.125'
-        max_long_functions_rate: '0.125'
+        max_defects_rate: '0.01'
+        max_complex_functions_rate: '0.5'
+        max_long_functions_rate: '0.5'
         max_timeout_sec: '3600'
         project_name: 'stellarium'
 
