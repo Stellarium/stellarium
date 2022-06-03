@@ -142,7 +142,7 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
 
   # Codiga Check
-  ci-cogita:
+  check-quality:
     name: "Codiga Check"
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]')"
@@ -154,10 +154,11 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         codiga_api_token: ${{ secrets.CODIGA_API_TOKEN }}
+        force_ref: 'none'
         min_quality_grade: 'WARNING'
         min_quality_score: '50'
-        max_defects_rate: '0.2'
-        max_complex_functions_rate: '0.0001'
-        max_long_functions_rate: '0.0001'
-        project_name: 'stellarium'
-        max_timeout_sec: '3600'
+        max_defects_rate: '0.5'
+        max_complex_functions_rate: '0.5'
+        max_long_functions_rate: '0.5'
+        project_name: 'Stellarium/stellarium'
+        max_timeout_sec: '600'
