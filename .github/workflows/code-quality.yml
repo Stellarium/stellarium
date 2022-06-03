@@ -8,7 +8,7 @@ jobs:
     steps:
     - name: Check code meets quality standards
       id: codiga
-      uses: codiga/github-action@master
+      uses: codiga/github-action@v1
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         codiga_api_token: ${{ secrets.CODIGA_API_TOKEN }}
