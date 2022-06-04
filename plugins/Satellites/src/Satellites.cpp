@@ -1423,6 +1423,15 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 	if (tleData.name.startsWith("ORBCOMM"))
 		groups << "orbcomm";
 
+	if (tleData.name.startsWith("TEVEL"))
+		groups << "tevel";
+
+	if (tleData.name.startsWith("QZS"))
+		groups << "qzss";
+
+	if (tleData.name.startsWith("FORMOSAT"))
+		groups << "formosat";
+
 	for (const auto& name : qAsConst(groups))
 	{
 		communications.clear();

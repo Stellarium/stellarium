@@ -2,12 +2,45 @@
     "satellites": {
         "1291": {
             "name": "SOLRAD 7B",
-            "source": "https://r4uab.ru/frequency/",
+            "source": "https://r4uab.ru/frequency/; https://www.zarya.info/Frequencies/FrequenciesAll.php",
             "comms": [
             {
                 "description": "downlink",
                 "frequency": 136.800,
                 "modulation": "100 mW FM/AM"
+            }
+            ]
+        },
+        "4237": {
+            "name": "OPS 7613-6",
+            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 137.410,
+                "modulation": "CW"
+            }
+            ]
+        },
+        "4256": {
+            "name": "OPS 7613-1",
+            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 137.380,
+                "modulation": "PAM/FM/AM"
+            }
+            ]
+        },
+        "5680": {
+            "name": "OPS 7898-2",
+            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 137.080,
+                "modulation": "CW"
             }
             ]
         },
@@ -152,6 +185,17 @@
             }
             ]
         },
+        "24772": {
+            "name": "Cosmos 2341",
+            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php",
+            "comms": [
+            {
+                "description": "Time and position information",
+                "frequency": 149.910,
+                "modulation": "FM"
+            }
+            ]
+        },
         "24920": {
             "name": "FORTE",
             "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
@@ -165,8 +209,18 @@
         },
         "25338": {
             "name": "NOAA 15",
-            "source": "https://www.n2yo.com/satellite/?s=25338",
+            "source": "https://www.n2yo.com/satellite/?s=25338; https://www.zarya.info/Frequencies/FrequenciesAll.php",
             "comms": [
+            {
+                "description": "beacon",
+                "frequency": 137.350,
+                "modulation": "CW"
+            },
+            {
+                "description": "beacon",
+                "frequency": 137.500,
+                "modulation": "CW"
+            },
             {
                 "description": "downlink",
                 "frequency": 137.620,
@@ -222,27 +276,38 @@
             {
                 "description": "ARISS uplink",
                 "frequency": 145.990,
-                "modulation": "FM tone 67.0Hz"
+                "modulation": "FM CTCSS 67.0Hz"
             },
             {
                 "description": "ARISS downlink",
                 "frequency": 437.800,
-                "modulation": "FM tone 67.0Hz"
+                "modulation": "FM CTCSS 67.0Hz"
             },
             {
                 "description": "NA1SS uplink",
                 "frequency": 145.200,
-                "modulation": "Voice (Region 1)"
+                "modulation": "FM/Voice (Region 1)"
             },
             {
                 "description": "NA1SS voice uplink region 2 & 3",
                 "frequency": 144.490,
-                "modulation": "Voice (Region 2 & 3)"
+                "modulation": "FM/Voice (Region 2 & 3)"
             },
             {
                 "description": "NA1SS voice downlink",
                 "frequency": 145.800,
-                "modulation": "Voice"
+                "modulation": "FM/Voice"
+            }
+            ]
+        },
+        "25590": {
+            "name": "Cosmos 2361",
+            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php",
+            "comms": [
+            {
+                "description": "Time and position information",
+                "frequency": 150.030,
+                "modulation": "FM"
             }
             ]
         },
@@ -264,6 +329,44 @@
             {
                 "description": "downlink",
                 "frequency": 8212.5
+            }
+            ]
+        },
+        "26536": {
+            "name": "NOAA 16",
+            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php",
+            "comms": [
+            {
+                "description": "beacon",
+                "frequency": 137.350,
+                "modulation": "CW"
+            },
+            {
+                "description": "beacon",
+                "frequency": 137.500,
+                "modulation": "CW"
+            }
+            ]
+        },
+        "26552": {
+            "name": "Cosmos 2373",
+            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php",
+            "comms": [
+            {
+                "description": "telemetry",
+                "frequency": 150.300,
+                "modulation": "AM"
+            }
+            ]
+        },
+        "26818": {
+            "name": "Cosmos 2378",
+            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php",
+            "comms": [
+            {
+                "description": "Time and position information",
+                "frequency": 149.940,
+                "modulation": "FM"
             }
             ]
         },
@@ -290,6 +393,17 @@
             {
                 "description": "downlink",
                 "frequency": 8160.0
+            }
+            ]
+        },
+        "27436": {
+            "name": "Cosmos 2389",
+            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php",
+            "comms": [
+            {
+                "description": "Time and position information",
+                "frequency": 149.970,
+                "modulation": "FM"
             }
             ]
         },
@@ -321,7 +435,18 @@
             {
                 "description": "uplink",
                 "frequency": 145.850,
-                "modulation": "FM tone 67.0Hz"
+                "modulation": "FM CTCSS 67.0Hz"
+            }
+            ]
+        },
+        "27818": {
+            "name": "Cosmos 2398",
+            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php",
+            "comms": [
+            {
+                "description": "Time and position information",
+                "frequency": 149.910,
+                "modulation": "FM"
             }
             ]
         },
@@ -373,8 +498,13 @@
         },
         "28654": {
             "name": "NOAA 18",
-            "source": "https://www.n2yo.com/satellite/?s=28654; https://space.oscar.wmo.int/satellites/view/noaa_18",
+            "source": "https://www.n2yo.com/satellite/?s=28654; https://space.oscar.wmo.int/satellites/view/noaa_18; https://www.zarya.info/Frequencies/FrequenciesAll.php",
             "comms": [
+            {
+                "description": "downlink",
+                "frequency": 137.100,
+                "modulation": "AM/APT"
+            },
             {
                 "description": "downlink",
                 "frequency": 137.9125,
@@ -384,6 +514,17 @@
                 "description": "downlink",
                 "frequency": 1707.000,
                 "modulation": "HRPT"
+            }
+            ]
+        },
+        "28841": {
+            "name": "Cosmos 2415",
+            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php",
+            "comms": [
+            {
+                "description": "beacon",
+                "frequency": 150.300,
+                "modulation": "CW"
             }
             ]
         },
@@ -410,6 +551,17 @@
             {
                 "description": "downlink",
                 "frequency": 435.325
+            }
+            ]
+        },
+        "29157": {
+            "name": "Compass 2",
+            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 137.350,
+                "modulation": "CW/AM"
             }
             ]
         },
@@ -560,6 +712,17 @@
                 "frequency": 1698.000
             }
             ]
+        },
+        "35635": {
+            "name": "Cosmos 2454",
+            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php",
+            "comms": [
+            {
+                "description": "Time and position information",
+                "frequency": 149.940,
+                "modulation": "FM"
+            }
+            ]
         },        
         "35865": {
             "name": "METEOR-M",
@@ -612,6 +775,27 @@
                 "description": "BJ1SA beacon",
                 "frequency": 435.790,
                 "modulation": "CW"
+            }
+            ]
+        },
+        "36519": {
+            "name": "Cosmos 2463",
+            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php",
+            "comms": [
+            {
+                "description": "Time and position information",
+                "frequency": 149.665,
+                "modulation": "FM"
+            },
+            {
+                "description": "Time and position information",
+                "frequency": 149.940,
+                "modulation": "FM"
+            },
+            {
+                "description": "Time and position information",
+                "frequency": 150.215,
+                "modulation": "FM"
             }
             ]
         },
@@ -682,6 +866,37 @@
                 "description": "downlink",
                 "frequency": 910.000,
                 "modulation": "AMTV-CW SSTV"
+            }
+            ]
+        },
+        "39285": {
+            "name": "Astra 2E",
+            "source": "https://www.bbc.co.uk/reception/help-guides/freesat-sky/satellite-frequencies",
+            "comms": [
+            {
+                "description": "downlink (Transponder 45)",
+                "frequency": 10773.25,
+                "modulation": "DVB-S, QPSK"
+            },
+            {
+                "description": "downlink (Transponder 47)",
+                "frequency": 10802.75,
+                "modulation": "DVB-S, QPSK"
+            },
+            {
+                "description": "downlink (Transponder 50)",
+                "frequency": 10847.00,
+                "modulation": "DVB-S2, 8PSK"
+            },
+            {
+                "description": "downlink (Transponder 46)",
+                "frequency": 10788.00,
+                "modulation": "DVB-S, QPSK"
+            },
+            {
+                "description": "downlink (Transponder 48)",
+                "frequency": 10817.50,
+                "modulation": "DVB-S, QPSK"
             }
             ]
         },
@@ -931,6 +1146,17 @@
             }
             ]
         },
+        "40364": {
+            "name": "Astra 2G",
+            "source": "https://www.bbc.co.uk/reception/help-guides/freesat-sky/satellite-frequencies",
+            "comms": [
+            {
+                "description": "downlink (Transponder 61)",
+                "frequency": 11023.25,
+                "modulation": "DVB-S2, 8PSK"
+            }
+            ]
+        },
         "40377": {
             "name": "FIREBIRD 3",
             "source": "https://www.n2yo.com/satellite/?s=40377",
@@ -1043,8 +1269,18 @@
         },
         "40908": {
             "name": "LILACSAT 2",
-            "source": "https://www.n2yo.com/satellite/?s=40908",
+            "source": "https://www.n2yo.com/satellite/?s=40908; https://www.amsat.org/fm-satellite-frequency-summary/",
             "comms": [
+            {
+                "description": "uplink",
+                "frequency": 144.350,
+                "modulation": "FM"
+            },
+            {
+                "description": "downlink",
+                "frequency": 437.200,
+                "modulation": "FM"
+            },
             {
                 "description": "BJ1SI uplink",
                 "frequency": 144.350,
@@ -1179,7 +1415,7 @@
         },
         "40931": {
             "name": "LAPAN A2 (IO-86)",
-            "source": "https://www.n2yo.com/satellite/?s=40931",
+            "source": "https://www.n2yo.com/satellite/?s=40931; https://www.amsat.org/fm-satellite-frequency-summary/",
             "comms": [
             {
                 "description": "YBSAT uplink",
@@ -1649,7 +1885,7 @@
         },
         "43017": {
             "name": "FOX-1B (RADFXSAT AO-91)",
-            "source": "https://www.n2yo.com/satellite/?s=43017",
+            "source": "https://www.n2yo.com/satellite/?s=43017; https://www.amsat.org/fm-satellite-frequency-summary/",
             "comms": [
             {
                 "description": "uplink",
@@ -1909,7 +2145,7 @@
         },
         "43678": {
             "name": "DIWATA 2B (PO-101)",
-            "source": "https://www.n2yo.com/satellite/?s=43678",
+            "source": "https://www.n2yo.com/satellite/?s=43678; https://www.amsat.org/fm-satellite-frequency-summary/",
             "comms": [
             {
                 "description": "D1W2PH uplink",
@@ -2886,38 +3122,6 @@
             }
             ]
         },
-        "50988": {
-            "name": "TEVEL-3",
-            "source": "https://www.n2yo.com/satellite/?s=50988",
-            "comms": [
-            {
-                "description": "T3TYB uplink",
-                "frequency": 145.970,
-                "modulation": "9600bps BPSK FM"
-            },
-            {
-                "description": "T3TYB downlink",
-                "frequency": 436.400,
-                "modulation": "9600bps BPSK FM"
-            }
-            ]
-        },
-        "50989": {
-            "name": "TEVEL-8",
-            "source": "https://www.n2yo.com/satellite/?s=50989",
-            "comms": [
-            {
-                "description": "T8GBS uplink",
-                "frequency": 145.970,
-                "modulation": "9600bps BPSK FM"
-            },
-            {
-                "description": "T8GBS downlink",
-                "frequency": 436.400,
-                "modulation": "9600bps BPSK FM"
-            }
-            ]
-        },
         "50991": {
             "name": "FOSSASAT2E6",
             "source": "https://www.n2yo.com/satellite/?s=50991",
@@ -2929,38 +3133,6 @@
             }
             ]
         },
-        "50998": {
-            "name": "TEVEL-5",
-            "source": "https://www.n2yo.com/satellite/?s=50998",
-            "comms": [
-            {
-                "description": "T5SNG uplink",
-                "frequency": 145.970,
-                "modulation": "9600bps BPSK FM"
-            },
-            {
-                "description": "T5SNG downlink",
-                "frequency": 436.400,
-                "modulation": "9600bps BPSK FM"
-            }
-            ]
-        },
-        "50999": {
-            "name": "TEVEL-6",
-            "source": "https://www.n2yo.com/satellite/?s=50999",
-            "comms": [
-            {
-                "description": "T6NZR uplink",
-                "frequency": 145.970,
-                "modulation": "9600bps BPSK FM"
-            },
-            {
-                "description": "T6NZR downlink",
-                "frequency": 436.400,
-                "modulation": "9600bps BPSK FM"
-            }
-            ]
-        },
         "51001": {
             "name": "FOSSASAT2E5",
             "source": "https://www.n2yo.com/satellite/?s=51001",
@@ -2969,22 +3141,6 @@
                 "description": "downlink",
                 "frequency": 401.700,
                 "modulation": "9600bps GFSK 125k LoRa"
-            }
-            ]
-        },
-        "51013": {
-            "name": "TEVEL-1",
-            "source": "https://www.n2yo.com/satellite/?s=51013",
-            "comms": [
-            {
-                "description": "T1OFK uplink",
-                "frequency": 145.970,
-                "modulation": "9600bps BPSK FM"
-            },
-            {
-                "description": "T1OFK downlink",
-                "frequency": 436.400,
-                "modulation": "9600bps BPSK FM"
             }
             ]
         },
@@ -3039,54 +3195,6 @@
                 "description": "downlink",
                 "frequency": 401.735,
                 "modulation": "4800bps"
-            }
-            ]
-        },
-        "51062": {
-            "name": "TEVEL-7",
-            "source": "https://www.n2yo.com/satellite/?s=51062",
-            "comms": [
-            {
-                "description": "T7ADM uplink",
-                "frequency": 145.970,
-                "modulation": "9600bps BPSK FM"
-            },
-            {
-                "description": "T7ADM downlink",
-                "frequency": 436.400,
-                "modulation": "9600bps BPSK FM"
-            }
-            ]
-        },
-        "51063": {
-            "name": "TEVEL-4",
-            "source": "https://www.n2yo.com/satellite/?s=51063",
-            "comms": [
-            {
-                "description": "T4ATA uplink",
-                "frequency": 145.970,
-                "modulation": "9600bps BPSK FM"
-            },
-            {
-                "description": "T4ATA downlink",
-                "frequency": 436.400,
-                "modulation": "9600bps BPSK FM"
-            }
-            ]
-        },
-        "51069": {
-            "name": "TEVEL-2",
-            "source": "https://www.n2yo.com/satellite/?s=51069",
-            "comms": [
-            {
-                "description": "T2YRC uplink",
-                "frequency": 145.970,
-                "modulation": "9600bps BPSK FM"
-            },
-            {
-                "description": "T2YRC downlink",
-                "frequency": 436.400,
-                "modulation": "9600bps BPSK FM"
             }
             ]
         },
@@ -3281,6 +3389,7 @@
     },
     "groups": {
         "glonass": {
+            "source": "https://www.tallysman.com/gnss-constellations-radio-frequencies-and-signals/",
             "comms": [
             {
                 "description": "L3OC",
@@ -3300,6 +3409,7 @@
             ]
         },
         "gps": {
+            "source": "https://www.tallysman.com/gnss-constellations-radio-frequencies-and-signals/",
             "comms": [
             {
                 "description": "L1",
@@ -3310,29 +3420,44 @@
                 "description": "L2",
                 "frequency": 1227.6,
                 "modulation": "BPSK"
+            },
+            {
+                "description": "L5",
+                "frequency": 1176.45,
+                "modulation": "BPSK"
             }
             ]
         },
         "beidou": {
+            "source": "https://www.tallysman.com/gnss-constellations-radio-frequencies-and-signals/",
             "comms": [
             {
-                "description": "B1",
+                "description": "B1I",
                 "frequency": 1561.098,
                 "modulation": "BPSK"
             },
             {
-                "description": "B2",
+                "description": "B1",
+                "frequency": 1575.42
+            },
+            {
+                "description": "B2a",
+                "frequency": 1176.45
+            },
+            {
+                "description": "B2/B2b",
                 "frequency": 1207.14,
                 "modulation": "BPSK"
             },
             {
-                "description": "B3",
+                "description": "B3I",
                 "frequency": 1268.52,
                 "modulation": "BPSK"
             }
             ]
         },
         "galileo": {
+            "source": "https://novatel.com/support/known-solutions/gnss-frequencies-and-signals",
             "comms": [
             {
                 "description": "E1-I",
@@ -3367,6 +3492,7 @@
             ]
         },
         "irnss": {
+            "source": "https://www.tallysman.com/gnss-constellations-radio-frequencies-and-signals/; https://novatel.com/support/known-solutions/gnss-frequencies-and-signals",
             "comms": [
             {
                 "description": "L5",
@@ -3386,6 +3512,62 @@
             {
                 "description": "downlink",
                 "frequency": 400.100,
+                "modulation": "CW"
+            }
+            ]
+        },
+        "qzss": {
+            "source": "https://www.tallysman.com/gnss-constellations-radio-frequencies-and-signals/; https://novatel.com/support/known-solutions/gnss-frequencies-and-signals",
+            "comms": [
+            {
+                "description": "L1",
+                "frequency": 1575.42
+            },
+            {
+                "description": "L2",
+                "frequency": 1227.6
+            },
+            {
+                "description": "L5",
+                "frequency": 1176.45
+            },
+            {
+                "description": "L6",
+                "frequency": 1278.75
+            }
+            ]
+        },
+        "tevel": {
+            "source": "https://www.amsat.org/fm-satellite-frequency-summary/, ",
+            "comms": [
+            {
+                "description": "uplink",
+                "frequency": 145.970,
+                "modulation": "9600bps BPSK FM"
+            },
+            {
+                "description": "downlink",
+                "frequency": 436.400,
+                "modulation": "9600bps BPSK FM"
+            }
+            ]
+        },
+        "formosat": {
+            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 150.012,
+                "modulation": "CW"
+            },
+            {
+                "description": "downlink",
+                "frequency": 400.032,
+                "modulation": "CW"
+            },
+            {
+                "description": "downlink",
+                "frequency": 1066.752,
                 "modulation": "CW"
             }
             ]
