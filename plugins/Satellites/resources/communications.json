@@ -2723,6 +2723,16 @@
             }
             ]
         },
+        "46922": {
+            "name": "BOBCAT-1",
+            "source": "https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 436.600
+            }
+            ]
+        },
         "46927": {
             "name": "DESCENT",
             "source": "https://www.n2yo.com/satellite/?s=46927",
@@ -2814,6 +2824,27 @@
             }
             ]
         },
+        "47721": {
+            "name": "SDSAT",
+            "source": "https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 435.495
+            }
+            ]
+        },
+        "47924": {
+            "name": "WARP-01",
+            "source": "https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "downlink & beacon",
+                "frequency": 437.425,
+                "modulation": "1k2 FSK, CW"
+            }
+            ]
+        },
         "47925": {
             "name": "RSP-01",
             "source": "https://www.n2yo.com/satellite/?s=47925",
@@ -2822,6 +2853,17 @@
                 "description": "8N1RSP downlink",
                 "frequency": 145.810,
                 "modulation": "1k2AFSK/9k6GMSK/19k2FSK CW"
+            }
+            ]
+        },
+        "47926": {
+            "name": "TAUSAT-1",
+            "source": "https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "downlink & beacon",
+                "frequency": 436.400,
+                "modulation": "9600bps BPSK"
             }
             ]
         },
@@ -2843,6 +2885,43 @@
                 "description": "JG6YMX beacon",
                 "frequency": 437.375,
                 "modulation": "4k8FSK APRS CW"
+            }
+            ]
+        },
+        "47928": {
+            "name": "STARS-EC",
+            "source": "https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "beacon",
+                "frequency": 437.245,
+                "modulation": "CW, 9600 FSK"
+            },
+            {
+                "description": "beacon",
+                "frequency": 437.255,
+                "modulation": "CW, 9600 FSK"
+            },
+            {
+                "description": "beacon",
+                "frequency": 437.405,
+                "modulation": "CW, 9600 FSK"
+            },
+            {
+                "description": "beacon",
+                "frequency": 437.425,
+                "modulation": "CW, 9600 FSK"
+            }
+            ]
+        },
+        "47930": {
+            "name": "HIROGARI (OPUSAT-II)",
+            "source": "https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "beacon",
+                "frequency": 145.900,
+                "modulation": "CW"
             }
             ]
         },
@@ -2911,24 +2990,62 @@
             }
             ]
         },
-        "47960": {
-            "name": "ORBICRAFT-ZORKIY",
-            "source": "https://www.n2yo.com/satellite/?s=47960",
+        "47954": {
+            "name": "KSU-CUBESAT",
+            "source": "https://r4uab.ru/frequency/",
             "comms": [
             {
-                "description": "RS15S downlink",
+                "description": "downlink & beacon",
+                "frequency": 437.130,
+                "modulation": "GMSK 4k8 AX.25"
+            }
+            ]
+        },
+        "47959": {
+            "name": "GRBALPHA",
+            "source": "https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "uplink & beacon",
+                "frequency": 437.024,
+                "modulation": "9k6 GFSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 437.024,
+                "modulation": "CW"
+            }
+            ]
+        },
+        "47960": {
+            "name": "ORBICRAFT-ZORKIY",
+            "source": "https://www.n2yo.com/satellite/?s=47960; https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "RS15S downlink & beacon",
                 "frequency": 437.850,
                 "modulation": "2k4/9k6 FSK DVB-S2"
             },
             {
-                "description": "RS15S downlink",
+                "description": "RS15S downlink & beacon",
                 "frequency": 437.950,
                 "modulation": "2k4/9k6 FSK DVB-S2"
             },
             {
-                "description": "RS15S downlink",
+                "description": "RS15S downlink & beacon",
                 "frequency": 10465.000,
                 "modulation": "2k4/9k6 FSK DVB-S2"
+            }
+            ]
+        },
+        "47962": {
+            "name": "STECCO",
+            "source": "https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "beacon",
+                "frequency": 435.800,
+                "modulation": "9600bps FSK"
             }
             ]
         },
@@ -2937,7 +3054,7 @@
             "source": "https://www.n2yo.com/satellite/?s=47963",
             "comms": [
             {
-                "description": "CONDOL downlink",
+                "description": "CONDOL downlink & beacon",
                 "frequency": 437.125,
                 "modulation": "100bdRTTY 500bdFSK CW"
             }
@@ -2948,7 +3065,7 @@
             "source": "https://www.n2yo.com/satellite/?s=47964",
             "comms": [
             {
-                "description": "downlink",
+                "description": "downlink & beacon",
                 "frequency": 437.345,
                 "modulation": "2GMSK CW"
             }
@@ -2956,12 +3073,23 @@
         },
         "48041": {
             "name": "BCCSAT-1",
-            "source": "https://www.n2yo.com/satellite/?s=48041",
+            "source": "https://www.n2yo.com/satellite/?s=48041; https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "downlink & beacon",
+                "frequency": 435.635,
+                "modulation": "9k6 GMSK; 1k2 FSK, 4k8 GMSK; CW"
+            }
+            ]
+        },
+        "48082": {
+            "name": "FEES",
+            "source": "https://r4uab.ru/frequency/",
             "comms": [
             {
                 "description": "downlink",
-                "frequency": 435.635,
-                "modulation": "4800bps GMSK CW"
+                "frequency": 437.200,
+                "modulation": "9600bps FSK, LoRa"
             }
             ]
         },
@@ -2976,6 +3104,17 @@
             }
             ]
         },
+        "48868": {
+            "name": "MIR-SAT 1",
+            "source": "https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "beacon",
+                "frequency": 436.925,
+                "modulation": "9600bps GMSK"
+            }
+            ]
+        },
         "48900": {
             "name": "TUBIN",
             "source": "https://www.n2yo.com/satellite/?s=48900",
@@ -2987,6 +3126,17 @@
             }
             ]
         },
+        "48943": {
+            "name": "QMR-KWT",
+            "source": "https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 436.500,
+                "modulation": "9600bps GMSK, CW"
+            }
+            ]
+        },
         "49016": {
             "name": "DHABISAT",
             "source": "https://www.n2yo.com/satellite/?s=49016",
@@ -2995,6 +3145,121 @@
                 "description": "A68MX downlink",
                 "frequency": 436.908,
                 "modulation": "1200bps BPSK"
+            }
+            ]
+        },
+        "49069": {
+            "name": "LEDSAT-1",
+            "source": "https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 435.190,
+                "modulation": "GMSK 1200bps/4800bps/9600bps"
+            }
+            ]
+        },
+        "49263": {
+            "name": "CUTE-LASP",
+            "source": "https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "beacon",
+                "frequency": 437.250,
+                "modulation": "9600 GFSK, 19200 GMSK, 500000 BPSK"
+            },
+            {
+                "description": "beacon",
+                "frequency": 2402.000,
+                "modulation": "9600 GFSK, 19200 GMSK, 500000 BPSK"
+            }
+            ]
+        },
+        "49273": {
+            "name": "MAYA-3",
+            "source": "https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "uplink",
+                "frequency": 145.825,
+                "modulation": "1k2 APRS, CW, 4k8 GMSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 145.825,
+                "modulation": "1k2 APRS, CW, 4k8 GMSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 437.377,
+                "modulation": "1k2 APRS, CW, 4k8 GMSK"
+            }
+            ]
+        },
+        "49274": {
+            "name": "MAYA-4",
+            "source": "https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "uplink",
+                "frequency": 145.825,
+                "modulation": "1k2 APRS, CW, 4k8 GMSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 145.825,
+                "modulation": "1k2 APRS, CW, 4k8 GMSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 437.377,
+                "modulation": "1k2 APRS, CW, 4k8 GMSK"
+            }
+            ]
+        },
+        "49275": {
+            "name": "CUAVA-1",
+            "source": "https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "uplink",
+                "frequency": 145.875,
+                "modulation": "9k6 GMSK"
+            },
+            {
+                "description": "uplink",
+                "frequency": 2404.000,
+                "modulation": "9k6 GMSK"
+            },
+            {
+                "description": "uplink",
+                "frequency": 5660.000,
+                "modulation": "9k6 GMSK"
+            },
+            {
+                "description": "uplink",
+                "frequency": 76750.000,
+                "modulation": "9k6 GMSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 437.075,
+                "modulation": "9k6 GMSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 2440.000,
+                "modulation": "9k6 GMSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 5840.000,
+                "modulation": "9k6 GMSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 76750.000,
+                "modulation": "9k6 GMSK"
             }
             ]
         },
@@ -3247,6 +3512,17 @@
             }
             ]
         },
+        "51439": {
+            "name": "GASPACS",
+            "source": "https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 437.365,
+                "modulation": "9600bps GFSK"
+            }
+            ]
+        },
         "51443": {
             "name": "DAILI",
             "source": "https://www.n2yo.com/satellite/?s=51443",
@@ -3291,6 +3567,17 @@
             }
             ]
         },
+        "51658": {
+            "name": "INS-2TD",
+            "source": "https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 435.080,
+                "modulation": "DATA"
+            }
+            ]
+        },
         "51954": {
             "name": "NOUR 02",
             "source": "https://www.n2yo.com/satellite/?s=51954",
@@ -3299,6 +3586,17 @@
                 "description": "downlink",
                 "frequency": 401.500,
                 "modulation": "9600bps FSK/BPSK"
+            }
+            ]
+        },
+        "52010": {
+            "name": "ORESAT0",
+            "source": "https://r4uab.ru/frequency/",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 436.500,
+                "modulation": "9600bps FSK/96000bps GMSK"
             }
             ]
         },
