@@ -1420,6 +1420,9 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 	if (tleData.name.startsWith("IRNSS"))
 		groups << "irnss";
 
+	if (tleData.name.startsWith("ORBCOMM"))
+		groups << "orbcomm";
+
 	for (const auto& name : qAsConst(groups))
 	{
 		communications.clear();

@@ -192,6 +192,8 @@ void SatellitesCommDialog::addCommData()
 		SatellitesMgr->saveCatalog();
 
 		getSatCommData();
+		// A "hackish" updating list of satellites
+		emit SatellitesMgr->customFilterChanged();
 	}
 	else
 		QMessageBox::warning(&StelMainView::getInstance(), q_("Nothing added"), q_("Please fill in description and add frequency before adding!"), QMessageBox::Ok);
@@ -221,6 +223,8 @@ void SatellitesCommDialog::removeCommData()
 		SatellitesMgr->saveCatalog();
 
 		getSatCommData();
+		// A "hackish" updating list of satellites
+		emit SatellitesMgr->customFilterChanged();
 	}
 	else
 		QMessageBox::warning(&StelMainView::getInstance(), q_("Nothing deleted"), q_("Please select a line first!"), QMessageBox::Ok);

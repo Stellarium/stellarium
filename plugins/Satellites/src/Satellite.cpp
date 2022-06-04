@@ -873,6 +873,8 @@ SatFlags Satellite::getFlags() const
 		flags |= SatOutdatedTLE;
 	if (getCustomFiltersFlag())
 		flags |= SatCustomFilter;
+	if (!comms.isEmpty())
+		flags |= SatCommunication;
 
 	return flags;
 }
