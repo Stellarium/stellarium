@@ -218,9 +218,15 @@ public:
 	//! Defines the number and the order of the columns in transit table
 	//! @enum TransitColumns
 	enum TransitColumns {
-		TransitDate,			//! date of greatest transit
+		TransitDate,			//! date of mid-transit
 		TransitPlanet,			//! transit planet
+		TransitContact1,		//! time of exterior ingress
+		TransitContact2,		//! time of interior ingress
+		TransitMid,			//! time of mid-transit
 		TransitSeparation,		//! minimum angular distance to Sun's center
+		TransitContact3,		//! time of interior egress
+		TransitContact4,		//! time of exterior egress
+		TransitDuration,		//! duration of transit
 		TransitCount			//! total number of columns
 	};
 
@@ -466,8 +472,6 @@ private:
 	void initListSolarEclipseLocal();
 	//! Init header and list of transit
 	void initListTransit();
-	//! Besselian elements for transit of Mercury and Venus across the solar disk
-	void TransitBessel(double &besX, double &besY, double &besL1, double &besL2, PlanetP object);
 
 	//! Populates the drop-down list of celestial bodies.
 	//! The displayed names are localized in the current interface language.
@@ -898,6 +902,14 @@ private:
 			return text(column).toLower() < other.text(column).toLower();
 		}
 	}
+};
+
+//! Besselian elements for transit of Mercury and Venus across the Sun
+class TransitBessel
+{
+public:
+	TransitBessel(PlanetP object, double &besX, double &besY,
+	double &besDec, double &besTf1, double &besTf2, double &besL1, double &besL2, double &besMu);
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug

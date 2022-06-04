@@ -344,7 +344,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->rtsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentRTS(QModelIndex)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(setRTSCelestialBodyName()));
 
-	// Tab: Eclipses and Transits
+	// Tab: Eclipses
 	initListLunarEclipse();
 	connect(ui->lunareclipsesCalculateButton, SIGNAL(clicked()), this, SLOT(generateLunarEclipses()));
 	connect(ui->lunareclipsesCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupLunarEclipses()));
@@ -3761,11 +3761,23 @@ void AstroCalcDialog::saveSolarEclipsesLocal()
 void AstroCalcDialog::setTransitHeaderNames()
 {
 	transitHeader.clear();
-	transitHeader << q_("Date");
-	// TRANSLATORS: The name of column in AstroCalc/Transits tool
-	transitHeader << qc_("Planet", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Transits tool
-	transitHeader << qc_("Separation", "column name");
+	transitHeader << qc_("Date of mid-transit", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
+	transitHeader << q_("Planet");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
+	transitHeader << qc_("Exterior Ingress", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
+	transitHeader << qc_("Interior Ingress", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
+	transitHeader << qc_("Mid-transit", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
+	transitHeader << qc_("Angular Distance", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
+	transitHeader << qc_("Interior Egress", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
+	transitHeader << qc_("Exterior Egress", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
+	transitHeader << qc_("Duration", "column name");
 	ui->transitTreeWidget->setHeaderLabels(transitHeader);
 
 	// adjust the column width
@@ -3784,7 +3796,99 @@ void AstroCalcDialog::initListTransit()
 	ui->transitTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
 }
 
-void AstroCalcDialog::TransitBessel(double &besX, double &besY, double &besL1, double &besL2, PlanetP object)
+// Local transit parameters
+struct LocalTransitparams {
+	double dt;
+	double L1;
+	double L2;
+	double ce;
+	double magnitude;
+	double altitude;
+};
+
+LocalTransitparams localTransit(double JD, int contact, bool central, PlanetP object, bool topocentric) {
+	LocalTransitparams result;
+	// contact : -1 for beginning, 0 for mid-transit, 1 for the ending
+	// central : true for full transit
+
+	// Besselian elements
+	// Source: Explanatory Supplement to the Astronomical Ephemeris 
+	// and the American Ephemeris and Nautical Almanac (1961)
+
+	StelCore* core = StelApp::getInstance().getCore();
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	double lat = static_cast<double>(core->getCurrentLocation().latitude);
+	double lon = static_cast<double>(core->getCurrentLocation().longitude);
+	double elevation = static_cast<double>(core->getCurrentLocation().altitude);
+	double rc = 0., rs = 0.;
+	if (topocentric)
+	{
+		Vec4d geocentricCoords = ssystem->getEarth()->getRectangularCoordinates(lon,lat,elevation);
+		static const double earthRadius = ssystem->getEarth()->getEquatorialRadius();
+		rc = geocentricCoords[0]/earthRadius; // rhoCosPhiPrime
+		rs = geocentricCoords[1]/earthRadius; // rhoSinPhiPrime
+	}
+	core->setUseTopocentricCoordinates(false);
+	core->setJD(JD);
+	core->update(0);
+
+	double x,y,d,tf1,tf2,L1,L2,mu;
+	TransitBessel(object,x,y,d,tf1,tf2,L1,L2,mu);
+
+	core->setJD(JD - 5./1440.);
+	core->update(0);
+	double x1,y1,d1,mu1;
+	TransitBessel(object,x1,y1,d1,tf1,tf2,L1,L2,mu1);
+
+	core->setJD(JD + 5./1440.);
+	core->update(0);
+	double x2,y2,d2,mu2;
+	TransitBessel(object,x2,y2,d2,tf1,tf2,L1,L2,mu2);
+
+	// Hourly rate of changes
+	const double xdot = (x2 - x1) * 6.;
+	const double ydot = (y2 - y1) * 6.;
+	const double ddot = (d2 - d1) * 6.;
+	double mudot = mu2 - mu1;
+	if (mudot < 0.) mudot += 360.; // make sure it is positive in case mu2 < mu1
+	mudot = mudot * 6. * M_PI_180;
+	double theta = (mu + lon) * M_PI_180;
+	theta = StelUtils::fmodpos(theta, 2.*M_PI);
+	const double xi = rc*sin(theta);
+	const double eta = rs*cos(d)-rc*sin(d)*cos(theta);
+	const double zeta = rs*sin(d)+rc*cos(d)*cos(theta);
+	const double xidot = mudot * rc * cos(theta);
+	const double etadot = mudot*xi*sin(d)-zeta*ddot;
+	const double u = x - xi;
+	const double v = y - eta;
+	const double udot = xdot - xidot;
+	const double vdot = ydot - etadot;
+	const double n2 = udot * udot + vdot * vdot;
+	const double delta = (u * vdot - udot * v) / sqrt(udot * udot + vdot * vdot);
+	L1 = L1 - zeta * tf1;
+	L2 = L2 - zeta * tf2;
+	double L = L1;
+	if (central) L = L2;
+	const double sfi = delta/L;
+	const double ce = 1.- sfi*sfi;
+	double cfi = 0.; 
+	if (ce > 0.)
+		cfi = contact * sqrt(ce);
+	const double m = sqrt(u * u + v * v);
+	const double magnitude = (L1 - m) / (L1 + L2);
+	const double altitude = asin(rc*cos(d)*cos(theta)+rs*sin(d)) / M_PI_180;
+	const double dt = (L * cfi / sqrt(udot * udot + vdot * vdot)) - (u * udot + v * vdot) / n2;
+	result.dt = dt;
+	result.L1 = L1;
+	result.L2 = L2;
+	result.ce = ce;
+	result.magnitude = magnitude;
+	result.altitude = altitude;
+	return result;
+}
+
+TransitBessel::TransitBessel(PlanetP object, double &besX, double &besY,
+	double &besD, double &bestf1, double &bestf2, double &besL1, double &besL2, double &besMu)
 {
 	// Besselian elements (adaped from solar eclipse)
 	// Source: Explanatory Supplement to the Astronomical Ephemeris 
@@ -3803,6 +3907,8 @@ void AstroCalcDialog::TransitBessel(double &besX, double &besY, double &besL1, d
 	const double earthRadius = ssystem->getEarth()->getEquatorialRadius()*AU;
 	// Planet's distance in Earth's radius
 	double pdistanceER = object->getEquinoxEquatorialPos(core).length() * AU / earthRadius;
+	// Greenwich Apparent Sidereal Time
+	const double gast = get_apparent_sidereal_time(core->getJD(), core->getJDE());
 	// Avoid bug for special cases happen around Vernal Equinox
 	double raDiff = StelUtils::fmodpos(raPlanet-raSun, 2.*M_PI);
 	if (raDiff>M_PI) raDiff-=2.*M_PI;
@@ -3811,7 +3917,7 @@ void AstroCalcDialog::TransitBessel(double &besX, double &besY, double &besL1, d
 	const double rss = sdistanceAu * 23454.7925; // from 1 AU/Earth's radius : 149597870.8/6378.1366
 	const double b = pdistanceER / rss;
 	const double a = raSun - ((b * cos(dePlanet) * raDiff) / ((1 - b) * cos(deSun)));
-	const double besD = deSun - (b * (dePlanet - deSun) / (1 - b));
+	besD = deSun - (b * (dePlanet - deSun) / (1 - b));
 	besX = cos(dePlanet) * sin((raPlanet - a));
 	besX *= pdistanceER;
 	besY = cos(besD) * sin(dePlanet);
@@ -3821,18 +3927,18 @@ void AstroCalcDialog::TransitBessel(double &besX, double &besY, double &besL1, d
 	z += cos(dePlanet) * cos(besD) * cos((raPlanet - a));
 	z *= pdistanceER;
 
-	// Ratio of Planet/Earth's radius (Venus with atmosphere)
-	double k;
-	if (object->getEnglishName().contains("Mercury"))
-		k = 0.3825096;
-	else
-		k = 0.9567984;
+	// Ratio of Planet/Earth's radius
+	double k = object->getEquatorialRadius()/ssystem->getEarth()->getEquatorialRadius();
 	// Parameters of the shadow cone
 	const double f1 = asin((SunEarth + k) / (rss * (1. - b)));
+	bestf1 = tan(f1);
 	const double f2 = asin((SunEarth - k) / (rss * (1. - b)));  
-	besL1 = z * tan(f1) + (k / cos(f1));
-	besL2 = z * tan(f2) - (k / cos(f2));
-}
+	bestf2 = tan(f2);
+	besL1 = z * bestf1 + (k / cos(f1));
+	besL2 = z * bestf2 - (k / cos(f2));
+	besMu = gast - a * M_180_PI;
+	besMu = StelUtils::fmodpos(besMu, 360.);
+};
 
 void AstroCalcDialog::generateTransits()
 {
@@ -3842,7 +3948,6 @@ void AstroCalcDialog::generateTransits()
 		initListTransit();
 		const double currentJD = core->getJD(); // save current JD
 		const bool saveTopocentric = core->getUseTopocentricCoordinates();
-
 		for (int p = 0; p < 2; p++)
 		{
 			double startyear = ui->eclipseFromYearSpinBox->value();
@@ -3852,18 +3957,20 @@ void AstroCalcDialog::generateTransits()
 			StelUtils::getJDFromDate(&stopJD, startyear+years, 12, 31, 23, 59, 59);
 			startJD = startJD - core->getUTCOffset(startJD) / 24.;
 			stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
-			QString planetStr, separationStr;
+			QString planetStr, separationStr, durationStr, separationLocalStr;
 			double approxJD, synodicPeriod;
 			if (p == 0)
 			{
+				 // Mercury
 				approxJD = 2451612.023;
 				synodicPeriod = 115.8774771;
 			}
 			else
-			{
-				approxJD = 2451996.706;
-				synodicPeriod = 583.921361;
-			}
+				{
+					// Venus
+					approxJD = 2451996.706;
+					synodicPeriod = 583.921361;
+				}
 			int elements = static_cast<int>((stopJD - startJD) / synodicPeriod);
 			// Find approximate JD of Inferior conjunction
 			double tmp = (startJD - approxJD - synodicPeriod) / synodicPeriod;
@@ -3897,18 +4004,18 @@ void AstroCalcDialog::generateTransits()
 					{
 						core->setJD(JD);
 						core->update(0);
-						double x,y,L1,L2;
-						TransitBessel(x,y,L1,L2,object);
+						double x,y,d,tf1,tf2,L1,L2,mu;
+						TransitBessel(object,x,y,d,tf1,tf2,L1,L2,mu);
 
 						core->setJD(JD - 5./1440.);
 						core->update(0);
 						double x1,y1;
-						TransitBessel(x1,y1,L1,L2,object);
+						TransitBessel(object,x1,y1,d,tf1,tf2,L1,L2,mu);
 
 						core->setJD(JD + 5./1440.);
 						core->update(0);
 						double x2,y2;
-						TransitBessel(x2,y2,L1,L2,object);
+						TransitBessel(object,x2,y2,d,tf1,tf2,L1,L2,mu);
 
 						double xdot1 = (x - x1) * 12.;
 						double xdot2 = (x2 - x) * 12.;
@@ -3923,24 +4030,199 @@ void AstroCalcDialog::generateTransits()
 					}
 					core->setJD(JD);
 					core->update(0);
-
-					double x,y,L1,L2;
-					TransitBessel(x,y,L1,L2,object);
-					double elongation = object->getElongation(core->getObserverHeliocentricEclipticPos());
-					separationStr = StelUtils::radToDmsStr(elongation, true);
+					
+					double x,y,d,tf1,tf2,L1,L2,mu;
+					TransitBessel(object,x,y,d,tf1,tf2,L1,L2,mu);
 					double gamma = sqrt(x * x + y * y);
-					if (gamma <= (0.9972+L1) && (JD <= stopJD))
+					if (gamma <= (0.9972+L1) && (JD <= stopJD)) // Transit occurs on this JD
 					{
+						double dt = 1.;
+						int iteration = 0;
+						double JDMid = JD;
+						double altitudeMidtransit = -1.;
+						double altitudeContact1 = -1., altitudeContact2 = -1., altitudeContact3 = -1., altitudeContact4 = -1.;
+						double JD1 = 0., JD2 = 0., JD3 = 0., JD4 = 0.;
+						// Time of mid-transit
+						LocalTransitparams transitData = localTransit(JD,0,false,object,saveTopocentric);
+						while (abs(dt) > 0.000001 && (iteration < 20))
+						{
+							transitData = localTransit(JD,0,false,object,saveTopocentric);
+							dt = transitData.dt;
+							JD += dt / 24.;
+							iteration += 1;
+							altitudeMidtransit = transitData.altitude;
+						}
+						JDMid = JD;
+
+						// 1st contact = Exterior Ingress
+						iteration = 0;
+						JD1 = JDMid;
+						transitData = localTransit(JD1,-1,false,object,saveTopocentric);
+						dt = transitData.dt;
+						while (abs(dt) > 0.000001 && (iteration < 20))
+						{
+							transitData = localTransit(JD1,-1,false,object,saveTopocentric);
+							dt = transitData.dt;
+							JD1 += dt / 24.;
+							iteration += 1;
+						}
+						altitudeContact1 = transitData.altitude;
+
+						// 4th contact = Exterior Egress
+						iteration = 0;
+						JD4 = JDMid;
+						transitData = localTransit(JD4,1,false,object,saveTopocentric);
+						dt = transitData.dt;
+						while (abs(dt) > 0.000001 && (iteration < 20))
+						{
+							transitData = localTransit(JD4,1,false,object,saveTopocentric);
+							dt = transitData.dt;
+							JD4 += dt / 24.;
+							iteration += 1;
+						}
+						altitudeContact4 = transitData.altitude;
+						double JDc1=JD1, JDc4=JD4;
+
+						// 2nd contact = Interior Ingress
+						iteration = 0;
+						JD2 = JDMid;
+						transitData = localTransit(JD2,-1,true,object,saveTopocentric);
+						dt = transitData.dt;
+						while (abs(dt) > 0.000001 && (iteration < 20))
+						{
+							transitData = localTransit(JD2,-1,true,object,saveTopocentric);
+							dt = transitData.dt;
+							JD2 += dt / 24.;
+							iteration += 1;
+						}
+						altitudeContact2 = transitData.altitude;
+						// 3rd contact = Interior Egress
+						iteration = 0;
+						JD3 = JDMid;
+						transitData = localTransit(JD3,1,true,object,saveTopocentric);
+						dt = transitData.dt;
+						while (abs(dt) > 0.000001 && (iteration < 20))
+						{
+							transitData = localTransit(JD3,1,true,object,saveTopocentric);
+							dt = transitData.dt;
+							JD3 += dt / 24.;
+							iteration += 1;
+						}
+						altitudeContact3 = transitData.altitude;
+
+						// Calculate duration for topocentric in case of the transit in progress at sunrise/sunset
+						// 0.3 deg. is approx. correction for atmospheric refraction at horizon
+						if (saveTopocentric)
+						{
+							if (altitudeContact1 < -.3 && altitudeContact4 > -.3) // Transit in progress at sunrise
+							{
+								// find time of sunrise (not exactly, we want the time when lower limb is at the horizon)
+								for (int j = 0; j <= 5; j++)
+								{
+									transitData = localTransit(JD - 5./1440.,0,false,object,true);
+									double alt1 = transitData.altitude+.3;
+									transitData = localTransit(JD + 5./1440.,0,false,object,true);
+									double alt2 = transitData.altitude+.3;
+									double dt = .006944444 * alt1 / (alt2 - alt1);
+									JD = JD - 5./1440. - dt;
+									transitData = localTransit(JD,0,false,object,true);
+								}
+								JDc1 = JD;
+							}
+
+							if (altitudeContact1 > -.3 && altitudeContact4 < -.3) // Transit in progress at sunset
+							{
+								// find time of sunset (not exactly, we want the time when lower limb is at the horizon)
+								for (int j = 0; j <= 5; j++)
+								{
+									transitData = localTransit(JD - 5./1440.,0,false,object,true);
+									double alt1 = transitData.altitude+.3;
+									transitData = localTransit(JD + 5./1440.,0,false,object,true);
+									double alt2 = transitData.altitude+.3;
+									double dt = .006944444 * alt1 / (alt2 - alt1);
+									JD = JD - 5./1440. - dt;
+									transitData = localTransit(JD,0,false,object,true);
+								}
+								JDc4 = JD;
+							}
+						}
+						// Duration from first to last contact (sunrise/sunset are taken into account in case of topocentric)
+						durationStr  = StelUtils::hoursToHmsStr((JDc4-JDc1)*24.,true);
+
 						ACTransitTreeWidgetItem* treeItem = new ACTransitTreeWidgetItem(ui->transitTreeWidget);
-						// Note: if (gamma > (0.9972+L2)) the transit is a grazing event (non-central)
-						treeItem->setText(TransitDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))); // local date and time
-						treeItem->setData(TransitDate, Qt::UserRole, JD);
+						treeItem->setText(TransitDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JDMid), localeMgr->getPrintableTimeLocal(JDMid))); // local date and time
+						treeItem->setData(TransitDate, Qt::UserRole, JDMid);
 						treeItem->setText(TransitPlanet, planetStr);
 						treeItem->setData(TransitPlanet, Qt::UserRole, planetStr);
+
+						if (saveTopocentric && altitudeContact1 < -.3)
+							treeItem->setText(TransitContact1, "---");
+						else
+							treeItem->setText(TransitContact1, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD1)));
+						treeItem->setToolTip(TransitContact1, q_("The time of first contact"));
+						if (saveTopocentric && (altitudeContact2 < -.3 || transitData.ce <= 0.))
+						{
+							if (transitData.ce <= 0.)
+								treeItem->setText(TransitContact2, dash);
+							else
+								treeItem->setText(TransitContact2, "---");
+						}
+						else
+							treeItem->setText(TransitContact2, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD2)));
+						treeItem->setToolTip(TransitContact2, q_("The time of second contact"));
+						if (saveTopocentric && altitudeMidtransit < -.3)
+							treeItem->setText(TransitMid, "---");
+						else
+							treeItem->setText(TransitMid, QString("%1").arg(localeMgr->getPrintableTimeLocal(JDMid)));
+						treeItem->setToolTip(TransitMid, q_("The time of minimum angular distance of planet to Sun's center"));
+						core->setUseTopocentricCoordinates(saveTopocentric);
+						core->setJD(JDMid);
+						core->update(0);
+						double elongation = object->getElongation(core->getObserverHeliocentricEclipticPos());
+						separationStr = StelUtils::radToDmsStr(elongation, true);
 						treeItem->setText(TransitSeparation, separationStr);
-						treeItem->setToolTip(TransitSeparation, q_("Geocentric minimum angular distance of planet to Sun's center"));
+						treeItem->setToolTip(TransitSeparation, q_("Minimum angular distance of planet to Sun's center"));
+						if (saveTopocentric && (altitudeContact3 < -.3 || transitData.ce <= 0.))
+						{
+							if (transitData.ce <= 0.)
+								treeItem->setText(TransitContact3, dash);
+							else
+								treeItem->setText(TransitContact3, "---");
+						}
+						else
+							treeItem->setText(TransitContact3, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD3)));
+						treeItem->setToolTip(TransitContact3, q_("The time of third contact"));
+						if (saveTopocentric && altitudeContact4 < -.3)
+							treeItem->setText(TransitContact4, "---");
+						else
+							treeItem->setText(TransitContact4, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD4)));
+						treeItem->setToolTip(TransitContact4, q_("The time of fourth contact"));
+						if (saveTopocentric && altitudeContact1 < -.3 && altitudeContact4 < -.3)
+						{
+							treeItem->setText(TransitDuration, dash);
+							// Special case: All contacts occur below horizon but visible around mid-transit
+							// Example: 2019 November 11 at Lat. +70, Long. -55
+							if (altitudeContact2 < -.3 && altitudeContact3 < -.3)
+							{
+								Vec4d rts = solarSystem->getSun()->getRTSTime(core,-.3);
+								if (rts[0]>JD1 && rts[2]<JD4)
+								{
+									durationStr  = StelUtils::hoursToHmsStr((rts[2]-rts[0])*24.,true);
+									treeItem->setText(TransitDuration, durationStr);
+								}	
+							}
+						}
+						else
+							treeItem->setText(TransitDuration, durationStr);
+						treeItem->setToolTip(TransitDuration, q_("Duration of transit"));
 						treeItem->setTextAlignment(TransitDate, Qt::AlignRight);
 						treeItem->setTextAlignment(TransitPlanet, Qt::AlignRight);
+						treeItem->setTextAlignment(TransitContact1, Qt::AlignCenter);
+						treeItem->setTextAlignment(TransitContact2, Qt::AlignCenter);
+						treeItem->setTextAlignment(TransitMid, Qt::AlignCenter);
+						treeItem->setTextAlignment(TransitSeparation, Qt::AlignCenter);
+						treeItem->setTextAlignment(TransitContact3, Qt::AlignCenter);
+						treeItem->setTextAlignment(TransitContact4, Qt::AlignCenter);	
 					}
 				}
 			}
@@ -6525,7 +6807,7 @@ void AstroCalcDialog::changeEclipsesTab(int index)
 		{0,	q_("Table of solar eclipses")},
 		{1,	q_("Table of solar eclipses visible in current location")},
 		{2,	q_("Table of lunar eclipses")},
-		{3,	q_("Transits of Mercury and Venus")}
+		{3,	q_("Transits of Mercury and Venus across the Sun")}
 		};
 	ui->eclipseHeaderLabel->setText(headermap.value(index, q_("Table of solar eclipses")));
 }
