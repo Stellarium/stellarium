@@ -3957,7 +3957,7 @@ void AstroCalcDialog::generateTransits()
 			StelUtils::getJDFromDate(&stopJD, startyear+years, 12, 31, 23, 59, 59);
 			startJD = startJD - core->getUTCOffset(startJD) / 24.;
 			stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
-			QString planetStr, separationStr, durationStr, separationLocalStr;
+			QString planetStr, separationStr, durationStr;
 			double approxJD, synodicPeriod;
 			if (p == 0)
 			{
