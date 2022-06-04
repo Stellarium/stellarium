@@ -29,6 +29,7 @@
 #include "StelObject.hpp"
 #include "StelFader.hpp"
 #include "StelProjectorType.hpp"
+#include "StelTranslator.hpp"
 
 class StelPainter;
 
@@ -54,6 +55,11 @@ public:
 	virtual QString getType(void) const Q_DECL_OVERRIDE
 	{
 		return NOVA_TYPE;
+	}
+
+	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	{
+		return N_("nova");
 	}
 
 	virtual QString getID(void) const Q_DECL_OVERRIDE

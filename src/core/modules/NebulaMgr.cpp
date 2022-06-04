@@ -187,7 +187,6 @@ void NebulaMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	Nebula::buildTypeStringMap();
 	nebulaFont.setPixelSize(StelApp::getInstance().getScreenFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), SLOT(setFontSizeFromApp(int)));
 	// Load circle texture
@@ -1729,7 +1728,6 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 
 void NebulaMgr::updateI18n()
 {
-	Nebula::buildTypeStringMap();
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	for (const auto& n : qAsConst(dsoArray))
 		n->translateName(trans);

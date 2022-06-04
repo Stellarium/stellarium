@@ -179,9 +179,6 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(bool flagCFPerigee			READ getFlagCFPerigee			WRITE setFlagCFPerigee			NOTIFY flagCFPerigeeChanged)
 	Q_PROPERTY(double minCFPerigee			READ getMinCFPerigee			WRITE setMinCFPerigee			NOTIFY minCFPerigeeChanged)
 	Q_PROPERTY(double maxCFPerigee			READ getMaxCFPerigee			WRITE setMaxCFPerigee			NOTIFY maxCFPerigeeChanged)
-	Q_PROPERTY(bool flagCFAltitude			READ getFlagCFAltitude			WRITE setFlagCFAltitude			NOTIFY flagCFAltitudeChanged)
-	Q_PROPERTY(double minCFAltitude			READ getMinCFAltitude			WRITE setMinCFAltitude			NOTIFY minCFAltitudeChanged)
-	Q_PROPERTY(double maxCFAltitude			READ getMaxCFAltitude			WRITE setMaxCFAltitude			NOTIFY maxCFAltitudeChanged)
 	Q_PROPERTY(bool flagCFEccentricity		READ getFlagCFEccentricity		WRITE setFlagCFEccentricity		NOTIFY flagCFEccentricityChanged)
 	Q_PROPERTY(double minCFEccentricity		READ getMinCFEccentricity		WRITE setMinCFEccentricity		NOTIFY minCFEccentricityChanged)
 	Q_PROPERTY(double maxCFEccentricity		READ getMaxCFEccentricity		WRITE setMaxCFEccentricity		NOTIFY maxCFEccentricityChanged)
@@ -194,6 +191,11 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(bool flagCFRCS			READ getFlagCFRCS			WRITE setFlagCFRCS			NOTIFY flagCFRCSChanged)
 	Q_PROPERTY(double minCFRCS			READ getMinCFRCS			WRITE setMinCFRCS			NOTIFY minCFRCSChanged)
 	Q_PROPERTY(double maxCFRCS			READ getMaxCFRCS			WRITE setMaxCFRCS			NOTIFY maxCFRCSChanged)
+	// visual filter
+	Q_PROPERTY(bool flagVFAltitude			READ getFlagVFAltitude			WRITE setFlagVFAltitude			NOTIFY flagVFAltitudeChanged)
+	Q_PROPERTY(double minVFAltitude			READ getMinVFAltitude			WRITE setMinVFAltitude			NOTIFY minVFAltitudeChanged)
+	Q_PROPERTY(double maxVFAltitude			READ getMaxVFAltitude			WRITE setMaxVFAltitude			NOTIFY maxVFAltitudeChanged)
+
 
 public:
 	//! @enum UpdateState
@@ -400,6 +402,9 @@ public:
 	//! for satellites.
 	//! @note We are having permissions for use this file from Mike McCants.	
 	void loadExtraData();
+
+	QList<CommLink> getCommunicationData(const QString& id);
+	QString getLastSelectedSatelliteID() { return lastSelectedSatellite; }
 	
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	//! Get depth of prediction for Iridium flares
@@ -439,9 +444,9 @@ signals:
 	void flagCFPerigeeChanged(bool b);
 	void minCFPerigeeChanged(double v);
 	void maxCFPerigeeChanged(double v);
-	void flagCFAltitudeChanged(bool b);
-	void minCFAltitudeChanged(double v);
-	void maxCFAltitudeChanged(double v);
+	void flagVFAltitudeChanged(bool b);
+	void minVFAltitudeChanged(double v);
+	void maxVFAltitudeChanged(double v);
 	void flagCFEccentricityChanged(bool b);
 	void minCFEccentricityChanged(double v);
 	void maxCFEccentricityChanged(double v);
@@ -479,6 +484,8 @@ signals:
 	void tleUpdateComplete(int updated, int total, int added, int missing);
 
 	void satGroupVisibleChanged();
+
+	void satSelectionChanged(QString satID);
 
 public slots:
 	//! get whether or not the plugin will try to update TLE data from the internet
@@ -663,20 +670,17 @@ public slots:
 	void setMinCFPerigee(double v);
 	double getMinCFPerigee() { return Satellite::minCFPerigee; }
 
-	//! Set whether custom filter 'altitude' enabled.
-	//! Emits customFilterChanged()
-	void setFlagCFAltitude(bool b);
-	bool getFlagCFAltitude() { return Satellite::flagCFAltitude; }
+	//! Set whether visual filter 'altitude' enabled.
+	void setFlagVFAltitude(bool b);
+	bool getFlagVFAltitude() { return Satellite::flagVFAltitude; }
 
-	//! Set whether custom filter 'altitude' maximum value (in kilometers).
-	//! Emits customFilterChanged()
-	void setMaxCFAltitude(double v);
-	double getMaxCFAltitude() { return Satellite::maxCFAltitude; }
+	//! Set visual filter 'altitude' maximum value (in kilometers).
+	void setMaxVFAltitude(double v);
+	double getMaxVFAltitude() { return Satellite::maxVFAltitude; }
 
-	//! Set whether custom filter 'altitude' minimum value (in kilometers).
-	//! Emits customFilterChanged()
-	void setMinCFAltitude(double v);
-	double getMinCFAltitude() { return Satellite::minCFAltitude; }
+	//! Set visual filter 'altitude' minimum value (in kilometers).
+	void setMinVFAltitude(double v);
+	double getMinVFAltitude() { return Satellite::minVFAltitude; }
 
 	//! Set whether custom filter 'eccentricity' enabled.
 	//! Emits customFilterChanged()
@@ -905,6 +909,8 @@ private:
 	QList<int> messageIDs;
 	//@}
 
+	QString lastSelectedSatellite;
+
 #if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	int iridiumFlaresPredictionDepth;
 #endif
@@ -930,6 +936,7 @@ private slots:
 	//! can be modified to read directly form QNetworkReply-s. --BM
 	void saveDownloadedUpdate(QNetworkReply* reply);
 	void updateObserverLocation(const StelLocation &loc);
+	void changeSelectedSatellite(QString id) { lastSelectedSatellite = id; }
 };
 
 

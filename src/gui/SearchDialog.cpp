@@ -457,9 +457,7 @@ void SearchDialog::createDialogContent()
 	updateListTab();
 
 	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(changeTab(int)));
-	// Set the focus directly on the line editDe	if (ui->tabWidget->currentIndex()==0)
-	ui->lineEditSearchSkyObject->setFocus();
-
+	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(refreshFocus()));
 	connect(StelApp::getInstance().getCore(), SIGNAL(updateSearchLists()), this, SLOT(updateListTab()));
 
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
@@ -498,6 +496,12 @@ void SearchDialog::populateRecentSearch()
 			.arg(qc_("searches", "search tool"));
 	ui->recentSearchSizeSpinBox->setToolTip(toolTipComment);
 	setRecentSearchClearDataPushButton();
+}
+
+void SearchDialog::refreshFocus(bool state)
+{
+	if (state)
+		ui->lineEditSearchSkyObject->setFocus();
 }
 
 void SearchDialog::changeTab(int index)

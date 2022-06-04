@@ -31,6 +31,7 @@
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
+#include "StelTranslator.hpp"
 #include "gSatWrapper.hpp"
 #include "SolarSystem.hpp"
 
@@ -147,6 +148,11 @@ public:
 		return SATELLITE_TYPE;
 	}
 
+	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	{
+		return N_("artificial satellite");
+	}
+
 	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{
 		return id;
@@ -218,6 +224,8 @@ public:
 	
 	void setNew() {newlyAdded = true;}
 	bool isNew() const {return newlyAdded;}
+
+	void setCommData(QList<CommLink> comm) { comms = comm; }
 	
 	//! Get internal flags as a single value.
 	SatFlags getFlags() const;
@@ -335,9 +343,6 @@ private:
 	static bool flagCFPerigee;
 	static double minCFPerigee;
 	static double maxCFPerigee;
-	static bool flagCFAltitude;
-	static double minCFAltitude;
-	static double maxCFAltitude;
 	static bool flagCFEccentricity;
 	static double minCFEccentricity;
 	static double maxCFEccentricity;
@@ -350,6 +355,9 @@ private:
 	static bool flagCFRCS;
 	static double minCFRCS;
 	static double maxCFRCS;
+	static bool flagVFAltitude;
+	static double minVFAltitude;
+	static double maxVFAltitude;
 
 	void draw(StelCore *core, StelPainter& painter);
 

@@ -109,28 +109,28 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 
 	#ifdef Q_OS_WIN
 	if (argsGetOption(argList, "-s", "--safe-mode"))
-		qApp->setProperty("onetime_mesa_mode", true);
+		qputenv("QT_OPENGL", "software");
 
 	if (argsGetOption(argList, "-a", "--angle-mode"))
-		qApp->setProperty("onetime_angle_mode", true);
+		qputenv("QT_OPENGL", "angle");
 
 	if (argsGetOption(argList, "-9", "--angle-d3d9"))
 	{
+		qputenv("QT_OPENGL", "angle");
 		qputenv("QT_ANGLE_PLATFORM", "d3d9");
-		qApp->setProperty("onetime_angle_mode", true);
 	}
 	if (argsGetOption(argList, "", "--angle-d3d11"))
 	{
+		qputenv("QT_OPENGL", "angle");
 		qputenv("QT_ANGLE_PLATFORM", "d3d11");
-		qApp->setProperty("onetime_angle_mode", true);
 	}
 	if (argsGetOption(argList, "", "--angle-warp"))
 	{
+		qputenv("QT_OPENGL", "angle");
 		qputenv("QT_ANGLE_PLATFORM", "warp");
-		qApp->setProperty("onetime_angle_mode", true);
 	}
 	if (argsGetOption(argList, "-m", "--mesa-mode"))
-		qApp->setProperty("onetime_mesa_mode", true);
+		qputenv("QT_OPENGL", "software");
 
 	#endif
 	if (argsGetOption(argList, "", "--list-landscapes"))

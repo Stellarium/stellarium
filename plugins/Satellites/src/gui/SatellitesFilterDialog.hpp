@@ -43,7 +43,6 @@ private slots:
 	void updateMinMaxInclination(bool state);
 	void updateMinMaxApogee(bool state);
 	void updateMinMaxPerigee(bool state);
-	void updateMinMaxAltitude(bool state);
 	void updateMinMaxPeriod(bool state);
 	void updateMinMaxEccentricity(bool state);
 	void updateMinMaxRCS(bool state);
