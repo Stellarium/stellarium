@@ -257,6 +257,8 @@ private:
 	void parseInternationalDesignator(const QString& tle1);
 	void calculateEpochFromLine1(QString tle);
 
+	bool getCustomFiltersFlag() const;
+
 	bool initialized;
 	//! Flag indicating whether the satellite should be displayed.
 	//! Should not be confused with the pedicted visibility of the 

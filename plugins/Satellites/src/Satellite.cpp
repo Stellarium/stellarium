@@ -871,29 +871,7 @@ SatFlags Satellite::getFlags() const
 		flags |= SatHEarthO;
 	if (qAbs(StelApp::getInstance().getCore()->getJD() - tleEpochJD) > tleEpochAge)
 		flags |= SatOutdatedTLE;
-	// custom filters
-	bool cfa = true;
-	if (flagCFApogee)
-		cfa = (apogee>=minCFApogee && apogee<=maxCFApogee);
-	bool cfp = true;
-	if (flagCFPerigee)
-		cfp = (perigee>=minCFPerigee && perigee<=maxCFPerigee);
-	bool cfe = true;
-	if (flagCFEccentricity)
-		cfe = (eccentricity>=minCFEccentricity && eccentricity<=maxCFEccentricity);
-	bool cfm = true;
-	if (flagCFKnownStdMagnitude)
-		cfm = (stdMag<99.0);
-	bool cft = true;
-	if (flagCFPeriod)
-		cft = (orbitalPeriod>=minCFPeriod && orbitalPeriod<=maxCFPeriod);
-	bool cfi = true;
-	if (flagCFInclination)
-		cfi = (inclination>=minCFInclination && inclination<=maxCFInclination);
-	bool cfr = true;
-	if (flagCFRCS)
-		cfr = (RCS>=minCFRCS && RCS<=maxCFRCS);
-	if (cfa && cfp && cfe && cfm && cft && cfi && cfr)
+	if (getCustomFiltersFlag())
 		flags |= SatCustomFilter;
 
 	return flags;
@@ -906,6 +884,40 @@ void Satellite::setFlags(const SatFlags& flags)
 	userDefined = flags.testFlag(SatUser);
 }
 
+bool Satellite::getCustomFiltersFlag() const
+{
+	double orbitalPeriod = pSatWrapper->getOrbitalPeriod();
+	// Apogee
+	bool cfa = true;
+	if (flagCFApogee)
+		cfa = (apogee>=minCFApogee && apogee<=maxCFApogee);
+	// Perigee
+	bool cfp = true;
+	if (flagCFPerigee)
+		cfp = (perigee>=minCFPerigee && perigee<=maxCFPerigee);
+	// Eccentricity
+	bool cfe = true;
+	if (flagCFEccentricity)
+		cfe = (eccentricity>=minCFEccentricity && eccentricity<=maxCFEccentricity);
+	// Known standrad magnitude
+	bool cfm = true;
+	if (flagCFKnownStdMagnitude)
+		cfm = (stdMag<99.0);
+	// Period
+	bool cft = true;
+	if (flagCFPeriod)
+		cft = (orbitalPeriod>=minCFPeriod && orbitalPeriod<=maxCFPeriod);
+	// Inclination
+	bool cfi = true;
+	if (flagCFInclination)
+		cfi = (inclination>=minCFInclination && inclination<=maxCFInclination);
+	// RCS
+	bool cfr = true;
+	if (flagCFRCS)
+		cfr = (RCS>=minCFRCS && RCS<=maxCFRCS);
+
+	return (cfa && cfp && cfe && cfm && cft && cfi && cfr);
+}
 
 void Satellite::parseInternationalDesignator(const QString& tle1)
 {
