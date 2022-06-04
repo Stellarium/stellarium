@@ -1386,7 +1386,6 @@ QList<CommLink> Satellites::getCommunicationData(const QString &id)
 QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 {
 	QList<CommLink> comms;
-	CommLink c;
 
 	// Communication data for individual satellites
 	QVariantMap communications = satComms.value(tleData.id.toInt(), QVariantMap());
@@ -1394,6 +1393,7 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 	{
 		for (const auto& comm : communications.value("comms").toList())
 		{
+			CommLink c;
 			QVariantMap commMap = comm.toMap();
 			c.frequency = commMap.value("frequency").toDouble();
 			c.description = commMap.value("description").toString();
@@ -1431,6 +1431,7 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 		{
 			for (const auto& comm : communications.value("comms").toList())
 			{
+				CommLink c;
 				QVariantMap commMap = comm.toMap();
 				c.frequency = commMap.value("frequency").toDouble();
 				c.description = commMap.value("description").toString();

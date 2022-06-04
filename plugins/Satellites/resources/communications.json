@@ -68,6 +68,17 @@
             }
             ]
         },
+        "15595": {
+            "name": "GEOSAT",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 400.032,
+                "modulation": "CW"
+            }
+            ]
+        },
         "18351": {
             "name": "EUTELSAT 1-F4 (ECS 4)",
             "source": "https://r4uab.ru/frequency/",
@@ -92,7 +103,7 @@
         },
         "22825": {
             "name": "AO-27 (EYESAT-A)",
-            "source": "https://www.n2yo.com/satellite/?s=22825; https://r4uab.ru/frequency/",
+            "source": "https://www.n2yo.com/satellite/?s=22825; https://r4uab.ru/frequency/; https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
             "comms": [
             {
                 "description": "downlink",
@@ -141,6 +152,17 @@
             }
             ]
         },
+        "24920": {
+            "name": "FORTE",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 401.568,
+                "modulation": "CW"
+            }
+            ]
+        },
         "25338": {
             "name": "NOAA 15",
             "source": "https://www.n2yo.com/satellite/?s=25338",
@@ -185,7 +207,7 @@
         },
         "25544": {
             "name": "SPACE STATION",
-            "source": "https://www.n2yo.com/satellite/?s=25544",
+            "source": "https://www.n2yo.com/satellite/?s=25544; https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
             "comms": [
             {
                 "description": "RS0ISS uplink",
@@ -208,16 +230,30 @@
                 "modulation": "FM tone 67.0Hz"
             },
             {
-                "description": "NA1SS voice uplink region 1",
-                "frequency": 145.200
+                "description": "NA1SS uplink",
+                "frequency": 145.200,
+                "modulation": "Voice (Region 1)"
             },
             {
                 "description": "NA1SS voice uplink region 2 & 3",
-                "frequency": 144.490
+                "frequency": 144.490,
+                "modulation": "Voice (Region 2 & 3)"
             },
             {
                 "description": "NA1SS voice downlink",
-                "frequency": 145.800
+                "frequency": 145.800,
+                "modulation": "Voice"
+            }
+            ]
+        },
+        "25991": {
+            "name": "DMSP 5D-2 F15",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 400.032,
+                "modulation": "CW"
             }
             ]
         },
@@ -832,7 +868,7 @@
         },
         "40039": {
             "name": "PERSEUS M1",
-            "source": "https://www.n2yo.com/satellite/?s=40039",
+            "source": "https://www.n2yo.com/satellite/?s=40039; https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
             "comms": [
             {
                 "description": "CQ downlink",
@@ -1232,6 +1268,66 @@
             }
             ]
         },
+        "41873": {
+            "name": "LEMUR 2 ANUBHAVTHAKUR",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 402.641
+            }
+            ]
+        },
+        "41948": {
+            "name": "CARTOSAT 2D",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 402.761
+            }
+            ]
+        },
+        "41991": {
+            "name": "LEMUR 2 SATCHMO",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 402.641
+            }
+            ]
+        },
+        "41996": {
+            "name": "LEMUR 2 NOGUECORREIG",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 402.760
+            }
+            ]
+        },
+        "42000": {
+            "name": "DIDO 2",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 400.300
+            }
+            ]
+        },
+        "42010": {
+            "name": "FLOCK 3P 4",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 401.334
+            }
+            ]
+        },
         "42017": {
             "name": "NAYIF (EO-88)",
             "source": "https://www.n2yo.com/satellite/?s=42017",
@@ -1250,6 +1346,16 @@
                 "description": "beacon",
                 "frequency": 145.940,
                 "modulation": "1200bps BPSK SSB"
+            }
+            ]
+        },
+        "42031": {
+            "name": "FLOCK 3P 46",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 401.334
             }
             ]
         },
@@ -1369,6 +1475,56 @@
             }
             ]
         },
+        "42779": {
+            "name": "LEMUR 2 LYNSEY-SYMO",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 402.700
+            }
+            ]
+        },
+        "42780": {
+            "name": "LEMUR 2 LISASAURUS",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 402.730
+            }
+            ]
+        },
+        "42783": {
+            "name": "RED DIAMOND",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 401.150
+            }
+            ]
+        },
+        "42785": {
+            "name": "GREEN DIAMOND",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 401.150
+            }
+            ]
+        },
+        "42786": {
+            "name": "BLUE DIAMOND",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 401.150
+            }
+            ]
+        },
         "42788": {
             "name": "SUCHAI",
             "source": "https://www.n2yo.com/satellite/?s=42788",
@@ -1407,6 +1563,90 @@
             }
             ]
         },
+        "42840": {
+            "name": "LEMUR 2 FURIAUS",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 402.670
+            }
+            ]
+        },
+        "42860": {
+            "name": "FLOCK 2K 21",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 401.300
+            }
+            ]
+        },
+        "42867": {
+            "name": "FLOCK 2K 37",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 401.300
+            }
+            ]
+        },
+        "42881": {
+            "name": "LEMUR 2 ARTFISCHER",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 402.640
+            }
+            ]
+        },
+        "42995": {
+            "name": "FLOCK 3M 1",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 401.334
+            }
+            ]
+        },
+        "42996": {
+            "name": "FLOCK 3M 3",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 401.333
+            }
+            ]
+        },
+        "42997": {
+            "name": "FLOCK 3M 4",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 401.300
+            },
+            {
+                "description": "downlink",
+                "frequency": 401.834
+            }
+            ]
+        },
+        "42998": {
+            "name": "FLOCK 3M 2",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 401.300
+            }
+            ]
+        },
         "43017": {
             "name": "FOX-1B (RADFXSAT AO-91)",
             "source": "https://www.n2yo.com/satellite/?s=43017",
@@ -1420,6 +1660,60 @@
                 "description": "downlink",
                 "frequency": 145.960,
                 "modulation": "FM CTCSS 67.0Hz/200bps DUV"
+            }
+            ]
+        },
+        "43051": {
+            "name": "LEMUR 2 MCCULLAGH",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 402.670
+            }
+            ]
+        },
+        "43124": {
+            "name": "LEMUR 2 PETERWEBSTER",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 402.670
+            }
+            ]
+        },
+        "43125": {
+            "name": "LEMUR 2 BROWNCOW",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 402.760
+            }
+            ]
+        },
+        "43126": {
+            "name": "LEMUR 2 DAVEWILSON",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 402.700
+            }
+            ]
+        },
+        "43130": {
+            "name": "ARKYD 6A",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 401.510
+            },
+            {
+                "description": "downlink",
+                "frequency": 401.989
             }
             ]
         },
@@ -1452,6 +1746,26 @@
                 "description": "downlink",
                 "frequency": 437.485,
                 "modulation": "9600bps FSK CW"
+            }
+            ]
+        },
+        "43143": {
+            "name": "CICERO 7",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 401.200
+            }
+            ]
+        },
+        "43144": {
+            "name": "TYVAK-61C",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 401.040
             }
             ]
         },
@@ -1491,6 +1805,16 @@
             }
             ]
         },
+        "43157": {
+            "name": "KEPLER-0",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 400.799
+            }
+            ]
+        },
         "43192": {
             "name": "FENGMANIU 1 (FMN 1)",
             "source": "https://www.n2yo.com/satellite/?s=43192",
@@ -1504,6 +1828,28 @@
                 "description": "BUAABJ downlink",
                 "frequency": 435.350,
                 "modulation": "9600bps BPSK FM"
+            }
+            ]
+        },
+        "43196": {
+            "name": "GOMX4-B",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 400.800,
+                "modulation": "FSK"
+            }
+            ]
+        },
+        "43197": {
+            "name": "GOMX4-A",
+            "source": "https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 400.800,
+                "modulation": "FSK"
             }
             ]
         },
@@ -3035,11 +3381,12 @@
             ]
         },
         "orbcomm": {
-            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php",
+            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php; https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
             "comms": [
             {
                 "description": "downlink",
-                "frequency": 400.100
+                "frequency": 400.100,
+                "modulation": "CW"
             }
             ]
         }
