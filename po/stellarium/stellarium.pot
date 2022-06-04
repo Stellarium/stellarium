@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-06-03 20:38+0700\n"
+"POT-Creation-Date: 2022-06-04 16:53+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16158,7 +16158,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Satellites/src/Satellite.cpp:461
-#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:87
+#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:88
 #: plugins/Pulsars/src/Pulsar.cpp:289
 msgctxt "frequency"
 msgid "MHz"
@@ -16739,40 +16739,51 @@ msgstr ""
 msgid "Radar cross-section"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:88
-#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:131
-msgid "Modulation"
+#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:87
+msgid "Callsign with channel description"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:89
-msgid "Remove selected communication data"
+msgid "Channel frequency"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:90
+msgid "Signal modulation mode"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:91
+msgid "Remove selected communication data"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:92
 msgid "Add communication data"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:129
+#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:131
 msgid "Description"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:130
+#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:132
 msgid "Frequency, MHz"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:195
+#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:133
+msgid "Modulation"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:197
 msgid "Nothing added"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:195
+#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:197
 msgid "Please fill in description and add frequency before adding!"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:224
+#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:226
 msgid "Nothing deleted"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:224
+#: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:226
 msgid "Please select a line first!"
 msgstr ""
 

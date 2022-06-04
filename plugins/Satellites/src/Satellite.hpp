@@ -42,9 +42,9 @@ class StelLocation;
 //! @ingroup satellites
 typedef struct
 {
-	double frequency; //!< Channel frequency in MHz.
-	QString modulation; //!< Signal modulation mode.
-	QString description; //!< Channel description.
+	double frequency;	//!< Channel frequency in MHz.
+	QString modulation;	//!< Signal modulation mode.
+	QString description;	//!< Callsign with channel description.
 } CommLink;
 
 //! Description of the data roles used in SatellitesListModel.

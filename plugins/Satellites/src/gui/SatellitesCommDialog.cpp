@@ -84,8 +84,10 @@ void SatellitesCommDialog::createDialogContent()
 
 void SatellitesCommDialog::populateTexts()
 {
+	ui->descriptionLineEdit->setToolTip(q_("Callsign with channel description"));
 	ui->frequencySpinBox->setSuffix(QString(" %1").arg(qc_("MHz", "frequency")));
-	ui->modulationLineEdit->setToolTip(q_("Modulation"));
+	ui->frequencySpinBox->setToolTip(q_("Channel frequency"));
+	ui->modulationLineEdit->setToolTip(q_("Signal modulation mode"));
 	ui->removeCommLinkButton->setToolTip(q_("Remove selected communication data"));
 	ui->addCommLinkButton->setToolTip(q_("Add communication data"));
 }
