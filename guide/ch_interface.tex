@@ -1370,12 +1370,12 @@ current date) as graphs.
 \subsection{The ``Eclipses'' Tab}
 \label{sec:gui:AstroCalc:Eclipses}
 
-The Eclipses tool\newFeature{0.22.0} has three subtabs: ``All Solar Eclipses'', ``Local Solar Eclipses'' and ``Lunar Eclipses''. 
+The Eclipses tool\newFeature{0.22.0} has four subtabs: ``All Solar Eclipses'', ``Local Solar Eclipses'', ``Lunar Eclipses'' and ``Planetary Transits''. 
 
-You can export the calculated eclipses into an XLSX or CSV file.
+You can export the calculated eclipses and transits into an XLSX or CSV file.
 
 \paragraph{Caution}
-Predicting eclipses, and in particular local circumstances, over thousands of years in the past and future
+Predicting eclipses and transits, and in particular local circumstances, over thousands of years in the past and future
 is not reliable due to the principal unpredictability of $\Delta T$, caused by fluctuations of Earth's rotation. (See section \ref{sec:Concepts:DeltaT} for details.)
 
 
@@ -1413,18 +1413,10 @@ Double click on a line in the table will set the time of greatest eclipse.
 \label{sec:gui:AstroCalc:Eclipses:LunarEclipses}
 
 This subtab (Fig.~\ref{fig:gui:AstroCalc:Eclipses:LunarEclipses}) contains data for all lunar eclipses on the Earth in defined time range.
-
-\begin{figure}[tbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_eclipses_le.jpg}
-\caption{Astronomical Calculations (AstroCalc): Eclipses / Lunar Eclipses}
-\label{fig:gui:AstroCalc:Eclipses:LunarEclipses}
-\end{figure}
-
 Double click on the table row will set time of greatest eclipse.
 
 The quantity gamma is the minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone, in units of Earth’s equatorial radius.
 This distance is positive or negative, depending on whether the Moon passes north or south of the shadow cone axis.
-
 
 The visibility conditions are based on the altitude of the Moon at greatest eclipse:
 \begin{description}
@@ -1434,6 +1426,27 @@ The visibility conditions are based on the altitude of the Moon at greatest ecli
   \item[Good] --- good visibility conditions for current location (altitude range is 30---45$\degree$; i.e., ``photometric altitude'');
   \item[Perfect] --- perfect visibility conditions for current location (altitude range is 45---90$\degree$).
 \end{description}
+
+\begin{figure}[tbp]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_eclipses_le.jpg}
+\caption{Astronomical Calculations (AstroCalc): Eclipses / Lunar Eclipses}
+\label{fig:gui:AstroCalc:Eclipses:LunarEclipses}
+\end{figure}
+
+
+\subsubsection{The ``Planetary Transits'' Subtab}\newFeature{0.22.2}
+\label{sec:gui:AstroCalc:Eclipses:PlanetaryTransits}
+
+This subtab (Fig.~\ref{fig:gui:AstroCalc:Eclipses:PlanetaryTransits}) contains data for all transits of Mercury and Venus across the Sun as seen from the Earth in defined time range.
+
+Double click on the table row will set time of mid-transit.
+
+\begin{figure}[tbp]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_eclipses_le.jpg}
+\caption{Astronomical Calculations (AstroCalc): Eclipses / Planetary Transits}
+\label{fig:gui:AstroCalc:Eclipses:PlanetaryTransits}
+\end{figure}
+
 
 \section{The Help Window}
 \label{sec:gui:help}

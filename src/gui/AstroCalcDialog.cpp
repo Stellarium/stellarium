@@ -2535,7 +2535,7 @@ void AstroCalcDialog::generateLunarEclipses()
 		double startyear = ui->eclipseFromYearSpinBox->value();
 		double years = ui->eclipseYearsSpinBox->value();
 		double startJD, stopJD;
-		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 1);
+		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 0);
 		StelUtils::getJDFromDate(&stopJD, startyear+years, 12, 31, 23, 59, 59);
 		startJD = startJD - core->getUTCOffset(startJD) / 24.;
 		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
@@ -2981,7 +2981,7 @@ void AstroCalcDialog::generateSolarEclipses()
 		int startyear = ui->eclipseFromYearSpinBox->value();
 		int years = ui->eclipseYearsSpinBox->value();
 		double startJD, stopJD;
-		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 1);
+		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 0);
 		StelUtils::getJDFromDate(&stopJD, startyear+years, 12, 31, 23, 59, 59);
 		startJD = startJD - core->getUTCOffset(startJD) / 24.;
 		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
@@ -3250,7 +3250,7 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 		int startyear = ui->eclipseFromYearSpinBox->value();
 		int years = ui->eclipseYearsSpinBox->value();
 		double startJD, stopJD;
-		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 1);
+		StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 0);
 		StelUtils::getJDFromDate(&stopJD, startyear+years, 12, 31, 23, 59, 59);
 		startJD = startJD - core->getUTCOffset(startJD) / 24.;
 		stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
@@ -3890,7 +3890,7 @@ LocalTransitparams localTransit(double JD, int contact, bool central, PlanetP ob
 TransitBessel::TransitBessel(PlanetP object, double &besX, double &besY,
 	double &besD, double &bestf1, double &bestf2, double &besL1, double &besL2, double &besMu)
 {
-	// Besselian elements (adaped from solar eclipse)
+	// Besselian elements (adapted from solar eclipse)
 	// Source: Explanatory Supplement to the Astronomical Ephemeris 
 	// and the American Ephemeris and Nautical Almanac (1961)
 
@@ -3948,12 +3948,13 @@ void AstroCalcDialog::generateTransits()
 		initListTransit();
 		const double currentJD = core->getJD(); // save current JD
 		const bool saveTopocentric = core->getUseTopocentricCoordinates();
+		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 		for (int p = 0; p < 2; p++)
 		{
 			double startyear = ui->eclipseFromYearSpinBox->value();
 			double years = ui->eclipseYearsSpinBox->value();
 			double startJD, stopJD;
-			StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 1);
+			StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 0);
 			StelUtils::getJDFromDate(&stopJD, startyear+years, 12, 31, 23, 59, 59);
 			startJD = startJD - core->getUTCOffset(startJD) / 24.;
 			stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
@@ -4156,22 +4157,28 @@ void AstroCalcDialog::generateTransits()
 						treeItem->setData(TransitPlanet, Qt::UserRole, planetStr);
 
 						if (saveTopocentric && altitudeContact1 < -.3)
-							treeItem->setText(TransitContact1, "---");
+						{
+							treeItem->setText(TransitContact1, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JD1)));
+							treeItem->setTextColor(TransitContact1, Qt::gray);
+						}
 						else
 							treeItem->setText(TransitContact1, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD1)));
 						treeItem->setToolTip(TransitContact1, q_("The time of first contact"));
-						if (saveTopocentric && (altitudeContact2 < -.3 || transitData.ce <= 0.))
-						{
-							if (transitData.ce <= 0.)
+						if (transitData.ce <= 0.)
 								treeItem->setText(TransitContact2, dash);
-							else
-								treeItem->setText(TransitContact2, "---");
+						else if (saveTopocentric && altitudeContact2 < -.3)
+						{
+							treeItem->setText(TransitContact2, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JD2)));
+							treeItem->setTextColor(TransitContact2, Qt::gray);
 						}
 						else
 							treeItem->setText(TransitContact2, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD2)));
 						treeItem->setToolTip(TransitContact2, q_("The time of second contact"));
 						if (saveTopocentric && altitudeMidtransit < -.3)
-							treeItem->setText(TransitMid, "---");
+						{
+							treeItem->setText(TransitMid, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JDMid)));
+							treeItem->setTextColor(TransitMid, Qt::gray);
+						}
 						else
 							treeItem->setText(TransitMid, QString("%1").arg(localeMgr->getPrintableTimeLocal(JDMid)));
 						treeItem->setToolTip(TransitMid, q_("The time of minimum angular distance of planet to Sun's center"));
@@ -4179,21 +4186,29 @@ void AstroCalcDialog::generateTransits()
 						core->setJD(JDMid);
 						core->update(0);
 						double elongation = object->getElongation(core->getObserverHeliocentricEclipticPos());
-						separationStr = StelUtils::radToDmsStr(elongation, true);
+						if (withDecimalDegree)
+							separationStr = StelUtils::radToDecDegStr(elongation, 5, false, true);
+						else
+							separationStr = StelUtils::radToDmsStr(elongation, true);
 						treeItem->setText(TransitSeparation, separationStr);
+						if (saveTopocentric && altitudeMidtransit < -.3)
+							treeItem->setTextColor(TransitSeparation, Qt::gray);
 						treeItem->setToolTip(TransitSeparation, q_("Minimum angular distance of planet to Sun's center"));
-						if (saveTopocentric && (altitudeContact3 < -.3 || transitData.ce <= 0.))
-						{
-							if (transitData.ce <= 0.)
+						if (transitData.ce <= 0.)
 								treeItem->setText(TransitContact3, dash);
-							else
-								treeItem->setText(TransitContact3, "---");
+						else if (saveTopocentric && altitudeContact3 < -.3)
+						{
+							treeItem->setText(TransitContact3, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JD3)));
+							treeItem->setTextColor(TransitContact3, Qt::gray);
 						}
 						else
 							treeItem->setText(TransitContact3, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD3)));
 						treeItem->setToolTip(TransitContact3, q_("The time of third contact"));
 						if (saveTopocentric && altitudeContact4 < -.3)
-							treeItem->setText(TransitContact4, "---");
+						{
+							treeItem->setText(TransitContact4, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JD4)));
+							treeItem->setTextColor(TransitContact4, Qt::gray);
+						}
 						else
 							treeItem->setText(TransitContact4, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD4)));
 						treeItem->setToolTip(TransitContact4, q_("The time of fourth contact"));
@@ -4214,7 +4229,10 @@ void AstroCalcDialog::generateTransits()
 						}
 						else
 							treeItem->setText(TransitDuration, durationStr);
-						treeItem->setToolTip(TransitDuration, q_("Duration of transit"));
+						if (saveTopocentric)
+							treeItem->setToolTip(TransitDuration, q_("Observable duration of transit"));
+						else
+							treeItem->setToolTip(TransitDuration, q_("Duration of transit"));
 						treeItem->setTextAlignment(TransitDate, Qt::AlignRight);
 						treeItem->setTextAlignment(TransitPlanet, Qt::AlignRight);
 						treeItem->setTextAlignment(TransitContact1, Qt::AlignCenter);
@@ -4222,7 +4240,8 @@ void AstroCalcDialog::generateTransits()
 						treeItem->setTextAlignment(TransitMid, Qt::AlignCenter);
 						treeItem->setTextAlignment(TransitSeparation, Qt::AlignCenter);
 						treeItem->setTextAlignment(TransitContact3, Qt::AlignCenter);
-						treeItem->setTextAlignment(TransitContact4, Qt::AlignCenter);	
+						treeItem->setTextAlignment(TransitContact4, Qt::AlignCenter);
+						treeItem->setTextAlignment(TransitDuration, Qt::AlignCenter);
 					}
 				}
 			}
@@ -4333,7 +4352,7 @@ void AstroCalcDialog::saveTransits()
 			}
 		}
 
-		xlsx.write(count+3, 1, q_("Note: Transit times during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
+		xlsx.write(count+3, 1, q_("Notes: Time in parentheses means the contact is invisible at current location. Transit times during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
 
 		for (int i = 0; i < columns; i++)
 		{
