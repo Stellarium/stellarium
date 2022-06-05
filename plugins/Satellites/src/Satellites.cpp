@@ -1538,7 +1538,7 @@ QStringList Satellites::guessGroups(const TleData& tleData)
 		satGroups.append("gnss");
 		satGroups.append("navigation");
 	}
-	if (tleData.name.startsWith("INTELSAT") || tleData.name.startsWith("GLOBALSTAR") || tleData.name.startsWith("ORBCOMM") || tleData.name.startsWith("GORIZONT") || tleData.name.startsWith("RADUGA") || tleData.name.startsWith("MOLNIYA") || tleData.name.startsWith("DIRECTV") || tleData.name.startsWith("CHINASAT") || tleData.name.startsWith("YAMAL"))
+	if (tleData.name.startsWith("GONETS-M") || tleData.name.startsWith("INTELSAT") || tleData.name.startsWith("GLOBALSTAR") || tleData.name.startsWith("ORBCOMM") || tleData.name.startsWith("GORIZONT") || tleData.name.startsWith("RADUGA") || tleData.name.startsWith("MOLNIYA") || tleData.name.startsWith("DIRECTV") || tleData.name.startsWith("CHINASAT") || tleData.name.startsWith("YAMAL"))
 	{
 		QString satName = tleData.name.split(" ").at(0).toLower();
 		if (satName.contains("-"))
@@ -3116,6 +3116,8 @@ void Satellites::translations()
 	N_("resupply");
 	// TRANSLATORS: Satellite group: are known to broadcast TV signals
 	N_("tv");
+	// TRANSLATORS: Satellite group: Satellites belonging to the GONETS satellites
+	N_("gonets");
 	//
 	// *** Special-Interest Satellites [CelesTrak groups]
 	//
