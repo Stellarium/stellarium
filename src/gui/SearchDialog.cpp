@@ -457,7 +457,7 @@ void SearchDialog::createDialogContent()
 	updateListTab();
 
 	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(changeTab(int)));
-	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(refreshFocus()));
+	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(refreshFocus(bool)));
 	connect(StelApp::getInstance().getCore(), SIGNAL(updateSearchLists()), this, SLOT(updateListTab()));
 
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
