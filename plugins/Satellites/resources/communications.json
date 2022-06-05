@@ -264,12 +264,7 @@
             "source": "https://www.n2yo.com/satellite/?s=25544; https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
             "comms": [
             {
-                "description": "RS0ISS uplink",
-                "frequency": 145.825,
-                "modulation": "1200bps AFSK"
-            },
-            {
-                "description": "RS0ISS downlink",
+                "description": "RS0ISS uplink & downlink",
                 "frequency": 145.825,
                 "modulation": "1200bps AFSK"
             },
@@ -375,12 +370,7 @@
             "source": "https://www.n2yo.com/satellite/?s=26931",
             "comms": [
             {
-                "description": "(A) W3ADO-1 downlink",
-                "frequency": 145.827,
-                "modulation": "1200bps AFSK"
-            },
-            {
-                "description": "(A) W3ADO-1 uplink",
+                "description": "(A) W3ADO-1 uplink & downlink",
                 "frequency": 145.827,
                 "modulation": "1200bps AFSK"
             }
@@ -418,7 +408,7 @@
             },
             {
                 "description": "downlink",
-                "frequency": 1707,
+                "frequency": 1707.0,
                 "modulation": "HRPT"
             }
             ]
@@ -1269,30 +1259,15 @@
         },
         "40908": {
             "name": "LILACSAT 2",
-            "source": "https://www.n2yo.com/satellite/?s=40908; https://www.amsat.org/fm-satellite-frequency-summary/",
+            "source": "https://www.n2yo.com/satellite/?s=40908",
             "comms": [
             {
-                "description": "uplink",
-                "frequency": 144.350,
-                "modulation": "FM"
-            },
-            {
-                "description": "downlink",
-                "frequency": 437.200,
-                "modulation": "FM"
-            },
-            {
                 "description": "BJ1SI uplink",
                 "frequency": 144.350,
                 "modulation": "1k2/4k8/9k6 AFSK/GFSK"
             },
             {
-                "description": "BJ1SI uplink",
-                "frequency": 144.390,
-                "modulation": "1k2/4k8/9k6 AFSK/GFSK"
-            },
-            {
-                "description": "BJ1SI downlink",
+                "description": "BJ1SI uplink & downlink",
                 "frequency": 144.390,
                 "modulation": "1k2/4k8/9k6 AFSK/GFSK"
             },
@@ -1428,12 +1403,7 @@
                 "modulation": "FM tone 88.5Hz/APRS"
             },
             {
-                "description": "YBOX-1 uplink",
-                "frequency": 145.825,
-                "modulation": "FM tone 88.5Hz/APRS"
-            },
-            {
-                "description": "YBOX-1 downlink",
+                "description": "YBOX-1 uplink & downlink",
                 "frequency": 145.825,
                 "modulation": "FM tone 88.5Hz/APRS"
             },
@@ -2010,28 +1980,18 @@
             "source": "https://www.n2yo.com/satellite/?s=43155",
             "comms": [
             {
-                "description": "uplink",
+                "description": "uplink & downlink",
                 "frequency": 435.350,
                 "modulation": "9k6 GMSK/5Mbps OFDM"
             },
             {
-                "description": "uplink",
+                "description": "uplink & downlink",
                 "frequency": 2403.000,
                 "modulation": "9k6 GMSK/5Mbps OFDM"
             },
             {
                 "description": "uplink",
                 "frequency": 5653.000,
-                "modulation": "9k6 GMSK/5Mbps OFDM"
-            },
-            {
-                "description": "downlink",
-                "frequency": 435.350,
-                "modulation": "9k6 GMSK/5Mbps OFDM"
-            },
-            {
-                "description": "downlink",
-                "frequency": 2403.000,
                 "modulation": "9k6 GMSK/5Mbps OFDM"
             },
             {
@@ -2127,12 +2087,7 @@
             "source": "https://www.n2yo.com/satellite/?s=43666",
             "comms": [
             {
-                "description": "EU10S uplink",
-                "frequency": 436.200,
-                "modulation": "4k8/9k6 GMSK Digipeater"
-            },
-            {
-                "description": "EU10S downlink",
+                "description": "EU10S uplink & downlink",
                 "frequency": 436.200,
                 "modulation": "4k8/9k6 GMSK Digipeater"
             },
@@ -2185,18 +2140,13 @@
             "source": "https://www.n2yo.com/satellite/?s=43880",
             "comms": [
             {
-                "description": "DP0UWH uplink",
+                "description": "DP0UWH uplink & downlink",
                 "frequency": 437.375,
                 "modulation": "9600bps FSK Digipeater"
             },
             {
                 "description": "DP0UWH downlink",
                 "frequency": 435.600,
-                "modulation": "9600bps FSK Digipeater"
-            },
-            {
-                "description": "DP0UWH downlink",
-                "frequency": 437.375,
                 "modulation": "9600bps FSK Digipeater"
             },
             {
@@ -2341,12 +2291,7 @@
                 "modulation": "1k2/SSTV PSK31"
             },
             {
-                "description": "PSAT2-1 uplink",
-                "frequency": 145.825,
-                "modulation": "1k2/SSTV PSK31"
-            },
-            {
-                "description": "PSAT2-1 downlink",
+                "description": "PSAT2-1 uplink & downlink",
                 "frequency": 145.825,
                 "modulation": "1k2/SSTV PSK31"
             },
@@ -2668,50 +2613,6 @@
             }
             ]
         },
-        "46504": {
-            "name": "NETSAT-4",
-            "source": "https://www.n2yo.com/satellite/?s=46504",
-            "comms": [
-            {
-                "description": "DP2NSD downlink",
-                "frequency": 435.600,
-                "modulation": "9600bps FSK"
-            }
-            ]
-        },
-        "46505": {
-            "name": "NETSAT-3",
-            "source": "https://www.n2yo.com/satellite/?s=46505",
-            "comms": [
-            {
-                "description": "DP2NSC downlink",
-                "frequency": 435.600,
-                "modulation": "9600bps FSK"
-            }
-            ]
-        },
-        "46506": {
-            "name": "NETSAT-1",
-            "source": "https://www.n2yo.com/satellite/?s=46506",
-            "comms": [
-            {
-                "description": "DP2NSA downlink",
-                "frequency": 435.600,
-                "modulation": "9600bps FSK"
-            }
-            ]
-        },
-        "46507": {
-            "name": "NETSAT-2",
-            "source": "https://www.n2yo.com/satellite/?s=46507",
-            "comms": [
-            {
-                "description": "DP2NSB downlink",
-                "frequency": 435.600,
-                "modulation": "9600bps FSK"
-            }
-            ]
-        },
         "46839": {
             "name": "BY70-3",
             "source": "https://www.n2yo.com/satellite/?s=46839",
@@ -2872,12 +2773,7 @@
             "source": "https://www.n2yo.com/satellite/?s=47927",
             "comms": [
             {
-                "description": "JG6YMX uplink",
-                "frequency": 145.825,
-                "modulation": "4k8FSK APRS CW"
-            },
-            {
-                "description": "JG6YMX downlink",
+                "description": "JG6YMX uplink & downlink",
                 "frequency": 145.825,
                 "modulation": "4k8FSK APRS CW"
             },
@@ -2905,11 +2801,6 @@
             {
                 "description": "beacon",
                 "frequency": 437.405,
-                "modulation": "CW, 9600 FSK"
-            },
-            {
-                "description": "beacon",
-                "frequency": 437.425,
                 "modulation": "CW, 9600 FSK"
             }
             ]
@@ -3180,12 +3071,7 @@
             "source": "https://r4uab.ru/frequency/",
             "comms": [
             {
-                "description": "uplink",
-                "frequency": 145.825,
-                "modulation": "1k2 APRS, CW, 4k8 GMSK"
-            },
-            {
-                "description": "downlink",
+                "description": "uplink & downlink",
                 "frequency": 145.825,
                 "modulation": "1k2 APRS, CW, 4k8 GMSK"
             },
@@ -3201,12 +3087,7 @@
             "source": "https://r4uab.ru/frequency/",
             "comms": [
             {
-                "description": "uplink",
-                "frequency": 145.825,
-                "modulation": "1k2 APRS, CW, 4k8 GMSK"
-            },
-            {
-                "description": "downlink",
+                "description": "uplink & downlink",
                 "frequency": 145.825,
                 "modulation": "1k2 APRS, CW, 4k8 GMSK"
             },
@@ -3237,7 +3118,7 @@
                 "modulation": "9k6 GMSK"
             },
             {
-                "description": "uplink",
+                "description": "uplink & downlink",
                 "frequency": 76750.000,
                 "modulation": "9k6 GMSK"
             },
@@ -3254,11 +3135,6 @@
             {
                 "description": "downlink",
                 "frequency": 5840.000,
-                "modulation": "9k6 GMSK"
-            },
-            {
-                "description": "downlink",
-                "frequency": 76750.000,
                 "modulation": "9k6 GMSK"
             }
             ]
@@ -3373,39 +3249,6 @@
                 "description": "downlink",
                 "frequency": 437.250,
                 "modulation": "9600bps FSK 62.5k LoRa"
-            }
-            ]
-        },
-        "50987": {
-            "name": "FOSSASAT2E4",
-            "source": "https://www.n2yo.com/satellite/?s=50987",
-            "comms": [
-            {
-                "description": "downlink",
-                "frequency": 401.700,
-                "modulation": "9600bps GFSK 125k LoRa"
-            }
-            ]
-        },
-        "50991": {
-            "name": "FOSSASAT2E6",
-            "source": "https://www.n2yo.com/satellite/?s=50991",
-            "comms": [
-            {
-                "description": "downlink",
-                "frequency": 401.700,
-                "modulation": "9600bps GFSK 125k LoRa"
-            }
-            ]
-        },
-        "51001": {
-            "name": "FOSSASAT2E5",
-            "source": "https://www.n2yo.com/satellite/?s=51001",
-            "comms": [
-            {
-                "description": "downlink",
-                "frequency": 401.700,
-                "modulation": "9600bps GFSK 125k LoRa"
             }
             ]
         },
@@ -3605,18 +3448,13 @@
             "source": "https://www.n2yo.com/satellite/?s=52014",
             "comms": [
             {
-                "description": "KJ7SAT downlink",
+                "description": "KJ7SAT downlink & beacon",
                 "frequency": 436.500,
                 "modulation": "9k6FSK 96kGMSK 1M_DPSK CW"
             },
             {
                 "description": "KJ7SAT downlink",
                 "frequency": 2425.000,
-                "modulation": "9k6FSK 96kGMSK 1M_DPSK CW"
-            },
-            {
-                "description": "KJ7SAT beacon",
-                "frequency": 436.500,
                 "modulation": "9k6FSK 96kGMSK 1M_DPSK CW"
             }
             ]
@@ -3652,12 +3490,7 @@
                 "modulation": "4800bps FSK Digipeater"
             },
             {
-                "description": "downlink",
-                "frequency": 437.225,
-                "modulation": "4800bps FSK Digipeater"
-            },
-            {
-                "description": "uplink",
+                "description": "uplink & downlink",
                 "frequency": 437.225,
                 "modulation": "4800bps FSK Digipeater"
             }
@@ -3673,12 +3506,7 @@
                 "modulation": "9600bps GFSK CW"
             },
             {
-                "description": "OK0BDS downlink",
-                "frequency": 436.025,
-                "modulation": "9600bps GFSK CW"
-            },
-            {
-                "description": "OK0BDS beacon",
+                "description": "OK0BDS downlink & beacon",
                 "frequency": 436.025,
                 "modulation": "9600bps GFSK CW"
             }
@@ -3867,6 +3695,26 @@
                 "description": "downlink",
                 "frequency": 1066.752,
                 "modulation": "CW"
+            }
+            ]
+        },
+        "fossasat": {
+            "source": "https://www.n2yo.com/satellite/?s=50987; https://www.n2yo.com/satellite/?s=50991; https://www.n2yo.com/satellite/?s=51001",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 401.700,
+                "modulation": "9600bps GFSK 125k LoRa"
+            }
+            ]        
+        },
+        "netsat": {
+            "source": "https://www.n2yo.com/satellite/?s=46504; https://www.n2yo.com/satellite/?s=46505; https://www.n2yo.com/satellite/?s=46506; https://www.n2yo.com/satellite/?s=46507",
+            "comms": [
+            {
+                "description": "downlink",
+                "frequency": 435.600,
+                "modulation": "9600bps FSK"
             }
             ]
         }

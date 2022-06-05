@@ -1404,33 +1404,30 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 	}
 
 	// Communication data for groups of satellites
+	const QMap<QString, QString> startsWith = {
+		{ "GPS",           "gps" },
+		{ "BEIDOU",     "beidou" },
+		{ "IRNSS",        "irnss" },
+		{ "ORBCOMM", "orbcomm" },
+		{ "TEVEL",        "tevel" },
+		{ "QZS",           "qzss" },
+		{ "FORMOSAT", "formosat" },
+		{ "FOSSASAT",  "fossasat"},
+		{ "NETSAT",      "netsat" }
+	};
+
 	QStringList groups;
-	if (tleData.name.startsWith("GPS"))
-		groups << "gps";
+	for (auto& satgr: startsWith.keys())
+	{
+		if (tleData.name.startsWith(satgr))
+			groups << startsWith.value(satgr);
+	}
 
 	if (tleData.name.startsWith("COSMOS") && tleData.name.contains("("))
 		groups << "glonass";
 
-	if (tleData.name.startsWith("BEIDOU"))
-		groups << "beidou";
-
 	if (tleData.name.startsWith("GSAT") && (tleData.name.contains("PRN") || tleData.name.contains("GALILEO")))
 		groups << "galileo";
-
-	if (tleData.name.startsWith("IRNSS"))
-		groups << "irnss";
-
-	if (tleData.name.startsWith("ORBCOMM"))
-		groups << "orbcomm";
-
-	if (tleData.name.startsWith("TEVEL"))
-		groups << "tevel";
-
-	if (tleData.name.startsWith("QZS"))
-		groups << "qzss";
-
-	if (tleData.name.startsWith("FORMOSAT"))
-		groups << "formosat";
 
 	for (const auto& name : qAsConst(groups))
 	{
