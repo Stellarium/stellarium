@@ -284,12 +284,12 @@
                 "modulation": "FM/Voice (Region 1)"
             },
             {
-                "description": "NA1SS voice uplink region 2 & 3",
+                "description": "NA1SS uplink",
                 "frequency": 144.490,
                 "modulation": "FM/Voice (Region 2 & 3)"
             },
             {
-                "description": "NA1SS voice downlink",
+                "description": "NA1SS downlink",
                 "frequency": 145.800,
                 "modulation": "FM/Voice"
             }
@@ -3362,12 +3362,12 @@
             {
                 "description": "downlink",
                 "frequency": 145.000,
-                "modulation": "9600bps FSK 125k Lora"
+                "modulation": "9600bps FSK 125k LoRa"
             },
             {
                 "description": "downlink",
                 "frequency": 437.200,
-                "modulation": "9600bps FSK 125k Lora"
+                "modulation": "9600bps FSK 125k LoRa"
             }
             ]
         },
