@@ -444,27 +444,54 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			oss << q_("Radio communication") << ":<br/>";
 			for (const auto& c : comms)
 			{
-				double dop = getDoppler(c.frequency);
-				double ddop = dop;
-				QString sign;
-				if (dop<0.)
-				{
-					sign='-';
-					ddop*=-1;
-				}
-				else
-					sign='+';
-
-				if (!c.modulation.isEmpty() && c.modulation != "") oss << "  " << c.modulation;
-				if (!c.description.isEmpty() && c.description != "") oss << "  " << c.description;
-				if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << ": ";
-				oss << QString("%1 %2 (%3%4 %5)").arg(QString::number(c.frequency, 'f', 3), qc_("MHz", "frequency"), sign, QString::number(ddop, 'f', 3), qc_("kHz", "frequency")) << "<br/>";
+				oss << getCommLinkInfo(c);
 			}
 		}
 	}
 
 	postProcessInfoString(str, flags);
 	return str;
+}
+
+QString Satellite::getCommLinkInfo(CommLink comm) const
+{
+	QString commLinkData;
+
+	if (!comm.modulation.isEmpty()) // OK, the signal modulation mode is exist
+		commLinkData = comm.modulation;
+
+	if (commLinkData.isEmpty()) // description cannot be empty!
+		commLinkData = comm.description;
+	else
+		commLinkData.append(QString(" %1").arg(comm.description));
+
+	if (commLinkData.isEmpty())
+		return QString();
+
+	// Translate some specific communications terms
+	// See end of Satellites.cpp file to define translatable terms
+	QStringList commTerms;
+	commTerms << "uplink" << "downlink" << "beacon" << "telemetry";
+	for (auto& term: commTerms)
+	{
+		commLinkData.replace(term, q_(term));
+	}
+	commLinkData.replace("&", q_("and"));
+
+	double dop = getDoppler(comm.frequency);
+	double ddop = dop;
+	QString sign;
+	if (dop<0.)
+	{
+		sign='-';
+		ddop*=-1;
+	}
+	else
+		sign='+';
+
+	commLinkData.append(QString(": %1 %2 (%3%4 %5)<br />").arg(QString::number(comm.frequency, 'f', 3), qc_("MHz", "frequency"), sign, QString::number(ddop, 'f', 3), qc_("kHz", "frequency")));
+
+	return commLinkData;
 }
 
 // Calculate perigee and apogee altitudes for mean Earth radius

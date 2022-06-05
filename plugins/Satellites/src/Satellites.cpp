@@ -3451,5 +3451,15 @@ void Satellites::translations()
 	N_("The satellite is eclipsed");
 	N_("The satellite is not visible");
 
+	// Special terms for communications
+	// TRANSLATORS: An uplink (UL or U/L) is the link from a ground station to a satellite
+	N_("uplink");
+	// TRANSLATORS: A downlink (DL) is the link from a satellite to a ground station
+	N_("downlink");
+	// TRANSLATORS: The beacon (or radio beacon) is a device in the satellite, which emit one or more signals (normally on a fixed frequency) whose purpose is twofold: station-keeping information (telemetry) and locates the satellite (determines its azimuth and elevation) in the sky
+	N_("beacon");
+	// TRANSLATORS: Telemetry is the collection of measurements or other data at satellites and their automatic transmission to receiving equipment (telecommunication) for monitoring
+	N_("telemetry");
+
 #endif
 }

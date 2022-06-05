@@ -259,6 +259,7 @@ private:
 	void calculateEpochFromLine1(QString tle);
 
 	bool getCustomFiltersFlag() const;
+	QString getCommLinkInfo(CommLink comm) const;
 
 	bool initialized;
 	//! Flag indicating whether the satellite should be displayed.
