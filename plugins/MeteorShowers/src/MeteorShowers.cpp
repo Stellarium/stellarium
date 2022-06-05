@@ -30,6 +30,7 @@
 MeteorShowers::MeteorShowers(MeteorShowersMgr* mgr)
 	: m_mgr(mgr)
 {
+	setObjectName("MeteorShowers");
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
 

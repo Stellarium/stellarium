@@ -30,6 +30,7 @@
 #include "SpecialMarkersMgr.hpp"
 #include "CustomObjectMgr.hpp"
 #include "SolarSystem.hpp"
+#include "NomenclatureMgr.hpp"
 
 #include "StelObjectMgr.hpp"
 #include "StelGui.hpp"
@@ -459,6 +460,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(changeTab(int)));
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(refreshFocus(bool)));
 	connect(StelApp::getInstance().getCore(), SIGNAL(updateSearchLists()), this, SLOT(updateListTab()));
+	connect(GETSTELMODULE(NomenclatureMgr), SIGNAL(nomenclatureDisplayedChanged(bool)), this, SLOT(updateListTab()));
 
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->simbadStatusLabel->setStyleSheet(style);
@@ -1226,52 +1228,8 @@ void SearchDialog::gotoObject(const QString &nameI18n, const QString &objType)
 	if (nameI18n.isEmpty())
 		return;
 
-	// Save recent search list
-	updateRecentSearchList(nameI18n);
-	saveRecentSearches();
-
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-	if (simbadResults.contains(nameI18n))
-	{
-		if (objectMgr->findAndSelect(nameI18n, objType))
-		{
-			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-			if (!newSelected.empty())
-			{
-				close();
-				ui->lineEditSearchSkyObject->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
-
-				// Can't point to home planet
-				if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
-				{
-					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
-					mvmgr->setFlagTracking(true);
-				}
-				else
-					GETSTELMODULE(StelObjectMgr)->unSelect();
-			}
-		}
-		else
-		{
-			close();
-			GETSTELMODULE(CustomObjectMgr)->addCustomObject(nameI18n, simbadResults[nameI18n]);
-			ui->lineEditSearchSkyObject->clear();
-			searchListModel->clearValues();
-			if (objectMgr->findAndSelect(nameI18n))
-			{
-				const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-				// Can't point to home planet
-				if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
-				{
-					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
-					mvmgr->setFlagTracking(true);
-				}
-				else
-					GETSTELMODULE(StelObjectMgr)->unSelect();
-			}
-		}
-	}
-	else if (objectMgr->findAndSelectI18n(nameI18n, objType) || objectMgr->findAndSelect(nameI18n, objType))
+	if (objectMgr->findAndSelectI18n(nameI18n, objType) || objectMgr->findAndSelect(nameI18n, objType))
 	{
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
@@ -1289,7 +1247,6 @@ void SearchDialog::gotoObject(const QString &nameI18n, const QString &objType)
 				GETSTELMODULE(StelObjectMgr)->unSelect();
 		}
 	}
-	simbadResults.clear();
 }
 
 void SearchDialog::gotoObject(const QModelIndex &modelIndex)
@@ -1310,6 +1267,14 @@ void SearchDialog::gotoObject(const QModelIndex &modelIndex)
 
 	objType.replace("Mgr","");
 	objType.replace("SolarSystem","Planet");
+	objType.replace("Nomenclature","NomenclatureItem");
+	// plug-ins
+	objType.replace("Supernovae","Supernova");
+	objType.replace("Novae","Nova");
+	objType.replace("Exoplanets","Exoplanet");
+	objType.replace("Pulsars","Pulsar");
+	objType.replace("Quasars","Quasar");
+	objType.replace("MeteorShowers","MeteorShower");
 
 	gotoObject(modelIndex.model()->data(modelIndex, Qt::DisplayRole).toString(), objType);
 }
