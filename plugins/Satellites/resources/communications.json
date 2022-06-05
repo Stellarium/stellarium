@@ -611,12 +611,17 @@
         },
         "32789": {
             "name": "DELFI C3",
-            "source": "https://www.n2yo.com/satellite/?s=32789",
+            "source": "https://www.n2yo.com/satellite/?s=32789; https://www.sigidwiki.com/wiki/Category:Satellite",
             "comms": [
             {
                 "description": "DLFIC3 downlink",
                 "frequency": 145.870,
                 "modulation": "1200bps BPSK"
+            },
+            {
+                "description": "beacon",
+                "frequency": 145.87,
+                "modulation": "LSB BPSK"
             }
             ]
         },
@@ -1425,6 +1430,17 @@
             }
             ]
         },
+        "41105": {
+            "name": "ELEKTRO-L N2",
+            "source": "https://www.sigidwiki.com/wiki/Category:Satellite",
+            "comms": [
+            {
+                "description": "beacon",
+                "frequency": 1.693,
+                "modulation": "DSB"
+            }
+            ]
+        },
         "41168": {
             "name": "ATHENOXAT-1",
             "source": "https://www.n2yo.com/satellite/?s=41168",
@@ -1441,7 +1457,7 @@
             "source": "https://www.n2yo.com/satellite/?s=41340",
             "comms": [
             {
-                "description": "JG6YBW downlink",
+                "description": "JG6YBW downlink & beacon",
                 "frequency": 437.375,
                 "modulation": "1k2 AFSK 9k6 GMSK S-BPSK CW"
             },
@@ -3555,7 +3571,7 @@
             ]
         },
         "beidou": {
-            "source": "https://www.tallysman.com/gnss-constellations-radio-frequencies-and-signals/",
+            "source": "https://www.tallysman.com/gnss-constellations-radio-frequencies-and-signals/; https://www.glonass-iac.ru/guide/gnss/beidou.php",
             "comms": [
             {
                 "description": "B1I",
@@ -3564,7 +3580,8 @@
             },
             {
                 "description": "B1",
-                "frequency": 1575.42
+                "frequency": 1575.42,
+                "modulation": "CBOC, QMBOC, BOC"
             },
             {
                 "description": "B2a",
@@ -3578,7 +3595,7 @@
             {
                 "description": "B3I",
                 "frequency": 1268.52,
-                "modulation": "BPSK"
+                "modulation": "BPSK, QPSK, BOC"
             }
             ]
         },
@@ -3633,12 +3650,37 @@
             ]
         },
         "orbcomm": {
-            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php; https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm",
+            "source": "https://www.zarya.info/Frequencies/FrequenciesAll.php; https://www.ne.jp/asahi/hamradio/je9pel/satslist.htm; https://www.sigidwiki.com/wiki/Orbcomm",
             "comms": [
             {
                 "description": "downlink",
                 "frequency": 400.100,
                 "modulation": "CW"
+            },
+            {
+                "description": "downlink",
+                "frequency": 137.5,
+                "modulation": "NFM PSK"
+            },
+            {
+                "description": "uplink",
+                "frequency": 149.0,
+                "modulation": "NFM PSK"
+            },
+            {
+                "description": "Mobile Telephony",
+                "frequency": 137.44,
+                "modulation": "NFM UNK"
+            },
+            {
+                "description": "Mobile Telephony",
+                "frequency": 137.46,
+                "modulation": "NFM UNK"
+            },
+            {
+                "description": "Mobile Telephony",
+                "frequency": 137.2,
+                "modulation": "NFM UNK"
             }
             ]
         },
@@ -3715,6 +3757,106 @@
                 "description": "downlink",
                 "frequency": 435.600,
                 "modulation": "9600bps FSK"
+            }
+            ]
+        },
+        "soyuz-ms": {
+            "source": "https://www.sigidwiki.com/wiki/Soyuz-MS_spacecraft_telemetry",
+            "comms": [
+            {
+                "description": "spacecraft telemetry",
+                "frequency": 166.0,
+                "modulation": "USB PCM,FM"
+            }
+            ]
+        },
+        "iridium": {
+            "source": "https://www.sigidwiki.com/wiki/Iridium",
+            "comms": [
+            {
+                "description": "Primary Messaging",
+                "frequency": 1626.437500,
+                "modulation": "DEQPSK"
+            },
+            {
+                "description": "Secondary Messaging",
+                "frequency": 1626.395833,
+                "modulation": "DEQPSK"
+            },
+            {
+                "description": "Ring Alert",
+                "frequency": 1626.270833,
+                "modulation": "DEQPSK"
+            }
+            ]
+        },
+        "starlink": {
+            "source": "https://www.markturner.net/2018/02/27/hacking-and-tracking-spacexs-starlink-internet-satellites/",
+            "comms": [
+            {
+                "description": "uplink (command)",
+                "frequency": 13875.0,
+                "modulation": "BPSK"
+            },
+            {
+                "description": "uplink (command)",
+                "frequency": 2085.0,
+                "modulation": "BPSK"
+            },
+            {
+                "description": "downlink (telemetry/video)",
+                "frequency": 11179.0,
+                "modulation": "OQPSK"
+            },
+            {
+                "description": "downlink (telemetry/video)",
+                "frequency": 18575.0,
+                "modulation": "OQPSK"
+            },
+            {
+                "description": "downlink (broadband)",
+                "frequency": 11075.0,
+                "modulation": "Up to 64QAM"
+            },
+            {
+                "description": "uplink (broadband)",
+                "frequency": 14125.0,
+                "modulation": "Up to 64QAM"
+            }
+            ]
+        },
+        "gonets": {
+            "source": "https://www.sigidwiki.com/wiki/Gonets",
+            "comms": [
+            {
+                "description": "beacon",
+                "frequency": 265.0,
+                "modulation": "NFM GMSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 1541.45,
+                "modulation": "NFM GMSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 262.35,
+                "modulation": "NFM GMSK"
+            },
+            {
+                "description": "downlink",
+                "frequency": 388.5,
+                "modulation": "NFM GMSK"
+            },
+            {
+                "description": "uplink",
+                "frequency": 313.5,
+                "modulation": "NFM GMSK"
+            },
+            {
+                "description": "uplink",
+                "frequency": 1633.95,
+                "modulation": "NFM GMSK"
             }
             ]
         }

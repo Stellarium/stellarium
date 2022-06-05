@@ -1413,7 +1413,11 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 		{ "QZS",           "qzss" },
 		{ "FORMOSAT", "formosat" },
 		{ "FOSSASAT",  "fossasat"},
-		{ "NETSAT",      "netsat" }
+		{ "NETSAT",      "netsat" },
+		{ "GONETS-M", "gonets" },
+		{ "SOYUZ-MS",  "soyuz-ms" },
+		{ "IRIDIUM",      "iridium" },
+		{ "STARLINK",   "starlink" }
 	};
 
 	QStringList groups;
