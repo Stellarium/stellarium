@@ -1251,6 +1251,11 @@ void SearchDialog::gotoObject(const QString &nameI18n, const QString &objType)
 
 void SearchDialog::gotoObject(const QModelIndex &modelIndex)
 {
+	gotoObject(modelIndex.model()->data(modelIndex, Qt::DisplayRole).toString());
+}
+
+void SearchDialog::gotoObjectWithType(const QModelIndex &modelIndex)
+{
 	QString objType, objClass = ui->objectTypeComboBox->currentData(Qt::UserRole).toString();
 	QStringList list;
 	if (objClass.contains(":"))
@@ -1420,7 +1425,7 @@ void SearchDialog::updateListView(int index)
 	proxyModel->sort(0, Qt::AscendingOrder);
 	ui->objectsListView->blockSignals(false);
 	//bugfix: prevent multiple connections, which seems to have happened before
-	connect(ui->objectsListView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(gotoObject(const QModelIndex&)), Qt::UniqueConnection);
+	connect(ui->objectsListView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(gotoObjectWithType(const QModelIndex&)), Qt::UniqueConnection);
 }
 
 void SearchDialog::updateListTab()
