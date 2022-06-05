@@ -1386,7 +1386,6 @@ QList<CommLink> Satellites::getCommunicationData(const QString &id)
 QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 {
 	QList<CommLink> comms;
-	CommLink c;
 
 	// Communication data for individual satellites
 	QVariantMap communications = satComms.value(tleData.id.toInt(), QVariantMap());
@@ -1394,6 +1393,7 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 	{
 		for (const auto& comm : communications.value("comms").toList())
 		{
+			CommLink c;
 			QVariantMap commMap = comm.toMap();
 			c.frequency = commMap.value("frequency").toDouble();
 			c.description = commMap.value("description").toString();
@@ -1404,21 +1404,34 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 	}
 
 	// Communication data for groups of satellites
+	const QMap<QString, QString> startsWith = {
+		{ "GPS",           "gps" },
+		{ "BEIDOU",     "beidou" },
+		{ "IRNSS",        "irnss" },
+		{ "ORBCOMM", "orbcomm" },
+		{ "TEVEL",        "tevel" },
+		{ "QZS",           "qzss" },
+		{ "FORMOSAT", "formosat" },
+		{ "FOSSASAT",  "fossasat"},
+		{ "NETSAT",      "netsat" },
+		{ "GONETS-M", "gonets" },
+		{ "SOYUZ-MS",  "soyuz-ms" },
+		{ "IRIDIUM",      "iridium" },
+		{ "STARLINK",   "starlink" }
+	};
+
 	QStringList groups;
-	if (tleData.name.startsWith("GPS"))
-		groups << "gps";
+	for (auto& satgr: startsWith.keys())
+	{
+		if (tleData.name.startsWith(satgr))
+			groups << startsWith.value(satgr);
+	}
 
 	if (tleData.name.startsWith("COSMOS") && tleData.name.contains("("))
 		groups << "glonass";
 
-	if (tleData.name.startsWith("BEIDOU"))
-		groups << "beidou";
-
 	if (tleData.name.startsWith("GSAT") && (tleData.name.contains("PRN") || tleData.name.contains("GALILEO")))
 		groups << "galileo";
-
-	if (tleData.name.startsWith("IRNSS"))
-		groups << "irnss";
 
 	for (const auto& name : qAsConst(groups))
 	{
@@ -1428,6 +1441,7 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 		{
 			for (const auto& comm : communications.value("comms").toList())
 			{
+				CommLink c;
 				QVariantMap commMap = comm.toMap();
 				c.frequency = commMap.value("frequency").toDouble();
 				c.description = commMap.value("description").toString();
@@ -1524,7 +1538,7 @@ QStringList Satellites::guessGroups(const TleData& tleData)
 		satGroups.append("gnss");
 		satGroups.append("navigation");
 	}
-	if (tleData.name.startsWith("INTELSAT") || tleData.name.startsWith("GLOBALSTAR") || tleData.name.startsWith("ORBCOMM") || tleData.name.startsWith("GORIZONT") || tleData.name.startsWith("RADUGA") || tleData.name.startsWith("MOLNIYA") || tleData.name.startsWith("DIRECTV") || tleData.name.startsWith("CHINASAT") || tleData.name.startsWith("YAMAL"))
+	if (tleData.name.startsWith("GONETS-M") || tleData.name.startsWith("INTELSAT") || tleData.name.startsWith("GLOBALSTAR") || tleData.name.startsWith("ORBCOMM") || tleData.name.startsWith("GORIZONT") || tleData.name.startsWith("RADUGA") || tleData.name.startsWith("MOLNIYA") || tleData.name.startsWith("DIRECTV") || tleData.name.startsWith("CHINASAT") || tleData.name.startsWith("YAMAL"))
 	{
 		QString satName = tleData.name.split(" ").at(0).toLower();
 		if (satName.contains("-"))
@@ -3102,6 +3116,8 @@ void Satellites::translations()
 	N_("resupply");
 	// TRANSLATORS: Satellite group: are known to broadcast TV signals
 	N_("tv");
+	// TRANSLATORS: Satellite group: Satellites belonging to the GONETS satellites
+	N_("gonets");
 	//
 	// *** Special-Interest Satellites [CelesTrak groups]
 	//
@@ -3436,6 +3452,16 @@ void Satellites::translations()
 	N_("The satellite is visible");
 	N_("The satellite is eclipsed");
 	N_("The satellite is not visible");
+
+	// Special terms for communications
+	// TRANSLATORS: An uplink (UL or U/L) is the link from a ground station to a satellite
+	N_("uplink");
+	// TRANSLATORS: A downlink (DL) is the link from a satellite to a ground station
+	N_("downlink");
+	// TRANSLATORS: The beacon (or radio beacon) is a device in the satellite, which emit one or more signals (normally on a fixed frequency) whose purpose is twofold: station-keeping information (telemetry) and locates the satellite (determines its azimuth and elevation) in the sky
+	N_("beacon");
+	// TRANSLATORS: Telemetry is the collection of measurements or other data at satellites and their automatic transmission to receiving equipment (telecommunication) for monitoring
+	N_("telemetry");
 
 #endif
 }

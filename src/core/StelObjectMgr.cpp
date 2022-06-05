@@ -661,6 +661,21 @@ StelObjectP StelObjectMgr::searchByNameI18n(const QString &name) const
 	return rval;
 }
 
+StelObjectP StelObjectMgr::searchByNameI18n(const QString &name, const QString &objType) const
+{
+	StelObjectP rval;
+	for (const auto* m : objectsModules)
+	{
+		if (m->getStelObjectType()==objType)
+		{
+			rval = m->searchByNameI18n(name);
+			if (rval)
+				return rval;
+		}
+	}
+	return rval;
+}
+
 //! Find any kind of object by its standard program name
 StelObjectP StelObjectMgr::searchByName(const QString &name) const
 {
@@ -707,6 +722,16 @@ bool StelObjectMgr::findAndSelectI18n(const QString &nameI18n, StelModule::StelM
 {
 	// Then look for another object
 	StelObjectP obj = searchByNameI18n(nameI18n);
+	if (!obj)
+		return false;
+	else
+		return setSelectedObject(obj, action);
+}
+
+bool StelObjectMgr::findAndSelectI18n(const QString &name, const QString &objtype, StelModule::StelModuleSelectAction action)
+{
+	// Then look for another object
+	StelObjectP obj = searchByNameI18n(name, objtype);
 	if (!obj)
 		return false;
 	else

@@ -84,8 +84,10 @@ void SatellitesCommDialog::createDialogContent()
 
 void SatellitesCommDialog::populateTexts()
 {
+	ui->descriptionLineEdit->setToolTip(q_("Callsign with channel description"));
 	ui->frequencySpinBox->setSuffix(QString(" %1").arg(qc_("MHz", "frequency")));
-	ui->modulationLineEdit->setToolTip(q_("Modulation"));
+	ui->frequencySpinBox->setToolTip(q_("Channel frequency"));
+	ui->modulationLineEdit->setToolTip(q_("Signal modulation mode"));
 	ui->removeCommLinkButton->setToolTip(q_("Remove selected communication data"));
 	ui->addCommLinkButton->setToolTip(q_("Add communication data"));
 }
@@ -190,6 +192,8 @@ void SatellitesCommDialog::addCommData()
 		SatellitesMgr->saveCatalog();
 
 		getSatCommData();
+		// A "hackish" updating list of satellites
+		emit SatellitesMgr->customFilterChanged();
 	}
 	else
 		QMessageBox::warning(&StelMainView::getInstance(), q_("Nothing added"), q_("Please fill in description and add frequency before adding!"), QMessageBox::Ok);
@@ -219,6 +223,8 @@ void SatellitesCommDialog::removeCommData()
 		SatellitesMgr->saveCatalog();
 
 		getSatCommData();
+		// A "hackish" updating list of satellites
+		emit SatellitesMgr->customFilterChanged();
 	}
 	else
 		QMessageBox::warning(&StelMainView::getInstance(), q_("Nothing deleted"), q_("Please select a line first!"), QMessageBox::Ok);

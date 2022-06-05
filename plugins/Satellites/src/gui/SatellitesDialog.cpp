@@ -291,7 +291,7 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->resetSourcesButton, SIGNAL(clicked()),	this, SLOT(restoreTleSources()));
 	connect(plugin, SIGNAL(satGroupVisibleChanged()),       this, SLOT(updateSatelliteAndSaveData()));
 	connect(plugin, SIGNAL(settingsChanged()),              this, SLOT(toggleCheckableSources()));
-	connect(plugin, SIGNAL(customFilterChanged()),          this, SLOT(updateFilteredSatellitesList()));
+	connect(plugin, SIGNAL(customFilterChanged()),          this, SLOT(updateFilteredSatellitesList()));	
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(ui->sourceList, SIGNAL(currentRowChanged(int)), ui->sourceList, SLOT(repaint()));
 	ui->editSourceButton->setEnabled(false);
@@ -478,7 +478,8 @@ void SatellitesDialog::filterListByGroup(int index)
 		{ "[PSSO]",		SatPSSO },
 		{ "[HEarthO]",		SatHEarthO },
 		{ "[outdatedTLE]",	SatOutdatedTLE },
-		{ "[custom]",		SatCustomFilter }
+		{ "[custom]",		SatCustomFilter },
+		{ "[communication]",	SatCommunication }
 	};
 
 	ui->customFilterButton->setEnabled(false);
@@ -507,7 +508,7 @@ void SatellitesDialog::filterListByGroup(int index)
 void SatellitesDialog::updateFilteredSatellitesList()
 {
 	QString groupId = ui->groupFilterCombo->currentData(Qt::UserRole).toString();
-	if (groupId == "[outdatedTLE]" || groupId == "[custom]")
+	if (groupId == "[outdatedTLE]" || groupId == "[custom]" || groupId == "[communication]")
 	{
 		filterListByGroup(ui->groupFilterCombo->currentIndex());
 	}
@@ -1100,6 +1101,7 @@ void SatellitesDialog::populateFilterMenu()
 	ui->groupFilterCombo->insertItem(0, q_("[all newly added]"), QVariant("[newlyadded]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all not displayed]"), QVariant("[undisplayed]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all displayed]"), QVariant("[displayed]"));
+	ui->groupFilterCombo->insertItem(0, q_("[all communications]"), QVariant("[communication]"));
 	ui->groupFilterCombo->insertItem(0, q_("[small satellites]"), QVariant("[smallsize]"));
 	ui->groupFilterCombo->insertItem(0, q_("[medium satellites]"), QVariant("[mediumsize]"));
 	ui->groupFilterCombo->insertItem(0, q_("[large satellites]"), QVariant("[largesize]"));
