@@ -1207,6 +1207,77 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 		{
 			close();
 			ui->lineEditSearchSkyObject->clear();
+
+			// Can't point to home planet
+			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
+			{
+				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+				mvmgr->setFlagTracking(true);
+			}
+			else
+				GETSTELMODULE(StelObjectMgr)->unSelect();
+		}
+	}
+	simbadResults.clear();
+}
+
+void SearchDialog::gotoObject(const QString &nameI18n, const QString &objType)
+{
+	if (nameI18n.isEmpty())
+		return;
+
+	// Save recent search list
+	updateRecentSearchList(nameI18n);
+	saveRecentSearches();
+
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+	if (simbadResults.contains(nameI18n))
+	{
+		if (objectMgr->findAndSelect(nameI18n, objType))
+		{
+			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+			if (!newSelected.empty())
+			{
+				close();
+				ui->lineEditSearchSkyObject->setText(""); // https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
+
+				// Can't point to home planet
+				if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
+				{
+					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+					mvmgr->setFlagTracking(true);
+				}
+				else
+					GETSTELMODULE(StelObjectMgr)->unSelect();
+			}
+		}
+		else
+		{
+			close();
+			GETSTELMODULE(CustomObjectMgr)->addCustomObject(nameI18n, simbadResults[nameI18n]);
+			ui->lineEditSearchSkyObject->clear();
+			searchListModel->clearValues();
+			if (objectMgr->findAndSelect(nameI18n))
+			{
+				const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+				// Can't point to home planet
+				if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
+				{
+					mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+					mvmgr->setFlagTracking(true);
+				}
+				else
+					GETSTELMODULE(StelObjectMgr)->unSelect();
+			}
+		}
+	}
+	else if (objectMgr->findAndSelectI18n(nameI18n, objType) || objectMgr->findAndSelect(nameI18n, objType))
+	{
+		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+		if (!newSelected.empty())
+		{
+			close();
+			ui->lineEditSearchSkyObject->clear();
 			
 			// Can't point to home planet
 			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
@@ -1223,7 +1294,24 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 
 void SearchDialog::gotoObject(const QModelIndex &modelIndex)
 {
-	gotoObject(modelIndex.model()->data(modelIndex, Qt::DisplayRole).toString());
+	QString objType, objClass = ui->objectTypeComboBox->currentData(Qt::UserRole).toString();
+	QStringList list;
+	if (objClass.contains(":"))
+	{
+		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+		list = objClass.split(":", Qt::SkipEmptyParts);
+		#else
+		list = objClass.split(":", QString::SkipEmptyParts);
+		#endif
+		objType = list.at(0);
+	}
+	else
+		objType = objClass;
+
+	objType.replace("Mgr","");
+	objType.replace("SolarSystem","Planet");
+
+	gotoObject(modelIndex.model()->data(modelIndex, Qt::DisplayRole).toString(), objType);
 }
 
 void SearchDialog::searchListClear()

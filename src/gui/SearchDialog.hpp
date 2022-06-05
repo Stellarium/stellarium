@@ -192,6 +192,7 @@ private slots:
 
 	void gotoObject();
 	void gotoObject(const QString& nameI18n);
+	void gotoObject(const QString& nameI18n, const QString& objType);
 	// for going from list views
 	void gotoObject(const QModelIndex &modelIndex);
 
