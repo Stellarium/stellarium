@@ -42,9 +42,9 @@ class StelLocation;
 //! @ingroup satellites
 typedef struct
 {
-	double frequency; //!< Channel frequency in MHz.
-	QString modulation; //!< Signal modulation mode.
-	QString description; //!< Channel description.
+	double frequency;	//!< Channel frequency in MHz.
+	QString modulation;	//!< Signal modulation mode.
+	QString description;	//!< Callsign with channel description.
 } CommLink;
 
 //! Description of the data roles used in SatellitesListModel.
@@ -73,27 +73,28 @@ typedef QSet<QString> GroupSet;
 //! @ingroup satellites
 enum SatFlag
 {
-	SatNoFlags	= 0x00000,
-	SatDisplayed	= 0x00001,
-	SatNotDisplayed	= 0x00002,
-	SatUser		= 0x00004,
-	SatOrbit	= 0x00008,
-	SatNew		= 0x00010,
-	SatError	= 0x00020,
-	SatSmallSize	= 0x00040,
-	SatMediumSize	= 0x00080,
-	SatLargeSize	= 0x00100,
-	SatLEO		= 0x00200,
-	SatMEO		= 0x00400,
-	SatGSO		= 0x00800,
-	SatHEO		= 0x01000,
-	SatHGSO		= 0x02000,
-	SatPolarOrbit	= 0x04000,
-	SatEquatOrbit	= 0x08000,
-	SatPSSO		= 0x10000,
-	SatHEarthO	= 0x20000,
-	SatOutdatedTLE	= 0x40000,
-	SatCustomFilter	= 0x80000
+	SatNoFlags		= 0x000000,
+	SatDisplayed		= 0x000001,
+	SatNotDisplayed	= 0x000002,
+	SatUser			= 0x000004,
+	SatOrbit			= 0x000008,
+	SatNew			= 0x000010,
+	SatError			= 0x000020,
+	SatSmallSize		= 0x000040,
+	SatMediumSize	= 0x000080,
+	SatLargeSize		= 0x000100,
+	SatLEO			= 0x000200,
+	SatMEO			= 0x000400,
+	SatGSO			= 0x000800,
+	SatHEO			= 0x001000,
+	SatHGSO			= 0x002000,
+	SatPolarOrbit		= 0x004000,
+	SatEquatOrbit		= 0x008000,
+	SatPSSO			= 0x010000,
+	SatHEarthO		= 0x020000,
+	SatOutdatedTLE	= 0x040000,
+	SatCustomFilter	= 0x080000,
+	SatCommunication	= 0x100000
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
@@ -256,6 +257,9 @@ private:
 	//! Sets #internationalDesignator and #jdLaunchYearJan1.
 	void parseInternationalDesignator(const QString& tle1);
 	void calculateEpochFromLine1(QString tle);
+
+	bool getCustomFiltersFlag() const;
+	QString getCommLinkInfo(CommLink comm) const;
 
 	bool initialized;
 	//! Flag indicating whether the satellite should be displayed.

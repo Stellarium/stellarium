@@ -444,27 +444,54 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			oss << q_("Radio communication") << ":<br/>";
 			for (const auto& c : comms)
 			{
-				double dop = getDoppler(c.frequency);
-				double ddop = dop;
-				QString sign;
-				if (dop<0.)
-				{
-					sign='-';
-					ddop*=-1;
-				}
-				else
-					sign='+';
-
-				if (!c.modulation.isEmpty() && c.modulation != "") oss << "  " << c.modulation;
-				if (!c.description.isEmpty() && c.description != "") oss << "  " << c.description;
-				if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << ": ";
-				oss << QString("%1 %2 (%3%4 %5)").arg(QString::number(c.frequency, 'f', 3), qc_("MHz", "frequency"), sign, QString::number(ddop, 'f', 3), qc_("kHz", "frequency")) << "<br/>";
+				oss << getCommLinkInfo(c);
 			}
 		}
 	}
 
 	postProcessInfoString(str, flags);
 	return str;
+}
+
+QString Satellite::getCommLinkInfo(CommLink comm) const
+{
+	QString commLinkData;
+
+	if (!comm.modulation.isEmpty()) // OK, the signal modulation mode is exist
+		commLinkData = comm.modulation;
+
+	if (commLinkData.isEmpty()) // description cannot be empty!
+		commLinkData = comm.description;
+	else
+		commLinkData.append(QString(" %1").arg(comm.description));
+
+	if (commLinkData.isEmpty())
+		return QString();
+
+	// Translate some specific communications terms
+	// See end of Satellites.cpp file to define translatable terms
+	QStringList commTerms;
+	commTerms << "uplink" << "downlink" << "beacon" << "telemetry";
+	for (auto& term: commTerms)
+	{
+		commLinkData.replace(term, q_(term));
+	}
+	commLinkData.replace("&", q_("and"));
+
+	double dop = getDoppler(comm.frequency);
+	double ddop = dop;
+	QString sign;
+	if (dop<0.)
+	{
+		sign='-';
+		ddop*=-1;
+	}
+	else
+		sign='+';
+
+	commLinkData.append(QString(": %1 %2 (%3%4 %5)<br />").arg(QString::number(comm.frequency, 'f', 3), qc_("MHz", "frequency"), sign, QString::number(ddop, 'f', 3), qc_("kHz", "frequency")));
+
+	return commLinkData;
 }
 
 // Calculate perigee and apogee altitudes for mean Earth radius
@@ -871,30 +898,10 @@ SatFlags Satellite::getFlags() const
 		flags |= SatHEarthO;
 	if (qAbs(StelApp::getInstance().getCore()->getJD() - tleEpochJD) > tleEpochAge)
 		flags |= SatOutdatedTLE;
-	// custom filters
-	bool cfa = true;
-	if (flagCFApogee)
-		cfa = (apogee>=minCFApogee && apogee<=maxCFApogee);
-	bool cfp = true;
-	if (flagCFPerigee)
-		cfp = (perigee>=minCFPerigee && perigee<=maxCFPerigee);
-	bool cfe = true;
-	if (flagCFEccentricity)
-		cfe = (eccentricity>=minCFEccentricity && eccentricity<=maxCFEccentricity);
-	bool cfm = true;
-	if (flagCFKnownStdMagnitude)
-		cfm = (stdMag<99.0);
-	bool cft = true;
-	if (flagCFPeriod)
-		cft = (orbitalPeriod>=minCFPeriod && orbitalPeriod<=maxCFPeriod);
-	bool cfi = true;
-	if (flagCFInclination)
-		cfi = (inclination>=minCFInclination && inclination<=maxCFInclination);
-	bool cfr = true;
-	if (flagCFRCS)
-		cfr = (RCS>=minCFRCS && RCS<=maxCFRCS);
-	if (cfa && cfp && cfe && cfm && cft && cfi && cfr)
+	if (getCustomFiltersFlag())
 		flags |= SatCustomFilter;
+	if (!comms.isEmpty())
+		flags |= SatCommunication;
 
 	return flags;
 }
@@ -906,6 +913,40 @@ void Satellite::setFlags(const SatFlags& flags)
 	userDefined = flags.testFlag(SatUser);
 }
 
+bool Satellite::getCustomFiltersFlag() const
+{
+	double orbitalPeriod = pSatWrapper->getOrbitalPeriod();
+	// Apogee
+	bool cfa = true;
+	if (flagCFApogee)
+		cfa = (apogee>=minCFApogee && apogee<=maxCFApogee);
+	// Perigee
+	bool cfp = true;
+	if (flagCFPerigee)
+		cfp = (perigee>=minCFPerigee && perigee<=maxCFPerigee);
+	// Eccentricity
+	bool cfe = true;
+	if (flagCFEccentricity)
+		cfe = (eccentricity>=minCFEccentricity && eccentricity<=maxCFEccentricity);
+	// Known standrad magnitude
+	bool cfm = true;
+	if (flagCFKnownStdMagnitude)
+		cfm = (stdMag<99.0);
+	// Period
+	bool cft = true;
+	if (flagCFPeriod)
+		cft = (orbitalPeriod>=minCFPeriod && orbitalPeriod<=maxCFPeriod);
+	// Inclination
+	bool cfi = true;
+	if (flagCFInclination)
+		cfi = (inclination>=minCFInclination && inclination<=maxCFInclination);
+	// RCS
+	bool cfr = true;
+	if (flagCFRCS)
+		cfr = (RCS>=minCFRCS && RCS<=maxCFRCS);
+
+	return (cfa && cfp && cfe && cfm && cft && cfi && cfr);
+}
 
 void Satellite::parseInternationalDesignator(const QString& tle1)
 {
