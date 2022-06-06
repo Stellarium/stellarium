@@ -3778,6 +3778,8 @@ void AstroCalcDialog::setTransitHeaderNames()
 	transitHeader << qc_("Exterior Egress", "column name");
 	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
 	transitHeader << qc_("Duration", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
+	transitHeader << qc_("Observable Duration", "column name");
 	ui->transitTreeWidget->setHeaderLabels(transitHeader);
 
 	// adjust the column width
@@ -3958,7 +3960,7 @@ void AstroCalcDialog::generateTransits()
 			StelUtils::getJDFromDate(&stopJD, startyear+years, 12, 31, 23, 59, 59);
 			startJD = startJD - core->getUTCOffset(startJD) / 24.;
 			stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
-			QString planetStr, separationStr, durationStr;
+			QString planetStr, separationStr, durationStr, observableDurationStr;
 			double approxJD, synodicPeriod;
 			if (p == 0)
 			{
@@ -4040,9 +4042,10 @@ void AstroCalcDialog::generateTransits()
 						double dt = 1.;
 						int iteration = 0;
 						double JDMid = JD;
-						double altitudeMidtransit = -1.;
+						double az, altitudeMidtransit = -1.;
 						double altitudeContact1 = -1., altitudeContact2 = -1., altitudeContact3 = -1., altitudeContact4 = -1.;
 						double JD1 = 0., JD2 = 0., JD3 = 0., JD4 = 0.;
+						Vec4d rts;
 						// Time of mid-transit
 						LocalTransitparams transitData = localTransit(JD,0,false,object,saveTopocentric);
 						while (abs(dt) > 0.000001 && (iteration < 20))
@@ -4051,9 +4054,11 @@ void AstroCalcDialog::generateTransits()
 							dt = transitData.dt;
 							JD += dt / 24.;
 							iteration += 1;
-							altitudeMidtransit = transitData.altitude;
 						}
 						JDMid = JD;
+						core->setJD(JDMid);
+						core->update(0);
+						StelUtils::rectToSphe(&az,&altitudeMidtransit,object->getAltAzPosAuto(core));
 
 						// 1st contact = Exterior Ingress
 						iteration = 0;
@@ -4067,7 +4072,9 @@ void AstroCalcDialog::generateTransits()
 							JD1 += dt / 24.;
 							iteration += 1;
 						}
-						altitudeContact1 = transitData.altitude;
+						core->setJD(JD1);
+						core->update(0);
+						StelUtils::rectToSphe(&az,&altitudeContact1,object->getAltAzPosAuto(core));
 
 						// 4th contact = Exterior Egress
 						iteration = 0;
@@ -4081,7 +4088,9 @@ void AstroCalcDialog::generateTransits()
 							JD4 += dt / 24.;
 							iteration += 1;
 						}
-						altitudeContact4 = transitData.altitude;
+						core->setJD(JD4);
+						core->update(0);
+						StelUtils::rectToSphe(&az,&altitudeContact4,object->getAltAzPosAuto(core));
 						double JDc1=JD1, JDc4=JD4;
 
 						// 2nd contact = Interior Ingress
@@ -4096,7 +4105,9 @@ void AstroCalcDialog::generateTransits()
 							JD2 += dt / 24.;
 							iteration += 1;
 						}
-						altitudeContact2 = transitData.altitude;
+						core->setJD(JD2);
+						core->update(0);
+						StelUtils::rectToSphe(&az,&altitudeContact2,object->getAltAzPosAuto(core));
 						// 3rd contact = Interior Egress
 						iteration = 0;
 						JD3 = JDMid;
@@ -4109,15 +4120,16 @@ void AstroCalcDialog::generateTransits()
 							JD3 += dt / 24.;
 							iteration += 1;
 						}
-						altitudeContact3 = transitData.altitude;
+						core->setJD(JD3);
+						core->update(0);
+						StelUtils::rectToSphe(&az,&altitudeContact3,object->getAltAzPosAuto(core));
 
-						// Calculate duration for topocentric in case of the transit in progress at sunrise/sunset
-						// 0.3 deg. is approx. correction for atmospheric refraction at horizon
+						// Transit in progress at sunrise/sunset
 						if (saveTopocentric)
 						{
-							if (altitudeContact1 < -.3 && altitudeContact4 > -.3) // Transit in progress at sunrise
+							if (altitudeContact1 < 0. && altitudeContact4 > 0.) // Transit in progress at sunrise
 							{
-								// find time of sunrise (not exactly, we want the time when lower limb is at the horizon)
+								// find rising time of planet
 								for (int j = 0; j <= 5; j++)
 								{
 									transitData = localTransit(JD - 5./1440.,0,false,object,true);
@@ -4128,12 +4140,15 @@ void AstroCalcDialog::generateTransits()
 									JD = JD - 5./1440. - dt;
 									transitData = localTransit(JD,0,false,object,true);
 								}
-								JDc1 = JD;
+								core->setJD(JD);
+								core->update(0);
+								rts = object->getRTSTime(core);
+								JDc1 = rts[0];
 							}
 
-							if (altitudeContact1 > -.3 && altitudeContact4 < -.3) // Transit in progress at sunset
+							if (altitudeContact1 > 0. && altitudeContact4 < 0.) // Transit in progress at sunset
 							{
-								// find time of sunset (not exactly, we want the time when lower limb is at the horizon)
+								// find setting time of planet
 								for (int j = 0; j <= 5; j++)
 								{
 									transitData = localTransit(JD - 5./1440.,0,false,object,true);
@@ -4144,7 +4159,10 @@ void AstroCalcDialog::generateTransits()
 									JD = JD - 5./1440. - dt;
 									transitData = localTransit(JD,0,false,object,true);
 								}
-								JDc4 = JD;
+								core->setJD(JD);
+								core->update(0);
+								rts = object->getRTSTime(core);
+								JDc4 = rts[2];
 							}
 						}
 						ACTransitTreeWidgetItem* treeItem = new ACTransitTreeWidgetItem(ui->transitTreeWidget);
@@ -4153,7 +4171,7 @@ void AstroCalcDialog::generateTransits()
 						treeItem->setText(TransitPlanet, planetStr);
 						treeItem->setData(TransitPlanet, Qt::UserRole, planetStr);
 
-						if (saveTopocentric && altitudeContact1 < -.3)
+						if (saveTopocentric && altitudeContact1 < 0.)
 						{
 							treeItem->setText(TransitContact1, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JD1)));
 							treeItem->setTextColor(TransitContact1, Qt::gray);
@@ -4164,7 +4182,7 @@ void AstroCalcDialog::generateTransits()
 						treeItem->setToolTip(TransitContact1, q_("The time of first contact, the instant when the planet's disk is externally tangent to the Sun (transit begins)"));
 						if (transitData.ce <= 0.)
 								treeItem->setText(TransitContact2, dash);
-						else if (saveTopocentric && altitudeContact2 < -.3)
+						else if (saveTopocentric && altitudeContact2 < 0.)
 						{
 							treeItem->setText(TransitContact2, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JD2)));
 							treeItem->setTextColor(TransitContact2, Qt::gray);
@@ -4173,7 +4191,7 @@ void AstroCalcDialog::generateTransits()
 							treeItem->setText(TransitContact2, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD2)));
 						treeItem->setData(TransitContact2, Qt::UserRole, JD2);
 						treeItem->setToolTip(TransitContact2, q_("The time of second contact, the entire disk of the planet is internally tangent to the Sun"));
-						if (saveTopocentric && altitudeMidtransit < -.3)
+						if (saveTopocentric && altitudeMidtransit < 0.)
 						{
 							treeItem->setText(TransitMid, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JDMid)));
 							treeItem->setTextColor(TransitMid, Qt::gray);
@@ -4191,13 +4209,13 @@ void AstroCalcDialog::generateTransits()
 						else
 							separationStr = StelUtils::radToDmsStr(elongation, true);
 						treeItem->setText(TransitSeparation, separationStr);
-						if (saveTopocentric && altitudeMidtransit < -.3)
+						if (saveTopocentric && altitudeMidtransit < 0.)
 							treeItem->setTextColor(TransitSeparation, Qt::gray);
 						treeItem->setData(TransitSeparation, Qt::UserRole, elongation);
 						treeItem->setToolTip(TransitSeparation, q_("Minimum angular distance of planet to Sun's center"));
 						if (transitData.ce <= 0.)
 								treeItem->setText(TransitContact3, dash);
-						else if (saveTopocentric && altitudeContact3 < -.3)
+						else if (saveTopocentric && altitudeContact3 < 0.)
 						{
 							treeItem->setText(TransitContact3, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JD3)));
 							treeItem->setTextColor(TransitContact3, Qt::gray);
@@ -4206,7 +4224,7 @@ void AstroCalcDialog::generateTransits()
 							treeItem->setText(TransitContact3, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD3)));
 						treeItem->setData(TransitContact3, Qt::UserRole, JD3);
 						treeItem->setToolTip(TransitContact3, q_("The time of third contact, the planet reaches the opposite limb and is once again internally tangent to the Sun"));
-						if (saveTopocentric && altitudeContact4 < -.3)
+						if (saveTopocentric && altitudeContact4 < 0.)
 						{
 							treeItem->setText(TransitContact4, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JD4)));
 							treeItem->setTextColor(TransitContact4, Qt::gray);
@@ -4215,36 +4233,45 @@ void AstroCalcDialog::generateTransits()
 							treeItem->setText(TransitContact4, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD4)));
 						treeItem->setData(TransitContact4, Qt::UserRole, JD4);
 						treeItem->setToolTip(TransitContact4, q_("The time of fourth contact, the planet's disk is externally tangent to the Sun (transit ends)"));
-						double duration = 0.;
-						if (saveTopocentric && altitudeContact1 < -.3 && altitudeContact4 < -.3)
+						double duration = (JD4-JD1)*24.;
+						durationStr = StelUtils::hoursToHmsStr(duration,true);
+						treeItem->setText(TransitDuration, durationStr);
+						treeItem->setData(TransitDuration, Qt::UserRole, duration);
+						treeItem->setToolTip(TransitDuration, q_("Total duration of transit"));
+						// Observable duration (rise/set are taken into account)
+						double observableDuration = 0.;
+						if (saveTopocentric)
 						{
-							treeItem->setText(TransitDuration, dash);
-							// Special case: All contacts occur below horizon but visible around mid-transit
-							// Example: 2019 November 11 at Lat. +70, Long. -55
-							if (altitudeContact2 < -.3 && altitudeContact3 < -.3)
+							if (altitudeContact1 < 0. && altitudeContact2 < 0. && altitudeContact3 < 0. && altitudeContact4 < 0.)
 							{
-								Vec4d rts = solarSystem->getSun()->getRTSTime(core,-.3);
-								if (rts[0]>JD1 && rts[2]<JD4)
+								observableDurationStr = dash;
+								// Special case: All contacts occur below horizon but visible around mid-transit
+								// Example: 2019 November 11 at Lat. +70, Long. -55
+								if (altitudeMidtransit > 0.)
 								{
-									// Duration from sunrise to sunset
-									duration = (rts[2]-rts[0])*24.;
-									durationStr  = StelUtils::hoursToHmsStr(duration,true);
-									treeItem->setText(TransitDuration, durationStr);
-								}	
+									core->setJD(JDMid);
+									core->update(0);
+									rts = object->getRTSTime(core);
+									if (rts[0]>JD1 && rts[2]<JD4)
+									{
+										observableDuration = (rts[2]-rts[0])*24.;
+										observableDurationStr = StelUtils::hoursToHmsStr(observableDuration,true);
+									}
+								}
 							}
+							else
+								{
+									observableDuration = (JDc4-JDc1)*24.;
+									observableDurationStr = StelUtils::hoursToHmsStr(observableDuration,true);
+								}
 						}
 						else
 							{
-								// Duration from first to last contact (sunrise/sunset are taken into account in case of topocentric)
-								duration = (JDc4-JDc1)*24.;
-								durationStr  = StelUtils::hoursToHmsStr(duration,true);
-								treeItem->setText(TransitDuration, durationStr);
+								observableDurationStr = dash;
 							}
-						treeItem->setData(TransitDuration, Qt::UserRole, duration);
-						if (saveTopocentric)
-							treeItem->setToolTip(TransitDuration, q_("Observable duration of transit"));
-						else
-							treeItem->setToolTip(TransitDuration, q_("Duration of transit"));
+						treeItem->setText(TransitObservableDuration, observableDurationStr);
+						treeItem->setData(TransitObservableDuration, Qt::UserRole, observableDuration);
+						treeItem->setToolTip(TransitObservableDuration, q_("Observable duration of transit"));
 						treeItem->setTextAlignment(TransitDate, Qt::AlignRight);
 						treeItem->setTextAlignment(TransitPlanet, Qt::AlignRight);
 						treeItem->setTextAlignment(TransitContact1, Qt::AlignCenter);
@@ -4254,6 +4281,7 @@ void AstroCalcDialog::generateTransits()
 						treeItem->setTextAlignment(TransitContact3, Qt::AlignCenter);
 						treeItem->setTextAlignment(TransitContact4, Qt::AlignCenter);
 						treeItem->setTextAlignment(TransitDuration, Qt::AlignCenter);
+						treeItem->setTextAlignment(TransitObservableDuration, Qt::AlignCenter);
 					}
 				}
 			}

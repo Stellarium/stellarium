@@ -227,6 +227,7 @@ public:
 		TransitContact3,		//! time of interior egress
 		TransitContact4,		//! time of exterior egress
 		TransitDuration,		//! duration of transit
+		TransitObservableDuration,	//! observable duration of transit
 		TransitCount			//! total number of columns
 	};
 
@@ -893,7 +894,7 @@ private:
 	{
 		int column = treeWidget()->sortColumn();
 
-		if (column == AstroCalcDialog::TransitDate)
+		if (column == AstroCalcDialog::TransitDate || column == AstroCalcDialog::TransitContact1 || column == AstroCalcDialog::TransitContact2 || column == AstroCalcDialog::TransitContact3 || column == AstroCalcDialog::TransitContact4 || column == AstroCalcDialog::TransitMid || column == AstroCalcDialog::TransitSeparation || column == AstroCalcDialog::TransitDuration || column == AstroCalcDialog::TransitObservableDuration)
 		{
 			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
 		}		
