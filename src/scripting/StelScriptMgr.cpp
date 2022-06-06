@@ -57,37 +57,6 @@
 #ifdef ENABLE_SCRIPT_QML
 #include <QJSEngine>
 
-V3d::V3d(const V3d &other) // copy constructor
-{
-	m_x=other.x();
-	m_y=other.y();
-	m_z=other.z();
-}
-
-V3d & V3d::operator =(const V3d &v)
-{
-	m_x=v.x();
-	m_y=v.y();
-	m_z=v.z();
-	return *this;
-}
-
-V3d::V3d(QString &hexColor)
-{
-	QColor qcol = QColor( hexColor );
-	if( qcol.isValid() )
-	{
-		m_x = qcol.redF();
-		m_y = qcol.greenF();
-		m_z = qcol.blueF();
-	}
-	else
-	{
-		qWarning() << "Bad color string: " << hexColor;
-		m_x=m_y=m_z=0.;
-	}
-}
-
 void StelScriptMgr::defVecClasses(QJSEngine *engine)
 {
 	qDebug() << "defVecClasses() not yet complete";
@@ -533,6 +502,7 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	mainAPI = new StelMainScriptAPI(this);
 #ifdef ENABLE_SCRIPT_QML
 	QJSValue objectValue = engine->newQObject(mainAPI);
+	mainAPI->setEngine(engine);
 #else
 	QScriptValue objectValue = engine->newQObject(mainAPI);
 #endif
@@ -1027,7 +997,7 @@ void StelScriptMgr::scriptEnded()
 			{QJSValue::SyntaxError, "Syntax"},
 			{QJSValue::TypeError, "Type"},
 			{QJSValue::URIError, "URI"}};
-		QString msg = QString("script error Type '%1'  @ line %2: %3").arg(errorMap.value(result.errorType()), result.property("lineNumber").toString(), result.toString());
+		QString msg = QString("script error: '%1'  @ line %2: %3").arg(errorMap.value(result.errorType()), result.property("lineNumber").toString(), result.toString());
 		emit scriptDebug(msg);
 		qWarning() << msg;
 		qWarning() << "Error name:" << result.property("name").toString() << "message" << result.property("message").toString()

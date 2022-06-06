@@ -21,19 +21,66 @@ core.output(typeof dir);
 var dir=StelMovementMgr.getViewDirectionJ2000(); 
 core.output(dir);
 core.output(typeof dir); // object
+//core.output("dir is an Array? " + dir.isArray()); // array? JS error: not a function
+//core.output("dir is an Array? " + dir.className()); // array? JS error: not a function
 var dirstr=""+dir;
 core.output(dirstr);
 core.output(typeof dirstr); // string
 var dirArray=JSON.parse(dir);
 core.output(dirArray);
-core.output(typeof dirArray); // object. May be an array now!
+core.output(typeof dirArray); // reports "object". May be an array now!
+//core.output("dirArray is an array: " + dirArray.isArray()); // No, still no JS Array!
 core.output(dirArray[0]);
 core.output(dirArray[1]);
 core.output(dirArray[2]);
+/////////////////////////////////////
 
+// Test a conversion of a Vec3d into a V3d, and how to use the V3d then.
 
+var dir=StelMovementMgr.getViewDirectionJ2000(); 
+var dirV3d=core.toV3d(dir); // Does not work properly!
+core.output("dirV3d:" + dirV3d);
+core.output("typeof dirV3d:" + typeof dirV3d);
+core.output("dirV3d.x" + dirV3d.x());
+core.output("dirV3d.y" + dirV3d.y());
+core.output("dirV3d.z" + dirV3d.z());
+core.output("dirV3d.r" + dirV3d.r());
+core.output("dirV3d.g" + dirV3d.g());
+core.output("dirV3d.b" + dirV3d.b());
+core.output("dirV3d.toVec3d() [weird converted string return]" + dirV3d.toVec3d());
 
+// Test a conversion of a Vec3d into an independently named new V3d, and how to use the V3d then.
 
+// There are several versions to operate with Vec3d:
+// You can retrieve it from the program:
+//var dir=StelMovementMgr.getViewDirectionJ2000(); 
+// A simple core.output(dir) "looks" like an array, and is everything needed for data output.
+// If you need access to its internals, there are several options.
+//var dirV3d=core.createNamedV3d("dirV3d", dir);
+//core.createNamedV3d("dirV3d", dir); // does the same, the name is defined in the JSEngine global namespace.
+// This creates a variable dirV3d that can be accessed with the public slots of V3d.
+// The cleanest use looks like:
+//var dirV3d=new V3d(dir);
+
+// THIS BLOCK SHOULD WORK:
+
+var dir=StelMovementMgr.getViewDirectionJ2000(); 
+//var dirV3d=core.createNamedV3d("dirV3d", dir);
+//core.createNamedV3d("dirV3d", dir);
+
+var dirV3d=new V3d(dir);
+
+core.output("dircV3d:" + dirV3d);
+core.output("typeof dirV3d:" + typeof dirV3d);
+core.output("dirV3d.x " + dirV3d.x());
+core.output("dirV3d.y " + dirV3d.y());
+core.output("dirV3d.z " + dirV3d.z());
+core.output("dirV3d.r " + dirV3d.r());
+core.output("dirV3d.g " + dirV3d.g());
+core.output("dirV3d.b " + dirV3d.b());
+core.output("dirV3d.toVec3d() [weird converted string return]" + dirV3d.toVec3d());
+
+////////////////////////////////////
 
 core.output(StelMovementMgr.getViewDirectionJ2000()[0]);
 core.output(StelMovementMgr.getViewDirectionJ2000()[1]);

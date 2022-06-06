@@ -106,8 +106,8 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestSetHomePosition()), StelApp::getInstance().getCore(), SLOT(returnToHome()));
 
 
-	QMetaType::registerConverter<QVector<double>, QVector3D>(&StelMainScriptAPI::vecToQVector3D);
-	QMetaType::registerConverter<QVector3D, Vec3d>(&StelMainScriptAPI::qVector3DToVec3d);
+//	QMetaType::registerConverter<QVector<double>, QVector3D>(&StelMainScriptAPI::vecToQVector3D);
+//	QMetaType::registerConverter<QVector3D, Vec3d>(&StelMainScriptAPI::qVector3DToVec3d);
 }
 
 StelMainScriptAPI::~StelMainScriptAPI()
@@ -119,6 +119,21 @@ Vec3d StelMainScriptAPI::vec3d(const double x, const double y, const double z)
 	return Vec3d(x, y, z);
 }
 
+V3d StelMainScriptAPI::toV3d(const Vec3d &vec)
+{
+	return V3d(vec);
+}
+
+QJSValue StelMainScriptAPI::createNamedV3d(const QString &name, const Vec3d &vec)
+{
+	// Follow https://doc.qt.io/qt-5/qtjavascript.html, Make QObject available to the Script Engine
+	QObject *someObject = new V3d(vec);
+	QJSValue objectValue = m_engine->newQObject(someObject);
+	m_engine->globalObject().setProperty(name, objectValue);
+	return objectValue;
+}
+
+/* // seems useless
 QVector3D StelMainScriptAPI::vecToQVector3D(const QVector<double> &vec)
 {
 	QVector3D res;
@@ -139,7 +154,7 @@ Vec3d StelMainScriptAPI::qVector3DToVec3d(const QVector3D &vec3d)
 		res[2]=vec3d[2];
 	return res;
 }
-
+*/
 
 //! Test how a QVector3D behaves: Forward these to StelMovementMgr.
 QVector3D StelMainScriptAPI::getViewDirection()

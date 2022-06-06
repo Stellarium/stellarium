@@ -32,6 +32,7 @@
 #ifdef ENABLE_SCRIPT_QML
 #include <QMutex>
 #include <QJSValue>
+#include "V3d.hpp"
 class QJSEngine;
 #else
 class StelScriptEngineAgent;
@@ -40,50 +41,8 @@ class QScriptEngine;
 
 #include "StelMainScriptAPI.hpp"
 
-
 #ifdef ENABLE_SCRIPT_CONSOLE
 class ScriptConsole;
-#endif
-
-#ifdef ENABLE_SCRIPT_QML
-
-//! V3d is a (currently still quite kludgy) glue class to allow some interaction between Vec3d and the scripting system. Vec3d is not scriptable,
-//! but an intermediate V3d allows calling slots which require a Vec3d argument by calling like
-//! @code
-//! StelMovementMgr.setViewDirectionJ2000(new V3d(0., 1., 0.).toVec3d());
-//! @endcode
-//! Similar to the direct use of Vec3d in the older (QtScript-based) solution of Stellarium 0.19-0.22, V3d also has an aspect of RGB colors:
-//! You can initialize it with a string that encodes HTML color (e.g., "#aaff33")
-//!
-class V3d: public QObject
-{
-	Q_OBJECT
-public:
-	V3d() = default; // TODO: Make sure this (only) initializes m_x=m_y=m_z=0;
-	V3d(const V3d &other); // copy constructor
-	V3d & operator =(const V3d &v);
-	Q_INVOKABLE V3d(const double x, const double y, const double z): m_x(x), m_y(y), m_z(z){};
-	Q_INVOKABLE V3d(QString &hexColor);
-
-public slots:
-	static V3d fromVec3d(const Vec3d &vec){return V3d(vec[0], vec[1], vec[2]);}
-	Vec3d toVec3d() const {return Vec3d(m_x, m_y, m_z);}
-	double r() const {return m_x;}
-	double g() const {return m_y;}
-	double b() const {return m_z;}
-	double x() const {return m_x;}
-	double y() const {return m_y;}
-	double z() const {return m_z;}
-	void setR(double r) {m_x = r;}
-	void setG(double g) {m_y = g;}
-	void setB(double b) {m_z = b;}
-	void setX(double x) {m_x = x;}
-	void setY(double y) {m_y = y;}
-	void setZ(double z) {m_z = z;}
-private:
-	double m_x, m_y, m_z;
-};
-Q_DECLARE_METATYPE(V3d)
 #endif
 
 //! Manage scripting in Stellarium
