@@ -930,7 +930,7 @@ void StelApp::handleKeys(QKeyEvent* event)
 	// First try to trigger a shortcut.
 	if (event->type() == QEvent::KeyPress)
 	{
-		if (getStelActionManager()->pushKey(event->key() + event->modifiers()))
+		if (getStelActionManager()->pushKey(event->key() + int(event->modifiers())))
 		{
 			event->setAccepted(true);
 			return;
@@ -1176,7 +1176,11 @@ void StelApp::setAppFont(QFont font)
 {
 	int oldSize=QGuiApplication::font().pixelSize();
 	font.setPixelSize(oldSize);
+	#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	font.setStyleHint(QFont::AnyStyle, QFont::PreferAntialias);
+	#else
 	font.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);
+	#endif
 	QGuiApplication::setFont(font);
 	emit fontChanged(font);
 }

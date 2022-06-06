@@ -234,7 +234,7 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 
 QString radToDecDegStr(const double angle, const int precision, const bool useD, const bool positive)
 {
-	const QChar degsign = (useD ? 'd' : 0x00B0);
+	const QChar degsign = (useD ? 'd' : QChar(0x00B0));
 	double deg = (positive ? fmodpos(angle, 2.0*M_PI) : std::fmod(angle, 2.0*M_PI)) * M_180_PI;
 
 	return QString("%1%2").arg(QString::number(deg, 'f', precision), degsign);
@@ -323,7 +323,7 @@ QString radToHmsStr(const double angle, const bool decimal)
 *************************************************************************/
 QString radToDmsStrAdapt(const double angle, const bool useD)
 {
-	const QChar degsign = (useD ? 'd' : 0x00B0);
+	const QChar degsign = (useD ? 'd' : QChar(0x00B0));
 	bool sign;
 	unsigned int d,m;
 	double s;
@@ -334,7 +334,13 @@ QString radToDmsStrAdapt(const double angle, const bool useD)
 	os << (sign?'+':'-') << d << degsign;
 	if (std::fabs(s*100-static_cast<int>(s)*100)>=1)
 	{
-		os << m << '\'' << fixed << qSetRealNumberPrecision(2) << qSetFieldWidth(5) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
+		os << m << '\'';
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		os.setRealNumberNotation(QTextStream::FixedNotation);
+#else
+		os << fixed ;
+#endif
+		os << qSetRealNumberPrecision(2) << qSetFieldWidth(5) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
 	}
 	else if (static_cast<int>(s)!=0)
 	{
@@ -363,7 +369,7 @@ QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 *************************************************************************/
 QString radToDmsPStr(const double angle, const int precision, const bool useD)
 {
-	const QChar degsign = (useD ? 'd' : 0x00B0);
+	const QChar degsign = (useD ? 'd' : QChar(0x00B0));
 	bool sign;
 	unsigned int d,m;
 	double s;
@@ -377,7 +383,12 @@ QString radToDmsPStr(const double angle, const int precision, const bool useD)
 	if (precision>0)
 		width = 3 + precision;
 	os << qSetRealNumberPrecision(precision);
-	os << fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	os.setRealNumberNotation(QTextStream::FixedNotation);
+#else
+	os << fixed;
+#endif
+	os << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
 
 	return str;
 }
@@ -909,10 +920,17 @@ QString localeDateString(const int year, const int month, const int day, const i
 	QDate test(year, month, day);
 
 	// try to avoid QDate's non-astronomical time here, don't do BCE or year 0.
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	if (year > 0 && test.isValid() && !test.toString(QLocale().dateFormat(QLocale::ShortFormat)).isEmpty())
+	{
+		return test.toString(QLocale().dateFormat(QLocale::ShortFormat));
+	}
+#else
 	if (year > 0 && test.isValid() && !test.toString(Qt::DefaultLocaleShortDate).isEmpty())
 	{
 		return test.toString(Qt::DefaultLocaleShortDate);
 	}
+#endif
 	else
 	{
 		return localeDateString(year,month,day,dayOfWeek,QLocale().dateFormat(QLocale::ShortFormat));
