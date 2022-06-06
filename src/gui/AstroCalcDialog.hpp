@@ -215,6 +215,22 @@ public:
 		SolarEclipseLocalCount		//! total number of columns
 	};
 
+	//! Defines the number and the order of the columns in transit table
+	//! @enum TransitColumns
+	enum TransitColumns {
+		TransitDate,			//! date of mid-transit
+		TransitPlanet,			//! transit planet
+		TransitContact1,		//! time of exterior ingress
+		TransitContact2,		//! time of interior ingress
+		TransitMid,			//! time of mid-transit
+		TransitSeparation,		//! minimum angular distance to Sun's center
+		TransitContact3,		//! time of interior egress
+		TransitContact4,		//! time of exterior egress
+		TransitDuration,		//! duration of transit
+		TransitObservableDuration,	//! observable duration of transit
+		TransitCount			//! total number of columns
+	};
+
 	AstroCalcDialog(QObject* parent);
 	virtual ~AstroCalcDialog() Q_DECL_OVERRIDE;
 
@@ -273,18 +289,25 @@ private slots:
 	void saveLunarEclipses();
 
 	//! Calculating solar eclipses to fill the list.
-	//! Algorithm taken from calculating the transits.
+	//! Algorithm taken from calculating the rises, transits and sets.
 	void generateSolarEclipses();
 	void cleanupSolarEclipses();
 	void selectCurrentSolarEclipse(const QModelIndex &modelIndex);
 	void saveSolarEclipses();
 
 	//! Calculating local solar eclipses to fill the list.
-	//! Algorithm taken from calculating the transits.
+	//! Algorithm taken from calculating the rises, transits and sets.
 	void generateSolarEclipsesLocal();
 	void cleanupSolarEclipsesLocal();
 	void selectCurrentSolarEclipseLocal(const QModelIndex &modelIndex);
 	void saveSolarEclipsesLocal();
+
+	//! Calculating transits to fill the list.
+	//! Algorithm taken from calculating the rises, transits and sets.
+	void generateTransits();
+	void cleanupTransits();
+	void selectCurrentTransit(const QModelIndex &modelIndex);
+	void saveTransits();
 
 	void saveEphemerisCelestialBody(int index);
 	void saveEphemerisSecondaryCelestialBody(int index);
@@ -427,6 +450,8 @@ private:
 	void setSolarEclipseHeaderNames();
 	//! update header names for local solar eclipse table
 	void setSolarEclipseLocalHeaderNames();
+	//! update header names for transit table
+	void setTransitHeaderNames();
 
 	//! Init header and list of celestial positions
 	void initListCelestialPositions();
@@ -446,6 +471,8 @@ private:
 	void initListSolarEclipse();
 	//! Init header and list of local solar eclipse
 	void initListSolarEclipseLocal();
+	//! Init header and list of transit
+	void initListTransit();
 
 	//! Populates the drop-down list of celestial bodies.
 	//! The displayed names are localized in the current interface language.
@@ -524,7 +551,7 @@ private:
 	// Signal that a plot has to be redone
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotLunarElongationGraph, plotAziVsTime;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration, graphsStep;
-	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader;
+	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader, transitHeader;
 	static double brightLimit;
 	static const QString dash, delimiter;
 
@@ -851,6 +878,39 @@ private:
 			return text(column).toLower() < other.text(column).toLower();
 		}
 	}
+};
+
+// Reimplements the QTreeWidgetItem class to fix the sorting bug
+class ACTransitTreeWidgetItem : public QTreeWidgetItem
+{
+public:
+	ACTransitTreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
+	}
+
+private:
+	bool operator < (const QTreeWidgetItem &other) const
+	{
+		int column = treeWidget()->sortColumn();
+
+		if (column == AstroCalcDialog::TransitDate || column == AstroCalcDialog::TransitContact1 || column == AstroCalcDialog::TransitContact2 || column == AstroCalcDialog::TransitContact3 || column == AstroCalcDialog::TransitContact4 || column == AstroCalcDialog::TransitMid || column == AstroCalcDialog::TransitSeparation || column == AstroCalcDialog::TransitDuration || column == AstroCalcDialog::TransitObservableDuration)
+		{
+			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
+		}		
+		else
+		{
+			return text(column).toLower() < other.text(column).toLower();
+		}
+	}
+};
+
+//! Besselian elements for transit of Mercury and Venus across the Sun
+class TransitBessel
+{
+public:
+	TransitBessel(PlanetP object, double &besX, double &besY,
+	double &besDec, double &besTf1, double &besTf2, double &besL1, double &besL2, double &besMu);
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
