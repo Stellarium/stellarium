@@ -57,6 +57,8 @@
 #include "../plugins/Supernovae/src/Supernovae.hpp"
 #endif
 
+#include <cmath>
+
 #include <QFileDialog>
 #include <QDir>
 #include <QSortFilterProxyModel>
@@ -3969,11 +3971,11 @@ void AstroCalcDialog::generateTransits()
 				synodicPeriod = 115.8774771;
 			}
 			else
-				{
-					// Venus
-					approxJD = 2451996.706;
-					synodicPeriod = 583.921361;
-				}
+			{
+				// Venus
+				approxJD = 2451996.706;
+				synodicPeriod = 583.921361;
+			}
 			int elements = static_cast<int>((stopJD - startJD) / synodicPeriod);
 			// Find approximate JD of Inferior conjunction
 			double tmp = (startJD - approxJD - synodicPeriod) / synodicPeriod;
@@ -4165,6 +4167,7 @@ void AstroCalcDialog::generateTransits()
 								JDc4 = rts[2];
 							}
 						}
+						const double shift = core->getUTCOffset(JD)/24.;
 						ACTransitTreeWidgetItem* treeItem = new ACTransitTreeWidgetItem(ui->transitTreeWidget);
 						treeItem->setText(TransitDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JDMid), localeMgr->getPrintableTimeLocal(JDMid))); // local date and time
 						treeItem->setData(TransitDate, Qt::UserRole, JDMid);
@@ -4178,7 +4181,7 @@ void AstroCalcDialog::generateTransits()
 						}
 						else
 							treeItem->setText(TransitContact1, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD1)));
-						treeItem->setData(TransitContact1, Qt::UserRole, JD1);
+						treeItem->setData(TransitContact1, Qt::UserRole, StelUtils::getHoursFromJulianDay(JD1 + shift));
 						treeItem->setToolTip(TransitContact1, q_("The time of first contact, the instant when the planet's disk is externally tangent to the Sun (transit begins)"));
 						if (transitData.ce <= 0.)
 								treeItem->setText(TransitContact2, dash);
@@ -4189,7 +4192,7 @@ void AstroCalcDialog::generateTransits()
 						}
 						else
 							treeItem->setText(TransitContact2, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD2)));
-						treeItem->setData(TransitContact2, Qt::UserRole, JD2);
+						treeItem->setData(TransitContact2, Qt::UserRole, StelUtils::getHoursFromJulianDay(JD2 + shift));
 						treeItem->setToolTip(TransitContact2, q_("The time of second contact, the entire disk of the planet is internally tangent to the Sun"));
 						if (saveTopocentric && altitudeMidtransit < 0.)
 						{
@@ -4198,7 +4201,7 @@ void AstroCalcDialog::generateTransits()
 						}
 						else
 							treeItem->setText(TransitMid, QString("%1").arg(localeMgr->getPrintableTimeLocal(JDMid)));
-						treeItem->setData(TransitMid, Qt::UserRole, JDMid);
+						treeItem->setData(TransitMid, Qt::UserRole, StelUtils::getHoursFromJulianDay(JDMid + shift));
 						treeItem->setToolTip(TransitMid, q_("The time of minimum angular distance of planet to Sun's center"));
 						core->setUseTopocentricCoordinates(saveTopocentric);
 						core->setJD(JDMid);
@@ -4222,7 +4225,7 @@ void AstroCalcDialog::generateTransits()
 						}
 						else
 							treeItem->setText(TransitContact3, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD3)));
-						treeItem->setData(TransitContact3, Qt::UserRole, JD3);
+						treeItem->setData(TransitContact3, Qt::UserRole, StelUtils::getHoursFromJulianDay(JD3 + shift));
 						treeItem->setToolTip(TransitContact3, q_("The time of third contact, the planet reaches the opposite limb and is once again internally tangent to the Sun"));
 						if (saveTopocentric && altitudeContact4 < 0.)
 						{
@@ -4231,7 +4234,7 @@ void AstroCalcDialog::generateTransits()
 						}
 						else
 							treeItem->setText(TransitContact4, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD4)));
-						treeItem->setData(TransitContact4, Qt::UserRole, JD4);
+						treeItem->setData(TransitContact4, Qt::UserRole, StelUtils::getHoursFromJulianDay(JD + shift));
 						treeItem->setToolTip(TransitContact4, q_("The time of fourth contact, the planet's disk is externally tangent to the Sun (transit ends)"));
 						double duration = (JD4-JD1)*24.;
 						durationStr = StelUtils::hoursToHmsStr(duration,true);
@@ -4260,15 +4263,15 @@ void AstroCalcDialog::generateTransits()
 								}
 							}
 							else
-								{
-									observableDuration = (JDc4-JDc1)*24.;
-									observableDurationStr = StelUtils::hoursToHmsStr(observableDuration,true);
-								}
+							{
+								observableDuration = (JDc4-JDc1)*24.;
+								observableDurationStr = StelUtils::hoursToHmsStr(observableDuration,true);
+							}
 						}
 						else
-							{
-								observableDurationStr = dash;
-							}
+						{
+							observableDurationStr = dash;
+						}
 						treeItem->setText(TransitObservableDuration, observableDurationStr);
 						treeItem->setData(TransitObservableDuration, Qt::UserRole, observableDuration);
 						treeItem->setToolTip(TransitObservableDuration, q_("Observable duration of transit"));
