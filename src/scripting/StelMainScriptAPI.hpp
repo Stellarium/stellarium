@@ -24,8 +24,12 @@
 #include <QVariant>
 #include <QStringList>
 #include <QVector3D>
+#ifdef ENABLE_SCRIPT_QML
+#include <QJSEngine>
+#endif
 #include "StelObject.hpp"
 #include "StelCore.hpp"
+#include "V3d.hpp"
 
 class QScriptEngine;
 
@@ -45,13 +49,35 @@ public:
 	StelMainScriptAPI(QObject *parent = Q_NULLPTR);
 	~StelMainScriptAPI() Q_DECL_OVERRIDE;
 
+#ifdef ENABLE_SCRIPT_QML
+	void setEngine(QJSEngine *eng){m_engine=eng;}
+#endif
+
 // These functions will be available in scripts
 public slots:
 
+	//! Seems not to work properly! Use
+	//! @code
+	//! var my=new V3d(vec);
+	//! @endcode
+	//! instead.
 	static Vec3d vec3d(const double x, const double y, const double z); // Maybe bogus
+	//! Seems not to work properly! Use
+	//! @code
+	//! var my=new V3d(vec);
+	//! @endcode
+	//! instead.
+	static V3d toV3d(const Vec3d &vec); // should allow a conversion from that magic type!
 
-	static QVector3D vecToQVector3D(const QVector<double> &vec); // Maybe bogus
-	static Vec3d qVector3DToVec3d(const QVector3D &vec3d); // Maybe bogus
+	//! Create a variable in the QJSEngine's namespace. This function may be redundant in light of
+	//! @code
+	//! name=new V3d(vec);
+	//! @endcode
+	QJSValue createNamedV3d(const QString &name, const Vec3d &vec);
+
+
+	//static QVector3D vecToQVector3D(const QVector<double> &vec); // Maybe bogus
+	//static Vec3d qVector3DToVec3d(const QVector3D &vec3d); // Maybe bogus
 
 	//! Test how a QVector3D behaves: Forward these to StelMovementMgr. Maybe bogus
 	static QVector3D getViewDirection();
@@ -962,6 +988,11 @@ signals:
 	void requestSetDiskViewport(bool b);
 	void requestExit();
 	void requestSetHomePosition();
+
+private:
+#ifdef ENABLE_SCRIPT_QML
+	QJSEngine *m_engine;
+#endif
 };
 
 #endif // STELMAINSCRIPTAPI_HPP

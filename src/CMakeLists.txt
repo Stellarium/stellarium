@@ -260,6 +260,8 @@ IF(ENABLE_SCRIPTING)
      SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
           scripting/StelScriptOutput.hpp
           scripting/StelScriptOutput.cpp
+          scripting/V3d.cpp
+          scripting/V3d.hpp
           scripting/StelScriptMgr.cpp
           scripting/StelScriptMgr.hpp
           scripting/ScreenImageMgr.hpp
