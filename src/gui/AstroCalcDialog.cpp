@@ -57,8 +57,6 @@
 #include "../plugins/Supernovae/src/Supernovae.hpp"
 #endif
 
-#include <cmath>
-
 #include <QFileDialog>
 #include <QDir>
 #include <QSortFilterProxyModel>
