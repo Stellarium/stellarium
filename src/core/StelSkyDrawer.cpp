@@ -830,9 +830,9 @@ static Vec3f Gamma(float gamma,const Vec3f &x)
 void StelSkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 {
 	std::map<float,Vec3f> color_map;
-	for (float bV=-0.5f;bV<=4.0f;bV+=0.01f)
+	for (int bV100=-50;bV100<=400;bV100++)
 	{
-		QString entry = QString::asprintf("bv_color_%+5.2f", static_cast<double>(bV));
+		QString entry = QString::asprintf("bv_color_%+5.2f", static_cast<double>(bV100)*0.01);
 		const QStringList s(conf->value(QString("stars/") + entry).toStringList());
 		if (!s.isEmpty())
 		{
@@ -841,7 +841,7 @@ void StelSkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 				c = Vec3f(s[0]);
 			else
 				c =Vec3f(s);
-			color_map[bV] = Gamma(eye->getDisplayGamma(),c);
+			color_map[bV100*0.01f] = Gamma(eye->getDisplayGamma(),c);
 		}
 	}
 
