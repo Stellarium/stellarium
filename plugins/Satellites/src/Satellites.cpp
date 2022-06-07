@@ -1405,19 +1405,26 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 
 	// Communication data for groups of satellites
 	const QMap<QString, QString> startsWith = {
-		{ "GPS",           "gps" },
-		{ "BEIDOU",     "beidou" },
-		{ "IRNSS",        "irnss" },
-		{ "ORBCOMM", "orbcomm" },
-		{ "TEVEL",        "tevel" },
-		{ "QZS",           "qzss" },
-		{ "FORMOSAT", "formosat" },
-		{ "FOSSASAT",  "fossasat"},
-		{ "NETSAT",      "netsat" },
-		{ "GONETS-M", "gonets" },
-		{ "SOYUZ-MS",  "soyuz-ms" },
-		{ "IRIDIUM",      "iridium" },
-		{ "STARLINK",   "starlink" }
+		{ "GPS",	"gps" },
+		{ "BEIDOU",	"beidou" },
+		{ "IRNSS",	"irnss" },
+		{ "ORBCOMM",	"orbcomm" },
+		{ "TEVEL",	"tevel" },
+		{ "QZS",	"qzss" },
+		{ "FORMOSAT",	"formosat" },
+		{ "FOSSASAT",	"fossasat"},
+		{ "NETSAT",	"netsat" },
+		{ "GONETS-M",	"gonets" },
+		{ "SOYUZ-MS",	"soyuz-ms" },
+		{ "PROGRESS-MS","progress-ms" },
+		{ "IRIDIUM",	"iridium" },
+		{ "STARLINK",	"starlink" },
+		{ "NOAA",	"noaa" },
+		{ "METEOR 1",	"meteor-1" },
+		{ "METEOR 3",	"meteor-2" },
+		{ "METEOR 2",	"meteor-3" },
+		{ "GLOBALSTAR",	"globalstar" },
+		{ "COSMO-SKYMED", "cosmo-skymed" }
 	};
 
 	QStringList groups;
