@@ -114,7 +114,7 @@ bool StelOBJ::parseBool(const ParseParams &params, bool &out, int paramsStart)
 	}
 
 
-	const QStringRef& cmd = params.at(paramsStart);
+	const QString cmd = params.at(paramsStart);
 	out = (CMD_CMP("1") || CMD_CMP("true") || CMD_CMP("TRUE") || CMD_CMP("yes") || CMD_CMP("YES"));
 
 	return true;
@@ -150,7 +150,11 @@ bool StelOBJ::parseString(const ParseParams &params, QString &out, int paramsSta
 		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	out = params.at(paramsStart);
+#else
 	out = params.at(paramsStart).toString();
+#endif
 	return true;
 }
 
@@ -318,7 +322,7 @@ bool StelOBJ::parseFace(const ParseParams& params, const V3Vec& posList, const V
 	for(int i =0; i<vtxAmount;++i)
 	{
 		//split on slash
-		QVector<QStringRef> split = params.at(i+1).split('/');
+		QStringList split = params.at(i+1).split('/');
 		switch(split.size())
 		{
 			case 1: //no slash, only position
@@ -440,13 +444,13 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 		QString line = stream.readLine().simplified();
 		//split line by space		
 		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-		QVector<QStringRef> splits = line.splitRef(' ',Qt::SkipEmptyParts);
+		QStringList splits = line.split(' ',Qt::SkipEmptyParts);
 		#else
-		QVector<QStringRef> splits = line.splitRef(' ',QString::SkipEmptyParts);
+		QStringList splits = line.splitRef(' ',QString::SkipEmptyParts);
 		#endif
 		if(!splits.isEmpty())
 		{
-			const QStringRef& cmd = splits.at(0);
+			const QString cmd = splits.at(0);
 
 			//macro to make sure a material is currently active
 			#define CHECK_MTL() if(!curMaterial) { ok = false; qCCritical(stelOBJ)<<"Encountered material statement without active material"; }
@@ -633,10 +637,14 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 					QStringList list;
 					for(int i = 1; i<splits.size();++i)
 					{
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+						list.append(splits.at(i));
+#else
 						list.append(splits.at(i).toString());
+#endif
 					}
 
-					curMaterial->additionalParams.insert(cmd.toString(),list);
+					curMaterial->additionalParams.insert(cmd,list);
 					//qCWarning(stelOBJ)<<"Unknown MTL statement:"<<line;
 				}
 			}
@@ -658,7 +666,11 @@ bool StelOBJ::Material::parseBool(const QStringList &params, bool &out)
 	ParseParams pp(params.size());
 	for(int i = 0; i< params.size();++i)
 	{
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		pp[i] = params.at(i);
+#else
 		pp[i] = QStringRef(&params.at(i));
+#endif
 	}
 	return StelOBJ::parseBool(pp,out,0);
 }
@@ -668,7 +680,11 @@ bool StelOBJ::Material::parseFloat(const QStringList &params, float &out)
 	ParseParams pp(params.size());
 	for(int i = 0; i< params.size();++i)
 	{
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		pp[i] = params.at(i);
+#else
 		pp[i] = QStringRef(&params.at(i));
+#endif
 	}
 	return StelOBJ::parseFloat(pp,out,0);
 }
@@ -678,7 +694,11 @@ bool StelOBJ::Material::parseVec2d(const QStringList &params, Vec2d &out)
 	ParseParams pp(params.size());
 	for(int i = 0; i< params.size();++i)
 	{
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		pp[i] = params.at(i);
+#else
 		pp[i] = QStringRef(&params.at(i));
+#endif
 	}
 	return StelOBJ::parseVec2(pp,out,0);
 }
@@ -742,13 +762,13 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 
 		//split line by whitespace
 		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-		QVector<QStringRef> splits = line.splitRef(separator, Qt::SkipEmptyParts);
+		QStringList splits = line.split(separator, Qt::SkipEmptyParts);
 		#else
-		QVector<QStringRef> splits = line.splitRef(separator, QString::SkipEmptyParts);
+		QStringList splits = line.splitRef(separator, QString::SkipEmptyParts);
 		#endif
 		if(!splits.isEmpty())
 		{
-			const QStringRef& cmd = splits.at(0);
+			const QString cmd = splits.at(0);
 
 			bool ok = true;
 

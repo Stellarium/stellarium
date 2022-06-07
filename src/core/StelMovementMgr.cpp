@@ -701,7 +701,11 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 				qDebug() << "StelMovementMgr::handleMouseClicks: unknown mouse event type, skipping: " << event->type();
 			}
 			break;
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		case Qt::MiddleButton :
+#else
 		case Qt::MidButton :
+#endif
 			if (event->type()==QEvent::MouseButtonRelease)
 			{
 				if (objectMgr->getWasSelected())

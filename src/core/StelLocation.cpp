@@ -33,7 +33,9 @@ int StelLocation::metaTypeId = initMetaType();
 int StelLocation::initMetaType()
 {
 	int id = qRegisterMetaType<StelLocation>();
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	qRegisterMetaTypeStreamOperators<StelLocation>();
+#endif
 	return id;
 }
 
@@ -135,12 +137,20 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	loc.population = static_cast<int> (splitline.at(4).toFloat()*1000);
 
 	const QString& latstring = splitline.at(5).trimmed();
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	loc.latitude = latstring.left(latstring.size() - 1).toFloat();
+#else
 	loc.latitude = latstring.leftRef(latstring.size() - 1).toFloat();
+#endif
 	if (latstring.endsWith('S'))
 		loc.latitude=-loc.latitude;
 
 	const QString& lngstring = splitline.at(6).trimmed();
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	loc.longitude = lngstring.left(lngstring.size() - 1).toFloat();
+#else
 	loc.longitude = lngstring.leftRef(lngstring.size() - 1).toFloat();
+#endif
 	if (lngstring.endsWith('W'))
 		loc.longitude=-loc.longitude;
 

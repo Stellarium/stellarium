@@ -1948,6 +1948,7 @@ void StelCore::registerMathMetaTypes()
 	qRegisterMetaType<Mat3d>();
 	qRegisterMetaType<Mat3f>();
 
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	//registers the QDataStream operators, so that QVariants with these types can be saved
 	qRegisterMetaTypeStreamOperators<Vec2d>();
 	qRegisterMetaTypeStreamOperators<Vec2f>();
@@ -1962,7 +1963,7 @@ void StelCore::registerMathMetaTypes()
 	qRegisterMetaTypeStreamOperators<Mat4f>();
 	qRegisterMetaTypeStreamOperators<Mat3d>();
 	qRegisterMetaTypeStreamOperators<Mat3f>();
-
+#endif
 	//for debugging QVariants with these types, it helps if we register the string converters
 	QMetaType::registerConverter(&Vec2d::toString);
 	QMetaType::registerConverter(&Vec2f::toString);
@@ -2713,6 +2714,7 @@ QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
 		}
 		iau_constelspan span;
 		static const QRegularExpression emptyLine("^\\s*$");
+		static const QRegularExpression spaceRe("\\s+");
 		QTextStream in(&file);
 		while (!in.atEnd())
 		{
@@ -2722,18 +2724,18 @@ QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
 			if (emptyLine.match(line).hasMatch()) continue;
 			if (line.at(0)=='#') continue; // skip comment lines.
 			//QStringList list = line.split(QRegularExpression("\\b\\s+\\b"));
-			QStringList list = line.trimmed().split(QRegularExpression("\\s+"));
+			QStringList list = line.trimmed().split(spaceRe);
 			if (list.count() != 4)
 			{
 				qWarning() << "IAU constellation file constellations_spans.dat has bad line:" << line << "with" << list.count() << "elements";
 				continue;
 			}
 			//qDebug() << "Creating span for decl=" << list.at(2) << " from RA=" << list.at(0) << "to" << list.at(1) << ": " << list.at(3);
-			QStringList numList=list.at(0).split(QRegularExpression(":"));
+			QStringList numList=list.at(0).split(QString(":"));
 			span.RAlow= atof(numList.at(0).toLatin1()) + atof(numList.at(1).toLatin1())/60. + atof(numList.at(2).toLatin1())/3600.;
-			numList=list.at(1).split(QRegularExpression(":"));
+			numList=list.at(1).split(QString(":"));
 			span.RAhigh=atof(numList.at(0).toLatin1()) + atof(numList.at(1).toLatin1())/60. + atof(numList.at(2).toLatin1())/3600.;
-			numList=list.at(2).split(QRegularExpression(":"));
+			numList=list.at(2).split(QString(":"));
 			span.decLow=atof(numList.at(0).toLatin1());
 			if (span.decLow<0.0)
 				span.decLow -= atof(numList.at(1).toLatin1())/60.;
