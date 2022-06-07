@@ -298,7 +298,11 @@ public:
 	//! This is intended to be used together with splitVertexData(), when you want your own vertex format.
 	void clearVertexData();
 private:
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	typedef QStringList ParseParams;
+#else
 	typedef QVector<QStringRef> ParseParams;
+#endif
 	typedef QHash<Vertex, int> VertexCache;
 
 	struct CurrentParserState

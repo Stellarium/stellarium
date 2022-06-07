@@ -30,7 +30,10 @@ int SphericalRegionP::metaTypeId = SphericalRegionP::initialize();
 int SphericalRegionP::initialize()
 {
 	int id = qRegisterMetaType<SphericalRegionP>("SphericalRegionP");
+
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	qRegisterMetaTypeStreamOperators<SphericalRegionP>("SphericalRegionP");
+#endif
 	return id;
 }
 

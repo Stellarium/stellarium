@@ -29,7 +29,9 @@ static QPixmap makePixmap()
 	QPixmap pixmap(StelFileMgr::findFile("data/splash.png"));
 	QPainter p(&pixmap);
 	p.setRenderHint(QPainter::Antialiasing);
-	p.setRenderHint(QPainter::HighQualityAntialiasing);
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+	p.setRenderHint(QPainter::HighQualityAntialiasing); // obsolete and ignored already in Qt5.15!
+#endif
 	p.setPen(Qt::white);
 	QFontMetrics metrics(p.font());
 	p.drawText(QPointF(metrics.averageCharWidth(), 1.3*metrics.height()), StelUtils::getApplicationVersion());

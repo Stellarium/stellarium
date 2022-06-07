@@ -208,7 +208,7 @@ QString StelFileMgr::findFile(const QString& path, Flags flags)
 	// explicitly specified relative paths
 	if (path[0] == '.')
 	{
-		if (fileFlagsCheck(path, flags))
+		if (fileFlagsCheck(QFileInfo(path), flags))
 			return path;
 		else
 		{
@@ -220,7 +220,7 @@ QString StelFileMgr::findFile(const QString& path, Flags flags)
 	// explicitly specified absolute paths
 	if (isAbsolute(path))
 	{
-		if (fileFlagsCheck(path, flags))
+		if (fileFlagsCheck(QFileInfo(path), flags))
 			return path;
 		else
 		{
@@ -258,7 +258,7 @@ QStringList StelFileMgr::findFileInAllPaths(const QString &path, const Flags &fl
 	// explicitly specified relative paths
 	if (path[0] == '.')
 	{
-		if (fileFlagsCheck(path, flags))
+		if (fileFlagsCheck(QFileInfo(path), flags))
 			filePaths.append(path);
 		return filePaths;
 	}
@@ -266,7 +266,7 @@ QStringList StelFileMgr::findFileInAllPaths(const QString &path, const Flags &fl
 	// explicitly specified absolute paths
 	if ( isAbsolute(path) )
 	{
-		if (fileFlagsCheck(path, flags))
+		if (fileFlagsCheck(QFileInfo(path), flags))
 			filePaths.append(path);
 		return filePaths;
 	}

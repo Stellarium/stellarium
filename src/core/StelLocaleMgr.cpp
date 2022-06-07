@@ -222,7 +222,12 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 			return t.toString("hh:mm:ss AP");
 		default:
 			qWarning() << "WARNING: unknown time format, fallback to system default";
+
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+			return t.toString(QLocale().dateFormat(QLocale::ShortFormat));
+#else
 			return t.toString(Qt::DefaultLocaleShortDate);
+#endif
 	}
 }
 
