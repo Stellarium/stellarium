@@ -876,9 +876,14 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 	str.append(omgr->getExtraInfoStrings(DebugAid).join(' ')); // TBD: Remove for Release builds?
 
 	// hack for avoiding an empty line before table
-	str.replace(QRegularExpression("<br(\\s*/)?><table"), "<table");
+	static const QRegularExpression tableRe("<br(\\s*/)?><table");
+	static const QRegularExpression brRe("<br(\\s*/)?>\\s*$");
+	static const QRegularExpression brRe2("<br(\\s*/)?>\\s*$");
+	static const QRegularExpression tdRe("<td(\\w*)?>");
+	static const QRegularExpression tableRe2("<table(\\w*)?>");
+	str.replace(tableRe, "<table");
 	// chomp trailing line breaks
-	str.replace(QRegularExpression("<br(\\s*/)?>\\s*$"), "");
+	str.replace(brRe, "");
 
 	if (flags&PlainText)
 	{
@@ -886,12 +891,12 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		str.replace("</b>", "");
 		str.replace("<h2>", "");
 		str.replace("</h2>", "\n");
-		str.replace(QRegularExpression("<br(\\s*/)?>"), "\n");
+		str.replace(brRe2, "\n");
 		str.replace("<tr>", "");
-		str.replace(QRegularExpression("<td(\\w*)?>"), "");
+		str.replace(tdRe, "");
 		str.replace("<td>", "");
 		str.replace("</tr>", "\n");
-		str.replace(QRegularExpression("<table(\\w*)?>"), "");
+		str.replace(tableRe2, "");
 		str.replace("</table>", "");
 	}
 	else if(!(flags&NoFont))
@@ -1103,13 +1108,12 @@ QStringList StelObject::getExtraInfoStrings(const InfoStringGroup& flags) const
 
 void StelObject::removeExtraInfoStrings(const InfoStringGroup& flags)
 {
-	QMultiMap<InfoStringGroup, QString>::iterator i = extraInfoStrings.begin();
-	while (i != extraInfoStrings.end())
+	QMultiMap<InfoStringGroup, QString>::const_iterator i = extraInfoStrings.constBegin();
+	while (i != extraInfoStrings.constEnd())
 	{
 		if (i.key() & flags)
-			i=extraInfoStrings.erase(i);
-		else
-			++i;
+			extraInfoStrings.erase(i);
+		++i;
 	}
 }
 

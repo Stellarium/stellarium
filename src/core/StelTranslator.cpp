@@ -190,7 +190,8 @@ void StelTranslator::initIso639_1LanguageCodes(const QString& fileName)
 		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty()) // skip comments and empty lines
 			continue;
 
-		record.remove(QRegularExpression("[\\n\\r]*$")); // chomp new lines
+		static const QRegularExpression nlExp("[\\n\\r]*$");
+		record.remove(nlExp); // chomp new lines
 		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
 		const QStringList& fields = record.split("\t", Qt::SkipEmptyParts);
 		#else
