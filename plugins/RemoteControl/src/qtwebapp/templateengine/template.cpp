@@ -14,6 +14,25 @@ Template::Template(QString source, QString sourceName)
 	this->warnings=false;
 }
 
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+Template::Template(QFile& file, QStringConverter::Encoding encoding)
+{
+	sourceName=QFileInfo(file.fileName()).baseName();
+	if (file.open(QFile::ReadOnly | QFile::Text))
+	{
+		QTextStream in(&file);
+		in.setEncoding(encoding);
+		QString content=in.readAll();
+		file.close();
+
+		append(content);
+	}
+	else
+	{
+		qCritical("Template: cannot read from %s, %s",qPrintable(sourceName),qPrintable(file.errorString()));
+	}
+}
+#else
 Template::Template(QFile& file, QTextCodec* textCodec)
 {
 	this->warnings=false;
@@ -33,6 +52,7 @@ Template::Template(QFile& file, QTextCodec* textCodec)
 		qCritical("Template: cannot read from %s, %s",qPrintable(sourceName),qPrintable(file.errorString()));
 	}
 }
+#endif
 
 
 int Template::setVariable(QString name, QString value)

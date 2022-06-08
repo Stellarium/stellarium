@@ -57,17 +57,21 @@ void HttpResponse::writeHeaders()
     buffer.append(' ');
     buffer.append(statusText);
     buffer.append("\r\n");
-    for (auto name : headers.uniqueKeys())
+    QMapIterator<QByteArray,QByteArray> it(headers);
+    while (it.hasNext())
     {
-        buffer.append(name);
+        it.next();
+        buffer.append(it.key());
         buffer.append(": ");
-        buffer.append(headers.value(name));
+        buffer.append(it.value());
         buffer.append("\r\n");
     }
-    for (auto cookie : cookies.values())
+    QMapIterator<QByteArray,HttpCookie> cit(cookies);
+    while (cit.hasNext())
     {
+        cit.next();
         buffer.append("Set-Cookie: ");
-        buffer.append(cookie.toByteArray());
+        buffer.append(cit.value().toByteArray());
         buffer.append("\r\n");
     }
     buffer.append("\r\n");
