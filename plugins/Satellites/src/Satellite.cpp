@@ -1092,6 +1092,7 @@ void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 	{
 		Vec3d position;
 		Vec3f drawColor;
+		Vec4d op;
 		QVector<Vec3d> vertexArray;
 		QVector<Vec4f> colorArray;
 		vertexArray.resize(size);
@@ -1100,7 +1101,7 @@ void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 		//Rest of points
 		for (int i=0; i<size; i++)
 		{
-			Vec4d op = orbitPoints[i];
+			op = orbitPoints[i];
 			position = core->altAzToJ2000(Vec3d(op[0],op[1],op[2]), StelCore::RefractionOff);
 			position.normalize();
 			vertexArray[i] = position;
