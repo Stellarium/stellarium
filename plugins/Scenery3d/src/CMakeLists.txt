@@ -60,7 +60,7 @@ QT_WRAP_UI(Scenery3d_UIS_H ${Scenery3d_UIS})
 
 ############### For building the static library ######################
 ADD_LIBRARY(Scenery3d-static STATIC ${Scenery3d_SRCS} ${Scenery3d_RES_CXX} ${Scenery3d_UIS_H} ${Scenery3d_MOC_SRCS} )
-TARGET_LINK_LIBRARIES(Scenery3d-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Concurrent Qt${QT_VERSION_MAJOR}::Gui ${STEL_GLES_LIBS} Qt${QT_VERSION_MAJOR}::Widgets)
+TARGET_LINK_LIBRARIES(Scenery3d-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Concurrent Qt${QT_VERSION_MAJOR}::Gui ${STEL_GLES_LIBS} Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGL)
 SET_TARGET_PROPERTIES(Scenery3d-static PROPERTIES OUTPUT_NAME "Scenery3d")
 SET_TARGET_PROPERTIES(Scenery3d-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins Scenery3d-static)

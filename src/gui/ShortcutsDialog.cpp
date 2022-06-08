@@ -38,14 +38,14 @@ ShortcutsFilterModel::ShortcutsFilterModel(QObject* parent) :
 
 bool ShortcutsFilterModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
-	if (filterRegExp().isEmpty())
+	if (filterRegularExpression().pattern().isEmpty())
 		return true;
 	
 	if (source_parent.isValid())
 	{
 		QModelIndex index = source_parent.model()->index(source_row, filterKeyColumn(), source_parent);
 		QString data = sourceModel()->data(index, filterRole()).toString();
-		return data.contains(filterRegExp());
+		return data.contains(filterRegularExpression());
 	}
 	else
 	{
@@ -92,7 +92,11 @@ void ShortcutsDialog::drawCollisions()
 void ShortcutsDialog::resetCollisions()
 {
 	QBrush brush =
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		ui->shortcutsTreeView->palette().windowText();
+#else
 		ui->shortcutsTreeView->palette().brush(QPalette::Foreground);
+#endif
 	for (auto* item : qAsConst(collisionItems))
 	{
 		item->setForeground(brush);

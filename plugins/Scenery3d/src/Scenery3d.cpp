@@ -441,7 +441,11 @@ void Scenery3d::loadScene(const SceneInfo& scene)
 	currentLoadScene = scene;
 	emit loadingSceneIDChanged(currentLoadScene.id);
 
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	QFuture<S3DScene*> future = QtConcurrent::run(&Scenery3d::loadSceneBackground,this,scene);
+#else
 	QFuture<S3DScene*> future = QtConcurrent::run(this,&Scenery3d::loadSceneBackground,scene);
+#endif
 	currentLoadFuture.setFuture(future);
 }
 

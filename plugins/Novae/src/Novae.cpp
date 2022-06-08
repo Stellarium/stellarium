@@ -576,7 +576,11 @@ int Novae::getSecondsToUpdate(void)
 
 void Novae::checkForUpdate(void)
 {
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime())
+#else
 	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime() && networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
+#endif
 		updateJSON();
 }
 
@@ -621,7 +625,12 @@ void Novae::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	// Unsure, see https://doc.qt.io/qt-6/network-changes-qt6.html#redirect-policies
+	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::ManualRedirectPolicy);
+#else
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+#endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 

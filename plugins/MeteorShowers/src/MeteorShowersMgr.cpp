@@ -298,7 +298,11 @@ void MeteorShowersMgr::repaint()
 
 void MeteorShowersMgr::checkForUpdates()
 {
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	if (m_enableAutoUpdates && m_lastUpdate.addSecs(static_cast<qint64>(m_updateFrequencyHours) * 3600) <= QDateTime::currentDateTime())
+#else
 	if (m_enableAutoUpdates && m_lastUpdate.addSecs(static_cast<qint64>(m_updateFrequencyHours) * 3600) <= QDateTime::currentDateTime() && m_networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
+#endif
 	{
 		updateCatalog();
 	}
@@ -343,7 +347,12 @@ void MeteorShowersMgr::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(m_url));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	// Unsure, see https://doc.qt.io/qt-6/network-changes-qt6.html#redirect-policies
+	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::ManualRedirectPolicy);
+#else
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+#endif
 	m_downloadReply = m_networkManager->get(request);
 	connect(m_downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 	m_updateState = MeteorShowersMgr::Updating;

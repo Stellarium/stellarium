@@ -469,7 +469,7 @@ QString StelFileMgr::getLocaleDir()
 	else
 	{
 		// If not found, try to look in the standard build directory (useful for developer)
-		localePath = QCoreApplication::applicationDirPath() + "/../translations";
+		localePath = QFileInfo(QCoreApplication::applicationDirPath() + QString("/../translations"));
 		if (localePath.exists())
 		{
 			return localePath.filePath();

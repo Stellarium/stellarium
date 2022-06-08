@@ -25,6 +25,9 @@
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <QtCharts/QtCharts>
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+using namespace QtCharts;
+#endif
 #include <QXYSeries>
 
 #include "StelDialog.hpp"
@@ -105,7 +108,7 @@ private:
 
 	QStringList exoplanetsHeader;
 	typedef QPair<QString, int> axisPair;
-	QtCharts::QChart *chart;
+	QChart *chart;
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug

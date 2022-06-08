@@ -66,25 +66,25 @@ bool SatellitesListFilterModel::filterAcceptsRow(int source_row, const QModelInd
 	}
 	
 	// Check name
-	if (index.data(Qt::DisplayRole).toString().contains(filterRegExp()))
+	if (index.data(Qt::DisplayRole).toString().contains(filterRegularExpression()))
 		return true;
 	
 	// Check ID
 	data = index.data(Qt::UserRole);
 	QString id = data.toString();
-	if (id.contains(filterRegExp()))
+	if (id.contains(filterRegularExpression()))
 		return true;
 
 	// search international designator
 	data = index.data(SatCosparIDRole);
 	id = data.toString();
-	if (id.contains(filterRegExp()))
+	if (id.contains(filterRegularExpression()))
 		return true;
 
 	// search descriptions
 	data = index.data(SatDescriptionRole);
 	QString descr = data.toString();
-	if (descr.contains(filterRegExp()))
+	if (descr.contains(filterRegularExpression()))
 		return true;
 	
 	// TODO: Possible check for "NORAD NNNN".

@@ -507,7 +507,7 @@ void Satellite::calculateSatDataFromLine2(QString tle)
 	// Details: http://www.satobs.org/seesat/Dec-2002/0197.html
 	const double meanEarthRadius = 6371.0088;
 	const double k = 8681663.653;
-	const double meanMotion = tle.left(63).rightRef(11).toDouble();
+	const double meanMotion = tle.left(63).right(11).toDouble();
 	const double semiMajorAxis = std::cbrt((k/meanMotion)*(k/meanMotion));
 	eccentricity = QString("0.%1").arg(tle.left(33).right(7)).toDouble();
 	perigee = semiMajorAxis*(1.0 - eccentricity) - meanEarthRadius;
@@ -519,13 +519,13 @@ void Satellite::calculateSatDataFromLine2(QString tle)
 void Satellite::calculateEpochFromLine1(QString tle)
 {
 	QString epochStr;
-	// Details: https://celestrak.org/columns/v04n03/ or https://en.wikipedia.org/wiki/Two-line_element_set
-	int year = tle.left(20).rightRef(2).toInt();
+	// Details: https://celestrak.com/columns/v04n03/ or https://en.wikipedia.org/wiki/Two-line_element_set
+	int year = tle.left(20).right(2).toInt();
 	if (year>=0 && year<57)
 		year += 2000;
 	else
 		year += 1900;
-	const double dayOfYear = tle.left(32).rightRef(12).toDouble();
+	const double dayOfYear = tle.left(32).right(12).toDouble();
 	QDate epoch = QDate(year, 1, 1).addDays(dayOfYear - 1);
 	if (!epoch.isValid())
 		epochStr = qc_("unknown", "unknown date");
@@ -959,7 +959,7 @@ void Satellite::parseInternationalDesignator(const QString& tle1)
 	QStringList tleData = tle1.split(" ");
 	QString rawString = tleData.at(2);
 	bool ok;
-	int year = rawString.leftRef(2).toInt(&ok);
+	int year = rawString.left(2).toInt(&ok);
 	if (!rawString.isEmpty() && ok)
 	{
 		// Y2K bug :) I wonder what NORAD will do in 2057. :)
