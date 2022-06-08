@@ -383,7 +383,7 @@ private:
 	Vec3f    orbitColor;
 	double    lastEpochCompForOrbit; //measured in Julian Days
 	double    epochTime;  //measured in Julian Days
-	QList<Vec3d> orbitPoints; //orbit points represented by ElAzPos vectors
+	QList<Vec4d> orbitPoints; //orbit points represented by ElAzPos vectors and altitudes
 	QList<gSatWrapper::Visibility> visibilityPoints; //orbit visibility points
 	QMap<gSatWrapper::Visibility, QString> visibilityDescription;
 };

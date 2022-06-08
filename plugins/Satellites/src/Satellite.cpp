@@ -839,7 +839,7 @@ void Satellite::update(double)
 		phaseAngle = pSatWrapper->getPhaseAngle();
 
 		// Compute orbit points to draw orbit line.
-		if (orbitDisplayed && !flagVFAltitude) computeOrbitPoints();
+		if (orbitDisplayed) computeOrbitPoints();
 	}
 }
 
@@ -1080,7 +1080,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 		}
 	}
 
-	if (orbitDisplayed && Satellite::orbitLinesFlag && orbitValid && !flagVFAltitude)
+	if (orbitDisplayed && Satellite::orbitLinesFlag && orbitValid)
 		drawOrbit(core, painter);
 }
 
@@ -1100,14 +1100,28 @@ void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 		//Rest of points
 		for (int i=0; i<size; i++)
 		{
-			position = core->altAzToJ2000(orbitPoints[i].toVec3d(), StelCore::RefractionOff);
+			Vec4d op = orbitPoints[i];
+			position = core->altAzToJ2000(Vec3d(op[0],op[1],op[2]), StelCore::RefractionOff);
 			position.normalize();
 			vertexArray[i] = position;
+
 			drawColor = (visibilityPoints[i] == gSatWrapper::VISIBLE) ? orbitColor : invisibleSatelliteColor;
-			if (hideInvisibleSatellitesFlag && visibilityPoints[i] != gSatWrapper::VISIBLE)
-				colorArray[i] = Vec4f(0.f,0.f,0.f,0.f); // hide invisible part of orbit
+			if (flagVFAltitude)
+			{
+				// visual filter is activated!
+				// is satellite located in valid range of altitudes?
+				if (minVFAltitude<=op[3] && op[3]<=maxVFAltitude)
+					colorArray[i] = Vec4f(drawColor, hintBrightness * calculateOrbitSegmentIntensity(i));
+				else
+					colorArray[i] = Vec4f(0.f,0.f,0.f,0.f); // hide invisible part of orbit
+			}
 			else
-				colorArray[i] = Vec4f(drawColor, hintBrightness * calculateOrbitSegmentIntensity(i));
+			{
+				if (hideInvisibleSatellitesFlag && visibilityPoints[i] != gSatWrapper::VISIBLE)
+					colorArray[i] = Vec4f(0.f,0.f,0.f,0.f); // hide invisible part of orbit
+				else
+					colorArray[i] = Vec4f(drawColor, hintBrightness * calculateOrbitSegmentIntensity(i));
+			}
 		}
 
 		painter.drawPath(vertexArray, colorArray); // (does client state switching as needed internally)
@@ -1138,8 +1152,9 @@ void Satellite::computeOrbitPoints()
 
 		for (int i=0; i<=orbitLineSegments; i++)
 		{
-			pSatWrapper->setEpoch(epochTm.getGmtTm());			
-			orbitPoints.append(pSatWrapper->getAltAz());
+			pSatWrapper->setEpoch(epochTm.getGmtTm());
+			Vec3d sat = pSatWrapper->getAltAz();
+			orbitPoints.append(Vec4d(sat[0],sat[1],sat[2],pSatWrapper->getSubPoint()[2]));
 			visibilityPoints.append(pSatWrapper->getVisibilityPredict());
 			epochTm    += computeInterval;
 		}
@@ -1168,8 +1183,9 @@ void Satellite::computeOrbitPoints()
 				//remove points at beginning of list and add points at end.
 				orbitPoints.removeFirst();
 				visibilityPoints.removeFirst();
-				pSatWrapper->setEpoch(epochTm.getGmtTm());				
-				orbitPoints.append(pSatWrapper->getAltAz());
+				pSatWrapper->setEpoch(epochTm.getGmtTm());
+				Vec3d sat = pSatWrapper->getAltAz();
+				orbitPoints.append(Vec4d(sat[0],sat[1],sat[2],pSatWrapper->getSubPoint()[2]));
 				visibilityPoints.append(pSatWrapper->getVisibilityPredict());
 				epochTm    += computeInterval;
 			}
@@ -1198,8 +1214,9 @@ void Satellite::computeOrbitPoints()
 			{ //remove points at end of list and add points at beginning.
 				orbitPoints.removeLast();
 				visibilityPoints.removeLast();
-				pSatWrapper->setEpoch(epochTm.getGmtTm());				
-				orbitPoints.push_front(pSatWrapper->getAltAz());
+				pSatWrapper->setEpoch(epochTm.getGmtTm());
+				Vec3d sat = pSatWrapper->getAltAz();
+				orbitPoints.push_front(Vec4d(sat[0],sat[1],sat[2],pSatWrapper->getSubPoint()[2]));
 				visibilityPoints.push_front(pSatWrapper->getVisibilityPredict());
 				epochTm -= computeInterval;
 			}
