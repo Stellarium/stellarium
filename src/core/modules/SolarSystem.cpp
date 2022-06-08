@@ -702,7 +702,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	// Stage 2b (as described above).
 	// qDebug() << "Stage 2b:";
 	QStringList orderedSections;
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	QMultiMapIterator<int, QString> levelMapIt(depLevelMap);
+#else
 	QMapIterator<int, QString> levelMapIt(depLevelMap);
+#endif
 	while(levelMapIt.hasNext())
 	{
 		levelMapIt.next();

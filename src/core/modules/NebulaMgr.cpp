@@ -1590,10 +1590,17 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 		if (commentRx.match(record).hasMatch())
 			continue;
 
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		// bytes 1 - 8, RA
+		RA = record.first(8).toDouble();
+		// bytes 9 -18, DE
+		DE = record.sliced(9, 10).toDouble();
+#else
 		// bytes 1 - 8, RA
 		RA = record.leftRef(8).toDouble();
 		// bytes 9 -18, DE
 		DE = record.midRef(9, 10).toDouble();
+#endif
 		// bytes 19-25, command
 		command = record.mid(19, 7).trimmed();
 		// bytes 26, designation of DSO
@@ -1875,7 +1882,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	QString objw = objPrefix.toUpper();
 
 	// Search by Messier objects number (possible formats are "M31" or "M 31")
-	if (objw.size()>=1 && objw.at(0)=="M" && objw.left(3)!="MEL")
+	if (objw.size()>=1 && objw.at(0)=='M' && objw.left(3)!="MEL")
 	{
 		for (const auto& n : dsoArray)
 		{
@@ -1994,7 +2001,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	}
 
 	// Search by Caldwell objects number (possible formats are "C31" or "C 31")
-	if (objw.size()>=1 && objw.at(0)=="C" && objw.left(2)!="CR" && objw.left(2)!="CE")
+	if (objw.size()>=1 && objw.at(0)=='C' && objw.left(2)!="CR" && objw.left(2)!="CE")
 	{
 		for (const auto& n : dsoArray)
 		{
@@ -2056,7 +2063,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	}
 
 	// Search by Barnard objects number (possible formats are "B31" or "B 31")
-	if (objw.size()>=1 && objw.at(0)=="B")
+	if (objw.size()>=1 && objw.at(0)=='B')
 	{
 		for (const auto& n : dsoArray)
 		{

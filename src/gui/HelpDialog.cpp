@@ -142,7 +142,12 @@ void HelpDialog::setKeyButtonState(bool state)
 
 void HelpDialog::checkUpdates()
 {
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+	// In Qt6 this is no longer available. Here we have to assume we are connected and test the reply.
+	// There is QNetworkInformation in Qt6.1, but it may give wrong results under certain circumstances.
+	// https://doc.qt.io/qt-6/qnetworkinformation.html
 	if (networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
+#endif
 	{
 		if (updateState==HelpDialog::Updating)
 		{
@@ -155,7 +160,12 @@ void HelpDialog::checkUpdates()
 		QNetworkRequest request;
 		request.setUrl(API);
 		request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		// Unsure, see https://doc.qt.io/qt-6/network-changes-qt6.html#redirect-policies
+		request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::ManualRedirectPolicy);
+#else
 		request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+#endif
 		downloadReply = networkManager->get(request);
 
 		updateState = HelpDialog::Updating;
@@ -270,11 +280,19 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "<tr><td>" + q_("Time scrolling: minutes").toHtmlEscaped() + "</td><td><b>" +
 			QKeySequence(Qt::CTRL).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: hours").toHtmlEscaped() + "</td><td><b>" +
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+			QKeySequence(Qt::CTRL | Qt::SHIFT).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+	htmlText += "<tr><td>" + q_("Time scrolling: days").toHtmlEscaped() + "</td><td><b>" +
+			QKeySequence(Qt::CTRL | Qt::ALT).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+	htmlText += "<tr><td>" + q_("Time scrolling: years").toHtmlEscaped() + "</td><td><b>" +
+			QKeySequence(Qt::CTRL | Qt::ALT | Qt::SHIFT).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+#else
 			QKeySequence(Qt::CTRL + Qt::SHIFT).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: days").toHtmlEscaped() + "</td><td><b>" +
 			QKeySequence(Qt::CTRL + Qt::ALT).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: years").toHtmlEscaped() + "</td><td><b>" +
 			QKeySequence(Qt::CTRL + Qt::ALT + Qt::SHIFT).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+#endif
 
 	// select object
 	htmlText += "<tr><td>" + q_("Select object").toHtmlEscaped() + "</td>";
@@ -295,7 +313,11 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT).toString(QKeySequence::NativeText) + delimiter + q_("right click").toHtmlEscaped() + "</b></td></tr>\n";
 	// delete all custom markers
 	htmlText += "<tr><td>" + q_("Delete all custom markers").toHtmlEscaped() + "</td>";
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT | Qt::ALT).toString(QKeySequence::NativeText) + delimiter + q_("right click").toHtmlEscaped() + "</b></td></tr>\n";
+#else
 	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT + Qt::ALT).toString(QKeySequence::NativeText) + delimiter + q_("right click").toHtmlEscaped() + "</b></td></tr>\n";
+#endif
 
 	htmlText += "</table>\n<p>" +
 			q_("Below are listed only the actions with assigned keys. Further actions may be available via the \"%1\" button.")

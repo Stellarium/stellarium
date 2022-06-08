@@ -1608,7 +1608,11 @@ QString LandscapeMgr::getDescription() const
 		if(file.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
 			QTextStream in(&file);
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+			in.setEncoding(QStringConverter::Utf8);
+#else
 			in.setCodec("UTF-8");
+#endif
 			desc = in.readAll();
 			file.close();
 		}

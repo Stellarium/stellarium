@@ -235,7 +235,7 @@ QString StarMgr::getCrossIdentificationDesignations(QString hip)
 {
 	QStringList designations;
 	auto cr = crossIdMap.find(hip);
-	if (cr==crossIdMap.end() && hip.rightRef(1).toUInt()==0)
+	if (cr==crossIdMap.end() && hip.right(1).toUInt()==0)
 		cr = crossIdMap.find(hip.left(hip.size()-1));
 
 	if (cr!=crossIdMap.end())

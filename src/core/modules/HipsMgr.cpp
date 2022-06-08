@@ -39,7 +39,10 @@ HipsMgr::HipsMgr()
 
 HipsMgr::~HipsMgr()
 {
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+	// This function is no longer available in Qt6. We assume it is OK to run the code in any case, even if we were not connected.
 	if (StelApp::getInstance().getNetworkAccessManager()->networkAccessible()==QNetworkAccessManager::Accessible)
+#endif
 	{
 		// Store active HiPS to config.ini if network is available
 		QSettings* conf = StelApp::getInstance().getSettings();
@@ -142,12 +145,16 @@ void HipsMgr::init()
 	conf->endGroup();
 	bool hasVisibleSurvey = size>0 ? true: false;
 
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+	// In Qt6 we don't have the online check. We could ping somewhere, or just live with it.
+	// There is QNetworkInformation in Qt6.1, but it may give wrong results under certain circumstances.
+	// https://doc.qt.io/qt-6/qnetworkinformation.html
 	if (StelApp::getInstance().getNetworkAccessManager()->networkAccessible()==QNetworkAccessManager::NotAccessible)
 	{
 		setFlagShow(false);
 		hasVisibleSurvey = false;
 	}
-
+#endif
 	addAction("actionShow_Hips_Surveys", N_("Display Options"), N_("Toggle Hierarchical Progressive Surveys"), "flagShow", "Ctrl+Alt+D");
 
 	// Start loading the sources only after stellarium has time to set up the proxy.

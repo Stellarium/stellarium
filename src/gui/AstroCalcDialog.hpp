@@ -398,7 +398,7 @@ private slots:
 	void showExtraEphemerisDialog();
 	void showCustomStepsDialog();
 
-	void saveGraph(QtCharts::QChartView *graph);
+	void saveGraph(QChartView *graph);
 
 private:
 	class AstroCalcExtraEphemerisDialog* extraEphemerisDialog;

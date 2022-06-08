@@ -70,11 +70,12 @@ Landscape::~Landscape()
 // Load attributes common to all landscapes
 void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landscapeId)
 {
+	static const QRegularExpression spaceRe("\\\\n\\s*\\\\n");
 	id = landscapeId;
 	name = landscapeIni.value("landscape/name").toString();
 	author = landscapeIni.value("landscape/author").toString();
 	description = landscapeIni.value("landscape/description").toString();
-	description = description.replace(QRegularExpression("\\\\n\\s*\\\\n"), "<br />");
+	description = description.replace(spaceRe, "<br />");
 	description = description.replace("\\n", " ");
 	if (name.isEmpty())
 	{
@@ -185,6 +186,7 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 		return;
 	}
 	static const QRegularExpression emptyLine("^\\s*$");
+	static const QRegularExpression spaceRe("\\s+");
 	QTextStream in(&file);
 	while (!in.atEnd())
 	{
@@ -193,7 +195,7 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 		if (line.length()==0) continue;
 		if (emptyLine.match(line).hasMatch()) continue;
 		if (line.at(0)=='#') continue; // skip comment lines.
-		const QStringList list = line.trimmed().split(QRegularExpression("\\s+"));
+		const QStringList list = line.trimmed().split(spaceRe);
 		if (list.count() < 2)
 		{
 			qWarning() << "Landscape polygon file" << QDir::toNativeSeparators(lineFileName) << "has bad line:" << line << "with" << list.count() << "elements";
@@ -310,7 +312,11 @@ void Landscape::loadLabels(const QString& landscapeId)
 	if(file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
 		QTextStream in(&file);
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		in.setEncoding(QStringConverter::Utf8);
+#else
 		in.setCodec("UTF-8");
+#endif
 		while (!in.atEnd())
 		{
 			QString line=in.readLine();
@@ -490,7 +496,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		const QStringList parameters = landscapeIni.value(key).toString().split(':');  // e.g. tex0:0:0:1:1
 		//TODO: How should be handled an invalid texture description?
 		QString textureName = parameters.value(0);                                    // tex0
-		texnum = textureName.rightRef(textureName.length() - 3).toUInt();             // 0
+		texnum = textureName.right(textureName.length() - 3).toUInt();             // 0
 		sides[i].tex = sideTexs[texnum];
 		sides[i].tex_illum = sideTexs[nbSide+texnum];
 		sides[i].texCoords[0] = parameters.at(1).toFloat();
