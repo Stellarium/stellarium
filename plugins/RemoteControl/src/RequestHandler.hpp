@@ -96,7 +96,11 @@ private:
 	QByteArray passwordReply;
 	APIController* apiController;
 	StaticFileController* staticFiles;
+#if (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
+	QRecursiveMutex templateMutex;
+#else
 	QMutex templateMutex;
+#endif
 
 	static const QByteArray AUTH_REALM;
 
