@@ -263,7 +263,7 @@ void ObsListDialog::obsListClearHighLightButtonPressed()
 */
 void ObsListDialog::obsListNewListButtonPressed()
 {
-	string listUuid = string();
+	std::string listUuid;
 	invokeObsListCreateEditDialog ( listUuid );
 }
 
@@ -281,7 +281,7 @@ void ObsListDialog::obsListEditButtonPressed()
 /**
  * Open the observing list create/edit dialog
 */
-void ObsListDialog::invokeObsListCreateEditDialog ( string listUuid )
+void ObsListDialog::invokeObsListCreateEditDialog ( std::string listUuid )
 {
 	createEditDialog_instance = ObsListCreateEditDialog::Instance ( listUuid );
 	connect ( createEditDialog_instance, SIGNAL ( exitButtonClicked() ), this, SLOT ( obsListCreateEditDialogClosed() ) );
