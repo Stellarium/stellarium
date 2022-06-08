@@ -57,6 +57,9 @@
 #ifdef DEBUG_SHADOWMAP
 #include <QOpenGLFramebufferObject>
 #endif
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#include <QOpenGLVersionFunctionsFactory>
+#endif
 #include <QOpenGLShader>
 #include <QtConcurrent>
 #include <QElapsedTimer>
@@ -3312,7 +3315,11 @@ bool Planet::initFBO()
 #ifndef QT_OPENGL_ES_2
 		if(!ctx->isOpenGLES())
 		{
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+			QOpenGLFunctions_1_0* gl10= QOpenGLVersionFunctionsFactory::get<QOpenGLFunctions_1_0>(ctx);
+#else
 			QOpenGLFunctions_1_0* gl10 = ctx->versionFunctions<QOpenGLFunctions_1_0>();
+#endif
 			if(Q_LIKELY(gl10))
 			{
 				//use DrawBuffer instead of DrawBuffers
@@ -3799,7 +3806,7 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	GL(shader->setUniformValue(shaderVars.diffuseLight, light.diffuse[0], light.diffuse[1], light.diffuse[2]));
 	GL(shader->setUniformValue(shaderVars.ambientLight, light.ambient[0], light.ambient[1], light.ambient[2]));
 	GL(shader->setUniformValue(shaderVars.tex, 0));
-	GL(shader->setUniformValue(shaderVars.shadowCount, data.shadowCandidates.size()));
+	GL(shader->setUniformValue(shaderVars.shadowCount, static_cast<GLint>(data.shadowCandidates.size())));
 	GL(shader->setUniformValue(shaderVars.shadowData, data.shadowCandidatesData));
 	GL(shader->setUniformValue(shaderVars.sunInfo, static_cast<GLfloat>(data.mTarget[12]), static_cast<GLfloat>(data.mTarget[13]), static_cast<GLfloat>(data.mTarget[14]), static_cast<GLfloat>(sun->getEquatorialRadius())));
 	GL(shader->setUniformValue(shaderVars.skyBrightness, lmgr->getAtmosphereAverageLuminance()));
@@ -4179,7 +4186,11 @@ bool Planet::ensureObjLoaded()
 	{
 		qDebug()<<"Queueing aysnc load of OBJ model for"<<englishName;
 		//create the async OBJ model loader
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		objModelLoader = new QFuture<PlanetOBJModel*>(QtConcurrent::run(&Planet::loadObjModel,this));
+#else
 		objModelLoader = new QFuture<PlanetOBJModel*>(QtConcurrent::run(this,&Planet::loadObjModel));
+#endif
 	}
 
 	if(objModelLoader)

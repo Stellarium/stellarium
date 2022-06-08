@@ -34,6 +34,7 @@
 #include <QTextStream>
 #include <QDebug>
 #include <QFontMetrics>
+#include <QIODevice>
 
 const QString Constellation::CONSTELLATION_TYPE = QStringLiteral("Constellation");
 

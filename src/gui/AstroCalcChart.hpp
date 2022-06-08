@@ -24,7 +24,10 @@
 #include <QSplineSeries>
 #include <QValueAxis>
 #include <QDateTimeAxis>
-//using namespace QtCharts;
+
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+using namespace QtCharts;
+#endif
 
 //! @class AstroCalcChart
 //! This class extends QChart and encapsulates data for the Altitude vs. Time and the other line Charts in AstroCalcDialog.
@@ -52,7 +55,7 @@
 //! @note We are using QDateTime here. Currently we have no handling for years before 1AD. Qt has no year zero, we have it. Qt time scaling may also show use pf Proleptic Gregorian calendars.
 //! We must expect to see a few weird dates before 1AD or even before 1582.
 //!
-class AstroCalcChart : public QtCharts::QChart
+class AstroCalcChart : public QChart
 {
 	Q_OBJECT
 
@@ -132,14 +135,14 @@ private:
 	//! @arg strictMin: The altVsTime plot may require strict minimum setting without buffer. Use false (default) for other plots.
 	void bufferYrange(Series series, double *min, double *max, bool strictMin=false);
 
-	QtCharts::QDateTimeAxis *xAxis; // running along bottom
-	QtCharts::QValueAxis *yAxis; // running on the left side
-	QtCharts::QValueAxis *yAxisR; // running on the right side for some charts only
+	QDateTimeAxis *xAxis; // running along bottom
+	QValueAxis *yAxis; // running on the left side
+	QValueAxis *yAxisR; // running on the right side for some charts only
 	qreal yMin, yMax; // store range of Y values
 	qreal yMinR, yMaxR; // store range of Y values for right axis
 
 	//! The QMap holds enums and series for principally existing graphs. These can be made active by show(key)
-	QMap<AstroCalcChart::Series, QtCharts::QLineSeries*> map;
+	QMap<AstroCalcChart::Series, QLineSeries*> map;
 	//! A simple map for line properties.
 	static const QMap<AstroCalcChart::Series, QPen> penMap;
 };

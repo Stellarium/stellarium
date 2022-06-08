@@ -63,7 +63,9 @@
 #include <QStringListModel>
 
 #include <QtCharts/QtCharts>
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 using namespace QtCharts;
+#endif
 
 #include "AstroCalcDialog.hpp"
 #include "AstroCalcExtraEphemerisDialog.hpp"
@@ -596,7 +598,7 @@ void AstroCalcDialog::populateToolTips()
 	ui->allowedSeparationLabel->setToolTip(QString("<p>%1</p>").arg(q_("This is a tolerance for the angular distance for conjunctions and oppositions from 0 and 180 degrees respectively.")));
 }
 
-void AstroCalcDialog::saveGraph(QtCharts::QChartView *graph)
+void AstroCalcDialog::saveGraph(QChartView *graph)
 {
 	QString dir = StelFileMgr::getScreenshotDir();
 	if (dir.isEmpty())
@@ -4211,7 +4213,11 @@ void AstroCalcDialog::generateTransits()
 							if (saveTopocentric && altitudeContact1 < 0.)
 								{
 									treeItem->setText(TransitContact1, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JD1)));
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+									treeItem->setForeground(TransitContact1, Qt::gray);
+#else
 									treeItem->setTextColor(TransitContact1, Qt::gray);
+#endif
 								}
 							else
 								treeItem->setText(TransitContact1, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD1)));
@@ -4225,7 +4231,11 @@ void AstroCalcDialog::generateTransits()
 						else if (saveTopocentric && altitudeContact2 < 0.)
 						{
 							treeItem->setText(TransitContact2, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JD2)));
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+							treeItem->setForeground(TransitContact2, Qt::gray);
+#else
 							treeItem->setTextColor(TransitContact2, Qt::gray);
+#endif
 						}
 						else
 							treeItem->setText(TransitContact2, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD2)));
@@ -4236,7 +4246,11 @@ void AstroCalcDialog::generateTransits()
 							if (saveTopocentric && altitudeMidtransit < 0.)
 								{
 									treeItem->setText(TransitMid, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JDMid)));
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+									treeItem->setForeground(TransitMid, Qt::gray);
+#else
 									treeItem->setTextColor(TransitMid, Qt::gray);
+#endif
 								}
 							else
 								treeItem->setText(TransitMid, QString("%1").arg(localeMgr->getPrintableTimeLocal(JDMid)));
@@ -4255,7 +4269,11 @@ void AstroCalcDialog::generateTransits()
 							separationStr = StelUtils::radToDmsStr(elongation, true);
 						treeItem->setText(TransitSeparation, separationStr);
 						if ((saveTopocentric && altitudeMidtransit < 0.) || transitMagnitude < 0.) 
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+							treeItem->setForeground(TransitSeparation, Qt::gray);
+#else
 							treeItem->setTextColor(TransitSeparation, Qt::gray);
+#endif
 						treeItem->setData(TransitSeparation, Qt::UserRole, elongation);
 						treeItem->setToolTip(TransitSeparation, q_("Minimum angular distance of planet to Sun's center"));
 						if (transitData.ce <= 0.)
@@ -4263,7 +4281,11 @@ void AstroCalcDialog::generateTransits()
 						else if (saveTopocentric && altitudeContact3 < 0.)
 						{
 							treeItem->setText(TransitContact3, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JD3)));
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+							treeItem->setForeground(TransitContact3, Qt::gray);
+#else
 							treeItem->setTextColor(TransitContact3, Qt::gray);
+#endif
 						}
 						else
 							treeItem->setText(TransitContact3, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD3)));
@@ -4274,7 +4296,11 @@ void AstroCalcDialog::generateTransits()
 							if (saveTopocentric && altitudeContact4 < 0.)
 							{
 								treeItem->setText(TransitContact4, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JD4)));
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+								treeItem->setForeground(TransitContact4, Qt::gray);
+#else
 								treeItem->setTextColor(TransitContact4, Qt::gray);
+#endif
 							}
 							else
 								treeItem->setText(TransitContact4, QString("%1").arg(localeMgr->getPrintableTimeLocal(JD4)));
@@ -7077,7 +7103,7 @@ void AstroCalcDialog::updateTabBarListWidgetWidth()
 	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
 	QFont font;
 	font.setPixelSize(14);
-	font.setWeight(75);
+	font.setWeight(QFont::Thin);
 	QFontMetrics fontMetrics(font);
 
 	int iconSize = ui->stackListWidget->iconSize().width();
@@ -8460,8 +8486,11 @@ void AstroCalcDialog::saveTableAsCSV(const QString &fileName, QTreeWidget* tWidg
 	}
 
 	QTextStream tableData(&table);
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	tableData.setEncoding(QStringConverter::Utf8);
+#else
 	tableData.setCodec("UTF-8");
-
+#endif
 	for (int i = 0; i < columns; i++)
 	{
 		QString h = headers.at(i).trimmed();

@@ -38,22 +38,22 @@ AstroCalcChart::AstroCalcChart(QSet<Series> which) : QChart(), yAxisR(Q_NULLPTR)
 	{
 		// To avoid "spline tremor" we need line series for azimuths (0/360° rollover) and magnitudes (in case of shadow transits)
 		if (QList<Series>({CurrentTime, TransitTime, AzVsTime, RightAscension1, RightAscension2, Magnitude1, Magnitude2}).contains(s))
-			map.insert(s, new QtCharts::QLineSeries(this));
+			map.insert(s, new QLineSeries(this));
 		else
-			map.insert(s, new QtCharts::QSplineSeries(this));
+			map.insert(s, new QSplineSeries(this));
 	// map.value(s)->setPointsVisible(true); // useful for debugging only.
 	}
 
 	setBackgroundBrush(QBrush(QColor(86, 87, 90)));
 	AstroCalcChart::retranslate();
 
-	xAxis=new QtCharts::QDateTimeAxis(this);
-	yAxis=new QtCharts::QValueAxis(this);
+	xAxis=new QDateTimeAxis(this);
+	yAxis=new QValueAxis(this);
 	if (QSet<AstroCalcChart::Series>({AngularSize2, Declination2,          Distance2,
 					  Elongation2,  HeliocentricDistance2, Magnitude2,
 					  PhaseAngle2,  Phase2,                RightAscension2, TransitAltitude2,
 					  pcDistanceDeg}).intersect(which).count())
-		yAxisR=new QtCharts::QValueAxis(this);
+		yAxisR=new QValueAxis(this);
 	if (QSet<AstroCalcChart::Series>({pcDistanceAU, pcDistanceDeg, MonthlyElevation,
 					 AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1}).intersect(which).count())
 	{
@@ -246,7 +246,7 @@ void AstroCalcChart::showToolTip(const QPointF &point, bool show)
 {
 	if (show)
 	{
-		QtCharts::QLineSeries *series=dynamic_cast<QtCharts::QLineSeries *>(sender());
+		QLineSeries *series=dynamic_cast<QLineSeries *>(sender());
 		AstroCalcChart::Series seriesCode=map.key(series);
 		QString units("°");
 		QDateTime date=QDateTime::fromMSecsSinceEpoch(qint64(point.x()), Qt::UTC);
@@ -319,7 +319,7 @@ QPair<QDateTime, QDateTime> AstroCalcChart::findXRange(const double JD, const Se
 			break;
 	}
 	//qDebug() << "findXRange(): Date Range set for series " << series << ":" << startDate << " to " << endDate;
-	return QPair(startDate, endDate);
+	return QPair<QDateTime, QDateTime>(startDate, endDate);
 }
 
 QPair<double, double> AstroCalcChart::findYRange(const Series series) const
@@ -511,7 +511,7 @@ void AstroCalcChart::setupAxes(const double jd, const int periods, const QString
 		font.setBold(false);
 		yAxisR->setTitleFont(font);
 	}
-	const QList<QtCharts::QAbstractSeries *> ser=series(); // currently shown series. These may be fewer than the series principally enabled in our map!
+	const QList<QAbstractSeries *> ser=series(); // currently shown series. These may be fewer than the series principally enabled in our map!
 
 	for (Series s: {AltVsTime, CurrentTime, TransitTime, SunElevation, CivilTwilight, NauticalTwilight, AstroTwilight, Moon, AzVsTime, MonthlyElevation,
 	     AngularSize1, Declination1, Distance1, Elongation1, HeliocentricDistance1, Magnitude1, PhaseAngle1, Phase1, RightAscension1, TransitAltitude1,
