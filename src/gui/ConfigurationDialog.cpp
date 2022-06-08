@@ -61,7 +61,11 @@
 #include <QFontDialog>
 #include <QComboBox>
 #include <QDir>
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#include <QWindow>
+#else
 #include <QDesktopWidget>
+#endif
 #include <QImageWriter>
 #include <QScreen>
 
@@ -1209,7 +1213,13 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("main/screenshot_custom_width",			propMgr->getStelPropertyValue("MainView.customScreenshotWidth").toInt());
 	conf->setValue("main/screenshot_custom_height",			propMgr->getStelPropertyValue("MainView.customScreenshotHeight").toInt());
 
+	QWidget& mainWindow = StelMainView::getInstance();
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	QScreen *mainScreen = mainWindow.windowHandle()->screen();
+	int screenNum=qApp->screens().indexOf(mainScreen);
+#else
 	int screenNum = qApp->desktop()->screenNumber(&StelMainView::getInstance());
+#endif
 	conf->setValue("video/screen_number", screenNum);
 
 	// full screen and window size
@@ -1218,7 +1228,6 @@ void ConfigurationDialog::saveAllSettings()
 	{
 		QRect screenGeom = QGuiApplication::screens().at(screenNum)->geometry();
 
-		QWidget& mainWindow = StelMainView::getInstance();
 		conf->setValue("video/screen_w", mainWindow.size().width());
 		conf->setValue("video/screen_h", mainWindow.size().height());
 		conf->setValue("video/screen_x", mainWindow.x() - screenGeom.x());
@@ -1824,7 +1833,7 @@ void ConfigurationDialog::updateTabBarListWidgetWidth()
 	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
 	QFont font;
 	font.setPixelSize(14);
-	font.setWeight(75);
+	font.setWeight(QFont::Thin);
 	QFontMetrics fontMetrics(font);
 
 	int iconSize = ui->stackListWidget->iconSize().width();
