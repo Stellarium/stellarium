@@ -218,7 +218,11 @@ void TelescopeConfigurationDialog::initConfigurationDialog()
 	QStringList* plist = listSerialPorts();
 	ui->comboSerialPort->clear();
 	ui->comboSerialPort->addItems(*plist);
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	ui->comboSerialPort->textActivated(plist->value(0));
+#else
 	ui->comboSerialPort->activated(plist->value(0));
+#endif
 	ui->comboSerialPort->setEditText(plist->value(0));
 	delete (plist);
 
@@ -311,7 +315,11 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 			ui->comboBoxDeviceModel->setCurrentIndex(index);
 
 		// Initialize the serial port value
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		ui->comboSerialPort->textActivated(serialPortName);
+#else
 		ui->comboSerialPort->activated(serialPortName);
+#endif
 		ui->comboSerialPort->setEditText(serialPortName);
 	}
 	else if (connectionType == ConnectionRemote)
@@ -386,7 +394,11 @@ void TelescopeConfigurationDialog::toggleTypeLocal(bool isChecked)
 		// Re-initialize values that may have been changed
 		ui->comboBoxDeviceModel->setCurrentIndex(0);
 		QStringList* plist = listSerialPorts();
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		ui->comboSerialPort->textActivated(plist->value(0));
+#else
 		ui->comboSerialPort->activated(plist->value(0));
+#endif
 		ui->comboSerialPort->setEditText(plist->value(0));
 		delete (plist);
 		ui->lineEditHostName->setText("localhost");

@@ -39,7 +39,7 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 	#endif
 {
 #ifdef Q_OS_WIN
-	handle = CreateFile(serial_device, GENERIC_READ|GENERIC_WRITE, 0, Q_NULLPTR, OPEN_EXISTING, 0, Q_NULLPTR);
+	handle = CreateFile(LPCWSTR(serial_device), GENERIC_READ|GENERIC_WRITE, 0, Q_NULLPTR, OPEN_EXISTING, 0, Q_NULLPTR);
 	if (handle == INVALID_HANDLE_VALUE)
 	{
 		*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
@@ -70,7 +70,11 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 				DCB dcb;
 				memset(&dcb, 0, sizeof(dcb));
 				dcb.DCBlength = sizeof(dcb);
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+				if (!BuildCommDCB(LPCWSTR("9600,n,8,1"), &dcb))
+#else
 				if (!BuildCommDCB("9600,n,8,1", &dcb))
+#endif
 				{
 					*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "
 							      "BuildCommDCB() failed: " << GetLastError() << StelUtils::getEndLineChar();
