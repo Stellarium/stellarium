@@ -50,7 +50,7 @@ public:
 
 static QString getExt(const QString& format)
 {
-	for (auto ext : format.split(' '))
+	for (auto &ext : format.split(' '))
 	{
 		if (ext == "jpeg") return "jpg";
 		if (ext == "png") return "png";
@@ -83,7 +83,7 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 	QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	connect(networkReply, &QNetworkReply::finished, this, [&, networkReply] {
 		QByteArray data = networkReply->readAll();
-		for (QString line : data.split('\n'))
+		for (const QString line : data.split('\n'))
 		{
 			if (line.startsWith("#")) continue;
 			QString key = line.section("=", 0, 0).trimmed();
