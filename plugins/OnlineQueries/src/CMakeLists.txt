@@ -26,13 +26,13 @@ SET(ONLINEQUERIES_UIS
 QT_WRAP_UI(ONLINEQUERIES_UIS_H ${ONLINEQUERIES_UIS})
 
 IF(ENABLE_QTWEBENGINE)
-    FIND_PACKAGE(Qt${QT_VERSION_MAJOR}WebEngine QUIET)
-    FIND_PACKAGE(Qt${QT_VERSION_MAJOR}WebEngineWidgets QUIET)
+    FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS WebEngine QUIET)
+    FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS WebEngineWidgets QUIET)
     IF(Qt${QT_VERSION_MAJOR}WebEngine_FOUND AND Qt${QT_VERSION_MAJOR}WebEngineWidgets_FOUND)
         ADD_DEFINITIONS(-DWITH_QTWEBENGINE)
         SET(QTWEBENGINE_LIBS Qt${QT_VERSION_MAJOR}::WebEngine Qt${QT_VERSION_MAJOR}::WebEngineWidgets)
     ELSE(Qt${QT_VERSION_MAJOR}WebEngine_FOUND AND Qt${QT_VERSION_MAJOR}WebEngineWidgets_FOUND)
-        MESSAGE(WARNING "Qt${QT_VERSION_MAJOR}WebEngine and/or Qt${QT_VERSION_MAJOR}WebEngineWidgets not found. \
+        MESSAGE(WARNING "Qt${QT_VERSION_MAJOR}::WebEngine and/or Qt${QT_VERSION_MAJOR}::WebEngineWidgets not found. \
                          If these packages exist for your platform, install and rerun. \
                          Else the program will call the system web browser where required.")
     ENDIF(Qt${QT_VERSION_MAJOR}WebEngine_FOUND AND Qt${QT_VERSION_MAJOR}WebEngineWidgets_FOUND)
