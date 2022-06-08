@@ -1105,11 +1105,13 @@ void MpcImportWindow::loadBookmarksGroup(QVariantMap source, Bookmarks & bookmar
 	if (source.isEmpty())
 		return;
 
-	for (auto title : source.keys())
+	QMapIterator<QString, QVariant> it(source);
+	while (it.hasNext())
 	{
-		QString url = source.value(title).toString();
+		it.next();
+		QString url = it.value().toString();
 		if (!url.isEmpty())
-			bookmarkGroup.insert(title, url);
+			bookmarkGroup.insert(it.key(), url);
 	}
 }
 
@@ -1167,8 +1169,10 @@ void MpcImportWindow::saveBookmarks()
 
 void MpcImportWindow::saveBookmarksGroup(Bookmarks & bookmarkGroup, QVariantMap & output)
 {
-	for (auto title : bookmarkGroup.keys())
+	QHashIterator<QString, QString>it(bookmarkGroup);
+	while (it.hasNext())
 	{
-		output.insert(title, bookmarkGroup.value(title));
+		it.next();
+		output.insert(it.key(), it.value());
 	}
 }
