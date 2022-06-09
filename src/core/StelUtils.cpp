@@ -334,13 +334,7 @@ QString radToDmsStrAdapt(const double angle, const bool useD)
 	os << (sign?'+':'-') << d << degsign;
 	if (std::fabs(s*100-static_cast<int>(s)*100)>=1)
 	{
-		os << m << '\'';
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-		os.setRealNumberNotation(QTextStream::FixedNotation);
-#else
-		os << fixed ;
-#endif
-		os << qSetRealNumberPrecision(2) << qSetFieldWidth(5) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
+		os << m << '\'' << Qt::fixed << qSetRealNumberPrecision(2) << qSetFieldWidth(5) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
 	}
 	else if (static_cast<int>(s)!=0)
 	{
@@ -382,13 +376,7 @@ QString radToDmsPStr(const double angle, const int precision, const bool useD)
 	int width = 2;
 	if (precision>0)
 		width = 3 + precision;
-	os << qSetRealNumberPrecision(precision);
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-	os.setRealNumberNotation(QTextStream::FixedNotation);
-#else
-	os << fixed;
-#endif
-	os << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
+	os << qSetRealNumberPrecision(precision) << Qt::fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
 
 	return str;
 }
@@ -920,7 +908,7 @@ QString localeDateString(const int year, const int month, const int day, const i
 	QDate test(year, month, day);
 
 	// try to avoid QDate's non-astronomical time here, don't do BCE or year 0.
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
 	if (year > 0 && test.isValid() && !test.toString(QLocale().dateFormat(QLocale::ShortFormat)).isEmpty())
 	{
 		return test.toString(QLocale().dateFormat(QLocale::ShortFormat));

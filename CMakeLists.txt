@@ -23,6 +23,9 @@ PROJECT(Stellarium C CXX)
 ########### Detect Qt version
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
 
+# Activate this to error on all things deprecated in 5.15
+#add_compile_definitions("QT_DISABLE_DEPRECATED_BEFORE=0x050F00")
+
 # If Qt6, set series number to 1.
 IF(${QT_VERSION_MAJOR} EQUAL "6")
      SET(STELLARIUM_MAJOR 1)

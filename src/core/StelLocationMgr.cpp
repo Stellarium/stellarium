@@ -277,7 +277,7 @@ NMEALookupHelper::NMEALookupHelper(QObject *parent)
 			qDebug() << "  VendorID:"       << pi.vendorIdentifier();
 			qDebug() << "  ProductID:"      << pi.productIdentifier();
 			qDebug() << "  SerialNumber:"   << pi.serialNumber();
-#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION<QT_VERSION_CHECK(5,14,0))
 			qDebug() << "  Busy:"           << pi.isBusy();
 #endif
 			qDebug() << "  Null:"           << pi.isNull();

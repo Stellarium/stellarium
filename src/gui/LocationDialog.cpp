@@ -140,7 +140,11 @@ void LocationDialog::createDialogContent()
 	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));
 	connect(ui->deleteLocationFromListPushButton, SIGNAL(clicked()), this, SLOT(deleteCurrentLocationFromList()));
 	connect(ui->resetListPushButton, SIGNAL(clicked()), this, SLOT(resetLocationList()));
+#if (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
+	connect(ui->regionNameComboBox, SIGNAL(textActivated(const QString &)), this, SLOT(filterSitesByRegion()));
+#else
 	connect(ui->regionNameComboBox, SIGNAL(activated(const QString &)), this, SLOT(filterSitesByRegion()));
+#endif
 
 	StelCore* core = StelApp::getInstance().getCore();
 	const StelLocation& currentLocation = core->getCurrentLocation();

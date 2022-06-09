@@ -4213,7 +4213,7 @@ void AstroCalcDialog::generateTransits()
 							if (saveTopocentric && altitudeContact1 < 0.)
 								{
 									treeItem->setText(TransitContact1, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JD1)));
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 									treeItem->setForeground(TransitContact1, Qt::gray);
 #else
 									treeItem->setTextColor(TransitContact1, Qt::gray);
@@ -4231,7 +4231,7 @@ void AstroCalcDialog::generateTransits()
 						else if (saveTopocentric && altitudeContact2 < 0.)
 						{
 							treeItem->setText(TransitContact2, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JD2)));
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 							treeItem->setForeground(TransitContact2, Qt::gray);
 #else
 							treeItem->setTextColor(TransitContact2, Qt::gray);
@@ -4246,7 +4246,7 @@ void AstroCalcDialog::generateTransits()
 							if (saveTopocentric && altitudeMidtransit < 0.)
 								{
 									treeItem->setText(TransitMid, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JDMid)));
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 									treeItem->setForeground(TransitMid, Qt::gray);
 #else
 									treeItem->setTextColor(TransitMid, Qt::gray);
@@ -4269,7 +4269,7 @@ void AstroCalcDialog::generateTransits()
 							separationStr = StelUtils::radToDmsStr(elongation, true);
 						treeItem->setText(TransitSeparation, separationStr);
 						if ((saveTopocentric && altitudeMidtransit < 0.) || transitMagnitude < 0.) 
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 							treeItem->setForeground(TransitSeparation, Qt::gray);
 #else
 							treeItem->setTextColor(TransitSeparation, Qt::gray);
@@ -4281,7 +4281,7 @@ void AstroCalcDialog::generateTransits()
 						else if (saveTopocentric && altitudeContact3 < 0.)
 						{
 							treeItem->setText(TransitContact3, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JD3)));
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 							treeItem->setForeground(TransitContact3, Qt::gray);
 #else
 							treeItem->setTextColor(TransitContact3, Qt::gray);
@@ -4296,7 +4296,7 @@ void AstroCalcDialog::generateTransits()
 							if (saveTopocentric && altitudeContact4 < 0.)
 							{
 								treeItem->setText(TransitContact4, QString("(%1)").arg(localeMgr->getPrintableTimeLocal(JD4)));
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 								treeItem->setForeground(TransitContact4, Qt::gray);
 #else
 								treeItem->setTextColor(TransitContact4, Qt::gray);
