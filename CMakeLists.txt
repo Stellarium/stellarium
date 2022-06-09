@@ -19,9 +19,18 @@ SET(CMAKE_WARN_DEPRECATED 1)
 SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 
 ########### Project name ###########
-PROJECT(Stellarium)
+PROJECT(Stellarium C CXX)
+########### Detect Qt version
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
+
+# If Qt6, set series number to 1.
+IF(${QT_VERSION_MAJOR} EQUAL "6")
+     SET(STELLARIUM_MAJOR 1)
+ELSE()
+     SET(STELLARIUM_MAJOR 0)
+ENDIF()
+
 # Use integer versions instead of strings for easier handling if required
-SET(STELLARIUM_MAJOR 0)
 SET(STELLARIUM_MINOR 22)
 SET(STELLARIUM_PATCH 2)
 ADD_DEFINITIONS(
@@ -243,7 +252,7 @@ SET(CMAKE_CXX_EXTENSIONS OFF)
 # NOTE: C_STANDARD 17 and 23 values added in CMake 3.21
 # https://gitlab.kitware.com/cmake/cmake/-/issues/22366
 # Ubuntu 18.04 have GCC 7.5 - so, C11 only
-SET(CMAKE_C_STANDARD 17)
+SET(CMAKE_C_STANDARD 11)
 SET(CMAKE_C_STANDARD_REQUIRED ON)
 SET(CMAKE_C_EXTENSIONS OFF)
 
@@ -321,9 +330,6 @@ ENDIF()
 #SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden -ffunction-sections -flto")
 #SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -ffunction-sections -flto")
 #SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--gc-sections -flto -ffunction-sections -fuse-linker-plugin")
-
-########### Detect Qt version
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
 
 ########### Others ###########
 # Activate translation
