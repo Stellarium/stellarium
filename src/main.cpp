@@ -359,7 +359,7 @@ int main(int argc, char **argv)
 	// Details: https://sourceforge.net/p/stellarium/discussion/278769/thread/810a1e5c/
 	QString baseFont = confSettings->value("gui/base_font_name", "Verdana").toString();
 	QFont tmpFont(baseFont);
-	#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 	tmpFont.setStyleHint(QFont::AnyStyle, QFont::PreferAntialias);
 	#else
 	tmpFont.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);

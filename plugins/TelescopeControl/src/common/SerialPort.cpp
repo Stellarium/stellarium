@@ -39,7 +39,11 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 	#endif
 {
 #ifdef Q_OS_WIN
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	handle = CreateFile(LPCWSTR(serial_device), GENERIC_READ|GENERIC_WRITE, 0, Q_NULLPTR, OPEN_EXISTING, 0, Q_NULLPTR);
+#else
+	handle = CreateFile(serial_device, GENERIC_READ|GENERIC_WRITE, 0, Q_NULLPTR, OPEN_EXISTING, 0, Q_NULLPTR);
+#endif
 	if (handle == INVALID_HANDLE_VALUE)
 	{
 		*log_file << Now() << "SerialPort::SerialPort(" << serial_device << "): "

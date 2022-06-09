@@ -92,7 +92,7 @@ void ShortcutsDialog::drawCollisions()
 void ShortcutsDialog::resetCollisions()
 {
 	QBrush brush =
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 		ui->shortcutsTreeView->palette().windowText();
 #else
 		ui->shortcutsTreeView->palette().brush(QPalette::Foreground);

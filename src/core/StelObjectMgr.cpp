@@ -719,11 +719,11 @@ QStringList StelObjectMgr::getExtraInfoStrings(const StelObject::InfoStringGroup
 
 void StelObjectMgr::removeExtraInfoStrings(const StelObject::InfoStringGroup& flags)
 {
-	QMultiMap<StelObject::InfoStringGroup, QString>::const_iterator i = extraInfoStrings.constBegin();
-	while (i != extraInfoStrings.constEnd())
+	QMutableMapIterator<StelObject::InfoStringGroup, QString> i(extraInfoStrings);
+	while (i.hasNext())
 	{
+		i.next();
 		if (i.key() & flags)
-			extraInfoStrings.erase(i);
-		++i;
+			i.remove();
 	}
 }

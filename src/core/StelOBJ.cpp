@@ -150,7 +150,7 @@ bool StelOBJ::parseString(const ParseParams &params, QString &out, int paramsSta
 		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 	out = params.at(paramsStart);
 #else
 	out = params.at(paramsStart).toString();
@@ -637,7 +637,7 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 					QStringList list;
 					for(int i = 1; i<splits.size();++i)
 					{
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 						list.append(splits.at(i));
 #else
 						list.append(splits.at(i).toString());
@@ -663,10 +663,14 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 
 bool StelOBJ::Material::parseBool(const QStringList &params, bool &out)
 {
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
+	ParseParams pp;
+#else
 	ParseParams pp(params.size());
+#endif
 	for(int i = 0; i< params.size();++i)
 	{
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 		pp[i] = params.at(i);
 #else
 		pp[i] = QStringRef(&params.at(i));
@@ -677,10 +681,14 @@ bool StelOBJ::Material::parseBool(const QStringList &params, bool &out)
 
 bool StelOBJ::Material::parseFloat(const QStringList &params, float &out)
 {
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
+	ParseParams pp;
+#else
 	ParseParams pp(params.size());
+#endif
 	for(int i = 0; i< params.size();++i)
 	{
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 		pp[i] = params.at(i);
 #else
 		pp[i] = QStringRef(&params.at(i));
@@ -691,10 +699,14 @@ bool StelOBJ::Material::parseFloat(const QStringList &params, float &out)
 
 bool StelOBJ::Material::parseVec2d(const QStringList &params, Vec2d &out)
 {
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
+	ParseParams pp;
+#else
 	ParseParams pp(params.size());
+#endif
 	for(int i = 0; i< params.size();++i)
 	{
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 		pp[i] = params.at(i);
 #else
 		pp[i] = QStringRef(&params.at(i));

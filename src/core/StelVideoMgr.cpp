@@ -106,7 +106,7 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 	// we test isSeekable() where needed, so only debug log entry. --> And we may use the signal however now during blocking load below!
 	connect(videoObjects[id]->player, SIGNAL(seekableChanged(bool)), this, SLOT(handleSeekableChanged(bool)));
 	#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-	connect(videoObjects[id]->player, SIGNAL(stateChanged(QMediaPlayer::PlaybackState)), this, SLOT(handleStateChanged(QMediaPlayer::PlaybackState)));
+	connect(videoObjects[id]->player, SIGNAL(playbackStateChanged(QMediaPlayer::PlaybackState)), this, SLOT(handleStateChanged(QMediaPlayer::PlaybackState)));
 	#else
 	connect(videoObjects[id]->player, SIGNAL(stateChanged(QMediaPlayer::State)), this, SLOT(handleStateChanged(QMediaPlayer::State)));
 	#endif
