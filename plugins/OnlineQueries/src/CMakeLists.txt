@@ -26,16 +26,20 @@ SET(ONLINEQUERIES_UIS
 QT_WRAP_UI(ONLINEQUERIES_UIS_H ${ONLINEQUERIES_UIS})
 
 IF(ENABLE_QTWEBENGINE)
-    FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS WebEngine QUIET)
+# REQUIRED will indicate missing dependencies and exit with error, QUIET just fails silently and continues.
+    #FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Positioning REQUIRED)
+    #FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS WebChannel REQUIRED)
+    #FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS WebEngineCore REQUIRED)
     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS WebEngineWidgets QUIET)
-    IF(Qt${QT_VERSION_MAJOR}WebEngine_FOUND AND Qt${QT_VERSION_MAJOR}WebEngineWidgets_FOUND)
+    IF(Qt${QT_VERSION_MAJOR}WebEngineWidgets_FOUND)
         ADD_DEFINITIONS(-DWITH_QTWEBENGINE)
-        SET(QTWEBENGINE_LIBS Qt${QT_VERSION_MAJOR}::WebEngine Qt${QT_VERSION_MAJOR}::WebEngineWidgets)
-    ELSE(Qt${QT_VERSION_MAJOR}WebEngine_FOUND AND Qt${QT_VERSION_MAJOR}WebEngineWidgets_FOUND)
-        MESSAGE(WARNING "Qt${QT_VERSION_MAJOR}::WebEngine and/or Qt${QT_VERSION_MAJOR}::WebEngineWidgets not found. \
+        #SET(QTWEBENGINE_LIBS Qt${QT_VERSION_MAJOR}::WebEngine Qt${QT_VERSION_MAJOR}::WebEngineWidgets)
+        SET(QTWEBENGINE_LIBS Qt${QT_VERSION_MAJOR}::WebEngineWidgets)
+    ELSE(Qt${QT_VERSION_MAJOR}WebEngineWidgets_FOUND)
+        MESSAGE(WARNING "Qt${QT_VERSION_MAJOR}::WebEngineWidgets or its dependencies (Positioning, WebChannel, WebEngineCore) not found. \
                          If these packages exist for your platform, install and rerun. \
                          Else the program will call the system web browser where required.")
-    ENDIF(Qt${QT_VERSION_MAJOR}WebEngine_FOUND AND Qt${QT_VERSION_MAJOR}WebEngineWidgets_FOUND)
+    ENDIF(Qt${QT_VERSION_MAJOR}WebEngineWidgets_FOUND)
 ENDIF(ENABLE_QTWEBENGINE)
 
 ################# compiles resources files ############
