@@ -93,7 +93,11 @@ void StelLogger::init(const QString& logFilePath)
 	}
 
 	QProcess lspci;
+	#if (QT_VERSION>=QT_VERSION_CHECK(6, 0, 0))
+	lspci.startCommand("lspci -v", QIODevice::ReadOnly);
+	#else
 	lspci.start("lspci -v", QIODevice::ReadOnly);
+	#endif
 	lspci.waitForFinished(300);
 	const QString pciData(lspci.readAll());
 	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
