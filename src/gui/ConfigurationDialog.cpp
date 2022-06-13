@@ -182,7 +182,7 @@ void ConfigurationDialog::createDialogContent()
 	cb->model()->sort(0);
 	updateCurrentLanguage();
 	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentLanguage()));
-	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectLanguage(const QString&)));
+	connect(cb, SIGNAL(currentIndexChanged(const int)), this, SLOT(selectLanguage(const int)));
 	// Do the same for sky language:
 	cb = ui->skycultureLanguageComboBox;
 	cb->clear();
@@ -190,7 +190,7 @@ void ConfigurationDialog::createDialogContent()
 	cb->model()->sort(0);
 	updateCurrentSkyLanguage();
 	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentSkyLanguage()));
-	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectSkyLanguage(const QString&)));
+	connect(cb, SIGNAL(currentIndexChanged(const int)), this, SLOT(selectSkyLanguage(const int)));
 	#else
 	ui->groupBox_LanguageSettings->hide();
 	#endif
@@ -225,7 +225,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->defaultSelectedInfoRadio, SIGNAL(released()), this, SLOT(setDefaultSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
 	connect(ui->customSelectedInfoRadio, SIGNAL(released()), this, SLOT(setCustomSelectedInfo()));
-	connect(ui->buttonGroupDisplayedFields, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedInfoFromCheckBoxes()));
+	connect(ui->buttonGroupDisplayedFields, SIGNAL(buttonClicked(QAbstractButton *)), this, SLOT(setSelectedInfoFromCheckBoxes()));
 	if (appGui)
 		connect(appGui, SIGNAL(infoStringChanged()), this, SLOT(updateSelectedInfoGui()));
 	
@@ -268,7 +268,7 @@ void ConfigurationDialog::createDialogContent()
 		idx = ui->dateFormatsComboBox->findData(QVariant("system_default"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->dateFormatsComboBox->setCurrentIndex(idx);
-	connect(ui->dateFormatsComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(setDateFormat()));
+	connect(ui->dateFormatsComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(setDateFormat()));
 
 	// Display formats of time
 	populateTimeFormatsList();
@@ -279,7 +279,7 @@ void ConfigurationDialog::createDialogContent()
 		idx = ui->timeFormatsComboBox->findData(QVariant("system_default"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->timeFormatsComboBox->setCurrentIndex(idx);
-	connect(ui->timeFormatsComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(setTimeFormat()));
+	connect(ui->timeFormatsComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(setTimeFormat()));
 	if (StelApp::getInstance().getSettings()->value("gui/flag_time_jd", false).toBool())
 		ui->jdRadioButton->setChecked(true);
 	else
@@ -366,7 +366,7 @@ void ConfigurationDialog::createDialogContent()
 
 	// Dithering
 	populateDitherList();
-	connect(ui->ditheringComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(setDitherFormat()));
+	connect(ui->ditheringComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(setDitherFormat()));
 
 	// General Option Save
 	connect(ui->saveViewDirAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewDirSettings()));
@@ -479,15 +479,17 @@ void ConfigurationDialog::updateCurrentSkyLanguage()
 		cb->setCurrentIndex(lt);
 }
 
-void ConfigurationDialog::selectLanguage(const QString& langName)
+void ConfigurationDialog::selectLanguage(const int id)
 {
+	const QString &langName=static_cast<QComboBox*>(sender())->itemText(id);
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
 	StelMainView::getInstance().initTitleI18n();
 }
 
-void ConfigurationDialog::selectSkyLanguage(const QString& langName)
+void ConfigurationDialog::selectSkyLanguage(const int id)
 {
+	const QString &langName=static_cast<QComboBox*>(sender())->itemText(id);
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
 }

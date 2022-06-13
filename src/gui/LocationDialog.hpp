@@ -111,7 +111,8 @@ private slots:
 	void setLocationFromList(const QModelIndex& index);
 	
 	//! Called when the planet is manually changed.
-	void moveToAnotherPlanet(const QString& text);
+	//! @param id actually unused. (This is just a connection requirement)
+	void moveToAnotherPlanet();
 
 	//! Called when latitude/longitude/altitude is modified
 	//! The int argument is required by the Altitude spinbox signal connection, but unused.
