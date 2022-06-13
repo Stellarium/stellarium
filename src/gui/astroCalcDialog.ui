@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>766</width>
-    <height>447</height>
+    <width>715</width>
+    <height>430</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -83,15 +83,6 @@
              </color>
             </brush>
            </colorrole>
-           <colorrole role="Window">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>239</red>
-              <green>240</green>
-              <blue>241</blue>
-             </color>
-            </brush>
-           </colorrole>
           </active>
           <inactive>
            <colorrole role="Dark">
@@ -103,15 +94,6 @@
              </color>
             </brush>
            </colorrole>
-           <colorrole role="Window">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>239</red>
-              <green>240</green>
-              <blue>241</blue>
-             </color>
-            </brush>
-           </colorrole>
           </inactive>
           <disabled>
            <colorrole role="Dark">
@@ -120,15 +102,6 @@
               <red>119</red>
               <green>120</green>
               <blue>120</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Window">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>239</red>
-              <green>240</green>
-              <blue>241</blue>
              </color>
             </brush>
            </colorrole>
@@ -1163,6 +1136,9 @@
             <property name="alignment">
              <set>Qt::AlignCenter</set>
             </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item row="3" column="0">
@@ -1172,6 +1148,9 @@
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -1907,6 +1886,9 @@
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
@@ -2892,6 +2874,9 @@
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
