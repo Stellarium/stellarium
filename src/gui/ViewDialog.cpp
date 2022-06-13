@@ -297,10 +297,10 @@ void ViewDialog::createDialogContent()
 	connect(ui->selectAllCatalogs, SIGNAL(clicked()), this, SLOT(selectAllCatalogs()));
 	connect(ui->selectStandardCatalogs, SIGNAL(clicked()), this, SLOT(selectStandardCatalogs()));
 	connect(ui->selectNoneCatalogs, SIGNAL(clicked()), this, SLOT(selectNoneCatalogs()));
-	connect(ui->buttonGroupDisplayedDSOCatalogs, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedCatalogsFromCheckBoxes()));
+	connect(ui->buttonGroupDisplayedDSOCatalogs, SIGNAL(buttonClicked(QAbstractButton *)), this, SLOT(setSelectedCatalogsFromCheckBoxes()));
 	updateSelectedTypesCheckBoxes();
 	connect(nmgr, SIGNAL(typeFiltersChanged(Nebula::TypeGroup)), this, SLOT(updateSelectedTypesCheckBoxes()));
-	connect(ui->buttonGroupDisplayedDSOTypes, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedTypesFromCheckBoxes()));
+	connect(ui->buttonGroupDisplayedDSOTypes, SIGNAL(buttonClicked(QAbstractButton *)), this, SLOT(setSelectedTypesFromCheckBoxes()));
 	connectGroupBox(ui->groupBoxDSOTypeFilters,"actionSet_Nebula_TypeFilterUsage");
 	// DSO Labels section
 	connectGroupBox(ui->groupBoxDSOLabelsAndMarkers, "actionShow_Nebulas");
