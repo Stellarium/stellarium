@@ -1108,7 +1108,11 @@ QStringList StelObject::getExtraInfoStrings(const InfoStringGroup& flags) const
 
 void StelObject::removeExtraInfoStrings(const InfoStringGroup& flags)
 {
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	QMutableMultiMapIterator<InfoStringGroup, QString> i(extraInfoStrings);
+#else
+	QMutableMapIterator<InfoStringGroup, QString> i(extraInfoStrings);
+#endif
 	while (i.hasNext())
 	{
 		i.next();
