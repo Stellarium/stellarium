@@ -806,19 +806,19 @@ void Observability::draw(StelCore* core)
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	float ppx = static_cast<float>(params.devicePixelsPerPixel);
 	int lineSpacing = static_cast<int>(ppx * 1.3f * fontSize);  // between lines
-	int groupSpacing = static_cast<int>(6*fontSize*ppx);  // between daily and yearly results
-	int yLine = static_cast<int>(8*fontSize*ppx + 110*ppx);
-	int xLine = 80;
+//	int groupSpacing = static_cast<int>(6*fontSize*ppx);  // between daily and yearly results
+	int yLine = static_cast<int>(8*fontSize*ppx + 50*ppx);
+	int xLine = 80*ppx;
 
-	if (show_Today) 
-	{
-		//renderer->drawText(TextParams(xLine, yLine,q_("TODAY:")));
-		painter.drawText(xLine, yLine, msgToday);
-		painter.drawText(xLine + fontSize, yLine - lineSpacing, RS2);
-		painter.drawText(xLine + fontSize, yLine - lineSpacing*2, RS1);
-		painter.drawText(xLine + fontSize, yLine - lineSpacing*3, Cul);
-		yLine -= groupSpacing;
-	}
+//	if (show_Today)
+//	{
+//		//renderer->drawText(TextParams(xLine, yLine,q_("TODAY:")));
+//		painter.drawText(xLine, yLine, msgToday);
+//		painter.drawText(xLine + fontSize, yLine - lineSpacing, RS2);
+//		painter.drawText(xLine + fontSize, yLine - lineSpacing*2, RS1);
+//		painter.drawText(xLine + fontSize, yLine - lineSpacing*3, Cul);
+//		yLine -= groupSpacing;
+//	}
 	
 	if ((isMoon && show_FullMoon) || (!isSun && !isMoon && show_Year)) 
 	{

@@ -29,6 +29,7 @@
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelFader.hpp"
+#include "StelTranslator.hpp"
 
 //! @ingroup exoplanets
 typedef struct
@@ -83,7 +84,7 @@ public:
 	//! Get the type of object
 	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
 	{
-		return "planetary system";
+		return N_("planetary system");
 	}
 
 	virtual QString getID(void) const Q_DECL_OVERRIDE

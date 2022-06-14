@@ -66,7 +66,6 @@ bool  Nebula::designationUsage = false;
 float Nebula::hintsBrightness = 0.f;
 Vec3f Nebula::labelColor = Vec3f(0.4f,0.3f,0.5f);
 QMap<Nebula::NebulaType, Vec3f>Nebula::hintColorMap;
-QMap<Nebula::NebulaType, QString> Nebula::typeStringMap;
 bool Nebula::flagUseTypeFilters = false;
 Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(Nebula::CatNone);
 Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
@@ -80,43 +79,43 @@ double Nebula::maxSizeLimit = 600.0;
 
 const QMap<Nebula::NebulaType, QString> Nebula::typeEnglishStringMap = // Maps type to english name.
 {
-	{ NebGx     , "galaxy" },
-	{ NebAGx    , "active galaxy" },
-	{ NebRGx    , "radio galaxy" },
-	{ NebIGx    , "interacting galaxy" },
-	{ NebQSO    , "quasar" },
-	{ NebCl     , "star cluster" },
-	{ NebOc     , "open star cluster" },
-	{ NebGc     , "globular star cluster" },
-	{ NebSA     , "stellar association" },
-	{ NebSC     , "star cloud" },
-	{ NebN      , "nebula" },
-	{ NebPn     , "planetary nebula" },
-	{ NebDn     , "dark nebula" },
-	{ NebRn     , "reflection nebula" },
-	{ NebBn     , "bipolar nebula" },
-	{ NebEn     , "emission nebula" },
-	{ NebCn     , "cluster associated with nebulosity" },
-	{ NebHII    , "HII region" },
-	{ NebSNR    , "supernova remnant" },
-	{ NebISM    , "interstellar matter" },
-	{ NebEMO    , "emission object" },
-	{ NebBLL    , "BL Lac object" },
-	{ NebBLA    , "blazar" },
-	{ NebMolCld , "molecular cloud" },
-	{ NebYSO    , "young stellar object" },
-	{ NebPossQSO, "possible quasar" },
-	{ NebPossPN , "possible planetary nebula" },
-	{ NebPPN    , "protoplanetary nebula" },
-	{ NebStar   , "star" },
-	{ NebSymbioticStar   , "symbiotic star" },
-	{ NebEmissionLineStar, "emission-line star" },
-	{ NebSNC    , "supernova candidate" },
-	{ NebSNRC   , "supernova remnant candidate" },
-	{ NebGxCl   , "cluster of galaxies" },
-	{ NebPartOfGx, "part of a galaxy" },
-	{ NebRegion , "region of the sky" },
-	{ NebUnknown, "object of unknown nature" }
+	{ NebGx     , N_("galaxy") },
+	{ NebAGx    , N_("active galaxy") },
+	{ NebRGx    , N_("radio galaxy") },
+	{ NebIGx    , N_("interacting galaxy") },
+	{ NebQSO    , N_("quasar") },
+	{ NebCl     , N_("star cluster") },
+	{ NebOc     , N_("open star cluster") },
+	{ NebGc     , N_("globular star cluster") },
+	{ NebSA     , N_("stellar association") },
+	{ NebSC     , N_("star cloud") },
+	{ NebN      , N_("nebula") },
+	{ NebPn     , N_("planetary nebula") },
+	{ NebDn     , N_("dark nebula") },
+	{ NebRn     , N_("reflection nebula") },
+	{ NebBn     , N_("bipolar nebula") },
+	{ NebEn     , N_("emission nebula") },
+	{ NebCn     , N_("cluster associated with nebulosity") },
+	{ NebHII    , N_("HII region") },
+	{ NebSNR    , N_("supernova remnant") },
+	{ NebISM    , N_("interstellar matter") },
+	{ NebEMO    , N_("emission object") },
+	{ NebBLL    , N_("BL Lac object") },
+	{ NebBLA    , N_("blazar") },
+	{ NebMolCld , N_("molecular cloud") },
+	{ NebYSO    , N_("young stellar object") },
+	{ NebPossQSO, N_("possible quasar") },
+	{ NebPossPN , N_("possible planetary nebula") },
+	{ NebPPN    , N_("protoplanetary nebula") },
+	{ NebStar   , N_("star") },
+	{ NebSymbioticStar   , N_("symbiotic star") },
+	{ NebEmissionLineStar, N_("emission-line star") },
+	{ NebSNC    , N_("supernova candidate") },
+	{ NebSNRC   , N_("supernova remnant candidate") },
+	{ NebGxCl   , N_("cluster of galaxies") },
+	{ NebPartOfGx, N_("part of a galaxy") },
+	{ NebRegion , N_("region of the sky") },
+	{ NebUnknown, N_("object of unknown nature") }
 };
 
 Nebula::Nebula()
@@ -1417,49 +1416,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 
 QString Nebula::getTypeString(Nebula::NebulaType nType)
 {
-	return typeStringMap.value(nType, q_("undocumented type"));
-}
-
-void Nebula::buildTypeStringMap()
-{
-	Nebula::typeStringMap = {
-	{ NebGx     , q_("galaxy") },
-	{ NebAGx    , q_("active galaxy") },
-	{ NebRGx    , q_("radio galaxy") },
-	{ NebIGx    , q_("interacting galaxy") },
-	{ NebQSO    , q_("quasar") },
-	{ NebCl     , q_("star cluster") },
-	{ NebOc     , q_("open star cluster") },
-	{ NebGc     , q_("globular star cluster") },
-	{ NebSA     , q_("stellar association") },
-	{ NebSC     , q_("star cloud") },
-	{ NebN      , q_("nebula") },
-	{ NebPn     , q_("planetary nebula") },
-	{ NebDn     , q_("dark nebula") },
-	{ NebRn     , q_("reflection nebula") },
-	{ NebBn     , q_("bipolar nebula") },
-	{ NebEn     , q_("emission nebula") },
-	{ NebCn     , q_("cluster associated with nebulosity") },
-	{ NebHII    , q_("HII region") },
-	{ NebSNR    , q_("supernova remnant") },
-	{ NebISM    , q_("interstellar matter") },
-	{ NebEMO    , q_("emission object") },
-	{ NebBLL    , q_("BL Lac object") },
-	{ NebBLA    , q_("blazar") },
-	{ NebMolCld , q_("molecular cloud") },
-	{ NebYSO    , q_("young stellar object") },
-	{ NebPossQSO, q_("possible quasar") },
-	{ NebPossPN , q_("possible planetary nebula") },
-	{ NebPPN    , q_("protoplanetary nebula") },
-	{ NebStar   , q_("star") },
-	{ NebSymbioticStar   , q_("symbiotic star") },
-	{ NebEmissionLineStar, q_("emission-line star") },
-	{ NebSNC    , q_("supernova candidate") },
-	{ NebSNRC   , q_("supernova remnant candidate") },
-	{ NebGxCl   , q_("cluster of galaxies") },
-	{ NebPartOfGx   , q_("part of a galaxy") },
-	{ NebRegion , q_("region of the sky") },
-	{ NebUnknown, q_("object of unknown nature") }};
+	return q_(typeEnglishStringMap.value(nType, q_("undocumented type")));
 }
 
 Vec3d Nebula::getJ2000EquatorialPos(const StelCore* core) const

@@ -341,9 +341,7 @@ private:
 
 	static Vec3f labelColor;				// The color of labels
 	static QMap<Nebula::NebulaType, Vec3f>hintColorMap;	// map for rapid lookup. Updated by NebulaMgr whenever a color changes.
-	static QMap<Nebula::NebulaType, QString> typeStringMap; // map that keeps type strings for NebulaType. Must be retranslated on language change.
-	static const QMap<Nebula::NebulaType, QString> typeEnglishStringMap;
-	static void buildTypeStringMap();			// (Re-)Fills typeStringMap. Called by NebulaMgr when required.
+	static const QMap<Nebula::NebulaType, QString> typeEnglishStringMap; // map that keeps type strings for NebulaType			// (Re-)Fills typeStringMap. Called by NebulaMgr when required.
 
 	static bool drawHintProportional;     // scale hint with nebula size?
 	static bool surfaceBrightnessUsage;

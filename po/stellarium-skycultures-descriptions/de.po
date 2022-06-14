@@ -10,17 +10,17 @@
 # cardinot <mcardinot@gmail.com>, 2022
 # Georg Zotti <Georg.Zotti@univie.ac.at>, 2022
 # Simon Hoffmann, 2022
-# Latein Lebt, 2022
 # Susanne Hoffmann <service@urania-uhura.de>, 2022
+# Latein Lebt, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-04-15 13:10+0700\n"
+"POT-Creation-Date: 2022-06-02 21:15+0700\n"
 "PO-Revision-Date: 2020-01-06 16:35+0000\n"
-"Last-Translator: Susanne Hoffmann <service@urania-uhura.de>, 2022\n"
+"Last-Translator: Latein Lebt, 2022\n"
 "Language-Team: German (https://www.transifex.com/stellarium/teams/80998/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -477,12 +477,12 @@ msgstr ""
 
 #. type: Content of: <p><h2>
 #: ../../skycultures/anutan/description.en.utf8:45
-#: ../../skycultures/arabic_al-sufi/description.en.utf8:69
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:66
 #: ../../skycultures/arabic_indigenous/description.en.utf8:32
 #: ../../skycultures/aztec/description.en.utf8:61
-#: ../../skycultures/babylonian_seleucid/description.en.utf8:475
+#: ../../skycultures/babylonian_seleucid/description.en.utf8:473
 #: ../../skycultures/chinese_contemporary/description.en.utf8:23
-#: ../../skycultures/chinese_medieval/description.en.utf8:48
+#: ../../skycultures/chinese_medieval/description.en.utf8:49
 #: ../../skycultures/egyptian/description.en.utf8:17
 #: ../../skycultures/greek_farnese/description.en.utf8:302
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:291
@@ -744,6 +744,20 @@ msgid ""
 "star file as secondary names, while names of group of stars were defined "
 "through asterism names and asterism lines files."
 msgstr ""
+"Die Strichfiguren der Sternbilder dieser Himmelskultur stammen von den "
+"Bildern aus Ulugh Begs Manuskript des Buches der Fixsterne. Sie wurden von "
+"Herrn Kutaibaa Akraa entnommen und für Stellarium angepasst <sup><a "
+"href=\"#footnote-5\">[5]</a></sup>. Die Sternnamen-Datei enthält die "
+"Sternnummer im Sternbild als ersten Sternnamen und die Sternbeschreibung in "
+"den Tabellen als Zweitnamen. Zum Beispiel ist der Erstname des Polarsterns "
+"»UMi1«, wobei UMi für Ursa Minor und die »1« für den ersten Stern dieses "
+"Sternbilds steht. Wenn der Stern ausgewählt wird, werden die anderen "
+"Zweitnamen im oberen Bildschirmrand angezeigt. Für den Polarstern wäre dies "
+"»Der Stern am Schwanzende«. Die Sternbildlinien folgen den Sternbildfiguren"
+"  und versuchen die meisten zu einem Sternbild gehörigen Sterne zu erfassen."
+" Für das einheimische arabische Sternenwissen wurden einzelne Sternnamen der"
+" Sterndatei als Zweitnamen hinzugefügt, während Sterngruppennamen über "
+"Sternbildnnamen- und Sternbildlinien-Dateien definiert wurden."
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic_al-sufi/description.en.utf8:63
@@ -754,9 +768,11 @@ msgid ""
 "href=\"#footnote-7\">[7]</a></sup>. The translation was modified in a few "
 "places to agree with Al-Sufi wording."
 msgstr ""
-"Die Übersetzung der Sternnamen vom Arabischen ins Englische stammt von Ernie"
-" Wrights Internetseite <sup><a href=\"#footnote-6\">[6]</a></sup>, die eine "
-"Tran"
+"Die Übersetzung der Sternnamen aus dem Arabischen ins Englische stammt von "
+"Ernie Wrights Internetseite<sup><a href=\"#footnote-6\">[6]</a></sup>, die "
+"aus der Toomer-Übersetzung des Almagest übernommen wurde<sup><a "
+"href=\"#footnote-7\">[7]</a></sup>. Die Übersetzung wurde an einigen Stellen"
+" angepasst, um mit Al-Sufis Wortlaut übereinzustimmen."
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic_al-sufi/description.en.utf8:64
@@ -767,32 +783,8 @@ msgstr ""
 "Die einzige Quelle dieser Himmelskultur ist das Buch der Fixsterne und das "
 "Ziel ist eine gewissenhafte Darstellung des Buchinhaltes zu geben."
 
-#. type: Content of: <h2>
-#: ../../skycultures/arabic_al-sufi/description.en.utf8:66
-#: ../../skycultures/babylonian_mulapin/description.en.utf8:522
-#: ../../skycultures/babylonian_seleucid/description.en.utf8:464
-#: ../../skycultures/egyptian_dendera/description.en.utf8:232
-#: ../../skycultures/greek_almagest/description.en.utf8:496
-#: ../../skycultures/greek_farnese/description.en.utf8:299
-#: ../../skycultures/greek_leidenAratea/description.en.utf8:288
-msgid "Fair Use"
-msgstr "Faire Nutzung"
-
 #. type: Content of: <p>
 #: ../../skycultures/arabic_al-sufi/description.en.utf8:67
-msgid ""
-"This sky culture is provided for free under CC BY-ND 4.0 International "
-"Public License (share-alike, do not change it without consulting the "
-"contributors, and cite the contributors). The author wishes that this work "
-"be cited according to the common rules."
-msgstr ""
-"Diese Himmelskultur wird frei unter der CC-BY-ND 4.0 International Public "
-"License (auf gleiche Weise teilen, nicht ohne Genehmigung der Mitwirkenden "
-"ändern und die Mitwirkenden zitieren). Der Autor wünscht, dass diese Arbeit "
-"nach den üblichen Regeln zitiert wird."
-
-#. type: Content of: <p>
-#: ../../skycultures/arabic_al-sufi/description.en.utf8:70
 msgid ""
 "This sky culture was compiled and added to Stellarium by Khalid Al-Ajaji: "
 "turath.alfalak@gmail.com"
@@ -801,16 +793,16 @@ msgstr ""
 "Khalid Al-Ajaji: turath.alfalak@gmail.com"
 
 #. type: Content of: <h2>
-#: ../../skycultures/arabic_al-sufi/description.en.utf8:72
-#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:151
-#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:77
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:69
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:149
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:75
 #: ../../skycultures/chinese/description.en.utf8:2960
 #: ../../skycultures/sami/description.en.utf8:57
 msgid "Notes"
 msgstr "Anmerkungen"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_al-sufi/description.en.utf8:73
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:70
 msgid ""
 "[1] The Arabs and the Stars, Paul Kunitzsch,The Astronomer Abu'L-Husayn Al-"
 "Sufi And His Book On The Constellations, XI, pg 57. Northampton [England]: "
@@ -821,13 +813,13 @@ msgstr ""
 "Variorum Reprints, 1989."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_al-sufi/description.en.utf8:74
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:71
 msgid "[2] See Al-Sufi description in his book of the 14th star in Auriga."
 msgstr ""
 "[2] siehe as-Sufi, Beschreibung 14ten Sterns in Auriga in seinem Buch."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_al-sufi/description.en.utf8:75
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:72
 msgid ""
 "[3] DESCRIPTIONS DES ETOILES FIXES, traduction littérale avec des notes par "
 "H C F C Schjellerup, St Petersbourg, 1874, pg 26-27."
@@ -836,7 +828,7 @@ msgstr ""
 "H C F C Schjellerup, St Petersbourg, 1874, pg 26-27."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_al-sufi/description.en.utf8:76
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:73
 msgid ""
 "[4] <a "
 "href=\"https://drive.google.com/drive/folders/1s6JXzftwjMQ5rgZoGE3718EtBLBZtjzr?usp=sharing\""
@@ -846,7 +838,7 @@ msgstr ""
 "[4] Book of Fixed Stars: Critical edition with commentary by Khalid AlAjaji"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_al-sufi/description.en.utf8:77
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:74
 msgid ""
 "[5] <a href=\"https://gallica.bnf.fr/ark:/12148/btv1b60006156.r=.langEN\" "
 "class='external text' rel=\"nofollow\">Oulough Beg copy of ʿAbd al-Raḥmān "
@@ -857,7 +849,7 @@ msgstr ""
 "kawākib al-ṯābita, Paris, Bibliothèque nationale de France Ms. Arabe 5036"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_al-sufi/description.en.utf8:78
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:75
 msgid ""
 "[6] <a href=\"http://www.etwright.org/astro/almagest.html#cat\" "
 "class='external text' rel=\"nofollow\">Seeing Ancient Stars, Visualization "
@@ -865,7 +857,7 @@ msgid ""
 msgstr "[6] Seeing Ancient Stars, Visualization of the Almagest Catalog"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_al-sufi/description.en.utf8:79
+#: ../../skycultures/arabic_al-sufi/description.en.utf8:76
 msgid ""
 "[7] Ptolemy’s ALMAGEST, G. J. Toomer, Princeton University Press, 2nd ed., "
 "1998."
@@ -1818,6 +1810,10 @@ msgid ""
 "name is oral tradition in the region of Wadi al-Dawasir in southwestern "
 "Saudi Arabia."
 msgstr ""
+"Ein Sternendreieck, das vor al-Thurayya (Plejaden) aufgeht. Es wird von den "
+"drei Sternen α Ari, α Tri  und β Tri gebildet. Der Ursprung des Namens sind "
+"mündliche Überlieferungen aus der Region Wadi al-Dawasir im Südwesten Saudi-"
+"Arabiens."
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:78
@@ -1836,6 +1832,10 @@ msgid ""
 "for the Orion stars. It is the same as that of ancient Arabs. Some oral "
 "traditions will give the name to only the three stars of Orion belt."
 msgstr ""
+"Al-Jawza ist ein weiblicher Eigenname. Dieses Sternbild zeigt einen "
+"Frauenkörper für die Orionsterne. Es ist das gleiche wie das der alten "
+"Araber. Einige mündliche Überlieferungen bezeichnen mit diesem Namen "
+"lediglich die drei Gürtelsterne des Orion."
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:79
@@ -1880,7 +1880,7 @@ msgstr "al-Ǧuġmah, al-Ǧuġġāmah"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:82
 msgid "The Sip, The Sipper"
-msgstr ""
+msgstr "Das Schlückchen, Der Schlucker"
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:82
@@ -1889,6 +1889,10 @@ msgid ""
 "sip, the sipper) sets. Another version is that they encourage the children "
 "to drink their milk before Venus (The sipper) drinks it."
 msgstr ""
+"Die Beduinen erzählten den Kindern, wenn sie nach Milch fragten, bis zum "
+"Venusuntergang (das Schlückchen, der Schlucker) zu warten. Eine anderer "
+"Version ist, dass die Beduinen die Kinder ermutigten, ihre Milch vor dem "
+"Venusuntergang (der Schlucker) zu trinken."
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:83
@@ -1910,6 +1914,12 @@ msgid ""
 "preceding others, and they will take back their camels late in the evening "
 "when Venus sets."
 msgstr ""
+"Al-Hawdan ist ein Stamm. Jeden Abend einigten sie sich darauf, ihre "
+"nomadische Reise für die Suche nach Weideland für ihre Kamele zu starten, "
+"wenn sie die Venus am Morgen sehen. Jedoch entschieden sie sich immer am "
+"Morgen doch zu bleiben, Eine andere Version ist, dass sie ihre Kamele immer "
+"dann, wenn die Venus vor den anderen aufgeht, zum Weideland führten und spät"
+" abends beim Venusuntergang ihre Kamele zurückbrachten."
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:84
@@ -2535,6 +2545,11 @@ msgid ""
 "edition print by Dr. Muḥammad ibn Nāṣir al-Šiṯrī), Riyadh, Saudi Arabia, "
 "2012, pg. 292.\"."
 msgstr ""
+"Name des Sterns: α Ori, der spezielle Name »Nördliche Klaue der al-Jawza« "
+"taucht in »Ibn Bišir, ʿUṯmān ibn ʿAbd Allah (gest. 1873), ʿInwān al-maǧd fi "
+"tarīḫ Naǧd, Der Titel des Ruhmes in der Geschichte des Nadschd,  (Gedruckte "
+"krititsche arabische Ausgabe von Dr. Muḥammad ibn Nāṣir al-Šiṯrī), Riad, "
+"Saudi-Arabien, 2012, S. 292« auf."
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:130
@@ -2749,13 +2764,13 @@ msgstr "al-Naayem 2"
 #. type: Content of: <h2>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:145
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:71
-#: ../../skycultures/babylonian_mulapin/description.en.utf8:539
+#: ../../skycultures/babylonian_mulapin/description.en.utf8:537
 #: ../../skycultures/belarusian/description.en.utf8:42
 #: ../../skycultures/boorong/description.en.utf8:220
 #: ../../skycultures/chinese/description.en.utf8:2980
 #: ../../skycultures/dakota/description.en.utf8:57
-#: ../../skycultures/egyptian_dendera/description.en.utf8:236
-#: ../../skycultures/greek_almagest/description.en.utf8:505
+#: ../../skycultures/egyptian_dendera/description.en.utf8:235
+#: ../../skycultures/greek_almagest/description.en.utf8:503
 #: ../../skycultures/inuit/description.en.utf8:31
 #: ../../skycultures/khoi-san/description.en.utf8:13
 #: ../../skycultures/lokono/description.en.utf8:377
@@ -2775,24 +2790,8 @@ msgstr "Autoren"
 msgid "Khalid al-Ajaji, turath.alfalak@gmail.com."
 msgstr "Khalid al-Ajaji, turath.alfalak@gmail.com."
 
-#. type: Content of: <h2>
-#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:149
-#: ../../skycultures/arabic_indigenous/description.en.utf8:34
-#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:74
-msgid "License"
-msgstr "Lizenz"
-
 #. type: Content of: <p>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:150
-#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:75
-msgid ""
-"Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)."
-msgstr ""
-"Namensnennung-Nicht kommerziell-Keine Bearbeitungen 4.0 International (CC "
-"BY-NC-ND 4.0)."
-
-#. type: Content of: <p>
-#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:152
 msgid ""
 "[1]: Al-Hamdânîʼs Geographie der Arabischen Halbinsel, David Heinrich "
 "Müller, Leiden : E. J. Brill, 1884, pg. 47."
@@ -2801,7 +2800,7 @@ msgstr ""
 "Müller, Leiden : E. J. Brill, 1884, pg. 47."
 
 #. type: Content of: <p><p>
-#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:153
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:151
 msgid ""
 "[2]: Le Bon, Gustave, La civilisation des Arabes, Paris, Librairie de "
 "Firmin-Didot, 1884, livre premier, pg. 1."
@@ -2810,7 +2809,7 @@ msgstr ""
 "Firmin-Didot, 1884, livre premier, pg. 1."
 
 #. type: Content of: <p><p><p>
-#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:154
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:152
 msgid ""
 "[3]: Al-Ajaji, Khalid, Sharḥ Maʾthūrāt al-Ḫalāwī al-falakiyah, Explanation "
 "of al-Ḫalāwī astronomy poems, Riyadh, Saudi Arabia, 2018."
@@ -2819,7 +2818,7 @@ msgstr ""
 " astronomischen al-Ḫalāwī-Gedichte, Riad, Saudi-Arabien, 2018."
 
 #. type: Content of: <p><p><p><p>
-#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:155
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:153
 msgid ""
 "[4]: Al-Ajaji, Khalid, Sharḥ Qaṣidat al-Qāḍī fi al-anwāʾ wal-nuǧūm, "
 "Explanation of al-Qāḍī poem of anwāʾ and stars, Riyadh, Saudi Arabia, 2013."
@@ -2828,7 +2827,7 @@ msgstr ""
 "Explanation of al-Qāḍī poem of anwāʾ and stars, Riyadh, Saudi Arabia, 2013."
 
 #. type: Content of: <p><p><p><p>
-#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:156
+#: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:154
 msgid ""
 "[5]: Ibn Bišir, ʿUṯmān ibn ʿAbd Allah (died 1873), ʿInwān al-maǧd fi tarīḫ "
 "Naǧd, The title of glory on the history of Najd, (Arabic critical edition "
@@ -2873,6 +2872,21 @@ msgid ""
 "indigenous Arab star names with the respective Ptolemaic stars of the Greek "
 "constellations<sup><a href=\"#footnote-1\">[2]</a></sup>."
 msgstr ""
+"Das Sternenwissen der alten Araber wurde in alten Gedichten und den alten "
+"Abhandlungen der arabischen Sprachwissenschaftler und Lexikographen der "
+"islamischen Zivilisation aufgezeichnet und bewahrt. Viele Bücher wurden über"
+" das Sternnenwissen und anwāʾ [arabisch: الأنواء], dem arabischen Wissen "
+"über die Meteorologie, geschrieben. Die Herausgeber von Ibn Qutaybahs "
+"<em>Kitāb al-Anwāʾ</em> (9. Jhr.) zählen 24 Bücher über dieses Thema, "
+"mehrheitlich zwischen dem frühen 8. Jhr. und 10. Jhr. geschrieben, "
+"auf<sup><a href=\"#footnote-1\">[1]</a></sup>. Der einzige vollständig "
+"erhaltene Text ist der von Ibn Qutaybah. Jedoch haben spätere Gelehrte viele"
+" der früheren Texte zitiert. Einer der bedeutsamsten Werke, welches die "
+"traditionellen arabischen Sternnamen erfasst, ist das <em>Buch der "
+"Fixsterne</em>, geschrieben um 964 n.Chr. von dem bekannten Astronomen al-"
+"Ṣūfī. In diesem Buch identfiziert er die traditionellen arabischen "
+"Sternnamen mit den entsprechenden ptolemäischen Sternen der griechischen "
+"Sternbilder.<sup><a href=\"#footnote-1\">[2]</a></sup>."
 
 #. type: Content of: <h4>
 #: ../../skycultures/arabic_indigenous/description.en.utf8:6
@@ -2980,6 +2994,20 @@ msgid ""
 "name of a woman for Orion stars.  Other asterisms are given names according "
 "to legends and stories."
 msgstr ""
+"Die alten Araber benannten einzelne Sterne, Sternenpaare, Himmelsareale und "
+"besondere Formen von Sterngruppen. Einzelne Sterne wurden nach einer "
+"menschlichen Figur oder einem Wüstentier benannt. Zum Beispiel heißt der "
+"Stern Arktur »al-Simāk al-Rāmiḥ«, das »der Hohe mit dem Speer« bedeutet. "
+"Canopus ist Suhayl, ein männlicher Eigenname. Es gibt auch Sterne die Namen "
+"wie »der Karakal und das Zicklein« tragen. Wenn zwei Sterne ähnlicher "
+"Helligkeit nah beieinander stehen, wurde ihnen ein gemeinsamer Name wie »die"
+" zwei Kälber«, »die zwei Wölfe« und »die zwei Tauben« gegeben. Manchmal "
+"wurde ein Himmelsareal nach einer Tiergruppe benannt. Die hellen Sterne sind"
+" erwachsene Tiere und die schwächeren die Jungtiere wie »die Hyänen und ihre"
+" Jungen« und »die Pferde und die Fohlen«. Besondere Sternformationen "
+"erhielten Namen wie »Skorpion«, »Löwe« und »al-Ǧawzā’«, welcher ein "
+"weiblicher Eigenname für die Orionsterne ist. Andere Asterismen wurden nach "
+"Sagen und Geschichten benannt."
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic_indigenous/description.en.utf8:33
@@ -2987,17 +3015,7 @@ msgid "Khalid al-Ajaji: turath.alfalak@gmail.com"
 msgstr "Khalid al-Ajaji: turath.alfalak@gmail.com"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_indigenous/description.en.utf8:35
-msgid ""
-"Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)."
-" The author wishes that this work be cited according to the common rules."
-msgstr ""
-"Namensnennung–Nicht kommerziell–Keine Bearbeitungen 4.0 International (CC "
-"BY-NC-ND 4.0). Der Autor wünscht, dass seine Arbeit nach den üblichen Regeln"
-" zitiert wird."
-
-#. type: Content of: <p>
-#: ../../skycultures/arabic_indigenous/description.en.utf8:36
+#: ../../skycultures/arabic_indigenous/description.en.utf8:34
 msgid ""
 "[1]: Ibn Qutaybah (Arabic ابن قتيبة) (b. 828 d. 884 or 889), Kitab al-Anwā’a"
 " (Arabic الأنواء في مواسم العرب), (Arabic print of the original book in 1956"
@@ -3008,7 +3026,7 @@ msgstr ""
 "Originalbuchs 1956 in Indien, Hydarabad/al-Dakan), Seite: يد."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_indigenous/description.en.utf8:37
+#: ../../skycultures/arabic_indigenous/description.en.utf8:35
 msgid ""
 "[2]: <a "
 "href=\"https://drive.google.com/drive/folders/1s6JXzftwjMQ5rgZoGE3718EtBLBZtjzr?usp=sharing\">Book"
@@ -3053,6 +3071,15 @@ msgid ""
 "However, this system had been adopted already in the pre-Islamic period, "
 "prior to the 7th century of the common era."
 msgstr ""
+"Ursprünglich waren die <em>Manāzil al-Qamar</em>, der arabische Begriff für "
+"die Mondhäuser oder Mondstationen, ein System von insgesamt 28 Sternen, "
+"Sterngruppen und Himmelstellen, in dessen Nähe der Mond in jeder der 28 "
+"Nächte seiner monatlichen Umdrehung steht. Frühe Erwähnungen der "
+"vollständigen Liste der Mondstationen finden sich bei Abd al-Malik ibn Ḥabīb"
+" (gest. 852) auf Anweisung von Mālik ibn Anas (gest. 795) <sup><a "
+"href=\"#footnote-1\">[1]</a></sup>. Allerdings wurde dieses System bereits "
+"in der vorislamischen Zeit vor dem siebten Jahrhundert unserer Zeitrechnung "
+"eingeführt."
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:9
@@ -3072,6 +3099,22 @@ msgid ""
 "distinctive weather pattern of rain, wind, and temperature <sup><a "
 "href=\"#footnote-3\">[3]</a></sup>."
 msgstr ""
+"Unter der Nutzung von heliakischen Beobachtungen dienten die Sterngruppen "
+"der Mondstationen zur Unterteilung des siderischen und Sonnenjahrs von 365 "
+"Tagen in 28 Perioden mit jeweils 13 Tagen mit der Ausnahme einer Periode, "
+"die 14 Tage lang ist. Diese 28 Perioden werden <em>Anwāʾ</em>, der Plural "
+"von <em>nawʾ</em>, genannt. Jeder <em>Nawʾ</em> wird durch einen "
+"charakteristischen Stern bestimmt.  Das Aufgehen dieses Sterns morgens "
+"während der Dämmerung (im Osten, kurz vor Sonnenaufgang) markiert den Beginn"
+" des nächsten <em>nawʾ</em>. Der Name des <em>nawʾ</em> (Zeitperiode, halber"
+" Monat) gibt auch der Mondstation ihren Namen. Ein kompletter Zyklus des "
+"Untergehens und Aufgehens jeder der 28 Mondstation nacheinander entspricht "
+"einem Sonnenjahr. Dieses System wurde zur Bestimmung der Jahreszeiten und "
+"zur Wettervorhersage besonders für Regen genutzt<sup><a "
+"href=\"#footnote-2\">[2]</a></sup>. Die Araber sagten, dass jeder "
+"<em>naw'</em> (13- bzw. 14-tägige Periode) durch ein eigenes Wettermuster "
+"bezüglich Regen, Wind und Temperatur charakterisiert ist<sup><a "
+"href=\"#footnote-3\">[3]</a></sup>. "
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:11
@@ -3083,6 +3126,13 @@ msgid ""
 "- d. 884 or 889). Copies of this book manuscripts survived, and it was "
 "printed in India in 1956 <sup><a href=\"#footnote-4\">[4]</a></sup>."
 msgstr ""
+"Eine detaillierte Beschreibung der Sterne jeder Mondstation, der Zeiten "
+"ihres heliakischen Aufgangs und eine Zusammenstellung astronomischen und "
+"meteorologischen Wissens der alten Araber findet sich im <em>Buch der "
+"Meteorologie</em> (arabisch: Kitāb al-anwāʾ), verfasst von Ibn Qutaybah "
+"(geb. 828, gest. 884 oder 889). Kopien von Manuskripten dieses Buches haben "
+"überdauert und es wurde 1956 in Indien gedruckt<sup><a "
+"href=\"#footnote-4\">[4]</a></sup>."
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:14
@@ -3099,6 +3149,18 @@ msgid ""
 "Shaikh Ṣāliḥ al-Shethrī (d. ~1891), titled <em>A time-table for farmers</em>"
 " <sup><a href=\"#footnote-7\">[7]</a></sup>."
 msgstr ""
+"Die Nutzung der Mondstationen diente weiterhin der Planung der Zeiten für "
+"die Landwirtschaft, Reisen und medizinischen Praktiken. Wegen der "
+"Wichtigkeit die Zeiten ihrer heliakischen Aufgänge zu beobachten, wurden "
+"kurze Abhandlungen und Gedichte, die die Sternbilder der 28 Stationen "
+"beschreiben, verfasst. Ein Gedicht, das der Sternbeschreibung der "
+"Mondstationen gewidmet ist, wurde von Gustave-Adolphe de Calassanti-"
+"Motylinski im Jahr 1899 in seinem Buch <em>Les mansions lunaires chez les "
+"Arabes</em> veröffentlicht. Das Gedicht wird Muḥammad al-Maqri (1578–1638) "
+"zugeschrieben<sup><a href=\"#footnote-5\">[5]</a></sup><sup><a "
+"href=\"#footnote-6\">[6]</a></sup>. Ein Beispiel ist die von Shaikh Ṣāliḥ "
+"al-Shethrī (gest. ~1891) geschriebene Abhandlung <em>A time-table for "
+"farmers</em><sup><a href=\"#footnote-7\">[7]</a></sup>."
 
 #. type: Content of: <h4>
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:16
@@ -3115,6 +3177,13 @@ msgid ""
 " period starting with the rise of the 3rd lunar station <em>al-Thurayya</em>"
 " (Pleiades) on June 7th <sup><a href=\"#footnote-9\">[9]</a></sup>:"
 msgstr ""
+"Bauernkalender, die auf den heliakischen Aufgängen der Mondstationen "
+"basieren, werden heute immer noch verwendet. Beispielsweise beinhaltet der "
+"offizielle Kalender Saudi-Arabiens diese Zeiten<sup><a "
+"href=\"#footnote-8\">[8]</a></sup>. Nachfolgend ist ein Beispiel für die "
+"Nutzung eines auf den Mondstationen basierenden Kalenders für die 13-tägige "
+"Periode, die mit dem Aufgang der dritten Mondstation <em>al-Thurayya</em> "
+"(Plejaden) am 7. Juni beginnt<sup><a href=\"#footnote-9\">[9]</a></sup>:"
 
 #. type: Content of: <p><blockquote>
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:20
@@ -3125,6 +3194,12 @@ msgid ""
 "irrigate trees with the right amounts and stop irrigation of vines when "
 "grapes start to get its color."
 msgstr ""
+"Das Wetter wird wärmer und der Wind stärker. Wilde Gräser trocknen. Das "
+"Wasser in den Brunnen wird flacher. Regen ist selten in dieser Zeit. "
+"Frühlingsinsekten beginnen zu verschwinden. Die Datteln der Palmen beginnen "
+"ihre Farbe zu bekommen. Es wird empfohlen, Bäume mit der richtigen Menge zu "
+"bewässern und die Bewässerung der Reben einzustellen, wenn die Trauben "
+"anfangen, ihre Farbe zu bekommen."
 
 #. type: Content of: <h4>
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:23
@@ -3143,6 +3218,15 @@ msgid ""
 "<em>al-Ġafr</em> <sup><a href=\"#footnote-10\">[10]</a></sup><sup><a "
 "href=\"#footnote-11\">[11]</a></sup>:"
 msgstr ""
+"Ibn Qutaybah (geb. 828, gest. 884 oder 889) liefert in seinem Buch <em>Kitāb"
+" al-anwāʾ</em> eine detaillierte Beschreibung der Sterne jeder Mondstation, "
+"während eine genaue Identifikation dem <em>Buch der Fixsterne</em> von al-"
+"Sufi (gest. 986) entnommen werden kann. Al-Sufi ordnet in seinem Buch die "
+"den alten Arabern bekannten Sterne denen der ptolemäischen Sternbilder zu. "
+"Als Beispiel für al-Sufis Charakterisierung der Sterne der Mondstationen "
+"folgt die Charakterisierung von <em>al-Ghafr</em><sup><a "
+"href=\"#footnote-10\">[10]</a></sup><sup><a "
+"href=\"#footnote-11\">[11]</a></sup>:"
 
 #. type: Content of: <p><blockquote>
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:27
@@ -3151,6 +3235,9 @@ msgid ""
 "garment] with the 25th on the left foot [of Virgo] are named [by the Arabs] "
 "<em>al-Ghafr</em> which is the 15th lunar mansion."
 msgstr ""
+"Und der 22. [Stern in der Jungfrau] und der 23., der sich am Ende [Saum des "
+"Gewands] befindet, mit dem 25. auf dem linken Fuß [der Jungfrau] werden [von"
+" den Arabern] <em>al-Ghafr</em> genannt, welche die 15. Mondstation ist."
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:29
@@ -3211,6 +3298,9 @@ msgid ""
 " the three stars on the head of Orion: λ Ori (Meissa), φ<sup>1</sup> Ori and"
 " φ<sup>2</sup> Ori"
 msgstr ""
+"(Arabisch: الهقعة) <em>Al-Haqʿah</em> (Das Abzeichen auf der Pferdeseite) "
+"ist aus den drei Sternen im Kopf des Orion: λ Ori (Meissa), φ<sup>1</sup> "
+"Ori und φ<sup>2</sup> Ori"
 
 #. type: Content of: <ol><li>
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:38
@@ -3218,6 +3308,8 @@ msgid ""
 "(Arabic: الهنعة<em>Al-Hanʿah</em> (The bend in the neck of a camel) composed"
 " of the 2 stars: γ Gem (Alhena) and ξ Gem"
 msgstr ""
+"(Arabisch: الهنعة<em>Al-Hanʿah</em> (Die Halskrümmung eines Kamels) ist aus "
+"zwei Sternen zusammengesetzt: γ Gem (Alhena) und ξ Gem"
 
 #. type: Content of: <ol><li>
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:39
@@ -3428,27 +3520,27 @@ msgid ""
 msgstr ""
 
 #. type: Content of: <p>
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:76
+msgid ""
+"[1]: Kunitzsch P. The Arabs and the Stars, Variorum reprints Northampton "
+"1989, Al-Manazil, Item XX pp 1-7."
+msgstr ""
+"[1]: Kunitzsch P. The Arabs and the Stars, Variorum reprints Northampton "
+"1989, Al-Manazil, Item XX pp 1-7."
+
+#. type: Content of: <p>
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:77
+msgid ""
+"[2]: Helaine Selin, Encyclopaedia of the History of Science, Technology, and"
+" Medicine in Non-Western Cultures, Lunar Mansions in Islamic History, "
+"Kunitzsch P. p 520"
+msgstr ""
+"[2]: Helaine Selin, Encyclopaedia of the History of Science, Technology, and"
+" Medicine in Non-Western Cultures, Lunar Mansions in Islamic History, "
+"Kunitzsch P. p 520"
+
+#. type: Content of: <p>
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:78
-msgid ""
-"[1]: Kunitzsch P. The Arabs and the Stars, Variorum reprints Northampton "
-"1989, Al-Manazil, Item XX pp 1-7."
-msgstr ""
-"[1]: Kunitzsch P. The Arabs and the Stars, Variorum reprints Northampton "
-"1989, Al-Manazil, Item XX pp 1-7."
-
-#. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:79
-msgid ""
-"[2]: Helaine Selin, Encyclopaedia of the History of Science, Technology, and"
-" Medicine in Non-Western Cultures, Lunar Mansions in Islamic History, "
-"Kunitzsch P. p 520"
-msgstr ""
-"[2]: Helaine Selin, Encyclopaedia of the History of Science, Technology, and"
-" Medicine in Non-Western Cultures, Lunar Mansions in Islamic History, "
-"Kunitzsch P. p 520"
-
-#. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:80
 msgid ""
 "[3]: Ibn Qutaybah (b. 828 d. 884 or 889), Kitab al-Anwā’, pp 6,7 (Arabic "
 "print of the original book in 1956 in India Hydarabad/Deccan)"
@@ -3457,7 +3549,7 @@ msgstr ""
 " Druck des Originalbuchs 1956 in Indien Hydarabad/Deccan)"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:81
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:79
 msgid ""
 "[4]: Helaine Selin, Encyclopaedia of the History of Science, Technology, and"
 " Medicine in Non-Western Cultures, Ibn Qutayba, Kunitzsch P. p 429"
@@ -3466,7 +3558,7 @@ msgstr ""
 " Medicine in Non-Western Cultures, Ibn Qutayba, Kunitzsch P., S. 429"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:82
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:80
 msgid ""
 "[5]: Ta̕rīf manāzil alkamar, Les mansions lunaires des Arabes; Muhammad "
 "al-Mukrī.; A de Calassanti-Motylinski published in Alger, Imprimerie "
@@ -3477,7 +3569,7 @@ msgstr ""
 "orientale, 1899."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:83
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:81
 msgid ""
 "[6]: <a href=\"http://www.uranos.fr/DOCU_03_T03.htm\">Muhammad al-Muqrī "
 "poem</a>"
@@ -3486,7 +3578,7 @@ msgstr ""
 "al-Muqrī</a>"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:84
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:82
 msgid ""
 "[7]: Salih al-Shethri, Timetable for farmers <em>Jadwal fi ilm al-harth ala "
 "hisaab al-shuthoor</em> (جدول في علم الحرث على حساب الشثور) ISBN "
@@ -3497,7 +3589,7 @@ msgstr ""
 "9960-49-971-5"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:85
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:83
 msgid ""
 "[8]: <a href=\"http://www.ummulqura.org.sa/\">Official Calendar</a> of the "
 "Kingdom of Saudi Arabia"
@@ -3506,7 +3598,7 @@ msgstr ""
 "Königreichs Saudi-Arabien"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:86
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:84
 msgid ""
 "[9]: Moon stations and Agriculture seasons. A bulletin by the Agriculture "
 "Administration of the Chamber of Commerce in Riyadh, Saudi Arabia. 2002"
@@ -3515,7 +3607,7 @@ msgstr ""
 "Administration of the Chamber of Commerce in Riyadh, Saudi Arabia. 2002"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:87
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:85
 msgid ""
 "[10]: Book of the Stars by al-Sufi (died 986): Critical edition with "
 "commentary by Khalid AlAjaji, digital edition, 2021 AD, كتاب الكواكب لأبي "
@@ -3528,7 +3620,7 @@ msgstr ""
 "بن عبد الله ."
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:88
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:86
 msgid ""
 "[11]: Schjellerup, Description des etoiles fixes, 1874, p. 163. (Translation"
 " into French)"
@@ -3537,7 +3629,7 @@ msgstr ""
 " ins Französische)"
 
 #. type: Content of: <p>
-#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:89
+#: ../../skycultures/arabic_lunar_mansions/description.en.utf8:87
 msgid "[12]: Laffitte, Roland, Le Ciel des Arabes, Geuthner, Paris 2012"
 msgstr "[12]: Laffitte, Roland, Le Ciel des Arabes, Geuthner, Paris 2012"
 
@@ -3890,8 +3982,8 @@ msgstr ""
 
 #. type: Content of: <h3>
 #: ../../skycultures/aztec/description.en.utf8:51
-#: ../../skycultures/babylonian_mulapin/description.en.utf8:527
-#: ../../skycultures/babylonian_seleucid/description.en.utf8:467
+#: ../../skycultures/babylonian_mulapin/description.en.utf8:525
+#: ../../skycultures/babylonian_seleucid/description.en.utf8:465
 msgid "Thanks to"
 msgstr "Danke an"
 
@@ -5079,18 +5171,25 @@ msgstr ""
 "celestial positioning system?</em> in: Proceedings of the Rencontre "
 "Assyriologique Internationale 2018 (In preparation)."
 
+#. type: Content of: <h2>
+#: ../../skycultures/babylonian_mulapin/description.en.utf8:522
+#: ../../skycultures/egyptian_dendera/description.en.utf8:232
+#: ../../skycultures/greek_almagest/description.en.utf8:496
+#: ../../skycultures/greek_farnese/description.en.utf8:299
+#: ../../skycultures/greek_leidenAratea/description.en.utf8:288
+msgid "Fair Use"
+msgstr "Faire Nutzung"
+
 #. type: Content of: <p>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:523
 msgid ""
 "This sky culture originates from many years of research by several scholars."
-"  We provide this for free but authors of contributions certainly deserve to"
-" be cited according to the common rules.  This sky culture is provided under"
-" CC BY-ND 4.0 International Public Licence (share-alike, do not change it "
-"without consulting the contributors, and cite the contributors). Thank you!"
+" We provide this for free but authors of contributions certainly deserve to "
+"be cited according to the common rules. Thank you!"
 msgstr ""
 
 #. type: Content of: <p>
-#: ../../skycultures/babylonian_mulapin/description.en.utf8:528
+#: ../../skycultures/babylonian_mulapin/description.en.utf8:526
 msgid ""
 "The positioning of the Babylonian terms in the sky and the drawing of the "
 "stick figures for Stellarium had been done by Susanne M. Hoffmann.  As an "
@@ -5099,36 +5198,36 @@ msgid ""
 msgstr ""
 
 #. type: Content of: <p><ul><li>
-#: ../../skycultures/babylonian_mulapin/description.en.utf8:531
+#: ../../skycultures/babylonian_mulapin/description.en.utf8:529
 msgid "Prof. i.R. Dr. Hermann Hunger (Assyriology, Vienna)"
 msgstr "Prof. i.R. Dr. Hermann Hunger (Assyrologie, Vienna)"
 
 #. type: Content of: <p><ul><li>
-#: ../../skycultures/babylonian_mulapin/description.en.utf8:532
+#: ../../skycultures/babylonian_mulapin/description.en.utf8:530
 msgid "Prof. Dr. Manfred Krebernik (Assyriology, Jena)"
 msgstr "Prof. Dr. Manfred Krebernik (Assyrologie, Jena)"
 
 #. type: Content of: <p><ul><li>
-#: ../../skycultures/babylonian_mulapin/description.en.utf8:533
-#: ../../skycultures/babylonian_seleucid/description.en.utf8:470
+#: ../../skycultures/babylonian_mulapin/description.en.utf8:531
+#: ../../skycultures/babylonian_seleucid/description.en.utf8:468
 msgid ""
 "Dr. Björn Voss (Manager of LWL Planetarium Münster and head of Society of "
 "German-speaking Planetariums)"
 msgstr ""
 
 #. type: Content of: <p><ul><li>
-#: ../../skycultures/babylonian_mulapin/description.en.utf8:534
+#: ../../skycultures/babylonian_mulapin/description.en.utf8:532
 msgid "Dr. Monika Staesche (Manager of Planetarium am Insulaner, Berlin)"
 msgstr "Dr. Monika Staesche (Leiterin des Planetariums am Insulaner, Berlin)"
 
 #. type: Content of: <p><ul><li>
-#: ../../skycultures/babylonian_mulapin/description.en.utf8:535
-#: ../../skycultures/babylonian_seleucid/description.en.utf8:471
+#: ../../skycultures/babylonian_mulapin/description.en.utf8:533
+#: ../../skycultures/babylonian_seleucid/description.en.utf8:469
 msgid "Stefan Harnisch (Manager of Planetarium Jena)"
 msgstr "Stefan Harnisch (Leiter des Planetariums Jena)"
 
 #. type: Content of: <p>
-#: ../../skycultures/babylonian_mulapin/description.en.utf8:540
+#: ../../skycultures/babylonian_mulapin/description.en.utf8:538
 msgid ""
 "The Babylonian star names and constellation lines were compiled and added to"
 " Stellarium:"
@@ -5137,29 +5236,29 @@ msgstr ""
 "Stellarium hinzugefügt:"
 
 #. type: Content of: <p>
-#: ../../skycultures/babylonian_mulapin/description.en.utf8:541
-#: ../../skycultures/egyptian_dendera/description.en.utf8:238
+#: ../../skycultures/babylonian_mulapin/description.en.utf8:539
+#: ../../skycultures/egyptian_dendera/description.en.utf8:237
 msgid "<em>Susanne M. Hoffmann: service@uhura-uraniae.com </em>"
 msgstr "<em>Susanne M. Hoffmann: service@uhura-uraniae.com </em>"
 
 #. type: Content of: <p>
-#: ../../skycultures/babylonian_mulapin/description.en.utf8:542
+#: ../../skycultures/babylonian_mulapin/description.en.utf8:540
 msgid ""
 "Paintings by: <em>Jessica Gullberg </em> (consulted by Steven Gullberg and "
 "Susanne M Hoffmann)"
 msgstr ""
 
 #. type: Content of: <h5>
-#: ../../skycultures/babylonian_mulapin/description.en.utf8:543
-#: ../../skycultures/egyptian_dendera/description.en.utf8:239
+#: ../../skycultures/babylonian_mulapin/description.en.utf8:541
+#: ../../skycultures/egyptian_dendera/description.en.utf8:238
 #: ../../skycultures/greek_farnese/description.en.utf8:305
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:294
 msgid "written in English:"
 msgstr "geschrieben auf Englisch:"
 
 #. type: Content of: <h5>
-#: ../../skycultures/babylonian_mulapin/description.en.utf8:543
-#: ../../skycultures/egyptian_dendera/description.en.utf8:239
+#: ../../skycultures/babylonian_mulapin/description.en.utf8:541
+#: ../../skycultures/egyptian_dendera/description.en.utf8:238
 msgid "SMH"
 msgstr "SMH"
 
@@ -5907,19 +6006,7 @@ msgstr ""
 "Pingree (1999). Darum listen wir sie hier nicht detailliert auf. "
 
 #. type: Content of: <p>
-#: ../../skycultures/babylonian_seleucid/description.en.utf8:465
-msgid ""
-"This sky culture is provided under CC BY-ND 4.0 (international) licence "
-"(noncommercial use only, share-alike, do not change it without consulting "
-"the contributors, and please cite the contributors). Thank you!"
-msgstr ""
-"Diese Sky Culture wird unter CC BY-ND 4.0 (international) Lizenz zur "
-"Verfügung gestellt (d.h. nur nichtkommerzielle Nutzung, unter gleichen "
-"Bedingungen zu teilen: bitte nichts daran ändern ohne Rücksprache mit den "
-"Beitragenden und bitte zitieren Sie die Beitragenden). Danke!"
-
-#. type: Content of: <p>
-#: ../../skycultures/babylonian_seleucid/description.en.utf8:468
+#: ../../skycultures/babylonian_seleucid/description.en.utf8:466
 msgid ""
 "Thanks to some very enthusiastic planetarium managers for their request and "
 "development time in their domes."
@@ -5928,20 +6015,20 @@ msgstr ""
 " und für die Entwicklungszeit in ihren Kuppeln. "
 
 #. type: Content of: <p>
-#: ../../skycultures/babylonian_seleucid/description.en.utf8:476
+#: ../../skycultures/babylonian_seleucid/description.en.utf8:474
 msgid "The Babylonian star names were compiled and added to Stellarium and"
 msgstr ""
 "Die babylonischen Sternennamen wurden zusammengetragen und Stellarium "
 "hinzugefügt und"
 
 #. type: Content of: <p>
-#: ../../skycultures/babylonian_seleucid/description.en.utf8:477
+#: ../../skycultures/babylonian_seleucid/description.en.utf8:475
 msgid "the Babylonian constellation lines and images were prepared by:"
 msgstr ""
 "die babylonischen Sternbilddlinien und -darstellungen wurden erstellt von:"
 
 #. type: Content of: <p>
-#: ../../skycultures/babylonian_seleucid/description.en.utf8:478
+#: ../../skycultures/babylonian_seleucid/description.en.utf8:476
 msgid "<em>Susanne M Hoffmann: service@uhura-uraniae.com </em>"
 msgstr "<em>Susanne M Hoffmann: service@uhura-uraniae.com </em>"
 
@@ -9416,43 +9503,43 @@ msgid ""
 "Heaven in WWT Community Beijing</a>"
 msgstr "Chinesischer Himmel in der WWT Gemeinde Peking"
 
-#. type: Content of: <p><p><ul><h2>
-#: ../../skycultures/chinese_medieval/description.en.utf8:38
+#. type: Content of: <p><p><h2>
+#: ../../skycultures/chinese_medieval/description.en.utf8:39
 msgid "Reference"
 msgstr "Quellenangabe"
 
-#. type: Content of: <p><p><ul><ol><li>
-#: ../../skycultures/chinese_medieval/description.en.utf8:40
+#. type: Content of: <p><p><ol><li>
+#: ../../skycultures/chinese_medieval/description.en.utf8:41
 msgid "Pan Nai. The History of Stellar Observation in China"
 msgstr "Pan Nai. The History of Stellar Observation in China"
 
-#. type: Content of: <p><p><ul><ol><li>
-#: ../../skycultures/chinese_medieval/description.en.utf8:41
+#. type: Content of: <p><p><ol><li>
+#: ../../skycultures/chinese_medieval/description.en.utf8:42
 msgid "Qi Rui and Wan Haoyi. Roving China Heavens"
 msgstr "Qi Rui and Wan Haoyi. Roving China Heavens"
 
-#. type: Content of: <p><p><ul><ol><li>
-#: ../../skycultures/chinese_medieval/description.en.utf8:42
+#. type: Content of: <p><p><ol><li>
+#: ../../skycultures/chinese_medieval/description.en.utf8:43
 msgid "Su Song. <i>Xinyixiangfayao Star Map</i>"
 msgstr "Su Song. <i>Xinyixiangfayao Star Map</i>"
 
-#. type: Content of: <p><p><ul><ol><li>
-#: ../../skycultures/chinese_medieval/description.en.utf8:43
+#. type: Content of: <p><p><ol><li>
+#: ../../skycultures/chinese_medieval/description.en.utf8:44
 msgid "<i>Records of the Grand Historian</i>"
 msgstr "<i>Records of the Grand Historian</i>"
 
-#. type: Content of: <p><p><ul><ol><li>
-#: ../../skycultures/chinese_medieval/description.en.utf8:44
+#. type: Content of: <p><p><ol><li>
+#: ../../skycultures/chinese_medieval/description.en.utf8:45
 msgid "<i>Book of Sui</i>"
 msgstr "<i>Book of Sui</i>"
 
-#. type: Content of: <p><p><ul><ol><li>
-#: ../../skycultures/chinese_medieval/description.en.utf8:45
+#. type: Content of: <p><p><ol><li>
+#: ../../skycultures/chinese_medieval/description.en.utf8:46
 msgid "<i>History of Song</i>"
 msgstr "<i>History of Song</i>"
 
-#. type: Content of: <p><p><ul><p><p>
-#: ../../skycultures/chinese_medieval/description.en.utf8:49
+#. type: Content of: <p><p><p><p>
+#: ../../skycultures/chinese_medieval/description.en.utf8:50
 msgid ""
 "This sky culture was contributed by Stellarium user <i>Sun Shuwei</i> (孙殳玮) "
 ".  <a href=\"mailto:sunshuwei.hi@foxmail.com\">sunshuwei.hi@foxmail.com</a>"
@@ -9497,7 +9584,7 @@ msgstr "<i>Nape</i>, Hand, unterer Orion & &beta; Eridanus"
 #. type: Content of: <ul><li>
 #: ../../skycultures/dakota/description.en.utf8:15
 msgid "<i>Mato Tipi/Tipila</i>, Bear's Lodge, Gemini"
-msgstr ""
+msgstr "<i>Mato Tipi/Tipila</i>, Bärenhöhle, Zwillinge"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/dakota/description.en.utf8:16
@@ -9728,32 +9815,6 @@ msgid "Contact A. Lee at aslee@stcloudstate.edu for more information."
 msgstr ""
 "Kontaktiere A. Lee unter aslee@stcloudstate.edu für weitere Informationen."
 
-#. type: Content of: <h2>
-#: ../../skycultures/dakota/description.en.utf8:62
-#: ../../skycultures/khoi-san/description.en.utf8:18
-#: ../../skycultures/ojibwe/description.en.utf8:53
-#: ../../skycultures/xhosa/description.en.utf8:21
-#: ../../skycultures/zulu/description.en.utf8:18
-msgid "Licence"
-msgstr ""
-
-#. type: Content of: <p>
-#: ../../skycultures/dakota/description.en.utf8:63
-#: ../../skycultures/ojibwe/description.en.utf8:54
-msgid ""
-"This SkyCulture is provided under CC BY-NC-ND 4.0 International Public "
-"licence."
-msgstr ""
-
-#. type: Content of: <p>
-#: ../../skycultures/dakota/description.en.utf8:64
-#: ../../skycultures/ojibwe/description.en.utf8:55
-msgid ""
-"It allows you to use the unadapted work for noncommercial purposes only, and"
-" only as long as you give credit to the creator.  You may also adapt the "
-"work for their own personal use but may not share any adaptations publicly."
-msgstr ""
-
 #. type: Content of: <h1>
 #: ../../skycultures/egyptian/description.en.utf8:1
 msgid "Egyptian"
@@ -9793,6 +9854,9 @@ msgid ""
 " some modern zodiac signs are very ancient indeed [2], although the "
 "constellations did change significantly over time [3]."
 msgstr ""
+"Frühere Sternbilder sind problematischer. Es existieren jedoch Hinweise "
+"darauf, dass einige moderne Tierkreiszeichen durchaus sehr alt sind [2]. "
+"Allerdings haben sich die Sternbilder deutlich über die Zeit verändert [3]."
 
 #. type: Content of: <p>
 #: ../../skycultures/egyptian/description.en.utf8:5
@@ -9805,6 +9869,13 @@ msgid ""
 "Saturn was \"Horus the Bull of the Sky\"; and Venus was \"the God of the "
 "Morning\" [7]."
 msgstr ""
+"Die Ägypter kannten fünf Planeten, die sie »Sterne, die keine Ruhe kennen« "
+"nannten. Ihre Bewegungen am Firmament erinnerten sie an die fünf Götter, die"
+" in ihrer Sonnenbarke (Schiff) entlang des Himmels segelten. Der heutzutage "
+"als Jupiter bekannte Planet wurde »Horus, der Begrenzer der beiden Länder«, "
+"Mars wurde »Horus des Horizonts«, Merkur wurde »Sebegu«, der mit Seth "
+"verbunden wurde, Saturn wurde »Horus, der Himmelsstier« und Venus wurde »der"
+" Morgengott« genannt."
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/egyptian/description.en.utf8:9
@@ -9827,6 +9898,9 @@ msgid ""
 "<a href=\"http://www.catchpenny.org/thoth/3arch.htm\">[2]</a> Three archaic "
 "Egyptian constellations used as seasonal markers?"
 msgstr ""
+"<a href=\"http://www.catchpenny.org/thoth/3arch.htm\">[2]</a> Drei "
+"altertümliche ägyptische Sternbilder, die als Jahreszeitenmarkierungen "
+"genutzt wurden?"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/egyptian/description.en.utf8:11
@@ -9862,6 +9936,9 @@ msgid ""
 "Education Solutions, Inc. based on the paper \"A Map of the Ancient Egyptian"
 " Firmament” by Juan Antonio Belmonte."
 msgstr ""
+"Diese Himmelskultur wurde von <i>Karrie Berglund</i> von Digitalis Education"
+" Solutions, Inc. basierend auf der Abhandlung »A Map of the Ancient Egyptian"
+" Firmament« von Juan Antonio Belmonte beigesteuert."
 
 #. type: Content of: <p>
 #: ../../skycultures/egyptian/description.en.utf8:19
@@ -10530,6 +10607,9 @@ msgid ""
 "href=\"https://collections.louvre.fr/en/ark:/53355/cl010028871#\">Photographs"
 " of the Louvre Collection</a>"
 msgstr ""
+"<a "
+"href=\"https://collections.louvre.fr/en/ark:/53355/cl010028871#\">Fotografien"
+" von der Louvre-Sammlung</a>"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/egyptian_dendera/description.en.utf8:224
@@ -10537,6 +10617,8 @@ msgid ""
 "Aubourg, E. (1995), ‘La date de conception du zodiaque du temple d’Hathor à "
 "Dendera’, Bulletin de l’Institut Français d’Archéologie Orientale 95, 1–10"
 msgstr ""
+"Aubourg, E. (1995), »La date de conception du zodiaque du temple d’Hathor à "
+"Dendera«, Bulletin de l’Institut Français d’Archéologie Orientale 95, 1–10"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/egyptian_dendera/description.en.utf8:225
@@ -10544,6 +10626,8 @@ msgid ""
 "Biot, J.-B. (1846), ‘Mémoire sur le zodiaque circulaire de denderah.’, "
 "Mémoires de l’Institutnational de France16(2ème partie), 1–101"
 msgstr ""
+"Biot, J.-B. (1846), »Mémoire sur le zodiaque circulaire de denderah.«, "
+"Mémoires de l’Institutnational de France16 (2ème partie), 1–101"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/egyptian_dendera/description.en.utf8:226
@@ -10551,6 +10635,8 @@ msgid ""
 "Hoffmann, Susanne M. (2017), Hipparchs Himmelsglobus, Springer, Wiesbaden/ "
 "New York, Chapter 4.2.2"
 msgstr ""
+"Hoffmann, Susanne M. (2017), Hipparchs Himmelsglobus, Springer, Wiesbaden/ "
+"New York, Kapitel 4.2.2"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/egyptian_dendera/description.en.utf8:227
@@ -10559,6 +10645,9 @@ msgid ""
 "(Egypt), in: Hoffmann and Wolfschmidt (ed.), Astronomy in Culture - Cultures"
 " of Astronomy, Nuncius Hamburgensis, Vol. 57, tredition, Hamburg"
 msgstr ""
+"Hoffmann, Susanne M. (2022), Preliminary Observations on the Dendera Zodiac "
+"(Egypt), in: Hoffmann und Wolfschmidt (ed.), Astronomy in Culture - Cultures"
+" of Astronomy, Nuncius Hamburgensis, Vol. 57, tredition, Hamburg"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/egyptian_dendera/description.en.utf8:228
@@ -10567,12 +10656,15 @@ msgid ""
 "preliminary observations.’, Mediterranean Archaeology and Archaeometry, 18, "
 "4, 97-105"
 msgstr ""
+"Steele, John M. (2018), »The development of the Babylonian zodiac: Some "
+"preliminary observations.«, Mediterranean Archaeology and Archaeometry, 18, "
+"4, 97–105"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/egyptian_dendera/description.en.utf8:229
 msgid ""
-"<a href=\"https://en.wikipedia.org/wiki/Dendera_zodiac\">wikipedia</a> "
-"(manches falsch)"
+"<a href=\"https://en.wikipedia.org/wiki/Dendera_zodiac\">wikipedia</a> (some"
+" things wrong)"
 msgstr ""
 
 #. type: Content of: <p>
@@ -10580,22 +10672,16 @@ msgstr ""
 msgid ""
 "This sky culture originates from research. We provide this for free but the "
 "authors of contributions certainly deserve to be cited according to the "
-"common rules."
+"common rules. Thank you!"
 msgstr ""
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:234
-msgid ""
-"This sky culture is provided under CC BY-ND 4.0 International Public Licence"
-" (share-alike, do not change it without consulting the contributors, and "
-"cite the contributors). Thank you!"
-msgstr ""
-
-#. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:237
+#: ../../skycultures/egyptian_dendera/description.en.utf8:236
 msgid ""
 "This Greco-Egyptian sky culture was painted and added to Stellarium by:"
 msgstr ""
+"Diese griechisch-ägyptische Himmelskultur wurde gemalt und Stellarium "
+"hinzugefügt von:"
 
 #. type: Content of: <h1>
 #: ../../skycultures/greek_almagest/description.en.utf8:1
@@ -11423,24 +11509,16 @@ msgstr ""
 msgid ""
 "This sky culture originates from a student's year of research. We provide "
 "this for free but authors of contributions certainly deserve to be cited "
-"according to the common rules. This sky culture is provided under CC BY-ND "
-"4.0 International Public Licence (share-alike, do not change it without "
-"consulting the contributors, and cite the contributors). Thank you!"
+"according to the common rules. Thank you!"
 msgstr ""
-"Diese Himmelskultur stammt aus dem Forschungsjahr eines Studenten. Wir "
-"stellen sie kostenfrei zur Verfügung, jedoch verdienen es die Autoren von "
-"Beiträgen gewiss, gemäß der allgemeinen Regeln zitiert zu werden. Diese "
-"Himmelskultur wird unter der CC BY-ND 4.0 International Public Licence "
-"(share-alike, ändere sie nicht ohne Einwilligung der Mitwirkenden und "
-"zitiere die Mitwirkenden). Danke!"
 
 #. type: Content of: <h2>
-#: ../../skycultures/greek_almagest/description.en.utf8:502
+#: ../../skycultures/greek_almagest/description.en.utf8:500
 msgid "Thanks"
 msgstr "Danke"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_almagest/description.en.utf8:503
+#: ../../skycultures/greek_almagest/description.en.utf8:501
 msgid ""
 "The authors thank Patrick Gleason and Georg Zotti for English proofreading "
 "and interesting discussions."
@@ -11449,7 +11527,7 @@ msgstr ""
 "Korrekturlesen und interessante Diskussionen."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_almagest/description.en.utf8:506
+#: ../../skycultures/greek_almagest/description.en.utf8:504
 msgid ""
 "This sky culture was compiled and added to Stellarium by Alina Schmidt, Lea "
 "Jabschinski, Marie von Seggern and Susanne M. Hoffmann: service@uhura-"
@@ -11460,7 +11538,7 @@ msgstr ""
 "und Stellarium hinzugefügt."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_almagest/description.en.utf8:507
+#: ../../skycultures/greek_almagest/description.en.utf8:505
 msgid "Written in English: the authors"
 msgstr "geschrieben auf Englisch: die Autoren"
 
@@ -11524,7 +11602,7 @@ msgstr ""
 #. type: Content of: <h2>
 #: ../../skycultures/greek_farnese/description.en.utf8:9
 msgid "How was this Sky Culture made?"
-msgstr ""
+msgstr "Wie wurde diese Himmelskultur erstellt?"
 
 #. type: Content of: <p>
 #: ../../skycultures/greek_farnese/description.en.utf8:10
@@ -11749,10 +11827,11 @@ msgstr ""
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:289
 msgid ""
 "We provide this sky culture free of charge, but the authors deserve to be "
-"cited according to the usual rules. This sky culture is provided under CC "
-"BY-ND 4.0 International Public Licence (cite, share under equal terms, do "
-"not modify without consulting the authors). Thank you!"
+"cited according to the usual rules. Thank you!"
 msgstr ""
+"Wir stellen diese Himmelskultur kostenlos zur Verfügung. Die Autoren "
+"verdienen es jedoch, den üblichen Regeln nach zitiert zu werden. Vielen "
+"Dank!"
 
 #. type: Content of: <p>
 #: ../../skycultures/greek_farnese/description.en.utf8:303
@@ -12843,8 +12922,7 @@ msgstr ""
 
 #. type: Content of: <p>
 #: ../../skycultures/inuit/description.en.utf8:34
-msgid ""
-"Illustrations are done by Johan Meuris, released under the Free Art License."
+msgid "Illustrations are done by Johan Meuris."
 msgstr ""
 
 #. type: Content of: <h1>
@@ -13355,12 +13433,12 @@ msgstr ""
 #. type: Content of: <h2>
 #: ../../skycultures/khoi-san/description.en.utf8:1
 msgid "Khoikhoi and San"
-msgstr ""
+msgstr "Khoikhoi und San"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/khoi-san/description.en.utf8:4
 msgid "<b>Stars&#8217; Road &mdash; Milky Way:</b>"
-msgstr ""
+msgstr "<b>Sternenstraße – Milchstraße:</b>"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/khoi-san/description.en.utf8:4
@@ -13371,11 +13449,16 @@ msgid ""
 "white roots now glow as red and white stars, and the ashes are the Milky Way"
 " or Stars&#8217; road."
 msgstr ""
+"Ein eigensinniges Mädchen wurde so wütend auf ihre Mutter, als sie ihr keine"
+" der köstlichen gebratenen Wurzeln geben wollte, dass sie sich die "
+"gerösteten Wurzeln einfach nahm und mit der Asche in den Himmel schleuderte."
+" Dort leuchten nun die roten und weißen Wurzeln als rote und weiße Sterne. "
+"Die Asche bildet die Milchstraße oder Sternenstraße."
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/khoi-san/description.en.utf8:6
 msgid "<b>Hunting trip &mdash; Pleiades, Aldebaran and Orion:</b>"
-msgstr ""
+msgstr "<b>Jagdausflug – Plejaden, Aldebaran und Orion:</b>"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/khoi-san/description.en.utf8:6
@@ -13386,11 +13469,16 @@ msgid ""
 "because he had not supplied meat for his family, and he cannot fetch his "
 "arrow because of the fierce lion (Betelgueuse), watching the zebras."
 msgstr ""
+"Bei den Nama waren die Plejaden die Töchter des Himmelsgottes. Ihr Ehemann "
+"(Aldebaran) schoss seinen Pfeil (Schwert des Orion) auf drei Zebras "
+"(Oriongürtel), verfehlte aber. Nun saß er fest. Er konnte weder heimkehren, "
+"da er kein Fleisch für seine Familie geliefert hatte, noch konnte er seinen "
+"Pfeil wegen des wilden Löwen (Beteigeuze), der die Zebras beobachtet, holen."
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/khoi-san/description.en.utf8:8
 msgid "<b>Other Legends</b>"
-msgstr ""
+msgstr "<b>Andere Legenden</b>"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/khoi-san/description.en.utf8:8
@@ -13429,24 +13517,6 @@ msgid ""
 "Nxumalo. The project was initiated by Sivuyile Manxoyi after having "
 "discussions with Prof Jarita Holbrook and Prof Kevin Snedegar on African "
 "Cultural astronomy."
-msgstr ""
-
-#. type: Content of: <p>
-#: ../../skycultures/khoi-san/description.en.utf8:19
-#: ../../skycultures/xhosa/description.en.utf8:22
-#: ../../skycultures/zulu/description.en.utf8:19
-msgid ""
-"This sky culture is provided under CC BY-ND 4.0 International Public Licence"
-" (you can use it for any commercial and noncommercial purpose but credit the"
-" authors and do not change it. Thanks!)."
-msgstr ""
-
-#. type: Content of: <p>
-#: ../../skycultures/khoi-san/description.en.utf8:21
-#: ../../skycultures/xhosa/description.en.utf8:24
-msgid ""
-"Please credit the <a href=\"https://cfah.org.za\">Centre for Astronomical "
-"Heritage (CfAH)</a>."
 msgstr ""
 
 #. type: Content of: <h1>
@@ -17256,13 +17326,6 @@ msgid ""
 "art done by Zamfir Somcutean."
 msgstr ""
 
-#. type: Content of: <p><p><p><p><p><p><p>
-#: ../../skycultures/romanian/description.en.utf8:28
-msgid ""
-"All materials related to Traditional Romanian Constellations are released "
-"under Creative Commons Attribution-ShareAlike 3.0 Unported."
-msgstr ""
-
 #. type: Content of: <h1>
 #: ../../skycultures/sami/description.en.utf8:1
 msgid "Sami"
@@ -18613,6 +18676,8 @@ msgid ""
 "<a href=\"https://en.wikipedia.org/wiki/Lenakel_language\">Netwar language "
 "on Wikipedia</a>"
 msgstr ""
+"<a href=\"https://en.wikipedia.org/wiki/Lenakel_language\">Netwar language "
+"on Wikipedia</a>"
 
 #. type: Content of: <p>
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:60
@@ -18634,6 +18699,11 @@ msgid ""
 " from Imapul, Nausien from Lamlu, Pierrot Nako Yaru from Lowanatom, Joe "
 "Natuman from Lowkweria."
 msgstr ""
+"Ältere aus lokalen Gemeinden auf Tanna, die mit ihrem vererbten Wissen zu "
+"diesem Projekt beisteuerten: Jimmy Napip von Ikumhala, Lomai Tain von "
+"Ielkes, Sylvano Kapalu von Ipai, Iawilu Naumusapen von Lowkweria, Kasékasé "
+"von Imapul, Nausien von Lamlu, Pierrot Nako Yaru von Lowanatom, Joe Natuman "
+"von Lowkweria."
 
 #. type: Content of: <h1>
 #: ../../skycultures/western/description.en.utf8:1
@@ -18678,6 +18748,11 @@ msgid ""
 "instead of traditional names except few cases where the traditional names "
 "are more famous than the designations."
 msgstr ""
+"Die meisten traditionellen westlichen Sternnamen stammen aus dem Arabischen."
+" In der Astronomie werden stattdessen häufig die Bayer/Flamsteed-"
+"Bezeichnungen genutzt. Es werden jedoch in einigen wenigen Fällen, in denen "
+"die traditionellen Namen bekannter als die Bezeichnungen sind, die "
+"traditionellen Namen weiterhin verwendet."
 
 #. type: Content of: <h2>
 #: ../../skycultures/western/description.en.utf8:10
@@ -19055,7 +19130,7 @@ msgstr ""
 #. type: Content of: <h2>
 #: ../../skycultures/xhosa/description.en.utf8:1
 msgid "Xhosa"
-msgstr ""
+msgstr "Xhosa"
 
 #. type: Content of: <p>
 #: ../../skycultures/xhosa/description.en.utf8:2
@@ -19064,6 +19139,9 @@ msgid ""
 "of blue rock resting on the Earth, upon which the Sun moves. In Xhosa, a "
 "star is called &#8220;inkwenkwezi&#8221;."
 msgstr ""
+"Ein weitverbreitete afrikanische Vorstellung ist, dass der Himmel eine feste"
+" Kuppel ist, etwa aus auf der Erde liegendem blauen Gestein, auf dem sich "
+"die Sonne bewegt. Auf Xhosa wird ein Stern »inkwenkwezi« genannt."
 
 #. type: Content of: <p>
 #: ../../skycultures/xhosa/description.en.utf8:3
@@ -19072,6 +19150,9 @@ msgid ""
 "therefore vary their positions relative to the stars, they often feature in "
 "Xhosa starlore."
 msgstr ""
+"Obwohl Planeten »Wanderer« des Nachthimmels sind und sich daher ihre "
+"Position relativ zu den Sternen ändert, tauchen sie oft in der Xhosa-"
+"Sternbildkultur auf."
 
 #. type: Content of: <p>
 #: ../../skycultures/xhosa/description.en.utf8:4
@@ -19079,6 +19160,8 @@ msgid ""
 "Jupiter was interpreted as people around a fire. Venus, as the evening star,"
 " is associated with the time the boys milked the cows"
 msgstr ""
+"Jupiter wurde als Menschen um ein Feuer gedeutet. Venus als Abendstern stand"
+" in Zusammenhang mit der Zeit, in der die Jungen die Kühe molken."
 
 #. type: Content of: <p>
 #: ../../skycultures/xhosa/description.en.utf8:5
@@ -19087,6 +19170,10 @@ msgid ""
 "girls were not allowed to date in public, but met at the fountain where the "
 "girls fetched water when Venus was visible in the evening."
 msgstr ""
+"Venus wurde auch der Stern der Partnersuche, »Madingen«, genannt. Denn es "
+"war Jungen und Mädchen verboten sich öffentlich mit Ausnahme an der Quelle, "
+"bei der die Mädchen Wasser holten, wenn die Venus abends sichtbar war, zu "
+"treffen."
 
 #. type: Content of: <h2>
 #: ../../skycultures/xhosa/description.en.utf8:7
@@ -19098,7 +19185,7 @@ msgstr "Sternsage"
 #: ../../skycultures/xhosa/description.en.utf8:9
 #: ../../skycultures/zulu/description.en.utf8:6
 msgid "<b>isiLimela &mdash; Pleiades:</b>"
-msgstr ""
+msgstr "<b>isiLimela &mdash; Plejaden:</b>"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/xhosa/description.en.utf8:9
@@ -19109,6 +19196,12 @@ msgid ""
 "the Abakwetha circumcision school and it has always been a custom for Xhosa "
 "men to count their years of manhood from this time."
 msgstr ""
+"Die erste Sichtung von »isiLimela« markierte den Beginn der Grab- oder "
+"Pflanzsaison der Xhosa. Es wird auch gesagt, dass der Monat der Grabesterne "
+"das neue Leben eines Mannes nach der Einfüghrungszeremonie in die "
+"Gesellschaft gemäß der Abakwetha-Beschneidungsschule symbolisierte. Für "
+"männliche Xhosa war es Brauch, die Jahre ihrer Männlichkeit von da an zu "
+"zählen."
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/xhosa/description.en.utf8:10
@@ -19244,9 +19337,4 @@ msgid ""
 "related to the way the Nguni people used to fight before Shaka Zulu&#8217;s "
 "revolutionary close-combat strategy. The strong warriors used to throw "
 "spears like javelin and the stream of spears would be seen in the air."
-msgstr ""
-
-#. type: Content of: <p>
-#: ../../skycultures/zulu/description.en.utf8:21
-msgid "Please credit the Centre for Astronomical Heritage (CfAH)."
 msgstr ""

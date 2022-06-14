@@ -105,6 +105,7 @@ Satellites::Satellites()
 	, flagPenumbraVisible(false)
 	, penumbraColor(1.0f, 0.0f, 0.0f)
 	, earthShadowEnlargementDanjon(false)
+	, lastSelectedSatellite(QString())
 	#if(SATELLITES_PLUGIN_IRIDIUM == 1)
 	, iridiumFlaresPredictionDepth(7)
 	#endif
@@ -210,7 +211,7 @@ void Satellites::init()
 
 	// Set up download manager and the update schedule
 	downloadMgr = new QNetworkAccessManager(this);
-    connect(downloadMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(saveDownloadedUpdate(QNetworkReply*)));
+	connect(downloadMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(saveDownloadedUpdate(QNetworkReply*)));
 	updateState = CompleteNoUpdates;
 	updateTimer = new QTimer(this);
 	updateTimer->setSingleShot(false);   // recurring check for update
@@ -229,6 +230,8 @@ void Satellites::init()
 	connect(core, SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateData()));
 	connect(ssystem, SIGNAL(earthShadowEnlargementDanjonChanged(bool)), this, SLOT(updateEarthShadowEnlargementFlag(bool)));
+
+	connect(this, SIGNAL(satSelectionChanged(QString)), this, SLOT(changeSelectedSatellite(QString)));
 
 	bindingGroups();
 }
@@ -700,9 +703,6 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("cf_perigee_flag", false);
 	conf->setValue("cf_perigee_min", 200.);
 	conf->setValue("cf_perigee_max", 1500.);
-	conf->setValue("cf_altitude_flag", false);
-	conf->setValue("cf_altitude_min", 200.);
-	conf->setValue("cf_altitude_max", 1500.);
 	conf->setValue("cf_eccentricity_flag", false);
 	conf->setValue("cf_eccentricity_min", 0.3);
 	conf->setValue("cf_eccentricity_max", 0.9);
@@ -715,6 +715,9 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("cf_rcs_flag", false);
 	conf->setValue("cf_rcs_min", 0.1);
 	conf->setValue("cf_rcs_max", 100.);
+	conf->setValue("vf_altitude_flag", false);
+	conf->setValue("vf_altitude_min", 200.);
+	conf->setValue("vf_altitude_max", 1500.);
 	
 	conf->endGroup(); // saveTleSources() opens it for itself
 }
@@ -845,9 +848,6 @@ void Satellites::loadSettings()
 	setFlagCFPerigee(conf->value("cf_perigee_flag", false).toBool());
 	setMinCFPerigee(conf->value("cf_perigee_min", 200.).toDouble());
 	setMaxCFPerigee(conf->value("cf_perigee_max", 1500.).toDouble());
-	setFlagCFAltitude(conf->value("cf_altitude_flag", false).toBool());
-	setMinCFAltitude(conf->value("cf_altitude_min", 200.).toDouble());
-	setMaxCFAltitude(conf->value("cf_altitude_max", 1500.).toDouble());
 	setFlagCFEccentricity(conf->value("cf_eccentricity_flag", false).toBool());
 	setMinCFEccentricity(conf->value("cf_eccentricity_min", 0.3).toDouble());
 	setMaxCFEccentricity(conf->value("cf_eccentricity_max", 0.9).toDouble());
@@ -860,6 +860,11 @@ void Satellites::loadSettings()
 	setFlagCFRCS(conf->value("cf_rcs_flag", false).toBool());
 	setMinCFRCS(conf->value("cf_rcs_min", 0.1).toDouble());
 	setMaxCFRCS(conf->value("cf_rcs_max", 100.).toDouble());
+
+	// visual filter
+	setFlagVFAltitude(conf->value("vf_altitude_flag", false).toBool());
+	setMinVFAltitude(conf->value("vf_altitude_min", 200.).toDouble());
+	setMaxVFAltitude(conf->value("vf_altitude_max", 500.).toDouble());
 
 	conf->endGroup();
 }
@@ -912,9 +917,6 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("cf_perigee_flag", getFlagCFPerigee());
 	conf->setValue("cf_perigee_min", getMinCFPerigee());
 	conf->setValue("cf_perigee_max", getMaxCFPerigee());
-	conf->setValue("cf_altitude_flag", getFlagCFAltitude());
-	conf->setValue("cf_altitude_min", getMinCFAltitude());
-	conf->setValue("cf_altitude_max", getMaxCFAltitude());
 	conf->setValue("cf_eccentricity_flag", getFlagCFEccentricity());
 	conf->setValue("cf_eccentricity_min", getMinCFEccentricity());
 	conf->setValue("cf_eccentricity_max", getMaxCFEccentricity());
@@ -927,6 +929,11 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("cf_rcs_flag", getFlagCFRCS());
 	conf->setValue("cf_rcs_min", getMinCFRCS());
 	conf->setValue("cf_rcs_max", getMaxCFRCS());
+
+	// visual filter
+	conf->setValue("vf_altitude_flag", getFlagVFAltitude());
+	conf->setValue("vf_altitude_min", getMinVFAltitude());
+	conf->setValue("vf_altitude_max", getMaxVFAltitude());
 
 	conf->endGroup();
 	
@@ -1363,10 +1370,22 @@ QPair<double, double> Satellites::getStdMagRCS(const TleData& tleData)
 	return result;
 }
 
+QList<CommLink> Satellites::getCommunicationData(const QString &id)
+{
+	QList<CommLink> comms;
+
+	for (const auto& sat : qAsConst(satellites))
+	{
+		if (sat->initialized && sat->getID() == id)
+			comms = sat->comms;
+	}
+
+	return comms;
+}
+
 QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 {
 	QList<CommLink> comms;
-	CommLink c;
 
 	// Communication data for individual satellites
 	QVariantMap communications = satComms.value(tleData.id.toInt(), QVariantMap());
@@ -1374,6 +1393,7 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 	{
 		for (const auto& comm : communications.value("comms").toList())
 		{
+			CommLink c;
 			QVariantMap commMap = comm.toMap();
 			c.frequency = commMap.value("frequency").toDouble();
 			c.description = commMap.value("description").toString();
@@ -1384,29 +1404,51 @@ QList<CommLink> Satellites::getCommunicationData(const TleData& tleData)
 	}
 
 	// Communication data for groups of satellites
+	const QMap<QString, QString> startsWith = {
+		{ "GPS",	"gps" },
+		{ "BEIDOU",	"beidou" },
+		{ "IRNSS",	"irnss" },
+		{ "ORBCOMM",	"orbcomm" },
+		{ "TEVEL",	"tevel" },
+		{ "QZS",	"qzss" },
+		{ "FORMOSAT",	"formosat" },
+		{ "FOSSASAT",	"fossasat"},
+		{ "NETSAT",	"netsat" },
+		{ "GONETS-M",	"gonets" },
+		{ "SOYUZ-MS",	"soyuz-ms" },
+		{ "PROGRESS-MS","progress-ms" },
+		{ "IRIDIUM",	"iridium" },
+		{ "STARLINK",	"starlink" },
+		{ "NOAA",	"noaa" },
+		{ "METEOR 1",	"meteor-1" },
+		{ "METEOR 3",	"meteor-2" },
+		{ "METEOR 2",	"meteor-3" },
+		{ "GLOBALSTAR",	"globalstar" },
+		{ "COSMO-SKYMED", "cosmo-skymed" }
+	};
+
 	QStringList groups;
-	if (tleData.name.startsWith("GPS"))
-		groups << "gps";
+	for (auto& satgr: startsWith.keys())
+	{
+		if (tleData.name.startsWith(satgr))
+			groups << startsWith.value(satgr);
+	}
 
 	if (tleData.name.startsWith("COSMOS") && tleData.name.contains("("))
 		groups << "glonass";
 
-	if (tleData.name.startsWith("BEIDOU"))
-		groups << "beidou";
-
 	if (tleData.name.startsWith("GSAT") && (tleData.name.contains("PRN") || tleData.name.contains("GALILEO")))
 		groups << "galileo";
 
-	if (tleData.name.startsWith("IRNSS"))
-		groups << "irnss";
-
 	for (const auto& name : qAsConst(groups))
 	{
-		QVariantMap communications = groupComms.value(name, QVariantMap());
+		communications.clear();
+		communications = groupComms.value(name, QVariantMap());
 		if (!communications.isEmpty())
 		{
 			for (const auto& comm : communications.value("comms").toList())
 			{
+				CommLink c;
 				QVariantMap commMap = comm.toMap();
 				c.frequency = commMap.value("frequency").toDouble();
 				c.description = commMap.value("description").toString();
@@ -1503,7 +1545,7 @@ QStringList Satellites::guessGroups(const TleData& tleData)
 		satGroups.append("gnss");
 		satGroups.append("navigation");
 	}
-	if (tleData.name.startsWith("INTELSAT") || tleData.name.startsWith("GLOBALSTAR") || tleData.name.startsWith("ORBCOMM") || tleData.name.startsWith("GORIZONT") || tleData.name.startsWith("RADUGA") || tleData.name.startsWith("MOLNIYA") || tleData.name.startsWith("DIRECTV") || tleData.name.startsWith("CHINASAT") || tleData.name.startsWith("YAMAL"))
+	if (tleData.name.startsWith("GONETS-M") || tleData.name.startsWith("INTELSAT") || tleData.name.startsWith("GLOBALSTAR") || tleData.name.startsWith("ORBCOMM") || tleData.name.startsWith("GORIZONT") || tleData.name.startsWith("RADUGA") || tleData.name.startsWith("MOLNIYA") || tleData.name.startsWith("DIRECTV") || tleData.name.startsWith("CHINASAT") || tleData.name.startsWith("YAMAL"))
 	{
 		QString satName = tleData.name.split(" ").at(0).toLower();
 		if (satName.contains("-"))
@@ -1860,28 +1902,25 @@ void Satellites::setMaxCFPerigee(double v)
 	emit maxCFPerigeeChanged(v);
 }
 
-void Satellites::setFlagCFAltitude(bool b)
+void Satellites::setFlagVFAltitude(bool b)
 {
-	if (Satellite::flagCFAltitude != b)
+	if (Satellite::flagVFAltitude != b)
 	{
-		Satellite::flagCFAltitude = b;
-		emit customFilterChanged();
-		emit flagCFAltitudeChanged(b);
+		Satellite::flagVFAltitude = b;
+		emit flagVFAltitudeChanged(b);
 	}
 }
 
-void Satellites::setMinCFAltitude(double v)
+void Satellites::setMinVFAltitude(double v)
 {
-	Satellite::minCFAltitude = v;
-	emit customFilterChanged();
-	emit minCFAltitudeChanged(v);
+	Satellite::minVFAltitude = v;
+	emit minVFAltitudeChanged(v);
 }
 
-void Satellites::setMaxCFAltitude(double v)
+void Satellites::setMaxVFAltitude(double v)
 {
-	Satellite::maxCFAltitude = v;
-	emit customFilterChanged();
-	emit maxCFAltitudeChanged(v);
+	Satellite::maxVFAltitude = v;
+	emit maxVFAltitudeChanged(v);
 }
 
 void Satellites::setFlagCFEccentricity(bool b)
@@ -2091,7 +2130,8 @@ void Satellites::updateFromOnlineSources()
 
 	progressBar->setValue(0);
 	progressBar->setRange(0, updateUrls.size());
-	progressBar->setFormat("TLE download %v/%m");
+	// TRANSLATORS: The full phrase is 'Loading TLE %VALUE%/%MAX%' in progress bar
+	progressBar->setFormat(QString("%1 %v/%m").arg(q_("Loading TLE")));
 
 	for (auto url : qAsConst(updateUrls))
 	{
@@ -3083,6 +3123,8 @@ void Satellites::translations()
 	N_("resupply");
 	// TRANSLATORS: Satellite group: are known to broadcast TV signals
 	N_("tv");
+	// TRANSLATORS: Satellite group: Satellites belonging to the GONETS satellites
+	N_("gonets");
 	//
 	// *** Special-Interest Satellites [CelesTrak groups]
 	//
@@ -3417,6 +3459,16 @@ void Satellites::translations()
 	N_("The satellite is visible");
 	N_("The satellite is eclipsed");
 	N_("The satellite is not visible");
+
+	// Special terms for communications
+	// TRANSLATORS: An uplink (UL or U/L) is the link from a ground station to a satellite
+	N_("uplink");
+	// TRANSLATORS: A downlink (DL) is the link from a satellite to a ground station
+	N_("downlink");
+	// TRANSLATORS: The beacon (or radio beacon) is a device in the satellite, which emit one or more signals (normally on a fixed frequency) whose purpose is twofold: station-keeping information (telemetry) and locates the satellite (determines its azimuth and elevation) in the sky
+	N_("beacon");
+	// TRANSLATORS: Telemetry is the collection of measurements or other data at satellites and their automatic transmission to receiving equipment (telecommunication) for monitoring
+	N_("telemetry");
 
 #endif
 }

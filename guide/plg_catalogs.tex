@@ -1247,7 +1247,7 @@ specify other sources online or load updates from local files.
 
 \begin{figure}[htbp]
 	\centering\includegraphics[width=0.8\textwidth]{satellites_plugin_configuration.jpg}
-	\caption{Configuration of the Satellites plugin.}
+	\caption{Configuration of the Satellites plugin}
 	\label{fig:plugins:Satellites:Configuration}
 \end{figure}
 
@@ -1269,14 +1269,14 @@ the unaided eye.
 You can display \newFeature{0.22.2} circles representing the Earth's
 shadow (penumbra and umbra, defined just like for Lunar eclipses, see
 section~\ref{sec:Eclipses:lunar}), at the distance of the currently
-selected satellite, or at a fixed distance from Earth's surface.
+selected satellite, or at a fixed (configurable) distance from Earth's surface.
 
 \subsection{Satellite Properties}
 \label{sec:plugins:Satellites:properties}
 
 \begin{figure}[tbp]
 	\centering\includegraphics[width=0.8\textwidth]{satellites_plugin_satellites.jpg}
-	\caption{Configuration of the Satellites plugin --- satellites properties.}
+	\caption{Configuration of the Satellites plugin: satellite properties}
 	\label{fig:plugins:Satellites:Configuration:Satellites}
 \end{figure}
 
@@ -1289,14 +1289,14 @@ selected satellite, or at a fixed distance from Earth's surface.
   \indexterm[TLE, two-line element]{TLE}s.
 \item[I.D. (The International Designator)] In the \emph{Satellite
   Catalog} satellites are also uniquely identified by their
-  International Designator also known as \indexterm[COSPAR ID (satellite ID)]{COSPAR ID}, which is encoded
-  in TLEs.
+  International Designator also known as \indexterm[COSPAR ID (satellite ID)]{COSPAR ID},
+  which is encoded in TLEs.
 \item[Standard magnitude] The \indexterm[standard magnitude
   (satellites)]{standard magnitude} may be an estimate based on the
   mean cross-sectional area derived from its dimensions, or it may be
   a mean value derived from visual observations.\footnote{The standard
     magnitude and RCS data were obtained from Mike McCants' quicksat
-    catalog with his permissions.}
+    catalog with his kind permission.}
 \item[RCS] The \indexterm[RCS, Radar Cross Section]{Radar Cross
   Section} is a median value derived from the last several years of
   values in the Satellite Situation Report. The units of the RCS are
@@ -1338,7 +1338,7 @@ The group names also can be used as an additional filters for the satellites (se
   velocity) at any point in the past or future can be estimated to
   some accuracy.
 
-\item[Epoch of the TLE] Human-readable epoch of current set of the TLE.
+\item[Epoch of the TLE] Human-readable epoch of current TLE set.
 \end{description}
 
 On the left side of this tab you may see tools for filtering the
@@ -1349,29 +1349,43 @@ group ``navigation''. Some filters are connected to orbital properties
 of satellites, e.g., selecting the filter ``[LEO]'' will show all
 low-orbital satellites.
 
-\begin{figure}[ht]
+\begin{figure}[t]
 	\centering\includegraphics[width=0.6\textwidth]{satellites_plugin_filters.jpg}
-	\caption{Configuration of the Satellites plugin --- satellites custom filter.}
+	\caption{Configuration of the Satellites plugin: satellites custom filter}
 	\label{fig:plugins:Satellites:Configuration:SatellitesFilter}
 \end{figure}
 
 You can display \newFeature{0.22.2} a list of satellites by specific
-selection of their properties, when filter ``[custom filter]'' has
-been selected (see
-\ref{fig:plugins:Satellites:Configuration:SatellitesFilter}). The
-settings of this filter available through button
+selection of their properties, when the filter ``[custom filter]'' has
+been selected (Fig.~\ref{fig:plugins:Satellites:Configuration:SatellitesFilter}). The
+settings of this filter are available through the button
 \guibutton{0.6}{uibtSettings.png}, which is located at the right of
 the drop-down list.
+
+\begin{figure}[tb]
+	\centering\includegraphics[width=0.6\textwidth]{satellites_plugin_comms.jpg}
+	\caption{Configuration of the Satellites plugin: satellite communication data}
+	\label{fig:plugins:Satellites:Configuration:SatellitesComms}
+\end{figure}
+
+You can edit communication data for individual satellites by pressing \guibutton{0.6}{bt_comms_sat.png}
+(Fig.~\ref{fig:plugins:Satellites:Configuration:SatellitesComms}),
+where ``Description'' and ``Frequency'' are required fields and field
+``Modulation'' is optional. Some individual satellites and their
+groups already have the communication data filled in the default
+catalog.
 
 \subsection{Satellite Catalog}
 \label{sec:plugins:Satellites:catalog}
 
-The satellite catalog is stored on the disk in JSON\footnote{\url{https://www.json.org/}}
-format, in a file named \file{satellites.json}. A default copy is embedded in the plug-in at compile time. A working copy is kept in the user data directory.
+The satellite catalog is stored on disk in JSON\footnote{\url{https://www.json.org/}}
+format, in a file named \file{satellites.json}. A default copy is embedded in the
+plug-in at compile time. A working copy is kept in the user data directory.
 
 %   Used in Satellites plug-in 0.7.1 and later (Stellarium 0.11.2 and later) 
 
-To add a new satellite, open a new line after line 5 and paste the following, note commas and brackets, they are important:
+To add a new satellite, open a new line after line 5 and paste the following.
+Note the structure of commas and brackets, they are important:
 \begin{configfileScr}
 "NORAD number": 
 {
@@ -1400,36 +1414,41 @@ Explanation of the fields:
 \begin{description}
 \item[NORAD number]  required parameter, surrounded by double quotes (\texttt{"}),
 followed by a colon (\texttt{:}). It is used internally to identify the
-satellite. You should replace the text \texttt{"NORAD number"} with the first number on both lines of the TLE set (in this case, \texttt{"12345"}). It must match the number of the satellite in the source you are adding from if you want the TLE to be automatically updated.
+satellite. You should replace the text \texttt{"NORAD number"} with the first number
+on both lines of the TLE set (in this case, \texttt{"12345"}).
+It must match the number of the satellite in the source you are adding from if you want the TLE to be automatically updated.
 \end{description}
-The remaining parameters should be listed between two curly brackets and the closing curly bracket must be followed by a comma to separate it from the next satellite in the list:
+The remaining parameters should be listed between two curly brackets,
+and the closing curly bracket must be followed by a comma to separate it from the next satellite in the list:
 
 \begin{description}
-\item[name] required parameter. It will be displayed on the screen and used
+\item[name]  required parameter. It will be displayed on the screen and used
 when searching for the satellite with the Find window. Use the
-description field for a more readable name if you like. (The
-description field can accept HTML tags such as \texttt{<br/>} (new line), \texttt{<b></b>} (bold), etc.)
-
-\item[description] optional parameter, double quoted. Appears when you click on the satellite \item[comms] optional parameter, square bracketed list of curly bracketed communications information.
-\item[groups]  optional parameter, comma separated list of double quoted group names contained in square brackets. Used for grouping satellites in the drop down box on the config (see above)
+description field for a more readable name if you like.
+\item[description]  optional parameter, double quoted. Appears when you click on the satellite.
+  The description field can accept HTML tags such as \texttt{<br/>} (new line), \texttt{<b>}\textbf{bold}\texttt{</b>}, etc.
+\item[comms]  optional parameter, square bracketed list of curly bracketed communications information.
+\item[groups]  optional parameter, comma separated list of double quoted group names contained in square brackets.
+  Used for grouping satellites in the drop down box on the config (see above)
 \item[tle1]  required, line 1 of the TLE, must be contained in double quotes and begin with \texttt{"1~"}
 \item[tle2]  required, line 2 of the TLE, must be contained in double quotes and begin with \texttt{"2~"}
 \item[visible]  required parameter, set to true if you want to see it, this can be toggled from the configuration window once the satellite is loaded. 
-\item[stdMag]  optional parameter, contained standard magnitude of satellite. 
+\item[stdMag]  optional parameter, containing standard magnitude of satellite. 
+\item[rcs] optional parameter, containing the satellite's  \indexterm[RCS, Radar Cross Section]{Radar Cross
+	Section}. The units of the RCS are square meters.
 \end{description}
 You can edit the tags for a satellite, modify the description and comms data, and even add new satellites. 
 
 \subsection{Configuration}
 %\label{sec:plugins:Satellites:configuration}
 
-The plug-in's configuration data is stored in Stellarium's main configuration
-file.
+The plug-in's configuration data is stored in Stellarium's main configuration file.
 
 \subsection{Sources for TLE data}
 
 \begin{figure}[tbp]
 	\centering\includegraphics[width=0.8\textwidth]{satellites_plugin_sources.png}
-	\caption{Configuration of the Satellites plugin --- sources for TLE data.}
+	\caption{Configuration of the Satellites plugin: sources for TLE data}
 	\label{fig:plugins:Satellites:Configuration:Sources}
 \end{figure}
 

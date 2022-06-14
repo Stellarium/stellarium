@@ -121,7 +121,7 @@ Major are widely recognised, known variously as ``the plough'', the
 picture of the bear has been removed and only a constellation diagram
 remains.
 
-\begin{figure}[hb]
+\begin{figure}[tbp]
 \centering\includegraphics[scale=0.8]{uma.png}
 \caption{Ursa Major}
 \label{fig:ursamajor}
@@ -433,7 +433,7 @@ denoted by a number in roman numerals, as described in table~\ref{tab:luminosity
 
 \begin{table}[tb]
   \centering\small
-  \begin{tabular}{lll}
+  \begin{tabular}{ll}
 \toprule
 \emph{Luminosity class} & \emph{Description}\\\midrule
 Ia, Ib & Super-giants\\
@@ -456,7 +456,7 @@ temperature gives a diagram called a Hertzsprung-Russell diagram
 in figure~\ref{fig:colourmag} (which is technically a colour/magnitude
 plot).
 
-\begin{figure}[tp]
+\begin{figure}[tbp]
 \centering\includegraphics[width=\textwidth]{colour_magnitude_graph.png}
 \caption{Hertzsprung-Russell Diagram}
 \label{fig:colourmag}
@@ -599,7 +599,7 @@ definition of a planet in 2006 Pluto has been relegated to having the
 status of \emph{dwarf planet}, along with bodies such as Ceres and Eris.
 See figure~\ref{fig:planets}.
 
-\begin{figure}[t]
+\begin{figure}[tb]
   \centering
   \includegraphics[width=0.9\linewidth]{pictures/the_planets.jpg}
   \caption{The Planets}
@@ -939,7 +939,7 @@ galaxies}, \emph{lenticular galaxies} and \emph{irregular galaxies}.
 
 
 
-\section{Eclipses}
+\section{Eclipses and Transits}
 \label{sec:Eclipses}
 
 Eclipses occur when an apparently large celestial body (planet, moon
@@ -978,8 +978,25 @@ classical literature, or \emph{hybrid} in more recent works.
 
 Lunar eclipses occur when the Earth moves between the Sun and the Moon,
 and the Moon is in the Earth's shadow. They occur under the same basic
-conditions as the solar eclipse but can occur more often because the
-Earth's shadow is so much larger than the Moon's.
+conditions as the solar eclipse but appear to occur more often because the
+Earth's shadow is so much larger than the Moon's, and a Lunar eclipse is
+observable from more than half the Earth's surface, while a Solar eclipse
+is limited to a smaller region.
+
+The geometrical begin of a Lunar eclipse is totally unobservable: Seen
+from a point near the observable edge of the Lunar surface, the large black
+disk of Earth just touches the Solar disk. While the time of this
+event can be determined, the effect on the apparent brightness of the
+Moon's surface as observed from Earth is close to zero. Only as more
+of the Solar disk is occulted by Earth, this spot on the Lunar surface
+will receive less sunlight and will appear darker when observed from
+Earth. A rule of thumb says that 70\% of the Moon must enter the
+Earth's penumbra before a light defect can be noted by attentive human
+observers. 
+
+The Earth's deep shadow is then much darker. As soon as an observer on
+the Lunar edge experiences a Total Solar eclipse, observers on Earth
+see the begin of the partial eclipse.
 
 Total lunar eclipses are more noticeable than partial eclipses because
 the Moon moves fully into the Earth's shadow and there is very
@@ -988,7 +1005,7 @@ noticeable darkening. However, the Earth's atmosphere refracts light
 surface even during total eclipses. The blue parts of sunlight are scattered and filtered away, 
 so that there is a marked reddening of the light as it passes through the atmosphere, and this 
 makes the Moon appear in a deep red colour. The darkness and colors are notably influenced by 
-atmospheric clarity and clouds. After big volcanic eruptions eclipses are often reported darker.
+atmospheric clarity and clouds. After big volcanic eruptions eclipses are often reported to appear darker.
 \name[Andr\'e]{Danjon} (1890--1967) has introduced a scale for the apparent brightness of the 
 fully eclipsed Moon, where 0 is given for extremely dark eclipses and 4 for very bright ones. 
 These unpredictable brightness differences make accurate simulation of the exact appearance impossible, 
@@ -1000,6 +1017,102 @@ objects. The Astronomical Almanac uses a traditional enlargement by 2\% after
 \name[William]{Chauvenet} (1820--1870) while recent eclipse experts prefer another
 formulation which leads to a slightly smaller enlargement after \name[Andr\'e]{Danjon} \citep{Espenak-Meeus:2009}. You
 can select which formulation you prefer (see section~\ref{sec:gui:view:sso}).
+
+\subsection{Transits}
+\label{sec:Eclipses:Transits}
+
+The term ``transit'' generally describes the passage of one object in
+front of another\footnote{Another ``transit'' means the crossing of
+  the meridian by the object.}. The most prominent examples are the
+passages of the \indexterm{inferior planets} Mercury or Venus between the Sun
+and Earth, where they appear as tiny black disks on the glaringly
+bright Solar disk. The disk of Venus can be seen with the unaided
+eye\footnote{Never look into the Sun without proper filters!}, while
+Mercury is too small to be discernible.
+
+Observing the transits of Venus from various locations on Earth was an
+important scientific endeavour in previous centuries. It allows a
+direct determination of the distance scale in the Solar
+System. Unfortunately, these transits are rare events: After two such
+transits 8 years apart, there is a gap lasting more than a
+century. The last such transits occurred in 2004 and 2012. Mercury's
+transits are much more frequent.
+
+In the telescope age, this also can be a passage of a Jovian Moon in
+front of Jupiter, or even the passage of a shadow of such a moon over
+Jupiter's disk, or, more recently, the passage of an artificial
+satellite in front of the Sun or Moon.
+
+\subsection{Contact Times}
+\label{sec:Eclipses:ContactTimes}
+
+Eclipse and transit observers like to prepare tables of precomputed
+\indexterm{contact times} for which they use terminology shown in
+Tables~\ref{tab:Eclipses:ContactTimesSolar}-\ref{tab:Eclipses:ContactTimes}.
+
+\begin{table}[p]
+  \centering\small
+  \begin{tabular}{lll}
+\toprule
+\emph{Contact} & \emph{Name}       & \emph{Description}\\\midrule
+First   & Begin of partial eclipse & Moon first touches Sun from the outside\\  
+Second  & Begin of totality        & Moon completely covers the Sun \\  
+        & Mid-eclipse & central time\\
+Third   & End of totality          & Bright Solar edge re-appears from complete occultation\\  
+Fourth  & End of partial eclipse   & Moon leaves Sun completely \\  
+\bottomrule
+\end{tabular}
+\caption{Contact terminology for Total Solar eclipses.}
+\label{tab:Eclipses:ContactTimesSolar}
+\end{table}
+
+\begin{table}[p]
+  \centering\small
+  \begin{tabular}{ll}
+\toprule
+\emph{Contact} & \emph{Name, Description}\\\midrule
+First  Penumbral & Begin of (penumbral) eclipse. Unobservable. \\
+                 & Moon first touches Earth's geometrical shadow cone from the outside. \\  
+Second Penumbral & Begin of total immersion in penumbra\\
+                 & Moon shows a notable darkening \\  
+First  Umbral    & Begin of partial eclipse\\
+                 & Moon first touches the central dark shadow \\  
+Second Umbral    & Begin of totality\\
+                 & Moon completely immersed in Earth's umbra (dark shadow) \\  
+Maximum          & Mid-eclipse, central time\\
+Third  Umbral    & End of totality\\
+                 & A bright Lunar edge re-appears from complete occultation \\  
+Fourth Umbral    & End of partial eclipse\\
+                 & Moon leaves umbra completely \\  
+Third  Penumbral & End of total penumbral phase\\
+                 & Lunar edge leaves penumbra. The opposide side is still darkened\\  
+Fourth Penumbral & End of (penumbral) eclipse. Unobservable. \\
+                 & Moon leaves penumbra completely. \\  
+\bottomrule
+\end{tabular}
+\caption{Contact terminology for Lunar eclipses. Depending on shadow
+  geometry, the second penumbral contact may occur only after the first
+  umbral, and third penumbral contact before fourth umbral.}
+\label{tab:Eclipses:ContactTimesLunar}
+\end{table}
+
+
+\begin{table}[p]
+  \centering\small
+  \begin{tabular}{lll}
+\toprule
+\emph{Contact} & \emph{Name} & \emph{Description}\\\midrule
+First  & Exterior Ingress & Planet/Moon first touches Sun from the outside\\  
+Second & Interior Ingress & Planet/Moon starts to be visible completely inside Sun \\  
+       & Mid-transit & central time\\
+Third  & Interior Egress & Planet/Moon first touches Sun from the inside\\  
+Fourth & Exterior Egress & Planet/Moon leaves Sun completely \\  
+\bottomrule
+\end{tabular}
+\caption{Contact terminology for Transits and Annular Solar eclipses.}
+\label{tab:Eclipses:ContactTimes}
+\end{table}
+
 
 \section{Observing Hints}
 \label{sec:observing_hints}
@@ -1058,7 +1171,7 @@ side but concentrating on the object's location can often reveal it.
 \subsection{Atmospheric Extinction}
 \label{sec:phenomena:Extinction}
 
-\begin{figure}[tb]
+\begin{figure}[tbp]
 \centering
 \ifpdf
 \includegraphics[width=\textwidth]{gz_extinctionmag}

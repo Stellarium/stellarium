@@ -31,6 +31,7 @@
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
+#include "StelTranslator.hpp"
 #include "gSatWrapper.hpp"
 #include "SolarSystem.hpp"
 
@@ -41,9 +42,9 @@ class StelLocation;
 //! @ingroup satellites
 typedef struct
 {
-	double frequency; //!< Channel frequency in MHz.
-	QString modulation; //!< Signal modulation mode.
-	QString description; //!< Channel description.
+	double frequency;	//!< Channel frequency in MHz.
+	QString modulation;	//!< Signal modulation mode.
+	QString description;	//!< Callsign with channel description.
 } CommLink;
 
 //! Description of the data roles used in SatellitesListModel.
@@ -72,27 +73,28 @@ typedef QSet<QString> GroupSet;
 //! @ingroup satellites
 enum SatFlag
 {
-	SatNoFlags	= 0x00000,
-	SatDisplayed	= 0x00001,
-	SatNotDisplayed	= 0x00002,
-	SatUser		= 0x00004,
-	SatOrbit	= 0x00008,
-	SatNew		= 0x00010,
-	SatError	= 0x00020,
-	SatSmallSize	= 0x00040,
-	SatMediumSize	= 0x00080,
-	SatLargeSize	= 0x00100,
-	SatLEO		= 0x00200,
-	SatMEO		= 0x00400,
-	SatGSO		= 0x00800,
-	SatHEO		= 0x01000,
-	SatHGSO		= 0x02000,
-	SatPolarOrbit	= 0x04000,
-	SatEquatOrbit	= 0x08000,
-	SatPSSO		= 0x10000,
-	SatHEarthO	= 0x20000,
-	SatOutdatedTLE	= 0x40000,
-	SatCustomFilter	= 0x80000
+	SatNoFlags		= 0x000000,
+	SatDisplayed		= 0x000001,
+	SatNotDisplayed	= 0x000002,
+	SatUser			= 0x000004,
+	SatOrbit			= 0x000008,
+	SatNew			= 0x000010,
+	SatError			= 0x000020,
+	SatSmallSize		= 0x000040,
+	SatMediumSize	= 0x000080,
+	SatLargeSize		= 0x000100,
+	SatLEO			= 0x000200,
+	SatMEO			= 0x000400,
+	SatGSO			= 0x000800,
+	SatHEO			= 0x001000,
+	SatHGSO			= 0x002000,
+	SatPolarOrbit		= 0x004000,
+	SatEquatOrbit		= 0x008000,
+	SatPSSO			= 0x010000,
+	SatHEarthO		= 0x020000,
+	SatOutdatedTLE	= 0x040000,
+	SatCustomFilter	= 0x080000,
+	SatCommunication	= 0x100000
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
@@ -149,7 +151,7 @@ public:
 
 	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
 	{
-		return "artificial satellite";
+		return N_("artificial satellite");
 	}
 
 	virtual QString getID(void) const Q_DECL_OVERRIDE
@@ -223,6 +225,8 @@ public:
 	
 	void setNew() {newlyAdded = true;}
 	bool isNew() const {return newlyAdded;}
+
+	void setCommData(QList<CommLink> comm) { comms = comm; }
 	
 	//! Get internal flags as a single value.
 	SatFlags getFlags() const;
@@ -253,6 +257,9 @@ private:
 	//! Sets #internationalDesignator and #jdLaunchYearJan1.
 	void parseInternationalDesignator(const QString& tle1);
 	void calculateEpochFromLine1(QString tle);
+
+	bool getCustomFiltersFlag() const;
+	QString getCommLinkInfo(CommLink comm) const;
 
 	bool initialized;
 	//! Flag indicating whether the satellite should be displayed.
@@ -340,9 +347,6 @@ private:
 	static bool flagCFPerigee;
 	static double minCFPerigee;
 	static double maxCFPerigee;
-	static bool flagCFAltitude;
-	static double minCFAltitude;
-	static double maxCFAltitude;
 	static bool flagCFEccentricity;
 	static double minCFEccentricity;
 	static double maxCFEccentricity;
@@ -355,6 +359,9 @@ private:
 	static bool flagCFRCS;
 	static double minCFRCS;
 	static double maxCFRCS;
+	static bool flagVFAltitude;
+	static double minVFAltitude;
+	static double maxVFAltitude;
 
 	void draw(StelCore *core, StelPainter& painter);
 
@@ -376,7 +383,7 @@ private:
 	Vec3f    orbitColor;
 	double    lastEpochCompForOrbit; //measured in Julian Days
 	double    epochTime;  //measured in Julian Days
-	QList<Vec3d> orbitPoints; //orbit points represented by ElAzPos vectors
+	QList<Vec4d> orbitPoints; //orbit points represented by ElAzPos vectors and altitudes
 	QList<gSatWrapper::Visibility> visibilityPoints; //orbit visibility points
 	QMap<gSatWrapper::Visibility, QString> visibilityDescription;
 };

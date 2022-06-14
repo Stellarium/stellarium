@@ -125,7 +125,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "<h2>" << designation << "</h2>";
 
 	if (flags&ObjectType)
-		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("quasar")) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getObjectType())) << "<br />";
 
 	if (flags&Magnitude && VMagnitude>-99.f)
 		oss << getMagnitudeInfoString(core, flags, 2);

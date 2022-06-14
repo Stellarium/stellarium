@@ -30,6 +30,7 @@
 #include "SpecialMarkersMgr.hpp"
 #include "CustomObjectMgr.hpp"
 #include "SolarSystem.hpp"
+#include "NomenclatureMgr.hpp"
 
 #include "StelObjectMgr.hpp"
 #include "StelGui.hpp"
@@ -457,10 +458,9 @@ void SearchDialog::createDialogContent()
 	updateListTab();
 
 	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(changeTab(int)));
-	// Set the focus directly on the line editDe	if (ui->tabWidget->currentIndex()==0)
-	ui->lineEditSearchSkyObject->setFocus();
-
+	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(refreshFocus(bool)));
 	connect(StelApp::getInstance().getCore(), SIGNAL(updateSearchLists()), this, SLOT(updateListTab()));
+	connect(GETSTELMODULE(NomenclatureMgr), SIGNAL(nomenclatureDisplayedChanged(bool)), this, SLOT(updateListTab()));
 
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->simbadStatusLabel->setStyleSheet(style);
@@ -498,6 +498,12 @@ void SearchDialog::populateRecentSearch()
 			.arg(qc_("searches", "search tool"));
 	ui->recentSearchSizeSpinBox->setToolTip(toolTipComment);
 	setRecentSearchClearDataPushButton();
+}
+
+void SearchDialog::refreshFocus(bool state)
+{
+	if (state)
+		ui->lineEditSearchSkyObject->setFocus();
 }
 
 void SearchDialog::changeTab(int index)
@@ -1203,7 +1209,7 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 		{
 			close();
 			ui->lineEditSearchSkyObject->clear();
-			
+
 			// Can't point to home planet
 			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
 			{
@@ -1217,9 +1223,65 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 	simbadResults.clear();
 }
 
+void SearchDialog::gotoObject(const QString &nameI18n, const QString &objType)
+{
+	if (nameI18n.isEmpty())
+		return;
+
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+	if (objectMgr->findAndSelectI18n(nameI18n, objType) || objectMgr->findAndSelect(nameI18n, objType))
+	{
+		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+		if (!newSelected.empty())
+		{
+			close();
+			ui->lineEditSearchSkyObject->clear();
+			
+			// Can't point to home planet
+			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
+			{
+				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+				mvmgr->setFlagTracking(true);
+			}
+			else
+				GETSTELMODULE(StelObjectMgr)->unSelect();
+		}
+	}
+}
+
 void SearchDialog::gotoObject(const QModelIndex &modelIndex)
 {
 	gotoObject(modelIndex.model()->data(modelIndex, Qt::DisplayRole).toString());
+}
+
+void SearchDialog::gotoObjectWithType(const QModelIndex &modelIndex)
+{
+	QString objType, objClass = ui->objectTypeComboBox->currentData(Qt::UserRole).toString();
+	QStringList list;
+	if (objClass.contains(":"))
+	{
+		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+		list = objClass.split(":", Qt::SkipEmptyParts);
+		#else
+		list = objClass.split(":", QString::SkipEmptyParts);
+		#endif
+		objType = list.at(0);
+	}
+	else
+		objType = objClass;
+
+	objType.replace("Mgr","");
+	objType.replace("SolarSystem","Planet");
+	objType.replace("Nomenclature","NomenclatureItem");
+	// plug-ins
+	objType.replace("Supernovae","Supernova");
+	objType.replace("Novae","Nova");
+	objType.replace("Exoplanets","Exoplanet");
+	objType.replace("Pulsars","Pulsar");
+	objType.replace("Quasars","Quasar");
+	objType.replace("MeteorShowers","MeteorShower");
+
+	gotoObject(modelIndex.model()->data(modelIndex, Qt::DisplayRole).toString(), objType);
 }
 
 void SearchDialog::searchListClear()
@@ -1363,7 +1425,7 @@ void SearchDialog::updateListView(int index)
 	proxyModel->sort(0, Qt::AscendingOrder);
 	ui->objectsListView->blockSignals(false);
 	//bugfix: prevent multiple connections, which seems to have happened before
-	connect(ui->objectsListView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(gotoObject(const QModelIndex&)), Qt::UniqueConnection);
+	connect(ui->objectsListView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(gotoObjectWithType(const QModelIndex&)), Qt::UniqueConnection);
 }
 
 void SearchDialog::updateListTab()

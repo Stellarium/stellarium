@@ -38,6 +38,7 @@ class QTimer;
 
 class SatellitesImportDialog;
 class SatellitesFilterDialog;
+class SatellitesCommDialog;
 class SatellitesListFilterModel;
 
 //! Main configuration window of the %Satellites plugin.
@@ -138,6 +139,8 @@ private slots:
 	void setRightSideToROMode();
 	void setRightSideToRWMode();
 
+	void enableMinMaxAltitude(bool state);
+
 private:
 	//! @todo find out if this is really necessary... --BM
 	void enableSatelliteDataForm(bool enabled);
@@ -175,6 +178,7 @@ private:
 	
 	SatellitesImportDialog* importWindow;
 	SatellitesFilterDialog* filterWindow;
+	SatellitesCommDialog* commWindow;
 	
 	SatellitesListFilterModel* filterModel;
 	

@@ -310,7 +310,6 @@ void Atmosphere::computeColor(StelCore* core, const double JD, const Planet& cur
 			if (pointF[2]<=0.f)
 			{
 				pointF[2] *= -1.f;
-				moonPosF[2] *= -1.f;
 				// The sky below the ground is the symmetric of the one above :
 				// it looks nice and gives proper values for brightness estimation
 				// Use the Skybright.cpp 's models for brightness which gives better results.

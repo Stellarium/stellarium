@@ -73,6 +73,13 @@ public:
 	//! @return true if a object with the passed name was found
 	bool findAndSelectI18n(const QString &nameI18n, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
+	//! Find and select an object from its translated name and object type name.
+	//! @param action define whether to add to, replace, or remove from the existing selection
+	//! @param nameI18n the case sensitive object translated name
+	//! @param objtype the type of the object
+	//! @return true if a object with the passed name was found
+	bool findAndSelectI18n(const QString &name, const QString &objtype, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
+
 	//! Find and select an object from its standard program name.
 	//! @param action define whether to add to, replace, or remove from the existing selection
 	//! @param name the case sensitive object translated name
@@ -128,6 +135,9 @@ public:
 
 	//! Find any kind of object by its translated name.
 	StelObjectP searchByNameI18n(const QString &name) const;
+
+	//! Find any kind of object by its translated name and its object type name.
+	StelObjectP searchByNameI18n(const QString &name, const QString &objType) const;
 
 	//! Find any kind of object by its standard program name.
 	StelObjectP searchByName(const QString &name) const;

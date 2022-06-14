@@ -149,7 +149,8 @@ void SatellitesImportDialog::getData()
 			progressBar = StelApp::getInstance().addProgressBar();
 		progressBar->setValue(0);
 		progressBar->setRange(0, sourceUrls.size());
-		progressBar->setFormat("TLE download %v/%m");
+		// TRANSLATORS: The full phrase is 'Loading TLE %VALUE%/%MAX%' in progress bar
+		progressBar->setFormat(QString("%1 %v/%m").arg(q_("Loading TLE")));
 		
 		ui->pushButtonGetData->setVisible(false);
 		ui->pushButtonAbort->setVisible(true);

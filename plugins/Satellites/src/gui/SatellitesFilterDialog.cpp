@@ -54,6 +54,7 @@ void SatellitesFilterDialog::createDialogContent()
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	connectBoolProperty(ui->inclinationCheckBox,  "Satellites.flagCFInclination");
 	connectDoubleProperty(ui->minInclination,     "Satellites.minCFInclination");
@@ -70,9 +71,6 @@ void SatellitesFilterDialog::createDialogContent()
 	connectBoolProperty(ui->perigeeCheckBox,      "Satellites.flagCFPerigee");
 	connectDoubleProperty(ui->minPerigee,         "Satellites.minCFPerigee");
 	connectDoubleProperty(ui->maxPerigee,         "Satellites.maxCFPerigee");
-	connectBoolProperty(ui->altitudeCheckBox,     "Satellites.flagCFAltitude");
-	connectDoubleProperty(ui->minAltitude,        "Satellites.minCFAltitude");
-	connectDoubleProperty(ui->maxAltitude,        "Satellites.maxCFAltitude");
 	connectBoolProperty(ui->rcsCheckBox,          "Satellites.flagCFRCS");
 	connectDoubleProperty(ui->minRCS,             "Satellites.minCFRCS");
 	connectDoubleProperty(ui->maxRCS,             "Satellites.maxCFRCS");
@@ -84,8 +82,6 @@ void SatellitesFilterDialog::createDialogContent()
 	connect(ui->apogeeCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxApogee(bool)));
 	updateMinMaxPerigee(ui->perigeeCheckBox->isChecked());
 	connect(ui->perigeeCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxPerigee(bool)));
-	updateMinMaxAltitude(ui->altitudeCheckBox->isChecked());
-	connect(ui->altitudeCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxAltitude(bool)));
 	updateMinMaxPeriod(ui->periodCheckBox->isChecked());
 	connect(ui->periodCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateMinMaxPeriod(bool)));
 	updateMinMaxEccentricity(ui->eccentricityCheckBox->isChecked());
@@ -114,12 +110,6 @@ void SatellitesFilterDialog::updateMinMaxPerigee(bool state)
 	ui->maxPerigee->setEnabled(state);
 }
 
-void SatellitesFilterDialog::updateMinMaxAltitude(bool state)
-{
-	ui->minAltitude->setEnabled(state);
-	ui->maxAltitude->setEnabled(state);
-}
-
 void SatellitesFilterDialog::updateMinMaxPeriod(bool state)
 {
 	ui->minPeriod->setEnabled(state);
@@ -143,18 +133,24 @@ void SatellitesFilterDialog::populateTexts()
 	QString km = qc_("km", "distance");
 	QString m = qc_("m", "distance");
 	QString min = qc_("m", "time");
+	QString vr = q_("Valid range");
 	ui->minApogee->setSuffix(QString(" %1").arg(km));
+	ui->minApogee->setToolTip(QString("%1: %2..%3 %4").arg(vr, QString::number(ui->minApogee->minimum(), 'f', 0), QString::number(ui->minApogee->maximum(), 'f', 0), km));
 	ui->maxApogee->setSuffix(QString(" %1").arg(km));
+	ui->maxApogee->setToolTip(QString("%1: %2..%3 %4").arg(vr, QString::number(ui->maxApogee->minimum(), 'f', 0), QString::number(ui->maxApogee->maximum(), 'f', 0), km));
 	ui->minPerigee->setSuffix(QString(" %1").arg(km));
+	ui->minPerigee->setToolTip(QString("%1: %2..%3 %4").arg(vr, QString::number(ui->minPerigee->minimum(), 'f', 0), QString::number(ui->minPerigee->maximum(), 'f', 0), km));
 	ui->maxPerigee->setSuffix(QString(" %1").arg(km));
-	ui->altitudeCheckBox->setToolTip(q_("The satellite can be located in selected range of altitudes"));
-	ui->minAltitude->setSuffix(QString(" %1").arg(km));
-	ui->maxAltitude->setSuffix(QString(" %1").arg(km));
+	ui->maxPerigee->setToolTip(QString("%1: %2..%3 %4").arg(vr, QString::number(ui->maxPerigee->minimum(), 'f', 0), QString::number(ui->maxPerigee->maximum(), 'f', 0), km));
 	ui->minPeriod->setSuffix(QString(" %1").arg(min));
+	ui->minPeriod->setToolTip(QString("%1: %2..%3 %4").arg(vr, QString::number(ui->minPeriod->minimum(), 'f', 0), QString::number(ui->minPeriod->maximum(), 'f', 0), min));
 	ui->maxPeriod->setSuffix(QString(" %1").arg(min));
+	ui->maxPeriod->setToolTip(QString("%1: %2..%3 %4").arg(vr, QString::number(ui->maxPeriod->minimum(), 'f', 0), QString::number(ui->maxPeriod->maximum(), 'f', 0), min));
 	ui->minInclination->setSuffix("°");
 	ui->maxInclination->setSuffix("°");
 	ui->rcsCheckBox->setToolTip(q_("Radar cross-section"));
 	ui->minRCS->setSuffix(QString(" %1%2").arg(m, "²"));
+	ui->minRCS->setToolTip(QString("%1: %2..%3 %4%5").arg(vr, QString::number(ui->minRCS->minimum(), 'f', 2), QString::number(ui->minRCS->maximum(), 'f', 2), m, "²"));
 	ui->maxRCS->setSuffix(QString(" %1%2").arg(m, "²"));
+	ui->maxRCS->setToolTip(QString("%1: %2..%3 %4%5").arg(vr, QString::number(ui->maxRCS->minimum(), 'f', 2), QString::number(ui->maxRCS->maximum(), 'f', 2), m, "²"));
 }

@@ -73,9 +73,6 @@ double Satellite::maxCFApogee = 55000.;
 bool Satellite::flagCFPerigee = false;
 double Satellite::minCFPerigee = 200.;
 double Satellite::maxCFPerigee = 1500.;
-bool Satellite::flagCFAltitude = false;
-double Satellite::minCFAltitude = 200.;
-double Satellite::maxCFAltitude = 1500.;
 bool Satellite::flagCFEccentricity = false;
 double Satellite::minCFEccentricity = 0.3;
 double Satellite::maxCFEccentricity = 0.9;
@@ -88,6 +85,9 @@ double Satellite::maxCFInclination = 360.;
 bool Satellite::flagCFRCS = false;
 double Satellite::minCFRCS = 0.1;
 double Satellite::maxCFRCS = 100.;
+bool Satellite::flagVFAltitude = false;
+double Satellite::minVFAltitude = 200.;
+double Satellite::maxVFAltitude = 500.;
 
 #if (SATELLITES_PLUGIN_IRIDIUM == 1)
 double Satellite::sunReflAngle = 180.;
@@ -293,6 +293,9 @@ QVariantMap Satellite::getMap(void)
 
 float Satellite::getSelectPriority(const StelCore*) const
 {
+	if (flagVFAltitude) // the visual filter is enabled
+		return (minVFAltitude<=height && height<=maxVFAltitude) ? -10. : 50.;
+
 	return -10.;
 }
 
@@ -324,7 +327,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	}
 
 	if (flags & ObjectType)
-		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("artificial satellite"))  << "<br/>";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getObjectType()))  << "<br/>";
 	
 	if ((flags & Magnitude) && (stdMag<99. || RCS>0.) && (visibility==gSatWrapper::VISIBLE))
 	{
@@ -441,27 +444,54 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 			oss << q_("Radio communication") << ":<br/>";
 			for (const auto& c : comms)
 			{
-				double dop = getDoppler(c.frequency);
-				double ddop = dop;
-				QString sign;
-				if (dop<0.)
-				{
-					sign='-';
-					ddop*=-1;
-				}
-				else
-					sign='+';
-
-				if (!c.modulation.isEmpty() && c.modulation != "") oss << "  " << c.modulation;
-				if (!c.description.isEmpty() && c.description != "") oss << "  " << c.description;
-				if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << ": ";
-				oss << QString("%1 %2 (%3%4 %5)").arg(QString::number(c.frequency, 'f', 3), qc_("MHz", "frequency"), sign, QString::number(ddop, 'f', 3), qc_("kHz", "frequency")) << "<br/>";
+				oss << getCommLinkInfo(c);
 			}
 		}
 	}
 
 	postProcessInfoString(str, flags);
 	return str;
+}
+
+QString Satellite::getCommLinkInfo(CommLink comm) const
+{
+	QString commLinkData;
+
+	if (!comm.modulation.isEmpty()) // OK, the signal modulation mode is exist
+		commLinkData = comm.modulation;
+
+	if (commLinkData.isEmpty()) // description cannot be empty!
+		commLinkData = comm.description;
+	else
+		commLinkData.append(QString(" %1").arg(comm.description));
+
+	if (commLinkData.isEmpty())
+		return QString();
+
+	// Translate some specific communications terms
+	// See end of Satellites.cpp file to define translatable terms
+	QStringList commTerms;
+	commTerms << "uplink" << "downlink" << "beacon" << "telemetry";
+	for (auto& term: commTerms)
+	{
+		commLinkData.replace(term, q_(term));
+	}
+	commLinkData.replace("&", q_("and"));
+
+	double dop = getDoppler(comm.frequency);
+	double ddop = dop;
+	QString sign;
+	if (dop<0.)
+	{
+		sign='-';
+		ddop*=-1;
+	}
+	else
+		sign='+';
+
+	commLinkData.append(QString(": %1 %2 (%3%4 %5)<br />").arg(QString::number(comm.frequency, 'f', 3), qc_("MHz", "frequency"), sign, QString::number(ddop, 'f', 3), qc_("kHz", "frequency")));
+
+	return commLinkData;
 }
 
 // Calculate perigee and apogee altitudes for mean Earth radius
@@ -868,33 +898,10 @@ SatFlags Satellite::getFlags() const
 		flags |= SatHEarthO;
 	if (qAbs(StelApp::getInstance().getCore()->getJD() - tleEpochJD) > tleEpochAge)
 		flags |= SatOutdatedTLE;
-	// custom filters
-	bool cfa = true;
-	if (flagCFApogee)
-		cfa = (apogee>=minCFApogee && apogee<=maxCFApogee);
-	bool cfp = true;
-	if (flagCFPerigee)
-		cfp = (perigee>=minCFPerigee && perigee<=maxCFPerigee);
-	bool cfe = true;
-	if (flagCFEccentricity)
-		cfe = (eccentricity>=minCFEccentricity && eccentricity<=maxCFEccentricity);
-	bool cfm = true;
-	if (flagCFKnownStdMagnitude)
-		cfm = (stdMag<99.0);
-	bool cft = true;
-	if (flagCFPeriod)
-		cft = (orbitalPeriod>=minCFPeriod && orbitalPeriod<=maxCFPeriod);
-	bool cfi = true;
-	if (flagCFInclination)
-		cfi = (inclination>=minCFInclination && inclination<=maxCFInclination);
-	bool cfr = true;
-	if (flagCFRCS)
-		cfr = (RCS>=minCFRCS && RCS<=maxCFRCS);
-	bool cfh = true;
-	if (flagCFAltitude)
-		cfh = ((perigee<=minCFAltitude && apogee>=maxCFAltitude) || (perigee>=minCFAltitude && apogee<=maxCFAltitude) || (perigee<=minCFAltitude && apogee>=minCFAltitude && apogee<=maxCFAltitude) || (perigee<=maxCFAltitude && perigee>=minCFAltitude && apogee>=maxCFAltitude));
-	if (cfa && cfp && cfe && cfm && cft && cfi && cfr && cfh)
+	if (getCustomFiltersFlag())
 		flags |= SatCustomFilter;
+	if (!comms.isEmpty())
+		flags |= SatCommunication;
 
 	return flags;
 }
@@ -906,6 +913,40 @@ void Satellite::setFlags(const SatFlags& flags)
 	userDefined = flags.testFlag(SatUser);
 }
 
+bool Satellite::getCustomFiltersFlag() const
+{
+	double orbitalPeriod = pSatWrapper->getOrbitalPeriod();
+	// Apogee
+	bool cfa = true;
+	if (flagCFApogee)
+		cfa = (apogee>=minCFApogee && apogee<=maxCFApogee);
+	// Perigee
+	bool cfp = true;
+	if (flagCFPerigee)
+		cfp = (perigee>=minCFPerigee && perigee<=maxCFPerigee);
+	// Eccentricity
+	bool cfe = true;
+	if (flagCFEccentricity)
+		cfe = (eccentricity>=minCFEccentricity && eccentricity<=maxCFEccentricity);
+	// Known standrad magnitude
+	bool cfm = true;
+	if (flagCFKnownStdMagnitude)
+		cfm = (stdMag<99.0);
+	// Period
+	bool cft = true;
+	if (flagCFPeriod)
+		cft = (orbitalPeriod>=minCFPeriod && orbitalPeriod<=maxCFPeriod);
+	// Inclination
+	bool cfi = true;
+	if (flagCFInclination)
+		cfi = (inclination>=minCFInclination && inclination<=maxCFInclination);
+	// RCS
+	bool cfr = true;
+	if (flagCFRCS)
+		cfr = (RCS>=minCFRCS && RCS<=maxCFRCS);
+
+	return (cfa && cfp && cfe && cfm && cft && cfi && cfr);
+}
 
 void Satellite::parseInternationalDesignator(const QString& tle1)
 {
@@ -954,6 +995,15 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 	// 2) Do not show satellites when time rate is over limit (JD/sec)!
 	if (core->getJD()<jdLaunchYearJan1 || qAbs(core->getTimeRate())>=timeRateLimit)
 		return;
+
+	if (flagVFAltitude)
+	{
+		// visual filter is activated!
+		// is satellite located in valid range of altitudes?
+		// yes, but... inverse the result and skip rendering!
+		if (!(minVFAltitude<=height && height<=maxVFAltitude))
+			return;
+	}
 
 	Vec3d win;
 	if (painter.getProjector()->projectCheck(XYZ, win))
@@ -1042,6 +1092,7 @@ void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 	{
 		Vec3d position;
 		Vec3f drawColor;
+		Vec4d op;
 		QVector<Vec3d> vertexArray;
 		QVector<Vec4f> colorArray;
 		vertexArray.resize(size);
@@ -1050,14 +1101,28 @@ void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 		//Rest of points
 		for (int i=0; i<size; i++)
 		{
-			position = core->altAzToJ2000(orbitPoints[i].toVec3d(), StelCore::RefractionOff);
+			op = orbitPoints[i];
+			position = core->altAzToJ2000(Vec3d(op[0],op[1],op[2]), StelCore::RefractionOff);
 			position.normalize();
 			vertexArray[i] = position;
+
 			drawColor = (visibilityPoints[i] == gSatWrapper::VISIBLE) ? orbitColor : invisibleSatelliteColor;
-			if (hideInvisibleSatellitesFlag && visibilityPoints[i] != gSatWrapper::VISIBLE)
-				colorArray[i] = Vec4f(0.f,0.f,0.f,0.f); // hide invisible part of orbit
+			if (flagVFAltitude)
+			{
+				// visual filter is activated!
+				// is satellite located in valid range of altitudes?
+				if (minVFAltitude<=op[3] && op[3]<=maxVFAltitude)
+					colorArray[i] = Vec4f(drawColor, hintBrightness * calculateOrbitSegmentIntensity(i));
+				else
+					colorArray[i] = Vec4f(0.f,0.f,0.f,0.f); // hide invisible part of orbit
+			}
 			else
-				colorArray[i] = Vec4f(drawColor, hintBrightness * calculateOrbitSegmentIntensity(i));
+			{
+				if (hideInvisibleSatellitesFlag && visibilityPoints[i] != gSatWrapper::VISIBLE)
+					colorArray[i] = Vec4f(0.f,0.f,0.f,0.f); // hide invisible part of orbit
+				else
+					colorArray[i] = Vec4f(drawColor, hintBrightness * calculateOrbitSegmentIntensity(i));
+			}
 		}
 
 		painter.drawPath(vertexArray, colorArray); // (does client state switching as needed internally)
@@ -1088,8 +1153,9 @@ void Satellite::computeOrbitPoints()
 
 		for (int i=0; i<=orbitLineSegments; i++)
 		{
-			pSatWrapper->setEpoch(epochTm.getGmtTm());			
-			orbitPoints.append(pSatWrapper->getAltAz());
+			pSatWrapper->setEpoch(epochTm.getGmtTm());
+			Vec3d sat = pSatWrapper->getAltAz();
+			orbitPoints.append(Vec4d(sat[0],sat[1],sat[2],pSatWrapper->getSubPoint()[2]));
 			visibilityPoints.append(pSatWrapper->getVisibilityPredict());
 			epochTm    += computeInterval;
 		}
@@ -1118,8 +1184,9 @@ void Satellite::computeOrbitPoints()
 				//remove points at beginning of list and add points at end.
 				orbitPoints.removeFirst();
 				visibilityPoints.removeFirst();
-				pSatWrapper->setEpoch(epochTm.getGmtTm());				
-				orbitPoints.append(pSatWrapper->getAltAz());
+				pSatWrapper->setEpoch(epochTm.getGmtTm());
+				Vec3d sat = pSatWrapper->getAltAz();
+				orbitPoints.append(Vec4d(sat[0],sat[1],sat[2],pSatWrapper->getSubPoint()[2]));
 				visibilityPoints.append(pSatWrapper->getVisibilityPredict());
 				epochTm    += computeInterval;
 			}
@@ -1148,8 +1215,9 @@ void Satellite::computeOrbitPoints()
 			{ //remove points at end of list and add points at beginning.
 				orbitPoints.removeLast();
 				visibilityPoints.removeLast();
-				pSatWrapper->setEpoch(epochTm.getGmtTm());				
-				orbitPoints.push_front(pSatWrapper->getAltAz());
+				pSatWrapper->setEpoch(epochTm.getGmtTm());
+				Vec3d sat = pSatWrapper->getAltAz();
+				orbitPoints.push_front(Vec4d(sat[0],sat[1],sat[2],pSatWrapper->getSubPoint()[2]));
 				visibilityPoints.push_front(pSatWrapper->getVisibilityPredict());
 				epochTm -= computeInterval;
 			}
