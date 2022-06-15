@@ -44,11 +44,13 @@ public:
 	enum Visibility
 	{
 		//constants for visibility prediction
-		UNKNOWN=0,
-		RADAR_SUN=1,
-		VISIBLE=2,
-		RADAR_NIGHT=3,
-		NOT_VISIBLE=4
+		UNKNOWN		= 0,
+		RADAR_SUN	= 1,
+		VISIBLE		= 2,
+		RADAR_NIGHT	= 3,
+		NOT_VISIBLE	= 4,
+		PENUMBRAL	= 5,
+		ANNULAR		= 6
 	};
         gSatWrapper(QString designation, QString tle1,QString tle2);
         ~gSatWrapper();
@@ -100,18 +102,20 @@ public:
 
         // Operation getVisibilityPredict
         //! @brief This operation predicts the satellite visibility contidions.
-        //! This prediction can return 4 different states
-	//!   RADAR_SUN when satellite and observer are in the sunlight
-	//!   VISIBLE   when satellite is in sunlight and observer is in the dark. Satellite could be visible in the sky.
-        //!   RADAR_NIGHT when satellite is eclipsed by the earth shadow.
-        //!   NOT_VISIBLE The satellite is under the observer horizon
+	//! VISIBLE means the satellite is sunlit and the site is in the dark;
+	//! RADAR_NIGHT means the satellite isn't sunlit and the site either in the light or dark;
+	//! RADAR_SUN means the satellite and site are in the sunlight
+	//! PENUMBRAL means the satellite is in penumbra
+	//! ANNULAR means the satellite is eclipsed by the earth shadow
         //! @return
         //!     1 if RADAR_SUN
         //!     2 if VISIBLE
 	//!     3 if RADAR_NIGHT
-        //!     3 if NOT_VISIBLE
+	//!     4 if NOT_VISIBLE
+	//! 	5 if PENUMBRAL
+	//!     6 if ANNULAR
         //! @par References
-        //!   Fundamentals of Astrodynamis and Applications (Third Edition) pg 898
+	//!   Fundamentals of Astrodynamis and Applications (Fourth Edition) p. 911
         //!   David A. Vallado
 	Visibility getVisibilityPredict() const;
 

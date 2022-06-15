@@ -3454,12 +3454,6 @@ void Satellites::translations()
 	// TRANSLATORS: Satellite name: China's space station name (with name of base module)
 	N_("TIANGONG (TIANHE)");
 
-	// Satellites visibility
-	N_("The satellite and the observer are in sunlight");
-	N_("The satellite is visible");
-	N_("The satellite is eclipsed");
-	N_("The satellite is not visible");
-
 	// Special terms for communications
 	// TRANSLATORS: An uplink (UL or U/L) is the link from a ground station to a satellite
 	N_("uplink");
@@ -3469,6 +3463,12 @@ void Satellites::translations()
 	N_("beacon");
 	// TRANSLATORS: Telemetry is the collection of measurements or other data at satellites and their automatic transmission to receiving equipment (telecommunication) for monitoring
 	N_("telemetry");
+	// TRANSLATORS: The channel for transmission of video data
+	N_("video");
+	// TRANSLATORS: The broadband is wide bandwidth data transmission which transports multiple signals at a wide range of frequencies
+	N_("broadband");
+	// TRANSLATORS: The channel for transmission of commands
+	N_("command");
 
 #endif
 }

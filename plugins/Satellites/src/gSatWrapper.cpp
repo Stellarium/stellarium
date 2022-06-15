@@ -205,36 +205,50 @@ Vec3d gSatWrapper::getSunECIPos()
 // @brief This operation predicts the satellite visibility conditions.
 gSatWrapper::Visibility gSatWrapper::getVisibilityPredict() const
 {
+	gSatWrapper::Visibility rval = RADAR_NIGHT;
 	Vec3d satAltAzPos = getAltAz();
-
 	if (satAltAzPos[2] > 0)
 	{
-		Vec3d satECIPos = getTEMEPos();
-		static const SolarSystem *solsystem = GETSTELMODULE(SolarSystem);
+		static const SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 		Vec3d sunAltAzPos = solsystem->getSun()->getAltAzPosGeometric(StelApp::getInstance().getCore());
-		Vec3d sunECIPos = getSunECIPos();
-
 		if (sunAltAzPos[2] > 0.0)
 		{
-			return RADAR_SUN;
+			rval = RADAR_SUN;
 		}
 		else
 		{
-			double sunSatAngle = sunECIPos.angle(satECIPos);
-			double Dist = satECIPos.length()*cos(sunSatAngle - (M_PI/2));
-
-			if (Dist > KEARTHRADIUS)
+			Vec3d sunECIPos = getSunECIPos();
+			Vec3d satECIPos = getTEMEPos();
+			rval = VISIBLE;
+			/*
+			Satellites in umbra/penumbra based on:-
+			Visually Observing Earth Satellites By Dr. T.S. Kelso
+			https://celestrak.com/columns/v03n01/
+			*/
+			double psun = std::sqrt(pow(satECIPos[0] - sunECIPos[0], 2) + pow(satECIPos[1] - sunECIPos[1], 2) + pow(satECIPos[2] - sunECIPos[2], 2) );
+			double pearth = std::sqrt(std::pow(satECIPos[0], 2) + std::pow(satECIPos[1], 2) + std::pow(satECIPos[2], 2));
+			double theta_e = std::asin((12742. / 2.) / pearth);
+			double theta_s = std::asin((1391000. / 2.) / psun);
+			double dotproduct_peps = std::abs((satECIPos[0] * sunECIPos[0]) + (satECIPos[1] * sunECIPos[1]) + (satECIPos[2] * sunECIPos[2]));
+			double theta = std::acos(dotproduct_peps / (psun * pearth));
+			if (theta_e > theta_s && theta < (theta_e - theta_s))
 			{
-				return VISIBLE;
+				rval = RADAR_NIGHT;
 			}
-			else
+			else if (std::abs(theta_e - theta_s) < theta && theta < (theta_e + theta_s))
 			{
-				return RADAR_NIGHT;
+				rval = PENUMBRAL;
+			}
+			else if (theta_s > theta_e && theta < (theta_s - theta_e))
+			{
+				rval = ANNULAR;
 			}
 		}
 	}
 	else
-		return NOT_VISIBLE;
+		rval = NOT_VISIBLE;
+
+	return rval;
 }
 
 double gSatWrapper::getPhaseAngle() const

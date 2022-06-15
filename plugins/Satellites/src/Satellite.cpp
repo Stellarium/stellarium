@@ -210,12 +210,13 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	moon = GETSTELMODULE(SolarSystem)->getMoon();
 	sun = GETSTELMODULE(SolarSystem)->getSun();
 
-	// Please sync text in Satellites.cpp file after adding new types
 	visibilityDescription={
-		{ gSatWrapper::RADAR_SUN, "The satellite and the observer are in sunlight" },
-		{ gSatWrapper::VISIBLE, "The satellite is visible" },
-		{ gSatWrapper::RADAR_NIGHT, "The satellite is eclipsed" },
-		{ gSatWrapper::NOT_VISIBLE, "The satellite is not visible" }
+		{ gSatWrapper::RADAR_SUN,	N_("The satellite and the observer are in sunlight") },
+		{ gSatWrapper::VISIBLE,		N_("The satellite is sunlit and the observer is in the dark") },
+		{ gSatWrapper::RADAR_NIGHT,	N_("The satellite isn't sunlit") },
+		{ gSatWrapper::NOT_VISIBLE,	N_("The satellite is not visible") },
+		{ gSatWrapper::PENUMBRAL,	N_("The satellite is in penumbra") },
+		{ gSatWrapper::ANNULAR,		N_("The satellite is eclipsed") }
 	};
 
 	update(0.);
@@ -471,7 +472,7 @@ QString Satellite::getCommLinkInfo(CommLink comm) const
 	// Translate some specific communications terms
 	// See end of Satellites.cpp file to define translatable terms
 	QStringList commTerms;
-	commTerms << "uplink" << "downlink" << "beacon" << "telemetry";
+	commTerms << "uplink" << "downlink" << "beacon" << "telemetry" << "video" << "broadband" << "command";
 	for (auto& term: commTerms)
 	{
 		commLinkData.replace(term, q_(term));
