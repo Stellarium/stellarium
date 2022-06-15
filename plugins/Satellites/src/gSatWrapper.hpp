@@ -48,9 +48,8 @@ public:
 		RADAR_SUN	= 1,
 		VISIBLE		= 2,
 		RADAR_NIGHT	= 3,
-		NOT_VISIBLE	= 4,
-		PENUMBRAL	= 5,
-		ANNULAR		= 6
+		PENUMBRAL	= 4,
+		ANNULAR		= 5
 	};
         gSatWrapper(QString designation, QString tle1,QString tle2);
         ~gSatWrapper();
@@ -111,9 +110,8 @@ public:
         //!     1 if RADAR_SUN
         //!     2 if VISIBLE
 	//!     3 if RADAR_NIGHT
-	//!     4 if NOT_VISIBLE
-	//! 	5 if PENUMBRAL
-	//!     6 if ANNULAR
+	//!     4 if PENUMBRAL
+	//!     5 if ANNULAR
         //! @par References
 	//!   Fundamentals of Astrodynamis and Applications (Fourth Edition) p. 911
         //!   David A. Vallado

@@ -245,8 +245,6 @@ gSatWrapper::Visibility gSatWrapper::getVisibilityPredict() const
 			}
 		}
 	}
-	else
-		rval = NOT_VISIBLE;
 
 	return rval;
 }
