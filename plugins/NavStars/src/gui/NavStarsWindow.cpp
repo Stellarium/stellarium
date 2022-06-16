@@ -186,10 +186,10 @@ void NavStarsWindow::populateTwilights()
 	// TRANSLATORS: full phrase is "XX° above the horizon"
 	QString aboveHorizon = q_("° above the horizon");
 
-	ui->labelGoldenHour->setToolTip(QString("%1%2").arg("6", aboveHorizon));
-	ui->labelCivilTwilight->setToolTip(QString("%1%2").arg("6", belowHorizon));
-	ui->labelNauticalTwilight->setToolTip(QString("%1%2").arg("12", belowHorizon));
-	ui->labelAstronomicalTwilight->setToolTip(QString("%1%2").arg("18", belowHorizon));
+	ui->labelGoldenHour->setToolTip(QString("6%1").arg(aboveHorizon));
+	ui->labelCivilTwilight->setToolTip(QString("6%1").arg(belowHorizon));
+	ui->labelNauticalTwilight->setToolTip(QString("12%1").arg(belowHorizon));
+	ui->labelAstronomicalTwilight->setToolTip(QString("18%1").arg(belowHorizon));
 }
 
 void NavStarsWindow::populateNavigationalStarsSets()
