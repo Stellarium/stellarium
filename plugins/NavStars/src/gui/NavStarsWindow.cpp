@@ -27,6 +27,7 @@
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelGui.hpp"
+#include "SolarSystem.hpp"
 
 #include <QComboBox>
 
@@ -83,6 +84,10 @@ void NavStarsWindow::createDialogContent()
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveSettings()));	
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetSettings()));
 
+	populateTwilights();
+	connect(ui->refreshData, SIGNAL(clicked()), this, SLOT(populateTwilights()));
+	connect(StelApp::getInstance().getCore(), SIGNAL(dateChanged()), this, SLOT(populateTwilights()));
+
 	// About tab
 	setAboutHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -104,6 +109,87 @@ void NavStarsWindow::resetSettings()
 	}
 	else
 		qDebug() << "[NavStars] restore defaults is canceled...";
+}
+
+void NavStarsWindow::populateTwilights()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
+	PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
+	QString dayBegin, dayEnd, goldenHourBegin, goldenHourEnd, civilTwilightBegin, civilTwilightEnd, nauticalTwilightBegin, nauticalTwilightEnd, astronomicalTwilightBegin, astronomicalTwilightEnd, dash = QChar(0x2014);
+	// day
+	Vec4d day = sun->getRTSTime(core, 0.);
+	if (day[3]==0.)
+	{
+		dayBegin = localeMgr->getPrintableTimeLocal(day[0]);
+		dayEnd = localeMgr->getPrintableTimeLocal(day[2]);
+	}
+	else
+		dayBegin = dayEnd = dash;
+
+	// civil twilight
+	Vec4d civilTwilight = sun->getRTSTime(core, -6.);
+	if (civilTwilight[3]==0.)
+	{
+		civilTwilightBegin = localeMgr->getPrintableTimeLocal(civilTwilight[0]);
+		civilTwilightEnd = localeMgr->getPrintableTimeLocal(civilTwilight[2]);
+	}
+	else
+		civilTwilightBegin = civilTwilightEnd = dash;
+
+	// nautical twilight
+	Vec4d nauticalTwilight = sun->getRTSTime(core, -12.);
+	if (nauticalTwilight[3]==0.)
+	{
+		nauticalTwilightBegin = localeMgr->getPrintableTimeLocal(nauticalTwilight[0]);
+		nauticalTwilightEnd = localeMgr->getPrintableTimeLocal(nauticalTwilight[2]);
+	}
+	else
+		nauticalTwilightBegin = nauticalTwilightEnd = dash;
+
+	// astronomical twilight
+	Vec4d astronomicalTwilight = sun->getRTSTime(core, -18.);
+	if (astronomicalTwilight[3]==0.)
+	{
+		astronomicalTwilightBegin = localeMgr->getPrintableTimeLocal(astronomicalTwilight[0]);
+		astronomicalTwilightEnd = localeMgr->getPrintableTimeLocal(astronomicalTwilight[2]);
+	}
+	else
+		astronomicalTwilightBegin = astronomicalTwilightEnd = dash;
+
+	// golden hour
+	Vec4d goldenHour = sun->getRTSTime(core, 6.);
+	if (goldenHour[3]==0.)
+	{
+		goldenHourBegin = localeMgr->getPrintableTimeLocal(goldenHour[0]);
+		goldenHourEnd = localeMgr->getPrintableTimeLocal(goldenHour[2]);
+	}
+	else
+		goldenHourBegin = goldenHourEnd = dash;
+
+	// fill the data
+	ui->labelToday->setText(localeMgr->getPrintableDateLocal(core->getJD()));
+	ui->labelGoldenHourBegin->setText(goldenHourBegin);
+	ui->labelGoldenHourEnd->setText(goldenHourEnd);
+	ui->labelDayBegin->setText(dayBegin);
+	ui->labelDayEnd->setText(dayEnd);
+	ui->labelCivilTwilightBegin->setText(civilTwilightBegin);
+	ui->labelCivilTwilightEnd->setText(civilTwilightEnd);
+	ui->labelNauticalTwilightBegin->setText(nauticalTwilightBegin);
+	ui->labelNauticalTwilightEnd->setText(nauticalTwilightEnd);
+	ui->labelAstronomicalTwilightBegin->setText(astronomicalTwilightBegin);
+	ui->labelAstronomicalTwilightEnd->setText(astronomicalTwilightEnd);
+
+	// tooltips
+	// TRANSLATORS: full phrase is "XX° below the horizon"
+	QString belowHorizon = q_("° below the horizon");
+	// TRANSLATORS: full phrase is "XX° above the horizon"
+	QString aboveHorizon = q_("° above the horizon");
+
+	ui->labelGoldenHour->setToolTip(QString("%1%2").arg("6", aboveHorizon));
+	ui->labelCivilTwilight->setToolTip(QString("%1%2").arg("6", belowHorizon));
+	ui->labelNauticalTwilight->setToolTip(QString("%1%2").arg("12", belowHorizon));
+	ui->labelAstronomicalTwilight->setToolTip(QString("%1%2").arg("18", belowHorizon));
 }
 
 void NavStarsWindow::populateNavigationalStarsSets()
