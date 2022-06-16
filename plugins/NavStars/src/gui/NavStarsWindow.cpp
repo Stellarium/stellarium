@@ -50,6 +50,7 @@ void NavStarsWindow::retranslate()
 		setAboutHtml();
 		populateNavigationalStarsSets();
 		populateNavigationalStarsSetDescription();
+		populateToday();
 	}
 }
 
