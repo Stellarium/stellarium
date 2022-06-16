@@ -438,7 +438,7 @@
             <item row="5" column="3">
              <widget class="QLabel" name="labelNauticalTwilightDuration">
               <property name="toolTip">
-               <string>Duration of the day with nautical twilight</string>
+               <string>Duration of the daytime (include nautical twilight)</string>
               </property>
               <property name="text">
                <string/>
@@ -471,7 +471,7 @@
             <item row="6" column="3">
              <widget class="QLabel" name="labelAstronomicalTwilightDuration">
               <property name="toolTip">
-               <string>Duration of the day with astronomical twilight</string>
+               <string>Duration of the daytime (include astronomical twilight)</string>
               </property>
               <property name="text">
                <string/>
@@ -484,7 +484,7 @@
             <item row="4" column="3">
              <widget class="QLabel" name="labelCivilTwilightDuration">
               <property name="toolTip">
-               <string>Duration of the day with civil twilight</string>
+               <string>Duration of the daytime (include civil twilight)</string>
               </property>
               <property name="text">
                <string/>
@@ -665,7 +665,7 @@
             <item row="3" column="3">
              <widget class="QLabel" name="labelDayDuration">
               <property name="toolTip">
-               <string>Duration of the day</string>
+               <string>Duration of the daytime</string>
               </property>
               <property name="text">
                <string/>
