@@ -88,7 +88,9 @@ void NavStarsWindow::createDialogContent()
 
 	populateToday();
 	connect(ui->refreshData, SIGNAL(clicked()), this, SLOT(populateToday()));
-	connect(StelApp::getInstance().getCore(), SIGNAL(dateChanged()), this, SLOT(populateToday()));
+	StelCore* core = StelApp::getInstance().getCore();
+	connect(core, SIGNAL(dateChanged()), this, SLOT(populateToday()));
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(populateToday()));
 
 	// About tab
 	setAboutHtml();
@@ -145,7 +147,7 @@ void NavStarsWindow::populateToday()
 	else
 	{
 		dayBegin = dayEnd = dash;
-		duration = (day[4]>99.) ? 24. : 0.;
+		duration = (day[3]>99.) ? 24. : 0.;
 	}
 	dayDuration = StelUtils::hoursToHmsStr(duration, true);
 
@@ -160,7 +162,7 @@ void NavStarsWindow::populateToday()
 	else
 	{
 		civilTwilightBegin = civilTwilightEnd = dash;
-		duration = (civilTwilight[4]>99.) ? 24. : 0.;
+		duration = (civilTwilight[3]>99.) ? 24. : 0.;
 	}
 	civilTwilightDuration = StelUtils::hoursToHmsStr(duration, true);
 
@@ -175,7 +177,7 @@ void NavStarsWindow::populateToday()
 	else
 	{
 		nauticalTwilightBegin = nauticalTwilightEnd = dash;
-		duration = (nauticalTwilight[4]>99.) ? 24. : 0.;
+		duration = (nauticalTwilight[3]>99.) ? 24. : 0.;
 	}
 	nauticalTwilightDuration = StelUtils::hoursToHmsStr(duration, true);
 
@@ -190,7 +192,7 @@ void NavStarsWindow::populateToday()
 	else
 	{
 		astronomicalTwilightBegin = astronomicalTwilightEnd = dash;
-		duration = (astronomicalTwilight[4]>99.) ? 24. : 0.;
+		duration = (astronomicalTwilight[3]>99.) ? 24. : 0.;
 	}
 	astronomicalTwilightDuration = StelUtils::hoursToHmsStr(duration, true);
 
