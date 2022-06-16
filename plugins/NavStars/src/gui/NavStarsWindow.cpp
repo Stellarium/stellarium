@@ -121,10 +121,9 @@ void NavStarsWindow::populateToday()
 	StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
 	PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
 	double duration;
-	QString moonrise, moonset, dayBegin, dayEnd, goldenHourBegin, goldenHourEnd, civilTwilightBegin,
-		civilTwilightEnd, nauticalTwilightBegin, nauticalTwilightEnd, astronomicalTwilightBegin,
-		astronomicalTwilightEnd, dayDuration, civilTwilightDuration, nauticalTwilightDuration,
-		astronomicalTwilightDuration, dash = QChar(0x2014);
+	QString moonrise, moonset, dayBegin, dayEnd, civilTwilightBegin, civilTwilightEnd, nauticalTwilightBegin,
+		nauticalTwilightEnd, astronomicalTwilightBegin, astronomicalTwilightEnd, dayDuration,
+		civilTwilightDuration, nauticalTwilightDuration, astronomicalTwilightDuration, dash = QChar(0x2014);
 
 	// Moon
 	Vec4d moon = GETSTELMODULE(SolarSystem)->getMoon()->getRTSTime(core, 0.);
@@ -196,20 +195,8 @@ void NavStarsWindow::populateToday()
 	}
 	astronomicalTwilightDuration = StelUtils::hoursToHmsStr(duration, true);
 
-	// golden hour
-	Vec4d goldenHour = sun->getRTSTime(core, 6.);
-	if (goldenHour[3]==0.)
-	{
-		goldenHourBegin = localeMgr->getPrintableTimeLocal(goldenHour[0]);
-		goldenHourEnd = localeMgr->getPrintableTimeLocal(goldenHour[2]);
-	}
-	else
-		goldenHourBegin = goldenHourEnd = dash;
-
 	// fill the data
 	ui->labelToday->setText(localeMgr->getPrintableDateLocal(core->getJD()));
-	ui->labelGoldenHourBegin->setText(goldenHourBegin);
-	ui->labelGoldenHourEnd->setText(goldenHourEnd);
 	ui->labelDayBegin->setText(dayBegin);
 	ui->labelDayEnd->setText(dayEnd);
 	ui->labelDayDuration->setText(dayDuration);
@@ -228,10 +215,6 @@ void NavStarsWindow::populateToday()
 	// tooltips
 	// TRANSLATORS: full phrase is "XX° below the horizon"
 	QString belowHorizon = q_("below the horizon");
-	// TRANSLATORS: full phrase is "XX° above the horizon"
-	QString aboveHorizon = q_("above the horizon");
-
-	ui->labelGoldenHour->setToolTip(QString("6° %1").arg(aboveHorizon));
 	ui->labelCivilTwilight->setToolTip(QString("6° %1").arg(belowHorizon));
 	ui->labelNauticalTwilight->setToolTip(QString("12° %1").arg(belowHorizon));
 	ui->labelAstronomicalTwilight->setToolTip(QString("18° %1").arg(belowHorizon));
