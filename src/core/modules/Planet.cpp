@@ -532,6 +532,13 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << QString("%1: <b>%2</b><br/>").arg(q_("Type"), q_(getPlanetTypeString()));		
 	}
 
+	if (getPlanetType()==PlanetType::isObserver)
+	{
+		// Do not display meaningless data for observers!
+		postProcessInfoString(str, flags);
+		return str;
+	}
+
 	if (flags&Magnitude)
 	{
 		static const QMap<ApparentMagnitudeAlgorithm, int>decMap={
