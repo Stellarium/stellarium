@@ -42,14 +42,17 @@
 ObsListCreateEditDialog *ObsListCreateEditDialog::m_instance = nullptr;
 
 ObsListCreateEditDialog::ObsListCreateEditDialog(std::string listUuid) : ui(new Ui_obsListCreateEditDialogForm()),
-                                                                    obsListListModel(
-                                                                            new QStandardItemModel(0, ColumnCount)),
-                                                                    core(StelApp::getInstance().getCore()),
-                                                                    listOlud_(std::move(listUuid)), sorting("") {
+                                                                         obsListListModel(
+                                                                                 new QStandardItemModel(0,
+                                                                                                        ColumnCount)),
+                                                                         core(StelApp::getInstance().getCore()),
+                                                                         listOlud_(std::move(listUuid)), sorting("") {
     objectMgr = GETSTELMODULE(StelObjectMgr);
     landscapeMgr = GETSTELMODULE(LandscapeMgr);
     observingListJsonPath =
-            StelFileMgr::findFile("data", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory | StelFileMgr::Writable)) + "/" +
+            StelFileMgr::findFile("data",
+                                  static_cast<StelFileMgr::Flags>(StelFileMgr::Directory | StelFileMgr::Writable)) +
+            "/" +
             QString(JSON_FILE_NAME);
 
 }
@@ -109,7 +112,7 @@ void ObsListCreateEditDialog::createDialogContent() {
     ui->obsListCreationEditionTreeView->header()->setStretchLastSection(true);
     ui->obsListCreationEditionTreeView->hideColumn(ColumnUUID);
     ui->obsListCreationEditionTreeView->hideColumn(ColumnNameI18n);
-    ui->obsListCreationEditionTreeView->hideColumn(ColumnJD);
+    ui->obsListCreationEditionTreeView->hideColumn(ColumnDate);
     ui->obsListCreationEditionTreeView->hideColumn(ColumnLocation);
     // Enable the sort for columns
     ui->obsListCreationEditionTreeView->setSortingEnabled(true);
@@ -122,6 +125,7 @@ void ObsListCreateEditDialog::createDialogContent() {
     ui->closeStelWindow->setHidden(true);
 
     ui->obsListErrorMessage->setHidden(true);
+    ui->obsListLandscapeCheckBox->setChecked(false);
 
     // In case of creation the nameOfListLineEdit is empty and button save/close must be disabled
     // In case on edition the nameOfListLineEdit is not empty and the button save/close must be enable
@@ -184,44 +188,52 @@ void ObsListCreateEditDialog::setObservingListHeaderNames() {
  * Add row in the obsListListModel
  */
 void ObsListCreateEditDialog::addModelRow(int number,
-                                          const QString& uuid,
-                                          const QString& name,
-                                          const QString& nameI18n,
-                                          const QString& type,
-                                          const QString& ra,
-                                          const QString& dec,
-                                          const QString& magnitude,
-                                          const QString& constellation) {
+                                          const QString &uuid,
+                                          const QString &name,
+                                          const QString &nameI18n,
+                                          const QString &objtype,
+                                          const QString &ra,
+                                          const QString &dec,
+                                          const QString &magnitude,
+                                          const QString &constellation) {
     QStandardItem *item = Q_NULLPTR;
 
+    // olud
     item = new QStandardItem(uuid);
     item->setEditable(false);
     obsListListModel->setItem(number, ColumnUUID, item);
 
+    // name
     item = new QStandardItem(name);
     item->setEditable(false);
     obsListListModel->setItem(number, ColumnName, item);
 
+    // nameI18n
     item = new QStandardItem(nameI18n);
     item->setEditable(false);
     obsListListModel->setItem(number, ColumnNameI18n, item);
 
-    item = new QStandardItem(type);
+    // objtype (object type)
+    item = new QStandardItem(objtype);
     item->setEditable(false);
     obsListListModel->setItem(number, ColumnType, item);
 
+    // ra
     item = new QStandardItem(ra);
     item->setEditable(false);
     obsListListModel->setItem(number, ColumnRa, item);
 
+    // dec
     item = new QStandardItem(dec);
     item->setEditable(false);
     obsListListModel->setItem(number, ColumnDec, item);
 
+    // magnitude
     item = new QStandardItem(magnitude);
     item->setEditable(false);
     obsListListModel->setItem(number, ColumnMagnitude, item);
 
+    // constellation
     item = new QStandardItem(constellation);
     item->setEditable(false);
     obsListListModel->setItem(number, ColumnConstellation, item);
@@ -236,7 +248,9 @@ void ObsListCreateEditDialog::addModelRow(int number,
  * Save selected object into the list of observed objects.
  */
 void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
+
     const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
+
     if (!selectedObject.isEmpty()) {
 
         // No duplicate item in the same list
@@ -262,6 +276,9 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
             }
 
             // Type
+            QString type = selectedObject[0]->getType();
+
+            // Object Type
             QString objectType = selectedObject[0]->getObjectType();
 
             // Ra & Dec
@@ -280,7 +297,7 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
 
             // Fov
             double fov = -1.0;
-            if(ui->obsListFovCheckBox->isChecked() || objectType == CUSTOM_OBJECT || objectName.isEmpty()){
+            if (ui->obsListFovCheckBox->isChecked() || objectType == CUSTOM_OBJECT || objectName.isEmpty()) {
                 fov = GETSTELMODULE(StelMovementMgr)->getCurrentFov();
             }
 
@@ -290,8 +307,7 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
             }
 
             // Magnitude
-            float objectMagnitude = selectedObject[0]->getVMagnitude(core);
-            QString objectMagnitudeStr = QString::number(objectMagnitude);
+            QString objectMagnitudeStr = util.getMagnitue(selectedObject, core);
 
             // Constallation
             QVariantMap objectMap = selectedObject[0]->getInfoMap(core);
@@ -315,10 +331,14 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
                 Location = QString("%1, %2").arg(loc.name, loc.region);
             }
 
+            // TODO only for test: delete after
+            // objectName = "Unnamed object";
+            // *********************************
+
             // Check if the object name is empty.
             if (objectName.isEmpty()) {
                 objectName = q_("Unnamed object");
-                if(objectNameI18n.isEmpty()){
+                if (objectNameI18n.isEmpty()) {
                     objectNameI18n = q_("Unnamed object");
                 }
             }
@@ -335,13 +355,17 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
                         objectConstellation);
 
             observingListItem item;
-            initItem(item);
+            util.initItem(item);
             item.name = objectName;
             item.nameI18n = objectNameI18n;
 
             // Type
+            if (!type.isEmpty()) {
+                item.type = type;
+            }
+            // Object Type
             if (!objectType.isEmpty()) {
-                item.type = objectType;
+                item.objtype = objectType;
             }
             // Ra
             if (!objectRaStr.isEmpty()) {
@@ -415,7 +439,7 @@ void ObsListCreateEditDialog::saveObservedObjectsInJsonFile() {
 
     // Creation date
     double JD = core->getJD();
-    QString listCreationDate = StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD) / 24.).replace("T"," ");
+    QString listCreationDate = StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD) / 24.).replace("T", " ");
 
     try {
         QVariantMap mapFromJsonFile;
@@ -440,11 +464,11 @@ void ObsListCreateEditDialog::saveObservedObjectsInJsonFile() {
         observingListDataList.insert(QString(KEY_CREATION_DATE), listCreationDate);
 
         // Landscape
-        if(ui->obsListLandscapeCheckBox->isChecked()){
+        if (ui->obsListLandscapeCheckBox->isChecked()) {
             QString landscapeId = landscapeMgr->getCurrentLandscapeID();
-            observingListDataList.insert(QString(KEY_LANDSCAPE_ID),landscapeId);
+            observingListDataList.insert(QString(KEY_LANDSCAPE_ID), landscapeId);
         } else {
-            observingListDataList.insert(QString(KEY_LANDSCAPE_ID),"");
+            observingListDataList.insert(QString(KEY_LANDSCAPE_ID), "");
         }
 
         // List of objects
@@ -476,8 +500,11 @@ void ObsListCreateEditDialog::saveObservedObjectsInJsonFile() {
             // Dec
             obl.insert(QString(KEY_DEC), item.dec);
 
+            // Type
+            obl.insert(QString(KEY_TYPE), item.type);
+
             // Object type
-            obl.insert(QString(KEY_OBJECTS_TYPE), item.type);
+            obl.insert(QString(KEY_OBJECTS_TYPE), item.objtype);
 
             // Magnitude
             obl.insert(QString(KEY_MAGNITUDE), item.magnitude);
@@ -516,8 +543,9 @@ void ObsListCreateEditDialog::saveObservedObjectsInJsonFile() {
             if (defaultListUuid.isEmpty()) {
                 mapFromJsonFile.insert(KEY_DEFAULT_LIST_OLUD, "");
             } else {
-                int compareResult = QString::compare(defaultListUuid, QString::fromStdString(listOlud_), Qt::CaseSensitive);
-                if(compareResult == 0){
+                int compareResult = QString::compare(defaultListUuid, QString::fromStdString(listOlud_),
+                                                     Qt::CaseSensitive);
+                if (compareResult == 0) {
                     mapFromJsonFile.insert(KEY_DEFAULT_LIST_OLUD, "");
                 }
             }
@@ -598,7 +626,8 @@ void ObsListCreateEditDialog::obsListSaveButtonPressed() {
     QString listName = ui->nameOfListLineEdit->text();
 
     // TODO il faut faire la comparaison du nom des liste en ignoreCase
-    bool isListAlreadyExists = !this->listNames_.isEmpty() && this->listNames_.contains(listName) && (isCreationMode ||(listName.compare(currentListName) !=0 &&!isCreationMode));
+    bool isListAlreadyExists = !this->listNames_.isEmpty() && this->listNames_.contains(listName) &&
+                               (isCreationMode || (listName.compare(currentListName) != 0 && !isCreationMode));
 
     if (isListAlreadyExists) {
         QString errorMessage;
@@ -678,6 +707,7 @@ void ObsListCreateEditDialog::headerClicked(int index) {
  * Load the observing list in case of edit mode
  */
 void ObsListCreateEditDialog::loadObservingList() {
+
     QVariantMap map;
     QFile jsonFile(observingListJsonPath);
     if (!jsonFile.open(QIODevice::ReadOnly)) {
@@ -710,7 +740,7 @@ void ObsListCreateEditDialog::loadObservingList() {
 
             // Landscape
             QString landscape = observingListMap.value(QString(KEY_LANDSCAPE_ID)).value<QString>();
-            if(!landscape.isEmpty()){
+            if (!landscape.isEmpty()) {
                 ui->obsListLandscapeCheckBox->setChecked(true);
             }
 
@@ -722,128 +752,114 @@ void ObsListCreateEditDialog::loadObservingList() {
                 return;
             }
 
-            for (const QVariant& object: listOfObjects) {
+            for (const QVariant &object: listOfObjects) {
                 QVariantMap objectMap;
                 if (object.canConvert<QVariantMap>()) {
                     objectMap = object.value<QVariantMap>();
+                    int lastRow = obsListListModel->rowCount();
+                    QString objectUuid = QUuid::createUuid().toString();
+                    bool visibleFlag = false;
+
+                    // Name
                     QString objectName = objectMap.value(QString(KEY_DESIGNATION)).value<QString>();
 
-                    // TODO il faut charger ce qui est dans le fichier
+                    // NameI18n
+                    QString objectNameI18n = objectMap.value(QString(KEY_NAME_I18N)).value<QString>();
 
-                    if (objectMgr->findAndSelect(objectName)) {
-                        const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
-                        if (!selectedObject.isEmpty()) {
-                            int lastRow = obsListListModel->rowCount();
-                            QString objectUuid = QUuid::createUuid().toString();
-                            QString objectNameI18n = selectedObject[0]->getNameI18n();
-                            QString objectRaStr = "";
-                            QString objectDecStr = "";
-                            bool visibleFlag = false;
+                    // Fov
+                    auto fov = objectMap.value(QString(KEY_FOV)).value<double>();
 
-                            // Fov
-                            auto fov = objectMap.value(QString(KEY_FOV)).value<double>();
+                    // Object type
+                    QString type = objectMap.value(QString(KEY_TYPE)).value<QString>();
 
-                            // Object type
-                            QString objectType = objectMap.value(QString(KEY_OBJECTS_TYPE)).value<QString>();
+                    // Object type
+                    QString objectType = objectMap.value(QString(KEY_OBJECTS_TYPE)).value<QString>();
 
-                            // Ra & dec
-                            objectRaStr = objectMap.value(QString(KEY_RA)).value<QString>();
-                            objectDecStr = objectMap.value(QString(KEY_DEC)).value<QString>();
+                    // Ra & dec
+                    QString objectRaStr = objectMap.value(QString(KEY_RA)).value<QString>();
+                    QString objectDecStr = objectMap.value(QString(KEY_DEC)).value<QString>();
 
-                            if (objectName.contains("marker", Qt::CaseInsensitive)) {
-                                visibleFlag = true;
-                            }
+                    // Magnitude
+                    QString objectMagnitudeStr = objectMap.value(QString(KEY_MAGNITUDE)).value<QString>();
 
-                            // Magnitude
-                            float objectMagnitude = selectedObject[0]->getVMagnitude(core);
-                            QString objectMagnitudeStr = QString::number(objectMagnitude);
+                    // Constellation
+                    QString objectConstellation = objectMap.value(QString(KEY_CONSTELLATION)).value<QString>();
 
-                            //TODO à modifier
-                            QVariantMap selectedObjectMap = selectedObject[0]->getInfoMap(core);
-                            // *********************************************************
+                    // Julian Day
+                    QString JDs = objectMap.value(QString(KEY_JD)).value<QString>();
 
-                            QVariant objectConstellationVariant = selectedObjectMap["iauConstellation"];
-                            QString objectConstellation("unknown");
-                            if (objectConstellationVariant.canConvert<QString>()) {
-                                objectConstellation = objectConstellationVariant.value<QString>();
-                            }
-
-                            // Julian Day
-                            QString JDs = objectMap.value(QString(KEY_JD)).value<QString>();
-
-                            // Location
-                            QString location = selectedObjectMap.value(QString(KEY_LOCATION)).value<QString>();;
-
-                            // Add data into model row
-                            addModelRow(lastRow,
-                                        objectUuid,
-                                        objectName,
-                                        objectNameI18n,
-                                        objectType,
-                                        objectRaStr,
-                                        objectDecStr,
-                                        objectMagnitudeStr,
-                                        objectConstellation);
+                    // Location
+                    QString location = objectMap.value(QString(KEY_LOCATION)).value<QString>();
 
 
-                            observingListItem item;
-                            initItem(item);
-                            item.name = objectName;
-                            item.nameI18n = objectNameI18n;
+                    // Add data into model row
+                    addModelRow(lastRow,
+                                objectUuid,
+                                objectName,
+                                objectNameI18n,
+                                objectType,
+                                objectRaStr,
+                                objectDecStr,
+                                objectMagnitudeStr,
+                                objectConstellation);
 
-                            // Object type
-                            if (!objectType.isEmpty()) {
-                                item.type = objectType;
-                            }
 
-                            // Ra
-                            if (!objectRaStr.isEmpty()) {
-                                item.ra = objectRaStr;
-                            }
+                    observingListItem item;
+                    util.initItem(item);
+                    item.name = objectName;
+                    item.nameI18n = objectNameI18n;
 
-                            // Dec
-                            if (!objectDecStr.isEmpty()) {
-                                item.dec = objectDecStr;
-                            }
-
-                            // Magnitude
-                            if (!objectMagnitudeStr.isEmpty()) {
-                                item.magnitude = objectMagnitudeStr;
-                            }
-
-                            // Constellation
-                            if (!objectConstellation.isEmpty()) {
-                                item.constellation = objectConstellation;
-                            }
-
-                            // JD
-                            if (!JDs.isEmpty()) {
-                                item.jd = JDs.toDouble();
-                            }
-
-                            // Location
-                            if (!location.isEmpty()) {
-                                item.location = location;
-                            }
-
-                            // Flag
-                            if (!visibleFlag) {
-                                item.isVisibleMarker = visibleFlag;
-                            }
-
-                            // Fov
-                            if (fov > 0.0) {
-                                item.fov = fov;
-                            }
-                            observingListItemCollection.insert(objectUuid, item);
-
-                        } else {
-                            qWarning() << "[ObservingList Creation/Edition] selected object is empty !";
-                        }
-
-                    } else {
-                        qWarning() << "[ObservingList Creation/Edition] object: " << objectName << " not found !";
+                    // Type
+                    if (!type.isEmpty()) {
+                        item.type = type;
                     }
+
+                    // Object type
+                    if (!objectType.isEmpty()) {
+                        item.objtype = objectType;
+                    }
+
+                    // Ra
+                    if (!objectRaStr.isEmpty()) {
+                        item.ra = objectRaStr;
+                    }
+
+                    // Dec
+                    if (!objectDecStr.isEmpty()) {
+                        item.dec = objectDecStr;
+                    }
+
+                    // Magnitude
+                    if (!objectMagnitudeStr.isEmpty()) {
+                        item.magnitude = objectMagnitudeStr;
+                    }
+
+                    // Constellation
+                    if (!objectConstellation.isEmpty()) {
+                        item.constellation = objectConstellation;
+                    }
+
+                    // JD
+                    if (!JDs.isEmpty()) {
+                        item.jd = JDs.toDouble();
+                    }
+
+                    // Location
+                    if (!location.isEmpty()) {
+                        item.location = location;
+                    }
+
+                    // Flag
+                    if (!visibleFlag) {
+                        item.isVisibleMarker = visibleFlag;
+                    }
+
+                    // Fov
+                    if (fov > 0.0) {
+                        item.fov = fov;
+                    }
+                    observingListItemCollection.insert(objectUuid, item);
+
                 } else {
                     qCritical() << "[ObservingList Creation/Edition] conversion error";
                     return;
@@ -886,23 +902,4 @@ void ObsListCreateEditDialog::kill() {
         delete m_instance;
         m_instance = nullptr;
     }
-}
-
-/**
- * Init observingListItem.
- * @param item
- */
-void ObsListCreateEditDialog::initItem(observingListItem &item) {
-
-    item.jd = 0.0;
-    item.type = "";
-    item.ra = "";
-    item.dec = "";
-    item.name = "";
-    item.nameI18n = "";
-    item.location = "";
-    item.fov = 0.0;
-    item.constellation = "";
-    item.magnitude = "";
-    item.isVisibleMarker = false;
 }

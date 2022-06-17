@@ -36,6 +36,7 @@
 #include "ObsListDialog.hpp"
 #include "LabelMgr.hpp"
 #include "Planet.hpp"
+#include "Nebula.hpp"
 
 #include "ui_obsListDialog.h"
 #include <QSortFilterProxyModel>
@@ -63,6 +64,8 @@ ObsListDialog::ObsListDialog(QObject *parent) : StelDialog("Observing list", par
                                   static_cast<StelFileMgr::Flags>(StelFileMgr::Directory | StelFileMgr::Writable)) +
             "/" +
             QString(JSON_BOOKMARKS_FILE_NAME);
+
+    currentJd = core->getJD();
 
 
 }
@@ -106,11 +109,11 @@ void ObsListDialog::createDialogContent() {
     ui->obsListTreeView->header()->setSectionResizeMode(ColumnDec, QHeaderView::ResizeToContents);
     ui->obsListTreeView->header()->setSectionResizeMode(ColumnConstellation, QHeaderView::ResizeToContents);
     ui->obsListTreeView->header()->setSectionResizeMode(ColumnMagnitude, QHeaderView::ResizeToContents);
+    ui->obsListTreeView->header()->setSectionResizeMode(ColumnDate, QHeaderView::ResizeToContents);
+    ui->obsListTreeView->header()->setSectionResizeMode(ColumnLocation, QHeaderView::ResizeToContents);
     ui->obsListTreeView->header()->setStretchLastSection(true);
     ui->obsListTreeView->hideColumn(ColumnUUID);
     ui->obsListTreeView->hideColumn(ColumnNameI18n);
-    ui->obsListTreeView->hideColumn(ColumnJD);
-    ui->obsListTreeView->hideColumn(ColumnLocation);
     //Enable the sort for columns
     ui->obsListTreeView->setSortingEnabled(true);
 
@@ -119,6 +122,9 @@ void ObsListDialog::createDialogContent() {
     ui->obsListHighlightAllButton->setEnabled(false);
     ui->obsListClearHighlightButton->setEnabled(false);
     ui->obsListDeleteButton->setEnabled(false);
+
+    ui->obsListJdCheckBox->setChecked(false);
+    ui->obsListLocationCheckBox->setChecked(false);
 
     // We hide the closeStelWindow to have only two possibilities to close the dialog:
     // Exit
@@ -172,8 +178,8 @@ void ObsListDialog::setObservingListHeaderNames() {
             q_ ("Declination"),
             q_ ("Magnitude"),
             q_ ("Constellation"),
-            q_ ("Date"), // Hidden column
-            q_ ("Location") // Hidden column
+            q_ ("Date"),
+            q_ ("Location")
     };
 
     obsListListModel->setHorizontalHeaderLabels(headerStrings);
@@ -184,7 +190,8 @@ void ObsListDialog::setObservingListHeaderNames() {
 */
 void ObsListDialog::addModelRow(int number, const QString &olud, const QString &name, const QString &nameI18n,
                                 const QString &type, const QString &ra,
-                                const QString &dec, const QString &magnitude, const QString &constellation) {
+                                const QString &dec, const QString &magnitude, const QString &constellation,
+                                const QString &date, const QString &location) {
     QStandardItem *item = Q_NULLPTR;
 
     item = new QStandardItem(olud);
@@ -218,6 +225,14 @@ void ObsListDialog::addModelRow(int number, const QString &olud, const QString &
     item = new QStandardItem(constellation);
     item->setEditable(false);
     obsListListModel->setItem(number, ColumnConstellation, item);
+
+    item = new QStandardItem(date);
+    item->setEditable(false);
+    obsListListModel->setItem(number, ColumnDate, item);
+
+    item = new QStandardItem(location);
+    item->setEditable(false);
+    obsListListModel->setItem(number, ColumnLocation, item);
 
     for (int i = 0; i < ColumnCount; ++i) {
         ui->obsListTreeView->resizeColumnToContents(i);
@@ -491,15 +506,20 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
                         QString objectMagnitudeStr = objectMap.value(QString(KEY_MAGNITUDE)).value<QString>();
 
                         // Constellation
-                        QString objectConstellation = objectMap.value(QString(KEY_CONSTELLATION)).value<QString>();;
+                        QString objectConstellation = objectMap.value(QString(KEY_CONSTELLATION)).value<QString>();
 
-                        // Julian Day
+                        // Julian Day / Date
                         QString JDs = objectMap.value(QString(KEY_JD)).value<QString>();
-                        if (JDs.isEmpty()) {
+                        QString date = "";
+                        if (JDs.isEmpty() || QString::compare(JDs, "0", Qt::CaseSensitive) == 0) {
                             double JD = core->getJD();
-                            JDs = StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD) / 24.).replace(
+                            JDs = QString::number(JD, 'f', 6);
+                        } else {
+                            double JD = JDs.toDouble();
+                            date = StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD) / 24.).replace(
                                     "T", " ");
                         }
+
 
                         // Location
                         QString Location = objectMap.value(QString(KEY_LOCATION)).value<QString>();
@@ -519,7 +539,7 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
                         }
 
                         addModelRow(lastRow, objectUuid, objectName, objectNameI18n, objectType, objectRaStr,
-                                    objectDecStr, objectMagnitudeStr, objectConstellation);
+                                    objectDecStr, objectMagnitudeStr, objectConstellation, date, Location);
 
                         observingListItem item;
                         item.name = objectName;
@@ -614,7 +634,7 @@ auto ObsListDialog::loadListFromJson(const QVariantMap &map, QString listOlud) -
  * For no regression with must take into account the legacy bookmarks.json file
 */
 void ObsListDialog::loadBookmarksInObservingList() {
-    QHash<QString, bookmark> bookmarksCollection;
+    QHash<QString, observingListItem> bookmarksCollection;
     QVariantMap map;
 
     QFile jsonFile(bookmarksJsonPath);
@@ -631,54 +651,122 @@ void ObsListDialog::loadBookmarksInObservingList() {
             for (auto bookmarkKey: bookmarksMap.keys()) {
 
                 QVariantMap bookmarkData = bookmarksMap.value(bookmarkKey).toMap();
-                bookmark item;
+                observingListItem item;
+                util.initItem(item);
 
+                // Name
                 item.name = bookmarkData.value(KEY_NAME).toString();
-                /// TODO vérifier si nameI18n est utilisé
-                QString nameI18n = bookmarkData.value(KEY_NAME_I18N).toString();
-                if (!nameI18n.isEmpty()) {
-                    item.nameI18n = nameI18n;
-                } else {
-                    item.nameI18n = "";
+
+                // We need to select the object to add additional information that is not in the Bookmark file
+                if (objectMgr->findAndSelect(item.name) && !objectMgr->getSelectedObject().isEmpty()) {
+                    const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
+
+                    // Ra & Dec - ra and dec are not empty in case of Custom Object
+                    QString raStr = bookmarkData.value(KEY_RA).toString();
+                    QString decStr = bookmarkData.value(KEY_DEC).toString();
+                    if (raStr.isEmpty() || decStr.isEmpty()) {
+                        float ra, dec;
+                        StelUtils::rectToSphe(&ra, &dec, selectedObject[0]->getJ2000EquatorialPos(core));
+                        raStr = StelUtils::radToHmsStr(ra, false).trimmed();
+                        decStr = StelUtils::radToDmsStr(dec, false).trimmed();
+                    }
+
+                    if (!raStr.isEmpty()) {
+                        item.ra = raStr;
+                    } else {
+                        item.ra = "";
+                    }
+
+                    if (!decStr.isEmpty()) {
+                        item.dec = decStr;
+                    } else {
+                        item.dec = "";
+                    }
+
+                    // NameI18n
+                    QString nameI18n = bookmarkData.value(KEY_NAME_I18N).toString();
+                    if (!nameI18n.isEmpty()) {
+                        item.nameI18n = nameI18n;
+                    } else {
+                        item.nameI18n = "";
+                    }
+
+                    // JDs
+                    QString JDs = bookmarkData.value(KEY_JD).toString();
+                    if (!JDs.isEmpty()) {
+                        item.jd = JDs.toDouble();
+                    } else {
+                        item.jd = 0.0;
+                    }
+
+                    // Location
+                    QString location = bookmarkData.value(KEY_LOCATION).toString();
+                    if (!location.isEmpty()) {
+                        item.location = location;
+                    } else {
+                        item.location = "";
+                    }
+
+
+                    // Constallation
+                    QVariantMap objectMap = selectedObject[0]->getInfoMap(core);
+                    QVariant objectConstellationVariant = objectMap["iauConstellation"];
+                    QString objectConstellation("unknown");
+                    if (objectConstellationVariant.canConvert<QString>()) {
+                        objectConstellation = objectConstellationVariant.value<QString>();
+                    }
+                    if (!objectConstellation.isEmpty()) {
+                        item.constellation = objectConstellation;
+                    }
+
+                    // Type
+                    QString type = selectedObject[0]->getType();
+                    if (!type.isEmpty()) {
+                        item.type = type;
+                    }
+
+                    // Object Type
+                    QString objectType = selectedObject[0]->getObjectType();
+                    if (!objectType.isEmpty()) {
+                        item.objtype = objectType;
+                    }
+
+                    // Magnitude
+                    // TODO sortir ce code dans une méthode
+                    /*QString objectMagnitudeStr;
+                    float objectMagnitude = selectedObject[0]->getVMagnitude(core);
+                    const float unknownMagnitude = 99;
+                    if (objectMagnitude == unknownMagnitude) {
+                        if (QString::compare(type, "Nebula", Qt::CaseSensitive) == 0) {
+                            auto &r_nebula = dynamic_cast<Nebula &>(*selectedObject[0]);
+                            float mB = r_nebula.getBMagnitude(core);
+                            if (mB == unknownMagnitude) {
+                                objectMagnitudeStr = "–";
+                            } else {
+                                objectMagnitudeStr = QString::number(mB);
+                            }
+                        } else {
+                            objectMagnitudeStr = "–";
+                        }
+                    } else {
+                        objectMagnitudeStr = QString::number(objectMagnitude);
+                    }*/
+                    QString objectMagnitudeStr = util.getMagnitue(selectedObject, core);
+                    if (!objectMagnitudeStr.isEmpty()) {
+                        item.magnitude = objectMagnitudeStr;
+                    }
+
+                    // Fov
+                    double fov = bookmarkData.value(KEY_FOV).toDouble();
+                    if (fov > 0.0) {
+                        item.fov = fov;
+                    }
+
+                    // Visible marker
+                    item.isVisibleMarker = bookmarkData.value(KEY_IS_VISIBLE_MARKER, false).toBool();
+
+                    bookmarksCollection.insert(bookmarkKey, item);
                 }
-
-                // JDs
-                QString JDs = bookmarkData.value(KEY_JD).toString();
-                if (!JDs.isEmpty()) {
-                    item.jd = JDs.toDouble();
-                } else {
-                    item.jd = 0.0;
-                }
-
-                QString Location = bookmarkData.value(KEY_LOCATION).toString();
-                if (!Location.isEmpty()) {
-                    item.location = Location;
-                } else {
-                    item.location = "";
-                }
-
-                QString RA = bookmarkData.value(KEY_RA).toString();
-                if (!RA.isEmpty()) {
-                    item.ra = RA;
-                } else {
-                    item.ra = "";
-                }
-
-                QString Dec = bookmarkData.value(KEY_DEC).toString();
-                if (!Dec.isEmpty()) {
-                    item.dec = Dec;
-                } else {
-                    item.dec = "";
-                }
-
-                item.isVisibleMarker = bookmarkData.value(KEY_IS_VISIBLE_MARKER, false).toBool();
-                double fov = bookmarkData.value(KEY_FOV).toDouble();
-                if (fov > 0.0) {
-                    item.fov = fov;
-                }
-
-                bookmarksCollection.insert(bookmarkKey, item);
-
             }
 
             saveBookmarksInObsListJsonFile(bookmarksCollection);
@@ -694,7 +782,7 @@ void ObsListDialog::loadBookmarksInObservingList() {
 /*
  * Save the bookmarks into observing list file
 */
-void ObsListDialog::saveBookmarksInObsListJsonFile(const QHash<QString, bookmark> &bookmarksCollection) {
+void ObsListDialog::saveBookmarksInObsListJsonFile(const QHash<QString, observingListItem> &bookmarksCollection) {
 
     QFile jsonFile(observingListJsonPath);
     if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text)) {
@@ -720,8 +808,6 @@ void ObsListDialog::saveBookmarksInObsListJsonFile(const QHash<QString, bookmark
 
         if (checkIfBookmarksListExists(allListsMap)) {
             //the bookmarks file is already loaded
-            // TODO le problème c'est que si le fichier de bookmark a été modifié entre temps les nouvelles
-            // TODO modifications ne seront pas prises en compte - à voir donc... !
             return;
         }
 
@@ -735,31 +821,27 @@ void ObsListDialog::saveBookmarksInObsListJsonFile(const QHash<QString, bookmark
                                                                                                                   " ");
         observingListDataList.insert(QString(KEY_CREATION_DATE), listCreationDate);
 
-        // Location
-        QString Location = "";
-        StelLocation loc = core->getCurrentLocation();
-        if (loc.name.isEmpty()) {
-            Location = QString("%1, %2").arg(loc.latitude).arg(loc.longitude);
-        } else {
-            Location = QString("%1, %2").arg(loc.name).arg(loc.region);
-        }
-        observingListDataList.insert(QString(KEY_LOCATION), Location);
+        // Landscape
+        QString landscapeId = landscapeMgr->getCurrentLandscapeID();
+        observingListDataList.insert(QString(KEY_LANDSCAPE_ID), landscapeId);
 
         // Name of the liste
         observingListDataList.insert(QString(KEY_NAME), BOOKMARKS_LIST_NAME);
 
         // List of objects
         QVariantList listOfObjects;
-        QHashIterator<QString, bookmark> i(bookmarksCollection);
+        QHashIterator<QString, observingListItem> i(bookmarksCollection);
         while (i.hasNext()) {
             i.next();
 
-            bookmark item = i.value();
+            observingListItem item = i.value();
             QVariantMap obl;
 
-            // Designation
-            QString objectName = item.name;
-            obl.insert(QString(KEY_DESIGNATION), objectName);
+            // Designation (name)
+            obl.insert(QString(KEY_DESIGNATION), item.name);
+
+            // NameI18
+            obl.insert(QString(KEY_NAME_I18N), item.nameI18n);
 
             // Fov
             obl.insert(QString(KEY_FOV), item.fov);
@@ -770,6 +852,12 @@ void ObsListDialog::saveBookmarksInObsListJsonFile(const QHash<QString, bookmark
             // Location
             obl.insert(QString(KEY_LOCATION), item.location);
 
+            // Magnitude
+            obl.insert(QString(KEY_MAGNITUDE), item.magnitude);
+
+            // Constellation
+            obl.insert(QString(KEY_CONSTELLATION), item.constellation);
+
             // Ra
             obl.insert(QString(KEY_RA), item.ra);
 
@@ -777,15 +865,10 @@ void ObsListDialog::saveBookmarksInObsListJsonFile(const QHash<QString, bookmark
             obl.insert(QString(KEY_DEC), item.dec);
 
             // Type
-            if (objectMgr->findAndSelect(objectName)) {
-                const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
-                QString objectType = selectedObject[0]->getType();
-                if (QString::compare(objectType, "Planet", Qt::CaseSensitive) == 0) {
-                    auto &r_planet = dynamic_cast<Planet &>(*selectedObject[0]);
-                    objectType = r_planet.getPlanetTypeString();
-                }
-                obl.insert(QString(KEY_OBJECTS_TYPE), objectType);
-            }
+            obl.insert(QString(KEY_TYPE), item.type);
+
+            // Object type
+            obl.insert(QString(KEY_OBJECTS_TYPE), item.objtype);
 
             listOfObjects.push_back(obl);
 
@@ -852,11 +935,15 @@ void ObsListDialog::selectAndGoToObject(QModelIndex index) {
     observingListItem item = observingListItemCollection.value(itemUuid);
 
 
-    if (item.jd != 0.0) {
+    // We use jd if the checkbox JD is checked.
+    if (ui->obsListJdCheckBox->isChecked() && item.jd != 0.0) {
         core->setJD(item.jd);
+    } else {
+        core->setJD(currentJd);
     }
 
-    if (!item.location.isEmpty()) {
+    // We use location if the checkbox Location is checked.
+    if (ui->obsListLocationCheckBox->isChecked() && !item.location.isEmpty()) {
         StelLocationMgr *locationMgr = &StelApp::getInstance().getLocationMgr();
         core->moveObserverTo(locationMgr->locationForString(item.location));
     }
@@ -973,13 +1060,7 @@ void ObsListDialog::obsListDeleteButtonPressed() {
                 int currentIndex = ui->obsListComboBox->currentIndex();
                 ui->obsListComboBox->removeItem(currentIndex);
 
-                //TODO pas utile car listeName_ est réinitialiséé et rechargée dans loadListsNameFromJsonFile().
-                //TODO a supprimer après les tests finaux.
-                //QString listName = ui->obsListComboBox->itemText(currentIndex);
-                //listNames_.removeOne(listName);
-
                 selectedObservingListUuid = "";
-
 
                 jsonFile.resize(0);
                 StelJsonParser::write(newMap, &jsonFile);
@@ -1062,7 +1143,6 @@ QString ObsListDialog::extractDefaultListOludFromJsonFile() {
         }
     }
 }
-
 
 /*
  * Override of the StelDialog::setVisible((bool) methode
