@@ -8,6 +8,7 @@ The Stellarium team gives a huge thanks to our backers:
 ## Bronze Sponsor:
 
  - Raul Monraz
+ - n8n GmbH
 
 ## Silver Sonsor:
 
