@@ -61,6 +61,7 @@ details of the implementation encapsulated.
 #include <string.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <errno.h>
 
 #include "StelUtils.hpp"
 /**** include variable and type definitions, specific for this C version */
