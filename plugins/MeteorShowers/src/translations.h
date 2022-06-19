@@ -171,6 +171,12 @@ class MSTranslations
 		N_("October Camelopardalids");
 		// TRANSLATORS: Name of meteor shower
 		N_("δ-Aurigids");
+		// TRANSLATORS: Name of meteor shower
+		N_("γ-Ursae Minorids");
+		// TRANSLATORS: Name of meteor shower
+		N_("η-Eridanids");
+		// TRANSLATORS: Name of meteor shower
+		N_("December Monocerotids");
 
 		// List of parent objects for meteor showers
 		// TRANSLATORS: Name of parent object for meteor shower
