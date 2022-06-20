@@ -465,6 +465,7 @@ void SatellitesDialog::filterListByGroup(int index)
 		{ "[undisplayed]",	SatNotDisplayed },
 		{ "[newlyadded]",	SatNew },
 		{ "[orbiterror]",	SatError },
+		{ "[orbitdecay]",	SatDecayOrbit },
 		{ "[smallsize]",	SatSmallSize },
 		{ "[mediumsize]",	SatMediumSize },
 		{ "[largesize]",	SatLargeSize },
@@ -1098,6 +1099,7 @@ void SatellitesDialog::populateFilterMenu()
 
 	// Add special groups - their IDs deliberately use JSON-incompatible chars.
 	ui->groupFilterCombo->insertItem(0, q_("[orbit calculation error]"), QVariant("[orbiterror]"));
+	ui->groupFilterCombo->insertItem(0, q_("[orbital decay]"), QVariant("[orbitdecay]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all newly added]"), QVariant("[newlyadded]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all not displayed]"), QVariant("[undisplayed]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all displayed]"), QVariant("[displayed]"));
