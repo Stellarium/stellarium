@@ -95,7 +95,7 @@ enum SatFlag
 	SatOutdatedTLE		= 0x040000,
 	SatCustomFilter		= 0x080000,
 	SatCommunication	= 0x100000,
-	SatDecayOrbit		= 0x200000
+	SatReentry		= 0x200000
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)

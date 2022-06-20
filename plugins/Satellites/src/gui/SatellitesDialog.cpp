@@ -465,7 +465,7 @@ void SatellitesDialog::filterListByGroup(int index)
 		{ "[undisplayed]",	SatNotDisplayed },
 		{ "[newlyadded]",	SatNew },
 		{ "[orbiterror]",	SatError },
-		{ "[orbitdecay]",	SatDecayOrbit },
+		{ "[reentry]",		SatReentry },
 		{ "[smallsize]",	SatSmallSize },
 		{ "[mediumsize]",	SatMediumSize },
 		{ "[largesize]",	SatLargeSize },
@@ -509,7 +509,7 @@ void SatellitesDialog::filterListByGroup(int index)
 void SatellitesDialog::updateFilteredSatellitesList()
 {
 	QString groupId = ui->groupFilterCombo->currentData(Qt::UserRole).toString();
-	if (groupId == "[outdatedTLE]" || groupId == "[custom]" || groupId == "[communication]")
+	if (groupId == "[outdatedTLE]" || groupId == "[custom]" || groupId == "[communication]" || groupId == "[reentry]")
 	{
 		filterListByGroup(ui->groupFilterCombo->currentIndex());
 	}
@@ -1099,7 +1099,7 @@ void SatellitesDialog::populateFilterMenu()
 
 	// Add special groups - their IDs deliberately use JSON-incompatible chars.
 	ui->groupFilterCombo->insertItem(0, q_("[orbit calculation error]"), QVariant("[orbiterror]"));
-	ui->groupFilterCombo->insertItem(0, q_("[orbital decay]"), QVariant("[orbitdecay]"));
+	ui->groupFilterCombo->insertItem(0, q_("[atmospheric entry]"), QVariant("[reentry]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all newly added]"), QVariant("[newlyadded]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all not displayed]"), QVariant("[undisplayed]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all displayed]"), QVariant("[displayed]"));
