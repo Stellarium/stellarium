@@ -896,7 +896,7 @@ SatFlags Satellite::getFlags() const
 		flags |= SatCustomFilter;
 	if (!comms.isEmpty())
 		flags |= SatCommunication;
-	if (apogee<=70.0 || height<=70.0) // Karman line, atmosphere
+	if (apogee<=100.0 || height<=100.0) // Karman line, atmosphere
 		flags |= SatReentry;
 
 	return flags;
