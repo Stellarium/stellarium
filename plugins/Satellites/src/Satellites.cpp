@@ -865,6 +865,9 @@ void Satellites::loadSettings()
 	setFlagVFAltitude(conf->value("vf_altitude_flag", false).toBool());
 	setMinVFAltitude(conf->value("vf_altitude_min", 200.).toDouble());
 	setMaxVFAltitude(conf->value("vf_altitude_max", 500.).toDouble());
+	setFlagVFMagnitude(conf->value("vf_magnitude_flag", false).toBool());
+	setMinVFMagnitude(conf->value("vf_magnitude_min", 8.).toDouble());
+	setMaxVFMagnitude(conf->value("vf_magnitude_max", -8.).toDouble());
 
 	conf->endGroup();
 }
@@ -934,6 +937,9 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("vf_altitude_flag", getFlagVFAltitude());
 	conf->setValue("vf_altitude_min", getMinVFAltitude());
 	conf->setValue("vf_altitude_max", getMaxVFAltitude());
+	conf->setValue("vf_magnitude_flag", getFlagVFMagnitude());
+	conf->setValue("vf_magnitude_min", getMinVFMagnitude());
+	conf->setValue("vf_magnitude_max", getMaxVFMagnitude());
 
 	conf->endGroup();
 	
@@ -1921,6 +1927,27 @@ void Satellites::setMaxVFAltitude(double v)
 {
 	Satellite::maxVFAltitude = v;
 	emit maxVFAltitudeChanged(v);
+}
+
+void Satellites::setFlagVFMagnitude(bool b)
+{
+	if (Satellite::flagVFMagnitude != b)
+	{
+		Satellite::flagVFMagnitude = b;
+		emit flagVFMagnitudeChanged(b);
+	}
+}
+
+void Satellites::setMinVFMagnitude(double v)
+{
+	Satellite::minVFMagnitude = v;
+	emit minVFMagnitudeChanged(v);
+}
+
+void Satellites::setMaxVFMagnitude(double v)
+{
+	Satellite::maxVFMagnitude = v;
+	emit maxVFMagnitudeChanged(v);
 }
 
 void Satellites::setFlagCFEccentricity(bool b)

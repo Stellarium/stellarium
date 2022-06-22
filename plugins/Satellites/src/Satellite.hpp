@@ -363,6 +363,9 @@ private:
 	static bool flagVFAltitude;
 	static double minVFAltitude;
 	static double maxVFAltitude;
+	static bool flagVFMagnitude;
+	static double minVFMagnitude;
+	static double maxVFMagnitude;
 
 	void draw(StelCore *core, StelPainter& painter);
 

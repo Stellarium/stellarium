@@ -88,6 +88,9 @@ double Satellite::maxCFRCS = 100.;
 bool Satellite::flagVFAltitude = false;
 double Satellite::minVFAltitude = 200.;
 double Satellite::maxVFAltitude = 500.;
+bool Satellite::flagVFMagnitude = false;
+double Satellite::minVFMagnitude = 8.;
+double Satellite::maxVFMagnitude = -8.;
 
 #if (SATELLITES_PLUGIN_IRIDIUM == 1)
 double Satellite::sunReflAngle = 180.;
@@ -291,12 +294,16 @@ QVariantMap Satellite::getMap(void)
 	return map;
 }
 
-float Satellite::getSelectPriority(const StelCore*) const
+float Satellite::getSelectPriority(const StelCore* core) const
 {
+	float limit = -10.f;
 	if (flagVFAltitude) // the visual filter is enabled
-		return (minVFAltitude<=height && height<=maxVFAltitude) ? -10. : 50.;
+		limit = (minVFAltitude<=height && height<=maxVFAltitude) ? -10.f : 50.f;
 
-	return -10.;
+	if (flagVFMagnitude) // the visual filter is enabled
+		limit = ((maxVFMagnitude<=getVMagnitude(core) && getVMagnitude(core)<=minVFMagnitude) && (stdMag<99. || RCS>0.)) ? -10.f : 50.f;
+
+	return limit;
 }
 
 QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
@@ -1001,6 +1008,16 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 			return;
 	}
 
+	const float magSat = getVMagnitude(core);
+	if (flagVFMagnitude)
+	{
+		// visual filter is activated and he is applicable!
+		if (!(stdMag<99. || RCS>0.))
+			return;
+		if (!(maxVFMagnitude<=magSat && magSat<=minVFMagnitude))
+			return;
+	}
+
 	Vec3d win;
 	if (painter.getProjector()->projectCheck(XYZ, win))
 	{
@@ -1028,7 +1045,6 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 			}
 			else
 			{
-				const float magSat = getVMagnitude(core);
 				StelSkyDrawer* sd = core->getSkyDrawer();
 				RCMag rcMag;
 
