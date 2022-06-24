@@ -118,6 +118,7 @@ void NavStarsWindow::resetSettings()
 void NavStarsWindow::populateToday()
 {
 	StelCore* core = StelApp::getInstance().getCore();
+	const double utcShift = core->getUTCOffset(core->getJD()) / 24.; // Fix DST shift...
 	StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
 	PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
 	double duration;
@@ -129,8 +130,8 @@ void NavStarsWindow::populateToday()
 	Vec4d moon = GETSTELMODULE(SolarSystem)->getMoon()->getRTSTime(core, 0.);
 	if (moon[3]==0.)
 	{
-		moonrise = localeMgr->getPrintableTimeLocal(moon[0]);
-		moonset = localeMgr->getPrintableTimeLocal(moon[2]);
+		moonrise = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(moon[0]+utcShift), true);
+		moonset = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(moon[2]+utcShift), true);
 	}
 	else
 		moonrise = moonset = dash;
@@ -139,8 +140,8 @@ void NavStarsWindow::populateToday()
 	Vec4d day = sun->getRTSTime(core, 0.);
 	if (day[3]==0.)
 	{
-		dayBegin = localeMgr->getPrintableTimeLocal(day[0]);
-		dayEnd = localeMgr->getPrintableTimeLocal(day[2]);
+		dayBegin = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(day[0]+utcShift), true);
+		dayEnd = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(day[2]+utcShift), true);
 		duration = qAbs(day[2]-day[0])*24.;
 	}
 	else
@@ -154,8 +155,8 @@ void NavStarsWindow::populateToday()
 	Vec4d civilTwilight = sun->getRTSTime(core, -6.);
 	if (civilTwilight[3]==0.)
 	{
-		civilTwilightBegin = localeMgr->getPrintableTimeLocal(civilTwilight[0]);
-		civilTwilightEnd = localeMgr->getPrintableTimeLocal(civilTwilight[2]);
+		civilTwilightBegin = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(civilTwilight[0]+utcShift), true);
+		civilTwilightEnd = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(civilTwilight[2]+utcShift), true);
 		duration = qAbs(civilTwilight[2]-civilTwilight[0])*24.;
 	}
 	else
@@ -169,8 +170,8 @@ void NavStarsWindow::populateToday()
 	Vec4d nauticalTwilight = sun->getRTSTime(core, -12.);
 	if (nauticalTwilight[3]==0.)
 	{
-		nauticalTwilightBegin = localeMgr->getPrintableTimeLocal(nauticalTwilight[0]);
-		nauticalTwilightEnd = localeMgr->getPrintableTimeLocal(nauticalTwilight[2]);
+		nauticalTwilightBegin = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(nauticalTwilight[0]+utcShift), true);
+		nauticalTwilightEnd = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(nauticalTwilight[2]+utcShift), true);
 		duration = qAbs(nauticalTwilight[2]-nauticalTwilight[0])*24.;
 	}
 	else
@@ -184,8 +185,8 @@ void NavStarsWindow::populateToday()
 	Vec4d astronomicalTwilight = sun->getRTSTime(core, -18.);
 	if (astronomicalTwilight[3]==0.)
 	{
-		astronomicalTwilightBegin = localeMgr->getPrintableTimeLocal(astronomicalTwilight[0]);
-		astronomicalTwilightEnd = localeMgr->getPrintableTimeLocal(astronomicalTwilight[2]);
+		astronomicalTwilightBegin = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(astronomicalTwilight[0]+utcShift), true);
+		astronomicalTwilightEnd = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(astronomicalTwilight[2]+utcShift), true);
 		duration = qAbs(astronomicalTwilight[2]-astronomicalTwilight[0])*24.;
 	}
 	else
