@@ -7277,7 +7277,7 @@ void AstroCalcDialog::calculateWutObjects()
 		ui->wutAngularSizeLimitMaxSpinBox->setToolTip(q_("Maximum angular size for visible celestial objects"));
 
 		// Direct calculate sunrise/sunset (civil twilight)
-		Vec4d rts = GETSTELMODULE(SolarSystem)->getSun()->getRTSTime(core, -7.);
+		Vec4d rts = GETSTELMODULE(SolarSystem)->getSun()->getRTSTime(core, -6.);
 		QList<double> wutJDList;
 		wutJDList.clear();
 

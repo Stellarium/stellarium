@@ -1076,9 +1076,13 @@ For example, below is a record for \textit{Northern Taurids}:
 
 \subsection{Notes}
 \begin{itemize}
-\item This plugin uses two models \citep{1994A&A...287..990J} and \citep{1998Jenniskens} to calculate ZHR, assumming that the activity profile of meteor shower follows the double exponential shape.
-\item To predict the local hourly rate, altitude of radiant and limiting magnitude of the sky are taken into account. Moonlight can also reduce the hourly rate, but it doesn't take into account.
-\item Most of numerical data for past meteor outbursts (Leonids, etc.) come from \citep{2006Jenniskens.book}. There are wide-range reported values of maximum ZHR for 1833 and 1966 Leonids \citep{1999Brown}. We decided to use maximum number of 150,000 to demonstrate meteor outbursts with very high rate.
+\item This plugin uses two models \citep{1994A&A...287..990J} and \citep{1998Jenniskens} to calculate ZHR,
+  assuming that the activity profile of meteor shower follows a double exponential shape.
+\item To predict the local hourly rate, altitude of radiant and limiting magnitude of the sky are taken into account.
+  Moonlight can also reduce the hourly rate, but is not taken into account.
+\item Most of the numerical data for past meteor outbursts (Leonids, etc.) come from \citep{2006Jenniskens.book}.
+  There is a wide range of reported values for the maximum ZHR for the 1833 and 1966 Leonids \citep{1999Brown}.
+  We decided to use a maximum number of 150,000 to demonstrate meteor outbursts with very high rate.
 \end{itemize}
 
 \subsection{Further Information}
@@ -1106,14 +1110,17 @@ This plugin was initially created as project of ESA Summer of Code in Space 2013
 \label{fig:plugin:NavigationalStars}
 \end{figure}
 
-\noindent This plugin marks navigational stars from a selected set:
+\noindent This plugin marks navigational stars from a selected set (Figure~\ref{fig:plugin:NavigationalStars:Settings}):
 \begin{description}
-	\item[Anglo-American] --- the 57 ``selected stars'' that are listed in \emph{The Nautical Almanac}\footnote{The Nautical Almanac
-		website -- \url{http://aa.usno.navy.mil/publications/docs/na.php}} jointly published by Her Majesty's Nautical Almanac Office and the US Naval Observatory since 1958; consequently, these stars are also used in navigational aids such as the \emph{2102-D Star Finder}\footnote{Rude Starfinder 2102-D
-		description and usage instruction --
-		\url{http://oceannavigation.blogspot.ru/2008/12/rude-starfinder-2102-d.html}} and \emph{Identifier}. 
-	\item[French] --- the 81 stars that are listed in the \emph{Ephémérides Nautiques} published by the French Bureau des Longitudes.
-	\item[Russian] --- the 160 stars that are listed in the Russian Nautical Almanac.
+\item[Anglo-American] --- the 57 ``selected stars'' that are listed in \emph{The Nautical Almanac}\footnote{The Nautical Almanac
+  website -- \url{https://aa.usno.navy.mil/publications/docs/na.php}} jointly published by Her Majesty's Nautical Almanac Office
+  and the US Naval Observatory since 1958; consequently, these stars are also used in navigational aids such as the
+  \emph{2102-D Star Finder}\footnote{Rude Starfinder 2102-D description and usage instruction --
+    \url{https://oceannavigation.blogspot.com/2008/12/rude-starfinder-2102-d.html}} and \emph{Identifier}. 
+\item[French] --- the 81 stars that are listed in the \emph{Ephémérides Nautiques} published by the French Bureau des Longitudes.
+\item[Russian] --- the 160 stars that are listed in the Russian Nautical Almanac.
+\item[German] --- the 80 stars that are listed in the German Nautical Almanac (The original German title is \textit{Nautisches Jahrbuch})
+  published by the Federal Maritime and Hydrographic Agency of Germany.
 \end{description}
 If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), just click
 on the Sextant button \guibutton{0.6}{bt_NavStars-off.png} on
@@ -1122,6 +1129,32 @@ can help you in training your skills in astronomical navigation before
 you cruise the ocean in the traditional way, with your sextant and
 chronometer.
 
+\begin{figure}[htbp]
+  \centering\includegraphics[width=0.8\textwidth]{navstars_plugin_settings.jpg}
+  \caption{Settings of the Navigational stars plugin}
+  \label{fig:plugin:NavigationalStars:Settings}
+\end{figure}
+
+In the second tab (``Today'', see Figure~\ref{fig:plugin:NavigationalStars:Today}) in the plugin's dialog (right-click the button)
+you can see times of sunrise and sunset, twilights, moonrise and moonset. 
+
+\begin{figure}[htbp]
+  \centering\includegraphics[width=0.8\textwidth]{navstars_plugin_today.jpg}
+  \caption{Today tab in the Navigational stars plugin}
+  \label{fig:plugin:NavigationalStars:Today}
+\end{figure}
+
+\begin{description}
+\item[Civil Twilight] occurs when the zenith angle of the center of the Sun is less than $96\degree$ ($6\degree$ below the horizon)
+  and the available skylight is still typically sufficient for most civilian outdoor activities. The apparent horizon is still
+  clearly visible against the glowing sky and only the brightest stars are beginning to show.
+\item[Nautical Twilight] occurs when the zenith angle of the center of the Sun is less than $102\degree$ ($12\degree$ below the horizon)
+  and the available skylight is no longer sufficient for detailed outdoor activities. However, the outline of the apparent horizon,
+  as well as most large topographical features, are still distinguishable and the key stars used for navigational purposes have all typically become visible.
+\item[Astronomical Twilight] occurs when the zenith angle of the center of the Sun is less than $108\degree$ ($18\degree$ below the horizon)
+  and the available skylight is effectively imperceptible compared to moonlight and starlight. Beyond this angle there is
+  no longer any discernible atmospheric scattering of sunlight, so the time after astronomical twilight is basically night.
+\end{description}
 
 \subsection{Section \big[NavigationalStars\big] in config.ini file}
 %\label{sec:plugins:NavigationalStars:configuration}
@@ -1131,10 +1164,16 @@ settings for the Navigational Stars plugin -- just make it carefully!
 
 \noindent%
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
-\emph{ID}			& \emph{Type} 	& \emph{Description}\\\midrule
-navstars\_color 	& R,G,B 		& Color of markers of navigational stars  \\
-enable\_at\_startup & bool 		    & Set to \emph{true} to display navigational stars at startup of planetarium  \\
-current\_ns\_set	& string		& Current set of navigational stars. Possible values: \emph{AngloAmerican}, \emph{French} and \emph{Russian}. \\
+\emph{ID}              & \emph{Type} & \emph{Description}\\\midrule
+navstars\_color             & R,G,B  & Color of markers of navigational stars  \\
+enable\_at\_startup         & bool   & Set to \emph{true} to display navigational stars at startup of planetarium  \\
+use\_utc\_time              & bool   & Set to \emph{true} to use UTC time when navigational stars are displayed \\
+extra\_decimals             & bool   & Set to \emph{true} to show extra decimals in info \\
+upper\_limb                 & bool   & Set to \emph{true} to use upper limb for Sun and Moon \\
+tabulated\_display          & bool   & Set to \emph{true} to show information as a tabulated list \\
+limit\_info\_to\_nav\_stars & bool   & Set to \emph{true} to show extra information only for marked Navigation Stars \\ 
+highlight\_when\_visible    & bool   & Set to \emph{true} to highlight only visible stars \\
+current\_ns\_set            & string & Current set of navigational stars. Possible values: \emph{AngloAmerican}, \emph{French}, \emph{Russian} and \emph{German}. \\
 \bottomrule
 \end{tabularx}
 
