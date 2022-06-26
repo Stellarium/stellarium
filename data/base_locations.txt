@@ -25,7 +25,7 @@ Umm Al Quwain City	Imarat Umm al Qaywayn	16	R	62.747	25.56473N	55.55517E	2	6	Asi
 Ras Al Khaimah City	Imarat Ra's al Khaymah	16	R	351.943	25.78953N	55.9432E	2	7	Asia/Dubai
 Zayed City	Abu Dhabi	16	N	63.482	23.65416N	53.70522E	118	6	Asia/Dubai
 Khawr Fakkan	Sharjah	16	N	40.677	25.33132N	56.34199E	20	5	Asia/Dubai
-Dubai	Dubai	16	R	2956.587	25.07725N	55.30927E	24	9	Asia/Dubai
+Dubai	Dubai	16	R	3478.3	25.07725N	55.30927E	24	9	Asia/Dubai
 Dibba Al-Fujairah	Fujairah	16	N	30	25.59246N	56.26176E	16	5	Asia/Dubai
 Dibba Al-Hisn	Fujairah	16	N	26.395	25.61955N	56.27291E	4	5	Asia/Dubai
 Sharjah	Sharjah	16	R	1324.473	25.33737N	55.41206E	6	9	Asia/Dubai
@@ -57,7 +57,7 @@ Paghman	Kabul	15	N	49.157	34.58787N	68.95091E	2328	5	Asia/Kabul
 Nahrin	Baghlan	15	N	22.363	36.0649N	69.13343E	1138	5	Asia/Kabul
 Maymana	Faryab	15	R	75.9	35.92139N	64.78361E	864	6	Asia/Kabul
 Mehtar Lam	Laghman	15	R	17.345	34.67139N	70.20944E	795	5	Asia/Kabul
-Mazar-e Sharif	Balkh	15	R	303.282	36.70904N	67.11087E	361	7	Asia/Kabul
+Mazar-e Sharif	Balkh	15	R	523.3	36.70904N	67.11087E	361	8	Asia/Kabul
 Lashkar Gah	Helmand	15	R	43.934	31.59382N	64.37161E	786	5	Asia/Kabul
 Kushk	Herat	15	N	16.952	33.29565N	61.95221E	1115	5	Asia/Kabul
 Kunduz	Kunduz	15	R	161.902	36.72895N	68.857E	402	7	Asia/Kabul
@@ -66,11 +66,11 @@ Khulm	Balkh	15	N	64.933	36.69736N	67.69826E	445	6	Asia/Kabul
 Khash	Nimroz	15	N	15.133	31.52919N	62.79055E	579	5	Asia/Kabul
 Khanabad	Kunduz	15	N	71.531	36.68304N	69.11279E	499	6	Asia/Kabul
 Karukh	Herat	15	N	17.484	34.48108N	62.5863E	1340	5	Asia/Kabul
-Kandahar	Kandahar	15	R	391.19	31.61332N	65.71013E	1007	7	Asia/Kabul
-Kabul	Kabul	15	C	3043.532	34.52813N	69.17233E	1798	9	Asia/Kabul
-Jalalabad	Nangarhar	15	R	200.331	34.42647N	70.45153E	575	7	Asia/Kabul
+Kandahar	Kandahar	15	R	523.3	31.61332N	65.71013E	1007	8	Asia/Kabul
+Kabul	Kabul	15	C	4434.55	34.52813N	69.17233E	1798	9	Asia/Kabul
+Jalalabad	Nangarhar	15	R	271.9	34.42647N	70.45153E	575	7	Asia/Kabul
 Jabal os Saraj	Parwan	15	N	15.032	35.11833N	69.23778E	1612	5	Asia/Kabul
-Herat	Herat	15	R	272.806	34.34817N	62.19967E	927	7	Asia/Kabul
+Herat	Herat	15	R	574.3	34.34817N	62.19967E	927	8	Asia/Kabul
 Ghormach	Badghis	15	N	30	35.73062N	63.78264E	659	5	Asia/Kabul
 Ghazni	Ghazni	15	R	141	33.55391N	68.42096E	2179	7	Asia/Kabul
 Gereshk	Helmand	15	N	43.588	31.82089N	64.57005E	830	5	Asia/Kabul
@@ -129,6 +129,7 @@ Gavar	Gegharkunik	16	R	21.68	40.35398N	45.12386E	1953	5	Asia/Yerevan
 Hrazdan	Kotayk	16	R	40.795	40.49748N	44.7662E	1762	5	Asia/Yerevan
 Armavir	Armavir	16	R	25.963	40.15446N	44.03815E	870	5	Asia/Yerevan
 Gyumri	Shirak	16	R	148.381	40.7942N	43.84528E	1549	7	Asia/Yerevan
+Ch'arents'avan	Kotayk	16	N	18.5	40.40289N	44.64447E	1661	5	Asia/Yerevan
 Ashtarak	Aragatsotn	16	R	18.779	40.2991N	44.36204E	1142	5	Asia/Yerevan
 Abovyan	Kotayk	16	N	35.673	40.27368N	44.63348E	1423	5	Asia/Yerevan
 Saurimo	Lunda Sul	03	R	40.498	9.66078S	20.39155E	1071	5	Africa/Luanda
@@ -1277,7 +1278,7 @@ Santiago del Torno	Santa Cruz	08	N	15.543	17.98674S	63.38118W	514	5	America/La_P
 Santa Cruz de la Sierra	Santa Cruz	08	R	1831.434	17.78629S	63.18117W	433	9	America/La_Paz
 San Ignacio de Velasco	Santa Cruz	08	N	23.569	16.36667S	60.95W	385	5	America/La_Paz
 Sacaba	Cochabamba	08	N	180.726	17.39799S	66.03825W	2710	7	America/La_Paz
-Riberalta	El Beni	08	N	74.014	11.00654S	66.06312W	150	6	America/La_Paz
+Riberalta	El Beni	08	N	74.014	11.01026S	66.05257W	145	6	America/La_Paz
 Quillacollo	Cochabamba	08	N	172.405	17.39228S	66.27838W	2559	7	America/La_Paz
 Punata	Cochabamba	08	N	15.194	17.54234S	65.83472W	2731	5	America/La_Paz
 Potosi	Potosi	08	R	141.251	19.58361S	65.75306W	3967	7	America/La_Paz
@@ -2571,7 +2572,7 @@ Mahilyow	Mogilev	17	R	369.2	53.9168N	30.3449E	184	7	Europe/Minsk
 Lyepyel'	Vitebsk	17	N	17.4	54.8814N	28.699E	165	5	Europe/Minsk
 Luninyets	Brest	17	N	25	52.2472N	26.8047E	139	5	Europe/Minsk
 Lida	Grodnenskaya	17	N	102.7	53.88333N	25.29972E	144	7	Europe/Minsk
-Krychaw	Mogilev	17	N	27.681	53.7125N	31.717E	168	5	Europe/Minsk
+Krychaw	Mogilev	17	N	27.681	53.69571N	31.71233E	154	5	Europe/Minsk
 Kalodzishchy	Minsk	17	N	17	53.944N	27.7823E	242	5	Europe/Minsk
 Kobryn	Brest	17	N	50.691	52.2138N	24.3564E	140	6	Europe/Minsk
 Kalinkavichy	Gomel Oblast	17	N	37.19	52.1323N	29.3257E	122	5	Europe/Minsk
@@ -3447,10 +3448,13 @@ Zoucheng	Shandong	13	N	277.4	35.40056N	116.96556E	76	7	Asia/Shanghai
 Nima	Gansu	13	N	17.82	34.00065N	102.07127E	3480	5	Asia/Shanghai
 Ziyang Chengguanzhen	Shaanxi	13	N	35.496	32.51917N	108.53232E	324	5	Asia/Shanghai
 Ziyang	Sichuan	13	N	905.729	30.12108N	104.64811E	365	8	Asia/Shanghai
+Zishui	Chongqing	13	N	20.396	31.41281N	108.31465E	467	5	Asia/Shanghai
 Zigong	Sichuan	13	N	1262.064	29.34162N	104.77689E	306	9	Asia/Shanghai
 Zhuzhou	Hunan	13	N	1129.687	27.83333N	113.15E	54	9	Asia/Shanghai
+Zhuyuan	Chongqing	13	N	39.338	31.30216N	109.25806E	859	5	Asia/Shanghai
 Zhuyang	Chongqing	13	N	26.335	29.06423N	105.94487E	227	5	Asia/Shanghai
 Zhuxi	Chongqing	13	N	34.113	29.53614N	105.66685E	324	5	Asia/Shanghai
+Zhuoshui	Chongqing	13	N	20.386	29.30309N	108.7702E	419	5	Asia/Shanghai
 Zhumadian	Henan	13	N	721.67	32.97944N	114.02944E	89	8	Asia/Shanghai
 Zhujiajiao	Shanghai	13	N	60	31.10757N	121.05696E	9	6	Asia/Shanghai
 Shangqiu	Henan	13	N	1536.392	34.45N	115.65E	51	9	Asia/Shanghai
@@ -3468,6 +3472,7 @@ Zhongzhai	Gansu	13	N	19.641	33.19133N	104.42009E	1375	5	Asia/Shanghai
 Zhongxing	Jiangsu	13	N	57.338	33.70389N	118.67917E	17	6	Asia/Shanghai
 Zhongxin	Yunnan	13	N	51.866	26.61667N	101.27154E	1226	6	Asia/Shanghai
 Zhongshu	Yunnan	13	N	91.75	24.51667N	103.76667E	1701	6	Asia/Shanghai
+Zhonghe	Chongqing	13	N	43.318	31.17664N	108.13155E	212	5	Asia/Shanghai
 Gusong	Sichuan	13	N	87.882	28.3133N	105.2377E	474	6	Asia/Shanghai
 Zhongchao	Guizhou	13	N	22.129	26.1375N	109.22E	461	5	Asia/Shanghai
 Zhong'ao	Chongqing	13	N	31.118	29.765N	105.66645E	390	5	Asia/Shanghai
@@ -3475,6 +3480,7 @@ Zhigou	Shandong	13	N	43.152	35.91667N	119.21667E	79	5	Asia/Shanghai
 Zhicheng	Zhejiang	13	N	63.753	31.00751N	119.90851E	12	6	Asia/Shanghai
 Zhicheng	Hubei	13	N	159.383	30.29556N	111.50472E	51	7	Asia/Shanghai
 Zhenzhou	Jiangsu	13	N	176.006	32.28034N	119.16999E	10	7	Asia/Shanghai
+Zhenxi	Chongqing	13	N	50.017	29.89929N	107.46452E	181	6	Asia/Shanghai
 Zhenping Chengguanzhen	Henan	13	N	181.528	33.03314N	112.23321E	189	7	Asia/Shanghai
 Zhenjiang	Jiangsu	13	N	950.516	32.21086N	119.45508E	26	8	Asia/Shanghai
 Zhaobaoshan	Zhejiang	13	N	61.979	29.9695N	121.68753E	3	6	Asia/Shanghai
@@ -3505,12 +3511,14 @@ Zaoyang	Hubei	13	N	184.509	32.12722N	112.75417E	113	7	Asia/Shanghai
 Yuyao	Zhejiang	13	N	114.177	30.05N	121.14944E	59	7	Asia/Shanghai
 Yingchuan	Henan	13	N	87.961	34.16278N	113.46389E	126	6	Asia/Shanghai
 Yuxia	Shaanxi	13	N	60.206	34.06153N	108.62905E	428	6	Asia/Shanghai
+Yushan	Chongqing	13	N	30.981	29.53284N	108.42504E	308	5	Asia/Shanghai
 Kunshan	Jiangsu	13	N	2092.496	31.37762N	120.95431E	10	9	Asia/Shanghai
 Yunyang	Henan	13	N	73.922	33.44743N	112.71422E	202	6	Asia/Shanghai
 Yuntai	Chongqing	13	N	40.328	30.13894N	107.20487E	390	5	Asia/Shanghai
 Yunshan	Gansu	13	N	16.22	34.76063N	105.79252E	1723	5	Asia/Shanghai
 Yunnanyi	Yunnan	13	N	93.671	25.4245N	100.689E	1978	6	Asia/Shanghai
 Yunmeng Chengguanzhen	Hubei	13	N	64.39	31.06251N	113.76545E	43	6	Asia/Shanghai
+Yunmen	Chongqing	13	N	68.698	30.08274N	106.32376E	243	6	Asia/Shanghai
 Jinghong	Yunnan	13	N	205.523	21.99102N	100.73409E	611	7	Asia/Shanghai
 Yunjin	Sichuan	13	N	54.385	29.0818N	105.64329E	414	6	Asia/Shanghai
 Pizhou	Jiangsu	13	N	343.421	34.31139N	117.95028E	25	7	Asia/Shanghai
@@ -3519,6 +3527,7 @@ Yuncheng	Shanxi	13	N	680.036	35.02306N	110.99278E	361	8	Asia/Shanghai
 Yulinshi	Shaanxi	13	N	90.87	38.29181N	109.73753E	1056	6	Asia/Shanghai
 Yulin	Guangxi	13	N	1056.743	22.6305N	110.14686E	87	9	Asia/Shanghai
 Wulingyuan	Hunan	13	N	52.712	29.34936N	110.54407E	327	6	Asia/Shanghai
+Yuexi	Chongqing	13	N	47.802	30.91127N	108.15926E	219	5	Asia/Shanghai
 Yudong	Chongqing	13	N	81.408	29.385N	106.51944E	212	6	Asia/Shanghai
 Yuci	Shanxi	13	N	235.929	37.68028N	112.73194E	798	7	Asia/Shanghai
 Yucheng	Shandong	13	N	62.365	34.92889N	116.46528E	37	6	Asia/Shanghai
@@ -3533,6 +3542,7 @@ Youting	Chongqing	13	N	44.363	29.43128N	105.73757E	402	5	Asia/Shanghai
 Yongzhou	Hunan	13	N	1020.715	26.42389N	111.61306E	101	9	Asia/Shanghai
 Yongxing	Gansu	13	N	22.079	34.20778N	105.32889E	1459	5	Asia/Shanghai
 Yongxing	Chongqing	13	N	32.535	28.98968N	106.17612E	252	5	Asia/Shanghai
+Yongxin	Chongqing	13	N	49.951	28.96667N	106.53333E	695	5	Asia/Shanghai
 Yongqing	Gansu	13	N	55.595	34.74806N	106.12694E	1407	6	Asia/Shanghai
 Yongning	Yunnan	13	N	20.852	27.83333N	100.66667E	2770	5	Asia/Shanghai
 Yongfeng	Hunan	13	N	70.783	27.45493N	112.16943E	111	6	Asia/Shanghai
@@ -3565,6 +3575,7 @@ Yanzibu	Jiangsu	13	N	25.714	34.50561N	117.70222E	30	5	Asia/Shanghai
 Yanzhou	Shandong	13	N	254.788	35.55278N	116.82861E	54	7	Asia/Shanghai
 Yantai	Shandong	13	N	2227.733	37.47649N	121.44081E	22	9	Asia/Shanghai
 Yanliang	Shaanxi	13	N	60.891	34.65918N	109.22921E	395	6	Asia/Shanghai
+Yanjing	Chongqing	13	N	24.68	29.94494N	106.35025E	227	5	Asia/Shanghai
 Yanjia	Chongqing	13	N	72.825	29.82758N	106.99734E	275	6	Asia/Shanghai
 Yangzhou	Jiangsu	13	N	1584.237	32.39722N	119.43583E	14	9	Asia/Shanghai
 Yangzhou	Shaanxi	13	N	64.349	33.22192N	107.54267E	474	6	Asia/Shanghai
@@ -3610,6 +3621,8 @@ Xinxing	Shandong	13	N	38.2	36.04917N	119.54139E	61	5	Asia/Shanghai
 Xinxiang	Henan	13	N	1047.088	35.19033N	113.80151E	82	9	Asia/Shanghai
 Xintai	Shandong	13	N	222.459	35.90056N	117.75194E	197	7	Asia/Shanghai
 Xinshi	Hubei	13	N	98.422	31.04704N	113.14098E	115	6	Asia/Shanghai
+Xinmin	Chongqing	13	N	21.912	30.90343N	109.46682E	633	5	Asia/Shanghai
+Xinmiao	Chongqing	13	N	34.299	29.65528N	107.04988E	400	5	Asia/Shanghai
 Xinji	Hebei	13	N	145.911	37.90278N	115.20361E	40	7	Asia/Shanghai
 Xining	Qinghai	13	R	1677.177	36.62554N	101.75739E	2275	9	Asia/Shanghai
 Shangmei	Hunan	13	N	75.233	27.74278N	111.29556E	179	6	Asia/Shanghai
@@ -3617,6 +3630,7 @@ Xinhe	Shandong	13	N	69.884	36.925N	119.59306E	1	6	Asia/Shanghai
 Xingtai	Hebei	13	N	798.77	37.06306N	114.49417E	76	8	Asia/Shanghai
 Xingren	Guizhou	13	N	91.579	25.43333N	105.23333E	1445	6	Asia/Shanghai
 Xinglong	Chongqing	13	N	20.333	29.88931N	106.70622E	563	5	Asia/Shanghai
+Xinglong	Chongqing	13	N	41.411	30.65723N	109.44599E	1272	5	Asia/Shanghai
 Xingguo	Gansu	13	N	95.211	34.85861N	105.66861E	1219	6	Asia/Shanghai
 Ankang	Shaanxi	13	N	870.126	32.68N	109.01722E	273	8	Asia/Shanghai
 Xindian	Shandong	13	N	82.555	36.7975N	118.29444E	73	6	Asia/Shanghai
@@ -3642,6 +3656,7 @@ Haining	Zhejiang	13	N	70.171	30.53629N	120.68638E	7	6	Asia/Shanghai
 Gongyi	Henan	13	N	56.033	34.75534N	113.01137E	223	6	Asia/Shanghai
 Xiaoweizhai	Guizhou	13	N	58.913	26.19028N	107.5125E	757	6	Asia/Shanghai
 Xiaoshan	Zhejiang	13	N	95.234	30.16746N	120.25883E	14	6	Asia/Shanghai
+Xiaomian	Chongqing	13	N	27.154	30.12268N	106.53435E	227	5	Asia/Shanghai
 Xiaolingwei	Jiangsu	13	N	66.031	32.03244N	118.854E	14	6	Asia/Shanghai
 Xiaogang	Jiangxi	13	N	127.076	28.23333N	116.58333E	59	7	Asia/Shanghai
 Xiaogan	Hubei	13	N	908.266	30.92689N	113.92221E	35	8	Asia/Shanghai
@@ -3686,11 +3701,13 @@ Wucheng	Anhui	13	N	60.212	29.60077N	118.17495E	149	6	Asia/Shanghai
 Wenzhou	Zhejiang	13	N	2650	27.99942N	120.66682E	10	9	Asia/Shanghai
 Wenxian Chengguanzhen	Gansu	13	N	31.339	32.94712N	104.68139E	1000	5	Asia/Shanghai
 Wenshang	Shandong	13	N	59.455	35.7275N	116.49611E	44	6	Asia/Shanghai
+Wenquan	Chongqing	13	N	39.402	31.35911N	108.52224E	277	5	Asia/Shanghai
 Wenling	Zhejiang	13	N	67.433	28.37524N	121.38416E	6	6	Asia/Shanghai
 Wenjiang	Sichuan	13	N	68.433	28.38812N	104.56339E	522	6	Asia/Shanghai
 Wenheng	Fujian	13	N	20.542	25.66742N	116.75429E	383	5	Asia/Shanghai
 Tianfu	Shandong	13	N	115.37	37.26366N	122.05228E	50	7	Asia/Shanghai
 Wenchang	Hainan	13	N	560.894	19.6157N	110.74894E	13	8	Asia/Shanghai
+Weituo	Chongqing	13	N	36.068	30.03983N	106.14701E	223	5	Asia/Shanghai
 Weinan	Shaanxi	13	N	1199.29	34.50355N	109.50891E	354	9	Asia/Shanghai
 Weimiao	Jiangsu	13	N	51.82	34.58333N	117.06667E	35	6	Asia/Shanghai
 Weiji	Jiangsu	13	N	48.069	34.03333N	117.95E	24	5	Asia/Shanghai
@@ -3701,6 +3718,7 @@ Wayao	Jiangsu	13	N	37.08	34.38333N	118.23333E	31	5	Asia/Shanghai
 Wanxian	Chongqing	13	N	188.98	30.81601N	108.37407E	232	7	Asia/Shanghai
 Wanshun	Chongqing	13	N	22.256	30.04006N	106.97159E	315	5	Asia/Shanghai
 Wanshui	Guizhou	13	N	17.141	26.73528N	107.98722E	600	5	Asia/Shanghai
+Wansheng	Chongqing	13	N	113.751	28.9629N	106.92844E	324	7	Asia/Shanghai
 Wanning	Hainan	13	N	545.992	18.79931N	110.3841E	15	8	Asia/Shanghai
 Wangwu	Hainan	13	N	24.274	19.65623N	109.29071E	27	5	Asia/Shanghai
 Wangu	Chongqing	13	N	28.871	29.68242N	105.93551E	309	5	Asia/Shanghai
@@ -3710,15 +3728,18 @@ Yinzhu	Shandong	13	N	75.656	35.87861N	119.97528E	8	6	Asia/Shanghai
 Wangfen	Shandong	13	N	48.052	36.55N	118.38333E	360	5	Asia/Shanghai
 Waina	Gansu	13	N	19.394	33.20639N	105.04972E	880	5	Asia/Shanghai
 Wafangdian	Liaoning	13	N	250.591	39.61833N	122.00806E	103	7	Asia/Shanghai
+Tuxiang	Chongqing	13	N	41.011	30.71293N	109.15556E	842	5	Asia/Shanghai
 Tushan	Jiangsu	13	N	42.853	34.22083N	117.83694E	27	5	Asia/Shanghai
 Huangshan	Anhui	13	N	460.786	29.71139N	118.3125E	134	7	Asia/Shanghai
 Loushanguan	Guizhou	13	N	80.344	28.1368N	106.822E	935	6	Asia/Shanghai
 Tongzhou	Beijing	13	N	163.326	39.90395N	116.66183E	33	7	Asia/Shanghai
+Tongxi	Chongqing	13	N	29.699	30.00047N	106.13043E	223	5	Asia/Shanghai
 Fuding	Fujian	13	N	192.352	27.32734N	120.21399E	13	7	Asia/Shanghai
 Tongren	Guizhou	13	N	90.593	27.71722N	109.18528E	263	6	Asia/Shanghai
 Tongling	Anhui	13	N	402.062	30.95N	117.78333E	7	7	Asia/Shanghai
 Tongjing	Chongqing	13	N	30.673	29.85653N	106.8448E	198	5	Asia/Shanghai
 Tongchuan	Sichuan	13	N	58.346	31.09407N	105.08731E	386	6	Asia/Shanghai
+Tieqiao	Chongqing	13	N	42.085	31.04001N	108.13362E	207	5	Asia/Shanghai
 Tiefu	Jiangsu	13	N	87.689	34.53333N	118.03333E	29	6	Asia/Shanghai
 Tiaoshi	Chongqing	13	N	28.825	29.27722N	106.6425E	346	5	Asia/Shanghai
 Tianzhuang	Shandong	13	N	64.957	36.79583N	119.73667E	21	6	Asia/Shanghai
@@ -3732,6 +3753,7 @@ Taoyuan	Jiangsu	13	N	52.861	33.85278N	117.77028E	29	6	Asia/Shanghai
 Taoluo	Shandong	13	N	61.852	35.27389N	119.37028E	0	6	Asia/Shanghai
 Taolin	Shandong	13	N	31.795	35.80006N	119.53395E	103	5	Asia/Shanghai
 Tantou	Fujian	13	N	69.05	26.03033N	119.59739E	10	6	Asia/Shanghai
+Tanjia	Chongqing	13	N	15.261	31.45574N	108.49861E	251	5	Asia/Shanghai
 Tangzhai	Anhui	13	N	67.936	34.43278N	116.59111E	46	6	Asia/Shanghai
 Tangwu	Shandong	13	N	93.26	36.44667N	118.85972E	149	6	Asia/Shanghai
 Tangshan	Hebei	13	N	3372.102	39.63333N	118.18333E	36	9	Asia/Shanghai
@@ -3743,6 +3765,7 @@ Taizhou	Jiangsu	13	N	1607.108	32.49069N	119.90812E	10	9	Asia/Shanghai
 Taiyuan	Shanxi	13	R	4303.673	37.86944N	112.56028E	795	9	Asia/Shanghai
 Taixing	Jiangsu	13	N	79.655	32.16667N	120.01361E	9	6	Asia/Shanghai
 Taiping	Chongqing	13	N	24.393	30.26204N	107.29287E	421	5	Asia/Shanghai
+Taihe	Chongqing	13	N	66.506	30.09949N	106.0489E	234	6	Asia/Shanghai
 Taishan	Guangdong	13	N	145.44	22.25135N	112.7799E	3	7	Asia/Shanghai
 Taicang	Jiangsu	13	N	831.113	31.44778N	121.09389E	4	8	Asia/Shanghai
 Tai'an	Shandong	13	N	1735.425	36.18528N	117.12E	143	9	Asia/Shanghai
@@ -3762,12 +3785,14 @@ Sitou	Shandong	13	N	56.289	36.31275N	118.41185E	269	6	Asia/Shanghai
 Sishui	Shandong	13	N	90.175	35.64889N	117.27583E	112	6	Asia/Shanghai
 Simen	Gansu	13	N	27.168	34.62222N	105.01278E	1579	5	Asia/Shanghai
 Simao	Yunnan	13	N	296.565	22.78863N	100.97481E	1331	7	Asia/Shanghai
+Dachang Shandao	Liaoning	13	N	29.717	39.27556N	122.6E	18	5	Asia/Shanghai
 Sihu	Jiangsu	13	N	40.43	34.62625N	117.97139E	37	5	Asia/Shanghai
 Shunhe	Jiangsu	13	N	47.33	34.84184N	116.55722E	28	5	Asia/Shanghai
 Shuizhai	Guangdong	13	N	140.493	23.92961N	115.76499E	106	7	Asia/Shanghai
 Shuitu	Chongqing	13	N	44.551	29.78221N	106.4974E	209	5	Asia/Shanghai
 Shuikou	Guizhou	13	N	26.827	25.91278N	109.31361E	289	5	Asia/Shanghai
 Shuikou	Guangdong	13	N	62.321	23.98372N	115.89581E	114	6	Asia/Shanghai
+Shuijiang	Chongqing	13	N	50.918	29.2476N	107.28443E	573	6	Asia/Shanghai
 Laixi	Shandong	13	N	341.47	36.85917N	120.52694E	54	7	Asia/Shanghai
 Shuanglong	Chongqing	13	N	29.213	29.95972N	107.20356E	418	5	Asia/Shanghai
 Shuangjiang	Guizhou	13	N	16.773	25.96667N	108.92417E	242	5	Asia/Shanghai
@@ -3779,6 +3804,7 @@ Shizilu	Shandong	13	N	86.749	35.17111N	118.82889E	101	6	Asia/Shanghai
 Shiyan	Hubei	13	N	3460	32.6475N	110.77806E	247	9	Asia/Shanghai
 Shiwan	Guangdong	13	N	82.031	23.00107N	113.077E	20	6	Asia/Shanghai
 Shiwan	Guangxi	13	N	40.33	21.75N	109.2E	5	5	Asia/Shanghai
+Shituo	Chongqing	13	N	26.144	29.71613N	107.13564E	194	5	Asia/Shanghai
 Shitanjing	Ningxia Hui Autonomous Region	13	N	78.765	39.23417N	106.34389E	1428	6	Asia/Shanghai
 Shiquan	Shaanxi	13	N	53.422	33.04083N	108.23639E	362	6	Asia/Shanghai
 Shiqiaozi	Shandong	13	N	58.538	36.16167N	119.26306E	68	6	Asia/Shanghai
@@ -3787,18 +3813,23 @@ Shiqi	Guangdong	13	N	342.306	22.51682N	113.38521E	8	7	Asia/Shanghai
 Shimen	Chongqing	13	N	35.665	29.10037N	106.03304E	219	5	Asia/Shanghai
 Shima	Chongqing	13	N	22.82	29.63116N	105.83065E	388	5	Asia/Shanghai
 Shima	Fujian	13	N	68.375	24.44647N	117.81216E	11	6	Asia/Shanghai
+Xianglong	Chongqing	13	N	25.006	30.26125N	106.57588E	303	5	Asia/Shanghai
 Shilong	Guangdong	13	N	109.733	23.11444N	113.84722E	14	7	Asia/Shanghai
 Tongchuanshi	Shaanxi	13	N	223.603	35.07474N	109.08495E	834	7	Asia/Shanghai
 Shikang	Guangxi	13	N	64.818	21.76667N	109.31667E	15	6	Asia/Shanghai
 Shijiazhuang	Hebei	13	R	3938.513	38.04139N	114.47861E	77	9	Asia/Shanghai
+Shijiao	Chongqing	13	N	46.097	28.92444N	106.75611E	365	5	Asia/Shanghai
 Shiji	Jiangsu	13	N	41.652	34.2N	118.48333E	19	5	Asia/Shanghai
+Shihui	Chongqing	13	N	15.205	29.57177N	108.61017E	464	5	Asia/Shanghai
 Shidui	Shandong	13	N	35.367	36.39333N	119.30861E	78	5	Asia/Shanghai
 Shichuan	Chongqing	13	N	39.645	29.76584N	106.82284E	265	5	Asia/Shanghai
 Shibuzi	Shandong	13	N	58.333	36.12389N	119.10278E	91	6	Asia/Shanghai
+Shetan	Chongqing	13	N	33.452	29.98924N	107.61521E	361	5	Asia/Shanghai
 Shenzhen	Guangdong	13	N	17494.398	22.54554N	114.0683E	4	9	Asia/Shanghai
 Yanta	Shandong	13	N	79.196	36.24111N	115.66722E	41	6	Asia/Shanghai
 Chentuan	Shandong	13	N	24.706	35.50472N	119.26694E	41	5	Asia/Shanghai
 Shenjiamen	Zhejiang	13	N	95.433	29.95763N	122.29802E	25	6	Asia/Shanghai
+Yunlong	Chongqing	13	N	29.673	30.5228N	107.64196E	440	5	Asia/Shanghai
 Shawan	Gansu	13	N	21.551	33.62736N	104.5637E	1489	5	Asia/Shanghai
 Rensha	Chongqing	13	N	20.054	30.05305N	107.59409E	200	5	Asia/Shanghai
 Shaping	Chongqing	13	N	30.928	30.47463N	107.43587E	435	5	Asia/Shanghai
@@ -3824,6 +3855,10 @@ Sanya	Hainan	13	N	1031.396	18.24306N	109.505E	11	9	Asia/Shanghai
 Sanqu	Chongqing	13	N	28.563	29.64157N	105.62161E	383	5	Asia/Shanghai
 Sanming	Fujian	13	N	602.166	26.24861N	117.61861E	126	8	Asia/Shanghai
 Sanmenxia	Henan	13	N	669.307	34.77472N	111.18139E	348	8	Asia/Shanghai
+Sanjiao	Chongqing	13	N	35.486	29.05028N	106.73639E	274	5	Asia/Shanghai
+Sanjiang	Chongqing	13	N	39.785	28.94472N	106.71056E	268	5	Asia/Shanghai
+Sanhui	Chongqing	13	N	51.413	30.08167N	106.5912E	266	6	Asia/Shanghai
+Sangzhe	Chongqing	13	N	26.221	29.27837N	108.39822E	874	5	Asia/Shanghai
 Runing	Henan	13	N	60.202	33.00111N	114.35417E	56	6	Asia/Shanghai
 Rui'an	Zhejiang	13	N	927.383	27.77605N	120.65859E	4	8	Asia/Shanghai
 Rongjiang	Yunnan	13	N	32.291	26.55N	101.25E	1180	5	Asia/Shanghai
@@ -3831,6 +3866,7 @@ Fuqing	Fujian	13	N	67.397	25.7294N	119.37469E	17	6	Asia/Shanghai
 Jieyang	Guangdong	13	N	1899.394	23.5418N	116.36581E	7	9	Asia/Shanghai
 Rizhuang	Shandong	13	N	43.758	36.95083N	120.38306E	79	5	Asia/Shanghai
 Renzhao	Shandong	13	N	64.569	36.63861N	120.20361E	23	6	Asia/Shanghai
+Renxian	Chongqing	13	N	21.499	30.66092N	107.67895E	450	5	Asia/Shanghai
 Renqiu	Hebei	13	N	98.569	38.69889N	116.09361E	13	6	Asia/Shanghai
 Renhe	Yunnan	13	N	24.903	26.41667N	101.01667E	2125	5	Asia/Shanghai
 Quzhou	Zhejiang	13	N	902.767	28.95944N	118.86861E	77	8	Asia/Shanghai
@@ -3852,6 +3888,7 @@ Qingshuping	Hunan	13	N	62	27.38083N	112.02056E	134	6	Asia/Shanghai
 Qingshizui	Qinghai	13	N	28.561	37.46667N	101.43333E	2940	5	Asia/Shanghai
 Qingshanquan	Jiangsu	13	N	44.314	34.41639N	117.36306E	36	5	Asia/Shanghai
 Qingquan	Hubei	13	N	76.154	30.45113N	115.25593E	35	6	Asia/Shanghai
+Qingping	Chongqing	13	N	21.16	29.97696N	106.52057E	269	5	Asia/Shanghai
 Huai'an	Jiangsu	13	N	2494.013	33.58861N	119.01917E	14	9	Asia/Shanghai
 Qingfu	Sichuan	13	N	56.65	28.43701N	104.51622E	339	6	Asia/Shanghai
 Qingdao	Shandong	13	N	7172.451	36.06488N	120.38042E	16	9	Asia/Shanghai
@@ -3864,6 +3901,7 @@ Qiaotou	Qinghai	13	N	114.712	36.935N	101.67361E	2487	7	Asia/Shanghai
 Qiaotou	Gansu	13	N	21.273	33.10763N	104.81168E	1066	5	Asia/Shanghai
 Qiaoguan	Shandong	13	N	82.467	36.56444N	118.88389E	148	6	Asia/Shanghai
 Qianliu	Yunnan	13	N	48.09	22.9N	100.2E	1416	5	Asia/Shanghai
+Puzi	Chongqing	13	N	18.133	29.63292N	108.32825E	579	5	Asia/Shanghai
 Puyang Chengguanzhen	Henan	13	N	104.994	35.70506N	115.01409E	56	7	Asia/Shanghai
 Puyang	Zhejiang	13	N	3590	29.45679N	119.88872E	76	9	Asia/Shanghai
 Putian	Fujian	13	N	1539.389	25.43944N	119.01028E	23	9	Asia/Shanghai
@@ -3881,6 +3919,7 @@ Pingshan	Guangdong	13	N	113.631	22.99376N	114.71311E	22	7	Asia/Shanghai
 Pingnan	Guangxi	13	N	62.483	23.5418N	110.38929E	39	6	Asia/Shanghai
 Pingliang	Gansu	13	N	504.848	35.53917N	106.68611E	1354	8	Asia/Shanghai
 Pingli	Shaanxi	13	N	45.493	32.38472N	109.34556E	488	5	Asia/Shanghai
+Pingjin	Chongqing	13	N	55.139	30.61176N	107.54497E	466	6	Asia/Shanghai
 Pingdu	Shandong	13	N	542.234	36.78444N	119.94639E	59	8	Asia/Shanghai
 Pingdingshan	Henan	13	N	979.13	33.73847N	113.30119E	88	8	Asia/Shanghai
 Pianjiao	Yunnan	13	N	24.575	26.01667N	100.58333E	1475	5	Asia/Shanghai
@@ -3906,6 +3945,7 @@ Nanxi	Sichuan	13	N	96.061	28.84209N	104.97958E	274	6	Asia/Shanghai
 Nantong	Jiangsu	13	N	2273.326	32.03028N	120.87472E	6	9	Asia/Shanghai
 Nanshu	Shandong	13	N	40.188	37.02014N	120.33731E	111	5	Asia/Shanghai
 Pucheng	Fujian	13	N	59.832	27.92333N	118.53333E	235	6	Asia/Shanghai
+Nanping	Chongqing	13	N	32.888	29.08639N	106.98722E	655	5	Asia/Shanghai
 Nanping	Fujian	13	N	467.875	26.645N	118.17361E	102	7	Asia/Shanghai
 Nanning	Guangxi	13	R	3839.8	22.81667N	108.31667E	91	9	Asia/Shanghai
 Nanma	Shandong	13	N	74.406	36.18478N	118.15486E	283	6	Asia/Shanghai
@@ -3940,6 +3980,7 @@ Mengcheng Chengguanzhen	Anhui	13	N	69.916	33.26611N	116.56605E	29	6	Asia/Shangha
 Meizhou	Guangdong	13	N	992.351	24.28859N	116.11768E	84	8	Asia/Shanghai
 Meishan	Sichuan	13	N	1107.742	30.04392N	103.83696E	423	9	Asia/Shanghai
 Wuchuan	Guangdong	13	N	104.168	21.45713N	110.76591E	7	7	Asia/Shanghai
+Mawu	Chongqing	13	N	32.36	29.5925N	107.31337E	573	5	Asia/Shanghai
 Mapo	Jiangsu	13	N	35.358	34.51667N	117.06667E	38	5	Asia/Shanghai
 Maoming	Guangdong	13	N	1307.802	21.66625N	110.91364E	31	9	Asia/Shanghai
 Maocun	Jiangsu	13	N	57.649	34.37667N	117.25056E	57	6	Asia/Shanghai
@@ -3975,9 +4016,12 @@ Lu'an	Anhui	13	N	1644.344	31.73561N	116.51688E	81	9	Asia/Shanghai
 Loudi	Hunan	13	N	497.171	27.73444N	111.99444E	135	7	Asia/Shanghai
 Longyan	Fujian	13	N	1025.087	25.07485N	117.01775E	318	9	Asia/Shanghai
 Longxing	Chongqing	13	N	36.297	29.70199N	106.7911E	273	5	Asia/Shanghai
+Longtan	Chongqing	13	N	36.511	29.44631N	107.10217E	694	5	Asia/Shanghai
 Longshui	Chongqing	13	N	121.609	29.56555N	105.76205E	367	7	Asia/Shanghai
+Longshi	Chongqing	13	N	56.142	30.21469N	106.45743E	351	6	Asia/Shanghai
 Longshan	Gansu	13	N	37.976	35.03194N	106.08056E	1593	5	Asia/Shanghai
 Longquan	Yunnan	13	N	91.534	24.67193N	102.1613E	1591	6	Asia/Shanghai
+Longmen	Chongqing	13	N	19.38	30.79819N	107.68712E	477	5	Asia/Shanghai
 Longhua	Chongqing	13	N	27.849	29.21028N	106.20725E	217	5	Asia/Shanghai
 Longlin	Gansu	13	N	18.148	33.94278N	105.06739E	1316	5	Asia/Shanghai
 Longgang	Shandong	13	N	60.444	37.65181N	120.33063E	6	6	Asia/Shanghai
@@ -4004,10 +4048,12 @@ Linyi	Shandong	13	N	2743.843	35.06306N	118.34278E	69	9	Asia/Shanghai
 Linxia Chengguanzhen	Gansu	13	N	274.466	35.60028N	103.20639E	1893	7	Asia/Shanghai
 Linxi	Hebei	13	N	100.316	39.71183N	118.44954E	46	7	Asia/Shanghai
 Linshui	Hebei	13	N	109.955	36.42472N	114.20472E	138	7	Asia/Shanghai
+Linshi	Chongqing	13	N	41.73	29.66698N	107.19233E	183	5	Asia/Shanghai
 Linqu	Shandong	13	N	299.646	36.51556N	118.53972E	97	7	Asia/Shanghai
 Linqiong	Sichuan	13	N	55.587	30.41587N	103.46089E	511	6	Asia/Shanghai
 Qingnian	Shandong	13	N	110.046	36.84092N	115.71087E	38	7	Asia/Shanghai
 Linping	Zhejiang	13	N	78.18	30.4225N	120.29722E	15	6	Asia/Shanghai
+Linjiang	Chongqing	13	N	71.149	31.09956N	108.21964E	193	6	Asia/Shanghai
 Linjiacun	Shandong	13	N	88.509	35.99389N	119.65028E	85	6	Asia/Shanghai
 Dongta	Ningxia Hui Autonomous Region	13	N	22.04	38.0814N	106.34444E	1122	5	Asia/Shanghai
 Linghe	Shandong	13	N	99.069	36.36417N	119.07694E	85	6	Asia/Shanghai
@@ -4020,6 +4066,7 @@ Lincang	Yunnan	13	N	323.708	23.87972N	100.09455E	1483	7	Asia/Shanghai
 Xishan	Hunan	13	N	98.162	27.66667N	113.5E	69	6	Asia/Shanghai
 Liji	Jiangsu	13	N	39.691	33.76667N	117.78333E	25	5	Asia/Shanghai
 Ligezhuang	Shandong	13	N	65.714	36.35778N	120.14278E	7	6	Asia/Shanghai
+Lidu	Chongqing	13	N	88.124	29.73861N	107.29477E	212	6	Asia/Shanghai
 Lichuan	Hubei	13	N	120.587	30.3N	108.85E	1255	7	Asia/Shanghai
 Licheng	Guangdong	13	N	172.775	23.29549N	113.82465E	24	7	Asia/Shanghai
 Licha	Shandong	13	N	55.14	36.05722N	119.78333E	80	6	Asia/Shanghai
@@ -4104,6 +4151,7 @@ Jiaxing	Zhejiang	13	N	1180	30.7522N	120.75E	8	9	Asia/Shanghai
 Jiawang	Jiangsu	13	N	133.861	34.43278N	117.44194E	31	7	Asia/Shanghai
 Jiasi	Chongqing	13	N	27.327	29.11569N	106.44691E	208	5	Asia/Shanghai
 Jiaozuo	Henan	13	N	865.413	35.23972N	113.23306E	138	8	Asia/Shanghai
+Jiaoshi	Chongqing	13	N	23.454	29.71607N	107.5976E	610	5	Asia/Shanghai
 Jiaogong	Gansu	13	N	19.083	33.56547N	104.64637E	1196	5	Asia/Shanghai
 Jiaozhou	Shandong	13	N	619.266	36.28389N	120.00333E	10	8	Asia/Shanghai
 Ningde	Fujian	13	N	429.26	26.66167N	119.52278E	20	7	Asia/Shanghai
@@ -4165,13 +4213,14 @@ Hongjiang	Hunan	13	N	59.199	27.11N	109.99556E	197	6	Asia/Shanghai
 Honghe	Shandong	13	N	88.458	36.40278N	118.91806E	110	6	Asia/Shanghai
 Hezuo	Gansu	13	N	59.148	34.98556N	102.90944E	2898	6	Asia/Shanghai
 Heze	Shandong	13	N	1346.717	35.23929N	115.47358E	53	9	Asia/Shanghai
-Hechuan	Chongqing	13	N	97.575	29.99228N	106.26461E	222	6	Asia/Shanghai
+Hechuan	Chongqing	13	N	377.213	29.99228N	106.26461E	222	7	Asia/Shanghai
 Hetoudian	Shandong	13	N	38.398	37.01837N	120.57372E	91	5	Asia/Shanghai
 Yiyang	Hunan	13	N	1249.807	28.58917N	112.32833E	25	9	Asia/Shanghai
 Hepo	Guangdong	13	N	131.238	23.43077N	115.82991E	41	7	Asia/Shanghai
 Hengyang	Hunan	13	N	1075.516	26.88946N	112.61888E	66	9	Asia/Shanghai
 Hengshui	Hebei	13	N	522.147	37.73222N	115.70111E	25	8	Asia/Shanghai
 Hengbei	Guangdong	13	N	78.575	23.87968N	115.72546E	116	6	Asia/Shanghai
+Helin	Chongqing	13	N	19.268	30.58123N	107.68064E	466	5	Asia/Shanghai
 Hejiang	Sichuan	13	N	137.437	28.81161N	105.83359E	236	7	Asia/Shanghai
 Hefei	Anhui	13	R	5050	31.86389N	117.28083E	24	9	Asia/Shanghai
 Hede	Jiangsu	13	N	89.107	33.7722N	120.26176E	2	6	Asia/Shanghai
@@ -4186,8 +4235,10 @@ Hanyuan	Gansu	13	N	37.284	34.01083N	105.29194E	1663	5	Asia/Shanghai
 Hanyin Chengguanzhen	Shaanxi	13	N	66.926	32.89139N	108.50472E	361	6	Asia/Shanghai
 Fu'an	Fujian	13	N	154.439	27.09131N	119.64446E	20	7	Asia/Shanghai
 Hanting	Shandong	13	N	90.637	36.77083N	119.21083E	18	6	Asia/Shanghai
+Hanjia	Chongqing	13	N	108.43	29.29524N	108.16132E	295	7	Asia/Shanghai
 Hangzhou	Zhejiang	13	R	9236.032	30.29365N	120.16142E	12	9	Asia/Shanghai
 Hangu	Tianjin	13	N	208.369	39.24889N	117.78917E	3	7	Asia/Shanghai
+Hanfeng	Chongqing	13	N	196.528	31.16946N	108.4031E	182	7	Asia/Shanghai
 Changzhi	Shanxi	13	N	1214.94	36.18389N	113.10528E	937	9	Asia/Shanghai
 Handan	Hebei	13	N	1358.318	36.60999N	114.48764E	61	9	Asia/Shanghai
 Hanchuan	Hubei	13	N	87.737	30.65N	113.76667E	25	6	Asia/Shanghai
@@ -4204,6 +4255,8 @@ Guye	Hebei	13	N	41.484	39.73054N	118.44085E	44	5	Asia/Shanghai
 Guxian	Shandong	13	N	44.533	36.7341N	120.22558E	42	5	Asia/Shanghai
 Gupi	Jiangsu	13	N	48.748	34.11389N	117.88278E	26	5	Asia/Shanghai
 Guozhen	Shaanxi	13	N	85.415	34.36591N	107.35904E	551	6	Asia/Shanghai
+Guofu	Chongqing	13	N	32.831	28.85N	106.60139E	649	5	Asia/Shanghai
+Gunan	Chongqing	13	N	208.01	29.0231N	106.648E	297	7	Asia/Shanghai
 Gulin	Sichuan	13	N	116.527	28.04223N	105.81038E	506	7	Asia/Shanghai
 Guli	Zhejiang	13	N	536	28.88162N	120.03308E	121	8	Asia/Shanghai
 Guiyang	Guizhou	13	R	3037.159	26.58333N	106.71667E	1087	9	Asia/Shanghai
@@ -4219,6 +4272,8 @@ Guanhu	Jiangsu	13	N	97.705	34.42528N	117.99528E	27	6	Asia/Shanghai
 Guangzhou	Guangdong	13	R	16096.724	23.11667N	113.25E	15	9	Asia/Shanghai
 Guangshui	Hubei	13	N	154.771	31.6199N	113.9978E	83	7	Asia/Shanghai
 Guandu	Chongqing	13	N	42.766	30.95589N	109.84697E	309	5	Asia/Shanghai
+Guandu	Chongqing	13	N	24.913	30.08101N	106.42897E	257	5	Asia/Shanghai
+Gongping	Chongqing	13	N	38.852	31.12695N	109.19722E	354	5	Asia/Shanghai
 Gongmen	Gansu	13	N	23.1	34.94139N	106.29639E	1745	5	Asia/Shanghai
 Gongguan	Guangxi	13	N	96.492	21.8N	109.6E	21	6	Asia/Shanghai
 Gelan	Chongqing	13	N	55.938	30.03589N	107.11612E	334	6	Asia/Shanghai
@@ -4232,11 +4287,13 @@ Gaomi	Shandong	13	N	391.986	36.38333N	119.75278E	24	7	Asia/Shanghai
 Gaoliu	Shandong	13	N	67.339	36.8N	118.5E	41	6	Asia/Shanghai
 Gaoliu	Jiangsu	13	N	48.485	34.31667N	118.51667E	21	5	Asia/Shanghai
 Gaojia	Chongqing	13	N	43.944	30.02035N	107.86E	217	5	Asia/Shanghai
+Gaogu	Chongqing	13	N	15.522	29.39557N	108.06579E	240	5	Asia/Shanghai
 Gaogou	Jiangsu	13	N	56.214	34.0175N	119.18861E	5	6	Asia/Shanghai
 Gao'an	Chongqing	13	N	49.218	30.29019N	107.46197E	398	5	Asia/Shanghai
 Ganzhou	Jiangxi	13	N	1977.253	25.84664N	114.9326E	117	9	Asia/Shanghai
 Gantang	Hunan	13	N	90	27.4375N	111.97306E	137	6	Asia/Shanghai
 Gantang	Hunan	13	N	24	26.71556N	109.76889E	321	5	Asia/Shanghai
+Ganshui	Chongqing	13	N	65.994	28.74222N	106.71111E	414	6	Asia/Shanghai
 Gangu Chengguanzhen	Gansu	13	N	103.589	34.73564N	105.32632E	1287	7	Asia/Shanghai
 Gangtou	Jiangsu	13	N	39.999	34.31743N	118.20719E	32	5	Asia/Shanghai
 Fuzhou	Jiangxi	13	N	1089.888	27.95999N	116.33333E	53	9	Asia/Shanghai
@@ -4245,7 +4302,8 @@ Fujia	Gansu	13	N	23.66	33.81889N	105.95361E	1010	5	Asia/Shanghai
 Fuyang	Anhui	13	N	1768.947	32.9N	115.81667E	31	9	Asia/Shanghai
 Fuyang	Zhejiang	13	N	70.183	30.05333N	119.95194E	22	6	Asia/Shanghai
 Qingyang	Shandong	13	N	65.622	37.49583N	121.25806E	12	6	Asia/Shanghai
-Fuling	Chongqing	13	N	166.507	29.70997N	107.39391E	232	7	Asia/Shanghai
+Fulu	Chongqing	13	N	20.225	30.65422N	107.96832E	265	5	Asia/Shanghai
+Fuling	Chongqing	13	N	268.658	29.70997N	107.39391E	232	7	Asia/Shanghai
 Fuji	Sichuan	13	N	131.927	29.14819N	105.37391E	291	7	Asia/Shanghai
 Foshan	Guangdong	13	N	9042.509	23.02677N	113.13148E	5	9	Asia/Shanghai
 Fenyi	Jiangxi	13	N	58.478	27.81117N	114.66805E	84	6	Asia/Shanghai
@@ -4253,6 +4311,7 @@ Fengyi	Yunnan	13	N	61.89	25.58399N	100.31181E	1988	6	Asia/Shanghai
 Fengcheng	Jiangsu	13	N	161.85	34.70388N	116.58717E	40	7	Asia/Shanghai
 Fengrun	Hebei	13	N	65.15	39.83333N	118.11667E	28	6	Asia/Shanghai
 Fengkou	Hubei	13	N	67.139	30.08268N	113.33346E	28	6	Asia/Shanghai
+Fengjia	Chongqing	13	N	21.81	29.39313N	108.78459E	436	5	Asia/Shanghai
 Fenggang	Jiangxi	13	N	64.715	27.54566N	116.21456E	102	6	Asia/Shanghai
 Feicheng	Shandong	13	N	80.929	35.26056N	117.9675E	114	6	Asia/Shanghai
 Fangshan	Beijing	13	N	97.026	39.68699N	115.99658E	42	6	Asia/Shanghai
@@ -4274,6 +4333,7 @@ Duoba	Qinghai	13	N	66.767	36.65795N	101.53374E	2371	6	Asia/Shanghai
 Xinyi	Guangdong	13	N	98.259	22.37303N	110.94746E	89	6	Asia/Shanghai
 Dongying	Shandong	13	N	998.968	37.46271N	118.49165E	6	8	Asia/Shanghai
 Dongxing	Guangxi	13	N	88.607	21.55N	107.96667E	16	6	Asia/Shanghai
+Dongxi	Chongqing	13	N	58.169	28.76139N	106.66111E	389	6	Asia/Shanghai
 Dongtai	Jiangsu	13	N	110.988	32.85231N	120.30947E	7	7	Asia/Shanghai
 Dongsheng	Inner Mongolia	13	N	99.809	39.81609N	109.97763E	1439	6	Asia/Shanghai
 Dongkan	Jiangsu	13	N	72.789	33.99972N	119.83083E	6	6	Asia/Shanghai
@@ -4300,10 +4360,11 @@ Zhangjiajie	Hunan	13	N	441.804	29.12944N	110.47833E	174	7	Asia/Shanghai
 Daye	Hubei	13	N	61.847	30.08333N	114.95E	25	6	Asia/Shanghai
 Lijiang	Yunnan	13	N	211.151	26.86879N	100.22072E	2397	7	Asia/Shanghai
 Daxing	Yunnan	13	N	52.568	27.26369N	100.86387E	2430	6	Asia/Shanghai
-Dazhou	Sichuan	13	N	1589.435	31.21592N	107.50092E	309	9	Asia/Shanghai
+Dazhou	Sichuan	13	N	1589.435	31.2106N	107.46308E	292	9	Asia/Shanghai
 Dawukou	Ningxia Hui Autonomous Region	13	N	131.88	39.04194N	106.39583E	1119	7	Asia/Shanghai
 Datun	Jiangsu	13	N	110.258	34.80923N	116.90174E	58	7	Asia/Shanghai
 Datong	Anhui	13	N	61.085	32.62082N	117.06319E	39	6	Asia/Shanghai
+Dashun	Chongqing	13	N	18.844	29.57007N	107.04542E	706	5	Asia/Shanghai
 Dashan	Yunnan	13	N	15.98	23.00238N	100.11489E	1618	5	Asia/Shanghai
 Fenghua	Zhejiang	13	N	76.653	29.65628N	121.4064E	17	6	Asia/Shanghai
 Daotian	Shandong	13	N	93.728	36.83389N	118.89778E	19	6	Asia/Shanghai
@@ -4319,9 +4380,12 @@ Dalu	Chongqing	13	N	48.145	29.72984N	106.2177E	387	5	Asia/Shanghai
 Daliang	Guangdong	13	N	210.411	22.84067N	113.2503E	4	7	Asia/Shanghai
 Dalian	Liaoning	13	N	4913.879	38.91222N	121.60222E	33	9	Asia/Shanghai
 Dali	Yunnan	13	N	235.305	25.58474N	100.21229E	1977	7	Asia/Shanghai
+Dajin	Chongqing	13	N	32.213	31.50955N	108.44579E	326	5	Asia/Shanghai
 Dahuangshan	Jiangsu	13	N	44.771	34.29341N	117.34436E	34	5	Asia/Shanghai
+Daguan	Chongqing	13	N	20.538	29.255N	106.97694E	734	5	Asia/Shanghai
 Dafengdong	Guizhou	13	N	26.46	26.71194N	107.81139E	895	5	Asia/Shanghai
 Dachang	Chongqing	13	N	36.217	31.26861N	109.8021E	151	5	Asia/Shanghai
+Shuren	Chongqing	13	N	21.009	29.98661N	107.73923E	399	5	Asia/Shanghai
 Cuijiaji	Shandong	13	N	47.651	36.62528N	119.71333E	13	5	Asia/Shanghai
 Cizhu	Chongqing	13	N	22.996	29.9854N	106.73982E	758	5	Asia/Shanghai
 Chuzhou	Anhui	13	N	782.671	32.32194N	118.29778E	24	8	Asia/Shanghai
@@ -4396,11 +4460,13 @@ Baoying	Jiangsu	13	N	80.292	33.22917N	119.30917E	4	6	Asia/Shanghai
 Shaoyang	Hunan	13	N	753.194	27.23818N	111.46214E	243	8	Asia/Shanghai
 Langzhong	Sichuan	13	N	60.542	31.55037N	105.99381E	362	6	Asia/Shanghai
 Baoluan	Chongqing	13	N	21.417	29.76416N	107.67834E	543	5	Asia/Shanghai
+Baojia	Chongqing	13	N	39.738	29.43869N	108.31324E	311	5	Asia/Shanghai
 Baoding	Hebei	13	N	2739.887	38.85111N	115.49028E	17	9	Asia/Shanghai
 Balu	Jiangsu	13	N	38.894	34.18868N	117.91265E	23	5	Asia/Shanghai
 Baiyin	Gansu	13	N	294.4	36.54696N	104.17023E	1723	7	Asia/Shanghai
 Baixi	Sichuan	13	N	88.251	28.6997N	104.54917E	296	6	Asia/Shanghai
 Baituo	Gansu	13	N	15.555	34.85111N	106.00167E	1585	5	Asia/Shanghai
+Baitao	Chongqing	13	N	46.16	29.55083N	107.48688E	186	5	Asia/Shanghai
 Baisha	Chongqing	13	N	115.761	29.06226N	106.1189E	233	7	Asia/Shanghai
 Baisha	Guangxi	13	N	89.759	21.71667N	109.68333E	15	6	Asia/Shanghai
 Baimajing	Hainan	13	N	59.585	19.71195N	109.21801E	9	6	Asia/Shanghai
@@ -4412,11 +4478,13 @@ Baichihe	Shandong	13	N	42.913	36.11556N	119.53333E	55	5	Asia/Shanghai
 Babu	Guangxi	13	N	65.603	24.41667N	111.51667E	109	6	Asia/Shanghai
 Qilian	Qinghai	13	N	25.603	38.18056N	100.24028E	2758	5	Asia/Shanghai
 Aoxi	Jiangxi	13	N	82.717	27.42589N	115.83643E	173	6	Asia/Shanghai
+Qingyang	Chongqing	13	N	16.197	29.52743N	107.20071E	747	5	Asia/Shanghai
 Anyuan	Gansu	13	N	40.828	34.88083N	105.27639E	1362	5	Asia/Shanghai
 Anxiang	Hunan	13	N	57.769	29.4N	112.15E	33	6	Asia/Shanghai
 Anshun	Guizhou	13	N	765.313	26.25N	105.93333E	1374	8	Asia/Shanghai
 Anqiu	Shandong	13	N	364.208	36.43417N	119.1925E	58	7	Asia/Shanghai
 Anqing	Anhui	13	N	804.493	30.51365N	117.04723E	19	8	Asia/Shanghai
+Anping	Chongqing	13	N	24.767	30.96384N	109.34504E	234	5	Asia/Shanghai
 Mabai	Yunnan	13	N	63.569	23.01279N	104.45081E	1501	6	Asia/Shanghai
 Anlu	Hubei	13	N	71.198	31.2575N	113.67833E	49	6	Asia/Shanghai
 Anlong	Guizhou	13	N	86.416	25.1N	105.51667E	1479	6	Asia/Shanghai
@@ -4473,6 +4541,7 @@ Banan	Chongqing	13	N	508.703	29.37861N	106.54E	216	8	Asia/Shanghai
 Dianbu	Shandong	13	N	52.613	36.70167N	120.35111E	38	6	Asia/Shanghai
 Yunshan	Shandong	13	N	52.249	36.82417N	120.22611E	53	6	Asia/Shanghai
 Xiasi	Sichuan	13	N	32.4	32.28998N	105.51326E	578	5	Asia/Shanghai
+Conglin	Chongqing	13	N	17.053	29.03028N	106.97028E	729	5	Asia/Shanghai
 Ciyun	Chongqing	13	N	18.551	29.07541N	106.2056E	290	5	Asia/Shanghai
 Xiaba	Chongqing	13	N	17.486	29.11684N	106.51006E	271	5	Asia/Shanghai
 Anlan	Chongqing	13	N	31.546	29.24722N	106.59417E	377	5	Asia/Shanghai
@@ -4483,6 +4552,7 @@ Ersheng	Chongqing	13	N	16.461	29.46583N	106.77083E	287	5	Asia/Shanghai
 Yufengshan	Chongqing	13	N	23.917	29.71975N	106.72342E	568	5	Asia/Shanghai
 Tongjiaxi	Chongqing	13	N	21.82	29.68497N	106.44442E	207	5	Asia/Shanghai
 Dasheng	Chongqing	13	N	21.85	29.89029N	106.89727E	203	5	Asia/Shanghai
+Tuchang	Chongqing	13	N	17.221	29.9253N	106.4907E	271	5	Asia/Shanghai
 Honghu	Chongqing	13	N	30.426	30.00043N	106.95204E	283	5	Asia/Shanghai
 Lanyang	Hainan	13	N	23.711	19.46141N	109.6604E	199	5	Asia/Shanghai
 Guangcun	Hainan	13	N	27.803	19.6405N	109.353E	37	5	Asia/Shanghai
@@ -4494,20 +4564,24 @@ Wuzhishan	Hainan	13	N	112.269	18.78229N	109.5013E	305	7	Asia/Shanghai
 Lianghu	Zhejiang	13	N	155	29.99152N	120.89845E	22	7	Asia/Shanghai
 Zhoucheng	Shandong	13	N	72.07	35.91222N	116.31167E	41	6	Asia/Shanghai
 Dalianwan	Liaoning	13	N	55.841	39.02861N	121.695E	24	6	Asia/Shanghai
+Xiaochangshan	Liaoning	13	N	16.071	39.23583N	122.72361E	37	5	Asia/Shanghai
 Wuyishan	Fujian	13	N	137.133	27.75995N	118.03066E	224	7	Asia/Shanghai
 Yueyang	Hunan	13	N	991.465	29.37455N	113.09481E	43	8	Asia/Shanghai
 Bojia	Hunan	13	N	25	26.46722N	111.96806E	89	5	Asia/Shanghai
 Santangpu	Hunan	13	N	58	27.40556N	111.98694E	125	6	Asia/Shanghai
+Zhaojia	Chongqing	13	N	39.91	31.08125N	108.41164E	173	5	Asia/Shanghai
 Yantai	Chongqing	13	N	29.695	30.1467N	107.3196E	391	5	Asia/Shanghai
+Sanmiao	Chongqing	13	N	35.877	30.23763N	106.12704E	242	5	Asia/Shanghai
+Longsheng	Chongqing	13	N	30.661	29.08139N	106.81639E	410	5	Asia/Shanghai
 Hedong	Guangdong	13	N	101.825	23.9196N	115.7801E	113	7	Asia/Shanghai
 Zhenlai	Jilin	13	N	67.76	45.84963N	123.19791E	139	6	Asia/Shanghai
 Shuangliao	Jilin	13	N	93.666	43.51067N	123.50069E	115	6	Asia/Shanghai
-Zhaozhou	Heilongjiang	13	N	62.373	45.68333N	125.31667E	152	6	Asia/Shanghai
+Zhaozhou	Heilongjiang	13	N	62.373	45.70595N	125.26606E	154	6	Asia/Shanghai
 Zhaoyuan	Heilongjiang	13	N	59.37	45.51971N	125.07633E	129	6	Asia/Shanghai
 Zhaodong	Heilongjiang	13	N	154.406	46.05223N	125.9552E	143	7	Asia/Shanghai
 Zhangjiakou	Hebei	13	N	692.602	40.78341N	114.87139E	744	8	Asia/Shanghai
 Zhalantun	Inner Mongolia	13	N	132.224	48.00945N	122.73651E	320	7	Asia/Shanghai
-Yushu	Jilin	13	N	124.736	44.8N	126.53333E	220	7	Asia/Shanghai
+Yushu	Jilin	13	N	124.736	44.82751N	126.54063E	196	7	Asia/Shanghai
 Youhao	Heilongjiang	13	N	78.402	47.85306N	128.83565E	238	6	Asia/Shanghai
 Yingkou	Liaoning	13	N	591.159	40.66472N	122.23176E	4	8	Asia/Shanghai
 Yilan	Heilongjiang	13	N	71.18	46.3223N	129.56081E	92	6	Asia/Shanghai
@@ -4535,7 +4609,7 @@ Tongliao	Inner Mongolia	13	N	261.11	43.6125N	122.26528E	182	7	Asia/Shanghai
 Tonghua	Jilin	13	N	510	41.71972N	125.92639E	375	8	Asia/Shanghai
 Tieling	Liaoning	13	N	333.907	42.29306N	123.84139E	64	7	Asia/Shanghai
 Tieli	Heilongjiang	13	N	109.636	46.97544N	128.04804E	209	7	Asia/Shanghai
-Guangming	Jilin	13	N	112.819	45.33333N	122.78333E	150	7	Asia/Shanghai
+Taonan	Jilin	13	N	112.819	45.33319N	122.78464E	148	7	Asia/Shanghai
 Tailai	Heilongjiang	13	N	66.623	46.39004N	123.40849E	141	6	Asia/Shanghai
 Dorbod	Heilongjiang	13	N	55.316	46.86135N	124.442E	146	6	Asia/Shanghai
 Tahe	Heilongjiang	13	N	60.874	52.32148N	124.69761E	353	6	Asia/Shanghai
@@ -4566,7 +4640,7 @@ Pingzhuang	Inner Mongolia	13	N	67.273	42.03722N	119.28889E	514	6	Asia/Shanghai
 Panshi	Jilin	13	N	80.2	42.94222N	126.05611E	323	6	Asia/Shanghai
 Panshan	Liaoning	13	N	625.04	41.18806N	122.04944E	9	8	Asia/Shanghai
 Nianzishan	Heilongjiang	13	N	62.131	47.51344N	122.88788E	231	6	Asia/Shanghai
-Nenjiang	Heilongjiang	13	N	87.236	49.17414N	125.21774E	229	6	Asia/Shanghai
+Nenjiang	Heilongjiang	13	N	87.236	49.17405N	125.21967E	228	6	Asia/Shanghai
 Nehe	Heilongjiang	13	N	108.253	48.4793N	124.87016E	206	7	Asia/Shanghai
 Nantai	Liaoning	13	N	56.478	40.9241N	122.80437E	34	6	Asia/Shanghai
 Nanpiao	Liaoning	13	N	157.044	41.09822N	120.74792E	98	7	Asia/Shanghai
@@ -4603,7 +4677,7 @@ Jishu	Jilin	13	N	103.988	44.31667N	126.8E	250	7	Asia/Shanghai
 Jinzhou	Liaoning	13	N	604.269	41.10778N	121.14167E	26	8	Asia/Shanghai
 Lianshan	Liaoning	13	N	313.247	40.76432N	120.85327E	17	7	Asia/Shanghai
 Jining	Inner Mongolia	13	N	258.757	41.0275N	113.10583E	1409	7	Asia/Shanghai
-Jilin	Jilin	13	N	1881.977	43.85083N	126.56028E	196	9	Asia/Shanghai
+Jilin	Jilin	13	N	1895.865	43.85083N	126.56028E	196	9	Asia/Shanghai
 Jidong	Heilongjiang	13	N	58.52	45.256N	131.11637E	251	6	Asia/Shanghai
 Jiaohe	Jilin	13	N	123.018	43.72133N	127.33473E	279	7	Asia/Shanghai
 Jiamusi	Heilongjiang	13	N	549.549	46.79711N	130.31118E	66	8	Asia/Shanghai
@@ -4668,7 +4742,7 @@ Chaoyang	Liaoning	13	N	410.005	41.57028N	120.45861E	162	7	Asia/Shanghai
 Changtu	Liaoning	13	N	71.284	42.77884N	124.09545E	135	6	Asia/Shanghai
 Changping	Beijing	13	N	93.174	40.21612N	116.23471E	68	6	Asia/Shanghai
 Changling	Jilin	13	N	55.841	44.27295N	123.97559E	191	6	Asia/Shanghai
-Changchun	Jilin	13	R	4193.073	43.88N	125.32278E	206	9	Asia/Shanghai
+Changchun	Jilin	13	R	4714.996	43.88N	125.32278E	206	9	Asia/Shanghai
 Chaihe	Heilongjiang	13	N	67.963	44.7598N	129.67826E	229	6	Asia/Shanghai
 Boli	Heilongjiang	13	N	95.26	45.7529N	130.58452E	216	6	Asia/Shanghai
 Bin Xian	Heilongjiang	13	N	62.017	45.74274N	127.46053E	191	6	Asia/Shanghai
@@ -4689,6 +4763,7 @@ Anda	Heilongjiang	13	N	181.271	46.44867N	125.30161E	143	7	Asia/Shanghai
 Oroqen Zizhiqi	Inner Mongolia	13	N	61.582	50.56667N	123.71667E	419	6	Asia/Shanghai
 Acheng	Heilongjiang	13	N	144.665	45.54558N	126.95191E	149	7	Asia/Shanghai
 Songling	Hebei	13	N	52.277	40.29303N	118.26908E	134	6	Asia/Shanghai
+Shigang	Chongqing	13	N	22.126	31.13611N	109.36432E	260	5	Asia/Shanghai
 E'zhou	Hubei	13	N	668.727	30.39607N	114.88655E	29	8	Asia/Shanghai
 Jinniu	Yunnan	13	N	96.883	25.80062N	100.57435E	1444	6	Asia/Shanghai
 Xiangjiaba	Yunnan	13	N	102.143	28.63266N	104.40416E	318	7	Asia/Shanghai
@@ -4749,8 +4824,36 @@ Sanxi	Chongqing	13	N	18.961	31.13202N	110.09403E	349	5	Asia/Shanghai
 Liangping	Chongqing	13	N	16.794	31.12136N	109.96909E	886	5	Asia/Shanghai
 Longxi	Chongqing	13	N	16.304	31.30223N	109.63552E	213	5	Asia/Shanghai
 Futian	Chongqing	13	N	32.34	31.22201N	109.71068E	313	5	Asia/Shanghai
-Baidi	Chongqing	13	N	25.965	31.05761N	109.59088E	196	5	Asia/Shanghai
+Dashu	Chongqing	13	N	21.793	31.21093N	109.32154E	398	5	Asia/Shanghai
+Kangle	Chongqing	13	N	35.521	31.11278N	109.42964E	189	5	Asia/Shanghai
+Fenhe	Chongqing	13	N	32.059	31.13723N	109.52206E	382	5	Asia/Shanghai
+Baidi	Chongqing	13	N	56.216	31.05761N	109.59088E	196	6	Asia/Shanghai
 Caotang	Chongqing	13	N	29.647	31.09023N	109.62397E	259	5	Asia/Shanghai
+Yongle	Chongqing	13	N	22.434	31.01048N	109.50479E	594	5	Asia/Shanghai
+Jiagao	Chongqing	13	N	24.407	30.88922N	109.17596E	412	5	Asia/Shanghai
+Qinglong	Chongqing	13	N	15.335	30.77977N	109.25641E	911	5	Asia/Shanghai
+Wuma	Chongqing	13	N	25.919	30.85405N	109.37645E	345	5	Asia/Shanghai
+Fengping	Chongqing	13	N	15.497	30.83481N	109.50499E	782	5	Asia/Shanghai
+Qinglian	Chongqing	13	N	26.969	31.19061N	109.23686E	958	5	Asia/Shanghai
+Heqian	Chongqing	13	N	20.632	31.41497N	108.46973E	235	5	Asia/Shanghai
+Maliu	Chongqing	13	N	17.451	31.43421N	108.24463E	484	5	Asia/Shanghai
+Heyan	Chongqing	13	N	19.589	31.35639N	108.67045E	658	5	Asia/Shanghai
+Guojia	Chongqing	13	N	31.394	31.29528N	108.48104E	201	5	Asia/Shanghai
+Baihe	Chongqing	13	N	40.937	31.26348N	108.46372E	182	5	Asia/Shanghai
+Dunhao	Chongqing	13	N	36.863	31.33301N	108.3582E	427	5	Asia/Shanghai
+Gaoqiao	Chongqing	13	N	23.608	31.36876N	108.24215E	502	5	Asia/Shanghai
+Yihe	Chongqing	13	N	26.313	31.15734N	108.08256E	340	5	Asia/Shanghai
+Jiulongshan	Chongqing	13	N	32.696	31.19445N	108.25094E	716	5	Asia/Shanghai
+Zhen'an	Chongqing	13	N	15.452	31.15226N	108.31675E	198	5	Asia/Shanghai
+Dade	Chongqing	13	N	31.548	31.21288N	108.34026E	705	5	Asia/Shanghai
+Fengle	Chongqing	13	N	19.851	31.18975N	108.41461E	177	5	Asia/Shanghai
+Zhendong	Chongqing	13	N	18.819	31.18517N	108.39544E	170	5	Asia/Shanghai
+Houba	Chongqing	13	N	17.358	31.20509N	108.50628E	164	5	Asia/Shanghai
+Changsha	Chongqing	13	N	47.17	30.99997N	108.30463E	190	5	Asia/Shanghai
+Nanmen	Chongqing	13	N	40.941	30.96187N	108.24327E	197	5	Asia/Shanghai
+Wushan	Chongqing	13	N	19.829	30.93725N	107.9466E	259	5	Asia/Shanghai
+Nanya	Chongqing	13	N	28.382	31.08434N	108.08664E	288	5	Asia/Shanghai
+Zhuxi	Chongqing	13	N	22.9	31.12443N	108.29065E	183	5	Asia/Shanghai
 Taizhou	Zhejiang	13	N	1485.502	28.66266N	121.43312E	15	9	Asia/Shanghai
 Caohui	Chongqing	13	N	21.028	30.39733N	107.46953E	391	5	Asia/Shanghai
 Xinmin	Chongqing	13	N	28.033	30.39759N	107.3895E	402	5	Asia/Shanghai
@@ -4761,13 +4864,39 @@ Gangjia	Chongqing	13	N	19.072	30.22055N	107.50403E	403	5	Asia/Shanghai
 Gaofeng	Chongqing	13	N	20.747	30.21968N	107.40788E	376	5	Asia/Shanghai
 Pingshan	Chongqing	13	N	29.409	30.09655N	107.42439E	460	5	Asia/Shanghai
 Baijia	Chongqing	13	N	19.133	30.01704N	107.32576E	518	5	Asia/Shanghai
+Panlong	Chongqing	13	N	18.609	30.63504N	107.8502E	737	5	Asia/Shanghai
+Yinping	Chongqing	13	N	18.574	30.54197N	107.57518E	440	5	Asia/Shanghai
+Jukui	Chongqing	13	N	32.971	30.63588N	107.59633E	442	5	Asia/Shanghai
+Bishan	Chongqing	13	N	18.102	30.77075N	107.4571E	401	5	Asia/Shanghai
+Huilong	Chongqing	13	N	32.07	30.52956N	107.48102E	416	5	Asia/Shanghai
+Mingda	Chongqing	13	N	22.686	30.7263N	107.65726E	475	5	Asia/Shanghai
+Lirang	Chongqing	13	N	19.799	30.68494N	107.63145E	457	5	Asia/Shanghai
+Hucheng	Chongqing	13	N	24.453	30.81479N	107.5418E	517	5	Asia/Shanghai
+Xinsheng	Chongqing	13	N	27.741	30.84367N	107.72413E	463	5	Asia/Shanghai
+Hexing	Chongqing	13	N	17.098	30.74485N	107.81977E	445	5	Asia/Shanghai
 Baohe	Chongqing	13	N	18.112	30.06084N	107.70172E	533	5	Asia/Shanghai
 Dongjia	Chongqing	13	N	18.727	30.22352N	107.70574E	447	5	Asia/Shanghai
+Shizhi	Chongqing	13	N	29.085	30.05304N	107.79426E	335	5	Asia/Shanghai
 Huwei	Chongqing	13	N	16.951	29.90565N	107.63853E	566	5	Asia/Shanghai
 Sanhe	Chongqing	13	N	140.954	29.86864N	107.73027E	224	7	Asia/Shanghai
+Xingyi	Chongqing	13	N	30.629	29.95552N	107.81646E	185	5	Asia/Shanghai
 Longkong	Chongqing	13	N	19.435	30.04477N	107.9149E	354	5	Asia/Shanghai
 Longhe	Chongqing	13	N	35.701	29.83957N	107.98508E	467	5	Asia/Shanghai
-Qianjiang	Chongqing	13	N	203.682	29.53284N	108.77478E	582	7	Asia/Shanghai
+Apengjiang	Chongqing	13	N	18.596	29.15196N	108.74289E	425	5	Asia/Shanghai
+Qianjiang	Chongqing	13	N	143.727	29.53284N	108.77478E	582	7	Asia/Shanghai
+Zhoubai	Chongqing	13	N	25.147	29.52949N	108.82267E	616	5	Asia/Shanghai
+Dianshui	Chongqing	13	N	18.288	29.28339N	108.089E	411	5	Asia/Shanghai
+Xintian	Chongqing	13	N	18.249	29.19634N	108.2705E	341	5	Asia/Shanghai
+Longshe	Chongqing	13	N	17.163	29.53086N	108.21126E	926	5	Asia/Shanghai
+Lianhu	Chongqing	13	N	15.797	29.69808N	108.43528E	413	5	Asia/Shanghai
+Tongle	Chongqing	13	N	18.659	29.46121N	107.19703E	737	5	Asia/Shanghai
+Zengfu	Chongqing	13	N	15.527	29.51066N	106.98577E	473	5	Asia/Shanghai
+Longqiao	Chongqing	13	N	34.541	29.71034N	107.29437E	234	5	Asia/Shanghai
+Lizhi	Chongqing	13	N	156.753	29.70317N	107.39521E	287	7	Asia/Shanghai
+Nantuo	Chongqing	13	N	26.447	29.85538N	107.5279E	209	5	Asia/Shanghai
+Qingxi	Chongqing	13	N	29.285	29.79712N	107.45755E	191	5	Asia/Shanghai
+Baisheng	Chongqing	13	N	41.114	29.81351N	107.39261E	378	5	Asia/Shanghai
+Yihe	Chongqing	13	N	37.39	29.73734N	107.21918E	417	5	Asia/Shanghai
 Yunji	Chongqing	13	N	27.564	29.91943N	107.34041E	455	5	Asia/Shanghai
 Changshouhu	Chongqing	13	N	37.839	29.90536N	107.23789E	346	5	Asia/Shanghai
 Haitang	Chongqing	13	N	24.252	30.17173N	107.22991E	396	5	Asia/Shanghai
@@ -4787,6 +4916,21 @@ Tianfu	Chongqing	13	N	30.98	29.87405N	106.49816E	470	5	Asia/Shanghai
 Fuxing	Chongqing	13	N	33.621	29.81905N	106.55714E	300	5	Asia/Shanghai
 Dongyang	Chongqing	13	N	40.143	29.83291N	106.45066E	212	5	Asia/Shanghai
 Longfeng	Chongqing	13	N	33.981	29.81527N	106.42906E	212	5	Asia/Shanghai
+Shuanghuai	Chongqing	13	N	39.907	30.18416N	106.5558E	268	5	Asia/Shanghai
+Shuangfeng	Chongqing	13	N	33.282	30.02333N	106.42963E	326	5	Asia/Shanghai
+Shitan	Chongqing	13	N	19.375	30.06896N	106.50291E	257	5	Asia/Shanghai
+Xiaojia	Chongqing	13	N	16.363	30.28838N	106.47031E	346	5	Asia/Shanghai
+Laitan	Chongqing	13	N	24.431	30.17582N	106.48624E	286	5	Asia/Shanghai
+Qiantang	Chongqing	13	N	65.894	30.18424N	106.3165E	283	6	Asia/Shanghai
+Dashi	Chongqing	13	N	61.426	30.09372N	106.22227E	289	6	Asia/Shanghai
+Gulou	Chongqing	13	N	19.447	30.17599N	106.17168E	268	5	Asia/Shanghai
+Yanwo	Chongqing	13	N	30.424	30.33178N	106.07357E	297	5	Asia/Shanghai
+Erlang	Chongqing	13	N	17.295	30.36264N	105.99213E	331	5	Asia/Shanghai
+Longfeng	Chongqing	13	N	20.334	30.26816N	106.02282E	375	5	Asia/Shanghai
+Longxing	Chongqing	13	N	28.746	30.19191N	106.0588E	369	5	Asia/Shanghai
+Yangcheng	Chongqing	13	N	186.242	29.99968N	106.25604E	219	7	Asia/Shanghai
+Diaoyucheng	Chongqing	13	N	47.205	29.99878N	106.26613E	233	5	Asia/Shanghai
+Nanjin	Chongqing	13	N	143.766	29.98497N	106.26529E	223	7	Asia/Shanghai
 Baoding	Chongqing	13	N	17.591	29.7488N	105.75843E	383	5	Asia/Shanghai
 Zhifeng	Chongqing	13	N	28.467	29.6544N	105.78416E	372	5	Asia/Shanghai
 Shiwan	Chongqing	13	N	16.103	29.61475N	105.89463E	285	5	Asia/Shanghai
@@ -4802,6 +4946,11 @@ Tuanbao	Hubei	13	N	59.58	30.33675N	109.13465E	999	6	Asia/Shanghai
 Bole	Xinjiang	13	N	235.585	44.89334N	82.06993E	509	7	Asia/Shanghai
 Liupanshui	Guizhou	13	N	1320.825	26.59444N	104.83333E	1799	9	Asia/Shanghai
 Huanggang	Hubei	13	N	366.769	30.45143N	114.87035E	46	7	Asia/Shanghai
+Nanchuan	Chongqing	13	N	204.775	29.15201N	107.10335E	538	7	Asia/Shanghai
+Anwen	Chongqing	13	N	30.553	28.68001N	106.75651E	746	5	Asia/Shanghai
+Datong	Chongqing	13	N	51.025	28.59648N	106.66749E	772	6	Asia/Shanghai
+Guanba	Chongqing	13	N	23.898	28.80194N	106.80589E	701	5	Asia/Shanghai
+Nantong	Chongqing	13	N	46.684	28.94386N	106.88194E	299	5	Asia/Shanghai
 Maliuzui	Chongqing	13	N	18.847	29.69286N	106.94399E	184	5	Asia/Shanghai
 Anxiang	Henan	13	N	38.345	38.38339N	114.54046E	101	5	Asia/Shanghai
 Mugala	Xinjiang	13	N	30.179	36.8576N	81.66844E	1432	5	Asia/Urumqi
@@ -4996,6 +5145,14 @@ Jiaping	Chongqing	13	N	18.883	28.99165N	106.34842E	230	5	Asia/Shanghai
 Xihu	Chongqing	13	N	38.386	29.10023N	106.39536E	199	5	Asia/Shanghai
 Zhongshan	Chongqing	13	N	20.509	28.85541N	106.33602E	306	5	Asia/Shanghai
 Mingshan	Chongqing	13	N	39.897	29.87832N	107.69921E	264	5	Asia/Shanghai
+Caojie	Chongqing	13	N	44.237	29.99755N	106.39018E	259	5	Asia/Shanghai
+Liangping	Chongqing	13	N	137.62	30.66108N	107.7661E	467	7	Asia/Shanghai
+Xinglong	Chongqing	13	N	20.489	29.1685N	107.0064E	743	5	Asia/Shanghai
+Fuhuan	Chongqing	13	N	25.164	28.83379N	106.75535E	504	5	Asia/Shanghai
+Qingnian	Chongqing	13	N	22.162	28.86504N	106.83814E	570	5	Asia/Shanghai
+Shihao	Chongqing	13	N	43.68	28.54082N	106.68069E	862	5	Asia/Shanghai
+Yongcheng	Chongqing	13	N	17.634	29.02133N	106.82012E	352	5	Asia/Shanghai
+Zhuantang	Chongqing	13	N	21.048	28.8963N	106.66835E	269	5	Asia/Shanghai
 Zipaquira	Cundinamarca	08	N	91.235	5.02208N	74.00481W	2607	6	America/Bogota
 Zarzal	Valle del Cauca	08	N	28.761	4.39462N	76.0715W	921	5	America/Bogota
 Zaragoza	Antioquia	08	N	18.795	7.48971N	74.86919W	66	5	America/Bogota
@@ -5334,7 +5491,7 @@ Guira de Melena	Artemisa	06	N	69.879	22.79613N	82.50667W	21	6	America/Havana
 Gueines	Mayabeque	06	N	68.935	22.83727N	82.02641W	66	6	America/Havana
 Guantanamo	Guantanamo	06	R	272.801	20.14444N	75.20917W	56	7	America/Havana
 Guane	Pinar del Rio	06	N	16.548	22.20179N	84.08484W	23	5	America/Havana
-Guanajay	Artemisa	06	N	25.258	22.92639N	82.6875W	109	5	America/Havana
+Guanajay	Artemisa	06	N	25.258	22.92616N	82.68687W	109	5	America/Havana
 Guanabacoa	Havana	06	N	112.964	23.12518N	82.30067W	32	7	America/Havana
 Guaimaro	Camaguey	06	N	39.358	21.05222N	77.3499W	84	5	America/Havana
 Gibara	Holguin	06	N	27.603	21.10988N	76.13145W	23	5	America/Havana
@@ -5531,14 +5688,14 @@ Wismar	Mecklenburg-Vorpommern	20	N	45.255	53.89314N	11.45286E	1	5	Europe/Berlin
 Wipperfuerth	North Rhine-Westphalia	20	N	23.723	51.1161N	7.39865E	290	5	Europe/Berlin
 Winterhude	Hamburg	20	N	51.297	53.6N	10E	22	6	Europe/Berlin
 Winsen	Lower Saxony	20	N	32.662	53.35753N	10.21282E	6	5	Europe/Berlin
-Winnenden	Baden-Wuerttemberg	20	N	28.334	48.87563N	9.39819E	293	5	Europe/Berlin
+Winnenden	Baden-Wurttemberg	20	N	28.334	48.87563N	9.39819E	293	5	Europe/Berlin
 Wilnsdorf	North Rhine-Westphalia	20	N	21.505	50.81667N	8.1E	396	5	Europe/Berlin
 Wilmersdorf Bezirk	Berlin	20	N	94.113	52.48333N	13.31667E	39	6	Europe/Berlin
 Willich	North Rhine-Westphalia	20	N	51.843	51.26371N	6.54734E	43	6	Europe/Berlin
 Wilhelmstadt	Berlin	20	N	37.624	52.52462N	13.17707E	33	5	Europe/Berlin
 Wilhelmshaven	Lower Saxony	20	N	84.393	53.52998N	8.11253E	3	6	Europe/Berlin
 Wildeshausen	Lower Saxony	20	N	18.114	52.89446N	8.43375E	27	5	Europe/Berlin
-Wiesloch	Baden-Wuerttemberg	20	N	26.605	49.29504N	8.69846E	134	5	Europe/Berlin
+Wiesloch	Baden-Wurttemberg	20	N	26.605	49.29504N	8.69846E	134	5	Europe/Berlin
 Wiesbaden	Hesse	20	R	272.432	50.08258N	8.24932E	128	7	Europe/Berlin
 Wiehl	North Rhine-Westphalia	20	N	26.291	50.9495N	7.55062E	197	5	Europe/Berlin
 Wetzlar	Hesse	20	N	52.656	50.56109N	8.50495E	169	6	Europe/Berlin
@@ -5547,7 +5704,7 @@ Westerstede	Lower Saxony	20	N	21.902	53.25682N	7.92737E	8	5	Europe/Berlin
 Westend	Berlin	20	N	38.501	52.51708N	13.27636E	60	5	Europe/Berlin
 Wesseling	North Rhine-Westphalia	20	N	35.665	50.82709N	6.9747E	50	5	Europe/Berlin
 Wesel	North Rhine-Westphalia	20	N	61.685	51.6669N	6.62037E	23	6	Europe/Berlin
-Wertheim	Baden-Wuerttemberg	20	N	24.869	49.759N	9.50852E	174	5	Europe/Berlin
+Wertheim	Baden-Wurttemberg	20	N	24.869	49.759N	9.50852E	174	5	Europe/Berlin
 Wernigerode	Saxony-Anhalt	20	N	34.463	51.83652N	10.78216E	237	5	Europe/Berlin
 Werne	North Rhine-Westphalia	20	N	30.81	51.66446N	7.63421E	60	5	Europe/Berlin
 Wermelskirchen	North Rhine-Westphalia	20	N	36.816	51.1397N	7.21583E	302	5	Europe/Berlin
@@ -5555,21 +5712,21 @@ Werl	North Rhine-Westphalia	20	N	32.149	51.55493N	7.91403E	92	5	Europe/Berlin
 Werdohl	North Rhine-Westphalia	20	N	20.366	51.26011N	7.76608E	201	5	Europe/Berlin
 Werder	Brandenburg	20	N	22.384	52.37874N	12.934E	33	5	Europe/Berlin
 Werdau	Saxony	20	N	24.424	50.73604N	12.37534E	274	5	Europe/Berlin
-Wendlingen am Neckar	Baden-Wuerttemberg	20	N	15.728	48.67124N	9.37632E	268	5	Europe/Berlin
+Wendlingen am Neckar	Baden-Wurttemberg	20	N	15.728	48.67124N	9.37632E	268	5	Europe/Berlin
 Wenden	North Rhine-Westphalia	20	N	19.924	50.96667N	7.86667E	405	5	Europe/Berlin
 Wendelstein	Bavaria	20	N	16.22	49.3523N	11.15069E	342	5	Europe/Berlin
 Weiterstadt	Hesse	20	N	24.253	49.9039N	8.58874E	109	5	Europe/Berlin
 Weisswasser	Saxony	20	N	22.099	51.50403N	14.64017E	139	5	Europe/Berlin
 Weissenfels	Saxony-Anhalt	20	N	29.792	51.20148N	11.96843E	102	5	Europe/Berlin
 Weissenburg in Bayern	Bavaria	20	N	18.578	49.03095N	10.97221E	428	5	Europe/Berlin
-Weinstadt-Endersbach	Baden-Wuerttemberg	20	N	26.166	48.81311N	9.36387E	235	5	Europe/Berlin
-Weinheim	Baden-Wuerttemberg	20	N	43.325	49.54887N	8.66697E	118	5	Europe/Berlin
-Weingarten	Baden-Wuerttemberg	20	N	23.802	47.81009N	9.63863E	461	5	Europe/Berlin
+Weinstadt-Endersbach	Baden-Wurttemberg	20	N	26.166	48.81311N	9.36387E	235	5	Europe/Berlin
+Weinheim	Baden-Wurttemberg	20	N	43.325	49.54887N	8.66697E	118	5	Europe/Berlin
+Weingarten	Baden-Wurttemberg	20	N	23.802	47.81009N	9.63863E	461	5	Europe/Berlin
 Weimar	Thuringia	20	N	64.727	50.9803N	11.32903E	220	6	Europe/Berlin
 Weilheim	Bavaria	20	N	21.401	47.84147N	11.15484E	573	5	Europe/Berlin
 Weilerswist	North Rhine-Westphalia	20	N	16.321	50.75292N	6.84585E	120	5	Europe/Berlin
-Weil der Stadt	Baden-Wuerttemberg	20	N	19.338	48.74953N	8.87176E	397	5	Europe/Berlin
-Weil am Rhein	Baden-Wuerttemberg	20	N	29.548	47.59331N	7.62082E	277	5	Europe/Berlin
+Weil der Stadt	Baden-Wurttemberg	20	N	19.338	48.74953N	8.87176E	397	5	Europe/Berlin
+Weil am Rhein	Baden-Wurttemberg	20	N	29.548	47.59331N	7.62082E	277	5	Europe/Berlin
 Weiden	Bavaria	20	N	42.55	49.67682N	12.15613E	397	5	Europe/Berlin
 Weissensee	Berlin	20	N	47.693	52.55632N	13.46649E	53	5	Europe/Berlin
 Wegberg	North Rhine-Westphalia	20	N	29.622	51.14221N	6.28436E	67	5	Europe/Berlin
@@ -5582,17 +5739,17 @@ Warendorf	North Rhine-Westphalia	20	N	38.707	51.95109N	7.98756E	58	5	Europe/Berl
 Waren	Mecklenburg-Vorpommern	20	N	21.47	53.5204N	12.67985E	66	5	Europe/Berlin
 Wardenburg	Lower Saxony	20	N	16.019	53.06667N	8.2E	7	5	Europe/Berlin
 Warburg	North Rhine-Westphalia	20	N	24.317	51.49011N	9.14641E	200	5	Europe/Berlin
-Wangen	Baden-Wuerttemberg	20	N	27.045	47.6895N	9.83247E	572	5	Europe/Berlin
+Wangen	Baden-Wurttemberg	20	N	27.045	47.6895N	9.83247E	572	5	Europe/Berlin
 Wandlitz	Brandenburg	20	N	19.888	52.74196N	13.45799E	66	5	Europe/Berlin
 Waltrop	North Rhine-Westphalia	20	N	30.22	51.62125N	7.40238E	71	5	Europe/Berlin
 Walsrode	Lower Saxony	20	N	24.448	52.86147N	9.5926E	37	5	Europe/Berlin
 Wallenhorst	Lower Saxony	20	N	24.201	52.35N	8.01667E	96	5	Europe/Berlin
-Waldshut-Tiengen	Baden-Wuerttemberg	20	N	22.404	47.62323N	8.21717E	341	5	Europe/Berlin
+Waldshut-Tiengen	Baden-Wurttemberg	20	N	22.404	47.62323N	8.21717E	341	5	Europe/Berlin
 Waldkraiburg	Bavaria	20	N	24.676	48.20854N	12.39893E	439	5	Europe/Berlin
-Waldkirch	Baden-Wuerttemberg	20	N	20.155	48.09585N	7.96371E	266	5	Europe/Berlin
+Waldkirch	Baden-Wurttemberg	20	N	20.155	48.09585N	7.96371E	266	5	Europe/Berlin
 Waldbroel	North Rhine-Westphalia	20	N	19.533	50.87576N	7.61688E	278	5	Europe/Berlin
-Waiblingen	Baden-Wuerttemberg	20	N	52.945	48.83241N	9.31641E	233	6	Europe/Berlin
-Waghausel	Baden-Wuerttemberg	20	N	20.178	49.24991N	8.51257E	106	5	Europe/Berlin
+Waiblingen	Baden-Wurttemberg	20	N	52.945	48.83241N	9.31641E	233	6	Europe/Berlin
+Waghausel	Baden-Wurttemberg	20	N	20.178	49.24991N	8.51257E	106	5	Europe/Berlin
 Wadgassen	Saarland	20	N	18.464	49.26667N	6.78333E	230	5	Europe/Berlin
 Wadern	Saarland	20	N	17.282	49.54122N	6.88774E	296	5	Europe/Berlin
 Wachtberg	North Rhine-Westphalia	20	N	20.032	50.63333N	7.1E	194	5	Europe/Berlin
@@ -5601,7 +5758,7 @@ Voelklingen	Saarland	20	N	41.132	49.25162N	6.85873E	197	5	Europe/Berlin
 Voerde	North Rhine-Westphalia	20	N	36.047	51.59703N	6.6863E	27	5	Europe/Berlin
 Vlotho	North Rhine-Westphalia	20	N	20.214	52.1653N	8.85996E	68	5	Europe/Berlin
 Vilshofen	Bavaria	20	N	16.695	48.62695N	13.19222E	319	5	Europe/Berlin
-Villingen-Schwenningen	Baden-Wuerttemberg	20	N	81.77	48.06226N	8.49358E	757	6	Europe/Berlin
+Villingen-Schwenningen	Baden-Wurttemberg	20	N	81.77	48.06226N	8.49358E	757	6	Europe/Berlin
 Viersen	North Rhine-Westphalia	20	N	76.153	51.25435N	6.39441E	44	6	Europe/Berlin
 Viernheim	Hesse	20	N	32.62	49.54033N	8.5782E	103	5	Europe/Berlin
 Versmold	North Rhine-Westphalia	20	N	20.996	52.04009N	8.15272E	70	5	Europe/Berlin
@@ -5613,27 +5770,27 @@ Vechta	Lower Saxony	20	N	29.729	52.72632N	8.28598E	36	5	Europe/Berlin
 Vechelde	Lower Saxony	20	N	16.219	52.26038N	10.36491E	82	5	Europe/Berlin
 Vaterstetten	Bavaria	20	N	21.007	48.10537N	11.76825E	547	5	Europe/Berlin
 Varel	Lower Saxony	20	N	25.212	53.39693N	8.13621E	9	5	Europe/Berlin
-Vaihingen an der Enz	Baden-Wuerttemberg	20	N	28.867	48.93563N	8.96045E	237	5	Europe/Berlin
+Vaihingen an der Enz	Baden-Wurttemberg	20	N	28.867	48.93563N	8.96045E	237	5	Europe/Berlin
 Uetersen	Schleswig-Holstein	20	N	17.921	53.68769N	9.66394E	9	5	Europe/Berlin
 Uslar	Lower Saxony	20	N	15.951	51.6569N	9.63501E	167	5	Europe/Berlin
 Unterschleissheim	Bavaria	20	N	25.567	48.28038N	11.57684E	472	5	Europe/Berlin
 Unterhaching	Bavaria	20	N	20.852	48.06598N	11.61564E	562	5	Europe/Berlin
-Unterkrozingen	Baden-Wuerttemberg	20	N	15.908	47.91933N	7.69045E	224	5	Europe/Berlin
+Unterkrozingen	Baden-Wurttemberg	20	N	15.908	47.91933N	7.69045E	224	5	Europe/Berlin
 Unna	North Rhine-Westphalia	20	N	66.734	51.53795N	7.68969E	103	6	Europe/Berlin
-Ulm	Baden-Wuerttemberg	20	N	120.451	48.39841N	9.99155E	480	7	Europe/Berlin
+Ulm	Baden-Wurttemberg	20	N	120.451	48.39841N	9.99155E	480	7	Europe/Berlin
 Uelzen	Lower Saxony	20	N	34.996	52.96572N	10.56111E	42	5	Europe/Berlin
-Uberlingen	Baden-Wuerttemberg	20	N	21.507	47.76977N	9.17136E	431	5	Europe/Berlin
+Uberlingen	Baden-Wurttemberg	20	N	21.507	47.76977N	9.17136E	431	5	Europe/Berlin
 UEbach-Palenberg	North Rhine-Westphalia	20	N	25.544	50.91775N	6.12336E	121	5	Europe/Berlin
-Tuttlingen	Baden-Wuerttemberg	20	N	34.847	47.98464N	8.8177E	646	5	Europe/Berlin
-Tuebingen	Baden-Wuerttemberg	20	N	83.416	48.52266N	9.05222E	333	6	Europe/Berlin
-Trossingen	Baden-Wuerttemberg	20	N	15.04	48.07667N	8.64409E	687	5	Europe/Berlin
+Tuttlingen	Baden-Wurttemberg	20	N	34.847	47.98464N	8.8177E	646	5	Europe/Berlin
+Tuebingen	Baden-Wurttemberg	20	N	83.416	48.52266N	9.05222E	333	6	Europe/Berlin
+Trossingen	Baden-Wurttemberg	20	N	15.04	48.07667N	8.64409E	687	5	Europe/Berlin
 Troisdorf	North Rhine-Westphalia	20	N	74.749	50.80901N	7.14968E	55	6	Europe/Berlin
 Trier	Rheinland-Pfalz	20	N	100.129	49.75565N	6.63935E	141	7	Europe/Berlin
 Traunstein	Bavaria	20	N	18.422	47.86825N	12.64335E	597	5	Europe/Berlin
 Traunreut	Bavaria	20	N	21.244	47.96269N	12.59231E	552	5	Europe/Berlin
 Torgau	Saxony	20	N	18.746	51.56016N	12.99617E	89	5	Europe/Berlin
 Toenisvorst	North Rhine-Westphalia	20	N	30.296	51.32092N	6.49412E	42	5	Europe/Berlin
-Tettnang	Baden-Wuerttemberg	20	N	18.135	47.66857N	9.59132E	467	5	Europe/Berlin
+Tettnang	Baden-Wurttemberg	20	N	18.135	47.66857N	9.59132E	467	5	Europe/Berlin
 Templin	Brandenburg	20	N	17.634	53.11865N	13.5022E	61	5	Europe/Berlin
 Tempelhof Bezirk	Berlin	20	N	56.669	52.46667N	13.4E	47	6	Europe/Berlin
 Teltow	Brandenburg	20	N	19.53	52.4031N	13.26014E	39	5	Europe/Berlin
@@ -5646,7 +5803,7 @@ Sundern	North Rhine-Westphalia	20	N	27.554	51.3281N	8.00369E	257	5	Europe/Berlin
 Sulzbach-Rosenberg	Bavaria	20	N	19.252	49.50126N	11.74598E	399	5	Europe/Berlin
 Sulzbach	Saarland	20	N	18.364	49.29882N	7.05696E	248	5	Europe/Berlin
 Suhl	Thuringia	20	N	43.509	50.60911N	10.69401E	442	5	Europe/Berlin
-Stuttgart	Baden-Wuerttemberg	20	R	589.793	48.78232N	9.17702E	252	8	Europe/Berlin
+Stuttgart	Baden-Wurttemberg	20	R	589.793	48.78232N	9.17702E	252	8	Europe/Berlin
 Stuhr	Lower Saxony	20	N	32.507	53.03333N	8.75E	3	5	Europe/Berlin
 Strausberg	Brandenburg	20	N	26.649	52.57859N	13.88741E	67	5	Europe/Berlin
 Straubing	Bavaria	20	N	44.58	48.88126N	12.57385E	333	5	Europe/Berlin
@@ -5654,7 +5811,7 @@ Stralsund	Mecklenburg-Vorpommern	20	N	58.976	54.30911N	13.0818E	4	6	Europe/Berli
 Straelen	North Rhine-Westphalia	20	N	15.325	51.4419N	6.26639E	46	5	Europe/Berlin
 Stolberg	North Rhine-Westphalia	20	N	56.377	50.77368N	6.22595E	185	6	Europe/Berlin
 Stockelsdorf	Schleswig-Holstein	20	N	16.562	53.8922N	10.64713E	28	5	Europe/Berlin
-Stockach	Baden-Wuerttemberg	20	N	16.844	47.85105N	9.0091E	474	5	Europe/Berlin
+Stockach	Baden-Wurttemberg	20	N	16.844	47.85105N	9.0091E	474	5	Europe/Berlin
 Stendal	Saxony-Anhalt	20	N	37.722	52.6069N	11.85867E	34	5	Europe/Berlin
 Stellingen	Hamburg	20	N	23.472	53.5922N	9.9287E	23	5	Europe/Berlin
 Steinhagen	North Rhine-Westphalia	20	N	19.869	52N	8.4E	96	5	Europe/Berlin
@@ -5680,11 +5837,11 @@ Soltau	Lower Saxony	20	N	21.945	52.98638N	9.84338E	62	5	Europe/Berlin
 Solingen	North Rhine-Westphalia	20	N	164.359	51.17343N	7.0845E	229	7	Europe/Berlin
 Soest	North Rhine-Westphalia	20	N	48.037	51.57558N	8.10619E	95	5	Europe/Berlin
 Sinzig	Rheinland-Pfalz	20	N	17.88	50.54384N	7.24639E	78	5	Europe/Berlin
-Sinsheim	Baden-Wuerttemberg	20	N	35.219	49.2529N	8.87867E	162	5	Europe/Berlin
-Singen	Baden-Wuerttemberg	20	N	48.033	47.75935N	8.8403E	436	5	Europe/Berlin
-Sindelfingen	Baden-Wuerttemberg	20	N	61.311	48.7N	9.01667E	468	6	Europe/Berlin
+Sinsheim	Baden-Wurttemberg	20	N	35.219	49.2529N	8.87867E	162	5	Europe/Berlin
+Singen	Baden-Wurttemberg	20	N	48.033	47.75935N	8.8403E	436	5	Europe/Berlin
+Sindelfingen	Baden-Wurttemberg	20	N	61.311	48.7N	9.01667E	468	6	Europe/Berlin
 Simmerath	North Rhine-Westphalia	20	N	15.646	50.6N	6.3E	536	5	Europe/Berlin
-Sigmaringen	Baden-Wuerttemberg	20	N	16.592	48.08829N	9.23033E	592	5	Europe/Berlin
+Sigmaringen	Baden-Wurttemberg	20	N	16.592	48.08829N	9.23033E	592	5	Europe/Berlin
 Siegen	North Rhine-Westphalia	20	N	107.242	50.87481N	8.02431E	272	7	Europe/Berlin
 Siegburg	North Rhine-Westphalia	20	N	39.135	50.80019N	7.20769E	71	5	Europe/Berlin
 Langenhorn	Hamburg	20	N	45.586	53.66667N	10.01667E	19	5	Europe/Berlin
@@ -5698,7 +5855,7 @@ Sehnde	Lower Saxony	20	N	23.06	52.31394N	9.9682E	66	5	Europe/Berlin
 Seevetal	Lower Saxony	20	N	41.266	53.4N	9.96667E	45	5	Europe/Berlin
 Seesen	Lower Saxony	20	N	21.909	51.89095N	10.17847E	214	5	Europe/Berlin
 Seelze	Lower Saxony	20	N	32.899	52.39635N	9.59727E	50	5	Europe/Berlin
-Schwetzingen	Baden-Wuerttemberg	20	N	22.593	49.38217N	8.5823E	101	5	Europe/Berlin
+Schwetzingen	Baden-Wurttemberg	20	N	22.593	49.38217N	8.5823E	101	5	Europe/Berlin
 Schwerte	North Rhine-Westphalia	20	N	50.399	51.44387N	7.5675E	124	6	Europe/Berlin
 Schwerin	Mecklenburg-Vorpommern	20	R	96.641	53.62937N	11.41316E	48	6	Europe/Berlin
 Schwelm	North Rhine-Westphalia	20	N	30.235	51.28635N	7.29388E	229	5	Europe/Berlin
@@ -5710,14 +5867,14 @@ Schwandorf in Bayern	Bavaria	20	N	28.235	49.32534N	12.1098E	363	5	Europe/Berlin
 Schwalmtal	North Rhine-Westphalia	20	N	19.435	51.21667N	6.26667E	62	5	Europe/Berlin
 Schwalmstadt	Hesse	20	N	19.279	50.93333N	9.21667E	235	5	Europe/Berlin
 Schwalbach	Saarland	20	N	18.708	49.3N	6.81667E	210	5	Europe/Berlin
-Schwaebisch Hall	Baden-Wuerttemberg	20	N	36.543	49.11127N	9.73908E	322	5	Europe/Berlin
-Schwaebisch Gmuend	Baden-Wuerttemberg	20	N	61.216	48.79947N	9.79809E	325	6	Europe/Berlin
+Schwaebisch Hall	Baden-Wurttemberg	20	N	36.543	49.11127N	9.73908E	322	5	Europe/Berlin
+Schwaebisch Gmuend	Baden-Wurttemberg	20	N	61.216	48.79947N	9.79809E	325	6	Europe/Berlin
 Schwabach	Bavaria	20	N	38.554	49.33047N	11.02346E	328	5	Europe/Berlin
 Schrobenhausen	Bavaria	20	N	16.143	48.56067N	11.26071E	414	5	Europe/Berlin
-Schramberg	Baden-Wuerttemberg	20	N	18.565	48.22399N	8.38583E	436	5	Europe/Berlin
+Schramberg	Baden-Wurttemberg	20	N	18.565	48.22399N	8.38583E	436	5	Europe/Berlin
 Schortens	Lower Saxony	20	N	21.357	53.53333N	7.95E	6	5	Europe/Berlin
-Schorndorf	Baden-Wuerttemberg	20	N	39.697	48.80537N	9.52721E	259	5	Europe/Berlin
-Schopfheim	Baden-Wuerttemberg	20	N	19.386	47.65105N	7.82089E	376	5	Europe/Berlin
+Schorndorf	Baden-Wurttemberg	20	N	39.697	48.80537N	9.52721E	259	5	Europe/Berlin
+Schopfheim	Baden-Wurttemberg	20	N	19.386	47.65105N	7.82089E	376	5	Europe/Berlin
 Schoneberg Bezirk	Berlin	20	N	115.976	52.46667N	13.35E	47	7	Europe/Berlin
 Schoenebeck	Saxony-Anhalt	20	N	30.387	52.01682N	11.7307E	53	5	Europe/Berlin
 Schneverdingen	Lower Saxony	20	N	19.199	53.11685N	9.79524E	97	5	Europe/Berlin
@@ -5731,7 +5888,7 @@ Schleswig	Schleswig-Holstein	20	N	24.114	54.52156N	9.5586E	28	5	Europe/Berlin
 Schkeuditz	Saxony	20	N	18.487	51.39678N	12.22141E	110	5	Europe/Berlin
 Schiffweiler	Saarland	20	N	15.78	49.36667N	7.13333E	295	5	Europe/Berlin
 Schifferstadt	Rheinland-Pfalz	20	N	19.209	49.38417N	8.3775E	104	5	Europe/Berlin
-Bad Saulgau	Baden-Wuerttemberg	20	N	17.911	48.01676N	9.50064E	590	5	Europe/Berlin
+Bad Saulgau	Baden-Wurttemberg	20	N	17.911	48.01676N	9.50064E	590	5	Europe/Berlin
 Sasel	Hamburg	20	N	23.131	53.65385N	10.11184E	34	5	Europe/Berlin
 Sarstedt	Lower Saxony	20	N	18.718	52.23495N	9.85411E	65	5	Europe/Berlin
 Sankt Wendel	Saarland	20	N	26.904	49.46633N	7.16814E	280	5	Europe/Berlin
@@ -5748,8 +5905,8 @@ Ruesselsheim	Hesse	20	N	59.73	49.98955N	8.42251E	89	6	Europe/Berlin
 Rummelsburg	Berlin	20	N	20.414	52.50146N	13.4934E	40	5	Europe/Berlin
 Rudow	Berlin	20	N	40.802	52.42407N	13.48529E	38	5	Europe/Berlin
 Rudolstadt	Thuringia	20	N	25.476	50.72043N	11.34046E	197	5	Europe/Berlin
-Rottweil	Baden-Wuerttemberg	20	N	25.51	48.16783N	8.62719E	605	5	Europe/Berlin
-Rottenburg	Baden-Wuerttemberg	20	N	42.721	48.47629N	8.93528E	349	5	Europe/Berlin
+Rottweil	Baden-Wurttemberg	20	N	25.51	48.16783N	8.62719E	605	5	Europe/Berlin
+Rottenburg	Baden-Wurttemberg	20	N	42.721	48.47629N	8.93528E	349	5	Europe/Berlin
 Roth	Bavaria	20	N	25.083	49.24762N	11.09111E	334	5	Europe/Berlin
 Rotenburg	Lower Saxony	20	N	22.139	53.11125N	9.41082E	20	5	Europe/Berlin
 Rostock	Mecklenburg-Vorpommern	20	N	198.293	54.0887N	12.14049E	18	7	Europe/Berlin
@@ -5761,14 +5918,14 @@ Rietberg	North Rhine-Westphalia	20	N	28.672	51.80924N	8.42841E	80	5	Europe/Berli
 Riesa	Saxony	20	N	37.156	51.30777N	13.29168E	111	5	Europe/Berlin
 Riegelsberg	Saarland	20	N	15.647	49.3N	6.93333E	318	5	Europe/Berlin
 Ribnitz-Damgarten	Mecklenburg-Vorpommern	20	N	17.152	54.2422N	12.45666E	6	5	Europe/Berlin
-Rheinfelden	Baden-Wuerttemberg	20	N	32.535	47.56013N	7.78715E	279	5	Europe/Berlin
+Rheinfelden	Baden-Wurttemberg	20	N	32.535	47.56013N	7.78715E	279	5	Europe/Berlin
 Rheine	North Rhine-Westphalia	20	N	76.491	52.28509N	7.44055E	41	6	Europe/Berlin
 Rheinberg	North Rhine-Westphalia	20	N	32.188	51.54649N	6.59525E	25	5	Europe/Berlin
 Rheinbach	North Rhine-Westphalia	20	N	26.262	50.62562N	6.94911E	182	5	Europe/Berlin
 Rhede	North Rhine-Westphalia	20	N	19.14	51.83537N	6.69602E	31	5	Europe/Berlin
 Rheda-Wiedenbrueck	North Rhine-Westphalia	20	N	46.123	51.84967N	8.30017E	72	5	Europe/Berlin
-Reutlingen	Baden-Wuerttemberg	20	N	112.627	48.49144N	9.20427E	374	7	Europe/Berlin
-Renningen	Baden-Wuerttemberg	20	N	17.442	48.76974N	8.93871E	408	5	Europe/Berlin
+Reutlingen	Baden-Wurttemberg	20	N	112.627	48.49144N	9.20427E	374	7	Europe/Berlin
+Renningen	Baden-Wurttemberg	20	N	17.442	48.76974N	8.93871E	408	5	Europe/Berlin
 Rendsburg	Schleswig-Holstein	20	N	28.323	54.30663N	9.66313E	4	5	Europe/Berlin
 Remscheid	North Rhine-Westphalia	20	N	117.118	51.17983N	7.1925E	351	7	Europe/Berlin
 Remagen	Rheinland-Pfalz	20	N	16.28	50.57879N	7.22703E	65	5	Europe/Berlin
@@ -5779,14 +5936,14 @@ Reichenbach/Vogtland	Saxony	20	N	22.53	50.62279N	12.30344E	381	5	Europe/Berlin
 Regensburg	Bavaria	20	N	129.151	49.01513N	12.10161E	341	7	Europe/Berlin
 Rees	North Rhine-Westphalia	20	N	22.544	51.76263N	6.39778E	21	5	Europe/Berlin
 Recklinghausen	North Rhine-Westphalia	20	N	122.438	51.61379N	7.19738E	80	7	Europe/Berlin
-Ravensburg	Baden-Wuerttemberg	20	N	48.825	47.78198N	9.61062E	447	5	Europe/Berlin
+Ravensburg	Baden-Wurttemberg	20	N	48.825	47.78198N	9.61062E	447	5	Europe/Berlin
 Ratingen	North Rhine-Westphalia	20	N	91.606	51.29724N	6.84929E	64	6	Europe/Berlin
 Rathenow	Brandenburg	20	N	27.115	52.60659N	12.33696E	31	5	Europe/Berlin
 Ratekau	Schleswig-Holstein	20	N	15.921	53.95N	10.73333E	17	5	Europe/Berlin
 Rastede	Lower Saxony	20	N	20.046	53.25N	8.2E	18	5	Europe/Berlin
-Rastatt	Baden-Wuerttemberg	20	N	47.906	48.85851N	8.20965E	126	5	Europe/Berlin
+Rastatt	Baden-Wurttemberg	20	N	47.906	48.85851N	8.20965E	126	5	Europe/Berlin
 Rahden	North Rhine-Westphalia	20	N	16.14	52.43367N	8.61263E	48	5	Europe/Berlin
-Radolfzell	Baden-Wuerttemberg	20	N	30.096	47.74194N	8.97098E	403	5	Europe/Berlin
+Radolfzell	Baden-Wurttemberg	20	N	30.096	47.74194N	8.97098E	403	5	Europe/Berlin
 Radevormwald	North Rhine-Westphalia	20	N	24.1	51.20219N	7.36027E	373	5	Europe/Berlin
 Radebeul	Saxony	20	N	32.643	51.10654N	13.66047E	120	5	Europe/Berlin
 Radeberg	Saxony	20	N	18.747	51.11112N	13.91199E	241	5	Europe/Berlin
@@ -5807,8 +5964,8 @@ Pirna	Saxony	20	N	40.322	50.95843N	13.93702E	119	5	Europe/Berlin
 Pirmasens	Rheinland-Pfalz	20	N	43.582	49.20145N	7.60529E	400	5	Europe/Berlin
 Pinneberg	Schleswig-Holstein	20	N	40.577	53.66732N	9.78936E	13	5	Europe/Berlin
 Pfungstadt	Hesse	20	N	25.084	49.80557N	8.60307E	109	5	Europe/Berlin
-Pfullingen	Baden-Wuerttemberg	20	N	18.269	48.46458N	9.22796E	429	5	Europe/Berlin
-Pforzheim	Baden-Wuerttemberg	20	N	119.313	48.88436N	8.69892E	256	7	Europe/Berlin
+Pfullingen	Baden-Wurttemberg	20	N	18.269	48.46458N	9.22796E	429	5	Europe/Berlin
+Pforzheim	Baden-Wurttemberg	20	N	119.313	48.88436N	8.69892E	256	7	Europe/Berlin
 Pfaffenhofen an der Ilm	Bavaria	20	N	23.192	48.53053N	11.505E	431	5	Europe/Berlin
 Petershagen	North Rhine-Westphalia	20	N	27.09	52.37513N	8.96538E	46	5	Europe/Berlin
 Penzberg	Bavaria	20	N	16.079	47.75293N	11.377E	600	5	Europe/Berlin
@@ -5834,8 +5991,8 @@ Olsberg	North Rhine-Westphalia	20	N	15.814	51.35613N	8.48899E	338	5	Europe/Berli
 Olpe	North Rhine-Westphalia	20	N	25.686	51.02899N	7.85139E	321	5	Europe/Berlin
 Oldenburg	Lower Saxony	20	N	159.218	53.14118N	8.21467E	10	7	Europe/Berlin
 Olching	Bavaria	20	N	23.978	48.2N	11.33333E	509	5	Europe/Berlin
-Ohringen	Baden-Wuerttemberg	20	N	22.765	49.19884N	9.5072E	228	5	Europe/Berlin
-Offenburg	Baden-Wuerttemberg	20	N	59.238	48.47377N	7.94495E	163	6	Europe/Berlin
+Ohringen	Baden-Wurttemberg	20	N	22.765	49.19884N	9.5072E	228	5	Europe/Berlin
+Offenburg	Baden-Wurttemberg	20	N	59.238	48.47377N	7.94495E	163	6	Europe/Berlin
 Offenbach	Hesse	20	N	119.192	50.10061N	8.76647E	113	7	Europe/Berlin
 Oerlinghausen	North Rhine-Westphalia	20	N	17.403	51.95453N	8.6622E	229	5	Europe/Berlin
 Oer-Erkenschwick	North Rhine-Westphalia	20	N	30.409	51.64198N	7.26451E	76	5	Europe/Berlin
@@ -5846,10 +6003,10 @@ Oberursel	Hesse	20	N	46.678	50.20731N	8.57747E	216	5	Europe/Berlin
 Obertshausen	Hesse	20	N	24.459	50.07139N	8.85123E	123	5	Europe/Berlin
 Oberschoneweide	Berlin	20	N	18.919	52.46106N	13.52108E	36	5	Europe/Berlin
 Ober-Ramstadt	Hesse	20	N	15.367	49.83078N	8.74887E	214	5	Europe/Berlin
-Oberkirch	Baden-Wuerttemberg	20	N	20.375	48.53241N	8.07864E	193	5	Europe/Berlin
+Oberkirch	Baden-Wurttemberg	20	N	20.375	48.53241N	8.07864E	193	5	Europe/Berlin
 Oberhausen	North Rhine-Westphalia	20	N	219.176	51.47805N	6.8625E	44	7	Europe/Berlin
 Oberasbach	Bavaria	20	N	17.306	49.42275N	10.95766E	316	5	Europe/Berlin
-Nurtingen	Baden-Wuerttemberg	20	N	40.21	48.62565N	9.34203E	284	5	Europe/Berlin
+Nurtingen	Baden-Wurttemberg	20	N	40.21	48.62565N	9.34203E	284	5	Europe/Berlin
 Nuernberg	Bavaria	20	N	515.543	49.45421N	11.07752E	300	8	Europe/Berlin
 Nuembrecht	North Rhine-Westphalia	20	N	17.427	50.90427N	7.54063E	287	5	Europe/Berlin
 Nottuln	North Rhine-Westphalia	20	N	20.427	51.93333N	7.35E	106	5	Europe/Berlin
@@ -5893,24 +6050,24 @@ Neubrandenburg	Mecklenburg-Vorpommern	20	N	68.082	53.56414N	13.27532E	18	6	Europ
 Neu-Anspach	Hesse	20	N	15.276	50.31667N	8.5E	320	5	Europe/Berlin
 Nettetal	North Rhine-Westphalia	20	N	42.417	51.31667N	6.28333E	52	5	Europe/Berlin
 Netphen	North Rhine-Westphalia	20	N	25.163	50.91667N	8.1E	300	5	Europe/Berlin
-Neckarsulm	Baden-Wuerttemberg	20	N	27.413	49.18912N	9.22527E	174	5	Europe/Berlin
+Neckarsulm	Baden-Wurttemberg	20	N	27.413	49.18912N	9.22527E	174	5	Europe/Berlin
 Naumburg	Saxony-Anhalt	20	N	29.722	51.14987N	11.80979E	134	5	Europe/Berlin
 Nauen	Brandenburg	20	N	16.6	52.60701N	12.87374E	37	5	Europe/Berlin
-Nagold	Baden-Wuerttemberg	20	N	22.912	48.5498N	8.72366E	399	5	Europe/Berlin
+Nagold	Baden-Wurttemberg	20	N	22.912	48.5498N	8.72366E	399	5	Europe/Berlin
 Munster	Lower Saxony	20	N	17.746	52.98569N	10.08756E	79	5	Europe/Berlin
 Muenster	North Rhine-Westphalia	20	N	270.184	51.96236N	7.62571E	64	7	Europe/Berlin
 Hannoversch Muenden	Lower Saxony	20	N	25.073	51.41505N	9.65046E	129	5	Europe/Berlin
 Munich	Bavaria	20	R	1260.391	48.13743N	11.57549E	524	9	Europe/Berlin
-Mullheim	Baden-Wuerttemberg	20	N	18.097	47.8082N	7.63035E	268	5	Europe/Berlin
+Mullheim	Baden-Wurttemberg	20	N	18.097	47.8082N	7.63035E	268	5	Europe/Berlin
 Muelheim	North Rhine-Westphalia	20	N	170.921	51.43218N	6.87967E	40	7	Europe/Berlin
 Muehlheim am Main	Hesse	20	N	28.534	50.11667N	8.83333E	103	5	Europe/Berlin
-Stuttgart Muehlhausen	Baden-Wuerttemberg	20	N	26.111	48.84232N	9.23028E	214	5	Europe/Berlin
+Stuttgart Muehlhausen	Baden-Wurttemberg	20	N	26.111	48.84232N	9.23028E	214	5	Europe/Berlin
 Muehlhausen	Thuringia	20	N	38.108	51.20896N	10.45275E	221	5	Europe/Berlin
 Muehldorf	Bavaria	20	N	17.622	48.2467N	12.52155E	415	5	Europe/Berlin
-Muhlacker	Baden-Wuerttemberg	20	N	26.375	48.94754N	8.83675E	225	5	Europe/Berlin
+Muhlacker	Baden-Wurttemberg	20	N	26.375	48.94754N	8.83675E	225	5	Europe/Berlin
 Much	North Rhine-Westphalia	20	N	15.231	50.90383N	7.40306E	226	5	Europe/Berlin
-Mossingen	Baden-Wuerttemberg	20	N	20.01	48.40567N	9.05419E	464	5	Europe/Berlin
-Mosbach	Baden-Wuerttemberg	20	N	25.106	49.35357N	9.15106E	186	5	Europe/Berlin
+Mossingen	Baden-Wurttemberg	20	N	20.01	48.40567N	9.05419E	464	5	Europe/Berlin
+Mosbach	Baden-Wurttemberg	20	N	25.106	49.35357N	9.15106E	186	5	Europe/Berlin
 Moosburg	Bavaria	20	N	17.363	48.47089N	11.93811E	415	5	Europe/Berlin
 Monheim am Rhein	North Rhine-Westphalia	20	N	43.038	51.09162N	6.89217E	44	5	Europe/Berlin
 Moenchengladbach	North Rhine-Westphalia	20	N	261.742	51.18539N	6.44172E	57	7	Europe/Berlin
@@ -5920,7 +6077,7 @@ Moabit	Berlin	20	N	70.911	52.52635N	13.33903E	40	6	Europe/Berlin
 Mittweida	Saxony	20	N	16.619	50.98622N	12.97537E	276	5	Europe/Berlin
 Minden	North Rhine-Westphalia	20	N	82.879	52.28953N	8.91455E	59	6	Europe/Berlin
 Michelstadt	Hesse	20	N	17.279	49.67569N	9.00373E	207	5	Europe/Berlin
-Metzingen	Baden-Wuerttemberg	20	N	22.112	48.53695N	9.2833E	350	5	Europe/Berlin
+Metzingen	Baden-Wurttemberg	20	N	22.112	48.53695N	9.2833E	350	5	Europe/Berlin
 Mettmann	North Rhine-Westphalia	20	N	39.55	51.2504N	6.97536E	132	5	Europe/Berlin
 Meschede	North Rhine-Westphalia	20	N	32.224	51.3502N	8.28332E	272	5	Europe/Berlin
 Merzig	Saarland	20	N	31.118	49.44331N	6.63874E	177	5	Europe/Berlin
@@ -5949,8 +6106,8 @@ Marienfelde	Berlin	20	N	30.338	52.41868N	13.36723E	44	5	Europe/Berlin
 Mariendorf	Berlin	20	N	49.917	52.4378N	13.38109E	49	5	Europe/Berlin
 Marienberg	Saxony	20	N	16.716	50.65051N	13.16122E	614	5	Europe/Berlin
 Marburg an der Lahn	Hesse	20	N	78.895	50.80904N	8.77069E	220	6	Europe/Berlin
-Marbach am Neckar	Baden-Wuerttemberg	20	N	15.604	48.93964N	9.25995E	242	5	Europe/Berlin
-Mannheim	Baden-Wuerttemberg	20	N	307.96	49.4891N	8.46694E	100	7	Europe/Berlin
+Marbach am Neckar	Baden-Wurttemberg	20	N	15.604	48.93964N	9.25995E	242	5	Europe/Berlin
+Mannheim	Baden-Wurttemberg	20	N	307.96	49.4891N	8.46694E	100	7	Europe/Berlin
 Mainz	Rheinland-Pfalz	20	R	184.997	49.98419N	8.2791E	126	7	Europe/Berlin
 Maintal	Hesse	20	N	38.313	50.15N	8.83333E	107	5	Europe/Berlin
 Mahlsdorf	Berlin	20	N	26.954	52.50935N	13.61373E	53	5	Europe/Berlin
@@ -5960,7 +6117,7 @@ Luenen	North Rhine-Westphalia	20	N	91.009	51.61634N	7.52872E	57	6	Europe/Berlin
 Lueneburg	Lower Saxony	20	N	71.26	53.2509N	10.41409E	12	6	Europe/Berlin
 Ludwigshafen am Rhein	Rheinland-Pfalz	20	N	163.196	49.48121N	8.44641E	97	7	Europe/Berlin
 Ludwigsfelde	Brandenburg	20	N	24.164	52.30322N	13.25405E	47	5	Europe/Berlin
-Ludwigsburg	Baden-Wuerttemberg	20	N	87.603	48.89731N	9.19161E	298	6	Europe/Berlin
+Ludwigsburg	Baden-Wurttemberg	20	N	87.603	48.89731N	9.19161E	298	6	Europe/Berlin
 Luedinghausen	North Rhine-Westphalia	20	N	24.094	51.7683N	7.44379E	52	5	Europe/Berlin
 Luedenscheid	North Rhine-Westphalia	20	N	79.386	51.21977N	7.6273E	410	6	Europe/Berlin
 Luckenwalde	Brandenburg	20	N	21.616	52.09029N	13.16772E	52	5	Europe/Berlin
@@ -5969,7 +6126,7 @@ Lubnjow	Brandenburg	20	N	17.461	51.86217N	13.95168E	51	5	Europe/Berlin
 Luebbecke	North Rhine-Westphalia	20	N	25.573	52.30699N	8.61423E	76	5	Europe/Berlin
 Loxstedt	Lower Saxony	20	N	16.382	53.46667N	8.65E	7	5	Europe/Berlin
 Losheim	Saarland	20	N	16.66	49.5099N	6.74549E	296	5	Europe/Berlin
-Loerrach	Baden-Wuerttemberg	20	N	47.002	47.61497N	7.66457E	308	5	Europe/Berlin
+Loerrach	Baden-Wurttemberg	20	N	47.002	47.61497N	7.66457E	308	5	Europe/Berlin
 Lohr am Main	Bavaria	20	N	16.127	49.98922N	9.57223E	167	5	Europe/Berlin
 Lohne	Lower Saxony	20	N	27.259	52.66625N	8.2375E	45	5	Europe/Berlin
 Loehne	North Rhine-Westphalia	20	N	39.521	52.18848N	8.6922E	68	5	Europe/Berlin
@@ -5987,20 +6144,20 @@ Lichtenrade	Berlin	20	N	49.489	52.39844N	13.40637E	45	5	Europe/Berlin
 Lichtenfels	Bavaria	20	N	21.336	50.14567N	11.05928E	263	5	Europe/Berlin
 Lichtenberg	Berlin	20	N	32.888	52.51395N	13.49975E	52	5	Europe/Berlin
 Leverkusen	North Rhine-Westphalia	20	N	162.738	51.0303N	6.98432E	52	7	Europe/Berlin
-Leutkirch	Baden-Wuerttemberg	20	N	22.362	47.82672N	10.0205E	655	5	Europe/Berlin
+Leutkirch	Baden-Wurttemberg	20	N	22.362	47.82672N	10.0205E	655	5	Europe/Berlin
 Leopoldshohe	North Rhine-Westphalia	20	N	16.219	52.01246N	8.69834E	132	5	Europe/Berlin
-Leonberg	Baden-Wuerttemberg	20	N	45.711	48.8N	9.01667E	382	5	Europe/Berlin
+Leonberg	Baden-Wurttemberg	20	N	45.711	48.8N	9.01667E	382	5	Europe/Berlin
 Lennestadt	North Rhine-Westphalia	20	N	28.102	51.11721N	8.06707E	271	5	Europe/Berlin
 Lengerich	North Rhine-Westphalia	20	N	22.697	52.18661N	7.86043E	81	5	Europe/Berlin
 Lemgo	North Rhine-Westphalia	20	N	41.943	52.02786N	8.89901E	100	5	Europe/Berlin
 Leipzig	Saxony	20	N	504.971	51.33962N	12.37129E	116	8	Europe/Berlin
-Leinfelden-Echterdingen	Baden-Wuerttemberg	20	N	36.672	48.69406N	9.16809E	422	5	Europe/Berlin
-Leimen	Baden-Wuerttemberg	20	N	27.19	49.34737N	8.68733E	112	5	Europe/Berlin
+Leinfelden-Echterdingen	Baden-Wurttemberg	20	N	36.672	48.69406N	9.16809E	422	5	Europe/Berlin
+Leimen	Baden-Wurttemberg	20	N	27.19	49.34737N	8.68733E	112	5	Europe/Berlin
 Leichlingen	North Rhine-Westphalia	20	N	27.885	51.10628N	7.01873E	63	5	Europe/Berlin
 Lehrte	Lower Saxony	20	N	43.92	52.37193N	9.97919E	60	5	Europe/Berlin
 Leer	Lower Saxony	20	N	33.886	53.23157N	7.461E	7	5	Europe/Berlin
 Lebach	Saarland	20	N	21.583	49.41122N	6.90988E	221	5	Europe/Berlin
-Laupheim	Baden-Wuerttemberg	20	N	19.012	48.22786N	9.87874E	504	5	Europe/Berlin
+Laupheim	Baden-Wurttemberg	20	N	19.012	48.22786N	9.87874E	504	5	Europe/Berlin
 Lauf an der Pegnitz	Bavaria	20	N	26.403	49.51386N	11.28247E	334	5	Europe/Berlin
 Lauchhammer	Brandenburg	20	N	18.99	51.48813N	13.76623E	99	5	Europe/Berlin
 Lankwitz	Berlin	20	N	41.242	52.43623N	13.3459E	43	5	Europe/Berlin
@@ -6012,13 +6169,13 @@ Landshut	Bavaria	20	N	60.488	48.52961N	12.16179E	488	6	Europe/Berlin
 Landsberg am Lech	Bavaria	20	N	27.017	48.04819N	10.88282E	637	5	Europe/Berlin
 Landau in der Pfalz	Rheinland-Pfalz	20	N	41.612	49.19844N	8.11692E	144	5	Europe/Berlin
 Lampertheim	Hesse	20	N	31.635	49.59786N	8.4725E	97	5	Europe/Berlin
-Lahr	Baden-Wuerttemberg	20	N	47.551	48.34042N	7.86886E	176	5	Europe/Berlin
+Lahr	Baden-Wurttemberg	20	N	47.551	48.34042N	7.86886E	176	5	Europe/Berlin
 Lahnstein	Rheinland-Pfalz	20	N	18.749	50.3N	7.61667E	134	5	Europe/Berlin
 Lage	North Rhine-Westphalia	20	N	34.885	51.99223N	8.79301E	103	5	Europe/Berlin
 Laatzen	Lower Saxony	20	N	40.038	52.31506N	9.79739E	71	5	Europe/Berlin
 Bad Laasphe	North Rhine-Westphalia	20	N	15.184	50.93139N	8.42502E	324	5	Europe/Berlin
 Kurten	North Rhine-Westphalia	20	N	20.103	51.05N	7.26667E	181	5	Europe/Berlin
-Kuenzelsau	Baden-Wuerttemberg	20	N	15.07	49.2818N	9.68352E	220	5	Europe/Berlin
+Kuenzelsau	Baden-Wurttemberg	20	N	15.07	49.2818N	9.68352E	220	5	Europe/Berlin
 Kunzell	Hesse	20	N	16.124	50.5442N	9.71792E	307	5	Europe/Berlin
 Kulmbach	Bavaria	20	N	27.565	50.10068N	11.45032E	330	5	Europe/Berlin
 Kronberg	Hesse	20	N	17.73	50.18424N	8.5232E	251	5	Europe/Berlin
@@ -6029,13 +6186,13 @@ Kreuzau	North Rhine-Westphalia	20	N	18.4	50.74699N	6.49069E	148	5	Europe/Berlin
 Krefeld	North Rhine-Westphalia	20	N	237.984	51.33645N	6.55381E	43	7	Europe/Berlin
 Koethen	Saxony-Anhalt	20	N	28.71	51.75185N	11.97093E	83	5	Europe/Berlin
 Korschenbroich	North Rhine-Westphalia	20	N	33.406	51.19139N	6.51352E	48	5	Europe/Berlin
-Kornwestheim	Baden-Wuerttemberg	20	N	31.04	48.86158N	9.18569E	299	5	Europe/Berlin
-Korntal	Baden-Wuerttemberg	20	N	18.081	48.83218N	9.1214E	310	5	Europe/Berlin
+Kornwestheim	Baden-Wurttemberg	20	N	31.04	48.86158N	9.18569E	299	5	Europe/Berlin
+Korntal	Baden-Wurttemberg	20	N	18.081	48.83218N	9.1214E	310	5	Europe/Berlin
 Korbach	Hesse	20	N	24.481	51.27561N	8.873E	371	5	Europe/Berlin
 Kopenick Bezirk	Berlin	20	N	60.128	52.4455N	13.57455E	32	6	Europe/Berlin
 Berlin Koepenick	Berlin	20	N	59.561	52.44254N	13.58228E	35	6	Europe/Berlin
 Konz	Rheinland-Pfalz	20	N	17.879	49.70045N	6.57652E	136	5	Europe/Berlin
-Konstanz	Baden-Wuerttemberg	20	N	81.275	47.66033N	9.17582E	402	6	Europe/Berlin
+Konstanz	Baden-Wurttemberg	20	N	81.275	47.66033N	9.17582E	402	6	Europe/Berlin
 Koenigs Wusterhausen	Brandenburg	20	N	32.513	52.30141N	13.633E	32	5	Europe/Berlin
 Koenigswinter	North Rhine-Westphalia	20	N	41.164	50.68376N	7.18675E	60	5	Europe/Berlin
 Koenigstein im Taunus	Hesse	20	N	15.661	50.17943N	8.47132E	364	5	Europe/Berlin
@@ -6044,12 +6201,12 @@ Konigsbrunn	Bavaria	20	N	27.494	48.27506N	10.89178E	516	5	Europe/Berlin
 Koeln	North Rhine-Westphalia	20	N	963.395	50.93333N	6.95E	58	8	Europe/Berlin
 Kolbermoor	Bavaria	20	N	17.941	47.84965N	12.06696E	461	5	Europe/Berlin
 Koblenz	Rheinland-Pfalz	20	N	107.319	50.35357N	7.57883E	75	7	Europe/Berlin
-Klingenstein	Baden-Wuerttemberg	20	N	15.643	48.41849N	9.90812E	498	5	Europe/Berlin
+Klingenstein	Baden-Wurttemberg	20	N	15.643	48.41849N	9.90812E	498	5	Europe/Berlin
 Kleve	North Rhine-Westphalia	20	N	49.072	51.78826N	6.13865E	29	5	Europe/Berlin
 Kleinmachnow	Brandenburg	20	N	17.892	52.40786N	13.22514E	47	5	Europe/Berlin
 Kitzingen	Bavaria	20	N	21.387	49.73973N	10.15072E	201	5	Europe/Berlin
 Kirchlengern	North Rhine-Westphalia	20	N	16.338	52.2N	8.63333E	64	5	Europe/Berlin
-Kirchheim unter Teck	Baden-Wuerttemberg	20	N	40.206	48.64683N	9.45378E	316	5	Europe/Berlin
+Kirchheim unter Teck	Baden-Wurttemberg	20	N	40.206	48.64683N	9.45378E	316	5	Europe/Berlin
 Kirchhain	Hesse	20	N	16.381	50.8272N	8.92806E	215	5	Europe/Berlin
 Kierspe	North Rhine-Westphalia	20	N	18.188	51.13403N	7.59075E	404	5	Europe/Berlin
 Kiel	Schleswig-Holstein	20	R	232.758	54.32133N	10.13489E	7	7	Europe/Berlin
@@ -6059,13 +6216,13 @@ Kempten (Allgaeu)	Bavaria	20	N	61.399	47.72674N	10.31389E	681	6	Europe/Berlin
 Kempen	North Rhine-Westphalia	20	N	36.312	51.36432N	6.41858E	41	5	Europe/Berlin
 Kelkheim	Hesse	20	N	29.162	50.13703N	8.4502E	198	5	Europe/Berlin
 Kelheim	Bavaria	20	N	15.723	48.91725N	11.88618E	346	5	Europe/Berlin
-Kehl	Baden-Wuerttemberg	20	N	34.009	48.57297N	7.81523E	138	5	Europe/Berlin
+Kehl	Baden-Wurttemberg	20	N	34.009	48.57297N	7.81523E	138	5	Europe/Berlin
 Kaulsdorf	Berlin	20	N	18.675	52.51732N	13.58871E	55	5	Europe/Berlin
 Kaufbeuren	Bavaria	20	N	42.505	47.88238N	10.62192E	672	5	Europe/Berlin
 Kassel	Hesse	20	N	194.501	51.31667N	9.5E	164	7	Europe/Berlin
 Karow	Berlin	20	N	18.817	52.60904N	13.48117E	55	5	Europe/Berlin
 Karlstadt	Bavaria	20	N	15.272	49.96034N	9.77239E	172	5	Europe/Berlin
-Karlsruhe	Baden-Wuerttemberg	20	N	283.799	49.00937N	8.40444E	118	7	Europe/Berlin
+Karlsruhe	Baden-Wurttemberg	20	N	283.799	49.00937N	8.40444E	118	7	Europe/Berlin
 Karlshorst	Berlin	20	N	22.285	52.48419N	13.53185E	36	5	Europe/Berlin
 Karlsfeld	Bavaria	20	N	17.92	48.22697N	11.47573E	491	5	Europe/Berlin
 Karben	Hesse	20	N	21.642	50.23019N	8.77155E	118	5	Europe/Berlin
@@ -6102,7 +6259,7 @@ Hoyerswerda	Saxony	20	N	43.681	51.43787N	14.23549E	118	5	Europe/Berlin
 Hoexter	North Rhine-Westphalia	20	N	32.713	51.77501N	9.38155E	100	5	Europe/Berlin
 Hovelhof	North Rhine-Westphalia	20	N	15.962	51.81667N	8.65E	101	5	Europe/Berlin
 Hoerstel	North Rhine-Westphalia	20	N	19.894	52.29763N	7.58382E	46	5	Europe/Berlin
-Horb am Neckar	Baden-Wuerttemberg	20	N	25.092	48.44423N	8.6913E	394	5	Europe/Berlin
+Horb am Neckar	Baden-Wurttemberg	20	N	25.092	48.44423N	8.6913E	394	5	Europe/Berlin
 Homburg	Saarland	20	N	44.607	49.32637N	7.33867E	242	5	Europe/Berlin
 Holzwickede	North Rhine-Westphalia	20	N	17.821	51.5N	7.63333E	135	5	Europe/Berlin
 Holzminden	Lower Saxony	20	N	20.998	51.82798N	9.4455E	91	5	Europe/Berlin
@@ -6112,7 +6269,7 @@ Hohen Neuendorf	Brandenburg	20	N	21.893	52.67631N	13.27775E	56	5	Europe/Berlin
 Hofheim am Taunus	Hesse	20	N	37.75	50.09019N	8.4493E	145	5	Europe/Berlin
 Hofgeismar	Hesse	20	N	16.444	51.49607N	9.385E	157	5	Europe/Berlin
 Hof	Bavaria	20	N	49.239	50.31297N	11.91261E	491	5	Europe/Berlin
-Hockenheim	Baden-Wuerttemberg	20	N	20.614	49.32334N	8.55194E	104	5	Europe/Berlin
+Hockenheim	Baden-Wurttemberg	20	N	20.614	49.32334N	8.55194E	104	5	Europe/Berlin
 Hochheim am Main	Hesse	20	N	17.027	50.01436N	8.35218E	131	5	Europe/Berlin
 Hochfeld	North Rhine-Westphalia	20	N	16.292	51.41943N	6.75462E	36	5	Europe/Berlin
 Hille	North Rhine-Westphalia	20	N	16.567	52.33333N	8.75E	58	5	Europe/Berlin
@@ -6127,7 +6284,7 @@ Hessisch Oldendorf	Lower Saxony	20	N	20.129	52.17269N	9.24913E	68	5	Europe/Berli
 Herzogenrath	North Rhine-Westphalia	20	N	47.381	50.86874N	6.09317E	106	5	Europe/Berlin
 Herzogenaurach	Bavaria	20	N	23.319	49.56798N	10.88565E	300	5	Europe/Berlin
 Herten	North Rhine-Westphalia	20	N	65.306	51.59638N	7.14387E	68	6	Europe/Berlin
-Herrenberg	Baden-Wuerttemberg	20	N	31.338	48.59523N	8.86648E	431	5	Europe/Berlin
+Herrenberg	Baden-Wurttemberg	20	N	31.338	48.59523N	8.86648E	431	5	Europe/Berlin
 Herne	North Rhine-Westphalia	20	N	172.108	51.5388N	7.22572E	67	7	Europe/Berlin
 Hermsdorf	Berlin	20	N	16.113	52.61421N	13.30587E	40	5	Europe/Berlin
 Herford	North Rhine-Westphalia	20	N	64.879	52.11457N	8.67343E	69	6	Europe/Berlin
@@ -6144,12 +6301,12 @@ Heinsberg	North Rhine-Westphalia	20	N	41.505	51.06358N	6.0998E	39	5	Europe/Berli
 Heilbad Heiligenstadt	Thuringia	20	N	17.23	51.37819N	10.13744E	264	5	Europe/Berlin
 Heiligensee	Berlin	20	N	17.587	52.61449N	13.24501E	39	5	Europe/Berlin
 Heiligenhaus	North Rhine-Westphalia	20	N	27.7	51.32662N	6.97106E	180	5	Europe/Berlin
-Heilbronn	Baden-Wuerttemberg	20	N	120.733	49.13995N	9.22054E	173	7	Europe/Berlin
-Heidenheim an der Brenz	Baden-Wuerttemberg	20	N	50.067	48.67798N	10.15162E	494	6	Europe/Berlin
+Heilbronn	Baden-Wurttemberg	20	N	120.733	49.13995N	9.22054E	173	7	Europe/Berlin
+Heidenheim an der Brenz	Baden-Wurttemberg	20	N	50.067	48.67798N	10.15162E	494	6	Europe/Berlin
 Heidenau	Saxony	20	N	16.756	50.97221N	13.86741E	120	5	Europe/Berlin
-Heidelberg	Baden-Wuerttemberg	20	N	143.345	49.40768N	8.69079E	115	7	Europe/Berlin
+Heidelberg	Baden-Wurttemberg	20	N	143.345	49.40768N	8.69079E	115	7	Europe/Berlin
 Heide	Schleswig-Holstein	20	N	20.599	54.19579N	9.0988E	14	5	Europe/Berlin
-Hechingen	Baden-Wuerttemberg	20	N	19.4	48.35149N	8.96317E	531	5	Europe/Berlin
+Hechingen	Baden-Wurttemberg	20	N	19.4	48.35149N	8.96317E	531	5	Europe/Berlin
 Hattingen	North Rhine-Westphalia	20	N	56.866	51.39894N	7.18557E	100	6	Europe/Berlin
 Hattersheim	Hesse	20	N	25.035	50.06906N	8.48632E	104	5	Europe/Berlin
 Hassloch	Rheinland-Pfalz	20	N	20.779	49.36278N	8.25806E	113	5	Europe/Berlin
@@ -6202,7 +6359,7 @@ Goettingen	Lower Saxony	20	N	122.149	51.53443N	9.93228E	153	7	Europe/Berlin
 Gotha	Thuringia	20	N	46.615	50.94823N	10.70193E	305	5	Europe/Berlin
 Goslar	Lower Saxony	20	N	43.56	51.90425N	10.42766E	270	5	Europe/Berlin
 Goerlitz	Saxony	20	N	57.751	51.15518N	14.98853E	210	6	Europe/Berlin
-Goeppingen	Baden-Wuerttemberg	20	N	58.04	48.70354N	9.65209E	323	6	Europe/Berlin
+Goeppingen	Baden-Wurttemberg	20	N	58.04	48.70354N	9.65209E	323	6	Europe/Berlin
 Goch	North Rhine-Westphalia	20	N	33.706	51.67873N	6.15895E	19	5	Europe/Berlin
 Glinde	Schleswig-Holstein	20	N	16.21	53.5441N	10.20048E	32	5	Europe/Berlin
 Glauchau	Saxony	20	N	26.473	50.81987N	12.54493E	266	5	Europe/Berlin
@@ -6211,7 +6368,7 @@ Ginsheim-Gustavsburg	Hesse	20	N	16.043	49.9711N	8.34532E	85	5	Europe/Berlin
 Gilching	Bavaria	20	N	16.859	48.10755N	11.2936E	562	5	Europe/Berlin
 Gifhorn	Lower Saxony	20	N	43	52.47774N	10.5511E	58	5	Europe/Berlin
 Giessen	Hesse	20	N	74.411	50.58727N	8.67554E	162	6	Europe/Berlin
-Giengen an der Brenz	Baden-Wuerttemberg	20	N	20.201	48.62219N	10.24312E	473	5	Europe/Berlin
+Giengen an der Brenz	Baden-Wurttemberg	20	N	20.201	48.62219N	10.24312E	473	5	Europe/Berlin
 Gevelsberg	North Rhine-Westphalia	20	N	32.664	51.31971N	7.3392E	166	5	Europe/Berlin
 Gesundbrunnen	Berlin	20	N	84.789	52.55035N	13.39139E	53	6	Europe/Berlin
 Geseke	North Rhine-Westphalia	20	N	20.602	51.64091N	8.5109E	103	5	Europe/Berlin
@@ -6219,14 +6376,14 @@ Gescher	North Rhine-Westphalia	20	N	17.115	51.954N	7.00481E	62	5	Europe/Berlin
 Gersthofen	Bavaria	20	N	20.254	48.42432N	10.87273E	473	5	Europe/Berlin
 Germersheim	Rheinland-Pfalz	20	N	20.972	49.22306N	8.36389E	99	5	Europe/Berlin
 Germering	Bavaria	20	N	40.511	48.13392N	11.3765E	544	5	Europe/Berlin
-Gerlingen	Baden-Wuerttemberg	20	N	19.05	48.79954N	9.06316E	341	5	Europe/Berlin
+Gerlingen	Baden-Wurttemberg	20	N	19.05	48.79954N	9.06316E	341	5	Europe/Berlin
 Geretsried	Bavaria	20	N	23.364	47.85775N	11.48054E	607	5	Europe/Berlin
 Gera	Thuringia	20	N	104.659	50.88029N	12.08187E	203	7	Europe/Berlin
 Georgsmarienhuette	Lower Saxony	20	N	32.58	52.20296N	8.0448E	117	5	Europe/Berlin
 Gelsenkirchen	North Rhine-Westphalia	20	N	270.028	51.50508N	7.09654E	48	7	Europe/Berlin
 Gelnhausen	Hesse	20	N	21.881	50.20164N	9.18742E	139	5	Europe/Berlin
 Geldern	North Rhine-Westphalia	20	N	34.013	51.51908N	6.32363E	28	5	Europe/Berlin
-Geislingen an der Steige	Baden-Wuerttemberg	20	N	27.962	48.62423N	9.82736E	426	5	Europe/Berlin
+Geislingen an der Steige	Baden-Wurttemberg	20	N	27.962	48.62423N	9.82736E	426	5	Europe/Berlin
 Geilenkirchen	North Rhine-Westphalia	20	N	28.334	50.96745N	6.11763E	96	5	Europe/Berlin
 Geesthacht	Schleswig-Holstein	20	N	29.487	53.43575N	10.3779E	26	5	Europe/Berlin
 Gauting	Bavaria	20	N	19.216	48.06919N	11.37703E	583	5	Europe/Berlin
@@ -6234,7 +6391,7 @@ Garmisch-Partenkirchen	Bavaria	20	N	26.022	47.49209N	11.09576E	705	5	Europe/Berl
 Garching	Bavaria	20	N	15.303	48.24896N	11.65101E	485	5	Europe/Berlin
 Garbsen	Lower Saxony	20	N	63.355	52.41371N	9.5899E	50	6	Europe/Berlin
 Ganderkesee	Lower Saxony	20	N	31.141	53.03333N	8.53333E	34	5	Europe/Berlin
-Gaggenau	Baden-Wuerttemberg	20	N	29.496	48.8N	8.33333E	186	5	Europe/Berlin
+Gaggenau	Baden-Wurttemberg	20	N	29.496	48.8N	8.33333E	186	5	Europe/Berlin
 Fuessen	Bavaria	20	N	15.608	47.57143N	10.70171E	800	5	Europe/Berlin
 Furth	Bavaria	20	N	112.025	49.47593N	10.98856E	302	7	Europe/Berlin
 Fuerstenwalde	Brandenburg	20	N	33.539	52.36067N	14.06185E	44	5	Europe/Berlin
@@ -6245,19 +6402,19 @@ Frohnau	Berlin	20	N	16.571	52.63336N	13.29024E	55	5	Europe/Berlin
 Friesoythe	Lower Saxony	20	N	20.311	53.0226N	7.85764E	10	5	Europe/Berlin
 Friedrichshain Bezirk	Berlin	20	N	117.829	52.51559N	13.45482E	41	7	Europe/Berlin
 Friedrichshagen	Berlin	20	N	17.529	52.45052N	13.62463E	38	5	Europe/Berlin
-Friedrichshafen	Baden-Wuerttemberg	20	N	58.403	47.65689N	9.47554E	405	6	Europe/Berlin
+Friedrichshafen	Baden-Wurttemberg	20	N	58.403	47.65689N	9.47554E	405	6	Europe/Berlin
 Friedrichsfelde	Berlin	20	N	49.109	52.50575N	13.50812E	39	5	Europe/Berlin
 Friedrichsdorf	Hesse	20	N	24.435	50.24962N	8.64281E	202	5	Europe/Berlin
 Friedenau	Berlin	20	N	26.972	52.47133N	13.32813E	44	5	Europe/Berlin
 Friedberg	Hesse	20	N	27.484	50.33739N	8.75591E	159	5	Europe/Berlin
 Friedberg	Bavaria	20	N	29.916	48.35693N	10.98461E	517	5	Europe/Berlin
-Freudenstadt	Baden-Wuerttemberg	20	N	23.868	48.46695N	8.41371E	736	5	Europe/Berlin
+Freudenstadt	Baden-Wurttemberg	20	N	23.868	48.46695N	8.41371E	736	5	Europe/Berlin
 Freudenberg	North Rhine-Westphalia	20	N	18.601	50.89741N	7.87415E	297	5	Europe/Berlin
 Freital	Saxony	20	N	39.027	51.00166N	13.6488E	171	5	Europe/Berlin
 Freising	Bavaria	20	N	42.57	48.40351N	11.74876E	448	5	Europe/Berlin
 Freilassing	Bavaria	20	N	15.909	47.84085N	12.98114E	423	5	Europe/Berlin
-Freiburg	Baden-Wuerttemberg	20	N	215.966	47.9959N	7.85222E	279	7	Europe/Berlin
-Freiberg am Neckar	Baden-Wuerttemberg	20	N	15.235	48.93196N	9.2024E	256	5	Europe/Berlin
+Freiburg	Baden-Wurttemberg	20	N	215.966	47.9959N	7.85222E	279	7	Europe/Berlin
+Freiberg am Neckar	Baden-Wurttemberg	20	N	15.235	48.93196N	9.2024E	256	5	Europe/Berlin
 Freiberg	Saxony	20	N	43.67	50.91089N	13.33881E	412	5	Europe/Berlin
 Frechen	North Rhine-Westphalia	20	N	48.733	50.91485N	6.8118E	73	5	Europe/Berlin
 Frankfurt am Main	Hesse	20	N	650	50.11552N	8.68417E	113	8	Europe/Berlin
@@ -6270,13 +6427,13 @@ Forchheim	Bavaria	20	N	30.442	49.71754N	11.05877E	261	5	Europe/Berlin
 Floersheim	Hesse	20	N	20.023	50.01311N	8.42779E	94	5	Europe/Berlin
 Flensburg	Schleswig-Holstein	20	N	85.838	54.78431N	9.43961E	7	6	Europe/Berlin
 Finsterwalde	Brandenburg	20	N	18.922	51.63388N	13.70662E	108	5	Europe/Berlin
-Stuttgart Feuerbach	Baden-Wuerttemberg	20	N	28.046	48.80867N	9.15719E	286	5	Europe/Berlin
-Fellbach	Baden-Wuerttemberg	20	N	43.935	48.80912N	9.27697E	287	5	Europe/Berlin
+Stuttgart Feuerbach	Baden-Wurttemberg	20	N	28.046	48.80867N	9.15719E	286	5	Europe/Berlin
+Fellbach	Baden-Wurttemberg	20	N	43.935	48.80912N	9.27697E	287	5	Europe/Berlin
 Falkensee	Brandenburg	20	N	37.468	52.56014N	13.0927E	31	5	Europe/Berlin
 Eutin	Schleswig-Holstein	20	N	16.984	54.14054N	10.60751E	44	5	Europe/Berlin
 Euskirchen	North Rhine-Westphalia	20	N	54.889	50.66057N	6.78722E	164	6	Europe/Berlin
-Ettlingen	Baden-Wuerttemberg	20	N	38.942	48.94094N	8.40763E	139	5	Europe/Berlin
-Esslingen	Baden-Wuerttemberg	20	N	92.39	48.73961N	9.30473E	241	6	Europe/Berlin
+Ettlingen	Baden-Wurttemberg	20	N	38.942	48.94094N	8.40763E	139	5	Europe/Berlin
+Esslingen	Baden-Wurttemberg	20	N	92.39	48.73961N	9.30473E	241	6	Europe/Berlin
 Essen	North Rhine-Westphalia	20	N	593.085	51.45657N	7.01228E	83	8	Europe/Berlin
 Espelkamp	North Rhine-Westphalia	20	N	26.378	52.38251N	8.62127E	53	5	Europe/Berlin
 Eschweiler	North Rhine-Westphalia	20	N	55.778	50.81854N	6.27184E	142	6	Europe/Berlin
@@ -6289,7 +6446,7 @@ Erkelenz	North Rhine-Westphalia	20	N	44.65	51.07947N	6.31531E	99	5	Europe/Berlin
 Erfurt	Thuringia	20	R	203.254	50.9787N	11.03283E	195	7	Europe/Berlin
 Erftstadt	North Rhine-Westphalia	20	N	51.207	50.81481N	6.79387E	94	6	Europe/Berlin
 Erding	Bavaria	20	N	33.519	48.30603N	11.90686E	466	5	Europe/Berlin
-Eppingen	Baden-Wuerttemberg	20	N	21.179	49.13645N	8.91229E	190	5	Europe/Berlin
+Eppingen	Baden-Wurttemberg	20	N	21.179	49.13645N	8.91229E	190	5	Europe/Berlin
 Eppelborn	Saarland	20	N	18.079	49.4N	6.96667E	244	5	Europe/Berlin
 Ennigerloh	North Rhine-Westphalia	20	N	20.713	51.83843N	8.03093E	104	5	Europe/Berlin
 Ennepetal	North Rhine-Westphalia	20	N	32.607	51.29848N	7.3629E	197	5	Europe/Berlin
@@ -6297,25 +6454,25 @@ Enger	North Rhine-Westphalia	20	N	19.852	52.14063N	8.55772E	98	5	Europe/Berlin
 Engelskirchen	North Rhine-Westphalia	20	N	20.786	50.98854N	7.41391E	144	5	Europe/Berlin
 Emsdetten	North Rhine-Westphalia	20	N	35.582	52.1734N	7.52781E	44	5	Europe/Berlin
 Emmerich	North Rhine-Westphalia	20	N	30.869	51.83933N	6.24792E	19	5	Europe/Berlin
-Emmendingen	Baden-Wuerttemberg	20	N	27.383	48.12096N	7.85359E	207	5	Europe/Berlin
+Emmendingen	Baden-Wurttemberg	20	N	27.383	48.12096N	7.85359E	207	5	Europe/Berlin
 Emden	Lower Saxony	20	N	51.526	53.36745N	7.20778E	6	6	Europe/Berlin
 Eltville	Hesse	20	N	16.845	50.02858N	8.11754E	99	5	Europe/Berlin
 Elsdorf	North Rhine-Westphalia	20	N	21.967	50.93739N	6.56828E	78	5	Europe/Berlin
 Elmshorn	Schleswig-Holstein	20	N	48.703	53.75396N	9.65339E	6	5	Europe/Berlin
-Ellwangen	Baden-Wuerttemberg	20	N	24.477	48.96164N	10.13173E	443	5	Europe/Berlin
+Ellwangen	Baden-Wurttemberg	20	N	24.477	48.96164N	10.13173E	443	5	Europe/Berlin
 Eitorf	North Rhine-Westphalia	20	N	19.761	50.76667N	7.45E	102	5	Europe/Berlin
-Eislingen	Baden-Wuerttemberg	20	N	21.243	48.69515N	9.70676E	338	5	Europe/Berlin
+Eislingen	Baden-Wurttemberg	20	N	21.243	48.69515N	9.70676E	338	5	Europe/Berlin
 Eisenhuettenstadt	Brandenburg	20	N	32.052	52.15N	14.65E	41	5	Europe/Berlin
 Eisenach	Thuringia	20	N	43.846	50.9807N	10.31522E	215	5	Europe/Berlin
 Einbeck	Lower Saxony	20	N	27.931	51.82018N	9.86961E	115	5	Europe/Berlin
 Eilenburg	Saxony	20	N	17.609	51.45984N	12.63338E	103	5	Europe/Berlin
-Ehingen	Baden-Wuerttemberg	20	N	26.398	48.28259N	9.72749E	518	5	Europe/Berlin
-Eggenstein-Leopoldshafen	Baden-Wuerttemberg	20	N	15.189	49.09006N	8.39879E	110	5	Europe/Berlin
+Ehingen	Baden-Wurttemberg	20	N	26.398	48.28259N	9.72749E	518	5	Europe/Berlin
+Eggenstein-Leopoldshafen	Baden-Wurttemberg	20	N	15.189	49.09006N	8.39879E	110	5	Europe/Berlin
 Edewecht	Lower Saxony	20	N	20.658	53.12699N	7.98406E	8	5	Europe/Berlin
 Eckernfoerde	Schleswig-Holstein	20	N	23.383	54.46854N	9.83824E	4	5	Europe/Berlin
 Eberswalde	Brandenburg	20	N	41.98	52.83492N	13.81951E	14	5	Europe/Berlin
-Ebersbach an der Fils	Baden-Wuerttemberg	20	N	15.919	48.716N	9.5236E	280	5	Europe/Berlin
-Eberbach	Baden-Wuerttemberg	20	N	15.624	49.4668N	8.99016E	144	5	Europe/Berlin
+Ebersbach an der Fils	Baden-Wurttemberg	20	N	15.919	48.716N	9.5236E	280	5	Europe/Berlin
+Eberbach	Baden-Wurttemberg	20	N	15.624	49.4668N	8.99016E	144	5	Europe/Berlin
 Duesseldorf	North Rhine-Westphalia	20	R	573.057	51.22172N	6.77616E	45	8	Europe/Berlin
 Dueren	North Rhine-Westphalia	20	N	93.44	50.80434N	6.49299E	142	6	Europe/Berlin
 Duelmen	North Rhine-Westphalia	20	N	47.495	51.83149N	7.28075E	72	5	Europe/Berlin
@@ -6328,9 +6485,9 @@ Dortmund	North Rhine-Westphalia	20	N	588.462	51.51494N	7.466E	96	8	Europe/Berlin
 Dorsten	North Rhine-Westphalia	20	N	79.981	51.66166N	6.96514E	36	6	Europe/Berlin
 Dormagen	North Rhine-Westphalia	20	N	63.582	51.09683N	6.83167E	45	6	Europe/Berlin
 Donauwoerth	Bavaria	20	N	18.364	48.71804N	10.7793E	410	5	Europe/Berlin
-Donaueschingen	Baden-Wuerttemberg	20	N	21.604	47.95514N	8.49707E	701	5	Europe/Berlin
+Donaueschingen	Baden-Wurttemberg	20	N	21.604	47.95514N	8.49707E	701	5	Europe/Berlin
 Doebeln	Saxony	20	N	21.338	51.1221N	13.11027E	168	5	Europe/Berlin
-Ditzingen	Baden-Wuerttemberg	20	N	24.149	48.82672N	9.06703E	300	5	Europe/Berlin
+Ditzingen	Baden-Wurttemberg	20	N	24.149	48.82672N	9.06703E	300	5	Europe/Berlin
 Dinslaken	North Rhine-Westphalia	20	N	70.573	51.56227N	6.7434E	34	6	Europe/Berlin
 Dingolfing	Bavaria	20	N	18.805	48.64244N	12.49283E	357	5	Europe/Berlin
 Dillingen an der Donau	Bavaria	20	N	18.734	48.58153N	10.49527E	436	5	Europe/Berlin
@@ -6353,7 +6510,7 @@ Dahlem	Berlin	20	N	15.737	52.4581N	13.28702E	54	5	Europe/Berlin
 Dachau	Bavaria	20	N	39.74	48.26N	11.43402E	502	5	Europe/Berlin
 Cuxhaven	Lower Saxony	20	N	52.677	53.86828N	8.69902E	3	6	Europe/Berlin
 Crimmitschau	Saxony	20	N	22.442	50.81644N	12.39045E	236	5	Europe/Berlin
-Crailsheim	Baden-Wuerttemberg	20	N	32.262	49.13444N	10.07193E	409	5	Europe/Berlin
+Crailsheim	Baden-Wurttemberg	20	N	32.262	49.13444N	10.07193E	409	5	Europe/Berlin
 Cottbus	Brandenburg	20	N	84.754	51.75769N	14.32888E	80	6	Europe/Berlin
 Coswig	Saxony	20	N	22.304	51.13204N	13.58312E	116	5	Europe/Berlin
 Coesfeld	North Rhine-Westphalia	20	N	36.631	51.94349N	7.16809E	83	5	Europe/Berlin
@@ -6365,7 +6522,7 @@ Charlottenburg Bezirk	Berlin	20	N	119.857	52.51667N	13.28333E	46	7	Europe/Berlin
 Cham	Bavaria	20	N	17.314	49.22565N	12.65501E	396	5	Europe/Berlin
 Celle	Lower Saxony	20	N	71.01	52.62264N	10.08047E	45	6	Europe/Berlin
 Castrop-Rauxel	North Rhine-Westphalia	20	N	77.924	51.55657N	7.31155E	83	6	Europe/Berlin
-Calw	Baden-Wuerttemberg	20	N	23.74	48.71419N	8.74031E	339	5	Europe/Berlin
+Calw	Baden-Wurttemberg	20	N	23.74	48.71419N	8.74031E	339	5	Europe/Berlin
 Buxtehude	Lower Saxony	20	N	38.192	53.46716N	9.68636E	15	5	Europe/Berlin
 Butzbach	Hesse	20	N	25.156	50.43395N	8.67122E	206	5	Europe/Berlin
 Buerstadt	Hesse	20	N	15.348	49.64266N	8.45936E	95	5	Europe/Berlin
@@ -6375,21 +6532,21 @@ Burgdorf	Lower Saxony	20	N	30.899	52.44628N	10.0064E	55	5	Europe/Berlin
 Burg bei Magdeburg	Saxony-Anhalt	20	N	24.958	52.27152N	11.85493E	44	5	Europe/Berlin
 Bueren	North Rhine-Westphalia	20	N	22.263	51.55109N	8.55956E	243	5	Europe/Berlin
 Buende	North Rhine-Westphalia	20	N	45.376	52.19837N	8.58644E	74	5	Europe/Berlin
-Buhl	Baden-Wuerttemberg	20	N	29.193	48.69676N	8.13523E	138	5	Europe/Berlin
+Buhl	Baden-Wurttemberg	20	N	29.193	48.69676N	8.13523E	138	5	Europe/Berlin
 Buedingen	Hesse	20	N	21.579	50.29013N	9.1114E	136	5	Europe/Berlin
 Buckow	Berlin	20	N	38.474	52.432N	13.46018E	44	5	Europe/Berlin
 Bueckeburg	Lower Saxony	20	N	19.351	52.26065N	9.04939E	68	5	Europe/Berlin
 Buchholz in der Nordheide	Lower Saxony	20	N	37.404	53.32641N	9.86812E	75	5	Europe/Berlin
 Buchholz	Berlin	20	N	19.429	52.60242N	13.43019E	46	5	Europe/Berlin
-Buchen in Odenwald	Baden-Wuerttemberg	20	N	17.773	49.52416N	9.32293E	344	5	Europe/Berlin
+Buchen in Odenwald	Baden-Wurttemberg	20	N	17.773	49.52416N	9.32293E	344	5	Europe/Berlin
 Bruehl	North Rhine-Westphalia	20	N	44.137	50.82928N	6.90499E	68	5	Europe/Berlin
 Bruggen	North Rhine-Westphalia	20	N	16.105	51.24053N	6.18376E	44	5	Europe/Berlin
 Bruckmuhl	Bavaria	20	N	15.851	47.87859N	11.91098E	514	5	Europe/Berlin
-Bruchsal	Baden-Wuerttemberg	20	N	45.364	49.12426N	8.59804E	118	5	Europe/Berlin
+Bruchsal	Baden-Wurttemberg	20	N	45.364	49.12426N	8.59804E	118	5	Europe/Berlin
 Bruchkoebel	Hesse	20	N	20.892	50.17853N	8.92315E	116	5	Europe/Berlin
 Britz	Berlin	20	N	39.488	52.44293N	13.43388E	44	5	Europe/Berlin
 Brilon	North Rhine-Westphalia	20	N	27.03	51.39462N	8.57146E	443	5	Europe/Berlin
-Bretten	Baden-Wuerttemberg	20	N	28.144	49.03685N	8.70745E	183	5	Europe/Berlin
+Bretten	Baden-Wurttemberg	20	N	28.144	49.03685N	8.70745E	183	5	Europe/Berlin
 Bremervoerde	Lower Saxony	20	N	19.268	53.48458N	9.14306E	8	5	Europe/Berlin
 Bremerhaven	Bremen	20	N	113.557	53.53615N	8.59298E	5	7	Europe/Berlin
 Bremen	Bremen	20	R	546.501	53.07582N	8.80717E	17	8	Europe/Berlin
@@ -6398,7 +6555,7 @@ Brandenburg an der Havel	Brandenburg	20	N	59.826	52.41667N	12.55E	57	6	Europe/Be
 Bramsche	Lower Saxony	20	N	31.394	52.40881N	7.97288E	62	5	Europe/Berlin
 Brakel	North Rhine-Westphalia	20	N	17.808	51.7175N	9.18596E	136	5	Europe/Berlin
 Brake (Unterweser)	Lower Saxony	20	N	16.15	53.33333N	8.48333E	0	5	Europe/Berlin
-Brackenheim	Baden-Wuerttemberg	20	N	15.083	49.07787N	9.06601E	202	5	Europe/Berlin
+Brackenheim	Baden-Wurttemberg	20	N	15.083	49.07787N	9.06601E	202	5	Europe/Berlin
 Bottrop	North Rhine-Westphalia	20	N	119.909	51.52392N	6.9285E	55	7	Europe/Berlin
 Bornheim	North Rhine-Westphalia	20	N	48.523	50.76313N	6.99089E	62	5	Europe/Berlin
 Borna	Saxony	20	N	18.806	51.12416N	12.49639E	142	5	Europe/Berlin
@@ -6409,17 +6566,17 @@ Bonen	North Rhine-Westphalia	20	N	19.393	51.6N	7.76667E	73	5	Europe/Berlin
 Bogenhausen	Bavaria	20	N	77.542	48.15221N	11.61585E	521	6	Europe/Berlin
 Bochum	North Rhine-Westphalia	20	N	385.729	51.48165N	7.21648E	102	7	Europe/Berlin
 Bocholt	North Rhine-Westphalia	20	N	73.943	51.83879N	6.61531E	31	6	Europe/Berlin
-Boeblingen	Baden-Wuerttemberg	20	N	46.282	48.68212N	9.01171E	442	5	Europe/Berlin
+Boeblingen	Baden-Wurttemberg	20	N	46.282	48.68212N	9.01171E	442	5	Europe/Berlin
 Bobingen	Bavaria	20	N	16.682	48.27091N	10.8339E	521	5	Europe/Berlin
 Blomberg	North Rhine-Westphalia	20	N	17.183	51.94331N	9.09067E	184	5	Europe/Berlin
 Blieskastel	Saarland	20	N	23.212	49.23724N	7.25617E	242	5	Europe/Berlin
 Blankenburg	Saxony-Anhalt	20	N	15.963	51.79025N	10.95509E	229	5	Europe/Berlin
 Bitterfeld-Wolfen	Saxony-Anhalt	20	N	15.608	51.62355N	12.32395E	79	5	Europe/Berlin
 Bingen am Rhein	Rheinland-Pfalz	20	N	24.657	49.96675N	7.8992E	115	5	Europe/Berlin
-Bietigheim-Bissingen	Baden-Wuerttemberg	20	N	41.769	48.94407N	9.11755E	226	5	Europe/Berlin
+Bietigheim-Bissingen	Baden-Wurttemberg	20	N	41.769	48.94407N	9.11755E	226	5	Europe/Berlin
 Biesdorf	Berlin	20	N	24.988	52.50906N	13.5534E	44	5	Europe/Berlin
 Bielefeld	North Rhine-Westphalia	20	N	331.906	52.03333N	8.53333E	111	7	Europe/Berlin
-Biberach an der Riss	Baden-Wuerttemberg	20	N	32.333	48.09345N	9.79053E	535	5	Europe/Berlin
+Biberach an der Riss	Baden-Wurttemberg	20	N	32.333	48.09345N	9.79053E	535	5	Europe/Berlin
 Bexbach	Saarland	20	N	19.115	49.34615N	7.25527E	250	5	Europe/Berlin
 Beverungen	North Rhine-Westphalia	20	N	15.266	51.66801N	9.37417E	103	5	Europe/Berlin
 Bernburg	Saxony-Anhalt	20	N	32.113	51.79464N	11.7401E	86	5	Europe/Berlin
@@ -6440,12 +6597,12 @@ Baunatal	Hesse	20	N	28.173	51.25182N	9.40747E	216	5	Europe/Berlin
 Baumschulenweg	Berlin	20	N	17.186	52.46583N	13.48523E	37	5	Europe/Berlin
 Bassum	Lower Saxony	20	N	16.191	52.85059N	8.72791E	43	5	Europe/Berlin
 Bamberg	Bavaria	20	N	70.047	49.89873N	10.90067E	243	6	Europe/Berlin
-Balingen	Baden-Wuerttemberg	20	N	34.414	48.27525N	8.85464E	512	5	Europe/Berlin
-Baiersbronn	Baden-Wuerttemberg	20	N	16.248	48.50318N	8.37699E	598	5	Europe/Berlin
+Balingen	Baden-Wurttemberg	20	N	34.414	48.27525N	8.85464E	512	5	Europe/Berlin
+Baiersbronn	Baden-Wurttemberg	20	N	16.248	48.50318N	8.37699E	598	5	Europe/Berlin
 Baesweiler	North Rhine-Westphalia	20	N	27.834	50.90964N	6.18874E	117	5	Europe/Berlin
 Bad Zwischenahn	Lower Saxony	20	N	27.55	53.18333N	8E	9	5	Europe/Berlin
 Bad Wildungen	Hesse	20	N	18.037	51.11963N	9.12475E	276	5	Europe/Berlin
-Bad Waldsee	Baden-Wuerttemberg	20	N	19.84	47.92027N	9.7549E	590	5	Europe/Berlin
+Bad Waldsee	Baden-Wurttemberg	20	N	19.84	47.92027N	9.7549E	590	5	Europe/Berlin
 Bad Vilbel	Hesse	20	N	30.736	50.17866N	8.73756E	117	5	Europe/Berlin
 Bad Toelz	Bavaria	20	N	17.434	47.76111N	11.5589E	662	5	Europe/Berlin
 Bad Soden am Taunus	Hesse	20	N	22.871	50.1408N	8.50449E	139	5	Europe/Berlin
@@ -6453,9 +6610,9 @@ Bad Segeberg	Schleswig-Holstein	20	N	16.052	53.94313N	10.30215E	40	5	Europe/Berl
 Bad Schwartau	Schleswig-Holstein	20	N	19.722	53.91887N	10.69691E	11	5	Europe/Berlin
 Bad Salzungen	Thuringia	20	N	16.41	50.81342N	10.2361E	250	5	Europe/Berlin
 Bad Salzuflen	North Rhine-Westphalia	20	N	54.899	52.0862N	8.74434E	82	6	Europe/Berlin
-Bad Sackingen	Baden-Wuerttemberg	20	N	16.549	47.55371N	7.94612E	290	5	Europe/Berlin
+Bad Sackingen	Baden-Wurttemberg	20	N	16.549	47.55371N	7.94612E	290	5	Europe/Berlin
 Bad Reichenhall	Bavaria	20	N	16.91	47.72947N	12.87819E	470	5	Europe/Berlin
-Bad Rappenau	Baden-Wuerttemberg	20	N	20.581	49.23848N	9.1018E	232	5	Europe/Berlin
+Bad Rappenau	Baden-Wurttemberg	20	N	20.581	49.23848N	9.1018E	232	5	Europe/Berlin
 Bad Pyrmont	Lower Saxony	20	N	21.629	51.98589N	9.25246E	113	5	Europe/Berlin
 Bad Oldesloe	Schleswig-Holstein	20	N	24.322	53.81167N	10.37417E	10	5	Europe/Berlin
 Bad Oeynhausen	North Rhine-Westphalia	20	N	49.513	52.20699N	8.80365E	58	5	Europe/Berlin
@@ -6464,7 +6621,7 @@ Bad Neuenahr-Ahrweiler	Rheinland-Pfalz	20	N	27.823	50.54322N	7.1113E	101	5	Europ
 Bad Nauheim	Hesse	20	N	30.291	50.36463N	8.73859E	157	5	Europe/Berlin
 Bad Muenstereifel	North Rhine-Westphalia	20	N	19.051	50.55667N	6.76424E	283	5	Europe/Berlin
 Bad Muender am Deister	Lower Saxony	20	N	18.726	52.19551N	9.46421E	118	5	Europe/Berlin
-Bad Mergentheim	Baden-Wuerttemberg	20	N	22.472	49.4925N	9.77361E	211	5	Europe/Berlin
+Bad Mergentheim	Baden-Wurttemberg	20	N	22.472	49.4925N	9.77361E	211	5	Europe/Berlin
 Bad Lippspringe	North Rhine-Westphalia	20	N	15.175	51.78333N	8.81683E	144	5	Europe/Berlin
 Bad Langensalza	Thuringia	20	N	18.183	51.10771N	10.646E	192	5	Europe/Berlin
 Bad Kreuznach	Rheinland-Pfalz	20	N	43.213	49.8414N	7.86713E	109	5	Europe/Berlin
@@ -6474,13 +6631,13 @@ Bad Homburg vor der Hoehe	Hesse	20	N	51.859	50.22683N	8.61816E	186	6	Europe/Berl
 Bad Hersfeld	Hesse	20	N	30.725	50.87197N	9.70891E	209	5	Europe/Berlin
 Bad Harzburg	Lower Saxony	20	N	22.954	51.88268N	10.56157E	262	5	Europe/Berlin
 Bad Essen	Lower Saxony	20	N	15.732	52.31667N	8.33333E	132	5	Europe/Berlin
-Baden-Baden	Baden-Wuerttemberg	20	N	55.449	48.7606N	8.23975E	169	6	Europe/Berlin
+Baden-Baden	Baden-Wurttemberg	20	N	55.449	48.7606N	8.23975E	169	6	Europe/Berlin
 Bad Duerkheim	Rheinland-Pfalz	20	N	18.698	49.4618N	8.17236E	133	5	Europe/Berlin
 Bad Driburg	North Rhine-Westphalia	20	N	19.553	51.73297N	9.01969E	217	5	Europe/Berlin
 Bad Berleburg	North Rhine-Westphalia	20	N	20.757	51.05224N	8.39227E	420	5	Europe/Berlin
 Bad Bentheim	Lower Saxony	20	N	15.508	52.30066N	7.15763E	60	5	Europe/Berlin
 Bad Aibling	Bavaria	20	N	17.672	47.8638N	12.01055E	482	5	Europe/Berlin
-Backnang	Baden-Wuerttemberg	20	N	35.778	48.94743N	9.43718E	245	5	Europe/Berlin
+Backnang	Baden-Wurttemberg	20	N	35.778	48.94743N	9.43718E	245	5	Europe/Berlin
 Babenhausen	Hesse	20	N	16.575	49.96519N	8.95129E	127	5	Europe/Berlin
 Aurich	Lower Saxony	20	N	40.319	53.46919N	7.48232E	10	5	Europe/Berlin
 Augsburg	Bavaria	20	N	259.196	48.37154N	10.89851E	489	7	Europe/Berlin
@@ -6509,33 +6666,33 @@ Alsfeld	Hesse	20	N	17.771	50.75185N	9.27082E	273	5	Europe/Berlin
 Alsdorf	North Rhine-Westphalia	20	N	46.34	50.87673N	6.16399E	167	5	Europe/Berlin
 Alfter	North Rhine-Westphalia	20	N	21.814	50.73333N	7.01667E	85	5	Europe/Berlin
 Alfeld	Lower Saxony	20	N	19.138	51.98382N	9.81989E	91	5	Europe/Berlin
-Albstadt	Baden-Wuerttemberg	20	N	46.664	48.21644N	9.02596E	733	5	Europe/Berlin
+Albstadt	Baden-Wurttemberg	20	N	46.664	48.21644N	9.02596E	733	5	Europe/Berlin
 Aichach	Bavaria	20	N	21.042	48.45755N	11.13413E	453	5	Europe/Berlin
 Ahrensburg	Schleswig-Holstein	20	N	30.103	53.67515N	10.22593E	44	5	Europe/Berlin
 Ahlen	North Rhine-Westphalia	20	N	55.28	51.76338N	7.8887E	82	6	Europe/Berlin
 Ahaus	North Rhine-Westphalia	20	N	38.165	52.07936N	7.01344E	50	5	Europe/Berlin
 Adlershof	Berlin	20	N	15.294	52.43548N	13.54825E	37	5	Europe/Berlin
 Achim	Lower Saxony	20	N	30.013	53.01416N	9.0263E	14	5	Europe/Berlin
-Achern	Baden-Wuerttemberg	20	N	24.478	48.63115N	8.07607E	145	5	Europe/Berlin
-Aalen	Baden-Wuerttemberg	20	N	67.085	48.83777N	10.0933E	433	6	Europe/Berlin
+Achern	Baden-Wurttemberg	20	N	24.478	48.63115N	8.07607E	145	5	Europe/Berlin
+Aalen	Baden-Wurttemberg	20	N	67.085	48.83777N	10.0933E	433	6	Europe/Berlin
 Vellmar	Hesse	20	N	18.623	51.35806N	9.47974E	178	5	Europe/Berlin
 Aachen	North Rhine-Westphalia	20	N	265.208	50.77664N	6.08342E	178	7	Europe/Berlin
 Moerfelden-Walldorf	Hesse	20	N	32.753	49.99472N	8.58361E	109	5	Europe/Berlin
 Riedstadt	Hesse	20	N	21.362	49.83411N	8.49621E	93	5	Europe/Berlin
-Lauda-Konigshofen	Baden-Wuerttemberg	20	N	15.278	49.56526N	9.70816E	195	5	Europe/Berlin
-Filderstadt	Baden-Wuerttemberg	20	N	43.55	48.65698N	9.22049E	393	5	Europe/Berlin
-Ostfildern	Baden-Wuerttemberg	20	N	33.598	48.72704N	9.24954E	409	5	Europe/Berlin
+Lauda-Konigshofen	Baden-Wurttemberg	20	N	15.278	49.56526N	9.70816E	195	5	Europe/Berlin
+Filderstadt	Baden-Wurttemberg	20	N	43.55	48.65698N	9.22049E	393	5	Europe/Berlin
+Ostfildern	Baden-Wurttemberg	20	N	33.598	48.72704N	9.24954E	409	5	Europe/Berlin
 Rodgau	Hesse	20	N	43.315	50.02627N	8.88588E	129	5	Europe/Berlin
 Gropiusstadt	Berlin	20	N	36.052	52.425N	13.46667E	52	5	Europe/Berlin
 Seeheim-Jugenheim	Hesse	20	N	16.395	49.765N	8.65194E	170	5	Europe/Berlin
 Charlottenburg-Nord	Berlin	20	N	17.942	52.53048N	13.29371E	28	5	Europe/Berlin
 Mitte	Berlin	20	N	81.205	52.52003N	13.40489E	48	6	Europe/Berlin
-Rheinstetten	Baden-Wuerttemberg	20	N	20.378	48.9685N	8.30704E	114	5	Europe/Berlin
+Rheinstetten	Baden-Wurttemberg	20	N	20.378	48.9685N	8.30704E	114	5	Europe/Berlin
 Altstadt Sud	North Rhine-Westphalia	20	N	27.515	50.93331N	6.95954E	52	5	Europe/Berlin
 Altstadt Nord	North Rhine-Westphalia	20	N	17.922	50.93893N	6.95752E	59	5	Europe/Berlin
 Neuehrenfeld	North Rhine-Westphalia	20	N	23.621	50.95753N	6.93611E	49	5	Europe/Berlin
 Bilderstoeckchen	North Rhine-Westphalia	20	N	15.43	50.96983N	6.92997E	51	5	Europe/Berlin
-Stuttgart-Ost	Baden-Wuerttemberg	20	N	47.5	48.78363N	9.21032E	259	5	Europe/Berlin
+Stuttgart-Ost	Baden-Wurttemberg	20	N	47.5	48.78363N	9.21032E	259	5	Europe/Berlin
 Bochum-Hordel	North Rhine-Westphalia	20	N	380	51.50168N	7.1756E	57	7	Europe/Berlin
 St. Pauli	Hamburg	20	N	27.612	53.557N	9.964E	17	5	Europe/Berlin
 Gallus	Hesse	20	N	39.13	50.10038N	8.6295E	101	5	Europe/Berlin
@@ -6563,10 +6720,10 @@ Muelheim	North Rhine-Westphalia	20	N	41.711	50.96639N	7.00384E	54	5	Europe/Berli
 Gartenstadt	Rheinland-Pfalz	20	N	17.745	49.45937N	8.40377E	96	5	Europe/Berlin
 Duesseldorf-Pempelfort	North Rhine-Westphalia	20	N	28.941	51.23812N	6.78678E	43	5	Europe/Berlin
 Burglesum	Bremen	20	N	33	53.16532N	8.68873E	8	5	Europe/Berlin
-Sachsenheim	Baden-Wuerttemberg	20	N	18.594	48.96N	9.06472E	240	5	Europe/Berlin
-Petershausen-West	Baden-Wuerttemberg	20	N	16.021	47.67411N	9.17787E	406	5	Europe/Berlin
+Sachsenheim	Baden-Wurttemberg	20	N	18.594	48.96N	9.06472E	240	5	Europe/Berlin
+Petershausen-West	Baden-Wurttemberg	20	N	16.021	47.67411N	9.17787E	406	5	Europe/Berlin
 Kronberg Tal	Hesse	20	N	17.55	50.17929N	8.5037E	240	5	Europe/Berlin
-Remseck am Neckar	Baden-Wuerttemberg	20	N	26.467	48.87213N	9.27334E	211	5	Europe/Berlin
+Remseck am Neckar	Baden-Wurttemberg	20	N	26.467	48.87213N	9.27334E	211	5	Europe/Berlin
 Tadjourah	Tadjourah	02	R	22.193	11.78778N	42.88222E	3	5	Africa/Djibouti
 Obock	Obock	02	R	17.776	11.96693N	43.28835E	13	5	Africa/Djibouti
 Djibouti	Djibouti	02	C	623.891	11.58901N	43.14503E	6	8	Africa/Djibouti
@@ -7887,6 +8044,7 @@ Kouvola	Kymenlaakso	18	R	31.133	60.86667N	26.7E	81	5	Europe/Helsinki
 Kotka	Kymenlaakso	18	N	54.616	60.4664N	26.94582E	1	6	Europe/Helsinki
 Korsholm	Ostrobothnia	18	N	17.176	63.11418N	21.68216E	15	5	Europe/Helsinki
 Kokkola	Central Ostrobothnia	18	R	35.586	63.83847N	23.13066E	9	5	Europe/Helsinki
+Klaukkala	Uusimaa	18	N	21.019	60.38244N	24.751E	52	5	Europe/Helsinki
 Kerava	Uusimaa	18	N	31.347	60.40338N	25.105E	54	5	Europe/Helsinki
 Kemi	Lapland	18	N	22.641	65.73641N	24.56371E	16	5	Europe/Helsinki
 Karhula	Kymenlaakso	18	N	22.867	60.52156N	26.93125E	4	5	Europe/Helsinki
@@ -9732,14 +9890,25 @@ Bafata	Bafata	05	R	22.521	12.16583N	14.66167W	20	5	Africa/Bissau
 New Amsterdam	East Berbice-Corentyne	08	R	35.039	6.24793N	57.5171W	7	5	America/Guyana
 Linden	Upper Demerara-Berbice	08	R	44.69	6.00809N	58.30714W	4	5	America/Guyana
 Georgetown	Demerara-Mahaica	08	C	235.017	6.80448N	58.15527W	3	7	America/Guyana
-Tsuen Wan	Tsuen Wan	13	R	288.728	22.37137N	114.11329E	1	7	Asia/Hong_Kong
-Yuen Long Kau Hui	Yuen Long	13	R	141.9	22.45N	114.03333E	4	7	Asia/Hong_Kong
-Tuen Mun	Tuen Mun	13	R	16.94	22.39175N	113.97157E	7	5	Asia/Hong_Kong
-Tai Po	Tai Po	13	R	16.302	22.45007N	114.16877E	22	5	Asia/Hong_Kong
-Sha Tin	Sha Tin	13	R	21.559	22.38333N	114.18333E	115	5	Asia/Hong_Kong
-Kowloon	Kowloon City	13	R	2019.533	22.31667N	114.18333E	92	9	Asia/Hong_Kong
+Tsuen Wan	Tsuen Wan	13	R	299.4	22.37137N	114.11329E	1	7	Asia/Hong_Kong
+Yuen Long Kau Hui	Yuen Long	13	R	169.6	22.45N	114.03333E	4	7	Asia/Hong_Kong
+Tuen Mun	Tuen Mun	13	R	507.9	22.39175N	113.97157E	7	8	Asia/Hong_Kong
+Tsing Yi Town	Kwai Tsing	13	N	182.1	22.35N	114.1E	71	7	Asia/Hong_Kong
+Tseung Kwan O	Sai Kung	13	N	412.9	22.32789N	114.24992E	19	7	Asia/Hong_Kong
+Tin Shui Wai	Yuen Long	13	N	282.4	22.45679N	114.00234E	10	7	Asia/Hong_Kong
+Tai Po	Tai Po	13	R	274.1	22.45007N	114.16877E	22	7	Asia/Hong_Kong
+Sha Tin	Sha Tin	13	R	495.2	22.38333N	114.18333E	115	7	Asia/Hong_Kong
+Sai Kung	Sai Kung	13	R	35.8	22.38333N	114.26667E	54	5	Asia/Hong_Kong
+Pok Fu Lam	Southern	13	N	77.1	22.26861N	114.12924E	117	6	Asia/Hong_Kong
+Ping Shan	Yuen Long	13	N	45.4	22.44111N	114.00608E	3	5	Asia/Hong_Kong
+Ma On Shan	Sha Tin	13	N	215.2	22.40613N	114.24079E	217	7	Asia/Hong_Kong
+Kwai Chung	Tsuen Wan	13	N	331.6	22.36828N	114.13877E	84	7	Asia/Hong_Kong
+Kowloon	Kowloon City	13	R	2303.1	22.31667N	114.18333E	92	9	Asia/Hong_Kong
 Hong Kong	Central and Western	13	C	7482.5	22.27832N	114.17469E	60	9	Asia/Hong_Kong
-Tung Chung	Islands	13	N	45	22.28783N	113.94243E	45	5	Asia/Hong_Kong
+Aberdeen	Southern	13	N	157.4	22.24802N	114.15289E	19	7	Asia/Hong_Kong
+Fanling	North	13	N	263.2	22.49487N	114.13949E	17	7	Asia/Hong_Kong
+Victoria		13	N	956.8	22.2875N	114.14417E	31	8	Asia/Hong_Kong
+Tung Chung	Islands	13	N	114.1	22.28783N	113.94243E	45	7	Asia/Hong_Kong
 Puerto Cortez	Cortes	07	N	48.013	15.82562N	87.92968W	10	5	America/Tegucigalpa
 Yoro	Yoro	07	R	15.774	15.1375N	87.12778W	648	5	America/Tegucigalpa
 Villanueva	Cortes	07	N	31.571	15.31476N	87.99383W	85	5	America/Tegucigalpa
@@ -10230,6 +10399,7 @@ Ciputat	West Java	14	N	207.858	6.2375S	106.69556E	23	7	Asia/Jakarta
 Cimahi	West Java	14	N	493.698	6.87222S	107.5425E	764	7	Asia/Jakarta
 Cileunyi	West Java	14	N	111.476	6.93889S	107.75278E	703	7	Asia/Jakarta
 Cileungsir	West Java	14	N	202.19	6.39472S	106.95917E	78	7	Asia/Jakarta
+Cilacap	Central Java	14	N	256.996	7.72639S	109.00944E	10	7	Asia/Jakarta
 Cikarang	West Java	14	N	106.479	6.26111S	107.15278E	17	7	Asia/Jakarta
 Cikampek	West Java	14	N	145.62	6.41972S	107.45583E	61	7	Asia/Jakarta
 Cicurug	West Java	14	N	88.965	6.78139S	106.7825E	502	6	Asia/Jakarta
@@ -10359,10 +10529,10 @@ Tel Aviv	Tel Aviv	16	R	432.892	32.08088N	34.78057E	15	7	Asia/Jerusalem
 maalot Tarshiha	Northern District	16	N	21.836	33.01667N	35.26667E	484	5	Asia/Jerusalem
 Tamra	Northern District	16	N	25.917	32.85301N	35.1987E	92	5	Asia/Jerusalem
 Shefar'am	Northern District	16	N	42.137	32.80583N	35.16895E	137	5	Asia/Jerusalem
-Sederot	Southern District	16	N	27.635	31.525N	34.59693E	90	5	Asia/Jerusalem
+Sderot	Southern District	16	N	27.635	31.525N	34.59693E	90	5	Asia/Jerusalem
 Sakhnin	Northern District	16	N	31.702	32.86422N	35.29707E	236	5	Asia/Jerusalem
 Rosh Ha'Ayin	Central District	16	N	61.801	32.09556N	34.95664E	62	6	Asia/Jerusalem
-Rishon LeZiyyon	Central District	16	N	220.492	31.97102N	34.78939E	56	7	Asia/Jerusalem
+RishonLeTsiyyon	Central District	16	N	220.492	31.97102N	34.78939E	56	7	Asia/Jerusalem
 Rehovot	Central District	16	N	143.904	31.89421N	34.81199E	47	7	Asia/Jerusalem
 Ramla	Central District	16	R	63.86	31.92923N	34.86563E	83	6	Asia/Jerusalem
 Ramat HaSharon	Tel Aviv	16	N	47.245	32.14613N	34.8394E	68	5	Asia/Jerusalem
@@ -10370,14 +10540,14 @@ Ramat Gan	Tel Aviv	16	N	163.301	32.08227N	34.81065E	57	7	Asia/Jerusalem
 Ra'anana	Central District	16	N	75.421	32.1836N	34.87386E	49	6	Asia/Jerusalem
 Qiryat Yam	Haifa	16	N	39.897	32.84966N	35.06973E	9	5	Asia/Jerusalem
 Qiryat Tiv'on	Haifa	16	N	18.13	32.71618N	35.12494E	154	5	Asia/Jerusalem
-Qiryat Shemona	Northern District	16	N	22.512	33.20733N	35.57212E	124	5	Asia/Jerusalem
-Qiryat Mozqin	Haifa	16	N	43.303	32.83706N	35.0776E	10	5	Asia/Jerusalem
+QiryatShmona	Northern District	16	N	22.512	33.20733N	35.57212E	124	5	Asia/Jerusalem
+QiryatMotsqin	Haifa	16	N	43.303	32.83706N	35.0776E	10	5	Asia/Jerusalem
 Qiryat Mal'akhi	Southern District	16	N	23.819	31.72888N	34.74632E	68	5	Asia/Jerusalem
 Kiryat Gat	Southern District	16	N	57.105	31.60998N	34.76422E	133	6	Asia/Jerusalem
 Qiryat Bialik	Haifa	16	N	40.231	32.8275N	35.08583E	12	5	Asia/Jerusalem
 Qiryat Ata	Haifa	16	N	59.03	32.81149N	35.11323E	46	6	Asia/Jerusalem
 Qalansuwa	Central District	16	N	16.898	32.28493N	34.98106E	39	5	Asia/Jerusalem
-Petah Tiqwa	Central District	16	N	247.956	32.08707N	34.88747E	54	7	Asia/Jerusalem
+PetahTiqva	Central District	16	N	247.956	32.08707N	34.88747E	54	7	Asia/Jerusalem
 Or Yehuda	Tel Aviv	16	N	36.813	32.02923N	34.85788E	33	5	Asia/Jerusalem
 Or Akiva	Haifa	16	N	18.972	32.5064N	34.92087E	17	5	Asia/Jerusalem
 Ofaqim	Southern District	16	N	30.662	31.3141N	34.62025E	137	5	Asia/Jerusalem
@@ -10389,11 +10559,11 @@ Nazerat 'Illit	Northern District	16	N	41.734	32.70816N	35.32469E	506	5	Asia/Jeru
 Nazareth	Northern District	16	R	64.8	32.70056N	35.29722E	333	6	Asia/Jerusalem
 Nahariyya	Northern District	16	N	58.096	33.00892N	35.09814E	15	6	Asia/Jerusalem
 Migdal Ha'Emeq	Northern District	16	N	25.675	32.67597N	35.23986E	227	5	Asia/Jerusalem
-Mevasseret Ziyyon	Jerusalem	16	N	24.052	31.80186N	35.15072E	711	5	Asia/Jerusalem
+MevasseretTsiyyon	Jerusalem	16	N	24.052	31.80186N	35.15072E	711	5	Asia/Jerusalem
 Majd el Kurum	Northern District	16	N	15.455	32.92186N	35.25568E	217	5	Asia/Jerusalem
 Maghar	Northern District	16	N	22.957	32.88984N	35.40703E	292	5	Asia/Jerusalem
 Lod	Central District	16	N	77.223	31.9467N	34.8903E	68	6	Asia/Jerusalem
-Kefar Yona	Central District	16	N	24.778	32.31669N	34.93507E	59	5	Asia/Jerusalem
+KfarYona	Central District	16	N	24.778	32.31669N	34.93507E	59	5	Asia/Jerusalem
 Kfar Saba	Central District	16	N	110.456	32.175N	34.90694E	57	7	Asia/Jerusalem
 Karmi'el	Northern District	16	N	46.252	32.91708N	35.30501E	233	5	Asia/Jerusalem
 Kafr Qasim	Central District	16	N	23.823	32.11406N	34.97624E	136	5	Asia/Jerusalem
@@ -13094,7 +13264,7 @@ Kazerun	Fars	15	N	94.511	29.61919N	51.6535E	846	6	Asia/Tehran
 Kashmar	Razavi Khorasan	15	N	96.151	35.23831N	58.46558E	1054	6	Asia/Tehran
 Karaj	Alborz Province	15	R	1448.075	35.83266N	50.99155E	1341	9	Asia/Tehran
 Kangavar	Kermanshah	15	N	53.414	34.5043N	47.9653E	1476	6	Asia/Tehran
-Kamyaran	Kordestan	15	N	61.642	34.7956N	46.9355E	1470	6	Asia/Tehran
+Kamyaran	Kordestan	15	N	61.642	34.79535N	46.93682E	1433	6	Asia/Tehran
 Kalaleh	Golestan	15	N	33.7	37.37899N	55.493E	152	5	Asia/Tehran
 Juybar	Mazandaran	15	N	28.404	36.64088N	52.91206E	-7	5	Asia/Tehran
 Javanrud	Kermanshah	15	N	38.657	34.79611N	46.51722E	1418	5	Asia/Tehran
@@ -14663,7 +14833,7 @@ Athi River	Machakos	02	N	24.53	1.4563S	36.97826E	1505	5	Africa/Nairobi
 Siaya	Siaya	02	R	15.354	0.0607N	34.28806E	1321	5	Africa/Nairobi
 Ol Kalou	Nyandarua	02	R	47.795	0.27088S	36.37917E	2348	5	Africa/Nairobi
 Suluktu	Batken	12	N	15.019	39.93652N	69.56779E	1251	5	Asia/Bishkek
-Isfana	Batken	12	N	16.952	39.83895N	69.5276E	1302	5	Asia/Bishkek
+Razzakov	Batken	12	N	16.952	39.83895N	69.5276E	1302	5	Asia/Bishkek
 Balykchy	Issyk-Kul	12	N	42.875	42.46017N	76.18709E	1641	5	Asia/Bishkek
 Tokmok	Chuy	12	N	63.047	42.84194N	75.30149E	824	6	Asia/Bishkek
 Tash-Kumyr	Jalal-Abad	12	N	23.594	41.34612N	72.21707E	612	5	Asia/Bishkek
@@ -14770,7 +14940,7 @@ Kapsan-up	Yanggang-do	13	N	20.406	41.09028N	128.29333E	813	5	Asia/Pyongyang
 Kanggye	Chagang-do	13	R	209.53	40.96946N	126.58523E	288	7	Asia/Pyongyang
 Iwon-up	Hamgyong-namdo	13	N	26.364	40.32306N	128.65528E	2	5	Asia/Pyongyang
 Hyesan-dong	Yanggang-do	13	N	97.794	41.39542N	128.18752E	754	6	Asia/Pyongyang
-Hyesan	Yanggang-do	13	N	192.68	41.40167N	128.17778E	709	7	Asia/Pyongyang
+Hyesan	Yanggang-do	13	R	192.68	41.40167N	128.17778E	709	7	Asia/Pyongyang
 Hongwon	Hamgyong-namdo	13	N	70.923	40.02528N	127.95583E	29	6	Asia/Pyongyang
 Hoeryong	Hamgyong-bukto	13	N	43.831	42.44113N	129.74601E	237	5	Asia/Pyongyang
 Chongjin	Hamgyong-bukto	13	R	327	41.79556N	129.77583E	5	7	Asia/Pyongyang
@@ -14934,7 +15104,7 @@ Atyrau	Atyrau	12	R	180	47.11667N	51.88333E	-25	7	Asia/Atyrau
 Aktobe	Aqtoebe	12	R	262.457	50.27969N	57.20718E	210	7	Asia/Aqtobe
 Shevchenko	Mangghystau	12	R	147.443	43.64806N	51.17222E	-9	7	Asia/Aqtau
 Aqsay	Batys Qazaqstan	12	N	34.799	51.1681N	52.99782E	65	5	Asia/Oral
-Zyryanovsk	East Kazakhstan	12	N	44.929	49.72654N	84.27318E	471	5	Asia/Almaty
+Altay	East Kazakhstan	12	N	44.929	49.73626N	84.25416E	460	5	Asia/Almaty
 Zhosaly	Qyzylorda	12	N	20.065	45.48778N	64.07806E	100	5	Asia/Qyzylorda
 Zhezqazghan	Karaganda	12	N	104.357	47.78746N	67.71118E	369	7	Asia/Almaty
 Zhitikara	Qostanay	12	N	43.104	52.19019N	61.19894E	271	5	Asia/Qostanay
@@ -14988,7 +15158,7 @@ Chardara	South Kazakhstan	12	N	25.356	41.25832N	67.96991E	255	5	Asia/Almaty
 Burunday	Almaty Oblysy	12	N	20.996	43.35567N	76.85477E	689	5	Asia/Almaty
 Belyye Vody	South Kazakhstan	12	N	26.115	42.42193N	69.82709E	614	5	Asia/Almaty
 Balqash	Karaganda	12	N	81.364	46.84806N	74.995E	372	6	Asia/Almaty
-Ayaguz	East Kazakhstan	12	N	33.479	47.96447N	80.43437E	665	5	Asia/Almaty
+Ayagoz	East Kazakhstan	12	N	33.479	47.96447N	80.43437E	665	5	Asia/Almaty
 Atbasar	Aqmola	12	N	34.797	51.80854N	68.35823E	287	5	Asia/Almaty
 Arys	South Kazakhstan	12	N	36.285	42.43015N	68.8087E	239	5	Asia/Almaty
 Arkalyk	Qostanay	12	N	42	50.25031N	66.90384E	332	5	Asia/Qostanay
@@ -16485,7 +16655,7 @@ Pindiga	Gombe	05	N	106.322	9.98433N	10.95229E	490	7	Africa/Lagos
 Patigi	Kwara	05	N	28.285	8.72851N	5.75561E	123	5	Africa/Lagos
 Pankshin	Plateau	05	N	31.516	9.32541N	9.4352E	1235	5	Africa/Lagos
 Ozubulu	Anambra	05	N	73.812	5.95753N	6.85305E	135	6	Africa/Lagos
-Oyo	Oyo	05	N	736.072	7.85257N	3.93125E	298	8	Africa/Lagos
+Oyo	Oyo	05	N	736.072	7.85367N	3.93235E	286	8	Africa/Lagos
 Oyan	Osun	05	N	73.622	8.05N	4.76667E	422	6	Africa/Lagos
 Owo	Ondo	05	N	276.574	7.1962N	5.58681E	348	7	Africa/Lagos
 Owerri	Imo	05	R	215.038	5.48363N	7.03325E	73	7	Africa/Lagos
@@ -16574,7 +16744,7 @@ Ipoti	Ekiti	05	N	82.113	7.87377N	5.07691E	593	6	Africa/Lagos
 Iperu	Ogun	05	N	15.935	6.91002N	3.66557E	97	5	Africa/Lagos
 Inisa	Osun	05	N	164.161	7.84855N	4.32981E	370	7	Africa/Lagos
 Ilorin	Kwara	05	R	814.192	8.49664N	4.54214E	320	8	Africa/Lagos
-Ilobu	Osun	05	N	118.089	7.84036N	4.48557E	334	7	Africa/Lagos
+Ilobu	Osun	05	N	118.089	7.83879N	4.48672E	339	7	Africa/Lagos
 Illela	Sokoto	05	N	17.461	13.73064N	5.29777E	272	5	Africa/Lagos
 Ilesa	Osun	05	N	277.904	7.62789N	4.74161E	377	7	Africa/Lagos
 Ilaro	Ogun	05	N	46.999	6.88901N	3.01416E	73	5	Africa/Lagos
@@ -16622,7 +16792,7 @@ Garko	Gombe	05	N	21.141	10.17506N	11.16458E	470	5	Africa/Lagos
 Ganye	Adamawa	05	N	15.178	8.43497N	12.05107E	484	5	Africa/Lagos
 Gamboru	Borno	05	N	84.672	12.37299N	14.2069E	291	6	Africa/Lagos
 Funtua	Katsina	05	N	136.811	11.52351N	7.31174E	709	7	Africa/Lagos
-Fiditi	Oyo	05	N	71.461	7.71361N	3.91722E	288	6	Africa/Lagos
+Fiditi	Oyo	05	N	71.461	7.71393N	3.91665E	288	6	Africa/Lagos
 Ezza-Ohu	Ebonyi	05	N	67.414	6.44094N	8.08432E	80	6	Africa/Lagos
 Esuk Oron	Akwa Ibom	05	N	112.033	4.80293N	8.25341E	38	7	Africa/Lagos
 Epe	Lagos	05	N	84.711	6.58412N	3.98336E	17	6	Africa/Lagos
@@ -16633,7 +16803,7 @@ Emure-Ekiti	Ekiti	05	N	90.645	7.43636N	5.45925E	379	6	Africa/Lagos
 Elele	Rivers	05	N	20.62	5.1009N	6.81411E	32	5	Africa/Lagos
 Ekpoma	Edo	05	N	59.618	6.743N	6.14029E	364	6	Africa/Lagos
 Eket	Akwa Ibom	05	N	25.569	4.64231N	7.92438E	30	5	Africa/Lagos
-Ejigbo	Osun	05	N	138.357	7.90292N	4.31419E	353	7	Africa/Lagos
+Ejigbo	Osun	05	N	138.357	7.90303N	4.31364E	353	7	Africa/Lagos
 Eha Amufu	Enugu	05	N	70.779	6.65915N	7.75961E	109	6	Africa/Lagos
 Egbe	Kogi	05	N	17.612	8.21896N	5.50757E	351	5	Africa/Lagos
 Efon-Alaaye	Ekiti	05	N	279.319	7.65649N	4.92235E	556	7	Africa/Lagos
@@ -16915,6 +17085,7 @@ Doetinchem	Gelderland	20	N	49.906	51.965N	6.28889E	17	5	Europe/Amsterdam
 Diemen	North Holland	20	N	24.361	52.33964N	4.96256E	2	5	Europe/Amsterdam
 Deventer	Overijssel	20	N	97.331	52.255N	6.16389E	12	6	Europe/Amsterdam
 Den Helder	North Holland	20	N	59.569	52.95988N	4.75933E	3	6	Europe/Amsterdam
+De Meern	Utrecht	20	N	22.116	52.08167N	5.03611E	3	5	Europe/Amsterdam
 Delfzijl	Groningen	20	N	28.649	53.33N	6.91806E	0	5	Europe/Amsterdam
 Delft	South Holland	20	N	95.06	52.00667N	4.35556E	1	6	Europe/Amsterdam
 Dalfsen	Overijssel	20	N	26.575	52.51167N	6.25694E	4	5	Europe/Amsterdam
@@ -17268,7 +17439,7 @@ Selva Alegre	Arequipa	08	N	72.696	16.37057S	71.52724W	2455	6	America/Lima
 Santiago	Cusco	08	N	64.075	13.52728S	71.9843W	3420	6	America/Lima
 Brena	Lima region	08	N	81.909	12.05605S	77.05295W	119	6	America/Lima
 Punaauia	Iles du Vent	24	N	25.75	17.63333S	149.6W	24	5	Pacific/Tahiti
-Papeete	Iles du Vent	24	C	26.357	17.53733S	149.5665W	9	5	Pacific/Tahiti
+Papeete	Iles du Vent	24	C	26.357	17.5347S	149.56843W	42	5	Pacific/Tahiti
 Faaa	Iles du Vent	24	N	29.851	17.55S	149.6W	5	5	Pacific/Tahiti
 Wewak	East Sepik	22	R	18.23	3.54964S	143.63229E	44	5	Pacific/Port_Moresby
 Port Moresby	National Capital	22	C	283.733	9.47723S	147.15089E	25	7	Pacific/Port_Moresby
@@ -17422,6 +17593,7 @@ Patuto	Calabarzon	14	N	52.883	14.11667N	120.96667E	549	6	Asia/Manila
 Passi	Western Visayas	14	N	42.794	11.10778N	122.64194E	42	5	Asia/Manila
 Pasay	Metro Manila	14	N	416.522	14.53748N	121.00144E	9	7	Asia/Manila
 Parang	Autonomous Region in Muslim Mindanao	14	N	44.93	7.37035N	124.26973E	57	5	Asia/Manila
+Paranaque City	Metro Manila	14	N	689.992	14.48156N	121.01749E	22	8	Asia/Manila
 Paraiso	Western Visayas	14	N	30.494	10.8849N	123.3627E	45	5	Asia/Manila
 Papaya	Central Luzon	14	N	38.64	15.32016N	120.83574E	17	5	Asia/Manila
 Paombong	Central Luzon	14	N	41.384	14.83111N	120.78917E	7	5	Asia/Manila
@@ -19611,7 +19783,7 @@ Lesnoy	Sverdlovsk	17	N	23.834	58.63667N	59.80222E	221	5	Asia/Yekaterinburg
 Trekhgornyy	Chelyabinsk	17	N	34.5	54.815N	58.45917E	418	5	Asia/Yekaterinburg
 Mirnyy	Arkhangelskaya	17	N	28	62.76409N	40.33746E	114	5	Europe/Moscow
 Znamensk	Astrakhan	17	N	31.922	48.5842N	45.7338E	9	5	Europe/Astrakhan
-Zarechnyy	Penza	17	N	62.139	53.13333N	46.58333E	221	6	Europe/Moscow
+Zarechnyy	Penza	17	N	62.139	53.13333N	46.58333E	233	6	Europe/Moscow
 Kochubeyevskoye	Stavropol' Kray	17	N	28.491	44.64417N	41.84528E	372	5	Europe/Moscow
 Vnukovo	Moscow	17	N	20	55.61194N	37.29611E	190	5	Europe/Moscow
 Moskovskiy	Moscow	17	N	15.435	55.59911N	37.35495E	185	5	Europe/Moscow
@@ -20137,7 +20309,7 @@ Alingsas	Vaestra Goetaland	18	N	26.329	57.93033N	12.53345E	66	5	Europe/Stockholm
 Akersberga	Stockholm	18	N	32.659	59.47944N	18.29967E	9	5	Europe/Stockholm
 Majorna	Vaestra Goetaland	18	N	29.254	57.69195N	11.91605E	8	5	Europe/Stockholm
 Tensta	Stockholm	18	N	17.083	59.3939N	17.90111E	32	5	Europe/Stockholm
-Singapore		14	C	3547.809	1.28967N	103.85007E	23	9	Asia/Singapore
+Singapore		14	C	5638.7	1.28967N	103.85007E	23	9	Asia/Singapore
 Woodlands		14	N	252.53	1.43801N	103.78877E	27	7	Asia/Singapore
 Marine Parade		14	N	46.39	1.30306N	103.90778E	16	5	Asia/Singapore
 Jamestown	Saint Helena	05	C	0.637	15.93872S	5.71675W	426		Atlantic/St_Helena
@@ -22563,7 +22735,7 @@ Chester	Pennsylvania	09	N	34.092	39.84967N	75.35707W	9	5	America/New_York
 Drexel Hill	Pennsylvania	09	N	28.043	39.94706N	75.29213W	77	5	America/New_York
 Hanover	Pennsylvania	09	N	15.496	39.80066N	76.98304W	188	5	America/New_York
 Pennsport	Pennsylvania	09	N	26	39.92761N	75.15045W	10	5	America/New_York
-Philadelphia	Pennsylvania	09	N	1603.797	39.95233N	75.16379W	40	9	America/New_York
+Philadelphia	Pennsylvania	09	N	1603.797	39.95238N	75.16362W	8	9	America/New_York
 Springfield	Pennsylvania	09	N	23.363	39.93067N	75.32019W	82	5	America/New_York
 West Chester	Pennsylvania	09	N	19.842	39.96097N	75.60804W	136	5	America/New_York
 Wharton	Pennsylvania	09	N	49.732	39.92678N	75.15712W	8	5	America/New_York
@@ -25408,6 +25580,7 @@ Dien Bien Phu	Dien Bien	14	R	40.282	21.38602N	103.02301E	485	5	Asia/Bangkok
 Di An	Binh Duong	14	N	474.681	10.90682N	106.7694E	32	7	Asia/Ho_Chi_Minh
 Da Nang	Da Nang	14	R	988.561	16.06778N	108.22083E	11	8	Asia/Ho_Chi_Minh
 Da Lat	Lam Dong	14	R	197	11.94646N	108.44193E	1483	7	Asia/Ho_Chi_Minh
+GJai Loc	Quang Nam	14	N	16.215	15.88214N	108.12092E	14	5	Asia/Ho_Chi_Minh
 Cu Chi	Ho Chi Minh	14	N	75	10.97333N	106.49325E	14	6	Asia/Ho_Chi_Minh
 Co GJo	Can Tho	14	N	116.576	10.09377N	105.42916E	4	7	Asia/Ho_Chi_Minh
 Co Loa	Hanoi	14	N	16.514	21.11667N	105.86667E	17	5	Asia/Bangkok
