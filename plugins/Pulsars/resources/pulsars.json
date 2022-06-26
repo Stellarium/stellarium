@@ -651,6 +651,14 @@
 			"RA": "00h58m00s",
 			"DE": "+61d25m00s"
 		},
+		"PSR J0058-7218":
+		{
+			"frequency": 45.9429870,
+			"pfrequency": -6.1E-11,
+			"notes": "NRAD",
+			"RA": "00h58m16.7s",
+			"DE": "-72d18m06s"
+		},
 		"PSR J0059+69":
 		{
 			"distance": 2.363,
@@ -5639,7 +5647,7 @@
 			"parallax": 1.55,
 			"distance": 0.450,
 			"bperiod": 7.8051353,
-			"eccentricity": 9.702,
+			"eccentricity": 9.702E-5,
 			"dmeasure": 10.2442,
 			"frequency": 60.7794479478993,
 			"pfrequency": -1.601009E-16,
@@ -12299,12 +12307,13 @@
 		"PSR J1555-2908":
 		{
 			"distance": 2.653,
-			"period": 0.00179,
-			"pderivative": 4.453E-20,
+			"bperiod": 0.23350026854,
 			"dmeasure": 75.9,
-			"notes": "UL",
-			"RA": "15h55m40.7s",
-			"DE": "-29d08m28s"
+			"frequency": 559.44000642613,
+			"pfrequency": -1.39430E-14,
+			"notes": "HE",
+			"RA": "15h55m40.6586s",
+			"DE": "-29d08m28.426s"
 		},
 		"PSR J1555-3134":
 		{
@@ -16428,7 +16437,7 @@
 			"parallax": 0.763,
 			"distance": 0.894,
 			"bperiod": 67.825139,
-			"eccentricity": 7.49408,
+			"eccentricity": 7.49408E-5,
 			"dmeasure": 15.98477,
 			"frequency": 218.8118403947170,
 			"pfrequency": -4.08387E-16,
@@ -26880,7 +26889,7 @@
 		},
 		"PSR J1856-3754":
 		{
-			"parallax": 8.16,
+			"parallax": 8.2,
 			"frequency": 0.1417393685,
 			"pfrequency": -5.98E-16,
 			"notes": "XINS,NRAD",
@@ -36446,7 +36455,7 @@
 			"RA": "23h22m34.64004s",
 			"DE": "-26d50m58.3171s"
 		},
-		"PSR J2323+1241":
+		"PSR J2323+1214":
 		{
 			"distance": 1.668,
 			"dmeasure": 29.0,
