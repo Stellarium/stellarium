@@ -3,6 +3,9 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Cata Alex, 2022
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,6 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2021-09-19 19:50+0700\n"
 "PO-Revision-Date: 2020-11-24 18:28+0000\n"
+"Last-Translator: Cata Alex, 2022\n"
 "Language-Team: Romanian (https://www.transifex.com/stellarium/teams/80998/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +24,7 @@ msgstr ""
 #. type: Content of: <h2>
 #: ../../scenery3d/Testscene/description.en.utf8:1
 msgid "Testscene"
-msgstr ""
+msgstr "Scenă de testare"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:3
@@ -30,11 +34,16 @@ msgid ""
 "or some other details to find out how this plugin behaves. Then build and "
 "present your own work!"
 msgstr ""
+"Această scenă este utilă în special ca zonă de testare pentru progresul "
+"propriu. Ar trebui să faceți o copie a dosarului scenei și să îl modificați "
+"după bunul plac, să încercați configurările materialelor sau alte detalii "
+"pentru a afla cum se comportă acest plugin. Apoi asamblează și prezintă-ți "
+"propria muncă!"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:8
 msgid "Coordinate and orientation tests"
-msgstr ""
+msgstr "Teste de coordonare și orientare"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:10
@@ -48,6 +57,15 @@ msgid ""
 "absolutely and always point west-east, the grid lines hit the northern "
 "horizon slightly (4.2 deg) left of north!"
 msgstr ""
+"Coloanele prezentate aici, așa cum se văd din centrul structurii, oferă o "
+"vedere aproximativă (nu de mare precizie!) a pozițiilor de răsărit/apus de "
+"soare la solstițiu/echinocțiu la latitudinile Europei Centrale. Coloanele "
+"centrale furnizează o linie est-vest. Grila de coordonate de măsurare "
+"vizibilă în partea de jos nu se aliniază cu nordul geografic. O rotație de "
+"-4,2 grade (faceți test pentru convergența meridianelor) trebuie compensată,"
+" adică, în timp ce coloanele centrale trebuie să indice în mod absolut și "
+"întotdeauna pe direcția vest-est, liniile grilei ating orizontul nordic "
+"puțin  (4,2 grade) mai în stânga nordului!"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:19
@@ -55,11 +73,13 @@ msgid ""
 "Walkaround ground coordinates (Ctrl-R, T) should display the coordinates "
 "visible along the south and west border of the ground."
 msgstr ""
+"Coordonatele de la sol (Ctrl-R, T) ar trebui să afișeze coordonatele "
+"vizibile de-a lungul granițelor de sud și de vest ale solului."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:23
 msgid "Material test"
-msgstr ""
+msgstr "Test al materialului"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:25
@@ -68,6 +88,10 @@ msgid ""
 " can play with material parameters to create funny effects like "
 "semitransparent or glow-in-the-dark brick spheres."
 msgstr ""
+"Acest model este folosit și pentru testarea capacităților grafice ale "
+"pluginului. Vă puteți juca cu parametrii materialului pentru a crea efecte "
+"amuzante, cum ar fi sfere de cărămidă semitransparente sau care strălucesc "
+"în întuneric."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:29
@@ -75,12 +99,15 @@ msgid ""
 "To test temporal features, the pillars and spheres are visible only from the"
 " years 2000 until 2020.  Edit the material file to change that!"
 msgstr ""
+"Pentru a testa caracteristicile temporale, coloanele și sferele sunt "
+"vizibile doar din anul 2000 și până în 2020. Editați fișierul materialului "
+"pentru a schimba acest aspect!"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:32
 #: ../../scenery3d/Sterngarten/description.en.utf8:56
 msgid "Model"
-msgstr ""
+msgstr "Model"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:33
@@ -88,11 +115,13 @@ msgid ""
 "Testscene for Stellarium/scenery3d development. Export from SU8-Kerkythea-"
 "KT2OBJ."
 msgstr ""
+"Scenă de testare pentru dezvoltarea Stellarium/scenery3d. Se face export de "
+"la SU8-Kerkythea-KT2OBJ."
 
 #. type: Content of: <h2>
 #: ../../scenery3d/Sterngarten/description.en.utf8:1
 msgid "Vienna Sterngarten"
-msgstr ""
+msgstr "Vienna Sterngarten"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:3
@@ -100,11 +129,13 @@ msgid ""
 "Sterngarten (\"Star Garden\") is an open-air planetarium in the south-west "
 "of Vienna, demonstrating the solar year."
 msgstr ""
+"Sterngarten („Grădina stelelor”) este un planetariu în aer liber din sud-"
+"vestul Vienei, care demonstrează anul solar."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:7
 msgid "Idea"
-msgstr ""
+msgstr "Idee"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:9
@@ -113,11 +144,15 @@ msgid ""
 "Astronomical Bureau (1907) and Austrian Astronomical Society (1924). "
 "Director of first Vienna Planetarium (1927) and Urania observatory."
 msgstr ""
+"Prof. Dr. Univ. Oswald Thomas (1882 Kronstadt - 1963 Viena). Fondator al "
+"Biroului Astronomic (1907) și al Societății Astronomice Australiene (1924). "
+"Director al primului Planetariu din Viena (1927) și al observatorului "
+"Urania."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:14
 msgid "Construction"
-msgstr ""
+msgstr "Construcție"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:16
@@ -131,6 +166,14 @@ msgid ""
 "Calendar)  and the monthly journal \"Der Sternenbote\" (The Starry "
 "Messenger)."
 msgstr ""
+"Sterngarten a fost dezvoltată de studentul lui Thomas și succesor al "
+"Biroului Astronomic, Prof. Hermann Mucke (1935-2019) împreună cu "
+"colaboratorii săi. Mucke a fost și secretar al Societății Astronomice "
+"Austriace în perioada 1963-2018, director al planetariului din Viena "
+"1963-2001 și al Observatorului public Urania din Viena între 1971-2001. Timp"
+" de mai bine de 60 de ani, Mucke și Societatea Astronomică Austriacă au "
+"publicat „Österreichischer Himmelskalender” (Calendarul Ceresc Austriac) și "
+"jurnalul lunar „Der Sternenbote” (Mesagerul Stelelor)."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:22
@@ -138,11 +181,13 @@ msgid ""
 "It was built 1997-2001 by the Austrian Astronomical Society, supported by "
 "public and private sponsors."
 msgstr ""
+"A fost construită în perioada 1997-2001 de către Societatea Astronomică "
+"Austriacă, susținută de sponsori publici și privați."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:24
 msgid "Purpose"
-msgstr ""
+msgstr "Scop"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:26
@@ -153,11 +198,16 @@ msgid ""
 "southwest of Vienna; always open privately for everybody free of charge. "
 "Frequently guided tours."
 msgstr ""
+"Îmbunătățirea cunoștințelor astronomice de bază ale publicul larg. "
+"Observarea evenimentelor si schimbărilor cerești cu ochiul liber, opțional "
+"cu un binoclu este oferită de  institutul nostru, situat in sud-vestul "
+"extrem al Vienei; deschis întotdeauna în privat și gratuit pentru toată "
+"lumea. Sunt frecvente tururile cu ghid."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:32
 msgid "Components"
-msgstr ""
+msgstr "Componente"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:35
@@ -165,17 +215,21 @@ msgid ""
 "Pyramid with platform 7x7m. Seen from 1.5m above Center Plate all angles "
 "fit."
 msgstr ""
+"Piramidă cu platformă de 7x7m. Văzută de la 1,5 m deasupra plăcii centrale "
+"cu toate unghiurile aliniate."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:36
 msgid "Horizon Railing, representing the mathematical horizon."
-msgstr ""
+msgstr "Grila Orizontului, reprezentând orizontul matematic."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:37
 msgid ""
 "Surrounding Steps; 200 seats. Entrance by staircase and wheelchair ramp."
 msgstr ""
+"Trepte înconjurătoare; 200 de locuri. Intrare pe scară și rampă pentru scaun"
+" cu rotile."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:38
@@ -186,6 +240,11 @@ msgid ""
 "rising/setting on the mathematical horizon is not possible in the field due "
 "to vegetation and landscape)."
 msgstr ""
+"Coloane pentru răsăritul și apusul soarelui la începutul anotimpurilor. "
+"Pozițiile coloanelor sunt exact peste azimuturile echinocțiilor și "
+"solstițiilor. Brațele indică orizontul și efectul de dislocare din cauza "
+"refracției. (Observarea răsăritului/apusului pe orizontul matematic nu este "
+"posibilă în teren din cauza vegetației și a reliefului)."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:42
@@ -193,6 +252,8 @@ msgid ""
 "South Pillar, marked (10&deg;/10&deg; altitude); Transit marks for sun at "
 "seasons' beginning."
 msgstr ""
+"Coloana de Sud, marcată (10°/10° altitudine); Marcaje de tranzit pentru "
+"soare la începutul anotimpurilor."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:43
@@ -200,6 +261,8 @@ msgid ""
 "North Pillar, marked (10&deg;/10&deg; altitude); on top Shadow Disc with "
 "central hole: North celestial Pole."
 msgstr ""
+"Pilonul de Nord, marcat (10°/10° altitudine); în partea de sus Discul Umbrei"
+" cu gaură centrală: Polul Nord ceresc."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:44
@@ -209,26 +272,30 @@ msgid ""
 " longitude, with zodiacal signs. Ascending part serves as polar gnomon for "
 "the"
 msgstr ""
+"Analemă Curbată, divizată. Date pentru primăvară și vară pe partea "
+"orizontală, date de toamnă și iarnă pe cea ascendentă, longitudine solară "
+"marcată (10°/10°), cu semne zodiacale. Partea ascendentă servește ca gnomon "
+"polar pentru"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:45
 msgid "Sundial, full hours Vh to VIIh marked."
-msgstr ""
+msgstr "Cadran solar, orele complete de la Vh la VIIh fiind marcate."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:46
 msgid "Information panels."
-msgstr ""
+msgstr "Panouri de informații."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:49
 msgid "Further Information"
-msgstr ""
+msgstr "Informație Suplimentară"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:50
 msgid "Websites in German only."
-msgstr ""
+msgstr "Site-uri web doar în Germană"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:52
@@ -236,6 +303,8 @@ msgid ""
 "Österreichischer Astronomischer Verein: <a "
 "href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
 msgstr ""
+"Asociația Astronomică Austriacă: <a href=\"https://www.astroverein.at\"> "
+"https://www.astroverein.at </a>"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:53
@@ -243,6 +312,8 @@ msgid ""
 "German Wikipedia article on the <a "
 "href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
 msgstr ""
+"Articol Wikipedia în limba germană despre <a "
+"href=\"https://de.wikipedia.org/wiki/Sterngarten\"> Sterngarten </a>"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:57
@@ -252,6 +323,10 @@ msgid ""
 "by Mucke in his primary school days. Mucke's spirit will remain alive in the"
 " Sterngarten."
 msgstr ""
+"Creat de Georg Zotti după planurile lui H. Mucke; La fel ca nenumărați "
+"astronomi amatori și profesioniști din Austria, Zotti a fost introdus în "
+"astronomie de către Mucke în timpul școlii sale primare. Spiritul lui Mucke "
+"va rămâne viu în Sterngarten."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:60
@@ -259,3 +334,5 @@ msgid ""
 "Model created in 2010 with Google Sketchup 8, exported from Google Sketchup "
 "8.0.14346."
 msgstr ""
+"Model creat în 2010 cu Google Sketchup 8, exportat din Google Sketchup "
+"8.0.14346."
