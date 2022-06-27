@@ -360,7 +360,9 @@ int main(int argc, char **argv)
 	QString baseFont = confSettings->value("gui/base_font_name", "Verdana").toString();
 	QFont tmpFont(baseFont);
 	#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
-	tmpFont.setStyleHint(QFont::AnyStyle, QFont::PreferAntialias);
+	tmpFont.setHintingPreference(QFont::PreferFullHinting);
+	//tmpFont.setStyleHint(QFont::AnyStyle, QFont::PreferAntialias);
+	tmpFont.setStyleHint(QFont::SansSerif, QFont::PreferAntialias);
 	#else
 	tmpFont.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);
 	#endif
@@ -369,6 +371,57 @@ int main(int argc, char **argv)
 	QFont tmpFont(baseFont);
 #endif
 	tmpFont.setPixelSize(confSettings->value("gui/gui_font_size", 13).toInt());
+
+	// Follow vague hint from https://stackoverflow.com/questions/70152818/no-space-between-letters-in-text
+	QFontMetrics fm(tmpFont);
+	//tmpFont.setLetterSpacing(QFont::PercentageSpacing, 120.);
+	tmpFont.setLetterSpacing(QFont::AbsoluteSpacing, fm.averageCharWidth()); // THIS REMEDIES A QT BUG SOMEWHAT
+	qDebug() << "Application font:" << tmpFont.toString();
+	qDebug() << "Average char width:"  << fm.averageCharWidth();
+	qDebug() << "Font LineWidth:" << fm.lineWidth();
+	qDebug() << "Width of AAA:" << fm.size(Qt::TextSingleLine, "AAA");
+	qDebug() << "Horizontal Advance of of AAA:" << fm.horizontalAdvance("AAA");
+	// Qt5.15.2 says:
+	//Application font: "Lucida Sans,-1,13,5,50,0,0,0,0,0"
+	// i.e.
+	//Lucida Sans,= Font family
+	//-1,         = Point size
+	//13,         = Pixel size
+	//5,          = Style hint (QFont::AnyStyle)
+	//50,         = Font weight (QFont::Normal)
+	//0,          = Font style
+	//0,          = Underline
+	//0,          = Strike out
+	//0,          = Fixed pitch
+	//0           = Always 0
+	//Average char width: 6
+	//Font LineWidth: 1
+	//Width of AAA: QSize(27, 15)
+	//Horizontal Advance of of AAA: 27
+	// Qt6.3.1 says:
+	//Application font: "Lucida Sans,-1,13,5,400,0,0,0,0,0,0,1,6,0,0,128"
+	// i.e.
+	//Lucida Sans = Font family
+	//-1,         = Point size
+	//13,         = Pixel size
+	//5,          = Style hint (QFont::AnyStyle; now changed to SansSerif, but did not help)
+	//400,        = Font weight (QFont::Normal)
+	//0,          = Font style
+	//0,          = Underline
+	//0,          = Strike out
+	//0,          = Fixed pitch
+	//0,          = Always 0
+	//0,          = Capitalization
+	//1,          = Letter spacing
+	//6,          = Word spacing
+	//0,          = Stretch
+	//0,          = Style strategy
+	//128         = Font style (omitted when unavailable) (QFont::PreferAntialias)
+	//Average char width: 6
+	//Font LineWidth: 1
+	//Width of AAA: QSize(0, 15)         <<<=== Qt BUG!
+	//Horizontal Advance of of AAA: 0    <<<=== Qt BUG!
+
 	QGuiApplication::setFont(tmpFont);
 
 	// Initialize translator feature
