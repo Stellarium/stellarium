@@ -245,6 +245,10 @@ void AstroCalcDialog::createDialogContent()
 	populateTimeIntervalsList();
 	populateWutGroups();
 
+	ui->lunarElongationLimitSpinBox->setSuffix("°");
+	ui->positiveAltitudeLimitSpinBox->setSuffix("°");
+	ui->monthlyElevationPositiveLimitSpinBox->setSuffix("°");
+
 	ui->genericMarkerColor->setText("1");
 	ui->secondaryMarkerColor->setText("2");
 	ui->mercuryMarkerColor->setText(QChar(0x263F));
