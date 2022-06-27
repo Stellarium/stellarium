@@ -311,6 +311,20 @@ void SolarSystem::init()
 	addAction("actionShow_Planets_EnlargeSun", displayGroup, N_("Enlarge Sun"), "flagSunScale");
 	addAction("actionShow_Skyculture_NativePlanetNames", displayGroup, N_("Native planet names (from starlore)"), "flagNativePlanetNames", "Ctrl+Shift+N");
 
+	QString timeGroup = N_("Date and Time");
+	addAction("actionCurrent_March_Equinox",      timeGroup, N_("March equinox at current year"),      this, "currentMarchEquinox()");
+	addAction("actionNext_March_Equinox",         timeGroup, N_("March equinox at next year"),         this, "nextMarchEquinox()");
+	addAction("actionPrevious_March_Equinox",     timeGroup, N_("March equinox at previous year"),     this, "previousMarchEquinox()");
+	addAction("actionCurrent_September_Equinox",  timeGroup, N_("September equinox at current year"),  this, "currentSeptemberEquinox()");
+	addAction("actionNext_September_Equinox",     timeGroup, N_("September equinox at next year"),     this, "nextSeptemberEquinox()");
+	addAction("actionPrevious_September_Equinox", timeGroup, N_("September equinox at previous year"), this, "previousSeptemberEquinox()");
+	addAction("actionCurrent_June_Solstice",      timeGroup, N_("June solstice at current year"),      this, "currentJuneSolstice()");
+	addAction("actionNext_June_Solstice",         timeGroup, N_("June solstice at next year"),         this, "nextJuneSolstice()");
+	addAction("actionPrevious_June_Solstice",     timeGroup, N_("June solstice at previous year"),     this, "previousJuneSolstice()");
+	addAction("actionCurrent_December_Solstice",  timeGroup, N_("December solstice at current year"),  this, "currentDecemberSolstice()");
+	addAction("actionNext_December_Solstice",     timeGroup, N_("December solstice at next year"),     this, "nextDecemberSolstice()");
+	addAction("actionPrevious_December_Solstice", timeGroup, N_("December solstice at previous year"), this, "previousDecemberSolstice()");
+
 	connect(StelApp::getInstance().getModule("HipsMgr"), SIGNAL(gotNewSurvey(HipsSurveyP)),
 			this, SLOT(onNewSurvey(HipsSurveyP)));
 
@@ -3302,4 +3316,211 @@ void SolarSystem::onNewSurvey(HipsSurveyP survey)
 	survey->setProperty("planet", pl->getCommonEnglishName());
 	// Not visible by default for the moment.
 	survey->setProperty("visible", false);
+}
+
+Vec4d SolarSystem::getEquinoxesSolstices(int year)
+{
+	Vec4d JDE, JDE0;
+	const double coeff[24][3] = {
+	//  i (row) a{i}   b{i}       c{i}
+	/*  1 */ { 485.0, 324.96,   1934.136 },
+	/*  2 */ { 203.0, 337.23,  32964.467 },
+	/*  3 */ { 199.0, 342.08,     20.186 },
+	/*  4 */ { 182.0,  27.85, 445267.112 },
+	/*  5 */ { 156.0,  73.14,  45036.886 },
+	/*  6 */ { 136.0, 171.52,  22518.443 },
+	/*  7 */ {  77.0, 222.54,  65928.934 },
+	/*  8 */ {  74.0, 296.72,   3034.906 },
+	/*  9 */ {  70.0, 243.58,   9037.513 },
+	/* 10 */ {  58.0, 119.81,  33718.147 },
+	/* 11 */ {  52.0, 297.17,    150.678 },
+	/* 12 */ {  50.0,  21.02,   2281.226 },
+	/* 13 */ {  45.0, 247.54,  29929.562 },
+	/* 14 */ {  44.0, 325.15,  31555.956 },
+	/* 15 */ {  29.0,  60.93,   4443.417 },
+	/* 16 */ {  18.0, 155.12,  67555.328 },
+	/* 17 */ {  17.0, 288.79,   4562.452 },
+	/* 18 */ {  16.0, 198.04,  62894.029 },
+	/* 19 */ {  14.0, 199.76,  31436.921 },
+	/* 20 */ {  12.0,  95.39,  14577.848 },
+	/* 21 */ {  12.0, 287.11,  31931.756 },
+	/* 22 */ {  12.0, 320.81,  34777.259 },
+	/* 23 */ {   9.0, 227.73,   1222.114 },
+	/* 24 */ {   8.0,  15.45,  16859.074 }
+	};
+
+	double T, W, deltaLambda, S, Y;
+	if (-1000<=year && year<=1000)
+	{
+		Y = year/1000.;
+		// March equinox
+		JDE0[0] = 1721139.29189 + Y*(365242.13740 + Y*( 0.06134 + Y*( 0.00111 + Y*(-0.00071))));
+		// June solstice
+		JDE0[1] = 1721233.25401 + Y*(365241.72562 + Y*(-0.05323 + Y*( 0.00907 + Y*( 0.00025))));
+		// September equinox
+		JDE0[2] = 1721325.70455 + Y*(365242.49558 + Y*(-0.11677 + Y*(-0.00297 + Y*( 0.00074))));
+		// December solstice
+		JDE0[3] = 1721414.39987 + Y*(365242.88257 + Y*(-0.00769 + Y*(-0.00933 + Y*(-0.00006))));
+	}
+	else if (1000<year && year<=3000)
+	{
+		Y = (year - 2000.)/1000.;
+		// March equinox
+		JDE0[0] = 2451623.80984 + Y*(365242.37404 + Y*( 0.05169 + Y*(-0.00411 + Y*(-0.00057))));
+		// June solstice
+		JDE0[1] = 2451716.56767 + Y*(365241.62603 + Y*( 0.00325 + Y*( 0.00888 + Y*(-0.00030))));
+		// September equinox
+		JDE0[2] = 2451810.21715 + Y*(365242.01767 + Y*(-0.11575 + Y*( 0.00337 + Y*( 0.00078))));
+		// December solstice
+		JDE0[3] = 2451900.05952 + Y*(365242.74049 + Y*(-0.06223 + Y*(-0.00823 + Y*( 0.00032))));
+	}
+	else
+		return Vec4d(0.);
+
+	for (int i=0; i<=3; i++)
+	{
+		T = (JDE0[i] - 2451545.0)/36525.;
+		W = 35999.373*T - 2.47; // degrees!
+		deltaLambda = 1 + 0.0334*cos(W*M_PI_180) + 0.0007*cos(2*W*M_PI_180);
+		S = 0.;
+		for (int j=0; j<24; j++)
+		{
+			S += coeff[j][0]*cos((coeff[j][1] + coeff[j][2]*T)*M_PI_180);
+		}
+		JDE[i] = JDE0[i] + 0.00001*S/deltaLambda;
+	}
+
+	return JDE;
+}
+
+void SolarSystem::currentMarchEquinox()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	double JD = core->getJDE();
+	int year, month, day;
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	Vec4d estime = getEquinoxesSolstices(year);
+	if (estime[0]>0.) // March equinox
+		core->setJDE(estime[0]);
+}
+
+void SolarSystem::nextMarchEquinox()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	double JD = core->getJDE();
+	int year, month, day;
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	Vec4d estime = getEquinoxesSolstices(year + 1);
+	if (estime[0]>0.) // March equinox
+		core->setJDE(estime[0]);
+}
+
+void SolarSystem::previousMarchEquinox()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	double JD = core->getJDE();
+	int year, month, day;
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	Vec4d estime = getEquinoxesSolstices(year - 1);
+	if (estime[0]>0.) // March equinox
+		core->setJDE(estime[0]);
+}
+
+void SolarSystem::currentJuneSolstice()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	double JD = core->getJDE();
+	int year, month, day;
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	Vec4d estime = getEquinoxesSolstices(year);
+	if (estime[1]>0.) // June solstice
+		core->setJDE(estime[1]);
+}
+
+void SolarSystem::nextJuneSolstice()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	double JD = core->getJDE();
+	int year, month, day;
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	Vec4d estime = getEquinoxesSolstices(year + 1);
+	if (estime[1]>0.) // June solstice
+		core->setJDE(estime[1]);
+}
+
+void SolarSystem::previousJuneSolstice()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	double JD = core->getJDE();
+	int year, month, day;
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	Vec4d estime = getEquinoxesSolstices(year - 1);
+	if (estime[1]>0.) // June solstice
+		core->setJDE(estime[1]);
+}
+
+void SolarSystem::currentSeptemberEquinox()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	double JD = core->getJDE();
+	int year, month, day;
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	Vec4d estime = getEquinoxesSolstices(year);
+	if (estime[2]>0.) // September equinox
+		core->setJDE(estime[2]);
+}
+
+void SolarSystem::nextSeptemberEquinox()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	double JD = core->getJDE();
+	int year, month, day;
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	Vec4d estime = getEquinoxesSolstices(year + 1);
+	if (estime[2]>0.) // September equinox
+		core->setJDE(estime[2]);
+}
+
+void SolarSystem::previousSeptemberEquinox()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	double JD = core->getJDE();
+	int year, month, day;
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	Vec4d estime = getEquinoxesSolstices(year - 1);
+	if (estime[2]>0.) // September equinox
+		core->setJDE(estime[2]);
+}
+
+void SolarSystem::currentDecemberSolstice()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	double JD = core->getJDE();
+	int year, month, day;
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	Vec4d estime = getEquinoxesSolstices(year);
+	if (estime[3]>0.) // December solstice
+		core->setJDE(estime[3]);
+}
+
+void SolarSystem::nextDecemberSolstice()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	double JD = core->getJDE();
+	int year, month, day;
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	Vec4d estime = getEquinoxesSolstices(year + 1);
+	if (estime[3]>0.) // December solstice
+		core->setJDE(estime[3]);
+}
+
+void SolarSystem::previousDecemberSolstice()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	double JD = core->getJDE();
+	int year, month, day;
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
+	Vec4d estime = getEquinoxesSolstices(year - 1);
+	if (estime[3]>0.) // December solstice
+		core->setJDE(estime[3]);
 }

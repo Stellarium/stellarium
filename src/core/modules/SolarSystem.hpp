@@ -886,7 +886,41 @@ public:
 	//! Get the list of all minor bodies names.
 	const QStringList getMinorBodiesList() const { return minorBodies; }
 
+	//! Compute the time of equinoxes and solstices for specific year
+	//! @param year (valid range: -1000..+3000)
+	//! @return Vec4d
+	//! [0] - March equinox
+	//! [1] - June solstice
+	//! [2] - September equinox
+	//! [3] - December solstice
+	Vec4d getEquinoxesSolstices(int year);
+
 private slots:
+	//! Set simulation time to the time of march equinox at current year
+	void currentMarchEquinox();
+	//! Set simulation time to the time of march equinox at next year
+	void nextMarchEquinox();
+	//! Set simulation time to the time of march equinox at previous year
+	void previousMarchEquinox();
+	//! Set simulation time to the time of june solstice at current year
+	void currentJuneSolstice();
+	//! Set simulation time to the time of june solstice at next year
+	void nextJuneSolstice();
+	//! Set simulation time to the time of june solstice at previous year
+	void previousJuneSolstice();
+	//! Set simulation time to the time of september equinox at current year
+	void currentSeptemberEquinox();
+	//! Set simulation time to the time of september equinox at next year
+	void nextSeptemberEquinox();
+	//! Set simulation time to the time of september equinox at previous year
+	void previousSeptemberEquinox();
+	//! Set simulation time to the time of december solstice at current year
+	void currentDecemberSolstice();
+	//! Set simulation time to the time of december solstice at next year
+	void nextDecemberSolstice();
+	//! Set simulation time to the time of december solstice at previous year
+	void previousDecemberSolstice();
+
 	//! Called when a new object is selected.
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
 
