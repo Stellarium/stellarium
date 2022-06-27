@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-06-26 19:40+0700\n"
+"POT-Creation-Date: 2022-06-27 14:47+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3519,7 +3519,7 @@ msgctxt "celestial event"
 msgid "Evening twilight"
 msgstr ""
 
-#: src/core/StelObject.cpp:744
+#: src/core/StelObject.cpp:744 plugins/NavStars/src/ui_navStarsWindow.h:574
 msgid "Daytime"
 msgstr ""
 
@@ -19591,15 +19591,15 @@ msgid "Today:"
 msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:552
-msgid "Duration of the daytime (include nautical twilight)"
+msgid "Duration of nautical twilight (including daytime)"
 msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:558
-msgid "Duration of the daytime (include astronomical twilight)"
+msgid "Duration of astronomical twilight (including daytime)"
 msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:562
-msgid "Duration of the daytime (include civil twilight)"
+msgid "Duration of civil twilight (including daytime)"
 msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:569
@@ -19608,10 +19608,6 @@ msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:571
 msgid "End"
-msgstr ""
-
-#: plugins/NavStars/src/ui_navStarsWindow.h:574
-msgid "Daylight"
 msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:576
@@ -19623,7 +19619,7 @@ msgid "Duration"
 msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:579
-msgid "Duration of the daytime"
+msgid "Duration of daytime"
 msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:586
