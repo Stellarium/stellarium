@@ -699,7 +699,7 @@ void ViewDialog::updateTabBarListWidgetWidth()
 	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
 	QFont font;
 	font.setPixelSize(14);
-	font.setWeight(QFont::Thin);
+	font.setWeight(QFont::Bold);
 	QFontMetrics fontMetrics(font);
 	int iconSize = ui->stackListWidget->iconSize().width();
 	int width = 0;
