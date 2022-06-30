@@ -44,7 +44,7 @@ your distribution. Here's a list.
 - A C++ compiler able to compile C++17 code ([GCC](https://gcc.gnu.org/) 7 or later, 
   Clang 6 or later, MSVC 2017 (15.7) or later; MSVC2019 required for Qt6)
 - [CMake](https://www.cmake.org/) 3.16.0 or later - buildsystem used by many open source projects
-- [Qt Framework](https://www.qt.io/) 5.12.0 or later. We recommend 5.15.2 for Stellarium 0.*, or even Qt6.2 or later for Stellarium 1.*.
+- [Qt Framework](https://www.qt.io/) 5.9.0 or later. We recommend 5.15.2 for Stellarium 0.*, or Qt6.2 or later for Stellarium 1.*.
 - [OpenGL](https://www.opengl.org/) - graphics library
 - [Zlib](https://www.zlib.net) - compression library
 
