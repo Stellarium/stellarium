@@ -21,13 +21,16 @@ SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 ########### Project name ###########
 PROJECT(Stellarium C CXX)
 ########### Detect Qt version
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
+find_package(Qt6 COMPONENTS Core QUIET)
+if (NOT Qt6_FOUND)
+    find_package(Qt5 REQUIRED COMPONENTS Core)
+ENDIF()
 
 # Activate this to error on all things deprecated in 5.15
 #add_compile_definitions("QT_DISABLE_DEPRECATED_BEFORE=0x050F00")
 
 # If Qt6, set series number to 1.
-IF(${QT_VERSION_MAJOR} EQUAL "6")
+IF(Qt6_FOUND)
      SET(STELLARIUM_MAJOR 1)
 ELSE()
      SET(STELLARIUM_MAJOR 0)
@@ -42,6 +45,7 @@ ADD_DEFINITIONS(
      -DSTELLARIUM_PATCH=${STELLARIUM_PATCH}
 )
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
+MESSAGE("Building ${VERSION}")
 SET(PACKAGE stellarium)
 STRING(TIMESTAMP CURRENTYEAR "%Y")
 SET(COPYRIGHT_YEARS "2000-${CURRENTYEAR}")
@@ -64,9 +68,12 @@ ADD_DEFINITIONS(-DPACKAGE_VERSION="${PACKAGE_VERSION}")
 ADD_DEFINITIONS(-DCOPYRIGHT_YEARS="${COPYRIGHT_YEARS}")
 ADD_DEFINITIONS(-DSTELLARIUM_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
 
-# Qt 5.15 is required as it provides version-less CMake functions (QT_WRAP_UI etc.)
-SET(MINIMAL_QT_VERSION "5.15.0")
-#SET(MINIMAL_QT_VERSION "6.2.0")
+# Qt 5.15 is preferred as it provides version-less CMake functions (QT_WRAP_UI etc.)
+IF(Qt6_FOUND)
+     SET(MINIMAL_QT_VERSION "6.2.0")
+ELSE()
+     SET(MINIMAL_QT_VERSION "5.12.0")
+ENDIF()
 # TODO: Check real minimal supported version of GPSD API
 SET(MINIMAL_GPS_API_VERSION "6.0")
 
@@ -398,7 +405,7 @@ IF(ENABLE_SPOUT)
      MARK_AS_ADVANCED(SPOUT_LIBRARY_DLL)
 ENDIF(ENABLE_SPOUT)
 
-IF(${QT_VERSION_MAJOR} EQUAL "5")
+IF(Qt5_FOUND)
      SET(ENABLE_SCRIPTING 1 CACHE BOOL "Define whether scripting features should be activated.")
      IF(ENABLE_SCRIPTING)
           ADD_DEFINITIONS(-DENABLE_SCRIPTING)
@@ -408,9 +415,9 @@ IF(${QT_VERSION_MAJOR} EQUAL "5")
                ADD_DEFINITIONS(-DENABLE_SCRIPT_CONSOLE)
           ENDIF()
      ENDIF()
-ELSE(${QT_VERSION_MAJOR} EQUAL "5")
+ELSE(Qt5_FOUND)
      SET(ENABLE_SCRIPTING 0 CACHE BOOL "Define whether scripting features should be activated. Currently strictly no Scripting on Qt6!")
-ENDIF(${QT_VERSION_MAJOR} EQUAL "5")
+ENDIF(Qt5_FOUND)
 
 SET(STELLARIUM_GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None")
 
@@ -489,8 +496,23 @@ ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 SET_TARGET_PROPERTIES(AllStaticPlugins PROPERTIES FOLDER "plugins")
 
 ########### Find packages ###########
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
+message("Identifying Qt:")
+FIND_PACKAGE(Qt6 COMPONENTS Core QUIET)
+message("Qt6_FOUND is ${Qt6_FOUND}")
+if (Qt6_FOUND)
+    message("Qt6 found. QT_VERSION_MAJOR is ${QT_VERSION_MAJOR}")
+    IF(NOT DEFINED QT_VERSION_MAJOR)
+         SET(QT_VERSION_MAJOR 6)
+    ENDIF()
+    ELSE()
+    FIND_PACKAGE(Qt5 REQUIRED COMPONENTS Core)
+    message("Qt5 found. QT_VERSION_MAJOR is ${QT_VERSION_MAJOR}")
+    IF(NOT DEFINED QT_VERSION_MAJOR)
+         SET(QT_VERSION_MAJOR 5)
+    ENDIF()
+endif()
 
+message("Qt version: ${QT_VERSION_MAJOR} ")
 FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
 # Catch the real path for used Qt Framework
 GET_TARGET_PROPERTY(QMAKE_LOCATION Qt${QT_VERSION_MAJOR}::qmake LOCATION)

@@ -12,11 +12,15 @@ SET(AngleMeasure_UIS
      gui/angleMeasureDialog.ui
 )
 
-QT_WRAP_UI(AngleMeasure_UIS_H ${AngleMeasure_UIS})
-
 ################# compiles resources files ############
 SET(AngleMeasure_RES ../AngleMeasure.qrc)
-QT_ADD_RESOURCES(AngleMeasure_RES_CXX ${AngleMeasure_RES})
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_WRAP_UI(AngleMeasure_UIS_H ${AngleMeasure_UIS})
+     QT5_ADD_RESOURCES(AngleMeasure_RES_CXX ${AngleMeasure_RES})
+ELSE()
+     QT_WRAP_UI(AngleMeasure_UIS_H ${AngleMeasure_UIS})
+     QT_ADD_RESOURCES(AngleMeasure_RES_CXX ${AngleMeasure_RES})
+ENDIF()
 
 ADD_LIBRARY(AngleMeasure-static STATIC ${AngleMeasure_SRCS} ${AngleMeasure_RES_CXX} ${AngleMeasure_UIS_H})
 TARGET_LINK_LIBRARIES(AngleMeasure-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)

@@ -8,7 +8,11 @@ SET(TelescopeControl_INDI_UIS
     INDIControlWidget.ui
     )
 
-QT_WRAP_UI(TelescopeControl_INDI_UIS_H ${TelescopeControl_INDI_UIS})
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_WRAP_UI(TelescopeControl_INDI_UIS_H ${TelescopeControl_INDI_UIS})
+ELSE()
+    QT_WRAP_UI(TelescopeControl_INDI_UIS_H ${TelescopeControl_INDI_UIS})
+ENDIF()
 
 add_library(TelescopeControl_INDI STATIC
     INDIConnection.hpp

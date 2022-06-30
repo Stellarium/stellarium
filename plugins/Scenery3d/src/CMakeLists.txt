@@ -49,15 +49,19 @@ ENDIF()
 
 ################# compiles resources files ############
 SET(Scenery3d_RES ../resources/Scenery3d.qrc)
-QT_ADD_RESOURCES(Scenery3d_RES_CXX ${Scenery3d_RES})
 
 ################# compiles .ui files ############
 SET(Scenery3d_UIS
      gui/scenery3dDialog.ui
      gui/storedViewDialog.ui
 )
-QT_WRAP_UI(Scenery3d_UIS_H ${Scenery3d_UIS})
-
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_WRAP_UI(Scenery3d_UIS_H ${Scenery3d_UIS})
+     QT5_ADD_RESOURCES(Scenery3d_RES_CXX ${Scenery3d_RES})
+ELSE()
+     QT_WRAP_UI(Scenery3d_UIS_H ${Scenery3d_UIS})
+     QT_ADD_RESOURCES(Scenery3d_RES_CXX ${Scenery3d_RES})
+ENDIF()
 ############### For building the static library ######################
 ADD_LIBRARY(Scenery3d-static STATIC ${Scenery3d_SRCS} ${Scenery3d_RES_CXX} ${Scenery3d_UIS_H} ${Scenery3d_MOC_SRCS} )
 TARGET_LINK_LIBRARIES(Scenery3d-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Concurrent Qt${QT_VERSION_MAJOR}::Gui ${STEL_GLES_LIBS} Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::OpenGL)

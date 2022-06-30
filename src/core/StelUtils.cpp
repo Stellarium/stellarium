@@ -334,7 +334,11 @@ QString radToDmsStrAdapt(const double angle, const bool useD)
 	os << (sign?'+':'-') << d << degsign;
 	if (std::fabs(s*100-static_cast<int>(s)*100)>=1)
 	{
+#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
 		os << m << '\'' << Qt::fixed << qSetRealNumberPrecision(2) << qSetFieldWidth(5) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
+#else
+		os << m << '\'' << fixed << qSetRealNumberPrecision(2) << qSetFieldWidth(5) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
+#endif
 	}
 	else if (static_cast<int>(s)!=0)
 	{
@@ -376,8 +380,11 @@ QString radToDmsPStr(const double angle, const int precision, const bool useD)
 	int width = 2;
 	if (precision>0)
 		width = 3 + precision;
+#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
 	os << qSetRealNumberPrecision(precision) << Qt::fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
-
+#else
+	os << qSetRealNumberPrecision(precision) << fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
+#endif
 	return str;
 }
 

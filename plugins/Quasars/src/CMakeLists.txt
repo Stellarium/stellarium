@@ -20,10 +20,15 @@ SET(QuasarsDialog_UIS
      gui/quasarsDialog.ui
 )
 
-QT_WRAP_UI(QuasarsDialog_UIS_H ${QuasarsDialog_UIS})
-
 SET(Quasars_RES ../resources/Quasars.qrc)
-QT_ADD_RESOURCES(Quasars_RES_CXX ${Quasars_RES})
+
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_WRAP_UI(QuasarsDialog_UIS_H ${QuasarsDialog_UIS})
+     QT5_ADD_RESOURCES(Quasars_RES_CXX ${Quasars_RES})
+ELSE()
+     QT_WRAP_UI(QuasarsDialog_UIS_H ${QuasarsDialog_UIS})
+     QT_ADD_RESOURCES(Quasars_RES_CXX ${Quasars_RES})
+ENDIF()
 
 ADD_LIBRARY(Quasars-static STATIC ${Quasars_SRCS} ${Quasars_RES_CXX} ${QuasarsDialog_UIS_H})
 TARGET_LINK_LIBRARIES(Quasars-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets)

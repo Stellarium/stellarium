@@ -19,10 +19,15 @@ SET(Exoplanets_SRCS
 SET(ExoplanetsDialog_UIS
      gui/exoplanetsDialog.ui
 )
-QT_WRAP_UI(ExoplanetsDialog_UIS_H ${ExoplanetsDialog_UIS})
 
 SET(Exoplanets_RES ../resources/Exoplanets.qrc)
-QT_ADD_RESOURCES(Exoplanets_RES_CXX ${Exoplanets_RES})
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_WRAP_UI(ExoplanetsDialog_UIS_H ${ExoplanetsDialog_UIS})
+     QT5_ADD_RESOURCES(Exoplanets_RES_CXX ${Exoplanets_RES})
+ELSE()
+     QT_WRAP_UI(ExoplanetsDialog_UIS_H ${ExoplanetsDialog_UIS})
+     QT_ADD_RESOURCES(Exoplanets_RES_CXX ${Exoplanets_RES})
+ENDIF()
 
 ADD_LIBRARY(Exoplanets-static STATIC ${Exoplanets_SRCS} ${Exoplanets_RES_CXX} ${ExoplanetsDialog_UIS_H})
 TARGET_LINK_LIBRARIES(Exoplanets-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts)

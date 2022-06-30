@@ -62,11 +62,16 @@ SET(RemoteControl_UIS
   gui/remoteControlDialog.ui
 )
 
-QT_WRAP_UI(RemoteControl_UIS_H ${RemoteControl_UIS})
-
 ################# compiles resources files ############
 SET(RemoteControl_RES ../RemoteControl.qrc)
-QT_ADD_RESOURCES(RemoteControl_RES_CXX ${RemoteControl_RES})
+
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_WRAP_UI(RemoteControl_UIS_H ${RemoteControl_UIS})
+     QT5_ADD_RESOURCES(RemoteControl_RES_CXX ${RemoteControl_RES})
+ELSE()
+     QT_WRAP_UI(RemoteControl_UIS_H ${RemoteControl_UIS})
+     QT_ADD_RESOURCES(RemoteControl_RES_CXX ${RemoteControl_RES})
+ENDIF()
 
 ADD_LIBRARY(RemoteControl-static STATIC ${RemoteControl_SRCS} ${RemoteControl_RES_CXX} ${RemoteControl_UIS_H} ${QtWebApp_SRCS})
 TARGET_INCLUDE_DIRECTORIES(RemoteControl-static PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../include)

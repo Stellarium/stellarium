@@ -26,11 +26,16 @@ SET(RemoteSync_UIS
   gui/remoteSyncDialog.ui
 )
 
-QT_WRAP_UI(RemoteSync_UIS_H ${RemoteSync_UIS})
-
 ################# compiles resources files ############
 SET(RemoteSync_RES ../RemoteSync.qrc)
-QT_ADD_RESOURCES(RemoteSync_RES_CXX ${RemoteSync_RES})
+
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_WRAP_UI(RemoteSync_UIS_H ${RemoteSync_UIS})
+     QT5_ADD_RESOURCES(RemoteSync_RES_CXX ${RemoteSync_RES})
+ELSE()
+     QT_WRAP_UI(RemoteSync_UIS_H ${RemoteSync_UIS})
+     QT_ADD_RESOURCES(RemoteSync_RES_CXX ${RemoteSync_RES})
+ENDIF()
 
 ADD_LIBRARY(RemoteSync-static STATIC ${RemoteSync_SRCS} ${RemoteSync_UIS_H} ${RemoteSync_RES_CXX})
 TARGET_LINK_LIBRARIES(RemoteSync-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets)

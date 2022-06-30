@@ -9,7 +9,11 @@ SET(TelescopeControl_ASCOM_UIS
     TelescopeClientASCOMWidget.ui
     )
 
-QT_WRAP_UI(TelescopeControl_ASCOM_UIS_H ${TelescopeControl_ASCOM_UIS})
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_WRAP_UI(TelescopeControl_ASCOM_UIS_H ${TelescopeControl_ASCOM_UIS})
+ELSE()
+     QT_WRAP_UI(TelescopeControl_ASCOM_UIS_H ${TelescopeControl_ASCOM_UIS})
+ENDIF()
 
 add_library(TelescopeControl_ASCOM STATIC
     ASCOMDevice.hpp
