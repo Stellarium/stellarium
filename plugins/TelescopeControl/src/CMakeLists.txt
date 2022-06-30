@@ -11,7 +11,11 @@ if(WIN32)
 endif(WIN32)
 
 SET(TelescopeControl_RES ../resources/TelescopeControl.qrc)
-QT_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
+ELSE()
+     QT_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
+ENDIF()
 
 ADD_LIBRARY(TelescopeControl-static STATIC
     TelescopeControlGlobals.hpp

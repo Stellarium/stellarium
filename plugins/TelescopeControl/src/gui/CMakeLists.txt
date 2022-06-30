@@ -8,7 +8,11 @@ SET(TelescopeControl_GUI_UIS
     storedPointsDialog.ui
     )
 
-QT_WRAP_UI(TelescopeControl_GUI_UIS_H ${TelescopeControl_GUI_UIS})
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_WRAP_UI(TelescopeControl_GUI_UIS_H ${TelescopeControl_GUI_UIS})
+ELSE()
+     QT_WRAP_UI(TelescopeControl_GUI_UIS_H ${TelescopeControl_GUI_UIS})
+ENDIF()
 
 add_library(TelescopeControl_gui STATIC
     SlewDialog.hpp

@@ -51,10 +51,15 @@ SET(SatellitesDialog_UIS
      gui/satellitesFilterDialog.ui
      gui/satellitesCommDialog.ui
 )
-QT_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
 
 SET(Satellites_RES ../resources/Satellites.qrc)
-QT_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
+     QT5_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
+ELSE()
+     QT_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
+     QT_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
+ENDIF()
 
 IF(ENABLE_TESTING)
     ADD_SUBDIRECTORY(test)

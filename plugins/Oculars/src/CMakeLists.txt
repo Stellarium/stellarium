@@ -26,13 +26,19 @@ SET(Oculars_SRCS
 )
 
 SET(Oculars_RES ../resources/Oculars.qrc)
-QT_ADD_RESOURCES(Oculars_RES_CXX ${Oculars_RES})
 
 ################# compiles .ui files ############
 SET(Oculars_UIS
      gui/ocularDialog.ui
 )
-QT_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
+
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+      QT5_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
+      QT5_ADD_RESOURCES(Oculars_RES_CXX ${Oculars_RES})
+ELSE()
+     QT_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
+     QT_ADD_RESOURCES(Oculars_RES_CXX ${Oculars_RES})
+ENDIF()
 
 ADD_LIBRARY(Oculars-static STATIC ${Oculars_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H})
 SET_TARGET_PROPERTIES(Oculars-static PROPERTIES OUTPUT_NAME "Oculars")

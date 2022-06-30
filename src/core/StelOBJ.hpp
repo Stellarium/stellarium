@@ -299,8 +299,10 @@ public:
 	void clearVertexData();
 private:
 #if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
-	typedef QStringList ParseParams;
+	typedef QStringView ParseParam;
+	typedef QVector<QStringView> ParseParams;
 #else
+	typedef QStringRef ParseParam;
 	typedef QVector<QStringRef> ParseParams;
 #endif
 	typedef QHash<Vertex, int> VertexCache;

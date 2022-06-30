@@ -291,7 +291,11 @@ SET(stellarium_exe_SRCS main.cpp)
 
 ################# compiles resources files ############
 SET(stellarium_RES ${CMAKE_SOURCE_DIR}/data/mainRes.qrc)
-QT_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
+IF(${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
+ELSE()
+     QT_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
+ENDIF()
 #############################################################################################
 ############################# Standard GUI plugin compilation ###############################
 #############################################################################################

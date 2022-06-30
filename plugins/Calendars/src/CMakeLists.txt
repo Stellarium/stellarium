@@ -79,11 +79,15 @@ SET(Calendars_UIS
      gui/calendarsDialog.ui
 )
 
-QT_WRAP_UI(Calendars_UIS_H ${Calendars_UIS})
-
 ################# compiles resources files ############
 SET(Calendars_RES ../resources/Calendars.qrc)
-QT_ADD_RESOURCES(Calendars_RES_CXX ${Calendars_RES})
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_WRAP_UI(Calendars_UIS_H ${Calendars_UIS})
+     QT5_ADD_RESOURCES(Calendars_RES_CXX ${Calendars_RES})
+ELSE()
+     QT_WRAP_UI(Calendars_UIS_H ${Calendars_UIS})
+     QT_ADD_RESOURCES(Calendars_RES_CXX ${Calendars_RES})
+ENDIF()
 
 IF(ENABLE_TESTING)
     ADD_SUBDIRECTORY(test)

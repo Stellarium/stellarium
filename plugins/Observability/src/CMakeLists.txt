@@ -19,11 +19,16 @@ SET(Observability_SRCS
 SET(ObservabilityDialog_UIS
      gui/ObservabilityDialog.ui
 )
-QT_WRAP_UI(ObservabilityDialog_UIS_H ${ObservabilityDialog_UIS})
-
 
 SET(Observability_RES ../Observability.qrc)
-QT_ADD_RESOURCES(Observability_RES_CXX ${Observability_RES})
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_WRAP_UI(ObservabilityDialog_UIS_H ${ObservabilityDialog_UIS})
+     QT5_ADD_RESOURCES(Observability_RES_CXX ${Observability_RES})
+ELSE()
+     QT_WRAP_UI(ObservabilityDialog_UIS_H ${ObservabilityDialog_UIS})
+     QT_ADD_RESOURCES(Observability_RES_CXX ${Observability_RES})
+ENDIF()
+
 
 ADD_LIBRARY(Observability-static STATIC ${Observability_SRCS} ${Observability_RES_CXX} ${ObservabilityDialog_UIS_H})
 TARGET_LINK_LIBRARIES(Observability-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)

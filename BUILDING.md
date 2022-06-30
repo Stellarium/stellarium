@@ -42,11 +42,11 @@ your distribution. Here's a list.
 ### Required dependencies
 
 - A C++ compiler able to compile C++17 code ([GCC](https://gcc.gnu.org/) 7 or later, 
-  Clang 6 or later, MSVC 2017 (15.7) or later)
-- [CMake](http://www.cmake.org/) 3.10.0 or later - buildsystem used by many open source projects
-- [Qt Framework](http://www.qt.io/) 5.9.0 or later
+  Clang 6 or later, MSVC 2017 (15.7) or later; MSVC2019 required for Qt6)
+- [CMake](https://www.cmake.org/) 3.16.0 or later - buildsystem used by many open source projects
+- [Qt Framework](https://www.qt.io/) 5.12.0 or later. We recommend 5.15.2 for Stellarium 0.*, or even Qt6.2 or later for Stellarium 1.*.
 - [OpenGL](https://www.opengl.org/) - graphics library
-- [Zlib](http://www.zlib.net) - compression library
+- [Zlib](https://www.zlib.net) - compression library
 
 ### Optional dependencies
 
@@ -62,6 +62,8 @@ To install all of these, use the following commands:
 
 #### Debian / Ubuntu
 
+##### Qt5
+
 ```
 sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc g++ \
                  graphviz doxygen gettext git \
@@ -70,6 +72,20 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc
                  qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins \
                  qtwebengine5-dev libqt5charts5-dev
 ```
+
+##### Qt6
+
+Ubuntu 22.04 comes with Qt5.15 and Qt6.2.  
+
+```
+sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc g++ \
+                 graphviz doxygen gettext git \
+                 qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools linguist-qt6 libqt6svg6-dev \
+                 qt6-multimedia-dev libqt6serialport6-dev \
+                 libqt6positioning6-plugins libgps-dev \
+                 libqt6webenginewidgets6 qt6-webengine-dev-tools libqt6charts6-dev
+```
+
 
 #### Fedora / CentOS
 

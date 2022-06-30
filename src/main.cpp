@@ -370,8 +370,7 @@ int main(int argc, char **argv)
 	QFont tmpFont(baseFont);
 	#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 	tmpFont.setHintingPreference(QFont::PreferFullHinting);
-	//tmpFont.setStyleHint(QFont::AnyStyle, QFont::PreferAntialias);
-	tmpFont.setStyleHint(QFont::SansSerif, QFont::PreferAntialias);
+	tmpFont.setStyleHint(QFont::AnyStyle, QFont::PreferAntialias);
 	#else
 	tmpFont.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);
 	#endif

@@ -15,11 +15,15 @@ SET(ArchaeoLines_UIS
      gui/archaeoLinesDialogLocations.ui
 )
 
-QT_WRAP_UI(ArchaeoLines_UIS_H ${ArchaeoLines_UIS})
-
 ################# compiles resources files ############
 SET(ArchaeoLines_RES ../ArchaeoLines.qrc)
-QT_ADD_RESOURCES(ArchaeoLines_RES_CXX ${ArchaeoLines_RES})
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_WRAP_UI(ArchaeoLines_UIS_H ${ArchaeoLines_UIS})
+     QT5_ADD_RESOURCES(ArchaeoLines_RES_CXX ${ArchaeoLines_RES})
+ELSE()
+     QT_WRAP_UI(ArchaeoLines_UIS_H ${ArchaeoLines_UIS})
+     QT_ADD_RESOURCES(ArchaeoLines_RES_CXX ${ArchaeoLines_RES})
+ENDIF()
 
 ADD_LIBRARY(ArchaeoLines-static STATIC ${ArchaeoLines_SRCS} ${ArchaeoLines_RES_CXX} ${ArchaeoLines_UIS_H})
 TARGET_LINK_LIBRARIES(ArchaeoLines-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)

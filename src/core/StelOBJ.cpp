@@ -114,7 +114,7 @@ bool StelOBJ::parseBool(const ParseParams &params, bool &out, int paramsStart)
 	}
 
 
-	const QString cmd = params.at(paramsStart);
+	const ParseParam& cmd = params.at(paramsStart);
 	out = (CMD_CMP("1") || CMD_CMP("true") || CMD_CMP("TRUE") || CMD_CMP("yes") || CMD_CMP("YES"));
 
 	return true;
@@ -150,11 +150,11 @@ bool StelOBJ::parseString(const ParseParams &params, QString &out, int paramsSta
 		qCWarning(stelOBJ)<<"Additional parameters ignored in statement"<<params;
 	}
 
-#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
-	out = params.at(paramsStart);
-#else
+//#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
+//	out = params.at(paramsStart);
+//#else
 	out = params.at(paramsStart).toString();
-#endif
+//#endif
 	return true;
 }
 
@@ -322,7 +322,11 @@ bool StelOBJ::parseFace(const ParseParams& params, const V3Vec& posList, const V
 	for(int i =0; i<vtxAmount;++i)
 	{
 		//split on slash
-		QStringList split = params.at(i+1).split('/');
+		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+		ParseParams split = params.at(i+1).split('/').toVector();
+		#else
+		ParseParams split = params.at(i+1).split('/');
+		#endif
 		switch(split.size())
 		{
 			case 1: //no slash, only position
@@ -444,13 +448,13 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 		QString line = stream.readLine().simplified();
 		//split line by space		
 		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-		QStringList splits = line.split(' ',Qt::SkipEmptyParts);
+		ParseParams splits = ParseParam(line).split(' ',Qt::SkipEmptyParts).toVector();
 		#else
-		QStringList splits = line.splitRef(' ',QString::SkipEmptyParts);
+		ParseParams splits = line.splitRef(' ',QString::SkipEmptyParts);
 		#endif
 		if(!splits.isEmpty())
 		{
-			const QString cmd = splits.at(0);
+			const ParseParam& cmd = splits.at(0);
 
 			//macro to make sure a material is currently active
 			#define CHECK_MTL() if(!curMaterial) { ok = false; qCCritical(stelOBJ)<<"Encountered material statement without active material"; }
@@ -627,7 +631,7 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 					curMaterial->illum = static_cast<Illum>(tmp);
 				}
 			}
-			else if(!cmd.startsWith("#"))
+			else if(!cmd.startsWith(QChar('#')))
 			{
 				CHECK_MTL()
 				if(ok)
@@ -637,14 +641,14 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 					QStringList list;
 					for(int i = 1; i<splits.size();++i)
 					{
-#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
-						list.append(splits.at(i));
-#else
+//#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
+//						list.append(splits.at(i));
+//#else
 						list.append(splits.at(i).toString());
-#endif
+//#endif
 					}
 
-					curMaterial->additionalParams.insert(cmd,list);
+					curMaterial->additionalParams.insert(cmd.toString(),list);
 					//qCWarning(stelOBJ)<<"Unknown MTL statement:"<<line;
 				}
 			}
@@ -663,11 +667,11 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 
 bool StelOBJ::Material::parseBool(const QStringList &params, bool &out)
 {
-#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
-	ParseParams pp;
-#else
+//#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
+//	ParseParams pp;
+//#else
 	ParseParams pp(params.size());
-#endif
+//#endif
 	for(int i = 0; i< params.size();++i)
 	{
 #if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
@@ -681,17 +685,17 @@ bool StelOBJ::Material::parseBool(const QStringList &params, bool &out)
 
 bool StelOBJ::Material::parseFloat(const QStringList &params, float &out)
 {
-#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
-	ParseParams pp;
-#else
+//#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
+//	ParseParams pp;
+//#else
 	ParseParams pp(params.size());
-#endif
+//#endif
 	for(int i = 0; i< params.size();++i)
 	{
 #if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 		pp[i] = params.at(i);
 #else
-		pp[i] = QStringRef(&params.at(i));
+		pp[i] = ParseParam(&params.at(i));
 #endif
 	}
 	return StelOBJ::parseFloat(pp,out,0);
@@ -699,17 +703,17 @@ bool StelOBJ::Material::parseFloat(const QStringList &params, float &out)
 
 bool StelOBJ::Material::parseVec2d(const QStringList &params, Vec2d &out)
 {
-#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
-	ParseParams pp;
-#else
+//#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
+//	ParseParams pp;
+//#else
 	ParseParams pp(params.size());
-#endif
+//#endif
 	for(int i = 0; i< params.size();++i)
 	{
 #if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
 		pp[i] = params.at(i);
 #else
-		pp[i] = QStringRef(&params.at(i));
+		pp[i] = ParseParam(&params.at(i));
 #endif
 	}
 	return StelOBJ::parseVec2(pp,out,0);
@@ -774,13 +778,13 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 
 		//split line by whitespace
 		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-		QStringList splits = line.split(separator, Qt::SkipEmptyParts);
+		ParseParams splits = ParseParam(line).split(separator, Qt::SkipEmptyParts).toVector();
 		#else
-		QStringList splits = line.splitRef(separator, QString::SkipEmptyParts);
+		ParseParams splits = line.splitRef(separator, QString::SkipEmptyParts);
 		#endif
 		if(!splits.isEmpty())
 		{
-			const QString cmd = splits.at(0);
+			const ParseParam& cmd = splits.at(0);
 
 			bool ok = true;
 
@@ -949,7 +953,7 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 			{
 				if(!smoothGroupWarned)
 				{
-					qCWarning(stelOBJ)<<"Smoothing groups are not supported, consider re-exporting your model from blender";
+					qCWarning(stelOBJ)<<"Smoothing groups are not supported, consider re-exporting your model from Blender";
 					smoothGroupWarned = true;
 				}
 			}

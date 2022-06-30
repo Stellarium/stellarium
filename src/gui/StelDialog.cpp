@@ -500,7 +500,11 @@ QComboBoxStelStringPropertyConnectionHelper::QComboBoxStelStringPropertyConnecti
 	onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
+#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
 	connect(combo, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::textActivated),prop,&StelProperty::setValue);
+#else
+	connect(combo, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::activated),prop,&StelProperty::setValue);
+#endif
 }
 
 void QComboBoxStelStringPropertyConnectionHelper::onPropertyChanged(const QVariant &value)
