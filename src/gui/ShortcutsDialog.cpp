@@ -38,14 +38,22 @@ ShortcutsFilterModel::ShortcutsFilterModel(QObject* parent) :
 
 bool ShortcutsFilterModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
+#if (QT_VERSION>=QT_VERSION_CHECK(5,12,0))
 	if (filterRegularExpression().pattern().isEmpty())
+#else
+	if (filterRegExp().pattern().isEmpty())
+#endif
 		return true;
 	
 	if (source_parent.isValid())
 	{
 		QModelIndex index = source_parent.model()->index(source_row, filterKeyColumn(), source_parent);
 		QString data = sourceModel()->data(index, filterRole()).toString();
+#if (QT_VERSION>=QT_VERSION_CHECK(5,12,0))
 		return data.contains(filterRegularExpression());
+#else
+		return data.contains(filterRegExp());
+#endif
 	}
 	else
 	{

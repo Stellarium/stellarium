@@ -38,6 +38,9 @@
 #include <QDir>
 #include <QOpenGLWidget>
 #include <QApplication>
+#if (QT_VERSION<QT_VERSION_CHECK(5,12,0))
+#include <QDesktopWidget>
+#endif
 #include <QGuiApplication>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsAnchorLayout>
@@ -1620,8 +1623,11 @@ void StelMainView::doScreenshot(void)
 	sParams.viewportXywh[3]=imgHeight;
 
 	// Configure a helper value to allow some modules to tweak their output sizes. Currently used by StarMgr, maybe solve font issues?
+#if (QT_VERSION>=QT_VERSION_CHECK(5,12,0))
 	customScreenshotMagnification=static_cast<float>(imgHeight)/static_cast<float>(qApp->screenAt(QPoint(stelScene->width()*0.5, stelScene->height()*0.5))->geometry().height());
-
+#else
+	customScreenshotMagnification=static_cast<float>(imgHeight)/static_cast<float>(qApp->screens().at(qApp->desktop()->screenNumber())->geometry().height());
+#endif
 	sParams.viewportCenter.set(0.0+(0.5+pParams.viewportCenterOffset.v[0])*imgWidth, 0.0+(0.5+pParams.viewportCenterOffset.v[1])*imgHeight);
 	sParams.viewportFovDiameter = qMin(imgWidth,imgHeight);
 	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(sParams);
