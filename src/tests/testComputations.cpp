@@ -798,7 +798,7 @@ void TestComputations::testInterpolation()
 			StelUtils::dmsToRad(0, 54, 04.133));
 	double res5=StelUtils::dmsToRad(0, 54, 13.369);
 	QVERIFY2(abs(i5-res5)<0.000001,
-		 qPrintable(QString("Interpol5 returned %1, not %2").arg(QString::number(i5), 'g', 7).arg(QString::number(res5), 'g', 7)));
+		 qPrintable(QString("Interpol5 returned %1, not %2").arg(QString::number(i5, 'g', 7).arg(QString::number(res5, 'g', 7)))));
 }
 
 void TestComputations::testIsWithin()
