@@ -21,9 +21,9 @@ SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 ########### Project name ###########
 PROJECT(Stellarium C CXX)
 ########### Detect Qt version
-find_package(Qt6 COMPONENTS Core QUIET)
+FIND_PACKAGE(Qt6 COMPONENTS Core QUIET)
 if (NOT Qt6_FOUND)
-    find_package(Qt5 REQUIRED COMPONENTS Core)
+    FIND_PACKAGE(Qt5 REQUIRED COMPONENTS Core)
 ENDIF()
 
 # Activate this to error on all things deprecated in 5.15
@@ -45,7 +45,6 @@ ADD_DEFINITIONS(
      -DSTELLARIUM_PATCH=${STELLARIUM_PATCH}
 )
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
-MESSAGE("Building ${VERSION}")
 SET(PACKAGE stellarium)
 STRING(TIMESTAMP CURRENTYEAR "%Y")
 SET(COPYRIGHT_YEARS "2000-${CURRENTYEAR}")
@@ -71,8 +70,14 @@ ADD_DEFINITIONS(-DSTELLARIUM_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
 # Qt 5.15 is preferred as it provides version-less CMake functions (QT_WRAP_UI etc.)
 IF(Qt6_FOUND)
      SET(MINIMAL_QT_VERSION "6.2.0")
+     IF(NOT DEFINED QT_VERSION_MAJOR)
+         SET(QT_VERSION_MAJOR 6)
+     ENDIF()
 ELSE()
      SET(MINIMAL_QT_VERSION "5.9.0")
+     IF(NOT DEFINED QT_VERSION_MAJOR)
+         SET(QT_VERSION_MAJOR 6)
+     ENDIF()
 ENDIF()
 # TODO: Check real minimal supported version of GPSD API
 SET(MINIMAL_GPS_API_VERSION "6.0")
@@ -496,23 +501,6 @@ ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 SET_TARGET_PROPERTIES(AllStaticPlugins PROPERTIES FOLDER "plugins")
 
 ########### Find packages ###########
-message("Identifying Qt:")
-FIND_PACKAGE(Qt6 COMPONENTS Core QUIET)
-message("Qt6_FOUND is ${Qt6_FOUND}")
-if (Qt6_FOUND)
-    message("Qt6 found. QT_VERSION_MAJOR is ${QT_VERSION_MAJOR}")
-    IF(NOT DEFINED QT_VERSION_MAJOR)
-         SET(QT_VERSION_MAJOR 6)
-    ENDIF()
-    ELSE()
-    FIND_PACKAGE(Qt5 REQUIRED COMPONENTS Core)
-    message("Qt5 found. QT_VERSION_MAJOR is ${QT_VERSION_MAJOR}")
-    IF(NOT DEFINED QT_VERSION_MAJOR)
-         SET(QT_VERSION_MAJOR 5)
-    ENDIF()
-endif()
-
-message("Qt version: ${QT_VERSION_MAJOR} ")
 FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
 # Catch the real path for used Qt Framework
 GET_TARGET_PROPERTY(QMAKE_LOCATION Qt${QT_VERSION_MAJOR}::qmake LOCATION)
