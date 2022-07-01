@@ -111,7 +111,6 @@ private slots:
 	void setLocationFromList(const QModelIndex& index);
 	
 	//! Called when the planet is manually changed.
-	//! @param id actually unused. (This is just a connection requirement)
 	void moveToAnotherPlanet();
 
 	//! Called when latitude/longitude/altitude is modified
