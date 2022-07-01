@@ -880,10 +880,9 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/milky_way_saturation",			QString::number(propMgr->getStelPropertyValue("MilkyWay.saturation").toDouble(), 'f', 2));
 	conf->setValue("astro/flag_zodiacal_light",				propMgr->getStelPropertyValue("ZodiacalLight.flagZodiacalLightDisplayed").toBool());
 	conf->setValue("astro/zodiacal_light_intensity",			QString::number(propMgr->getStelPropertyValue("ZodiacalLight.intensity").toDouble(), 'f', 2));
-	conf->setValue("astro/flag_grs_custom",				propMgr->getStelPropertyValue("SolarSystem.flagCustomGrsSettings").toBool());
-	conf->setValue("astro/grs_longitude",					propMgr->getStelPropertyValue("SolarSystem.customGrsLongitude").toInt());
-	conf->setValue("astro/grs_drift",						propMgr->getStelPropertyValue("SolarSystem.customGrsDrift").toDouble());
-	conf->setValue("astro/grs_jd",						propMgr->getStelPropertyValue("SolarSystem.customGrsJD").toDouble());
+	conf->setValue("astro/grs_longitude",					propMgr->getStelPropertyValue("SolarSystem.grsLongitude").toInt());
+	conf->setValue("astro/grs_drift",						propMgr->getStelPropertyValue("SolarSystem.grsDrift").toDouble());
+	conf->setValue("astro/grs_jd",						propMgr->getStelPropertyValue("SolarSystem.grsJD").toDouble());
 	conf->setValue("astro/shadow_enlargement_danjon",		propMgr->getStelPropertyValue("SolarSystem.earthShadowEnlargementDanjon").toBool());
 	conf->setValue("astro/flag_planets_labels",				propMgr->getStelPropertyValue("SolarSystem.labelsDisplayed").toBool());
 	conf->setValue("astro/labels_amount",					propMgr->getStelPropertyValue("SolarSystem.labelsAmount").toDouble());
