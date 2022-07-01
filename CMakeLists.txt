@@ -76,7 +76,7 @@ IF(Qt6_FOUND)
 ELSE()
      SET(MINIMAL_QT_VERSION "5.9.0")
      IF(NOT DEFINED QT_VERSION_MAJOR)
-         SET(QT_VERSION_MAJOR 6)
+         SET(QT_VERSION_MAJOR 5)
      ENDIF()
 ENDIF()
 # TODO: Check real minimal supported version of GPSD API
