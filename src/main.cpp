@@ -183,6 +183,52 @@ int main(int argc, char **argv)
 
 	QGuiApplication::setDesktopSettingsAware(false);
 
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	// IMPORTANT: OpenGL default context/formats must be configured before constructing app!
+	// Copy from StelMainView
+	// TODO: adapt/remove code from StelMainView?
+
+	//use the default format as basis
+	QSurfaceFormat fmt = QSurfaceFormat::defaultFormat();
+
+	//if on an GLES build, do not set the format
+	if (fmt.renderableType()==QSurfaceFormat::OpenGL)
+	{
+#ifdef Q_OS_OSX
+		// On OSX, you should get what you ask for. Setting format later may not work. Let's assume all MacOSX deliver at least 3.3 compatibility profile.
+		fmt.setMajorVersion(3);
+		fmt.setMinorVersion(3);
+		fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
+#else
+		// OGL 2.1 + FBOs should basically be the minimum required for Stellarium
+		fmt.setMajorVersion(2);
+		fmt.setMinorVersion(1);
+#endif
+	}
+
+	//request some sane buffer formats
+	fmt.setRedBufferSize(8);
+	fmt.setGreenBufferSize(8);
+	fmt.setBlueBufferSize(8);
+	fmt.setAlphaBufferSize(8);
+	fmt.setDepthBufferSize(24);
+	//Stencil buffer seems necessary for GUI boxes
+	fmt.setStencilBufferSize(8);
+	//const int multisamplingLevel = configuration->value("video/multisampling", 0).toInt();
+	//if(  multisamplingLevel  && (qApp->property("spout").toString() == "none") && (!isMesa) )
+	//	fmt.setSamples(multisamplingLevel);
+
+#ifdef OPENGL_DEBUG_LOGGING
+	//try to enable GL debugging using GL_KHR_debug
+	fmt.setOption(QSurfaceFormat::DebugContext);
+#endif
+	//vsync needs to be set on the default format for it to work
+	//fmt.setSwapInterval(0);
+
+	QSurfaceFormat::setDefaultFormat(fmt);
+
+	/////////////////////////////////////////////////////////////////////////////////
+
 #ifndef USE_QUICKVIEW
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 	// The QApplication MUST be created before the StelFileMgr is initialized.
