@@ -273,7 +273,7 @@ private:
 	//! Returns the desired OpenGL format settings,
 	//! on desktop this corresponds to a GL 2.1 context,
 	//! with 32bit RGBA buffer and 24/8 depth/stencil buffer
-	QSurfaceFormat getDesiredGLFormat() const;
+	static QSurfaceFormat getDesiredGLFormat(QSettings *configuration);
 	//! provide extended OpenGL diagnostics in logfile.
 	void dumpOpenGLdiagnostics() const;
 	//! Startup diagnostics, providing test for various circumstances of bad OS/OpenGL driver combinations
