@@ -1034,7 +1034,7 @@ Vec3f StelApp::getDaylightInfoColor() const
 void StelApp::updateI18n()
 {
 #ifdef ENABLE_NLS
-	emit(languageChanged());
+	emit languageChanged();
 #endif
 }
 
