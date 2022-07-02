@@ -30,7 +30,7 @@ regions of the sky in articles for newsletters and magazines, and the
 exchangeable sky cultures feature invites its use in the field of
 Cultural Astronomy research and outreach.
 
-Stellarium is still under development, and by the time you read
+Stellarium is under continuous development, and by the time you read
 this guide, a newer version may have been released with even more
 features than those documented here. Check for updates to Stellarium at
 the Stellarium website\footnote{\url{https://stellarium.org}}.
@@ -67,11 +67,11 @@ arrival on the project:
 \item[Bogdan Marinov] GUI, telescope control, other plugins
 \item[Diego Marcos] SVMT plugin
 \item[Guillaume Ch\'ereau] display, optimization, Qt upgrades, HiPS surveys
-\item[Alexander Wolf] maintainer, DSO catalogs, user guide, general development
-\item[Georg Zotti] astronomical computations, Scenery 3D, ArchaeoLines and Calendars plugins, general development, user guide, user support
+\item[Alexander Wolf] maintainer, DSO catalogs, AstroCalc module, user guide, general development
+\item[Georg Zotti] astronomical computations, Scenery 3D plugin, ArchaeoLines and Calendars plugins, general development, user guide, user support
 \item[Marcos Cardinot] MeteorShowers plugin
 \item[Florian Schaukowitsch] Scenery 3D plugin, Remote Control plugin, RemoteSync plugin, OBJ rendering, Qt/OpenGL internals
-\item[Teresa Huertas Roldán] Planetary nomenclature 
+\item[Teresa Huertas Rold\'an] Planetary nomenclature 
 \end{description}
 
 Unfortunately time is evolving, and most members of the original
@@ -94,7 +94,7 @@ graphic items like comet tails or the Zodiacal Light.
 milestones for the project:
 \begin{description}
 \item[2000] first lines of code for the project
-\item[2001-06] first public mention (and users feedbacks!) of the
+\item[2001-06] first public mention (and user feedbacks!) of the
   software on the French newsgroup \texttt{fr.sci.astronomie.amateur} 
   \footnote{\url{https://groups.google.com/d/topic/fr.sci.astronomie.amateur/OT7K8yogRlI/discussion}}
 \item[2003-01] Stellarium reviewed by Astronomy magazine
@@ -104,12 +104,12 @@ milestones for the project:
 \item[2006-08] large stars catalogs
 \item[2007-01] funding by ESO for development of professional astronomy extensions (VirGO)
 \item[2007-04] developers' meeting near Munich, Germany
-\item[2007-05] switch to the Qt library as main GUI and general purpose library
+\item[2007-05] switch to the Qt4 library as main GUI and general purpose library
 \item[2009-09] plugin system, enabling a lot of new development
 \item[2010-07] Stellarium ported on Maemo mobile device
 \item[2010-11] artificial satellites plugin
 \item[2014-06] high quality satellites and Saturn rings shadows, normal mapping for moon craters
-\item[2014-07] v0.13.0: adapt to OpenGL evolutions in the Qt framework, now requires more modern graphic hardware than earlier versions
+\item[2014-07] v0.13.0: adapt to OpenGL evolutions in the Qt5 framework, now requires more modern graphic hardware than earlier versions
 \item[2015-04] v0.13.3: Scenery 3D plugin
 \item[2015-10] v0.14.0: Accurate precession
 \item[2016-07] v0.15.0: Remote Control plugin
@@ -122,7 +122,35 @@ milestones for the project:
 \item[2020-09] v0.20.3: Accurate seasons' beginnings
 \item[2021-03] v0.21.0: Accurate planet rotation (Libration, central meridians, subsolar points, \ldots) 
 \item[2021-09] v0.21.2: Annual aberration, DE440\&441. Accuracy goals reached.
+\item[2022-09] v0.22.3 and v1.22.3: \textbf{Stellarium 1.0}.  
 \end{description}
+
+\section{Version Numbers}
+Since its inception, Stellarium's version number started with 0 to
+indicate ``work in progress''. The numbers after that have followed a
+year.release convention with approximately seasonal releases since
+2018. (For example, 0.18.2 was the third release in 2018 which
+appeared around autumn equinox, after 0.18.0 and 0.18.1.)
+
+A software version number of 1.0 signifies a milestone of some sort,
+like completion of a particular original feature set, usability, or
+stability. With the completion of the original accuracy issues in 2021
+we felt it was time to finally change version number to 1. However, a
+major technical update in the underlying Qt framework also forced some
+technical changes upon us to ensure Stellarium will remain working in
+the later 2020s, and therefore we decided to base the 1.* series on
+the new version of Qt.
+
+Qt6 does not support old hardware, particularly 32-bit systems will
+not be able to run 1.* versions.  Therefore, we are going to keep both
+series alive for those with older hardware. Thanks to only minor
+differences in the underlying frameworks, both series should retain
+feature equivalence. The only notable difference for now lies in the
+Scripting functionality (see chapter~\ref{ch:scripting}).
+
+Our version numbers therefore indicate which version of Qt is used:
+series 0.* will continue to be based on Qt5, and series 1.* will be
+based on Qt6.
 
 \section{Acknowledgements}
 Stellarium has been kindly supported by ESA in their Summer of Code in

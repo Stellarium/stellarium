@@ -492,10 +492,10 @@ For example, using the option \texttt{-c\ my\_config.ini} would resolve to the f
 -\/-verbose          &            & Even more diagnostic output in logfile (esp.\ multimedia handling)\\
 -\/-dump-opengl-details or -d     & {[}none{]} & Dump information about OpenGL support to logfile. 
                                                  Use this is you have graphics problems and want to send a bug report. \\\midrule
--\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect Direct3D version).\footnotemark[1]\\
--\/-angle-d3d9 or -9 & {[}none{]} & Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\
--\/-angle-d3d11      & {[}none{]} & Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\
--\/-angle-warp       & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\
+-\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect Direct3D version).\footnotemark[1]\footnote{Stellarium 0.* series only}\\
+-\/-angle-d3d9 or -9 & {[}none{]} & Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\footnotemark[3]\\
+-\/-angle-d3d11      & {[}none{]} & Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\footnotemark[3]\\
+-\/-angle-warp       & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\footnotemark[3]\\
 -\/-mesa-mode or -m  & {[}none{]} & Use MESA as software OpenGL rendering engine.\footnotemark[1]\\
 -\/-safe-mode or -s  & {[}none{]} & Synonymous to -\/-mesa-mode.\footnotemark[1]\\
 -\/-compat33 or -C   & {[}none{]} & Request OpenGL 3.3 Compatibility Profile. May help for certain driver configurations. Mac?\\
