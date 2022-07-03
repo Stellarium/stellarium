@@ -122,7 +122,7 @@ public:
 		Q_ASSERT(ctx == QOpenGLContext::currentContext());
 		StelOpenGL::mainContext = ctx; //throw an error when StelOpenGL functions are executed in another context
 
-		qDebug()<<"initializeGL";
+		qDebug() << "initializeGL";
 		qDebug() << "OpenGL supported version: " << QString(reinterpret_cast<const char*>(ctx->functions()->glGetString(GL_VERSION)));
 		qDebug() << "Current Format: " << this->format();
 
@@ -633,22 +633,11 @@ StelMainView::StelMainView(QSettings* settings)
 
 	qDebug()<<"Desired surface format: "<<glFormat;
 
-	//we set the default format to our required format, if possible
-	//this only works with Qt 5.4+
-	QSurfaceFormat defFmt = glFormat;
-	//we don't need these buffers in the background
-	defFmt.setAlphaBufferSize(0);
-	defFmt.setStencilBufferSize(0);
-	defFmt.setDepthBufferSize(0);
-	qDebug() << "setDefaultFormat";
-	QSurfaceFormat::setDefaultFormat(defFmt);
-
 	//QGLWidget should set the format in constructor to prevent creating an unnecessary temporary context
 	qDebug() << "Creating GL widget";
 	glWidget = new StelGLWidget(glFormat, this);
-	qDebug() << "setViewport";
 	setViewport(glWidget);
-	qDebug() << "done";
+	qDebug() << "The viewport is settled...";
 
 	stelScene = new StelGraphicsScene(this);
 	setScene(stelScene);
@@ -727,8 +716,13 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 {
 	//use the default format as basis
 	QSurfaceFormat fmt = QSurfaceFormat::defaultFormat();
-	qDebug()<<"Default surface format: "<<fmt;
+	qDebug() << "Default surface format: " << fmt;
 
+	#ifdef Q_OS_OSX
+	fmt.setMajorVersion(3);
+	fmt.setMinorVersion(3);
+	fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
+	#else
 	//if on an GLES build, do not set the format
 	const QOpenGLContext::OpenGLModuleType openGLModuleType=QOpenGLContext::openGLModuleType();
 	if (openGLModuleType==QOpenGLContext::LibGL)
@@ -750,6 +744,7 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 		//fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
 		//fmt.setOption(QSurfaceFormat::DeprecatedFunctions);
 	}
+	#endif
 
 	// Note: this only works if --mesa-mode was given on the command line. Auto-switch to Mesa or the driver name apparently cannot be detected at this early stage.
 	const bool isMesa= (QString(getenv("QT_OPENGL"))=="software");
@@ -820,7 +815,7 @@ void StelMainView::init()
 	if (configuration->value("main/check_requirements", true).toBool())
 	{
 		// Find out lots of debug info about supported version of OpenGL and vendor/renderer.
-		processOpenGLdiagnosticsAndWarnings(configuration, QOpenGLContext::currentContext());
+		processOpenGLdiagnosticsAndWarnings(configuration, glInfo.mainContext);
 	}
 
 	//create and initialize main app
