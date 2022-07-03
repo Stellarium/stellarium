@@ -286,7 +286,7 @@ QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup
 	}
 
 	if (flags&ObjectType)
-		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getObjectType())) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
 
 	getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
