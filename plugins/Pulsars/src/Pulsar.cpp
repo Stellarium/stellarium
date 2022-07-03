@@ -185,9 +185,9 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&ObjectType)
 	{
 		if (glitch==0)
-			oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("pulsar")) << "<br />";
+			oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
 		else
-			oss << QString("%1: <b>%2</b> (%3: %4)").arg(q_("Type"), q_("pulsar with glitches"), q_("registered glitches"), QString::number(glitch)) << "<br />";
+			oss << QString("%1: <b>%2</b> (%3: %4)").arg(q_("Type"), getObjectTypeI18n(), q_("registered glitches"), QString::number(glitch)) << "<br />";
 	}
 
 	// Ra/Dec etc.

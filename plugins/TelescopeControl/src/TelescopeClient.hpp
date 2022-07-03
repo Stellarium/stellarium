@@ -77,6 +77,7 @@ public:
 	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 	QString getType(void) const Q_DECL_OVERRIDE {return TELESCOPECLIENT_TYPE;}
 	QString getObjectType(void) const Q_DECL_OVERRIDE {return N_("telescope");}
+	QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE {return q_(getObjectType());}
 	QString getID() const Q_DECL_OVERRIDE {return name;}
 		
 	// Methods specific to telescope

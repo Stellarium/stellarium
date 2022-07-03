@@ -27,6 +27,7 @@
 #include <QDateTime>
 
 #include "StelCore.hpp"
+#include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
@@ -83,6 +84,10 @@ public:
 	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
 	{
 		return (glitch==0) ? "pulsar" : "pulsar with glitches";
+	}
+	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE
+	{
+		return q_(getObjectType());
 	}
 
 	virtual QString getID(void) const Q_DECL_OVERRIDE

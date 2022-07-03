@@ -1161,7 +1161,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				else
 					elongStr = StelUtils::radToDmsStr(angularDistance, true);
 
-				fillCelestialPositionTable(dsoName, coordStrings.first, coordStrings.second, magOp, angularSize, asToolTip, extra, mu, sTransit, sMaxElevation, elongStr, q_(obj->getTypeString()));
+				fillCelestialPositionTable(dsoName, coordStrings.first, coordStrings.second, magOp, angularSize, asToolTip, extra, mu, sTransit, sMaxElevation, elongStr, obj->getObjectTypeI18n());
 			}
 		}
 	}
@@ -1259,21 +1259,19 @@ void AstroCalcDialog::currentCelestialPositions()
 				else
 					elongStr = dash;
 
-				fillCelestialPositionTable(planet->getNameI18n(), coordStrings.first, coordStrings.second, planet->getVMagnitudeWithExtinction(core), angularSize, asToolTip, extra, sToolTip, sTransit, sMaxElevation, elongStr, q_(planet->getPlanetTypeString()));
+				fillCelestialPositionTable(planet->getNameI18n(), coordStrings.first, coordStrings.second, planet->getVMagnitudeWithExtinction(core), angularSize, asToolTip, extra, sToolTip, sTransit, sMaxElevation, elongStr, planet->getObjectTypeI18n());
 			}
 		}		
 	}
 	else
 	{
 		// stars
-		QString sType = q_("star");
 		QString commonName, sToolTip = "";
 		QList<StelACStarData> celestialObjects;
 		if (celTypeId == 170)
 		{
 			// double stars
 			celestialObjects = starMgr->getHipparcosDoubleStars();
-			sType = q_("double star");
 		}
 		else if (celTypeId == 171 || celTypeId == 173 || celTypeId == 174)
 		{
@@ -1290,13 +1288,11 @@ void AstroCalcDialog::currentCelestialPositions()
 					celestialObjects = starMgr->getHipparcosClassicalCepheidsTypeStars();
 					break;
 			}
-			sType = q_("variable star");
 		}
 		else
 		{
 			// stars with high proper motion
 			celestialObjects = starMgr->getHipparcosHighPMStars();
-			sType = q_("star with high proper motion");
 		}
 
 		for (const auto& star : qAsConst(celestialObjects))
@@ -1348,7 +1344,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (commonName.isEmpty())
 					commonName = obj->getID();
 
-				fillCelestialPositionTable(commonName, coordStrings.first, coordStrings.second, obj->getVMagnitudeWithExtinction(core), dash, "", extra, sToolTip, sTransit, sMaxElevation, elongStr, sType);
+				fillCelestialPositionTable(commonName, coordStrings.first, coordStrings.second, obj->getVMagnitudeWithExtinction(core), dash, "", extra, sToolTip, sTransit, sMaxElevation, elongStr, obj->getObjectTypeI18n());
 			}
 		}
 		ui->celestialPositionsTreeWidget->hideColumn(CColumnAngularSize);
@@ -7158,6 +7154,7 @@ void AstroCalcDialog::setWUTHeaderNames(const bool magnitude, const bool separat
 	}
 	// TRANSLATORS: IAU Constellation
 	wutHeader << qc_("Const.", "IAU Constellation");
+	wutHeader << q_("Type");
 	ui->wutMatchingObjectsTreeWidget->setHeaderLabels(wutHeader);
 
 	adjustWUTColumns();
@@ -7190,7 +7187,7 @@ void AstroCalcDialog::enableAngularLimits(bool enable)
 		ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 }
 
-void AstroCalcDialog::fillWUTTable(QString objectName, QString designation, float magnitude, Vec4d RTSTime, double maxElevation, double angularSize, QString constellation, bool decimalDegrees)
+void AstroCalcDialog::fillWUTTable(QString objectName, QString designation, float magnitude, Vec4d RTSTime, double maxElevation, double angularSize, QString constellation, QString otype, bool decimalDegrees)
 {
 	QString sAngularSize = dash;
 	QString sRise = dash;
@@ -7240,6 +7237,7 @@ void AstroCalcDialog::fillWUTTable(QString objectName, QString designation, floa
 	treeItem->setText(WUTConstellation, constellation);
 	treeItem->setTextAlignment(WUTConstellation, Qt::AlignCenter);
 	treeItem->setToolTip(WUTConstellation, q_("IAU Constellation"));
+	treeItem->setText(WUTObjectType, otype);
 }
 
 void AstroCalcDialog::calculateWutObjects()
@@ -7273,7 +7271,7 @@ void AstroCalcDialog::calculateWutObjects()
 		double alt;
 		float mag;
 		QSet<QString> objectsList;
-		QString designation, starName, constellation;
+		QString designation, starName, constellation, otype;
 
 		ui->wutAngularSizeLimitCheckBox->setText(q_("Limit angular size:"));
 		ui->wutAngularSizeLimitCheckBox->setToolTip(q_("Set limits for angular size for visible celestial objects"));
@@ -7344,8 +7342,9 @@ void AstroCalcDialog::calculateWutObjects()
 								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(object);
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
+								otype = object->getObjectTypeI18n();
 
-								fillWUTTable(starName, designation, mag, rts, alt, 0.0, constellation, withDecimalDegree);
+								fillWUTTable(starName, designation, mag, rts, alt, 0.0, constellation, otype, withDecimalDegree);
 								objectsList.insert(designation);
 							}
 						}
@@ -7474,13 +7473,14 @@ void AstroCalcDialog::calculateWutObjects()
 								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
+								otype = object->getObjectTypeI18n();
 
 								if (d.isEmpty())
-									fillWUTTable(n, n, mag, rts, alt, object->getAngularRadius(core), constellation, withDecimalDegree);
+									fillWUTTable(n, n, mag, rts, alt, object->getAngularRadius(core), constellation, otype, withDecimalDegree);
 								else if (n.isEmpty())
-									fillWUTTable(d, d, mag, rts, alt, object->getAngularRadius(core), constellation, withDecimalDegree);
+									fillWUTTable(d, d, mag, rts, alt, object->getAngularRadius(core), constellation, otype, withDecimalDegree);
 								else
-									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, rts, alt, object->getAngularRadius(core), constellation, withDecimalDegree);
+									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, rts, alt, object->getAngularRadius(core), constellation, otype, withDecimalDegree);
 
 								objectsList.insert(designation);
 							}
@@ -7533,8 +7533,9 @@ void AstroCalcDialog::calculateWutObjects()
 								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
+								otype = object->getObjectTypeI18n();
 
-								fillWUTTable(object->getNameI18n(), designation, mag, rts, alt, 2.0*object->getAngularRadius(core), constellation, withDecimalDegree);
+								fillWUTTable(object->getNameI18n(), designation, mag, rts, alt, 2.0*object->getAngularRadius(core), constellation, otype, withDecimalDegree);
 								objectsList.insert(designation);
 							}
 						}
@@ -7577,8 +7578,9 @@ void AstroCalcDialog::calculateWutObjects()
 								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(object);
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
+								otype = object->getObjectTypeI18n();
 
-								fillWUTTable(starName, designation, mag, rts, alt, dblStar.value(object)/3600.0, constellation, withDecimalDegree);
+								fillWUTTable(starName, designation, mag, rts, alt, dblStar.value(object)/3600.0, constellation, otype, withDecimalDegree);
 								objectsList.insert(designation);
 							}
 						}
@@ -7612,8 +7614,9 @@ void AstroCalcDialog::calculateWutObjects()
 								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(object);
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
+								otype = object->getObjectTypeI18n();
 
-								fillWUTTable(starName, designation, mag, rts, alt, 0.0, constellation, withDecimalDegree);
+								fillWUTTable(starName, designation, mag, rts, alt, 0.0, constellation, otype, withDecimalDegree);
 								objectsList.insert(designation);
 							}
 						}
@@ -7641,8 +7644,9 @@ void AstroCalcDialog::calculateWutObjects()
 								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(object);
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
+								otype = object->getObjectTypeI18n();
 
-								fillWUTTable(starName, designation, mag, rts, alt, 0.0, constellation, withDecimalDegree);
+								fillWUTTable(starName, designation, mag, rts, alt, 0.0, constellation, otype, withDecimalDegree);
 								objectsList.insert(designation);
 							}
 						}
@@ -7674,13 +7678,14 @@ void AstroCalcDialog::calculateWutObjects()
 								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
+								otype = object->getObjectTypeI18n();
 
 								if (d.isEmpty())
-									fillWUTTable(n, n, mag, rts, alt, object->getAngularRadius(core), constellation, withDecimalDegree);
+									fillWUTTable(n, n, mag, rts, alt, object->getAngularRadius(core), constellation, otype, withDecimalDegree);
 								else if (n.isEmpty())
-									fillWUTTable(d, d, mag, rts, alt, object->getAngularRadius(core), constellation, withDecimalDegree);
+									fillWUTTable(d, d, mag, rts, alt, object->getAngularRadius(core), constellation, otype, withDecimalDegree);
 								else
-									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, rts, alt, object->getAngularRadius(core), constellation, withDecimalDegree);
+									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, rts, alt, object->getAngularRadius(core), constellation, otype, withDecimalDegree);
 
 								objectsList.insert(designation);
 							}
@@ -7703,8 +7708,9 @@ void AstroCalcDialog::calculateWutObjects()
 										rts = object->getRTSTime(core, altitudeLimitMin);
 										alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 										constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
+										otype = object->getObjectTypeI18n();
 
-										fillWUTTable(object->getNameI18n(), designation, mag, rts, alt, 0.0, constellation, withDecimalDegree);
+										fillWUTTable(object->getNameI18n(), designation, mag, rts, alt, 0.0, constellation, otype, withDecimalDegree);
 										objectsList.insert(designation);
 									}
 								}
@@ -7733,8 +7739,9 @@ void AstroCalcDialog::calculateWutObjects()
 								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
+								otype = object->getObjectTypeI18n();
 
-								fillWUTTable(starName, designation, 99.f, rts, alt, 0.0, constellation, withDecimalDegree);
+								fillWUTTable(starName, designation, 99.f, rts, alt, 0.0, constellation, otype, withDecimalDegree);
 								objectsList.insert(designation);
 							}
 						}
@@ -7756,8 +7763,9 @@ void AstroCalcDialog::calculateWutObjects()
 								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
+								otype = object->getObjectTypeI18n();
 
-								fillWUTTable(object->getNameI18n().trimmed(), designation, mag, rts, alt, 0.0, constellation, withDecimalDegree);
+								fillWUTTable(object->getNameI18n().trimmed(), designation, mag, rts, alt, 0.0, constellation, otype, withDecimalDegree);
 								objectsList.insert(designation);
 							}
 						}
@@ -7778,8 +7786,9 @@ void AstroCalcDialog::calculateWutObjects()
 								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
+								otype = object->getObjectTypeI18n();
 
-								fillWUTTable(object->getNameI18n(), designation, mag, rts, alt, 0.0, constellation, withDecimalDegree);
+								fillWUTTable(object->getNameI18n(), designation, mag, rts, alt, 0.0, constellation, otype, withDecimalDegree);
 								objectsList.insert(designation);
 							}
 						}
@@ -7800,8 +7809,9 @@ void AstroCalcDialog::calculateWutObjects()
 								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
+								otype = object->getObjectTypeI18n();
 
-								fillWUTTable(object->getNameI18n(), designation, mag, rts, alt, 0.0, constellation, withDecimalDegree);
+								fillWUTTable(object->getNameI18n(), designation, mag, rts, alt, 0.0, constellation, otype, withDecimalDegree);
 								objectsList.insert(designation);
 							}
 						}
@@ -7856,13 +7866,14 @@ void AstroCalcDialog::calculateWutObjects()
 								rts = object->getRTSTime(core, altitudeLimitMin);
 								alt = computeMaxElevation(qSharedPointerCast<StelObject>(object));
 								constellation = core->getIAUConstellation(object->getEquinoxEquatorialPos(core));
+								otype = object->getObjectTypeI18n();
 
 								if (d.isEmpty())
-									fillWUTTable(n, n, mag, rts, alt, object->getAngularRadius(core), constellation, withDecimalDegree);
+									fillWUTTable(n, n, mag, rts, alt, object->getAngularRadius(core), constellation, otype, withDecimalDegree);
 								else if (n.isEmpty())
-									fillWUTTable(d, d, mag, rts, alt, object->getAngularRadius(core), constellation, withDecimalDegree);
+									fillWUTTable(d, d, mag, rts, alt, object->getAngularRadius(core), constellation, otype, withDecimalDegree);
 								else
-									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, rts, alt, object->getAngularRadius(core), constellation, withDecimalDegree);
+									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, rts, alt, object->getAngularRadius(core), constellation, otype, withDecimalDegree);
 
 								objectsList.insert(designation);
 							}

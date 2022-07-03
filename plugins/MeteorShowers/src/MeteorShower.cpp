@@ -537,7 +537,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 	}
 
 	if (flags&ObjectType)
-		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_(getObjectType()), mstdata) << "<br />";
+		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), getObjectTypeI18n(), mstdata) << "<br />";
 	
 
 	// Ra/Dec etc.

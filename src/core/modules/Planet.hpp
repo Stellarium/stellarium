@@ -23,6 +23,7 @@
 #include "StelObject.hpp"
 #include "StelProjector.hpp"
 #include "StelPropertyMgr.hpp"
+#include "StelTranslator.hpp"
 #include "VecMath.hpp"
 #include "GeomMath.hpp"
 #include "StelFader.hpp"
@@ -233,6 +234,7 @@ public:
 	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
 	virtual QString getType(void) const Q_DECL_OVERRIDE {return PLANET_TYPE;}
 	virtual QString getObjectType(void) const Q_DECL_OVERRIDE { return getPlanetTypeString(); }
+	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE { return q_(getPlanetTypeString()); }
 	virtual QString getID(void) const Q_DECL_OVERRIDE { return englishName; }
 	//! A Planet's own eclipticPos is in VSOP87 ref. frame (practically equal to ecliptic of J2000 for us) coordinates relative to the parent body (sun, planet).
 	//! To get J2000 equatorial coordinates, we require heliocentric ecliptical positions (adding up parent positions) of observer and Planet.

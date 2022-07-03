@@ -81,7 +81,7 @@ QString CustomObject::getInfoString(const StelCore* core, const InfoStringGroup&
 		oss << "<h2>" << getNameI18n() << "</h2>";
 
 	if (flags&ObjectType)
-		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getObjectType())) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
 
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);

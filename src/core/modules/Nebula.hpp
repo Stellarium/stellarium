@@ -175,6 +175,10 @@ public:
 	{
 		return typeEnglishStringMap.value(nType, "undocumented type");
 	}
+	virtual QString getObjectTypeI18n() const Q_DECL_OVERRIDE
+	{
+		return getTypeString();
+	}
 	virtual QString getID() const Q_DECL_OVERRIDE {return getDSODesignation(); } //this depends on the currently shown catalog flags, should this be changed?
 	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const Q_DECL_OVERRIDE;
 	virtual double getCloseViewFov(const StelCore* core = Q_NULLPTR) const Q_DECL_OVERRIDE;

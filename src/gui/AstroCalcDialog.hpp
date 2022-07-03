@@ -168,6 +168,7 @@ public:
 		WUTSetTime,             //! set time
 		WUTAngularSize,         //! angular size
 		WUTConstellation,       //! IAU constellation
+		WUTObjectType,	        //! object type
 		WUTCount                //! total number of columns
 	};
 
@@ -507,8 +508,8 @@ private:
 	//! @arg decimalDegrees use decimal format, not DMS/HMS
 	//! @return QPair(lngStr, latStr) formatted output strings
 	static QPair<QString, QString> getStringCoordinates(const Vec3d coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees);
-	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec4d RTSTime,
-					  double maxElevation, double angularSize, QString constellation, bool decimalDegrees = false);
+	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec4d RTSTime, double maxElevation,
+			  double angularSize, QString constellation, QString otype, bool decimalDegrees = false);
 	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, double magnitude,
 					QString angularSize, QString angularSizeToolTip, QString extraData,
 					QString extraDataToolTip, QString transitTime, QString maxElevation,
