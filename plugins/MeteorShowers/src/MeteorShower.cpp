@@ -546,7 +546,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 	if (flags&Extra)
 	{
 		QString sDriftRA;
-		if (m_driftAlpha > 0.)
+		if (m_driftAlpha >= 0.)
 			sDriftRA = StelUtils::radToHmsStr(static_cast<double>(m_driftAlpha));
 		else
 			sDriftRA = '-'+StelUtils::radToHmsStr(static_cast<double>(abs(m_driftAlpha)));
