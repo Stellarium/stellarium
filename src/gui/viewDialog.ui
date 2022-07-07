@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>919</width>
-    <height>592</height>
+    <width>944</width>
+    <height>678</height>
    </rect>
   </property>
   <property name="font">
@@ -2466,6 +2466,12 @@
                <property name="minimumSize">
                 <size>
                  <width>0</width>
+                 <height>1</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
                  <height>1</height>
                 </size>
                </property>
@@ -5260,12 +5266,12 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
