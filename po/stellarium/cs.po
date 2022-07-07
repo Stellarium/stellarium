@@ -10965,7 +10965,7 @@ msgstr "Kamilarojská/Euahlajská"
 #: skycultures/translations_skycultures.fab:60
 msgctxt "sky culture"
 msgid "Khoikhoi and San"
-msgstr ""
+msgstr "Khoikhoiská a Sanská"
 
 #: skycultures/translations_skycultures.fab:62
 msgctxt "sky culture"
@@ -11085,7 +11085,7 @@ msgstr "Západní (Sternenkarten)"
 #: skycultures/translations_skycultures.fab:108
 msgctxt "sky culture"
 msgid "Xhosa"
-msgstr ""
+msgstr "Xhošská"
 
 #: skycultures/translations_skycultures.fab:110
 msgctxt "sky culture"
@@ -11851,11 +11851,11 @@ msgstr "Zobrazit objekty z katalogů"
 
 #: src/ui_viewDialog.h:3464
 msgid "Quick selection:"
-msgstr ""
+msgstr "Rychlý výběr:"
 
 #: src/ui_viewDialog.h:3466
 msgid "Select all catalogs"
-msgstr ""
+msgstr "Vybrat všechny katalogy"
 
 #: src/ui_viewDialog.h:3468
 msgid "select all"
@@ -11863,19 +11863,19 @@ msgstr "vybrat vše"
 
 #: src/ui_viewDialog.h:3470
 msgid "Select standard catalogs (NGC/IC and M)"
-msgstr ""
+msgstr "Vybrat standardní katalogy (NGC/IC a M)"
 
 #: src/ui_viewDialog.h:3472
 msgid "select standard"
-msgstr ""
+msgstr "vybrat standardní"
 
 #: src/ui_viewDialog.h:3474
 msgid "Deselect all catalogs"
-msgstr ""
+msgstr "Zrušit výběr všech katalogů"
 
 #: src/ui_viewDialog.h:3476
 msgid "select none"
-msgstr ""
+msgstr "žádný nevybrat"
 
 #: src/ui_viewDialog.h:3478
 msgid "Atlas of Peculiar Galaxies (Arp, 1966)"
@@ -13564,7 +13564,7 @@ msgstr "Adresář pro snímky obrazovky"
 
 #: src/ui_configurationDialog.h:2079
 msgid "Rules for screenshot file naming"
-msgstr ""
+msgstr "Pravidla pro pojmenování souborů snímků obrazovky"
 
 #: src/ui_configurationDialog.h:2081
 msgid "File format"
@@ -13903,7 +13903,7 @@ msgstr "Viděno nyní"
 #: src/ui_astroCalcDialog.h:2241 src/ui_astroCalcDialog.h:2254
 #: src/ui_astroCalcDialog.h:2277 src/ui_astroCalcDialog.h:2312
 msgid "Export graph..."
-msgstr ""
+msgstr "Exportovat graf..."
 
 #: src/ui_astroCalcDialog.h:2131
 msgid "Show connecting line between the ephemeris markers"
@@ -14134,7 +14134,7 @@ msgstr "Místní čas v hodinách"
 
 #: src/ui_astroCalcDialog.h:2257
 msgid "How many years to display"
-msgstr "Kolik roků zobrazit"
+msgstr "Kolik zobrazit roků"
 
 #: src/ui_astroCalcDialog.h:2259
 msgid "Duration:"
@@ -14142,20 +14142,21 @@ msgstr "Trvání:"
 
 #: src/ui_astroCalcDialog.h:2261
 msgid "How many months to display"
-msgstr ""
+msgstr "Kolik zobrazit měsíců"
 
 #: src/ui_astroCalcDialog.h:2263
 msgctxt "duration"
 msgid "months"
-msgstr ""
+msgstr "měsíců"
 
 #: src/ui_astroCalcDialog.h:2264
 msgid "Step:"
-msgstr ""
+msgstr "Krok:"
 
 #: src/ui_astroCalcDialog.h:2266
 msgid "Step width for computation. Caution! Short steps cause slow graphs."
 msgstr ""
+"Délka kroku pro výpočet. Pozor! Krátké kroky způsobí pomalé kreslení grafů."
 
 #. TRANSLATORS: Short for "hours".
 #: src/ui_astroCalcDialog.h:2268
@@ -14176,6 +14177,8 @@ msgid ""
 "Notes: This tool works on Earth only! Short steps and long duration may "
 "cause a long delay!"
 msgstr ""
+"Poznámky: Tento nástroj funguje pouze na Zemi! Krátké časové kroky a dlouhá "
+"doba trvání mohou způsobit, že výpočet potrvá dlouho!"
 
 #: src/ui_astroCalcDialog.h:2272
 msgid "Draw graphs"
@@ -14183,11 +14186,11 @@ msgstr "Kreslit grafy"
 
 #: src/ui_astroCalcDialog.h:2273
 msgid "Export graphs..."
-msgstr ""
+msgstr "Exportovat grafy..."
 
 #: src/ui_astroCalcDialog.h:2275
 msgid "Angular distance limit:"
-msgstr ""
+msgstr "Mezní úhlová vzdálenost:"
 
 #: src/ui_astroCalcDialog.h:2276
 msgid "Important note: this tool works on Earth only!"
@@ -14900,78 +14903,88 @@ msgid ""
 "Reset all ABCDE values for zenith and distribution to those in Stellarium's "
 "original implementation paper"
 msgstr ""
+"Znovu nastavit všechny hodnoty ABCDE pro zenit a distribuční koeficienty na "
+"hodnoty v původním implementačním dokumentu Stellaria"
 
 #: src/ui_skylightDialog.h:1203
 msgid "Reset all xy (Stellarium)"
-msgstr ""
+msgstr "Resetovat všechna xy (Stellarium)"
 
 #: src/ui_skylightDialog.h:1205
 msgid ""
 "Reset all ABCDE values for zenith and distribution to those in Preetham's "
 "1999 paper"
 msgstr ""
+"Znovu nastavit všechny hodnoty ABCDE pro zenit a distribuční koeficienty na "
+"hodnoty v článku Preetham et al. z roku 1999"
 
 #: src/ui_skylightDialog.h:1207
 msgid "Reset all xy (Preetham)"
-msgstr ""
+msgstr "Resetovat všechna xy (Preetham)"
 
 #: src/ui_skylightDialog.h:1209
 msgid ""
 "Schaefer's skylight model is better than the result from the CIE skylight "
 "distribution."
 msgstr ""
+"Schaeferův model oblohy je lepší než výsledek distribučních koeficientů "
+"oblohy CIE."
 
 #: src/ui_skylightDialog.h:1211
 msgid "Y from Schaefer, not Preetham sky"
-msgstr ""
+msgstr "Y od Schaefera, a ne z oblohy od Preethama"
 
 #: src/ui_skylightDialog.h:1212
 msgid "[Preetham]"
-msgstr ""
+msgstr "[Preetham]"
 
 #: src/ui_skylightDialog.h:1213 src/ui_skylightDialog.h:1215
 #: src/ui_skylightDialog.h:1224 src/ui_skylightDialog.h:1226
 #: src/ui_skylightDialog.h:1228
 msgid "Reset: Stellarium"
-msgstr ""
+msgstr "Resetovat: Stellarium"
 
 #: src/ui_skylightDialog.h:1214 src/ui_skylightDialog.h:1216
 #: src/ui_skylightDialog.h:1223 src/ui_skylightDialog.h:1225
 #: src/ui_skylightDialog.h:1227
 msgid "Reset: Preetham"
-msgstr ""
+msgstr "Resetovat: Preetham"
 
 #: src/ui_skylightDialog.h:1217
 msgid ""
 "with zenith angle &theta;, solar zenith angle &theta;<sub>s</sub>, solar "
 "angle &gamma;"
 msgstr ""
+"se zenitovým úhlem &theta;, zenitovým úhlem Slunce &theta;<sub>s</sub>, "
+"slunečním úhlem &gamma;"
 
 #: src/ui_skylightDialog.h:1218
 msgid "Horizon bright/dark"
-msgstr ""
+msgstr "Obzor jasný/temný"
 
 #: src/ui_skylightDialog.h:1219
 msgid "Hor.Gradient"
-msgstr ""
+msgstr "Gradient obzor"
 
 #: src/ui_skylightDialog.h:1220
 msgid "circumsolar Intensity"
-msgstr ""
+msgstr "Intenzita okolí Slunce"
 
 #: src/ui_skylightDialog.h:1221
 msgid "highlightSize"
-msgstr ""
+msgstr "Velikost zvýraznění"
 
 #: src/ui_skylightDialog.h:1222
 msgid "rel. backscatter"
-msgstr ""
+msgstr "rel. zpětný rozptyl"
 
 #: src/ui_skylightDialog.h:1229
 msgid ""
 "Note: when the sky brightness (CIE Y) is set by Schaefer's model, the "
 "bottom-left settings will not visibly change anything."
 msgstr ""
+"Poznámka: pokud je jas oblohy (CIE Y) nastaven z Schaeferova modelu, "
+"nastavení vlevo dole nic viditelně nezmění."
 
 #: src/ui_tonemappingDialog.h:180
 msgid "Tone Mapping Details"
@@ -15074,15 +15087,15 @@ msgstr "mag/arcsec²"
 
 #: src/ui_configureScreenshotsDialog.h:122
 msgid "Screenshots naming"
-msgstr ""
+msgstr "Pojmenování snímků obrazovky"
 
 #: src/ui_configureScreenshotsDialog.h:124
 msgid "Use time mask for naming screenshots"
-msgstr ""
+msgstr "Použít časovou masku pro pojmenování snímků obrazovky"
 
 #: src/ui_configureScreenshotsDialog.h:125
 msgid "Filename mask:"
-msgstr ""
+msgstr "Maska souboru:"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:58
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:142

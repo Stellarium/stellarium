@@ -4879,7 +4879,7 @@ msgstr "วิธีใช้ Stellarium"
 
 #: src/gui/HelpDialog.cpp:247 src/gui/HelpDialog.cpp:252
 msgid "Keys"
-msgstr "ปุ่ม"
+msgstr "แป้น"
 
 #: src/gui/HelpDialog.cpp:249 src/gui/HelpDialog.cpp:376
 msgid "Further Reading"
@@ -4961,7 +4961,7 @@ msgstr "คลิกซ้าย"
 
 #: src/gui/HelpDialog.cpp:294
 msgid "Delete marker closest to mouse cursor"
-msgstr "ลบเครื่องหมายที่อยู่ใกล้ตำแหน่งเคอเซอร์ของเมาส์"
+msgstr "ลบเครื่องหมายที่อยู่ใกล้ตัวชี้ตำแหน่งของเมาส์"
 
 #: src/gui/HelpDialog.cpp:295 src/gui/HelpDialog.cpp:298
 msgid "right click"
@@ -9303,7 +9303,7 @@ msgstr "เลือกสี"
 #: src/translations.h:656
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
-msgstr "ตัวชี้อยู่ที่ %1, %2 กด ESC เพื่อยกเลิก"
+msgstr "ตัวชี้ตำแหน่งอยู่ที่ %1, %2 กด ESC เพื่อยกเลิก"
 
 #: src/translations.h:657
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:243
@@ -13387,11 +13387,11 @@ msgstr "ตั้งการทำงานของแป้นพิมพ์
 
 #: src/ui_configurationDialog.h:2019
 msgid "Hides the mouse cursor when inactive"
-msgstr "ซ่อนตัวชี้เมาส์เมื่อไม่มีการใช้งาน"
+msgstr "ซ่อนตัวชี้ตำแหน่งเมาส์เมื่อไม่มีการใช้งาน"
 
 #: src/ui_configurationDialog.h:2021
 msgid "Mouse cursor timeout:"
-msgstr "เวลาที่แสดงตัวชี้เมาส์:"
+msgstr "เวลาที่แสดงตัวชี้ตำแหน่งเมาส์:"
 
 #: src/ui_configurationDialog.h:2023
 msgid "seconds"
@@ -13748,7 +13748,7 @@ msgstr "ตั้งค่า"
 
 #: src/ui_scriptConsole.h:420
 msgid "Cursor position"
-msgstr "ตำแหน่งเคอร์เซอร์"
+msgstr "ตำแหน่งของตัวชี้"
 
 #: src/ui_scriptConsole.h:422
 msgid "R:0 C:0"
@@ -25385,7 +25385,7 @@ msgstr "โปรแกรมเสริมพิกัดของตัวช
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
 msgid "Show coordinates of the mouse cursor on the screen."
-msgstr "แสดงพิกัดของตัวชี้เมาส์บนหน้าจอ"
+msgstr "แสดงพิกัดของตัวชี้ตำแหน่งเมาส์บนหน้าจอ"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:177
 msgid "The top center of the screen"
@@ -25401,7 +25401,7 @@ msgstr "ด้านล่างขวาของจอ"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:180
 msgid "Near mouse cursor"
-msgstr "ใกล้เคอร์เซอร์ของเมาส์"
+msgstr "ใกล้ตัวชี้ตำแหน่งของเมาส์"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:181
 msgid "Custom position"
@@ -25453,7 +25453,7 @@ msgstr "แสดงอักษรย่อกลุ่มดาวโดยไ
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Show crossed lines under mouse cursor"
-msgstr "แสดงเส้นกากบาทตรงเคอร์เซอร์ของเมาส์"
+msgstr "แสดงเส้นกากบาทตรงตัวชี้ตำแหน่งของเมาส์"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
 msgid "Which coordinate system will be used for displaying"
