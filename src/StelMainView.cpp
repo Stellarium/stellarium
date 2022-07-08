@@ -1351,10 +1351,10 @@ void StelMainView::initTitleI18n()
 void StelMainView::setFullScreen(bool b)
 {
 	if (b)
-		setWindowState((windowState() ^ Qt::WindowFullScreen) | Qt::WindowActive);
+		showFullScreen();
 	else
 	{
-		setWindowState((windowState() & ~Qt::WindowFullScreen) | Qt::WindowActive);
+		showNormal();
 		// Not enough. If we had started in fullscreen, the inner part of the window is at 0/0, with the frame extending to top/left off screen.
 		// Therefore moving is not possible. We must move to the stored position or at least defaults.
 		if ( (x()<0)  && (y()<0))
