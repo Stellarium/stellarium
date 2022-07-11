@@ -4304,7 +4304,7 @@
                <item row="12" column="6">
                 <widget class="QToolButton" name="colorQuadratureLine">
                  <property name="toolTip">
-                  <string>Color of the quadrature line</string>
+                  <string>Color of the quadratures line</string>
                  </property>
                 </widget>
                </item>
@@ -4390,6 +4390,9 @@
                </item>
                <item row="12" column="7">
                 <widget class="QCheckBox" name="showQuadratureLineCheckBox">
+                 <property name="toolTip">
+                  <string>The line of quadratures</string>
+                 </property>
                  <property name="text">
                   <string>Quadrature</string>
                  </property>
