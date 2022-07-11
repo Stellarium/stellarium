@@ -154,7 +154,8 @@ public:
 		GreatestElongation	= 2,
 		StationaryPoint		= 3,
 		OrbitalPoint		= 4,
-		Shadows			= 5
+		Shadows			= 5,
+		Quadrature		= 6
 	};
 
 	//! Defines the number and the order of the columns in the WUT tool
@@ -540,6 +541,9 @@ private:
 	//! Calculation greatest elongations
 	QMap<double, double> findGreatestElongationApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD);
 	bool findPreciseGreatestElongation(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step);
+	//! Calculation guadratures
+	QMap<double, double> findQuadratureApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD);
+	bool findPreciseQuadrature(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step);
 	//! Calculation stationary points
 	QMap<double, double> findStationaryPointApproach(PlanetP& object1, double startJD, double stopJD);
 	bool findPreciseStationaryPoint(QPair<double, double>* out, PlanetP object, double JD, double stopJD, double step, bool retrograde);
