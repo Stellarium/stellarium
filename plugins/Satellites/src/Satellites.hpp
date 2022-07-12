@@ -776,7 +776,7 @@ private slots:
 
 private:
 	//! Drawing the circles of Earth's umbra and penumbra
-	void drawCircles(StelCore* core);
+	void drawCircles(StelCore* core, StelPainter& painter);
 	//! Add to the current collection the satellite described by the data.
 	//! @warning Use only in other methods! Does not update satelliteListModel!
 	//! @todo This probably could be done easier if Satellite had a constructor

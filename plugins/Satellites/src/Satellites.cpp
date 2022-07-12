@@ -2690,7 +2690,7 @@ void Satellites::draw(StelCore* core)
 		drawPointer(core, painter);
 
 	if (getFlagUmbraVisible())
-		drawCircles(core);
+		drawCircles(core, painter);
 }
 
 void Satellites::drawPointer(StelCore* core, StelPainter& painter)
@@ -2723,13 +2723,13 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 	}
 }
 
-void Satellites::drawCircles(StelCore* core)
+void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 {
-	StelPainter sPainter(core->getProjection(StelCore::FrameHeliocentricEclipticJ2000, StelCore::RefractionAuto));
-
-	sPainter.setBlending(true, GL_ONE, GL_ONE);
-	sPainter.setLineSmooth(true);
-	sPainter.setFont(labelFont);
+	StelProjectorP saveProj = painter.getProjector();
+	painter.setProjector(core->getProjection(StelCore::FrameHeliocentricEclipticJ2000, StelCore::RefractionAuto));
+	painter.setBlending(true, GL_ONE, GL_ONE);
+	painter.setLineSmooth(true);
+	painter.setFont(labelFont);
 
 	double lambda, beta, satDistance;
 	const Vec3d pos = earth->getEclipticPos();
@@ -2781,15 +2781,15 @@ void Satellites::drawCircles(StelCore* core)
 		rot.transfo(point);
 		umbra.vertex.append(pos+point);
 	}
-	sPainter.setColor(getUmbraColor(), 1.f);
-	sPainter.drawStelVertexArray(umbra, false);
+	painter.setColor(getUmbraColor(), 1.f);
+	painter.drawStelVertexArray(umbra, false);
 
 	Vec3d point(satDistance, 0.0, 0.0);
 	rot.transfo(point);
 	Vec3d coord = pos+point;
-	sPainter.drawSprite2dMode(coord, 5.f);
+	painter.drawSprite2dMode(coord, 5.f);
 	QString cuLabel = QString("%1 (h=%2 %3)").arg(q_("C.U."), QString::number(AU*(satDistance - earth->getEquatorialRadius()), 'f', 1), qc_("km","distance"));
-	sPainter.drawText(coord, cuLabel, 0, shift, shift, false);
+	painter.drawText(coord, cuLabel, 0, shift, shift, false);
 
 	if (getFlagPenumbraVisible())
 	{
@@ -2801,9 +2801,10 @@ void Satellites::drawCircles(StelCore* core)
 			penumbra.vertex.append(pos+point);
 		}
 
-		sPainter.setColor(getPenumbraColor(), 1.f);
-		sPainter.drawStelVertexArray(penumbra, false);
+		painter.setColor(getPenumbraColor(), 1.f);
+		painter.drawStelVertexArray(penumbra, false);
 	}
+	painter.setProjector(saveProj);
 }
 
 bool Satellites::checkJsonFileFormat()
