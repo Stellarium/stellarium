@@ -35,6 +35,20 @@ class SpecificTimeMgr : public StelModule
 	Q_PROPERTY(double twilightAltitude READ getTwilightAltitude WRITE setTwilightAltitude NOTIFY twilightAltitudeChanged)
 
 public:
+	enum Equinox
+	{
+		March		= 0,
+		September	= 1
+	};
+	Q_ENUM(Equinox)
+
+	enum Solstice
+	{
+		June		= 0,
+		December	= 1
+	};
+	Q_ENUM(Solstice)
+
 	SpecificTimeMgr();
 	virtual ~SpecificTimeMgr() Q_DECL_OVERRIDE;
 
@@ -48,10 +62,18 @@ public:
 	//! Get twilight altitude [degrees]
 	double getTwilightAltitude() const {return twilightAltitude;}
 
+	//! Compute the time of equinoxe for specific year
+	//! @param year (valid range: -1000..+3000)
+	//! @param equinox type
+	double getEquinox(int year, SpecificTimeMgr::Equinox equinox);
+	//! Compute the time of solstice for specific year
+	//! @param year (valid range: -1000..+3000)
+	//! @param solstice type
+	double getSolstice(int year, SpecificTimeMgr::Solstice solstice);
+
 public slots:
 	//! Set twilight altitude [degrees]
 	void setTwilightAltitude(double alt);
-
 
 	//! Set simulation time to the time of next transit of selected object
 	void nextTransit();
@@ -111,6 +133,34 @@ public slots:
 	void nextEveningAtAltitude();
 	//! Set simulation time to the previous evening when selected object reaches current altitude
 	void previousEveningAtAltitude();
+
+	//! Set simulation time to the time of March equinox at current year
+	void currentMarchEquinox();
+	//! Set simulation time to the time of March equinox at next year
+	void nextMarchEquinox();
+	//! Set simulation time to the time of March equinox at previous year
+	void previousMarchEquinox();
+
+	//! Set simulation time to the time of September equinox at current year
+	void currentSeptemberEquinox();
+	//! Set simulation time to the time of September equinox at next year
+	void nextSeptemberEquinox();
+	//! Set simulation time to the time of September equinox at previous year
+	void previousSeptemberEquinox();
+
+	//! Set simulation time to the time of June solstice at current year
+	void currentJuneSolstice();
+	//! Set simulation time to the time of June solstice at next year
+	void nextJuneSolstice();
+	//! Set simulation time to the time of June solstice at previous year
+	void previousJuneSolstice();
+
+	//! Set simulation time to the time of December solstice at current year
+	void currentDecemberSolstice();
+	//! Set simulation time to the time of December solstice at next year
+	void nextDecemberSolstice();
+	//! Set simulation time to the time of December solstice at previous year
+	void previousDecemberSolstice();
 
 signals:
 	//! Signal that the configurable twilight altitude for the sun has changed.
