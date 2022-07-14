@@ -34,10 +34,6 @@ SpecificTimeMgr::SpecificTimeMgr()
 	: twilightAltitude(0.)
 {
 	setObjectName("SpecificTimeMgr");
-	conf = StelApp::getInstance().getSettings();
-	core = StelApp::getInstance().getCore();
-	objMgr = GETSTELMODULE(StelObjectMgr);
-	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
 }
 
 SpecificTimeMgr::~SpecificTimeMgr()
@@ -45,57 +41,61 @@ SpecificTimeMgr::~SpecificTimeMgr()
 	//
 }
 
-double SpecificTimeMgr::getCallOrder(StelModuleActionName actionName) const
-{
-	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName)+10.;
-	return 0;
-}
+//double SpecificTimeMgr::getCallOrder(StelModuleActionName actionName) const
+//{
+//	if (actionName==StelModule::ActionDraw)
+//		return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName)+10.;
+//	return 0;
+//}
 
 void SpecificTimeMgr::init()
 {
-	// Register all the core actions.
+	core = StelApp::getInstance().getCore();
+	conf = StelApp::getInstance().getSettings();
+	objMgr = GETSTELMODULE(StelObjectMgr);
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+
 	QString timeGroup = N_("Specific Time");
-	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
-	actionsMgr->addAction("actionNext_Transit",		  timeGroup, N_("Next transit of the selected object"),     this, "nextTransit()");
-	actionsMgr->addAction("actionNext_Rising",		  timeGroup, N_("Next rising of the selected object"),      this, "nextRising()");
-	actionsMgr->addAction("actionNext_Setting",		  timeGroup, N_("Next setting of the selected object"),     this, "nextSetting()");
-	actionsMgr->addAction("actionToday_Transit",		  timeGroup, N_("Today's transit of the selected object"),  this, "todayTransit()");
-	actionsMgr->addAction("actionToday_Rising",		  timeGroup, N_("Today's rising of the selected object"),   this, "todayRising()");
-	actionsMgr->addAction("actionToday_Setting",		  timeGroup, N_("Today's setting of the selected object"),  this, "todaySetting()");
-	actionsMgr->addAction("actionPrevious_Transit",		  timeGroup, N_("Previous transit of the selected object"), this, "previousTransit()");
-	actionsMgr->addAction("actionPrevious_Rising",		  timeGroup, N_("Previous rising of the selected object"),  this, "previousRising()");
-	actionsMgr->addAction("actionPrevious_Setting",		  timeGroup, N_("Previous setting of the selected object"), this, "previousSetting()");
 
-	actionsMgr->addAction("actionNext_MorningTwilight",       timeGroup, N_("Next morning twilight"),     this, "nextMorningTwilight()");
-	actionsMgr->addAction("actionNext_EveningTwilight",       timeGroup, N_("Next evening twilight"),     this, "nextEveningTwilight()");
-	actionsMgr->addAction("actionToday_MorningTwilight",      timeGroup, N_("Today's morning twilight"),  this, "todayMorningTwilight()");
-	actionsMgr->addAction("actionToday_EveningTwilight",      timeGroup, N_("Today's evening twilight"),  this, "todayEveningTwilight()");
-	actionsMgr->addAction("actionPrevious_MorningTwilight",   timeGroup, N_("Previous morning twilight"), this, "previousMorningTwilight()");
-	actionsMgr->addAction("actionPrevious_EveningTwilight",	  timeGroup, N_("Previous evening twilight"), this, "previousEveningTwilight()");
+	addAction("actionNext_Transit",		      timeGroup, N_("Next transit of the selected object"),     this, "nextTransit()");
+	addAction("actionNext_Rising",		      timeGroup, N_("Next rising of the selected object"),      this, "nextRising()");
+	addAction("actionNext_Setting",		      timeGroup, N_("Next setting of the selected object"),     this, "nextSetting()");
+	addAction("actionToday_Transit",	      timeGroup, N_("Today's transit of the selected object"),  this, "todayTransit()");
+	addAction("actionToday_Rising",		      timeGroup, N_("Today's rising of the selected object"),   this, "todayRising()");
+	addAction("actionToday_Setting",	      timeGroup, N_("Today's setting of the selected object"),  this, "todaySetting()");
+	addAction("actionPrevious_Transit",	      timeGroup, N_("Previous transit of the selected object"), this, "previousTransit()");
+	addAction("actionPrevious_Rising",	      timeGroup, N_("Previous rising of the selected object"),  this, "previousRising()");
+	addAction("actionPrevious_Setting",	      timeGroup, N_("Previous setting of the selected object"), this, "previousSetting()");
 
-	actionsMgr->addAction("actionNext_MorningAtAltitude",     timeGroup, N_("Selected object at altitude at next morning"),      this, "nextMorningAtAltitude()");
-	actionsMgr->addAction("actionToday_MorningAtAltitude",    timeGroup, N_("Selected object at altitude this morning"),         this, "todayMorningAtAltitude()");
-	actionsMgr->addAction("actionPrevious_MorningAtAltitude", timeGroup, N_("Selected object at altitude at previous morning"),  this, "previousMorningAtAltitude()");
-	actionsMgr->addAction("actionNext_EveningAtAltitude",     timeGroup, N_("Selected object at altitude at next evening"),      this, "nextEveningAtAltitude()");
-	actionsMgr->addAction("actionToday_EveningAtAltitude",    timeGroup, N_("Selected object at altitude this evening"),         this, "todayEveningAtAltitude()");
-	actionsMgr->addAction("actionPrevious_EveningAtAltitude", timeGroup, N_("Selected object at altitude at previous evening"),  this, "previousEveningAtAltitude()");
+	addAction("actionNext_MorningTwilight",       timeGroup, N_("Next morning twilight"),     this, "nextMorningTwilight()");
+	addAction("actionNext_EveningTwilight",       timeGroup, N_("Next evening twilight"),     this, "nextEveningTwilight()");
+	addAction("actionToday_MorningTwilight",      timeGroup, N_("Today's morning twilight"),  this, "todayMorningTwilight()");
+	addAction("actionToday_EveningTwilight",      timeGroup, N_("Today's evening twilight"),  this, "todayEveningTwilight()");
+	addAction("actionPrevious_MorningTwilight",   timeGroup, N_("Previous morning twilight"), this, "previousMorningTwilight()");
+	addAction("actionPrevious_EveningTwilight",   timeGroup, N_("Previous evening twilight"), this, "previousEveningTwilight()");
 
-	actionsMgr->addAction("actionCurrent_March_Equinox",      timeGroup, N_("March equinox at current year"),      this, "currentMarchEquinox()");
-	actionsMgr->addAction("actionNext_March_Equinox",         timeGroup, N_("March equinox at next year"),         this, "nextMarchEquinox()");
-	actionsMgr->addAction("actionPrevious_March_Equinox",     timeGroup, N_("March equinox at previous year"),     this, "previousMarchEquinox()");
+	addAction("actionNext_MorningAtAltitude",     timeGroup, N_("Selected object at altitude at next morning"),      this, "nextMorningAtAltitude()");
+	addAction("actionToday_MorningAtAltitude",    timeGroup, N_("Selected object at altitude this morning"),         this, "todayMorningAtAltitude()");
+	addAction("actionPrevious_MorningAtAltitude", timeGroup, N_("Selected object at altitude at previous morning"),  this, "previousMorningAtAltitude()");
+	addAction("actionNext_EveningAtAltitude",     timeGroup, N_("Selected object at altitude at next evening"),      this, "nextEveningAtAltitude()");
+	addAction("actionToday_EveningAtAltitude",    timeGroup, N_("Selected object at altitude this evening"),         this, "todayEveningAtAltitude()");
+	addAction("actionPrevious_EveningAtAltitude", timeGroup, N_("Selected object at altitude at previous evening"),  this, "previousEveningAtAltitude()");
 
-	actionsMgr->addAction("actionCurrent_September_Equinox",  timeGroup, N_("September equinox at current year"),  this, "currentSeptemberEquinox()");
-	actionsMgr->addAction("actionNext_September_Equinox",     timeGroup, N_("September equinox at next year"),     this, "nextSeptemberEquinox()");
-	actionsMgr->addAction("actionPrevious_September_Equinox", timeGroup, N_("September equinox at previous year"), this, "previousSeptemberEquinox()");
+	addAction("actionCurrent_March_Equinox",      timeGroup, N_("March equinox at current year"),      this, "currentMarchEquinox()");
+	addAction("actionNext_March_Equinox",         timeGroup, N_("March equinox at next year"),         this, "nextMarchEquinox()");
+	addAction("actionPrevious_March_Equinox",     timeGroup, N_("March equinox at previous year"),     this, "previousMarchEquinox()");
 
-	actionsMgr->addAction("actionCurrent_June_Solstice",      timeGroup, N_("June solstice at current year"),      this, "currentJuneSolstice()");
-	actionsMgr->addAction("actionNext_June_Solstice",         timeGroup, N_("June solstice at next year"),         this, "nextJuneSolstice()");
-	actionsMgr->addAction("actionPrevious_June_Solstice",     timeGroup, N_("June solstice at previous year"),     this, "previousJuneSolstice()");
+	addAction("actionCurrent_September_Equinox",  timeGroup, N_("September equinox at current year"),  this, "currentSeptemberEquinox()");
+	addAction("actionNext_September_Equinox",     timeGroup, N_("September equinox at next year"),     this, "nextSeptemberEquinox()");
+	addAction("actionPrevious_September_Equinox", timeGroup, N_("September equinox at previous year"), this, "previousSeptemberEquinox()");
 
-	actionsMgr->addAction("actionCurrent_December_Solstice",  timeGroup, N_("December solstice at current year"),  this, "currentDecemberSolstice()");
-	actionsMgr->addAction("actionNext_December_Solstice",     timeGroup, N_("December solstice at next year"),     this, "nextDecemberSolstice()");
-	actionsMgr->addAction("actionPrevious_December_Solstice", timeGroup, N_("December solstice at previous year"), this, "previousDecemberSolstice()");
+	addAction("actionCurrent_June_Solstice",      timeGroup, N_("June solstice at current year"),      this, "currentJuneSolstice()");
+	addAction("actionNext_June_Solstice",         timeGroup, N_("June solstice at next year"),         this, "nextJuneSolstice()");
+	addAction("actionPrevious_June_Solstice",     timeGroup, N_("June solstice at previous year"),     this, "previousJuneSolstice()");
+
+	addAction("actionCurrent_December_Solstice",  timeGroup, N_("December solstice at current year"),  this, "currentDecemberSolstice()");
+	addAction("actionNext_December_Solstice",     timeGroup, N_("December solstice at next year"),     this, "nextDecemberSolstice()");
+	addAction("actionPrevious_December_Solstice", timeGroup, N_("December solstice at previous year"), this, "previousDecemberSolstice()");
 
 	setTwilightAltitude(conf->value("astro/twilight_altitude", -6.).toDouble());
 }
@@ -105,12 +105,11 @@ void SpecificTimeMgr::deinit()
 
 }
 
-void SpecificTimeMgr::draw(StelCore* core)
-{
-	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter painter(prj);
-
-}
+//void SpecificTimeMgr::draw(StelCore* core)
+//{
+//	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+//	StelPainter painter(prj);
+//}
 
 void SpecificTimeMgr::setTwilightAltitude(double alt)
 {
@@ -236,14 +235,14 @@ void SpecificTimeMgr::todayMorningTwilight()
 {
 	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
 	if (rts[3]>-1000.)
-			core->setJD(rts[0]);
+		core->setJD(rts[0]);
 }
 
 void SpecificTimeMgr::todayEveningTwilight()
 {
 	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
 	if (rts[3]>-1000.)
-			core->setJD(rts[2]);
+		core->setJD(rts[2]);
 }
 
 void SpecificTimeMgr::previousMorningTwilight()
