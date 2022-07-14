@@ -415,7 +415,7 @@ double SpecificTimeMgr::getEquinox(int year, SpecificTimeMgr::Equinox equinox)
 			JDE0 = 2451810.21715 + Y*(365242.01767 + Y*(-0.11575 + Y*( 0.00337 + Y*( 0.00078))));
 	}
 	else
-		return -1.0;
+		return 0.0;
 
 	const double T = (JDE0 - 2451545.0)/36525.;
 	const double W = 35999.373*T - 2.47; // degrees!
@@ -449,7 +449,7 @@ double SpecificTimeMgr::getSolstice(int year, SpecificTimeMgr::Solstice solstice
 			JDE0 = 2451900.05952 + Y*(365242.74049 + Y*(-0.06223 + Y*(-0.00823 + Y*( 0.00032))));
 	}
 	else
-		return -1.0;
+		return 0.0;
 
 	const double T = (JDE0 - 2451545.0)/36525.;
 	const double W = 35999.373*T - 2.47; // degrees!
