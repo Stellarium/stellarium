@@ -150,8 +150,11 @@ void StelDialog::setVisible(bool v)
 				newY= (screenSize.height() - dialog->size().height());
 
 			// Make sure that the window's title bar is accessible
-			if (newY <-0)
+			if (newY < 0)
 				newY = 0;
+			// Make sure that the window is not moved to the left border
+			if (newX < -(static_cast<int>(dialog->size().width()*.75)))
+				newX = -(static_cast<int>(dialog->size().width()*.75)); // 25% of window is visible
 			proxy->setPos(newX, newY);
 			// Invisible frame around the window to make resizing easier
 			// (this also changes the bounding rectangle size)
