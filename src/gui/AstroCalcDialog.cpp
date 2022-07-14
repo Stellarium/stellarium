@@ -6571,14 +6571,15 @@ bool AstroCalcDialog::findPreciseQuadrature(QPair<double, double>* out, PlanetP 
 	if (out == Q_NULLPTR)
 		return false;
 
-	step = -step / 5.;
+	step = -step / 288.;
 
 	while (true)
 	{
 		JD += step;
-		out->first = JD - step / 5.0;
-		out->second = findDistance(JD - step / 5.0, object1, object2, PhenomenaTypeIndex::Conjunction);
-		if (qAbs(out->second - M_PI_2) <= 0.0125 )
+
+		out->first = JD - step / 288.0;
+		out->second = findDistance(JD - step / 288.0, object1, object2, PhenomenaTypeIndex::Conjunction);
+		if (qAbs(out->second - M_PI_2) <= 0.008 )
 		{
 			if (object1->getJ2000EquatorialPos(core).longitude()>object2->getJ2000EquatorialPos(core).longitude())
 				out->second *= -1.0; // let's use negative value for eastern quadratures
