@@ -368,7 +368,7 @@ void SpecificTimeMgr::previousEveningAtAltitude()
 	}
 }
 
-static const double coeff[24][3] = {
+static const double MeeusCoefficients[24][3] = {
 	//  i (row) a{i}   b{i}       c{i}
 	/*  1 */ { 485.0, 324.96,   1934.136 },
 	/*  2 */ { 203.0, 337.23,  32964.467 },
@@ -422,9 +422,9 @@ double SpecificTimeMgr::getEquinox(int year, SpecificTimeMgr::Equinox equinox)
 	const double W = 35999.373*T - 2.47; // degrees!
 	const double deltaLambda = 1 + 0.0334*cos(W*M_PI_180) + 0.0007*cos(2*W*M_PI_180);
 	double S = 0.;
-	for (int j=0; j<24; j++)
+	for (int i=0; i<24; i++)
 	{
-		S += coeff[j][0]*cos((coeff[j][1] + coeff[j][2]*T)*M_PI_180);
+		S += MeeusCoefficients[i][0]*cos((MeeusCoefficients[i][1] + MeeusCoefficients[i][2]*T)*M_PI_180);
 	}
 
 	return JDE0 + 0.00001*S/deltaLambda;
@@ -456,9 +456,9 @@ double SpecificTimeMgr::getSolstice(int year, SpecificTimeMgr::Solstice solstice
 	const double W = 35999.373*T - 2.47; // degrees!
 	const double deltaLambda = 1 + 0.0334*cos(W*M_PI_180) + 0.0007*cos(2*W*M_PI_180);
 	double S = 0.;
-	for (int j=0; j<24; j++)
+	for (int i=0; i<24; i++)
 	{
-		S += coeff[j][0]*cos((coeff[j][1] + coeff[j][2]*T)*M_PI_180);
+		S += MeeusCoefficients[i][0]*cos((MeeusCoefficients[i][1] + MeeusCoefficients[i][2]*T)*M_PI_180);
 	}
 
 	return JDE0 + 0.00001*S/deltaLambda;

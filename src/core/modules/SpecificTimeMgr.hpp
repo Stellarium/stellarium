@@ -63,12 +63,19 @@ public:
 	double getTwilightAltitude() const {return twilightAltitude;}
 
 	//! Compute the time of equinoxe for specific year
+	//! Source: J. Meeus "Astronomical Algorithms" (2nd ed., 1998) ch. 27
 	//! @param year (valid range: -1000..+3000)
-	//! @param equinox type
+	//! @param equinox type (Equinox::March or Equinox::September)
+	//! @return JDE or zero for outside the valid range
+	//! @todo the solution should be extended to the wider year range; see https://github.com/Stellarium/stellarium/pull/2497 for details
 	double getEquinox(int year, SpecificTimeMgr::Equinox equinox);
+
 	//! Compute the time of solstice for specific year
+	//! Source: J. Meeus "Astronomical Algorithms" (2nd ed., 1998) ch. 27
 	//! @param year (valid range: -1000..+3000)
-	//! @param solstice type
+	//! @param solstice type (Solstice::June or Solstice::December)
+	//! @return JDE or zero for outside the valid range
+	//! @todo the solution should be extended to the wider year range; see https://github.com/Stellarium/stellarium/pull/2497 for details
 	double getSolstice(int year, SpecificTimeMgr::Solstice solstice);
 
 public slots:
