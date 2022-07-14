@@ -31,6 +31,7 @@
 #include "SolarSystem.hpp"
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
+#include "SpecificTimeMgr.hpp"
 #include "planetsephems/sidereal_time.h"
 #include "planetsephems/precession.h"
 
@@ -721,7 +722,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		{
 			QString sMTwilight = qc_("Morning twilight", "celestial event");
 			QString sETwilight = qc_("Evening twilight", "celestial event");
-			const double twilightAltitude = omgr->getTwilightAltitude();
+			const double twilightAltitude = GETSTELMODULE(SpecificTimeMgr)->getTwilightAltitude();
 			QString alt = QString::number(twilightAltitude, 'f', 1);
 			Vec4d twilight = getRTSTime(core, twilightAltitude);
 			if (twilight[3]==0.)
