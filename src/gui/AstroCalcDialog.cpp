@@ -6427,7 +6427,7 @@ bool AstroCalcDialog::isSecondObjectRight(double JD, PlanetP object1, StelObject
 	core->update(0);
 	const double angle1 = object1->getJ2000EquatorialPos(core).longitude() * M_180_PI;
 	const double angle2 = object2->getJ2000EquatorialPos(core).longitude() * M_180_PI;
-	return ((angle2-angle1)>0.0);
+	return (StelUtils::fmodpos(angle2-angle1, 360.)<180.);
 }
 
 QMap<double, double> AstroCalcDialog::findGreatestElongationApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD)
