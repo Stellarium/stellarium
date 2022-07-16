@@ -188,14 +188,7 @@ void AstroCalcDialog::retranslate()
 		// Hack to shrink the tabs to optimal size after language change
 		// by causing the list items to be laid out again.
 		updateTabBarListWidgetWidth();
-		// TODO: make a new private function and call that here and in createDialogContent?
-		QString validDates = QString("%1 1582/10/15 - 9999/12/31").arg(q_("Gregorian dates. Valid range:"));
-		ui->dateFromDateTimeEdit->setToolTip(validDates);
-		ui->dateToDateTimeEdit->setToolTip(validDates);
-		ui->phenomenFromDateEdit->setToolTip(validDates);
-		ui->phenomenToDateEdit->setToolTip(validDates);
-		ui->rtsFromDateEdit->setToolTip(validDates);
-		ui->rtsToDateEdit->setToolTip(validDates);
+		populateToolTips();
 	}
 }
 
@@ -244,6 +237,7 @@ void AstroCalcDialog::createDialogContent()
 	initListWUT();
 	populateTimeIntervalsList();
 	populateWutGroups();
+	populateToolTips();
 
 	ui->lunarElongationLimitSpinBox->setSuffix("°");
 	ui->positiveAltitudeLimitSpinBox->setSuffix("°");
@@ -271,20 +265,12 @@ void AstroCalcDialog::createDialogContent()
 	// TODO: Replace QDateTimeEdit by a new StelDateTimeEdit widget to apply full range of dates
 	// NOTE: https://github.com/Stellarium/stellarium/issues/711
 	const QDate minDate = QDate(1582, 10, 15); // QtDateTime's minimum date is 1.1.100AD, but appears to be always Gregorian.
-	QString validDates = QString("%1 1582/10/15 - 9999/12/31").arg(q_("Gregorian dates. Valid range:"));
 	ui->dateFromDateTimeEdit->setMinimumDate(minDate);
-	ui->dateFromDateTimeEdit->setToolTip(validDates);
 	ui->dateToDateTimeEdit->setMinimumDate(minDate);
-	ui->dateToDateTimeEdit->setToolTip(validDates);
 	ui->phenomenFromDateEdit->setMinimumDate(minDate);
-	ui->phenomenFromDateEdit->setToolTip(validDates);
 	ui->phenomenToDateEdit->setMinimumDate(minDate);
-	ui->phenomenToDateEdit->setToolTip(validDates);
 	ui->rtsFromDateEdit->setMinimumDate(minDate);
-	ui->rtsFromDateEdit->setToolTip(validDates);
 	ui->rtsToDateEdit->setMinimumDate(minDate);
-	ui->rtsToDateEdit->setToolTip(validDates);
-	ui->eclipseFromYearSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range years:"), QString::number(ui->eclipseFromYearSpinBox->minimum()), QString::number(ui->eclipseFromYearSpinBox->maximum())));
 	ui->pushButtonExtraEphemerisDialog->setFixedSize(QSize(20, 20));
 	ui->pushButtonCustomStepsDialog->setFixedSize(QSize(26, 26));
 
@@ -376,7 +362,6 @@ void AstroCalcDialog::createDialogContent()
 	ui->allowedSeparationSpinBox->setMinimum(0.0, true);
 	ui->allowedSeparationSpinBox->setMaximum(20.0, true);
 	ui->allowedSeparationSpinBox->setWrapping(false);
-	ui->allowedSeparationSpinBox->setToolTip(QString("%1: %2 - %3").arg(q_("Valid range"), StelUtils::decDegToDmsStr(ui->allowedSeparationSpinBox->getMinimum(true)), StelUtils::decDegToDmsStr(ui->allowedSeparationSpinBox->getMaximum(true))));
 
 	ui->phenomenaOppositionCheckBox->setChecked(conf->value("astrocalc/flag_phenomena_opposition", false).toBool());
 	connect(ui->phenomenaOppositionCheckBox, SIGNAL(toggled(bool)), this, SLOT(savePhenomenaOppositionFlag(bool)));
@@ -560,6 +545,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->solareclipsesCalculateButton->setShortcut(QKeySequence("Shift+F10"));
 	ui->solareclipseslocalCalculateButton->setShortcut(QKeySequence("Shift+F10"));
 	ui->lunareclipsesCalculateButton->setShortcut(QKeySequence("Shift+F10"));
+	ui->transitsCalculateButton->setShortcut(QKeySequence("Shift+F10"));
 
 	// Let's improve visibility of the text
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
@@ -592,6 +578,20 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->exportGraphsPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->twoGraphsChartView); });
 	connect(ui->exportLunarElongationPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->lunarElongationChartView); });
 	connect(ui->exportPCPushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->pcChartView); });
+}
+
+void AstroCalcDialog::populateToolTips()
+{
+	QString validDates = QString("%1 1582/10/15 - 9999/12/31").arg(q_("Gregorian dates. Valid range:"));
+	ui->dateFromDateTimeEdit->setToolTip(validDates);
+	ui->dateToDateTimeEdit->setToolTip(validDates);
+	ui->phenomenFromDateEdit->setToolTip(validDates);
+	ui->phenomenToDateEdit->setToolTip(validDates);
+	ui->rtsFromDateEdit->setToolTip(validDates);
+	ui->rtsToDateEdit->setToolTip(validDates);
+	ui->eclipseFromYearSpinBox->setToolTip(QString("%1 %2..%3").arg(q_("Valid range years:"), QString::number(ui->eclipseFromYearSpinBox->minimum()), QString::number(ui->eclipseFromYearSpinBox->maximum())));
+	ui->allowedSeparationSpinBox->setToolTip(QString("%1: %2..%3").arg(q_("Valid range"), StelUtils::decDegToDmsStr(ui->allowedSeparationSpinBox->getMinimum(true)), StelUtils::decDegToDmsStr(ui->allowedSeparationSpinBox->getMaximum(true))));
+	ui->allowedSeparationLabel->setToolTip(QString("<p>%1</p>").arg(q_("This is a tolerance for the angular distance for conjunctions and oppositions from 0 and 180 degrees respectively.")));
 }
 
 void AstroCalcDialog::saveGraph(QtCharts::QChartView *graph)

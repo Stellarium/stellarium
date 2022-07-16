@@ -433,6 +433,8 @@ private:
 	void saveTableAsCSV(const QString& fileName, QTreeWidget* tWidget, QStringList& headers);
 	void saveTableAsBookmarks(const QString& fileName, QTreeWidget* tWidget);
 
+	void populateToolTips();
+
 	//! Update header names for celestial positions tables
 	void setCelestialPositionsHeaderNames();
 	//! Update header names for celestial positions tables (major planets; heliocentric ecliptic coordinates)
