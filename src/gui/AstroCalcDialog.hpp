@@ -330,6 +330,7 @@ private slots:
 	void savePhenomenaCelestialGroup(int index);
 	void savePhenomenaOppositionFlag(bool b);
 	void savePhenomenaPerihelionAphelionFlag(bool b);
+	void savePhenomenaElongationsQuadraturesFlag(bool b);
 
 	//! Compute planetary data
 	void saveFirstCelestialBody(int index);

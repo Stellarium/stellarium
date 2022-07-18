@@ -382,6 +382,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->phenomenaOppositionCheckBox, SIGNAL(toggled(bool)), this, SLOT(savePhenomenaOppositionFlag(bool)));
 	ui->phenomenaPerihelionAphelionCheckBox->setChecked(conf->value("astrocalc/flag_phenomena_perihelion", false).toBool());
 	connect(ui->phenomenaPerihelionAphelionCheckBox, SIGNAL(toggled(bool)), this, SLOT(savePhenomenaPerihelionAphelionFlag(bool)));
+	ui->phenomenaElongationQuadratureCheckBox->setChecked(conf->value("astrocalc/flag_phenomena_quadratures", false).toBool());
+	connect(ui->phenomenaElongationQuadratureCheckBox, SIGNAL(toggled(bool)), this, SLOT(savePhenomenaElongationsQuadraturesFlag(bool)));
 	ui->allowedSeparationSpinBox->setDegrees(conf->value("astrocalc/phenomena_angular_separation", 1.0).toDouble());
 	connect(ui->allowedSeparationSpinBox, SIGNAL(valueChanged()), this, SLOT(savePhenomenaAngularSeparation()));
 
@@ -4832,6 +4834,11 @@ void AstroCalcDialog::savePhenomenaPerihelionAphelionFlag(bool b)
 	conf->setValue("astrocalc/flag_phenomena_perihelion", b);
 }
 
+void AstroCalcDialog::savePhenomenaElongationsQuadraturesFlag(bool b)
+{
+	conf->setValue("astrocalc/flag_phenomena_quadratures", b);
+}
+
 void AstroCalcDialog::savePhenomenaAngularSeparation()
 {
 	conf->setValue("astrocalc/phenomena_angular_separation", QString::number(ui->allowedSeparationSpinBox->valueDegrees(), 'f', 5));
@@ -5482,6 +5489,7 @@ void AstroCalcDialog::calculatePhenomena()
 	const double separation = ui->allowedSeparationSpinBox->valueDegrees();
 	const bool opposition = ui->phenomenaOppositionCheckBox->isChecked();
 	const bool perihelion = ui->phenomenaPerihelionAphelionCheckBox->isChecked();
+	const bool quadrature = ui->phenomenaElongationQuadratureCheckBox->isChecked();
 
 	initListPhenomena();
 
@@ -5745,15 +5753,18 @@ void AstroCalcDialog::calculatePhenomena()
 		if (planet!=sun && planet->getPlanetType()!=Planet::isMoon)
 		{
 			StelObjectP mObj = qSharedPointerCast<StelObject>(sun);
-			if (planet->getHeliocentricEclipticPos().length()<core->getCurrentPlanet()->getHeliocentricEclipticPos().length())
+			if (quadrature)
 			{
-				// greatest elongations for inner planets
-				fillPhenomenaTable(findGreatestElongationApproach(planet, mObj, startJD, stopJD), planet, sun, PhenomenaTypeIndex::GreatestElongation);
-			}
-			else
-			{
-				// quadratures for outer planets
-				fillPhenomenaTable(findQuadratureApproach(planet, mObj, startJD, stopJD), planet, sun, PhenomenaTypeIndex::Quadrature);
+				if (planet->getHeliocentricEclipticPos().length()<core->getCurrentPlanet()->getHeliocentricEclipticPos().length())
+				{
+					// greatest elongations for inner planets
+					fillPhenomenaTable(findGreatestElongationApproach(planet, mObj, startJD, stopJD), planet, sun, PhenomenaTypeIndex::GreatestElongation);
+				}
+				else
+				{
+					// quadratures for outer planets
+					fillPhenomenaTable(findQuadratureApproach(planet, mObj, startJD, stopJD), planet, sun, PhenomenaTypeIndex::Quadrature);
+				}
 			}
 			// stationary points
 			fillPhenomenaTable(findStationaryPointApproach(planet, startJD, stopJD), planet, sun, PhenomenaTypeIndex::StationaryPoint);
