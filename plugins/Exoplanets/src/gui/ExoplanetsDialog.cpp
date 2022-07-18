@@ -49,7 +49,6 @@ ExoplanetsDialog::ExoplanetsDialog()
 	: StelDialog("Exoplanets")
 	, ep(Q_NULLPTR)
 	, updateTimer(Q_NULLPTR)
-	, chart(Q_NULLPTR)
 {
         ui = new Ui_exoplanetsDialog;
 	exoplanetsHeader.clear();
@@ -64,8 +63,6 @@ ExoplanetsDialog::~ExoplanetsDialog()
 		updateTimer->stop();
 		delete updateTimer;
 		updateTimer = Q_NULLPTR;
-		if (chart)
-			delete chart;
 	}
 	delete ui;
 }
