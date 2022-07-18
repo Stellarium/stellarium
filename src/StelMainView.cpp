@@ -643,12 +643,9 @@ StelMainView::StelMainView(QSettings* settings)
 	qDebug() << "setDefaultFormat";
 	QSurfaceFormat::setDefaultFormat(defFmt); // Causes a warning in Qt5.
 
-	//QGLWidget should set the format in constructor to prevent creating an unnecessary temporary context
-	qDebug() << "Creating GL widget";
+	//QOpenGLWidget should set the format in constructor to prevent creating an unnecessary temporary context
 	glWidget = new StelGLWidget(glFormat, this);
-	qDebug() << "setViewport";
 	setViewport(glWidget);
-	qDebug() << "done";
 
 	stelScene = new StelGraphicsScene(this);
 	setScene(stelScene);
