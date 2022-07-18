@@ -633,11 +633,22 @@ StelMainView::StelMainView(QSettings* settings)
 
 	qDebug()<<"Desired surface format: "<<glFormat;
 
+	//we set the default format to our required format, if possible
+	//this only works with Qt 5.4+
+	QSurfaceFormat defFmt = glFormat;
+	//we don't need these buffers in the background
+	defFmt.setAlphaBufferSize(0);
+	defFmt.setStencilBufferSize(0);
+	defFmt.setDepthBufferSize(0);
+	qDebug() << "setDefaultFormat";
+	QSurfaceFormat::setDefaultFormat(defFmt); // Causes a warning in Qt5.
+
 	//QGLWidget should set the format in constructor to prevent creating an unnecessary temporary context
 	qDebug() << "Creating GL widget";
 	glWidget = new StelGLWidget(glFormat, this);
+	qDebug() << "setViewport";
 	setViewport(glWidget);
-	qDebug() << "The viewport is settled...";
+	qDebug() << "done";
 
 	stelScene = new StelGraphicsScene(this);
 	setScene(stelScene);
@@ -733,6 +744,7 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 		fmt.setMinorVersion(1);
 		if (qApp->property("onetime_compat33")==true)
 		{
+			// Observations: 3.2:core has a transparent window. No black sky, no lines, but line labels. (on Qt6)
 			qDebug() << "Setting 3.3 compatibility profile from command line...";
 			fmt.setMajorVersion(3);
 			fmt.setMinorVersion(3);

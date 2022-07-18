@@ -183,19 +183,23 @@ int main(int argc, char **argv)
 
 	QGuiApplication::setDesktopSettingsAware(false);
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 	////////////////////////////////////////////////////////////////////////////////////////////////
-	// IMPORTANT: OpenGL default context/formats must be configured before constructing app!
-	// Copy from StelMainView
-	// TODO: adapt/remove code from StelMainView?
+	/// We can define our default OpenGL context only with Qt6 when we have no more dynamic OpenGL/ANGLE.
+	/// IMPORTANT: OpenGL default context/formats must be configured before constructing app!
+	/// Copy from StelMainView
+	/// TODO: adapt/remove code from StelMainView?
+	/// TODO: Find out of this works on GLES devices!
 
 	//use the default format as basis
 	QSurfaceFormat fmt = QSurfaceFormat::defaultFormat();
 
 	//if on an GLES build, do not set the format
-	if (fmt.renderableType()==QSurfaceFormat::OpenGL)
+	//if (fmt.renderableType()==QSurfaceFormat::OpenGL) // Probably at this point it is only QSurfaceFormat::DefaultRenderableType
 	{
 #ifdef Q_OS_OSX
-		// On OSX, you should get what you ask for. Setting format later may not work. Let's assume all MacOSX deliver at least 3.3 compatibility profile.
+		// On OSX, you should get what you ask for. Setting format later may not work.
+		// Let's assume all MacOSX deliver at least 3.3 compatibility profile.
 		fmt.setMajorVersion(3);
 		fmt.setMinorVersion(3);
 		fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
@@ -203,6 +207,7 @@ int main(int argc, char **argv)
 		// OGL 2.1 + FBOs should basically be the minimum required for Stellarium
 		fmt.setMajorVersion(2);
 		fmt.setMinorVersion(1);
+		//fmt.setProfile(QSurfaceFormat::CoreProfile);
 #endif
 	}
 
@@ -228,6 +233,7 @@ int main(int argc, char **argv)
 	QSurfaceFormat::setDefaultFormat(fmt);
 
 	/////////////////////////////////////////////////////////////////////////////////
+#endif
 
 #ifndef USE_QUICKVIEW
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
