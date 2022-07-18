@@ -108,7 +108,6 @@ private:
 
 	QStringList exoplanetsHeader;
 	typedef QPair<QString, int> axisPair;
-	QChart *chart;
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
