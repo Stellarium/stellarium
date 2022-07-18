@@ -256,22 +256,6 @@ SET(stellarium_lib_SRCS
      translations_regions.h
 )
 
-## Block can be removed: Qt5.15 includes CMake 3.21.
-### CMake < 3.0 does not AUTOMOC Q_GADGET which some files use, so we have to manually add it
-### Wrap it in an IF to prevent some linker warnings about symbols defined twice (on MSVC13 at least)
-### Q_GADGET is required force the Qt MOC to run on some specific files,
-### because they do not contain QObjects, but require a MOC for Q_FLAG or similar
-#####IF("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 3.0)
-#####     QT5_WRAP_CPP(stellarium_lib_moc_SRCS
-#####         core/StelObject.hpp
-#####         core/StelRegionObject.hpp
-#####         core/modules/Nebula.hpp
-#####     )
-#####     SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
-#####          ${stellarium_lib_moc_SRCS}
-#####     )
-#####ENDIF()
-
 IF(ENABLE_SCRIPTING)
      SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
           scripting/StelScriptOutput.hpp
