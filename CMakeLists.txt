@@ -67,7 +67,7 @@ ADD_DEFINITIONS(-DPACKAGE_VERSION="${PACKAGE_VERSION}")
 ADD_DEFINITIONS(-DCOPYRIGHT_YEARS="${COPYRIGHT_YEARS}")
 ADD_DEFINITIONS(-DSTELLARIUM_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
 
-# Qt 5.15 is preferred as it provides version-less CMake functions (QT_WRAP_UI etc.)
+# Qt 5.15+ is preferred as it provides version-less CMake functions (QT_WRAP_UI etc.)
 IF(Qt6_FOUND)
      SET(MINIMAL_QT_VERSION "6.2.0")
      IF(NOT DEFINED QT_VERSION_MAJOR)
@@ -290,18 +290,15 @@ IF(WIN32)
           # C4996: deprecated POSIX names (used in zlib)
           SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996")
           # Avoid type conflict with C++17 standard
-          # SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_HAS_STD_BYTE=0") # WHAT??? Required for Qt6. --> Just avoid "using namespace std" anywhere! https://developercommunity.visualstudio.com/t/error-c2872-byte-ambiguous-symbol/93889
-          # Set minimal version of Windows
-          SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_WIN32_WINNT=${MIN_WIN_VERSION}")
-          #IF(MSVC_VERSION GREATER 1700) # MSVC2017 is 1910 and bare minimum.
-               SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /MP")
+          # SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_HAS_STD_BYTE=0") # Don't do this in Qt6. Just avoid "using namespace std" anywhere! https://developercommunity.visualstudio.com/t/error-c2872-byte-ambiguous-symbol/93889
+          # Set multiprocessing and minimal version of Windows
+          SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /MP /D_WIN32_WINNT=${MIN_WIN_VERSION}")
 
-               FOREACH(flag_var
-                    CMAKE_EXE_LINKER_FLAGS_DEBUG CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO
-                    CMAKE_SHARED_LINKER_FLAGS_DEBUG CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO)
-                    SET(${flag_var} "${${flag_var}} /DEBUG:FASTLINK")
-               ENDFOREACH()
-          #ENDIF(MSVC_VERSION GREATER 1700)
+          FOREACH(flag_var
+               CMAKE_EXE_LINKER_FLAGS_DEBUG CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO
+               CMAKE_SHARED_LINKER_FLAGS_DEBUG CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO)
+               SET(${flag_var} "${${flag_var}} /DEBUG:FASTLINK")
+          ENDFOREACH()
           SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_MSVC_FLAGS}")
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STEL_MSVC_FLAGS}")
           # Additional defines:
@@ -327,8 +324,8 @@ IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra -Wno-unknown-warning-option")
           # macOS architectures: x86_64 or arm64 (default: current system's processor architecture)
           IF(NOT CMAKE_OSX_ARCHITECTURES)
-	       SET(CMAKE_OSX_ARCHITECTURES "${CMAKE_HOST_SYSTEM_PROCESSOR}" CACHE STRING "macOS architectures" FORCE)
-	  ENDIF()
+               SET(CMAKE_OSX_ARCHITECTURES "${CMAKE_HOST_SYSTEM_PROCESSOR}" CACHE STRING "macOS architectures" FORCE)
+          ENDIF()
      ENDIF()
 ENDIF()
 
@@ -531,7 +528,7 @@ IF(WIN32)
      # Qt 5.9 (LTS) use OpenSSL 1.0* and Qt 5.12 (LTS) and newest version of Qt use OpenSSL 1.1*
      # Source: https://lists.qt-project.org/pipermail/releasing/2019-March/002614.html
      IF((${QT_VERSION_MAJOR} EQUAL "5") AND (Qt5Core_VERSION VERSION_LESS "5.10"))
-          # OK, it's Qt 5.9, let's try found OpenSSL 1.0.x DLL's on Windows
+          # OK, it's Qt 5.9, let's try to find OpenSSL 1.0.x DLL's on Windows
           FIND_FILE(OPENSSL_SSLEAY32_LIBRARY_DLL ssleay32.dll)
           FIND_FILE(OPENSSL_LIBEAY32_LIBRARY_DLL libeay32.dll)
           FIND_FILE(OPENSSL_LIBSSL32_LIBRARY_DLL libssl32.dll)
@@ -603,8 +600,8 @@ ENDIF()
 
 # Tell CMake to run moc when necessary:
 SET(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON) # ?
-set(CMAKE_AUTOUIC ON) # ?
+SET(CMAKE_AUTORCC ON) # ?
+SET(CMAKE_AUTOUIC ON) # ?
 # As moc files are generated in the binary dir, tell CMake to always look for includes there:
 SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 
