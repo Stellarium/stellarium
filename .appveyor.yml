@@ -49,6 +49,14 @@ environment:
     packaging: true
     suffix: Win64
     cmake_args: -A x64
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+    platform: x64
+    qtver: 6.4
+    qtbin: msvc2019_64
+    msvcname: Visual Studio 16 2022
+    packaging: true
+    suffix: Win64
+    cmake_args: -A x64
 
 before_build:
   - set PUBLISH_BINARY=false
