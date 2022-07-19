@@ -88,6 +88,11 @@ QString getOperatingSystemInfo()
 	OS = QSysInfo::prettyProductName();
 	#endif
 
+	#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0)) && defined(Q_OS_MAC)
+	if (OS.isEmpty()) // fixed bug in Qt6 [https://bugreports.qt.io/browse/QTBUG-105076]
+		OS = QString("macOS %1 (%2)").arg(QSysInfo::productVersion(), QSysInfo::currentCpuArchitecture());
+	#endif
+
 	return OS;
 }
 
