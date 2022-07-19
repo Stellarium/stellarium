@@ -46,7 +46,7 @@ environment:
     qtver: 6.3
     qtbin: msvc2019_64
     msvcname: Visual Studio 16 2019
-    packaging: false
+    packaging: true
     suffix: Win64
     cmake_args: -A x64
 
