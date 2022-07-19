@@ -121,7 +121,7 @@ void Scenery3d::handleKeys(QKeyEvent* e)
 	//on OSX, there is a still-unfixed bug which prevents the command key (=Qt's Control key) to be used here
 	//see https://bugreports.qt.io/browse/QTBUG-36839
 	//we have to use the option/ALT key instead to activate walking around, and CMD is used as multiplier.
-#ifdef Q_OS_OSX
+#ifdef Q_OS_MACOS
 	static const Qt::KeyboardModifier S3D_CTRL_MODIFIER = Qt::AltModifier;
 	static const Qt::KeyboardModifier S3D_SPEEDMUL_MODIFIER = Qt::ControlModifier;
 #else
@@ -152,7 +152,7 @@ void Scenery3d::handleKeys(QKeyEvent* e)
 		}
 	}
 	// FS: No modifier here!? GZ: I want the lock feature. If this does not work for MacOS, it is not there, but only on that platform...
-#ifdef Q_OS_OSX
+#ifdef Q_OS_MACOS
 	else if ((e->type() == QKeyEvent::KeyRelease) )
 #else
 	else if ((e->type() == QKeyEvent::KeyRelease) && (e->modifiers() & S3D_CTRL_MODIFIER))
@@ -167,21 +167,21 @@ void Scenery3d::handleKeys(QKeyEvent* e)
 			case Qt::Key_Minus:
 			case Qt::Key_PageDown:
 				movementKeyInput[2] = 0.0;
-#ifndef Q_OS_OSX
+#ifndef Q_OS_MACOS
 				e->accept();
 #endif
 				break;
 			case Qt::Key_Up:
 			case Qt::Key_Down:
 				movementKeyInput[1] = 0.0;
-#ifndef Q_OS_OSX
+#ifndef Q_OS_MACOS
 				e->accept();
 #endif
 				break;
 			case Qt::Key_Right:
 			case Qt::Key_Left:
 				movementKeyInput[0] = 0.0;
-#ifndef Q_OS_OSX
+#ifndef Q_OS_MACOS
 				e->accept();
 #endif
 				break;

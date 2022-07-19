@@ -197,7 +197,7 @@ int main(int argc, char **argv)
 	//if on an GLES build, do not set the format
 	//if (fmt.renderableType()==QSurfaceFormat::OpenGL) // Probably at this point it is only QSurfaceFormat::DefaultRenderableType
 	{
-#ifdef Q_OS_OSX
+#ifdef Q_OS_MACOS
 		// On OSX, you should get what you ask for. Setting format later may not work.
 		// Let's assume all MacOSX deliver at least 3.3 compatibility profile.
 		fmt.setMajorVersion(3);
