@@ -619,7 +619,7 @@ StelMainView::StelMainView(QSettings* settings)
 	//get the desired opengl format parameters
 	QSurfaceFormat glFormat = getDesiredGLFormat(configuration);
 	// VSync control
-	#ifdef Q_OS_OSX
+	#ifdef Q_OS_MACOS
 	// FIXME: workaround for bug LP:#1705832 (https://bugs.launchpad.net/stellarium/+bug/1705832)
 	// Qt: https://bugreports.qt.io/browse/QTBUG-53273
 	const bool vsdef = false; // use vsync=false by default on macOS
@@ -726,7 +726,7 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 	QSurfaceFormat fmt = QSurfaceFormat::defaultFormat();
 	qDebug() << "Default surface format: " << fmt;
 
-	#ifdef Q_OS_OSX
+	#ifdef Q_OS_MACOS
 	fmt.setMajorVersion(3);
 	fmt.setMinorVersion(3);
 	fmt.setProfile(QSurfaceFormat::CompatibilityProfile);

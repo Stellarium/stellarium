@@ -74,24 +74,24 @@ QString getUserAgentString()
 
 QString getOperatingSystemInfo()
 {
-	QString OS = "Unknown operating system";
+	QString OS = QSysInfo::prettyProductName();
 
-	#if defined(Q_OS_BSD4) || defined(Q_OS_SOLARIS)
-	// Check FreeBSD, NetBSD, OpenBSD and DragonFly BSD
+	#if (defined(Q_OS_FREEBSD) || defined(Q_OS_NETBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_SOLARIS))
+	// Check FreeBSD, OpenBSD, NetBSD and Sun Solaris operating systems
 	QProcess uname;
+	#if (QT_VERSION>=QT_VERSION_CHECK(6, 0, 0))
+	uname.startCommand("/usr/bin/uname -srm");
+	#else
 	uname.start("/usr/bin/uname -srm");
+	#endif
 	uname.waitForStarted();
 	uname.waitForFinished();
 	const QString BSDsystem = uname.readAllStandardOutput();
 	OS = BSDsystem.trimmed();
-	#else
-	OS = QSysInfo::prettyProductName();
 	#endif
 
-	#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0)) && defined(Q_OS_MAC)
-	if (OS.isEmpty()) // fixed bug in Qt6 [https://bugreports.qt.io/browse/QTBUG-105076]
-		OS = QString("macOS %1 (%2)").arg(QSysInfo::productVersion(), QSysInfo::currentCpuArchitecture());
-	#endif
+	if (OS.isEmpty() || OS==QStringLiteral("unknown"))
+		OS = "Unknown operating system";
 
 	return OS;
 }
