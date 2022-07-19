@@ -4304,7 +4304,7 @@
                <item row="12" column="6">
                 <widget class="QToolButton" name="colorQuadratureLine">
                  <property name="toolTip">
-                  <string>Color of the quadratures line</string>
+                  <string>Color of the quadrature circle</string>
                  </property>
                 </widget>
                </item>
@@ -4391,10 +4391,10 @@
                <item row="12" column="7">
                 <widget class="QCheckBox" name="showQuadratureLineCheckBox">
                  <property name="toolTip">
-                  <string>The line of quadratures</string>
+                  <string>A circle 90° from the Sun marking quadrature</string>
                  </property>
                  <property name="text">
-                  <string>Quadrature</string>
+                  <string>Quadrature circle</string>
                  </property>
                 </widget>
                </item>
@@ -5283,12 +5283,12 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
