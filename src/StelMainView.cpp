@@ -999,13 +999,13 @@ void StelMainView::reloadShaders()
 // Several tests do not apply to MacOS X.
 void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLContext *context) const
 {
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
 	Q_UNUSED(conf);
 #endif
 	QSurfaceFormat format=context->format();
 
 	// These tests are not required on MacOS X
-#ifndef Q_OS_MAC
+#ifndef Q_OS_MACOS
 	bool openGLerror=false;
 	if (format.renderableType()==QSurfaceFormat::OpenGL || format.renderableType()==QSurfaceFormat::OpenGLES)
 	{
@@ -1032,7 +1032,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	// If platform does not even support minimal OpenGL version for Qt5, then tell the user about troubles and quit from application.
 	// This test is apparently not applicable on MacOS X due to its behaving differently from all other known OSes.
 	// The correct way to handle driver issues on MacOS X remains however unclear for now.
-#ifndef Q_OS_MAC
+#ifndef Q_OS_MACOS
 	bool isMesa=glDriver.contains("Mesa", Qt::CaseInsensitive);
 	#if (defined Q_OS_WIN) && (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	bool isANGLE=glRenderer.startsWith("ANGLE", Qt::CaseSensitive);
@@ -1127,7 +1127,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 		}
 	}
 #endif
-#ifndef Q_OS_MAC
+#ifndef Q_OS_MACOS
 	// Do a similar test for MESA: Ensure we have at least Mesa 10, Mesa 9 on FreeBSD (used for hardware-acceleration of AMD IGP) was reported to lose the stars.
 	if (isMesa)
 	{
@@ -1184,7 +1184,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	// Depending on whatever driver/implementation details, Stellarium may crash or show only minor graphical errors.
 	// On these systems, we show a warning panel that can be suppressed by a config option which is automatically added on first run.
 	// Again, based on a sample size of one, Macs have been reported already to always work in this case.
-#ifndef Q_OS_MAC
+#ifndef Q_OS_MACOS
 	static const QRegularExpression glslRegExp("^(\\d\\.\\d\\d)");
 	int pos=glslString.indexOf(glslRegExp);
 	// VC4 drivers on Raspberry Pi reports ES 1.0.16 or so, we must step down to one cipher after decimal.

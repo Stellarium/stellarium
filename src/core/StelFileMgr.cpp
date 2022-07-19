@@ -56,7 +56,7 @@ void StelFileMgr::init()
 	{
 		userDir = winApiPath + "\\Stellarium";
 	}
-#elif defined(Q_OS_MAC)
+#elif defined(Q_OS_MACOS)
 	userDir = QDir::homePath() + "/Library/Application Support/Stellarium";
 #else
 	userDir = QDir::homePath() + "/.stellarium";
@@ -101,7 +101,7 @@ void StelFileMgr::init()
 	}	
 	else
 	{
-	#if defined(Q_OS_MAC)
+	#if defined(Q_OS_MACOS)
 		QString relativePath = "/../Resources";
 		if (QCoreApplication::applicationDirPath().contains("src")) {
 			relativePath = "/../..";

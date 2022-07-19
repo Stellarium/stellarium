@@ -171,7 +171,7 @@ int main(int argc, char **argv)
 	if (argList.contains("--scale-gui")) // Variable QT_SCALE_FACTOR should be defined before app will be created!
 		qputenv("QT_SCALE_FACTOR", CLIProcessor::argsGetOptionWithArg(argList, "", "--scale-gui", "").toString().toLatin1());
 
-	#if defined(Q_OS_MAC)
+	#if defined(Q_OS_MACOS)
 	QFileInfo appInfo(QString::fromUtf8(argv[0]));
 	QDir appDir(appInfo.absolutePath());
 	appDir.cdUp();
