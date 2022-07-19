@@ -455,7 +455,8 @@ void ViewDialog::createDialogContent()
 	connectColorButton(ui->colorLongitudeLine,            "GridLinesMgr.longitudeLineColor",             "color/oc_longitude_color");
 	connectColorButton(ui->colorQuadratureLine,           "GridLinesMgr.quadratureLineColor",            "color/quadrature_color");
 	connectColorButton(ui->colorColuresLine,              "GridLinesMgr.colureLinesColor",               "color/colures_color");
-	connectColorButton(ui->colorCircumpolarCircles,       "GridLinesMgr.umbraCircleColor",               "color/umbra_circle_color");
+	connectColorButton(ui->colorCircumpolarCircles,       "GridLinesMgr.circumpolarCirclesColor",        "color/circumpolar_circles_color");
+	connectColorButton(ui->colorUmbraCircle,              "GridLinesMgr.umbraCircleColor",               "color/umbra_circle_color");
 	connectColorButton(ui->colorPenumbraCircle,           "GridLinesMgr.penumbraCircleColor",            "color/penumbra_circle_color");
 	connectColorButton(ui->colorPrecessionCircles,        "GridLinesMgr.precessionCirclesColor",         "color/precession_circles_color");
 	connectColorButton(ui->colorPrimeVerticalLine,        "GridLinesMgr.primeVerticalLineColor",         "color/prime_vertical_color");
