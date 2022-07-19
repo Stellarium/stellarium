@@ -2060,7 +2060,7 @@ Vec3d Planet::getEclipticPos(double dateJDE) const
 	return *pos;
 }
 
-// Return heliocentric ecliptical coordinate of p [AU]
+// Return heliocentric ecliptical Cartesian J2000 coordinates of p [AU]
 Vec3d Planet::getHeliocentricPos(Vec3d p) const
 {
 	// Note: using shared copies is too slow here.  So we use direct access instead.

@@ -111,6 +111,9 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(bool longitudePartsLabeled	READ getFlagLongitudeLabeled	WRITE setFlagLongitudeLabeled		NOTIFY longitudePartsLabeledChanged)
 	Q_PROPERTY(Vec3f longitudeLineColor		READ getColorLongitudeLine	WRITE setColorLongitudeLine		NOTIFY longitudeLineColorChanged)
 
+	Q_PROPERTY(bool quadratureLineDisplayed		READ getFlagQuadratureLine	WRITE setFlagQuadratureLine		NOTIFY quadratureLineDisplayedChanged)
+	Q_PROPERTY(Vec3f quadratureLineColor		READ getColorQuadratureLine	WRITE setColorQuadratureLine		NOTIFY quadratureLineColorChanged)
+
 	Q_PROPERTY(bool horizonLineDisplayed		READ getFlagHorizonLine		WRITE setFlagHorizonLine		NOTIFY horizonLineDisplayedChanged)
 	Q_PROPERTY(bool horizonPartsDisplayed	READ getFlagHorizonParts	WRITE setFlagHorizonParts		NOTIFY horizonPartsDisplayedChanged)
 	Q_PROPERTY(bool horizonPartsLabeled		READ getFlagHorizonLabeled	WRITE setFlagHorizonLabeled		NOTIFY horizonPartsLabeledChanged)
@@ -562,6 +565,20 @@ public slots:
 	//! @endcode
 	void setColorLongitudeLine(const Vec3f& newColor);
 
+	//! Setter for displaying quadrature line.
+	void setFlagQuadratureLine(const bool displayed);
+	//! Accessor for displaying quadrature line.
+	bool getFlagQuadratureLine() const;
+	//! Get the current color of the quadrature line.
+	Vec3f getColorQuadratureLine() const;
+	//! Set the color of the quadrature line.
+	//! @param newColor The color of quadrature line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorQuadratureLine(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorQuadratureLine(const Vec3f& newColor);
+
 	//! Setter for displaying Horizon Line.
 	void setFlagHorizonLine(const bool displayed);
 	//! Accessor for displaying Horizon Line.
@@ -1009,6 +1026,8 @@ signals:
 	void longitudePartsDisplayedChanged(const bool displayed);
 	void longitudePartsLabeledChanged(const bool displayed);
 	void longitudeLineColorChanged(const Vec3f & newColor);
+	void quadratureLineDisplayedChanged(const bool displayed);
+	void quadratureLineColorChanged(const Vec3f & newColor);
 	void horizonLineDisplayedChanged(const bool displayed);
 	void horizonPartsDisplayedChanged(const bool displayed);
 	void horizonPartsLabeledChanged(const bool displayed);
@@ -1102,6 +1121,7 @@ private:
 	SkyLine * precessionCircleS;		// Southern precession circle
 	SkyLine * meridianLine;			// Meridian line
 	SkyLine * longitudeLine;		// Opposition/conjunction longitude line
+	SkyLine * quadratureLine;		// Quadrature line
 	SkyLine * horizonLine;			// Horizon line
 	SkyLine * galacticEquatorLine;		// line depicting the Galactic equator as defined by the IAU definition of Galactic coordinates (System II, 1958)
 	SkyLine * supergalacticEquatorLine;	// line depicting the Supergalactic equator
