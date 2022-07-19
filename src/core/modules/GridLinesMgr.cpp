@@ -2140,6 +2140,7 @@ void GridLinesMgr::setFlagAllLines(const bool displayed)
 	setFlagEclipticLine(displayed);
 	setFlagMeridianLine(displayed);
 	setFlagLongitudeLine(displayed);
+	setFlagQuadratureLine(displayed);
 	setFlagEquatorJ2000Line(displayed);
 	setFlagEclipticJ2000Line(displayed);
 	setFlagInvariablePlaneLine(displayed);
