@@ -271,7 +271,7 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "<tr><td><b>" + hotkeyTextWrapper("Ctrl+Up") + "/" + hotkeyTextWrapper("Ctrl+Down") + "</b></td></tr>\n";
 	// time dragging/scrolling
 	QString delimiter = "";
-	#ifdef Q_OS_MAC
+	#ifdef Q_OS_MACOS
 	// TRANSLATORS: The char mean "and"
 	delimiter = QString(" %1 ").arg(q_("&"));
 	#endif
@@ -280,19 +280,19 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "<tr><td>" + q_("Time scrolling: minutes").toHtmlEscaped() + "</td><td><b>" +
 			QKeySequence(Qt::CTRL).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: hours").toHtmlEscaped() + "</td><td><b>" +
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 			QKeySequence(Qt::CTRL | Qt::SHIFT).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: days").toHtmlEscaped() + "</td><td><b>" +
 			QKeySequence(Qt::CTRL | Qt::ALT).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: years").toHtmlEscaped() + "</td><td><b>" +
 			QKeySequence(Qt::CTRL | Qt::ALT | Qt::SHIFT).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
-#else
+	#else
 			QKeySequence(Qt::CTRL + Qt::SHIFT).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: days").toHtmlEscaped() + "</td><td><b>" +
 			QKeySequence(Qt::CTRL + Qt::ALT).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: years").toHtmlEscaped() + "</td><td><b>" +
 			QKeySequence(Qt::CTRL + Qt::ALT + Qt::SHIFT).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
-#endif
+	#endif
 
 	// select object
 	htmlText += "<tr><td>" + q_("Select object").toHtmlEscaped() + "</td>";
@@ -300,11 +300,11 @@ void HelpDialog::updateHelpText(void) const
 	// clear selection
 	htmlText += "<tr><td>";
 	htmlText += q_("Clear selection").toHtmlEscaped() + "</td>";
-#ifdef Q_OS_MAC
+	#ifdef Q_OS_MACOS
 	htmlText += "<td><b>" + QKeySequence(Qt::CTRL).toString(QKeySequence::NativeText) + delimiter + q_("& left click").toHtmlEscaped() + "</b></td></tr>\n";
-#else
+	#else
 	htmlText += "<td><b>" + q_("Right click").toHtmlEscaped() + "</b></td></tr>\n";
-#endif
+	#endif
 	// add custom marker
 	htmlText += "<tr><td>" + q_("Add custom marker").toHtmlEscaped() + "</td>";
 	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT).toString(QKeySequence::NativeText) + delimiter + q_("left click").toHtmlEscaped() + "</b></td></tr>\n";
@@ -313,11 +313,11 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT).toString(QKeySequence::NativeText) + delimiter + q_("right click").toHtmlEscaped() + "</b></td></tr>\n";
 	// delete all custom markers
 	htmlText += "<tr><td>" + q_("Delete all custom markers").toHtmlEscaped() + "</td>";
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT | Qt::ALT).toString(QKeySequence::NativeText) + delimiter + q_("right click").toHtmlEscaped() + "</b></td></tr>\n";
-#else
+	#else
 	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT + Qt::ALT).toString(QKeySequence::NativeText) + delimiter + q_("right click").toHtmlEscaped() + "</b></td></tr>\n";
-#endif
+	#endif
 
 	htmlText += "</table>\n<p>" +
 			q_("Below are listed only the actions with assigned keys. Further actions may be available via the \"%1\" button.")

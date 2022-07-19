@@ -178,7 +178,7 @@ void StelLogger::init(const QString& logFilePath)
 	if(i == 0)
 		writeLog("Could not get processor info.");
 
-#elif defined Q_OS_MAC
+#elif defined Q_OS_MACOS
 	QProcess systemProfiler;
 	systemProfiler.start("/usr/sbin/system_profiler -detailLevel mini SPHardwareDataType SPDisplaysDataType");
 	systemProfiler.waitForStarted();
