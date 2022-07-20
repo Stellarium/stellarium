@@ -315,6 +315,13 @@ void TestStelSphericalGeometry::testSphericalPolygon()
 
 	//Booleans methods
 	QCOMPARE(holySquare.getArea(), bigSquare.getArea()-smallSquare.getArea());
+	// NOTE: On Qt6.3, these debug outputs cause the following QCOMPARE to deliver correct results. Without the qDebug()s it fails. This indicates some deeper problem, but I (GZ) fail to see it.
+	qDebug() << "holySquare (" << holySquare.getOutlineVertexArray().vertex.length() << "):" << holySquare.getOutlineVertexArray().vertex;
+	qDebug() << "bigSquare  (" << bigSquare.getOutlineVertexArray().vertex.length()  << "):" << bigSquare.getOutlineVertexArray().vertex;
+	qDebug() << "bigSquareUholy (" << bigSquare.getUnion(holySquare)->getOutlineVertexArray().vertex.length() << "):" << bigSquare.getUnion(holySquare)->getOutlineVertexArray().vertex;
+	qDebug() << "bigSquare Unioned with holySquare has area:" << bigSquare.getUnion(holySquare)->getArea();
+	qDebug() << "bigSquare alone has area: " << bigSquare.getArea();
+	// Note that even though the results of the previous two lines differ, this next test (and the rest of the test function) passes!
 	QCOMPARE(bigSquare.getUnion(holySquare)->getArea(), bigSquare.getArea());
 	QCOMPARE(bigSquare.getSubtraction(smallSquare)->getArea(), bigSquare.getArea()-smallSquare.getArea());
 	QCOMPARE(bigSquare.getIntersection(smallSquare)->getArea(), smallSquare.getArea());
@@ -445,6 +452,18 @@ void TestStelSphericalGeometry::testOctahedronPolygon()
 	QCOMPARE(southPoleSquare.getUnion(northPoleSquare)->getArea(), 2.*southPoleSquare.getArea());
 	QCOMPARE(southPoleSquare.getSubtraction(northPoleSquare)->getArea(), southPoleSquare.getArea());
 
+	QCOMPARE(southPoleSquare.getOctahedronPolygon().getOutlineVertexArray().vertex.length(), 16);
+	QCOMPARE(northPoleSquare.getOctahedronPolygon().getOutlineVertexArray().vertex.length(), 16);
+	//QCOMPARE(northPoleSquare.getIntersection(northPoleSquare)->getArea() / northPoleSquare.getArea(), 1);
+	//QCOMPARE(4*northPoleSquare.getIntersection(northPoleSquare)->getArea(), 3*northPoleSquare.getArea());
+	QCOMPARE(northPoleSquare.getIntersection(northPoleSquare)->getOctahedronPolygon().getOutlineVertexArray().vertex.length(), 16);
+	// dump contours: Run in Qt5.15.2 and Qt6.3 and write results here:
+	qDebug() << "NorthpoleSquare by itself      (" << northPoleSquare.getOctahedronPolygon().getOutlineVertexArray().vertex.length() << "):" << northPoleSquare.getOctahedronPolygon().getOutlineVertexArray().vertex;
+	qDebug() << "NorthpoleSquare self-intersect (" << northPoleSquare.getIntersection(northPoleSquare)->getOctahedronPolygon().getOutlineVertexArray().vertex.length() << "):" << northPoleSquare.getIntersection(northPoleSquare)->getOctahedronPolygon().getOutlineVertexArray().vertex;
+	qDebug() << "NorthpoleSquare self-union     (" << northPoleSquare.getUnion(northPoleSquare)->getOctahedronPolygon().getOutlineVertexArray().vertex.length() << "):" << northPoleSquare.getIntersection(northPoleSquare)->getOctahedronPolygon().getOutlineVertexArray().vertex;
+	qDebug() << "NorthpoleSquare by itself      has area" << northPoleSquare.getArea();
+	qDebug() << "NorthpoleSquare self-intersect has area" << northPoleSquare.getIntersection(northPoleSquare)->getArea();
+	qDebug() << "NorthpoleSquare self-union     has area" << northPoleSquare.getUnion(northPoleSquare)->getArea();
 	QCOMPARE(northPoleSquare.getIntersection(northPoleSquare)->getArea(), northPoleSquare.getArea());
 	QCOMPARE(northPoleSquare.getUnion(northPoleSquare)->getArea(), northPoleSquare.getArea());
 	QCOMPARE(northPoleSquare.getSubtraction(northPoleSquare)->getArea(), 0.);
