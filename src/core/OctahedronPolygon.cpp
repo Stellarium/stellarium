@@ -219,12 +219,20 @@ void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 	}
 	projectOnOctahedron(resultSides);
 
-	// Append the new sides to this
+	// Append the new sides to this. Run TestStelSphericalGeometry::testOctahedronPolygon, see debug output.
+	// Qt6: lengths 8/8/8. sublength: 011, 011, 000, 000, 011, 011, 000, 000. Same as Qt5. Seems no difference here.
+	qDebug() << "appendSubContour:";
+	qDebug() << "sides.length():" << sides.length();
+	qDebug() << "resultSides.length():" << resultSides.length();
 	Q_ASSERT(sides.size()==8 && resultSides.size()==8);
 	for (int i=0;i<8;++i)
 	{
+		qDebug() << "sides[" << i << "].length():" << sides[i].length();
+		qDebug() << "resultSides[" << i << "].length():" << resultSides[i].length();
 		sides[i] += resultSides[i];
+		qDebug() << "after plus: sides[" << i << "].length():" << sides[i].length();
 	}
+	qDebug() << "after splicing: sides.length():" << sides.length();
 }
 
 // Return the area in squared degrees.
@@ -255,12 +263,17 @@ Vec3d OctahedronPolygon::getPointInside() const
 	return res;
 }
 
+// GZ I think operator += / append may behave differently between Qt5 and Qt6!
 void OctahedronPolygon::append(const OctahedronPolygon& other)
 {
 	Q_ASSERT(sides.size()==8 && other.sides.size()==8);
 	for (int i=0;i<8;++i)
 	{
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		sides[i].append(other.sides[i]);
+#else
 		sides[i] += other.sides[i];
+#endif
 	}
 }
 
@@ -271,7 +284,11 @@ void OctahedronPolygon::appendReversed(const OctahedronPolygon& other)
 	{
 		for (const auto& sub : other.sides[i])
 		{
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+			sides[i].append(sub.reversed());
+#else
 			sides[i] += sub.reversed();
+#endif
 		}
 	}
 }
@@ -320,7 +337,7 @@ struct OctTessTrianglesCallbackData
 void errorCallback(GLenum errn)
 {
 	qWarning() << "Tesselator error:" << QString::fromLatin1(reinterpret_cast<const char*>(gluesErrorString(errn)));
-	Q_ASSERT(0);
+	//Q_ASSERT(0);
 }
 
 void vertexTrianglesCallback(Vec3d* vertexData, OctTessTrianglesCallbackData* userData)
@@ -352,11 +369,20 @@ QVector<Vec3d> OctahedronPolygon::tesselateOneSideTriangles(GLUEStesselator* tes
 	OctTessTrianglesCallbackData data;
 	gluesTessNormal(tess, 0.,0., (sidenb%2==0 ? -1. : 1.));
 	gluesTessBeginPolygon(tess, &data);
-	for (int c=0;c<contours.size();++c)
+	qDebug() << "contours.size()=" << contours.size();
+	for (int c=0;c<contours.size();c++)
 	{
+		qDebug() << "contours.at(" << c << ").size()=" << contours.at(c).size();
 		gluesTessBeginContour(tess);
-		for (int i=0;i<contours.at(c).size();++i)
+		for (int i=0;i<contours.at(c).size();i++)
 		{
+			const Vec3d vDat(contours[c][i].vertex.v);
+			if (abs(vDat[0]) > GLUES_TESS_MAX_COORD)
+				qDebug() << "contours[" << c << "][" << i <<  "]: vDat[0] too large:" << vDat[0];
+			if (abs(vDat[1]) > GLUES_TESS_MAX_COORD)
+				qDebug() << "contours[" << c << "][" << i <<  "]: vDat[1] too large:" << vDat[1];
+			if (abs(vDat[2]) > GLUES_TESS_MAX_COORD)
+				qDebug() << "contours[" << c << "][" << i <<  "]: vDat[2] too large:" << vDat[2];
 			gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.data())), static_cast<void*>(const_cast<Vec3d *>(&(contours[c][i].vertex))));
 		}
 		gluesTessEndContour(tess);
@@ -417,7 +443,7 @@ void OctahedronPolygon::updateVertexArray()
 			else
 			{
 				//  Discard vertex..
-				//qDebug() << "Found a CW triangle - discarding!";
+				qDebug() << "Found a CW triangle - discarding!";
 			}
 		}
 
@@ -457,8 +483,9 @@ void OctahedronPolygon::updateVertexArray()
 
 #ifndef NDEBUG
 	// Check that all triangles are properly oriented
-	QVector<Vec3d> c;
-	c.resize(3);
+	QVector<Vec3d> c(3);
+//	c.resize(3);
+//	c.squeeze();
 	for (int j=0;j<fillCachedVertexArray.vertex.size()/3;++j)
 	{
 		c[0]=fillCachedVertexArray.vertex.at(j*3);
@@ -469,8 +496,9 @@ void OctahedronPolygon::updateVertexArray()
 #else
 	// If I don't let this like that, the behaviour will fail in Release mode!!!!
 	// It is either a bug in GCC either a memory problem which appears only when optimizations are activated.
-	QVector<Vec3d> c;
-	c.resize(3);
+	QVector<Vec3d> c(3);
+//	c.resize(3);
+//	c.squeeze();
 #endif
 }
 
