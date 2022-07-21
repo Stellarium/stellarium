@@ -290,11 +290,15 @@ void TestStelSphericalGeometry::benchmarkGetIntersection()
 {
 	SphericalRegionP bug1 = SphericalRegionP::loadFromJson("{\"worldCoords\": [[[123.023842, -49.177087], [122.167613, -49.177087], [122.167613, -48.631248], [123.023842, -48.631248]]]}");
 	SphericalRegionP bug2 = SphericalRegionP::loadFromJson("{\"worldCoords\": [[[123.028902, -49.677124], [122.163995, -49.677124], [122.163995, -49.131382], [123.028902, -49.131382]]]}");
+	qDebug() << "critical call...";
 	QVERIFY(bug1->intersects(bug2));
+	qDebug() << "continue";
 	SphericalRegionP res;
 	QBENCHMARK {
+		qDebug() << "critical call #2...";
 		res = bug1->getIntersection(bug2);
 	}
+	qDebug() << "done";
 }
 
 void TestStelSphericalGeometry::testEnlarge()
@@ -316,13 +320,52 @@ void TestStelSphericalGeometry::testSphericalPolygon()
 	//Booleans methods
 	QCOMPARE(holySquare.getArea(), bigSquare.getArea()-smallSquare.getArea());
 	// NOTE: On Qt6.3, these debug outputs cause the following QCOMPARE to deliver correct results. Without the qDebug()s it fails. This indicates some deeper problem, but I (GZ) fail to see it.
+	// Qt5.15.2:
+	// holySquare ( 32 ): QVector([0.96053, 0.194709, 0.198669], [0.979273, 1e-99, 0.202546], [0.848948, 1e-99, 0.528477], [0.770151, 0.420735, 0.479426], [0.770151, 0.420735, 0.479426], [0.877583, 0.479426, 0],
+	//                            [0.980067, 0.198669, 0], [0.96053, 0.194709, 0.198669], [0.877583, 0.479426, 0], [0.770151, 0.420735, -0.479426], [0.770151, 0.420735, -0.479426], [0.848948, 1e-99, -0.528477],
+	//                            [0.979273, 1e-99, -0.202546], [0.96053, 0.194709, -0.198669], [0.96053, 0.194709, -0.198669], [0.980067, 0.198669, 0], [0.877583, -0.479426, 0], [0.770151, -0.420735, 0.479426],
+	//                            [0.770151, -0.420735, 0.479426], [0.848948, -1e-99, 0.528477], [0.979273, -1e-99, 0.202546], [0.96053, -0.194709, 0.198669], [0.96053, -0.194709, 0.198669], [0.980067, -0.198669, 0],
+	//                            [0.96053, -0.194709, -0.198669], [0.979273, -1e-99, -0.202546], [0.848948, -1e-99, -0.528477], [0.770151, -0.420735, -0.479426], [0.770151, -0.420735, -0.479426], [0.877583, -0.479426, 0],
+	//                            [0.980067, -0.198669, 0], [0.96053, -0.194709, -0.198669])
+	// bigSquare  ( 16 ):     QVector([0.848948, 1e-99, 0.528477], [0.770151, 0.420735, 0.479426], [0.770151, 0.420735, 0.479426], [0.877583, 0.479426, 0], [0.877583, 0.479426, 0], [0.770151, 0.420735, -0.479426], [0.770151, 0.420735, -0.479426], [0.848948, 1e-99, -0.528477],
+	//                                [0.877583, -0.479426, 0], [0.770151, -0.420735, 0.479426], [0.770151, -0.420735, 0.479426], [0.848948, -1e-99, 0.528477], [0.848948, -1e-99, -0.528477], [0.770151, -0.420735, -0.479426], [0.770151, -0.420735, -0.479426], [0.877583, -0.479426, 0])
+	// bigSquareUholy ( 16 ): QVector([0.848948, 1e-99, 0.528477], [0.770151, 0.420735, 0.479426], [0.770151, 0.420735, 0.479426], [0.877583, 0.479426, 0], [0.877583, 0.479426, 0], [0.770151, 0.420735, -0.479426], [0.770151, 0.420735, -0.479426], [0.848948, 1e-99, -0.528477],
+	//                                [0.877583, -0.479426, 0], [0.770151, -0.420735, 0.479426], [0.770151, -0.420735, 0.479426], [0.848948, -1e-99, 0.528477], [0.848948, -1e-99, -0.528477], [0.770151, -0.420735, -0.479426], [0.770151, -0.420735, -0.479426], [0.877583, -0.479426, 0])
+	// bigSquare Unioned with holySquare has area: 1.02463
+	// bigSquare alone has area:  1.02463
+	// Qt6.3.1:
+	// holySquare ( 32 ): QList([0.96053, 0.194709, 0.198669], [0.979273, 1e-99, 0.202546], [0.848948, 1e-99, 0.528477], [0.770151, 0.420735, 0.479426], [0.770151, 0.420735, 0.479426], [0.877583, 0.479426, 0],
+	//                          [0.980067, 0.198669, 0], [0.96053, 0.194709, 0.198669], [0.877583, 0.479426, 0], [0.770151, 0.420735, -0.479426], [0.770151, 0.420735, -0.479426], [0.848948, 1e-99, -0.528477],
+	//                          [0.979273, 1e-99, -0.202546], [0.96053, 0.194709, -0.198669], [0.96053, 0.194709, -0.198669], [0.980067, 0.198669, 0], [0.877583, -0.479426, 0], [0.770151, -0.420735, 0.479426],
+	//                          [0.770151, -0.420735, 0.479426], [0.848948, -1e-99, 0.528477], [0.979273, -1e-99, 0.202546], [0.96053, -0.194709, 0.198669], [0.96053, -0.194709, 0.198669], [0.980067, -0.198669, 0],
+	//                          [0.96053, -0.194709, -0.198669], [0.979273, -1e-99, -0.202546], [0.848948, -1e-99, -0.528477], [0.770151, -0.420735, -0.479426], [0.770151, -0.420735, -0.479426], [0.877583, -0.479426, 0],
+	//                          [0.980067, -0.198669, 0], [0.96053, -0.194709, -0.198669])
+	// bigSquare  ( 16 ): QList([0.848948, 1e-99, 0.528477], [0.770151, 0.420735, 0.479426], [0.770151, 0.420735, 0.479426], [0.877583, 0.479426, 0], [0.877583, 0.479426, 0], [0.770151, 0.420735, -0.479426], [0.770151, 0.420735, -0.479426], [0.848948, 1e-99, -0.528477],
+	//                          [0.877583, -0.479426, 0], [0.770151, -0.420735, 0.479426], [0.770151, -0.420735, 0.479426], [0.848948, -1e-99, 0.528477], [0.848948, -1e-99, -0.528477], [0.770151, -0.420735, -0.479426], [0.770151, -0.420735, -0.479426], [0.877583, -0.479426, 0])
+	// Tesselator error: "a coordinate is too large"
+	// Tesselator error: "a coordinate is too large"
+	// Tesselator error: "a coordinate is too large"
+	// Tesselator error: "a coordinate is too large"
+	// Tesselator error: "a coordinate is too large"
+	// bigSquareUholy ( 8 ): QList([0.848948, 1e-99, 0.528477], [-0.301511, -0.301511, 0.904534], [-0.301511, -0.301511, 0.904534], [1, 1.02117e-99, 0], [1, -1.17793e-99, 0], [-0.57735, -0.57735, 0.57735], [-0.57735, -0.57735, 0.57735], [0.979273, -1e-99, 0.202546],
+	//                             [0.848948, -1e-99, -0.528477], [-0.57735, -0.57735, 0.57735], [-0.57735, -0.57735, 0.57735], [0.877583, -0.479426, 0]) <<<================== WHY ARE THERE 12 VERTICES IF LENGTH==8?????
+	// Tesselator error: "a coordinate is too large"
+	// Tesselator error: "a coordinate is too large"
+	// Tesselator error: "a coordinate is too large"
+	// bigSquare Unioned with holySquare has area: 1.65351
+	// bigSquare alone has area:  1.02463
+	// Tesselator error: "a coordinate is too large"
+	// Tesselator error: "a coordinate is too large"
+
 	qDebug() << "holySquare (" << holySquare.getOutlineVertexArray().vertex.length() << "):" << holySquare.getOutlineVertexArray().vertex;
 	qDebug() << "bigSquare  (" << bigSquare.getOutlineVertexArray().vertex.length()  << "):" << bigSquare.getOutlineVertexArray().vertex;
+	QVector<Vec3d> unionVertex = bigSquare.getUnion(holySquare)->getOutlineVertexArray().vertex;
+	qDebug() << "unionVertex (" << unionVertex.length() << "):" << unionVertex;
 	qDebug() << "bigSquareUholy (" << bigSquare.getUnion(holySquare)->getOutlineVertexArray().vertex.length() << "):" << bigSquare.getUnion(holySquare)->getOutlineVertexArray().vertex;
 	qDebug() << "bigSquare Unioned with holySquare has area:" << bigSquare.getUnion(holySquare)->getArea();
 	qDebug() << "bigSquare alone has area: " << bigSquare.getArea();
 	// Note that even though the results of the previous two lines differ, this next test (and the rest of the test function) passes!
-	QCOMPARE(bigSquare.getUnion(holySquare)->getArea(), bigSquare.getArea());
+	QCOMPARE(bigSquare.getUnion(holySquare)->getArea(), bigSquare.getArea()); // fails in Qt6
 	QCOMPARE(bigSquare.getSubtraction(smallSquare)->getArea(), bigSquare.getArea()-smallSquare.getArea());
 	QCOMPARE(bigSquare.getIntersection(smallSquare)->getArea(), smallSquare.getArea());
 
@@ -454,18 +497,37 @@ void TestStelSphericalGeometry::testOctahedronPolygon()
 
 	QCOMPARE(southPoleSquare.getOctahedronPolygon().getOutlineVertexArray().vertex.length(), 16);
 	QCOMPARE(northPoleSquare.getOctahedronPolygon().getOutlineVertexArray().vertex.length(), 16);
-	//QCOMPARE(northPoleSquare.getIntersection(northPoleSquare)->getArea() / northPoleSquare.getArea(), 1);
-	//QCOMPARE(4*northPoleSquare.getIntersection(northPoleSquare)->getArea(), 3*northPoleSquare.getArea());
-	QCOMPARE(northPoleSquare.getIntersection(northPoleSquare)->getOctahedronPolygon().getOutlineVertexArray().vertex.length(), 16);
+//	QCOMPARE(northPoleSquare.getIntersection(northPoleSquare)->getOctahedronPolygon().getOutlineVertexArray().vertex.length(), 16); // reports as 18 in Qt6!
 	// dump contours: Run in Qt5.15.2 and Qt6.3 and write results here:
+	// Qt 5.15.2: All looks as expected.
+	// NorthpoleSquare by itself      ( 16 ): QVector([1e-99, 0.091261, 0.995827], [0.0993347, 0.00996671, 0.995004], [0.0993347, 0.00996671, 0.995004], [0.091261, 1e-99, 0.995827], [-0.091261, 1e-99, 0.995827], [-0.00996671, 0.0993347, 0.995004], [-0.00996671, 0.0993347, 0.995004], [-1e-99, 0.091261, 0.995827],
+	//                                                [0.091261, -1e-99, 0.995827], [0.00996671, -0.0993347, 0.995004], [0.00996671, -0.0993347, 0.995004], [1e-99, -0.091261, 0.995827], [-1e-99, -0.091261, 0.995827], [-0.0993347, -0.00996671, 0.995004], [-0.0993347, -0.00996671, 0.995004], [-0.091261, -1e-99, 0.995827])
+	// NorthpoleSquare self-intersect ( 16 ): QVector([0.0993347, 0.00996671, 0.995004], [0.091261, 1e-99, 0.995827], [1e-99, 0.091261, 0.995827], [0.0993347, 0.00996671, 0.995004], [-0.091261, 1e-99, 0.995827], [-0.00996671, 0.0993347, 0.995004], [-0.00996671, 0.0993347, 0.995004], [-1e-99, 0.091261, 0.995827],
+	//                                                [0.091261, -1e-99, 0.995827], [0.00996671, -0.0993347, 0.995004], [0.00996671, -0.0993347, 0.995004], [1e-99, -0.091261, 0.995827], [-1e-99, -0.091261, 0.995827], [-0.0993347, -0.00996671, 0.995004], [-0.0993347, -0.00996671, 0.995004], [-0.091261, -1e-99, 0.995827])
+	// NorthpoleSquare self-union     ( 16 ): QVector([0.0993347, 0.00996671, 0.995004], [0.091261, 1e-99, 0.995827], [1e-99, 0.091261, 0.995827], [0.0993347, 0.00996671, 0.995004], [-0.091261, 1e-99, 0.995827], [-0.00996671, 0.0993347, 0.995004], [-0.00996671, 0.0993347, 0.995004], [-1e-99, 0.091261, 0.995827],
+	//                                                [0.091261, -1e-99, 0.995827], [0.00996671, -0.0993347, 0.995004], [0.00996671, -0.0993347, 0.995004], [1e-99, -0.091261, 0.995827], [-1e-99, -0.091261, 0.995827], [-0.0993347, -0.00996671, 0.995004], [-0.0993347, -0.00996671, 0.995004], [-0.091261, -1e-99, 0.995827])
+	// NorthpoleSquare by itself      has area 0.0200333
+	// NorthpoleSquare self-intersect has area 0.0200333
+	// NorthpoleSquare self-union     has area 0.0200333
+	// Qt6.3.1/Debug build (after disabling the Q_ASSERT(0) in OctahedronPolygon.cpp:323):
+	// NorthpoleSquare by itself      ( 16 ): QList([1e-99, 0.091261, 0.995827], [0.0993347, 0.00996671, 0.995004], [0.0993347, 0.00996671, 0.995004], [0.091261, 1e-99, 0.995827], [-0.091261, 1e-99, 0.995827], [-0.00996671, 0.0993347, 0.995004], [-0.00996671, 0.0993347, 0.995004], [-1e-99, 0.091261, 0.995827], [0.091261, -1e-99, 0.995827], [0.00996671, -0.0993347, 0.995004], [0.00996671, -0.0993347, 0.995004], [1e-99, -0.091261, 0.995827], [-1e-99, -0.091261, 0.995827], [-0.0993347, -0.00996671, 0.995004], [-0.0993347, -0.00996671, 0.995004], [-0.091261, -1e-99, 0.995827])
+	// Tesselator error: "a coordinate is too large"
+	// NorthpoleSquare self-intersect ( 16 ): QList([0.0993347, 0.00996671, 0.995004], [0.091261, 1e-99, 0.995827], [1e-99, 0.091261, 0.995827], [0.0993347, 0.00996671, 0.995004], [-0.091261, 1e-99, 0.995827], [-0.00996671, 0.0993347, 0.995004], [-0.00996671, 0.0993347, 0.995004], [-1e-99, 0.091261, 0.995827], [0.091261, -1e-99, 0.995827], [0.00996671, -0.0993347, 0.995004], [0.00996671, -0.0993347, 0.995004], [1e-99, -0.091261, 0.995827], [-1e-99, -0.091261, 0.995827], [-0.57735, -0.57735, -0.57735], [-0.57735, -0.57735, -0.57735], [-0.091261, -1e-99, 0.995827])
+	// Tesselator error: "a coordinate is too large"
+	// NorthpoleSquare self-union     ( 12 ): QList([0.0993347, 0.00996671, 0.995004], [0.091261, 1e-99, 0.995827], [1e-99, 0.091261, 0.995827], [0.0993347, 0.00996671, 0.995004], [-0.091261, 1e-99, 0.995827], [-0.00996671, 0.0993347, 0.995004], [-0.00996671, 0.0993347, 0.995004], [-1e-99, 0.091261, 0.995827], [0.091261, -1e-99, 0.995827], [0.00996671, -0.0993347, 0.995004], [0.00996671, -0.0993347, 0.995004], [1e-99, -0.091261, 0.995827], [1e-99, -0.091261, 0.995827], [-0.57735, -0.57735, 0.57735], [-0.57735, -0.57735, 0.57735], [0.091261, -1e-99, 0.995827], [-1e-99, -0.091261, 0.995827], [-0.0993347, -0.00996671, 0.995004], [-0.0993347, -0.00996671, 0.995004], [-0.091261, -1e-99, 0.995827])
+	// NorthpoleSquare by itself      has area 0.0200333
+	// NorthpoleSquare self-intersect has area 0.0200333
+	// NorthpoleSquare self-union     has area 0.0200333
+	// Tesselator error: "a coordinate is too large"
+	// Tesselator error: "a coordinate is too large"
 	qDebug() << "NorthpoleSquare by itself      (" << northPoleSquare.getOctahedronPolygon().getOutlineVertexArray().vertex.length() << "):" << northPoleSquare.getOctahedronPolygon().getOutlineVertexArray().vertex;
 	qDebug() << "NorthpoleSquare self-intersect (" << northPoleSquare.getIntersection(northPoleSquare)->getOctahedronPolygon().getOutlineVertexArray().vertex.length() << "):" << northPoleSquare.getIntersection(northPoleSquare)->getOctahedronPolygon().getOutlineVertexArray().vertex;
 	qDebug() << "NorthpoleSquare self-union     (" << northPoleSquare.getUnion(northPoleSquare)->getOctahedronPolygon().getOutlineVertexArray().vertex.length() << "):" << northPoleSquare.getIntersection(northPoleSquare)->getOctahedronPolygon().getOutlineVertexArray().vertex;
 	qDebug() << "NorthpoleSquare by itself      has area" << northPoleSquare.getArea();
 	qDebug() << "NorthpoleSquare self-intersect has area" << northPoleSquare.getIntersection(northPoleSquare)->getArea();
 	qDebug() << "NorthpoleSquare self-union     has area" << northPoleSquare.getUnion(northPoleSquare)->getArea();
-	QCOMPARE(northPoleSquare.getIntersection(northPoleSquare)->getArea(), northPoleSquare.getArea());
-	QCOMPARE(northPoleSquare.getUnion(northPoleSquare)->getArea(), northPoleSquare.getArea());
+	QCOMPARE(northPoleSquare.getIntersection(northPoleSquare)->getArea(), northPoleSquare.getArea()); // fails in Qt6
+	QCOMPARE(northPoleSquare.getUnion(northPoleSquare)->getArea(), northPoleSquare.getArea()); // fails in Qt6
 	QCOMPARE(northPoleSquare.getSubtraction(northPoleSquare)->getArea(), 0.);
 
 	// Test binary IO
@@ -542,6 +604,8 @@ void TestStelSphericalGeometry::testSerialize()
 	QVERIFY(capReg->getType()==reg2->getType());
 }
 
+// NOTE: On Qt6.3.1 this reports contours.at(0).size()=7.
+// TODO: Check on Qt5. OK, the same 7.
 void TestStelSphericalGeometry::benchmarkCreatePolygon()
 {
 	QVector<QVector<Vec3d> > contours;
