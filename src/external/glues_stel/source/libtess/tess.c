@@ -420,7 +420,8 @@ static int EmptyCache(GLUEStesselator* tess)
 }
 
 
-void  gluesTessVertex(GLUEStesselator* tess, double coords[3], void* data)
+// location is actually an array of only 3 doubles.
+void  gluesTessVertex(GLUEStesselator* tess, double* location, void* data)
 {
    int i;
    int tooLarge=FALSE;
@@ -440,7 +441,7 @@ void  gluesTessVertex(GLUEStesselator* tess, double coords[3], void* data)
 
    for (i=0; i<3; ++i)
    {
-      x=coords[i];
+      x=location[i];
       if (x<-GLUES_TESS_MAX_COORD)
       {
          x=-GLUES_TESS_MAX_COORD;
