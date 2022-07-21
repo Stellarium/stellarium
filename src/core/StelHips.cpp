@@ -96,6 +96,7 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 			// XXX: StelUtils::getJulianDayFromISO8601String does not work
 			// without the seconds!
 			QDateTime date = QDateTime::fromString(properties["hips_release_date"].toString(), Qt::ISODate);
+			date.setTimeSpec(Qt::UTC);
 			releaseDate = StelUtils::qDateTimeToJd(date);
 		}
 		if (properties.contains("hips_frame"))
@@ -524,6 +525,7 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 			// XXX: StelUtils::getJulianDayFromISO8601String does not work
 			// without the seconds!
 			QDateTime date = QDateTime::fromString(value, Qt::ISODate);
+			date.setTimeSpec(Qt::UTC);
 			releaseDate = StelUtils::qDateTimeToJd(date);
 		}
 		if (key == "hips_status" && value.split(' ').contains("public")) {
