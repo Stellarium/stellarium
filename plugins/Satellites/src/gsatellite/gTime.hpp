@@ -262,7 +262,7 @@ public:
 	//!     http://books.google.com/books?id=uJ4JhGJANb4C&lpg=PA52&hl=es&pg=PA50#v=onepage&q&f=false
 	//!     "Orbital Coordinate Systems, Part II."  Dr. T.Kelzo
 	//!	     Satellite Times, 2, no. 2 (November/December 1995): 78-79.
-	//!       http://www.celestrak.com/columns/v02n02/
+	//!       https://celestrak.org/columns/v02n02/
 	//! @return
 	//!    Theta Angle in radians, measuring eastward from the Vernal Equinox to the
 	//!    prime meridian
