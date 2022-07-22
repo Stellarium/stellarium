@@ -364,7 +364,7 @@ void TestStelSphericalGeometry::testSphericalPolygon()
 	qDebug() << "bigSquareUholy (" << bigSquare.getUnion(holySquare)->getOutlineVertexArray().vertex.length() << "):" << bigSquare.getUnion(holySquare)->getOutlineVertexArray().vertex;
 	qDebug() << "bigSquare Unioned with holySquare has area:" << bigSquare.getUnion(holySquare)->getArea();
 	qDebug() << "bigSquare alone has area: " << bigSquare.getArea();
-	// Note that even though the results of the previous two lines differ, this next test (and the rest of the test function) passes!
+	// Note that even though the results of the previous two lines differ, this next test (and the rest of the test function) passes *sometimes*!
 	QCOMPARE(bigSquare.getUnion(holySquare)->getArea(), bigSquare.getArea()); // fails in Qt6
 	QCOMPARE(bigSquare.getSubtraction(smallSquare)->getArea(), bigSquare.getArea()-smallSquare.getArea());
 	QCOMPARE(bigSquare.getIntersection(smallSquare)->getArea(), smallSquare.getArea());
@@ -537,6 +537,10 @@ void TestStelSphericalGeometry::testOctahedronPolygon()
 	qDebug() << "NorthpoleSquare by itself      (" << outlineVA.length() << "):" << outlineVA;
 	outlineVA=northPoleSquare.getIntersection(northPoleSquare)->getOctahedronPolygon().getOutlineVertexArray().vertex;
 	qDebug() << "NorthpoleSquare self-intersect (" << outlineVA.length() << "):" << outlineVA;
+	// SET BREAKPOINT HERE AND GO SLOWLY NOW!
+	SphericalRegionP northSelfUnion=northPoleSquare.getUnion(northPoleSquare);
+	qDebug() << "northSelfUnion.data()" << northSelfUnion.data();
+	qDebug() << "northSelfUnion->getOutlineVertexArray().vertex (" << northSelfUnion->getOutlineVertexArray().vertex.length() << ")" << northSelfUnion->getOutlineVertexArray().vertex;
 	outlineVA=northPoleSquare.getUnion(northPoleSquare)->getOctahedronPolygon().getOutlineVertexArray().vertex;
 	qDebug() << "NorthpoleSquare self-union     (" << outlineVA.length() << "):" << outlineVA;
 	//qDebug() << "NorthpoleSquare by itself      (" << northPoleSquare.getOctahedronPolygon().getOutlineVertexArray().vertex.length() << "):" << northPoleSquare.getOctahedronPolygon().getOutlineVertexArray().vertex;

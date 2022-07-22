@@ -475,6 +475,7 @@ void OctahedronPolygon::updateVertexArray()
 			{
 				outlineCachedVertexArray.vertex.append(previous.vertex);
 				outlineCachedVertexArray.vertex.append(c.first().vertex);
+				Q_ASSERT(outlineCachedVertexArray.vertex.last() == outlineCachedVertexArray.vertex.at(outlineCachedVertexArray.vertex.length()-1));
 				unprojectOctahedron(outlineCachedVertexArray.vertex.last(), sideDirection);
 			}
 		}
