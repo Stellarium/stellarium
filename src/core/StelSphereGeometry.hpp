@@ -560,7 +560,7 @@ public:
 class SphericalPolygon : public SphericalRegion
 {
 public:
-	// Avoid name hiding when overloading the virtual methods.
+	// Avoid name hiding when overloading the virtual methods. GZ WHY IS THIS NECESSARY????
 	using SphericalRegion::intersects;
 	using SphericalRegion::contains;
 	using SphericalRegion::getIntersection;

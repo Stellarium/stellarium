@@ -259,7 +259,7 @@ Vec3d OctahedronPolygon::getPointInside() const
 	Vec3d res(trianglesArray[0]);
 	res+=trianglesArray[1];
 	res+=trianglesArray[2];
-	res.normalize();
+	res.normalize(); // GZ: WHY this? Why not (a1+a2+a3)/3?
 	return res;
 }
 
@@ -374,7 +374,7 @@ QVector<Vec3d> OctahedronPolygon::tesselateOneSideTriangles(GLUEStesselator* tes
 	{
 		qDebug() << "contours.at(" << c << ").size()=" << contours.at(c).size();
 		gluesTessBeginContour(tess);
-		for (int i=0;i<contours.at(c).size();i++)
+		for (auto i=0;i<contours.at(c).size();i++)
 		{
 			const Vec3d vDat(contours[c][i].vertex.v);
 			if (abs(vDat[0]) > GLUES_TESS_MAX_COORD)
@@ -383,7 +383,8 @@ QVector<Vec3d> OctahedronPolygon::tesselateOneSideTriangles(GLUEStesselator* tes
 				qDebug() << "contours[" << c << "][" << i <<  "]: vDat[1] too large:" << vDat[1];
 			if (abs(vDat[2]) > GLUES_TESS_MAX_COORD)
 				qDebug() << "contours[" << c << "][" << i <<  "]: vDat[2] too large:" << vDat[2];
-			gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.data())), static_cast<void*>(const_cast<Vec3d *>(&(contours[c][i].vertex))));
+			//gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.data())), static_cast<void*>(const_cast<Vec3d *>(&(contours[c][i].vertex))));
+			gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.v)), static_cast<void*>(const_cast<Vec3d *>(&(contours[c][i].vertex))));
 		}
 		gluesTessEndContour(tess);
 	}

@@ -30,20 +30,20 @@ Q_OBJECT
 private slots:
 	void initTestCase();
 	void testOctahedronPolygon();
-	void testSphericalCap();
-	void testContains();
-	void testPlaneIntersect2();
-	void testGreatCircleIntersection();
+//	void testSphericalCap();
+//	void testContains();
+//	void testPlaneIntersect2();
+//	void testGreatCircleIntersection();
 	void testSphericalPolygon();
-	void testConsistency();
-	void testLoading();
-	void testEnlarge();
-	void benchmarkContains();
-	void benchmarkCheckValid();
-	void benchmarkSphericalCap();
-	void benchmarkGetIntersection();
-	void testSerialize();
-	void benchmarkCreatePolygon();
+//	void testConsistency();
+//	void testLoading();
+//	void testEnlarge();
+//	void benchmarkContains();
+//	void benchmarkCheckValid();
+//	void benchmarkSphericalCap();
+//	void benchmarkGetIntersection();
+//	void testSerialize();
+//	void benchmarkCreatePolygon();
 private:
 	SphericalPolygon holySquare;
 	SphericalPolygon bigSquare;
