@@ -264,16 +264,50 @@ Vec3d OctahedronPolygon::getPointInside() const
 }
 
 // GZ I think operator += / append may behave differently between Qt5 and Qt6!
+// Thge debug output dumps vertex lists before and after the actual append.
 void OctahedronPolygon::append(const OctahedronPolygon& other)
 {
+	qDebug() << "OctahedronPolygon::append()";
 	Q_ASSERT(sides.size()==8 && other.sides.size()==8);
 	for (int i=0;i<8;++i)
 	{
+		qDebug() << "sides ["<<i<<"]:" << sides[i].data();
+		QVector<SubContour> v=sides[i];
+		qDebug() << "sides ["<<i<<"]: size=" << v.size();
+		for (int j=0; j<v.size(); j++)
+		{
+			const SubContour &sub=v.at(j);
+			qDebug() << "sub=sides["<<i<<"]["<<j<<"]" << sub.data();
+			for (int k=0; k<sub.size(); k++)
+			{
+				const EdgeVertex &edgeVertex=sub.at(k);
+				qDebug() << "edgeVertex=sides["<<i<<"]["<<j<<"]["<<k<<"]" << edgeVertex.vertex << "(edge:" << (edgeVertex.edgeFlag ? "yes":"no") << ")";
+
+			}
+		}
+		qDebug() << "Appending other.sides[" << i << "] (" << other.sides[i].length() << "elements)";
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-		sides[i].append(other.sides[i]);
+		//sides[i].append(other.sides[i]);
+		sides[i] = sides[i] << QVector<SubContour>(other.sides[i]);
+		// THIS MAY BE FORBIDDEN! the data() pointers are identical!
 #else
 		sides[i] += other.sides[i];
 #endif
+		// Now dump the sides list again:
+		qDebug() << "sides*["<<i<<"]:" << sides[i].data();
+		v=sides[i];
+		qDebug() << "sides*["<<i<<"]: size=" << v.size();
+		for (int j=0; j<v.size(); j++)
+		{
+			const SubContour &sub=v.at(j);
+			qDebug() << "sub=sides*["<<i<<"]["<<j<<"]" << sub.data();
+			for (int k=0; k<sub.size(); k++)
+			{
+				const EdgeVertex &edgeVertex=sub.at(k);
+				qDebug() << "edgeVertex=sides*["<<i<<"]["<<j<<"]["<<k<<"]" << edgeVertex.vertex << "(edge:" << (edgeVertex.edgeFlag ? "yes":"no") << ")";
+
+			}
+		}
 	}
 }
 
@@ -285,7 +319,8 @@ void OctahedronPolygon::appendReversed(const OctahedronPolygon& other)
 		for (const auto& sub : other.sides[i])
 		{
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-			sides[i].append(sub.reversed());
+			//sides[i].append(sub.reversed());
+			sides[i] = sides[i] << sub.reversed();
 #else
 			sides[i] += sub.reversed();
 #endif
@@ -369,22 +404,18 @@ QVector<Vec3d> OctahedronPolygon::tesselateOneSideTriangles(GLUEStesselator* tes
 	OctTessTrianglesCallbackData data;
 	gluesTessNormal(tess, 0.,0., (sidenb%2==0 ? -1. : 1.));
 	gluesTessBeginPolygon(tess, &data);
-	qDebug() << "contours.size()=" << contours.size();
+	//qDebug() << "contours.size()=" << contours.size();
 	for (int c=0;c<contours.size();c++)
 	{
-		qDebug() << "contours.at(" << c << ").size()=" << contours.at(c).size();
+		//qDebug() << "contours.at(" << c << ").size()=" << contours.at(c).size();
 		gluesTessBeginContour(tess);
 		for (auto i=0;i<contours.at(c).size();i++)
 		{
-			const Vec3d vDat(contours[c][i].vertex.v);
-			if (abs(vDat[0]) > GLUES_TESS_MAX_COORD)
-				qDebug() << "contours[" << c << "][" << i <<  "]: vDat[0] too large:" << vDat[0];
-			if (abs(vDat[1]) > GLUES_TESS_MAX_COORD)
-				qDebug() << "contours[" << c << "][" << i <<  "]: vDat[1] too large:" << vDat[1];
-			if (abs(vDat[2]) > GLUES_TESS_MAX_COORD)
-				qDebug() << "contours[" << c << "][" << i <<  "]: vDat[2] too large:" << vDat[2];
-			//gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.data())), static_cast<void*>(const_cast<Vec3d *>(&(contours[c][i].vertex))));
-			gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.v)), static_cast<void*>(const_cast<Vec3d *>(&(contours[c][i].vertex))));
+			//const Vec3d vDat(contours[c][i].vertex.v);
+			//if ((abs(vDat[0]) > GLUES_TESS_MAX_COORD) || (abs(vDat[1]) > GLUES_TESS_MAX_COORD) || (abs(vDat[2]) > GLUES_TESS_MAX_COORD))
+				//qDebug() << "contours[" << c << "][" << i <<  "]: vDat range too large:" << vDat;
+			gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.data())), static_cast<void*>(const_cast<Vec3d *>(&(contours[c][i].vertex))));
+			//gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.v)), static_cast<void*>(const_cast<Vec3d *>(&(contours[c][i].vertex))));
 		}
 		gluesTessEndContour(tess);
 	}
@@ -524,7 +555,14 @@ QVector<SubContour> OctahedronPolygon::tesselateOneSideLineLoop(GLUEStesselator*
 		for (int i=0;i<contours.at(c).size();++i)
 		{
 			Q_ASSERT(contours[c][i].vertex[2]<0.000001);
+			//qDebug() << "Before Tessellation:" << contours[c][i].vertex.data();
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+			gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.v)), const_cast<void*>(static_cast<const void*>(&(contours[c][i]))));
+#else
 			gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.data())), const_cast<void*>(static_cast<const void*>(&(contours[c][i]))));
+#endif
+			//qDebug() << "Result of Tessellation:" << contours[c][i].vertex.data();
+
 		}
 		gluesTessEndContour(tess);
 	}
