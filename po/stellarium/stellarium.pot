@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-07-20 18:16+0700\n"
+"POT-Creation-Date: 2022-07-24 19:21+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -308,7 +308,7 @@ msgstr ""
 
 #. TRANSLATORS: Center of the umbra
 #: src/core/modules/GridLinesMgr.cpp:1474
-#: plugins/Satellites/src/Satellites.cpp:2791
+#: plugins/Satellites/src/Satellites.cpp:2797
 msgid "C.U."
 msgstr ""
 
@@ -796,7 +796,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:1441 src/core/modules/Comet.cpp:159
 #: src/core/modules/Comet.cpp:169 src/gui/StelGuiItems.cpp:847
 #: src/gui/AstroCalcDialog.cpp:2992 src/gui/AstroCalcDialog.cpp:8160
-#: plugins/Satellites/src/Satellites.cpp:2791
+#: plugins/Satellites/src/Satellites.cpp:2797
 #: plugins/Satellites/src/Satellite.cpp:354
 #: plugins/Satellites/src/Satellite.cpp:397
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1162
@@ -2097,10 +2097,10 @@ msgid "See Logfile for instructions."
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Planet satellites
-#. TRANSLATORS: CelesTrak source [Planet]: http://www.celestrak.com/NORAD/elements/planet.txt
-#. TRANSLATORS: CelesTrak source [Planet]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=planet&FORMAT=tle
-#. TRANSLATORS: CelesTrak supplemental source [Planet TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/planet.txt
-#: src/core/modules/Planet.cpp:124 plugins/Satellites/src/Satellites.cpp:3220
+#. TRANSLATORS: CelesTrak source [Planet]: https://celestrak.org/NORAD/elements/planet.txt
+#. TRANSLATORS: CelesTrak source [Planet]: https://celestrak.org/NORAD/elements/gp.php?GROUP=planet&FORMAT=tle
+#. TRANSLATORS: CelesTrak supplemental source [Planet TLEs]: https://celestrak.org/NORAD/elements/supplemental/planet.txt
+#: src/core/modules/Planet.cpp:124 plugins/Satellites/src/Satellites.cpp:3226
 msgid "planet"
 msgstr ""
 
@@ -2642,6 +2642,142 @@ msgstr ""
 
 #: src/core/modules/HipsMgr.cpp:151
 msgid "Toggle Hierarchical Progressive Surveys"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:58
+msgid "Specific Time"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:60
+msgid "Next transit of the selected object"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:61
+msgid "Next rising of the selected object"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:62
+msgid "Next setting of the selected object"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:63
+msgid "Today's transit of the selected object"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:64
+msgid "Today's rising of the selected object"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:65
+msgid "Today's setting of the selected object"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:66
+msgid "Previous transit of the selected object"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:67
+msgid "Previous rising of the selected object"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:68
+msgid "Previous setting of the selected object"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:70
+msgid "Next morning twilight"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:71
+msgid "Next evening twilight"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:72
+msgid "Today's morning twilight"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:73
+msgid "Today's evening twilight"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:74
+msgid "Previous morning twilight"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:75
+msgid "Previous evening twilight"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:77
+msgid "Selected object at altitude at next morning"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:78
+msgid "Selected object at altitude this morning"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:79
+msgid "Selected object at altitude at previous morning"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:80
+msgid "Selected object at altitude at next evening"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:81
+msgid "Selected object at altitude this evening"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:82
+msgid "Selected object at altitude at previous evening"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:84
+msgid "March equinox at current year"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:85
+msgid "March equinox at next year"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:86
+msgid "March equinox at previous year"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:88
+msgid "September equinox at current year"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:89
+msgid "September equinox at next year"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:90
+msgid "September equinox at previous year"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:92
+msgid "June solstice at current year"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:93
+msgid "June solstice at next year"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:94
+msgid "June solstice at previous year"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:96
+msgid "December solstice at current year"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:97
+msgid "December solstice at next year"
+msgstr ""
+
+#: src/core/modules/SpecificTimeMgr.cpp:98
+msgid "December solstice at previous year"
 msgstr ""
 
 #: src/core/StelApp.cpp:455
@@ -15487,689 +15623,689 @@ msgid "Hide satellites from the group"
 msgstr ""
 
 #. TRANSLATORS: The full phrase is 'Loading TLE %VALUE%/%MAX%' in progress bar
-#: plugins/Satellites/src/Satellites.cpp:2161
+#: plugins/Satellites/src/Satellites.cpp:2167
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:153
 msgid "Loading TLE"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:3127
+#: plugins/Satellites/src/Satellites.cpp:3133
 msgid "communications"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:3129
+#: plugins/Satellites/src/Satellites.cpp:3135
 msgid "navigation"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:3131
+#: plugins/Satellites/src/Satellites.cpp:3137
 msgid "scientific"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#: plugins/Satellites/src/Satellites.cpp:3133
+#: plugins/Satellites/src/Satellites.cpp:3139
 msgid "earth resources"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:3135
+#: plugins/Satellites/src/Satellites.cpp:3141
 msgid "geostationary"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:3137
+#: plugins/Satellites/src/Satellites.cpp:3143
 msgid "non-operational"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:3139
+#: plugins/Satellites/src/Satellites.cpp:3145
 msgid "observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: The Indian Regional Navigation Satellite System (IRNSS) is an autonomous regional satellite navigation system being developed by the Indian Space Research Organisation (ISRO) which would be under complete control of the Indian government.
-#: plugins/Satellites/src/Satellites.cpp:3141
+#: plugins/Satellites/src/Satellites.cpp:3147
 msgid "irnss"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: The Quasi-Zenith Satellite System (QZSS), is a proposed three-satellite regional time transfer system and Satellite Based Augmentation System for the Global Positioning System, that would be receivable within Japan.
-#: plugins/Satellites/src/Satellites.cpp:3143
+#: plugins/Satellites/src/Satellites.cpp:3149
 msgid "qzss"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
-#: plugins/Satellites/src/Satellites.cpp:3145
+#: plugins/Satellites/src/Satellites.cpp:3151
 msgid "cosmos"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Debris of satellites
-#: plugins/Satellites/src/Satellites.cpp:3147
+#: plugins/Satellites/src/Satellites.cpp:3153
 msgid "debris"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Crewed satellites
-#: plugins/Satellites/src/Satellites.cpp:3149
+#: plugins/Satellites/src/Satellites.cpp:3155
 msgid "crewed"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
-#: plugins/Satellites/src/Satellites.cpp:3151
+#: plugins/Satellites/src/Satellites.cpp:3157
 msgid "resupply"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: are known to broadcast TV signals
-#: plugins/Satellites/src/Satellites.cpp:3153
+#: plugins/Satellites/src/Satellites.cpp:3159
 msgid "tv"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GONETS satellites
-#: plugins/Satellites/src/Satellites.cpp:3155
+#: plugins/Satellites/src/Satellites.cpp:3161
 msgid "gonets"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Last 30 Days' Launches
-#. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]: http://www.celestrak.com/NORAD/elements/tle-new.txt
-#: plugins/Satellites/src/Satellites.cpp:3161
+#. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]: https://celestrak.org/NORAD/elements/tle-new.txt
+#: plugins/Satellites/src/Satellites.cpp:3167
 msgid "tle-new"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Last 30 Days' Launches
-#. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3164
+#. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]: https://celestrak.org/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3170
 msgid "last-30-days"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Space stations
-#. TRANSLATORS: CelesTrak source [Space Stations]: http://www.celestrak.com/NORAD/elements/stations.txt
-#. TRANSLATORS: CelesTrak source [Space Stations]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=stations&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3168
+#. TRANSLATORS: CelesTrak source [Space Stations]: https://celestrak.org/NORAD/elements/stations.txt
+#. TRANSLATORS: CelesTrak source [Space Stations]: https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3174
 msgid "stations"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#. TRANSLATORS: CelesTrak source [100 (or so) Brightest]: http://www.celestrak.com/NORAD/elements/visual.txt
-#. TRANSLATORS: CelesTrak source [100 (or so) Brightest]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=visual&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3172
+#. TRANSLATORS: CelesTrak source [100 (or so) Brightest]: https://celestrak.org/NORAD/elements/visual.txt
+#. TRANSLATORS: CelesTrak source [100 (or so) Brightest]: https://celestrak.org/NORAD/elements/gp.php?GROUP=visual&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3178
 msgid "visual"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Active Satellites
-#. TRANSLATORS: CelesTrak source [Active Satellites]: http://www.celestrak.com/NORAD/elements/active.txt
-#. TRANSLATORS: CelesTrak source [Active Satellites]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=active&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3176
+#. TRANSLATORS: CelesTrak source [Active Satellites]: https://celestrak.org/NORAD/elements/active.txt
+#. TRANSLATORS: CelesTrak source [Active Satellites]: https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3182
 msgid "active"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Analyst Satellites
-#. TRANSLATORS: CelesTrak source [Analyst Satellites]: http://www.celestrak.com/NORAD/elements/analyst.txt
-#. TRANSLATORS: CelesTrak source [Analyst Satellites]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=analyst&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3180
+#. TRANSLATORS: CelesTrak source [Analyst Satellites]: https://celestrak.org/NORAD/elements/analyst.txt
+#. TRANSLATORS: CelesTrak source [Analyst Satellites]: https://celestrak.org/NORAD/elements/gp.php?GROUP=analyst&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3186
 msgid "analyst"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#. TRANSLATORS: CelesTrak source [Weather]: http://www.celestrak.com/NORAD/elements/weather.txt
-#. TRANSLATORS: CelesTrak source [Weather]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=weather&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3187
+#. TRANSLATORS: CelesTrak source [Weather]: https://celestrak.org/NORAD/elements/weather.txt
+#. TRANSLATORS: CelesTrak source [Weather]: https://celestrak.org/NORAD/elements/gp.php?GROUP=weather&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3193
 msgid "weather"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the NOAA satellites
-#. TRANSLATORS: CelesTrak source [NOAA]: http://www.celestrak.com/NORAD/elements/noaa.txt
-#. TRANSLATORS: CelesTrak source [NOAA]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=noaa&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3191
+#. TRANSLATORS: CelesTrak source [NOAA]: https://celestrak.org/NORAD/elements/noaa.txt
+#. TRANSLATORS: CelesTrak source [NOAA]: https://celestrak.org/NORAD/elements/gp.php?GROUP=noaa&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3197
 msgid "noaa"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GOES satellites
-#. TRANSLATORS: CelesTrak source [GOES]: http://www.celestrak.com/NORAD/elements/goes.txt
-#. TRANSLATORS: CelesTrak source [GOES]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=goes&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3195
+#. TRANSLATORS: CelesTrak source [GOES]: https://celestrak.org/NORAD/elements/goes.txt
+#. TRANSLATORS: CelesTrak source [GOES]: https://celestrak.org/NORAD/elements/gp.php?GROUP=goes&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3201
 msgid "goes"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#. TRANSLATORS: CelesTrak source [Earth Resources]: http://www.celestrak.com/NORAD/elements/resource.txt
-#. TRANSLATORS: CelesTrak source [Earth Resources]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=resource&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3199
+#. TRANSLATORS: CelesTrak source [Earth Resources]: https://celestrak.org/NORAD/elements/resource.txt
+#. TRANSLATORS: CelesTrak source [Earth Resources]: https://celestrak.org/NORAD/elements/gp.php?GROUP=resource&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3205
 msgid "resource"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Search & Rescue (SARSAT) satellites
-#. TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]: http://www.celestrak.com/NORAD/elements/sarsat.txt
-#. TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=sarsat&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3203
+#. TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]: https://celestrak.org/NORAD/elements/sarsat.txt
+#. TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]: https://celestrak.org/NORAD/elements/gp.php?GROUP=sarsat&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3209
 msgid "sarsat"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Disaster Monitoring satellites
-#. TRANSLATORS: CelesTrak source [Disaster Monitoring]: http://www.celestrak.com/NORAD/elements/dmc.txt
-#. TRANSLATORS: CelesTrak source [Disaster Monitoring]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=dmc&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3207
+#. TRANSLATORS: CelesTrak source [Disaster Monitoring]: https://celestrak.org/NORAD/elements/dmc.txt
+#. TRANSLATORS: CelesTrak source [Disaster Monitoring]: https://celestrak.org/NORAD/elements/gp.php?GROUP=dmc&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3213
 msgid "dmc"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: The Tracking and Data Relay Satellite System (TDRSS) is a network of communications satellites and ground stations used by NASA for space communications.
-#. TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System (TDRSS)]: http://www.celestrak.com/NORAD/elements/tdrss.txt
-#. TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System (TDRSS)]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=tdrss&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3211
+#. TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System (TDRSS)]: https://celestrak.org/NORAD/elements/tdrss.txt
+#. TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System (TDRSS)]: https://celestrak.org/NORAD/elements/gp.php?GROUP=tdrss&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3217
 msgid "tdrss"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: ARGOS Data Collection System satellites
-#. TRANSLATORS: CelesTrak source [ARGOS Data Collection System]: http://www.celestrak.com/NORAD/elements/argos.txt
-#. TRANSLATORS: CelesTrak source [ARGOS Data Collection System]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=argos&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3215
+#. TRANSLATORS: CelesTrak source [ARGOS Data Collection System]: https://celestrak.org/NORAD/elements/argos.txt
+#. TRANSLATORS: CelesTrak source [ARGOS Data Collection System]: https://celestrak.org/NORAD/elements/gp.php?GROUP=argos&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3221
 msgid "argos"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Spire constellation (LEMUR satellites)
-#. TRANSLATORS: CelesTrak source [Spire]: http://www.celestrak.com/NORAD/elements/spire.txt
-#. TRANSLATORS: CelesTrak source [Spire]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=spire&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3224
+#. TRANSLATORS: CelesTrak source [Spire]: https://celestrak.org/NORAD/elements/spire.txt
+#. TRANSLATORS: CelesTrak source [Spire]: https://celestrak.org/NORAD/elements/gp.php?GROUP=spire&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3230
 msgid "spire"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Active Geosynchronous Satellites
-#. TRANSLATORS: CelesTrak source [Active Geosynchronous]: http://www.celestrak.com/NORAD/elements/geo.txt
-#. TRANSLATORS: CelesTrak source [Active Geosynchronous]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=geo&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3231
+#. TRANSLATORS: CelesTrak source [Active Geosynchronous]: https://celestrak.org/NORAD/elements/geo.txt
+#. TRANSLATORS: CelesTrak source [Active Geosynchronous]: https://celestrak.org/NORAD/elements/gp.php?GROUP=geo&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3237
 msgid "geo"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: GEO Protected Zone
-#. TRANSLATORS: CelesTrak source [GEO Protected Zone]: http://www.celestrak.com/satcat/gpz.php
-#. TRANSLATORS: CelesTrak source [GEO Protected Zone]: https://www.celestrak.com/NORAD/elements/gp.php?SPECIAL=gpz&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3235
+#. TRANSLATORS: CelesTrak source [GEO Protected Zone]: https://celestrak.org/satcat/gpz.php
+#. TRANSLATORS: CelesTrak source [GEO Protected Zone]: https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3241
 msgid "gpz"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: GEO Protected Zone Plus
-#. TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]: http://www.celestrak.com/satcat/gpz-plus.php
-#. TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]: https://www.celestrak.com/NORAD/elements/gp.php?SPECIAL=gpz-plus&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3239
+#. TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]: https://celestrak.org/satcat/gpz-plus.php
+#. TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]: https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz-plus&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3245
 msgid "gpz-plus"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT satellites
-#. TRANSLATORS: CelesTrak source [Intelsat]: http://www.celestrak.com/NORAD/elements/intelsat.txt
-#. TRANSLATORS: CelesTrak source [Intelsat]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=intelsat&FORMAT=tle
-#. TRANSLATORS: CelesTrak supplemental source [INTELSAT TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/intelsat.txt
-#: plugins/Satellites/src/Satellites.cpp:3244
+#. TRANSLATORS: CelesTrak source [Intelsat]: https://celestrak.org/NORAD/elements/intelsat.txt
+#. TRANSLATORS: CelesTrak source [Intelsat]: https://celestrak.org/NORAD/elements/gp.php?GROUP=intelsat&FORMAT=tle
+#. TRANSLATORS: CelesTrak supplemental source [INTELSAT TLEs]: https://celestrak.org/NORAD/elements/supplemental/intelsat.txt
+#: plugins/Satellites/src/Satellites.cpp:3250
 msgid "intelsat"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the SES satellites
-#. TRANSLATORS: CelesTrak source [SES]: http://www.celestrak.com/NORAD/elements/ses.txt
-#. TRANSLATORS: CelesTrak source [SES]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=ses&FORMAT=tle
-#. TRANSLATORS: CelesTrak supplemental source [SES TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/ses.txt
-#: plugins/Satellites/src/Satellites.cpp:3249
+#. TRANSLATORS: CelesTrak source [SES]: https://celestrak.org/NORAD/elements/ses.txt
+#. TRANSLATORS: CelesTrak source [SES]: https://celestrak.org/NORAD/elements/gp.php?GROUP=ses&FORMAT=tle
+#. TRANSLATORS: CelesTrak supplemental source [SES TLEs]: https://celestrak.org/NORAD/elements/supplemental/ses.txt
+#: plugins/Satellites/src/Satellites.cpp:3255
 msgid "ses"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#. TRANSLATORS: CelesTrak source [Iridium]: http://www.celestrak.com/NORAD/elements/iridium.txt
-#. TRANSLATORS: CelesTrak source [Iridium]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=iridium&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3253
+#. TRANSLATORS: CelesTrak source [Iridium]: https://celestrak.org/NORAD/elements/iridium.txt
+#. TRANSLATORS: CelesTrak source [Iridium]: https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3259
 msgid "iridium"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT constellation (Iridium is a proper name)
-#. TRANSLATORS: CelesTrak source [Iridium NEXT]: http://www.celestrak.com/NORAD/elements/iridium-NEXT.txt
-#. TRANSLATORS: CelesTrak source [Iridium NEXT]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=iridium-NEXT&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3257
+#. TRANSLATORS: CelesTrak source [Iridium NEXT]: https://celestrak.org/NORAD/elements/iridium-NEXT.txt
+#. TRANSLATORS: CelesTrak source [Iridium NEXT]: https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium-NEXT&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3263
 msgid "iridium-NEXT"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Starlink constellation (Starlink is a proper name)
-#. TRANSLATORS: CelesTrak source [Starlink]: http://www.celestrak.com/NORAD/elements/starlink.txt
-#. TRANSLATORS: CelesTrak source [Starlink]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle
-#. TRANSLATORS: CelesTrak supplemental source [Starlink TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/starlink.txt
-#: plugins/Satellites/src/Satellites.cpp:3262
+#. TRANSLATORS: CelesTrak source [Starlink]: https://celestrak.org/NORAD/elements/starlink.txt
+#. TRANSLATORS: CelesTrak source [Starlink]: https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle
+#. TRANSLATORS: CelesTrak supplemental source [Starlink TLEs]: https://celestrak.org/NORAD/elements/supplemental/starlink.txt
+#: plugins/Satellites/src/Satellites.cpp:3268
 msgid "starlink"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the OneWeb constellation (OneWeb is a proper name)
-#. TRANSLATORS: CelesTrak source [OneWeb]: http://www.celestrak.com/NORAD/elements/oneweb.txt
-#. TRANSLATORS: CelesTrak source [OneWeb]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=oneweb&FORMAT=tle
-#. TRANSLATORS: CelesTrak supplemental source [OneWeb TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/oneweb.txt
-#: plugins/Satellites/src/Satellites.cpp:3267
+#. TRANSLATORS: CelesTrak source [OneWeb]: https://celestrak.org/NORAD/elements/oneweb.txt
+#. TRANSLATORS: CelesTrak source [OneWeb]: https://celestrak.org/NORAD/elements/gp.php?GROUP=oneweb&FORMAT=tle
+#. TRANSLATORS: CelesTrak supplemental source [OneWeb TLEs]: https://celestrak.org/NORAD/elements/supplemental/oneweb.txt
+#: plugins/Satellites/src/Satellites.cpp:3273
 msgid "oneweb"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the ORBCOMM satellites
-#. TRANSLATORS: CelesTrak source [Orbcomm]: http://www.celestrak.com/NORAD/elements/orbcomm.txt
-#. TRANSLATORS: CelesTrak source [Orbcomm]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=orbcomm&FORMAT=tle
-#. TRANSLATORS: CelesTrak supplemental source [ORBCOMM TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/orbcomm.txt
-#: plugins/Satellites/src/Satellites.cpp:3272
+#. TRANSLATORS: CelesTrak source [Orbcomm]: https://celestrak.org/NORAD/elements/orbcomm.txt
+#. TRANSLATORS: CelesTrak source [Orbcomm]: https://celestrak.org/NORAD/elements/gp.php?GROUP=orbcomm&FORMAT=tle
+#. TRANSLATORS: CelesTrak supplemental source [ORBCOMM TLEs]: https://celestrak.org/NORAD/elements/supplemental/orbcomm.txt
+#: plugins/Satellites/src/Satellites.cpp:3278
 msgid "orbcomm"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLOBALSTAR satellites
-#. TRANSLATORS: CelesTrak source [Globalstar]: http://www.celestrak.com/NORAD/elements/globalstar.txt
-#. TRANSLATORS: CelesTrak source [Globalstar]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=globalstar&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3276
+#. TRANSLATORS: CelesTrak source [Globalstar]: https://celestrak.org/NORAD/elements/globalstar.txt
+#. TRANSLATORS: CelesTrak source [Globalstar]: https://celestrak.org/NORAD/elements/gp.php?GROUP=globalstar&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3282
 msgid "globalstar"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the SWARM satellites
-#. TRANSLATORS: CelesTrak source [Swarm]: http://www.celestrak.com/NORAD/elements/swarm.txt
-#. TRANSLATORS: CelesTrak source [Swarm]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=swarm&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3280
+#. TRANSLATORS: CelesTrak source [Swarm]: https://celestrak.org/NORAD/elements/swarm.txt
+#. TRANSLATORS: CelesTrak source [Swarm]: https://celestrak.org/NORAD/elements/gp.php?GROUP=swarm&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3286
 msgid "swarm"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#. TRANSLATORS: CelesTrak source [Amateur Radio]: http://www.celestrak.com/NORAD/elements/amateur.txt
-#. TRANSLATORS: CelesTrak source [Amateur Radio]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=amateur&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3284
+#. TRANSLATORS: CelesTrak source [Amateur Radio]: https://celestrak.org/NORAD/elements/amateur.txt
+#. TRANSLATORS: CelesTrak source [Amateur Radio]: https://celestrak.org/NORAD/elements/gp.php?GROUP=amateur&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3290
 msgid "amateur"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Experimental communication satellites
-#. TRANSLATORS: CelesTrak source [Experimental]: http://www.celestrak.com/NORAD/elements/x-comm.txt
-#. TRANSLATORS: CelesTrak source [Experimental]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=x-comm&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3288
+#. TRANSLATORS: CelesTrak source [Experimental]: https://celestrak.org/NORAD/elements/x-comm.txt
+#. TRANSLATORS: CelesTrak source [Experimental]: https://celestrak.org/NORAD/elements/gp.php?GROUP=x-comm&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3294
 msgid "x-comm"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Other communication satellites
-#. TRANSLATORS: CelesTrak source [Other Comm]: http://www.celestrak.com/NORAD/elements/other-comm.txt
-#. TRANSLATORS: CelesTrak source [Other Comm]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=other-comm&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3292
+#. TRANSLATORS: CelesTrak source [Other Comm]: https://celestrak.org/NORAD/elements/other-comm.txt
+#. TRANSLATORS: CelesTrak source [Other Comm]: https://celestrak.org/NORAD/elements/gp.php?GROUP=other-comm&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3298
 msgid "other-comm"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the SatNOGS satellites
-#. TRANSLATORS: CelesTrak source [SatNOGS]: http://www.celestrak.com/NORAD/elements/satnogs.txt
-#. TRANSLATORS: CelesTrak source [SatNOGS]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=satnogs&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3296
+#. TRANSLATORS: CelesTrak source [SatNOGS]: https://celestrak.org/NORAD/elements/satnogs.txt
+#. TRANSLATORS: CelesTrak source [SatNOGS]: https://celestrak.org/NORAD/elements/gp.php?GROUP=satnogs&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3302
 msgid "satnogs"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT satellites
-#. TRANSLATORS: CelesTrak source [Gorizont]: http://www.celestrak.com/NORAD/elements/gorizont.txt
-#. TRANSLATORS: CelesTrak source [Gorizont]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=gorizont&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3300
+#. TRANSLATORS: CelesTrak source [Gorizont]: https://celestrak.org/NORAD/elements/gorizont.txt
+#. TRANSLATORS: CelesTrak source [Gorizont]: https://celestrak.org/NORAD/elements/gp.php?GROUP=gorizont&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3306
 msgid "gorizont"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
-#. TRANSLATORS: CelesTrak source [Raduga]: http://www.celestrak.com/NORAD/elements/raduga.txt
-#. TRANSLATORS: CelesTrak source [Raduga]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=raduga&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3304
+#. TRANSLATORS: CelesTrak source [Raduga]: https://celestrak.org/NORAD/elements/raduga.txt
+#. TRANSLATORS: CelesTrak source [Raduga]: https://celestrak.org/NORAD/elements/gp.php?GROUP=raduga&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3310
 msgid "raduga"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA satellites
-#. TRANSLATORS: CelesTrak source [Molniya]: http://www.celestrak.com/NORAD/elements/molniya.txt
-#. TRANSLATORS: CelesTrak source [Molniya]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=molniya&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3308
+#. TRANSLATORS: CelesTrak source [Molniya]: https://celestrak.org/NORAD/elements/molniya.txt
+#. TRANSLATORS: CelesTrak source [Molniya]: https://celestrak.org/NORAD/elements/gp.php?GROUP=molniya&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3314
 msgid "molniya"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GNSS satellites
-#. TRANSLATORS: CelesTrak source [GNSS]: http://www.celestrak.com/NORAD/elements/gnss.txt
-#. TRANSLATORS: CelesTrak source [GNSS]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=gnss&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3315
+#. TRANSLATORS: CelesTrak source [GNSS]: https://celestrak.org/NORAD/elements/gnss.txt
+#. TRANSLATORS: CelesTrak source [GNSS]: https://celestrak.org/NORAD/elements/gp.php?GROUP=gnss&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3321
 msgid "gnss"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#. TRANSLATORS: CelesTrak supplemental source [GPS TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/gps.txt
-#: plugins/Satellites/src/Satellites.cpp:3318
+#. TRANSLATORS: CelesTrak supplemental source [GPS TLEs]: https://celestrak.org/NORAD/elements/supplemental/gps.txt
+#: plugins/Satellites/src/Satellites.cpp:3324
 msgid "gps"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#. TRANSLATORS: CelesTrak source [GPS Operational]: http://www.celestrak.com/NORAD/elements/gps-ops.txt
-#. TRANSLATORS: CelesTrak source [GPS Operational]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=gps-ops&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3322
+#. TRANSLATORS: CelesTrak source [GPS Operational]: https://celestrak.org/NORAD/elements/gps-ops.txt
+#. TRANSLATORS: CelesTrak source [GPS Operational]: https://celestrak.org/NORAD/elements/gp.php?GROUP=gps-ops&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3328
 msgid "gps-ops"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#. TRANSLATORS: CelesTrak supplemental source [GLONASS TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/glonass.txt
-#: plugins/Satellites/src/Satellites.cpp:3325
+#. TRANSLATORS: CelesTrak supplemental source [GLONASS TLEs]: https://celestrak.org/NORAD/elements/supplemental/glonass.txt
+#: plugins/Satellites/src/Satellites.cpp:3331
 msgid "glonass"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#. TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]: http://www.celestrak.com/NORAD/elements/glo-ops.txt
-#. TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=glo-ops&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3329
+#. TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]: https://celestrak.org/NORAD/elements/glo-ops.txt
+#. TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]: https://celestrak.org/NORAD/elements/gp.php?GROUP=glo-ops&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3335
 msgid "glo-ops"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#. TRANSLATORS: CelesTrak source [Galileo]: http://www.celestrak.com/NORAD/elements/galileo.txt
-#. TRANSLATORS: CelesTrak source [Galileo]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=galileo&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3333
+#. TRANSLATORS: CelesTrak source [Galileo]: https://celestrak.org/NORAD/elements/galileo.txt
+#. TRANSLATORS: CelesTrak source [Galileo]: https://celestrak.org/NORAD/elements/gp.php?GROUP=galileo&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3339
 msgid "galileo"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the BeiDou constellation (BeiDou Navigation Satellite System)
-#. TRANSLATORS: CelesTrak source [Beidou]: http://www.celestrak.com/NORAD/elements/beidou.txt
-#. TRANSLATORS: CelesTrak source [Beidou]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=beidou&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3337
+#. TRANSLATORS: CelesTrak source [Beidou]: https://celestrak.org/NORAD/elements/beidou.txt
+#. TRANSLATORS: CelesTrak source [Beidou]: https://celestrak.org/NORAD/elements/gp.php?GROUP=beidou&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3343
 msgid "beidou"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)
-#. TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)]: http://www.celestrak.com/NORAD/elements/sbas.txt
-#. TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=sbas&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3341
+#. TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)]: https://celestrak.org/NORAD/elements/sbas.txt
+#. TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)]: https://celestrak.org/NORAD/elements/gp.php?GROUP=sbas&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3347
 msgid "sbas"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Navy Navigation Satellite System (NNSS)
-#. TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]: http://www.celestrak.com/NORAD/elements/nnss.txt
-#. TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=nnss&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3345
+#. TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]: https://celestrak.org/NORAD/elements/nnss.txt
+#. TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]: https://celestrak.org/NORAD/elements/gp.php?GROUP=nnss&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3351
 msgid "nnss"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Russian LEO Navigation Satellites
-#. TRANSLATORS: CelesTrak source [Russian LEO Navigation]: http://www.celestrak.com/NORAD/elements/musson.txt
-#. TRANSLATORS: CelesTrak source [Russian LEO Navigation]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=musson&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3349
+#. TRANSLATORS: CelesTrak source [Russian LEO Navigation]: https://celestrak.org/NORAD/elements/musson.txt
+#. TRANSLATORS: CelesTrak source [Russian LEO Navigation]: https://celestrak.org/NORAD/elements/gp.php?GROUP=musson&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3355
 msgid "musson"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Space & Earth Science satellites
-#. TRANSLATORS: CelesTrak source [Space & Earth Science]: http://www.celestrak.com/NORAD/elements/science.txt
-#. TRANSLATORS: CelesTrak source [Space & Earth Science]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=science&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3356
+#. TRANSLATORS: CelesTrak source [Space & Earth Science]: https://celestrak.org/NORAD/elements/science.txt
+#. TRANSLATORS: CelesTrak source [Space & Earth Science]: https://celestrak.org/NORAD/elements/gp.php?GROUP=science&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3362
 msgid "science"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Geodetic satellites
-#. TRANSLATORS: CelesTrak source [Geodetic]: http://www.celestrak.com/NORAD/elements/geodetic.txt
-#. TRANSLATORS: CelesTrak source [Geodetic]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=geodetic&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3360
+#. TRANSLATORS: CelesTrak source [Geodetic]: https://celestrak.org/NORAD/elements/geodetic.txt
+#. TRANSLATORS: CelesTrak source [Geodetic]: https://celestrak.org/NORAD/elements/gp.php?GROUP=geodetic&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3366
 msgid "geodetic"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Engineering satellites
-#. TRANSLATORS: CelesTrak source [Engineering]: http://www.celestrak.com/NORAD/elements/engineering.txt
-#. TRANSLATORS: CelesTrak source [Engineering]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=engineering&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3364
+#. TRANSLATORS: CelesTrak source [Engineering]: https://celestrak.org/NORAD/elements/engineering.txt
+#. TRANSLATORS: CelesTrak source [Engineering]: https://celestrak.org/NORAD/elements/gp.php?GROUP=engineering&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3370
 msgid "engineering"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Education satellites
-#. TRANSLATORS: CelesTrak source [Education]: http://www.celestrak.com/NORAD/elements/education.txt
-#. TRANSLATORS: CelesTrak source [Education]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=education&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3368
+#. TRANSLATORS: CelesTrak source [Education]: https://celestrak.org/NORAD/elements/education.txt
+#. TRANSLATORS: CelesTrak source [Education]: https://celestrak.org/NORAD/elements/gp.php?GROUP=education&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3374
 msgid "education"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Military satellites
-#. TRANSLATORS: CelesTrak source [Miscellaneous Military]: http://www.celestrak.com/NORAD/elements/military.txt
-#. TRANSLATORS: CelesTrak source [Miscellaneous Military]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=military&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3375
+#. TRANSLATORS: CelesTrak source [Miscellaneous Military]: https://celestrak.org/NORAD/elements/military.txt
+#. TRANSLATORS: CelesTrak source [Miscellaneous Military]: https://celestrak.org/NORAD/elements/gp.php?GROUP=military&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3381
 msgid "military"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Radar Calibration satellites
-#. TRANSLATORS: CelesTrak source [Radar Calibration]: http://www.celestrak.com/NORAD/elements/radar.txt
-#. TRANSLATORS: CelesTrak source [Radar Calibration]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=radar&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3379
+#. TRANSLATORS: CelesTrak source [Radar Calibration]: https://celestrak.org/NORAD/elements/radar.txt
+#. TRANSLATORS: CelesTrak source [Radar Calibration]: https://celestrak.org/NORAD/elements/gp.php?GROUP=radar&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3385
 msgid "radar"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: CubeSats (Cube Satellites)
-#. TRANSLATORS: CelesTrak source [CubeSats]: http://www.celestrak.com/NORAD/elements/cubesat.txt
-#. TRANSLATORS: CelesTrak source [CubeSats]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=cubesat&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3383
+#. TRANSLATORS: CelesTrak source [CubeSats]: https://celestrak.org/NORAD/elements/cubesat.txt
+#. TRANSLATORS: CelesTrak source [CubeSats]: https://celestrak.org/NORAD/elements/gp.php?GROUP=cubesat&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3389
 msgid "cubesat"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Other satellites
-#. TRANSLATORS: CelesTrak source [Other]: http://www.celestrak.com/NORAD/elements/other.txt
-#. TRANSLATORS: CelesTrak source [Other]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=other&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3387
+#. TRANSLATORS: CelesTrak source [Other]: https://celestrak.org/NORAD/elements/other.txt
+#. TRANSLATORS: CelesTrak source [Other]: https://celestrak.org/NORAD/elements/gp.php?GROUP=other&FORMAT=tle
+#: plugins/Satellites/src/Satellites.cpp:3393
 msgid "other"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Meteosat
-#. TRANSLATORS: CelesTrak supplemental source [METEOSAT TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/meteosat.txt
-#: plugins/Satellites/src/Satellites.cpp:3394
+#. TRANSLATORS: CelesTrak supplemental source [METEOSAT TLEs]: https://celestrak.org/NORAD/elements/supplemental/meteosat.txt
+#: plugins/Satellites/src/Satellites.cpp:3400
 msgid "meteosat"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Telesat
-#. TRANSLATORS: CelesTrak supplemental source [Telesat TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/telesat.txt
-#: plugins/Satellites/src/Satellites.cpp:3398
+#. TRANSLATORS: CelesTrak supplemental source [Telesat TLEs]: https://celestrak.org/NORAD/elements/supplemental/telesat.txt
+#: plugins/Satellites/src/Satellites.cpp:3404
 msgid "telesat"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: ISS Segments
-#. TRANSLATORS: CelesTrak supplemental source [ISS TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/iss.txt
-#: plugins/Satellites/src/Satellites.cpp:3401
+#. TRANSLATORS: CelesTrak supplemental source [ISS TLEs]: https://celestrak.org/NORAD/elements/supplemental/iss.txt
+#: plugins/Satellites/src/Satellites.cpp:3407
 msgid "iss"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: CPF
-#. TRANSLATORS: CelesTrak supplemental source [CPF TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/cpf.txt
-#: plugins/Satellites/src/Satellites.cpp:3404
+#. TRANSLATORS: CelesTrak supplemental source [CPF TLEs]: https://celestrak.org/NORAD/elements/supplemental/cpf.txt
+#: plugins/Satellites/src/Satellites.cpp:3410
 msgid "cpf"
 msgstr ""
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:3409
+#: plugins/Satellites/src/Satellites.cpp:3415
 msgid "The Hubble Space Telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3411
+#: plugins/Satellites/src/Satellites.cpp:3417
 msgid "The International Space Station"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3413
+#: plugins/Satellites/src/Satellites.cpp:3419
 msgid "China's first space station"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3415
+#: plugins/Satellites/src/Satellites.cpp:3421
 msgid "Tiangong space station (Chinese large modular space station)"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3417
+#: plugins/Satellites/src/Satellites.cpp:3423
 msgid "The russian space radio telescope RadioAstron"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3419
+#: plugins/Satellites/src/Satellites.cpp:3425
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3421
+#: plugins/Satellites/src/Satellites.cpp:3427
 msgid "The Microvariability and Oscillations of Stars telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3423
+#: plugins/Satellites/src/Satellites.cpp:3429
 msgid "The Interface Region Imaging Spectrograph"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3425
+#: plugins/Satellites/src/Satellites.cpp:3431
 msgid ""
 "The Spectroscopic Planet Observatory for Recognition of Interaction of "
 "Atmosphere"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3429
+#: plugins/Satellites/src/Satellites.cpp:3435
 msgid "The Dark Matter Particle Explorer"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3431
+#: plugins/Satellites/src/Satellites.cpp:3437
 msgid "Arcsecond Space Telescope Enabling Research in Astrophysics"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3433
+#: plugins/Satellites/src/Satellites.cpp:3439
 msgid "Reuven Ramaty High Energy Solar Spectroscopic Imager"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3435
+#: plugins/Satellites/src/Satellites.cpp:3441
 msgid "The Chandra X-ray Observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3437
+#: plugins/Satellites/src/Satellites.cpp:3443
 msgid "Neil Gehrels Swift Observatory (Swift Gamma-Ray Burst Explorer)"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3439
+#: plugins/Satellites/src/Satellites.cpp:3445
 msgid "Astro‐Rivelatore Gamma a Immagini Leggero"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3441
+#: plugins/Satellites/src/Satellites.cpp:3447
 msgid "Fermi Gamma-ray Space Telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3443
+#: plugins/Satellites/src/Satellites.cpp:3449
 msgid "Interplanetary Kite-craft Accelerated by Radiation Of the Sun"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3445
+#: plugins/Satellites/src/Satellites.cpp:3451
 msgid "X-ray Multi-Mirror Mission"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3447
+#: plugins/Satellites/src/Satellites.cpp:3453
 msgid "Hard X-ray Modulation Telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3449
+#: plugins/Satellites/src/Satellites.cpp:3455
 msgid "Spectrum-X-Gamma"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3451
+#: plugins/Satellites/src/Satellites.cpp:3457
 msgid "Imaging X-ray Polarimetry Explorer"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3453
+#: plugins/Satellites/src/Satellites.cpp:3459
 msgid "Near Earth Object Surveillance Satellite"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3455
+#: plugins/Satellites/src/Satellites.cpp:3461
 msgid "Transiting Exoplanet Survey Satellite"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3457
+#: plugins/Satellites/src/Satellites.cpp:3463
 msgid "Characterising Exoplanets Satellite"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3459
+#: plugins/Satellites/src/Satellites.cpp:3465
 msgid "Wide-field Infrared Survey Explorer"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:3461
+#: plugins/Satellites/src/Satellites.cpp:3467
 msgid "James Webb Space Telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3465
+#: plugins/Satellites/src/Satellites.cpp:3471
 msgid "ISS (ZARYA)"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3467
+#: plugins/Satellites/src/Satellites.cpp:3473
 msgid "ISS (NAUKA)"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3469
+#: plugins/Satellites/src/Satellites.cpp:3475
 msgid "ISS"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:3471
+#: plugins/Satellites/src/Satellites.cpp:3477
 msgid "HST"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:3473
+#: plugins/Satellites/src/Satellites.cpp:3479
 msgid "SPEKTR-R"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Spektr-RG Space Observatory
-#: plugins/Satellites/src/Satellites.cpp:3475
+#: plugins/Satellites/src/Satellites.cpp:3481
 msgid "SPEKTR-RG"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:3477
+#: plugins/Satellites/src/Satellites.cpp:3483
 msgid "INTEGRAL"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:3479
+#: plugins/Satellites/src/Satellites.cpp:3485
 msgid "TIANGONG 1"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: name of China's space station module
-#: plugins/Satellites/src/Satellites.cpp:3481
+#: plugins/Satellites/src/Satellites.cpp:3487
 msgid "TIANHE"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: China's space station name (with name of base module)
-#: plugins/Satellites/src/Satellites.cpp:3483
+#: plugins/Satellites/src/Satellites.cpp:3489
 msgid "TIANGONG (TIANHE)"
 msgstr ""
 
 #. TRANSLATORS: An uplink (UL or U/L) is the link from a ground station to a satellite
-#: plugins/Satellites/src/Satellites.cpp:3487
+#: plugins/Satellites/src/Satellites.cpp:3493
 msgid "uplink"
 msgstr ""
 
 #. TRANSLATORS: A downlink (DL) is the link from a satellite to a ground station
-#: plugins/Satellites/src/Satellites.cpp:3489
+#: plugins/Satellites/src/Satellites.cpp:3495
 msgid "downlink"
 msgstr ""
 
 #. TRANSLATORS: The beacon (or radio beacon) is a device in the satellite, which emit one or more signals (normally on a fixed frequency) whose purpose is twofold: station-keeping information (telemetry) and locates the satellite (determines its azimuth and elevation) in the sky
-#: plugins/Satellites/src/Satellites.cpp:3491
+#: plugins/Satellites/src/Satellites.cpp:3497
 msgid "beacon"
 msgstr ""
 
 #. TRANSLATORS: Telemetry is the collection of measurements or other data at satellites and their automatic transmission to receiving equipment (telecommunication) for monitoring
-#: plugins/Satellites/src/Satellites.cpp:3493
+#: plugins/Satellites/src/Satellites.cpp:3499
 msgid "telemetry"
 msgstr ""
 
 #. TRANSLATORS: The channel for transmission of video data
-#: plugins/Satellites/src/Satellites.cpp:3495
+#: plugins/Satellites/src/Satellites.cpp:3501
 msgid "video"
 msgstr ""
 
 #. TRANSLATORS: The broadband is wide bandwidth data transmission which transports multiple signals at a wide range of frequencies
-#: plugins/Satellites/src/Satellites.cpp:3497
+#: plugins/Satellites/src/Satellites.cpp:3503
 msgid "broadband"
 msgstr ""
 
 #. TRANSLATORS: The channel for transmission of commands
-#: plugins/Satellites/src/Satellites.cpp:3499
+#: plugins/Satellites/src/Satellites.cpp:3505
 msgid "command"
 msgstr ""
 
