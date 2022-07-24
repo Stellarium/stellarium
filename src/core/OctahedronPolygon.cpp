@@ -263,7 +263,11 @@ Vec3d OctahedronPolygon::getPointInside() const
 	return res;
 }
 
+// Two defines that control dumping the sides lists. It seems the append() works without difference in both Qt5 and Qt6.
+//#define DUMP_OCT_SUBS 1
+#define DUMP_OCT_SUBS_REV 1
 // GZ I think operator += / append may behave differently between Qt5 and Qt6!
+// GZ No, actually there is no difference. Also the calls can remain the same.
 // Thge debug output dumps vertex lists before and after the actual append.
 void OctahedronPolygon::append(const OctahedronPolygon& other)
 {
@@ -271,13 +275,15 @@ void OctahedronPolygon::append(const OctahedronPolygon& other)
 	Q_ASSERT(sides.size()==8 && other.sides.size()==8);
 	for (int i=0;i<8;++i)
 	{
-		qDebug() << "sides ["<<i<<"]:" << sides[i].data();
+#ifdef DUMP_OCT_SUBS
+		// sides[i].data() prints a pointer address value. Not meaningful when comparing.
+		qDebug() << "sides ["<<i<<"]:"; // << sides[i].data();
 		QVector<SubContour> v=sides[i];
 		qDebug() << "sides ["<<i<<"]: size=" << v.size();
 		for (int j=0; j<v.size(); j++)
 		{
 			const SubContour &sub=v.at(j);
-			qDebug() << "sub=sides["<<i<<"]["<<j<<"]" << sub.data();
+			qDebug() << "sub=sides["<<i<<"]["<<j<<"]"; // << sub.data();
 			for (int k=0; k<sub.size(); k++)
 			{
 				const EdgeVertex &edgeVertex=sub.at(k);
@@ -286,21 +292,23 @@ void OctahedronPolygon::append(const OctahedronPolygon& other)
 			}
 		}
 		qDebug() << "Appending other.sides[" << i << "] (" << other.sides[i].length() << "elements)";
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-		//sides[i].append(other.sides[i]);
-		sides[i] = sides[i] << QVector<SubContour>(other.sides[i]);
-		// THIS MAY BE FORBIDDEN! the data() pointers are identical!
-#else
-		sides[i] += other.sides[i];
 #endif
+//#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+//		//sides[i].append(other.sides[i]);
+//		sides[i] = sides[i] << QVector<SubContour>(other.sides[i]);
+//		// THIS MAY BE FORBIDDEN! the data() pointers are identical!
+//#else
+		sides[i] += other.sides[i];
+//#endif
+#ifdef DUMP_OCT_SUBS
 		// Now dump the sides list again:
-		qDebug() << "sides*["<<i<<"]:" << sides[i].data();
+		qDebug() << "sides*["<<i<<"]:"; // << sides[i].data();
 		v=sides[i];
 		qDebug() << "sides*["<<i<<"]: size=" << v.size();
 		for (int j=0; j<v.size(); j++)
 		{
 			const SubContour &sub=v.at(j);
-			qDebug() << "sub=sides*["<<i<<"]["<<j<<"]" << sub.data();
+			qDebug() << "sub=sides*["<<i<<"]["<<j<<"]"; // << sub.data();
 			for (int k=0; k<sub.size(); k++)
 			{
 				const EdgeVertex &edgeVertex=sub.at(k);
@@ -308,23 +316,61 @@ void OctahedronPolygon::append(const OctahedronPolygon& other)
 
 			}
 		}
+#endif
 	}
 }
 
 void OctahedronPolygon::appendReversed(const OctahedronPolygon& other)
 {
+	qDebug() << "OctahedronPolygon::appendReversed()";
 	Q_ASSERT(sides.size()==8 && other.sides.size()==8);
 	for (int i=0;i<8;++i)
 	{
+#ifdef DUMP_OCT_SUBS_REV
+		// sides[i].data() prints a pointer address value. Not meaningful when comparing.
+		qDebug() << "sides ["<<i<<"]:"; // << sides[i].data();
+		QVector<SubContour> v=sides[i];
+		qDebug() << "sides ["<<i<<"]: size=" << v.size();
+		for (int j=0; j<v.size(); j++)
+		{
+			const SubContour &sub=v.at(j);
+			qDebug() << "sub=sides["<<i<<"]["<<j<<"]"; // << sub.data();
+			for (int k=0; k<sub.size(); k++)
+			{
+				const EdgeVertex &edgeVertex=sub.at(k);
+				qDebug() << "edgeVertex=sides["<<i<<"]["<<j<<"]["<<k<<"]" << edgeVertex.vertex << "(edge:" << (edgeVertex.edgeFlag ? "yes":"no") << ")";
+
+			}
+		}
+		qDebug() << "Appending other.sides[" << i << "] (" << other.sides[i].length() << "elements)";
+#endif
+
 		for (const auto& sub : other.sides[i])
 		{
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-			//sides[i].append(sub.reversed());
-			sides[i] = sides[i] << sub.reversed();
-#else
+//#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+//			//sides[i].append(sub.reversed());
+//			sides[i] = sides[i] << sub.reversed();
+//#else
 			sides[i] += sub.reversed();
-#endif
+//#endif
 		}
+#ifdef DUMP_OCT_SUBS_REV
+		// Now dump the sides list again:
+		qDebug() << "sides*["<<i<<"]:"; // << sides[i].data();
+		v=sides[i];
+		qDebug() << "sides*["<<i<<"]: size=" << v.size();
+		for (int j=0; j<v.size(); j++)
+		{
+			const SubContour &sub=v.at(j);
+			qDebug() << "sub=sides*["<<i<<"]["<<j<<"]"; // << sub.data();
+			for (int k=0; k<sub.size(); k++)
+			{
+				const EdgeVertex &edgeVertex=sub.at(k);
+				qDebug() << "edgeVertex=sides*["<<i<<"]["<<j<<"]["<<k<<"]" << edgeVertex.vertex << "(edge:" << (edgeVertex.edgeFlag ? "yes":"no") << ")";
+
+			}
+		}
+#endif
 	}
 }
 
