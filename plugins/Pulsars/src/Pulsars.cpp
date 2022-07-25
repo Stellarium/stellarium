@@ -202,7 +202,8 @@ void Pulsars::init()
 	readJsonFile();
 
 	// Set up download manager and the update schedule
-	networkManager = StelApp::getInstance().getNetworkAccessManager();
+	//networkManager = StelApp::getInstance().getNetworkAccessManager();
+	networkManager = new QNetworkAccessManager(this);
 	updateState = CompleteNoUpdates;
 	updateTimer = new QTimer(this);
 	updateTimer->setSingleShot(false);   // recurring check for update
@@ -776,7 +777,8 @@ void Pulsars::downloadComplete(QNetworkReply *reply)
 	reply->deleteLater();
 	downloadReply = Q_NULLPTR;
 
-	readJsonFile();
+	qDebug() << "[Pulsars] Updating pulsars catalog is complete...";
+	//readJsonFile();
 }
 
 
