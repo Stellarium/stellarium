@@ -134,6 +134,8 @@ OctahedronPolygon::OctahedronPolygon(const QList<OctahedronPolygon>& octs) : fil
 	updateVertexArray();
 }
 
+#define DUMP_OCT_APPENDSUBS 1
+
 void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 {
 	QVarLengthArray<QVector<SubContour>,8 > resultSides(8);
@@ -233,6 +235,26 @@ void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 		qDebug() << "after plus: sides[" << i << "].length():" << sides[i].length();
 	}
 	qDebug() << "after splicing: sides.length():" << sides.length();
+#ifdef DUMP_OCT_APPENDSUBS
+	for (int i=0; i<8; i++)
+	{
+		// sides[i].data() prints a pointer address value. Not meaningful when comparing.
+		//qDebug() << "sides ["<<i<<"]:" << sides[i].data();
+		QVector<SubContour> v=sides[i];
+		qDebug() << "sides ["<<i<<"]: size=" << v.size();
+		for (int j=0; j<v.size(); j++)
+		{
+			const SubContour &sub=v.at(j);
+			qDebug() << "sub=sides["<<i<<"]["<<j<<"]" << sub.data();
+			for (int k=0; k<sub.size(); k++)
+			{
+				const EdgeVertex &edgeVertex=sub.at(k);
+				qDebug() << "edgeVertex=sides["<<i<<"]["<<j<<"]["<<k<<"]" << edgeVertex.vertex << "(edge:" << (edgeVertex.edgeFlag ? "yes":"no") << ")";
+
+			}
+		}
+	}
+#endif
 }
 
 // Return the area in squared degrees.
@@ -242,6 +264,7 @@ double OctahedronPolygon::getArea() const
 	double area = 0.;
 	Vec3d v1, v2, v3;
 	const QVector<Vec3d>& trianglesArray = getFillVertexArray().vertex;
+	qDebug() << "OctahedronPolygon::getArea: vertex=" << trianglesArray;
 	Q_ASSERT(getFillVertexArray().primitiveType==StelVertexArray::Triangles);
 	for (int i=0;i<trianglesArray.size()/3;++i)
 	{
@@ -265,10 +288,10 @@ Vec3d OctahedronPolygon::getPointInside() const
 
 // Two defines that control dumping the sides lists. It seems the append() works without difference in both Qt5 and Qt6.
 //#define DUMP_OCT_SUBS 1
-#define DUMP_OCT_SUBS_REV 1
+//#define DUMP_OCT_SUBS_REV 1
 // GZ I think operator += / append may behave differently between Qt5 and Qt6!
 // GZ No, actually there is no difference. Also the calls can remain the same.
-// Thge debug output dumps vertex lists before and after the actual append.
+// The debug output dumps vertex lists before and after the actual append.
 void OctahedronPolygon::append(const OctahedronPolygon& other)
 {
 	qDebug() << "OctahedronPolygon::append()";
@@ -408,9 +431,10 @@ bool OctahedronPolygon::triangleContains2D(const Vec3d& a, const Vec3d& b, const
 			(a[0]-c[0])*(p[1]-c[1])-(a[1]-c[1])*(p[0]-c[0])>=0.;
 }
 
-// Store data for the GLUES tesselation callbacks
+// Store data for the GLUES tesselation callbacks. This is used as tess->polygonData
 struct OctTessTrianglesCallbackData
 {
+	// TODO: Note that QVector and QList are the same in Qt6! Check how they differ in our use here!
 	QVector<Vec3d> result;			//! Contains the resulting tesselated vertices.
 	QList<Vec3d> tempVertices;		//! Used to store the temporary combined vertices
 };
@@ -802,6 +826,7 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 			tmpVertex = greatCircleIntersection(previousVertex.vertex, currentVertex.vertex, plan, ok);
 			if (!ok)
 			{
+				qDebug() << "notOK";
 				// There was a problem, probably the 2 vertices are too close, just keep them like that
 				// since they are each at a different side of the plan.
 				currentSubContour << currentVertex;
@@ -825,7 +850,7 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 		}
 		previousVertex=currentVertex;
 	}
-	
+	qDebug() << "i remained at " << i;
 	// Now handle the other ones
 	for (;i<inputContour.size();++i)
 	{
