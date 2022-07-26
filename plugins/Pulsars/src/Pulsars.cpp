@@ -296,7 +296,7 @@ StelObjectP Pulsars::searchByName(const QString& englishName) const
 
 	for (const auto& pulsar : psr)
 	{
-		if (pulsar->getEnglishName().toUpper() == englishName.toUpper() || pulsar->getDesignation().toUpper() == englishName.toUpper())
+		if (pulsar->getEnglishName().toUpper() == englishName.toUpper() || pulsar->getDesignation().toUpper() == englishName.toUpper() || pulsar->getBDesignation().toUpper() == englishName.toUpper())
 			return qSharedPointerCast<StelObject>(pulsar);
 	}
 
@@ -310,7 +310,7 @@ StelObjectP Pulsars::searchByNameI18n(const QString& nameI18n) const
 
 	for (const auto& pulsar : psr)
 	{
-		if (pulsar->getNameI18n().toUpper() == nameI18n.toUpper() || pulsar->getDesignation().toUpper() == nameI18n.toUpper())
+		if (pulsar->getNameI18n().toUpper() == nameI18n.toUpper() || pulsar->getDesignation().toUpper() == nameI18n.toUpper() || pulsar->getBDesignation().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(pulsar);
 	}
 
@@ -330,6 +330,8 @@ QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			if (!pulsar->getEnglishName().isEmpty())
 				names << pulsar->getEnglishName();
 			names << pulsar->getDesignation();
+			if (!pulsar->getBDesignation().isEmpty())
+				names << pulsar->getBDesignation();
 		}
 
 		QString fullMatch = "";
@@ -360,24 +362,23 @@ QStringList Pulsars::listAllObjects(bool inEnglish) const
 	if (!flagShowPulsars)
 		return result;
 
-	if (inEnglish)
+	for (const auto& pulsar : psr)
 	{
-		for (const auto& pulsar : psr)
+		if (inEnglish)
 		{
 			if (!pulsar->getEnglishName().isEmpty())
 				result << pulsar->getEnglishName();
-			result << pulsar->getDesignation();
 		}
-	}
-	else
-	{
-		for (const auto& pulsar : psr)
+		else
 		{
 			if (!pulsar->getNameI18n().isEmpty())
 				result << pulsar->getNameI18n();
-			result << pulsar->getDesignation();
 		}
-	}	
+		result << pulsar->getDesignation();
+		if (!pulsar->getBDesignation().isEmpty())
+			result << pulsar->getBDesignation();
+	}
+
 	return result;
 }
 

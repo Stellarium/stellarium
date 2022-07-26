@@ -54,6 +54,7 @@ Vec3f Pulsar::glitchColor = Vec3f(0.2f,0.3f,1.0f);
 Pulsar::Pulsar(const QVariantMap& map)
 	: initialized(false)
 	, designation("")
+	, bdesignation("")
 	, pulsarName("")
 	, RA(0.)
 	, DE(0.)
@@ -81,6 +82,7 @@ Pulsar::Pulsar(const QVariantMap& map)
 	}
 
 	designation  = map.value("designation").toString();
+	bdesignation  = map.value("bdesignation").toString();
 	pulsarName = map.value("name").toString();
 	parallax = map.value("parallax").toFloat();
 	period = map.value("period").toDouble();
@@ -125,6 +127,7 @@ QVariantMap Pulsar::getMap(void) const
 {
 	QVariantMap map;
 	map["designation"] = designation;
+	map["bdesignation"] = bdesignation;
 	map["name"] = pulsarName;
 	map["parallax"] = parallax;
 	map["bperiod"] = bperiod;
@@ -176,10 +179,14 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Name)
 	{
+		QStringList designations;
 		oss << "<h2>";
 		if (!getNameI18n().isEmpty())
 			oss << getNameI18n() << "< br />";
-		oss << getDesignation() << "</h2>";
+		designations << getDesignation();
+		if (!getBDesignation().isEmpty())
+			designations  << getBDesignation();
+		oss << designations.join(" - ") << "</h2>";
 	}
 
 	if (flags&ObjectType)

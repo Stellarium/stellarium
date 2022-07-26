@@ -53,6 +53,7 @@ public:
 
 	//! Get a QVariantMap which describes the pulsar. Could be used to create a duplicate.
 	//! - designation: pulsar name based on J2000 coordinates
+	//! - bdesignation: pulsar name based on B1950 coordinates
 	//! - parallax: annual parallax (mas)
 	//! - bperiod: binary period of pulsar (days)
 	//! - frequency: barycentric rotation frequency (Hz)
@@ -112,8 +113,10 @@ public:
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
 	//! Get the english name of pulsar
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
-	//! Get the designation of pulsar
+	//! Get the designation of pulsar (based on J2000 coordinates)
 	QString getDesignation(void) const { return designation; }
+	//! Get the designation of pulsar (based on B1950 coordinates)
+	QString getBDesignation(void) const { return bdesignation; }
 
 	void update(double deltaTime);
 
@@ -132,7 +135,8 @@ private:
 	void draw(StelCore* core, StelPainter *painter);
 
 	//! Variables for description of properties of pulsars
-	QString designation;	//! The designation of the pulsar (J2000 pulsar name)
+	QString designation;	//! The designation of the pulsar (based on J2000 coordinates)
+	QString bdesignation;	//! The designation of the pulsar (based on B1550 coordinates)
 	QString pulsarName;	//! The proper name of the pulsar
 	double RA;		//! J2000 right ascension
 	double DE;		//! J2000 declination
