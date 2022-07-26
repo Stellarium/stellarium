@@ -84,7 +84,7 @@ public:
 	//! Get the type of object
 	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
 	{
-		return (glitch==0) ? "pulsar" : "pulsar with glitches";
+		return (glitch==0) ? N_("pulsar") : N_("pulsar with glitches");
 	}
 	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE
 	{

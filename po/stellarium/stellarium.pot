@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-07-24 19:21+0700\n"
+"POT-Creation-Date: 2022-07-26 18:15+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,8 +32,8 @@ msgstr ""
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:149
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:524
 #: plugins/Supernovae/src/Supernova.cpp:144 plugins/Novae/src/Nova.cpp:150
-#: plugins/Quasars/src/Quasar.cpp:128 plugins/Pulsars/src/Pulsar.cpp:188
-#: plugins/Pulsars/src/Pulsar.cpp:190 plugins/Exoplanets/src/Exoplanet.cpp:320
+#: plugins/Quasars/src/Quasar.cpp:128 plugins/Pulsars/src/Pulsar.cpp:191
+#: plugins/Pulsars/src/Pulsar.cpp:193 plugins/Exoplanets/src/Exoplanet.cpp:320
 #: plugins/MeteorShowers/src/MeteorShower.cpp:540
 msgid "Type"
 msgstr ""
@@ -1729,7 +1729,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:359 src/core/modules/Nebula.cpp:372
 #: src/core/modules/StarWrapper.cpp:337
 #: plugins/Supernovae/src/Supernova.cpp:159 plugins/Novae/src/Nova.cpp:164
-#: plugins/Pulsars/src/Pulsar.cpp:272 plugins/Exoplanets/src/Exoplanet.cpp:334
+#: plugins/Pulsars/src/Pulsar.cpp:270 plugins/Exoplanets/src/Exoplanet.cpp:334
 msgctxt "distance"
 msgid "ly"
 msgstr ""
@@ -1746,7 +1746,7 @@ msgid "Distance"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:370 plugins/Pulsars/src/Pulsar.cpp:269
+#: src/core/modules/Nebula.cpp:370 plugins/Pulsars/src/Pulsar.cpp:267
 msgctxt "distance"
 msgid "kpc"
 msgstr ""
@@ -1773,7 +1773,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: src/core/modules/Nebula.cpp:431 src/core/modules/StarWrapper.cpp:376
-#: plugins/Pulsars/src/Pulsar.cpp:260
+#: plugins/Pulsars/src/Pulsar.cpp:259
 msgctxt "parallax"
 msgid "mas"
 msgstr ""
@@ -2183,7 +2183,7 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:611 src/core/modules/Planet.cpp:1300
 #: src/core/modules/Planet.cpp:1309 src/core/modules/StarWrapper.cpp:359
-#: plugins/Pulsars/src/Pulsar.cpp:203
+#: plugins/Pulsars/src/Pulsar.cpp:206
 msgctxt "into the direction of"
 msgid "towards"
 msgstr ""
@@ -2577,17 +2577,17 @@ msgstr ""
 msgid "Photometric system"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:356 plugins/Pulsars/src/Pulsar.cpp:201
+#: src/core/modules/StarWrapper.cpp:356 plugins/Pulsars/src/Pulsar.cpp:204
 msgid "Proper motion"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:358 src/core/modules/StarWrapper.cpp:364
-#: plugins/Pulsars/src/Pulsar.cpp:202 plugins/Pulsars/src/Pulsar.cpp:204
+#: plugins/Pulsars/src/Pulsar.cpp:205 plugins/Pulsars/src/Pulsar.cpp:207
 msgctxt "milliarc second per year"
 msgid "mas/yr"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:361 plugins/Pulsars/src/Pulsar.cpp:204
+#: src/core/modules/StarWrapper.cpp:361 plugins/Pulsars/src/Pulsar.cpp:207
 msgid "Proper motions by axes"
 msgstr ""
 
@@ -14650,7 +14650,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanets.cpp:174
 #: plugins/Observability/src/Observability.cpp:210
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:96
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:146
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:147
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:103
 #: plugins/Scenery3d/src/Scenery3d.cpp:333
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:275
@@ -15209,7 +15209,7 @@ msgid ""
 msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:628
-#: plugins/Pulsars/src/Pulsar.cpp:303
+#: plugins/Pulsars/src/Pulsar.cpp:299
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:609
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:347
 msgid "Notes"
@@ -16437,7 +16437,7 @@ msgstr ""
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Satellites/src/Satellite.cpp:499
 #: plugins/Satellites/src/gui/SatellitesCommDialog.cpp:88
-#: plugins/Pulsars/src/Pulsar.cpp:289
+#: plugins/Pulsars/src/Pulsar.cpp:285
 msgctxt "frequency"
 msgid "MHz"
 msgstr ""
@@ -17408,7 +17408,7 @@ msgid "Min."
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:299
-#: plugins/Pulsars/src/Pulsar.cpp:252 plugins/Exoplanets/src/Exoplanet.cpp:365
+#: plugins/Pulsars/src/Pulsar.cpp:251 plugins/Exoplanets/src/Exoplanet.cpp:365
 msgid "Eccentricity"
 msgstr ""
 
@@ -19006,22 +19006,22 @@ msgid "Import orbital elements in MPC format..."
 msgstr ""
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:161
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:162
 #, qt-format
 msgid "Query the MPC's %1:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:164
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:165
 msgid "Only one result will be returned if the query is successful."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:165
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:166
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:172
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:173
 #, qt-format
 msgid ""
 "Comet <i>names</i> need to be prefixed with %1 or %2. If more than one comet "
@@ -19030,23 +19030,23 @@ msgid ""
 "will return the asteroid %6."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:213
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:214
 msgid "Select bookmark..."
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:350
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:351
 msgid "Plain Text File"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:352
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:353
 msgid "All Files"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:354
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:355
 msgid "Select a file"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:740
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:741
 msgid "Searching..."
 msgstr ""
 
@@ -19876,46 +19876,46 @@ msgstr ""
 msgid "Show pulsars"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:190
+#: plugins/Pulsars/src/Pulsar.cpp:193
 msgid "registered glitches"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:212
+#: plugins/Pulsars/src/Pulsar.cpp:215
 msgid "Barycentric period"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - seconds
-#: plugins/Pulsars/src/Pulsar.cpp:215
+#: plugins/Pulsars/src/Pulsar.cpp:218
 msgctxt "period"
 msgid "s"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:219
+#: plugins/Pulsars/src/Pulsar.cpp:221
 msgid "Time derivative of barycentric period"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:224
+#: plugins/Pulsars/src/Pulsar.cpp:226
 msgid "Dispersion measure"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
-#: plugins/Pulsars/src/Pulsar.cpp:227
+#: plugins/Pulsars/src/Pulsar.cpp:229
 msgctxt "distance"
 msgid "pc"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
-#: plugins/Pulsars/src/Pulsar.cpp:229
+#: plugins/Pulsars/src/Pulsar.cpp:231
 msgctxt "distance"
 msgid "cm"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:236
+#: plugins/Pulsars/src/Pulsar.cpp:237
 msgid "Spin down energy loss rate"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for power - erg per second
-#: plugins/Pulsars/src/Pulsar.cpp:239
+#: plugins/Pulsars/src/Pulsar.cpp:240
 msgctxt "power"
 msgid "ergs/s"
 msgstr ""
@@ -19930,66 +19930,74 @@ msgctxt "period"
 msgid "days"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:257
+#: plugins/Pulsars/src/Pulsar.cpp:256
 msgid "Annual parallax"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:266
+#: plugins/Pulsars/src/Pulsar.cpp:264
 msgid "Distance based on electron density model"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:279
+#: plugins/Pulsars/src/Pulsar.cpp:276
 #, no-c-format
 msgid "Profile width at 50% of peak"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
-#: plugins/Pulsars/src/Pulsar.cpp:282
+#: plugins/Pulsars/src/Pulsar.cpp:279
 msgctxt "time"
 msgid "ms"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:287
+#: plugins/Pulsars/src/Pulsar.cpp:283
 msgid "Time averaged flux density at"
 msgstr ""
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:291
+#: plugins/Pulsars/src/Pulsar.cpp:287
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:352
 msgctxt "spectral flux density"
 msgid "mJy"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:391
+#: plugins/Pulsars/src/Pulsar.cpp:387
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:396
+#: plugins/Pulsars/src/Pulsar.cpp:392
 msgid "has one or more binary companions"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:401
+#: plugins/Pulsars/src/Pulsar.cpp:397
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:406
+#: plugins/Pulsars/src/Pulsar.cpp:402
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:411
+#: plugins/Pulsars/src/Pulsar.cpp:407
 msgid "with pulsed emission in the radio band"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:416
+#: plugins/Pulsars/src/Pulsar.cpp:412
 msgid "with intermittently pulsed radio emission"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:421
+#: plugins/Pulsars/src/Pulsar.cpp:417
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.hpp:87
+msgid "pulsar"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.hpp:87
+msgid "pulsar with glitches"
 msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:135
@@ -20436,97 +20444,97 @@ msgid "Show exoplanets"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1029
+#: plugins/Exoplanets/src/Exoplanets.cpp:1030
 msgid "Hot"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1031
+#: plugins/Exoplanets/src/Exoplanets.cpp:1032
 msgid "Warm"
 msgstr ""
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1033
+#: plugins/Exoplanets/src/Exoplanets.cpp:1034
 msgid "Cold"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1036
+#: plugins/Exoplanets/src/Exoplanets.cpp:1037
 msgid "Miniterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1038
+#: plugins/Exoplanets/src/Exoplanets.cpp:1039
 msgid "Subterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1040
+#: plugins/Exoplanets/src/Exoplanets.cpp:1041
 msgid "Terran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1042
+#: plugins/Exoplanets/src/Exoplanets.cpp:1043
 msgid "Superterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1044
+#: plugins/Exoplanets/src/Exoplanets.cpp:1045
 msgid "Jovian"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1046
+#: plugins/Exoplanets/src/Exoplanets.cpp:1047
 msgid "Neptunian"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1049
+#: plugins/Exoplanets/src/Exoplanets.cpp:1050
 msgid "Primary Transit"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1051
+#: plugins/Exoplanets/src/Exoplanets.cpp:1052
 msgid "Microlensing"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1053
+#: plugins/Exoplanets/src/Exoplanets.cpp:1054
 msgid "Radial Velocity"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1055
+#: plugins/Exoplanets/src/Exoplanets.cpp:1056
 msgid "Imaging"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1057
+#: plugins/Exoplanets/src/Exoplanets.cpp:1058
 msgid "Astrometry"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method. TTV=Transit Timing Variation
-#: plugins/Exoplanets/src/Exoplanets.cpp:1059
+#: plugins/Exoplanets/src/Exoplanets.cpp:1060
 msgid "TTV"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1061
+#: plugins/Exoplanets/src/Exoplanets.cpp:1062
 msgid "Timing"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1063
+#: plugins/Exoplanets/src/Exoplanets.cpp:1064
 msgid "Default"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1065
+#: plugins/Exoplanets/src/Exoplanets.cpp:1066
 msgid "Secondary Transit"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1067
+#: plugins/Exoplanets/src/Exoplanets.cpp:1068
 msgid "Disk Kinematics"
 msgstr ""
 
@@ -23133,34 +23141,34 @@ msgstr ""
 msgid "The current catalog of Meteor Showers is invalid!"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:143
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:621
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:144
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:623
 msgid "Meteor Showers"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:144
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:145
 msgid "Toggle meteor showers"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:145
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:146
 msgid "Toggle radiant labels"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:147
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:148
 msgid "Show meteor showers search dialog"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:269
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:270
 msgid "Using the default Meteor Showers catalog."
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:624
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:626
 msgid ""
 "This plugin was initially created in the 2013 campaign of the ESA Summer of "
 "Code in Space programme."
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:626
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:628
 msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "

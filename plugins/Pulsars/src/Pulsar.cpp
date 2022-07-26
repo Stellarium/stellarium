@@ -179,22 +179,18 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Name)
 	{
-		QStringList designations;
 		oss << "<h2>";
 		if (!getNameI18n().isEmpty())
 			oss << getNameI18n() << "< br />";
-		designations << getDesignation();
-		if (!getBDesignation().isEmpty())
-			designations  << getBDesignation();
-		oss << designations.join(" - ") << "</h2>";
+		oss << (getBDesignation().isEmpty() ? getDesignation() : QString("%1 - %2").arg(getDesignation(), getBDesignation())) << "</h2>";
 	}
 
 	if (flags&ObjectType)
 	{
 		if (glitch==0)
-			oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
+			oss << QString("%1: <b>%2</b><br />").arg(q_("Type"), getObjectTypeI18n());
 		else
-			oss << QString("%1: <b>%2</b> (%3: %4)").arg(q_("Type"), getObjectTypeI18n(), q_("registered glitches"), QString::number(glitch)) << "<br />";
+			oss << QString("%1: <b>%2</b> (%3: %4)<br />").arg(q_("Type"), getObjectTypeI18n(), q_("registered glitches"), QString::number(glitch));
 	}
 
 	// Ra/Dec etc.
@@ -205,71 +201,66 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		double pa = std::atan2(pmRA, pmDE)*M_180_PI;
 		if (pa<0)
 			pa += 360.;
-		oss << QString("%1: %2 %3 %4 %5&deg;").arg(q_("Proper motion"),
+		oss << QString("%1: %2 %3 %4 %5&deg;<br />").arg(q_("Proper motion"),
 			       QString::number(std::sqrt(pmRA*pmRA + pmDE*pmDE), 'f', 1), qc_("mas/yr", "milliarc second per year"),
-			       qc_("towards", "into the direction of"), QString::number(pa, 'f', 1)) << "<br />";
-		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes"), QString::number(pmRA, 'f', 1), QString::number(pmDE, 'f', 1), qc_("mas/yr", "milliarc second per year")) << "<br />";
+			       qc_("towards", "into the direction of"), QString::number(pa, 'f', 1));
+		oss << QString("%1: %2 %3 (%4)<br />").arg(q_("Proper motions by axes"), QString::number(pmRA, 'f', 1), QString::number(pmDE, 'f', 1), qc_("mas/yr", "milliarc second per year"));
 	}
 
 	if (flags&Extra)
 	{
 		if (period>0)
 		{
-			oss << QString("%1: %2 %3").arg(
+			oss << QString("%1: %2 %3<br />").arg(
 			       q_("Barycentric period"),
 			       QString::number(period, 'f', 16),
 			       //TRANSLATORS: Unit of measure for period - seconds
 			       qc_("s", "period"));
-			oss << "<br />";
 		}
 		if (pderivative>0)
-			oss << QString("%1: %2").arg(q_("Time derivative of barycentric period"), QString::number(pderivative, 'e', 5)) << "<br />";
+			oss << QString("%1: %2<br />").arg(q_("Time derivative of barycentric period"), QString::number(pderivative, 'e', 5));
 
 		if (dmeasure>0)
 		{
-			oss << QString("%1: %2 %3/%4<sup>3</sup>").arg(
+			oss << QString("%1: %2 %3/%4<sup>3</sup><br />").arg(
 				       q_("Dispersion measure"),
 				       QString::number(dmeasure, 'f', 3),
 				       //TRANSLATORS: Unit of measure for distance - parsecs
 				       qc_("pc", "distance"),
 				       //TRANSLATORS: Unit of measure for distance - centimeters
 				       qc_("cm", "distance"));
-			oss << "<br />";
 		}
 		double edot = getEdot(period, pderivative);
 		if (edot>0)
 		{
-			oss << QString("%1: %2 %3").arg(
+			oss << QString("%1: %2 %3<br />").arg(
 				       q_("Spin down energy loss rate"),
 				       QString::number(edot, 'e', 2),
 				       //TRANSLATORS: Unit of measure for power - erg per second
 				       qc_("ergs/s", "power"));
-			oss << "<br>";
 		}
 		if (bperiod>0)
 		{
-			oss << QString("%1: %2 %3").arg(
+			oss << QString("%1: %2 %3<br />").arg(
 				       q_("Binary period of pulsar"),
 				       QString::number(bperiod, 'f', 12),
 				       //TRANSLATORS: Unit of measure for period - days
 				       qc_("days", "period"));
-			oss << "<br>";
 		}
 		if (eccentricity>0)
-			oss << QString("%1: %2").arg(q_("Eccentricity"), QString::number(eccentricity, 'f', 10)) << "<br />";
+			oss << QString("%1: %2<br />").arg(q_("Eccentricity"), QString::number(eccentricity, 'f', 10));
 
 		if (parallax>0)
 		{
-			oss << QString("%1: %2 %3").arg(
+			oss << QString("%1: %2 %3<br />").arg(
 				       q_("Annual parallax"),
 				       QString::number(parallax),
 				       //TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 				       qc_("mas", "parallax"));
-			oss << "<br />";
 		}
 		if (distance>0)
 		{
-			oss << QString("%1: %2 %3 (%4 %5)")
+			oss << QString("%1: %2 %3 (%4 %5)<br />")
 			       .arg(q_("Distance based on electron density model"))
 			       .arg(distance)
 			       //TRANSLATORS: Unit of measure for distance - kiloparsecs
@@ -277,17 +268,15 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			       .arg(distance*3261.563777)
 			       //TRANSLATORS: Unit of measure for distance - light years
 			       .arg(qc_("ly", "distance"));
-			oss << "<br />";
 		}
 		if (w50>0)
 		{
-			oss << QString("%1: %2 %3").arg(
+			oss << QString("%1: %2 %3<br />").arg(
 				       // xgettext:no-c-format
 				       q_("Profile width at 50% of peak"),
 				       QString::number(w50, 'f', 2),
 				       //TRANSLATORS: Unit of measure for time - milliseconds
 				       qc_("ms", "time"));
-			oss << "<br />";
 		}
 
 		// TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
@@ -298,16 +287,16 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		QString sfd  = qc_("mJy", "spectral flux density");
 
 		if (s400>0)
-			oss << QString("%1 %2%3: %4 %5").arg(flux, QString::number(400), freq, QString::number(s400, 'f', 2), sfd) << "<br />";
+			oss << QString("%1 %2%3: %4 %5<br />").arg(flux, QString::number(400), freq, QString::number(s400, 'f', 2), sfd);
 
 		if (s600>0)
-			oss << QString("%1 %2%3: %4 %5").arg(flux, QString::number(600), freq, QString::number(s600, 'f', 2), sfd) << "<br />";
+			oss << QString("%1 %2%3: %4 %5<br />").arg(flux, QString::number(600), freq, QString::number(s600, 'f', 2), sfd);
 
 		if (s1400>0)
-			oss << QString("%1 %2%3: %4 %5").arg(flux, QString::number(1400), freq, QString::number(s1400, 'f', 2), sfd) << "<br />";
+			oss << QString("%1 %2%3: %4 %5<br />").arg(flux, QString::number(1400), freq, QString::number(s1400, 'f', 2), sfd);
 
 		if (notes.length()>0)
-			oss << "<br />" << QString("%1: %2").arg(q_("Notes"), getPulsarTypeInfoString(notes)) << "<br />";
+			oss << QString("<br />%1: %2<br />").arg(q_("Notes"), getPulsarTypeInfoString(notes));
 	}
 
 	postProcessInfoString(str, flags);
