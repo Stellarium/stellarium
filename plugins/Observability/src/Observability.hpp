@@ -143,6 +143,8 @@ public slots:
 	
 	//! Controls whether an observability report will be displayed.
 	void showReport(bool b);
+    //! Get a JSON string representation of the report.
+    QString getReportAsJson(); 
 
 	
 private slots:
@@ -356,7 +358,7 @@ private:
 	//! Cached copy of the line reporting when the target is observable.
 	QString lineObservableRange;
 	//! Cached copy of the line reporting the acronical/cosmical rise and set.
-	QString lineAcroCos, lineHeli;
+	QString lineAcro, lineCosm, lineHeli;
 
 	//! Strings to save ephemeris Times:
 	QString RiseTime, SetTime, CulmTime;
