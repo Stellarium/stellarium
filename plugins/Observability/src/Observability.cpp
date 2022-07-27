@@ -173,16 +173,15 @@ void Observability::updateMessageText()
 	msgCulminatesAt	= q_("Culminates at %1 (in %2) at %3 deg.");
 	msgCulminatedAt	= q_("Culminated at %1 (%2 ago) at %3 deg.");
 	msgSrcNotObs	= q_("Source is not observable.");
-	msgNoACRise	= q_("No Acronychal nor Cosmical rise/set.");
 	msgGreatElong	= q_("Greatest elongation: %1 (at %2 deg.)");
 	msgLargSSep	= q_("Largest Sun separation: %1 (at %2 deg.)");
 	msgNone		= q_("None");
 	// TRANSLATORS: The space at the end is significant - another sentence may follow.
-	msgAcroRise	= q_("Acronycal rise/set: %1/%2. ");
+	msgAcroRise	= q_("Acronychal rise/set: %1/%2. ");
 	msgHeliRise	= q_("Heliacal rise/set: %1/%2. ");
 	msgNoHeliRise	= q_("No Heliacal rise/set. ");
 	// TRANSLATORS: The space at the end is significant - another sentence may follow.
-	msgNoAcroRise	= q_("No Acronycal rise/set. ");
+	msgNoAcroRise	= q_("No Acronychal rise/set. ");
 	msgCosmRise	= q_("Cosmical rise/set: %1/%2.");
 	msgNoCosmRise	= q_("No Cosmical rise/set.");
 	msgWholeYear	= q_("Observable during the whole year.");
@@ -621,7 +620,8 @@ void Observability::draw(StelCore* core)
 		if (show_FullMoon)
 		{
 			lineObservableRange.clear();
-			lineAcroCos.clear();
+			lineAcro.clear();
+			lineCos.clear();
 			lineHeli.clear();
 			calculateSolarSystemEvents(core, 2);
 		}
@@ -656,7 +656,8 @@ void Observability::draw(StelCore* core)
 				//ObsRange = q_("Source is not observable.");
 				//AcroCos = q_("No Acronychal nor Cosmical rise/set.");
 				lineObservableRange = msgSrcNotObs;
-				lineAcroCos = msgNoACRise;
+				lineAcro = msgNoAcroRise;
+				lineCos = msgNoCosmRise;
 				lineHeli = msgNoHeliRise;
 			}
 			else
@@ -717,14 +718,14 @@ void Observability::draw(StelCore* core)
 
 
 					if (result==3 || result==1)
-						lineAcroCos =  msgAcroRise.arg(acroRiseStr, acroSetStr);
+						lineAcro =  msgAcroRise.arg(acroRiseStr, acroSetStr);
 					else
-						lineAcroCos =  msgNoAcroRise;
+						lineAcro =  msgNoAcroRise;
 					
 					if (result==3 || result==2)
-						lineAcroCos += msgCosmRise.arg(cosRiseStr, cosSetStr);
+						lineCos = msgCosmRise.arg(cosRiseStr, cosSetStr);
 					else
-						lineAcroCos += msgNoCosmRise;
+						lineCos += msgNoCosmRise;
 
 					if (resultHeli==1)
 						lineHeli = msgHeliRise.arg(heliRiseStr, heliSetStr);
@@ -836,7 +837,9 @@ void Observability::draw(StelCore* core)
 		if (show_AcroCos)
 		{
 			yLine -= lineSpacing;
-			painter.drawText(xLine + fontSize, yLine, lineAcroCos);
+			painter.drawText(xLine + fontSize, yLine, lineAcro);
+			yLine -= lineSpacing;
+			painter.drawText(xLine + fontSize, yLine, lineCos);
 			yLine -= lineSpacing;
 			painter.drawText(xLine + fontSize, yLine, lineHeli);
 		}
@@ -1614,7 +1617,8 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 				lineBestNight += msgNextFullMoon.arg(StelLocaleMgr::shortMonthName(fullMonth)).arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 
 			lineObservableRange.clear(); 
-			lineAcroCos.clear();
+			lineAcro.clear();
+			lineCos.clear();
 
 	// Now, compute the days of all the Full Moons of the current year, and get the Earth/Moon distance:
 //			double monthFrac, monthTemp, maxMoonDate;
@@ -1645,7 +1649,8 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 	{
 		lineBestNight.clear();
 		lineObservableRange.clear(); 
-		lineAcroCos.clear();
+		lineAcro.clear();
+		lineCos.clear();
 	}
 
 // Return the Moon and Earth to its current position:
@@ -1861,8 +1866,9 @@ QString Observability::getReportAsJson() {
 		}
 		if (show_AcroCos)
 		{
-            report += QString("\"%1\": \"%2\", ").arg("acroCos").arg(lineAcroCos);
-            report += QString("\"%1\": \"%2\" ").arg("heli").arg(lineHeli);
+            report += QString("\"%1\": \"%2\", ").arg("acronychal").arg(lineAcro);
+            report += QString("\"%1\": \"%2\", ").arg("cosmic").arg(lineCos);
+            report += QString("\"%1\": \"%2\" ").arg("heliacal").arg(lineHeli);
 		}
 	}
     report += QString("}");

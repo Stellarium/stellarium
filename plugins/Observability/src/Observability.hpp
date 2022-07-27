@@ -358,7 +358,7 @@ private:
 	//! Cached copy of the line reporting when the target is observable.
 	QString lineObservableRange;
 	//! Cached copy of the line reporting the acronical/cosmical rise and set.
-	QString lineAcroCos, lineHeli;
+	QString lineAcro, lineCos, lineHeli;
 
 	//! Strings to save ephemeris Times:
 	QString RiseTime, SetTime, CulmTime;
@@ -398,7 +398,7 @@ private:
 	//! @todo Decide whether to keep translation caching.
 	//! @{
 	QString msgSetsAt, msgRoseAt, msgSetAt, msgRisesAt, msgCircumpolar, msgNoRise, msgCulminatesAt, msgCulminatedAt, msgH, msgM, msgS;
-	QString msgSrcNotObs, msgNoACRise, msgGreatElong, msgLargSSep, msgNone, msgAcroRise, msgNoAcroRise, msgCosmRise, msgNoCosmRise;
+	QString msgSrcNotObs, msgNoACRise, msgGreatElong, msgLargSSep, msgNone, msgAcroRise, msgNoAcroRise, msgNoCosRise, msgCosmRise, msgNoCosmRise;
         QString msgHeliRise, msgHeliSet, msgNoHeliRise;
 	QString msgWholeYear, msgNotObs, msgAboveHoriz, msgToday, msgThisYear, msgPrevFullMoon, msgNextFullMoon;
 	//! @}
