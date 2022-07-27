@@ -621,7 +621,7 @@ void Observability::draw(StelCore* core)
 		{
 			lineObservableRange.clear();
 			lineAcro.clear();
-			lineCos.clear();
+			lineCosm.clear();
 			lineHeli.clear();
 			calculateSolarSystemEvents(core, 2);
 		}
@@ -657,7 +657,7 @@ void Observability::draw(StelCore* core)
 				//AcroCos = q_("No Acronychal nor Cosmical rise/set.");
 				lineObservableRange = msgSrcNotObs;
 				lineAcro = msgNoAcroRise;
-				lineCos = msgNoCosmRise;
+				lineCosm = msgNoCosmRise;
 				lineHeli = msgNoHeliRise;
 			}
 			else
@@ -723,9 +723,9 @@ void Observability::draw(StelCore* core)
 						lineAcro =  msgNoAcroRise;
 					
 					if (result==3 || result==2)
-						lineCos = msgCosmRise.arg(cosRiseStr, cosSetStr);
+						lineCosm = msgCosmRise.arg(cosRiseStr, cosSetStr);
 					else
-						lineCos += msgNoCosmRise;
+						lineCosm = msgNoCosmRise;
 
 					if (resultHeli==1)
 						lineHeli = msgHeliRise.arg(heliRiseStr, heliSetStr);
@@ -839,7 +839,7 @@ void Observability::draw(StelCore* core)
 			yLine -= lineSpacing;
 			painter.drawText(xLine + fontSize, yLine, lineAcro);
 			yLine -= lineSpacing;
-			painter.drawText(xLine + fontSize, yLine, lineCos);
+			painter.drawText(xLine + fontSize, yLine, lineCosm);
 			yLine -= lineSpacing;
 			painter.drawText(xLine + fontSize, yLine, lineHeli);
 		}
@@ -1618,7 +1618,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 			lineObservableRange.clear(); 
 			lineAcro.clear();
-			lineCos.clear();
+			lineCosm.clear();
 
 	// Now, compute the days of all the Full Moons of the current year, and get the Earth/Moon distance:
 //			double monthFrac, monthTemp, maxMoonDate;
@@ -1650,7 +1650,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 		lineBestNight.clear();
 		lineObservableRange.clear(); 
 		lineAcro.clear();
-		lineCos.clear();
+		lineCosm.clear();
 	}
 
 // Return the Moon and Earth to its current position:
@@ -1867,7 +1867,7 @@ QString Observability::getReportAsJson() {
 		if (show_AcroCos)
 		{
             report += QString("\"%1\": \"%2\", ").arg("acronychal").arg(lineAcro);
-            report += QString("\"%1\": \"%2\", ").arg("cosmic").arg(lineCos);
+            report += QString("\"%1\": \"%2\", ").arg("cosmic").arg(lineCosm);
             report += QString("\"%1\": \"%2\" ").arg("heliacal").arg(lineHeli);
 		}
 	}
