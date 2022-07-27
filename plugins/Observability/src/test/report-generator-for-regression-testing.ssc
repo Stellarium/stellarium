@@ -15,7 +15,7 @@ const objectNames = [
 const observerLocations = [
     "Boise, Northern America",
     "Brasilia, Southern America",
-    "Palestine, Nothern America",
+    "Palestine, Northern America",
     "Barnaul, Northern Asia",
     "Albany, Australasia",
     "Prague, Eastern Europe"
@@ -26,15 +26,29 @@ Observability.showReport(true)
 core.resetOutput()
 var reports = []
 for (i=0; i < observerLocations.length; i++) {
-    const location = observerLocations[i]
-    core.setObserverLocation(location, 0.1)
+    var location = observerLocations[i]
+    core.setObserverLocation(location, 0.0)
+    var actualLocation = core.getObserverLocation()
+    var attempts = 0
+    while (location != actualLocation) {
+        if (attempts > 100) {
+            core.debug("Couldn't update location. It appears that the location ID '" + location + "' is incorrect or the attempted location change happened too slowly.")
+            break
+        }
+        actualLocation = core.getObserverLocation()
+        attempts++
+    }
     for (j=0; j < objectNames.length; j++) {
-        const objectName = objectNames[j]
-        core.selectObjectByName(objectName)
-        const reportJson = Observability.getReportAsJson()
+        var objectName = objectNames[j]
+        core.selectObjectByName(objectName, false)
+        // Need to wait a sufficient amount of time to allow the object selection to take place.
+        // Could use core.getSelectedObjectInfo to verify the selection was successful, but using that method crashes Stellarium.
+        core.wait(0.1)
+
+        var reportJson = Observability.getReportAsJson()
         var reportObj = JSON.parse(reportJson)
 
-        var augmentedReportObj = { objectName: objectName, location: location, report: reportObj }
+        var augmentedReportObj = { objectName: objectName, location: actualLocation, report: reportObj }
         reports.push(augmentedReportObj)
     }
 }
@@ -44,5 +58,6 @@ const d = new Date()
 time = d.getTime()
 // For macOS, output will be saved to ~/Library/Application Support/Stellarium/observability-report.json
 core.saveOutputAs("observability-report-" + time + ".json")
-core.debug("For macOS, output was saved to " + "~/Library/Application\\ Support/Stellarium/observability-report-" + time + ".json")
+core.debug("For macOS, output was saved to:")
+core.debug("~/Library/Application\\ Support/Stellarium/observability-report-" + time + ".json")
 
