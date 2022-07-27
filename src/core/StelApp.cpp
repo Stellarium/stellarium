@@ -40,6 +40,7 @@
 #include "SolarSystem.hpp"
 #include "NomenclatureMgr.hpp"
 #include "SporadicMeteorMgr.hpp"
+#include "SpecificTimeMgr.hpp"
 #include "StarMgr.hpp"
 #include "StelIniParser.hpp"
 #include "StelProjector.hpp"
@@ -619,6 +620,12 @@ void StelApp::init(QSettings* conf)
 	HighlightMgr* hlMgr = new HighlightMgr();
 	hlMgr->init();
 	getModuleMgr().registerModule(hlMgr);
+
+	// Init specific time
+	SplashScreen::showMessage(q_("Initializing specific time..."));
+	SpecificTimeMgr* specificTime = new SpecificTimeMgr();
+	specificTime->init();
+	getModuleMgr().registerModule(specificTime);
 
 	//Create the script manager here, maybe some modules/plugins may want to connect to it
 	//It has to be initialized later after all modules have been loaded by calling initScriptMgr

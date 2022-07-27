@@ -89,7 +89,8 @@ void MeteorShowersMgr::init()
 	}
 
 	// Set up download manager and the update schedule
-	m_networkManager = StelApp::getInstance().getNetworkAccessManager();
+	//m_networkManager = StelApp::getInstance().getNetworkAccessManager();
+	m_networkManager = new QNetworkAccessManager(this);
 	m_updateState = CompleteNoUpdates;
 	m_updateTimer = new QTimer(this);
 	m_updateTimer->setSingleShot(false);   // recurring check for update
@@ -408,6 +409,7 @@ void MeteorShowersMgr::downloadComplete(QNetworkReply *reply)
 		}
 
 		m_updateState = MeteorShowersMgr::CompleteUpdates;
+		qDebug() << "[MeteorShowersMgr] Updating Meteor Showers catalog is complete...";
 		m_lastUpdate = QDateTime::currentDateTime();
 		m_conf->setValue("MeteorShowers/last_update", m_lastUpdate.toString(Qt::ISODate));
 	}

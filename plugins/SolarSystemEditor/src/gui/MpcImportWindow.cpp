@@ -65,7 +65,8 @@ MpcImportWindow::MpcImportWindow()
 	ui = new Ui_mpcImportWindow();
 	ssoManager = GETSTELMODULE(SolarSystemEditor);
 
-	networkManager = StelApp::getInstance().getNetworkAccessManager();
+	//networkManager = StelApp::getInstance().getNetworkAccessManager();
+	networkManager = new QNetworkAccessManager(this);
 
 	countdownTimer = new QTimer(this);
 

@@ -223,7 +223,7 @@ gSatWrapper::Visibility gSatWrapper::getVisibilityPredict() const
 			/*
 			Satellites in umbra/penumbra based on:-
 			Visually Observing Earth Satellites By Dr. T.S. Kelso
-			https://celestrak.com/columns/v03n01/
+			https://celestrak.org/columns/v03n01/
 			*/
 			double psun = std::sqrt(pow(satECIPos[0] - sunECIPos[0], 2) + pow(satECIPos[1] - sunECIPos[1], 2) + pow(satECIPos[2] - sunECIPos[2], 2) );
 			double pearth = std::sqrt(std::pow(satECIPos[0], 2) + std::pow(satECIPos[1], 2) + std::pow(satECIPos[2], 2));

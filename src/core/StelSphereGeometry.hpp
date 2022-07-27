@@ -211,7 +211,7 @@ public:
 	QByteArray toJSON() const;
 
 	//! Returns whether a SphericalRegion is contained into this region.
-	//! A default potentially very slow implementation is provided for each cases.
+	//! A default potentially very slow implementation is provided for each case.
 	bool contains(const SphericalRegion* r) const;
 	bool contains(const SphericalRegionP r) const {return contains(r.data());}
 	virtual bool contains(const Vec3d& p) const {return getOctahedronPolygon().contains(p);}
@@ -223,7 +223,7 @@ public:
 	bool contains(const EmptySphericalRegion&) const {return false;}
 
 	//! Returns whether a SphericalRegion intersects with this region.
-	//! A default potentially very slow implementation is provided for each cases.
+	//! A default potentially very slow implementation is provided for each case.
 	bool intersects(const SphericalRegion* r) const;
 	bool intersects(const SphericalRegionP r) const {return intersects(r.data());}
 	bool intersects(const Vec3d& p) const {return contains(p);}
@@ -235,7 +235,7 @@ public:
 	bool intersects(const EmptySphericalRegion&) const {return false;}
 
 	//! Return a new SphericalRegion consisting of the intersection of this and the given region.
-	//! A default potentially very slow implementation is provided for each cases.
+	//! A default potentially very slow implementation is provided for each case.
 	SphericalRegionP getIntersection(const SphericalRegion* r) const;
 	SphericalRegionP getIntersection(const SphericalRegionP r) const {return getIntersection(r.data());}
 	virtual SphericalRegionP getIntersection(const SphericalPolygon& r) const;
@@ -246,7 +246,7 @@ public:
 	SphericalRegionP getIntersection(const EmptySphericalRegion& r) const;
 
 	//! Return a new SphericalRegion consisting of the union of this and the given region.
-	//! A default potentially very slow implementation is provided for each cases.
+	//! A default potentially very slow implementation is provided for each case.
 	SphericalRegionP getUnion(const SphericalRegion* r) const;
 	SphericalRegionP getUnion(const SphericalRegionP r) const {return getUnion(r.data());}
 	virtual SphericalRegionP getUnion(const SphericalPolygon& r) const;
@@ -257,7 +257,7 @@ public:
 	virtual SphericalRegionP getUnion(const EmptySphericalRegion& r) const;
 
 	//! Return a new SphericalRegion consisting of the subtraction of the given region from this.
-	//! A default potentially very slow implementation is provided for each cases.
+	//! A default potentially very slow implementation is provided for each case.
 	SphericalRegionP getSubtraction(const SphericalRegion* r) const;
 	SphericalRegionP getSubtraction(const SphericalRegionP r) const {return getSubtraction(r.data());}
 	virtual SphericalRegionP getSubtraction(const SphericalPolygon& r) const;
@@ -288,12 +288,12 @@ public:
 	SphericalCap() : d(0) {;}
 
 	//! Construct a SphericalCap from its direction and assumes a 90 deg aperture.
-	SphericalCap(double x, double y, double z) : n(x,y,z), d(0) {;}
+	SphericalCap(double x, double y, double z) : SphericalRegion(), n(x,y,z), d(0) {;}
 
 	//! Construct a SphericalCap from its direction and aperture.
 	//! @param an a unit vector indicating the direction.
 	//! @param ar cosinus of the aperture.
-	SphericalCap(const Vec3d& an, double ar) : n(an), d(ar) {//n.normalize();
+	SphericalCap(const Vec3d& an, double ar) : SphericalRegion(), n(an), d(ar) {//n.normalize();
 		Q_ASSERT(d==0 || qFuzzyCompare(n.lengthSquared(),1.));}
 	// FIXME: GZ reports 2013-03-02: apparently the Q_ASSERT is here because n should be normalized at this point, but
 	// for efficiency n.normalize() should not be called at this point.

@@ -88,7 +88,7 @@ public:
 	//! @par References
 	//!  Orbital Coordinate Systems, Part II
 	//!   Dr. T.S. Kelso
-	//!   http://www.celestrak.com/columns/v02n02/
+	//!   https://celestrak.org/columns/v02n02/
 	Vec3d getAltAz() const;
 
         // Operation getSlantRange
@@ -135,7 +135,7 @@ public:
 	//! @par References
 	//!  Orbital Coordinate Systems, Part II
 	//!   Dr. T.S. Kelso
-	//!   http://www.celestrak.com/columns/v02n02/
+	//!   https://celestrak.org/columns/v02n02/
         //! @param[out] ao_position Observer ECI position vector measured in Km
         //! @param[out] ao_vel Observer ECI velocity vector measured in Km/s
 	static void calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_vel) ;

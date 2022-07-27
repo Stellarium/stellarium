@@ -11,7 +11,7 @@
  *              Kelso, "Revisiting Spacetrack Report #3,"
  *              presented at the AIAA/AAS Astrodynamics Specialist
  *              Conference, Keystone, CO, 2006 August 21-24.
- *              http://celestrak.com/publications/AIAA/2006-6753/
+ *              https://celestrak.org/publications/AIAA/2006-6753/
  ***************************************************************************/
 
 /***************************************************************************

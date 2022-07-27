@@ -11,7 +11,7 @@
  *              Kelso, "Revisiting Spacetrack Report #3,"
  *              presented at the AIAA/AAS Astrodynamics Specialist
  *              Conference, Keystone, CO, 2006 August 21-24.
- *              http://celestrak.com/publications/AIAA/2006-6753/
+ *              https://celestrak.org/publications/AIAA/2006-6753/
  ***************************************************************************/
 
 /***************************************************************************
@@ -110,7 +110,7 @@ public:
 	//! @brief Get the Geographic satellite subpoint Vector calculated by the method compute SubPoint
 	//! @details To implement this operation, next references has been used:
 	//!	   Orbital Coordinate Systems, Part III  By Dr. T.S. Kelso
-	//!	   http://www.celestrak.com/columns/v02n03/
+	//!	   https://celestrak.org/columns/v02n03/
 	//! @return Vec3d Geographical coordinates\n
 	//!    Latitude:  Coord[0]  measured in degrees\n
 	//!    Longitude: Coord[1]  measured in degrees\n
@@ -152,7 +152,7 @@ private:
 	//! @brief Compute the Geographic satellite subpoint Vector
 	//! @details To implement this operation, next references has been used:
 	//!	   Orbital Coordinate Systems, Part III  By Dr. T.S. Kelso
-	//!	   http://www.celestrak.com/columns/v02n03/
+	//!	   https://celestrak.org/columns/v02n03/
 	//! @param[in] ai_Time Epoch time for subpoint calculation. (of course, this must be
 	//!    refactorized to be computed in the setEpoch function)
 	//! @return Vec3d Geographical coordinates\n
