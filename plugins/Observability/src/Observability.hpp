@@ -143,6 +143,8 @@ public slots:
 	
 	//! Controls whether an observability report will be displayed.
 	void showReport(bool b);
+    //! Get a JSON string representation of the report.
+    QString getReportAsJson(); 
 
 	
 private slots:

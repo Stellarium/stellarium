@@ -1845,3 +1845,26 @@ void Observability::showReport(bool b)
 	}
 }
 
+QString Observability::getReportAsJson() {
+    QString report = QString("{ ");
+	bool show_Year = show_Best_Night || show_Good_Nights || show_AcroCos; 
+	if ((isMoon && show_FullMoon) || (!isSun && !isMoon && show_Year)) 
+	{
+        report += QString("\"%1\": \"%2\", ").arg("title").arg(msgThisYear);
+		if (show_Best_Night || show_FullMoon)
+		{
+            report += QString("\"%1\": \"%2\", ").arg("bestNight").arg(lineBestNight);
+		}
+		if (show_Good_Nights)
+		{
+            report += QString("\"%1\": \"%2\", ").arg("observableRange").arg(lineObservableRange);
+		}
+		if (show_AcroCos)
+		{
+            report += QString("\"%1\": \"%2\", ").arg("acroCos").arg(lineAcroCos);
+            report += QString("\"%1\": \"%2\" ").arg("heli").arg(lineHeli);
+		}
+	}
+    report += QString("}");
+    return report;
+}
