@@ -8,7 +8,7 @@ const objectNames = [
     "Sun",      // Sun
     "Moon",     // Moon
     "Jupiter",  // Solar system planet
-    "Achernar", // Interstellar object
+    "Achernar", // Star object
 ]
 
 // Locations from different continents
@@ -31,10 +31,11 @@ for (i=0; i < observerLocations.length; i++) {
     var actualLocation = core.getObserverLocation()
     var attempts = 0
     while (location != actualLocation) {
-        if (attempts > 100) {
+        if (attempts > 20) {
             core.debug("Couldn't update location. It appears that the location ID '" + location + "' is incorrect or the attempted location change happened too slowly.")
             break
         }
+        core.wait(0.1)
         actualLocation = core.getObserverLocation()
         attempts++
     }
