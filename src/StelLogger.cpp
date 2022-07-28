@@ -334,6 +334,8 @@ QString StelLogger::getMsvcVersionString(int ver)
 		{1928, "MSVC++ 16.8, 16.9 (Visual Studio 2019)"   },
 		{1929, "MSVC++ 16.10, 16.11 (Visual Studio 2019)" },
 		{1930, "MSVC++ 17.0 (Visual Studio 2022 RTW)"     },
+		{1931, "MSVC++ 17.1 (Visual Studio 2022)"         },
+		{1932, "MSVC++ 17.2 (Visual Studio 2022)"         },
 	};
 	return map.value(ver, "unknown MSVC++ version");
 }
