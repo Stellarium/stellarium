@@ -608,14 +608,14 @@ public:
 	virtual bool contains(const SphericalPoint& r) const Q_DECL_OVERRIDE {return octahedronPolygon.contains(r.n);}
 	virtual bool contains(const AllSkySphericalRegion& r) const Q_DECL_OVERRIDE {return octahedronPolygon.contains(r.getOctahedronPolygon());}
 
+// These are too buggy in Qt6 to be useful.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	virtual bool intersects(const SphericalPolygon& r) const Q_DECL_OVERRIDE {return octahedronPolygon.intersects(r.octahedronPolygon);}
 	virtual bool intersects(const SphericalConvexPolygon& r) const Q_DECL_OVERRIDE;
 	virtual bool intersects(const SphericalCap& r) const Q_DECL_OVERRIDE {return r.intersects(*this);}
 	virtual bool intersects(const SphericalPoint& r) const Q_DECL_OVERRIDE {return octahedronPolygon.contains(r.n);}
 	virtual bool intersects(const AllSkySphericalRegion&) const Q_DECL_OVERRIDE {return !isEmpty();}
 
-// These are too buggy in Qt6 to be useful.
-#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	virtual SphericalRegionP getIntersection(const SphericalPoint& r) const Q_DECL_OVERRIDE {return contains(r.n) ? SphericalRegionP(new SphericalPoint(r)) : EmptySphericalRegion::staticInstance;}
 	virtual SphericalRegionP getIntersection(const AllSkySphericalRegion& ) const Q_DECL_OVERRIDE {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
 

@@ -70,7 +70,6 @@ QDataStream& operator>>(QDataStream& in, EdgeVertex& v)
 
 SubContour::SubContour(const QVector<Vec3d>& vertices, bool closed) : QVector<EdgeVertex>(vertices.size(), EdgeVertex(true))
 {
-	//qDebug() << "Create SubContour with size()" << vertices.size() << "or count()" << vertices.count() << "- now own Own count" << this->count() << "or size()=" << this->size();
 	Q_ASSERT(size() == vertices.count());
 	// Create the contour list by adding the matching edge flags
 	for (int i=0;i<vertices.size();++i)
@@ -134,7 +133,6 @@ OctahedronPolygon::OctahedronPolygon(const SubContour& initContour)
 
 OctahedronPolygon::OctahedronPolygon(const QList<OctahedronPolygon>& octs) : fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines)
 {
-	qWarning() << "USING QList octs"; // Does this get called in the unit tests?
 	sides.resize(8);
 	for (const auto& oct : octs)
 	{
@@ -308,7 +306,6 @@ void OctahedronPolygon::append(const OctahedronPolygon& other)
 			{
 				const EdgeVertex &edgeVertex=sub.at(k);
 				qDebug() << "edgeVertex=sides["<<i<<"]["<<j<<"]["<<k<<"]" << edgeVertex.vertex << "(edge:" << (edgeVertex.edgeFlag ? "yes":"no") << ")";
-
 			}
 		}
 		qDebug() << "Appending other.sides[" << i << "] (" << other.sides[i].length() << "elements)";
@@ -375,7 +372,6 @@ void OctahedronPolygon::appendReversed(const OctahedronPolygon& other)
 			{
 				const EdgeVertex &edgeVertex=sub.at(k);
 				qDebug() << "edgeVertex=sides*["<<i<<"]["<<j<<"]["<<k<<"]" << edgeVertex.vertex << "(edge:" << (edgeVertex.edgeFlag ? "yes":"no") << ")";
-
 			}
 		}
 #endif
@@ -427,7 +423,7 @@ struct OctTessTrianglesCallbackData
 void errorCallback(GLenum errn)
 {
 	qWarning() << "Tessellator error:" << QString::fromLatin1(reinterpret_cast<const char*>(gluesErrorString(errn)));
-	Q_ASSERT(0);
+	//Q_ASSERT(0);
 }
 
 void vertexTrianglesCallback(Vec3d* vertexData, OctTessTrianglesCallbackData* userData)
@@ -464,13 +460,12 @@ QVector<Vec3d> OctahedronPolygon::tesselateOneSideTriangles(GLUEStesselator* tes
 	{
 		//qDebug() << "contours.at(" << c << ").size()=" << contours.at(c).size();
 		gluesTessBeginContour(tess);
-		for (auto i=0;i<contours.at(c).size();i++)
+		for (auto i=0;i<contours.at(c).size();++i)
 		{
 			//const Vec3d vDat(contours[c][i].vertex.v);
 			//if ((abs(vDat[0]) > GLUES_TESS_MAX_COORD) || (abs(vDat[1]) > GLUES_TESS_MAX_COORD) || (abs(vDat[2]) > GLUES_TESS_MAX_COORD))
 				//qDebug() << "contours[" << c << "][" << i <<  "]: vDat range too large:" << vDat;
 			gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.data())), static_cast<void*>(const_cast<Vec3d *>(&(contours[c][i].vertex))));
-			//gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.v)), static_cast<void*>(const_cast<Vec3d *>(&(contours[c][i].vertex))));
 		}
 		gluesTessEndContour(tess);
 	}
@@ -530,7 +525,7 @@ void OctahedronPolygon::updateVertexArray()
 			else
 			{
 				//  Discard vertex..
-				// qDebug() << "Found a CW triangle - discarding!";
+				//qDebug() << "Found a CW triangle - discarding!";
 			}
 		}
 
@@ -621,8 +616,8 @@ QVector<SubContour> OctahedronPolygon::tesselateOneSideLineLoop(GLUEStesselator*
 		gluesTessEndContour(tess);
 	}
 	gluesTessEndPolygon(tess);
-	qDebug() << "End Result of Tessellation of sidenb=" << sidenb;
 #ifdef DUMP_OCT_TESS_ONE
+	qDebug() << "End Result of Tessellation of sidenb=" << sidenb;
 	// just dump to output
 	for (int i=0; i<data.resultList.length(); i++)
 	{
@@ -717,7 +712,6 @@ void OctahedronPolygon::tesselate(TessWindingRule windingRule)
 	}
 	gluesDeleteTess(tess);
 }
-
 
 QString OctahedronPolygon::toJson() const
 {
@@ -833,7 +827,6 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 			tmpVertex = greatCircleIntersection(previousVertex.vertex, currentVertex.vertex, plan, ok);
 			if (!ok)
 			{
-				qDebug() << "notOK";
 				// There was a problem, probably the 2 vertices are too close, just keep them like that
 				// since they are each at a different side of the plan.
 				currentSubContour << currentVertex;
