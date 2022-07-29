@@ -22,7 +22,6 @@
 
 #include "StelObjectType.hpp"
 #include "StelObjectModule.hpp"
-#include "StelProjectorType.hpp"
 
 #include <vector>
 #include <QString>

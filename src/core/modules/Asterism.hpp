@@ -22,7 +22,6 @@
 
 #include "StelObject.hpp"
 #include "StelTranslator.hpp"
-#include "StelUtils.hpp"
 #include "StelFader.hpp"
 #include "StelSphereGeometry.hpp"
 #include "AsterismMgr.hpp"
