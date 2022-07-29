@@ -372,7 +372,7 @@ static int AddVertex(GLUEStesselator* tess, double coords[3], void* data)
    e->Org->coords[2]=coords[2];
 
    /* The winding of an edge says how the winding number changes as we
-    * cross from the edge''s right face to its left face.  We add the
+    * cross from the edge's right face to its left face.  We add the
     * vertices in such an order that a CCW contour will add +1 to
     * the winding number of the region inside the contour.
     */
@@ -421,6 +421,7 @@ static int EmptyCache(GLUEStesselator* tess)
 
 
 // location is actually an array of only 3 doubles.
+// data is a SubContour*
 void  gluesTessVertex(GLUEStesselator* tess, double* location, void* data)
 {
    int i;
