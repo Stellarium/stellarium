@@ -24,7 +24,6 @@
 
 #include "StelObject.hpp"
 #include "StelTranslator.hpp"
-#include "StelUtils.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"

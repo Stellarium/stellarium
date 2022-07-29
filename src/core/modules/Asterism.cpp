@@ -24,8 +24,7 @@
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelModuleMgr.hpp"
-#include "AsterismMgr.hpp"
+#include "StelUtils.hpp"
 
 #include <algorithm>
 #include <QString>

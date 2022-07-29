@@ -34,8 +34,8 @@
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
-#include "StelSkyDrawer.hpp"
-#include "SolarSystem.hpp"
+#include "Planet.hpp"
+#include "StelUtils.hpp"
 
 #include <vector>
 #include <QDebug>

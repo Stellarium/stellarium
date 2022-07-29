@@ -26,7 +26,7 @@
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelModuleMgr.hpp"
+#include "StelUtils.hpp"
 #include "ConstellationMgr.hpp"
 
 #include <algorithm>
