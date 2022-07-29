@@ -25,7 +25,6 @@
 
 #include <stdexcept>
 
-//#include "StelJsonParser.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelUtils.hpp"
 
@@ -456,7 +455,7 @@ void TestStelSphericalGeometry::testOctahedronPolygon()
 	QCOMPARE(splittedSubCopy.getArea(), 0.);
 
 	QCOMPARE(southPoleSquare.getArea(), northPoleSquare.getArea());
-	// WHoever wants to re-activate the getIntersection() and getUnion() methods in Qt6: Test these here.
+	// Whoever wants to re-activate the getIntersection() and getUnion() methods in Qt6: Test these here.
 #if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	QCOMPARE(southPoleSquare.getIntersection(northPoleSquare)->getArea(), 0.);
 	QCOMPARE(southPoleSquare.getUnion(northPoleSquare)->getArea(), 2.*southPoleSquare.getArea());
