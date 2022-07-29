@@ -250,7 +250,6 @@ void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 			{
 				const EdgeVertex &edgeVertex=sub.at(k);
 				qDebug() << "edgeVertex=sides["<<i<<"]["<<j<<"]["<<k<<"]" << edgeVertex.vertex << "(edge:" << (edgeVertex.edgeFlag ? "yes":"no") << ")";
-
 			}
 		}
 	}
@@ -264,7 +263,6 @@ double OctahedronPolygon::getArea() const
 	double area = 0.;
 	Vec3d v1, v2, v3;
 	const QVector<Vec3d>& trianglesArray = getFillVertexArray().vertex;
-	//qDebug() << "OctahedronPolygon::getArea: vertex=" << trianglesArray;
 	Q_ASSERT(getFillVertexArray().primitiveType==StelVertexArray::Triangles);
 	for (int i=0;i<trianglesArray.size()/3;++i)
 	{
@@ -289,7 +287,6 @@ Vec3d OctahedronPolygon::getPointInside() const
 // The optional debug output dumps vertex lists before and after the actual append.
 void OctahedronPolygon::append(const OctahedronPolygon& other)
 {
-	qDebug() << "OctahedronPolygon::append()";
 	Q_ASSERT(sides.size()==8 && other.sides.size()==8);
 	for (int i=0;i<8;++i)
 	{
@@ -324,7 +321,6 @@ void OctahedronPolygon::append(const OctahedronPolygon& other)
 			{
 				const EdgeVertex &edgeVertex=sub.at(k);
 				qDebug() << "edgeVertex=sides*["<<i<<"]["<<j<<"]["<<k<<"]" << edgeVertex.vertex << "(edge:" << (edgeVertex.edgeFlag ? "yes":"no") << ")";
-
 			}
 		}
 #endif
@@ -349,7 +345,6 @@ void OctahedronPolygon::appendReversed(const OctahedronPolygon& other)
 			{
 				const EdgeVertex &edgeVertex=sub.at(k);
 				qDebug() << "edgeVertex=sides["<<i<<"]["<<j<<"]["<<k<<"]" << edgeVertex.vertex << "(edge:" << (edgeVertex.edgeFlag ? "yes":"no") << ")";
-
 			}
 		}
 		qDebug() << "Appending other.sides[" << i << "] (" << other.sides[i].length() << "elements)";
@@ -423,7 +418,7 @@ struct OctTessTrianglesCallbackData
 void errorCallback(GLenum errn)
 {
 	qWarning() << "Tessellator error:" << QString::fromLatin1(reinterpret_cast<const char*>(gluesErrorString(errn)));
-	//Q_ASSERT(0);
+	Q_ASSERT(0);
 }
 
 void vertexTrianglesCallback(Vec3d* vertexData, OctTessTrianglesCallbackData* userData)
@@ -464,7 +459,7 @@ QVector<Vec3d> OctahedronPolygon::tesselateOneSideTriangles(GLUEStesselator* tes
 		{
 			//const Vec3d vDat(contours[c][i].vertex.v);
 			//if ((abs(vDat[0]) > GLUES_TESS_MAX_COORD) || (abs(vDat[1]) > GLUES_TESS_MAX_COORD) || (abs(vDat[2]) > GLUES_TESS_MAX_COORD))
-				//qDebug() << "contours[" << c << "][" << i <<  "]: vDat range too large:" << vDat;
+			//	qDebug() << "contours[" << c << "][" << i <<  "]: vDat range too large:" << vDat;
 			gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.data())), static_cast<void*>(const_cast<Vec3d *>(&(contours[c][i].vertex))));
 		}
 		gluesTessEndContour(tess);
@@ -563,7 +558,6 @@ void OctahedronPolygon::updateVertexArray()
 	}
 	gluesDeleteTess(tess);
 	computeBoundingCap();
-
 #ifndef NDEBUG
 	// Check that all triangles are properly oriented
 	QVector<Vec3d> c(3);
@@ -582,6 +576,7 @@ void OctahedronPolygon::updateVertexArray()
 	QVector<Vec3d> c(3);
 //	c.resize(3);
 //	c.squeeze();
+	Q_UNUSED(c)
 #endif
 }
 
@@ -636,10 +631,7 @@ QVector<SubContour> OctahedronPolygon::tesselateOneSideLineLoop(GLUEStesselator*
 // Define the square of the angular distance from which we merge 2 points.
 inline bool tooClose(const Vec3d& e1, const Vec3d& e2)
 {
-	bool res=(e1[0]-e2[0])*(e1[0]-e2[0])+(e1[1]-e2[1])*(e1[1]-e2[1])<0.000000002;
-	// if (res)
-	// 	qDebug() << "Points " << e1 << "and" << e2 << "too close.";
-	return res;
+	return (e1[0]-e2[0])*(e1[0]-e2[0])+(e1[1]-e2[1])*(e1[1]-e2[1])<0.000000002;
 }
 
 void vertexLineLoopCallback(EdgeVertex* vertexData, OctTessLineLoopCallbackData* userData)
