@@ -422,7 +422,7 @@ static int EmptyCache(GLUEStesselator* tess)
 
 // location is actually an array of only 3 doubles.
 // data is a SubContour*
-void  gluesTessVertex(GLUEStesselator* tess, double* location, void* data)
+void  gluesTessVertex(GLUEStesselator* tess, const double* location, void* data)
 {
    int i;
    int tooLarge=FALSE;
