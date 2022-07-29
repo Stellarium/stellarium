@@ -24,6 +24,17 @@
 
 #include <QFile>
 
+// Note on changes inflicted by Qt6:
+
+// Apparently the combination of QVector and QList in Qt6 causes issues in getUnion and getIntersection methods. These are currently (2022) not used.
+// We keep them available for the sake of future developers who may be interested in the functions, but will have to debug them first.
+
+// Here are a few defines which may help in debugging. They control verbose data dumps.
+//#define DUMP_OCT_SUBS 1
+//#define DUMP_OCT_SUBS_REV 1
+//#define DUMP_OCT_APPENDSUBS 1
+//#define DUMP_OCT_TESS_ONE 1
+
 const Vec3d OctahedronPolygon::sideDirections[] = {	Vec3d(1,1,1), Vec3d(1,1,-1),Vec3d(-1,1,1),Vec3d(-1,1,-1),
 	Vec3d(1,-1,1),Vec3d(1,-1,-1),Vec3d(-1,-1,1),Vec3d(-1,-1,-1)};
 
@@ -59,6 +70,8 @@ QDataStream& operator>>(QDataStream& in, EdgeVertex& v)
 
 SubContour::SubContour(const QVector<Vec3d>& vertices, bool closed) : QVector<EdgeVertex>(vertices.size(), EdgeVertex(true))
 {
+	//qDebug() << "Create SubContour with size()" << vertices.size() << "or count()" << vertices.count() << "- now own Own count" << this->count() << "or size()=" << this->size();
+	Q_ASSERT(size() == vertices.count());
 	// Create the contour list by adding the matching edge flags
 	for (int i=0;i<vertices.size();++i)
 		(*this)[i].vertex = vertices.at(i);
@@ -95,6 +108,7 @@ QString SubContour::toJSON() const
 
 OctahedronPolygon::OctahedronPolygon(const QVector<Vec3d>& contour) : fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines)
 {
+	Q_ASSERT(sides.size()==0);
 	sides.resize(8);
 	appendSubContour(SubContour(contour));
 	tesselate(WindingPositive);
@@ -118,9 +132,9 @@ OctahedronPolygon::OctahedronPolygon(const SubContour& initContour)
 	updateVertexArray();
 }
 
-
 OctahedronPolygon::OctahedronPolygon(const QList<OctahedronPolygon>& octs) : fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines)
 {
+	qWarning() << "USING QList octs"; // Does this get called in the unit tests?
 	sides.resize(8);
 	for (const auto& oct : octs)
 	{
@@ -133,8 +147,6 @@ OctahedronPolygon::OctahedronPolygon(const QList<OctahedronPolygon>& octs) : fil
 	}
 	updateVertexArray();
 }
-
-#define DUMP_OCT_APPENDSUBS 1
 
 void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 {
@@ -221,25 +233,15 @@ void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 	}
 	projectOnOctahedron(resultSides);
 
-	// Append the new sides to this. Run TestStelSphericalGeometry::testOctahedronPolygon, see debug output.
-	// Qt6: lengths 8/8/8. sublength: 011, 011, 000, 000, 011, 011, 000, 000. Same as Qt5. Seems no difference here.
-	qDebug() << "appendSubContour:";
-	qDebug() << "sides.length():" << sides.length();
-	qDebug() << "resultSides.length():" << resultSides.length();
+	// Append the new sides to this.
 	Q_ASSERT(sides.size()==8 && resultSides.size()==8);
 	for (int i=0;i<8;++i)
 	{
-		qDebug() << "sides[" << i << "].length():" << sides[i].length();
-		qDebug() << "resultSides[" << i << "].length():" << resultSides[i].length();
 		sides[i] += resultSides[i];
-		qDebug() << "after plus: sides[" << i << "].length():" << sides[i].length();
 	}
-	qDebug() << "after splicing: sides.length():" << sides.length();
 #ifdef DUMP_OCT_APPENDSUBS
 	for (int i=0; i<8; i++)
 	{
-		// sides[i].data() prints a pointer address value. Not meaningful when comparing.
-		//qDebug() << "sides ["<<i<<"]:" << sides[i].data();
 		QVector<SubContour> v=sides[i];
 		qDebug() << "sides ["<<i<<"]: size=" << v.size();
 		for (int j=0; j<v.size(); j++)
@@ -264,7 +266,7 @@ double OctahedronPolygon::getArea() const
 	double area = 0.;
 	Vec3d v1, v2, v3;
 	const QVector<Vec3d>& trianglesArray = getFillVertexArray().vertex;
-	qDebug() << "OctahedronPolygon::getArea: vertex=" << trianglesArray;
+	//qDebug() << "OctahedronPolygon::getArea: vertex=" << trianglesArray;
 	Q_ASSERT(getFillVertexArray().primitiveType==StelVertexArray::Triangles);
 	for (int i=0;i<trianglesArray.size()/3;++i)
 	{
@@ -282,16 +284,11 @@ Vec3d OctahedronPolygon::getPointInside() const
 	Vec3d res(trianglesArray[0]);
 	res+=trianglesArray[1];
 	res+=trianglesArray[2];
-	res.normalize(); // GZ: WHY this? Why not (a1+a2+a3)/3?
+	res.normalize();
 	return res;
 }
 
-// Two defines that control dumping the sides lists. It seems the append() works without difference in both Qt5 and Qt6.
-//#define DUMP_OCT_SUBS 1
-//#define DUMP_OCT_SUBS_REV 1
-// GZ I think operator += / append may behave differently between Qt5 and Qt6!
-// GZ No, actually there is no difference. Also the calls can remain the same.
-// The debug output dumps vertex lists before and after the actual append.
+// The optional debug output dumps vertex lists before and after the actual append.
 void OctahedronPolygon::append(const OctahedronPolygon& other)
 {
 	qDebug() << "OctahedronPolygon::append()";
@@ -299,14 +296,14 @@ void OctahedronPolygon::append(const OctahedronPolygon& other)
 	for (int i=0;i<8;++i)
 	{
 #ifdef DUMP_OCT_SUBS
-		// sides[i].data() prints a pointer address value. Not meaningful when comparing.
-		qDebug() << "sides ["<<i<<"]:"; // << sides[i].data();
+		// sides[i].data() prints a pointer address value. Not meaningful when comparing Qt5/Qt6, but the before/after addresses may have changed.
+		qDebug() << "sides ["<<i<<"]:" << sides[i].data();
 		QVector<SubContour> v=sides[i];
 		qDebug() << "sides ["<<i<<"]: size=" << v.size();
 		for (int j=0; j<v.size(); j++)
 		{
 			const SubContour &sub=v.at(j);
-			qDebug() << "sub=sides["<<i<<"]["<<j<<"]"; // << sub.data();
+			qDebug() << "sub=sides["<<i<<"]["<<j<<"]" << sub.data();
 			for (int k=0; k<sub.size(); k++)
 			{
 				const EdgeVertex &edgeVertex=sub.at(k);
@@ -316,22 +313,16 @@ void OctahedronPolygon::append(const OctahedronPolygon& other)
 		}
 		qDebug() << "Appending other.sides[" << i << "] (" << other.sides[i].length() << "elements)";
 #endif
-//#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-//		//sides[i].append(other.sides[i]);
-//		sides[i] = sides[i] << QVector<SubContour>(other.sides[i]);
-//		// THIS MAY BE FORBIDDEN! the data() pointers are identical!
-//#else
 		sides[i] += other.sides[i];
-//#endif
 #ifdef DUMP_OCT_SUBS
-		// Now dump the sides list again:
-		qDebug() << "sides*["<<i<<"]:"; // << sides[i].data();
+		// Now dump the sides list again. Check for potential address changes.
+		qDebug() << "sides*["<<i<<"]:" << sides[i].data();
 		v=sides[i];
 		qDebug() << "sides*["<<i<<"]: size=" << v.size();
 		for (int j=0; j<v.size(); j++)
 		{
 			const SubContour &sub=v.at(j);
-			qDebug() << "sub=sides*["<<i<<"]["<<j<<"]"; // << sub.data();
+			qDebug() << "sub=sides*["<<i<<"]["<<j<<"]" << sub.data();
 			for (int k=0; k<sub.size(); k++)
 			{
 				const EdgeVertex &edgeVertex=sub.at(k);
@@ -345,19 +336,18 @@ void OctahedronPolygon::append(const OctahedronPolygon& other)
 
 void OctahedronPolygon::appendReversed(const OctahedronPolygon& other)
 {
-	qDebug() << "OctahedronPolygon::appendReversed()";
 	Q_ASSERT(sides.size()==8 && other.sides.size()==8);
 	for (int i=0;i<8;++i)
 	{
 #ifdef DUMP_OCT_SUBS_REV
-		// sides[i].data() prints a pointer address value. Not meaningful when comparing.
-		qDebug() << "sides ["<<i<<"]:"; // << sides[i].data();
+		// sides[i].data() prints a pointer address value. Not meaningful when comparing Qt5/Qt6, but the before/after addresses may have changed.
+		qDebug() << "sides ["<<i<<"]:" << sides[i].data();
 		QVector<SubContour> v=sides[i];
 		qDebug() << "sides ["<<i<<"]: size=" << v.size();
 		for (int j=0; j<v.size(); j++)
 		{
 			const SubContour &sub=v.at(j);
-			qDebug() << "sub=sides["<<i<<"]["<<j<<"]"; // << sub.data();
+			qDebug() << "sub=sides["<<i<<"]["<<j<<"]" << sub.data();
 			for (int k=0; k<sub.size(); k++)
 			{
 				const EdgeVertex &edgeVertex=sub.at(k);
@@ -370,22 +360,17 @@ void OctahedronPolygon::appendReversed(const OctahedronPolygon& other)
 
 		for (const auto& sub : other.sides[i])
 		{
-//#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-//			//sides[i].append(sub.reversed());
-//			sides[i] = sides[i] << sub.reversed();
-//#else
 			sides[i] += sub.reversed();
-//#endif
 		}
 #ifdef DUMP_OCT_SUBS_REV
 		// Now dump the sides list again:
-		qDebug() << "sides*["<<i<<"]:"; // << sides[i].data();
+		qDebug() << "sides*["<<i<<"]:" << sides[i].data();
 		v=sides[i];
 		qDebug() << "sides*["<<i<<"]: size=" << v.size();
 		for (int j=0; j<v.size(); j++)
 		{
 			const SubContour &sub=v.at(j);
-			qDebug() << "sub=sides*["<<i<<"]["<<j<<"]"; // << sub.data();
+			qDebug() << "sub=sides*["<<i<<"]["<<j<<"]" << sub.data();
 			for (int k=0; k<sub.size(); k++)
 			{
 				const EdgeVertex &edgeVertex=sub.at(k);
@@ -441,8 +426,8 @@ struct OctTessTrianglesCallbackData
 
 void errorCallback(GLenum errn)
 {
-	qWarning() << "Tesselator error:" << QString::fromLatin1(reinterpret_cast<const char*>(gluesErrorString(errn)));
-	//Q_ASSERT(0);
+	qWarning() << "Tessellator error:" << QString::fromLatin1(reinterpret_cast<const char*>(gluesErrorString(errn)));
+	Q_ASSERT(0);
 }
 
 void vertexTrianglesCallback(Vec3d* vertexData, OctTessTrianglesCallbackData* userData)
@@ -545,7 +530,7 @@ void OctahedronPolygon::updateVertexArray()
 			else
 			{
 				//  Discard vertex..
-				qDebug() << "Found a CW triangle - discarding!";
+				// qDebug() << "Found a CW triangle - discarding!";
 			}
 		}
 
@@ -587,8 +572,8 @@ void OctahedronPolygon::updateVertexArray()
 #ifndef NDEBUG
 	// Check that all triangles are properly oriented
 	QVector<Vec3d> c(3);
-//	c.resize(3);
-//	c.squeeze();
+	c.resize(3);
+	c.squeeze();
 	for (int j=0;j<fillCachedVertexArray.vertex.size()/3;++j)
 	{
 		c[0]=fillCachedVertexArray.vertex.at(j*3);
@@ -612,13 +597,15 @@ struct OctTessLineLoopCallbackData
 	QList<EdgeVertex> tempVertices;	//! Used to store the temporary combined vertices
 };
 
+// 8 sides, so sidenb in 0...7
 QVector<SubContour> OctahedronPolygon::tesselateOneSideLineLoop(GLUEStesselator* tess, int sidenb) const
 {
+	Q_ASSERT((0<=sidenb) && (sidenb<8));
 	const QVector<SubContour>& contours = sides[sidenb];
 	Q_ASSERT(!contours.isEmpty());
 	OctTessLineLoopCallbackData data;
 	gluesTessNormal(tess, 0.,0., (sidenb%2==0 ? -1. : 1.));
-	gluesTessBeginPolygon(tess, &data);
+	gluesTessBeginPolygon(tess, &data); // initialize and set tess->polygonData to data
 	for (int c=0;c<contours.size();++c)
 	{
 		gluesTessBeginContour(tess);
@@ -626,33 +613,53 @@ QVector<SubContour> OctahedronPolygon::tesselateOneSideLineLoop(GLUEStesselator*
 		{
 			Q_ASSERT(contours[c][i].vertex[2]<0.000001);
 			//qDebug() << "Before Tessellation:" << contours[c][i].vertex.data();
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-			gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.v)), const_cast<void*>(static_cast<const void*>(&(contours[c][i]))));
-#else
+			//qDebug() << "call glueTessVertex on " << contours[c][i].vertex;
 			gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.data())), const_cast<void*>(static_cast<const void*>(&(contours[c][i]))));
-#endif
 			//qDebug() << "Result of Tessellation:" << contours[c][i].vertex.data();
-
+			//qDebug() << "Result of Tessellation:" << contours[c][i].vertex;
 		}
 		gluesTessEndContour(tess);
 	}
 	gluesTessEndPolygon(tess);
+	qDebug() << "End Result of Tessellation of sidenb=" << sidenb;
+#ifdef DUMP_OCT_TESS_ONE
+	// just dump to output
+	for (int i=0; i<data.resultList.length(); i++)
+	{
+		const SubContour &sc=data.resultList.at(i);
+		if (sc.length()==0)
+			qDebug() << "\tSC" << i << "empty";
+		for (int j=0; i<sc.length(); i++)
+		{
+			qDebug() << "\tSC" << i << "[" << j << "]" << sc.at(j).vertex << "(" << (sc.at(j).edgeFlag ? "edge" : "no edge") << ")";
+		}
+	}
+#endif
 	return data.resultList;
 }
 
 // Define the square of the angular distance from which we merge 2 points.
 inline bool tooClose(const Vec3d& e1, const Vec3d& e2)
 {
-	return (e1[0]-e2[0])*(e1[0]-e2[0])+(e1[1]-e2[1])*(e1[1]-e2[1])<0.000000002;
+	bool res=(e1[0]-e2[0])*(e1[0]-e2[0])+(e1[1]-e2[1])*(e1[1]-e2[1])<0.000000002;
+	// if (res)
+	// 	qDebug() << "Points " << e1 << "and" << e2 << "too close.";
+	return res;
 }
 
 void vertexLineLoopCallback(EdgeVertex* vertexData, OctTessLineLoopCallbackData* userData)
 {
 	Q_ASSERT(vertexData->vertex[2]<0.0000001);
 	if (userData->result.isEmpty() || !tooClose(userData->result.last().vertex, vertexData->vertex))
+	{
+		//qDebug() << "vertexLineLoopCallback: appending";
 		userData->result.append(*vertexData);
+	}
 	else
+	{
+		//qDebug() << "vertexLineLoopCallback: fixing edge flag";
 		userData->result.last().edgeFlag = userData->result.last().edgeFlag && vertexData->edgeFlag;
+	}
 }
 
 void combineLineLoopCallback(double coords[3], EdgeVertex* vertex_data[4], GLfloat[4], EdgeVertex** outData, OctTessLineLoopCallbackData* userData)
@@ -850,7 +857,7 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 		}
 		previousVertex=currentVertex;
 	}
-	qDebug() << "i remained at " << i;
+	//qDebug() << "i remained at " << i;
 	// Now handle the other ones
 	for (;i<inputContour.size();++i)
 	{
@@ -951,7 +958,7 @@ void OctahedronPolygon::computeBoundingCap()
 		capD = 2.;
 		return;
 	}
-	// This is a quite crapy algorithm
+	// This is a quite crappy algorithm
 	capN.set(0,0,0);
 	for (const auto& v : trianglesArray)
 		capN+=v;

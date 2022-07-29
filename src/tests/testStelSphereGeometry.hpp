@@ -24,7 +24,7 @@
 #include <QtTest>
 #include "StelSphereGeometry.hpp"
 
-//! This includes test for the SphericalPolygons and OcrtahedronPolygons.
+//! This includes test for the SphericalPolygons and OctahedronPolygons.
 //! Developer note, 07/2022: The classes were developed around 2009 and worked in Qt5. Changes in Qt6 causes some methods to deliver wrong results.
 //! These now-buggy methods had been developed for a now-defunct plugin and are not used in versions 0.20 and later,
 //! although they seem interesting and may be useful in later versions, if somebody cares to debug them.
