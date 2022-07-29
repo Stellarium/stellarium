@@ -171,6 +171,8 @@ bool SphericalRegion::intersects(const SphericalRegion* r) const
 	//return false;
 }
 
+// These are too buggy in Qt6 to be useful.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 SphericalRegionP SphericalRegion::getIntersection(const SphericalRegion* r) const
 {
 	switch (r->getType())
@@ -228,7 +230,7 @@ SphericalRegionP SphericalRegion::getUnion(const SphericalCap& r) const {return 
 SphericalRegionP SphericalRegion::getUnion(const SphericalPoint& r) const {return getUnionDefault(&r);}
 SphericalRegionP SphericalRegion::getUnion(const AllSkySphericalRegion&) const {return SphericalRegionP(new AllSkySphericalRegion());}
 SphericalRegionP SphericalRegion::getUnion(const EmptySphericalRegion& r) const {return getUnionDefault(&r);}
-
+#endif
 
 SphericalRegionP SphericalRegion::getSubtraction(const SphericalRegion* r) const
 {
@@ -275,6 +277,8 @@ bool SphericalRegion::intersectsDefault(const SphericalRegion* r) const
 	return getOctahedronPolygon().intersects(r->getOctahedronPolygon());
 }
 
+// These are too buggy in Qt6 to be useful.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 // Return a new SphericalPolygon consisting of the intersection of this and the given SphericalPolygon.
 SphericalRegionP SphericalRegion::getIntersectionDefault(const SphericalRegion* r) const
 {
@@ -292,6 +296,7 @@ SphericalRegionP SphericalRegion::getUnionDefault(const SphericalRegion* r) cons
 	resOct.inPlaceUnion(r->getOctahedronPolygon());
 	return SphericalRegionP(new SphericalPolygon(resOct));
 }
+#endif
 
 // Return a new SphericalPolygon consisting of the subtraction of the given SphericalPolygon from this.
 SphericalRegionP SphericalRegion::getSubtractionDefault(const SphericalRegion* r) const
@@ -761,6 +766,8 @@ SphericalRegionP SphericalPolygon::deserialize(QDataStream& in)
 bool SphericalPolygon::contains(const SphericalConvexPolygon& r) const {return octahedronPolygon.contains(r.getOctahedronPolygon());}
 bool SphericalPolygon::intersects(const SphericalConvexPolygon& r) const {return r.intersects(*this);}
 
+// These are too buggy in Qt6 to be useful.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 SphericalRegionP SphericalPolygon::multiUnion(const QList<SphericalRegionP>& regions, bool optimizeByPreGrouping)
 {
 	if (regions.size()==1)
@@ -822,6 +829,7 @@ SphericalRegionP SphericalPolygon::multiIntersection(const QList<SphericalRegion
 		reg = reg->getIntersection(regions.at(i));
 	return reg;
 }
+#endif
 
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalTexturedPolygon
@@ -1371,8 +1379,12 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& l)
 		SphericalRegionP reg1 = loadFromQVariant(l.at(1).toList());
 		for (int n=2;n<l.size();++n)
 		{
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		qWarning() << "INTERSECTION not available in Qt6 based builds!";
+#else
 			SphericalRegionP reg2 = loadFromQVariant(l.at(n).toList());
 			reg1 = reg1->getIntersection(reg2.data());
+#endif
 		}
 		return reg1;
 	}
@@ -1380,9 +1392,13 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& l)
 	{
 		Q_ASSERT(l.size()==3);
 		SphericalRegionP reg1 = loadFromQVariant(l.at(1).toList());
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		qWarning() << "SUBTRACTION not available in Qt6 based builds!";
+#else
 		SphericalRegionP reg2 = loadFromQVariant(l.at(2).toList());
 		SphericalRegionP regIntersection = reg1->getIntersection(reg2.data());
 		reg1 = reg1->getSubtraction(regIntersection.data());
+#endif
 		return reg1;
 	}
 	else if (code=="PATH")

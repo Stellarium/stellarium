@@ -43,6 +43,12 @@ class EmptySphericalRegion;
 
 //! @file StelSphereGeometry.hpp
 //! Define all SphericalGeometry primitives as well as the SphericalRegionP type.
+//!
+//! Developer note, 07/2022: The classes were developed around 2009 and worked in Qt5. Changes in Qt6 causes some methods to deliver wrong results.
+//! These now-buggy methods had been developed for a now-defunct plugin and are not used in versions 0.20 and later,
+//! although they seem interesting and may be useful in later versions, if somebody cares to debug them.
+//! The problem seems to lie in Qt's changes in the QVector/QList classes.
+//! For now, these methods have been disabled when compiled with Qt6.
 
 //! @class SphericalRegionP
 //! A shared pointer on a SphericalRegion.
@@ -234,6 +240,8 @@ public:
 	virtual bool intersects(const AllSkySphericalRegion& r) const;
 	bool intersects(const EmptySphericalRegion&) const {return false;}
 
+// These are too buggy in Qt6 to be useful.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	//! Return a new SphericalRegion consisting of the intersection of this and the given region.
 	//! A default potentially very slow implementation is provided for each case.
 	SphericalRegionP getIntersection(const SphericalRegion* r) const;
@@ -255,7 +263,7 @@ public:
 	virtual SphericalRegionP getUnion(const SphericalPoint& r) const;
 	SphericalRegionP getUnion(const AllSkySphericalRegion& r) const;
 	virtual SphericalRegionP getUnion(const EmptySphericalRegion& r) const;
-
+#endif
 	//! Return a new SphericalRegion consisting of the subtraction of the given region from this.
 	//! A default potentially very slow implementation is provided for each case.
 	SphericalRegionP getSubtraction(const SphericalRegion* r) const;
@@ -519,8 +527,11 @@ public:
 	// Avoid name hiding when overloading the virtual methods.
 	using SphericalRegion::intersects;
 	using SphericalRegion::contains;
+	// These are too buggy in Qt6 to be useful.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	using SphericalRegion::getIntersection;
 	using SphericalRegion::getUnion;
+#endif
 	using SphericalRegion::getSubtraction;
 
 	EmptySphericalRegion() {;}
@@ -563,8 +574,11 @@ public:
 	// Avoid name hiding when overloading the virtual methods. GZ WHY IS THIS NECESSARY????
 	using SphericalRegion::intersects;
 	using SphericalRegion::contains;
+// These are too buggy in Qt6 to be useful.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	using SphericalRegion::getIntersection;
 	using SphericalRegion::getUnion;
+#endif
 	using SphericalRegion::getSubtraction;
 
 	SphericalPolygon() {;}
@@ -600,11 +614,14 @@ public:
 	virtual bool intersects(const SphericalPoint& r) const Q_DECL_OVERRIDE {return octahedronPolygon.contains(r.n);}
 	virtual bool intersects(const AllSkySphericalRegion&) const Q_DECL_OVERRIDE {return !isEmpty();}
 
+// These are too buggy in Qt6 to be useful.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	virtual SphericalRegionP getIntersection(const SphericalPoint& r) const Q_DECL_OVERRIDE {return contains(r.n) ? SphericalRegionP(new SphericalPoint(r)) : EmptySphericalRegion::staticInstance;}
 	virtual SphericalRegionP getIntersection(const AllSkySphericalRegion& ) const Q_DECL_OVERRIDE {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
 
 	virtual SphericalRegionP getUnion(const SphericalPoint&) const Q_DECL_OVERRIDE {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
 	virtual SphericalRegionP getUnion(const EmptySphericalRegion&) const Q_DECL_OVERRIDE {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
+#endif
 
 	virtual SphericalRegionP getSubtraction(const SphericalPoint&) const Q_DECL_OVERRIDE {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
 	virtual SphericalRegionP getSubtraction(const EmptySphericalRegion&) const Q_DECL_OVERRIDE {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
@@ -626,11 +643,14 @@ public:
 	//! Deserialize the region. This method must allow as fast as possible deserialization.
 	static SphericalRegionP deserialize(QDataStream& in);
 
+// These are too buggy in Qt6 to be useful.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	//! Create a new SphericalRegionP which is the union of all the passed ones.
 	static SphericalRegionP multiUnion(const QList<SphericalRegionP>& regions, bool optimizeByPreGrouping=false);
 	
 	//! Create a new SphericalRegionP which is the intersection of all the passed ones.
 	static SphericalRegionP multiIntersection(const QList<SphericalRegionP>& regions);
+#endif
 
 private:
 	OctahedronPolygon octahedronPolygon;
