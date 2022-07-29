@@ -327,7 +327,7 @@ void TestStelSphericalGeometry::testSphericalPolygon()
 	// qDebug() << "bigSquare Unioned with holySquare has area:" << bigSquare.getUnion(holySquare)->getArea();
 	// Whoever wants to re-activate the getIntersection() and getUnion() methods in Qt6: Test these here.
 	// Note that even though the results of the previous two lines differ, this next test (and the rest of the test function) passes *sometimes*!
-	QCOMPARE(bigSquare.getUnion(holySquare)->getArea(), bigSquare.getArea()); // fails in Qt6
+	QCOMPARE(bigSquare.getUnion(holySquare)->getArea(), bigSquare.getArea());
 	QCOMPARE(bigSquare.getIntersection(smallSquare)->getArea(), smallSquare.getArea());
 #endif
 	QCOMPARE(bigSquare.getSubtraction(smallSquare)->getArea(), bigSquare.getArea()-smallSquare.getArea());
@@ -479,7 +479,7 @@ void TestStelSphericalGeometry::testOctahedronPolygon()
 	// qDebug() << "NorthpoleSquare self-intersect (" << outlineVA.length() << "):" << outlineVA;
 
 	SphericalRegionP northUnionNorth=northPoleSquare.getUnion(northPoleSquare);
-	qDebug() << "northSelfUnion.data()" << northUnionNorth.data();
+	// qDebug() << "northSelfUnion.data()" << northUnionNorth.data();
 	outlineVA=northUnionNorth->getOctahedronPolygon().getOutlineVertexArray().vertex;
 	// qDebug() << "NorthpoleSquare self-union (" << outlineVA.length() << "):" << outlineVA;
 
