@@ -625,8 +625,11 @@ QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QS
 
 	//use a buffered stream instead of QFile::readLine - much faster!
 	QTextStream textStream(&file);
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	textStream.setEncoding(QStringConverter::Utf8);
+#else
 	textStream.setCodec("UTF-8");
-
+#endif
 	QRegularExpression nameExp("^\\s*//\\s*" + id + ":\\s*(.+)$");
 	while (!textStream.atEnd())
 	{
@@ -722,8 +725,11 @@ QString StelScriptMgr::getDescription(const QString& s)
 
 	//use a buffered stream instead of QFile::readLine - much faster!
 	QTextStream textStream(&file);
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	textStream.setEncoding(QStringConverter::Utf8);
+#else
 	textStream.setCodec("UTF-8");
-
+#endif
 	QString desc = "";
 	bool inDesc = false;
 	static const QRegularExpression descExp("^\\s*//\\s*Description:\\s*([^\\s].+)\\s*$");
