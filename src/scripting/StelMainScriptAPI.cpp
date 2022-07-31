@@ -53,9 +53,8 @@
 #include "StelSkyLayerMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelGuiBase.hpp"
-#include "MilkyWay.hpp"
 #include "ZodiacalLight.hpp"
-#include "ToastMgr.hpp"
+//#include "ToastMgr.hpp"
 #include "StelToneReproducer.hpp"
 
 #include <QDateTime>
@@ -105,9 +104,7 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelApp::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));	
 	connect(this, SIGNAL(requestSetHomePosition()), StelApp::getInstance().getCore(), SLOT(returnToHome()));
 
-
-//	QMetaType::registerConverter<QVector<double>, QVector3D>(&StelMainScriptAPI::vecToQVector3D);
-//	QMetaType::registerConverter<QVector3D, Vec3d>(&StelMainScriptAPI::qVector3DToVec3d);
+	QMetaType::registerConverter(&V3d::toString);
 }
 
 StelMainScriptAPI::~StelMainScriptAPI()
@@ -119,54 +116,22 @@ Vec3d StelMainScriptAPI::vec3d(const double x, const double y, const double z)
 	return Vec3d(x, y, z);
 }
 
-V3d StelMainScriptAPI::toV3d(const Vec3d &vec)
+Vec3d StelMainScriptAPI::vec3d(const QString &hex)
 {
-	return V3d(vec);
-}
+	Vec3d res(0,0,0);
 
-QJSValue StelMainScriptAPI::createNamedV3d(const QString &name, const Vec3d &vec)
-{
-	// Follow https://doc.qt.io/qt-5/qtjavascript.html, Make QObject available to the Script Engine
-	QObject *someObject = new V3d(vec);
-	QJSValue objectValue = m_engine->newQObject(someObject);
-	m_engine->globalObject().setProperty(name, objectValue);
-	return objectValue;
-}
-
-/* // seems useless
-QVector3D StelMainScriptAPI::vecToQVector3D(const QVector<double> &vec)
-{
-	QVector3D res;
-	if (vec.length()>=3)
-	{
-		res[0]=vec[0];
-		res[1]=vec[1];
-		res[2]=vec[2];
-	}
+	QColor qcol = QColor(hex);
+	if(qcol.isValid())
+		res.set( static_cast<float>(qcol.redF()), static_cast<float>(qcol.greenF()), static_cast<float>(qcol.blueF()) );
+	else
+		qWarning() << "Color: invalid color name: " << hex;
 	return res;
 }
 
-Vec3d StelMainScriptAPI::qVector3DToVec3d(const QVector3D &vec3d)
-{
-	Vec3d res;
-		res[0]=vec3d[0];
-		res[1]=vec3d[1];
-		res[2]=vec3d[2];
-	return res;
-}
-*/
-
-//! Test how a QVector3D behaves: Forward these to StelMovementMgr.
-QVector3D StelMainScriptAPI::getViewDirection()
-{
-	return GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000().toQVector3D();
-}
-void StelMainScriptAPI::setViewDirection(QVector3D dir)
-{
-//	GETSTELMODULE(StelMovementMgr)->setViewDirectionJ2000(Vec3d::fromQVector3D(dir));
-	GETSTELMODULE(StelMovementMgr)->setViewDirectionJ2000(qVector3DToVec3d(dir));
-}
-
+//V3d StelMainScriptAPI::toV3d(const Vec3d &vec)
+//{
+//	return V3d(vec);
+//}
 
 //! Set the current date in Julian Day
 //! @param JD the Julian Date (UT)

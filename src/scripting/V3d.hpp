@@ -34,6 +34,9 @@
 //! Similar to the direct use of Vec3d in the older (QtScript-based) solution of Stellarium 0.19-0.22, V3d also has an aspect of RGB colors:
 //! You can initialize it with a string that encodes HTML color (e.g., "#aaff33")
 //!
+//! @todo This class would probably not be required if QVector3D or self-made classes that don't derive from QObject could be made scriptable
+//! like in the old QtScript module. See https://forum.qt.io/topic/24368/custom-c-types-and-qjsengine for a very early discussion.
+
 class V3d: public QObject
 {
 	Q_OBJECT
@@ -69,6 +72,7 @@ public slots:
 	void setX(double x) {m_x = x;}
 	void setY(double y) {m_y = y;}
 	void setZ(double z) {m_z = z;}
+	inline QString toString() const {return QString("[%1, %2, %3]").arg(m_x).arg(m_y).arg(m_z);}
 private:
 	double m_x, m_y, m_z;
 };

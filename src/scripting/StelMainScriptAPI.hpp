@@ -27,9 +27,8 @@
 #ifdef ENABLE_SCRIPT_QML
 #include <QJSEngine>
 #endif
-#include "StelObject.hpp"
 #include "StelCore.hpp"
-#include "V3d.hpp"
+#include "VecMath.hpp"
 
 class QScriptEngine;
 
@@ -56,32 +55,26 @@ public:
 // These functions will be available in scripts
 public slots:
 
-	//! Seems not to work properly! Use
+	//! Create a Vec3d object. This is very important for many functions, but can only be created indirectly.
+	//! Either use this function or use an intermediary V3d object like
 	//! @code
-	//! var my=new V3d(vec);
+	//! var myV3d=new V3d(vec);
+	//! var myVec3d=myV3d.toVec3d();
 	//! @endcode
-	//! instead.
-	static Vec3d vec3d(const double x, const double y, const double z); // Maybe bogus
-	//! Seems not to work properly! Use
+	static Vec3d vec3d(const double x, const double y, const double z);
+	//! @returns Vec3d object from a color hexstring or even color name definition.
 	//! @code
-	//! var my=new V3d(vec);
+	//! var crimson=core.vec3d("Crimson");
+	//! var red=core.vec3d("#ff0000");
 	//! @endcode
-	//! instead.
-	static V3d toV3d(const Vec3d &vec); // should allow a conversion from that magic type!
 
-	//! Create a variable in the QJSEngine's namespace. This function may be redundant in light of
-	//! @code
-	//! name=new V3d(vec);
-	//! @endcode
-	QJSValue createNamedV3d(const QString &name, const Vec3d &vec);
-
-
-	//static QVector3D vecToQVector3D(const QVector<double> &vec); // Maybe bogus
-	//static Vec3d qVector3DToVec3d(const QVector3D &vec3d); // Maybe bogus
-
-	//! Test how a QVector3D behaves: Forward these to StelMovementMgr. Maybe bogus
-	static QVector3D getViewDirection();
-	static void setViewDirection(QVector3D dir);
+	static Vec3d vec3d(const QString &hex);
+	// Seems not to work properly! Use
+	// @code
+	// var my=new V3d(vec);
+	// @endcode
+	// instead.
+	//static V3d toV3d(const Vec3d &vec); // should allow a conversion from that magic type
 
 	//! Set the current date as Julian Day number
 	//! @param JD the Julian Day number
