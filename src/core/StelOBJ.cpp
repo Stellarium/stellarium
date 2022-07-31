@@ -961,8 +961,8 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 
 	qCDebug(stelOBJ)<<"Loaded OBJ in"<<timer.elapsed()<<"ms";
 	qCDebug(stelOBJ, "Parsed %d positions, %d normals, %d texture coordinates, %d materials",
-		posList.size(), normalList.size(), texList.size(), m_materials.size());
-	qCDebug(stelOBJ, "Created %d vertices, %d faces, %d objects", m_vertices.size(), getFaceCount(), m_objects.size());
+		int(posList.size()), int(normalList.size()), int(texList.size()), int(m_materials.size()));
+	qCDebug(stelOBJ, "Created %d vertices, %d faces, %d objects", int(m_vertices.size()), getFaceCount(), int(m_objects.size()));
 
 	//perform post processing
 	performPostProcessing(normalList.isEmpty());
