@@ -1365,30 +1365,58 @@ QString Satellites::getSatelliteDescription(int satID)
 {
 	// Format: NORAD (SATCAT) ID, description
 	const QMap<int, QString> descriptions = {
-		{ 20580, "The Hubble Space Telescope" },
-		{ 25544, "The International Space Station" },
-		{ 25867, "The Chandra X-ray Observatory" },
-		{ 25989, "X-ray Multi-Mirror Mission" },
-		{ 27370, "Reuven Ramaty High Energy Solar Spectroscopic Imager" },
-		{ 27540, "International Gamma-Ray Astrophysics Laboratory" },
-		{ 27843, "The Microvariability and Oscillations of Stars telescope" },
-		{ 28485, "Neil Gehrels Swift Observatory (Swift Gamma-Ray Burst Explorer)" },
-		{ 31135, "Astro‐Rivelatore Gamma a Immagini Leggero" },
-		{ 33053, "Fermi Gamma-ray Space Telescope" },
-		{ 36119, "Wide-field Infrared Survey Explorer" },
-		{ 36577, "Interplanetary Kite-craft Accelerated by Radiation Of the Sun" },
-		{ 38358, "Nuclear Spectroscopic Telescope Array" },
-		{ 39089, "Near Earth Object Surveillance Satellite" },
-		{ 39197, "The Interface Region Imaging Spectrograph" },
-		{ 39253, "The Spectroscopic Planet Observatory for Recognition of Interaction of Atmosphere" },
-		{ 41173, "The Dark Matter Particle Explorer" },
-		{ 42758, "Hard X-ray Modulation Telescope" },
-		{ 43435, "Transiting Exoplanet Survey Satellite" },
-		{ 44432, "Spectrum-X-Gamma" },
-		{ 44874, "Characterising Exoplanets Satellite" },
-		{ 48274, "Tiangong space station (Chinese large modular space station)" },
-		{ 49954, "Imaging X-ray Polarimetry Explorer" },
-		{ 50463, "James Webb Space Telescope" }
+		// TRANSLATORS: Satellite description. "Hubble" is a person's name.
+		{ 20580, N_("The Hubble Space Telescope") },
+		// TRANSLATORS: Satellite description.
+		{ 25544, N_("The International Space Station") },
+		// TRANSLATORS: Satellite description.
+		{ 25867, N_("The Chandra X-ray Observatory") },
+		// TRANSLATORS: Satellite description.
+		{ 25989, N_("X-ray Multi-Mirror Mission") },
+		// TRANSLATORS: Satellite description.
+		{ 27370, N_("Reuven Ramaty High Energy Solar Spectroscopic Imager") },
+		// TRANSLATORS: Satellite description.
+		{ 27540, N_("International Gamma-Ray Astrophysics Laboratory") },
+		// TRANSLATORS: Satellite description.
+		{ 27843, N_("The Microvariability and Oscillations of Stars telescope") },
+		// TRANSLATORS: Satellite description.
+		{ 28485, N_("Neil Gehrels Swift Observatory (Swift Gamma-Ray Burst Explorer)") },
+		// TRANSLATORS: Satellite description.
+		{ 31135, N_("Astro‐Rivelatore Gamma a Immagini Leggero") },
+		// TRANSLATORS: Satellite description.
+		{ 33053, N_("Fermi Gamma-ray Space Telescope") },
+		// TRANSLATORS: Satellite description.
+		{ 36119, N_("Wide-field Infrared Survey Explorer") },
+		// TRANSLATORS: Satellite description.
+		{ 36577, N_("Interplanetary Kite-craft Accelerated by Radiation Of the Sun") },
+		// TRANSLATORS: Satellite description.
+		{ 37755, N_("The russian space radio telescope RadioAstron") },
+		// TRANSLATORS: Satellite description.
+		{ 38358, N_("Nuclear Spectroscopic Telescope Array") },
+		// TRANSLATORS: Satellite description.
+		{ 39089, N_("Near Earth Object Surveillance Satellite") },
+		// TRANSLATORS: Satellite description.
+		{ 39197, N_("The Interface Region Imaging Spectrograph") },
+		// TRANSLATORS: Satellite description.
+		{ 39253, N_("The Spectroscopic Planet Observatory for Recognition of Interaction of Atmosphere") },
+		// TRANSLATORS: Satellite description.
+		{ 41173, N_("The Dark Matter Particle Explorer") },
+		// TRANSLATORS: Satellite description.
+		{ 42758, N_("Hard X-ray Modulation Telescope") },
+		// TRANSLATORS: Satellite description.
+		{ 43020, N_("Arcsecond Space Telescope Enabling Research in Astrophysics") },
+		// TRANSLATORS: Satellite description.
+		{ 43435, N_("Transiting Exoplanet Survey Satellite") },
+		// TRANSLATORS: Satellite description.
+		{ 44432, N_("Spectrum-X-Gamma") },
+		// TRANSLATORS: Satellite description.
+		{ 44874, N_("Characterising Exoplanets Satellite") },
+		// TRANSLATORS: Satellite description.
+		{ 48274, N_("Tiangong space station (Chinese large modular space station)") },
+		// TRANSLATORS: Satellite description.
+		{ 49954, N_("Imaging X-ray Polarimetry Explorer") },
+		// TRANSLATORS: Satellite description. "James Webb" is a person's name.
+		{ 50463, N_("James Webb Space Telescope") }
 	};
 	return descriptions.value(satID, QString());
 }
@@ -1402,6 +1430,10 @@ QPair<double, double> Satellites::getStdMagRCS(const TleData& tleData)
 		stdMag = qsMagList[sid];
 	if (rcsList.contains(sid))
 		RCS = rcsList[sid];
+
+	// special case: chinese space station / CSS (TIANHE1)
+	if (sid==48274 && stdMag > 90.)
+		stdMag = -1.1; // Mir complex has std. magnitude -1.0 and maximum length 31 meters, the CSS has maximum length 37 meters, so, std. magnitude -1.1 is good approximation here
 
 	// special case: starlink satellites; details: http://satobs.org/seesat/Apr-2020/0174.html
 	if (!rcsList.contains(sid) && tleData.name.startsWith("STARLINK"))
@@ -3450,63 +3482,6 @@ void Satellites::translations()
 	// TRANSLATORS: Satellite group: CPF
 	// TRANSLATORS: CelesTrak supplemental source [CPF TLEs]: https://celestrak.org/NORAD/elements/supplemental/cpf.txt
 	N_("cpf");
-	
-	// Satellite descriptions - bright and/or famous objects
-	// Just A FEW objects please! (I'm looking at you, Alex!)
-	// TRANSLATORS: Satellite description. "Hubble" is a person's name.
-	N_("The Hubble Space Telescope");
-	// TRANSLATORS: Satellite description.
-	N_("The International Space Station");
-	// TRANSLATORS: Satellite description.
-	N_("China's first space station");
-	// TRANSLATORS: Satellite description.
-	N_("Tiangong space station (Chinese large modular space station)");
-	// TRANSLATORS: Satellite description.
-	N_("The russian space radio telescope RadioAstron");
-	// TRANSLATORS: Satellite description.
-	N_("International Gamma-Ray Astrophysics Laboratory");
-	// TRANSLATORS: Satellite description.
-	N_("The Microvariability and Oscillations of Stars telescope");
-	// TRANSLATORS: Satellite description.
-	N_("The Interface Region Imaging Spectrograph");
-	// TRANSLATORS: Satellite description.
-	N_("The Spectroscopic Planet Observatory for Recognition of Interaction of Atmosphere");
-	// TRANSLATORS: Satellite description.
-	M_("Nuclear Spectroscopic Telescope Array");
-	// TRANSLATORS: Satellite description.
-	N_("The Dark Matter Particle Explorer");
-	// TRANSLATORS: Satellite description.
-	N_("Arcsecond Space Telescope Enabling Research in Astrophysics");
-	// TRANSLATORS: Satellite description.
-	N_("Reuven Ramaty High Energy Solar Spectroscopic Imager");
-	// TRANSLATORS: Satellite description.
-	N_("The Chandra X-ray Observatory");
-	// TRANSLATORS: Satellite description.
-	N_("Neil Gehrels Swift Observatory (Swift Gamma-Ray Burst Explorer)");
-	// TRANSLATORS: Satellite description.
-	N_("Astro‐Rivelatore Gamma a Immagini Leggero");
-	// TRANSLATORS: Satellite description.
-	N_("Fermi Gamma-ray Space Telescope");
-	// TRANSLATORS: Satellite description.
-	N_("Interplanetary Kite-craft Accelerated by Radiation Of the Sun");
-	// TRANSLATORS: Satellite description.
-	N_("X-ray Multi-Mirror Mission");
-	// TRANSLATORS: Satellite description.
-	N_("Hard X-ray Modulation Telescope");
-	// TRANSLATORS: Satellite description.
-	N_("Spectrum-X-Gamma");
-	// TRANSLATORS: Satellite description.
-	N_("Imaging X-ray Polarimetry Explorer");
-	// TRANSLATORS: Satellite description.
-	N_("Near Earth Object Surveillance Satellite");
-	// TRANSLATORS: Satellite description.
-	N_("Transiting Exoplanet Survey Satellite");
-	// TRANSLATORS: Satellite description.
-	N_("Characterising Exoplanets Satellite");
-	// TRANSLATORS: Satellite description.
-	N_("Wide-field Infrared Survey Explorer");
-	// TRANSLATORS: Satellite description.
-	N_("James Webb Space Telescope");
 
 	// Satellite names - a few famous objects only
 	// TRANSLATORS: Satellite name: International Space Station
