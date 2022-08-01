@@ -843,19 +843,17 @@ ENDIF()
 ########### Windows packaging ###############
 IF(WIN32)
      CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss @ONLY)
-     SET(ISS_COMPILER_FILENAME "ISCC.exe")
-     FIND_FILE(ISS_COMPILER_PATH ${ISS_COMPILER_FILENAME})
-     IF(ISS_COMPILER_PATH)
-          MESSAGE(STATUS "Found Inno Setup (.iss) compiler: ${ISS_COMPILER_PATH}")
+     FIND_PACKAGE(ISCC)
+     IF(ISS_COMPILER_FOUND)
           # Add installer target
           ADD_CUSTOM_TARGET(
                stellarium-installer
-               COMMAND ${ISS_COMPILER_PATH} "${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss"
+	       COMMAND ${ISS_COMPILER_EXECUTABLE} "${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss"
                COMMENT "Making an installer package for Windows..."
                VERBATIM
           )
      ELSE()
-          MESSAGE(STATUS "Could NOT find Inno Setup Compiler (missing: ${ISS_COMPILER_FILENAME}). You won't be able to build setup files.")
+	  MESSAGE(STATUS "Could NOT find Inno Setup compiler. You won't be able to build setup files.")
      ENDIF()
 ENDIF()
 
