@@ -226,8 +226,13 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
      # share data location:
      SET(SDATALOC "Resources")
 ELSE()
+     IF(HAIKU)
+	  SET(SDATAPREFIX "data")
+     ELSE()
+	  SET(SDATAPREFIX "share")
+     ENDIF()
      # share data location:
-     SET(SDATALOC "share/${PACKAGE}")
+     SET(SDATALOC "${SDATAPREFIX}/${PACKAGE}")
 ENDIF()
 
 IF(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUCC)

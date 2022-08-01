@@ -490,6 +490,10 @@ IF(ENABLE_LIBGPS)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} ${GPS_LIBRARY})
 ENDIF()
 
+IF(HAIKU)
+     SET(STELMAIN_DEPS ${STELMAIN_DEPS} network)
+ENDIF()
+
 # Main executable/library setup
 IF(GENERATE_STELMAINLIB)
      ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
