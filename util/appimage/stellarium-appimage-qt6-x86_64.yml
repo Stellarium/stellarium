@@ -24,19 +24,28 @@ AppDir:
       - sourceline: 'deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse'
 
     include:
+      - libqt6charts6
       - libqt6core6
+      - libqt6dbus6
       - libqt6gui6
       - libqt6multimedia6
       - libqt6multimediawidgets6
       - libqt6network6
-      - libqt6positioning6
-      - libqt6serialport6
-      - libqt6widgets6
-      - libqt6charts6
       - libqt6opengl6
+      - libqt6openglwidgets6
+      - libqt6positioning6
+      - libqt6printsupport6
+      - libqt6qml6
+      - libqt6qmlmodels6
+      - libqt6quick6
+      - libqt6quickwidgets6
+      - libqt6serialport6
+      - libqt6waylandclient6
+      - libqt6webchannel6
+      - libqt6webengine6-data
       - libqt6webenginecore6
       - libqt6webenginewidgets6
-      - libqt6waylandclient6
+      - libqt6widgets6
       - libgps28
     exclude: []
 

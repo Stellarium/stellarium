@@ -29,7 +29,7 @@ jobs:
         sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
         # Installing dependencies
         sudo apt install -y libgps-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot wget
-        sudo apt install -y qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools linguist-qt6 libqt6svg6-dev qt6-multimedia-dev libqt6serialport6-dev qt6-positioning-dev libqt6positioning6-plugins libqt6webchannel6-dev libqt6webenginewidgets6 qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev
+        sudo apt install -y qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools linguist-qt6 libqt6svg6-dev qt6-multimedia-dev libqt6serialport6-dev qt6-positioning-dev libqt6positioning6-plugins libqt6webchannel6-dev libqt6webenginewidgets6 qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev qt6-qpa-plugins
         sudo pip3 install appimage-builder
         sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O /usr/local/bin/appimagetool
         sudo chmod +x /usr/local/bin/appimagetool
