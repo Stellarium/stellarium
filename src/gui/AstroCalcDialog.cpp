@@ -1615,18 +1615,18 @@ void AstroCalcDialog::drawHECGraph(QString selectedObject)
 
 	// The QLogValueAxis has a stupid limit for the low end. Again, circumvent it with a CategoryAxis.
 	QCategoryAxis *radialAxis = new QCategoryAxis();
-	radialAxis->append("0.5", log(.5));  // a few stop marks for AU values
-	radialAxis->append("1", log(1));
-	radialAxis->append("2", log(2));
-	radialAxis->append("5", log(5));
-	radialAxis->append("10", log(10));
-	radialAxis->append("20", log(20));
-	radialAxis->append("30", log(30));
+	radialAxis->append("0.5", log(0.5));  // a few stop marks for AU values
+	radialAxis->append("1", log(1.0));
+	radialAxis->append("2", log(2.0));
+	radialAxis->append("5", log(5.0));
+	radialAxis->append("10", log(10.0));
+	radialAxis->append("20", log(20.0));
+	radialAxis->append("30", log(30.0));
 	radialAxis->setLabelsPosition(QCategoryAxis::AxisLabelsPositionOnValue);
 	radialAxis->setLabelsColor(labelColor);
 	radialAxis->setGridLineColor(axisColor);
 	radialAxis->setLineVisible(false);
-	radialAxis->setRange(-1.5, log(32));
+	radialAxis->setRange(-1.5, log(32.0));
 	chart->addAxis(radialAxis, QPolarChart::PolarOrientationRadial);
 
 	seriesPlanets->attachAxis(angularAxis);

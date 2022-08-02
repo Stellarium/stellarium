@@ -66,7 +66,7 @@ jobs:
         export PATH="/usr/local/opt/qt@6/bin:$PATH"
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
+        cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_OSX_ARCHITECTURES=x86_64 -DENABLE_TESTING=On ${{ github.workspace }}
 
     - name: Compile
       working-directory: build

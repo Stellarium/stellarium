@@ -619,10 +619,7 @@ void MpcImportWindow::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(url));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-	// Unsure, see https://doc.qt.io/qt-6/network-changes-qt6.html#redirect-policies
-	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::ManualRedirectPolicy);
-#else
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
 #endif
 	downloadReply = networkManager->get(request);
@@ -795,10 +792,7 @@ void MpcImportWindow::sendQueryToUrl(QUrl url)
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
 	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded"); //Is this really necessary?
 	request.setHeader(QNetworkRequest::ContentLengthHeader, url.query(QUrl::FullyEncoded).length());
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-	// Unsure, see https://doc.qt.io/qt-6/network-changes-qt6.html#redirect-policies
-	request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::ManualRedirectPolicy);
-#else
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
 #endif
 

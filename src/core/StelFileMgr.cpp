@@ -58,6 +58,9 @@ void StelFileMgr::init()
 	}
 #elif defined(Q_OS_MACOS)
 	userDir = QDir::homePath() + "/Library/Application Support/Stellarium";
+#elif defined(Q_OS_HAIKU)
+	// Use system settings dir
+	userDir = QDir::homePath() + "/config/settings/Stellarium";
 #else
 	userDir = QDir::homePath() + "/.stellarium";
 #endif

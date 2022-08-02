@@ -75,15 +75,16 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc
 
 ##### Qt6
 
-Ubuntu 22.04 comes with Qt5.15 and Qt6.2.  
+Ubuntu 22.04 comes with Qt5.15 and Qt6.2. To build with Qt6:
 
 ```
 sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc g++ \
                  graphviz doxygen gettext git \
                  qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools linguist-qt6 libqt6svg6-dev \
                  qt6-multimedia-dev libqt6serialport6-dev \
-                 libqt6positioning6-plugins libgps-dev \
-                 libqt6webenginewidgets6 qt6-webengine-dev-tools libqt6charts6-dev
+                 qt6-positioning-dev libqt6positioning6-plugins libgps-dev \
+                 libqt6webchannel6-dev libqt6webenginewidgets6 qt6-webengine-dev qt6-webengine-dev-tools \
+                 libqt6charts6-dev
 ```
 
 
