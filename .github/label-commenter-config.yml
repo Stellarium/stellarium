@@ -20,7 +20,7 @@ labels:
       issue:
         body: Oops... Sorry for mistake @{{ issue.user.login }}
         action: open
-  - name: state: outdated
+  - name: "state: outdated"
     labeled:
       issue:
         body: This report is outdated, such, the problematic code replaced by new tool or feature...
@@ -59,11 +59,11 @@ labels:
     labeled:
       issue:
         body: Hello @{{ issue.user.login }}! Thank you for this suggestion.
-  - name: state: confirmed
+  - name: "state: confirmed"
     labeled:
       issue:
         body: Hello @{{ issue.user.login }}! OK, developers can reproduce the issue. Thanks for the report!
-  - name: won't fix
+  - name: "state: won't fix"
     labeled:
       issue:
         body: |
@@ -94,7 +94,7 @@ labels:
         body: |
           Thank you @{{ issue.user.login }}! In future please use Transifex to fix and improve translations:
           https://www.transifex.com/stellarium/stellarium/dashboard/
-  - name: state: fix committed
+  - name: "state: fix committed"
     labeled:
       issue:
         body: |
