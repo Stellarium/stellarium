@@ -172,7 +172,7 @@ ELSE()
           ADD_DEFINITIONS(-DSTELLARIUM_VERSION="${STELLARIUM_VERSION}")
      ENDIF()     
 ENDIF()
-MESSAGE(STATUS "Building Stellarium ${PACKAGE_VERSION} [${WINDOWS_PACKAGE_VERSION}] (Mode: ${CMAKE_BUILD_TYPE})")
+MESSAGE(STATUS "Building ${PROJECT_NAME} ${PACKAGE_VERSION} (Mode: ${CMAKE_BUILD_TYPE})")
 
 # Write version and series of Stellarium to Stellarium User Guide
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
