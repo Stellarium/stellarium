@@ -82,11 +82,14 @@
 //! @namespace StelUtils contains general purpose utility functions.
 namespace StelUtils
 {
-	//! Return the full name of stellarium, i.e. "stellarium 0.9.0"
+	//! Return the full name of stellarium, i.e. "Stellarium 23.1"
 	QString getApplicationName();
 
-	//! Return the version of stellarium, i.e. "0.9.0"
+	//! Return the version of stellarium, i.e. "0.23.1"
 	QString getApplicationVersion();
+
+	//! Return the public version of stellarium, i.e. "23.1"
+	QString getApplicationPublicVersion();
 
 	//! Return the name and the version of operating system, i.e. "macOS 12.5"
 	QString getOperatingSystemInfo();

@@ -161,7 +161,7 @@ int main(int argc, char **argv)
 	qsrand(QDateTime::currentMSecsSinceEpoch());
 #endif
 	QCoreApplication::setApplicationName("stellarium");
-	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
+	QCoreApplication::setApplicationVersion(StelUtils::getApplicationPublicVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
 

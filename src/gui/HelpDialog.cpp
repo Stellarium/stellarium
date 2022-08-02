@@ -209,11 +209,17 @@ void HelpDialog::downloadComplete(QNetworkReply *reply)
 
 	QString latestVersion = map["name"].toString();
 	latestVersion.replace("v","", Qt::CaseInsensitive);
+	QStringList v = latestVersion.split(".");
 
-	QString appVersion = StelUtils::getApplicationVersion();
-	QStringList c = appVersion.split(".");	
+	QString appVersion;
+	if (v.count()==3)
+		appVersion = StelUtils::getApplicationVersion();
+	else
+		appVersion = StelUtils::getApplicationPublicVersion();
+
+	QStringList c = StelUtils::getApplicationVersion().split(".");
 	int r = StelUtils::compareVersions(latestVersion, appVersion);
-	if (r==-1 || c.count()>3 || c.last().contains("-"))
+	if (r==-1 || c.count()>v.count() || c.last().contains("-"))
 		message = q_("Looks like you are using the development version of Stellarium.");
 	else if (r==0)
 		message = q_("This is latest stable version of Stellarium.");
@@ -482,10 +488,12 @@ void HelpDialog::updateAboutText(void) const
 
 	// populate About tab
 	QString newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
-	// Note: this legal notice is not suitable for translation
-	newHtml += QString("<h3>%1</h3>").arg(STELLARIUM_COPYRIGHT);
+	newHtml += QString("<p><strong>%1 %2").arg(q_("Version"), StelUtils::getApplicationVersion());
+	newHtml += QString("<br />%1 %2</strong></p>").arg(q_("Based on Qt"), QT_VERSION_STR);
 	if (!message.isEmpty())
 		newHtml += "<p><strong>" + message + "</strong></p>";
+	// Note: this legal notice is not suitable for translation
+	newHtml += QString("<h3>%1</h3>").arg(STELLARIUM_COPYRIGHT);
 	// newHtml += "<p><em>Version 0.15 is dedicated in memory of our team member Barry Gerdes.</em></p>";
 	newHtml += "<p>This program is free software; you can redistribute it and/or ";
 	newHtml += "modify it under the terms of the GNU General Public License ";
