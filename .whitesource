@@ -3,6 +3,10 @@
     "shouldScanRepo": true
   },
   "checkRunSettings": {
+    "displayMode": "diff",
     "vulnerableCheckRunConclusionLevel": "failure"
+  },
+  "issueSettings": {
+    "minSeverityLevel": "MEDIUM"
   }
 }
