@@ -338,7 +338,7 @@ int main(int argc, char **argv)
 		if (!restoreDefaultConfigFile)
 		{
 			QString version = confSettings->value("main/version", "0.0.0").toString();
-			if (version!=QString(PACKAGE_VERSION))
+			if (version!=QString(STELLARIUM_PUBLIC_VERSION))
 			{
 				QTextStream istr(&version);
 				char tmp;
@@ -357,7 +357,7 @@ int main(int argc, char **argv)
 				else
 				{
 					qDebug() << "Attempting to use an existing older config file.";
-					confSettings->setValue("main/version", QString(PACKAGE_VERSION)); // Upgrade version of config.ini
+					confSettings->setValue("main/version", QString(STELLARIUM_PUBLIC_VERSION)); // Upgrade version of config.ini
 					clearCache();
 					qDebug() << "Cleared cache and updated config.ini...";
 				}
