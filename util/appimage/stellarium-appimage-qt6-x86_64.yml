@@ -46,6 +46,10 @@ AppDir:
       - libqt6webenginecore6
       - libqt6webenginewidgets6
       - libqt6widgets6
+      - libqt6waylandcompositor6
+      - libqt6waylandeglclienthwintegration6
+      - libqt6waylandeglcompositorhwintegration6
+      - libqt6wlshellintegration6
       - libgps28
     exclude: []
 
