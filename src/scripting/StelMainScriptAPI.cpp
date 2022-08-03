@@ -116,15 +116,22 @@ Vec3d StelMainScriptAPI::vec3d(const double x, const double y, const double z)
 	return Vec3d(x, y, z);
 }
 
-Vec3d StelMainScriptAPI::vec3d(const QString &hex)
+Vec3f StelMainScriptAPI::vec3f(const float x, const float y, const float z)
 {
-	Vec3d res(0,0,0);
+	return Vec3f(x, y, z);
+}
 
-	QColor qcol = QColor(hex);
+Vec3f StelMainScriptAPI::vec3f(const QString &cstr){return color(cstr);}
+
+Vec3f StelMainScriptAPI::color(const QString &cstr)
+{
+	Vec3f res(0,0,0);
+
+	QColor qcol = QColor(cstr);
 	if(qcol.isValid())
 		res.set( static_cast<float>(qcol.redF()), static_cast<float>(qcol.greenF()), static_cast<float>(qcol.blueF()) );
 	else
-		qWarning() << "Color: invalid color name: " << hex;
+		qWarning() << "Color: invalid color name: " << cstr;
 	return res;
 }
 
@@ -132,6 +139,15 @@ Vec3d StelMainScriptAPI::vec3d(const QString &hex)
 //{
 //	return V3d(vec);
 //}
+
+bool StelMainScriptAPI::useQtScript()
+{
+#ifdef ENABLE_SCRIPT_QML
+	return false;
+#else
+	return true;
+#endif
+}
 
 //! Set the current date in Julian Day
 //! @param JD the Julian Date (UT)

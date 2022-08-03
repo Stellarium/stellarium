@@ -23,7 +23,7 @@
 #include <QObject>
 #include <QVariant>
 #include <QStringList>
-#include <QVector3D>
+#include "V3d.hpp"
 #ifdef ENABLE_SCRIPT_QML
 #include <QJSEngine>
 #endif
@@ -62,19 +62,36 @@ public slots:
 	//! var myVec3d=myV3d.toVec3d();
 	//! @endcode
 	static Vec3d vec3d(const double x, const double y, const double z);
-	//! @returns Vec3d object from a color hexstring or even color name definition.
-	//! @code
-	//! var crimson=core.vec3d("Crimson");
-	//! var red=core.vec3d("#ff0000");
-	//! @endcode
 
-	static Vec3d vec3d(const QString &hex);
+	//! Create a Vec3f object. This is very important for many functions, but can only be created indirectly.
+	//! Either use this function or use an intermediary V3f object like
+	//! @code
+	//! var myV3f=new V3f(vec);
+	//! var myVec3f=myV3f.toVec3f();
+	//! @endcode
+	static Vec3f vec3f(const float x, const float y, const float z);
+
+	//! @returns Vec3f object from a color hexstring or even color name definition.
+	//! @code
+	//! var crimson=core.color("Crimson");
+	//! var red=core.color("#ff0000");
+	//! @endcode
+	static Vec3f vec3f(const QString &cstr);
+	//! alias for vec3f(cstr)
+	static Vec3f color(const QString &cstr);
+
 	// Seems not to work properly! Use
 	// @code
 	// var my=new V3d(vec);
 	// @endcode
 	// instead.
 	//static V3d toV3d(const Vec3d &vec); // should allow a conversion from that magic type
+
+	//! Returns true if the script is running on the older, Qt5-based QtScript JavaScript engine.
+	//! Note that it is possible to build Stellarium on Qt5.14 and later also with the newer scripting engine.
+	//! Use this to make code paths work with all versions of Stellarium.
+	//! @todo Should we rename this method?
+	static bool useQtScript();
 
 	//! Set the current date as Julian Day number
 	//! @param JD the Julian Day number

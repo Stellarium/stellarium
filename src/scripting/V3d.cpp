@@ -18,7 +18,6 @@
  */
 
 #include "V3d.hpp"
-#include "StelUtils.hpp"
 
 #include <QDebug>
 #include <QVariant>
@@ -26,10 +25,7 @@
 #include <cmath>
 
 
-#ifdef ENABLE_SCRIPT_QML
-#include <QJSEngine>
-
-V3d::V3d(const V3d &other) // copy constructor
+V3d::V3d(const V3d &other) : QObject() // copy constructor
 {
 	m_x=other.x();
 	m_y=other.y();
@@ -44,24 +40,66 @@ V3d & V3d::operator =(const V3d &v)
 	return *this;
 }
 
-V3d::V3d(QString &hexColor)
+QString V3d::toHex() const
+{
+	return QString("#%1%2%3")
+		.arg(qMin(255, int(m_x * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(m_y * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(m_z * 255)), 2, 16, QChar('0'));
+}
+
+/////////////////////
+V3f::V3f(const V3f &other) : QObject() // copy constructor
+{
+	m_x=other.x();
+	m_y=other.y();
+	m_z=other.z();
+}
+
+V3f & V3f::operator =(const V3f &v)
+{
+	m_x=v.x();
+	m_y=v.y();
+	m_z=v.z();
+	return *this;
+}
+
+///////////////////////
+Color::Color(const Color &other) : QObject() // copy constructor
+{
+	m_r=other.r();
+	m_g=other.g();
+	m_b=other.b();
+}
+
+Color & Color::operator =(const Color &v)
+{
+	m_r=v.r();
+	m_g=v.g();
+	m_b=v.b();
+	return *this;
+}
+
+Color::Color(QString &hexColor) : QObject()
 {
 	QColor qcol = QColor( hexColor );
 	if( qcol.isValid() )
 	{
-		m_x = qcol.redF();
-		m_y = qcol.greenF();
-		m_z = qcol.blueF();
+		m_r = qcol.redF();
+		m_g = qcol.greenF();
+		m_b = qcol.blueF();
 	}
 	else
 	{
 		qWarning() << "Bad color string: " << hexColor;
-		m_x=m_y=m_z=0.;
+		m_r=m_g=m_b=0.;
 	}
 }
 
-V3d::V3d(const Vec3d &vec) : m_x(vec[0]), m_y(vec[1]), m_z(vec[2]){}
-V3d::V3d(const Vec3f &vec) : m_x(double(vec[0])), m_y(double(vec[1])), m_z(double(vec[2])){}
-V3d::V3d(const Vec3i &vec) : m_x(double(vec[0])), m_y(double(vec[1])), m_z(double(vec[2])){}
-
-#endif
+QString Color::toHex() const
+{
+	return QString("#%1%2%3")
+		.arg(qMin(255, int(m_r * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(m_g * 255)), 2, 16, QChar('0'))
+		.arg(qMin(255, int(m_b * 255)), 2, 16, QChar('0'));
+}

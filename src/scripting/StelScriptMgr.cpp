@@ -102,16 +102,6 @@ defined in https://www.w3.org/TR/SVG11/types.htm.
 // GZ These seem not to be portable to QJSEngine use
 // GZ Maybe we don't even need to port these functions given QVariant uses. Let's try.
 
-QJSValue vec3fToString(QScriptContext* context, QJSEngine *engine)
-{
-	Q_UNUSED(engine)
-	QJSValue that = context->thisObject();
-	QJSValue rVal = that.property( "r", QScriptValue::ResolveLocal );
-	QJSValue gVal = that.property( "g", QScriptValue::ResolveLocal );
-	QJSValue bVal = that.property( "b", QScriptValue::ResolveLocal );
-	return "[r:" + rVal.toString() + ", " + "g:" + gVal.toString() + ", " +
-	    "b:" + bVal.toString() + "]";
-}
 
 QJSValue vec3fToHex(QJSContext* context, QJSEngine *engine)
 {
@@ -205,12 +195,11 @@ QJSValue createColor(QScriptContext* context, QScriptEngine *engine)
 
 #else
 #include <QtScript>
-// TODO: Allow Vec3* in the QML script branch
 // 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f
 
 /***
 The C++ type Vec3f is an array of three floats, used for representing
-colors according to the terms of the RGB color model. It is mapped to
+colors according to the terms of the RGB color model. In Qt5-based versions it is mapped to
 a JavaScript class with a constructor Vec3f, properties 'r', 'g' and 'b',
 and methods toString and toHex. The latter returns a string according to
 the pattern '#hhhhhh' (six hexadecimal digits). A second constructor,
@@ -219,10 +208,14 @@ argument to return  'white', a single argument which is either a color name
 or a '#hhhhhh' string, or three arguments, specifying the RGB values,
 floating point numbers between 0 and 1. Color names correspond to the names
 defined in https://www.w3.org/TR/SVG11/types.htm.
+
+This functionality is however deprecated. We strongly advise not to use it in scripts.
+Scripts using it will only work on Qt5-based builds of Stellarium (series 0.*)
 ***/
 
 QScriptValue vec3fToString(QScriptContext* context, QScriptEngine *engine)
 {
+	qWarning() << "The Vec3f script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	QScriptValue rVal = that.property( "r", QScriptValue::ResolveLocal );
@@ -234,6 +227,7 @@ QScriptValue vec3fToString(QScriptContext* context, QScriptEngine *engine)
 
 QScriptValue vec3fToHex(QScriptContext* context, QScriptEngine *engine)
 {
+	qWarning() << "The Vec3f script object is deprecated and will not work in future versions of Stellarium. Use V3d.toHex()";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	QScriptValue rVal = that.property( "r", QScriptValue::ResolveLocal );
@@ -247,6 +241,7 @@ QScriptValue vec3fToHex(QScriptContext* context, QScriptEngine *engine)
 
 void vec3fFromScriptValue(const QScriptValue& obj, Vec3f& c)
 {
+	qWarning() << "The Vec3f script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	c[0] = static_cast<float>(obj.property("r").toNumber());
 	c[1] = static_cast<float>(obj.property("g").toNumber());
 	c[2] = static_cast<float>(obj.property("b").toNumber());
@@ -254,6 +249,7 @@ void vec3fFromScriptValue(const QScriptValue& obj, Vec3f& c)
 
 QScriptValue vec3fToScriptValue(QScriptEngine *engine, const Vec3f& c)
 {
+	qWarning() << "The Vec3f script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	QScriptValue obj = engine->newObject();
 	obj.setProperty("r", QScriptValue(engine, static_cast<qsreal>(c[0])));
 	obj.setProperty("g", QScriptValue(engine, static_cast<qsreal>(c[1])));
@@ -267,6 +263,7 @@ QScriptValue vec3fToScriptValue(QScriptEngine *engine, const Vec3f& c)
 // Three arguments are r, g, b. One argument is "#hhhhhh", or, perhaps, a color name.
 QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 {
+	qWarning() << "The Vec3f script object is deprecated and will not work in future versions of Stellarium. Use core.vec3f()";
 	Vec3f c;
 	switch( context->argumentCount() )
 	{
@@ -318,6 +315,7 @@ QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 
 QScriptValue createColor(QScriptContext* context, QScriptEngine *engine)
 {
+	qWarning() << "The Color script object is deprecated and will not work in future versions of Stellarium. Use core.color()";
 	return engine->globalObject().property("Vec3f").construct(context->argumentsObject());
 }
 
@@ -326,7 +324,7 @@ QScriptValue createColor(QScriptContext* context, QScriptEngine *engine)
 /***
 The C++ type Vec3d is an array of three doubles, used for representing
 vectors (points or directions) in three-dimensional space. The coordinate
-system is implied by the context.  It is mapped to a JavaScript class with
+system is implied by the context.  In Qt5-based versions it is mapped to a JavaScript class with
 the constructor Vec3d, properties 'x', 'y' and 'z' (and, for historical
 reasons, also named 'r', 'g' and 'b') and a method toString. The 
 constructor may be called without an argument, returning the null vector,
@@ -335,6 +333,10 @@ interpreted to mean longtitude and latitude angles (or azimuth and
 altitude angles). These angles may be given as double values for degrees,
 or as string values denoting angles according to the patterns accepted
 by StelUtils::getDecAngle. 
+
+
+This functionality is however deprecated. We strongly advise not to use it in scripts.
+Scripts using it will only work on Qt5-based builds of Stellarium (series 0.*)
 ***/
 
 
@@ -351,18 +353,21 @@ QScriptValue vec3dToString(QScriptContext* context, QScriptEngine *engine)
 
 QScriptValue getX(QScriptContext* context, QScriptEngine *engine)
 {
+	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	return that.property( "r", QScriptValue::ResolveLocal );
 }
 QScriptValue getY(QScriptContext* context, QScriptEngine *engine)
 {
+	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	return that.property( "g", QScriptValue::ResolveLocal );
 }
 QScriptValue getZ(QScriptContext* context, QScriptEngine *engine)
 {
+	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	return that.property( "b", QScriptValue::ResolveLocal );
@@ -370,6 +375,7 @@ QScriptValue getZ(QScriptContext* context, QScriptEngine *engine)
 
 QScriptValue setX(QScriptContext* context, QScriptEngine *engine)
 {
+	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	that.setProperty("r", context->argument(0).toNumber());
@@ -377,6 +383,7 @@ QScriptValue setX(QScriptContext* context, QScriptEngine *engine)
 }
 QScriptValue setY(QScriptContext* context, QScriptEngine *engine)
 {
+	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	that.setProperty("g", context->argument(0).toNumber());
@@ -384,6 +391,7 @@ QScriptValue setY(QScriptContext* context, QScriptEngine *engine)
 }
 QScriptValue setZ(QScriptContext* context, QScriptEngine *engine)
 {
+	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	that.setProperty("b", context->argument(0).toNumber());
@@ -392,6 +400,7 @@ QScriptValue setZ(QScriptContext* context, QScriptEngine *engine)
 
 void vec3dFromScriptValue(const QScriptValue& obj, Vec3d& c)
 {
+	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	c[0] = obj.property("r").toNumber();
 	c[1] = obj.property("g").toNumber();
 	c[2] = obj.property("b").toNumber();
@@ -399,6 +408,7 @@ void vec3dFromScriptValue(const QScriptValue& obj, Vec3d& c)
 
 QScriptValue vec3dToScriptValue(QScriptEngine *engine, const Vec3d& v)
 {
+	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	QScriptValue obj = engine->newObject();
 	obj.setProperty("r", QScriptValue(engine, static_cast<qsreal>(v[0])));
 	obj.setProperty("g", QScriptValue(engine, static_cast<qsreal>(v[1])));
@@ -415,6 +425,7 @@ QScriptValue vec3dToScriptValue(QScriptEngine *engine, const Vec3d& v)
 
 QScriptValue createVec3d(QScriptContext* context, QScriptEngine *engine)
 {
+	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use core.vec3d() or a V3d object.";
 	Vec3d c;
 	switch( context->argumentCount() )
 	{
@@ -454,8 +465,8 @@ public:
 	explicit StelScriptEngineAgent(QScriptEngine *engine);
 	virtual ~StelScriptEngineAgent() Q_DECL_OVERRIDE {}
 
-	void setPauseScript(bool pause) { isPaused=pause; }
-	bool getPauseScript() { return isPaused; }
+	void setPauseScript(bool pause) { qWarning() << "setPauseScript() is deprecated and will no longer be available in future versions of Stellarium."; isPaused=pause; }
+	bool getPauseScript() { qWarning() << "getPauseScript() is deprecated and will no longer be available in future versions of Stellarium."; return isPaused; }
 
 	void positionChange(qint64 scriptId, int lineNumber, int columnNumber) Q_DECL_OVERRIDE;
 
@@ -475,6 +486,17 @@ void StelScriptMgr::defVecClasses(QScriptEngine *engine)
 	qScriptRegisterMetaType(engine, vec3dToScriptValue, vec3dFromScriptValue);
 	QScriptValue ctorVec3d = engine->newFunction(createVec3d);
 	engine->globalObject().setProperty("Vec3d", ctorVec3d);
+
+	// Configure replacement types so that new scripts should work also with the old engine.
+	qRegisterMetaType<V3d>();
+	//qScriptRegisterMetaType(engine, v3dtoScriptValue, v3dFromScriptValue);
+
+	QMetaType::registerConverter<V3d, Vec3d>(&V3d::toVec3d);
+	QMetaType::registerConverter<Vec3d, V3d>(&V3d::fromVec3d);
+
+	QScriptValue v3dMetaObject = engine->newQMetaObject(&V3d::staticMetaObject);
+	engine->globalObject().setProperty("V3d", v3dMetaObject);
+
 }
 #endif
 
@@ -507,6 +529,11 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	QScriptValue objectValue = engine->newQObject(mainAPI);
 #endif
 	engine->globalObject().setProperty("core", objectValue);
+
+	// Make a global V3d object available for calling its static methods.
+	V3d *v3dGlobal=new V3d();
+	objectValue = engine->newQObject(v3dGlobal);
+	engine->globalObject().setProperty("V3dfactory", objectValue);
 
 	// Add other classes which we want to be directly accessible from scripts
 	if(StelSkyLayerMgr* smgr = GETSTELMODULE(StelSkyLayerMgr))
@@ -951,18 +978,26 @@ void StelScriptMgr::setScriptRate(double r)
 	engine->globalObject().setProperty("scriptRateReadOnly", r);
 }
 
-#ifndef ENABLE_SCRIPT_QML
 void StelScriptMgr::pauseScript()
 {
+#ifdef ENABLE_SCRIPT_QML
+	qWarning() << "pauseScript() is no longer available and does nothing.";
+#else
+	qWarning() << "pauseScript() is deprecated and will no longer be available in future versions of Stellarium.";
 	emit scriptPaused();
 	agent->setPauseScript(true);
+#endif
 }
 
 void StelScriptMgr::resumeScript()
 {
+#ifdef ENABLE_SCRIPT_QML
+	qWarning() << "resumeScript() is no longer available and does nothing.";
+#else
+	qWarning() << "resumeScript() is deprecated and will no longer be available in future versions of Stellarium.";
 	agent->setPauseScript(false);
-}
 #endif
+}
 
 double StelScriptMgr::getScriptRate()
 {

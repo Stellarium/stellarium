@@ -95,16 +95,19 @@ StelMovementMgr.lookNorth(true);
 core.output(StelMovementMgr.getViewDirectionJ2000());
 
 
-// Test color aspects of vec3d.
-var crimson=core.vec3d("Crimson");
-core.output(crimson);
-var red=core.vec3d("#ff0000");
-core.output(red);
+// Test color aspects of Vec3f. We cannot use V3f but must use another glue class, Color. 
+var crimson=core.color("Crimson");
+core.output("Crimson is " + crimson);
+var red=core.color("#ff0000");
+core.output("Red is " + red);
 
 
 // The new JSEngine can also emit entries to the standard logfile. 
-console.log("standard logfile entry from a script");
-
+if (core.useQtScript()){
+	core.output("Using QtScript - no console output possible.");
+}else{
+	console.log("standard logfile entry from a script");
+}
 
 // Attempt with the new V3d class which may act as intermediate thing. Not sure how to bring auto-conversion to work correctly! 
 var mydir=new V3d(0.730694, 0.129957, 0.670222);

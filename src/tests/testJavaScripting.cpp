@@ -25,7 +25,6 @@
 #include <QVariantList>
 
 #include "StelScriptMgr.hpp"
-#include "VecMath.hpp"
 
 QTEST_GUILESS_MAIN(TestJavaScripting)
 
@@ -62,17 +61,42 @@ void TestJavaScripting::initTestCase()
 {
 #ifdef ENABLE_SCRIPT_QML
 	engine = new QJSEngine(this);
-	//StelScriptMgr::defVecClasses(engine); // FIXME
 #else
 	engine = new QScriptEngine(this);
-	StelScriptMgr::defVecClasses(engine);
 #endif
+	StelScriptMgr::defVecClasses(engine);
 }
 	
 void TestJavaScripting::testVec3fConstructor()
 {
 	QVariantList data;
  
+	// In ideal cases the new scripting interface works in QtScript:
+	data << "var f1 = core.vec3f(0.5, 0.4, 0.3);\n"
+		"f1.r().toFixed(1)+','+f1.g().toFixed(1)+','+f1.b().toFixed(1)\n"
+		<< "0.5,0.4,0.3"
+		<< "var f3 = core.vec3f('#00ffff');\n"
+		"f3.toString()\n"
+		<< "[r:0, g:1, b:1]"
+		<< "var f4 = core.vec3f('white');\n"
+		"f4.toString()"
+		<< "[r:1, g:1, b:1]"
+		<< "var f5 = core.vec3f('lime');\n"
+		"f5.toString()\n"
+		<< "[r:0, g:1, b:0]"
+		<< "var f6 = core.vec3f();\n"
+		"f6.toString()\n"
+		<< "[r:1, g:1, b:1]"
+		<< "var f7 = core.vec3f('darkorange');\n"
+		"f7.toHex()\n"
+		<< "#ff8c00"
+		<< "var f8 = core.color('darkorange');\n"
+		"f8.toHex()\n"
+		<< "#ff8c00"
+		<< "var f9 = core.color(f4);\n"  // still the same QScriptEngine
+		"f9.toHex()\n"
+		<< "#ffffff";
+#ifndef ENABLE_SCRIPT_QML
 	data << "var f1 = Vec3f(0.5, 0.4, 0.3);\n"
 		"f1.r.toFixed(1)+','+f1.g.toFixed(1)+','+f1.b.toFixed(1)\n"
 		<< "0.5,0.4,0.3"
@@ -97,6 +121,7 @@ void TestJavaScripting::testVec3fConstructor()
 		<< "var f9 = Color(f4);\n"  // still the same QScriptEngine
 		"f9.toHex()\n"
 		<< "#ffffff";
+#endif
 
 	while (data.count() >= 4)
 	{
@@ -111,12 +136,21 @@ void TestJavaScripting::testVec3fConstructorFail()
 {
 	QVariantList data;
 
+	// In ideal cases the new scripting interface works in QtScript:
+	data << "var f2 = new V3d(core.vec3f(1, 2, 3));\n"
+		"f2.toString()\n"
+		<< "error"
+		<< "var f10 = new V3d(core.color('nosuchcolor'));\n"
+		"f10.toString()\n"
+		<< "error";
+#ifndef ENABLE_SCRIPT_QML
 	data << "var f2 = Vec3f(1, 2, 3);\n"
 		"f2.toString()\n"
 		<< "error"
 		<< "var f10 = Color('nosuchcolor');\n"
 		"f10.toString()\n"
 		<< "error";
+#endif
 
 	while (data.count() >= 4)
 	{
@@ -131,6 +165,22 @@ void TestJavaScripting::testVec3dConstructor()
 {
 	QVariantList data;
 
+	// In ideal cases the new scripting interface works in QtScript:
+	data << "var v = new V3d(core.vec3d(4,5,6));\n"
+		"v.r() + ',' + v.g() + ',' + v.b()\n"
+		<< "4,5,6"
+		<< "v.toString()\n"
+		<< "[4, 5, 6]"
+		<< "v.x() + '/' + v.y() + '/' + v.z()\n"
+		<< "4/5/6"
+		<< "v.setX(40); v.setY(50); v.setZ(60);\n"
+		"v.toString()\n"
+		<< "[40, 50, 60]";
+		// This strictly does no longer work.
+		//<< "var w = Vec3d( 90, 90 );\n"
+		//"w.x.toFixed(1) + ',' + w.y.toFixed(1) + ',' + w.z.toFixed(1)\n"
+		//<< "0.0,0.0,1.0";   // toString shows coordinates off by epsilon
+#ifndef ENABLE_SCRIPT_QML
 	data << "var v = Vec3d(4,5,6);\n"
 		"v.r + ',' + v.g + ',' + v.b\n"
 		<< "4,5,6"
@@ -150,6 +200,7 @@ void TestJavaScripting::testVec3dConstructor()
 		    "a.toString()\n"
 		 << "[?, ?, ?]";
 	***/
+#endif
 
 	while (data.count() >= 4)
 	{
