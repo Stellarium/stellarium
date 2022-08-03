@@ -22,7 +22,6 @@
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
 #include "StelProjector.hpp"
-#include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelGui.hpp"
 #include "SkyGui.hpp"
@@ -32,7 +31,6 @@
 #include "StelOpenGL.hpp"
 #include "StelOpenGLArray.hpp"
 #include "StelProjector.hpp"
-#include "StelMovementMgr.hpp"
 
 #include <QDebug>
 #include <QDir>

@@ -23,8 +23,6 @@
 #include "StelCore.hpp"
 #include "StelApp.hpp"
 #include "StelTranslator.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelSkyLayerMgr.hpp"
 #include "StelUtils.hpp"
 
 #include <QNetworkReply>

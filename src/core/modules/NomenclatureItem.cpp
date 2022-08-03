@@ -18,13 +18,11 @@
  */
 
 #include "NomenclatureItem.hpp"
-#include "NomenclatureMgr.hpp"
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelTranslator.hpp"
-#include "StelModuleMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelUtils.hpp"
 

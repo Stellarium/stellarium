@@ -28,7 +28,7 @@
 #ifdef OPENGL_DEBUG_LOGGING
 #include <QOpenGLDebugMessage>
 #endif
-#include "StelUtils.hpp"
+#include "VecMath.hpp"
 
 class StelGLWidget;
 class StelGraphicsScene;

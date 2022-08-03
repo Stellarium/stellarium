@@ -36,10 +36,7 @@
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
-#include "StelSkyImageTile.hpp"
 #include "StelPainter.hpp"
-#include "RefractionExtinction.hpp"
-#include "StelActionMgr.hpp"
 
 #include <algorithm>
 #include <vector>

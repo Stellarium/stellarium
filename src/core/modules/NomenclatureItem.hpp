@@ -27,10 +27,8 @@
 #include <QList>
 
 #include "StelObject.hpp"
-#include "StelTextureTypes.hpp"
 #include "StelFader.hpp"
 #include "StelTranslator.hpp"
-#include "Planet.hpp"
 #include "SolarSystem.hpp"
 
 class StelPainter;

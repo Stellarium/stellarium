@@ -43,7 +43,6 @@
 #include "StelUtils.hpp"
 #include "StelPainter.hpp"
 #include "TrailGroup.hpp"
-#include "RefractionExtinction.hpp"
 
 #include "AstroCalcDialog.hpp"
 #include "StelObserver.hpp"

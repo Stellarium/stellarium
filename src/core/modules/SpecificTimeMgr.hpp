@@ -20,7 +20,6 @@
 #define SPECIFICTIMEMGR_HPP
 
 #include "SolarSystem.hpp"
-#include "StelObjectModule.hpp"
 #include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
 

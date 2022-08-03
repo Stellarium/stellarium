@@ -28,7 +28,6 @@
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
 #include "Planet.hpp"
-#include "StelGui.hpp"
 #include "StelHips.hpp"
 
 #include <QFont>

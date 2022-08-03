@@ -28,13 +28,11 @@
 #include "Planet.hpp"
 #include "Orbit.hpp"
 #include "planetsephems/precession.h"
-#include "planetsephems/EphemWrapper.hpp"
 #include "StelObserver.hpp"
 #include "StelProjector.hpp"
 #include "sidereal_time.h"
 #include "StelTextureMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StarMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelTranslator.hpp"
@@ -44,7 +42,6 @@
 #include "StelOpenGLArray.hpp"
 #include "StelHips.hpp"
 #include "RefractionExtinction.hpp"
-#include "StelObjectMgr.hpp"
 
 #include <limits>
 #include <QByteArray>

@@ -28,7 +28,6 @@
 #include "GeomMath.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelProjectorType.hpp"
 #include "RotationElements.hpp"
 
 #include <QCache>

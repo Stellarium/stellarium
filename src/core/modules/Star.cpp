@@ -21,7 +21,6 @@
 
 #include "Star.hpp"
 #include "StarMgr.hpp"
-#include "StelUtils.hpp"
 
 #include <QDebug>
 #include <QString>

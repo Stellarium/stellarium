@@ -23,7 +23,6 @@
 
 #include "StarWrapper.hpp"
 #include "ZoneArray.hpp"
-#include "SolarSystem.hpp"
 
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"

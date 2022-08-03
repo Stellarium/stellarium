@@ -21,6 +21,7 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelGui.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -72,11 +73,11 @@ using namespace QtCharts;
 #include "ui_astroCalcDialog.h"
 
 #include "external/qxlsx/xlsxdocument.h"
-#include "external/qxlsx/xlsxchartsheet.h"
+//#include "external/qxlsx/xlsxchartsheet.h"
 #include "external/qxlsx/xlsxcellrange.h"
-#include "external/qxlsx/xlsxchart.h"
-#include "external/qxlsx/xlsxrichstring.h"
-#include "external/qxlsx/xlsxworkbook.h"
+//#include "external/qxlsx/xlsxchart.h"
+//#include "external/qxlsx/xlsxrichstring.h"
+//#include "external/qxlsx/xlsxworkbook.h"
 using namespace QXlsx;
 
 QVector<Ephemeris> AstroCalcDialog::EphemerisList;

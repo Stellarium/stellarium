@@ -18,11 +18,10 @@
  */
 
 #include "ZoneArray.hpp"
-#include "StelApp.hpp"
-#include "StelFileMgr.hpp"
 #include "StelGeodesicGrid.hpp"
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
+#include "StarMgr.hpp"
 
 #include <QDebug>
 #include <QFile>

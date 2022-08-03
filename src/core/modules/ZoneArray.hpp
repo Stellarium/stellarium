@@ -28,7 +28,6 @@
 
 #include "StelCore.hpp"
 #include "StelSkyDrawer.hpp"
-#include "StarMgr.hpp"
 
 #include <QString>
 #include <QFile>
