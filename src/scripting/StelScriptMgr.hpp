@@ -241,13 +241,13 @@ public slots:
 	//! @note For storing to absolute path names, set [scripts]/flag_script_allow_write_absolute_path=true.
 	void saveOutputAs(const QString &filename);
 
-#ifndef ENABLE_SCRIPT_QML
 	//! Pause a running script.
+	//! @note This method only works with the Qt5-based scripting engine.
 	void pauseScript();
 
 	//! Resume a paused script.
+	//! @note This method only works with the Qt5-based scripting engine.
 	void resumeScript();
-#endif
 
 private slots:
 	//! Called at the end of the running threa
