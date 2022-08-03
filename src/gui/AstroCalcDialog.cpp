@@ -33,7 +33,6 @@
 #include "Planet.hpp"
 #include "NebulaMgr.hpp"
 #include "Nebula.hpp"
-#include "StelActionMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "planetsephems/sidereal_time.h"
@@ -295,6 +294,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(dsoMgr, SIGNAL(minSizeLimitChanged(double)), this, SLOT(currentCelestialPositions()));
 	connect(dsoMgr, SIGNAL(maxSizeLimitChanged(double)), this, SLOT(currentCelestialPositions()));
 
+	ui->hecSelectedMinorPlanetsCheckBox->setChecked(conf->value("astrocalc/flag_hec_minor_planets", false).toBool());
+	connect(ui->hecSelectedMinorPlanetsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveHECFlagMinorPlanets(bool)));
 	connect(ui->hecPositionsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentHECPosition(QModelIndex)));
 	connect(ui->hecPositionsTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(markCurrentHECPosition(QModelIndex)));
 	connect(ui->hecPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentHECPositions()));
@@ -573,6 +574,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->moonAltitudeCheckBox->setStyleSheet(style);
 	ui->positiveAltitudeOnlyCheckBox->setStyleSheet(style);
 	ui->monthlyElevationPositiveCheckBox->setStyleSheet(style);
+	ui->hecSelectedMinorPlanetsCheckBox->setStyleSheet(style);
 
 	// chartview exports:
 	connect(ui->hecPositionsExportButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->hecPositionsChartView); });
@@ -1521,27 +1523,50 @@ void AstroCalcDialog::fillHECPositionTable(QString objectName, QChar objectSymbo
 	treeItem->setToolTip(HECColumnDistance, q_("Distance from the Sun at the moment of computation of position"));
 }
 
+void AstroCalcDialog::saveHECFlagMinorPlanets(bool b)
+{
+	conf->setValue("astrocalc/flag_hec_minor_planets", b);
+	currentHECPositions();
+}
+
 void AstroCalcDialog::currentHECPositions()
 {
 	QPair<QString, QString> coordStrings;
 	hecObjects.clear();
 	initListHECPositions();
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	const bool minorPlanets = ui->hecSelectedMinorPlanetsCheckBox->isChecked();
 
 	const QMap<QString, QChar> symbol = {
 		{ "Mercury", QChar(0x263F) }, { "Venus",   QChar(0x2640) }, { "Earth",   QChar(0x2641) },
 		{ "Mars",    QChar(0x2642) }, { "Jupiter", QChar(0x2643) }, { "Saturn",  QChar(0x2644) },
-		{ "Uranus",  QChar(0x2645) }, { "Neptune", QChar(0x2646) }
+		{ "Uranus",  QChar(0x2645) }, { "Neptune", QChar(0x2646) }, { "Pluto",   QChar(0x2647) }
 	};
 
 	HECPosition object;
 	const double JD = core->getJD();
 	ui->hecPositionsTimeLabel->setText(q_("Positions on %1").arg(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))));
 
-	QList<PlanetP> planets = solarSystem->getAllPlanets();
-	for (const auto& planet : qAsConst(planets))
+	QList<PlanetP> planets;
+	QList<PlanetP> allplanets = solarSystem->getAllPlanets();
+	planets.clear();
+	for (const auto& planet : qAsConst(allplanets))
 	{
 		if (planet->getPlanetType() == Planet::isPlanet)
+			planets.append(planet);
+	}
+	if (minorPlanets)
+	{
+		planets.append(solarSystem->searchByEnglishName("Pluto"));
+		planets.append(solarSystem->searchMinorPlanetByEnglishName("Ceres"));
+		planets.append(solarSystem->searchMinorPlanetByEnglishName("Pallas"));
+		planets.append(solarSystem->searchMinorPlanetByEnglishName("Juno"));
+		planets.append(solarSystem->searchMinorPlanetByEnglishName("Vesta"));
+	}
+
+	for (const auto& planet : qAsConst(planets))
+	{
+		if (!planet.isNull())
 		{
 			Vec3d pos = planet->getHeliocentricEclipticPos();
 			double distance = pos.length();
@@ -1581,6 +1606,7 @@ void AstroCalcDialog::drawHECGraph(QString selectedObject)
 	QScatterSeries *seriesSelectedPlanet = new QScatterSeries();
 	QScatterSeries *seriesSun = new QScatterSeries();
 	seriesSun->append(0., -1.5);
+	const bool minorPlanets = ui->hecSelectedMinorPlanetsCheckBox->isChecked();
 
 	for (const auto& planet : qAsConst(hecObjects))
 	{
@@ -1630,12 +1656,18 @@ void AstroCalcDialog::drawHECGraph(QString selectedObject)
 	radialAxis->append("5", log(5.0));
 	radialAxis->append("10", log(10.0));
 	radialAxis->append("20", log(20.0));
-	radialAxis->append("30", log(30.0));
+	if (minorPlanets)
+		radialAxis->append("40", log(40.0));
+	else
+		radialAxis->append("30", log(30.0));
 	radialAxis->setLabelsPosition(QCategoryAxis::AxisLabelsPositionOnValue);
 	radialAxis->setLabelsColor(labelColor);
 	radialAxis->setGridLineColor(axisColor);
 	radialAxis->setLineVisible(false);
-	radialAxis->setRange(-1.5, log(32.0));
+	if (minorPlanets)
+		radialAxis->setRange(-1.5, log(52.0));
+	else
+		radialAxis->setRange(-1.5, log(32.0));
 	chart->addAxis(radialAxis, QPolarChart::PolarOrientationRadial);
 
 	seriesPlanets->attachAxis(angularAxis);
