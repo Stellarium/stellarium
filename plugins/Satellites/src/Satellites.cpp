@@ -259,7 +259,7 @@ void Satellites::bindingGroups()
 	QString satGroup = N_("Satellites");
 	QString showSatGroup = q_("Show satellites from the group");
 	QString hideSatGroup = q_("Hide satellites from the group");
-    for (auto constIterator = groups.constBegin(); constIterator != groups.constEnd(); ++constIterator)
+	for (auto constIterator = groups.constBegin(); constIterator != groups.constEnd(); ++constIterator)
 	{
 		QString groupId = (*constIterator).toLocal8Bit().constData();
 		QString actionShowName = QString("actionShow_Satellite_Group_%1").arg(groupId);
@@ -1433,7 +1433,7 @@ QPair<double, double> Satellites::getStdMagRCS(const TleData& tleData)
 
 	// special case: chinese space station / CSS (TIANHE1)
 	if (sid==48274 && stdMag > 90.)
-		stdMag = -1.1; // Mir complex has std. magnitude -1.0 and maximum length 31 meters, the CSS has maximum length 37 meters, so, std. magnitude -1.1 is good approximation here
+		stdMag = 0.87; // see details: http://www.satobs.org/seesat/Aug-2022/0030.html
 
 	// special case: starlink satellites; details: http://satobs.org/seesat/Apr-2020/0174.html
 	if (!rcsList.contains(sid) && tleData.name.startsWith("STARLINK"))
