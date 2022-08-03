@@ -84,7 +84,7 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc
                  qt6-multimedia-dev libqt6serialport6-dev \
                  qt6-positioning-dev libqt6positioning6-plugins libgps-dev \
                  libqt6webchannel6-dev libqt6webenginewidgets6 qt6-webengine-dev qt6-webengine-dev-tools \
-                 libqt6charts6-dev libqt6opengl6-dev
+                 libqt6webenginecore6-bin libqt6charts6-dev libqt6opengl6-dev
 ```
 
 
