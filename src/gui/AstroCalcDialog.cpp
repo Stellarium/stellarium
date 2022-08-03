@@ -4776,7 +4776,7 @@ void AstroCalcDialog::populatePlanetList()
 	}
 	// special case: selected dwarf and minor planets
 	planets.clear();
-	planets.append(solarSystem->searchMinorPlanetByEnglishName("Pluto"));
+	planets.append(solarSystem->searchByEnglishName("Pluto"));
 	planets.append(solarSystem->searchMinorPlanetByEnglishName("Ceres"));
 	planets.append(solarSystem->searchMinorPlanetByEnglishName("Pallas"));
 	planets.append(solarSystem->searchMinorPlanetByEnglishName("Juno"));
