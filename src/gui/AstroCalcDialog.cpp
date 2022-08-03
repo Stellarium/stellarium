@@ -4755,7 +4755,6 @@ void AstroCalcDialog::populatePlanetList()
 
 	QComboBox* planetList = ui->object1ComboBox;
 	QList<PlanetP> planets = solarSystem->getAllPlanets();
-	const StelTranslator& trans = localeMgr->getSkyTranslator();
 	QString cpName = core->getCurrentPlanet()->getEnglishName();
 
 	// Save the current selection to be restored later
@@ -4769,23 +4768,23 @@ void AstroCalcDialog::populatePlanetList()
 	{
 		// major planets and the Sun
 		if ((planet->getPlanetType() == Planet::isPlanet || planet->getPlanetType() == Planet::isStar) && planet->getEnglishName() != cpName)
-			planetList->addItem(trans.qtranslate(planet->getNameI18n()), planet->getEnglishName());
+			planetList->addItem(planet->getNameI18n(), planet->getEnglishName());
 
 		// moons of the current planet
 		if (planet->getPlanetType() == Planet::isMoon && planet->getEnglishName() != cpName && planet->getParent() == core->getCurrentPlanet())
-			planetList->addItem(trans.qtranslate(planet->getNameI18n()), planet->getEnglishName());
+			planetList->addItem(planet->getNameI18n(), planet->getEnglishName());
 	}
 	// special case: selected dwarf and minor planets
 	planets.clear();
-	planets.append(solarSystem->searchByEnglishName("Pluto"));
-	planets.append(solarSystem->searchByEnglishName("Ceres"));
-	planets.append(solarSystem->searchByEnglishName("Pallas"));
-	planets.append(solarSystem->searchByEnglishName("Juno"));
-	planets.append(solarSystem->searchByEnglishName("Vesta"));
+	planets.append(solarSystem->searchMinorPlanetByEnglishName("Pluto"));
+	planets.append(solarSystem->searchMinorPlanetByEnglishName("Ceres"));
+	planets.append(solarSystem->searchMinorPlanetByEnglishName("Pallas"));
+	planets.append(solarSystem->searchMinorPlanetByEnglishName("Juno"));
+	planets.append(solarSystem->searchMinorPlanetByEnglishName("Vesta"));
 	for (const auto& planet : planets)
 	{
 		if (!planet.isNull() && planet->getEnglishName()!=cpName)
-			planetList->addItem(trans.qtranslate(planet->getNameI18n()), planet->getEnglishName());
+			planetList->addItem(planet->getNameI18n(), planet->getEnglishName());
 	}
 	// Restore the selection
 	index = planetList->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
