@@ -438,6 +438,8 @@ private:
 	void saveTableAsBookmarks(const QString& fileName, QTreeWidget* tWidget);
 
 	void populateToolTips();
+	//! Get the list of selected dwarf and minor planets
+	QList<PlanetP> getSelectedMinorPlanets();
 
 	//! Update header names for celestial positions tables
 	void setCelestialPositionsHeaderNames();

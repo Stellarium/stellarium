@@ -1556,13 +1556,7 @@ void AstroCalcDialog::currentHECPositions()
 			planets.append(planet);
 	}
 	if (minorPlanets)
-	{
-		planets.append(solarSystem->searchByEnglishName("Pluto"));
-		planets.append(solarSystem->searchMinorPlanetByEnglishName("Ceres"));
-		planets.append(solarSystem->searchMinorPlanetByEnglishName("Pallas"));
-		planets.append(solarSystem->searchMinorPlanetByEnglishName("Juno"));
-		planets.append(solarSystem->searchMinorPlanetByEnglishName("Vesta"));
-	}
+		planets.append(getSelectedMinorPlanets());
 
 	for (const auto& planet : qAsConst(planets))
 	{
@@ -4808,12 +4802,8 @@ void AstroCalcDialog::populatePlanetList()
 	}
 	// special case: selected dwarf and minor planets
 	planets.clear();
-	planets.append(solarSystem->searchByEnglishName("Pluto"));
-	planets.append(solarSystem->searchMinorPlanetByEnglishName("Ceres"));
-	planets.append(solarSystem->searchMinorPlanetByEnglishName("Pallas"));
-	planets.append(solarSystem->searchMinorPlanetByEnglishName("Juno"));
-	planets.append(solarSystem->searchMinorPlanetByEnglishName("Vesta"));
-	for (const auto& planet : planets)
+	planets = getSelectedMinorPlanets();
+	for (const auto& planet : qAsConst(planets))
 	{
 		if (!planet.isNull() && planet->getEnglishName()!=cpName)
 			planetList->addItem(planet->getNameI18n(), planet->getEnglishName());
@@ -8580,4 +8570,21 @@ void AstroCalcDialog::saveTableAsBookmarks(const QString &fileName, QTreeWidget*
 	StelJsonParser::write(bmList, &bookmarksFile);
 	bookmarksFile.flush();
 	bookmarksFile.close();
+}
+
+QList<PlanetP> AstroCalcDialog::getSelectedMinorPlanets()
+{
+	// The list of selected dwarf and minor planets is obtainded from Astronomical Almanacs
+	const QStringList minorPlanets = { "Ceres", "Pallas", "Juno", "Vesta" };
+	QList<PlanetP> planets;
+	// special case: Pluto
+	planets.append(solarSystem->searchByEnglishName("Pluto"));
+	for (auto &planet: minorPlanets)
+	{
+		PlanetP mp = solarSystem->searchMinorPlanetByEnglishName(planet);
+		if (!mp.isNull())
+			planets.append(mp);
+	}
+
+	return planets;
 }
