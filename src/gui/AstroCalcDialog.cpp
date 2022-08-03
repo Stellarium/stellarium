@@ -913,6 +913,7 @@ void AstroCalcDialog::setHECPositionsHeaderNames()
 	hecPositionsHeader.clear();
 	// TRANSLATORS: name of object
 	hecPositionsHeader << q_("Name");
+	hecPositionsHeader << q_("Symbol");
 	// TRANSLATORS: ecliptic latitude
 	hecPositionsHeader << q_("Latitude");
 	// TRANSLATORS: ecliptic longitude
@@ -1503,11 +1504,13 @@ void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex& modelInd
 	}	
 }
 
-void AstroCalcDialog::fillHECPositionTable(QString objectName, QString latitude, QString longitude, double distance)
+void AstroCalcDialog::fillHECPositionTable(QString objectName, QChar objectSymbol, QString latitude, QString longitude, double distance)
 {
 	AHECPosTreeWidgetItem* treeItem = new AHECPosTreeWidgetItem(ui->hecPositionsTreeWidget);
 	treeItem->setText(HECColumnName, objectName);
 	treeItem->setTextAlignment(HECColumnName, Qt::AlignLeft);
+	treeItem->setText(HECColumnSymbol, objectSymbol);
+	treeItem->setTextAlignment(HECColumnSymbol, Qt::AlignHCenter);
 	treeItem->setText(HECColumnLatitude, latitude);
 	treeItem->setTextAlignment(HECColumnLatitude, Qt::AlignRight);
 	treeItem->setText(HECColumnLongitude, longitude);
@@ -1524,6 +1527,12 @@ void AstroCalcDialog::currentHECPositions()
 	hecObjects.clear();
 	initListHECPositions();
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+
+	const QMap<QString, QChar> symbol = {
+		{ "Mercury", QChar(0x263F) }, { "Venus",   QChar(0x2640) }, { "Earth",   QChar(0x2641) },
+		{ "Mars",    QChar(0x2642) }, { "Jupiter", QChar(0x2643) }, { "Saturn",  QChar(0x2644) },
+		{ "Uranus",  QChar(0x2645) }, { "Neptune", QChar(0x2646) }
+	};
 
 	HECPosition object;
 	const double JD = core->getJD();
@@ -1551,7 +1560,7 @@ void AstroCalcDialog::currentHECPositions()
 				coordStrings.second = StelUtils::radToDmsStr(longitude, true);
 			}
 
-			fillHECPositionTable(planet->getNameI18n(), coordStrings.first, coordStrings.second, distance);
+			fillHECPositionTable(planet->getNameI18n(), symbol.value(planet->getCommonEnglishName(), QChar(0x200B)), coordStrings.first, coordStrings.second, distance);
 			object.objectName = planet->getNameI18n();
 			object.angle = 360.-dl;
 			object.dist = log(distance);
@@ -1637,7 +1646,7 @@ void AstroCalcDialog::drawHECGraph(QString selectedObject)
 
 	seriesSelectedPlanet->attachAxis(angularAxis);
 	seriesSelectedPlanet->attachAxis(radialAxis);
-	seriesSelectedPlanet->setMarkerSize(7);
+	seriesSelectedPlanet->setMarkerSize(9);
 	seriesSelectedPlanet->setColor(Qt::green);
 	seriesSelectedPlanet->setBorderColor(Qt::transparent);
 

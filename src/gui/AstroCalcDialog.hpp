@@ -98,6 +98,7 @@ public:
 	//! @enum HECPositionsColumns
 	enum HECPositionsColumns {
 		HECColumnName,          //! name of the planet
+		HECColumnSymbol,        //! symbol of the planet
 		HECColumnLatitude,      //! heliocentric ecliptical latitude
 		HECColumnLongitude,     //! heliocentric ecliptical longitude
 		HECColumnDistance,      //! distance
@@ -518,7 +519,7 @@ private:
 					QString angularSize, QString angularSizeToolTip, QString extraData,
 					QString extraDataToolTip, QString transitTime, QString maxElevation,
 					QString sElongation, QString objectType);
-	void fillHECPositionTable(QString objectName, QString latitude, QString longitude, double distance);
+	void fillHECPositionTable(QString objectName, QChar objectSymbol, QString latitude, QString longitude, double distance);
 
 	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculates
