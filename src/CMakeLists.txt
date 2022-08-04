@@ -558,6 +558,7 @@ IF(WIN32)
              COMMAND \"${WINDEPLOYQT_COMMAND}\"
 		     --dir \"\${CMAKE_INSTALL_PREFIX}/qtstuff\"
                      --no-translations
+		     --verbose 1
                      --compiler-runtime
                      \"\${CMAKE_INSTALL_PREFIX}/bin/stellarium.exe\"
              WORKING_DIRECTORY \"\${CMAKE_INSTALL_PRERIX}/bin\"
