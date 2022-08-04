@@ -128,6 +128,9 @@ void ConfigurationDialog::retranslate()
 		//(trigger re-displaying the description of the current item)
 		#ifdef ENABLE_SCRIPTING
 		scriptSelectionChanged(ui->scriptListWidget->currentItem()->text());
+		#else
+		// we had hidden and re-sorted the tabs, and must now manually re-set the label.
+		ui->stackListWidget->item(5)->setText(QCoreApplication::translate("configurationDialogForm", "Plugins", nullptr));
 		#endif
 
 		populateDitherList();
@@ -415,8 +418,10 @@ void ConfigurationDialog::createDialogContent()
 	populateScriptsList();
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateScriptsList()));
 	#else
-	ui->configurationStackedWidget->removeWidget(ui->page_Scripts);
-	delete ui->stackListWidget->takeItem(5);
+	ui->configurationStackedWidget->removeWidget(ui->page_Scripts); // only hide, no delete!
+	QListWidgetItem *item = ui->stackListWidget->takeItem(5); // take out from its place.
+	ui->stackListWidget->addItem(item); // We must add it back to the end of the tabs, as...
+	ui->stackListWidget->item(6)->setHidden(true); // deleting would cause a crash during retranslation. (GH#2544)
 	#endif
 
 	// plugins control
