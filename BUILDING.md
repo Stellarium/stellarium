@@ -353,6 +353,9 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 | CMAKE_INSTALL_PREFIX          | path   | *       | Prefix where to install Stellarium
 | CMAKE_PREFIX_PATH             | path   |         | Additional path to look for libraries
 | CMAKE_BUILD_TYPE              | string | Release | Build type of Stellarium
+| CMAKE_OSX_ARCHITECTURES       | string | arm64;x86_64 | macOS architecture**
+| CMAKE_OSX_DEPLOYMENT_TARGET   | string | 11.0    | Minimum macOS deployment version**
+| OPENGL_DEBUG_LOGGING          | bool   | OFF     | Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger
 | ENABLE_NLS                    | bool   | ON      | Enable interface translation
 | ENABLE_GPS                    | bool   | ON      | Enable GPS support
 | ENABLE_LIBGPS                 | bool   | ON      | Enable GPS support with libGPS library (N/A on Windows)
@@ -387,6 +390,7 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 Notes:
  \* `/usr/local` on Unix-like systems, `C:\Program Files` or `C:\Program Files (x86)`
    on Windows depending on OS type (32 or 64 bit) and build configuration.
+ \** Default values for Qt6 environment on macOS
 
 ## Test-run compiled program without installing
 
