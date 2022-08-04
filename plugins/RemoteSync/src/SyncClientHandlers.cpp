@@ -236,7 +236,7 @@ bool ClientSelectionHandler::handleMessage(QDataStream &stream, SyncProtocol::tP
 	//this might cause problems if 2 objects of different types have the same name!
 	QList<StelObjectP> selection;
 
-	for (const auto& selectedObject : msg.selectedObjects)
+	for (const auto& selectedObject : qAsConst(msg.selectedObjects))
 	{
 		StelObjectP obj = objMgr->searchByID(selectedObject.first, selectedObject.second);
 		if(obj)
@@ -263,7 +263,7 @@ ClientStelPropertyUpdateHandler::ClientStelPropertyUpdateHandler(bool skipGuiPro
 	QString pattern("^(");
 	//construct a regular expression for the excludes
 	bool first = true;
-	for (auto str : excludeProps)
+	for (auto &str : excludeProps)
 	{
 		QString tmp = QRegularExpression::escape(str);
 		// replace escaped asterisks with the regex "all"

@@ -57,14 +57,14 @@ public:
 	void setFadeDuration(float duration) {fader.setDuration(static_cast<int>(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
 	bool isDisplayed() const {return fader;}
-	void setLineThickness(const int thickness) {lineThickness = thickness;}
-	int getLineThickness() const {return lineThickness;}
+	void setLineThickness(const float thickness) {lineThickness = thickness;}
+	float getLineThickness() const {return lineThickness;}
 private:
 	Vec3f color;
 	StelCore::FrameType frameType;
 	QFont font;
 	LinearFader fader;
-	int lineThickness;
+	float lineThickness;
 };
 
 //! @class SkyPoint
@@ -124,6 +124,7 @@ public:
 	{
 		EQUATOR_J2000,
 		EQUATOR_OF_DATE,
+		FIXED_EQUATOR,
 		ECLIPTIC_J2000,
 		ECLIPTIC_OF_DATE,
 		PRECESSIONCIRCLE_N,
@@ -161,10 +162,10 @@ public:
 	void setLabeled(const bool displayed){showLabel = displayed;}
 	bool isLabeled() const {return showLabel;}
 	void setFontSize(int newSize);
-	void setLineThickness(const int thickness) {lineThickness = thickness;}
-	int getLineThickness() const {return lineThickness;}
-	void setPartThickness(const int thickness) {partThickness = thickness;}
-	int getPartThickness() const {return partThickness;}
+	void setLineThickness(const float thickness) {lineThickness = thickness;}
+	float getLineThickness() const {return lineThickness;}
+	void setPartThickness(const float thickness) {partThickness = thickness;}
+	float getPartThickness() const {return partThickness;}
 	//! Re-translates the label and sets the frameType. Must be called in the constructor!
 	void updateLabel();
 	static void setSolarSystem(SolarSystem* ss);
@@ -176,8 +177,8 @@ private:
 	LinearFader fader;
 	QFont font;
 	QString label;
-	int lineThickness;
-	int partThickness;
+	float lineThickness;
+	float partThickness;
 	bool showPartitions;
 	bool showLabel;
 	static QMap<int, double> precessionPartitions;
@@ -271,12 +272,12 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 					lon = 0.;
 
 				const double delta = raAngle<M_PI ? M_PI : -M_PI;				
-				if (std::fabs(lon-raAngle) < 0.01 || (lon==0. && raAngle!=M_PI))					
+				if (std::fabs(lon-raAngle) < 0.01 || (lon==0. && !qFuzzyCompare(raAngle, M_PI)))
 					textAngle = raAngle;
 				else
 					textAngle = raAngle+delta;
 
-				if (raAngle==2*M_PI && delta==-M_PI)
+				if (qFuzzyCompare(raAngle, 2*M_PI) && qFuzzyCompare(delta, -M_PI))
 					textAngle = 0;
 
 				if (useOldAzimuth)
@@ -291,6 +292,8 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 			}
 			case StelCore::FrameObservercentricEclipticJ2000:
 			case StelCore::FrameObservercentricEclipticOfDate:
+			case StelCore::FrameGalactic:
+			case StelCore::FrameSupergalactic:
 			{
 				raAngle = d->raAngle;
 				if (raAngle<0.)
@@ -308,7 +311,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				else
 					textAngle = raAngle+delta;
 
-				if (raAngle==2*M_PI && delta==-M_PI)
+				if (qFuzzyCompare(raAngle, 2*M_PI) && qFuzzyCompare(delta, -M_PI))
 					textAngle = 0;
 
 				if (withDecimalDegree)
@@ -340,16 +343,13 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 					textAngle = -raAngle-delta+M_PI;
 				}
 
+				if (d->frameType==StelCore::FrameFixedEquatorial)
+					textAngle=2.*M_PI-textAngle;
 
 				if (withDecimalDegree)
 					text = StelUtils::radToDecDegStr(textAngle, 4, false, true);
 				else
-				{
-					if (d->frameType == StelCore::FrameGalactic || d->frameType == StelCore::FrameSupergalactic)
-						text = StelUtils::radToDmsStrAdapt(textAngle);
-					else
-						text = StelUtils::radToHmsStrAdapt(textAngle);
-				}
+					text = StelUtils::radToHmsStrAdapt(textAngle);
 			}
 		}
 	}
@@ -364,7 +364,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	if (angleDeg>90.f || angleDeg<-90.f)
 	{
 		angleDeg+=180.f;
-		xshift=-(d->sPainter->getFontMetrics().boundingRect(text).width() + xshift*ppx);
+		xshift=-(static_cast<float>(d->sPainter->getFontMetrics().boundingRect(text).width()) + xshift*ppx);
 	}
 
 	d->sPainter->drawText(static_cast<float>(screenPos[0]), static_cast<float>(screenPos[1]), text, angleDeg, xshift*ppx, yshift*ppx);
@@ -375,7 +375,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 //! Draw the sky grid in the current frame
 void SkyGrid::draw(const StelCore* core) const
 {
-	const StelProjectorP prj = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? StelCore::RefractionAuto : StelCore::RefractionOff);
+	const StelProjectorP prj = core->getProjection(frameType, (frameType!=StelCore::FrameAltAz && frameType!=StelCore::FrameFixedEquatorial) ? StelCore::RefractionAuto : StelCore::RefractionOff);
 	if (fader.getInterstate() <= 0.f)
 		return;
 
@@ -399,13 +399,13 @@ void SkyGrid::draw(const StelCore* core) const
 	const double gridStepParallelRad = M_PI_180*getClosestResolutionDMS(static_cast<double>(prj->getPixelPerRadAtCenter()));
 	double gridStepMeridianRad;
 	if (northPoleInViewport || southPoleInViewport)
-		gridStepMeridianRad = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic || frameType==StelCore::FrameSupergalactic) ? M_PI/180.* 10. : M_PI/180.* 15.;
+		gridStepMeridianRad = (frameType==StelCore::FrameAltAz) ? M_PI_180 * 10. : M_PI_180 * 15.;
 	else
 	{
-		const double closestResLon = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic || frameType==StelCore::FrameSupergalactic) ?
+		const double closestResLon = (frameType==StelCore::FrameAltAz) ?
 					getClosestResolutionDMS(static_cast<double>(prj->getPixelPerRadAtCenter())*std::cos(lat2)) :
 					getClosestResolutionHMS(static_cast<double>(prj->getPixelPerRadAtCenter())*std::cos(lat2));
-		gridStepMeridianRad = M_PI/180.* closestResLon;
+		gridStepMeridianRad = M_PI_180 * closestResLon;
 	}
 
 	// Get the bounding halfspace
@@ -424,7 +424,7 @@ void SkyGrid::draw(const StelCore* core) const
 	// Initialize a painter and set OpenGL state
 	StelPainter sPainter(prj);
 	sPainter.setBlending(true);
-	if (lineThickness>1)
+	if (lineThickness>1.f)
 		sPainter.setLineWidth(lineThickness); // set line thickness
 	sPainter.setLineSmooth(true);
 
@@ -701,6 +701,10 @@ void SkyLine::updateLabel()
 			frameType = StelCore::FrameEquinoxEqu;
 			label = q_("Equator");
 			break;
+		case FIXED_EQUATOR:
+			frameType = StelCore::FrameFixedEquatorial; // Apparent Hour Angle is a non-refraction frame.
+			label = q_("Hour Angle");
+			break;
 		case PRECESSIONCIRCLE_N:
 		case PRECESSIONCIRCLE_S:
 			frameType = StelCore::FrameObservercentricEclipticOfDate;
@@ -768,7 +772,7 @@ void SkyLine::draw(StelCore *core) const
 	if (fader.getInterstate() <= 0.f)
 		return;
 
-	StelProjectorP prj = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? StelCore::RefractionAuto : StelCore::RefractionOff);
+	StelProjectorP prj = core->getProjection(frameType, (frameType!=StelCore::FrameAltAz && frameType!=StelCore::FrameFixedEquatorial) ? StelCore::RefractionAuto : StelCore::RefractionOff);
 
 	// Get the bounding halfspace
 	const SphericalCap& viewPortSphericalCap = prj->getBoundingCap();
@@ -820,13 +824,16 @@ void SkyLine::draw(StelCore *core) const
 			// It seems better to just switch it off.
 			if (GETSTELMODULE(SolarSystem)->getFlagMoonScale()) return;
 
+			// We compute the shadow circle attached to the geocenter, but must point it in the opposite direction of the sun's aberrated position.
 			const Vec3d pos=earth->getEclipticPos();
+			const Vec3d dir= - sun->getAberrationPush() + pos;
 			double lambda, beta;
-			StelUtils::rectToSphe(&lambda, &beta, pos);
+			StelUtils::rectToSphe(&lambda, &beta, dir);
 			const QPair<Vec3d, Vec3d> radii=GETSTELMODULE(SolarSystem)->getEarthShadowRadiiAtLunarDistance();
 			const double radius=(line_type==EARTH_UMBRA ? radii.first[1] : radii.second[1]);
 			const double dist=moon->getEclipticPos().length();  // geocentric Lunar distance [AU]
 			const Mat4d rot=Mat4d::zrotation(lambda)*Mat4d::yrotation(-beta);
+
 			StelVertexArray circle(StelVertexArray::LineLoop);
 			for (int i=0; i<360; ++i)
 			{
@@ -839,7 +846,7 @@ void SkyLine::draw(StelCore *core) const
 			// Special case for Umbra and Penumbra labels
 			Vec3d point(dist, 0.0, 0.0);
 			rot.transfo(point);
-			const float shift=sPainter.getProjector()->getPixelPerRadAtCenter()*(line_type==EARTH_UMBRA ? radii.first[0] : radii.second[0])*0.0000112f/M_PIf;
+			const float shift=static_cast<float>(sPainter.getProjector()->getPixelPerRadAtCenter()*(line_type==EARTH_UMBRA ? radii.first[0] : radii.second[0]))*0.0000112f/M_PIf;
 			sPainter.drawText(pos+point, (line_type==EARTH_UMBRA ? q_("Umbra") : q_("Penumbra")), 0.f, shift, shift, false);
 			return;
 		}
@@ -1070,7 +1077,7 @@ void SkyLine::draw(StelCore *core) const
 		const float lineThickness=sPainter.getLineWidth();
 		sPainter.setLineWidth(partThickness);
 
-		// TODO: Before drawing the lines themselves (and returning), draw the short partition lines
+		// Before drawing the lines themselves (and returning), draw the short partition lines
 		// Define short lines from "equator" a bit "southwards"
 		Vec3d part0 = fpt;
 		Vec3d partAxis(0,1,0);
@@ -1108,8 +1115,8 @@ void SkyLine::draw(StelCore *core) const
 
 		for (int i=0; i<i_max; ++i)
 		{
-			if ((line_type==CURRENT_VERTICAL && i>=i_min) || (line_type!=CURRENT_VERTICAL)){
-
+			if ((line_type==CURRENT_VERTICAL && i>=i_min) || (line_type!=CURRENT_VERTICAL))
+			{
 				if (i%30 == 0 && (viewPortSphericalCap.contains(part0) || viewPortSphericalCap.contains(part30)))
 				{
 					sPainter.drawGreatCircleArc(part0, part30, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
@@ -1125,9 +1132,12 @@ void SkyLine::draw(StelCore *core) const
 						float shifty = - static_cast<float>(sPainter.getFontMetrics().height());
 						QString unit("°");
 						QString label;
-						switch (line_type) {
+						switch (line_type)
+						{
 							case EQUATOR_J2000:
 							case EQUATOR_OF_DATE:
+							case FIXED_EQUATOR:
+								if (line_type==FIXED_EQUATOR) value=(360-i) % 360;
 								if (!StelApp::getInstance().getFlagShowDecimalDegrees())
 								{
 									value /= 15;
@@ -1211,7 +1221,8 @@ void SkyLine::draw(StelCore *core) const
 						double dx=screenPosTgtL[0]-screenPosTgt[0];
 						double dy=screenPosTgtL[1]-screenPosTgt[1];
 						float textAngle=static_cast<float>(atan2(dy,dx));
-						sPainter.drawText(part30l, label, textAngle*M_180_PIf + extraTextAngle, shiftx, shifty, false);
+						// Gravity labels look outright terrible here! Disable them.
+						sPainter.drawText(part30l, label, textAngle*M_180_PIf + extraTextAngle, shiftx, shifty, true);
 					}
 				}
 
@@ -1235,7 +1246,7 @@ void SkyLine::draw(StelCore *core) const
 	Vec3d p1, p2;
 	if (line_type==CURRENT_VERTICAL)
 	{
-		// The usual handling should always projects this circle into a straight line. However, with some projections we see ugly artifacts. Better handle this line specially.
+		// The usual handling should always project this circle into a straight line. However, with some projections we see ugly artifacts. Better handle this line specially.
 		p1.set(0.,0.,1.);
 		p2.set(0.,0.,-1.);
 		Vec3d pHori;
@@ -1461,9 +1472,9 @@ void SkyPoint::updateLabel()
 			if (speed>0.)
 			{
 				const QString kms = qc_("km/s", "speed");
-				QString speedStr = QString(" (%1 %2)").arg(QString::number(speed, 'f', 2)).arg(kms);
+				QString speedStr = QString(" (%1 %2)").arg(QString::number(speed, 'f', 2), kms);
 				northernLabel += speedStr;
-				speedStr = QString(" (-%1 %2)").arg(QString::number(speed, 'f', 2)).arg(kms);
+				speedStr = QString(" (-%1 %2)").arg(QString::number(speed, 'f', 2), kms);
 				southernLabel += speedStr;
 			}
 			break;
@@ -1559,11 +1570,14 @@ void SkyPoint::draw(StelCore *core) const
 		}
 		case EARTH_UMBRA_CENTER:
 		{
+			// We compute the shadow center attached to the geocenter, but must point it in the opposite direction of the sun's aberrated position.
 			const Vec3d pos=earth->getEclipticPos();
+			const Vec3d dir= - sun->getAberrationPush() + pos;
 			double lambda, beta;
-			StelUtils::rectToSphe(&lambda, &beta, pos);
+			StelUtils::rectToSphe(&lambda, &beta, dir);
 			const double dist=GETSTELMODULE(SolarSystem)->getMoon()->getEclipticPos().length();
 			const Mat4d rot=Mat4d::zrotation(lambda)*Mat4d::yrotation(-beta);
+
 			Vec3d point(dist, 0.0, 0.0);
 			rot.transfo(point);
 			Vec3d coord = pos+point;
@@ -1600,6 +1614,7 @@ GridLinesMgr::GridLinesMgr()
 	SkyLine::init();
 
 	equGrid = new SkyGrid(StelCore::FrameEquinoxEqu);
+	fixedEquatorialGrid = new SkyGrid(StelCore::FrameFixedEquatorial);
 	equJ2000Grid = new SkyGrid(StelCore::FrameJ2000);
 	eclJ2000Grid = new SkyGrid(StelCore::FrameObservercentricEclipticJ2000);
 	eclGrid = new SkyGrid(StelCore::FrameObservercentricEclipticOfDate);
@@ -1608,6 +1623,7 @@ GridLinesMgr::GridLinesMgr()
 	aziGrid = new SkyGrid(StelCore::FrameAltAz);
 	equatorLine = new SkyLine(SkyLine::EQUATOR_OF_DATE);
 	equatorJ2000Line = new SkyLine(SkyLine::EQUATOR_J2000);
+	fixedEquatorLine = new SkyLine(SkyLine::FIXED_EQUATOR);
 	eclipticJ2000Line = new SkyLine(SkyLine::ECLIPTIC_J2000);
 	eclipticLine = new SkyLine(SkyLine::ECLIPTIC_OF_DATE);
 	invariablePlaneLine = new SkyLine(SkyLine::INVARIABLEPLANE);
@@ -1650,6 +1666,7 @@ GridLinesMgr::GridLinesMgr()
 GridLinesMgr::~GridLinesMgr()
 {
 	delete equGrid;
+	delete fixedEquatorialGrid;
 	delete equJ2000Grid;
 	delete eclJ2000Grid;
 	delete eclGrid;
@@ -1658,6 +1675,7 @@ GridLinesMgr::~GridLinesMgr()
 	delete aziGrid;
 	delete equatorLine;
 	delete equatorJ2000Line;
+	delete fixedEquatorLine;
 	delete eclipticLine;
 	delete eclipticJ2000Line;
 	delete invariablePlaneLine;
@@ -1720,6 +1738,7 @@ void GridLinesMgr::init()
 	setFlagGridlines(conf->value("viewing/flag_gridlines", true).toBool());
 	setFlagAzimuthalGrid(conf->value("viewing/flag_azimuthal_grid").toBool());
 	setFlagEquatorGrid(conf->value("viewing/flag_equatorial_grid").toBool());
+	setFlagFixedEquatorGrid(conf->value("viewing/flag_fixed_equatorial_grid").toBool());
 	setFlagEquatorJ2000Grid(conf->value("viewing/flag_equatorial_J2000_grid").toBool());
 	setFlagEclipticJ2000Grid(conf->value("viewing/flag_ecliptic_J2000_grid").toBool());
 	setFlagEclipticGrid(conf->value("viewing/flag_ecliptic_grid").toBool());
@@ -1731,6 +1750,9 @@ void GridLinesMgr::init()
 	setFlagEquatorJ2000Line(conf->value("viewing/flag_equator_J2000_line").toBool());
 	setFlagEquatorJ2000Parts(conf->value("viewing/flag_equator_J2000_parts").toBool());
 	setFlagEquatorJ2000Labeled(conf->value("viewing/flag_equator_J2000_labels").toBool());
+	setFlagFixedEquatorLine(conf->value("viewing/flag_fixed_equator_line").toBool());
+	setFlagFixedEquatorParts(conf->value("viewing/flag_fixed_equator_parts").toBool());
+	setFlagFixedEquatorLabeled(conf->value("viewing/flag_fixed_equator_labels").toBool());
 	setFlagEclipticLine(conf->value("viewing/flag_ecliptic_line").toBool());
 	setFlagEclipticParts(conf->value("viewing/flag_ecliptic_parts").toBool());
 	setFlagEclipticLabeled(conf->value("viewing/flag_ecliptic_labels").toBool());
@@ -1788,12 +1810,13 @@ void GridLinesMgr::init()
 	setFlagApexPoints(conf->value("viewing/flag_apex_points").toBool());
 
 	// Set the line thickness for grids and lines
-	setLineThickness(conf->value("viewing/line_thickness", 1).toInt());
-	setPartThickness(conf->value("viewing/part_thickness", 1).toInt());
+	setLineThickness(conf->value("viewing/line_thickness", 1.f).toFloat());
+	setPartThickness(conf->value("viewing/part_thickness", 1.f).toFloat());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color", "0.5,0.5,0.7").toString();
 	setColorEquatorGrid(			Vec3f(conf->value("color/equatorial_color", defaultColor).toString()));
+	setColorFixedEquatorGrid(		Vec3f(conf->value("color/fixed_equatorial_color", defaultColor).toString()));
 	setColorEquatorJ2000Grid(		Vec3f(conf->value("color/equatorial_J2000_color", defaultColor).toString()));
 	setColorEclipticJ2000Grid(		Vec3f(conf->value("color/ecliptical_J2000_color", defaultColor).toString()));
 	setColorEclipticGrid(			Vec3f(conf->value("color/ecliptical_color", defaultColor).toString()));
@@ -1802,6 +1825,7 @@ void GridLinesMgr::init()
 	setColorAzimuthalGrid(			Vec3f(conf->value("color/azimuthal_color", defaultColor).toString()));
 	setColorEquatorLine(			Vec3f(conf->value("color/equator_color", defaultColor).toString()));
 	setColorEquatorJ2000Line(		Vec3f(conf->value("color/equator_J2000_color", defaultColor).toString()));
+	setColorFixedEquatorLine(		Vec3f(conf->value("color/fixed_equator_color", defaultColor).toString()));
 	setColorEclipticLine(			Vec3f(conf->value("color/ecliptic_color", defaultColor).toString()));
 	setColorEclipticJ2000Line(		Vec3f(conf->value("color/ecliptic_J2000_color", defaultColor).toString()));
 	setColorInvariablePlaneLine(		Vec3f(conf->value("color/invariable_plane_color", defaultColor).toString()));
@@ -1840,6 +1864,7 @@ void GridLinesMgr::init()
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Gridlines",			displayGroup, N_("Grids and lines"), "gridlinesDisplayed");
 	addAction("actionShow_Equatorial_Grid",		displayGroup, N_("Equatorial grid"), "equatorGridDisplayed", "E");
+	addAction("actionShow_Fixed_Equatorial_Grid",	displayGroup, N_("Fixed Equatorial grid"), "fixedEquatorGridDisplayed");
 	addAction("actionShow_Azimuthal_Grid",		displayGroup, N_("Azimuthal grid"), "azimuthalGridDisplayed", "Z");
 	addAction("actionShow_Ecliptic_Line",			displayGroup, N_("Ecliptic line"), "eclipticLineDisplayed", ",");
 	addAction("actionShow_Ecliptic_J2000_Line",	displayGroup, N_("Ecliptic J2000 line"), "eclipticJ2000LineDisplayed");
@@ -1847,6 +1872,7 @@ void GridLinesMgr::init()
 	addAction("actionShow_Solar_Equator_Line",	displayGroup, N_("Solar Equator Plane line"), "solarEquatorLineDisplayed");
 	addAction("actionShow_Equator_Line",			displayGroup, N_("Equator line"), "equatorLineDisplayed", ".");
 	addAction("actionShow_Equator_J2000_Line",	displayGroup, N_("Equator J2000 line"), "equatorJ2000LineDisplayed"); // or with Hotkey??
+	addAction("actionShow_Fixed_Equator_Line",	displayGroup, N_("Fixed Equator line"), "fixedEquatorLineDisplayed");
 	addAction("actionShow_Meridian_Line",			displayGroup, N_("Meridian line"), "meridianLineDisplayed", ";");
 	addAction("actionShow_Horizon_Line",			displayGroup, N_("Horizon line"), "horizonLineDisplayed", "H");
 	addAction("actionShow_Equatorial_J2000_Grid",	displayGroup, N_("Equatorial J2000 grid"), "equatorJ2000GridDisplayed");
@@ -1892,6 +1918,7 @@ void GridLinesMgr::update(double deltaTime)
 {
 	// Update faders
 	equGrid->update(deltaTime);
+	fixedEquatorialGrid->update(deltaTime);
 	equJ2000Grid->update(deltaTime);
 	eclJ2000Grid->update(deltaTime);
 	eclGrid->update(deltaTime);
@@ -1900,6 +1927,7 @@ void GridLinesMgr::update(double deltaTime)
 	aziGrid->update(deltaTime);
 	equatorLine->update(deltaTime);
 	equatorJ2000Line->update(deltaTime);
+	fixedEquatorLine->update(deltaTime);
 	eclipticLine->update(deltaTime);
 	eclipticJ2000Line->update(deltaTime);
 	invariablePlaneLine->update(deltaTime);
@@ -1942,12 +1970,24 @@ void GridLinesMgr::draw(StelCore* core)
 	if (!gridlinesDisplayed)
 		return;
 
-	galacticGrid->draw(core);
+	// Draw elements from the outside in.
+	// Lines after corresponding grids, to be able to e.g. draw equators in different color!
+	// Points should come last, to avoid text overdraw.
 	supergalacticGrid->draw(core);
-	equJ2000Grid->draw(core);
-	equGrid->draw(core);
-	aziGrid->draw(core);
+	galacticGrid->draw(core);
+	supergalacticEquatorLine->draw(core);
+	galacticEquatorLine->draw(core);
+	invariablePlaneLine->draw(core);
+	solarEquatorLine->draw(core);
+
 	eclJ2000Grid->draw(core);
+	eclipticJ2000Line->draw(core);
+
+	equJ2000Grid->draw(core);
+	equatorJ2000Line->draw(core);
+
+	equGrid->draw(core);
+	equatorLine->draw(core);
 	// While ecliptic of J2000 may be helpful to get a feeling of the Z=0 plane of VSOP87,
 	// ecliptic of date is related to Earth and does not make much sense for the other planets.
 	// Of course, orbital plane of respective planet would be better, but is not implemented.
@@ -1967,38 +2007,38 @@ void GridLinesMgr::draw(StelCore* core)
 		longitudeLine->draw(core);
 		umbraCenterPoint->draw(core);
 	}
+	circumpolarCircleN->draw(core);
+	circumpolarCircleS->draw(core);
 
-	// Lines after grids, to be able to e.g. draw equators in different color!
-	galacticEquatorLine->draw(core);
-	supergalacticEquatorLine->draw(core);
-	eclipticJ2000Line->draw(core);	
-	equatorJ2000Line->draw(core);
-	equatorLine->draw(core);
-	invariablePlaneLine->draw(core);
-	solarEquatorLine->draw(core);
+	fixedEquatorialGrid->draw(core);
+	fixedEquatorLine->draw(core);
+
+	aziGrid->draw(core);
 	meridianLine->draw(core);
 	horizonLine->draw(core);
 	primeVerticalLine->draw(core);
+
 	currentVerticalLine->draw(core);
-	circumpolarCircleN->draw(core);
-	circumpolarCircleS->draw(core);
-	celestialJ2000Poles->draw(core);
-	celestialPoles->draw(core);
-	zenithNadir->draw(core);
-	eclipticJ2000Poles->draw(core);
+
+	supergalacticPoles->draw(core);
 	galacticPoles->draw(core);
 	galacticCenter->draw(core);
-	supergalacticPoles->draw(core);
+	apexPoints->draw(core);
+	antisolarPoint->draw(core);
+	eclipticJ2000Poles->draw(core);
 	equinoxJ2000Points->draw(core);
-	solsticeJ2000Points->draw(core);	
-	apexPoints->draw(core);	
-	antisolarPoint->draw(core);	
+	solsticeJ2000Points->draw(core);
+	celestialJ2000Poles->draw(core);
+	celestialPoles->draw(core);
+
+	zenithNadir->draw(core);
 }
 
 void GridLinesMgr::updateLabels()
 {
 	equatorJ2000Line->updateLabel();
 	equatorLine->updateLabel();
+	fixedEquatorLine->updateLabel();
 	eclipticLine->updateLabel();
 	eclipticJ2000Line->updateLabel();
 	invariablePlaneLine->updateLabel();
@@ -2054,6 +2094,7 @@ bool GridLinesMgr::getFlagGridlines() const
 void GridLinesMgr::setFlagAllGrids(const bool displayed)
 {
 	setFlagEquatorGrid(displayed);
+	setFlagFixedEquatorGrid(displayed);
 	setFlagEclipticGrid(displayed);
 	setFlagGalacticGrid(displayed);
 	setFlagAzimuthalGrid(displayed);
@@ -2067,6 +2108,7 @@ void GridLinesMgr::setFlagAllLines(const bool displayed)
 {
 	setFlagColureLines(displayed);
 	setFlagEquatorLine(displayed);
+	setFlagFixedEquatorLine(displayed);
 	setFlagHorizonLine(displayed);
 	setFlagEclipticLine(displayed);
 	setFlagMeridianLine(displayed);
@@ -2156,6 +2198,33 @@ void GridLinesMgr::setColorEquatorGrid(const Vec3f& newColor)
 	{
 		equGrid->setColor(newColor);
 		emit equatorGridColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying Fixed Equatorial Grid (Hour Angle/Declination)
+void GridLinesMgr::setFlagFixedEquatorGrid(const bool displayed)
+{
+	if(displayed != fixedEquatorialGrid->isDisplayed())
+	{
+		fixedEquatorialGrid->setDisplayed(displayed);
+		emit fixedEquatorGridDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Fixed Equatorial Grid (Hour Angle/Declination)
+bool GridLinesMgr::getFlagFixedEquatorGrid() const
+{
+	return fixedEquatorialGrid->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorFixedEquatorGrid() const
+{
+	return fixedEquatorialGrid->getColor();
+}
+void GridLinesMgr::setColorFixedEquatorGrid(const Vec3f& newColor)
+{
+	if(newColor != fixedEquatorialGrid->getColor())
+	{
+		fixedEquatorialGrid->setColor(newColor);
+		emit fixedEquatorGridColorChanged(newColor);
 	}
 }
 
@@ -2397,6 +2466,59 @@ void GridLinesMgr::setColorEquatorJ2000Line(const Vec3f& newColor)
 	{
 		equatorJ2000Line->setColor(newColor);
 		emit equatorJ2000LineColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying Fixed Equator Line
+void GridLinesMgr::setFlagFixedEquatorLine(const bool displayed)
+{
+	if(displayed != fixedEquatorLine->isDisplayed())
+	{
+		fixedEquatorLine->setDisplayed(displayed);
+		emit fixedEquatorLineDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Fixed Equator Line
+bool GridLinesMgr::getFlagFixedEquatorLine() const
+{
+	return fixedEquatorLine->isDisplayed();
+}
+//! Set flag for displaying Fixed Equator Line partitions
+void GridLinesMgr::setFlagFixedEquatorParts(const bool displayed)
+{
+	if(displayed != fixedEquatorLine->showsPartitions())
+	{
+		fixedEquatorLine->setPartitions(displayed);
+		emit fixedEquatorPartsDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Fixed Equator Line partitions
+bool GridLinesMgr::getFlagFixedEquatorParts() const
+{
+	return fixedEquatorLine->showsPartitions();
+}
+void GridLinesMgr::setFlagFixedEquatorLabeled(const bool displayed)
+{
+	if(displayed != fixedEquatorLine->isLabeled())
+	{
+		fixedEquatorLine->setLabeled(displayed);
+		emit fixedEquatorPartsLabeledChanged(displayed);
+	}
+}
+bool GridLinesMgr::getFlagFixedEquatorLabeled() const
+{
+	return fixedEquatorLine->isLabeled();
+}
+Vec3f GridLinesMgr::getColorFixedEquatorLine() const
+{
+	return fixedEquatorLine->getColor();
+}
+void GridLinesMgr::setColorFixedEquatorLine(const Vec3f& newColor)
+{
+	if(newColor != fixedEquatorLine->getColor())
+	{
+		fixedEquatorLine->setColor(newColor);
+		emit fixedEquatorLineColorChanged(newColor);
 	}
 }
 
@@ -3572,15 +3694,16 @@ void GridLinesMgr::setColorApexPoints(const Vec3f& newColor)
 	}
 }
 
-void GridLinesMgr::setLineThickness(const int thickness)
+void GridLinesMgr::setLineThickness(const float thickness)
 {
-	int lineThickness = equGrid->getLineThickness();
-	if (lineThickness!=thickness)
+	float lineThickness = equGrid->getLineThickness();
+	if (!qFuzzyCompare(lineThickness, thickness))
 	{
-		lineThickness=qBound(1, thickness, 5);
+		lineThickness=qBound(1.f, thickness, 5.f);
 		// Grids
 		equGrid->setLineThickness(lineThickness);
 		equJ2000Grid->setLineThickness(lineThickness);
+		fixedEquatorialGrid->setLineThickness(lineThickness);
 		galacticGrid->setLineThickness(lineThickness);
 		supergalacticGrid->setLineThickness(lineThickness);
 		eclGrid->setLineThickness(lineThickness);
@@ -3589,6 +3712,7 @@ void GridLinesMgr::setLineThickness(const int thickness)
 		// Lines
 		equatorLine->setLineThickness(lineThickness);
 		equatorJ2000Line->setLineThickness(lineThickness);
+		fixedEquatorLine->setLineThickness(lineThickness);
 		eclipticLine->setLineThickness(lineThickness);
 		eclipticJ2000Line->setLineThickness(lineThickness);
 		invariablePlaneLine->setLineThickness(lineThickness);
@@ -3613,46 +3737,47 @@ void GridLinesMgr::setLineThickness(const int thickness)
 	}
 }
 
- int GridLinesMgr::getLineThickness() const
+float GridLinesMgr::getLineThickness() const
 {
 	return equGrid->getLineThickness();
 }
 
- void GridLinesMgr::setPartThickness(const int thickness)
- {
-	 int partThickness = equatorLine->getPartThickness();
-	 if (partThickness!=thickness)
-	 {
-		 partThickness=qBound(1, thickness, 5);
-		 // Lines
-		 equatorLine->setPartThickness(partThickness);
-		 equatorJ2000Line->setPartThickness(partThickness);
-		 eclipticLine->setPartThickness(partThickness);
-		 eclipticJ2000Line->setPartThickness(partThickness);
-		 //invariablePlaneLine->setPartThickness(partThickness);
-		 solarEquatorLine->setPartThickness(partThickness);
-		 precessionCircleN->setPartThickness(partThickness);
-		 precessionCircleS->setPartThickness(partThickness);
-		 meridianLine->setPartThickness(partThickness);
-		 longitudeLine->setPartThickness(partThickness);
-		 horizonLine->setPartThickness(partThickness);
-		 galacticEquatorLine->setPartThickness(partThickness);
-		 supergalacticEquatorLine->setPartThickness(partThickness);
-		 primeVerticalLine->setPartThickness(partThickness);
-		 currentVerticalLine->setPartThickness(partThickness);
-		 colureLine_1->setPartThickness(partThickness);
-		 colureLine_2->setPartThickness(partThickness);
-		 //circumpolarCircleN->setPartThickness(partThickness);
-		 //circumpolarCircleS->setPartThickness(partThickness);
+void GridLinesMgr::setPartThickness(const float thickness)
+{
+	float partThickness = equatorLine->getPartThickness();
+	if (!qFuzzyCompare(partThickness, thickness))
+	{
+		partThickness=qBound(1.f, thickness, 5.f);
+		// Lines
+		equatorLine->setPartThickness(partThickness);
+		equatorJ2000Line->setPartThickness(partThickness);
+		fixedEquatorLine->setPartThickness(partThickness);
+		eclipticLine->setPartThickness(partThickness);
+		eclipticJ2000Line->setPartThickness(partThickness);
+		//invariablePlaneLine->setPartThickness(partThickness);
+		solarEquatorLine->setPartThickness(partThickness);
+		precessionCircleN->setPartThickness(partThickness);
+		precessionCircleS->setPartThickness(partThickness);
+		meridianLine->setPartThickness(partThickness);
+		longitudeLine->setPartThickness(partThickness);
+		horizonLine->setPartThickness(partThickness);
+		galacticEquatorLine->setPartThickness(partThickness);
+		supergalacticEquatorLine->setPartThickness(partThickness);
+		primeVerticalLine->setPartThickness(partThickness);
+		currentVerticalLine->setPartThickness(partThickness);
+		colureLine_1->setPartThickness(partThickness);
+		colureLine_2->setPartThickness(partThickness);
+		//circumpolarCircleN->setPartThickness(partThickness);
+		//circumpolarCircleS->setPartThickness(partThickness);
 
-		 emit partThicknessChanged(partThickness);
-	 }
- }
+		emit partThicknessChanged(partThickness);
+	}
+}
 
-  int GridLinesMgr::getPartThickness() const
- {
-	 return equatorLine->getPartThickness();
- }
+float GridLinesMgr::getPartThickness() const
+{
+	return equatorLine->getPartThickness();
+}
 
 void GridLinesMgr::setFontSizeFromApp(int size)
 {
@@ -3662,6 +3787,7 @@ void GridLinesMgr::setFontSizeFromApp(int size)
 
 	equGrid->setFontSize(gridFontSize);
 	equJ2000Grid->setFontSize(gridFontSize);
+	fixedEquatorialGrid->setFontSize(gridFontSize);
 	galacticGrid->setFontSize(gridFontSize);
 	supergalacticGrid->setFontSize(gridFontSize);
 	eclGrid->setFontSize(gridFontSize);
@@ -3669,6 +3795,7 @@ void GridLinesMgr::setFontSizeFromApp(int size)
 	aziGrid->setFontSize(gridFontSize);
 	equatorLine->setFontSize(lineFontSize);
 	equatorJ2000Line->setFontSize(lineFontSize);
+	fixedEquatorLine->setFontSize(lineFontSize);
 	eclipticLine->setFontSize(lineFontSize);
 	eclipticJ2000Line->setFontSize(lineFontSize);
 	invariablePlaneLine->setFontSize(lineFontSize);

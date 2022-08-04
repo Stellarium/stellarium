@@ -41,7 +41,7 @@ labels:
     labeled:
       issue:
         body: This issue is easy for contributing. Everyone can work on this.
-  - name: incomplete
+  - name: more info
     labeled:
       issue:
         body: The hardware info, steps of reproduction and log file are really important and help us resolve over 90% issues fast. Of course, in some specific cases we need more data, but we ask the required data separately...
@@ -79,7 +79,7 @@ labels:
       issue:
         body: |
           Hello @{{ issue.user.login }}! Please see FAQ in the wiki:
-          https://github.com/Stellarium/stellarium/wiki/FAQ
+          https://github.com/Stellarium/stellarium/wiki/FAQ or https://github.com/Stellarium/stellarium/wiki/Common-Problems-for-the-current-version
         action: close
   - name: mobile
     labeled:
@@ -92,24 +92,24 @@ labels:
     labeled:
       issue:
         body: |
-          Thank you @{{ issue.user.login }}! In future please use Transifex to fix and improve translations: 
+          Thank you @{{ issue.user.login }}! In future please use Transifex to fix and improve translations:
           https://www.transifex.com/stellarium/stellarium/dashboard/
   - name: fix committed
     labeled:
       issue:
         body: |
-          Hello @{{ issue.user.login }}! Please check the fresh version (development snapshot) of Stellarium: 
+          Hello @{{ issue.user.login }}! Please check the fresh version (development snapshot) of Stellarium:
           https://github.com/Stellarium/stellarium-data/releases/tag/weekly-snapshot
       pr:
         body: |
-          Hello @{{ pull_request.user.login }}! Please check the fresh version (development snapshot) of Stellarium: 
+          Hello @{{ pull_request.user.login }}! Please check the fresh version (development snapshot) of Stellarium:
           https://github.com/Stellarium/stellarium-data/releases/tag/weekly-snapshot
     unlabeled:
       issue:
         body: |
-          Hello @{{ issue.user.login }}! Please check the latest stable version of Stellarium: 
+          Hello @{{ issue.user.login }}! Please check the latest stable version of Stellarium:
           https://github.com/Stellarium/stellarium/releases/latest
       pr:
         body: |
-          Hello @{{ pull_request.user.login }}! Please check the latest stable version of Stellarium: 
+          Hello @{{ pull_request.user.login }}! Please check the latest stable version of Stellarium:
           https://github.com/Stellarium/stellarium/releases/latest

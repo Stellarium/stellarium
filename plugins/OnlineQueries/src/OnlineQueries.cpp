@@ -40,7 +40,6 @@
 #include <QSettings>
 #include <QMetaEnum>
 #include <QLoggingCategory>
-#include <QDesktopServices>
 #include <QXmlStreamReader>
 
 Q_LOGGING_CATEGORY(onlineQueries,"stel.plugin.OnlineQueries")
@@ -68,13 +67,11 @@ StelPluginInfo OnlineQueriesPluginInterface::getPluginInfo() const
 
 OnlineQueries::OnlineQueries() :
 	enabled(false),
+	disableWebView(false),
 	toolbarButton(Q_NULLPTR),
 	custom1UseHip(false),
 	custom2UseHip(false),
 	custom3UseHip(false),
-	custom1inBrowser(false),
-	custom2inBrowser(false),
-	custom3inBrowser(false),
 	hipQuery(Q_NULLPTR),
 	hipOnlineReply(Q_NULLPTR)
 {
@@ -121,24 +118,19 @@ void OnlineQueries::init()
 	createToolbarButton();
 }
 
-void OnlineQueries::deinit()
-{
-	//
-}
-
 void OnlineQueries::setEnabled(bool b)
 {
 	if (b!=enabled)
 	{
 		enabled = b;
 		emit flagEnabledChanged(b);
+		dialog->setVisible(b);
 	}
-	configureGui(b);
 }
 
 bool OnlineQueries::configureGui(bool show)
 {
-	dialog->setVisible(show);
+	setEnabled(show);
 	return true;
 }
 
@@ -155,6 +147,8 @@ void OnlineQueries::restoreDefaultConfiguration(void)
 void OnlineQueries::loadConfiguration(void)
 {
 	conf->beginGroup("OnlineQueries");
+
+	disableWebView =conf->value("disable_webview", false).toBool();
 	ancientSkiesUrl=conf->value("ancientskies_url", "https://www.ancient-skies.org/api.php?apikey=fZdn9QsNdCAY4KggkV2T&response=HTML&entity=star&catalog=HIPPARCOS&id=%1").toString();
 	aavsoHipUrl    =conf->value("aavso_hip_url",    "https://www.aavso.org/vsx/index.php?view=api.object&ident=HIP%1").toString();
 	aavsoOidUrl    =conf->value("aavso_oid_url",    "https://www.aavso.org/vsx/index.php?view=detail.top&oid=%1").toString();
@@ -178,9 +172,6 @@ void OnlineQueries::loadConfiguration(void)
 		qWarning() << "OnlineQueries: custom3_url invalid: no '%1' found in " << customUrl3;
 		customUrl3 = "";
 	}
-	custom1inBrowser=conf->value("custom1_in_browser", false).toBool();
-	custom2inBrowser=conf->value("custom2_in_browser", false).toBool();
-	custom3inBrowser=conf->value("custom3_in_browser", false).toBool();
 	custom1UseHip=conf->value("custom1_use_hip", true).toBool();
 	custom2UseHip=conf->value("custom2_use_hip", true).toBool();
 	custom3UseHip=conf->value("custom3_use_hip", true).toBool();
@@ -198,12 +189,10 @@ void OnlineQueries::saveConfiguration(void)
 	conf->setValue("custom1_url", customUrl1);
 	conf->setValue("custom2_url", customUrl2);
 	conf->setValue("custom3_url", customUrl3);
-	conf->setValue("custom1_in_browser", custom1inBrowser);
-	conf->setValue("custom2_in_browser", custom2inBrowser);
-	conf->setValue("custom3_in_browser", custom3inBrowser);
 	conf->setValue("custom1_use_hip", custom1UseHip);
 	conf->setValue("custom2_use_hip", custom2UseHip);
 	conf->setValue("custom3_use_hip", custom3UseHip);
+	conf->setValue("disable_webview", disableWebView);
 	conf->endGroup();
 }
 
@@ -221,7 +210,7 @@ void OnlineQueries::createToolbarButton() const
 							       QPixmap(":/OnlineQueries/bt_OnlineQueries_Off.png"),
 							       QPixmap(":/graphicGui/glow32x32.png"),
 							       "actionShow_OnlineQueries");
-			qCDebug(onlineQueries) << "adding Button to toolbar ...";
+			//qCDebug(onlineQueries) << "adding Button to toolbar ...";
 
 			gui->getButtonBar()->addButton(button, "065-pluginsGroup");
 		}
@@ -234,7 +223,7 @@ void OnlineQueries::createToolbarButton() const
 
 void OnlineQueries::queryWikipedia()
 {
-	query(wikipediaUrl, false, true);
+	query(wikipediaUrl, false);
 }
 
 // 2-step query.
@@ -264,67 +253,60 @@ void OnlineQueries::queryAAVSO()
 
 void OnlineQueries::queryGCVS()
 {
-	query(gcvsUrl, true, false);
+	query(gcvsUrl, true);
 }
 
 void OnlineQueries::queryAncientSkies()
 {
 	setOutputHtml("<h1>Ancient-Skies</h1><p>querying...</p>");
-	// Depending on development of AS, the last argument may be turned to true to have the result in a webbrowser for further refinements.
-
-	query(ancientSkiesUrl, true, false);
+	query(ancientSkiesUrl, true);
 }
 
 void OnlineQueries::queryCustomSite1()
 {
-	query(customUrl1, custom1UseHip, custom1inBrowser);
+	query(customUrl1, custom1UseHip);
 }
 
 void OnlineQueries::queryCustomSite2()
 {
-	query(customUrl2, custom2UseHip, custom2inBrowser);
+	query(customUrl2, custom2UseHip);
 }
 
 void OnlineQueries::queryCustomSite3()
 {
-	query(customUrl3, custom3UseHip, custom3inBrowser);
+	query(customUrl3, custom3UseHip);
 }
 
-void OnlineQueries::query(QString url, bool useHip, bool useBrowser)
+void OnlineQueries::query(QString url, bool useHip)
 {
-	// dissect url and set output. TODO: Maybe add another arg for the heading to the call?
-	QUrl htmlUrl(url); // only used for the next line.
-	setOutputHtml(QString("<h1>%1</h1><p>querying %2...</p>").arg(htmlUrl.host()).arg(url));
+	// dissect url and set output.
+	QUrl htmlUrl(url);
+	setOutputHtml(QString("<h1>%1</h1><p>querying %2...</p>").arg(htmlUrl.host(), url));
 
 	const QList<StelObjectP>& sel=GETSTELMODULE(StelObjectMgr)->getSelectedObject();
 	if (sel.length()==0)
+	{
+		setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(htmlUrl.host(), q_("Please select an object first!")));
 		return;
+	}
 	const StelObjectP obj=sel.at(0);
 
 	if (useHip)
 	{
 		if (obj->getType()!=STAR_TYPE)
+		{
+			setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(htmlUrl.host(), qc_("Not a star!", "OnlineQueries")));
 			return;
+		}
 
 		QString hipStr=obj->getID();
 		if (!hipStr.startsWith("HIP"))
 		{
-			setOutputHtml(QString("<h1>%1</h1><p>No HIPPARCOS star!</p>").arg(htmlUrl.host()));
+			setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(htmlUrl.host(), qc_("Not a HIPPARCOS star!", "OnlineQueries")));
 			return;
 		}
-
 		int hipNr=hipStr.split(' ').at(1).toInt();
-		if (useBrowser)
-		{
-			QDesktopServices::openUrl(QUrl(url.arg(hipNr)));
-		}
-		else
-		{
-			hipOnlineReply=hipQuery->lookup(url, hipNr);
-
-			onHipQueryStatusChanged();
-			connect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
-		}
+		setOutputUrl(QUrl(url.arg(hipNr)));
 	}
 	else
 	{
@@ -333,7 +315,10 @@ void OnlineQueries::query(QString url, bool useHip, bool useBrowser)
 		{
 			QString hipStr=obj->getID();
 			if (!hipStr.startsWith("HIP"))
+			{
+				setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(htmlUrl.host(), qc_("Not a HIPPARCOS star!", "OnlineQueries")));
 				return;
+			}
 			int hipNr=hipStr.split(' ').at(1).toInt();
 			objName=StarMgr::getCommonEnglishName(hipNr);
 		}
@@ -364,27 +349,16 @@ void OnlineQueries::query(QString url, bool useHip, bool useBrowser)
 			// TODO: Other similar replacements?
 			if (objName.isEmpty())
 			{
-				setOutputHtml(QString("<h1>ERROR</h1><p>This can request data for stars, planets and deep-sky objects. A valid name for this object could not be found. Please enable a few DSO catalogs to form at least a numerical name.</p>"));
+				setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(q_("ERROR"), q_("We can request data for stars, planets and deep-sky objects. A valid name for this object could not be found. Please enable a few DSO catalogs to form at least a numerical name.")));
 				return;
 			}
 		}
 		else
 		{
-			setOutputHtml(QString("<h1>ERROR</h1><p>This can request data for stars, planets and deep-sky objects only.</p>"));
+			setOutputHtml(QString("<h1>%1</h1><p>%2</p>").arg(q_("ERROR"), q_("We can request data for stars, planets and deep-sky objects only.")));
 			return;
 		}
-		if (useBrowser)
-		{
-			setOutputHtml(QString("<h1>%1</h1><p>Opened page on '%2' in your webbrowser.</p>").arg(htmlUrl.host()).arg(objName));
-			QDesktopServices::openUrl(QUrl(url.arg(objName)));
-		}
-		else
-		{
-			hipOnlineReply=hipQuery->lookup(url, objName);
-
-			onHipQueryStatusChanged();
-			connect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
-		}
+		setOutputUrl(QUrl(url.arg(objName)));
 	}
 }
 
@@ -443,14 +417,9 @@ void OnlineQueries::onAavsoHipQueryStatusChanged()
 		//delete hipOnlineReply;
 
 		// Trigger second AAVSO query. Note that we mangle the name a bit.
-		//hipOnlineReply=hipQuery->lookup(aavsOidUrl, oid);
-		//onHipQueryStatusChanged();
-		//connect(hipOnlineReply, SIGNAL(statusChanged()), this, SLOT(onHipQueryStatusChanged()));
-		// It's prettier to call the browser externally.
 		if (oid>0)
 		{
-			setOutputHtml(QString("<h1>AAVSO</h1><p>Opened AAVSO page on OID=%1 in your webbrowser.</p>").arg(QString::number(oid)));
-			QDesktopServices::openUrl(QUrl(aavsoOidUrl.arg(oid)));
+			setOutputUrl(QUrl(aavsoOidUrl.arg(oid)));
 		}
 		else
 			setOutputHtml(QString("<h1>AAVSO</h1><p>AAVSO has no entry for this star.</p>"));
@@ -468,4 +437,10 @@ void OnlineQueries::setOutputHtml(QString html)
 {
 	if (dialog)
 		dialog->setOutputHtml(html);
+}
+
+void OnlineQueries::setOutputUrl(QUrl url)
+{
+	if (dialog)
+		dialog->setOutputUrl(url);
 }

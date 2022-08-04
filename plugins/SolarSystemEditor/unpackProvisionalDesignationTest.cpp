@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QChar>
 #include <QString>
-#include <QRegExp>
+#include <QRegularExpression>
 
 class TestClass: public QObject
 {
@@ -78,24 +78,25 @@ int TestClass::unpackAlphanumericNumber (QChar prefix, int lastDigit)
 
 QString TestClass::unpackMinorPlanetProvisionalDesignation (QString packedDesignation, bool returnHTML)
 {
-	QRegExp packedFormat("^([IJK])(\\d\\d)([A-Z])([\\dA-Za-z])(\\d)([A-Z])$");
-	if (packedFormat.indexIn(packedDesignation) != 0)
+	QRegularExpression packedFormat("^([IJK])(\\d\\d)([A-Z])([\\dA-Za-z])(\\d)([A-Z])$");
+	QRegularExpressionMatch match;
+	if (packedDesignation.indexOf(packedFormat, 0, &match) != 0)
 	{
 		return QString();
 	}
 
 	//Year
-	QChar yearPrefix = packedFormat.cap(1).at(0);
-	int yearLastTwoDigits = packedFormat.cap(2).toInt();
+	QChar yearPrefix = match.captured(1).at(0);
+	int yearLastTwoDigits = match.captured(2).toInt();
 	int year = unpackYearNumber(yearPrefix, yearLastTwoDigits);
 
 	//Letters
-	QString halfMonthLetter = packedFormat.cap(3);
-	QString secondLetter = packedFormat.cap(6);
+	QString halfMonthLetter = match.captured(3);
+	QString secondLetter = match.captured(6);
 
 	//Second letter cycle count
-	QChar cycleCountPrefix = packedFormat.cap(4).at(0);
-	int cycleCountLastDigit = packedFormat.cap(5).toInt();
+	QChar cycleCountPrefix = match.captured(4).at(0);
+	int cycleCountLastDigit = match.captured(5).toInt();
 	int cycleCount = unpackAlphanumericNumber(cycleCountPrefix, cycleCountLastDigit);
 
 	//Assemble the unpacked provisional designation
@@ -113,27 +114,28 @@ QString TestClass::unpackMinorPlanetProvisionalDesignation (QString packedDesign
 
 QString TestClass::unpackCometProvisionalDesignation(QString packedDesignation)
 {
-	QRegExp packedFormat("^([IJK])(\\d\\d)([A-Z])([\\dA-Z])(\\d)([0a-z])$");
-	if (packedFormat.indexIn(packedDesignation) != 0)
+	QRegularExpression packedFormat("^([IJK])(\\d\\d)([A-Z])([\\dA-Z])(\\d)([0a-z])$");
+	QRegularExpressionMatch match;
+	if (packedDesignation.indexOf(packedFormat, 0, &match) != 0)
 	{
 		return QString();
 	}
 
 	//Year
-	QChar yearPrefix = packedFormat.cap(1).at(0);
-	int yearLastTwoDigits = packedFormat.cap(2).toInt();
+	QChar yearPrefix = match.captured(1).at(0);
+	int yearLastTwoDigits = match.captured(2).toInt();
 	int year = unpackYearNumber(yearPrefix, yearLastTwoDigits);
 
 	//Half-month letter
-	QString halfMonthLetter = packedFormat.cap(3);
+	QString halfMonthLetter = match.captured(3);
 
 	//Half-month number
-	QChar numberPrefix = packedFormat.cap(4).at(0);
-	int numberLastDigit = packedFormat.cap(5).toInt();
+	QChar numberPrefix = match.captured(4).at(0);
+	int numberLastDigit = match.captured(5).toInt();
 	int halfMonthNumber = unpackAlphanumericNumber(numberPrefix, numberLastDigit);
 
 	//Fragment
-	QChar fragmentDesignation = packedFormat.cap(6).at(0);
+	QChar fragmentDesignation = match.captured(6).at(0);
 
 	QString result = QString("%1 %2%3").arg(year).arg(halfMonthLetter).arg(halfMonthNumber);
 	if (fragmentDesignation != '0')

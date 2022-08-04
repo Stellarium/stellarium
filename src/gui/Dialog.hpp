@@ -65,10 +65,10 @@ public:
   
 	ResizeFrame(QWidget* parent) : QFrame(parent) {}
   
-	virtual void mousePressEvent(QMouseEvent *event) {
+	virtual void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE {
 		mousePos = event->pos();
 	}
-	virtual void mouseMoveEvent(QMouseEvent *event);
+	virtual void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 };
 
 

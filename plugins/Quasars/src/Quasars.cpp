@@ -170,7 +170,7 @@ void Quasars::init()
 
 		// key bindings and other actions
 		addAction("actionShow_Quasars", N_("Quasars"), N_("Show quasars"), "quasarsVisible", "Ctrl+Alt+Q");
-		addAction("actionShow_Quasars_ConfigDialog", N_("Quasars"), N_("Quasars configuration window"), configDialog, "visible", ""); // Allow assign shortkey
+		addAction("actionShow_Quasars_dialog", N_("Quasars"), N_("Show settings dialog"), configDialog, "visible", ""); // Allow assign shortkey
 
 		GlowIcon = new QPixmap(":/graphicGui/miscGlow32x32.png");
 		OnIcon = new QPixmap(":/Quasars/btQuasars-on.png");
@@ -186,7 +186,7 @@ void Quasars::init()
 	}
 
 	// If the json file does not already exist, create it from the resource in the Qt resource
-	if(QFileInfo(catalogJsonPath).exists())
+	if(QFileInfo::exists(catalogJsonPath))
 	{
 		if (!checkJsonFileFormat() || getJsonFileFormatVersion()<CATALOG_FORMAT_VERSION)
 		{
@@ -230,7 +230,7 @@ void Quasars::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 
-	for (const auto& quasar : QSO)
+	for (const auto& quasar : qAsConst(QSO))
 	{
 		if (quasar && quasar->initialized)
 			quasar->draw(core, painter);
@@ -250,9 +250,9 @@ void Quasars::drawPointer(StelCore* core, StelPainter& painter)
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		Vec3d screenpos;
+		Vec3f screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!painter.getProjector()->project(pos, screenpos))
+		if (!painter.getProjector()->project(pos.toVec3f(), screenpos))
 			return;
 
 		const Vec3f& c(obj->getInfoColor());
@@ -356,7 +356,7 @@ QStringList Quasars::listAllObjects(bool inEnglish) const
 */
 void Quasars::restoreDefaultJsonFile(void)
 {
-	if (QFileInfo(catalogJsonPath).exists())
+	if (QFileInfo::exists(catalogJsonPath))
 		backupJsonFile(true);
 
 	QFile src(":/Quasars/quasars.json");
@@ -393,7 +393,7 @@ bool Quasars::backupJsonFile(bool deleteOriginal)
 	}
 
 	QString backupPath = catalogJsonPath + ".old";
-	if (QFileInfo(backupPath).exists())
+	if (QFileInfo::exists(backupPath))
 		QFile(backupPath).remove();
 
 	if (old.copy(backupPath))
@@ -459,8 +459,8 @@ void Quasars::setQSOMap(const QVariantMap& map)
 {
 	QSO.clear();
 	QsrCount = 0;
-	QVariantMap qsoMap = map.value("quasars").toMap();
-	for (auto qsoKey : qsoMap.keys())
+	const QVariantMap qsoMap = map.value("quasars").toMap();
+	for (auto &qsoKey : qsoMap.keys())
 	{
 		QVariantMap qsoData = qsoMap.value(qsoKey).toMap();
 		qsoData["designation"] = qsoKey;
@@ -604,7 +604,7 @@ void Quasars::saveSettingsToConfig(void)
 int Quasars::getSecondsToUpdate(void)
 {
 	QDateTime nextUpdate = lastUpdate.addSecs(updateFrequencyDays * 3600 * 24);
-	return QDateTime::currentDateTime().secsTo(nextUpdate);
+	return static_cast<int>(QDateTime::currentDateTime().secsTo(nextUpdate));
 }
 
 void Quasars::checkForUpdate(void)
@@ -659,7 +659,7 @@ void Quasars::startDownload(QString urlString)
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
 	updateState = Quasars::Updating;
-	emit(updateStateChanged(updateState));
+	emit updateStateChanged(updateState);
 }
 
 void Quasars::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
@@ -675,11 +675,11 @@ void Quasars::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = std::floor(bytesReceived / 1024.);
-			bytesTotal    = std::floor(bytesTotal / 1024.);
+			bytesReceived = static_cast<long long>(std::floor(static_cast<double>(bytesReceived) / 1024.));
+			bytesTotal    = static_cast<long long>(std::floor(static_cast<double>(bytesTotal) / 1024.));
 		}
-		currentValue = bytesReceived;
-		endValue = bytesTotal;
+		currentValue = static_cast<int>(bytesReceived);
+		endValue     = static_cast<int>(bytesTotal);
 	}
 
 	progressBar->setValue(currentValue);
@@ -731,8 +731,8 @@ void Quasars::downloadComplete(QNetworkReply *reply)
 		updateState = Quasars::DownloadError;
 	}
 
-	emit(updateStateChanged(updateState));
-	emit(jsonUpdateComplete());
+	emit updateStateChanged(updateState);
+	emit jsonUpdateComplete();
 
 	reply->deleteLater();
 	downloadReply = Q_NULLPTR;
@@ -766,7 +766,7 @@ void Quasars::setFlagShowQuasarsButton(bool b)
 		if (b==true) {
 			if (toolbarButton==Q_NULLPTR) {
 				// Create the quasars button
-				toolbarButton = new StelButton(Q_NULLPTR, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Quasars");
+				toolbarButton = new StelButton(Q_NULLPTR, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Quasars", false, "actionShow_Quasars_dialog");
 			}
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		} else {
@@ -825,7 +825,8 @@ void Quasars::reloadCatalog(void)
 	if (hasSelection)
 	{
 		// Restore selection...
-		objMgr->setSelectedObject(selectedObject);
+		StelObjectP obj = selectedObject[0];
+		objMgr->findAndSelect(obj->getEnglishName(), obj->getType());
 	}
 }
 

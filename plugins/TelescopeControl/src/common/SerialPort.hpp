@@ -42,10 +42,10 @@ public:
 	//! On UNIX systems, this should be something like "/dev/ttyS0".
 	//! On Microsoft Windows systems, this should be something like "COM1:".
 	SerialPort(Server &server, const char *serial_device);
-	~SerialPort(void);
+	~SerialPort(void) override;
 	//! Returns true if the connection is closed.
 	//! This method has different platform-dependent implementations.
-	virtual bool isClosed(void) const
+	virtual bool isClosed(void) const override
 	{
 	#ifdef Q_OS_WIN
 		return (handle == INVALID_HANDLE_VALUE);
@@ -55,19 +55,19 @@ public:
 	}
 	
 protected:
-	void prepareSelectFds(fd_set&, fd_set&, int&);
+	void prepareSelectFds(fd_set&, fd_set&, int&) override;
 	
 private:
 	//! Returns false, as SerialPort implements a serial port connection.
-	bool isTcpConnection(void) const {return false;}
+	virtual bool isTcpConnection(void) const override {return false;}
 	//! Returns true, as SerialPort implements a serial port connection.
-	bool isAsciiConnection(void) const {return true;}
+	virtual bool isAsciiConnection(void) const override {return true;}
 	
 private:
 #ifdef Q_OS_WIN
-	int readNonblocking(char *buf, int count);
-	int writeNonblocking(const char *buf, int count);
-	void handleSelectFds(const fd_set&, const fd_set&) {}
+	virtual int readNonblocking(char *buf, int count) override;
+	virtual int writeNonblocking(const char *buf, int count) override;
+	virtual void handleSelectFds(const fd_set&, const fd_set&) override {}
 	HANDLE handle;
 	DCB dcb_original;
 #else

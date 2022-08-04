@@ -47,7 +47,7 @@ StelSkyLayerMgr::StelSkyLayerMgr(void) : flagShow(true)
 
 StelSkyLayerMgr::~StelSkyLayerMgr()
 {
-	for (auto* s : allSkyLayers)
+	for (auto* s : qAsConst(allSkyLayers))
 		delete s;
 }
 
@@ -170,7 +170,7 @@ void StelSkyLayerMgr::draw(StelCore* core)
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	sPainter.setBlending(true, GL_ONE, GL_ONE); //additive blending
-	for (auto* s : allSkyLayers)
+	for (auto* s : qAsConst(allSkyLayers))
 	{
 		if (s->show) 
 		{
@@ -180,7 +180,7 @@ void StelSkyLayerMgr::draw(StelCore* core)
 	}
 }
 
-void noDelete(StelSkyLayer*) {;}
+void noDelete(StelSkyLayer*) {}
 
 // Called when loading of data started or stopped for one collection
 void StelSkyLayerMgr::loadingStateChanged(bool b)
@@ -194,9 +194,17 @@ void StelSkyLayerMgr::loadingStateChanged(bool b)
 		Q_ASSERT(elem->progressBar==Q_NULLPTR);
 		elem->progressBar = StelApp::getInstance().addProgressBar();
 		QString serverStr = elem->layer->getShortServerCredits();
-		if (!serverStr.isEmpty())
-			serverStr = " from "+serverStr;
-		elem->progressBar->setFormat("Loading "+elem->layer->getShortName()+serverStr);
+		QString shortName = elem->layer->getShortName();
+		if (serverStr.isEmpty())
+		{
+			// TRANSLATORS: The full phrase is "Loading '%SHORT_NAME%'" in progress bar
+			elem->progressBar->setFormat(q_("Loading '%1'").arg(shortName));
+		}
+		else
+		{
+			// TRANSLATORS: The full phrase is "Loading '%SHORT_NAME%' from %URL%" in progress bar
+			elem->progressBar->setFormat(q_("Loading '%1' from %2").arg(shortName, serverStr));
+		}
 		elem->progressBar->setRange(0,100);
 	}
 	else
@@ -220,7 +228,7 @@ void StelSkyLayerMgr::percentLoadedChanged(int percentage)
 
 StelSkyLayerMgr::SkyLayerElem* StelSkyLayerMgr::skyLayerElemForLayer(const StelSkyLayer* t)
 {
-	for (auto* e : allSkyLayers)
+    for (auto* e : qAsConst(allSkyLayers))
 	{
 		if (e->layer==t)
 		{
@@ -236,7 +244,7 @@ QString StelSkyLayerMgr::keyForLayer(const StelSkyLayer* t)
 }
 
 StelSkyLayerMgr::SkyLayerElem::SkyLayerElem(StelSkyLayerP t, bool ashow) : layer(t), progressBar(Q_NULLPTR), show(ashow)
-{;}
+{}
 
 StelSkyLayerMgr::SkyLayerElem::~SkyLayerElem()
 {
@@ -250,7 +258,7 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 								   double long1, double lat1,
 								   double long2, double lat2,
 								   double long3, double lat3,
-								   double minRes, double maxBright, bool visible, StelCore::FrameType frameType)
+								   double minRes, double maxBright, bool visible, StelCore::FrameType frameType, bool withAberration)
 {
 	if (allSkyLayers.contains(id))
 	{
@@ -272,6 +280,7 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 	vm["maxBrightness"] = QVariant(maxBright);
 	vm["minResolution"] = QVariant(minRes);
 	vm["shortName"] = QVariant(id);
+	vm["withAberration"] = QVariant(withAberration);
 
 	// textureCoords (define the ordering of worldCoords)
 	cl.clear();

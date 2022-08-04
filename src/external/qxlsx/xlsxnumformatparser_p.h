@@ -38,7 +38,7 @@
 
 #include "xlsxglobal.h"
 
-namespace QXlsx {
+QT_BEGIN_NAMESPACE_XLSX
 
 class NumFormatParser
 {
@@ -46,6 +46,6 @@ public:
     static bool isDateTime(const QString &formatCode);
 };
 
-} // namespace QXlsx
+QT_END_NAMESPACE_XLSX
 
 #endif // QXLSX_NUMFORMATPARSER_H

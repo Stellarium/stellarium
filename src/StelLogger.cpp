@@ -137,24 +137,17 @@ void StelLogger::init(const QString& logFilePath)
 
 // Aargh Windows API
 #elif defined Q_OS_WIN
-	// Hopefully doesn't throw a linker error on earlier systems. Not like
-	// I'm gonna test it or anything.
-	if (QSysInfo::WindowsVersion >= QSysInfo::WV_XP)
-	{
-		MEMORYSTATUSEX statex;
-		statex.dwLength = sizeof (statex);
-		GlobalMemoryStatusEx(&statex);
-		writeLog(QString("Total physical memory: %1 MB").arg(statex.ullTotalPhys/(1024<<10)));
-		writeLog(QString("Available physical memory: %1 MB").arg(statex.ullAvailPhys/(1024<<10)));
-		writeLog(QString("Physical memory in use: %1%").arg(statex.dwMemoryLoad));
-		#ifndef _WIN64
-		// This always reports about 8TB on Win64, not really useful to show.
-		writeLog(QString("Total virtual memory: %1 MB").arg(statex.ullTotalVirtual/(1024<<10)));
-		writeLog(QString("Available virtual memory: %1 MB").arg(statex.ullAvailVirtual/(1024<<10)));
-		#endif
-	}
-	else
-		writeLog("Windows version too old to get memory info.");
+	MEMORYSTATUSEX statex;
+	statex.dwLength = sizeof (statex);
+	GlobalMemoryStatusEx(&statex);
+	writeLog(QString("Total physical memory: %1 MB").arg(statex.ullTotalPhys/(1024<<10)));
+	writeLog(QString("Available physical memory: %1 MB").arg(statex.ullAvailPhys/(1024<<10)));
+	writeLog(QString("Physical memory in use: %1%").arg(statex.dwMemoryLoad));
+	#ifndef _WIN64
+	// This always reports about 8TB on Win64, not really useful to show.
+	writeLog(QString("Total virtual memory: %1 MB").arg(statex.ullTotalVirtual/(1024<<10)));
+	writeLog(QString("Available virtual memory: %1 MB").arg(statex.ullAvailVirtual/(1024<<10)));
+	#endif
 
 	HKEY hKey = Q_NULLPTR;
 	DWORD dwType = REG_DWORD;
@@ -173,7 +166,7 @@ void StelLogger::init(const QString& logFilePath)
 
 		if(lRet == ERROR_SUCCESS)
 		{
-			if(RegQueryValueExA(hKey, "~MHz", Q_NULLPTR, &dwType, (LPBYTE)&numVal, &dwSize) == ERROR_SUCCESS)
+			if(RegQueryValueExA(hKey, "~MHz", Q_NULLPTR, &dwType, reinterpret_cast<LPBYTE>(&numVal), &dwSize) == ERROR_SUCCESS)
 				writeLog(QString("Processor speed: %1 MHz").arg(numVal));
 			else
 				writeLog("Could not get processor speed.");
@@ -186,7 +179,7 @@ void StelLogger::init(const QString& logFilePath)
 
 		if (lRet == ERROR_SUCCESS)
 		{
-			if (RegQueryValueExA(hKey, "ProcessorNameString", Q_NULLPTR, &dwType, (LPBYTE)&nameStr, &nameSize) == ERROR_SUCCESS)
+			if (RegQueryValueExA(hKey, "ProcessorNameString", Q_NULLPTR, &dwType, reinterpret_cast<LPBYTE>(&nameStr), &nameSize) == ERROR_SUCCESS)
 				writeLog(QString("Processor name: %1").arg(nameStr));
 			else
 				writeLog("Could not get processor name.");
@@ -210,25 +203,25 @@ void StelLogger::init(const QString& logFilePath)
 	#endif
 	for (int i = 0; i<systemLines.size(); i++)
 	{
-		if(systemLines.at(i).contains("Model"))
-		{
+		// hardware overview
+		if(systemLines.at(i).contains("Model", Qt::CaseInsensitive))
 			writeLog(systemLines.at(i).trimmed());
-		}
 
-		if(systemLines.at(i).contains("Processor"))
-		{
+		if(systemLines.at(i).contains("Chip:", Qt::CaseInsensitive))
 			writeLog(systemLines.at(i).trimmed());
-		}
 
-		if(systemLines.at(i).contains("Memory"))
-		{
-			writeLog(systemLines.at(i).trimmed());
-		}
+		if(systemLines.at(i).contains("Processor", Qt::CaseInsensitive))
+			writeLog(systemLines.at(i).trimmed().replace("Unknown", "Apple M1"));
 
-		if(systemLines.at(i).contains("VRAM"))
-		{
+		if(systemLines.at(i).contains("Memory", Qt::CaseInsensitive))
 			writeLog(systemLines.at(i).trimmed());
-		}
+
+		// graphics/display overview
+		if(systemLines.at(i).contains("Resolution", Qt::CaseInsensitive))
+			writeLog(systemLines.at(i).trimmed());
+
+		if(systemLines.at(i).contains("VRAM", Qt::CaseInsensitive))
+			writeLog(systemLines.at(i).trimmed());
 	}
 
 #elif defined Q_OS_BSD4
@@ -306,33 +299,41 @@ void StelLogger::writeLog(QString msg)
 		msg.append(QLatin1Char('\n'));
 
 	fileMutex.lock();
-	logFile.write(qPrintable(msg), msg.size());
+	const auto utf8 = msg.toUtf8();
+	logFile.write(utf8.constData(), utf8.size());
 	log += msg;
 	fileMutex.unlock();
 }
 
 QString StelLogger::getMsvcVersionString(int ver)
 {
-	// Defines for _MSC_VER macro: https://docs.microsoft.com/ru-ru/cpp/preprocessor/predefined-macros?view=vs-2019
+	// Defines for _MSC_VER macro: https://docs.microsoft.com/ru-ru/cpp/preprocessor/predefined-macros?view=msvc-160
 	const QMap<int, QString> map = {
-		{1310, "MSVC++ 7.1 (Visual Studio 2003)"     },
-		{1400, "MSVC++ 8.0 (Visual Studio 2005)"     },
-		{1500, "MSVC++ 9.0 (Visual Studio 2008)"     },
-		{1600, "MSVC++ 10.0 (Visual Studio 2010)"    },
-		{1700, "MSVC++ 11.0 (Visual Studio 2012)"    },
-		{1800, "MSVC++ 12.0 (Visual Studio 2013)"    },
-		{1900, "MSVC++ 14.0 (Visual Studio 2015)"    },
-		{1910, "MSVC++ 15.0 (Visual Studio 2017 RTW)"},
-		{1911, "MSVC++ 15.3 (Visual Studio 2017)"    },
-		{1912, "MSVC++ 15.5 (Visual Studio 2017)"    },
-		{1913, "MSVC++ 15.6 (Visual Studio 2017)"    },
-		{1914, "MSVC++ 15.7 (Visual Studio 2017)"    },
-		{1915, "MSVC++ 15.8 (Visual Studio 2017)"    },
-		{1916, "MSVC++ 15.9 (Visual Studio 2017)"    },
-		{1920, "MSVC++ 16.0 (Visual Studio 2019 RTW)"},
-		{1921, "MSVC++ 16.1 (Visual Studio 2019)"    },
-		{1922, "MSVC++ 16.2 (Visual Studio 2019)"    },
-		{1923, "MSVC++ 16.3 (Visual Studio 2019)"    },
+		{1310, "MSVC++ 7.1 (Visual Studio 2003)"          },
+		{1400, "MSVC++ 8.0 (Visual Studio 2005)"          },
+		{1500, "MSVC++ 9.0 (Visual Studio 2008)"          },
+		{1600, "MSVC++ 10.0 (Visual Studio 2010)"         },
+		{1700, "MSVC++ 11.0 (Visual Studio 2012)"         },
+		{1800, "MSVC++ 12.0 (Visual Studio 2013)"         },
+		{1900, "MSVC++ 14.0 (Visual Studio 2015)"         },
+		{1910, "MSVC++ 15.0 (Visual Studio 2017 RTW)"     },
+		{1911, "MSVC++ 15.3 (Visual Studio 2017)"         },
+		{1912, "MSVC++ 15.5 (Visual Studio 2017)"         },
+		{1913, "MSVC++ 15.6 (Visual Studio 2017)"         },
+		{1914, "MSVC++ 15.7 (Visual Studio 2017)"         },
+		{1915, "MSVC++ 15.8 (Visual Studio 2017)"         },
+		{1916, "MSVC++ 15.9 (Visual Studio 2017)"         },
+		{1920, "MSVC++ 16.0 (Visual Studio 2019 RTW)"     },
+		{1921, "MSVC++ 16.1 (Visual Studio 2019)"         },
+		{1922, "MSVC++ 16.2 (Visual Studio 2019)"         },
+		{1923, "MSVC++ 16.3 (Visual Studio 2019)"         },
+		{1924, "MSVC++ 16.4 (Visual Studio 2019)"         },
+		{1925, "MSVC++ 16.5 (Visual Studio 2019)"         },
+		{1926, "MSVC++ 16.6 (Visual Studio 2019)"         },
+		{1927, "MSVC++ 16.7 (Visual Studio 2019)"         },
+		{1928, "MSVC++ 16.8, 16.9 (Visual Studio 2019)"   },
+		{1929, "MSVC++ 16.10, 16.11 (Visual Studio 2019)" },
+		{1930, "MSVC++ 17.0 (Visual Studio 2022 RTW)"     },
 	};
 	return map.value(ver, "unknown MSVC++ version");
 }

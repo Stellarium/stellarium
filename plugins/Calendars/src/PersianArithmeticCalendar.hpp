@@ -50,7 +50,6 @@ public slots:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-public:
 	//! returns true for leap years
 	static bool isLeap(int pYear);
 
@@ -58,6 +57,9 @@ public:
 	static int fixedFromPersianArithmetic(QVector<int> persian);
 	//! find date in the Persian calendar from RD number
 	static QVector<int> persianArithmeticFromFixed(int rd);
+
+	//! find RD number of Persian New Year (Nowruz)
+	static int nowruz(const int gYear);
 
 protected:
 	static const int persianEpoch; //! RD of .

@@ -216,7 +216,7 @@ void DateTimeDialog::mjdChanged(double nmjd)
 double DateTimeDialog::newJd()
 {
 	double cjd;
-	StelUtils::getJDFromDate(&cjd, year, month, day, hour, minute, second);
+	StelUtils::getJDFromDate(&cjd, year, month, day, hour, minute, static_cast<float>(second));
 	cjd -= (core->getUTCOffset(cjd)/24.0); // local tz -> UTC
 
 	return cjd;
@@ -256,8 +256,7 @@ void DateTimeDialog::setDateTime(double newJd)
 	{
 		// JD and MJD should be at the UTC scale on the window!
 		double newJdC = newJd + core->getUTCOffset(newJd)/24.0; // UTC -> local tz
-		StelUtils::getDateFromJulianDay(newJdC, &year, &month, &day);
-		StelUtils::getTimeFromJulianDay(newJdC, &hour, &minute, &second);
+		StelUtils::getDateTimeFromJulianDay(newJdC, &year, &month, &day, &hour, &minute, &second);
 		jd = newJd;
 
 		pushToWidgets();

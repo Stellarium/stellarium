@@ -39,7 +39,7 @@ public:
 	//! To see the default services that are registered here, see \ref rcApiReference.
 	RequestHandler(const StaticFileControllerSettings& settings, QObject* parent = Q_NULLPTR);
 	//! The internal APIController, and all registered services are deleted
-	virtual ~RequestHandler();
+	virtual ~RequestHandler() Q_DECL_OVERRIDE;
 
 	//! Called in the main thread each frame, only passed on to APIController::update
 	void update(double deltaTime);
@@ -56,7 +56,7 @@ public:
 	//!  - Otherwise, it is passed to a StaticFileController that has been set up for the \c data/webroot folder.
 	//!
 	//! @note This method runs in an HTTP worker thread, not in the Stellarium main thread, so take caution.
-	virtual void service(HttpRequest& request, HttpResponse& response);
+	virtual void service(HttpRequest& request, HttpResponse& response) Q_DECL_OVERRIDE;
 
 public slots:
 	//! Sets wether a password set with setPassword() is required by all requests.

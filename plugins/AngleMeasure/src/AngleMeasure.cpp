@@ -139,7 +139,8 @@ void AngleMeasure::init()
 	StelApp& app = StelApp::getInstance();
 
 	// Create action for enable/disable & hook up signals	
-	addAction("actionShow_Angle_Measure", N_("Angle Measure"), N_("Angle measure"), "enabled", "Ctrl+A");
+	addAction("actionShow_Angle_Measure",        N_("Angle Measure"), N_("Angle measure"),                          "enabled", "Ctrl+A");
+	addAction("actionShow_Angle_Measure_dialog", N_("Angle Measure"), N_("Angle measure settings"),  configDialog,  "visible" ); // no default hotkey
 
 	// Initialize the message strings and make sure they are translated when
 	// the language changes.
@@ -156,7 +157,9 @@ void AngleMeasure::init()
 						       QPixmap(":/angleMeasure/bt_anglemeasure_on.png"),
 						       QPixmap(":/angleMeasure/bt_anglemeasure_off.png"),
 						       QPixmap(":/graphicGui/miscGlow32x32.png"),
-						       "actionShow_Angle_Measure");
+						       "actionShow_Angle_Measure",
+						       false,
+						       "actionShow_Angle_Measure_dialog");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
 	}
@@ -197,11 +200,11 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 
 	if (lineVisible.getInterstate() > 0.000001f)
 	{
-		Vec3d xy; // plot position of data text block
+		Vec3f xy; // plot position of data text block
 		QString displayedText;
 		if (frameType==StelCore::FrameEquinoxEqu)
 		{
-			if (prj->project(flagFollowCursor ? perp2StartPoint : perp1EndPoint ,xy))
+			if (prj->project(flagFollowCursor ? perp2StartPoint.toVec3f() : perp1EndPoint.toVec3f() ,xy))
 			{
 				painter.setColor(txtColor, lineVisible.getInterstate());
 				if (flagShowEquatorialPA)
@@ -213,7 +216,7 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 		}
 		else
 		{
-			if (prj->project(flagFollowCursor ? perp2StartPointHor : perp1EndPointHor, xy))
+			if (prj->project(flagFollowCursor ? perp2StartPointHor.toVec3f() : perp1EndPointHor.toVec3f(), xy))
 			{
 				painter.setColor(txtColor, lineVisible.getInterstate());
 				if (flagShowHorizontalPA)
@@ -252,9 +255,9 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 		// text block (bottom left)
 		painter.setColor(txtColor[0], txtColor[1], txtColor[2], messageFader.getInterstate());
 		const double ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
-		int x = 83*ppx;
-		int y = 120*ppx;
-		int ls = ppx*painter.getFontMetrics().lineSpacing();
+		int x  = static_cast<int>(83*ppx);
+		int y  = static_cast<int>(120*ppx);
+		int ls = static_cast<int>(ppx*painter.getFontMetrics().lineSpacing());
 		painter.drawText(x, y, messageEnabled);
 		y -= ls;
 		painter.drawText(x, y, messageLeftButton);
@@ -289,13 +292,10 @@ QString AngleMeasure::calculatePositionAngle(const Vec3d p1, const Vec3d p2) con
 	if (r<0)
 		r+= 2*M_PI;
 
-	unsigned int d, m;
 	double s;
-	bool sign;
-
 	if (withDecimalDegree)
 	{
-		StelUtils::radToDecDeg(r, sign, s);
+		s = std::abs(r * M_180_PI);
 		if (flagUseDmsFormat)
 			return QString("%1d").arg(s, 0, 'f', 5);
 		else
@@ -303,6 +303,8 @@ QString AngleMeasure::calculatePositionAngle(const Vec3d p1, const Vec3d p2) con
 	}
 	else
 	{
+		unsigned int d, m;
+		bool sign;
 		StelUtils::radToDms(r, sign, d, m, s);
 		if (flagUseDmsFormat)
 			return QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
@@ -431,14 +433,10 @@ void AngleMeasure::calculateEndsOneLine(const Vec3d &start, const Vec3d &end, Ve
 
 QString AngleMeasure::formatAngleString(double angle) const
 {
-	unsigned int d, m;
 	double s;
-	bool sign;
-
 	if (withDecimalDegree)
 	{
-		StelUtils::radToDecDeg(angle, sign, s);
-
+		s = std::abs(angle * M_180_PI);
 		if (flagUseDmsFormat)
 			return QString("%1d").arg(s, 0, 'f', 5);
 		else
@@ -446,6 +444,8 @@ QString AngleMeasure::formatAngleString(double angle) const
 	}
 	else
 	{
+		unsigned int d, m;
+		bool sign;
 		StelUtils::radToDms(angle, sign, d, m, s);
 
 		if (flagUseDmsFormat)

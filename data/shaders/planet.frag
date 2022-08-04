@@ -25,6 +25,7 @@ varying mediump vec2 texc; //texture coord
 varying highp vec3 P; //original vertex pos in model space
 
 uniform sampler2D tex;
+uniform mediump vec2 poleLat; //latitudes of pole caps, in terms of texture coordinate. x>0...north, y<1...south. 
 uniform mediump vec3 ambientLight;
 uniform mediump vec3 diffuseLight;
 uniform highp vec4 sunInfo;
@@ -298,7 +299,23 @@ void main()
     //litColor.xyz = clamp( litColor.xyz + vec3(outgas), 0.0, 1.0);
 
     lowp vec4 texColor = texture2D(tex, texc);
+
     mediump vec4 finalColor = texColor;
+	// apply (currently only Martian) pole caps. texc.t=0 at south pole, 1 at north pole. 
+	if (texc.t>poleLat.x-0.01+0.001*sin(texc.s*18.*M_PI)) {	// North pole near t=1
+		mediump float mixfactor=1.;
+		if (texc.t<poleLat.x+0.01+0.001*sin(texc.s*18.*M_PI))
+			mixfactor=(texc.t-poleLat.x+0.01-0.001*sin(texc.s*18.*M_PI))/0.02;
+		//finalColor.xyz=mix(vec3(1., 1., 1.), finalColor.xyz, 1.-mixfactor); 
+		finalColor.xyz=mix(vec3(1., 1., 1.), finalColor.xyz, smoothstep(0., 1., 1.-mixfactor)); 
+	}
+	if (texc.t<poleLat.y+0.01+0.001*sin(texc.s*18.*M_PI)) {	// South pole near texc.t~0
+		mediump float mixfactor=1.;
+		if (texc.t>poleLat.y-0.01+0.001*sin(texc.s*18.*M_PI))
+			mixfactor=(poleLat.y+0.01-texc.t-0.001*sin(texc.s*18.*M_PI))/0.02;
+		//finalColor.xyz=mix(vec3(1., 1., 1.), finalColor.xyz, 1.-mixfactor); 
+		finalColor.xyz=mix(vec3(1., 1., 1.), finalColor.xyz, smoothstep(0., 1., 1.-mixfactor)); 
+	}
 #ifdef IS_MOON
     if(final_illumination < 0.9999)
     {

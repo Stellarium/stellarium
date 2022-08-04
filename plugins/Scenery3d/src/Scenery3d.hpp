@@ -152,7 +152,7 @@ signals:
     void loadingSceneIDChanged(const QString& sceneID);
 
     //! This signal is emitted from another thread than this QObject belongs to, so use QueuedConnection.
-    void progressReport(const QString& str, int val, int min, int max) const;
+    void progressReport(const QString& str, int val, int min, int max) const; // ignore clazy warning here.
 
 public slots:
     //! Performs a relative translation of the viewer's position.
@@ -363,9 +363,9 @@ class Scenery3dStelPluginInterface : public QObject, public StelPluginInterface
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
-	virtual QObjectList getExtensionList() const;
+	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE;
 };
 
 

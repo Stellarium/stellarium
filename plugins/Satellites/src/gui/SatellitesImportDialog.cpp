@@ -149,7 +149,8 @@ void SatellitesImportDialog::getData()
 			progressBar = StelApp::getInstance().addProgressBar();
 		progressBar->setValue(0);
 		progressBar->setRange(0, sourceUrls.size());
-		progressBar->setFormat("TLE download %v/%m");
+		// TRANSLATORS: The full phrase is 'Loading TLE %VALUE%/%MAX%' in progress bar
+		progressBar->setFormat(QString("%1 %v/%m").arg(q_("Loading TLE")));
 		
 		ui->pushButtonGetData->setVisible(false);
 		ui->pushButtonAbort->setVisible(true);
@@ -168,14 +169,14 @@ void SatellitesImportDialog::getData()
 	{
 		QStringList sourceFilePaths;
 		// XXX: we should check that there is at least one home location.
-		QString homeDirPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation)[0];
+		QString homeDirPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).constFirst();
 		sourceFilePaths = QFileDialog::getOpenFileNames(
 				      Q_NULLPTR,
 		                      q_("Select TLE source file(s)..."),
 		                      homeDirPath, "*.*");
 		if (sourceFilePaths.isEmpty())
 			return;
-		for (auto filePath : sourceFilePaths)
+		for (auto &filePath : sourceFilePaths)
 		{
 			QFileInfo fileInfo(filePath);
 			if (fileInfo.exists() && fileInfo.isReadable())

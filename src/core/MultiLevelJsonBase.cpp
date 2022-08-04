@@ -64,9 +64,9 @@ QNetworkAccessManager& MultiLevelJsonBase::getNetworkAccessManager()
 class JsonLoadThread : public QThread
 {
 	public:
-		JsonLoadThread(MultiLevelJsonBase* atile, QByteArray content, bool aqZcompressed=false, bool agzCompressed=false) : QThread((QObject*)atile),
-			tile(atile), data(content), qZcompressed(aqZcompressed), gzCompressed(agzCompressed){;}
-		virtual void run();
+		JsonLoadThread(MultiLevelJsonBase* atile, QByteArray content, bool aqZcompressed=false, bool agzCompressed=false) : QThread(static_cast<QObject*>(atile)),
+			tile(atile), data(content), qZcompressed(aqZcompressed), gzCompressed(agzCompressed){}
+		virtual void run() Q_DECL_OVERRIDE;
 	private:
 		MultiLevelJsonBase* tile;
 		QByteArray data;
@@ -108,7 +108,7 @@ MultiLevelJsonBase::MultiLevelJsonBase(MultiLevelJsonBase* parent) : StelSkyLaye
 void MultiLevelJsonBase::initFromUrl(const QString& url)
 {
 	const MultiLevelJsonBase* parent = qobject_cast<MultiLevelJsonBase*>(QObject::parent());
-	contructorUrl = url;
+	constructorUrl = url;
 	if (!url.startsWith("http", Qt::CaseInsensitive) && (parent==Q_NULLPTR || !parent->getBaseUrl().startsWith("http", Qt::CaseInsensitive)))
 	{
 		// Assume a local file
@@ -152,8 +152,8 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 	}
 	else
 	{
-		// Use a very short deletion delay to ensure that tile which are outside screen are discared before they are even downloaded
-		// This is useful to reduce bandwidth when the user moves rapidely
+		// Use a very short deletion delay to ensure that tiles which are outside screen are discarded before they are even downloaded
+		// This is useful to reduce bandwidth when the user moves the view rapidly
 		deletionDelay = 0.001;
 		QUrl qurl;
 		if (url.startsWith("http", Qt::CaseInsensitive))
@@ -188,7 +188,7 @@ void MultiLevelJsonBase::initFromQVariantMap(const QVariantMap& map)
 	if (parent!=Q_NULLPTR)
 	{
 		baseUrl = parent->getBaseUrl();
-		contructorUrl = parent->contructorUrl + "/?";
+		constructorUrl = parent->constructorUrl + "/?";
 	}
 	try
 	{
@@ -228,7 +228,7 @@ MultiLevelJsonBase::~MultiLevelJsonBase()
 			//loadThread->wait(2000);
 		}
 	}
-	for (auto* tile : subTiles)
+	for (auto* tile : qAsConst(subTiles))
 	{
 		tile->deleteLater();
 	}
@@ -238,7 +238,7 @@ MultiLevelJsonBase::~MultiLevelJsonBase()
 
 void MultiLevelJsonBase::scheduleChildsDeletion()
 {
-	for (auto* tile : subTiles)
+	for (auto* tile : qAsConst(subTiles))
 	{
 		if (tile->timeWhenDeletionScheduled<0)
 			tile->timeWhenDeletionScheduled = StelApp::getInstance().getTotalRunTime();
@@ -249,7 +249,7 @@ void MultiLevelJsonBase::scheduleChildsDeletion()
 void MultiLevelJsonBase::cancelDeletion()
 {
 	timeWhenDeletionScheduled=-1.;
-	for (auto* tile : subTiles)
+	for (auto* tile : qAsConst(subTiles))
 	{
 		tile->cancelDeletion();
 	}
@@ -353,7 +353,7 @@ void MultiLevelJsonBase::deleteUnusedSubTiles()
 		return;
 	const double now = StelApp::getInstance().getTotalRunTime();
 	bool deleteAll = true;
-	for (auto* tile : subTiles)
+	for (auto* tile : qAsConst(subTiles))
 	{
 		if (tile->timeWhenDeletionScheduled<0 || (now-tile->timeWhenDeletionScheduled)<deletionDelay)
 		{
@@ -363,15 +363,15 @@ void MultiLevelJsonBase::deleteUnusedSubTiles()
 	}
 	if (deleteAll==true)
 	{
-		//qDebug() << "Delete all tiles for " << this << ": " << contructorUrl;
-		for (auto* tile : subTiles)
+		//qDebug() << "Delete all tiles for " << this << ": " << constructorUrl;
+		for (auto* tile : qAsConst(subTiles))
 			tile->deleteLater();
 		subTiles.clear();
 	}
 	else
 	{
 		// Nothing to delete at this level, propagate
-		for (auto* tile : subTiles)
+		for (auto* tile : qAsConst(subTiles))
 			tile->deleteUnusedSubTiles();
 	}
 }
@@ -383,7 +383,7 @@ void MultiLevelJsonBase::updatePercent(int tot, int toBeLoaded)
 		if (loadingState==true)
 		{
 			loadingState=false;
-			emit(loadingStateChanged(false));
+			emit loadingStateChanged(false);
 		}
 		return;
 	}
@@ -394,7 +394,7 @@ void MultiLevelJsonBase::updatePercent(int tot, int toBeLoaded)
 		if (loadingState==true)
 		{
 			loadingState=false;
-			emit(loadingStateChanged(false));
+			emit loadingStateChanged(false);
 		}
 		return;
 	}
@@ -403,11 +403,11 @@ void MultiLevelJsonBase::updatePercent(int tot, int toBeLoaded)
 		if (loadingState==false)
 		{
 			loadingState=true;
-			emit(loadingStateChanged(true));
+			emit loadingStateChanged(true);
 		}
 	}
 	if (p==lastPercent)
 		return;
 	lastPercent=p;
-	emit(percentLoadedChanged(p));
+	emit percentLoadedChanged(p);
 }

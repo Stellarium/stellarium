@@ -57,7 +57,7 @@ public:
 	// Methods defined in the StelModule class
 	virtual void init() Q_DECL_OVERRIDE;
 	virtual void deinit() Q_DECL_OVERRIDE;
-	virtual void update(double)  Q_DECL_OVERRIDE{;}
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE {NomenclatureItem::labelsFader.update(static_cast<int>(deltaTime*1000));}
 	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 	virtual void drawPointer(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
@@ -65,7 +65,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
 	//! Used to get a list of objects which are near to some position.
-	//! @param v a vector representing the position in th sky around which to search for nomenclatures.
+	//! @param v a vector representing the position in the sky around which to search for nomenclatures.
 	//! @param limitFov the field of view around the position v in which to search for nomenclatures.
 	//! @param core the StelCore to use for computations.
 	//! @return a list containing the NomenclatureItems located inside the limitFov circle around position v.
@@ -133,6 +133,8 @@ private:
 
 	//! Load nomenclature for solar system bodies
 	void loadNomenclature();
+
+	void loadSpecialNomenclature();
 
 	// Font used for displaying our text
 	QFont font;

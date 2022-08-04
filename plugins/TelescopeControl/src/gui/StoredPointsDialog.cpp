@@ -91,7 +91,7 @@ void StoredPointsDialog::setHeaderNames()
 {
 	QStringList headerStrings;
 	// TRANSLATORS: Symbol for "number"
-	headerStrings << q_("#");
+	headerStrings << qc_("#", "numero sign");
 	headerStrings << q_("Name");
 	headerStrings << q_("Right Ascension (J2000)");
 	headerStrings << q_("Declination (J2000)");

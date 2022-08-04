@@ -108,7 +108,7 @@ void StelTexture::reportError(const QString& aerrorMessage)
 	errorOccured = true;
 	errorMessage = aerrorMessage;
 	// Report failure of texture loading
-	emit(loadingProcessFinished(true));
+	emit loadingProcessFinished(true);
 }
 
 StelTexture::GLData StelTexture::imageToGLData(const QImage &image)
@@ -420,7 +420,7 @@ bool StelTexture::glLoad(const GLData& data)
 
 
 	// Report success of texture loading
-	emit(loadingProcessFinished(false));
+	emit loadingProcessFinished(false);
 	return true;
 }
 

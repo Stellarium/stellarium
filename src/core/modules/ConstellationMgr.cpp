@@ -41,7 +41,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QSettings>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QString>
 #include <QStringList>
 #include <QDir>
@@ -493,11 +493,11 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 
 	int totalRecords=0;
 	QString record;
-	QRegExp commentRx("^(\\s*#.*|\\s*)$"); // pure comment lines or empty lines
+	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$"); // pure comment lines or empty lines
 	while (!in.atEnd())
 	{
 		record = QString::fromUtf8(in.readLine());
-		if (!commentRx.exactMatch(record))
+		if (!commentRx.match(record).hasMatch())
 			totalRecords++;
 	}
 	in.seek(0);
@@ -516,7 +516,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	{
 		record = QString::fromUtf8(in.readLine());
 		currentLineNumber++;
-		if (commentRx.exactMatch(record))
+		if (commentRx.match(record).hasMatch())
 			continue;
 
 		cons = new Constellation;
@@ -560,7 +560,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	while (!fic.atEnd())
 	{
 		record = QString::fromUtf8(fic.readLine());
-		if (!commentRx.exactMatch(record))
+		if (!commentRx.match(record).hasMatch())
 			totalRecords++;
 	}
 	fic.seek(0);
@@ -584,10 +584,10 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	{
 		++currentLineNumber;
 		record = QString::fromUtf8(fic.readLine());
-		if (commentRx.exactMatch(record))
+		if (commentRx.match(record).hasMatch())
 			continue;
 
-		// prevent leaving zeros on numbers from being interpretted as octal numbers
+		// prevent leading zeros on numbers from being interpreted as octal numbers
 		record.replace(" 0", " ");
 		QTextStream rStr(&record);
 		rStr >> shortname >> texfile >> x1 >> y1 >> hp1 >> x2 >> y2 >> hp2 >> x3 >> y3 >> hp3;
@@ -616,7 +616,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 				qWarning() << "ERROR: could not find texture, " << QDir::toNativeSeparators(texfile);
 			}
 
-			cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath);
+			cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath, StelTexture::StelTextureParams(true));
 
 			int texSizeX = 0, texSizeY = 0;
 			if (cons->artTexture==Q_NULLPTR || !cons->artTexture->getDimensions(texSizeX, texSizeY))
@@ -625,20 +625,20 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			}
 
 			StelCore* core = StelApp::getInstance().getCore();
-			Vec3d s1 = hipStarMgr->searchHP(static_cast<int>(hp1))->getJ2000EquatorialPos(core);
-			Vec3d s2 = hipStarMgr->searchHP(static_cast<int>(hp2))->getJ2000EquatorialPos(core);
-			Vec3d s3 = hipStarMgr->searchHP(static_cast<int>(hp3))->getJ2000EquatorialPos(core);
+			const Vec3d s1 = hipStarMgr->searchHP(static_cast<int>(hp1))->getJ2000EquatorialPos(core);
+			const Vec3d s2 = hipStarMgr->searchHP(static_cast<int>(hp2))->getJ2000EquatorialPos(core);
+			const Vec3d s3 = hipStarMgr->searchHP(static_cast<int>(hp3))->getJ2000EquatorialPos(core);
 
 			// To transform from texture coordinate to 2d coordinate we need to find X with XA = B
-			// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate
-			// We need 3 stars and the 4th point is deduced from the other to get an normal base
+			// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate space
+			// We need 3 stars and the 4th point is deduced from the others to get a normal base
 			// X = B inv(A)
 			Vec3d s4 = s1 + ((s2 - s1) ^ (s3 - s1));
 			Mat4d B(s1[0], s1[1], s1[2], 1, s2[0], s2[1], s2[2], 1, s3[0], s3[1], s3[2], 1, s4[0], s4[1], s4[2], 1);
 			Mat4d A(x1, texSizeY - static_cast<int>(y1), 0., 1., x2, texSizeY - static_cast<int>(y2), 0., 1., x3, texSizeY - static_cast<int>(y3), 0., 1., x1, texSizeY - static_cast<int>(y1), texSizeX, 1.);
 			Mat4d X = B * A.inverse();
 
-			// Tesselate on the plan assuming a tangential projection for the image
+			// Tessellate on the plane assuming a tangential projection for the image
 			static const int nbPoints=5;
 			QVector<Vec2f> texCoords;
 			texCoords.reserve(nbPoints*nbPoints*6);
@@ -657,8 +657,14 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 
 			QVector<Vec3d> contour;
 			contour.reserve(texCoords.size());
-			for (const auto& v : texCoords)
-				contour << X * Vec3d(static_cast<double>(v[0]) * texSizeX, static_cast<double>(v[1]) * texSizeY, 0.);
+			for (const auto& v : qAsConst(texCoords))
+			{
+				Vec3d vertex = X * Vec3d(static_cast<double>(v[0]) * texSizeX, static_cast<double>(v[1]) * texSizeY, 0.);
+				// Originally the projected texture plane remained as tangential plane.
+				// The vertices should however be reduced to the sphere for correct aberration:
+				vertex.normalize();
+				contour << vertex;
+			}
 
 			cons->artPolygon.vertex=contour;
 			cons->artPolygon.texCoords=texCoords;
@@ -684,13 +690,20 @@ void ConstellationMgr::draw(StelCore* core)
 	StelPainter sPainter(prj);
 	sPainter.setFont(asterFont);
 	drawLines(sPainter, core);
-	drawNames(sPainter);
-	drawArt(sPainter);
-	drawBoundaries(sPainter);
+	Vec3d vel(0.);
+	if (core->getUseAberration())
+	{
+		vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		vel=StelCore::matVsop87ToJ2000*vel;
+		vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+	}
+	drawNames(sPainter, vel);
+	drawArt(sPainter, vel);
+	drawBoundaries(sPainter, vel);
 }
 
 // Draw constellations art textures
-void ConstellationMgr::drawArt(StelPainter& sPainter) const
+void ConstellationMgr::drawArt(StelPainter& sPainter, const Vec3d &obsVelocity) const
 {
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	sPainter.setCullFace(true);
@@ -698,7 +711,7 @@ void ConstellationMgr::drawArt(StelPainter& sPainter) const
 	SphericalRegionP region = sPainter.getProjector()->getViewportConvexPolygon();
 	for (auto* constellation : constellations)
 	{
-		constellation->drawArtOptim(sPainter, *region);
+		constellation->drawArtOptim(sPainter, *region, obsVelocity);
 	}
 
 	sPainter.setCullFace(false);
@@ -724,13 +737,18 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) co
 }
 
 // Draw the names of all the constellations
-void ConstellationMgr::drawNames(StelPainter& sPainter) const
+void ConstellationMgr::drawNames(StelPainter& sPainter, const Vec3d &obsVelocity) const
 {
 	sPainter.setBlending(true);
 	for (auto* constellation : constellations)
 	{
+		Vec3d XYZname=constellation->XYZname;
+		XYZname.normalize();
+		XYZname+=obsVelocity;
+		XYZname.normalize();
+
 		// Check if in the field of view
-		if (sPainter.getProjector()->projectCheck(constellation->XYZname, constellation->XYname))
+		if (sPainter.getProjector()->projectCheck(XYZname, constellation->XYname))
 			constellation->drawName(sPainter, constellationDisplayStyle);
 	}
 }
@@ -796,17 +814,13 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 
 	// Now parse the file
 	// lines to ignore which start with a # or are empty
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 
 	// lines which look like records - we use the RE to extract the fields
 	// which will be available in recRx.capturedTexts()
 	// abbreviation is allowed to start with a dot to mark as "hidden".
-	QRegExp recRx("^\\s*(\\.?\\w+)\\s+\"(.*)\"\\s+_[(]\"(.*)\"[)]\\s*(\\w*)\\n");
-	QRegExp ctxRx("(.*)\",\\s*\"(.*)");
-
-	// Some more variables to use in the parsing
-	Constellation *aster;
-	QString record, shortName, ctxt;
+	static const QRegularExpression recRx("^\\s*(\\.?\\w+)\\s+\"(.*)\"\\s+_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
+	static const QRegularExpression ctxRx("(.*)\",\\s*\"(.*)");
 
 	// keep track of how many records we processed.
 	int totalRecords=0;
@@ -814,32 +828,34 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 	int lineNumber=0;
 	while (!commonNameFile.atEnd())
 	{
-		record = QString::fromUtf8(commonNameFile.readLine());
+		QString record = QString::fromUtf8(commonNameFile.readLine());
 		lineNumber++;
 
 		// Skip comments
-		if (commentRx.exactMatch(record))
+		if (commentRx.match(record).hasMatch())
 			continue;
 
 		totalRecords++;
 
-		if (!recRx.exactMatch(record))
+		QRegularExpressionMatch recMatch=recRx.match(record);
+		if (!recMatch.hasMatch())
 		{
 			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in constellation names file" << QDir::toNativeSeparators(namesFile) << ":" << record;
 		}
 		else
 		{
-			shortName = recRx.cap(1);
-			aster = findFromAbbreviation(shortName);
+			QString shortName = recMatch.captured(1);
+			Constellation *aster = findFromAbbreviation(shortName);
 			// If the constellation exists, set the English name
 			if (aster != Q_NULLPTR)
 			{
-				aster->nativeName = recRx.cap(2);
-				ctxt = recRx.cap(3);
-				if (ctxRx.exactMatch(ctxt))
+				aster->nativeName = recMatch.captured(2);
+				QString ctxt = recMatch.captured(3);
+				QRegularExpressionMatch ctxMatch=ctxRx.match(ctxt);
+				if (ctxMatch.hasMatch())
 				{
-					aster->englishName = ctxRx.cap(1);
-					aster->context = ctxRx.cap(2);
+					aster->englishName = ctxMatch.captured(1);
+					aster->context = ctxMatch.captured(2);
 				}
 				else
 				{
@@ -899,11 +915,11 @@ void ConstellationMgr::loadSeasonalRules(const QString& rulesFile)
 
 	// Now parse the file
 	// lines to ignore which start with a # or are empty
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 
 	// lines which look like records - we use the RE to extract the fields
 	// which will be available in recRx.capturedTexts()
-	QRegExp recRx("^\\s*(\\w+)\\s+(\\w+)\\s+(\\w+)\\n");
+	static const QRegularExpression recRx("^\\s*(\\w+)\\s+(\\w+)\\s+(\\w+)\\n");
 
 	// Some more variables to use in the parsing
 	Constellation *aster;
@@ -919,24 +935,25 @@ void ConstellationMgr::loadSeasonalRules(const QString& rulesFile)
 		lineNumber++;
 
 		// Skip comments
-		if (commentRx.exactMatch(record))
+		if (commentRx.match(record).hasMatch())
 			continue;
 
 		totalRecords++;
 
-		if (!recRx.exactMatch(record))
+		QRegularExpressionMatch recMatch=recRx.match(record);
+		if (!recMatch.hasMatch())
 		{
 			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in seasonal rules file" << QDir::toNativeSeparators(rulesFile);
 		}
 		else
 		{
-			shortName = recRx.cap(1);
+			shortName = recMatch.captured(1);
 			aster = findFromAbbreviation(shortName);
 			// If the constellation exists, set the English name
 			if (aster != Q_NULLPTR)
 			{
-				aster->beginSeason = recRx.cap(2).toInt();
-				aster->endSeason = recRx.cap(3).toInt();
+				aster->beginSeason = recMatch.captured(2).toInt();
+				aster->endSeason = recMatch.captured(3).toInt();
 				readOk++;
 			}
 			else
@@ -963,7 +980,7 @@ void ConstellationMgr::update(double deltaTime)
 {
 	//calculate FOV fade value, linear fade between artIntensityMaximumFov and artIntensityMinimumFov
 	double fov = StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov();
-	Constellation::artIntensityFovScale = qBound(0.0,(fov - artIntensityMinimumFov) / (artIntensityMaximumFov - artIntensityMinimumFov),1.0);
+	Constellation::artIntensityFovScale = static_cast<float>(qBound(0.0,(fov - artIntensityMinimumFov) / (artIntensityMaximumFov - artIntensityMinimumFov),1.0));
 
 	const int delta = static_cast<int>(deltaTime*1000);
 	for (auto* constellation : constellations)
@@ -1014,7 +1031,7 @@ double ConstellationMgr::getArtIntensityMaximumFov() const
 
 void ConstellationMgr::setArtFadeDuration(const float duration)
 {
-	if (artFadeDuration != duration)
+    if (!qFuzzyCompare(artFadeDuration, duration))
 	{
 		artFadeDuration = duration;
 
@@ -1323,7 +1340,6 @@ void ConstellationMgr::unsetSelectedConst(Constellation * c)
 bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 {
 	Constellation *cons = Q_NULLPTR;
-	unsigned int i, j;
 
 	// delete existing boundaries if any exist
 	for (auto* segment : allBoundarySegments)
@@ -1345,20 +1361,20 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 
 	double DE, RA;
 	Vec3d XYZ;
-	unsigned num, numc;
+	unsigned numc;
 	vector<Vec3d> *points = Q_NULLPTR;
-	QString consname, record, data = "";
-	i = 0;
+	QString consname, data = "";
+	unsigned int i = 0;
 
 	// Added support of comments for constellation_boundaries.dat file
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 	while (!dataFile.atEnd())
 	{
 		// Read the line
-		record = QString::fromUtf8(dataFile.readLine());
+		QString record = QString::fromUtf8(dataFile.readLine());
 
 		// Skip comments
-		if (commentRx.exactMatch(record))
+		if (commentRx.match(record).hasMatch())
 			continue;
 
 		// Append the data
@@ -1369,14 +1385,14 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	QTextStream istr(&data);
 	while (!istr.atEnd())
 	{
-		num = 0;
+		unsigned num = 0;
 		istr >> num;
 		if(num == 0)
 			continue; // empty line
 
 		points = new vector<Vec3d>;
 
-		for (j=0;j<num;j++)
+		for (unsigned int j=0;j<num;j++)
 		{
 			istr >> RA >> DE;
 
@@ -1394,7 +1410,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 		istr >> numc;
 		// there are 2 constellations per boundary
 
-		for (j=0;j<numc;j++)
+		for (unsigned int j=0;j<numc;j++)
 		{
 			istr >> consname;
 			// not used?
@@ -1425,7 +1441,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	return true;
 }
 
-void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
+void ConstellationMgr::drawBoundaries(StelPainter& sPainter, const Vec3d &obsVelocity) const
 {
 	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 	sPainter.setBlending(false);
@@ -1434,7 +1450,7 @@ void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 	sPainter.setLineSmooth(true);
 	for (auto* constellation : constellations)
 	{
-		constellation->drawBoundaryOptim(sPainter);
+		constellation->drawBoundaryOptim(sPainter, obsVelocity);
 	}
 	if (constellationBoundariesThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(1); // restore line thickness

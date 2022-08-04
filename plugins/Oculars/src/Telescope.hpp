@@ -36,7 +36,7 @@ class Telescope : public QObject
 public:
 	Telescope();
 	Q_INVOKABLE Telescope(const QObject& other);
-	virtual ~Telescope();
+	virtual ~Telescope() Q_DECL_OVERRIDE;
 	static Telescope* telescopeFromSettings(QSettings* theSettings, int telescopeIndex);
 	void writeToSettings(QSettings * settings, const int index);
 	static Telescope* telescopeModel();

@@ -29,5 +29,5 @@ StelGuiBase::StelGuiBase()
 
 void StelGuiBase::init(QGraphicsWidget *atopLevelGraphicsWidget)
 {
-	Q_UNUSED(atopLevelGraphicsWidget);
+	Q_UNUSED(atopLevelGraphicsWidget)
 }

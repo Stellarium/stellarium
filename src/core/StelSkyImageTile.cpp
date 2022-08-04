@@ -46,6 +46,7 @@ void StelSkyImageTile::initCtor()
 	noTexture = false;
 	texFader = Q_NULLPTR;
 	birthJD = -1e10;
+	withAberration = true;
 }
 
 // Constructor
@@ -77,16 +78,31 @@ StelSkyImageTile::~StelSkyImageTile()
 {
 }
 
-void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float)
+void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float opacity)
 {
+	Q_UNUSED(opacity)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+
+	// compute aberration correction vector
+	Vec3d vel(0.0);
+	if ((core) && (core->getUseAberration()) && (core->getCurrentPlanet()) && (withAberration))
+	{
+		vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+	}
 
 	const float limitLuminance = core->getSkyDrawer()->getLimitLuminance();
 	QMultiMap<double, StelSkyImageTile*> result;
-	getTilesToDraw(result, core, prj->getViewportConvexPolygon(0, 0), limitLuminance, true);
+	// TODO: adjust that viewportconvexpolygon by aberration to select the right tiles.
+	// I thought the viewportpolygon needs to be enlarged just a bit. (I use 20 arcseconds here as estimate of max. aberration from earth.)
+	//getTilesToDraw(result, core, prj->getViewportConvexPolygon(0,0)->getEnlarged(20./3600.*M_PI_180 *core->getAberrationFactor()), limitLuminance, true);
+	// But it seems not even the AllSky region prevents clipping, so it must be caused somewhere else.
+//	const SphericalCap& hp = prj->getBoundingCap();
+//	getTilesToDraw(result, core, SphericalRegionP(new SphericalCap(hp)), limitLuminance, true);
+	getTilesToDraw(result, core, SphericalRegionP(new AllSkySphericalRegion()), limitLuminance, true);
 
 	int numToBeLoaded=0;
-	for (auto* t : result)
+	for (auto* t : qAsConst(result))
 		if (t->isReadyToDisplay()==false)
 			++numToBeLoaded;
 	updatePercent(result.size(), numToBeLoaded);
@@ -97,7 +113,7 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float)
 	while (i!=result.begin())
 	{
 		--i;
-		i.value()->drawTile(core, sPainter);
+		i.value()->drawTile(core, sPainter, vel);
 	}
 
 	deleteUnusedSubTiles();
@@ -160,7 +176,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		}
 		else
 		{
-			for (const auto& poly : skyConvexPolygons)
+			for (const auto& poly : qAsConst(skyConvexPolygons))
 			{
 				if (viewPortPoly->contains(poly))
 				{
@@ -213,7 +229,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 		if (subTiles.isEmpty() && !subTilesUrls.isEmpty())
 		{
 			// Load the sub tiles because we reached the maximum resolution and they are not yet loaded
-			for (const auto& s : subTilesUrls)
+			for (const auto& s : qAsConst(subTilesUrls))
 			{
 				StelSkyImageTile* nt;
 				if (s.type()==QVariant::Map)
@@ -227,7 +243,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 			}
 		}
 		// Try to add the subtiles
-		for (auto* tile : subTiles)
+		for (auto* tile : qAsConst(subTiles))
 		{
 			qobject_cast<StelSkyImageTile*>(tile)->getTilesToDraw(result, core, viewPortPoly, limitLuminance, !fullInScreen);
 		}
@@ -241,7 +257,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 
 // Draw the image on the screen.
 // Assume GL_TEXTURE_2D is enabled
-bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
+bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter, const Vec3d &vel)
 {
 	if (!tex->bind())
 		return false;
@@ -270,9 +286,13 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 	}
 
 	const bool withExtinction=(getFrameType()!=StelCore::FrameAltAz && core->getSkyDrawer()->getFlagHasAtmosphere() && core->getSkyDrawer()->getExtinction().getExtinctionCoefficient()>=0.01f);
-	
-	for (const auto& poly : skyConvexPolygons)
+
+	for (const auto& poly : qAsConst(skyConvexPolygons))
 	{
+		// Not sure: Are all skyConvexPolygons in J2000 frame? This would also simplify code below...
+		// No, by scripting we can have other frames!
+		//Q_ASSERT(getFrameType() == StelCore::FrameJ2000);
+
 		Vec4f extinctedColor = color;
 		if (withExtinction)
 		{
@@ -282,6 +302,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 			Vec3d baryJ2000;
 			double lng, lat, ra, dec; // aux. values for coordinate transformations
 			double eclJ2000, eclJDE;
+			//qDebug() << "Frame: " << getFrameType();
 			switch (getFrameType()) // all possible but AzAlt!
 			{
 				case StelCore::FrameJ2000:
@@ -327,7 +348,7 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 			extinctedColor[2]*=fabs(extinctionFactor);
 		}
 		sPainter.setColor(extinctedColor);
-		sPainter.drawSphericalRegion(poly.data(), StelPainter::SphericalPolygonDrawModeTextureFill);
+		sPainter.drawSphericalRegion(poly.data(), StelPainter::SphericalPolygonDrawModeTextureFill, Q_NULLPTR, true, 5., vel);
 	}
 
 #ifdef DEBUG_STELSKYIMAGE_TILE
@@ -379,14 +400,14 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		htmlDescription = map.value("description").toString();
 		if (parent()==Q_NULLPTR)
 		{
-			htmlDescription+= "<h3>URL: "+contructorUrl+"</h3>";
+			htmlDescription+= "<h3>URL: "+constructorUrl+"</h3>";
 		}
 	}
 	else
 	{
 		if (parent()==Q_NULLPTR)
 		{
-			htmlDescription= "<h3>URL: "+contructorUrl+"</h3>";
+			htmlDescription= "<h3>URL: "+constructorUrl+"</h3>";
 		}
 	}
 
@@ -399,14 +420,14 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	minResolution = map.value("minResolution").toFloat(&ok);
 	if (!ok)
 	{
-		throw std::runtime_error(qPrintable(QString("minResolution expect a double value, found: \"%1\"").arg(map.value("minResolution").toString())));
+		throw std::runtime_error(qPrintable(QString("minResolution expects a double value, found: \"%1\"").arg(map.value("minResolution").toString())));
 	}
 
 	if (map.contains("luminance"))
 	{
 		luminance = map.value("luminance").toFloat(&ok);
 		if (!ok)
-			throw std::runtime_error("luminance expect a float value");
+			throw std::runtime_error("luminance expects a float value");
 		qWarning() << "luminance in preview JSON files is deprecated. Replace with maxBrightness.";
 	}
 
@@ -415,7 +436,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		// maxBrightness is the maximum nebula brightness in Vmag/arcmin^2
 		luminance = map.value("maxBrightness").toFloat(&ok);
 		if (!ok)
-			throw std::runtime_error("maxBrightness expect a float value");
+			throw std::runtime_error("maxBrightness expects a float value");
 		luminance = StelApp::getInstance().getCore()->getSkyDrawer()->surfaceBrightnessToLuminance(luminance);
 	}
 
@@ -496,10 +517,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	else
 		noTexture = true;
 
-	if (map.contains("birthJD"))
-		birthJD = map.value("birthJD").toDouble();
-	else
-		birthJD = -1e10;
+	birthJD = map.value("birthJD", -1e10).toDouble();
 
 	// This is a list of URLs to the child tiles or a list of already loaded map containing child information
 	// (in this later case, the StelSkyImageTile objects will be created later)
@@ -520,6 +538,8 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 // 	{
 // 		qWarning() << "Large tiles number for " << shortName << ": " << subTilesUrls.size();
 // 	}
+
+	withAberration = map.value("withAberration", true).toBool();
 }
 
 // Convert the image informations to a map following the JSON structure.
@@ -562,6 +582,7 @@ QVariantMap StelSkyImageTile::toQVariantMap() const
 		res["imageUrl"]=absoluteImageURI;
 	if (birthJD>-1e10)
 		res["birthJD"]=birthJD;
+	res["withAberration"] = withAberration;
 
 	// Polygons
 	// TODO

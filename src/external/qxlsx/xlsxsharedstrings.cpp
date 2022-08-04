@@ -1,32 +1,6 @@
-/****************************************************************************
-** Copyright (c) 2013-2014 Debao Zhang <hello@debao.me>
-** All right reserved.
-**
-** Permission is hereby granted, free of charge, to any person obtaining
-** a copy of this software and associated documentation files (the
-** "Software"), to deal in the Software without restriction, including
-** without limitation the rights to use, copy, modify, merge, publish,
-** distribute, sublicense, and/or sell copies of the Software, and to
-** permit persons to whom the Software is furnished to do so, subject to
-** the following conditions:
-**
-** The above copyright notice and this permission notice shall be
-** included in all copies or substantial portions of the Software.
-**
-** THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-** EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-** MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-** NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-** LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-** OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-**
-****************************************************************************/
-#include "xlsxrichstring.h"
-#include "xlsxsharedstrings_p.h"
-#include "xlsxutility_p.h"
-#include "xlsxformat_p.h"
-#include "xlsxcolor_p.h"
+// xlsxsharedstrings.cpp
+
+#include <QtGlobal>
 #include <QXmlStreamWriter>
 #include <QXmlStreamReader>
 #include <QDir>
@@ -34,7 +8,13 @@
 #include <QDebug>
 #include <QBuffer>
 
-namespace QXlsx {
+#include "xlsxrichstring.h"
+#include "xlsxsharedstrings_p.h"
+#include "xlsxutility_p.h"
+#include "xlsxformat_p.h"
+#include "xlsxcolor_p.h"
+
+QT_BEGIN_NAMESPACE_XLSX
 
 /*
  * Note that, when we open an existing .xlsx file (broken file?),
@@ -69,10 +49,10 @@ int SharedStrings::addSharedString(const RichString &string)
 {
     m_stringCount += 1;
 
-    if (m_stringTable.contains(string)) {
-        XlsxSharedStringInfo &item = m_stringTable[string];
-        item.count += 1;
-        return item.index;
+    auto it = m_stringTable.find(string);
+    if (it != m_stringTable.end()) {
+        it->count += 1;
+        return it->index;
     }
 
     int index = m_stringList.size();
@@ -104,19 +84,19 @@ void SharedStrings::removeSharedString(const QString &string)
  */
 void SharedStrings::removeSharedString(const RichString &string)
 {
-    if (!m_stringTable.contains(string))
+    auto it = m_stringTable.find(string);
+    if (it == m_stringTable.end())
         return;
 
     m_stringCount -= 1;
 
-    XlsxSharedStringInfo &item = m_stringTable[string];
-    item.count -= 1;
+    it->count -= 1;
 
-    if (item.count <= 0) {
-        for (int i=item.index+1; i<m_stringList.size(); ++i)
+    if (it->count <= 0) {
+        for (int i=it->index+1; i<m_stringList.size(); ++i)
             m_stringTable[m_stringList[i]].index -= 1;
 
-        m_stringList.removeAt(item.index);
+        m_stringList.removeAt(it->index);
         m_stringTable.remove(string);
     }
 }
@@ -128,8 +108,9 @@ int SharedStrings::getSharedStringIndex(const QString &string) const
 
 int SharedStrings::getSharedStringIndex(const RichString &string) const
 {
-    if (m_stringTable.contains(string))
-        return m_stringTable[string].index;
+    auto it = m_stringTable.constFind(string);
+    if (it != m_stringTable.constEnd())
+        return it->index;
     return -1;
 }
 
@@ -224,7 +205,7 @@ void SharedStrings::saveToXmlFile(QIODevice *device) const
     writer.writeAttribute(QStringLiteral("count"), QString::number(m_stringCount));
     writer.writeAttribute(QStringLiteral("uniqueCount"), QString::number(m_stringList.size()));
 
-    foreach (RichString string, m_stringList) {
+    for (const RichString &string : m_stringList) {
         writer.writeStartElement(QStringLiteral("si"));
         if (string.isRichString()) {
             //Rich text string
@@ -398,4 +379,4 @@ bool SharedStrings::loadFromXmlFile(QIODevice *device)
     return true;
 }
 
-} //namespace
+QT_END_NAMESPACE_XLSX

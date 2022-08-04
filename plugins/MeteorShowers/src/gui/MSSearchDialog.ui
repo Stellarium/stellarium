@@ -135,13 +135,13 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <property name="leftMargin">
-      <number>8</number>
+      <number>0</number>
      </property>
      <property name="rightMargin">
-      <number>8</number>
+      <number>0</number>
      </property>
      <property name="bottomMargin">
-      <number>4</number>
+      <number>0</number>
      </property>
      <item>
       <widget class="QGroupBox" name="search">
@@ -155,49 +155,44 @@
         <string>Search</string>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
         <item>
          <widget class="QLabel" name="labelFrom">
-          <property name="text">
-           <string>From:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QDateEdit" name="dateFrom">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="displayFormat">
-           <string>dd/MM/yyyy</string>
-          </property>
-          <property name="calendarPopup">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="labelTo">
           <property name="text">
-           <string>To:</string>
+           <string>Year:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QDateEdit" name="dateTo">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+         <widget class="QSpinBox" name="fromYearSpinBox">
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
-          <property name="displayFormat">
-           <string>dd/MM/yyyy</string>
+          <property name="minimum">
+           <number>-1000</number>
           </property>
-          <property name="calendarPopup">
-           <bool>true</bool>
+          <property name="maximum">
+           <number>5000</number>
           </property>
          </widget>
         </item>
@@ -224,19 +219,19 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <property name="spacing">
-         <number>4</number>
+         <number>0</number>
         </property>
         <property name="leftMargin">
-         <number>4</number>
+         <number>0</number>
         </property>
         <property name="topMargin">
-         <number>4</number>
+         <number>0</number>
         </property>
         <property name="rightMargin">
-         <number>4</number>
+         <number>0</number>
         </property>
         <property name="bottomMargin">
-         <number>4</number>
+         <number>0</number>
         </property>
         <item>
          <widget class="QTreeWidget" name="listEvents">

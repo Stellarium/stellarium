@@ -34,6 +34,7 @@
 #include <QFile>
 #include <QDir>
 #include <QBuffer>
+#include <QRegularExpression>
 
 NomenclatureMgr::NomenclatureMgr() : StelObjectModule()
 {
@@ -63,6 +64,7 @@ void NomenclatureMgr::init()
 	// Load the nomenclature
 	NomenclatureItem::createNameLists();
 	loadNomenclature();
+	loadSpecialNomenclature();
 
 	setColor(Vec3f(conf->value("color/planet_nomenclature_color", "0.1,1.0,0.1").toString()));
 	setFlagLabels(conf->value("astro/flag_planets_nomenclature", false).toBool());
@@ -82,8 +84,47 @@ void NomenclatureMgr::updateNomenclatureData()
 {
 	bool flag = getFlagLabels();
 	loadNomenclature();
+	loadSpecialNomenclature();
 	updateI18n();
 	setFlagLabels(flag);
+}
+
+void NomenclatureMgr::loadSpecialNomenclature()
+{
+	int featureId = 50000;
+	const QList<PlanetP> ss = ssystem->getAllPlanets();
+	for (const auto& p: ss)
+	{
+		const double size = p->getEquatorialRadius()*AU*0.25; // formal radius of point is 25% of equatorial radius
+		NomenclatureItemP nomNP = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("North Pole"), "", NomenclatureItem::niSpecialPointPole, 90., 0., size));
+		if (!nomNP.isNull())
+			nomenclatureItems.insert(p, nomNP);
+		featureId++;
+		NomenclatureItemP nomSP = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("South Pole"), "", NomenclatureItem::niSpecialPointPole, -90., 0., size));
+		if (!nomSP.isNull())
+			nomenclatureItems.insert(p, nomSP);
+		featureId++;
+		// longitude is fake, used just to define the object
+		NomenclatureItemP nomE = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("East"), "", NomenclatureItem::niSpecialPointEast, 0., 0., size));
+		if (!nomE.isNull())
+			nomenclatureItems.insert(p, nomE);
+		featureId++;
+		// longitude is fake, used just to define the object
+		NomenclatureItemP nomW = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("West"), "", NomenclatureItem::niSpecialPointWest, 0., 180., size));
+		if (!nomW.isNull())
+			nomenclatureItems.insert(p, nomW);
+		featureId++;
+		// longitude is fake, used just to define the object
+		NomenclatureItemP nomC = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("Centre"), "", NomenclatureItem::niSpecialPointCenter, 0., 180., size));
+		if (!nomC.isNull())
+			nomenclatureItems.insert(p, nomC);
+		featureId++;
+		// longitude is fake, used just to define the object
+		NomenclatureItemP nomS = NomenclatureItemP(new NomenclatureItem(p, featureId, N_("Subsolar"), "", NomenclatureItem::niSpecialPointSubSolar, 0., 180., size));
+		if (!nomS.isNull())
+			nomenclatureItems.insert(p, nomS);
+		featureId++;
+	}
 }
 
 void NomenclatureMgr::loadNomenclature()
@@ -93,7 +134,7 @@ void NomenclatureMgr::loadNomenclature()
 	nomenclatureItems.clear();	
 
 	// regular expression to find the comments and empty lines
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 
 	// regular expression to find the nomenclature data
 	// Rules:
@@ -106,13 +147,11 @@ void NomenclatureMgr::loadNomenclature()
 	//	latitude of surface feature		: float (decimal degrees)
 	//	longitude of surface feature		: float (decimal degrees)
 	//	diameter of surface feature		: float (kilometers)
-	QRegExp recRx("^\\s*(\\w+)\\s+(\\d+)\\s+_[(]\"(.*)\"[)]\\s+(\\w+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)(.*)");
-	QRegExp ctxRx("(.*)\",\\s*\"(.*)");
-	QString record, ctxt;
-
+	static const QRegularExpression recRx("^\\s*(\\w+)\\s+(\\d+)\\s+_[(]\"(.*)\"[)]\\s+(\\w+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)\\s+([\\-\\+\\.\\d]+)(.*)");
+	static const QRegularExpression ctxRx("(.*)\",\\s*\"(.*)");
 
 	QString surfNamesFile = StelFileMgr::findFile("data/nomenclature.dat"); // compressed version of file nomenclature.fab
-	if (!surfNamesFile.isEmpty()) // OK, the file is exist!
+	if (!surfNamesFile.isEmpty()) // OK, the file exists!
 	{
 		// Open file
 		QFile planetSurfNamesFile(surfNamesFile);
@@ -143,33 +182,35 @@ void NomenclatureMgr::loadNomenclature()
 		int featureId;
 		QString name, planet = "", planetName = "", context = "";
 		NomenclatureItem::NomenclatureItemType ntype;
-		float latitude, longitude, size;
+		double latitude, longitude, size;
 		QStringList faultPlanets;
 
 		while (!buf.atEnd())
 		{
-			record = QString::fromUtf8(buf.readLine());
+			QString record = QString::fromUtf8(buf.readLine());
 			lineNumber++;
 
 			// Skip comments
-			if (commentRx.exactMatch(record))
+			if (commentRx.match(record).hasMatch())
 				continue;
 
 			totalRecords++;
-			if (!recRx.exactMatch(record))
+			QRegularExpressionMatch recMatch=recRx.match(record);
+			if (!recMatch.hasMatch())
 				qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in surface nomenclature file" << QDir::toNativeSeparators(surfNamesFile);
 			else
 			{
 				// Read the planet name
-				planet	= recRx.cap(1).trimmed();
+				planet	= recMatch.captured(1).trimmed();
 				// Read the ID of feature
-				featureId	= recRx.cap(2).toInt();
+				featureId	= recMatch.captured(2).toInt();
 				// Read the name of feature and context
-				ctxt		= recRx.cap(3).trimmed();
-				if (ctxRx.exactMatch(ctxt))
+				QString ctxt	= recMatch.captured(3).trimmed();
+				QRegularExpressionMatch ctxMatch=ctxRx.match(ctxt);
+				if (ctxMatch.hasMatch())
 				{
-					name = ctxRx.cap(1).trimmed();
-					context = ctxRx.cap(2).trimmed();
+					name = ctxMatch.captured(1).trimmed();
+					context = ctxMatch.captured(2).trimmed();
 				}
 				else
 				{
@@ -177,14 +218,14 @@ void NomenclatureMgr::loadNomenclature()
 					context = "";
 				}
 				// Read the type of feature
-				QString ntypecode	= recRx.cap(4).trimmed();
+				QString ntypecode	= recMatch.captured(4).trimmed();
 				ntype = NomenclatureItem::getNomenclatureItemType(ntypecode.toUpper());
 				// Read the latitude of feature
-				latitude	= recRx.cap(5).toFloat();
+				latitude	= recMatch.captured(5).toDouble();
 				// Read the longitude of feature
-				longitude	= recRx.cap(6).toFloat();
+				longitude	= recMatch.captured(6).toDouble();
 				// Read the size of feature
-				size		= recRx.cap(7).toFloat();
+				size		= recMatch.captured(7).toDouble();
 
 				if (planetName.isEmpty() || planet!=planetName)
 				{
@@ -213,7 +254,7 @@ void NomenclatureMgr::loadNomenclature()
 		faultPlanets.removeDuplicates();
 		int err = faultPlanets.size();
 		if (err>0)
-			qDebug() << "WARNING - The next planets to assign nomenclature items is not found:" << faultPlanets.join(", ");
+			qDebug() << "WARNING - These planets to assign nomenclature items were not found:" << faultPlanets.join(", ");
 	}
 }
 
@@ -227,13 +268,20 @@ void NomenclatureMgr::draw(StelCore* core)
 {
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
+	painter.setBlending(true);
+
+	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
+	    drawPointer(core, painter);
+
+	if (NomenclatureItem::labelsFader.getInterstate()<=0.f)
+	    return;
+
 	painter.setFont(font);
 	const SphericalCap& viewportRegion = painter.getProjector()->getBoundingCap();
 
 	for (const auto& p : nomenclatureItems.uniqueKeys())
 	{
-		// Early exit if the planet is not visible or too small to render the
-		// labels.
+		// Early exit if the planet is not visible or too small to render the labels.
 		const Vec3d equPos = p->getJ2000EquatorialPos(core);
 		const double r = p->getEquatorialRadius() * static_cast<double>(p->getSphereScale());
 		double angularSize = atan2(r, equPos.length());
@@ -255,9 +303,6 @@ void NomenclatureMgr::draw(StelCore* core)
 				nItem->draw(core, &painter);
 		}
 	}
-
-	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-		drawPointer(core, painter);
 }
 
 void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)
@@ -275,7 +320,6 @@ void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)
 
 		painter.setColor(obj->getInfoColor());
 		texPointer->bind();
-		painter.setBlending(true);
 		painter.drawSprite2dMode(static_cast<float>(screenpos[0]), static_cast<float>(screenpos[1]), 13.f, static_cast<float>(StelApp::getInstance().getTotalRunTime()*40.));
 	}
 }
@@ -284,8 +328,18 @@ QList<StelObjectP> NomenclatureMgr::searchAround(const Vec3d& av, double limitFo
 {
 	QList<StelObjectP> result;
 
+	const bool withAberration=core->getUseAberration();
 	Vec3d v(av);
 	v.normalize();
+	if (withAberration)
+	{
+	    Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+	    StelCore::matVsop87ToJ2000.transfo(vel);
+	    vel*=core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+	    v+=vel;
+	    v.normalize();
+	}
+
 	const double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
@@ -305,9 +359,11 @@ StelObjectP NomenclatureMgr::searchByName(const QString& englishName) const
 {
 	if (getFlagLabels())
 	{
+		NomenclatureItem::NomenclatureItemType niType;
 		for (const auto& nItem : nomenclatureItems)
 		{
-			if (nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && nItem->getEnglishName().toUpper() == englishName.toUpper())
+			niType = nItem->getNomenclatureType();
+			if (niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPointPole && niType!=NomenclatureItem::niSpecialPointEast && niType!=NomenclatureItem::niSpecialPointWest && nItem->getEnglishName().toUpper() == englishName.toUpper())
 			{
 				return qSharedPointerCast<StelObject>(nItem);
 			}
@@ -320,9 +376,11 @@ StelObjectP NomenclatureMgr::searchByNameI18n(const QString& nameI18n) const
 {
 	if (getFlagLabels())
 	{
+		NomenclatureItem::NomenclatureItemType niType;
 		for (const auto& nItem : nomenclatureItems)
 		{
-			if (nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && nItem->getNameI18n().toUpper() == nameI18n.toUpper())
+			niType = nItem->getNomenclatureType();
+			if (niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPointPole && niType!=NomenclatureItem::niSpecialPointEast && niType!=NomenclatureItem::niSpecialPointWest  && nItem->getNameI18n().toUpper() == nameI18n.toUpper())
 			{
 				return qSharedPointerCast<StelObject>(nItem);
 			}
@@ -337,11 +395,13 @@ QStringList NomenclatureMgr::listAllObjects(bool inEnglish) const
 
 	if (getFlagLabels())
 	{
+		NomenclatureItem::NomenclatureItemType niType;
 		if (inEnglish)
 		{
 			for (const auto& nItem : nomenclatureItems)
 			{
-				if (nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature)
+				niType = nItem->getNomenclatureType();
+				if (niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPointPole && niType!=NomenclatureItem::niSpecialPointEast && niType!=NomenclatureItem::niSpecialPointWest)
 					result << nItem->getEnglishName();
 			}
 		}
@@ -349,7 +409,8 @@ QStringList NomenclatureMgr::listAllObjects(bool inEnglish) const
 		{
 			for (const auto& nItem : nomenclatureItems)
 			{
-				if (nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature)
+				niType = nItem->getNomenclatureType();
+				if (niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPointPole && niType!=NomenclatureItem::niSpecialPointEast && niType!=NomenclatureItem::niSpecialPointWest)
 					result << nItem->getNameI18n();
 			}
 		}
@@ -368,9 +429,11 @@ QStringList NomenclatureMgr::listAllObjectsByType(const QString &objType, bool i
 		{
 			case 0:
 			{
+				NomenclatureItem::NomenclatureItemType niType;
 				for (const auto& nItem : nomenclatureItems)
 				{
-					if (nItem->getPlanet()->getEnglishName().contains(objType, Qt::CaseSensitive) && nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature)
+					niType = nItem->getNomenclatureType();
+					if (nItem->getPlanet()->getEnglishName().contains(objType, Qt::CaseSensitive) && niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPointPole && niType!=NomenclatureItem::niSpecialPointEast && niType!=NomenclatureItem::niSpecialPointWest)
 					{
 						if (inEnglish)
 							result << nItem->getEnglishName();
@@ -405,9 +468,11 @@ NomenclatureItemP NomenclatureMgr::searchByEnglishName(QString nomenclatureItemE
 {
 	if (getFlagLabels())
 	{
+		NomenclatureItem::NomenclatureItemType niType;
 		for (const auto& p : nomenclatureItems)
 		{
-			if (p->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && p->getEnglishName() == nomenclatureItemEnglishName)
+			niType = p->getNomenclatureType();
+			if (niType!=NomenclatureItem::niSatelliteFeature && niType!=NomenclatureItem::niSpecialPointPole && niType!=NomenclatureItem::niSpecialPointEast && niType!=NomenclatureItem::niSpecialPointWest && p->getEnglishName() == nomenclatureItemEnglishName)
 				return p;
 		}
 	}
@@ -430,20 +495,14 @@ void NomenclatureMgr::setFlagLabels(bool b)
 {
 	if (getFlagLabels() != b)
 	{
-		for (const auto& i : nomenclatureItems)
-			i->setFlagLabels(b);
+		NomenclatureItem::setFlagLabels(b);
 		emit nomenclatureDisplayedChanged(b);
 	}
 }
 
 bool NomenclatureMgr::getFlagLabels() const
 {
-	for (const auto& i : nomenclatureItems)
-	{
-		if (i->getFlagLabels())
-			return true;
-	}
-	return false;
+	return NomenclatureItem::getFlagLabels();
 }
 
 void NomenclatureMgr::setFlagHideLocalNomenclature(bool b)
@@ -462,6 +521,13 @@ void NomenclatureMgr::updateI18n()
 {
 	NomenclatureItem::createNameLists();
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getPlanetaryFeaturesTranslator();
-	for (const auto& i : nomenclatureItems)
-		i->translateName(trans);
+	const StelTranslator& transSpecial = StelApp::getInstance().getLocaleMgr().getAppStelTranslator();
+	for (const auto& i : qAsConst(nomenclatureItems))
+	{
+		NomenclatureItem::NomenclatureItemType niType = i->getNomenclatureType();
+		if (niType>=NomenclatureItem::niSpecialPointPole)
+			i->translateName(transSpecial);
+		else
+			i->translateName(trans);
+	}
 }

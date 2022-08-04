@@ -52,7 +52,7 @@ StelPluginInfo RemoteSyncStelPluginInterface::getPluginInfo() const
 	info.id = "RemoteSync";
 	info.displayedName = N_("Remote Sync");
 	info.authors = "Florian Schaukowitsch and Georg Zotti";
-	info.contact = "http://homepage.univie.ac.at/Georg.Zotti";
+	info.contact = "https://homepage.univie.ac.at/Georg.Zotti";
 	info.description = N_("Provides state synchronization for multiple Stellarium instances running in a network. See manual for detailed description.");
 	info.acknowledgements = N_("This plugin was created in the 2015/2016 campaigns of the ESA Summer of Code in Space programme.");
 	info.version = REMOTESYNC_PLUGIN_VERSION;
@@ -74,6 +74,7 @@ RemoteSync::RemoteSync()
 	, state(IDLE)
 	, server(Q_NULLPTR)
 	, client(Q_NULLPTR)
+	, allowVersionMismatch(false)
 {
 	setObjectName("RemoteSync");
 
@@ -276,7 +277,7 @@ void RemoteSync::startServer()
 {
 	if(state == IDLE)
 	{
-		server = new SyncServer(this);
+		server = new SyncServer(this, allowVersionMismatch);
 		if(server->start(serverPort))
 			setState(SERVER);
 		else
@@ -394,6 +395,7 @@ void RemoteSync::loadSettings()
 	setConnectionLostBehavior(static_cast<ClientBehavior>(conf->value("connectionLostBehavior",1).toInt()));
 	setQuitBehavior(static_cast<ClientBehavior>(conf->value("quitBehavior").toInt()));
 	reconnectTimer.setInterval(conf->value("clientReconnectInterval", 5000).toInt());
+	allowVersionMismatch=conf->value("allowVersionMismatch", false).toBool();
 	conf->endGroup();
 }
 
@@ -408,6 +410,7 @@ void RemoteSync::saveSettings()
 	conf->setValue("connectionLostBehavior", connectionLostBehavior);
 	conf->setValue("quitBehavior", quitBehavior);
 	conf->setValue("clientReconnectInterval", reconnectTimer.interval());
+	conf->setValue("allowVersionMismatch", allowVersionMismatch);
 	conf->endGroup();
 }
 

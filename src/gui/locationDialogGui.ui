@@ -94,7 +94,7 @@
               <blue>195</blue>
              </color>
             </brush>
-           </colorrole>           
+           </colorrole>
           </active>
           <inactive>
            <colorrole role="WindowText">
@@ -114,7 +114,7 @@
               <blue>195</blue>
              </color>
             </brush>
-           </colorrole>           
+           </colorrole>
           </inactive>
           <disabled>
            <colorrole role="WindowText">
@@ -134,7 +134,7 @@
               <blue>195</blue>
              </color>
             </brush>
-           </colorrole>           
+           </colorrole>
           </disabled>
          </palette>
         </property>
@@ -729,7 +729,7 @@
              <number>0</number>
             </property>
             <item row="1" column="1">
-             <widget class="QComboBox" name="countryNameComboBox">
+             <widget class="QComboBox" name="regionNameComboBox">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -835,7 +835,7 @@
             <item row="1" column="0">
              <widget class="QLabel" name="label_4">
               <property name="text">
-               <string>Country:</string>
+               <string>Region:</string>
               </property>
              </widget>
             </item>
@@ -885,7 +885,7 @@
   <tabstop>longitudeSpinBox</tabstop>
   <tabstop>altitudeSpinBox</tabstop>
   <tabstop>cityNameLineEdit</tabstop>
-  <tabstop>countryNameComboBox</tabstop>
+  <tabstop>regionNameComboBox</tabstop>
   <tabstop>planetNameComboBox</tabstop>
   <tabstop>timeZoneNameComboBox</tabstop>
   <tabstop>useCustomTimeZoneCheckBox</tabstop>

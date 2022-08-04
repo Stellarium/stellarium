@@ -1,25 +1,31 @@
 # SOME DESCRIPTIVE TITLE
-# Copyright (C) YEAR Free Software Foundation, Inc.
+# Copyright (C) YEAR Stellarium's team
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Nuno Santos <nuno.caldeira.santos@gmail.com>, 2021
+# cardinot <mcardinot@gmail.com>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-12-26 18:32+0700\n"
+"Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
+"POT-Creation-Date: 2021-09-19 19:50+0700\n"
 "PO-Revision-Date: 2020-11-24 18:28+0000\n"
+"Last-Translator: cardinot <mcardinot@gmail.com>, 2022\n"
 "Language-Team: Portuguese (https://www.transifex.com/stellarium/teams/80998/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #. type: Content of: <h2>
 #: ../../scenery3d/Testscene/description.en.utf8:1
 msgid "Testscene"
-msgstr ""
+msgstr "Cena de teste"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:3
@@ -33,7 +39,7 @@ msgstr ""
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:8
 msgid "Coordinate and orientation tests"
-msgstr ""
+msgstr "Testes de coordenada e orientação"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:10
@@ -58,7 +64,7 @@ msgstr ""
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:23
 msgid "Material test"
-msgstr ""
+msgstr "Teste de material"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:25
@@ -79,7 +85,7 @@ msgstr ""
 #: ../../scenery3d/Testscene/description.en.utf8:32
 #: ../../scenery3d/Sterngarten/description.en.utf8:56
 msgid "Model"
-msgstr ""
+msgstr "Modelo"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:33
@@ -91,7 +97,7 @@ msgstr ""
 #. type: Content of: <h2>
 #: ../../scenery3d/Sterngarten/description.en.utf8:1
 msgid "Vienna Sterngarten"
-msgstr ""
+msgstr "Sterngarten de Viena"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:3
@@ -103,7 +109,7 @@ msgstr ""
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:7
 msgid "Idea"
-msgstr ""
+msgstr "Ideia"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:9
@@ -116,7 +122,7 @@ msgstr ""
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:14
 msgid "Construction"
-msgstr ""
+msgstr "Construção"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:16

@@ -165,7 +165,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 		if (ini.contains("longitude"))
 			info.location->longitude = StelUtils::getDecAngle(ini.value("longitude").toString())*M_180_PI;
 		if (ini.contains("country"))
-			info.location->country = ini.value("country").toString();
+			info.location->region = StelLocationMgr::pickRegionFromCountry(ini.value("country").toString());
 		if (ini.contains("state"))
 			info.location->state = ini.value("state").toString();
 		info.location->ianaTimeZone = StelLocationMgr::sanitizeTimezoneStringFromLocationDB(ini.value("timezone", "LMST").toString());
@@ -339,7 +339,7 @@ QStringList SceneInfo::getAllSceneIDs()
 	QStringList result;
 
 	// We just look over the map of names to IDs and extract the values
-	for (auto i : nameToDirMap.values())
+	for (auto &i : nameToDirMap.values())
 	{
 		result += i;
 	}
@@ -352,7 +352,7 @@ QStringList SceneInfo::getAllSceneNames()
 	QStringList result;
 
 	// We just look over the map of names to IDs and extract the keys
-	for (auto i : nameToDirMap.keys())
+	for (auto &i : nameToDirMap.keys())
 	{
 		result += i;
 	}
@@ -361,10 +361,9 @@ QStringList SceneInfo::getAllSceneNames()
 
 QMap<QString, QString> SceneInfo::getNameToIDMap()
 {
-	QSet<QString> scenery3dDirs;
 	QMap<QString, QString> result;
 
-	scenery3dDirs = StelFileMgr::listContents(SceneInfo::SCENES_PATH, StelFileMgr::Directory);
+	const QSet<QString> scenery3dDirs = StelFileMgr::listContents(SceneInfo::SCENES_PATH, StelFileMgr::Directory);
 
 	for (const auto& dir : scenery3dDirs)
 	{

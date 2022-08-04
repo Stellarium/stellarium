@@ -6,7 +6,7 @@ INCLUDE_DIRECTORIES(
      ${CMAKE_BINARY_DIR}/plugins/Satellites/src/gui
 )
 
-LINK_DIRECTORIES(${BUILD_DIR}/src)
+LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 
 SET(Satellites_SRCS
      gsatellite/gException.hpp
@@ -39,11 +39,17 @@ SET(Satellites_SRCS
      gui/SatellitesDialog.cpp
      gui/SatellitesImportDialog.hpp
      gui/SatellitesImportDialog.cpp
+     gui/SatellitesFilterDialog.hpp
+     gui/SatellitesFilterDialog.cpp
+     gui/SatellitesCommDialog.hpp
+     gui/SatellitesCommDialog.cpp
 )
 
 SET(SatellitesDialog_UIS
      gui/satellitesDialog.ui
      gui/satellitesImportDialog.ui
+     gui/satellitesFilterDialog.ui
+     gui/satellitesCommDialog.ui
 )
 QT5_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
 

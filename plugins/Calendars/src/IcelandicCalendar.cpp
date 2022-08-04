@@ -38,7 +38,7 @@ int IcelandicCalendar::icelandicSummer(int iyear)
 
 IcelandicCalendar::IcelandicCalendar(double jd): Calendar (jd)
 {
-	retranslate();
+	IcelandicCalendar::retranslate();
 }
 
 // Set a calendar date from the Julian day number
@@ -97,13 +97,13 @@ QString IcelandicCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
 	// TRANSLATORS: Icelandic calendar phrase like "[Weekday] of week [number] of [summer|winter] (Month [number]: [name]) - [year]"
-	return QString(q_("%1 of week %2 of %3 (Month %4: %5) - %6"))
-			.arg(str.at(6)) // weekday
-			.arg(str.at(4)) // week
-			.arg(str.at(1)) // season
-			.arg(str.at(2)) // month
-			.arg(str.at(3)) // monthName
-			.arg(str.at(0));// year
+	return QString(q_("%1 of week %2 of %3 (Month %4: %5) - %6")).arg(
+			str.at(6), // weekday
+			str.at(4), // week
+			str.at(1), // season
+			str.at(2), // month
+			str.at(3), // monthName
+			str.at(0));// year
 }
 
 /* ====================================================
@@ -113,10 +113,10 @@ QString IcelandicCalendar::getFormattedDateString() const
 // RD from {year, season, week[1...27], weekday[0...6]}
 int IcelandicCalendar::fixedFromIcelandic(QVector<int> icelandic)
 {
-	const int year=icelandic.at(0);
-	const Calendar::Season season=static_cast<Calendar::Season>(icelandic.at(1));
-	const int week=icelandic.at(2);
-	const Calendar::Day weekday=static_cast<Calendar::Day>(icelandic.at(3));
+	const int year=icelandic.value(0);
+	const Calendar::Season season=static_cast<Calendar::Season>(icelandic.value(1));
+	const int week=icelandic.value(2);
+	const Calendar::Day weekday=static_cast<Calendar::Day>(icelandic.value(3));
 
 	int start = (season==summer ? icelandicSummer(year) : icelandicWinter(year));
 	int shift = (season==summer ? thursday : saturday );

@@ -64,12 +64,6 @@ extern void qt_set_sequence_auto_mnemonic(bool b);
 
 static QSettings *settings; //!< The settings as read in from the ini file.
 
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark StelModuleMgr Methods
-#endif
-/* ****************************************************************************************************************** */
 //! This method is the one called automatically by the StelModuleMgr just
 //! after loading the dynamic library
 StelModule* OcularsStelPluginInterface::getStelModule() const
@@ -93,13 +87,6 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Instance Methods
-#endif
-/* ****************************************************************************************************************** */
 Oculars::Oculars()
 	: selectedCCDIndex(-1)
 	, selectedOcularIndex(-1)
@@ -239,13 +226,6 @@ QSettings* Oculars::getSettings()
 	return settings;
 }
 
-
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark StelModule Methods
-#endif
-/* ****************************************************************************************************************** */
 bool Oculars::configureGui(bool show)
 {
 	if (show)
@@ -661,17 +641,11 @@ void Oculars::init()
 	connect(skyDrawer, SIGNAL(flagStarMagnitudeLimitChanged(bool)), this, SLOT(handleStarMagLimitToggle(bool)));
 }
 
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Private slots Methods
-#endif
-/* ****************************************************************************************************************** */
 void Oculars::determineMaxEyepieceAngle()
 {
 	if (ready)
 	{
-		for (const auto* ocular : oculars)
+		for (const auto* ocular : qAsConst(oculars))
 		{
 			if (ocular->apparentFOV() > maxEyepieceAngle)
 			{
@@ -808,12 +782,6 @@ void Oculars::updateOcularReticle(void)
 	}
 }
 
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Slots Methods
-#endif
-/* ****************************************************************************************************************** */
 void Oculars::updateLists()
 {
 	if (oculars.isEmpty())
@@ -876,7 +844,7 @@ void Oculars::ccdRotationReset()
 	if (ccd)
 	{
 		ccd->setChipRotAngle(0.0);
-		emit(selectedCCDChanged(selectedCCDIndex));
+		emit selectedCCDChanged(selectedCCDIndex);
 		emit selectedCCDRotationAngleChanged(0.0);
 	}
 }
@@ -889,7 +857,7 @@ void Oculars::prismPositionAngleReset()
 	if (ccd)
 	{
 		ccd->setPrismPosAngle(0.0);
-		emit(selectedCCDChanged(selectedCCDIndex));
+		emit selectedCCDChanged(selectedCCDIndex);
 		emit selectedCCDPrismPositionAngleChanged(0.0);
 	}
 }
@@ -1026,7 +994,7 @@ void Oculars::decrementCCDIndex()
 	{
 		selectedCCDIndex = ccds.count() - 1;
 	}
-	emit(selectedCCDChanged(selectedCCDIndex));
+	emit selectedCCDChanged(selectedCCDIndex);
 }
 
 void Oculars::decrementOcularIndex()
@@ -1048,7 +1016,7 @@ void Oculars::decrementOcularIndex()
 		if (selectedTelescopeIndex == -1)
 			selectedTelescopeIndex = 0;
 	}
-	emit(selectedOcularChanged(selectedOcularIndex));
+	emit selectedOcularChanged(selectedOcularIndex);
 }
 
 void Oculars::decrementTelescopeIndex()
@@ -1058,7 +1026,7 @@ void Oculars::decrementTelescopeIndex()
 	{
 		selectedTelescopeIndex = telescopes.count() - 1;
 	}
-	emit(selectedTelescopeChanged(selectedTelescopeIndex));
+	emit selectedTelescopeChanged(selectedTelescopeIndex);
 }
 
 void Oculars::decrementLensIndex()
@@ -1072,7 +1040,7 @@ void Oculars::decrementLensIndex()
 	{
 		selectedLensIndex = lenses.count() - 1;
 	}
-	emit(selectedLensChanged(selectedLensIndex));
+	emit selectedLensChanged(selectedLensIndex);
 }
 
 void Oculars::rotateReticleClockwise()
@@ -1117,7 +1085,7 @@ void Oculars::displayPopupMenu()
 				QAction* action = Q_NULLPTR;
 				if (selectedTelescopeIndex != -1 || oculars[index]->isBinoculars())
 				{
-					action = submenu->addAction(label, [=](){selectOcularAtIndex(index);});
+					action = submenu->addAction(label, submenu, [=](){selectOcularAtIndex(index);});
 					availableOcularCount++;
 				}
 
@@ -1192,7 +1160,7 @@ void Oculars::displayPopupMenu()
 				{
 					label = ccds[index]->name();
 				}
-				QAction* action = submenu->addAction(label, [=](){selectCCDAtIndex(index);});
+				QAction* action = submenu->addAction(label, submenu, [=](){selectCCDAtIndex(index);});
 				if (index == selectedCCDIndex)
 				{
 					action->setCheckable(true);
@@ -1202,16 +1170,16 @@ void Oculars::displayPopupMenu()
 			popup->addMenu(submenu);
 			
 			submenu = new QMenu(q_("&Rotate CCD"), popup);
-			submenu->addAction(QString("&1: -90") + QChar(0x00B0), [=](){rotateCCD(-90);});
-			submenu->addAction(QString("&2: -45") + QChar(0x00B0), [=](){rotateCCD(-45);});
-			submenu->addAction(QString("&3: -15") + QChar(0x00B0), [=](){rotateCCD(-15);});
-			submenu->addAction(QString("&4: -5") + QChar(0x00B0),  [=](){rotateCCD(-5);});
-			submenu->addAction(QString("&5: -1") + QChar(0x00B0),  [=](){rotateCCD(-1);});
-			submenu->addAction(QString("&6: +1") + QChar(0x00B0),  [=](){rotateCCD(1);});
-			submenu->addAction(QString("&7: +5") + QChar(0x00B0),  [=](){rotateCCD(5);});
-			submenu->addAction(QString("&8: +15") + QChar(0x00B0), [=](){rotateCCD(15);});
-			submenu->addAction(QString("&9: +45") + QChar(0x00B0), [=](){rotateCCD(45);});
-			submenu->addAction(QString("&0: +90") + QChar(0x00B0), [=](){rotateCCD(90);});
+			submenu->addAction(QString("&1: -90") + QChar(0x00B0), submenu, [=](){rotateCCD(-90);});
+			submenu->addAction(QString("&2: -45") + QChar(0x00B0), submenu, [=](){rotateCCD(-45);});
+			submenu->addAction(QString("&3: -15") + QChar(0x00B0), submenu, [=](){rotateCCD(-15);});
+			submenu->addAction(QString("&4: -5") + QChar(0x00B0),  submenu, [=](){rotateCCD(-5);});
+			submenu->addAction(QString("&5: -1") + QChar(0x00B0),  submenu, [=](){rotateCCD(-1);});
+			submenu->addAction(QString("&6: +1") + QChar(0x00B0),  submenu, [=](){rotateCCD(1);});
+			submenu->addAction(QString("&7: +5") + QChar(0x00B0),  submenu, [=](){rotateCCD(5);});
+			submenu->addAction(QString("&8: +15") + QChar(0x00B0), submenu, [=](){rotateCCD(15);});
+			submenu->addAction(QString("&9: +45") + QChar(0x00B0), submenu, [=](){rotateCCD(45);});
+			submenu->addAction(QString("&0: +90") + QChar(0x00B0), submenu, [=](){rotateCCD(90);});
 
 			submenu->addAction(q_("&Reset rotation"), this, SLOT(ccdRotationReset()));
 			popup->addMenu(submenu);			
@@ -1227,7 +1195,7 @@ void Oculars::displayPopupMenu()
 		}
 	}
 
-#if QT_VERSION >= 0x050700 && defined(Q_OS_WIN)
+#ifdef Q_OS_WIN
 	popup->showTearOffMenu(QCursor::pos());
 #endif
 	popup->exec(QCursor::pos());
@@ -1502,21 +1470,15 @@ void Oculars::toggleTelrad()
 	toggleTelrad(!flagShowTelrad);
 }
 
-/* ****************************************************************************************************************** */
-#if 0
-#pragma mark -
-#pragma mark Private Methods
-#endif
-/* ****************************************************************************************************************** */
 void Oculars::initializeActivationActions()
 {
 	QString ocularsGroup = N_("Oculars");
-	actionShowOcular = addAction("actionShow_Ocular", ocularsGroup, N_("Ocular view"), "enableOcular", "Ctrl+O");
+	actionShowOcular = addAction("actionShow_Oculars", ocularsGroup, N_("Ocular view"), "enableOcular", "Ctrl+O");
 	actionMenu = addAction("actionShow_Ocular_Menu", ocularsGroup, N_("Oculars popup menu"), "displayPopupMenu()", "Alt+O");
 	actionShowCrosshairs = addAction("actionShow_Ocular_Crosshairs", ocularsGroup, N_("Show crosshairs"), "enableCrosshairs", "Alt+C");
 	actionShowSensor = addAction("actionShow_Sensor", ocularsGroup, N_("Image sensor frame"), "enableCCD");
 	actionShowTelrad = addAction("actionShow_Telrad", ocularsGroup, N_("Telrad sight"), "enableTelrad", "Ctrl+B");
-	actionConfiguration = addAction("actionOpen_Oculars_Configuration", ocularsGroup, N_("Toggle Oculars configuration window"), ocularDialog, "visible", ""); // Allow assign shortkey
+	actionConfiguration = addAction("actionShow_Oculars_dialog", ocularsGroup, N_("Show settings dialog"), ocularDialog, "visible", ""); // Allow assign shortkey
 	addAction("actionShow_Oculars_GUI", ocularsGroup, N_("Toggle Oculars button bar"), "flagGuiPanelEnabled"); // Allow assign shortkey
 	// Select next telescope via keyboard
 	addAction("actionShow_Telescope_Increment", ocularsGroup, N_("Select next telescope"), "incrementTelescopeIndex()");
@@ -2176,7 +2138,7 @@ void Oculars::validateAndLoadIniFile()
 		return;
 
 	// If the ini file does not already exist, create it from the resource in the QT resource
-	if(!QFileInfo(ocularIniPath).exists())
+	if(!QFileInfo::exists(ocularIniPath))
 	{
 		QFile src(":/ocular/default_ocular.ini");
 		if (!src.copy(ocularIniPath))
@@ -2265,7 +2227,7 @@ void Oculars::unzoomOcular()
 	skyDrawer->setCustomPlanetMagnitudeLimit(magLimitPlanetsMain);
 	skyDrawer->setCustomNebulaMagnitudeLimit(magLimitDSOsMain);
 	movementManager->setFlagEnableZoomKeys(true);
-	movementManager->setFlagEnableMouseNavigation(true);
+	movementManager->setFlagEnableMouseZooming(true);
 
 	GETSTELMODULE(SolarSystem)->setFlagMoonScale(flagMoonScaleMain);
 	GETSTELMODULE(SolarSystem)->setFlagMinorBodyScale(flagMinorBodiesScaleMain);
@@ -2397,7 +2359,7 @@ void Oculars::zoomOcular()
 
 	movementManager->setFlagTracking(true);
 	movementManager->setFlagEnableZoomKeys(false);
-	movementManager->setFlagEnableMouseNavigation(false);
+	movementManager->setFlagEnableMouseZooming(false);
 	
 	// We won't always have a selected object
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
@@ -2508,7 +2470,7 @@ QMenu* Oculars::addLensSubmenu(QMenu* parent)
 		{
 			label = lenses[index]->getName();
 		}
-		QAction* action = submenu->addAction(label, [=](){selectLensAtIndex(index);});
+		QAction* action = submenu->addAction(label, submenu, [=](){selectLensAtIndex(index);});
 		if (index == selectedLensIndex)
 		{
 			action->setCheckable(true);
@@ -2537,7 +2499,7 @@ QMenu* Oculars::addTelescopeSubmenu(QMenu *parent)
 		{
 			label = telescopes[index]->name();
 		}
-		QAction* action = submenu->addAction(label, [=](){selectTelescopeAtIndex(index);});
+		QAction* action = submenu->addAction(label, submenu, [=](){selectTelescopeAtIndex(index);});
 		if (index == selectedTelescopeIndex)
 		{
 			action->setCheckable(true);
@@ -2948,12 +2910,12 @@ void Oculars::setFlagShowOcularsButton(bool b)
 	{
 		if (b==true) {
 			if (toolbarButton==Q_NULLPTR) {
-				// Create the pulsars button
-				toolbarButton = new StelButton(Q_NULLPTR, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, "actionShow_Ocular");
+				// Create the oculars button
+				toolbarButton = new StelButton(Q_NULLPTR, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, "actionShow_Oculars", false, "actionShow_Oculars_dialog");
 			}
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		} else {
-			gui->getButtonBar()->hideButton("actionShow_Ocular");
+			gui->getButtonBar()->hideButton("actionShow_Oculars");
 		}
 	}
 	flagShowOcularsButton = b;

@@ -30,7 +30,6 @@ class QNetworkAccessManager;
 class HipOnlineReply : public QObject
 {
 	Q_OBJECT
-	Q_ENUMS(HipQueryStatus)
 
 	friend class HipOnlineQuery;
 
@@ -42,8 +41,9 @@ public:
 		HipQueryErrorOccured,      //!< An error occured while looking up Starnames. Call getErrorString() for a description of the error.
 		HipQueryFinished           //!< The query is over. The reply can be deleted.
 	};
+	Q_ENUM(HipQueryStatus)
 
-	~HipOnlineReply();
+	~HipOnlineReply() Q_DECL_OVERRIDE;
 
 	//! Get the raw result HTML string from HIP search
 	QString getResult() const {return htmlResult;}

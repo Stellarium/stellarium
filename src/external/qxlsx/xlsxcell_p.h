@@ -1,26 +1,18 @@
-//--------------------------------------------------------------------
-//
-// QXlsx
-// MIT License
-// https://github.com/j2doll/QXlsx
-//
-// QtXlsx
-// https://github.com/dbzhang800/QtXlsxWriter
-// http://qtxlsx.debao.me/
-// MIT License
-
+// xlsxcell_p.h
 
 #ifndef XLSXCELL_P_H
 #define XLSXCELL_P_H
+
+#include <QtGlobal>
+#include <QObject>
+#include <QList>
+#include <QSharedPointer>
 
 #include "xlsxglobal.h"
 #include "xlsxcell.h"
 #include "xlsxcellrange.h"
 #include "xlsxrichstring.h"
 #include "xlsxcellformula.h"
-#include <QtGlobal>
-#include <QList>
-#include <QSharedPointer>
 
 QT_BEGIN_NAMESPACE_XLSX
 
@@ -30,19 +22,19 @@ class CellPrivate
 public:
     CellPrivate(Cell *p);
     CellPrivate(const CellPrivate * const cp);
-
 public:
-    QVariant value;
-    CellFormula formula;
+    Worksheet *parent;
+    Cell *q_ptr;
+public:
     Cell::CellType cellType;
+    QVariant value;
+
+    CellFormula formula;
     Format format;
 
     RichString richString;
 
-    Worksheet *parent;
-    Cell *q_ptr;
-
-	qint32 styleNumber;
+    qint32 styleNumber;
 };
 
 QT_END_NAMESPACE_XLSX

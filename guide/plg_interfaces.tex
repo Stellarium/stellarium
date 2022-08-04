@@ -38,7 +38,8 @@ angular distance between two points on the sky.
 %\label{sec:plugins:AngleMeasure:using}
 
 \begin{enumerate}
-\item Enable the tool by clicking the tool-bar button, or by pressing
+\item Enable the tool by clicking the tool-bar button
+  \guibutton{0.6}{bt_anglemeasure_Off.png}, or by pressing
   \key{\ctrl+A}. A message will appear at the bottom of the screen to
   tell you that the tool is active.
 \item Drag a line from the first point to the second point using the
@@ -468,7 +469,7 @@ If you are using this plugin in your scientific publications, please cite \citet
 \section{Remote Sync Plugin}
 \label{sec:plugin:RemoteSync}
 
-The Remote Sync plugin\newFeature{v0.16.0} enables setups which connect several instances of
+The Remote Sync plugin\newFeature{0.16.0} enables setups which connect several instances of
 Stellarium running on a network. This may be useful in installations where one
 presenter wants to allow a larger audience to follow the actions on several
 dim screens (e.g., when you need to avoid a projector's bright light in a 
@@ -477,7 +478,7 @@ performed on a ``master'' instance, which acts as a server, are automatically
 replicated on all connected clients. These clients may run on the same device 
 the server runs, or may access the server over a network.
 
-The plugin is still quite experimental, but is provided for testing purposes.
+The plugin is still quite experimental, but is provided for testing and developing purposes.
 You can configure it through the standard plugin settings dialog 
 (\autoref{fig:plugins:RemoteSync:settings}). One Stellarium instance
 can either run in the server mode or connect to an existing server as a client.
@@ -525,7 +526,7 @@ By default, the following things are synchronized:
 	as projection type, sky and view options, landscape settings, line colors, etc.
 \end{itemize}
 
-Because there is currently no full time synchronization implemented, for the best
+\noindent Because there is currently no full time synchronization implemented, for the best
 results all client computers should make sure their system clocks are set as
 close as possible to the server computer's clock (preferably a few milliseconds
 difference at most). This can be done for example by using an NTP server.\footnote{
@@ -576,6 +577,18 @@ Run the script and inspect the output tab. It may take a little guesswork to sel
 but the general structure of property names like 
 \texttt{<Module>.<Property>} should help you to find your way around.
 
+\subsection{Developer notes}
+
+Usually the synchronisation fails if you attempt to use different
+versions of Stellarium. You can override this behaviour
+\newFeature{0.21.2} with an entry in the respective section of
+\file{config.ini}:
+
+\begin{configfile}
+  [RemoteSync]
+  allowVersionMismatch = true
+\end{configfile}
+
 \subsection*{Author and Acknowledgements}
 
 This plugin was created mostly by Florian Schaukowitsch in the 2015-16 campaigns of the 
@@ -595,10 +608,19 @@ This plugin was created mostly by Florian Schaukowitsch in the 2015-16 campaigns
 
 Stellarium stores its data (orbital elements and other details) about
 solar system objects (planets, their moons, minor bodies) in two files.  
-File \file{data/ssystem\_major.ini} in the installation directory contains data for the planets and their moons.
+File \file{data/ssystem\_major.ini} in the installation directory contains data for the planets and their moons, and should never be touched by users.
 File \file{data/ssystem\_minor.ini} contains data for minor bodies, i.e., planetoids and comets.
 The file will be taken from the user data directory if it also exists there, which means that users can add minor planets or comets as they become observable by editing this file.
 
+The orbits of minor bodies (minor planets and comets) are specified with \indexterm{orbital elements} for 
+\indexterm{Kepler orbits} (after \name[Johannes]{Kepler} (1572--1630) who found the true shape of the orbit 
+of a small body around a large one being a conic section, i.e., circle, ellipse, parabola or hyperbola). These elements 
+describe the instantaneous shape and orientation of the object's orbit around the Sun at a particular time 
+called the \indexterm{epoch}.  See Appendix~\ref{sec:ssystem.ini} for more details. 
+We compute positions from these unperturbed orbits, but the result is only valid for 
+a moderately short timespan around the epoch, because the major planets can exert noticeable gravitational perturbations 
+on the objects when they come close, and so these orbital elements need to be updated on a regular basis. 
+When you go out hunting for asteroids and comets, this plugin is for you.
 
 This plugin provides access to the Minor Planet Center (MPC\footnote{\url{https://www.minorplanetcenter.net}}) server where the latest Solar System information can be found. When this plugin is
 loaded (see section~\ref{sec:Plugins:EnablingPlugins}) and you open the configuration dialog, the first tab allows to import, export or reset your \file{ssystem\_minor.ini}, 
@@ -607,7 +629,7 @@ For example, the installation directory contains a file \file{ssystem\_1000comet
 data for over 1000 historical comets. Currently it is not possible to select only a few from that, 
 so try loading this only on a reasonably fast computer, and think about deleting comets again (or resetting the file) when you don't require them.
 
-\begin{figure}[th]\centering
+\begin{figure}[tbh]\centering
 	\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-conffile.png}
 	\caption{Interface of Solar System Editor plugin: Configuration file tab}
 	\label{fig:SolarSystemEditor:ConfigurationFile}
@@ -619,7 +641,7 @@ longer. Just select one or more objects and press \button{Remove}.
 If you have a very weak computer, you may want to reduce the number of
 minor bodies to just a handful to improve performance.
 
-\begin{figure}[th]\centering
+\begin{figure}[tbh]\centering
 	\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-solsys.png}
 	\caption{Interface of Solar System Editor plugin: Solar System tab}
 	\label{fig:SolarSystemEditor:SolarSystem}
@@ -628,16 +650,16 @@ minor bodies to just a handful to improve performance.
 On this tab, you also find the option to connect to the MPC and download current orbital elements, 
 or load a text file in the format provided by MPC (see figures \ref{fig:SolarSystemEditor:ImportData:InitialView} and \ref{fig:SolarSystemEditor:ImportData:FinalView}). 
 
-\begin{figure}[th]\centering
-\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-import.png}
+\begin{figure}[tbph]\centering
+\includegraphics[width=.7\textwidth,trim=0 40 0 0,clip]{SolarSystemEditor-plugin-import.png}
 \caption{Interface of Solar System Editor plugin: Import data dialog}
 \label{fig:SolarSystemEditor:ImportData:InitialView}
 \end{figure}
 
 Once MPC data has been downloaded, the user can select objects for updating the user's \file{ssystem\_minor.ini}.
 
-\begin{figure}[th]\centering
-\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-import2.png}
+\begin{figure}[tbph]\centering
+\includegraphics[width=.7\textwidth]{SolarSystemEditor-plugin-import2.png}
 \caption{Interface of Solar System Editor plugin: Import data dialog --- view after downloading and parsing the MPC data.}
 \label{fig:SolarSystemEditor:ImportData:FinalView}
 \end{figure}

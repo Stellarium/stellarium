@@ -1,39 +1,19 @@
-/****************************************************************************
-** Copyright (c) 2013-2014 Debao Zhang <hello@debao.me>
-** All right reserved.
-**
-** Permission is hereby granted, free of charge, to any person obtaining
-** a copy of this software and associated documentation files (the
-** "Software"), to deal in the Software without restriction, including
-** without limitation the rights to use, copy, modify, merge, publish,
-** distribute, sublicense, and/or sell copies of the Software, and to
-** permit persons to whom the Software is furnished to do so, subject to
-** the following conditions:
-**
-** The above copyright notice and this permission notice shall be
-** included in all copies or substantial portions of the Software.
-**
-** THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-** EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-** MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-** NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-** LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-** OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-**
-****************************************************************************/
-#include "xlsxrelationships_p.h"
+// xlsxrelationships.cpp
+
+#include <QtGlobal>
 #include <QXmlStreamWriter>
 #include <QXmlStreamReader>
 #include <QDir>
 #include <QFile>
 #include <QBuffer>
 
-namespace QXlsx {
+#include "xlsxrelationships_p.h"
 
-const QString schema_doc = QStringLiteral("http://schemas.openxmlformats.org/officeDocument/2006/relationships");
-const QString schema_msPackage = QStringLiteral("http://schemas.microsoft.com/office/2006/relationships");
-const QString schema_package = QStringLiteral("http://schemas.openxmlformats.org/package/2006/relationships");
+QT_BEGIN_NAMESPACE_XLSX
+
+const QLatin1String schema_doc("http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+const QLatin1String schema_msPackage("http://schemas.microsoft.com/office/2006/relationships");
+const QLatin1String schema_package("http://schemas.openxmlformats.org/package/2006/relationships");
 //const QString schema_worksheet = QStringLiteral("http://schemas.openxmlformats.org/officeDocument/2006/relationships");
 Relationships::Relationships()
 {
@@ -82,7 +62,7 @@ void Relationships::addWorksheetRelationship(const QString &relativeType, const 
 QList<XlsxRelationship> Relationships::relationships(const QString &type) const
 {
     QList<XlsxRelationship> res;
-    foreach (XlsxRelationship ship, m_relationships) {
+    for (const XlsxRelationship &ship : m_relationships) {
         if (ship.type == type)
             res.append(ship);
     }
@@ -107,7 +87,7 @@ void Relationships::saveToXmlFile(QIODevice *device) const
     writer.writeStartDocument(QStringLiteral("1.0"), true);
     writer.writeStartElement(QStringLiteral("Relationships"));
     writer.writeAttribute(QStringLiteral("xmlns"), QStringLiteral("http://schemas.openxmlformats.org/package/2006/relationships"));
-    foreach (XlsxRelationship relation, m_relationships) {
+    for (const XlsxRelationship &relation : m_relationships) {
         writer.writeStartElement(QStringLiteral("Relationship"));
         writer.writeAttribute(QStringLiteral("Id"), relation.id);
         writer.writeAttribute(QStringLiteral("Type"), relation.type);
@@ -164,7 +144,7 @@ bool Relationships::loadFromXmlData(const QByteArray &data)
 
 XlsxRelationship Relationships::getRelationshipById(const QString &id) const
 {
-    foreach (XlsxRelationship ship, m_relationships) {
+    for (const XlsxRelationship &ship : m_relationships) {
         if (ship.id == id)
             return ship;
     }
@@ -186,4 +166,4 @@ bool Relationships::isEmpty() const
     return m_relationships.isEmpty();
 }
 
-} //namespace
+QT_END_NAMESPACE_XLSX

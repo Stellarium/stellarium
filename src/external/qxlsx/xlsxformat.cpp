@@ -1,20 +1,13 @@
-//--------------------------------------------------------------------
-//
-// QXlsx
-// MIT License
-// https://github.com/j2doll/QXlsx
-//
-// QtXlsx
-// https://github.com/dbzhang800/QtXlsxWriter
-// http://qtxlsx.debao.me/
-// MIT License
+// xlsxformat.cpp
+
+#include <QtGlobal>
+#include <QDataStream>
+#include <QDebug>
 
 #include "xlsxformat.h"
 #include "xlsxformat_p.h"
 #include "xlsxcolor_p.h"
 #include "xlsxnumformatparser_p.h"
-#include <QDataStream>
-#include <QDebug>
 
 QT_BEGIN_NAMESPACE_XLSX
 
@@ -40,10 +33,12 @@ FormatPrivate::FormatPrivate(const FormatPrivate &other)
 	, theme(other.theme)
 	, properties(other.properties)
 {
+
 }
 
 FormatPrivate::~FormatPrivate()
 {
+
 }
 
 /*!
@@ -174,6 +169,7 @@ Format::Format()
 Format::Format(const Format &other)
 	:d(other.d)
 {
+
 }
 
 /*!
@@ -292,8 +288,9 @@ bool Format::hasNumFmtData() const
 	if (!d)
 		return false;
 
-	if (hasProperty(FormatPrivate::P_NumFmt_Id)
-			|| hasProperty(FormatPrivate::P_NumFmt_FormatCode)) {
+    if ( hasProperty(FormatPrivate::P_NumFmt_Id) ||
+         hasProperty(FormatPrivate::P_NumFmt_FormatCode) )
+    {
 		return true;
 	}
 	return false;
@@ -519,8 +516,9 @@ QByteArray Format::fontKey() const
 		QByteArray key;
 		QDataStream stream(&key, QIODevice::WriteOnly);
 		for (int i=FormatPrivate::P_Font_STARTID; i<FormatPrivate::P_Font_ENDID; ++i) {
-			if (d->properties.contains(i))
-				stream << i << d->properties[i];
+            auto it = d->properties.constFind(i);
+            if (it != d->properties.constEnd())
+                stream << i << it.value();
 		};
 
 		const_cast<Format*>(this)->d->font_key = key;
@@ -599,7 +597,7 @@ bool Format::textWrap() const
 /*!
  * Enable the text wrap if \a wrap is true.
  */
-void Format::setTextWarp(bool wrap)
+void Format::setTextWrap(bool wrap)
 {
 	if (wrap && hasProperty(FormatPrivate::P_Alignment_ShinkToFit))
 		clearProperty(FormatPrivate::P_Alignment_ShinkToFit);
@@ -927,8 +925,9 @@ QByteArray Format::borderKey() const
 		QByteArray key;
 		QDataStream stream(&key, QIODevice::WriteOnly);
 		for (int i=FormatPrivate::P_Border_STARTID; i<FormatPrivate::P_Border_ENDID; ++i) {
-			if (d->properties.contains(i))
-				stream << i << d->properties[i];
+            auto it = d->properties.constFind(i);
+            if (it != d->properties.constEnd())
+                stream << i << it.value();
 		};
 
 		const_cast<Format*>(this)->d->border_key = key;
@@ -1047,8 +1046,9 @@ QByteArray Format::fillKey() const
 		QByteArray key;
 		QDataStream stream(&key, QIODevice::WriteOnly);
 		for (int i=FormatPrivate::P_Fill_STARTID; i<FormatPrivate::P_Fill_ENDID; ++i) {
-			if (d->properties.contains(i))
-				stream << i << d->properties[i];
+            auto it = d->properties.constFind(i);
+            if (it != d->properties.constEnd())
+                stream << i << it.value();
 		};
 
 		const_cast<Format*>(this)->d->fill_key = key;
@@ -1115,7 +1115,8 @@ bool Format::hasProtectionData() const
 	if (!d)
 		return false;
 
-	if (hasProperty(FormatPrivate::P_Protection_Hidden)	|| hasProperty(FormatPrivate::P_Protection_Locked)) {
+	if (hasProperty(FormatPrivate::P_Protection_Hidden)
+			|| hasProperty(FormatPrivate::P_Protection_Locked)) {
 		return true;
 	}
 	return false;
@@ -1278,8 +1279,11 @@ int Format::theme() const
  */
 QVariant Format::property(int propertyId, const QVariant &defaultValue) const
 {
-	if (d && d->properties.contains(propertyId))
-		return d->properties[propertyId];
+    if (d) {
+        auto it = d->properties.constFind(propertyId);
+        if (it != d->properties.constEnd())
+            return it.value();
+    }
 	return defaultValue;
 }
 
@@ -1291,17 +1295,25 @@ void Format::setProperty(int propertyId, const QVariant &value, const QVariant &
 	if (!d)
 		d = new FormatPrivate;
 
-	if (value != clearValue) {
-		if (d->properties.contains(propertyId) && d->properties[propertyId] == value)
+    if (value != clearValue)
+    {
+        auto it = d->properties.constFind(propertyId);
+        if (it != d->properties.constEnd() && it.value() == value)
 			return;
+
 		if (detach)
 			d.detach();
+
 		d->properties[propertyId] = value;
-	} else {
+    }
+    else
+    {
 		if (!d->properties.contains(propertyId))
 			return;
+
 		if (detach)
 			d.detach();
+
 		d->properties.remove(propertyId);
 	}
 
@@ -1309,13 +1321,18 @@ void Format::setProperty(int propertyId, const QVariant &value, const QVariant &
 	d->xf_indexValid = false;
 	d->dxf_indexValid = false;
 
-	if (propertyId >= FormatPrivate::P_Font_STARTID && propertyId < FormatPrivate::P_Font_ENDID) {
+    if (propertyId >= FormatPrivate::P_Font_STARTID && propertyId < FormatPrivate::P_Font_ENDID)
+    {
 		d->font_dirty = true;
 		d->font_index_valid = false;
-	} else if (propertyId >= FormatPrivate::P_Border_STARTID && propertyId < FormatPrivate::P_Border_ENDID) {
+    }
+    else if (propertyId >= FormatPrivate::P_Border_STARTID && propertyId < FormatPrivate::P_Border_ENDID)
+    {
 		d->border_dirty = true;
 		d->border_index_valid = false;
-	} else if (propertyId >= FormatPrivate::P_Fill_STARTID && propertyId < FormatPrivate::P_Fill_ENDID) {
+    }
+    else if (propertyId >= FormatPrivate::P_Fill_STARTID && propertyId < FormatPrivate::P_Fill_ENDID)
+    {
 		d->fill_dirty = true;
 		d->fill_index_valid = false;
 	}

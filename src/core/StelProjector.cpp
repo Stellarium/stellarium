@@ -131,7 +131,7 @@ void StelProjector::init(const StelProjectorParams& params)
 
 QString StelProjector::getHtmlSummary() const
 {
-	return QString("<h3>%1</h3><p>%2</p><b>%3</b>%4").arg(getNameI18()).arg(getDescriptionI18()).arg(q_("Maximum FOV: ")).arg(static_cast<double>(getMaxFov()))+QChar(0x00B0);
+	return QString("<h3>%1</h3><p>%2</p><b>%3</b>%4°").arg(getNameI18(), getDescriptionI18(), q_("Maximum FOV: "), QString::number(static_cast<double>(getMaxFov())));
 }
 
 bool StelProjector::intersectViewportDiscontinuity(const Vec3d& p1, const Vec3d& p2) const
@@ -308,6 +308,14 @@ bool StelProjector::project(const Vec3f& v, Vec3f& win) const
 	return projectInPlace(win);
 }
 
+bool StelProjector::project(const Vec3d& v, Vec3f& win) const
+{
+	Vec3d wind = v;
+	bool res= projectInPlace(wind);
+	win = wind.toVec3f();
+	return res;
+}
+
 void StelProjector::project(int n, const Vec3d* in, Vec3f* out)
 {
 	Vec3d v;
@@ -403,12 +411,12 @@ void StelProjector::computeBoundingCap()
 	// Now need to determine the aperture
 	Vec3d e0,e1,e2,e3,e4,e5;
 	const Vec4i& vp = viewportXywh;
-	ok &= unProject(vp[0],vp[1],e0);
-	ok &= unProject(vp[0]+vp[2],vp[1],e1);
-	ok &= unProject(vp[0]+vp[2],vp[1]+vp[3],e2);
-	ok &= unProject(vp[0],vp[1]+vp[3],e3);
-	ok &= unProject(vp[0],vp[1]+vp[3]/2,e4);
-	ok &= unProject(vp[0]+vp[2],vp[1]+vp[3]/2,e5);
+	ok &= unProject(vp[0],vp[1],e0);               // e0: bottom left
+	ok &= unProject(vp[0]+vp[2],vp[1],e1);         // e1: bottom right
+	ok &= unProject(vp[0]+vp[2],vp[1]+vp[3],e2);   // e2: top right
+	ok &= unProject(vp[0],vp[1]+vp[3],e3);         // e3: top left
+	ok &= unProject(vp[0],vp[1]+vp[3]/2,e4);       // e4: left center
+	ok &= unProject(vp[0]+vp[2],vp[1]+vp[3]/2,e5); // e5: right center
 	if (!ok)
 	{
 		// Some points were in invalid positions, use full sky.

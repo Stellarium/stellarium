@@ -99,6 +99,7 @@ TelescopeControl::TelescopeControl()
 	, syncActionId("actionSync_Telescope_To_Selection_%1")
 	, abortSlewActionId("actionAbortSlew_Telescope_Slew_%1")
 	, moveToCenterActionId("actionSlew_Telescope_To_Direction_%1")
+	, centeringScreenActionId("actionCentering_Screen_By_Telescope_%1")
 {
 	setObjectName("TelescopeControl");
 
@@ -190,6 +191,11 @@ void TelescopeControl::init()
 			shortcut = QString("Ctrl+Shift+Alt+%1").arg(i);
 			text = q_("Abort last slew command of telescope #%1").arg(i);
 			addAction(name, section, text, this, [=](){abortTelescopeSlew(i);}, shortcut);
+
+			// "Centering screen by telescope coordinates" commands
+			name = centeringScreenActionId.arg(i);
+			text = q_("Centering screen by telescope coordinates #%1").arg(i);
+			addAction(name, section, text, this, [=](){centeringScreenByTelescope(i);});
 		}
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(translateActionDescriptions()));
 
@@ -198,6 +204,7 @@ void TelescopeControl::init()
 		slewDialog = new SlewDialog();
 
 		addAction("actionShow_Slew_Window", N_("Telescope Control"), N_("Move a telescope to a given set of coordinates"), slewDialog, "visible", "Ctrl+0");
+		addAction("actionShow_TelescopeControl_dialog", N_("Telescope Control"), N_("Show settings dialog"), telescopeDialog, "visible");
 
 		//Create toolbar button
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -207,7 +214,9 @@ void TelescopeControl::init()
 						       QPixmap(":/telescopeControl/button_Slew_Dialog_on.png"),
 						       QPixmap(":/telescopeControl/button_Slew_Dialog_off.png"),
 						       QPixmap(":/graphicGui/miscGlow32x32.png"),
-						       "actionShow_Slew_Window");
+						       "actionShow_Slew_Window",
+						       false,
+						       "actionShow_TelescopeControl_dialog");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
 	}
@@ -243,6 +252,10 @@ void TelescopeControl::translateActionDescriptions()
 
 		name = abortSlewActionId.arg(i);
 		description = q_("Abort last slew command of telescope #%1").arg(i);
+		actionMgr->findAction(name)->setText(description);
+
+		name = centeringScreenActionId.arg(i);
+		description = q_("Center the screen on telescope #%1 coordinates").arg(i);
 		actionMgr->findAction(name)->setText(description);
 	}
 }
@@ -291,27 +304,27 @@ void TelescopeControl::draw(StelCore* core)
 	{
 		if (telescope->isConnected() && telescope->hasKnownPosition())
 		{
-			Vec3d XY;
-			if (prj->projectCheck(telescope->getJ2000EquatorialPos(core), XY))
+			Vec3f XY;
+			if (prj->projectCheck(telescope->getJ2000EquatorialPos(core).toVec3f(), XY))
 			{
 				//Telescope circles appear synchronously with markers
 				if (circleFader.getInterstate() >= 0)
 				{
-					sPainter.setColor(circleColor[0], circleColor[1], circleColor[2], circleFader.getInterstate());
+					sPainter.setColor(circleColor, circleFader.getInterstate());
 					for (auto circle : telescope->getOculars())
 					{
-						sPainter.drawCircle(XY[0], XY[1], 0.5 * prj->getPixelPerRadAtCenter() * (M_PI/180) * (circle));
+						sPainter.drawCircle(XY[0], XY[1], prj->getPixelPerRadAtCenter() * static_cast<float>(0.5 * (M_PI/180.) * (circle)));
 					}
 				}
 				if (reticleFader.getInterstate() >= 0)
 				{
 					sPainter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
-					sPainter.setColor(reticleColor[0], reticleColor[1], reticleColor[2], reticleFader.getInterstate());
+					sPainter.setColor(reticleColor, reticleFader.getInterstate());
 					sPainter.drawSprite2dMode(XY[0],XY[1],15.f);
 				}
 				if (labelFader.getInterstate() >= 0)
 				{
-					sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+					sPainter.setColor(labelColor, labelFader.getInterstate());
 					//TODO: Different position of the label if circles are shown?
 					//TODO: Remove magic number (text spacing)
 					sPainter.drawText(XY[0], XY[1], telescope->getNameI18n(), 0, 6 + 10, -4, false);
@@ -445,6 +458,23 @@ void TelescopeControl::abortTelescopeSlew(const int idx) {
 		telescopeClients.value(idx)->telescopeAbortSlew();
 }
 
+void TelescopeControl::centeringScreenByTelescope(const int idx) {
+	if (telescopeClients.contains(idx))
+	{
+		StelObjectMgr* objectMgr = GETSTELMODULE(StelObjectMgr);
+		StelMovementMgr* mvMgr = GETSTELMODULE(StelMovementMgr);
+		if (objectMgr->findAndSelect(telescopeClients.value(idx)->getEnglishName(), "Telescope"))
+		{
+			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject("Telescope");
+			if (!newSelected.empty())
+			{
+				mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
+				mvMgr->setFlagTracking(true);
+			}
+		}
+	}
+}
+
 void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* core, StelPainter& sPainter)
 {
 #ifndef COMPATIBILITY_001002
@@ -456,13 +486,12 @@ void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* co
 	{
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos = obj->getJ2000EquatorialPos(core);
-		Vec3d screenpos;
+		Vec3f screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!prj->project(pos, screenpos))
+		if (!prj->project(pos.toVec3f(), screenpos))
 			return;
 
-		const Vec3f& c(obj->getInfoColor());
-		sPainter.setColor(c[0], c[1], c[2]);
+		sPainter.setColor(obj->getInfoColor());
 		selectionTexture->bind();
 		sPainter.setBlending(true);
 		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 25., StelApp::getInstance().getTotalRunTime() * 40.);
@@ -669,7 +698,7 @@ void TelescopeControl::saveConfiguration()
 void TelescopeControl::saveTelescopes()
 {
 	//Open/create the JSON file
-	QString telescopesJsonPath = StelFileMgr::findFile("modules/TelescopeControl", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/telescopes.json";
+	QString telescopesJsonPath = StelFileMgr::findFile("modules/TelescopeControl", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/telescopes.json";
 	if (telescopesJsonPath.isEmpty())
 	{
 		qWarning() << "[TelescopeControl] Error saving telescopes";
@@ -695,7 +724,7 @@ void TelescopeControl::loadTelescopes()
 {
 	QVariantMap result;
 
-	QString telescopesJsonPath = StelFileMgr::findFile("modules/TelescopeControl", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/telescopes.json";
+	QString telescopesJsonPath = StelFileMgr::findFile("modules/TelescopeControl", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/telescopes.json";
 	if (telescopesJsonPath.isEmpty())
 	{
 		qWarning() << "[TelescopeControl] Error loading telescopes";
@@ -1444,7 +1473,7 @@ void TelescopeControl::loadDeviceModels()
 	
 	//Make sure that the device models file exists
 	bool useDefaultList = false;
-	QString deviceModelsJsonPath = StelFileMgr::findFile("modules/TelescopeControl", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/device_models.json";
+	QString deviceModelsJsonPath = StelFileMgr::findFile("modules/TelescopeControl", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/device_models.json";
 	if(!QFileInfo(deviceModelsJsonPath).exists())
 	{
 		if(!restoreDeviceModelsListTo(deviceModelsJsonPath))

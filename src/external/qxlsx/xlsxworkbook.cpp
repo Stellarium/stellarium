@@ -1,27 +1,13 @@
-/****************************************************************************
-** Copyright (c) 2013-2014 Debao Zhang <hello@debao.me>
-** All right reserved.
-**
-** Permission is hereby granted, free of charge, to any person obtaining
-** a copy of this software and associated documentation files (the
-** "Software"), to deal in the Software without restriction, including
-** without limitation the rights to use, copy, modify, merge, publish,
-** distribute, sublicense, and/or sell copies of the Software, and to
-** permit persons to whom the Software is furnished to do so, subject to
-** the following conditions:
-**
-** The above copyright notice and this permission notice shall be
-** included in all copies or substantial portions of the Software.
-**
-** THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-** EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-** MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-** NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-** LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-** OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-**
-****************************************************************************/
+// xlsxworkbook.cpp
+
+#include <QtGlobal>
+#include <QXmlStreamWriter>
+#include <QXmlStreamReader>
+#include <QFile>
+#include <QBuffer>
+#include <QDir>
+#include <QtDebug>
+
 #include "xlsxworkbook.h"
 #include "xlsxworkbook_p.h"
 #include "xlsxsharedstrings_p.h"
@@ -33,12 +19,7 @@
 #include "xlsxformat_p.h"
 #include "xlsxmediafile_p.h"
 #include "xlsxutility_p.h"
-
-#include <QXmlStreamWriter>
-#include <QXmlStreamReader>
-#include <QFile>
-#include <QBuffer>
-#include <QDir>
+#include "xlsxchart.h"
 
 QT_BEGIN_NAMESPACE_XLSX
 
@@ -71,6 +52,7 @@ WorkbookPrivate::WorkbookPrivate(Workbook *q, Workbook::CreateFlag flag) :
 Workbook::Workbook(CreateFlag flag)
     : AbstractOOXmlFile(new WorkbookPrivate(this, flag))
 {
+
 }
 
 Workbook::~Workbook()
@@ -209,17 +191,27 @@ AbstractSheet *Workbook::addSheet(const QString &name, int sheetId, AbstractShee
     Q_D(Workbook);
     if (sheetId > d->last_sheet_id)
         d->last_sheet_id = sheetId;
-    AbstractSheet *sheet=0;
-    if (type == AbstractSheet::ST_WorkSheet) {
+
+    AbstractSheet *sheet = NULL;
+    if (type == AbstractSheet::ST_WorkSheet)
+    {
+        // create work sheet (value sheet)
         sheet = new Worksheet(name, sheetId, this, F_LoadFromExists);
-    } else if (type == AbstractSheet::ST_ChartSheet) {
+    }
+    else if (type == AbstractSheet::ST_ChartSheet)
+    {
+        // create chart sheet
         sheet = new Chartsheet(name, sheetId, this, F_LoadFromExists);
-    } else {
+    }
+    else
+    {
         qWarning("unsupported sheet type.");
         Q_ASSERT(false);
     }
+
     d->sheets.append(QSharedPointer<AbstractSheet>(sheet));
     d->sheetNames.append(name);
+
     return sheet;
 }
 
@@ -253,15 +245,26 @@ AbstractSheet *Workbook::insertSheet(int index, const QString &name, AbstractShe
     }
 
     ++d->last_sheet_id;
-    AbstractSheet *sheet;
-    if (type == AbstractSheet::ST_WorkSheet)
+
+    AbstractSheet *sheet = NULL;
+    if ( type == AbstractSheet::ST_WorkSheet )
+    {
         sheet = new Worksheet(sheetName, d->last_sheet_id, this, F_NewFromScratch);
-    else
+    }
+    else if ( type == AbstractSheet::ST_ChartSheet )
+    {
         sheet = new Chartsheet(sheetName, d->last_sheet_id, this, F_NewFromScratch);
+    }
+    else
+    {
+        qWarning("unsupported sheet type.");
+        Q_ASSERT(false);
+    }
 
     d->sheets.insert(index, QSharedPointer<AbstractSheet>(sheet));
     d->sheetNames.insert(index, sheetName);
     d->activesheetIndex = index;
+
     return sheet;
 }
 
@@ -371,7 +374,7 @@ bool Workbook::copySheet(int index, const QString &newName)
     d->sheets.append(QSharedPointer<AbstractSheet> (sheet));
     d->sheetNames.append(sheet->sheetName());
 
-    return false;
+    return true; // #162
 }
 
 /*!
@@ -519,7 +522,7 @@ void Workbook::saveToXmlFile(QIODevice *device) const
 
     if (!d->definedNamesList.isEmpty()) {
         writer.writeStartElement(QStringLiteral("definedNames"));
-        foreach (XlsxDefineNameData data, d->definedNamesList) {
+        for (const XlsxDefineNameData &data : d->definedNamesList) {
             writer.writeStartElement(QStringLiteral("definedName"));
             writer.writeAttribute(QStringLiteral("name"), data.name);
             if (!data.comment.isEmpty())
@@ -557,15 +560,23 @@ bool Workbook::loadFromXmlFile(QIODevice *device)
     Q_D(Workbook);
 
     QXmlStreamReader reader(device);
-    while (!reader.atEnd()) {
+    while (!reader.atEnd())
+    {
          QXmlStreamReader::TokenType token = reader.readNext();
-         if (token == QXmlStreamReader::StartElement) {
-             if (reader.name() == QLatin1String("sheet")) {
+         if (token == QXmlStreamReader::StartElement)
+         {
+             if (reader.name() == QLatin1String("sheet"))
+             {
                  QXmlStreamAttributes attributes = reader.attributes();
-                 const QString name = attributes.value(QLatin1String("name")).toString();
+
+                 const auto& name = attributes.value(QLatin1String("name")).toString();
+
                  int sheetId = attributes.value(QLatin1String("sheetId")).toString().toInt();
-                 const QString rId = attributes.value(QLatin1String("r:id")).toString();
-                 const QStringRef &stateString = attributes.value(QLatin1String("state"));
+
+                 const auto& rId = attributes.value(QLatin1String("r:id")).toString();
+
+                 const auto& stateString = attributes.value(QLatin1String("state"));
+
                  AbstractSheet::SheetState state = AbstractSheet::SS_Visible;
                  if (stateString == QLatin1String("hidden"))
                      state = AbstractSheet::SS_Hidden;
@@ -576,29 +587,54 @@ bool Workbook::loadFromXmlFile(QIODevice *device)
 
                  AbstractSheet::SheetType type = AbstractSheet::ST_WorkSheet;
                  if (relationship.type.endsWith(QLatin1String("/worksheet")))
+                 {
                      type = AbstractSheet::ST_WorkSheet;
+                 }
                  else if (relationship.type.endsWith(QLatin1String("/chartsheet")))
+                 {
                      type = AbstractSheet::ST_ChartSheet;
+                 }
                  else if (relationship.type.endsWith(QLatin1String("/dialogsheet")))
+                 {
                      type = AbstractSheet::ST_DialogSheet;
+                 }
                  else if (relationship.type.endsWith(QLatin1String("/xlMacrosheet")))
+                 {
                      type = AbstractSheet::ST_MacroSheet;
+                 }
                  else
-                     qWarning("unknown sheet type");
+                 {
+                     qWarning() << "unknown sheet type : " << relationship.type ;
+                 }
 
                  AbstractSheet *sheet = addSheet(name, sheetId, type);
                  sheet->setSheetState(state);
-                 const QString fullPath = QDir::cleanPath(splitPath(filePath())[0] +QLatin1String("/")+ relationship.target);
+                 QString strFilePath = filePath();
+
+                 // const QString fullPath = QDir::cleanPath(splitPath(strFilePath).constFirst() + QLatin1String("/") + relationship.target);
+                 QString str = *( splitPath(strFilePath).begin() );
+                 str = str + QLatin1String("/");
+                 str = str + relationship.target;
+                 const QString fullPath = QDir::cleanPath( str );
+
                  sheet->setFilePath(fullPath);
-             } else if (reader.name() == QLatin1String("workbookPr")) {
+             }
+             else if (reader.name() == QLatin1String("workbookPr"))
+             {
                 QXmlStreamAttributes attrs = reader.attributes();
                 if (attrs.hasAttribute(QLatin1String("date1904")))
                     d->date1904 = true;
-             } else if (reader.name() == QLatin1String("bookviews")) {
-                while (!(reader.name() == QLatin1String("bookviews") && reader.tokenType() == QXmlStreamReader::EndElement)) {
+             }
+             else if (reader.name() == QLatin1String("bookviews"))
+             {
+                while (!(reader.name() == QLatin1String("bookviews") &&
+                         reader.tokenType() == QXmlStreamReader::EndElement))
+                {
                     reader.readNextStartElement();
-                    if (reader.tokenType() == QXmlStreamReader::StartElement) {
-                        if (reader.name() == QLatin1String("workbookView")) {
+                    if (reader.tokenType() == QXmlStreamReader::StartElement)
+                    {
+                        if (reader.name() == QLatin1String("workbookView"))
+                        {
                             QXmlStreamAttributes attrs = reader.attributes();
                             if (attrs.hasAttribute(QLatin1String("xWindow")))
                                 d->x_window = attrs.value(QLatin1String("xWindow")).toString().toInt();
@@ -615,13 +651,20 @@ bool Workbook::loadFromXmlFile(QIODevice *device)
                         }
                     }
                 }
-             } else if (reader.name() == QLatin1String("externalReference")) {
+             }
+             else if (reader.name() == QLatin1String("externalReference"))
+             {
                  QXmlStreamAttributes attributes = reader.attributes();
                  const QString rId = attributes.value(QLatin1String("r:id")).toString();
                  XlsxRelationship relationship = d->relationships->getRelationshipById(rId);
 
                  QSharedPointer<SimpleOOXmlFile> link(new SimpleOOXmlFile(F_LoadFromExists));
-                 const QString fullPath = QDir::cleanPath(splitPath(filePath())[0] +QLatin1String("/")+ relationship.target);
+
+                 QString str = *( splitPath(filePath()).begin() );
+                 str = str + QLatin1String("/");
+                 str = str + relationship.target;
+                 const QString fullPath = QDir::cleanPath( str );
+
                  link->setFilePath(fullPath);
                  d->externalLinks.append(link);
              } else if (reader.name() == QLatin1String("definedName")) {
@@ -660,14 +703,19 @@ QList<QSharedPointer<MediaFile> > Workbook::mediaFiles() const
 void Workbook::addMediaFile(QSharedPointer<MediaFile> media, bool force)
 {
     Q_D(Workbook);
-    if (!force) {
-        for (int i=0; i<d->mediaFiles.size(); ++i) {
-            if (d->mediaFiles[i]->hashKey() == media->hashKey()) {
+
+    if (!force)
+    {
+        for (int i=0; i<d->mediaFiles.size(); ++i)
+        {
+            if (d->mediaFiles[i]->hashKey() == media->hashKey())
+            {
                 media->setIndex(i);
                 return;
             }
         }
     }
+
     media->setIndex(d->mediaFiles.size());
     d->mediaFiles.append(media);
 }

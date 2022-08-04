@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES(
      ${CMAKE_BINARY_DIR}/plugins/Quasars/src/gui
 )
 
-LINK_DIRECTORIES(${BUILD_DIR}/src)
+LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 
 SET(Quasars_SRCS
      Quasars.hpp

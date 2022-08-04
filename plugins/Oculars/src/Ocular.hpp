@@ -41,7 +41,7 @@ class Ocular : public QObject
 public:
 	Ocular();
 	Q_INVOKABLE Ocular(const QObject& other);
-	virtual ~Ocular();
+	virtual ~Ocular() Q_DECL_OVERRIDE;
 	static Ocular * ocularFromSettings(const QSettings * theSettings, const int ocularIndex);
 	void writeToSettings(QSettings * settings, const int index);
 	static Ocular * ocularModel(void);

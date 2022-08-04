@@ -51,7 +51,6 @@ public slots:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-public:
 	//! returns true for leap years (those with 53 weeks)
 	static bool isLeap(int iyear);
 
@@ -70,13 +69,15 @@ public:
 	//! Retrieve Icelandic month name. Numbers 1..6 for summer months, 7..12 for winter months.
 	static QString icelandicMonthName(int i) {return monthNames.value(i);}
 
+	//! find RD of begin of summer for Icelandic (Gregorian) year.
+	static int icelandicSummer(int iyear);
+	//! find RD of begin of winter for Icelandic (Gregorian) year.
+	static int icelandicWinter(int iyear){ return icelandicSummer(iyear+1)-180; }
+
+public:
 	static const int icelandicEpoch;  //! RD of April 19, AD1 (Gregorian).
 
 protected:
-	//! find RD of begin of summer for Icelandic (Gregorian) year.
-	static int icelandicSummer(int iyear);
-	static int icelandicWinter(int iyear){ return icelandicSummer(iyear+1)-180; }
-
 	static QMap<int, QString> weekDayNames;
 	static QMap<int, QString> monthNames;
 };

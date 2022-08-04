@@ -48,23 +48,17 @@ static QMap<int, QString> mapping;
 QMap<int, QString> Telescope::propertyMap()
 {
 	if(mapping.isEmpty()) {
-		mapping = QMap<int, QString>();
-		mapping[0] = "name";
-		mapping[1] = "diameter";
-		mapping[2] = "focalLength";
-		mapping[3] = "hFlipped";
-		mapping[4] = "vFlipped";
-		mapping[5] = "equatorial";
+	mapping = {
+		    {0, "name"},
+		    {1, "diameter"},
+		    {2, "focalLength"},
+		    {3, "hFlipped"},
+		    {4, "vFlipped"},
+		    {5, "equatorial"}};
 	}
 	return mapping;
 }
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Accessors & Mutators
-#endif
-/* ********************************************************************* */
 const QString Telescope::name() const
 {
 	return m_name;
@@ -136,13 +130,6 @@ void Telescope::writeToSettings(QSettings * settings, const int index)
 	settings->setValue(prefix + "equatorial", this->isEquatorial());
 }
 
-/* ********************************************************************* */
-#if 0
-#pragma mark -
-#pragma mark Static Methods
-#endif
-/* ********************************************************************* */
-
 Telescope* Telescope::telescopeFromSettings(QSettings* theSettings, int telescopeIndex)
 {
 	Telescope* telescope = new Telescope();
@@ -156,6 +143,7 @@ Telescope* Telescope::telescopeFromSettings(QSettings* theSettings, int telescop
 	telescope->setEquatorial(theSettings->value(prefix + "equatorial").toBool());
 	return telescope;
 }
+
 Telescope* Telescope::telescopeModel()
 {
 	Telescope* model = new Telescope();

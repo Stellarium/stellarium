@@ -118,20 +118,17 @@ void QuasarsDialog::createDialogContent()
 
 void QuasarsDialog::setAboutHtml(void)
 {
-	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Quasars Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + QUASARS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + QUASARS_PLUGIN_LICENSE + "</td></tr>";
-	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf</td></tr>";
 	html += "</table>";
 
-	html += QString("<p>%1 (<a href=\"%2\">%3</a>)</p>")
-			.arg(q_("The Quasars plugin provides visualization of some quasars brighter than visual magnitude 18. The catalogue of quasars was compiled from \"Quasars and Active Galactic Nuclei\" (13th Ed.)"))
-			.arg("http://adsabs.harvard.edu/abs/2010A%26A...518A..10V")
-			.arg(q_("Veron+ 2010"));
+	html += QString("<p>%1 (<a href=\"%2\">%3</a>)</p>").arg(
+			q_("The Quasars plugin provides visualization of some quasars brighter than visual magnitude 18. The catalogue of quasars was compiled from \"Quasars and Active Galactic Nuclei\" (13th Ed.)"),
+			"http://adsabs.harvard.edu/abs/2010A%26A...518A..10V",
+			q_("Veron+ 2010"));
 
 	html += "</ul><p>" + q_("The current catalog contains info about %1 quasars.").arg(qsr->getCountQuasars()) + "</p>";
 	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Quasars plugin");

@@ -1,0 +1,121 @@
+// Test Astronomical Calendar basics. Regular QTesting impossible because we need a StelCore for this.
+// (c) 2022 Georg Zotti
+// This is for the Calendars plugin
+
+
+core.output(Calendar.lunarNode(0));
+core.output(Calendar.moonNode(0));
+core.output(Calendar.lunarLatitude(GregorianCalendar.fixedFromGregorian([2000, 1, 1])));
+core.output(Calendar.jdFromMoment(GregorianCalendar.fixedFromGregorian([2000, 1, 1])+0.5, false));
+
+core.output(Calendar.lunarLatitude(730120.5));
+core.output(Calendar.lunarLongitude(730120.5));
+core.output(Calendar.lunarDistance(730120.5));
+
+core.output(Calendar.meanLunarLongitude(0));
+core.output(Calendar.lunarPhase(Calendar.rdNow()));
+core.output(Calendar.moonrise(Calendar.rdNow()));
+core.output(Calendar.observedLunarAltitude(Calendar.rdNow()));
+core.output(Calendar.topocentricLunarAltitude(Calendar.rdNow()));
+core.output(Calendar.refraction(Calendar.rdNow()));
+
+core.output(Calendar.direction(Calendar.location("Graz, Austria"), Calendar.location("Paris, France")));
+core.output(Calendar.direction("Graz, Austria", "Paris, France"));
+core.output(Calendar.universalFromLocal(0, "Vienna, Austria") * 24);
+core.output(Calendar.localFromUniversal(0, "Vienna, Austria") * 24);
+core.output("UT from Zone of Vienna: " + Calendar.universalFromStandard(0, "Vienna, Austria") * 24); // BUG! No zone offset!
+core.output("Vienna Zone Time from UT 0: " +Calendar.standardFromUniversal(0, "Vienna, Austria") * 24); // BUG! No zone offset!
+
+core.output("nn");
+core.output(Calendar.midday(728714, "Tehran, Iran")); // UT
+core.output(Calendar.standardFromUniversal(Calendar.midday(728714, "Tehran, Iran"), "Tehran, Iran")); // INDEED WANTED OUTPUT
+core.output(Calendar.localFromUniversal(Calendar.midday(728714, "Tehran, Iran"), "Tehran, Iran"));
+// this should be standard time like the WANTED OUTPUT 2 lines above.
+core.output(Calendar.middayTehran(728714));
+
+core.output("Paris dawn:");
+core.output(Calendar.dawnParis(728714));
+core.output(Calendar.dawn(728714, 18, "Paris, France"));
+core.output(Calendar.standardFromUniversal(Calendar.dawn(728714, 18, "Paris, France"), "Paris, France"));
+
+core.output("Mecca Moonrise (0.466211)");
+core.output(Calendar.moonriseMecca(728714));
+core.output(Calendar.moonrise(728714, "Mecca, Saudi Arabia"));
+core.output(Calendar.standardFromUniversal(Calendar.moonrise(728714, "Mecca, Saudi Arabia"), "Mecca, Saudi Arabia"));
+
+
+
+// Test data from CC:UE
+const data=[
+// RD  , EphCorr ,  Eq.ofTime, SLong_12UT, RDnextSol/Eq  , DawnParis, MidTehran, ssetJerus, LunLng0UT, LunLat0UT, LunAlt0UT?, RDnextNewMoon , MeccaMoonrise,-set
+[-214193, 0.214169, -0.001190, 119.473431, -214131.147334,  0.095285,  0.504216, 0.780556, 244.853905,  2.452759, -13.163184, -214174.605828, 0.645260, 0.084225 ],
+[ -61387, 0.143632,  0.003159, 254.248961,  -61371.053052,  0.277372,  0.499952, 0.697324, 208.856738, -4.902230,  -7.281426,  -61382.995328, 0.146650, 0.627607 ],
+[  25469, 0.114444,  0.005373, 181.435996,   25556.789090,  0.203569,  0.497556, 0.734889, 213.746842, -2.939469, -77.149900,   25495.809776, 0.365595, 0.842646 ],
+[  49217, 0.107183,  0.006791, 188.663922,   49297.584568,  0.212231,  0.496143, 0.728514, 292.046243,  5.001904, -30.401178,   49238.502448, 0.582553, 0.030307 ],
+[ 171307, 0.069498, -0.007231, 289.091566,  171378.539292,  0.286370,  0.510331, 0.708788, 156.819014, -3.208909,  71.848578,  171318.435313, 0.926722, 0.419886 ],
+[ 210155, 0.057506,  0.004410,  59.119741,  210187.908137,  0.096280,  0.498595, 0.774201, 108.055632,  0.894361, -43.798579,  210180.691849, 0.391565, 0.965784 ],
+[ 253427, 0.044758,  0.009897, 228.314554,  253468.413001,  0.253730,  0.493137, 0.700877,  39.356097, -3.863335,  40.653204,  253442.859367, 0.737227, 0.252852 ],
+[ 369740, 0.017397,  0.001987,  34.460769,  369798.559125,  0.149472,  0.500958, 0.762736,  98.565851, -2.522444, -40.278725,  369763.746413, 0.434271, 0.000000 ],
+[ 400085, 0.012796,  0.003478,  63.187995,  400113.618511,  0.088486,  0.499538, 0.776777, 332.958296,  1.032069,  29.611156,  400091.578343, 0.028119, 0.528119 ],
+[ 434355, 0.008869, -0.004947,   2.457591,  434446.328561,  0.209217,  0.507865, 0.748088,  92.259651,  3.005689, -19.973178,  434376.578106, 0.501712, 0.052493 ],
+[ 452605, 0.007262, -0.007588, 350.475934,  452615.134851,  0.228552,  0.510516, 0.742536,  78.132029,  1.613843, -23.740743,  452627.191972, 0.494050, 0.037996 ],
+[ 470160, 0.005979, -0.002369,  13.498220,  470240.017391,  0.189859,  0.505289, 0.753102, 274.946995,  4.766741,  30.956688,  470167.578360, 0.013196, 0.493177 ],
+[ 473837, 0.005740,  0.002140,  37.403920,  473892.432571,  0.143920,  0.500814, 0.764402, 128.362844,  4.899203, -18.888690,  473858.853276, 0.519306, 0.060322 ],
+[ 507850, 0.003875,  0.001195,  81.028130,  507859.911980,  0.      ,  0.501853, 0.784041,  89.518450,  4.838474, -32.161162,  507878.666842, 0.259826, 0.856017 ],
+[ 524156, 0.003157, -0.010356, 313.860498,  524202.622400,  0.272361,  0.513383, 0.722535,  24.607322,  2.301475, -45.680919,  524179.247062, 0.452190, 0.00000  ],
+[ 544676, 0.002393, -0.001013,  19.954430,  544749.318739,  0.178067,  0.503941, 0.756134,  53.485056, -0.890563, -50.292110,  544702.753873, 0.343276, 0.908706 ],
+[ 567118, 0.001731,  0.004277, 176.059431,  567122.512168,  0.196839,  0.498637, 0.739658, 187.898520,  4.765784, -54.345305,  567146.513181, 0.300431, 0.818009 ],
+[ 569477, 0.001669, -0.008429, 344.922951,  569492.673245,  0.236578,  0.511368, 0.739663, 320.172362, -2.737358, -34.566000,  569479.203258, 0.231763, 0.714185 ],
+[ 601716, 0.000615,  0.000943,  79.964921,  601727.018725,  0.045748,  0.502105, 0.784057, 314.042566, -4.035652,  44.131989,  601727.033557, 0.973015, 0.416862 ],
+[ 613424, 0.000177, -0.002039,  99.302317,  613508.259061,  0.      ,  0.505088, 0.787086, 145.474065, -3.157214, -57.539862,  613449.762129, 0.394417, 0.932503 ],
+[ 626596, 0.000101, -0.004277, 121.535304,  626656.970915,  0.105595,  0.507082, 0.781969, 185.030507, -1.879614, -62.082439,  626620.369801, 0.450518, 0.956378 ],
+[ 645554, 0.000171, -0.000541,  88.567428,  645556.001954,  0.      ,  0.503594, 0.786308, 142.189132, -3.379519, -54.072091,  645579.076748, 0.416008, 0.952629 ],
+[ 664224, 0.000136, -0.004143, 129.289884,  664276.907718,  0.122462,  0.507129, 0.778132, 253.743375, -4.398341, -16.120452,  664242.886718, 0.657391, 0.070965 ],
+[ 671401, 0.000061, -0.004008,   6.146910,  671488.166885,  0.202856,  0.506931, 0.749687, 151.648685,  2.099198,  23.864594,  671418.970638, 0.686259, 0.200419 ],
+[ 694799, 0.000014,  0.000392,  28.251993,  694863.628311,  0.162579,  0.502551, 0.760231, 287.987743,  5.268746,  32.950146,  694807.563371, 0.008243, 0.489200 ],
+[ 704424, 0.000276, -0.001555, 151.780633,  704453.536160,  0.163289,  0.504488, 0.761909,  25.626707, -1.672299,  72.691651,  704433.491182, 0.916779, 0.429962 ],
+[ 708842, 0.000296,  0.006529, 185.945867,  708926.239052,  0.208698,  0.496387, 0.730647, 290.288300,  4.682012, -29.849481,  708863.597000, 0.586590, 0.031414 ],
+[ 709409, 0.000302,  0.000427,  28.555607,  709473.300039,  0.162020,  0.502516, 0.760390, 189.913142,  3.705518,  31.610644,  709424.404929, 0.742587, 0.224521 ],
+[ 709580, 0.000302,  0.008180, 193.347892,  709656.728163,  0.216912,  0.494746, 0.724012, 284.931730,  2.493964, -42.219689,  709602.082686, 0.555246, 0.00000  ],
+[ 727274, 0.000675, -0.005843, 357.151254,  727277.366581,  0.217687,  0.508771, 0.745361, 152.339044, -4.167774,  28.647809,  727291.209400, 0.719220, 0.214825 ],
+[ 728714, 0.000712, -0.009214, 336.170692,  728738.335351,  0.247980,  0.512176, 0.734750,  51.662265, -2.873757, -38.950553,  728737.447691, 0.466211, 0.00000  ],
+[ 744313, 0.000963,  0.011238, 228.184879,  744354.792807,  0.251890,  0.491786, 0.699821,  26.682060, -4.667251,  27.601977,  744329.573999, 0.705999, 0.211858 ],
+[ 764652, 0.002913, -0.004466, 116.439352,  764718.468836,  0.094955,  0.507483, 0.784480, 175.500822,  5.138562, -54.854681,  764676.191273, 0.436806, 0.963174 ]
+ ];
+const seasonName=["Spring Equinox", "Summer Solstice", "Autumn Equinox", "Winter Solstice"]; 
+for (i=0; i<data.length; i++){
+	const rd=data[i][0];
+	sLong=Calendar.solarLongitude(rd+0.5);
+	prevSeason=Math.floor(sLong/90.); // 0=spring, 1=summer etc
+	dawnParis=((Calendar.dawnParis(rd) % 1) + 1) % 1;
+	midTehran=((Calendar.middayTehran(rd) % 1) + 1) % 1;
+	midTehranPC=((Calendar.standardFromUniversal(PersianAstronomicalCalendar.middayInTehran(rd), "Tehran, Iran") % 1) + 1) % 1;
+	ssetJeru=((Calendar.sunsetJerusalem(rd) % 1) + 1) % 1;
+	core.output("RD " + rd + " (" + GregorianCalendar.gregorianFromFixed(rd) + ")" 
+				//+ ": EphCorr sec ["       + (data[i][1]*86400).toFixed(2) + "s]: " + (Calendar.ephemerisCorrection(rd)*86400).toFixed(2) + "s (Diff: " + ((Calendar.ephemerisCorrection(rd)-data[i][1])*86400).toFixed(2) + "s)"
+				//+ " Eq. of time min ["   + (data[i][2]*1440).toFixed(3) + "]: " + (Calendar.equationOfTime(rd)*1440).toFixed(3) 
+				//+ " Solar Longit. [" + data[i][3] + " 12UT]: " + sLong.toFixed(6) + "(Diff: " + ((sLong-data[i][3])*3600).toFixed(2) + "\")"
+				//+ " Aberration " + (Calendar.aberration(rd)*3600).toFixed(4)
+				//+ " Nutation " + (Calendar.nutation(rd)*3600).toFixed(4)
+				//+ " Upcoming " + seasonName[(prevSeason+1) % 4] + " [" + data[i][4] + "]: " + Calendar.solarLongitudeAfter(((prevSeason+1) % 4)*90, rd).toFixed(6) + " (Diff: " + ((Calendar.solarLongitudeAfter(((prevSeason+1) % 4)*90, rd)-data[i][4])*86400.).toFixed(2) + "s) "
+				//+ "\tDawn Paris ["    + data[i][5] + "]: " + (dawnParis).toFixed(6) + " (Diff: " + ((dawnParis-data[i][5])*86400).toFixed(2) + "s) "
+				+ "\tTehran Midday ["    + data[i][6] + "]: " + (midTehran).toFixed(6) + " (Diff: " + ((midTehran-data[i][6])*86400).toFixed(2) + "s) "
+				+ "\tTehran Midday PersianCalendar ["    + data[i][6] + "]: " + (midTehranPC).toFixed(6) + " (Diff: " + ((midTehranPC-data[i][6])*86400).toFixed(2) + "s) "
+				//+ "\tJerusalem Sunset [" + data[i][7] + "]: " + (ssetJeru).toFixed(6)  + " (Diff: " + ((ssetJeru-data[i][7]) *86400).toFixed(2) + "s) "
+	);
+	mLong=Calendar.lunarLongitude(rd);
+	mLat=Calendar.lunarLatitude(rd);
+	nextNew=Calendar.lunarPhaseAtOrAfter(0, rd);
+	//core.output("\t Lunar Longit. [" + data[i][8] + "]: " + mLong.toFixed(6) + "(Diff: " + ((mLong-data[i][8])*3600).toFixed(2) + "\")"
+				//+ " Lunar Latit. ["  + data[i][9] + "]: " + mLat.toFixed(6)  + "(Diff: " + ((mLat-data[i][9])*3600).toFixed(2) + "\")" // PERFECT
+				//+ " Lunar Altit. ["  + data[i][10] + "]: " + Calendar.lunarAltitude(rd).toFixed(6)  // BUG: Location is not specified, reference values unusable. Tested with "current location" and seems to work well. 
+				//+ "\tNext New Moon [" + data[i][11] + "]: " + nextNew.toFixed(6) + "(Greg. " + GregorianCalendar.gregorianFromFixed(nextNew) + ", Diff." + ((nextNew-data[i][11])*24).toFixed(2)  +  "h)"
+				//);
+	//meccaMR=((Calendar.moonriseMecca(rd) % 1) + 1) % 1;
+	//meccaMS=((Calendar.moonsetMecca(rd) % 1) + 1) % 1;
+	//core.output(//"Moonrise" + Calendar.moonrise(rd).toFixed(6) +
+	//			"\t Mecca Moonrise [" + data[i][12] + "]: " + meccaMR.toFixed(6) + " (Diff: " + ((meccaMR-data[i][12])*86400).toFixed(2) + "s)"
+	//			+ "\t Mecca Moonset [" + data[i][13] + "]: " + meccaMS.toFixed(6) + " (Diff: " + ((meccaMS-data[i][13])*86400).toFixed(2) + "s)"
+	//			);
+
+}

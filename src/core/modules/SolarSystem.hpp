@@ -58,6 +58,7 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(bool flagOrbits			READ getFlagOrbits			WRITE setFlagOrbits			NOTIFY flagOrbitsChanged)
 	Q_PROPERTY(bool trailsDisplayed			READ getFlagTrails			WRITE setFlagTrails			NOTIFY trailsDisplayedChanged)
 	Q_PROPERTY(int maxTrailPoints			READ getMaxTrailPoints			WRITE setMaxTrailPoints			NOTIFY maxTrailPointsChanged)
+	Q_PROPERTY(int maxTrailTimeExtent		READ getMaxTrailTimeExtent		WRITE setMaxTrailTimeExtent		NOTIFY maxTrailTimeExtentChanged)
 	Q_PROPERTY(int trailsThickness			READ getTrailsThickness			WRITE setTrailsThickness		NOTIFY trailsThicknessChanged)
 	// was bool hintsDisplayed. This is a "forwarding property" only, without own variable.
 	Q_PROPERTY(bool flagHints			READ getFlagHints			WRITE setFlagHints			NOTIFY flagHintsChanged)
@@ -83,6 +84,7 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(bool flagSunScale			READ getFlagSunScale			WRITE setFlagSunScale			NOTIFY flagSunScaleChanged)
 	Q_PROPERTY(double sunScale			READ getSunScale			WRITE setSunScale			NOTIFY sunScaleChanged)
 	Q_PROPERTY(double labelsAmount			READ getLabelsAmount			WRITE setLabelsAmount			NOTIFY labelsAmountChanged)
+	Q_PROPERTY(bool flagPermanentSolarCorona	READ getFlagPermanentSolarCorona	WRITE setFlagPermanentSolarCorona	NOTIFY flagPermanentSolarCoronaChanged)
 	// Ephemeris-related properties
 	Q_PROPERTY(bool ephemerisMarkersDisplayed	READ getFlagEphemerisMarkers		WRITE setFlagEphemerisMarkers		NOTIFY ephemerisMarkersChanged)
 	Q_PROPERTY(bool ephemerisHorizontalCoordinates	READ getFlagEphemerisHorizontalCoordinates	WRITE setFlagEphemerisHorizontalCoordinates	NOTIFY ephemerisHorizontalCoordinatesChanged)
@@ -96,11 +98,11 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(int ephemerisDataLimit		READ getEphemerisDataLimit		WRITE setEphemerisDataLimit		NOTIFY ephemerisDataLimitChanged)
 	Q_PROPERTY(bool ephemerisSmartDates		READ getFlagEphemerisSmartDates		WRITE setFlagEphemerisSmartDates	NOTIFY ephemerisSmartDatesChanged)
 	Q_PROPERTY(bool ephemerisScaleMarkersDisplayed	READ getFlagEphemerisScaleMarkers	WRITE setFlagEphemerisScaleMarkers	NOTIFY ephemerisScaleMarkersChanged)
+	Q_PROPERTY(bool ephemerisAlwaysOn		READ getFlagEphemerisAlwaysOn		WRITE setFlagEphemerisAlwaysOn		NOTIFY ephemerisAlwaysOnChanged)
 	// Great Red Spot (GRS) properties
-	Q_PROPERTY(bool flagCustomGrsSettings		READ getFlagCustomGrsSettings		WRITE setFlagCustomGrsSettings		NOTIFY flagCustomGrsSettingsChanged)
-	Q_PROPERTY(int customGrsLongitude		READ getCustomGrsLongitude		WRITE setCustomGrsLongitude		NOTIFY customGrsLongitudeChanged)
-	Q_PROPERTY(double customGrsDrift		READ getCustomGrsDrift			WRITE setCustomGrsDrift			NOTIFY customGrsDriftChanged)
-	Q_PROPERTY(double customGrsJD			READ getCustomGrsJD			WRITE setCustomGrsJD			NOTIFY customGrsJDChanged)
+	Q_PROPERTY(int grsLongitude			READ getGrsLongitude			WRITE setGrsLongitude			NOTIFY grsLongitudeChanged)
+	Q_PROPERTY(double grsDrift			READ getGrsDrift			WRITE setGrsDrift			NOTIFY grsDriftChanged)
+	Q_PROPERTY(double grsJD				READ getGrsJD				WRITE setGrsJD				NOTIFY grsJDChanged)
 	// Eclipse algorithm properties
 	Q_PROPERTY(bool earthShadowEnlargementDanjon    READ getFlagEarthShadowEnlargementDanjon    WRITE setFlagEarthShadowEnlargementDanjon   NOTIFY earthShadowEnlargementDanjonChanged)
 	// Colors
@@ -145,7 +147,7 @@ class SolarSystem : public StelObjectModule
 
 public:
 	SolarSystem();
-	virtual ~SolarSystem();
+	virtual ~SolarSystem() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -154,45 +156,45 @@ public:
 	//! - loading planetary body orbital and model data from data/ssystem.ini
 	//! - perform initial planet position calculation
 	//! - set display options from application settings
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 
-	virtual void deinit();
+	virtual void deinit() Q_DECL_OVERRIDE;
 	
 	//! Draw SolarSystem objects (planets).
 	//! @param core The StelCore object.
 	//! @return The maximum squared distance in pixels that any SolarSystem object
 	//! has travelled since the last update.
-	virtual void draw(StelCore *core);
+	virtual void draw(StelCore *core) Q_DECL_OVERRIDE;
 
 	//! Update time-varying components.
 	//! This includes planet motion trails.
-	virtual void update(double deltaTime);
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
 
 	//! Used to determine what order to draw the various StelModules.
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
 	//! Search for SolarSystem objects in some area around a point.
-	//! @param v A vector representing a point in the sky.
+	//! @param v A vector representing a point in the sky in equatorial J2000 coordinates (without aberration).
 	//! @param limitFov The radius of the circle around the point v which
 	//! defines the size of the area to search.
 	//! @param core the core object
 	//! @return QList of StelObjectP (pointers) containing all SolarSystem objects
 	//! found in the specified area. This vector is not sorted by distance from v.
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
 
 	//! Search for a SolarSystem object based on the localised name.
 	//! @param nameI18n the case in-sensitive translated planet name.
 	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
 
 	//! Search for a SolarSystem object based on the English name.
 	//! @param name the case in-sensitive English planet name.
 	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
-	virtual StelObjectP searchByName(const QString& name) const;
+	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
 
-	virtual StelObjectP searchByID(const QString &id) const
+	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE
 	{
 		return searchByName(id);
 	}
@@ -202,11 +204,11 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
-	virtual QString getName() const { return "Solar System"; }
-	virtual QString getStelObjectType() const { return Planet::PLANET_TYPE; }
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const Q_DECL_OVERRIDE;
+	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const Q_DECL_OVERRIDE;
+	virtual QString getName() const Q_DECL_OVERRIDE { return "Solar System"; }
+	virtual QString getStelObjectType() const Q_DECL_OVERRIDE { return Planet::PLANET_TYPE; }
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////
@@ -234,6 +236,14 @@ public slots:
 	void setMaxTrailPoints(int max);
 	//! Get maximum number of trail points. Too many points may slow down the application. 5000 seems to be a good balance.
 	int getMaxTrailPoints() const {return maxTrailPoints;}
+
+	//! Set maximum number of trail time extent in years.
+	//! Too many points may slow down the application. One year (365 days) seems to be a good balance.
+	//! If drawing many trails slows down the application, you can set a new maximum trail time extent or step length.
+	//! Note that the fadeout may require more points or a decent simulation speed.
+	void setMaxTrailTimeExtent(int max);
+	//! Get maximum number of trail time extent in years. Too many points may slow down the application. One year (365 days) seems to be a good balance.
+	int getMaxTrailTimeExtent() const {return maxTrailTimeExtent;}
 
 	//! Set flag which determines if planet hints are drawn or hidden along labels
 	void setFlagHints(bool b);
@@ -660,30 +670,30 @@ public slots:
 	//! Get the current value of the flag which enables showing of planets orbits only or not.
 	bool getFlagPlanetsOrbitsOnly(void) const;
 
-	//! Set flag which determines if custom settings is using for Great Red Spot on Jupiter
-	void setFlagCustomGrsSettings(bool b);
-	//! Get the current value of the flag which determines if custom settings for Great Red Spot on Jupiter is used or not.
-	bool getFlagCustomGrsSettings() const;
+	//! Set flag which enabled the showing of solar corona when atmosphere is disabled (true) of draw the corona when total solar eclipses is happened only (false)
+	void setFlagPermanentSolarCorona(bool b) {	if (flagPermanentSolarCorona!=b)	{ flagPermanentSolarCorona = b; emit flagPermanentSolarCoronaChanged(b); } }
+	//! Get the current value of the flag which enables showing of solar corona when atmosphere is disabled or when total solar eclipses is happened only.
+	bool getFlagPermanentSolarCorona(void) const { return flagPermanentSolarCorona; }
 
 	//! Set longitude of Great Red Spot (System II is used)
 	//! @param longitude (degrees)
-	void setCustomGrsLongitude(int longitude);
+	void setGrsLongitude(int longitude);
 	//! Get longitude of Great Red Spot (System II is used)
 	//! @return a longitude (degrees)
-	int getCustomGrsLongitude() const;
+	int getGrsLongitude() const;
 
 	//! Set speed of annual drift for Great Red Spot (System II is used)
 	//! @param annual drift (degrees)
-	void setCustomGrsDrift(double drift);
+	void setGrsDrift(double drift);
 	//! Get speed of annual drift for Great Red Spot (System II is used)
-	double getCustomGrsDrift() const;
+	double getGrsDrift() const;
 
 	//! Set initial JD for calculation of position of Great Red Spot
 	//! @param JD
 	// TODO (GZ): Clarify whether this is JD or rather JDE?
-	void setCustomGrsJD(double JD);
+	void setGrsJD(double JD);
 	//! Get initial JD for calculation of position of Great Red Spot
-	double getCustomGrsJD();
+	double getGrsJD();
 
 	//! Set whether earth shadow should be enlarged following Danjon's method
 	void setFlagEarthShadowEnlargementDanjon(bool b);
@@ -715,6 +725,16 @@ public slots:
 	//! Reset and recreate trails
 	void recreateTrails();
 
+	//! Reset textures for planet @param planetName
+	//! @note if @param planetName is empty then reset will happen for all solar system objects
+	void resetTextures(const QString& planetName);
+
+	//! Replace the texture for the planet @param planetName
+	//! @param planetName - English name of the planet
+	//! @param texName - file path for texture
+	//! The texture path starts in the scripts directory.
+	void setTextureForPlanet(const QString &planetName, const QString &texName);
+
 signals:
 	void labelsDisplayedChanged(bool b);
 	void nomenclatureDisplayedChanged(bool b);
@@ -726,6 +746,7 @@ signals:
 	void trailsThicknessChanged(int v);
 	void orbitsThicknessChanged(int v);
 	void maxTrailPointsChanged(int max);
+	void maxTrailTimeExtentChanged(int max);
 	void flagPointerChanged(bool b);
 	void flagNativePlanetNamesChanged(bool b);
 	void flagPlanetsDisplayedChanged(bool b);
@@ -751,6 +772,7 @@ signals:
 	void ephemerisDatesChanged(bool b);
 	void ephemerisMagnitudesChanged(bool b);
 	void ephemerisLineChanged(bool b);
+	void ephemerisAlwaysOnChanged(bool b);
 	void ephemerisLineThicknessChanged(int v);
 	void ephemerisSkipDataChanged(bool b);
 	void ephemerisSkipMarkersChanged(bool b);
@@ -758,47 +780,47 @@ signals:
 	void ephemerisDataLimitChanged(int s);
 	void ephemerisSmartDatesChanged(bool b);
 	void ephemerisScaleMarkersChanged(bool b);
-	void flagCustomGrsSettingsChanged(bool b);
-	void customGrsLongitudeChanged(int l);
-	void customGrsDriftChanged(double drift);
-	void customGrsJDChanged(double JD);
+	void grsLongitudeChanged(int l);
+	void grsDriftChanged(double drift);
+	void grsJDChanged(double JD);
 	void earthShadowEnlargementDanjonChanged(bool b);
+	void flagPermanentSolarCoronaChanged(bool b);
 
-	void labelsColorChanged(const Vec3f & color) const;
-	void pointerColorChanged(const Vec3f & color) const;
-	void trailsColorChanged(const Vec3f & color) const;
-	void orbitsColorChanged(const Vec3f & color) const;
-	void nomenclatureColorChanged(const Vec3f & color) const;
-	void majorPlanetsOrbitsColorChanged(const Vec3f & color) const;
-	void minorPlanetsOrbitsColorChanged(const Vec3f & color) const;
-	void dwarfPlanetsOrbitsColorChanged(const Vec3f & color) const;
-	void moonsOrbitsColorChanged(const Vec3f & color) const;
-	void cubewanosOrbitsColorChanged(const Vec3f & color) const;
-	void plutinosOrbitsColorChanged(const Vec3f & color) const;
-	void scatteredDiskObjectsOrbitsColorChanged(const Vec3f & color) const;
-	void oortCloudObjectsOrbitsColorChanged(const Vec3f & color) const;
-	void cometsOrbitsColorChanged(const Vec3f & color) const;
-	void sednoidsOrbitsColorChanged(const Vec3f & color) const;
-	void interstellarOrbitsColorChanged(const Vec3f & color) const;
-	void mercuryOrbitColorChanged(const Vec3f & color) const;
-	void venusOrbitColorChanged(const Vec3f & color) const;
-	void earthOrbitColorChanged(const Vec3f & color) const;
-	void marsOrbitColorChanged(const Vec3f & color) const;
-	void jupiterOrbitColorChanged(const Vec3f & color) const;
-	void saturnOrbitColorChanged(const Vec3f & color) const;
-	void uranusOrbitColorChanged(const Vec3f & color) const;
-	void neptuneOrbitColorChanged(const Vec3f & color) const;
-	void ephemerisGenericMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisSecondaryMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisSelectedMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisMercuryMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisVenusMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisMarsMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisJupiterMarkerColorChanged(const Vec3f & color) const;
-	void ephemerisSaturnMarkerColorChanged(const Vec3f & color) const;
+	void labelsColorChanged(const Vec3f & color);
+	void pointerColorChanged(const Vec3f & color);
+	void trailsColorChanged(const Vec3f & color);
+	void orbitsColorChanged(const Vec3f & color);
+	void nomenclatureColorChanged(const Vec3f & color);
+	void majorPlanetsOrbitsColorChanged(const Vec3f & color);
+	void minorPlanetsOrbitsColorChanged(const Vec3f & color);
+	void dwarfPlanetsOrbitsColorChanged(const Vec3f & color);
+	void moonsOrbitsColorChanged(const Vec3f & color);
+	void cubewanosOrbitsColorChanged(const Vec3f & color);
+	void plutinosOrbitsColorChanged(const Vec3f & color);
+	void scatteredDiskObjectsOrbitsColorChanged(const Vec3f & color);
+	void oortCloudObjectsOrbitsColorChanged(const Vec3f & color);
+	void cometsOrbitsColorChanged(const Vec3f & color);
+	void sednoidsOrbitsColorChanged(const Vec3f & color);
+	void interstellarOrbitsColorChanged(const Vec3f & color);
+	void mercuryOrbitColorChanged(const Vec3f & color);
+	void venusOrbitColorChanged(const Vec3f & color);
+	void earthOrbitColorChanged(const Vec3f & color);
+	void marsOrbitColorChanged(const Vec3f & color);
+	void jupiterOrbitColorChanged(const Vec3f & color);
+	void saturnOrbitColorChanged(const Vec3f & color);
+	void uranusOrbitColorChanged(const Vec3f & color);
+	void neptuneOrbitColorChanged(const Vec3f & color);
+	void ephemerisGenericMarkerColorChanged(const Vec3f & color);
+	void ephemerisSecondaryMarkerColorChanged(const Vec3f & color);
+	void ephemerisSelectedMarkerColorChanged(const Vec3f & color);
+	void ephemerisMercuryMarkerColorChanged(const Vec3f & color);
+	void ephemerisVenusMarkerColorChanged(const Vec3f & color);
+	void ephemerisMarsMarkerColorChanged(const Vec3f & color);
+	void ephemerisJupiterMarkerColorChanged(const Vec3f & color);
+	void ephemerisSaturnMarkerColorChanged(const Vec3f & color);
 
-	void orbitColorStyleChanged(QString style) const;
-	void apparentMagnitudeAlgorithmOnEarthChanged(QString algorithm) const;
+	void orbitColorStyleChanged(QString style);
+	void apparentMagnitudeAlgorithmOnEarthChanged(QString algorithm);
 
 	void solarSystemDataReloaded();
 	void requestEphemerisVisualization();
@@ -842,7 +864,7 @@ public:
 
 	//! Determines relative amount of sun visible from the observer's position (first element) and the Planet object pointer for eclipsing celestial body (second element).
 	//! In the unlikely event of multiple objects in front of the sun, only the largest will be reported.
-	QPair<double, PlanetP> getEclipseFactor(const StelCore *core) const;
+	QPair<double, PlanetP> getSolarEclipseFactor(const StelCore *core) const;
 
 	//! Retrieve Radius of Umbra and Penumbra at the distance of the Moon.
 	//! Returns a pair (umbra, penumbra) in (geocentric_arcseconds, AU, geometric_AU).
@@ -863,9 +885,6 @@ public:
 	const QList<PlanetP>& getAllMinorBodies() const {return systemMinorBodies;}
 	//! Get the list of all minor bodies names.
 	const QStringList getMinorBodiesList() const { return minorBodies; }
-
-	//! Get lighttime corrected solar position (essential to draw the sun during solar eclipse and compute things like eclipse factor etc, until we get aberration working.)
-	const Vec3d getLightTimeSunPosition() const { return lightTimeSunPosition; }
 
 private slots:
 	//! Called when a new object is selected.
@@ -888,6 +907,11 @@ private slots:
 	void setFlagEphemerisLine(bool b);
 	//! Get the current value of the flag which enabled the showing of ephemeris line between markers or not
 	bool getFlagEphemerisLine() const;
+
+	//! Set flag which enables ephemeris lines and marks always on
+	void setFlagEphemerisAlwaysOn(bool b);
+	//! Get the current value of the flag which makes ephemeris lines and marks always on
+	bool getFlagEphemerisAlwaysOn() const;
 
 	//! Set the thickness of ephemeris line
 	void setEphemerisLineThickness(int v);
@@ -984,6 +1008,9 @@ private:
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const StelCore* core);
 
+	//! Draw ephemeris lines and markers
+	void drawEphemerisItems(const StelCore* core);
+
 	//! Draw a nice markers for ephemeris of objects.
 	void drawEphemerisMarkers(const StelCore* core);
 
@@ -1040,6 +1067,9 @@ private:
 	//! The amount of planet labels (between 0 and 10).
 	double labelsAmount;
 
+	// Flag to follow the state of drawing of solar corona
+	bool flagPermanentSolarCorona;
+
 	//! List of all the bodies of the solar system.
 	QList<PlanetP> systemPlanets;
 	//! List of all the minor bodies of the solar system.
@@ -1062,6 +1092,7 @@ private:
 	bool flagIsolatedTrails;
 	int numberIsolatedTrails;
 	int maxTrailPoints;                         // limit trails to a manageable size.
+	int maxTrailTimeExtent;
 	int trailsThickness;
 	bool flagIsolatedOrbits;
 	bool flagPlanetsOrbitsOnly;
@@ -1070,6 +1101,7 @@ private:
 	bool ephemerisMagnitudesDisplayed;
 	bool ephemerisHorizontalCoordinates;
 	bool ephemerisLineDisplayed;
+	bool ephemerisAlwaysOn;
 	int ephemerisLineThickness;
 	bool ephemerisSkipDataDisplayed;
 	bool ephemerisSkipMarkersDisplayed;
@@ -1095,8 +1127,6 @@ private:
 	QHash<QString, QString> planetNativeNamesMap, planetNativeNamesMeaningMap;
 	QStringList minorBodies;
 
-	Vec3d lightTimeSunPosition;			// when observing a solar eclipse, we need solar position 8 minutes ago.
-							// Direct shift caused problems (LP:#1699648), circumvented with this construction.
 	// 0.16pre observation GZ: this list contains pointers to all orbit objects,
 	// while the planets don't own their orbit objects.
 	// Would it not be better to hand over the orbit object ownership to the Planet object?

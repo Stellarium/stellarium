@@ -104,8 +104,6 @@ class SearchDialog : public StelDialog
 	Q_PROPERTY(bool simbadGetTypes  READ getSimbadGetsTypes  WRITE setSimbadGetsTypes  NOTIFY simbadGetsTypesChanged)
 	Q_PROPERTY(bool simbadGetDims   READ getSimbadGetsDims   WRITE setSimbadGetsDims   NOTIFY simbadGetsDimsChanged)
 
-	Q_ENUMS(CoordinateSystem)
-
 public:
 	//! Available coordinate systems
 	enum CoordinateSystem
@@ -118,6 +116,7 @@ public:
 		ecliptic,
 		eclipticJ2000
 	};
+	Q_ENUM(CoordinateSystem)
 
 	SearchDialog(QObject* parent);
 	virtual ~SearchDialog() Q_DECL_OVERRIDE;
@@ -142,36 +141,38 @@ signals:
 	void simbadGetsTypesChanged(bool b);
 	void simbadGetsDimsChanged(bool b);
 
-
 public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
+	//! On the first call with "true" populates the window contents. Also sets focus to entry line.
+	virtual void setVisible(bool v) Q_DECL_OVERRIDE;
 	//! This style only displays the text search field and the search button
 	void setSimpleStyle();
 
 	//! Set the current coordinate system
-	void setCurrentCoordinateSystem(CoordinateSystem cs)
+	void setCurrentCoordinateSystem(SearchDialog::CoordinateSystem cs)
 	{
 		currentCoordinateSystem = cs;
 	}
-	//! Get the current coordinate system
-	CoordinateSystem getCurrentCoordinateSystem() const
-	{
-		return currentCoordinateSystem;
-	}
-	//! Get the current coordinate system key
-	QString getCurrentCoordinateSystemKey(void) const;
 	//! Set the current coordinate system from its key
 	void setCurrentCoordinateSystemKey(QString key);
+	//! Called when user wants to change recent search list size
+	void setRecentSearchSize(int maxSize);
 
 	void setCoordinateSystem(int csID);
 	void populateCoordinateSystemsList();
 	void populateCoordinateAxis();
 	void populateRecentSearch();
 
+public:
+	//! Get the current coordinate system
+	SearchDialog::CoordinateSystem getCurrentCoordinateSystem() const
+	{
+	    return currentCoordinateSystem;
+	}
+	//! Get the current coordinate system key
+	QString getCurrentCoordinateSystemKey(void) const;
 	//! Returns current max size of recent search list
 	int  getRecentSearchSize () const { return recentObjectSearchesData.maxSize;}
-	//! Called when user wants to change recent search list size
-	void setRecentSearchSize(int maxSize);
 
 protected:
 	Ui_searchDialogForm* ui;
@@ -191,17 +192,19 @@ private slots:
 
 	void gotoObject();
 	void gotoObject(const QString& nameI18n);
+	void gotoObject(const QString& nameI18n, const QString& objType);
 	// for going from list views
 	void gotoObject(const QModelIndex &modelIndex);
+	void gotoObjectWithType(const QModelIndex &modelIndex);
 
 	void searchListClear();
+	void refreshFocus(bool state);
 
 	//! Called when the user edit the manual position controls
 	void manualPositionChanged();
 
 	//! Whether to use SIMBAD for searches or not.
 	void enableSimbadSearch(bool enable);
-	bool simbadSearchEnabled() const {return useSimbad;}
 
 	//! Whether to use autofill for start of words or not.
 	void enableStartOfWordsAutofill(bool enable);
@@ -230,14 +233,6 @@ private slots:
 
 	void changeTab(int index);
 
-	int  getSimbadQueryDist () const { return simbadDist;}
-	int  getSimbadQueryCount() const { return simbadCount;}
-	bool getSimbadGetsIds   () const { return simbadGetIds;}
-	bool getSimbadGetsSpec  () const { return simbadGetSpec;}
-	bool getSimbadGetsMorpho() const { return simbadGetMorpho;}
-	bool getSimbadGetsTypes () const { return simbadGetTypes;}
-	bool getSimbadGetsDims  () const { return simbadGetDims;}
-
 	void setSimbadQueryDist(int dist);
 	void setSimbadQueryCount(int count);
 	void setSimbadGetsIds(bool b);
@@ -253,6 +248,15 @@ private slots:
 	void recentSearchClearDataClicked();
 
 private:
+	bool simbadSearchEnabled() const {return useSimbad;}
+	int  getSimbadQueryDist () const { return simbadDist;}
+	int  getSimbadQueryCount() const { return simbadCount;}
+	bool getSimbadGetsIds   () const { return simbadGetIds;}
+	bool getSimbadGetsSpec  () const { return simbadGetSpec;}
+	bool getSimbadGetsMorpho() const { return simbadGetMorpho;}
+	bool getSimbadGetsTypes () const { return simbadGetTypes;}
+	bool getSimbadGetsDims  () const { return simbadGetDims;}
+
 	class SearchDialogStaticData
 	{
 	public:

@@ -43,7 +43,7 @@ bool ShortcutsFilterModel::filterAcceptsRow(int source_row, const QModelIndex &s
 	
 	if (source_parent.isValid())
 	{
-		QModelIndex index = source_parent.child(source_row, filterKeyColumn());
+		QModelIndex index = source_parent.model()->index(source_row, filterKeyColumn(), source_parent);
 		QString data = sourceModel()->data(index, filterRole()).toString();
 		return data.contains(filterRegExp());
 	}
@@ -79,7 +79,7 @@ ShortcutsDialog::~ShortcutsDialog()
 void ShortcutsDialog::drawCollisions()
 {
 	QBrush brush(Qt::red);
-	for (auto* item : collisionItems)
+	for (auto* item : qAsConst(collisionItems))
 	{
 		// change colors of all columns for better visibility
 		item->setForeground(brush);
@@ -92,8 +92,8 @@ void ShortcutsDialog::drawCollisions()
 void ShortcutsDialog::resetCollisions()
 {
 	QBrush brush =
-	        ui->shortcutsTreeView->palette().brush(QPalette::Foreground);
-	for (auto* item : collisionItems)
+		ui->shortcutsTreeView->palette().brush(QPalette::Foreground);
+	for (auto* item : qAsConst(collisionItems))
 	{
 		item->setForeground(brush);
 		QModelIndex index = item->index();
@@ -151,7 +151,7 @@ bool ShortcutsDialog::prefixMatchKeySequence(const QKeySequence& ks1,
 	{
 		return false;
 	}
-	for (int i = 0; i < qMin(ks1.count(), ks2.count()); ++i)
+	for (uint i = 0; i < static_cast<uint>(qMin(ks1.count(), ks2.count())); ++i)
 	{
 		if (ks1[i] != ks2[i])
 		{
@@ -335,6 +335,9 @@ void ShortcutsDialog::createDialogContent()
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->primaryLabel->setStyleSheet(style);
 	ui->altLabel->setStyleSheet(style);
+
+	// set initial focus to action search
+	ui->lineEditSearch->setFocus();
 }
 
 void ShortcutsDialog::polish()
@@ -402,7 +405,7 @@ QStandardItem* ShortcutsDialog::findItemByData(QVariant value, int role, int col
 				return subitem;
 		}
 	}
-	return 0;
+	return Q_NULLPTR;
 }
 
 void ShortcutsDialog::updateShortcutsItem(StelAction *action,
@@ -488,12 +491,12 @@ void ShortcutsDialog::restoreDefaultShortcuts()
 void ShortcutsDialog::updateTreeData()
 {
 	// Create shortcuts tree
-	QStringList groups = actionMgr->getGroupList();
+	const QStringList groups = actionMgr->getGroupList();
 	for (const auto& group : groups)
 	{
 		updateGroup(group);
 		// display group's shortcuts
-		QList<StelAction*> actions = actionMgr->getActionList(group);
+		const QList<StelAction*> actions = actionMgr->getActionList(group);
 		for (auto* action : actions)
 		{
 			updateShortcutsItem(action);

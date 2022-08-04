@@ -25,23 +25,24 @@
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTexture.hpp"
-#include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelUtils.hpp"
+#include "Planet.hpp"
 
 const QString CustomObject::CUSTOMOBJECT_TYPE = QStringLiteral("CustomObject");
 Vec3f CustomObject::markerColor = Vec3f(0.1f,1.0f,0.1f);
 float CustomObject::markerSize = 1.f;
 float CustomObject::selectPriority = 0.f;
 
-CustomObject::CustomObject(const QString& codesignation, const Vec3d& coordinates, const bool isVisible)
+CustomObject::CustomObject(const QString& codesignation, const Vec3d& coordJ2000, const bool isVisible)
 	: initialized(false)
-	, XYZ(coordinates)
+	, XYZ(coordJ2000)
 	, markerTexture(Q_NULLPTR)
 	, designation(codesignation)
 	, isMarker(isVisible)
 {
+	XYZ.normalize();
 	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");	
 	initialized = true;
 }
@@ -53,7 +54,7 @@ CustomObject::~CustomObject()
 
 float CustomObject::getSelectPriority(const StelCore* core) const
 {
-	Q_UNUSED(core);
+	Q_UNUSED(core)
 	return selectPriority;
 }
 
@@ -64,7 +65,7 @@ QString CustomObject::getNameI18n() const
 	{
 		QStringList cod = designation.split(" ");
 		if (cod.count()>1)
-			r = QString("%1 %2").arg(q_(cod.at(0))).arg(cod.at(1));
+			r = QString("%1 %2").arg(q_(cod.at(0)), cod.at(1));
 		else
 			r = q_(r);
 	}
@@ -80,16 +81,11 @@ QString CustomObject::getInfoString(const StelCore* core, const InfoStringGroup&
 		oss << "<h2>" << getNameI18n() << "</h2>";
 
 	if (flags&ObjectType)
-	{
-		QString type = q_("custom object");
-		if (isMarker)
-			type = q_("custom marker");
-
-		oss << QString("%1: <b>%2</b>").arg(q_("Type"), type) << "<br />";
-	}
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getObjectType())) << "<br />";
 
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
+	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 	return str;
 }
@@ -99,18 +95,19 @@ Vec3f CustomObject::getInfoColor(void) const
 	return Vec3f(1.f, 1.f, 1.f);
 }
 
+Vec3d CustomObject::getJ2000EquatorialPos(const StelCore* core) const
+{
+	Q_UNUSED(core)
+	return XYZ;
+}
+
 float CustomObject::getVMagnitude(const StelCore* core) const
 {
-	Q_UNUSED(core);
+	Q_UNUSED(core)
 	if (isMarker)
 		return 3.f;
 	else
 		return 99.f;
-}
-
-double CustomObject::getAngularSize(const StelCore*) const
-{
-	return 0.00001;
 }
 
 void CustomObject::update(double deltaTime)
@@ -120,10 +117,9 @@ void CustomObject::update(double deltaTime)
 
 void CustomObject::draw(StelCore* core, StelPainter *painter)
 {
-	Q_UNUSED(core);
 	Vec3d pos;
 	// Check visibility of custom object
-	if (!(painter->getProjector()->projectCheck(XYZ, pos)))
+	if (!(painter->getProjector()->projectCheck(getJ2000EquatorialPos(core), pos)))
 		return;
 
 	painter->setBlending(true, GL_ONE, GL_ONE);
@@ -132,8 +128,7 @@ void CustomObject::draw(StelCore* core, StelPainter *painter)
 	if (isMarker)
 	{
 		markerTexture->bind();
-		const float size = static_cast<float>(getAngularSize(Q_NULLPTR))*M_PI_180f*painter->getProjector()->getPixelPerRadAtCenter();
-		const float shift = markerSize + size/1.6f;
+		const float shift = markerSize + 2.f;
 
 		painter->drawSprite2dMode(static_cast<float>(pos[0]), static_cast<float>(pos[1]), markerSize);
 

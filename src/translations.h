@@ -30,35 +30,6 @@ class Translations
 		// Generate Gettext strings for traduction
 		Q_ASSERT(0);
 
-		// List of types solar system bodies
-		// TRANSLATORS: Type of object
-		N_("star");
-		// TRANSLATORS: Type of object
-		N_("planet");
-		// TRANSLATORS: Type of object
-		N_("comet");
-		// TRANSLATORS: Type of object
-		N_("asteroid");
-		// TRANSLATORS: Type of object
-		N_("moon");
-		// TRANSLATORS: Type of object
-		N_("plutino");
-		// TRANSLATORS: Type of object
-		N_("dwarf planet");
-		// TRANSLATORS: Type of object
-		N_("cubewano");
-		// TRANSLATORS: Type of object
-		N_("scattered disc object");
-		// TRANSLATORS: Type of object
-		N_("Oort cloud object");
-		// TRANSLATORS: Type of object
-		N_("sednoid");
-		// TRANSLATORS: Type of object
-		N_("interstellar object");
-		// TRANSLATORS: Type of object
-		N_("observer");
-		// TRANSLATORS: Type of object
-		N_("artificial");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Planets");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
@@ -453,95 +424,8 @@ class Translations
 		N_("Variable stars: the classical cepheids");
 		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
 		N_("Bright carbon stars");
-		
-		// =====================================================================
-		// Constellation cultures
-		// TRANSLATORS: Name of the sky culture
-		N_("Al-Sufi");
-		// TRANSLATORS: Name of the sky culture
-		N_("Almagest");
-		// TRANSLATORS: Name of the sky culture
-		N_("Anutan");
-		// TRANSLATORS: Name of the sky culture
-		N_("Arabic Moon Stations");
-		// TRANSLATORS: Name of the sky culture
-		N_("Armintxe");
-		// TRANSLATORS: Name of the sky culture
-		N_("Aztec");
-		// TRANSLATORS: Name of the sky culture
-		N_("Belarusian");
-		// TRANSLATORS: Name of the sky culture
-		N_("Boorong");
-		// TRANSLATORS: Name of the sky culture
-		N_("Chinese");
-		// TRANSLATORS: Name of the sky culture
-		N_("Chinese Contemporary");
-		// TRANSLATORS: Name of the sky culture
-		N_("Chinese Medieval");
-		// TRANSLATORS: Name of the sky culture
-		N_("Egyptian");
-		// TRANSLATORS: Name of the sky culture
-		N_("Hawaiian Starlines");
-		// TRANSLATORS: Name of the sky culture
-		N_("Inuit");
-		// TRANSLATORS: Name of the sky culture
-		N_("Indian Vedic");
-		// TRANSLATORS: Name of the sky culture
-		N_("Japanese Moon Stations");
-		// TRANSLATORS: Name of the sky culture
-		N_("Kamilaroi/Euahlayi");
-		// TRANSLATORS: Name of the sky culture
-		N_("Korean");
-		// TRANSLATORS: Name of the sky culture
-		N_("Dakota/Lakota/Nakota");
-		// TRANSLATORS: Name of the sky culture
-		N_("Macedonian");
-		// TRANSLATORS: Name of the sky culture
-		N_("Maori");
-		// TRANSLATORS: Name of the sky culture
-		N_("Maya");
-		// TRANSLATORS: Name of the sky culture
-		N_("Mongolian");
-		// TRANSLATORS: Name of the sky culture
-		N_("Lokono");
-		// TRANSLATORS: Name of the sky culture
-		N_("Navajo");
-		// TRANSLATORS: Name of the sky culture
-		N_("Norse");
-		// TRANSLATORS: Name of the sky culture
-		N_("Ojibwe");
-		// TRANSLATORS: Name of the sky culture
-		N_("Romanian");
-		// TRANSLATORS: Name of the sky culture
-		N_("Sami");
-		// TRANSLATORS: Name of the sky culture
-		N_("Sardinian");
-		// TRANSLATORS: Name of the sky culture
-		N_("Siberian");
-		// TRANSLATORS: Name of the sky culture
-		N_("Tukano");
-		// TRANSLATORS: Name of the sky culture
-		N_("Tupi-Guarani");
-		// TRANSLATORS: Name of the sky culture
-		N_("Tongan");
-		// TRANSLATORS: Name of the sky culture
-		N_("Western");
-		// TRANSLATORS: Name of the sky culture
-		N_("Western (H.A.Rey)");
-		// TRANSLATORS: Name of the sky culture
-		N_("Western (O.Hlad)");
-		// TRANSLATORS: Name of the sky culture
-		N_("Western (Sky & Telescope)");
-		// TRANSLATORS: Name of the sky culture
-		N_("Northern Andes");
-		// TRANSLATORS: Name of the sky culture
-		N_("Babylonian (MUL.APIN)");
-		// TRANSLATORS: Name of the sky culture
-		N_("Babylonian (Seleucid)");
-		// TRANSLATORS: Name of the sky culture and landscape
-		N_("Armintxe Cave");
-		// TRANSLATORS: Name of the sky culture
-		N_("Vanuatu (Netwar)");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Bright barium stars");
 		
 		// =====================================================================
 		// Landscape names
@@ -751,6 +635,9 @@ class Translations
 		N_("Computer");
 		N_("&Open");
 		N_("&Save");
+		N_("Save");
+		N_("Save As:");
+		N_("Tags:");
 		N_("File &name:");
 		N_("Copy &Link Location");
 		N_("Abort");
@@ -783,6 +670,8 @@ class Translations
 		N_("&Rename");
 		N_("&Delete");
 		N_("&New Folder");
+		N_("New Folder");
 		N_("Show &hidden files");
+		N_("Search");
 	}
 };

@@ -63,7 +63,6 @@ file (section [NavigationalStars]).
 class NavStars : public StelModule
 {
 	Q_OBJECT
-	Q_ENUMS(NavigationalStarsSet)
 	Q_PROPERTY(bool navStarsVisible		READ getNavStarsMarks		WRITE setNavStarsMarks		NOTIFY navStarsMarksChanged)
 	Q_PROPERTY(bool displayAtStartup	READ getEnableAtStartup		WRITE setEnableAtStartup	NOTIFY enableAtStartupChanged)
 	Q_PROPERTY(bool highlightWhenVisible	READ getHighlightWhenVisible	WRITE setHighlightWhenVisible   NOTIFY highlightWhenVisibleChanged)
@@ -82,18 +81,19 @@ public:
 		Russian,		//!< Russian set (Морской астрономический ежегодник)
 		German		//!< German set (Nautisches Jahrbuch)
 	};
+	Q_ENUM(NavigationalStarsSet)
 
 	NavStars();
-	virtual ~NavStars();
+	virtual ~NavStars() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init();
-	virtual void deinit();
-	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core);
-	virtual double getCallOrder(StelModuleActionName actionName) const;
-	virtual bool configureGui(bool show);
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void deinit() Q_DECL_OVERRIDE;
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	virtual bool configureGui(bool show) Q_DECL_OVERRIDE;
 
 	//! Set up the plugin with default values.  This means clearing out the NavigationalStars section in the
 	//! main config.ini (if one already exists), and populating it with default values.
@@ -144,7 +144,7 @@ public slots:
 		currentNSSet = nsset;
 	}
 	//! Get the set of navigational stars
-	NavigationalStarsSet getCurrentNavigationalStarsSet() const
+	NavStars::NavigationalStarsSet getCurrentNavigationalStarsSet() const
 	{
 		return currentNSSet;
 	}
@@ -241,9 +241,9 @@ class NavStarsStelPluginInterface : public QObject, public StelPluginInterface
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
-	virtual QObjectList getExtensionList() const { return QObjectList(); }
+	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif // NAVSTARS_HPP

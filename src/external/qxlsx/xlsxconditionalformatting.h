@@ -1,40 +1,20 @@
-/****************************************************************************
-** Copyright (c) 2013-2014 Debao Zhang <hello@debao.me>
-** All right reserved.
-**
-** Permission is hereby granted, free of charge, to any person obtaining
-** a copy of this software and associated documentation files (the
-** "Software"), to deal in the Software without restriction, including
-** without limitation the rights to use, copy, modify, merge, publish,
-** distribute, sublicense, and/or sell copies of the Software, and to
-** permit persons to whom the Software is furnished to do so, subject to
-** the following conditions:
-**
-** The above copyright notice and this permission notice shall be
-** included in all copies or substantial portions of the Software.
-**
-** THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-** EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-** MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-** NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-** LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-** OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-**
-****************************************************************************/
+// xlsxconditionalformatting.h
+
 #ifndef QXLSX_XLSXCONDITIONALFORMATTING_H
 #define QXLSX_XLSXCONDITIONALFORMATTING_H
+
+#include <QtGlobal>
+#include <QString>
+#include <QList>
+#include <QColor>
+#include <QXmlStreamReader>
+#include <QXmlStreamWriter>
+#include <QSharedDataPointer>
 
 #include "xlsxglobal.h"
 #include "xlsxcellrange.h"
 #include "xlsxcellreference.h"
-#include <QSharedDataPointer>
-#include <QString>
-#include <QList>
 
-class QXmlStreamReader;
-class QXmlStreamWriter;
-class QColor;
 class ConditionalFormattingTest;
 
 QT_BEGIN_NAMESPACE_XLSX
@@ -42,9 +22,9 @@ QT_BEGIN_NAMESPACE_XLSX
 class Format;
 class Worksheet;
 class Styles;
-
 class ConditionalFormattingPrivate;
-class   ConditionalFormatting
+
+class ConditionalFormatting
 {
 public:
     enum HighlightRuleType {
@@ -100,10 +80,12 @@ public:
         VOT_Percentile
     };
 
+public:
     ConditionalFormatting();
     ConditionalFormatting(const ConditionalFormatting &other);
     ~ConditionalFormatting();
 
+public:
     bool addHighlightCellsRule(HighlightRuleType type, const Format &format, bool stopIfTrue=false);
     bool addHighlightCellsRule(HighlightRuleType type, const QString &formula1, const Format &format, bool stopIfTrue=false);
     bool addHighlightCellsRule(HighlightRuleType type, const QString &formula1, const QString &formula2, const Format &format, bool stopIfTrue=false);
@@ -125,8 +107,11 @@ public:
 private:
     friend class Worksheet;
     friend class ::ConditionalFormattingTest;
+
+private:
     bool saveToXml(QXmlStreamWriter &writer) const;
-    bool loadFromXml(QXmlStreamReader &reader, Styles *styles=0);
+    bool loadFromXml(QXmlStreamReader &reader, Styles* styles = NULL);
+
     QSharedDataPointer<ConditionalFormattingPrivate> d;
 };
 

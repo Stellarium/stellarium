@@ -35,9 +35,8 @@ class StelCore;
 //! @sa StelObjectP
 class StelObject : public StelRegionObject
 {
-	//Required for Q_FLAGS macro, this requires this header to be MOC'ed
+	//Required for Q_FLAG macro, this requires this header to be MOC'ed
 	Q_GADGET
-	Q_FLAGS(InfoStringGroupFlags InfoStringGroup)
 public:
 	//! Used as named bitfield flags as specifiers to
 	//! filter results of getInfoString. The precise definition of these should
@@ -70,30 +69,36 @@ public:
 		IAUConstellation        = 0x00100000, //!< Three-letter constellation code (And, Boo, Cas, ...)
 		SiderealTime		= 0x00200000, //!< Mean and Apparent Sidereal Time
 		RTSTime			= 0x00400000, //!< Time of rise, transit and set of celestial object
-		Script                  = 0x00800000, //!< Should be used by Scripts only which can inject extraInfoStrings.
-		DebugAid                = 0x01000000, //!< Should be used in DEBUG builds only, place messages into extraInfoStrings.
-		NoFont			= 0x02000000,
-		PlainText		= 0x04000000  //!< Strip HTML tags from output
+		SolarLunarPosition      = 0x00800000, //!< Show Solar and Lunar horizontal position (on Earth location only)
+		Script                  = 0x01000000, //!< Should be used by Scripts only which can inject extraInfoStrings.
+		DebugAid                = 0x02000000, //!< Can be used for development only, place messages into extraInfoStrings. Comment them away or delete for releases.
+		NoFont			= 0x04000000,
+		PlainText		= 0x08000000  //!< Strip HTML tags from output
 	};
 	Q_DECLARE_FLAGS(InfoStringGroup, InfoStringGroupFlags)
+	Q_FLAG(InfoStringGroup)
 
-	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags AllInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
+	//! A pre-defined "all available" set of specifiers for the getInfoString flags argument to getInfoString
+	static constexpr InfoStringGroup AllInfo = static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
 									   Distance|Elongation|Size|Velocity|ProperMotion|Extra|HourAngle|AbsoluteMagnitude|
 									   GalacticCoord|SupergalacticCoord|OtherCoord|ObjectType|EclipticCoordJ2000|
-									   EclipticCoordOfDate|IAUConstellation|SiderealTime|RTSTime);
-	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags ShortInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000);
+									   EclipticCoordOfDate|IAUConstellation|SiderealTime|RTSTime|SolarLunarPosition);
+	//! A pre-defined "default" set of specifiers for the getInfoString flags argument to getInfoString
+	//! It appears useful to propose this set as post-install settings and let users configure more on demand.
+	static constexpr InfoStringGroup DefaultInfo = static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecOfDate|HourAngle|AltAzi|OtherCoord|
+											  Distance|Elongation|Size|Velocity|Extra|IAUConstellation|SiderealTime|RTSTime);
+	//! A pre-defined "shortest useful" set of specifiers for the getInfoString flags argument to getInfoString
+	static constexpr InfoStringGroup ShortInfo = static_cast<InfoStringGroup>(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
-	virtual ~StelObject() {}
+	virtual ~StelObject() Q_DECL_OVERRIDE {}
 
 	//! Default implementation of the getRegion method.
 	//! Return the spatial region of the object.
-	virtual SphericalRegionP getRegion() const {return SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(Q_NULLPTR)));}
+	virtual SphericalRegionP getRegion() const Q_DECL_OVERRIDE {return SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(Q_NULLPTR)));}
 
 	//! Default implementation of the getPointInRegion method.
 	//! Return the J2000 Equatorial Position of the object.
-	virtual Vec3d getPointInRegion() const {return getJ2000EquatorialPos(Q_NULLPTR);}
+	virtual Vec3d getPointInRegion() const Q_DECL_OVERRIDE {return getJ2000EquatorialPos(Q_NULLPTR);}
 	
 	//! Write I18n information about the object in QString.
 	//! @param core the StelCore object to use
@@ -133,10 +138,10 @@ public:
 	//! - elatJ2000 : ecliptic latitude (Earth's J2000 frame) in decimal degrees
 	//! - vmag : visual magnitude
 	//! - vmage : visual magnitude (after atmospheric extinction)
-	//! - size: angular size in radians
-	//! - size-dd : angular size in decimal degrees
-	//! - size-deg : angular size in decimal degrees (formatted string)
-	//! - size-dms : angular size in DMS format
+	//! - size: angular size (diameter) in radians
+	//! - size-dd : angular size (diameter) in decimal degrees
+	//! - size-deg : angular size (diameter) in decimal degrees (formatted string)
+	//! - size-dms : angular size (diameter) in DMS format
 	//! - rise : time of rise in HM format
 	//! - rise-dhr : time of rise in decimal hours
 	//! - transit : time of transit in HM format
@@ -144,12 +149,17 @@ public:
 	//! - set : time of set in HM format
 	//! - set-dhr : time of set in decimal hours
 	//! - name : english name of the object
-	//! - localized-name : localized name	
+	//! - localized-name : localized name
+	//! - type: type of object' class
+	//! - object-type: English lowercase name of the type of the object
 	//! @note Coordinate values may need modulo operation to bring them into ranges [0..360].
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 
 	//! Return object's type. It should be the name of the class.
 	virtual QString getType() const = 0;
+
+	//! Return object's type. It should be English lowercase name of the type of the object.
+	virtual QString getObjectType() const = 0;
 
 	//! Returns a unique identifier for this object.
 	//! The ID should be unique for all objects of the same type,
@@ -225,10 +235,17 @@ public:
 	//! @return true if object an above real horizon (uses test for landscapes)
 	bool isAboveRealHorizon(const StelCore* core) const;
 
-	//! Get today's time of rise, transit and set for celestial object for current location.
-	//! @return Vec3f - time of rise, transit and set; decimal hours
-	//! @note The value -1.f is used as undefined value
-	Vec3f getRTSTime(StelCore *core) const;
+	//! Compute time of rise, transit and set for celestial object for current location.
+	//! @param core the currently active StelCore object
+	//! @param altitude (optional; default=0) altitude of the object, degrees.
+	//!        Setting this to -6. for the Sun will find begin and end for civil twilight.
+	//! @return Vec4d - time of rise, transit and set closest to current time; JD.
+	//! @note The fourth element flags particular conditions:
+	//!       *  +100. for circumpolar objects. Rise and set give lower culmination times.
+	//!       *  -100. for objects never rising. Rise and set give transit times.
+	//!       * -1000. is used as "invalid" value. The result should then not be used.
+	//! @note This is an abbreviated version of the method implemented in the Planet class.
+	virtual Vec4d getRTSTime(const StelCore* core, const double altitude=0.) const;
 
 	//! Return object's apparent V magnitude as seen from observer, without including extinction.
 	virtual float getVMagnitude(const StelCore* core) const;
@@ -254,7 +271,8 @@ public:
 	//! Return the angular radius of a circle containing the object as seen from the observer
 	//! with the circle center assumed to be at getJ2000EquatorialPos().
 	//! @return radius in degree. This value is the apparent angular size of the object, and is independent of the current FOV.
-	virtual double getAngularSize(const StelCore* core) const = 0;
+	//! @note The default implementation just returns zero.
+	virtual double getAngularRadius(const StelCore* core) const {Q_UNUSED(core); return 0;}
 
 	//! Return airmass value for the object (for atmosphere-dependent calculations)
 	//! @param core
@@ -265,6 +283,7 @@ public slots:
 	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
 	//! Hard-set this string group to a single str, or delete all messages when str==""
 	//! @note This should be used with caution. Usually you want to use addToExtraInfoString().
+	//! @note: If this breaks some const declaration, you can use StelObjectMgr::setExtraInfoString() instead.
 	virtual void setExtraInfoString(const InfoStringGroup& flags, const QString &str);
 	//! Add str to the extra string. This should be preferrable over hard setting.
 	//! Can be used by plugins to show extra info for the selected object, or for debugging.
@@ -273,9 +292,11 @@ public slots:
 	//! and must be adapted to table or non-table layout as required.
 	//! The line ending must be given explicitly, usually just end a line with "<br/>", except when it may end up in a Table or appended to a line.
 	//! See getCommonInfoString() or the respective getInfoString() in the subclasses for details of use.
+	//! @note: If this breaks some const declaration, you can use StelObjectMgr::addToExtraInfoString() instead.
 	virtual void addToExtraInfoString(const StelObject::InfoStringGroup& flags, const QString &str);
 	//! Retrieve an (unsorted) QStringList of all extra info strings that match flags.
 	//! Normally the order matches the order of addition, but this cannot be guaranteed.
+	//! @note: Usually objects should keep their extraInfoStrings to themselves. But there are cases where StelObjectMgr::setExtraInfoString() has been set.
 	QStringList getExtraInfoStrings(const InfoStringGroup& flags) const;
 	//! Remove the extraInfoStrings with the given flags.
 	//! This is a finer-grained removal than just extraInfoStrings.remove(flags), as it allows a combination of flags.
@@ -283,6 +304,7 @@ public slots:
 	//! extraInfoStrings having been set with the DebugAid and Script flags have to be removed by separate calls of this method.
 	//! Those which have been set by scripts have to persist at least as long as the selection remains active.
 	//! The behaviour of DebugAid texts depends on the use case.
+	//! @note: Usually objects should keep their extraInfoStrings to themselves. But there are cases where StelObjectMgr::setExtraInfoString() has been set.
 	void removeExtraInfoStrings(const InfoStringGroup& flags);
 
 protected:
@@ -297,15 +319,15 @@ protected:
 	//! @param decimals significant digits after the comma.
 	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const int decimals=1) const;
 
+	//! Add a section to the InfoString with just horizontal data for the Sun and Moon, when observed from Earth.
+	//! The application of this is to have quick info while observing other objects.
+	QString getSolarLunarInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+
 	//! Apply post processing on the info string.
 	//! This also removes all extraInfoStrings possibly injected by modules (plugins) etc., except for Script and DebugAid types.
 	void postProcessInfoString(QString& str, const InfoStringGroup& flags) const;
-private:
-	//! Compute time of rise, transit and set for celestial object for current location.
-	//! @return Vec3f - time of rise, transit and set; decimal hours
-	//! @note The value -1.f is used as undefined value
-	Vec3f computeRTSTime(StelCore* core) const;
 
+private:
 	//! Location for additional object info that can be set for special purposes (at least for debugging, but maybe others), even via scripting.
 	//! Modules are allowed to add new strings to be displayed in the various getInfoString() methods of subclasses.
 	//! This helps avoiding screen collisions if a plugin wants to display some additional object information.

@@ -52,12 +52,12 @@ public slots:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-public:
 	//! find RD number for date in the Zoroastrian calendar (may be used in other calendars!)
 	static int fixedFromZoroastrian(QVector<int> julian);
 	//! find date in the Zoroastrian calendar from RD number (may be used in other calendars!)
 	static QVector<int> zoroastrianFromFixed(int rd);
 
+public:
 	static const int zoroastrianEpoch;
 
 protected:

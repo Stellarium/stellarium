@@ -27,7 +27,6 @@
 class HipsMgr : public StelModule
 {
 	Q_OBJECT
-	Q_ENUMS(State)
 	Q_PROPERTY(QList<HipsSurveyP> surveys
 			MEMBER surveys
 			NOTIFY surveysChanged)
@@ -43,9 +42,10 @@ public:
 		Loading,
 		Loaded,
 	};
+	Q_ENUM(State)
 
 	HipsMgr();
-	virtual ~HipsMgr();
+	virtual ~HipsMgr() Q_DECL_OVERRIDE;
 	virtual void init() Q_DECL_OVERRIDE;
 	virtual void deinit() Q_DECL_OVERRIDE;
 	virtual void update(double deltaTime) Q_DECL_OVERRIDE;

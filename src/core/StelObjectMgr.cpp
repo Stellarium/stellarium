@@ -30,6 +30,8 @@
 #include "StelSkyDrawer.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
+#include "Planet.hpp"
+#include "SolarSystem.hpp"
 
 #include <QMouseEvent>
 #include <QString>
@@ -37,7 +39,7 @@
 #include <QStringList>
 #include <QSettings>
 
-StelObjectMgr::StelObjectMgr() : objectPointerVisibility(true), searchRadiusPixel(25.), distanceWeight(1.f)
+StelObjectMgr::StelObjectMgr() : objectPointerVisibility(true), searchRadiusPixel(25.), distanceWeight(1.f), twilightAltitude(0.)
 {
 	setObjectName("StelObjectMgr");
 }
@@ -51,19 +53,102 @@ void StelObjectMgr::init()
 	// Register all the core actions.
 	QString timeGroup = N_("Date and Time");	
 	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
-	actionsMgr->addAction("actionNext_Transit", timeGroup, N_("Next transit of the selected object"), this, "nextTransit()");
-	actionsMgr->addAction("actionNext_Rising", timeGroup, N_("Next rising of the selected object"), this, "nextRising()");
-	actionsMgr->addAction("actionNext_Setting", timeGroup, N_("Next setting of the selected object"), this, "nextSetting()");
-	actionsMgr->addAction("actionToday_Transit", timeGroup, N_("Today's transit of the selected object"), this, "todayTransit()");
-	actionsMgr->addAction("actionToday_Rising", timeGroup, N_("Today's rising of the selected object"), this, "todayRising()");
-	actionsMgr->addAction("actionToday_Setting", timeGroup, N_("Today's setting of the selected object"), this, "todaySetting()");
+	actionsMgr->addAction("actionNext_Transit",     timeGroup, N_("Next transit of the selected object"),     this, "nextTransit()");
+	actionsMgr->addAction("actionNext_Rising",      timeGroup, N_("Next rising of the selected object"),      this, "nextRising()");
+	actionsMgr->addAction("actionNext_Setting",     timeGroup, N_("Next setting of the selected object"),     this, "nextSetting()");
+	actionsMgr->addAction("actionToday_Transit",    timeGroup, N_("Today's transit of the selected object"),  this, "todayTransit()");
+	actionsMgr->addAction("actionToday_Rising",     timeGroup, N_("Today's rising of the selected object"),   this, "todayRising()");
+	actionsMgr->addAction("actionToday_Setting",    timeGroup, N_("Today's setting of the selected object"),  this, "todaySetting()");
 	actionsMgr->addAction("actionPrevious_Transit", timeGroup, N_("Previous transit of the selected object"), this, "previousTransit()");
-	actionsMgr->addAction("actionPrevious_Rising", timeGroup, N_("Previous rising of the selected object"), this, "previousRising()");
+	actionsMgr->addAction("actionPrevious_Rising",  timeGroup, N_("Previous rising of the selected object"),  this, "previousRising()");
 	actionsMgr->addAction("actionPrevious_Setting", timeGroup, N_("Previous setting of the selected object"), this, "previousSetting()");
+
+	actionsMgr->addAction("actionNext_MorningTwilight",     timeGroup, N_("Next morning twilight"),     this, "nextMorningTwilight()");
+	actionsMgr->addAction("actionNext_EveningTwilight",     timeGroup, N_("Next evening twilight"),     this, "nextEveningTwilight()");
+	actionsMgr->addAction("actionToday_MorningTwilight",    timeGroup, N_("Today's morning twilight"),  this, "todayMorningTwilight()");
+	actionsMgr->addAction("actionToday_EveningTwilight",    timeGroup, N_("Today's evening twilight"),  this, "todayEveningTwilight()");
+	actionsMgr->addAction("actionPrevious_MorningTwilight", timeGroup, N_("Previous morning twilight"), this, "previousMorningTwilight()");
+	actionsMgr->addAction("actionPrevious_EveningTwilight", timeGroup, N_("Previous evening twilight"), this, "previousEveningTwilight()");
+
+	actionsMgr->addAction("actionNext_MorningAtAltitude",     timeGroup, N_("Selected object at altitude at next morning"),      this, "nextMorningAtAltitude()");
+	actionsMgr->addAction("actionToday_MorningAtAltitude",    timeGroup, N_("Selected object at altitude this morning"),         this, "todayMorningAtAltitude()");
+	actionsMgr->addAction("actionPrevious_MorningAtAltitude", timeGroup, N_("Selected object at altitude at previous morning"),  this, "previousMorningAtAltitude()");
+	actionsMgr->addAction("actionNext_EveningAtAltitude",     timeGroup, N_("Selected object at altitude at next evening"),      this, "nextEveningAtAltitude()");
+	actionsMgr->addAction("actionToday_EveningAtAltitude",    timeGroup, N_("Selected object at altitude this evening"),         this, "todayEveningAtAltitude()");
+	actionsMgr->addAction("actionPrevious_EveningAtAltitude", timeGroup, N_("Selected object at altitude at previous evening"),  this, "previousEveningAtAltitude()");
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	setFlagSelectedObjectPointer(conf->value("viewing/flag_show_selection_marker", true).toBool());
+	setTwilightAltitude(conf->value("astro/twilight_altitude", -6.).toDouble());
+}
+
+StelObject::InfoStringGroup StelObjectMgr::getCustomInfoStrings()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	StelObject::InfoStringGroup infoTextFilters = StelObject::InfoStringGroup(StelObject::None);
+
+	conf->beginGroup("custom_selected_info");
+	if (conf->value("flag_show_name", false).toBool())
+		infoTextFilters |= StelObject::Name;
+	if (conf->value("flag_show_catalognumber", false).toBool())
+		infoTextFilters |= StelObject::CatalogNumber;
+	if (conf->value("flag_show_magnitude", false).toBool())
+		infoTextFilters |= StelObject::Magnitude;
+	if (conf->value("flag_show_absolutemagnitude", false).toBool())
+		infoTextFilters |= StelObject::AbsoluteMagnitude;
+	if (conf->value("flag_show_radecj2000", false).toBool())
+		infoTextFilters |= StelObject::RaDecJ2000;
+	if (conf->value("flag_show_radecofdate", false).toBool())
+		infoTextFilters |= StelObject::RaDecOfDate;
+	if (conf->value("flag_show_hourangle", false).toBool())
+		infoTextFilters |= StelObject::HourAngle;
+	if (conf->value("flag_show_altaz", false).toBool())
+		infoTextFilters |= StelObject::AltAzi;
+	if (conf->value("flag_show_elongation", false).toBool())
+		infoTextFilters |= StelObject::Elongation;
+	if (conf->value("flag_show_distance", false).toBool())
+		infoTextFilters |= StelObject::Distance;
+	if (conf->value("flag_show_velocity", false).toBool())
+		infoTextFilters |= StelObject::Velocity;
+	if (conf->value("flag_show_propermotion", false).toBool())
+		infoTextFilters |= StelObject::ProperMotion;
+	if (conf->value("flag_show_size", false).toBool())
+		infoTextFilters |= StelObject::Size;
+	if (conf->value("flag_show_extra", false).toBool())
+		infoTextFilters |= StelObject::Extra;
+	if (conf->value("flag_show_type", false).toBool())
+		infoTextFilters |= StelObject::ObjectType;
+	if (conf->value("flag_show_galcoord", false).toBool())
+		infoTextFilters |= StelObject::GalacticCoord;
+	if (conf->value("flag_show_supergalcoord", false).toBool())
+		infoTextFilters |= StelObject::SupergalacticCoord;
+	if (conf->value("flag_show_othercoord", false).toBool())
+		infoTextFilters |= StelObject::OtherCoord;
+	if (conf->value("flag_show_eclcoordofdate", false).toBool())
+		infoTextFilters |= StelObject::EclipticCoordOfDate;
+	if (conf->value("flag_show_eclcoordj2000", false).toBool())
+		infoTextFilters |= StelObject::EclipticCoordJ2000;
+	if (conf->value("flag_show_constellation", false).toBool())
+		infoTextFilters |= StelObject::IAUConstellation;
+	if (conf->value("flag_show_sidereal_time", false).toBool())
+		infoTextFilters |= StelObject::SiderealTime;
+	if (conf->value("flag_show_rts_time", false).toBool())
+		infoTextFilters |= StelObject::RTSTime;
+	if (conf->value("flag_show_solar_lunar", false).toBool())
+	    infoTextFilters |= StelObject::SolarLunarPosition;
+	conf->endGroup();
+
+	return infoTextFilters;
+}
+
+void StelObjectMgr::setTwilightAltitude(double alt)
+{
+	if (!qFuzzyCompare(alt, twilightAltitude))
+	{
+		twilightAltitude=alt;
+		emit twilightAltitudeChanged(alt);
+	}
 }
 
 void StelObjectMgr::nextTransit()
@@ -73,9 +158,10 @@ void StelObjectMgr::nextTransit()
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(1.0);
-		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		core->setJD(static_cast<int>(JD) + static_cast<double>(rts[1]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core);
+		if (rts[3]>-1000.)
+			core->setJD(rts[1]);
 	}
 }
 
@@ -86,10 +172,10 @@ void StelObjectMgr::nextRising()
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(1.0);
-		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		if (rts[0]>-99.f && rts[0]<100.f)
-			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[0]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core);
+		if (rts[3]>-1000.)
+			core->setJD(rts[0]);
 	}
 }
 
@@ -100,10 +186,10 @@ void StelObjectMgr::nextSetting()
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(1.0);
-		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		if (rts[2]>-99.f && rts[2]<100.f)
-			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[2]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core);
+		if (rts[3]>-1000.)
+			core->setJD(rts[2]);
 	}
 }
 
@@ -114,9 +200,10 @@ void StelObjectMgr::previousTransit()
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(-1.0);
-		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		core->setJD(static_cast<int>(JD) + static_cast<double>(rts[1]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core);
+		if (rts[3]>-1000.)
+			core->setJD(rts[1]);
 	}
 }
 
@@ -127,10 +214,10 @@ void StelObjectMgr::previousRising()
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(-1.0);
-		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		if (rts[0]>-99.f && rts[0]<100.f)
-			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[0]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core);
+		if (rts[3]>-1000.)
+			core->setJD(rts[0]);
 	}
 }
 
@@ -141,10 +228,10 @@ void StelObjectMgr::previousSetting()
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		core->addSolarDays(-1.0);
-		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		if (rts[2]>-99.f && rts[2]<100.f)
-			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[2]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core);
+		if (rts[3]>-1000.)
+			core->setJD(rts[2]);
 	}
 }
 
@@ -154,9 +241,9 @@ void StelObjectMgr::todayTransit()
 	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
 	{
 		StelCore* core = StelApp::getInstance().getCore();
-		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		core->setJD(static_cast<int>(JD) + static_cast<double>(rts[1]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		Vec4d rts = selected[0]->getRTSTime(core);
+		if (rts[3]>-1000.)
+			core->setJD(rts[1]);
 	}
 }
 
@@ -166,10 +253,9 @@ void StelObjectMgr::todayRising()
 	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
 	{
 		StelCore* core = StelApp::getInstance().getCore();
-		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		if (rts[0]>-99.f && rts[0]<100.f)
-			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[0]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		Vec4d rts = selected[0]->getRTSTime(core);
+		if (rts[3]>-1000.)
+			core->setJD(rts[0]);
 	}
 }
 
@@ -179,10 +265,167 @@ void StelObjectMgr::todaySetting()
 	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
 	{
 		StelCore* core = StelApp::getInstance().getCore();
-		double JD = core->getJD();
-		Vec3f rts = selected[0]->getRTSTime(core);
-		if (rts[2]>-99.f && rts[2]<100.f)
-			core->setJD(static_cast<int>(JD) + static_cast<double>(rts[2]/24.f - core->getUTCOffset(JD) / 24.f + 0.5f));
+		Vec4d rts = selected[0]->getRTSTime(core);
+		if (rts[3]>-1000.)
+			core->setJD(rts[2]);
+	}
+}
+
+void StelObjectMgr::todayMorningTwilight()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
+	if (rts[3]>-1000.)
+			core->setJD(rts[0]);
+}
+
+void StelObjectMgr::todayEveningTwilight()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
+	if (rts[3]>-1000.)
+			core->setJD(rts[2]);
+}
+
+void StelObjectMgr::previousMorningTwilight()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+
+	core->addSolarDays(-1.0);
+	core->update(0);
+	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
+	if (rts[3]>-1000.)
+		core->setJD(rts[0]);
+}
+
+void StelObjectMgr::previousEveningTwilight()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+
+	core->addSolarDays(-1.0);
+	core->update(0);
+	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
+	if (rts[3]>-1000.)
+		core->setJD(rts[2]);
+}
+
+void StelObjectMgr::nextMorningTwilight()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+
+	core->addSolarDays(1.0);
+	core->update(0);
+	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
+	if (rts[3]>-1000.)
+		core->setJD(rts[0]);
+}
+
+void StelObjectMgr::nextEveningTwilight()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+
+	core->addSolarDays(1.0);
+	core->update(0);
+	Vec4d rts = sun->getRTSTime(core, twilightAltitude);
+	if (rts[3]>-1000.)
+		core->setJD(rts[2]);
+}
+
+void StelObjectMgr::todayMorningAtAltitude()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		double az, alt;
+		StelCore* core = StelApp::getInstance().getCore();
+		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
+		Vec4d rts = selected[0]->getRTSTime(core, alt*M_180_PI);
+		if (rts[3]>-1000.)
+			core->setJD(rts[0]);
+	}
+}
+
+void StelObjectMgr::nextMorningAtAltitude()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		double az, alt;
+		StelCore* core = StelApp::getInstance().getCore();
+		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
+		core->addSolarDays(1.0);
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core, alt*M_180_PI);
+		if (rts[3]>-1000.)
+			core->setJD(rts[0]);
+	}
+}
+
+void StelObjectMgr::previousMorningAtAltitude()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		double az, alt;
+		StelCore* core = StelApp::getInstance().getCore();
+		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
+		core->addSolarDays(-1.0);
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core, alt*M_180_PI);
+		if (rts[3]>-1000.)
+			core->setJD(rts[0]);
+	}
+}
+
+void StelObjectMgr::todayEveningAtAltitude()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		double az, alt;
+		StelCore* core = StelApp::getInstance().getCore();
+		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
+		Vec4d rts = selected[0]->getRTSTime(core, alt*M_180_PI);
+		if (rts[3]>-1000.)
+			core->setJD(rts[2]);
+	}
+}
+
+void StelObjectMgr::nextEveningAtAltitude()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		double az, alt;
+		StelCore* core = StelApp::getInstance().getCore();
+		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
+		core->addSolarDays(1.0);
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core, alt*M_180_PI);
+		if (rts[3]>-1000.)
+			core->setJD(rts[2]);
+	}
+}
+
+void StelObjectMgr::previousEveningAtAltitude()
+{
+	const QList<StelObjectP> selected = getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		double az, alt;
+		StelCore* core = StelApp::getInstance().getCore();
+		StelUtils::rectToSphe(&az, &alt, selected[0]->getAltAzPosGeometric(core));
+		core->addSolarDays(-1.0);
+		core->update(0);
+		Vec4d rts = selected[0]->getRTSTime(core, alt*M_180_PI);
+		if (rts[3]>-1000.)
+			core->setJD(rts[2]);
 	}
 }
 
@@ -296,6 +539,7 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["StarMgr:5"] = "Variable stars: Algol-type eclipsing systems";
 		objModulesMap["StarMgr:6"] = "Variable stars: the classical cepheids";
 		objModulesMap["StarMgr:7"] = "Bright carbon stars";
+		objModulesMap["StarMgr:8"] = "Bright barium stars";
 	}
 	// Nomenclature...
 	if (m->objectName()=="NomenclatureMgr")
@@ -417,6 +661,21 @@ StelObjectP StelObjectMgr::searchByNameI18n(const QString &name) const
 	return rval;
 }
 
+StelObjectP StelObjectMgr::searchByNameI18n(const QString &name, const QString &objType) const
+{
+	StelObjectP rval;
+	for (const auto* m : objectsModules)
+	{
+		if (m->getStelObjectType()==objType)
+		{
+			rval = m->searchByNameI18n(name);
+			if (rval)
+				return rval;
+		}
+	}
+	return rval;
+}
+
 //! Find any kind of object by its standard program name
 StelObjectP StelObjectMgr::searchByName(const QString &name) const
 {
@@ -426,6 +685,21 @@ StelObjectP StelObjectMgr::searchByName(const QString &name) const
 		rval = m->searchByName(name);
 		if (rval)
 			return rval;
+	}
+	return rval;
+}
+
+StelObjectP StelObjectMgr::searchByName(const QString &name, const QString &objType) const
+{
+	StelObjectP rval;
+	for (const auto* m : objectsModules)
+	{
+		if (m->getStelObjectType()==objType)
+		{
+			rval = m->searchByName(name);
+			if (rval)
+				return rval;
+		}
 	}
 	return rval;
 }
@@ -454,6 +728,16 @@ bool StelObjectMgr::findAndSelectI18n(const QString &nameI18n, StelModule::StelM
 		return setSelectedObject(obj, action);
 }
 
+bool StelObjectMgr::findAndSelectI18n(const QString &name, const QString &objtype, StelModule::StelModuleSelectAction action)
+{
+	// Then look for another object
+	StelObjectP obj = searchByNameI18n(name, objtype);
+	if (!obj)
+		return false;
+	else
+		return setSelectedObject(obj, action);
+}
+
 //! Find and select an object from its standard program name
 bool StelObjectMgr::findAndSelect(const QString &name, StelModule::StelModuleSelectAction action)
 {
@@ -465,8 +749,17 @@ bool StelObjectMgr::findAndSelect(const QString &name, StelModule::StelModuleSel
 		return setSelectedObject(obj, action);
 }
 
+bool StelObjectMgr::findAndSelect(const QString &name, const QString &objtype, StelModule::StelModuleSelectAction action)
+{
+	// Then look for another object
+	StelObjectP obj = searchByName(name, objtype);
+	if (!obj)
+		return false;
+	else
+		return setSelectedObject(obj, action);
+}
 
-//! Find and select an object near given equatorial position
+//! Find and select an object near given equatorial J2000 position
 bool StelObjectMgr::findAndSelect(const StelCore* core, const Vec3d& pos, StelModule::StelModuleSelectAction action)
 {
 	StelObjectP tempselect = cleverFind(core, pos);
@@ -480,7 +773,7 @@ bool StelObjectMgr::findAndSelect(const StelCore* core, int x, int y, StelModule
 	return setSelectedObject(tempselect, action);
 }
 
-// Find an object in a "clever" way, v in J2000 frame
+// Find an object in a "clever" way, v in J2000 frame (no aberration!)
 StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) const
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
@@ -489,6 +782,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	const double fov_around = core->getMovementMgr()->getCurrentFov()/qMin(prj->getViewportWidth(), prj->getViewportHeight()) * searchRadiusPixel;
 
 	// Collect the objects inside the range
+	// TODO: normalize v here, and just Q_ASSERT normalized state in the submodules' searchAround() calls.
 	QList<StelObjectP> candidates;
 	for (const auto* m : objectsModules)
 		candidates += m->searchAround(v, fov_around, core);
@@ -498,7 +792,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 				static_cast<float>(core->getSkyDrawer()->getCustomStarMagnitudeLimit()) :
 				core->getSkyDrawer()->getLimitMagnitude();
 	QList<StelObjectP> tmp;
-	for (const auto& obj : candidates)
+	for (const auto& obj : qAsConst(candidates))
 	{
 		if (obj->getSelectPriority(core)<=limitMag)
 			tmp.append(obj);
@@ -513,7 +807,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 
 	StelObjectP sobj;
 	float best_object_value = 100000.f;
-	for (const auto& obj : candidates)
+	for (const auto& obj : qAsConst(candidates))
 	{
 		prj->project(obj->getJ2000EquatorialPos(core), winpos);
 		float distance = static_cast<float>(std::sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1])))*distanceWeight;
@@ -530,7 +824,10 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 }
 
 /*************************************************************************
- Find in a "clever" way an object from its equatorial position
+ Find in a "clever" way an object from its screen position
+ If aberration is corrected, we must compute mean J2000 from the clicked position
+ because all cleverfind() is supposed to work with mean J2000 positions.
+ With aberration clause, stars/DSO are found, without the planet moons are found.
 *************************************************************************/
 StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 {
@@ -545,7 +842,18 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 		const double dy = y - win.v[1];
 		prj->unProject(x+dx, y+dy, v);
 
-		return cleverFind(core, v);
+		// Apply annual aberration (backwards). Explan. Suppl. 2013, (7.38)
+		Vec3d v2000(v);
+		if (core->getUseAberration())
+		{
+			v2000.normalize(); // just to be sure...
+			Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+			StelCore::matVsop87ToJ2000.transfo(vel);
+			vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+			v2000-=vel;
+			v2000.normalize();
+		}
+		return cleverFind(core, v2000);
 	}
 	return StelObjectP();
 }
@@ -558,7 +866,7 @@ void StelObjectMgr::unSelect(void)
 	if(!lastSelectedObjects.isEmpty())
 	{
 		lastSelectedObjects.clear();
-		emit(selectedObjectChanged(StelModule::RemoveFromSelection));
+		emit selectedObjectChanged(StelModule::RemoveFromSelection);
 	}
 }
 
@@ -588,7 +896,7 @@ bool StelObjectMgr::setSelectedObject(const QList<StelObjectP>& objs, StelModule
 		lastSelectedObjects.append(objs);
 	else
 		lastSelectedObjects = objs;
-	emit(selectedObjectChanged(action));
+	emit selectedObjectChanged(action);
 	return true;
 }
 
@@ -688,4 +996,50 @@ QVariantMap StelObjectMgr::getObjectInfo(const StelObjectP obj)
 		map.insert("found", true);
 	}
 	return map;
+}
+
+
+
+void StelObjectMgr::setExtraInfoString(const StelObject::InfoStringGroup& flags, const QString &str)
+{
+	extraInfoStrings.remove(flags); // delete all entries with these flags
+	if (str.length()>0)
+		extraInfoStrings.insert(flags, str);
+}
+void StelObjectMgr::addToExtraInfoString(const StelObject::InfoStringGroup &flags, const QString &str)
+{
+	// Avoid insertion of full duplicates!
+	if (!extraInfoStrings.contains(flags, str))
+		extraInfoStrings.insert(flags, str);
+}
+
+QStringList StelObjectMgr::getExtraInfoStrings(const StelObject::InfoStringGroup& flags) const
+{
+	QStringList list;
+	QMultiMap<StelObject::InfoStringGroup, QString>::const_iterator i = extraInfoStrings.constBegin();
+	while (i != extraInfoStrings.constEnd())
+	{
+		if (i.key() & flags)
+		{
+			QString val=i.value();
+			if (flags&StelObject::DebugAid)
+				val.prepend("DEBUG: ");
+			// For unclear reasons the sequence of entries can be preserved by *pre*pending in the returned list.
+			list.prepend(val);
+		}
+		++i;
+	}
+	return list;
+}
+
+void StelObjectMgr::removeExtraInfoStrings(const StelObject::InfoStringGroup& flags)
+{
+	QMultiMap<StelObject::InfoStringGroup, QString>::iterator i = extraInfoStrings.begin();
+	while (i != extraInfoStrings.end())
+	{
+		if (i.key() & flags)
+			i=extraInfoStrings.erase(i);
+		else
+			++i;
+	}
 }

@@ -285,7 +285,9 @@ void ArchaeoLines::init()
 						       QPixmap(":/archaeoLines/bt_archaeolines_on.png"),
 						       QPixmap(":/archaeoLines/bt_archaeolines_off.png"),
 						       QPixmap(":/graphicGui/miscGlow32x32.png"),
-						       "actionShow_ArchaeoLines");
+						       "actionShow_ArchaeoLines",
+						       false,
+						       "actionShow_ArchaeoLines_dialog");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
 	}
@@ -1352,7 +1354,7 @@ struct ALViewportEdgeIntersectCallbackData
 {
 	ALViewportEdgeIntersectCallbackData(StelPainter* p)
 		: sPainter(p)
-	{;}
+	{}
 	StelPainter* sPainter;
 	//Vec4f textColor;
 	QString text;		// Label to display at the intersection of the lines and screen side

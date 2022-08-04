@@ -62,7 +62,7 @@
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QSet>
 #include <QStringList>
 #include <QTemporaryFile>
@@ -75,8 +75,8 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 {
 	if(StelSkyLayerMgr* smgr = GETSTELMODULE(StelSkyLayerMgr))
 	{
-		connect(this, SIGNAL(requestLoadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType)),
-			smgr, SLOT(         loadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType)));
+		connect(this, SIGNAL(requestLoadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType, bool)),
+			smgr, SLOT(         loadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType, bool)));
 		connect(this, SIGNAL(requestRemoveSkyImage(const QString&)), smgr, SLOT(removeSkyLayer(const QString&)));
 	}
 
@@ -160,6 +160,11 @@ QString StelMainScriptAPI::getDeltaT()
 	return StelUtils::hoursToHmsStr(StelApp::getInstance().getCore()->getDeltaT()/3600.);
 }
 
+double StelMainScriptAPI::getDeltaTsec()
+{
+	return StelApp::getInstance().getCore()->getDeltaT();
+}
+
 QString StelMainScriptAPI::getDeltaTAlgorithm()
 {
 	return StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithmKey();
@@ -222,11 +227,12 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 			loc.planetName = ssObj->getEnglishName();
 	}
 
-	QRegExp cico( "^\\s*([^,]+),\\s*(\\S.*)$" );
-	if( cico.exactMatch( name ) )
+	static const QRegularExpression cico( "^\\s*([^,]+),\\s*(\\S.*)$" );
+	QRegularExpressionMatch match=cico.match(name);
+	if( match.hasMatch() )
 	{
-		loc.name = cico.cap(1);
-		loc.country = cico.cap(2);
+		loc.name = match.captured(1);
+		loc.region = match.captured(2);
 	}
 	else
 		loc.name = name;
@@ -362,7 +368,7 @@ QString StelMainScriptAPI::getProjectionMode()
 
 void StelMainScriptAPI::setProjectionMode(const QString& id)
 {
-	emit(requestSetProjectionMode(id));
+	emit requestSetProjectionMode(id);
 }
 
 QStringList StelMainScriptAPI::getAllSkyCultureIDs()
@@ -378,7 +384,7 @@ QString StelMainScriptAPI::getSkyCulture()
 void StelMainScriptAPI::setSkyCulture(const QString& id)
 {
 	GETSTELMODULE(StelObjectMgr)->unSelect(); // mistake-proofing!
-	emit(requestSetSkyCulture(id));
+	emit requestSetSkyCulture(id);
 }
 
 QString StelMainScriptAPI::getSkyCultureName()
@@ -443,7 +449,7 @@ void StelMainScriptAPI::setSphericMirror(bool b)
 
 void StelMainScriptAPI::setDiskViewport(bool b)
 {
-	emit(requestSetDiskViewport(b));
+	emit requestSetDiskViewport(b);
 }
 
 void StelMainScriptAPI::setViewportStretch(const float stretch)
@@ -456,7 +462,7 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 				     double lon1, double lat1,
 				     double lon2, double lat2,
 				     double lon3, double lat3,
-				     double minRes, double maxBright, bool visible, const QString &frame)
+				     double minRes, double maxBright, bool visible, const QString &frame, bool withAberration)
 {
 	QString path = "scripts/" + filename;
 	StelCore::FrameType frameType=StelCore::FrameJ2000;
@@ -477,7 +483,7 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 		qDebug() << "StelMainScriptAPI::loadSkyImage(): unknown frame type " << frame << " requested -- Using Equatorial J2000";
 	}
 
-	emit(requestLoadSkyImage(id, path, lon0, lat0, lon1, lat1, lon2, lat2, lon3, lat3, minRes, maxBright, visible, frameType));
+	emit requestLoadSkyImage(id, path, lon0, lat0, lon1, lat1, lon2, lat2, lon3, lat3, minRes, maxBright, visible, frameType, withAberration);
 }
 
 // Convenience method:
@@ -486,20 +492,20 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 				     const QString& lon1, const QString& lat1,
 				     const QString& lon2, const QString& lat2,
 				     const QString& lon3, const QString& lat3,
-				     double minRes, double maxBright, bool visible, const QString& frame)
+				     double minRes, double maxBright, bool visible, const QString& frame, bool withAberration)
 {
 	loadSkyImage(id, filename,
 		     StelUtils::getDecAngle(lon0) *M_180_PI, StelUtils::getDecAngle(lat0)*M_180_PI,
 		     StelUtils::getDecAngle(lon1) *M_180_PI, StelUtils::getDecAngle(lat1)*M_180_PI,
 		     StelUtils::getDecAngle(lon2) *M_180_PI, StelUtils::getDecAngle(lat2)*M_180_PI,
 		     StelUtils::getDecAngle(lon3) *M_180_PI, StelUtils::getDecAngle(lat3)*M_180_PI,
-		     minRes, maxBright, visible, frame);
+		     minRes, maxBright, visible, frame, withAberration);
 }
 
 // Convenience method: (Fixed 2017-03: rotation increased by 90deg, makes upright images now!)
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 				     double lon, double lat, double angSize, double rotation,
-				     double minRes, double maxBright, bool visible, const QString &frame)
+				     double minRes, double maxBright, bool visible, const QString &frame, bool withAberration)
 {
 	Vec3f XYZ;
 	static const float RADIUS_NEB = 1.f;
@@ -527,23 +533,23 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 		     static_cast<double>(cornersRaDec[1][0])*(M_180_PI), static_cast<double>(cornersRaDec[1][1])*(M_180_PI),
 		     static_cast<double>(cornersRaDec[3][0])*(M_180_PI), static_cast<double>(cornersRaDec[3][1])*(M_180_PI),
 		     static_cast<double>(cornersRaDec[2][0])*(M_180_PI), static_cast<double>(cornersRaDec[2][1])*(M_180_PI),
-		     minRes, maxBright, visible, frame);
+		     minRes, maxBright, visible, frame, withAberration);
 }
 
 // Convenience method:
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 				     const QString& lon, const QString& lat,
 				     double angSize, double rotation,
-				     double minRes, double maxBright, bool visible, const QString &frame)
+				     double minRes, double maxBright, bool visible, const QString &frame, bool withAberration)
 {
 	loadSkyImage(id, filename, StelUtils::getDecAngle(lon)*M_180_PI,
 		     StelUtils::getDecAngle(lat)*M_180_PI, angSize,
-		     rotation, minRes, maxBright, visible, frame);
+		     rotation, minRes, maxBright, visible, frame, withAberration);
 }
 
 void StelMainScriptAPI::removeSkyImage(const QString& id)
 {
-	emit(requestRemoveSkyImage(id));
+	emit requestRemoveSkyImage(id);
 }
 
 void StelMainScriptAPI::loadSound(const QString& filename, const QString& id)
@@ -555,27 +561,27 @@ void StelMainScriptAPI::loadSound(const QString& filename, const QString& id)
 		return;
 	}
 
-	emit(requestLoadSound(path, id));
+	emit requestLoadSound(path, id);
 }
 
 void StelMainScriptAPI::playSound(const QString& id)
 {
-	emit(requestPlaySound(id));
+	emit requestPlaySound(id);
 }
 
 void StelMainScriptAPI::pauseSound(const QString& id)
 {
-	emit(requestPauseSound(id));
+	emit requestPauseSound(id);
 }
 
 void StelMainScriptAPI::stopSound(const QString& id)
 {
-	emit(requestStopSound(id));
+	emit requestStopSound(id);
 }
 
 void StelMainScriptAPI::dropSound(const QString& id)
 {
-	emit(requestDropSound(id));
+	emit requestDropSound(id);
 }
 
 qint64 StelMainScriptAPI::getSoundPosition(const QString& id)
@@ -597,57 +603,57 @@ void StelMainScriptAPI::loadVideo(const QString& filename, const QString& id, fl
 		return;
 	}
 
-	emit(requestLoadVideo(path, id, x, y, show, alpha));
+	emit requestLoadVideo(path, id, x, y, show, alpha);
 }
 
 void StelMainScriptAPI::playVideo(const QString& id, bool keepVisibleAtEnd)
 {
-	emit(requestPlayVideo(id, keepVisibleAtEnd));
+	emit requestPlayVideo(id, keepVisibleAtEnd);
 }
 
 void StelMainScriptAPI::playVideoPopout(const QString& id, float fromX, float fromY, float atCenterX, float atCenterY, float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition)
 {
-	emit(requestPlayVideoPopout(id, fromX, fromY, atCenterX, atCenterY, finalSizeX, finalSizeY, popupDuration, frozenInTransition));
+	emit requestPlayVideoPopout(id, fromX, fromY, atCenterX, atCenterY, finalSizeX, finalSizeY, popupDuration, frozenInTransition);
 }
 
 void StelMainScriptAPI::pauseVideo(const QString& id)
 {
-	emit(requestPauseVideo(id));
+	emit requestPauseVideo(id);
 }
 
 void StelMainScriptAPI::stopVideo(const QString& id)
 {
-	emit(requestStopVideo(id));
+	emit requestStopVideo(id);
 }
 
 void StelMainScriptAPI::dropVideo(const QString& id)
 {
-	emit(requestDropVideo(id));
+	emit requestDropVideo(id);
 }
 
 void StelMainScriptAPI::seekVideo(const QString& id, qint64 ms, bool pause)
 {
-	emit(requestSeekVideo(id, ms, pause));
+	emit requestSeekVideo(id, ms, pause);
 }
 
 void StelMainScriptAPI::setVideoXY(const QString& id, float x, float y, bool relative)
 {
-	emit(requestSetVideoXY(id, x, y, relative));
+	emit requestSetVideoXY(id, x, y, relative);
 }
 
 void StelMainScriptAPI::setVideoAlpha(const QString& id, float alpha)
 {
-	emit(requestSetVideoAlpha(id, alpha));
+	emit requestSetVideoAlpha(id, alpha);
 }
 
 void StelMainScriptAPI::resizeVideo(const QString& id, float w, float h)
 {
-	emit(requestResizeVideo(id, w, h));
+	emit requestResizeVideo(id, w, h);
 }
 
 void StelMainScriptAPI::showVideo(const QString& id, bool show)
 {
-	emit(requestShowVideo(id, show));
+	emit requestShowVideo(id, show);
 }
 
 qint64 StelMainScriptAPI::getVideoDuration(const QString& id)
@@ -689,17 +695,21 @@ void StelMainScriptAPI::setSelectedObjectInfo(const QString& level)
 {
 	if (level == "AllInfo")
 		StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::AllInfo));
+	else if (level == "DefaultInfo")
+		StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::DefaultInfo));
 	else if (level == "ShortInfo")
 		StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
 	else if (level == "None")
-		StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(Q_NULLPTR));
+		StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::None));
+	else if (level == "Custom")
+		StelApp::getInstance().getGui()->setInfoTextFilters(GETSTELMODULE(StelObjectMgr)->getCustomInfoStrings());
 	else
 		qWarning() << "setSelectedObjectInfo unknown level string \"" << level << "\"";
 }
 
 void StelMainScriptAPI::exit()
 {
-	emit(requestExit());
+	emit requestExit();
 }
 
 void StelMainScriptAPI::quitStellarium()
@@ -738,15 +748,15 @@ QString StelMainScriptAPI::mapToString(const QVariantMap& map)
 	{
 		if (i.value().type()==QVariant::String)
 		{
-			res.append(QString("[ \"%1\" = \"%2\" ]\n").arg(i.key()).arg(i.value().toString()));
+			res.append(QString("[ \"%1\" = \"%2\" ]\n").arg(i.key(), i.value().toString()));
 		}
 		else if (simpleTypeList.contains(i.value().type()))
 		{
-			res.append(QString("[ \"%1\" = %2 ]\n").arg(i.key()).arg(i.value().toString()));
+			res.append(QString("[ \"%1\" = %2 ]\n").arg(i.key(), i.value().toString()));
 		}
 		else
 		{
-			res.append(QString("[ \"%1\" = \"<%2>:%3\" ]\n").arg(i.key()).arg(i.value().typeName()).arg(i.value().toString()));
+			res.append(QString("[ \"%1\" = \"<%2>:%3\" ]\n").arg(i.key(), i.value().typeName(), i.value().toString()));
 		}
 	}
 	res.append( QString("]\n"));
@@ -780,12 +790,13 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	if (ok)
 		return jd;
 
-	QRegExp nowRe("(now)?"
+	static const QRegularExpression nowRe("(now)?"
 		      "\\s*([-+])"
 		      "\\s*(\\d+(?:\\.\\d+)?(?:[eE][-+]?\\d+)?)"
 		      "\\s*(second|minute|hour|day|sol|week|month|year)s?"
 		      "(?:\\s+(sidereal))?");
-	if (nowRe.exactMatch(tdt))
+	QRegularExpressionMatch nowMatch=nowRe.match(tdt);
+	if (nowMatch.hasMatch())
 	{
 		double delta;
 		double unit;
@@ -793,19 +804,19 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 		double yearLength = 365.242190419; // duration of Earth's mean tropical year
 		double monthLength = 27.321582241; // duration of Earth's mean tropical month
 
-		if (nowRe.cap(1)=="now")
+		if (nowMatch.captured(1)=="now")
 			jd = StelUtils::getJDFromSystem();
 		else
 			jd = core->getJD();
 
-		if (nowRe.cap(5) == "sidereal")
+		if (nowMatch.captured(5) == "sidereal")
 		{
 			dayLength = core->getLocalSiderealDayLength();
 			yearLength = core->getLocalSiderealYearLength();
 			monthLength = 27.321661; // duration of Earth's sidereal month
 		}
 
-		QString unitString = nowRe.cap(4);
+		QString unitString = nowMatch.captured(4);
 		if ( unitString == "second")
 			unit = dayLength / (24*3600.);
 		else if (unitString == "minute")
@@ -824,15 +835,15 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 			unit = yearLength;
 		else
 		{
-			qWarning() << "StelMainScriptAPI::setDate - unknown time unit:" << nowRe.cap(4);
+			qWarning() << "StelMainScriptAPI::setDate - unknown time unit:" << unitString;
 			unit = 0;
 		}
 
-		delta = nowRe.cap(3).toDouble();
+		delta = nowMatch.captured(3).toDouble();
 
-		if (nowRe.cap(2) == "+")
+		if (nowMatch.captured(2) == "+")
 			jd += (unit * delta);
-		else if (nowRe.cap(2) == "-")
+		else if (nowMatch.captured(2) == "-")
 			jd -= (unit * delta);
 		return jd;
 	}
@@ -848,7 +859,7 @@ void StelMainScriptAPI::wait(double t)
 	QTimer::singleShot(qRound(1000*t), loop, SLOT(quit()));
 	if( loop->exec() != 0 )
 	{
-		emit(requestExit()); // causes a call of stopScript
+		emit requestExit(); // causes a call of stopScript
 	}
 }
 
@@ -872,7 +883,7 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 	QTimer::singleShot(interval, loop, SLOT(quit()));
 	if( loop->exec() != 0 )
 	{
-		emit(requestExit()); // causes a call of stopScript
+		emit requestExit(); // causes a call of stopScript
 	}
 }
 
@@ -1005,7 +1016,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		ssmgr->setFlagMoonScale(false);
 		ssmgr->setFlagMinorBodyScale(false);
 		ssmgr->setFlagTrails(false);
-		lmgr->setFlagCardinalsPoints(false);
+		lmgr->setFlagCardinalPoints(false);
 		amgr->setFlagLines(false);
 		amgr->setFlagLabels(false);
 		amgr->setFlagRayHelpers(false);
@@ -1272,7 +1283,7 @@ QString StelMainScriptAPI::translate(QString englishText)
 
 void StelMainScriptAPI::goHome()
 {
-	emit(requestSetHomePosition());
+	emit requestSetHomePosition();
 }
 
 int StelMainScriptAPI::getBortleScaleIndex()
@@ -1282,7 +1293,8 @@ int StelMainScriptAPI::getBortleScaleIndex()
 
 void StelMainScriptAPI::setBortleScaleIndex(int index)
 {
-	StelApp::getInstance().getCore()->getSkyDrawer()->setBortleScaleIndex(index);
+	const auto lum = StelCore::bortleScaleIndexToLuminance(index);
+	StelApp::getInstance().getCore()->getSkyDrawer()->setLightPollutionLuminance(lum);
 }
 
 double StelMainScriptAPI::refraction(double altitude, bool apparent)
@@ -1372,4 +1384,30 @@ bool StelMainScriptAPI::isMediaPlaybackSupported(void)
 	#else
 	return false;
 	#endif
+}
+
+// Experimental. Try to play with physical display properties for tonemapping.
+void StelMainScriptAPI::setDisplayMaxLuminance(double cdPerSqM)
+{
+    StelApp::getInstance().getCore()->getToneReproducer()->setMaxDisplayLuminance(static_cast<float>(cdPerSqM));
+}
+double StelMainScriptAPI::getDisplayMaxLuminance()
+{
+    return static_cast<double>(StelApp::getInstance().getCore()->getToneReproducer()->getMaxDisplayLuminance());
+}
+void StelMainScriptAPI::setDisplayAdaptationLuminance(double cdPerSqM)
+{
+    StelApp::getInstance().getCore()->getToneReproducer()->setDisplayAdaptationLuminance(static_cast<float>(cdPerSqM));
+}
+double StelMainScriptAPI::getDisplayAdaptationLuminance()
+{
+    return static_cast<double>(StelApp::getInstance().getCore()->getToneReproducer()->getDisplayAdaptationLuminance());
+}
+void StelMainScriptAPI::setDisplayGamma(double gamma)
+{
+    StelApp::getInstance().getCore()->getToneReproducer()->setDisplayGamma(static_cast<float>(gamma));
+}
+double StelMainScriptAPI::getDisplayGamma()
+{
+    return static_cast<double>(StelApp::getInstance().getCore()->getToneReproducer()->getDisplayGamma());
 }

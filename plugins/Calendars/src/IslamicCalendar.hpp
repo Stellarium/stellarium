@@ -54,7 +54,6 @@ public slots:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-public:
 	//! Return true if iYear is an Islamic leap year
 	static bool isLeap(int iYear);
 
@@ -63,6 +62,7 @@ public:
 	//! find date in the Islamic calendar from RD number
 	static QVector<int> islamicFromFixed(int rd);
 
+public:
 	static const int islamicEpoch; //! RD of July 16, 622.
 
 protected:

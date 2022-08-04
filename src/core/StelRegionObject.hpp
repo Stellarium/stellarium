@@ -27,10 +27,10 @@
 //! to be stored in a StelSphericalIndex.
 class StelRegionObject
 {
-	//required for Q_FLAGS macro in some derived classes
+	//required for Q_FLAG macro in some derived classes
 	Q_GADGET
 public:
-	virtual ~StelRegionObject(void) {;}
+	virtual ~StelRegionObject(void) {}
 
 	//! Return the spatial region of the object.
 	virtual SphericalRegionP getRegion() const=0;

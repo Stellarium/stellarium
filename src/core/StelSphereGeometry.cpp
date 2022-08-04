@@ -767,7 +767,7 @@ SphericalRegionP SphericalPolygon::multiUnion(const QList<SphericalRegionP>& reg
 		static const double minOverlap = 0.2;
 		// Try to first split the set of regions into groups of intersecting regions
 		QList<QList<SphericalRegionP> > res;
-		QList<SphericalCap> groupReferenceCap;
+		QVector<SphericalCap> groupReferenceCap;
 		for (const auto& newReg : regions)
 		{
 			bool createNewGroup = true;
@@ -794,7 +794,7 @@ SphericalRegionP SphericalPolygon::multiUnion(const QList<SphericalRegionP>& reg
 		}
 		// res now contains n list of regions to union together		
 		QList<SphericalRegionP> mappedRegions;
-		for (const auto& l : res)
+		for (const auto& l : qAsConst(res))
 		{
 			mappedRegions.append(SphericalPolygon::multiUnion(l));
 		}
@@ -850,6 +850,53 @@ bool SphericalConvexPolygon::checkValidContour(const QVector<Vec3d>& contour)
 		res &= sideHalfSpaceContains(contour.first(), contour.last(), contour[(p+contour.size()+1)%contour.size()]);
 	return res;
 }
+
+StelVertexArray SphericalConvexPolygon::getFillVertexArray() const
+{
+	return StelVertexArray(contour, StelVertexArray::TriangleFan);
+}
+
+StelVertexArray SphericalConvexPolygon::getFillVertexArray(const Vec3d &observerVelocityForAberration)
+{
+	if (observerVelocityForAberration==Vec3d(0.))
+		return StelVertexArray(contour, StelVertexArray::TriangleFan);
+	else
+	{
+		aberratedContour.clear();
+		for (const Vec3d &v: qAsConst(contour))
+		{
+			Q_ASSERT(qAbs(v.lengthSquared()-1.0)<0.0001);
+			Vec3d vec=v+observerVelocityForAberration;
+			aberratedContour.append(vec);
+		}
+
+		return StelVertexArray(aberratedContour, StelVertexArray::TriangleFan);
+	}
+}
+
+StelVertexArray SphericalConvexPolygon::getOutlineVertexArray() const
+{
+	return StelVertexArray(contour, StelVertexArray::LineLoop);
+}
+
+StelVertexArray SphericalConvexPolygon::getOutlineVertexArray(Vec3d observerVelocityForAberration)
+{
+	if (observerVelocityForAberration==Vec3d(0.))
+		return StelVertexArray(contour, StelVertexArray::LineLoop);
+	else
+	{
+		aberratedContour.clear();
+		for (const Vec3d &v: qAsConst(contour))
+		{
+			Q_ASSERT(qAbs(v.lengthSquared()-1.0)<0.0001);
+			Vec3d vec=v+observerVelocityForAberration;
+			aberratedContour.append(vec);
+		}
+
+		return StelVertexArray(aberratedContour, StelVertexArray::LineLoop);
+	}
+}
+
 
 //! Return the area of the region in steradians.
 double SphericalConvexPolygon::getArea() const
@@ -1001,11 +1048,11 @@ void SphericalConvexPolygon::updateBoundingCap()
 	Q_ASSERT(contour.size()>2);
 	// Use this crapy algorithm instead
 	cachedBoundingCap.n.set(0,0,0);
-	for (const auto& v : contour)
+	for (const auto& v : qAsConst(contour))
 		cachedBoundingCap.n+=v;
 	cachedBoundingCap.n.normalize();
 	cachedBoundingCap.d = 1.;
-	for (const auto& v : contour)
+	for (const auto& v : qAsConst(contour))
 	{
 		if (cachedBoundingCap.n*v<cachedBoundingCap.d)
 			cachedBoundingCap.d = cachedBoundingCap.n*v;
@@ -1044,6 +1091,30 @@ SphericalRegionP SphericalConvexPolygon::deserialize(QDataStream& in)
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalTexturedConvexPolygon
 ///////////////////////////////////////////////////////////////////////////////
+StelVertexArray SphericalTexturedConvexPolygon::getFillVertexArray(const Vec3d &observerVelocityForAberration)
+{
+	if (observerVelocityForAberration==Vec3d(0.))
+		return StelVertexArray(contour, StelVertexArray::TriangleFan, textureCoords);
+	else
+	{
+		aberratedContour.clear();
+		for (const Vec3d &v: qAsConst(contour))
+		{
+			Q_ASSERT(qAbs(v.lengthSquared()-1.0)<0.0001);
+			Vec3d vec=v+observerVelocityForAberration;
+			aberratedContour.append(vec);
+		}
+
+		return StelVertexArray(aberratedContour, StelVertexArray::TriangleFan, textureCoords);
+	}
+}
+
+StelVertexArray SphericalTexturedConvexPolygon::getFillVertexArray() const
+{
+		return StelVertexArray(contour, StelVertexArray::TriangleFan, textureCoords);
+}
+
+
 QVariantList SphericalTexturedConvexPolygon::toQVariant() const
 {
 	QVariantList res = SphericalConvexPolygon::toQVariant();
@@ -1156,7 +1227,7 @@ struct TriangleDumper
 	inline void operator=(const TriangleDumper &other){triangleList=other.triangleList;}
 	inline void operator()(const Vec3d* v1, const Vec3d* v2, const Vec3d* v3,
 			       const Vec2f* , const Vec2f* , const Vec2f* ,
-			       const Vec3f* , const Vec3f* , const Vec3f* , // GZ NEW
+			       const Vec3f* , const Vec3f* , const Vec3f* ,
 						   unsigned int , unsigned int , unsigned int )
 	{
 		QVector<Vec3d> triangle;

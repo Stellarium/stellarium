@@ -186,7 +186,9 @@ catalogs such as the Hipparcos catalog.
 %% see also confusion between "equinox" and "epoch" at https://en.wikipedia.org/wiki/Talk:Epoch_(astronomy)#Epoch_and_Equinox
 However, the story is complicated a little by \indexterm{precession}
 (section~\ref{sec:Concepts:Precession}) and \indexterm{parallax}
-(section~\ref{sec:Concepts:Parallax}). Precession causes a slow drift of the coordinates almost parallel to the \indexterm{ecliptic}, and therefore star catalogs always have to specify their \indexterm{equinox} of
+(section~\ref{sec:Concepts:Parallax}). Precession causes a slow drift
+of the coordinates almost parallel to the \indexterm{ecliptic},
+and therefore star catalogs always have to specify their \indexterm{equinox} of
 validity.
 
 Current catalogs and atlases use coordinates for the
@@ -197,17 +199,27 @@ the astronomical literature \citep{ESAA:2013}. Other catalogs with data
 referring to ``J2000.0'' may have to be slightly adjusted (usually in
 sub-arcsecond rotations) to match the ICRF coordinate system (short ICRS).
 
+Stars close to the \indexterm[pole, celestial]{celestial poles} are
+permanently visible above the horizon and thus called
+\indexterm{circumpolar}.  Those stars have observable
+\indexterm[culmination, upper]{upper} and \indexterm[culmination,
+  lower]{lower culminations} when they pass the meridian arc spanning
+from the celestial pole over the zenith to the opposite point on the
+horizon, or from the celestial pole to the horizon below,
+respectively.
+
+Those circumpolar stars which show their upper culmination between
+\indexterm[pole, celestial]{pole} and \indexterm{zenith} also have
+limits in \indexterm{azimuth} which they can reach in their daily course,
+\newFeature{0.21.2} the points of \indexterm[digression,
+  greatest]{greatest digression}. At these points they move vertically
+upwards (in the east) or downwards (in the west), respectively.
 
 Stellarium can draw grid lines for equatorial coordinates. Use the
 button \guibutton{0.6}{bt_eq_grid.png} on the main toolbar to activate
 this grid, or press the \key{E} key to draw the equatorial grid for
 the simulation time. The Markings dialog (\ref{sec:gui:view:markings})
 allows you to set also the grid for J2000.0 standard coordinates.
-
-In case you are observing from another celestial object, the
-equatorial coordinates use a system similar to the one referring to
-the Earth-based coordinates, but parallel to the planet's rotational
-axis.
 
 There are again a few great circles with special names which
 Stellarium can draw in addition, both for simulation time and for
@@ -222,6 +234,35 @@ J2000.0 (see section~\ref{sec:gui:view:markings}).
   \indexterm[Colure!Solstitial]{Solstitial Colure} runs from the NCP through \indexterm{First Point of
   Cancer} \Cancer, SCP and \indexterm{First Point of Capricorn} \Capricorn.
 \end{description}
+
+In case you are observing from another celestial object, the
+equatorial coordinates use a system similar to the one referring to
+the Earth-based coordinates, but parallel to the planet's rotational
+axis.
+
+\subsection{Fixed Equatorial Coordinates}
+\label{sec:Concepts:FixedEquatorial}
+\index{Coordinate System!Fixed Equatorial}
+
+The celestial sphere with its stars and other objects located in
+equatorial coordinates seems to rotate around the celestial polar
+axis. When observing with a telescope, it proved useful to mount the
+instrument on an axis which is aimed to be parallel to the earth's
+axis, i.e., points to the celestial pole. In this case, after setting
+the objects's declination, it is enough to move the telescope around
+this polar axis to track its course over time and keep the object in
+the field of view. We can describe the \indexterm[[Coordinate
+    System!Fixed Equatorial]{Fixed Equatorial Coordinate System} as an
+  intermediate coordinate system which uses the same equator and
+  declination as the equatorial system, but does not rotate as time
+  goes by. The longitudinal coordinate is counted in hours from the
+  meridian towards the west and is aptly named \indexterm{Hour
+    Angle}. A star which has passed the meridian will reach hour angle
+  of 1~hour one sidereal hour later.
+
+Stellarium can display \newFeature{0.22.2} the fixed equatorial
+coordinates in the Markings dialog (\ref{sec:gui:view:markings}).
+
 
 \subsection{Ecliptical Coordinates}
 \label{sec:Concepts:Ecliptical}
@@ -242,7 +283,7 @@ plane. Earth acts like a spinning top and evades this pull in a
 sideways motion, so that Earth's axis seems to describe a small circle
 over a period of almost 26.000 years (see section~\ref{sec:Concepts:Precession}). 
 
-In addition, ecliptic obliquity against the equatorial coordinates,
+In addition, \indexterm[obliquity, ecliptic]{ecliptic obliquity} against the equatorial coordinates,
 which mirrors the Earth's axial tilt, slowly changes.
 
 Therefore, also for ecliptical coordinates is is required to specify
@@ -265,8 +306,26 @@ However, these circles are simply plotted centered on the instantaneous
 ecliptic pole by the instantaneous value of obliquity. 
 If you observe long enough, you will
 see that these circles vary in size, reflecting the changes in
-ecliptic \indexterm{obliquity}. The real track of where Earth's axis is pointing forms an open helical loop.
+ecliptic \indexterm[obliquity, ecliptic]{obliquity}. The real track of where Earth's axis is pointing forms an open helical loop.
 
+The inner planets are best observed when their apparent distance from
+the Sun, or \indexterm{elongation} reaches a maximum. Unfortunately
+there are two definitions for elongation, though:
+\begin{description}
+\item[$\psi$] angular distance on the sphere. This is today the most widely used definition.
+\item[$\Delta\lambda_{\text{\Sun}}$] difference between solar and the
+  object's ecliptical longitude.\newFeature{0.21.2} The advantage of using this
+  definition is that we can easily read \indexterm{opposition}
+  ($\Delta\lambda_{\text{\Sun}}=180^\circ$) and \indexterm{conjunction}
+  ($\Delta\lambda_{\text{\Sun}}=0^\circ$). We can also see whether we have
+  \indexterm[elongation, eastern]{eastern elongation} ($\Delta\lambda_{\text{\Sun}}>0$) where the planet is visible in the evening sky, or
+  \indexterm[elongation, western]{western elongation} ($\Delta\lambda_{\text{\Sun}}<0$) where the planet is visible in the morning sky.
+  For the inner planets Mercury and Venus
+  we further discern \indexterm[conjunction, superior]{superior
+    conjunction}, when the planet is ``above'', or behind, the Sun,
+  and \indexterm[conjunction, inferior]{inferior conjunction}, when
+  the planet is ``below'', or closer than, the Sun.
+\end{description}
 
 
 Many of the minor bodies are best observed around the times of their
@@ -417,7 +476,7 @@ context of the mind-boggling vastness of space.
 \label{sec:Concepts:Time}
 
 \begin{figure}[ht]
-\centering\includegraphics[width=\textwidth]{sidereal_day.png}
+\centering\includegraphics[width=0.95\textwidth]{sidereal_day.png}
 \caption{Sidereal day}
 \label{fig:SiderealDay}
 \end{figure}
@@ -452,7 +511,7 @@ at four times:
   Earth has rotated more than $360\degree$ since 1.
 \end{enumerate}
 
-It should be noted that in figure~\ref{fig:SiderealDay} the sizes of
+\noindent It should be noted that in figure~\ref{fig:SiderealDay} the sizes of
 the Sun and Earth and not to scale. More importantly, the distance the
 Earth moves around its orbit is much exaggerated. The Earth takes a
 year to travel round the Sun --
@@ -465,8 +524,10 @@ sidereal day is about 23 hours, 56 minutes and 4 seconds.
 It takes exactly one sidereal day for the celestial sphere to make one
 revolution in the sky. Astronomers find \indexterm{sidereal time}
 useful when observing. This is the Right Ascension which is currently
-passing the meridian line.  When visiting observatories, look out for
-doctored alarm clocks that have been set to run in sidereal time!
+passing the meridian line, or, equivalent, the \indexterm{Hour Angle}
+of the First Point of Aries \Aries.  When visiting observatories, look
+out for doctored alarm clocks that have been set to run faster and
+show sidereal time!
 
 \subsection{Julian Day Number}
 \label{sec:Concepts:JulianDay}
@@ -558,10 +619,11 @@ temporal offset which amounts already to more than a minute in the 21st
 century. There have been many attempts to properly model $\Delta T$,
 and Stellarium offers several models you can choose from in the
 configuration dialog (see
-section~\ref{sec:gui:configuration:time}). The default, ``Espenak and
-Meeus (2006)'', is a widely accepted standard. But if you are a
-researcher and want to experiment with alternative models, you will
-hopefully like this feature. you can even specify your own data for
+section~\ref{sec:gui:configuration:time}). ``Espenak and
+Meeus (2006)'', is a widely accepted standard. The default, ``Modified Espenak and
+Meeus (2006)'', is created to make $\Delta T$ closely in line with observed and predicted
+values between the years 2005-2050. But if you are a researcher and want to experiment
+with alternative models, you will hopefully like this feature. you can even specify your own data for
 $a$, $b$, $c$, $y$ and the secular term for lunar acceleration $n$
 (actually $\dot{n}=dn/dt$ in units of
 $\mathrm{arcseconds}/\mathrm{century}^2$) if you can model $\Delta T$
@@ -702,17 +764,17 @@ The following list describes sources and a few details about the models for $\De
   addendum~\citep{2005JHA....36..339M}. Valid range of usage: between
   years -1000 and 2000. $\dot{n}=-26.0''/\cy^2$.
 
-\item[Stephenson, Morrison \& Hohenkerk (2016).] This important new solution was published 
+\item[Stephenson, Morrison \& Hohenkerk (2016, 2021).] This important new solution was published 
   %by F. R. Stephenson,  L. V. Morrison and C. Y. Hohenkerk in the article 
   %``Measurement of the Earth’s rotation: 720 BC to AD 2015''~
   in \citetp{StephensonMorrisonHohenkerk:2016}. 
   The solution combines a spline fit to observations (used between the given limits) 
   with a parabolic fit (used as fallback outside the range, but without smooth transitions at the limits, i.e., 
   values for 2016 and later deviate notably from current estimates, and should not be used for dates after 2015).
-  Recommended range of usage: between years -720.0 and 2016.0 $\dot{n}=-25.82''/\cy^2$.
+  The solution was updated in \citetp{StephensonMorrisonHohenkerk:2021}.
+  Recommended range of usage: between years -720.0 and 2019.0 $\dot{n}=-25.82''/\cy^2$.
   
-\item[Espenak \& Meeus (2006).] This solution\footnote{This solution
-    is used by default.} by F. Espenak and J. Meeus, based on 
+\item[Espenak \& Meeus (2006).] This solution by F. Espenak and J. Meeus, based on 
 	\citet{2004JHA....35..327M} and a polynomial fit
   through tabulated values for 1600-2000, is used for the NASA Eclipse
   Web Site\footnote{\url{https://eclipse.gsfc.nasa.gov/eclipse.html}}
@@ -720,6 +782,11 @@ The following list describes sources and a few details about the models for $\De
   solar, lunar and planetary ephemeris program \program{SOLEX}. Valid
   range of usage: between years -1999 and
   3000. $\dot{n}=-25.858''/\cy^2$.
+
+\item[Modified Espenak \& Meeus (2006).] This solution\footnote{This solution
+  is used by default.} is a modification from Espenak \& Meeus (2006). Two formulae are developed to make $\Delta T$
+  closely in line with observed and predicted values by IERS and also connected with original values.
+  Valid range of usage: between years -1999 and 3000. $\dot{n}=-25.858''/\cy^2$.
 
 \item[Reijs (2006).] From the Length of Day (LOD; as determined by
   \citet{2004JHA....35..327M}), Victor Reijs
@@ -747,7 +814,7 @@ The following list describes sources and a few details about the models for $\De
   of accuracy was published in \citetp{Khalid-Sultana-Zaidi:2014}. 
   Valid range of usage: between years 1620 and 2013, with zero values outside this range.
 
-\item[Henriksson (2017).] \newFeature{v0.18.2} A solution which combines Schoch's 1931
+\item[Henriksson (2017).] \newFeature{0.18.2} A solution which combines Schoch's 1931
   solution (parabolic fit) with a discussion of and correction for relativistic effects.  The author
   claims an accurate fit for solar eclipses probably depicted in artifacts going back to the mid-fourth
   millennium BC.
@@ -902,12 +969,12 @@ and so on. Luminosity is related to absolute magnitude.
 \label{fig:Obliquity}
 \end{figure}
 
-As the Earth orbits the Sun throughout the year, the axis of rotation
+\noindent As the Earth orbits the Sun throughout the year, the axis of rotation
 (the line running through the rotational poles of the Earth) seems to
 point towards the same position on the celestial sphere, as can be
 seen in figure~\ref{fig:Obliquity}. The angle between the axis of
 rotation and the perpendicular of the orbital plane is called the
-\indexterm{obliquity of the ecliptic}. It is currently about
+\indexterm[obliquity, ecliptic]{obliquity of the ecliptic}. It is currently about
 $23\degree27'$ and is the angle between equatorial plane
 (\ref{sec:Concepts:Equatorial}) and ecliptical plane
 (\ref{sec:Concepts:Ecliptical}).
@@ -1034,7 +1101,7 @@ A similar thing happens due to the Earth's motion around the Sun. Nearby
 stars appear to move against more distant background stars, as
 illustrated in figure~\ref{fig:Parallax}.
 The movement of nearby stars against the background is called
-\emph{stellar parallax}, or \emph{annual parallax}.
+\indexterm{stellar parallax}, or \indexterm{annual parallax}.
 
 Since we know the radius of the Earth's orbit around the
 Sun from other methods, we can use simple geometry to calculate the
@@ -1057,12 +1124,48 @@ of stars up to about 1,600 light years from the Earth, after which the
 annual parallax is so small it cannot be measured accurately enough.
 
 In Stellarium, the annual parallax can be listed in the object information for stars
-when available. It is not used for the positional calculations.
+when available. It is not accounted for in the positional calculations.
+
+\section{Aberration of Light}
+\label{sec:Concepts:Aberration}
+
+\newFeature{0.21.2} When you are standing under a rainy but
+windless sky with an umbrella placed vertically over your head, your
+feet will not be hit by raindrops. But when you are walking, raindrops
+which just missed the umbrella may hit your feet. Relative to your
+umbrella and feet, it seems that the raindrops are coming not quite
+vertically from above, but inclined from the direction you are heading
+into, and therefore you tilt the umbrella slightly forward to fend off
+the raindrops from your feet.
+
+Light propagates very fast compared to the motion of the planets, but
+still with a finite velocity. Therefore, just like the raindrops
+mentioned above, light from all celestial objects seem to come in from
+a position slightly distorted towards the point in space the observer
+is heading to.
+
+In search for stellar parallax (see section \ref{sec:Concepts:StellarParallax}),
+this effect of the \indexterm{aberration of light} was fortuitously
+discovered and then explained by \name[James]{Bradley} (1693--1762) in
+1725. This was also the final proof for Earth's movement around the
+Sun. For an observer on the moving Earth, the apparent deviation of a
+star from the mean coordinates can reach $20.4"$. As the months pass,
+Earth is changing its direction along its orbit, and so the light
+distortion also changes, i.e., the direction towards the object moves
+against the fixed coordinate axes. The effect is significant when we
+want to compute, for example, stellar occultations by the Moon.
+
+In Stellarium, you can observe a slight annual wobble in all objects'
+positions against the fixed celestial grids. Just enable the
+equatorial grid, zoom in and run through the months. You can also
+exaggerate the aberration effect upto $5\times$ to make it more
+apparent. \footnote{Exaggerating even more causes graphics defects and
+  has been disabled for now.}
 
 \section{Proper Motion}
 \label{sec:Concepts:ProperMotion}
 
-\indexterm{Proper motion} is the change in the position of a star over time as a
+\indexterm[proper motion]{Proper motion} is the change in the position of a star over time as a
 result of its motion through space relative to the Sun. It does not
 include the apparent shift in position of star due to annular parallax.
 The star exhibiting the greatest proper motion is \indexterm{Barnard's Star} which
@@ -1085,8 +1188,9 @@ Note however some limitations:
   motion in space requires more computation, which would slow down the
   program.
 \item Double stars are listed in catalogs as two individual stars with
-  their current proper motion which consists of spatial motion and the 
-  orbital motion around their center of gravity. They may be seen flying 
+  their current proper motion which consists of a common spatial motion and the 
+  orbital motion around their common center of gravity. However, their orbital
+  motion around each other is not modelled in Stellarium.  They may be seen flying 
   apart, which is of course not realistic.
 \end{enumerate}
 

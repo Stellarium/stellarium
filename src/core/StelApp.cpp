@@ -63,6 +63,10 @@
 #ifdef ENABLE_SCRIPTING
  #include "StelScriptMgr.hpp"
  #include "StelMainScriptAPIProxy.hpp"
+
+#ifdef USE_STATIC_PLUGIN_CALENDARS
+ #include "../plugins/Calendars/src/Calendars.hpp"
+#endif
 #endif
 
 
@@ -88,6 +92,10 @@
 #include <QGuiApplication>
 #include <QScreen>
 #include <QDateTime>
+#include <QRegularExpression>
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+#include <QRandomGenerator>
+#endif
 #ifdef ENABLE_SPOUT
 #include <QMessageBox>
 #include "SpoutSender.hpp"
@@ -217,6 +225,9 @@ void StelApp::deinitStatic()
 *************************************************************************/
 StelApp::StelApp(StelMainView *parent)
 	: QObject(parent)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+	, randomGenerator(Q_NULLPTR)
+#endif
 	, mainWin(parent)
 	, core(Q_NULLPTR)
 	, moduleMgr(Q_NULLPTR)
@@ -273,6 +284,9 @@ StelApp::StelApp(StelMainView *parent)
 	singleton = this;
 
 	moduleMgr = new StelModuleMgr();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+	randomGenerator = new QRandomGenerator(static_cast<quint32>(QDateTime::currentMSecsSinceEpoch()));
+#endif
 }
 
 /*************************************************************************
@@ -302,7 +316,9 @@ StelApp::~StelApp()
 	delete actionMgr; actionMgr = Q_NULLPTR;
 	delete propMgr; propMgr = Q_NULLPTR;
 	delete renderBuffer; renderBuffer = Q_NULLPTR;
-
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+	delete randomGenerator; randomGenerator=Q_NULLPTR;
+#endif
 	Q_ASSERT(singleton);
 	singleton = Q_NULLPTR;
 }
@@ -339,13 +355,14 @@ void StelApp::setupNetworkProxy()
 				// http://proxy.loc:3128/
 				// http://2001:62a:4:203:6ab5:99ff:fef2:560b:3128/
 				// http://foo:bar@2001:62a:4:203:6ab5:99ff:fef2:560b:3128/
-				QRegExp pre("^([^:]+://)?(?:([^:]+):([^@]*)@)?(.+):([\\d]+)");
-				if (pre.indexIn(proxyString) >= 0)
+				static const QRegularExpression pre("^([^:]+://)?(?:([^:]+):([^@]*)@)?(.+):([\\d]+)");
+				QRegularExpressionMatch preMatch=pre.match(proxyString);
+				if (proxyString.indexOf(pre) >= 0)
 				{
-					proxyUser = pre.cap(2);
-					proxyPass = pre.cap(3);
-					proxyHost = pre.cap(4);
-					proxyPort = pre.cap(5);
+					proxyUser = preMatch.captured(2);
+					proxyPass = preMatch.captured(3);
+					proxyHost = preMatch.captured(4);
+					proxyPort = preMatch.captured(5);
 				}
 				else
 				{
@@ -387,6 +404,12 @@ void StelApp::setupNetworkProxy()
 void StelApp::initScriptMgr()
 {
 	scriptMgr->addModules();
+
+#ifdef USE_STATIC_PLUGIN_CALENDARS
+	Calendars *cal=GETSTELMODULE_SILENT(Calendars);
+	if (cal)
+		cal->makeCalendarsScriptable(scriptMgr);
+#endif
 	QString startupScript;
 	if (qApp->property("onetime_startup_script").isValid())
 		startupScript = qApp->property("onetime_startup_script").toString();
@@ -434,9 +457,7 @@ void StelApp::init(QSettings* conf)
 
 	SplashScreen::showMessage(q_("Initializing network access..."));
 	networkAccessManager = new QNetworkAccessManager(this);
-	#if QT_VERSION >= 0x050900
 	networkAccessManager->setRedirectPolicy(QNetworkRequest::NoLessSafeRedirectPolicy);
-	#endif
 	SplashScreen::showMessage(q_("Initializing network disk cache..."));
 	// Activate http cache if Qt version >= 4.5
 	QNetworkDiskCache* cache = new QNetworkDiskCache(networkAccessManager);
@@ -678,7 +699,8 @@ void StelApp::initPlugIns()
 {
 	// Load dynamically all the modules found in the modules/ directories
 	// which are configured to be loaded at startup
-	for (const auto& i : moduleMgr->getPluginsList())
+	const QList<StelModuleMgr::PluginDescriptor> pluginList=moduleMgr->getPluginsList();
+	for (const auto& i : pluginList)
 	{
 		if (i.loadAtStartup==false)
 			continue;
@@ -716,14 +738,14 @@ StelProgressController* StelApp::addProgressBar()
 {
 	StelProgressController* p = new StelProgressController(this);
 	progressControllers.append(p);
-	emit(progressBarAdded(p));
+	emit progressBarAdded(p);
 	return p;
 }
 
 void StelApp::removeProgressBar(StelProgressController* p)
 {
 	progressControllers.removeOne(p);	
-	emit(progressBarRemoved(p));
+	emit progressBarRemoved(p);
 	delete p;
 }
 
@@ -860,9 +882,15 @@ void StelApp::handleClick(QMouseEvent* inputEvent)
 void StelApp::handleWheel(QWheelEvent* event)
 {
 	event->setAccepted(false);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+	QWheelEvent deltaEvent(event->position()*devicePixelsPerPixel,
+			       event->globalPosition()*devicePixelsPerPixel,
+			       event->pixelDelta(), event->angleDelta(), event->buttons(), event->modifiers(), Qt::ScrollUpdate, false);
+#else
 	QWheelEvent deltaEvent(QPoint(qRound(event->pos().x()*devicePixelsPerPixel), qRound(event->pos().y()*devicePixelsPerPixel)),
 			       QPoint(qRound(event->globalPos().x()*devicePixelsPerPixel), qRound(event->globalPos().y()*devicePixelsPerPixel)),
-	                       event->delta(), event->buttons(), event->modifiers(), event->orientation());
+			       event->delta(), event->buttons(), event->modifiers(), event->orientation());
+#endif
 	deltaEvent.setAccepted(false);
 	// Send the event to every StelModule
 	for (auto* i : moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks)) {
@@ -927,7 +955,7 @@ void StelApp::setVisionModeNight(bool b)
 	if (flagNightVision!=b)
 	{
 		flagNightVision=b;
-		emit(visionNightModeChanged(b));
+		emit visionNightModeChanged(b);
 	}
 }
 
@@ -936,7 +964,7 @@ void StelApp::setFlagOverwriteInfoColor(bool b)
 	if (flagOverwriteInfoColor!=b)
 	{
 		flagOverwriteInfoColor=b;
-		emit(flagOverwriteInfoColorChanged(b));
+		emit flagOverwriteInfoColorChanged(b);
 	}
 }
 
@@ -1100,12 +1128,8 @@ QString StelApp::getViewportEffect() const
 void StelApp::dumpModuleActionPriorities(StelModule::StelModuleActionName actionName) const
 {
 	const QList<StelModule*> modules = moduleMgr->getCallOrders(actionName);
-	#if QT_VERSION >= 0x050500
 	QMetaEnum me = QMetaEnum::fromType<StelModule::StelModuleActionName>();
 	qDebug() << "Module Priorities for action named" << me.valueToKey(actionName);
-	#else
-	qDebug() << "Module Priorities for action named" << actionName;
-	#endif
 
 	for (auto* module : modules)
 	{
@@ -1153,5 +1177,5 @@ void StelApp::setAppFont(QFont font)
 QString StelApp::getVersion() const
 {
 	QStringList ver = StelUtils::getApplicationVersion().split(".");
-	return QString("%1.%2.%3").arg(ver[0]).arg(ver[1]).arg(ver[2]);
+	return QString("%1.%2.%3").arg(ver[0], ver[1], ver[2]);
 }

@@ -36,18 +36,18 @@
 // We mean it.
 //
 
-#include "xlsxglobal.h"
-#include "xlsxrichstring.h"
-#include "xlsxabstractooxmlfile.h"
 #include <QHash>
 #include <QStringList>
 #include <QSharedPointer>
+#include <QIODevice>
+#include <QXmlStreamReader>
+#include <QXmlStreamWriter>
 
-class QIODevice;
-class QXmlStreamReader;
-class QXmlStreamWriter;
+#include "xlsxglobal.h"
+#include "xlsxrichstring.h"
+#include "xlsxabstractooxmlfile.h"
 
-namespace QXlsx {
+QT_BEGIN_NAMESPACE_XLSX
 
 class XlsxSharedStringInfo
 {
@@ -94,5 +94,6 @@ private:
     int m_stringCount;
 };
 
-}
+QT_END_NAMESPACE_XLSX
+
 #endif // XLSXSHAREDSTRINGS_H

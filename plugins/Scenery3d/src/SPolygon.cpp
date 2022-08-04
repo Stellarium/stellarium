@@ -42,7 +42,7 @@ void SPolygon::intersect(const Plane &p, QVector<Vec3f> &intersectionPoints)
 
 	for(int i=0; i<vertices.size(); i++)
 	{
-		unsigned int next = (i+1) % vertices.size();
+		int next = (i+1) % vertices.size();
 
 		bool curOut = !p.isBehind(vertices[i]);
 		bool nextOut = !p.isBehind(vertices[next]);

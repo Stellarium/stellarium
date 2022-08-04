@@ -60,9 +60,9 @@ class NexStarCommandGotoPosition : public NexStarCommand
 {
 public:
 	NexStarCommandGotoPosition(Server &server, unsigned int ra_int, int dec_int);
-	bool writeCommandToBuffer(char *&buff, char *end);
-	int readAnswerFromBuffer(const char *&buff, const char *end) const;
-	void print(QTextStream &o) const;
+	virtual bool writeCommandToBuffer(char *&buff, char *end) Q_DECL_OVERRIDE;
+	virtual int readAnswerFromBuffer(const char *&buff, const char *end) const Q_DECL_OVERRIDE;
+	virtual void print(QTextStream &o) const Q_DECL_OVERRIDE;
 	
 private:
 	int ra, dec;
@@ -73,9 +73,9 @@ class NexStarCommandSync : public NexStarCommand
 {
 public:
 	NexStarCommandSync(Server &server, unsigned int ra_int, int dec_int);
-	bool writeCommandToBuffer(char *&buff, char *end);
-	int readAnswerFromBuffer(const char *&buff, const char *end) const;
-	void print(QTextStream &o) const;
+	virtual bool writeCommandToBuffer(char *&buff, char *end) Q_DECL_OVERRIDE;
+	virtual int readAnswerFromBuffer(const char *&buff, const char *end) const Q_DECL_OVERRIDE;
+	virtual void print(QTextStream &o) const Q_DECL_OVERRIDE;
 
 private:
 	int ra, dec;
@@ -86,9 +86,9 @@ class NexStarCommandGetRaDec : public NexStarCommand
 {
 public:
 	NexStarCommandGetRaDec(Server &server) : NexStarCommand(server) {}
-	bool writeCommandToBuffer(char *&buff, char *end);
-	int readAnswerFromBuffer(const char *&buff, const char *end) const;
-	void print(QTextStream &o) const;
+	virtual bool writeCommandToBuffer(char *&buff, char *end) Q_DECL_OVERRIDE;
+	virtual int readAnswerFromBuffer(const char *&buff, const char *end) const Q_DECL_OVERRIDE;
+	virtual void print(QTextStream &o) const Q_DECL_OVERRIDE;
 };
 
 #endif

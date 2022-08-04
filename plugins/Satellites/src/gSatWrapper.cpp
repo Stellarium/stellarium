@@ -111,16 +111,14 @@ void gSatWrapper::calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_velocity
 
 		double radLatitude	= loc.latitude * KDEG2RAD;
 		double theta		= epoch.toThetaLMST(loc.longitude * KDEG2RAD);
-		double r;
-		double c,sq;
 
 		/* Reference:  Explanatory supplement to the Astronomical Almanac 1992, page 209-210. */
 		/* Elipsoid earth model*/
 		/* c = Nlat/a */
-		c = 1/std::sqrt(1 + __f*(__f - 2)*Sqr(sin(radLatitude)));
-		sq = Sqr(1 - __f)*c;
+		double c = 1/std::sqrt(1 + __f*(__f - 2)*Sqr(sin(radLatitude)));
+		double sq = Sqr(1 - __f)*c;
 
-		r = (KEARTHRADIUS*c + (loc.altitude/1000))*cos(radLatitude);
+		double r = (KEARTHRADIUS*c + (loc.altitude/1000))*cos(radLatitude);
 		ao_position[0] = r * cos(theta);/*kilometers*/
 		ao_position[1] = r * sin(theta);
 		ao_position[2] = (KEARTHRADIUS*sq + (loc.altitude/1000))*sin(radLatitude);
@@ -185,7 +183,7 @@ void gSatWrapper::updateSunECIPos()
 	// All positions in ECI system are positions referenced in a StelCore::EquinoxEq system centered in the earth centre
 	calcObserverECIPosition(observerECIPos, observerECIVel);
 
-	static const SolarSystem *solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+	static const SolarSystem *solsystem = GETSTELMODULE(SolarSystem);
 	Vec3d sunEquinoxEqPos = solsystem->getSun()->getEquinoxEquatorialPos(StelApp::getInstance().getCore());
 
 	//sunEquinoxEqPos is measured in AU. we need measure it in Km
@@ -212,7 +210,7 @@ gSatWrapper::Visibility gSatWrapper::getVisibilityPredict() const
 	if (satAltAzPos[2] > 0)
 	{
 		Vec3d satECIPos = getTEMEPos();
-		static const SolarSystem *solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+		static const SolarSystem *solsystem = GETSTELMODULE(SolarSystem);
 		Vec3d sunAltAzPos = solsystem->getSun()->getAltAzPosGeometric(StelApp::getInstance().getCore());
 		Vec3d sunECIPos = getSunECIPos();
 

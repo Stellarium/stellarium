@@ -7,7 +7,6 @@
 #define TEMPLATE_H
 
 #include <QString>
-#include <QRegExp>
 #include <QIODevice>
 #include <QTextCodec>
 #include <QFile>

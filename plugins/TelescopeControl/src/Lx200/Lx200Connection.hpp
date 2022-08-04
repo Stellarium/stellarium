@@ -47,11 +47,11 @@ public:
 	
 private:
 	//! Parses read buffer data received from the telescope.
-	void dataReceived(const char *&p, const char *read_buff_end);
+	virtual void dataReceived(const char *&p, const char *read_buff_end) Q_DECL_OVERRIDE;
 	//! Not implemented, as this is not a connection to a client.
-	void sendPosition(unsigned int ra_int, int dec_int, int status) {Q_UNUSED(ra_int); Q_UNUSED(dec_int); Q_UNUSED(status);}
+	virtual void sendPosition(unsigned int ra_int, int dec_int, int status) Q_DECL_OVERRIDE {Q_UNUSED(ra_int) Q_UNUSED(dec_int) Q_UNUSED(status)}
 	void resetCommunication(void);
-	void prepareSelectFds(fd_set &read_fds, fd_set &write_fds, int &fd_max);
+	virtual void prepareSelectFds(fd_set &read_fds, fd_set &write_fds, int &fd_max) Q_DECL_OVERRIDE;
 	bool writeFrontCommandToBuffer(void);
 	//! Flushes the command queue, sending commands to the write buffer.
 	//! This method iterates over the queue, writing to the write buffer

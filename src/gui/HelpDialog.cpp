@@ -38,6 +38,7 @@
 #include <QSysInfo>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QRegularExpression>
 
 #include "ui_helpDialogGui.h"
 #include "HelpDialog.hpp"
@@ -212,7 +213,7 @@ void HelpDialog::downloadComplete(QNetworkReply *reply)
 	reply->deleteLater();
 	downloadReply = Q_NULLPTR;
 
-	emit(checkUpdatesComplete());
+	emit checkUpdatesComplete();
 }
 
 void HelpDialog::showShortcutsWindow()
@@ -304,8 +305,9 @@ void HelpDialog::updateHelpText(void) const
 	// Append all StelAction shortcuts.
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	typedef QPair<QString, QString> KeyDescription;
-	QList<KeyDescription> groups;
-	for (const auto &group : actionMgr->getGroupList())
+	QVector<KeyDescription> groups;
+	const QStringList groupList = actionMgr->getGroupList();
+	for (const auto &group : groupList)
 	{
 		groups.append(KeyDescription(q_(group), group));
 	}
@@ -313,8 +315,9 @@ void HelpDialog::updateHelpText(void) const
 	std::sort(groups.begin(), groups.end());
 	for (const auto &group : groups)
 	{
-		QList<KeyDescription> descriptions;
-		for (auto* action : actionMgr->getActionList(group.second))
+		QVector<KeyDescription> descriptions;
+		const QList<StelAction *>actionList = actionMgr->getActionList(group.second);
+		for (auto* action : actionList)
 		{
 			if (action->getShortcut().isEmpty())
 				continue;
@@ -358,7 +361,8 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
 	htmlText += "<tr><td>" + q_("Calculate ephemeris") + "</td>";
 	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
-	htmlText += "<tr><td>" + q_("Calculate transits") + "</td>";
+	// TRANSLATOR: RTS = rise, transit, set
+	htmlText += "<tr><td>" + q_("Calculate RTS") + "</td>";
 	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
 	htmlText += "<tr><td>" + q_("Calculate phenomena") + "</td>";
 	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
@@ -366,7 +370,7 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "</table>";
 
 	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
+	static const QRegularExpression a_rx("[{]([^{]*)[}]");
 
 	// WARNING! Section titles are re-used above!
 	htmlText += "<h2 id=\"links\">" + q_("Further Reading").toHtmlEscaped() + "</h2>\n";
@@ -424,39 +428,40 @@ QString HelpDialog::hotkeyTextWrapper(const QString hotkey) const
 
 void HelpDialog::updateAboutText(void) const
 {
-	QStringList contributors;
-	contributors << "Vladislav Bataron" << "Barry Gerdes" << "Peter Walser" << "Michal Sojka"
-		     << "Nick Fedoseev" << "Clement Sommelet" << "Ivan Marti-Vidal" << "Nicolas Martignoni"
-		     << "Oscar Roig Felius" << "M.S. Adityan" << "Tomasz Buchert" << "Adam Majer"
-		     << "Roland Bosa" << "Łukasz 'sil2100' Zemczak" << "Gábor Péterffy"
-		     << "Mircea Lite" << "Alexey Dokuchaev" << "William Formyduval" << "Daniel De Mickey"
-		     << "François Scholder" << "Anton Samoylov" << "Mykyta Sytyi" << "Shantanu Agarwal"
-		     << "Teemu Nätkinniemi" << "Kutaibaa Akraa" << "J.L.Canales" << "Leonid Froenchenko"
-		     << "Peter Mousley" << "Greg Alexander" << "Yuri Chornoivan" << "Daniel Michalik"
-		     << "Hleb Valoshka" << "Matthias Drochner" << "Kenan Dervišević" << "Alex Gamper"
-		     << "Volker Hören" << "Max Digruber" << "Dan Smale" << "Victor Reijs"
-		     << "Tanmoy Saha" << "Oleg Ginzburg" << "Peter Hickey" << "Bernd Kreuss"
-		     << "Alexander Miller" << "Eleni Maria Stea" << "Kirill Snezhko"
-		     << "Simon Parzer" << "Peter Neubauer" << "Andrei Borza" << "Allan Johnson"
-		     << "Felix Zeltner" << "Paolo Cancedda" << "Ross Mitchell" << "David Baucum"
-		     << "Maciej Serylak" << "Adriano Steffler" << "Sibi Antony" << "Tony Furr"
-		     << "misibacsi" << "Pavel Klimenko" << "Rumen G. Bogdanovski" << "Colin Gaudion"
-		     << "Annette S. Lee" << "Vancho Stojkoski" << "Robert S. Fuller" << "Giuseppe Putzolu"
-		     << "henrysky" << "Nick Kanel" << "Petr Kubánek" << "Matwey V. Kornilov"
-		     << "Alessandro Siniscalchi" << "Ruslan Kabatsayev" << "Pawel Stolowski"
-		     << "Antoine Jacoutot" << "Sebastian Jennen" << "Matt Hughes" << "Sun Shuwei"
-		     << "Alexey Sokolov" << "Paul Krizak" << "ChrUnger" << "Minmin Gong" << "Andy Kirkham"
-		     << "Michael Dickens" << "Patrick (zero0cool0)" << "Martín Bernardi" << "Sebastian Garcia"
-		     << "Wolfgang Laun" << "Alexandros Kosiaris" << "Alexander Duytschaever";
+    QStringList contributors({
+		     "Vladislav Bataron", "Barry Gerdes", "Peter Walser", "Michal Sojka",
+		     "Nick Fedoseev", "Clement Sommelet", "Ivan Marti-Vidal", "Nicolas Martignoni",
+		     "Oscar Roig Felius", "M.S. Adityan", "Tomasz Buchert", "Adam Majer",
+		     "Roland Bosa", "Łukasz 'sil2100' Zemczak", "Gábor Péterffy",
+		     "Mircea Lite", "Alexey Dokuchaev", "William Formyduval", "Daniel De Mickey",
+		     "François Scholder", "Anton Samoylov", "Mykyta Sytyi", "Shantanu Agarwal",
+		     "Teemu Nätkinniemi", "Kutaibaa Akraa", "J.L.Canales", "Leonid Froenchenko",
+		     "Peter Mousley", "Greg Alexander", "Yuri Chornoivan", "Daniel Michalik",
+		     "Hleb Valoshka", "Matthias Drochner", "Kenan Dervišević", "Alex Gamper",
+		     "Volker Hören", "Max Digruber", "Dan Smale", "Victor Reijs",
+		     "Tanmoy Saha", "Oleg Ginzburg", "Peter Hickey", "Bernd Kreuss",
+		     "Alexander Miller", "Eleni Maria Stea", "Kirill Snezhko",
+		     "Simon Parzer", "Peter Neubauer", "Andrei Borza", "Allan Johnson",
+		     "Felix Zeltner", "Paolo Cancedda", "Ross Mitchell", "David Baucum",
+		     "Maciej Serylak", "Adriano Steffler", "Sibi Antony", "Tony Furr",
+		     "misibacsi", "Pavel Klimenko", "Rumen G. Bogdanovski", "Colin Gaudion",
+		     "Annette S. Lee", "Vancho Stojkoski", "Robert S. Fuller", "Giuseppe Putzolu",
+		     "henrysky", "Nick Kanel", "Petr Kubánek", "Matwey V. Kornilov",
+		     "Alessandro Siniscalchi", "Ruslan Kabatsayev", "Pawel Stolowski",
+		     "Antoine Jacoutot", "Sebastian Jennen", "Matt Hughes", "Sun Shuwei",
+		     "Alexey Sokolov", "Paul Krizak", "ChrUnger", "Minmin Gong", "Andy Kirkham",
+		     "Michael Dickens",  "Patrick (zero0cool0)", "Martín Bernardi", "Sebastian Garcia",
+		     "Wolfgang Laun", "Alexandros Kosiaris", "Alexander Duytschaever", "Jocelyn Girod",
+		     "Atque", "Worachate Boonplod"});
 	contributors.sort();
 
 	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
+	static const QRegularExpression a_rx("[{]([^{]*)[}]");
 
 	// populate About tab
 	QString newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
 	// Note: this legal notice is not suitable for translation
-	newHtml += QString("<h3>Copyright &copy; %1 Stellarium Developers</h3>").arg(COPYRIGHT_YEARS);
+	newHtml += QString("<h3>%1</h3>").arg(STELLARIUM_COPYRIGHT);
 	if (!message.isEmpty())
 		newHtml += "<p><strong>" + message + "</strong></p>";
 	// newHtml += "<p><em>Version 0.15 is dedicated in memory of our team member Barry Gerdes.</em></p>";
@@ -476,11 +481,12 @@ void HelpDialog::updateAboutText(void) const
 	newHtml += "Boston, MA  02110-1335, USA.\n</pre>";
 	newHtml += "<p><a href=\"http://www.fsf.org\">www.fsf.org</a></p>";
 	newHtml += "<h3>" + q_("Developers").toHtmlEscaped() + "</h3><ul>";
-	newHtml += "<li>" + q_("Project coordinator & lead developer: %1").arg(QString("Fabien Ch%1reau").arg(QChar(0x00E9))).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Project coordinator & lead developer: %1").arg(QString("Fabien Chéreau")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Graphic/other designer: %1").arg(QString("Martín Bernardi")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Guillaume Ch%1reau").arg(QChar(0x00E9))).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Guillaume Chéreau")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Georg Zotti")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Alexander Wolf")).toHtmlEscaped() + "</li></ul>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Alexander V. Wolf")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Sky cultures researcher: %1").arg(QString("Susanne M. Hoffmann")).toHtmlEscaped() + "</li></ul>";
 	newHtml += "<h3>" + q_("Former Developers").toHtmlEscaped() + "</h3>";
 	newHtml += "<p>"  + q_("Several people have made significant contributions, but are no longer active. Their work has made a big difference to the project:").toHtmlEscaped() + "</p><ul>";
 	newHtml += "<li>" + q_("Graphic/other designer: %1").arg(QString("Johan Meuris")).toHtmlEscaped() + "</li>";
@@ -490,11 +496,11 @@ void HelpDialog::updateAboutText(void) const
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Bogdan Marinov")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Timothy Reaves")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Florian Schaukowitsch")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Andr%1s Mohari").arg(QChar(0x00E1))).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("András Mohari")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Mike Storm")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Ferdinand Majerech")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Jörg Müller")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Marcos Cardinot")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Marcos Cardinot")).toHtmlEscaped() + "</li>";	
 	newHtml += "<li>" + q_("OSX Developer: %1").arg(QString("Nigel Kerr")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("OSX Developer: %1").arg(QString("Diego Marcos")).toHtmlEscaped() + "</li></ul>";
 	newHtml += "<li>" + q_("Continuous Integration: %1").arg(QString("Hans Lambermont")).toHtmlEscaped() + "</li>";

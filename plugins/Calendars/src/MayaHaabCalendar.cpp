@@ -28,7 +28,7 @@ const int MayaHaabCalendar::mayanHaabEpoch=MayaLongCountCalendar::mayanEpoch-May
 
 MayaHaabCalendar::MayaHaabCalendar(double jd): Calendar(jd)
 {
-	retranslate();
+	MayaHaabCalendar::retranslate();
 }
 
 QMap<int, QString> MayaHaabCalendar::monthNames;
@@ -89,9 +89,7 @@ QStringList MayaHaabCalendar::getDateStrings() const
 QString MayaHaabCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-	return QString("%1 %2")
-			.arg(str.at(1))
-			.arg(str.at(0));
+	return QString("%1 %2").arg(str.at(1), str.at(0));
 }
 
 // set date from a vector of calendar date elements sorted from the largest to the smallest.
@@ -101,7 +99,7 @@ void MayaHaabCalendar::setDate(QVector<int> parts)
 {
 	this->parts=parts;
 
-	const int rdOnOrBefore=mayanHaabOnOrBefore(parts, fixedFromJD(JD));
+	const int rdOnOrBefore=mayanHaabOnOrBefore(parts, fixedFromJD(JD, true));
 
 	// restore time from JD!
 	double frac=StelUtils::fmodpos(JD+0.5+StelApp::getInstance().getCore()->getUTCOffset(JD)/24., 1.);

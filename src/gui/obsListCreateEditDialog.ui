@@ -82,7 +82,7 @@
          <font/>
         </property>
         <property name="text">
-         <string>Observing Lists creation/edition</string>
+         <string>Observing Lists editor</string>
         </property>
        </widget>
       </item>
@@ -127,13 +127,46 @@
    <item row="1" column="0">
     <widget class="QWidget" name="widget" native="true">
      <layout class="QGridLayout" name="gridLayout">
-      <item row="11" column="0">
+      <item row="6" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayoutLineEdit_2">
+        <item>
+         <widget class="QLabel" name="labelDescription">
+          <property name="text">
+           <string>Description:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>62</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="descriptionLineEdit"/>
+        </item>
+       </layout>
+      </item>
+      <item row="12" column="0">
        <widget class="QFrame" name="frame">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="mouseTracking">
+         <bool>false</bool>
         </property>
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
@@ -143,19 +176,58 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayoutCheckBox">
+          <layout class="QHBoxLayout" name="horizontalLayoutCheckBoxRacDecFov">
            <item>
-            <widget class="QCheckBox" name="obsListDefaultListCheckBox">
+            <widget class="QCheckBox" name="obsListRaCheckBox">
              <property name="toolTip">
-              <string>Set the list as default</string>
+              <string>Add right ascension</string>
              </property>
              <property name="toolTipDuration">
               <number>3</number>
              </property>
              <property name="text">
-              <string>Set list as default</string>
+              <string>Ra</string>
              </property>
             </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="obsListDecCheckBox">
+             <property name="toolTip">
+              <string>Add declination</string>
+             </property>
+             <property name="toolTipDuration">
+              <number>3</number>
+             </property>
+             <property name="text">
+              <string>Dec</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="obsListFovCheckBox">
+             <property name="toolTip">
+              <string>Add field of view</string>
+             </property>
+             <property name="toolTipDuration">
+              <number>3</number>
+             </property>
+             <property name="text">
+              <string>Fov</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </item>
@@ -193,7 +265,7 @@
            <item>
             <widget class="QPushButton" name="obsListExportListButton">
              <property name="toolTip">
-              <string>Create a new observing list</string>
+              <string>Export list</string>
              </property>
              <property name="toolTipDuration">
               <number>3</number>
@@ -206,7 +278,7 @@
            <item>
             <widget class="QPushButton" name="obsListImportListButton">
              <property name="toolTip">
-              <string>Edit the selected list</string>
+              <string>Import list</string>
              </property>
              <property name="toolTipDuration">
               <number>3</number>
@@ -223,7 +295,7 @@
            <item>
             <widget class="QPushButton" name="obsListSaveButton">
              <property name="text">
-              <string>Save and Close </string>
+              <string>Save and close </string>
              </property>
             </widget>
            </item>
@@ -252,6 +324,70 @@
         </layout>
        </widget>
       </item>
+      <item row="8" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="obsListErrorMessage">
+          <property name="styleSheet">
+           <string notr="true">QLabel {color : red;}</string>
+          </property>
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="11" column="0">
+       <widget class="QTreeView" name="obsListCreationEditionTreeView">
+        <property name="toolTipDuration">
+         <number>-1</number>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayoutCheckBoxDefault">
+        <item>
+         <widget class="QCheckBox" name="obsListDefaultListCheckBox">
+          <property name="toolTip">
+           <string>Set the list as default</string>
+          </property>
+          <property name="toolTipDuration">
+           <number>3</number>
+          </property>
+          <property name="text">
+           <string>Set list as default</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="obsListLandscapeCheckBox">
+          <property name="toolTip">
+           <string>Add landscape</string>
+          </property>
+          <property name="toolTipDuration">
+           <number>3</number>
+          </property>
+          <property name="text">
+           <string>Landscape</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
       <item row="5" column="0">
        <layout class="QHBoxLayout" name="horizontalLayoutLineEdit_1">
         <item>
@@ -279,43 +415,6 @@
         </item>
         <item>
          <widget class="QLineEdit" name="nameOfListLineEdit"/>
-        </item>
-       </layout>
-      </item>
-      <item row="10" column="0">
-       <widget class="QTreeView" name="obsListCreationEditionTreeView">
-        <property name="toolTipDuration">
-         <number>-1</number>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayoutLineEdit_2">
-        <item>
-         <widget class="QLabel" name="labelDescription">
-          <property name="text">
-           <string>Description:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>67</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="descriptionLineEdit"/>
         </item>
        </layout>
       </item>

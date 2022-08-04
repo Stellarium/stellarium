@@ -92,16 +92,13 @@ void AngleMeasureDialog::restoreDefaults()
 
 void AngleMeasureDialog::setAboutHtml(void)
 {
-	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Angle Measure Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + ANGLEMEASURE_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + ANGLEMEASURE_PLUGIN_LICENSE + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Matthew Gates</td></tr>";
 	html += "<tr><td rowspan=3><strong>" + q_("Contributors") + ":</strong></td><td>Bogdan Marinov</td></tr>";
-	html += "<tr><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr><td>Alexander Wolf</td></tr>";
 	html += "<tr><td>Georg Zotti</td></tr>";
 	html += "</table>";
 

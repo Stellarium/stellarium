@@ -168,7 +168,7 @@ void Pulsars::init()
 
 		// key bindings and other actions
 		addAction("actionShow_Pulsars", N_("Pulsars"), N_("Show pulsars"), "pulsarsVisible", "Ctrl+Alt+P");
-		addAction("actionShow_Pulsars_ConfigDialog", N_("Pulsars"), N_("Pulsars configuration window"), configDialog, "visible", ""); // Allow assign shortkey
+		addAction("actionShow_Pulsars_dialog", N_("Pulsars"), N_("Show settings dialog"), configDialog, "visible", ""); // Allow assign shortkey
 
 		GlowIcon = new QPixmap(":/graphicGui/miscGlow32x32.png");
 		OnIcon = new QPixmap(":/Pulsars/btPulsars-on.png");
@@ -184,7 +184,7 @@ void Pulsars::init()
 	}
 
 	// If the json file does not already exist, create it from the resource in the Qt resource
-	if(QFileInfo(jsonCatalogPath).exists())
+	if(QFileInfo::exists(jsonCatalogPath))
 	{
 		if (!checkJsonFileFormat() || getJsonFileFormatVersion()<CATALOG_FORMAT_VERSION)
 		{
@@ -217,7 +217,7 @@ void Pulsars::init()
 }
 
 /*
- Draw our module. This should print name of first PSR in the main window
+ Draw our module.
 */
 void Pulsars::draw(StelCore* core)
 {
@@ -248,13 +248,12 @@ void Pulsars::drawPointer(StelCore* core, StelPainter& painter)
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		Vec3d screenpos;
+		Vec3f screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!painter.getProjector()->project(pos, screenpos))
+		if (!painter.getProjector()->project(pos.toVec3f(), screenpos))
 			return;
 
-		const Vec3f& c(obj->getInfoColor());
-		painter.setColor(c[0],c[1],c[2]);
+		painter.setColor(obj->getInfoColor());
 		texPointer->bind();
 		painter.setBlending(true);
 		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
@@ -386,7 +385,7 @@ QStringList Pulsars::listAllObjects(bool inEnglish) const
 */
 void Pulsars::restoreDefaultJsonFile(void)
 {
-	if (QFileInfo(jsonCatalogPath).exists())
+	if (QFileInfo::exists(jsonCatalogPath))
 		backupJsonFile(true);
 
 	QFile src(":/Pulsars/pulsars.json");
@@ -423,7 +422,7 @@ bool Pulsars::backupJsonFile(bool deleteOriginal)
 	}
 
 	QString backupPath = jsonCatalogPath + ".old";
-	if (QFileInfo(backupPath).exists())
+	if (QFileInfo::exists(backupPath))
 		QFile(backupPath).remove();
 
 	if (old.copy(backupPath))
@@ -489,8 +488,8 @@ void Pulsars::setPSRMap(const QVariantMap& map)
 {
 	psr.clear();
 	PsrCount = 0;
-	QVariantMap psrMap = map.value("pulsars").toMap();
-	for (auto psrKey : psrMap.keys())
+	const QVariantMap psrMap = map.value("pulsars").toMap();
+	for (auto &psrKey : psrMap.keys())
 	{
 		QVariantMap psrData = psrMap.value(psrKey).toMap();
 		psrData["designation"] = psrKey;
@@ -699,7 +698,7 @@ void Pulsars::startDownload(QString urlString)
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
 	updateState = Pulsars::Updating;
-	emit(updateStateChanged(updateState));
+	emit updateStateChanged(updateState);
 }
 
 void Pulsars::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
@@ -715,8 +714,8 @@ void Pulsars::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = static_cast<qint64>(std::floor(bytesReceived / 1024.));
-			bytesTotal    = static_cast<qint64>(std::floor(bytesTotal / 1024.));
+			bytesReceived = static_cast<qint64>(std::floor(static_cast<double>(bytesReceived) / 1024.));
+			bytesTotal    = static_cast<qint64>(std::floor(static_cast<double>(bytesTotal) / 1024.));
 		}
 		currentValue = static_cast<int>(bytesReceived);
 		endValue = static_cast<int>(bytesTotal);
@@ -771,8 +770,8 @@ void Pulsars::downloadComplete(QNetworkReply *reply)
 		updateState = Pulsars::DownloadError;
 	}
 
-	emit(updateStateChanged(updateState));
-	emit(jsonUpdateComplete());
+	emit updateStateChanged(updateState);
+	emit jsonUpdateComplete();
 
 	reply->deleteLater();
 	downloadReply = Q_NULLPTR;
@@ -807,7 +806,7 @@ void Pulsars::setFlagShowPulsarsButton(bool b)
 		if (b==true) {
 			if (toolbarButton==Q_NULLPTR) {
 				// Create the pulsars button
-				toolbarButton = new StelButton(Q_NULLPTR, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Pulsars");
+				toolbarButton = new StelButton(Q_NULLPTR, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Pulsars", false, "actionShow_Pulsars_dialog");
 			}
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		} else {
@@ -897,7 +896,8 @@ void Pulsars::reloadCatalog(void)
 	if (hasSelection)
 	{
 		// Restore selection...
-		objMgr->setSelectedObject(selectedObject);
+		StelObjectP obj = selectedObject[0];
+		objMgr->findAndSelect(obj->getEnglishName(), obj->getType());
 	}
 }
 

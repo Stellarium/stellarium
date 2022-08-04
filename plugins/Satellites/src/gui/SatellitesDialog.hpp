@@ -37,6 +37,8 @@ class QStandardItemModel;
 class QTimer;
 
 class SatellitesImportDialog;
+class SatellitesFilterDialog;
+class SatellitesCommDialog;
 class SatellitesListFilterModel;
 
 //! Main configuration window of the %Satellites plugin.
@@ -61,14 +63,14 @@ public:
 #endif
 
 	SatellitesDialog();
-	~SatellitesDialog();
+	~SatellitesDialog() Q_DECL_OVERRIDE;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	void createDialogContent();
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 
 private slots:
 	void jumpToSourcesTab();
@@ -84,9 +86,13 @@ private slots:
 	//! multiple items.)
 	void updateSatelliteData();
 	void updateSatelliteAndSaveData();
+	void updateFilteredSatellitesList();
+	void selectFilteredSatellitesList();
 	void saveSatellites(void);
 	void showUpdateState(Satellites::UpdateState state);
 	void showUpdateCompleted(int updated, int total, int added, int missing);
+	void handleOrbitLinesGroup(bool state);
+	void handleUmbraGroup(bool state);
 	
 	//! @name Sources Tab 
 	//@{
@@ -102,6 +108,7 @@ private slots:
 	//@}
 	
 	void restoreDefaults(void);
+	void restoreTleSources(void);
 	void saveSettings(void);
 	void addSatellites(const TleDataList& newSatellites);
 	void removeSatellites();
@@ -131,6 +138,8 @@ private slots:
 
 	void setRightSideToROMode();
 	void setRightSideToRWMode();
+
+	void enableMinMaxAltitude(bool state);
 
 private:
 	//! @todo find out if this is really necessary... --BM
@@ -168,6 +177,8 @@ private:
 	QTimer* updateTimer;
 	
 	SatellitesImportDialog* importWindow;
+	SatellitesFilterDialog* filterWindow;
+	SatellitesCommDialog* commWindow;
 	
 	SatellitesListFilterModel* filterModel;
 	

@@ -31,8 +31,65 @@
 #include <QCache>
 
 class Atmosphere;
-class Cardinals;
 class QSettings;
+
+
+//! @class Cardinals manages the display of cardinal points
+class Cardinals
+{
+    Q_GADGET
+public:
+    enum CompassDirection
+    {
+	// Cardinals (4-wind compass rose)
+	dN	=  1,	// north
+	dS	=  2,	// south
+	dE	=  3,	// east
+	dW	=  4,	// west
+	// Intercardinals (or ordinals) (8-wind compass rose)
+	dNE	=  5,	// northeast
+	dSE	=  6,	// southeast
+	dNW	=  7,	// northwest
+	dSW	=  8,	// southwest
+	// Secondary Intercardinals (16-wind compass rose)
+	dNNE	=  9,	// north-northeast
+	dENE	= 10,	// east-northeast
+	dESE	= 11,	// east-southeast
+	dSSE	= 12,	// south-southeast
+	dSSW	= 13,	// south-southwest
+	dWSW	= 14,	// west-southwest
+	dWNW	= 15,	// west-northwest
+	dNNW	= 16	// north-northwest
+    };
+    Q_ENUM(CompassDirection)
+
+    Cardinals();
+    virtual ~Cardinals();
+    void draw(const StelCore* core, double latitude) const;
+    void setColor(const Vec3f& c) {color = c;}
+    Vec3f getColor() const {return color;}
+    void updateI18n();
+    void update(double deltaTime);
+    void setFadeDuration(float duration);
+    void setFlagShowCardinals(bool b) { fader4WCR = b; }
+    bool getFlagShowCardinals() const { return fader4WCR; }
+
+    void setFlagShow4WCRLabels(bool b) { fader4WCR = b; }
+    bool getFlagShow4WCRLabels() const { return fader4WCR; }
+    void setFlagShow8WCRLabels(bool b) { fader8WCR = b; }
+    bool getFlagShow8WCRLabels() const { return fader8WCR; }
+    void setFlagShow16WCRLabels(bool b) { fader16WCR = b; }
+    bool getFlagShow16WCRLabels() const { return fader16WCR; }
+private:
+    class StelPropertyMgr* propMgr;
+    QFont font4WCR, font8WCR, font16WCR;
+    Vec3f color;
+    static constexpr float cp = static_cast<float>(1./(1.+M_SQRT2)); // dimension for secondary intercardinals
+    static const QMap<Cardinals::CompassDirection, Vec3f> rose4winds, rose8winds, rose16winds;
+    QMap<Cardinals::CompassDirection, QString> labels;
+    LinearFader fader4WCR, fader8WCR, fader16WCR;
+    int screenFontSize;
+};
 
 //! @class LandscapeMgr
 //! Manages all the rendering at the level of the observer's surroundings.
@@ -56,22 +113,26 @@ class LandscapeMgr : public StelModule
 		   READ getFlagAtmosphere
 		   WRITE setFlagAtmosphere
 		   NOTIFY atmosphereDisplayedChanged)
-	Q_PROPERTY(bool cardinalsPointsDisplayed
-		   READ getFlagCardinalsPoints
-		   WRITE setFlagCardinalsPoints
-		   NOTIFY cardinalsPointsDisplayedChanged)
-	Q_PROPERTY(bool ordinalsPointsDisplayed
-		   READ getFlagOrdinalsPoints
-		   WRITE setFlagOrdinalsPoints
-		   NOTIFY ordinalsPointsDisplayedChanged)
-	Q_PROPERTY(bool ordinals16WRPointsDisplayed
-		   READ getFlagOrdinals16WRPoints
-		   WRITE setFlagOrdinals16WRPoints
-		   NOTIFY ordinals16WRPointsDisplayedChanged)
-	Q_PROPERTY(Vec3f cardinalsPointsColor
+	Q_PROPERTY(bool atmosphereNoScatter
+		   READ getFlagAtmosphereNoScatter
+		   WRITE setFlagAtmosphereNoScatter
+		   NOTIFY atmosphereNoScatterChanged)
+	Q_PROPERTY(bool cardinalPointsDisplayed
+		   READ getFlagCardinalPoints
+		   WRITE setFlagCardinalPoints
+		   NOTIFY cardinalPointsDisplayedChanged)
+	Q_PROPERTY(bool ordinalPointsDisplayed
+		   READ getFlagOrdinalPoints
+		   WRITE setFlagOrdinalPoints
+		   NOTIFY ordinalPointsDisplayedChanged)
+	Q_PROPERTY(bool ordinal16WRPointsDisplayed
+		   READ getFlagOrdinal16WRPoints
+		   WRITE setFlagOrdinal16WRPoints
+		   NOTIFY ordinal16WRPointsDisplayedChanged)
+	Q_PROPERTY(Vec3f cardinalPointsColor
 		   READ getColorCardinalPoints
 		   WRITE setColorCardinalPoints
-		   NOTIFY cardinalsPointsColorChanged)
+		   NOTIFY cardinalPointsColorChanged)
 	Q_PROPERTY(bool fogDisplayed
 		   READ getFlagFog
 		   WRITE setFlagFog
@@ -144,7 +205,7 @@ class LandscapeMgr : public StelModule
 
 public:
 	LandscapeMgr();
-	virtual ~LandscapeMgr();
+	virtual ~LandscapeMgr() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -152,10 +213,10 @@ public:
 	//! Operations performed:
 	//! - Load the default landscape as specified in the application configuration
 	//! - Set up landscape-related display flags from ini parser object
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 
 	//! Draw the atmosphere, landscape graphics, and cardinal points.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 	//! Draw landscape graphics and cardinal points. This only will redraw a polygonal line (if defined), the gazetteer and the Cardinal points.
 	//! This can be called outside the usual call order, if any foreground has to be overdrawn, e.g. 3D sceneries.
 	void drawPolylineOnly(StelCore* core);
@@ -167,10 +228,10 @@ public:
 	//!   and moon.
 	//! - updates adaptation luminescence based on visible bright objects.
 	//! - Landscape and lightscape brightness computations based on sun position and whether atmosphere is on or off.
-	virtual void update(double deltaTime);
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
 
 	//! Get the order in which this module will draw its objects relative to other modules.
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to the landscape manager
@@ -347,19 +408,19 @@ public slots:
 	bool getFlagUseLightPollutionFromDatabase() const;
 
 	//! Get flag for displaying cardinal points (4-wind compass rose directions)
-	bool getFlagCardinalsPoints() const;
+	bool getFlagCardinalPoints() const;
 	//! Set flag for displaying cardinal points (4-wind compass rose directions)
-	void setFlagCardinalsPoints(const bool displayed);
+	void setFlagCardinalPoints(const bool displayed);
 
 	//! Get flag for displaying intercardinal (or ordinal) points (8-wind compass rose directions).
-	bool getFlagOrdinalsPoints() const;
+	bool getFlagOrdinalPoints() const;
 	//! Set flag for displaying intercardinal (or ordinal) points (8-wind compass rose directions).
-	void setFlagOrdinalsPoints(const bool displayed);
+	void setFlagOrdinalPoints(const bool displayed);
 
 	//! Get flag for displaying intercardinal (or ordinal) points (16-wind compass rose directions).
-	bool getFlagOrdinals16WRPoints() const;
+	bool getFlagOrdinal16WRPoints() const;
 	//! Set flag for displaying intercardinal (or ordinal) points (16-wind compass rose directions).
-	void setFlagOrdinals16WRPoints(const bool displayed);
+	void setFlagOrdinal16WRPoints(const bool displayed);
 
 	//! Get Cardinals Points color.
 	Vec3f getColorCardinalPoints() const;
@@ -370,6 +431,11 @@ public slots:
 	bool getFlagAtmosphere() const;
 	//! Set flag for displaying Atmosphere.
 	void setFlagAtmosphere(const bool displayed);
+
+	//! Get flag for suppressing Atmosphere scatter (blue light) while displaying all other effects (refraction, extinction).
+	bool getFlagAtmosphereNoScatter() const;
+	//! Set flag for suppressing Atmosphere scatter (blue light) while displaying all other effects (refraction, extinction).
+	void setFlagAtmosphereNoScatter(const bool displayed);
 
 	//! Get current display intensity of atmosphere ([0..1], for smoother transitions)
 	float getAtmosphereFadeIntensity() const;
@@ -493,10 +559,11 @@ public slots:
 
 signals:
 	void atmosphereDisplayedChanged(const bool displayed);
-	void cardinalsPointsDisplayedChanged(const bool displayed);
-	void ordinalsPointsDisplayedChanged(const bool displayed);
-	void ordinals16WRPointsDisplayedChanged(const bool displayed);
-	void cardinalsPointsColorChanged(const Vec3f & newColor) const;
+	void atmosphereNoScatterChanged(const bool noScatter);
+	void cardinalPointsDisplayedChanged(const bool displayed);
+	void ordinalPointsDisplayedChanged(const bool displayed);
+	void ordinal16WRPointsDisplayedChanged(const bool displayed);
+	void cardinalPointsColorChanged(const Vec3f & newColor) const;
 	void fogDisplayedChanged(const bool displayed);
 	void landscapeDisplayedChanged(const bool displayed);
 	void illuminationDisplayedChanged(const bool displayed);
@@ -546,10 +613,6 @@ signals:
 	void currentLandscapeChanged(QString currentLandscapeID,QString currentLandscapeName);
 
 private slots:
-	//! Set the light pollution following the Bortle Scale.
-	//! This should not be called from script code, use StelMainScriptAPI::setBortleScaleIndex if you want to change the light pollution.
-	void setAtmosphereBortleLightPollution(const int bIndex);
-
 	//! Reacts to StelCore::locationChanged.
 	void onLocationChanged(const StelLocation &loc);
 	void onTargetLocationChanged(const StelLocation &loc);
@@ -562,11 +625,10 @@ private slots:
 	void cyclicChangeLightPollution();
 
 private:
-	//! Get light pollution luminance level.
+	//! Get light pollution luminance level in cd/m².
 	float getAtmosphereLightPollutionLuminance() const;
-	//! Set light pollution luminance level.
+	//! Set light pollution luminance level in cd/m².
 	void setAtmosphereLightPollutionLuminance(const float f);
-
 
 	//! For a given landscape name, return the landscape ID.
 	//! This takes a name of the landscape, as described in the landscape:name item in the
@@ -580,7 +642,7 @@ private:
 	static QString getLandscapePath(const QString landscapeID);
 
 	Atmosphere* atmosphere;			// Atmosphere
-	Cardinals* cardinalsPoints;		// Cardinals points
+	Cardinals* cardinalPoints;		// Cardinals points
 	Landscape* landscape;			// The landscape i.e. the fog, the ground and "decor"
 	Landscape* oldLandscape;		// Used only during transitions to newly loaded landscape.
 
@@ -590,6 +652,7 @@ private:
 	bool flagLandscapeAutoSelection;
 
 	bool flagLightPollutionFromDatabase;
+	bool atmosphereNoScatter; // true to suppress actual blue-sky rendering but keep refraction & extinction
 
 	//! control drawing of a Polygonal line, if one is defined.
 	bool flagPolyLineDisplayedOnly;

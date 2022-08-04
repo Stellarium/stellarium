@@ -17,13 +17,15 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>Stel</string>
 	<key>CFBundleVersion</key>
 	<string>@PACKAGE_VERSION@</string>
 	<key>CFBundleShortVersionString</key>
 	<string>@PACKAGE_VERSION@</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>@PACKAGE_OSX_TARGET@</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>@STELLARIUM_COPYRIGHT@</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSHighResolutionCapable</key>

@@ -19,8 +19,8 @@
 #include "SatellitesListFilterModel.hpp"
 
 SatellitesListFilterModel::SatellitesListFilterModel(QObject *parent) :
-    QSortFilterProxyModel(parent),
-    filterFlag(SatNoFlags)
+	QSortFilterProxyModel(parent),
+	filterFlag(SatNoFlags)
 {
 }
 
@@ -73,6 +73,18 @@ bool SatellitesListFilterModel::filterAcceptsRow(int source_row, const QModelInd
 	data = index.data(Qt::UserRole);
 	QString id = data.toString();
 	if (id.contains(filterRegExp()))
+		return true;
+
+	// search international designator
+	data = index.data(SatCosparIDRole);
+	id = data.toString();
+	if (id.contains(filterRegExp()))
+		return true;
+
+	// search descriptions
+	data = index.data(SatDescriptionRole);
+	QString descr = data.toString();
+	if (descr.contains(filterRegExp()))
 		return true;
 	
 	// TODO: Possible check for "NORAD NNNN".

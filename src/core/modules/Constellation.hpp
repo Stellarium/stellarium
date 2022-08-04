@@ -23,6 +23,7 @@
 #define CONSTELLATION_HPP
 
 #include "StelObject.hpp"
+#include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
@@ -53,7 +54,7 @@ class Constellation : public StelObject
 private:
 	static const QString CONSTELLATION_TYPE;
 	Constellation();
-	~Constellation();
+	~Constellation() Q_DECL_OVERRIDE;
 
 	// StelObject method to override
 	//! Get a string with data about the Constellation.
@@ -62,17 +63,16 @@ private:
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString a description of the constellation.
-	virtual QString getInfoString(const StelCore*, const InfoStringGroup& flags) const;
+	virtual QString getInfoString(const StelCore*, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 
 	//! Get the module/object type string.
 	//! @return "Constellation"
-	virtual QString getType() const {return CONSTELLATION_TYPE;}
-	virtual QString getID() const { return abbreviation; }
+	virtual QString getType() const Q_DECL_OVERRIDE {return CONSTELLATION_TYPE;}
+	virtual QString getObjectType() const Q_DECL_OVERRIDE { return N_("constellation"); }
+	virtual QString getID() const Q_DECL_OVERRIDE { return abbreviation; }
 
 	//! observer centered J2000 coordinates.
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const {return XYZname;}
-
-	virtual double getAngularSize(const StelCore*) const {Q_ASSERT(0); return 0.;} // TODO
+	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const Q_DECL_OVERRIDE {return XYZname;}
 
 	//! @param record string containing the following whitespace
 	//! separated fields: abbreviation - a three character abbreviation
@@ -87,8 +87,8 @@ private:
 	void drawName(StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const;
 	//! Draw the constellation art
 	void drawArt(StelPainter& sPainter) const;
-	//! Draw the constellation boundary
-	void drawBoundaryOptim(StelPainter& sPainter) const;
+	//! Draw the constellation boundary. obsVelocity used for aberration
+	void drawBoundaryOptim(StelPainter& sPainter, const Vec3d &obsVelocity) const;
 
 	//! Test if a star is part of a Constellation.
 	//! This member tests to see if a star is one of those which make up
@@ -104,17 +104,17 @@ private:
 	StelObjectP getBrightestStarInConstellation(void) const;
 
 	//! Get the translated name for the Constellation.
-	QString getNameI18n() const {return nameI18;}
+	QString getNameI18n() const Q_DECL_OVERRIDE {return nameI18;}
 	//! Get the English name for the Constellation.
-	QString getEnglishName() const {return englishName;}
+	QString getEnglishName() const Q_DECL_OVERRIDE {return englishName;}
 	//! Get the short name for the Constellation (returns the abbreviation).
 	QString getShortName() const {return abbreviation;}
 	//! Draw the lines for the Constellation.
 	//! This method uses the coords of the stars (optimized for use through
 	//! the class ConstellationMgr only).
 	void drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const;
-	//! Draw the art texture, optimized function to be called through a constellation manager only.
-	void drawArtOptim(StelPainter& sPainter, const SphericalRegion& region) const;
+	//! Draw the art texture, optimized function to be called through a constellation manager only.  obsVelocity used for aberration
+	void drawArtOptim(StelPainter& sPainter, const SphericalRegion& region, const Vec3d& obsVelocity) const;
 	//! Update fade levels according to time since various events.
 	void update(int deltaTime);
 	//! Turn on and off Constellation line rendering.

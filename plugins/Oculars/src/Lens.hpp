@@ -37,7 +37,7 @@ class Lens : public QObject
 public:
 	Lens();
 	Q_INVOKABLE Lens(const QObject& other);
-	virtual ~Lens();
+	virtual ~Lens() Q_DECL_OVERRIDE;
 	static Lens* lensFromSettings(QSettings* theSettings, int lensIndex);
 	void writeToSettings(QSettings * settings, const int index);
 	static Lens* lensModel();

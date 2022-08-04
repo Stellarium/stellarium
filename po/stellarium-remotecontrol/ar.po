@@ -4,17 +4,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# cardinot <mcardinot@gmail.com>, 2017
-# Khalid AlAjaji, 2020
+# Khalid AlAjaji, 2021
+# cardinot <mcardinot@gmail.com>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-06-15 22:33+0700\n"
+"POT-Creation-Date: 2022-06-03 20:38+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
-"Last-Translator: Khalid AlAjaji, 2020\n"
+"Last-Translator: cardinot <mcardinot@gmail.com>, 2022\n"
 "Language-Team: Arabic (https://www.transifex.com/stellarium/teams/80998/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -259,10 +259,6 @@ msgstr "انظر باتجاه الأفق على السمت"
 msgid "Vertical View offset"
 msgstr "مقدار موازنة المنظر الأفقي"
 
-#: index.html:154 tablet7in.html:133
-msgid "Reset"
-msgstr "أعد للوضع الأصلي"
-
 #: index.html:160 tablet7in.html:138
 msgid "FOV"
 msgstr "حقل الرؤية"
@@ -319,6 +315,10 @@ msgstr "المسح السماوي الرقمي"
 msgid "HiPS Survey"
 msgstr "المسح السماوي الهرمي المتدرج Hips"
 
+#: index.html:286 tablet7in.html:350
+msgid "Show planet markers"
+msgstr "أظهر علامات الكواكب"
+
 #: index.html:287 tablet7in.html:351
 msgid "Show planet orbits"
 msgstr "أظهر مدارات الكوكب"
@@ -338,6 +338,18 @@ msgstr "أظهر مسار الكوكب"
 #: index.html:291 tablet7in.html:355
 msgid "Show trail only for selected planet"
 msgstr "أظهر المسار للكوكب المختار فقط"
+
+#: index.html:294 tablet7in.html:359
+msgid "Scale Moon:"
+msgstr "كبِّر الحجم الظاهري للقمر"
+
+#: index.html:295 tablet7in.html:363
+msgid "Scale minor bodies:"
+msgstr "تضخيم حجم الأجرام الصغيرة"
+
+#: index.html:318 tablet7in.html:404
+msgid "Extinction Coefficient:"
+msgstr "معامل الانطفاء"
 
 #: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"
@@ -405,7 +417,7 @@ msgstr "الأسماء والعلامات"
 
 #: index.html:573 tablet7in.html:652
 msgid "Use associated planet and position"
-msgstr ""
+msgstr "استعمل الكوكب والموقع المتعلقين"
 
 #: index.html:582 tablet7in.html:661
 msgid "Show illumination"
@@ -649,7 +661,7 @@ msgstr "الحوت"
 
 #: tablet7in.html:507
 msgid "Compass Marks"
-msgstr ""
+msgstr "علامات البوصلة"
 
 #: tablet7in.html:742
 msgid "Favorites"

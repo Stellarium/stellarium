@@ -4,17 +4,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# cardinot <mcardinot@gmail.com>, 2017
-# 03bfdb1e3bdfa21b80c8160ea93f1c67_2436d66, 2020
+# cardinot <mcardinot@gmail.com>, 2022
+# 03bfdb1e3bdfa21b80c8160ea93f1c67_2436d66, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-06-15 22:33+0700\n"
+"POT-Creation-Date: 2022-06-03 20:38+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
-"Last-Translator: 03bfdb1e3bdfa21b80c8160ea93f1c67_2436d66, 2020\n"
+"Last-Translator: 03bfdb1e3bdfa21b80c8160ea93f1c67_2436d66, 2022\n"
 "Language-Team: Turkish (https://www.transifex.com/stellarium/teams/80998/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -259,10 +259,6 @@ msgstr "Azimut'ta ufka doğru bakış"
 msgid "Vertical View offset"
 msgstr "Dikey Görünüm dengesi"
 
-#: index.html:154 tablet7in.html:133
-msgid "Reset"
-msgstr "Sıfırla"
-
 #: index.html:160 tablet7in.html:138
 msgid "FOV"
 msgstr "Görüş Alanı"
@@ -319,6 +315,10 @@ msgstr "Dijitalleştirilmiş Gökyüzü Araştırması"
 msgid "HiPS Survey"
 msgstr "HiPS incelemesi"
 
+#: index.html:286 tablet7in.html:350
+msgid "Show planet markers"
+msgstr "Gezegen işaretleyicilerini göster"
+
 #: index.html:287 tablet7in.html:351
 msgid "Show planet orbits"
 msgstr "Gezegen yörüngelerini göster"
@@ -338,6 +338,18 @@ msgstr "Gezegen yollarını göster"
 #: index.html:291 tablet7in.html:355
 msgid "Show trail only for selected planet"
 msgstr "İzi(yolu) yalnızca seçilen gezegen için göster"
+
+#: index.html:294 tablet7in.html:359
+msgid "Scale Moon:"
+msgstr "Ay skalası(ölçeği):"
+
+#: index.html:295 tablet7in.html:363
+msgid "Scale minor bodies:"
+msgstr "Küçük cisimlerin skalası(ölçeği):"
+
+#: index.html:318 tablet7in.html:404
+msgid "Extinction Coefficient:"
+msgstr "Sönüm Katsayısı:"
 
 #: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"
@@ -651,7 +663,7 @@ msgstr "Balık"
 
 #: tablet7in.html:507
 msgid "Compass Marks"
-msgstr ""
+msgstr "Pusula İşaretleri"
 
 #: tablet7in.html:742
 msgid "Favorites"

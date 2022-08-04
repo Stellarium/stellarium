@@ -27,7 +27,11 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
+#include <QRegularExpression>
+#else
 #include <QRegExp>
+#endif
 
 LocationSearchService::LocationSearchService(QObject *parent)
 	: AbstractAPIService(parent), locMgr(LocationList())
@@ -69,14 +73,16 @@ void LocationSearchService::get(const QByteArray& operation, const APIParameters
 		const QList<QString>& list = allItems.keys();
 
 		//use a regexp in wildcard mode, the app does the same
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
+		QRegularExpression exp(QRegularExpression::wildcardToRegularExpression(term), QRegularExpression::CaseInsensitiveOption);
+#else
 		QRegExp exp(term,Qt::CaseInsensitive, QRegExp::Wildcard);
-
+#endif
 		for(const auto& str : list)
 		{
 			if (str.contains(exp))
 				results.append(str);
 		}
-
 		response.writeJSON(QJsonDocument(results));
 	}
 	else if(operation=="nearby")

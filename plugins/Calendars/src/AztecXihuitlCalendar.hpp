@@ -53,7 +53,6 @@ public slots:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-public:
 	//! find number in sequence from a xihuitl date of {month[1...19], day[1...20]}
 	inline static int aztecXihuitlOrdinal(QVector<int> xihuitl) {return (xihuitl.at(0)-1)*20+xihuitl.at(1)-1;}
 
@@ -66,10 +65,10 @@ public:
 	//! get RD of a combined date on or before rd. They repeat every 18980 days.
 	static int aztecXihuitlTonalpohualliOnOrBefore(QVector<int>xihuitl, QVector<int>tonalpohualli, int rd);
 
+public:
 	//! Aztec date of fall of Tenochtitlan
 	static const int aztecCorrelation;
 	static const int aztecXihuitlCorrelation;
-
 
 private:
 	static QMap<int, QString> monthNames;

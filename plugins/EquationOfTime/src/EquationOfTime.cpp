@@ -92,7 +92,8 @@ void EquationOfTime::init()
 	// populate settings from main config file.
 	readSettingsFromConfig();
 
-	addAction("actionShow_EquationOfTime", N_("Equation of Time"), N_("Show solution for Equation of Time"), "showEOT", "Ctrl+Alt+T");
+	addAction("actionShow_EquationOfTime",        N_("Equation of Time"), N_("Show solution for Equation of Time"), "showEOT", "Ctrl+Alt+T");
+	addAction("actionShow_EquationOfTime_dialog", N_("Equation of Time"), N_("Show settings dialog"), mainWindow, "visible");
 
 	enableEquationOfTime(getFlagEnableAtStartup());
 	setFlagShowEOTButton(flagShowEOTButton);
@@ -120,12 +121,12 @@ void EquationOfTime::draw(StelCore *core)
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	float ppx = static_cast<float>(params.devicePixelsPerPixel);
 
-	sPainter.setColor(textColor[0], textColor[1], textColor[2], 1.f);
+	sPainter.setColor(textColor, 1.f);
 	font.setPixelSize(getFontSize());
 	sPainter.setFont(font);
 
 	QString timeText;
-	double eqTime = core->getSolutionEquationOfTime(core->getJDE());
+	double eqTime = core->getSolutionEquationOfTime();
 
 	if (getFlagInvertedValue())
 		eqTime *= -1;
@@ -235,7 +236,9 @@ void EquationOfTime::setFlagShowEOTButton(bool b)
 						       QPixmap(":/EquationOfTime/bt_EquationOfTime_On.png"),
 						       QPixmap(":/EquationOfTime/bt_EquationOfTime_Off.png"),
 						       QPixmap(":/graphicGui/miscGlow32x32.png"),
-						       "actionShow_EquationOfTime");
+						       "actionShow_EquationOfTime",
+						       false,
+						       "actionShow_EquationOfTime_dialog");
 		}
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} else {

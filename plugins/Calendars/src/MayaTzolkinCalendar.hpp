@@ -48,7 +48,6 @@ public slots:
 	//! dayNumber[1..13]-name
 	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
 
-public:
 	//! usually internal, but used by MayaHaabCalendar.
 	static QVector<int> mayanTzolkinFromFixed(int rd);
 
@@ -57,10 +56,11 @@ public:
 
 	// ordinal of {number, name}
 	inline static int mayanTzolkinOrdinal(QVector<int> tzolkin) {return StelUtils::imod((tzolkin.at(0) - 1 + 39*(tzolkin.at(0)-tzolkin.at(1))), 260);}
-	static const int mayanTzolkinEpoch;
 
-private:
 	static int mayanTzolkinOnOrBefore(QVector<int> tzolkin, int rd);
+public:
+	static const int mayanTzolkinEpoch;
+private:
 	static QMap<int, QString> tzolkinNames;
 };
 

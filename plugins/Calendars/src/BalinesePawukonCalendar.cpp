@@ -48,7 +48,7 @@ void BalinesePawukonCalendar::setDate(QVector<int> parts)
 	//const double dayFraction=JD+0.5 -std::floor(JD);
 
 	this->parts=parts;
-	int fixedFromBP=baliOnOrBefore(parts, fixedFromJD(JD));
+	int fixedFromBP=baliOnOrBefore(parts, fixedFromJD(JD, true));
 
 	// restore time from JD!
 	double frac=StelUtils::fmodpos(JD+0.5+StelApp::getInstance().getCore()->getUTCOffset(JD)/24., 1.);
@@ -81,7 +81,7 @@ QString BalinesePawukonCalendar::getFormattedDateString() const
 	QString str;
 	for (int i=1; i<=10; i++)
 	{
-		str.append(QString("%1:%2 (%3) ").arg(QString::number(i)).arg(QString::number(parts.at(i-1))).arg(dateStrings.at(i-1)));
+		str.append(QString("%1:%2 (%3) ").arg(QString::number(i), QString::number(parts.at(i-1)), dateStrings.at(i-1)));
 	}
 	return str;
 }
@@ -95,7 +95,7 @@ QString BalinesePawukonCalendar::getFormattedDateString1to5() const
 	if (str.length()>0) str.append(" ");
 	for (int i=2; i<=5; i++)
 	{
-		str.append(QString("%1:%2 (%3) ").arg(QString::number(i)).arg(QString::number(parts.at(i-1))).arg(dateStrings.at(i-1)));
+		str.append(QString("%1:%2 (%3) ").arg(QString::number(i), QString::number(parts.at(i-1)), dateStrings.at(i-1)));
 	}
 	return str;
 }
@@ -107,7 +107,7 @@ QString BalinesePawukonCalendar::getFormattedDateString6to10() const
 	QString str;
 	for (int i=6; i<=10; i++)
 	{
-		str.append(QString("%1:%2 (%3) ").arg(QString::number(i)).arg(QString::number(parts.at(i-1))).arg(dateStrings.at(i-1)));
+		str.append(QString("%1:%2 (%3) ").arg(QString::number(i), QString::number(parts.at(i-1)), dateStrings.at(i-1)));
 	}
 	return str;
 }
@@ -195,9 +195,9 @@ int BalinesePawukonCalendar::baliCaturwaraFromFixed(const int rd)
 
 int BalinesePawukonCalendar::baliOnOrBefore(const QVector<int>baliDate, const int rd)
 {
-	const int a5=baliDate.at(4)-1;
-	const int a6=baliDate.at(5)-1;
-	const int b7=baliDate.at(6)-1;
+	const int a5=baliDate.value(4)-1;
+	const int a6=baliDate.value(5)-1;
+	const int b7=baliDate.value(6)-1;
 	const int b35=StelUtils::imod(a5+14+15*(b7-a5), 35);
 	const int days=a6+36*(b35-a6);
 	static const int Delta=baliDayFromFixed(0);

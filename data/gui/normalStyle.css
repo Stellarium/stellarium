@@ -27,6 +27,11 @@ QFrame {
 	border: none;
 }
 
+QFrame[frameShape="4"],   /* QFrame::HLine == 0x0004 */
+QFrame[frameShape="5"] { /* QFrame::VLine == 0x0005 */
+        border: 1px solid rgb(31, 31, 31);
+}
+
 QToolTip {
 	color: rgb(4, 5, 9);
 	font-size: 100%;
@@ -39,6 +44,12 @@ QToolTip {
 	font-size: 100%;
 	padding: 2px;
 	background: rgb(101, 0, 0);
+}
+
+QSizeGrip {
+	width: 8px;
+	height: 8px;
+	background: rgb(101, 101, 101);
 }
 
 QTextEdit,
@@ -651,7 +662,7 @@ QScrollBar:vertical {
 	border: 0 solid rgb(116, 116, 116);
 	background: rgb(50, 50, 51);
 	width: 16px;
-	margin: 20px 0 20px 0;
+	margin: 20px 0;
 }
 
 QScrollBar::handle:vertical {
@@ -705,7 +716,7 @@ QScrollBar:horizontal {
 	border: 0 solid rgb(116, 116, 116);
 	background: rgb(50, 50, 51);
 	height: 16px;
-	margin: 0 20px 0 20px;
+	margin: 0 20px;
 }
 
 QScrollBar::handle:horizontal {

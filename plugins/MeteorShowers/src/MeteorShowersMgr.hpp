@@ -28,7 +28,7 @@
 #include "StelObjectModule.hpp"
 #include "StelLocationMgr.hpp"
 
-#define MS_CATALOG_VERSION 1
+#define MS_CATALOG_VERSION 2
 #define MS_CONFIG_PREFIX QString("MeteorShowers")
 
 class MeteorShowers;
@@ -59,19 +59,21 @@ class MeteorShowersMgr : public StelModule
 	Q_PROPERTY(bool enableLabels READ getEnableLabels WRITE setEnableLabels NOTIFY enableLabelsChanged)
 
 public:
-	//! @enum DownloadStatus
-	enum DownloadStatus {
-		OUTDATED,
-		UPDATING,
-		UPDATED,
-		FAILED
+	//! @enum UpdateState
+	//! Used for keeping for track of the download/update status
+	enum UpdateState {
+		Updating,			//!< Update in progress
+		CompleteNoUpdates,	//!< Update completed, there we no updates
+		CompleteUpdates,	//!< Update completed, there were updates
+		DownloadError,		//!< Error during download phase
+		OtherError			//!< Other error
 	};
 
 	//! Constructor.
 	MeteorShowersMgr();
 
 	//! Destructor.
-	virtual ~MeteorShowersMgr();
+	virtual ~MeteorShowersMgr() Q_DECL_OVERRIDE;
 
 	//! Restore default catalog.
 	bool restoreDefaultCatalog(const QString& destination);
@@ -107,9 +109,8 @@ public:
 	void setLastUpdate(const QDateTime& datetime);
 	QDateTime getLastUpdate() { return m_lastUpdate; }
 
-	//! Set the status of the last update
-	void setStatusOfLastUpdate(const int &downloadStatus);
-	DownloadStatus getStatusOfLastUpdate() { return m_statusOfLastUpdate; }
+	//! Get the current updateState
+	UpdateState getUpdateState(void) const {return m_updateState;}
 
 	//! Gets the date of the next update.
 	QDateTime getNextUpdate();
@@ -120,15 +121,19 @@ public:
 	//
 	// Methods defined in the StelModule class
 	//
-	virtual void init();
-	virtual void deinit();
-	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core);
-	virtual double getCallOrder(StelModuleActionName actionName) const;
-	virtual bool configureGui(bool show=true);
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void deinit() Q_DECL_OVERRIDE;
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
 
 signals:
-	void downloadStatusChanged(DownloadStatus);
+	//! @param state the new update state.
+	void updateStateChanged(MeteorShowersMgr::UpdateState state);
+
+	//! Emitted after a JSON update has run.
+	void jsonUpdateComplete(void);
 	void enablePluginChanged(bool b);
 	void enableLabelsChanged(bool b);
 
@@ -317,10 +322,11 @@ private:
 	int m_updateFrequencyHours;
 	QString m_url;
 	QDateTime m_lastUpdate;
-	DownloadStatus m_statusOfLastUpdate;
+	UpdateState m_updateState;
 	QNetworkAccessManager * m_networkManager;
 	QNetworkReply * m_downloadReply;
 	class StelProgressController* m_progressBar;
+	QTimer* m_updateTimer;
 
 	void createActions();
 	void loadConfig();	
@@ -345,9 +351,9 @@ class MeteorShowersStelPluginInterface : public QObject, public StelPluginInterf
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
-	virtual QObjectList getExtensionList() const { return QObjectList(); }
+	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /*METEORSHOWERSMGR_HPP*/

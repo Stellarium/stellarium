@@ -48,7 +48,7 @@ public:
 
 	//! @param id The official designation for a pulsar, e.g. "PSR J1919+21"
 	Pulsar(const QVariantMap& map);
-	~Pulsar();
+	~Pulsar() Q_DECL_OVERRIDE;
 
 	//! Get a QVariantMap which describes the pulsar. Could be used to create a duplicate.
 	//! - designation: pulsar name based on J2000 coordinates
@@ -74,44 +74,39 @@ public:
 	QVariantMap getMap(void) const;
 
 	//! Get the type of object
-	virtual QString getType(void) const
+	virtual QString getType(void) const Q_DECL_OVERRIDE
 	{
 		return PULSAR_TYPE;
 	}
 
-	virtual QString getID(void) const
+	//! Get the type of object
+	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	{
+		return (glitch==0) ? "pulsar" : "pulsar with glitches";
+	}
+
+	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{
 		return designation;
 	}
 
-	virtual float getSelectPriority(const StelCore* core) const;
+	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
+	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getMap(), except for designation, RA and DE fields.
-	virtual QVariantMap getInfoMap(const StelCore *core) const;
-	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const
-	{
-		static const double d2000 = 2451545.0;
-		const double movementFactor = (M_PI/180.)*(0.0001/3600.) * (core->getJDE()-d2000)/365.25;
-		Vec3d v;
-		const double cRA = RA + movementFactor*pmRA;
-		const double cDE = DE + movementFactor*pmDE;
-		StelUtils::spheToRect(cRA, cDE, v);
-		return v;
-	}
+	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
+	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
+	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the visual magnitude of pulsar
-	virtual float getVMagnitude(const StelCore* core) const;
+	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
 	virtual float getVMagnitudeWithExtinction(const StelCore *core) const;
-	//! Get the angular size of pulsar
-	virtual double getAngularSize(const StelCore* core) const;
 	//! Get the localized name of pulsar
-	virtual QString getNameI18n(void) const;
+	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
 	//! Get the english name of pulsar
-	virtual QString getEnglishName(void) const;
+	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
 	//! Get the designation of pulsar
 	QString getDesignation(void) const { return designation; }
 

@@ -29,7 +29,11 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "gust86.h"
 #include "de431.hpp"
 #include "de430.hpp"
+#include "de441.hpp"
+#include "de440.hpp"
 #include "pluto.h"
+#include "htc20b.hpp"
+#include "StelUtils.hpp"
 
 #define EPHEM_MERCURY_ID  0
 #define EPHEM_VENUS_ID    1
@@ -68,6 +72,16 @@ void EphemWrapper::init_de431(const char* filepath)
 	InitDE431(filepath);
 }
 
+void EphemWrapper::init_de440(const char* filepath)
+{
+	InitDE440(filepath);
+}
+
+void EphemWrapper::init_de441(const char* filepath)
+{
+	InitDE441(filepath);
+}
+
 bool EphemWrapper::jd_fits_de431(const double jd)
 {
 	//Correct limits found via jpl_get_double(). Limits hardcoded to avoid calls each time.
@@ -82,6 +96,20 @@ bool EphemWrapper::jd_fits_de430(const double jd)
 	return ((jd > 2287184.5) && (jd < 2688976.5));
 }
 
+bool EphemWrapper::jd_fits_de441(const double jd)
+{
+	//Correct limits found via jpl_get_double(). Limits hardcoded to avoid calls each time.
+	//return !(jd < -3027215.5 || jd > 7930192.5);
+	//This limits inside those where sun can jump between ecliptic of date and ecliptic2000.
+	// We lose a month in -13000 and a few months in +17000, this should not matter.
+	return ((jd > -3027188.25 ) && (jd < 7930056.87916));
+}
+
+bool EphemWrapper::jd_fits_de440(const double jd)
+{
+	return ((jd > 2287184.5) && (jd < 2688976.5));
+}
+
 bool EphemWrapper::use_de430(const double jd)
 {
 	return StelApp::getInstance().getCore()->de430IsActive() && EphemWrapper::jd_fits_de430(jd);
@@ -90,6 +118,16 @@ bool EphemWrapper::use_de430(const double jd)
 bool EphemWrapper::use_de431(const double jd)
 {
 	return StelApp::getInstance().getCore()->de431IsActive() && EphemWrapper::jd_fits_de431(jd);
+}
+
+bool EphemWrapper::use_de440(const double jd)
+{
+	return StelApp::getInstance().getCore()->de440IsActive() && EphemWrapper::jd_fits_de440(jd);
+}
+
+bool EphemWrapper::use_de441(const double jd)
+{
+	return StelApp::getInstance().getCore()->de441IsActive() && EphemWrapper::jd_fits_de441(jd);
 }
 
 // planet_id is ONLY one of the #defined values 0..8 above.
@@ -103,7 +141,15 @@ void get_planet_helio_coordsv(const double jd, double xyz[3], double xyzdot[3], 
 		return;
 	}
 
-	if(EphemWrapper::use_de430(jd))
+	if(EphemWrapper::use_de440(jd))
+	{
+		deOk=GetDe440Coor(jd, planet_id + 1, xyz6);
+	}
+	else if(EphemWrapper::use_de441(jd))
+	{
+		deOk=GetDe441Coor(jd, planet_id + 1, xyz6);
+	}
+	else if(EphemWrapper::use_de430(jd))
 	{
 		deOk=GetDe430Coor(jd, planet_id + 1, xyz6);
 	}
@@ -131,7 +177,15 @@ void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], d
 		return;
 	}
 
-	if(EphemWrapper::use_de430(jd))
+	if(EphemWrapper::use_de440(jd))
+	{
+		deOk=GetDe440Coor(jd, planet_id + 1, xyz6);
+	}
+	else if(EphemWrapper::use_de441(jd))
+	{
+		deOk=GetDe441Coor(jd, planet_id + 1, xyz6);
+	}
+	else if(EphemWrapper::use_de430(jd))
 	{
 		deOk=GetDe430Coor(jd, planet_id + 1, xyz6);
 	}
@@ -154,7 +208,7 @@ void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], d
 
 void get_pluto_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	bool deOk=false;
 	double xyz6[6];
 	if(!std::isfinite(jd))
@@ -163,7 +217,15 @@ void get_pluto_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* un
 		return;
 	}
 
-	if(EphemWrapper::use_de430(jd))
+	if(EphemWrapper::use_de440(jd))
+	{
+		deOk=GetDe440Coor(jd, EPHEM_JPL_PLUTO_ID, xyz6);
+	}
+	else if(EphemWrapper::use_de441(jd))
+	{
+		deOk=GetDe441Coor(jd, EPHEM_JPL_PLUTO_ID, xyz6);
+	}
+	else if(EphemWrapper::use_de430(jd))
 	{
 		deOk=GetDe430Coor(jd, EPHEM_JPL_PLUTO_ID, xyz6);
 	}
@@ -187,26 +249,26 @@ void get_pluto_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* un
 /* Return 0 for the sun */
 void get_sun_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(jd);
-	Q_UNUSED(unused);
+	Q_UNUSED(jd)
+	Q_UNUSED(unused)
 	xyz[0]   =0.; xyz[1]   =0.; xyz[2]   =0.;
 	xyzdot[0]=0.; xyzdot[1]=0.; xyzdot[2]=0.;
 }
 
 void get_mercury_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	get_planet_helio_coordsv(jd, xyz, xyzdot, EPHEM_MERCURY_ID);
 }
 void get_venus_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	get_planet_helio_coordsv(jd, xyz, xyzdot, EPHEM_VENUS_ID);
 }
 
 void get_earth_helio_coordsv(const double jd,double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	bool deOk=false;
 	double xyz6[6];
 	if(!std::isfinite(jd))
@@ -215,7 +277,15 @@ void get_earth_helio_coordsv(const double jd,double xyz[3], double xyzdot[3], vo
 		return;
 	}
 
-	if(EphemWrapper::use_de430(jd))
+	if(EphemWrapper::use_de440(jd))
+	{
+		deOk=GetDe440Coor(jd, EPHEM_JPL_EARTH_ID, xyz6);
+	}
+	else if(EphemWrapper::use_de441(jd))
+	{
+		deOk=GetDe441Coor(jd, EPHEM_JPL_EARTH_ID, xyz6);
+	}
+	else if(EphemWrapper::use_de430(jd))
 	{
 		deOk=GetDe430Coor(jd, EPHEM_JPL_EARTH_ID, xyz6);
 	}
@@ -242,31 +312,31 @@ void get_earth_helio_coordsv(const double jd,double xyz[3], double xyzdot[3], vo
 
 void get_mars_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	get_planet_helio_coordsv(jd, xyz, xyzdot, EPHEM_MARS_ID);
 }
 
 void get_jupiter_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	get_planet_helio_coordsv(jd, xyz, xyzdot, EPHEM_JUPITER_ID);
 }
 
 void get_saturn_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	get_planet_helio_coordsv(jd, xyz, xyzdot, EPHEM_SATURN_ID);
 }
 
 void get_uranus_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	get_planet_helio_coordsv(jd, xyz, xyzdot, EPHEM_URANUS_ID);
 }
 
 void get_neptune_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	get_planet_helio_coordsv(jd, xyz, xyzdot, EPHEM_NEPTUNE_ID);
 }
 
@@ -319,10 +389,14 @@ void get_neptune_helio_osculating_coords(double jd0,double jd,double xyz[3], dou
  * param jd Julian day, rect pos */
 void get_lunar_parent_coordsv(double jde, double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	double xyz6[6];
 	bool deOk=false;
-	if(EphemWrapper::use_de430(jde))
+	if(EphemWrapper::use_de440(jde))
+		deOk=GetDe440Coor(jde, EPHEM_JPL_MOON_ID, xyz6, EPHEM_JPL_EARTH_ID);
+	else if(EphemWrapper::use_de441(jde))
+		deOk=GetDe441Coor(jde, EPHEM_JPL_MOON_ID, xyz6, EPHEM_JPL_EARTH_ID);
+	else if(EphemWrapper::use_de430(jde))
 		deOk=GetDe430Coor(jde, EPHEM_JPL_MOON_ID, xyz6, EPHEM_JPL_EARTH_ID);
 	else if(EphemWrapper::use_de431(jde))
 		deOk=GetDe431Coor(jde, EPHEM_JPL_MOON_ID, xyz6, EPHEM_JPL_EARTH_ID);
@@ -333,122 +407,158 @@ void get_lunar_parent_coordsv(double jde, double xyz[3], double xyzdot[3], void*
 		xyzdot[0]=xyz6[3]; xyzdot[1]=xyz6[4]; xyzdot[2]=xyz6[5];
 	}
 	else
-	{  // fallback to DE-less solution.
+	{       // fallback to DE-less solution.
+		// Compute speed from positional difference within 10 seconds.
+		GetElp82bCoor(jde+10.*StelCore::JD_SECOND, xyzdot);
 		GetElp82bCoor(jde,xyz);
-		xyzdot[0]=xyzdot[1]=xyzdot[2]=0.0; // TODO: Some meaningful way to get speed?
+		xyzdot[0]-=xyz[0]; xyzdot[1]-=xyz[1]; xyzdot[2]-=xyz[2];
+		const double factor=8640.; // 86400/10 seconds
+		xyzdot[0]*=factor; xyzdot[1]*=factor; xyzdot[2]*=factor;
 	}
+	// Apply a tiny sub-arcsecond correction to compensate for the difference between figure centre (visible) and centre of gravity (ephemeris position).
+	// This is important for eclipse and occultation observations.
+	// See note in "Astronomical Phenomena for the year 2017", Naut.Alm.Office, USNO and HM Naut. Alm. Office, UK Hydrographic Office, 2014, p.69
+	// TBD: Find a better reference for this!
+	Vec3d XYZ(xyz);
+	double lng, lat, r;
+	StelUtils::rectToSphe(&lng, &lat, &r, XYZ);
+	lng+= 0.50/3600. * M_PI_180;
+	lat+=-0.25/3600. * M_PI_180;
+	StelUtils::spheToRect(lng, lat, r, XYZ);
+	xyz[0]=XYZ.v[0]; xyz[1]=XYZ.v[1]; xyz[2]=XYZ.v[2];
 }
 
 void get_phobos_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetMarsSatCoor(jd, MARS_SAT_PHOBOS, xyz, xyzdot);
 }
 
 void get_deimos_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetMarsSatCoor(jd, MARS_SAT_DEIMOS, xyz, xyzdot);
 }
 
 void get_io_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetL12Coor(jd, L12_IO, xyz, xyzdot);
 }
 
 void get_europa_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetL12Coor(jd, L12_EUROPA, xyz, xyzdot);
 }
 
 void get_ganymede_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetL12Coor(jd, L12_GANYMEDE, xyz, xyzdot);
 }
 
 void get_callisto_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetL12Coor(jd, L12_CALLISTO, xyz, xyzdot);
 }
 
 void get_mimas_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 { 
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetTass17Coor(jd, TASS17_MIMAS, xyz, xyzdot);
 }
 
 void get_enceladus_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetTass17Coor(jd, TASS17_ENCELADUS, xyz, xyzdot);
 }
 
 void get_tethys_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 { 
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetTass17Coor(jd, TASS17_TETHYS, xyz, xyzdot);
 }
 
 void get_dione_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 { 
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetTass17Coor(jd, TASS17_DIONE, xyz, xyzdot);
 }
 
 void get_rhea_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 { 
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetTass17Coor(jd, TASS17_RHEA, xyz, xyzdot);
 }
 
 void get_titan_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 { 
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetTass17Coor(jd, TASS17_TITAN, xyz, xyzdot);
 }
 
 void get_hyperion_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 { 
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetTass17Coor(jd, TASS17_HYPERION, xyz, xyzdot);
 }
 
 void get_iapetus_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 { 
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetTass17Coor(jd, TASS17_IAPETUS, xyz, xyzdot);
 }
 
 void get_miranda_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetGust86Coor(jd, GUST86_MIRANDA, xyz, xyzdot);
 }
 
 void get_ariel_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetGust86Coor(jd, GUST86_ARIEL, xyz, xyzdot);
 }
 
 void get_umbriel_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetGust86Coor(jd, GUST86_UMBRIEL, xyz, xyzdot);
 }
 
 void get_titania_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetGust86Coor(jd, GUST86_TITANIA, xyz, xyzdot);
 }
 
 void get_oberon_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
-	Q_UNUSED(unused);
+	Q_UNUSED(unused)
 	GetGust86Coor(jd, GUST86_OBERON, xyz, xyzdot);
+}
+
+void get_helene_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
+{
+	Q_UNUSED(unused)
+	int r = htc20(jd, HTC2_HELENE, xyz, xyzdot);
+	Q_UNUSED(r)
+}
+
+void get_telesto_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
+{
+	Q_UNUSED(unused)
+	int r = htc20(jd, HTC2_TELESTO, xyz, xyzdot);
+	Q_UNUSED(r)
+}
+
+void get_calypso_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
+{
+	Q_UNUSED(unused)
+	int r = htc20(jd, HTC2_CALYPSO, xyz, xyzdot);
+	Q_UNUSED(r)
 }

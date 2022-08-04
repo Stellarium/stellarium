@@ -36,13 +36,13 @@ class RemoteControlDialog : public StelDialog
 
 public:
 	RemoteControlDialog();
-	~RemoteControlDialog();
+	~RemoteControlDialog() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 
 protected:
-	void createDialogContent();
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 private:
 	Ui_remoteControlDialog* ui;

@@ -46,7 +46,7 @@ public:
 
 	virtual int rowCount(const QModelIndex &parent) const Q_DECL_OVERRIDE
 	{
-		Q_UNUSED(parent);
+		Q_UNUSED(parent)
 		if(mgr->getIsANGLE())
 		{
 			return 1;

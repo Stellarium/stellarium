@@ -25,7 +25,7 @@
 class StelProjectorPerspective : public StelProjector
 {
 public:
-	StelProjectorPerspective(ModelViewTranformP func) : StelProjector(func) {;}
+	StelProjectorPerspective(ModelViewTranformP func) : StelProjector(func) {}
 	virtual QString getNameI18() const Q_DECL_OVERRIDE;
 	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
 	virtual float getMaxFov() const  Q_DECL_OVERRIDE{return 120.f;}
@@ -43,7 +43,7 @@ protected:
 class StelProjectorEqualArea : public StelProjector
 {
 public:
-	StelProjectorEqualArea(ModelViewTranformP func) : StelProjector(func) {;}
+	StelProjectorEqualArea(ModelViewTranformP func) : StelProjector(func) {}
 	virtual QString getNameI18() const Q_DECL_OVERRIDE;
 	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
 	virtual float getMaxFov() const  Q_DECL_OVERRIDE{return 360.f;}
@@ -61,7 +61,7 @@ protected:
 class StelProjectorStereographic : public StelProjector
 {
 public:
-	StelProjectorStereographic(ModelViewTranformP func) : StelProjector(func) {;}
+	StelProjectorStereographic(ModelViewTranformP func) : StelProjector(func) {}
 	virtual QString getNameI18() const Q_DECL_OVERRIDE;
 	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
 	virtual float getMaxFov() const  Q_DECL_OVERRIDE {return 235.f;}
@@ -94,7 +94,7 @@ protected:
 class StelProjectorFisheye : public StelProjector
 {
 public:
-	StelProjectorFisheye(ModelViewTranformP func) : StelProjector(func) {;}
+	StelProjectorFisheye(ModelViewTranformP func) : StelProjector(func) {}
 	virtual QString getNameI18() const Q_DECL_OVERRIDE;
 	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
 	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 360.0f;}
@@ -112,7 +112,7 @@ protected:
 class StelProjectorHammer : public StelProjector
 {
 public:
-	StelProjectorHammer(ModelViewTranformP func) : StelProjector(func) {;}
+	StelProjectorHammer(ModelViewTranformP func) : StelProjector(func) {}
 	virtual QString getNameI18() const Q_DECL_OVERRIDE;
 	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
 	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 185.f;}
@@ -151,7 +151,7 @@ protected:
 class StelProjectorCylinder : public StelProjector
 {
 public:
-	StelProjectorCylinder(ModelViewTranformP func) : StelProjector(func) {;}
+	StelProjectorCylinder(ModelViewTranformP func) : StelProjector(func) {}
 	virtual QString getNameI18() const Q_DECL_OVERRIDE;
 	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
 	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 200.f;} // slight overshoot
@@ -179,7 +179,7 @@ protected:
 class StelProjectorMercator : public StelProjector
 {
 public:
-	StelProjectorMercator(ModelViewTranformP func) : StelProjector(func) {;}
+	StelProjectorMercator(ModelViewTranformP func) : StelProjector(func) {}
 	virtual QString getNameI18() const Q_DECL_OVERRIDE;
 	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
 	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 270.f; }
@@ -207,7 +207,7 @@ protected:
 class StelProjectorOrthographic : public StelProjector
 {
 public:
-	StelProjectorOrthographic(ModelViewTranformP func) : StelProjector(func) {;}
+	StelProjectorOrthographic(ModelViewTranformP func) : StelProjector(func) {}
 	virtual QString getNameI18() const Q_DECL_OVERRIDE;
 	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
 	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 179.9999f;}
@@ -225,7 +225,7 @@ protected:
 class StelProjectorSinusoidal : public StelProjectorCylinder
 {
 public:
-	StelProjectorSinusoidal(ModelViewTranformP func) : StelProjectorCylinder(func) {;}
+	StelProjectorSinusoidal(ModelViewTranformP func) : StelProjectorCylinder(func) {}
 	virtual QString getNameI18() const Q_DECL_OVERRIDE;
 	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
 	virtual bool forward(Vec3f &win) const Q_DECL_OVERRIDE;
@@ -235,7 +235,7 @@ public:
 class StelProjectorMiller : public StelProjectorMercator
 {
 public:
-	StelProjectorMiller(ModelViewTranformP func) : StelProjectorMercator(func) {;}
+	StelProjectorMiller(ModelViewTranformP func) : StelProjectorMercator(func) {}
 	virtual QString getNameI18() const Q_DECL_OVERRIDE;
 	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
 	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 270.f; }
@@ -246,7 +246,7 @@ public:
 class StelProjector2d : public StelProjector
 {
 public:
-	StelProjector2d() : StelProjector(ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity()))) {;}
+	StelProjector2d() : StelProjector(ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity()))) {}
 	virtual QString getNameI18() const Q_DECL_OVERRIDE;
 	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
 	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 360.f;}
@@ -259,7 +259,7 @@ protected:
 	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const Q_DECL_OVERRIDE {Q_ASSERT(0); return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const Q_DECL_OVERRIDE {Q_ASSERT(0); return false;}
-	virtual void computeBoundingCap() Q_DECL_OVERRIDE {;}
+	virtual void computeBoundingCap() Q_DECL_OVERRIDE {}
 };
 
 #endif // STELPROJECTIONS_HPP

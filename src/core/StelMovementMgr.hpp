@@ -54,8 +54,6 @@ private:
 class StelMovementMgr : public StelModule
 {
 	Q_OBJECT
-	Q_ENUMS(MountMode)
-	Q_ENUMS(ZoomingMode)
 	Q_PROPERTY(bool equatorialMount
 		   READ getEquatorialMount
 		   WRITE setEquatorialMount
@@ -85,6 +83,10 @@ class StelMovementMgr : public StelModule
 		   READ getFlagEnableMouseNavigation
 		   WRITE setFlagEnableMouseNavigation
 		   NOTIFY flagEnableMouseNavigationChanged)
+	Q_PROPERTY(bool flagEnableMouseZooming
+		   READ getFlagEnableMouseZooming
+		   WRITE setFlagEnableMouseZooming
+		   NOTIFY flagEnableMouseZoomingChanged)
 	Q_PROPERTY(bool flagEnableMoveKeys
 		   READ getFlagEnableMoveKeys
 		   WRITE setFlagEnableMoveKeys
@@ -93,17 +95,23 @@ class StelMovementMgr : public StelModule
 		   READ getFlagEnableZoomKeys
 		   WRITE setFlagEnableZoomKeys
 		   NOTIFY flagEnableZoomKeysChanged)
+	Q_PROPERTY(double userMaxFov
+		   READ getUserMaxFov
+		   WRITE setUserMaxFov
+		   NOTIFY userMaxFovChanged)
 public:
 	//! Possible mount modes defining the reference frame in which head movements occur.
 	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
 	// TODO: add others: MountEcliptical, MountEq2000, MountEcliptical2000 and implement proper variants.
 	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic, MountSupergalactic};
+	Q_ENUM(MountMode)
 
 	//! Named constants for zoom operations.
 	enum ZoomingMode { ZoomOut=-1, ZoomNone=0, ZoomIn=1};
+	Q_ENUM(ZoomingMode)
 
 	StelMovementMgr(StelCore* core);
-	virtual ~StelMovementMgr();
+	virtual ~StelMovementMgr() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -115,28 +123,28 @@ public:
 	//! - Enabling/disabling the mouse movement
 	//! - Sets the zoom and movement speeds
 	//! - Sets the auto-zoom duration and mode.
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 
 	//! Update time-dependent things (triggers a time dragging record if required)
-	virtual void update(double)
+	virtual void update(double) Q_DECL_OVERRIDE
 	{
 		if (dragTimeMode)
 			addTimeDragPoint(QCursor::pos().x(), QCursor::pos().y());
 	}
 	//! Implement required draw function.  Does nothing.
-	virtual void draw(StelCore*) {;}
+	virtual void draw(StelCore*) Q_DECL_OVERRIDE {}
 	//! Handle keyboard events.
-	virtual void handleKeys(QKeyEvent* event);
+	virtual void handleKeys(QKeyEvent* event) Q_DECL_OVERRIDE;
 	//! Handle mouse movement events.
-	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
+	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b) Q_DECL_OVERRIDE;
 	//! Handle mouse wheel events.
-	virtual void handleMouseWheel(class QWheelEvent* event);
+	virtual void handleMouseWheel(class QWheelEvent* event) Q_DECL_OVERRIDE;
 	//! Handle mouse click events.
-	virtual void handleMouseClicks(class QMouseEvent* event);
+	virtual void handleMouseClicks(class QMouseEvent* event) Q_DECL_OVERRIDE;
 	// allow some keypress interaction by plugins.
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 	//! Handle pinch gesture.
-	virtual bool handlePinch(qreal scale, bool started);
+	virtual bool handlePinch(qreal scale, bool started) Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to StelMovementMgr
@@ -221,6 +229,11 @@ public slots:
 	//! Set whether mouse can control movement
 	void setFlagEnableMouseNavigation(bool b) {flagEnableMouseNavigation=b; emit flagEnableMouseNavigationChanged(b); }
 
+	//! Get whether mouse can control zooming
+	bool getFlagEnableMouseZooming() const {return flagEnableMouseZooming;}
+	//! Set whether mouse can control zooming
+	void setFlagEnableMouseZooming(bool b) {flagEnableMouseZooming=b; emit flagEnableMouseZoomingChanged(b); }
+
 	//! Get the state of flag for indication of mount mode
 	bool getFlagIndicationMountMode() const {return flagIndicationMountMode;}
 	//! Set the state of flag for indication of mount mode
@@ -241,7 +254,7 @@ public slots:
 	//!       J2000 positions, the x-axis points to 0h,0°, the y-axis to 6h,0° and the z-axis points to the
 	//!       celestial pole. You may use a constructor defining three components (x,y,z) or the
 	//!       format with just two angles, e.g., Vec3d("0h","0d").
-	void moveToJ2000(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
+	void moveToJ2000(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1., StelMovementMgr::ZoomingMode zooming = ZoomNone);
 
 	//! Move the view to a specified AltAzimuthal position.
 	//! @param aim The position to move to expressed as a vector in AltAz frame.
@@ -262,7 +275,7 @@ public slots:
 	//!       with azimuth angles running counter-clockwise, i.e., against the usual orientation.
 	//! @note Panic function made March 2016. It turned out that using moveToJ2000 for alt-az-based moves behaves odd for long moves during fast timelapse: end vector is linked to the sky!
 	//! As of March 2016: This call does nothing when mount frame is not AltAzi!
-	void moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1.f, ZoomingMode zooming = ZoomNone);
+	void moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float moveDuration = 1.f, StelMovementMgr::ZoomingMode zooming = ZoomNone);
 
 	//! Change the zoom level.
 	//! @param aimFov The desired field of view in degrees.
@@ -413,10 +426,10 @@ public slots:
 	void moveViewport(double offsetX, double offsetY, const float duration=0.f);
 
 	//! Set current mount type defining the reference frame in which head movements occur.
-	void setMountMode(MountMode m);
+	void setMountMode(StelMovementMgr::MountMode m);
 	//! Get current mount type defining the reference frame in which head movements occur.
-	MountMode getMountMode(void) const {return mountMode;}
-	bool getEquatorialMount(void) const {return mountMode == MountEquinoxEquatorial;}
+	StelMovementMgr::MountMode getMountMode(void) const {return mountMode;}
+	bool getEquatorialMount(void) const {return mountMode == StelMovementMgr::MountEquinoxEquatorial;}
 
 	//! Function designed only for scripting context. Put the function into the startup.ssc of your planetarium setup,
 	//! this will avoid any unwanted tracking.
@@ -430,6 +443,11 @@ public slots:
 	void setViewportHorizontalOffsetTarget(double f) { moveViewport(f,getViewportVerticalOffsetTarget()); }
 	void setViewportVerticalOffsetTarget(double f) { moveViewport(getViewportHorizontalOffsetTarget(),f); }
 
+	//! Set a hard limit for any fov change. Useful in the context of a planetarium with dome
+	//! where a presenter never ever wants to set more than 180° even if the projection would allow it.
+	void setUserMaxFov(double max);
+	double getUserMaxFov() const {return userMaxFov; }
+
 signals:
 	//! Emitted when the tracking property changes
 	void flagTrackingChanged(bool b);
@@ -439,8 +457,10 @@ signals:
 	void viewportHorizontalOffsetTargetChanged(double f);
 	void viewportVerticalOffsetTargetChanged(double f);
 	void flagEnableMouseNavigationChanged(bool b);
+	void flagEnableMouseZoomingChanged(bool b);
 	void flagEnableMoveKeysChanged(bool b);
 	void flagEnableZoomKeysChanged(bool b);
+	void userMaxFovChanged(double fov);
 
 private slots:
 	//! Called when the selected object changes.
@@ -456,7 +476,8 @@ private:
 	double currentFov; // The current FOV in degrees
 	double initFov;    // The FOV at startup
 	double minFov;     // Minimum FOV in degrees
-	double maxFov;     // Maximum FOV in degrees
+	double maxFov;     // Maximum FOV in degrees. Depends on projection.
+	double userMaxFov; // Custom setting. Can be useful in a planetarium context.
 	double deltaFov;   // requested change of FOV (degrees) used during zooming.
 	void setFov(double f)
 	{
@@ -486,6 +507,7 @@ private:
 
 	bool flagEnableMoveAtScreenEdge; // allow mouse at edge of screen to move view
 	bool flagEnableMouseNavigation;
+	bool flagEnableMouseZooming;
 	double mouseZoomSpeed;
 
 	bool flagEnableZoomKeys;

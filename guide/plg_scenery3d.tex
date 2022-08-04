@@ -31,8 +31,8 @@ sundials and other shadow casters in action, etc.
 
 
 You activate the plugin with the \emph{circular enclosure} button \guibutton{0.6}{bt_scenery3d_off.png} at screen
-bottom or by pressing \key{\ctrl+W}. The other button with circular enclosure and
-tool icon  \guibutton{0.6}{bt_scenery3d_settings_off.png} (or \key{\ctrl+\shift+W}) opens the settings dialog. Once loaded and
+bottom or by pressing \key{\ctrl+W}. A right-click on that button \newFeature{0.21.2} (or \key{\ctrl+\shift+W})
+opens the settings dialog. Once loaded and
 displaying, you can walk around pressing \key{\ctrl} plus cursor keys. Change eye
 height with \key{\ctrl+Page\,\arrowkeyup\,}/\key{\ctrl + Page\,\arrowkeydown\,} keys. Adding \key{\shift} key increases speed by 10,
 adding \key{\Alt} multiplies by 5 (pressing both keys multiplies by 50!). If you release \key{\ctrl} before
@@ -69,7 +69,7 @@ renders the scene into the six planes of a so-called cubemap, which is
 then correctly reprojected onto the sides of a cube, depending on the
 current projection settings. Your graphics card must be able to do
 this, i.e. it must support the OpenGL extension called
-\texttt{EXT\_framebuffer\_object}. Typical modern 3D cards (by NVidia
+\texttt{EXT\_framebuffer\_object}. Typical modern 3D cards (by Nvidia
 or ATI/AMD) support this extension. In case your graphics hardware
 does not suppport it, the plugin will still work, but you are limited
 to perspective projection.
@@ -127,12 +127,12 @@ reopen Stellarium.
 
 This plugin clearly runs better with proper 3D graphics cards. 
 On reasonably good hardware 
-%2012: (tested on a notebook PC with NVidia M9800 GTS), 
+%2012: (tested on a notebook PC with Nvidia M9800 GTS), 
 % models up to 100.000 triangles are fluent, up to 250.000 are still ``interactive''.  
 % we have 2015, and a much faster implementation!
-%%(tested on a notebook PC with NVidia M580 GTS), models with about 850.000 triangles 
+%%(tested on a notebook PC with Nvidia M580 GTS), models with about 850.000 triangles 
 %% Latest benchmark...
-(tested on a notebook PC with NVidia M960), models with over 10.000.000 triangles 
+(tested on a notebook PC with Nvidia M960), models with over 10.000.000 triangles 
 %%
 are working nicely with shadows and bumpmaps, although your mileage may vary.  On very small
 hardware like single-board computers with native OpenGL ES2, models
@@ -267,6 +267,7 @@ already, you can separate them using \program{Blender}:
 \end{enumerate}
 
 \begin{table}[tb]
+\footnotesize
 \begin{tabular}{llll}
 \toprule
 \emph{Parameter}  &\emph{Default} &\emph{Range}    & \emph{Meaning}\\
@@ -632,7 +633,7 @@ Verify the new model loads correctly, e.g.\ in \program{Meshlab}\footnote{\url{h
 \subsection{Beyond 3D: Temporally evolving Models}
 \label{sec:scenery3d:Beyond3D}
 
-Stellarium \newFeature{v0.16.1} working as ``time machine'' can display the sky for any calendar date in its range of valid dates. 
+Stellarium \newFeature{0.16.1} working as ``time machine'' can display the sky for any calendar date in its range of valid dates. 
 Also landscapes and human-built structures evolve. Temples are being rebuilt, changed, re-dedicated or repurposed, 
 new windows are cut, old windows closed. 
 To show landscape and buildings in the right shape for the time in question, we can make material transparent, 
@@ -844,7 +845,7 @@ into account:
 \item The model is rendered in Cartesian coordinates. Earth's surface
   is curved. If your model extends by tens of kilometres, the visible
   horizon formed by faraway mountains may appear too high. You can
-  \newFeature{v0.20.2} display a landscape polygon defined in the
+  \newFeature{0.20.2} display a landscape polygon defined in the
   currently displayed Landscape on top of your 3D scene by activating
   \menu{Draw horizon polyline in foreground} in the plugin's
   settings dialog.

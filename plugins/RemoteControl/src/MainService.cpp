@@ -125,7 +125,7 @@ void MainService::get(const QByteArray& operation, const APIParameters &paramete
 			obj2.insert("latitude",static_cast<double>(loc.latitude));
 			obj2.insert("longitude",static_cast<double>(loc.longitude));
 			obj2.insert("altitude",loc.altitude);
-			obj2.insert("country",loc.country);
+			obj2.insert("region",loc.region);
 			obj2.insert("state",loc.state);
 			obj2.insert("landscapeKey",loc.landscapeKey);
 			obj.insert("location",obj2);
@@ -276,7 +276,7 @@ void MainService::get(const QByteArray& operation, const APIParameters &paramete
 
 void MainService::post(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
-	Q_UNUSED(data);
+	Q_UNUSED(data)
 
 	if(operation == "time")
 	{

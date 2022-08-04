@@ -5,7 +5,7 @@ on:
   push:
     branches:
     - master
-    paths: 
+    paths:
     - '**.pot'
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
 
     steps:
     - name: "Checkout repository"
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: "Install Python 3"
       uses: actions/setup-python@v2

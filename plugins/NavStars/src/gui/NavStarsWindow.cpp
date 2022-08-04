@@ -147,14 +147,11 @@ void NavStarsWindow::populateNavigationalStarsSetDescription(void)
 
 void NavStarsWindow::setAboutHtml(void)
 {
-	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Navigational Stars Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + NAVSTARS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + NAVSTARS_PLUGIN_LICENSE + "</td></tr>";
-	html += "<tr><td rowspan='2'><strong>" + q_("Authors") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr><td rowspan='2'><strong>" + q_("Authors") + ":</strong></td><td>Alexander Wolf</td></tr>";
 	html += "<tr><td>Andy Kirkham &lt;kirkham.andy@gmail.com&gt;</td></tr>";
 	html += "</table>";
 

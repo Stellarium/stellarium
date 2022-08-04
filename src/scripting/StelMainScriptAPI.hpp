@@ -42,7 +42,7 @@ class StelMainScriptAPI : public QObject
 
 public:
 	StelMainScriptAPI(QObject *parent = Q_NULLPTR);
-	~StelMainScriptAPI();
+	~StelMainScriptAPI() Q_DECL_OVERRIDE;
 
 // These functions will be available in scripts
 public slots:
@@ -96,6 +96,11 @@ public slots:
 	//! in HMS format, e.g. "0h1m68.2s"
 	//! @return the DeltaT for current simulation time.
 	static QString getDeltaT();
+
+	//! get the DeltaT for the simulation date and time as a double
+	//! in seconds
+	//! @return the DeltaT for current simulation time.
+	static double getDeltaTsec();
 
 	//! get the DeltaT equation name for the simulation date and time as a string
 	//! @return name of the DeltaT equation
@@ -216,6 +221,9 @@ public slots:
 	//! - elongation : elongation of object in radians (for Solar system objects only!)
 	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
 	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
+	//! - ecl-elongation : elongation (difference in ecliptical longitude) of object in radians (for Solar system objects and from Earth only!)
+	//! - ecl-elongation-dms : elongation (difference in ecliptical longitude) of object in DMS (for Solar system objects and from Earth only!)
+	//! - ecl-elongation-deg : elongation (difference in ecliptical longitude) of object in decimal degrees (for Solar system objects and from Earth only!)
 	//! - velocity: the planet velocity around the parent planet in ecliptical coordinates in AU/d (for Solar system objects only!)
 	//! - velocity-kms: the planet velocity around the parent planet in km/s (for Solar system objects only!)
 	//! - heliocentric-velocity: the planet's heliocentric velocity in the solar system in ecliptical coordinates in AU/d (for Solar system objects only!)
@@ -347,7 +355,7 @@ public slots:
 	//! @param duration the time for the transition from the
 	//!        old to the new location.
 	//! @param name A name for the location (which will appear
-	//!        in the status bar. Use "<city>, <country>" for
+	//!        in the status bar. Use "<city>, <region>" for
 	//!        moving across a border.
 	//! @param planet the English name of the new planet.
 	//!        If the planet name is not known (e.g. ""), the
@@ -370,7 +378,7 @@ public slots:
 	//! - longitude : longitude in decimal degrees
 	//! - latitude : latitude in decimal degrees
 	//! - planet : name of planet
-	//! - location : city and country
+	//! - location : city and region
 	//! - sidereal-year : duration of the sidereal year on the planet in Earth's days (since 0.12.0)
 	//! - sidereal-day : duration of the sidereal day on the planet in Earth's hours (since 0.12.0)
 	//! - solar-day : duration of the mean solar day on the planet in Earth's hours (since 0.12.0)
@@ -533,8 +541,7 @@ public slots:
 	//! @todo allow alpha in images?
 	//! @param id a string ID to be used when referring to this
 	//! image (e.g. when changing the displayed status or deleting it.
-	//! @param filename the file name of the image.  If a relative
-	//! path is specified, "scripts/" will be prefixed before the
+	//! @param filename the file name of the image. "scripts/" will be prefixed before the
 	//! image is searched for using StelFileMgr.
 	//! @param lon0 The right ascension/longitude/azimuth of the first corner of the image in degrees (bottom left)
 	//! @param lat0 The declination/latitude/altitude of the first corner of the image in degrees (bottom left)
@@ -548,14 +555,15 @@ public slots:
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
 	//! @param frame one of EqJ2000|EqDate|EclJ2000|EclDate|Gal(actic)|SuperG(alactic)|AzAlt.
-	//! @note since 2017-03, you can select Frame.
-	//! @note Images in AzAlt frame are not affected by atmosphere effects like refraction or extinction.
+	//! @param withAberration The image, if frame==EqJ2000, undergoes aberration effect. Default: true.
+	//! @note Images in AzAlt frame are not affected by atmosphere effects like refraction or extinction, and also not by aberration.
 	void loadSkyImage(const QString& id, const QString& filename,
 					  double lon0, double lat0,
 					  double lon1, double lat1,
 					  double lon2, double lat2,
 					  double lon3, double lat3,
-					  double minRes=2.5, double maxBright=14, bool visible=true, const QString &frame="EqJ2000");
+					  double minRes=2.5, double maxBright=14, bool visible=true,
+					  const QString &frame="EqJ2000", bool withAberration=true);
 
 
 	//! Convenience function which allows the user to provide longitudinal and latitudinal angles (RA/Dec or Long/Lat or Az/Alt)
@@ -565,7 +573,8 @@ public slots:
 					  const QString& lon1, const QString& lat1,
 					  const QString& lon2, const QString& lat2,
 					  const QString& lon3, const QString& lat3,
-					  double minRes=2.5, double maxBright=14, bool visible=true, const QString& frame="EqJ2000");
+					  double minRes=2.5, double maxBright=14, bool visible=true,
+					  const QString& frame="EqJ2000", bool withAberration=true);
 
 	//! Convenience function which allows loading of a (square) sky image based on a
 	//! central coordinate, angular size and rotation. Note that the edges will not be aligned with edges at center plus/minus size!
@@ -582,11 +591,12 @@ public slots:
 	//! @param maxBright The maximum brightness setting for the image, Vmag/arcmin^2. Use this to blend the brightest possible pixels with DSO. mag 15 or brighter seems ok.
 	//! @param visible The initial visibility of the image
 	//! @param frame one of EqJ2000|EqDate|EclJ2000|EclDate|Gal(actic)|SuperG(alactic)|AzAlt.
-	//! @note since 2017-03, you can select Frame.
+	//! @param withAberration The image, if frame==EqJ2000, undergoes aberration effect. Default: true.
 	//! @note Images in AzAlt frame are not affected by atmosphere effects like refraction or extinction.
 	void loadSkyImage(const QString& id, const QString& filename,
 					  double lon, double lat, double angSize, double rotation,
-					  double minRes=2.5, double maxBright=14, bool visible=true, const QString& frame="EqJ2000");
+					  double minRes=2.5, double maxBright=14, bool visible=true,
+					  const QString& frame="EqJ2000", bool withAberration=true);
 
 	//! Convenience function which allows loading of a (square) sky image based on a
 	//! central coordinate, angular size and rotation.  Parameters are the same
@@ -594,7 +604,8 @@ public slots:
 	//! lon and lat, except here text expressions of angles may be used.
 	void loadSkyImage(const QString& id, const QString& filename,
 					  const QString& lon, const QString& lat, double angSize, double rotation,
-					  double minRes=2.5, double maxBright=14, bool visible=true, const QString& frame="EqJ2000");
+					  double minRes=2.5, double maxBright=14, bool visible=true,
+					  const QString& frame="EqJ2000", bool withAberration=true);
 
 	//! Remove a SkyImage.
 	//! @param id the ID of the image to remove.
@@ -754,7 +765,7 @@ public slots:
 	static void pauseScript();
 
 	//! Set the amount of selected object information to display
-	//! @param level can be "AllInfo", "ShortInfo", "None"
+	//! @param level can be "AllInfo", "DefaultInfo", "ShortInfo", "None", "Custom"
 	static void setSelectedObjectInfo(const QString& level);
 
 	//! Stop the script
@@ -873,13 +884,48 @@ public slots:
 	//! @return The current status of media playback support.
 	static bool isMediaPlaybackSupported(void);
 
+	//! Experimental. Allow setting physical display properties for tonemapping.
+	//! The standard value is 100cd/m^2, appropriate for CRTs. More modern screens often have more.
+	//! Increasing the value makes most of the sky darker, to allow saving the highest tones for the brightest lights (esp. the Sun).
+	//! @note This is experimental and may not be available in later versions.
+	static void setDisplayMaxLuminance(double cdPerSqM);
+	//! Experimental.
+	//! @return configured physical display luminance for tonemapping.
+	//! The standard value is 100cd/m^2, appropriate for CRTs. More modern screens often have more.
+	//! @note This is experimental and may not be available in later versions.
+	static double getDisplayMaxLuminance();
+	//! Experimental. Allow setting physical display adaptation luminance for tonemapping.
+	//! The standard value is 50cd/m^2, appropriate for CRTs in dimly lit office environments.
+	//! TBD true?: Increasing the value makes most of the sky darker, to allow saving the highest tones for the brightest lights (esp. the Sun).
+	//! @note This is experimental and may not be available in later versions.
+	static void setDisplayAdaptationLuminance(double cdPerSqM);
+	//! Experimental.
+	//! @return configured physical display adaptation luminance for tonemapping.
+	//! The standard value is 50cd/m^2, appropriate for CRTs in dimly lit office environments.
+	//! @note This is experimental and may not be available in later versions.
+	static double getDisplayAdaptationLuminance();
+	//! Experimental: Set the display gamma
+	//! @param gamma the gamma. Initial default value is 2.2222 (for a CRT), and
+	//! sRGB LCD (and similar modern) panels try to reproduce that. This method allows overriding for other sky tones.
+	//! Higher gamma makes the sky brighter.
+	//! @note It may be technically an error to deviate from the defaults!
+	//! @note Only the blue-sky (atmosphere) model is influenced, not the foreground (landscape)
+	//! @note This is experimental and may not be available in later versions.
+	static void setDisplayGamma(double gamma);
+	//! Experimental: Get the display gamma. Initial default value is 2.2222 (for a CRT), and
+	//! sRGB LCD (and similar modern) panels try to reproduce that.
+	//! Higher gamma makes the sky brighter.
+	//! @note This is experimental and may not be available in later versions.
+	static double getDisplayGamma();
+
 signals:
 	void requestLoadSkyImage(const QString& id, const QString& filename,
-							 double c1, double c2,
-							 double c3, double c4,
-							 double c5, double c6,
-							 double c7, double c8,
-							 double minRes, double maxBright, bool visible, const StelCore::FrameType frameType);
+							 double lon0, double lat0,
+							 double lon1, double lat1,
+							 double lon2, double lat2,
+							 double lon3, double lat3,
+							 double minRes, double maxBright, bool visible,
+							 const StelCore::FrameType frameType, bool withAberration);
 
 	void requestRemoveSkyImage(const QString& id);
 

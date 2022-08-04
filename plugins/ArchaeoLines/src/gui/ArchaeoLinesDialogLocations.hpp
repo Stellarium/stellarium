@@ -41,15 +41,15 @@ class ArchaeoLinesDialogLocations : public StelDialog
 
 public:
 	ArchaeoLinesDialogLocations();
-	~ArchaeoLinesDialogLocations();
+	~ArchaeoLinesDialogLocations() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 	//! call with context 1 or 2 to prepare selection of location 1 or 2.
 	void setModalContext(int context);
 
 protected:
-	void createDialogContent();
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 private:
 	Ui_archaeoLinesDialogLocations* ui;

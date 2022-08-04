@@ -44,7 +44,7 @@
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QSet>
 #include <QStringList>
 #include <QTemporaryFile>
@@ -299,12 +299,12 @@ class StelScriptEngineAgent : public QScriptEngineAgent
 {
 public:
 	explicit StelScriptEngineAgent(QScriptEngine *engine);
-	virtual ~StelScriptEngineAgent() {}
+	virtual ~StelScriptEngineAgent() Q_DECL_OVERRIDE {}
 
 	void setPauseScript(bool pause) { isPaused=pause; }
 	bool getPauseScript() { return isPaused; }
 
-	void positionChange(qint64 scriptId, int lineNumber, int columnNumber);
+	void positionChange(qint64 scriptId, int lineNumber, int columnNumber) Q_DECL_OVERRIDE;
 
 private:
 	bool isPaused;
@@ -336,6 +336,9 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 
 	defVecClasses(engine);
 
+	// This is enough for a simple Array access for a QVector<int> input or return type (e.g. Calendars plugin)
+	qScriptRegisterSequenceMetaType<QVector<int>>(engine);
+
 	// Add the core object to access methods related to core
 	mainAPI = new StelMainScriptAPI(this);
 	QScriptValue objectValue = engine->newQObject(mainAPI);
@@ -362,7 +365,8 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 void StelScriptMgr::initActions()
 {
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
-	for (const auto& script : getScriptList())
+	const QStringList scriptList = getScriptList();
+	for (const auto& script : scriptList)
 	{
 		QString shortcut = getShortcut(script);
 		QString actionId = "actionScript/" + script;
@@ -379,11 +383,18 @@ void StelScriptMgr::addModules()
 {
 	// Add all the StelModules into the script engine
 	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
-	for (auto* m : mmgr->getAllModules())
+	const QList allModules = mmgr->getAllModules();
+	for (auto* m : allModules)
 	{
 		QScriptValue objectValue = engine->newQObject(m);
 		engine->globalObject().setProperty(m->objectName(), objectValue);
 	}
+}
+
+void StelScriptMgr::addObject(QObject *obj)
+{
+	QScriptValue objectValue = engine->newQObject(obj);
+	engine->globalObject().setProperty(obj->objectName(), objectValue);
 }
 
 QStringList StelScriptMgr::getScriptList() const
@@ -391,10 +402,10 @@ QStringList StelScriptMgr::getScriptList() const
 	QStringList scriptFiles;
 
 	QSet<QString> files = StelFileMgr::listContents("scripts", StelFileMgr::File, true);
-	QRegExp fileRE("^.*\\.ssc$");
+	static const QRegularExpression fileRE("^.*\\.ssc$");
 	for (const auto& f : files)
 	{
-		if (fileRE.exactMatch(f))
+		if (fileRE.match(f).hasMatch())
 			scriptFiles << f;
 	}
 	return scriptFiles;
@@ -410,13 +421,13 @@ QString StelScriptMgr::runningScriptId() const
 	return scriptFileName;
 }
 
-QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText) const
+QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText)
 {
 	QFile file(StelFileMgr::findFile("scripts/" + s, StelFileMgr::File));
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
 		QString msg = QString("WARNING: script file %1 could not be opened for reading").arg(QDir::toNativeSeparators(s));
-		emit(scriptDebug(msg));
+		emit scriptDebug(msg);
 		qWarning() << msg;
 		return QString();
 	}
@@ -425,21 +436,22 @@ QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QS
 	QTextStream textStream(&file);
 	textStream.setCodec("UTF-8");
 
-	QRegExp nameExp("^\\s*//\\s*" + id + ":\\s*(.+)$");
+	QRegularExpression nameExp("^\\s*//\\s*" + id + ":\\s*(.+)$");
 	while (!textStream.atEnd())
 	{
 		QString line = textStream.readLine();
-		if (nameExp.exactMatch(line))
+		QRegularExpressionMatch nameMatch=nameExp.match(line);
+		if (nameMatch.hasMatch())
 		{
 			file.close();
-			return nameExp.cap(1).trimmed();
+			return nameMatch.captured(1).trimmed();
 		}
 	}
 	file.close();
 	return notFoundText;
 }
 
-QString StelScriptMgr::getHtmlDescription(const QString &s, bool generateDocumentTags) const
+QString StelScriptMgr::getHtmlDescription(const QString &s, bool generateDocumentTags)
 {
 	QString html;
 	if (generateDocumentTags)
@@ -447,7 +459,8 @@ QString StelScriptMgr::getHtmlDescription(const QString &s, bool generateDocumen
 	html += "<h2>" + q_(getName(s).trimmed()) + "</h2>";
 	QString d = getDescription(s).trimmed();
 	d.replace("\n", "<br />");
-	d.replace(QRegExp("\\s{2,}"), " ");
+	static const QRegularExpression spaceExp("\\s{2,}");
+	d.replace(spaceExp, " ");
 	html += "<p>" + q_(d) + "</p>";
 	html += "<p>";
 
@@ -479,39 +492,39 @@ QString StelScriptMgr::getHtmlDescription(const QString &s, bool generateDocumen
 	return html;
 }
 
-QString StelScriptMgr::getName(const QString& s) const
+QString StelScriptMgr::getName(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "Name", s);
 }
 
-QString StelScriptMgr::getAuthor(const QString& s) const
+QString StelScriptMgr::getAuthor(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "Author");
 }
 
-QString StelScriptMgr::getLicense(const QString& s) const
+QString StelScriptMgr::getLicense(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "License", "");
 }
 
-QString StelScriptMgr::getVersion(const QString& s) const
+QString StelScriptMgr::getVersion(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "Version", "");
 }
 
 
-QString StelScriptMgr::getShortcut(const QString& s) const
+QString StelScriptMgr::getShortcut(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "Shortcut", "");
 }
 
-QString StelScriptMgr::getDescription(const QString& s) const
+QString StelScriptMgr::getDescription(const QString& s)
 {
 	QFile file(StelFileMgr::findFile("scripts/" + s, StelFileMgr::File));
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
 		QString msg = QString("WARNING: script file %1 could not be opened for reading").arg(QDir::toNativeSeparators(s));
-		emit(scriptDebug(msg));
+		emit scriptDebug(msg);
 		qWarning() << msg;
 		return QString();
 	}
@@ -522,26 +535,28 @@ QString StelScriptMgr::getDescription(const QString& s) const
 
 	QString desc = "";
 	bool inDesc = false;
-	QRegExp descExp("^\\s*//\\s*Description:\\s*([^\\s].+)\\s*$");
-	QRegExp descNewlineExp("^\\s*//\\s*$");
-	QRegExp descContExp("^\\s*//\\s*([^\\s].*)\\s*$");
+	static const QRegularExpression descExp("^\\s*//\\s*Description:\\s*([^\\s].+)\\s*$");
+	static const QRegularExpression descNewlineExp("^\\s*//\\s*$");
+	static const QRegularExpression descContExp("^\\s*//\\s*([^\\s].*)\\s*$");
 	while (!textStream.atEnd())
 	{
 		QString line = textStream.readLine();
-		if (!inDesc && descExp.exactMatch(line))
+		QRegularExpressionMatch descMatch=descExp.match(line);
+		if (!inDesc && descMatch.hasMatch())
 		{
 			inDesc = true;
-			desc = descExp.cap(1) + " ";
+			desc = descMatch.captured(1) + " ";
 			desc.replace("\n","");
 		}
 		else if (inDesc)
 		{
 			QString d("");
-			if (descNewlineExp.exactMatch(line))
+			QRegularExpressionMatch descContMatch=descContExp.match(line);
+			if (descNewlineExp.match(line).hasMatch())
 				d = "\n";
-			else if (descContExp.exactMatch(line))
+			else if (descContMatch.hasMatch())
 			{
-				d = descContExp.cap(1) + " ";
+				d = descContMatch.captured(1) + " ";
 				d.replace("\n","");
 			}
 			else
@@ -561,7 +576,7 @@ bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript, con
 	if (engine->isEvaluating())
 	{
 		QString msg = QString("ERROR: there is already a script running, please wait until it's over.");
-		emit(scriptDebug(msg));
+		emit scriptDebug(msg);
 		qWarning() << msg;
 		return false;
 	}
@@ -574,7 +589,7 @@ bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript, con
 	scriptFileName = scriptId;
 
 	// Notify that the script starts here
-	emit(scriptRunning());
+	emit scriptRunning();
 	emit runningScriptIdChanged(scriptId);
 
 	// run that script in a new context
@@ -606,6 +621,13 @@ bool StelScriptMgr::runScriptDirect(const QString scriptId, const QString &scrip
 	return false;
 }
 
+bool StelScriptMgr::runScriptDirect(const QString& scriptCode, const QString &includePath)
+{
+	QString dummyId("directScript");
+	int dummyErrLoc;
+	return runScriptDirect(dummyId, scriptCode, dummyErrLoc, includePath);
+}
+
 bool StelScriptMgr::prepareScript( QString &script, const QString &fileName, const QString &includePath)
 {
 	QString absPath;
@@ -618,7 +640,7 @@ bool StelScriptMgr::prepareScript( QString &script, const QString &fileName, con
 	if (absPath.isEmpty())
 	{
 		QString msg = QString("WARNING: could not find script file %1").arg(QDir::toNativeSeparators(fileName));
-		emit(scriptDebug(msg));
+		emit scriptDebug(msg);
 		qWarning() << msg;
 		return false;
 	}
@@ -629,7 +651,7 @@ bool StelScriptMgr::prepareScript( QString &script, const QString &fileName, con
 	if (!fic.open(QIODevice::ReadOnly))
 	{
 		QString msg = QString("WARNING: cannot open script: %1").arg(QDir::toNativeSeparators(fileName));
-		emit(scriptDebug(msg));
+		emit scriptDebug(msg);
 		qWarning() << msg;
 		return false;
 	}
@@ -668,7 +690,7 @@ void StelScriptMgr::stopScript()
 			agent->setPauseScript(false);
 		}
 		QString msg = QString("INFO: asking running script to exit");
-		emit(scriptDebug(msg));
+		emit scriptDebug(msg);
 		//qDebug() << msg;
 		engine->abortEvaluation();
 	}
@@ -699,7 +721,7 @@ void StelScriptMgr::setScriptRate(double r)
 
 void StelScriptMgr::pauseScript()
 {
-	emit(scriptPaused());
+	emit scriptPaused();
 	agent->setPauseScript(true);
 }
 
@@ -708,26 +730,26 @@ void StelScriptMgr::resumeScript()
 	agent->setPauseScript(false);
 }
 
-double StelScriptMgr::getScriptRate() const
+double StelScriptMgr::getScriptRate()
 {
 	return engine->globalObject().property("scriptRateReadOnly").toNumber();
 }
 
 void StelScriptMgr::debug(const QString& msg)
 {
-	emit(scriptDebug(msg));
+	emit scriptDebug(msg);
 }
 
 void StelScriptMgr::output(const QString &msg)
 {
 	StelScriptOutput::writeLog(msg);
-	emit(scriptOutput(msg));
+	emit scriptOutput(msg);
 }
 
 void StelScriptMgr::resetOutput(void)
 {
 	StelScriptOutput::reset();
-	emit(scriptOutput(""));
+	emit scriptOutput("");
 }
 
 void StelScriptMgr::saveOutputAs(const QString &filename)
@@ -741,15 +763,15 @@ void StelScriptMgr::scriptEnded()
 	{
 		int outputPos = engine->uncaughtExceptionLineNumber();
 		QString realPos = lookup( outputPos );
-		QString msg = QString("script error: \"%1\" @ line %2").arg(engine->uncaughtException().toString()).arg(realPos);
-		emit(scriptDebug(msg));
+		QString msg = QString("script error: \"%1\" @ line %2").arg(engine->uncaughtException().toString(), realPos);
+		emit scriptDebug(msg);
 		qWarning() << msg;
 	}
 
 	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(1.0);
 	scriptFileName = QString();
 	emit runningScriptIdChanged(scriptFileName);
-	emit(scriptStopped());
+	emit scriptStopped();
 }
 
 QMap<QString, QString> StelScriptMgr::mappify(const QStringList& args, bool lowerKey)
@@ -798,14 +820,15 @@ bool StelScriptMgr::preprocessScript(const QString fileName, const QString &inpu
 	
 void StelScriptMgr::expand(const QString fileName, const QString &input, QString &output, const QString &scriptDir, int &errLoc){
 	QStringList lines = input.split("\n");
-	QRegExp includeRe("^include\\s*\\(\\s*\"([^\"]+)\"\\s*\\)\\s*;\\s*(//.*)?$");
+	static const QRegularExpression includeRe("^include\\s*\\(\\s*\"([^\"]+)\"\\s*\\)\\s*;\\s*(//.*)?$");
 	int curline = 0;
 	for (const auto& line : lines)
 	{
 		curline++;
-		if (includeRe.exactMatch(line))
+		QRegularExpressionMatch includeMatch=includeRe.match(line);
+		if (includeMatch.hasMatch())
 		{
-			QString incName = includeRe.cap(1);
+			QString incName = includeMatch.captured(1);
 			QString incPath;
 
 			// Search for the include file.  Rules are:
@@ -828,7 +851,7 @@ void StelScriptMgr::expand(const QString fileName, const QString &input, QString
 					if (incPath.isEmpty())
 					{
 						fail += " or scripts/" + incName;
-						emit(scriptDebug(QString("WARNING: could not find script include file: %1").arg(QDir::toNativeSeparators(incName))));
+						emit scriptDebug(QString("WARNING: could not find script include file: %1").arg(QDir::toNativeSeparators(incName)));
 						qWarning() << "WARNING: could not find script include file: " << QDir::toNativeSeparators(incName);
 						if( errLoc == -1 ) errLoc = output.length();
 						output += line + " // <<< " + fail + " not found\n";
@@ -856,7 +879,7 @@ void StelScriptMgr::expand(const QString fileName, const QString &input, QString
 				}
 				else
 				{
-					emit(scriptDebug(QString("WARNING: could not open script include file for reading: %1").arg(QDir::toNativeSeparators(incPath))));
+					emit scriptDebug(QString("WARNING: could not open script include file for reading: %1").arg(QDir::toNativeSeparators(incPath)));
 					qWarning() << "WARNING: could not open script include file for reading: " << QDir::toNativeSeparators(incPath);
 				   	if( errLoc == -1 ) errLoc = output.length();
 					output += line + " // <<< " + incPath + ": cannot open\n";

@@ -3,13 +3,18 @@
 # This file is distributed under the same license as the stellarium-remotecontrol package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# cardinot <mcardinot@gmail.com>, 2022
+# Xəyyam Qocayev <xxmn77@gmail.com>, 2022
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-06-15 22:33+0700\n"
+"POT-Creation-Date: 2022-06-03 20:38+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
+"Last-Translator: Xəyyam Qocayev <xxmn77@gmail.com>, 2022\n"
 "Language-Team: Azerbaijani (https://www.transifex.com/stellarium/teams/80998/az/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -254,10 +259,6 @@ msgstr ""
 msgid "Vertical View offset"
 msgstr ""
 
-#: index.html:154 tablet7in.html:133
-msgid "Reset"
-msgstr ""
-
 #: index.html:160 tablet7in.html:138
 msgid "FOV"
 msgstr ""
@@ -304,7 +305,7 @@ msgstr ""
 
 #: index.html:268 tablet7in.html:321
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Süd Yolun parlaqlığı"
 
 #: index.html:272 tablet7in.html:333
 msgid "Digitized Sky Survey"
@@ -314,9 +315,13 @@ msgstr ""
 msgid "HiPS Survey"
 msgstr ""
 
+#: index.html:286 tablet7in.html:350
+msgid "Show planet markers"
+msgstr "Planetlərin adlarını göstər"
+
 #: index.html:287 tablet7in.html:351
 msgid "Show planet orbits"
-msgstr ""
+msgstr "Planetlərin orbitlərini göstər"
 
 #: index.html:288 tablet7in.html:352
 msgid "Show planet orbits only"
@@ -333,6 +338,18 @@ msgstr ""
 #: index.html:291 tablet7in.html:355
 msgid "Show trail only for selected planet"
 msgstr ""
+
+#: index.html:294 tablet7in.html:359
+msgid "Scale Moon:"
+msgstr "Ayın miqyası:"
+
+#: index.html:295 tablet7in.html:363
+msgid "Scale minor bodies:"
+msgstr ""
+
+#: index.html:318 tablet7in.html:404
+msgid "Extinction Coefficient:"
+msgstr "Estinksiya koeffisiyenti"
 
 #: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"
@@ -399,7 +416,7 @@ msgstr ""
 
 #: index.html:573 tablet7in.html:652
 msgid "Use associated planet and position"
-msgstr ""
+msgstr "Bağlı planeti və mövüeni işlət"
 
 #: index.html:582 tablet7in.html:661
 msgid "Show illumination"
@@ -551,31 +568,31 @@ msgstr ""
 
 #: tablet7in.html:266
 msgid "Sirius"
-msgstr ""
+msgstr "Sirius"
 
 #: tablet7in.html:267
 msgid "Arcturus"
-msgstr ""
+msgstr "Arktur"
 
 #: tablet7in.html:268
 msgid "Capella"
-msgstr ""
+msgstr "Kapella"
 
 #: tablet7in.html:269
 msgid "Vega"
-msgstr ""
+msgstr "Veqa"
 
 #: tablet7in.html:270
 msgid "Deneb"
-msgstr ""
+msgstr "Deneb"
 
 #: tablet7in.html:271
 msgid "Altair"
-msgstr ""
+msgstr "Altair"
 
 #: tablet7in.html:272
 msgid "Andromeda Galaxy"
-msgstr ""
+msgstr "Andromeda qalaktikası"
 
 #: tablet7in.html:273
 msgid "Hercules Cluster"
@@ -595,55 +612,55 @@ msgstr ""
 
 #: tablet7in.html:277
 msgid "Aries"
-msgstr ""
+msgstr "Oğlaq"
 
 #: tablet7in.html:278
 msgid "Taurus"
-msgstr ""
+msgstr "Buğa"
 
 #: tablet7in.html:279
 msgid "Gemini"
-msgstr ""
+msgstr "Əkizlər"
 
 #: tablet7in.html:280
 msgid "Cancer"
-msgstr ""
+msgstr "Xərçəng"
 
 #: tablet7in.html:281
 msgid "Leo"
-msgstr ""
+msgstr "Şir"
 
 #: tablet7in.html:282
 msgid "Virgo"
-msgstr ""
+msgstr "Qız"
 
 #: tablet7in.html:283
 msgid "Libra"
-msgstr ""
+msgstr "Tərəzi"
 
 #: tablet7in.html:284
 msgid "Scorpius"
-msgstr ""
+msgstr "Əqrəb"
 
 #: tablet7in.html:285
 msgid "Sagittarius"
-msgstr ""
+msgstr "Oxatan"
 
 #: tablet7in.html:286
 msgid "Capricornus"
-msgstr ""
+msgstr "Oğlaq"
 
 #: tablet7in.html:287
 msgid "Aquarius"
-msgstr ""
+msgstr "Dolça"
 
 #: tablet7in.html:288
 msgid "Pisces"
-msgstr ""
+msgstr "Balıqlar"
 
 #: tablet7in.html:507
 msgid "Compass Marks"
-msgstr ""
+msgstr "Kompas"
 
 #: tablet7in.html:742
 msgid "Favorites"

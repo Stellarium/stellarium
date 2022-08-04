@@ -61,7 +61,6 @@ public slots:
 	//! get a formatted string for the 5 second components of a date.
 	QString getFormattedDateString6to10() const;
 
-public:
 	static QVector<int> baliPawukonFromFixed(const int rd);
 	static int baliDayFromFixed(const int rd);
 	static int baliTriwaraFromFixed(const int rd);
@@ -77,6 +76,7 @@ public:
 	static int baliCaturwaraFromFixed(const int rd);
 
 	static int baliOnOrBefore(const QVector<int>baliDate, const int rd);
+public:
 	static const int baliEpoch;
 
 protected:

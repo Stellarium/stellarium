@@ -115,14 +115,11 @@ void SupernovaeDialog::createDialogContent()
 
 void SupernovaeDialog::setAboutHtml(void)
 {
-	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Historical Supernovae Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + SUPERNOVAE_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + SUPERNOVAE_PLUGIN_LICENSE + "</td></tr>";
-	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf</td></tr>";
 	html += "</table>";
 
 	html += "<p>" + q_("This plugin allows you to see some bright historical supernovae: ");
@@ -135,11 +132,11 @@ void SupernovaeDialog::setAboutHtml(void)
 
 	html += "<h3>" + q_("Acknowledgments") + "</h3>";
 	html += "<p>" + q_("We thank the following people for their contribution and valuable comments:") + "</p><ul>";
-	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)")
-			.arg(q_("Sergei Blinnikov"))
-			.arg("http://www.itep.ru/")
-			.arg(q_("Institute for Theoretical and Experimental Physics"))
-			.arg(q_("in Russia")) + "</li>";
+	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)").arg(
+				 q_("Sergei Blinnikov"),
+				 "http://www.itep.ru/",
+				 q_("Institute for Theoretical and Experimental Physics"),
+				 q_("in Russia")) + "</li>";
 	html += "</ul>";
 
 	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Historical Supernovae plugin");

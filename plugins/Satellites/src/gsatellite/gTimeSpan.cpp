@@ -67,7 +67,7 @@ const gTimeSpan& gTimeSpan::operator=(const gTimeSpan& timeSpanSrc)
 
 long  gTimeSpan::getDays() const
 {
-	return (long)(m_timeSpan / KSEC_PER_DAY);
+	return static_cast<long>(m_timeSpan / KSEC_PER_DAY);
 }
 
 ////////////////////////////////////////////////////////////////////////////

@@ -227,6 +227,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="alwaysOnCheckBox">
+        <property name="text">
+         <string>Lines and markers always on</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QLabel" name="label">

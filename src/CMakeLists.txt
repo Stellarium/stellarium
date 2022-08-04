@@ -41,8 +41,6 @@ SET(stellarium_lib_SRCS
      core/MultiLevelJsonBase.cpp
      core/StelSkyImageTile.hpp
      core/StelSkyImageTile.cpp
-     core/StelSkyPolygon.hpp
-     core/StelSkyPolygon.cpp
      core/SphericMirrorCalculator.cpp
      core/SphericMirrorCalculator.hpp
      core/StelApp.cpp
@@ -148,8 +146,6 @@ SET(stellarium_lib_SRCS
      core/planetsephems/precession.h
      core/planetsephems/sidereal_time.c
      core/planetsephems/sidereal_time.h
-     #core/planetsephems/stellplanet.c   # replaced by EphemWrapper during de430 work
-     #core/planetsephems/stellplanet.h
      core/planetsephems/jpl_int.h
      core/planetsephems/jpleph.h
      core/planetsephems/jpleph.cpp
@@ -163,6 +159,12 @@ SET(stellarium_lib_SRCS
      core/planetsephems/de430.hpp
      core/planetsephems/de431.cpp
      core/planetsephems/de431.hpp
+     core/planetsephems/de440.cpp
+     core/planetsephems/de440.hpp
+     core/planetsephems/de441.cpp
+     core/planetsephems/de441.hpp
+     core/planetsephems/htc20b.cpp
+     core/planetsephems/htc20b.hpp
      core/modules/Atmosphere.cpp
      core/modules/Atmosphere.hpp
      core/modules/Asterism.cpp
@@ -249,13 +251,13 @@ SET(stellarium_lib_SRCS
      CLIProcessor.hpp
      CLIProcessor.cpp
      translations.h
-     translations_countries.h
+     translations_regions.h
 )
 
 ### CMake < 3.0 does not AUTOMOC Q_GADGET which some files use, so we have to manually add it
 ### Wrap it in an IF to prevent some linker warnings about symbols defined twice (on MSVC13 at least)
 ### Q_GADGET is required force the Qt MOC to run on some specific files,
-### because they do not contain QObjects, but require a MOC for Q_FLAGS or similar
+### because they do not contain QObjects, but require a MOC for Q_FLAG or similar
 IF("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 3.0)
      QT5_WRAP_CPP(stellarium_lib_moc_SRCS
          core/StelObject.hpp
@@ -318,6 +320,10 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/DateTimeDialog.cpp
           gui/ViewDialog.hpp
           gui/ViewDialog.cpp
+          gui/LightPollutionWidget.hpp
+          gui/LightPollutionWidget.cpp
+          gui/LogarithmicSpinBox.hpp
+          gui/LogarithmicSpinBox.cpp
           gui/SearchDialog.hpp
           gui/SearchDialog.cpp
           gui/ConfigurationDialog.hpp
@@ -334,12 +340,16 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/GreatRedSpotDialog.cpp
           gui/CustomDeltaTEquationDialog.hpp
           gui/CustomDeltaTEquationDialog.cpp
+          gui/ConfigureScreenshotsDialog.hpp
+          gui/ConfigureScreenshotsDialog.cpp
           gui/AstroCalcDialog.hpp
           gui/AstroCalcDialog.cpp
           gui/AstroCalcExtraEphemerisDialog.hpp
           gui/AstroCalcExtraEphemerisDialog.cpp
           gui/AstroCalcCustomStepsDialog.hpp
           gui/AstroCalcCustomStepsDialog.cpp
+          gui/AstroCalcChart.hpp
+          gui/AstroCalcChart.cpp
           gui/ObsListDialog.hpp
           gui/ObsListDialog.cpp
           gui/ObsListCreateEditDialog.hpp
@@ -347,6 +357,12 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/StelDialog.hpp
           gui/StelDialog_p.hpp
           gui/StelDialog.cpp
+          gui/StelDialogSeparate.hpp
+          gui/StelDialogSeparate.cpp
+          gui/TonemappingDialog.hpp
+          gui/TonemappingDialog.cpp
+          gui/SkylightDialog.hpp
+          gui/SkylightDialog.cpp
      )
 
      ################# compiles .ui files ############
@@ -356,11 +372,13 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/shortcutsDialog.ui
           gui/dateTimeDialogGui.ui
           gui/viewDialog.ui
+          gui/lightPollutionWidget.ui
           gui/searchDialogGui.ui
           gui/configurationDialog.ui
           gui/atmosphereDialog.ui
           gui/greatRedSpotDialog.ui
           gui/customDeltaTEquationDialog.ui
+          gui/configureScreenshotsDialog.ui
           gui/astroCalcDialog.ui
           gui/astroCalcExtraEphemerisDialog.ui
           gui/astroCalcCustomStepsDialog.ui
@@ -369,6 +387,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/addRemoveLandscapesDialog.ui
           gui/dsoColorsDialog.ui
           gui/orbitColorsDialog.ui
+          gui/tonemappingDialog.ui
+          gui/skylightDialog.ui
      )
 
      IF(ENABLE_SCRIPTING)
@@ -448,7 +468,7 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
 ENDIF()
 
 # Setup Qt5 dependencies
-SET(STELLARIUM_QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Gui ${STEL_GLES_LIBS} Qt5::Network Qt5::Widgets)
+SET(STELLARIUM_QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Gui ${STEL_GLES_LIBS} Qt5::Network Qt5::Widgets Qt5::Charts)
 IF(ENABLE_MEDIA)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Multimedia Qt5::MultimediaWidgets)
 ENDIF()
@@ -464,7 +484,7 @@ IF(ENABLE_SPOUT AND SPOUT_LIBRARY_DLL)
      CONFIGURE_FILE(${SPOUT_LIBRARY_DLL} ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 ENDIF()
 
-SET(STELMAIN_DEPS ${ZLIB_LIBRARIES} qtcompress_stel glues_stel qcustomplot_stel qxlsx_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY})
+SET(STELMAIN_DEPS ${ZLIB_LIBRARIES} qtcompress_stel glues_stel qxlsx_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY})
 IF(ENABLE_LIBGPS)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} ${GPS_LIBRARY})
 ENDIF()
@@ -736,15 +756,17 @@ IF(ENABLE_TESTING)
     ADD_TEST(testVecMath testVecMath)
     SET_TARGET_PROPERTIES(testVecMath PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testJavaScripting_SRCS
-        tests/testJavaScripting.hpp
-        tests/testJavaScripting.cpp
-    )
-    ADD_EXECUTABLE(testJavaScripting ${tests_testJavaScripting_SRCS})
-    TARGET_LINK_LIBRARIES(testJavaScripting ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testJavaScripting)
-    ADD_TEST(testJavaScripting testJavaScripting)
-    SET_TARGET_PROPERTIES(testJavaScripting PROPERTIES FOLDER "src/tests")
+    IF(ENABLE_SCRIPTING)
+        SET(tests_testJavaScripting_SRCS
+            tests/testJavaScripting.hpp
+            tests/testJavaScripting.cpp
+        )
+        ADD_EXECUTABLE(testJavaScripting ${tests_testJavaScripting_SRCS})
+        TARGET_LINK_LIBRARIES(testJavaScripting ${TESTS_LIBRARIES})
+        ADD_DEPENDENCIES(buildTests testJavaScripting)
+        ADD_TEST(testJavaScripting testJavaScripting)
+        SET_TARGET_PROPERTIES(testJavaScripting PROPERTIES FOLDER "src/tests")
+    ENDIF(ENABLE_SCRIPTING)
 	
     SET(tests_testStelProjector_SRCS
         tests/testStelProjector.hpp

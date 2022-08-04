@@ -1,90 +1,65 @@
-/****************************************************************************
-** Copyright (c) 2013-2014 Debao Zhang <hello@debao.me>
-** All right reserved.
-**
-** Permission is hereby granted, free of charge, to any person obtaining
-** a copy of this software and associated documentation files (the
-** "Software"), to deal in the Software without restriction, including
-** without limitation the rights to use, copy, modify, merge, publish,
-** distribute, sublicense, and/or sell copies of the Software, and to
-** permit persons to whom the Software is furnished to do so, subject to
-** the following conditions:
-**
-** The above copyright notice and this permission notice shall be
-** included in all copies or substantial portions of the Software.
-**
-** THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-** EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-** MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-** NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-** LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-** OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-**
-****************************************************************************/
+// xlsxchart_p.h
 
 #ifndef QXLSX_CHART_P_H
 #define QXLSX_CHART_P_H
 
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Qt Xlsx API.  It exists for the convenience
-// of the Qt Xlsx.  This header file may change from
-// version to version without notice, or even be removed.
-//
-// We mean it.
-//
+#include <QtGlobal>
+#include <QObject>
+#include <QString>
+#include <QSharedPointer>
+#include <QVector>
+#include <QMap>
+#include <QList>
+#include <QXmlStreamReader>
+#include <QXmlStreamWriter>
 
 #include "xlsxabstractooxmlfile_p.h"
 #include "xlsxchart.h"
 
-#include <QSharedPointer>
-
-class QXmlStreamReader;
-class QXmlStreamWriter;
-
-namespace QXlsx {
+QT_BEGIN_NAMESPACE_XLSX
 
 class XlsxSeries
 {
 public:
     //At present, we care about number cell ranges only!
-    QString numberDataSource_numRef; //yval, val
-    QString axDataSource_numRef; //xval, cat
+    QString numberDataSource_numRef; // yval, val
+    QString axDataSource_numRef; // xval, cat
+    QString headerH_numRef;
+    QString headerV_numRef;
+    bool    swapHeader = false;
 };
 
 class XlsxAxis
 {
 public:
-    enum Type
-    {
-        T_Cat,
-        T_Val,
-        T_Date,
-        T_Ser
-    };
-
-    enum Pos
-    {
-        Left,
-        Right,
-        Top,
-        Bottom
-    };
-
+    enum Type { T_None = (-1), T_Cat, T_Val, T_Date, T_Ser };
+    enum AxisPos { None = (-1), Left, Right, Top, Bottom };
+public:
     XlsxAxis(){}
 
-    XlsxAxis(Type t, Pos p, int id, int crossId)
-        :type(t), axisPos(p), axisId(id), crossAx(crossId)
+    XlsxAxis( Type t,
+              XlsxAxis::AxisPos p,
+              int id,
+              int crossId,
+              QString axisTitle = QString())
     {
+        type = t;
+        axisPos = p;
+        axisId = id;
+        crossAx = crossId;
+
+        if ( !axisTitle.isEmpty() )
+        {
+            axisNames[ p ] = axisTitle;
+        }
     }
 
+public:
     Type type;
-    Pos axisPos; //l,r,b,t
+    XlsxAxis::AxisPos axisPos;
     int axisId;
     int crossAx;
+    QMap< XlsxAxis::AxisPos, QString > axisNames;
 };
 
 class ChartPrivate : public AbstractOOXmlFilePrivate
@@ -95,14 +70,43 @@ public:
     ChartPrivate(Chart *q, Chart::CreateFlag flag);
     ~ChartPrivate();
 
+public:
     bool loadXmlChart(QXmlStreamReader &reader);
     bool loadXmlPlotArea(QXmlStreamReader &reader);
+protected:
+    bool loadXmlPlotAreaElement(QXmlStreamReader &reader);
+public:
     bool loadXmlXxxChart(QXmlStreamReader &reader);
     bool loadXmlSer(QXmlStreamReader &reader);
     QString loadXmlNumRef(QXmlStreamReader &reader);
-    bool loadXmlAxis(QXmlStreamReader &reader);
+    QString loadXmlStrRef(QXmlStreamReader &reader);
+    bool loadXmlChartTitle(QXmlStreamReader &reader);
+    bool loadXmlChartLegend(QXmlStreamReader &reader);
+protected:
+    bool loadXmlChartTitleTx(QXmlStreamReader &reader);
+    bool loadXmlChartTitleTxRich(QXmlStreamReader &reader);
+    bool loadXmlChartTitleTxRichP(QXmlStreamReader &reader);
+    bool loadXmlChartTitleTxRichP_R(QXmlStreamReader &reader);
+protected:
+    bool loadXmlAxisCatAx(QXmlStreamReader &reader);
+    bool loadXmlAxisDateAx(QXmlStreamReader &reader);
+    bool loadXmlAxisSerAx(QXmlStreamReader &reader);
+    bool loadXmlAxisValAx(QXmlStreamReader &reader);
+    bool loadXmlAxisEG_AxShared(QXmlStreamReader &reader, XlsxAxis* axis);
+    bool loadXmlAxisEG_AxShared_Scaling(QXmlStreamReader &reader, XlsxAxis* axis);
+    bool loadXmlAxisEG_AxShared_Title(QXmlStreamReader &reader, XlsxAxis* axis);
+    bool loadXmlAxisEG_AxShared_Title_Overlay(QXmlStreamReader &reader, XlsxAxis* axis);
+    bool loadXmlAxisEG_AxShared_Title_Tx(QXmlStreamReader &reader, XlsxAxis* axis);
+    bool loadXmlAxisEG_AxShared_Title_Tx_Rich(QXmlStreamReader &reader, XlsxAxis* axis);
+    bool loadXmlAxisEG_AxShared_Title_Tx_Rich_P(QXmlStreamReader &reader, XlsxAxis* axis);
+    bool loadXmlAxisEG_AxShared_Title_Tx_Rich_P_pPr(QXmlStreamReader &reader, XlsxAxis* axis);
+    bool loadXmlAxisEG_AxShared_Title_Tx_Rich_P_R(QXmlStreamReader &reader, XlsxAxis* axis);
 
+    QString readSubTree(QXmlStreamReader &reader);
+
+public:
     void saveXmlChart(QXmlStreamWriter &writer) const;
+    void saveXmlChartTitle(QXmlStreamWriter &writer) const;
     void saveXmlPieChart(QXmlStreamWriter &writer) const;
     void saveXmlBarChart(QXmlStreamWriter &writer) const;
     void saveXmlLineChart(QXmlStreamWriter &writer) const;
@@ -110,16 +114,35 @@ public:
     void saveXmlAreaChart(QXmlStreamWriter &writer) const;
     void saveXmlDoughnutChart(QXmlStreamWriter &writer) const;
     void saveXmlSer(QXmlStreamWriter &writer, XlsxSeries *ser, int id) const;
-    void saveXmlAxes(QXmlStreamWriter &writer) const;
+    void saveXmlAxis(QXmlStreamWriter &writer) const;
+    void saveXmlChartLegend(QXmlStreamWriter &writer) const;
 
+protected:
+    void saveXmlAxisCatAx(QXmlStreamWriter &writer, XlsxAxis* axis) const;
+    void saveXmlAxisDateAx(QXmlStreamWriter &writer, XlsxAxis* axis) const;
+    void saveXmlAxisSerAx(QXmlStreamWriter &writer, XlsxAxis* axis) const;
+    void saveXmlAxisValAx(QXmlStreamWriter &writer, XlsxAxis* axis) const;
+
+    void saveXmlAxisEG_AxShared(QXmlStreamWriter &writer, XlsxAxis* axis) const;
+    void saveXmlAxisEG_AxShared_Title(QXmlStreamWriter &writer, XlsxAxis* axis) const;
+    QString GetAxisPosString( XlsxAxis::AxisPos axisPos ) const;
+    QString GetAxisName(XlsxAxis* ptrXlsxAxis) const;
+
+public:
     Chart::ChartType chartType;
+    QList< QSharedPointer<XlsxSeries> > seriesList;
+    QList< QSharedPointer<XlsxAxis> > axisList;
+    QMap< XlsxAxis::AxisPos, QString > axisNames;
+    QString chartTitle;
+    AbstractSheet* sheet;
+    Chart::ChartAxisPos legendPos;
+    bool legendOverlay;
+    bool majorGridlinesEnabled;
+    bool minorGridlinesEnabled;
 
-    QList<QSharedPointer<XlsxSeries> > seriesList;
-    QList<QSharedPointer<XlsxAxis> > axisList;
-
-    AbstractSheet *sheet;
+    QString layout;             // only for storing a readed file
 };
 
-} // namespace QXlsx
+QT_END_NAMESPACE_XLSX
 
 #endif // QXLSX_CHART_P_H

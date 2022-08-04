@@ -4,18 +4,20 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# cardinot <mcardinot@gmail.com>, 2017
 # handbookEOF <fachri.ikh1213@gmail.com>, 2018
 # Hariyadi Putraga <hariyadiputraga@gmail.com>, 2020
+# Andika Triwidada <andika@gmail.com>, 2021
+# cardinot <mcardinot@gmail.com>, 2022
+# Ian Sebastian <iansebastian.tan@gmail.com>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-06-15 22:33+0700\n"
+"POT-Creation-Date: 2022-06-03 20:38+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
-"Last-Translator: Hariyadi Putraga <hariyadiputraga@gmail.com>, 2020\n"
+"Last-Translator: Ian Sebastian <iansebastian.tan@gmail.com>, 2022\n"
 "Language-Team: Indonesian (https://www.transifex.com/stellarium/teams/80998/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,24 +78,24 @@ msgstr "sedang menanyakan"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:44
 msgid "Error (%1)"
-msgstr "kesalahan (%1)"
+msgstr "Kesalahan (%1)"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:60
 msgid "Error performing Simbad lookup"
-msgstr "kesalahan melakukan pencarian pada Simbad"
+msgstr "Kesalahan melakukan pencarian pada Simbad"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:219
 #: tablet7in.html:235
 msgid "idle"
-msgstr "tidak bekerja"
+msgstr "menganggur"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:105
 msgid "Error loading object types"
-msgstr "kesalahan memuat tipe objek"
+msgstr "Kesalahan memuat tipe objek"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:138
 msgid "Error getting object list"
-msgstr "kesalahan mendapatkan daftar objek"
+msgstr "Kesalahan mendapatkan daftar objek"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:200
 msgid "waiting"
@@ -101,12 +103,12 @@ msgstr "menunggu"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:38
 msgid "Could not retrieve projection list"
-msgstr "tidak dapat mendapatkan daftar projeksi"
+msgstr "Tidak bisa mengambil daftar projeksi"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:51
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
 msgid "Could not retrieve landscape list"
-msgstr "tidak dapat mendapatkan daftar lanskap"
+msgstr "Tidak bisa mengambil daftar lanskap"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
 #: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:638
@@ -120,12 +122,12 @@ msgstr "(Saat ini sedang memuat: %1)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
-msgstr "Tidak dapat mendapatkan daftar Pemandangan3d"
+msgstr "Tidak bisa mengambail daftar Scenery3d"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
 msgid "on"
-msgstr "pada"
+msgstr "nyala"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
@@ -134,15 +136,15 @@ msgstr "padam"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:58
 msgid "Show All Items"
-msgstr "perlihatkan semua item"
+msgstr "Perlihatkan Semua Butir"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:124
 msgid "Input did not match any item"
-msgstr "masukan/input tidak sesuai dengan item yang tersedia"
+msgstr "Masukan tidak cocok dengan butir mana pun"
 
 #: plugins/RemoteControl/webroot/js/ui/search.js:285
 msgid "No current selection"
-msgstr "tidak ada pemilihan saat ini"
+msgstr "Tidak ada yang dipilih saat ini"
 
 #: index.html:5 tablet7in.html:5
 msgid "Stellarium remote control plugin"
@@ -150,22 +152,19 @@ msgstr "Plugin remote kontrol Stellarium"
 
 #: index.html:17 tablet7in.html:18
 msgid "Please wait, loading"
-msgstr "Harap menunggu, memuat /loading"
+msgstr "Harap tunggu, sedang memuat"
 
 #: index.html:26 tablet7in.html:27
 msgid "Stellarium remote control"
-msgstr "remote kontrol stellarium"
+msgstr "Remote kontrol Stellarium"
 
 #: index.html:30 tablet7in.html:31
 msgid "Main controls"
-msgstr "kontrol utama"
+msgstr "Kontrol utama"
 
 #: index.html:33 tablet7in.html:38
 msgid "DSO"
-msgstr ""
-"Objek Langit Dalam \r\n"
-"\r\n"
-"Objek Deep Sky"
+msgstr "DSO"
 
 #: index.html:36
 msgid "Actions and scripts"
@@ -173,7 +172,7 @@ msgstr "Tindakan dan Skrip"
 
 #: index.html:39 tablet7in.html:45
 msgid "Scenery3d"
-msgstr "Pemandangan3d"
+msgstr "Scenery3d"
 
 #: index.html:77
 msgid "Pause"
@@ -181,7 +180,7 @@ msgstr "Jeda"
 
 #: index.html:82 tablet7in.html:183
 msgid "Time jumps"
-msgstr "loncatan waktu"
+msgstr "Loncatan waktu"
 
 #: index.html:86 tablet7in.html:187
 msgid "Solar hour"
@@ -263,10 +262,6 @@ msgstr "melihat ke arah horizon pada Azimuth"
 msgid "Vertical View offset"
 msgstr "Pergeseran Pandangan Vertikal"
 
-#: index.html:154 tablet7in.html:133
-msgid "Reset"
-msgstr "Mengatur Ulang"
-
 #: index.html:160 tablet7in.html:138
 msgid "FOV"
 msgstr "Medan Pandang"
@@ -323,6 +318,10 @@ msgstr "Mendigitalkan Tinjauan Langit"
 msgid "HiPS Survey"
 msgstr "Survey HiPS"
 
+#: index.html:286 tablet7in.html:350
+msgid "Show planet markers"
+msgstr "Tampilkan penanda planet"
+
 #: index.html:287 tablet7in.html:351
 msgid "Show planet orbits"
 msgstr "Menampilkan Orbit - orbit planet"
@@ -342,6 +341,18 @@ msgstr "Menampilkan jejak - jejak planet"
 #: index.html:291 tablet7in.html:355
 msgid "Show trail only for selected planet"
 msgstr "Menampilkan jejak hanya planet yang dipilih"
+
+#: index.html:294 tablet7in.html:359
+msgid "Scale Moon:"
+msgstr "Skalakan Bulan:"
+
+#: index.html:295 tablet7in.html:363
+msgid "Scale minor bodies:"
+msgstr ""
+
+#: index.html:318 tablet7in.html:404
+msgid "Extinction Coefficient:"
+msgstr "Koefisien ekstingsi:"
 
 #: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"
@@ -412,7 +423,7 @@ msgstr "label dan penanda"
 
 #: index.html:573 tablet7in.html:652
 msgid "Use associated planet and position"
-msgstr ""
+msgstr "Gunakan posisi dan planet yang terkait"
 
 #: index.html:582 tablet7in.html:661
 msgid "Show illumination"
@@ -658,7 +669,7 @@ msgstr "Pisces"
 
 #: tablet7in.html:507
 msgid "Compass Marks"
-msgstr ""
+msgstr "Tanda Kompas"
 
 #: tablet7in.html:742
 msgid "Favorites"
@@ -666,12 +677,12 @@ msgstr "Favorit"
 
 #: tablet7in.html:744
 msgid "Show 1"
-msgstr "perlihatkan 1"
+msgstr "Perlihatkan 1"
 
 #: tablet7in.html:745
 msgid "Remove Labels and Images"
-msgstr "hilangkan Label dan Gambar"
+msgstr "Hilangkan Label dan Gambar"
 
 #: tablet7in.html:745
 msgid "Cleanup Screen"
-msgstr "membersihkan layar"
+msgstr "Bersihkan Layar"

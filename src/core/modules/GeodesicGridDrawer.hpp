@@ -32,15 +32,14 @@ class StelGeodesicGridDrawer : public StelModule
 {
 public:
 	StelGeodesicGridDrawer(int level);
-	virtual ~StelGeodesicGridDrawer();
+	virtual ~StelGeodesicGridDrawer() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init();
-	virtual double draw(StelCore* core, int maxSearchLevel);
-	virtual void update(double deltaTime) {;}
-	virtual void updateI18n() {;}
-	virtual void updateSkyCulture() {;}
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual double draw(StelCore* core, int maxSearchLevel) Q_DECL_OVERRIDE;
+	virtual void updateI18n() Q_DECL_OVERRIDE {}
+	virtual void updateSkyCulture() Q_DECL_OVERRIDE {}
 	
 private:
 //	StelGeodesicGrid* grid;

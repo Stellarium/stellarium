@@ -71,17 +71,6 @@ public:
 	//! All initializations should be done here.
 	virtual void init() Q_DECL_OVERRIDE;
 
-	//! called before the plug-in is un-loaded.
-	//! Useful for stopping processes, unloading textures, etc.
-	virtual void deinit() Q_DECL_OVERRIDE {}
-
-	//! Does nothing.
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE {Q_UNUSED(deltaTime)}
-
-	//! draws on the view port.
-	//! Dialog windows don't need explicit drawing, it's done automatically.
-	virtual void draw(StelCore * core) Q_DECL_OVERRIDE {Q_UNUSED(core)}
-
 	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	//! called when the "configure" button in the "Plugins" tab is pressed
@@ -258,6 +247,9 @@ private:
 	//! \returns true if the replacement has been successfull.
 	bool resetSolarSystemConfigurationFile() const;
 
+	//! Check encoding of the file
+	bool isFileEncodingValid(QString filePath) const;
+
 	//! Converts an alphanumeric digit as used in MPC packed dates to an integer.
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDates.html
 	//! Interprets the digits from 0 to 9 normally, and the capital letters
@@ -306,9 +298,9 @@ class SolarSystemEditorStelPluginInterface : public QObject, public StelPluginIn
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
-	virtual QObjectList getExtensionList() const { return QObjectList(); }
+	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif // SOLARSYSTEMEDITOR_HPP

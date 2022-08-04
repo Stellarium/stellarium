@@ -77,10 +77,10 @@ public:
 	StelSkyImageTile(const QVariantMap& map, StelSkyImageTile* parent);
 
 	//! Destructor
-	~StelSkyImageTile();
+	~StelSkyImageTile() Q_DECL_OVERRIDE;
 
 	//! Draw the image on the screen.
-	void draw(StelCore* core, StelPainter& sPainter, float opacity=1.);
+	void draw(StelCore* core, StelPainter& sPainter, float opacity=1.) Q_DECL_OVERRIDE;
 
 	//! Return the dataset credits to use in the progress bar
 	DataSetCredits getDataSetCredits() const {return dataSetCredits;}
@@ -99,12 +99,12 @@ public:
 	QString getAbsoluteImageURI() const {return absoluteImageURI;}
 
 	//! Return an HTML description of the image to be displayed in the GUI.
-	virtual QString getLayerDescriptionHtml() const {return htmlDescription;}
+	virtual QString getLayerDescriptionHtml() const Q_DECL_OVERRIDE {return htmlDescription;}
 
 protected:
 	//! Reimplement the abstract method.
 	//! Load the tile from a valid QVariantMap.
-	virtual void loadFromQVariantMap(const QVariantMap& map);
+	virtual void loadFromQVariantMap(const QVariantMap& map) Q_DECL_OVERRIDE;
 
 	//! The credits of the server where this data come from
 	ServerCredits serverCredits;
@@ -136,6 +136,9 @@ protected:
 	//! Allow some images to be shown only after this date, e.g. Supernova remnants.
 	double birthJD;
 
+	//! Should usually be true. Allow disabling observation of aberration correction for script-loaded SkyImages.
+	bool withAberration;
+
 private:
 	//! init the StelSkyImageTile
 	void initCtor();
@@ -146,10 +149,10 @@ private:
 
 	//! Draw the image on the screen.
 	//! @return true if the tile was actually displayed
-	bool drawTile(StelCore* core, StelPainter& sPainter);
+	bool drawTile(StelCore* core, StelPainter& sPainter, const Vec3d &vel);
 
 	//! Return the minimum resolution
-	double getMinResolution() const {return minResolution;}
+	double getMinResolution() const {return static_cast<double>(minResolution);}
 
 	//! The list of all the subTiles URL or already loaded JSON map for this tile
 	QVariantList subTilesUrls;

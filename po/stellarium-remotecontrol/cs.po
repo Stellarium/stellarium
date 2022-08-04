@@ -5,16 +5,16 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
-# Zdeněk Moravec <moravec@hapteplice.cz>, 2021
+# Zdeněk Moravec <moravec@hapteplice.cz>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-06-15 22:33+0700\n"
+"POT-Creation-Date: 2022-06-03 20:38+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
-"Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2021\n"
+"Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/stellarium/teams/80998/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -259,10 +259,6 @@ msgstr "Pohled na horizont na azimutu"
 msgid "Vertical View offset"
 msgstr "Svislý posun pohledu"
 
-#: index.html:154 tablet7in.html:133
-msgid "Reset"
-msgstr "Resetovat"
-
 #: index.html:160 tablet7in.html:138
 msgid "FOV"
 msgstr "Zorné pole"
@@ -320,6 +316,10 @@ msgstr "Digitalizovaný průzkum oblohy"
 msgid "HiPS Survey"
 msgstr "HiPS přehlídka oblohy"
 
+#: index.html:286 tablet7in.html:350
+msgid "Show planet markers"
+msgstr "Zobrazit značky planet"
+
 #: index.html:287 tablet7in.html:351
 msgid "Show planet orbits"
 msgstr "Zobrazit oběžné dráhy planet"
@@ -339,6 +339,18 @@ msgstr "Zobrazit stopy planet"
 #: index.html:291 tablet7in.html:355
 msgid "Show trail only for selected planet"
 msgstr "Zobrazit stopu pouze pro vybranou planetu"
+
+#: index.html:294 tablet7in.html:359
+msgid "Scale Moon:"
+msgstr "Zvětšení Měsíce:"
+
+#: index.html:295 tablet7in.html:363
+msgid "Scale minor bodies:"
+msgstr "Zvětšení malých těles:"
+
+#: index.html:318 tablet7in.html:404
+msgid "Extinction Coefficient:"
+msgstr "Extinkční koeficient"
 
 #: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"

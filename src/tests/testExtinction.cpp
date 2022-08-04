@@ -36,9 +36,15 @@ void TestExtinction::testBase()
 	extCls.forward(v, &mag);
 	QVERIFY(mag>=4.);
 
+	Vec3f f(1.,0.,0.);
+	float magf=4.f;
+	extCls.forward(f, &magf);
+	QVERIFY(magf>=4.);
+
 	Vec3d vert(0.,0.,1.);
 	mag=2.0f;
 	extCls.setExtinctionCoefficient(0.25);
 	extCls.forward(vert, &mag);
 	QVERIFY(fabs(mag-2.25)<0.0001);
+	QVERIFY(fabs(extCls.getExtinctionCoefficient()-0.25)<0.0001);
 }

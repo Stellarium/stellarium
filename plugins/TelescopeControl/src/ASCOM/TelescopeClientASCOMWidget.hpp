@@ -33,7 +33,7 @@ class TelescopeClientASCOMWidget : public QWidget
 
 public:
 	explicit TelescopeClientASCOMWidget(QWidget *parent = Q_NULLPTR);
-	~TelescopeClientASCOMWidget();
+	~TelescopeClientASCOMWidget() override;
 	QString selectedDevice() const;
 	void setSelectedDevice(const QString& device);
 	bool useDeviceEqCoordType() const;

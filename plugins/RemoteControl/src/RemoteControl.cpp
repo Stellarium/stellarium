@@ -58,7 +58,7 @@ StelPluginInfo RemoteControlStelPluginInterface::getPluginInfo() const
 	info.id = "RemoteControl";
 	info.displayedName = N_("Remote Control");
 	info.authors = "Florian Schaukowitsch, Georg Zotti";
-	info.contact = "http://homepage.univie.ac.at/Georg.Zotti";
+	info.contact = "https://homepage.univie.ac.at/Georg.Zotti";
 	info.description = N_("Provides remote control functionality using a webserver interface. See manual for detailed description.");
 	info.acknowledgements += N_("This plugin was created in the 2015 campaign of the ESA Summer of Code in Space programme.");
 	info.version = REMOTECONTROL_PLUGIN_VERSION;
@@ -150,11 +150,12 @@ void RemoteControl::init()
 	StelApp& app = StelApp::getInstance();
 
 	// Create action for enable/disable & hook up signals	
-	addAction("actionShow_Remote_Control", N_("Remote Control"), N_("Remote control"), "enabled", "");
+	addAction("actionShow_Remote_Control",        N_("Remote Control"), N_("Remote control"), "enabled");
+	addAction("actionShow_Remote_Control_dialog", N_("Remote Control"), N_("Remote control config"), configDialog, "visible");
 
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 
-	// Add a toolbar button. TODO:  decide whether a button is necessary at all. Maye the button should not only enable, but call the GUI dialog directly?
+	// Add a toolbar button. Right-click opens the config.
 	try
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
@@ -164,7 +165,9 @@ void RemoteControl::init()
 						       QPixmap(":/RemoteControl/resources/bt_remote_on.png"),
 						       QPixmap(":/RemoteControl/resources/bt_remote_off.png"),
 						       QPixmap(":/graphicGui/miscGlow32x32.png"),
-						       "actionShow_Remote_Control");
+						       "actionShow_Remote_Control",
+						       false,
+						       "actionShow_Remote_Control_dialog");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
 	}

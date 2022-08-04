@@ -99,16 +99,16 @@ class StelVideoMgr : public StelModule
 
 public:
 	StelVideoMgr();
-	~StelVideoMgr();
+	~StelVideoMgr() Q_DECL_OVERRIDE;
 
 public slots:
 
 	// Methods from StelModule: only update() needed.
-	virtual void init(){;} // Or do something?
+	virtual void init() Q_DECL_OVERRIDE {;} // Or do something?
 
 	//! Update the module with respect to the time. This allows the special effects in playVideoPopout(), and may evaluate things like video resolution when they become available.
 	//! @param deltaTime the time increment in second since last call.
-	virtual void update(double deltaTime);
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
 
 	//! load a video from filename, assign an id for it for later reference.
 	//! If id is already in use, replace it.

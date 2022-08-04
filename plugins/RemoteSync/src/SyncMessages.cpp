@@ -37,7 +37,7 @@ void ErrorMessage::serialize(QDataStream &stream) const
 
 bool ErrorMessage::deserialize(QDataStream &stream, tPayloadSize dataSize)
 {
-	Q_UNUSED(dataSize);
+	Q_UNUSED(dataSize)
 	message = readString(stream);
 	return !stream.status();
 }
@@ -148,7 +148,7 @@ void Location::serialize(QDataStream &stream) const
 
 bool Location::deserialize(QDataStream &stream, tPayloadSize dataSize)
 {
-	Q_UNUSED(dataSize);
+	Q_UNUSED(dataSize)
 	stream>>stelLocation;
 	stream>>totalDuration;
 	stream>>timeToGo;
@@ -162,7 +162,7 @@ void Selection::serialize(QDataStream &stream) const
 
 bool Selection::deserialize(QDataStream &stream, tPayloadSize dataSize)
 {
-	Q_UNUSED(dataSize);
+	Q_UNUSED(dataSize)
 	stream>>selectedObjects;
 	return !stream.status();
 }
@@ -175,7 +175,7 @@ void StelPropertyUpdate::serialize(QDataStream &stream) const
 
 bool StelPropertyUpdate::deserialize(QDataStream &stream, tPayloadSize dataSize)
 {
-	Q_UNUSED(dataSize);
+	Q_UNUSED(dataSize)
 	propId = readString(stream);
 	stream>>value;
 	return !stream.status();

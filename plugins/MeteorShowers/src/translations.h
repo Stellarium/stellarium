@@ -32,7 +32,7 @@ class MSTranslations
 		// TRANSLATORS: Name of meteor shower
 		N_("Quadrantids");
 		// TRANSLATORS: Name of meteor shower
-		N_("Lyrids");
+		N_("April Lyrids");
 		// TRANSLATORS: Name of meteor shower
 		N_("α-Centaurids");
 		// TRANSLATORS: Name of meteor shower
@@ -48,7 +48,7 @@ class MSTranslations
 		// TRANSLATORS: Name of meteor shower
 		N_("α-Capricornids");
 		// TRANSLATORS: Name of meteor shower
-		N_("α-Aurigids");
+		N_("Aurigids");
 		// TRANSLATORS: Name of meteor shower
 		N_("September ε-Perseids");
 		// TRANSLATORS: Name of meteor shower
@@ -74,7 +74,7 @@ class MSTranslations
 		// TRANSLATORS: Name of meteor shower
 		N_("ε-Lyrids");
 		// TRANSLATORS: Name of meteor shower
-		N_("δ-Aurigids");
+		N_("October δ-Aurigids");
 		// TRANSLATORS: Name of meteor shower
 		N_("ε-Geminids");
 		// TRANSLATORS: Name of meteor shower
@@ -118,7 +118,7 @@ class MSTranslations
 		// TRANSLATORS: Name of meteor shower
 		N_("Northern ω-Scorpiids");
 		// TRANSLATORS: Name of meteor shower
-		N_("Arietids");
+		N_("Daytime Arietids");
 		// TRANSLATORS: Name of meteor shower
 		N_("π-Cetids");
 		// TRANSLATORS: Name of meteor shower
@@ -161,6 +161,16 @@ class MSTranslations
 		N_("August Caelids");
 		// TRANSLATORS: Name of meteor shower
 		N_("ε-Gruids");
+		// TRANSLATORS: Name of meteor shower
+		N_("Antihelion");
+		// TRANSLATORS: Name of meteor shower
+		N_("July Pegasids");
+		// TRANSLATORS: Name of meteor shower
+		N_("July γ-Draconids");
+		// TRANSLATORS: Name of meteor shower
+		N_("October Camelopardalids");
+		// TRANSLATORS: Name of meteor shower
+		N_("δ-Aurigids");
 
 		// List of parent objects for meteor showers
 		// TRANSLATORS: Name of parent object for meteor shower
@@ -174,7 +184,7 @@ class MSTranslations
 		// TRANSLATORS: Name of parent object for meteor shower
 		N_("Comet 109P/Swift-Tuttle");
 		// TRANSLATORS: Name of parent object for meteor shower
-		N_("Comet Thatcher (1861 I)");
+		N_("Comet C/1861 G1 (Thatcher)");
 		// TRANSLATORS: Name of parent object for meteor shower
 		N_("Comet 26P/Grigg-Skjellerup");
 		// TRANSLATORS: Name of parent object for meteor shower
@@ -192,7 +202,7 @@ class MSTranslations
 		// TRANSLATORS: Name of parent object for meteor shower
 		N_("Comet C/1964 N1 (Ikeya)");
 		// TRANSLATORS: Name of parent object for meteor shower
-		N_("Comet Schwassmann-Wachmann 3");
+		N_("Comet 73P/Schwassmann-Wachmann 3");
 		// TRANSLATORS: Name of parent object for meteor shower
 		N_("Minor planet 2003 EH1 and Comet C/1490 Y1");
 		// TRANSLATORS: Name of parent object for meteor shower
@@ -205,5 +215,11 @@ class MSTranslations
 		N_("Minor planet 2004 TG10");
 		// TRANSLATORS: Name of parent object for meteor shower
 		N_("Minor planet (3200) Phaethon");
+		// TRANSLATORS: Name of parent object for meteor shower
+		N_("Comet C/1911 N1 (Kiess)");
+		// TRANSLATORS: Name of parent object for meteor shower
+		N_("Comet C/1852 K1 (Chacornac)?");
+		// TRANSLATORS: Name of parent object for meteor shower
+		N_("Comet C/1979 Y1 (Bradfield)");
 	}
 };

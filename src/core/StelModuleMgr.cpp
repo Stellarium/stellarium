@@ -21,6 +21,7 @@
 #include <QPluginLoader>
 #include <QSettings>
 #include <QDir>
+#include <QRegularExpression>
 
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
@@ -156,7 +157,7 @@ QObjectList StelModuleMgr::loadExtensions(const QString &moduleID)
 
 struct StelModuleOrderComparator
 {
-	StelModuleOrderComparator(StelModule::StelModuleActionName aaction) : action(aaction) {;}
+	StelModuleOrderComparator(StelModule::StelModuleActionName aaction) : action(aaction) {}
 	bool operator()(StelModule* x, StelModule* y) {return x->getCallOrder(action)<y->getCallOrder(action);}
 private:
 	StelModule::StelModuleActionName action;
@@ -211,7 +212,7 @@ void StelModuleMgr::generateCallingLists()
 		// Flush previous call orders
 		mc.value().clear();
 		// and init them with modules in creation order
-		for (auto* m : getAllModules())
+		for (auto& m : getAllModules())
 		{
 			mc.value().push_back(m);
 		}
@@ -231,7 +232,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 
 	// First list all static plugins.
 	// If a dynamic plugin with the same ID exists, it will take precedence on the static one.
-	for (auto* plugin : QPluginLoader::staticInstances())
+	for (auto& plugin : QPluginLoader::staticInstances())
 	{
 		StelPluginInterface* pluginInterface = qobject_cast<StelPluginInterface*>(plugin);
 		if (pluginInterface)
@@ -244,10 +245,9 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 	}
 
 	// Then list dynamic libraries from the modules/ directory
-	QSet<QString> moduleDirs;
-	moduleDirs = StelFileMgr::listContents("modules",StelFileMgr::Directory);
+	const QSet<QString> moduleDirs = StelFileMgr::listContents("modules",StelFileMgr::Directory);
 
-	for (auto dir : moduleDirs)
+	for (auto &dir : moduleDirs)
 	{
 		QString moduleFullPath = QString("modules/") + dir + "/lib" + dir;
 #ifdef Q_OS_WIN
@@ -309,7 +309,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 QString StelModuleMgr::getStandardSupportLinksInfo(QString moduleName, bool furtherInfo)
 {
 	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
+	static const QRegularExpression a_rx("[{]([^{]*)[}]");
 	QString html;
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg(moduleName) + "</p>";

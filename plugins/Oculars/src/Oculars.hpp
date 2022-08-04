@@ -143,7 +143,6 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 	//! Returns the module-specific style sheet.	
 	virtual void handleMouseClicks(class QMouseEvent* event) Q_DECL_OVERRIDE;
-	virtual void update(double) Q_DECL_OVERRIDE {}
 
 	QString getDimensionsString(double fovX, double fovY) const;
 	QString getFOVString(double fov) const;
@@ -564,9 +563,9 @@ class OcularsStelPluginInterface : public QObject, public StelPluginInterface
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
-	virtual QObjectList getExtensionList() const { return QObjectList(); }
+	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /* OCULARS_HPP */

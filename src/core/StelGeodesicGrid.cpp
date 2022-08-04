@@ -92,7 +92,7 @@ StelGeodesicGrid::StelGeodesicGrid(const int lev) : maxLevel(lev<0?0:lev), lastM
 {
 	if (maxLevel > 0)
 	{
-		triangles = new Triangle*[maxLevel+1];
+		triangles = new Triangle*[static_cast<size_t>(maxLevel)+1];
 		uint nr_of_triangles = 20;
 		for (int i=0;i<maxLevel;i++)
 		{
@@ -318,16 +318,16 @@ void StelGeodesicGrid::searchZones(const QVector<SphericalCap>& convex,
 	if (maxSearchLevel < 0) maxSearchLevel = 0;
 	else if (maxSearchLevel > maxLevel) maxSearchLevel = maxLevel;
 #if defined __STRICT_ANSI__ || !defined __GNUC__
-	int *halfs_used = new int[convex.size()];
+	int *halfs_used = new int[static_cast<size_t>(convex.size())];
 #else
-	int halfs_used[convex.size()];
+	int halfs_used[static_cast<size_t>(convex.size())];
 #endif
 	for (int h=0;h<static_cast<int>(convex.size());h++) {halfs_used[h] = h;}
 #if defined __STRICT_ANSI__ || !defined __GNUC__
 	bool *corner_inside[12];
-	for(int ci=0; ci < 12; ci++) corner_inside[ci]= new bool[convex.size()];
+	for(int ci=0; ci < 12; ci++) corner_inside[ci]= new bool[static_cast<size_t>(convex.size())];
 #else
-	bool corner_inside[12][convex.size()];
+	bool corner_inside[12][static_cast<size_t>(convex.size())];
 #endif
 	for (int h=0;h<convex.size();h++)
 	{
@@ -363,9 +363,9 @@ void StelGeodesicGrid::searchZones(int lev,int index,
                                const int maxSearchLevel) const
 {
 #if defined __STRICT_ANSI__ || !defined __GNUC__
-	int *halfs_used = new int[halfSpacesUsed];
+	int *halfs_used = new int[static_cast<size_t>(halfSpacesUsed)];
 #else
-	int halfs_used[halfSpacesUsed];
+	int halfs_used[static_cast<size_t>(halfSpacesUsed)];
 #endif
 	int halfs_used_count = 0;
 	for (int h=0;h<halfSpacesUsed;h++)
@@ -404,13 +404,13 @@ void StelGeodesicGrid::searchZones(int lev,int index,
 			inside_list++;
 			border_list++;
 #if defined __STRICT_ANSI__ || !defined __GNUC__
-			bool *edge0_inside = new bool[convex.size()];
-			bool *edge1_inside = new bool[convex.size()];
-			bool *edge2_inside = new bool[convex.size()];
+			bool *edge0_inside = new bool[static_cast<size_t>(convex.size())];
+			bool *edge1_inside = new bool[static_cast<size_t>(convex.size())];
+			bool *edge2_inside = new bool[static_cast<size_t>(convex.size())];
 #else
-			bool edge0_inside[convex.size()];
-			bool edge1_inside[convex.size()];
-			bool edge2_inside[convex.size()];
+			bool edge0_inside[static_cast<size_t>(convex.size())];
+			bool edge1_inside[static_cast<size_t>(convex.size())];
+			bool edge2_inside[static_cast<size_t>(convex.size())];
 #endif
 			for (int h=0;h<halfs_used_count;h++)
 			{
@@ -470,13 +470,13 @@ const GeodesicSearchResult* StelGeodesicGrid::search(const QVector<SphericalCap>
 
 GeodesicSearchResult::GeodesicSearchResult(const StelGeodesicGrid &grid)
 		:grid(grid),
-		zones(new int*[grid.getMaxLevel()+1]),
-		inside(new int*[grid.getMaxLevel()+1]),
-		border(new int*[grid.getMaxLevel()+1])
+		zones( new int*[static_cast<size_t>(grid.getMaxLevel())+1]),
+		inside(new int*[static_cast<size_t>(grid.getMaxLevel())+1]),
+		border(new int*[static_cast<size_t>(grid.getMaxLevel())+1])
 {
 	for (int i=0;i<=grid.getMaxLevel();i++)
 	{
-		zones[i] = new int[StelGeodesicGrid::nrOfZones(i)];
+		zones[i] = new int[static_cast<size_t>(StelGeodesicGrid::nrOfZones(i))];
 	}
 }
 

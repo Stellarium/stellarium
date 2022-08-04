@@ -50,12 +50,12 @@ public slots:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-public:
 	//! find RD number for date in the Egyptian calendar (may be used in other calendars!)
 	static int fixedFromEgyptian(QVector<int> julian);
 	//! find date in the Egyptian calendar from RD number (may be used in other calendars!)
 	static QVector<int> egyptianFromFixed(int rd);
 
+public:
 	static const int egyptianEpoch; //! RD of JD1448638.
 
 protected:

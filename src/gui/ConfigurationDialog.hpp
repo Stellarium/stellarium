@@ -32,6 +32,7 @@ class QNetworkAccessManager;
 class QListWidgetItem;
 class StelGui;
 class CustomDeltaTEquationDialog;
+class ConfigureScreenshotsDialog;
 
 class ConfigurationDialog : public StelDialog
 {
@@ -71,9 +72,11 @@ private:
 	class StelProgressController* progressBar;
 
 private slots:
+	void updateSelectedInfoGui();
 	void setNoSelectedInfo();
 	void setAllSelectedInfo();
 	void setBriefSelectedInfo();
+	void setDefaultSelectedInfo();
 	void setCustomSelectedInfo();
 	//! Set the selected object info fields from the "Displayed Fields" boxes.
 	//! Called when any of the boxes has been clicked. Sets the
@@ -106,6 +109,13 @@ private slots:
 	//! value will be changed, but not saved to config file.
 	void browseForScreenshotDir();
 	void selectScreenshotDir();
+	//! Update tooltip of the dpi spinner to tell users the final print size at current dpi
+	//! This is called
+	//! - when DPI changes
+	//! - when custom size is toggled
+	//! - when window is resized
+	//! - when custom screenshot size is changed
+	void updateDpiTooltip();
 
 	//! Save the current viewing options including location and sky culture
 	//! This doesn't include the current viewing direction, landscape, time and FOV since those
@@ -127,6 +137,8 @@ private slots:
 	void setDeltaTAlgorithm(int algorithmID);
 	void setDeltaTAlgorithmDescription();
 	void showCustomDeltaTEquationDialog();
+
+	void showConfigureScreenshotsDialog();
 
 	void populateDateFormatsList();
 	void setDateFormat();
@@ -158,6 +170,8 @@ private slots:
 
 	void de430ButtonClicked();
 	void de431ButtonClicked();
+	void de440ButtonClicked();
+	void de441ButtonClicked();
 
 	//! feed the combo with useful values. Call in createDialogContent().
 	void populateFontWritingSystemCombo();
@@ -170,8 +184,11 @@ private:
 	StelGui* gui;
 
 	CustomDeltaTEquationDialog* customDeltaTEquationDialog;
+	ConfigureScreenshotsDialog * configureScreenshotsDialog;
 
 	int savedProjectionType;
+
+	void populateTooltips();
 	
 	//! Set the displayed fields checkboxes from the current displayed fields.
 	void updateSelectedInfoCheckBoxes();

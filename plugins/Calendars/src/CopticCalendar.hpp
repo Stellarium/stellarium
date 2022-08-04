@@ -50,7 +50,6 @@ public slots:
 	//! get a formatted complete string for a date
 	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
 
-public:
 	//! find RD number for date in the Coptic calendar (may be used in other calendars!)
 	static int fixedFromCoptic(QVector<int> coptic);
 	//! find date in the Coptic calendar from RD number (may be used in other calendars!)
@@ -59,13 +58,14 @@ public:
 	//! returns true for leap years
 	static bool isLeap(int year);
 
+	//! returns name of weekday for a JD
+	static QString weekday(double jd);
+public:
 	static const int copticEpoch; //! RD of 284-aug-29 (Jul).
 
 protected:
 	static QMap<int, QString> monthNames;
 	static QMap<int, QString> dayNames;
-
-	static QString weekday(double jd);
 };
 
 #endif

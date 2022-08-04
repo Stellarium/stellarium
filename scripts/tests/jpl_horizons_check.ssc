@@ -1,0 +1,152 @@
+//
+// Name: JPL Horizons Comparison
+// License: Public Domain
+// Author: Georg Zotti
+// Description: Create data against JPL HORIZONS reference values sent by Atque. 
+//              Use the results to create the right half of the tables in Appendix F of the User Guide.
+//
+
+
+// SELECT ONE OF THESE!
+// For a run in UT
+var myDeltaTAlgorithm="JPLHorizons";
+// For a run in TT
+//var myDeltaTAlgorithm="WithoutCorrection";
+
+
+
+function format_D_HMS(num){
+	num=num % 360;
+	if (num<0) num+= 360;
+	hrs=num/15;
+	H=Math.floor(hrs);
+	mins=(hrs-H) * 60;
+	M=Math.floor(mins);
+	secs=(mins-M) * 60;
+	return ("00"+H).slice(-2) + "&" + ("00"+M).slice(-2) + "&" + ("00.000"+secs.toFixed(2)).slice(-5);
+}
+
+function format_D_DMS(num){
+	if (num<0) { S="-" } else {S="+"};
+	num=Math.abs(num);
+	D=Math.floor(num);
+	mins=(num-D) * 60;
+	M=Math.floor(mins);
+	secs=(mins-M) * 60;
+	return S + ("00"+D).slice(-2) + "&" + ("00"+M).slice(-2) + "&" + ("00.000"+secs.toFixed(1)).slice(-4);
+}
+
+function onePlanetC(planet, dates){
+	core.output(planet);
+	core.selectObjectByName( planet, true );
+	dates.every(function callback(jd){
+		core.setDate(jd, "UTC", useTT);
+		core.wait(0.1);
+		map=core.getSelectedObjectInfo();
+		// retrieve/print all data:
+		//core.output(core.mapToString(core.getSelectedObjectInfo()));
+		DeltaT = core.getDeltaTsec(); // seconds, not a formatted string!
+		core.output( format_D_HMS(map.ra) + " & " + format_D_DMS(map.dec) + " & " + DeltaT.toFixed(2)  + "\\\\ % " + jd);
+		return true; // needed for successful "every"
+	});
+}
+
+
+var jdM2500_1= "-2499-01-01T00:00:00";
+var jdM2500_2= "-2499-06-02T00:00:00";
+var jdM2500_3= "-2499-11-01T00:00:00";
+var jdM2500_4= "-2498-04-02T00:00:00";
+var jdM2500 = [jdM2500_1, jdM2500_2, jdM2500_3, jdM2500_4];
+
+var jdM500_1= "-499-01-01T00:00:00";
+var jdM500_2= "-499-06-02T00:00:00";
+var jdM500_3= "-499-11-01T00:00:00";
+var jdM500_4= "-498-04-02T00:00:00";
+var jdM500 = [jdM500_1, jdM500_2, jdM500_3, jdM500_4];
+
+var jd0500_1= "500-01-01T00:00:00";
+var jd0500_2= "500-06-01T00:00:00";
+var jd0500_3= "500-10-31T00:00:00";
+var jd0500_4= "501-04-01T00:00:00";
+var jd0500_5= "501-08-31T00:00:00";
+var jd0500 = [jd0500_1, jd0500_2, jd0500_3, jd0500_4, jd0500_5];
+
+var jd1600_1= "1600-01-01T00:00:00";
+var jd1600_2= "1600-06-01T00:00:00";
+var jd1600_3= "1600-10-31T00:00:00";
+var jd1600_4= "1601-04-01T00:00:00";
+var jd1600_5= "1601-08-31T00:00:00";
+var jd1600 = [jd1600_1, jd1600_2, jd1600_3, jd1600_4, jd1600_5];
+
+var jd1601_1= "1601-01-01T00:00:00";
+var jd1601_2= "1601-06-02T00:00:00";
+var jd1601_3= "1601-11-01T00:00:00";
+var jd1601_4= "1602-04-02T00:00:00";
+var jd1601 = [jd1601_1, jd1601_2, jd1601_3, jd1601_4];
+
+var jd1750_1= "1750-01-01T00:00:00";
+var jd1750_2= "1750-06-02T00:00:00";
+var jd1750_3= "1750-11-01T00:00:00";
+var jd1750_4= "1751-04-02T00:00:00";
+var jd1750 = [jd1750_1, jd1750_2, jd1750_3, jd1750_4];
+
+var jd1801_1= "1801-01-01T00:00:00";
+var jd1801_2= "1801-06-02T00:00:00";
+var jd1801_3= "1801-11-01T00:00:00";
+var jd1801_4= "1802-04-02T00:00:00";
+var jd1801 = [jd1801_1, jd1801_2, jd1801_3, jd1801_4];
+
+var jd2021_1= "2021-01-01T00:00:00";
+var jd2021_2= "2021-06-02T00:00:00";
+var jd2021_3= "2021-11-01T00:00:00";
+var jd2021_4= "2022-04-02T00:00:00";
+var jd2021 = [jd2021_1, jd2021_2, jd2021_3, jd2021_4];
+
+// RECONFIGURE
+var keepPlanetocentric=core.isPlanetocentricCalculations();
+core.setPlanetocentricCalculations(true);
+
+
+var keepDeltaTAlgoName=core.getDeltaTAlgorithm();
+var useTT = (myDeltaTAlgorithm=="WithoutCorrection");
+core.setDeltaTAlgorithm(myDeltaTAlgorithm);
+
+core.resetOutput();
+
+//// FOR TABLE WITH TT:
+if (useTT){	
+	onePlanetC("Sun"     , jdM2500.concat(jdM500).concat(jd0500).concat(jd1600));
+	onePlanetC("Mercury" , jdM2500.concat(jdM500).concat(jd0500).concat(jd1600));
+	onePlanetC("Venus"   , jdM2500.concat(jdM500).concat(jd0500).concat(jd1600));
+	onePlanetC("Moon"    , jdM2500.concat(jdM500).concat(jd0500).concat(jd1600));
+	onePlanetC("Mars"    , jd1601);
+	onePlanetC("Jupiter" , jd1601);
+	onePlanetC("Saturn"  , jd1750);
+	onePlanetC("Uranus"  , jd1600);
+	onePlanetC("Neptune" , jd1801);
+	onePlanetC("Io"      , jd1601);
+	onePlanetC("Europa"  , jd1601);
+	onePlanetC("Ganymede", jd1601);
+	onePlanetC("Callisto", jd1601);
+}else{
+// FOR TABLE WITH UT:
+	onePlanetC("Sun"     , jdM2500.concat(jdM500).concat(jd0500).concat(jd1600).concat(jd2021));
+	onePlanetC("Mercury" , jdM2500.concat(jdM500).concat(jd0500).concat(jd1600).concat(jd2021));
+	onePlanetC("Venus"   , jdM2500.concat(jdM500).concat(jd0500).concat(jd1600).concat(jd2021));
+	onePlanetC("Moon"    , jdM2500.concat(jdM500).concat(jd0500).concat(jd1600).concat(jd2021));
+	onePlanetC("Mars"    , jd1601.concat( jd2021 ));
+	onePlanetC("Jupiter" , jd1601.concat( jd2021 ));
+	onePlanetC("Saturn"  , jd1750.concat( jd2021 ));
+	onePlanetC("Uranus"  , jd1600.concat( jd2021 ));
+	onePlanetC("Neptune" , jd1801.concat( jd2021 ));
+	onePlanetC("Io"      , jd1601.concat( jd2021 ));
+	onePlanetC("Europa"  , jd1601.concat( jd2021 ));
+	onePlanetC("Ganymede", jd1601.concat( jd2021 ));
+	onePlanetC("Callisto", jd1601.concat( jd2021 ));
+}
+core.saveOutputAs("jpl_crosscheck.txt");
+
+// RESTORE
+core.setPlanetocentricCalculations(keepPlanetocentric);
+core.setDeltaTAlgorithm(keepDeltaTAlgoName);
+

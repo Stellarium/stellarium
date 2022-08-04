@@ -33,8 +33,6 @@
 class StelSkyCulture
 {
 	Q_GADGET
-	Q_ENUMS(BOUNDARIES)
-	Q_ENUMS(CLASSIFICATION)
 public:
 	//! Possible values for boundary lines between constellations.
 	//! Most traditional skies do not have boundaries.
@@ -46,6 +44,8 @@ public:
 		IAU,
 		OWN
 	};
+	Q_ENUM(BOUNDARIES)
+
 	//! Since V0.19. A rough classification scheme that may allow filtering and at least some rough idea of quality control.
 	//! In future versions, this scheme could be refined or changed, and external reviewers
 	//! can probably provide more quality control. For now, we can at least highlight and discern
@@ -76,16 +76,22 @@ public:
 				//! Typically nobody alive today shares the world view of these past cultures.
 				//! The description should provide some insight over sources and how data were retrieved and interpreted,
 				//! and should provide references to (optimally: peer-reviewed) published work.
-		SINGLE		//! Implementation of a single book or atlas usually providing a "snapshot" of a traditional skyculture.
+		SINGLE,		//! Implementation of a single book or atlas usually providing a "snapshot" of a traditional skyculture.
 				//! e.g. Bayer, Schiller, Hevelius, Bode, Rey, ...
 				//! Content (star names, artwork, spelling, ...) should not deviate from what the atlas contains.
-				//! The description should provide information about the presented work, and if possible a link to a digital online version.		
+				//! The description should provide information about the presented work, and if possible a link to a digital online version.
+		COMPARATIVE	//! Special-purpose compositions of artwork from one and stick figures from another skyculture. These figures
+				//! sometimes will appear not to fit together well. This may be intended, to explain and highlight just those differences!
+				//! The description text must clearly explain and identify both sources and how these differences should be interpreted.
 	};
+	Q_ENUM(CLASSIFICATION)
 
 	//! English name
 	QString englishName;
 	//! Name of the author
 	QString author;
+	//! Credits info, when it is not equal to author field (optional)
+	QString credit;
 	//! The license
 	QString license;
 	//! Type of the boundaries (enum)
@@ -159,6 +165,9 @@ public slots:
 
 	//! @return a localized HTML description of the classification for the current sky culture
 	QString getCurrentSkyCultureHtmlClassification() const;
+
+	//! @return a localized HTML description of the license for the current sky culture
+	QString getCurrentSkyCultureHtmlLicense() const;
 
 	//! @return a localized HTML description of the references for the current sky culture
 	QString getCurrentSkyCultureHtmlReferences() const;

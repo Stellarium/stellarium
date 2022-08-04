@@ -25,7 +25,6 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelTranslator.hpp"
 #include "AsterismMgr.hpp"
 
 #include <algorithm>
@@ -184,7 +183,7 @@ void Asterism::update(int deltaTime)
 
 QString Asterism::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
 {
-	Q_UNUSED(core);
+	Q_UNUSED(core)
 	QString str;
 	QTextStream oss(&str);
 
@@ -192,8 +191,9 @@ QString Asterism::getInfoString(const StelCore *core, const InfoStringGroup &fla
 		oss << "<h2>" << getNameI18n() << "</h2>";
 
 	if (flags&ObjectType)
-		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("asterism")) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getObjectType())) << "<br />";
 
+	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 
 	return str;

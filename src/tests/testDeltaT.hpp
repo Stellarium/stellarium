@@ -39,7 +39,8 @@ private slots:
 	void testDeltaTByStephensonMorrison1995WideDates();	
 	void testDeltaTByStephensonMorrison2004WideDates();	
 	void testDeltaTByStephensonMorrisonHohenkerk2016GenericDates();
-	void testDeltaTByStephenson1997WideDates();	
+	void testDeltaTByStephensonMorrisonHohenkerk2016SpecialDates();
+	void testDeltaTByStephenson1997();
 	void testDeltaTByMeeusSimons();	
 	void testDeltaTByKhalidSultanaZaidiWideDates();
 	void testDeltaTByMontenbruckPfleger();
@@ -48,7 +49,10 @@ private slots:
 	void testDeltaTByBorkowski();
 	void testDeltaTByIAU();
 	void testDeltaTByAstronomicalEphemeris();
-	void testDeltaTByTuckermanGoldstine();		
+	void testDeltaTByTuckermanGoldstine();
+	void testDeltaTByChaprontTouze();
+	void testDeltaTByIAUWideDates();
+	void testDeltaTByStephensonHoulden();
 	void testDeltaTStandardError();
 private:
 	QVariantList genericData;

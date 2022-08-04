@@ -311,12 +311,12 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	rotatePrismPlus15Button = new StelButton(ccdControls, pOn, pOff, pHover, "actionToggle_Oculars_Rotate_Prism_15_Clockwise", true);
 	rotatePrismPlus15Button->setToolTip(q_("Rotate the prism 15 degrees clockwise"));
 
-	connect(rotateCcdMinus15Button, &StelButton::triggered, [=](){ocularsPlugin->rotateCCD(-15);});
-	connect(rotateCcdMinus5Button,  &StelButton::triggered, [=](){ocularsPlugin->rotateCCD(-5);});
-	connect(rotateCcdMinus1Button,  &StelButton::triggered, [=](){ocularsPlugin->rotateCCD(-1);});
-	connect(rotateCcdPlus1Button,   &StelButton::triggered, [=](){ocularsPlugin->rotateCCD(1);});
-	connect(rotateCcdPlus5Button,   &StelButton::triggered, [=](){ocularsPlugin->rotateCCD(5);});
-	connect(rotateCcdPlus15Button,  &StelButton::triggered, [=](){ocularsPlugin->rotateCCD(15);});
+	connect(rotateCcdMinus15Button, &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(-15);});
+	connect(rotateCcdMinus5Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(-5);});
+	connect(rotateCcdMinus1Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(-1);});
+	connect(rotateCcdPlus1Button,   &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(1);});
+	connect(rotateCcdPlus5Button,   &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(5);});
+	connect(rotateCcdPlus15Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotateCCD(15);});
 	connect(resetCcdRotationButton, SIGNAL(triggered()),ocularsPlugin, SLOT(ccdRotationReset()));
 
 	connect(rotateCcdMinus15Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
@@ -327,12 +327,12 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	connect(rotateCcdPlus15Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
 	connect(resetCcdRotationButton, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
 
-	connect(rotatePrismMinus15Button, &StelButton::triggered, [=](){ocularsPlugin->rotatePrism(-15);});
-	connect(rotatePrismMinus5Button,  &StelButton::triggered, [=](){ocularsPlugin->rotatePrism(-5);});
-	connect(rotatePrismMinus1Button,  &StelButton::triggered, [=](){ocularsPlugin->rotatePrism(-1);});
-	connect(rotatePrismPlus1Button,   &StelButton::triggered, [=](){ocularsPlugin->rotatePrism(1);});
-	connect(rotatePrismPlus5Button,   &StelButton::triggered, [=](){ocularsPlugin->rotatePrism(5);});
-	connect(rotatePrismPlus15Button,  &StelButton::triggered, [=](){ocularsPlugin->rotatePrism(15);});
+	connect(rotatePrismMinus15Button, &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(-15);});
+	connect(rotatePrismMinus5Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(-5);});
+	connect(rotatePrismMinus1Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(-1);});
+	connect(rotatePrismPlus1Button,   &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(1);});
+	connect(rotatePrismPlus5Button,   &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(5);});
+	connect(rotatePrismPlus15Button,  &StelButton::triggered, this, [=](){ocularsPlugin->rotatePrism(15);});
 	connect(resetPrismRotationButton, SIGNAL(triggered()),ocularsPlugin, SLOT(prismPositionAngleReset()));
 
 	connect(rotatePrismMinus15Button, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
@@ -709,13 +709,13 @@ void OcularsGuiPanel::updateCcdControls()
 	posY += fieldCcdRotation->boundingRect().height();
 	widgetHeight += fieldCcdRotation->boundingRect().height();
 
-	int rotationButtonsWidth = rotateCcdMinus15Button->boundingRect().width();
-	rotationButtonsWidth += rotateCcdMinus5Button->boundingRect().width();
-	rotationButtonsWidth += rotateCcdMinus1Button->boundingRect().width();
-	rotationButtonsWidth += resetCcdRotationButton->boundingRect().width();
-	rotationButtonsWidth += rotateCcdPlus1Button->boundingRect().width();
-	rotationButtonsWidth += rotateCcdPlus5Button->boundingRect().width();
-	rotationButtonsWidth += rotateCcdPlus15Button->boundingRect().width();
+	int rotationButtonsWidth = rotateCcdMinus15Button->boundingRect().width()
+				 + rotateCcdMinus5Button->boundingRect().width()
+				 + rotateCcdMinus1Button->boundingRect().width()
+				 + resetCcdRotationButton->boundingRect().width()
+				 + rotateCcdPlus1Button->boundingRect().width()
+				 + rotateCcdPlus5Button->boundingRect().width()
+				 + rotateCcdPlus15Button->boundingRect().width();
 	int spacing = (fieldCcdRotation->boundingRect().width() - rotationButtonsWidth) / 6;
 	posX = fieldCcdRotation->x();
 	rotateCcdMinus15Button->setPos(posX, posY);
@@ -748,13 +748,13 @@ void OcularsGuiPanel::updateCcdControls()
 		posY += fieldPrismRotation->boundingRect().height();
 		widgetHeight += fieldPrismRotation->boundingRect().height();
 
-		int positionAngleButtonsWidth = rotatePrismMinus15Button->boundingRect().width();
-		positionAngleButtonsWidth += rotatePrismMinus5Button->boundingRect().width();
-		positionAngleButtonsWidth += rotatePrismMinus1Button->boundingRect().width();
-		positionAngleButtonsWidth += resetPrismRotationButton->boundingRect().width();
-		positionAngleButtonsWidth += rotatePrismPlus1Button->boundingRect().width();
-		positionAngleButtonsWidth += rotatePrismPlus5Button->boundingRect().width();
-		positionAngleButtonsWidth += rotatePrismPlus15Button->boundingRect().width();
+		int positionAngleButtonsWidth = rotatePrismMinus15Button->boundingRect().width()
+					      + rotatePrismMinus5Button->boundingRect().width()
+					      + rotatePrismMinus1Button->boundingRect().width()
+					      + resetPrismRotationButton->boundingRect().width()
+					      + rotatePrismPlus1Button->boundingRect().width()
+					      + rotatePrismPlus5Button->boundingRect().width()
+					      + rotatePrismPlus15Button->boundingRect().width();
 		spacing = (fieldPrismRotation->boundingRect().width() - positionAngleButtonsWidth) / 6;
 		posX = fieldPrismRotation->x();
 		rotatePrismMinus15Button->setPos(posX, posY);
@@ -948,28 +948,28 @@ void OcularsGuiPanel::updateTelescopeControls()
 	double diameter = telescope->diameter();
 	if (diameter>0.0 && ocularsPlugin->getFlagShowResolutionCriteria())
 	{
-		QString rayleighLabel = QString("%1: %2\"").arg(q_("Rayleigh criterion")).arg(QString::number(138/diameter, 'f', 2));
+		QString rayleighLabel = QString("%1: %2\"").arg(q_("Rayleigh criterion"), QString::number(138/diameter, 'f', 2));
 		fieldRayleighCriterion->setPlainText(rayleighLabel);
 		fieldRayleighCriterion->setToolTip(q_("The Rayleigh resolution criterion"));
 		fieldRayleighCriterion->setPos(posX, posY);
 		posY += fieldRayleighCriterion->boundingRect().height();
 		widgetHeight += fieldRayleighCriterion->boundingRect().height();
 
-		QString dawesLabel = QString("%1: %2\"").arg(q_("Dawes' limit")).arg(QString::number(116/diameter, 'f', 2));
+		QString dawesLabel = QString("%1: %2\"").arg(q_("Dawes' limit"), QString::number(116/diameter, 'f', 2));
 		fieldDawesCriterion->setPlainText(dawesLabel);
 		fieldDawesCriterion->setToolTip(q_("Dawes' resolution criterion"));
 		fieldDawesCriterion->setPos(posX, posY);
 		posY += fieldDawesCriterion->boundingRect().height();
 		widgetHeight += fieldDawesCriterion->boundingRect().height();
 
-		QString abbeyLabel = QString("%1: %2\"").arg(q_("Abbe's limit")).arg(QString::number(113/diameter, 'f', 2));
+		QString abbeyLabel = QString("%1: %2\"").arg(q_("Abbe's limit"), QString::number(113/diameter, 'f', 2));
 		fieldAbbeyCriterion->setPlainText(abbeyLabel);
 		fieldAbbeyCriterion->setToolTip(q_("Abbe’s diffraction resolution limit"));
 		fieldAbbeyCriterion->setPos(posX, posY);
 		posY += fieldAbbeyCriterion->boundingRect().height();
 		widgetHeight += fieldAbbeyCriterion->boundingRect().height();
 
-		QString sparrowLabel = QString("%1: %2\"").arg(q_("Sparrow's limit")).arg(QString::number(108/diameter, 'f', 2));
+		QString sparrowLabel = QString("%1: %2\"").arg(q_("Sparrow's limit"), QString::number(108/diameter, 'f', 2));
 		fieldSparrowCriterion->setPlainText(sparrowLabel);
 		fieldSparrowCriterion->setToolTip(q_("Sparrow's resolution limit"));
 		fieldSparrowCriterion->setPos(posX, posY);
@@ -993,11 +993,11 @@ void OcularsGuiPanel::updateTelescopeControls()
 	// Visual resolution
 	if (ocularsPlugin->flagShowOculars && ocularsPlugin->getFlagShowResolutionCriteria() && diameter>0.0)
 	{
-		float rayleigh = 138/diameter;
-		float vres = 60/mag;
+		double rayleigh = 138/diameter;
+		double vres = 60/mag;
 		if (vres<rayleigh)
 			vres = rayleigh;
-		QString visualResolutionLabel = QString("%1: %2\"").arg(q_("Visual resolution")).arg(QString::number(vres, 'f', 2));
+		QString visualResolutionLabel = QString("%1: %2\"").arg(q_("Visual resolution"), QString::number(vres, 'f', 2));
 		fieldVisualResolution->setPlainText(visualResolutionLabel);
 		fieldVisualResolution->setToolTip(q_("Visual resolution is based on eye properties and magnification"));
 		fieldVisualResolution->setPos(posX, posY);
@@ -1244,7 +1244,7 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 
 void OcularsGuiPanel::setColorScheme(const QString &schemeName)
 {
-	Q_UNUSED(schemeName);
+	Q_UNUSED(schemeName)
 	borderPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
 	borderPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
 	setControlsColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));

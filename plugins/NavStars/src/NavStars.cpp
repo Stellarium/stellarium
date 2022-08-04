@@ -123,7 +123,8 @@ void NavStars::init()
 	markerTexture = StelApp::getInstance().getTextureManager().createTexture(path);
 
 	// key bindings and other actions
-	addAction("actionShow_NavStars", N_("Navigational Stars"), N_("Mark the navigational stars"), "navStarsVisible", "");
+	addAction("actionShow_NavStars",        N_("Navigational Stars"), N_("Mark the navigational stars"), "navStarsVisible");
+	addAction("actionShow_NavStars_dialog", N_("Navigational Stars"), N_("Show settings dialog"),        mainWindow, "visible");
 
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setUseDecimalDegrees(bool)));
@@ -140,7 +141,9 @@ void NavStars::init()
 						       QPixmap(":/NavStars/btNavStars-on.png"),
 						       QPixmap(":/NavStars/btNavStars-off.png"),
 						       QPixmap(":/graphicGui/miscGlow32x32.png"),
-						       "actionShow_NavStars");
+						       "actionShow_NavStars",
+						       false,
+						       "actionShow_NavStars_dialog");
 		}
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
@@ -218,7 +221,7 @@ void NavStars::draw(StelCore* core)
 				label = QString("%1").arg(i+1);
 			else
 				label = QString("%1 (%2)").arg(label).arg(i+1);
-			painter.drawText(static_cast<float>(pos[0]), static_cast<float>(pos[1]), label, 0, 10.f, 10.f, false);
+			painter.drawText(static_cast<float>(pos[0]), static_cast<float>(pos[1]), label, 0, 15.f, 15.f, false);
 		}
 	}
 
@@ -436,7 +439,7 @@ void NavStars::populateNavigationalStarsSet(void)
 				    <<  26311 <<  27989 <<  30438 <<  32349 <<  33579 <<  37279 <<  37826
 				    <<  41037 <<  44816 <<  45238 <<  46390 <<  49669 <<  54061 <<  57632
 				    <<  59803 <<  60718 <<  61084 <<  62956 <<  65474 <<  67301 <<  68702
-				    <<  68933 <<  69673 <<  71683 <<  72603 <<  72607 <<  76267 <<  80763
+				    <<  68933 <<  69673 <<  71683 <<  72622 <<  72607 <<  76267 <<  80763
 				    <<  82273 <<  84012 <<  85927 <<  86032 <<  87833 <<  90185 <<  91262
 				    <<  92855 <<  97649 << 100751 << 102098 << 107315 << 109268 << 113368
 				    << 113963;
@@ -478,7 +481,7 @@ void NavStars::populateNavigationalStarsSet(void)
 				    <<  59774 <<  59803 <<  60718 <<  61084 <<  61359 <<  61585 <<  61932
 				    <<  61941 <<  62434 <<  62956 <<  63121 <<  63608 <<  65109 <<  65378
 				    <<  65474 <<  66657 <<  67301 <<  67927 <<  68002 <<  68702 <<  68933
-				    <<  69673 <<  71075 <<  71352 <<  71681 <<  71860 <<  72105 <<  72603
+				    <<  69673 <<  71075 <<  71352 <<  71681 <<  71860 <<  72105 <<  72622
 				    <<  72607 <<  73273 <<  74946 <<  74785 <<  76297 <<  76267 <<  77070
 				    <<  78401 <<  78820 <<  79593 <<  80331 <<  80763 <<  80816 <<  81266
 				    <<  81377 <<  81693 <<  82273 <<  82396 <<  83081 <<  84012 <<  85258
@@ -530,10 +533,9 @@ void NavStars::addExtraInfo(StelCore *core)
 		if (limitInfoToNavStars) 
 		{
 			doExtraInfo = false;
-			QString type = selectedObject->getType();
 			if(selectedObject->getType() == QStringLiteral("Star")) {
-				for (QVector<StelObjectP>::const_iterator itor = stars.begin();
-					itor != stars.end();
+				for (QVector<StelObjectP>::const_iterator itor = stars.constBegin();
+					itor != stars.constEnd();
 					itor++)
 				{
 					StelObjectP p = *itor;
@@ -587,11 +589,11 @@ void NavStars::extraInfo(StelCore* core, const StelObjectP& selectedObject)
 
 	if ("Sun" == englishName || "Moon" == englishName) 
 	{
-		// Adjust Ho if target is Sun or Moon by adding/subtracting half the angular diameter.
-		double d = selectedObject->getAngularSize(core);
-		if (upperLimb)
-			d *= -1;
-		calc.addAltAppRad(((d / 2) * M_PI) / 180.);
+		// Adjust Ho if target is Sun or Moon by adding/subtracting the angular radius.
+		double obj_radius_in_degrees = selectedObject->getAngularRadius(core);
+		if (!upperLimb)
+			obj_radius_in_degrees *= -1;
+		calc.addAltAppRad((obj_radius_in_degrees * M_PI) / 180.);
 		extraText = upperLimb ?
 			" (" + QString(qc_("upper limb", "the highest part of the Sun or Moon")) + ")" :
 			" (" + QString(qc_("lower limb", "the lowest part of the Sun or Moon")) + ")";
@@ -671,8 +673,8 @@ QString NavStars::oneRowTwoCells(const QString& a, const QString& b, const QStri
 
 bool NavStars::isPermittedObject(const QString& s)
 {
-	QVector<QString>::const_iterator itor = permittedObjects.begin();
-	while (itor != permittedObjects.end())
+	QVector<QString>::const_iterator itor = permittedObjects.constBegin();
+	while (itor != permittedObjects.constEnd())
 	{
 		if (*itor == s)
 			return true;

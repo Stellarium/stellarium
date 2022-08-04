@@ -1,8 +1,12 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.10.0)
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 
-IF(POLICY CMP0054)
+# Fix behavior of CMAKE_CXX_STANDARD and CMAKE_C_STANDARD when targeting macOS.
+IF(POLICY CMP0025)
+     CMAKE_POLICY(SET CMP0025 NEW)
+ENDIF()
 # Potential dangerous comparison of variables. Details: https://cmake.org/cmake/help/v3.1/policy/CMP0054.html
+IF(POLICY CMP0054)
      CMAKE_POLICY(SET CMP0054 NEW)
 ENDIF()
 IF(POLICY CMP0071)
@@ -18,7 +22,7 @@ SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 PROJECT(Stellarium)
 # Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MAJOR 0)
-SET(STELLARIUM_MINOR 21)
+SET(STELLARIUM_MINOR 22)
 SET(STELLARIUM_PATCH 1)
 ADD_DEFINITIONS(
      -DSTELLARIUM_MAJOR=${STELLARIUM_MAJOR}
@@ -33,6 +37,12 @@ SET(COPYRIGHT_YEARS "2000-${CURRENTYEAR}")
 SET(STELLARIUM_URL "https://stellarium.org/")
 ADD_DEFINITIONS(-DSTELLARIUM_URL="${STELLARIUM_URL}")
 
+# The line below is copied from src/gui/HelpDialog.cpp file
+SET(STELLARIUM_COPYRIGHT "Copyright (C) ${COPYRIGHT_YEARS} ${PROJECT_NAME} Developers")
+# The line below is copied from src/main.cpp file
+#SET(STELLARIUM_COPYRIGHT "Copyright (C) ${COPYRIGHT_YEARS} Fabien Chereau et al.")
+ADD_DEFINITIONS(-DSTELLARIUM_COPYRIGHT="${STELLARIUM_COPYRIGHT}")
+
 # Define URL for usage within program (feedback URL for plug-ins)
 SET(STELLARIUM_DEV_URL "https://github.com/Stellarium/stellarium")
 ADD_DEFINITIONS(-DSTELLARIUM_DEV_URL="${STELLARIUM_DEV_URL}")
@@ -42,8 +52,8 @@ ADD_DEFINITIONS(-DPACKAGE_VERSION="${PACKAGE_VERSION}")
 ADD_DEFINITIONS(-DCOPYRIGHT_YEARS="${COPYRIGHT_YEARS}")
 ADD_DEFINITIONS(-DSTELLARIUM_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
 
-# currently Qt 5.9/5.12 is recommended
-SET(MINIMAL_QT_VERSION "5.7.0")
+# currently Qt 5.12 is recommended
+SET(MINIMAL_QT_VERSION "5.9.0")
 # TODO: Check real minimal supported version of GPSD API
 SET(MINIMAL_GPS_API_VERSION "6.0")
 
@@ -88,30 +98,41 @@ SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release
 IF(STELLARIUM_RELEASE_BUILD)
      ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
      SET(SERIES "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}")
+     SET(WINDOWS_PACKAGE_VERSION "${VERSION}.0")
 ELSE()
      SET(SERIES "head")
-ENDIF()
-
-########### Get revision number for non-release builds ###########
-IF(NOT STELLARIUM_RELEASE_BUILD)
-     # Hack until CMake detection for Git is finished
-     IF(WIN32)
-          FIND_FILE(GITCMD git.exe)
-     ELSE()
-          FIND_FILE(GITCMD git)
-     ENDIF()
+     ########### Get revision number for non-release builds ###########
      STRING(TIMESTAMP CDNUMBER "%j")
      SET(WINDOWS_PACKAGE_VERSION "${VERSION}.${CDNUMBER}")
-     IF(EXISTS ${GITCMD})
-          EXECUTE_PROCESS(COMMAND git rev-parse --abbrev-ref HEAD WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_BRANCH OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
-          EXECUTE_PROCESS(COMMAND git log -1 --pretty=format:%h WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_REVISION OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
-          EXECUTE_PROCESS(COMMAND git rev-list --count ${GIT_BRANCH} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_COMMITS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+     FIND_PACKAGE(Git QUIET)
+     IF(Git_FOUND)
+          MESSAGE(STATUS "Found Git ${GIT_VERSION_STRING}")
+          # get the name of current branch
+          EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} rev-parse --abbrev-ref HEAD WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_BRANCH OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          # get the hash of latest commit
+          EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} log -1 --pretty=format:%h WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_REVISION OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          # get the name of latest annotated tag
+          EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} describe --tags --abbrev=0 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_TAGS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          # get the count of commits between latest release (we use tags for releases) and current HEAD
+          IF(WIN32)
+               EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} log ${GIT_TAGS}..HEAD --pretty=oneline COMMAND find /c /v "" WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_COMMITS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          ELSE()
+               EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} log ${GIT_TAGS}..HEAD --pretty=oneline COMMAND wc -l WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} TIMEOUT 30 OUTPUT_VARIABLE GIT_COMMITS OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_VARIABLE GIT_ERROR)
+          ENDIF()
+          # remove all whitespaces
+          STRING(REPLACE " " "" GIT_COMMITS "${GIT_COMMITS}")
           IF(GIT_REVISION)
                # Let's use short hash in all cases
                STRING(SUBSTRING ${GIT_REVISION} 0 7 REVISION)
                SET(PACKAGE_VERSION "${VERSION}-${REVISION}")
                ADD_DEFINITIONS(-DGIT_REVISION="${REVISION}")
                ADD_DEFINITIONS(-DGIT_BRANCH="${GIT_BRANCH}")
+               # check to use --depth param...
+               IF(${GIT_COMMITS} EQUAL 0)
+                    # Append the day of the current year to the number 1 as string
+                    # because we never reaches 1000 commits per 1/4 year
+                    STRING(TIMESTAMP GIT_COMMITS "1%j")
+               ENDIF()
                # better way to numbering
                SET(WINDOWS_PACKAGE_VERSION "${VERSION}.${GIT_COMMITS}")
           ENDIF()
@@ -124,9 +145,9 @@ IF(NOT STELLARIUM_RELEASE_BUILD)
      IF(STELLARIUM_VERSION)
           SET(PACKAGE_VERSION "${STELLARIUM_VERSION}")
           ADD_DEFINITIONS(-DSTELLARIUM_VERSION="${STELLARIUM_VERSION}")
-     ENDIF()
+     ENDIF()     
 ENDIF()
-MESSAGE(STATUS "Building Stellarium ${PACKAGE_VERSION} (Mode: ${CMAKE_BUILD_TYPE})")
+MESSAGE(STATUS "Building Stellarium ${PACKAGE_VERSION} [${WINDOWS_PACKAGE_VERSION}] (Mode: ${CMAKE_BUILD_TYPE})")
 
 # Write version and series of Stellarium to Stellarium User Guide
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
@@ -139,10 +160,12 @@ IF(OPENGL_DEBUG_LOGGING)
 ENDIF()
 
 # Use ccache if possible
-FIND_PROGRAM(CCACHE_PROGRAM ccache)
-IF(CCACHE_PROGRAM)
-     MESSAGE(STATUS "Found ccache ${CCACHE_PROGRAM}")
-     SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+IF(NOT WIN32)
+     FIND_PROGRAM(CCACHE_PROGRAM ccache)
+     IF(CCACHE_PROGRAM)
+          MESSAGE(STATUS "Found ccache ${CCACHE_PROGRAM}")
+          SET_PROPERTY(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+     ENDIF()
 ENDIF()
 
 # Add gprof build options if necessary.  Note gmon.out will be created in working directory when Stellarium is executed
@@ -212,17 +235,16 @@ ELSE()
      SET(STEL_GCC_CXX_FLAGS "${STEL_GCC_CXX_FLAGS} -diag-disable:remark -wd1875,654")
 ENDIF()
 
-# Set whether to try using C++11 when compiling. Required for Qt >= 5.7"
-IF(NOT (CMAKE_VERSION VERSION_LESS 3.1.0))
-     # Let CMake handle setting C++11 (since 3.1)
-     SET(CMAKE_CXX_STANDARD 11)
-     SET(CMAKE_C_STANDARD 11)
-ELSE()
-     # Add std=c++11 to gcc flags
-     SET(STEL_GCC_CXX_FLAGS "-std=c++11 ${STEL_GCC_CXX_FLAGS}")
-     # Add std=c11 to gcc flags
-     SET(STEL_GCC_C_FLAGS "-std=c11 ${STEL_GCC_C_FLAGS}")
-ENDIF()
+# Enable using C++17 when compiling.
+SET(CMAKE_CXX_STANDARD 17)
+SET(CMAKE_CXX_STANDARD_REQUIRED ON)
+SET(CMAKE_CXX_EXTENSIONS OFF)
+# NOTE: C_STANDARD 17 and 23 values added in CMake 3.21
+# https://gitlab.kitware.com/cmake/cmake/-/issues/22366
+# Ubuntu 18.04 have GCC 7.5 - so, C11 only
+SET(CMAKE_C_STANDARD 11)
+SET(CMAKE_C_STANDARD_REQUIRED ON)
+SET(CMAKE_C_EXTENSIONS OFF)
 
 IF(WIN32)
      # We don't need the extra Windows.h stuff, this may speed up compilation a tiny bit
@@ -233,7 +255,8 @@ IF(WIN32)
           SET(STEL_MINGW_FLAGS "-fexceptions -fident -mthreads")
           SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_GCC_C_FLAGS} ${STEL_MINGW_FLAGS}")
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STEL_GCC_CXX_FLAGS} ${STEL_MINGW_FLAGS}")
-     ELSE() # MSVC
+     ELSE()
+          # MSVC
           # Additional flags:
           # Disabled warnings
           # C4244: implicit type conversion to a smaller type
@@ -241,6 +264,8 @@ IF(WIN32)
           # C4351: "new" behaviour, member array default initialization. Required since at least C++98, but funny MSVC throws a warning.
           # C4996: deprecated POSIX names (used in zlib)
           SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996")
+          # Avoid type conflict with C++17 standard
+          SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_HAS_STD_BYTE=0")
           # Set minimal version of Windows
           SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_WIN32_WINNT=${MIN_WIN_VERSION}")
           IF(MSVC_VERSION GREATER 1700)
@@ -272,29 +297,21 @@ IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
      IF(${CMAKE_CXX_COMPILER_VERSION} VERSION_GREATER 3.3)
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-const-variable -Wno-unused-result")
      ENDIF()
+     IF(APPLE)
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra -Wno-unknown-warning-option")
+          # macOS architectures: x86_64 or arm64 (default: current system's processor architecture)
+          IF(NOT CMAKE_OSX_ARCHITECTURES)
+               SET(CMAKE_OSX_ARCHITECTURES "${CMAKE_HOST_SYSTEM_PROCESSOR}" CACHE STRING "macOS architectures" FORCE)
+          ENDIF()
+     ENDIF()
 ENDIF()
 
 # FreeBSD-specific compiler flags
 # resolve bug for FreeBSD/amd64 and NVIDIA proprietary drivers 
 IF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
      # Use -pthread compilation option to properly link to threading library
-     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-     IF(${GCC_VERSION} VERSION_GREATER 4.7)
-          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-local-typedefs")
-     ENDIF()
-ENDIF()
-
-# best way to get to APPLE?
-IF(APPLE)
-     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra")
-     # using regular Clang or AppleClang
-     IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
-          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-private-field -Wno-unknown-warning-option -Wno-unused-const-variable -Wno-unused-result")
-     ENDIF()
-     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
-
-     # We support only 64 bits MacOSX
-     SET(CMAKE_OSX_ARCHITECTURES "x86_64")
+     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -Wno-unused-local-typedefs")
 ENDIF()
 
 # This activates Link Time Optimization on recent GCC
@@ -313,6 +330,9 @@ ENDIF()
 
 # Activate media support
 SET(ENABLE_MEDIA 1 CACHE BOOL "Define whether media support should be activated.")
+
+# Activate QtWebEngine support
+SET(ENABLE_QTWEBENGINE 1 CACHE BOOL "Define whether QtWebEngine module should be supported if it installed.")
 
 # Activate GPS support. Solution depends on operating system:
 # - Windows: Only directly-attached serial NMEA emitter.
@@ -472,9 +492,7 @@ FIND_PACKAGE(Qt5Concurrent REQUIRED)
 FIND_PACKAGE(Qt5Gui REQUIRED)
 FIND_PACKAGE(Qt5Network REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
-# required for qcustomplot external dependency
-# not used elsewhere
-FIND_PACKAGE(Qt5PrintSupport REQUIRED)
+FIND_PACKAGE(Qt5Charts REQUIRED)
 IF(USE_PLUGIN_TELESCOPECONTROL OR ENABLE_GPS)
      FIND_PACKAGE(Qt5SerialPort REQUIRED)
 ENDIF()
@@ -549,7 +567,6 @@ ELSE()
      MESSAGE(STATUS "Building an OpenGL build")
 ENDIF()
 
-
 # Tell CMake to run moc when necessary:
 SET(CMAKE_AUTOMOC ON)
 # As moc files are generated in the binary dir, tell CMake to always look for includes there:
@@ -593,7 +610,6 @@ ELSE(ENABLE_GPS)
      SET(ENABLE_LIBGPS 0)
      MESSAGE(STATUS "GPS: disabled.")
 ENDIF(ENABLE_GPS)
-
 
 IF(USE_QTOPENGL)
      # QtOpenGL module is deprecated. After merging the QOpenGLWidget branch, we don't use this module directly anymore,
@@ -769,9 +785,9 @@ IF(APPLE)
      FIND_PROGRAM(MACDEPLOYQT_COMMAND macdeployqt HINTS "${_qt_bin_dir}")
 
      IF(NOT CMAKE_OSX_DEPLOYMENT_TARGET)
-          SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.12" CACHE STRING "Minimum OS X deployment version" FORCE)
+          SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.13" CACHE STRING "Minimum macOS deployment version" FORCE)
      ENDIF()
-     MESSAGE(STATUS "Mac OS X deployment target: ${CMAKE_OSX_DEPLOYMENT_TARGET}")
+     MESSAGE(STATUS "macOS deployment target: ${CMAKE_OSX_DEPLOYMENT_TARGET} (${CMAKE_OSX_ARCHITECTURES})")
      SET(PACKAGE_OSX_TARGET ${CMAKE_OSX_DEPLOYMENT_TARGET})
      ADD_DEFINITIONS(-DPACKAGE_OSX_TARGET)
      CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/Info.plist.cmake ${CMAKE_SOURCE_DIR}/data/Info.plist @ONLY)
@@ -810,14 +826,6 @@ IF(DOXYGEN_FOUND)
      ADD_CUSTOM_TARGET(apidoc ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc directory.")
 ENDIF()
 
-##################### Generate translation copying script ######################
-IF(WIN32)
-     STRING(REPLACE "/" "\\" PROJECT_SOURCE_DIR_WINPATH ${PROJECT_SOURCE_DIR})
-     STRING(REPLACE "/" "\\" PROJECT_BINARY_DIR_WINPATH ${PROJECT_BINARY_DIR})
-     CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/copy-translations.bat.cmake ${PROJECT_SOURCE_DIR}/util/copy-translations.bat @ONLY NEWLINE_STYLE WIN32)
-ENDIF() 
-
-
 ########### Top level include directories ###########
 # This will be used for all compilations in sub-directories
 INCLUDE_DIRECTORIES(
@@ -838,12 +846,11 @@ ADD_SUBDIRECTORY( models )
 ADD_SUBDIRECTORY( src )
 ADD_SUBDIRECTORY( textures )
 ADD_SUBDIRECTORY( doc )
-IF(ENABLE_NLS)
-     ADD_SUBDIRECTORY( po )
-ENDIF()
 ADD_SUBDIRECTORY( landscapes )
 ADD_SUBDIRECTORY( skycultures )
 ADD_SUBDIRECTORY( nebulae )
+ADD_SUBDIRECTORY( stars )
+ADD_SUBDIRECTORY( plugins )
 IF(ENABLE_SCRIPTING)
      ADD_SUBDIRECTORY( scripts )
 ENDIF()
@@ -851,5 +858,6 @@ IF(USE_PLUGIN_SCENERY3D)
      # add scenery3d scenes
      ADD_SUBDIRECTORY( scenery3d )
 ENDIF()
-ADD_SUBDIRECTORY( stars )
-ADD_SUBDIRECTORY( plugins )
+IF(ENABLE_NLS)
+     ADD_SUBDIRECTORY( po )
+ENDIF()

@@ -34,13 +34,15 @@
 #include <QSettings>
 #include <QStringList>
 
+//! @class ArtificialPlanet Auxiliary construct used during transitions from one planet to another.
 class ArtificialPlanet : public Planet
 {
 public:
 	ArtificialPlanet(const PlanetP& orig);
 	void setDest(const PlanetP& dest);
 	void computeAverage(double f1);
-	virtual void computePosition(const double dateJDE) Q_DECL_OVERRIDE;
+	//! This does nothing, but avoids a crash.
+	virtual void computePosition(const double dateJDE, const Vec3d &aberrationPush) Q_DECL_OVERRIDE;
 private:
 	void setRot(const Vec3d &r);
 	static Vec3d getRot(const Planet* p);
@@ -72,8 +74,8 @@ ArtificialPlanet::ArtificialPlanet(const PlanetP& orig) :
 void ArtificialPlanet::setDest(const PlanetP& dest)
 {
 	ArtificialPlanet::dest = dest;
-	englishName = QString("%1->%2").arg(orig_name).arg(dest->getEnglishName());
-	nameI18 = QString("%1->%2").arg(orig_name_i18n).arg(dest->getNameI18n());
+	englishName = QString("%1->%2").arg(orig_name, dest->getEnglishName());
+	nameI18 = QString("%1->%2").arg(orig_name_i18n, dest->getNameI18n());
 
 	// rotation:
 	const RotationElements &r(dest->getRotationElements());
@@ -138,10 +140,10 @@ Vec3d ArtificialPlanet::getRot(const Planet* p)
 	return r;
 }
 
-void ArtificialPlanet::computePosition(const double dateJDE)
+void ArtificialPlanet::computePosition(const double dateJDE, const Vec3d &aberrationpush)
 {
 	Q_UNUSED(dateJDE)
-	// This does nothing, but avoids a crash.
+	Q_UNUSED(aberrationpush)
 }
 
 void ArtificialPlanet::computeAverage(double f1)
@@ -212,29 +214,9 @@ Vec4d StelObserver::getTopographicOffsetFromCenter(void) const
 	if (getHomePlanet()->getEquatorialRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver have this
 		return Vec4d(0.,0.,static_cast<double>(currentLocation.latitude)*(M_PI/180.0),currentLocation.altitude/(1000.0*AU));
 
-	const double a=getHomePlanet()->getEquatorialRadius();
-	const double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
-
-	// Details: https://github.com/Stellarium/stellarium/issues/391
-	//if (fabs(currentLocation.latitude)>=89.9) // avoid tan(90) issues?
-	//	return Vec4d(0.0,
-	//                   StelUtils::sign(currentLocation.latitude)*getHomePlanet()->getPolarRadius(),
-	//                   StelUtils::sign(currentLocation.latitude)*M_PI/2.0,
-	//                   getHomePlanet()->getPolarRadius()); // Do we need this?
-
-	const double latRad=static_cast<double>(currentLocation.latitude)*(M_PI_180);
-	const double u = atan( bByA * tan(latRad));
-	//qDebug() << "getTopographicOffsetFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
-	// This may fail & crash if on SpaceshipObserver on the way to the Sun (?) --> add test bByA==1
-	Q_ASSERT((bByA==1.) || (fabs(u)<= fabs(latRad)));
-	const double altFix = currentLocation.altitude/(1000.0*AU*a);
-
-	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
-	const double rhoCosPhiPrime=        cos(u) + altFix*cos(latRad);
-
-	const double rho = sqrt(rhoSinPhiPrime*rhoSinPhiPrime+rhoCosPhiPrime*rhoCosPhiPrime);
-	double phiPrime=asin(rhoSinPhiPrime/rho);
-	return Vec4d(rhoCosPhiPrime*a, rhoSinPhiPrime*a, phiPrime, rho*a);
+	return getHomePlanet()->getRectangularCoordinates(static_cast<double>(currentLocation.longitude),
+							  static_cast<double>(currentLocation.latitude),
+							  currentLocation.altitude);
 }
 
 // For Earth we require JD, for other planets JDE to describe rotation!
