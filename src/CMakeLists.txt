@@ -556,7 +556,7 @@ IF(WIN32)
         "
          EXECUTE_PROCESS(
              COMMAND \"${WINDEPLOYQT_COMMAND}\"
-                     --dir \"\${CMAKE_INSTALL_PREFIX}/qt${QT_VERSION_MAJOR}stuff\"
+		     --dir \"\${CMAKE_INSTALL_PREFIX}/qtstuff\"
                      --no-translations
                      --compiler-runtime
                      \"\${CMAKE_INSTALL_PREFIX}/bin/stellarium.exe\"
@@ -572,7 +572,7 @@ IF(WIN32)
              "
               EXECUTE_PROCESS(
                   COMMAND \"${WINDEPLOYQT_COMMAND}\"
-                          --dir \"\${CMAKE_INSTALL_PREFIX}/qt${QT_VERSION_MAJOR}stuff\"
+			  --dir \"\${CMAKE_INSTALL_PREFIX}/qtstuff\"
                           --no-translations
                           --compiler-runtime
                           \"\${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"
