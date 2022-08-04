@@ -48,7 +48,7 @@ using namespace std;
 ObsListDialog::ObsListDialog(QObject *parent) : StelDialog("Observing list", parent), ui(new Ui_obsListDialogForm()),
                                                 obsListListModel(new QStandardItemModel(0, ColumnCount)),
                                                 core(StelApp::getInstance().getCore()),
-                                                createEditDialog_instance(Q_NULLPTR) {
+                                                currentJd(core->getJD()), createEditDialog_instance(Q_NULLPTR) {
 
     objectMgr = GETSTELMODULE (StelObjectMgr);
     labelMgr = GETSTELMODULE (LabelMgr);
@@ -64,9 +64,6 @@ ObsListDialog::ObsListDialog(QObject *parent) : StelDialog("Observing list", par
                                   static_cast<StelFileMgr::Flags>(StelFileMgr::Directory | StelFileMgr::Writable)) +
             "/" +
             QString(JSON_BOOKMARKS_FILE_NAME);
-
-    currentJd = core->getJD();
-
 
 }
 
@@ -104,6 +101,7 @@ void ObsListDialog::createDialogContent() {
     ui->obsListTreeView->setModel(obsListListModel);
     ui->obsListTreeView->header()->setSectionsMovable(false);
     ui->obsListTreeView->header()->setSectionResizeMode(ColumnName, QHeaderView::ResizeToContents);
+    ui->obsListTreeView->header()->setSectionResizeMode(ColumnNameI18n, QHeaderView::ResizeToContents);
     ui->obsListTreeView->header()->setSectionResizeMode(ColumnType, QHeaderView::ResizeToContents);
     ui->obsListTreeView->header()->setSectionResizeMode(ColumnRa, QHeaderView::ResizeToContents);
     ui->obsListTreeView->header()->setSectionResizeMode(ColumnDec, QHeaderView::ResizeToContents);
@@ -113,7 +111,7 @@ void ObsListDialog::createDialogContent() {
     ui->obsListTreeView->header()->setSectionResizeMode(ColumnLocation, QHeaderView::ResizeToContents);
     ui->obsListTreeView->header()->setStretchLastSection(true);
     ui->obsListTreeView->hideColumn(ColumnUUID);
-    ui->obsListTreeView->hideColumn(ColumnNameI18n);
+
     //Enable the sort for columns
     ui->obsListTreeView->setSortingEnabled(true);
 
@@ -151,7 +149,7 @@ void ObsListDialog::createDialogContent() {
  * Retranslate dialog
 */
 void ObsListDialog::retranslate() {
-    if (dialog) {
+    if (dialog != nullptr) {
         ui->retranslateUi(dialog);
         setObservingListHeaderNames();
     }
@@ -171,8 +169,8 @@ void ObsListDialog::styleChanged() {
 void ObsListDialog::setObservingListHeaderNames() {
     const QStringList headerStrings = {
             "UUID", // Hidden column
+            q_ ("Object designation"),
             q_ ("Object name"),
-            q_ ("Object name I18N"), // Hidden column
             q_ ("Type"),
             q_ ("Right ascension"),
             q_ ("Declination"),
@@ -526,7 +524,7 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
                         if (Location.isEmpty()) {
                             StelLocation loc = core->getCurrentLocation();
                             if (loc.name.isEmpty()) {
-                                Location = QString("%1, %2").arg(loc.latitude).arg(loc.longitude);
+                                Location = q_("Location not found");
                             } else {
                                 Location = QString("%1, %2").arg(loc.name).arg(loc.region);
                             }
@@ -732,25 +730,6 @@ void ObsListDialog::loadBookmarksInObservingList() {
                     }
 
                     // Magnitude
-                    // TODO sortir ce code dans une méthode
-                    /*QString objectMagnitudeStr;
-                    float objectMagnitude = selectedObject[0]->getVMagnitude(core);
-                    const float unknownMagnitude = 99;
-                    if (objectMagnitude == unknownMagnitude) {
-                        if (QString::compare(type, "Nebula", Qt::CaseSensitive) == 0) {
-                            auto &r_nebula = dynamic_cast<Nebula &>(*selectedObject[0]);
-                            float mB = r_nebula.getBMagnitude(core);
-                            if (mB == unknownMagnitude) {
-                                objectMagnitudeStr = "–";
-                            } else {
-                                objectMagnitudeStr = QString::number(mB);
-                            }
-                        } else {
-                            objectMagnitudeStr = "–";
-                        }
-                    } else {
-                        objectMagnitudeStr = QString::number(objectMagnitude);
-                    }*/
                     QString objectMagnitudeStr = util.getMagnitue(selectedObject, core);
                     if (!objectMagnitudeStr.isEmpty()) {
                         item.magnitude = objectMagnitudeStr;
@@ -770,6 +749,7 @@ void ObsListDialog::loadBookmarksInObservingList() {
             }
 
             saveBookmarksInObsListJsonFile(bookmarksCollection);
+            objectMgr->unSelect();
 
         } catch (std::runtime_error &e) {
             qWarning() << "[ObservingList] Load bookmarks in observing list: File format is wrong! Error: " << e.what();

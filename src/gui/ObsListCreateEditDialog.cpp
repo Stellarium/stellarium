@@ -25,6 +25,7 @@
 #include <utility>
 #include <Planet.hpp>
 #include <StelOBJ.hpp>
+#include <QMessageBox>
 
 #include "NebulaMgr.hpp"
 #include "StelCore.hpp"
@@ -103,6 +104,7 @@ void ObsListCreateEditDialog::createDialogContent() {
     ui->obsListCreationEditionTreeView->setModel(obsListListModel);
     ui->obsListCreationEditionTreeView->header()->setSectionsMovable(false);
     ui->obsListCreationEditionTreeView->header()->setSectionResizeMode(ColumnName, QHeaderView::ResizeToContents);
+    ui->obsListCreationEditionTreeView->header()->setSectionResizeMode(ColumnNameI18n, QHeaderView::ResizeToContents);
     ui->obsListCreationEditionTreeView->header()->setSectionResizeMode(ColumnType, QHeaderView::ResizeToContents);
     ui->obsListCreationEditionTreeView->header()->setSectionResizeMode(ColumnRa, QHeaderView::ResizeToContents);
     ui->obsListCreationEditionTreeView->header()->setSectionResizeMode(ColumnDec, QHeaderView::ResizeToContents);
@@ -111,7 +113,7 @@ void ObsListCreateEditDialog::createDialogContent() {
     ui->obsListCreationEditionTreeView->header()->setSectionResizeMode(ColumnMagnitude, QHeaderView::ResizeToContents);
     ui->obsListCreationEditionTreeView->header()->setStretchLastSection(true);
     ui->obsListCreationEditionTreeView->hideColumn(ColumnUUID);
-    ui->obsListCreationEditionTreeView->hideColumn(ColumnNameI18n);
+    //ui->obsListCreationEditionTreeView->hideColumn(ColumnNameI18n);
     ui->obsListCreationEditionTreeView->hideColumn(ColumnDate);
     ui->obsListCreationEditionTreeView->hideColumn(ColumnLocation);
     // Enable the sort for columns
@@ -124,11 +126,13 @@ void ObsListCreateEditDialog::createDialogContent() {
     // Save and close and Exit
     ui->closeStelWindow->setHidden(true);
 
-    ui->obsListErrorMessage->setHidden(true);
+    initErrorMessage();
     ui->obsListLandscapeCheckBox->setChecked(false);
 
     // In case of creation the nameOfListLineEdit is empty and button save/close must be disabled
     // In case on edition the nameOfListLineEdit is not empty and the button save/close must be enable
+    //delete with space -> no list with only white space as name
+    ui->nameOfListLineEdit->setText(QString(ui->nameOfListLineEdit->text()).remove(QRegExp("([ ]+)$")));
     if (ui->nameOfListLineEdit->text().isEmpty()) {
         ui->obsListSaveButton->setEnabled(false);
     } else {
@@ -139,10 +143,12 @@ void ObsListCreateEditDialog::createDialogContent() {
         // case of creation mode
         isCreationMode = true;
         ui->stelWindowTitle->setText("Observing list creation mode");
+        ui->obsListImportListButton->setHidden(false);
     } else {
         // case of edit mode
         isCreationMode = false;
         ui->stelWindowTitle->setText("Observing list editor mode");
+        ui->obsListImportListButton->setHidden(true);
         loadObservingList();
     }
 }
@@ -170,8 +176,8 @@ void ObsListCreateEditDialog::styleChanged() {
 void ObsListCreateEditDialog::setObservingListHeaderNames() {
     const QStringList headerStrings = {
             "UUID", // Hidden column
+            q_("Object designation"),
             q_("Object name"),
-            q_("Object name I18N"), // Hidden column
             q_("Type"),
             q_("Right ascension"),
             q_("Declination"),
@@ -248,7 +254,7 @@ void ObsListCreateEditDialog::addModelRow(int number,
  * Save selected object into the list of observed objects.
  */
 void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
-
+    initErrorMessage();
     const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
 
     if (!selectedObject.isEmpty()) {
@@ -323,10 +329,10 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
             JDs = StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD) / 24.).replace("T", " ");
 
             // Location
-            QString Location = "";
+            QString Location;
             StelLocation loc = core->getCurrentLocation();
             if (loc.name.isEmpty()) {
-                Location = QString("%1, %2").arg(loc.latitude, loc.longitude);
+                Location = q_("Location not found");
             } else {
                 Location = QString("%1, %2").arg(loc.name, loc.region);
             }
@@ -410,6 +416,7 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
  * Slot for button obsListRemoveObjectButton
  */
 void ObsListCreateEditDialog::obsListRemoveObjectButtonPressed() {
+    initErrorMessage();
     int number = ui->obsListCreationEditionTreeView->currentIndex().row();
     QString uuid = obsListListModel->index(number, ColumnUUID).data().toString();
     obsListListModel->removeRow(number);
@@ -574,6 +581,7 @@ void ObsListCreateEditDialog::saveObservedObjectsInJsonFile() {
  * Slot for button obsListExportListButton
  */
 void ObsListCreateEditDialog::obsListExportListButtonPressed() {
+    initErrorMessage();
     QString originalobservingListJsonPath = observingListJsonPath;
 
     QString filter = "JSON (*.json)";
@@ -587,35 +595,61 @@ void ObsListCreateEditDialog::obsListExportListButtonPressed() {
  * Slot for button obsListImportListButton
  */
 void ObsListCreateEditDialog::obsListImportListButtonPresssed() {
-    QString originalobservingListJsonPath = observingListJsonPath;
 
     QString filter = "JSON (*.json)";
-    observingListJsonPath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Import observing list"), QDir::homePath(),
-                                                         filter);
-
+    QString fileToImportJsonPath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Import observing list"),
+                                                                QDir::homePath(),
+                                                                filter);
     QVariantMap map;
-    QFile jsonFile(observingListJsonPath);
+    QFile jsonFile(fileToImportJsonPath);
     if (!jsonFile.open(QIODevice::ReadOnly)) {
-        qWarning() << "[ObservingList Creation/Edition] cannot open" << QDir::toNativeSeparators(JSON_FILE_NAME);
-
+        qWarning() << "[ObservingList Creation/Edition import] cannot open"
+                   << QDir::toNativeSeparators(jsonFile.fileName());
     } else {
+
         try {
+            initErrorMessage();
             map = StelJsonParser::parse(jsonFile.readAll()).toMap();
             jsonFile.close();
-            QVariantMap observingListMap = map.value(QString(KEY_OBSERVING_LISTS)).toMap();
 
-            if (observingListMap.size() == 1) {
-                listOlud_ = observingListMap.keys().at(0).toStdString();
-            } else {
-                // define error message if needed
-                return;
+            if (map.contains(KEY_OBSERVING_LISTS)) { // Case of observingList import
+                qDebug() << "ObservingList import";
+
+                QVariantMap observingListMap = map.value(QString(KEY_OBSERVING_LISTS)).toMap();
+                if (!observingListMap.isEmpty() && observingListMap.size() == 1) {
+                    listOlud_ = observingListMap.keys().at(0).toStdString();
+                } else {
+                    qWarning()
+                            << "[ObservingList Creation/Edition import] there is no list or more than one list.";
+                    displayErrorMessage("Error: here is no list or more than one list.");
+                    return;
+                }
+
+                QString originalobservingListJsonPath = observingListJsonPath;
+                observingListJsonPath = fileToImportJsonPath;
+                loadObservingList();
+                observingListJsonPath = originalobservingListJsonPath;
+            } else if (map.contains(KEY_BOOKMARKS)) { // Case of legacy bookmarks import
+                qDebug() << "Legacy bookmarks import";
+                QVariantMap bookmarksListMap = map.value(QString(KEY_BOOKMARKS)).toMap();
+                if (!bookmarksListMap.isEmpty()) {
+                    listOlud_ = bookmarksListMap.keys().at(0).toStdString();
+                    QString originalobservingListJsonPath = observingListJsonPath;
+                    observingListJsonPath = fileToImportJsonPath;
+                    loadBookmarksInObservingList();
+                    observingListJsonPath = originalobservingListJsonPath;
+                } else {
+                    qWarning()
+                            << "[ObservingList Creation/Edition import] the file is empty or doesn't contains legacy bookmarks.";
+                    displayErrorMessage("Error: the file is empty or doesn't contains legacy bookmarks.");
+                    return;
+                }
             }
         } catch (std::runtime_error &e) {
             qWarning() << "[ObservingList Creation/Edition] File format is wrong! Error: " << e.what();
+            displayErrorMessage("File format is wrong!");
             return;
         }
-        loadObservingList();
-        observingListJsonPath = originalobservingListJsonPath;
     }
 }
 
@@ -623,7 +657,11 @@ void ObsListCreateEditDialog::obsListImportListButtonPresssed() {
  * Slot for button obsListSaveButton
  */
 void ObsListCreateEditDialog::obsListSaveButtonPressed() {
+    initErrorMessage();
     QString listName = ui->nameOfListLineEdit->text();
+
+    //delete with space at the end of the name
+    listName = QString(listName).remove(QRegExp("([ ]+)$"));
 
     // TODO il faut faire la comparaison du nom des liste en ignoreCase
     bool isListAlreadyExists = !this->listNames_.isEmpty() && this->listNames_.contains(listName) &&
@@ -636,16 +674,12 @@ void ObsListCreateEditDialog::obsListSaveButtonPressed() {
                 .append(" already exists !");
         qWarning() << "[ObservingList Creation/Edition] Error: a list with the name " << ui->nameOfListLineEdit->text()
                    << " already exists !";
-        ui->obsListErrorMessage->setHidden(false);
-        ui->obsListErrorMessage->setText(errorMessage);
+        std::string errorMessage_str = errorMessage.toStdString();
+        displayErrorMessage(errorMessage_str.c_str());
     } else if (ui->nameOfListLineEdit->text().isEmpty()) {
-        QString errorMessage;
-        errorMessage.append("Error: the list name is empty.");
         qWarning() << "[ObservingList Creation/Edition] Error: the list name is empty.";
-        ui->obsListErrorMessage->setHidden(false);
-        ui->obsListErrorMessage->setText(errorMessage);
+        displayErrorMessage("Error: the list name is empty.");
     } else {
-        ui->obsListErrorMessage->setHidden(true);
         if (listName.compare(currentListName) != 0 && !isCreationMode) {
             isSaveAs = true;
         } else {
@@ -661,6 +695,8 @@ void ObsListCreateEditDialog::obsListSaveButtonPressed() {
  * Slot for button obsListExitButton
  */
 void ObsListCreateEditDialog::obsListExitButtonPressed() {
+    ui->obsListErrorMessage->setHidden(true);
+    ui->obsListErrorMessage->clear();
     this->close();
     emit exitButtonClicked();
 }
@@ -876,11 +912,156 @@ void ObsListCreateEditDialog::loadObservingList() {
 }
 
 /*
+* Load the bookmarks of bookmarks.json file into observing lists file
+* For no regression with must take into account the legacy bookmarks.json file
+*/
+void ObsListCreateEditDialog::loadBookmarksInObservingList() {
+    QHash<QString, observingListItem> bookmarksCollection;
+    QVariantMap map;
+
+    QFile jsonFile(observingListJsonPath);
+    if (!jsonFile.open(QIODevice::ReadOnly)) {
+        qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators(observingListJsonPath);
+    } else {
+
+        try {
+
+            map = StelJsonParser::parse(jsonFile.readAll()).toMap();
+            jsonFile.close();
+            QVariantMap bookmarksMap = map.value(KEY_BOOKMARKS).toMap();
+            observingListItemCollection.clear();
+
+            for (auto bookmarkKey: bookmarksMap.keys()) {
+
+                QVariantMap bookmarkData = bookmarksMap.value(bookmarkKey).toMap();
+                observingListItem item;
+                util.initItem(item);
+                QString objectUuid = QUuid::createUuid().toString();
+                int lastRow = obsListListModel->rowCount();
+
+                // Name
+                QString objectName = bookmarkData.value(KEY_NAME).toString();
+                item.name = objectName;
+
+                // We need to select the object to add additional information that is not in the Bookmark file
+                if (objectMgr->findAndSelect(item.name) && !objectMgr->getSelectedObject().isEmpty()) {
+                    const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
+
+                    // Ra & Dec - ra and dec are not empty in case of Custom Object
+                    QString raStr = bookmarkData.value(KEY_RA).toString();
+                    QString decStr = bookmarkData.value(KEY_DEC).toString();
+                    if (raStr.isEmpty() || decStr.isEmpty()) {
+                        float ra, dec;
+                        StelUtils::rectToSphe(&ra, &dec, selectedObject[0]->getJ2000EquatorialPos(core));
+                        raStr = StelUtils::radToHmsStr(ra, false).trimmed();
+                        decStr = StelUtils::radToDmsStr(dec, false).trimmed();
+                    }
+
+                    if (!raStr.isEmpty()) {
+                        item.ra = raStr;
+                    } else {
+                        item.ra = "";
+                    }
+
+                    if (!decStr.isEmpty()) {
+                        item.dec = decStr;
+                    } else {
+                        item.dec = "";
+                    }
+
+                    // NameI18n
+                    QString nameI18n = bookmarkData.value(KEY_NAME_I18N).toString();
+                    if (!nameI18n.isEmpty()) {
+                        item.nameI18n = nameI18n;
+                    } else {
+                        item.nameI18n = "";
+                    }
+
+                    // JDs
+                    QString JDs = bookmarkData.value(KEY_JD).toString();
+                    if (!JDs.isEmpty()) {
+                        item.jd = JDs.toDouble();
+                    } else {
+                        item.jd = 0.0;
+                    }
+
+                    // Location
+                    QString location = bookmarkData.value(KEY_LOCATION).toString();
+                    if (!location.isEmpty()) {
+                        item.location = location;
+                    } else {
+                        item.location = "";
+                    }
+
+
+                    // Constallation
+                    QVariantMap objectMap = selectedObject[0]->getInfoMap(core);
+                    QVariant objectConstellationVariant = objectMap["iauConstellation"];
+                    QString objectConstellation("unknown");
+                    if (objectConstellationVariant.canConvert<QString>()) {
+                        objectConstellation = objectConstellationVariant.value<QString>();
+                    }
+                    if (!objectConstellation.isEmpty()) {
+                        item.constellation = objectConstellation;
+                    }
+
+                    // Type
+                    QString type = selectedObject[0]->getType();
+                    if (!type.isEmpty()) {
+                        item.type = type;
+                    }
+
+                    // Object Type
+                    QString objectType = selectedObject[0]->getObjectType();
+                    if (!objectType.isEmpty()) {
+                        item.objtype = objectType;
+                    }
+
+                    // Magnitude
+                    QString objectMagnitudeStr = util.getMagnitue(selectedObject, core);
+                    if (!objectMagnitudeStr.isEmpty()) {
+                        item.magnitude = objectMagnitudeStr;
+                    }
+
+                    // Fov
+                    double fov = bookmarkData.value(KEY_FOV).toDouble();
+                    if (fov > 0.0) {
+                        item.fov = fov;
+                    }
+
+                    // Visible marker
+                    item.isVisibleMarker = bookmarkData.value(KEY_IS_VISIBLE_MARKER, false).toBool();
+
+                    // Add data into model row
+                    addModelRow(lastRow,
+                                objectUuid,
+                                objectName,
+                                nameI18n,
+                                objectType,
+                                raStr,
+                                decStr,
+                                objectMagnitudeStr,
+                                objectConstellation);
+
+                    observingListItemCollection.insert(objectUuid, item);
+                }
+            }
+            objectMgr->unSelect();
+        } catch (std::runtime_error &e) {
+            qWarning() << "[ObservingList] Load bookmarks in observing list: File format is wrong! Error: " << e.what();
+            return;
+        }
+    }
+}
+
+/*
  * Called when the text of the nameOfListLineEdit change
  */
 void ObsListCreateEditDialog::nameOfListTextChange() {
     ui->obsListErrorMessage->setHidden(true);
-    if (ui->nameOfListLineEdit->text().isEmpty()) {
+    //delete with space -> no list with only white space as name
+    QString listeName = QString(ui->nameOfListLineEdit->text()).remove(QRegExp("([ ]+)$"));
+    if (listeName.isEmpty()) {
         ui->obsListSaveButton->setEnabled(false);
     } else {
         ui->obsListSaveButton->setEnabled(true);
@@ -892,6 +1073,24 @@ void ObsListCreateEditDialog::nameOfListTextChange() {
  */
 void ObsListCreateEditDialog::setListName(QList<QString> listName) {
     this->listNames_ = std::move(listName);
+}
+
+/*
+ * Initialize error mssage
+ */
+void ObsListCreateEditDialog::initErrorMessage() {
+    ui->obsListErrorMessage->setHidden(true);
+    ui->obsListErrorMessage->clear();
+}
+
+/*
+ * Display error message
+ */
+void ObsListCreateEditDialog::displayErrorMessage(const char *message) {
+    QString errorMessage;
+    errorMessage.append(q_(message));
+    ui->obsListErrorMessage->setHidden(false);
+    ui->obsListErrorMessage->setText(errorMessage);
 }
 
 /*

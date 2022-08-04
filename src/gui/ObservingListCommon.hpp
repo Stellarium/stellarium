@@ -21,6 +21,8 @@
 #define OBSERVINGLISTCOMMON_H
 
 #include "Nebula.hpp"
+#include "StelTranslator.hpp"
+#include <QStringList>
 
 struct observingListItem {
     QString name;

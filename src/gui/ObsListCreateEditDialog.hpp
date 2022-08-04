@@ -102,6 +102,15 @@ private:
     //! Load the observing liste in case of edit mode
     void loadObservingList();
 
+    //! Load bookmark in observing list for import.
+    void loadBookmarksInObservingList();
+
+    //! Initialize the error message (obsListErrorMessage).
+    void initErrorMessage();
+
+    //! Display the error message.
+    void displayErrorMessage(const char *message);
+
     //Private constructor and destructor
     explicit ObsListCreateEditDialog(std::string listUuid);
 
