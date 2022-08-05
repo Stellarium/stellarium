@@ -110,9 +110,6 @@ Observability::Observability()
 	, curYear(0)
 	, nDays(0)
 	, dmyFormat(false)
-	, isStar(true)
-	, isMoon(false)
-	, isSun(false)
 	, isScreen(true)
 	, hasRisen(false)
 	, configChanged(false)
@@ -238,6 +235,7 @@ void Observability::draw(StelCore* core)
 	bool locChanged, yearChanged;
 	StelObjectP selectedObject;
 	PlanetP ssObject, parentPlanet;
+	QList<StelObjectP> objectSelection = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
 
 // Only execute plugin if we are on Earth.
 	if (core->getCurrentLocation().planetName != "Earth")
@@ -261,7 +259,7 @@ void Observability::draw(StelCore* core)
 	double currLocalT = 24.*modf(currJD + GMTShift,&currJDint);
 	int auxm, auxd, auxy;
 	StelUtils::getDateFromJulianDay(currJD, &auxy, &auxm, &auxd);
-	bool isSource = StelApp::getInstance().getStelObjectMgr().getWasSelected();
+	bool objectWasSelected = StelApp::getInstance().getStelObjectMgr().getWasSelected();
 	bool show_Year = show_Best_Night || show_Good_Nights || show_AcroCos; 
 
 //////////////////////////////////////////////////////////////////
@@ -342,21 +340,17 @@ void Observability::draw(StelCore* core)
 	if (isScreen) // Always re-compute everything for the screen center.
 		souChanged = true; 
 
-	if (isSource) // There is something selected!
+	if (objectWasSelected) // There is something selected!
 	{ 
-// Get the selected source and its name:
-		selectedObject = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]; 
-
+        selectedObject = objectSelection[0];
 // Don't do anything for satellites:
 		if(selectedObject->getType() == "Satellite")
 			return;
 
 		QString name = selectedObject->getEnglishName();
-		isMoon = ("Moon" == name);
-		isSun = ("Sun" == name);
 
 // If Moon is not selected (or was unselected), force re-compute of Full Moon next time it is selected:
-		if (!isMoon)
+		if (!isMoon(objectSelection))
 		{
 			prevFullMoon = 0.0;
 			nextFullMoon = 0.0;
@@ -378,10 +372,7 @@ void Observability::draw(StelCore* core)
 			souChanged = true;
 			selName = name;
 
-			Planet* planet = dynamic_cast<Planet*>(selectedObject.data());
-			isStar = (planet == Q_NULLPTR);
-
-			if (!isStar && !isMoon && !isSun)  // Object in the Solar System, but is not Sun nor Moon.
+			if (!isNotSSO(objectSelection) && !isMoon(objectSelection) && !isSun(objectSelection))  // Object in the Solar System, but is not Sun nor Moon.
 			{ 
 				int gene = -1;
 
@@ -412,9 +403,6 @@ void Observability::draw(StelCore* core)
 	{
 	// If no source is selected, get the position vector of the screen center:
 		selName.clear();
-		isStar = true;
-		isMoon = false;
-		isSun = false;
 		isScreen = true;
 		Vec3d currentPos = GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000();
 		currentPos.normalize();
@@ -455,11 +443,11 @@ void Observability::draw(StelCore* core)
 	if (show_Today)
 	{
 		// Today's ephemeris (rise, set, and transit times)
-		if (!isStar) 
+		if (!isNotSSO(objectSelection))
 		{
-			int type = (isSun) ? 1:0;
-			type += (isMoon) ? 2:0;
-			type += (!isSun && !isMoon) ? 3:0;
+			int type = (isSun(objectSelection)) ? 1:0;
+			type += (isMoon(objectSelection)) ? 2:0;
+			type += (!isSun(objectSelection) && !isMoon(objectSelection)) ? 3:0;
 			
 			// Returns false if the calculation fails...
 			solvedMoon = calculateSolarSystemEvents(core, type);
@@ -506,7 +494,7 @@ void Observability::draw(StelCore* core)
 			}
 		}
 		
-		if ((solvedMoon && MoonRise>0.0) || (!isSun && !isMoon && horizH>0.0))
+		if ((solvedMoon && MoonRise>0.0) || (!isSun(objectSelection) && !isMoon(objectSelection) && horizH>0.0))
 		{
 			double2hms(TFrac*settingTime, d1, m1, s1);
 			double2hms(TFrac*risingTime, d2, m2, s2);
@@ -557,7 +545,7 @@ void Observability::draw(StelCore* core)
 		
 		// 	Culmination:
 		
-		if (isStar)
+		if (isNotSSO(objectSelection))
 		{
 			culmAlt = qAbs(mylat-selDec); // 90.-altitude at transit.
 			transit = LocPos[1]<0.0;
@@ -610,12 +598,12 @@ void Observability::draw(StelCore* core)
 // Compute yearly ephemeris (only if necessary, and not for Sun):
 
 
-	if (isSun) 
+	if (isSun(objectSelection))
 	{
 		lineBestNight.clear();
 		lineObservableRange.clear();
 	}
-	else if (isMoon)
+	else if (isMoon(objectSelection))
 	{
 		if (show_FullMoon)
 		{
@@ -628,7 +616,7 @@ void Observability::draw(StelCore* core)
 	}
 	else if (show_Year)
 	{
-		if (!isStar && (souChanged || yearChanged)) // Object moves.
+		if (!isNotSSO(objectSelection) && (souChanged || yearChanged)) // Object moves.
 			updatePlanetData(core); // Re-compute ephemeris.
 		else
 		{ // Object is fixed on the sky.
@@ -801,7 +789,7 @@ void Observability::draw(StelCore* core)
 				} // Comes from show_Good_Nights==True"
 			} // Comes from the "else" of "culmAlt>=..."
 		}// Comes from  "souChanged || ..."
-	} // Comes from the "else" with "!isMoon"
+	} // Comes from the "else" with "!isMoon(objectSelection)"
 
 // Print all results:
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
@@ -821,7 +809,7 @@ void Observability::draw(StelCore* core)
 //		yLine -= groupSpacing;
 //	}
 	
-	if ((isMoon && show_FullMoon) || (!isSun && !isMoon && show_Year)) 
+	if ((isMoon(objectSelection) && show_FullMoon) || (!isSun(objectSelection) && !isMoon(objectSelection) && show_Year))
 	{
 		painter.drawText(xLine, yLine, msgThisYear);
 		if (show_Best_Night || show_FullMoon)
@@ -1850,10 +1838,31 @@ void Observability::showReport(bool b)
 	}
 }
 
+bool Observability::isMoon(QList<StelObjectP> & objectSelection)
+{
+   return !objectSelection.empty() && "Moon" == objectSelection[0]->getEnglishName();
+}
+
+bool Observability::isSun(QList<StelObjectP> & objectSelection)
+{
+   return !objectSelection.empty() && "Sun" == objectSelection[0]->getEnglishName();
+}
+
+bool Observability::isNotSSO(QList<StelObjectP> & objectSelection)
+{
+   if (objectSelection.empty()) {
+       return true; // no object selected, so the selection is the screen/space.
+   }
+   // This works because the Planet class only exists for in system objectSelection (including moon and sun).
+   Planet * planet = dynamic_cast<Planet *>(objectSelection[0].data());
+   return planet == Q_NULLPTR;
+}
+
 QString Observability::getReportAsJson() {
+    QList<StelObjectP> objectSelection = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
     QString report = QString("{ ");
 	bool show_Year = show_Best_Night || show_Good_Nights || show_AcroCos; 
-	if ((isMoon && show_FullMoon) || (!isSun && !isMoon && show_Year)) 
+	if ((isMoon(objectSelection) && show_FullMoon) || (!isSun(objectSelection) && !isMoon(objectSelection) && show_Year)) 
 	{
         report += QString("\"%1\": \"%2\", ").arg("title").arg(msgThisYear);
 		if (show_Best_Night || show_FullMoon)

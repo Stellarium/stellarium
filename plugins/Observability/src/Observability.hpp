@@ -156,6 +156,21 @@ private:
 	//! Configuration window.
 	ObservabilityDialog* configDialog;
 
+	//! Returns whether the first object in the selection is the moon.
+	//! @param List of selected objects.
+	//! @returns true if the moon, false otherwise
+    bool isMoon(QList<StelObjectP> & objectSelection);
+
+	//! Returns whether the first object in the selection is the sun.
+	//! @param List of selected objects.
+	//! @returns true if the sun, false otherwise
+    bool isSun(QList<StelObjectP> & objectSelection);
+
+	//! Returns whether the first object in the selection is not in the solar system. If no object is selected, returns true. SSO stands for "solar system object."
+	//! @param List of selected objects.
+	//! @returns true if in solar system, false otherwise
+    bool isNotSSO(QList<StelObjectP> & objectSelection);
+
 	void setDateFormat(bool b) { dmyFormat=b; }
 	bool getDateFormat(void) { return dmyFormat; }
 
@@ -369,8 +384,8 @@ private:
 	//! Equatorial and local coordinates of currently-selected source.
 	Vec3d EquPos, LocPos;
 
-	//! Some booleans to check the kind of source selected and the kind of output to produce.
-	bool isStar, isMoon, isSun, isScreen;
+	//! Boolean representing if the screen is selected, i.e., no object is selected.
+	bool isScreen;
 
 	//! This really shouldn't be handled like this...
 	bool hasRisen;
