@@ -27,7 +27,6 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #define LX200COMMAND_HPP
 
 #include <QTextStream>
-using namespace std;
 
 class Server;
 class TelescopeClientDirectLx200;

@@ -42,11 +42,11 @@ your distribution. Here's a list.
 ### Required dependencies
 
 - A C++ compiler able to compile C++17 code ([GCC](https://gcc.gnu.org/) 7 or later, 
-  Clang 6 or later, MSVC 2017 (15.7) or later)
-- [CMake](http://www.cmake.org/) 3.10.0 or later - buildsystem used by many open source projects
-- [Qt Framework](http://www.qt.io/) 5.9.0 or later
+  Clang 6 or later, MSVC 2017 (15.7) or later; MSVC2019 required for Qt6)
+- [CMake](https://www.cmake.org/) 3.16.0 or later - buildsystem used by many open source projects
+- [Qt Framework](https://www.qt.io/) 5.9.0 or later. We recommend 5.15.2 for Stellarium 0.*, or Qt6.2 or later for Stellarium 1.*.
 - [OpenGL](https://www.opengl.org/) - graphics library
-- [Zlib](http://www.zlib.net) - compression library
+- [Zlib](https://www.zlib.net) - compression library
 
 ### Optional dependencies
 
@@ -62,6 +62,8 @@ To install all of these, use the following commands:
 
 #### Debian / Ubuntu
 
+##### Qt5
+
 ```
 sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc g++ \
                  graphviz doxygen gettext git \
@@ -70,6 +72,21 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc
                  qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins \
                  qtwebengine5-dev libqt5charts5-dev
 ```
+
+##### Qt6
+
+Ubuntu 22.04 comes with Qt5.15 and Qt6.2. To build with Qt6:
+
+```
+sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc g++ \
+                 graphviz doxygen gettext git \
+                 qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools linguist-qt6 libqt6svg6-dev \
+                 qt6-multimedia-dev libqt6serialport6-dev \
+                 qt6-positioning-dev libqt6positioning6-plugins libgps-dev \
+                 libqt6webchannel6-dev libqt6webenginewidgets6 qt6-webengine-dev qt6-webengine-dev-tools \
+                 libqt6webenginecore6-bin libqt6webengine6-data libqt6charts6-dev libqt6opengl6-dev
+```
+
 
 #### Fedora / CentOS
 
@@ -336,6 +353,9 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 | CMAKE_INSTALL_PREFIX          | path   | *       | Prefix where to install Stellarium
 | CMAKE_PREFIX_PATH             | path   |         | Additional path to look for libraries
 | CMAKE_BUILD_TYPE              | string | Release | Build type of Stellarium
+| CMAKE_OSX_ARCHITECTURES       | string | arm64;x86_64 | macOS architecture**
+| CMAKE_OSX_DEPLOYMENT_TARGET   | string | 11.0    | Minimum macOS deployment version**
+| OPENGL_DEBUG_LOGGING          | bool   | OFF     | Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger
 | ENABLE_NLS                    | bool   | ON      | Enable interface translation
 | ENABLE_GPS                    | bool   | ON      | Enable GPS support
 | ENABLE_LIBGPS                 | bool   | ON      | Enable GPS support with libGPS library (N/A on Windows)
@@ -370,6 +390,7 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 Notes:
  \* `/usr/local` on Unix-like systems, `C:\Program Files` or `C:\Program Files (x86)`
    on Windows depending on OS type (32 or 64 bit) and build configuration.
+ \** Default values for Qt6 environment on macOS
 
 ## Test-run compiled program without installing
 

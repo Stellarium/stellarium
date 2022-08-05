@@ -23,7 +23,6 @@
 
 #include "StarWrapper.hpp"
 #include "ZoneArray.hpp"
-#include "SolarSystem.hpp"
 
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
@@ -47,7 +46,7 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 	QTextStream oss(&str);
 
 	if (flags&ObjectType)
-		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getObjectType())) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
 
 	oss << getMagnitudeInfoString(core, flags, 2);
 
@@ -117,6 +116,27 @@ QString StarWrapper1::getObjectType() const
 	}
 	else
 		return startype;
+}
+
+QString StarWrapper1::getObjectTypeI18n() const
+{
+	QString stypefinal, stype = getObjectType();
+	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
+	if (!varType.isEmpty())
+	{
+		if (stype.contains(","))
+		{
+			QStringList stypesI18n, stypes = stype.split(",");
+			for (const auto &st: stypes) { stypesI18n << q_(st.trimmed()); }
+			stypefinal = stypesI18n.join(", ");
+		}
+		else
+			stypefinal = q_(stype);
+	}
+	else
+		stypefinal = q_(stype);
+
+	return stypefinal;
 }
 
 QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
@@ -267,18 +287,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	if (flags&ObjectType)
 	{
 		if (!varType.isEmpty())
-		{
-			if (stype.contains(","))
-			{
-				QStringList stypesI18n, stypes = stype.split(",");
-				for (const auto &st: stypes) { stypesI18n << q_(st.trimmed()); }
-				oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), stypesI18n.join(", "), varType) << "<br />";
-			}
-			else
-				oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_(stype), varType) << "<br />";
-		}
+			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), getObjectTypeI18n(), varType) << "<br />";
 		else
-			oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(stype)) << "<br />";
+			oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
 
 		oss << getExtraInfoStrings(flags&ObjectType).join("");
 	}
@@ -308,7 +319,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			{
 				QString minStr = QString::number(minimumM1, 'f', 2);
 				if (min2VMag<99.f)
-					minStr = QString("%1/%2").arg(QString::number(minimumM1, 'f', 2)).arg(QString::number(minimumM2, 'f', 2));
+					minStr = QString("%1/%2").arg(QString::number(minimumM1, 'f', 2), QString::number(minimumM2, 'f', 2));
 
 				oss << QString("%1: <b>%2</b>%3<b>%4</b> (%5: %6)").arg(q_("Magnitude range"), QString::number(maxVMag, 'f', 2), QChar(0x00F7), minStr, q_("Photometric system"), photoVSys) << "<br />";
 			}

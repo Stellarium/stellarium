@@ -201,7 +201,8 @@ void Exoplanets::init()
 	readJsonFile();
 
 	// Set up download manager and the update schedule
-	networkManager = StelApp::getInstance().getNetworkAccessManager();
+	//networkManager = StelApp::getInstance().getNetworkAccessManager();
+	networkManager = new QNetworkAccessManager(this);
 	updateState = CompleteNoUpdates;
 	updateTimer = new QTimer(this);
 	updateTimer->setSingleShot(false);   // recurring check for update
@@ -745,7 +746,11 @@ int Exoplanets::getSecondsToUpdate(void)
 
 void Exoplanets::checkForUpdate(void)
 {
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime())
+#else
 	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime() && networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
+#endif
 		updateJSON();
 }
 
@@ -936,7 +941,9 @@ void Exoplanets::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+#endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
@@ -1003,7 +1010,6 @@ void Exoplanets::downloadComplete(QNetworkReply *reply)
 		}
 
 		updateState = Exoplanets::CompleteUpdates;
-
 		lastUpdate = QDateTime::currentDateTime();
 		conf->setValue("Exoplanets/last_update", lastUpdate.toString(Qt::ISODate));
 	}
@@ -1019,7 +1025,8 @@ void Exoplanets::downloadComplete(QNetworkReply *reply)
 	reply->deleteLater();
 	downloadReply = Q_NULLPTR;
 
-	readJsonFile();
+	qDebug() << "[Exoplanets] Updating exoplanets catalog is complete...";
+	//readJsonFile();
 }
 
 void Exoplanets::translations()

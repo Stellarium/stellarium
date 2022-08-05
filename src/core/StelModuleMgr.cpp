@@ -252,12 +252,10 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 		QString moduleFullPath = QString("modules/") + dir + "/lib" + dir;
 #ifdef Q_OS_WIN
 		moduleFullPath += ".dll";
-#else
-#ifdef Q_OS_MAC
+#elif defined(Q_OS_MACOS)
 		moduleFullPath += ".dylib";
 #else
 		moduleFullPath += ".so";
-#endif
 #endif
 		moduleFullPath = StelFileMgr::findFile(moduleFullPath, StelFileMgr::File);
 		if (moduleFullPath.isEmpty())

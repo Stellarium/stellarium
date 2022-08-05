@@ -24,7 +24,6 @@
 
 #include "StelObject.hpp"
 #include "StelTranslator.hpp"
-#include "StelUtils.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
@@ -69,6 +68,7 @@ private:
 	//! @return "Constellation"
 	virtual QString getType() const Q_DECL_OVERRIDE {return CONSTELLATION_TYPE;}
 	virtual QString getObjectType() const Q_DECL_OVERRIDE { return N_("constellation"); }
+	virtual QString getObjectTypeI18n() const Q_DECL_OVERRIDE { return q_(getObjectType()); }
 	virtual QString getID() const Q_DECL_OVERRIDE { return abbreviation; }
 
 	//! observer centered J2000 coordinates.

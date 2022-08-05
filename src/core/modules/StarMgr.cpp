@@ -26,7 +26,6 @@
 #include "StelObject.hpp"
 #include "StelTexture.hpp"
 
-#include "StelToneReproducer.hpp"
 #include "StelTranslator.hpp"
 #include "StelGeodesicGrid.hpp"
 #include "StelApp.hpp"
@@ -37,12 +36,10 @@
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
-#include "StelIniParser.hpp"
 #include "StelPainter.hpp"
 #include "StelJsonParser.hpp"
 #include "ZoneArray.hpp"
 #include "StelSkyDrawer.hpp"
-#include "RefractionExtinction.hpp"
 #include "StelModuleMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "Planet.hpp"
@@ -235,7 +232,7 @@ QString StarMgr::getCrossIdentificationDesignations(QString hip)
 {
 	QStringList designations;
 	auto cr = crossIdMap.find(hip);
-	if (cr==crossIdMap.end() && hip.rightRef(1).toUInt()==0)
+	if (cr==crossIdMap.end() && hip.right(1).toUInt()==0)
 		cr = crossIdMap.find(hip.left(hip.size()-1));
 
 	if (cr!=crossIdMap.end())

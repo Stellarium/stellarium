@@ -50,7 +50,7 @@ public:
 
 static QString getExt(const QString& format)
 {
-	for (auto ext : format.split(' '))
+	for (auto &ext : format.split(' '))
 	{
 		if (ext == "jpeg") return "jpg";
 		if (ext == "png") return "png";
@@ -83,7 +83,7 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 	QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	connect(networkReply, &QNetworkReply::finished, this, [&, networkReply] {
 		QByteArray data = networkReply->readAll();
-		for (QString line : data.split('\n'))
+		for (const QString line : data.split('\n'))
 		{
 			if (line.startsWith("#")) continue;
 			QString key = line.section("=", 0, 0).trimmed();
@@ -96,6 +96,7 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 			// XXX: StelUtils::getJulianDayFromISO8601String does not work
 			// without the seconds!
 			QDateTime date = QDateTime::fromString(properties["hips_release_date"].toString(), Qt::ISODate);
+			date.setTimeSpec(Qt::UTC);
 			releaseDate = StelUtils::qDateTimeToJd(date);
 		}
 		if (properties.contains("hips_frame"))
@@ -524,6 +525,7 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 			// XXX: StelUtils::getJulianDayFromISO8601String does not work
 			// without the seconds!
 			QDateTime date = QDateTime::fromString(value, Qt::ISODate);
+			date.setTimeSpec(Qt::UTC);
 			releaseDate = StelUtils::qDateTimeToJd(date);
 		}
 		if (key == "hips_status" && value.split(' ').contains("public")) {

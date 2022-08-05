@@ -43,6 +43,12 @@ class EmptySphericalRegion;
 
 //! @file StelSphereGeometry.hpp
 //! Define all SphericalGeometry primitives as well as the SphericalRegionP type.
+//!
+//! Developer note, 07/2022: The classes were developed around 2009 and worked in Qt5. Changes in Qt6 causes some methods to deliver wrong results.
+//! These now-buggy methods had been developed for a now-defunct plugin and are not used in versions 0.20 and later,
+//! although they seem interesting and may be useful in later versions, if somebody cares to debug them.
+//! The problem seems to lie in Qt's changes in the QVector/QList classes.
+//! For now, these methods have been disabled when compiled with Qt6.
 
 //! @class SphericalRegionP
 //! A shared pointer on a SphericalRegion.
@@ -211,7 +217,7 @@ public:
 	QByteArray toJSON() const;
 
 	//! Returns whether a SphericalRegion is contained into this region.
-	//! A default potentially very slow implementation is provided for each cases.
+	//! A default potentially very slow implementation is provided for each case.
 	bool contains(const SphericalRegion* r) const;
 	bool contains(const SphericalRegionP r) const {return contains(r.data());}
 	virtual bool contains(const Vec3d& p) const {return getOctahedronPolygon().contains(p);}
@@ -223,7 +229,7 @@ public:
 	bool contains(const EmptySphericalRegion&) const {return false;}
 
 	//! Returns whether a SphericalRegion intersects with this region.
-	//! A default potentially very slow implementation is provided for each cases.
+	//! A default potentially very slow implementation is provided for each case.
 	bool intersects(const SphericalRegion* r) const;
 	bool intersects(const SphericalRegionP r) const {return intersects(r.data());}
 	bool intersects(const Vec3d& p) const {return contains(p);}
@@ -234,8 +240,10 @@ public:
 	virtual bool intersects(const AllSkySphericalRegion& r) const;
 	bool intersects(const EmptySphericalRegion&) const {return false;}
 
+// These are too buggy in Qt6 to be useful.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	//! Return a new SphericalRegion consisting of the intersection of this and the given region.
-	//! A default potentially very slow implementation is provided for each cases.
+	//! A default potentially very slow implementation is provided for each case.
 	SphericalRegionP getIntersection(const SphericalRegion* r) const;
 	SphericalRegionP getIntersection(const SphericalRegionP r) const {return getIntersection(r.data());}
 	virtual SphericalRegionP getIntersection(const SphericalPolygon& r) const;
@@ -246,7 +254,7 @@ public:
 	SphericalRegionP getIntersection(const EmptySphericalRegion& r) const;
 
 	//! Return a new SphericalRegion consisting of the union of this and the given region.
-	//! A default potentially very slow implementation is provided for each cases.
+	//! A default potentially very slow implementation is provided for each case.
 	SphericalRegionP getUnion(const SphericalRegion* r) const;
 	SphericalRegionP getUnion(const SphericalRegionP r) const {return getUnion(r.data());}
 	virtual SphericalRegionP getUnion(const SphericalPolygon& r) const;
@@ -255,9 +263,9 @@ public:
 	virtual SphericalRegionP getUnion(const SphericalPoint& r) const;
 	SphericalRegionP getUnion(const AllSkySphericalRegion& r) const;
 	virtual SphericalRegionP getUnion(const EmptySphericalRegion& r) const;
-
+#endif
 	//! Return a new SphericalRegion consisting of the subtraction of the given region from this.
-	//! A default potentially very slow implementation is provided for each cases.
+	//! A default potentially very slow implementation is provided for each case.
 	SphericalRegionP getSubtraction(const SphericalRegion* r) const;
 	SphericalRegionP getSubtraction(const SphericalRegionP r) const {return getSubtraction(r.data());}
 	virtual SphericalRegionP getSubtraction(const SphericalPolygon& r) const;
@@ -288,12 +296,12 @@ public:
 	SphericalCap() : d(0) {;}
 
 	//! Construct a SphericalCap from its direction and assumes a 90 deg aperture.
-	SphericalCap(double x, double y, double z) : n(x,y,z), d(0) {;}
+	SphericalCap(double x, double y, double z) : SphericalRegion(), n(x,y,z), d(0) {;}
 
 	//! Construct a SphericalCap from its direction and aperture.
 	//! @param an a unit vector indicating the direction.
 	//! @param ar cosinus of the aperture.
-	SphericalCap(const Vec3d& an, double ar) : n(an), d(ar) {//n.normalize();
+	SphericalCap(const Vec3d& an, double ar) : SphericalRegion(), n(an), d(ar) {//n.normalize();
 		Q_ASSERT(d==0 || qFuzzyCompare(n.lengthSquared(),1.));}
 	// FIXME: GZ reports 2013-03-02: apparently the Q_ASSERT is here because n should be normalized at this point, but
 	// for efficiency n.normalize() should not be called at this point.
@@ -519,8 +527,11 @@ public:
 	// Avoid name hiding when overloading the virtual methods.
 	using SphericalRegion::intersects;
 	using SphericalRegion::contains;
+	// These are too buggy in Qt6 to be useful.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	using SphericalRegion::getIntersection;
 	using SphericalRegion::getUnion;
+#endif
 	using SphericalRegion::getSubtraction;
 
 	EmptySphericalRegion() {;}
@@ -560,11 +571,14 @@ public:
 class SphericalPolygon : public SphericalRegion
 {
 public:
-	// Avoid name hiding when overloading the virtual methods.
+	// Avoid name hiding when overloading the virtual methods. GZ WHY IS THIS NECESSARY????
 	using SphericalRegion::intersects;
 	using SphericalRegion::contains;
+// These are too buggy in Qt6 to be useful.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	using SphericalRegion::getIntersection;
 	using SphericalRegion::getUnion;
+#endif
 	using SphericalRegion::getSubtraction;
 
 	SphericalPolygon() {;}
@@ -594,6 +608,8 @@ public:
 	virtual bool contains(const SphericalPoint& r) const Q_DECL_OVERRIDE {return octahedronPolygon.contains(r.n);}
 	virtual bool contains(const AllSkySphericalRegion& r) const Q_DECL_OVERRIDE {return octahedronPolygon.contains(r.getOctahedronPolygon());}
 
+// These are too buggy in Qt6 to be useful.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	virtual bool intersects(const SphericalPolygon& r) const Q_DECL_OVERRIDE {return octahedronPolygon.intersects(r.octahedronPolygon);}
 	virtual bool intersects(const SphericalConvexPolygon& r) const Q_DECL_OVERRIDE;
 	virtual bool intersects(const SphericalCap& r) const Q_DECL_OVERRIDE {return r.intersects(*this);}
@@ -605,6 +621,7 @@ public:
 
 	virtual SphericalRegionP getUnion(const SphericalPoint&) const Q_DECL_OVERRIDE {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
 	virtual SphericalRegionP getUnion(const EmptySphericalRegion&) const Q_DECL_OVERRIDE {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
+#endif
 
 	virtual SphericalRegionP getSubtraction(const SphericalPoint&) const Q_DECL_OVERRIDE {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
 	virtual SphericalRegionP getSubtraction(const EmptySphericalRegion&) const Q_DECL_OVERRIDE {return SphericalRegionP(new SphericalPolygon(octahedronPolygon));}
@@ -626,11 +643,14 @@ public:
 	//! Deserialize the region. This method must allow as fast as possible deserialization.
 	static SphericalRegionP deserialize(QDataStream& in);
 
+// These are too buggy in Qt6 to be useful.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	//! Create a new SphericalRegionP which is the union of all the passed ones.
 	static SphericalRegionP multiUnion(const QList<SphericalRegionP>& regions, bool optimizeByPreGrouping=false);
 	
 	//! Create a new SphericalRegionP which is the intersection of all the passed ones.
 	static SphericalRegionP multiIntersection(const QList<SphericalRegionP>& regions);
+#endif
 
 private:
 	OctahedronPolygon octahedronPolygon;

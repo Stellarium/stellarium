@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.10.0)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 
 # Fix behavior of CMAKE_CXX_STANDARD and CMAKE_C_STANDARD when targeting macOS.
@@ -19,11 +19,26 @@ SET(CMAKE_WARN_DEPRECATED 1)
 SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 
 ########### Project name ###########
-PROJECT(Stellarium)
+PROJECT(Stellarium C CXX)
+########### Detect Qt version
+FIND_PACKAGE(Qt6 COMPONENTS Core QUIET)
+if (NOT Qt6_FOUND)
+    FIND_PACKAGE(Qt5 REQUIRED COMPONENTS Core)
+ENDIF()
+
+# Activate this to error on all things deprecated in 5.15
+#add_compile_definitions("QT_DISABLE_DEPRECATED_BEFORE=0x050F00")
+
+# If Qt6, set series number to 1.
+IF(Qt6_FOUND)
+     SET(STELLARIUM_MAJOR 1)
+ELSE()
+     SET(STELLARIUM_MAJOR 0)
+ENDIF()
+
 # Use integer versions instead of strings for easier handling if required
-SET(STELLARIUM_MAJOR 0)
 SET(STELLARIUM_MINOR 22)
-SET(STELLARIUM_PATCH 1)
+SET(STELLARIUM_PATCH 2)
 ADD_DEFINITIONS(
      -DSTELLARIUM_MAJOR=${STELLARIUM_MAJOR}
      -DSTELLARIUM_MINOR=${STELLARIUM_MINOR}
@@ -52,8 +67,18 @@ ADD_DEFINITIONS(-DPACKAGE_VERSION="${PACKAGE_VERSION}")
 ADD_DEFINITIONS(-DCOPYRIGHT_YEARS="${COPYRIGHT_YEARS}")
 ADD_DEFINITIONS(-DSTELLARIUM_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
 
-# currently Qt 5.12 is recommended
-SET(MINIMAL_QT_VERSION "5.9.0")
+# Qt 5.15+ is preferred as it provides version-less CMake functions (QT_WRAP_UI etc.)
+IF(Qt6_FOUND)
+     SET(MINIMAL_QT_VERSION "6.2.0")
+     IF(NOT DEFINED QT_VERSION_MAJOR)
+         SET(QT_VERSION_MAJOR 6)
+     ENDIF()
+ELSE()
+     SET(MINIMAL_QT_VERSION "5.9.0")
+     IF(NOT DEFINED QT_VERSION_MAJOR)
+         SET(QT_VERSION_MAJOR 5)
+     ENDIF()
+ENDIF()
 # TODO: Check real minimal supported version of GPSD API
 SET(MINIMAL_GPS_API_VERSION "6.0")
 
@@ -147,7 +172,7 @@ ELSE()
           ADD_DEFINITIONS(-DSTELLARIUM_VERSION="${STELLARIUM_VERSION}")
      ENDIF()     
 ENDIF()
-MESSAGE(STATUS "Building Stellarium ${PACKAGE_VERSION} [${WINDOWS_PACKAGE_VERSION}] (Mode: ${CMAKE_BUILD_TYPE})")
+MESSAGE(STATUS "Building ${PROJECT_NAME} ${PACKAGE_VERSION} (Mode: ${CMAKE_BUILD_TYPE})")
 
 # Write version and series of Stellarium to Stellarium User Guide
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
@@ -201,8 +226,13 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
      # share data location:
      SET(SDATALOC "Resources")
 ELSE()
+     IF(HAIKU)
+	  SET(SDATAPREFIX "data")
+     ELSE()
+	  SET(SDATAPREFIX "share")
+     ENDIF()
      # share data location:
-     SET(SDATALOC "share/${PACKAGE}")
+     SET(SDATALOC "${SDATAPREFIX}/${PACKAGE}")
 ENDIF()
 
 IF(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUCC)
@@ -265,18 +295,15 @@ IF(WIN32)
           # C4996: deprecated POSIX names (used in zlib)
           SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996")
           # Avoid type conflict with C++17 standard
-          SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_HAS_STD_BYTE=0")
-          # Set minimal version of Windows
-          SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_WIN32_WINNT=${MIN_WIN_VERSION}")
-          IF(MSVC_VERSION GREATER 1700)
-               SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /MP")
+          # SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_HAS_STD_BYTE=0") # Don't do this in Qt6. Just avoid "using namespace std" anywhere! https://developercommunity.visualstudio.com/t/error-c2872-byte-ambiguous-symbol/93889
+          # Set multiprocessing and minimal version of Windows
+          SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /MP /D_WIN32_WINNT=${MIN_WIN_VERSION}")
 
-               FOREACH(flag_var
-                    CMAKE_EXE_LINKER_FLAGS_DEBUG CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO
-                    CMAKE_SHARED_LINKER_FLAGS_DEBUG CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO)
-                    SET(${flag_var} "${${flag_var}} /DEBUG:FASTLINK")
-               ENDFOREACH()
-          ENDIF()
+          FOREACH(flag_var
+               CMAKE_EXE_LINKER_FLAGS_DEBUG CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO
+               CMAKE_SHARED_LINKER_FLAGS_DEBUG CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO)
+               SET(${flag_var} "${${flag_var}} /DEBUG:FASTLINK")
+          ENDFOREACH()
           SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${STEL_MSVC_FLAGS}")
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STEL_MSVC_FLAGS}")
           # Additional defines:
@@ -302,7 +329,12 @@ IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra -Wno-unknown-warning-option")
           # macOS architectures: x86_64 or arm64 (default: current system's processor architecture)
           IF(NOT CMAKE_OSX_ARCHITECTURES)
-               SET(CMAKE_OSX_ARCHITECTURES "${CMAKE_HOST_SYSTEM_PROCESSOR}" CACHE STRING "macOS architectures" FORCE)
+	       IF(${QT_VERSION_MAJOR} EQUAL 6)
+		    # Qt6: by default - universal binary + minimal operating system is macOS Big Sur
+		    SET(CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE STRING "macOS architectures" FORCE)
+	       ELSE()
+		    SET(CMAKE_OSX_ARCHITECTURES "${CMAKE_HOST_SYSTEM_PROCESSOR}" CACHE STRING "macOS architectures" FORCE)
+	       ENDIF()
           ENDIF()
      ENDIF()
 ENDIF()
@@ -385,15 +417,19 @@ IF(ENABLE_SPOUT)
      MARK_AS_ADVANCED(SPOUT_LIBRARY_DLL)
 ENDIF(ENABLE_SPOUT)
 
-SET(ENABLE_SCRIPTING 1 CACHE BOOL "Define whether scripting features should be activated.")
-IF(ENABLE_SCRIPTING)
-     ADD_DEFINITIONS(-DENABLE_SCRIPTING)
-     # (De-)Activate the script edit console
-     SET(ENABLE_SCRIPT_CONSOLE 1 CACHE BOOL "Define whether to build the script console feature.")
-     IF(ENABLE_SCRIPT_CONSOLE)
-          ADD_DEFINITIONS(-DENABLE_SCRIPT_CONSOLE)
+IF(Qt5_FOUND)
+     SET(ENABLE_SCRIPTING 1 CACHE BOOL "Define whether scripting features should be activated.")
+     IF(ENABLE_SCRIPTING)
+          ADD_DEFINITIONS(-DENABLE_SCRIPTING)
+          # (De-)Activate the script edit console
+          SET(ENABLE_SCRIPT_CONSOLE 1 CACHE BOOL "Define whether to build the script console feature.")
+          IF(ENABLE_SCRIPT_CONSOLE)
+               ADD_DEFINITIONS(-DENABLE_SCRIPT_CONSOLE)
+          ENDIF()
      ENDIF()
-ENDIF()
+ELSE(Qt5_FOUND)
+     SET(ENABLE_SCRIPTING 0 CACHE BOOL "Define whether scripting features should be activated. Currently strictly no Scripting on Qt6!")
+ENDIF(Qt5_FOUND)
 
 SET(STELLARIUM_GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None")
 
@@ -407,15 +443,6 @@ IF(WIN32 AND NOT MSVC)
 ELSE()
      SET(GENERATE_STELMAINLIB 0)
 ENDIF()
-
-IF(ENABLE_TESTING)
-    ENABLE_TESTING()
-    ADD_DEFINITIONS(-DENABLE_TESTING)
-    FIND_PACKAGE(Qt5Test REQUIRED)
-    MESSAGE(STATUS "Unit tests support: enabled")
-ELSE(ENABLE_TESTING)
-    MESSAGE(STATUS "Unit tests support: disabled")
-ENDIF(ENABLE_TESTING)
 
 ########### User Guide ###############
 IF(EXISTS "${CMAKE_SOURCE_DIR}/guide/guide.pdf")
@@ -481,29 +508,37 @@ ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 SET_TARGET_PROPERTIES(AllStaticPlugins PROPERTIES FOLDER "plugins")
 
 ########### Find packages ###########
-FIND_PACKAGE(Qt5Core REQUIRED)
-GET_TARGET_PROPERTY(QMAKE_LOCATION Qt5::qmake LOCATION)
-IF(${Qt5Core_VERSION} VERSION_LESS MINIMAL_QT_VERSION)
-     MESSAGE(FATAL_ERROR "Found Qt5: ${QMAKE_LOCATION} (found unsuitable version ${Qt5Core_VERSION}, required is ${MINIMAL_QT_VERSION})")
-ELSE()
-     MESSAGE(STATUS "Found Qt5: ${QMAKE_LOCATION} (found suitable version ${Qt5Core_VERSION})")
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
+# Catch the real path for used Qt Framework
+GET_TARGET_PROPERTY(QMAKE_LOCATION Qt${QT_VERSION_MAJOR}::qmake LOCATION)
+IF(NOT QT_VERSION)
+     # Variable ${QT_VERSION} is not defined, but no problem - we can get it from qmake
+     EXECUTE_PROCESS(COMMAND ${QMAKE_LOCATION} -query QT_VERSION OUTPUT_VARIABLE QT_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
+     STRING(REPLACE " " "" QT_VERSION ${QT_VERSION})
 ENDIF()
-FIND_PACKAGE(Qt5Concurrent REQUIRED)
-FIND_PACKAGE(Qt5Gui REQUIRED)
-FIND_PACKAGE(Qt5Network REQUIRED)
-FIND_PACKAGE(Qt5Widgets REQUIRED)
-FIND_PACKAGE(Qt5Charts REQUIRED)
+IF(${QT_VERSION} VERSION_LESS MINIMAL_QT_VERSION)
+     MESSAGE(FATAL_ERROR "Found Qt${QT_VERSION_MAJOR}: ${QMAKE_LOCATION} (found unsuitable version ${QT_VERSION}, required is ${MINIMAL_QT_VERSION})")
+ELSE()
+     MESSAGE(STATUS "Found Qt${QT_VERSION_MAJOR}: ${QMAKE_LOCATION} (found suitable version ${QT_VERSION})")
+ENDIF()
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Concurrent REQUIRED)
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Gui REQUIRED)
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Network REQUIRED)
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Charts REQUIRED)
 IF(USE_PLUGIN_TELESCOPECONTROL OR ENABLE_GPS)
-     FIND_PACKAGE(Qt5SerialPort REQUIRED)
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS SerialPort REQUIRED)
 ENDIF()
 IF(WIN32)
-     FIND_PACKAGE(Qt5Svg REQUIRED)
-     FIND_PACKAGE(Qt5XmlPatterns REQUIRED)
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Svg REQUIRED)
+     IF(${QT_VERSION_MAJOR} EQUAL 5)
+          FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS XmlPatterns REQUIRED)
+     ENDIF()
 
      # Qt 5.9 (LTS) use OpenSSL 1.0* and Qt 5.12 (LTS) and newest version of Qt use OpenSSL 1.1*
      # Source: https://lists.qt-project.org/pipermail/releasing/2019-March/002614.html
-     IF(${Qt5Core_VERSION} VERSION_LESS "5.10")
-          # OK, it's Qt 5.9, let's try found OpenSSL 1.0.x DLL's on Windows
+     IF((${QT_VERSION_MAJOR} EQUAL "5") AND (Qt5Core_VERSION VERSION_LESS "5.10"))
+          # OK, it's Qt 5.9, let's try to find OpenSSL 1.0.x DLL's on Windows
           FIND_FILE(OPENSSL_SSLEAY32_LIBRARY_DLL ssleay32.dll)
           FIND_FILE(OPENSSL_LIBEAY32_LIBRARY_DLL libeay32.dll)
           FIND_FILE(OPENSSL_LIBSSL32_LIBRARY_DLL libssl32.dll)
@@ -547,6 +582,12 @@ IF(WIN32)
     ENDIF()
 ENDIF()
 
+IF(APPLE)
+     IF(${QT_VERSION_MAJOR} EQUAL 6)
+	  FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS DBus REQUIRED)
+     ENDIF()
+ENDIF()
+
 # Since Qt 5.4, linking to OpenGL is basically not required anymore,
 # because the QtGui module re-implements the GL functions, and perhaps even
 # dispatches the calls to a dynamically selected GL library.
@@ -569,6 +610,8 @@ ENDIF()
 
 # Tell CMake to run moc when necessary:
 SET(CMAKE_AUTOMOC ON)
+SET(CMAKE_AUTORCC ON) # ?
+SET(CMAKE_AUTOUIC ON) # ?
 # As moc files are generated in the binary dir, tell CMake to always look for includes there:
 SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -579,17 +622,17 @@ ENDIF()
 IF(ENABLE_MEDIA)
      SET(USE_QTOPENGL 1)
      ADD_DEFINITIONS(-DENABLE_MEDIA)
-     FIND_PACKAGE(Qt5Multimedia REQUIRED)
-     FIND_PACKAGE(Qt5MultimediaWidgets REQUIRED)
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Multimedia REQUIRED)
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS MultimediaWidgets REQUIRED)
 ENDIF()
 
 IF(ENABLE_GPS)
      MESSAGE(STATUS "GPS: support by Qt's NMEA handling enabled.")
-     FIND_PACKAGE(Qt5Positioning REQUIRED)
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Positioning REQUIRED)
      ADD_DEFINITIONS(-DENABLE_GPS)
      IF(WIN32)
           SET(ENABLE_LIBGPS 0)
-     ELSE(WIN32)
+     ELSEIF(NOT DEFINED ENABLE_LIBGPS)
           FIND_PACKAGE(GPS QUIET)
           IF(GPS_FOUND)
                IF(${GPS_VERSION_STRING} VERSION_LESS MINIMAL_GPS_API_VERSION)
@@ -601,21 +644,30 @@ IF(ENABLE_GPS)
                     ADD_DEFINITIONS(-DENABLE_LIBGPS)
                     MESSAGE(STATUS "GPS: using GPS library at ${GPS_LIBRARY} (found suitable GPSD API version: ${GPS_VERSION_STRING})")
                ENDIF()
-          ELSE(GPS_FOUND)
+	  ELSE()
                SET(ENABLE_LIBGPS 0)
                MESSAGE(STATUS "GPS: could not find GPS library - GPSD query disabled!")
-          ENDIF(GPS_FOUND)
-     ENDIF(WIN32)
-ELSE(ENABLE_GPS)
+	  ENDIF()
+     ENDIF()
+ELSE()
      SET(ENABLE_LIBGPS 0)
      MESSAGE(STATUS "GPS: disabled.")
-ENDIF(ENABLE_GPS)
+ENDIF()
 
 IF(USE_QTOPENGL)
      # QtOpenGL module is deprecated. After merging the QOpenGLWidget branch, we don't use this module directly anymore,
      # but the QtMultimediaWidgets module requires it internally, so we still have to package it.
-     FIND_PACKAGE(Qt5OpenGL REQUIRED)
+     FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS OpenGL REQUIRED)
 ENDIF()
+
+IF(ENABLE_TESTING)
+    ENABLE_TESTING()
+    ADD_DEFINITIONS(-DENABLE_TESTING)
+    FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Test REQUIRED)
+    MESSAGE(STATUS "Unit tests support: enabled")
+ELSE(ENABLE_TESTING)
+    MESSAGE(STATUS "Unit tests support: disabled")
+ENDIF(ENABLE_TESTING)
 
 ### Zlib package
 FIND_PACKAGE(ZLIB QUIET) #quiet warnings about not found, we have our own version anyway
@@ -712,6 +764,11 @@ IF(WIN32)
 
      GET_FILENAME_COMPONENT(_qt_bin_dir "${QMAKE_LOCATION}" DIRECTORY)
      FIND_PROGRAM(WINDEPLOYQT_COMMAND windeployqt HINTS "${_qt_bin_dir}")
+     IF(WINDEPLOYQT_COMMAND)
+	  MESSAGE(STATUS "Found windeployqt: ${WINDEPLOYQT_COMMAND}")
+     ELSE()
+	  MESSAGE(STATUS "windeployqt not found!")
+     ENDIF()
 
      SET(ISS_STELLARIUM_STUFF "; Additional libraries")
      IF(ENABLE_SPOUT)
@@ -783,9 +840,19 @@ ENDIF()
 IF(APPLE)
      GET_FILENAME_COMPONENT(_qt_bin_dir "${QMAKE_LOCATION}" DIRECTORY)
      FIND_PROGRAM(MACDEPLOYQT_COMMAND macdeployqt HINTS "${_qt_bin_dir}")
+     IF(MACDEPLOYQT_COMMAND)
+	  MESSAGE(STATUS "Found macdeployqt: ${MACDEPLOYQT_COMMAND}")
+     ELSE()
+	  MESSAGE(STATUS "macdeployqt not found!")
+     ENDIF()
 
      IF(NOT CMAKE_OSX_DEPLOYMENT_TARGET)
-          SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.13" CACHE STRING "Minimum macOS deployment version" FORCE)
+	  IF(${QT_VERSION_MAJOR} EQUAL 6)
+	       # Qt6: by default - universal binary + minimal operating system is macOS Big Sur
+	       SET(CMAKE_OSX_DEPLOYMENT_TARGET "11.0" CACHE STRING "Minimum macOS deployment version" FORCE)
+	  ELSE()
+	       SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum macOS deployment version" FORCE)
+	  ENDIF()
      ENDIF()
      MESSAGE(STATUS "macOS deployment target: ${CMAKE_OSX_DEPLOYMENT_TARGET} (${CMAKE_OSX_ARCHITECTURES})")
      SET(PACKAGE_OSX_TARGET ${CMAKE_OSX_DEPLOYMENT_TARGET})
@@ -796,19 +863,17 @@ ENDIF()
 ########### Windows packaging ###############
 IF(WIN32)
      CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss @ONLY)
-     SET(ISS_COMPILER_FILENAME "ISCC.exe")
-     FIND_FILE(ISS_COMPILER_PATH ${ISS_COMPILER_FILENAME})
-     IF(ISS_COMPILER_PATH)
-          MESSAGE(STATUS "Found Inno Setup (.iss) compiler: ${ISS_COMPILER_PATH}")
+     FIND_PACKAGE(ISCC)
+     IF(ISS_COMPILER_FOUND)
           # Add installer target
           ADD_CUSTOM_TARGET(
                stellarium-installer
-               COMMAND ${ISS_COMPILER_PATH} "${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss"
+	       COMMAND ${ISS_COMPILER_EXECUTABLE} "${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss"
                COMMENT "Making an installer package for Windows..."
                VERBATIM
           )
      ELSE()
-          MESSAGE(STATUS "Could NOT find Inno Setup Compiler (missing: ${ISS_COMPILER_FILENAME}). You won't be able to build setup files.")
+	  MESSAGE(STATUS "Could NOT find Inno Setup compiler. You won't be able to build setup files.")
      ENDIF()
 ENDIF()
 

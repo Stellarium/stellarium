@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2012 Sibi Antony (Phonon/QT4 implementation)
- * Copyright (C) 2015 Georg Zotti (Reactivated with QT5 classes)
+ * Copyright (C) 2015 Georg Zotti (Reactivated with Qt5 classes)
+ * Copyright (C) 2022 Georg Zotti (Qt6 changes)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +29,9 @@
 #include <QSizeF>
 #include <QPoint>
 #include <QPointF>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QMediaContent>
+#endif
 #include <QMediaPlayer>
 #include "StelFader.hpp"
 #endif
@@ -214,15 +217,21 @@ private slots:
 	void handleMutedChanged(bool muted);
 	//void handlePositionChanged(qint64 position); // periodically notify where in the video we are. Could be used to update scale bars, not needed.
 	void handleSeekableChanged(bool seekable);
+	#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	void handleStateChanged(QMediaPlayer::PlaybackState state);
+	#else
 	void handleStateChanged(QMediaPlayer::State state);
+	#endif
 	void handleVideoAvailableChanged(bool videoAvailable);
 	void handleVolumeChanged(int volume);
 
 	// Slots to handle QMediaPlayer change signals inherited from QMediaObject:
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	void handleAvailabilityChanged(bool available);
 	void handleAvailabilityChanged(QMultimedia::AvailabilityStatus availability);
 	//! @note This one works, while handleMetaDataChanged(key, value) is not called on Windows (QTBUG-42034)
 	void handleMetaDataChanged();
+#endif
 	// This signal is not triggered on Windows, we must work around using handleMetaDataChanged()
 	//void handleMetaDataChanged(const QString & key, const QVariant & value);
 #endif

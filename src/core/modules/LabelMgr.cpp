@@ -19,11 +19,10 @@
  */
 
 #include "LabelMgr.hpp"
+#include "StelFader.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelApp.hpp"
-#include "StarMgr.hpp"
 #include "StelCore.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 
 #include "StelProjector.hpp"

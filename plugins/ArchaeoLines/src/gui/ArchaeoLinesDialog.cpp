@@ -32,6 +32,7 @@
 #include "StelMainView.hpp"
 #include "StelOpenGL.hpp"
 #include "AngleSpinBox.hpp"
+#include "StelUtils.hpp"
 
 ArchaeoLinesDialog::ArchaeoLinesDialog()
 	: StelDialog("ArchaeoLines")

@@ -259,7 +259,7 @@ void Satellites::bindingGroups()
 	QString satGroup = N_("Satellites");
 	QString showSatGroup = q_("Show satellites from the group");
 	QString hideSatGroup = q_("Hide satellites from the group");
-    for (auto constIterator = groups.constBegin(); constIterator != groups.constEnd(); ++constIterator)
+	for (auto constIterator = groups.constBegin(); constIterator != groups.constEnd(); ++constIterator)
 	{
 		QString groupId = (*constIterator).toLocal8Bit().constData();
 		QString actionShowName = QString("actionShow_Satellite_Group_%1").arg(groupId);
@@ -644,8 +644,8 @@ void Satellites::restoreDefaultTleSources()
 		{ "radar", false },      { "cubesat", false },      { "other", false },        { "oneweb", true },
 		{ "starlink", true },    { "planet", false },       { "spire", false },        { "swarm", false }
 	};
-	// Details: https://www.celestrak.com/NORAD/documentation/gp-data-formats.php
-	QString celestrackBaseURL = "https://www.celestrak.com/NORAD/elements/gp.php?GROUP=%1&FORMAT=TLE";
+	// Details: https://celestrak.org/NORAD/documentation/gp-data-formats.php
+	QString celestrackBaseURL = "https://celestrak.org/NORAD/elements/gp.php?GROUP=%1&FORMAT=TLE";
 	QStringList urls;
 	// TLE sources from Celestrak
 	for (auto group = celestrak.begin(); group != celestrak.end(); ++group)
@@ -657,7 +657,7 @@ void Satellites::restoreDefaultTleSources()
 			urls << url;
 	}
 	// Other sources and supplemental data from Celestrack
-	urls << "1,http://www.celestrak.com/NORAD/elements/supplemental/starlink.txt"
+	urls << "1,https://celestrak.org/NORAD/elements/supplemental/starlink.txt"
 	     << "https://www.amsat.org/amsat/ftp/keps/current/nasabare.txt"
 	     << "https://www.prismnet.com/~mmccants/tles/classfd.zip";
 
@@ -769,9 +769,11 @@ void Satellites::loadSettings()
 			conf->remove(key); // Delete old-style keys
 			if (url.isEmpty())
 				continue;
-			// NOTE: This URL is also hard-coded in restoreDefaultSettings().
-			if (url == "http://celestrak.com/NORAD/elements/visual.txt")
-				url.prepend("1,"); // Same as in the new default configuration
+
+			// celestrak.com moved to celestrak.org
+			if (url.contains("celestrak.com", Qt::CaseInsensitive))
+				url.replace("celestrak.com", "celestrak.org", Qt::CaseInsensitive);
+
 			urls << url;
 		}
 	}
@@ -791,6 +793,10 @@ void Satellites::loadSettings()
 			QString url = conf->value("url").toString();
 			if (!url.isEmpty())
 			{
+				// celestrak.com moved to celestrak.org
+				if (url.contains("celestrak.com", Qt::CaseInsensitive))
+					url.replace("celestrak.com", "celestrak.org", Qt::CaseInsensitive);
+
 				if (conf->value("add_new").toBool())
 					url.prepend("1,");
 				updateUrls.append(url);
@@ -865,6 +871,30 @@ void Satellites::loadSettings()
 	setFlagVFAltitude(conf->value("vf_altitude_flag", false).toBool());
 	setMinVFAltitude(conf->value("vf_altitude_min", 200.).toDouble());
 	setMaxVFAltitude(conf->value("vf_altitude_max", 500.).toDouble());
+	setFlagVFMagnitude(conf->value("vf_magnitude_flag", false).toBool());
+	setMinVFMagnitude(conf->value("vf_magnitude_min", 8.).toDouble());
+	setMaxVFMagnitude(conf->value("vf_magnitude_max", -8.).toDouble());
+
+	// custom filter
+	setFlagCFKnownStdMagnitude(conf->value("cf_magnitude_flag", false).toBool());
+	setFlagCFApogee(conf->value("cf_apogee_flag", false).toBool());
+	setMinCFApogee(conf->value("cf_apogee_min", 20000.).toDouble());
+	setMaxCFApogee(conf->value("cf_apogee_max", 55000.).toDouble());
+	setFlagCFPerigee(conf->value("cf_perigee_flag", false).toBool());
+	setMinCFPerigee(conf->value("cf_perigee_min", 200.).toDouble());
+	setMaxCFPerigee(conf->value("cf_perigee_max", 1500.).toDouble());
+	setFlagCFEccentricity(conf->value("cf_eccentricity_flag", false).toBool());
+	setMinCFEccentricity(conf->value("cf_eccentricity_min", 0.3).toDouble());
+	setMaxCFEccentricity(conf->value("cf_eccentricity_max", 0.9).toDouble());
+	setFlagCFPeriod(conf->value("cf_period_flag", false).toBool());
+	setMinCFPeriod(conf->value("cf_period_min", 0.).toDouble());
+	setMaxCFPeriod(conf->value("cf_period_max", 150.).toDouble());
+	setFlagCFInclination(conf->value("cf_inclination_flag", false).toBool());
+	setMinCFInclination(conf->value("cf_inclination_min", 120.).toDouble());
+	setMaxCFInclination(conf->value("cf_inclination_max", 180.).toDouble());
+	setFlagCFRCS(conf->value("cf_rcs_flag", false).toBool());
+	setMinCFRCS(conf->value("cf_rcs_min", 0.1).toDouble());
+	setMaxCFRCS(conf->value("cf_rcs_max", 100.).toDouble());
 
 	conf->endGroup();
 }
@@ -934,6 +964,30 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("vf_altitude_flag", getFlagVFAltitude());
 	conf->setValue("vf_altitude_min", getMinVFAltitude());
 	conf->setValue("vf_altitude_max", getMaxVFAltitude());
+	conf->setValue("vf_magnitude_flag", getFlagVFMagnitude());
+	conf->setValue("vf_magnitude_min", getMinVFMagnitude());
+	conf->setValue("vf_magnitude_max", getMaxVFMagnitude());
+
+	// custom filter
+	conf->setValue("cf_magnitude_flag", getFlagCFKnownStdMagnitude());
+	conf->setValue("cf_apogee_flag", getFlagCFApogee());
+	conf->setValue("cf_apogee_min", getMinCFApogee());
+	conf->setValue("cf_apogee_max", getMaxCFApogee());
+	conf->setValue("cf_perigee_flag", getFlagCFPerigee());
+	conf->setValue("cf_perigee_min", getMinCFPerigee());
+	conf->setValue("cf_perigee_max", getMaxCFPerigee());
+	conf->setValue("cf_eccentricity_flag", getFlagCFEccentricity());
+	conf->setValue("cf_eccentricity_min", getMinCFEccentricity());
+	conf->setValue("cf_eccentricity_max", getMaxCFEccentricity());
+	conf->setValue("cf_period_flag", getFlagCFPeriod());
+	conf->setValue("cf_period_min", getMinCFPeriod());
+	conf->setValue("cf_period_max", getMaxCFPeriod());
+	conf->setValue("cf_inclination_flag", getFlagCFInclination());
+	conf->setValue("cf_inclination_min", getMinCFInclination());
+	conf->setValue("cf_inclination_max", getMaxCFInclination());
+	conf->setValue("cf_rcs_flag", getFlagCFRCS());
+	conf->setValue("cf_rcs_min", getMinCFRCS());
+	conf->setValue("cf_rcs_max", getMaxCFRCS());
 
 	conf->endGroup();
 	
@@ -1311,30 +1365,58 @@ QString Satellites::getSatelliteDescription(int satID)
 {
 	// Format: NORAD (SATCAT) ID, description
 	const QMap<int, QString> descriptions = {
-		{ 20580, "The Hubble Space Telescope" },
-		{ 25544, "The International Space Station" },
-		{ 25867, "The Chandra X-ray Observatory" },
-		{ 25989, "X-ray Multi-Mirror Mission" },
-		{ 27370, "Reuven Ramaty High Energy Solar Spectroscopic Imager" },
-		{ 27540, "International Gamma-Ray Astrophysics Laboratory" },
-		{ 27843, "The Microvariability and Oscillations of Stars telescope" },
-		{ 28485, "Neil Gehrels Swift Observatory (Swift Gamma-Ray Burst Explorer)" },
-		{ 31135, "Astro‐Rivelatore Gamma a Immagini Leggero" },
-		{ 33053, "Fermi Gamma-ray Space Telescope" },
-		{ 36119, "Wide-field Infrared Survey Explorer" },
-		{ 36577, "Interplanetary Kite-craft Accelerated by Radiation Of the Sun" },
-		{ 38358, "Nuclear Spectroscopic Telescope Array" },
-		{ 39089, "Near Earth Object Surveillance Satellite" },
-		{ 39197, "The Interface Region Imaging Spectrograph" },
-		{ 39253, "The Spectroscopic Planet Observatory for Recognition of Interaction of Atmosphere" },
-		{ 41173, "The Dark Matter Particle Explorer" },
-		{ 42758, "Hard X-ray Modulation Telescope" },
-		{ 43435, "Transiting Exoplanet Survey Satellite" },
-		{ 44432, "Spectrum-X-Gamma" },
-		{ 44874, "Characterising Exoplanets Satellite" },
-		{ 48274, "Tiangong space station (Chinese large modular space station)" },
-		{ 49954, "Imaging X-ray Polarimetry Explorer" },
-		{ 50463, "James Webb Space Telescope" }
+		// TRANSLATORS: Satellite description. "Hubble" is a person's name.
+		{ 20580, N_("The Hubble Space Telescope") },
+		// TRANSLATORS: Satellite description.
+		{ 25544, N_("The International Space Station") },
+		// TRANSLATORS: Satellite description.
+		{ 25867, N_("The Chandra X-ray Observatory") },
+		// TRANSLATORS: Satellite description.
+		{ 25989, N_("X-ray Multi-Mirror Mission") },
+		// TRANSLATORS: Satellite description.
+		{ 27370, N_("Reuven Ramaty High Energy Solar Spectroscopic Imager") },
+		// TRANSLATORS: Satellite description.
+		{ 27540, N_("International Gamma-Ray Astrophysics Laboratory") },
+		// TRANSLATORS: Satellite description.
+		{ 27843, N_("The Microvariability and Oscillations of Stars telescope") },
+		// TRANSLATORS: Satellite description.
+		{ 28485, N_("Neil Gehrels Swift Observatory (Swift Gamma-Ray Burst Explorer)") },
+		// TRANSLATORS: Satellite description.
+		{ 31135, N_("Astro‐Rivelatore Gamma a Immagini Leggero") },
+		// TRANSLATORS: Satellite description.
+		{ 33053, N_("Fermi Gamma-ray Space Telescope") },
+		// TRANSLATORS: Satellite description.
+		{ 36119, N_("Wide-field Infrared Survey Explorer") },
+		// TRANSLATORS: Satellite description.
+		{ 36577, N_("Interplanetary Kite-craft Accelerated by Radiation Of the Sun") },
+		// TRANSLATORS: Satellite description.
+		{ 37755, N_("The russian space radio telescope RadioAstron") },
+		// TRANSLATORS: Satellite description.
+		{ 38358, N_("Nuclear Spectroscopic Telescope Array") },
+		// TRANSLATORS: Satellite description.
+		{ 39089, N_("Near Earth Object Surveillance Satellite") },
+		// TRANSLATORS: Satellite description.
+		{ 39197, N_("The Interface Region Imaging Spectrograph") },
+		// TRANSLATORS: Satellite description.
+		{ 39253, N_("The Spectroscopic Planet Observatory for Recognition of Interaction of Atmosphere") },
+		// TRANSLATORS: Satellite description.
+		{ 41173, N_("The Dark Matter Particle Explorer") },
+		// TRANSLATORS: Satellite description.
+		{ 42758, N_("Hard X-ray Modulation Telescope") },
+		// TRANSLATORS: Satellite description.
+		{ 43020, N_("Arcsecond Space Telescope Enabling Research in Astrophysics") },
+		// TRANSLATORS: Satellite description.
+		{ 43435, N_("Transiting Exoplanet Survey Satellite") },
+		// TRANSLATORS: Satellite description.
+		{ 44432, N_("Spectrum-X-Gamma") },
+		// TRANSLATORS: Satellite description.
+		{ 44874, N_("Characterising Exoplanets Satellite") },
+		// TRANSLATORS: Satellite description.
+		{ 48274, N_("Tiangong space station (Chinese large modular space station)") },
+		// TRANSLATORS: Satellite description.
+		{ 49954, N_("Imaging X-ray Polarimetry Explorer") },
+		// TRANSLATORS: Satellite description. "James Webb" is a person's name.
+		{ 50463, N_("James Webb Space Telescope") }
 	};
 	return descriptions.value(satID, QString());
 }
@@ -1348,6 +1430,10 @@ QPair<double, double> Satellites::getStdMagRCS(const TleData& tleData)
 		stdMag = qsMagList[sid];
 	if (rcsList.contains(sid))
 		RCS = rcsList[sid];
+
+	// special case: chinese space station / CSS (TIANHE1)
+	if (sid==48274 && stdMag > 90.)
+		stdMag = 0.87; // see details: http://www.satobs.org/seesat/Aug-2022/0030.html
 
 	// special case: starlink satellites; details: http://satobs.org/seesat/Apr-2020/0174.html
 	if (!rcsList.contains(sid) && tleData.name.startsWith("STARLINK"))
@@ -1567,7 +1653,7 @@ QStringList Satellites::guessGroups(const TleData& tleData)
 		satGroups.append("non-operational");
 
 	// Guessing the groups from CelesTrak's groups (a "supergroups")
-	if (tleData.sourceURL.contains("celestrak.com", Qt::CaseInsensitive))
+	if (tleData.sourceURL.contains("celestrak.org", Qt::CaseInsensitive))
 	{
 		// add groups, based on CelesTrak's groups
 		QString groupName;
@@ -1575,7 +1661,7 @@ QStringList Satellites::guessGroups(const TleData& tleData)
 			groupName = QUrl(tleData.sourceURL).fileName().toLower().replace(".txt", "");
 		else
 		{
-			// New format of source: https://celestrak.com/NORAD/documentation/gp-data-formats.php
+			// New format of source: https://celestrak.org/NORAD/documentation/gp-data-formats.php
 			groupName = QUrl(tleData.sourceURL).query().toLower().split("&").filter("group=").join("").replace("group=", "");
 		}
 		groupName.remove("gp.php");
@@ -1921,6 +2007,27 @@ void Satellites::setMaxVFAltitude(double v)
 {
 	Satellite::maxVFAltitude = v;
 	emit maxVFAltitudeChanged(v);
+}
+
+void Satellites::setFlagVFMagnitude(bool b)
+{
+	if (Satellite::flagVFMagnitude != b)
+	{
+		Satellite::flagVFMagnitude = b;
+		emit flagVFMagnitudeChanged(b);
+	}
+}
+
+void Satellites::setMinVFMagnitude(double v)
+{
+	Satellite::minVFMagnitude = v;
+	emit minVFMagnitudeChanged(v);
+}
+
+void Satellites::setMaxVFMagnitude(double v)
+{
+	Satellite::maxVFMagnitude = v;
+	emit maxVFMagnitudeChanged(v);
 }
 
 void Satellites::setFlagCFEccentricity(bool b)
@@ -2663,7 +2770,7 @@ void Satellites::draw(StelCore* core)
 		drawPointer(core, painter);
 
 	if (getFlagUmbraVisible())
-		drawCircles(core);
+		drawCircles(core, painter);
 }
 
 void Satellites::drawPointer(StelCore* core, StelPainter& painter)
@@ -2696,13 +2803,13 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 	}
 }
 
-void Satellites::drawCircles(StelCore* core)
+void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 {
-	StelPainter sPainter(core->getProjection(StelCore::FrameHeliocentricEclipticJ2000, StelCore::RefractionAuto));
-
-	sPainter.setBlending(true, GL_ONE, GL_ONE);
-	sPainter.setLineSmooth(true);
-	sPainter.setFont(labelFont);
+	StelProjectorP saveProj = painter.getProjector();
+	painter.setProjector(core->getProjection(StelCore::FrameHeliocentricEclipticJ2000, StelCore::RefractionAuto));
+	painter.setBlending(true, GL_ONE, GL_ONE);
+	painter.setLineSmooth(true);
+	painter.setFont(labelFont);
 
 	double lambda, beta, satDistance;
 	const Vec3d pos = earth->getEclipticPos();
@@ -2754,15 +2861,15 @@ void Satellites::drawCircles(StelCore* core)
 		rot.transfo(point);
 		umbra.vertex.append(pos+point);
 	}
-	sPainter.setColor(getUmbraColor(), 1.f);
-	sPainter.drawStelVertexArray(umbra, false);
+	painter.setColor(getUmbraColor(), 1.f);
+	painter.drawStelVertexArray(umbra, false);
 
 	Vec3d point(satDistance, 0.0, 0.0);
 	rot.transfo(point);
 	Vec3d coord = pos+point;
-	sPainter.drawSprite2dMode(coord, 5.f);
+	painter.drawSprite2dMode(coord, 5.f);
 	QString cuLabel = QString("%1 (h=%2 %3)").arg(q_("C.U."), QString::number(AU*(satDistance - earth->getEquatorialRadius()), 'f', 1), qc_("km","distance"));
-	sPainter.drawText(coord, cuLabel, 0, shift, shift, false);
+	painter.drawText(coord, cuLabel, 0, shift, shift, false);
 
 	if (getFlagPenumbraVisible())
 	{
@@ -2774,9 +2881,10 @@ void Satellites::drawCircles(StelCore* core)
 			penumbra.vertex.append(pos+point);
 		}
 
-		sPainter.setColor(getPenumbraColor(), 1.f);
-		sPainter.drawStelVertexArray(penumbra, false);
+		painter.setColor(getPenumbraColor(), 1.f);
+		painter.drawStelVertexArray(penumbra, false);
 	}
+	painter.setProjector(saveProj);
 }
 
 bool Satellites::checkJsonFileFormat()
@@ -3129,308 +3237,251 @@ void Satellites::translations()
 	// *** Special-Interest Satellites [CelesTrak groups]
 	//
 	// TRANSLATORS: Satellite group: Last 30 Days' Launches
-	// TRANSLATORS: CelesTrak source [Last 30 Days' Launches]: http://www.celestrak.com/NORAD/elements/tle-new.txt	
+	// TRANSLATORS: CelesTrak source [Last 30 Days' Launches]: https://celestrak.org/NORAD/elements/tle-new.txt
 	N_("tle-new");
 	// TRANSLATORS: Satellite group: Last 30 Days' Launches
-	// TRANSLATORS: CelesTrak source [Last 30 Days' Launches]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Last 30 Days' Launches]: https://celestrak.org/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=tle
 	N_("last-30-days");
 	// TRANSLATORS: Satellite group: Space stations	
-	// TRANSLATORS: CelesTrak source [Space Stations]: http://www.celestrak.com/NORAD/elements/stations.txt
-	// TRANSLATORS: CelesTrak source [Space Stations]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=stations&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Space Stations]: https://celestrak.org/NORAD/elements/stations.txt
+	// TRANSLATORS: CelesTrak source [Space Stations]: https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=tle
 	N_("stations");
 	// TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-	// TRANSLATORS: CelesTrak source [100 (or so) Brightest]: http://www.celestrak.com/NORAD/elements/visual.txt
-	// TRANSLATORS: CelesTrak source [100 (or so) Brightest]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=visual&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [100 (or so) Brightest]: https://celestrak.org/NORAD/elements/visual.txt
+	// TRANSLATORS: CelesTrak source [100 (or so) Brightest]: https://celestrak.org/NORAD/elements/gp.php?GROUP=visual&FORMAT=tle
 	N_("visual");
 	// TRANSLATORS: Satellite group: Active Satellites
-	// TRANSLATORS: CelesTrak source [Active Satellites]: http://www.celestrak.com/NORAD/elements/active.txt
-	// TRANSLATORS: CelesTrak source [Active Satellites]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=active&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Active Satellites]: https://celestrak.org/NORAD/elements/active.txt
+	// TRANSLATORS: CelesTrak source [Active Satellites]: https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle
 	N_("active");
 	// TRANSLATORS: Satellite group: Analyst Satellites
-	// TRANSLATORS: CelesTrak source [Analyst Satellites]: http://www.celestrak.com/NORAD/elements/analyst.txt
-	// TRANSLATORS: CelesTrak source [Analyst Satellites]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=analyst&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Analyst Satellites]: https://celestrak.org/NORAD/elements/analyst.txt
+	// TRANSLATORS: CelesTrak source [Analyst Satellites]: https://celestrak.org/NORAD/elements/gp.php?GROUP=analyst&FORMAT=tle
 	N_("analyst");
 	//
 	// *** Weather & Earth Resources Satellites [CelesTrak groups]
 	//
 	// TRANSLATORS: Satellite group: Weather (meteorological) satellites
-	// TRANSLATORS: CelesTrak source [Weather]: http://www.celestrak.com/NORAD/elements/weather.txt
-	// TRANSLATORS: CelesTrak source [Weather]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=weather&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Weather]: https://celestrak.org/NORAD/elements/weather.txt
+	// TRANSLATORS: CelesTrak source [Weather]: https://celestrak.org/NORAD/elements/gp.php?GROUP=weather&FORMAT=tle
 	N_("weather");
 	// TRANSLATORS: Satellite group: Satellites belonging to the NOAA satellites
-	// TRANSLATORS: CelesTrak source [NOAA]: http://www.celestrak.com/NORAD/elements/noaa.txt
-	// TRANSLATORS: CelesTrak source [NOAA]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=noaa&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [NOAA]: https://celestrak.org/NORAD/elements/noaa.txt
+	// TRANSLATORS: CelesTrak source [NOAA]: https://celestrak.org/NORAD/elements/gp.php?GROUP=noaa&FORMAT=tle
 	N_("noaa");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GOES satellites
-	// TRANSLATORS: CelesTrak source [GOES]: http://www.celestrak.com/NORAD/elements/goes.txt
-	// TRANSLATORS: CelesTrak source [GOES]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=goes&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [GOES]: https://celestrak.org/NORAD/elements/goes.txt
+	// TRANSLATORS: CelesTrak source [GOES]: https://celestrak.org/NORAD/elements/gp.php?GROUP=goes&FORMAT=tle
 	N_("goes");
 	// TRANSLATORS: Satellite group: Earth Resources satellites
-	// TRANSLATORS: CelesTrak source [Earth Resources]: http://www.celestrak.com/NORAD/elements/resource.txt
-	// TRANSLATORS: CelesTrak source [Earth Resources]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=resource&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Earth Resources]: https://celestrak.org/NORAD/elements/resource.txt
+	// TRANSLATORS: CelesTrak source [Earth Resources]: https://celestrak.org/NORAD/elements/gp.php?GROUP=resource&FORMAT=tle
 	N_("resource");
 	// TRANSLATORS: Satellite group: Search & Rescue (SARSAT) satellites
-	// TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]: http://www.celestrak.com/NORAD/elements/sarsat.txt
-	// TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=sarsat&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]: https://celestrak.org/NORAD/elements/sarsat.txt
+	// TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]: https://celestrak.org/NORAD/elements/gp.php?GROUP=sarsat&FORMAT=tle
 	N_("sarsat");
 	// TRANSLATORS: Satellite group: Disaster Monitoring satellites
-	// TRANSLATORS: CelesTrak source [Disaster Monitoring]: http://www.celestrak.com/NORAD/elements/dmc.txt
-	// TRANSLATORS: CelesTrak source [Disaster Monitoring]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=dmc&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Disaster Monitoring]: https://celestrak.org/NORAD/elements/dmc.txt
+	// TRANSLATORS: CelesTrak source [Disaster Monitoring]: https://celestrak.org/NORAD/elements/gp.php?GROUP=dmc&FORMAT=tle
 	N_("dmc");
 	// TRANSLATORS: Satellite group: The Tracking and Data Relay Satellite System (TDRSS) is a network of communications satellites and ground stations used by NASA for space communications.
-	// TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System (TDRSS)]: http://www.celestrak.com/NORAD/elements/tdrss.txt
-	// TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System (TDRSS)]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=tdrss&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System (TDRSS)]: https://celestrak.org/NORAD/elements/tdrss.txt
+	// TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System (TDRSS)]: https://celestrak.org/NORAD/elements/gp.php?GROUP=tdrss&FORMAT=tle
 	N_("tdrss");
 	// TRANSLATORS: Satellite group: ARGOS Data Collection System satellites
-	// TRANSLATORS: CelesTrak source [ARGOS Data Collection System]: http://www.celestrak.com/NORAD/elements/argos.txt
-	// TRANSLATORS: CelesTrak source [ARGOS Data Collection System]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=argos&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [ARGOS Data Collection System]: https://celestrak.org/NORAD/elements/argos.txt
+	// TRANSLATORS: CelesTrak source [ARGOS Data Collection System]: https://celestrak.org/NORAD/elements/gp.php?GROUP=argos&FORMAT=tle
 	N_("argos");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Planet satellites
-	// TRANSLATORS: CelesTrak source [Planet]: http://www.celestrak.com/NORAD/elements/planet.txt
-	// TRANSLATORS: CelesTrak source [Planet]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=planet&FORMAT=tle
-	// TRANSLATORS: CelesTrak supplemental source [Planet TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/planet.txt
+	// TRANSLATORS: CelesTrak source [Planet]: https://celestrak.org/NORAD/elements/planet.txt
+	// TRANSLATORS: CelesTrak source [Planet]: https://celestrak.org/NORAD/elements/gp.php?GROUP=planet&FORMAT=tle
+	// TRANSLATORS: CelesTrak supplemental source [Planet TLEs]: https://celestrak.org/NORAD/elements/supplemental/planet.txt
 	N_("planet");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Spire constellation (LEMUR satellites)
-	// TRANSLATORS: CelesTrak source [Spire]: http://www.celestrak.com/NORAD/elements/spire.txt
-	// TRANSLATORS: CelesTrak source [Spire]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=spire&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Spire]: https://celestrak.org/NORAD/elements/spire.txt
+	// TRANSLATORS: CelesTrak source [Spire]: https://celestrak.org/NORAD/elements/gp.php?GROUP=spire&FORMAT=tle
 	N_("spire");	
 	//
 	// *** Communications Satellites [CelesTrak groups]
 	//
 	// TRANSLATORS: Satellite group: Active Geosynchronous Satellites
-	// TRANSLATORS: CelesTrak source [Active Geosynchronous]: http://www.celestrak.com/NORAD/elements/geo.txt
-	// TRANSLATORS: CelesTrak source [Active Geosynchronous]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=geo&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Active Geosynchronous]: https://celestrak.org/NORAD/elements/geo.txt
+	// TRANSLATORS: CelesTrak source [Active Geosynchronous]: https://celestrak.org/NORAD/elements/gp.php?GROUP=geo&FORMAT=tle
 	N_("geo");
 	// TRANSLATORS: Satellite group: GEO Protected Zone
-	// TRANSLATORS: CelesTrak source [GEO Protected Zone]: http://www.celestrak.com/satcat/gpz.php
-	// TRANSLATORS: CelesTrak source [GEO Protected Zone]: https://www.celestrak.com/NORAD/elements/gp.php?SPECIAL=gpz&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [GEO Protected Zone]: https://celestrak.org/satcat/gpz.php
+	// TRANSLATORS: CelesTrak source [GEO Protected Zone]: https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz&FORMAT=tle
 	N_("gpz");
 	// TRANSLATORS: Satellite group: GEO Protected Zone Plus
-	// TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]: http://www.celestrak.com/satcat/gpz-plus.php
-	// TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]: https://www.celestrak.com/NORAD/elements/gp.php?SPECIAL=gpz-plus&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]: https://celestrak.org/satcat/gpz-plus.php
+	// TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]: https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz-plus&FORMAT=tle
 	N_("gpz-plus");
 	// TRANSLATORS: Satellite group: Satellites belonging to the INTELSAT satellites
-	// TRANSLATORS: CelesTrak source [Intelsat]: http://www.celestrak.com/NORAD/elements/intelsat.txt
-	// TRANSLATORS: CelesTrak source [Intelsat]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=intelsat&FORMAT=tle
-	// TRANSLATORS: CelesTrak supplemental source [INTELSAT TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/intelsat.txt
+	// TRANSLATORS: CelesTrak source [Intelsat]: https://celestrak.org/NORAD/elements/intelsat.txt
+	// TRANSLATORS: CelesTrak source [Intelsat]: https://celestrak.org/NORAD/elements/gp.php?GROUP=intelsat&FORMAT=tle
+	// TRANSLATORS: CelesTrak supplemental source [INTELSAT TLEs]: https://celestrak.org/NORAD/elements/supplemental/intelsat.txt
 	N_("intelsat");
 	// TRANSLATORS: Satellite group: Satellites belonging to the SES satellites
-	// TRANSLATORS: CelesTrak source [SES]: http://www.celestrak.com/NORAD/elements/ses.txt
-	// TRANSLATORS: CelesTrak source [SES]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=ses&FORMAT=tle
-	// TRANSLATORS: CelesTrak supplemental source [SES TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/ses.txt
+	// TRANSLATORS: CelesTrak source [SES]: https://celestrak.org/NORAD/elements/ses.txt
+	// TRANSLATORS: CelesTrak source [SES]: https://celestrak.org/NORAD/elements/gp.php?GROUP=ses&FORMAT=tle
+	// TRANSLATORS: CelesTrak supplemental source [SES TLEs]: https://celestrak.org/NORAD/elements/supplemental/ses.txt
 	N_("ses");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-	// TRANSLATORS: CelesTrak source [Iridium]: http://www.celestrak.com/NORAD/elements/iridium.txt
-	// TRANSLATORS: CelesTrak source [Iridium]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=iridium&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Iridium]: https://celestrak.org/NORAD/elements/iridium.txt
+	// TRANSLATORS: CelesTrak source [Iridium]: https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium&FORMAT=tle
 	N_("iridium");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Iridium NEXT constellation (Iridium is a proper name)
-	// TRANSLATORS: CelesTrak source [Iridium NEXT]: http://www.celestrak.com/NORAD/elements/iridium-NEXT.txt
-	// TRANSLATORS: CelesTrak source [Iridium NEXT]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=iridium-NEXT&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Iridium NEXT]: https://celestrak.org/NORAD/elements/iridium-NEXT.txt
+	// TRANSLATORS: CelesTrak source [Iridium NEXT]: https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium-NEXT&FORMAT=tle
 	N_("iridium-NEXT");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Starlink constellation (Starlink is a proper name)
-	// TRANSLATORS: CelesTrak source [Starlink]: http://www.celestrak.com/NORAD/elements/starlink.txt
-	// TRANSLATORS: CelesTrak source [Starlink]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle
-	// TRANSLATORS: CelesTrak supplemental source [Starlink TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/starlink.txt
+	// TRANSLATORS: CelesTrak source [Starlink]: https://celestrak.org/NORAD/elements/starlink.txt
+	// TRANSLATORS: CelesTrak source [Starlink]: https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle
+	// TRANSLATORS: CelesTrak supplemental source [Starlink TLEs]: https://celestrak.org/NORAD/elements/supplemental/starlink.txt
 	N_("starlink");
 	// TRANSLATORS: Satellite group: Satellites belonging to the OneWeb constellation (OneWeb is a proper name)
-	// TRANSLATORS: CelesTrak source [OneWeb]: http://www.celestrak.com/NORAD/elements/oneweb.txt
-	// TRANSLATORS: CelesTrak source [OneWeb]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=oneweb&FORMAT=tle
-	// TRANSLATORS: CelesTrak supplemental source [OneWeb TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/oneweb.txt
+	// TRANSLATORS: CelesTrak source [OneWeb]: https://celestrak.org/NORAD/elements/oneweb.txt
+	// TRANSLATORS: CelesTrak source [OneWeb]: https://celestrak.org/NORAD/elements/gp.php?GROUP=oneweb&FORMAT=tle
+	// TRANSLATORS: CelesTrak supplemental source [OneWeb TLEs]: https://celestrak.org/NORAD/elements/supplemental/oneweb.txt
 	N_("oneweb");
 	// TRANSLATORS: Satellite group: Satellites belonging to the ORBCOMM satellites
-	// TRANSLATORS: CelesTrak source [Orbcomm]: http://www.celestrak.com/NORAD/elements/orbcomm.txt
-	// TRANSLATORS: CelesTrak source [Orbcomm]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=orbcomm&FORMAT=tle
-	// TRANSLATORS: CelesTrak supplemental source [ORBCOMM TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/orbcomm.txt
+	// TRANSLATORS: CelesTrak source [Orbcomm]: https://celestrak.org/NORAD/elements/orbcomm.txt
+	// TRANSLATORS: CelesTrak source [Orbcomm]: https://celestrak.org/NORAD/elements/gp.php?GROUP=orbcomm&FORMAT=tle
+	// TRANSLATORS: CelesTrak supplemental source [ORBCOMM TLEs]: https://celestrak.org/NORAD/elements/supplemental/orbcomm.txt
 	N_("orbcomm");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GLOBALSTAR satellites
-	// TRANSLATORS: CelesTrak source [Globalstar]: http://www.celestrak.com/NORAD/elements/globalstar.txt
-	// TRANSLATORS: CelesTrak source [Globalstar]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=globalstar&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Globalstar]: https://celestrak.org/NORAD/elements/globalstar.txt
+	// TRANSLATORS: CelesTrak source [Globalstar]: https://celestrak.org/NORAD/elements/gp.php?GROUP=globalstar&FORMAT=tle
 	N_("globalstar");
 	// TRANSLATORS: Satellite group: Satellites belonging to the SWARM satellites
-	// TRANSLATORS: CelesTrak source [Swarm]: http://www.celestrak.com/NORAD/elements/swarm.txt
-	// TRANSLATORS: CelesTrak source [Swarm]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=swarm&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Swarm]: https://celestrak.org/NORAD/elements/swarm.txt
+	// TRANSLATORS: CelesTrak source [Swarm]: https://celestrak.org/NORAD/elements/gp.php?GROUP=swarm&FORMAT=tle
 	N_("swarm");
 	// TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-	// TRANSLATORS: CelesTrak source [Amateur Radio]: http://www.celestrak.com/NORAD/elements/amateur.txt
-	// TRANSLATORS: CelesTrak source [Amateur Radio]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=amateur&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Amateur Radio]: https://celestrak.org/NORAD/elements/amateur.txt
+	// TRANSLATORS: CelesTrak source [Amateur Radio]: https://celestrak.org/NORAD/elements/gp.php?GROUP=amateur&FORMAT=tle
 	N_("amateur");
 	// TRANSLATORS: Satellite group: Experimental communication satellites
-	// TRANSLATORS: CelesTrak source [Experimental]: http://www.celestrak.com/NORAD/elements/x-comm.txt
-	// TRANSLATORS: CelesTrak source [Experimental]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=x-comm&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Experimental]: https://celestrak.org/NORAD/elements/x-comm.txt
+	// TRANSLATORS: CelesTrak source [Experimental]: https://celestrak.org/NORAD/elements/gp.php?GROUP=x-comm&FORMAT=tle
 	N_("x-comm");
 	// TRANSLATORS: Satellite group: Other communication satellites
-	// TRANSLATORS: CelesTrak source [Other Comm]: http://www.celestrak.com/NORAD/elements/other-comm.txt
-	// TRANSLATORS: CelesTrak source [Other Comm]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=other-comm&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Other Comm]: https://celestrak.org/NORAD/elements/other-comm.txt
+	// TRANSLATORS: CelesTrak source [Other Comm]: https://celestrak.org/NORAD/elements/gp.php?GROUP=other-comm&FORMAT=tle
 	N_("other-comm");
 	// TRANSLATORS: Satellite group: Satellites belonging to the SatNOGS satellites
-	// TRANSLATORS: CelesTrak source [SatNOGS]: http://www.celestrak.com/NORAD/elements/satnogs.txt
-	// TRANSLATORS: CelesTrak source [SatNOGS]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=satnogs&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [SatNOGS]: https://celestrak.org/NORAD/elements/satnogs.txt
+	// TRANSLATORS: CelesTrak source [SatNOGS]: https://celestrak.org/NORAD/elements/gp.php?GROUP=satnogs&FORMAT=tle
 	N_("satnogs");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GORIZONT satellites
-	// TRANSLATORS: CelesTrak source [Gorizont]: http://www.celestrak.com/NORAD/elements/gorizont.txt
-	// TRANSLATORS: CelesTrak source [Gorizont]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=gorizont&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Gorizont]: https://celestrak.org/NORAD/elements/gorizont.txt
+	// TRANSLATORS: CelesTrak source [Gorizont]: https://celestrak.org/NORAD/elements/gp.php?GROUP=gorizont&FORMAT=tle
 	N_("gorizont");
 	// TRANSLATORS: Satellite group: Satellites belonging to the RADUGA satellites
-	// TRANSLATORS: CelesTrak source [Raduga]: http://www.celestrak.com/NORAD/elements/raduga.txt
-	// TRANSLATORS: CelesTrak source [Raduga]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=raduga&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Raduga]: https://celestrak.org/NORAD/elements/raduga.txt
+	// TRANSLATORS: CelesTrak source [Raduga]: https://celestrak.org/NORAD/elements/gp.php?GROUP=raduga&FORMAT=tle
 	N_("raduga");
 	// TRANSLATORS: Satellite group: Satellites belonging to the MOLNIYA satellites
-	// TRANSLATORS: CelesTrak source [Molniya]: http://www.celestrak.com/NORAD/elements/molniya.txt
-	// TRANSLATORS: CelesTrak source [Molniya]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=molniya&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Molniya]: https://celestrak.org/NORAD/elements/molniya.txt
+	// TRANSLATORS: CelesTrak source [Molniya]: https://celestrak.org/NORAD/elements/gp.php?GROUP=molniya&FORMAT=tle
 	N_("molniya");	
 	//
 	// *** Navigation Satellites [CelesTrak groups]
 	//
 	// TRANSLATORS: Satellite group: Satellites belonging to the GNSS satellites
-	// TRANSLATORS: CelesTrak source [GNSS]: http://www.celestrak.com/NORAD/elements/gnss.txt
-	// TRANSLATORS: CelesTrak source [GNSS]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=gnss&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [GNSS]: https://celestrak.org/NORAD/elements/gnss.txt
+	// TRANSLATORS: CelesTrak source [GNSS]: https://celestrak.org/NORAD/elements/gp.php?GROUP=gnss&FORMAT=tle
 	N_("gnss");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-	// TRANSLATORS: CelesTrak supplemental source [GPS TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/gps.txt	
+	// TRANSLATORS: CelesTrak supplemental source [GPS TLEs]: https://celestrak.org/NORAD/elements/supplemental/gps.txt
 	N_("gps");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-	// TRANSLATORS: CelesTrak source [GPS Operational]: http://www.celestrak.com/NORAD/elements/gps-ops.txt
-	// TRANSLATORS: CelesTrak source [GPS Operational]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=gps-ops&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [GPS Operational]: https://celestrak.org/NORAD/elements/gps-ops.txt
+	// TRANSLATORS: CelesTrak source [GPS Operational]: https://celestrak.org/NORAD/elements/gp.php?GROUP=gps-ops&FORMAT=tle
 	N_("gps-ops");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-	// TRANSLATORS: CelesTrak supplemental source [GLONASS TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/glonass.txt
+	// TRANSLATORS: CelesTrak supplemental source [GLONASS TLEs]: https://celestrak.org/NORAD/elements/supplemental/glonass.txt
 	N_("glonass");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-	// TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]: http://www.celestrak.com/NORAD/elements/glo-ops.txt
-	// TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=glo-ops&FORMAT=tle
+	// TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]: https://celestrak.org/NORAD/elements/glo-ops.txt
+	// TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]: https://celestrak.org/NORAD/elements/gp.php?GROUP=glo-ops&FORMAT=tle
 	N_("glo-ops");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-	// TRANSLATORS: CelesTrak source [Galileo]: http://www.celestrak.com/NORAD/elements/galileo.txt
-	// TRANSLATORS: CelesTrak source [Galileo]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=galileo&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Galileo]: https://celestrak.org/NORAD/elements/galileo.txt
+	// TRANSLATORS: CelesTrak source [Galileo]: https://celestrak.org/NORAD/elements/gp.php?GROUP=galileo&FORMAT=tle
 	N_("galileo");
 	// TRANSLATORS: Satellite group: Satellites belonging to the BeiDou constellation (BeiDou Navigation Satellite System)
-	// TRANSLATORS: CelesTrak source [Beidou]: http://www.celestrak.com/NORAD/elements/beidou.txt
-	// TRANSLATORS: CelesTrak source [Beidou]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=beidou&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Beidou]: https://celestrak.org/NORAD/elements/beidou.txt
+	// TRANSLATORS: CelesTrak source [Beidou]: https://celestrak.org/NORAD/elements/gp.php?GROUP=beidou&FORMAT=tle
 	N_("beidou");
 	// TRANSLATORS: Satellite group: Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)
-	// TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)]: http://www.celestrak.com/NORAD/elements/sbas.txt
-	// TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=sbas&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)]: https://celestrak.org/NORAD/elements/sbas.txt
+	// TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System (WAAS/EGNOS/MSAS)]: https://celestrak.org/NORAD/elements/gp.php?GROUP=sbas&FORMAT=tle
 	N_("sbas");
 	// TRANSLATORS: Satellite group: Navy Navigation Satellite System (NNSS)
-	// TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]: http://www.celestrak.com/NORAD/elements/nnss.txt
-	// TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=nnss&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]: https://celestrak.org/NORAD/elements/nnss.txt
+	// TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]: https://celestrak.org/NORAD/elements/gp.php?GROUP=nnss&FORMAT=tle
 	N_("nnss");
 	// TRANSLATORS: Satellite group: Russian LEO Navigation Satellites
-	// TRANSLATORS: CelesTrak source [Russian LEO Navigation]: http://www.celestrak.com/NORAD/elements/musson.txt
-	// TRANSLATORS: CelesTrak source [Russian LEO Navigation]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=musson&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Russian LEO Navigation]: https://celestrak.org/NORAD/elements/musson.txt
+	// TRANSLATORS: CelesTrak source [Russian LEO Navigation]: https://celestrak.org/NORAD/elements/gp.php?GROUP=musson&FORMAT=tle
 	N_("musson");
 	//
 	// *** Scientific Satellites [CelesTrak groups]
 	//
 	// TRANSLATORS: Satellite group: Space & Earth Science satellites
-	// TRANSLATORS: CelesTrak source [Space & Earth Science]: http://www.celestrak.com/NORAD/elements/science.txt
-	// TRANSLATORS: CelesTrak source [Space & Earth Science]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=science&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Space & Earth Science]: https://celestrak.org/NORAD/elements/science.txt
+	// TRANSLATORS: CelesTrak source [Space & Earth Science]: https://celestrak.org/NORAD/elements/gp.php?GROUP=science&FORMAT=tle
 	N_("science");
 	// TRANSLATORS: Satellite group: Geodetic satellites
-	// TRANSLATORS: CelesTrak source [Geodetic]: http://www.celestrak.com/NORAD/elements/geodetic.txt
-	// TRANSLATORS: CelesTrak source [Geodetic]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=geodetic&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Geodetic]: https://celestrak.org/NORAD/elements/geodetic.txt
+	// TRANSLATORS: CelesTrak source [Geodetic]: https://celestrak.org/NORAD/elements/gp.php?GROUP=geodetic&FORMAT=tle
 	N_("geodetic");
 	// TRANSLATORS: Satellite group: Engineering satellites
-	// TRANSLATORS: CelesTrak source [Engineering]: http://www.celestrak.com/NORAD/elements/engineering.txt
-	// TRANSLATORS: CelesTrak source [Engineering]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=engineering&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Engineering]: https://celestrak.org/NORAD/elements/engineering.txt
+	// TRANSLATORS: CelesTrak source [Engineering]: https://celestrak.org/NORAD/elements/gp.php?GROUP=engineering&FORMAT=tle
 	N_("engineering");
 	// TRANSLATORS: Satellite group: Education satellites
-	// TRANSLATORS: CelesTrak source [Education]: http://www.celestrak.com/NORAD/elements/education.txt
-	// TRANSLATORS: CelesTrak source [Education]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=education&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Education]: https://celestrak.org/NORAD/elements/education.txt
+	// TRANSLATORS: CelesTrak source [Education]: https://celestrak.org/NORAD/elements/gp.php?GROUP=education&FORMAT=tle
 	N_("education");
 	//
 	// *** Miscellaneous Satellites [CelesTrak groups]
 	//
 	// TRANSLATORS: Satellite group: Military satellites
-	// TRANSLATORS: CelesTrak source [Miscellaneous Military]: http://www.celestrak.com/NORAD/elements/military.txt
-	// TRANSLATORS: CelesTrak source [Miscellaneous Military]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=military&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Miscellaneous Military]: https://celestrak.org/NORAD/elements/military.txt
+	// TRANSLATORS: CelesTrak source [Miscellaneous Military]: https://celestrak.org/NORAD/elements/gp.php?GROUP=military&FORMAT=tle
 	N_("military");
 	// TRANSLATORS: Satellite group: Radar Calibration satellites
-	// TRANSLATORS: CelesTrak source [Radar Calibration]: http://www.celestrak.com/NORAD/elements/radar.txt
-	// TRANSLATORS: CelesTrak source [Radar Calibration]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=radar&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Radar Calibration]: https://celestrak.org/NORAD/elements/radar.txt
+	// TRANSLATORS: CelesTrak source [Radar Calibration]: https://celestrak.org/NORAD/elements/gp.php?GROUP=radar&FORMAT=tle
 	N_("radar");
 	// TRANSLATORS: Satellite group: CubeSats (Cube Satellites)
-	// TRANSLATORS: CelesTrak source [CubeSats]: http://www.celestrak.com/NORAD/elements/cubesat.txt
-	// TRANSLATORS: CelesTrak source [CubeSats]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=cubesat&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [CubeSats]: https://celestrak.org/NORAD/elements/cubesat.txt
+	// TRANSLATORS: CelesTrak source [CubeSats]: https://celestrak.org/NORAD/elements/gp.php?GROUP=cubesat&FORMAT=tle
 	N_("cubesat");
 	// TRANSLATORS: Satellite group: Other satellites
-	// TRANSLATORS: CelesTrak source [Other]: http://www.celestrak.com/NORAD/elements/other.txt
-	// TRANSLATORS: CelesTrak source [Other]: https://www.celestrak.com/NORAD/elements/gp.php?GROUP=other&FORMAT=tle
+	// TRANSLATORS: CelesTrak source [Other]: https://celestrak.org/NORAD/elements/other.txt
+	// TRANSLATORS: CelesTrak source [Other]: https://celestrak.org/NORAD/elements/gp.php?GROUP=other&FORMAT=tle
 	N_("other");
 	//
 	// *** Supplemental Two-Line Element Sets [CelesTrak groups]
 	//
 	// Probably the meteorological satellites
 	// TRANSLATORS: Satellite group: Meteosat
-	// TRANSLATORS: CelesTrak supplemental source [METEOSAT TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/meteosat.txt
+	// TRANSLATORS: CelesTrak supplemental source [METEOSAT TLEs]: https://celestrak.org/NORAD/elements/supplemental/meteosat.txt
 	N_("meteosat");
 	// Probably the communications satellites
 	// TRANSLATORS: Satellite group: Telesat
-	// TRANSLATORS: CelesTrak supplemental source [Telesat TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/telesat.txt
+	// TRANSLATORS: CelesTrak supplemental source [Telesat TLEs]: https://celestrak.org/NORAD/elements/supplemental/telesat.txt
 	N_("telesat");
 	// TRANSLATORS: Satellite group: ISS Segments
-	// TRANSLATORS: CelesTrak supplemental source [ISS TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/iss.txt
+	// TRANSLATORS: CelesTrak supplemental source [ISS TLEs]: https://celestrak.org/NORAD/elements/supplemental/iss.txt
 	N_("iss");
 	// TRANSLATORS: Satellite group: CPF
-	// TRANSLATORS: CelesTrak supplemental source [CPF TLEs]: http://www.celestrak.com/NORAD/elements/supplemental/cpf.txt
+	// TRANSLATORS: CelesTrak supplemental source [CPF TLEs]: https://celestrak.org/NORAD/elements/supplemental/cpf.txt
 	N_("cpf");
-	
-	// Satellite descriptions - bright and/or famous objects
-	// Just A FEW objects please! (I'm looking at you, Alex!)
-	// TRANSLATORS: Satellite description. "Hubble" is a person's name.
-	N_("The Hubble Space Telescope");
-	// TRANSLATORS: Satellite description.
-	N_("The International Space Station");
-	// TRANSLATORS: Satellite description.
-	N_("China's first space station");
-	// TRANSLATORS: Satellite description.
-	N_("Tiangong space station (Chinese large modular space station)");
-	// TRANSLATORS: Satellite description.
-	N_("The russian space radio telescope RadioAstron");
-	// TRANSLATORS: Satellite description.
-	N_("International Gamma-Ray Astrophysics Laboratory");
-	// TRANSLATORS: Satellite description.
-	N_("The Microvariability and Oscillations of Stars telescope");
-	// TRANSLATORS: Satellite description.
-	N_("The Interface Region Imaging Spectrograph");
-	// TRANSLATORS: Satellite description.
-	N_("The Spectroscopic Planet Observatory for Recognition of Interaction of Atmosphere");
-	// TRANSLATORS: Satellite description.
-	M_("Nuclear Spectroscopic Telescope Array");
-	// TRANSLATORS: Satellite description.
-	N_("The Dark Matter Particle Explorer");
-	// TRANSLATORS: Satellite description.
-	N_("Arcsecond Space Telescope Enabling Research in Astrophysics");
-	// TRANSLATORS: Satellite description.
-	N_("Reuven Ramaty High Energy Solar Spectroscopic Imager");
-	// TRANSLATORS: Satellite description.
-	N_("The Chandra X-ray Observatory");
-	// TRANSLATORS: Satellite description.
-	N_("Neil Gehrels Swift Observatory (Swift Gamma-Ray Burst Explorer)");
-	// TRANSLATORS: Satellite description.
-	N_("Astro‐Rivelatore Gamma a Immagini Leggero");
-	// TRANSLATORS: Satellite description.
-	N_("Fermi Gamma-ray Space Telescope");
-	// TRANSLATORS: Satellite description.
-	N_("Interplanetary Kite-craft Accelerated by Radiation Of the Sun");
-	// TRANSLATORS: Satellite description.
-	N_("X-ray Multi-Mirror Mission");
-	// TRANSLATORS: Satellite description.
-	N_("Hard X-ray Modulation Telescope");
-	// TRANSLATORS: Satellite description.
-	N_("Spectrum-X-Gamma");
-	// TRANSLATORS: Satellite description.
-	N_("Imaging X-ray Polarimetry Explorer");
-	// TRANSLATORS: Satellite description.
-	N_("Near Earth Object Surveillance Satellite");
-	// TRANSLATORS: Satellite description.
-	N_("Transiting Exoplanet Survey Satellite");
-	// TRANSLATORS: Satellite description.
-	N_("Characterising Exoplanets Satellite");
-	// TRANSLATORS: Satellite description.
-	N_("Wide-field Infrared Survey Explorer");
-	// TRANSLATORS: Satellite description.
-	N_("James Webb Space Telescope");
 
 	// Satellite names - a few famous objects only
 	// TRANSLATORS: Satellite name: International Space Station
@@ -3454,12 +3505,6 @@ void Satellites::translations()
 	// TRANSLATORS: Satellite name: China's space station name (with name of base module)
 	N_("TIANGONG (TIANHE)");
 
-	// Satellites visibility
-	N_("The satellite and the observer are in sunlight");
-	N_("The satellite is visible");
-	N_("The satellite is eclipsed");
-	N_("The satellite is not visible");
-
 	// Special terms for communications
 	// TRANSLATORS: An uplink (UL or U/L) is the link from a ground station to a satellite
 	N_("uplink");
@@ -3469,6 +3514,12 @@ void Satellites::translations()
 	N_("beacon");
 	// TRANSLATORS: Telemetry is the collection of measurements or other data at satellites and their automatic transmission to receiving equipment (telecommunication) for monitoring
 	N_("telemetry");
+	// TRANSLATORS: The channel for transmission of video data
+	N_("video");
+	// TRANSLATORS: The broadband is wide bandwidth data transmission which transports multiple signals at a wide range of frequencies
+	N_("broadband");
+	// TRANSLATORS: The channel for transmission of commands
+	N_("command");
 
 #endif
 }

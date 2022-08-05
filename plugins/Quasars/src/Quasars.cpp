@@ -204,7 +204,8 @@ void Quasars::init()
 	readJsonFile();
 
 	// Set up download manager and the update schedule
-	networkManager = StelApp::getInstance().getNetworkAccessManager();
+	//networkManager = StelApp::getInstance().getNetworkAccessManager();
+	networkManager = new QNetworkAccessManager(this);;
 	updateState = CompleteNoUpdates;
 	updateTimer = new QTimer(this);
 	updateTimer->setSingleShot(false);   // recurring check for update
@@ -609,7 +610,11 @@ int Quasars::getSecondsToUpdate(void)
 
 void Quasars::checkForUpdate(void)
 {
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime())
+#else
 	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime() && networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
+#endif
 		updateJSON();
 }
 
@@ -654,7 +659,9 @@ void Quasars::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+#endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
@@ -737,7 +744,8 @@ void Quasars::downloadComplete(QNetworkReply *reply)
 	reply->deleteLater();
 	downloadReply = Q_NULLPTR;
 
-	readJsonFile();
+	qDebug() << "[Quasars] Updating quasars catalog is complete...";
+	//readJsonFile();
 }
 
 void Quasars::displayMessage(const QString& message, const QString hexColor)

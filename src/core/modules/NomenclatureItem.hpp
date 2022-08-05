@@ -27,10 +27,8 @@
 #include <QList>
 
 #include "StelObject.hpp"
-#include "StelTextureTypes.hpp"
 #include "StelFader.hpp"
 #include "StelTranslator.hpp"
-#include "Planet.hpp"
 #include "SolarSystem.hpp"
 
 class StelPainter;
@@ -143,6 +141,10 @@ public:
 	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
 	{
 		return getNomenclatureTypeLatinString(nType);
+	}
+	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE
+	{
+		return getNomenclatureTypeString(nType);
 	}
 
 	virtual QString getID(void) const Q_DECL_OVERRIDE

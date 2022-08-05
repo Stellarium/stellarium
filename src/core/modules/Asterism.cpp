@@ -24,14 +24,14 @@
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelModuleMgr.hpp"
-#include "AsterismMgr.hpp"
+#include "StelUtils.hpp"
 
 #include <algorithm>
 #include <QString>
 #include <QTextStream>
 #include <QDebug>
 #include <QFontMetrics>
+#include <QIODevice>
 
 Vec3f Asterism::lineColor = Vec3f(0.4f,0.4f,0.8f);
 Vec3f Asterism::rayHelperColor = Vec3f(1.0f,1.0f,0.0f);
@@ -191,7 +191,7 @@ QString Asterism::getInfoString(const StelCore *core, const InfoStringGroup &fla
 		oss << "<h2>" << getNameI18n() << "</h2>";
 
 	if (flags&ObjectType)
-		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getObjectType())) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
 
 	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);

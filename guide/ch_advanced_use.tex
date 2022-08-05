@@ -81,7 +81,7 @@ endings''.\footnote{This is a very confusing default setting and in fact
   section~\ref{sec:CommandLineOptions}).
 \end{description}
 
-\subsection{Mac OS X}
+\subsection{macOS}
 \label{sec:FilesAndDirectories:MacOSX}
 
 \begin{description}
@@ -90,9 +90,7 @@ endings''.\footnote{This is a very confusing default setting and in fact
     Bundles}\footnote{\url{http://www.mactipsandtricks.com/articles/Wiley_HT_appBundles.lasso}}
   for more information.
 \item[user directory] This is the sub-directory 
-  \file{Library/Preferences/Stellarium/} (or \\
-  \file{\textasciitilde{}/Library/Application\ Support/Stellarium} on
-  newest versions of Mac OS X) of the user's home
+  \file{\textasciitilde{}/Library/Application\ Support/Stellarium} of the user's home
   directory.
 \item[screenshot save directory] Screenshots are saved to the user's
   Desktop.
@@ -249,12 +247,12 @@ program download (the \emph{standard edition} of Stellarium DSO catalog\footnote
 number in the version of Stellarium DSO catalog meaning version of catalog structure 
 and second number meaning version of data.}, see section \ref{sec:dso:catalog}), 
 but an \emph{extended edition} of DSO catalog with over one million objects (up to $20.0^m$ for galaxies) may be downloaded
-from Stellarium's Github website\footnote{\url{https://github.com/Stellarium/stellarium-data/releases/tag/dso-3.15}}:
+from Stellarium's Github website\footnote{\url{https://github.com/Stellarium/stellarium-data/releases/tag/dso-3.16}}:
 
 \noindent\begin{tabular}{lllr}
 \toprule
 \emph{Version; Edition} & \emph{Filename} & \emph{MD5 hash} & \emph{Size}\\\midrule
-3.15; extended & \file{catalog-3.15.dat} & \texttt{5a343f8204eb4a43b4f9ef320d61c4da} & 28MB\\\bottomrule
+3.16; extended & \file{catalog-3.16.dat} & \texttt{85488951212a13f1d498fad0fa3a5679} & 28MB\\\bottomrule
 \end{tabular}
 
 The file can be placed in a folder named \file{nebulae/default} inside the \emph{user directory}
@@ -494,10 +492,10 @@ For example, using the option \texttt{-c\ my\_config.ini} would resolve to the f
 -\/-verbose          &            & Even more diagnostic output in logfile (esp.\ multimedia handling)\\
 -\/-dump-opengl-details or -d     & {[}none{]} & Dump information about OpenGL support to logfile. 
                                                  Use this is you have graphics problems and want to send a bug report. \\\midrule
--\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect Direct3D version).\footnotemark[1]\\
--\/-angle-d3d9 or -9 & {[}none{]} & Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\
--\/-angle-d3d11      & {[}none{]} & Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\
--\/-angle-warp       & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\
+-\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect Direct3D version).\footnotemark[1]\footnote{Stellarium 0.* series only}\\
+-\/-angle-d3d9 or -9 & {[}none{]} & Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\footnotemark[3]\\
+-\/-angle-d3d11      & {[}none{]} & Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\footnotemark[3]\\
+-\/-angle-warp       & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\footnotemark[3]\\
 -\/-mesa-mode or -m  & {[}none{]} & Use MESA as software OpenGL rendering engine.\footnotemark[1]\\
 -\/-safe-mode or -s  & {[}none{]} & Synonymous to -\/-mesa-mode.\footnotemark[1]\\
 -\/-compat33 or -C   & {[}none{]} & Request OpenGL 3.3 Compatibility Profile. May help for certain driver configurations. Mac?\\

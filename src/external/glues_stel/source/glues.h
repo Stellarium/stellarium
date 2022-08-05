@@ -140,7 +140,7 @@ void gluesTessEndContour(GLUEStesselator* tess);
 void gluesTessEndPolygon(GLUEStesselator* tess);
 void gluesTessNormal(GLUEStesselator* tess, double valueX, double valueY, double valueZ);
 void gluesTessProperty(GLUEStesselator* tess, GLenum which, double data);
-void gluesTessVertex(GLUEStesselator* tess, double* location, GLvoid* data);
+void gluesTessVertex(GLUEStesselator* tess, const double* location, GLvoid* data);
 
 const GLubyte* gluesErrorString(GLenum errorCode);
 

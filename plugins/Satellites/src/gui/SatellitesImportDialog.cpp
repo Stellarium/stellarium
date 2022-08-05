@@ -35,6 +35,7 @@
 #include <QStandardItemModel>
 #include <QTemporaryFile>
 #include <QDir>
+#include <QStandardPaths>
 
 SatellitesImportDialog::SatellitesImportDialog()
 	: StelDialog("SatellitesImport")

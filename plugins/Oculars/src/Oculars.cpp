@@ -193,7 +193,7 @@ Oculars::Oculars()
 	telescopes = QList<Telescope *>();
 	lenses = QList<Lens *> ();
 
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
 	qt_set_sequence_auto_mnemonic(true);
 #endif
 }

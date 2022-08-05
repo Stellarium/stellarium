@@ -85,7 +85,11 @@ private:
 	StelTranslator* rcTranslator;
 };
 
+#if (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
+RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QObject* parent) : HttpRequestHandler(parent), usePassword(false), enableCors(false), templateMutex()
+#else
 RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QObject* parent) : HttpRequestHandler(parent), usePassword(false), enableCors(false), templateMutex(QMutex::Recursive)
+#endif
 {
 	apiController = new APIController(QByteArray("/api/").size(),this);
 

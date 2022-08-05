@@ -37,7 +37,7 @@ class StelCore;
 class StelObjectMgr : public StelModule
 {
 	Q_OBJECT
-	Q_PROPERTY(double twilightAltitude READ getTwilightAltitude WRITE setTwilightAltitude NOTIFY twilightAltitudeChanged)
+
 public:
 	StelObjectMgr();
 	virtual ~StelObjectMgr() Q_DECL_OVERRIDE;
@@ -169,75 +169,11 @@ public:
 	//! Return a list of enabled fields (custom info strings)
 	StelObject::InfoStringGroup getCustomInfoStrings();
 
-	//! Get twilight altitude [degrees]
-	double getTwilightAltitude() const {return twilightAltitude;}
-
 	//! Retrieve an (unsorted) QStringList of all extra info strings that match flags.
 	//! Normally the order matches the order of addition, but this cannot be guaranteed.
 	QStringList getExtraInfoStrings(const StelObject::InfoStringGroup& flags) const;
 
 public slots:
-	//! Set twilight altitude [degrees]
-	void setTwilightAltitude(double alt);
-
-	//! Set simulation time to the time of next transit of selected object
-	void nextTransit();
-	//! Set simulation time to the time of previous transit of selected object
-	void previousTransit();
-	//! Set simulation time to the time of today's transit of selected object
-	void todayTransit();
-
-	//! Set simulation time to the time of next rising of selected object (if applicable)
-	//! @note for circumpolar objects, this sets to time of lower culmination
-	//! @note for permanently invisible objects, this sets to time of transit
-	void nextRising();
-	//! Set simulation time to the time of previous rising of selected object (if applicable)
-	//! @note for circumpolar objects, this sets to time of lower culmination
-	//! @note for permanently invisible objects, this sets to time of transit
-	void previousRising();
-	//! Set simulation time to the time of today's rising of selected object (if applicable)
-	//! @note for circumpolar objects, this sets to time of lower culmination
-	//! @note for permanently invisible objects, this sets to time of transit
-	void todayRising();
-
-	//! Set simulation time to the time of next setting of selected object (if applicable)
-	//! @note for circumpolar objects, this sets to time of lower culmination
-	//! @note for permanently invisible objects, this sets to time of transit
-	void nextSetting();
-	//! Set simulation time to the time of previous setting of selected object (if applicable)
-	//! @note for circumpolar objects, this sets to time of lower culmination
-	//! @note for permanently invisible objects, this sets to time of transit
-	void previousSetting();
-	//! Set simulation time to the time of today's setting of selected object (if applicable)
-	//! @note for circumpolar objects, this sets to time of lower culmination
-	//! @note for permanently invisible objects, this sets to time of transit
-	void todaySetting();
-
-	//! Set simulation time to this day's morning when Sun reaches twilightAltitude
-	void todayMorningTwilight();
-	//! Set simulation time to this day's evening when Sun reaches twilightAltitude
-	void todayEveningTwilight();
-	//! Set simulation time to the previous day's morning when Sun reaches twilightAltitude
-	void previousMorningTwilight();
-	//! Set simulation time to the previous day's evening when Sun reaches twilightAltitude
-	void previousEveningTwilight();
-	//! Set simulation time to the next day's morning when Sun reaches twilightAltitude
-	void nextMorningTwilight();
-	//! Set simulation time to the next day's evening when Sun reaches twilightAltitude
-	void nextEveningTwilight();
-
-	//! Set simulation time to this day's morning when selected object reaches current altitude
-	void todayMorningAtAltitude();
-	//! Set simulation time to the next morning when selected object reaches current altitude
-	void nextMorningAtAltitude();
-	//! Set simulation time to the previous morning when selected object reaches current altitude
-	void previousMorningAtAltitude();
-	//! Set simulation time to this day's evening when selected object reaches current altitude
-	void todayEveningAtAltitude();
-	//! Set simulation time to the next evening when selected object reaches current altitude
-	void nextEveningAtAltitude();
-	//! Set simulation time to the previous evening when selected object reaches current altitude
-	void previousEveningAtAltitude();
 
 	//! @note These functions were copied over from StelObject. Given that setExtraInfoString is non-const and some functions where these methods are useful are const, we can use the StelObjectMgr as "carrier object".
 	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
@@ -267,9 +203,6 @@ signals:
 	//! @param action define if the user requested that the objects are added to the selection or just replace it
 	void selectedObjectChanged(StelModule::StelModuleSelectAction);
 
-	//! Signal that the configurable twilight altitude for the sun has changed.
-	void twilightAltitudeChanged(double alt);
-
 private:
 	// The list of StelObjectModule that are referenced in Stellarium
 	QList<StelObjectModule*> objectsModules;
@@ -293,9 +226,6 @@ private:
 
 	//! Weight of the distance factor when choosing the best object to select.
 	float distanceWeight;
-
-	//! configurable altitude for the sun for "goto next twilight" actions
-	double twilightAltitude;
 
 	//! Location for additional object info that can be set for special purposes (at least for debugging, but maybe others), even via scripting.
 	//! Modules are allowed to add new strings to be displayed in the various getInfoString() methods of subclasses.

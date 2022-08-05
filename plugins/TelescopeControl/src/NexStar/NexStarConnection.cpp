@@ -29,7 +29,6 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "StelUtils.hpp"
 
 #include <iostream>
-using namespace std;
 
 NexStarConnection::NexStarConnection(Server &server, const char *serial_device) : SerialPort(server, serial_device)
 {

@@ -403,7 +403,7 @@ void OnlineQueries::onAavsoHipQueryStatusChanged()
 		int oid=0;
 		while (!xml.atEnd()) {
 			xml.readNext();
-			if (xml.isStartElement() && xml.name()=="OID")
+			if (xml.isStartElement() && xml.name()==QString("OID"))
 			{
 				oid=xml.readElementText().toInt();
 			}

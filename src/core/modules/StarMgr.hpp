@@ -26,7 +26,6 @@
 #include "StelFader.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelProjectorType.hpp"
 
 class StelObject;
 class StelToneReproducer;

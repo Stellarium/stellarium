@@ -89,7 +89,8 @@ void MeteorShowersMgr::init()
 	}
 
 	// Set up download manager and the update schedule
-	m_networkManager = StelApp::getInstance().getNetworkAccessManager();
+	//m_networkManager = StelApp::getInstance().getNetworkAccessManager();
+	m_networkManager = new QNetworkAccessManager(this);
 	m_updateState = CompleteNoUpdates;
 	m_updateTimer = new QTimer(this);
 	m_updateTimer->setSingleShot(false);   // recurring check for update
@@ -297,7 +298,11 @@ void MeteorShowersMgr::repaint()
 
 void MeteorShowersMgr::checkForUpdates()
 {
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	if (m_enableAutoUpdates && m_lastUpdate.addSecs(static_cast<qint64>(m_updateFrequencyHours) * 3600) <= QDateTime::currentDateTime())
+#else
 	if (m_enableAutoUpdates && m_lastUpdate.addSecs(static_cast<qint64>(m_updateFrequencyHours) * 3600) <= QDateTime::currentDateTime() && m_networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
+#endif
 	{
 		updateCatalog();
 	}
@@ -342,7 +347,9 @@ void MeteorShowersMgr::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(m_url));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+#endif
 	m_downloadReply = m_networkManager->get(request);
 	connect(m_downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 	m_updateState = MeteorShowersMgr::Updating;
@@ -408,6 +415,7 @@ void MeteorShowersMgr::downloadComplete(QNetworkReply *reply)
 		}
 
 		m_updateState = MeteorShowersMgr::CompleteUpdates;
+		qDebug() << "[MeteorShowersMgr] Updating Meteor Showers catalog is complete...";
 		m_lastUpdate = QDateTime::currentDateTime();
 		m_conf->setValue("MeteorShowers/last_update", m_lastUpdate.toString(Qt::ISODate));
 	}

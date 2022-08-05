@@ -675,7 +675,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 				{
 					// It's a normal click release
 					// TODO: Leave time dragging in Natural speed or zero speed (config option?) if mouse was resting
-			#ifdef Q_OS_MAC
+			#ifdef Q_OS_MACOS
 					// CTRL + left click = right click for 1 button mouse
 					if (event->modifiers().testFlag(Qt::ControlModifier))
 					{
@@ -701,7 +701,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 				qDebug() << "StelMovementMgr::handleMouseClicks: unknown mouse event type, skipping: " << event->type();
 			}
 			break;
-		case Qt::MidButton :
+		case Qt::MiddleButton :
 			if (event->type()==QEvent::MouseButtonRelease)
 			{
 				if (objectMgr->getWasSelected())

@@ -74,21 +74,85 @@ QString getUserAgentString()
 
 QString getOperatingSystemInfo()
 {
-	QString OS = "Unknown operating system";
+	QString OS = QSysInfo::prettyProductName();
 
-	#if defined(Q_OS_BSD4) || defined(Q_OS_SOLARIS)
-	// Check FreeBSD, NetBSD, OpenBSD and DragonFly BSD
+	#if (defined(Q_OS_FREEBSD) || defined(Q_OS_NETBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_SOLARIS))
+	// Check FreeBSD, OpenBSD, NetBSD and Sun Solaris operating systems
 	QProcess uname;
+	#if (QT_VERSION>=QT_VERSION_CHECK(6, 0, 0))
+	uname.startCommand("/usr/bin/uname -srm");
+	#else
 	uname.start("/usr/bin/uname -srm");
+	#endif
 	uname.waitForStarted();
 	uname.waitForFinished();
 	const QString BSDsystem = uname.readAllStandardOutput();
 	OS = BSDsystem.trimmed();
-	#else
-	OS = QSysInfo::prettyProductName();
 	#endif
 
+	if (OS.isEmpty() || OS==QStringLiteral("unknown"))
+		OS = "Unknown operating system";
+
 	return OS;
+}
+
+QString getCompilerInfo()
+{
+	QString compilerInfo = "";
+
+	#if defined __GNUC__ && !defined __clang__ && !defined __INTEL_COMPILER
+	#ifdef __MINGW32__
+		#define COMPILER "MinGW GCC"
+	#else
+		#define COMPILER "GCC"
+	#endif
+	compilerInfo = QString("%1 %2.%3.%4").arg(COMPILER).arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__);
+	#elif defined __clang__
+	#ifdef Q_OS_MACOS
+		#define COMPILER "Clang (Apple)"
+	#else
+		#define COMPILER "Clang"
+	#endif
+	compilerInfo = QString("%1 %2.%3.%4").arg(COMPILER).arg(__clang_major__).arg(__clang_minor__).arg(__clang_patchlevel__);
+	#elif defined __INTEL_COMPILER
+	QString iccVer = QString::number(__INTEL_COMPILER);
+	int iccVL = iccVer.length();
+	compilerInfo = QString("%1 %2.%3.%4.%5").arg("Intel C/C++").arg(iccVer.mid(0, iccVL-2)).arg(iccVer.mid(iccVL-2,1)).arg(iccVer.mid(iccVL-1,1)).arg(__INTEL_COMPILER_BUILD_DATE);
+	#elif defined _MSC_VER
+	// Defines for _MSC_VER macro: https://docs.microsoft.com/ru-ru/cpp/preprocessor/predefined-macros?view=msvc-160
+	const QMap<int, QString> map = {
+		{1310, "MSVC++ 7.1 (Visual Studio 2003)"          },
+		{1400, "MSVC++ 8.0 (Visual Studio 2005)"          },
+		{1500, "MSVC++ 9.0 (Visual Studio 2008)"          },
+		{1600, "MSVC++ 10.0 (Visual Studio 2010)"         },
+		{1700, "MSVC++ 11.0 (Visual Studio 2012)"         },
+		{1800, "MSVC++ 12.0 (Visual Studio 2013)"         },
+		{1900, "MSVC++ 14.0 (Visual Studio 2015)"         },
+		{1910, "MSVC++ 15.0 (Visual Studio 2017 RTW)"     },
+		{1911, "MSVC++ 15.3 (Visual Studio 2017)"         },
+		{1912, "MSVC++ 15.5 (Visual Studio 2017)"         },
+		{1913, "MSVC++ 15.6 (Visual Studio 2017)"         },
+		{1914, "MSVC++ 15.7 (Visual Studio 2017)"         },
+		{1915, "MSVC++ 15.8 (Visual Studio 2017)"         },
+		{1916, "MSVC++ 15.9 (Visual Studio 2017)"         },
+		{1920, "MSVC++ 16.0 (Visual Studio 2019 RTW)"     },
+		{1921, "MSVC++ 16.1 (Visual Studio 2019)"         },
+		{1922, "MSVC++ 16.2 (Visual Studio 2019)"         },
+		{1923, "MSVC++ 16.3 (Visual Studio 2019)"         },
+		{1924, "MSVC++ 16.4 (Visual Studio 2019)"         },
+		{1925, "MSVC++ 16.5 (Visual Studio 2019)"         },
+		{1926, "MSVC++ 16.6 (Visual Studio 2019)"         },
+		{1927, "MSVC++ 16.7 (Visual Studio 2019)"         },
+		{1928, "MSVC++ 16.8, 16.9 (Visual Studio 2019)"   },
+		{1929, "MSVC++ 16.10, 16.11 (Visual Studio 2019)" },
+		{1930, "MSVC++ 17.0 (Visual Studio 2022 RTW)"     },
+		{1931, "MSVC++ 17.1 (Visual Studio 2022)"         },
+		{1932, "MSVC++ 17.2 (Visual Studio 2022)"         },
+	};
+	compilerInfo = map.value(_MSC_VER, "unknown MSVC++ version");
+	#endif
+
+	return compilerInfo;
 }
 
 double hmsStrToHours(const QString& s)
@@ -175,7 +239,7 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 
 QString radToDecDegStr(const double angle, const int precision, const bool useD, const bool positive)
 {
-	const QChar degsign = (useD ? 'd' : 0x00B0);
+	const QChar degsign = (useD ? 'd' : QChar(0x00B0));
 	double deg = (positive ? fmodpos(angle, 2.0*M_PI) : std::fmod(angle, 2.0*M_PI)) * M_180_PI;
 
 	return QString("%1%2").arg(QString::number(deg, 'f', precision), degsign);
@@ -264,7 +328,7 @@ QString radToHmsStr(const double angle, const bool decimal)
 *************************************************************************/
 QString radToDmsStrAdapt(const double angle, const bool useD)
 {
-	const QChar degsign = (useD ? 'd' : 0x00B0);
+	const QChar degsign = (useD ? 'd' : QChar(0x00B0));
 	bool sign;
 	unsigned int d,m;
 	double s;
@@ -275,7 +339,11 @@ QString radToDmsStrAdapt(const double angle, const bool useD)
 	os << (sign?'+':'-') << d << degsign;
 	if (std::fabs(s*100-static_cast<int>(s)*100)>=1)
 	{
+#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+		os << m << '\'' << Qt::fixed << qSetRealNumberPrecision(2) << qSetFieldWidth(5) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
+#else
 		os << m << '\'' << fixed << qSetRealNumberPrecision(2) << qSetFieldWidth(5) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
+#endif
 	}
 	else if (static_cast<int>(s)!=0)
 	{
@@ -304,7 +372,7 @@ QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 *************************************************************************/
 QString radToDmsPStr(const double angle, const int precision, const bool useD)
 {
-	const QChar degsign = (useD ? 'd' : 0x00B0);
+	const QChar degsign = (useD ? 'd' : QChar(0x00B0));
 	bool sign;
 	unsigned int d,m;
 	double s;
@@ -317,9 +385,11 @@ QString radToDmsPStr(const double angle, const int precision, const bool useD)
 	int width = 2;
 	if (precision>0)
 		width = 3 + precision;
-	os << qSetRealNumberPrecision(precision);
-	os << fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
-
+#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+	os << qSetRealNumberPrecision(precision) << Qt::fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
+#else
+	os << qSetRealNumberPrecision(precision) << fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
+#endif
 	return str;
 }
 
@@ -850,10 +920,17 @@ QString localeDateString(const int year, const int month, const int day, const i
 	QDate test(year, month, day);
 
 	// try to avoid QDate's non-astronomical time here, don't do BCE or year 0.
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	if (year > 0 && test.isValid() && !test.toString(QLocale().dateFormat(QLocale::ShortFormat)).isEmpty())
+	{
+		return test.toString(QLocale().dateFormat(QLocale::ShortFormat));
+	}
+#else
 	if (year > 0 && test.isValid() && !test.toString(Qt::DefaultLocaleShortDate).isEmpty())
 	{
 		return test.toString(Qt::DefaultLocaleShortDate);
 	}
+#endif
 	else
 	{
 		return localeDateString(year,month,day,dayOfWeek,QLocale().dateFormat(QLocale::ShortFormat));

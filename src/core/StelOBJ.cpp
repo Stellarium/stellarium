@@ -114,7 +114,7 @@ bool StelOBJ::parseBool(const ParseParams &params, bool &out, int paramsStart)
 	}
 
 
-	const QStringRef& cmd = params.at(paramsStart);
+	const ParseParam& cmd = params.at(paramsStart);
 	out = (CMD_CMP("1") || CMD_CMP("true") || CMD_CMP("TRUE") || CMD_CMP("yes") || CMD_CMP("YES"));
 
 	return true;
@@ -318,7 +318,11 @@ bool StelOBJ::parseFace(const ParseParams& params, const V3Vec& posList, const V
 	for(int i =0; i<vtxAmount;++i)
 	{
 		//split on slash
-		QVector<QStringRef> split = params.at(i+1).split('/');
+		#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		ParseParams split = params.at(i+1).split('/').toVector();
+		#else
+		ParseParams split = params.at(i+1).split('/');
+		#endif
 		switch(split.size())
 		{
 			case 1: //no slash, only position
@@ -439,14 +443,14 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 		//make sure only spaces are the separator
 		QString line = stream.readLine().simplified();
 		//split line by space		
-		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-		QVector<QStringRef> splits = line.splitRef(' ',Qt::SkipEmptyParts);
+		#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		ParseParams splits = ParseParam(line).split(' ',Qt::SkipEmptyParts).toVector();
 		#else
-		QVector<QStringRef> splits = line.splitRef(' ',QString::SkipEmptyParts);
+		ParseParams splits = line.splitRef(' ',QString::SkipEmptyParts);
 		#endif
 		if(!splits.isEmpty())
 		{
-			const QStringRef& cmd = splits.at(0);
+			const ParseParam& cmd = splits.at(0);
 
 			//macro to make sure a material is currently active
 			#define CHECK_MTL() if(!curMaterial) { ok = false; qCCritical(stelOBJ)<<"Encountered material statement without active material"; }
@@ -623,7 +627,7 @@ StelOBJ::MaterialList StelOBJ::Material::loadFromFile(const QString &filename)
 					curMaterial->illum = static_cast<Illum>(tmp);
 				}
 			}
-			else if(!cmd.startsWith("#"))
+			else if(!cmd.startsWith(QChar('#')))
 			{
 				CHECK_MTL()
 				if(ok)
@@ -658,7 +662,11 @@ bool StelOBJ::Material::parseBool(const QStringList &params, bool &out)
 	ParseParams pp(params.size());
 	for(int i = 0; i< params.size();++i)
 	{
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		pp[i] = params.at(i);
+#else
 		pp[i] = QStringRef(&params.at(i));
+#endif
 	}
 	return StelOBJ::parseBool(pp,out,0);
 }
@@ -668,7 +676,11 @@ bool StelOBJ::Material::parseFloat(const QStringList &params, float &out)
 	ParseParams pp(params.size());
 	for(int i = 0; i< params.size();++i)
 	{
-		pp[i] = QStringRef(&params.at(i));
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		pp[i] = params.at(i);
+#else
+		pp[i] = ParseParam(&params.at(i));
+#endif
 	}
 	return StelOBJ::parseFloat(pp,out,0);
 }
@@ -678,7 +690,11 @@ bool StelOBJ::Material::parseVec2d(const QStringList &params, Vec2d &out)
 	ParseParams pp(params.size());
 	for(int i = 0; i< params.size();++i)
 	{
-		pp[i] = QStringRef(&params.at(i));
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		pp[i] = params.at(i);
+#else
+		pp[i] = ParseParam(&params.at(i));
+#endif
 	}
 	return StelOBJ::parseVec2(pp,out,0);
 }
@@ -741,14 +757,14 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 		QString line = stream.readLine().trimmed();
 
 		//split line by whitespace
-		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
-		QVector<QStringRef> splits = line.splitRef(separator, Qt::SkipEmptyParts);
+		#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		ParseParams splits = ParseParam(line).split(separator, Qt::SkipEmptyParts).toVector();
 		#else
-		QVector<QStringRef> splits = line.splitRef(separator, QString::SkipEmptyParts);
+		ParseParams splits = line.splitRef(separator, QString::SkipEmptyParts);
 		#endif
 		if(!splits.isEmpty())
 		{
-			const QStringRef& cmd = splits.at(0);
+			const ParseParam& cmd = splits.at(0);
 
 			bool ok = true;
 
@@ -917,7 +933,7 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 			{
 				if(!smoothGroupWarned)
 				{
-					qCWarning(stelOBJ)<<"Smoothing groups are not supported, consider re-exporting your model from blender";
+					qCWarning(stelOBJ)<<"Smoothing groups are not supported, consider re-exporting your model from Blender";
 					smoothGroupWarned = true;
 				}
 			}
@@ -945,8 +961,8 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 
 	qCDebug(stelOBJ)<<"Loaded OBJ in"<<timer.elapsed()<<"ms";
 	qCDebug(stelOBJ, "Parsed %d positions, %d normals, %d texture coordinates, %d materials",
-		posList.size(), normalList.size(), texList.size(), m_materials.size());
-	qCDebug(stelOBJ, "Created %d vertices, %d faces, %d objects", m_vertices.size(), getFaceCount(), m_objects.size());
+		int(posList.size()), int(normalList.size()), int(texList.size()), int(m_materials.size()));
+	qCDebug(stelOBJ, "Created %d vertices, %d faces, %d objects", int(m_vertices.size()), getFaceCount(), int(m_objects.size()));
 
 	//perform post processing
 	performPostProcessing(normalList.isEmpty());

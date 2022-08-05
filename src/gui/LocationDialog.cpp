@@ -140,7 +140,11 @@ void LocationDialog::createDialogContent()
 	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));
 	connect(ui->deleteLocationFromListPushButton, SIGNAL(clicked()), this, SLOT(deleteCurrentLocationFromList()));
 	connect(ui->resetListPushButton, SIGNAL(clicked()), this, SLOT(resetLocationList()));
+#if (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
+	connect(ui->regionNameComboBox, SIGNAL(textActivated(const QString &)), this, SLOT(filterSitesByRegion()));
+#else
 	connect(ui->regionNameComboBox, SIGNAL(activated(const QString &)), this, SLOT(filterSitesByRegion()));
+#endif
 
 	StelCore* core = StelApp::getInstance().getCore();
 	const StelLocation& currentLocation = core->getCurrentLocation();
@@ -261,9 +265,9 @@ void LocationDialog::disconnectEditSignals()
 	disconnect(ui->longitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
 	disconnect(ui->latitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
 	disconnect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setLocationFromCoords(int)));
-	disconnect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));	
-	disconnect(ui->regionNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
-	disconnect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(saveTimeZone()));
+	disconnect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(moveToAnotherPlanet()));
+	disconnect(ui->regionNameComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(reportEdit()));
+	disconnect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(saveTimeZone()));
 	disconnect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
 }
 
@@ -272,9 +276,9 @@ void LocationDialog::connectEditSignals()
 	connect(ui->longitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
 	connect(ui->latitudeSpinBox, SIGNAL(valueChanged()), this, SLOT(setLocationFromCoords()));
 	connect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setLocationFromCoords(int)));
-	connect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));
-	connect(ui->regionNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
-	connect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(saveTimeZone()));
+	connect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(moveToAnotherPlanet()));
+	connect(ui->regionNameComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(reportEdit()));
+	connect(ui->timeZoneNameComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(saveTimeZone()));
 	connect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
 }
 
@@ -569,7 +573,7 @@ void LocationDialog::setLocationFromMap(double longitude, double latitude)
 }
 
 // Called when the planet name is changed by hand
-void LocationDialog::moveToAnotherPlanet(const QString&)
+void LocationDialog::moveToAnotherPlanet()
 {
 	reportEdit();
 	StelLocation loc = locationFromFields();

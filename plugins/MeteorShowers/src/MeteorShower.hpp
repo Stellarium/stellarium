@@ -119,6 +119,7 @@ public:
 	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
 	virtual QString getType(void) const Q_DECL_OVERRIDE { return METEORSHOWER_TYPE; }
 	virtual QString getObjectType(void) const Q_DECL_OVERRIDE { return N_("meteor shower"); }
+	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE { return q_(getObjectType()); }
 	virtual QString getID(void) const Q_DECL_OVERRIDE { return m_showerID; }
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE { return m_designation.trimmed(); }
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE	{ return q_(m_designation.trimmed()); }

@@ -98,6 +98,7 @@ public:
 	//! @enum HECPositionsColumns
 	enum HECPositionsColumns {
 		HECColumnName,          //! name of the planet
+		HECColumnSymbol,        //! symbol of the planet
 		HECColumnLatitude,      //! heliocentric ecliptical latitude
 		HECColumnLongitude,     //! heliocentric ecliptical longitude
 		HECColumnDistance,      //! distance
@@ -154,7 +155,8 @@ public:
 		GreatestElongation	= 2,
 		StationaryPoint		= 3,
 		OrbitalPoint		= 4,
-		Shadows			= 5
+		Shadows			= 5,
+		Quadrature		= 6
 	};
 
 	//! Defines the number and the order of the columns in the WUT tool
@@ -168,6 +170,7 @@ public:
 		WUTSetTime,             //! set time
 		WUTAngularSize,         //! angular size
 		WUTConstellation,       //! IAU constellation
+		WUTObjectType,	        //! object type
 		WUTCount                //! total number of columns
 	};
 
@@ -261,6 +264,7 @@ private slots:
 	void saveHECPositions();
 	void selectCurrentHECPosition(const QModelIndex &modelIndex);
 	void markCurrentHECPosition(const QModelIndex &modelIndex);
+	void saveHECFlagMinorPlanets(bool b);
 
 	void saveCelestialPositionsMagnitudeLimit(double mag);
 	void saveCelestialPositionsHorizontalCoordinatesFlag(bool b);
@@ -328,6 +332,7 @@ private slots:
 	void savePhenomenaCelestialGroup(int index);
 	void savePhenomenaOppositionFlag(bool b);
 	void savePhenomenaPerihelionAphelionFlag(bool b);
+	void savePhenomenaElongationsQuadraturesFlag(bool b);
 
 	//! Compute planetary data
 	void saveFirstCelestialBody(int index);
@@ -395,7 +400,7 @@ private slots:
 	void showExtraEphemerisDialog();
 	void showCustomStepsDialog();
 
-	void saveGraph(QtCharts::QChartView *graph);
+	void saveGraph(QChartView *graph);
 
 private:
 	class AstroCalcExtraEphemerisDialog* extraEphemerisDialog;
@@ -431,6 +436,10 @@ private:
 
 	void saveTableAsCSV(const QString& fileName, QTreeWidget* tWidget, QStringList& headers);
 	void saveTableAsBookmarks(const QString& fileName, QTreeWidget* tWidget);
+
+	void populateToolTips();
+	//! Get the list of selected dwarf and minor planets
+	QList<PlanetP> getSelectedMinorPlanets();
 
 	//! Update header names for celestial positions tables
 	void setCelestialPositionsHeaderNames();
@@ -507,13 +516,13 @@ private:
 	//! @arg decimalDegrees use decimal format, not DMS/HMS
 	//! @return QPair(lngStr, latStr) formatted output strings
 	static QPair<QString, QString> getStringCoordinates(const Vec3d coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees);
-	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec4d RTSTime,
-					  double maxElevation, double angularSize, QString constellation, bool decimalDegrees = false);
+	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec4d RTSTime, double maxElevation,
+			  double angularSize, QString constellation, QString otype, bool decimalDegrees = false);
 	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, double magnitude,
 					QString angularSize, QString angularSizeToolTip, QString extraData,
 					QString extraDataToolTip, QString transitTime, QString maxElevation,
 					QString sElongation, QString objectType);
-	void fillHECPositionTable(QString objectName, QString latitude, QString longitude, double distance);
+	void fillHECPositionTable(QString objectName, QChar objectSymbol, QString latitude, QString longitude, double distance);
 
 	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculates
@@ -536,17 +545,21 @@ private:
 	void fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, float firstObjectMagnitude,
 				   QString secondObjectName, float secondObjectMagnitude, QString separation, QString elevation,
 				   QString elongation, QString angularDistance, QString elongTooltip="", QString angDistTooltip="");
-	//! Calculation greatest elongations
+	//! Calculation of greatest elongations
 	QMap<double, double> findGreatestElongationApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD);
 	bool findPreciseGreatestElongation(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step);
-	//! Calculation stationary points
+	//! Calculation of quadratures
+	QMap<double, double> findQuadratureApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD);
+	bool findPreciseQuadrature(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step);
+	//! Calculation of stationary points
 	QMap<double, double> findStationaryPointApproach(PlanetP& object1, double startJD, double stopJD);
 	bool findPreciseStationaryPoint(QPair<double, double>* out, PlanetP object, double JD, double stopJD, double step, bool retrograde);
 	double findRightAscension(double JD, PlanetP object);
-	//! Calculation perihelion and aphelion points
+	//! Calculation of perihelion and aphelion points
 	QMap<double, double> findOrbitalPointApproach(PlanetP& object1, double startJD, double stopJD);
 	bool findPreciseOrbitalPoint(QPair<double, double>* out, PlanetP object1, double JD, double stopJD, double step, bool minimal);
 	inline double findHeliocentricDistance(double JD, PlanetP object1) const {return object1->getHeliocentricEclipticPos(JD+core->computeDeltaT(JD)/86400.).length();}
+	bool isSecondObjectRight(double JD, PlanetP object1, StelObjectP object2);
 
 	// Signal that a plot has to be redone
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotLunarElongationGraph, plotAziVsTime;

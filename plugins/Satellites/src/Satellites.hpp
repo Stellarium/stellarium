@@ -195,6 +195,9 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(bool flagVFAltitude			READ getFlagVFAltitude			WRITE setFlagVFAltitude			NOTIFY flagVFAltitudeChanged)
 	Q_PROPERTY(double minVFAltitude			READ getMinVFAltitude			WRITE setMinVFAltitude			NOTIFY minVFAltitudeChanged)
 	Q_PROPERTY(double maxVFAltitude			READ getMaxVFAltitude			WRITE setMaxVFAltitude			NOTIFY maxVFAltitudeChanged)
+	Q_PROPERTY(bool flagVFMagnitude			READ getFlagVFMagnitude			WRITE setFlagVFMagnitude		NOTIFY flagVFMagnitudeChanged)
+	Q_PROPERTY(double minVFMagnitude		READ getMinVFMagnitude			WRITE setMinVFMagnitude			NOTIFY minVFMagnitudeChanged)
+	Q_PROPERTY(double maxVFMagnitude		READ getMaxVFMagnitude			WRITE setMaxVFMagnitude			NOTIFY maxVFMagnitudeChanged)
 
 
 public:
@@ -443,10 +446,7 @@ signals:
 	void maxCFApogeeChanged(double v);
 	void flagCFPerigeeChanged(bool b);
 	void minCFPerigeeChanged(double v);
-	void maxCFPerigeeChanged(double v);
-	void flagVFAltitudeChanged(bool b);
-	void minVFAltitudeChanged(double v);
-	void maxVFAltitudeChanged(double v);
+	void maxCFPerigeeChanged(double v);	
 	void flagCFEccentricityChanged(bool b);
 	void minCFEccentricityChanged(double v);
 	void maxCFEccentricityChanged(double v);
@@ -459,6 +459,12 @@ signals:
 	void flagCFRCSChanged(bool b);
 	void minCFRCSChanged(double v);
 	void maxCFRCSChanged(double v);
+	void flagVFAltitudeChanged(bool b);
+	void minVFAltitudeChanged(double v);
+	void maxVFAltitudeChanged(double v);
+	void flagVFMagnitudeChanged(bool b);
+	void minVFMagnitudeChanged(double v);
+	void maxVFMagnitudeChanged(double v);
 
 	//! Emitted when some of the plugin settings have been changed.
 	//! Used to communicate with the configuration window.
@@ -682,6 +688,18 @@ public slots:
 	void setMinVFAltitude(double v);
 	double getMinVFAltitude() { return Satellite::minVFAltitude; }
 
+	//! Set whether visual filter 'magnitude' enabled.
+	void setFlagVFMagnitude(bool b);
+	bool getFlagVFMagnitude() { return Satellite::flagVFMagnitude; }
+
+	//! Set visual filter 'magnitude' maximum value.
+	void setMaxVFMagnitude(double v);
+	double getMaxVFMagnitude() { return Satellite::maxVFMagnitude; }
+
+	//! Set visual filter 'magnitude' minimum value.
+	void setMinVFMagnitude(double v);
+	double getMinVFMagnitude() { return Satellite::minVFMagnitude; }
+
 	//! Set whether custom filter 'eccentricity' enabled.
 	//! Emits customFilterChanged()
 	void setFlagCFEccentricity(bool b);
@@ -758,7 +776,7 @@ private slots:
 
 private:
 	//! Drawing the circles of Earth's umbra and penumbra
-	void drawCircles(StelCore* core);
+	void drawCircles(StelCore* core, StelPainter& painter);
 	//! Add to the current collection the satellite described by the data.
 	//! @warning Use only in other methods! Does not update satelliteListModel!
 	//! @todo This probably could be done easier if Satellite had a constructor

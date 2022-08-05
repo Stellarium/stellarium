@@ -457,7 +457,7 @@ void ShaderMgr::buildUniformCache(QOpenGLShaderProgram &program)
 	{
 		GL(gl->glGetActiveUniform(prog,i,bufSize,&length,&size,&type,buf.data()));
 		QString str(buf);
-		str = str.trimmed(); // no idea if this is required
+		str = str.left(str.indexOf(QChar(0x00)));
 
 		GLint loc = program.uniformLocation(str);
 

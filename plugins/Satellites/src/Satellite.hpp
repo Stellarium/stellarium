@@ -75,13 +75,13 @@ enum SatFlag
 {
 	SatNoFlags		= 0x000000,
 	SatDisplayed		= 0x000001,
-	SatNotDisplayed	= 0x000002,
+	SatNotDisplayed		= 0x000002,
 	SatUser			= 0x000004,
-	SatOrbit			= 0x000008,
+	SatOrbit		= 0x000008,
 	SatNew			= 0x000010,
-	SatError			= 0x000020,
+	SatError		= 0x000020,
 	SatSmallSize		= 0x000040,
-	SatMediumSize	= 0x000080,
+	SatMediumSize		= 0x000080,
 	SatLargeSize		= 0x000100,
 	SatLEO			= 0x000200,
 	SatMEO			= 0x000400,
@@ -92,9 +92,10 @@ enum SatFlag
 	SatEquatOrbit		= 0x008000,
 	SatPSSO			= 0x010000,
 	SatHEarthO		= 0x020000,
-	SatOutdatedTLE	= 0x040000,
-	SatCustomFilter	= 0x080000,
-	SatCommunication	= 0x100000
+	SatOutdatedTLE		= 0x040000,
+	SatCustomFilter		= 0x080000,
+	SatCommunication	= 0x100000,
+	SatReentry		= 0x200000
 };
 typedef QFlags<SatFlag> SatFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
@@ -123,11 +124,11 @@ public:
 	//! @enum OptStatus operational statuses
 	enum OptStatus
 	{
-		StatusOperational		= 1,
+		StatusOperational			= 1,
 		StatusNonoperational		= 2,
 		StatusPartiallyOperational	= 3,
 		StatusStandby			= 4,
-		StatusSpare			= 5,
+		StatusSpare				= 5,
 		StatusExtendedMission		= 6,
 		StatusDecayed			= 7,
 		StatusUnknown			= 0
@@ -152,6 +153,10 @@ public:
 	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
 	{
 		return N_("artificial satellite");
+	}
+	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE
+	{
+		return q_(getObjectType());
 	}
 
 	virtual QString getID(void) const Q_DECL_OVERRIDE
@@ -362,6 +367,9 @@ private:
 	static bool flagVFAltitude;
 	static double minVFAltitude;
 	static double maxVFAltitude;
+	static bool flagVFMagnitude;
+	static double minVFMagnitude;
+	static double maxVFMagnitude;
 
 	void draw(StelCore *core, StelPainter& painter);
 

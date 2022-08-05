@@ -17,7 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelUtils.hpp"
 
 #include <cstdlib>
 #include <QCoreApplication>
@@ -56,8 +55,11 @@ void StelFileMgr::init()
 	{
 		userDir = winApiPath + "\\Stellarium";
 	}
-#elif defined(Q_OS_MAC)
+#elif defined(Q_OS_MACOS)
 	userDir = QDir::homePath() + "/Library/Application Support/Stellarium";
+#elif defined(Q_OS_HAIKU)
+	// Use system settings dir
+	userDir = QDir::homePath() + "/config/settings/Stellarium";
 #else
 	userDir = QDir::homePath() + "/.stellarium";
 #endif
@@ -101,7 +103,7 @@ void StelFileMgr::init()
 	}	
 	else
 	{
-	#if defined(Q_OS_MAC)
+	#if defined(Q_OS_MACOS)
 		QString relativePath = "/../Resources";
 		if (QCoreApplication::applicationDirPath().contains("src")) {
 			relativePath = "/../..";
@@ -208,7 +210,7 @@ QString StelFileMgr::findFile(const QString& path, Flags flags)
 	// explicitly specified relative paths
 	if (path[0] == '.')
 	{
-		if (fileFlagsCheck(path, flags))
+		if (fileFlagsCheck(QFileInfo(path), flags))
 			return path;
 		else
 		{
@@ -220,7 +222,7 @@ QString StelFileMgr::findFile(const QString& path, Flags flags)
 	// explicitly specified absolute paths
 	if (isAbsolute(path))
 	{
-		if (fileFlagsCheck(path, flags))
+		if (fileFlagsCheck(QFileInfo(path), flags))
 			return path;
 		else
 		{
@@ -258,7 +260,7 @@ QStringList StelFileMgr::findFileInAllPaths(const QString &path, const Flags &fl
 	// explicitly specified relative paths
 	if (path[0] == '.')
 	{
-		if (fileFlagsCheck(path, flags))
+		if (fileFlagsCheck(QFileInfo(path), flags))
 			filePaths.append(path);
 		return filePaths;
 	}
@@ -266,7 +268,7 @@ QStringList StelFileMgr::findFileInAllPaths(const QString &path, const Flags &fl
 	// explicitly specified absolute paths
 	if ( isAbsolute(path) )
 	{
-		if (fileFlagsCheck(path, flags))
+		if (fileFlagsCheck(QFileInfo(path), flags))
 			filePaths.append(path);
 		return filePaths;
 	}
@@ -469,7 +471,7 @@ QString StelFileMgr::getLocaleDir()
 	else
 	{
 		// If not found, try to look in the standard build directory (useful for developer)
-		localePath = QCoreApplication::applicationDirPath() + "/../translations";
+		localePath = QFileInfo(QCoreApplication::applicationDirPath() + QString("/../translations"));
 		if (localePath.exists())
 		{
 			return localePath.filePath();

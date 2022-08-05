@@ -53,7 +53,11 @@ void StelAudioMgr::loadSound(const QString& filename, const QString& id)
 
 	QMediaPlayer* sound = new QMediaPlayer();
 	QString path = QFileInfo(filename).absoluteFilePath();
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	sound->setSource(QUrl::fromLocalFile(path));
+#else
 	sound->setMedia(QMediaContent(QUrl::fromLocalFile(path)));
+#endif
 	audioObjects[id] = sound;
 }
 
@@ -64,7 +68,11 @@ void StelAudioMgr::playSound(const QString& id)
 		if (audioObjects[id]!=Q_NULLPTR)
 		{
 			// if already playing, stop and play from the start
+			#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+			if (audioObjects[id]->playbackState()==QMediaPlayer::PlayingState)
+			#else
 			if (audioObjects[id]->state()==QMediaPlayer::PlayingState)
+			#endif
 				audioObjects[id]->stop();
 
 			// otherwise just play it

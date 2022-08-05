@@ -17,7 +17,6 @@
  */
 
 #include "CustomObject.hpp"
-#include "CustomObjectMgr.hpp"
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
@@ -25,10 +24,7 @@
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTexture.hpp"
-#include "StelModuleMgr.hpp"
 #include "StelProjector.hpp"
-#include "StelUtils.hpp"
-#include "Planet.hpp"
 
 const QString CustomObject::CUSTOMOBJECT_TYPE = QStringLiteral("CustomObject");
 Vec3f CustomObject::markerColor = Vec3f(0.1f,1.0f,0.1f);
@@ -81,7 +77,7 @@ QString CustomObject::getInfoString(const StelCore* core, const InfoStringGroup&
 		oss << "<h2>" << getNameI18n() << "</h2>";
 
 	if (flags&ObjectType)
-		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getObjectType())) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
 
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);

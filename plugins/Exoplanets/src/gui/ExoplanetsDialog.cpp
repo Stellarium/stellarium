@@ -45,13 +45,10 @@
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
 
-using namespace QtCharts;
-
 ExoplanetsDialog::ExoplanetsDialog()
 	: StelDialog("Exoplanets")
 	, ep(Q_NULLPTR)
 	, updateTimer(Q_NULLPTR)
-	, chart(Q_NULLPTR)
 {
         ui = new Ui_exoplanetsDialog;
 	exoplanetsHeader.clear();
@@ -66,8 +63,6 @@ ExoplanetsDialog::~ExoplanetsDialog()
 		updateTimer->stop();
 		delete updateTimer;
 		updateTimer = Q_NULLPTR;
-		if (chart)
-			delete chart;
 	}
 	delete ui;
 }
@@ -790,7 +785,7 @@ void ExoplanetsDialog::drawDiagram()
 
 	QList<double> aX = ep->getExoplanetsData(currentAxisX), aY = ep->getExoplanetsData(currentAxisY);
 
-	QtCharts::QChart *chart=new QtCharts::QChart();
+	QChart *chart=new QChart();
 	chart->setBackgroundBrush(QBrush(QColor(86, 87, 90)));
 	chart->setTitleBrush(QBrush(Qt::white));
 	chart->setMargins(QMargins(2, 1, 2, 1)); // set to 0/0/0/0 for max space usage. This is between the title/axis labels and the enclosing QChartView.
@@ -798,7 +793,7 @@ void ExoplanetsDialog::drawDiagram()
 	chart->setBackgroundRoundness(0); // remove rounded corners
 	chart->legend()->hide();
 
-	QtCharts::QScatterSeries *series=new QScatterSeries();
+	QScatterSeries *series=new QScatterSeries();
 	QAbstractAxis *chartXAxis, *chartYAxis;
 	for (int i=0; i<aX.length(); i++)
 	{

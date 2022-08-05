@@ -277,7 +277,9 @@ NMEALookupHelper::NMEALookupHelper(QObject *parent)
 			qDebug() << "  VendorID:"       << pi.vendorIdentifier();
 			qDebug() << "  ProductID:"      << pi.productIdentifier();
 			qDebug() << "  SerialNumber:"   << pi.serialNumber();
+#if (QT_VERSION<QT_VERSION_CHECK(5,14,0))
 			qDebug() << "  Busy:"           << pi.isBusy();
+#endif
 			qDebug() << "  Null:"           << pi.isNull();
 			if (pi.portName()==portName)
 			{
@@ -628,7 +630,11 @@ LocationMap StelLocationMgr::loadCities(const QString& fileName, bool isUserLoca
 	// Read the data serialized from the file.
 	// Code below borrowed from Marble (http://edu.kde.org/marble/)
 	QTextStream sourcestream(&sourcefile);
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	sourcestream.setEncoding(QStringConverter::Utf8);
+#else
 	sourcestream.setCodec("UTF-8");
+#endif
 	StelLocation loc;
 	while (!sourcestream.atEnd())
 	{
@@ -817,7 +823,11 @@ bool StelLocationMgr::saveUserLocation(const StelLocation& loc)
 	}
 
 	QTextStream outstream(&sourcefile);
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	outstream.setEncoding(QStringConverter::Utf8);
+#else
 	outstream.setCodec("UTF-8");
+#endif
 	outstream << loc.serializeToLine() << '\n';
 	sourcefile.close();
 
@@ -875,7 +885,11 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 	}
 
 	QTextStream outstream(&sourcefile);
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	outstream.setEncoding(QStringConverter::Utf8);
+#else
 	outstream.setCodec("UTF-8");
+#endif
 
 	for (QMap<QString, StelLocation>::ConstIterator iter=locations.constBegin();iter!=locations.constEnd();++iter)
 	{

@@ -246,6 +246,10 @@ void Calendars::init()
 
 	foreach (Calendar* cal, calendars)
 	{
+#ifndef NDEBUG
+		// We must set JD explicitly to enforce creation of parts for a debug mode test in StelMainView::init().
+		cal->setJD(jd);
+#endif
 		connect(cal, SIGNAL(jdChanged(double)), StelApp::getInstance().getCore(), SLOT(setJD(double)));
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()), cal, SLOT(retranslate()));
 	}

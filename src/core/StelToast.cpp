@@ -26,6 +26,7 @@
 #include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelToast.hpp"
+#include "StelToneReproducer.hpp"
 #include "LandscapeMgr.hpp"
 #include "Planet.hpp"
 

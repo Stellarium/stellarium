@@ -88,6 +88,9 @@ double Satellite::maxCFRCS = 100.;
 bool Satellite::flagVFAltitude = false;
 double Satellite::minVFAltitude = 200.;
 double Satellite::maxVFAltitude = 500.;
+bool Satellite::flagVFMagnitude = false;
+double Satellite::minVFMagnitude = 8.;
+double Satellite::maxVFMagnitude = -8.;
 
 #if (SATELLITES_PLUGIN_IRIDIUM == 1)
 double Satellite::sunReflAngle = 180.;
@@ -210,12 +213,12 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	moon = GETSTELMODULE(SolarSystem)->getMoon();
 	sun = GETSTELMODULE(SolarSystem)->getSun();
 
-	// Please sync text in Satellites.cpp file after adding new types
 	visibilityDescription={
-		{ gSatWrapper::RADAR_SUN, "The satellite and the observer are in sunlight" },
-		{ gSatWrapper::VISIBLE, "The satellite is visible" },
-		{ gSatWrapper::RADAR_NIGHT, "The satellite is eclipsed" },
-		{ gSatWrapper::NOT_VISIBLE, "The satellite is not visible" }
+		{ gSatWrapper::RADAR_SUN,	N_("The satellite and the observer are in sunlight") },
+		{ gSatWrapper::VISIBLE,		N_("The satellite is sunlit and the observer is in the dark") },
+		{ gSatWrapper::RADAR_NIGHT,	N_("The satellite isn't sunlit") },
+		{ gSatWrapper::PENUMBRAL,	N_("The satellite is in penumbra") },
+		{ gSatWrapper::ANNULAR,		N_("The satellite is eclipsed") }
 	};
 
 	update(0.);
@@ -291,12 +294,16 @@ QVariantMap Satellite::getMap(void)
 	return map;
 }
 
-float Satellite::getSelectPriority(const StelCore*) const
+float Satellite::getSelectPriority(const StelCore* core) const
 {
+	float limit = -10.f;
 	if (flagVFAltitude) // the visual filter is enabled
-		return (minVFAltitude<=height && height<=maxVFAltitude) ? -10. : 50.;
+		limit = (minVFAltitude<=height && height<=maxVFAltitude) ? -10.f : 50.f;
 
-	return -10.;
+	if (flagVFMagnitude) // the visual filter is enabled
+		limit = ((maxVFMagnitude<=getVMagnitude(core) && getVMagnitude(core)<=minVFMagnitude) && (stdMag<99. || RCS>0.)) ? -10.f : 50.f;
+
+	return limit;
 }
 
 QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
@@ -327,7 +334,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	}
 
 	if (flags & ObjectType)
-		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getObjectType()))  << "<br/>";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n())  << "<br/>";
 	
 	if ((flags & Magnitude) && (stdMag<99. || RCS>0.) && (visibility==gSatWrapper::VISIBLE))
 	{
@@ -471,7 +478,7 @@ QString Satellite::getCommLinkInfo(CommLink comm) const
 	// Translate some specific communications terms
 	// See end of Satellites.cpp file to define translatable terms
 	QStringList commTerms;
-	commTerms << "uplink" << "downlink" << "beacon" << "telemetry";
+	commTerms << "uplink" << "downlink" << "beacon" << "telemetry" << "video" << "broadband" << "command";
 	for (auto& term: commTerms)
 	{
 		commLinkData.replace(term, q_(term));
@@ -500,7 +507,7 @@ void Satellite::calculateSatDataFromLine2(QString tle)
 	// Details: http://www.satobs.org/seesat/Dec-2002/0197.html
 	const double meanEarthRadius = 6371.0088;
 	const double k = 8681663.653;
-	const double meanMotion = tle.left(63).rightRef(11).toDouble();
+	const double meanMotion = tle.left(63).right(11).toDouble();
 	const double semiMajorAxis = std::cbrt((k/meanMotion)*(k/meanMotion));
 	eccentricity = QString("0.%1").arg(tle.left(33).right(7)).toDouble();
 	perigee = semiMajorAxis*(1.0 - eccentricity) - meanEarthRadius;
@@ -513,12 +520,12 @@ void Satellite::calculateEpochFromLine1(QString tle)
 {
 	QString epochStr;
 	// Details: https://celestrak.com/columns/v04n03/ or https://en.wikipedia.org/wiki/Two-line_element_set
-	int year = tle.left(20).rightRef(2).toInt();
+	int year = tle.left(20).right(2).toInt();
 	if (year>=0 && year<57)
 		year += 2000;
 	else
 		year += 1900;
-	const double dayOfYear = tle.left(32).rightRef(12).toDouble();
+	const double dayOfYear = tle.left(32).right(12).toDouble();
 	QDate epoch = QDate(year, 1, 1).addDays(dayOfYear - 1);
 	if (!epoch.isValid())
 		epochStr = qc_("unknown", "unknown date");
@@ -811,19 +818,13 @@ void Satellite::update(double)
 		velocity                 = pSatWrapper->getTEMEVel();
 		latLongSubPointPosition  = pSatWrapper->getSubPoint();
 		height                   = latLongSubPointPosition[2]; // km
-		if (height < 70.0)
+		if (height < 0.1)
 		{
 			// The orbit is no longer valid.  Causes include very out of date
 			// TLE, system date and time out of a reasonable range, and orbital
 			// degradation and re-entry of a satellite.  In any of these cases
 			// we might end up with a problem - usually a crash of Stellarium
-			// because of a div/0 or something.  To prevent this, we turn off
-			// the satellite when the computed height is 70km.
-			// Low Earth Orbit (LEO):
-			// A geocentric orbit with an altitude much less than the Earth's radius.
-			// Satellites in this orbit are between 80 and 2000 kilometres above
-			// the Earth's surface.
-			// Source: https://www.nasa.gov/directorates/heo/scan/definitions/glossary/index.html#L
+			// because of a div/0 or something.
 			qWarning() << "Satellite has invalid orbit:" << name << id;
 			orbitValid = false;
 			displayed = false; // It shouldn't be displayed!
@@ -902,6 +903,8 @@ SatFlags Satellite::getFlags() const
 		flags |= SatCustomFilter;
 	if (!comms.isEmpty())
 		flags |= SatCommunication;
+	if (apogee<=100.0 || height<=100.0) // Karman line, atmosphere
+		flags |= SatReentry;
 
 	return flags;
 }
@@ -956,7 +959,7 @@ void Satellite::parseInternationalDesignator(const QString& tle1)
 	QStringList tleData = tle1.split(" ");
 	QString rawString = tleData.at(2);
 	bool ok;
-	int year = rawString.leftRef(2).toInt(&ok);
+	int year = rawString.left(2).toInt(&ok);
 	if (!rawString.isEmpty() && ok)
 	{
 		// Y2K bug :) I wonder what NORAD will do in 2057. :)
@@ -1005,6 +1008,16 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 			return;
 	}
 
+	const float magSat = getVMagnitude(core);
+	if (flagVFMagnitude)
+	{
+		// visual filter is activated and he is applicable!
+		if (!(stdMag<99. || RCS>0.))
+			return;
+		if (!(maxVFMagnitude<=magSat && magSat<=minVFMagnitude))
+			return;
+	}
+
 	Vec3d win;
 	if (painter.getProjector()->projectCheck(XYZ, win))
 	{
@@ -1032,7 +1045,6 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 			}
 			else
 			{
-				const float magSat = getVMagnitude(core);
 				StelSkyDrawer* sd = core->getSkyDrawer();
 				RCMag rcMag;
 

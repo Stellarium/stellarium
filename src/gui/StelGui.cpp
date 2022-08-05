@@ -23,26 +23,16 @@
 #include "SkyGui.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelProjector.hpp"
 #include "StelMovementMgr.hpp"
-#include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelIniParser.hpp"
 #include "StelMainView.hpp"
 #include "StelObjectMgr.hpp"
-#include "LandscapeMgr.hpp"
-#include "StarMgr.hpp"
-#include "NebulaMgr.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelPropertyMgr.hpp"
 
-#include "SporadicMeteorMgr.hpp"
 #include "StelObjectType.hpp"
 #include "StelObject.hpp"
-#include "SolarSystem.hpp"
 #include "StelStyle.hpp"
-#include "StelSkyDrawer.hpp"
 #ifdef ENABLE_SCRIPT_CONSOLE
 #include "ScriptConsole.hpp"
 #endif
@@ -225,13 +215,13 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
 
 	// XXX: this should probably go into the script manager.
-	QString datetimeGroup = N_("Date and Time");
 	QString windowsGroup = N_("Windows");
 	QString miscGroup = N_("Miscellaneous");
 	QString infoGroup = N_("Selected object information");
 	actionsMgr->addAction("actionQuit_Global", miscGroup, N_("Quit"), this, "quit()", "Ctrl+Q", "Ctrl+X");
 
 #ifdef ENABLE_SCRIPTING
+	QString datetimeGroup = N_("Date and Time");
 	actionsMgr->addAction("actionIncrease_Script_Speed", datetimeGroup, N_("Speed up the script execution rate"), this, "increaseScriptSpeed()");
 	actionsMgr->addAction("actionDecrease_Script_Speed", datetimeGroup, N_("Slow down the script execution rate"), this, "decreaseScriptSpeed()");
 	actionsMgr->addAction("actionSet_Real_Script_Speed", datetimeGroup, N_("Set the normal script execution rate"), this, "setRealScriptSpeed()");
