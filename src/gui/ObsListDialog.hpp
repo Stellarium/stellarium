@@ -107,7 +107,7 @@ private:
 
     void saveBookmarksInObsListJsonFile(const QHash<QString, observingListItem> &bookmarksCollection);
 
-    auto checkIfBookmarksListExists(QVariantMap allListsMap) -> bool;
+    auto checkIfBookmarksListExists(const QVariantMap& allListsMap) -> bool;
 
     //! Load list from JSON file
     auto loadListFromJson(const QVariantMap &map, QString listOlud) -> QVariantList;
@@ -119,7 +119,7 @@ private:
     void populateDataInComboBox(QVariantMap map, const QString &defaultListOlud);
 
     //! Sort the obsListTreeView by the column name given in parameter
-    void sortObsListTreeViewByColumnName(QString columnName);
+    void sortObsListTreeViewByColumnName(const QString& columnName);
 
     //! Clear highlights
     void clearHighlight();

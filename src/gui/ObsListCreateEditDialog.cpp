@@ -294,6 +294,7 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
             QString objectDecStr = "";
             bool visibleFlag = false;
             StelUtils::rectToSphe(&ra, &dec, selectedObject[0]->getJ2000EquatorialPos(core));
+
             if (ui->obsListRaCheckBox->isChecked() || objectType == CUSTOM_OBJECT || objectName.isEmpty()) {
                 objectRaStr = StelUtils::radToHmsStr(ra, false).trimmed();
             }
@@ -336,10 +337,6 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
             } else {
                 Location = QString("%1, %2").arg(loc.name, loc.region);
             }
-
-            // TODO only for test: delete after
-            // objectName = "Unnamed object";
-            // *********************************
 
             // Check if the object name is empty.
             if (objectName.isEmpty()) {
@@ -518,6 +515,9 @@ void ObsListCreateEditDialog::saveObservedObjectsInJsonFile() {
 
             // Constellation
             obl.insert(QString(KEY_CONSTELLATION), item.constellation);
+
+            // Visible marker
+            obl.insert(QString(KEY_IS_VISIBLE_MARKER),item.isVisibleMarker);
 
             listOfObjects.push_back(obl);
         }
@@ -794,7 +794,6 @@ void ObsListCreateEditDialog::loadObservingList() {
                     objectMap = object.value<QVariantMap>();
                     int lastRow = obsListListModel->rowCount();
                     QString objectUuid = QUuid::createUuid().toString();
-                    bool visibleFlag = false;
 
                     // Name
                     QString objectName = objectMap.value(QString(KEY_DESIGNATION)).value<QString>();
@@ -826,6 +825,10 @@ void ObsListCreateEditDialog::loadObservingList() {
 
                     // Location
                     QString location = objectMap.value(QString(KEY_LOCATION)).value<QString>();
+
+                    // Visible flag
+                    bool visibleFlag = objectMap.value(QString(KEY_IS_VISIBLE_MARKER)).value<bool>();
+
 
 
                     // Add data into model row
@@ -931,7 +934,7 @@ void ObsListCreateEditDialog::loadBookmarksInObservingList() {
             QVariantMap bookmarksMap = map.value(KEY_BOOKMARKS).toMap();
             observingListItemCollection.clear();
 
-            for (auto bookmarkKey: bookmarksMap.keys()) {
+            for (const auto& bookmarkKey: bookmarksMap.keys()) {
 
                 QVariantMap bookmarkData = bookmarksMap.value(bookmarkKey).toMap();
                 observingListItem item;
@@ -951,7 +954,8 @@ void ObsListCreateEditDialog::loadBookmarksInObservingList() {
                     QString raStr = bookmarkData.value(KEY_RA).toString();
                     QString decStr = bookmarkData.value(KEY_DEC).toString();
                     if (raStr.isEmpty() || decStr.isEmpty()) {
-                        float ra, dec;
+                        float ra = 0.0;
+                        float dec = 0.0;
                         StelUtils::rectToSphe(&ra, &dec, selectedObject[0]->getJ2000EquatorialPos(core));
                         raStr = StelUtils::radToHmsStr(ra, false).trimmed();
                         decStr = StelUtils::radToDmsStr(dec, false).trimmed();
@@ -992,7 +996,6 @@ void ObsListCreateEditDialog::loadBookmarksInObservingList() {
                     } else {
                         item.location = "";
                     }
-
 
                     // Constallation
                     QVariantMap objectMap = selectedObject[0]->getInfoMap(core);

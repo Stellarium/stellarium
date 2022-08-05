@@ -255,7 +255,7 @@ void ObsListDialog::obsListHighLightAllButtonPressed() {
         QString decStr = item.dec.trimmed();
 
         Vec3d pos;
-        bool status = false;
+        bool status;
         if (!raStr.isEmpty() && !decStr.isEmpty()) {
             StelUtils::spheToRect(StelUtils::getDecAngle(raStr), StelUtils::getDecAngle(decStr), pos);
             status = true;
@@ -473,7 +473,6 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
                         int lastRow = obsListListModel->rowCount();
                         QString objectUuid = QUuid::createUuid().toString();
                         QString objectNameI18n = objectMap.value(QString(KEY_NAME_I18N)).value<QString>();
-                        bool visibleFlag = false;
                         double fov = -1.0;
 
                         // Type
@@ -535,6 +534,9 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
                         if (!fovStr.isEmpty()) {
                             fov = fovStr.toDouble();
                         }
+
+                        // Visible flag
+                        bool visibleFlag = objectMap.value(QString(KEY_IS_VISIBLE_MARKER)).value<bool>();
 
                         addModelRow(lastRow, objectUuid, objectName, objectNameI18n, objectType, objectRaStr,
                                     objectDecStr, objectMagnitudeStr, objectConstellation, date, Location);
@@ -646,7 +648,7 @@ void ObsListDialog::loadBookmarksInObservingList() {
             jsonFile.close();
             QVariantMap bookmarksMap = map.value(KEY_BOOKMARKS).toMap();
 
-            for (auto bookmarkKey: bookmarksMap.keys()) {
+            for (const auto& bookmarkKey: bookmarksMap.keys()) {
 
                 QVariantMap bookmarkData = bookmarksMap.value(bookmarkKey).toMap();
                 observingListItem item;
@@ -663,7 +665,8 @@ void ObsListDialog::loadBookmarksInObservingList() {
                     QString raStr = bookmarkData.value(KEY_RA).toString();
                     QString decStr = bookmarkData.value(KEY_DEC).toString();
                     if (raStr.isEmpty() || decStr.isEmpty()) {
-                        float ra, dec;
+                        float ra = 0.0;
+                        float dec = 0.0;
                         StelUtils::rectToSphe(&ra, &dec, selectedObject[0]->getJ2000EquatorialPos(core));
                         raStr = StelUtils::radToHmsStr(ra, false).trimmed();
                         decStr = StelUtils::radToDmsStr(dec, false).trimmed();
@@ -704,7 +707,6 @@ void ObsListDialog::loadBookmarksInObservingList() {
                     } else {
                         item.location = "";
                     }
-
 
                     // Constallation
                     QVariantMap objectMap = selectedObject[0]->getInfoMap(core);
@@ -850,6 +852,9 @@ void ObsListDialog::saveBookmarksInObsListJsonFile(const QHash<QString, observin
             // Object type
             obl.insert(QString(KEY_OBJECTS_TYPE), item.objtype);
 
+            // Visible marker
+            obl.insert(QString(KEY_IS_VISIBLE_MARKER), item.isVisibleMarker);
+
             listOfObjects.push_back(obl);
 
         }
@@ -887,7 +892,7 @@ void ObsListDialog::saveBookmarksInObsListJsonFile(const QHash<QString, observin
  * Check if bookmarks list already exists in observing list file,
  * in fact if the file of bookarks has already be loaded.
 */
-auto ObsListDialog::checkIfBookmarksListExists(QVariantMap allListsMap) -> bool {
+auto ObsListDialog::checkIfBookmarksListExists(const QVariantMap& allListsMap) -> bool {
 
     for (auto bookmarkKey: allListsMap.keys()) {
 
@@ -961,12 +966,12 @@ void ObsListDialog::selectAndGoToObject(QModelIndex index) {
 
             Vec3d winpos;
             prj->project(pos, winpos);
-            float xpos = winpos[0];
-            float ypos = winpos[1];
-            float best_object_value = 1000.f;
+            double xpos = winpos[0];
+            double ypos = winpos[1];
+            float best_object_value = 1000.F;
             for (const auto &obj: candidates) {
                 prj->project(obj->getJ2000EquatorialPos(core), winpos);
-                float distance = std::sqrt(
+                double distance = std::sqrt(
                         (xpos - winpos[0]) * (xpos - winpos[0]) + (ypos - winpos[1]) * (ypos - winpos[1]));
                 if (distance < best_object_value) {
                     best_object_value = distance;
@@ -974,7 +979,7 @@ void ObsListDialog::selectAndGoToObject(QModelIndex index) {
                 }
             }
 
-            if (sobj) {
+            if (sobj != nullptr) {
                 status = objectMgr->setSelectedObject(sobj);
             }
         }
@@ -1094,9 +1099,6 @@ void ObsListDialog::obsListCreateEditDialogClosed() {
         loadSelectedObservingList(index);
     }
 
-    //TODO remove after
-    qDebug() << "obsListCreateEditDialogClosed() before kill ObsListCreateEditDialog";
-
     ObsListCreateEditDialog::kill();
     createEditDialog_instance = Q_NULLPTR;
 }
@@ -1140,7 +1142,7 @@ void ObsListDialog::setVisible(bool v) {
 /*
  * Sort the obsListTreeView by the column name given in parameter
 */
-void ObsListDialog::sortObsListTreeViewByColumnName(QString columnName) {
+void ObsListDialog::sortObsListTreeViewByColumnName(const QString& columnName) {
     if (QString::compare(columnName, SORTING_BY_NAME) == 0) {
         obsListListModel->sort(COLUMN_NUMBER_NAME, Qt::AscendingOrder);
     } else if (QString::compare(columnName, SORTING_BY_TYPE) == 0) {
