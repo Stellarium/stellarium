@@ -67,7 +67,9 @@ before_build:
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "release" -and $env:packaging -eq "true") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]') -and $env:packaging -eq "true") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:PUBLISH_BINARY -eq "true") { $env:USE_LIBGLES = 'true' }
+  - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:qtver -eq "6.2") { $env:USE_LIBGLES = 'false' }
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:qtver -eq "6.3") { $env:USE_LIBGLES = 'false' }
+  - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:qtver -eq "6.4") { $env:USE_LIBGLES = 'false' }
   - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
   - mkdir stellarium-%qtver%-%qtbin%
   - cd c:\stellarium
