@@ -40,6 +40,7 @@
 ****************************************************************************/
 
 #include <QtGlobal>
+#include <memory>
 
 #ifndef QT_NO_TEXTODFWRITER
 
