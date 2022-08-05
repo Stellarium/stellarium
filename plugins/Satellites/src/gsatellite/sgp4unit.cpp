@@ -1332,7 +1332,7 @@ bool sgp4init(gravconsttype whichconst, char opsmode,   const int satn,     cons
 
 	ss1  = 0.0;	ss2  = 0.0;	ss3  = 0.0;
 	ss4  = 0.0;	ss5  = 0.0;	ss6  = 0.0;
-	ss6  = 0.0;
+	ss7  = 0.0;
 	sz1  = 0.0;	sz2  = 0.0;	sz3  = 0.0;
 	sz11 = 0.0;	sz12 = 0.0;	sz13 = 0.0;
 	sz21 = 0.0;	sz22 = 0.0;	sz23 = 0.0;

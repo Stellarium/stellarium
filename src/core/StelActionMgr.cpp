@@ -141,7 +141,11 @@ void StelAction::connectToObject(QObject* obj, const char* slot)
 	QVariant prop = obj->property(slot);
 	if (prop.isValid()) // Connect to a bool property, use a StelProperty if possible
 	{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		Q_ASSERT(prop.metaType() == QMetaType(QMetaType::Bool));
+#else
 		Q_ASSERT(prop.type() == QVariant::Bool);
+#endif
 
 		// Listen to the property notified signal if there is one.
 		int propIndex = obj->metaObject()->indexOfProperty(slot);

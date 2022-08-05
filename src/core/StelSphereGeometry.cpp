@@ -1334,7 +1334,11 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& l)
 {
 	if (l.isEmpty())
 		return EmptySphericalRegion::staticInstance;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	if (l.at(0).metaType()==QMetaType(QMetaType::QVariantList))
+#else
 	if (l.at(0).type()==QVariant::List)
+#endif
 	{
 		// The region is composed of either:
 		// - a list of regions, which are assumed to be combined using the positive winding rule.
@@ -1354,13 +1358,21 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& l)
 				const QVariantList& subL = l.at(i).toList();
 				if (subL.isEmpty())
 					throw std::runtime_error(qPrintable(QString("invalid region definition: %1").arg(l.at(i).toString())));
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+				if (subL.at(0).metaType()==QMetaType(QMetaType::QVariantList))
+#else
 				if (subL.at(0).type()==QVariant::List)
+#endif
 				{
 					// Special optimization for basic contours (if no type is provided, assume a polygon)
 					contours.append(singleContourFromQVariantList(subL));
 					continue;
 				}
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+				Q_ASSERT(subL.at(0).metaType()==QMetaType(QMetaType::QString) || subL.at(0).metaType()==QMetaType(QMetaType::QByteArray));
+#else
 				Q_ASSERT(subL.at(0).type()==QVariant::String || subL.at(0).type()==QVariant::ByteArray);
+#endif
 				const SphericalRegionP& reg = loadFromQVariant(subL);
 				if (!reg->isEmpty())
 					contours << reg->getSimplifiedContours();
@@ -1369,7 +1381,11 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& l)
 		return SphericalRegionP(new SphericalPolygon(contours));
 	}
 	
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	Q_ASSERT(l.at(0).metaType()==QMetaType(QMetaType::QString) || l.at(0).metaType()==QMetaType(QMetaType::QByteArray));
+#else
 	Q_ASSERT(l.at(0).type()==QVariant::String || l.at(0).type()==QVariant::ByteArray);
+#endif
 	const QString& code=l.at(0).toString();
 	if (code=="CAP")
 		return capFromQVariantList(l);

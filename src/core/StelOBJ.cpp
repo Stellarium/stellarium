@@ -1347,7 +1347,7 @@ void StelOBJ::transform(const QMatrix4x4 &mat, bool onlyPosition)
 	{
 		Vertex& pVertex = m_vertices[i];
 
-		QVector3D tf = mat * QVector3D(pVertex.position[0], pVertex.position[1], pVertex.position[2]);
+		QVector3D tf = mat.map(QVector3D(pVertex.position[0], pVertex.position[1], pVertex.position[2]));
 		std::copy(&tf[0],&tf[0]+3,pVertex.position);
 
 		if(!onlyPosition)
