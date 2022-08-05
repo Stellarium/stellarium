@@ -71,6 +71,10 @@ public:
 	{
 		return N_("quasar");
 	}
+	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE
+	{
+		return q_(getObjectType());
+	}
 
 	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{

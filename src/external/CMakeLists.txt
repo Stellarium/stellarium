@@ -31,7 +31,7 @@ add_library(glues_stel STATIC EXCLUDE_FROM_ALL ${glues_lib_SRCS})
 target_include_directories(glues_stel PUBLIC glues_stel/source)
 #link the GUI module for the GL headers
 #our stripped version does not call any GL functions, but requires the GL types to be defined
-target_link_libraries(glues_stel Qt5::Gui)
+target_link_libraries(glues_stel Qt${QT_VERSION_MAJOR}::Gui)
 #turn off automoc, not needed here
 set_target_properties(glues_stel PROPERTIES AUTOMOC 0)
 SET_TARGET_PROPERTIES(glues_stel PROPERTIES FOLDER "src/external")
@@ -78,7 +78,7 @@ set(qtcompress_SRCS
 add_library(qtcompress_stel STATIC EXCLUDE_FROM_ALL ${qtcompress_SRCS})
 target_include_directories(qtcompress_stel PUBLIC qtcompress)
 #this can use the system zlib, or our zlib
-target_link_libraries(qtcompress_stel ${ZLIB_LIBRARIES} Qt5::Core)
+target_link_libraries(qtcompress_stel ${ZLIB_LIBRARIES} Qt${QT_VERSION_MAJOR}::Core)
 #turn off automoc, not needed here
 set_target_properties(qtcompress_stel PROPERTIES AUTOMOC 0)
 SET_TARGET_PROPERTIES(qtcompress_stel PROPERTIES FOLDER "src/external")
@@ -170,7 +170,7 @@ SET(qxlsx_SRCS
     qxlsx/xlsxcelllocation.h
     )
 add_library(qxlsx_stel STATIC EXCLUDE_FROM_ALL ${qxlsx_SRCS})
-target_link_libraries(qxlsx_stel Qt5::Core Qt5::Gui qtcompress_stel)
+target_link_libraries(qxlsx_stel Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui qtcompress_stel)
 set_target_properties(qxlsx_stel PROPERTIES FOLDER "src/external")
 
 ################################# INDI ################################

@@ -531,7 +531,7 @@ void TelescopeDialog::updateWarningTexts()
 	QString text;
 	if (telescopeCount > 0)
 	{
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
 		QString modifierName = "Command";
 #else
 		QString modifierName = "Ctrl";

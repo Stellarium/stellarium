@@ -21,15 +21,14 @@
 
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
+#include "Planet.hpp"
 #include "StelTexture.hpp"
 
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
-#include "SolarSystem.hpp"
 #include "RefractionExtinction.hpp"
 
 #include <QTextStream>

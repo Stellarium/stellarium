@@ -50,6 +50,7 @@ protected:
 	virtual ~StarWrapperBase(void) Q_DECL_OVERRIDE {}
 	virtual QString getType(void) const Q_DECL_OVERRIDE {return STAR_TYPE;}
 	virtual QString getObjectType(void) const Q_DECL_OVERRIDE {return N_("star"); }
+	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE {return q_(getObjectType()); }
 
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE {return QString();}
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE = 0;
@@ -153,6 +154,7 @@ public:
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
 	virtual QString getID(void) const Q_DECL_OVERRIDE;
 	virtual QString getObjectType() const Q_DECL_OVERRIDE;
+	virtual QString getObjectTypeI18n() const Q_DECL_OVERRIDE;
 };
 
 class StarWrapper2 : public StarWrapper<Star2>

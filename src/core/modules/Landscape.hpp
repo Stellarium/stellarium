@@ -21,11 +21,8 @@
 #define LANDSCAPE_HPP
 
 #include "VecMath.hpp"
-#include "StelToneReproducer.hpp"
-#include "StelProjector.hpp"
 
 #include "StelFader.hpp"
-#include "StelUtils.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelLocation.hpp"
 #include "StelSphereGeometry.hpp"

@@ -43,7 +43,6 @@
 #include "StelUtils.hpp"
 #include "StelPainter.hpp"
 #include "TrailGroup.hpp"
-#include "RefractionExtinction.hpp"
 
 #include "AstroCalcDialog.hpp"
 #include "StelObserver.hpp"
@@ -217,7 +216,6 @@ void SolarSystem::init()
 	setOrbitColorStyle(conf->value("astro/planets_orbits_color_style", "one_color").toString());
 
 	// Settings for calculation of position of Great Red Spot on Jupiter
-//	setFlagCustomGrsSettings(conf->value("astro/flag_grs_custom", false).toBool());
 	setGrsLongitude(conf->value("astro/grs_longitude", 216).toInt());
 	setGrsDrift(conf->value("astro/grs_drift", 15.).toDouble());
 	setGrsJD(conf->value("astro/grs_jd", 2456901.5).toDouble());
@@ -703,7 +701,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	// Stage 2b (as described above).
 	// qDebug() << "Stage 2b:";
 	QStringList orderedSections;
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	QMultiMapIterator<int, QString> levelMapIt(depLevelMap);
+#else
 	QMapIterator<int, QString> levelMapIt(depLevelMap);
+#endif
 	while(levelMapIt.hasNext())
 	{
 		levelMapIt.next();

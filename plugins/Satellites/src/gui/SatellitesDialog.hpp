@@ -140,6 +140,7 @@ private slots:
 	void setRightSideToRWMode();
 
 	void enableMinMaxAltitude(bool state);
+	void enableMinMaxMagnitude(bool state);
 
 private:
 	//! @todo find out if this is really necessary... --BM

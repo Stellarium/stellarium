@@ -56,6 +56,7 @@
 #include "MilkyWay.hpp"
 #include "ZodiacalLight.hpp"
 #include "ToastMgr.hpp"
+#include "StelToneReproducer.hpp"
 
 #include <QDateTime>
 #include <QDebug>

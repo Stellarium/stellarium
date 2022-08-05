@@ -65,7 +65,8 @@ MpcImportWindow::MpcImportWindow()
 	ui = new Ui_mpcImportWindow();
 	ssoManager = GETSTELMODULE(SolarSystemEditor);
 
-	networkManager = StelApp::getInstance().getNetworkAccessManager();
+	//networkManager = StelApp::getInstance().getNetworkAccessManager();
+	networkManager = new QNetworkAccessManager(this);
 
 	countdownTimer = new QTimer(this);
 
@@ -618,7 +619,9 @@ void MpcImportWindow::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(url));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+#endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 }
@@ -789,7 +792,9 @@ void MpcImportWindow::sendQueryToUrl(QUrl url)
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
 	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded"); //Is this really necessary?
 	request.setHeader(QNetworkRequest::ContentLengthHeader, url.query(QUrl::FullyEncoded).length());
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+#endif
 
 	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveQueryReply(QNetworkReply*)));
 	queryReply = networkManager->post(request, url.query(QUrl::FullyEncoded).toUtf8());	
@@ -1094,11 +1099,13 @@ void MpcImportWindow::loadBookmarksGroup(QVariantMap source, Bookmarks & bookmar
 	if (source.isEmpty())
 		return;
 
-	for (auto title : source.keys())
+	QMapIterator<QString, QVariant> it(source);
+	while (it.hasNext())
 	{
-		QString url = source.value(title).toString();
+		it.next();
+		QString url = it.value().toString();
 		if (!url.isEmpty())
-			bookmarkGroup.insert(title, url);
+			bookmarkGroup.insert(it.key(), url);
 	}
 }
 
@@ -1156,8 +1163,10 @@ void MpcImportWindow::saveBookmarks()
 
 void MpcImportWindow::saveBookmarksGroup(Bookmarks & bookmarkGroup, QVariantMap & output)
 {
-	for (auto title : bookmarkGroup.keys())
+	QHashIterator<QString, QString>it(bookmarkGroup);
+	while (it.hasNext())
 	{
-		output.insert(title, bookmarkGroup.value(title));
+		it.next();
+		output.insert(it.key(), it.value());
 	}
 }

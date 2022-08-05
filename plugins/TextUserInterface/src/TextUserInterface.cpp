@@ -889,7 +889,7 @@ void TextUserInterface::shutDown()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	QString shutdownCmd = QDir::fromNativeSeparators(conf->value("tui/admin_shutdown_cmd", "").toString());
 	int err; 
-	if (!(err = QProcess::execute(shutdownCmd))) {
+	if (!(err = QProcess::execute(shutdownCmd, {}))) {
 		qDebug() << "[TextUserInterface] shutdown error, QProcess::execute():" << err;
 	}
 }

@@ -34,7 +34,6 @@
 #include "sidereal_time.h"
 #include "StelTextureMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StarMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelTranslator.hpp"
@@ -44,7 +43,6 @@
 #include "StelOpenGLArray.hpp"
 #include "StelHips.hpp"
 #include "RefractionExtinction.hpp"
-#include "StelObjectMgr.hpp"
 
 #include <limits>
 #include <QByteArray>
@@ -56,6 +54,9 @@
 #include <QOpenGLContext>
 #ifdef DEBUG_SHADOWMAP
 #include <QOpenGLFramebufferObject>
+#endif
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#include <QOpenGLVersionFunctionsFactory>
 #endif
 #include <QOpenGLShader>
 #include <QtConcurrent>
@@ -532,6 +533,13 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << QString("%1: <b>%2</b><br/>").arg(q_("Type"), q_(getPlanetTypeString()));		
 	}
 
+	if (getPlanetType()==PlanetType::isObserver)
+	{
+		// Do not display meaningless data for observers!
+		postProcessInfoString(str, flags);
+		return str;
+	}
+
 	if (flags&Magnitude)
 	{
 		static const QMap<ApparentMagnitudeAlgorithm, int>decMap={
@@ -591,16 +599,18 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		StelCore* core1 = StelApp::getInstance().getCore(); // we need non-const reference here.
 		const double currentJD=core1->getJDOfLastJDUpdate();
 		const qint64 millis=core1->getMilliSecondsOfLastJDUpdate();
-		core1->setJD(currentJD-StelCore::JD_HOUR);
-		core1->update(0);
-		Vec3d equPosPrev=getEquinoxEquatorialPos(core1);
+		StelCore* core2 = StelApp::getInstance().getCore(); // use to fix hourly motion
+		const double JD2=core2->getJD();
+		core2->setJD(JD2-StelCore::JD_HOUR*.1);
+		core2->update(0);
+		Vec3d equPosPrev=getEquinoxEquatorialPos(core2);
 		const double deltaEq=equPos.angle(equPosPrev);
 		double dec_equPrev, ra_equPrev;
 		StelUtils::rectToSphe(&ra_equPrev,&dec_equPrev,equPosPrev);
 		double pa=atan2(ra_equ-ra_equPrev, dec_equ-dec_equPrev); // position angle: From North counterclockwise!
 		if (pa<0) pa += 2.*M_PI;
-		oss << QString("%1: %2 %3 %4%5<br/>").arg(q_("Hourly motion"), withDecimalDegree ? StelUtils::radToDecDegStr(deltaEq) : StelUtils::radToDmsStr(deltaEq), qc_("towards", "into the direction of"), QString::number(pa*M_180_PI, 'f', 1), QChar(0x00B0));
-		oss << QString("%1: d&alpha;=%2 d&delta;=%3<br/>").arg(q_("Hourly motion"), withDecimalDegree ? StelUtils::radToDecDegStr(ra_equ-ra_equPrev) : StelUtils::radToDmsStr(ra_equ-ra_equPrev), withDecimalDegree ? StelUtils::radToDecDegStr(dec_equ-dec_equPrev) : StelUtils::radToDmsStr(dec_equ-dec_equPrev));
+		oss << QString("%1: %2 %3 %4%5<br/>").arg(q_("Hourly motion"), withDecimalDegree ? StelUtils::radToDecDegStr(deltaEq*10.) : StelUtils::radToDmsStr(deltaEq*10.), qc_("towards", "into the direction of"), QString::number(pa*M_180_PI, 'f', 1), QChar(0x00B0));
+		oss << QString("%1: d&alpha;=%2 d&delta;=%3<br/>").arg(q_("Hourly motion"), withDecimalDegree ? StelUtils::radToDecDegStr((ra_equ-ra_equPrev)*10.) : StelUtils::radToDmsStr((ra_equ-ra_equPrev)*10.), withDecimalDegree ? StelUtils::radToDecDegStr((dec_equ-dec_equPrev)*10.) : StelUtils::radToDmsStr((dec_equ-dec_equPrev)*10.));
 		core1->setJD(currentJD); // this calls sync() which sets millis
 		core1->setMilliSecondsOfLastJDUpdate(millis); // restore millis.
 		core1->update(0);
@@ -2051,7 +2061,7 @@ Vec3d Planet::getEclipticPos(double dateJDE) const
 	return *pos;
 }
 
-// Return heliocentric ecliptical coordinate of p [AU]
+// Return heliocentric ecliptical Cartesian J2000 coordinates of p [AU]
 Vec3d Planet::getHeliocentricPos(Vec3d p) const
 {
 	// Note: using shared copies is too slow here.  So we use direct access instead.
@@ -3303,7 +3313,11 @@ bool Planet::initFBO()
 #ifndef QT_OPENGL_ES_2
 		if(!ctx->isOpenGLES())
 		{
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+			QOpenGLFunctions_1_0* gl10= QOpenGLVersionFunctionsFactory::get<QOpenGLFunctions_1_0>(ctx);
+#else
 			QOpenGLFunctions_1_0* gl10 = ctx->versionFunctions<QOpenGLFunctions_1_0>();
+#endif
 			if(Q_LIKELY(gl10))
 			{
 				//use DrawBuffer instead of DrawBuffers
@@ -3790,7 +3804,7 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	GL(shader->setUniformValue(shaderVars.diffuseLight, light.diffuse[0], light.diffuse[1], light.diffuse[2]));
 	GL(shader->setUniformValue(shaderVars.ambientLight, light.ambient[0], light.ambient[1], light.ambient[2]));
 	GL(shader->setUniformValue(shaderVars.tex, 0));
-	GL(shader->setUniformValue(shaderVars.shadowCount, data.shadowCandidates.size()));
+	GL(shader->setUniformValue(shaderVars.shadowCount, static_cast<GLint>(data.shadowCandidates.size())));
 	GL(shader->setUniformValue(shaderVars.shadowData, data.shadowCandidatesData));
 	GL(shader->setUniformValue(shaderVars.sunInfo, static_cast<GLfloat>(data.mTarget[12]), static_cast<GLfloat>(data.mTarget[13]), static_cast<GLfloat>(data.mTarget[14]), static_cast<GLfloat>(sun->getEquatorialRadius())));
 	GL(shader->setUniformValue(shaderVars.skyBrightness, lmgr->getAtmosphereAverageLuminance()));
@@ -4170,7 +4184,11 @@ bool Planet::ensureObjLoaded()
 	{
 		qDebug()<<"Queueing aysnc load of OBJ model for"<<englishName;
 		//create the async OBJ model loader
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		objModelLoader = new QFuture<PlanetOBJModel*>(QtConcurrent::run(&Planet::loadObjModel,this));
+#else
 		objModelLoader = new QFuture<PlanetOBJModel*>(QtConcurrent::run(this,&Planet::loadObjModel));
+#endif
 	}
 
 	if(objModelLoader)
@@ -4646,18 +4664,19 @@ void Planet::drawOrbit(const StelCore* core)
 
 bool Planet::hasValidPositionalData(const double JDE, const PositionQuality purpose) const
 {
-    if ((pType<isObserver) || (englishName=="Pluto"))
-		return true;
-	else if (orbitPtr && pType>=isArtificial)
-	{
-		switch (purpose) {
+    if ((pType<=isObserver) || (englishName=="Pluto"))
+	    return true;
+    else if (orbitPtr && pType>=isArtificial)
+    {
+	    switch (purpose)
+	    {
 		    case Position:
-			return static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(JDE);
+			    return static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(JDE);
 		    case OrbitPlotting:
-			return static_cast<KeplerOrbit*>(orbitPtr)->objectDateGoodEnoughForOrbits(JDE);
-		}
-	}
-	return false;
+			    return static_cast<KeplerOrbit*>(orbitPtr)->objectDateGoodEnoughForOrbits(JDE);
+	    }
+    }
+    return false;
 }
 
 Vec2d Planet::getValidPositionalDataRange(const PositionQuality purpose) const

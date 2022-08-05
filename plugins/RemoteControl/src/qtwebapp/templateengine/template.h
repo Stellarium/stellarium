@@ -8,7 +8,11 @@
 
 #include <QString>
 #include <QIODevice>
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#include <QStringConverter>
+#else
 #include <QTextCodec>
+#endif
 #include <QFile>
 #include <QString>
 #include "templateglobal.h"
@@ -114,10 +118,17 @@ public:
       to be used on local filesystem.
       @param file File that provides the source text
       @param textCodec Encoding of the source. If null, UTF-8 is assumed.
+      @param encoding Encoding of the source. (Qt6 version)
       @see TemplateLoader
       @see TemplateCache
+      @note Qt6 upgrade by Georg Zotti for Stellarium
     */
+
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+    Template(QFile& file, QStringConverter::Encoding encoding=QStringConverter::Utf8);
+#else
     Template(QFile& file, QTextCodec* textCodec = Q_NULLPTR);
+#endif
 
     virtual ~Template() { }
 

@@ -40,6 +40,7 @@
 #include "SolarSystem.hpp"
 #include "NomenclatureMgr.hpp"
 #include "SporadicMeteorMgr.hpp"
+#include "SpecificTimeMgr.hpp"
 #include "StarMgr.hpp"
 #include "StelIniParser.hpp"
 #include "StelProjector.hpp"
@@ -620,6 +621,12 @@ void StelApp::init(QSettings* conf)
 	hlMgr->init();
 	getModuleMgr().registerModule(hlMgr);
 
+	// Init specific time
+	SplashScreen::showMessage(q_("Initializing specific time..."));
+	SpecificTimeMgr* specificTime = new SpecificTimeMgr();
+	specificTime->init();
+	getModuleMgr().registerModule(specificTime);
+
 	//Create the script manager here, maybe some modules/plugins may want to connect to it
 	//It has to be initialized later after all modules have been loaded by calling initScriptMgr
 #ifdef ENABLE_SCRIPTING
@@ -923,7 +930,7 @@ void StelApp::handleKeys(QKeyEvent* event)
 	// First try to trigger a shortcut.
 	if (event->type() == QEvent::KeyPress)
 	{
-		if (getStelActionManager()->pushKey(event->key() + event->modifiers()))
+		if (getStelActionManager()->pushKey(event->key() + int(event->modifiers())))
 		{
 			event->setAccepted(true);
 			return;
@@ -1027,7 +1034,7 @@ Vec3f StelApp::getDaylightInfoColor() const
 void StelApp::updateI18n()
 {
 #ifdef ENABLE_NLS
-	emit(languageChanged());
+	emit languageChanged();
 #endif
 }
 
@@ -1169,7 +1176,11 @@ void StelApp::setAppFont(QFont font)
 {
 	int oldSize=QGuiApplication::font().pixelSize();
 	font.setPixelSize(oldSize);
+	#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
+	font.setStyleHint(QFont::AnyStyle, QFont::PreferAntialias);
+	#else
 	font.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);
+	#endif
 	QGuiApplication::setFont(font);
 	emit fontChanged(font);
 }

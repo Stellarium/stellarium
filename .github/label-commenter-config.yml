@@ -20,7 +20,7 @@ labels:
       issue:
         body: Oops... Sorry for mistake @{{ issue.user.login }}
         action: open
-  - name: outdated
+  - name: "state: outdated"
     labeled:
       issue:
         body: This report is outdated, such, the problematic code replaced by new tool or feature...
@@ -40,7 +40,7 @@ labels:
   - name: good first issue
     labeled:
       issue:
-        body: This issue is easy for contributing. Everyone can work on this.
+        body: This is a good task for the community to participate in the contribution into Stellarium. Who wants to help us?
   - name: more info
     labeled:
       issue:
@@ -59,11 +59,11 @@ labels:
     labeled:
       issue:
         body: Hello @{{ issue.user.login }}! Thank you for this suggestion.
-  - name: confirmed
+  - name: "state: confirmed"
     labeled:
       issue:
         body: Hello @{{ issue.user.login }}! OK, developers can reproduce the issue. Thanks for the report!
-  - name: won't fix
+  - name: "state: won't fix"
     labeled:
       issue:
         body: |
@@ -94,7 +94,7 @@ labels:
         body: |
           Thank you @{{ issue.user.login }}! In future please use Transifex to fix and improve translations:
           https://www.transifex.com/stellarium/stellarium/dashboard/
-  - name: fix committed
+  - name: "state: fix committed"
     labeled:
       issue:
         body: |

@@ -22,7 +22,6 @@
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
 #include "StelProjector.hpp"
-#include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelGui.hpp"
 #include "SkyGui.hpp"
@@ -32,13 +31,14 @@
 #include "StelOpenGL.hpp"
 #include "StelOpenGLArray.hpp"
 #include "StelProjector.hpp"
-#include "StelMovementMgr.hpp"
 
 #include <QDebug>
 #include <QDir>
 #include <QOpenGLWidget>
 #include <QApplication>
+#if (QT_VERSION<QT_VERSION_CHECK(5,12,0))
 #include <QDesktopWidget>
+#endif
 #include <QGuiApplication>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsAnchorLayout>
@@ -120,7 +120,7 @@ public:
 		Q_ASSERT(ctx == QOpenGLContext::currentContext());
 		StelOpenGL::mainContext = ctx; //throw an error when StelOpenGL functions are executed in another context
 
-		qDebug()<<"initializeGL";
+		qDebug() << "initializeGL";
 		qDebug() << "OpenGL supported version: " << QString(reinterpret_cast<const char*>(ctx->functions()->glGetString(GL_VERSION)));
 		qDebug() << "Current Format: " << this->format();
 
@@ -284,7 +284,7 @@ protected:
 	{
 		// Try to trigger a global shortcut.
 		StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
-		if (actionMgr->pushKey(event->key() + event->modifiers(), true)) {
+		if (actionMgr->pushKey(event->key() + int(event->modifiers()), true)) {
 			event->setAccepted(true);
 			parent->thereWasAnEvent(); // Refresh screen ASAP
 			return;
@@ -615,9 +615,9 @@ StelMainView::StelMainView(QSettings* settings)
 #endif
 
 	//get the desired opengl format parameters
-	QSurfaceFormat glFormat = getDesiredGLFormat();
+	QSurfaceFormat glFormat = getDesiredGLFormat(configuration);
 	// VSync control
-	#ifdef Q_OS_OSX
+	#ifdef Q_OS_MACOS
 	// FIXME: workaround for bug LP:#1705832 (https://bugs.launchpad.net/stellarium/+bug/1705832)
 	// Qt: https://bugreports.qt.io/browse/QTBUG-53273
 	const bool vsdef = false; // use vsync=false by default on macOS
@@ -638,9 +638,10 @@ StelMainView::StelMainView(QSettings* settings)
 	defFmt.setAlphaBufferSize(0);
 	defFmt.setStencilBufferSize(0);
 	defFmt.setDepthBufferSize(0);
-	QSurfaceFormat::setDefaultFormat(defFmt);
+	qDebug() << "setDefaultFormat";
+	QSurfaceFormat::setDefaultFormat(defFmt); // Causes a warning in Qt5.
 
-	//QGLWidget should set the format in constructor to prevent creating an unnecessary temporary context
+	//QOpenGLWidget should set the format in constructor to prevent creating an unnecessary temporary context
 	glWidget = new StelGLWidget(glFormat, this);
 	setViewport(glWidget);
 
@@ -717,12 +718,17 @@ StelMainView::~StelMainView()
 	guiItem=Q_NULLPTR;
 }
 
-QSurfaceFormat StelMainView::getDesiredGLFormat() const
+QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 {
 	//use the default format as basis
 	QSurfaceFormat fmt = QSurfaceFormat::defaultFormat();
-	qDebug()<<"Default surface format: "<<fmt;
+	qDebug() << "Default surface format: " << fmt;
 
+	#ifdef Q_OS_MACOS
+	fmt.setMajorVersion(3);
+	fmt.setMinorVersion(3);
+	fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
+	#else
 	//if on an GLES build, do not set the format
 	const QOpenGLContext::OpenGLModuleType openGLModuleType=QOpenGLContext::openGLModuleType();
 	if (openGLModuleType==QOpenGLContext::LibGL)
@@ -731,13 +737,21 @@ QSurfaceFormat StelMainView::getDesiredGLFormat() const
 		fmt.setRenderableType(QSurfaceFormat::OpenGL);
 		fmt.setMajorVersion(2);
 		fmt.setMinorVersion(1);
-
+		if (qApp->property("onetime_compat33")==true)
+		{
+			// Observations: 3.2:core has a transparent window. No black sky, no lines, but line labels. (on Qt6)
+			qDebug() << "Setting 3.3 compatibility profile from command line...";
+			fmt.setMajorVersion(3);
+			fmt.setMinorVersion(3);
+			fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
+		}
 		// The following is NOT needed (or even supported) when we request a 2.1 context
 		// The implementation may give us a newer context,
 		// but compatibility with 2.1 should be ensured automatically
 		//fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
 		//fmt.setOption(QSurfaceFormat::DeprecatedFunctions);
 	}
+	#endif
 
 	// Note: this only works if --mesa-mode was given on the command line. Auto-switch to Mesa or the driver name apparently cannot be detected at this early stage.
 	const bool isMesa= (QString(getenv("QT_OPENGL"))=="software");
@@ -808,7 +822,7 @@ void StelMainView::init()
 	if (configuration->value("main/check_requirements", true).toBool())
 	{
 		// Find out lots of debug info about supported version of OpenGL and vendor/renderer.
-		processOpenGLdiagnosticsAndWarnings(configuration, QOpenGLContext::currentContext());
+		processOpenGLdiagnosticsAndWarnings(configuration, glInfo.mainContext);
 	}
 
 	//create and initialize main app
@@ -983,13 +997,13 @@ void StelMainView::reloadShaders()
 // Several tests do not apply to MacOS X.
 void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLContext *context) const
 {
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
 	Q_UNUSED(conf);
 #endif
 	QSurfaceFormat format=context->format();
 
 	// These tests are not required on MacOS X
-#ifndef Q_OS_MAC
+#ifndef Q_OS_MACOS
 	bool openGLerror=false;
 	if (format.renderableType()==QSurfaceFormat::OpenGL || format.renderableType()==QSurfaceFormat::OpenGLES)
 	{
@@ -1016,9 +1030,9 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	// If platform does not even support minimal OpenGL version for Qt5, then tell the user about troubles and quit from application.
 	// This test is apparently not applicable on MacOS X due to its behaving differently from all other known OSes.
 	// The correct way to handle driver issues on MacOS X remains however unclear for now.
-#ifndef Q_OS_MAC
+#ifndef Q_OS_MACOS
 	bool isMesa=glDriver.contains("Mesa", Qt::CaseInsensitive);
-	#ifdef Q_OS_WIN
+	#if (defined Q_OS_WIN) && (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	bool isANGLE=glRenderer.startsWith("ANGLE", Qt::CaseSensitive);
 	#endif
 	if ( openGLerror ||
@@ -1026,19 +1040,26 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 0)) &&  isMesa) || // Mesa defaults to 2.0 but works!
 	     ((format.renderableType()==QSurfaceFormat::OpenGLES) && (format.version() < QPair<int, int>(2, 0)))  )
 	{
-		#ifdef Q_OS_WIN
+	#if (defined Q_OS_WIN) && (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 		if ((!isANGLE) && (!isMesa))
 			qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, graphics hardware, or use --angle-mode (or even --mesa-mode) option.";
 		else if (isANGLE)
 			qWarning() << "Oops... Insufficient OpenGLES version in ANGLE. Please update drivers, graphics hardware, or use --mesa-mode option.";
+	#elif (defined Q_OS_WIN)
+		if (!isMesa)
+			qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, graphics hardware, or use --mesa-mode option.";
 		else
 			qWarning() << "Oops... Insufficient OpenGL version. Mesa failed! Please send a bug report.";
 
+		#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 		QMessageBox::critical(Q_NULLPTR, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use --angle-mode (or --mesa-mode) option."), QMessageBox::Abort, QMessageBox::Abort);
 		#else
+		QMessageBox::critical(Q_NULLPTR, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use --mesa-mode option."), QMessageBox::Abort, QMessageBox::Abort);
+		#endif
+	#else
 		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, or graphics hardware.";
 		QMessageBox::critical(Q_NULLPTR, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, or graphics hardware."), QMessageBox::Abort, QMessageBox::Abort);
-		#endif
+	#endif
 		exit(1);
 	}
 #endif
@@ -1050,7 +1071,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	if (qApp->property("dump_OpenGL_details").toBool())
 		dumpOpenGLdiagnostics();
 
-#ifdef Q_OS_WIN
+#if (defined Q_OS_WIN) && (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	// If we have ANGLE, check esp. for insufficient ps_2 level.
 	if (isANGLE)
 	{
@@ -1104,7 +1125,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 		}
 	}
 #endif
-#ifndef Q_OS_MAC
+#ifndef Q_OS_MACOS
 	// Do a similar test for MESA: Ensure we have at least Mesa 10, Mesa 9 on FreeBSD (used for hardware-acceleration of AMD IGP) was reported to lose the stars.
 	if (isMesa)
 	{
@@ -1161,7 +1182,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	// Depending on whatever driver/implementation details, Stellarium may crash or show only minor graphical errors.
 	// On these systems, we show a warning panel that can be suppressed by a config option which is automatically added on first run.
 	// Again, based on a sample size of one, Macs have been reported already to always work in this case.
-#ifndef Q_OS_MAC
+#ifndef Q_OS_MACOS
 	static const QRegularExpression glslRegExp("^(\\d\\.\\d\\d)");
 	int pos=glslString.indexOf(glslRegExp);
 	// VC4 drivers on Raspberry Pi reports ES 1.0.16 or so, we must step down to one cipher after decimal.
@@ -1621,8 +1642,11 @@ void StelMainView::doScreenshot(void)
 	sParams.viewportXywh[3]=imgHeight;
 
 	// Configure a helper value to allow some modules to tweak their output sizes. Currently used by StarMgr, maybe solve font issues?
+#if (QT_VERSION>=QT_VERSION_CHECK(5,12,0))
+	customScreenshotMagnification=static_cast<float>(imgHeight)/static_cast<float>(qApp->screenAt(QPoint(stelScene->width()*0.5, stelScene->height()*0.5))->geometry().height());
+#else
 	customScreenshotMagnification=static_cast<float>(imgHeight)/static_cast<float>(qApp->screens().at(qApp->desktop()->screenNumber())->geometry().height());
-
+#endif
 	sParams.viewportCenter.set(0.0+(0.5+pParams.viewportCenterOffset.v[0])*imgWidth, 0.0+(0.5+pParams.viewportCenterOffset.v[1])*imgHeight);
 	sParams.viewportFovDiameter = qMin(imgWidth,imgHeight);
 	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(sParams);

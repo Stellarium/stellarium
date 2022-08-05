@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>stellarium</string>
 	<key>CFBundleIconFile</key>
-	<string>Icon</string>
+	<string>stellarium</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.stellarium.Stellarium</string>
 	<key>CFBundleName</key>
@@ -38,7 +38,7 @@
 		<key>CFBundleTypeRole</key>
 		<string>Viewer</string>
 		<key>CFBundleTypeIconFile</key>
-		<string>Icon.icns</string>
+		<string>stellarium.icns</string>
 		<key>CFBundleTypeExtensions</key>
 		<array>
 			<string>ssc</string>

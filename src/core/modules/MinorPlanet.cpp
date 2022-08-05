@@ -263,7 +263,7 @@ QString MinorPlanet::renderProvisionalDesignationinHtml(QString plainTextName)
 		QString suffix = match.captured(2);
 		if (!suffix.isEmpty())
 		{
-			return (QString("%1<sub>%2</sub>").arg(main).arg(suffix));
+			return (QString("%1<sub>%2</sub>").arg(main, suffix));
 		}
 		else
 		{

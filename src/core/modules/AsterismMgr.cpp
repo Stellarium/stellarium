@@ -27,12 +27,11 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelMovementMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
-#include "StelSkyDrawer.hpp"
-#include "SolarSystem.hpp"
+#include "Planet.hpp"
+#include "StelUtils.hpp"
 
 #include <vector>
 #include <QDebug>
@@ -42,8 +41,6 @@
 #include <QString>
 #include <QStringList>
 #include <QDir>
-
-using namespace std;
 
 // constructor which loads all data from appropriate files
 AsterismMgr::AsterismMgr(StarMgr *_hip_stars)

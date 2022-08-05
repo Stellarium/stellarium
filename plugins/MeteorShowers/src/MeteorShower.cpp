@@ -537,7 +537,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 	}
 
 	if (flags&ObjectType)
-		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_(getObjectType()), mstdata) << "<br />";
+		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), getObjectTypeI18n(), mstdata) << "<br />";
 	
 
 	// Ra/Dec etc.
@@ -545,7 +545,11 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 
 	if (flags&Extra)
 	{
-		QString sDriftRA = StelUtils::radToHmsStr(static_cast<double>(m_driftAlpha));
+		QString sDriftRA;
+		if (m_driftAlpha >= 0.)
+			sDriftRA = StelUtils::radToHmsStr(static_cast<double>(m_driftAlpha));
+		else
+			sDriftRA = '-'+StelUtils::radToHmsStr(static_cast<double>(abs(m_driftAlpha)));
 		QString sDriftDE = StelUtils::radToDmsStr(static_cast<double>(m_driftDelta));
 		if (withDecimalDegree)
 		{

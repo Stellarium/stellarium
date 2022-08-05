@@ -150,8 +150,11 @@ void StelDialog::setVisible(bool v)
 				newY= (screenSize.height() - dialog->size().height());
 
 			// Make sure that the window's title bar is accessible
-			if (newY <-0)
+			if (newY < 0)
 				newY = 0;
+			// Make sure that the window is not moved to the left border
+			if (newX < -(static_cast<int>(dialog->size().width()*.75)))
+				newX = -(static_cast<int>(dialog->size().width()*.75)); // 25% of window is visible
 			proxy->setPos(newX, newY);
 			// Invisible frame around the window to make resizing easier
 			// (this also changes the bounding rectangle size)
@@ -497,7 +500,11 @@ QComboBoxStelStringPropertyConnectionHelper::QComboBoxStelStringPropertyConnecti
 	onPropertyChanged(val);
 
 	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
+#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+	connect(combo, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::textActivated),prop,&StelProperty::setValue);
+#else
 	connect(combo, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::activated),prop,&StelProperty::setValue);
+#endif
 }
 
 void QComboBoxStelStringPropertyConnectionHelper::onPropertyChanged(const QVariant &value)

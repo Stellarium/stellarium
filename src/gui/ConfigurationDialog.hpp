@@ -86,8 +86,8 @@ private slots:
 
 	void updateCurrentLanguage();
 	void updateCurrentSkyLanguage();
-	void selectLanguage(const QString& languageCode);
-	void selectSkyLanguage(const QString& languageCode);
+	void selectLanguage(const int id);    // id is index of name in QComboBox (must be called in a signal/slot connection!)
+	void selectSkyLanguage(const int id); // id is index of name in QComboBox (must be called in a signal/slot connection!)
 	void setStartupTimeMode();
 	//! Show/bring to foreground the shortcut editor window.
 	void showShortcutsWindow();

@@ -317,7 +317,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	}
 	
 	if (flags&ObjectType)
-		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_(getObjectType())) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
 
 	if (flags&Magnitude && isVMagnitudeDefined() && !distributionMode)
 		oss << getMagnitudeInfoString(core, flags, 2);

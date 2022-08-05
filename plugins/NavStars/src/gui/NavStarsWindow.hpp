@@ -53,6 +53,7 @@ private slots:
 	void resetSettings();
 	void populateNavigationalStarsSets();
 	void setNavigationalStarsSet(int nsSetID);
+	void populateToday();
 };
 
 

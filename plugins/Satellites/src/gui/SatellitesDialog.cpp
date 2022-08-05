@@ -218,6 +218,12 @@ void SatellitesDialog::createDialogContent()
 	connectDoubleProperty(ui->maxAltitude,        "Satellites.maxVFAltitude");
 	enableMinMaxAltitude(ui->altitudeCheckBox->isChecked());
 	connect(ui->altitudeCheckBox, SIGNAL(clicked(bool)), this, SLOT(enableMinMaxAltitude(bool)));
+	// Logic sub-group: Visual filter / Magnitude range
+	connectBoolProperty(ui->magnitudeCheckBox,    "Satellites.flagVFMagnitude");
+	connectDoubleProperty(ui->minMagnitude,       "Satellites.minVFMagnitude");
+	connectDoubleProperty(ui->maxMagnitude,       "Satellites.maxVFMagnitude");
+	enableMinMaxMagnitude(ui->magnitudeCheckBox->isChecked());
+	connect(ui->magnitudeCheckBox, SIGNAL(clicked(bool)), this, SLOT(enableMinMaxMagnitude(bool)));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton,    SIGNAL(clicked()), this, SLOT(saveSettings()));
@@ -278,6 +284,9 @@ void SatellitesDialog::createDialogContent()
 	commWindow = new SatellitesCommDialog();
 	connect(ui->commSatelliteButton, SIGNAL(clicked()), commWindow, SLOT(setVisible()));
 
+	filterWindow = new SatellitesFilterDialog();
+	connect(ui->customFilterButton, SIGNAL(clicked()), filterWindow, SLOT(setVisible()));
+
 	// Sources tab
 	connect(ui->sourceList, SIGNAL(currentRowChanged(int)),			this, SLOT(updateButtonsProperties()));
 	connect(ui->sourceList, SIGNAL(itemChanged(QListWidgetItem*)),		this,	SLOT(saveSourceList()));
@@ -326,6 +335,12 @@ void SatellitesDialog::enableMinMaxAltitude(bool state)
 {
 	ui->minAltitude->setEnabled(state);
 	ui->maxAltitude->setEnabled(state);
+}
+
+void SatellitesDialog::enableMinMaxMagnitude(bool state)
+{
+	ui->minMagnitude->setEnabled(state);
+	ui->maxMagnitude->setEnabled(state);
 }
 
 void SatellitesDialog::handleOrbitLinesGroup(bool state)
@@ -465,6 +480,7 @@ void SatellitesDialog::filterListByGroup(int index)
 		{ "[undisplayed]",	SatNotDisplayed },
 		{ "[newlyadded]",	SatNew },
 		{ "[orbiterror]",	SatError },
+		{ "[reentry]",		SatReentry },
 		{ "[smallsize]",	SatSmallSize },
 		{ "[mediumsize]",	SatMediumSize },
 		{ "[largesize]",	SatLargeSize },
@@ -508,7 +524,7 @@ void SatellitesDialog::filterListByGroup(int index)
 void SatellitesDialog::updateFilteredSatellitesList()
 {
 	QString groupId = ui->groupFilterCombo->currentData(Qt::UserRole).toString();
-	if (groupId == "[outdatedTLE]" || groupId == "[custom]" || groupId == "[communication]")
+	if (groupId == "[outdatedTLE]" || groupId == "[custom]" || groupId == "[communication]" || groupId == "[reentry]")
 	{
 		filterListByGroup(ui->groupFilterCombo->currentIndex());
 	}
@@ -813,7 +829,7 @@ void SatellitesDialog::populateAboutPage()
 	// TRANSLATORS: Title of a section in the About tab of the Satellites window
 	html += "<h3>" + q_("TLE data updates") + "</h3>";
 	html += "<p>" + q_("The Satellites plugin can automatically download TLE data from Internet sources, and by default the plugin will do this if the existing data is more than 72 hours old. ");
-	html += "</p><p>" + QString(q_("If you disable Internet updates, you may update from a file on your computer.  This file must be in the same format as the Celestrak updates (see %1 for an example).").arg("<a href=\"http://celestrak.com/NORAD/elements/visual.txt\">visual.txt</a>"));
+	html += "</p><p>" + QString(q_("If you disable Internet updates, you may update from a file on your computer.  This file must be in the same format as the Celestrak updates (see %1 for an example).").arg("<a href=\"https://celestrak.org/NORAD/elements/visual.txt\">visual.txt</a>"));
 	html += "</p><p>" + q_("<b>Note:</b> if the name of a satellite in update data has anything in square brackets at the end, it will be removed before the data is used.");
 	html += "</p>";
 
@@ -823,7 +839,7 @@ void SatellitesDialog::populateAboutPage()
 
 	html += "<h3>" + q_("Technical notes") + "</h3>";
 	html += "<p>" + q_("Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data as the input.") + " ";
-	html +=               q_("The orbital calculation code is written by Jose Luis Canales according to the revised Spacetrack Report #3 (including Spacetrack Report #6)") + " <a href=\"http://www.celestrak.com/publications/AIAA/2006-6753\">[*]</a>. ";
+	html +=               q_("The orbital calculation code is written by Jose Luis Canales according to the revised Spacetrack Report #3 (including Spacetrack Report #6)") + " <a href=\"https://celestrak.org/publications/AIAA/2006-6753\">[*]</a>. ";
 	html +=               q_("To calculate an approximate visual magnitude of satellites we use data from Mike McCants' database (with permissions) of the radar cross-section (RCS) and standard magnitudes.") + " ";
 	html +=               q_("Formula to calculate an approximate visual magnitude of satellites from the standard magnitude may be found at Mike McCants website") + " <a href=\"https://www.prismnet.com/~mmccants/tles/mccdesc.html\">[**]</a>. ";
 	html +=               q_("We use a spherical shape of satellite to calculate an approximate visual magnitude from RCS values.") + " ";
@@ -1098,6 +1114,7 @@ void SatellitesDialog::populateFilterMenu()
 
 	// Add special groups - their IDs deliberately use JSON-incompatible chars.
 	ui->groupFilterCombo->insertItem(0, q_("[orbit calculation error]"), QVariant("[orbiterror]"));
+	ui->groupFilterCombo->insertItem(0, q_("[atmospheric entry]"), QVariant("[reentry]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all newly added]"), QVariant("[newlyadded]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all not displayed]"), QVariant("[undisplayed]"));
 	ui->groupFilterCombo->insertItem(0, q_("[all displayed]"), QVariant("[displayed]"));
@@ -1156,6 +1173,8 @@ void SatellitesDialog::populateInfo()
 	ui->orbitSegmentsSpin->setToolTip(QString("<p>%1. %2: %3..%4</p>").arg(q_("Number of segments: number of segments used to draw the line"), vr, QString::number(ui->orbitSegmentsSpin->minimum()), QString::number(ui->orbitSegmentsSpin->maximum())));
 	ui->orbitDurationSpin->setToolTip(QString("<p>%1. %2: %3..%4 %5</p>").arg(q_("Segment length: duration of a single segment in seconds"), vr, QString::number(ui->orbitDurationSpin->minimum()), QString::number(ui->orbitDurationSpin->maximum()), s));
 	ui->orbitFadeSpin->setToolTip(QString("<p>%1. %2: %3..%4</p>").arg(q_("Fade length: number of segments used to draw each end of the line"), vr, QString::number(ui->orbitFadeSpin->minimum()), QString::number(ui->orbitFadeSpin->maximum())));
+	ui->minMagnitude->setToolTip(QString("%1: %2..%3").arg(vr, QString::number(ui->minMagnitude->minimum(), 'f', 2), QString::number(ui->minMagnitude->maximum(), 'f', 2)));
+	ui->maxMagnitude->setToolTip(QString("%1: %2..%3").arg(vr, QString::number(ui->maxMagnitude->minimum(), 'f', 2), QString::number(ui->maxMagnitude->maximum(), 'f', 2)));
 }
 
 void SatellitesDialog::populateSourcesList()
@@ -1398,7 +1417,7 @@ void SatellitesDialog::handleGroupChanges(QListWidgetItem* item)
 	{
 		// Harmonize the item with the rest...
 		flags ^= Qt::ItemIsEditable;
-		item->setFlags(flags | Qt::ItemIsUserCheckable | Qt::ItemIsTristate);
+		item->setFlags(flags | Qt::ItemIsUserCheckable | Qt::ItemIsAutoTristate);
 		item->setCheckState(Qt::Checked);
 		QString groupId = item->text().trimmed();
 		item->setData(Qt::UserRole, groupId);
@@ -1586,8 +1605,11 @@ void SatellitesDialog::savePredictedIridiumFlares()
 		}
 
 		QTextStream predictedIridiumFlaresList(&predictedIridiumFlares);
+		#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		predictedIridiumFlaresList.setEncoding(QStringConverter::Utf8);
+		#else
 		predictedIridiumFlaresList.setCodec("UTF-8");
-
+		#endif
 		predictedIridiumFlaresList << iridiumFlaresHeader.join(delimiter) << StelUtils::getEndLineChar();
 
 		for (int i = 0; i < count; i++)

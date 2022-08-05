@@ -61,7 +61,11 @@
 #include <QFontDialog>
 #include <QComboBox>
 #include <QDir>
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#include <QWindow>
+#else
 #include <QDesktopWidget>
+#endif
 #include <QImageWriter>
 #include <QScreen>
 
@@ -124,6 +128,9 @@ void ConfigurationDialog::retranslate()
 		//(trigger re-displaying the description of the current item)
 		#ifdef ENABLE_SCRIPTING
 		scriptSelectionChanged(ui->scriptListWidget->currentItem()->text());
+		#else
+		// we had hidden and re-sorted the tabs, and must now manually re-set the label.
+		ui->stackListWidget->item(5)->setText(QCoreApplication::translate("configurationDialogForm", "Plugins", nullptr));
 		#endif
 
 		populateDitherList();
@@ -178,7 +185,7 @@ void ConfigurationDialog::createDialogContent()
 	cb->model()->sort(0);
 	updateCurrentLanguage();
 	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentLanguage()));
-	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectLanguage(const QString&)));
+	connect(cb, SIGNAL(currentIndexChanged(const int)), this, SLOT(selectLanguage(const int)));
 	// Do the same for sky language:
 	cb = ui->skycultureLanguageComboBox;
 	cb->clear();
@@ -186,7 +193,7 @@ void ConfigurationDialog::createDialogContent()
 	cb->model()->sort(0);
 	updateCurrentSkyLanguage();
 	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentSkyLanguage()));
-	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectSkyLanguage(const QString&)));
+	connect(cb, SIGNAL(currentIndexChanged(const int)), this, SLOT(selectSkyLanguage(const int)));
 	#else
 	ui->groupBox_LanguageSettings->hide();
 	#endif
@@ -221,7 +228,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->defaultSelectedInfoRadio, SIGNAL(released()), this, SLOT(setDefaultSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
 	connect(ui->customSelectedInfoRadio, SIGNAL(released()), this, SLOT(setCustomSelectedInfo()));
-	connect(ui->buttonGroupDisplayedFields, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedInfoFromCheckBoxes()));
+	connect(ui->buttonGroupDisplayedFields, SIGNAL(buttonClicked(QAbstractButton *)), this, SLOT(setSelectedInfoFromCheckBoxes()));
 	if (appGui)
 		connect(appGui, SIGNAL(infoStringChanged()), this, SLOT(updateSelectedInfoGui()));
 	
@@ -264,7 +271,7 @@ void ConfigurationDialog::createDialogContent()
 		idx = ui->dateFormatsComboBox->findData(QVariant("system_default"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->dateFormatsComboBox->setCurrentIndex(idx);
-	connect(ui->dateFormatsComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(setDateFormat()));
+	connect(ui->dateFormatsComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(setDateFormat()));
 
 	// Display formats of time
 	populateTimeFormatsList();
@@ -275,7 +282,7 @@ void ConfigurationDialog::createDialogContent()
 		idx = ui->timeFormatsComboBox->findData(QVariant("system_default"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->timeFormatsComboBox->setCurrentIndex(idx);
-	connect(ui->timeFormatsComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(setTimeFormat()));
+	connect(ui->timeFormatsComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(setTimeFormat()));
 	if (StelApp::getInstance().getSettings()->value("gui/flag_time_jd", false).toBool())
 		ui->jdRadioButton->setChecked(true);
 	else
@@ -362,7 +369,7 @@ void ConfigurationDialog::createDialogContent()
 
 	// Dithering
 	populateDitherList();
-	connect(ui->ditheringComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(setDitherFormat()));
+	connect(ui->ditheringComboBox, SIGNAL(currentIndexChanged(const int)), this, SLOT(setDitherFormat()));
 
 	// General Option Save
 	connect(ui->saveViewDirAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewDirSettings()));
@@ -411,8 +418,10 @@ void ConfigurationDialog::createDialogContent()
 	populateScriptsList();
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateScriptsList()));
 	#else
-	ui->configurationStackedWidget->removeWidget(ui->page_Scripts);
-	delete ui->stackListWidget->takeItem(5);
+	ui->configurationStackedWidget->removeWidget(ui->page_Scripts); // only hide, no delete!
+	QListWidgetItem *item = ui->stackListWidget->takeItem(5); // take out from its place.
+	ui->stackListWidget->addItem(item); // We must add it back to the end of the tabs, as...
+	ui->stackListWidget->item(6)->setHidden(true); // deleting would cause a crash during retranslation. (GH#2544)
 	#endif
 
 	// plugins control
@@ -475,15 +484,17 @@ void ConfigurationDialog::updateCurrentSkyLanguage()
 		cb->setCurrentIndex(lt);
 }
 
-void ConfigurationDialog::selectLanguage(const QString& langName)
+void ConfigurationDialog::selectLanguage(const int id)
 {
+	const QString &langName=static_cast<QComboBox*>(sender())->itemText(id);
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
 	StelMainView::getInstance().initTitleI18n();
 }
 
-void ConfigurationDialog::selectSkyLanguage(const QString& langName)
+void ConfigurationDialog::selectSkyLanguage(const int id)
 {
+	const QString &langName=static_cast<QComboBox*>(sender())->itemText(id);
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
 }
@@ -842,7 +853,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("stars/flag_star_twinkle",				propMgr->getStelPropertyValue("StelSkyDrawer.flagStarTwinkle").toBool());
 	conf->setValue("stars/star_twinkle_amount",			QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.twinkleAmount").toDouble(), 'f', 2));
 	conf->setValue("stars/flag_star_spiky",					propMgr->getStelPropertyValue("StelSkyDrawer.flagStarSpiky").toBool());
-	conf->setValue("astro/twilight_altitude",				propMgr->getStelPropertyValue("StelObjectMgr.twilightAltitude").toDouble());
+	conf->setValue("astro/twilight_altitude",				propMgr->getStelPropertyValue("SpecificTimeMgr.twilightAltitude").toDouble());
 	conf->setValue("astro/flag_star_magnitude_limit",		propMgr->getStelPropertyValue("StelSkyDrawer.flagStarMagnitudeLimit").toBool());
 	conf->setValue("astro/star_magnitude_limit",			QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.customStarMagLimit").toDouble(), 'f', 2));
 	conf->setValue("astro/flag_planet_magnitude_limit",		propMgr->getStelPropertyValue("StelSkyDrawer.flagPlanetMagnitudeLimit").toBool());
@@ -880,10 +891,9 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/milky_way_saturation",			QString::number(propMgr->getStelPropertyValue("MilkyWay.saturation").toDouble(), 'f', 2));
 	conf->setValue("astro/flag_zodiacal_light",				propMgr->getStelPropertyValue("ZodiacalLight.flagZodiacalLightDisplayed").toBool());
 	conf->setValue("astro/zodiacal_light_intensity",			QString::number(propMgr->getStelPropertyValue("ZodiacalLight.intensity").toDouble(), 'f', 2));
-	conf->setValue("astro/flag_grs_custom",				propMgr->getStelPropertyValue("SolarSystem.flagCustomGrsSettings").toBool());
-	conf->setValue("astro/grs_longitude",					propMgr->getStelPropertyValue("SolarSystem.customGrsLongitude").toInt());
-	conf->setValue("astro/grs_drift",						propMgr->getStelPropertyValue("SolarSystem.customGrsDrift").toDouble());
-	conf->setValue("astro/grs_jd",						propMgr->getStelPropertyValue("SolarSystem.customGrsJD").toDouble());
+	conf->setValue("astro/grs_longitude",					propMgr->getStelPropertyValue("SolarSystem.grsLongitude").toInt());
+	conf->setValue("astro/grs_drift",						propMgr->getStelPropertyValue("SolarSystem.grsDrift").toDouble());
+	conf->setValue("astro/grs_jd",						propMgr->getStelPropertyValue("SolarSystem.grsJD").toDouble());
 	conf->setValue("astro/shadow_enlargement_danjon",		propMgr->getStelPropertyValue("SolarSystem.earthShadowEnlargementDanjon").toBool());
 	conf->setValue("astro/flag_planets_labels",				propMgr->getStelPropertyValue("SolarSystem.labelsDisplayed").toBool());
 	conf->setValue("astro/labels_amount",					propMgr->getStelPropertyValue("SolarSystem.labelsAmount").toDouble());
@@ -1210,7 +1220,13 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("main/screenshot_custom_width",			propMgr->getStelPropertyValue("MainView.customScreenshotWidth").toInt());
 	conf->setValue("main/screenshot_custom_height",			propMgr->getStelPropertyValue("MainView.customScreenshotHeight").toInt());
 
+	QWidget& mainWindow = StelMainView::getInstance();
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	QScreen *mainScreen = mainWindow.windowHandle()->screen();
+	int screenNum=qApp->screens().indexOf(mainScreen);
+#else
 	int screenNum = qApp->desktop()->screenNumber(&StelMainView::getInstance());
+#endif
 	conf->setValue("video/screen_number", screenNum);
 
 	// full screen and window size
@@ -1219,7 +1235,6 @@ void ConfigurationDialog::saveAllSettings()
 	{
 		QRect screenGeom = QGuiApplication::screens().at(screenNum)->geometry();
 
-		QWidget& mainWindow = StelMainView::getInstance();
 		conf->setValue("video/screen_w", mainWindow.size().width());
 		conf->setValue("video/screen_h", mainWindow.size().height());
 		conf->setValue("video/screen_x", mainWindow.x() - screenGeom.x());
@@ -1825,7 +1840,7 @@ void ConfigurationDialog::updateTabBarListWidgetWidth()
 	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
 	QFont font;
 	font.setPixelSize(14);
-	font.setWeight(75);
+	font.setWeight(QFont::Bold);
 	QFontMetrics fontMetrics(font);
 
 	int iconSize = ui->stackListWidget->iconSize().width();

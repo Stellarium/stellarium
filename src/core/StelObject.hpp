@@ -160,6 +160,8 @@ public:
 
 	//! Return object's type. It should be English lowercase name of the type of the object.
 	virtual QString getObjectType() const = 0;
+	//! Return object's type. It should be translated lowercase name of the type of the object.
+	virtual QString getObjectTypeI18n() const = 0;
 
 	//! Returns a unique identifier for this object.
 	//! The ID should be unique for all objects of the same type,

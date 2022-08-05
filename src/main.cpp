@@ -166,12 +166,14 @@ int main(int argc, char **argv)
 	QCoreApplication::setOrganizationName("stellarium");
 
 	// Support high DPI pixmaps and fonts
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
+#endif
 	if (argList.contains("--scale-gui")) // Variable QT_SCALE_FACTOR should be defined before app will be created!
 		qputenv("QT_SCALE_FACTOR", CLIProcessor::argsGetOptionWithArg(argList, "", "--scale-gui", "").toString().toLatin1());
 
-	#if defined(Q_OS_MAC)
+	#if defined(Q_OS_MACOS)
 	QFileInfo appInfo(QString::fromUtf8(argv[0]));
 	QDir appDir(appInfo.absolutePath());
 	appDir.cdUp();
@@ -183,6 +185,58 @@ int main(int argc, char **argv)
 
 	QGuiApplication::setDesktopSettingsAware(false);
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	/// We can define our default OpenGL context only with Qt6 when we have no more dynamic OpenGL/ANGLE.
+	/// IMPORTANT: OpenGL default context/formats must be configured before constructing app!
+	/// Copy from StelMainView
+	/// TODO: adapt/remove code from StelMainView?
+	/// TODO: Find out of this works on GLES devices!
+
+	//use the default format as basis
+	QSurfaceFormat fmt = QSurfaceFormat::defaultFormat();
+
+	//if on an GLES build, do not set the format
+	//if (fmt.renderableType()==QSurfaceFormat::OpenGL) // Probably at this point it is only QSurfaceFormat::DefaultRenderableType
+	{
+#ifdef Q_OS_MACOS
+		// On OSX, you should get what you ask for. Setting format later may not work.
+		// Let's assume all MacOSX deliver at least 3.3 compatibility profile.
+		fmt.setMajorVersion(3);
+		fmt.setMinorVersion(3);
+		fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
+#else
+		// OGL 2.1 + FBOs should basically be the minimum required for Stellarium
+		fmt.setMajorVersion(2);
+		fmt.setMinorVersion(1);
+		//fmt.setProfile(QSurfaceFormat::CoreProfile);
+#endif
+	}
+
+	//request some sane buffer formats
+	fmt.setRedBufferSize(8);
+	fmt.setGreenBufferSize(8);
+	fmt.setBlueBufferSize(8);
+	fmt.setAlphaBufferSize(8);
+	fmt.setDepthBufferSize(24);
+	//Stencil buffer seems necessary for GUI boxes
+	fmt.setStencilBufferSize(8);
+	//const int multisamplingLevel = configuration->value("video/multisampling", 0).toInt();
+	//if(  multisamplingLevel  && (qApp->property("spout").toString() == "none") && (!isMesa) )
+	//	fmt.setSamples(multisamplingLevel);
+
+#ifdef OPENGL_DEBUG_LOGGING
+	//try to enable GL debugging using GL_KHR_debug
+	fmt.setOption(QSurfaceFormat::DebugContext);
+#endif
+	//vsync needs to be set on the default format for it to work
+	//fmt.setSwapInterval(0);
+
+	QSurfaceFormat::setDefaultFormat(fmt);
+
+	/////////////////////////////////////////////////////////////////////////////////
+#endif
+
 #ifndef USE_QUICKVIEW
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 	// The QApplication MUST be created before the StelFileMgr is initialized.
@@ -190,6 +244,15 @@ int main(int argc, char **argv)
 #else
 	QGuiApplication::setDesktopSettingsAware(false);
 	QGuiApplication app(argc, argv);
+#endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	// Follow vague hint from https://stackoverflow.com/questions/70152818/no-space-between-letters-in-text
+	// For some absurd reason, Qt6 needs some initialisation kick so that the font engine starts working.
+	// Else all characters are squashed together.
+	QSize absurdInitBugSize=QFontMetrics(qApp->font()).size(Qt::TextSingleLine, "A really absurd bug!");
+	Q_ASSERT(absurdInitBugSize.width()>0);
+	Q_UNUSED(absurdInitBugSize)
 #endif
 
 	// QApplication sets current locale, but
@@ -359,7 +422,12 @@ int main(int argc, char **argv)
 	// Details: https://sourceforge.net/p/stellarium/discussion/278769/thread/810a1e5c/
 	QString baseFont = confSettings->value("gui/base_font_name", "Verdana").toString();
 	QFont tmpFont(baseFont);
+	#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
+	tmpFont.setHintingPreference(QFont::PreferFullHinting);
+	tmpFont.setStyleHint(QFont::AnyStyle, QFont::PreferAntialias);
+	#else
 	tmpFont.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);
+	#endif
 #else
 	QString baseFont = confSettings->value("gui/base_font_name", "DejaVu Sans").toString();
 	QFont tmpFont(baseFont);

@@ -27,6 +27,8 @@
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelGui.hpp"
+#include "SolarSystem.hpp"
+#include "StelUtils.hpp"
 
 #include <QComboBox>
 
@@ -48,6 +50,7 @@ void NavStarsWindow::retranslate()
 		setAboutHtml();
 		populateNavigationalStarsSets();
 		populateNavigationalStarsSetDescription();
+		populateToday();
 	}
 }
 
@@ -83,6 +86,12 @@ void NavStarsWindow::createDialogContent()
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveSettings()));	
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetSettings()));
 
+	populateToday();
+	connect(ui->refreshData, SIGNAL(clicked()), this, SLOT(populateToday()));
+	StelCore* core = StelApp::getInstance().getCore();
+	connect(core, SIGNAL(dateChanged()), this, SLOT(populateToday()));
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(populateToday()));
+
 	// About tab
 	setAboutHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -104,6 +113,112 @@ void NavStarsWindow::resetSettings()
 	}
 	else
 		qDebug() << "[NavStars] restore defaults is canceled...";
+}
+
+void NavStarsWindow::populateToday()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	const double utcShift = core->getUTCOffset(core->getJD()) / 24.; // Fix DST shift...
+	StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
+	PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
+	double duration;
+	QString moonrise, moonset, dayBegin, dayEnd, civilTwilightBegin, civilTwilightEnd, nauticalTwilightBegin,
+		nauticalTwilightEnd, astronomicalTwilightBegin, astronomicalTwilightEnd, dayDuration,
+		civilTwilightDuration, nauticalTwilightDuration, astronomicalTwilightDuration, dash = QChar(0x2014);
+
+	// Moon
+	Vec4d moon = GETSTELMODULE(SolarSystem)->getMoon()->getRTSTime(core, 0.);
+	if (moon[3]==0.)
+	{
+		moonrise = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(moon[0]+utcShift), true);
+		moonset = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(moon[2]+utcShift), true);
+	}
+	else
+		moonrise = moonset = dash;
+
+	// day
+	Vec4d day = sun->getRTSTime(core, 0.);
+	if (day[3]==0.)
+	{
+		dayBegin = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(day[0]+utcShift), true);
+		dayEnd = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(day[2]+utcShift), true);
+		duration = qAbs(day[2]-day[0])*24.;
+	}
+	else
+	{
+		dayBegin = dayEnd = dash;
+		duration = (day[3]>99.) ? 24. : 0.;
+	}
+	dayDuration = StelUtils::hoursToHmsStr(duration, true);
+
+	// civil twilight
+	Vec4d civilTwilight = sun->getRTSTime(core, -6.);
+	if (civilTwilight[3]==0.)
+	{
+		civilTwilightBegin = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(civilTwilight[0]+utcShift), true);
+		civilTwilightEnd = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(civilTwilight[2]+utcShift), true);
+		duration = qAbs(civilTwilight[2]-civilTwilight[0])*24.;
+	}
+	else
+	{
+		civilTwilightBegin = civilTwilightEnd = dash;
+		duration = (civilTwilight[3]>99.) ? 24. : 0.;
+	}
+	civilTwilightDuration = StelUtils::hoursToHmsStr(duration, true);
+
+	// nautical twilight
+	Vec4d nauticalTwilight = sun->getRTSTime(core, -12.);
+	if (nauticalTwilight[3]==0.)
+	{
+		nauticalTwilightBegin = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(nauticalTwilight[0]+utcShift), true);
+		nauticalTwilightEnd = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(nauticalTwilight[2]+utcShift), true);
+		duration = qAbs(nauticalTwilight[2]-nauticalTwilight[0])*24.;
+	}
+	else
+	{
+		nauticalTwilightBegin = nauticalTwilightEnd = dash;
+		duration = (nauticalTwilight[3]>99.) ? 24. : 0.;
+	}
+	nauticalTwilightDuration = StelUtils::hoursToHmsStr(duration, true);
+
+	// astronomical twilight
+	Vec4d astronomicalTwilight = sun->getRTSTime(core, -18.);
+	if (astronomicalTwilight[3]==0.)
+	{
+		astronomicalTwilightBegin = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(astronomicalTwilight[0]+utcShift), true);
+		astronomicalTwilightEnd = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(astronomicalTwilight[2]+utcShift), true);
+		duration = qAbs(astronomicalTwilight[2]-astronomicalTwilight[0])*24.;
+	}
+	else
+	{
+		astronomicalTwilightBegin = astronomicalTwilightEnd = dash;
+		duration = (astronomicalTwilight[3]>99.) ? 24. : 0.;
+	}
+	astronomicalTwilightDuration = StelUtils::hoursToHmsStr(duration, true);
+
+	// fill the data
+	ui->labelToday->setText(localeMgr->getPrintableDateLocal(core->getJD()));
+	ui->labelDayBegin->setText(dayBegin);
+	ui->labelDayEnd->setText(dayEnd);
+	ui->labelDayDuration->setText(dayDuration);
+	ui->labelCivilTwilightBegin->setText(civilTwilightBegin);
+	ui->labelCivilTwilightEnd->setText(civilTwilightEnd);
+	ui->labelCivilTwilightDuration->setText(civilTwilightDuration);
+	ui->labelNauticalTwilightBegin->setText(nauticalTwilightBegin);
+	ui->labelNauticalTwilightEnd->setText(nauticalTwilightEnd);
+	ui->labelNauticalTwilightDuration->setText(nauticalTwilightDuration);
+	ui->labelAstronomicalTwilightBegin->setText(astronomicalTwilightBegin);
+	ui->labelAstronomicalTwilightEnd->setText(astronomicalTwilightEnd);
+	ui->labelAstronomicalTwilightDuration->setText(astronomicalTwilightDuration);
+	ui->labelMoonRise->setText(moonrise);
+	ui->labelMoonSet->setText(moonset);
+
+	// tooltips
+	// TRANSLATORS: full phrase is "XX° below the horizon"
+	QString belowHorizon = q_("below the horizon");
+	ui->labelCivilTwilight->setToolTip(QString("6° %1").arg(belowHorizon));
+	ui->labelNauticalTwilight->setToolTip(QString("12° %1").arg(belowHorizon));
+	ui->labelAstronomicalTwilight->setToolTip(QString("18° %1").arg(belowHorizon));
 }
 
 void NavStarsWindow::populateNavigationalStarsSets()

@@ -61,16 +61,13 @@ details of the implementation encapsulated.
 #include <string.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <errno.h>
 
 #include "StelUtils.hpp"
 /**** include variable and type definitions, specific for this C version */
 
 #include "jpleph.h"
 #include "jpl_int.h"
-
-#define TRUE 1
-#define FALSE 0
-
 
 // GZ patches for Large File Support for DE431 past AD10100...
 #if defined(Q_OS_WIN)
@@ -751,7 +748,18 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
     unsigned i, j;
     unsigned long de_version;
     char title[84];
+
+    errno=0;
     FILE *ifile = fopen(ephemeris_filename, "rb");
+    int err=errno;
+    if (err!=0)
+    {
+	    qDebug() << "Error" << err << " -- Problem opening file" << ephemeris_filename << ":" << strerror(err);
+#ifdef Q_OS_WIN
+	    qDebug() << "It seems on Windows filename translation sometimes fails on Debug builds. Disable the DE* on this build!";
+#endif
+    }
+    Q_ASSERT_X(err==0, "Problem opening file", strerror(err));
 
     struct jpl_eph_data *rval;
     struct jpl_eph_data temp_data;

@@ -31,6 +31,7 @@
 #include "SolarSystem.hpp"
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
+#include "SpecificTimeMgr.hpp"
 #include "planetsephems/sidereal_time.h"
 #include "planetsephems/precession.h"
 
@@ -721,7 +722,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		{
 			QString sMTwilight = qc_("Morning twilight", "celestial event");
 			QString sETwilight = qc_("Evening twilight", "celestial event");
-			const double twilightAltitude = omgr->getTwilightAltitude();
+			const double twilightAltitude = GETSTELMODULE(SpecificTimeMgr)->getTwilightAltitude();
 			QString alt = QString::number(twilightAltitude, 'f', 1);
 			Vec4d twilight = getRTSTime(core, twilightAltitude);
 			if (twilight[3]==0.)
@@ -875,9 +876,14 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 	str.append(omgr->getExtraInfoStrings(DebugAid).join(' ')); // TBD: Remove for Release builds?
 
 	// hack for avoiding an empty line before table
-	str.replace(QRegularExpression("<br(\\s*/)?><table"), "<table");
+	static const QRegularExpression tableRe("<br(\\s*/)?><table");
+	static const QRegularExpression brRe("<br(\\s*/)?>\\s*$");
+	static const QRegularExpression brRe2("<br(\\s*/)?>\\s*$");
+	static const QRegularExpression tdRe("<td(\\w*)?>");
+	static const QRegularExpression tableRe2("<table(\\w*)?>");
+	str.replace(tableRe, "<table");
 	// chomp trailing line breaks
-	str.replace(QRegularExpression("<br(\\s*/)?>\\s*$"), "");
+	str.replace(brRe, "");
 
 	if (flags&PlainText)
 	{
@@ -885,12 +891,12 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		str.replace("</b>", "");
 		str.replace("<h2>", "");
 		str.replace("</h2>", "\n");
-		str.replace(QRegularExpression("<br(\\s*/)?>"), "\n");
+		str.replace(brRe2, "\n");
 		str.replace("<tr>", "");
-		str.replace(QRegularExpression("<td(\\w*)?>"), "");
+		str.replace(tdRe, "");
 		str.replace("<td>", "");
 		str.replace("</tr>", "\n");
-		str.replace(QRegularExpression("<table(\\w*)?>"), "");
+		str.replace(tableRe2, "");
 		str.replace("</table>", "");
 	}
 	else if(!(flags&NoFont))
@@ -1102,13 +1108,16 @@ QStringList StelObject::getExtraInfoStrings(const InfoStringGroup& flags) const
 
 void StelObject::removeExtraInfoStrings(const InfoStringGroup& flags)
 {
-	QMultiMap<InfoStringGroup, QString>::iterator i = extraInfoStrings.begin();
-	while (i != extraInfoStrings.end())
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	QMutableMultiMapIterator<InfoStringGroup, QString> i(extraInfoStrings);
+#else
+	QMutableMapIterator<InfoStringGroup, QString> i(extraInfoStrings);
+#endif
+	while (i.hasNext())
 	{
+		i.next();
 		if (i.key() & flags)
-			i=extraInfoStrings.erase(i);
-		else
-			++i;
+			i.remove();
 	}
 }
 

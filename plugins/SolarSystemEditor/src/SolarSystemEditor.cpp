@@ -40,7 +40,9 @@
 #include <QSettings>
 #include <QString>
 #include <QRegularExpression>
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
 #include <QTextCodec>
+#endif
 
 #include <cmath>
 #include <stdexcept>
@@ -288,6 +290,15 @@ bool SolarSystemEditor::isFileEncodingValid(QString filePath) const
 	}
 	else
 	{
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		QTextStream in(&checkFile);
+		in.setEncoding(QStringConverter::Utf8);
+		in.readAll();
+		checkFile.close();
+
+		if (in.status()!=QTextStream::Ok)
+#else
+
 		QByteArray byteArray = checkFile.readAll();
 		checkFile.close();
 
@@ -296,6 +307,7 @@ bool SolarSystemEditor::isFileEncodingValid(QString filePath) const
 		const QString text = codec->toUnicode(byteArray.constData(), byteArray.size(), &state);
 		Q_UNUSED(text)
 		if (state.invalidChars > 0)
+#endif
 		{
 			qDebug() << "[Solar System Editor] Not a valid UTF-8 sequence in file " << filePath;
 			return false;

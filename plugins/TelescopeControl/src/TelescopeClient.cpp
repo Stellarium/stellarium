@@ -146,7 +146,7 @@ QString TelescopeClient::getInfoString(const StelCore* core, const InfoStringGro
 		oss << "<h2>" << nameI18n << "</h2>";
 
 	if (flags&ObjectType)
-		oss << QString("%1: <b>%2</b><br />").arg(q_("Type"), q_(getObjectType()));
+		oss << QString("%1: <b>%2</b><br />").arg(q_("Type"), getObjectTypeI18n());
 
 	oss << getCommonInfoString(core, flags);
 	oss << getTelescopeInfoString(core, flags);

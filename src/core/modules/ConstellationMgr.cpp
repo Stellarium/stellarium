@@ -34,8 +34,8 @@
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
-#include "StelSkyDrawer.hpp"
-#include "SolarSystem.hpp"
+#include "Planet.hpp"
+#include "StelUtils.hpp"
 
 #include <vector>
 #include <QDebug>
@@ -45,8 +45,6 @@
 #include <QString>
 #include <QStringList>
 #include <QDir>
-
-using namespace std;
 
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
@@ -1362,7 +1360,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	double DE, RA;
 	Vec3d XYZ;
 	unsigned numc;
-	vector<Vec3d> *points = Q_NULLPTR;
+	std::vector<Vec3d> *points = Q_NULLPTR;
 	QString consname, data = "";
 	unsigned int i = 0;
 
@@ -1390,7 +1388,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 		if(num == 0)
 			continue; // empty line
 
-		points = new vector<Vec3d>;
+		points = new std::vector<Vec3d>;
 
 		for (unsigned int j=0;j<num;j++)
 		{

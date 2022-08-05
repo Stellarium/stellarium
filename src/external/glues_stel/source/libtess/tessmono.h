@@ -62,6 +62,7 @@
  * separate an interior region from an exterior one.
  */
 
+#include "mesh.h"
 int  __gl_meshTessellateMonoRegion(GLUESface* face);
 int  __gl_meshTessellateInterior(GLUESmesh* mesh);
 void __gl_meshDiscardExterior(GLUESmesh* mesh);

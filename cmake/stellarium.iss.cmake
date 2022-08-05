@@ -43,8 +43,8 @@ Source: "@CMAKE_SOURCE_DIR@\data\stellarium-devdocs.url"; DestDir: "{app}"; Flag
 Source: "@CMAKE_SOURCE_DIR@\*.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "@CMAKE_SOURCE_DIR@\COPYING"; DestDir: "{app}"; Flags: ignoreversion; DestName: "GPL.txt"
 Source: "@CMAKE_SOURCE_DIR@\ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.txt"
-; Qt5 stuff
-Source: "@CMAKE_INSTALL_PREFIX@\qt5stuff\*"; DestDir: "{app}\"; Flags: recursesubdirs ignoreversion
+; Qt stuff
+Source: "@CMAKE_INSTALL_PREFIX@\qtstuff\*"; DestDir: "{app}\"; Flags: recursesubdirs ignoreversion
 ; Stellarium's stuff
 Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs ignoreversion
 @ISS_OPENSSL_LIBS@
@@ -120,9 +120,7 @@ Name: "nl"; MessagesFile: "compiler:Languages\Dutch.isl"
 Name: "fi"; MessagesFile: "compiler:Languages\Finnish.isl"
 Name: "fr"; MessagesFile: "compiler:Languages\French.isl,@CMAKE_SOURCE_DIR@\util\ISL\FrenchCM.isl"
 Name: "de"; MessagesFile: "compiler:Languages\German.isl,@CMAKE_SOURCE_DIR@\util\ISL\GermanCM.isl"
-Name: "el"; MessagesFile: "compiler:Languages\Greek.isl"
 Name: "he"; MessagesFile: "compiler:Languages\Hebrew.isl"
-Name: "hu"; MessagesFile: "compiler:Languages\Hungarian.isl"
 Name: "it"; MessagesFile: "compiler:Languages\Italian.isl"
 Name: "ja"; MessagesFile: "compiler:Languages\Japanese.isl"
 Name: "no"; MessagesFile: "compiler:Languages\Norwegian.isl,@CMAKE_SOURCE_DIR@\util\ISL\NorwegianCM.isl"
@@ -130,11 +128,13 @@ Name: "pl"; MessagesFile: "compiler:Languages\Polish.isl"
 Name: "pt_BR"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl,@CMAKE_SOURCE_DIR@\util\ISL\BrazilianPortugueseCM.isl"
 Name: "pt"; MessagesFile: "compiler:Languages\Portuguese.isl"
 Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl,@CMAKE_SOURCE_DIR@\util\ISL\RussianCM.isl"
-Name: "sr"; MessagesFile: "compiler:Languages\SerbianCyrillic.isl"
 Name: "sl"; MessagesFile: "compiler:Languages\Slovenian.isl"
 Name: "es"; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: "uk"; MessagesFile: "compiler:Languages\Ukrainian.isl,@CMAKE_SOURCE_DIR@\util\ISL\UkrainianCM.isl"
 ; Unofficial translations of GUI of Inno Setup
+Name: "el"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\Greek.isl"
+Name: "hu"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\Hungarian.isl"
+Name: "sr"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\SerbianCyrillic.isl"
 Name: "bg"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\Bulgarian.isl,@CMAKE_SOURCE_DIR@\util\ISL\BulgarianCM.isl"
 Name: "bs"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\Bosnian.isl,@CMAKE_SOURCE_DIR@\util\ISL\BosnianCM.isl"
 Name: "ko"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\Korean.isl,@CMAKE_SOURCE_DIR@\util\ISL\KoreanCM.isl"

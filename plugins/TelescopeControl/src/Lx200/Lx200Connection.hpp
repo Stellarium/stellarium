@@ -28,7 +28,6 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "common/SerialPort.hpp"
 
 #include <list>
-using namespace std;
 
 class Lx200Command;
 
@@ -60,7 +59,7 @@ private:
 	void flushCommandList(void);
 	
 private:
-	list<Lx200Command*> command_list;
+	std::list<Lx200Command*> command_list;
 	long long int time_between_commands;
 	long long int next_send_time;
 	long long int read_timeout_endtime;

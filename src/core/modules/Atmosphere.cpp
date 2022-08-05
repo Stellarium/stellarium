@@ -25,7 +25,6 @@
 #include "StelToneReproducer.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
-#include "StelFileMgr.hpp"
 #include "Dithering.hpp"
 
 #include <QFile>

@@ -337,10 +337,6 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
                 Location = QString("%1, %2").arg(loc.name, loc.region);
             }
 
-            // TODO only for test: delete after
-            // objectName = "Unnamed object";
-            // *********************************
-
             // Check if the object name is empty.
             if (objectName.isEmpty()) {
                 objectName = q_("Unnamed object");

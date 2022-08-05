@@ -56,6 +56,10 @@ public:
 	{
 		return (isMarker ? N_("custom marker") : N_("custom object"));
 	}
+	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE
+	{
+		return q_(getObjectType());
+	}
 
 	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{
