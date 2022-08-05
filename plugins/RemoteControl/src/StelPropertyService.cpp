@@ -20,9 +20,6 @@
 #include "StelPropertyService.hpp"
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelLocationMgr.hpp"
 
 #include <QJsonArray>
 #include <QJsonDocument>

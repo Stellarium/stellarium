@@ -329,16 +329,30 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	if (event->type()==QEvent::MouseButtonPress && event->button()==Qt::LeftButton)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		if (prj->unProject(event->position().x(),event->position().y(),startPoint))
+#else
 		if (prj->unProject(event->x(),event->y(),startPoint))
+#endif
 		{ // Nick Fedoseev patch: improve click match
 			Vec3d win;
 			prj->project(startPoint,win);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+			double dx = event->position().x() - win.v[0];
+			double dy = event->position().y() - win.v[1];
+			prj->unProject(event->position().x()+dx, event->position().y()+dy, startPoint);
+#else
 			double dx = event->x() - win.v[0];
 			double dy = event->y() - win.v[1];
 			prj->unProject(event->x()+dx, event->y()+dy, startPoint);
+#endif
 		}
 		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		prjHor->unProject(event->position().x(),event->position().y(),startPointHor);
+#else
 		prjHor->unProject(event->x(),event->y(),startPointHor);
+#endif
 
 		// first click reset the line... only draw it after we've dragged a little.
 		if (!dragging)
@@ -365,16 +379,31 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	else if (event->type()==QEvent::MouseButtonPress && event->button()==Qt::RightButton)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		if (prj->unProject(event->position().x(),event->position().y(),endPoint))
+#else
 		if (prj->unProject(event->x(),event->y(),endPoint))
+#endif
 		{ // Nick Fedoseev patch: improve click match
 			Vec3d win;
 			prj->project(endPoint,win);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+			double dx = event->position().x() - win.v[0];
+			double dy = event->position().y() - win.v[1];
+			prj->unProject(event->position().x()+dx, event->position().y()+dy, endPoint);
+#else
 			double dx = event->x() - win.v[0];
 			double dy = event->y() - win.v[1];
 			prj->unProject(event->x()+dx, event->y()+dy, endPoint);
+#endif
+
 		}
 		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		prjHor->unProject(event->position().x(),event->position().y(),endPointHor);
+#else
 		prjHor->unProject(event->x(),event->y(),endPointHor);
+#endif
 		calculateEnds();
 		event->setAccepted(true);
 		return;
