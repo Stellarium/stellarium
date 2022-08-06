@@ -605,18 +605,24 @@ void AstroCalcChart::bufferYrange(Series series, double *min, double *max, bool 
 		case Declination2:
 		case TransitAltitude1:
 		case TransitAltitude2:
+		{
 			*min=qMax(-90., *min-(strictMin ? 0. : 5.));
 			*max=qMin( 90., *max+5.);
 			break;
+		}
 		case AzVsTime:
+		{
 			*min=qMax(  0., *min);
 			*max=qMin(360., *max);
 			break;
+		}
 		case RightAscension1:
 		case RightAscension2:
+		{
 			*min=qMax( 0., *min);
 			*max=qMin(24., *max);
 			break;
+		}
 		case AngularSize1:
 		case AngularSize2:
 		case Distance1:
@@ -624,31 +630,36 @@ void AstroCalcChart::bufferYrange(Series series, double *min, double *max, bool 
 		case HeliocentricDistance1:
 		case HeliocentricDistance2:
 		case pcDistanceAU:
+		{
 			*min=qMax( 0., *min);
 			*max*=1.05;
 			break;
+		}
 		case Elongation1:
 		case Elongation2:
 		case PhaseAngle1:
 		case PhaseAngle2:
 		case LunarElongation:
 		case pcDistanceDeg:
+		{
 			*min=qMax(  0., *min-0.05*range);
 			*max=qMin(180., *max+0.05*range);
 			break;
+		}
 		case Magnitude1:
 		case Magnitude2:
+		{
 			*min=*min-0.05*range;
 			*max=*max+0.05*range;
 			break;
+		}
 		case Phase1:
-			*min=qMax(0., *min-0.05*range);
-			*max=qMin(100., *max+0.05*range);
-			break;
 		case Phase2:
+		{
 			*min=qMax(0., *min-0.05*range);
 			*max=qMin(100., *max+0.05*range);
 			break;
+		}
 		default: // 8 other series which should not influence chart scaling
 			break;
 	}
