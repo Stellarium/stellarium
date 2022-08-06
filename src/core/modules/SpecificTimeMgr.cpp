@@ -18,7 +18,6 @@
 
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
@@ -53,7 +52,7 @@ void SpecificTimeMgr::init()
 	core = StelApp::getInstance().getCore();
 	conf = StelApp::getInstance().getSettings();
 	objMgr = GETSTELMODULE(StelObjectMgr);
-	PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
+	sun = GETSTELMODULE(SolarSystem)->getSun();
 
 	QString timeGroup = N_("Specific Time");
 
