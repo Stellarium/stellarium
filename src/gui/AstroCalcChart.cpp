@@ -264,7 +264,9 @@ void AstroCalcChart::showToolTip(const QPointF &point, bool show)
 						  AstroCalcChart::Distance1, AstroCalcChart::Distance2,
 						  AstroCalcChart::HeliocentricDistance1, AstroCalcChart::HeliocentricDistance2,
 						  AstroCalcChart::RightAscension1, AstroCalcChart::RightAscension2,
-						  AstroCalcChart::Phase1, AstroCalcChart::Phase2, AstroCalcChart::pcDistanceAU}).contains(seriesCode))
+						  AstroCalcChart::Phase1, AstroCalcChart::Phase2, AstroCalcChart::pcDistanceAU,
+						  AstroCalcChart::Magnitude1, AstroCalcChart::Magnitude2,
+						  AstroCalcChart::AngularSize1, AstroCalcChart::AngularSize2}).contains(seriesCode))
 		{
 			units="";
 		}
@@ -640,9 +642,12 @@ void AstroCalcChart::bufferYrange(Series series, double *min, double *max, bool 
 			*max=*max+0.05*range;
 			break;
 		case Phase1:
+			*min=qMax(0., *min-0.05*range);
+			*max=qMin(100., *max+0.05*range);
+			break;
 		case Phase2:
 			*min=qMax(0., *min-0.05*range);
-			*max=qMin(1., *max+0.05*range);
+			*max=qMin(100., *max+0.05*range);
 			break;
 		default: // 8 other series which should not influence chart scaling
 			break;
