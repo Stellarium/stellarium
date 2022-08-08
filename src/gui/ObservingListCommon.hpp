@@ -88,6 +88,7 @@ static constexpr char const *KEY_SHORT_NAME = "shortName";
 static constexpr char const *KEY_IS_VISIBLE_MARKER = "isVisibleMarker";
 
 static constexpr char const *SORTING_BY_NAME = "name";
+static constexpr char const *SORTING_BY_NAMEI18N = "nameI18n";
 static constexpr char const *SORTING_BY_TYPE = "type";
 static constexpr char const *SORTING_BY_RA = "right ascension";
 static constexpr char const *SORTING_BY_DEC = "declination";
@@ -95,6 +96,7 @@ static constexpr char const *SORTING_BY_MAGNITUDE = "magnitude";
 static constexpr char const *SORTING_BY_CONSTELLATION = "constellation";
 
 static constexpr int COLUMN_NUMBER_NAME = 1;
+static constexpr int COLUMN_NUMBER_NAMEI18N = 2;
 static constexpr int COLUMN_NUMBER_TYPE = 3;
 static constexpr int COLUMN_NUMBER_RA = 4;
 static constexpr int COLUMN_NUMBER_DEC = 5;

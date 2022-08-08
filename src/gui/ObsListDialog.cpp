@@ -459,10 +459,13 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
 
             listOfObjects = loadListFromJson(map, listOlud);
 
+            // TODO check if it is possible to have an empty list. If no the delete button must be disabled.
+            ui->obsListDeleteButton->setEnabled(true);
+
             if (!listOfObjects.isEmpty()) {
                 ui->obsListHighlightAllButton->setEnabled(true);
                 ui->obsListClearHighlightButton->setEnabled(true);
-                ui->obsListDeleteButton->setEnabled(true);
+                //ui->obsListDeleteButton->setEnabled(true);
 
                 for (const QVariant &object: listOfObjects) {
                     QVariantMap objectMap;
@@ -582,7 +585,7 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
             } else {
                 ui->obsListHighlightAllButton->setEnabled(false);
                 ui->obsListClearHighlightButton->setEnabled(false);
-                ui->obsListDeleteButton->setEnabled(false);
+                //ui->obsListDeleteButton->setEnabled(false);
             }
 
             objectMgr->unSelect();
@@ -1145,6 +1148,8 @@ void ObsListDialog::setVisible(bool v) {
 void ObsListDialog::sortObsListTreeViewByColumnName(const QString& columnName) {
     if (QString::compare(columnName, SORTING_BY_NAME) == 0) {
         obsListListModel->sort(COLUMN_NUMBER_NAME, Qt::AscendingOrder);
+    } else if (QString::compare(columnName, SORTING_BY_NAMEI18N) == 0) {
+        obsListListModel->sort(COLUMN_NUMBER_NAMEI18N, Qt::AscendingOrder);
     } else if (QString::compare(columnName, SORTING_BY_TYPE) == 0) {
         obsListListModel->sort(COLUMN_NUMBER_TYPE, Qt::AscendingOrder);
     } else if (QString::compare(columnName, SORTING_BY_RA) == 0) {

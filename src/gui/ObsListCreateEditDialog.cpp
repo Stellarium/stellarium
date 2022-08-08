@@ -333,7 +333,7 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
             QString Location;
             StelLocation loc = core->getCurrentLocation();
             if (loc.name.isEmpty()) {
-                Location = q_("Location not found");
+                Location = "";
             } else {
                 Location = QString("%1, %2").arg(loc.name, loc.region);
             }
@@ -716,6 +716,9 @@ void ObsListCreateEditDialog::headerClicked(int index) {
     switch (index) {
         case ColumnName:
             sorting = QString(SORTING_BY_NAME);
+            break;
+        case ColumnNameI18n:
+            sorting = QString(SORTING_BY_NAMEI18N);
             break;
         case ColumnType:
             sorting = QString(SORTING_BY_TYPE);
