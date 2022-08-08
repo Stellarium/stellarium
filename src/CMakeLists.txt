@@ -559,7 +559,8 @@ IF(WIN32)
 		     --dir \"\${CMAKE_INSTALL_PREFIX}/qtstuff\"
                      --no-translations
 		     --verbose 1
-                     --compiler-runtime
+		     --no-virtualkeyboard
+		     --compiler-runtime
                      \"\${CMAKE_INSTALL_PREFIX}/bin/stellarium.exe\"
              WORKING_DIRECTORY \"\${CMAKE_INSTALL_PRERIX}/bin\"
              OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.log\"
@@ -575,6 +576,7 @@ IF(WIN32)
                   COMMAND \"${WINDEPLOYQT_COMMAND}\"
 			  --dir \"\${CMAKE_INSTALL_PREFIX}/qtstuff\"
                           --no-translations
+			  --no-virtualkeyboard
                           --compiler-runtime
                           \"\${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"
                   WORKING_DIRECTORY \"\${CMAKE_INSTALL_PRERIX}/bin\"

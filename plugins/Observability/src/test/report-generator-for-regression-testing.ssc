@@ -43,7 +43,6 @@ for (i=0; i < observerLocations.length; i++) {
         var objectName = objectNames[j]
         core.selectObjectByName(objectName, false)
         // Need to wait a sufficient amount of time to allow the object selection to take place.
-        // Could use core.getSelectedObjectInfo to verify the selection was successful, but using that method after selected Achernar crashes Stellarium.
         core.wait(1)
 
         var reportJson = Observability.getReportAsJson()

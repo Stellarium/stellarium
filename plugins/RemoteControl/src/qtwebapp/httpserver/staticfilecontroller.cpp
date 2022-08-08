@@ -27,7 +27,7 @@ StaticFileController::StaticFileController(const StaticFileControllerSettings& s
     maxCachedFileSize=settings.maxCachedFileSize;
     cache.setMaxCost(settings.cacheSize);
     cacheTimeout=settings.cacheTime;
-    qDebug("StaticFileController: cache timeout=%i, size=%i",cacheTimeout,cache.maxCost());
+    qDebug("StaticFileController: cache timeout=%i, size=%i",cacheTimeout,int(cache.maxCost()));
 }
 
 

@@ -45,7 +45,11 @@ QMetaType::Type StelProperty::getType() const
 	//Qt is quite funky when it comes to QVariant::Type vs QMetaType::Type, see
 	//https://doc.qt.io/qt-5/qvariant.html#type
 	//and https://stackoverflow.com/questions/31290606/qmetatypefloat-not-in-qvarianttype
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	return static_cast<QMetaType::Type>(prop.typeId());
+#else
 	return static_cast<QMetaType::Type>(prop.type());
+#endif
 }
 
 void StelProperty::propertyChanged()

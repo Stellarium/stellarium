@@ -71,13 +71,13 @@ void HttpConnectionHandlerPool::cleanup()
         if (!handler->isBusy())
         {
             if (++idleCounter > maxIdleHandlers)
-            {
-                pool.removeOne(handler);
-                qDebug("HttpConnectionHandlerPool: Removed connection handler (%p), pool size is now %i",handler,pool.size());
+	    {
+		pool.removeOne(handler);
+		qDebug("HttpConnectionHandlerPool: Removed connection handler (%p), pool size is now %i",handler,int(pool.size()));
 		delete handler;
-                break; // remove only one handler in each interval
-            }
-        }
+		break; // remove only one handler in each interval
+	    }
+	}
     }
     mutex.unlock();
 }

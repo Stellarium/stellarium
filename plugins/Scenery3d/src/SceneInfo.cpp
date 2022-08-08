@@ -96,7 +96,6 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 		info.shadowFarZ = info.camFarZ;
 
 	// In case we don't have an axis-aligned OBJ model, this is the chance to correct it.
-	info.obj2gridMatrix = Mat4d::identity();
 	if (ini.contains("obj2grid_trafo"))
 	{
 		QString str=ini.value("obj2grid_trafo").toString();
@@ -339,9 +338,11 @@ QStringList SceneInfo::getAllSceneIDs()
 	QStringList result;
 
 	// We just look over the map of names to IDs and extract the values
-	for (auto &i : nameToDirMap.values())
+	QMap<QString,QString>::const_iterator it=nameToDirMap.constBegin();
+	while (it != nameToDirMap.constEnd())
 	{
-		result += i;
+		result += it.value();
+		it++;
 	}
 	return result;
 }
@@ -352,9 +353,11 @@ QStringList SceneInfo::getAllSceneNames()
 	QStringList result;
 
 	// We just look over the map of names to IDs and extract the keys
-	for (auto &i : nameToDirMap.keys())
+	QMap<QString,QString>::const_iterator it=nameToDirMap.constBegin();
+	while (it != nameToDirMap.constEnd())
 	{
-		result += i;
+		result += it.key();
+		it++;
 	}
 	return result;
 }
