@@ -29,6 +29,7 @@
 #include <QtConcurrent>
 
 #include <stdexcept>
+#include <memory>
 
 #include "Scenery3d.hpp"
 #include "Scenery3dRemoteControlService.hpp"
@@ -452,7 +453,7 @@ void Scenery3d::loadScene(const SceneInfo& scene)
 S3DScene* Scenery3d::loadSceneBackground(const SceneInfo& scene) const
 {
 	//the scoped pointer ensures this scene is deleted when errors occur
-	QScopedPointer<S3DScene> newScene(new S3DScene(scene));
+	std::unique_ptr<S3DScene> newScene(new S3DScene(scene));
 
 	if(loadCancel)
 		return Q_NULLPTR;
@@ -509,7 +510,7 @@ S3DScene* Scenery3d::loadSceneBackground(const SceneInfo& scene) const
 
 	updateProgress(q_("Finalizing load..."),6,0,6);
 
-	return newScene.take();
+	return newScene.release();
 }
 
 void Scenery3d::loadSceneCompleted()

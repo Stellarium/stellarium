@@ -293,7 +293,8 @@ IF(WIN32)
           # C4305: type truncation
           # C4351: "new" behaviour, member array default initialization. Required since at least C++98, but funny MSVC throws a warning.
           # C4996: deprecated POSIX names (used in zlib)
-          SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996")
+	  # C5105: defines in macros
+          SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996 /wd5105")
           # Avoid type conflict with C++17 standard
           # SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_HAS_STD_BYTE=0") # Don't do this in Qt6. Just avoid "using namespace std" anywhere! https://developercommunity.visualstudio.com/t/error-c2872-byte-ambiguous-symbol/93889
           # Set multiprocessing and minimal version of Windows
@@ -767,7 +768,7 @@ IF(WIN32)
      IF(WINDEPLOYQT_COMMAND)
 	  MESSAGE(STATUS "Found windeployqt: ${WINDEPLOYQT_COMMAND}")
      ELSE()
-	  MESSAGE(STATUS "windeployqt not found!")
+	  MESSAGE(STATUS "Could NOT find windeployqt")
      ENDIF()
 
      SET(ISS_STELLARIUM_STUFF "; Additional libraries")
@@ -843,7 +844,7 @@ IF(APPLE)
      IF(MACDEPLOYQT_COMMAND)
 	  MESSAGE(STATUS "Found macdeployqt: ${MACDEPLOYQT_COMMAND}")
      ELSE()
-	  MESSAGE(STATUS "macdeployqt not found!")
+	  MESSAGE(STATUS "Could NOT find macdeployqt")
      ENDIF()
 
      IF(NOT CMAKE_OSX_DEPLOYMENT_TARGET)

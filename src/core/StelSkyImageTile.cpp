@@ -232,11 +232,19 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 			for (const auto& s : qAsConst(subTilesUrls))
 			{
 				StelSkyImageTile* nt;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+				if (s.metaType()==QMetaType(QMetaType::QVariantMap))
+#else
 				if (s.type()==QVariant::Map)
+#endif
 					nt = new StelSkyImageTile(s.toMap(), this);
 				else
 				{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+					Q_ASSERT(s.metaType()==QMetaType(QMetaType::QString));
+#else
 					Q_ASSERT(s.type()==QVariant::String);
+#endif
 					nt = new StelSkyImageTile(s.toString(), this);
 				}
 				subTiles.append(nt);
@@ -524,7 +532,11 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	subTilesUrls = map.value("subTiles").toList();
 	for (auto& variant : subTilesUrls)
 	{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		if (variant.metaType() == QMetaType(QMetaType::QVariantMap))
+#else
 		if (variant.type() == QVariant::Map)
+#endif
 		{
 			// Check if the JSON object is a reference, i.e. if it contains a $ref key
 			QVariantMap m = variant.toMap();

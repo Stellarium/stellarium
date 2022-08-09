@@ -40,6 +40,7 @@
 ****************************************************************************/
 
 #include <QtGlobal>
+#include <memory>
 
 #ifndef QT_NO_TEXTODFWRITER
 
@@ -849,7 +850,7 @@ void QZipWriterPrivate::addEntry(EntryType type, const QString &fileName, const 
 */
 QZipReader::QZipReader(const QString &archive, QIODevice::OpenMode mode)
 {
-    QScopedPointer<QFile> f(new QFile(archive));
+    std::unique_ptr<QFile> f(new QFile(archive));
     f->open(mode);
     QZipReader::Status status;
     if (f->error() == QFile::NoError)
@@ -865,8 +866,8 @@ QZipReader::QZipReader(const QString &archive, QIODevice::OpenMode mode)
             status = FileError;
     }
 
-    d = new QZipReaderPrivate(f.data(), /*ownDevice=*/true);
-    f.take();
+    d = new QZipReaderPrivate(f.get(), /*ownDevice=*/true);
+    f.release();
     d->status = status;
 }
 
@@ -1146,7 +1147,7 @@ void QZipReader::close()
 */
 QZipWriter::QZipWriter(const QString &fileName, QIODevice::OpenMode mode)
 {
-    QScopedPointer<QFile> f(new QFile(fileName));
+    std::unique_ptr<QFile> f(new QFile(fileName));
     f->open(mode);
     QZipWriter::Status status;
     if (f->error() == QFile::NoError)
@@ -1162,8 +1163,8 @@ QZipWriter::QZipWriter(const QString &fileName, QIODevice::OpenMode mode)
             status = QZipWriter::FileError;
     }
 
-    d = new QZipWriterPrivate(f.data(), /*ownDevice=*/true);
-    f.take();
+    d = new QZipWriterPrivate(f.get(), /*ownDevice=*/true);
+    f.release();
     d->status = status;
 }
 

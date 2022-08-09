@@ -1245,8 +1245,13 @@ bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
 
 void debugQVariantMap(const QVariant& m, const QString& indent, const QString& key)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	QMetaType t = m.metaType();
+	if (t == QMetaType(QMetaType::QVariantMap))
+#else
 	QVariant::Type t = m.type();
 	if (t == QVariant::Map)
+#endif
 	{
 		qDebug() << indent + key + "(map):";
 		QList<QString> keys = m.toMap().keys();
@@ -1256,7 +1261,11 @@ void debugQVariantMap(const QVariant& m, const QString& indent, const QString& k
 			debugQVariantMap(m.toMap()[k], indent + "    ", k);
 		}
 	}
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	else if (t == QMetaType(QMetaType::QVariantList))
+#else
 	else if (t == QVariant::List)
+#endif
 	{
 		qDebug() << indent + key + "(list):";
 		const QList<QVariant> mList=m.toList();

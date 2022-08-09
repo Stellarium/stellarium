@@ -42,7 +42,7 @@ StelPluginInfo HelloStelModuleStelPluginInterface::getPluginInfo() const
 	info.displayedName = "Hello World test plugin";
 	info.authors = "Stellarium team";
 	info.contact = "www.stellarium.org";
-	info.description = "An minimal plugin example.";
+	info.description = "A minimal plugin example.";
 	return info;
 }
 
