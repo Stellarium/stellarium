@@ -651,7 +651,7 @@ void ObsListDialog::loadBookmarksInObservingList() {
             jsonFile.close();
             QVariantMap bookmarksMap = map.value(KEY_BOOKMARKS).toMap();
 
-            for (const auto& bookmarkKey: bookmarksMap.keys()) {
+            for (const auto &bookmarkKey: bookmarksMap.keys()) {
 
                 QVariantMap bookmarkData = bookmarksMap.value(bookmarkKey).toMap();
                 observingListItem item;
@@ -895,7 +895,7 @@ void ObsListDialog::saveBookmarksInObsListJsonFile(const QHash<QString, observin
  * Check if bookmarks list already exists in observing list file,
  * in fact if the file of bookarks has already be loaded.
 */
-auto ObsListDialog::checkIfBookmarksListExists(const QVariantMap& allListsMap) -> bool {
+auto ObsListDialog::checkIfBookmarksListExists(const QVariantMap &allListsMap) -> bool {
 
     for (auto bookmarkKey: allListsMap.keys()) {
 
@@ -1145,7 +1145,7 @@ void ObsListDialog::setVisible(bool v) {
 /*
  * Sort the obsListTreeView by the column name given in parameter
 */
-void ObsListDialog::sortObsListTreeViewByColumnName(const QString& columnName) {
+void ObsListDialog::sortObsListTreeViewByColumnName(const QString &columnName) {
     if (QString::compare(columnName, SORTING_BY_NAME) == 0) {
         obsListListModel->sort(COLUMN_NUMBER_NAME, Qt::AscendingOrder);
     } else if (QString::compare(columnName, SORTING_BY_NAMEI18N) == 0) {

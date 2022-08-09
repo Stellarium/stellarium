@@ -26,6 +26,7 @@
 #include <Planet.hpp>
 #include <StelOBJ.hpp>
 #include <QMessageBox>
+#include <QRegExp>
 
 #include "NebulaMgr.hpp"
 #include "StelCore.hpp"
@@ -517,7 +518,7 @@ void ObsListCreateEditDialog::saveObservedObjectsInJsonFile() {
             obl.insert(QString(KEY_CONSTELLATION), item.constellation);
 
             // Visible marker
-            obl.insert(QString(KEY_IS_VISIBLE_MARKER),item.isVisibleMarker);
+            obl.insert(QString(KEY_IS_VISIBLE_MARKER), item.isVisibleMarker);
 
             listOfObjects.push_back(obl);
         }
@@ -922,7 +923,6 @@ void ObsListCreateEditDialog::loadObservingList() {
 * For no regression with must take into account the legacy bookmarks.json file
 */
 void ObsListCreateEditDialog::loadBookmarksInObservingList() {
-    QHash<QString, observingListItem> bookmarksCollection;
     QVariantMap map;
 
     QFile jsonFile(observingListJsonPath);
@@ -937,7 +937,7 @@ void ObsListCreateEditDialog::loadBookmarksInObservingList() {
             QVariantMap bookmarksMap = map.value(KEY_BOOKMARKS).toMap();
             observingListItemCollection.clear();
 
-            for (const auto& bookmarkKey: bookmarksMap.keys()) {
+            for (const auto &bookmarkKey: bookmarksMap.keys()) {
 
                 QVariantMap bookmarkData = bookmarksMap.value(bookmarkKey).toMap();
                 observingListItem item;
