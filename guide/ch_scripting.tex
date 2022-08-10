@@ -50,7 +50,8 @@ yet another scripting engine in 2022. Qt6 comes with QJSEngine, another
 JavaScript engine which behaves mostly similar to the older QtScript. 
 However, small differences exist, so that care must be taken if scripts 
 should be developed for both series of Stellarium. Some older scripts 
-will not work on versions 1.0 and later or at least require some adaptations. 
+will not work on versions 1.0 and later or at least require some adaptations 
+described in section~\ref{sec:scripting:differences}. 
 
 % Section 2020-03-26 by Wolfgang Laun
 \section{The Script Console}
@@ -144,7 +145,7 @@ LabelMgr.deleteLabel(label);
 \section{Critical Scripting Differences introduced with version 1.0}
 \label{sec:scripting:differences}
 
-Qt5's QtScript module which has been used in versions 0.10 to 0.22 was more flexible than Qt6's QJSEngine, 
+Qt5's QtScript module which has been used in versions 0.10 to 0.22 was more flexible and easier to fine-tune than Qt6's QJSEngine, 
 which is used in the 1.* series of the program, i.e., versions 1.0 (22.3) and later. 
 Still, most scripts that have been developed for Stellarium versions 0.10 to 0.22 
 still run without or with just minor modifications as described in this section. 
@@ -161,6 +162,55 @@ One of the most important little helper classes in the main program are three-di
 \texttt{Vec3f} describe those with single-precision floating point data, 
 and \texttt{Vec3d} are those with double-precision floating point data.
 
+\begin{sidewaystable}
+{\ttfamily\scriptsize
+\begin{tabular}{rlll}
+ &Input                                         & Result with Qt5                                                       & Result with Qt6                          \\\hline
+x&\textbf{var f1=new V3d(.1,.2,.3);}            &                                                                       &                                          \\
+ &core.output(f1);                              &  [0.1, 0.2, 0.3]                                                      &  V3d(0x249a1cf37c0) [some address]       \\
+ &core.output(+f1.toString());                  &  [0.1, 0.2, 0.3]                                                      &  V3d(0x249a1cf37c0) [some address]       \\
+x&\textbf{core.output(f1.toHex());}             &  \#19334c                                                             &  \#19334c                                \\
+x&\textbf{core.output(f1.toVec3d());}           &  [0.1, 0.2, 0.3]                                                      &  [0.1, 0.2, 0.3]                         \\\hline
+x&\textbf{var f2=new V3d(f1.x(), 2*f1.y(), 3*f1.z());}   &                                                              &                                          \\
+ &core.output(f2);                              &  [0.1, 0.4, 0.9]                                                      &  V3d(0x249a1cf3a60) [some address]       \\
+x&\textbf{core.output(f2.toVec3d());}           &  [0.1, 0.4, 0.8999999999999999]                                       &  [0.1, 0.4, 0.9]                         \\\hline
+x&\textbf{var crimson=new Color("Crimson");}    &                                                              &                                          \\
+x&\textbf{core.output(crimson.toHex());}        &  \#dc143c                                                             &  \#dc143c                                \\
+ &core.output(crimson.toVec3f());               &  [r:0.8627451062202454, g:0.0784313753247261, b:0.23529411852359772]  &  [0.862745, 0.0784314, 0.235294]         \\
+ &core.output(crimson.r);                       &  0.8627451062202454                                                   &  error                                   \\
+ &core.output(crimson.r());                     &  error                                                                &  0.8627451062202454                      \\
+x&\textbf{core.output(crimson.getR());}         &  0.8627451062202454                                                   &  0.8627451062202454                      \\
+x&\textbf{core.output(crimson.getG());}         &  0.0784313753247261                                                   &  0.0784313753247261                      \\
+x&\textbf{core.output(crimson.getB());}         &  0.23529411852359772                                                  &  0.23529411852359772                     \\
+ &crimson.g=0.444;                              &  (works)                                                              & (error)                                  \\
+ &crimson.setG(0.444);                          &  (error)                                                              & (works)                                  \\
+x&\textbf{crimson=new Color(crimson.getR(), 0.444, crimson.getB());} & (reassign crimson; recommended for Qt5 and Qt6)  & \\
+x&\textbf{core.output(crimson.toRGBString());}  &  [r:0.862745, g:0.444, b:0.235294]                                    & [r:0.862745, g:0.444, b:0.235294]        \\\hline
+
+x&\multicolumn{2}{l}{\textbf{var eq=new Color(GridLinesMgr.getColorEquatorJ2000Grid());}}                               &                                          \\
+x&\textbf{core.output(eq.toHex());}             &  \#00aaff                                                             &  \#00aaff                                \\
+ &core.output(eq.toVec3f());                    &  [r:0, g:0.6666669845581055, b:1]                                     &  [0, 0.666667, 1]                        \\
+ &core.output(eq.toVec3d());                    &  (n.a.)                                                               &  [0, 0.666667, 1]                        \\
+ &core.output(eq.toString());                   &  [0, 0.666667, 1]                                                     &  Color(0x24a11712910) [some address]     \\
+x&\textbf{core.output(eq.toRGBString());}       &  [r:0, g:0.666667, b:1]                                               &  [r:0, g:0.666667, b:1]                  \\\hline
+
+x&\textbf{var c=new Color(core.vec3f(.3, .4, .5));}      &                                                              &                                          \\
+ &core.output(c.toString());                    &  [0.3, 0.4, 0.5]                                                      &  Color(0x249a1e078b0) [some address]     \\
+ &core.output(c.toVec3f());                     &  [r:0.30000001192092896, g:0.4000000059604645, b:0.5]                 &  [0.3, 0.4, 0.5]                         \\
+x&\textbf{var d=c;} // assign to other          &                                                                       &                                          \\
+ &core.output(d.toVec3f());                     &  [r:0.30000001192092896, g:0.4000000059604645, b:0.5]                 &  [0.3, 0.4, 0.5]                         \\\hline
+x&\textbf{var c2=new Color(.3, .4, .5);}        &                                                                       &                                          \\
+ &core.output(c2.toString());                   &  [0.3, 0.4, 0.5]                                                      &  Color(0x24a11712a60) [some address]     \\
+ &core.output(c2.toVec3f());                    &  [r:0.30000001192092896, g:0.4000000059604645, b:0.5]                 &  [0.3, 0.4, 0.5]                         \\
+x&\textbf{var d2=c2;} // assign to other        &                                                                       &                                          \\
+ &core.output(d2.toVec3f());                    &  [r:0.30000001192092896, g:0.4000000059604645, b:0.5]                 &  [0.3, 0.4, 0.5]                                            
+\end{tabular}}
+\caption{Use of V3d, V3f and Color wrapper classes. Only use the calls marked with \texttt{x} in scripts targeted at all versions of Stellarium.}
+\label{tab:scripting:Vec3f}
+\end{sidewaystable}
+
+
+
 As late as in version 0.19 we added \texttt{Vec3f} and later \texttt{Vec3d} data types to the Javascript environment. 
 These allowed addressing variables of C++ classes \texttt{Vec3f} or \texttt{Vec3d} with named sub-fields \texttt{r}, \texttt{g}, \texttt{b} 
 (if used to describe colors), or \texttt{x}, \texttt{y}, \texttt{z} (same data but contextually understood as 3D data).
@@ -169,15 +219,16 @@ Stellarium (series 0.*, now usually found on 32-bit systems), but we recommend t
 
 Qt6's scripting module cannot be extended that easily. The \texttt{Vec3d} and \texttt{Vec3f} data types are not directly scriptable, 
 but we can deal with method arguments of these types when they are mentioned in the API documentation (see \ref{sec:scripting:introduction}). 
-To access internals of these classes, we must use helper classes which bear different names:
+To access internals of these classes, we must use wrapper classes which bear different names:
 \begin{description}
 \item[\texttt{V3d}] can be used where \texttt{Vec3d} must be accessed.
 \item[\texttt{V3f}] can be used where \texttt{Vec3f} must be accessed.
 \item[\texttt{Color}] can be used where a \texttt{Vec3f} must be accessed which represents a color value.
 \end{description}
 
-% TODO: ADD DETAILS
-
+They behave slightly different when run using Qt5 or Qt6, as shown in Table~\ref{tab:scripting:Vec3f}. If you aim for maximum compatibility between versions, 
+only use the calls which provide equal results in both series. This current state is far from optimal or even pretty, but a pragmatic solution that works. 
+We invite advanced developers to find a better solution that works with both Qt5 and Qt6.
 
 
 \section{Example: Retrograde motion of Mars}

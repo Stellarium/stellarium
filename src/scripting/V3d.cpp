@@ -24,7 +24,6 @@
 
 #include <cmath>
 
-
 V3d::V3d(const V3d &other) : QObject() // copy constructor
 {
 	m_x=other.x();
@@ -65,6 +64,8 @@ V3f & V3f::operator =(const V3f &v)
 }
 
 ///////////////////////
+#ifdef ENABLE_SCRIPT_QML
+
 Color::Color(const Color &other) : QObject() // copy constructor
 {
 	m_r=other.r();
@@ -103,3 +104,4 @@ QString Color::toHex() const
 		.arg(qMin(255, int(m_g * 255)), 2, 16, QChar('0'))
 		.arg(qMin(255, int(m_b * 255)), 2, 16, QChar('0'));
 }
+#endif

@@ -104,7 +104,9 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelApp::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));	
 	connect(this, SIGNAL(requestSetHomePosition()), StelApp::getInstance().getCore(), SLOT(returnToHome()));
 
-	QMetaType::registerConverter(&V3d::toString);
+	//QMetaType::registerConverter<V3d,QString>(&V3d::toString);
+	//QMetaType::registerConverter<V3f,QString>(&V3f::toString);
+	//QMetaType::registerConverter<Color,QString>(&Color::toString);
 }
 
 StelMainScriptAPI::~StelMainScriptAPI()
@@ -121,11 +123,11 @@ Vec3f StelMainScriptAPI::vec3f(const float x, const float y, const float z)
 	return Vec3f(x, y, z);
 }
 
-Vec3f StelMainScriptAPI::vec3f(const QString &cstr){return color(cstr);}
-
-Vec3f StelMainScriptAPI::color(const QString &cstr)
+//Col StelMainScriptAPI::vec3f(const QString &cstr){return color(cstr);}
+#ifdef ENABLE_SCRIPT_QML
+Color StelMainScriptAPI::color(const QString &cstr)
 {
-	Vec3f res(0,0,0);
+	Color res(0,0,0);
 
 	QColor qcol = QColor(cstr);
 	if(qcol.isValid())
@@ -134,7 +136,7 @@ Vec3f StelMainScriptAPI::color(const QString &cstr)
 		qWarning() << "Color: invalid color name: " << cstr;
 	return res;
 }
-
+#endif
 //V3d StelMainScriptAPI::toV3d(const Vec3d &vec)
 //{
 //	return V3d(vec);
