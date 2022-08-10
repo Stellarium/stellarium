@@ -47,9 +47,6 @@ core.output("typeof dirV3d: " + typeof dirV3d);
 core.output("dirV3d.x: " + dirV3d.x());
 core.output("dirV3d.y: " + dirV3d.y());
 core.output("dirV3d.z: " + dirV3d.z());
-core.output("dirV3d.r: " + dirV3d.r());
-core.output("dirV3d.g: " + dirV3d.g());
-core.output("dirV3d.b: " + dirV3d.b());
 core.output("dirV3d.toVec3d(): " + dirV3d.toVec3d());  // This prints result as a string via the converter functions registered in StelCore
 
 

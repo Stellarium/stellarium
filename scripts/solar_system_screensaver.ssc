@@ -120,7 +120,7 @@ c1 = "#24F82C"
 
 if (id[r] == 2)
 {
-// Gan De's Gandymede
+// Gan De's Ganymede
 core.setObserverLocation(116.87, 37.19, 20, 1, "", "Earth");
 core.setDate("-365-05-28T17:00:51", "utc");
 
@@ -130,7 +130,7 @@ StelMovementMgr.setFlagTracking(true);
 var pick = Math.floor(Math.random()*2)+3;
 StelMovementMgr.zoomTo(pick/10, 1);
 
-d1 = "Gan De may have discovered Gandymede summer 365 B.C."; 
+d1 = "Gan De may have discovered Ganymede summer 365 B.C."; 
 c1 = "#7ADAFF"
 
 
@@ -390,7 +390,7 @@ StelMovementMgr.setFlagTracking(true);
 var pick = Math.floor(Math.random()*6)+1
 StelMovementMgr.zoomTo(pick, 1);
 
-d1 = "That Solar eclipse that proved Einstein's Theory of Reletivity 5/29/1919"
+d1 = "The Solar eclipse that proved Einstein's Theory of Relativity 5/29/1919"
 c1 = "#FAFAFF"
 
 
@@ -432,7 +432,7 @@ SolarSystem.setLabelsAmount(20);
 var pick = Math.floor(Math.random()*2+1)*6
 StelMovementMgr.zoomTo(pick, 1);
 	
-d1 = "Earth as the Apollo 11 Astronauts viewed it  07/20/1969"
+d1 = "Earth as the Apollo 11 Astronauts viewed it 07/20/1969"
 c1 = "#F1FAFF"
 
 
@@ -452,7 +452,7 @@ StelMovementMgr.setFlagTracking(true);
 var pick = Math.floor(Math.random()*4)+1
 StelMovementMgr.zoomTo(pick, 1);
 
-d1 = "And you flew your private jet up to Nova Scotia for the Total Eclispe of the Sun"
+d1 = "And you flew your private jet up to Nova Scotia for the Total Eclipse of the Sun"
 c1 = "#FAFAFF"
 
 d2 = "You're so vain - I bet you think this script is about you. Don't you."
@@ -678,7 +678,7 @@ var pick = Math.floor(Math.random()*30)+44;
 
 StelMovementMgr.zoomTo(pick, 1);
 
-d1 = "Four planet and Moon Grouping 8/13/2010"
+d1 = "Four planets and Moon Grouping 8/13/2010"
 c1 = "#A95F3A"
 
 
@@ -711,7 +711,7 @@ c1 = "#74A82C"
 
 if (id[r] == 25)
 {
-// Gandymede's Greatest Elongation 09/23/2010
+// Ganymede's Greatest Elongation 09/23/2010
 core.setObserverLocation(-145.5, 15, 64, 1, "", "Earth");
 core.setDate("2010-09-23T14:12:53", "utc");
 
@@ -723,7 +723,7 @@ StelMovementMgr.zoomTo(pick/10, 1);
 
 SolarSystem.setFlagOrbits(true);
 
-d1 = "Gandymede Greatest Elongation away from Jupiter (0.1049 Degrees)"; 
+d1 = "Ganymede Greatest Elongation away from Jupiter (0.1049 Degrees)"; 
 c1 = "#7ADAFF"
 
 d2 = "in the 21st century as seen from Earth 09/23/2010";
@@ -1529,7 +1529,7 @@ if (pick == 3)
 {
 core.selectObjectByName("Callisto", pointer = true);
 }
-d1 = "Triple (2 True - 1 Gazing) Jupiter Moon Transit 10/31/2019"
+d1 = "Triple (2 True - 1 Grazing) Jupiter Moon Transit 10/31/2019"
 c1 = "#CC7802"
 
 SolarSystem.setFlagMoonScale(0);  
@@ -1562,7 +1562,7 @@ var pick = Math.random()*460+40;
 pick = pick /1000
 StelMovementMgr.zoomTo(pick);
 
-d1 = "A close 0.013" + degstring + " Mars Pluto Conjuncton 12/2/2020"
+d1 = "A close 0.013" + degstring + " Mars Pluto Conjunction 12/2/2020"
 
 c1 = "#FF0007"
  	
@@ -1819,7 +1819,7 @@ pick = pick +1;
 pick = pick/50;
 StelMovementMgr.zoomTo(pick, 1);
 
-d1 = "Earth in the Lagoon Nebulea from Venus 6/3/2021";
+d1 = "Earth in the Lagoon Nebula from Venus 6/3/2021";
 c1 = "#1122FF"
 LandscapeMgr.setFlagAtmosphere(false);
 
@@ -2638,7 +2638,7 @@ StelMovementMgr.zoomTo(pick, 1);
 
 
 
-d1 = "The Next Phobos & Diemos Double Eclipse"
+d1 = "The Next Phobos & Deimos Double Eclipse"
 c1 = "#A10107"
 
 d2 = "from Mars 11/21/2025"
@@ -3165,7 +3165,7 @@ StelMovementMgr.zoomTo(pick, 0);
 
 StelMovementMgr.setFlagTracking(true);
 
-d1 = "Triple conjunction Saturn, Mars, Uranus during a Jupiter Eclispe";
+d1 = "Triple conjunction Saturn, Mars, Uranus during a Jupiter Eclipse";
 c1 = "#FFFFF4"
 
 d2 = " from Callisto 2/7/2032"
@@ -5842,7 +5842,7 @@ c1 = "#FF22FF"
 if (id[r] == 201)
 {
 
-// Triton Eclispe
+// Triton Eclipse
 
 dir = 0
 long = -90
@@ -5862,7 +5862,7 @@ StelMovementMgr.setFlagTracking(true);
 var pick = Math.floor(Math.random()*3)+1;
 StelMovementMgr.zoomTo(pick/3 +1, 1);
 
-d1 = "Triton's next Eclispe from Nereid 3/23/2080"
+d1 = "Triton's next Eclipse from Nereid 3/23/2080"
 d2 = ""
 
 c1 = "#007FF7"
@@ -7482,7 +7482,7 @@ LandscapeMgr.setFlagAtmosphere(false);
 
 if (id[r] == 259)
 {
-// Nereid Eclispe 
+// Nereid Eclipse 
 
 dir = 4
 long = 0
@@ -7502,7 +7502,7 @@ StelMovementMgr.setFlagTracking(true);
 var pick = Math.floor(Math.random()*40)+1;
 StelMovementMgr.zoomTo(pick/10, 1);
 
-d1 = "Nereid's next Eclispe from Triton 12/15/2324"
+d1 = "Nereid's next Eclipse from Triton 12/15/2324"
 d2 = ""
 
 c1 = "#007FF7"
@@ -9550,7 +9550,7 @@ long = -179
 
 
 
-// Eclispe
+// Eclipse
 
 if (dir == 4)
 {
@@ -9640,7 +9640,7 @@ core.setObserverLocation(blong, lat, alt, 0, "", p1);
 
 
 
-// Eclispe
+// Eclipse
 
 
 

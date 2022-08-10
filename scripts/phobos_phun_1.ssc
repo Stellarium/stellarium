@@ -33,6 +33,7 @@ while (alt < 20)
 
 LandscapeMgr.setFlagAtmosphere(false);
 LandscapeMgr.setFlagFog(false);
+LandscapeMgr.setFlagLandscapeSetsLocation(false);
 LandscapeMgr.setCurrentLandscapeID("moon");
 
 core.selectObjectByName("Sun", pointer = true);
