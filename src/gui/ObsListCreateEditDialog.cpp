@@ -661,7 +661,7 @@ void ObsListCreateEditDialog::obsListSaveButtonPressed() {
     QString listName = ui->nameOfListLineEdit->text();
 
     //delete with space at the end of the name
-    listName = QString(listName).remove(QRegExp("([ ]+)$"));
+    listName = QString(listName).remove(QRegularExpression("([ ]+)$"));
 
     bool isListAlreadyExists = !this->listNames_.isEmpty() && this->listNames_.contains(listName) &&
                                (isCreationMode || (listName.compare(currentListName) != 0 && !isCreationMode));
