@@ -26,7 +26,7 @@
 #include <Planet.hpp>
 #include <StelOBJ.hpp>
 #include <QMessageBox>
-#include <QRegExp>
+#include <QRegularExpression>
 
 #include "NebulaMgr.hpp"
 #include "StelCore.hpp"
@@ -114,7 +114,6 @@ void ObsListCreateEditDialog::createDialogContent() {
     ui->obsListCreationEditionTreeView->header()->setSectionResizeMode(ColumnMagnitude, QHeaderView::ResizeToContents);
     ui->obsListCreationEditionTreeView->header()->setStretchLastSection(true);
     ui->obsListCreationEditionTreeView->hideColumn(ColumnUUID);
-    //ui->obsListCreationEditionTreeView->hideColumn(ColumnNameI18n);
     ui->obsListCreationEditionTreeView->hideColumn(ColumnDate);
     ui->obsListCreationEditionTreeView->hideColumn(ColumnLocation);
     // Enable the sort for columns
@@ -132,8 +131,8 @@ void ObsListCreateEditDialog::createDialogContent() {
 
     // In case of creation the nameOfListLineEdit is empty and button save/close must be disabled
     // In case on edition the nameOfListLineEdit is not empty and the button save/close must be enable
-    //delete with space -> no list with only white space as name
-    ui->nameOfListLineEdit->setText(QString(ui->nameOfListLineEdit->text()).remove(QRegExp("([ ]+)$")));
+    // delete with space -> no list with only white space as name
+    ui->nameOfListLineEdit->setText(QString(ui->nameOfListLineEdit->text()).remove(QRegularExpression("([ ]+)$")));
     if (ui->nameOfListLineEdit->text().isEmpty()) {
         ui->obsListSaveButton->setEnabled(false);
     } else {
@@ -195,7 +194,7 @@ void ObsListCreateEditDialog::setObservingListHeaderNames() {
  * Add row in the obsListListModel
  */
 void ObsListCreateEditDialog::addModelRow(int number,
-                                          const QString &uuid,
+                                          const QString &olud,
                                           const QString &name,
                                           const QString &nameI18n,
                                           const QString &objtype,
@@ -206,7 +205,7 @@ void ObsListCreateEditDialog::addModelRow(int number,
     QStandardItem *item = Q_NULLPTR;
 
     // olud
-    item = new QStandardItem(uuid);
+    item = new QStandardItem(olud);
     item->setEditable(false);
     obsListListModel->setItem(number, ColumnUUID, item);
 
@@ -272,7 +271,7 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
 
         if (!is_already_in_list) {
             const int lastRow = obsListListModel->rowCount();
-            const QString objectUuid = QUuid::createUuid().toString();
+            const QString objectOlud = QUuid::createUuid().toString();
 
             // Object name (designation) and object name I18n
             QString objectName = selectedObject[0]->getEnglishName();
@@ -349,7 +348,7 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
 
             // Add objects in row model
             addModelRow(lastRow,
-                        objectUuid,
+                        objectOlud,
                         objectName,
                         objectNameI18n,
                         objectType,
@@ -403,10 +402,10 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
             if (fov > 0.0) {
                 item.fov = fov;
             }
-            observingListItemCollection.insert(objectUuid, item);
+            observingListItemCollection.insert(objectOlud, item);
         }
     } else {
-        qWarning() << "selected object is empty !";
+        qWarning() << "Selected object is empty !";
     }
 }
 
@@ -664,7 +663,6 @@ void ObsListCreateEditDialog::obsListSaveButtonPressed() {
     //delete with space at the end of the name
     listName = QString(listName).remove(QRegExp("([ ]+)$"));
 
-    // TODO il faut faire la comparaison du nom des liste en ignoreCase
     bool isListAlreadyExists = !this->listNames_.isEmpty() && this->listNames_.contains(listName) &&
                                (isCreationMode || (listName.compare(currentListName) != 0 && !isCreationMode));
 
@@ -681,11 +679,7 @@ void ObsListCreateEditDialog::obsListSaveButtonPressed() {
         qWarning() << "[ObservingList Creation/Edition] Error: the list name is empty.";
         displayErrorMessage("Error: the list name is empty.");
     } else {
-        if (listName.compare(currentListName) != 0 && !isCreationMode) {
-            isSaveAs = true;
-        } else {
-            isSaveAs = false;
-        }
+        isSaveAs = listName.compare(currentListName) != 0 && !isCreationMode;
         saveObservedObjectsInJsonFile();
         this->close();
         emit exitButtonClicked();
@@ -768,18 +762,18 @@ void ObsListCreateEditDialog::loadObservingList() {
             QVariantMap observingListMap = map.value(QString(KEY_OBSERVING_LISTS)).toMap().value(keyOlud).toMap();
             QVariantList listOfObjects;
 
-            QString listName = observingListMap.value(QString(KEY_NAME)).value<QString>();
+            auto listName = observingListMap.value(QString(KEY_NAME)).value<QString>();
 
             // List name
             currentListName = listName;
             ui->nameOfListLineEdit->setText(listName);
 
             // List description
-            QString listDescription = observingListMap.value(QString(KEY_DESCRIPTION)).value<QString>();
+            auto listDescription = observingListMap.value(QString(KEY_DESCRIPTION)).value<QString>();
             ui->descriptionLineEdit->setText(listDescription);
 
             // Landscape
-            QString landscape = observingListMap.value(QString(KEY_LANDSCAPE_ID)).value<QString>();
+            auto landscape = observingListMap.value(QString(KEY_LANDSCAPE_ID)).value<QString>();
             if (!landscape.isEmpty()) {
                 ui->obsListLandscapeCheckBox->setChecked(true);
             }
@@ -797,38 +791,38 @@ void ObsListCreateEditDialog::loadObservingList() {
                 if (object.canConvert<QVariantMap>()) {
                     objectMap = object.value<QVariantMap>();
                     int lastRow = obsListListModel->rowCount();
-                    QString objectUuid = QUuid::createUuid().toString();
+                    QString objectOlud = QUuid::createUuid().toString();
 
                     // Name
-                    QString objectName = objectMap.value(QString(KEY_DESIGNATION)).value<QString>();
+                    auto objectName = objectMap.value(QString(KEY_DESIGNATION)).value<QString>();
 
                     // NameI18n
-                    QString objectNameI18n = objectMap.value(QString(KEY_NAME_I18N)).value<QString>();
+                    auto objectNameI18n = objectMap.value(QString(KEY_NAME_I18N)).value<QString>();
 
                     // Fov
                     auto fov = objectMap.value(QString(KEY_FOV)).value<double>();
 
                     // Object type
-                    QString type = objectMap.value(QString(KEY_TYPE)).value<QString>();
+                    auto type = objectMap.value(QString(KEY_TYPE)).value<QString>();
 
                     // Object type
-                    QString objectType = objectMap.value(QString(KEY_OBJECTS_TYPE)).value<QString>();
+                    auto objectType = objectMap.value(QString(KEY_OBJECTS_TYPE)).value<QString>();
 
                     // Ra & dec
-                    QString objectRaStr = objectMap.value(QString(KEY_RA)).value<QString>();
-                    QString objectDecStr = objectMap.value(QString(KEY_DEC)).value<QString>();
+                    auto objectRaStr = objectMap.value(QString(KEY_RA)).value<QString>();
+                    auto objectDecStr = objectMap.value(QString(KEY_DEC)).value<QString>();
 
                     // Magnitude
-                    QString objectMagnitudeStr = objectMap.value(QString(KEY_MAGNITUDE)).value<QString>();
+                    auto objectMagnitudeStr = objectMap.value(QString(KEY_MAGNITUDE)).value<QString>();
 
                     // Constellation
-                    QString objectConstellation = objectMap.value(QString(KEY_CONSTELLATION)).value<QString>();
+                    auto objectConstellation = objectMap.value(QString(KEY_CONSTELLATION)).value<QString>();
 
                     // Julian Day
-                    QString JDs = objectMap.value(QString(KEY_JD)).value<QString>();
+                    auto JDs = objectMap.value(QString(KEY_JD)).value<QString>();
 
                     // Location
-                    QString location = objectMap.value(QString(KEY_LOCATION)).value<QString>();
+                    auto location = objectMap.value(QString(KEY_LOCATION)).value<QString>();
 
                     // Visible flag
                     bool visibleFlag = objectMap.value(QString(KEY_IS_VISIBLE_MARKER)).value<bool>();
@@ -837,7 +831,7 @@ void ObsListCreateEditDialog::loadObservingList() {
 
                     // Add data into model row
                     addModelRow(lastRow,
-                                objectUuid,
+                                objectOlud,
                                 objectName,
                                 objectNameI18n,
                                 objectType,
@@ -901,7 +895,7 @@ void ObsListCreateEditDialog::loadObservingList() {
                     if (fov > 0.0) {
                         item.fov = fov;
                     }
-                    observingListItemCollection.insert(objectUuid, item);
+                    observingListItemCollection.insert(objectOlud, item);
 
                 } else {
                     qCritical() << "[ObservingList Creation/Edition] conversion error";

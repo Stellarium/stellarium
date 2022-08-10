@@ -107,10 +107,10 @@ private:
 
     void saveBookmarksInObsListJsonFile(const QHash<QString, observingListItem> &bookmarksCollection);
 
-    auto checkIfBookmarksListExists(const QVariantMap &allListsMap) -> bool;
+    static auto checkIfBookmarksListExists(const QVariantMap &allListsMap) -> bool;
 
     //! Load list from JSON file
-    auto loadListFromJson(const QVariantMap &map, QString listOlud) -> QVariantList;
+    auto loadListFromJson(const QVariantMap &map, const QString& listOlud) -> QVariantList;
 
     //! Populate list names into combo box
     void populateListNameInComboBox(QVariantMap map);

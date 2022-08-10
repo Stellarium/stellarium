@@ -36,7 +36,6 @@
 #include "ObsListDialog.hpp"
 #include "LabelMgr.hpp"
 #include "Planet.hpp"
-#include "Nebula.hpp"
 
 #include "ui_obsListDialog.h"
 #include <QSortFilterProxyModel>
@@ -132,7 +131,6 @@ void ObsListDialog::createDialogContent() {
     // For no regression we must take into account the legacy bookmarks file
     QFile jsonBookmarksFile(bookmarksJsonPath);
     if (jsonBookmarksFile.exists()) {
-        qDebug() << "Fichiers bookmarks détecté";
         loadBookmarksInObservingList();
     }
 
@@ -303,10 +301,9 @@ void ObsListDialog::clearHighlight() {
  * Slot for button obsListNewListButton
 */
 void ObsListDialog::obsListNewListButtonPressed() {
-    string listUuid = string();
-    invokeObsListCreateEditDialog(listUuid);
+    string olud = string();
+    invokeObsListCreateEditDialog(olud);
 }
-
 /*
  * Slot for button obsListEditButton
 */
@@ -314,7 +311,7 @@ void ObsListDialog::obsListEditButtonPressed() {
     if (!selectedObservingListUuid.empty()) {
         invokeObsListCreateEditDialog(selectedObservingListUuid);
     } else {
-        qWarning() << "The selected observing list uuid is empty";
+        qWarning() << "The selected observing list olud is empty";
     }
 }
 
@@ -369,8 +366,8 @@ void ObsListDialog::populateListNameInComboBox(QVariantMap map) {
     for (i = map.begin(); i != map.end(); ++i) {
         if (i.value().canConvert<QVariantMap>()) {
             QVariant var = i.value();
-            QVariantMap data = var.value<QVariantMap>();
-            QString listName = data.value(KEY_NAME).value<QString>();
+            auto data = var.value<QVariantMap>();
+            auto listName = data.value(KEY_NAME).value<QString>();
             listNamesModel.append(listName);
             listName_.append(listName);
         }
@@ -388,8 +385,8 @@ void ObsListDialog::populateDataInComboBox(QVariantMap map, const QString &defau
         const QString &listUuid = i.key();
         if (i.value().canConvert<QVariantMap>()) {
             QVariant var = i.value();
-            QVariantMap data = var.value<QVariantMap>();
-            QString listName = data.value(KEY_NAME).value<QString>();
+            auto data = var.value<QVariantMap>();
+            auto listName = data.value(KEY_NAME).value<QString>();
 
                     foreach (QString str, listNamesModel) {
                     if (QString::compare(str, listName) == 0) {
@@ -471,19 +468,19 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
                     QVariantMap objectMap;
                     if (object.canConvert<QVariantMap>()) {
                         objectMap = object.value<QVariantMap>();
-                        QString objectName = objectMap.value(QString(KEY_DESIGNATION)).value<QString>();
+                        auto objectName = objectMap.value(QString(KEY_DESIGNATION)).value<QString>();
 
                         int lastRow = obsListListModel->rowCount();
-                        QString objectUuid = QUuid::createUuid().toString();
-                        QString objectNameI18n = objectMap.value(QString(KEY_NAME_I18N)).value<QString>();
+                        QString objectOlud = QUuid::createUuid().toString();
+                        auto objectNameI18n = objectMap.value(QString(KEY_NAME_I18N)).value<QString>();
                         double fov = -1.0;
 
                         // Type
-                        QString objectType = objectMap.value(QString(KEY_OBJECTS_TYPE)).value<QString>();
+                        auto objectType = objectMap.value(QString(KEY_OBJECTS_TYPE)).value<QString>();
 
                         // RA & DEC
-                        QString objectRaStr = objectMap.value(QString(KEY_RA)).value<QString>();
-                        QString objectDecStr = objectMap.value(QString(KEY_DEC)).value<QString>();
+                        auto objectRaStr = objectMap.value(QString(KEY_RA)).value<QString>();
+                        auto objectDecStr = objectMap.value(QString(KEY_DEC)).value<QString>();
 
                         if (objectMgr->findAndSelect(objectName) && !objectMgr->getSelectedObject().isEmpty()) {
                             const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
@@ -503,13 +500,13 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
                         }
 
                         // Magnitude
-                        QString objectMagnitudeStr = objectMap.value(QString(KEY_MAGNITUDE)).value<QString>();
+                        auto objectMagnitudeStr = objectMap.value(QString(KEY_MAGNITUDE)).value<QString>();
 
                         // Constellation
-                        QString objectConstellation = objectMap.value(QString(KEY_CONSTELLATION)).value<QString>();
+                        auto objectConstellation = objectMap.value(QString(KEY_CONSTELLATION)).value<QString>();
 
                         // Julian Day / Date
-                        QString JDs = objectMap.value(QString(KEY_JD)).value<QString>();
+                        auto JDs = objectMap.value(QString(KEY_JD)).value<QString>();
                         QString date = "";
                         if (JDs.isEmpty() || QString::compare(JDs, "0", Qt::CaseSensitive) == 0) {
                             double JD = core->getJD();
@@ -522,7 +519,7 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
 
 
                         // Location
-                        QString Location = objectMap.value(QString(KEY_LOCATION)).value<QString>();
+                        auto Location = objectMap.value(QString(KEY_LOCATION)).value<QString>();
                         if (Location.isEmpty()) {
                             StelLocation loc = core->getCurrentLocation();
                             if (loc.name.isEmpty()) {
@@ -533,7 +530,7 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
                         }
 
                         // Fov
-                        QString fovStr = objectMap.value(QString(KEY_FOV)).value<QString>();
+                        auto fovStr = objectMap.value(QString(KEY_FOV)).value<QString>();
                         if (!fovStr.isEmpty()) {
                             fov = fovStr.toDouble();
                         }
@@ -541,7 +538,7 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
                         // Visible flag
                         bool visibleFlag = objectMap.value(QString(KEY_IS_VISIBLE_MARKER)).value<bool>();
 
-                        addModelRow(lastRow, objectUuid, objectName, objectNameI18n, objectType, objectRaStr,
+                        addModelRow(lastRow, objectOlud, objectName, objectNameI18n, objectType, objectRaStr,
                                     objectDecStr, objectMagnitudeStr, objectConstellation, date, Location);
 
                         observingListItem item;
@@ -575,7 +572,7 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
                             item.fov = fov;
                         }
 
-                        observingListItemCollection.insert(objectUuid, item);
+                        observingListItemCollection.insert(objectOlud, item);
 
                     } else {
                         qCritical() << "[ObservingList] conversion error";
@@ -606,17 +603,17 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
 /*
  * Load the list from JSON file QVariantMap map
 */
-auto ObsListDialog::loadListFromJson(const QVariantMap &map, QString listOlud) -> QVariantList {
+auto ObsListDialog::loadListFromJson(const QVariantMap &map, const QString& listOlud) -> QVariantList {
 
     observingListItemCollection.clear();
     QVariantMap observingListMap = map.value(QString(KEY_OBSERVING_LISTS)).toMap().value(listOlud).toMap();
     QVariantList listOfObjects;
 
-    QString listDescription = observingListMap.value(QString(KEY_DESCRIPTION)).value<QString>();
+    auto listDescription = observingListMap.value(QString(KEY_DESCRIPTION)).value<QString>();
     ui->obsListDescriptionTextEdit->setPlainText(listDescription);
 
     // Displaying the creation date
-    QString listCreationDate = observingListMap.value(QString(KEY_CREATION_DATE)).value<QString>();
+    auto listCreationDate = observingListMap.value(QString(KEY_CREATION_DATE)).value<QString>();
     ui->obsListCreationDateLineEdit->setText(listCreationDate);
 
     if (observingListMap.value(QString(KEY_OBJECTS)).canConvert<QVariantList>()) {
@@ -897,7 +894,7 @@ void ObsListDialog::saveBookmarksInObsListJsonFile(const QHash<QString, observin
 */
 auto ObsListDialog::checkIfBookmarksListExists(const QVariantMap &allListsMap) -> bool {
 
-    for (auto bookmarkKey: allListsMap.keys()) {
+    for (const auto& bookmarkKey: allListsMap.keys()) {
 
         QVariantMap bookmarkData = allListsMap.value(bookmarkKey).toMap();
         QString listName = bookmarkData.value(KEY_NAME).toString();
@@ -971,7 +968,7 @@ void ObsListDialog::selectAndGoToObject(QModelIndex index) {
             prj->project(pos, winpos);
             double xpos = winpos[0];
             double ypos = winpos[1];
-            float best_object_value = 1000.F;
+            double best_object_value = 1000.F;
             for (const auto &obj: candidates) {
                 prj->project(obj->getJ2000EquatorialPos(core), winpos);
                 double distance = std::sqrt(
@@ -1107,13 +1104,12 @@ void ObsListDialog::obsListCreateEditDialogClosed() {
 }
 
 /*
- * Etract the defaultListOlud from the Json file.
+ * Extract the defaultListOlud from the Json file.
 */
-QString ObsListDialog::extractDefaultListOludFromJsonFile() {
+auto ObsListDialog::extractDefaultListOludFromJsonFile() -> QString {
     QFile jsonFile(observingListJsonPath);
     if (!jsonFile.open(QIODevice::ReadOnly)) {
         qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators(JSON_FILE_NAME);
-
     } else {
         try {
             QVariantMap map = StelJsonParser::parse(jsonFile.readAll()).toMap();
@@ -1127,6 +1123,7 @@ QString ObsListDialog::extractDefaultListOludFromJsonFile() {
             return "";
         }
     }
+    return {};
 }
 
 /*

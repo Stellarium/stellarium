@@ -55,8 +55,8 @@ private:
     Ui_obsListCreateEditDialogForm *ui;
     //! To know if the dialog is open in creation mode or editionn mode
     // if true we are in creation mode otherwise in edition mode
-    bool isCreationMode;
-    bool isSaveAs;
+    bool isCreationMode{};
+    bool isSaveAs{};
     QStandardItemModel *obsListListModel;
 
     class StelCore *core;
@@ -86,14 +86,14 @@ private:
 
     //! Add row in the obsListListModel
     //! @param number row number
-    //! @param uuid id of the record
+    //! @param olud id of the record
     //! @param name name or the designation of the object
     //! @param type type of the object
     //! @param ra right ascension of the object
     //! @param dec declination of the object
     //! @param magnitude magnitude of the object
     //! @param constellation constellation in which the object is located
-    void addModelRow(int number, const QString &uuid, const QString &name, const QString &nameI18n, const QString &type,
+    void addModelRow(int number, const QString &olud, const QString &name, const QString &nameI18n, const QString &type,
                      const QString &ra, const QString &dec, const QString &magnitude, const QString &constellation);
 
     //! Save the object informations into json file
