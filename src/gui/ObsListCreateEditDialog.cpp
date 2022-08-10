@@ -1060,7 +1060,7 @@ void ObsListCreateEditDialog::loadBookmarksInObservingList() {
 void ObsListCreateEditDialog::nameOfListTextChange() {
     ui->obsListErrorMessage->setHidden(true);
     //delete with space -> no list with only white space as name
-    QString listeName = QString(ui->nameOfListLineEdit->text()).remove(QRegExp("([ ]+)$"));
+    QString listeName = QString(ui->nameOfListLineEdit->text()).remove(QRegularExpression("([ ]+)$"));
     if (listeName.isEmpty()) {
         ui->obsListSaveButton->setEnabled(false);
     } else {
