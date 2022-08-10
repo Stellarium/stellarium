@@ -71,21 +71,15 @@ public slots:
 	//! @endcode
 	static Vec3f vec3f(const float x, const float y, const float z);
 
-	//! @returns Vec3f object from a color hexstring or even color name definition.
+#ifdef ENABLE_SCRIPT_QML
+	//! @returns Color object from a color hexstring or even color name definition.
 	//! @code
 	//! var crimson=core.color("Crimson");
 	//! var red=core.color("#ff0000");
 	//! @endcode
-	static Vec3f vec3f(const QString &cstr);
-	//! alias for vec3f(cstr)
-	static Vec3f color(const QString &cstr);
-
-	// Seems not to work properly! Use
-	// @code
-	// var my=new V3d(vec);
-	// @endcode
-	// instead.
-	//static V3d toV3d(const Vec3d &vec); // should allow a conversion from that magic type
+	//! almost an alias for vec3f(cstr)
+	static Color color(const QString &cstr);
+#endif
 
 	//! Returns true if the script is running on the older, Qt5-based QtScript JavaScript engine.
 	//! Note that it is possible to build Stellarium on Qt5.14 and later also with the newer scripting engine.
