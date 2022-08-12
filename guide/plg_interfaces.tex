@@ -443,9 +443,9 @@ curl -d 'id=LandscapeMgr.fogDisplayed&value=false' \
 This allows triggering automatic show setups for museums etc.\ via  some centralized schedulers like \command{cron}.
 
 % TODO: List all available commands with examples here?
-To get a complete pretty-printed list of properties, use:
+To get a complete pretty-printed list of properties and actions, use:
 \begin{commandsScr}
-curl -G -d 'id=propId=-1&actionId=-2' http://localhost:8090/api/main/status | \
+curl -G -d 'propId=-2&actionId=-2' http://localhost:8090/api/main/status | \
      python -m json.tool 
 \end{commandsScr} 
 
