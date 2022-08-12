@@ -22,7 +22,6 @@
 
 #include "StelDialog.hpp"
 #include "StelGui.hpp"
-#include "StelTranslator.hpp"
 
 #include <QString>
 #include <QColor>
