@@ -1046,75 +1046,42 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_topocentric_coordinates",	core->getUseTopocentricCoordinates());
 
 	// view dialog / DSO tag settings
-	const Nebula::CatalogGroup& cflags = nmgr->getCatalogFilters();
-
-	conf->beginGroup("dso_catalog_filters");
-	conf->setValue("flag_show_ngc",		static_cast<bool>(cflags & Nebula::CatNGC));
-	conf->setValue("flag_show_ic",		static_cast<bool>(cflags & Nebula::CatIC));
-	conf->setValue("flag_show_m",		static_cast<bool>(cflags & Nebula::CatM));
-	conf->setValue("flag_show_c",		static_cast<bool>(cflags & Nebula::CatC));
-	conf->setValue("flag_show_b",		static_cast<bool>(cflags & Nebula::CatB));
-	conf->setValue("flag_show_vdb",		static_cast<bool>(cflags & Nebula::CatVdB));
-	conf->setValue("flag_show_sh2",		static_cast<bool>(cflags & Nebula::CatSh2));
-	conf->setValue("flag_show_rcw",		static_cast<bool>(cflags & Nebula::CatRCW));
-	conf->setValue("flag_show_lbn",		static_cast<bool>(cflags & Nebula::CatLBN));
-	conf->setValue("flag_show_ldn",		static_cast<bool>(cflags & Nebula::CatLDN));
-	conf->setValue("flag_show_cr",		static_cast<bool>(cflags & Nebula::CatCr));
-	conf->setValue("flag_show_mel",		static_cast<bool>(cflags & Nebula::CatMel));
-	conf->setValue("flag_show_ced",		static_cast<bool>(cflags & Nebula::CatCed));
-	conf->setValue("flag_show_pgc",		static_cast<bool>(cflags & Nebula::CatPGC));
-	conf->setValue("flag_show_ugc",		static_cast<bool>(cflags & Nebula::CatUGC));
-	conf->setValue("flag_show_arp",		static_cast<bool>(cflags & Nebula::CatArp));
-	conf->setValue("flag_show_vv",		static_cast<bool>(cflags & Nebula::CatVV));
-	conf->setValue("flag_show_pk",		static_cast<bool>(cflags & Nebula::CatPK));
-	conf->setValue("flag_show_png",		static_cast<bool>(cflags & Nebula::CatPNG));
-	conf->setValue("flag_show_snrg",		static_cast<bool>(cflags & Nebula::CatSNRG));
-	conf->setValue("flag_show_aco",		static_cast<bool>(cflags & Nebula::CatACO));
-	conf->setValue("flag_show_hcg",		static_cast<bool>(cflags & Nebula::CatHCG));
-	conf->setValue("flag_show_eso",		static_cast<bool>(cflags & Nebula::CatESO));
-	conf->setValue("flag_show_vdbh",		static_cast<bool>(cflags & Nebula::CatVdBH));
-	conf->setValue("flag_show_dwb",		static_cast<bool>(cflags & Nebula::CatDWB));
-	conf->setValue("flag_show_tr",		static_cast<bool>(cflags & Nebula::CatTr));
-	conf->setValue("flag_show_st",		static_cast<bool>(cflags & Nebula::CatSt));
-	conf->setValue("flag_show_ru",		static_cast<bool>(cflags & Nebula::CatRu));
-	conf->setValue("flag_show_vdbha",	static_cast<bool>(cflags & Nebula::CatVdBHa));
-	conf->setValue("flag_show_other",		static_cast<bool>(cflags & Nebula::CatOther));
-	conf->endGroup();
+	nmgr->storeCatalogFilters();
 
 	const Nebula::TypeGroup& tflags = nmgr->getTypeFilters();
 	conf->beginGroup("dso_type_filters");
-	conf->setValue("flag_show_galaxies",				static_cast<bool>(tflags & Nebula::TypeGalaxies));
-	conf->setValue("flag_show_active_galaxies",		static_cast<bool>(tflags & Nebula::TypeActiveGalaxies));
-	conf->setValue("flag_show_interacting_galaxies",		static_cast<bool>(tflags & Nebula::TypeInteractingGalaxies));
-	conf->setValue("flag_show_open_clusters",			static_cast<bool>(tflags & Nebula::TypeOpenStarClusters));
-	conf->setValue("flag_show_globular_clusters",		static_cast<bool>(tflags & Nebula::TypeGlobularStarClusters));
-	conf->setValue("flag_show_bright_nebulae",			static_cast<bool>(tflags & Nebula::TypeBrightNebulae));
-	conf->setValue("flag_show_dark_nebulae",			static_cast<bool>(tflags & Nebula::TypeDarkNebulae));
-	conf->setValue("flag_show_planetary_nebulae",		static_cast<bool>(tflags & Nebula::TypePlanetaryNebulae));
-	conf->setValue("flag_show_hydrogen_regions",		static_cast<bool>(tflags & Nebula::TypeHydrogenRegions));
-	conf->setValue("flag_show_supernova_remnants",	static_cast<bool>(tflags & Nebula::TypeSupernovaRemnants));
-	conf->setValue("flag_show_galaxy_clusters",		static_cast<bool>(tflags & Nebula::TypeGalaxyClusters));
-	conf->setValue("flag_show_other",					static_cast<bool>(tflags & Nebula::TypeOther));
+	conf->setValue("flag_show_galaxies",             static_cast<bool>(tflags & Nebula::TypeGalaxies));
+	conf->setValue("flag_show_active_galaxies",      static_cast<bool>(tflags & Nebula::TypeActiveGalaxies));
+	conf->setValue("flag_show_interacting_galaxies", static_cast<bool>(tflags & Nebula::TypeInteractingGalaxies));
+	conf->setValue("flag_show_open_clusters",        static_cast<bool>(tflags & Nebula::TypeOpenStarClusters));
+	conf->setValue("flag_show_globular_clusters",    static_cast<bool>(tflags & Nebula::TypeGlobularStarClusters));
+	conf->setValue("flag_show_bright_nebulae",       static_cast<bool>(tflags & Nebula::TypeBrightNebulae));
+	conf->setValue("flag_show_dark_nebulae",         static_cast<bool>(tflags & Nebula::TypeDarkNebulae));
+	conf->setValue("flag_show_planetary_nebulae",    static_cast<bool>(tflags & Nebula::TypePlanetaryNebulae));
+	conf->setValue("flag_show_hydrogen_regions",     static_cast<bool>(tflags & Nebula::TypeHydrogenRegions));
+	conf->setValue("flag_show_supernova_remnants",   static_cast<bool>(tflags & Nebula::TypeSupernovaRemnants));
+	conf->setValue("flag_show_galaxy_clusters",      static_cast<bool>(tflags & Nebula::TypeGalaxyClusters));
+	conf->setValue("flag_show_other",                static_cast<bool>(tflags & Nebula::TypeOther));
 	conf->endGroup();
 
 	// view dialog / landscape tab settings
 	// DO NOT SAVE CURRENT LANDSCAPE ID! There is a dedicated button in the landscape tab of the View dialog.
 	//conf->setValue("init_location/landscape_name",                     propMgr->getStelPropertyValue("LandscapeMgr.currentLandscapeID").toString());
-	conf->setValue("landscape/flag_landscape_sets_location",	propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeSetsLocation").toBool());
-	conf->setValue("landscape/flag_landscape",				propMgr->getStelPropertyValue("LandscapeMgr.landscapeDisplayed").toBool());
-	conf->setValue("landscape/flag_atmosphere",			propMgr->getStelPropertyValue("LandscapeMgr.atmosphereDisplayed").toBool());
-	conf->setValue("landscape/flag_fog",					propMgr->getStelPropertyValue("LandscapeMgr.fogDisplayed").toBool());
-	conf->setValue("landscape/flag_enable_illumination_layer",	propMgr->getStelPropertyValue("LandscapeMgr.illuminationDisplayed").toBool());
-	conf->setValue("landscape/flag_enable_labels",			propMgr->getStelPropertyValue("LandscapeMgr.labelsDisplayed").toBool());
-	conf->setValue("landscape/flag_minimal_brightness",		propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeUseMinimalBrightness").toBool());
+	conf->setValue("landscape/flag_landscape_sets_location",           propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeSetsLocation").toBool());
+	conf->setValue("landscape/flag_landscape",                         propMgr->getStelPropertyValue("LandscapeMgr.landscapeDisplayed").toBool());
+	conf->setValue("landscape/flag_atmosphere",                        propMgr->getStelPropertyValue("LandscapeMgr.atmosphereDisplayed").toBool());
+	conf->setValue("landscape/flag_fog",                               propMgr->getStelPropertyValue("LandscapeMgr.fogDisplayed").toBool());
+	conf->setValue("landscape/flag_enable_illumination_layer",         propMgr->getStelPropertyValue("LandscapeMgr.illuminationDisplayed").toBool());
+	conf->setValue("landscape/flag_enable_labels",                     propMgr->getStelPropertyValue("LandscapeMgr.labelsDisplayed").toBool());
+	conf->setValue("landscape/flag_minimal_brightness",                propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeUseMinimalBrightness").toBool());
 	conf->setValue("landscape/flag_landscape_sets_minimal_brightness", propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeSetsMinimalBrightness").toBool());
-	conf->setValue("landscape/minimal_brightness",			propMgr->getStelPropertyValue("LandscapeMgr.defaultMinimalBrightness").toFloat());
-	conf->setValue("landscape/flag_polyline_only",			propMgr->getStelPropertyValue("LandscapeMgr.flagPolyLineDisplayedOnly").toBool());
-	conf->setValue("landscape/polyline_thickness",			propMgr->getStelPropertyValue("LandscapeMgr.polyLineThickness").toInt());
-	conf->setValue("stars/init_light_pollution_luminance",	propMgr->getStelPropertyValue("StelSkyDrawer.lightPollutionLuminance").toFloat());
-	conf->setValue("landscape/atmospheric_extinction_coefficient",	propMgr->getStelPropertyValue("StelSkyDrawer.extinctionCoefficient").toFloat());
-	conf->setValue("landscape/pressure_mbar",				propMgr->getStelPropertyValue("StelSkyDrawer.atmospherePressure").toFloat());
-	conf->setValue("landscape/temperature_C",				propMgr->getStelPropertyValue("StelSkyDrawer.atmosphereTemperature").toFloat());
+	conf->setValue("landscape/minimal_brightness",                     propMgr->getStelPropertyValue("LandscapeMgr.defaultMinimalBrightness").toFloat());
+	conf->setValue("landscape/flag_polyline_only",                     propMgr->getStelPropertyValue("LandscapeMgr.flagPolyLineDisplayedOnly").toBool());
+	conf->setValue("landscape/polyline_thickness",                     propMgr->getStelPropertyValue("LandscapeMgr.polyLineThickness").toInt());
+	conf->setValue("stars/init_light_pollution_luminance",             propMgr->getStelPropertyValue("StelSkyDrawer.lightPollutionLuminance").toFloat());
+	conf->setValue("landscape/atmospheric_extinction_coefficient",     propMgr->getStelPropertyValue("StelSkyDrawer.extinctionCoefficient").toFloat());
+	conf->setValue("landscape/pressure_mbar",                          propMgr->getStelPropertyValue("StelSkyDrawer.atmospherePressure").toFloat());
+	conf->setValue("landscape/temperature_C",                          propMgr->getStelPropertyValue("StelSkyDrawer.atmosphereTemperature").toFloat());
 
 	// view dialog / starlore tab
 	QObject* scmgr = reinterpret_cast<QObject*>(&StelApp::getInstance().getSkyCultureMgr());

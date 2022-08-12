@@ -394,6 +394,16 @@ public:
 public slots:
 	void setCatalogFilters(Nebula::CatalogGroup cflags);
 	Nebula::CatalogGroup getCatalogFilters() const { return Nebula::catalogFilters; }
+	//! Activate all catalogs
+	void selectAllCatalogs();
+	//! Activate a useful selection of catalogs: M, NGC, IC
+	void selectStandardCatalogs();
+	//! Disable all catalogs
+	void selectNoneCatalogs();
+	//! retrieve configured catalogs from config.ini.
+	void loadCatalogFilters();
+	//! store configured catalogs into config.ini.
+	void storeCatalogFilters();
 
 	void setTypeFilters(Nebula::TypeGroup tflags);
 	Nebula::TypeGroup getTypeFilters() const { return Nebula::typeFilters; }

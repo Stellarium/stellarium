@@ -2051,6 +2051,20 @@
                 </widget>
                </item>
                <item>
+                <widget class="QPushButton" name="selectPreferredCatalogs">
+                 <property name="text">
+                  <string>select preference</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="storePreferredCatalogs">
+                 <property name="text">
+                  <string>store preference</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
                 <widget class="QPushButton" name="selectNoneCatalogs">
                  <property name="minimumSize">
                   <size>
@@ -5283,12 +5297,12 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
