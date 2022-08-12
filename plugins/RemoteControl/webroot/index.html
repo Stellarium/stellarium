@@ -265,7 +265,9 @@
               <p><label for="stars_relativeScale"><?= tr("Relative scale:")?></label><input id="stars_relativeScale" class="spinner stelproperty" name="StelSkyDrawer.relativeStarScale" data-min="0.25" data-max="5" data-step="0.05" data-numberformat="n2"/></p>
               <p><label><input class="stelproperty" name="StelSkyDrawer.flagStarTwinkle" type="checkbox"/><?= tr("Twinkle:")?></label><input class="spinner stelproperty" name="StelSkyDrawer.twinkleAmount" data-min="0" data-max="1.5" data-step="0.1" data-numberformat="n2"/></p>
               <p><label><input class="stelproperty" name="StelSkyDrawer.flagStarMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="StelSkyDrawer.customStarMagLimit" data-min="0" data-max="21" data-step="0.1" data-numberformat="n2"/></p>
+              <p><label><input class="stelproperty" name="StelSkyDrawer.flagStarSpiky" type="checkbox"/><?= tr("Spiky stars")?></label></p>
               <p><label for="stars_milkywayintensity"><input class="stelproperty" name="MilkyWay.flagMilkyWayDisplayed" type="checkbox"/><?= tr("Milky Way brightness:")?></label><input id="stars_milkywayintensity" class="spinner stelproperty" name="MilkyWay.intensity" data-min="0" data-max="10" data-step="0.1" data-numberformat="n2"/></p>
+              <p><label for="stars_milkywaysaturation"><?= tr("Milky Way saturation:")?></label><input id="stars_milkywaysaturation" class="spinner stelproperty" name="MilkyWay.saturation" data-min="0" data-max="1" data-step="0.1" data-numberformat="n2"/></p>
               <p><label for="stars_zodiacintensity"><input class="stelproperty" name="ZodiacalLight.flagZodiacalLightDisplayed" type="checkbox"/><?= tr("Zodiacal Light brightness:")?></label><input id="stars_zodiacintensity" class="spinner stelproperty" name="ZodiacalLight.intensity" data-min="0" data-max="10" data-step="0.1" data-numberformat="n2"/></p>
             </div>
             <label><input class="stelproperty" name="StelSkyDrawer.flagLuminanceAdaptation" type="checkbox"/><?= tr("Dynamic eye adaptation")?></label>
@@ -291,8 +293,14 @@
             <label><input class="stelproperty" name="SolarSystem.flagIsolatedTrails" type="checkbox"/><?= tr("Show trail only for selected planet")?></label>
             <label><input class="stelproperty" name="SolarSystem.flagLightTravelTime" type="checkbox"/><?= tr("Simulate light speed")?></label>
             <div class="table">
-              <p><label><input class="stelproperty" name="SolarSystem.flagMoonScale" type="checkbox"/><?= tr("Scale Moon:")?></label><input class="spinner stelproperty" name="SolarSystem.moonScale" data-min="1" data-max="20" data-step="0.1" data-numberformat="n2"/></p>
-              <p><label><input class="stelproperty" name="SolarSystem.flagMinorBodyScale" type="checkbox"/><?= tr("Scale minor bodies:")?></label><input class="spinner stelproperty" name="SolarSystem.minorBodyScale" data-min="1" data-max="100" data-step="0.5" data-numberformat="n2"/></p>
+			  <table>
+			  <tr>
+              <td><label><input class="stelproperty" name="SolarSystem.flagMoonScale" type="checkbox"/><?= tr("Scale Moon:")?></label></td><td><input class="spinner stelproperty" name="SolarSystem.moonScale" data-min="1" data-max="20" data-step="0.1" data-numberformat="n1"/></td>
+              <td><label><input class="stelproperty" name="SolarSystem.flagSunScale" type="checkbox"/><?= tr("Scale Sun:")?></label></td><td><input class="spinner stelproperty" name="SolarSystem.sunScale" data-min="1" data-max="20" data-step="0.5" data-numberformat="n1"/></td></tr><tr>
+              <td><label><input class="stelproperty" name="SolarSystem.flagPlanetScale" type="checkbox"/><?= tr("Scale Planets:")?></label></td><td><input class="spinner stelproperty" name="SolarSystem.planetScale" data-min="1" data-max="1000" data-step="1" data-numberformat="n0"/></td>
+              <td><label><input class="stelproperty" name="SolarSystem.flagMinorBodyScale" type="checkbox"/><?= tr("Scale minor bodies:")?></label></td><td><input class="spinner stelproperty" name="SolarSystem.minorBodyScale" data-min="1" data-max="100" data-step="0.5" data-numberformat="n1"/></td>
+			  </tr>
+			  </table>
               <p><label><input class="stelproperty" name="StelSkyDrawer.flagPlanetMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="StelSkyDrawer.customPlanetMagLimit" data-min="0" data-max="22" data-step="0.1" data-numberformat="n2"/></p>
             </div>
             <div class="flex flex-baseline">
@@ -326,10 +334,11 @@
             </div>
           </div>
           <div id="vo_markers_boxes" class="smallblock flex">
-            <h3><?= tr("Celestial Sphere")?></h3>
+            <h3><input type="checkbox" class="stelaction" name="actionShow_Gridlines" /><?= tr("Celestial Sphere")?></h3>
 			<div class="inline-block blocklabel">
                 <label><input type="checkbox" class="stelaction" name="actionShow_Equatorial_J2000_Grid" /><?= tr("Equatorial grid (J2000)")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Equatorial_Grid" /><?= tr("Equatorial grid (of date)")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Fixed_Equatorial_Grid" /><?= tr("Fixed Equatorial grid")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Ecliptic_J2000_Grid" /><?= tr("Ecliptic grid (J2000)")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Ecliptic_Grid" /><?= tr("Ecliptic grid (of date)")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Azimuthal_Grid" /><?= tr("Azimuthal grid")?></label>
@@ -339,35 +348,55 @@
                 <label><input type="checkbox" class="stelaction" name="actionShow_Equinox_Points" /><?= tr("Equinoxes (of date)")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Solstice_J2000_Points" /><?= tr("Solstices (J2000)")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Solstice_Points" /><?= tr("Solstices (of date)")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Apex_Points" /><?= tr("Apex points")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Galactic_Center" /><?= tr("Galactic center and anticenter")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Cardinal_Points" /><?= tr("Cardinal points")?>
+				       <input type="checkbox" class="stelaction" name="actionShow_Intercardinal_Points" />8 
+					   <input type="checkbox" class="stelaction" name="actionShow_Secondary_Intercardinal_Points" />16</label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Compass_Marks"/><?= tr("Compass marks")?></label>
             </div>
             <div class="inline-block blocklabel">
                 <label><input type="checkbox" class="stelaction" name="actionShow_Equator_J2000_Line" /><?= tr("Equator (J2000)")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Equator_Line" /><?= tr("Equator (of date)")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Fixed_Equator_Line" /><?= tr("Fixed Equator")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Ecliptic_J2000_Line" /><?= tr("Ecliptic (J2000)")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Ecliptic_Line" /><?= tr("Ecliptic (of date)")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Horizon_Line" /><?= tr("Horizon")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Galactic_Equator_Line" /><?= tr("Galactic equator")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Supergalactic_Equator_Line" /><?= tr("Supergalactic equator")?></label>
+                <label title='<?= tr("Opposition/conjunction longitude line - the line of ecliptic longitude which passes through both ecliptic poles, the Sun and opposition point.")?>'>
+                       <input type="checkbox" class="stelaction" name="actionShow_Longitude_Line" /><?= tr("O./C. longitude")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Solar_Equator_Line" /><?= tr("Projected Solar Equator")?></label>				
                 <label><input type="checkbox" class="stelaction" name="actionShow_Meridian_Line" /><?= tr("Meridian")?></label>
-			    <label title='<?= tr("Show Prime (East-West) Vertical.")?>'><input type="checkbox" class="stelaction" name="actionShow_Prime_Vertical_Line" /><?= tr("Prime Vertical")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Current_Vertical_Line" /><?= tr("Altitude")?></label>
                 <label title='<?= tr("Show colures (great circles through poles and solstices/equinoxes).")?>'><input type="checkbox" class="stelaction" name="actionShow_Colure_Lines" /><?= tr("Colures")?></label>
-                <label><input type="checkbox" class="stelaction" name="actionShow_Cardinal_Points" /><?= tr("Cardinal points")?></label>
+                <label title='<?= tr("Instantaneous circles of earth´s axis on its motion around ecliptical poles. Displayed on Earth only.")?>'>
+                       <input type="checkbox" class="stelaction" name="actionShow_Precession_Circles" /><?= tr("Precession circles")?></label>				
+			    <label title='<?= tr("Show Prime (East-West) Vertical.")?>'><input type="checkbox" class="stelaction" name="actionShow_Prime_Vertical_Line" /><?= tr("Prime Vertical")?></label>
             </div>
 			<div class="inline-block blocklabel">
                 <label><input type="checkbox" class="stelaction" name="actionShow_Celestial_J2000_Poles" /><?= tr("Celestial poles (J2000)")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Celestial_Poles" /><?= tr("Celestial poles (of date)")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Circumpolar_Circles" /><?= tr("Circumpolar circles")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Ecliptic_J2000_Poles" /><?= tr("Ecliptic poles (J2000)")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Ecliptic_Poles" /><?= tr("Ecliptic poles (of date)")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Zenith_Nadir" /><?= tr("Zenith and Nadir")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Galactic_Poles" /><?= tr("Galactic poles")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Supergalactic_Poles" /><?= tr("Supergalactic poles")?></label>
-                <label title='<?= tr("Opposition/conjunction longitude line - the line of ecliptic longitude which passes through both ecliptic poles, the Sun and opposition point.")?>'>
-                       <input type="checkbox" class="stelaction" name="actionShow_Longitude_Line" /><?= tr("O./C. longitude")?></label>
                 <label><input type="checkbox" class="stelaction" name="actionShow_Antisolar_Point" /><?= tr("Antisolar point")?></label>
-                <label><input type="checkbox" class="stelaction" name="actionShow_Circumpolar_Circles" /><?= tr("Circumpolar circles")?></label>
-                <label title='<?= tr("Instantaneous circles of earth´s axis on its motion around ecliptical poles. Displayed on Earth only.")?>'>
-                       <input type="checkbox" class="stelaction" name="actionShow_Precession_Circles" /><?= tr("Precession circles")?></label>
-                <label><input type="checkbox" class="stelaction" name="actionShow_Compass_Marks"/><?= tr("Compass marks")?></label>
+				
+				<label><input type="checkbox" class="stelaction" name="actionShow_Umbra_Circle" /><?= tr("Earth umbra")?>
+				       <input type="checkbox" class="stelaction" name="actionShow_Umbra_Center_Point" /><?= tr("Center")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Penumbra_Circle" /><?= tr("Earth penumbra")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_Invariable_Plane_Line" /><?= tr("Invariable plane of the Solar system")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_FOV_Center_Marker" /><?= tr("Center of FOV")?></label>
+                <label><input type="checkbox" class="stelaction" name="actionShow_FOV_Circular_Marker" /><?= tr("Circular FOV")?></label>
+				       <input id="FOV_circle_diameter" class="spinner stelproperty" name="SpecialMarkersMgr.fovCircularMarkerSize" data-min="0.1" data-max="28" data-step="0.1" data-numberformat="n2"/>
+                <label><input type="checkbox" class="stelaction" name="actionShow_FOV_Rectangular_Marker" /><?= tr("Rectangular FOV")?></label>
+				       <input id="FOV_box_width"  class="spinner stelproperty" name="SpecialMarkersMgr.fovRectangularMarkerWidth" data-min="0.1" data-max="180" data-step="0.1" data-numberformat="n2"/>
+				       <input id="FOV_box_height" class="spinner stelproperty" name="SpecialMarkersMgr.fovRectangularMarkerHeight" data-min="0.1" data-max="180" data-step="0.1" data-numberformat="n2"/>
+				       <input id="FOV_box_angle"  class="spinner stelproperty" name="SpecialMarkersMgr.fovRectangularMarkerRotationAngle" data-min="-90" data-max="90" data-step="1" data-numberformat="n1"/>
+
             </div>
           </div>
 
@@ -379,6 +408,7 @@
                 <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCrossquarters"/><?= tr("Crossquarters")?></label>
                 <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowMajorStandstills"/><?= tr("Major Standstill")?></label>
                 <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowMinorStandstills"/><?= tr("Minor Standstill")?></label>
+                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowPolarCircles"/><?= tr("Polar Circles")?></label>
                 <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowZenithPassage"/><?= tr("Zenith Passage")?></label>
                 <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowNadirPassage"/><?= tr("Nadir Passage")?></label>
               </div>
@@ -405,6 +435,8 @@
                 <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowGeographicLocation2"/><?= tr("Geographic Location 2")?> (<span class="stelproperty" data-prop="ArchaeoLines.geographicLocation2Label"></span>)</label>
                 <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCustomAzimuth1"/><?= tr("Custom Azimuth 1")?> (<span class="stelproperty" data-prop="ArchaeoLines.customAzimuth1" data-numberformat="n1"></span>&deg;=<span class="stelproperty" data-prop="ArchaeoLines.customAzimuth1Label"></span>)</label>
                 <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCustomAzimuth2"/><?= tr("Custom Azimuth 2")?> (<span class="stelproperty" data-prop="ArchaeoLines.customAzimuth2" data-numberformat="n1"></span>&deg;=<span class="stelproperty" data-prop="ArchaeoLines.customAzimuth2Label"></span>)</label>
+                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCustomAltitude1"/><?= tr("Custom Altitude 1")?> (<span class="stelproperty" data-prop="ArchaeoLines.customAltitude1" data-numberformat="n1"></span>&deg;=<span class="stelproperty" data-prop="ArchaeoLines.customAltitude1Label"></span>)</label>
+                <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCustomAltitude2"/><?= tr("Custom Altitude 2")?> (<span class="stelproperty" data-prop="ArchaeoLines.customAltitude2" data-numberformat="n1"></span>&deg;=<span class="stelproperty" data-prop="ArchaeoLines.customAltitude2Label"></span>)</label>
                 <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCustomDeclination1"/><?= tr("Custom Declination 1")?> (<span class="stelproperty" data-prop="ArchaeoLines.customDeclination1" data-numberformat="n1"></span>&deg;=<span class="stelproperty" data-prop="ArchaeoLines.customDeclination1Label"></span>)</label>
                 <label><input type="checkbox" class="stelproperty" name="ArchaeoLines.flagShowCustomDeclination2"/><?= tr("Custom Declination 2")?> (<span class="stelproperty" data-prop="ArchaeoLines.customDeclination2" data-numberformat="n1"></span>&deg;=<span class="stelproperty" data-prop="ArchaeoLines.customDeclination2Label"></span>)</label>
               </div>
@@ -441,11 +473,11 @@
               <label title='<?= tr("Hickson Compact Group (Hickson+, 1982)")?>'>
                 <input type="checkbox" value="0x200000" />HCG
               </label>
-              <label title='<?= tr("Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)")?>'>
-                <input type="checkbox" value="0x800000" />VdBH
+              <label title='<?= tr("Catalogue and distances of optically visible H II regions (Dickel+, 1969)")?>'>
+                <input type="checkbox" value="0x1000000" />DWB
               </label>
-              <label title='<?= tr("Trumpler Catalogue")?>'>
-                <input type="checkbox" value="0x2000000" />Tr
+              <label title='<?= tr("Ruprecht Catalogue")?>'>
+                <input type="checkbox" value="0x8000000" />Ru
               </label>
             </div>
             <div class="inline-block blocklabel">
@@ -470,14 +502,14 @@
               <label title='<?= tr("A catalogue of Galactic supernova remnants (Green, 2014)")?>'>
                 <input type="checkbox" value="0x80000" />SNR G
               </label>
-              <label title='<?= tr("A Catalog of Rich Clusters of Galaxies (Abell+, 1989)")?>'>
-                <input type="checkbox" value="0x100000" />Abell
+              <label title='<?= tr("Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)")?>'>
+                <input type="checkbox" value="0x800000" />VdBH
               </label>
-              <label title='<?= tr("Catalogue and distances of optically visible H II regions (Dickel+, 1969)")?>'>
-                <input type="checkbox" value="0x1000000" />DWB
+              <label title='<?= tr("Trumpler Catalogue")?>'>
+                <input type="checkbox" value="0x2000000" />Tr
               </label>
-              <label title='<?= tr("Stock Catalogue")?>'>
-                <input type="checkbox" value="0x4000000" />St
+              <label title='<?= tr("van den Bergh-Hagen Catalogue (Uniform survey of clusters in the Southern Milky Way; van den Bergh and Hagen, 1975)")?>'>
+                <input type="checkbox" value="0x10000000" />vdB-Ha
               </label>
             </div>
             <div class="inline-block blocklabel">
@@ -499,16 +531,15 @@
               <label title='<?= tr("The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)")?>'>
                 <input type="checkbox" value="0x20000" />PK
               </label>
+              <label title='<?= tr("A Catalog of Rich Clusters of Galaxies (Abell+, 1989)")?>'>
+                <input type="checkbox" value="0x100000" />Abell (ACO)
+              </label>
               <label title='<?= tr("ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982)")?>'>
                 <input type="checkbox" value="0x400000" />ESO
               </label>
-              <label title='<?= tr("Ruprecht Catalogue")?>'>
-                <input type="checkbox" value="0x8000000" />Ru
+              <label title='<?= tr("Stock Catalogue")?>'>			  
+                <input type="checkbox" value="0x4000000" />St
               </label>
-              <label title='<?= tr("van den Bergh-Hagen Catalogue (Uniform survey of clusters in the Southern Milky Way; van den Bergh and Hagen, 1975)")?>'>
-                <input type="checkbox" value="0x10000000" />vdB-Ha
-              </label>
-
               <label title='<?= tr("Objects without identifier")?>'>
                 <input type="checkbox" value="0x2000000" /><?= tr("Other")?>
               </label>
@@ -527,21 +558,23 @@
               <label><input type="checkbox" value="0x002"/><?= tr("Active galaxies")?></label>
               <label><input type="checkbox" value="0x004"/><?= tr("Interacting galaxies")?></label>
               <label><input type="checkbox" value="0x200"/><?= tr("Clusters of galaxies")?></label>
-              <label><input type="checkbox" value="0x008"/><?= tr("Star clusters")?></label>
-              <label><input type="checkbox" value="0x010"/><?= tr("Hydrogen regions")?></label>
+              <label><input type="checkbox" value="0x008"/><?= tr("Open Star clusters")?></label>
+              <label><input type="checkbox" value="0x010"/><?= tr("Globular Star clusters")?></label>
+              <label><input type="checkbox" value="0x020"/><?= tr("Hydrogen regions")?></label>
               <div class="stelplugin" data-plugin="Quasars">
                    <label><input type="checkbox" class="stelaction" name="actionShow_Quasars"/><?= tr("Quasars")?></label>
               </div>
             </div>
             <div class="inline-block blocklabel">
-              <label><input type="checkbox" value="0x020"/><?= tr("Bright Nebulae")?></label>
-              <label><input type="checkbox" value="0x040"/><?= tr("Dark Nebulae")?></label>
-              <label><input type="checkbox" value="0x080"/><?= tr("Planetary Nebulae")?></label>
-              <label><input type="checkbox" value="0x100"/><?= tr("Supernova remnants")?></label>
+              <label><input type="checkbox" value="0x040"/><?= tr("Bright Nebulae")?></label>
+              <label><input type="checkbox" value="0x080"/><?= tr("Dark Nebulae")?></label>
+              <label><input type="checkbox" value="0x100"/><?= tr("Planetary Nebulae")?></label>
+              <label><input type="checkbox" value="0x200"/><?= tr("Supernova remnants")?></label>
+              <label><input type="checkbox" value="0x400"/><?= tr("Galaxy clusters")?></label>
               <div class="stelplugin" data-plugin="Pulsars">
                    <label><input type="checkbox" class="stelaction" name="actionShow_Pulsars"/><?= tr("Pulsars")?></label>
               </div>
-              <label><input type="checkbox" value="0x200"/><?= tr("Other")?></label>
+              <label><input type="checkbox" value="0x800"/><?= tr("Other")?></label>
             </div>
           </div>
           <div id="vo_dsolabels" class="smallblock blocklabel">
@@ -578,6 +611,8 @@
             </div>
           </div>
           <div class="inline-block blocklabel">
+            <label><input type="checkbox" class="stelproperty" name="LandscapeMgr.flagPolyLineDisplayedOnly" /><?= tr("Draw only polygon")?> 
+			       <input id="landscape_polyLineThickness" class="flex-expand spinner stelproperty" name="LandscapeMgr.polyLineThickness" data-min="1" data-max="5" data-step="1" data-numberformat="n0"/></label>
             <label><input type="checkbox" class="stelaction" name="actionShow_LandscapeLabels" /><?= tr("Show landscape labels")?></label>
             <label><input type="checkbox" class="stelaction" name="actionShow_LandscapeIllumination" /><?= tr("Show illumination")?></label>
             <label><input id="landscape_flagLandscapeSetsMinimalBrightness" type="checkbox" class="stelproperty" name="LandscapeMgr.flagLandscapeSetsMinimalBrightness"/><?= tr("from landscape, if given")?></label>
@@ -686,6 +721,11 @@
           </select>
           <iframe id="vo_projectioninfo" class="flex-expand" src="/api/view/projectiondescription"></iframe>
         </div>
+		<div class="flex flex-baseline">
+              <label><?= tr("Vertical viewport offset")?></label>
+			  <div class="slider stelproperty flex-expand" data-prop="StelMovementMgr.viewportVerticalOffsetTarget" data-min="-50" data-max="50" data-step="1"></div>
+			  <span class="stelproperty" style="margin-left: 5px; min-width: 48px;" data-prop="StelMovementMgr.viewportVerticalOffsetTarget"></span>
+        </div>		
       </div>
       <div id="tab_scenery3d" class="stelplugin" data-plugin="Scenery3d" data-pluginjs="plugins/scenery3d">
           <div class="flex">
