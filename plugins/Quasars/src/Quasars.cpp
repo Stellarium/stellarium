@@ -23,7 +23,6 @@
 #include "StelCore.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelTextureMgr.hpp"

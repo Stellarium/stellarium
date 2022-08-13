@@ -22,10 +22,9 @@
 #include "ui_equationOfTimeWindow.h"
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelTranslator.hpp"
 
 EquationOfTimeWindow::EquationOfTimeWindow()
 	: StelDialog("EquationOfTime")

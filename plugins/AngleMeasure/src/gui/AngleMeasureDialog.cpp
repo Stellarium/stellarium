@@ -21,8 +21,9 @@
 #include "AngleMeasureDialog.hpp"
 #include "ui_angleMeasureDialog.h"
 
+#include "StelGui.hpp"
+#include "StelTranslator.hpp"
 #include "StelApp.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
 

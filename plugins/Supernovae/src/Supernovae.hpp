@@ -21,7 +21,6 @@
 
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
-#include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "Supernova.hpp"
 #include <QFont>

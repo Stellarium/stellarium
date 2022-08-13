@@ -31,7 +31,6 @@
 #include <QLogValueAxis>
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
 #include "ui_exoplanetsDialog.h"
 #include "ExoplanetsDialog.hpp"
 #include "Exoplanets.hpp"
@@ -40,8 +39,6 @@
 #include "StelMovementMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelGui.hpp"
-#include "StelMainView.hpp"
-#include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
 

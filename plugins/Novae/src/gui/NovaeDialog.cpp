@@ -25,16 +25,12 @@
 #include <QFileDialog>
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
 #include "ui_novaeDialog.h"
 #include "NovaeDialog.hpp"
 #include "Novae.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelMovementMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelGui.hpp"
-#include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
 NovaeDialog::NovaeDialog()

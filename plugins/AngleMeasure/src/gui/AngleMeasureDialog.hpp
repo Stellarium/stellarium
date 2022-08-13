@@ -21,8 +21,6 @@
 #define ANGLEMEASUREDIALOG_HPP
 
 #include "StelDialog.hpp"
-#include "StelGui.hpp"
-#include "StelTranslator.hpp"
 #include <QString>
 
 class Ui_angleMeasureDialog;

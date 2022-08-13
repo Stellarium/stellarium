@@ -17,7 +17,6 @@
  */
 
 #include "Pulsar.hpp"
-#include "Pulsars.hpp"
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
@@ -25,7 +24,6 @@
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
-#include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelProjector.hpp"
 #include "StelLocaleMgr.hpp"

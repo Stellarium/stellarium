@@ -26,17 +26,12 @@
 #include <QColorDialog>
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
 #include "ui_pulsarsDialog.h"
 #include "PulsarsDialog.hpp"
 #include "Pulsars.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelMovementMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelGui.hpp"
-#include "StelMainView.hpp"
-#include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
 PulsarsDialog::PulsarsDialog()

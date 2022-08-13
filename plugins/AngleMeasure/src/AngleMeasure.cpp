@@ -17,17 +17,15 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "StelProjector.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelFileMgr.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelVertexArray.hpp"
 #include "AngleMeasure.hpp"
 #include "AngleMeasureDialog.hpp"
 

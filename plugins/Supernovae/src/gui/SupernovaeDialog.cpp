@@ -25,17 +25,12 @@
 #include <QFileDialog>
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
 #include "ui_supernovaeDialog.h"
 #include "SupernovaeDialog.hpp"
 #include "Supernovae.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelMovementMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelGui.hpp"
-#include "StelMainView.hpp"
-#include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
 SupernovaeDialog::SupernovaeDialog()
