@@ -26,10 +26,8 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelFileMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelMovementMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "LandscapeMgr.hpp"

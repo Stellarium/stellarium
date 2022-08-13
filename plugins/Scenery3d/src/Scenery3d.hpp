@@ -29,9 +29,7 @@
 #include "StelCore.hpp"
 #include "StelPluginInterface.hpp"
 #include "StelModule.hpp"
-#include "StelUtils.hpp"
 #include "StelFader.hpp"
-#include "StelActionMgr.hpp"
 #include "StelProgressController.hpp"
 
 #include "SceneInfo.hpp"

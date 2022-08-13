@@ -23,12 +23,12 @@
 #include "Scenery3d.hpp"
 #include "SceneInfo.hpp"
 #include "S3DEnum.hpp"
-#include "StoredViewDialog.hpp"
 
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
+#include "StelActionMgr.hpp"
 
 #include <QLineEdit>
 #include <QStandardItemModel>
