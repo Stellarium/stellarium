@@ -21,18 +21,8 @@
  
 #include "MinorPlanet.hpp"
 #include "Orbit.hpp"
-
-#include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelObserver.hpp"
-
-#include "StelTexture.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelTranslator.hpp"
-#include "StelUtils.hpp"
-#include "StelFileMgr.hpp"
-#include "RefractionExtinction.hpp"
-#include "Orbit.hpp"
 
 #include <QRegularExpression>
 #include <QDebug>

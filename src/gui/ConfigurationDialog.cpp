@@ -30,7 +30,6 @@
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
-#include "StelObjectMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelProgressController.hpp"
 
@@ -41,7 +40,6 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelLocation.hpp"
-#include "StelSkyLayerMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "StarMgr.hpp"
 #include "NebulaMgr.hpp"
@@ -49,10 +47,7 @@
 #ifdef ENABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
 #endif
-#include "StelJsonParser.hpp"
 #include "StelTranslator.hpp"
-#include "EphemWrapper.hpp"
-#include "ToastMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>

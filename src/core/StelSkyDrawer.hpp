@@ -23,13 +23,12 @@
 #include "StelApp.hpp"
 #include "RefractionExtinction.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelProjectorType.hpp"
 #include "VecMath.hpp"
-#include "StelOpenGL.hpp"
 
 #include <QObject>
 #include <QImage>
 #include <QSettings>
+#include <QOpenGLFunctions>
 
 class StelToneReproducer;
 class StelCore;
