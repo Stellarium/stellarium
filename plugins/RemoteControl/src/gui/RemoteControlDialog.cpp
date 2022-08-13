@@ -25,8 +25,8 @@
 #include "ui_remoteControlDialog.h"
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelLocaleMgr.hpp"
+#include "StelGui.hpp"
+#include "StelTranslator.hpp"
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
 
@@ -144,7 +144,7 @@ void RemoteControlDialog::setAboutHtml(void)
 	// TODO Add longer instructions?
 
 	// Regexp to replace {text} with an HTML link.
-	QRegularExpression a_rx("[{]([^{]*)[}]");
+	static const QRegularExpression a_rx("[{]([^{]*)[}]");
 
 	html += "<p>" + q_("It is also possible to send commands via command line, e.g..");
 	html += "<pre>\n"

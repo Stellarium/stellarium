@@ -20,8 +20,6 @@
 #include "LocationSearchService.hpp"
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelModuleMgr.hpp"
 #include "StelLocationMgr.hpp"
 
 #include <QJsonArray>

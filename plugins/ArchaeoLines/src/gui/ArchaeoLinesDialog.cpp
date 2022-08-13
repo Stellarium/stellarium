@@ -26,8 +26,10 @@
 #include "ArchaeoLinesDialogLocations.hpp"
 
 #include "StelApp.hpp"
+#include "StelGui.hpp"
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelTranslator.hpp"
 #include "AngleSpinBox.hpp"
 #include "StelUtils.hpp"
 

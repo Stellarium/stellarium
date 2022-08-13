@@ -24,7 +24,6 @@
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelLocationMgr.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelTranslator.hpp"
 #include "SolarSystem.hpp"
 

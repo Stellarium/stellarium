@@ -19,9 +19,6 @@
 
 #include "SyncClient.hpp"
 #include "SyncClientHandlers.hpp"
-#include "SyncMessages.hpp"
-
-#include "StelTranslator.hpp"
 
 #include <QDateTime>
 #include <QTcpSocket>

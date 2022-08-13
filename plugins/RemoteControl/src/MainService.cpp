@@ -29,9 +29,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelPropertyMgr.hpp"
-#include "StelScriptMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
-#include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 
 #include <QJsonDocument>

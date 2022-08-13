@@ -24,8 +24,6 @@
 #include <QListWidgetItem>
 
 #include "StelDialog.hpp"
-#include "StelGui.hpp"
-#include "StelTranslator.hpp"
 
 class Ui_remoteSyncDialog;
 class RemoteSync;

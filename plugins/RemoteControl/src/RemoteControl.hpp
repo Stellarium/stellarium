@@ -23,9 +23,7 @@
 #include <QFont>
 #include <QKeyEvent>
 
-#include "VecMath.hpp"
 #include "StelModule.hpp"
-#include "StelFader.hpp"
 #include "StelCore.hpp"
 
 class QTimer;

@@ -23,11 +23,11 @@
 #include "ui_remoteSyncDialog.h"
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelPropertyMgr.hpp"
+#include "StelGui.hpp"
+#include "StelTranslator.hpp"
 
 RemoteSyncDialog::RemoteSyncDialog()
 	: StelDialog("RemoteSync")

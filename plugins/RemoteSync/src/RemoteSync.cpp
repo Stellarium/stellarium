@@ -23,11 +23,9 @@
 #include "SyncServer.hpp"
 #include "SyncClient.hpp"
 
-#include "CLIProcessor.hpp"
-#include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelModuleMgr.hpp"
+#include "StelTranslator.hpp"
 
 #include <QApplication>
 #include <QDebug>

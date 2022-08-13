@@ -19,11 +19,7 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelMainView.hpp"
-#include "SkyGui.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelFileMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelObjectMgr.hpp"
@@ -31,7 +27,6 @@
 #include "StarMgr.hpp"
 #include "Planet.hpp"
 #include "NebulaMgr.hpp"
-#include "StelUtils.hpp"
 #include "StelDialog.hpp"
 #include "OnlineQueries.hpp"
 #include "OnlineQueriesDialog.hpp"
@@ -41,6 +36,7 @@
 #include <QMetaEnum>
 #include <QLoggingCategory>
 #include <QXmlStreamReader>
+#include <stdexcept>
 
 Q_LOGGING_CATEGORY(onlineQueries,"stel.plugin.OnlineQueries")
 

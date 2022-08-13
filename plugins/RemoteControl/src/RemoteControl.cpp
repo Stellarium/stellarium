@@ -17,21 +17,16 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelUtils.hpp"
-#include "StelProjector.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
-#include "StelIniParser.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelVertexArray.hpp"
 #include "RemoteControl.hpp"
 #include "RemoteControlDialog.hpp"
 #include "RequestHandler.hpp"
+#include "StelTranslator.hpp"
 
 #include "httpserver/httplistener.h"
 #include "httpserver/staticfilecontroller.h"

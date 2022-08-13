@@ -33,9 +33,7 @@
 #include "ViewService.hpp"
 
 #include "StelApp.hpp"
-#include "StelUtils.hpp"
 #include "StelTranslator.hpp"
-#include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 
 #include <QDir>
