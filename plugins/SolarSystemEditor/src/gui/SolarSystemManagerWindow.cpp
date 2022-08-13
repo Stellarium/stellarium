@@ -27,6 +27,7 @@
 #include "ManualImportWindow.hpp"
 
 #include "StelApp.hpp"
+#include "StelGui.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"

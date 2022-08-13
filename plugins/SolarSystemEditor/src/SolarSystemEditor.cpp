@@ -23,11 +23,8 @@
 
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
-#include "StelGui.hpp"
-#include "StelGuiItems.hpp"
 #include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "SolarSystem.hpp"
@@ -298,7 +295,6 @@ bool SolarSystemEditor::isFileEncodingValid(QString filePath) const
 
 		if (in.status()!=QTextStream::Ok)
 #else
-
 		QByteArray byteArray = checkFile.readAll();
 		checkFile.close();
 
