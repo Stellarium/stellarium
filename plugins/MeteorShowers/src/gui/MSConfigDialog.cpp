@@ -23,6 +23,7 @@
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelTranslator.hpp"
 #include "ui_MSConfigDialog.h"
 #include "StelMainView.hpp"
 

@@ -25,7 +25,6 @@
 #include "Ocular.hpp"
 #include "PropertyBasedTableModel.hpp"
 #include "StelDialog.hpp"
-#include "StelStyle.hpp"
 #include "Telescope.hpp"
 #include "Lens.hpp"
 #include "VecMath.hpp"

@@ -22,10 +22,7 @@
 
 #include "MeteorObj.hpp"
 #include "MeteorShowersMgr.hpp"
-#include "StelFader.hpp"
 #include "StelObject.hpp"
-#include "StelPainter.hpp"
-#include "StelTextureTypes.hpp"
 #include "StelTranslator.hpp"
 
 //! @class MeteorShower

@@ -20,11 +20,7 @@
 #include "Oculars.hpp"
 #include "OcularsGuiPanel.hpp"
 
-#include "GridLinesMgr.hpp"
 #include "LabelMgr.hpp"
-#include "ConstellationMgr.hpp"
-#include "AsterismMgr.hpp"
-#include "MilkyWay.hpp"
 #include "SkyGui.hpp"
 #include "StelActionMgr.hpp"
 #include "StelApp.hpp"
@@ -32,7 +28,6 @@
 #include "StelFileMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
@@ -45,7 +40,6 @@
 #include "NebulaMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelPropertyMgr.hpp"
-#include "LandscapeMgr.hpp"
 
 #include <QAction>
 #include <QDebug>

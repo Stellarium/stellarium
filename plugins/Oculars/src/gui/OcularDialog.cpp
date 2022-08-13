@@ -23,11 +23,9 @@
 
 #include "StelApp.hpp"
 #include "StelGui.hpp"
-#include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMainView.hpp"
 #include "StelTranslator.hpp"
-#include "StelActionMgr.hpp"
 
 #include <QAbstractItemModel>
 #include <QDataWidgetMapper>

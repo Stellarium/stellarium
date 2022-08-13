@@ -20,7 +20,6 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "Oculars.hpp"
 #include "OcularsGuiPanel.hpp"
 #include "StelApp.hpp"
-#include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"

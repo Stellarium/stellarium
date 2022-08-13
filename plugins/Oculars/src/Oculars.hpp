@@ -26,7 +26,7 @@
 #include "Ocular.hpp"
 #include "OcularDialog.hpp"
 #include "StelModule.hpp"
-#include "StelTexture.hpp"
+#include "StelTextureTypes.hpp"
 #include "Telescope.hpp"
 #include "VecMath.hpp"
 

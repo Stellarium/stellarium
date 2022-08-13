@@ -34,6 +34,7 @@
 #include "StelGui.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelProgressController.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelUtils.hpp"
 #include "SporadicMeteorMgr.hpp"
 
@@ -50,11 +51,14 @@ MeteorShowersMgr::MeteorShowersMgr()
 	, m_enableMarker(true)
 	, m_showEnableButton(true)
 	, m_showSearchButton(true)
+	//, m_isUpdating(false)
 	, m_enableAutoUpdates(true)
 	, m_updateFrequencyHours(0)
 	, m_updateState(CompleteNoUpdates)
+	, m_networkManager(Q_NULLPTR)
 	, m_downloadReply(Q_NULLPTR)
 	, m_progressBar(Q_NULLPTR)
+	, m_updateTimer(Q_NULLPTR)
 {
 	setObjectName("MeteorShowers");
 }
