@@ -276,10 +276,39 @@ void TextUserInterface::init()
 	                                  skyDrawer->getTwinkleAmount(),
 	                                  0.0, 1.5, 0.1,
 	                                  m4, m4_3);
+	TuiNode* m4_5 = new TuiNodeDouble(N_("Mag limit:"),
+					  skyDrawer, SLOT(setCustomStarMagnitudeLimit(double)),
+					  skyDrawer->getCustomStarMagnitudeLimit(),
+					  0.0, 20.0, 0.1,
+					  m4, m4_4);
+	TuiNode* m4_6 = new TuiNodeBool(N_("Use mag limit"),
+					skyDrawer, SLOT(setFlagStarMagnitudeLimit(bool)),
+					skyDrawer->getFlagStarMagnitudeLimit(), m4, m4_5);
+	TuiNode* m4_7 = new TuiNodeBool(N_("Spiky stars"),
+					skyDrawer, SLOT(setFlagStarSpiky(bool)),
+					skyDrawer->getFlagStarSpiky(), m4, m4_6);
+	TuiNode* m4_8 = new TuiNodeDouble(N_("Labels and Markers"),
+					  starMgr, SLOT(setLabelsAmount(double)),
+					  starMgr->getLabelsAmount(),
+					  0.0, 19.0, 0.2,
+					  m4, m4_7);
+	TuiNode* m4_9 = new TuiNodeBool(N_("Show additional star names"),
+					starMgr, SLOT(setFlagAdditionalNames(bool)),
+					starMgr->getFlagAdditionalNames(), m4, m4_8);
+	TuiNode* m4_10 = new TuiNodeBool(N_("Use designations for screen labels"),
+					starMgr, SLOT(setDesignationUsage(bool)),
+					starMgr->getDesignationUsage(), m4, m4_9);
+
 	m4_1->setNextNode(m4_2);
 	m4_2->setNextNode(m4_3);
 	m4_3->setNextNode(m4_4);
-	m4_4->setNextNode(m4_1);
+	m4_4->setNextNode(m4_5);
+	m4_5->setNextNode(m4_6);
+	m4_6->setNextNode(m4_7);
+	m4_7->setNextNode(m4_8);
+	m4_8->setNextNode(m4_9);
+	m4_9->setNextNode(m4_10);
+	m4_10->setNextNode(m4_1);
 	m4_1->loopToTheLast();
 	m4->setChildNode(m4_1);
 
@@ -477,19 +506,26 @@ void TextUserInterface::init()
 	                                 GETSTELMODULE(MilkyWay)->getIntensity(),
 	                                 0, 10.0, 0.1, 
 					 m6, m6_5);
-	TuiNode* m6_7 = new TuiNodeDouble(N_("Zodiacal light intensity:"),
+	TuiNode* m6_7 = new TuiNodeDouble(N_("Milky Way saturation:"),
+					 GETSTELMODULE(MilkyWay),
+					 SLOT(setSaturation(double)),
+					 GETSTELMODULE(MilkyWay)->getSaturation(),
+					 0, 1.0, 0.1,
+					 m6, m6_6);
+	TuiNode* m6_8 = new TuiNodeDouble(N_("Zodiacal light intensity:"),
 					 GETSTELMODULE(ZodiacalLight),
 					 SLOT(setIntensity(double)),
 					 GETSTELMODULE(ZodiacalLight)->getIntensity(),
 					 0, 10.0, 0.1,
-					 m6, m6_6);
+					 m6, m6_7);
 	m6_1->setNextNode(m6_2);
 	m6_2->setNextNode(m6_3);
 	m6_3->setNextNode(m6_4);
 	m6_4->setNextNode(m6_5);
 	m6_5->setNextNode(m6_6);
 	m6_6->setNextNode(m6_7);
-	m6_7->setNextNode(m6_1);
+	m6_7->setNextNode(m6_8);
+	m6_8->setNextNode(m6_1);
 	m6_1->loopToTheLast();
 	m6->setChildNode(m6_1);
 

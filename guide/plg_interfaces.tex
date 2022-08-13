@@ -177,11 +177,6 @@ This plugin re-implements the ``TUI'' of the pre-0.10 versions of
 Stellarium, an unobtrusive menu used primarily by planetarium system
 operators to change settings, run scripts and so on.
 
-Given that color configuration for lines and texts cannot be found
-elsewhere, an interesting part for general use (at least for extended
-configuration sessions) is the way to interactively select colors in
-this menu.
-
 A full list of the commands for the TUI plugin is
 given in section~\ref{sec:plugins:TUI:commands}. 
 
@@ -239,7 +234,13 @@ given in section~\ref{sec:plugins:TUI:commands}.
 4.1  & Show stars     & Turn on/off star rendering\\%\midrule
 4.2  & Relative Scale & Change the relative brightness of the stars. Larger values make bright stars much larger.\\%\midrule
 4.3  & Absolute Scale & Change the absolute brightness of the stars. Large values show more stars. Leave at 1 for realistic views. \\%\midrule
-4.4  & Twinkle        & Sets how strong the star twinkling effect is - zero is off, the higher the value the more the stars will twinkle.\\\midrule
+4.4  & Twinkle        & Sets how strong the star twinkling effect is - zero is off, the higher the value the more the stars will twinkle.\\%\midrule
+4.5  & Mag limit      & Sets a custom magitude cutoff for stars\\
+4.6  & Use mag limit  & Activates this magnitude limit \\
+4.7  & Spiky stars    & Use pointed star figures \\
+4.8  & Labels and Markers & configures the amount of labels \\
+4.9  & Show additional star names  & \\
+4.10 & Use designations for screen labels & \\\midrule
 5    & Colors                      & (menu group) change color/brightness of the\ldots\\%\midrule
 5.1  & Constellation lines         & constellation lines\\%\midrule
 5.2  & Constellation labels        & labels used to name stars\\%\midrule
@@ -277,6 +278,7 @@ given in section~\ref{sec:plugins:TUI:commands}.
                                                       When set to ``On'', view will return to startup view. \\%\midrule
 6.5  & Zoom Duration              & Sets the time for zoom operations to take (in seconds)\\%\midrule
 6.6  & Milky Way intensity        & Changes the brightness of the Milky Way\\%\midrule
+6.6  & Milky Way saturation       & Changes the saturation of the Milky Way\\%\midrule
 6.7  & Zodiacal light intensity   & Changes the brightness of the Zodiacal light\\\midrule
 %6.6 & Nebula label frequency     & Changes the magnitude limit for labelling of nebulae\\\midrule
 %6.6 & Nebula label frequency     & (not active) \\\midrule
