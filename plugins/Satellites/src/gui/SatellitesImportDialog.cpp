@@ -21,7 +21,7 @@
 #include "ui_satellitesImportDialog.h"
 
 #include "StelApp.hpp"
-#include "StelMainView.hpp" //for the QFileDialog? Why?
+#include "StelGui.hpp"
 #include "StelModuleMgr.hpp" // for the GETSTELMODULE macro :(
 #include "StelTranslator.hpp"
 #include "StelProgressController.hpp"

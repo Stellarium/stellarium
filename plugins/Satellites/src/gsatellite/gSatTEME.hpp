@@ -41,7 +41,6 @@
 #include "VecMath.hpp"
 
 #include "sgp4unit.h"
-#include "sgp4ext.h"
 #include "stdsat.h"
 
 //! @class gSatTEME

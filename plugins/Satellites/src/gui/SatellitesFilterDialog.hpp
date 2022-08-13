@@ -21,7 +21,6 @@
 #define FILTERSATELLITESWINDOW_HPP
 
 #include "StelDialog.hpp"
-#include "Satellites.hpp"
 
 class Ui_satellitesFilterDialog;
 

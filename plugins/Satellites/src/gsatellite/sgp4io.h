@@ -28,7 +28,7 @@
 #include <cstdio>
 #include <cmath>
 
-#include "sgp4ext.h"    // for several misc routines
+//#include "sgp4ext.h"    // for several misc routines
 #include "sgp4unit.h"   // for sgp4init and getgravconst
 
 // ------------------------- function declarations -------------------------

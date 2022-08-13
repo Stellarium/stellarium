@@ -25,9 +25,6 @@
 #include <cstring>
 #include <cmath>
 
-#include "sgp4unit.h"
-
-
 // ------------------------- function declarations -------------------------
 
 double mag(double x[3]);

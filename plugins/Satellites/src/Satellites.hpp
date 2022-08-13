@@ -23,8 +23,6 @@
 #include "StelObjectModule.hpp"
 #include "Satellite.hpp"
 #include "StelFader.hpp"
-#include "StelGui.hpp"
-#include "StelDialog.hpp"
 #include "StelLocation.hpp"
 
 #include <QDateTime>

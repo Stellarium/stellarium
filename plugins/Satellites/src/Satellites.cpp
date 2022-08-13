@@ -26,10 +26,8 @@
 #include "StelLocation.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTextureMgr.hpp"
-#include "StelIniParser.hpp"
 #include "Satellites.hpp"
 #include "Satellite.hpp"
 #include "SatellitesListModel.hpp"
@@ -497,7 +495,7 @@ StelObjectP Satellites::searchByInternationalDesignator(const QString &intlDesig
 		return Q_NULLPTR;
 
 	// If the search string is an international designator...
-	QRegularExpression regExp("^(\\d+)-(\\w*)\\s*$");
+	static const QRegularExpression regExp("^(\\d+)-(\\w*)\\s*$");
 	QRegularExpressionMatch match=regExp.match(intlDesignator);
 	if (match.hasMatch())
 	{
@@ -534,7 +532,7 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 	QString objw = objPrefix.toUpper();
 
 	QString numberPrefix;
-	QRegularExpression regExp("^(NORAD)\\s*(\\d+)\\s*$");
+	static const QRegularExpression regExp("^(NORAD)\\s*(\\d+)\\s*$");
 	QRegularExpressionMatch match=regExp.match(objw);
 	if (match.hasMatch())
 	{
@@ -546,7 +544,7 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 	}
 
 	QString designatorPrefix;
-	QRegularExpression regExp2("^(\\d+)-(\\w*)\\s*$");
+	static const QRegularExpression regExp2("^(\\d+)-(\\w*)\\s*$");
 	QRegularExpressionMatch match2=regExp2.match(objw);
 	if (match2.hasMatch())
 		designatorPrefix = QString("%1-%2").arg(match2.captured(1), match2.captured(2));
@@ -759,7 +757,7 @@ void Satellites::loadSettings()
 	// Backward compatibility: try to detect and read an old-style array.
 	// TODO: Assume that the user hasn't modified their conf in a stupid way?
 //	if (conf->contains("tle_url0")) // This can skip some operations...
-	QRegularExpression keyRE("^tle_url\\d+$");
+	static const QRegularExpression keyRE("^tle_url\\d+$");
 	QStringList urls;
 	for (const auto& key : conf->childKeys())
 	{
@@ -1047,7 +1045,7 @@ const QString Satellites::readCatalogVersion()
 	if (map.contains("version"))
 	{
 		QString version = map.value("version").toString();
-		QRegularExpression vRx("(\\d+\\.\\d+\\.\\d+)");
+		static const QRegularExpression vRx("(\\d+\\.\\d+\\.\\d+)");
 		QRegularExpressionMatch match=vRx.match(version);
 		if (match.hasMatch())
 			jsonVersion = match.captured(1);
@@ -1055,7 +1053,7 @@ const QString Satellites::readCatalogVersion()
 	else if (map.contains("creator"))
 	{
 		QString creator = map.value("creator").toString();
-		QRegularExpression vRx(".*(\\d+\\.\\d+\\.\\d+).*");
+		static const QRegularExpression vRx(".*(\\d+\\.\\d+\\.\\d+).*");
 		QRegularExpressionMatch match=vRx.match(creator);
 		if (match.hasMatch())
 			jsonVersion = match.captured(1);
@@ -2598,7 +2596,7 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 			
 			// The thing in square brackets after the name is actually
 			// Celestrak's "status code". Parse it!
-			QRegularExpression statusRx("\\s*\\[(\\D{1})\\]\\s*$", QRegularExpression::InvertedGreedinessOption );
+			static const QRegularExpression statusRx("\\s*\\[(\\D{1})\\]\\s*$", QRegularExpression::InvertedGreedinessOption );
 			QRegularExpressionMatch match;
 			if (line.indexOf(statusRx, 0, &match)>-1)
 				lastData.status = satOpStatusMap.value(match.captured(1).toUpper(), Satellite::StatusUnknown);
@@ -2611,9 +2609,11 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 		else
 		{
 			// TODO: Yet another place suitable for a standard TLE regex. --BM
-			if (QRegularExpression("^1 .*").match(line).hasMatch())
+			static const QRegularExpression reL1("^1 .*");
+			static const QRegularExpression reL2("^2 .*");
+			if (reL1.match(line).hasMatch())
 				lastData.first = line;
-			else if (QRegularExpression("^2 .*").match(line).hasMatch())
+			else if (reL2.match(line).hasMatch())
 			{
 				lastData.second = line;
 				// The Satellite Catalogue Number is the second number

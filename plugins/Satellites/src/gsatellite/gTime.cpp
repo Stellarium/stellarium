@@ -29,7 +29,6 @@
 // gtime
 #include "gTime.hpp"
 // GExcpt
-#include "gException.hpp"
 #include "stdsat.h"
 #include <cmath>
 #include <cstdio>

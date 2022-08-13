@@ -21,7 +21,6 @@
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
-#include "StelLocation.hpp"
 #include "StelCore.hpp"
 #include "StelTexture.hpp"
 #include "VecMath.hpp"
@@ -40,7 +39,7 @@
 #include <QMatrix4x4>
 
 #include "gsatellite/gTime.hpp"
-#include "gsatellite/stdsat.h"
+//#include "gsatellite/stdsat.h"
 
 #include <cmath>
 
