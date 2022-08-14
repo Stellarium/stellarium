@@ -26,6 +26,7 @@
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 #include "StelFader.hpp"
+#include "StelLocation.hpp"
 
 class QPixmap;
 class StelButton;
@@ -153,6 +154,24 @@ private slots:
 
 	
 private:
+	//! Recompute data.
+    void recomputeData();
+	//! Perform logic dependent on location.
+    void onLocationChanged(const StelLocation &location);
+	//! Close connections that are dependent on the plugin status.
+    void closeConnections();
+	//! Create connections that are dependent on the plugin status.
+    void createConnections();
+	//! Update the obserability of the selected object.
+    void updateSunMoonData(); 
+	//! Update the obserability of the selected object.
+    void getObjectObservability(); 
+	//! Render obserability report to the screen.
+    void renderResults();
+    bool shouldShowYear();
+    //! Perform logic dependent on language updates.
+    void onLanguageChanged(); 
+
 	//! Configuration window.
 	ObservabilityDialog* configDialog;
 
@@ -287,7 +306,7 @@ private:
 	void updateSunData(StelCore* core);
 
 	//! Computes the Sun's Sid. Times at astronomical twilight (for each year's day)
-	void updateSunH();
+	void updateSunSiderealTime();
 
 	//! Convert an equatorial position vector to RA/Dec.
 	void toRADec(Vec3d vec3d, double& ra, double& dec);
