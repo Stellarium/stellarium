@@ -2446,7 +2446,7 @@ void AstroCalcDialog::saveRTS()
 							&defaultFilter);
 
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-		saveTableAsCSV(filePath, ui->rtsTreeWidget, ephemerisHeader);
+		saveTableAsCSV(filePath, ui->rtsTreeWidget, rtsHeader);
 	else
 	{
 		int count = ui->rtsTreeWidget->topLevelItemCount();
@@ -2455,7 +2455,7 @@ void AstroCalcDialog::saveRTS()
 		QString sData;
 
 		QXlsx::Document xlsx;
-		xlsx.setDocumentProperty("title", q_("Transits"));
+		xlsx.setDocumentProperty("title", q_("Risings, Transits, and Settings"));
 		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
 		xlsx.addSheet(ui->rtsCelestialBodyNameLabel->text(), AbstractSheet::ST_WorkSheet);
 
@@ -2825,7 +2825,7 @@ void AstroCalcDialog::saveLunarEclipses()
 							&defaultFilter);
 
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-		saveTableAsCSV(filePath, ui->lunareclipseTreeWidget, ephemerisHeader);
+		saveTableAsCSV(filePath, ui->lunareclipseTreeWidget, lunareclipseHeader);
 	else
 	{
 		int count = ui->lunareclipseTreeWidget->topLevelItemCount();
@@ -3641,7 +3641,7 @@ void AstroCalcDialog::saveSolarEclipses()
 							&defaultFilter);
 
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-		saveTableAsCSV(filePath, ui->solareclipseTreeWidget, ephemerisHeader);
+		saveTableAsCSV(filePath, ui->solareclipseTreeWidget, solareclipseHeader);
 	else
 	{
 		int count = ui->solareclipseTreeWidget->topLevelItemCount();
@@ -3742,7 +3742,7 @@ void AstroCalcDialog::saveSolarEclipsesLocal()
 							&defaultFilter);
 
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-		saveTableAsCSV(filePath, ui->solareclipselocalTreeWidget, ephemerisHeader);
+		saveTableAsCSV(filePath, ui->solareclipselocalTreeWidget, solareclipselocalHeader);
 	else
 	{
 		int count = ui->solareclipselocalTreeWidget->topLevelItemCount();
@@ -4483,7 +4483,7 @@ void AstroCalcDialog::saveTransits()
 							&defaultFilter);
 
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-		saveTableAsCSV(filePath, ui->solareclipseTreeWidget, ephemerisHeader);
+		saveTableAsCSV(filePath, ui->transitTreeWidget, transitHeader);
 	else
 	{
 		int count = ui->transitTreeWidget->topLevelItemCount();
