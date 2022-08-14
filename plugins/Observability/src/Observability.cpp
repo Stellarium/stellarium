@@ -29,26 +29,19 @@
 
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
-#include "StarMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelFader.hpp"
-#include "StelFileMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelIniParser.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelObserver.hpp"
-#include "StelProjector.hpp"
-#include "StelSkyDrawer.hpp"
-#include "StelUtils.hpp"
 #include "StelPainter.hpp"
-#include "ZoneArray.hpp"
+#include "StelProjector.hpp"
+#include "StelUtils.hpp"
 
 
 StelModule* ObservabilityStelPluginInterface::getStelModule() const
@@ -81,7 +74,6 @@ const double Observability::MoonT = 29.530588;           // Moon synodic period 
 const double Observability::RefFullMoon = 2451564.696; // Reference Julian date of a Full Moon.
 const double Observability::MoonPerilune = 0.0024236308; // Smallest Earth-Moon distance (in AU).
 
-
 Observability::Observability()
 	: configDialog(new ObservabilityDialog())
 	, nextFullMoon(0.)
@@ -103,8 +95,8 @@ Observability::Observability()
 	, myJD(0., 0.)
 	, MoonRise(0.)
 	, MoonSet(0.)
-	, MoonCulm(0.)	
-	, lastJDMoon(0.)	
+	, MoonCulm(0.)
+	, lastJDMoon(0.)
 	, ObserverLoc(0.)
 	, myPlanet(Q_NULLPTR)
 	, curYear(0)
@@ -121,7 +113,7 @@ Observability::Observability()
 	, show_Today(false)
 	, show_FullMoon(false)
 	, flagShowReport(false)
-	, fontSize(14)	
+	, fontSize(14)
 	, button(Q_NULLPTR)
 {
 	setObjectName("Observability");
@@ -201,66 +193,65 @@ double Observability::getCallOrder(StelModuleActionName actionName) const
 void Observability::init()
 {
 	loadConfiguration();
-	
+
 	addAction("actionShow_Observability",        N_("Observability"), N_("Observability"),      "flagShowReport");
 	addAction("actionShow_Observability_dialog", N_("Observability"), N_("Show settings dialog"), configDialog, "visible", ""); // Allow assign shortkey
 
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (gui!=Q_NULLPTR)
-	{
-		button = new StelButton(Q_NULLPTR,
-					QPixmap(":/observability/bt_observab_on.png"),
-					QPixmap(":/observability/bt_observab_off.png"),
-					QPixmap(":/graphicGui/miscGlow32x32.png"),
-					"actionShow_Observability",
-					false,
-					"actionShow_Observability_dialog");
-		gui->getButtonBar()->addButton(button, "065-pluginsGroup");
-	}
-	
-	updateMessageText();
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-	        this, SLOT(updateMessageText()));
-	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveConfiguration()));
+    StelGui * gui = dynamic_cast<StelGui *>(StelApp::getInstance().getGui());
+    if (gui != Q_NULLPTR) {
+       button = new StelButton(Q_NULLPTR,
+ 			      QPixmap(":/observability/bt_observab_on.png"),
+ 			      QPixmap(":/observability/bt_observab_off.png"),
+ 			      QPixmap(":/graphicGui/miscGlow32x32.png"),
+ 			      "actionShow_Observability",
+ 			      false,
+ 			      "actionShow_Observability_dialog");
+       gui->getButtonBar()->addButton(button, "065-pluginsGroup");
+    }
+
+    updateMessageText();
+    connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &Observability::onLanguageChanged);
+    connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveConfiguration()));
+
+    connect(this, &Observability::flagReportVisibilityChanged, this, [&](bool enabled) {
+        if (enabled) {
+            qDebug() << "[Observability] Creating plugin status dependent connections.";
+            createConnections();
+            // Recompute the data when the plugin is activated.
+            recomputeData();
+        } else {
+            qDebug() << "[Observability] Closing plugin status dependent connections.";
+            closeConnections();
+        }
+    });
 }
 
 /////////////////////////////////////////////
 // MAIN CODE:
 void Observability::draw(StelCore* core)
 {
-	if (!flagShowReport)
-		return; // Button is off.
+    if (!flagShowReport)
+       return; // Button is off.
 /////////////////////////////////////////////////////////////////
 // PRELIMINARS:
-	bool locChanged, yearChanged;
-	StelObjectP selectedObject;
-	PlanetP ssObject, parentPlanet;
+    bool yearChanged;
+    StelObjectP selectedObject;
+    PlanetP ssObject, parentPlanet;
 	QList<StelObjectP> objectSelection = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
 
 // Only execute plugin if we are on Earth.
 	if (core->getCurrentLocation().planetName != "Earth")
 		return;
 
-// Set the painter:
-	StelPainter painter(core->getProjection2d());
-	painter.setColor(fontColor[0],fontColor[1],fontColor[2],1.f);
-	font.setPixelSize(fontSize);
-	painter.setFont(font);
+   // Get current date, location, and check if there is something selected.
+   double currJD     = core->getJD();
+   double currJDint;
+   GMTShift          = core->getUTCOffset(currJD) / 24.0;
 
-// Get current date, location, and check if there is something selected.
-	double currlat = static_cast<double>(core->getCurrentLocation().latitude)/Rad2Deg;
-	double currlon = static_cast<double>(core->getCurrentLocation().longitude)/Rad2Deg;
-	double currheight = (6371.+(core->getCurrentLocation().altitude)/1000.)/UA;
-	double currJD = core->getJD();
-	double currJDint;
-	GMTShift = core->getUTCOffset(currJD)/24.0;
-
-
-	double currLocalT = 24.*modf(currJD + GMTShift,&currJDint);
-	int auxm, auxd, auxy;
-	StelUtils::getDateFromJulianDay(currJD, &auxy, &auxm, &auxd);
-	bool objectWasSelected = StelApp::getInstance().getStelObjectMgr().getWasSelected();
-	bool show_Year = show_Best_Night || show_Good_Nights || show_AcroCos; 
+   double currLocalT = 24. * modf(currJD + GMTShift, &currJDint);
+   int    auxm, auxd, auxy;
+   StelUtils::getDateFromJulianDay(currJD, &auxy, &auxm, &auxd);
+   bool objectWasSelected  = StelApp::getInstance().getStelObjectMgr().getWasSelected();
 
 //////////////////////////////////////////////////////////////////
 
@@ -284,28 +275,11 @@ void Observability::draw(StelCore* core)
 		yearChanged = false;
 	}
 
-// Have we changed the latitude or longitude?
-	if (qFuzzyCompare(currlat, mylat) && qFuzzyCompare(currlon, mylon))
-	{
-		locChanged = false;
-	}
-	else
-	{
-		locChanged = true;
-		mylat = currlat; mylon = currlon;
-		double temp1 = currheight*std::cos(currlat);
-		ObserverLoc[0] = temp1*std::cos(currlon);
-		ObserverLoc[1] = temp1*std::sin(currlon);
-		ObserverLoc[2] = currheight*std::sin(currlat);
-	}
-
-
-
 // Add refraction, if necessary:
-	Vec3d TempRefr;	
-	TempRefr[0] = std::cos(horizonAltitude);  
-	TempRefr[1] = 0.0; 
-	TempRefr[2] = std::sin(horizonAltitude);  
+	Vec3d TempRefr;
+	TempRefr[0] = std::cos(horizonAltitude);
+	TempRefr[1] = 0.0;
+	TempRefr[2] = std::sin(horizonAltitude);
 	Vec3d CorrRefr = core->altAzToEquinoxEqu(TempRefr,StelCore::RefractionAuto);
 	TempRefr = core->equinoxEquToAltAz(CorrRefr,StelCore::RefractionOff);
 	double RefracAlt = std::asin(TempRefr[2]);
@@ -319,16 +293,11 @@ void Observability::draw(StelCore* core)
 		souChanged = true;
 	}
 
-
-
-
-
-// If we have changed latitude (or year), we update the vector of Sun's hour 
+// If we have changed latitude (or year), we update the vector of Sun's hour
 // angles at twilight, and re-compute Sun/Moon ephemeris (if selected):
-	if (locChanged || yearChanged || configChanged) 
+	if (yearChanged || configChanged)
 	{
-		updateSunH();
-		lastJDMoon = 0.0;
+        updateSunMoonData();
 	}
 
 //////////////////////////////////////////////////////////////////
@@ -338,10 +307,10 @@ void Observability::draw(StelCore* core)
 // NOW WE DEAL WITH THE SOURCE (OR SCREEN-CENTER) POSITION:
 
 	if (isScreen) // Always re-compute everything for the screen center.
-		souChanged = true; 
+		souChanged = true;
 
 	if (objectWasSelected) // There is something selected!
-	{ 
+	{
         selectedObject = objectSelection[0];
 // Don't do anything for satellites:
 		if(selectedObject->getType() == "Satellite")
@@ -361,19 +330,19 @@ void Observability::draw(StelCore* core)
 		EquPos.normalize();
 		LocPos = core->equinoxEquToAltAz(EquPos, StelCore::RefractionOff);
 
-// Check if the user has changed the source (or if the source is Sun/Moon). 
-		if (name == selName) 
+// Check if the user has changed the source (or if the source is Sun/Moon).
+		if (name == selName)
 		{
 			souChanged = false;
 		}
-		else 
+		else
 		{
 			// Check also if the (new) source belongs to the Solar System:
 			souChanged = true;
 			selName = name;
 
 			if (!isNotSSO(objectSelection) && !isMoon(objectSelection) && !isSun(objectSelection))  // Object in the Solar System, but is not Sun nor Moon.
-			{ 
+			{
 				int gene = -1;
 
 			// If object is a planet's moon, we get its parent planet:
@@ -381,7 +350,7 @@ void Observability::draw(StelCore* core)
 				// TODO: Isn't it easier just to use the planet object we just cast? --BM
 
 				parentPlanet = ssObject->getParent();
-				if (parentPlanet) 
+				if (parentPlanet)
 				{
 					while (parentPlanet)
 					{
@@ -393,7 +362,7 @@ void Observability::draw(StelCore* core)
 				{
 					ssObject = ssObject->getParent();
 				}
-				
+
 			// Now get a pointer to the planet's instance:
 				myPlanet = ssObject.data();
 			}
@@ -419,8 +388,8 @@ void Observability::draw(StelCore* core)
 
 
 // Force re-computation of ephemeris if the location changes or the user changes the configuration:
-	if (locChanged || configChanged || yearChanged)
-	{ 
+	if (configChanged || yearChanged)
+	{
 		souChanged=true;
 		configChanged=false;
 	}
@@ -448,7 +417,7 @@ void Observability::draw(StelCore* core)
 			int type = (isSun(objectSelection)) ? 1:0;
 			type += (isMoon(objectSelection)) ? 2:0;
 			type += (!isSun(objectSelection) && !isMoon(objectSelection)) ? 3:0;
-			
+
 			// Returns false if the calculation fails...
 			solvedMoon = calculateSolarSystemEvents(core, type);
 			currH = qAbs(24.*(MoonCulm-myJD.first)/TFrac);
@@ -479,7 +448,7 @@ void Observability::draw(StelCore* core)
 			}
 			else // The source is at the western side...
 			{
-				if ( currH>horizH ) // ... and below the horizon. 
+				if ( currH>horizH ) // ... and below the horizon.
 				{
 					settingTime = currH-horizH;
 					risingTime = 24.-currH-horizH;
@@ -493,12 +462,12 @@ void Observability::draw(StelCore* core)
 				}
 			}
 		}
-		
+
 		if ((solvedMoon && MoonRise>0.0) || (!isSun(objectSelection) && !isMoon(objectSelection) && horizH>0.0))
 		{
 			double2hms(TFrac*settingTime, d1, m1, s1);
 			double2hms(TFrac*risingTime, d2, m2, s2);
-			
+
 			//		Strings with time spans for rise/set/transit:
 			RS1 = (d1==0)?"":QString("%1%2 ").arg(d1).arg(msgH);
 			RS1 += (m1==0)?"":QString("%1%2 ").arg(m1).arg(msgM);
@@ -506,7 +475,7 @@ void Observability::draw(StelCore* core)
 			RS2 = (d2==0)?"":QString("%1%2 ").arg(d2).arg(msgH);
 			RS2 += (m2==0)?"":QString("%1%2 ").arg(m2).arg(msgM);
 			RS2 += QString("%1%2").arg(s2).arg(msgS);
-			if (hasRisen) 
+			if (hasRisen)
 			{
 				double2hms(toUnsignedRA(currLocalT+TFrac*settingTime+12.),
 				           ephHour, ephMinute, ephSecond);
@@ -515,22 +484,22 @@ void Observability::draw(StelCore* core)
 				double2hms(toUnsignedRA(currLocalT-TFrac*risingTime+12.),
 				           ephHour, ephMinute, ephSecond); // Local time for rise.
 				RiseTime = QString("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
-				
+
 				//RS1 = q_("Sets at %1 (in %2)").arg(SetTime).arg(RS1);
 				//RS2 = q_("Rose at %1 (%2 ago)").arg(RiseTime).arg(RS2);
 				RS1 = msgSetsAt.arg(SetTime, RS1);
 				RS2 = msgRoseAt.arg(RiseTime, RS2);
 			}
-			else 
+			else
 			{
 				double2hms(toUnsignedRA(currLocalT-TFrac*settingTime+12.),
 				           ephHour, ephMinute, ephSecond);
 				SetTime = QString("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
-				
+
 				double2hms(toUnsignedRA(currLocalT+TFrac*risingTime+12.),
 				           ephHour, ephMinute, ephSecond);
 				RiseTime = QString("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
-				
+
 				//RS1 = q_("Set at %1 (%2 ago)").arg(SetTime).arg(RS1);
 				//RS2 = q_("Rises at %1 (in %2)").arg(RiseTime).arg(RS2);
 				RS1 = msgSetAt.arg(SetTime, RS1);
@@ -542,37 +511,37 @@ void Observability::draw(StelCore* core)
 			(alti>refractedHorizonAlt)? RS1 = msgCircumpolar: RS1 = msgNoRise;
 			RS2 = "";
 		}
-		
+
 		// 	Culmination:
-		
+
 		if (isNotSSO(objectSelection))
 		{
 			culmAlt = qAbs(mylat-selDec); // 90.-altitude at transit.
 			transit = LocPos[1]<0.0;
 		}
-		
+
 		if (culmAlt < (halfpi - refractedHorizonAlt)) // Source can be observed.
 		{
 //			THESE IS FREE OF ATMOSPHERE AND REFERRED TO TRUE HORIZON!
 			double altiAtCulmi = (halfpi-culmAlt); //-refractedHorizonAlt);
 
 // Add refraction, if necessary:
-			Vec3d TempRefr;	
-			TempRefr[0] = std::cos(altiAtCulmi);  
-			TempRefr[1] = 0.0; 
-			TempRefr[2] = std::sin(altiAtCulmi);  
+			Vec3d TempRefr;
+			TempRefr[0] = std::cos(altiAtCulmi);
+			TempRefr[1] = 0.0;
+			TempRefr[2] = std::sin(altiAtCulmi);
 			Vec3d CorrRefr = core->altAzToEquinoxEqu(TempRefr,StelCore::RefractionOff);
 			TempRefr = core->equinoxEquToAltAz(CorrRefr,StelCore::RefractionAuto);
 			altiAtCulmi = Rad2Deg*std::asin(TempRefr[2]);
 
 			double2hms(TFrac*currH,dc,mc,sc);
-			
+
 			//String with the time span for culmination:
 			Cul = (dc==0)?"":QString("%1%2 ").arg(dc).arg(msgH);
 			Cul += (mc==0)?"":QString("%1%2 ").arg(mc).arg(msgM);
 			Cul += QString("%1%2").arg(sc).arg(msgS);
 			if (!transit)
-			{ 
+			{
 				double2hms(toUnsignedRA(currLocalT + TFrac*currH + 12.),
 				           ephHour, ephMinute, ephSecond); // Local time at transit.
 				CulmTime = QString("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
@@ -614,15 +583,15 @@ void Observability::draw(StelCore* core)
 			calculateSolarSystemEvents(core, 2);
 		}
 	}
-	else if (show_Year)
+	else if (shouldShowYear())
 	{
 		if (!isNotSSO(objectSelection) && (souChanged || yearChanged)) // Object moves.
 			updatePlanetData(core); // Re-compute ephemeris.
 		else
 		{ // Object is fixed on the sky.
 			double auxH = calculateHourAngle(mylat,refractedHorizonAlt,selDec);
-			double auxSidT1 = toUnsignedRA(selRA - auxH); 
-			double auxSidT2 = toUnsignedRA(selRA + auxH); 
+			double auxSidT1 = toUnsignedRA(selRA - auxH);
+			double auxSidT2 = toUnsignedRA(selRA + auxH);
 			for (int i=0;i<nDays;i++) {
 				objectH0[i] = auxH;
 				objectRA[i] = selRA;
@@ -633,210 +602,18 @@ void Observability::draw(StelCore* core)
 		}
 
 // Determine source observability (only if something changed):
-		if ((souChanged || locChanged || yearChanged))
+		if ((souChanged || yearChanged))
 		{
-			lineBestNight.clear();
-			lineObservableRange.clear();
-
-			// Check if the target cannot be seen.
-			if (culmAlt >= (halfpi - refractedHorizonAlt))
-			{
-				//ObsRange = q_("Source is not observable.");
-				//AcroCos = q_("No Acronychal nor Cosmical rise/set.");
-				lineObservableRange = msgSrcNotObs;
-				lineAcro = msgNoAcroRise;
-				lineCosm = msgNoCosmRise;
-				lineHeli = msgNoHeliRise;
-			}
-			else
-			{ // Source can be seen.
-///////////////////////////
-// - Part 1. Determine the best observing night (i.e., opposition to the Sun):
-				if (show_Best_Night)
-				{
-					int selday = 0;
-					double deltaPhs = -1.0; // Initial dummy value
-					double tempPhs; 	
-					for (int i=0; i<nDays; i++) // Maximize the Sun-object separation.
-					{
-						tempPhs = Lambda(objectRA[i], objectDec[i],
-						                 sunRA[i], sunDec[i]);
-						if (tempPhs > deltaPhs)
-						{
-							selday = i;
-							deltaPhs = tempPhs;
-						}
-					}
-
-					if (selName=="Mercury" || selName=="Venus")
-					{
-						lineBestNight = msgGreatElong;
-					}
-					else 
-					{
-						lineBestNight = msgLargSSep;
-					}
-					
-					lineBestNight = lineBestNight
-					                .arg(formatAsDate(selday))
-					                .arg(deltaPhs*Rad2Deg, 0, 'f', 1);
-				}
-
-///////////////////////////////
-// - Part 2. Determine Acronychal and Cosmical rise and set:
-
-				if (show_AcroCos)
-				{
-					int acroRise, acroSet, cosRise, cosSet, heliRise, heliSet;
-
-					int result = calculateAcroCos(acroRise, acroSet,
-					                              cosRise, cosSet);
-					int resultHeli = calculateHeli(0,heliRise,heliSet);
-
-					QString acroRiseStr, acroSetStr;
-					QString cosRiseStr, cosSetStr;
-					QString heliRiseStr, heliSetStr;
-					// TODO: Possible error? Day 0 is 1 Jan. ==> IMV: Indeed! Corrected
-					acroRiseStr = (acroRise>=0)?formatAsDate(acroRise):msgNone;
-					acroSetStr = (acroSet>=0)?formatAsDate(acroSet):msgNone;
-					cosRiseStr = (cosRise>0)?formatAsDate(cosRise):msgNone;
-					cosSetStr = (cosSet>0)?formatAsDate(cosSet):msgNone;
-					heliRiseStr = (heliRise>=0)?formatAsDate(heliRise):msgNone;
-					heliSetStr = (heliSet>=0)?formatAsDate(heliSet):msgNone;
-
-
-					if (result==3 || result==1)
-						lineAcro =  msgAcroRise.arg(acroRiseStr, acroSetStr);
-					else
-						lineAcro =  msgNoAcroRise;
-					
-					if (result==3 || result==2)
-						lineCosm = msgCosmRise.arg(cosRiseStr, cosSetStr);
-					else
-						lineCosm = msgNoCosmRise;
-
-					if (resultHeli==1)
-						lineHeli = msgHeliRise.arg(heliRiseStr, heliSetStr);
-					else
-						lineHeli = msgNoHeliRise;
-				}
-
-////////////////////////////
-// - Part 3. Determine range of good nights 
-// (i.e., above horizon before/after twilight):
-				if (show_Good_Nights)
-				{
-					int selday = 0;
-					int selday2 = 0;
-					bool bestBegun = false; // Are we inside a good time range?
-					bool atLeastOne = false;
-					QString dateRange;
-					bool poleNight, twiGood;
-
-					for (int i=0; i<nDays; i++)
-					{
-						poleNight = sunSidT[0][i]<0.0 && qAbs(sunDec[i]-mylat)>=halfpi; // Is it night during 24h?
-						twiGood = (poleNight && qAbs(objectDec[i]-mylat)<halfpi)?true:CheckRise(i);
-						
-						if (twiGood && bestBegun == false)
-						{
-							selday = i;
-							bestBegun = true;
-							atLeastOne = true;
-						}
-
-						if (!twiGood && bestBegun == true)
-						{
-							selday2 = i;
-							bestBegun = false;
-							if (selday2 > selday)
-							{
-								// FIXME: This kind of concatenation is bad for i18n.
-								if (!dateRange.isEmpty())
-									dateRange += ", ";
-								dateRange += QString("%1").arg(formatAsDateRange(selday, selday2));
-							}
-						}
-					}
-
-					// Check if there were good dates till the end of the year.
-					if (bestBegun)
-					{
-						// FIXME: This kind of concatenation is bad for i18n.
-						 if (!dateRange.isEmpty())
-							 dateRange += ", ";
-						dateRange += formatAsDateRange(selday, 0);
-					}
-					
-					if (dateRange.isEmpty()) 
-					{ 
-						if (atLeastOne) 
-						{
-							//ObsRange = q_("Observable during the whole year.");
-							lineObservableRange = msgWholeYear;
-						}
-						else
-						{
-							//ObsRange = q_("Not observable at dark night.");
-							lineObservableRange = msgNotObs;
-						}
-					}
-					else
-					{
-						// Nights when the target is above the horizon
-						lineObservableRange = msgAboveHoriz.arg(dateRange);
-					}
-				} // Comes from show_Good_Nights==True"
-			} // Comes from the "else" of "culmAlt>=..."
-		}// Comes from  "souChanged || ..."
+             getObjectObservability();
+		}
 	} // Comes from the "else" with "!isMoon(objectSelection)"
 
-// Print all results:
-	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-	float ppx = static_cast<float>(params.devicePixelsPerPixel);
-	int lineSpacing = static_cast<int>(ppx * 1.3f * fontSize);  // between lines
-//	int groupSpacing = static_cast<int>(6*fontSize*ppx);  // between daily and yearly results
-	int yLine = static_cast<int>(8*fontSize*ppx + 50*ppx);
-	int xLine = 80*ppx;
-
-//	if (show_Today)
-//	{
-//		//renderer->drawText(TextParams(xLine, yLine,q_("TODAY:")));
-//		painter.drawText(xLine, yLine, msgToday);
-//		painter.drawText(xLine + fontSize, yLine - lineSpacing, RS2);
-//		painter.drawText(xLine + fontSize, yLine - lineSpacing*2, RS1);
-//		painter.drawText(xLine + fontSize, yLine - lineSpacing*3, Cul);
-//		yLine -= groupSpacing;
-//	}
-	
-	if ((isMoon(objectSelection) && show_FullMoon) || (!isSun(objectSelection) && !isMoon(objectSelection) && show_Year))
-	{
-		painter.drawText(xLine, yLine, msgThisYear);
-		if (show_Best_Night || show_FullMoon)
-		{
-			yLine -= lineSpacing;
-			painter.drawText(xLine + fontSize, yLine, lineBestNight);
-		}
-		if (show_Good_Nights)
-		{
-			yLine -= lineSpacing;
-			painter.drawText(xLine + fontSize, yLine, lineObservableRange);
-		}
-		if (show_AcroCos)
-		{
-			yLine -= lineSpacing;
-			painter.drawText(xLine + fontSize, yLine, lineAcro);
-			yLine -= lineSpacing;
-			painter.drawText(xLine + fontSize, yLine, lineCosm);
-			yLine -= lineSpacing;
-			painter.drawText(xLine + fontSize, yLine, lineHeli);
-		}
-	}
+   // Render all results:
+   renderResults();
 }
 
 // END OF MAIN CODE
 ///////////////////////////////////////////////////////
-
 
 //////////////////////////////
 // AUXILIARY FUNCTIONS
@@ -860,7 +637,6 @@ double Observability::calculateHourAngle(double latitude,
 	}
 }
 ////////////////////////////////////
-
 
 ////////////////////////////////////
 // Returns the angular separation between two points on the Sky:
@@ -888,14 +664,14 @@ void Observability::double2hms(double hfloat, int &h1, int &h2, int &h3)
 	h1 = static_cast<int>(hfloat);
 	h2 = static_cast<int>((qAbs(hfloat)-qAbs(double(h1)))*60);
 	h3 = static_cast<int>(((qAbs(hfloat)-qAbs(double(h1)))*60)-h2)*60;
-} 
+}
 ////////////////////////////////////
 
 ////////////////////////////////////
 // Adds/subtracts 24hr to ensure a RA between 0 and 24hr:
 double Observability::toUnsignedRA(double RA)
 {
-	double tempRA,tempmod;	
+	double tempRA,tempmod;
 	if (RA<0.0)
 	{
 		tempmod = std::modf(-RA/24.,&tempRA);
@@ -906,7 +682,6 @@ double Observability::toUnsignedRA(double RA)
 	return auxRA;
 }
 ////////////////////////////////////
-
 
 QString Observability::formatAsDate(int dayNumber)
 {
@@ -936,7 +711,7 @@ QString Observability::formatAsDateRange(int startDay, int endDay)
 		sDay = 1;
 		sMonth = 1;
 	}
-	
+
 	// If it's the same month, display "X-Y Month" or "Month X-Y"
 	if (sMonth == eMonth)
 	{
@@ -945,7 +720,7 @@ QString Observability::formatAsDateRange(int startDay, int endDay)
 	}
 	else
 	{
-		QString formatString = (getDateFormat()) ? "%1 %2 - %3 %4" 
+		QString formatString = (getDateFormat()) ? "%1 %2 - %3 %4"
 		                                         : "%2 %1 - %4 %3";
 		range = formatString.arg(sDay)
 				    .arg(StelLocaleMgr::shortMonthName(sMonth))
@@ -975,9 +750,9 @@ void Observability::updatePlanetData(StelCore *core)
 }
 
 /////////////////////////////////////////////////
-// Computes the Sun's RA and Dec (and the JD) for 
+// Computes the Sun's RA and Dec (and the JD) for
 // each day of the current year.
-void Observability::updateSunData(StelCore* core) 
+void Observability::updateSunData(StelCore* core)
 {
 	int day, month, year, sameYear;
 // Get current date:
@@ -989,7 +764,7 @@ void Observability::updateSunData(StelCore* core)
 // Check if we are on a leap year:
 	StelUtils::getDateFromJulianDay(Jan1stJD+365., &sameYear, &month, &day);
 	nDays = (year==sameYear)?366:365;
-	
+
 // Compute Earth's position throughout the year:
 	Vec3d pos, sunPos;
 	for (int i=0; i<nDays; i++)
@@ -1010,10 +785,9 @@ void Observability::updateSunData(StelCore* core)
 }
 ///////////////////////////////////////////////////
 
-
 ////////////////////////////////////////////
 // Computes Sun's Sidereal Times at twilight and culmination:
-void Observability::updateSunH()
+void Observability::updateSunSiderealTime()
 {
 	double tempH, tempH00;
 
@@ -1031,7 +805,7 @@ void Observability::updateSunH()
 			sunSidT[0][i] = -1000.0;
 			sunSidT[1][i] = -1000.0;
 		}
-		
+
 		if (tempH00>0.0)
 		{
 			sunSidT[2][i] = toUnsignedRA(sunRA[i]+tempH00);
@@ -1060,7 +834,7 @@ bool Observability::CheckRise(int day)
 	auxSid1 += (sunSidT[0][day] < sunSidT[1][day]) ? 24.0 : 0.0;
 	double deltaT = (auxSid1-sunSidT[1][day]) / static_cast<double>(nBin);
 
-	double hour; 
+	double hour;
 	for (int j=0; j<nBin; j++)
 	{
 		hour = toUnsignedRA(sunSidT[1][day]+deltaT*static_cast<double>(j) - objectRA[day]);
@@ -1096,11 +870,11 @@ int Observability::calculateHeli(int imethod, int &heliRise, int &heliSet)
 			hourDiffHeliRise = toUnsignedRA(objectRA[i] - objectH0[i]);
 		//	hourDiffCosRise = hourDiffAcroRise-sunSidT[0][i];
 			hourDiffHeliRise -= sunSidT[0][i];
-			
+
 			hourDiffHeliSet = toUnsignedRA(objectRA[i] + objectH0[i]);
 		//	hourCosDiffSet = hourDiffAcroSet - sunSidT[1][i];
 			hourDiffHeliSet -= sunSidT[1][i];
-			
+
 			// Heliacal rise/set:
 			if (qAbs(hourDiffHeliRise) < bestDiffHeliRise)
 			{
@@ -1147,11 +921,11 @@ int Observability::calculateAcroCos(int &acroRise, int &acroSet,
 			hourDiffAcroRise = toUnsignedRA(objectRA[i] - objectH0[i]);
 			hourDiffCosRise = hourDiffAcroRise-sunSidT[3][i];
 			hourDiffAcroRise -= sunSidT[2][i];
-			
+
 			hourDiffAcroSet = toUnsignedRA(objectRA[i] + objectH0[i]);
 			hourCosDiffSet = hourDiffAcroSet - sunSidT[2][i];
 			hourDiffAcroSet -= sunSidT[3][i];
-			
+
 			// Acronychal rise/set:
 			if (qAbs(hourDiffAcroRise) < bestDiffAcroRise)
 			{
@@ -1163,7 +937,7 @@ int Observability::calculateAcroCos(int &acroRise, int &acroSet,
 				bestDiffAcroSet = qAbs(hourDiffAcroSet);
 				acroSet = i;
 			}
-			
+
 			// Cosmical Rise/Set:
 			if (qAbs(hourDiffCosRise) < bestDiffCosRise)
 			{
@@ -1188,7 +962,6 @@ int Observability::calculateAcroCos(int &acroRise, int &acroSet,
 }
 ///////////////////////////////////////////
 
-
 ////////////////////////////////////////////
 // Convert an Equatorial Vec3d into RA and Dec:
 void Observability::toRADec(Vec3d vec3d, double& ra, double &dec)
@@ -1199,8 +972,6 @@ void Observability::toRADec(Vec3d vec3d, double& ra, double &dec)
 }
 ////////////////////////////////////////////
 
-
-
 ///////////////////////////
 // Just return the sign of a double
 double Observability::sign(double d)
@@ -1208,8 +979,6 @@ double Observability::sign(double d)
 	return (d<0.0)?-1.0:1.0;
 }
 //////////////////////////
-
-
 
 //////////////////////////
 // Get the coordinates of Sun or Moon for a given JD:
@@ -1226,7 +995,7 @@ void Observability::getSunMoonCoords(StelCore *core, QPair<double, double> JD,
 		myEarth->computeTransMatrix(JD.first, JD.second);
 		myMoon->computePosition(JD.second, Vec3d(0.));
 		myMoon->computeTransMatrix(JD.first, JD.second);
-	} 
+	}
 	else // Compute coordinates:
 	{
 		myEarth->computePosition(JD.second, Vec3d(0.));
@@ -1246,7 +1015,7 @@ void Observability::getSunMoonCoords(StelCore *core, QPair<double, double> JD,
 		myMoon->computeTransMatrix(JD.first, JD.second);
 		Vec3d moonPos = myMoon->getHeliocentricEclipticPos();
 		sunPos = (core->j2000ToEquinoxEqu(LocTrans*moonPos, StelCore::RefractionOff))-RotObserver;
-		
+
 		eclLon = moonPos[0]*earthPos[1] - moonPos[1]*earthPos[0];
 
 		toRADec(sunPos,raMoon,decMoon);
@@ -1265,7 +1034,7 @@ void Observability::getMoonDistance(StelCore *core, QPair<double, double> JD, do
 		myEarth->computeTransMatrix(JD.first, JD.second);
 		myMoon->computePosition(JD.second, Vec3d(0.));
 		myMoon->computeTransMatrix(JD.first, JD.second);
-	} 
+	}
 	else
 	{	// Compute coordinates:
 		myEarth->computePosition(JD.second, Vec3d(0.));
@@ -1377,7 +1146,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 		double Hcurr = -calculateHourAngle(mylat,alti,selDec)*sign(LocPos[1]);
 		double SidT = toUnsignedRA(selRA + Hcurr);
 
-		MoonCulm = -Hcurr; 
+		MoonCulm = -Hcurr;
 		MoonRise = (-hHoriz-Hcurr);
 		MoonSet = (hHoriz-Hcurr);
 
@@ -1397,7 +1166,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 	// Get modified coordinates:
 				tempJd.first = MoonRise;
 				tempJd.second=tempJd.first+core->computeDeltaT(tempJd.first)/86400.0;
-	
+
 				if (bodyType<3)
 				{
 					getSunMoonCoords(core, tempJd,
@@ -1427,7 +1196,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 				tempEphH = tempH;
 				MoonRise = myJD.first + (tempEphH/24.);
 			}
-// Set time:  
+// Set time:
 			tempEphH = MoonSet;
 			MoonSet = myJD.first + (MoonSet/24.);
 			for (i=0; i<NUM_ITER; i++)
@@ -1436,7 +1205,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 				tempJd.first = MoonSet;
 				tempJd.second=tempJd.first+core->computeDeltaT(tempJd.first)/86400.0;
 
-				
+
 				if (bodyType < 3)
 					getSunMoonCoords(core, tempJd,
 					                 raSun, decSun,
@@ -1444,9 +1213,9 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 					                 eclLon, false);
 				else
 					getPlanetCoords(core, tempJd, ra, dec, false);
-				
+
 				if (bodyType==1) {ra = raSun; dec = decSun;}
-				
+
 	// Current hour angle at mod. coordinates:
 				Hcurr = toUnsignedRA(SidT-ra);
 				Hcurr -= (hasRisen)?24.:0.;
@@ -1464,7 +1233,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 				tempEphH = tempH;
 				MoonSet = myJD.first + (tempEphH/24.);
 			}
-		} 
+		}
 		else // Comes from if(raises)
 		{
 			MoonSet = -1.0;
@@ -1533,11 +1302,11 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 			double iniEst1, iniEst2;  // JD values that MUST include the solution within them.
 			double Phase1;
 
-			for (int j=0; j<2; j++) 
+			for (int j=0; j<2; j++)
 			{
 				// Two steps: one for the previos Full Moon and the other for the next one.
-				iniEst1 =  TempFullMoon - 0.25*MoonT; 
-				iniEst2 =  TempFullMoon + 0.25*MoonT; 
+				iniEst1 =  TempFullMoon - 0.25*MoonT;
+				iniEst2 =  TempFullMoon + 0.25*MoonT;
 
 				Sec1.first = iniEst1; // TempFullMoon - 0.05*MoonT; // Initial estimates of Full-Moon dates
 				Sec1.second= core->computeDeltaT(Sec1.first)/86400.0; // enough to compute this once.
@@ -1555,8 +1324,8 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 					Phase1 = (Sec2.first-Sec1.first)/(Temp1-Temp2)*Temp1+Sec1.first;
 					// The ad-hoc pair needs a DeltaT, use the one of Sec1
 					getSunMoonCoords(core,QPair<double, double>(Phase1, Phase1+Sec1.second),raSun,decSun,ra,dec,eclLon,false);
-					
-					if (Temp1*eclLon < 0.0) 
+
+					if (Temp1*eclLon < 0.0)
 					{
 						Sec2.first = Phase1;
 						Temp2 = eclLon;
@@ -1583,9 +1352,9 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 				}
 			}
 
-	// Update the string shown in the screen: 
+	// Update the string shown in the screen:
 			int fullDay, fullMonth,fullYear, fullHour, fullMinute, fullSecond;
-			double LocalPrev = prevFullMoon+GMTShift+0.5;  // Shift to the local time. 
+			double LocalPrev = prevFullMoon+GMTShift+0.5;  // Shift to the local time.
 			double LocalNext = nextFullMoon+GMTShift+0.5;
 			double intMoon;
 			double LocalTMoon = 24.*modf(LocalPrev,&intMoon);
@@ -1598,13 +1367,13 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 			LocalTMoon = 24.*modf(LocalNext,&intMoon);
 			StelUtils::getDateFromJulianDay(intMoon,&fullYear,&fullMonth,&fullDay);
-			double2hms(toUnsignedRA(LocalTMoon),fullHour,fullMinute,fullSecond);			
+			double2hms(toUnsignedRA(LocalTMoon),fullHour,fullMinute,fullSecond);
 			if (getDateFormat())
 				lineBestNight += msgNextFullMoon.arg(fullDay).arg(StelLocaleMgr::shortMonthName(fullMonth)).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 			else
 				lineBestNight += msgNextFullMoon.arg(StelLocaleMgr::shortMonthName(fullMonth)).arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 
-			lineObservableRange.clear(); 
+			lineObservableRange.clear();
 			lineAcro.clear();
 			lineCosm.clear();
 
@@ -1620,7 +1389,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 //			for (int i=-PrevMonths; i<13 ; i++)
 //			{
 //				jd1 = nextFullMoon + MoonT*((double) i);
-//				getMoonDistance(core,jd1,Distance,false); 
+//				getMoonDistance(core,jd1,Distance,false);
 //				if (Distance < BestDistance)
 //				{  // Month with the largest Full Moon:
 //					BestDistance = Distance;
@@ -1632,11 +1401,11 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 //			double MoonSize = MoonPerilune/BestDistance*100.;
 //			ObsRange = q_("Greatest Full Moon: %1 "+months[fullMonth-1]+" (%2% of Moon at Perilune)").arg(fullDay).arg(MoonSize,0,'f',2);
 		}
-	} 
+	}
 	else if (bodyType <3)
 	{
 		lineBestNight.clear();
-		lineObservableRange.clear(); 
+		lineObservableRange.clear();
 		lineAcro.clear();
 		lineCosm.clear();
 	}
@@ -1697,13 +1466,13 @@ void Observability::loadConfiguration()
 	// inverted sign.
 	// TODO: Skip the sign inversion when the key is changed.
 	int altitude = -(conf->value("Sun_Altitude", 12).toInt());
-	setTwilightAltitude(altitude); 
+	setTwilightAltitude(altitude);
 
 	altitude = conf->value("Horizon_Altitude", 0).toInt();
 	setHorizonAltitude(altitude);
-	
+
 	conf->endGroup();
-	
+
 	// Load date format from main settings.
 	// TODO: Handle date format properly.
 	if (conf->value("localization/date_display_format", "system_default").toString() == "ddmmyyyy")
@@ -1828,7 +1597,6 @@ void Observability::setHorizonAltitude(int altitude)
 	configChanged = true;
 }
 
-
 void Observability::showReport(bool b)
 {
 	if (b!=flagShowReport)
@@ -1836,6 +1604,275 @@ void Observability::showReport(bool b)
 		flagShowReport = b;
 		emit flagReportVisibilityChanged(b);
 	}
+}
+
+void Observability::createConnections()
+{
+   /* // Location change event. If we have changed location, we update the vector of Sun's hour */
+   connect(StelApp::getInstance().getCore(), &StelCore::locationChanged, this, &Observability::onLocationChanged);
+
+   qDebug() << "[Observability] Plugin status dependent signals and slots connected.";
+}
+
+void Observability::closeConnections()
+{
+   disconnect(StelApp::getInstance().getCore(), &StelCore::locationChanged, this, nullptr);
+}
+
+void Observability::onLocationChanged(const StelLocation & location)
+{
+   qDebug() << "[Observability] Location updated.";
+
+   mylat          = static_cast<double>(location.latitude)/Rad2Deg;
+   mylon          = static_cast<double>(location.longitude)/Rad2Deg;
+   double currheight = (6371. + (location.altitude) / 1000.) / UA;
+
+   double temp1   = currheight * std::cos(mylat);
+   ObserverLoc[0] = temp1 * std::cos(mylon);
+   ObserverLoc[1] = temp1 * std::sin(mylon);
+   ObserverLoc[2] = currheight * std::sin(mylat);
+
+   updateSunMoonData();
+
+   // Force re-computation of ephemeris if the location changes
+   souChanged     = true;
+   configChanged  = false;
+
+   getObjectObservability();
+}
+
+void Observability::recomputeData()
+{
+   StelLocation location = StelApp::getInstance().getCore()->getCurrentLocation();
+   onLocationChanged(location);
+}
+
+void Observability::updateSunMoonData()
+{
+   updateSunSiderealTime();
+   lastJDMoon = 0.0;
+}
+
+// Determine source observability (only if something changed):
+void Observability::getObjectObservability()
+{
+			lineBestNight.clear();
+			lineObservableRange.clear();
+
+			// Check if the target cannot be seen.
+			if (culmAlt >= (halfpi - refractedHorizonAlt))
+			{
+				//ObsRange = q_("Source is not observable.");
+				//AcroCos = q_("No Acronychal nor Cosmical rise/set.");
+				lineObservableRange = msgSrcNotObs;
+				lineAcro = msgNoAcroRise;
+				lineCosm = msgNoCosmRise;
+				lineHeli = msgNoHeliRise;
+			}
+			else
+			{ // Source can be seen.
+///////////////////////////
+// - Part 1. Determine the best observing night (i.e., opposition to the Sun):
+				if (show_Best_Night)
+				{
+					int selday = 0;
+					double deltaPhs = -1.0; // Initial dummy value
+					double tempPhs;
+					for (int i=0; i<nDays; i++) // Maximize the Sun-object separation.
+					{
+						tempPhs = Lambda(objectRA[i], objectDec[i],
+						                 sunRA[i], sunDec[i]);
+						if (tempPhs > deltaPhs)
+						{
+							selday = i;
+							deltaPhs = tempPhs;
+						}
+					}
+
+					if (selName=="Mercury" || selName=="Venus")
+					{
+						lineBestNight = msgGreatElong;
+					}
+					else
+					{
+						lineBestNight = msgLargSSep;
+					}
+
+					lineBestNight = lineBestNight
+					                .arg(formatAsDate(selday))
+					                .arg(deltaPhs*Rad2Deg, 0, 'f', 1);
+				}
+
+///////////////////////////////
+// - Part 2. Determine Acronychal and Cosmical rise and set:
+
+				if (show_AcroCos)
+				{
+					int acroRise, acroSet, cosRise, cosSet, heliRise, heliSet;
+
+					int result = calculateAcroCos(acroRise, acroSet,
+					                              cosRise, cosSet);
+					int resultHeli = calculateHeli(0,heliRise,heliSet);
+
+					QString acroRiseStr, acroSetStr;
+					QString cosRiseStr, cosSetStr;
+					QString heliRiseStr, heliSetStr;
+					// TODO: Possible error? Day 0 is 1 Jan. ==> IMV: Indeed! Corrected
+					acroRiseStr = (acroRise>=0)?formatAsDate(acroRise):msgNone;
+					acroSetStr = (acroSet>=0)?formatAsDate(acroSet):msgNone;
+					cosRiseStr = (cosRise>0)?formatAsDate(cosRise):msgNone;
+					cosSetStr = (cosSet>0)?formatAsDate(cosSet):msgNone;
+					heliRiseStr = (heliRise>=0)?formatAsDate(heliRise):msgNone;
+					heliSetStr = (heliSet>=0)?formatAsDate(heliSet):msgNone;
+
+
+					if (result==3 || result==1)
+						lineAcro =  msgAcroRise.arg(acroRiseStr, acroSetStr);
+					else
+						lineAcro =  msgNoAcroRise;
+
+					if (result==3 || result==2)
+						lineCosm = msgCosmRise.arg(cosRiseStr, cosSetStr);
+					else
+						lineCosm = msgNoCosmRise;
+
+					if (resultHeli==1)
+						lineHeli = msgHeliRise.arg(heliRiseStr, heliSetStr);
+					else
+						lineHeli = msgNoHeliRise;
+				}
+
+////////////////////////////
+// - Part 3. Determine range of good nights
+// (i.e., above horizon before/after twilight):
+				if (show_Good_Nights)
+				{
+					int selday = 0;
+					int selday2 = 0;
+					bool bestBegun = false; // Are we inside a good time range?
+					bool atLeastOne = false;
+					QString dateRange;
+					bool poleNight, twiGood;
+
+					for (int i=0; i<nDays; i++)
+					{
+						poleNight = sunSidT[0][i]<0.0 && qAbs(sunDec[i]-mylat)>=halfpi; // Is it night during 24h?
+						twiGood = (poleNight && qAbs(objectDec[i]-mylat)<halfpi)?true:CheckRise(i);
+
+						if (twiGood && bestBegun == false)
+						{
+							selday = i;
+							bestBegun = true;
+							atLeastOne = true;
+						}
+
+						if (!twiGood && bestBegun == true)
+						{
+							selday2 = i;
+							bestBegun = false;
+							if (selday2 > selday)
+							{
+								// FIXME: This kind of concatenation is bad for i18n.
+								if (!dateRange.isEmpty())
+									dateRange += ", ";
+								dateRange += QString("%1").arg(formatAsDateRange(selday, selday2));
+							}
+						}
+					}
+
+					// Check if there were good dates till the end of the year.
+					if (bestBegun)
+					{
+						// FIXME: This kind of concatenation is bad for i18n.
+						 if (!dateRange.isEmpty())
+							 dateRange += ", ";
+						dateRange += formatAsDateRange(selday, 0);
+					}
+
+					if (dateRange.isEmpty())
+					{
+						if (atLeastOne)
+						{
+							//ObsRange = q_("Observable during the whole year.");
+							lineObservableRange = msgWholeYear;
+						}
+						else
+						{
+							//ObsRange = q_("Not observable at dark night.");
+							lineObservableRange = msgNotObs;
+						}
+					}
+					else
+					{
+						// Nights when the target is above the horizon
+						lineObservableRange = msgAboveHoriz.arg(dateRange);
+					}
+				} // Comes from show_Good_Nights==True"
+			} // Comes from the "else" of "culmAlt>=..."
+}
+
+void Observability::renderResults() {
+	StelCore *core = StelApp::getInstance().getCore();
+	QList<StelObjectP> objectSelection = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
+
+	// Set the painter:
+	StelPainter painter(core->getProjection2d());
+	painter.setColor(fontColor[0], fontColor[1], fontColor[2], 1.f);
+	font.setPixelSize(fontSize);
+	painter.setFont(font);
+
+// Print all results:
+	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+	float ppx = static_cast<float>(params.devicePixelsPerPixel);
+	int lineSpacing = static_cast<int>(ppx * 1.3f * fontSize);  // between lines
+//	int groupSpacing = static_cast<int>(6*fontSize*ppx);  // between daily and yearly results
+	int yLine = static_cast<int>(8*fontSize*ppx + 50*ppx);
+	int xLine = 80*ppx;
+
+//	if (show_Today)
+//	{
+//		//renderer->drawText(TextParams(xLine, yLine,q_("TODAY:")));
+//		painter.drawText(xLine, yLine, msgToday);
+//		painter.drawText(xLine + fontSize, yLine - lineSpacing, RS2);
+//		painter.drawText(xLine + fontSize, yLine - lineSpacing*2, RS1);
+//		painter.drawText(xLine + fontSize, yLine - lineSpacing*3, Cul);
+//		yLine -= groupSpacing;
+//	}
+
+	if ((isMoon(objectSelection) && show_FullMoon) || (!isSun(objectSelection) && !isMoon(objectSelection) && shouldShowYear()))
+	{
+		painter.drawText(xLine, yLine, msgThisYear);
+		if (show_Best_Night || show_FullMoon)
+		{
+			yLine -= lineSpacing;
+			painter.drawText(xLine + fontSize, yLine, lineBestNight);
+		}
+		if (show_Good_Nights)
+		{
+			yLine -= lineSpacing;
+			painter.drawText(xLine + fontSize, yLine, lineObservableRange);
+		}
+		if (show_AcroCos)
+		{
+			yLine -= lineSpacing;
+			painter.drawText(xLine + fontSize, yLine, lineAcro);
+			yLine -= lineSpacing;
+			painter.drawText(xLine + fontSize, yLine, lineCosm);
+			yLine -= lineSpacing;
+			painter.drawText(xLine + fontSize, yLine, lineHeli);
+		}
+	}
+}
+
+void Observability::onLanguageChanged() {
+    qDebug() << "[Observability] Language was changed. Updating rendered text.";
+    updateMessageText();
+    getObjectObservability();
+    renderResults();
+}
+
+bool Observability::shouldShowYear() {
+   return show_Best_Night || show_Good_Nights || show_AcroCos;
 }
 
 bool Observability::isMoon(QList<StelObjectP> & objectSelection)
@@ -1861,8 +1898,7 @@ bool Observability::isNotSSO(QList<StelObjectP> & objectSelection)
 QString Observability::getReportAsJson() {
     QList<StelObjectP> objectSelection = StelApp::getInstance().getStelObjectMgr().getSelectedObject();
     QString report = QString("{ ");
-	bool show_Year = show_Best_Night || show_Good_Nights || show_AcroCos; 
-	if ((isMoon(objectSelection) && show_FullMoon) || (!isSun(objectSelection) && !isMoon(objectSelection) && show_Year)) 
+	if ((isMoon(objectSelection) && show_FullMoon) || (!isSun(objectSelection) && !isMoon(objectSelection) && shouldShowYear()))
 	{
         report += QString("\"%1\": \"%2\", ").arg("title").arg(msgThisYear);
 		if (show_Best_Night || show_FullMoon)
