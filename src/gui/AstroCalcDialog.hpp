@@ -187,6 +187,20 @@ public:
 		LunarEclipseCount		//! total number of columns
 	};
 
+	//! Defines the number and the order of the columns in the lunar eclipse contact table
+	//! @enum LunarEclipseContactColumns
+	enum LunarEclipseContactColumns {
+		LunarEclipseContact,		//! circumstance of lunar eclipse
+		LunarEclipseContactDate,	//! date and time
+		LunarEclipseContactAltitude,	//! altitude of the Moon
+		LunarEclipseContactAzimuth,	//! azimuth of the Moon
+		LunarEclipseContactLatitude,	//! latitude where the Moon appears in the zenith
+		LunarEclipseContactLongitude,	//! longitude where the Moon appears in the zenith
+		LunarEclipseContactPA,		//! position angle of shadow
+		LunarEclipseContactDistance,	//! angular distance between the Moon and shadow
+		LunarEclipseContactCount	//! total number of columns
+	};
+
 	//! Defines the number and the order of the columns in the global solar eclipse table
 	//! @enum SolarEclipseColumns
 	enum SolarEclipseColumns {
@@ -290,6 +304,7 @@ private slots:
 	void generateLunarEclipses();
 	void cleanupLunarEclipses();
 	void selectCurrentLunarEclipse(const QModelIndex &modelIndex);
+	void selectCurrentLunarEclipseContact(const QModelIndex &modelIndex);
 	void saveLunarEclipses();
 
 	//! Calculating solar eclipses to fill the list.
@@ -431,7 +446,6 @@ private:
 	QSettings* conf;
 	QTimer *currentTimeLine;
 	QHash<QString,int> wutCategories;
-	QPair<double, double> getLunarEclipseXY() const;
 	QList<HECPosition> hecObjects;
 
 	void saveTableAsCSV(const QString& fileName, QTreeWidget* tWidget, QStringList& headers);
@@ -455,6 +469,8 @@ private:
 	void setWUTHeaderNames(const bool magnitude = true, const bool separation = false);
 	//! update header names for lunar eclipse table
 	void setLunarEclipseHeaderNames();
+	//! update header names for lunar eclipse contact table
+	void setLunarEclipseContactsHeaderNames();
 	//! update header names for solar eclipse table
 	void setSolarEclipseHeaderNames();
 	//! update header names for local solar eclipse table
@@ -476,6 +492,8 @@ private:
 	void initListWUT(const bool magnitude = true, const bool separation = false);
 	//! Init header and list of lunar eclipse
 	void initListLunarEclipse();
+	//! Init header and list of lunar eclipse contact
+	void initListLunarEclipseContact();
 	//! Init header and list of solar eclipse
 	void initListSolarEclipse();
 	//! Init header and list of local solar eclipse
@@ -564,7 +582,7 @@ private:
 	// Signal that a plot has to be redone
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotLunarElongationGraph, plotAziVsTime;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration, graphsStep;
-	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader, transitHeader;
+	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, lunareclipsecontactsHeader, solareclipseHeader, solareclipselocalHeader, transitHeader;
 	static double brightLimit;
 	static const QString dash, delimiter;
 
@@ -836,6 +854,30 @@ private:
 		{
 			return text(column).toLower() < other.text(column).toLower();
 		}
+	}
+};
+
+//! Besselian elements for lunar eclipse
+class LunarEclipseBessel
+{
+public:
+	LunarEclipseBessel(double &besX, double &besY, double &besL1, double &besL2, double &besL3, double &latDeg, double &lngDeg);
+};
+
+//! Iteration to compute contact times of lunar eclipse
+class LunarEclipseIteration
+{
+public:
+	LunarEclipseIteration(double &JD, double &positionAngle, double &axisDistance, bool beforeMaximum, int eclipseType);
+};
+
+// Reimplements the QTreeWidgetItem class to fix the sorting bug
+class ACLunarEclipseContactsTreeWidgetItem : public QTreeWidgetItem
+{
+public:
+	ACLunarEclipseContactsTreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
 	}
 };
 

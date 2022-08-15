@@ -172,6 +172,7 @@ void AstroCalcDialog::retranslate()
 		setPhenomenaHeaderNames();
 		setWUTHeaderNames();
 		setLunarEclipseHeaderNames();
+		setLunarEclipseContactsHeaderNames();
 		setSolarEclipseHeaderNames();
 		setSolarEclipseLocalHeaderNames();
 		setTransitHeaderNames();
@@ -344,6 +345,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->lunareclipsesCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupLunarEclipses()));
 	connect(ui->lunareclipsesSaveButton, SIGNAL(clicked()), this, SLOT(saveLunarEclipses()));
 	connect(ui->lunareclipseTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentLunarEclipse(QModelIndex)));
+	connect(ui->lunareclipsecontactsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentLunarEclipseContact(QModelIndex)));
 	initListSolarEclipse();
 	connect(ui->solareclipsesCalculateButton, SIGNAL(clicked()), this, SLOT(generateSolarEclipses()));
 	connect(ui->solareclipsesCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupSolarEclipses()));
@@ -2522,6 +2524,29 @@ void AstroCalcDialog::setLunarEclipseHeaderNames()
 	}
 }
 
+void AstroCalcDialog::setLunarEclipseContactsHeaderNames()
+{
+	lunareclipsecontactsHeader.clear();
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	lunareclipsecontactsHeader << qc_("Circumstances", "column name");
+	lunareclipsecontactsHeader << q_("Date and Time");
+	lunareclipsecontactsHeader << q_("Altitude");
+	lunareclipsecontactsHeader << q_("Azimuth");
+	lunareclipsecontactsHeader << q_("Latitude");
+	lunareclipsecontactsHeader << q_("Longitude");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	lunareclipsecontactsHeader << qc_("Position Angle", "column name");
+	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+	lunareclipsecontactsHeader << qc_("Axis Distance", "column name");
+	ui->lunareclipsecontactsTreeWidget->setHeaderLabels(lunareclipsecontactsHeader);
+
+	// adjust the column width
+	for (int i = 0; i < LunarEclipseContactCount; ++i)
+	{
+		ui->lunareclipsecontactsTreeWidget->resizeColumnToContents(i);
+	}
+}
+
 void AstroCalcDialog::initListLunarEclipse()
 {
 	ui->lunareclipseTreeWidget->clear();
@@ -2529,45 +2554,123 @@ void AstroCalcDialog::initListLunarEclipse()
 	setLunarEclipseHeaderNames();
 	ui->lunareclipseTreeWidget->header()->setSectionsMovable(false);
 	ui->lunareclipseTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
+	initListLunarEclipseContact();
 }
 
-QPair<double,double> AstroCalcDialog::getLunarEclipseXY() const
+void AstroCalcDialog::initListLunarEclipseContact()
 {
+	ui->lunareclipsecontactsTreeWidget->clear();
+	ui->lunareclipsecontactsTreeWidget->setColumnCount(LunarEclipseContactCount);
+	setLunarEclipseContactsHeaderNames();
+	ui->lunareclipsecontactsTreeWidget->header()->setSectionsMovable(false);
+	ui->lunareclipsecontactsTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
+}
+
+LunarEclipseBessel::LunarEclipseBessel(double &besX, double &besY, double &besL1, double &besL2, double &besL3, double &latDeg, double &lngDeg)
+{
+	// Besselian elements
 	// Source: Explanatory Supplement to the Astronomical Ephemeris 
 	// and the American Ephemeris and Nautical Almanac (1961)
-	// Algorithm adaped from Planet::getLunarEclipseMagnitudes() -- we need only x and y here.
-	// Find x, y of Besselian elements
-	QPair<double,double> LunarEclipseXY;
-	// Use geocentric coordinates
+	// Algorithm adapted from Planet::getLunarEclipseMagnitudes()
+
 	StelCore* core = StelApp::getInstance().getCore();
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	PlanetP moon = ssystem->getMoon();
+	// Use geocentric coordinates
 	core->setUseTopocentricCoordinates(false);
 	core->update(0);
 
 	double raMoon, deMoon, raSun, deSun;
 	StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
-	StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core));
+	StelUtils::rectToSphe(&raMoon, &deMoon, moon->getEquinoxEquatorialPos(core));
 
 	// R.A./Dec of Earth's shadow
-	const double raShadow = StelUtils::fmodpos(raSun + M_PI, 2.*M_PI);
+	const double raShadow = StelUtils::fmodpos(raSun+M_PI, 2.*M_PI);
 	const double deShadow = -(deSun);
-	const double raDiff = StelUtils::fmodpos(raMoon - raShadow, 2.*M_PI);
+	const double raDiff = StelUtils::fmodpos(raMoon-raShadow, 2.*M_PI);
+	besX = std::cos(deMoon)*std::sin(raDiff)*3600.*M_180_PI;
+	besY = (std::cos(deShadow)*std::sin(deMoon)-std::sin(deShadow)*std::cos(deMoon)*std::cos(raDiff))*3600.* M_180_PI;
+	const double dist=moon->getEclipticPos().length();  // geocentric Lunar distance [AU]
+	const double mSD=atan(moon->getEquatorialRadius()/dist)*M_180_PI*3600.; // arcsec
+	const QPair<Vec3d,Vec3d>shadowRadii=ssystem->getEarthShadowRadiiAtLunarDistance();
+	const double f1 = shadowRadii.second[0]; // radius of penumbra at the distance of the Moon
+	const double f2 = shadowRadii.first[0];  // radius of umbra at the distance of the Moon
+	besL1 = f1+mSD; // distance between center of the Moon and shadow at beginning and end of penumbral eclipse
+	besL2 = f2+mSD; // distance between center of the Moon and shadow at beginning and end of partial eclipse
+	besL3 = f2-mSD; // distance between center of the Moon and shadow at beginning and end of total eclipse
 
-	double x = cos(deMoon) * sin(raDiff);
-	x *= 3600. * M_180_PI;
-	double y = cos(deShadow) * sin(deMoon) - sin(deShadow) * cos(deMoon) * cos(raDiff);
-	y *= 3600. * M_180_PI;
+	// Sublunar point
+	const double gast = get_apparent_sidereal_time(core->getJD(), core->getJDE());
+	latDeg = deMoon*M_180_PI;
+	lngDeg = StelUtils::fmodpos((raMoon*M_180_PI)-gast, 360.);
+	if (lngDeg>180.) lngDeg-=360.;
+};
 
-	LunarEclipseXY.first = x;
-	LunarEclipseXY.second = y;
+// Lunar eclipse parameters
+struct LunarEclipseParameters {
+	double dt;
+	double positionAngle;
+	double axisDistance;
+};
 
-	return LunarEclipseXY;
+LunarEclipseParameters lunarEclipseContacts(double JD, bool beforeMaximum, int eclipseType) {
+	LunarEclipseParameters result;
+
+	StelCore* core = StelApp::getInstance().getCore();
+	core->setJD(JD);
+	core->update(0);
+	double x,y,L1,L2,L3,latitude,longitude,L=0.;
+	LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
+	switch (eclipseType)
+	{
+		case 0: // penumbral
+			L = L1;
+			break;
+		case 1: // partial
+			L = L2;
+			break;
+		case 2: // total
+			L = L3;
+			break;
+	}
+
+	core->setJD(JD - 5./1440.);
+	core->update(0);
+	double x1,y1;
+	LunarEclipseBessel(x1,y1,L1,L2,L3,latitude,longitude);
+	core->setJD(JD + 5./1440.);
+	core->update(0);
+	double x2,y2;
+	LunarEclipseBessel(x2,y2,L1,L2,L3,latitude,longitude);
+
+	const double xdot = (x2 - x1) * 6.;
+	const double ydot = (y2 - y1) * 6.;
+	const double n2 = xdot*xdot+ydot*ydot;
+	const double delta = (x*ydot-y*xdot)/sqrt(n2);
+	double dt = -(x*xdot+y*ydot)/n2;
+	double semiDuration = sqrt((L*L-delta*delta)/n2);
+	if (beforeMaximum)
+		dt-=semiDuration;
+	else
+		dt+=semiDuration;
+
+	double positionAngle = atan2(x, y);
+	if (positionAngle<0) positionAngle += 2.*M_PI;
+	double axisDistance = sqrt(x*x+y*y)*M_PI_180/3600.;
+	core->setJD(JD);
+	core->update(0);
+
+	result.dt = dt;
+	result.positionAngle = positionAngle;
+	result.axisDistance = axisDistance;
+
+	return result;
 }
 
 void AstroCalcDialog::generateLunarEclipses()
 {
 	const bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
-	if (onEarth) // Not sure it's right thing to do but should be ok.
+	if (onEarth)
 	{
 		initListLunarEclipse();
 
@@ -2614,28 +2717,18 @@ void AstroCalcDialog::generateLunarEclipses()
 				{
 					core->setJD(JD);
 					core->update(0);
-					QPair<double,double> XY = getLunarEclipseXY();
-					double x = XY.first;
-					double y = XY.second;
+					double x,y,L1,L2,L3,latitude,longitude;
+					LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
 					core->setJD(JD - 5./1440.);
 					core->update(0);
-					XY = getLunarEclipseXY();
-					double x1 = XY.first;
-					double y1 = XY.second;
+					double x1,y1;
+					LunarEclipseBessel(x1,y1,L1,L2,L3,latitude,longitude);
 					core->setJD(JD + 5./1440.);
 					core->update(0);
-					XY = getLunarEclipseXY();
-					double x2 = XY.first;
-					double y2 = XY.second;
-
-					double xdot1 = (x - x1) * 12.;
-					double xdot2 = (x2 - x) * 12.;
-					double xdot = (xdot1 + xdot2) / 2.;
-
-					double ydot1 = (y - y1) * 12.;
-					double ydot2 = (y2 - y) * 12.;
-					double ydot = (ydot1 + ydot2) / 2.;
-				    
+					double x2,y2;
+					LunarEclipseBessel(x2,y2,L1,L2,L3,latitude,longitude);
+					double xdot = (x2 - x1) * 6.;
+					double ydot = (y2 - y1) * 6.;
 					double n2 = xdot * xdot + ydot * ydot;
 					dt  = -(x * xdot + y * ydot) / n2;
 					JD += dt / 24.;
@@ -2649,20 +2742,12 @@ void AstroCalcDialog::generateLunarEclipses()
 				// Source: Explanatory Supplement to the Astronomical Ephemeris 
 				// and the American Ephemeris and Nautical Almanac (1961)
 				// Algorithm taken from Planet::getLunarEclipseMagnitudes()
-				
-				QPair<double,double> XY = getLunarEclipseXY();				
-				double x = XY.first;
-				double y = XY.second;
 
 				const double dist=moon->getEclipticPos().length();  // geocentric Lunar distance [AU]
 				const double mSD=atan(moon->getEquatorialRadius()/dist) * M_180_PI*3600.; // arcsec
-				const QPair<Vec3d,Vec3d>shadowRadii=ssystem->getEarthShadowRadiiAtLunarDistance();
-				const double f1 = shadowRadii.second[0]; // radius of penumbra at the distance of the Moon
-				const double f2 = shadowRadii.first[0];  // radius of umbra at the distance of the Moon
-
+				double x,y,L1,L2,L3,latitude,longitude;
+				LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
 				const double m = sqrt(x * x + y * y); // distance between lunar centre and shadow centre
-				const double L1 = f1 + mSD; // distance between center of the Moon and shadow at beginning and end of penumbral eclipse
-				const double L2 = f2 + mSD; // distance between center of the Moon and shadow at beginning and end of partial eclipse
 				const double pMag = (L1 - m) / (2. * mSD); // penumbral magnitude
 				const double uMag = (L2 - m) / (2. * mSD); // umbral magnitude
 				
@@ -2728,8 +2813,8 @@ void AstroCalcDialog::generateLunarEclipses()
 					// gamma = minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone
 					// in units of Earth’s equatorial radius. Positive when the Moon passes north of the shadow cone axis.
 					// Source: https://eclipse.gsfc.nasa.gov/5MCLE/5MCLE-Text10.pdf
-					double gamma = m*0.2725/mSD;
-					if (y<0.) gamma = -(gamma);
+					double gamma = m*0.2725076/mSD;
+					if (y<0.) gamma *= -1.;
 
 					sarosStr = QString("%1").arg(QString::number(saros));
 					gammaStr = QString("%1").arg(QString::number(gamma, 'f', 3));
@@ -2783,17 +2868,210 @@ void AstroCalcDialog::generateLunarEclipses()
 void AstroCalcDialog::cleanupLunarEclipses()
 {
 	ui->lunareclipseTreeWidget->clear();
+	ui->lunareclipsecontactsTreeWidget->clear();
 }
+
+LunarEclipseIteration::LunarEclipseIteration(double &JD, double &positionAngle, double &axisDistance, bool beforeMaximum, int eclipseType)
+{
+	double dt = 1.;
+	int iterations = 0;
+	LunarEclipseParameters eclipseData;
+	while (abs(dt) > 0.00002 && (iterations < 10))
+	{
+		eclipseData = lunarEclipseContacts(JD,beforeMaximum,eclipseType);
+		dt = eclipseData.dt;
+		JD += dt/24.;
+		iterations += 1;
+	}
+	positionAngle = eclipseData.positionAngle;
+	if (eclipseType < 2)
+	{
+		positionAngle -= M_PI;
+		if (positionAngle < 0) positionAngle += 2.*M_PI;
+	}
+	axisDistance = eclipseData.axisDistance;
+};
 
 void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 {
-	// Find the Moon
-	QString name = "Moon";
-	double JD = modelIndex.sibling(modelIndex.row(), LunarEclipseDate).data(Qt::UserRole).toDouble();
+	initListLunarEclipseContact();
+	const bool saveTopocentric = core->getUseTopocentricCoordinates();
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	PlanetP moon = ssystem->getMoon();
+	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	QPair<QString, QString> coordStrings;
+	double JDMid = modelIndex.sibling(modelIndex.row(), LunarEclipseDate).data(Qt::UserRole).toDouble();
+	double uMag = modelIndex.sibling(modelIndex.row(), LunarEclipseUMag).data(Qt::UserRole).toDouble();
+	double JD = JDMid;
 
-	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
+	// Compute time and other data of contacts
+	double x,y,L1,L2,L3,latitude,longitude, positionAngle=0, axisDistance=0;
+	bool event = false;
+	LunarEclipseParameters eclipseData;
+	for (int i = 0; i < 7; i++)
 	{
-		core->setJD(JD);
+		if (i==0)
+		{
+			JD = JDMid;
+			LunarEclipseIteration(JD,positionAngle,axisDistance,true,0);
+			LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
+			event = true;
+		}
+		else if (i==1 && uMag>0.)
+		{
+			JD = JDMid;
+			LunarEclipseIteration(JD,positionAngle,axisDistance,true,1);
+			LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
+			event = true;
+		}
+		else if (i==2 && uMag>=1.)
+		{
+			JD = JDMid;
+			LunarEclipseIteration(JD,positionAngle,axisDistance,true,2);
+			LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
+			event = true;
+		}
+		else if (i==3)
+		{
+			JD = JDMid;
+			eclipseData = lunarEclipseContacts(JD,true,2);
+			LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
+			positionAngle = eclipseData.positionAngle;
+			axisDistance = eclipseData.axisDistance;
+			event = true;
+		}
+		else if (i==4 && uMag>=1.)
+		{
+			JD = JDMid;
+			LunarEclipseIteration(JD,positionAngle,axisDistance,false,2);
+			LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
+			event = true;
+		}
+		else if (i==5 && uMag>0.)
+		{
+			JD = JDMid;
+			LunarEclipseIteration(JD,positionAngle,axisDistance,false,1);
+			LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
+			event = true;
+		}
+		else if (i==6)
+		{
+			JD = JDMid;
+			LunarEclipseIteration(JD,positionAngle,axisDistance,false,0);
+			LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
+			event = true;
+		}
+		if (event)
+		{
+			ACLunarEclipseContactsTreeWidgetItem* treeItem = new ACLunarEclipseContactsTreeWidgetItem(ui->lunareclipsecontactsTreeWidget);
+			switch (i)
+			{
+				case 0:
+					treeItem->setText(LunarEclipseContact, QString(q_("Moon enters penumbra")));
+					break;
+				case 1:
+					treeItem->setText(LunarEclipseContact, QString(q_("Moon enters umbra")));
+					break;
+				case 2:
+					treeItem->setText(LunarEclipseContact, QString(q_("Total eclipse begins")));
+					break;
+				case 3:
+					treeItem->setText(LunarEclipseContact, QString(q_("Maximum eclipse")));
+					break;
+				case 4:
+					treeItem->setText(LunarEclipseContact, QString(q_("Total eclipse ends")));
+					break;
+				case 5:
+					treeItem->setText(LunarEclipseContact, QString(q_("Moon leaves umbra")));
+					break;
+				case 6:
+					treeItem->setText(LunarEclipseContact, QString(q_("Moon leaves penumbra")));
+					break;
+			}
+			QString altitudeStr, azimuthStr, positionAngleStr, distanceStr, latitudeStr, longitudeStr;
+			treeItem->setText(LunarEclipseContactDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
+			treeItem->setData(LunarEclipseContactDate, Qt::UserRole, JD);
+			core->setJD(JD);
+			core->setUseTopocentricCoordinates(saveTopocentric);
+			core->update(0);
+			double az, alt;
+			StelUtils::rectToSphe(&az, &alt, moon->getAltAzPosAuto(core));
+			coordStrings = getStringCoordinates(moon->getAltAzPosAuto(core), true, useSouthAzimuth, withDecimalDegree);
+			azimuthStr = coordStrings.first;
+			altitudeStr = coordStrings.second;
+			treeItem->setText(LunarEclipseContactAltitude, altitudeStr);
+			treeItem->setData(LunarEclipseContactAltitude, Qt::UserRole, alt);
+			treeItem->setText(LunarEclipseContactAzimuth, azimuthStr);
+			treeItem->setData(LunarEclipseContactAzimuth, Qt::UserRole, az);
+			latitudeStr = StelUtils::decDegToLatitudeStr(latitude, !withDecimalDegree);
+			longitudeStr = StelUtils::decDegToLongitudeStr(longitude, true, false, !withDecimalDegree);
+			treeItem->setText(LunarEclipseContactLatitude, latitudeStr);
+			treeItem->setData(LunarEclipseContactLatitude, Qt::UserRole, latitude);
+			treeItem->setToolTip(LunarEclipseContactLatitude, q_("Geographic latitude where the Moon appears in the zenith"));
+			treeItem->setText(LunarEclipseContactLongitude, longitudeStr);
+			treeItem->setData(LunarEclipseContactLatitude, Qt::UserRole, longitude);
+			treeItem->setToolTip(LunarEclipseContactLongitude, q_("Geographic longitude where the Moon appears in the zenith"));
+			if (withDecimalDegree)
+			{
+				positionAngleStr = StelUtils::radToDecDegStr(positionAngle, 3, false, true);
+				distanceStr = StelUtils::radToDecDegStr(axisDistance, 5, false, true);
+			}
+			else
+			{
+				positionAngleStr = StelUtils::radToDmsStr(positionAngle, true);
+				distanceStr = StelUtils::radToDmsStr(axisDistance, true);
+			}
+			treeItem->setText(LunarEclipseContactPA, positionAngleStr);
+			treeItem->setData(LunarEclipseContactPA, Qt::UserRole, positionAngle);
+			treeItem->setToolTip(LunarEclipseContactPA, q_("Position angle of the Earth's shadow with respect to center of the Moon measured counter-clockwise from celestial north"));
+			treeItem->setText(LunarEclipseContactDistance, distanceStr);
+			treeItem->setData(LunarEclipseContactDistance, Qt::UserRole, axisDistance);
+			treeItem->setToolTip(LunarEclipseContactDistance, q_("Geocentric angular distance of center of the Moon from the axis or center of the Earth's shadow"));
+			treeItem->setTextAlignment(LunarEclipseContactDate, Qt::AlignRight);
+			if (alt<0.)
+			{
+#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
+				treeItem->setForeground(LunarEclipseContact, Qt::gray);
+				treeItem->setForeground(LunarEclipseContactDate, Qt::gray);
+				treeItem->setForeground(LunarEclipseContactAltitude, Qt::gray);
+				treeItem->setForeground(LunarEclipseContactAzimuth, Qt::gray);
+				treeItem->setForeground(LunarEclipseContactLatitude, Qt::gray);
+				treeItem->setForeground(LunarEclipseContactLongitude, Qt::gray);
+				treeItem->setForeground(LunarEclipseContactPA, Qt::gray);
+				treeItem->setForeground(LunarEclipseContactDistance, Qt::gray);
+#else
+				treeItem->setTextColor(LunarEclipseContact, Qt::gray);
+				treeItem->setTextColor(LunarEclipseContactDate, Qt::gray);
+				treeItem->setTextColor(LunarEclipseContactAltitude, Qt::gray);
+				treeItem->setTextColor(LunarEclipseContactAzimuth, Qt::gray);
+				treeItem->setTextColor(LunarEclipseContactLatitude, Qt::gray);
+				treeItem->setTextColor(LunarEclipseContactLongitude, Qt::gray);
+				treeItem->setTextColor(LunarEclipseContactPA, Qt::gray);
+				treeItem->setTextColor(LunarEclipseContactDistance, Qt::gray);
+#endif
+			}
+			treeItem->setTextAlignment(LunarEclipseContact, Qt::AlignLeft);
+			treeItem->setTextAlignment(LunarEclipseContactDate, Qt::AlignRight);
+			treeItem->setTextAlignment(LunarEclipseContactAltitude, Qt::AlignRight);
+			treeItem->setTextAlignment(LunarEclipseContactAzimuth, Qt::AlignRight);
+			treeItem->setTextAlignment(LunarEclipseContactLatitude, Qt::AlignRight);
+			treeItem->setTextAlignment(LunarEclipseContactLongitude, Qt::AlignRight);
+			treeItem->setTextAlignment(LunarEclipseContactPA, Qt::AlignRight);
+			treeItem->setTextAlignment(LunarEclipseContactDistance, Qt::AlignRight);
+		}
+		event = false;
+	}
+
+	// adjust the column width
+	for (int i = 0; i < LunarEclipseContactCount; ++i)
+	{
+		ui->lunareclipsecontactsTreeWidget->resizeColumnToContents(i);
+	}
+
+	if (objectMgr->findAndSelectI18n("Moon") || objectMgr->findAndSelect("Moon"))
+	{
+		core->setJD(JDMid);
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
 		{
@@ -2806,6 +3084,32 @@ void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 			else
 			{
 				GETSTELMODULE(StelObjectMgr)->unSelect();
+			}
+		}
+	}
+}
+
+void AstroCalcDialog::selectCurrentLunarEclipseContact(const QModelIndex& modelIndex)
+{
+	double JD = modelIndex.sibling(modelIndex.row(), LunarEclipseContactDate).data(Qt::UserRole).toDouble();
+	if (objectMgr->findAndSelectI18n("Moon") || objectMgr->findAndSelect("Moon"))
+	{
+		if (JD!=0)
+		{
+			core->setJD(JD);
+			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+			if (!newSelected.empty())
+			{
+				// Can't point to home planet
+				if (newSelected[0]->getEnglishName() != core->getCurrentLocation().planetName)
+				{
+					mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
+					mvMgr->setFlagTracking(true);
+				}
+				else
+				{
+					GETSTELMODULE(StelObjectMgr)->unSelect();
+				}
 			}
 		}
 	}
@@ -2985,7 +3289,7 @@ LocalSEparams localSolarEclipse(double JD,int contact,bool central) {
 	const double udot = xdot - xidot;
 	const double vdot = ydot - etadot;
 	const double n2 = udot * udot + vdot * vdot;
-	const double delta = (u * vdot - udot * v) / sqrt(udot * udot + vdot * vdot);
+	const double delta = (u * vdot - udot * v) / sqrt(n2);
 	L1 = L1 - zeta * tf1;
 	L2 = L2 - zeta * tf2;
 	double L = L1;
