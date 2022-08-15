@@ -2901,6 +2901,7 @@ void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	QPair<QString, QString> coordStrings;
+	QString altitudeStr, azimuthStr, positionAngleStr, distanceStr, latitudeStr, longitudeStr;
 	double JDMid = modelIndex.sibling(modelIndex.row(), LunarEclipseDate).data(Qt::UserRole).toDouble();
 	double uMag = modelIndex.sibling(modelIndex.row(), LunarEclipseUMag).data(Qt::UserRole).toDouble();
 	double JD = JDMid;
@@ -2989,7 +2990,6 @@ void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 					treeItem->setText(LunarEclipseContact, QString(q_("Moon leaves penumbra")));
 					break;
 			}
-			QString altitudeStr, azimuthStr, positionAngleStr, distanceStr, latitudeStr, longitudeStr;
 			treeItem->setText(LunarEclipseContactDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
 			treeItem->setData(LunarEclipseContactDate, Qt::UserRole, JD);
 			core->setJD(JD);
