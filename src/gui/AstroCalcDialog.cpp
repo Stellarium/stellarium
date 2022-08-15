@@ -1363,7 +1363,7 @@ void AstroCalcDialog::currentCelestialPositions()
 	ui->celestialPositionsTreeWidget->sortItems(CColumnName, Qt::AscendingOrder);
 }
 
-QPair<QString, QString> AstroCalcDialog::getStringCoordinates(const Vec3d coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees)
+QPair<QString, QString> AstroCalcDialog::getStringCoordinates(const Vec3d &coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees)
 {
 	double lng, lat;
 	QString lngStr, latStr;

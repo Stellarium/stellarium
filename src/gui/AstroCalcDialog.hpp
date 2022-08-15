@@ -515,7 +515,7 @@ private:
 	//! @arg southAzimuth (relevant only for horizontal=true) count azimuth from south.
 	//! @arg decimalDegrees use decimal format, not DMS/HMS
 	//! @return QPair(lngStr, latStr) formatted output strings
-	static QPair<QString, QString> getStringCoordinates(const Vec3d coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees);
+	static QPair<QString, QString> getStringCoordinates(const Vec3d &coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees);
 	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec4d RTSTime, double maxElevation,
 			  double angularSize, QString constellation, QString otype, bool decimalDegrees = false);
 	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, double magnitude,

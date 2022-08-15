@@ -2623,7 +2623,7 @@ bool Oculars::getFlagScalingFOVForTelrad() const
 	return  flagScalingFOVForTelrad;
 }
 
-void Oculars::setTelradFOV(Vec4f fov)
+void Oculars::setTelradFOV(const Vec4f &fov)
 {
 	telradFOV = fov;
 	settings->setValue("telrad_fov", fov.toStr());

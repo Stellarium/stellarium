@@ -19,7 +19,6 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelProjector.hpp"
 
 #include "StelUtils.hpp"
 #include "SolarSystem.hpp"

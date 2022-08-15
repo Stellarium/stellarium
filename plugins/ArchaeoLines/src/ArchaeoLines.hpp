@@ -301,36 +301,36 @@ signals:
 	void customDeclination1Changed(double dec);
 	void customDeclination2Changed(double dec);
 	void currentPlanetChanged(ArchaeoLine::Line l); // meaningful only CurrentPlanetNone...CurrentPlanetSaturn.
-	void geographicLocation1LabelChanged(QString label);
-	void geographicLocation2LabelChanged(QString label);
-	void customAzimuth1LabelChanged(QString label);
-	void customAzimuth2LabelChanged(QString label);
-	void customAltitude1LabelChanged(QString label);
-	void customAltitude2LabelChanged(QString label);
-	void customDeclination1LabelChanged(QString label);
-	void customDeclination2LabelChanged(QString label);
-	void equinoxColorChanged(Vec3f color);
-	void solsticesColorChanged(Vec3f color);
-	void crossquartersColorChanged(Vec3f color);
-	void majorStandstillColorChanged(Vec3f color);
-	void minorStandstillColorChanged(Vec3f color);
-	void polarCirclesColorChanged(Vec3f color);
-	void zenithPassageColorChanged(Vec3f color);
-	void nadirPassageColorChanged(Vec3f color);
-	void selectedObjectColorChanged(Vec3f color);
-	void selectedObjectAzimuthColorChanged(Vec3f color);
-	void selectedObjectHourAngleColorChanged(Vec3f color);
-	void currentSunColorChanged(Vec3f color);
-	void currentMoonColorChanged(Vec3f color);
-	void currentPlanetColorChanged(Vec3f color);
-	void geographicLocation1ColorChanged(Vec3f color);
-	void geographicLocation2ColorChanged(Vec3f color);
-	void customAzimuth1ColorChanged(Vec3f color);
-	void customAzimuth2ColorChanged(Vec3f color);
-	void customAltitude1ColorChanged(Vec3f color);
-	void customAltitude2ColorChanged(Vec3f color);
-	void customDeclination1ColorChanged(Vec3f color);
-	void customDeclination2ColorChanged(Vec3f color);
+	void geographicLocation1LabelChanged(const QString &label);
+	void geographicLocation2LabelChanged(const QString &label);
+	void customAzimuth1LabelChanged(const QString &label);
+	void customAzimuth2LabelChanged(const QString &label);
+	void customAltitude1LabelChanged(const QString &label);
+	void customAltitude2LabelChanged(const QString &label);
+	void customDeclination1LabelChanged(const QString &label);
+	void customDeclination2LabelChanged(const QString &label);
+	void equinoxColorChanged(const Vec3f &color);
+	void solsticesColorChanged(const Vec3f &color);
+	void crossquartersColorChanged(const Vec3f &color);
+	void majorStandstillColorChanged(const Vec3f &color);
+	void minorStandstillColorChanged(const Vec3f &color);
+	void polarCirclesColorChanged(const Vec3f &color);
+	void zenithPassageColorChanged(const Vec3f &color);
+	void nadirPassageColorChanged(const Vec3f &color);
+	void selectedObjectColorChanged(const Vec3f &color);
+	void selectedObjectAzimuthColorChanged(const Vec3f &color);
+	void selectedObjectHourAngleColorChanged(const Vec3f &color);
+	void currentSunColorChanged(const Vec3f &color);
+	void currentMoonColorChanged(const Vec3f &color);
+	void currentPlanetColorChanged(const Vec3f &color);
+	void geographicLocation1ColorChanged(const Vec3f &color);
+	void geographicLocation2ColorChanged(const Vec3f &color);
+	void customAzimuth1ColorChanged(const Vec3f &color);
+	void customAzimuth2ColorChanged(const Vec3f &color);
+	void customAltitude1ColorChanged(const Vec3f &color);
+	void customAltitude2ColorChanged(const Vec3f &color);
+	void customDeclination1ColorChanged(const Vec3f &color);
+	void customDeclination2ColorChanged(const Vec3f &color);
 	void lineWidthChanged(int width);
 
 public slots:
@@ -374,15 +374,15 @@ public slots:
 	void showCurrentSun(bool b);
 	void showCurrentMoon(bool b);
 	void showCurrentPlanet(ArchaeoLine::Line l); // Allowed values for l: CurrentPlanetNone...CurrentPlanetSaturn.
-	void showCurrentPlanetNamed(QString planet); // Allowed values for planet: "none", "Mercury", "Venus", "Mars", "Jupiter", "Saturn".
+	void showCurrentPlanetNamed(const QString &planet); // Allowed values for planet: "none", "Mercury", "Venus", "Mars", "Jupiter", "Saturn".
 	void showGeographicLocation1(bool b);
 	void showGeographicLocation2(bool b);
 	void setGeographicLocation1Longitude(double lng);
 	void setGeographicLocation1Latitude(double lat);
 	void setGeographicLocation2Longitude(double lng);
 	void setGeographicLocation2Latitude(double lat);
-	void setGeographicLocation1Label(QString label);
-	void setGeographicLocation2Label(QString label);
+	void setGeographicLocation1Label(const QString &label);
+	void setGeographicLocation2Label(const QString &label);
 	QString getGeographicLocation1Label() const {return geographicLocation1Line->getLabel();}
 	QString getGeographicLocation2Label() const {return geographicLocation2Line->getLabel();}
 	double getGeographicLocation1Longitude() const {return geographicLocation1Longitude; }
@@ -395,8 +395,8 @@ public slots:
 	double getCustomAzimuth1() const { return customAzimuth1Line->getDefiningAngle(); }
 	void setCustomAzimuth2(double az);
 	double getCustomAzimuth2() const { return customAzimuth2Line->getDefiningAngle(); }
-	void setCustomAzimuth1Label(QString label);
-	void setCustomAzimuth2Label(QString label);
+	void setCustomAzimuth1Label(const QString &label);
+	void setCustomAzimuth2Label(const QString &label);
 	QString getCustomAzimuth1Label() const {return customAzimuth1Line->getLabel();}
 	QString getCustomAzimuth2Label() const {return customAzimuth2Line->getLabel();}
 	void showCustomAltitude1(bool b);
@@ -405,8 +405,8 @@ public slots:
 	double getCustomAltitude1() const { return customAltitude1Line->getDefiningAngle(); }
 	void setCustomAltitude2(double alt);
 	double getCustomAltitude2() const { return customAltitude2Line->getDefiningAngle(); }
-	void setCustomAltitude1Label(QString label);
-	void setCustomAltitude2Label(QString label);
+	void setCustomAltitude1Label(const QString &label);
+	void setCustomAltitude2Label(const QString &label);
 	QString getCustomAltitude1Label() const {return customAltitude1Line->getLabel();}
 	QString getCustomAltitude2Label() const {return customAltitude2Line->getLabel();}
 	void showCustomDeclination1(bool b);
@@ -415,8 +415,8 @@ public slots:
 	double getCustomDeclination1() const { return customDeclination1Line->getDefiningAngle(); }
 	void setCustomDeclination2(double dec);
 	double getCustomDeclination2() const { return customDeclination2Line->getDefiningAngle(); }
-	void setCustomDeclination1Label(QString label);
-	void setCustomDeclination2Label(QString label);
+	void setCustomDeclination1Label(const QString &label);
+	void setCustomDeclination2Label(const QString &label);
 	QString getCustomDeclination1Label() const {return customDeclination1Line->getLabel();}
 	QString getCustomDeclination2Label() const {return customDeclination2Line->getLabel();}
 
@@ -451,28 +451,28 @@ public slots:
 	Vec3f getCustomAltitude2Color()         const {return customAltitude2Color;}
 	Vec3f getCustomDeclination1Color()      const {return customDeclination1Color;}
 	Vec3f getCustomDeclination2Color()      const {return customDeclination2Color;}
-	void setEquinoxColor(Vec3f color);
-	void setSolsticesColor(Vec3f color);
-	void setCrossquartersColor(Vec3f color);
-	void setMajorStandstillColor(Vec3f color);
-	void setMinorStandstillColor(Vec3f color);
-	void setPolarCirclesColor(Vec3f color);
-	void setZenithPassageColor(Vec3f color);
-	void setNadirPassageColor(Vec3f color);
-	void setSelectedObjectColor(Vec3f color);
-	void setSelectedObjectAzimuthColor(Vec3f color);
-	void setSelectedObjectHourAngleColor(Vec3f color);
-	void setCurrentSunColor(Vec3f color);
-	void setCurrentMoonColor(Vec3f color);
-	void setCurrentPlanetColor(Vec3f color);
-	void setGeographicLocation1Color(Vec3f color);
-	void setGeographicLocation2Color(Vec3f color);
-	void setCustomAzimuth1Color(Vec3f color);
-	void setCustomAzimuth2Color(Vec3f color);
-	void setCustomAltitude1Color(Vec3f color);
-	void setCustomAltitude2Color(Vec3f color);
-	void setCustomDeclination1Color(Vec3f color);
-	void setCustomDeclination2Color(Vec3f color);
+	void setEquinoxColor(const Vec3f &color);
+	void setSolsticesColor(const Vec3f &color);
+	void setCrossquartersColor(const Vec3f &color);
+	void setMajorStandstillColor(const Vec3f &color);
+	void setMinorStandstillColor(const Vec3f &color);
+	void setPolarCirclesColor(const Vec3f &color);
+	void setZenithPassageColor(const Vec3f &color);
+	void setNadirPassageColor(const Vec3f &color);
+	void setSelectedObjectColor(const Vec3f &color);
+	void setSelectedObjectAzimuthColor(const Vec3f &color);
+	void setSelectedObjectHourAngleColor(const Vec3f &color);
+	void setCurrentSunColor(const Vec3f &color);
+	void setCurrentMoonColor(const Vec3f &color);
+	void setCurrentPlanetColor(const Vec3f &color);
+	void setGeographicLocation1Color(const Vec3f &color);
+	void setGeographicLocation2Color(const Vec3f &color);
+	void setCustomAzimuth1Color(const Vec3f &color);
+	void setCustomAzimuth2Color(const Vec3f &color);
+	void setCustomAltitude1Color(const Vec3f &color);
+	void setCustomAltitude2Color(const Vec3f &color);
+	void setCustomDeclination1Color(const Vec3f &color);
+	void setCustomDeclination2Color(const Vec3f &color);
 
 	int getLineWidth() const {return lineWidth;}
 	void setLineWidth(int width);

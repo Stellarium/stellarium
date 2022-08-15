@@ -122,10 +122,10 @@ signals:
 	void flagShowHorizontalPAChanged(bool b);
 	void flagShowHorizontalStartSkylinkedChanged(bool b);
 	void flagShowHorizontalEndSkylinkedChanged(bool b);
-	void equatorialTextColorChanged(Vec3f c);
-	void equatorialLineColorChanged(Vec3f c);
-	void horizontalTextColorChanged(Vec3f c);
-	void horizontalLineColorChanged(Vec3f c);
+	void equatorialTextColorChanged(const Vec3f &c);
+	void equatorialLineColorChanged(const Vec3f &c);
+	void horizontalTextColorChanged(const Vec3f &c);
+	void horizontalLineColorChanged(const Vec3f &c);
 
 public slots:
 	bool isEnabled() const    { return flagShowAngleMeasure; }
@@ -151,10 +151,10 @@ public slots:
 	void showHorizontal(bool b);
 	void showHorizontalStartSkylinked(bool b);
 	void showHorizontalEndSkylinked(bool b);
-	void setEquatorialTextColor(Vec3f color);
-	void setEquatorialLineColor(Vec3f color);
-	void setHorizontalTextColor(Vec3f color);
-	void setHorizontalLineColor(Vec3f color);
+	void setEquatorialTextColor(const Vec3f &color);
+	void setEquatorialLineColor(const Vec3f &color);
+	void setHorizontalTextColor(const Vec3f &color);
+	void setHorizontalLineColor(const Vec3f &color);
 
 private slots:
 	void updateMessageText();

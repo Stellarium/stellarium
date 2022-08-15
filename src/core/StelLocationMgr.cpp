@@ -24,7 +24,6 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelJsonParser.hpp"
-#include "StelLocaleMgr.hpp"
 
 #include <QStringListModel>
 #include <QDebug>

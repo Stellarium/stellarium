@@ -577,7 +577,7 @@ void AngleMeasure::useDmsFormat(bool b)
 	emit dmsFormatChanged(b);
 }
 
-void AngleMeasure::setEquatorialTextColor(Vec3f color)
+void AngleMeasure::setEquatorialTextColor(const Vec3f &color)
 {
 	if (equatorialTextColor != color)
 	{
@@ -587,7 +587,7 @@ void AngleMeasure::setEquatorialTextColor(Vec3f color)
 	}
 }
 
-void AngleMeasure::setEquatorialLineColor(Vec3f color)
+void AngleMeasure::setEquatorialLineColor(const Vec3f &color)
 {
 	if (equatorialLineColor != color)
 	{
@@ -597,7 +597,7 @@ void AngleMeasure::setEquatorialLineColor(Vec3f color)
 	}
 }
 
-void AngleMeasure::setHorizontalTextColor(Vec3f color)
+void AngleMeasure::setHorizontalTextColor(const Vec3f &color)
 {
 	if (horizontalTextColor != color)
 	{
@@ -607,7 +607,7 @@ void AngleMeasure::setHorizontalTextColor(Vec3f color)
 	}
 }
 
-void AngleMeasure::setHorizontalLineColor(Vec3f color)
+void AngleMeasure::setHorizontalLineColor(const Vec3f &color)
 {
 	if (horizontalLineColor != color)
 	{

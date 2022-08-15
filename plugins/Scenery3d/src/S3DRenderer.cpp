@@ -513,7 +513,7 @@ void S3DRenderer::computePolyhedron(Polyhedron& body,const Frustum& frustum,cons
 	body.extrude(shadowDir, sceneAABB);
 }
 
-void S3DRenderer::computeOrthoProjVals(const Vec3f shadowDir,float& orthoExtent,float& orthoNear,float& orthoFar)
+void S3DRenderer::computeOrthoProjVals(const Vec3f &shadowDir, float& orthoExtent, float& orthoNear, float& orthoFar)
 {
 	//Focus the light first on the entire scene
 	float maxZ = -std::numeric_limits<float>::max();
@@ -1596,7 +1596,7 @@ void S3DRenderer::determineFeatureSupport()
 		qCDebug(s3drenderer)<<"Maximum framebuffer size:"<<maximumFramebufferSize;
 	}
 
-	QString renderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+	const QString renderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
 	isANGLE = renderer.contains("ANGLE");
 
 	//check if GS cubemapping is possible

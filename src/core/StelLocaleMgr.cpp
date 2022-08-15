@@ -20,7 +20,6 @@
 #include "StelLocaleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
-#include "StelFileMgr.hpp"
 
 #include <QLocale>
 #include <QDebug>

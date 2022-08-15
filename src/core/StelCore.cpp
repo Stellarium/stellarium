@@ -2686,7 +2686,7 @@ static bool iau_constlineVecInitialized=false;
 
 // File iau_constellations_spans.dat is converted from file data.dat from ADC catalog VI/42.
 // We converted back to HH:MM:SS format to avoid the inherent rounding errors present in that file (Bug LP:#1690615).
-QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
+QString StelCore::getIAUConstellation(const Vec3d &positionEqJnow) const
 {
 	// Precess positionJ2000 to 1875.0
 	const Vec3d pos1875=j2000ToJ1875(equinoxEquToJ2000(positionEqJnow, RefractionOff));
