@@ -306,6 +306,7 @@ private slots:
 	void selectCurrentLunarEclipse(const QModelIndex &modelIndex);
 	void selectCurrentLunarEclipseContact(const QModelIndex &modelIndex);
 	void saveLunarEclipses();
+	void saveLunarEclipseCircumstances();
 
 	//! Calculating solar eclipses to fill the list.
 	//! Algorithm taken from calculating the rises, transits and sets.
