@@ -344,6 +344,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->lunareclipsesCalculateButton, SIGNAL(clicked()), this, SLOT(generateLunarEclipses()));
 	connect(ui->lunareclipsesCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupLunarEclipses()));
 	connect(ui->lunareclipsesSaveButton, SIGNAL(clicked()), this, SLOT(saveLunarEclipses()));
+	connect(ui->lunareclipsescontactsSaveButton, SIGNAL(clicked()), this, SLOT(saveLunarEclipseCircumstances()));
 	connect(ui->lunareclipseTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentLunarEclipse(QModelIndex)));
 	connect(ui->lunareclipsecontactsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentLunarEclipseContact(QModelIndex)));
 	initListSolarEclipse();
@@ -3164,6 +3165,76 @@ void AstroCalcDialog::saveLunarEclipses()
 			{
 				// Row 2 and next: the data
 				sData = ui->lunareclipseTreeWidget->topLevelItem(i)->text(j).trimmed();
+				xlsx.write(i + 2, j + 1, sData, data);
+				int w = sData.size();
+				if (w > width[j])
+				{
+					width[j] = w;
+				}
+			}
+		}
+
+		xlsx.write(count+3, 1, q_("Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
+
+		for (int i = 0; i < columns; i++)
+		{
+			xlsx.setColumnWidth(i+1, width[i]+2);
+		}
+
+		delete[] width;
+		xlsx.saveAs(filePath);
+	}
+}
+
+void AstroCalcDialog::saveLunarEclipseCircumstances()
+{
+	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
+	filter.append(" (*.xlsx);;");
+	filter.append(q_("CSV (Comma delimited)"));
+	filter.append(" (*.csv)");
+	QString defaultFilter("(*.xlsx)");
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save lunar eclipse circumstances as..."),
+							QDir::homePath() + "/lunareclipse-circumstances.xlsx",
+							filter,
+							&defaultFilter);
+
+	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
+		saveTableAsCSV(filePath, ui->lunareclipsecontactsTreeWidget, lunareclipsecontactsHeader);
+	else
+	{
+		int count = ui->lunareclipsecontactsTreeWidget->topLevelItemCount();
+		int columns = lunareclipsecontactsHeader.size();
+		int *width = new int[static_cast<unsigned int>(columns)];
+		QString sData;
+
+		QXlsx::Document xlsx;
+		xlsx.setDocumentProperty("title", q_("Circumstances of Lunar Eclipse"));
+		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
+		xlsx.addSheet("Circumstances of Lunar Eclipse", AbstractSheet::ST_WorkSheet);
+
+		QXlsx::Format header;
+		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
+		header.setPatternBackgroundColor(Qt::yellow);
+		header.setBorderStyle(QXlsx::Format::BorderThin);
+		header.setBorderColor(Qt::black);
+		header.setFontBold(true);
+		for (int i = 0; i < columns; i++)
+		{
+			// Row 1: Names of columns
+			sData = lunareclipsecontactsHeader.at(i).trimmed();
+			xlsx.write(1, i + 1, sData, header);
+			width[i] = sData.size();
+		}
+
+		QXlsx::Format data;
+		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
+		for (int i = 0; i < count; i++)
+		{
+			for (int j = 0; j < columns; j++)
+			{
+				// Row 2 and next: the data
+				sData = ui->lunareclipsecontactsTreeWidget->topLevelItem(i)->text(j).trimmed();
 				xlsx.write(i + 2, j + 1, sData, data);
 				int w = sData.size();
 				if (w > width[j])
