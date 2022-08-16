@@ -557,9 +557,7 @@ struct DrawNebulaFuncObject
 			return;
 
 		Nebula* n = static_cast<Nebula*>(obj);
-		float mag = n->vMag;
-		if (mag>90.f)
-			mag = n->bMag;
+		float mag=n->getVisibilityLevelByMagnitude();
 
 		StelSkyDrawer *drawer = core->getSkyDrawer();
 		// filter out DSOs which are too dim to be seen (e.g. for bino observers)

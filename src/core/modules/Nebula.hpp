@@ -321,7 +321,7 @@ private:
 	NebulaType nType;
 
 	SphericalRegionP pointRegion;
-	QStringList designations;
+	QStringList designations;       // List of Catalog number entries
 
 	static StelTextureSP texCircle;				// The symbolic circle texture
 	static StelTextureSP texCircleLarge;			// The symbolic circle texture for large objects

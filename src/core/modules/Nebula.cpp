@@ -654,8 +654,8 @@ float Nebula::getVisibilityLevelByMagnitude(void) const
 {
 	StelCore* core = StelApp::getInstance().getCore();
 
+	const float mLim = 15.0f;
 	float lim = qMin(vMag, bMag);
-	float mLim = 15.0f;
 
 	if (surfaceBrightnessUsage)
 	{
@@ -664,12 +664,12 @@ float Nebula::getVisibilityLevelByMagnitude(void) const
 	}
 	else
 	{
-		float mag = getVMagnitude(core);
 		if (lim > 90.f) lim = mLim;
 
 		// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
 		if (nType==NebDn)
 		{
+			const float mag = getVMagnitude(core);
 			// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
 			// 9-(opac-5)-2*(angularSize-0.5)
 			// GZ Not good for non-Barnards. weak opacity and large surface are antagonists. (some LDN are huge, but opacity 2 is not much to discern).
@@ -679,10 +679,11 @@ float Nebula::getVisibilityLevelByMagnitude(void) const
 			else
 				lim = (B_nb>0 ? 9.0f : 12.0f); // GZ I assume LDN objects are rather elusive.
 		}
-		else if (nType==NebHII) // NebHII={Sharpless, LBN, RCW}
-		{ // artificially increase visibility of (most) Sharpless objects? No magnitude recorded:-(
-			lim=9.0f;
-		}		
+		else if (nType==NebHII) // NebHII={Sharpless, LBN, RCW} but also M42.
+		{
+			// artificially increase visibility of (most) Sharpless and LBN objects. No magnitude recorded:-(
+			lim=qMin(lim, 12.0f);
+		}
 	}
 
 	if (nType==NebRegion) // special case for regions
