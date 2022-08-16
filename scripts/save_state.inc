@@ -1,6 +1,6 @@
 //
 // Name:        Save and restore display state
-// Version:     0.19.1
+// Version:     0.22.3
 // License:     Public Domain
 // Authors:     Matthew Gates (matthewg42) (Original author)
 //              Alexander Wolf (alex-w)
