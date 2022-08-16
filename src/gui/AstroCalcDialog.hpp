@@ -31,14 +31,13 @@
 #include <QTimer>
 #include <QRegularExpression>
 #include <QMutex>
-#include <QtCharts>
 
 #include "AstroCalcChart.hpp"
+#include "QtCharts/qchartview.h"
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
-#include "Nebula.hpp"
 #include "NebulaMgr.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StarMgr.hpp"
