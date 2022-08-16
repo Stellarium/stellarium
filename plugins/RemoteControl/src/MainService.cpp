@@ -330,12 +330,12 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 	else if(operation == "focus")
 	{
 		QString target = QString::fromUtf8(parameters.value("target"));
-		SelectionMode selMode = Center;
+		MainService::SelectionMode selMode = MainService::Center;
 
 		if(parameters.value("mode") == "zoom")
-			selMode = Zoom;
+			selMode = MainService::Zoom;
 		else if(parameters.value("mode") == "mark")
-			selMode = Mark;
+			selMode = MainService::Mark;
 
 		//check target string first
 		if(target.isEmpty())
@@ -373,7 +373,7 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 		QMetaObject::invokeMethod(this,"focusObject",SERVICE_DEFAULT_INVOKETYPE,
 					  Q_RETURN_ARG(bool,result),
 					  Q_ARG(QString,target),
-					  Q_ARG(SelectionMode,selMode));
+					  Q_ARG(MainService::SelectionMode,selMode));
 
 		response.setData(result ? "true" : "false");
 	}
@@ -534,7 +534,7 @@ QString MainService::getInfoString()
 	return selectedObject->getInfoString(core,StelObject::AllInfo | StelObject::NoFont);
 }
 
-bool MainService::focusObject(const QString &name, SelectionMode mode)
+bool MainService::focusObject(const QString &name, MainService::SelectionMode mode)
 {
 	//StelDialog::gotoObject
 
