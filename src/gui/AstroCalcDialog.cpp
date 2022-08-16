@@ -186,6 +186,10 @@ void AstroCalcDialog::retranslate()
 		populateFunctionsList();
 		drawAltVsTimeDiagram();
 		drawAziVsTimeDiagram();
+		drawMonthlyElevationGraph();
+		drawLunarElongationGraph();
+		drawDistanceGraph();
+		drawXVsTimeGraphs();
 		populateTimeIntervalsList();
 		populateWutGroups();
 		// Hack to shrink the tabs to optimal size after language change
@@ -731,7 +735,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 	{
 		const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 		StelObjectP selectedObject = selectedObjects[0];
-		azVsTimeChart->setTitle(selectedObject->getNameI18n());
+		azVsTimeChart->setTitle(QString("%1 (%2)").arg(getSelectedObjectNameI18n(selectedObject), selectedObject->getObjectTypeI18n()));
 		const double currentJD = core->getJD();
 		const double shift = core->getUTCOffset(currentJD) / 24.0;
 		const double noon = std::floor(currentJD + shift); // Integral JD of this day
@@ -781,21 +785,6 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		azVsTimeChart->setYrange(AstroCalcChart::AzVsTime, yRange);
 
 		drawCurrentTimeDiagram();
-
-		QString name = selectedObject->getNameI18n();
-		if (name.isEmpty())
-		{
-			QString otype = selectedObject->getType();
-			if (otype == "Nebula")
-			{
-				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
-				if (name.isEmpty())
-					name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC();
-			}
-
-			if (otype == "Star" || otype=="Pulsar")
-				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
-		}
 	}
 	else
 	{
@@ -1509,6 +1498,24 @@ void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex& modelInd
 			mvMgr->setFlagTracking(true);
 		}
 	}	
+}
+
+QString AstroCalcDialog::getSelectedObjectNameI18n(StelObjectP selectedObject)
+{
+	QString name = selectedObject->getNameI18n();
+	if (name.isEmpty())
+	{
+		QString otype = selectedObject->getType();
+		if (otype == "Nebula")
+		{
+			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+			if (name.isEmpty())
+				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC();
+		}
+		else if (otype == "Star" || otype=="Pulsar")
+			name = (selectedObject->getID().isEmpty() ? q_("Unnamed star") : selectedObject->getID());
+	}
+	return name;
 }
 
 void AstroCalcDialog::fillHECPositionTable(QString objectName, QChar objectSymbol, QString latitude, QString longitude, double distance)
@@ -5318,7 +5325,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 	{
 		// X axis - time; Y axis - altitude
 		StelObjectP selectedObject = selectedObjects[0];
-		altVsTimeChart->setTitle(selectedObject->getNameI18n());
+		altVsTimeChart->setTitle(QString("%1 (%2)").arg(getSelectedObjectNameI18n(selectedObject), selectedObject->getObjectTypeI18n()));
 		PlanetP sun = solarSystem->getSun();
 		PlanetP moon = solarSystem->getMoon();
 
@@ -5396,20 +5403,6 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		core->setJD(currentJD);
 
 		drawCurrentTimeDiagram();
-
-		QString name = selectedObject->getNameI18n();
-		if (name.isEmpty())
-		{
-			QString otype = selectedObject->getType();
-			if (otype == "Nebula")
-			{
-				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
-				if (name.isEmpty())
-					name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC();
-			}
-			else if (otype == "Star" || otype=="Pulsar")
-				name = (selectedObject->getID().isEmpty() ? q_("Unnamed star") : selectedObject->getID());
-		}
 
 		// Transit line
 		QPair<double, double>transit=altVsTimeChart->findYMax(AstroCalcChart::AltVsTime);
@@ -5788,7 +5781,7 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 	{
 		// X axis - time; Y axis - altitude
 		StelObjectP selectedObject = selectedObjects[0];
-		monthlyElevationChart->setTitle(selectedObject->getNameI18n());
+		monthlyElevationChart->setTitle(QString("%1 (%2)").arg(getSelectedObjectNameI18n(selectedObject), selectedObject->getObjectTypeI18n()));
 
 		const double currentJD = core->getJD();
 		int year, month, day;		
@@ -5812,21 +5805,6 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		}
 		core->setJD(currentJD);
 		yRangeME=monthlyElevationChart->findYRange(AstroCalcChart::MonthlyElevation);
-
-		QString name = selectedObject->getNameI18n();
-		if (name.isEmpty())
-		{
-			QString otype = selectedObject->getType();
-			if (otype == "Nebula")
-			{
-				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
-				if (name.isEmpty())
-					name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC();
-			}
-			if (otype == "Star" || otype=="Pulsar")
-				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
-		}
-		monthlyElevationChart->setTitle(name);
 	}
 	else
 		monthlyElevationChart->setTitle(q_("Please select object to plot its 'Monthly Elevation' graph for the current year at selected time."));
@@ -8828,22 +8806,10 @@ void AstroCalcDialog::drawLunarElongationGraph()
 			lunarElongationChart->append(AstroCalcChart::LunarElongation, StelUtils::jdToQDateTime(JD+utcOffset, Qt::UTC).toMSecsSinceEpoch(), distance*M_180_PI);
 		}
 		core->setJD(currentJD);
-
-		QString name = selectedObject->getNameI18n();
-		if (name.isEmpty())
-		{
-			QString otype = selectedObject->getType();
-			if (otype == "Nebula")
-			{
-				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
-				if (name.isEmpty())
-					name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignationWIC();
-			}
-			if (otype == "Star" || otype=="Pulsar")
-				selectedObject->getID().isEmpty() ? name = q_("Unnamed star") : name = selectedObject->getID();
-		}
-		ui->lunarElongationChartView->setToolTip(QString("%1 (%2)").arg(label, name));
-		lunarElongationChart->setTitle(QString("%1 (%2)").arg(label, name));
+		QString name = getSelectedObjectNameI18n(selectedObject);
+		QString otype = selectedObject->getObjectTypeI18n();
+		ui->lunarElongationChartView->setToolTip(QString("<p>%1 &quot;%2&quot; (%3)</p>").arg(q_("Angular distance between the Moon and celestial object"), name, otype));
+		lunarElongationChart->setTitle(QString("%1: %2 &mdash; %3 (%4)").arg(q_("Angular distance"), moon->getNameI18n(), name, otype));
 
 		yRange=lunarElongationChart->findYRange(AstroCalcChart::LunarElongation);
 	}

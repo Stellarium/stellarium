@@ -593,6 +593,8 @@ private:
 
 	void enableAngularLimits(bool enable);
 
+	QString getSelectedObjectNameI18n(StelObjectP selectedObject);
+
 	//! Memorize day for detecting rollover to next/prev one
 	int oldGraphJD;
 
