@@ -1282,13 +1282,18 @@ double StelCore::getUTCOffset(const double JD) const
 	StelLocation loc = getCurrentLocation();
 	QString tzName = getCurrentTimeZone();
 	QTimeZone tz(tzName.toUtf8());
-	if (!tz.isValid() && !QString("LMST LTST system_default").contains(tzName))
+	// We must fight a bug in Qt6.2 on Linux. For some reason tz.isValid() is true even for our self-named zones LMST,LTST,system_default.
+	// We must use an intermediate Boolean which we set to false where needed.
+	bool tzValid=tz.isValid();
+	if (QString("LMST LTST system_default").contains(tzName))
+		tzValid=false;
+	if (!tzValid && !QString("LMST LTST system_default").contains(tzName))
 	{
 		qWarning() << "Invalid timezone: " << tzName;
 	}
 
 	qint64 shiftInSeconds = 0;
-	if (tzName=="system_default" || (loc.planetName=="Earth" && !tz.isValid() && !QString("LMST LTST").contains(tzName)))
+	if (tzName=="system_default" || (loc.planetName=="Earth" && !tzValid && !QString("LMST LTST").contains(tzName)))
 	{
 		QDateTime local = universal.toLocalTime();
 		//Both timezones should be interpreted as UTC because secsTo() converts both
@@ -1303,7 +1308,7 @@ double StelCore::getUTCOffset(const double JD) const
 	else
 	{
 		// The first adoption of a standard time was on December 1, 1847 in Great Britain
-		if (tz.isValid() && loc.planetName=="Earth" && (JD>=StelCore::TZ_ERA_BEGINNING || getUseCustomTimeZone()))
+		if (tzValid && loc.planetName=="Earth" && (JD>=StelCore::TZ_ERA_BEGINNING || getUseCustomTimeZone()))
 		{
 			if (getUseDST())
 				shiftInSeconds = tz.offsetFromUtc(universal);
@@ -1337,7 +1342,7 @@ double StelCore::getUTCOffset(const double JD) const
 	// Extraterrestrial: Either use the configured Terrestrial timezone, or even a pseudo-LMST based on planet's rotation speed?
 	if (loc.planetName!="Earth")
 	{
-		if (tz.isValid() && (JD>=StelCore::TZ_ERA_BEGINNING || getUseCustomTimeZone()))
+		if (tzValid && (JD>=StelCore::TZ_ERA_BEGINNING || getUseCustomTimeZone()))
 		{
 			if (getUseDST())
 				shiftInSeconds = tz.offsetFromUtc(universal);
