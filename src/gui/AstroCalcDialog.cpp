@@ -345,7 +345,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->lunareclipsesCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupLunarEclipses()));
 	connect(ui->lunareclipsesSaveButton, SIGNAL(clicked()), this, SLOT(saveLunarEclipses()));
 	connect(ui->lunareclipsescontactsSaveButton, SIGNAL(clicked()), this, SLOT(saveLunarEclipseCircumstances()));
-	connect(ui->lunareclipseTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentLunarEclipse(QModelIndex)));
+	connect(ui->lunareclipseTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(selectCurrentLunarEclipse(QModelIndex)));
+	connect(ui->lunareclipseTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentLunarEclipseDate(QModelIndex)));
 	connect(ui->lunareclipsecontactsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentLunarEclipseContact(QModelIndex)));
 	initListSolarEclipse();
 	connect(ui->solareclipsesCalculateButton, SIGNAL(clicked()), this, SLOT(generateSolarEclipses()));
@@ -2893,10 +2894,34 @@ LunarEclipseIteration::LunarEclipseIteration(double &JD, double &positionAngle, 
 	axisDistance = eclipseData.axisDistance;
 };
 
+void AstroCalcDialog::selectCurrentLunarEclipseDate(const QModelIndex& modelIndex)
+{
+	double JDMid = modelIndex.sibling(modelIndex.row(), LunarEclipseDate).data(Qt::UserRole).toDouble();
+	if (objectMgr->findAndSelectI18n("Moon") || objectMgr->findAndSelect("Moon"))
+	{
+		core->setJD(JDMid);
+		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+		if (!newSelected.empty())
+		{
+			// Can't point to home planet
+			if (newSelected[0]->getEnglishName() != core->getCurrentLocation().planetName)
+			{
+				mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
+				mvMgr->setFlagTracking(true);
+			}
+			else
+			{
+				GETSTELMODULE(StelObjectMgr)->unSelect();
+			}
+		}
+	}
+}
+
 void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 {
 	initListLunarEclipseContact();
 	const bool saveTopocentric = core->getUseTopocentricCoordinates();
+	double currentJD = core->getJD();
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	PlanetP moon = ssystem->getMoon();
 	const bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
@@ -3069,25 +3094,7 @@ void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 	{
 		ui->lunareclipsecontactsTreeWidget->resizeColumnToContents(i);
 	}
-
-	if (objectMgr->findAndSelectI18n("Moon") || objectMgr->findAndSelect("Moon"))
-	{
-		core->setJD(JDMid);
-		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
-		if (!newSelected.empty())
-		{
-			// Can't point to home planet
-			if (newSelected[0]->getEnglishName() != core->getCurrentLocation().planetName)
-			{
-				mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
-				mvMgr->setFlagTracking(true);
-			}
-			else
-			{
-				GETSTELMODULE(StelObjectMgr)->unSelect();
-			}
-		}
-	}
+	core->setJD(currentJD);
 }
 
 void AstroCalcDialog::selectCurrentLunarEclipseContact(const QModelIndex& modelIndex)

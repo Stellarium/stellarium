@@ -304,6 +304,7 @@ private slots:
 	void generateLunarEclipses();
 	void cleanupLunarEclipses();
 	void selectCurrentLunarEclipse(const QModelIndex &modelIndex);
+	void selectCurrentLunarEclipseDate(const QModelIndex &modelIndex);
 	void selectCurrentLunarEclipseContact(const QModelIndex &modelIndex);
 	void saveLunarEclipses();
 	void saveLunarEclipseCircumstances();

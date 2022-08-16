@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>764</width>
-    <height>447</height>
+    <width>851</width>
+    <height>453</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -2708,67 +2708,7 @@
               <string>Lunar Eclipses</string>
              </attribute>
              <layout class="QGridLayout" name="gridLayout_19">
-              <item row="1" column="0">
-               <widget class="QTreeWidget" name="lunareclipseTreeWidget">
-                <property name="rootIsDecorated">
-                 <bool>false</bool>
-                </property>
-                <property name="uniformRowHeights">
-                 <bool>true</bool>
-                </property>
-                <property name="itemsExpandable">
-                 <bool>false</bool>
-                </property>
-                <property name="sortingEnabled">
-                 <bool>true</bool>
-                </property>
-                <property name="expandsOnDoubleClick">
-                 <bool>false</bool>
-                </property>
-                <property name="columnCount">
-                 <number>0</number>
-                </property>
-                <attribute name="headerShowSortIndicator" stdset="0">
-                 <bool>true</bool>
-                </attribute>
-               </widget>
-              </item>
-              <item row="2" column="0" alignment="Qt::AlignBottom">
-                <widget class="QTreeWidget" name="lunareclipsecontactsTreeWidget">
-                <property name="rootIsDecorated">
-                 <bool>false</bool>
-                </property>
-                <property name="uniformRowHeights">
-                 <bool>true</bool>
-                </property>
-                <property name="itemsExpandable">
-                 <bool>false</bool>
-                </property>
-                <property name="sortingEnabled">
-                 <bool>false</bool>
-                </property>
-                <property name="expandsOnDoubleClick">
-                 <bool>false</bool>
-                </property>
-                <property name="columnCount">
-                 <number>0</number>
-                </property>
-                <attribute name="headerShowSortIndicator" stdset="0">
-                 <bool>true</bool>
-                </attribute>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="gammaNoteLabel">
-                <property name="text">
-                 <string>Notes: The quantity gamma is the minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the Moon passes north or south of the shadow cone axis. Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation.</string>
-                </property>
-                <property name="wordWrap">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="0">
+              <item row="5" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_39">
                 <item>
                  <widget class="QPushButton" name="lunareclipsesCleanupButton">
@@ -2799,6 +2739,85 @@
                  </widget>
                 </item>
                </layout>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="gammaNoteLabel">
+                <property name="text">
+                 <string>Notes: The quantity gamma is the minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone, in units of Earth’s equatorial radius. This distance is positive or negative, depending on whether the Moon passes north or south of the shadow cone axis. Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation.</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0" alignment="Qt::AlignBottom">
+               <widget class="QTreeWidget" name="lunareclipsecontactsTreeWidget">
+                <property name="rootIsDecorated">
+                 <bool>false</bool>
+                </property>
+                <property name="uniformRowHeights">
+                 <bool>true</bool>
+                </property>
+                <property name="itemsExpandable">
+                 <bool>false</bool>
+                </property>
+                <property name="sortingEnabled">
+                 <bool>false</bool>
+                </property>
+                <property name="expandsOnDoubleClick">
+                 <bool>false</bool>
+                </property>
+                <property name="columnCount">
+                 <number>0</number>
+                </property>
+                <attribute name="headerShowSortIndicator" stdset="0">
+                 <bool>true</bool>
+                </attribute>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QTreeWidget" name="lunareclipseTreeWidget">
+                <property name="rootIsDecorated">
+                 <bool>false</bool>
+                </property>
+                <property name="uniformRowHeights">
+                 <bool>true</bool>
+                </property>
+                <property name="itemsExpandable">
+                 <bool>false</bool>
+                </property>
+                <property name="sortingEnabled">
+                 <bool>true</bool>
+                </property>
+                <property name="expandsOnDoubleClick">
+                 <bool>false</bool>
+                </property>
+                <property name="columnCount">
+                 <number>0</number>
+                </property>
+                <attribute name="headerShowSortIndicator" stdset="0">
+                 <bool>true</bool>
+                </attribute>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="Line" name="line">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>1</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>1</height>
+                 </size>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
               </item>
              </layout>
             </widget>
