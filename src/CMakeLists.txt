@@ -516,6 +516,7 @@ ENDIF()
 # Main executable/library setup
 IF(GENERATE_STELMAINLIB)
      ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
+     target_precompile_headers(stelMain PUBLIC core/VecMath.hpp core/StelUtils.h external/SpoutLibrary.h core/*.hpp core/planetsephems/*.h core/planetsephems/*.hpp core/modules/*.hpp gui/*.hpp)
      TARGET_LINK_LIBRARIES(stelMain ${STELMAIN_DEPS})
      INSTALL(TARGETS stelMain DESTINATION lib)
      # WIN32 creates a windows app without console, no effect on non-win platforms
