@@ -22,6 +22,9 @@
 #include <QObject>
 #include <QMap>
 #include <QString>
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#include <QAudioOutput>
+#endif
 
 class QMediaPlayer;
 
@@ -54,6 +57,9 @@ public slots:
 
 private:
 	QMap<QString, QMediaPlayer*> audioObjects;
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	QAudioOutput *audioOutput;
+#endif
 };
 
 #endif // STELAUDIOMGR_HPP

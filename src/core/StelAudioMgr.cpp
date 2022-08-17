@@ -27,6 +27,9 @@
 
 StelAudioMgr::StelAudioMgr()
 {
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	audioOutput=new QAudioOutput();
+#endif
 }
 
 StelAudioMgr::~StelAudioMgr()
@@ -41,6 +44,11 @@ StelAudioMgr::~StelAudioMgr()
 			it.remove();
 		}
 	}
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	delete audioOutput;
+	audioOutput=Q_NULLPTR;
+#endif
+
 }
 
 void StelAudioMgr::loadSound(const QString& filename, const QString& id)
@@ -69,6 +77,7 @@ void StelAudioMgr::playSound(const QString& id)
 		{
 			// if already playing, stop and play from the start
 			#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+			audioObjects[id]->setAudioOutput(audioOutput);
 			if (audioObjects[id]->playbackState()==QMediaPlayer::PlayingState)
 			#else
 			if (audioObjects[id]->state()==QMediaPlayer::PlayingState)
