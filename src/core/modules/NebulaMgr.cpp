@@ -495,7 +495,7 @@ void NebulaMgr::loadCatalogFilters()
 	conf->endGroup();
 
 	// NB: nebula set loaded inside setter of catalog filter
-	setCatalogFilters(catalogFilters);
+	setCatalogFilters(int(catalogFilters));
 }
 
 void NebulaMgr::storeCatalogFilters()
@@ -504,7 +504,7 @@ void NebulaMgr::storeCatalogFilters()
 	Q_ASSERT(conf);
 
 	// view dialog / DSO tag settings
-	const Nebula::CatalogGroup& cflags = getCatalogFilters();
+	const Nebula::CatalogGroup cflags = static_cast<Nebula::CatalogGroup>(getCatalogFilters());
 
 	conf->beginGroup("dso_catalog_filters");
 	conf->setValue("flag_show_ngc",		static_cast<bool>(cflags & Nebula::CatNGC));
@@ -586,20 +586,20 @@ struct DrawNebulaFuncObject
 	bool checkMaxMagHints;
 };
 
-void NebulaMgr::setCatalogFilters(Nebula::CatalogGroup cflags)
+void NebulaMgr::setCatalogFilters(int cflags)
 {
-	if(static_cast<int>(cflags) != static_cast<int>(Nebula::catalogFilters))
+	if(cflags != static_cast<int>(Nebula::catalogFilters))
 	{
-		Nebula::catalogFilters = cflags;
+		Nebula::catalogFilters = static_cast<Nebula::CatalogGroup>(cflags);
 		emit catalogFiltersChanged(cflags);
 	}
 }
 
-void NebulaMgr::setTypeFilters(Nebula::TypeGroup tflags)
+void NebulaMgr::setTypeFilters(int tflags)
 {
-	if(static_cast<int>(tflags) != static_cast<int>(Nebula::typeFilters))
+	if(tflags != static_cast<int>(Nebula::typeFilters))
 	{
-		Nebula::typeFilters = tflags;
+		Nebula::typeFilters = static_cast<Nebula::TypeGroup>(tflags);
 		emit typeFiltersChanged(tflags);
 	}
 }

@@ -1043,7 +1043,7 @@ void ConfigurationDialog::saveAllSettings()
 	// view dialog / DSO tag settings
 	nmgr->storeCatalogFilters();
 
-	const Nebula::TypeGroup& tflags = nmgr->getTypeFilters();
+	const Nebula::TypeGroup tflags = static_cast<Nebula::TypeGroup>(nmgr->getTypeFilters());
 	conf->beginGroup("dso_type_filters");
 	conf->setValue("flag_show_galaxies",             static_cast<bool>(tflags & Nebula::TypeGalaxies));
 	conf->setValue("flag_show_active_galaxies",      static_cast<bool>(tflags & Nebula::TypeActiveGalaxies));

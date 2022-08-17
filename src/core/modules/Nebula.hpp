@@ -93,13 +93,11 @@ public:
 		TypePlanetaryNebulae     = 0x00000100, //!< Planetary Nebulae
 		TypeSupernovaRemnants    = 0x00000200, //!< Supernova Remnants
 		TypeGalaxyClusters       = 0x00000400, //!< Galaxy Clusters
-		TypeOther                = 0x00000800  //!< Other objects
+		TypeOther                = 0x00000800, //!< Other types
+		TypeAll                  = 0xFFFFFFFF  //!< All types
 	};
 	Q_DECLARE_FLAGS(TypeGroup, TypeGroupFlags)
 	Q_FLAG(TypeGroup)
-
-	//! A pre-defined set of specifiers for the catalogs filter
-	static constexpr TypeGroup    AllTypes    = static_cast<TypeGroup>(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeOpenStarClusters|TypeGlobularStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeGalaxyClusters|TypeOther);
 
 	//! @enum NebulaType Nebula types
 	enum NebulaType

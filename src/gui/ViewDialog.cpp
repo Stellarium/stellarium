@@ -286,7 +286,7 @@ void ViewDialog::createDialogContent()
 	// DSO tab contents
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 	updateSelectedCatalogsCheckBoxes();
-	connect(nmgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(updateSelectedCatalogsCheckBoxes()));
+	connect(nmgr, SIGNAL(catalogFiltersChanged(int)), this, SLOT(updateSelectedCatalogsCheckBoxes()));
 	connect(ui->selectAllCatalogs, SIGNAL(clicked()), nmgr, SLOT(selectAllCatalogs()));
 	connect(ui->selectStandardCatalogs, SIGNAL(clicked()), nmgr, SLOT(selectStandardCatalogs()));
 	connect(ui->selectPreferredCatalogs, SIGNAL(clicked()), nmgr, SLOT(loadCatalogFilters()));
@@ -294,7 +294,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->selectNoneCatalogs, SIGNAL(clicked()), nmgr, SLOT(selectNoneCatalogs()));
 	connect(ui->buttonGroupDisplayedDSOCatalogs, SIGNAL(buttonClicked(QAbstractButton *)), this, SLOT(setSelectedCatalogsFromCheckBoxes()));
 	updateSelectedTypesCheckBoxes();
-	connect(nmgr, SIGNAL(typeFiltersChanged(Nebula::TypeGroup)), this, SLOT(updateSelectedTypesCheckBoxes()));
+	connect(nmgr, SIGNAL(typeFiltersChanged(int)), this, SLOT(updateSelectedTypesCheckBoxes()));
 	connect(ui->buttonGroupDisplayedDSOTypes, SIGNAL(buttonClicked(QAbstractButton *)), this, SLOT(setSelectedTypesFromCheckBoxes()));
 	connectGroupBox(ui->groupBoxDSOTypeFilters,"actionSet_Nebula_TypeFilterUsage");
 	// DSO Labels section
@@ -819,7 +819,7 @@ void ViewDialog::setSelectedTypesFromCheckBoxes()
 
 void ViewDialog::updateSelectedCatalogsCheckBoxes()
 {
-	const Nebula::CatalogGroup& flags = GETSTELMODULE(NebulaMgr)->getCatalogFilters();
+	const Nebula::CatalogGroup flags = static_cast<Nebula::CatalogGroup>(GETSTELMODULE(NebulaMgr)->getCatalogFilters());
 	ui->checkBoxNGC->setChecked(flags & Nebula::CatNGC);
 	ui->checkBoxIC->setChecked(flags & Nebula::CatIC);
 	ui->checkBoxM->setChecked(flags & Nebula::CatM);
@@ -854,7 +854,7 @@ void ViewDialog::updateSelectedCatalogsCheckBoxes()
 
 void ViewDialog::updateSelectedTypesCheckBoxes()
 {
-	const Nebula::TypeGroup& flags = GETSTELMODULE(NebulaMgr)->getTypeFilters();
+	const Nebula::TypeGroup flags = static_cast<Nebula::TypeGroup>(GETSTELMODULE(NebulaMgr)->getTypeFilters());
 	ui->checkBoxGalaxiesType->setChecked(flags & Nebula::TypeGalaxies);
 	ui->checkBoxActiveGalaxiesType->setChecked(flags & Nebula::TypeActiveGalaxies);
 	ui->checkBoxInteractingGalaxiesType->setChecked(flags & Nebula::TypeInteractingGalaxies);
