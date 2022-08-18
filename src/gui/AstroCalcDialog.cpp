@@ -294,8 +294,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->celestialPositionsUpdateButton, SIGNAL(clicked()), this, SLOT(currentCelestialPositions()));
 	connect(ui->celestialPositionsSaveButton, SIGNAL(clicked()), this, SLOT(saveCelestialPositions()));
 	connect(ui->celestialCategoryComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveCelestialPositionsCategory(int)));
-	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(populateCelestialCategoryList()));
-	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(currentCelestialPositions()));
+	connect(dsoMgr, SIGNAL(catalogFiltersChanged(int)), this, SLOT(populateCelestialCategoryList()));
+	connect(dsoMgr, SIGNAL(catalogFiltersChanged(int)), this, SLOT(currentCelestialPositions()));
 	connect(dsoMgr, SIGNAL(flagSizeLimitsUsageChanged(bool)), this, SLOT(currentCelestialPositions()));
 	connect(dsoMgr, SIGNAL(minSizeLimitChanged(double)), this, SLOT(currentCelestialPositions()));
 	connect(dsoMgr, SIGNAL(maxSizeLimitChanged(double)), this, SLOT(currentCelestialPositions()));
@@ -488,8 +488,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->saveObjectsButton, SIGNAL(clicked()), this, SLOT(saveWutObjects()));
 	//connect(ui->wutMatchingObjectsLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 	ui->wutMatchingObjectsLineEdit->setVisible(false);
-	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(calculateWutObjects()));
-	connect(dsoMgr, SIGNAL(typeFiltersChanged(Nebula::TypeGroup)), this, SLOT(calculateWutObjects()));
+	connect(dsoMgr, SIGNAL(catalogFiltersChanged(int)), this, SLOT(calculateWutObjects()));
+	connect(dsoMgr, SIGNAL(typeFiltersChanged(int)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(flagSizeLimitsUsageChanged(bool)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(minSizeLimitChanged(double)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(maxSizeLimitChanged(double)), this, SLOT(calculateWutObjects()));
@@ -3994,7 +3994,8 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 	loc.name = q_("Greatest eclipse’s point");
 	loc.planetName = "Earth";
 	loc.ianaTimeZone = "LMST";
-	core->moveObserverTo(loc, 0.);
+	// NOTE: A small time is needed to update the GUI after change the coordinates without changing the name of location
+	core->moveObserverTo(loc, 0.1);
 
 	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
 	{
