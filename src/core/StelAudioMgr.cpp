@@ -17,7 +17,6 @@
  */
 
 #include "StelAudioMgr.hpp"
-#include "StelFileMgr.hpp"
 #include <QDebug>
 #include <QDir>
 

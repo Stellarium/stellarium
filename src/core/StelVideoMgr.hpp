@@ -78,8 +78,10 @@ class QGraphicsVideoItem;
 //! <li>WEBM (invalid media) </li>
 //! </ul>
 //!
+//! Update 2022: Seems to work with Qt5.12 and later. Does not show frame on Qt5.9.
+//!
 //! <h2>Mac OS X Notes</h2>
-//! NOT TESTED ON A MAC! There is a critical difference (causing a crash!) between Win and Linux to either hide or not hide the player just after loading.
+//! NOT TESTED ON A MAC! There was a critical difference (causing a crash with Qt5.4!) between Win and Linux to either hide or not hide the player just after loading.
 //! Please somebody find out Mac behaviour.
 //!
 //! QtMultimedia is a bit tricky to use: There seems to be no way to load a media file to analyze resolution or duration before starting its replay.
@@ -210,30 +212,33 @@ private slots:
 	// Some of them are useful to understand media handling and to get to crucial information like native resolution and duration during loading of media.
 	// Most only give simple debug output...
 	void handleAudioAvailableChanged(bool available);
-	void handleBufferStatusChanged(int percentFilled);
 	void handleDurationChanged(qint64 duration);
-	void handleError(QMediaPlayer::Error error);
 	void handleMediaStatusChanged(QMediaPlayer::MediaStatus status);
 	void handleMutedChanged(bool muted);
 	//void handlePositionChanged(qint64 position); // periodically notify where in the video we are. Could be used to update scale bars, not needed.
 	void handleSeekableChanged(bool seekable);
 	#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	void handleStateChanged(QMediaPlayer::PlaybackState state);
+	void handleBufferProgressChanged(float filled);
+	void handleErrorMsg(QMediaPlayer::Error error, const QString &errorString);
+	void handleSourceChanged(const QUrl &media);
 	#else
 	void handleStateChanged(QMediaPlayer::State state);
+	void handleBufferStatusChanged(int percentFilled);
+	void handleError(QMediaPlayer::Error error);
 	#endif
 	void handleVideoAvailableChanged(bool videoAvailable);
 	void handleVolumeChanged(int volume);
 
 	// Slots to handle QMediaPlayer change signals inherited from QMediaObject:
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+	//! Deal with changes as metadata become available. (Implementation differs for Qt5/Qt6)
+	void handleMetaDataChanged();
+	#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	void handleAvailabilityChanged(bool available);
 	void handleAvailabilityChanged(QMultimedia::AvailabilityStatus availability);
-	//! @note This one works, while handleMetaDataChanged(key, value) is not called on Windows (QTBUG-42034)
-	void handleMetaDataChanged();
-#endif
-	// This signal is not triggered on Windows, we must work around using handleMetaDataChanged()
+	// This signal is not triggered on Windows (QTBUG-42034), we must work around using handleMetaDataChanged()
 	//void handleMetaDataChanged(const QString & key, const QVariant & value);
+	#endif
 #endif
 
 
@@ -252,6 +257,9 @@ private:
 		//QVideoWidget *widget; // would be easiest, but only with QtQuick2...
 		QGraphicsVideoItem *videoItem;
 		QMediaPlayer *player;
+		#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		QAudioOutput *audioOutput;
+		#endif
 		qint64 duration;           //!< duration of video. This becomes available only after loading or at begin of playing! (?)
 		QSize resolution;          //!< stores resolution of video. This becomes available only after loading or at begin of playing, so we must apply a trick with signals and slots to set it.
 		bool keepVisible;          //!< true if you want to show the last frame after video has played. (Due to delays in signal/slot handling of mediaplayer status changes, we use update() to stop a few frames before end.)
