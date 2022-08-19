@@ -762,7 +762,7 @@ public slots:
 	//! Set the alpha value of a video when visible.
 	//! @param id the identifier used when loadVideo() was called
 	//! @param alpha the new alpha value to set.
-	//! @bug With Qt5/V0.13+, @param alpha does not work properly, only @param alpha=0 makes it invisible.
+	//! @bug With Qt5, @param alpha does not work properly, only @param alpha=0 makes it invisible.
 	void setVideoAlpha(const QString& id, float alpha);
 
 	//! Resize the video widget to the specified width, height.

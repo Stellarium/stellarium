@@ -41,7 +41,7 @@ StelVideoMgr::StelVideoMgr() : StelModule()
 	setObjectName("StelVideoMgr");
 #ifdef ENABLE_MEDIA
 	// in case the property has not been set, getProperty() returns invalid.
-	verbose= true ; //(qApp->property("verbose") == true); // FIXME: Undo
+	verbose= (qApp->property("verbose") == true);
 	#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 	QMediaFormat fmt=QMediaFormat();
 	if (verbose)
@@ -518,7 +518,7 @@ void StelVideoMgr::resizeVideo(const QString& id, float w, float h)
 
 			QSize videoSize=videoObjects[id]->resolution;
 			if (verbose)
-				qDebug() << "resizeVideo(): native resolution=" << videoSize;
+				qDebug() << "resizeVideo(): old resolution=" << videoSize;
 
 			if (!videoSize.isValid() && (w==-1 || h==-1))
 			{
@@ -650,7 +650,7 @@ void StelVideoMgr::setVideoVolume(const QString& id, int newVolume)
 		if (videoObjects[id]->player!=Q_NULLPTR)
 		{
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-			videoObjects[id]->player->audioOutput()->setVolume(newVolume);
+			videoObjects[id]->player->audioOutput()->setVolume(qBound(0,newVolume,100)/100.);
 #else
 			videoObjects[id]->player->setVolume(newVolume);
 #endif
@@ -667,7 +667,7 @@ int StelVideoMgr::getVideoVolume(const QString& id) const
 		if (videoObjects[id]->player!=Q_NULLPTR)
 		{
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-			volume=videoObjects[id]->player->audioOutput()->volume();
+			volume=int(videoObjects[id]->player->audioOutput()->volume()*100.);
 #else
 			volume=videoObjects[id]->player->volume();
 #endif
@@ -824,32 +824,29 @@ void StelVideoMgr::handleVolumeChanged(int volume)
 void StelVideoMgr::handleMetaDataChanged()
 {
 	QString id=QObject::sender()->property("Stel_id").toString();
-	//if (verbose)
+	if (verbose)
 		qDebug() << "StelVideoMgr: " << id << ":  Metadata changed (global notification).";
 
-	if (videoObjects.contains(id)) //&& videoObjects[id]->player->isMetaDataAvailable())
+	if (videoObjects.contains(id))
 	{
 		const QMediaMetaData metaData=videoObjects[id]->player->metaData();
 
-		//if (verbose)
+		if (verbose)
 			qDebug() << "StelVideoMgr: " << id << ":  Following metadata are available:";
-		//const QStringList metadataList=videoObjects[id]->player->availableMetaData();
 		for (const auto& mdKey : metaData.keys())
 		{
 			QString key = metaData.stringValue(mdKey);
-			//if (verbose)
+			if (verbose)
 				qDebug() << "\t" << mdKey << "==>" << key;
 
-			if ((key=="Resolution")) // && !(videoObjects[id]->resolution.isValid()))
+			if ((key=="Resolution"))
 			{
-				//if (verbose)
+				if (verbose)
 					qDebug() << "StelVideoMgr: Resolution becomes available: " << metaData.stringValue(mdKey);
 				videoObjects[id]->resolution=metaData.value(mdKey).toSize();
 			}
 		}
 	}
-	//else if (videoObjects.contains(id) && !(videoObjects[id]->player->isMetaDataAvailable()) &&verbose)
-	//	qDebug() << "StelVideoMgr::handleMetaDataChanged()" << id << ": no metadata now.";
 	else
 		qDebug() << "StelVideoMgr::handleMetaDataChanged()" << id << ": no such video - this is absurd.";
 }
@@ -917,32 +914,6 @@ void StelVideoMgr::handleMetaDataChanged()
 }
 #endif
 
-
-
-/*
-// Either this signal or metadataChanged() must be evaluated. On Linux, both are fired, on Windows only the (void) version.
-// I (GZ) cannot say which may work on MacOSX, but will disable this for now, the required data handling is done in handleMetaDataChanged(void).
-void StelVideoMgr::handleMetaDataChanged(const QString & key, const QVariant & value)
-{
-    qDebug() << "!!! StelVideoMgr::handleMetadataChanged(.,.): Is this called on Windows when built with MSVC? ";  // NOT WITH MinGW and Qt5.4!!!
-    qDebug() << "THIS IS TO ENSURE YOU SEE A CRASH! (If you see it, be happy!) CURRENTLY THE SIGNAL IS NOT SENT ON WINDOWS WHEN BUILT WITH minGW Qt5.4 and not with MSVC on Qt5.3.2";
-    Q_ASSERT(0); // Remove the Q_ASSERT and write a comment that it works on (which) Windows/Mac/...!
-    QString id=QObject::sender()->property("Stel_id").toString();
-    qDebug() << "StelVideoMgr: " << id << ":  Metadata change:" << key << "=>" << value;
-    if (key=="Resolution")
-    {
-        qDebug() << "hah, resolution becomes available!";
-        if (videoObjects.contains(id))
-        {
-            videoObjects[id]->resolution=value.toSize();
-            videoObjects[id]->videoItem->setSize(videoObjects[id]->resolution);
-        }
-	else qDebug() << "StelVideoMgr::handleMetaDataChanged(.,.)" << id << ": no such video - this is absurd.";
-    }
-}
-*/
-
-
 // update() has only to deal with the faders in all videos, and (re)set positions and sizes of video windows.
 void StelVideoMgr::update(double deltaTime)
 {
@@ -982,9 +953,6 @@ void StelVideoMgr::update(double deltaTime)
 			default:
 				break;
 		}
-
-//		if (verbose)
-//			qDebug() << "update() Still alive";
 
 		// First fix targetFrameSize if needed and possible.
 		if ((*voIter)->needResize && ((*voIter)->resolution.isValid()))

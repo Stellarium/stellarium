@@ -40,11 +40,11 @@
 class QGraphicsVideoItem;
 
 //! @class StelVideoMgr
-//! A scriptable way to show videos embedded in the screen.
-//! After experimental support with Qt4/Phonon library, this feature is back.
+//! StelVideoMgr provides a scriptable way to show videos embedded in the screen.
+//! After experimental support with Qt4/Phonon library, this feature is available with native classes from Qt5 and Qt6. The latter seems much better.
 //! Videos can be scaled, paused, placed and relocated (shifted) on screen.
-//! Setting opacity seems not to do much unless setting it to zero, the video is then simply invisible.
-//! Therefore smooth fading in/out or setting a semitransparent overlay does not work, but there is now an intro/end animation available:
+//! Setting opacity seems not to do much in Qt5 unless setting it to zero, the video is then simply invisible. On Qt6 it mixes nicely.
+//! Therefore smooth fading in/out has not yet been developed or setting a semitransparent overlay does not work, but there is now an intro/end animation available:
 //! zooming out from a pixel position to a player frame position, and returning to that spot close to end of video playback.
 //!
 //! However, support for multimedia content depends on the operating system, installed codecs, and completeness of the QtMultimedia system support,
@@ -62,9 +62,18 @@ class QGraphicsVideoItem;
 //! <li>Some type of AVI failed</li>
 //! </ul>
 //!
+//! In 2022 and with Qt6 (https://doc.qt.io/qt-6/videooverview.html) Qt requires:
+//! <ul>
+//! <li>gstreamer1.0-plugins-base</li>
+//! <li>gstreamer1.0-plugins-good</li>
+//! <li>gstreamer1.0-pulseaudio</li>
+//! <li>For a Linux desktop target, it is strongly recommended to have gstreamer1.0-libav for good codec coverage and gstreamer1.0-vaapi to get hardware acceleration.</li>
+//! </ul>
+//!
 //! <h2>Windows notes</h2>
+//! <h3>Qt5</h3>
 //! According to https://wiki.qt.io/Qt_Multimedia, MinGW is limited to the decaying DirectShow platform plugin.
-//! The WMF platform plugin requires Visual Studio, so building with MSVC should provide better result.
+//! The WMF platform plugin requires Visual Studio, so building with MSVC should provide better results.
 //! Some signals are not triggered under Windows, so we cannot use them, globally.
 //! There is partial success with MP4 files on MinGW, but also these are rendered badly. Often just shows an error on Windows/MinGW:
 //! DirectShowPlayerService::doRender: Unresolved error code 80040154
@@ -78,7 +87,10 @@ class QGraphicsVideoItem;
 //! <li>WEBM (invalid media) </li>
 //! </ul>
 //!
-//! Update 2022: Seems to work with Qt5.12 and later. Does not show frame on Qt5.9.
+//! Update 2022: Seems to work with Qt5.12 and later. Does not show frame on Qt5.9. It also does not work in WSL/Ubuntu 20.04LTS/Qt5.12
+//!
+//! <h3>Qt6</h3>
+//! Qt's API has changed, but much to the better. It finally seems to work as advertised. Even alpha transparency of the frame works.
 //!
 //! <h2>Mac OS X Notes</h2>
 //! NOT TESTED ON A MAC! There was a critical difference (causing a crash with Qt5.4!) between Win and Linux to either hide or not hide the player just after loading.
@@ -88,7 +100,7 @@ class QGraphicsVideoItem;
 //! This means, configuring player frames either require absolute frame coordinates, or triggering necessary configuration steps only after replay has started.
 //! We opted for the latter solution because it allows scaled but undistorted video frames which may also take current screen resolution into account.
 //!
-//! Under unclear circumstances we also have a pair of messages:
+//! @bug Under unclear circumstances we also have a pair of messages:
 //! @code
 //! Failed to start video surface due to main thread blocked.
 //! Failed to start video surface
@@ -208,7 +220,7 @@ public slots:
 
 #ifdef ENABLE_MEDIA
 private slots:
-	// Slots to handle QMediaPlayer signals. Never call them yourself!
+	// Slots to handle connected QMediaPlayer signals. Never call them yourself!
 	// Some of them are useful to understand media handling and to get to crucial information like native resolution and duration during loading of media.
 	// Most only give simple debug output...
 	void handleAudioAvailableChanged(bool available);
@@ -236,8 +248,6 @@ private slots:
 	#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	void handleAvailabilityChanged(bool available);
 	void handleAvailabilityChanged(QMultimedia::AvailabilityStatus availability);
-	// This signal is not triggered on Windows (QTBUG-42034), we must work around using handleMetaDataChanged()
-	//void handleMetaDataChanged(const QString & key, const QVariant & value);
 	#endif
 #endif
 
