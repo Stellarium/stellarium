@@ -1365,7 +1365,7 @@ void StelMainView::deinit()
 // Update the translated title
 void StelMainView::initTitleI18n()
 {
-	QString appNameI18n = q_("Stellarium %1").arg(StelUtils::getApplicationVersion());
+	QString appNameI18n = q_("Stellarium %1").arg(StelUtils::getApplicationPublicVersion());
 	setWindowTitle(appNameI18n);
 }
 
