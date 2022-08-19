@@ -93,8 +93,7 @@ class QGraphicsVideoItem;
 //! Qt's API has changed, but much to the better. It finally seems to work as advertised. Even alpha transparency of the frame works.
 //!
 //! <h2>Mac OS X Notes</h2>
-//! NOT TESTED ON A MAC! There was a critical difference (causing a crash with Qt5.4!) between Win and Linux to either hide or not hide the player just after loading.
-//! Please somebody find out Mac behaviour.
+//! Observations on macOS12.5: Works with Qt6, does not work with Qt5.
 //!
 //! QtMultimedia is a bit tricky to use: There seems to be no way to load a media file to analyze resolution or duration before starting its replay.
 //! This means, configuring player frames either require absolute frame coordinates, or triggering necessary configuration steps only after replay has started.

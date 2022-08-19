@@ -220,12 +220,8 @@ void StelVideoMgr::playVideo(const QString& id, const bool keepVisibleAtEnd)
 			{
 				videoObjects[id]->player->stop();
 			}
-//#ifndef Q_OS_WIN
-			// On Linux, we may have made movie frame invisible during loadVideo().
-			videoObjects[id]->videoItem->setVisible(true);
-//#endif
-
 			// otherwise just play it, or resume playing paused video.
+			videoObjects[id]->videoItem->setVisible(true);
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 			if (videoObjects[id]->player->playbackState() == QMediaPlayer::PausedState)
 #else
