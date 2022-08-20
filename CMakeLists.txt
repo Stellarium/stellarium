@@ -331,15 +331,6 @@ IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
      IF(APPLE)
           SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra -Wno-unknown-warning-option")
-          # macOS architectures: x86_64 or arm64 (default: current system's processor architecture)
-          IF(NOT CMAKE_OSX_ARCHITECTURES)
-	       IF(${QT_VERSION_MAJOR} EQUAL 6)
-		    # Qt6: by default - universal binary + minimal operating system is macOS Big Sur
-		    SET(CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE STRING "macOS architectures" FORCE)
-	       ELSE()
-		    SET(CMAKE_OSX_ARCHITECTURES "${CMAKE_HOST_SYSTEM_PROCESSOR}" CACHE STRING "macOS architectures" FORCE)
-	       ENDIF()
-          ENDIF()
      ENDIF()
 ENDIF()
 
@@ -858,6 +849,22 @@ IF(APPLE)
 	  MESSAGE(STATUS "Found macdeployqt: ${MACDEPLOYQT_COMMAND}")
      ELSE()
 	  MESSAGE(STATUS "Could NOT find macdeployqt")
+     ENDIF()
+
+     # macOS architectures: x86_64 or arm64
+     IF(NOT CMAKE_OSX_ARCHITECTURES)
+	  # find utilite 'lipo'
+	  FIND_PROGRAM(LIPO_COMMAND lipo)
+	  IF(LIPO_COMMAND)
+	       MESSAGE(STATUS "Found lipo: ${LIPO_COMMAND}")
+	       # get architecture of Qt framework
+	       EXECUTE_PROCESS(COMMAND ${LIPO_COMMAND} -archs ${QMAKE_LOCATION} TIMEOUT 30 OUTPUT_VARIABLE QT_ARCHS OUTPUT_STRIP_TRAILING_WHITESPACE)
+	       STRING(REPLACE " " ";" QT_ARCHS ${QT_ARCHS})
+	       SET(CMAKE_OSX_ARCHITECTURES "${QT_ARCHS}" CACHE STRING "macOS architectures" FORCE)
+	  ELSE()
+	       # current system's processor architecture
+	       SET(CMAKE_OSX_ARCHITECTURES "${CMAKE_HOST_SYSTEM_PROCESSOR}" CACHE STRING "macOS architectures" FORCE)
+	  ENDIF()
      ENDIF()
 
      IF(NOT CMAKE_OSX_DEPLOYMENT_TARGET)
