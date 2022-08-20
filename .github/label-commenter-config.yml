@@ -24,10 +24,10 @@ labels:
     labeled:
       issue:
         body: This report is outdated, such, the problematic code replaced by new tool or feature...
-        action: stale
+        action: close
       pr:
         body: This pull request is outdated, such, the problematic code replaced by new tool or feature...
-        action: stale
+        action: close
     unlabeled:
       issue:
         body: Oops... Sorry for mistake @{{ issue.user.login }}
@@ -36,7 +36,7 @@ labels:
     labeled:
       issue:
         body: This issue already exists.
-        action: duplicate
+        action: close
   - name: good first issue
     labeled:
       issue:
@@ -69,7 +69,7 @@ labels:
         body: |
           We have a strong reason not to do it! Some reasons for it in the FAQ:
           https://github.com/Stellarium/stellarium/wiki/FAQ#Why_dont_you_implement
-        action: won't fix
+        action: close
     unlabeled:
       issue:
         body: Hello @{{ issue.user.login }}! This has become active again.
