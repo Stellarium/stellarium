@@ -1093,6 +1093,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			// For aiming at objects, we can assume simple up vector.
 			move.startUp=getViewUpVectorJ2000();
 			move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.));
+			move.aimUpCopy=move.aimUp;
 		}
 		else // no targetObject:
 		{
@@ -1103,6 +1104,8 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 //			}
 //			else
 //			{ // March 2016
+			// 2022: NOOO We must not change UP vectors!
+			// Oh yes we must, else the movement immediately jumps to target azimuth
 				move.startUp=getViewUpVectorJ2000();
 				move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.));
 //			}
@@ -1112,9 +1115,16 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		setViewUpVectorJ2000(move.aimUp);
 		if (move.coef>=1.f)
 		{
-			//qDebug() << "AutoMove finished. Setting Up vector (in mount frame) to " << upVectorMountFrame.v[0] << "/" << upVectorMountFrame.v[1] << "/" << upVectorMountFrame.v[2];
+			qDebug() << "AutoMove finished. Setting Up vector (in mount frame) to " << upVectorMountFrame.v[0] << "/" << upVectorMountFrame.v[1] << "/" << upVectorMountFrame.v[2];
 			flagAutoMove=false;
 			move.coef=1.f;
+
+			if (qFuzzyCompare(fabs(upVectorMountFrame.v[2]), 1.))
+			{
+				qDebug() << "View towards the pole of the mount frame. This would cause black screen or orientation jitter.";
+				qDebug() << "Recreating up vector from stored copy.";
+				setViewUpVectorJ2000(mountFrameToJ2000(move.aimUpCopy));
+			}
 		}
 
 		// Use a smooth function
@@ -1358,6 +1368,7 @@ void StelMovementMgr::moveToJ2000(const Vec3d& aim, const Vec3d& aimUp, float mo
 	move.aim*=2.;
 	move.aimUp=aimUp; // the new up vector. We cannot simply keep vertical axis, there may be the intention to look into the zenith or so.
 	move.aimUp.normalize();
+	move.aimUpCopy=move.aimUp;
 	move.start=viewDirectionJ2000;	
 	move.start.normalize();
 	move.startUp=getViewUpVectorJ2000();
@@ -1378,6 +1389,7 @@ void StelMovementMgr::moveToObject(const StelObjectP& target, float moveDuration
 	move.aim=Vec3d(0.);
 	move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.)); // the new up vector. We try simply vertical axis here. (Should be same as pre-0.15)
 	move.aimUp.normalize();
+	move.aimUpCopy=move.aimUp;
 	move.start=viewDirectionJ2000;
 	move.start.normalize();
 	move.startUp=getViewUpVectorJ2000();
@@ -1408,9 +1420,10 @@ void StelMovementMgr::moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float m
 	move.aim*=2.;
 	move.aimUp=aimUp; // the new up vector. We cannot simply keep vertical axis, there may be the intention to look into the zenith or so.
 	move.aimUp.normalize();
+	move.aimUpCopy=move.aimUp;
 	move.start=core->j2000ToAltAz(viewDirectionJ2000, StelCore::RefractionOff);
 	move.start.normalize();
-	move.startUp.set(0., 0., 1.);
+	move.startUp=aimUp; // .set(0., 0., 1.); // we must put this to the target up vector immediately.
 	move.speed=1.f/(moveDuration*1000);
 	move.coef=0.;
 	move.targetObject.clear();
