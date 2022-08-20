@@ -35,7 +35,6 @@ IF(Qt6_FOUND)
 ELSE()
      SET(STELLARIUM_MAJOR 0)
 ENDIF()
-
 # Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MINOR 22)
 SET(STELLARIUM_PATCH 2)
@@ -45,8 +44,12 @@ ADD_DEFINITIONS(
      -DSTELLARIUM_PATCH=${STELLARIUM_PATCH}
 )
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
-# Public version: YY.V
-SET(STELLARIUM_PUBLIC_VERSION "${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
+# Public version has format YY.V, where:
+# -- YY - two last digits of the year of release
+# -- V  - version of the release
+# Example: first release in year 2023 has version 1.23.0 and public version 23.1
+MATH(EXPR STELLARIUM_V "${STELLARIUM_PATCH} + 1" OUTPUT_FORMAT DECIMAL)
+SET(STELLARIUM_PUBLIC_VERSION "${STELLARIUM_MINOR}.${STELLARIUM_V}")
 SET(PACKAGE stellarium)
 STRING(TIMESTAMP CURRENTYEAR "%Y")
 SET(COPYRIGHT_YEARS "2000-${CURRENTYEAR}")
@@ -841,7 +844,7 @@ IF(GENERATE_PACKAGE_TARGET)
      INCLUDE(CPack)
 ENDIF()
 
-########### OS X Bundling ###############
+########### macOS Bundling ###############
 IF(APPLE)
      GET_FILENAME_COMPONENT(_qt_bin_dir "${QMAKE_LOCATION}" DIRECTORY)
      FIND_PROGRAM(MACDEPLOYQT_COMMAND macdeployqt HINTS "${_qt_bin_dir}")
