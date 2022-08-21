@@ -313,7 +313,9 @@ void StelMovementMgr::setFlagLockEquPos(bool b)
 
 void StelMovementMgr::setViewUpVectorJ2000(const Vec3d& up)
 {
-	//qDebug() << "setViewUpvectorJ2000()";
+	//qDebug() << "setViewUpvectorJ2000(): setting upVectorMountFrame to " << j2000ToMountFrame(up);
+	StelObjectMgr *omgr=GETSTELMODULE(StelObjectMgr);
+	//omgr->setExtraInfoString(StelObject::DebugAid, QString("setViewUpvectorJ2000(): setting upVectorMountFrame to ").append(j2000ToMountFrame(up).toString()));
 	upVectorMountFrame = j2000ToMountFrame(up);
 }
 
@@ -321,7 +323,7 @@ void StelMovementMgr::setViewUpVectorJ2000(const Vec3d& up)
 // We have a problem if alt=+/-90degrees: view and up angles are ill-defined (actually, angle between them=0 and therefore we saw shaky rounding effects), therefore Bug LP:1068529
 void StelMovementMgr::setViewUpVector(const Vec3d& up)
 {
-	//qDebug() << "setViewUpvector()";
+	//qDebug() << "setViewUpvector(): setting upVectorMountFrame to " << up;
 	upVectorMountFrame = up;
 }
 
@@ -1115,14 +1117,14 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		setViewUpVectorJ2000(move.aimUp);
 		if (move.coef>=1.f)
 		{
-			qDebug() << "AutoMove finished. Setting Up vector (in mount frame) to " << upVectorMountFrame.v[0] << "/" << upVectorMountFrame.v[1] << "/" << upVectorMountFrame.v[2];
+			//qDebug() << "AutoMove finished. Setting Up vector (in mount frame) to " << upVectorMountFrame.v[0] << "/" << upVectorMountFrame.v[1] << "/" << upVectorMountFrame.v[2];
 			flagAutoMove=false;
 			move.coef=1.f;
 
 			if (qFuzzyCompare(fabs(upVectorMountFrame.v[2]), 1.))
 			{
-				qDebug() << "View towards the pole of the mount frame. This would cause black screen or orientation jitter.";
-				qDebug() << "Recreating up vector from stored copy.";
+				//qDebug() << "View towards the pole of the mount frame. This would cause black screen or orientation jitter.";
+				//qDebug() << "Recreating up vector from stored copy." << move.aimUpCopy << " - transformed to " << mountFrameToJ2000(move.aimUpCopy);
 				setViewUpVectorJ2000(mountFrameToJ2000(move.aimUpCopy));
 			}
 		}
@@ -1423,6 +1425,37 @@ void StelMovementMgr::moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float m
 	move.aimUpCopy=move.aimUp;
 	move.start=core->j2000ToAltAz(viewDirectionJ2000, StelCore::RefractionOff);
 	move.start.normalize();
+	//qDebug() << "move.start=" << move.start;
+
+	// In the rare case that we currently sit in the zenith, the current up vector cannot be 0/0/1.
+	// The only way to come here would have been a previously programmed moveToAltAzi(zenith), and optional move around zenith/nadir by left/right keys.
+	// We decode view azimuth from the current up vector and set our move.start direction to the same azimuth, just off the zenith/nadir.
+	Vec3d currentUp=upVectorMountFrame; // j2000ToMountFrame(getViewUpVectorJ2000());
+	if (fabs(currentUp[2]) < 1.e-12)
+	{
+		//qDebug() << "Start a programmed move out of the zenith! Decode azimuth from the up vector." << currentUp;
+		// CurrentUp reported as -1/0/0 when looking towards zenith/south
+		double az=StelUtils::fmodpos(-atan2(currentUp[1], currentUp[0]), 2.*M_PI); // or some permutation! 0/1 seems wrong.
+		double alt=acos(qBound(-1.,currentUp[2],1.)); // Ambiguous - One of the poles! We still need info from the view vector.
+		Vec3d currentAim=core->j2000ToAltAz(viewDirectionJ2000, StelCore::RefractionOff);
+		//qDebug() << "current pre-move view vector is" << currentAim;
+		if (currentAim[2]<0)
+		{
+			alt*=-1;
+			az+=M_PI;
+		}
+		//qDebug() << "current pre-move view decoded as az=" << az*M_180_PI << " alt=" << alt*M_180_PI;
+		// Compare with current view direction. Take this (presumably looking into 0/0/1 or 0/0/-1), reduce by 1e-4 degrees
+		// TODO: reduce altitude, build new view vector, set move.start.
+		Vec3d safeAltAz;
+		alt-=1e-2*M_PI_180*StelUtils::sign(alt);
+		StelUtils::spheToRect(M_PI-az, alt, safeAltAz);
+		//qDebug() << "pre-move view vector reduced to az=" << az*M_180_PI << "alt=" << alt*M_180_PI << "-->" << safeAltAz;
+		move.start=safeAltAz; //core->altAzToJ2000(safeAltAz, StelCore::RefractionOff);
+		viewDirectionJ2000=core->altAzToJ2000(move.start, StelCore::RefractionOff);
+		upVectorMountFrame.set(0,0,1);
+
+	}
 	move.startUp=aimUp; // .set(0., 0., 1.); // we must put this to the target up vector immediately.
 	move.speed=1.f/(moveDuration*1000);
 	move.coef=0.;
