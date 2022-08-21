@@ -299,7 +299,7 @@ public slots:
 	//! Set the radius of the big halo texture used when a 3d model is very bright.
 	void setBig3dModelHaloRadius(float r) {big3dModelHaloRadius=r;}
 
-	// GZ These are to find out the best sky parameters. Maybe keep this as program feature for debugging/expert mode?
+	// These are to find out the best sky parameters. Program feature for debugging/expert mode.
 	// These will be connected from AtmosphereDialog and forward the settings to SkyLight class.
 
 	void setFlagDrawSunAfterAtmosphere(bool val){
@@ -328,7 +328,7 @@ public slots:
 		emit flagTfromKChanged(val);
 		}
 
-		double getT(void) const {return static_cast<double>(turbidity);}
+	double getT(void) const {return static_cast<double>(turbidity);}
 	void setT(double newT){
 	    turbidity=static_cast<float>(newT);
 		QSettings* conf = StelApp::getInstance().getSettings();
@@ -375,7 +375,6 @@ signals:
 	void atmosphereTemperatureChanged(double celsius);
 	void atmospherePressureChanged(double mbar);
 
-	// GZ atmosphere tweaks
 	void flagTfromKChanged(bool b);
 	void flagDrawSunAfterAtmosphereChanged(bool b);
 	void flagEarlySunHaloChanged(bool b);
@@ -546,8 +545,7 @@ private:
 	double daylightLabelThreshold;
 
 	float big3dModelHaloRadius;
-	// Settings for Atmospheric tweaks:
-	bool flagDrawSunAfterAtmosphere;
+	bool flagDrawSunAfterAtmosphere; // Overdraw to avoid color mixing. Useful to allow deep-red suns, but may also look ugly.
 	bool flagEarlySunHalo; // Used to select if solar halo is plotted before (true) or after (default, false) the 3D sphere.
 	bool flagTfromK; // true to compute T from extinction k
 	float turbidity; // atmospheric turbidity: Preetham sky usable for 2<T<6, best at T=5.

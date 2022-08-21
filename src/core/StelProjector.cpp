@@ -21,7 +21,6 @@
 #include "StelTranslator.hpp"
 
 #include "StelProjector.hpp"
-#include "StelProjectorClasses.hpp"
 
 #include <QDebug>
 #include <QString>

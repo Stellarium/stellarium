@@ -59,8 +59,6 @@
 
 void StelScriptMgr::defVecClasses(QJSEngine *engine)
 {
-	qDebug() << "defVecClasses() not yet complete";
-
 	qRegisterMetaType<V3d>();
 	QMetaType::registerConverter<V3d,QString>(&V3d::toString);
 	QMetaType::registerConverter<V3d, Vec3d>(&V3d::toVec3d);

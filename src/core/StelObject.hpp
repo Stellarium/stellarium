@@ -21,6 +21,7 @@
 #define STELOBJECT_HPP
 
 #include "VecMath.hpp"
+// Ignore clangd warning! Inclusion is OK.
 #include "StelObjectType.hpp"
 #include "StelRegionObject.hpp"
 

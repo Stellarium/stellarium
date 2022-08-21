@@ -22,7 +22,7 @@
 #include <QObject>
 #include <QMap>
 #include <QString>
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0)) && defined(ENABLE_MEDIA)
 #include <QAudioOutput>
 #endif
 
@@ -57,7 +57,7 @@ public slots:
 
 private:
 	QMap<QString, QMediaPlayer*> audioObjects;
-#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0)) && defined(ENABLE_MEDIA)
 	QAudioOutput *audioOutput;
 #endif
 };

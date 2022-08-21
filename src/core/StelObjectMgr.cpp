@@ -21,17 +21,12 @@
 #include "StelApp.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelObjectModule.hpp"
-#include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 #include "StelProjector.hpp"
 #include "StelMovementMgr.hpp"
-#include "RefractionExtinction.hpp"
 #include "StelSkyDrawer.hpp"
-#include "StelTranslator.hpp"
-#include "StelActionMgr.hpp"
 #include "Planet.hpp"
-#include "SolarSystem.hpp"
 
 #include <QMouseEvent>
 #include <QString>
