@@ -307,7 +307,7 @@ IF(WIN32)
           # Avoid type conflict with C++17 standard
           # SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /D_HAS_STD_BYTE=0") # Don't do this in Qt6. Just avoid "using namespace std" anywhere! https://developercommunity.visualstudio.com/t/error-c2872-byte-ambiguous-symbol/93889
           # Set multiprocessing and minimal version of Windows
-          SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /MP /D_WIN32_WINNT=${MIN_WIN_VERSION}")
+	  SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /MP /D_WIN32_WINNT=${MIN_WIN_VERSION} /GL")
 
           FOREACH(flag_var
                CMAKE_EXE_LINKER_FLAGS_DEBUG CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO
