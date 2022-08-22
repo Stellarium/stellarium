@@ -1022,14 +1022,15 @@ void TestCalendars::testMesoamerican()
 		 qPrintable(QString("fixedFromJD %1 vs fixedFromJulian %2")
 			    .arg(Calendar::fixedFromJD(584282.5, false))
 			    .arg(JulianCalendar::fixedFromJulian({-3114, 9, 6}))  ));
-	int mlc0 = MayaLongCountCalendar::fixedFromMayanLongCount({0, 0, 0, 0, 0});
+	const int mlc0 = MayaLongCountCalendar::fixedFromMayanLongCount({0, 0, 0, 0, 0});
 	QVERIFY2(mlc0 == GregorianCalendar::fixedFromGregorian({-3113, 8, 11}),
 		 qPrintable(QString("MayaLongCount{0, 0, 0, 0, 0}=%1 vs fixedFromGregorian{-3113,8,11}=%2")
 			    .arg(mlc0)
 			    .arg(GregorianCalendar::fixedFromGregorian({-3113, 8, 11}))  ));
 	QVERIFY2(MayaLongCountCalendar::fixedFromMayanLongCount({7, 17, 18, 13, 2}) == 0,
 		 qPrintable(QString("MayaLongCount %1 vs R.D. 0 = %2").arg("{7, 17, 18, 13, 2}").arg(0)  ));
-	QVERIFY(MayaHaabCalendar::mayanHaabFromFixed(mlc0) == QVector<int>({18, 8}));
+	//QVERIFY(MayaHaabCalendar::mayanHaabFromFixed(mlc0) == QVector<int>({18, 8}));
+	QVERIFY(MayaHaabCalendar::mayanHaabFromFixed(MayaLongCountCalendar::fixedFromMayanLongCount({0, 0, 0, 0, 0})) == QVector<int>({18, 8}));
 	QVERIFY(MayaTzolkinCalendar::mayanTzolkinFromFixed(mlc0) == QVector<int>({4, 20}));
 	QVERIFY2(AztecXihuitlCalendar::aztecCorrelation==555403,
 		 qPrintable(QString("aztecCorrelation %1 vs %2")
