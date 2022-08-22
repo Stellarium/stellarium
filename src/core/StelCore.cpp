@@ -1332,6 +1332,7 @@ double StelCore::getUTCOffset(const double JD) const
 		if (tzName=="LTST")
 			shiftInSeconds += qRound(getSolutionEquationOfTime()*60);
 	}
+	//qDebug() << "ShiftInSeconds:" << shiftInSeconds;
 	#ifdef Q_OS_WIN
 	// A dirty hack for report: https://github.com/Stellarium/stellarium/issues/686
 	// TODO: switch to IANA TZ on all operating systems

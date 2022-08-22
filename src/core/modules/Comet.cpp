@@ -97,7 +97,7 @@ Comet::Comet(const QString& englishName,
 	  dustTailBrightnessFactor(dustTailBrightnessFact),
 	  intensityFovScale(1.0f),
 	  intensityMinFov(0.001f), // when zooming in further, Coma is no longer visible.
-	  intensityMaxFov(0.010f) // when zooming out further, MilkyComa is fully visible (when enabled).
+	  intensityMaxFov(0.010f) // when zooming out further, Coma is fully visible (when enabled).
 {
 	this->outgas_intensity =outgas_intensity;
 	this->outgas_falloff   =outgas_falloff;
