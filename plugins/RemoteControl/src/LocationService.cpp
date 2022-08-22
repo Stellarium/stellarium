@@ -143,7 +143,6 @@ void LocationService::post(const QByteArray& operation, const APIParameters &par
 				QMetaObject::invokeMethod(core, "moveObserverTo", SERVICE_DEFAULT_INVOKETYPE,
 							  Q_ARG(StelLocation, loc),
 							  Q_ARG(double,0.0) );
-
 				response.setData("ok");
 				return;
 			}
@@ -192,6 +191,10 @@ void LocationService::post(const QByteArray& operation, const APIParameters &par
 		{
 			loc.name = name;
 			doneSomething = true;
+		}
+		else if (!parameters.contains("name"))
+		{
+			loc.name=QString("%1, %2").arg(loc.latitude).arg(loc.longitude); // Force a preliminary name
 		}
 		if(!region.isEmpty() && region != loc.region)
 		{
