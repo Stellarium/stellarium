@@ -972,11 +972,64 @@ void StelMovementMgr::lookNadir(void)
 
 void StelMovementMgr::lookTowardsNCP(void)
 {
+	if (mountMode==StelMovementMgr::MountEquinoxEquatorial)
+	{
+		Vec3d viewVector=core->j2000ToEquinoxEqu(getViewDirectionJ2000(), StelCore::RefractionOff);
+		if (qFuzzyCompare(viewVector[2], 1.))
+		{
+			//qDebug() << "Already looking to north pole. Doing nothing.";
+			return;
+		}
+
+		if (qFuzzyCompare(viewVector[2], -1.)) // Stress test! We are looing to the south pole and just want to flip over.
+		{
+			//qDebug() << "Looking to south pole. Invert view and up vectors.";
+			viewDirectionMountFrame[2]*=-1;
+			upVectorMountFrame *= -1;
+			return;
+		}
+
+		//qDebug() << "ViewVector" << viewVector << ", viewDirectionMountFrame" << viewDirectionMountFrame;
+		//qDebug() << "viewUpVectorJ2000" << getViewUpVectorJ2000();
+
+		double RA, dec;
+		StelUtils::rectToSphe(&RA, &dec, viewVector);
+		//qDebug() << "Detected RA" << StelUtils::fmodpos(RA*M_180_PI/15., 24.) << "dec" << dec*M_180_PI;
+		Vec3d safeUp(-viewVector[0], -viewVector[1],0.);
+		safeUp.normalize();
+		setViewUpVector(safeUp);
+	}
 	setViewDirectionJ2000(core->equinoxEquToJ2000(Vec3d(0,0,1), StelCore::RefractionOff));
 }
 
 void StelMovementMgr::lookTowardsSCP(void)
 {
+	if (mountMode==StelMovementMgr::MountEquinoxEquatorial)
+	{
+		Vec3d viewVector=core->j2000ToEquinoxEqu(getViewDirectionJ2000(), StelCore::RefractionOff);
+		if (qFuzzyCompare(viewVector[2], -1.))
+		{
+			//qDebug() << "Already looking to south pole. Doing nothing.";
+			return;
+		}
+		if (qFuzzyCompare(viewVector[2], 1.)) // Stress test! We are looing to the north pole and just want to flip over.
+		{
+			//qDebug() << "Looking to north pole. Invert view and up vectors.";
+			viewDirectionMountFrame[2]*=-1;
+			upVectorMountFrame *= -1;
+			return;
+		}
+
+		//qDebug() << "ViewVector" << viewVector << ", viewDirectionMountFrame" << viewDirectionMountFrame;
+		//qDebug() << "viewUpVectorJ2000" << getViewUpVectorJ2000();
+
+		double RA, dec;
+		StelUtils::rectToSphe(&RA, &dec, viewVector);
+		//qDebug() << "Detected RA" << StelUtils::fmodpos(RA*M_180_PI/15., 24.) << "dec" << dec*M_180_PI;
+		Vec3d safeUp(viewVector[0], viewVector[1],0.);
+		safeUp.normalize();
+		setViewUpVector(safeUp);
+	}
 	setViewDirectionJ2000(core->equinoxEquToJ2000(Vec3d(0,0,-1), StelCore::RefractionOff));
 }
 
