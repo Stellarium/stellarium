@@ -344,7 +344,7 @@ ENDIF()
 
 # This activates Link Time Optimization
 # It's providing a 20% size reduction, and probably a faster code when activated
-IF(MSVC)
+IF(WIN32 AND MSVC)
      SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /GL")
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /GL")
      SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /LTCG")
