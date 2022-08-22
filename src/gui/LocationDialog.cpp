@@ -250,7 +250,12 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 		ui->pushButtonReturnToDefault->setEnabled(!b);
 	}
 
-	setFieldsFromLocation(currentLocation); // also updates map
+	const QString& key1 = currentLocation.getID();
+	const QString& key2 = locationFromFields().getID();
+	if (key1!=key2)
+	{
+		setFieldsFromLocation(currentLocation);
+	}
 }
 
 void LocationDialog::disconnectEditSignals()
@@ -546,6 +551,7 @@ void LocationDialog::setLocationFromMap(double longitude, double latitude)
 	StelLocation loc = locationFromFields();
 	loc.latitude = latitude;
 	loc.longitude = longitude;
+	loc.name= QString("%1, %2").arg(loc.latitude).arg(loc.longitude); // Force a preliminary name
 	setFieldsFromLocation(loc);
 	core->moveObserverTo(loc, 0.);
 	// Only for locations on Earth: set zone to LMST.
