@@ -85,9 +85,9 @@ define(["jquery", "./remotecontrol", "./updatequeue"], function($, rc, UpdateQue
             $(publ).trigger('nameChanged', loc.name);
             lastName = loc.name;
         }
-	if (lastRegion !== loc.region) {
-	    $(publ).trigger('regionChanged', loc.region);
-	    lastRegion= loc.region;
+        if (lastRegion !== loc.region) {
+            $(publ).trigger('regionChanged', loc.region);
+            lastRegion= loc.region;
         }
         if (lastAltitude !== loc.altitude) {
             $(publ).trigger('altitudeChanged', loc.altitude);

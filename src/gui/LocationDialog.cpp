@@ -28,9 +28,7 @@
 #include "StelModuleMgr.hpp"
 #include "SolarSystem.hpp"
 #include "StelFileMgr.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelGui.hpp"
-#include "StelGuiItems.hpp"
 #include "StelSkyCultureMgr.hpp"
 
 #include <QSettings>
@@ -252,12 +250,7 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 		ui->pushButtonReturnToDefault->setEnabled(!b);
 	}
 
-	const QString& key1 = currentLocation.getID();
-	const QString& key2 = locationFromFields().getID();
-	if (key1!=key2)
-	{
-		setFieldsFromLocation(currentLocation);
-	}
+	setFieldsFromLocation(currentLocation); // also updates map
 }
 
 void LocationDialog::disconnectEditSignals()
@@ -345,7 +338,6 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	core->setCurrentTimeZone(tz);
 
 	setMapForLocation(loc);
-	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
 
 	ui->deleteLocationFromListPushButton->setEnabled(StelApp::getInstance().getLocationMgr().canDeleteUserLocation(loc.getID()));
 
@@ -370,38 +362,38 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 void LocationDialog::setMapForLocation(const StelLocation& loc)
 {
 	// Avoids useless processing
-	if (lastPlanet==loc.planetName)
-		return;
-
-	QPixmap pixmap;
-	// Try to set the proper planet map image
-	if (loc.planetName=="Earth")
+	if (lastPlanet!=loc.planetName)
 	{
-		// Special case for earth, we don't want to see the clouds
-		pixmap = QPixmap(":/graphicGui/miscWorldMap.png");
-	}
-	else
-	{
-		SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-		PlanetP p = ssm->searchByEnglishName(loc.planetName);
-		if (p)
+		QPixmap pixmap;
+		// Try to set the proper planet map image
+		if (loc.planetName=="Earth")
 		{
-			QString path = StelFileMgr::findFile("textures/"+p->getTextMapName());
-			if (path.isEmpty())
-			{
-				qWarning() << "ERROR - could not find planet map for " << loc.planetName;
-				return;
-			}
-			pixmap = QPixmap(path);
+			// Special case for earth, we don't want to see the clouds
+			pixmap = QPixmap(":/graphicGui/miscWorldMap.png");
 		}
+		else
+		{
+			SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+			PlanetP p = ssm->searchByEnglishName(loc.planetName);
+			if (p)
+			{
+				QString path = StelFileMgr::findFile("textures/"+p->getTextMapName());
+				if (path.isEmpty())
+				{
+					qWarning() << "ERROR - could not find planet map for " << loc.planetName;
+					return;
+				}
+				pixmap = QPixmap(path);
+			}
+		}
+		StelCore * core = StelApp::getInstance().getCore();
+		pixmap.setDevicePixelRatio(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
+		ui->mapLabel->setPixmap(pixmap);
+		ui->mapLabel->resizePixmap();
+		// For caching
+		lastPlanet = loc.planetName;
 	}
-	StelCore * core = StelApp::getInstance().getCore();
-	pixmap.setDevicePixelRatio(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
-	ui->mapLabel->setPixmap(pixmap);
-	ui->mapLabel->resizePixmap();
 	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
-	// For caching
-	lastPlanet = loc.planetName;
 }
 
 void LocationDialog::populatePlanetList()
