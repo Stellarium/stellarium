@@ -313,7 +313,7 @@ void StelMovementMgr::setFlagLockEquPos(bool b)
 
 void StelMovementMgr::setViewUpVectorJ2000(const Vec3d& up)
 {
-	//qDebug() << "setViewUpvectorJ2000()";
+	//GETSTELMODULE(StelObjectMgr)->setExtraInfoString(StelObject::DebugAid, QString("setViewUpvectorJ2000(): setting upVectorMountFrame to ").append(j2000ToMountFrame(up).toString()));
 	upVectorMountFrame = j2000ToMountFrame(up);
 }
 
@@ -321,7 +321,7 @@ void StelMovementMgr::setViewUpVectorJ2000(const Vec3d& up)
 // We have a problem if alt=+/-90degrees: view and up angles are ill-defined (actually, angle between them=0 and therefore we saw shaky rounding effects), therefore Bug LP:1068529
 void StelMovementMgr::setViewUpVector(const Vec3d& up)
 {
-	//qDebug() << "setViewUpvector()";
+	//qDebug() << "setViewUpvector(): setting upVectorMountFrame to " << up;
 	upVectorMountFrame = up;
 }
 
@@ -970,11 +970,51 @@ void StelMovementMgr::lookNadir(void)
 
 void StelMovementMgr::lookTowardsNCP(void)
 {
+	if (mountMode==StelMovementMgr::MountEquinoxEquatorial)
+	{
+		Vec3d viewVector=core->j2000ToEquinoxEqu(getViewDirectionJ2000(), StelCore::RefractionOff);
+		if (qFuzzyCompare(viewVector[2], 1.)) // Already looking to north pole. Do nothing.
+		{
+			return;
+		}
+		else if (qFuzzyCompare(viewVector[2], -1.)) // Stress test! We are looing to the south pole and just want to flip over.
+		{
+			viewDirectionMountFrame[2]*=-1;
+			upVectorMountFrame *= -1;
+			return;
+		}
+
+		double RA, dec;
+		StelUtils::rectToSphe(&RA, &dec, viewVector);
+		Vec3d safeUp(-viewVector[0], -viewVector[1], 0.);
+		safeUp.normalize();
+		setViewUpVector(safeUp);
+	}
 	setViewDirectionJ2000(core->equinoxEquToJ2000(Vec3d(0,0,1), StelCore::RefractionOff));
 }
 
 void StelMovementMgr::lookTowardsSCP(void)
 {
+	if (mountMode==StelMovementMgr::MountEquinoxEquatorial)
+	{
+		Vec3d viewVector=core->j2000ToEquinoxEqu(getViewDirectionJ2000(), StelCore::RefractionOff);
+		if (qFuzzyCompare(viewVector[2], -1.)) // Already looking to south pole. Do nothing.
+		{
+			return;
+		}
+		else if (qFuzzyCompare(viewVector[2], 1.)) // Stress test! We are looing to the north pole and just want to flip over.
+		{
+			viewDirectionMountFrame[2]*=-1;
+			upVectorMountFrame *= -1;
+			return;
+		}
+
+		double RA, dec;
+		StelUtils::rectToSphe(&RA, &dec, viewVector);
+		Vec3d safeUp(viewVector[0], viewVector[1], 0.);
+		safeUp.normalize();
+		setViewUpVector(safeUp);
+	}
 	setViewDirectionJ2000(core->equinoxEquToJ2000(Vec3d(0,0,-1), StelCore::RefractionOff));
 }
 
@@ -1093,28 +1133,27 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			// For aiming at objects, we can assume simple up vector.
 			move.startUp=getViewUpVectorJ2000();
 			move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.));
+			move.aimUpCopy=move.aimUp;
 		}
 		else // no targetObject:
 		{
-//			if (move.mountMode == MountAltAzimuthal)
-//			{
-//				move.startUp=Vec3d(0., 0., 1.);
-//				move.aimUp=Vec3d(0., 0., 1.);
-//			}
-//			else
-//			{ // March 2016
-				move.startUp=getViewUpVectorJ2000();
-				move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.));
-//			}
+			move.startUp=getViewUpVectorJ2000();
+			move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.));
 		}
 		move.coef+=move.speed*static_cast<float>(deltaTime)*1000;
-		//qDebug() << "updateVisionVector: setViewUpvectorJ2000 L813";
 		setViewUpVectorJ2000(move.aimUp);
 		if (move.coef>=1.f)
 		{
 			//qDebug() << "AutoMove finished. Setting Up vector (in mount frame) to " << upVectorMountFrame.v[0] << "/" << upVectorMountFrame.v[1] << "/" << upVectorMountFrame.v[2];
 			flagAutoMove=false;
 			move.coef=1.f;
+
+			if (qFuzzyCompare(fabs(upVectorMountFrame.v[2]), 1.))
+			{
+				//qDebug() << "View towards the pole of the mount frame. This would cause black screen or orientation jitter.";
+				//qDebug() << "Recreating up vector from stored copy." << move.aimUpCopy << " - transformed to " << mountFrameToJ2000(move.aimUpCopy);
+				setViewUpVectorJ2000(mountFrameToJ2000(move.aimUpCopy));
+			}
 		}
 
 		// Use a smooth function
@@ -1130,7 +1169,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 				c = static_cast<double>(std::atan(smooth * 2.f*move.coef-smooth)/std::atan(smooth)/2+0.5f);
 		}
 
-		// 2016-03: In case of azimuthal moves, it is not useful to compute anything from J2000 coordinates.
+		// In case of azimuthal moves, it is not useful to compute anything from J2000 coordinates.
 		// Imagine a slow AltAz move during speedy timelapse: Aim will move!
 		// TODO: all variants...
 		Vec3d tmpStart;
@@ -1164,18 +1203,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		const double ra_now = ra_aim*c + ra_start*(1.-c);
 		Vec3d tmp;
 		StelUtils::spheToRect(ra_now, de_now, tmp);
-		// now tmp is either Mountframe or AltAz interpolated vector.
-//		if (move.mountMode==MountAltAzimuthal)
-//		{ // Actually, Altaz moves work in Altaz coords only. Maybe we are here?
-//		}
-//		else
-			setViewDirectionJ2000(mountFrameToJ2000(tmp));
-//			if (move.mountMode==MountAltAzimuthal)
-//			{
-//				setViewUpVector(Vec3d(0., 0., 1.));
-//				qDebug() << "We do indeed set this";
-//			}
-		// qDebug() << "setting view direction to " << tmp.v[0] << "/" << tmp.v[1] << "/" << tmp.v[2];
+		setViewDirectionJ2000(mountFrameToJ2000(tmp));
 	}
 	else // no autoMove
 	{
@@ -1209,7 +1237,6 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			StelUtils::spheToRect(lon, lat, v);
 
 			setViewDirectionJ2000(mountFrameToJ2000(v));
-			//qDebug() << "setViewUpVector() L930";
 			setViewUpVectorJ2000(mountFrameToJ2000(Vec3d(0., 0., 1.))); // Does not disturb to reassure this former default.
 		}
 		else // not tracking or no selection
@@ -1226,9 +1253,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 				// After setting time, moveToAltAz broke the up vector without this:
 				// Make sure this does not now break zenith views!
 				// Or make sure to call moveToAltAz twice.
-				//qDebug() << "setUpVectorJ2000 woe L947";
-				//setViewUpVectorJ2000(mountFrameToJ2000(Vec3d(0.,0.,1.)));
-				setViewUpVectorJ2000(mountFrameToJ2000(upVectorMountFrame)); // maybe fixes? / < < < < < < < < < < THIS WAS THE BIG ONE
+				setViewUpVectorJ2000(mountFrameToJ2000(upVectorMountFrame));
 			}
 		}
 	}
@@ -1358,6 +1383,7 @@ void StelMovementMgr::moveToJ2000(const Vec3d& aim, const Vec3d& aimUp, float mo
 	move.aim*=2.;
 	move.aimUp=aimUp; // the new up vector. We cannot simply keep vertical axis, there may be the intention to look into the zenith or so.
 	move.aimUp.normalize();
+	move.aimUpCopy=move.aimUp;
 	move.start=viewDirectionJ2000;	
 	move.start.normalize();
 	move.startUp=getViewUpVectorJ2000();
@@ -1378,6 +1404,7 @@ void StelMovementMgr::moveToObject(const StelObjectP& target, float moveDuration
 	move.aim=Vec3d(0.);
 	move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.)); // the new up vector. We try simply vertical axis here. (Should be same as pre-0.15)
 	move.aimUp.normalize();
+	move.aimUpCopy=move.aimUp;
 	move.start=viewDirectionJ2000;
 	move.start.normalize();
 	move.startUp=getViewUpVectorJ2000();
@@ -1390,7 +1417,7 @@ void StelMovementMgr::moveToObject(const StelObjectP& target, float moveDuration
 	flagAutoMove = true;
 }
 
-// March 2016: This call does nothing when mount frame is not AltAzi! (TODO later: rethink&fix.)
+// This call does nothing when mount frame is not AltAzi! (TODO later: rethink&fix.)
 void StelMovementMgr::moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float moveDuration, ZoomingMode zooming)
 {
 	if (mountMode!=StelMovementMgr::MountAltAzimuthal)
@@ -1408,19 +1435,51 @@ void StelMovementMgr::moveToAltAzi(const Vec3d& aim, const Vec3d &aimUp, float m
 	move.aim*=2.;
 	move.aimUp=aimUp; // the new up vector. We cannot simply keep vertical axis, there may be the intention to look into the zenith or so.
 	move.aimUp.normalize();
+	move.aimUpCopy=move.aimUp;
 	move.start=core->j2000ToAltAz(viewDirectionJ2000, StelCore::RefractionOff);
 	move.start.normalize();
-	move.startUp.set(0., 0., 1.);
+	//qDebug() << "move.start=" << move.start;
+
+	// In the rare case that we currently sit in the zenith, the current up vector cannot be 0/0/1.
+	// The only way to come here would have been a previously programmed moveToAltAzi(zenith), and optional move around zenith/nadir by left/right keys.
+	// We decode view azimuth from the current up vector and set our move.start direction to the same azimuth, just off the zenith/nadir.
+	Vec3d currentUp=upVectorMountFrame; // j2000ToMountFrame(getViewUpVectorJ2000());
+	if (fabs(currentUp[2]) < 1.e-12)
+	{
+		//qDebug() << "Start a programmed move out of the zenith! Decode azimuth from the up vector." << currentUp;
+		// CurrentUp reported as -1/0/0 when looking towards zenith/south
+		double az=StelUtils::fmodpos(-atan2(currentUp[1], currentUp[0]), 2.*M_PI); // or some permutation! 0/1 seems wrong.
+		double alt=acos(qBound(-1.,currentUp[2],1.)); // Ambiguous - One of the poles! We still need info from the view vector.
+		Vec3d currentAim=core->j2000ToAltAz(viewDirectionJ2000, StelCore::RefractionOff);
+		//qDebug() << "current pre-move view vector is" << currentAim;
+		if (currentAim[2]<0)
+		{
+			alt*=-1;
+			az+=M_PI;
+		}
+		//qDebug() << "current pre-move view decoded as az=" << az*M_180_PI << " alt=" << alt*M_180_PI;
+		// Compare with current view direction. Take this (presumably looking into 0/0/1 or 0/0/-1), reduce by 1e-4 degrees
+		// reduce altitude, build new view vector, set move.start.
+		Vec3d safeAltAz;
+		alt-=1e-4*M_PI_180*StelUtils::sign(alt);
+		StelUtils::spheToRect(M_PI-az, alt, safeAltAz);
+		//qDebug() << "pre-move view vector reduced to az=" << az*M_180_PI << "alt=" << alt*M_180_PI << "-->" << safeAltAz;
+		move.start=safeAltAz; //core->altAzToJ2000(safeAltAz, StelCore::RefractionOff);
+		viewDirectionJ2000=core->altAzToJ2000(move.start, StelCore::RefractionOff);
+		upVectorMountFrame.set(0,0,1);
+
+	}
+	move.startUp=aimUp; // we must put this to the target up vector immediately.
 	move.speed=1.f/(moveDuration*1000);
 	move.coef=0.;
 	move.targetObject.clear();
 	move.mountMode=MountAltAzimuthal; // This signals: start and aim are given in AltAz coordinates.
 	flagAutoMove = true;
-	//	// debug output if required
-	//	double currAlt, currAzi, newAlt, newAzi;
-	//	StelUtils::rectToSphe(&currAzi, &currAlt, move.start);
-	//	StelUtils::rectToSphe(&newAzi, &newAlt, move.aim);
-	//	qDebug() << "StelMovementMgr::moveToAltAzi() from alt:" << currAlt*(180./M_PI) << "/azi" << currAzi*(180./M_PI)  << "to alt:" << newAlt*(180./M_PI)  << "azi" << newAzi*(180./M_PI) ;
+	// debug output if required
+	//double currAlt, currAzi, newAlt, newAzi;
+	//StelUtils::rectToSphe(&currAzi, &currAlt, move.start);
+	//StelUtils::rectToSphe(&newAzi, &newAlt, move.aim);
+	//qDebug() << "StelMovementMgr::moveToAltAzi() from alt:" << currAlt*(180./M_PI) << "/azi" << currAzi*(180./M_PI)  << "to alt:" << newAlt*(180./M_PI)  << "azi" << newAzi*(180./M_PI) ;
 }
 
 
@@ -1619,7 +1678,6 @@ void StelMovementMgr::updateAutoZoom(double deltaTime)
 			else
 			{
 				setViewDirectionJ2000(mountFrameToJ2000(v));
-				//qDebug() << "setViewUpVector L1501";
 				setViewUpVectorJ2000(mountFrameToJ2000(vUp));
 			}
 		}
@@ -1697,7 +1755,6 @@ void StelMovementMgr::moveViewport(double offsetX, double offsetY, const float d
 	viewportOffsetTimeline->stop();
 	viewportOffsetTimeline->setDuration(static_cast<int>(1000.f*duration));
 
-	//qDebug() << "moveViewport() started, from " << oldViewportOffset.v[0] << "/" << oldViewportOffset.v[1] << " towards " << offsetX << "/" << offsetY;
 	viewportOffsetTimeline->start();
 }
 
@@ -1707,7 +1764,6 @@ void StelMovementMgr::handleViewportOffsetMovement(qreal value)
 	// value is always 0...1
 	double offsetX=oldViewportOffset.v[0] + (targetViewportOffset.v[0]-oldViewportOffset.v[0])*value;
 	double offsetY=oldViewportOffset.v[1] + (targetViewportOffset.v[1]-oldViewportOffset.v[1])*value;
-	//qDebug() << "handleViewportOffsetMovement(" << value << "): Setting viewport offset to " << offsetX << "/" << offsetY;
 	core->setViewportOffset(offsetX, offsetY);
 }
 
@@ -1724,4 +1780,3 @@ void StelMovementMgr::smoothPan(double deltaX, double deltaY, double ptime, bool
 	else
 		deltaAz = deltaAlt = 0.0;
 }
-
