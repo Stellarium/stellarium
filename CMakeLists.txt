@@ -257,8 +257,8 @@ ADD_DEFINITIONS(-D_USE_MATH_DEFINES)
 
 # flags shared for gcc-like compilers (also MinGW/Clang)
 # Qt 5.7 requires C++11 support
-SET(STEL_GCC_C_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unknown-pragmas -flto")
-SET(STEL_GCC_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unknown-pragmas -flto")
+SET(STEL_GCC_C_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unknown-pragmas")
+SET(STEL_GCC_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unknown-pragmas")
 # Intel C/C++ compilers do not have an option -Wno-unused-results
 IF(NOT "${CMAKE_CXX_COMPILER_ID}" MATCHES "Intel")
      SET(STEL_GCC_C_FLAGS "${STEL_GCC_C_FLAGS} -Wno-unused-result")
@@ -300,9 +300,7 @@ IF(WIN32)
           # C4351: "new" behaviour, member array default initialization. Required since at least C++98, but funny MSVC throws a warning.
           # C4996: deprecated POSIX names (used in zlib)
 	  # C5105: defines in macros
-          SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996 /wd5105")
-	  # Enable LTO support
-	  SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /GL /LTCG")
+	  SET(STEL_MSVC_FLAGS "/wd4244 /wd4305 /wd4351 /wd4996 /wd5105")
 	  # Set multiprocessing and minimal version of Windows
 	  SET(STEL_MSVC_FLAGS "${STEL_MSVC_FLAGS} /MP /D_WIN32_WINNT=${MIN_WIN_VERSION}")
 
@@ -344,12 +342,17 @@ IF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -Wno-unused-local-typedefs")
 ENDIF()
 
-# This activates Link Time Optimization on recent GCC
-# Unfortunately, it also seems to break static plugins
+# This activates Link Time Optimization
 # It's providing a 20% size reduction, and probably a faster code when activated
-#SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden -ffunction-sections -flto")
-#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -ffunction-sections -flto")
-#SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--gc-sections -flto -ffunction-sections -fuse-linker-plugin")
+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -flto")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -flto")
+IF(WIN32)
+     IF(MSVC)
+	  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /GL")
+	  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /GL")
+	  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /LTCG")
+     ENDIF()
+ENDIF()
 
 ########### Others ###########
 # Activate translation
