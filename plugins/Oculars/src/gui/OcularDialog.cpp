@@ -572,7 +572,6 @@ void OcularDialog::selectTelescope(const QModelIndex)
 
 void OcularDialog::setLabelsDescriptionText(bool state)
 {
-	const QString qMM = QString(" %1").arg(qc_("mm","millimeters"));
 	if (state)
 	{
 		// TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
@@ -581,15 +580,13 @@ void OcularDialog::setLabelsDescriptionText(bool state)
 		ui->labelFL->setText(q_("Magnification factor:"));
 		ui->labelFS->setText(q_("Diameter:"));
 		ui->ocularFL->setSuffix("x");
-		ui->ocularFieldStop->setSuffix(qMM);
 	}
 	else
 	{
 		ui->labelFOV->setText(q_("aFOV:"));
 		ui->labelFL->setText(q_("Focal length:"));
 		ui->labelFS->setText(q_("Field stop:"));
-		ui->ocularFL->setSuffix(qMM);
-		ui->ocularFieldStop->setSuffix(qMM);
+		ui->ocularFL->setSuffix(QString(" %1").arg(qc_("mm","millimeters")));
 	}
 }
 
@@ -605,6 +602,7 @@ void OcularDialog::updateSuffixes()
 	ui->OAGDist->setSuffix(qMM);
 	ui->OAGPrismH->setSuffix(qMM);
 	ui->OAGPrismW->setSuffix(qMM);
+	ui->ocularFieldStop->setSuffix(qMM);
 
 	ui->ccdResX->setSuffix(qPX);
 	ui->ccdResY->setSuffix(qPX);
