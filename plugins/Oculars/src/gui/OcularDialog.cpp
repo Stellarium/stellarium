@@ -100,6 +100,7 @@ void OcularDialog::retranslate()
 	{
 		ui->retranslateUi(dialog);
 		initAboutText();
+		updateSuffixes();
 	}
 }
 
@@ -362,6 +363,7 @@ void OcularDialog::createDialogContent()
 	ui->lensName->setValidator(validatorName);
 
 	initAboutText();
+	updateSuffixes();
 
 	connect(ui->pushButtonMoveOcularUp,      SIGNAL(pressed()), this, SLOT(moveUpSelectedOcular()));
 	connect(ui->pushButtonMoveOcularDown,    SIGNAL(pressed()), this, SLOT(moveDownSelectedOcular()));
@@ -570,6 +572,7 @@ void OcularDialog::selectTelescope(const QModelIndex)
 
 void OcularDialog::setLabelsDescriptionText(bool state)
 {
+	const QString qMM = QString(" %1").arg(qc_("mm","millimeters"));
 	if (state)
 	{
 		// TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
@@ -577,13 +580,40 @@ void OcularDialog::setLabelsDescriptionText(bool state)
 		// TRANSLATORS: Magnification factor for binoculars
 		ui->labelFL->setText(q_("Magnification factor:"));
 		ui->labelFS->setText(q_("Diameter:"));
+		ui->ocularFL->setSuffix("x");
+		ui->ocularFieldStop->setSuffix(qMM);
 	}
 	else
 	{
 		ui->labelFOV->setText(q_("aFOV:"));
 		ui->labelFL->setText(q_("Focal length:"));
 		ui->labelFS->setText(q_("Field stop:"));
+		ui->ocularFL->setSuffix(qMM);
+		ui->ocularFieldStop->setSuffix(qMM);
 	}
+}
+
+void OcularDialog::updateSuffixes()
+{
+	const QString qMM = QString(" %1").arg(qc_("mm","millimeters"));
+	const QString qPX = QString(" %1").arg(qc_("px", "pixels"));
+	const QString qDG = QChar(0x00B0);
+	ui->telescopeFL->setSuffix(qMM);
+	ui->telescopeDiameter->setSuffix(qMM);
+	ui->ccdChipX->setSuffix(qMM);
+	ui->ccdChipY->setSuffix(qMM);
+	ui->OAGDist->setSuffix(qMM);
+	ui->OAGPrismH->setSuffix(qMM);
+	ui->OAGPrismW->setSuffix(qMM);
+
+	ui->ccdResX->setSuffix(qPX);
+	ui->ccdResY->setSuffix(qPX);
+
+	ui->ccdRotAngle->setSuffix(qDG);
+	ui->OAGPrismPA->setSuffix(qDG);
+	ui->ocularAFov->setSuffix(qDG);
+
+	ui->lensMultiplier->setSuffix("x");
 }
 
 void OcularDialog::initAboutText()

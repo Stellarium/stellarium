@@ -93,6 +93,7 @@ private slots:
 	void setupTelradFOVspins(Vec4f fov);
 	void updateGuiOptions();
 	void updateCCDRotationAngles();
+	void updateSuffixes();
 
 private:
 	Oculars* plugin;
