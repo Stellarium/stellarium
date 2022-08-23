@@ -47,7 +47,6 @@ StelAudioMgr::~StelAudioMgr()
 	delete audioOutput;
 	audioOutput=Q_NULLPTR;
 #endif
-
 }
 
 void StelAudioMgr::loadSound(const QString& filename, const QString& id)

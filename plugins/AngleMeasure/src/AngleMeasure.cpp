@@ -394,7 +394,6 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 			double dy = event->y() - win.v[1];
 			prj->unProject(event->x()+dx, event->y()+dy, endPoint);
 #endif
-
 		}
 		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
