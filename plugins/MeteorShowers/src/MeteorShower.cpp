@@ -73,7 +73,6 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 	{
 		StelCore* core = StelApp::getInstance().getCore();
 		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-		double eclJ2000 = ssystem->getEarth()->getRotObliquity(2451545.0);
 		double ra_equ, dec_equ, currentLambda, beta;
 		
 		StelUtils::rectToSphe(&ra_equ,&dec_equ, ssystem->getSun()->getJ2000EquatorialPos(core));
@@ -90,6 +89,7 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 	m_rDeltaPeak = static_cast<float>(m_radiantDelta);
 
 	const int genericYear = 1000;
+	eclJ2000 = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
 
 	// build the activity list
 	QList<QVariant> activities = map.value("activity").toList();
@@ -225,10 +225,7 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 		return;
 	}
 
-	// gets the current UTC date
-	double currentJD = core->getJD();
 	static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-	double eclJ2000 = ssystem->getEarth()->getRotObliquity(2451545.0);
 	double ra_equ, dec_equ, currentSolLong, beta;
 	StelUtils::rectToSphe(&ra_equ,&dec_equ, ssystem->getSun()->getJ2000EquatorialPos(core));
 	StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &currentSolLong, &beta);
@@ -298,7 +295,7 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 	}
 
 	// calculates a ZHR for the current date
-	int currentZHR = calculateZHR(currentJD);
+	int currentZHR = calculateZHR(core);
 	if (currentZHR < 1)
 	{
 		return;
@@ -452,11 +449,9 @@ MeteorShower::Activity MeteorShower::hasConfirmedShower(double currentSolLong, b
 	return Activity();
 }
 
-int MeteorShower::calculateZHR(const double& currentJD)
+int MeteorShower::calculateZHR(StelCore *core)
 {
-	StelCore* core = StelApp::getInstance().getCore();
 	static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-	const double eclJ2000 = ssystem->getEarth()->getRotObliquity(2451545.0);
 	double ra_equ, dec_equ, currentlambda, beta;
 	StelUtils::rectToSphe(&ra_equ,&dec_equ, ssystem->getSun()->getJ2000EquatorialPos(core));
 	StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &currentlambda, &beta);
@@ -578,7 +573,6 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 
 		QString actStr = q_("Activity");
 		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-		double eclJ2000 = ssystem->getEarth()->getRotObliquity(2451545.0);
 		double ra_equ, dec_equ, currentLambda, beta, az, alt;
 		const double currentJD = core->getJD(); // save current JD
 		

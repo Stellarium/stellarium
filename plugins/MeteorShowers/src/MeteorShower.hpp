@@ -153,6 +153,8 @@ private:
 
 	QList<MeteorObj*> m_activeMeteors; //! List with all the active meteors
 
+	double eclJ2000;                   //! Ecliptic on J2000.0 epoch
+
 	//! Draws the radiant
 	void drawRadiant(StelCore* core);
 
@@ -160,8 +162,7 @@ private:
 	void drawMeteors(StelCore* core);
 
 	//! Calculates the ZHR using two types of distribution function
-	//! @param current Julian day
-	int calculateZHR(const double& currentJD);
+	int calculateZHR(StelCore* core);
 };
 
 #endif /* METEORSHOWER_HPP */
