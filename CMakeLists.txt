@@ -105,6 +105,7 @@ MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")
 
 ########### Main global variables ###########
 SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
+SET(ENABLE_LTO 0 CACHE BOOL "Define whether the Link Time Optimization should be activated.")
 
 IF(NOT CMAKE_BUILD_TYPE)
      SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind ASan UBSan Release RelWithDebInfo MinSizeRel." FORCE)
@@ -344,12 +345,20 @@ IF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -Wno-unused-local-typedefs")
 ENDIF()
 
-# This activates Link Time Optimization on recent GCC
-# Unfortunately, it also seems to break static plugins
-# It's providing a 20% size reduction, and probably a faster code when activated
-#SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden -ffunction-sections -flto")
-#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -ffunction-sections -flto")
-#SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--gc-sections -flto -ffunction-sections -fuse-linker-plugin")
+# This activates Link Time Optimization
+# LTO has longer build times but optimizes code (smaller by 15-20 percents)
+# LTO fails a test for unknown reasons on Linux/GCC and on Windows/MSVC.
+IF(ENABLE_LTO)
+     IF(WIN32 AND MSVC)
+	  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /GL")
+	  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /GL")
+	  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /LTCG")
+     ELSE()
+	  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -flto")
+	  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -flto")
+	  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -flto")
+     ENDIF()
+ENDIF()
 
 ########### Others ###########
 # Activate translation
