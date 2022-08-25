@@ -403,7 +403,7 @@ namespace StelUtils
 	//! Floor integer division provides truncating to the next lower integer, also for negative numerators.
 	//! https://stackoverflow.com/questions/2622441/c-integer-floor-function
 	//! @returns floor(num/den)
-	inline long intFloorDiv (long num, long den)
+	inline int intFloorDiv (int num, int den)
 	{
 	  if (0 < (num^den)) // lgtm [cpp/bitwise-sign-check]
 	    return num/den;
@@ -416,16 +416,16 @@ namespace StelUtils
 	}
 
 	//! version of intFloorDiv() for large integers.
-	inline long intFloorDivLL(long long num, long long den)
+	inline int intFloorDivLL(qint64 num, qint64 den)
 	{
 	  if (0 < (num^den)) // lgtm [cpp/bitwise-sign-check]
-	    return static_cast<long>(num/den);
+	    return int(num/den);
 	  else
 	    {
 	      lldiv_t res = lldiv(num,den);
-	      long long ret=  (res.rem)? res.quot-1
+	      qint64 ret= (res.rem)? res.quot-1
 			      : res.quot;
-	      return static_cast<long>(ret);
+	      return int(ret);
 	    }
 	}
 
