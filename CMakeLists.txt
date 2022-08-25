@@ -105,7 +105,7 @@ MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")
 
 ########### Main global variables ###########
 SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
-SET(ENABLE_LTO 1 CACHE BOOL "Define whether the Link Time Optimization should be activated.")
+SET(ENABLE_LTO 0 CACHE BOOL "Define whether the Link Time Optimization should be activated.")
 
 IF(NOT CMAKE_BUILD_TYPE)
      SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind ASan UBSan Release RelWithDebInfo MinSizeRel." FORCE)
@@ -346,7 +346,8 @@ IF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
 ENDIF()
 
 # This activates Link Time Optimization
-# It's providing a 20% size reduction, and probably a faster code when activated
+# LTO has longer build times but optimizes code (smaller by 15-20 percents)
+# LTO fails a test for unknown reasons on Linux/GCC and on Windows/MSVC.
 IF(ENABLE_LTO)
      IF(WIN32 AND MSVC)
 	  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /GL")
