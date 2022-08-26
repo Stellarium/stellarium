@@ -781,7 +781,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		azVsTimeChart->show(AstroCalcChart::AzVsTime);
 		core->setJD(currentJD);
 
-		QPair<double, double>yRange=azVsTimeChart->findYRange(AstroCalcChart::AzVsTime);
+		const QPair<double, double>&yRange=azVsTimeChart->findYRange(AstroCalcChart::AzVsTime);
 		azVsTimeChart->setYrange(AstroCalcChart::AzVsTime, yRange);
 
 		drawCurrentTimeDiagram();
