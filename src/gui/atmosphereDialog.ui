@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>313</width>
-    <height>289</height>
+    <width>337</width>
+    <height>491</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+   <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -125,6 +125,187 @@
         <property name="text">
          <string/>
         </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="visualModelConfigGroup">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Visual Model</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Choose &amp;model:</string>
+          </property>
+          <property name="buddy">
+           <cstring>atmosphereModel</cstring>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="atmosphereModel">
+          <item>
+           <property name="text">
+            <string>Preetham</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>ShowMySky</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QFrame" name="showMySky_optionsGroup">
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QLabel" name="showMySky_statusLabel">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+           <property name="textInteractionFlags">
+            <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="showMySky_pathToDataLayout">
+           <item>
+            <widget class="QLabel" name="showMySky_pathToModelLabel">
+             <property name="text">
+              <string>Path to &amp;data:</string>
+             </property>
+             <property name="buddy">
+              <cstring>showMySky_pathToModelEdit</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="showMySky_pathToModelEdit"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="showMySky_pathToModelBrowseBtn">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>:/graphicGui/uibtFolder.png</normaloff>
+               <disabledoff>:/graphicGui/uibtFolder-disabled.png</disabledoff>:/graphicGui/uibtFolder.png</iconset>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="showMySky_eclipseSimQualityLayout">
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Eclipse simulation &amp;quality:</string>
+             </property>
+             <property name="buddy">
+              <cstring>showMySky_eclipseSimulationQualitySpinBox</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSpinBox" name="showMySky_eclipseSimulationQualitySpinBox">
+             <property name="maximum">
+              <number>3</number>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="showMySky_debugOptionsEnabled">
+           <property name="text">
+            <string>Show debugging options</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="showMySky_debugOptionsGroup">
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <widget class="QCheckBox" name="showMySky_zeroOrderEnabled">
+              <property name="text">
+               <string>Render zero-order scattering</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="showMySky_singleScatteringEnabled">
+              <property name="text">
+               <string>Render single scattering</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="showMySky_multipleScatteringEnabled">
+              <property name="text">
+               <string>Render multiple scattering</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
@@ -318,6 +499,22 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>atmosphereModel</tabstop>
+  <tabstop>showMySky_pathToModelEdit</tabstop>
+  <tabstop>showMySky_pathToModelBrowseBtn</tabstop>
+  <tabstop>showMySky_debugOptionsEnabled</tabstop>
+  <tabstop>showMySky_zeroOrderEnabled</tabstop>
+  <tabstop>showMySky_singleScatteringEnabled</tabstop>
+  <tabstop>showMySky_multipleScatteringEnabled</tabstop>
+  <tabstop>pressureDoubleSpinBox</tabstop>
+  <tabstop>temperatureDoubleSpinBox</tabstop>
+  <tabstop>extinctionDoubleSpinBox</tabstop>
+  <tabstop>standardAtmosphereButton</tabstop>
+  <tabstop>checkBox_noScatter</tabstop>
+  <tabstop>checkBox_TfromK</tabstop>
+  <tabstop>doubleSpinBox_T</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
