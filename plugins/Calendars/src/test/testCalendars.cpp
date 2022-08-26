@@ -1029,6 +1029,10 @@ void TestCalendars::testMesoamerican()
 			    .arg(GregorianCalendar::fixedFromGregorian({-3113, 8, 11}))  ));
 	QVERIFY2(MayaLongCountCalendar::fixedFromMayanLongCount({7, 17, 18, 13, 2}) == 0,
 		 qPrintable(QString("MayaLongCount %1 vs R.D. 0 = %2").arg("{7, 17, 18, 13, 2}").arg(0)  ));
+	// These debugs are useful to further trace down the reason for failed tests when LTO (Link Time Optimization) is activated
+	// LTO is not ready for action when these tests fail!
+	qDebug() << "Haab"    << MayaHaabCalendar::mayanHaabFromFixed(mlc0);
+	qDebug() << "Tzolkin" << MayaTzolkinCalendar::mayanTzolkinFromFixed(mlc0);
 	QVERIFY(MayaHaabCalendar::mayanHaabFromFixed(mlc0) == QVector<int>({18, 8}));
 	QVERIFY(MayaTzolkinCalendar::mayanTzolkinFromFixed(mlc0) == QVector<int>({4, 20}));
 	QVERIFY2(AztecXihuitlCalendar::aztecCorrelation==555403,
