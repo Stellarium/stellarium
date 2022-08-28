@@ -411,7 +411,7 @@ void AsterismMgr::loadNames(const QString& namesFile)
 	// Now parse the file
 	// lines to ignore which start with a # or are empty
 	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
-	static const QRegularExpression recRx("^\\s*(\\w+)\\s+_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
+	static const QRegularExpression recRx("^\\s*(\\S+)\\s+_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
 	static const QRegularExpression ctxRx("(.*)\",\\s*\"(.*)");
 
 	// keep track of how many records we processed.
