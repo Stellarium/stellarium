@@ -558,6 +558,12 @@ ELSE()
      INSTALL(TARGETS stellarium DESTINATION bin)
 ENDIF()
 IF(WIN32)
+     IF((${QT_VERSION_MAJOR} EQUAL "5") AND (Qt5Core_VERSION VERSION_LESS "5.15"))
+          SET(VIRTUAL_KBD_SETTING "")
+     ELSE()
+          SET(VIRTUAL_KBD_SETTING "--no-virtualkeyboard")
+     ENDIF()
+
      INSTALL(CODE
         "
          EXECUTE_PROCESS(
@@ -565,7 +571,7 @@ IF(WIN32)
 		     --dir \"\${CMAKE_INSTALL_PREFIX}/qtstuff\"
                      --no-translations
 		     --verbose 1
-		     --no-virtualkeyboard
+                     ${VIRTUAL_KBD_SETTING}
 		     --compiler-runtime
                      \"\${CMAKE_INSTALL_PREFIX}/bin/stellarium.exe\"
              WORKING_DIRECTORY \"\${CMAKE_INSTALL_PREFIX}/bin\"
@@ -582,7 +588,7 @@ IF(WIN32)
                   COMMAND \"${WINDEPLOYQT_COMMAND}\"
 			  --dir \"\${CMAKE_INSTALL_PREFIX}/qtstuff\"
                           --no-translations
-			  --no-virtualkeyboard
+                          ${VIRTUAL_KBD_SETTING}
                           --compiler-runtime
                           \"\${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"
                   WORKING_DIRECTORY \"\${CMAKE_INSTALL_PREFIX}/bin\"
