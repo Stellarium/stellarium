@@ -92,10 +92,18 @@ SET(MINIMAL_GPS_API_VERSION "6.0")
 # Use installer for checking minimum requirements
 # Stellarium/MSVC require Windows 7 (6.1) for work
 # Details: http://www.jrsoftware.org/ishelp/index.php?topic=winvernotes
-SET(ISS_MIN_WIN_VERSION "6.1")
+IF(Qt6_FOUND)
+     SET(ISS_MIN_WIN_VERSION "10.0")
+ELSE()
+     SET(ISS_MIN_WIN_VERSION "6.1")
+ENDIF()
 # Define required version for MSVC
 # Details: https://docs.microsoft.com/ru-ru/windows/win32/winprog/using-the-windows-headers
-SET(MIN_WIN_VERSION "0x0601")
+IF(Qt6_FOUND)
+     SET(MIN_WIN_VERSION "0x0A00")
+ELSE()
+     SET(MIN_WIN_VERSION "0x0601")
+ENDIF()
 
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)

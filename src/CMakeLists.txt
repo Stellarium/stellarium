@@ -568,7 +568,7 @@ IF(WIN32)
 		     --no-virtualkeyboard
 		     --compiler-runtime
                      \"\${CMAKE_INSTALL_PREFIX}/bin/stellarium.exe\"
-             WORKING_DIRECTORY \"\${CMAKE_INSTALL_PRERIX}/bin\"
+             WORKING_DIRECTORY \"\${CMAKE_INSTALL_PREFIX}/bin\"
              OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.log\"
              ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.err\"
          )
@@ -585,7 +585,7 @@ IF(WIN32)
 			  --no-virtualkeyboard
                           --compiler-runtime
                           \"\${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"
-                  WORKING_DIRECTORY \"\${CMAKE_INSTALL_PRERIX}/bin\"
+                  WORKING_DIRECTORY \"\${CMAKE_INSTALL_PREFIX}/bin\"
                   OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.log\"
                   ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.err\"
          )
