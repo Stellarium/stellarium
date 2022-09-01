@@ -223,9 +223,15 @@ ENDIF()
 
 # Add ASan (AddressSanitizer) build options if necessary
 # Details: https://github.com/google/sanitizers/wiki/AddressSanitizer
+#          https://docs.microsoft.com/ru-ru/cpp/build/reference/fsanitize?view=msvc-150
 IF(${CMAKE_BUILD_TYPE} MATCHES "ASan")
-     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -O1 -fno-omit-frame-pointer -g")
-     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -O1 -fno-omit-frame-pointer -g")
+     IF(MSVC)
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /fsanitize=address")
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /fsanitize=address")
+     ELSE()
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -O1 -fno-omit-frame-pointer -g")
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -O1 -fno-omit-frame-pointer -g")
+     ENDIF()
 ENDIF()
 
 # Add UBSan (UndefinedBehaviorSanitizer) build options if necessary
@@ -237,9 +243,15 @@ ENDIF()
 
 # Add Fuzzer (Fuzzer Sanitizer) build options if necessary
 # Details: https://llvm.org/docs/LibFuzzer.html
+#          https://docs.microsoft.com/ru-ru/cpp/build/reference/fsanitize?view=msvc-150
 IF(${CMAKE_BUILD_TYPE} MATCHES "Fuzzer")
-     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=fuzzer -O1 -g")
-     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=fuzzer -O1 -g")
+     IF(MSVC)
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /fsanitize=fuzzer")
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /fsanitize=fuzzer")
+     ELSE()
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=fuzzer -O1 -g")
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=fuzzer -O1 -g")
+     ENDIF()
 ENDIF()
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
