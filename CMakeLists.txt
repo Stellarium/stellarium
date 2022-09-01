@@ -235,6 +235,13 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "UBSan")
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined -g")
 ENDIF()
 
+# Add Fuzzer (Fuzzer Sanitizer) build options if necessary
+# Details: https://llvm.org/docs/LibFuzzer.html
+IF(${CMAKE_BUILD_TYPE} MATCHES "Fuzzer")
+     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=fuzzer -O1 -g")
+     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=fuzzer -O1 -g")
+ENDIF()
+
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
      SET(APPLE 1)
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
