@@ -993,6 +993,74 @@ void StelLocationMgr::locationFromGPS(int interval)
 			qDebug() << "nmeaHelper not ready. Something went wrong.";
 		delete nmeaHelper;
 		nmeaHelper=Q_NULLPTR;
+#ifndef Q_OS_WIN
+		emit gpsQueryFinished(false);
+#else
+		if (!positionSource)
+			positionSource = QGeoPositionInfoSource::createDefaultSource(this);
+		if (positionSource)
+		{
+			if (interval)
+			{
+				if (verbose)
+					qDebug() << "Creating new positionSource...";
+				positionSource->setUpdateInterval(interval);
+				connect(positionSource, SIGNAL(positionUpdated(QGeoPositionInfo)), this, SLOT(positionUpdated(QGeoPositionInfo)));
+				positionSource->startUpdates();
+				if (verbose)
+					qDebug() << "Creating new positionSource...done";
+			}
+			else
+			{
+				if (verbose)
+					qDebug() << "Deactivating and deleting gps...";
+				positionSource->stopUpdates();
+				delete positionSource;
+				positionSource=Q_NULLPTR;
+			}
+			emit gpsQueryFinished(true); // signal "successful operation", avoid showing any error in GUI.
+		}
+		else
+		{
+			emit gpsQueryFinished(false);
+		}
+#endif
+	}
+}
+
+void StelLocationMgr::positionUpdated(QGeoPositionInfo info)
+{
+	bool verbose=qApp->property("verbose").toBool();
+	StelCore *core=StelApp::getInstance().getCore();
+	StelLocation loc;
+	if (info.isValid())
+	{
+		loc.longitude = info.coordinate().longitude();
+		loc.latitude = info.coordinate().latitude();
+		loc.altitude = info.coordinate().altitude();
+		if (verbose)
+			qDebug() << "Location in progress: Long=" << loc.longitude << " Lat=" << loc.latitude << " Alt" << loc.altitude;
+		if (loc.altitude < -2000)
+			loc.altitude = 0;
+		loc.lightPollutionLuminance = StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
+		// Usually you don't leave your time zone with GPS.
+		loc.ianaTimeZone = core->getCurrentTimeZone();
+		loc.isUserLocation = true;
+		loc.planetName = "Earth";
+		loc.name = QString("GPS %1%2 %3%4")
+			.arg(loc.latitude<0?"S":"N").arg(floor(.5+abs(loc.latitude)))
+			.arg(loc.longitude<0?"W":"E").arg(floor(.5+abs(loc.longitude)));
+		core->moveObserverTo(loc, 0.0, 0.0);
+		emit gpsQueryFinished(true);
+	}
+	else
+	{
+		// something went wrong. However, a dysfunctional positionSource may still exist, better delete it.
+		if (verbose)
+			qDebug() << "gps not ready. Something went wrong.";
+		positionSource->stopUpdates();
+		delete positionSource;
+		positionSource=Q_NULLPTR;
 		emit gpsQueryFinished(false);
 	}
 }
