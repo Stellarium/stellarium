@@ -17,8 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#define PAN_AND_ZOOM // This keeps the left mouse button for panning and selecting objects - only the right mouse button is used for angle measurement
-
 #include "StelObjectMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
@@ -70,6 +68,7 @@ AngleMeasure::AngleMeasure()
 	, withDecimalDegree(false)
 	, dragging(false)
 	, angleEquatorial(0.)
+	, flagPanAndSelect(false)
 	, flagFollowCursor(false)
 	, flagUseDmsFormat(false)
 	, flagShowEquatorial(false)
@@ -260,10 +259,11 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 		int y  = static_cast<int>(120*ppx);
 		int ls = static_cast<int>(ppx*painter.getFontMetrics().lineSpacing());
 		painter.drawText(x, y, messageEnabled);
-#ifndef PAN_AND_ZOOM
-		y -= ls;
-		painter.drawText(x, y, messageLeftButton);
-#endif
+		if (!flagPanAndSelect)
+		{
+			y -= ls;
+			painter.drawText(x, y, messageLeftButton);
+		}
 		y -= ls;
 		painter.drawText(x, y, messageRightButton);
 	}
@@ -329,162 +329,165 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 		return;
 	}
 
-#ifndef PAN_AND_ZOOM
-	if (event->type()==QEvent::MouseButtonPress && event->button()==Qt::LeftButton)
+	if (!flagPanAndSelect)
 	{
-		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-		if (prj->unProject(event->position().x(),event->position().y(),startPoint))
-#else
-		if (prj->unProject(event->x(),event->y(),startPoint))
-#endif
-		{ // Nick Fedoseev patch: improve click match
-			Vec3d win;
-			prj->project(startPoint,win);
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-			double dx = event->position().x() - win.v[0];
-			double dy = event->position().y() - win.v[1];
-			prj->unProject(event->position().x()+dx, event->position().y()+dy, startPoint);
-#else
-			double dx = event->x() - win.v[0];
-			double dy = event->y() - win.v[1];
-			prj->unProject(event->x()+dx, event->y()+dy, startPoint);
-#endif
-		}
-		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-		prjHor->unProject(event->position().x(),event->position().y(),startPointHor);
-#else
-		prjHor->unProject(event->x(),event->y(),startPointHor);
-#endif
-		// first click reset the line... only draw it after we've dragged a little.
-		if (!dragging)
+		if (event->type()==QEvent::MouseButtonPress && event->button()==Qt::LeftButton)
 		{
-			lineVisible = false;
-			endPoint = startPoint;
-			endPointHor=startPointHor;
-		}
-		else
-			lineVisible = true;
-
-		dragging = true;
-		calculateEnds();
-		event->setAccepted(true);
-		return;
-	}
-	else if (event->type()==QEvent::MouseButtonRelease && event->button()==Qt::LeftButton)
-	{
-		dragging = false;
-		calculateEnds();
-		event->setAccepted(true);
-		return;
-	}
-	else if (event->type()==QEvent::MouseButtonPress && event->button()==Qt::RightButton)
-	{
-		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-		if (prj->unProject(event->position().x(),event->position().y(),endPoint))
-#else
-		if (prj->unProject(event->x(),event->y(),endPoint))
-#endif
-		{ // Nick Fedoseev patch: improve click match
-			Vec3d win;
-			prj->project(endPoint,win);
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-			double dx = event->position().x() - win.v[0];
-			double dy = event->position().y() - win.v[1];
-			prj->unProject(event->position().x()+dx, event->position().y()+dy, endPoint);
-#else
-			double dx = event->x() - win.v[0];
-			double dy = event->y() - win.v[1];
-			prj->unProject(event->x()+dx, event->y()+dy, endPoint);
-#endif
-		}
-		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-		prjHor->unProject(event->position().x(),event->position().y(),endPointHor);
-#else
-		prjHor->unProject(event->x(),event->y(),endPointHor);
-#endif
-		calculateEnds();
-		event->setAccepted(true);
-		return;
-	}
-#else
-	if (event->button() == Qt::RightButton)
-	{
-		bool release = event->type() == QEvent::MouseButtonRelease;
-		bool dblclick = event->type() == QEvent::MouseButtonDblClick;
-		bool press = event->type() == QEvent::MouseButtonPress;
-		bool erase = olddblclick && dblclick;
-		if (erase || release && !picked)
-		{
-			if (dragging)
-				QApplication::restoreOverrideCursor();
-			dragging = false;
-			if (erase)
-			{
-				startPoint = Vec3d(0,0,0);
-				endPoint = Vec3d(0,0,0);
-				startPointHor = Vec3d(0,0,0);
-				endPointHor = Vec3d(0,0,0);
-				lineVisible = false;
-			}
-		}
-		else if (press || dblclick)
-		{
-			olddblclick = picked;
-			picked = dblclick;
-			if (!dragging)
-				QApplication::setOverrideCursor(QCursor(Qt::CrossCursor));
-			dragging = true;
-			lineVisible = true;
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-			qreal x = event->position().x(), y = event->position().y();
-#else
-			qreal x = event->x(), y = event->y();
-#endif
 			const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
-			Vec3d c1, e1, s1;
-			c1.v[0] = x;
-			c1.v[1] = y;
-			prj->project(endPoint, e1);
-			prj->project(startPoint, s1);
-			// Move the point closest to the mouse
-			if ((c1-e1).length() > (c1-s1).length())
-			{
-				startPoint = endPoint;
-				startPointHor = endPointHor;
+	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+			if (prj->unProject(event->position().x(),event->position().y(),startPoint))
+	#else
+			if (prj->unProject(event->x(),event->y(),startPoint))
+	#endif
+			{ // Nick Fedoseev patch: improve click match
+				Vec3d win;
+				prj->project(startPoint,win);
+	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+				double dx = event->position().x() - win.v[0];
+				double dy = event->position().y() - win.v[1];
+				prj->unProject(event->position().x()+dx, event->position().y()+dy, startPoint);
+	#else
+				double dx = event->x() - win.v[0];
+				double dy = event->y() - win.v[1];
+				prj->unProject(event->x()+dx, event->y()+dy, startPoint);
+	#endif
 			}
-			if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
-			{ // snap to selected object
-				StelCore *core = StelApp::getInstance().getCore();
-				StelObjectP selectedObject = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0];
-				endPoint = selectedObject->getEquinoxEquatorialPos(core);
-				endPointHor = selectedObject->getAltAzPosAuto(core);
+			const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+			prjHor->unProject(event->position().x(),event->position().y(),startPointHor);
+	#else
+			prjHor->unProject(event->x(),event->y(),startPointHor);
+	#endif
+			// first click reset the line... only draw it after we've dragged a little.
+			if (!dragging)
+			{
+				lineVisible = false;
+				endPoint = startPoint;
+				endPointHor=startPointHor;
 			}
 			else
-			{
-				if (prj->unProject(x,y,endPoint))
-				{ // Nick Fedoseev patch: improve click match
-					Vec3d win;
-					prj->project(endPoint,win);
-					double dx = x - win.v[0];
-					double dy = y - win.v[1];
-					prj->unProject(x+dx, y+dy, endPoint);
-				}
-				const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-				prjHor->unProject(x,y,endPointHor);
-			}
-			if (!startPoint.length())
-			{
-				startPoint = endPoint;
-				startPointHor = endPointHor;
-			}
+				lineVisible = true;
+
+			dragging = true;
+			calculateEnds();
+			event->setAccepted(true);
+			return;
 		}
-		calculateEnds();
+		else if (event->type()==QEvent::MouseButtonRelease && event->button()==Qt::LeftButton)
+		{
+			dragging = false;
+			calculateEnds();
+			event->setAccepted(true);
+			return;
+		}
+		else if (event->type()==QEvent::MouseButtonPress && event->button()==Qt::RightButton)
+		{
+			const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
+	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+			if (prj->unProject(event->position().x(),event->position().y(),endPoint))
+	#else
+			if (prj->unProject(event->x(),event->y(),endPoint))
+	#endif
+			{ // Nick Fedoseev patch: improve click match
+				Vec3d win;
+				prj->project(endPoint,win);
+	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+				double dx = event->position().x() - win.v[0];
+				double dy = event->position().y() - win.v[1];
+				prj->unProject(event->position().x()+dx, event->position().y()+dy, endPoint);
+	#else
+				double dx = event->x() - win.v[0];
+				double dy = event->y() - win.v[1];
+				prj->unProject(event->x()+dx, event->y()+dy, endPoint);
+	#endif
+			}
+			const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+			prjHor->unProject(event->position().x(),event->position().y(),endPointHor);
+	#else
+			prjHor->unProject(event->x(),event->y(),endPointHor);
+	#endif
+			calculateEnds();
+			event->setAccepted(true);
+			return;
+		}
 	}
-#endif
+	else
+	{
+		if (event->button() == Qt::RightButton)
+		{
+			bool release = event->type() == QEvent::MouseButtonRelease;
+			bool dblclick = event->type() == QEvent::MouseButtonDblClick;
+			bool press = event->type() == QEvent::MouseButtonPress;
+			bool erase = olddblclick && dblclick;
+			if (erase || release && !picked)
+			{
+				if (dragging)
+					QApplication::restoreOverrideCursor();
+				dragging = false;
+				if (erase)
+				{
+					startPoint = Vec3d(0,0,0);
+					endPoint = Vec3d(0,0,0);
+					startPointHor = Vec3d(0,0,0);
+					endPointHor = Vec3d(0,0,0);
+					lineVisible = false;
+				}
+			}
+			else if (press || dblclick)
+			{
+				olddblclick = picked;
+				picked = dblclick;
+				if (!dragging)
+					QApplication::setOverrideCursor(QCursor(Qt::CrossCursor));
+				dragging = true;
+				lineVisible = true;
+	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+				qreal x = event->position().x(), y = event->position().y();
+	#else
+				qreal x = event->x(), y = event->y();
+	#endif
+				const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
+				Vec3d c1, e1, s1;
+				c1.v[0] = x;
+				c1.v[1] = y;
+				prj->project(endPoint, e1);
+				prj->project(startPoint, s1);
+				// Move the point closest to the mouse
+				if ((c1-e1).length() > (c1-s1).length())
+				{
+					startPoint = endPoint;
+					startPointHor = endPointHor;
+				}
+				if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
+				{ // snap to selected object
+					StelCore *core = StelApp::getInstance().getCore();
+					StelObjectP selectedObject = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0];
+					endPoint = selectedObject->getEquinoxEquatorialPos(core);
+					endPointHor = selectedObject->getAltAzPosAuto(core);
+				}
+				else
+				{
+					if (prj->unProject(x,y,endPoint))
+					{ // Nick Fedoseev patch: improve click match
+						Vec3d win;
+						prj->project(endPoint,win);
+						double dx = x - win.v[0];
+						double dy = y - win.v[1];
+						prj->unProject(x+dx, y+dy, endPoint);
+					}
+					const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+					prjHor->unProject(x,y,endPointHor);
+				}
+				if (!startPoint.length())
+				{
+					startPoint = endPoint;
+					startPointHor = endPointHor;
+				}
+			}
+			calculateEnds();
+		}
+	}
 	event->setAccepted(false);
 }
 
@@ -505,15 +508,12 @@ bool AngleMeasure::handleMouseMoves(int x, int y, Qt::MouseButtons)
 		prjHor->unProject(x,y,endPointHor);
 		calculateEnds();
 		lineVisible = true;
-#ifndef PAN_AND_ZOOM
+		if (flagPanAndSelect)
+			return false;
 		return true;
 	}
 	else
 		return false;
-#else
-	}
-	return false;
-#endif
 }
 
 void AngleMeasure::calculateEnds(void)
@@ -577,9 +577,8 @@ void AngleMeasure::enableAngleMeasure(bool b)
 		{
 			//qDebug() << "AngleMeasure::enableAngleMeasure starting timer";
 			messageTimer->start();
-#ifndef PAN_AND_ZOOM
-			QApplication::setOverrideCursor(QCursor(Qt::CrossCursor));
-#endif
+			if (!flagPanAndSelect)
+				QApplication::setOverrideCursor(QCursor(Qt::CrossCursor));
 		}
 		else 
 		{
@@ -646,6 +645,14 @@ void AngleMeasure::showHorizontalEndSkylinked(bool b)
 	// Immediate saving of settings
 	conf->setValue("AngleMeasure/link_horizontal_end_to_sky", flagShowHorizontalEndSkylinked);
 	emit flagShowHorizontalEndSkylinkedChanged(b);
+}
+
+void AngleMeasure::panAndSelect(bool b)
+{
+	flagPanAndSelect = b;
+	// Immediate saving of settings
+	conf->setValue("AngleMeasure/pan_and_select", flagPanAndSelect);
+	emit flagPanAndSelectChanged(b);
 }
 
 void AngleMeasure::followCursor(bool b)
@@ -740,6 +747,7 @@ void AngleMeasure::restoreDefaultSettings()
 
 void AngleMeasure::loadSettings()
 {
+	panAndSelect(conf->value("AngleMeasure/pan_and_select", false).toBool());
 	followCursor(conf->value("AngleMeasure/follow_cursor", false).toBool());
 	useDmsFormat(conf->value("AngleMeasure/angle_format_dms", false).toBool());
 	equatorialTextColor = Vec3f(conf->value("AngleMeasure/text_color", "0,0.5,1").toString());
