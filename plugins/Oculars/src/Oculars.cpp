@@ -1747,7 +1747,7 @@ void Oculars::paintCCDBounds()
 						QString resolutionOverlayText = QString("%1%3 %4 %2%3")
 								.arg(QString::number(actualCropOverlayX, 'd', 0))
 								.arg(QString::number(actualCropOverlayY, 'd', 0))
-								.arg(qc_("px", "pixel"))
+								.arg(qc_("px", "pixels"))
 								.arg(QChar(0x00D7));
 						if(actualCropOverlayX!=ccdCropOverlayHSize || actualCropOverlayY!=ccdCropOverlayVSize)
 							resolutionOverlayText.append(" [*]");
