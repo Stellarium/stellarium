@@ -269,20 +269,6 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item row="5" column="0">
-           <widget class="QCheckBox" name="azAltStartOnSkyCheckBox">
-            <property name="text">
-             <string>Attach start point to rotating sky</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="0">
-           <widget class="QCheckBox" name="azAltEndOnSkyCheckBox">
-            <property name="text">
-             <string>Attach end point to rotating sky</string>
-            </property>
-           </widget>
-          </item>
           <item row="3" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
@@ -350,6 +336,20 @@
             </item>
            </layout>
           </item>
+          <item row="5" column="0">
+           <widget class="QCheckBox" name="azAltStartOnSkyCheckBox">
+            <property name="text">
+             <string>Attach start point to rotating sky</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QCheckBox" name="azAltEndOnSkyCheckBox">
+            <property name="text">
+             <string>Attach end point to rotating sky</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -374,13 +374,6 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="useDmsFormatCheckBox">
-            <property name="text">
-             <string>Use dms format for angles</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0">
            <widget class="QCheckBox" name="followCursorCheckBox">
             <property name="toolTip">
@@ -388,6 +381,23 @@
             </property>
             <property name="text">
              <string>Show measurements near mouse</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="useDmsFormatCheckBox">
+            <property name="text">
+             <string>Use dms format for angles</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="panAndSelectCheckBox">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When set, only the right mouse button is used to measure angles, the left mouse button pans and selects as usual&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>Allow snap to selected object</string>
             </property>
            </widget>
           </item>
