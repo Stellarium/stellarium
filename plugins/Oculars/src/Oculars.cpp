@@ -1978,10 +1978,10 @@ void Oculars::paintText(const StelCore* core)
 	const double insetFromRHS = painter.getFontMetrics().boundingRect(widthString).width();
 	StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
 	int yPositionOffset = qRound(projectorParams.viewportXywh[3]*projectorParams.viewportCenterOffset[1]);
-	const double ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
-	int xPosition = qRound(projectorParams.devicePixelsPerPixel*projectorParams.viewportXywh[2] - insetFromRHS*ppx);
-	int yPosition = qRound(projectorParams.devicePixelsPerPixel*projectorParams.viewportXywh[3] - yPositionOffset - 20*ppx);
-	const int lineHeight = painter.getFontMetrics().height()*ppx;
+	const double ppx = projectorParams.devicePixelsPerPixel;
+	int xPosition = qRound(ppx*(projectorParams.viewportXywh[2] - insetFromRHS));
+	int yPosition = qRound(ppx*(projectorParams.viewportXywh[3] - 20) - yPositionOffset);
+	const int lineHeight = qRound(ppx*painter.getFontMetrics().height());
 
 	// The Ocular
 	if (flagShowOculars && ocular!=Q_NULLPTR)
