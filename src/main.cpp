@@ -232,6 +232,10 @@ int main(int argc, char **argv)
 	//vsync needs to be set on the default format for it to work
 	//fmt.setSwapInterval(0);
 
+	// avoid screen blanking on Intel UHD
+	//if (confSettings->value("video/SwapBehaviorSingleBuffer", false).toBool())
+	fmt.setSwapBehavior(QSurfaceFormat::SingleBuffer);
+
 	QSurfaceFormat::setDefaultFormat(fmt);
 
 	/////////////////////////////////////////////////////////////////////////////////

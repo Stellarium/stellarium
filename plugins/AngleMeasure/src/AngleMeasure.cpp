@@ -17,6 +17,9 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#define PAN_AND_ZOOM // This keeps the left mouse button for panning and selecting objects - only the right mouse button is used for angle measurement
+
+#include "StelObjectMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "StelProjector.hpp"
@@ -257,8 +260,10 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 		int y  = static_cast<int>(120*ppx);
 		int ls = static_cast<int>(ppx*painter.getFontMetrics().lineSpacing());
 		painter.drawText(x, y, messageEnabled);
+#ifndef PAN_AND_ZOOM
 		y -= ls;
 		painter.drawText(x, y, messageLeftButton);
+#endif
 		y -= ls;
 		painter.drawText(x, y, messageRightButton);
 	}
@@ -324,6 +329,7 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 		return;
 	}
 
+#ifndef PAN_AND_ZOOM
 	if (event->type()==QEvent::MouseButtonPress && event->button()==Qt::LeftButton)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
@@ -351,7 +357,6 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 #else
 		prjHor->unProject(event->x(),event->y(),startPointHor);
 #endif
-
 		// first click reset the line... only draw it after we've dragged a little.
 		if (!dragging)
 		{
@@ -405,6 +410,81 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 		event->setAccepted(true);
 		return;
 	}
+#else
+	if (event->button() == Qt::RightButton)
+	{
+		bool release = event->type() == QEvent::MouseButtonRelease;
+		bool dblclick = event->type() == QEvent::MouseButtonDblClick;
+		bool press = event->type() == QEvent::MouseButtonPress;
+		bool erase = olddblclick && dblclick;
+		if (erase || release && !picked)
+		{
+			if (dragging)
+				QApplication::restoreOverrideCursor();
+			dragging = false;
+			if (erase)
+			{
+				startPoint = Vec3d(0,0,0);
+				endPoint = Vec3d(0,0,0);
+				startPointHor = Vec3d(0,0,0);
+				endPointHor = Vec3d(0,0,0);
+				lineVisible = false;
+			}
+		}
+		else if (press || dblclick)
+		{
+			olddblclick = picked;
+			picked = dblclick;
+			if (!dragging)
+				QApplication::setOverrideCursor(QCursor(Qt::CrossCursor));
+			dragging = true;
+			lineVisible = true;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+			qreal x = event->position().x(), y = event->position().y();
+#else
+			qreal x = event->x(), y = event->y();
+#endif
+			const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
+			Vec3d c1, e1, s1;
+			c1.v[0] = x;
+			c1.v[1] = y;
+			prj->project(endPoint, e1);
+			prj->project(startPoint, s1);
+			// Move the point closest to the mouse
+			if ((c1-e1).length() > (c1-s1).length())
+			{
+				startPoint = endPoint;
+				startPointHor = endPointHor;
+			}
+			if (StelApp::getInstance().getStelObjectMgr().getWasSelected())
+			{ // snap to selected object
+				StelCore *core = StelApp::getInstance().getCore();
+				StelObjectP selectedObject = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0];
+				endPoint = selectedObject->getEquinoxEquatorialPos(core);
+				endPointHor = selectedObject->getAltAzPosAuto(core);
+			}
+			else
+			{
+				if (prj->unProject(x,y,endPoint))
+				{ // Nick Fedoseev patch: improve click match
+					Vec3d win;
+					prj->project(endPoint,win);
+					double dx = x - win.v[0];
+					double dy = y - win.v[1];
+					prj->unProject(x+dx, y+dy, endPoint);
+				}
+				const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+				prjHor->unProject(x,y,endPointHor);
+			}
+			if (!startPoint.length())
+			{
+				startPoint = endPoint;
+				startPointHor = endPointHor;
+			}
+		}
+		calculateEnds();
+	}
+#endif
 	event->setAccepted(false);
 }
 
@@ -425,10 +505,15 @@ bool AngleMeasure::handleMouseMoves(int x, int y, Qt::MouseButtons)
 		prjHor->unProject(x,y,endPointHor);
 		calculateEnds();
 		lineVisible = true;
+#ifndef PAN_AND_ZOOM
 		return true;
 	}
 	else
 		return false;
+#else
+	}
+	return false;
+#endif
 }
 
 void AngleMeasure::calculateEnds(void)
@@ -442,13 +527,13 @@ void AngleMeasure::calculateEnds(void)
 void AngleMeasure::calculateEndsOneLine(const Vec3d &start, const Vec3d &end, Vec3d &perp1Start, Vec3d &perp1End, Vec3d &perp2Start, Vec3d &perp2End, double &angle)
 {
 	Vec3d v0 = end - start;
-	Vec3d v1 = Vec3d(0,0,0) - start;
+	Vec3d v1 = start / end.length();
 	Vec3d p = v0 ^ v1;
 	p *= 0.08;  // end width
 	perp1Start.set(start[0]-p[0],start[1]-p[1],start[2]-p[2]);
 	perp1End.set(start[0]+p[0],start[1]+p[1],start[2]+p[2]);
 
-	v1 = Vec3d(0,0,0) - end;
+	v1 = end / start.length();
 	p = v0 ^ v1;
 	p *= 0.08;  // end width
 	perp2Start.set(end[0]-p[0],end[1]-p[1],end[2]-p[2]);
@@ -492,7 +577,9 @@ void AngleMeasure::enableAngleMeasure(bool b)
 		{
 			//qDebug() << "AngleMeasure::enableAngleMeasure starting timer";
 			messageTimer->start();
+#ifndef PAN_AND_ZOOM
 			QApplication::setOverrideCursor(QCursor(Qt::CrossCursor));
+#endif
 		}
 		else 
 		{
@@ -506,6 +593,7 @@ void AngleMeasure::enableAngleMeasure(bool b)
 
 			// finally, pop the cross cursor
 			QApplication::restoreOverrideCursor();
+			dragging = false;
 		}
 
 		emit flagAngleMeasureChanged(b);

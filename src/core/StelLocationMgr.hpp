@@ -19,6 +19,7 @@
 #ifndef STELLOCATIONMGR_HPP
 #define STELLOCATIONMGR_HPP
 
+#include <QtPositioning/QGeoPositionInfoSource>
 #include "StelLocation.hpp"
 #include <QString>
 #include <QObject>
@@ -150,6 +151,7 @@ private slots:
 #ifdef ENABLE_GPS
 	void changeLocationFromGPSQuery(const StelLocation& loc);
 	void gpsQueryError(const QString& err);
+	void positionUpdated(QGeoPositionInfo gpsPos);
 #endif
 private:
 	void loadRegions();
@@ -180,6 +182,7 @@ private:
 	StelLocation lastResortLocation;
 
 	GPSLookupHelper *nmeaHelper,*libGpsHelper;
+	QGeoPositionInfoSource *positionSource=Q_NULLPTR;
 };
 
 #endif // STELLOCATIONMGR_HPP

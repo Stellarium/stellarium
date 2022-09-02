@@ -87,6 +87,7 @@ class StelApp : public QObject
 
 public:
 	friend class StelAppGraphicsWidget;
+	friend class StelMainView;
 	friend class StelRootItem;
 
 	//! Create and initialize the main Stellarium application.

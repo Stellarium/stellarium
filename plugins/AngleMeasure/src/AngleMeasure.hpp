@@ -172,6 +172,8 @@ private:
 	QString messageRightButton;
 	QString messagePA;
 	bool dragging;
+	bool picked;
+	bool olddblclick;
 	Vec3d startPoint;
 	Vec3d endPoint;
 	Vec3d perp1StartPoint;
