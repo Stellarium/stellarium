@@ -333,6 +333,7 @@ private:
 	static int   orbitLineSegments;
 	static int   orbitLineFadeSegments;
 	static int   orbitLineSegmentDuration; //measured in seconds
+	static int   orbitLineThickness;
 	static bool  orbitLinesFlag;
 	static bool  iconicModeFlag;
 	static bool  hideInvisibleSatellitesFlag;
