@@ -826,6 +826,7 @@ void Satellites::loadSettings()
 	Satellite::orbitLineSegments = conf->value("orbit_line_segments", 180).toInt();
 	Satellite::orbitLineFadeSegments = conf->value("orbit_fade_segments", 5).toInt();
 	Satellite::orbitLineSegmentDuration = conf->value("orbit_segment_duration", 5).toInt();
+	Satellite::orbitLineThickness = conf->value("orbit_line_thickness", 1).toInt();
 	setInvisibleSatelliteColor(Vec3f(conf->value("invisible_satellite_color", "0.2,0.2,0.2").toString()));
 	setTransitSatelliteColor(Vec3f(conf->value("transit_satellite_color", "0.0,0.0,0.0").toString()));
 	Satellite::timeRateLimit = conf->value("time_rate_limit", 1.0).toDouble();
@@ -921,6 +922,7 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("orbit_line_segments", Satellite::orbitLineSegments);
 	conf->setValue("orbit_fade_segments", Satellite::orbitLineFadeSegments);
 	conf->setValue("orbit_segment_duration", Satellite::orbitLineSegmentDuration);
+	conf->setValue("orbit_line_thickness", Satellite::orbitLineThickness);
 
 	conf->setValue("valid_epoch_age", Satellite::tleEpochAge);
 
@@ -2150,6 +2152,16 @@ void Satellites::setOrbitLineFadeSegments(int s)
 	{
 		Satellite::orbitLineFadeSegments=s;
 		emit orbitLineFadeSegmentsChanged(s);
+		recalculateOrbitLines();
+	}
+}
+
+void Satellites::setOrbitLineThickness(int s)
+{
+	if (s != Satellite::orbitLineThickness)
+	{
+		Satellite::orbitLineThickness=s;
+		emit orbitLineThicknessChanged(s);
 		recalculateOrbitLines();
 	}
 }

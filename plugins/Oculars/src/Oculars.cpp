@@ -1747,7 +1747,7 @@ void Oculars::paintCCDBounds()
 						QString resolutionOverlayText = QString("%1%3 %4 %2%3")
 								.arg(QString::number(actualCropOverlayX, 'd', 0))
 								.arg(QString::number(actualCropOverlayY, 'd', 0))
-								.arg(qc_("px", "pixel"))
+								.arg(qc_("px", "pixels"))
 								.arg(QChar(0x00D7));
 						if(actualCropOverlayX!=ccdCropOverlayHSize || actualCropOverlayY!=ccdCropOverlayVSize)
 							resolutionOverlayText.append(" [*]");
@@ -1974,13 +1974,14 @@ void Oculars::paintText(const StelCore* core)
 
 	// Get the X & Y positions, and the line height
 	painter.setFont(font);
-	QString widthString = "MMMMMMMMMMMMMMMMMMMMM";
+	QString widthString = "MMMMMMMMMMMMMMMMMMMMMM";
 	const double insetFromRHS = painter.getFontMetrics().boundingRect(widthString).width();
 	StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
 	int yPositionOffset = qRound(projectorParams.viewportXywh[3]*projectorParams.viewportCenterOffset[1]);
-	int xPosition = qRound(projectorParams.devicePixelsPerPixel*projectorParams.viewportXywh[2] - insetFromRHS);
-	int yPosition = qRound(projectorParams.devicePixelsPerPixel*projectorParams.viewportXywh[3] - yPositionOffset - 20);
-	const int lineHeight = painter.getFontMetrics().height();
+	const double ppx = projectorParams.devicePixelsPerPixel;
+	int xPosition = qRound(ppx*(projectorParams.viewportXywh[2] - insetFromRHS));
+	int yPosition = qRound(ppx*(projectorParams.viewportXywh[3] - 20) - yPositionOffset);
+	const int lineHeight = qRound(ppx*painter.getFontMetrics().height());
 
 	// The Ocular
 	if (flagShowOculars && ocular!=Q_NULLPTR)
