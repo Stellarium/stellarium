@@ -321,6 +321,18 @@ void AngleMeasure::handleKeys(QKeyEvent* event)
 	event->setAccepted(false);
 }
 
+void improveClickMatch(StelProjectorP prj, double x, double y, Vec3d &v)
+{ // Nick Fedoseev patch: improve click match
+	Vec3d win;
+	prj->project(v,win);
+	double dx = x - win.v[0];
+	double dy = y - win.v[1];
+	bool verbose=qApp->property("verbose").toBool();
+	if (verbose)
+		qDebug() << "Nick Fedoseev patch: improve click match" << dx << dy;
+	prj->unProject(x+dx,y+dy,v);
+}
+
 void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 {
 	if (!flagShowAngleMeasure)
@@ -329,35 +341,20 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 		return;
 	}
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	qreal x = event->position().x(), y = event->position().y();
+#else
+	qreal x = event->x(), y = event->y();
+#endif
 	if (!flagPanAndSelect)
 	{
 		if (event->type()==QEvent::MouseButtonPress && event->button()==Qt::LeftButton)
 		{
 			const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
-	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-			if (prj->unProject(event->position().x(),event->position().y(),startPoint))
-	#else
-			if (prj->unProject(event->x(),event->y(),startPoint))
-	#endif
-			{ // Nick Fedoseev patch: improve click match
-				Vec3d win;
-				prj->project(startPoint,win);
-	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-				double dx = event->position().x() - win.v[0];
-				double dy = event->position().y() - win.v[1];
-				prj->unProject(event->position().x()+dx, event->position().y()+dy, startPoint);
-	#else
-				double dx = event->x() - win.v[0];
-				double dy = event->y() - win.v[1];
-				prj->unProject(event->x()+dx, event->y()+dy, startPoint);
-	#endif
-			}
+			if (prj->unProject(x,y,startPoint))
+				improveClickMatch(prj,x,y,startPoint);
 			const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-			prjHor->unProject(event->position().x(),event->position().y(),startPointHor);
-	#else
-			prjHor->unProject(event->x(),event->y(),startPointHor);
-	#endif
+			prjHor->unProject(x,y,startPointHor);
 			// first click reset the line... only draw it after we've dragged a little.
 			if (!dragging)
 			{
@@ -383,30 +380,10 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 		else if (event->type()==QEvent::MouseButtonPress && event->button()==Qt::RightButton)
 		{
 			const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
-	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-			if (prj->unProject(event->position().x(),event->position().y(),endPoint))
-	#else
-			if (prj->unProject(event->x(),event->y(),endPoint))
-	#endif
-			{ // Nick Fedoseev patch: improve click match
-				Vec3d win;
-				prj->project(endPoint,win);
-	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-				double dx = event->position().x() - win.v[0];
-				double dy = event->position().y() - win.v[1];
-				prj->unProject(event->position().x()+dx, event->position().y()+dy, endPoint);
-	#else
-				double dx = event->x() - win.v[0];
-				double dy = event->y() - win.v[1];
-				prj->unProject(event->x()+dx, event->y()+dy, endPoint);
-	#endif
-			}
+			if (prj->unProject(x,y,endPoint))
+				improveClickMatch(prj,x,y,endPoint);
 			const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-			prjHor->unProject(event->position().x(),event->position().y(),endPointHor);
-	#else
-			prjHor->unProject(event->x(),event->y(),endPointHor);
-	#endif
+			prjHor->unProject(x,y,endPointHor);
 			calculateEnds();
 			event->setAccepted(true);
 			return;
@@ -442,11 +419,6 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 					QApplication::setOverrideCursor(QCursor(Qt::CrossCursor));
 				dragging = true;
 				lineVisible = true;
-	#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-				qreal x = event->position().x(), y = event->position().y();
-	#else
-				qreal x = event->x(), y = event->y();
-	#endif
 				const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 				Vec3d c1, e1, s1;
 				c1.v[0] = x;
@@ -469,13 +441,7 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 				else
 				{
 					if (prj->unProject(x,y,endPoint))
-					{ // Nick Fedoseev patch: improve click match
-						Vec3d win;
-						prj->project(endPoint,win);
-						double dx = x - win.v[0];
-						double dy = y - win.v[1];
-						prj->unProject(x+dx, y+dy, endPoint);
-					}
+						improveClickMatch(prj,x,y,endPoint);
 					const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 					prjHor->unProject(x,y,endPointHor);
 				}
@@ -497,13 +463,7 @@ bool AngleMeasure::handleMouseMoves(int x, int y, Qt::MouseButtons)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 		if (prj->unProject(x,y,endPoint))
-		{ // Nick Fedoseev patch: improve click match
-		   Vec3d win;
-		   prj->project(endPoint,win);
-		   double dx = x - win.v[0];
-		   double dy = y - win.v[1];
-		   prj->unProject(x+dx, y+dy, endPoint);
-		}
+			improveClickMatch(prj,x,y,endPoint);
 		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 		prjHor->unProject(x,y,endPointHor);
 		calculateEnds();
