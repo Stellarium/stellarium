@@ -27,7 +27,7 @@ The most important hardware requirement is a contemporary graphics subsystem.
 
 \subsection{Minimum}
 \begin{itemize}
-\item Linux/Unix; Windows 7 and later; Mac OS X 10.10.0 and later
+\item Linux/Unix; Windows 7 and later; macOS 10.15 and later\footnote{Windows 10 and macOS 11.0 is minimal for Qt6-based Stellarium.}
 \item 3D graphics capabilities which support OpenGL 3.0 and GLSL 1.3 (2008
   GeForce 8xxx and later, ATI/AMD Radeon HD-2xxx and later; Intel HD
   graphics (Core-i 2xxx and later)) or OpenGL ES 2.0 and GLSL ES 1.0
@@ -48,7 +48,7 @@ The most important hardware requirement is a contemporary graphics subsystem.
 
 \subsection{Recommended}
 \begin{itemize}
-\item Linux/Unix; Windows 7 and later; Mac OS X 10.10.0 and later
+\item Linux/Unix; Windows 10 and later; macOS 11.0 and later
 \item 3D graphics card which supports OpenGL 3.3 and above and GLSL1.3 and later
 \item FullHD ($1920\times1080$ or $1920\times1200$) screen.\footnote{HiDPI screens may work, but show occasional platform-dependent issues.}
 \item 1 GB RAM or more
@@ -63,7 +63,7 @@ The most important hardware requirement is a contemporary graphics subsystem.
 \label{sec:GettingStarted:Downloading}
 
 Download the correct package for your operating system directly from the main page, \newline \url{https://stellarium.org}.
-An archive of all available versions is available at \url{https://github.com/Stellarium/stellarium/releases}.
+An archive of all available versions is available at our GitHub page --- \url{https://github.com/Stellarium/stellarium/releases}.
 
 \section{Installation}\index{Installation}
 \label{sec:GettingStarted:Installation}
@@ -204,6 +204,8 @@ FAQ (Frequently Asked Questions, also Frequently Answered
 Questions)\index{FAQ} and a general question section which may include
 further hints. Please make sure you have read and understood the FAQ
 before asking the same questions again.
+
+On some Intel UHD\newFeature{1.0} users may see the screen blanking when Stellarium is working --- the startup of planetarium with \textbf{--single-buffer} parameter can help here.
 
 
 %%% Local Variables: 
