@@ -759,8 +759,10 @@ if(QXlsx_ADDED)
         ${QXlsx_SOURCE_DIR}/QXlsx/source/*.cpp
         ${QXlsx_SOURCE_DIR}/QXlsx/header/*.h)
     add_library(QXlsx STATIC EXCLUDE_FROM_ALL ${QXLSX_FILES})
-    target_link_libraries(QXlsx PUBLIC Qt5::Core Qt5::Gui Qt5::GuiPrivate)
+    target_link_libraries(QXlsx PUBLIC Qt${QT_VERSION_MAJOR}::Core
+        Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::GuiPrivate)
     target_include_directories(QXlsx PUBLIC ${QXlsx_SOURCE_DIR}/QXlsx/header)
+    add_library(QXlsx::QXlsx ALIAS QXlsx)
 endif()
 
 CPMFindPackage(NAME Qt5Compress

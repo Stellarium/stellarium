@@ -86,30 +86,33 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
         # them, therefore DOWNLOAD_ONLY and all the code below
         CPMAddPackage(NAME indiclient
             URL https://github.com/indilib/indi/archive/v1.8.5.zip
-            URL_HASH SHA256=6c89a515b916a833dfb6ffe53972143cbdd274099c9a0834b8a5440e780d9f4a
+            URL_HASH SHA256=57b78afe6d338533e35725e94cf6a9e302e22348ab418811bd41997cddf13fd6
             VERSION 1.8.5
             DOWNLOAD_ONLY YES)
 
         # Installed version has /usr/include/libindi, move these headers to
         # such directory for a consistent #include
         file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/libindi)
-        file(GLOB INDI_HEADERS "${indiclient_SOURCE_DIR}/libindi/libs/indibase/*.h")
+        file(GLOB INDI_HEADERS "${indiclient_SOURCE_DIR}/libs/indibase/*.h")
         file(COPY ${INDI_HEADERS}
             DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/libindi)
 
         # Avoid bundling libnova too
         file(READ
-            ${indiclient_SOURCE_DIR}/libindi/libs/indibase/inditelescope.h
+            ${indiclient_SOURCE_DIR}/libs/indibase/inditelescope.h
             INDITELESCOPE_H)
         string(REGEX REPLACE
             "#include <libnova/julian_day.h>" "struct ln_date;"
+            INDITELESCOPE_H "${INDITELESCOPE_H}")
+        string(REGEX REPLACE
+            "ln_lnlat_posn lnobserver { 0, 0 };" ""
             INDITELESCOPE_H "${INDITELESCOPE_H}")
         file(GENERATE OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libindi/inditelescope.h
             CONTENT "${INDITELESCOPE_H}")
 
         # Fix build in windows
         file(READ
-            ${indiclient_SOURCE_DIR}/libindi/libs/indibase/indilogger.h
+            ${indiclient_SOURCE_DIR}/libs/indibase/indilogger.h
             INDILOGGER_H)
         string(REGEX REPLACE "#include <sys/time.h>"
             "#ifdef Q_OS_WIN\n#include <windows.h>\n#else\n#include <sys/time.h>\n#endif"
@@ -119,25 +122,25 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
 
         set(INDI_SOVERSION "1")
         set(CMAKE_INDI_VERSION_MAJOR 1)
-        set(CMAKE_INDI_VERSION_MINOR 6)
-        set(CMAKE_INDI_VERSION_RELEASE 0)
+        set(CMAKE_INDI_VERSION_MINOR 8)
+        set(CMAKE_INDI_VERSION_RELEASE 5)
         set(CMAKE_INDI_VERSION_STRING "${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE}")
         set(INDI_VERSION ${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE})
         set(DATA_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/share/indi/")
-        configure_file(${indiclient_SOURCE_DIR}/libindi/config.h.cmake
+        configure_file(${indiclient_SOURCE_DIR}/config.h.cmake
             ${CMAKE_CURRENT_BINARY_DIR}/libindi/config.h )
         add_library(indiclient STATIC
-            ${indiclient_SOURCE_DIR}/libindi/libs/lilxml.c
-            ${indiclient_SOURCE_DIR}/libindi/base64.c
-            ${indiclient_SOURCE_DIR}/libindi/libs/indibase/basedevice.cpp
-            ${indiclient_SOURCE_DIR}/libindi/libs/indibase/baseclient.cpp
-            ${indiclient_SOURCE_DIR}/libindi/libs/indibase/indiproperty.cpp
-            ${indiclient_SOURCE_DIR}/libindi/libs/indibase/indistandardproperty.cpp
-            ${indiclient_SOURCE_DIR}/libindi/libs/indicom.c)
+            ${indiclient_SOURCE_DIR}/libs/lilxml.c
+			${indiclient_SOURCE_DIR}/base64.c
+			${indiclient_SOURCE_DIR}/libs/indibase/basedevice.cpp
+			${indiclient_SOURCE_DIR}/libs/indibase/baseclient.cpp
+			${indiclient_SOURCE_DIR}/libs/indibase/indiproperty.cpp
+			${indiclient_SOURCE_DIR}/libs/indibase/indistandardproperty.cpp
+			${indiclient_SOURCE_DIR}/libs/indicom.c)
         target_include_directories(indiclient PUBLIC
             ${CMAKE_CURRENT_BINARY_DIR}
-            ${indiclient_SOURCE_DIR}/libindi
-            ${indiclient_SOURCE_DIR}/libindi/libs
+            ${indiclient_SOURCE_DIR}
+            ${indiclient_SOURCE_DIR}/libs
             PRIVATE
             ${CMAKE_CURRENT_BINARY_DIR}/libindi)
         target_link_libraries(indiclient ${ZLIB_LIBRARIES})
