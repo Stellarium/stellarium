@@ -25,7 +25,9 @@
 #include "StelModule.hpp"
 #include "StelUtils.hpp"
 #include "Landscape.hpp"
+#include "Skylight.hpp"
 
+#include <memory>
 #include <QMap>
 #include <QStringList>
 #include <QCache>
@@ -117,6 +119,38 @@ class LandscapeMgr : public StelModule
 		   READ getFlagAtmosphereNoScatter
 		   WRITE setFlagAtmosphereNoScatter
 		   NOTIFY atmosphereNoScatterChanged)
+	Q_PROPERTY(QString atmosphereModel
+		   READ getAtmosphereModel
+		   WRITE setAtmosphereModel
+		   NOTIFY atmosphereModelChanged)
+	Q_PROPERTY(QString atmosphereModelPath
+		   READ getAtmosphereModelPath
+		   WRITE setAtmosphereModelPath
+		   NOTIFY atmosphereModelPathChanged)
+	Q_PROPERTY(bool atmosphereShowMySkyStoppedWithError
+		   READ getAtmosphereShowMySkyStoppedWithError
+		   WRITE setAtmosphereShowMySkyStoppedWithError
+		   NOTIFY atmosphereStoppedWithErrorChanged)
+	Q_PROPERTY(QString atmosphereShowMySkyStatusText
+		   READ getAtmosphereShowMySkyStatusText
+		   WRITE setAtmosphereShowMySkyStatusText
+		   NOTIFY atmosphereStatusTextChanged)
+	Q_PROPERTY(bool flagAtmosphereZeroOrderScattering
+		   READ getFlagAtmosphereZeroOrderScattering
+		   WRITE setFlagAtmosphereZeroOrderScattering
+		   NOTIFY flagAtmosphereZeroOrderScatteringChanged)
+	Q_PROPERTY(bool flagAtmosphereSingleScattering
+		   READ getFlagAtmosphereSingleScattering
+		   WRITE setFlagAtmosphereSingleScattering
+		   NOTIFY flagAtmosphereSingleScatteringChanged)
+	Q_PROPERTY(bool flagAtmosphereMultipleScattering
+		   READ getFlagAtmosphereMultipleScattering
+		   WRITE setFlagAtmosphereMultipleScattering
+		   NOTIFY flagAtmosphereMultipleScatteringChanged)
+	Q_PROPERTY(int atmosphereEclipseSimulationQuality
+		   READ getAtmosphereEclipseSimulationQuality
+		   WRITE setAtmosphereEclipseSimulationQuality
+		   NOTIFY atmosphereEclipseSimulationQualityChanged)
 	Q_PROPERTY(bool cardinalPointsDisplayed
 		   READ getFlagCardinalPoints
 		   WRITE setFlagCardinalPoints
@@ -432,6 +466,30 @@ public slots:
 	//! Set flag for displaying Atmosphere.
 	void setFlagAtmosphere(const bool displayed);
 
+	QString getAtmosphereModel() const;
+	void setAtmosphereModel(const QString& model);
+
+	QString getAtmosphereModelPath() const;
+	void setAtmosphereModelPath(const QString& path);
+
+	bool getAtmosphereShowMySkyStoppedWithError() const;
+	void setAtmosphereShowMySkyStoppedWithError(bool error);
+
+	QString getAtmosphereShowMySkyStatusText() const;
+	void setAtmosphereShowMySkyStatusText(const QString& text);
+
+	bool getFlagAtmosphereZeroOrderScattering() const;
+	void setFlagAtmosphereZeroOrderScattering(bool enable);
+
+	bool getFlagAtmosphereSingleScattering() const;
+	void setFlagAtmosphereSingleScattering(bool enable);
+
+	bool getFlagAtmosphereMultipleScattering() const;
+	void setFlagAtmosphereMultipleScattering(bool enable);
+
+	int getAtmosphereEclipseSimulationQuality() const;
+	void setAtmosphereEclipseSimulationQuality(int quality);
+
 	//! Get flag for suppressing Atmosphere scatter (blue light) while displaying all other effects (refraction, extinction).
 	bool getFlagAtmosphereNoScatter() const;
 	//! Set flag for suppressing Atmosphere scatter (blue light) while displaying all other effects (refraction, extinction).
@@ -559,6 +617,14 @@ public slots:
 
 signals:
 	void atmosphereDisplayedChanged(const bool displayed);
+	void atmosphereModelChanged(const QString& model);
+	void atmosphereModelPathChanged(const QString& model);
+	void atmosphereStoppedWithErrorChanged(bool error);
+	void atmosphereStatusTextChanged(const QString& status);
+	void flagAtmosphereZeroOrderScatteringChanged(bool value);
+	void flagAtmosphereSingleScatteringChanged(bool value);
+	void flagAtmosphereMultipleScatteringChanged(bool value);
+	void atmosphereEclipseSimulationQualityChanged(unsigned quality);
 	void atmosphereNoScatterChanged(const bool noScatter);
 	void cardinalPointsDisplayedChanged(const bool displayed);
 	void ordinalPointsDisplayedChanged(const bool displayed);
@@ -623,6 +689,8 @@ private slots:
 	void increaseLightPollution();
 	void reduceLightPollution();
 	void cyclicChangeLightPollution();
+	void createAtmosphere();
+	void resetToFallbackAtmosphere();
 
 private:
 	//! Get light pollution luminance level in cd/m².
@@ -641,7 +709,10 @@ private:
 	//! @returns an empty string, if no such landscape was found.
 	static QString getLandscapePath(const QString landscapeID);
 
-	Atmosphere* atmosphere;			// Atmosphere
+	Skylight skylight; // Is used by AtmospherePreetham, but must not be deleted & re-created,
+                       // otherwise StelPropertyMgr::registerObject will break.
+	std::unique_ptr<Atmosphere> atmosphere; // Atmosphere
+	std::unique_ptr<Atmosphere> loadingAtmosphere; // Atmosphere that's in the process of loading
 	Cardinals* cardinalPoints;		// Cardinals points
 	Landscape* landscape;			// The landscape i.e. the fog, the ground and "decor"
 	Landscape* oldLandscape;		// Used only during transitions to newly loaded landscape.
@@ -689,6 +760,14 @@ private:
 
 	//! Core current planet name, used to react to planet change.
 	QString currentPlanetName;
+
+	bool needToRecreateAtmosphere=false;
+	bool atmosphereZeroOrderScatteringEnabled=false;
+	bool atmosphereSingleScatteringEnabled=true;
+	bool atmosphereMultipleScatteringEnabled=true;
+
+	QString atmosphereShowMySkyStatusText;
+	bool atmosphereShowMySkyStoppedWithError=false;
 };
 
 #endif // LANDSCAPEMGR_HPP

@@ -165,7 +165,10 @@ SET(stellarium_lib_SRCS
      core/planetsephems/de441.hpp
      core/planetsephems/htc20b.cpp
      core/planetsephems/htc20b.hpp
-     core/modules/Atmosphere.cpp
+     core/modules/AtmospherePreetham.cpp
+     core/modules/AtmospherePreetham.hpp
+     core/modules/AtmosphereShowMySky.cpp
+     core/modules/AtmosphereShowMySky.hpp
      core/modules/Atmosphere.hpp
      core/modules/Asterism.cpp
      core/modules/Asterism.hpp
@@ -518,6 +521,9 @@ ELSE()
      IF(APPLE)
 	  SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
      ENDIF()
+ENDIF()
+IF(ENABLE_SHOWMYSKY)
+    TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${ShowMySky_INCLUDE_DIRECTORIES}")
 ENDIF()
 
 ADD_DEPENDENCIES(stellarium AllStaticPlugins)
