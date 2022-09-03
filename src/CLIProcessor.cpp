@@ -61,6 +61,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "--compat33 (or -C)      : Request OpenGL 3.3 Compatibility Profile\n"
 			  << "                          May help for certain driver configurations. Mac?\n"
 			  << "--fix-text (or -t)      : May fix text rendering problems\n"
+			  << "--single-buffer         : Use single buffer swap (avoid screen blanking on Intel UHD)\n"
 			  << "--scale-gui  <scale factor>  : Scaling the GUI according to scale factor\n"
 			  << "--dump-opengl-details (or -d) : dump information about OpenGL support to logfile.\n"
 			  << "                          Use this is you have graphics problems\n"

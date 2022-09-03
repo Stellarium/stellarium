@@ -31,9 +31,12 @@ jobs:
     - name: Configure CMake
       shell: bash
       run: |
+        wget https://github.com/10110111/CalcMySky/releases/download/v0.0.5/CalcMySky-v0.0.5-linux-amd64-qt6.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
+        tar xf "${{ github.workspace }}/../CalcMySky.tar.xz" -C "${{ github.workspace }}/.."
+        mv "${{ github.workspace }}/../CalcMySky"{-*,}
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
+        cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }} -DCMAKE_PREFIX_PATH="${{ github.workspace }}/../CalcMySky"
 
     - name: Compile
       working-directory: build
@@ -64,9 +67,12 @@ jobs:
       shell: bash
       run: |
         export PATH="/usr/local/opt/qt@6/bin:$PATH"
+        wget https://github.com/10110111/CalcMySky/releases/download/v0.0.5/CalcMySky-v0.0.5-macos-amd64-qt6.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
+        tar xf "${{ github.workspace }}/../CalcMySky.tar.xz" -C "${{ github.workspace }}/.."
+        mv "${{ github.workspace }}/../CalcMySky"{-*,}
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_OSX_ARCHITECTURES=x86_64 -DENABLE_TESTING=On ${{ github.workspace }}
+        cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_OSX_ARCHITECTURES=x86_64 -DENABLE_TESTING=On ${{ github.workspace }} -DCMAKE_PREFIX_PATH="${{ github.workspace }}/../CalcMySky"
 
     - name: Compile
       working-directory: build

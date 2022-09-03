@@ -233,8 +233,8 @@ int main(int argc, char **argv)
 	//fmt.setSwapInterval(0);
 
 	// avoid screen blanking on Intel UHD
-	//if (confSettings->value("video/SwapBehaviorSingleBuffer", false).toBool())
-	fmt.setSwapBehavior(QSurfaceFormat::SingleBuffer);
+	if (argList.contains("--single-buffer"))
+		fmt.setSwapBehavior(QSurfaceFormat::SingleBuffer);
 
 	QSurfaceFormat::setDefaultFormat(fmt);
 

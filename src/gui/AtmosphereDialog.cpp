@@ -19,9 +19,23 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelSkyDrawer.hpp"
+#include "StelTranslator.hpp"
+#include "StelPropertyMgr.hpp"
 #include "AtmosphereDialog.hpp"
 #include "StelPropertyMgr.hpp"
 #include "ui_atmosphereDialog.h"
+
+#include <QFileInfo>
+#include <QFileDialog>
+
+namespace
+{
+constexpr char MODEL_PROPERTY[]      = "LandscapeMgr.atmosphereModel";
+constexpr char MODEL_PATH_PROPERTY[] = "LandscapeMgr.atmosphereModelPath";
+constexpr char ERROR_PROPERTY[]       = "LandscapeMgr.atmosphereShowMySkyStoppedWithError";
+constexpr char STATUS_TEXT_PROPERTY[] = "LandscapeMgr.atmosphereShowMySkyStatusText";
+constexpr char ECLIPSE_SIM_QUALITY_PROPERTY[] = "LandscapeMgr.atmosphereEclipseSimulationQuality";
+}
 
 AtmosphereDialog::AtmosphereDialog()
 	: StelDialog("Atmosphere")
@@ -43,6 +57,7 @@ void AtmosphereDialog::retranslate()
 void AtmosphereDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+	dialog->installEventFilter(this);
 	
 	//Signals and slots
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -52,6 +67,10 @@ void AtmosphereDialog::createDialogContent()
 	connectDoubleProperty(ui->pressureDoubleSpinBox,"StelSkyDrawer.atmospherePressure");
 	connectDoubleProperty(ui->temperatureDoubleSpinBox,"StelSkyDrawer.atmosphereTemperature");
 	connectDoubleProperty(ui->extinctionDoubleSpinBox,"StelSkyDrawer.extinctionCoefficient");
+	connect(StelApp::getInstance().getStelPropertyManager()->getProperty(STATUS_TEXT_PROPERTY),
+			&StelProperty::changed, this, [this](const QVariant& v){ ui->showMySky_statusLabel->setText(v.toString()); });
+	connect(StelApp::getInstance().getStelPropertyManager()->getProperty(ERROR_PROPERTY),
+			&StelProperty::changed, this, [this](const QVariant& v){ onErrorStateChanged(v.toBool()); });
 
 	connect(ui->standardAtmosphereButton, SIGNAL(clicked()), this, SLOT(setStandardAtmosphere()));
 
@@ -75,6 +94,33 @@ void AtmosphereDialog::createDialogContent()
 	}
 	else
 		ui->groupBox_experimental->hide();
+
+#ifdef ENABLE_SHOWMYSKY
+	connect(ui->atmosphereModel, &QComboBox::currentTextChanged, this, &AtmosphereDialog::onModelChoiceChanged);
+	connect(ui->showMySky_pathToModelBrowseBtn, &QPushButton::clicked, this, &AtmosphereDialog::browsePathToModel);
+	connect(ui->showMySky_pathToModelEdit, &QLineEdit::textChanged, this, &AtmosphereDialog::onPathToModelChanged);
+	connect(ui->showMySky_pathToModelEdit, &QLineEdit::editingFinished, this, &AtmosphereDialog::onPathToModelEditingFinished);
+	connect(ui->showMySky_debugOptionsEnabled, &QCheckBox::toggled, this,
+			[this](const bool enabled){ ui->showMySky_debugOptionsGroup->setVisible(enabled); });
+	connectBoolProperty(ui->showMySky_zeroOrderEnabled, "LandscapeMgr.flagAtmosphereZeroOrderScattering");
+	connectBoolProperty(ui->showMySky_singleScatteringEnabled, "LandscapeMgr.flagAtmosphereSingleScattering");
+	connectBoolProperty(ui->showMySky_multipleScatteringEnabled, "LandscapeMgr.flagAtmosphereMultipleScattering");
+	connectIntProperty(ui->showMySky_eclipseSimulationQualitySpinBox, ECLIPSE_SIM_QUALITY_PROPERTY);
+#else
+    ui->visualModelConfigGroup->hide();
+#endif
+
+	setCurrentValues();
+}
+
+bool AtmosphereDialog::eventFilter(QObject* object, QEvent* event)
+{
+	if (object != dialog || event->type() != QEvent::KeyPress)
+		return false;
+	const auto keyEvent = static_cast<QKeyEvent*>(event);
+	if (keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return)
+		return true; // Prevent these keys pressing buttons when focus is not on the buttons
+	return false;
 }
 
 void AtmosphereDialog::setStandardAtmosphere()
@@ -96,4 +142,111 @@ void AtmosphereDialog::setTfromK(double k)
 
 		skyDrawer->setT(T);
 	}
+}
+
+void AtmosphereDialog::clearStatus()
+{
+	ui->showMySky_statusLabel->setText("");
+    ui->showMySky_statusLabel->setStyleSheet("");
+}
+
+void AtmosphereDialog::onModelChoiceChanged(const QString& model)
+{
+	updatePathToModelStyle();
+
+	const bool isShowMySky = model.toLower()=="showmysky";
+	ui->showMySky_optionsGroup->setVisible(isShowMySky);
+	if(!isShowMySky || this->hasValidModelPath())
+		StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(MODEL_PROPERTY, model);
+}
+
+void AtmosphereDialog::browsePathToModel()
+{
+	const auto path=QFileDialog::getExistingDirectory(nullptr, q_("Open ShowMySky model"));
+	if(path.isNull()) return;
+
+	const auto mgr = StelApp::getInstance().getStelPropertyManager();
+	const auto currentModel = mgr->getProperty(MODEL_PROPERTY)->getValue().toString();
+
+	clearStatus();
+	ui->showMySky_pathToModelEdit->setText(path);
+	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(MODEL_PATH_PROPERTY, path);
+
+    const auto selectedModel = ui->atmosphereModel->currentText();
+    if(selectedModel.toLower() != currentModel.toLower())
+        onModelChoiceChanged(selectedModel);
+}
+
+bool AtmosphereDialog::hasValidModelPath() const
+{
+	const auto text=ui->showMySky_pathToModelEdit->text();
+	if(text.isEmpty()) return false;
+	return QFileInfo(text+"/params.atmo").exists();
+}
+
+void AtmosphereDialog::onPathToModelEditingFinished()
+{
+	clearStatus();
+
+	if(!hasValidModelPath())
+		return;
+
+	const auto mgr = StelApp::getInstance().getStelPropertyManager();
+	const auto currentModel = mgr->getProperty(MODEL_PROPERTY)->getValue().toString();
+
+	const auto path = ui->showMySky_pathToModelEdit->text();
+	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(MODEL_PATH_PROPERTY, path);
+
+    const auto selectedModel = ui->atmosphereModel->currentText();
+    if(selectedModel.toLower() != currentModel.toLower())
+        onModelChoiceChanged(selectedModel);
+}
+
+void AtmosphereDialog::updatePathToModelStyle()
+{
+	if(hasValidModelPath())
+		ui->showMySky_pathToModelEdit->setStyleSheet("");
+	else
+		ui->showMySky_pathToModelEdit->setStyleSheet("color:red;");
+}
+
+void AtmosphereDialog::onPathToModelChanged()
+{
+	clearStatus();
+    updatePathToModelStyle();
+}
+
+void AtmosphereDialog::onErrorStateChanged(const bool error)
+{
+	if(error)
+		ui->showMySky_statusLabel->setStyleSheet("margin-left: 1px; border-radius: 5px; background-color: #ff5757;");
+	else
+		ui->showMySky_statusLabel->setStyleSheet("");
+}
+
+void AtmosphereDialog::setCurrentValues()
+{
+	const auto mgr = StelApp::getInstance().getStelPropertyManager();
+	const auto currentModel = mgr->getProperty(MODEL_PROPERTY)->getValue().toString();
+	for(int i = 0; i < ui->atmosphereModel->count(); ++i)
+	{
+		if(ui->atmosphereModel->itemText(i).toLower()==currentModel.toLower())
+		{
+			ui->atmosphereModel->setCurrentIndex(i);
+			break;
+		}
+	}
+	onModelChoiceChanged(ui->atmosphereModel->currentText());
+
+	const auto currentModelPath = mgr->getProperty(MODEL_PATH_PROPERTY)->getValue().toString();
+	ui->showMySky_pathToModelEdit->setText(currentModelPath);
+	const auto currentStatusText = mgr->getProperty(STATUS_TEXT_PROPERTY)->getValue().toString();
+	ui->showMySky_statusLabel->setText(currentStatusText);
+	const bool currentErrorStatus = mgr->getProperty(ERROR_PROPERTY)->getValue().toBool();
+	onErrorStateChanged(currentErrorStatus);
+
+	const auto eclipseQuality = mgr->getProperty(ECLIPSE_SIM_QUALITY_PROPERTY)->getValue().toInt();
+	ui->showMySky_eclipseSimulationQualitySpinBox->setValue(eclipseQuality);
+
+	ui->showMySky_debugOptionsEnabled->setChecked(false);
 }

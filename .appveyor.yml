@@ -62,12 +62,20 @@ before_build:
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "release" -and $env:packaging -eq "true") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]') -and $env:packaging -eq "true") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:qtver.contains('5.')) { $env:USE_EXT_LIBGLES = 'true' }
+  - ps: if($env:qtver.contains('6.')) { $env:QT_VER_MAJOR=6 }
+  - ps: if($env:qtver.contains('5.')) { $env:QT_VER_MAJOR=5 }
+  - ps: if($env:suffix.contains('32')) { $env:BITS=32 }
+  - ps: if($env:suffix.contains('64')) { $env:BITS=64 }
+  - appveyor DownloadFile https://github.com/10110111/CalcMySky/releases/download/v0.0.5/CalcMySky-v0.0.5-win%BITS%-qt%QT_VER_MAJOR%.zip -FileName c:\CalcMySky.zip
+  - cd c:\
+  - 7z x CalcMySky.zip
+  - bash -c 'mv CalcMySky{-*,}'
   - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
   - mkdir stellarium-%qtver%-%qtbin%
   - cd c:\stellarium
   - mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
-  - if [%PUBLISH_BINARY%]==[true] cmake -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" %cmake_args% ..
-  - if [%PUBLISH_BINARY%]==[false] cmake -DENABLE_TESTING=On -DENABLE_NLS=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" %cmake_args% ..
+  - if [%PUBLISH_BINARY%]==[true] cmake -DCMAKE_PREFIX_PATH=c:/CalcMySky -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" %cmake_args% ..
+  - if [%PUBLISH_BINARY%]==[false] cmake -DCMAKE_PREFIX_PATH=c:/CalcMySky -DENABLE_TESTING=On -DENABLE_NLS=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" %cmake_args% ..
 
 build:
   project: c:\stellarium\build-%qtver%-%qtbin%\Stellarium.sln
