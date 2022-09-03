@@ -321,9 +321,8 @@ void AngleMeasure::handleKeys(QKeyEvent* event)
 	event->setAccepted(false);
 }
 
-void improveClickMatch(double x, double y, Vec3d &v)
+void improveClickMatch(StelProjectorP prj, double x, double y, Vec3d &v)
 { // Nick Fedoseev patch: improve click match
-	const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 	Vec3d win;
 	prj->project(v,win);
 	double dx = x - win.v[0];
@@ -353,7 +352,7 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 		{
 			const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 			if (prj->unProject(x,y,startPoint))
-				improveClickMatch(x,y,startPoint);
+				improveClickMatch(prj,x,y,startPoint);
 			const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 			prjHor->unProject(x,y,startPointHor);
 			// first click reset the line... only draw it after we've dragged a little.
@@ -382,7 +381,7 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 		{
 			const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 			if (prj->unProject(x,y,endPoint))
-				improveClickMatch(x,y,endPoint);
+				improveClickMatch(prj,x,y,endPoint);
 			const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 			prjHor->unProject(x,y,endPointHor);
 			calculateEnds();
@@ -442,7 +441,7 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 				else
 				{
 					if (prj->unProject(x,y,endPoint))
-						improveClickMatch(x,y,endPoint);
+						improveClickMatch(prj,x,y,endPoint);
 					const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 					prjHor->unProject(x,y,endPointHor);
 				}
@@ -464,7 +463,7 @@ bool AngleMeasure::handleMouseMoves(int x, int y, Qt::MouseButtons)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 		if (prj->unProject(x,y,endPoint))
-			improveClickMatch(x,y,endPoint);
+			improveClickMatch(prj,x,y,endPoint);
 		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 		prjHor->unProject(x,y,endPointHor);
 		calculateEnds();
