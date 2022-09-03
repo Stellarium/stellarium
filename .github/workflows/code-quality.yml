@@ -52,9 +52,12 @@ jobs:
       shell: bash
       run: |
         mkdir -p ../../../.stellarium/ephem
+        wget https://github.com/10110111/CalcMySky/releases/download/v0.0.5/CalcMySky-v0.0.5-linux-amd64-qt5.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
+        tar xf "${{ github.workspace }}/../CalcMySky.tar.xz" -C "${{ github.workspace }}/.."
+        mv "${{ github.workspace }}/../CalcMySky"-* "${{ github.workspace }}/../CalcMySky"
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }}
+        cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }} -DCMAKE_PREFIX_PATH="${{ github.workspace }}/../CalcMySky"
 
     - name: Compile
       working-directory: build

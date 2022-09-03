@@ -21,6 +21,17 @@ extraction:
       - "libgps-dev"
       - "libgl1-mesa-dev"
       - "libdrm-dev"
+    configure:
+      command:
+      - wget https://github.com/10110111/CalcMySky/releases/download/v0.0.5/CalcMySky-v0.0.5-linux-amd64-qt5.tar.xz -O CalcMySky.tar.xz
+      - tar xvf CalcMySky.tar.xz
+      - mv CalcMySky{-*,}
+      - mkdir build && cd build
+      - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/opt/src/CalcMySky /opt/src
+    index:
+      build_command:
+        - cd /opt/src/build
+        - make
   python:
     python_setup:
       version: 3

@@ -57,8 +57,15 @@ jobs:
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v2
+    - name: Build
+      run: |
+        wget https://github.com/10110111/CalcMySky/releases/download/v0.0.5/CalcMySky-v0.0.5-linux-amd64-qt5.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
+        tar xf "${{ github.workspace }}/../CalcMySky.tar.xz" -C "${{ github.workspace }}/.."
+        mv "${{ github.workspace }}/../CalcMySky"{-*,}
+        mkdir -p build
+        cd build
+        cmake -DCMAKE_BUILD_TYPE=Release ${{ github.workspace }} -DCMAKE_PREFIX_PATH="${{ github.workspace }}/../CalcMySky"
+        make
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl

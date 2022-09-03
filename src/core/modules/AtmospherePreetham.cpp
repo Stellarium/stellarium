@@ -17,7 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "Atmosphere.hpp"
+#include "AtmospherePreetham.hpp"
 #include "StelUtils.hpp"
 #include "Planet.hpp"
 #include "StelApp.hpp"
@@ -26,6 +26,7 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "Dithering.hpp"
+#include "Skylight.hpp"
 
 #include <QFile>
 #include <QDebug>
@@ -33,8 +34,9 @@
 #include <QOpenGLShaderProgram>
 
 
-Atmosphere::Atmosphere(void)
+AtmospherePreetham::AtmospherePreetham(Skylight& sky)
 	: viewport(0,0,0,0)
+    , sky(sky)
 	, skyResolutionY(44)
 	, skyResolutionX(44)
 	, posGrid(Q_NULLPTR)
@@ -42,16 +44,12 @@ Atmosphere::Atmosphere(void)
 	, indicesBuffer(QOpenGLBuffer::IndexBuffer)
 	, colorGrid(Q_NULLPTR)
 	, colorGridBuffer(QOpenGLBuffer::VertexBuffer)
-	, averageLuminance(0.f)
-	, overrideAverageLuminance(false)
-	, eclipseFactor(1.f)
-	, lightPollutionLuminance(0)
 {
 	setFadeDuration(1.5f);
 
 	QOpenGLShader vShader(QOpenGLShader::Vertex);
 	{
-		QFile vert(":/shaders/atmosphere.vert");
+		QFile vert(":/shaders/preethamAtmosphere.vert");
 		if(!vert.open(QFile::ReadOnly))
 			qFatal("Failed to open atmosphere vertex shader source");
 		QFile toneRepro(":/shaders/xyYToRGB.glsl");
@@ -62,7 +60,7 @@ Atmosphere::Atmosphere(void)
 	}
 	if (!vShader.log().isEmpty())
 	{
-		qWarning() << "Warnings while compiling atmosphere vertex shader: " << vShader.log();
+		qWarning() << "Warnings while compiling Preetham atmosphere vertex shader: " << vShader.log();
 	}
 	QOpenGLShader fShader(QOpenGLShader::Fragment);
 	if (!fShader.compileSourceCode(
@@ -73,16 +71,16 @@ Atmosphere::Atmosphere(void)
 					 "   gl_FragColor = vec4(dither(resultSkyColor), 1.);\n"
 					 "}"))
 	{
-		qFatal("Error while compiling atmosphere fragment shader: %s", fShader.log().toLatin1().constData());
+		qFatal("Error while compiling Preetham atmosphere fragment shader: %s", fShader.log().toLatin1().constData());
 	}
 	if (!fShader.log().isEmpty())
 	{
-		qWarning() << "Warnings while compiling atmosphere fragment shader: " << vShader.log();
+		qWarning() << "Warnings while compiling Preetham atmosphere fragment shader: " << vShader.log();
 	}
 	atmoShaderProgram = new QOpenGLShaderProgram();
 	atmoShaderProgram->addShader(&vShader);
 	atmoShaderProgram->addShader(&fShader);
-	StelPainter::linkProg(atmoShaderProgram, "atmosphere");
+	StelPainter::linkProg(atmoShaderProgram, "Preetham atmosphere");
 
 	GL(atmoShaderProgram->bind());
 	GL(shaderAttribLocations.bayerPattern = atmoShaderProgram->uniformLocation("bayerPattern"));
@@ -113,7 +111,7 @@ Atmosphere::Atmosphere(void)
 	GL(atmoShaderProgram->release());
 }
 
-Atmosphere::~Atmosphere(void)
+AtmospherePreetham::~AtmospherePreetham(void)
 {
 	delete [] posGrid;
 	posGrid = Q_NULLPTR;
@@ -123,9 +121,9 @@ Atmosphere::~Atmosphere(void)
 	atmoShaderProgram = Q_NULLPTR;
 }
 
-void Atmosphere::computeColor(StelCore* core, const double JD, const Planet& currentPlanet, const Planet& sun, const Planet*const moon,
-							  const StelLocation& location, const float temperature, const float relativeHumidity,
-							  const float extinctionCoefficient, const bool noScatter)
+void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Planet& currentPlanet, const Planet& sun, const Planet*const moon,
+									  const StelLocation& location, const float temperature, const float relativeHumidity,
+									  const float extinctionCoefficient, const bool noScatter)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	if (viewport != prj->getViewport())
@@ -357,24 +355,8 @@ void Atmosphere::computeColor(StelCore* core, const double JD, const Planet& cur
 		averageLuminance = sum_lum/static_cast<float>((1+skyResolutionX)*(1+skyResolutionY));
 }
 
-// override computable luminance. This is for special operations only, e.g. for scripting of brightness-balanced image export.
-// To return to auto-computed values, set any negative value.
-void Atmosphere::setAverageLuminance(float overrideLum)
-{
-	if (overrideLum<0.f)
-	{
-		overrideAverageLuminance=false;
-		averageLuminance=0.f;
-	}
-	else
-	{
-		overrideAverageLuminance=true;
-		averageLuminance=overrideLum;
-	}
-}
-
 // Draw the atmosphere using the precalc values stored in tab_sky
-void Atmosphere::draw(StelCore* core)
+void AtmospherePreetham::draw(StelCore* core)
 {
 	if (StelApp::getInstance().getVisionModeNight())
 		return;
@@ -455,5 +437,5 @@ void Atmosphere::draw(StelCore* core)
 	// debug output
 	// sPainter.setColor(0.7f, 0.7f, 0.7f);
 	// sPainter.drawText(83, 108, QString("Tonemapper::worldAdaptationLuminance(): %1" ).arg(eye->getWorldAdaptationLuminance()));
-	// sPainter.drawText(83, 120, QString("Atmosphere::getAverageLuminance(): %1" ).arg(getAverageLuminance()));
+	// sPainter.drawText(83, 120, QString("AtmospherePreetham::getAverageLuminance(): %1" ).arg(getAverageLuminance()));
 }

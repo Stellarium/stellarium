@@ -23,7 +23,8 @@
 #include "StelActionMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "Landscape.hpp"
-#include "Atmosphere.hpp"
+#include "AtmospherePreetham.hpp"
+#include "AtmosphereShowMySky.hpp"
 #include "StelApp.hpp"
 #include "SolarSystem.hpp"
 #include "StelCore.hpp"
@@ -47,10 +48,20 @@
 #include <QTemporaryFile>
 #include <QMouseEvent>
 #include <QPainter>
+#include <QElapsedTimer>
 #include <QOpenGLPaintDevice>
 
 #include <stdexcept>
 
+namespace
+{
+constexpr char ATMOSPHERE_MODEL_CONFIG_KEY[]="landscape/atmosphere_model";
+constexpr char ATMOSPHERE_MODEL_PATH_CONFIG_KEY[]="landscape/atmosphere_model_path";
+constexpr char ATMOSPHERE_ECLIPSE_SIM_QUALITY_CONFIG_KEY[]="landscape/atmosphere_eclipse_simulation_quality";
+constexpr char ATMOSPHERE_MODEL_CONF_VAL_PREETHAM[]="preetham";
+constexpr char ATMOSPHERE_MODEL_CONF_VAL_SHOWMYSKY[]="showmysky";
+constexpr char ATMOSPHERE_MODEL_CONF_VAL_DEFAULT[]="preetham";
+}
 
 Cardinals::Cardinals()
 	: color(0.6f,0.2f,0.2f)
@@ -280,7 +291,6 @@ LandscapeMgr::LandscapeMgr()
 
 LandscapeMgr::~LandscapeMgr()
 {
-	delete atmosphere;
 	delete cardinalPoints;
 	if (oldLandscape)
 	{
@@ -310,6 +320,78 @@ double LandscapeMgr::getCallOrder(StelModuleActionName actionName) const
 
 void LandscapeMgr::update(double deltaTime)
 {
+	if(needToRecreateAtmosphere && !loadingAtmosphere)
+		createAtmosphere();
+
+	const auto core = StelApp::getInstance().getCore();
+	const auto drawer = core->getSkyDrawer();
+
+	if(loadingAtmosphere && loadingAtmosphere->isLoading())
+	{
+		try
+		{
+			// Use no more than 1/60th of a second for this batch of loading
+			QElapsedTimer timer;
+			timer.start();
+            Atmosphere::LoadingStatus status;
+			while(loadingAtmosphere->isLoading() && timer.elapsed() < 1000/60)
+				status = loadingAtmosphere->stepDataLoading();
+			if(loadingAtmosphere->isLoading())
+            {
+                setAtmosphereShowMySkyStoppedWithError(false);
+				const auto percentDone = std::lround(100.*status.stepsDone/status.stepsToDo);
+                setAtmosphereShowMySkyStatusText(q_("Loading... %1% done").arg(percentDone));
+				qDebug() << "Finished this batch of loading at" << percentDone << "%, will continue in the next frame";
+            }
+			else
+			{
+				setAtmosphereShowMySkyStatusText(q_("Switching models..."));
+			}
+		}
+		catch(AtmosphereShowMySky::InitFailure const& error)
+		{
+			qWarning() << "ERROR: Failed to load atmosphere model data:" << error.what();
+			qWarning() << "WARNING: Falling back to the Preetham's model";
+            setAtmosphereShowMySkyStoppedWithError(true);
+            setAtmosphereShowMySkyStatusText(error.what());
+			loadingAtmosphere.reset();
+		}
+	}
+
+	if(loadingAtmosphere && loadingAtmosphere->isReadyToRender())
+	{
+        bool loaded = false;
+		if(drawer->getFlagHasAtmosphere())
+        {
+            // Fade out current atmosphere, then fade in the new one
+            if(atmosphere->getFlagShow())
+            {
+                atmosphere->setFlagShow(false);
+            }
+            else if(atmosphere->getFadeIntensity() == 0)
+            {
+                loadingAtmosphere->setFlagShow(true);
+                loadingAtmosphere->setFadeDuration(atmosphere->getFadeDuration());
+                loadingAtmosphere->setLightPollutionLuminance(atmosphere->getLightPollutionLuminance());
+                loaded = true;
+            }
+        }
+        else
+        {
+            loaded = true;
+        }
+
+        if(loaded)
+        {
+            atmosphere = std::move(loadingAtmosphere);
+#ifdef ENABLE_SHOWMYSKY
+            if(dynamic_cast<AtmosphereShowMySky*>(atmosphere.get()))
+                setAtmosphereShowMySkyStatusText(q_("Loaded successfully"));
+#endif
+            emit atmosphereModelChanged(getAtmosphereModel());
+        }
+	}
+
 	atmosphere->update(deltaTime);
 
 	if (oldLandscape)
@@ -336,9 +418,6 @@ void LandscapeMgr::update(double deltaTime)
 	// Compute the atmosphere color and intensity
 	// Compute the sun position in local coordinate
 	SolarSystem* ssystem = static_cast<SolarSystem*>(StelApp::getInstance().getModuleMgr().getModule("SolarSystem"));
-
-	StelCore* core = StelApp::getInstance().getCore();
-	StelSkyDrawer* drawer=core->getSkyDrawer();
 
 	// Compute the moon position in local coordinate
 	const auto sun   = ssystem->getSun();
@@ -521,6 +600,85 @@ void LandscapeMgr::drawPolylineOnly(StelCore* core)
 	cardinalPoints->draw(core, static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().latitude));
 }
 
+void LandscapeMgr::createAtmosphere()
+{
+	const auto modelName=getAtmosphereModel();
+	const auto modelConfig=modelName.toLower();
+	bool needResetConfig=false;
+	if(modelConfig==ATMOSPHERE_MODEL_CONF_VAL_PREETHAM)
+	{
+		loadingAtmosphere.reset(new AtmospherePreetham(skylight));
+	}
+#ifdef ENABLE_SHOWMYSKY
+	else if(modelConfig==ATMOSPHERE_MODEL_CONF_VAL_SHOWMYSKY)
+	{
+		try
+		{
+            // Clear status so that if a repeated error happens, we do emit a signal that will update the GUI.
+            setAtmosphereShowMySkyStatusText("");
+            setAtmosphereShowMySkyStoppedWithError(false);
+
+			loadingAtmosphere.reset(new AtmosphereShowMySky());
+			if(!atmosphere)
+			{
+				// We're just loading the first atmosphere in the run of Stellarium. Initialize it synchronously.
+				while(loadingAtmosphere->isLoading())
+					loadingAtmosphere->stepDataLoading();
+                setAtmosphereShowMySkyStoppedWithError(false);
+                setAtmosphereShowMySkyStatusText(q_("Loaded successfully"));
+			}
+            else
+            {
+                setAtmosphereShowMySkyStoppedWithError(false);
+                setAtmosphereShowMySkyStatusText(q_("Loading... 0% done"));
+            }
+		}
+		catch(AtmosphereShowMySky::InitFailure const& error)
+		{
+			qWarning() << "ERROR: Failed to initialize ShowMySky atmosphere model:" << error.what();
+			qWarning() << "WARNING: Falling back to the Preetham's model";
+			loadingAtmosphere.reset(new AtmospherePreetham(skylight));
+			needResetConfig=true;
+
+            setAtmosphereShowMySkyStoppedWithError(true);
+            setAtmosphereShowMySkyStatusText(error.what());
+		}
+	}
+#endif
+	else
+	{
+		qWarning() << "Unsupported atmosphere model" << modelName;
+		loadingAtmosphere.reset(new AtmospherePreetham(skylight));
+		needResetConfig=true;
+	}
+	if(!atmosphere)
+	{
+		// We're just loading the first atmosphere in the run of Stellarium. The atmosphere is fully loaded by this point.
+		atmosphere = std::move(loadingAtmosphere);
+
+        const auto conf=StelApp::getInstance().getSettings();
+        setFlagAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
+        setAtmosphereFadeDuration(conf->value("landscape/atmosphere_fade_duration",0.5).toFloat());
+
+        const auto drawer = StelApp::getInstance().getCore()->getSkyDrawer();
+        setAtmosphereLightPollutionLuminance(drawer->getLightPollutionLuminance());
+	}
+
+	if(needResetConfig)
+	{
+		// We've failed to apply the setting, so reset to the fallback value
+		const auto conf=StelApp::getInstance().getSettings();
+		conf->setValue(ATMOSPHERE_MODEL_CONFIG_KEY, ATMOSPHERE_MODEL_CONF_VAL_PREETHAM);
+	}
+
+	needToRecreateAtmosphere=false;
+}
+
+void LandscapeMgr::resetToFallbackAtmosphere()
+{
+	StelApp::getInstance().getSettings()->setValue(ATMOSPHERE_MODEL_CONFIG_KEY, ATMOSPHERE_MODEL_CONF_VAL_PREETHAM);
+	createAtmosphere();
+}
 
 void LandscapeMgr::init()
 {
@@ -541,12 +699,9 @@ void LandscapeMgr::init()
 	setFlagLandscapeUseMinimalBrightness(conf->value("landscape/flag_minimal_brightness", false).toBool());
 	setFlagLandscapeSetsMinimalBrightness(conf->value("landscape/flag_landscape_sets_minimal_brightness",false).toBool());
 
-	atmosphere = new Atmosphere();
+	createAtmosphere();
 	// Put the atmosphere's Skylight under the StelProperty system (simpler and more consistent GUI)
-	StelApp::getInstance().getStelPropertyManager()->registerObject(atmosphere->getSkyLight());
-	setFlagAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
-	setAtmosphereFadeDuration(conf->value("landscape/atmosphere_fade_duration",0.5).toFloat());
-	setAtmosphereLightPollutionLuminance(conf->value("viewing/light_pollution_luminance",0.0).toFloat());
+	StelApp::getInstance().getStelPropertyManager()->registerObject(&skylight);
 
 	defaultLandscapeID = conf->value("init_location/landscape_name").toString();
 
@@ -1163,6 +1318,79 @@ void LandscapeMgr::setFlagAtmosphere(const bool displayed)
 	}
 }
 
+void LandscapeMgr::setAtmosphereModel(const QString& model)
+{
+	const auto modelToSet = model.toLower();
+	const auto oldModel = getAtmosphereModel().toLower();
+	if(modelToSet == oldModel)
+		return;
+
+	StelApp::getInstance().getSettings()->setValue(ATMOSPHERE_MODEL_CONFIG_KEY, model);
+
+	if(!(oldModel.isEmpty() && modelToSet == ATMOSPHERE_MODEL_CONF_VAL_DEFAULT))
+	{
+		// Can't call createAtmosphere() right now, because we likely have wrong OpenGL context (or even none).
+		// So just schedule it for the next draw.
+		needToRecreateAtmosphere=true;
+	}
+}
+
+void LandscapeMgr::setAtmosphereModelPath(const QString& path)
+{
+	if(getAtmosphereModelPath()==path)
+		return;
+
+	StelApp::getInstance().getSettings()->setValue(ATMOSPHERE_MODEL_PATH_CONFIG_KEY, path);
+	setAtmosphereModel(ATMOSPHERE_MODEL_CONF_VAL_SHOWMYSKY); // This is the only relevant model for this property
+	needToRecreateAtmosphere=true;
+
+	emit atmosphereModelPathChanged(path);
+}
+
+void LandscapeMgr::setAtmosphereShowMySkyStoppedWithError(const bool error)
+{
+	if(atmosphereShowMySkyStoppedWithError == error)
+		return;
+	atmosphereShowMySkyStoppedWithError = error;
+	emit atmosphereStoppedWithErrorChanged(error);
+}
+
+void LandscapeMgr::setAtmosphereShowMySkyStatusText(const QString& text)
+{
+	if(atmosphereShowMySkyStatusText == text)
+		return;
+	atmosphereShowMySkyStatusText = text;
+	emit atmosphereStatusTextChanged(text);
+}
+
+void LandscapeMgr::setFlagAtmosphereZeroOrderScattering(const bool enable)
+{
+	atmosphereZeroOrderScatteringEnabled=enable;
+	emit flagAtmosphereZeroOrderScatteringChanged(enable);
+}
+
+void LandscapeMgr::setFlagAtmosphereSingleScattering(const bool enable)
+{
+	atmosphereSingleScatteringEnabled=enable;
+	emit flagAtmosphereSingleScatteringChanged(enable);
+}
+
+void LandscapeMgr::setFlagAtmosphereMultipleScattering(const bool enable)
+{
+	atmosphereMultipleScatteringEnabled=enable;
+	emit flagAtmosphereMultipleScatteringChanged(enable);
+}
+
+void LandscapeMgr::setAtmosphereEclipseSimulationQuality(const int quality)
+{
+	if(getAtmosphereEclipseSimulationQuality() == quality)
+		return;
+
+	StelApp::getInstance().getSettings()->setValue(ATMOSPHERE_ECLIPSE_SIM_QUALITY_CONFIG_KEY, quality);
+
+	emit atmosphereEclipseSimulationQualityChanged(quality);
+}
+
 //! Get flag for displaying Atmosphere
 bool LandscapeMgr::getFlagAtmosphere() const
 {
@@ -1180,6 +1408,49 @@ void LandscapeMgr::setFlagAtmosphereNoScatter(const bool noScatter)
 bool LandscapeMgr::getFlagAtmosphereNoScatter() const
 {
     return atmosphereNoScatter;
+}
+
+QString LandscapeMgr::getAtmosphereModel() const
+{
+	const auto conf=StelApp::getInstance().getSettings();
+	return conf->value(ATMOSPHERE_MODEL_CONFIG_KEY, ATMOSPHERE_MODEL_CONF_VAL_DEFAULT).toString();
+}
+
+QString LandscapeMgr::getAtmosphereModelPath() const
+{
+	const auto conf=StelApp::getInstance().getSettings();
+	return conf->value(ATMOSPHERE_MODEL_PATH_CONFIG_KEY, "").toString();
+}
+
+bool LandscapeMgr::getAtmosphereShowMySkyStoppedWithError() const
+{
+	return atmosphereShowMySkyStoppedWithError;
+}
+
+QString LandscapeMgr::getAtmosphereShowMySkyStatusText() const
+{
+	return atmosphereShowMySkyStatusText;
+}
+
+bool LandscapeMgr::getFlagAtmosphereZeroOrderScattering() const
+{
+	return atmosphereZeroOrderScatteringEnabled;
+}
+
+bool LandscapeMgr::getFlagAtmosphereSingleScattering() const
+{
+	return atmosphereSingleScatteringEnabled;
+}
+
+bool LandscapeMgr::getFlagAtmosphereMultipleScattering() const
+{
+	return atmosphereMultipleScatteringEnabled;
+}
+
+int LandscapeMgr::getAtmosphereEclipseSimulationQuality() const
+{
+	const auto conf=StelApp::getInstance().getSettings();
+	return conf->value(ATMOSPHERE_ECLIPSE_SIM_QUALITY_CONFIG_KEY, 1).toInt();
 }
 
 float LandscapeMgr::getAtmosphereFadeIntensity() const
