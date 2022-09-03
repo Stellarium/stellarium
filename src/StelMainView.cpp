@@ -17,6 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#define MOUSE_TRACKING
+
 #include "StelMainView.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -387,6 +389,7 @@ protected:
 			mainView->thereWasAnEvent();
 	}
 
+#ifndef MOUSE_TRACKING
 	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
 	{
 		QMouseEvent ev = convertMouseEvent(event);
@@ -395,6 +398,7 @@ protected:
 		if(event->isAccepted())
 			mainView->thereWasAnEvent();
 	}
+#endif
 
 	void wheelEvent(QGraphicsSceneWheelEvent *event) Q_DECL_OVERRIDE
 	{
@@ -700,6 +704,16 @@ void StelMainView::mouseMoveEvent(QMouseEvent *event)
 		cursorTimeoutTimer->start();
 	}
 	
+#ifdef MOUSE_TRACKING
+	QPointF pos = event->pos();
+	//Y needs to be inverted
+	int height1 = StelApp::getInstance().mainWin->height();
+	pos.setY(height1 - 1 - pos.y());
+	event->setAccepted(StelApp::getInstance().handleMove(pos.x(), pos.y(), event->buttons()));
+	if(event->isAccepted())
+		thereWasAnEvent();
+#endif
+
 	QGraphicsView::mouseMoveEvent(event);
 }
 
