@@ -25,7 +25,7 @@
 #include "StelModuleMgr.hpp"
 #include "SolarSystem.hpp"
 
-Skybright::Skybright() : SN(1.f)
+Skybright::Skybright()
 {
 	setDate(2003, 8, 0.f, 0.f);
 	setLocation(M_PI_4f, 1000., 25.f, 40.f);
@@ -39,7 +39,7 @@ void Skybright::setDate(const int year, const int month, const float moonPhase, 
 	// GZ The original formula set by Schaefer computes lunar magnitude here. But it does not take eclipse into account.
 	//    For 0.16 we changed that. (Bug LP:#1471546)
 	// Maybe we can use the moon mag formula elsewhere, don't delete yet!
-	Q_UNUSED(moonPhase);
+	Q_UNUSED(moonPhase)
 	//magMoon = -12.73f + 1.4896903f * fabsf(moonPhase) + 0.04310727f * powf(moonPhase, 4.f);
 	magMoon=moonMag;
 

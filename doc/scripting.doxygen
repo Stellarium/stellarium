@@ -86,7 +86,6 @@ LandscapeMgr.setFlagAtmosphere(true);
 
 - The public slots for each of the following classes of the plugins are available 
 in the scripting engine too:
-   - CompassMarks
    - Oculars
    - Satellites
    - Quasars
@@ -97,6 +96,7 @@ in the scripting engine too:
    - NavStars
    - MeteorShowersMgr (The public slots in this class are available via an object named \b MeteorShowers)
    - ArchaeoLines
+   - Calendars
    - TelescopeControl
    .
 

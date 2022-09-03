@@ -26,8 +26,7 @@
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelTranslator.hpp"
+#include "StelUtils.hpp"
 #include "ConstellationMgr.hpp"
 
 #include <algorithm>
@@ -35,6 +34,7 @@
 #include <QTextStream>
 #include <QDebug>
 #include <QFontMetrics>
+#include <QIODevice>
 
 const QString Constellation::CONSTELLATION_TYPE = QStringLiteral("Constellation");
 
@@ -110,7 +110,7 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const
 
 	if (checkVisibility())
 	{
-		sPainter.setColor(lineColor[0], lineColor[1], lineColor[2], lineFader.getInterstate());
+		sPainter.setColor(lineColor, lineFader.getInterstate());
 
 		Vec3d star1;
 		Vec3d star2;
@@ -149,12 +149,12 @@ void Constellation::drawName(StelPainter& sPainter, ConstellationMgr::Constellat
 				break;
 		}
 
-		sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());
+		sPainter.setColor(labelColor, nameFader.getInterstate());
 		sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
 	}
 }
 
-void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& region) const
+void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& region, const Vec3d& obsVelocity) const
 {
 	if (checkVisibility())
 	{
@@ -167,7 +167,13 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 			if (artTexture->bind()==false)
 				return;
 
-			sPainter.drawStelVertexArray(artPolygon);
+#ifdef Q_OS_LINUX
+			// Unfortunately applying aberration to the constellation artwork causes ugly artifacts visible on Linux.
+			// It is better to disable aberration in this case and have a tiny texture shift where it usually does not need to critically match.
+			sPainter.drawStelVertexArray(artPolygon, false, Vec3d(0.));
+#else
+			sPainter.drawStelVertexArray(artPolygon, false, obsVelocity);
+#endif
 		}
 	}
 }
@@ -175,10 +181,12 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 // Draw the art texture
 void Constellation::drawArt(StelPainter& sPainter) const
 {
+	// Is this ever used?
+	Q_ASSERT(0);
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	sPainter.setCullFace(true);
 	SphericalRegionP region = sPainter.getProjector()->getViewportConvexPolygon();
-	drawArtOptim(sPainter, *region);
+	drawArtOptim(sPainter, *region, Vec3d(0.));
 	sPainter.setCullFace(false);
 }
 
@@ -204,13 +212,13 @@ void Constellation::update(int deltaTime)
 	boundaryFader.update(deltaTime);
 }
 
-void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
+void Constellation::drawBoundaryOptim(StelPainter& sPainter, const Vec3d& obsVelocity) const
 {
 	if (boundaryFader.getInterstate()==0.0f)
 		return;
 
 	sPainter.setBlending(true);
-	sPainter.setColor(boundaryColor[0], boundaryColor[1], boundaryColor[2], boundaryFader.getInterstate());
+	sPainter.setColor(boundaryColor, boundaryFader.getInterstate());
 
 	unsigned int i, j;
 	size_t size;
@@ -228,7 +236,12 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
 
 		for (j=0;j<points->size()-1;j++)
 		{
-			sPainter.drawGreatCircleArc(points->at(j), points->at(j+1), &viewportHalfspace);
+			Vec3d point0=points->at(j)+obsVelocity;
+			point0.normalize();
+			Vec3d point1=points->at(j+1)+obsVelocity;
+			point1.normalize();
+
+			sPainter.drawGreatCircleArc(point0, point1, &viewportHalfspace);
 		}
 	}
 }
@@ -274,8 +287,9 @@ QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup
 	}
 
 	if (flags&ObjectType)
-		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("constellation")) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
 
+	getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 
 	return str;

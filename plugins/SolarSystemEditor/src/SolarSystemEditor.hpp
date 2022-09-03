@@ -22,9 +22,7 @@
 #ifndef SOLARSYSTEMEDITOR_HPP
 #define SOLARSYSTEMEDITOR_HPP
 
-#include "StelGui.hpp"
 #include "StelModule.hpp"
-//#include "CAIMainWindow.hpp"
 
 #include <QHash>
 #include <QList>
@@ -70,15 +68,9 @@ public:
 	//! called when the plug-in is loaded.
 	//! All initializations should be done here.
 	virtual void init() Q_DECL_OVERRIDE;
-	//! called before the plug-in is un-loaded.
-	//! Useful for stopping processes, unloading textures, etc.
-	virtual void deinit() Q_DECL_OVERRIDE {}
-	//! Does nothing.
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE {Q_UNUSED(deltaTime)}
-	//! draws on the view port.
-	//! Dialog windows don't need explicit drawing, it's done automatically.
-	virtual void draw(StelCore * core) Q_DECL_OVERRIDE {Q_UNUSED(core)}
+
 	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+
 	//! called when the "configure" button in the "Plugins" tab is pressed
 	virtual bool configureGui(bool show) Q_DECL_OVERRIDE;
 	
@@ -133,12 +125,13 @@ public:
 	bool appendToSolarSystemConfigurationFile(SsoElements object);
 
 	//! Adds new entries at the end of the user solar system configuration file.
+	//! XXX Also updates existing objects (by removing and then appending)
 	//! This function writes directly to the file. QSettings was not used, as:
 	//!  - Using QSettings with QSettings::IniFormat causes the list in the
 	//!    "color" field (e.g. "1.0, 1.0, 1.0") to be wrapped in double quotation
 	//!    marks (Stellarium requires no quotation marks).
 	//!    (Has been fixed by using StelIniFormat)
-	//!  - Using QSettings with StelIniFormat causes unaccepptable append times
+	//!  - Using QSettings with StelIniFormat causes unacceptable append times
 	//!    when the file grows (>~40 entries). This most probably happens because
 	//!    StelIniParser uses QMap internally for the entry list. QMap orders its
 	//!    keys (in the case of strings - alphabetically) and it has to find
@@ -159,17 +152,17 @@ public:
 
 	//! Flags to control the updateSolarSystemConfigurationFile() function.
 	enum UpdateFlag {
-		UpdateNameAndNumber = 0x01,//!< Update the name and minor planet number, if any.
-		UpdateType = 0x02, //!< Update objects that lack the "type" parameter
-		UpdateOrbitalElements = 0x04, //!< Update the orbital elements, including the orbit function.
-		UpdateMagnitudeParameters = 0x08 //!< Update the values in the two parameter system, or add them if they are missing and the type allows.
+		UpdateNameAndNumber 		= 0x01,	//!< Update the name and minor planet number, if any.
+		UpdateType 			= 0x02,	//!< Update objects that lack the "type" parameter.
+		UpdateOrbitalElements 		= 0x04,	//!< Update the orbital elements, including the orbit function.
+		UpdateMagnitudeParameters 	= 0x08 	//!< Update the values in the two parameter system, or add them if they are missing and the type allows.
 	};
 	Q_DECLARE_FLAGS(UpdateFlags, UpdateFlag)
 
 	//! Updates entries in the user solar system configuration file.
 	//! \param objects a list of data for already existing objects (non-existing ones are skipped);
 	//! \param flags flags controlling what is being updated. See UpdateFlag.
-	//! \returns false if the operation has failed completely for some reason.
+	//! \returns false if the operation has failed for some reason.
 	bool updateSolarSystemConfigurationFile(QList<SsoElements> objects, UpdateFlags flags);
 
 	//! Returns the names of the objects listed in the default ssystem_major.ini.
@@ -191,12 +184,14 @@ public:
 
 	//! Export current minor bodies file from user data directory (if it exists) to filePath. Return true on success.
 	bool copySolarSystemConfigurationFileTo(QString filePath);
+
 	//! Replace current minor bodies file in the user data directory.
 	//! Writes warning to logfile and returns false in case of problems.
 	bool replaceSolarSystemConfigurationFileWith(QString filePath);
+
 	//! (new 0.16)
-	//! Loads all new objects from filePath (an .ini file).
-	//! Default proposal is ssystem_1000comsts.ini in the installation dir.
+	//! Loads all new objects from filePath (an .ini file), and updates existing objects
+	//! Default proposal is ssystem_1000comets.ini in the installation dir.
 	bool addFromSolarSystemConfigurationFile(QString filePath);
 
 	//! returns the path
@@ -235,10 +230,9 @@ private:
 	//! Initialized in init().
 	QHash<QString,QString> defaultSsoIdentifiers;
 
-	//! Gets the names of the objects listed in a ssystem.ini-formatted file.
+	//! Gets the names of the minor planet objects listed in a ssystem.ini-formatted file.
 	//! Used internally in readAllCurrentSsoNames() and in init() to initialize
 	//! defaultSsoNames.
-	//! Does not check if the file exists.
 	QHash<QString,QString> listAllLoadedObjectsInFile(QString filePath) const;
 
 	//! Creates a copy of the default ssystem.ini file in the user data directory.
@@ -251,6 +245,9 @@ private:
 	//! \returns true if the replacement has been successfull.
 	bool resetSolarSystemConfigurationFile() const;
 
+	//! Check encoding of the file
+	bool isFileEncodingValid(QString filePath) const;
+
 	//! Converts an alphanumeric digit as used in MPC packed dates to an integer.
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDates.html
 	//! Interprets the digits from 0 to 9 normally, and the capital letters
@@ -258,11 +255,13 @@ private:
 	//! \returns -1 if the digit is invalid (0 is also an invalid ordinal number
 	//! for a day or month, so this is not a problem)
 	static int unpackDayOrMonthNumber (QChar digit);
+
 	//! Converts an alphanumeric year number as used in MPC packed dates to an integer.
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDates.html
 	//! Also used in packed provisional designations, see
 	//! http://www.minorplanetcenter.org/iau/info/PackedDes.html
 	static int unpackYearNumber (QChar prefix, int lastTwoDigits);
+
 	//! Converts a two-character number used in MPC packed provisional designations.
 	//! See http://www.minorplanetcenter.org/iau/info/PackedDes.html
 	//! This function is used for both asteroid and comet designations.
@@ -280,6 +279,7 @@ private:
 
 	//! Converts an object name to a key (group) name in a configuration file.
 	static QString convertToGroupName(QString& name, int minorPlanetNumber = 0);
+	
 	//! replaces "%25" by "%", then replaces "%28" by "(" and "%29" by ")".
 	static QString fixGroupName(QString &name);
 };
@@ -296,9 +296,9 @@ class SolarSystemEditorStelPluginInterface : public QObject, public StelPluginIn
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
-	virtual QObjectList getExtensionList() const { return QObjectList(); }
+	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif // SOLARSYSTEMEDITOR_HPP

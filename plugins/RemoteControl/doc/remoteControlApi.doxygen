@@ -270,6 +270,9 @@ Returns all objects of the specified \p type. If \p english is given and it eval
 will be returned, otherwise the localized names will be returned. Returns a JSON string array.
 
 \subsection rcScriptService ScriptService operations (/api/scripts/)
+
+@note Stellarium must have been built with ENABLE_SCRIPTING (default).
+
 \subsubsection rcScriptServiceGET GET operations
 Implemented by ScriptService::getImpl
 

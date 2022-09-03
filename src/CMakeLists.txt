@@ -41,8 +41,6 @@ SET(stellarium_lib_SRCS
      core/MultiLevelJsonBase.cpp
      core/StelSkyImageTile.hpp
      core/StelSkyImageTile.cpp
-     core/StelSkyPolygon.hpp
-     core/StelSkyPolygon.cpp
      core/SphericMirrorCalculator.cpp
      core/SphericMirrorCalculator.hpp
      core/StelApp.cpp
@@ -148,14 +146,11 @@ SET(stellarium_lib_SRCS
      core/planetsephems/precession.h
      core/planetsephems/sidereal_time.c
      core/planetsephems/sidereal_time.h
-     #core/planetsephems/stellplanet.c   # replaced by EphemWrapper during de430 work
-     #core/planetsephems/stellplanet.h
      core/planetsephems/jpl_int.h
      core/planetsephems/jpleph.h
      core/planetsephems/jpleph.cpp
      core/planetsephems/EphemWrapper.cpp
      core/planetsephems/EphemWrapper.hpp
-
      core/planetsephems/tass17.c
      core/planetsephems/tass17.h
      core/planetsephems/vsop87.c
@@ -164,8 +159,16 @@ SET(stellarium_lib_SRCS
      core/planetsephems/de430.hpp
      core/planetsephems/de431.cpp
      core/planetsephems/de431.hpp
-
-     core/modules/Atmosphere.cpp
+     core/planetsephems/de440.cpp
+     core/planetsephems/de440.hpp
+     core/planetsephems/de441.cpp
+     core/planetsephems/de441.hpp
+     core/planetsephems/htc20b.cpp
+     core/planetsephems/htc20b.hpp
+     core/modules/AtmospherePreetham.cpp
+     core/modules/AtmospherePreetham.hpp
+     core/modules/AtmosphereShowMySky.cpp
+     core/modules/AtmosphereShowMySky.hpp
      core/modules/Atmosphere.hpp
      core/modules/Asterism.cpp
      core/modules/Asterism.hpp
@@ -210,6 +213,8 @@ SET(stellarium_lib_SRCS
      core/modules/Orbit.hpp
      core/modules/Planet.cpp
      core/modules/Planet.hpp
+     core/modules/RotationElements.cpp
+     core/modules/RotationElements.hpp
      core/modules/MinorPlanet.cpp
      core/modules/MinorPlanet.hpp
      core/modules/Comet.cpp
@@ -240,6 +245,8 @@ SET(stellarium_lib_SRCS
      core/modules/ZoneData.hpp
      core/modules/SpecialMarkersMgr.cpp
      core/modules/SpecialMarkersMgr.hpp
+     core/modules/SpecificTimeMgr.cpp
+     core/modules/SpecificTimeMgr.hpp
      StelMainView.hpp
      StelMainView.cpp
      StelSplashScreen.hpp
@@ -249,28 +256,15 @@ SET(stellarium_lib_SRCS
      CLIProcessor.hpp
      CLIProcessor.cpp
      translations.h
-     translations_countries.h
+     translations_regions.h
 )
-
-### CMake < 3.0 does not AUTOMOC Q_GADGET which some files use, so we have to manually add it
-### Wrap it in an IF to prevent some linker warnings about symbols defined twice (on MSVC13 at least)
-### Q_GADGET is required force the Qt MOC to run on some specific files,
-### because they do not contain QObjects, but require a MOC for Q_FLAGS or similar
-IF("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 3.0)
-     QT5_WRAP_CPP(stellarium_lib_moc_SRCS
-         core/StelObject.hpp
-         core/StelRegionObject.hpp
-         core/modules/Nebula.hpp
-     )
-     SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
-          ${stellarium_lib_moc_SRCS}
-     )
-ENDIF()
 
 IF(ENABLE_SCRIPTING)
      SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
           scripting/StelScriptOutput.hpp
           scripting/StelScriptOutput.cpp
+          scripting/V3d.cpp
+          scripting/V3d.hpp
           scripting/StelScriptMgr.cpp
           scripting/StelScriptMgr.hpp
           scripting/ScreenImageMgr.hpp
@@ -286,8 +280,11 @@ SET(stellarium_exe_SRCS main.cpp)
 
 ################# compiles resources files ############
 SET(stellarium_RES ${CMAKE_SOURCE_DIR}/data/mainRes.qrc)
-QT5_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
-
+IF(${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
+ELSE()
+     QT_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
+ENDIF()
 #############################################################################################
 ############################# Standard GUI plugin compilation ###############################
 #############################################################################################
@@ -318,6 +315,10 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/DateTimeDialog.cpp
           gui/ViewDialog.hpp
           gui/ViewDialog.cpp
+          gui/LightPollutionWidget.hpp
+          gui/LightPollutionWidget.cpp
+          gui/LogarithmicSpinBox.hpp
+          gui/LogarithmicSpinBox.cpp
           gui/SearchDialog.hpp
           gui/SearchDialog.cpp
           gui/ConfigurationDialog.hpp
@@ -334,17 +335,29 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/GreatRedSpotDialog.cpp
           gui/CustomDeltaTEquationDialog.hpp
           gui/CustomDeltaTEquationDialog.cpp
+          gui/ConfigureScreenshotsDialog.hpp
+          gui/ConfigureScreenshotsDialog.cpp
           gui/AstroCalcDialog.hpp
           gui/AstroCalcDialog.cpp
           gui/AstroCalcExtraEphemerisDialog.hpp
           gui/AstroCalcExtraEphemerisDialog.cpp
           gui/AstroCalcCustomStepsDialog.hpp
           gui/AstroCalcCustomStepsDialog.cpp
-          gui/BookmarksDialog.hpp
-          gui/BookmarksDialog.cpp
+          gui/AstroCalcChart.hpp
+          gui/AstroCalcChart.cpp
+          gui/ObsListDialog.hpp
+          gui/ObsListDialog.cpp
+          gui/ObsListCreateEditDialog.hpp
+          gui/ObsListCreateEditDialog.cpp
           gui/StelDialog.hpp
           gui/StelDialog_p.hpp
           gui/StelDialog.cpp
+          gui/StelDialogSeparate.hpp
+          gui/StelDialogSeparate.cpp
+          gui/TonemappingDialog.hpp
+          gui/TonemappingDialog.cpp
+          gui/SkylightDialog.hpp
+          gui/SkylightDialog.cpp
      )
 
      ################# compiles .ui files ############
@@ -354,18 +367,23 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/shortcutsDialog.ui
           gui/dateTimeDialogGui.ui
           gui/viewDialog.ui
+          gui/lightPollutionWidget.ui
           gui/searchDialogGui.ui
           gui/configurationDialog.ui
           gui/atmosphereDialog.ui
           gui/greatRedSpotDialog.ui
           gui/customDeltaTEquationDialog.ui
+          gui/configureScreenshotsDialog.ui
           gui/astroCalcDialog.ui
           gui/astroCalcExtraEphemerisDialog.ui
           gui/astroCalcCustomStepsDialog.ui
-          gui/bookmarksDialog.ui
+          gui/obsListDialog.ui
+          gui/obsListCreateEditDialog.ui
           gui/addRemoveLandscapesDialog.ui
           gui/dsoColorsDialog.ui
           gui/orbitColorsDialog.ui
+          gui/tonemappingDialog.ui
+          gui/skylightDialog.ui
      )
 
      IF(ENABLE_SCRIPTING)
@@ -382,11 +400,19 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           ENDIF()
      ENDIF()
 
-     QT5_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
+     IF(${QT_VERSION_MAJOR} EQUAL "5")
+         QT5_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
+     ELSE()
+         QT_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
+    ENDIF()
 
      # compiles resources files
      SET(stellarium_gui_RES ${CMAKE_SOURCE_DIR}/data/gui/guiRes.qrc)
-     QT5_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
+     IF(${QT_VERSION_MAJOR} EQUAL "5")
+         QT5_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
+     ELSE()
+         QT_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
+     ENDIF()
 
      SET(stellarium_lib_SRCS ${stellarium_lib_SRCS} ${stellarium_gui_SRCS} ${stellarium_UIS_H} ${stellarium_gui_RES_CXX})
 ENDIF()
@@ -444,20 +470,23 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
      ENDIF()
 ENDIF()
 
-# Setup Qt5 dependencies
-SET(STELLARIUM_QT_LIBRARIES Qt5::Core Qt5::Concurrent Qt5::Gui ${STEL_GLES_LIBS} Qt5::Network Qt5::Widgets)
+# Setup Qt5/6 dependencies
+SET(STELLARIUM_QT_LIBRARIES Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Concurrent Qt${QT_VERSION_MAJOR}::Gui ${STEL_GLES_LIBS} Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts)
+IF(APPLE AND Qt6_FOUND)
+     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::DBus)
+ENDIF()
 IF(ENABLE_MEDIA)
-     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Multimedia Qt5::MultimediaWidgets)
+     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::Multimedia Qt${QT_VERSION_MAJOR}::MultimediaWidgets)
 ENDIF()
 IF(ENABLE_SCRIPTING)
-     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Script)
-ENDIF()
-IF(USE_OLD_QGLWIDGET)
-     # The Qt5OpenGL library is only required when using the legacy viewport
-     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::OpenGL)
+    IF(ENABLE_SCRIPT_QML)
+         SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::Qml)
+    ELSE(ENABLE_SCRIPT_QML)
+         SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Script)
+    ENDIF(ENABLE_SCRIPT_QML)
 ENDIF()
 IF(ENABLE_GPS)
-     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Positioning Qt5::SerialPort)
+     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::Positioning Qt${QT_VERSION_MAJOR}::SerialPort)
 ENDIF()
 
 IF(ENABLE_SPOUT AND SPOUT_LIBRARY_DLL)
@@ -465,9 +494,13 @@ IF(ENABLE_SPOUT AND SPOUT_LIBRARY_DLL)
      CONFIGURE_FILE(${SPOUT_LIBRARY_DLL} ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 ENDIF()
 
-SET(STELMAIN_DEPS ${ZLIB_LIBRARIES} Qt5::Compress glues_stel qcustomplot_stel QXlsx ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY})
+SET(STELMAIN_DEPS ${ZLIB_LIBRARIES} Qt${QT_VERSION_MAJOR}::Compress glues_stel QXlsx ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY})
 IF(ENABLE_LIBGPS)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} ${GPS_LIBRARY})
+ENDIF()
+
+IF(HAIKU)
+     SET(STELMAIN_DEPS ${STELMAIN_DEPS} network)
 ENDIF()
 
 # Main executable/library setup
@@ -486,8 +519,11 @@ ELSE()
      TARGET_LINK_LIBRARIES(stellarium ${winMMLib} ${STELMAIN_DEPS} stelMain)
 
      IF(APPLE)
-          SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
+	  SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
      ENDIF()
+ENDIF()
+IF(ENABLE_SHOWMYSKY)
+    TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${ShowMySky_INCLUDE_DIRECTORIES}")
 ENDIF()
 
 ADD_DEPENDENCIES(stellarium AllStaticPlugins)
@@ -528,15 +564,23 @@ ELSE()
      INSTALL(TARGETS stellarium DESTINATION bin)
 ENDIF()
 IF(WIN32)
+     IF((${QT_VERSION_MAJOR} EQUAL "5") AND (Qt5Core_VERSION VERSION_LESS "5.15"))
+          SET(VIRTUAL_KBD_SETTING "")
+     ELSE()
+          SET(VIRTUAL_KBD_SETTING "--no-virtualkeyboard")
+     ENDIF()
+
      INSTALL(CODE
         "
          EXECUTE_PROCESS(
              COMMAND \"${WINDEPLOYQT_COMMAND}\"
-                     --dir \"\${CMAKE_INSTALL_PREFIX}/qt5stuff\"
+		     --dir \"\${CMAKE_INSTALL_PREFIX}/qtstuff\"
                      --no-translations
-                     --compiler-runtime
+		     --verbose 1
+                     ${VIRTUAL_KBD_SETTING}
+		     --compiler-runtime
                      \"\${CMAKE_INSTALL_PREFIX}/bin/stellarium.exe\"
-             WORKING_DIRECTORY \"\${CMAKE_INSTALL_PRERIX}/bin\"
+             WORKING_DIRECTORY \"\${CMAKE_INSTALL_PREFIX}/bin\"
              OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.log\"
              ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.err\"
          )
@@ -548,11 +592,12 @@ IF(WIN32)
              "
               EXECUTE_PROCESS(
                   COMMAND \"${WINDEPLOYQT_COMMAND}\"
-                          --dir \"\${CMAKE_INSTALL_PREFIX}/qt5stuff\"
+			  --dir \"\${CMAKE_INSTALL_PREFIX}/qtstuff\"
                           --no-translations
+                          ${VIRTUAL_KBD_SETTING}
                           --compiler-runtime
                           \"\${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"
-                  WORKING_DIRECTORY \"\${CMAKE_INSTALL_PRERIX}/bin\"
+                  WORKING_DIRECTORY \"\${CMAKE_INSTALL_PREFIX}/bin\"
                   OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.log\"
                   ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.err\"
          )
@@ -570,7 +615,7 @@ SET_TARGET_PROPERTIES(stellarium PROPERTIES FOLDER "src")
 
 IF(ENABLE_TESTING)
 
-    SET(TESTS_LIBRARIES ${ZLIB_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Test stelMain)
+    SET(TESTS_LIBRARIES ${ZLIB_LIBRARIES} Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Test stelMain)
 
     # Custom target used to build all tests at once
     ADD_CUSTOM_TARGET(buildTests)
@@ -737,15 +782,17 @@ IF(ENABLE_TESTING)
     ADD_TEST(testVecMath testVecMath)
     SET_TARGET_PROPERTIES(testVecMath PROPERTIES FOLDER "src/tests")
 
-    SET(tests_testJavaScripting_SRCS
-        tests/testJavaScripting.hpp
-        tests/testJavaScripting.cpp
-    )
-    ADD_EXECUTABLE(testJavaScripting ${tests_testJavaScripting_SRCS})
-    TARGET_LINK_LIBRARIES(testJavaScripting ${TESTS_LIBRARIES})
-    ADD_DEPENDENCIES(buildTests testJavaScripting)
-    ADD_TEST(testJavaScripting testJavaScripting)
-    SET_TARGET_PROPERTIES(testJavaScripting PROPERTIES FOLDER "src/tests")
+    IF(ENABLE_SCRIPTING)
+        SET(tests_testJavaScripting_SRCS
+            tests/testJavaScripting.hpp
+            tests/testJavaScripting.cpp
+        )
+        ADD_EXECUTABLE(testJavaScripting ${tests_testJavaScripting_SRCS})
+        TARGET_LINK_LIBRARIES(testJavaScripting ${TESTS_LIBRARIES})
+        ADD_DEPENDENCIES(buildTests testJavaScripting)
+        ADD_TEST(testJavaScripting testJavaScripting)
+        SET_TARGET_PROPERTIES(testJavaScripting PROPERTIES FOLDER "src/tests")
+    ENDIF(ENABLE_SCRIPTING)
 	
     SET(tests_testStelProjector_SRCS
         tests/testStelProjector.hpp

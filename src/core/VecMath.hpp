@@ -26,10 +26,12 @@
 
 
 #include <cmath>
+#include <cstring>
 #include <limits>
 #include <QString>
 #include <QMatrix4x4>
 #include <QColor>
+#include <QRegularExpression>
 
 template<class T> class Vector2;
 template<class T> class Vector3;
@@ -158,6 +160,8 @@ public:
 
 	//! Formatted string with brackets
 	inline QString toString() const {return QString("[%1, %2]").arg(v[0]).arg(v[1]);}
+	//! converters to be registered in StelCore
+	static Vector2<T>fromBracketedString(QString s);
 	//! Compact comma-separated string without brackets and spaces.
 	//! The result can be restored into a Vector2 by the Vector2(QString s) constructors.
 	QString toStr() const;
@@ -252,6 +256,10 @@ public:
 
 	//! Formatted string with brackets
 	inline QString toString() const {return QString("[%1, %2, %3]").arg(v[0]).arg(v[1]).arg(v[2]);}
+	//! converters to be registered in StelCore (may not work!)
+	static Vector3<T>fromBracketedString(QString s);
+	//! convert from a QVector3D
+	static Vector3<T>fromQVector3D(QVector3D v);
 	//! Compact comma-separated string without brackets and spaces.
 	//! The result can be restored into a Vector2 by the Vector3(QString s) constructors.
 	QString toStr() const;
@@ -260,6 +268,8 @@ public:
 	QString toHtmlColor() const;
 	//! Convert to a QColor.
 	QColor toQColor() const;
+	//! Convert to a QVector3D.
+	QVector3D toQVector3D() const;
 
 	T v[3];		// The 3 values
 };
@@ -332,8 +342,10 @@ public:
 
 	//! Formatted string with brackets
 	inline QString toString() const {return QString("[%1, %2, %3, %4]").arg(v[0]).arg(v[1]).arg(v[2]).arg(v[3]);}
+	//! converters to be registered in StelCore
+	static Vector4<T>fromBracketedString(QString s);
 	//! Compact comma-separated string without brackets and spaces.
-	//! The result can be restored into a Vector2 by the Vector4(QString s) constructors.
+	//! The result can be restored into a Vector4 by the Vector4(QString s) constructors.
 	QString toStr() const;
 	//! Convert to a QColor.
 	QColor toQColor() const;
@@ -1073,7 +1085,7 @@ template<class T> Matrix3<T>::Matrix3() {}
 
 template<class T> Matrix3<T>::Matrix3(const T* m)
 {
-	memcpy(r,m,sizeof(T)*9);
+	std::memcpy(r,m,sizeof(T)*9);
 }
 
 template<class T> Matrix3<T>::Matrix3(const Vector3<T>& v0, const Vector3<T>& v1, const Vector3<T>& v2)
@@ -1186,9 +1198,9 @@ template<class T> Matrix3<T> Matrix3<T>::inverse() const
 
 	/* choose pivot - or die */
 	if (fabs(r2[0]) > fabs(r1[0]))
-		SWAP_ROWS(r2, r1);
+		SWAP_ROWS(r2, r1)
 	if (fabs(r1[0]) > fabs(r0[0]))
-		SWAP_ROWS(r1, r0);
+		SWAP_ROWS(r1, r0)
 	if (0.0 == r0[0])
 		return Matrix3<T>();
 
@@ -1222,7 +1234,7 @@ template<class T> Matrix3<T> Matrix3<T>::inverse() const
 
 	/* choose pivot - or die */
 	if (fabs(r2[1]) > fabs(r1[1]))
-		SWAP_ROWS(r2, r1);
+		SWAP_ROWS(r2, r1)
 	if (0.0 == r1[1])
 		return Matrix3<T>();
 
@@ -1286,7 +1298,7 @@ template<class T> Matrix4<T>::Matrix4() {}
 
 template<class T> Matrix4<T>::Matrix4(const T* m)
 {
-	memcpy(r,m,sizeof(T)*16);
+	std::memcpy(r,m,sizeof(T)*16);
 }
 
 template<class T> Matrix4<T>::Matrix4(const Vector4<T>& v0,
@@ -1522,11 +1534,11 @@ template<class T> Matrix4<T> Matrix4<T>::inverse() const
 
 	/* choose pivot - or die */
 	if (fabs(r3[0]) > fabs(r2[0]))
-		SWAP_ROWS(r3, r2);
+		SWAP_ROWS(r3, r2)
 	if (fabs(r2[0]) > fabs(r1[0]))
-		SWAP_ROWS(r2, r1);
+		SWAP_ROWS(r2, r1)
 	if (fabs(r1[0]) > fabs(r0[0]))
-		SWAP_ROWS(r1, r0);
+		SWAP_ROWS(r1, r0)
 	if (0.0 == r0[0])
 		return Matrix4<T>();
 
@@ -1573,9 +1585,9 @@ template<class T> Matrix4<T> Matrix4<T>::inverse() const
 
 	/* choose pivot - or die */
 	if (fabs(r3[1]) > fabs(r2[1]))
-		SWAP_ROWS(r3, r2);
+		SWAP_ROWS(r3, r2)
 	if (fabs(r2[1]) > fabs(r1[1]))
-		SWAP_ROWS(r2, r1);
+		SWAP_ROWS(r2, r1)
 	if (0.0 == r1[1])
 		return Matrix4<T>();
 
@@ -1609,7 +1621,7 @@ template<class T> Matrix4<T> Matrix4<T>::inverse() const
 
 	/* choose pivot - or die */
 	if (fabs(r3[2]) > fabs(r2[2]))
-		SWAP_ROWS(r3, r2);
+		SWAP_ROWS(r3, r2)
 	if (0.0 == r2[2])
 		return Matrix4<T>();
 

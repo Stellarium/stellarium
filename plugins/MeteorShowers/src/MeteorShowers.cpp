@@ -23,12 +23,14 @@
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelTextureMgr.hpp"
+#include "StelPainter.hpp"
 #include "StelUtils.hpp"
+#include "SolarSystem.hpp"
 
 MeteorShowers::MeteorShowers(MeteorShowersMgr* mgr)
 	: m_mgr(mgr)
 {
+	setObjectName("MeteorShowers");
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
 
@@ -40,7 +42,7 @@ MeteorShowers::~MeteorShowers()
 void MeteorShowers::update(double deltaTime)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	for (const auto& ms : m_meteorShowers)
+	for (const auto& ms : qAsConst(m_meteorShowers))
 	{
 		ms->update(core, deltaTime);
 	}
@@ -48,7 +50,7 @@ void MeteorShowers::update(double deltaTime)
 
 void MeteorShowers::draw(StelCore* core)
 {
-	for (const auto& ms : m_meteorShowers)
+	for (const auto& ms : qAsConst(m_meteorShowers))
 	{
 		ms->draw(core);
 	}
@@ -83,10 +85,7 @@ void MeteorShowers::drawPointer(StelCore* core)
 	m_mgr->getPointerTexture()->bind();
 
 	painter.setBlending(true);
-
-	float size = static_cast<float>(obj->getAngularSize(core)) * M_PI_180f * static_cast<float>(painter.getProjector()->getPixelPerRadAtCenter());
-	size += 20.f + 10.f * sinf(2.f * static_cast<float>(StelApp::getInstance().getTotalRunTime()));
-
+	const float size = 20.f + 10.f * sinf(2.f * static_cast<float>(StelApp::getInstance().getTotalRunTime()));
 	painter.drawSprite2dMode(static_cast<float>(screenpos[0])-size/2, static_cast<float>(screenpos[1])-size/2, 10.f, 90);
 	painter.drawSprite2dMode(static_cast<float>(screenpos[0])-size/2, static_cast<float>(screenpos[1])+size/2, 10.f, 0);
 	painter.drawSprite2dMode(static_cast<float>(screenpos[0])+size/2, static_cast<float>(screenpos[1])+size/2, 10.f, -90);
@@ -97,7 +96,7 @@ void MeteorShowers::drawPointer(StelCore* core)
 void MeteorShowers::loadMeteorShowers(const QVariantMap& map)
 {
 	m_meteorShowers.clear();
-	for (auto msKey : map.keys())
+	for (auto &msKey : map.keys())
 	{
 		QVariantMap msData = map.value(msKey).toMap();
 		msData["showerID"] = msKey;
@@ -110,44 +109,65 @@ void MeteorShowers::loadMeteorShowers(const QVariantMap& map)
 	}
 }
 
-QList<MeteorShowers::SearchResult> MeteorShowers::searchEvents(QDate dateFrom, QDate dateTo) const
+QList<MeteorShowers::SearchResult> MeteorShowers::searchEvents(int year) const
 {
 	QList<SearchResult> result;
 	bool found;
-	QDate date;
 	MeteorShower::Activity a;
 	SearchResult r;
+
+	StelCore* core = StelApp::getInstance().getCore();
+	static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+	double eclJ2000 = ssystem->getEarth()->getRotObliquity(2451545.0);
+	double ra_equ, dec_equ, solLong, solLongstart, beta;
+	const double currentJD = core->getJD(); // save current JD
+
 	for (const auto& ms : m_meteorShowers)
 	{
-		date = dateFrom;
-		while(date.operator <=(dateTo))
+		double JDstart;
+		StelUtils::getJDFromDate(&JDstart, year, 1, 1, 0, 0, 1);
+		core->setJD(JDstart);
+		core->update(0);
+		StelUtils::rectToSphe(&ra_equ,&dec_equ, ssystem->getSun()->getJ2000EquatorialPos(core));
+		StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &solLongstart, &beta);
+		solLongstart = StelUtils::fmodpos(solLongstart, 2.*M_PI) / M_PI_180;
+
+		solLong = 0.;
+		while(solLong < 360.)
 		{
 			found = false;
-			a = ms->hasConfirmedShower(date, found);
+			a = ms->hasConfirmedShower(StelUtils::fmodpos(solLongstart+solLong, 360.), found);
 			r.type = q_("Confirmed");
 			if (!found)
 			{
-				a = ms->hasGenericShower(date, found);
+				a = ms->hasGenericShower(StelUtils::fmodpos(solLongstart+solLong, 360.), found);
 				r.type = q_("Generic");
 			}
 
 			if (found)
 			{
-				r.name = ms->getNameI18n();
-				r.peak = a.peak;
-				if (a.zhr == -1) {
-					r.zhrMin = a.variable.at(0);
-					r.zhrMax = a.variable.at(1);
-				} else {
-					r.zhrMin = a.zhr;
-					r.zhrMax = a.zhr;
+				r.code = ms->getID();
+				if (r.code!="ANT")
+				{
+					r.name = ms->getNameI18n();
+					r.peak = a.peak;
+					r.peakyear = year;
+					if (a.zhr == -1) {
+						r.zhrMin = a.variable.at(0);
+						r.zhrMax = a.variable.at(1);
+					} else {
+						r.zhrMin = a.zhr;
+						r.zhrMax = a.zhr;
+					}
+					result.append(r);
 				}
-				result.append(r);
 				break;
 			}
-			date = date.addDays(1);
+			solLong += 1.;
 		}
 	}
+	core->setJD(currentJD);
+	core->update(0);
 	return result;
 }
 
@@ -225,40 +245,11 @@ StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
-{
-	QStringList result;
-	if (!m_mgr->getEnablePlugin() || maxNbItem <= 0)
-	{
-		return result;
-	}
-
-	for (const auto& ms : m_meteorShowers)
-	{
-		QString name = inEnglish ? ms->getEnglishName() : ms->getNameI18n();
-		if (!matchObjectName(name, objPrefix, useStartOfWords))
-		{
-			continue;
-		}
-
-		result.append(name);
-		if (result.size() >= maxNbItem)
-		{
-			break;
-		}
-	}
-
-	result.sort();
-	return result;
-}
-
 QStringList MeteorShowers::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
 	if (!m_mgr->getEnablePlugin())
-	{
 		return result;
-	}
 
 	if (inEnglish)
 	{

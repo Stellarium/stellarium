@@ -1,0 +1,15 @@
+# This is the cmake config file for the OnlineQueries plugin
+
+# Use program version number. (Static plugin, why bother?)
+SET(ONLINEQUERIES_VERSION "${VERSION}")
+
+ADD_DEFINITIONS(
+-DONLINEQUERIES_PLUGIN_VERSION="${ONLINEQUERIES_VERSION}"
+)
+
+ADD_DEFINITIONS(-DONLINEQUERIES_PLUGIN_LICENSE="GNU GPLv2 or later")
+
+ADD_SUBDIRECTORY( src )
+
+SET(CMAKE_INSTALL_PREFIX $HDATALOC)
+INSTALL(FILES DESTINATION "modules/OnlineQueries")

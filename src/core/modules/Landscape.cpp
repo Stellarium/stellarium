@@ -23,7 +23,6 @@
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "StelIniParser.hpp"
 #include "StelLocation.hpp"
 #include "StelLocationMgr.hpp"
 #include "StelCore.hpp"
@@ -38,6 +37,7 @@
 #include <QFile>
 #include <QDir>
 #include <QtAlgorithms>
+#include <QRegularExpression>
 
 Landscape::Landscape(float _radius)
 	: radius(static_cast<double>(_radius))
@@ -51,7 +51,6 @@ Landscape::Landscape(float _radius)
 	, angleRotateZ(0.)
 	, angleRotateZOffset(0.)
 	, sinMinAltitudeLimit(-0.035) //sin(-2 degrees))
-	, defaultBortleIndex(-1)
 	, defaultFogSetting(-1)
 	, defaultExtinctionCoefficient(-1.)
 	, defaultTemperature(-1000.)
@@ -59,6 +58,7 @@ Landscape::Landscape(float _radius)
 	, horizonPolygon(Q_NULLPTR)
 	, fontSize(18)
 	, memorySize(sizeof(Landscape))
+	, multisamplingEnabled_(StelApp::getInstance().getSettings()->value("video/multisampling", 0).toUInt() != 0)
 {
 }
 
@@ -69,11 +69,12 @@ Landscape::~Landscape()
 // Load attributes common to all landscapes
 void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landscapeId)
 {
+	static const QRegularExpression spaceRe("\\\\n\\s*\\\\n");
 	id = landscapeId;
 	name = landscapeIni.value("landscape/name").toString();
 	author = landscapeIni.value("landscape/author").toString();
 	description = landscapeIni.value("landscape/description").toString();
-	description = description.replace(QRegExp("\\\\n\\s*\\\\n"), "<br />");
+	description = description.replace(spaceRe, "<br />");
 	description = description.replace("\\n", " ");
 	if (name.isEmpty())
 	{
@@ -105,7 +106,7 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		if (landscapeIni.contains("location/longitude"))
 			location.longitude = static_cast<float>(StelUtils::getDecAngle(landscapeIni.value("location/longitude").toString())*M_180_PI);
 		if (landscapeIni.contains("location/country"))
-			location.country = landscapeIni.value("location/country").toString();
+			location.region = StelLocationMgr::pickRegionFromCountry(landscapeIni.value("location/country").toString());
 		if (landscapeIni.contains("location/state"))
 			location.state = landscapeIni.value("location/state").toString();
 		if (landscapeIni.contains("location/name"))
@@ -118,9 +119,22 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		if ((tzString.length() > 0))
 			location.ianaTimeZone=StelLocationMgr::sanitizeTimezoneStringFromLocationDB(tzString);
 
-		defaultBortleIndex = landscapeIni.value("location/light_pollution", -1).toInt();
+		auto defaultBortleIndex = landscapeIni.value("location/light_pollution", -1).toInt();
 		if (defaultBortleIndex<=0) defaultBortleIndex=-1; // neg. values in ini file signal "no change".
 		if (defaultBortleIndex>9) defaultBortleIndex=9; // correct bad values.
+		const auto lum = landscapeIni.value("location/light_pollution_luminance");
+		if (lum.isValid())
+		{
+			defaultLightPollutionLuminance = lum;
+
+			if (defaultBortleIndex>=0)
+			{
+				qWarning() << "Landscape light pollution is specified both as luminance and as Bortle scale index."
+				              "Only one value should be specified, preferably luminance.";
+			}
+		}
+		else if (defaultBortleIndex>=0)
+			defaultLightPollutionLuminance = StelCore::bortleScaleIndexToLuminance(defaultBortleIndex);
 
 		defaultFogSetting = landscapeIni.value("location/display_fog", -1).toInt();
 		defaultExtinctionCoefficient = landscapeIni.value("location/atmospheric_extinction_coefficient", -1.0).toDouble();
@@ -170,17 +184,17 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 		qWarning() << "Landscape Horizon line data file" << QDir::toNativeSeparators(lineFileName) << "not found.";
 		return;
 	}
-	QRegExp emptyLine("^\\s*$");
+	static const QRegularExpression emptyLine("^\\s*$");
+	static const QRegularExpression spaceRe("\\s+");
 	QTextStream in(&file);
 	while (!in.atEnd())
 	{
 		// Build list of vertices. The checks can certainly become more robust.
 		QString line = in.readLine();
 		if (line.length()==0) continue;
-		if (emptyLine.exactMatch((line))) continue;
+		if (emptyLine.match(line).hasMatch()) continue;
 		if (line.at(0)=='#') continue; // skip comment lines.
-		//QStringList list = line.split(QRegExp("\\b\\s+\\b"));
-		const QStringList list = line.trimmed().split(QRegExp("\\s+"));
+		const QStringList list = line.trimmed().split(spaceRe);
 		if (list.count() < 2)
 		{
 			qWarning() << "Landscape polygon file" << QDir::toNativeSeparators(lineFileName) << "has bad line:" << line << "with" << list.count() << "elements";
@@ -226,7 +240,7 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 		}
 
 		StelUtils::spheToRect(az, alt, point);
-		if (horiPoints.last() != point)
+		if (horiPoints.isEmpty() || horiPoints.last() != point)
 			horiPoints.append(point);
 	}
 	file.close();
@@ -277,7 +291,7 @@ void Landscape::loadLabels(const QString& landscapeId)
 	engLabelFileName = StelFileMgr::findFile("landscapes/" + landscapeId, StelFileMgr::Directory) + "/gazetteer.en.utf8";
 
 	// Check the file with full name of locale
-	if (!QFileInfo(locLabelFileName).exists())
+	if (!QFileInfo::exists(locLabelFileName))
 	{
 		// File not found. What about short name of locale?
 		lang = lang.split("_").at(0);
@@ -285,9 +299,9 @@ void Landscape::loadLabels(const QString& landscapeId)
 	}
 
 	// Get localized or at least English description for landscape
-	if (QFileInfo(locLabelFileName).exists())
+	if (QFileInfo::exists(locLabelFileName))
 		descFileName = locLabelFileName;
-	else if (QFileInfo(engLabelFileName).exists())
+	else if (QFileInfo::exists(engLabelFileName))
 		descFileName = engLabelFileName;
 	else
 		return;
@@ -297,7 +311,11 @@ void Landscape::loadLabels(const QString& landscapeId)
 	if(file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
 		QTextStream in(&file);
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		in.setEncoding(QStringConverter::Utf8);
+#else
 		in.setCodec("UTF-8");
+#endif
 		while (!in.atEnd())
 		{
 			QString line=in.readLine();
@@ -477,7 +495,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		const QStringList parameters = landscapeIni.value(key).toString().split(':');  // e.g. tex0:0:0:1:1
 		//TODO: How should be handled an invalid texture description?
 		QString textureName = parameters.value(0);                                    // tex0
-		texnum = textureName.right(textureName.length() - 3).toUInt();                 // 0
+		texnum = textureName.right(textureName.length() - 3).toUInt();             // 0
 		sides[i].tex = sideTexs[texnum];
 		sides[i].tex_illum = sideTexs[nbSide+texnum];
 		sides[i].texCoords[0] = parameters.at(1).toFloat();
@@ -565,9 +583,10 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	const float sa = std::sin(alpha);
 	float y0 = static_cast<float>(radius);
 	float x0 = 0.0f;
+	unsigned short int limit;
 
 	LOSSide precompSide;
-	precompSide.arr.primitiveType=StelVertexArray::Triangles;
+	precompSide.arr.primitiveType=StelVertexArray::Triangles;	
 	for (unsigned int n=0;n<nbDecorRepeat;n++)
 	{
 		for (unsigned int i=0;i<nbSide;i++)
@@ -588,7 +607,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 			float tx0 = sides[ti].texCoords[0];
 			const float d_tx = (sides[ti].texCoords[2]-sides[ti].texCoords[0]) / slices_per_side;
-			const float d_ty = (sides[ti].texCoords[3]-sides[ti].texCoords[1]) / stacks;
+			const float d_ty = (sides[ti].texCoords[3]-sides[ti].texCoords[1]) / stacks;			
 			for (unsigned short int j=0;j<slices_per_side;j++)
 			{
 				const float y1 = y0*ca - x0*sa;
@@ -596,7 +615,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 				const float tx1 = tx0 + d_tx;
 				float z = z0;
 				float ty0 = sides[ti].texCoords[1];
-				for (unsigned short int k=0u;k<=static_cast<unsigned short int>(stacks*2u);k+=2u)
+				limit = static_cast<unsigned short int>(stacks*2u);
+				for (unsigned short int k=0u;k<=limit;k+=2u)
 				{
 					precompSide.arr.texCoords << Vec2f(tx0, ty0) << Vec2f(tx1, ty0);
 					if (calibrated && !tanMode)
@@ -613,7 +633,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 					ty0 += d_ty;
 				}
 				unsigned short int offset = j*(stacks+1u)*2u;
-				for (unsigned short int k = 2;k<static_cast<unsigned short int>(stacks*2u+2u);k+=2u)
+				limit = static_cast<unsigned short int>(stacks*2u+2u);
+				for (unsigned short int k = 2;k<limit;k+=2u)
 				{
 					precompSide.arr.indices << offset+k-2 << offset+k-1 << offset+k;
 					precompSide.arr.indices << offset+k   << offset+k-1 << offset+k+1;
@@ -641,6 +662,7 @@ void LandscapeOldStyle::draw(StelCore* core, bool onlyPolygon)
 		return;
 
 	StelPainter painter(core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff));
+	const float ppx = static_cast<float>(painter.getProjector()->getDevicePixelsPerPixel());
 	painter.setBlending(true);
 	painter.setCullFace(true);
 
@@ -671,7 +693,7 @@ void LandscapeOldStyle::draw(StelCore* core, bool onlyPolygon)
 		painter.setBlending(true, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		painter.setColor(horizonPolygonLineColor, landFader.getInterstate());
 		const float lineWidth=painter.getLineWidth();
-		painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness());
+		painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
 		painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 		painter.setLineWidth(lineWidth);
 	}
@@ -723,6 +745,12 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter, const b
 	else
 		sPainter.setColor(Vec3f(landscapeBrightness), landFader.getInterstate());
 
+    const auto gl = sPainter.glFuncs();
+#ifdef GL_MULTISAMPLE
+	if (multisamplingEnabled_)
+		gl->glEnable(GL_MULTISAMPLE);
+#endif
+
 	for (const auto& side : precomputedSides)
 	{
 		if (side.light==drawLight)
@@ -731,6 +759,11 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter, const b
 			sPainter.drawSphericalTriangles(side.arr, true, false, Q_NULLPTR, false);
 		}
 	}
+
+#ifdef GL_MULTISAMPLE
+	if (multisamplingEnabled_)
+		gl->glDisable(GL_MULTISAMPLE);
+#endif
 }
 
 // Draw the ground
@@ -754,6 +787,7 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 		groundTex->bind();
 	}
 	StelVertexArray va(static_cast<const QVector<Vec3d> >(groundVertexArr), StelVertexArray::Triangles, static_cast<const QVector<Vec2f> >(groundTexCoordArr));
+
 	sPainter.drawStelVertexArray(va, true);
 }
 
@@ -886,6 +920,7 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 	transfo->combine(Mat4d::zrotation(-static_cast<double>(angleRotateZOffset)));
 	const StelProjectorP prj = core->getProjection(transfo);
 	StelPainter sPainter(prj);
+	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 
 	// Normal transparency mode for the transition blending
 	sPainter.setBlending(true);
@@ -894,7 +929,19 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 	if (!onlyPolygon) // The only useful application of the onlyPolygon is a demo which does not fill the polygon
 	{
 		sPainter.setColor(landscapeBrightness*groundColor, landFader.getInterstate());
+
+    const auto gl = sPainter.glFuncs();
+#ifdef GL_MULTISAMPLE
+	if (multisamplingEnabled_)
+		gl->glEnable(GL_MULTISAMPLE);
+#endif
+
 		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeFill);
+
+#ifdef GL_MULTISAMPLE
+	if (multisamplingEnabled_)
+		gl->glDisable(GL_MULTISAMPLE);
+#endif
 	}
 
 	if (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f))
@@ -902,7 +949,7 @@ void LandscapePolygonal::draw(StelCore* core, bool onlyPolygon)
 		sPainter.setLineSmooth(true);
 		sPainter.setColor(horizonPolygonLineColor, landFader.getInterstate());
 		const float lineWidth=sPainter.getLineWidth();
-		sPainter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness());
+		sPainter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
 		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 		sPainter.setLineWidth(lineWidth);
 		sPainter.setLineSmooth(false);
@@ -1006,6 +1053,7 @@ void LandscapeFisheye::draw(StelCore* core, bool onlyPolygon)
 	transfo->combine(Mat4d::zrotation(-static_cast<double>(angleRotateZ+angleRotateZOffset)));
 	const StelProjectorP prj = core->getProjection(transfo);
 	StelPainter painter(prj);
+	const float ppx = static_cast<float>(painter.getProjector()->getDevicePixelsPerPixel());
 
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
@@ -1045,7 +1093,7 @@ void LandscapeFisheye::draw(StelCore* core, bool onlyPolygon)
 		painter.setBlending(true, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		painter.setColor(horizonPolygonLineColor, landFader.getInterstate());
 		const float lineWidth=painter.getLineWidth();
-		painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness());
+		painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
 		painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 		painter.setLineWidth(lineWidth);
 	}
@@ -1212,6 +1260,7 @@ void LandscapeSpherical::draw(StelCore* core, bool onlyPolygon)
 	transfo->combine(Mat4d::zrotation(-(static_cast<double>(angleRotateZ+angleRotateZOffset))));
 	const StelProjectorP prj = core->getProjection(transfo);
 	StelPainter sPainter(prj);
+	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 
 	// Normal transparency mode
 	sPainter.setBlending(true);
@@ -1261,7 +1310,7 @@ void LandscapeSpherical::draw(StelCore* core, bool onlyPolygon)
 		sPainter.setBlending(true);
 		sPainter.setColor(horizonPolygonLineColor, landFader.getInterstate());
 		const float lineWidth=sPainter.getLineWidth();
-		sPainter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness());
+		sPainter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
 		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 		sPainter.setLineWidth(lineWidth);
 	}

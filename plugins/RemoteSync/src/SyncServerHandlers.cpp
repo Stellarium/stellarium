@@ -18,6 +18,7 @@
  */
 
 #include "SyncServerHandlers.hpp"
+#include "SyncMessages.hpp"
 #include "SyncServer.hpp"
 
 using namespace SyncProtocol;

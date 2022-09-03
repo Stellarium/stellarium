@@ -122,8 +122,10 @@
 	
 %% This will avoid overshooting of the margin notes out of the page.
 \setlength{\marginparwidth}{0.6\marginparwidth}
-%% A command to show the version number when a feature was introduced in the margin. Give only the version number. TODO Decide on formatting etc.
-\newcommand{\newFeature}[1]{\marginpar{\centering{\small #1}}}
+%% A command to show the version number when a feature was introduced in the margin.
+%% Inside, give ONLY the version number like \newFeature{0.21.2}
+%% TODO Decide on formatting etc.
+\newcommand{\newFeature}[1]{\marginpar{\centering{\small v#1}}}
 
 %% A few units. Add what you need in the same style here.
 \newcommand{\cm}{\ensuremath{\,\mathrm{cm}}}
@@ -140,8 +142,9 @@
 \newcommand{\mJy}{\ensuremath{\,\mathrm{mJy}}}
 \newcommand{\kg}{\ensuremath{\,\mathrm{kg}}}
 \newcommand{\g}{\ensuremath{\,\mathrm{g}}}
-\newcommand{\px}{\ensuremath{\mathrm{px}}} % pixels
-\newcommand{\cy}{\ensuremath{\mathrm{cy}}} % century
+\newcommand{\px}{\ensuremath{\,\mathrm{px}}} % pixels
+\newcommand{\cy}{\ensuremath{\,\mathrm{cy}}} % century
+\newcommand{\cdpmQ}{\ensuremath{\,\mathrm{cd}/\mathrm{m}^2}} % candela
 
 % It seems the lstenvironments are much too compicated or need big efforts for decorating in HTML/CSS. Just replace by something simpler.
 % We must repeat the same definitions with small and scriptsize (executed in PDF only), and later remove the optional size argument. 							 
@@ -255,6 +258,7 @@
 %	BIBLIOGRAPHY AND INDEX
 %----------------------------------------------------------------------------------------
 
+\usepackage{csquotes} % recommended when using biblatex and babel
 %\usepackage[style=numeric,citestyle=numeric,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
 \usepackage[style=authoryear-comp,citestyle=authoryear,natbib=true,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
 \addbibresource{guide.bib} % BibTeX bibliography file

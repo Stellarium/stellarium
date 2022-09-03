@@ -34,7 +34,7 @@ public:
 	//! Requires a valid GL context
 	SpoutSender(const QString& senderName);
 	//! Releases all held resources
-	virtual ~SpoutSender();
+	virtual ~SpoutSender() Q_DECL_OVERRIDE;
 public slots:
 	//! Captures a frame from the currently bound framebuffer,
 	//! and sends it to Spout.

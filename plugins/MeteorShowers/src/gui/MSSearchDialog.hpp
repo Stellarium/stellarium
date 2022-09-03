@@ -38,6 +38,7 @@ public:
 	//! Defines the number and the order of the columns in the table that lists active meteor showers
 	//! @enum ModelColumns
 	enum ModelColumns {
+		ColumnCode,		//! code column
 		ColumnName,		//! name column
 		ColumnZHR,		//! zhr column
 		ColumnDataType,		//! data type column
@@ -49,19 +50,16 @@ public:
 	MSSearchDialog(MeteorShowersMgr *mgr);
 
 	//! Destructor
-	~MSSearchDialog();
+	~MSSearchDialog() Q_DECL_OVERRIDE;
 
 protected:
 	//! Initialize the dialog and connect the signals/slots
-	void createDialogContent();
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 
 private slots:
-	//! Checks if the inputed dates are valid for use.
-	void checkDates();
-
 	//! Search events and fill the list.
 	void searchEvents();
 
@@ -93,10 +91,16 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem& other) const
+	bool operator < (const QTreeWidgetItem& other) const Q_DECL_OVERRIDE
 	{
 		const int column = treeWidget()->sortColumn();
-		return this->data(column, Qt::UserRole) < other.data(column, Qt::UserRole);
+
+		if (column == MSSearchDialog::ColumnZHR)
+			return this->data(column, Qt::UserRole).toInt() < other.data(column, Qt::UserRole).toInt();
+		else if (column == MSSearchDialog::ColumnPeak)
+			return this->data(column, Qt::UserRole).toDouble() < other.data(column, Qt::UserRole).toDouble();
+		else
+			return text(column).toLower() < other.text(column).toLower();
 	}
 };
 

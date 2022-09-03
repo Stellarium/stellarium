@@ -22,9 +22,6 @@
 #include "SimbadSearcher.hpp"
 #include "SearchDialog.hpp"
 #include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelTranslator.hpp"
 
 #include <QEventLoop>
 #include <QJsonArray>

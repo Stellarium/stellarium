@@ -21,6 +21,7 @@
 #include <QPluginLoader>
 #include <QSettings>
 #include <QDir>
+#include <QRegularExpression>
 
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
@@ -29,8 +30,8 @@
 #include "StelPluginInterface.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelIniParser.hpp"
-
-
+#include "StelLocaleMgr.hpp"
+#include "StelUtils.hpp"
 
 StelModuleMgr::StelModuleMgr() : callingListsToRegenerate(true), pluginDescriptorListLoaded(false)
 {
@@ -156,7 +157,7 @@ QObjectList StelModuleMgr::loadExtensions(const QString &moduleID)
 
 struct StelModuleOrderComparator
 {
-	StelModuleOrderComparator(StelModule::StelModuleActionName aaction) : action(aaction) {;}
+	StelModuleOrderComparator(StelModule::StelModuleActionName aaction) : action(aaction) {}
 	bool operator()(StelModule* x, StelModule* y) {return x->getCallOrder(action)<y->getCallOrder(action);}
 private:
 	StelModule::StelModuleActionName action;
@@ -211,7 +212,7 @@ void StelModuleMgr::generateCallingLists()
 		// Flush previous call orders
 		mc.value().clear();
 		// and init them with modules in creation order
-		for (auto* m : getAllModules())
+		for (auto& m : getAllModules())
 		{
 			mc.value().push_back(m);
 		}
@@ -231,7 +232,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 
 	// First list all static plugins.
 	// If a dynamic plugin with the same ID exists, it will take precedence on the static one.
-	for (auto* plugin : QPluginLoader::staticInstances())
+	for (auto& plugin : QPluginLoader::staticInstances())
 	{
 		StelPluginInterface* pluginInterface = qobject_cast<StelPluginInterface*>(plugin);
 		if (pluginInterface)
@@ -244,20 +245,17 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 	}
 
 	// Then list dynamic libraries from the modules/ directory
-	QSet<QString> moduleDirs;
-	moduleDirs = StelFileMgr::listContents("modules",StelFileMgr::Directory);
+	const QSet<QString> moduleDirs = StelFileMgr::listContents("modules",StelFileMgr::Directory);
 
-	for (auto dir : moduleDirs)
+	for (auto &dir : moduleDirs)
 	{
 		QString moduleFullPath = QString("modules/") + dir + "/lib" + dir;
 #ifdef Q_OS_WIN
 		moduleFullPath += ".dll";
-#else
-#ifdef Q_OS_MAC
+#elif defined(Q_OS_MACOS)
 		moduleFullPath += ".dylib";
 #else
 		moduleFullPath += ".so";
-#endif
 #endif
 		moduleFullPath = StelFileMgr::findFile(moduleFullPath, StelFileMgr::File);
 		if (moduleFullPath.isEmpty())
@@ -304,4 +302,28 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 
 	pluginDescriptorListLoaded = true;
 	return pluginDescriptorList.values();
+}
+
+QString StelModuleMgr::getStandardSupportLinksInfo(QString moduleName, bool furtherInfo)
+{
+	// Regexp to replace {text} with an HTML link.
+	static const QRegularExpression a_rx("[{]([^{]*)[}]");
+	QString html;
+	html += "<h3>" + q_("Links") + "</h3>";
+	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg(moduleName) + "</p>";
+	html += "<p><ul>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
+	html += "</ul></p>";
+	if (furtherInfo)
+	{
+		QStringList ver = StelUtils::getApplicationPublicVersion().split(".");
+		QString URL = QString("<a href=\"http://stellarium.org/doc/%1.0/\">\\1</a>").arg(ver[0]);
+		// TRANSLATORS: The text between braces is the text of an HTML link.
+		html += "<p>" + q_("Further information can be found in the {developer documentation}.").toHtmlEscaped().replace(a_rx, URL) + "</p>";
+	}
+
+	return html;
 }

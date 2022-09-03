@@ -26,10 +26,8 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelFileMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelMovementMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "LandscapeMgr.hpp"
@@ -161,7 +159,7 @@ void S3DRenderer::setupPassUniforms(QOpenGLShaderProgram *shader)
 	if(shaderParameters.shadows && loc >= 0)
 	{
 		//Holds the frustum splits necessary for the lookup in the shader
-		Vec4f splitData;
+		Vec4f splitData(0.f);
 		for(int i=0; i<shaderParameters.frustumSplits; i++)
 		{
 			float zVal;
@@ -515,7 +513,7 @@ void S3DRenderer::computePolyhedron(Polyhedron& body,const Frustum& frustum,cons
 	body.extrude(shadowDir, sceneAABB);
 }
 
-void S3DRenderer::computeOrthoProjVals(const Vec3f shadowDir,float& orthoExtent,float& orthoNear,float& orthoFar)
+void S3DRenderer::computeOrthoProjVals(const Vec3f &shadowDir, float& orthoExtent, float& orthoNear, float& orthoFar)
 {
 	//Focus the light first on the entire scene
 	float maxZ = -std::numeric_limits<float>::max();
@@ -813,15 +811,16 @@ void S3DRenderer::calculateLighting()
 {
 	//calculate which light source we need + intensity
 	float ambientBrightness=0.0f, directionalBrightness=0.0f, emissiveFactor;
-	float eclipseFactor=static_cast<float>(GETSTELMODULE(SolarSystem)->getEclipseFactor(StelApp::getInstance().getCore()).first);
+	float eclipseFactor=static_cast<float>(GETSTELMODULE(SolarSystem)->getSolarEclipseFactor(StelApp::getInstance().getCore()).first);
 
 	Vec3d sunPosition = sun->getAltAzPosAuto(core);
 	sunPosition.normalize();
 	Vec3d moonPosition = moon->getAltAzPosAuto(core);
-	float moonPhaseAngle = moon->getPhase(core->getObserverHeliocentricEclipticPos());
+	//const float moonPhaseAngle = moon->getPhase(core->getObserverHeliocentricEclipticPos());
+	const float moonBrightnessFromMag=moon->getVMagnitudeWithExtinction(core)/-12.73f; // This can handle eclipse situations better than just phase angle. Max. mag is around -13 (full moon surge).
 	moonPosition.normalize();
 	Vec3d venusPosition = venus->getAltAzPosAuto(core);
-	float venusPhaseAngle = venus->getPhase(core->getObserverHeliocentricEclipticPos());
+	const float venusPhaseAngle = venus->getPhase(core->getObserverHeliocentricEclipticPos());
 	venusPosition.normalize();
 
 	// The light model here: ambient light consists of solar twilight and day ambient,
@@ -838,9 +837,9 @@ void S3DRenderer::calculateLighting()
 	//float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+8.*M_PI/180.));
 	//float sinMoonAngleRad = moonPosition[2];
 
-	float sinSunAngle  =  static_cast<float>(sunPosition[2]);
-	float sinMoonAngle =  static_cast<float>(moonPosition[2]);
-	float sinVenusAngle = static_cast<float>(venusPosition[2]);
+	const float sinSunAngle  =  static_cast<float>(sunPosition[2]);
+	const float sinMoonAngle =  static_cast<float>(moonPosition[2]);
+	const float sinVenusAngle = static_cast<float>(venusPosition[2]);
 
 	//set the minimum ambient brightness
 	//this uses the LandscapeMgr values
@@ -879,8 +878,8 @@ void S3DRenderer::calculateLighting()
 		// I don't know if this can ever happen, but in this case,
 		// directly use the same model as LandscapeMgr::update uses for the lightscapeBrightness
 		emissiveFactor = 0.0f;
-		if (sunPosition[2]<-0.14) emissiveFactor=1.0f;
-		else if (sunPosition[2]<-0.05) emissiveFactor = 1.0f-static_cast<float>(sunPosition[2]+0.14)/(-0.05f+0.14f);
+		if (sinSunAngle<-0.14f) emissiveFactor=1.0f;
+		else if (sinSunAngle<-0.05f) emissiveFactor = 1.0f-(sinSunAngle+0.14f)/(-0.05f+0.14f);
 	}
 
 	// calculate ambient light
@@ -894,7 +893,8 @@ void S3DRenderer::calculateLighting()
 
 	if ((sinMoonAngle>0.0f) && (sinSunAngle<0.0f))
 	{
-		lightInfo.moonAmbient = sqrtf(sinMoonAngle * ((cosf(moonPhaseAngle)+1.0f)*0.5f)) * LUNAR_BRIGHTNESS_FACTOR;
+		//lightInfo.moonAmbient = sqrtf(sinMoonAngle * ((cosf(moonPhaseAngle)+1.0f)*0.5f)) * LUNAR_BRIGHTNESS_FACTOR;
+		lightInfo.moonAmbient = sqrtf(sinMoonAngle * moonBrightnessFromMag) * LUNAR_BRIGHTNESS_FACTOR;
 		ambientBrightness += lightInfo.moonAmbient;
 	}
 	else
@@ -913,7 +913,7 @@ void S3DRenderer::calculateLighting()
 	// and "else" implies sinSunAngle<-0.1 or sun <-6 degrees.
 	else if (sinMoonAngle>0.0f)
 	{
-		float moonBrightness = sqrtf(sinMoonAngle) * ((cosf(moonPhaseAngle)+1.0f)*0.5f) * LUNAR_BRIGHTNESS_FACTOR;
+		float moonBrightness = sqrtf(sinMoonAngle) * moonBrightnessFromMag * LUNAR_BRIGHTNESS_FACTOR;
 		moonBrightness -= (ambientBrightness-0.05f)*0.5f;
 		moonBrightness = qMax(0.0f,moonBrightness);
 		if (moonBrightness > 0.0f)
@@ -943,8 +943,8 @@ void S3DRenderer::calculateLighting()
 	}
 
 	//convert to float
-	lightInfo.lightDirectionV3f = lightPosition.toVec3f(); // lightPosition.v[0],lightPosition[1],lightPosition.v[2]);
-	lightInfo.lightDirectionWorld = QVector3D(static_cast<float>(lightPosition.v[0]),static_cast<float>(lightPosition[1]),static_cast<float>(lightPosition.v[2]));
+	lightInfo.lightDirectionV3f = lightPosition.toVec3f();
+	lightInfo.lightDirectionWorld = lightPosition.toQVector3D();
 
 	lightInfo.landscapeOpacity = 0.0f;
 
@@ -1596,7 +1596,7 @@ void S3DRenderer::determineFeatureSupport()
 		qCDebug(s3drenderer)<<"Maximum framebuffer size:"<<maximumFramebufferSize;
 	}
 
-	QString renderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+	const QString renderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
 	isANGLE = renderer.contains("ANGLE");
 
 	//check if GS cubemapping is possible
@@ -2111,12 +2111,12 @@ bool S3DRenderer::initCubemapping()
 #define PLANE(_PLANEID_, _MAT_) for(int i=_PLANEID_ * vtxCount;i < (_PLANEID_ + 1)*vtxCount;i++){ _MAT_.transfo(cubeVertices[i]); }\
 	for(int i =_PLANEID_ * idxCount; i < (_PLANEID_+1)*idxCount;++i) { cubeIndices[i] = cubeIndices[i] + _PLANEID_ * vtxCount; }
 
-	PLANE(0, Mat4f::zrotation(-M_PI_2f)); //S
-	PLANE(1, Mat4f::zrotation(M_PI_2f));  //N
-	PLANE(2, Mat4f::identity());  //E
-	PLANE(3, Mat4f::zrotation(M_PIf)); //W
-	PLANE(4, Mat4f::xrotation(M_PI_2f)); //U
-	PLANE(5, Mat4f::xrotation(-M_PI_2f)); //D
+	PLANE(0, Mat4f::zrotation(-M_PI_2f)) //S
+	PLANE(1, Mat4f::zrotation(M_PI_2f))  //N
+	PLANE(2, Mat4f::identity())  //E
+	PLANE(3, Mat4f::zrotation(M_PIf)) //W
+	PLANE(4, Mat4f::xrotation(M_PI_2f)) //U
+	PLANE(5, Mat4f::xrotation(-M_PI_2f)) //D
 #undef PLANE
 
 	//upload original cube vertices + indices to GL

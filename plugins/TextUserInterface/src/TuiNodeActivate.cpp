@@ -31,7 +31,7 @@ TuiNodeResponse TuiNodeActivate::handleKey(int key)
 {
 	if (key==Qt::Key_Return)
 	{
-		emit(activate());
+		emit activate();
 		TuiNodeResponse response;
 		response.accepted = true;
 		response.newNode = this;

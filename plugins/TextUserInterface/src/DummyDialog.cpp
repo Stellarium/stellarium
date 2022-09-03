@@ -28,20 +28,20 @@
 #include <QLineEdit>
 
 // this is adapted from DummyDialog.cpp
-class CustomProxy : public QGraphicsProxyWidget
+class DummyCustomProxy : public QGraphicsProxyWidget
 {
 	public:
-		CustomProxy(QGraphicsItem *parent = Q_NULLPTR, Qt::WindowFlags wFlags = Qt::WindowFlags()) : QGraphicsProxyWidget(parent, wFlags)
+		DummyCustomProxy(QGraphicsItem *parent = Q_NULLPTR, Qt::WindowFlags wFlags = Qt::WindowFlags()) : QGraphicsProxyWidget(parent, wFlags)
 		{
 			setFocusPolicy(Qt::StrongFocus);
 		}
 		//! Reimplement this method to add windows decorations. Currently there are invisible 2 px decorations
-		void paintWindowFrame(QPainter*, const QStyleOptionGraphicsItem *, QWidget *)
+		void paintWindowFrame(QPainter*, const QStyleOptionGraphicsItem *, QWidget *) Q_DECL_OVERRIDE
 		{
 		}
 
 	protected:
-		virtual bool event(QEvent* event)
+		virtual bool event(QEvent* event) Q_DECL_OVERRIDE
 		{
 			if (event->type()==QEvent::WindowDeactivate)
 			{
@@ -55,7 +55,7 @@ class CustomProxy : public QGraphicsProxyWidget
 		}
 		
 		// Avoid blocking the program when hovering over an inactive window
-		virtual bool sceneEvent(QEvent* event)
+		virtual bool sceneEvent(QEvent* event) Q_DECL_OVERRIDE
 		{
 			if (!(isActiveWindow() || event->type()==QEvent::WindowActivate || event->type()==QEvent::GraphicsSceneMousePress))
 			{
@@ -99,7 +99,7 @@ void DummyDialog::setVisible(bool v)
 		connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
 		createDialogContent();
 		
-		proxy = new CustomProxy(Q_NULLPTR, Qt::Tool);
+		proxy = new DummyCustomProxy(Q_NULLPTR, Qt::Tool);
 		proxy->setWidget(dialog);
 		StelMainView::getInstance().scene()->addItem(proxy);
 		// Invisible frame around the window to make resizing easier

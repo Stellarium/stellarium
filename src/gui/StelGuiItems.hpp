@@ -54,8 +54,8 @@ class CornerButtons : public QObject, public QGraphicsItem
 	Q_INTERFACES(QGraphicsItem)
 public:
 	CornerButtons(QGraphicsItem* parent=Q_NULLPTR);
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
-	virtual QRectF boundingRect() const;
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) Q_DECL_OVERRIDE;
+	virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 	void setOpacity(double opacity);
 private:
 	mutable double lastOpacity;
@@ -77,7 +77,9 @@ public:
 	//! @param noBackground define whether the button background image have to be used
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
 		   const QPixmap& pixHover=QPixmap(),
-		   class StelAction* action=Q_NULLPTR, bool noBackground=false);
+		   class StelAction* action=Q_NULLPTR,
+		   bool noBackground=false,
+		   StelAction *otherAction=Q_NULLPTR);
 	
 	//! Constructor
 	//! @param parent the parent item
@@ -88,7 +90,9 @@ public:
 	//! @param noBackground define whether the button background image have to be used
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
 		   const QPixmap& pixHover,
-		   const QString& actionId, bool noBackground=false);
+		   const QString& actionId,
+		   bool noBackground=false,
+		   const QString& otherActionId="");
 	//! Constructor
 	//! @param parent the parent item
 	//! @param pixOn the pixmap to display when the button is toggled
@@ -100,7 +104,9 @@ public:
 	//! @param isTristate define whether the button is a tristate or an on/off button
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixNoChange,
 		   const QPixmap& pixHover,
-		   const QString& actionId=QString(), bool noBackground=false, bool isTristate=true);
+		   const QString& actionId=QString(),
+		   bool noBackground=false,
+		   bool isTristate=true);
 	
 	//! Button states
 	enum {ButtonStateOff = 0, ButtonStateOn = 1, ButtonStateNoChange = 2};
@@ -132,6 +138,7 @@ signals:
 	void toggled(bool);
 	//! Triggered when the button state changes
 	void triggered();
+	void triggeredRight();
 	//! Emitted when the hover state change
 	//! @param b true if the mouse entered the button
 	void hoverChanged(bool b);
@@ -139,13 +146,13 @@ signals:
 public slots:
 	//! set whether the button is checked
 	void setChecked(int b);
-	void setChecked(bool b) { setChecked((int)b); }
+	void setChecked(bool b) { setChecked(static_cast<int>(b)); }
 
 protected:
-	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
-	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event);
-	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event);
-	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) Q_DECL_OVERRIDE;
+	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) Q_DECL_OVERRIDE;
+	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) Q_DECL_OVERRIDE;
+	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) Q_DECL_OVERRIDE;
 private slots:
 	void animValueChanged(qreal value);
 	void updateIcon();
@@ -154,7 +161,8 @@ private:
                   const QPixmap& apixOff,
                   const QPixmap& apixNoChange,
                   const QPixmap& apixHover,
-                  StelAction* aaction,
+		  StelAction* anAction,
+		  StelAction* otherAction,
 		  bool noBackground,
 		  bool isTristate);
 	int toggleChecked(int);
@@ -169,7 +177,8 @@ private:
 	bool flagChangeFocus;
 
 	QTimeLine* timeLine;
-	class StelAction* action;
+	class StelAction* action;          // linked action for button press
+	class StelAction* secondAction;    // linked action for rightclick (or Ctrl-Click?)
 	bool noBckground;
 	bool isTristate_;
 	double opacity;
@@ -184,9 +193,9 @@ class LeftStelBar : public QObject, public QGraphicsItem
 	Q_INTERFACES(QGraphicsItem)
 public:
 	LeftStelBar(QGraphicsItem* parent);
-	~LeftStelBar();
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
-	virtual QRectF boundingRect() const;
+	~LeftStelBar() Q_DECL_OVERRIDE;
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) Q_DECL_OVERRIDE;
+	virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 	void addButton(StelButton* button);
 	QRectF boundingRectNoHelpLabel() const;
 	//! Set the color for all the sub elements
@@ -207,9 +216,9 @@ class BottomStelBar : public QObject, public QGraphicsItem
 	Q_INTERFACES(QGraphicsItem)
 public:
 	BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft=QPixmap(), const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(), const QPixmap& pixSingle=QPixmap());
-	virtual ~BottomStelBar();
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR);
-	virtual QRectF boundingRect() const;
+	virtual ~BottomStelBar() Q_DECL_OVERRIDE;
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = Q_NULLPTR) Q_DECL_OVERRIDE;
+	virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
 	QRectF boundingRectNoHelpLabel() const;
 
 	//! Add a button in a group in the button bar. Group are displayed in alphabetic order.
@@ -287,7 +296,7 @@ private:
 	{
 		ButtonGroup() : leftMargin(0), rightMargin(0),
 						pixBackgroundLeft(Q_NULLPTR), pixBackgroundRight(Q_NULLPTR),
-						pixBackgroundMiddle(Q_NULLPTR), pixBackgroundSingle(Q_NULLPTR) {;}
+						pixBackgroundMiddle(Q_NULLPTR), pixBackgroundSingle(Q_NULLPTR) {}
 		//! Elements of the group
 		QList<StelButton*> elems;
 		//! Left margin size in pixel
@@ -325,10 +334,11 @@ class StelBarsPath : public QGraphicsPathItem
 	public:
 		StelBarsPath(QGraphicsItem* parent);
 		void updatePath(BottomStelBar* bot, LeftStelBar* lef);
+		//! return radius of corner arc
 		double getRoundSize() const {return roundSize;}
 		void setBackgroundOpacity(double opacity);
 	private:
-		double roundSize;
+		double roundSize; // radius of corner arc
 };
 
 #endif // STELGUIITEMS_HPP

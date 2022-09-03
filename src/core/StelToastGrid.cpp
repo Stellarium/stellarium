@@ -115,8 +115,8 @@ QVector<Vec3d> ToastGrid::getVertexArray(int level, int x, int y, int resolution
 
 QVector<Vec2f> ToastGrid::getTextureArray(int level, int x, int y, int resolution) const
 {
-	Q_UNUSED(x);
-	Q_UNUSED(y);
+	Q_UNUSED(x)
+	Q_UNUSED(y)
 	Q_ASSERT(resolution >= level);
 	Q_ASSERT(resolution <= maxLevel);
 	// The size of the returned array
@@ -127,7 +127,7 @@ QVector<Vec2f> ToastGrid::getTextureArray(int level, int x, int y, int resolutio
 	{
 		for (int j = 0; j < size; j++)
 		{
-			ret.append(Vec2f(j,i) / (size-1));
+			ret.append(Vec2f(static_cast<float>(j),static_cast<float>(i)) / static_cast<float>(size-1));
 		}
 	}
 	Q_ASSERT(ret.size() == size * size);

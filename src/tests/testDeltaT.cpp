@@ -32,152 +32,185 @@ QTEST_GUILESS_MAIN(TestDeltaT)
 void TestDeltaT::initTestCase()
 {
 	// source: http://astro.ukho.gov.uk/nao/lvm/
+	// the data obtainded 13 Jan. 2021
 
-	//                            Year               ΔT              ε (seconds)
+	//              Year         ΔT         ε (seconds)
 	// ΔT (s) : −2000 to −800 (convert from hours)
-	genericData << -2000.0  <<  1123200 <<  25920;
-	genericData << -1900.0  <<  1062720 <<  25920;
-	genericData << -1800.0  <<  1010880 <<  25920;
-	genericData << -1700.0  <<    950400 <<  25920;
-	genericData << -1600.0  <<    907200 <<  17280;
-	genericData << -1500.0  <<    855360 <<  17280;
-	genericData << -1400.0  <<    803520 <<  17280;
-	genericData << -1300.0  <<    760320 <<  17280;
-	genericData << -1200.0  <<    708480 <<  17280;
-	genericData << -1100.0  <<    665280 <<  17280;
-	genericData << -1000.0  <<    622080 <<  17280;
-	genericData <<   -900.0  <<    570240 <<    8640;
-	genericData <<   -800.0  <<    527040 <<    8640;
+	genericData << -2000.0  << 46080.00 << 1080.00;
+	genericData << -1900.0  << 43560.00 << 1080.00;
+	genericData << -1800.0  << 41040.00 << 1080.00;
+	genericData << -1700.0  << 38880.00 << 1080.00;
+	genericData << -1600.0  << 36720.00 <<  720.00;
+	genericData << -1500.0  << 34920.00 <<  720.00;
+	genericData << -1400.0  << 32760.00 <<  720.00;
+	genericData << -1300.0  << 30960.00 <<  720.00;
+	genericData << -1200.0  << 29160.00 <<  720.00;
+	genericData << -1100.0  << 27360.00 <<  720.00;
+	genericData << -1000.0  << 25560.00 <<  720.00;
+	genericData <<  -900.0  << 23760.00 <<  360.00;
+	genericData <<  -800.0  << 21960.00 <<  360.00;
 	// ΔT (s) : −720 to +1600
-	genericData <<   -720.0  << 20480.00 << 180.00;
-	genericData <<   -700.0  << 20120.00 << 170.00;
-	genericData <<   -600.0  << 18400.00 << 160.00;
-	genericData <<   -500.0  << 16820.00 << 150.00;
-	genericData <<   -400.0  << 15370.00 << 130.00;
-	genericData <<   -300.0  << 14030.00 << 120.00;
-	genericData <<   -200.0  << 12800.00 << 110.00;
-	genericData <<   -100.0  << 11640.00 << 100.00;
-	genericData <<        0.0  << 10550.00 <<   90.00;
-	genericData <<    100.0  <<   9510.00 <<   80.00;
-	genericData <<    200.0  <<   8500.00 <<   70.00;
-	genericData <<    300.0  <<   7510.00 <<   60.00;
-	genericData <<    400.0  <<   6520.00 <<   50.00;
-	genericData <<    500.0  <<   5520.00 <<   40.00;
-	genericData <<    600.0  <<   4550.00 <<   40.00;
-	genericData <<    700.0  <<   3630.00 <<   30.00;
-	genericData <<    800.0  <<   2800.00 <<   25.00;
-	genericData <<    900.0  <<   2090.00 <<   20.00;
-	genericData <<  1000.0  <<   1540.00 <<   15.00;
-	genericData <<  1100.0  <<   1170.00 <<   15.00;
-	genericData <<  1200.0  <<     900.00 <<   15.00;
-	genericData <<  1300.0  <<     660.00 <<   15.00;
-	genericData <<  1400.0  <<     400.00 <<   15.00;
-	genericData <<  1500.0  <<     200.00 <<   15.00;
-	genericData <<  1600.0  <<     110.00 <<   15.00;
+	genericData <<  -720.0  << 20370.00 <<  180.00;
+	genericData <<  -700.0  << 20050.00 <<  170.00;
+	genericData <<  -600.0  << 18470.00 <<  160.00;
+	genericData <<  -500.0  << 16940.00 <<  150.00;
+	genericData <<  -400.0  << 15470.00 <<  130.00;
+	genericData <<  -300.0  << 14080.00 <<  120.00;
+	genericData <<  -200.0  << 12770.00 <<  110.00;
+	genericData <<  -100.0  << 11560.00 <<  100.00;
+	genericData <<     0.0  << 10440.00 <<   90.00;
+	genericData <<   100.0  <<  9410.00 <<   80.00;
+	genericData <<   200.0  <<  8420.00 <<   70.00;
+	genericData <<   300.0  <<  7480.00 <<   60.00;
+	genericData <<   400.0  <<  6540.00 <<   50.00;
+	genericData <<   500.0  <<  5590.00 <<   40.00;
+	genericData <<   600.0  <<  4650.00 <<   40.00;
+	genericData <<   700.0  <<  3760.00 <<   30.00;
+	genericData <<   800.0  <<  2940.00 <<   25.00;
+	genericData <<   900.0  <<  2230.00 <<   20.00;
+	genericData <<  1000.0  <<  1650.00 <<   15.00;
+	genericData <<  1100.0  <<  1220.00 <<   15.00;
+	genericData <<  1200.0  <<   910.00 <<   15.00;
+	genericData <<  1300.0  <<   680.00 <<   15.00;
+	genericData <<  1400.0  <<   480.00 <<   15.00;
+	genericData <<  1500.0  <<   290.00 <<   15.00;
+	genericData <<  1600.0  <<   110.00 <<   15.00;
 	// ΔT (s) : +1600 to +1800
-	genericData <<  1600.0  <<     113.00 <<   15.00;
-	genericData <<  1610.0  <<     100.00 <<   15.00;
-	genericData <<  1620.0  <<       86.00 <<   20.00;
-	genericData <<  1630.0  <<       72.00 <<   20.00;
-	genericData <<  1640.0  <<       58.00 <<   20.00;
-	genericData <<  1650.0  <<       45.00 <<   20.00;
-	genericData <<  1660.0  <<       35.00 <<   15.00;
-	genericData <<  1670.0  <<       26.00 <<   10.00;
-	genericData <<  1680.0  <<       21.00 <<     5.00;
-	genericData <<  1690.0  <<       17.00 <<     5.00;
-	genericData <<  1700.0  <<       14.00 <<     5.00;
-	genericData <<  1710.0  <<       12.00 <<     5.00;
-	genericData <<  1720.0  <<       12.00 <<     5.00;
-	genericData <<  1730.0  <<       13.00 <<     2.00;
-	genericData <<  1740.0  <<       15.00 <<     2.00;
-	genericData <<  1750.0  <<       17.00 <<     2.00;
-	genericData <<  1760.0  <<       19.00 <<     2.00;
-	genericData <<  1770.0  <<       21.00 <<     1.00;
-	genericData <<  1780.0  <<       21.00 <<     1.00;
-	genericData <<  1790.0  <<       21.00 <<     1.00;
-	genericData <<  1800.0  <<       18.00 <<     0.50;
-	genericData <<  1810.0  <<       16.00 <<     0.50;
-	// ΔT (s) : +1950 to +2016
-	genericData <<  1950.0  <<       28.93 <<     0.05;
-	genericData <<  1951.0  <<       29.32 <<     0.05;
-	genericData <<  1952.0  <<       29.70 <<     0.05;
-	genericData <<  1953.0  <<       30.00 <<     0.05;
-	genericData <<  1954.0  <<       30.20 <<     0.05;
-	genericData <<  1955.0  <<       30.41 <<     0.05;
-	genericData <<  1956.0  <<       30.76 <<     0.05;
-	genericData <<  1957.0  <<       31.34 <<     0.05;
-	genericData <<  1958.0  <<       32.03 <<     0.05;
-	genericData <<  1959.0  <<       32.65 <<     0.05;
-	genericData <<  1960.0  <<       33.07 <<     0.05;
-	genericData <<  1961.0  <<       33.36 <<     0.05;
-	genericData <<  1962.0  <<       33.62 <<     0.05;
-	genericData <<  1963.0  <<       33.96 <<     0.05;
-	genericData <<  1964.0  <<       34.44 <<     0.05;
-	genericData <<  1965.0  <<       35.09 <<     0.05;
-	genericData <<  1966.0  <<       35.95 <<     0.05;
-	genericData <<  1967.0  <<       36.93 <<     0.05;
-	genericData <<  1968.0  <<       37.96 <<     0.05;
-	genericData <<  1969.0  <<       38.95 <<     0.05;
-	genericData <<  1970.0  <<       39.93 <<     0.05;
-	genericData <<  1971.0  <<       40.95 <<     0.05;
-	genericData <<  1972.0  <<       42.04 <<     0.05;
-	genericData <<  1973.0  <<       43.15 <<     0.05;
-	genericData <<  1974.0  <<       44.24 <<     0.05;
-	genericData <<  1975.0  <<       45.28 <<     0.05;
-	genericData <<  1976.0  <<       46.28 <<     0.05;
-	genericData <<  1977.0  <<       47.29 <<     0.05;
-	genericData <<  1978.0  <<       48.33 <<     0.05;
-	genericData <<  1979.0  <<       49.37 <<     0.05;
-	genericData <<  1980.0  <<       50.36 <<     0.05;
-	genericData <<  1981.0  <<       51.28 <<     0.05;
-	genericData <<  1982.0  <<       52.13 <<     0.05;
-	genericData <<  1983.0  <<       52.94 <<     0.05;
-	genericData <<  1984.0  <<       53.70 <<     0.05;
-	genericData <<  1985.0  <<       54.39 <<     0.05;
-	genericData <<  1986.0  <<       54.98 <<     0.05;
-	genericData <<  1987.0  <<       55.46 <<     0.05;
-	genericData <<  1988.0  <<       55.89 <<     0.05;
-	genericData <<  1989.0  <<       56.37 <<     0.05;
-	genericData <<  1990.0  <<       56.99 <<     0.05;
-	genericData <<  1991.0  <<       57.70 <<     0.05;
-	genericData <<  1992.0  <<       58.45 <<     0.05;
-	genericData <<  1993.0  <<       59.19 <<     0.05;
-	genericData <<  1994.0  <<       59.92 <<     0.05;
-	genericData <<  1995.0  <<       60.68 <<     0.05;
-	genericData <<  1996.0  <<       61.46 <<     0.05;
-	genericData <<  1997.0  <<       62.23 <<     0.05;
-	genericData <<  1998.0  <<       62.90 <<     0.05;
-	genericData <<  1999.0  <<       63.42 <<     0.05;
-	genericData <<  2000.0  <<       63.81 <<     0.05;
-	genericData <<  2001.0  <<       64.08 <<     0.05;
-	genericData <<  2002.0  <<       64.27 <<     0.05;
-	genericData <<  2003.0  <<       64.41 <<     0.05;
-	genericData <<  2004.0  <<       64.55 <<     0.05;
-	genericData <<  2005.0  <<       64.73 <<     0.05;
-	genericData <<  2006.0  <<       64.94 <<     0.05;
-	genericData <<  2007.0  <<       65.19 <<     0.05;
-	genericData <<  2008.0  <<       65.48 <<     0.05;
-	genericData <<  2009.0  <<       65.78 <<     0.05;
-	genericData <<  2010.0  <<       66.06 <<     0.05;
-	genericData <<  2011.0  <<       66.33 <<     0.05;
-	genericData <<  2012.0  <<       66.60 <<     0.05;
-	genericData <<  2013.0  <<       66.92 <<     0.05;
-	genericData <<  2014.0  <<       67.30 <<     0.05;
-	genericData <<  2015.0  <<       67.69 <<     0.05;
-	genericData <<  2016.0  <<       68.04 <<     0.05;
-	// ΔT (seconds) : +2017 to +2500
-	genericData <<  2017.0  <<       68.60 <<     0.10;
-	genericData <<  2018.0  <<       69.00 <<     0.10;
-	genericData <<  2019.0  <<       69.20 <<     0.10;
-	genericData <<  2020.0  <<       69.50 <<     0.10;
-	genericData <<  2030.0  <<       70.00 <<     2.00;
-	genericData <<  2040.0  <<       72.00 <<     4.00;
-	genericData <<  2050.0  <<       75.00 <<     6.00;
-	genericData <<  2100.0  <<       93.00 <<   10.00;
-	genericData <<  2200.0  <<     163.00 <<   20.00;
-	genericData <<  2300.0  <<     297.00 <<   30.00;
-	genericData <<  2400.0  <<     521.00 <<   50.00;
-	genericData <<  2500.0  <<     855.00 << 100.00;
+	genericData <<  1600.0  <<   109.00 <<   15.00;
+	genericData <<  1610.0  <<    94.00 <<   15.00;
+	genericData <<  1620.0  <<    80.00 <<   20.00;
+	genericData <<  1630.0  <<    66.00 <<   20.00;
+	genericData <<  1640.0  <<    54.00 <<   20.00;
+	genericData <<  1650.0  <<    44.00 <<   20.00;
+	genericData <<  1660.0  <<    35.00 <<   15.00;
+	genericData <<  1670.0  <<    28.00 <<   10.00;
+	genericData <<  1680.0  <<    22.00 <<    5.00;
+	genericData <<  1690.0  <<    17.00 <<    5.00;
+	genericData <<  1700.0  <<    14.00 <<    5.00;
+	genericData <<  1710.0  <<    12.00 <<    5.00;
+	genericData <<  1720.0  <<    12.00 <<    5.00;
+	genericData <<  1730.0  <<    13.00 <<    2.00;
+	genericData <<  1740.0  <<    15.00 <<    2.00;
+	genericData <<  1750.0  <<    17.00 <<    2.00;
+	genericData <<  1760.0  <<    19.00 <<    2.00;
+	genericData <<  1770.0  <<    21.00 <<    1.00;
+	genericData <<  1780.0  <<    21.00 <<    1.00;
+	genericData <<  1790.0  <<    21.00 <<    1.00;
+	genericData <<  1800.0  <<    18.00 <<    0.50;
+	genericData <<  1810.0  <<    16.00 <<    0.50;
+	// ΔT (s) : +1800 to +1950
+	genericData <<  1800.0  <<    18.40 <<    0.50;
+	genericData <<  1805.0  <<    16.60 <<    0.30;
+	genericData <<  1810.0  <<    15.70 <<    0.20;
+	genericData <<  1815.0  <<    16.40 <<    0.20;
+	genericData <<  1820.0  <<    16.50 <<    0.20;
+	genericData <<  1825.0  <<    14.10 <<    0.20;
+	genericData <<  1830.0  <<    10.80 <<    0.20;
+	genericData <<  1835.0  <<     8.50 <<    0.10;
+	genericData <<  1840.0  <<     7.60 <<    0.10;
+	genericData <<  1845.0  <<     8.00 <<    0.10;
+	genericData <<  1850.0  <<     9.30 <<    0.10;
+	genericData <<  1855.0  <<    10.36 <<    0.10;
+	genericData <<  1860.0  <<     9.04 <<    0.10;
+	genericData <<  1865.0  <<     8.25 <<    0.10;
+	genericData <<  1870.0  <<     2.37 <<    0.05;
+	genericData <<  1875.0  <<    -1.13 <<    0.05;
+	genericData <<  1880.0  <<    -3.21 <<    0.05;
+	genericData <<  1885.0  <<    -4.39 <<    0.05;
+	genericData <<  1890.0  <<    -3.88 <<    0.05;
+	genericData <<  1895.0  <<    -5.02 <<    0.05;
+	genericData <<  1900.0  <<    -1.98 <<    0.05;
+	genericData <<  1905.0  <<     4.92 <<    0.05;
+	genericData <<  1910.0  <<    11.14 <<    0.05;
+	genericData <<  1915.0  <<    17.48 <<    0.05;
+	genericData <<  1920.0  <<    21.62 <<    0.05;
+	genericData <<  1925.0  <<    23.79 <<    0.05;
+	genericData <<  1930.0  <<    24.42 <<    0.05;
+	genericData <<  1935.0  <<    24.16 <<    0.05;
+	genericData <<  1940.0  <<    24.43 <<    0.05;
+	genericData <<  1945.0  <<    27.05 <<    0.05;
+	genericData <<  1950.0  <<    28.93 <<    0.05;
+	// ΔT (s) : +1950 to +2019
+	genericData <<  1950.0  <<    28.93 <<    0.05;
+	genericData <<  1951.0  <<    29.32 <<    0.05;
+	genericData <<  1952.0  <<    29.70 <<    0.05;
+	genericData <<  1953.0  <<    30.00 <<    0.05;
+	genericData <<  1954.0  <<    30.20 <<    0.05;
+	genericData <<  1955.0  <<    30.41 <<    0.05;
+	genericData <<  1956.0  <<    30.76 <<    0.05;
+	genericData <<  1957.0  <<    31.34 <<    0.05;
+	genericData <<  1958.0  <<    32.03 <<    0.05;
+	genericData <<  1959.0  <<    32.65 <<    0.05;
+	genericData <<  1960.0  <<    33.07 <<    0.05;
+	genericData <<  1961.0  <<    33.36 <<    0.05;
+	genericData <<  1962.0  <<    33.62 <<    0.05;
+	genericData <<  1963.0  <<    33.96 <<    0.05;
+	genericData <<  1964.0  <<    34.44 <<    0.05;
+	genericData <<  1965.0  <<    35.09 <<    0.05;
+	genericData <<  1966.0  <<    35.95 <<    0.05;
+	genericData <<  1967.0  <<    36.93 <<    0.05;
+	genericData <<  1968.0  <<    37.96 <<    0.05;
+	genericData <<  1969.0  <<    38.95 <<    0.05;
+	genericData <<  1970.0  <<    39.93 <<    0.05;
+	genericData <<  1971.0  <<    40.95 <<    0.05;
+	genericData <<  1972.0  <<    42.04 <<    0.05;
+	genericData <<  1973.0  <<    43.15 <<    0.05;
+	genericData <<  1974.0  <<    44.24 <<    0.05;
+	genericData <<  1975.0  <<    45.28 <<    0.05;
+	genericData <<  1976.0  <<    46.28 <<    0.05;
+	genericData <<  1977.0  <<    47.29 <<    0.05;
+	genericData <<  1978.0  <<    48.33 <<    0.05;
+	genericData <<  1979.0  <<    49.37 <<    0.05;
+	genericData <<  1980.0  <<    50.36 <<    0.05;
+	genericData <<  1981.0  <<    51.28 <<    0.05;
+	genericData <<  1982.0  <<    52.13 <<    0.05;
+	genericData <<  1983.0  <<    52.94 <<    0.05;
+	genericData <<  1984.0  <<    53.70 <<    0.05;
+	genericData <<  1985.0  <<    54.39 <<    0.05;
+	genericData <<  1986.0  <<    54.98 <<    0.05;
+	genericData <<  1987.0  <<    55.46 <<    0.05;
+	genericData <<  1988.0  <<    55.89 <<    0.05;
+	genericData <<  1989.0  <<    56.37 <<    0.05;
+	genericData <<  1990.0  <<    56.99 <<    0.05;
+	genericData <<  1991.0  <<    57.70 <<    0.05;
+	genericData <<  1992.0  <<    58.45 <<    0.05;
+	genericData <<  1993.0  <<    59.19 <<    0.05;
+	genericData <<  1994.0  <<    59.92 <<    0.05;
+	genericData <<  1995.0  <<    60.68 <<    0.05;
+	genericData <<  1996.0  <<    61.46 <<    0.05;
+	genericData <<  1997.0  <<    62.23 <<    0.05;
+	genericData <<  1998.0  <<    62.90 <<    0.05;
+	genericData <<  1999.0  <<    63.42 <<    0.05;
+	genericData <<  2000.0  <<    63.81 <<    0.05;
+	genericData <<  2001.0  <<    64.08 <<    0.05;
+	genericData <<  2002.0  <<    64.27 <<    0.05;
+	genericData <<  2003.0  <<    64.41 <<    0.05;
+	genericData <<  2004.0  <<    64.55 <<    0.05;
+	genericData <<  2005.0  <<    64.73 <<    0.05;
+	genericData <<  2006.0  <<    64.95 <<    0.05;
+	genericData <<  2007.0  <<    65.20 <<    0.05;
+	genericData <<  2008.0  <<    65.48 <<    0.05;
+	genericData <<  2009.0  <<    65.77 <<    0.05;
+	genericData <<  2010.0  <<    66.06 <<    0.05;
+	genericData <<  2011.0  <<    66.33 <<    0.05;
+	genericData <<  2012.0  <<    66.61 <<    0.05;
+	genericData <<  2013.0  <<    66.92 <<    0.05;
+	genericData <<  2014.0  <<    67.28 <<    0.05;
+	genericData <<  2015.0  <<    67.69 <<    0.05;
+	genericData <<  2016.0  <<    68.11 <<    0.05;
+	genericData <<  2017.0  <<    68.53 <<    0.05;
+	genericData <<  2018.0  <<    68.92 <<    0.05;
+	genericData <<  2019.0  <<    69.24 <<    0.05;
+	// ΔT (seconds) : +2020 to +2500
+	//genericData <<  2020.0  <<       69.50 <<     0.10;
+	genericData <<  2030.0  <<    67.00 <<    2.00;
+	genericData <<  2040.0  <<    68.00 <<    4.00;
+	genericData <<  2050.0  <<    70.00 <<    6.00;
+	genericData <<  2100.0  <<    80.00 <<   10.00;
+	genericData <<  2200.0  <<   160.00 <<   20.00;
+	genericData <<  2300.0  <<   330.00 <<   30.00;
+	genericData <<  2400.0  <<   610.00 <<   50.00;
+	genericData <<  2500.0  <<  1000.00 <<  100.00;
 }
 
 void TestDeltaT::testDeltaTByEspenakMeeus()
@@ -571,61 +604,33 @@ void TestDeltaT::testDeltaTByStephensonMorrison1995WideDates()
 	}
 }
 
-void TestDeltaT::testDeltaTByStephenson1997WideDates()
+void TestDeltaT::testDeltaTByStephenson1997()
 {
-	// test data taken from http://www.staff.science.uu.nl/~gent0113/deltat/deltat_old.htm
+	// test data taken from http://ebooks.cambridge.org/ebook.jsf?bid=CBO9780511525186
 
 	QVariantList data;
-
-	/*
-	// FIXME: WTF?
-	data << -500 << 16800;
-	data << -450 << 16000;
-	data << -400 << 15300;
-	data << -350 << 14600;
-	data << -300 << 14000;
-	data << -250 << 13400;
-	data << -200 << 12800;
-	data << -150 << 12200;
-	data << -100 << 11600;
-	data <<  -50 << 11100;
-	*/
+	//data << -500 << 16800;
+	//data << -400 << 15300;
+	//data << -300 << 14000;
+	//data << -200 << 12800;
+	//data << -100 << 11600;
 	data <<    0 << 10600;
-	data <<   50 << 10100;
 	data <<  100 <<  9600;
-	data <<  150 <<  9100;
 	data <<  200 <<  8600;
-	data <<  250 <<  8200;
 	data <<  300 <<  7700;
-	data <<  350 <<  7200;
 	data <<  400 <<  6700;
-	data <<  450 <<  6200;
 	data <<  500 <<  5700;
-	data <<  550 <<  5200;
 	data <<  600 <<  4700;
-	data <<  650 <<  4300;
 	data <<  700 <<  3800;
-	data <<  750 <<  3400;
-	/*
-	// FIXME: WTF?
-	data <<  800 <<  3000;
-	data <<  850 <<  2600;
-	data <<  900 <<  2200;
-	data <<  950 <<  1900;
-	data << 1000 <<  1600;
-	data << 1050 <<  1350;
-	data << 1100 <<  1100;
-	data << 1150 <<   900;
-	data << 1200 <<   750;
-	data << 1250 <<   600;
-	data << 1300 <<   460;
-	data << 1350 <<   360;
-	data << 1400 <<   280; // 300
-	data << 1450 <<   200; // 230
-	data << 1500 <<   150; // 180
-	data << 1550 <<   110; // 140
-	data << 1600 <<    80;  // 110
-	*/
+	//data <<  800 <<  3000;
+	//data <<  900 <<  2200;
+	//data << 1000 <<  1600;
+	//data << 1100 <<  1100;
+	//data << 1200 <<   750;
+	//data << 1300 <<   470;
+	//data << 1400 <<   300;
+	//data << 1500 <<   180;
+	//data << 1600 <<   110;
 
 	while(data.count() >= 2)
 	{
@@ -642,36 +647,6 @@ void TestDeltaT::testDeltaTByStephenson1997WideDates()
 							.arg(result)
 							.arg(expectedResult)
 							.toUtf8());
-	}
-}
-
-void TestDeltaT::testDeltaTByStephenson1997GenericDates()
-{
-	// Valid range: -500..1600
-
-	double year, expectedResult, acceptableError, JD;
-	int yout, mout, dout;
-	while(genericData.count() >= 3)
-	{
-		year = genericData.takeFirst().toDouble();
-		expectedResult = genericData.takeFirst().toDouble();
-		acceptableError = genericData.takeFirst().toDouble();
-
-		if (year>=-501. && year<1600.)
-		{
-			StelUtils::getJDFromDate(&JD, static_cast<int>(year), 1, 1, 0, 0, 0);
-			double result = StelUtils::getDeltaTByStephenson1997(JD);
-			double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
-			StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
-			QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
-								.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
-								.arg(year)
-								.arg(result)
-								.arg(expectedResult)
-								.arg(actualError)
-								.arg(acceptableError)
-								.toUtf8());
-		}
 	}
 }
 
@@ -767,22 +742,21 @@ void TestDeltaT::testDeltaTByStephensonMorrison2004WideDates()
 
 void TestDeltaT::testDeltaTByStephensonMorrisonHohenkerk2016GenericDates()
 {
-	// Valid range: 720 BC to AD 2015
+	// Valid range: 720 BC to AD 2019
 
 	double year, expectedResult, acceptableError, JD;
 	int yout, mout, dout;
-	while(genericData.count() >= 3)
+	QVariantList d = genericData;
+	while(d.count() >= 3)
 	{
-		year = genericData.takeFirst().toDouble();
-		expectedResult = genericData.takeFirst().toDouble();
-		acceptableError = genericData.takeFirst().toDouble();
+		year = d.takeFirst().toDouble();
+		expectedResult = d.takeFirst().toDouble();
+		acceptableError = d.takeFirst().toDouble();
 
 		if (year<0)  // https://github.com/Stellarium/stellarium/wiki/FAQ#There_is_no_year_0_or_BC_dates_are_a_year_out
 			year += 1;
 
-		// Unit tests failures ranges: 300-600, 900-1610, 1780, 1800-1810
-		// TODO: Check algorithm
-		if ((year>=-720. && year<300.) || (year>600. && year<900.) || (year>=1620. && year<=1770.) || (year>=1820. && year<=2015.))
+		if (year>=-720. && year<2019.)
 		{
 			StelUtils::getJDFromDate(&JD, static_cast<int>(year), 1, 1, 0, 0, 0);
 			double result = StelUtils::getDeltaTByStephensonMorrisonHohenkerk2016(JD);
@@ -801,11 +775,14 @@ void TestDeltaT::testDeltaTByStephensonMorrisonHohenkerk2016GenericDates()
 	}
 
 	// Check dates prior 720 BC
-	while(genericData.count() >= 3)
+	/*
+	d.clear();
+	d = genericData;
+	while(d.count() >= 3)
 	{
-		year = genericData.takeFirst().toDouble();
-		expectedResult = genericData.takeFirst().toDouble();
-		acceptableError = genericData.takeFirst().toDouble();
+		year = d.takeFirst().toDouble();
+		expectedResult = d.takeFirst().toDouble();
+		acceptableError = d.takeFirst().toDouble();
 
 		if (year<0)  // https://github.com/Stellarium/stellarium/wiki/FAQ#There_is_no_year_0_or_BC_dates_are_a_year_out
 			year += 1;
@@ -820,21 +797,23 @@ void TestDeltaT::testDeltaTByStephensonMorrisonHohenkerk2016GenericDates()
 			QVERIFY2(actualError <= acceptableError, QString("[%8] date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
 								.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
 								.arg(year)
-								.arg(result)
-								.arg(expectedResult)
-								.arg(actualError)
-								.arg(acceptableError)
+								.arg(QString::number(result, 'f', 2))
+								.arg(QString::number(expectedResult, 'f', 2))
+								.arg(QString::number(actualError, 'f', 2))
+								.arg(QString::number(acceptableError, 'f', 2))
 								.arg("prior 720 BC")
 								.toUtf8());
 		}
 	}
 
 	// Check dates after AD 2015
-	while(genericData.count() >= 3)
+	d.clear();
+	d = genericData;
+	while(d.count() >= 3)
 	{
-		year = genericData.takeFirst().toDouble();
-		expectedResult = genericData.takeFirst().toDouble();
-		acceptableError = genericData.takeFirst().toDouble();
+		year = d.takeFirst().toDouble();
+		expectedResult = d.takeFirst().toDouble();
+		acceptableError = d.takeFirst().toDouble();
 
 		if (year>=2015)
 		{
@@ -845,15 +824,48 @@ void TestDeltaT::testDeltaTByStephensonMorrisonHohenkerk2016GenericDates()
 			QVERIFY2(actualError <= acceptableError, QString("[%8] date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
 								.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
 								.arg(year)
-								.arg(result)
-								.arg(expectedResult)
-								.arg(actualError)
-								.arg(acceptableError)
+								.arg(QString::number(result, 'f', 2))
+								.arg(QString::number(expectedResult, 'f', 2))
+								.arg(QString::number(actualError, 'f', 2))
+								.arg(QString::number(acceptableError, 'f', 2))
 								.arg("after AD 2015")
 								.toUtf8());
 		}
 	}
+	*/
 }
+
+void TestDeltaT::testDeltaTByStephensonMorrisonHohenkerk2016SpecialDates()
+{
+	QVariantList data;
+	// From United States Naval Observatory table
+	// see details: https://github.com/Stellarium/stellarium-web-engine/blob/53906077226a735473023d4c5beb4adce6855903/src/algos/deltat.c#L108
+	data << 1980 <<  50.5387;
+	data << 2000 <<  63.8285;
+	data << 2010 <<  66.0699;
+
+	while(data.count() >= 2)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		double acceptableError = 0.2; // TODO: Increase accuracy to 0.1 seconds
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByStephensonMorrisonHohenkerk2016(JD);
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.arg(actualError)
+							.arg(acceptableError)
+							.toUtf8());
+	}
+}
+
 
 void TestDeltaT::testDeltaTByMeeusSimons()
 {
@@ -905,36 +917,6 @@ void TestDeltaT::testDeltaTByMeeusSimons()
 							.arg(result)
 							.arg(expectedResult)
 							.toUtf8());
-	}
-}
-
-void TestDeltaT::testDeltaTByMeeusSimonsGenericDates()
-{
-	// Valid range: 1620..2000
-
-	double year, expectedResult, acceptableError, JD;
-	int yout, mout, dout;
-	while(genericData.count() >= 3)
-	{
-		year = genericData.takeFirst().toDouble();
-		expectedResult = genericData.takeFirst().toDouble();
-		acceptableError = genericData.takeFirst().toDouble();
-
-		if (year>=1620. && year<2000.)
-		{
-			StelUtils::getJDFromDate(&JD, static_cast<int>(year), 1, 1, 0, 0, 0);
-			double result = StelUtils::getDeltaTByMeeusSimons(JD);
-			double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
-			StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
-			QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
-								.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
-								.arg(year)
-								.arg(result)
-								.arg(expectedResult)
-								.arg(actualError)
-								.arg(acceptableError)
-								.toUtf8());
-		}
 	}
 }
 
@@ -1053,22 +1035,22 @@ void TestDeltaT::testDeltaTByReingoldDershowitzWideDates()
 	data << 1690 <<  0.000115;
 	data << 1700 <<  0.000094;
 	data << 1790 <<  0.000177;
-	// TODO: Compute and fill the test data for range [1800..1986]
-	//data << 1800 << 128.824; // ??? seems equation has wrong signs for terms
-	//data << 1850 <<  1.755490;
-	//data << 1890 <<  0.002340;
-	//data << 1900 <<  0.000591;
+	data << 1800 <<  0.000160;
+	data << 1850 <<  0.000080;
+	data << 1890 << -0.000070;
+	data << 1900 << -0.000020;
 	data << 1987 <<  0.000640;
 	data << 2000 <<  0.000739;
 	data << 2005 <<  0.000749;
 	data << 2006 <<  0.000752;
 	data << 2010 <<  0.000772;
 	data << 2050 <<  0.001076;
-	data << 2060 <<  0.002488;
-	data << 2100 <<  0.002998;
+	data << 2060 <<  0.002490;
+	data << 2100 <<  0.003000;
 	data << 2150 <<  0.003802;
 	data << 2200 <<  0.005117;
 
+	// TODO: switch to use seconds
 	while(data.count() >= 2)
 	{
 		int year = data.takeFirst().toInt();
@@ -1078,11 +1060,10 @@ void TestDeltaT::testDeltaTByReingoldDershowitzWideDates()
 		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
 		double result = StelUtils::getDeltaTByReingoldDershowitz(JD)/86400.;
 		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
-		QVERIFY2(qAbs(result-expectedResult)<=1e-5, QString("date=%2 year=%3 result=%4 expected=%5")
-			 .arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
-			 .arg(year)
-			 .arg(QString::number(result, 'f', 5))
-			 .arg(QString::number(expectedResult, 'f', 5))
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+		QVERIFY2(actualError<=1e-5, QString("date=%2 year=%3 result=%4 expected=%5")
+			 .arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout)).arg(year)
+			 .arg(QString::number(result, 'f', 5), QString::number(expectedResult, 'f', 5))
 			 .toUtf8());
 	}
 }
@@ -1282,93 +1263,164 @@ void TestDeltaT::testDeltaTByTuckermanGoldstine()
 	}
 }
 
-void TestDeltaT::testDeltaTByIslamSadiqQureshiGenericDates()
+void TestDeltaT::testDeltaTByChaprontTouze()
 {
-	// Valid range: 1620..2007
+	QVariantList data;
+	// check outside valid range
+	data << -395 <<  0.0;
+	data << 1610 <<  0.0;
 
-	double year, expectedResult, acceptableError, JD;
-	int yout, mout, dout;
-	while(genericData.count() >= 3)
+	while(data.count() >= 2)
 	{
-		year = genericData.takeFirst().toDouble();
-		expectedResult = genericData.takeFirst().toDouble();
-		acceptableError = genericData.takeFirst().toDouble();
-
-		if (year>=1620. && year<2007.)
-		{
-			StelUtils::getJDFromDate(&JD, static_cast<int>(year), 1, 1, 0, 0, 0);
-			double result = StelUtils::getDeltaTByIslamSadiqQureshi(JD);
-			double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
-			StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
-			QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
-								.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
-								.arg(year)
-								.arg(result)
-								.arg(expectedResult)
-								.arg(actualError)
-								.arg(acceptableError)
-								.toUtf8());
-		}
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		double acceptableError = 1.0; // TODO: Increase accuracy to 0.1 seconds
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByChaprontTouze(JD);
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.arg(actualError)
+							.arg(acceptableError)
+							.toUtf8());
 	}
 }
 
-void TestDeltaT::testDeltaTBySchmadelZech1988GenericDates()
+void TestDeltaT::testDeltaTByIAUWideDates()
 {
-	// Valid range: 1800..1988
+	// Source of test data: https://web.archive.org/web/20150226203358/http://user.online.be/felixverbelen/dt.htm
+	QVariantList data;
+	data << -2000 << 42757.0;
+	data << -1900 << 40524.0;
+	data << -1800 << 38350.0;
+	data << -1700 << 36236.0;
+	data << -1600 << 34181.0;
+	data << -1500 << 32187.0;
+	data << -1400 << 30253.0;
+	data << -1300 << 28378.0;
+	data << -1200 << 26564.0;
+	data << -1100 << 24809.0;
+	data << -1000 << 23115.0;
+	data <<  -900 << 21480.0;
+	data <<  -800 << 19905.0;
+	data <<  -700 << 18390.0;
+	data <<  -600 << 16935.0;
+	data <<  -500 << 15539.0;
+	data <<  -400 << 14204.0;
+	data <<  -300 << 12929.0;
+	data <<  -200 << 11713.0;
+	data <<  -100 << 10557.0;
+	data <<     0 <<  9462.0;
+	data <<   100 <<  8426.0;
+	data <<   200 <<  7450.0;
+	data <<   300 <<  6534.0;
+	data <<   400 <<  5678.0;
+	data <<   500 <<  4882.0;
+	data <<   600 <<  4145.0;
+	data <<   700 <<  3469.0;
+	data <<   800 <<  2852.0;
+	data <<   900 <<  2296.0;
+	data <<  1000 <<  1799.0;
+	data <<  1100 <<  1362.0;
+	data <<  1200 <<   985.0;
+	data <<  1300 <<   668.0;
+	data <<  1400 <<   411.0;
+	data <<  1500 <<   214.0;
+	data <<  1600 <<    76.0;
+	data <<  1700 <<    -1.0;
+	//data <<  1800 <<   -19.0;
+	//data <<  1900 <<    24.0;
+	data <<  2000 <<   126.0;
 
-	double year, expectedResult, acceptableError, JD;
-	int yout, mout, dout;
-	while(genericData.count() >= 3)
+	while(data.count() >= 2)
 	{
-		year = genericData.takeFirst().toDouble();
-		expectedResult = genericData.takeFirst().toDouble();
-		acceptableError = genericData.takeFirst().toDouble();
-
-		if (year>=1800. && year<1988.)
-		{
-			StelUtils::getJDFromDate(&JD, static_cast<int>(year), 1, 1, 0, 0, 0);
-			double result = StelUtils::getDeltaTBySchmadelZech1988(JD);
-			double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
-			StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
-			QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
-								.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
-								.arg(year)
-								.arg(result)
-								.arg(expectedResult)
-								.arg(actualError)
-								.arg(acceptableError)
-								.toUtf8());
-		}
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		double acceptableError = 1.0; // TODO: Increase accuracy to 0.1 seconds
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByIAU(JD);
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.arg(actualError)
+							.arg(acceptableError)
+							.toUtf8());
 	}
 }
 
-void TestDeltaT::testDeltaTByChaprontTouzeGenericDates()
+void TestDeltaT::testDeltaTByStephensonHoulden()
 {
-	// Valid range: -390..1600
+	// Source of test data: https://web.archive.org/web/20150226203358/http://user.online.be/felixverbelen/dt.htm
+	QVariantList data;
+	data << -2000 << 54181.0;
+	data << -1900 << 51081.0;
+	data << -1800 << 48073.0;
+	data << -1700 << 45159.0;
+	data << -1600 << 42338.0;
+	data << -1500 << 39610.0; // begin of valid range
+	data << -1400 << 36975.0;
+	data << -1300 << 34433.0;
+	data << -1200 << 31984.0;
+	data << -1100 << 29627.0;
+	data << -1000 << 27364.0;
+	data <<  -900 << 25194.0;
+	data <<  -800 << 23117.0;
+	data <<  -700 << 21133.0;
+	data <<  -600 << 19242.0;
+	data <<  -500 << 17444.0;
+	data <<  -400 << 15738.0;
+	data <<  -300 << 14126.0;
+	data <<  -200 << 12607.0;
+	data <<  -100 << 11181.0;
+	data <<     0 <<  9848.0;
+	data <<   100 <<  8608.0;
+	data <<   200 <<  7461.0;
+	data <<   300 <<  6406.0;
+	data <<   400 <<  5445.0;
+	data <<   500 <<  4577.0;
+	data <<   600 <<  3802.0;
+	data <<   700 <<  3120.0;
+	data <<   800 <<  2531.0;
+	data <<   900 <<  2035.0;
+	data <<  1000 <<  1625.0;
+	data <<  1100 <<  1265.0;
+	data <<  1200 <<   950.0;
+	data <<  1300 <<   680.0;
+	data <<  1400 <<   455.0;
+	data <<  1500 <<   275.0;
+	data <<  1600 <<   140.0;
 
-	double year, expectedResult, acceptableError, JD;
-	int yout, mout, dout;
-	while(genericData.count() >= 3)
+	while(data.count() >= 2)
 	{
-		year = genericData.takeFirst().toDouble();
-		expectedResult = genericData.takeFirst().toDouble();
-		acceptableError = genericData.takeFirst().toDouble();
-
-		if (year>=-391. && year<1600.)
-		{
-			StelUtils::getJDFromDate(&JD, static_cast<int>(year), 1, 1, 0, 0, 0);
-			double result = StelUtils::getDeltaTByChaprontTouze(JD);
-			double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
-			StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
-			QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
-								.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
-								.arg(year)
-								.arg(result)
-								.arg(expectedResult)
-								.arg(actualError)
-								.arg(acceptableError)
-								.toUtf8());
-		}
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		double acceptableError = 1.0; // 1 sec
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByStephensonHoulden(JD);
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.arg(actualError)
+							.arg(acceptableError)
+							.toUtf8());
 	}
 }
 

@@ -75,7 +75,7 @@ void SimbadLookupReply::httpQueryFinished()
 	if (reply->error()!=QNetworkReply::NoError || reply->bytesAvailable()==0)
 	{
 		currentStatus = SimbadLookupErrorOccured;
-		errorString = QString("%1: %2").arg(q_("Network error")).arg(reply->errorString());
+		errorString = QString("%1: %2").arg(q_("Network error"), reply->errorString());
 		emit statusChanged();
 		return;
 	}

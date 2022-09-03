@@ -17,16 +17,14 @@
  */
 
 #include "Quasar.hpp"
-#include "Quasars.hpp"
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
-#include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
-#include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
+#include "Planet.hpp"
 
 #include <QTextStream>
 #include <QDebug>
@@ -121,23 +119,16 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	QTextStream oss(&str);
 
 	if (flags&Name)
-	{
 		oss << "<h2>" << designation << "</h2>";
-	}
+
 	if (flags&ObjectType)
-		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("quasar")) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
 
 	if (flags&Magnitude && VMagnitude>-99.f)
-	{
-		double az_app, alt_app;
-		StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
-		Q_UNUSED(az_app)
-
-		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
-	}
+		oss << getMagnitudeInfoString(core, flags, 2);
 
 	if (flags&AbsoluteMagnitude && AMagnitude>-99.f)
-		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(QString::number(AMagnitude, 'f', 2)) << "<br />";
+		oss << QString("%1: %2").arg(q_("Absolute Magnitude"), QString::number(AMagnitude, 'f', 2)) << "<br />";
 
 	if (flags&Extra && bV>-99.f)
 		oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(bV, 'f', 2)) << "<br />";
@@ -154,9 +145,9 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (redshift>0.f)
 			oss << QString("%1: %2").arg(q_("Redshift")).arg(redshift) << "<br />";
 		if (f6>-9999.f)
-			oss << QString("%1: %2 %3").arg(q_("Radio flux density around 5GHz (6cm)")).arg(QString::number(f6, 'f', 3)).arg(sfd) << "<br />";
+			oss << QString("%1: %2 %3").arg(q_("Radio flux density around 5GHz (6cm)"), QString::number(f6, 'f', 3), sfd) << "<br />";
 		if (f20>-9999.f)
-			oss << QString("%1: %2 %3").arg(q_("Radio flux density around 1.4GHz (21cm)")).arg(QString::number(f20, 'f', 3)).arg(sfd) << "<br />";
+			oss << QString("%1: %2 %3").arg(q_("Radio flux density around 1.4GHz (21cm)"), QString::number(f20, 'f', 3), sfd) << "<br />";
 	}
 
 	postProcessInfoString(str, flags);
@@ -184,13 +175,8 @@ Vec3f Quasar::getInfoColor(void) const
 
 float Quasar::getVMagnitude(const StelCore* core) const
 {
-	Q_UNUSED(core);
+	Q_UNUSED(core)
 	return VMagnitude;
-}
-
-double Quasar::getAngularSize(const StelCore*) const
-{
-	return 0.00001;
 }
 
 float Quasar::getSelectPriority(const StelCore* core) const
@@ -219,6 +205,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 
 	StelSkyDrawer* sd = core->getSkyDrawer();
 	const float mlimit = sd->getLimitMagnitude();
+	const float shift = 8.f;
 	float mag = getVMagnitudeWithExtinction(core);
 	if (useMarkers)
 		mag -= shiftVisibility;
@@ -228,36 +215,32 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 
 	if (mag <= mlimit)
 	{
-		float size, shift=0;
 		if (distributionMode || useMarkers)
 		{
 			painter.setBlending(true, GL_ONE, GL_ONE);
-			painter.setColor(markerColor[0], markerColor[1], markerColor[2], 1);
+			painter.setColor(markerColor, 1);
 
 			Quasar::markerTexture->bind();
-			size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
-			shift = 5.f + size/1.6f;
-
-			painter.drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
+			painter.drawSprite2dMode(getJ2000EquatorialPos(core), distributionMode ? 4.f : 5.f);
 		}
 		else
 		{
 			Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f; // see ZoneArray.cpp:L490
+			Vec3f vf(getJ2000EquatorialPos(core).toVec3f());
+			Vec3f altAz(vf);
+			altAz.normalize();
+			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 			RCMag rcMag;
-
 			sd->preDrawPointSource(&painter);
 			sd->computeRCMag(mag, &rcMag);
-			sd->drawPointSource(&painter, XYZ.toVec3f(), rcMag, sd->indexToColor(BvToColorIndex(bV)), true);
-			painter.setColor(color[0], color[1], color[2], 1);
-			size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
-			shift = 6.f + size/1.8f;
+			// allow height-dependent twinkle and suppress twinkling in higher altitudes. Keep 0.1 twinkle amount in zenith.
+			sd->drawPointSource(&painter, vf, rcMag, sd->indexToColor(BvToColorIndex(bV)), true, qMin(1.0f, 1.0f-0.9f*altAz[2]));
 			sd->postDrawPointSource(&painter);
+			painter.setColor(color[0], color[1], color[2], 1);
 		}
 
 		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+2.f)<mlimit)
-		{
-			painter.drawText(XYZ, designation, 0, shift, shift, false);
-		}
+			painter.drawText(getJ2000EquatorialPos(core), designation, 0, shift, shift, false);
 	}
 }
 
@@ -267,4 +250,20 @@ unsigned char Quasar::BvToColorIndex(float b_v)
 		b_v = 0.f;
 	double dBV = qBound(-500., static_cast<double>(b_v)*1000., 3499.);
 	return static_cast<unsigned char>(floor(0.5+127.0*((500.0+dBV)/4000.0)));
+}
+
+Vec3d Quasar::getJ2000EquatorialPos(const StelCore* core) const
+{
+	if ((core) && (core->getUseAberration()) && (core->getCurrentPlanet()))
+	{
+		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+		Vec3d pos=XYZ+vel;
+		pos.normalize();
+		return pos;
+	}
+	else
+	{
+		return XYZ;
+	}
 }

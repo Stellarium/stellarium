@@ -22,6 +22,9 @@
 
 #include <QString>
 #include <QObject>
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+#include <QRandomGenerator>
+#endif
 #include "StelModule.hpp"
 #include "VecMath.hpp"
 
@@ -80,7 +83,7 @@ class StelApp : public QObject
 	Q_PROPERTY(int  screenFontSize          READ getScreenFontSize          WRITE setScreenFontSize          NOTIFY screenFontSizeChanged)
 	Q_PROPERTY(int  guiFontSize             READ getGuiFontSize             WRITE setGuiFontSize             NOTIFY guiFontSizeChanged)
 
-	Q_PROPERTY(QString version READ getVersion)
+	Q_PROPERTY(QString version READ getVersion CONSTANT)
 
 public:
 	friend class StelAppGraphicsWidget;
@@ -94,7 +97,7 @@ public:
 	StelApp(StelMainView* parent);
 
 	//! Deinitialize and destroy the main Stellarium application.
-	virtual ~StelApp();
+	virtual ~StelApp() Q_DECL_OVERRIDE;
 
 	//! Initialize core and all the modules.
 	void init(QSettings* conf);
@@ -164,6 +167,15 @@ public:
 	//! @return the StelCore instance of the program
 	StelCore* getCore() const {return core;}
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+	//! get a pseudo-random integer
+	quint32 getRand() const {Q_ASSERT(randomGenerator); return randomGenerator->generate();}
+	int getRandBounded(int lowest, int highest) const {Q_ASSERT(randomGenerator); return randomGenerator->bounded(lowest, highest);}
+	//! shortcut to retrieve a random float [0...1).
+	float getRandF() const {Q_ASSERT(randomGenerator); return static_cast<float>(randomGenerator->generateDouble());}
+	float getRandFp1() const {Q_ASSERT(randomGenerator); return static_cast<float>(randomGenerator->generate()) / (static_cast<float>(RAND_MAX)+1.f);}
+#endif
+
 	//! Get the common instance of QNetworkAccessManager used in stellarium
 	QNetworkAccessManager* getNetworkAccessManager() const {return networkAccessManager;}
 
@@ -210,7 +222,7 @@ public:
 	//! The caller is responsible for destroying the GUI.
 	void setGui(StelGuiBase* b) {stelGui=b;}
 
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	//! Get the script API proxy (for signal handling)
 	StelMainScriptAPIProxy* getMainScriptAPIProxy() const {return scriptAPIProxy;}
 	//! Get the script manager
@@ -358,6 +370,11 @@ private:
 	// The StelApp singleton
 	static StelApp* singleton;
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+	//! The app-global random number generator
+	QRandomGenerator *randomGenerator;
+#endif
+
 	//! The main window which is the parent of this object
 	StelMainView* mainWin;
 
@@ -402,7 +419,7 @@ private:
 
 	StelSkyLayerMgr* skyImageMgr;
 
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 	// The script API proxy object (for bridging threads)
 	StelMainScriptAPIProxy* scriptAPIProxy;
 
@@ -419,12 +436,6 @@ private:
 	// The scaling ratio to apply on all display elements, like GUI, text etc..
 	float globalScalingRatio;
 	
-	// Used to collect wheel events
-	QTimer * wheelEventTimer;
-
-	// Accumulated horizontal and vertical wheel event deltas
-	int wheelEventDelta[2];
-
 	float fps;
 	int frame;
 	double frameTimeAccum;		// Used for fps counter

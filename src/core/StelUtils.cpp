@@ -31,7 +31,7 @@
 #include <QFile>
 #include <QDebug>
 #include <QLocale>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QProcess>
 #include <QSysInfo>
 #include <cmath> // std::fmod
@@ -39,22 +39,28 @@
 
 namespace StelUtils
 {
-//! Return the full name of stellarium, i.e. "stellarium 0.19.0"
+//! Return the full name of stellarium, e.g. "Stellarium 23.1"
 QString getApplicationName()
 {
-	return QString("Stellarium")+" "+StelUtils::getApplicationVersion();
+	return QString("Stellarium %1").arg(StelUtils::getApplicationPublicVersion());
 }
 
-//! Return the version of stellarium, i.e. "0.19.0"
+//! Return the version of stellarium, e.g. "0.23.1"
 QString getApplicationVersion()
 {
 #if defined(STELLARIUM_VERSION)
 	return QString(STELLARIUM_VERSION);
 #elif defined(GIT_REVISION)
-	return QString("%1-%2 [%3]").arg(PACKAGE_VERSION).arg(GIT_REVISION).arg(GIT_BRANCH);
+	return QString("%1-%2 [%3]").arg(PACKAGE_VERSION, GIT_REVISION, GIT_BRANCH);
 #else
 	return QString(PACKAGE_VERSION);
 #endif
+}
+
+//! Return the public version of stellarium, e.g. "23.1"
+QString getApplicationPublicVersion()
+{
+	return QString(STELLARIUM_PUBLIC_VERSION);
 }
 
 QString getUserAgentString()
@@ -69,39 +75,128 @@ QString getUserAgentString()
 		os = "OpenBSD";
 
 	// Set user agent as "Stellarium/$version$ ($operating system$; $CPU architecture$)"
-	return QString("Stellarium/%1 (%2; %3)").arg(StelUtils::getApplicationVersion(), os, QSysInfo::currentCpuArchitecture());
+	return QString("Stellarium/%1 (%2; %3)").arg(StelUtils::getApplicationPublicVersion(), os, QSysInfo::currentCpuArchitecture());
 }
 
 QString getOperatingSystemInfo()
 {
-	QString OS = "Unknown operating system";
+	QString OS = QSysInfo::prettyProductName();
 
-	#if defined(Q_OS_BSD4) || defined(Q_OS_SOLARIS)
-	// Check FreeBSD, NetBSD, OpenBSD and DragonFly BSD
+	#if (defined(Q_OS_FREEBSD) || defined(Q_OS_NETBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_SOLARIS))
+	// Check FreeBSD, OpenBSD, NetBSD and Sun Solaris operating systems
 	QProcess uname;
+	#if (QT_VERSION>=QT_VERSION_CHECK(6, 0, 0))
+	uname.startCommand("/usr/bin/uname -srm");
+	#else
 	uname.start("/usr/bin/uname -srm");
+	#endif
 	uname.waitForStarted();
 	uname.waitForFinished();
 	const QString BSDsystem = uname.readAllStandardOutput();
 	OS = BSDsystem.trimmed();
-	#else
-	OS = QSysInfo::prettyProductName();
 	#endif
+
+	if (OS.isEmpty() || OS==QStringLiteral("unknown"))
+		OS = "Unknown operating system";
 
 	return OS;
 }
 
+QString getCompilerInfo()
+{
+	QString compilerInfo = "";
+
+	#if defined __GNUC__ && !defined __clang__ && !defined __INTEL_COMPILER
+	#ifdef __MINGW32__
+		#define COMPILER "MinGW GCC"
+	#else
+		#define COMPILER "GCC"
+	#endif
+	compilerInfo = QString("%1 %2.%3.%4").arg(COMPILER).arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__);
+	#elif defined __clang__
+	#ifdef Q_OS_MACOS
+		#define COMPILER "Clang (Apple)"
+	#else
+		#define COMPILER "Clang"
+	#endif
+	compilerInfo = QString("%1 %2.%3.%4").arg(COMPILER).arg(__clang_major__).arg(__clang_minor__).arg(__clang_patchlevel__);
+	#elif defined __INTEL_COMPILER
+	QString iccVer = QString::number(__INTEL_COMPILER);
+	int iccVL = iccVer.length();
+	compilerInfo = QString("%1 %2.%3.%4.%5").arg("Intel C/C++").arg(iccVer.mid(0, iccVL-2)).arg(iccVer.mid(iccVL-2,1)).arg(iccVer.mid(iccVL-1,1)).arg(__INTEL_COMPILER_BUILD_DATE);
+	#elif defined _MSC_VER
+	// Defines for _MSC_VER macro: https://docs.microsoft.com/ru-ru/cpp/preprocessor/predefined-macros?view=msvc-160
+	const QMap<int, QString> map = {
+		{1310, "MSVC++ 7.1 (Visual Studio 2003)"          },
+		{1400, "MSVC++ 8.0 (Visual Studio 2005)"          },
+		{1500, "MSVC++ 9.0 (Visual Studio 2008)"          },
+		{1600, "MSVC++ 10.0 (Visual Studio 2010)"         },
+		{1700, "MSVC++ 11.0 (Visual Studio 2012)"         },
+		{1800, "MSVC++ 12.0 (Visual Studio 2013)"         },
+		{1900, "MSVC++ 14.0 (Visual Studio 2015)"         },
+		{1910, "MSVC++ 15.0 (Visual Studio 2017 RTW)"     },
+		{1911, "MSVC++ 15.3 (Visual Studio 2017)"         },
+		{1912, "MSVC++ 15.5 (Visual Studio 2017)"         },
+		{1913, "MSVC++ 15.6 (Visual Studio 2017)"         },
+		{1914, "MSVC++ 15.7 (Visual Studio 2017)"         },
+		{1915, "MSVC++ 15.8 (Visual Studio 2017)"         },
+		{1916, "MSVC++ 15.9 (Visual Studio 2017)"         },
+		{1920, "MSVC++ 16.0 (Visual Studio 2019 RTW)"     },
+		{1921, "MSVC++ 16.1 (Visual Studio 2019)"         },
+		{1922, "MSVC++ 16.2 (Visual Studio 2019)"         },
+		{1923, "MSVC++ 16.3 (Visual Studio 2019)"         },
+		{1924, "MSVC++ 16.4 (Visual Studio 2019)"         },
+		{1925, "MSVC++ 16.5 (Visual Studio 2019)"         },
+		{1926, "MSVC++ 16.6 (Visual Studio 2019)"         },
+		{1927, "MSVC++ 16.7 (Visual Studio 2019)"         },
+		{1928, "MSVC++ 16.8, 16.9 (Visual Studio 2019)"   },
+		{1929, "MSVC++ 16.10, 16.11 (Visual Studio 2019)" },
+		{1930, "MSVC++ 17.0 (Visual Studio 2022 RTW)"     },
+		{1931, "MSVC++ 17.1 (Visual Studio 2022)"         },
+		{1932, "MSVC++ 17.2 (Visual Studio 2022)"         },
+	};
+	compilerInfo = map.value(_MSC_VER, "unknown MSVC++ version");
+	#endif
+
+	return compilerInfo;
+}
+
 double hmsStrToHours(const QString& s)
 {
-	QRegExp reg("(\\d+)h(\\d+)m(\\d+)s");
-	if (!reg.exactMatch(s))
+	static const QRegularExpression reg("(\\d+)h(\\d+)m(\\d+)s");
+	QRegularExpressionMatch match=reg.match(s);
+	if (!match.hasMatch())
 		return 0.;
-	uint hrs = reg.cap(1).toUInt();
-	uint min = reg.cap(2).toUInt();
-	int sec = reg.cap(3).toInt();
+	uint hrs = match.captured(1).toUInt();
+	uint min = match.captured(2).toUInt();
+	int sec  = match.captured(3).toInt();
 
 	return hmsToHours(hrs, min, sec);
 }
+
+/*************************************************************************
+ Convert a real duration in days to DHMS formatted string
+*************************************************************************/
+QString daysFloatToDHMS(float days)
+{
+	float remain = days;
+
+	int d = static_cast<int> (remain); remain -= d;
+	remain *= 24.0f;
+	int h = static_cast<int> (remain); remain -= h;
+	remain *= 60.0f;
+	int m = static_cast<int> (remain); remain -= m; 
+	remain *= 60.0f;
+
+	auto r = QString("%1%2 %3%4 %5%6 %7%8")
+	.arg(d)		.arg(qc_("d", "duration"))
+	.arg(h)		.arg(qc_("h", "duration"))
+	.arg(m)		.arg(qc_("m", "duration"))
+	.arg(remain)	.arg(qc_("s", "duration"));
+
+	return r;
+}
+
 
 /*************************************************************************
  Convert an angle in radian to hms
@@ -115,7 +210,7 @@ void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
 
 	h = static_cast<unsigned int>(angle);
 	m = static_cast<unsigned int>((angle-h)*60);
-	s = (angle-h)*3600.-60.*m;	
+	s = qAbs((angle-h)*3600.-60.*m);
 }
 
 /*************************************************************************
@@ -148,39 +243,12 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 	}	
 }
 
-void radToDecDeg(double rad, bool &sign, double &deg)
+QString radToDecDegStr(const double angle, const int precision, const bool useD, const bool positive)
 {
-	rad = std::fmod(rad,2.0*M_PI);
-	sign=true;
-	if (rad<0)
-	{
-		rad *= -1;
-		sign = false;
-	}
-	deg = rad*M_180_PI;
-}
+	const QChar degsign = (useD ? 'd' : QChar(0x00B0));
+	double deg = (positive ? fmodpos(angle, 2.0*M_PI) : std::fmod(angle, 2.0*M_PI)) * M_180_PI;
 
-QString radToDecDegStr(const double angle, const int precision, const bool useD, const bool useC)
-{
-	QChar degsign('d');
-	QString str;	
-	if (!useD)
-	{
-		degsign = 0x00B0;		
-	}
-	bool sign;
-	double deg;
-	StelUtils::radToDecDeg(angle, sign, deg);
-	str = QString("%1%2%3").arg((sign?"+":"-"), QString::number(deg, 'f', precision), degsign);
-	if (useC)
-	{
-		if (!sign)
-			deg = 360. - deg;
-
-		str = QString("+%1%2").arg(QString::number(deg, 'f', precision), degsign);
-	}
-
-	return str;
+	return QString("%1%2").arg(QString::number(deg, 'f', precision), degsign);
 }
 
 /*************************************************************************
@@ -227,9 +295,9 @@ QString radToHmsStr(const double angle, const bool decimal)
 {
 	unsigned int h,m;
 	double s;
-	StelUtils::radToHms(angle+0.005*M_PI/12/(60*60), h, m, s);
+	StelUtils::radToHms(angle, h, m, s);
 	int width, precision;
-	QString carry, r;
+	QString carry;
 	if (decimal)
 	{
 		width=5;
@@ -266,22 +334,22 @@ QString radToHmsStr(const double angle, const bool decimal)
 *************************************************************************/
 QString radToDmsStrAdapt(const double angle, const bool useD)
 {
-	QChar degsign('d');
-	if (!useD)
-	{
-		degsign = 0x00B0;
-	}
+	const QChar degsign = (useD ? 'd' : QChar(0x00B0));
 	bool sign;
 	unsigned int d,m;
 	double s;
-	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s); // NOTE: WTF???
+	StelUtils::radToDms(angle, sign, d, m, s);
 	QString str;
 	QTextStream os(&str);
 
 	os << (sign?'+':'-') << d << degsign;
 	if (std::fabs(s*100-static_cast<int>(s)*100)>=1)
 	{
+#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+		os << m << '\'' << Qt::fixed << qSetRealNumberPrecision(2) << qSetFieldWidth(5) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
+#else
 		os << m << '\'' << fixed << qSetRealNumberPrecision(2) << qSetFieldWidth(5) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
+#endif
 	}
 	else if (static_cast<int>(s)!=0)
 	{
@@ -310,11 +378,7 @@ QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 *************************************************************************/
 QString radToDmsPStr(const double angle, const int precision, const bool useD)
 {
-	QChar degsign('d');
-	if (!useD)
-	{
-		degsign = 0x00B0;
-	}
+	const QChar degsign = (useD ? 'd' : QChar(0x00B0));
 	bool sign;
 	unsigned int d,m;
 	double s;
@@ -327,9 +391,11 @@ QString radToDmsPStr(const double angle, const int precision, const bool useD)
 	int width = 2;
 	if (precision>0)
 		width = 3 + precision;
-	os << qSetRealNumberPrecision(precision);
-	os << fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
-
+#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
+	os << qSetRealNumberPrecision(precision) << Qt::fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
+#else
+	os << qSetRealNumberPrecision(precision) << fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
+#endif
 	return str;
 }
 
@@ -365,19 +431,68 @@ QString decDegToDmsStr(const double angle)
 	double s;
 	unsigned int d, m;
 	decDegToDms(angle, sign, d, m, s);
-	return QString("%1%2%3%4\'%5\"").arg(sign?'+':'-').arg(d).arg(QChar(0x00B0)).arg(m,2,10,QLatin1Char('0')).arg((unsigned int)s,2,10,QLatin1Char('0'));
+	return QString("%1%2%3%4\'%5\"").arg(sign?'+':'-').arg(d).arg(QChar(0x00B0)).arg(m,2,10,QLatin1Char('0')).arg(static_cast<unsigned int>(s),2,10,QLatin1Char('0'));
+}
+
+// Convert latitude in decimal degrees to a dms formatted string.
+QString decDegToLatitudeStr(const double latitude, bool dms)
+{
+	bool sign;
+	double s;
+	unsigned int d, m;
+	decDegToDms(latitude, sign, d, m, s);
+	// Important note: we use untranslatable designations for North and South directions,
+	//                 because on some languages (e.g. Russian) the name of direction is
+	//                 followed the value of latitude.
+	// Example: N50.036 = 50.036 с.ш. (Russian; "с.ш." = "n.l." (northern latitude))
+	if (dms)
+		return QString("%1%2%3%4\'%5\"").arg(sign ? 'N' : 'S').arg(d).arg(QChar(0x00B0)).arg(m,2,10,QLatin1Char('0')).arg(static_cast<unsigned int>(s),2,10,QLatin1Char('0'));
+	else
+		return QString("%1%2%3").arg(sign ? 'N' : 'S').arg(QString::number(fabs(latitude), 'f', 4), QChar(0x00B0));
+}
+
+// default values as for Earth
+QString decDegToLongitudeStr(const double longitude, bool eastPositive, bool semiSphere, bool dms)
+{
+	bool sign;
+	double s, longMod = longitude;
+	unsigned int d, m;
+	QString positive, negative;
+	if (eastPositive)
+	{
+		positive = "E";
+		negative = "W";
+	}
+	else
+	{
+		longMod = fmodpos(360.-longitude, 360.); // avoid 360.0 for the poles!
+		positive = "W";
+		negative = "E";
+	}
+	if (semiSphere)
+		longMod = longitude > 180. ? longitude-360. : longitude;
+	decDegToDms(longMod, sign, d, m, s);
+	// Important note: we use untranslatable designations for East and West directions,
+	//                 because on some languages (e.g. Russian) the name of direction is
+	//                 followed the value of longitude.
+	// Example: E82.136 = 82.136 в.д. (Russian; "в.д." = "e.l." (eastern longitude))
+	if (dms)
+		return QString("%1%2%3%4\'%5\"").arg(sign ? positive : negative).arg(d).arg(QChar(0x00B0)).arg(m,2,10,QLatin1Char('0')).arg(static_cast<unsigned int>(s),2,10,QLatin1Char('0'));
+	else
+		return QString("%1%2%3").arg(sign ? positive : negative).arg(QString::number(fabs(longMod), 'f', 4), QChar(0x00B0));
 }
 
 // Convert a dms formatted string to an angle in radian
 double dmsStrToRad(const QString& s)
 {
-	QRegExp reg("([\\+\\-])(\\d+)d(\\d+)'(\\d+)\"");
-	if (!reg.exactMatch(s))
+	static const QRegularExpression reg("([\\+\\-])(\\d+)d(\\d+)'(\\d+)\"");
+	QRegularExpressionMatch match=reg.match(s);
+	if (!match.hasMatch())
 		return 0;
-	bool sign = (reg.cap(1) == "-");
-	int deg = reg.cap(2).toInt();
-	uint min = reg.cap(3).toUInt();
-	int sec = reg.cap(4).toInt();
+	bool sign = (match.captured(1) == "-");
+	int deg   = match.captured(2).toInt();
+	uint min  = match.captured(3).toUInt();
+	int sec   = match.captured(4).toInt();
 
 	double rad = dmsToRad(qAbs(deg), min, sec);
 	if (sign)
@@ -388,30 +503,39 @@ double dmsStrToRad(const QString& s)
 
 double getDecAngle(const QString& str)
 {
-	QRegExp rex("([-+]?)\\s*"                         // [sign] (1)
-		    "(?:"                                 // either
-		    "(\\d+(?:\\.\\d+)?)\\s*"               // fract (2)
-		    "([dhms°º]?)"                          // [dhms] (3) \u00B0\u00BA
-		    "|"                                   // or
-		    "(?:(\\d+)\\s*([hHdD°º])\\s*)?"         // [int degs] (4) (5)
-		    "(?:"                                   // either
-		    "(?:(\\d+)\\s*['mM]\\s*)?"              //  [int mins]  (6)
-		    "(\\d+(?:\\.\\d+)?)\\s*[\"sS]"          //  fract secs  (7)
-		    "|"                                     // or
-		    "(\\d+(?:\\.\\d+)?)\\s*['mM]"           //  fract mins (8)
-		    ")"                                     // end
-		    ")"                                   // end
-		    "\\s*([NSEW]?)",                      // [point] (9)
-		    Qt::CaseInsensitive);
+	static const QString reStr("([-+]?)\\s*"                         // [sign]  (1)
+				   "(?:"                                 // either
+				   "(\\d+(?:\\.\\d+)?)\\s*"              //  fract  (2)
+				   "([dhms°º]?)"                         //  [dhms] (3) \u00B0\u00BA
+				   "|"                                   // or
+				   "(?:(\\d+)\\s*([hHdD°º])\\s*)?"       //  [int degs]   (4) (5)
+				   "(?:"                                 //  either
+				   "(?:(\\d+)\\s*['mM]\\s*)?"            //   [int mins]  (6)
+				   "(\\d+(?:\\.\\d+)?)\\s*[\"sS]"        //   fract secs  (7)
+				   "|"                                   //  or
+				   "(\\d+(?:\\.\\d+)?)\\s*['mM]"         //   fract mins  (8)
+				   ")"                                   //  end
+				   ")"                                   // end
+				   "\\s*([NSEW]?)"                       // [point] (9)
+				  );
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0))
+	QRegularExpression rex(QRegularExpression::anchoredPattern(reStr), QRegularExpression::CaseInsensitiveOption);
+	QRegularExpressionMatch match=rex.match(str);
+	if( match.hasMatch() )
+	{
+		QStringList caps = match.capturedTexts();
+#else
+	QRegExp rex(reStr, Qt::CaseInsensitive);
 	if( rex.exactMatch(str) )
 	{
 		QStringList caps = rex.capturedTexts();
+#endif
 #if 0
-		std::cout << "reg exp: ";
+		qDebug() << "reg exp: ";
 		for( int i = 1; i <= rex.captureCount() ; ++i ){
-			std::cout << i << "=\"" << caps.at(i).toStdString() << "\" ";
+			qDebug() << i << "=\"" << caps.at(i) << "\" ";
 		}
-		std::cout << std::endl;
 #endif
 		double d = 0;
 		double m = 0;
@@ -536,15 +660,18 @@ int getBiggerPowerOfTwo(int value)
 }
 
 /*************************************************************************
- Convert a QT QDateTime class to julian day
+ Convert a Qt QDateTime class to Julian Day
 *************************************************************************/
 
-QDateTime jdToQDateTime(const double& jd)
+QDateTime jdToQDateTime(const double& jd, const Qt::TimeSpec timeSpec)
 {
-	int year, month, day;
-	getDateFromJulianDay(jd, &year, &month, &day);
-	QDateTime result = QDateTime::fromString(QString("%1.%2.%3").arg(year, 4, 10, QLatin1Char('0')).arg(month).arg(day), "yyyy.M.d");
-	result.setTime(jdFractionToQTime(jd));
+	Q_ASSERT((timeSpec==Qt::UTC) || (timeSpec==Qt::LocalTime));
+	int year, month, day, hour, minute, second, millis;
+	getDateTimeFromJulianDay(jd, &year, &month, &day, &hour, &minute, &second, &millis);
+	QDateTime result(QDate(year, month, day), QTime(hour, minute, second, millis), timeSpec);
+	if (!result.isValid())
+		qCritical() << "StelUtils::jdToQDateTime(): Invalid QDateTime:" << result;
+	Q_ASSERT(result.isValid());
 	return result;
 }
 
@@ -561,9 +688,7 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 
 	static const long JD_GREG_CAL = 2299161;
 	static const int JB_MAX_WITHOUT_OVERFLOW = 107374182;
-	long julian;
-
-	julian = static_cast<long>(floor(jd + 0.5));
+	const long julian = static_cast<long>(floor(jd + 0.5));
 
 	long ta, jalpha, tb, tc, td, te;
 
@@ -588,9 +713,7 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	}
 	else
 	{
-		// FIXME: Modifying this cast to modern style breaks a test.
-		//tc = static_cast<long>((static_cast<unsigned long long>(tb*20) - 2442) / 7305); //- WTF???
-		tc = (long)(((unsigned long long)tb*20 - 2442) / 7305);
+		tc = static_cast<long>((static_cast<unsigned long long>(tb)*20 - 2442) / 7305);
 	}
 	td = 365 * tc + tc/4;
 	te = ((tb - td) * 10000)/306001;
@@ -613,26 +736,54 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	}
 }
 
-void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis)
+void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis, bool *wrapDay)
 {
 	double frac = julianDay - (floor(julianDay));
 	double secs = frac * 24.0 * 60.0 * 60.0 + 0.0001; // add constant to fix floating-point truncation error
-	int s = static_cast<int>(floor(secs));
+	int s = int(floor(secs));
 
-	*hour = ((s / (60 * 60))+12)%24;
+	*hour = ((s / (60 * 60))+12);
+	if (*hour>=24)
+	{
+		*hour-=24;
+		if (*hour>=24)
+			qCritical() << "This is wrapping more than a day!";
+		Q_ASSERT(*hour < 24);
+		if (wrapDay) *wrapDay=true;
+	}
+	else
+		if (wrapDay) *wrapDay=false;
 	*minute = (s/(60))%60;
 	*second = s % 60;
 	if(millis)
 	{
-		*millis = static_cast<int>(floor((secs - floor(secs)) * 1000.0));
+		*millis = int(floor((secs - floor(secs)) * 1000.0));
 	}
+	//qDebug() << "getTimeFromJulianDay:" << QString::number(frac, 'f', 18) << QString::number(secs, 'f', 5) << "~" << s << *hour << *minute << *second;
 }
+
+void getDateTimeFromJulianDay(const double julianDay, int *year, int *month, int *day, int *hour, int *minute, int *second, int *millis)
+{
+	bool wrapDay;
+	getTimeFromJulianDay(julianDay, hour, minute, second, millis, &wrapDay);
+	if (wrapDay)
+		getDateFromJulianDay(julianDay+0.1, year, month, day);
+	else
+		getDateFromJulianDay(julianDay, year, month, day);
+}
+
+double getHoursFromJulianDay(const double julianDay)
+{
+	int hr, min, sec, millis;
+	getTimeFromJulianDay(julianDay, &hr, &min, &sec, &millis);
+	return static_cast<double>(hr)+static_cast<double>(min)/60.+static_cast<double>(sec + millis/1000.)/3600.;
+}
+
 
 QString julianDayToISO8601String(const double jd, bool addMS)
 {
 	int year, month, day, hour, minute, second, millis=0;
-	getDateFromJulianDay(jd, &year, &month, &day);
-	getTimeFromJulianDay(jd, &hour, &minute, &second, addMS ? &millis : Q_NULLPTR );
+	getDateTimeFromJulianDay(jd, &year, &month, &day, &hour, &minute, &second, addMS ? &millis : Q_NULLPTR );
 
 	QString res = QString("%1-%2-%3T%4:%5:%6")
 				 .arg((year >= 0 ? year : -1* year),4,10,QLatin1Char('0'))
@@ -644,7 +795,7 @@ QString julianDayToISO8601String(const double jd, bool addMS)
 
 	if(addMS)
 	{
-		res = res.append(".%1").arg(millis,3,10,QLatin1Char('0'));
+		res.append(QString(".%1").arg(millis,3,10,QLatin1Char('0')));
 	}
 	if (year < 0)
 	{
@@ -775,10 +926,17 @@ QString localeDateString(const int year, const int month, const int day, const i
 	QDate test(year, month, day);
 
 	// try to avoid QDate's non-astronomical time here, don't do BCE or year 0.
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	if (year > 0 && test.isValid() && !test.toString(QLocale().dateFormat(QLocale::ShortFormat)).isEmpty())
+	{
+		return test.toString(QLocale().dateFormat(QLocale::ShortFormat));
+	}
+#else
 	if (year > 0 && test.isValid() && !test.toString(Qt::DefaultLocaleShortDate).isEmpty())
 	{
 		return test.toString(Qt::DefaultLocaleShortDate);
 	}
+#endif
 	else
 	{
 		return localeDateString(year,month,day,dayOfWeek,QLocale().dateFormat(QLocale::ShortFormat));
@@ -797,7 +955,7 @@ int getDayOfWeek(int year, int month, int day)
 //! time is more than likely always going to be expressible by QDateTime.
 double getJDFromSystem()
 {
-	return qDateTimeToJd(QDateTime::currentDateTime().toUTC());
+	return qDateTimeToJd(QDateTime::currentDateTimeUtc());
 }
 
 double getJDFromBesselianEpoch(const double epoch)
@@ -812,10 +970,36 @@ double qTimeToJDFraction(const QTime& time)
 
 QTime jdFractionToQTime(const double jd)
 {
-	double decHours = std::fmod(jd+0.5, 1.0);
-	int hours = static_cast<int>(decHours/0.041666666666666666666);
-	int mins = static_cast<int>((decHours-(hours*0.041666666666666666666))/0.00069444444444444444444);
-	return QTime::fromString(QString("%1.%2").arg(hours).arg(mins), "h.m");
+	double decHours = std::fmod(jd+0.5, 1.0) * 24.;
+	int hours =int(std::floor(decHours));
+	double decMins = (decHours-hours)*60.;
+	int mins = int(std::floor(decMins));
+	double decSec = (decMins-mins)*60.;
+	int sec = int(std::floor(decSec));
+	double decMsec = (decSec-sec)*1000.;
+	int ms=int(std::round(decMsec));
+
+	if (ms>=1000){
+		ms-=1000;
+		sec+=1;
+	}
+	if (sec>=60){
+		sec-=60;
+		mins+=1;
+	}
+	if (mins>=60){
+		mins-=60;
+		hours+=1;
+	}
+	if (hours >= 24)
+		qDebug() << "WARNING: hours exceed a full day!" << hours;
+	hours %= 24;
+
+	QTime tm=QTime(hours, mins, sec, ms);
+	if (!tm.isValid())
+		qWarning() << "Invalid QTime:" << hours << "/" << mins << "/" << sec << "/" << ms << "-->" << tm;
+	Q_ASSERT(tm.isValid());
+	return tm;
 }
 
 // UTC !
@@ -825,7 +1009,7 @@ bool getJDFromDate(double* newjd, const int y, const int m, const int d, const i
 	double deltaTime = (h / 24.0) + (min / (24.0*60.0)) + (static_cast<double>(s) / (24.0 * 60.0 * 60.0)) - 0.5;
 	QDate test((y <= 0 ? y-1 : y), m, d);
 	// if QDate will oblige, do so.
-	// added hook for Julian calendar, because he has been removed from Qt5 --AW
+	// added hook for Julian calendar, because it has been removed from Qt5 --AW
 	if ( test.isValid() && y>1582)
 	{
 		double qdjd = static_cast<double>(test.toJulianDay());
@@ -950,15 +1134,15 @@ int numberOfDaysInMonthInYear(const int month, const int year)
 // return true if year is a leap year. Observes 1582 switch from Julian to Gregorian Calendar.
 bool isLeapYear(const int year)
 {
-	if (year>1582){
-		if (year % 400 == 0)
-			return true;
-		else if (year % 100 == 0)
-			return false;
-		else return (year % 4 == 0);
+	if (year>1582)
+	{
+		if (year % 100 == 0)
+			return (year % 400 == 0);
+		else
+			return (year % 4 == 0);
 	}
 	else
-		return (year % 4 == 0);
+		return (year % 4 == 0); // astronomical year counting: strictly every 4th year.
 }
 
 // Find day number for date in year.
@@ -1067,21 +1251,31 @@ bool changeDateTimeForRollover(int oy, int om, int od, int oh, int omin, int os,
 
 void debugQVariantMap(const QVariant& m, const QString& indent, const QString& key)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	QMetaType t = m.metaType();
+	if (t == QMetaType(QMetaType::QVariantMap))
+#else
 	QVariant::Type t = m.type();
 	if (t == QVariant::Map)
+#endif
 	{
 		qDebug() << indent + key + "(map):";
 		QList<QString> keys = m.toMap().keys();
 		std::sort(keys.begin(), keys.end());
-		for (auto k : keys)
+		for (auto &k : keys)
 		{
 			debugQVariantMap(m.toMap()[k], indent + "    ", k);
 		}
 	}
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	else if (t == QMetaType(QMetaType::QVariantList))
+#else
 	else if (t == QVariant::List)
+#endif
 	{
 		qDebug() << indent + key + "(list):";
-		for (const auto& item : m.toList())
+		const QList<QVariant> mList=m.toList();
+		for (const auto& item : mList)
 		{
 			debugQVariantMap(item, indent + "    ");
 		}
@@ -1111,22 +1305,23 @@ double getJulianDayFromISO8601String(const QString& iso8601Date, bool* ok)
 bool getDateTimeFromISO8601String(const QString& iso8601Date, int* y, int* m, int* d, int* h, int* min, float* s)
 {
 	// Represents an ISO8601 complete date string.
-	QRegExp finalRe("^([+\\-]?\\d+)[:\\-](\\d\\d)[:\\-](\\d\\d)T(\\d?\\d):(\\d\\d):(\\d\\d(?:\\.\\d*)?)$");
-	if (finalRe.exactMatch(iso8601Date) && finalRe.captureCount()==6)
+	static const QRegularExpression finalRe("^([+\\-]?\\d+)[:\\-](\\d\\d)[:\\-](\\d\\d)T(\\d?\\d):(\\d\\d):(\\d\\d(?:\\.\\d*)?)$");
+	QRegularExpressionMatch match=finalRe.match(iso8601Date);
+	if (match.hasMatch() && finalRe.captureCount()==6)
 	{
 		bool error = false;
 		bool ok;
-		*y = finalRe.cap(1).toInt(&ok);
+		*y = match.captured(1).toInt(&ok);
 		error = error || !ok;
-		*m = finalRe.cap(2).toInt(&ok);
+		*m = match.captured(2).toInt(&ok);
 		error = error || !ok;
-		*d = finalRe.cap(3).toInt(&ok);
+		*d = match.captured(3).toInt(&ok);
 		error = error || !ok;
-		*h = finalRe.cap(4).toInt(&ok);
+		*h = match.captured(4).toInt(&ok);
 		error = error || !ok;
-		*min = finalRe.cap(5).toInt(&ok);
+		*min = match.captured(5).toInt(&ok);
 		error = error || !ok;
-		*s = finalRe.cap(6).toFloat(&ok);
+		*s = match.captured(6).toFloat(&ok);
 		error = error || !ok;
 		if (!error)
 			return true;
@@ -1178,7 +1373,7 @@ QString hoursToHmsStr(const float hours, const bool lowprecision)
 //  1820.0=1820-jan-0.5=2385800.0
 //  1810.0=1810-jan-0.5=2382148.0
 //  1800.0=1800-jan-0.5=2378496.0
-//  1735.0=1735-jan-0.5=2354755.0
+//  1735.0=1735-jan-0.5=2354756.0
 //  1625.0=1625-jan-0.5=2314579.0
 //
 // Up to V0.15.1, if the requested year was outside validity range, we returned zero or some useless value.
@@ -1300,6 +1495,113 @@ double getDeltaTByEspenakMeeus(const double jDay)
 	return r;
 }
 
+// Implementation of algorithm by Espenak & Meeus (2006) with modified formulae for DeltaT computation
+double getDeltaTByEspenakMeeusModified(const double jDay)
+{
+	int year, month, day;	
+	getDateFromJulianDay(jDay, &year, &month, &day);
+
+	// Note: the method here is adapted from
+	// "Five Millennium Canon of Solar Eclipses" [Espenak and Meeus, 2006]
+	// A summary is described here:
+	// http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
+
+	double y = yearFraction(year, month, day);
+
+	// set the default value for Delta T
+	double u = (y-1820)/100.;
+	double r = (-20 + 32 * u * u);
+
+	if (y < -500)
+	{
+		// values are equal to defaults!
+	}
+	else if (y < 500)
+	{
+		u = y/100;
+		r = (((((0.0090316521*u + 0.022174192)*u - 0.1798452)*u - 5.952053)*u + 33.78311)*u -1014.41)*u +10583.6;
+	}
+	else if (y < 1600)
+	{
+		u = (y-1000)/100;
+		r = (((((0.0083572073*u - 0.005050998)*u -0.8503463)*u +0.319781)*u + 71.23472)*u -556.01)*u + 1574.2;
+	}
+	else if (y < 1700)
+	{
+		double t = y - 1600;
+		r = ((t/7129.0 - 0.01532)*t - 0.9808)*t +120.0;
+	}
+	else if (y < 1800)
+	{
+		double t = y - 1700;
+		r = (((-t/1174000.0 + 0.00013336)*t - 0.0059285)*t + 0.1603)*t +8.83;
+	}
+	else if (y < 1860)
+	{
+		double t = y - 1800;
+		r = ((((((.000000000875*t -.0000001699)*t + 0.0000121272)*t - 0.00037436)*t + 0.0041116)*t + 0.0068612)*t - 0.332447)*t +13.72;
+	}
+	else if (y < 1900)
+	{
+		double t = y - 1860;
+		r = ((((t/233174.0 -0.0004473624)*t + 0.01680668)*t - 0.251754)*t + 0.5737)*t + 7.62;
+	}
+	else if (y < 1920)
+	{
+		double t = y - 1900;
+		r = (((-0.000197*t + 0.0061966)*t - 0.0598939)*t + 1.494119)*t -2.79;
+	}
+	else if (y < 1941)
+	{
+		double t = y - 1920;
+		r = ((0.0020936*t - 0.076100)*t+ 0.84493)*t +21.20;
+	}
+	else if (y < 1961)
+	{
+		double t = y - 1950;
+		r = ((t/2547.0 -1.0/233.0)*t + 0.407)*t +29.07;
+	}
+	else if (y < 1986)
+	{
+		double t = y - 1975;
+		r = ((-t/718.0 -1/260.0)*t + 1.067)*t +45.45;
+	}
+	else if (y < 2005)
+	{
+		double t = y - 2000;
+		r = ((((0.00002373599*t + 0.000651814)*t + 0.0017275)*t - 0.060374)*t + 0.3345)*t +63.86;
+	}
+	// WB: Polynomial data fit from IERS's DeltaT values during 2005-2021, including predicted values until 2032
+	// Data: https://cddis.nasa.gov/archive/products/iers/deltat.data & https://cddis.nasa.gov/archive/products/iers/deltat.preds
+	// Last updated: 2022 Mar 11
+	else if (y < 2032)
+	{
+		double t = y - 2000;
+		r = (-0.00331233402*t + 0.404229283)*t + 62.48;
+	}
+	// WB: Formula to create reasonable curve between final predicted year and 2050
+	// 93 is the predicted deltaT for 2050 (Espenak/Meeus)
+	// It looks more likely that this value is too high
+	// But we will follow it for now until we have a better model
+	// Small corrections (<0.2 sec) related to secular acceleration of the Moon are neglected
+	// Last updated: 2022 Mar 11
+	else if (y < 2050)
+	{
+		double finalPredictedYear = 2032.;
+		double finalPredictedDeltaT = 72.07;
+		double t = y - finalPredictedYear;
+		double diff = 2050.-finalPredictedYear;
+		r = finalPredictedDeltaT + (93.-finalPredictedDeltaT) * t * t/(diff*diff);
+	}
+	else if (y < 2150)
+	{
+		// r has been precomputed before, just add the term patching the discontinuity
+		r -= 0.5628*(2150.0-y);
+	}
+
+	return r;
+}
+
 // Implementation of algorithm by Schoch (1931) for DeltaT computation
 double getDeltaTBySchoch(const double jDay)
 {
@@ -1354,7 +1656,7 @@ double getDeltaTByStephenson1978(const double jDay)
 // Implementation of algorithm by Stephenson (1997) for DeltaT computation
 double getDeltaTByStephenson1997(const double jDay)
 {
-	double u=(jDay-2354755.0)/36525.0; // (1735-jan-0.5)
+	double u=(jDay-2354756.0)/36525.0; // (1735-jan-0.5)
 	return -20.0 + 35.0*u*u;
 }
 
@@ -1405,9 +1707,27 @@ double getDeltaTByStephensonMorrison1995(const double jDay)
 // Implementation of algorithm by Stephenson & Houlden (1986) for DeltaT computation
 double getDeltaTByStephensonHoulden(const double jDay)
 {
+	int year, month, day;
+	double u, deltaT = 0.;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+
+	if (year <= 948)
+	{
+		//u = (year-948)/100;
+		u = (yearFraction(year, month, day)-948)/100;
+		deltaT = (46.5*u -405.0)*u +1830.0;
+	}
+	if (948 < year && year <= 1600)
+	{
+		//u = (year-1850)/100;
+		u = (yearFraction(year, month, day)-1850)/100;
+		deltaT = 22.5*u*u;
+	}
+
+	return deltaT;
 	// This formula found in the cited book, page (ii), formula (1).
-	double T=(jDay-2415020.0)/36525; // centuries from J1900.0
-	return (36.79*T+35.06)*T+4.87;
+	//double T=(jDay-2415020.0)/36525; // centuries from J1900.0
+	//return (36.79*T+35.06)*T+4.87;
 }
 
 // Implementation of algorithm by Espenak (1987, 1989) for DeltaT computation
@@ -1442,7 +1762,9 @@ double getDeltaTByChaprontTouze(const double jDay)
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
 	// Limited years!
-	year=qBound(-391, year, 1600);
+	if (year < -391 || year > 1600)
+		return deltaT;
+	//year=qBound(-391, year, 1600);
 
 	double u=(jDay-2451545.0)/36525.0; // (2000-jan-1.5)
 
@@ -1664,12 +1986,12 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 	if ((year>= 2051) && (year <= 2150))
 	{
 		// [2051..2150]
-		double x = (year-1820)/100.;
-		deltaT = (- 20 + 32*x*x + 0.5628*(2150-year));
+		const double x = (year-1820)/100.;
+		deltaT = -20 + 32*x*x + 0.5628*(2150-year);
 	}
 	else if ((year >= 1987) && (year <= 2050))
 	{
-		int y2000 = year-2000;
+		const int y2000 = year-2000;
 		if (year>=2006) // [2006..2050]
 		{
 			deltaT = ((0.005589*y2000 + 0.32217)*y2000 + 62.92);
@@ -1681,10 +2003,7 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 	}
 	else if ((year >= 1800) && (year <= 1986))
 	{
-		// FIXME: This part should be check and maybe partially rewrited (gregorian-date-difference?)
-		//        because this part gives the strange values of DeltaT
-		double c = (getFixedFromGregorian(1900, 1, 1)-getFixedFromGregorian(year, 7, 1))/36525.;
-
+		const double c = (getFixedFromGregorian(year, 7, 1)-getFixedFromGregorian(1900, 1, 1))/36525.;
 		if (year >= 1900) // [1900..1986]
 		{
 			deltaT = ((((((-0.212591*c + 0.677066)*c - 0.861938)*c + 0.553040)*c - 0.181133)*c + 0.025184)*c + 0.000297)*c - 0.00002;
@@ -1698,31 +2017,31 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 	else if ((year>=1700) && (year<=1799))
 	{
 		// [1700..1799]
-		int y1700 = year-1700;
+		const int y1700 = year-1700;
 		deltaT = (((-0.0000266484*y1700 + 0.003336121)*y1700 - 0.005092142)*y1700 + 8.118780842);
 	}
 	else if ((year>=1600) && (year<=1699))
 	{
 		// [1600..1699]
-		int y1600 = year-1600;
-		deltaT = (((0.000140272128*y1600 - 0.01532)*y1600 - 0.9808)*y1600 + 120);
+		const int y1600 = year-1600;
+		deltaT = (((0.000140272128*y1600 - 0.01532)*y1600 - 0.9808)*y1600 + 120.);
 	}
 	else if ((year>=500) && (year<=1599))
 	{
 		// [500..1599]
-		double y1000 = (year-1000)/100.;
+		const double y1000 = (year-1000)/100.;
 		deltaT = ((((((0.0083572073*y1000 - 0.005050998)*y1000 - 0.8503463)*y1000 + 0.319781)*y1000 + 71.23472)*y1000 - 556.01)*y1000 + 1574.2);
 	}
 	else if ((year>-500) && (year<500))
 	{
 		// (-500..500)
-		double y0 = year/100.;
+		const double y0 = year/100.;
 		deltaT = ((((((0.0090316521*y0 + 0.022174192)*y0 - 0.1798452)*y0 - 5.952053)*y0 + 33.78311)*y0 - 1014.41)*y0 + 10583.6);
 	}
 	else
 	{
 		// otherwise
-		double x = (year-1820)/100.;
+		const double x = (year-1820)/100.;
 		deltaT = (-20 + 32*x*x);
 	}
 
@@ -1853,95 +2172,99 @@ double getDeltaTByKhalidSultanaZaidi(const double jDay)
 	return (((a4[i]*u + a3[i])*u + a2[i])*u + a1[i])*u + a0[i];
 }
 
-static const double StephensonMorrisonHohenkerk2016DeltaTtableS15[54][6]={
+static const double StephensonMorrisonHohenkerk2016DeltaTtableS15[58][6]={
+// Table S15: The Polynomial Coefficients for DT -720.0 to 2019.0   v. 2020
+// Source: http://astro.ukho.gov.uk/nao/lvm/Table-S15.2020.txt
 //	Row         Years                  Polynomial Coefficients
-//	  i      K_i    K_{i+1}        a_0         a_1         a_2         a_3
+//	  i      K_i     K_{i+1}        a_0         a_1         a_2         a_3
 //	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-/*	  1 */  {-720.0,     400.0,   20550.593,  -21268.478,   11863.418,   -4541.129},
-/*	  2 */  { 400.0,    1000.0,    6604.404,   -5981.266,    -505.093,    1349.609},
-/*	  3 */  {1000.0,    1500.0,    1467.654,   -2452.187,    2460.927,   -1183.759},
-/*	  4 */  {1500.0,    1600.0,     292.635,    -216.322,     -43.614,      56.681},
-/*	  5 */  {1600.0,    1650.0,      89.380,     -66.754,      31.607,     -10.497},
-/*	  6 */  {1650.0,    1720.0,      43.736,     -49.043,       0.227,      15.811},
-/*	  7 */  {1720.0,    1800.0,      10.730,      -1.321,      62.250,     -52.946},
-/*	  8 */  {1800.0,    1810.0,      18.714,      -4.457,      -1.509,       2.507},
-/*	  9 */  {1810.0,    1820.0,      15.255,       0.046,       6.012,      -4.634},
-/*	 10 */  {1820.0,    1830.0,      16.679,      -1.831,      -7.889,       3.799},
-/*	 11 */  {1830.0,    1840.0,      10.758,      -6.211,       3.509,      -0.388},
-/*	 12 */  {1840.0,    1850.0,       7.668,      -0.357,       2.345,      -0.338},
-/*	 13 */  {1850.0,    1855.0,       9.317,       1.659,       0.332,      -0.932},
-/*	 14 */  {1855.0,    1860.0,      10.376,      -0.472,      -2.463,       1.596},
-/*	 15 */  {1860.0,    1865.0,       9.038,      -0.610,       2.325,      -2.497},
-/*	 16 */  {1865.0,    1870.0,       8.256,      -3.450,      -5.166,       2.729},
-/*	 17 */  {1870.0,    1875.0,       2.369,      -5.596,       3.020,      -0.919},
-/*	 18 */  {1875.0,    1880.0,      -1.126,      -2.312,       0.264,      -0.037},
-/*	 19 */  {1880.0,    1885.0,      -3.211,      -1.894,       0.154,       0.562},
-/*	 20 */  {1885.0,    1890.0,      -4.388,       0.101,       1.841,      -1.438},
-/*	 21 */  {1890.0,    1895.0,      -3.884,      -0.531,      -2.473,       1.870},
-/*	 22 */  {1895.0,    1900.0,      -5.017,       0.134,       3.138,      -0.232},
-/*	 23 */  {1900.0,    1905.0,      -1.977,       5.715,       2.443,      -1.257},
-/*	 24 */  {1905.0,    1910.0,       4.923,       6.828,      -1.329,       0.720},
-/*	 25 */  {1910.0,    1915.0,      11.142,       6.330,       0.831,      -0.825},
-/*	 26 */  {1915.0,    1920.0,      17.479,       5.518,      -1.643,       0.262},
-/*	 27 */  {1920.0,    1925.0,      21.617,       3.020,      -0.856,       0.008},
-/*	 28 */  {1925.0,    1930.0,      23.789,       1.333,      -0.831,       0.127},
-/*	 29 */  {1930.0,    1935.0,      24.418,       0.052,      -0.449,       0.142},
-/*	 30 */  {1935.0,    1940.0,      24.164,      -0.419,      -0.022,       0.702},
-/*	 31 */  {1940.0,    1945.0,      24.426,       1.645,       2.086,      -1.106},
-/*	 32 */  {1945.0,    1950.0,      27.050,       2.499,      -1.232,       0.614},
-/*	 33 */  {1950.0,    1953.0,      28.932,       1.127,       0.220,      -0.277},
-/*	 34 */  {1953.0,    1956.0,      30.002,       0.737,      -0.610,       0.631},
-/*	 35 */  {1956.0,    1959.0,      30.760,       1.409,       1.282,      -0.799},
-/*	 36 */  {1959.0,    1962.0,      32.652,       1.577,      -1.115,       0.507},
-/*	 37 */  {1962.0,    1965.0,      33.621,       0.868,       0.406,       0.199},
-/*	 38 */  {1965.0,    1968.0,      35.093,       2.275,       1.002,      -0.414},
-/*	 39 */  {1968.0,    1971.0,      37.956,       3.035,      -0.242,       0.202},
-/*	 40 */  {1971.0,    1974.0,      40.951,       3.157,       0.364,      -0.229},
-/*	 41 */  {1974.0,    1977.0,      44.244,       3.198,      -0.323,       0.172},
-/*	 42 */  {1977.0,    1980.0,      47.291,       3.069,       0.193,      -0.192},
-/*	 43 */  {1980.0,    1983.0,      50.361,       2.878,      -0.384,       0.081},
-/*	 44 */  {1983.0,    1986.0,      52.936,       2.354,      -0.140,      -0.166},
-/*	 45 */  {1986.0,    1989.0,      54.984,       1.577,      -0.637,       0.448},
-/*	 46 */  {1989.0,    1992.0,      56.373,       1.649,       0.709,      -0.277},
-/*	 47 */  {1992.0,    1995.0,      58.453,       2.235,      -0.122,       0.111},
-/*	 48 */  {1995.0,    1998.0,      60.677,       2.324,       0.212,      -0.315},
-/*	 49 */  {1998.0,    2001.0,      62.899,       1.804,      -0.732,       0.112},
-/*	 50 */  {2001.0,    2004.0,      64.082,       0.675,      -0.396,       0.193},
-/*	 51 */  {2004.0,    2007.0,      64.555,       0.463,       0.184,      -0.008},
-/*	 52 */  {2007.0,    2010.0,      65.194,       0.809,       0.161,      -0.101},
-/*	 53 */  {2010.0,    2013.0,      66.063,       0.828,      -0.142,       0.168},
-/*	 54 */  {2013.0,    2016.0,      66.917,       1.046,       0.360,      -0.282}
+/*       1 */  { -720.0,    -100.0,   20371.848,   -9999.586,     776.247,     409.160 },
+/* 	 2 */  { -100.0,     400.0,   11557.668,   -5822.270,    1303.151,    -503.433 },
+/*	 3 */  {  400.0,    1000.0,    6535.116,   -5671.519,    -298.291,    1085.087 },
+/*	 4 */  { 1000.0,    1150.0,    1650.393,    -753.210,     184.811,     -25.346 },
+/*	 5 */  { 1150.0,    1300.0,    1056.647,    -459.628,     108.771,     -24.641 },
+/*	 6 */  { 1300.0,    1500.0,     681.149,    -421.345,      61.953,     -29.414 },
+/*	 7 */  { 1500.0,    1600.0,     292.343,    -192.841,      -6.572,      16.197 },
+/*	 8 */  { 1600.0,    1650.0,     109.127,     -78.697,      10.505,       3.018 },
+/*	 9 */  { 1650.0,    1720.0,      43.952,     -68.089,      38.333,      -2.127 },
+/*	10 */  { 1720.0,    1800.0,      12.068,       2.507,      41.731,     -37.939 },
+/*	11 */  { 1800.0,    1810.0,      18.367,      -3.481,      -1.126,       1.918 },
+/*	12 */  { 1810.0,    1820.0,      15.678,       0.021,       4.629,      -3.812 },
+/*	13 */  { 1820.0,    1830.0,      16.516,      -2.157,      -6.806,       3.250 },
+/*	14 */  { 1830.0,    1840.0,      10.804,      -6.018,       2.944,      -0.096 },
+/*	15 */  { 1840.0,    1850.0,       7.634,      -0.416,       2.658,      -0.539 },
+/*	16 */  { 1850.0,    1855.0,       9.338,       1.642,       0.261,      -0.883 },
+/*	17 */  { 1855.0,    1860.0,      10.357,      -0.486,      -2.389,       1.558 },
+/*	18 */  { 1860.0,    1865.0,       9.040,      -0.591,       2.284,      -2.477 },
+/*	19 */  { 1865.0,    1870.0,       8.255,      -3.456,      -5.148,       2.720 },
+/*	20 */  { 1870.0,    1875.0,       2.371,      -5.593,       3.011,      -0.914 },
+/*	21 */  { 1875.0,    1880.0,      -1.126,      -2.314,       0.269,      -0.039 },
+/*	22 */  { 1880.0,    1885.0,      -3.210,      -1.893,       0.152,       0.563 },
+/*	23 */  { 1885.0,    1890.0,      -4.388,       0.101,       1.842,      -1.438 },
+/*	24 */  { 1890.0,    1895.0,      -3.884,      -0.531,      -2.474,       1.871 },
+/*	25 */  { 1895.0,    1900.0,      -5.017,       0.134,       3.138,      -0.232 },
+/*	26 */  { 1900.0,    1905.0,      -1.977,       5.715,       2.443,      -1.257 },
+/*	27 */  { 1905.0,    1910.0,       4.923,       6.828,      -1.329,       0.720 },
+/*	28 */  { 1910.0,    1915.0,      11.142,       6.330,       0.831,      -0.825 },
+/*	29 */  { 1915.0,    1920.0,      17.479,       5.518,      -1.643,       0.262 },
+/*	30 */  { 1920.0,    1925.0,      21.617,       3.020,      -0.856,       0.008 },
+/*	31 */  { 1925.0,    1930.0,      23.789,       1.333,      -0.831,       0.127 },
+/*	32 */  { 1930.0,    1935.0,      24.418,       0.052,      -0.449,       0.142 },
+/*	33 */  { 1935.0,    1940.0,      24.164,      -0.419,      -0.022,       0.702 },
+/*	34 */  { 1940.0,    1945.0,      24.426,       1.645,       2.086,      -1.106 },
+/*	35 */  { 1945.0,    1950.0,      27.050,       2.499,      -1.232,       0.614 },
+/*	36 */  { 1950.0,    1953.0,      28.932,       1.127,       0.220,      -0.277 },
+/*	37 */  { 1953.0,    1956.0,      30.002,       0.737,      -0.610,       0.631 },
+/*	38 */  { 1956.0,    1959.0,      30.760,       1.409,       1.282,      -0.799 },
+/*	39 */  { 1959.0,    1962.0,      32.652,       1.577,      -1.115,       0.507 },
+/*	40 */  { 1962.0,    1965.0,      33.621,       0.868,       0.406,       0.199 },
+/*	41 */  { 1965.0,    1968.0,      35.093,       2.275,       1.002,      -0.414 },
+/*	42 */  { 1968.0,    1971.0,      37.956,       3.035,      -0.242,       0.202 },
+/*	43 */  { 1971.0,    1974.0,      40.951,       3.157,       0.364,      -0.229 },
+/*	44 */  { 1974.0,    1977.0,      44.244,       3.199,      -0.323,       0.172 },
+/*	45 */  { 1977.0,    1980.0,      47.291,       3.069,       0.193,      -0.192 },
+/*	46 */  { 1980.0,    1983.0,      50.361,       2.878,      -0.384,       0.081 },
+/*	47 */  { 1983.0,    1986.0,      52.936,       2.354,      -0.140,      -0.165 },
+/*	48 */  { 1986.0,    1989.0,      54.984,       1.577,      -0.637,       0.448 },
+/*	49 */  { 1989.0,    1992.0,      56.373,       1.648,       0.708,      -0.276 },
+/*	50 */  { 1992.0,    1995.0,      58.453,       2.235,      -0.121,       0.110 },
+/*	51 */  { 1995.0,    1998.0,      60.678,       2.324,       0.210,      -0.313 },
+/*	52 */  { 1998.0,    2001.0,      62.898,       1.804,      -0.729,       0.109 },
+/*	53 */  { 2001.0,    2004.0,      64.083,       0.674,      -0.402,       0.199 },
+/*	54 */  { 2004.0,    2007.0,      64.553,       0.466,       0.194,      -0.017 },
+/*	55 */  { 2007.0,    2010.0,      65.197,       0.804,       0.144,      -0.084 },
+/*	56 */  { 2010.0,    2013.0,      66.061,       0.839,      -0.109,       0.128 },
+/*	57 */  { 2013.0,    2016.0,      66.920,       1.007,       0.277,      -0.095 },
+/*	58 */  { 2016.0,    2019.0,      68.109,       1.277,      -0.007,      -0.139 }
 };
 double getDeltaTByStephensonMorrisonHohenkerk2016(const double jDay)
 {
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 	double y=yearFraction(year, month, day);
-	if ((y<-720.) || (y>2016.))
+	if ((y<-720.) || (y>2019.))
 	{
 		double fact=(y-1825.0)/100.;
-		return -320.0+32.5*fact*fact;
+		//return -320.0+32.5*fact*fact;
+		return -10+31.4*fact*fact;
 	}
 	int i=0;
 	while (StephensonMorrisonHohenkerk2016DeltaTtableS15[i][1]<y) i++;
-	Q_ASSERT(i<54);
+	Q_ASSERT(i<58);
 	double t=(y-StephensonMorrisonHohenkerk2016DeltaTtableS15[i][0]) / (StephensonMorrisonHohenkerk2016DeltaTtableS15[i][1]-StephensonMorrisonHohenkerk2016DeltaTtableS15[i][0]);
 	return ((StephensonMorrisonHohenkerk2016DeltaTtableS15[i][5]*t + StephensonMorrisonHohenkerk2016DeltaTtableS15[i][4])*t
 		+ StephensonMorrisonHohenkerk2016DeltaTtableS15[i][3])*t + StephensonMorrisonHohenkerk2016DeltaTtableS15[i][2];
 }
 
-double getMoonSecularAcceleration(const double jDay, const double nd, const bool useDE43x)
+double getMoonSecularAcceleration(const double jDay, const double nd, const bool useDE4xx)
 {
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double t = (yearFraction(year, month, day)-1955.5)/100.0;
+	const double t = (yearFraction(year, month, day)-1955.5)/100.0;
 	// n.dot for secular acceleration of the Moon in ELP2000-82B
-	// have value -23.8946 "/cy/cy (or -25.8 for DE43x usage)
-	double ephND = -23.8946;
-	if (useDE43x)
-		ephND = -25.8;
-
+	// has value -23.8946 "/cy/cy (or -25.8 for DE43x usage)
+	const double ephND = (useDE4xx ? -25.8 : -23.8946);
 	return -0.91072 * (ephND + qAbs(nd))*t*t;
 }
 
@@ -2180,7 +2503,7 @@ float* ComputeCosSinTheta(const unsigned int slices)
 	Q_ASSERT(slices<=MAX_SLICES);
 	
 	// Difference angle between the stops. Always use 2*M_PI/slices!
-	const float dTheta = 2.f * static_cast<float>(M_PI) / slices;
+	const float dTheta = 2.f * static_cast<float>(M_PI) / static_cast<float>(slices);
 	float *cos_sin = cos_sin_theta;
 	float *cos_sin_rev = cos_sin + 2*(slices+1);
 	const float c = std::cos(dTheta);
@@ -2214,7 +2537,7 @@ float* ComputeCosSinRho(const unsigned int segments)
 	Q_ASSERT(segments<=MAX_STACKS);
 	
 	// Difference angle between the stops. Always use M_PI/segments!
-	const float dRho = static_cast<float>(M_PI) / segments;
+	const float dRho = static_cast<float>(M_PI) / static_cast<float>(segments);
 	float *cos_sin = cos_sin_rho;
 	float *cos_sin_rev = cos_sin + 2*(segments+1);
 	const float c = cosf(dRho);
@@ -2265,11 +2588,15 @@ float *ComputeCosSinRhoZone(const float dRho, const unsigned int segments, const
 
 int getFixedFromGregorian(const int year, const int month, const int day)
 {
+	bool leap = false;
+	if (year % 100 == 0)
+		leap = (year % 400 == 0);
+	else
+		leap = (year % 4 == 0);
 	int y = year - 1;
-	int r = 365*y + static_cast<int>(std::floor(y/4.) - std::floor(y/100.) + std::floor(y/400.) + std::floor((367 * month - 362)/12.));
+	int r = 365*y + intFloorDiv(y, 4) - intFloorDiv(y, 100) + intFloorDiv(y, 400) + (367*month-362)/12 + day;
 	if (month>2)
-		r -= isLeapYear(year) ? 1 : 2;
-	r += day;
+		r += (leap ? -1 : -2);
 
 	return r;
 }
@@ -2302,6 +2629,11 @@ int compareVersions(const QString v1, const QString v2)
 int gcd(int a, int b)
 {
 	return b ? gcd(b, a % b) : a;
+}
+
+int lcm(int a, int b)
+{
+	return (a*b/gcd(a, b));
 }
 
 //! Uncompress gzip or zlib compressed data.

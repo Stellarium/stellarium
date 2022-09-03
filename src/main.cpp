@@ -26,7 +26,7 @@
 #include "CLIProcessor.hpp"
 #include "StelIniParser.hpp"
 #include "StelUtils.hpp"
-#ifndef DISABLE_SCRIPTING
+#ifdef ENABLE_SCRIPTING
 #include "StelScriptOutput.hpp"
 #endif
 
@@ -87,17 +87,17 @@ class CustomQTranslator : public QTranslator
 {
 	using QTranslator::translate;
 public:
-	virtual bool isEmpty() const { return false; }
+	virtual bool isEmpty() const Q_DECL_OVERRIDE { return false; }
 
 	//! Overrides QTranslator::translate().
 	//! Calls StelTranslator::qtranslate().
 	//! @param context Qt context string - IGNORED.
 	//! @param sourceText the source message.
 	//! @param comment optional parameter
-	virtual QString translate(const char *context, const char *sourceText, const char *disambiguation = Q_NULLPTR, int n = -1) const
+	virtual QString translate(const char *context, const char *sourceText, const char *disambiguation = Q_NULLPTR, int n = -1) const Q_DECL_OVERRIDE
 	{
-		Q_UNUSED(context);
-		Q_UNUSED(n);
+		Q_UNUSED(context)
+		Q_UNUSED(n)
 		return StelTranslator::globalTranslator->qtranslate(sourceText, disambiguation);
 	}
 };
@@ -156,21 +156,24 @@ int main(int argc, char **argv)
 	}
 #endif
 
-	// Seed the PRNG
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+	// Seed the PRNG. Later Qt versions use qApp->randomGenerator
 	qsrand(QDateTime::currentMSecsSinceEpoch());
-
+#endif
 	QCoreApplication::setApplicationName("stellarium");
-	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
+	QCoreApplication::setApplicationVersion(StelUtils::getApplicationPublicVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
 
 	// Support high DPI pixmaps and fonts
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
+#endif
 	if (argList.contains("--scale-gui")) // Variable QT_SCALE_FACTOR should be defined before app will be created!
 		qputenv("QT_SCALE_FACTOR", CLIProcessor::argsGetOptionWithArg(argList, "", "--scale-gui", "").toString().toLatin1());
 
-	#if defined(Q_OS_MAC)
+	#if defined(Q_OS_MACOS)
 	QFileInfo appInfo(QString::fromUtf8(argv[0]));
 	QDir appDir(appInfo.absolutePath());
 	appDir.cdUp();
@@ -182,6 +185,58 @@ int main(int argc, char **argv)
 
 	QGuiApplication::setDesktopSettingsAware(false);
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	/// We can define our default OpenGL context only with Qt6 when we have no more dynamic OpenGL/ANGLE.
+	/// IMPORTANT: OpenGL default context/formats must be configured before constructing app!
+	/// Copy from StelMainView
+	/// TODO: adapt/remove code from StelMainView?
+	/// TODO: Find out of this works on GLES devices!
+
+	//use the default format as basis
+	QSurfaceFormat fmt = QSurfaceFormat::defaultFormat();
+
+	//if on an GLES build, do not set the format
+	//if (fmt.renderableType()==QSurfaceFormat::OpenGL) // Probably at this point it is only QSurfaceFormat::DefaultRenderableType
+	{
+#ifdef Q_OS_MACOS
+		// On OSX, you should get what you ask for. Setting format later may not work.
+		// Let's assume all MacOSX deliver at least 3.3 compatibility profile.
+		fmt.setMajorVersion(3);
+		fmt.setMinorVersion(3);
+		fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
+#else
+		// OGL 2.1 + FBOs should basically be the minimum required for Stellarium
+		fmt.setMajorVersion(2);
+		fmt.setMinorVersion(1);
+		//fmt.setProfile(QSurfaceFormat::CoreProfile);
+#endif
+	}
+
+	//request some sane buffer formats
+	fmt.setRedBufferSize(8);
+	fmt.setGreenBufferSize(8);
+	fmt.setBlueBufferSize(8);
+	fmt.setAlphaBufferSize(8);
+	fmt.setDepthBufferSize(24);
+	//Stencil buffer seems necessary for GUI boxes
+	fmt.setStencilBufferSize(8);
+	//const int multisamplingLevel = configuration->value("video/multisampling", 0).toInt();
+	//if(  multisamplingLevel  && (qApp->property("spout").toString() == "none") && (!isMesa) )
+	//	fmt.setSamples(multisamplingLevel);
+
+#ifdef OPENGL_DEBUG_LOGGING
+	//try to enable GL debugging using GL_KHR_debug
+	fmt.setOption(QSurfaceFormat::DebugContext);
+#endif
+	//vsync needs to be set on the default format for it to work
+	//fmt.setSwapInterval(0);
+
+	QSurfaceFormat::setDefaultFormat(fmt);
+
+	/////////////////////////////////////////////////////////////////////////////////
+#endif
+
 #ifndef USE_QUICKVIEW
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 	// The QApplication MUST be created before the StelFileMgr is initialized.
@@ -189,6 +244,15 @@ int main(int argc, char **argv)
 #else
 	QGuiApplication::setDesktopSettingsAware(false);
 	QGuiApplication app(argc, argv);
+#endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	// Follow vague hint from https://stackoverflow.com/questions/70152818/no-space-between-letters-in-text
+	// For some absurd reason, Qt6 needs some initialisation kick so that the font engine starts working.
+	// Else all characters are squashed together.
+	QSize absurdInitBugSize=QFontMetrics(qApp->font()).size(Qt::TextSingleLine, "A really absurd bug!");
+	Q_ASSERT(absurdInitBugSize.width()>0);
+	Q_UNUSED(absurdInitBugSize)
 #endif
 
 	// QApplication sets current locale, but
@@ -218,25 +282,14 @@ int main(int argc, char **argv)
 	// output, such as --help and --version
 	CLIProcessor::parseCLIArgsPreConfig(argList);
 
-	#ifdef Q_OS_WIN
-	if (qApp->property("onetime_angle_mode").isValid())
-	{
-		app.setAttribute(Qt::AA_UseOpenGLES, true);
-	}
-	if (qApp->property("onetime_mesa_mode").isValid())
-	{
-		app.setAttribute(Qt::AA_UseSoftwareOpenGL, true);
-	}
-	#endif
-
 	// Start logging.
 	StelLogger::init(StelFileMgr::getUserDir()+"/log.txt");
 	StelLogger::writeLog(argStr);
 
 	// OK we start the full program.
 	// Print the console splash and get on with loading the program
-	QString versionLine = QString("This is %1 - %2").arg(StelUtils::getApplicationName()).arg(STELLARIUM_URL);
-	QString copyrightLine = QString("Copyright (C) %1 Fabien Chereau et al.").arg(COPYRIGHT_YEARS);
+	QString versionLine = QString("This is %1 (v%2) - %3").arg(StelUtils::getApplicationName(), StelUtils::getApplicationVersion(), STELLARIUM_URL);
+	QString copyrightLine = STELLARIUM_COPYRIGHT;
 	int maxLength = qMax(versionLine.size(), copyrightLine.size());
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
 	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
@@ -285,7 +338,7 @@ int main(int argc, char **argv)
 		if (!restoreDefaultConfigFile)
 		{
 			QString version = confSettings->value("main/version", "0.0.0").toString();
-			if (version!=QString(PACKAGE_VERSION))
+			if (version!=QString(STELLARIUM_PUBLIC_VERSION))
 			{
 				QTextStream istr(&version);
 				char tmp;
@@ -295,7 +348,7 @@ int main(int argc, char **argv)
 				// Config versions less than 0.6.0 are not supported, otherwise we will try to use it
 				if (v1==0 && v2<6)
 				{
-					// The config file is too old to try an importation
+					// The config file is too old to try an import
 					qDebug() << "The current config file is from a version too old for parameters to be imported ("
 							 << (version.isEmpty() ? "<0.6.0" : version) << ").\n"
 							 << "It will be replaced by the default config file.";
@@ -304,9 +357,9 @@ int main(int argc, char **argv)
 				else
 				{
 					qDebug() << "Attempting to use an existing older config file.";
-					confSettings->setValue("main/version", QString(PACKAGE_VERSION)); // Upgrade version of config.ini
+					confSettings->setValue("main/version", QString(STELLARIUM_PUBLIC_VERSION)); // Upgrade version of config.ini
 					clearCache();
-					qDebug() << "Clear cache and update config.ini...";
+					qDebug() << "Cleared cache and updated config.ini...";
 				}
 			}
 		}
@@ -317,7 +370,7 @@ int main(int argc, char **argv)
 				delete confSettings;
 
 			QString backupFile(configFileFullPath.left(configFileFullPath.length()-3) + QString("old"));
-			if (QFileInfo(backupFile).exists())
+			if (QFileInfo::exists(backupFile))
 				QFile(backupFile).remove();
 
 			QFile(configFileFullPath).rename(backupFile);
@@ -337,7 +390,7 @@ int main(int argc, char **argv)
 	Q_ASSERT(confSettings);
 	qDebug() << "Config file is: " << QDir::toNativeSeparators(configFileFullPath);
 
-	#ifndef DISABLE_SCRIPTING
+	#ifdef ENABLE_SCRIPTING
 	QString outputFile = StelFileMgr::getUserDir()+"/output.txt";
 	if (confSettings->value("main/use_separate_output_file", false).toBool())
 		outputFile = StelFileMgr::getUserDir()+"/output-"+QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss")+".txt";
@@ -369,7 +422,12 @@ int main(int argc, char **argv)
 	// Details: https://sourceforge.net/p/stellarium/discussion/278769/thread/810a1e5c/
 	QString baseFont = confSettings->value("gui/base_font_name", "Verdana").toString();
 	QFont tmpFont(baseFont);
+	#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
+	tmpFont.setHintingPreference(QFont::PreferFullHinting);
+	tmpFont.setStyleHint(QFont::AnyStyle, QFont::PreferAntialias);
+	#else
 	tmpFont.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);
+	#endif
 #else
 	QString baseFont = confSettings->value("gui/base_font_name", "DejaVu Sans").toString();
 	QFont tmpFont(baseFont);
@@ -378,7 +436,7 @@ int main(int argc, char **argv)
 	QGuiApplication::setFont(tmpFont);
 
 	// Initialize translator feature
-	StelTranslator::init(StelFileMgr::getInstallationDir() + "/data/iso639-1.utf8");
+	StelTranslator::init(StelFileMgr::getInstallationDir() + "/data/languages.tab");
 	
 	// Use our custom translator for Qt translations as well
 	CustomQTranslator trans;

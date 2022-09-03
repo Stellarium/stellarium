@@ -32,6 +32,7 @@ class SkyPoint;
 //! @class GridLinesMgr
 //! The GridLinesMgr controls the drawing of the Azimuthal, Equatorial, Ecliptical and Galactic Grids,
 //! as well as the great circles: Meridian Line, Ecliptic Lines of J2000.0 and date, Equator Line (of J2000.0 and date),
+//! Solar Equator and Invariable Plane of the Solar System,
 //! Precession Circles, and a special line marking conjunction or opposition in ecliptical longitude (of date).
 class GridLinesMgr : public StelModule
 {
@@ -43,6 +44,9 @@ class GridLinesMgr : public StelModule
 
 	Q_PROPERTY(bool equatorGridDisplayed		READ getFlagEquatorGrid		WRITE setFlagEquatorGrid		NOTIFY equatorGridDisplayedChanged)
 	Q_PROPERTY(Vec3f equatorGridColor		READ getColorEquatorGrid	WRITE setColorEquatorGrid		NOTIFY equatorGridColorChanged)
+
+	Q_PROPERTY(bool fixedEquatorGridDisplayed	READ getFlagFixedEquatorGrid	WRITE setFlagFixedEquatorGrid		NOTIFY fixedEquatorGridDisplayedChanged)
+	Q_PROPERTY(Vec3f fixedEquatorGridColor		READ getColorFixedEquatorGrid	WRITE setColorFixedEquatorGrid		NOTIFY fixedEquatorGridColorChanged)
 
 	Q_PROPERTY(bool equatorJ2000GridDisplayed	READ getFlagEquatorJ2000Grid	WRITE setFlagEquatorJ2000Grid		NOTIFY equatorJ2000GridDisplayedChanged)
 	Q_PROPERTY(Vec3f equatorJ2000GridColor		READ getColorEquatorJ2000Grid	WRITE setColorEquatorJ2000Grid		NOTIFY equatorJ2000GridColorChanged)
@@ -69,6 +73,11 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(bool equatorJ2000PartsLabeled	READ getFlagEquatorJ2000Labeled	WRITE setFlagEquatorJ2000Labeled	NOTIFY equatorJ2000PartsLabeledChanged)
 	Q_PROPERTY(Vec3f equatorJ2000LineColor		READ getColorEquatorJ2000Line	WRITE setColorEquatorJ2000Line		NOTIFY equatorJ2000LineColorChanged)
 
+	Q_PROPERTY(bool fixedEquatorLineDisplayed	READ getFlagFixedEquatorLine	WRITE setFlagFixedEquatorLine		NOTIFY fixedEquatorLineDisplayedChanged)
+	Q_PROPERTY(bool fixedEquatorPartsDisplayed	READ getFlagFixedEquatorParts	WRITE setFlagFixedEquatorParts		NOTIFY fixedEquatorPartsDisplayedChanged)
+	Q_PROPERTY(bool fixedEquatorPartsLabeled	READ getFlagFixedEquatorLabeled	WRITE setFlagFixedEquatorLabeled	NOTIFY fixedEquatorPartsLabeledChanged)
+	Q_PROPERTY(Vec3f fixedEquatorLineColor		READ getColorFixedEquatorLine	WRITE setColorFixedEquatorLine		NOTIFY fixedEquatorLineColorChanged)
+
 	Q_PROPERTY(bool eclipticLineDisplayed		READ getFlagEclipticLine	WRITE setFlagEclipticLine		NOTIFY eclipticLineDisplayedChanged)
 	Q_PROPERTY(bool eclipticPartsDisplayed		READ getFlagEclipticParts	WRITE setFlagEclipticParts		NOTIFY eclipticPartsDisplayedChanged)
 	Q_PROPERTY(bool eclipticPartsLabeled		READ getFlagEclipticLabeled	WRITE setFlagEclipticLabeled		NOTIFY eclipticPartsLabeledChanged)
@@ -76,8 +85,16 @@ class GridLinesMgr : public StelModule
 
 	Q_PROPERTY(bool eclipticJ2000LineDisplayed	READ getFlagEclipticJ2000Line	 WRITE setFlagEclipticJ2000Line		NOTIFY eclipticJ2000LineDisplayedChanged)
 	Q_PROPERTY(bool eclipticJ2000PartsDisplayed	READ getFlagEclipticJ2000Parts	 WRITE setFlagEclipticJ2000Parts	NOTIFY eclipticJ2000PartsDisplayedChanged)
-	Q_PROPERTY(bool eclipticJ2000PartsLabeled	READ getFlagEclipticJ2000Labeled WRITE setFlagEclipticJ2000Labeled	NOTIFY eclipticJ2000PartsLabeledChanged)
+	Q_PROPERTY(bool eclipticJ2000PartsLabeled		READ getFlagEclipticJ2000Labeled WRITE setFlagEclipticJ2000Labeled	NOTIFY eclipticJ2000PartsLabeledChanged)
 	Q_PROPERTY(Vec3f eclipticJ2000LineColor		READ getColorEclipticJ2000Line	 WRITE setColorEclipticJ2000Line	NOTIFY eclipticJ2000LineColorChanged)
+
+	Q_PROPERTY(bool invariablePlaneLineDisplayed	READ getFlagInvariablePlaneLine	 WRITE setFlagInvariablePlaneLine	NOTIFY invariablePlaneLineDisplayedChanged)
+	Q_PROPERTY(Vec3f invariablePlaneLineColor	READ getColorInvariablePlaneLine WRITE setColorInvariablePlaneLine	NOTIFY invariablePlaneLineColorChanged)
+
+	Q_PROPERTY(bool solarEquatorLineDisplayed	READ getFlagSolarEquatorLine	 WRITE setFlagSolarEquatorLine		NOTIFY solarEquatorLineDisplayedChanged)
+	Q_PROPERTY(bool solarEquatorPartsDisplayed	READ getFlagSolarEquatorParts	 WRITE setFlagSolarEquatorParts		NOTIFY solarEquatorPartsDisplayedChanged)
+	Q_PROPERTY(bool solarEquatorPartsLabeled	READ getFlagSolarEquatorLabeled  WRITE setFlagSolarEquatorLabeled	NOTIFY solarEquatorPartsLabeledChanged)
+	Q_PROPERTY(Vec3f solarEquatorLineColor		READ getColorSolarEquatorLine	 WRITE setColorSolarEquatorLine		NOTIFY solarEquatorLineColorChanged)
 
 	Q_PROPERTY(bool precessionCirclesDisplayed	READ getFlagPrecessionCircles	WRITE setFlagPrecessionCircles		NOTIFY precessionCirclesDisplayedChanged)
 	Q_PROPERTY(bool precessionPartsDisplayed	READ getFlagPrecessionParts	WRITE setFlagPrecessionParts		NOTIFY precessionPartsDisplayedChanged)
@@ -89,13 +106,16 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(bool meridianPartsLabeled		READ getFlagMeridianLabeled	WRITE setFlagMeridianLabeled		NOTIFY meridianPartsLabeledChanged)
 	Q_PROPERTY(Vec3f meridianLineColor		READ getColorMeridianLine	WRITE setColorMeridianLine		NOTIFY meridianLineColorChanged)
 
-	Q_PROPERTY(bool longitudeLineDisplayed		READ getFlagLongitudeLine	WRITE setFlagLongitudeLine		NOTIFY longitudeLineDisplayedChanged)
-	Q_PROPERTY(bool longitudePartsDisplayed		READ getFlagLongitudeParts	WRITE setFlagLongitudeParts		NOTIFY longitudePartsDisplayedChanged)
-	Q_PROPERTY(bool longitudePartsLabeled		READ getFlagLongitudeLabeled	WRITE setFlagLongitudeLabeled		NOTIFY longitudePartsLabeledChanged)
+	Q_PROPERTY(bool longitudeLineDisplayed	READ getFlagLongitudeLine	WRITE setFlagLongitudeLine		NOTIFY longitudeLineDisplayedChanged)
+	Q_PROPERTY(bool longitudePartsDisplayed	READ getFlagLongitudeParts	WRITE setFlagLongitudeParts		NOTIFY longitudePartsDisplayedChanged)
+	Q_PROPERTY(bool longitudePartsLabeled	READ getFlagLongitudeLabeled	WRITE setFlagLongitudeLabeled		NOTIFY longitudePartsLabeledChanged)
 	Q_PROPERTY(Vec3f longitudeLineColor		READ getColorLongitudeLine	WRITE setColorLongitudeLine		NOTIFY longitudeLineColorChanged)
 
+	Q_PROPERTY(bool quadratureLineDisplayed		READ getFlagQuadratureLine	WRITE setFlagQuadratureLine		NOTIFY quadratureLineDisplayedChanged)
+	Q_PROPERTY(Vec3f quadratureLineColor		READ getColorQuadratureLine	WRITE setColorQuadratureLine		NOTIFY quadratureLineColorChanged)
+
 	Q_PROPERTY(bool horizonLineDisplayed		READ getFlagHorizonLine		WRITE setFlagHorizonLine		NOTIFY horizonLineDisplayedChanged)
-	Q_PROPERTY(bool horizonPartsDisplayed		READ getFlagHorizonParts	WRITE setFlagHorizonParts		NOTIFY horizonPartsDisplayedChanged)
+	Q_PROPERTY(bool horizonPartsDisplayed	READ getFlagHorizonParts	WRITE setFlagHorizonParts		NOTIFY horizonPartsDisplayedChanged)
 	Q_PROPERTY(bool horizonPartsLabeled		READ getFlagHorizonLabeled	WRITE setFlagHorizonLabeled		NOTIFY horizonPartsLabeledChanged)
 	Q_PROPERTY(Vec3f horizonLineColor		READ getColorHorizonLine	WRITE setColorHorizonLine		NOTIFY horizonLineColorChanged)
 
@@ -127,6 +147,11 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(bool circumpolarCirclesDisplayed	READ getFlagCircumpolarCircles	WRITE setFlagCircumpolarCircles		NOTIFY circumpolarCirclesDisplayedChanged)
 	Q_PROPERTY(Vec3f circumpolarCirclesColor	READ getColorCircumpolarCircles	WRITE setColorCircumpolarCircles	NOTIFY circumpolarCirclesColorChanged)
 
+	Q_PROPERTY(bool umbraCircleDisplayed		READ getFlagUmbraCircle		WRITE setFlagUmbraCircle		NOTIFY umbraCircleDisplayedChanged)
+	Q_PROPERTY(Vec3f umbraCircleColor		READ getColorUmbraCircle	WRITE setColorUmbraCircle		NOTIFY umbraCircleColorChanged)
+	Q_PROPERTY(bool penumbraCircleDisplayed		READ getFlagPenumbraCircle	WRITE setFlagPenumbraCircle		NOTIFY penumbraCircleDisplayedChanged)
+	Q_PROPERTY(Vec3f penumbraCircleColor		READ getColorPenumbraCircle	WRITE setColorPenumbraCircle		NOTIFY penumbraCircleColorChanged)
+
 	Q_PROPERTY(bool celestialJ2000PolesDisplayed	READ getFlagCelestialJ2000Poles		WRITE setFlagCelestialJ2000Poles	NOTIFY celestialJ2000PolesDisplayedChanged)
 	Q_PROPERTY(Vec3f celestialJ2000PolesColor	READ getColorCelestialJ2000Poles	WRITE setColorCelestialJ2000Poles	NOTIFY celestialJ2000PolesColorChanged)
 
@@ -139,11 +164,14 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(bool eclipticJ2000PolesDisplayed	READ getFlagEclipticJ2000Poles	WRITE setFlagEclipticJ2000Poles		NOTIFY eclipticJ2000PolesDisplayedChanged)
 	Q_PROPERTY(Vec3f eclipticJ2000PolesColor	READ getColorEclipticJ2000Poles	WRITE setColorEclipticJ2000Poles	NOTIFY eclipticJ2000PolesColorChanged)
 
-	Q_PROPERTY(bool eclipticPolesDisplayed		READ getFlagEclipticPoles	WRITE setFlagEclipticPoles		NOTIFY eclipticPolesDisplayedChanged)
+	Q_PROPERTY(bool eclipticPolesDisplayed		READ getFlagEclipticPoles		WRITE setFlagEclipticPoles		NOTIFY eclipticPolesDisplayedChanged)
 	Q_PROPERTY(Vec3f eclipticPolesColor		READ getColorEclipticPoles	WRITE setColorEclipticPoles		NOTIFY eclipticPolesColorChanged)
 
 	Q_PROPERTY(bool galacticPolesDisplayed		READ getFlagGalacticPoles	WRITE setFlagGalacticPoles		NOTIFY galacticPolesDisplayedChanged)
 	Q_PROPERTY(Vec3f galacticPolesColor		READ getColorGalacticPoles	WRITE setColorGalacticPoles		NOTIFY galacticPolesColorChanged)
+
+	Q_PROPERTY(bool galacticCenterDisplayed		READ getFlagGalacticCenter	WRITE setFlagGalacticCenter		NOTIFY galacticCenterDisplayedChanged)
+	Q_PROPERTY(Vec3f galacticCenterColor		READ getColorGalacticCenter	WRITE setColorGalacticCenter		NOTIFY galacticCenterColorChanged)
 
 	Q_PROPERTY(bool supergalacticPolesDisplayed	READ getFlagSupergalacticPoles	WRITE setFlagSupergalacticPoles		NOTIFY supergalacticPolesDisplayedChanged)
 	Q_PROPERTY(Vec3f supergalacticPolesColor	READ getColorSupergalacticPoles	WRITE setColorSupergalacticPoles	NOTIFY supergalacticPolesColorChanged)
@@ -154,7 +182,7 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(bool equinoxPointsDisplayed		READ getFlagEquinoxPoints	WRITE setFlagEquinoxPoints		NOTIFY equinoxPointsDisplayedChanged)
 	Q_PROPERTY(Vec3f equinoxPointsColor		READ getColorEquinoxPoints	WRITE setColorEquinoxPoints		NOTIFY equinoxPointsColorChanged)
 
-	Q_PROPERTY(bool solsticeJ2000PointsDisplayed	READ getFlagSolsticeJ2000Points		WRITE setFlagSolsticeJ2000Points	NOTIFY solsticeJ2000PointsDisplayedChanged)
+	Q_PROPERTY(bool solsticeJ2000PointsDisplayed	READ getFlagSolsticeJ2000Points	WRITE setFlagSolsticeJ2000Points	NOTIFY solsticeJ2000PointsDisplayedChanged)
 	Q_PROPERTY(Vec3f solsticeJ2000PointsColor	READ getColorSolsticeJ2000Points	WRITE setColorSolsticeJ2000Points	NOTIFY solsticeJ2000PointsColorChanged)
 
 	Q_PROPERTY(bool solsticePointsDisplayed		READ getFlagSolsticePoints	WRITE setFlagSolsticePoints		NOTIFY solsticePointsDisplayedChanged)
@@ -163,14 +191,16 @@ class GridLinesMgr : public StelModule
 	Q_PROPERTY(bool antisolarPointDisplayed		READ getFlagAntisolarPoint	WRITE setFlagAntisolarPoint		NOTIFY antisolarPointDisplayedChanged)
 	Q_PROPERTY(Vec3f antisolarPointColor		READ getColorAntisolarPoint	WRITE setColorAntisolarPoint		NOTIFY antisolarPointColorChanged)
 
+	Q_PROPERTY(bool umbraCenterPointDisplayed	READ getFlagUmbraCenterPoint	WRITE setFlagUmbraCenterPoint		NOTIFY umbraCenterPointDisplayedChanged)
+
 	Q_PROPERTY(bool apexPointsDisplayed		READ getFlagApexPoints		WRITE setFlagApexPoints			NOTIFY apexPointsDisplayedChanged)
 	Q_PROPERTY(Vec3f apexPointsColor		READ getColorApexPoints		WRITE setColorApexPoints		NOTIFY apexPointsColorChanged)
 
-	Q_PROPERTY(int lineThickness			READ getLineThickness		WRITE setLineThickness			NOTIFY lineThicknessChanged)
-	Q_PROPERTY(int partThickness			READ getPartThickness		WRITE setPartThickness			NOTIFY partThicknessChanged)
+	Q_PROPERTY(float lineThickness			READ getLineThickness		WRITE setLineThickness			NOTIFY lineThicknessChanged)
+	Q_PROPERTY(float partThickness			READ getPartThickness		WRITE setPartThickness			NOTIFY partThicknessChanged)
 public:
 	GridLinesMgr();
-	virtual ~GridLinesMgr();
+	virtual ~GridLinesMgr() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -178,7 +208,7 @@ public:
 	//! application settings, and according to the settings there
 	//! sets the visibility of the Equatorial Grids, Ecliptical Grids, Azimuthal Grid, Meridian Line,
 	//! Equator Line and Ecliptic Lines.
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 
 	//! Get the module ID, returns "GridLinesMgr".
 	virtual QString getModuleID() const {return "GridLinesMgr";}
@@ -187,14 +217,14 @@ public:
 	//! Draws the Equatorial Grids, Ecliptical Grids, Azimuthal Grid, Meridian Line, Equator Line,
 	//! Ecliptic Lines, Precession Circles, Conjunction-Opposition Line, east-west vertical and colures according to the
 	//! various flags which control their visibility.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 
 	//! Update time-dependent features.
 	//! Used to control fading when turning on and off the grid lines and great circles.
-	virtual void update(double deltaTime);
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
 
 	//! Used to determine the order in which the various modules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Setter and getters
@@ -238,6 +268,20 @@ public slots:
 	//! GridLinesMgr.setColorEquatorGrid(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setColorEquatorGrid(const Vec3f& newColor);
+
+	//! Setter for displaying the Fixed Equatorial Grid (Hour angle/declination).
+	void setFlagFixedEquatorGrid(const bool displayed);
+	//! Accessor for displaying Fixed Equatorial Grid.
+	bool getFlagFixedEquatorGrid() const;
+	//! Get the current color of the Fixed Equatorial Grid.
+	Vec3f getColorFixedEquatorGrid() const;
+	//! Set the color of the FixedEquatorial Grid.
+	//! @param newColor The color of fixed equatorial grid
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorFixedEquatorGrid(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorFixedEquatorGrid(const Vec3f& newColor);
 
 	//! Setter for displaying Equatorial J2000 Grid.
 	void setFlagEquatorJ2000Grid(const bool displayed);
@@ -353,6 +397,28 @@ public slots:
 	//! @endcode
 	void setColorEquatorJ2000Line(const Vec3f& newColor);
 
+	//! Setter for displaying Fixed Equator Line.
+	void setFlagFixedEquatorLine(const bool displayed);
+	//! Accessor for displaying Fixed Equator Line.
+	bool getFlagFixedEquatorLine() const;
+	//! Setter for displaying Fixed Equator line partitions (hour angles).
+	void setFlagFixedEquatorParts(const bool displayed);
+	//! Accessor for displaying Fixed Equator (hour angles) line partitions.
+	bool getFlagFixedEquatorParts() const;
+	//! Setter for displaying Fixed Equator line partition labels.
+	void setFlagFixedEquatorLabeled(const bool displayed);
+	//! Accessor for displaying Fixed Equator line partition labels.
+	bool getFlagFixedEquatorLabeled() const;
+	//! Get the current color of the Fixed Equator Line.
+	Vec3f getColorFixedEquatorLine() const;
+	//! Set the color of the Fixed Equator Line (hour angles).
+	//! @param newColor The color of fixed equator line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorFixedEquatorLine(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorFixedEquatorLine(const Vec3f& newColor);
+
 	//! Setter for displaying Ecliptic of J2000 Line.
 	void setFlagEclipticJ2000Line(const bool displayed);
 	//! Accessor for displaying Ecliptic of J2000 Line.
@@ -396,6 +462,42 @@ public slots:
 	//! GridLinesMgr.setColorEclipticLine(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setColorEclipticLine(const Vec3f& newColor);
+
+	//! Setter for displaying a line for the Invariable Plane of the Solar System.
+	void setFlagInvariablePlaneLine(const bool displayed);
+	//! Accessor for displaying Invariable Plane Line.
+	bool getFlagInvariablePlaneLine() const;
+	//! Get the current color of the Line for the Invariable Plane.
+	Vec3f getColorInvariablePlaneLine() const;
+	//! Set the color of the Line for the Invariable Plane.
+	//! @param newColor The color of the Invariable Plane line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorInvariablePlaneLine(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorInvariablePlaneLine(const Vec3f& newColor);
+
+	//! Setter for displaying Solar Equator Line.
+	void setFlagSolarEquatorLine(const bool displayed);
+	//! Accessor for displaying Solar Equator Line.
+	bool getFlagSolarEquatorLine() const;
+	//! Setter for displaying Solar Equator line partitions.
+	void setFlagSolarEquatorParts(const bool displayed);
+	//! Accessor for displaying Solar Equator line partitions.
+	bool getFlagSolarEquatorParts() const;
+	//! Setter for displaying Solar Equator line partition labels.
+	void setFlagSolarEquatorLabeled(const bool displayed);
+	//! Accessor for displaying Solar Equator line partition labels.
+	bool getFlagSolarEquatorLabeled() const;
+	//! Get the current color of the Solar Equator Line.
+	Vec3f getColorSolarEquatorLine() const;
+	//! Set the color of the Solar Equator Line.
+	//! @param newColor The color of Solar Equator line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorSolarEquatorLine(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorSolarEquatorLine(const Vec3f& newColor);
 
 	//! Setter for displaying precession circles.
 	void setFlagPrecessionCircles(const bool displayed);
@@ -462,6 +564,20 @@ public slots:
 	//! GridLinesMgr.setColorLongitudeLine(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setColorLongitudeLine(const Vec3f& newColor);
+
+	//! Setter for displaying quadrature line.
+	void setFlagQuadratureLine(const bool displayed);
+	//! Accessor for displaying quadrature line.
+	bool getFlagQuadratureLine() const;
+	//! Get the current color of the quadrature line.
+	Vec3f getColorQuadratureLine() const;
+	//! Set the color of the quadrature line.
+	//! @param newColor The color of quadrature line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorQuadratureLine(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorQuadratureLine(const Vec3f& newColor);
 
 	//! Setter for displaying Horizon Line.
 	void setFlagHorizonLine(const bool displayed);
@@ -609,6 +725,34 @@ public slots:
 	//! @endcode
 	void setColorCircumpolarCircles(const Vec3f& newColor);
 
+	//! Setter for displaying umbra circle.
+	void setFlagUmbraCircle(const bool displayed);
+	//! Accessor for displaying umbra circle.
+	bool getFlagUmbraCircle() const;
+	//! Get the current color of the umbra circle.
+	Vec3f getColorUmbraCircle() const;
+	//! Set the color of the umbra circle.
+	//! @param newColor The color of umbra circle
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorUmbraCircle(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorUmbraCircle(const Vec3f& newColor);
+
+	//! Setter for displaying penumbra circle.
+	void setFlagPenumbraCircle(const bool displayed);
+	//! Accessor for displaying penumbra circle.
+	bool getFlagPenumbraCircle() const;
+	//! Get the current color of the penumbra circle.
+	Vec3f getColorPenumbraCircle() const;
+	//! Set the color of the penumbra circle.
+	//! @param newColor The color of penumbra circle
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorPenumbraCircle(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorPenumbraCircle(const Vec3f& newColor);
+
 	//! Setter for displaying celestial poles of J2000.
 	void setFlagCelestialJ2000Poles(const bool displayed);
 	//! Accessor for displaying celestial poles of J2000.
@@ -692,6 +836,20 @@ public slots:
 	//! GridLinesMgr.setColorGalacticPoles(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setColorGalacticPoles(const Vec3f& newColor);
+
+	//! Setter for displaying galactic center and anticenter markers.
+	void setFlagGalacticCenter(const bool displayed);
+	//! Accessor for displaying galactic center and anticenter markers.
+	bool getFlagGalacticCenter() const;
+	//! Get the current color of the galactic center and anticenter markers.
+	Vec3f getColorGalacticCenter() const;
+	//! Set the color of the galactic center and anticenter markers.
+	//! @param newColor The color of galactic center and anticenter markers
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorGalacticCenter(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorGalacticCenter(const Vec3f& newColor);
 
 	//! Setter for displaying supergalactic poles.
 	void setFlagSupergalacticPoles(const bool displayed);
@@ -777,6 +935,11 @@ public slots:
 	//! @endcode
 	void setColorAntisolarPoint(const Vec3f& newColor);
 
+	//! Setter for displaying the point of the center of umbra.
+	void setFlagUmbraCenterPoint(const bool displayed);
+	//! Accessor for displaying the point of the center of umbra.
+	bool getFlagUmbraCenterPoint() const;
+
 	//! Setter for displaying the Apex and Antapex points, i.e. where the observer planet is heading to or coming from, respectively
 	void setFlagApexPoints(const bool displayed);
 	//! Accessor for displaying Apex/Antapex points.
@@ -793,114 +956,137 @@ public slots:
 
 	//! Set the thickness of lines
 	//! @param thickness of line in pixels
-	void setLineThickness(const int thickness);
+	void setLineThickness(const float thickness);
 	//! Get the thickness of lines
-	int getLineThickness() const;
+	float getLineThickness() const;
 
 	//! Set the thickness of partition lines
 	//! @param thickness of line in pixels
-	void setPartThickness(const int thickness);
+	void setPartThickness(const float thickness);
 	//! Get the thickness of lines
-	int getPartThickness() const;
+	float getPartThickness() const;
 
 signals:
-	void gridlinesDisplayedChanged(const bool) const;
-	void lineThicknessChanged(const int) const;
-	void partThicknessChanged(const int) const;
-	void azimuthalGridDisplayedChanged(const bool) const;
-	void azimuthalGridColorChanged(const Vec3f & newColor) const;
-	void equatorGridDisplayedChanged(const bool displayed) const;
-	void equatorGridColorChanged(const Vec3f & newColor) const;
-	void equatorJ2000GridDisplayedChanged(const bool displayed) const;
-	void equatorJ2000GridColorChanged(const Vec3f & newColor) const;
-	void eclipticGridDisplayedChanged(const bool displayed) const;
-	void eclipticGridColorChanged(const Vec3f & newColor) const;
-	void eclipticJ2000GridDisplayedChanged(const bool displayed) const;
-	void eclipticJ2000GridColorChanged(const Vec3f & newColor) const;
-	void galacticGridDisplayedChanged(const bool displayed) const;
-	void galacticGridColorChanged(const Vec3f & newColor) const;
-	void supergalacticGridDisplayedChanged(const bool displayed) const;
-	void supergalacticGridColorChanged(const Vec3f & newColor) const;
-	void equatorLineDisplayedChanged(const bool displayed) const;
-	void equatorPartsDisplayedChanged(const bool displayed) const;
-	void equatorPartsLabeledChanged(const bool displayed) const;
-	void equatorLineColorChanged(const Vec3f & newColor) const;
-	void equatorJ2000LineDisplayedChanged(const bool displayed) const;
-	void equatorJ2000PartsDisplayedChanged(const bool displayed) const;
-	void equatorJ2000PartsLabeledChanged(const bool displayed) const;
-	void equatorJ2000LineColorChanged(const Vec3f & newColor) const;
-	void eclipticLineDisplayedChanged(const bool displayed) const;
-	void eclipticPartsDisplayedChanged(const bool displayed) const;
-	void eclipticPartsLabeledChanged(const bool displayed) const;
-	void eclipticLineColorChanged(const Vec3f & newColor) const;
-	void eclipticJ2000LineDisplayedChanged(const bool displayed) const;
-	void eclipticJ2000PartsDisplayedChanged(const bool displayed) const;
-	void eclipticJ2000PartsLabeledChanged(const bool displayed) const;
-	void eclipticJ2000LineColorChanged(const Vec3f & newColor) const;
-	void precessionCirclesDisplayedChanged(const bool displayed) const;
-	void precessionPartsDisplayedChanged(const bool displayed) const;
-	void precessionPartsLabeledChanged(const bool displayed) const;
-	void precessionCirclesColorChanged(const Vec3f & newColor) const;
-	void meridianLineDisplayedChanged(const bool displayed) const;
-	void meridianPartsDisplayedChanged(const bool displayed) const;
-	void meridianPartsLabeledChanged(const bool displayed) const;
-	void meridianLineColorChanged(const Vec3f & newColor) const;
-	void longitudeLineDisplayedChanged(const bool displayed) const;
-	void longitudePartsDisplayedChanged(const bool displayed) const;
-	void longitudePartsLabeledChanged(const bool displayed) const;
-	void longitudeLineColorChanged(const Vec3f & newColor) const;
-	void horizonLineDisplayedChanged(const bool displayed) const;
-	void horizonPartsDisplayedChanged(const bool displayed) const;
-	void horizonPartsLabeledChanged(const bool displayed) const;
-	void horizonLineColorChanged(const Vec3f & newColor) const;
-	void galacticEquatorLineDisplayedChanged(const bool displayed) const;
-	void galacticEquatorPartsDisplayedChanged(const bool displayed) const;
-	void galacticEquatorPartsLabeledChanged(const bool displayed) const;
-	void galacticEquatorLineColorChanged(const Vec3f & newColor) const;
-	void supergalacticEquatorLineDisplayedChanged(const bool displayed) const;
-	void supergalacticEquatorPartsDisplayedChanged(const bool displayed) const;
-	void supergalacticEquatorPartsLabeledChanged(const bool displayed) const;
-	void supergalacticEquatorLineColorChanged(const Vec3f & newColor) const;
-	void primeVerticalLineDisplayedChanged(const bool displayed) const;
-	void primeVerticalPartsDisplayedChanged(const bool displayed) const;
-	void primeVerticalPartsLabeledChanged(const bool displayed) const;
-	void primeVerticalLineColorChanged(const Vec3f & newColor) const;
-	void currentVerticalLineDisplayedChanged(const bool displayed) const;
-	void currentVerticalPartsDisplayedChanged(const bool displayed) const;
-	void currentVerticalPartsLabeledChanged(const bool displayed) const;
-	void currentVerticalLineColorChanged(const Vec3f & newColor) const;
-	void colureLinesDisplayedChanged(const bool displayed) const;
-	void colurePartsDisplayedChanged(const bool displayed) const;
-	void colurePartsLabeledChanged(const bool displayed) const;
-	void colureLinesColorChanged(const Vec3f & newColor) const;
-	void circumpolarCirclesDisplayedChanged(const bool displayed) const;
-	void circumpolarCirclesColorChanged(const Vec3f & newColor) const;
-	void celestialJ2000PolesDisplayedChanged(const bool displayed) const;
-	void celestialJ2000PolesColorChanged(const Vec3f & newColor) const;
-	void celestialPolesDisplayedChanged(const bool displayed) const;
-	void celestialPolesColorChanged(const Vec3f & newColor) const;
-	void zenithNadirDisplayedChanged(const bool displayed) const;
-	void zenithNadirColorChanged(const Vec3f & newColor) const;
-	void eclipticJ2000PolesDisplayedChanged(const bool displayed) const;
-	void eclipticJ2000PolesColorChanged(const Vec3f & newColor) const;
-	void eclipticPolesDisplayedChanged(const bool displayed) const;
-	void eclipticPolesColorChanged(const Vec3f & newColor) const;
-	void galacticPolesDisplayedChanged(const bool displayed) const;
-	void galacticPolesColorChanged(const Vec3f & newColor) const;
-	void supergalacticPolesDisplayedChanged(const bool displayed) const;
-	void supergalacticPolesColorChanged(const Vec3f & newColor) const;
-	void equinoxJ2000PointsDisplayedChanged(const bool displayed) const;
-	void equinoxJ2000PointsColorChanged(const Vec3f & newColor) const;
-	void equinoxPointsDisplayedChanged(const bool displayed) const;
-	void equinoxPointsColorChanged(const Vec3f & newColor) const;
-	void solsticeJ2000PointsDisplayedChanged(const bool displayed) const;
-	void solsticeJ2000PointsColorChanged(const Vec3f & newColor) const;
-	void solsticePointsDisplayedChanged(const bool displayed) const;
-	void solsticePointsColorChanged(const Vec3f & newColor) const;
-	void antisolarPointDisplayedChanged(const bool displayed) const;
-	void antisolarPointColorChanged(const Vec3f & newColor) const;
-	void apexPointsDisplayedChanged(const bool displayed) const;
-	void apexPointsColorChanged(const Vec3f & newColor) const;	
+	void gridlinesDisplayedChanged(const bool);
+	void lineThicknessChanged(const float);
+	void partThicknessChanged(const float);
+	void azimuthalGridDisplayedChanged(const bool);
+	void azimuthalGridColorChanged(const Vec3f & newColor);
+	void equatorGridDisplayedChanged(const bool displayed);
+	void equatorGridColorChanged(const Vec3f & newColor);
+	void fixedEquatorGridDisplayedChanged(const bool displayed);
+	void fixedEquatorGridColorChanged(const Vec3f & newColor);
+	void equatorJ2000GridDisplayedChanged(const bool displayed);
+	void equatorJ2000GridColorChanged(const Vec3f & newColor);
+	void eclipticGridDisplayedChanged(const bool displayed);
+	void eclipticGridColorChanged(const Vec3f & newColor);
+	void eclipticJ2000GridDisplayedChanged(const bool displayed);
+	void eclipticJ2000GridColorChanged(const Vec3f & newColor);
+	void galacticGridDisplayedChanged(const bool displayed);
+	void galacticGridColorChanged(const Vec3f & newColor);
+	void supergalacticGridDisplayedChanged(const bool displayed);
+	void supergalacticGridColorChanged(const Vec3f & newColor);
+	void equatorLineDisplayedChanged(const bool displayed);
+	void equatorPartsDisplayedChanged(const bool displayed);
+	void equatorPartsLabeledChanged(const bool displayed);
+	void equatorLineColorChanged(const Vec3f & newColor);
+	void equatorJ2000LineDisplayedChanged(const bool displayed);
+	void equatorJ2000PartsDisplayedChanged(const bool displayed);
+	void equatorJ2000PartsLabeledChanged(const bool displayed);
+	void equatorJ2000LineColorChanged(const Vec3f & newColor);
+	void fixedEquatorLineDisplayedChanged(const bool displayed);
+	void fixedEquatorPartsDisplayedChanged(const bool displayed);
+	void fixedEquatorPartsLabeledChanged(const bool displayed);
+	void fixedEquatorLineColorChanged(const Vec3f & newColor);
+	void eclipticLineDisplayedChanged(const bool displayed);
+	void eclipticPartsDisplayedChanged(const bool displayed);
+	void eclipticPartsLabeledChanged(const bool displayed);
+	void eclipticLineColorChanged(const Vec3f & newColor);
+	void invariablePlaneLineDisplayedChanged(const bool displayed);
+	//void invariablePlanePartsDisplayedChanged(const bool displayed);
+	//void invariablePlanePartsLabeledChanged(const bool displayed);
+	void invariablePlaneLineColorChanged(const Vec3f & newColor);
+	void solarEquatorLineDisplayedChanged(const bool displayed);
+	void solarEquatorPartsDisplayedChanged(const bool displayed);
+	void solarEquatorPartsLabeledChanged(const bool displayed);
+	void solarEquatorLineColorChanged(const Vec3f & newColor);
+	void eclipticJ2000LineDisplayedChanged(const bool displayed);
+	void eclipticJ2000PartsDisplayedChanged(const bool displayed);
+	void eclipticJ2000PartsLabeledChanged(const bool displayed);
+	void eclipticJ2000LineColorChanged(const Vec3f & newColor);
+	void precessionCirclesDisplayedChanged(const bool displayed);
+	void precessionPartsDisplayedChanged(const bool displayed);
+	void precessionPartsLabeledChanged(const bool displayed);
+	void precessionCirclesColorChanged(const Vec3f & newColor);
+	void meridianLineDisplayedChanged(const bool displayed);
+	void meridianPartsDisplayedChanged(const bool displayed);
+	void meridianPartsLabeledChanged(const bool displayed);
+	void meridianLineColorChanged(const Vec3f & newColor);
+	void longitudeLineDisplayedChanged(const bool displayed);
+	void longitudePartsDisplayedChanged(const bool displayed);
+	void longitudePartsLabeledChanged(const bool displayed);
+	void longitudeLineColorChanged(const Vec3f & newColor);
+	void quadratureLineDisplayedChanged(const bool displayed);
+	void quadratureLineColorChanged(const Vec3f & newColor);
+	void horizonLineDisplayedChanged(const bool displayed);
+	void horizonPartsDisplayedChanged(const bool displayed);
+	void horizonPartsLabeledChanged(const bool displayed);
+	void horizonLineColorChanged(const Vec3f & newColor);
+	void galacticEquatorLineDisplayedChanged(const bool displayed);
+	void galacticEquatorPartsDisplayedChanged(const bool displayed);
+	void galacticEquatorPartsLabeledChanged(const bool displayed);
+	void galacticEquatorLineColorChanged(const Vec3f & newColor);
+	void supergalacticEquatorLineDisplayedChanged(const bool displayed);
+	void supergalacticEquatorPartsDisplayedChanged(const bool displayed);
+	void supergalacticEquatorPartsLabeledChanged(const bool displayed);
+	void supergalacticEquatorLineColorChanged(const Vec3f & newColor);
+	void primeVerticalLineDisplayedChanged(const bool displayed);
+	void primeVerticalPartsDisplayedChanged(const bool displayed);
+	void primeVerticalPartsLabeledChanged(const bool displayed);
+	void primeVerticalLineColorChanged(const Vec3f & newColor);
+	void currentVerticalLineDisplayedChanged(const bool displayed);
+	void currentVerticalPartsDisplayedChanged(const bool displayed);
+	void currentVerticalPartsLabeledChanged(const bool displayed);
+	void currentVerticalLineColorChanged(const Vec3f & newColor);
+	void colureLinesDisplayedChanged(const bool displayed);
+	void colurePartsDisplayedChanged(const bool displayed);
+	void colurePartsLabeledChanged(const bool displayed);
+	void colureLinesColorChanged(const Vec3f & newColor);
+	void circumpolarCirclesDisplayedChanged(const bool displayed);
+	void circumpolarCirclesColorChanged(const Vec3f & newColor);
+	void umbraCircleDisplayedChanged(const bool displayed);
+	void umbraCircleColorChanged(const Vec3f & newColor);
+	void penumbraCircleDisplayedChanged(const bool displayed);
+	void penumbraCircleColorChanged(const Vec3f & newColor);
+	void celestialJ2000PolesDisplayedChanged(const bool displayed);
+	void celestialJ2000PolesColorChanged(const Vec3f & newColor);
+	void celestialPolesDisplayedChanged(const bool displayed);
+	void celestialPolesColorChanged(const Vec3f & newColor);
+	void zenithNadirDisplayedChanged(const bool displayed);
+	void zenithNadirColorChanged(const Vec3f & newColor);
+	void eclipticJ2000PolesDisplayedChanged(const bool displayed);
+	void eclipticJ2000PolesColorChanged(const Vec3f & newColor);
+	void eclipticPolesDisplayedChanged(const bool displayed);
+	void eclipticPolesColorChanged(const Vec3f & newColor);
+	void galacticPolesDisplayedChanged(const bool displayed);
+	void galacticPolesColorChanged(const Vec3f & newColor);
+	void galacticCenterDisplayedChanged(const bool displayed);
+	void galacticCenterColorChanged(const Vec3f & newColor);
+	void supergalacticPolesDisplayedChanged(const bool displayed);
+	void supergalacticPolesColorChanged(const Vec3f & newColor);
+	void equinoxJ2000PointsDisplayedChanged(const bool displayed);
+	void equinoxJ2000PointsColorChanged(const Vec3f & newColor);
+	void equinoxPointsDisplayedChanged(const bool displayed);
+	void equinoxPointsColorChanged(const Vec3f & newColor);
+	void solsticeJ2000PointsDisplayedChanged(const bool displayed);
+	void solsticeJ2000PointsColorChanged(const Vec3f & newColor);
+	void solsticePointsDisplayedChanged(const bool displayed);
+	void solsticePointsColorChanged(const Vec3f & newColor);
+	void antisolarPointDisplayedChanged(const bool displayed);
+	void antisolarPointColorChanged(const Vec3f & newColor);
+	void umbraCenterPointDisplayedChanged(const bool displayed);
+	void apexPointsDisplayedChanged(const bool displayed);
+	void apexPointsColorChanged(const Vec3f & newColor);
 
 private slots:
 	//! Re-translate the labels of the great circles.
@@ -908,7 +1094,7 @@ private slots:
 	void updateLabels();
 	//! Connect the earth shared pointer.
 	//! Must be connected to SolarSystem::solarSystemDataReloaded()
-	void connectEarthFromSolarSystem();
+	void connectSolarSystem();
 
 	//! Connect from StelApp to reset all fonts of the grids, lines and points.
 	void setFontSizeFromApp(int size);
@@ -918,6 +1104,7 @@ private:
 	bool gridlinesDisplayed;		// master switch to switch off all grids/lines. (useful for oculars plugin)
 	SkyGrid * equGrid;			// Equatorial grid
 	SkyGrid * equJ2000Grid;			// Equatorial J2000 grid
+	SkyGrid * fixedEquatorialGrid;		// Fixed Equatorial grid (hour angle/declination)
 	SkyGrid * galacticGrid;			// Galactic grid
 	SkyGrid * supergalacticGrid;		// Supergalactic grid
 	SkyGrid * eclGrid;			// Ecliptic of Date grid
@@ -925,12 +1112,16 @@ private:
 	SkyGrid * aziGrid;			// Azimuthal grid
 	SkyLine * equatorLine;			// Celestial Equator line
 	SkyLine * equatorJ2000Line;		// Celestial Equator line of J2000
+	SkyLine * fixedEquatorLine;		// Fixed Celestial Equator line (hour angles)
 	SkyLine * eclipticLine;			// Ecliptic line
 	SkyLine * eclipticJ2000Line;		// Ecliptic line of J2000
+	SkyLine * invariablePlaneLine;		// Invariable Plane of the Solar System (WGCCRE2015 report)
+	SkyLine * solarEquatorLine;		// Projected Solar equator (WGCCRE2015 report)
 	SkyLine * precessionCircleN;		// Northern precession circle
 	SkyLine * precessionCircleS;		// Southern precession circle
 	SkyLine * meridianLine;			// Meridian line
 	SkyLine * longitudeLine;		// Opposition/conjunction longitude line
+	SkyLine * quadratureLine;		// Quadrature line
 	SkyLine * horizonLine;			// Horizon line
 	SkyLine * galacticEquatorLine;		// line depicting the Galactic equator as defined by the IAU definition of Galactic coordinates (System II, 1958)
 	SkyLine * supergalacticEquatorLine;	// line depicting the Supergalactic equator
@@ -940,18 +1131,22 @@ private:
 	SkyLine * colureLine_2;			// Second Colure line (6/18h)
 	SkyLine * circumpolarCircleN;		// Northern circumpolar circle
 	SkyLine * circumpolarCircleS;		// Southern circumpolar circle
+	SkyLine * umbraCircle;			// Umbra circle (Earth shadow in Lunar distance)
+	SkyLine * penumbraCircle;		// Penumbra circle (Earth partial shadow in Lunar distance)
 	SkyPoint * celestialJ2000Poles;		// Celestial poles of J2000
 	SkyPoint * celestialPoles;		// Celestial poles
 	SkyPoint * zenithNadir;			// Zenith and nadir
 	SkyPoint * eclipticJ2000Poles;		// Ecliptic poles of J2000
 	SkyPoint * eclipticPoles;		// Ecliptic poles
 	SkyPoint * galacticPoles;		// Galactic poles
+	SkyPoint * galacticCenter;		// Galactic center and anticenter
 	SkyPoint * supergalacticPoles;		// Supergalactic poles
 	SkyPoint * equinoxJ2000Points;		// Equinox points of J2000
 	SkyPoint * equinoxPoints;		// Equinox points
 	SkyPoint * solsticeJ2000Points;		// Solstice points of J2000
 	SkyPoint * solsticePoints;		// Solstice points
 	SkyPoint * antisolarPoint;		// Antisolar point
+	SkyPoint * umbraCenterPoint;		// The point of the center of umbra
 	SkyPoint * apexPoints;			// Apex and Antapex points, i.e. the point where the observer planet is moving to or receding from	
 };
 

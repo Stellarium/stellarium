@@ -25,6 +25,7 @@
 #define STELDIALOG_P_HPP
 
 #include "StelPropertyMgr.hpp"
+#include "AngleSpinBox.hpp"
 #include <QAbstractButton>
 #include <QComboBox>
 #include <QSpinBox>
@@ -136,6 +137,21 @@ protected slots:
 	virtual void onPropertyChanged(const QVariant& value) Q_DECL_OVERRIDE;
 private:
 	QDoubleSpinBox* spin;
+};
+
+//! A StelPropertyProxy that works with AngleSpinBox widgets.
+//! When the property changes, the widget's value is updated, while preventing widget signals to be sent.
+//! This avoids emitting the valueChanged() signal, which would unnecessarily set the property value again, which may lead to problems.
+class AngleSpinBoxStelPropertyConnectionHelper : public StelPropertyProxy
+{
+	Q_OBJECT
+public:
+	AngleSpinBoxStelPropertyConnectionHelper(StelProperty* prop,AngleSpinBox* spin);
+
+protected slots:
+	virtual void onPropertyChanged(const QVariant& value) Q_DECL_OVERRIDE;
+private:
+	AngleSpinBox* spin;
 };
 
 class QSliderStelPropertyConnectionHelper : public StelPropertyProxy

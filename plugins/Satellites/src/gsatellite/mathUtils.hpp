@@ -38,7 +38,6 @@ double AcTan(double sinx, double cosx);
 
 //! Returns square of a double
 //! @ingroup satellites
-double Sqr(double arg);
-
+inline double Sqr(double arg){ return(arg*arg);}
 
 #endif // MATHUTILS_HPP

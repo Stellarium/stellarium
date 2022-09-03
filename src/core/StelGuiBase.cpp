@@ -18,8 +18,6 @@
  */
 
 #include "StelGuiBase.hpp"
-#include "StelMainView.hpp"
-#include "StelTranslator.hpp"
 #include <QAction>
 
 
@@ -29,5 +27,5 @@ StelGuiBase::StelGuiBase()
 
 void StelGuiBase::init(QGraphicsWidget *atopLevelGraphicsWidget)
 {
-	Q_UNUSED(atopLevelGraphicsWidget);
+	Q_UNUSED(atopLevelGraphicsWidget)
 }

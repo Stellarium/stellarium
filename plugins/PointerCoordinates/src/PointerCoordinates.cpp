@@ -24,12 +24,9 @@
 #include "StelCore.hpp"
 #include "StelMainView.hpp"
 #include "SkyGui.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelFileMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelObjectMgr.hpp"
 #include "StelUtils.hpp"
 #include "SolarSystem.hpp"
 #include "PointerCoordinates.hpp"
@@ -99,7 +96,8 @@ void PointerCoordinates::init()
 	// populate settings from main config file.
 	loadConfiguration();
 
-	addAction("actionShow_MousePointer_Coordinates", N_("Pointer Coordinates"), N_("Show coordinates of the mouse pointer"), "enabled", "");
+	addAction("actionShow_MousePointer_Coordinates",        N_("Pointer Coordinates"), N_("Show coordinates of the mouse pointer"), "enabled", "");
+	addAction("actionShow_MousePointer_Coordinates_dialog", N_("Pointer Coordinates"), N_("Show settings dialog"), mainWindow, "visible");
 
 	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), this, SLOT(saveSettings()));
 
@@ -109,11 +107,6 @@ void PointerCoordinates::init()
 	setFlagShowCrossedLines(flagShowCrossedLines);
 }
 
-void PointerCoordinates::deinit()
-{
-	//
-}
-
 void PointerCoordinates::draw(StelCore *core)
 {
 	if (!isEnabled())
@@ -121,7 +114,7 @@ void PointerCoordinates::draw(StelCore *core)
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
 	StelPainter sPainter(prj);
-	sPainter.setColor(textColor[0], textColor[1], textColor[2], 1.f);
+	sPainter.setColor(textColor, 1.f);
 	font.setPixelSize(getFontSize());
 	sPainter.setFont(font);
 
@@ -226,7 +219,7 @@ void PointerCoordinates::draw(StelCore *core)
 		{
 			double lambda, beta;
 			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition, StelCore::RefractionOff));
-			StelUtils::equToEcl(cx, cy, core->getCurrentPlanet()->getRotObliquity(core->getJDE()), &lambda, &beta); // Calculate ecliptic position and show it...
+			StelUtils::equToEcl(cx, cy, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE()), &lambda, &beta); // Calculate ecliptic position and show it...
 			if (lambda<0) lambda+=2.0*M_PI;
 			coordsSystem = qc_("Ecl. Long/Lat", "abbreviated in the plugin");
 			if (withDecimalDegree)
@@ -245,7 +238,7 @@ void PointerCoordinates::draw(StelCore *core)
 		{
 			double lambda, beta;
 			StelUtils::rectToSphe(&cx,&cy, mousePosition);
-			StelUtils::equToEcl(cx, cy, core->getCurrentPlanet()->getRotObliquity(2451545.0), &lambda, &beta); // Calculate ecliptic position and show it...
+			StelUtils::equToEcl(cx, cy, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0), &lambda, &beta); // Calculate ecliptic position and show it...
 			if (lambda<0) lambda+=2.0*M_PI;
 			coordsSystem = qc_("Ecl. Long/Lat (J2000.0)", "abbreviated in the plugin");
 			if (withDecimalDegree)
@@ -288,7 +281,7 @@ void PointerCoordinates::draw(StelCore *core)
 	{
 		constel=QString(" (%1)").arg(core->getIAUConstellation(core->j2000ToEquinoxEqu(mousePosition)));
 	}
-	QString coordsText = QString("%1: %2/%3%4").arg(coordsSystem).arg(cxt).arg(cyt).arg(constel);
+	QString coordsText = QString("%1: %2/%3%4").arg(coordsSystem, cxt, cyt, constel);
 	x = getCoordinatesPlace(coordsText).first;
 	y = getCoordinatesPlace(coordsText).second;
 	if (getCurrentCoordinatesPlace()!=Custom)
@@ -393,7 +386,9 @@ void PointerCoordinates::setFlagShowCoordinatesButton(bool b)
 							       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_On.png"),
 							       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_Off.png"),
 							       QPixmap(":/graphicGui/miscGlow32x32.png"),
-							       "actionShow_MousePointer_Coordinates");
+							       "actionShow_MousePointer_Coordinates",
+							       false,
+							       "actionShow_MousePointer_Coordinates_dialog");
 			}
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		} else {
@@ -407,12 +402,7 @@ void PointerCoordinates::setFlagShowCoordinatesButton(bool b)
 void PointerCoordinates::setCurrentCoordinatesPlaceKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinatesPlace"));
-	CoordinatesPlace coordPlace = static_cast<CoordinatesPlace>(en.keyToValue(key.toLatin1().data()));
-	if (coordPlace<0)
-	{
-		qWarning() << "[PointerCoordinates] Unknown coordinates place: " << key << "setting \"TopRight\" instead";
-		coordPlace = TopRight;
-	}
+	CoordinatesPlace coordPlace = static_cast<CoordinatesPlace>(qMax(0, en.keyToValue(key.toLatin1().data())));
 	setCurrentCoordinatesPlace(coordPlace);
 }
 
@@ -425,12 +415,7 @@ QString PointerCoordinates::getCurrentCoordinatesPlaceKey() const
 void PointerCoordinates::setCurrentCoordinateSystemKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinateSystem"));
-	CoordinateSystem coordSystem = static_cast<CoordinateSystem>(en.keyToValue(key.toLatin1().data()));
-	if (coordSystem<0)
-	{
-		qWarning() << "[PointerCoordinates] Unknown coordinate system: " << key << "setting \"RaDecJ2000\" instead";
-		coordSystem = RaDecJ2000;
-	}
+	CoordinateSystem coordSystem = static_cast<CoordinateSystem>(qMax(0, en.keyToValue(key.toLatin1().data())));
 	setCurrentCoordinateSystem(coordSystem);
 }
 

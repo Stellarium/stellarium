@@ -60,7 +60,7 @@ class CompletionListModel : public QStringListModel
 public:
 	CompletionListModel(QObject* parent=Q_NULLPTR);
 	CompletionListModel(const QStringList & strings, QObject* parent =Q_NULLPTR);
-	~CompletionListModel();
+	~CompletionListModel() Q_DECL_OVERRIDE;
 
 	QString getSelected(void) const;
 	void setValues(const QStringList&, const QStringList&);
@@ -69,12 +69,12 @@ public:
 	void appendRecentValues(const QStringList&);
 	void clearValues();
 
-	QStringList getValues(void) { return values; };
-	QStringList getRecentValues(void) { return recentValues; };
+	QStringList getValues(void) { return values; }
+	QStringList getRecentValues(void) { return recentValues; }
 	int getSelectedIdx() { return selectedIdx; }
 
 	// Bold recent objects
-	QVariant data(const QModelIndex &index, int role) const;
+	QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
 
 public slots:
 	void selectNext();
@@ -104,8 +104,6 @@ class SearchDialog : public StelDialog
 	Q_PROPERTY(bool simbadGetTypes  READ getSimbadGetsTypes  WRITE setSimbadGetsTypes  NOTIFY simbadGetsTypesChanged)
 	Q_PROPERTY(bool simbadGetDims   READ getSimbadGetsDims   WRITE setSimbadGetsDims   NOTIFY simbadGetsDimsChanged)
 
-	Q_ENUMS(CoordinateSystem)
-
 public:
 	//! Available coordinate systems
 	enum CoordinateSystem
@@ -118,12 +116,11 @@ public:
 		ecliptic,
 		eclipticJ2000
 	};
+	Q_ENUM(CoordinateSystem)
 
 	SearchDialog(QObject* parent);
-	virtual ~SearchDialog();
-	//! Notify that the application style changed
-	void styleChanged();
-	bool eventFilter(QObject *object, QEvent *event);
+	virtual ~SearchDialog() Q_DECL_OVERRIDE;
+	virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
 
 	//! Replaces all occurences of substrings describing Greek letters (i.e. "alpha", "beta", ...)
 	//! with the actual Greek unicode characters.
@@ -144,41 +141,43 @@ signals:
 	void simbadGetsTypesChanged(bool b);
 	void simbadGetsDimsChanged(bool b);
 
-
 public slots:
-	void retranslate();
+	virtual void retranslate() Q_DECL_OVERRIDE;
+	//! On the first call with "true" populates the window contents. Also sets focus to entry line.
+	virtual void setVisible(bool v) Q_DECL_OVERRIDE;
 	//! This style only displays the text search field and the search button
 	void setSimpleStyle();
 
 	//! Set the current coordinate system
-	void setCurrentCoordinateSystem(CoordinateSystem cs)
+	void setCurrentCoordinateSystem(SearchDialog::CoordinateSystem cs)
 	{
 		currentCoordinateSystem = cs;
 	}
-	//! Get the current coordinate system
-	CoordinateSystem getCurrentCoordinateSystem() const
-	{
-		return currentCoordinateSystem;
-	}
-	//! Get the current coordinate system key
-	QString getCurrentCoordinateSystemKey(void) const;
 	//! Set the current coordinate system from its key
 	void setCurrentCoordinateSystemKey(QString key);
+	//! Called when user wants to change recent search list size
+	void setRecentSearchSize(int maxSize);
 
 	void setCoordinateSystem(int csID);
 	void populateCoordinateSystemsList();
 	void populateCoordinateAxis();
 	void populateRecentSearch();
 
+public:
+	//! Get the current coordinate system
+	SearchDialog::CoordinateSystem getCurrentCoordinateSystem() const
+	{
+	    return currentCoordinateSystem;
+	}
+	//! Get the current coordinate system key
+	QString getCurrentCoordinateSystemKey(void) const;
 	//! Returns current max size of recent search list
 	int  getRecentSearchSize () const { return recentObjectSearchesData.maxSize;}
-	//! Called when user wants to change recent search list size
-	void setRecentSearchSize(int maxSize);
 
 protected:
 	Ui_searchDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 
 private slots:
 	void greekLetterClicked();
@@ -193,17 +192,19 @@ private slots:
 
 	void gotoObject();
 	void gotoObject(const QString& nameI18n);
+	void gotoObject(const QString& nameI18n, const QString& objType);
 	// for going from list views
 	void gotoObject(const QModelIndex &modelIndex);
+	void gotoObjectWithType(const QModelIndex &modelIndex);
 
 	void searchListClear();
+	void refreshFocus(bool state);
 
 	//! Called when the user edit the manual position controls
 	void manualPositionChanged();
 
 	//! Whether to use SIMBAD for searches or not.
 	void enableSimbadSearch(bool enable);
-	bool simbadSearchEnabled() const {return useSimbad;}
 
 	//! Whether to use autofill for start of words or not.
 	void enableStartOfWordsAutofill(bool enable);
@@ -232,14 +233,6 @@ private slots:
 
 	void changeTab(int index);
 
-	int  getSimbadQueryDist () const { return simbadDist;}
-	int  getSimbadQueryCount() const { return simbadCount;}
-	bool getSimbadGetsIds   () const { return simbadGetIds;}
-	bool getSimbadGetsSpec  () const { return simbadGetSpec;}
-	bool getSimbadGetsMorpho() const { return simbadGetMorpho;}
-	bool getSimbadGetsTypes () const { return simbadGetTypes;}
-	bool getSimbadGetsDims  () const { return simbadGetDims;}
-
 	void setSimbadQueryDist(int dist);
 	void setSimbadQueryCount(int count);
 	void setSimbadGetsIds(bool b);
@@ -255,6 +248,15 @@ private slots:
 	void recentSearchClearDataClicked();
 
 private:
+	bool simbadSearchEnabled() const {return useSimbad;}
+	int  getSimbadQueryDist () const { return simbadDist;}
+	int  getSimbadQueryCount() const { return simbadCount;}
+	bool getSimbadGetsIds   () const { return simbadGetIds;}
+	bool getSimbadGetsSpec  () const { return simbadGetSpec;}
+	bool getSimbadGetsMorpho() const { return simbadGetMorpho;}
+	bool getSimbadGetsTypes () const { return simbadGetTypes;}
+	bool getSimbadGetsDims  () const { return simbadGetDims;}
+
 	class SearchDialogStaticData
 	{
 	public:
@@ -323,6 +325,8 @@ private:
 	bool simbadGetTypes;  //!< get object types
 	bool simbadGetDims;   //!< get dimensions
 
+	bool shiftPressed;   //!< follow Shift button status
+
 	void populateSimbadServerList();
 
 	// The current coordinate system
@@ -343,13 +347,9 @@ private:
 	//! Shrink list if needed
 	void adjustRecentList(int maxSize);
 	//! Display search per user preference
-	void adjustMatchesResult(QStringList &allMatches,
-				 QStringList& recentMatches,
-				 QStringList& matches,
-				 int maxNbItem);
+	void adjustMatchesResult(QStringList &allMatches, QStringList& recentMatches, QStringList& matches, int maxNbItem);
 	//! Update searches result display and reset selectedIdx = 0
-	void resetSearchResultDisplay(QStringList allMatches,
-				      QStringList recentMatches);
+	void resetSearchResultDisplay(QStringList allMatches, QStringList recentMatches);
 	//! Decide if push button should be enabled
 	void setPushButtonGotoSearch();
 	//! Default maxNbItem when matching objects
@@ -364,9 +364,7 @@ public:
 	//! @param maxNbItem the maximum number of returned object names.
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object names by order of recent searches, or an empty list if nothing match
-	QStringList listMatchingRecentObjects(const QString& objPrefix,
-					      int maxNbItem=20,
-					      bool useStartOfWords=false) const;
+	QStringList listMatchingRecentObjects(const QString& objPrefix, int maxNbItem=20, bool useStartOfWords=false) const;
 };
 
 #endif // _SEARCHDIALOG_HPP

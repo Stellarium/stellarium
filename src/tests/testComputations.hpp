@@ -40,11 +40,15 @@ private slots:
 	void testVector2Operators();
 	void testVector3Operators();
 	void testIntMod();
+	void testIntDiv();
+	void testIntFloorDiv();
 	void testFloatMod();
 	void testDoubleMod();
 	void testExp();
 	void testACos();
 	void testSign();
+	void testInterpolation();
+	void testIsWithin();
 };
 
 #endif // _TESTCOMPUTATIONS_HPP

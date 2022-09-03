@@ -37,8 +37,9 @@ class QSettings;
 struct SceneInfo
 {
 	SceneInfo() : isValid(false),id(),fullPath(),name(),author(),description(),copyright(),landscapeName(),modelScenery(),modelGround(),vertexOrder(),vertexOrderEnum(StelOBJ::XYZ),
-		camNearZ(0.1f),camFarZ(1000.0f),shadowFarZ(1000.0f),shadowSplitWeight(0.5f),location(),lookAt_fov(0.0f,0.0f,25.0f),eyeLevel(0.0),
-		altitudeFromModel(false),startPositionFromModel(false),groundNullHeightFromModel(false),groundNullHeight(0.0),
+		camNearZ(0.1f),camFarZ(1000.0f),shadowFarZ(1000.0f),shadowSplitWeight(0.5f),location(),lookAt_fov(0.0f,0.0f,25.0f),eyeLevel(0.0),modelWorldOffset(0.),startWorldOffset(0.),
+		relativeStartPosition(0.),altitudeFromModel(false),startPositionFromModel(false),groundNullHeightFromModel(false),
+		obj2gridMatrix(Mat4d::identity()),zRotateMatrix(Mat4d::identity()),groundNullHeight(0.0),
 		transparencyThreshold(0.0f),sceneryGenerateNormals(false),groundGenerateNormals(false)
 	{}
 	//! If this is a valid sceneInfo object loaded from file

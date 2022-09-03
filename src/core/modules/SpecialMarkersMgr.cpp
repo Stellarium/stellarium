@@ -36,10 +36,11 @@ public:
 	{
 		FOV_CENTER,
 		FOV_CIRCULAR,
-		FOR_RECTANGULAR
+		FOV_RECTANGULAR,
+		COMPASS_MARKS
 	};
 	SpecialSkyMarker(SKY_MARKER_TYPE _marker_type = FOV_CENTER);
-	virtual ~SpecialSkyMarker();
+	virtual ~SpecialSkyMarker(){}
 	void draw(StelCore* core) const;
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() const {return color;}
@@ -67,15 +68,13 @@ SpecialSkyMarker::SpecialSkyMarker(SKY_MARKER_TYPE _marker_type) : marker_type(_
 	{
 		case FOV_CENTER:
 		case FOV_CIRCULAR:
-		case FOR_RECTANGULAR:
+		case FOV_RECTANGULAR:
 			frameType = StelCore::FrameEquinoxEqu;
-			break;		
+			break;
+		case COMPASS_MARKS:
+			frameType = StelCore::FrameAltAz;
+			break;
 	}
-}
-
-SpecialSkyMarker::~SpecialSkyMarker()
-{
-	//
 }
 
 void SpecialSkyMarker::draw(StelCore *core) const
@@ -88,7 +87,8 @@ void SpecialSkyMarker::draw(StelCore *core) const
 	// Initialize a painter and set openGL state
 	StelPainter sPainter(prj);
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-	sPainter.setColor(color);
+	sPainter.setBlending(true);
+	sPainter.setColor(color, fader.getInterstate());
 	Vec2i centerScreen(prj->getViewportPosX() + prj->getViewportWidth() / 2, prj->getViewportPosY() + prj->getViewportHeight() / 2);
 
 	/////////////////////////////////////////////////
@@ -113,7 +113,7 @@ void SpecialSkyMarker::draw(StelCore *core) const
 		case FOV_CIRCULAR:
 		{
 			const double pixelsPerRad = static_cast<double>(prj->getPixelPerRadAtCenter());
-			sPainter.drawCircle(centerScreen[0], centerScreen[1], 0.5f * pixelsPerRad * static_cast<float>(M_PI/180) * (angularSize[0]));
+			sPainter.drawCircle(centerScreen[0], centerScreen[1], 0.5f * static_cast<float>((M_PI/180.) * pixelsPerRad * angularSize[0]));
 
 			/*
 			 * NOTE: uncomment the code for display FOV value in top right corner of marker
@@ -128,7 +128,7 @@ void SpecialSkyMarker::draw(StelCore *core) const
 			*/
 		}
 			break;
-		case FOR_RECTANGULAR:
+		case FOV_RECTANGULAR:
 		{
 			QPoint a, b;
 			//const double fovRatio = qMax(angularSize[0], angularSize[1])/static_cast<double>(params.fov);
@@ -164,9 +164,53 @@ void SpecialSkyMarker::draw(StelCore *core) const
 			*/
 		}
 			break;
+		case COMPASS_MARKS:
+		{
+			Vec3d pos, screenPos;
+			const int f = (StelApp::getInstance().getFlagSouthAzimuthUsage() ? 180 : 0);
+			const float ppx = static_cast<float>(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
+			sPainter.setLineSmooth(true);
+
+			for(int i=0; i<360; i++)
+			{
+				double a = i*(M_PI/180);
+				pos.set(sin(a),cos(a), 0.);
+				double h = 6.; // height of tickmark endpoint, arcminutes
+				if (i % 15 == 0)
+				{
+					h = 15.;  // the size of the mark every 15 degrees remains small: it is labeled!
+
+					QString s = QString("%1°").arg((i+90+f)%360);
+
+					Vec3d target(pos[0], pos[1], tan(h/60.*M_PI/180.)); target.normalize();
+					Vec3d screenPos, screenTgt;
+					prj->project(pos, screenPos);
+					prj->project(target, screenTgt);
+					double dx=screenTgt[0]-screenPos[0];
+					double dy=screenTgt[1]-screenPos[1];
+					float textAngle=static_cast<float>(atan2(dx, dy));
+					float wx = ppx*sPainter.getFontMetrics().boundingRect(s).width() *0.5f;
+					float wy = ppx*sPainter.getFontMetrics().height() *0.25f;
+
+					// Gravity labels look outright terrible here! Disable them.
+					sPainter.drawText(target, s, -textAngle*180.f/M_PI, -wx, wy, true);
+				}
+				else if (i % 5 == 0)
+				{
+					h = 30.;  // the size of the mark every 5 degrees
+				}
+
+				// Limit arcs to those that are visible for improved performance
+				if (prj->project(pos, screenPos) &&
+				     screenPos[0]>prj->getViewportPosX() && screenPos[0] < prj->getViewportPosX() + prj->getViewportWidth()) {
+					Vec3d target(pos[0], pos[1], tan(h/60.*M_PI/180.)); target.normalize();
+					sPainter.drawGreatCircleArc(pos, target, Q_NULLPTR);
+				}
+			}
+		}
+			break;
 	}
 }
-
 
 SpecialMarkersMgr::SpecialMarkersMgr()
 {
@@ -174,7 +218,8 @@ SpecialMarkersMgr::SpecialMarkersMgr()
 
 	fovCenterMarker = new SpecialSkyMarker(SpecialSkyMarker::FOV_CENTER);
 	fovCircularMarker = new SpecialSkyMarker(SpecialSkyMarker::FOV_CIRCULAR);
-	fovRectangularMarker = new SpecialSkyMarker(SpecialSkyMarker::FOR_RECTANGULAR);
+	fovRectangularMarker = new SpecialSkyMarker(SpecialSkyMarker::FOV_RECTANGULAR);
+	compassMarks = new SpecialSkyMarker(SpecialSkyMarker::COMPASS_MARKS);
 }
 
 SpecialMarkersMgr::~SpecialMarkersMgr()
@@ -182,6 +227,7 @@ SpecialMarkersMgr::~SpecialMarkersMgr()
 	delete fovCenterMarker;
 	delete fovCircularMarker;
 	delete fovRectangularMarker;
+	delete compassMarks;
 }
 
 /*************************************************************************
@@ -207,17 +253,20 @@ void SpecialMarkersMgr::init()
 	setFOVRectangularMarkerWidth(conf->value("viewing/width_fov_rectangular_marker", 4.0).toDouble());
 	setFOVRectangularMarkerHeight(conf->value("viewing/height_fov_rectangular_marker", 3.0).toDouble());
 	setFOVRectangularMarkerRotationAngle(conf->value("viewing/rot_fov_rectangular_marker", 0.0).toDouble());
+	setFlagCompassMarks(conf->value("viewing/flag_compass_marks").toBool());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color", "0.5,0.5,0.7").toString();
 	setColorFOVCenterMarker(Vec3f(conf->value("color/fov_center_marker_color", defaultColor).toString()));
 	setColorFOVCircularMarker(Vec3f(conf->value("color/fov_circular_marker_color", defaultColor).toString()));
 	setColorFOVRectangularMarker(Vec3f(conf->value("color/fov_rectangular_marker_color", defaultColor).toString()));
+	setColorCompassMarks(Vec3f(conf->value("color/compass_marks_color", defaultColor).toString()));
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_FOV_Center_Marker", displayGroup, N_("FOV Center marker"), "fovCenterMarkerDisplayed", "");
 	addAction("actionShow_FOV_Circular_Marker", displayGroup, N_("Circular marker of FOV"), "fovCircularMarkerDisplayed", "");
 	addAction("actionShow_FOV_Rectangular_Marker", displayGroup, N_("Rectangular marker of FOV"), "fovRectangularMarkerDisplayed", "");
+	addAction("actionShow_Compass_Marks", displayGroup, N_("Compass marks"), "compassMarksDisplayed", "Shift+Q");
 }
 
 void SpecialMarkersMgr::update(double deltaTime)
@@ -226,6 +275,7 @@ void SpecialMarkersMgr::update(double deltaTime)
 	fovCenterMarker->update(deltaTime);
 	fovCircularMarker->update(deltaTime);
 	fovRectangularMarker->update(deltaTime);
+	compassMarks->update(deltaTime);
 }
 
 void SpecialMarkersMgr::draw(StelCore* core)
@@ -233,6 +283,7 @@ void SpecialMarkersMgr::draw(StelCore* core)
 	fovCenterMarker->draw(core);
 	fovCircularMarker->draw(core);
 	fovRectangularMarker->draw(core);
+	compassMarks->draw(core);
 }
 
 void SpecialMarkersMgr::setFlagFOVCenterMarker(const bool displayed)
@@ -355,4 +406,30 @@ void SpecialMarkersMgr::setFOVRectangularMarkerRotationAngle(const double angle)
 double SpecialMarkersMgr::getFOVRectangularMarkerRotationAngle() const
 {
 	return fovRectangularMarker->getRotationAngle();
+}
+
+void SpecialMarkersMgr::setFlagCompassMarks(const bool displayed)
+{
+	if(displayed != compassMarks->isDisplayed()) {
+		compassMarks->setDisplayed(displayed);
+		emit compassMarksDisplayedChanged(displayed);
+	}
+}
+
+bool SpecialMarkersMgr::getFlagCompassMarks() const
+{
+	return compassMarks->isDisplayed();
+}
+
+Vec3f SpecialMarkersMgr::getColorCompassMarks() const
+{
+	return compassMarks->getColor();
+}
+
+void SpecialMarkersMgr::setColorCompassMarks(const Vec3f& newColor)
+{
+	if(newColor != compassMarks->getColor()) {
+		compassMarks->setColor(newColor);
+		emit compassMarksColorChanged(newColor);
+	}
 }

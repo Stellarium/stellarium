@@ -21,7 +21,6 @@
 
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
-#include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "Exoplanet.hpp"
 #include <QFont>
@@ -70,22 +69,16 @@ typedef QSharedPointer<Exoplanet> ExoplanetP;
 class Exoplanets : public StelObjectModule
 {
 	Q_OBJECT
-	Q_ENUMS(TemperatureScale)
-	Q_PROPERTY(bool showExoplanets
-		   READ getFlagShowExoplanets
-		   WRITE setFlagShowExoplanets
-		   NOTIFY flagExoplanetsVisibilityChanged
-		   )
-	Q_PROPERTY(Vec3f markerColor
-		   READ getMarkerColor
-		   WRITE setMarkerColor
-		   NOTIFY markerColorChanged
-		   )
-	Q_PROPERTY(Vec3f habitableColor
-		   READ getHabitableColor
-		   WRITE setHabitableColor
-		   NOTIFY habitableColorChanged
-		   )
+	Q_PROPERTY(bool showExoplanets    READ getFlagShowExoplanets   WRITE setFlagShowExoplanets NOTIFY flagExoplanetsVisibilityChanged)
+	Q_PROPERTY(Vec3f markerColor      READ getMarkerColor          WRITE setMarkerColor        NOTIFY markerColorChanged)
+	Q_PROPERTY(Vec3f habitableColor   READ getHabitableColor       WRITE setHabitableColor     NOTIFY habitableColorChanged)
+
+	Q_PROPERTY(bool flagDisplayMode   READ getDisplayMode          WRITE setDisplayMode        NOTIFY displayModeChanged)
+	Q_PROPERTY(bool flagTimelineMode  READ getTimelineMode         WRITE setTimelineMode       NOTIFY timelineModeChanged)
+	Q_PROPERTY(bool flagHabitableMode READ getHabitableMode        WRITE setHabitableMode      NOTIFY habitableModeChanged)
+	Q_PROPERTY(bool flagShowExoplanetsDesignations READ getFlagShowExoplanetsDesignations WRITE setFlagShowExoplanetsDesignations NOTIFY flagShowExoplanetsDesignationsChanged)
+	Q_PROPERTY(bool flagShowExoplanetsNumbers READ getFlagShowExoplanetsNumbers WRITE setFlagShowExoplanetsNumbers NOTIFY flagShowExoplanetsNumbersChanged)
+
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -96,6 +89,7 @@ public:
 		DownloadError,			//!< Error during download phase
 		OtherError				//!< Other error
 	};
+	Q_ENUM(UpdateState)
 	//! @enum TemperatureScale
 	//! Available temperature scales
 	enum TemperatureScale
@@ -104,18 +98,19 @@ public:
 		Celsius		= 1,
 		Fahrenheit	= 2
 	};
-	
+	Q_ENUM(TemperatureScale)
+
 	Exoplanets();
-	virtual ~Exoplanets();
+	virtual ~Exoplanets() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init();
-	virtual void deinit();
-	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core);
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void deinit() Q_DECL_OVERRIDE;
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 	virtual void drawPointer(StelCore* core, StelPainter& painter);
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
@@ -124,38 +119,38 @@ public:
 	//! @param limitFov the field of view around the position v in which to search for exoplanets.
 	//! @param core the StelCore to use for computations.
 	//! @return a list containing the exoplanets located inside the limitFov circle around position v.
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
 
 	//! Return the matching exoplanet system object's pointer if exists or Q_NULLPTR.
 	//! @param nameI18n The case in-sensitive localized exoplanet system name
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
 
 	//! Return the matching exoplanet system if exists or Q_NULLPTR.
 	//! @param name The case in-sensitive english exoplanet system name
-	virtual StelObjectP searchByName(const QString& name) const;
+	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
 
 	//! Return the matching exoplanet system if exists or Q_NULLPTR.
 	//! @param id The exoplanet system id
-	virtual StelObjectP searchByID(const QString &id) const;
+	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const Q_DECL_OVERRIDE;
 
-	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
 
-	virtual QString getName() const { return "Exoplanets"; }
-	virtual QString getStelObjectType() const { return Exoplanet::EXOPLANET_TYPE; }
+	virtual QString getName() const Q_DECL_OVERRIDE { return "Exoplanets"; }
+	virtual QString getStelObjectType() const Q_DECL_OVERRIDE { return Exoplanet::EXOPLANET_TYPE; }
 
 	//! get a exoplanet object by identifier
 	ExoplanetP getByID(const QString& id) const;
 
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
 	//! plugin.
-	virtual bool configureGui(bool show=true);
+	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
 
 	//! Set up the plugin with default values.  This means clearing out the Exoplanets section in the
 	//! main config.ini (if one already exists), and populating it with default values.  It also
@@ -242,6 +237,11 @@ signals:
 	void flagExoplanetsVisibilityChanged(bool b);
 	void markerColorChanged(Vec3f);
 	void habitableColorChanged(Vec3f);
+	void displayModeChanged(bool);
+	void timelineModeChanged(bool);
+	void habitableModeChanged(bool);
+	void flagShowExoplanetsDesignationsChanged(bool);
+	void flagShowExoplanetsNumbersChanged(bool);
 
 public slots:
 	//! Download JSON from web recources described in the module section of the
@@ -261,6 +261,13 @@ public slots:
 	//! Get status to display of designations of exoplanetary systems
 	//! @return true if it's visible
 	bool getFlagShowExoplanetsDesignations(void) const;
+
+	//! Enable/disable display of number of exoplanets in exoplanetary system
+	//! @param b boolean flag
+	void setFlagShowExoplanetsNumbers(bool b);
+	//! Get status to display of designations of exoplanets in exoplanetary system
+	//! @return true if it's visible
+	bool getFlagShowExoplanetsNumbers(void) const;
 
 	//! Define whether the button toggling exoplanets should be visible
 	void setFlagShowExoplanetsButton(bool b);
@@ -335,12 +342,12 @@ public slots:
 	}
 
 	//! Set the temperature scale
-	void setCurrentTemperatureScale(TemperatureScale tscale)
+	void setCurrentTemperatureScale(Exoplanets::TemperatureScale tscale)
 	{
 		Exoplanet::temperatureScaleID = static_cast<int>(tscale);
 	}
 	//! Get the current temperature scale
-	TemperatureScale getCurrentTemperatureScale() const
+	Exoplanets::TemperatureScale getCurrentTemperatureScale() const
 	{
 		return static_cast<TemperatureScale>(Exoplanet::temperatureScaleID);
 	}
@@ -458,9 +465,9 @@ class ExoplanetsStelPluginInterface : public QObject, public StelPluginInterface
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
-	virtual QObjectList getExtensionList() const { return QObjectList(); }
+	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /* EXOPLANETS_HPP */

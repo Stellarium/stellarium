@@ -3,83 +3,92 @@ version: '{branch}-{build}'
 configuration: Release
 # clone directory
 clone_folder: c:\stellarium
+# set clone depth
+clone_depth: 5
 # Do not build feature branch with open Pull Requests
 skip_branch_with_pr: true
+# Do not build on tags
+skip_tags: true
+# Skipping commits
+skip_commits:
+  message: /(GHA|skip)/
+  files:
+    - guide/*
+# Maximum number of concurrent jobs for the project
+max_jobs: 4
 # environment variables
 environment:
   matrix:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-    platform: x64
     qtver: 5.12
     qtbin: msvc2017_64
     msvcname: Visual Studio 15 2017 Win64
     packaging: true
     suffix: Win64
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-    platform: Win32
     qtver: 5.12
     qtbin: msvc2017
     msvcname: Visual Studio 15 2017
     packaging: true
     suffix: Win32
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    platform: x64
-    qtver: 5.14
-    qtbin: msvc2017_64
-    msvcname: Visual Studio 16 2019
-    packaging: false
-    suffix: Win64
-    cmake_args: -A x64
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    platform: Win32
-    qtver: 5.14
-    qtbin: msvc2017
-    msvcname: Visual Studio 16 2019
-    packaging: false
-    suffix: Win32 
-    cmake_args: -A Win32
-#  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-#    platform: x64
-#    qtver: 5.12
-#    qtbin: msvc2017_64
-#    msvcname: Visual Studio 16 2019
+#  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+#    qtver: 5.15
+#    qtbin: msvc2019_64
+#    msvcname: Visual Studio 17 2022
 #    packaging: false
 #    suffix: Win64
 #    cmake_args: -A x64
-#  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-#    platform: Win32
-#    qtver: 5.12
-#    qtbin: msvc2017
-#    msvcname: Visual Studio 16 2019
-#    packaging: false
-#    suffix: Win32 
-#    cmake_args: -A Win32
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    qtver: 6.3
+    qtbin: msvc2019_64
+    msvcname: Visual Studio 16 2019
+    packaging: true
+    suffix: Win64
+    cmake_args: -A x64
+#  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+#    qtver: 6.2
+#    qtbin: msvc2019_64
+#    msvcname: Visual Studio 17 2022
+#    packaging: true
+#    suffix: Win64
+#    cmake_args: -A x64
 
 before_build:
   - set PUBLISH_BINARY=false
+  - set USE_EXT_LIBGLES=false
   - set INNSPATH=C:\Program Files (x86)\Inno Setup 5;C:\Program Files (x86)\Inno Setup 6
   - set OPENSSLPATH=C:\OpenSSL-%suffix%\bin;C:\OpenSSL-v111-%suffix%\bin
   - set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%OPENSSLPATH%;%PATH%
-  - appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
+  - ps: if($env:APPVEYOR_REPO_BRANCH -eq "release" -and $env:packaging -eq "true") { $env:PUBLISH_BINARY = 'true' }
+  - ps: if($env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]') -and $env:packaging -eq "true") { $env:PUBLISH_BINARY = 'true' }
+  - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:qtver.contains('5.')) { $env:USE_EXT_LIBGLES = 'true' }
+  - ps: if($env:qtver.contains('6.')) { $env:QT_VER_MAJOR=6 }
+  - ps: if($env:qtver.contains('5.')) { $env:QT_VER_MAJOR=5 }
+  - ps: if($env:suffix.contains('32')) { $env:BITS=32 }
+  - ps: if($env:suffix.contains('64')) { $env:BITS=64 }
+  - appveyor DownloadFile https://github.com/10110111/CalcMySky/releases/download/v0.0.5/CalcMySky-v0.0.5-win%BITS%-qt%QT_VER_MAJOR%.zip -FileName c:\CalcMySky.zip
+  - cd c:\
+  - 7z x CalcMySky.zip
+  - bash -c 'mv CalcMySky{-*,}'
+  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
   - mkdir stellarium-%qtver%-%qtbin%
   - cd c:\stellarium
   - mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
-  - cmake -DENABLE_TESTING=1 -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" %cmake_args% ..
+  - if [%PUBLISH_BINARY%]==[true] cmake -DCMAKE_PREFIX_PATH=c:/CalcMySky -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" %cmake_args% ..
+  - if [%PUBLISH_BINARY%]==[false] cmake -DCMAKE_PREFIX_PATH=c:/CalcMySky -DENABLE_TESTING=On -DENABLE_NLS=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" %cmake_args% ..
 
 build:
   project: c:\stellarium\build-%qtver%-%qtbin%\Stellarium.sln
   parallel: true
   verbosity: minimal
-  
+
 test_script:
-  - ctest --output-on-failure
+  - if [%PUBLISH_BINARY%]==[false] ctest --output-on-failure
 
 after_test:
-  - ps: if($env:APPVEYOR_REPO_BRANCH -eq "release" -and $env:packaging -eq "true") { $env:PUBLISH_BINARY = 'true' }
-  - ps: if($env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]') -and $env:packaging -eq "true") { $env:PUBLISH_BINARY = 'true' }
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install
-  - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-%suffix%.zip -FileName c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip
-  - if [%PUBLISH_BINARY%]==[true] 7z e c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip -aoa -oc:\stellarium-%qtver%-%qtbin%\qt5stuff
+  - if [%USE_EXT_LIBGLES%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-%suffix%.zip -FileName c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip
+  - if [%USE_EXT_LIBGLES%]==[true] 7z e c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip -aoa -oc:\stellarium-%qtver%-%qtbin%\qtstuff
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
   - if [%PUBLISH_BINARY%]==[true] cd c:\stellarium\installers
   - if [%PUBLISH_BINARY%]==[true] for %%i in (*.exe) do appveyor PushArtifact %%i

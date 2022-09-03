@@ -73,7 +73,7 @@ public:
 	//! @param QString pos Use + or N or E. 
 	//! @param QString neg Use - or S or W.
 	//! @return QString the representation of angle rad.    
-	static QString radToDm(double rad, const QString pos = "+", const QString neg = "-");
+	static QString radToDm(double rad, const QString &pos = "+", const QString &neg = "-");
 
 
 	//! Ensure the supplied angle, in radians, is with 0 to 2PI.
@@ -87,6 +87,7 @@ public:
 	static double wrap360(double d);
 
 	static bool useExtraDecimals;
+	static bool useDecimalDegrees;
 
 private:
 	QString utc;
@@ -103,7 +104,7 @@ public:
 	QString lmstDegreesPrintable()
 	{
 		QString sign = lmst < 0. ? "-" : "+";
-		return QString("%1%2%3").arg(sign).arg(QString::number(lmst, 'f', 3)).arg("&deg;");
+		return QString("%1%2%3").arg(sign, QString::number(lmst, 'f', 3), "&deg;");
 	}
 	QString lmstPrintable() { return radToDm(lmst_rad); }
 
@@ -144,7 +145,7 @@ public:
 	}
 	QString gmstDegreesPrintable() {
 		QString sign = gmst < 0. ? "-" : "+";
-		return QString("%1%2%3").arg(sign).arg(QString::number(gmst, 'f', 3)).arg("&deg;");
+		return QString("%1%2%3").arg(sign, QString::number(gmst, 'f', 3), "&deg;");
 	}
 	QString gmstPrintable() { return radToDm(gmst_rad); }
 

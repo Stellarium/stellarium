@@ -27,6 +27,8 @@
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelGui.hpp"
+#include "SolarSystem.hpp"
+#include "StelUtils.hpp"
 
 #include <QComboBox>
 
@@ -48,6 +50,7 @@ void NavStarsWindow::retranslate()
 		setAboutHtml();
 		populateNavigationalStarsSets();
 		populateNavigationalStarsSetDescription();
+		populateToday();
 	}
 }
 
@@ -71,23 +74,23 @@ void NavStarsWindow::createDialogContent()
 	}
 	ui->nsSetComboBox->setCurrentIndex(idx);
 	connect(ui->nsSetComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setNavigationalStarsSet(int)));
-	ui->displayAtStartupCheckBox->setChecked(ns->getEnableAtStartup());
-	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
-	ui->highlightWhenVisible->setChecked(ns->getHighlightWhenVisible());
-	connect(ui->highlightWhenVisible, SIGNAL(stateChanged(int)), this, SLOT(setHighlightWhenVisibleEnabled(int)));
-	ui->limitInfoToNavStars->setChecked(ns->getLimitInfoToNavStars());
-	connect(ui->limitInfoToNavStars, SIGNAL(stateChanged(int)), this, SLOT(setLimitInfoToNavStarsEnabled(int)));
-	ui->showExtraDecimals->setChecked(ns->getShowExtraDecimals());
-	connect(ui->showExtraDecimals, SIGNAL(stateChanged(int)), this, SLOT(setExtraDecimalsDisplayEnabled(int)));
 
-	ui->upperLimb->setChecked(ns->getUpperLimb());
-	connect(ui->upperLimb, SIGNAL(stateChanged(int)), this, SLOT(setUpperLimbEnabled(int)));
-
-	ui->tabulatedDisplay->setChecked(ns->getTabulatedDisplay());
-	connect(ui->tabulatedDisplay, SIGNAL(stateChanged(int)), this, SLOT(setTabulatedDisplayEnabled(int)));
+	connectBoolProperty(ui->displayAtStartupCheckBox,	"NavStars.displayAtStartup");
+	connectBoolProperty(ui->highlightWhenVisible,		"NavStars.highlightWhenVisible");
+	connectBoolProperty(ui->limitInfoToNavStars,		"NavStars.limitInfoToNavStars");
+	connectBoolProperty(ui->upperLimb,			"NavStars.upperLimb");
+	connectBoolProperty(ui->tabulatedDisplay,		"NavStars.tabulatedDisplay");
+	connectBoolProperty(ui->showExtraDecimals,		"NavStars.showExtraDecimals");
+	connectBoolProperty(ui->useUTCCheckBox,			"NavStars.useUTCTime");
 
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveSettings()));	
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetSettings()));
+
+	populateToday();
+	connect(ui->refreshData, SIGNAL(clicked()), this, SLOT(populateToday()));
+	StelCore* core = StelApp::getInstance().getCore();
+	connect(core, SIGNAL(dateChanged()), this, SLOT(populateToday()));
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(populateToday()));
 
 	// About tab
 	setAboutHtml();
@@ -95,7 +98,6 @@ void NavStarsWindow::createDialogContent()
 	if(gui!=Q_NULLPTR)
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 }
-
 
 void NavStarsWindow::saveSettings()
 {
@@ -113,40 +115,110 @@ void NavStarsWindow::resetSettings()
 		qDebug() << "[NavStars] restore defaults is canceled...";
 }
 
-void NavStarsWindow::setDisplayAtStartupEnabled(int checkState)
+void NavStarsWindow::populateToday()
 {
-	bool b = checkState != Qt::Unchecked;
-	ns->setEnableAtStartup(b);
-}
+	StelCore* core = StelApp::getInstance().getCore();
+	const double utcShift = core->getUTCOffset(core->getJD()) / 24.; // Fix DST shift...
+	StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
+	PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
+	double duration;
+	QString moonrise, moonset, dayBegin, dayEnd, civilTwilightBegin, civilTwilightEnd, nauticalTwilightBegin,
+		nauticalTwilightEnd, astronomicalTwilightBegin, astronomicalTwilightEnd, dayDuration,
+		civilTwilightDuration, nauticalTwilightDuration, astronomicalTwilightDuration, dash = QChar(0x2014);
 
-void NavStarsWindow::setHighlightWhenVisibleEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ns->setHighlightWhenVisible(b);
-}
+	// Moon
+	Vec4d moon = GETSTELMODULE(SolarSystem)->getMoon()->getRTSTime(core, 0.);
+	if (moon[3]==0.)
+	{
+		moonrise = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(moon[0]+utcShift), true);
+		moonset = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(moon[2]+utcShift), true);
+	}
+	else
+		moonrise = moonset = dash;
 
-void NavStarsWindow::setLimitInfoToNavStarsEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ns->setLimitInfoToNavStars(b);
-}
+	// day
+	Vec4d day = sun->getRTSTime(core, 0.);
+	if (day[3]==0.)
+	{
+		dayBegin = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(day[0]+utcShift), true);
+		dayEnd = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(day[2]+utcShift), true);
+		duration = qAbs(day[2]-day[0])*24.;
+	}
+	else
+	{
+		dayBegin = dayEnd = dash;
+		duration = (day[3]>99.) ? 24. : 0.;
+	}
+	dayDuration = StelUtils::hoursToHmsStr(duration, true);
 
-void NavStarsWindow::setUpperLimbEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ns->setUpperLimb(b);
-}
+	// civil twilight
+	Vec4d civilTwilight = sun->getRTSTime(core, -6.);
+	if (civilTwilight[3]==0.)
+	{
+		civilTwilightBegin = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(civilTwilight[0]+utcShift), true);
+		civilTwilightEnd = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(civilTwilight[2]+utcShift), true);
+		duration = qAbs(civilTwilight[2]-civilTwilight[0])*24.;
+	}
+	else
+	{
+		civilTwilightBegin = civilTwilightEnd = dash;
+		duration = (civilTwilight[3]>99.) ? 24. : 0.;
+	}
+	civilTwilightDuration = StelUtils::hoursToHmsStr(duration, true);
 
-void NavStarsWindow::setTabulatedDisplayEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ns->setTabulatedDisplay(b);
-}
+	// nautical twilight
+	Vec4d nauticalTwilight = sun->getRTSTime(core, -12.);
+	if (nauticalTwilight[3]==0.)
+	{
+		nauticalTwilightBegin = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(nauticalTwilight[0]+utcShift), true);
+		nauticalTwilightEnd = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(nauticalTwilight[2]+utcShift), true);
+		duration = qAbs(nauticalTwilight[2]-nauticalTwilight[0])*24.;
+	}
+	else
+	{
+		nauticalTwilightBegin = nauticalTwilightEnd = dash;
+		duration = (nauticalTwilight[3]>99.) ? 24. : 0.;
+	}
+	nauticalTwilightDuration = StelUtils::hoursToHmsStr(duration, true);
 
-void NavStarsWindow::setExtraDecimalsDisplayEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ns->setShowExtraDecimals(b);
+	// astronomical twilight
+	Vec4d astronomicalTwilight = sun->getRTSTime(core, -18.);
+	if (astronomicalTwilight[3]==0.)
+	{
+		astronomicalTwilightBegin = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(astronomicalTwilight[0]+utcShift), true);
+		astronomicalTwilightEnd = StelUtils::hoursToHmsStr(StelUtils::getHoursFromJulianDay(astronomicalTwilight[2]+utcShift), true);
+		duration = qAbs(astronomicalTwilight[2]-astronomicalTwilight[0])*24.;
+	}
+	else
+	{
+		astronomicalTwilightBegin = astronomicalTwilightEnd = dash;
+		duration = (astronomicalTwilight[3]>99.) ? 24. : 0.;
+	}
+	astronomicalTwilightDuration = StelUtils::hoursToHmsStr(duration, true);
+
+	// fill the data
+	ui->labelToday->setText(localeMgr->getPrintableDateLocal(core->getJD()));
+	ui->labelDayBegin->setText(dayBegin);
+	ui->labelDayEnd->setText(dayEnd);
+	ui->labelDayDuration->setText(dayDuration);
+	ui->labelCivilTwilightBegin->setText(civilTwilightBegin);
+	ui->labelCivilTwilightEnd->setText(civilTwilightEnd);
+	ui->labelCivilTwilightDuration->setText(civilTwilightDuration);
+	ui->labelNauticalTwilightBegin->setText(nauticalTwilightBegin);
+	ui->labelNauticalTwilightEnd->setText(nauticalTwilightEnd);
+	ui->labelNauticalTwilightDuration->setText(nauticalTwilightDuration);
+	ui->labelAstronomicalTwilightBegin->setText(astronomicalTwilightBegin);
+	ui->labelAstronomicalTwilightEnd->setText(astronomicalTwilightEnd);
+	ui->labelAstronomicalTwilightDuration->setText(astronomicalTwilightDuration);
+	ui->labelMoonRise->setText(moonrise);
+	ui->labelMoonSet->setText(moonset);
+
+	// tooltips
+	// TRANSLATORS: full phrase is "XX° below the horizon"
+	QString belowHorizon = q_("below the horizon");
+	ui->labelCivilTwilight->setToolTip(QString("6° %1").arg(belowHorizon));
+	ui->labelNauticalTwilight->setToolTip(QString("12° %1").arg(belowHorizon));
+	ui->labelAstronomicalTwilight->setToolTip(QString("18° %1").arg(belowHorizon));
 }
 
 void NavStarsWindow::populateNavigationalStarsSets()
@@ -190,14 +262,11 @@ void NavStarsWindow::populateNavigationalStarsSetDescription(void)
 
 void NavStarsWindow::setAboutHtml(void)
 {
-	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Navigational Stars Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + NAVSTARS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + NAVSTARS_PLUGIN_LICENSE + "</td></tr>";
-	html += "<tr><td rowspan='2'><strong>" + q_("Authors") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr><td rowspan='2'><strong>" + q_("Authors") + ":</strong></td><td>Alexander Wolf</td></tr>";
 	html += "<tr><td>Andy Kirkham &lt;kirkham.andy@gmail.com&gt;</td></tr>";
 	html += "</table>";
 
@@ -253,16 +322,8 @@ void NavStarsWindow::setAboutHtml(void)
 	html += q_("For further information please refer to the Stellarium User Guide.");
 	html += "</p>";
 
-	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Navigational Stars plugin") + "</p>";
-	html += "<p/><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Navigational_Stars_plugin\">\\1</a>") + "</li>";
-	html += "</ul></p><br/></body></html>";
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Navigational Stars plugin");
+	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if(gui!=Q_NULLPTR)

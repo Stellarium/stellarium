@@ -1,3 +1,99 @@
+0.22.2 [2022-07-07]
+The major changes of this version:
+- Added recognition licenses for skycultures
+- Many improvements in the Satellites plugin, esp. display of earth shadow
+  and filtering
+- Improvements in AstroCalc: graphs, eclipses, transits
+- Improvements in Meteor Showers, Exoplanets and the Navigational Stars plugins
+- Updated DSO catalog
+- Fixed ANGLE mode for some rare cases
+- A large number of bug fixes and closed feature requests and enhancements
+  (see full list of changes).
+
+Behind the scenes, we are preparing for a major upgrade of the internal
+Qt framework.
+
+Enjoy!
+
+Alexander and Georg
+
+0.22.1 [2022-04-16]
+The major changes of this version:
+- Added fixed equatorial grid/line
+- Added new sky cultures
+- Fixed building Stellarium (AppImage)
+- Updated DSO catalog
+
+0.22.0 [2022-03-27]
+The major changes of this version:
+- AstroCalc: Eclipse Finder
+- AstroCalc: RTS (Rises, Transits, Settings)
+- Switch from Bortle scale to physical brightness values for light pollution.
+- Allow tweaks for the atmosphere brightness/color model and tone mapping
+- Several new calendars in the Calendars plugin
+- Seasonal polar caps on Mars
+- New and improved sky cultures
+- Larger textures allowed in Scenery3D
+- Improved OnlineQueries and Satellites plugin
+- Many fixes in core and plugins.
+- Technical preparations towards a major upgrade of the internal Qt framework.
+
+0.21.3 [2021-12-25]
+The major changes of this version:
+- Better handling of minor bodies with outdated orbital elements
+- "Goto next day at same altitude" functionality for selected objects
+- Mark a few special points on the planets
+- Three refined Arab skycultures
+- Updated Mul-Apin skyculture with new artwork
+- Improved OnlineQueries and Satellites plugin
+- Fixed a problem with LX200 telescopes
+- Many fixes in core and plugins
+
+0.21.2 [2021-09-27]
+The major changes of this version:
+- Annual aberration correction. Planet positions are finally very accurate!
+- Bookmarks replaced by Observation Lists
+- Politically neutral geonames
+- Right-click opens plugin configuration
+- Improved computation of rising, transit, setting times
+- "Goto next twilight" functionality
+- Two new Greek skycultures
+- Updated Mul-Apin skyculture with new artwork
+- Improved fidelity of Lunar eclipses
+- Fixed display of stellar proper motion
+- Many fixes in core and plugins
+
+0.21.1 [2021-06-24]
+The major changes of this version:
+- Updated designations of stars and handling of list of designations 
+  and common names those stars
+- Updated Almagest and al-Sufi skycultures
+- Many changes in plugins
+- Many fixes in core and plugins for support HiDPI devices
+- Enhancements in visualization of markings and in scripting engine
+
+0.21.0 [2021-03-28]
+The major changes of this version:
+- We have finally completed our work on accurate planet axes, 
+  including Lunar libration
+- Visualisation of Earth shadow for Lunar eclipses
+- Better texture for the Lunar surface
+- Added the latest algorithms for planet magnitudes
+- Enhanced Calendars plugin
+- Replaced "arabic" by more accurate "al-Sufi" skyculture
+- Planets are now scalable and Solar glare switchable for didactic 
+  applications
+
+We have also published a scientific paper about the application of
+Stellarium in cultural astronomy: https://doi.org/10.1558/jsa.17822
+
+0.20.4 [2020-12-28]
+The major changes of this version:
+- Added Calendars plugin
+- Many changes in AstroCalc tool and core of Stellarium
+- Many changes in plugins
+- Updated DSO catalog
+
 0.20.3 [2020-09-27]
 The major changes of this version:
 - Fixed nutation and, with it, season beginning times

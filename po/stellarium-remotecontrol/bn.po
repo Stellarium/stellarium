@@ -4,17 +4,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# cardinot <mcardinot@gmail.com>, 2017
-# Tanmoy Saha <t4saha@gmail.com>, 2020
+# Tanmoy Saha <t4saha@gmail.com>, 2022
+# cardinot <mcardinot@gmail.com>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-06-22 00:46+0700\n"
+"POT-Creation-Date: 2022-06-19 21:37+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
-"Last-Translator: Tanmoy Saha <t4saha@gmail.com>, 2020\n"
+"Last-Translator: cardinot <mcardinot@gmail.com>, 2022\n"
 "Language-Team: Bengali (https://www.transifex.com/stellarium/teams/80998/bn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -108,8 +108,8 @@ msgid "Could not retrieve landscape list"
 msgstr "ভূমিরূপ সংক্রান্ত তালিকাটি পাওয়া যায় নি"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:628
-#: index.html:685 tablet7in.html:733 tablet7in.html:793
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:638
+#: index.html:695 tablet7in.html:733 tablet7in.html:793
 msgid "-none-"
 msgstr "-কিছু না-"
 
@@ -259,10 +259,6 @@ msgstr "দিগংশ বরাবর দিগন্তের দিকে �
 msgid "Vertical View offset"
 msgstr "উলম্ব দৃষ্টিক্ষেত্র"
 
-#: index.html:154 tablet7in.html:133
-msgid "Reset"
-msgstr "পুনঃ বিন্যাস করুন"
-
 #: index.html:160 tablet7in.html:138
 msgid "FOV"
 msgstr "দৃষ্টিক্ষেত্র"
@@ -319,6 +315,10 @@ msgstr "ডিজিটাল মহাকাশ নিরীক্ষা"
 msgid "HiPS Survey"
 msgstr "মহাকাশ নিরীক্ষা"
 
+#: index.html:286 tablet7in.html:350
+msgid "Show planet markers"
+msgstr "অবস্থান"
+
 #: index.html:287 tablet7in.html:351
 msgid "Show planet orbits"
 msgstr "কক্ষপথ"
@@ -339,6 +339,18 @@ msgstr "গমনপথ"
 msgid "Show trail only for selected planet"
 msgstr "পছন্দসই জ্যোতিষ্কের গমনপথ"
 
+#: index.html:294 tablet7in.html:359
+msgid "Scale Moon:"
+msgstr "বিবর্ধিত চাঁদ :"
+
+#: index.html:295 tablet7in.html:363
+msgid "Scale minor bodies:"
+msgstr "বিবর্ধিত গ্রহাণু :"
+
+#: index.html:318 tablet7in.html:404
+msgid "Extinction Coefficient:"
+msgstr "বিলুপ্তিকরণ গুনাঙ্ক :"
+
 #: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"
 msgstr "উল্কাপাত"
@@ -355,153 +367,157 @@ msgstr ""
 "মেরুর বৃত্তাকার সঞ্চারপথ যা পৃথিবীর অক্ষের দোলন জনিত প্রভাবের ফলে উৎপন্ন হয় "
 "(লাট্টুর মত ঘুর্ণনের কারণে) ।"
 
-#: index.html:377 tablet7in.html:472
+#: index.html:378 tablet7in.html:472
 msgid "Solstices"
 msgstr "সূর্যায়ণ"
 
-#: index.html:378 tablet7in.html:473
+#: index.html:379 tablet7in.html:473
 msgid "Crossquarters"
 msgstr "মরশুমি সূচনা রেখা"
 
-#: index.html:379 tablet7in.html:474
+#: index.html:380 tablet7in.html:474
 msgid "Major Standstill"
 msgstr "সর্বোচ্চ চন্দ্রায়ণ"
 
-#: index.html:380 tablet7in.html:475
+#: index.html:381 tablet7in.html:475
 msgid "Minor Standstill"
 msgstr "সর্বনিম্ন চন্দ্রায়ণ"
 
-#: index.html:389 tablet7in.html:484
+#: index.html:390 tablet7in.html:484
 msgid "Current Planet:"
 msgstr "পছন্দসই গ্রহ :"
 
-#: index.html:429 tablet7in.html:524
+#: index.html:426 tablet7in.html:524
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr "প্রতিফলিত নীহারিকার তালিকা (ভ্যান ডেন বার্গ, ১৯৬৬)"
 
-#: index.html:447 tablet7in.html:542
+#: index.html:444 tablet7in.html:542
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
 msgstr ""
 "দক্ষিন গোলার্ধের নীহারিকাযুক্ত নক্ষত্র তালিকা (ভ্যান ডেন বার্গ+, ১৯৭৫)"
 
-#: index.html:502
+#: index.html:512
 msgid "Objects without identifier"
 msgstr "কোনো তালিকাভুক্ত নয়"
 
-#: index.html:527 tablet7in.html:616
+#: index.html:537 tablet7in.html:616
 msgid "Bright Nebulae"
 msgstr "উজ্জ্বল নীহারিকা"
 
-#: index.html:528 tablet7in.html:617
+#: index.html:538 tablet7in.html:617
 msgid "Dark Nebulae"
 msgstr "কৃষ্ণবর্ণ নীহারিকা"
 
-#: index.html:529 tablet7in.html:618
+#: index.html:539 tablet7in.html:618
 msgid "Planetary Nebulae"
 msgstr "গ্রহরূপী নীহারিকা"
 
-#: index.html:538 tablet7in.html:627
+#: index.html:548 tablet7in.html:627
 msgid "Labels and markers"
 msgstr "নাম এবং চিহ্ন"
 
-#: index.html:572 tablet7in.html:661
+#: index.html:573 tablet7in.html:652
+msgid "Use associated planet and position"
+msgstr "সংযুক্ত ঠিকানা ব্যবহার"
+
+#: index.html:582 tablet7in.html:661
 msgid "Show illumination"
 msgstr "দীপন স্তর"
 
-#: index.html:577 tablet7in.html:667
+#: index.html:587 tablet7in.html:667
 msgid "Current landscape"
 msgstr "ব্যবহৃত ভূমিরূপ"
 
-#: index.html:589 tablet7in.html:680
+#: index.html:599 tablet7in.html:680
 msgid "Show lines with thickness"
 msgstr "কল্পরেখার বেধ :"
 
-#: index.html:594 tablet7in.html:685
+#: index.html:604 tablet7in.html:685
 msgid "Show asterisms with thickness"
 msgstr "নক্ষত্রপুঞ্জের রেখার বেধ"
 
-#: index.html:598 tablet7in.html:689
+#: index.html:608 tablet7in.html:689
 msgid "Show ray helpers with thickness"
 msgstr "অনুসন্ধান সহায়ক রেখার বেধ"
 
-#: index.html:606 tablet7in.html:699
+#: index.html:616 tablet7in.html:699
 msgid "Show boundaries with thickness"
 msgstr "সীমারেখার বেধ"
 
-#: index.html:611 tablet7in.html:704
+#: index.html:621 tablet7in.html:704
 msgid "Constellation selection isolated"
 msgstr "একটি করে তারামন্ডল নির্বাচন"
 
-#: index.html:615 tablet7in.html:708
+#: index.html:625 tablet7in.html:708
 msgid "Current sky culture"
 msgstr "ব্যবহৃত সংস্কৃতি"
 
-#: index.html:628 tablet7in.html:733
+#: index.html:638 tablet7in.html:733
 msgid "Active script:"
 msgstr "সক্রিয় কার্যলিপি"
 
-#: index.html:629 tablet7in.html:734
+#: index.html:639 tablet7in.html:734
 msgid "Run selected script"
 msgstr "কার্যলিপি চালান"
 
-#: index.html:629 tablet7in.html:734
+#: index.html:639 tablet7in.html:734
 msgid "Stop current script"
 msgstr "কার্যলিপি বন্ধ করুন"
 
-#: index.html:634 tablet7in.html:41 tablet7in.html:718
+#: index.html:644 tablet7in.html:41 tablet7in.html:718
 msgid "Actions"
 msgstr "কার্য তালিকা"
 
-#: index.html:638 tablet7in.html:722
+#: index.html:648 tablet7in.html:722
 msgid "Run/toggle action"
 msgstr "কার্য সম্পাদনা করুন"
 
-#: index.html:649 tablet7in.html:757
+#: index.html:659 tablet7in.html:757
 msgid "Planet map"
 msgstr "মানচিত্র"
 
-#: index.html:650 tablet7in.html:758
+#: index.html:660 tablet7in.html:758
 msgid "Planet map pointer"
 msgstr "মানচিত্রে স্থান নির্দেশক"
 
-#: index.html:654 tablet7in.html:762
+#: index.html:664 tablet7in.html:762
 msgid "Type to search location"
 msgstr "স্থানের নাম লিখুন"
 
-#: index.html:683 tablet7in.html:791
+#: index.html:693 tablet7in.html:791
 msgid "Interaction"
 msgstr "ব্যবহার"
 
-#: index.html:684 tablet7in.html:792
+#: index.html:694 tablet7in.html:792
 msgid "Current scene:"
 msgstr "ব্যবহৃত ভূমিরূপ"
 
-#: index.html:687 tablet7in.html:795
+#: index.html:697 tablet7in.html:795
 msgid "View controls"
 msgstr "অভিমুখ পরিবর্তন"
 
-#: index.html:693 tablet7in.html:801
+#: index.html:703 tablet7in.html:801
 msgid "Movement controls"
 msgstr "চলন নিয়ন্ত্রন"
 
-#: index.html:705 tablet7in.html:813
+#: index.html:715 tablet7in.html:813
 msgid "Torchlight"
 msgstr "টর্চ লাইট"
 
-#: index.html:712 tablet7in.html:820
+#: index.html:722 tablet7in.html:820
 msgid "Scene selection"
 msgstr "ভূমিরূপ তালিকা"
 
-#: index.html:716 tablet7in.html:824
+#: index.html:726 tablet7in.html:824
 msgid "Load selected scene"
 msgstr "নির্বাচিত ভূমিরূপটি ব্যবহার করুন"
 
-#: index.html:740 tablet7in.html:849
+#: index.html:750 tablet7in.html:849
 msgid "No response from server"
 msgstr "সার্ভার থেকে কোনো প্রতিক্রিয়া পাওয়া যাচ্ছে না"
 
-#: index.html:741 tablet7in.html:850
+#: index.html:751 tablet7in.html:850
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "%1 সেকেন্ড ধরে সার্ভারের সাথে যোগাযোগ নেই । স্টেলারিয়াম কি চালু করা আছে ?"
@@ -645,6 +661,10 @@ msgstr "জল বাহক (কুম্ভ)"
 #: tablet7in.html:288
 msgid "Pisces"
 msgstr "মাছ (মীন)"
+
+#: tablet7in.html:507
+msgid "Compass Marks"
+msgstr "দিকচিহ্ণ"
 
 #: tablet7in.html:742
 msgid "Favorites"

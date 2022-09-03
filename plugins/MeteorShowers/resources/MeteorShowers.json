@@ -1,0 +1,1467 @@
+{
+	"shortName": "meteor showers data",
+	"version": 2,
+	"showers":
+	{
+		"ANT":
+		{
+			"designation": "Antihelion",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 4,
+				"start": 0,
+				"finish": 360,
+				"peak": 0
+			}
+			],
+			"speed": 30,
+			"radiantAlpha": 0,
+			"radiantDelta": 0,
+			"driftAlpha": 0,
+			"driftDelta": 0,
+			"pidx": 3.0
+		},
+		"ARI":
+		{
+			"designation": "Daytime Arietids",
+			"IAUNo": "171",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 30,
+				"start": 52,
+				"finish": 93,
+				"peak": 76.6,
+				"disttype": 0,
+				"b1": 0.1,
+				"b2": 0.1
+			}
+			],
+			"speed": 38,
+			"radiantAlpha": 44,
+			"radiantDelta": 24,
+			"driftAlpha": 1.05,
+			"driftDelta": 0.28,
+			"parentObj": "Comet 96P/Machholz",
+			"pidx": 2.8
+		},
+		"DSX":
+		{
+			"designation": "Daytime Sextantids",
+			"IAUNo": "221",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 5,
+				"start": 165,
+				"finish": 196,
+				"peak": 184.3
+			}
+			],
+			"speed": 32,
+			"radiantAlpha": 152,
+			"radiantDelta": 0,
+			"driftAlpha": 0.91,
+			"driftDelta": -0.37,
+			"pidx": 2.5
+		},
+		"NOO":
+		{
+			"designation": "November Orionids",
+			"IAUNo": "250",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 3,
+				"start": 231,
+				"finish": 254,
+				"peak": 246
+			}
+			],
+			"speed": 41,
+			"radiantAlpha": 91,
+			"radiantDelta": 16,
+			"driftAlpha": 1.03,
+			"driftDelta": -0.01,
+			"pidx": 3.0
+		},
+		"ACE":
+		{
+			"designation": "α-Centaurids",
+			"IAUNo": "102",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "5-20",
+				"start": 310,
+				"finish": 331,
+				"peak": 319.2,
+				"disttype": 0,
+				"b1": 0.18,
+				"b2": 0.18
+			},
+			{
+				"year": "2023",
+				"zhr": 6
+			},
+			{
+				"year": "2022",
+				"zhr": 6
+			}
+			],
+			"speed": 56,
+			"radiantAlpha": 210,
+			"radiantDelta": -59,
+			"driftAlpha": 1.9,
+			"driftDelta": -0.5,
+			"pidx": 2.0
+		},
+		"AMO":
+		{
+			"designation": "α-Monocerotids",
+			"IAUNo": "246",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "5-400",
+				"start": 232,
+				"finish": 243,
+				"peak": 239.32
+			},
+			{
+				"year": "2022",
+				"zhr": -1,
+				"variable": "1-5"
+			},
+			{
+				"year": "1995",
+				"zhr": 500,
+				"peak": 239.322,
+				"disttype": 1,
+				"b1": 0.008
+			},
+			{
+				"year": "1985",
+				"zhr": 600,
+				"peak": 239.316,
+				"disttype": 1,
+				"b1": 0.003
+			},
+			{
+				"year": "1935",
+				"zhr": 1200,
+				"peak": 239.344,
+				"disttype": 1,
+				"b1": 0.009
+			},
+			{
+				"year": "1925",
+				"zhr": 2300,
+				"peak": 239.384,
+				"disttype": 1,
+				"b1": 0.005
+			}
+			],
+			"speed": 65,
+			"radiantAlpha": 117,
+			"radiantDelta": 1,
+			"driftAlpha": 0.97,
+			"driftDelta": -0.09,
+			"pidx": 2.4
+		},
+		"AND":
+		{
+			"designation": "Andromedids",
+			"IAUNo": "18",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 3,
+				"start": 213,
+				"finish": 235,
+				"peak": 223.0
+			},
+			{
+				"year": "1904",
+				"zhr": 20,
+				"peak": 240.954
+			},
+			{
+				"year": "1899",
+				"zhr": 150,
+				"peak": 243.7
+			},
+			{
+				"year": "1892",
+				"zhr": 300,
+				"peak": 243.8
+			},
+			{
+				"year": "1885",
+				"zhr": 6400,
+				"peak": 247.336,
+				"disttype": 1,
+				"b1": 0.062
+			},
+			{
+				"year": "1872",
+				"zhr": 7400,
+				"peak": 247.713,
+				"disttype": 1,
+				"b1": 0.062
+			},
+			{
+				"year": "1847",
+				"zhr": 150,
+				"peak": 256.3
+			},
+			{
+				"year": "1838",
+				"zhr": 150,
+				"peak": 256.7
+			},
+			{
+				"year": "1830",
+				"zhr": 1000,
+				"peak": 257.8
+			},
+			{
+				"year": "1825",
+				"zhr": 300,
+				"peak": 254.5
+			},
+			{
+				"year": "1798",
+				"zhr": 100,
+				"peak": 257.8
+			},
+			{
+				"year": "1741",
+				"zhr": 300,
+				"peak": 257.6
+			}
+			],
+			"speed": 19,
+			"radiantAlpha": 26,
+			"radiantDelta": 37,
+			"driftAlpha": 1.0,
+			"driftDelta": 0.37,
+			"parentObj": "Comet 3D/Biela",
+			"pidx": 2.3
+		},
+		"AUR":
+		{
+			"designation": "Aurigids",
+			"IAUNo": "206",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 10,
+				"start": 154,
+				"finish": 163,
+				"peak": 158.6,
+				"disttype": 0,
+				"b1": 0.19,
+				"b2": 0.19
+			},
+			{
+				"year": "2023",
+				"zhr": 6
+			},
+			{
+				"year": "2022",
+				"zhr": 6
+			},
+			{
+				"year": "2009",
+				"zhr": 7
+			}
+			],
+			"speed": 66,
+			"radiantAlpha": 91,
+			"radiantDelta": 39,
+			"driftAlpha": 1.24,
+			"driftDelta": -0.01,
+			"parentObj": "Comet C/1911 N1 (Kiess)",
+			"pidx": 2.5
+		},
+		"CAP":
+		{
+			"designation": "α-Capricornids",
+			"IAUNo": "1",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 5,
+				"start": 101,
+				"finish": 142,
+				"peak": 127.0
+			}
+			],
+			"speed": 23,
+			"radiantAlpha": 307,
+			"radiantDelta": -10,
+			"driftAlpha": 0.97,
+			"driftDelta": 0.24,
+			"colors":
+			[
+			{
+				"color": "white",
+				"intensity": 60
+			},
+			{
+				"color": "yellow",
+				"intensity": 40
+			}
+			],
+			"parentObj": "Comet 169P/NEAT",
+			"pidx": 2.5
+		},
+		"COM":
+		{
+			"designation": "Comae Berenicids",
+			"IAUNo": "20",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 3,
+				"start": 259,
+				"finish": 271,
+				"peak": 264
+			}
+			],
+			"speed": 65,
+			"radiantAlpha": 175,
+			"radiantDelta": 18,
+			"driftAlpha": 0.96,
+			"driftDelta": -0.39,
+			"pidx": 3.0
+		},
+		"DAU":
+		{
+			"designation": "October δ-Aurigids",
+			"IAUNo": "224",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 2,
+				"start": 196,
+				"finish": 205,
+				"peak": 198
+			}
+			],
+			"speed": 64,
+			"radiantAlpha": 84,
+			"radiantDelta": 44,
+			"driftAlpha": 1.1,
+			"driftDelta": 0.1,
+			"pidx": 3.0
+		},
+		"DLM":
+		{
+			"designation": "December Leonis Minorids",
+			"IAUNo": "32",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 5,
+				"start": 252,
+				"finish": 315,
+				"peak": 268
+			}
+			],
+			"speed": 64,
+			"radiantAlpha": 161,
+			"radiantDelta": 30,
+			"driftAlpha": 0.86,
+			"driftDelta": 0.43,
+			"pidx": 3.0
+		},
+		"DRA":
+		{
+			"designation": "Draconids",
+			"IAUNo": "9",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "20-700",
+				"start": 192,
+				"finish": 197,
+				"peak": 195.4
+			},
+			{
+				"year": "2023",
+				"zhr": 5
+			},
+			{
+				"year": "2022",
+				"zhr": 10
+			},
+			{
+				"year": "1946",
+				"zhr": 12000,
+				"peak": 196.992,
+				"disttype": 0,
+				"b1": 0.035
+			},
+			{
+				"year": "1933",
+				"zhr": 10000,
+				"peak": 196.999,
+				"disttype": 0,
+				"b1": 0.025
+			}
+			],
+			"speed": 20,
+			"radiantAlpha": 262,
+			"radiantDelta": 54,
+			"driftAlpha": 0.34,
+			"driftDelta": -0.05,
+			"colors":
+			[
+			{
+				"color": "white",
+				"intensity": 50
+			},
+			{
+				"color": "orangeYellow",
+				"intensity": 30
+			},
+			{
+				"color": "yellow",
+				"intensity": 20
+			}
+			],
+			"parentObj": "Comet 21P/Giacobini-Zinner",
+			"pidx": 2.6
+		},
+		"EGE":
+		{
+			"designation": "ε-Geminids",
+			"IAUNo": "23",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 3,
+				"start": 200,
+				"finish": 214,
+				"peak": 205,
+				"disttype": 0,
+				"b1": 0.082,
+				"b2": 0.082
+			}
+			],
+			"speed": 70,
+			"radiantAlpha": 102,
+			"radiantDelta": 27,
+			"driftAlpha": 1.13,
+			"driftDelta": -0.03,
+			"parentObj": "Comet C/1964 N1 (Ikeya)",
+			"pidx": 3.0
+		},
+		"ELY":
+		{
+			"designation": "η-Lyrids",
+			"IAUNo": "145",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 3,
+				"start": 42,
+				"finish": 53,
+				"peak": 50
+			}
+			],
+			"speed": 43,
+			"radiantAlpha": 291,
+			"radiantDelta": 43,
+			"driftAlpha": 0.56,
+			"driftDelta": 0.14,
+			"pidx": 3.0
+		},
+		"ETA":
+		{
+			"designation": "η-Aquariids",
+			"IAUNo": "31",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "40-85",
+				"start": 28,
+				"finish": 66,
+				"peak": 45.5,
+				"disttype": 0,
+				"b1": 0.08,
+				"b2": 0.08
+			},
+			{
+				"year": "2023",
+				"zhr": 50
+			},
+			{
+				"year": "2022",
+				"zhr": 50
+			}
+			],
+			"speed": 66,
+			"radiantAlpha": 338,
+			"radiantDelta": -1,
+			"driftAlpha": 0.92,
+			"driftDelta": 0.37,
+			"colors":
+			[
+			{
+				"color": "white",
+				"intensity": 70
+			},
+			{
+				"color": "yellow",
+				"intensity": 30
+			}
+			],
+			"parentObj": "Comet 1P/Halley",
+			"pidx": 2.4
+		},
+		"GEM":
+		{
+			"designation": "Geminids",
+			"IAUNo": "4",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 120,
+				"start": 251,
+				"finish": 268,
+				"peak": 262.2,
+				"disttype": 0,
+				"b1": 0.39,
+				"b2": 0.72
+			},
+			{
+				"year": "2023",
+				"zhr": 150
+			},
+			{
+				"year": "2022",
+				"zhr": 150
+			}
+			],
+			"speed": 35,
+			"radiantAlpha": 112,
+			"radiantDelta": 33,
+			"driftAlpha": 1.15,
+			"driftDelta": -0.16,
+			"colors":
+			[
+			{
+				"color": "white",
+				"intensity": 65
+			},
+			{
+				"color": "yellow",
+				"intensity": 25
+			},
+			{
+				"color": "greenBlue",
+				"intensity": 10
+			}
+			],
+			"parentObj": "Minor planet (3200) Phaethon",
+			"pidx": 2.6
+		},
+		"GNO":
+		{
+			"designation": "γ-Normids",
+			"IAUNo": "118",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 6,
+				"start": 335,
+				"finish": 8,
+				"peak": 354,
+				"disttype": 0,
+				"b1": 0.19,
+				"b2": 0.19
+			}
+			],
+			"speed": 56,
+			"radiantAlpha": 239,
+			"radiantDelta": -50,
+			"driftAlpha": 1.3,
+			"driftDelta": -0.1,
+			"pidx": 2.4
+		},
+		"HYD":
+		{
+			"designation": "σ-Hydrids",
+			"IAUNo": "16",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 7,
+				"start": 250,
+				"finish": 268,
+				"peak": 257
+			}
+			],
+			"speed": 58,
+			"radiantAlpha": 125,
+			"radiantDelta": 2,
+			"driftAlpha": 0.92,
+			"driftDelta": -0.28,
+			"pidx": 3.0
+		},
+		"JBO":
+		{
+			"designation": "June Bootids",
+			"IAUNo": "170",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "0-100",
+				"start": 90,
+				"finish": 100,
+				"peak": 95.7
+			}
+			],
+			"speed": 18,
+			"radiantAlpha": 224,
+			"radiantDelta": 48,
+			"driftAlpha": 0.4,
+			"driftDelta": -0.2,
+			"parentObj": "Comet 7P/Pons-Winnecke",
+			"pidx": 2.2
+		},
+		"KCG":
+		{
+			"designation": "κ-Cygnids",
+			"IAUNo": "12",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 3,
+				"start": 130,
+				"finish": 152,
+				"peak": 145,
+				"disttype": 0,
+				"b1": 0.069,
+				"b2": 0.069
+			},
+			{
+				"year": "2023",
+				"zhr": 3,
+				"peak": 144
+			}
+			],
+			"speed": 25,
+			"radiantAlpha": 286,
+			"radiantDelta": 59,
+			"driftAlpha": 0.4,
+			"driftDelta": 0.05,
+			"parentObj": "Minor planet 2008 ED69",
+			"pidx": 3.0
+		},
+		"LEO":
+		{
+			"designation": "Leonids",
+			"IAUNo": "13",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "5-20",
+				"start": 223,
+				"finish": 248,
+				"peak": 235.27,
+				"disttype": 0,
+				"b1": 0.39,
+				"b2": 0.39
+			},
+			{
+				"year": "2023",
+				"zhr": -1,
+				"variable": "10-15"
+			},
+			{
+				"year": "2022",
+				"zhr": -1,
+				"variable": "10-15"
+			},
+			{
+				"year": "2002",
+				"zhr": 2200,
+				"peak": 236.898,
+				"disttype": 1,
+				"b1": 0.024
+			},
+			{
+				"year": "2001",
+				"peak": 236.451,
+				"zhr": 1400,
+				"disttype": 1,
+				"b1": 0.04
+			},
+			{
+				"year": "2000",
+				"zhr": 480,
+				"peak": 235.276,
+				"disttype": 1,
+				"b1": 0.07
+			},
+			{
+				"year": "1999",
+				"peak": 235.282,
+				"zhr": 4200,
+				"disttype": 1,
+				"b1": 0.031
+			},
+			{
+				"year": "1998",
+				"peak": 234.52,
+				"zhr": 200,
+				"disttype": 1,
+				"b1": 0.8
+			},
+			{
+				"year": "1966",
+				"peak": 235.166,
+				"zhr": 150000,
+				"disttype": 1,
+				"b1": 0.028
+			},
+			{
+				"year": "1867",
+				"peak": 233.410,
+				"zhr": 4300,
+				"disttype": 1,
+				"b1": 0.024
+			},
+			{
+				"year": "1866",
+				"peak": 233.327,
+				"zhr": 6800,
+				"disttype": 1,
+				"b1": 0.033
+			},
+			{
+				"year": "1833",
+				"peak": 233.144,
+				"zhr": 150000,
+				"disttype": 1,
+				"b1": 0.033
+			}
+			],
+			"speed": 71,
+			"radiantAlpha": 152,
+			"radiantDelta": 22,
+			"driftAlpha": 0.99,
+			"driftDelta": -0.36,
+			"colors":
+			[
+			{
+				"color": "blueGreen",
+				"intensity": 50
+			},
+			{
+				"color": "white",
+				"intensity": 50
+			}
+			],
+			"parentObj": "Comet 55P/Tempel-Tuttle",
+			"pidx": 2.5
+		},
+		"LMI":
+		{
+			"designation": "Leonis Minorids",
+			"IAUNo": "22",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 2,
+				"start": 205,
+				"finish": 214,
+				"peak": 211,
+				"disttype": 0,
+				"b1": 0.14,
+				"b2": 0.14
+			}
+			],
+			"speed": 62,
+			"radiantAlpha": 162,
+			"radiantDelta": 37,
+			"driftAlpha": 1.02,
+			"driftDelta": -0.38,
+			"pidx": 3.0
+		},
+		"LYR":
+		{
+			"designation": "April Lyrids",
+			"IAUNo": "6",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "0-90",
+				"start": 23,
+				"finish": 40,
+				"peak": 32.32,
+				"disttype": 0,
+				"b1": 0.22,
+				"b2": 0.22
+			},
+			{
+				"year": "2023",
+				"zhr": 18
+			},
+			{
+				"year": "2022",
+				"zhr": 18
+			},
+			{
+				"year": "1982",
+				"zhr": 250,
+				"peak": 32.085,
+				"disttype": 1,
+				"b1": 0.018
+			},
+			{
+				"year": "1945",
+				"zhr": 112,
+				"peak": 32.053
+			},
+			{
+				"year": "1922",
+				"zhr": 800,
+				"peak": 32.006,
+				"disttype": 1,
+				"b1": 0.017
+			}
+			],
+			"speed": 49,
+			"radiantAlpha": 271,
+			"radiantDelta": 34,
+			"driftAlpha": 0.66,
+			"driftDelta": 0.02,
+			"parentObj": "Comet C/1861 G1 (Thatcher)",
+			"pidx": 2.1
+		},
+		"MON":
+		{
+			"designation": "December Monocerotids",
+			"IAUNo": "19",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 3,
+				"start": 252,
+				"finish": 268,
+				"peak": 257,
+				"disttype": 0,
+				"b1": 0.25,
+				"b2": 0.25
+			}
+			],
+			"speed": 41,
+			"radiantAlpha": 100,
+			"radiantDelta": 8,
+			"driftAlpha": 0.97,
+			"driftDelta": -0.09,
+			"parentObj": "Minor planet 2004 TG10",
+			"pidx": 3.0
+		},
+		"NIA":
+		{
+			"designation": "Northern ι-Aquariids",
+			"IAUNo": "33",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "5-10",
+				"start": 133,
+				"finish": 160,
+				"peak": 148.0
+			}
+			],
+			"radiantAlpha": 350,
+			"radiantDelta": 0,
+			"driftAlpha": 1.03,
+			"driftDelta": 0.13,
+			"pidx": 3.0
+		},
+		"NTA":
+		{
+			"designation": "Northern Taurids",
+			"IAUNo": "17",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 5,
+				"start": 206,
+				"finish": 258,
+				"peak": 230
+			}
+			],
+			"speed": 29,
+			"radiantAlpha": 58,
+			"radiantDelta": 22,
+			"driftAlpha": 1.03,
+			"driftDelta": 0.26,
+			"colors":
+			[
+			{
+				"color": "yellow",
+				"intensity": 80
+			},
+			{
+				"color": "white",
+				"intensity": 20
+			}
+			],
+			"parentObj": "Comet 2P/Encke",
+			"pidx": 2.3
+		},
+		"ORI":
+		{
+			"designation": "Orionids",
+			"IAUNo": "8",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 20,
+				"start": 188,
+				"finish": 225,
+				"peak": 208.0,
+				"disttype": 0,
+				"b1": 0.12,
+				"b2": 0.12
+			}
+			],
+			"speed": 66,
+			"radiantAlpha": 95,
+			"radiantDelta": 16,
+			"driftAlpha": 1.03,
+			"driftDelta": -0.05,
+			"colors":
+			[
+			{
+				"color": "white",
+				"intensity": 50
+			},
+			{
+				"color": "greenBlue",
+				"intensity": 30
+			},
+			{
+				"color": "yellow",
+				"intensity": 20
+			}
+			],
+			"pidx": 2.5
+		},
+		"PAU":
+		{
+			"designation": "Piscis Austrinids",
+			"IAUNo": "183",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 5,
+				"start": 112,
+				"finish": 138,
+				"peak": 125,
+				"disttype": 0,
+				"b1": 0.26,
+				"b2": 0.26
+			}
+			],
+			"speed": 35,
+			"radiantAlpha": 341,
+			"radiantDelta": -30,
+			"driftAlpha": 0.94,
+			"driftDelta": 0.4,
+			"pidx": 3.2
+		},
+		"PER":
+		{
+			"designation": "Perseids",
+			"IAUNo": "7",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 100,
+				"start": 114,
+				"finish": 151,
+				"peak": 140.0,
+				"disttype": 0,
+				"b1": 0.2,
+				"b2": 0.2
+			}
+			],
+			"speed": 59,
+			"radiantAlpha": 48,
+			"radiantDelta": 58,
+			"driftAlpha": 1.4,
+			"driftDelta": 0.26,
+			"colors":
+			[
+			{
+				"color": "white",
+				"intensity": 70
+			},
+			{
+				"color": "blueGreen",
+				"intensity": 30
+			}
+			],
+			"parentObj": "Comet 109P/Swift-Tuttle",
+			"pidx": 2.2
+		},
+		"PHO":
+		{
+			"designation": "Phoenicids",
+			"IAUNo": "254",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "0-100",
+				"start": 245,
+				"finish": 257,
+				"peak": 250,
+				"disttype": 0,
+				"b1": 0.3,
+				"b2": 0.3
+			}
+			],
+			"speed": 18,
+			"radiantAlpha": 18,
+			"radiantDelta": -53,
+			"driftAlpha": 0.8,
+			"driftDelta": -0.2,
+			"parentObj": "Comet 289P/Blanpain",
+			"pidx": 2.8
+		},
+		"PPU":
+		{
+			"designation": "π-Puppids",
+			"IAUNo": "137",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "0-40",
+				"start": 24,
+				"finish": 38,
+				"peak": 33.5
+			}			
+			],
+			"speed": 18,
+			"radiantAlpha": 110,
+			"radiantDelta": -45,
+			"driftAlpha": 0.4,
+			"driftDelta": -0.1,
+			"parentObj": "Comet 26P/Grigg-Skjellerup",
+			"pidx": 2.0
+		},
+		"PUP":
+		{
+			"designation": "Puppid-Velids",
+			"IAUNo": "301",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 10,
+				"start": 248,
+				"finish": 263,
+				"peak": 255,
+				"disttype": 0,
+				"b1": 0.034,
+				"b2": 0.034
+			}
+			],
+			"speed": 40,
+			"radiantAlpha": 123,
+			"radiantDelta": -45,
+			"driftAlpha": 0.6,
+			"driftDelta": 0,
+			"pidx": 2.9
+		},
+		"QUA":
+		{
+			"designation": "Quadrantids",
+			"IAUNo": "10",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "60-200",
+				"start": 275,
+				"finish": 292,
+				"peak": 283.15,
+				"disttype": 0,
+				"b1": 1.8,
+				"b2": 1.8
+			},
+			{
+				"year": "2023",
+				"zhr": 110
+			},
+			{
+				"year": "2022",
+				"zhr": 120
+			}
+			],
+			"speed": 41,
+			"radiantAlpha": 230,
+			"radiantDelta": 49,
+			"driftAlpha": 0.56,
+			"driftDelta": -0.25,
+			"colors":
+			[
+			{
+				"color": "white",
+				"intensity": 70
+			},
+			{
+				"color": "blueGreen",
+				"intensity": 30
+			}
+			],
+			"parentObj": "Minor planet 2003 EH1 and Comet C/1490 Y1",
+			"pidx": 2.1
+		},
+		"SDA":
+		{
+			"designation": "Southern δ-Aquariids",
+			"IAUNo": "5",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 25,
+				"start": 109,
+				"finish": 150,
+				"peak": 127,
+				"disttype": 0,
+				"b1": 0.091,
+				"b2": 0.091
+			}
+			],
+			"speed": 41,
+			"radiantAlpha": 340,
+			"radiantDelta": -16,
+			"driftAlpha": 0.75,
+			"driftDelta": 0.21,
+			"colors":
+			[
+			{
+				"color": "white",
+				"intensity": 60
+			},
+			{
+				"color": "yellow",
+				"intensity": 40
+			}
+			],
+			"parentObj": "Comet 96P/Machholz",
+			"pidx": 3.2
+		},
+		"SPE":
+		{
+			"designation": "September ε-Perseids",
+			"IAUNo": "208",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 5,
+				"start": 161,
+				"finish": 178,
+				"peak": 166.7
+			}
+			],
+			"speed": 64,
+			"radiantAlpha": 47,
+			"radiantDelta": 40,
+			"driftAlpha": 1.17,
+			"driftDelta": 0.26,
+			"pidx": 3.0
+		},
+		"STA":
+		{
+			"designation": "Southern Taurids",
+			"IAUNo": "2",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "5-10",
+				"start": 166,
+				"finish": 238,
+				"peak": 197
+			},
+			{
+				"year": "2023",
+				"zhr": 7,
+				"peak": 223
+			}
+			],
+			"speed": 27,
+			"radiantAlpha": 52,
+			"radiantDelta": 15,
+			"driftAlpha": 0.82,
+			"driftDelta": 0.29,
+			"colors":
+			[
+			{
+				"color": "yellow",
+				"intensity": 80
+			},
+			{
+				"color": "white",
+				"intensity": 20
+			}
+			],
+			"parentObj": "Comet 2P/Encke",
+			"pidx": 2.3
+		},
+		"TAH":
+		{
+			"designation": "τ-Herculids",
+			"IAUNo": "61",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "1-72",
+				"start": 59,
+				"finish": 81,
+				"peak": 72.0
+			},
+			{
+				"year": "2022",
+				"zhr": 45,
+				"peak": 69.45
+			},
+			{
+				"year": "1930",
+				"zhr": 50,
+				"peak": 78
+			}
+			],
+			"speed": 15,
+			"radiantAlpha": 209,
+			"radiantDelta": 28,
+			"driftAlpha": -0.1,
+			"driftDelta": 0.9,
+			"parentObj": "Comet 73P/Schwassmann-Wachmann 3",
+			"pidx": 3.0
+		},
+		"URS":
+		{
+			"designation": "Ursids",
+			"IAUNo": "15",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "10-50",
+				"start": 264,
+				"finish": 274,
+				"peak": 270.7,
+				"disttype": 0,
+				"b1": 0.61,
+				"b2": 0.61
+			},
+			{
+				"year": "2023",
+				"zhr": 10
+			},
+			{
+				"year": "2022",
+				"zhr": 10
+			},
+			{
+				"year": "2000",
+				"zhr": 90,
+				"peak": 270.780,
+				"disttype": 1,
+				"b1": 0.09
+			},
+			{
+				"year": "1986",
+				"zhr": 110,
+				"peak": 270.935,
+				"disttype": 1,
+				"b1": 0.05
+			},
+			{
+				"year": "1945",
+				"zhr": 120,
+				"peak": 271.324,
+				"disttype": 1,
+				"b1": 0.05
+			}
+			],
+			"speed": 33,
+			"radiantAlpha": 217,
+			"radiantDelta": 76,
+			"driftAlpha": 0.05,
+			"driftDelta": -0.31,
+			"parentObj": "Comet 8P/Tuttle",
+			"pidx": 2.8
+		},
+		"ERI":
+		{
+			"designation": "η-Eridanids",
+			"IAUNo": "191",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 3,
+				"start": 118,
+				"finish": 174,
+				"peak": 135
+			}
+			],
+			"speed": 64.5,
+			"radiantAlpha": 43.7,
+			"radiantDelta": -11.9,
+			"driftAlpha": 0.86,
+			"driftDelta": 0.29,
+			"parentObj": "Comet C/1852 K1 (Chacornac)?",
+			"pidx": 3.0
+		},
+		"GUM":
+		{
+			"designation": "γ-Ursae Minorids",
+			"IAUNo": "404",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 3,
+				"start": 289,
+				"finish": 302,
+				"peak": 298
+			}
+			],
+			"speed": 31,
+			"radiantAlpha": 228,
+			"radiantDelta": 67,
+			"driftAlpha": 0.97,
+			"driftDelta": -0.09,
+			"pidx": 3.0
+		},
+		"JPE":
+		{
+			"designation": "July Pegasids",
+			"IAUNo": "175",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 5,
+				"start": 101,
+				"finish": 112,
+				"peak": 107.5
+			}
+			],
+			"speed": 61,
+			"radiantAlpha": 340,
+			"radiantDelta": 15,
+			"driftAlpha": 0.9,
+			"driftDelta": 0.39,
+			"parentObj": "Comet C/1979 Y1 (Bradfield)",
+			"pidx": 3.0
+		},
+		"GDR":
+		{
+			"designation": "July γ-Draconids",
+			"IAUNo": "184",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 5,
+				"start": 121,
+				"finish": 128,
+				"peak": 125.3
+			}
+			],
+			"speed": 27,
+			"radiantAlpha": 280,
+			"radiantDelta": 51,
+			"driftAlpha": 0.45,
+			"driftDelta": 0.07,
+			"pidx": 3.0
+		},
+		"OCT":
+		{
+			"designation": "October Camelopardalids",
+			"IAUNo": "281",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 5,
+				"start": 191,
+				"finish": 193,
+				"peak": 192.58
+			}
+			],
+			"speed": 47,
+			"radiantAlpha": 164,
+			"radiantDelta": 79,
+			"driftAlpha": -0.93,
+			"driftDelta": -0.13,
+			"pidx": 2.5
+		}
+	}
+}

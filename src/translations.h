@@ -30,54 +30,6 @@ class Translations
 		// Generate Gettext strings for traduction
 		Q_ASSERT(0);
 
-		// Cardinals names
-		// TRANSLATORS: Cardinals names: North
-		N_("N");
-		// TRANSLATORS: Cardinals names: South
-		N_("S");
-		// TRANSLATORS: Cardinals names: East
-		N_("E");
-		// TRANSLATORS: Cardinals names: West
-		N_("W");
-		// TRANSLATORS: Ordinals names: Northeast
-		N_("NE");
-		// TRANSLATORS: Ordinals names: Southeast
-		N_("SE");
-		// TRANSLATORS: Ordinals names: Southwest
-		N_("SW");
-		// TRANSLATORS: Ordinals names: Northwest
-		N_("NW");
-
-		// =====================================================================
-		// List of types solar system bodies
-		// TRANSLATORS: Type of object
-		N_("star");
-		// TRANSLATORS: Type of object
-		N_("planet");
-		// TRANSLATORS: Type of object
-		N_("comet");
-		// TRANSLATORS: Type of object
-		N_("asteroid");
-		// TRANSLATORS: Type of object
-		N_("moon");
-		// TRANSLATORS: Type of object
-		N_("plutino");
-		// TRANSLATORS: Type of object
-		N_("dwarf planet");
-		// TRANSLATORS: Type of object
-		N_("cubewano");
-		// TRANSLATORS: Type of object
-		N_("scattered disc object");
-		// TRANSLATORS: Type of object
-		N_("Oort cloud object");
-		// TRANSLATORS: Type of object
-		N_("sednoid");
-		// TRANSLATORS: Type of object
-		N_("interstellar object");
-		// TRANSLATORS: Type of object
-		N_("observer");
-		// TRANSLATORS: Type of object
-		N_("artificial");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Planets");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
@@ -466,95 +418,14 @@ class Translations
 		N_("Bright variable stars");
 		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
 		N_("Bright stars with high proper motion");
-		
-		// =====================================================================
-		// Constellation cultures
-		// TRANSLATORS: Name of the sky culture
-		N_("Almagest");
-		// TRANSLATORS: Name of the sky culture
-		N_("Anutan");
-		// TRANSLATORS: Name of the sky culture
-		N_("Arabic");
-		// TRANSLATORS: Name of the sky culture
-		N_("Arabic Moon Stations");
-		// TRANSLATORS: Name of the sky culture
-		N_("Armintxe");
-		// TRANSLATORS: Name of the sky culture
-		N_("Aztec");
-		// TRANSLATORS: Name of the sky culture
-		N_("Belarusian");
-		// TRANSLATORS: Name of the sky culture
-		N_("Boorong");
-		// TRANSLATORS: Name of the sky culture
-		N_("Chinese");
-		// TRANSLATORS: Name of the sky culture
-		N_("Chinese Contemporary");
-		// TRANSLATORS: Name of the sky culture
-		N_("Chinese Medieval");
-		// TRANSLATORS: Name of the sky culture
-		N_("Egyptian");
-		// TRANSLATORS: Name of the sky culture
-		N_("Hawaiian Starlines");
-		// TRANSLATORS: Name of the sky culture
-		N_("Inuit");
-		// TRANSLATORS: Name of the sky culture
-		N_("Indian Vedic");
-		// TRANSLATORS: Name of the sky culture
-		N_("Japanese Moon Stations");
-		// TRANSLATORS: Name of the sky culture
-		N_("Kamilaroi/Euahlayi");
-		// TRANSLATORS: Name of the sky culture
-		N_("Korean");
-		// TRANSLATORS: Name of the sky culture
-		N_("Dakota/Lakota/Nakota");
-		// TRANSLATORS: Name of the sky culture
-		N_("Macedonian");
-		// TRANSLATORS: Name of the sky culture
-		N_("Maori");
-		// TRANSLATORS: Name of the sky culture
-		N_("Maya");
-		// TRANSLATORS: Name of the sky culture
-		N_("Mongolian");
-		// TRANSLATORS: Name of the sky culture
-		N_("Lokono");
-		// TRANSLATORS: Name of the sky culture
-		N_("Navajo");
-		// TRANSLATORS: Name of the sky culture
-		N_("Norse");
-		// TRANSLATORS: Name of the sky culture
-		N_("Ojibwe");
-		// TRANSLATORS: Name of the sky culture
-		N_("Romanian");
-		// TRANSLATORS: Name of the sky culture
-		N_("Sami");
-		// TRANSLATORS: Name of the sky culture
-		N_("Sardinian");
-		// TRANSLATORS: Name of the sky culture
-		N_("Siberian");
-		// TRANSLATORS: Name of the sky culture
-		N_("Tukano");
-		// TRANSLATORS: Name of the sky culture
-		N_("Tupi-Guarani");
-		// TRANSLATORS: Name of the sky culture
-		N_("Tongan");
-		// TRANSLATORS: Name of the sky culture
-		N_("Western");
-		// TRANSLATORS: Name of the sky culture
-		N_("Western (H.A.Rey)");
-		// TRANSLATORS: Name of the sky culture
-		N_("Western (O.Hlad)");
-		// TRANSLATORS: Name of the sky culture
-		N_("Western (Sky & Telescope)");
-		// TRANSLATORS: Name of the sky culture
-		N_("Northern Andes");
-		// TRANSLATORS: Name of the sky culture
-		N_("Babylonian (MUL.APIN)");
-		// TRANSLATORS: Name of the sky culture
-		N_("Babylonian (Seleucid)");
-		// TRANSLATORS: Name of the sky culture and landscape
-		N_("Armintxe Cave");
-		// TRANSLATORS: Name of the sky culture
-		N_("Vanuatu (Netwar)");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Variable stars: Algol-type eclipsing systems");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Variable stars: the classical cepheids");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Bright carbon stars");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Bright barium stars");
 		
 		// =====================================================================
 		// Landscape names
@@ -690,6 +561,8 @@ class Translations
 		N_("Uranian analemma");
 		// TRANSLATORS: Name of script
 		N_("Messier Marathon");
+		// TRANSLATORS: Name of script
+		N_("Random location");
 		
 		// =====================================================================
 		// Script descriptions
@@ -710,13 +583,13 @@ class Translations
 		N_("Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021.");
 		N_("Phobos occultations of Earth are common, as are occultations of Jupiter. But occultations of both on the same day are very rare. Here's one that takes place 1/23/2048. In real speed.");
 		N_("Phobos races ahead of Mars and transits the sun, passes through it and then retrogrades back towards the sun and just partially transits it again (only seen in the southern hemisphere of Deimos), then Mars totally eclipses the sun while Phobos transits in darkness between Mars and Deimos. When Phobos emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to light up later.");
-		N_("Screensaver of various happenings in the Solar System. 300 events in all!");
+		N_("Screensaver of various happenings in the Solar System. 313 events in all!");
 		N_("A tour of the western constellations.");
 		N_("A tour of the constellations of the selected sky culture.");
 		N_("Look at the Sun from big planets of Solar System and Pluto.");
 		N_("Best views of Earth from other Solar System bodies in the 21st Century.");
 		N_("Transit of Venus as seen from Sydney Australia, 6th June 2012.");
-		N_("Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae plugin has to be enabled.");
+		N_("Flash of the supernova observed by Tycho Brahe in 1572. The Historical Supernovae plugin has to be enabled.");
 		N_("Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-3000");
 		N_("Earth Greatest Elongations and Transits from Callisto 2000-3000. Why Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's moons, Callisto will be the one.");
 		N_("Earth the other visible Planet's Greatest Elongations and Oppositions from Ceres 2000-2200");
@@ -738,7 +611,9 @@ class Translations
 		N_("A demonstration of the analemma - the path of the Sun across the sky during the year on Saturn.");
 		N_("A demonstration of the analemma - the path of the Sun across the sky during the year on Uranus.");
 		N_("Messier Marathon on March 20, 2020. The data for the script are taken from GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm");
-		
+		N_("Creates 6 tiles (North/East/South/West/Up/Down) for a skybox. These can be further used e.g. in Unity3D or other 3D environments. Output directory and filenames can be set with environment variables STEL_SKYBOX_DIR and STEL_SKYBOX_BASENAME. A data file is also written, you can set its name with environment variable OUTPUT_DATA. Please read the script to understand how to apply it to your projects.");
+		N_("This script will help you make practical works for celestial navigation - he sets a random location and hides it from the GUI.");
+
 		// =====================================================================
 		// List of GUI elements (Qt's dialogs)
 		N_("&Undo");
@@ -760,6 +635,9 @@ class Translations
 		N_("Computer");
 		N_("&Open");
 		N_("&Save");
+		N_("Save");
+		N_("Save As:");
+		N_("Tags:");
 		N_("File &name:");
 		N_("Copy &Link Location");
 		N_("Abort");
@@ -792,6 +670,8 @@ class Translations
 		N_("&Rename");
 		N_("&Delete");
 		N_("&New Folder");
+		N_("New Folder");
 		N_("Show &hidden files");
+		N_("Search");
 	}
 };

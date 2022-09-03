@@ -28,7 +28,6 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "common/SerialPort.hpp"
 
 #include <list>
-using namespace std;
 
 class NexStarCommand;
 
@@ -37,18 +36,18 @@ class NexStarConnection : public SerialPort
 {
 public:
 	NexStarConnection(Server &server, const char *serial_device);
-	~NexStarConnection(void) { resetCommunication(); }
+	~NexStarConnection(void) Q_DECL_OVERRIDE { resetCommunication(); }
 	void sendGoto(unsigned int ra_int, int dec_int);
 	void sendSync(unsigned int ra_int, int dec_int);
 	void sendCommand(NexStarCommand * command);
 	
 private:
-	void dataReceived(const char *&p, const char *read_buff_end);
-	void sendPosition(unsigned int ra_int, int dec_int, int status) {Q_UNUSED(ra_int); Q_UNUSED(dec_int); Q_UNUSED(status);}
+	virtual void dataReceived(const char *&p, const char *read_buff_end) Q_DECL_OVERRIDE;
+	virtual void sendPosition(unsigned int ra_int, int dec_int, int status) Q_DECL_OVERRIDE {Q_UNUSED(ra_int) Q_UNUSED(dec_int) Q_UNUSED(status)}
 	void resetCommunication(void);
 	
 private:
-	list<NexStarCommand*> command_list;
+	std::list<NexStarCommand*> command_list;
 };
 
 #endif // NEXSTARCONNECTION_HPP

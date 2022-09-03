@@ -32,45 +32,42 @@ StelObjectModule::~StelObjectModule()
 bool StelObjectModule::matchObjectName(const QString& objName, const QString& objPrefix, bool useStartOfWords) const
 {
 	if (useStartOfWords)
-	{
 		return objName.startsWith(objPrefix, Qt::CaseInsensitive);
-	}
 	else
-	{
 		return objName.contains(objPrefix, Qt::CaseInsensitive);
-	}
 }
 
-QStringList StelObjectModule::listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList StelObjectModule::listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem <= 0)
-	{
 		return result;
-	}
 
-	QStringList names = listAllObjects(inEnglish);
-	for (const auto& name : names)
+	QStringList names;
+	names << listAllObjects(false) << listAllObjects(true);
+	QString fullMatch = "";
+	for (const auto& name : qAsConst(names))
 	{
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
-		{
 			continue;
-		}
 
-		result.append(name);
+		if (name==objPrefix)
+			fullMatch = name;
+		else
+			result.append(name);
 		if (result.size() >= maxNbItem)
-		{
 			break;
-		}
 	}
 
 	result.sort();
+	if (!fullMatch.isEmpty())
+		result.prepend(fullMatch);
 	return result;
 }
 
 QStringList StelObjectModule::listAllObjectsByType(const QString &objType, bool inEnglish) const
 {
-	Q_UNUSED(objType);
-	Q_UNUSED(inEnglish);
+	Q_UNUSED(objType)
+	Q_UNUSED(inEnglish)
 	return QStringList();
 }

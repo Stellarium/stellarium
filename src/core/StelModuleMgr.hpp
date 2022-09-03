@@ -27,8 +27,11 @@
 #include "StelPluginInterface.hpp"
 
 //! @def GETSTELMODULE(m)
-//! Return a pointer on a StelModule from its QMetaObject name @a m
+//! Return a pointer on a StelModule from its QMetaObject name @a m, and emit a warning to the logfile if module cannot be found.
 #define GETSTELMODULE( m ) qobject_cast< m *>(StelApp::getInstance().getModuleMgr().getModule( #m ))
+//! @def GETSTELMODULE_SILENT(m)
+//! Return a pointer on a StelModule from its QMetaObject name @a m, and don't emit a warning to the logfile if module cannot be found.
+#define GETSTELMODULE_SILENT( m ) qobject_cast< m *>(StelApp::getInstance().getModuleMgr().getModule( #m, true ))
 
 //! @class StelModuleMgr
 //! Manage a collection of StelModules including both core and plugin modules.
@@ -39,7 +42,7 @@ class StelModuleMgr : public QObject
 
 public:
 	StelModuleMgr();
-	~StelModuleMgr();
+	~StelModuleMgr() Q_DECL_OVERRIDE;
 
 	//! Regenerate calling lists if necessary
 	void update();
@@ -71,6 +74,8 @@ public:
 
 	bool isPluginLoaded(const QString& moduleID);
 
+	QString getStandardSupportLinksInfo(QString moduleName, bool furtherInfo = false);
+
 	//! Get the corresponding module or Q_NULLPTR if can't find it.
 	//! @param moduleID the QObject name of the module instance, by convention it is equal to the class name.
 	//! @param noWarning if true, don't display any warning if the module is not found.
@@ -88,7 +93,7 @@ public:
 	//! Contains the information read from the module.ini file
 	struct PluginDescriptor
 	{
-		PluginDescriptor() : loadAtStartup(false), loaded(false), pluginInterface(Q_NULLPTR) {;}
+		PluginDescriptor() : loadAtStartup(false), loaded(false), pluginInterface(Q_NULLPTR) {}
 		//! The static info for the plugin.
 		StelPluginInfo info;
 		//! If true, the module is automatically loaded at startup

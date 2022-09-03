@@ -34,22 +34,20 @@ class LocationDialog : public StelDialog
 	Q_OBJECT
 public:
 	LocationDialog(QObject* parent);
-	virtual ~LocationDialog();
+	virtual ~LocationDialog() Q_DECL_OVERRIDE;
 	//! Notify that the application style changed
-	void styleChanged();
+	virtual void styleChanged() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	virtual void retranslate() Q_DECL_OVERRIDE;
 	//! In addition to StelDialog's inherited solution, puts the arrow on the right spot in the map.
-	virtual void handleDialogSizeChanged(QSizeF size);
+	virtual void handleDialogSizeChanged(QSizeF size) Q_DECL_OVERRIDE;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	Ui_locationDialogForm* ui;
 
-	//void resizePixmap();
-	
 private:
 	//! Set the values of all the fields from a location info
 	//! Also move the observer to this position
@@ -73,11 +71,11 @@ private:
 	//! item.
 	void populatePlanetList();
 
-	//! Populates the drop-down list of countries.
+	//! Populates the drop-down list of regions.
 	//! The displayed names are localized in the current interface language.
 	//! The original names are kept in the user data field of each QComboBox
 	//! item.
-	void populateCountryList();
+	void populateRegionList(const QString& planet = "");
 
 	//! Populates the drop-down list of time zones.
 	//! The displayed names are localized in the current interface language.
@@ -113,7 +111,7 @@ private slots:
 	void setLocationFromList(const QModelIndex& index);
 	
 	//! Called when the planet is manually changed.
-	void moveToAnotherPlanet(const QString& text);
+	void moveToAnotherPlanet();
 
 	//! Called when latitude/longitude/altitude is modified
 	//! The int argument is required by the Altitude spinbox signal connection, but unused.
@@ -125,8 +123,8 @@ private slots:
 	//! Called when the user clicks on the delete button
 	void deleteCurrentLocationFromList();
 
-	//! filter city list to show entries from single country only
-	void filterSitesByCountry();
+	//! filter city list to show entries from single region only
+	void filterSitesByRegion();
 
 	//! reset city list to complete list (may have been reduced to picked list)
 	void resetLocationList();
@@ -137,6 +135,11 @@ private slots:
 	//! @arg state true to immediately query location and activate auto-query on next launch.
 	//! @arg state false to store current location as startup location.
 	void ipQueryLocation(bool state);
+
+	// Esp. for signals from StelSkyCultureMgr
+	void populatePlanetList(QString) { populatePlanetList(); }
+
+	void setDisplayFormatForSpins(bool flagDecimalDegrees);
 
 #ifdef ENABLE_GPS
 	//! called when the user wants to get GPS location from GPSD or directly attached (USB over virtual serial device) GPS device.

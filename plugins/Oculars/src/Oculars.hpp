@@ -26,7 +26,7 @@
 #include "Ocular.hpp"
 #include "OcularDialog.hpp"
 #include "StelModule.hpp"
-#include "StelTexture.hpp"
+#include "StelTextureTypes.hpp"
 #include "Telescope.hpp"
 #include "VecMath.hpp"
 
@@ -87,6 +87,7 @@ class Oculars : public StelModule
 	Q_PROPERTY(int selectedTelescopeIndex READ getSelectedTelescopeIndex WRITE selectTelescopeAtIndex NOTIFY selectedTelescopeChanged)
 	Q_PROPERTY(int selectedLensIndex      READ getSelectedLensIndex      WRITE selectLensAtIndex      NOTIFY selectedLensChanged)
 	Q_PROPERTY(double selectedCCDRotationAngle READ getSelectedCCDRotationAngle WRITE setSelectedCCDRotationAngle NOTIFY selectedCCDRotationAngleChanged)
+	Q_PROPERTY(double selectedCCDPrismPositionAngle READ getSelectedCCDPrismPositionAngle WRITE setSelectedCCDPrismPositionAngle NOTIFY selectedCCDPrismPositionAngleChanged)
 
 	Q_PROPERTY(bool flagGuiPanelEnabled          READ getFlagGuiPanelEnabled          WRITE enableGuiPanel NOTIFY flagGuiPanelEnabledChanged)
 	Q_PROPERTY(bool flagInitFOVUsage             READ getFlagInitFovUsage             WRITE setFlagInitFovUsage NOTIFY flagInitFOVUsageChanged) 
@@ -142,7 +143,6 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 	//! Returns the module-specific style sheet.	
 	virtual void handleMouseClicks(class QMouseEvent* event) Q_DECL_OVERRIDE;
-	virtual void update(double) Q_DECL_OVERRIDE {}
 
 	QString getDimensionsString(double fovX, double fovY) const;
 	QString getFOVString(double fov) const;
@@ -156,6 +156,7 @@ public slots:
 	//! is implemented.
 	void updateLists();
 	void ccdRotationReset();
+	void prismPositionAngleReset();
 	void decrementCCDIndex();
 	void decrementOcularIndex();
 	void decrementTelescopeIndex();
@@ -177,6 +178,10 @@ public slots:
 	void rotateCCD(int amount);     //!< amount must be a number. This adds to the current rotation.
 	double getSelectedCCDRotationAngle(void) const; //!< get rotation angle from currently selected CCD
 	void setSelectedCCDRotationAngle(double angle); //!< set rotation angle for currently selected CCD
+
+	void rotatePrism(int amount);     //!< amount must be a number. This adds to the current rotation.
+	double getSelectedCCDPrismPositionAngle(void) const; //!< get position angle from prism/OAG of currently selected CCD
+	void setSelectedCCDPrismPositionAngle(double angle); //!< set position angle for prism/OAG of currently selected CCD
 	
 	void selectCCDAtIndex(int index);           //!< index in the range of -1:ccds.count(), else call is ignored
 	int getSelectedCCDIndex() const {return selectedCCDIndex; }
@@ -208,16 +213,16 @@ public slots:
 	void setGuiPanelFontSize(int size);
 	int getGuiPanelFontSize()const {return guiPanelFontSize;}
 
-	void setTextColor(Vec3f color) {textColor=color; emit textColorChanged(color);}
+	void setTextColor(const Vec3f &color) {textColor=color; emit textColorChanged(color);}
 	Vec3f getTextColor() const {return textColor;}
 
-	void setLineColor(Vec3f color) {lineColor=color; emit lineColorChanged(color);}
+	void setLineColor(const Vec3f &color) {lineColor=color; emit lineColorChanged(color);}
 	Vec3f getLineColor() const {return lineColor;}
 
-	void setFocuserColor(Vec3f color) { focuserColor=color; emit focuserColorChanged(color);}
+	void setFocuserColor(const Vec3f &color) { focuserColor=color; emit focuserColorChanged(color);}
 	Vec3f getFocuserColor() const {return focuserColor;}
 
-	void setTelradFOV(Vec4f fov);
+	void setTelradFOV(const Vec4f &fov);
 	Vec4f getTelradFOV() const;
 
 	void setFlagDMSDegrees(const bool b);
@@ -316,12 +321,13 @@ signals:
 	void selectedTelescopeChanged(int value);
 	void selectedLensChanged(int value);
 	void selectedCCDRotationAngleChanged(double value);
+	void selectedCCDPrismPositionAngleChanged(double value);
 
 	void flagGuiPanelEnabledChanged(bool value);
 	void guiPanelFontSizeChanged(int value);
-	void textColorChanged(Vec3f color);
-	void lineColorChanged(Vec3f color);
-	void focuserColorChanged(Vec3f color);
+	void textColorChanged(const Vec3f &color);
+	void lineColorChanged(const Vec3f &color);
+	void focuserColorChanged(const Vec3f &color);
 	void flagHideGridsLinesChanged(bool value);
 	void flagAutosetMountForCCDChanged(bool value);
 	void flagScalingFOVForTelradChanged(bool value);
@@ -430,6 +436,7 @@ private:
 	int selectedTelescopeIndex;     //!< index of the current telescope, in the range of -1:telescopes.count(). -1 means none is selected.
 	int selectedLensIndex;          //!< index of the current lens, in the range of -1:lense.count(). -1 means no lens is selected
 	double selectedCCDRotationAngle;//!< allows rotating via property/remotecontrol API
+	double selectedCCDPrismPositionAngle;//!< allows rotating via property/remotecontrol API
 	int arrowButtonScale;           //!< allows scaling of the GUI "previous/next" Ocular/CCD/Telescope etc. buttons
 
 	QFont font;			//!< The font used for drawing labels.
@@ -465,6 +472,9 @@ private:
 	double absoluteStarScaleCCD;    //!< Value to store the absolute star scale when switching off CCD view
 	bool flagMoonScaleMain;	        //!< Flag to track of usage zooming of the Moon
 	bool flagMinorBodiesScaleMain;  //!< Flag to track of usage zooming of minor bodies
+	bool flagSunScaleMain;	        //!< Flag to track of usage zooming of the Sun
+	bool flagPlanetsScaleMain;	//!< Flag to track of usage zooming of major planets
+	bool flagDSOPropHintMain;	//!< Flag to track of usage proportional hints for DSO
 	double milkyWaySaturation;
 
 	double maxEyepieceAngle;        //!< The maximum aFOV of any eyepiece.
@@ -513,8 +523,10 @@ private:
 
 	//Reticle
 	StelTextureSP reticleTexture;
-	StelTextureSP cardinalsNormalTexture;
-	StelTextureSP cardinalsMirroredTexture;
+	StelTextureSP protractorTexture;
+	StelTextureSP protractorFlipVTexture;
+	StelTextureSP protractorFlipHTexture;
+	StelTextureSP protractorFlipHVTexture;
 	double actualFOV;		//!< Holds the FOV of the ocular/tescope/lens combination; what the screen is zoomed to.
 	double initialFOV;		//!< Holds the initial FOV, degrees
 	bool flagInitFOVUsage;		//!< Flag used to track if we use default initial FOV (value at the startup of planetarium).
@@ -551,9 +563,9 @@ class OcularsStelPluginInterface : public QObject, public StelPluginInterface
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
-	virtual QObjectList getExtensionList() const { return QObjectList(); }
+	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /* OCULARS_HPP */

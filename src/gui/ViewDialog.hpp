@@ -30,6 +30,8 @@ class QToolButton;
 
 class AddRemoveLandscapesDialog;
 class AtmosphereDialog;
+class SkylightDialog;
+class TonemappingDialog;
 class GreatRedSpotDialog;
 class ConfigureDSOColorsDialog;
 class ConfigureOrbitColorsDialog;
@@ -39,17 +41,17 @@ class ViewDialog : public StelDialog
 Q_OBJECT
 public:
 	ViewDialog(QObject* parent);
-	virtual ~ViewDialog();
+	virtual ~ViewDialog() Q_DECL_OVERRIDE;
 	//! Notify that the application style changed
-	void styleChanged();
+	virtual void styleChanged() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	virtual void retranslate() Q_DECL_OVERRIDE;
 
 protected:
 	Ui_viewDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 private slots:
 	void populateLists();
 	void populateToolTips();
@@ -59,22 +61,27 @@ private slots:
 	void changeLandscape(QListWidgetItem* item);
 	void landscapeChanged(QString id,QString name);
 	void updateZhrDescription(int zhr);
-	void setBortleScaleToolTip(int Bindex);
 	void setCurrentLandscapeAsDefault(void);
 	void setCurrentCultureAsDefault(void);
 	void updateDefaultSkyCulture();
 	void updateDefaultLandscape();
 
 	void showAddRemoveLandscapesDialog();
-        void showAtmosphereDialog();
+	// GZ I make this public to have it on a hotkey...
+public slots:
+	void showAtmosphereDialog();
+	void showSkylightDialog();
+	void showTonemappingDialog();
 	void showGreatRedSpotDialog();
 	void showConfigureDSOColorsDialog();
 	void showConfigureOrbitColorsDialog();
 
-	void populateLightPollution();
+private slots:
 	void populatePlanetMagnitudeAlgorithmsList();
 	void populatePlanetMagnitudeAlgorithmDescription();
 	void setPlanetMagnitudeAlgorithm(int algorithmID);
+
+	void setSelectedCardinalCheckBoxes();
 
 	void setSelectedCatalogsFromCheckBoxes();
 	void setSelectedTypesFromCheckBoxes();
@@ -100,6 +107,8 @@ private:
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
 	AtmosphereDialog * atmosphereDialog;
+	SkylightDialog * skylightDialog;
+	TonemappingDialog * tonemappingDialog;
 	GreatRedSpotDialog * greatRedSpotDialog;
 	ConfigureDSOColorsDialog * configureDSOColorsDialog;
 	ConfigureOrbitColorsDialog * configureOrbitColorsDialog;

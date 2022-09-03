@@ -38,7 +38,7 @@ class SyncServer : public QObject
 	Q_OBJECT
 
 public:
-	SyncServer(QObject* parent = Q_NULLPTR);
+	SyncServer(QObject* parent = Q_NULLPTR, bool allowVersionMismatch=false);
 	virtual ~SyncServer() Q_DECL_OVERRIDE;
 
 	//! This should be called in the StelModule::update function

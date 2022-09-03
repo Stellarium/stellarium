@@ -20,12 +20,14 @@
 #ifndef SCRIPTSERVICE_HPP
 #define SCRIPTSERVICE_HPP
 
+#ifdef ENABLE_SCRIPTING
+
 #include "AbstractAPIService.hpp"
 
 class StelScriptMgr;
 
 //! @ingroup remoteControl
-//! Contains services related to script execution
+//! Contains services related to script execution. Obviously, Stellarium has to be built with ENABLE_SCRIPTING=1
 //!
 //! @see \ref rcScriptService
 class ScriptService : public AbstractAPIService
@@ -45,6 +47,6 @@ private:
 	StelScriptMgr* scriptMgr;
 };
 
-
+#endif
 
 #endif

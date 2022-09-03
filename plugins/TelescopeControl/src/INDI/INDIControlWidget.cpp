@@ -43,42 +43,42 @@ INDIControlWidget::~INDIControlWidget()
 
 void INDIControlWidget::onNorthButtonPressed()
 {
-	mTelescope->move(0, speed());
+	mTelescope->move(180, speed());
 }
 
 void INDIControlWidget::onNorthButtonReleased()
 {
-	mTelescope->move(0, 0);
+	mTelescope->move(180, 0);
 }
 
 void INDIControlWidget::onEastButtonPressed()
 {
-	mTelescope->move(90, speed());
+	mTelescope->move(270, speed());
 }
 
 void INDIControlWidget::onEastButtonReleased()
 {
-	mTelescope->move(90, 0);
+	mTelescope->move(270, 0);
 }
 
 void INDIControlWidget::onSouthButtonPressed()
 {
-	mTelescope->move(180, speed());
+	mTelescope->move(0, speed());
 }
 
 void INDIControlWidget::onSouthButtonReleased()
 {
-	mTelescope->move(180, 0);
+	mTelescope->move(0, 0);
 }
 
 void INDIControlWidget::onWestButtonPressed()
 {
-	mTelescope->move(270, speed());
+	mTelescope->move(90, speed());
 }
 
 void INDIControlWidget::onWestButtonReleased()
 {
-	mTelescope->move(270, 0);
+	mTelescope->move(90, 0);
 }
 
 double INDIControlWidget::speed() const

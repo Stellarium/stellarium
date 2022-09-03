@@ -61,16 +61,13 @@ details of the implementation encapsulated.
 #include <string.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <errno.h>
 
 #include "StelUtils.hpp"
 /**** include variable and type definitions, specific for this C version */
 
 #include "jpleph.h"
 #include "jpl_int.h"
-
-#define TRUE 1
-#define FALSE 0
-
 
 // GZ patches for Large File Support for DE431 past AD10100...
 #if defined(Q_OS_WIN)
@@ -82,12 +79,12 @@ details of the implementation encapsulated.
 
 double DLL_FUNC jpl_get_double(const void *ephem, const int value)
 {
-   return(*(double *)((char *)ephem + value));
+	return(*reinterpret_cast<const double *>(static_cast<const char *>(ephem) + value));
 }
 
 long DLL_FUNC jpl_get_long(const void *ephem, const int value)
 {
-   return(*(int32_t *)((char *)ephem + value));
+	return(*reinterpret_cast<const int32_t *>(static_cast<const char *>(ephem) + value));
 }
 
 
@@ -143,7 +140,7 @@ long DLL_FUNC jpl_get_long(const void *ephem, const int value)
 int DLL_FUNC jpl_pleph(void *ephem, const double et, const int ntarg,
                       const int ncent, double rrd[], const int calc_velocity)
 {
-    struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
+    struct jpl_eph_data *eph = static_cast<struct jpl_eph_data *>(ephem);
     double pv[13][6]={{0.}};/* pv is the position/velocity array
                              NUMBERED FROM ZERO: 0=Mercury,1=Venus,...
                              8=Pluto,9=Moon,10=Sun,11=SSBary,12=EMBary
@@ -204,7 +201,7 @@ int DLL_FUNC jpl_pleph(void *ephem, const double et, const int ntarg,
 
     for(i = 0; i < 2; i++) /* list[] IS NUMBERED FROM ZERO ! */
     {
-      const unsigned k = (i ? ncent : ntarg) - 1;
+      const unsigned k = static_cast<unsigned int>(i ? ncent : ntarg) - 1;
 
       if(k <= 9) list[k] = list_val;   /* Major planets */
       if(k == 9) list[2] = list_val;   /* for moon,  earth state is needed */
@@ -235,15 +232,15 @@ int DLL_FUNC jpl_pleph(void *ephem, const double et, const int ntarg,
    else
       {
       if(list[2])           /* calculate earth state from EMBary */
-         for(i = 0; i < list[2] * 3u; ++i)
+	 for(i = 0; i < static_cast<unsigned int>(list[2]) * 3u; ++i)
             pv[2][i] -= pv[9][i]/(1.0+eph->emrat);
 
       if(list[9]) /* calculate Solar System barycentric moon state */
-         for(i = 0; i < list[9] * 3u; ++i)
+	 for(i = 0; i < static_cast<unsigned int>(list[9]) * 3u; ++i)
             pv[9][i] += pv[2][i];
       }
 
-   for(i = 0; i < list_val * 3u; ++i)
+   for(i = 0; i < static_cast<unsigned int>(list_val) * 3u; ++i)
       rrd[i] = pv[ntarg-1][i] - pv[ncent-1][i];
 
    return(rval);
@@ -329,9 +326,9 @@ static void interp(struct interpolation_info *iinfo,
         const double coef[], const double t[2], const unsigned ncf, const unsigned ncm,
         const unsigned na, const int velocity_flag, double posvel[])
 {
-    const double dna = (double)na;
+    const double dna = static_cast<double>(na);
     const double temp = dna * t[0];
-    unsigned l = (unsigned)temp;
+    unsigned l = static_cast<unsigned>(temp);
     double vfac, unused_temp1;
     double tc = 2.0 * modf(temp, &unused_temp1) - 1.0;
     unsigned i, j;
@@ -456,22 +453,22 @@ value read from the ephemeris must be byte-swapped by these two functions. */
 
 static void swap_32_bit_val(void *ptr)
 {
-    char *tptr = (char *)ptr, tchar;
+   char *tptr = static_cast<char *>(ptr), tchar;
 
-   SWAP_MACRO(tptr[0], tptr[3], tchar);
-   SWAP_MACRO(tptr[1], tptr[2], tchar);
+   SWAP_MACRO(tptr[0], tptr[3], tchar)
+   SWAP_MACRO(tptr[1], tptr[2], tchar)
 }
 
 static void swap_64_bit_val(void *ptr, long count)
 {
-    char *tptr = (char *)ptr, tchar;
+    char *tptr = static_cast<char *>(ptr), tchar;
     
     while(count--)
     {
-      SWAP_MACRO(tptr[0], tptr[7], tchar);
-      SWAP_MACRO(tptr[1], tptr[6], tchar);
-      SWAP_MACRO(tptr[2], tptr[5], tchar);
-      SWAP_MACRO(tptr[3], tptr[4], tchar);
+      SWAP_MACRO(tptr[0], tptr[7], tchar)
+      SWAP_MACRO(tptr[1], tptr[6], tchar)
+      SWAP_MACRO(tptr[2], tptr[5], tchar)
+      SWAP_MACRO(tptr[3], tptr[4], tchar)
 
       tptr += 8;
     }
@@ -482,9 +479,9 @@ have an x, y, and z;  librations and lunar mantle angles have three Euler
 angles.  But TDT-TT is a single quantity,  and nutation is expressed as
 two angles.   */
 
-static int dimension(const int idx)
+static unsigned int dimension(const unsigned int idx)
 {
-    int rval;
+    unsigned int rval;
 
     if(idx == 11)             /* Nutations */
       rval = 2;
@@ -579,7 +576,7 @@ static int dimension(const int idx)
 int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
                           double pv[][6], double nut[4], const int bary)
 {
-	struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
+	struct jpl_eph_data *eph = static_cast<struct jpl_eph_data *>(ephem);
 	unsigned i, j, n_intervals;
 	uint32_t nr;
 	double *buf = eph->cache;
@@ -594,9 +591,9 @@ int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
 
 	/*   calculate record # and relative time in interval   */
 
-	nr = (uint32_t)block_loc;
-	t[0] = block_loc - (double)nr;
-	if(!t[0] && nr)
+	nr = static_cast<uint32_t>(block_loc);
+	t[0] = block_loc - static_cast<double>(nr);
+	if(t[0]==0.0 && nr)
 	{
 		t[0] = 1.;
 		nr--;
@@ -607,14 +604,14 @@ int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
 	{
 		eph->curr_cache_loc = nr;
 		/* Read two blocks ahead to account for header: */
-		if(FSeek(eph->ifile, (nr + 2) * eph->recsize, SEEK_SET)) // lgtm [cpp/integer-multiplication-cast-to-long]
+		if(FSeek(eph->ifile, static_cast<unsigned long>(nr + 2) * eph->recsize, SEEK_SET)) // lgtm [cpp/integer-multiplication-cast-to-long]
 		{
 			// GZ: Make sure we will try again on next call...
 			eph->curr_cache_loc=0;
 			return(JPL_EPH_FSEEK_ERROR);
 		}
-		if(fread(buf, sizeof(double), (size_t)eph->ncoeff, eph->ifile)
-				!= (size_t)eph->ncoeff)
+		if(fread(buf, sizeof(double), static_cast<size_t>(eph->ncoeff), eph->ifile)
+				!= static_cast<size_t>(eph->ncoeff))
 			return(JPL_EPH_READ_ERROR);
 
 		if(eph->swap_bytes)
@@ -650,7 +647,7 @@ int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
 			}
 			else
 			{
-				quantities = list[i];
+				quantities = static_cast<unsigned int>(list[i]);
 				iptr = &eph->ipt[i < 10 ? i : i + 1][0];
 			}
 			if(n_intervals == iptr[2] && quantities)
@@ -663,9 +660,10 @@ int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
 					dest = eph->pvsun;
 				else
 					dest = nut;
-				interp(&eph->iinfo, &buf[iptr[0]-1], t, static_cast<int>(iptr[1]),
+
+				interp(&eph->iinfo, &buf[iptr[0]-1], t, static_cast<unsigned int>(iptr[1]),
 						dimension(i + 1),
-						n_intervals, quantities, dest);
+						n_intervals, static_cast<int>(quantities), dest);
 
 				if(i < 10 || i == 14)        /*  convert km to AU */
 					for(j = 0; j < quantities * 3; j++)
@@ -674,7 +672,7 @@ int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
 		}
 	if(!bary)                             /* gotta correct everybody for */
 		for(i = 0; i < 9; i++)            /* the solar system barycenter */
-			for(j = 0; j < (unsigned)list[i] * 3; j++)
+			for(j = 0; j < static_cast<unsigned>(list[i]) * 3; j++)
 				pv[i][j] -= eph->pvsun[j];
 	return(0);
 }
@@ -691,29 +689,29 @@ const char * jpl_init_error_message(void)
   switch(init_err_code)
   {
     case 0:
-      return (const char *)("JPL_INIT_NO_ERROR");
+      return "JPL_INIT_NO_ERROR";
     case -1:
-      return (const char *)("JPL_INIT_FILE_NOT_FOUND");
+      return "JPL_INIT_FILE_NOT_FOUND";
     case -2:
-      return (const char *)("JPL_INIT_FSEEK_FAILED");    
+      return "JPL_INIT_FSEEK_FAILED";
     case -3:
-      return (const char *)("JPL_INIT_FREAD_FAILED");
+      return "JPL_INIT_FREAD_FAILED";
     case -4:
-      return (const char *)("JPL_INIT_FREAD2_FAILED");
+      return "JPL_INIT_FREAD2_FAILED";
     case -5:
-      return (const char *)("JPL_INIT_FILE_CORRUPT");
+      return "JPL_INIT_FILE_CORRUPT";
     case -6:
-      return (const char *)("JPL_INIT_MEMORY_FAILURE");
+      return "JPL_INIT_MEMORY_FAILURE";
     case -7:
-      return (const char *)("JPL_INIT_FREAD3_FAILED");
+      return "JPL_INIT_FREAD3_FAILED";
     case -8:
-      return (const char *)("JPL_INIT_FREAD4_FAILED");
+      return "JPL_INIT_FREAD4_FAILED";
     case -9:
-      return (const char *)("JPL_INIT_NOT_CALLED");
+      return "JPL_INIT_NOT_CALLED";
     case -10:
-      return (const char *)("JPL_INIT_FREAD5_FAILED");
+      return "JPL_INIT_FREAD5_FAILED";
     default:
-      return (const char *)("ERROR_NOT_RECOGNIZED");
+      return "ERROR_NOT_RECOGNIZED";
   }
 }
 
@@ -748,9 +746,20 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
                           char nam[][6], double *val)
 {
     unsigned i, j;
-    long de_version;
+    unsigned long de_version;
     char title[84];
+
+    errno=0;
     FILE *ifile = fopen(ephemeris_filename, "rb");
+    int err=errno;
+    if (err!=0)
+    {
+	    qDebug() << "Error" << err << " -- Problem opening file" << ephemeris_filename << ":" << strerror(err);
+#ifdef Q_OS_WIN
+	    qDebug() << "It seems on Windows filename translation sometimes fails on Debug builds. Disable the DE* on this build!";
+#endif
+    }
+    Q_ASSERT_X(err==0, "Problem opening file", strerror(err));
 
     struct jpl_eph_data *rval;
     struct jpl_eph_data temp_data;
@@ -770,10 +779,10 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
     {
       if(ifile)
         fclose(ifile);
-      return(NULL);
+      return(Q_NULLPTR);
     }
 
-    de_version = atoi(title + 26);
+    de_version = strtoul(title+26, Q_NULLPTR, 10);
     
     /* A small piece of trickery:  in the binary file,  data is stored */
     /* for ipt[0...11],  then the ephemeris version,  then the         */
@@ -815,7 +824,7 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
          /* bytes. */
       if(temp_data.ncon > 400)
       {
-	if ( FSeek(ifile, (size_t)(temp_data.ncon - 400) * 6, SEEK_CUR) != 0)
+	if ( FSeek(ifile, static_cast<long long>(static_cast<size_t>(temp_data.ncon - 400) * 6), SEEK_CUR) != 0)
 	{
 	      qWarning() << "jpl_init_ephemeris(): Cannot seek in file. Result will be undefined.";
 	}
@@ -824,7 +833,7 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
          init_err_code = JPL_INIT_FREAD5_FAILED;
     }
     else                 /* mark header data as invalid */
-      temp_data.ipt[13][0] = (uint32_t)-1;
+      temp_data.ipt[13][0] = static_cast<uint32_t>(-1);
 
     if(temp_data.swap_bytes)     /* byte order is wrong for current platform */
     {  
@@ -859,7 +868,7 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
     if(init_err_code)
     {
       fclose(ifile);
-      return(NULL);
+      return(Q_NULLPTR);
     }
 
          /* Once upon a time,  the kernel size was determined from the */
@@ -869,7 +878,7 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
     temp_data.kernel_size = 4;
     for(i = 0; i < 15; i++)
       temp_data.kernel_size +=
-             2 * temp_data.ipt[i][1] * temp_data.ipt[i][2] * dimension(i);
+	     2 * temp_data.ipt[i][1] * temp_data.ipt[i][2] * dimension(i);
 // for(i = 0; i < 13; i++)
 //    temp_data.kernel_size +=
 //                     temp_data.ipt[i][1] * temp_data.ipt[i][2] * ((i == 11) ? 4 : 6);
@@ -882,13 +891,13 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
                /* we need is allocated in _one_ chunk,  then parceled out. */
                /* This looks a little weird,  but it simplifies error      */
                /* handling and cleanup.                                    */
-    rval = (struct jpl_eph_data *)calloc(sizeof(struct jpl_eph_data)
-                        + temp_data.recsize, 1);
+    rval = static_cast<struct jpl_eph_data *>(calloc(sizeof(struct jpl_eph_data)
+			+ temp_data.recsize, 1));
     if(!rval)
     {
       init_err_code = JPL_INIT_MEMORY_FAILURE;
       fclose(ifile);
-      return(NULL);
+      return(Q_NULLPTR);
     }
     memcpy(rval, &temp_data, sizeof(struct jpl_eph_data));
     rval->iinfo.posn_coeff[0] = 1.0;
@@ -897,10 +906,10 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
     rval->iinfo.posn_coeff[1] = -2.0;
     rval->iinfo.vel_coeff[0] = 0.0;
     rval->iinfo.vel_coeff[1] = 1.0;
-    rval->curr_cache_loc = (uint32_t)-1;
+    rval->curr_cache_loc = static_cast<uint32_t>(-1);
     
               /* The 'cache' data is right after the 'jpl_eph_data' struct: */
-    rval->cache = (double *)(rval + 1);
+    rval->cache = reinterpret_cast<double *>(rval + 1);
                /* If there are more than 400 constants,  the names of       */
                /* the extra constants are stored in what would normally     */
                /* be zero-padding after the header record.  However,        */
@@ -925,8 +934,8 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
     if(val)
     {
       FSeek(ifile, rval->recsize, SEEK_SET);
-      if(fread(val, sizeof(double), (size_t)rval->ncon, ifile)
-                        != (size_t)rval->ncon)
+      if(fread(val, sizeof(double), static_cast<size_t>(rval->ncon), ifile)
+			!= static_cast<size_t>(rval->ncon))
          init_err_code = JPL_INIT_FREAD3_FAILED;
       else if(rval->swap_bytes)     /* gotta swap the constants,  too */
          swap_64_bit_val(val, rval->ncon);
@@ -955,7 +964,7 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
 ****************************************************************************/
 void DLL_FUNC jpl_close_ephemeris(void *ephem)
 {
-   struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
+   struct jpl_eph_data *eph = static_cast<struct jpl_eph_data *>(ephem);
 
    fclose(eph->ifile);
    free(ephem);
@@ -966,15 +975,15 @@ void DLL_FUNC jpl_close_ephemeris(void *ephem)
 
 double DLL_FUNC jpl_get_constant(const int idx, void *ephem, char *constant_name)
 {
-	struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
+	struct jpl_eph_data *eph = static_cast<struct jpl_eph_data *>(ephem);
 	double rval = 0.;
 
 	*constant_name = '\0';
 	if(idx >= 0 && idx < static_cast<int>(eph->ncon))
 	{
 		// GZ extended from const long to const long long
-		const long long seek_loc = (idx < 400 ? 84L * 3L + (long)idx * 6 :
-							START_400TH_CONSTANT_NAME + (idx - 400) * 6);
+		const long long seek_loc = (idx < 400 ? 84L * 3L + static_cast<long>(idx) * 6 :
+							static_cast<long long>(START_400TH_CONSTANT_NAME) + (idx - 400) * 6);
 
 		if (FSeek(eph->ifile, seek_loc, SEEK_SET) != 0)
 		{
@@ -983,7 +992,7 @@ double DLL_FUNC jpl_get_constant(const int idx, void *ephem, char *constant_name
 		if(fread(constant_name, 1, 6, eph->ifile) == 6 )
 		{
 			constant_name[6] = '\0';
-			if (FSeek(eph->ifile, eph->recsize + (long)idx * sizeof(double), SEEK_SET) != 0)
+			if (FSeek(eph->ifile, static_cast<long long>(eph->recsize) + static_cast<long long>(idx) * static_cast<long long>(sizeof(double)), SEEK_SET) != 0)
 			{
 				qWarning() << "jpl_get_constant(): Cannot seek in file (call2). Result will be undefined.";
 			}

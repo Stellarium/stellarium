@@ -108,7 +108,7 @@ void StelTexture::reportError(const QString& aerrorMessage)
 	errorOccured = true;
 	errorMessage = aerrorMessage;
 	// Report failure of texture loading
-	emit(loadingProcessFinished(true));
+	emit loadingProcessFinished(true);
 }
 
 StelTexture::GLData StelTexture::imageToGLData(const QImage &image)
@@ -300,19 +300,10 @@ QByteArray StelTexture::convertToGLFormat(const QImage& image, GLint *format, GL
 	ret.reserve(width * height * bpp);
 	QImage tmp = image.convertToFormat(QImage::Format_ARGB32);
 
-	// flips bits over y
-	int ipl = tmp.bytesPerLine() / 4;
-	for (int y = 0; y < height / 2; ++y)
-	{
-		int *a = reinterpret_cast<int *>(tmp.scanLine(y));
-		int *b = reinterpret_cast<int *>(tmp.scanLine(height - y - 1));
-		for (int x = 0; x < ipl; ++x)
-			qSwap(a[x], b[x]);
-	}
-
 	// convert data
 	// we always use a tightly packed format, with 1-4 bpp
-	for (int i = 0; i < height; ++i)
+	// the image should be flipped over y, so read it backwards from the end
+	for (int i = height - 1; i >= 0; --i)
 	{
 		uint *p = reinterpret_cast<uint *>( tmp.scanLine(i));
 		for (int x = 0; x < width; ++x)
@@ -429,7 +420,7 @@ bool StelTexture::glLoad(const GLData& data)
 
 
 	// Report success of texture loading
-	emit(loadingProcessFinished(false));
+	emit loadingProcessFinished(false);
 	return true;
 }
 

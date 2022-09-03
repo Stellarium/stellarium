@@ -25,9 +25,12 @@
 #include <QUrl>
 #include <QFileDialog>
 #include <QColorDialog>
+#include <QtCharts/QtCharts>
+#include <QScatterSeries>
+#include <QValueAxis>
+#include <QLogValueAxis>
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
 #include "ui_exoplanetsDialog.h"
 #include "ExoplanetsDialog.hpp"
 #include "Exoplanets.hpp"
@@ -36,12 +39,8 @@
 #include "StelMovementMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelGui.hpp"
-#include "StelMainView.hpp"
-#include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
-
-#include "external/qcustomplot/qcustomplot.h"
 
 ExoplanetsDialog::ExoplanetsDialog()
 	: StelDialog("Exoplanets")
@@ -49,6 +48,9 @@ ExoplanetsDialog::ExoplanetsDialog()
 	, updateTimer(Q_NULLPTR)
 {
         ui = new Ui_exoplanetsDialog;
+	exoplanetsHeader.clear();
+	objectMgr = GETSTELMODULE(StelObjectMgr);
+	mvMgr = GETSTELMODULE(StelMovementMgr);
 }
 
 ExoplanetsDialog::~ExoplanetsDialog()
@@ -73,6 +75,7 @@ void ExoplanetsDialog::retranslate()
 		setWebsitesHtml();
 		populateDiagramsList();
 		populateTemperatureScales();
+		fillExoplanetsTable();
 	}
 }
 
@@ -96,16 +99,9 @@ void ExoplanetsDialog::createDialogContent()
 	// Settings tab / updates group
 	ui->displayAtStartupCheckBox->setChecked(ep->getEnableAtStartup());
 	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
-	ui->displayModeCheckBox->setChecked(ep->getDisplayMode());
-	connect(ui->displayModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDistributionEnabled(int)));
 	ui->displayShowExoplanetsButton->setChecked(ep->getFlagShowExoplanetsButton());
 	connect(ui->displayShowExoplanetsButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowExoplanetsButton(int)));
-	ui->timelineModeCheckBox->setChecked(ep->getTimelineMode());
-	connect(ui->timelineModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setTimelineEnabled(int)));
-	ui->habitableModeCheckBox->setChecked(ep->getHabitableMode());
-	connect(ui->habitableModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setHabitableEnabled(int)));
-	ui->displayShowDesignationsCheckBox->setChecked(ep->getFlagShowExoplanetsDesignations());
-	connect(ui->displayShowDesignationsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowExoplanetsDesignations(int)));
+
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
 	connect(ep, SIGNAL(updateStateChanged(Exoplanets::UpdateState)), this, SLOT(updateStateReceiver(Exoplanets::UpdateState)));
@@ -114,6 +110,12 @@ void ExoplanetsDialog::createDialogContent()
 	refreshUpdateValues(); // fetch values for last updated and so on
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
 	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
+
+	connectBoolProperty(ui->displayModeCheckBox,               "Exoplanets.flagDisplayMode");
+	connectBoolProperty(ui->timelineModeCheckBox,              "Exoplanets.flagTimelineMode");
+	connectBoolProperty(ui->habitableModeCheckBox,             "Exoplanets.flagHabitableMode");
+	connectBoolProperty(ui->displayShowDesignationsCheckBox,   "Exoplanets.flagShowExoplanetsDesignations");
+	connectBoolProperty(ui->displayShowNumbersCheckBox,        "Exoplanets.flagShowExoplanetsNumbers");
 
 	connectColorButton(ui->exoplanetMarkerColor,		"Exoplanets.markerColor",    "Exoplanets/exoplanet_marker_color");
 	connectColorButton(ui->habitableExoplanetMarkerColor,	"Exoplanets.habitableColor", "Exoplanets/habitable_exoplanet_marker_color");
@@ -127,7 +129,6 @@ void ExoplanetsDialog::createDialogContent()
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));	
-	connect(ui->plotDiagram, SIGNAL(clicked()), this, SLOT(drawDiagram()));
 
 	populateTemperatureScales();
 	int idx = ui->temperatureScaleComboBox->findData(ep->getCurrentTemperatureScaleKey(), Qt::UserRole, Qt::MatchCaseSensitive);
@@ -138,6 +139,9 @@ void ExoplanetsDialog::createDialogContent()
 	}
 	ui->temperatureScaleComboBox->setCurrentIndex(idx);
 	connect(ui->temperatureScaleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setTemperatureScale(int)));
+
+	// Table tab
+	connect(ui->exoplanetsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentExoplanet(QModelIndex)));
 
 	// About & Info tabs
 	setAboutHtml();
@@ -151,34 +155,137 @@ void ExoplanetsDialog::createDialogContent()
 	}
 
 	populateDiagramsList();	
+	drawDiagram();
+	connect(ui->comboAxisX, SIGNAL(currentIndexChanged(int)), this, SLOT(drawDiagram()));
+	connect(ui->comboAxisY, SIGNAL(currentIndexChanged(int)), this, SLOT(drawDiagram()));
+	connect(ui->checkBoxLogX, SIGNAL(toggled(bool)), this, SLOT(drawDiagram()));
+	connect(ui->checkBoxLogY, SIGNAL(toggled(bool)), this, SLOT(drawDiagram()));
+	connect(ui->minX, SIGNAL(textChanged(const QString &)), this, SLOT(drawDiagram()));
+	connect(ui->maxX, SIGNAL(textChanged(const QString &)), this, SLOT(drawDiagram()));
+	connect(ui->minY, SIGNAL(textChanged(const QString &)), this, SLOT(drawDiagram()));
+	connect(ui->maxY, SIGNAL(textChanged(const QString &)), this, SLOT(drawDiagram()));
+	fillExoplanetsTable();
 	updateGuiFromSettings();
+}
+
+void ExoplanetsDialog::setColumnNames()
+{
+	exoplanetsHeader.clear();
+	exoplanetsHeader << q_("Exoplanet");
+	exoplanetsHeader << QString("%1, M%2").arg(q_("Mass")).arg(QChar(0x2643));
+	exoplanetsHeader << QString("%1, R%2").arg(q_("Radius")).arg(QChar(0x2643));
+	exoplanetsHeader << QString("%1, %2").arg(q_("Period"),qc_("day","time period"));
+	exoplanetsHeader << QString("a, %1").arg(qc_("AU", "distance, astronomical unit"));
+	exoplanetsHeader << QString("e");
+	exoplanetsHeader << QString("i, %1").arg(QChar(0x00B0));
+	// TRANSLATORS: angular distance
+	exoplanetsHeader << QString("%1, \"").arg(q_("Ang. dist."));
+	// TRANSLATORS: magnitude
+	exoplanetsHeader << q_("Mag.");
+	exoplanetsHeader << QString("%1, R%2").arg(q_("Radius")).arg(QChar(0x2609));
+	// TRANSLATORS: detection method
+	exoplanetsHeader << q_("D. M.");
+	ui->exoplanetsTreeWidget->setHeaderLabels(exoplanetsHeader);
+
+	// adjust the column width
+	for (int i = 0; i < EPSCount; ++i)
+	{
+		ui->exoplanetsTreeWidget->resizeColumnToContents(i);
+	}
+}
+
+void ExoplanetsDialog::fillExoplanetsTable()
+{
+	ui->exoplanetsTreeWidget->clear();
+	ui->exoplanetsTreeWidget->setColumnCount(EPSCount);
+	setColumnNames();
+	ui->exoplanetsTreeWidget->header()->setSectionsMovable(false);
+	ui->exoplanetsTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
+
+	const QString dash = QChar(0x2014);
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	for (auto &epsystem : ep->getAllExoplanetarySystems())
+	{
+		QVariantMap map = epsystem->getMap();
+		float vmag = map["Vmag"].toFloat();
+		float sr = map["sradius"].toFloat();
+		QString sradius = sr>0.f ? QString::number(sr, 'f', 5) : dash;
+		for (auto &eps : map["exoplanets"].toList())
+		{
+			auto epdata = eps.toMap();
+			QString dm = epdata.contains("detectionMethod") ? epdata["detectionMethod"].toString().trimmed() : dash;
+			EPSTreeWidgetItem* treeItem = new EPSTreeWidgetItem(ui->exoplanetsTreeWidget);
+			treeItem->setText(EPSExoplanetName, QString("%1 %2").arg(trans.qtranslate(map["designation"].toString().trimmed()), epdata["planetName"].toString()).trimmed());
+			treeItem->setData(EPSExoplanetName, Qt::UserRole, map["designation"].toString());
+			if (epdata.contains("planetProperName")) {
+				treeItem->setToolTip(EPSExoplanetName, trans.qtranslate(epdata["planetProperName"].toString().trimmed()));
+			}
+			treeItem->setText(EPSExoplanetMass, epdata.contains("mass") ? QString::number(epdata["mass"].toDouble(), 'f', 2) : dash);
+			treeItem->setToolTip(EPSExoplanetMass,  q_("Mass of exoplanet in Jovian masses"));
+			treeItem->setTextAlignment(EPSExoplanetMass,  Qt::AlignRight);
+			treeItem->setText(EPSExoplanetRadius, epdata.contains("radius") ? QString::number(epdata["radius"].toDouble(), 'f', 2) : dash);
+			treeItem->setToolTip(EPSExoplanetRadius,  q_("Radius of exoplanet in Jovian radii"));
+			treeItem->setTextAlignment(EPSExoplanetRadius,  Qt::AlignRight);
+			treeItem->setText(EPSExoplanetPeriod, epdata.contains("period") ? QString::number(epdata["period"].toDouble(), 'f', 2) : dash);
+			treeItem->setToolTip(EPSExoplanetPeriod,  q_("Orbital period of exoplanet in days"));
+			treeItem->setTextAlignment(EPSExoplanetPeriod,  Qt::AlignRight);
+			treeItem->setText(EPSExoplanetSemiAxes, epdata.contains("semiAxis") ? QString::number(epdata["semiAxis"].toDouble(), 'f', 4) : dash);
+			treeItem->setToolTip(EPSExoplanetSemiAxes,  q_("Semi-major axis of orbit in astronomical units"));
+			treeItem->setTextAlignment(EPSExoplanetSemiAxes,  Qt::AlignRight);
+			treeItem->setText(EPSExoplanetEccentricity, epdata.contains("eccentricity") ? QString::number(epdata["eccentricity"].toDouble(), 'f', 3) : dash);
+			treeItem->setToolTip(EPSExoplanetEccentricity,  q_("Eccentricity of orbit"));
+			treeItem->setTextAlignment(EPSExoplanetEccentricity,  Qt::AlignRight);
+			treeItem->setText(EPSExoplanetInclination, epdata.contains("inclination") ? QString::number(epdata["inclination"].toDouble(), 'f', 1) : dash);
+			treeItem->setToolTip(EPSExoplanetInclination,  q_("Inclination of orbit in degrees"));
+			treeItem->setTextAlignment(EPSExoplanetInclination,  Qt::AlignRight);
+			treeItem->setText(EPSExoplanetAngleDistance, epdata.contains("angleDistance") ? QString::number(epdata["angleDistance"].toDouble(), 'f', 6) : dash);
+			treeItem->setToolTip(EPSExoplanetAngleDistance,  q_("Angular distance from host star in arcseconds"));
+			treeItem->setTextAlignment(EPSExoplanetAngleDistance,  Qt::AlignRight);
+			treeItem->setText(EPSStarMagnitude, vmag < 98.f ? QString::number(vmag, 'f', 2) : dash);
+			treeItem->setTextAlignment(EPSStarMagnitude,  Qt::AlignRight);
+			treeItem->setText(EPSStarRadius, sradius);
+			treeItem->setToolTip(EPSStarRadius,  q_("Radius of star in solar radii"));
+			treeItem->setTextAlignment(EPSStarRadius,  Qt::AlignRight);
+			treeItem->setText(EPSExoplanetDetectionMethod, q_(dm));
+			treeItem->setToolTip(EPSExoplanetDetectionMethod,  q_("Detection method of exoplanet"));
+		}
+	}
+}
+
+void ExoplanetsDialog::selectCurrentExoplanet(const QModelIndex& modelIndex)
+{
+	// Enable display exoplanets if it is not
+	if (!ep->getFlagShowExoplanets())
+		ep->setFlagShowExoplanets(true);
+	// Find the object
+	QString name = modelIndex.sibling(modelIndex.row(), EPSExoplanetName).data(Qt::UserRole).toString();
+	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
+	{
+		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+		if (!newSelected.empty())
+		{
+			mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
+			mvMgr->setFlagTracking(true);
+		}
+	}
 }
 
 void ExoplanetsDialog::setAboutHtml(void)
 {
-	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Exoplanets Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + EXOPLANETS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + EXOPLANETS_PLUGIN_LICENSE + "</td></tr>";
-	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr></table>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf</td></tr>";
+	html += "<tr><td><strong>" + q_("Contributors") + ":</strong></td><td>Georg Zotti</td></tr></table>";
 
-	html += "<p>" + QString(q_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from \"%1The Extrasolar Planets Encyclopaedia%2\"")).arg("<a href=\"http://exoplanet.eu/\">").arg("</a>") + ". ";
+	html += "<p>" + QString(q_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from \"%1The Extrasolar Planets Encyclopaedia%2\"")).arg("<a href=\"http://exoplanet.eu/\">", "</a>. ");
 	html += QString(q_("The list of potential habitable exoplanets and data about them were taken from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability Laboratory%3.")).arg("<a href=\"http://phl.upr.edu/projects/habitable-exoplanets-catalog\">").arg("<a href=\"http://phl.upr.edu/home\">").arg("</a>") + "</p>";
 
 	html += "<p>" + q_("The current catalog contains info about %1 planetary systems, which altogether have %2 exoplanets (including %3 potentially habitable exoplanets).").arg(ep->getCountPlanetarySystems()).arg(ep->getCountAllExoplanets()).arg(ep->getCountHabitableExoplanets()) + "</p>";
-	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Exoplanets plugin") + "</p>";
-	html += "<p><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Exoplanets_plugin\">\\1</a>") + "</li>";
-	html += "</ul></p></body></html>";
+
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Exoplanets plugin");
+	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if(gui!=Q_NULLPTR)
@@ -198,21 +305,27 @@ void ExoplanetsDialog::setInfoHtml(void)
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Potential habitable exoplanets") + "</h2>";
 	html += QString("<p>%1 %2</p>")
-			.arg(q_("This plugin can display potential habitable exoplanets (orange marker) and some information about those planets."))
-			.arg(q_("Extra info for the optimistic samples of potentially habitable planets mark by italic text."));
+			.arg(q_("This plugin can display potential habitable exoplanets (orange marker) and some information about those planets."),
+			     q_("Extra info for the optimistic samples of potentially habitable planets mark by italic text."));
 	html += QString("<p><b>%1</b> &mdash; %2</p>")
-			.arg(q_("Planetary Class"))
-			.arg(q_("Planet classification from host star spectral type (F, G, K, M), habitable zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, jovian, neptunian) (Earth = G-Warm Terran)."));
-	html += QString("<p><b><a href='http://lasp.colorado.edu/~bagenal/3720/CLASS6/6EquilibriumTemp.html'>%1</a></b> &mdash; %2 %3</p>")
-			.arg(q_("Equilibrium Temperature"))
-			.arg(q_("The planetary equilibrium temperature is a theoretical temperature in (°C) that the planet would be at when considered simply as if it were a black body being heated only by its parent star (assuming a 0.3 bond albedo). As example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."))
-			.arg(q_("Actual surface temperatures are expected to be larger than the equilibrium temperature depending on the atmosphere of the planets, which are currently unknown (e.g. Earth mean global surface temperature is about 288 K or 15°C)."));
+			.arg(q_("Planetary Class"),
+			     q_("Planet classification from host star spectral type (F, G, K, M), habitable zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, jovian, neptunian) (Earth = G-Warm Terran)."));
+	html += QString("<p><b><a href='https://en.wikipedia.org/wiki/Planetary_equilibrium_temperature'>%1</a></b> &mdash; %2 %3</p>")
+			.arg(q_("Equilibrium Temperature"),
+			     q_("The planetary equilibrium temperature is a theoretical temperature in (°C) that the planet would be at when considered simply as if it were a black body being heated only by its parent star (assuming a 0.3 bond albedo). As example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."),
+			     q_("Actual surface temperatures are expected to be larger than the equilibrium temperature depending on the atmosphere of the planets, which are currently unknown (e.g. Earth mean global surface temperature is about 288 K or 15°C)."));
 	html += QString("<p><b>%1</b> &mdash; %2</p>")
-			.arg(q_("Flux"))
-			.arg(q_("Average stellar flux of the planet in Earth fluxes (Earth = 1.0 S<sub>E</sub>)."));
+			.arg(q_("Flux"),
+			     q_("Average stellar flux of the planet in Earth fluxes (Earth = 1.0 S<sub>E</sub>)."));
 	html += QString("<p><b><a href='http://phl.upr.edu/projects/earth-similarity-index-esi'>%1</a></b> &mdash; %2</p>")
-			.arg(q_("Earth Similarity Index (ESI)"))
-			.arg(q_("Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-like. ESI depends on the planet's radius, density, escape velocity, and surface temperature."));
+			.arg(q_("Earth Similarity Index (ESI)"),
+			     q_("Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-like. ESI depends on the planet's radius, density, escape velocity, and surface temperature."));
+	html += QString("<p><b>%1</b> &mdash; %2</p>")
+			.arg(q_("Conservative Sample"),
+			     q_("Planets in the habitable zone with a radius less 1.5 Earth radii or a minimum mass less 5 Earth masses. These are the best candidates for planets that might be rocky and support surface liquid water. They are also known as warm terrans."));
+	html += QString("<p><b>%1</b> &mdash; %2</p>")
+			.arg(q_("Optimistic Sample"),
+			     q_("Planets in the habitable zone with a radius between 1.5 to 2.5 Earth radii or between 5 to 10 Earth masses. These are planets that are less likely to be rocky or support surface liquid water. Some might be mini-Neptunes instead. They are also known as warm superterrans."));
 	html += "<h2>" + q_("Proper names") + "</h2>";
 	html += "<p>" + q_("In December 2015 and in December 2019, the International Astronomical Union (IAU) has officially approved names for several exoplanets after a public vote.") + "</p><ul>";
 	html += QString("<li><strong>%1</strong><sup>*</sup> (%2) &mdash; %3<sup>1</sup></li>").arg(trans.qtranslate("Veritate"), "14 And", q_("From the latin <em>Veritas</em>, truth. The ablative form means <em>where there is truth</em>."));
@@ -515,24 +628,24 @@ void ExoplanetsDialog::setWebsitesHtml(void)
 {
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("General professional Web sites relevant to extrasolar planets") + "</h2><ul>";
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://codementum.org/exoplanets/").arg(q_("Exoplanets: an interactive version of XKCD 1071"));
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.cfa.harvard.edu/HEK/").arg(q_("HEK (The Hunt for Exomoons with Kepler)"));
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.univie.ac.at/adg/schwarz/multiple.html").arg(q_("Exoplanets in binaries and multiple systems (Richard Schwarz)"));
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.iau.org/public/naming/#exoplanets").arg(q_("Naming exoplanets (IAU)"));
-	html += QString("<li><a href='%1'>%2</a> (<em>%3</em>)</li>").arg("http://voparis-exoplanet.obspm.fr/people.html").arg(q_("Some Astronomers and Groups active in extrasolar planets studies")).arg(q_("update: 16 April 2012"));
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://exoplanets.org/").arg(q_("The Exoplanet Data Explorer"));
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.phys.unsw.edu.au/~cgt/planet/AAPS_Home.html").arg(q_("The Anglo-Australian Planet Search"));
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.exoplanets.ch/").arg(q_("Geneva Extrasolar Planet Search Programmes"));
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://olbin.jpl.nasa.gov/").arg(q_("OLBIN (Optical Long-Baseline Interferometry News)"));
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://exep.jpl.nasa.gov/").arg(q_("NASA's Exoplanet Exploration Program"));
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.astro.psu.edu/users/alex/pulsar_planets.htm").arg(q_("Pulsar planets"));
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://exoplanetarchive.ipac.caltech.edu/").arg(q_("The NASA Exoplanet Archive"));
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.dtm.ciw.edu/boss/c53index.html").arg(q_("IAU Commission 53: Extrasolar Planets"));
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.exomol.com/").arg(q_("ExoMol"));
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.hzgallery.org/").arg(q_("The Habitable Zone Gallery"));
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://planetquest.jpl.nasa.gov/").arg(q_("PlanetQuest - The Search for Another Earth"));
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.openexoplanetcatalogue.com/").arg(q_("Open Exoplanet Catalogue"));
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://phl.upr.edu/projects/habitable-exoplanets-catalog").arg(q_("The Habitable Exoplanets Catalog"));
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://codementum.org/exoplanets/", q_("Exoplanets: an interactive version of XKCD 1071"));
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.cfa.harvard.edu/HEK/", q_("HEK (The Hunt for Exomoons with Kepler)"));
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.univie.ac.at/adg/schwarz/multiple.html", q_("Exoplanets in binaries and multiple systems (Richard Schwarz)"));
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.iau.org/public/naming/#exoplanets", q_("Naming exoplanets (IAU)"));
+	html += QString("<li><a href='%1'>%2</a> (<em>%3</em>)</li>").arg("http://voparis-exoplanet.obspm.fr/people.html", q_("Some Astronomers and Groups active in extrasolar planets studies"), q_("update: 16 April 2012"));
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://exoplanets.org/", "The Exoplanet Data Explorer");
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.phys.unsw.edu.au/~cgt/planet/AAPS_Home.html", q_("The Anglo-Australian Planet Search"));
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.exoplanets.ch/",  q_("Geneva Extrasolar Planet Search Programmes"));
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://olbin.jpl.nasa.gov/", q_("OLBIN (Optical Long-Baseline Interferometry News)"));
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://exep.jpl.nasa.gov/",  q_("NASA's Exoplanet Exploration Program"));
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.astro.psu.edu/users/alex/pulsar_planets.htm", q_("Pulsar planets"));
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://exoplanetarchive.ipac.caltech.edu/", q_("The NASA Exoplanet Archive"));
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.dtm.ciw.edu/boss/c53index.html", q_("IAU Commission 53: Extrasolar Planets"));
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.exomol.com/", q_("ExoMol"));
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.hzgallery.org/", q_("The Habitable Zone Gallery"));
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://planetquest.jpl.nasa.gov/", q_("PlanetQuest - The Search for Another Earth"));
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.openexoplanetcatalogue.com/", q_("Open Exoplanet Catalogue"));
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://phl.upr.edu/projects/habitable-exoplanets-catalog", q_("The Habitable Exoplanets Catalog"));
 	html += "</ul></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -576,30 +689,6 @@ void ExoplanetsDialog::setUpdateValues(int hours)
 {
 	ep->setUpdateFrequencyHours(hours);
 	refreshUpdateValues();
-}
-
-void ExoplanetsDialog::setDistributionEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ep->setDisplayMode(b);
-}
-
-void ExoplanetsDialog::setDisplayShowExoplanetsDesignations(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ep->setFlagShowExoplanetsDesignations(b);
-}
-
-void ExoplanetsDialog::setTimelineEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ep->setTimelineMode(b);
-}
-
-void ExoplanetsDialog::setHabitableEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	ep->setHabitableMode(b);
 }
 
 void ExoplanetsDialog::setDisplayAtStartupEnabled(int checkState)
@@ -646,7 +735,8 @@ void ExoplanetsDialog::updateCompleteReceiver(void)
 	ui->lastUpdateDateTimeEdit->setDateTime(ep->getLastUpdate());
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
-	setAboutHtml();
+	setAboutHtml();	
+	fillExoplanetsTable();
 }
 
 void ExoplanetsDialog::restoreDefaults(void)
@@ -683,18 +773,62 @@ void ExoplanetsDialog::updateJSON(void)
 
 void ExoplanetsDialog::drawDiagram()
 {
-	int currentAxisX = ui->comboAxisX->currentData(Qt::UserRole).toInt();
-	QString currentAxisXString = ui->comboAxisX->currentText();
-	int currentAxisY = ui->comboAxisY->currentData(Qt::UserRole).toInt();
-	QString currentAxisYString = ui->comboAxisY->currentText();
+	const int currentAxisX = ui->comboAxisX->currentData(Qt::UserRole).toInt();
+	const QString currentAxisXString = ui->comboAxisX->currentText();
+	const bool axisXlog=ui->checkBoxLogX->isChecked();
+	const int currentAxisY = ui->comboAxisY->currentData(Qt::UserRole).toInt();
+	const QString currentAxisYString = ui->comboAxisY->currentText();
+	const bool axisYlog=ui->checkBoxLogY->isChecked();
 
 	QList<double> aX = ep->getExoplanetsData(currentAxisX), aY = ep->getExoplanetsData(currentAxisY);
-	QVector<double> x = aX.toVector(), y = aY.toVector();
 
-	double minX = *std::min_element(aX.begin(), aX.end());
-	double minY = *std::min_element(aY.begin(), aY.end());
-	double maxX = *std::max_element(aX.begin(), aX.end());
-	double maxY = *std::max_element(aY.begin(), aY.end());
+	QChart *chart=new QChart();
+	chart->setBackgroundBrush(QBrush(QColor(86, 87, 90)));
+	chart->setTitleBrush(QBrush(Qt::white));
+	chart->setMargins(QMargins(2, 1, 2, 1)); // set to 0/0/0/0 for max space usage. This is between the title/axis labels and the enclosing QChartView.
+	chart->layout()->setContentsMargins(0, 0, 0, 0);
+	chart->setBackgroundRoundness(0); // remove rounded corners
+	chart->legend()->hide();
+
+	QScatterSeries *series=new QScatterSeries();
+	QAbstractAxis *chartXAxis, *chartYAxis;
+	for (int i=0; i<aX.length(); i++)
+	{
+		// build chartable series from the two lists. Exclude zeros and negative values to avoid issues with log charts.
+		if (axisXlog && axisYlog)
+		{
+			if ( (aX.at(i)>0.) && (aY.at(i)>0.))
+				series->append(aX.at(i), aY.at(i));
+		}
+		else if (axisXlog && !axisYlog)
+		{
+			if (aX.at(i)>0.)
+				series->append(aX.at(i), aY.at(i));
+		}
+		else if (!axisXlog && axisYlog)
+		{
+			if (aY.at(i)>0.)
+				series->append(aX.at(i), aY.at(i));
+		}
+		else
+			series->append(aX.at(i), aY.at(i));
+	}
+
+	// Find range of actually used values
+	const QList<QPointF>points=series->points();
+	auto compX=[](const QPointF &a, const QPointF &b){
+		return a.x() < b.x();
+	};
+	auto compY=[](const QPointF &a, const QPointF &b){
+		return a.y() < b.y();
+	};
+	auto [minXs, maxXs] = std::minmax_element(points.begin(), points.end(), compX);
+	auto [minYs, maxYs] = std::minmax_element(points.begin(), points.end(), compY);
+	//qDebug() << "Xmin" << *minXs << "Xmax" << *maxXs << "Ymin" << *minYs << "Ymax" << *maxYs;
+	double minX=minXs->x();
+	double maxX=maxXs->x();
+	double minY=minYs->y();
+	double maxY=maxYs->y();
 
 	if (!ui->minX->text().isEmpty())
 		minX = ui->minX->text().toDouble();
@@ -708,55 +842,80 @@ void ExoplanetsDialog::drawDiagram()
 	if (!ui->maxY->text().isEmpty())
 		maxY = ui->maxY->text().toDouble();
 
-	ui->customPlot->addGraph();	
-	ui->customPlot->graph(0)->setData(x, y);
-	ui->customPlot->graph(0)->setPen(QPen(Qt::blue));
-	ui->customPlot->graph(0)->setLineStyle(QCPGraph::lsNone);
-	ui->customPlot->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssDisc, 4));
-	ui->customPlot->graph(0)->rescaleAxes(true);
-	ui->customPlot->xAxis->setLabel(currentAxisXString);
-	ui->customPlot->yAxis->setLabel(currentAxisYString);
+	chart->addSeries(series);
+	series->setPen(QPen(Qt::blue));
+	series->setMarkerShape(QScatterSeries::MarkerShapeCircle);
+	series->setMarkerSize(4);
 
-	ui->customPlot->xAxis->setRange(minX, maxX);
-	if (ui->checkBoxLogX->isChecked())
+	if (axisXlog)
 	{
-		ui->customPlot->xAxis->setScaleType(QCPAxis::stLogarithmic);
-		ui->customPlot->xAxis->setScaleLogBase(10);
+		chartXAxis = new QLogValueAxis(chart);
+		chart->addAxis(chartXAxis, Qt::AlignBottom);
+		chartXAxis->setRange(minX, maxX);
+		dynamic_cast<QLogValueAxis*>(chartXAxis)->setMinorTickCount(-1);
 	}
 	else
-		ui->customPlot->xAxis->setScaleType(QCPAxis::stLinear);
-
-	ui->customPlot->yAxis->setRange(minY, maxY);
-	if (ui->checkBoxLogY->isChecked())
 	{
-		ui->customPlot->yAxis->setScaleType(QCPAxis::stLogarithmic);
-		ui->customPlot->yAxis->setScaleLogBase(10);
+		chartXAxis = new QValueAxis(chart);
+		chart->addAxis(chartXAxis, Qt::AlignBottom);
+		chartXAxis->setRange(minX, maxX);
+		dynamic_cast<QValueAxis *>(chartXAxis)->applyNiceNumbers();
+		dynamic_cast<QValueAxis *>(chartXAxis)->setMinorTickCount(1);
+	}
+
+	if (axisYlog)
+	{
+		chartYAxis = new QLogValueAxis(chart);
+		chart->addAxis(chartYAxis, Qt::AlignLeft);
+		chartYAxis->setRange(minY, maxY);
+		dynamic_cast<QLogValueAxis*>(chartYAxis)->setMinorTickCount(-1);
 	}
 	else
-		ui->customPlot->yAxis->setScaleType(QCPAxis::stLinear);
+	{
+		chartYAxis = new QValueAxis(chart);
+		chart->addAxis(chartYAxis, Qt::AlignLeft);
+		chartYAxis->setRange(minY, maxY);
+		dynamic_cast<QValueAxis *>(chartYAxis)->applyNiceNumbers();
+		dynamic_cast<QValueAxis *>(chartYAxis)->setMinorTickCount(1);
+	}
 
-	ui->customPlot->replot();
+	chartXAxis->setTitleText(currentAxisXString);
+	chartYAxis->setTitleText(currentAxisYString);
+	QFont font=chartXAxis->titleFont();
+	font.setBold(false);
+	chartXAxis->setTitleFont(font);
+	font=chartYAxis->titleFont();
+	font.setBold(false);
+	chartYAxis->setTitleFont(font);
+
+	static const QPen axisPen(          Qt::white, 1,    Qt::SolidLine);
+	static const QPen axisGridPen(      Qt::white, 0.5,  Qt::SolidLine);
+	static const QPen axisMinorGridPen( Qt::white, 0.35, Qt::DotLine);
+
+	chartXAxis->setTitleBrush(Qt::white);
+	chartXAxis->setLabelsBrush(Qt::white);
+	chartXAxis->setLinePen(axisPen);
+	chartXAxis->setGridLinePen(axisGridPen);
+	chartXAxis->setMinorGridLinePen(axisMinorGridPen);
+	chartYAxis->setTitleBrush(Qt::white);
+	chartYAxis->setLabelsBrush(Qt::white);
+	chartYAxis->setLinePen(axisPen);
+	chartYAxis->setGridLinePen(axisGridPen);
+	chartYAxis->setMinorGridLinePen(axisMinorGridPen);
+
+	series->attachAxis(chartXAxis);
+	series->attachAxis(chartYAxis);
+
+	QChart *oldChart=ui->chartView->chart();
+	if (oldChart) oldChart->deleteLater();
+	ui->chartView->setChart(chart);
+	ui->chartView->setRenderHint(QPainter::Antialiasing);
 }
 
 void ExoplanetsDialog::populateDiagramsList()
 {
 	Q_ASSERT(ui->comboAxisX);
 	Q_ASSERT(ui->comboAxisY);
-
-	QColor axisColor(Qt::white);
-	QPen axisPen(axisColor, 1);
-
-	ui->customPlot->setBackground(QBrush(QColor(86, 87, 90)));
-	ui->customPlot->xAxis->setLabelColor(axisColor);
-	ui->customPlot->xAxis->setTickLabelColor(axisColor);
-	ui->customPlot->xAxis->setBasePen(axisPen);
-	ui->customPlot->xAxis->setTickPen(axisPen);
-	ui->customPlot->xAxis->setSubTickPen(axisPen);
-	ui->customPlot->yAxis->setLabelColor(axisColor);
-	ui->customPlot->yAxis->setTickLabelColor(axisColor);
-	ui->customPlot->yAxis->setBasePen(axisPen);
-	ui->customPlot->yAxis->setTickPen(axisPen);
-	ui->customPlot->yAxis->setSubTickPen(axisPen);
 
 	QComboBox* axisX = ui->comboAxisX;
 	QComboBox* axisY = ui->comboAxisY;

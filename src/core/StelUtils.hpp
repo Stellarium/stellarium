@@ -34,8 +34,18 @@
 #define AU_KMf (1.0f/149597870.691f)
 // Parsec (km)
 #define PARSEC 30.857e12
+// Parsec (LY)
+#define PARSEC_LY 3.261563777
 // speed of light (km/sec)
 #define SPEED_OF_LIGHT 299792.458
+// Ecliptic obliquity of J2000.0, degrees
+#define EPS_0 23.4392803055555555555556
+// Equatorial radius of the Earth in km
+#define EARTH_RADIUS 6378.1366
+// Equatorial radius of the Sun in km
+#define SUN_RADIUS 696000.
+// Equatorial radius of the Moon in km
+#define MOON_RADIUS 1738.
 
 // Add a few frequently used extra math-type literals
 #ifndef M_PI_180
@@ -72,14 +82,20 @@
 //! @namespace StelUtils contains general purpose utility functions.
 namespace StelUtils
 {
-	//! Return the full name of stellarium, i.e. "stellarium 0.9.0"
+	//! Return the full name of stellarium, i.e. "Stellarium 23.1"
 	QString getApplicationName();
 
-	//! Return the version of stellarium, i.e. "0.9.0"
+	//! Return the version of stellarium, i.e. "0.23.1"
 	QString getApplicationVersion();
 
-	//! Return the name and the version of operating system, i.e. "Mac OS X 10.7"
+	//! Return the public version of stellarium, i.e. "23.1"
+	QString getApplicationPublicVersion();
+
+	//! Return the name and the version of operating system, i.e. "macOS 12.5"
 	QString getOperatingSystemInfo();
+
+	//! Return the name and the version of compiler, which was used for building the planetarium, i.e. "GCC 9.3.0"
+	QString getCompilerInfo();
 
 	//! Return the user agent name, i.e. "Stellarium/0.15.0 (Linux)"
 	QString getUserAgentString();
@@ -136,14 +152,15 @@ namespace StelUtils
 	//! @param rad input angle in radian
 	//! @param sign true if positive, false otherwise
 	//! @param deg decimal degree
+	Q_DECL_DEPRECATED_X("just use rad*M_180_PI instead")
 	void radToDecDeg(double rad, bool& sign, double& deg);
 
 	//! Convert an angle in radian to a decimal degree string.
 	//! @param angle input angle in radian
 	//! @param precision
 	//! @param useD Define if letter "d" must be used instead of deg sign
-	//! @param useC Define if function should use 0-360 degrees
-	QString radToDecDegStr(const double angle, const int precision = 4, const bool useD=false, const bool useC=false);
+	//! @param positive Define if function should use 0-360 degrees
+	QString radToDecDegStr(const double angle, const int precision = 4, const bool useD=false, const bool positive=false);
 
 	//! Convert an angle in radian to a hms formatted string.
 	//! If the second, minute part is == 0, it is not output
@@ -184,6 +201,18 @@ namespace StelUtils
 	//! Convert an angle in decimal degrees to a dms formatted string.
 	//! @param angle input angle in decimal degrees
 	QString decDegToDmsStr(const double angle);
+
+	//! Convert latitude in decimal degrees to a dms formatted string or use decimal values.
+	//! @param latitude in decimal degrees
+	//! @param dms set true to use DMS formatted string
+	QString decDegToLatitudeStr(const double latitude, bool dms = true);
+
+	//! Convert longitude in decimal degrees to a dms formatted string.
+	//! @param longitude in decimal degrees
+	//! @param eastPositive set true to counting East direction positive
+	//! @param semiSphere set true to use -180..180 degrees range (0..360 degrees otherwise)
+	//! @param dms set true to use DMS formatted string
+	QString decDegToLongitudeStr(const double longitude, bool eastPositive = true, bool semiSphere = true, bool dms = true);
 
 	//! Convert a dms formatted string to an angle in radian
 	//! @param s The input string
@@ -226,7 +255,7 @@ namespace StelUtils
 	}
 
 	//! Convert from Rectangular direction to spherical coordinate components.
-	//! @param lng double* to store longitude in radian
+	//! @param lng double* to store longitude in radian [-pi, pi]
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(double *lng, double *lat, const Vec3d& v){
@@ -236,7 +265,7 @@ namespace StelUtils
 	}
 
 	//! Convert from Rectangular direction to spherical coordinate components.
-	//! @param lng float* to store longitude in radian
+	//! @param lng float* to store longitude in radian [-pi, pi]
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(float *lng, float *lat, const Vec3d& v){
@@ -247,7 +276,7 @@ namespace StelUtils
 
 
 	//! Convert from Rectangular direction to spherical coordinate components.
-	//! @param lng float* to store longitude in radian
+	//! @param lng float* to store longitude in radian [-pi, pi]
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(float *lng, float *lat, const Vec3f& v){
@@ -257,13 +286,34 @@ namespace StelUtils
 	}
 
 	//! Convert from Rectangular direction to spherical coordinate components.
-	//! @param lng double* to store longitude in radian
+	//! @param lng double* to store longitude in radian [-pi, pi]
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(double *lng, double *lat, const Vec3f &v){
 		double r = static_cast<double>(v.length());
 		*lat = asin(static_cast<double>(v[2])/r);
 		*lng = atan2(static_cast<double>(v[1]),static_cast<double>(v[0]));
+	}
+
+	//! Convert from spherical coordinates (including distance) to Rectangular direction.
+	//! @param lng longitude in radian
+	//! @param lat latitude in radian
+	//! @param r length of radius vector (distance)
+	//! @param v the resulting 3D unit vector
+	inline void spheToRect(const double lng, const double lat, const double r, Vec3d& v){
+		const double cosLat = cos(lat);
+		v.set(cos(lng) * cosLat * r, sin(lng) * cosLat * r, sin(lat) * r);
+	}
+
+	//! Convert from Rectangular direction to spherical coordinate components (including distance).
+	//! @param lng double* to store longitude in radian [-pi, pi]
+	//! @param lat double* to store latitude in radian
+	//! @param r double*   length of radius vector (distance)
+	//! @param v the input 3D vector
+	inline void rectToSphe(double *lng, double *lat, double *r, const Vec3d& v){
+		*r = v.length();
+		*lat = asin(v[2] / *r);
+		*lng = atan2(v[1],v[0]);
 	}
 
 	//! Coordinate Transformation from equatorial to ecliptical
@@ -321,21 +371,28 @@ namespace StelUtils
 			     -std::log(-z + std::sqrt(z*z+1)));
 	}
 
-	//! Integer modulo where the result is always positive.
+	//! Integer modulo where the result is always nonnegative. [0..b-1]
 	inline int imod(const int a, const int b){
 		int ret = a % b;
 		if(ret < 0)
 			ret+=b;
 		return ret;
 	}
-	//! Double modulo where the result is always positive.
+	//! Integer modulo where the result is always positive. [1..b]
+	inline int amod(const int a, const int b){
+		int ret = a % b;
+		if(ret <= 0)
+			ret+=b;
+		return ret;
+	}
+	//! Double modulo where the result is always nonnegative. [0..(b
 	inline double fmodpos(const double a, const double b){
 		double ret = fmod(a, b);
 		if(ret < 0)
 			ret+=b;
 		return ret;
 	}
-	//! Float modulo where the result is always positive.
+	//! Float modulo where the result is always nonnegative. [0..(b
 	inline float fmodpos(const float a, const float b){
 		float ret = fmodf(a, b);
 		if(ret < 0)
@@ -343,13 +400,53 @@ namespace StelUtils
 		return ret;
 	}
 
+	//! Floor integer division provides truncating to the next lower integer, also for negative numerators.
+	//! https://stackoverflow.com/questions/2622441/c-integer-floor-function
+	//! @returns floor(num/den)
+	inline int intFloorDiv (int num, int den)
+	{
+	  if (0 < (num^den)) // lgtm [cpp/bitwise-sign-check]
+	    return num/den;
+	  else
+	    {
+	      ldiv_t res = ldiv(num,den);
+	      return (res.rem)? res.quot-1
+			      : res.quot;
+	    }
+	}
+
+	//! version of intFloorDiv() for large integers.
+	inline int intFloorDivLL(qint64 num, qint64 den)
+	{
+	  if (0 < (num^den)) // lgtm [cpp/bitwise-sign-check]
+	    return int(num/den);
+	  else
+	    {
+	      lldiv_t res = lldiv(num,den);
+	      qint64 ret= (res.rem)? res.quot-1
+			      : res.quot;
+	      return int(ret);
+	    }
+	}
+
 	///////////////////////////////////////////////////
 	// New Qt based General Calendar Functions.
-	//! Make from julianDay a year, month, day for the Julian Date julianDay represents.
+	//! Extract from julianDay a year, month, day for the Julian Date julianDay represents.
+	//! @attention Under rare circumstances with a rounded result where julianDay=*.49999999xyz this will still round off whereas the time is less than a fraction from midnight of the next day.
+	//! Depending on circumstances this may matter or not. If you need a full decoding of a Julian day number, prefer to use getDateTimeFromJulianDay()
 	void getDateFromJulianDay(const double julianDay, int *year, int *month, int *day);
 
-	//! Make from julianDay an hour, minute, second.
-	void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis=Q_NULLPTR);
+	//! Extract from julianDay an hour, minute, second.
+	//! @attention Under rare circumstances with a rounded result where julianDay=*.49999999xyz this will lead to a factual result for *.5000000abc, i.e. not 24 but 0 hours, and wrapDay will be true.
+	//! Depending on circumstances this may matter or not. If you need a full decoding of a Julian day number, prefer to use getDateTimeFromJulianDay()
+	void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis=Q_NULLPTR, bool *wrapDay=Q_NULLPTR);
+
+	//! Extract from julianDay a year, month, day, hour, minute, second and (optional) millisecond for the Julian Day julianDay represents.
+	//! This is the preferred method of complete decoding of a Julian day number.
+	void getDateTimeFromJulianDay(const double julianDay, int *year, int *month, int *day, int *hour, int *minute, int *second, int *millis=Q_NULLPTR);
+
+	//! Make hours (decimal format) from julianDay
+	double getHoursFromJulianDay(const double julianDay);
 
 	//! Parse an ISO8601 date string.
 	//! Also handles negative and distant years.
@@ -377,8 +474,8 @@ namespace StelUtils
 	//! Return a day number of week for date
 	//! @return number of day: 0 - sunday, 1 - monday,..
 	int getDayOfWeek(int year, int month, int day);
-	inline int getDayOfWeek(double JD){ double d= fmod(JD+1.5, 7); if (d<0) d+=7.0;
-		return static_cast<int>(floor(d));
+	inline int getDayOfWeek(double JD){ double d= fmodpos(JD+1.5, 7);
+		return std::lround(floor(d));
 	}
 
 	//! Get the current Julian Date from system time.
@@ -402,13 +499,19 @@ namespace StelUtils
 	//! @param dateTime the UTC QDateTime to convert
 	//! @result the matching decimal Julian Day
 	inline double qDateTimeToJd(const QDateTime& dateTime){
+		Q_ASSERT(dateTime.timeSpec()==Qt::UTC);
 		return dateTime.date().toJulianDay()+static_cast<double>(1./(24*60*60*1000))*QTime(0, 0, 0, 0).msecsTo(dateTime.time())-0.5;
 	}
 
-	//! Convert a julian day to a QDateTime.
-	//! @param jd to convert
-	//! @result the matching UTC QDateTime
-	QDateTime jdToQDateTime(const double& jd);
+	//! Convert a Julian Day number to a QDateTime.
+	//! @param jd Julian Day number (with fractions) to convert
+	//! @param timeSpec a Qt::TimeSpec constant. Meaningful in this context seem only Qt::UTC (preferred) and Qt::LocalTime (useful in some GUI contexts).
+	//! @note From 2008 to 2022-05 this converted to local time zone, not to UTC as specified and intended.
+	//!        The old behaviour is kept with @param timeSpec set to Qt::LocalTime.
+	//! If you use Qt::LocalTime, you should add StelCore::getUTCOffset(jd)/24 to the current JD before calling this to have @param jd as a "local time zone corrected JD" before conversion.
+	//! @result the matching QDateTime
+	//! @note QDate has no year zero. This and other idiosyncrasies of QDateTime may limit the applicability of program parts which use this method to positive years or may cause other issues.
+	QDateTime jdToQDateTime(const double& jd, const Qt::TimeSpec timeSpec);
 
 	//! Compute Julian day number from calendar date.
 	//! Uses QDate functionality if possible, but also works for negative JD.
@@ -464,6 +567,9 @@ namespace StelUtils
 	//! Convert a hms formatted string to decimal hours
 	double hmsStrToHours(const QString& s);
 
+	//! Convert days (float) to a time string
+	QString daysFloatToDHMS(float days);
+
 	//! Get Delta-T estimation for a given date.
 	//! This is just an "empty" correction function, returning 0.
 	double getDeltaTwithoutCorrection(const double jDay);
@@ -475,6 +581,14 @@ namespace StelUtils
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByEspenakMeeus(const double jDay);
+
+	//! Get Delta-T estimation for a given date.
+	//! Note that this method is recommended for the year range:
+	//! -1999 to +3000. It gives details for -500...+2150.
+	//! Implementation of algorithm by Espenak & Meeus (2006) with modified formulae for DeltaT computation
+	//! @param jDay the date and time expressed as a Julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByEspenakMeeusModified(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation of algorithm by Schoch (1931) for DeltaT computation,
@@ -596,6 +710,8 @@ namespace StelUtils
 
 	//! Get Delta-T estimation for a given date.
 	//! Implementation of algorithm by Stephenson & Houlden (1986) for DeltaT computation
+	//! Source: STEPHENSON F.R and HOULDEN M.A. - Atlas of Historical Eclipse Maps - Cambridge Univ.Press. (1986)
+	//! [https://assets.cambridge.org/97805212/67236/frontmatter/9780521267236_frontmatter.pdf]
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds or 0 if year > 1600
 	double getDeltaTByStephensonHoulden(const double jDay);
@@ -730,10 +846,15 @@ namespace StelUtils
 	double getDeltaTByKhalidSultanaZaidi(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-	//! Implementation of a spline approximation for time period -720-2016.0 for DeltaT by Stephenson, Morrison and Hohenkerk (2016).
-	//! Source: Measurement of the Earth’s rotation: 720 BC to AD 2015
-	//! Proc. R. Soc. A 472: 20160404.
+	//! Implementation of a spline approximation for time period -720-2019.0 for DeltaT by Stephenson, Morrison and Hohenkerk (2016).
+	//! Source: Measurement of the Earth's rotation: 720 BC to AD 2015, published in 2016 in the Royal Society's
+	//! Proceedings A 472, and made freely available via Open Access, by Stephenson, F.R., Morrison, L.V. and
+	//! Hohenkerk, C.Y..
 	//! https://doi.org/10.1098/rspa.2016.0404
+	//! Addendum 2020 to "Measurement of the Earth's Rotation: 720 BC to AD 2015", published in 2021 February
+	//! in the Royal Society's Proceedings A 478, by Morrison, L. V., Stephenson, F.R., Hohenkerk, C.Y. and
+	//! M. Zawilski, M..
+	//! https://doi.org/10.1098/rspa.2020.0776
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds. For times outside the limits, return result from the fitting parabola.
 	double getDeltaTByStephensonMorrisonHohenkerk2016(const double jDay);
@@ -744,10 +865,10 @@ namespace StelUtils
 	//! For adapting from -26 to -23.895, use -0.91072 * (-23.895 + 26.0) = -1.9170656
 	//! @param jDay the JD
 	//! @param ndot value of n-dot (secular acceleration of the Moon) which should be used in the lunar ephemeris instead of the default values.
-	//! @param useDE43x true if function should adapt calculation of the secular acceleration of the Moon to the DE43x ephemeris
+	//! @param useDE4xx true if function should adapt calculation of the secular acceleration of the Moon to the DE43x/DE44x ephemerides
 	//! @return SecularAcceleration in seconds
-	//! @note n-dot for secular acceleration of the Moon in ELP2000-82B is -23.8946 "/cy/cy and for DE43x is -25.8 "/cy/cy
-	double getMoonSecularAcceleration(const double jDay, const double ndot, const bool useDE43x);
+	//! @note n-dot for secular acceleration of the Moon in ELP2000-82B is -23.8946 "/cy/cy and for DE43x/DE44x is -25.8 "/cy/cy
+	double getMoonSecularAcceleration(const double jDay, const double ndot, const bool useDE4xx);
 
 	//! Get the standard error (sigma) for the value of DeltaT
 	//! @param jDay the JD
@@ -790,7 +911,7 @@ namespace StelUtils
 	//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
 	float* ComputeCosSinRhoZone(const float dRho, const unsigned int segments, const float minAngle);
 
-	//! Calculate fixed days (R.D.) from Gregorian date
+	//! Calculate fixed days (R.D.) from Gregorian date (proleptic Gregorian calendar)
 	//! @param year
 	//! @param month
 	//! @param day
@@ -818,6 +939,12 @@ namespace StelUtils
 	//! @param b second number
 	//! @return Greatest Common Divisor
 	int gcd(int a, int b);
+
+	//! Least Common Multiple
+	//! @param a first number
+	//! @param b second number
+	//! @return Least Common Multiple
+	int lcm(int a, int b);
 
 	//! Given regularly spaced steps x1, x2, x3 and curve values y1, y2, y3,
 	//! calculate an intermediate value of the 3 arguments for the given interpolation point n.
@@ -863,8 +990,16 @@ namespace StelUtils
 	//! Interval test. This checks whether @param value is within [@param low, @param high]
 	template <typename T> bool isWithin(const T& value, const T& low, const T& high)
 	{
-	    return !(value < low) && !(high < value);
+		return !(value < low) && !(high < value);
 	}
+
+	template <class Arg1, class Arg2, class Result>
+	struct binary_function
+	{
+		typedef Arg1 first_argument_type;
+		typedef Arg2 second_argument_type;
+		typedef Result result_type;
+	};
 
 
 #ifdef _MSC_BUILD

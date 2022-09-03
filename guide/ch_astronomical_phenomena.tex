@@ -39,6 +39,39 @@ the \key{,} key.
   amounts of energy. By far the safest way to observe the Sun is to
   look at it on a computer screen, courtesy of Stellarium!}
 
+\subsection{Twilight}
+\label{sec:Phenomena:sun:twilight}
+
+The sunlight is scattered in Earth's atmosphere even if the Sun is
+below the horizon. The period after sunset when the Sun is higher than
+$-6°$ is called \indexterm[twilight, civil]{civil twilight}. The sky
+is generally bright enough for outdoor activity or reading the
+newspaper.
+
+As time progresses, the first stars will appear. The phase where the
+Sun is between $-6°$ and $-12°$ below the (mathematical) horizon is
+called \indexterm[twilight, nautical]{nautical twilight}: before the
+invention of satellite navigation, celestial navigation was used to
+find a ship's position on the oceans. This required that it was still
+bright enough so that the horizon line was visible, but already dark
+enough to see enough stars to clearly identify them and measure the
+altitude of a few of them. (See also section \ref{sec:plugins:NavigationalStars}.)
+
+The twilight phase when the Sun is between $-12°$ and $-18°$ is called
+\indexterm[twilight, astronomical]{astronomical twilight}. Only the
+western horizon shows some brightening, but else the natural sky is
+``almost'' as dark as it can get.
+
+In the morning the game is reversed. Dawn starts with astronomical
+twilight, progresses to nautical and civil twilight, and sunrise
+ends the night.
+
+In Stellarium, you can \newFeature{0.21.2} set the time when the Sun
+reaches a configured altitude. See
+section~\ref{sec:gui:help:hotkeys:example} about how to configure the
+program.
+
+
 \section{Stars}
 \label{sec:Phenomena:stars}
 
@@ -88,7 +121,7 @@ Major are widely recognised, known variously as ``the plough'', the
 picture of the bear has been removed and only a constellation diagram
 remains.
 
-\begin{figure}[hb]
+\begin{figure}[tbp]
 \centering\includegraphics[scale=0.8]{uma.png}
 \caption{Ursa Major}
 \label{fig:ursamajor}
@@ -400,7 +433,7 @@ denoted by a number in roman numerals, as described in table~\ref{tab:luminosity
 
 \begin{table}[tb]
   \centering\small
-  \begin{tabular}{lll}
+  \begin{tabular}{ll}
 \toprule
 \emph{Luminosity class} & \emph{Description}\\\midrule
 Ia, Ib & Super-giants\\
@@ -421,10 +454,9 @@ temperature gives a diagram called a Hertzsprung-Russell diagram
 (after the two astronomers \name[Ejnar]{Hertzsprung} (1873--1967) and 
 \name[Henry Norris]{Russell} (1877--1957) who devised it). A slight variation of this is shown
 in figure~\ref{fig:colourmag} (which is technically a colour/magnitude
-in figure~\ref{fig:colourmag} (which is technically a colour/magnitude
 plot).
 
-\begin{figure}[tp]
+\begin{figure}[tbp]
 \centering\includegraphics[width=\textwidth]{colour_magnitude_graph.png}
 \caption{Hertzsprung-Russell Diagram}
 \label{fig:colourmag}
@@ -496,6 +528,34 @@ Waning Crescent& Less than half the disc of the moon is illuminated, and this ge
 \label{tab:moonphases}
 \end{table}
 
+\subsection{The Lunar Magnitude}
+\label{sec:Moon:magnitude}
+
+The eastern half of the Moon has more dark \emph{maria}, therefore
+careful studies \citep{Russell:1916} have shown that in the waxing
+phases the Moon is slightly brighter than in the waning phase of the
+same degree of illumination.
+
+Around Full Moon, the Moon shows an \indexterm{opposition surge}, a
+strong increase in brightness which \citet{Krisciunas-Schaefer:1991}
+describe as a 35\% increase in luminous flux over the curve
+extrapolated from measurements when the phase angle $|\alpha|<7^\circ$. 
+
+Of course, just at Full Moon when the opposition is near-perfect, the
+Moon will also move through Earth's shadow during a Lunar eclipse.
+
+The Moon is a large reflective body which reflects not only sunlight
+which directly hits it, but also sunlight reflected from Earth to the
+Moon \citep{Agrawal:2016}. This \indexterm{Ashen Light} or
+\indexterm{Earthshine} is brightest when Earth is most strongly
+illuminated for the Moon, i.e., when the Moon as seen from Earth shows
+only a thin crescent. Therefore in these days around the New Moon, the
+thin crescent can often be seen complemented into a softly glowing
+full disk. \newFeature{0.21.0} Stellarium's estimate for visual
+magnitude is based on the mentioned references and a new standard 
+value for the solar illumination constant of 133.1~klx \citep{Ashdown:2019}.
+
+
 \section{The Major Planets}
 \label{sec:Planets}
 
@@ -539,7 +599,7 @@ definition of a planet in 2006 Pluto has been relegated to having the
 status of \emph{dwarf planet}, along with bodies such as Ceres and Eris.
 See figure~\ref{fig:planets}.
 
-\begin{figure}[t]
+\begin{figure}[tb]
   \centering
   \includegraphics[width=0.9\linewidth]{pictures/the_planets.jpg}
   \caption{The Planets}
@@ -571,6 +631,31 @@ metallic cores). Because of this, they have an average density which is
 much less than the terrestrial planets. Saturn's mean density is only
 about $0.7 \g/\cm^3$ -- it would float in water!
 
+\subsection{Apparent Magnitudes of the Planets}
+The apparent magnitude of the planets can be found in astronomical
+almanachs. Over time, several scientific studies have refined these
+models. A few of them have been implemented in Stellarium:
+\begin{description}
+\item[M\"uller 1893] G. M\"uller formulated
+  \indexterm[magnitudes, visual]{visual magnitudes} for the
+  planets from visual observations of 1877--1891. They can be found in
+  \citet{AstronomicalAlgorithms:1998} and \citet{ESAE:1961}. They give 
+  notably lower brightness estimates than the later models, which however 
+  provide \indexterm[magnitudes, instrumental]{instrumental magnitudes}
+  in the Johnson V photometric system. Several important 
+  historical studies from the early 20th century are based on these estimates.
+\item[Astronomical Almanac 1984] This model was used in the
+  Astronomical Almanac starting in 1984. The expressions are allegedly
+  ``due to D. L.  Harris'', but J.
+  \citet[p.286]{AstronomicalAlgorithms:1998} denies this origin. 
+\item[Explanatory Supplement 1992] Expressions from \citet{ESAA:1992}.
+\item[Explanatory Supplement 2013] Expressions from \citet{ESAA:2013}.
+\item[Mallama \& Hilton 2018] The currently most modern expressions
+  include e.g. a model for Mars which takes the brightening and
+  dimming of albedo features into account \citep{Mallama:2018}.
+\item[Generic] A simple model based on albedo, size and distance.
+\end{description}
+
 \section{The Minor Bodies}%\label{the-minor-planets}
 
 As well as the Major Planets, the solar system also contains
@@ -578,6 +663,25 @@ innumerable smaller bodies in orbit around the Sun. These are
 generally the \emph{dwarf planets} (Ceres, Pluto, Eris), the other
 \emph{minor planets}, also known as \emph{planetoids} or
 \emph{asteroids}, and comets.
+
+While the positions of the major planets can meanwhile be computed for
+many millennia in the past and future, the minor bodies have only been
+systematically observed since the beginning of the 19th
+century.\footnote{The first discovered asteroid, (1) Ceres, was in
+  fact discovered on January 1, 1801.} The small masses occasionally
+pass by the larger planets which exert gravitational forces, so that
+the orbits of the minor bodies are not stable and cannot be computed
+for long periods. The positions are computed by using
+\indexterm{osculating orbital elements}, which describe the motions on
+instantaneous \indexterm{Kepler orbits}\footnote{The mathematician and
+  astronomer \name[Johannes]{Kepler} (1571--1630) discovered that
+  planets do not move on circles (which had been postulated since
+  antiquity), but on ``conical sections'', i.e., ellipses, parabolae
+  or even hyperbolae. The latter two can be observed for far-out
+  comets and recently even interstellar objects passing the Sun.}. If
+you want to compute positions of these objects with Stellarium, you
+need to have valid (current) \indexterm{orbital elements}. See
+Appendix~\ref{sec:ssystem.ini:minor} for more details.
 
 \subsection{Asteroids}
 \label{sec:Phenomena:Asteroids}
@@ -600,7 +704,9 @@ time a very long way from the Sun. Comets are composed of rock, dust
 and ices. When they come close to the Sun, the heat evaporates the
 ices, causing a gaseous release. This gas and loose material which
 comes away from the body of the comet is swept away from the Sun by
-the Solar wind, forming the tail.
+the Solar wind, forming the tail. The outgassing may also change the
+orbit of the comet, so that its orbital elements should be used only
+for a few months around their \indexterm{epoch}. 
 
 Most larger comets exhibit two kinds of tail: a straight gas tail
 (often blue-green in photographs), and a wider, occasionally curved
@@ -609,9 +715,9 @@ dust tail (reflecting whitish sunlight).
 Comets whose orbit brings them close to the Sun more frequently than
 every 200 years are considered to be \emph{short period} comets, the
 most famous of which is probably Comet Halley, named after the British
-astronomer \name[Edmund]{Halley} (1656--1741/42\footnote{Halley lived 
+astronomer \name[Edmund]{Halley} (1656--1741/42\footnote{\name{Halley} lived 
 in a time when Great Britain still used the Julian calendar and started 
-the years in March. He died January 14th, 1741 (Julian), 
+the years in March. He died on January 14th, 1741 (British Julian), 
 which was called January 25th 1742 (Gregorian) in most other European countries.}), 
 which has an orbital period of roughly 76~years.
 
@@ -833,11 +939,11 @@ galaxies}, \emph{lenticular galaxies} and \emph{irregular galaxies}.
 
 
 
-\section{Eclipses}
+\section{Eclipses and Transits}
 \label{sec:Eclipses}
 
 Eclipses occur when an apparently large celestial body (planet, moon
-etc.) moves between the observer (that's you!) and a more distant object
+etc.) moves between the observer and a more distant object
 -- the more distant object being eclipsed by the nearer one.
 
 \subsection{Solar Eclipses}
@@ -872,8 +978,25 @@ classical literature, or \emph{hybrid} in more recent works.
 
 Lunar eclipses occur when the Earth moves between the Sun and the Moon,
 and the Moon is in the Earth's shadow. They occur under the same basic
-conditions as the solar eclipse but can occur more often because the
-Earth's shadow is so much larger than the Moon's.
+conditions as the solar eclipse but appear to occur more often because the
+Earth's shadow is so much larger than the Moon's, and a Lunar eclipse is
+observable from more than half the Earth's surface, while a Solar eclipse
+is limited to a smaller region.
+
+The geometrical begin of a Lunar eclipse is totally unobservable: Seen
+from a point near the observable edge of the Lunar surface, the large black
+disk of Earth just touches the Solar disk. While the time of this
+event can be determined, the effect on the apparent brightness of the
+Moon's surface as observed from Earth is close to zero. Only as more
+of the Solar disk is occulted by Earth, this spot on the Lunar surface
+will receive less sunlight and will appear darker when observed from
+Earth. A rule of thumb says that 70\% of the Moon must enter the
+Earth's penumbra before a light defect can be noted by attentive human
+observers. 
+
+The Earth's deep shadow is then much darker. As soon as an observer on
+the Lunar edge experiences a Total Solar eclipse, observers on Earth
+see the begin of the partial eclipse.
 
 Total lunar eclipses are more noticeable than partial eclipses because
 the Moon moves fully into the Earth's shadow and there is very
@@ -882,8 +1005,113 @@ noticeable darkening. However, the Earth's atmosphere refracts light
 surface even during total eclipses. The blue parts of sunlight are scattered and filtered away, 
 so that there is a marked reddening of the light as it passes through the atmosphere, and this 
 makes the Moon appear in a deep red colour. The darkness and colors are notably influenced by 
-atmospheric clarity and clouds. After big volcanic eruptions eclipses are often reported darker.
+atmospheric clarity and clouds. After big volcanic eruptions eclipses are often reported to appear darker.
+\name[Andr\'e]{Danjon} (1890--1967) has introduced a scale for the apparent brightness of the 
+fully eclipsed Moon, where 0 is given for extremely dark eclipses and 4 for very bright ones. 
+These unpredictable brightness differences make accurate simulation of the exact appearance impossible, 
+but Stellarium's display gives a pretty good impression for eclipses given as 2-3 on this \indexterm{Danjon scale}. 
 
+Earth's atmosphere also makes the shadow slightly larger than what can
+be derived by the geometrical sizes and distances of the involved
+objects. The Astronomical Almanac uses a traditional enlargement by 2\% after
+\name[William]{Chauvenet} (1820--1870) while recent eclipse experts prefer another
+formulation which leads to a slightly smaller enlargement after \name[Andr\'e]{Danjon} \citep{Espenak-Meeus:2009}. You
+can select which formulation you prefer (see section~\ref{sec:gui:view:sso}).
+
+\subsection{Transits}
+\label{sec:Eclipses:Transits}
+
+The term ``transit'' generally describes the passage of one object in
+front of another\footnote{Another ``transit'' means the crossing of
+  the meridian by the object.}. The most prominent examples are the
+passages of the \indexterm{inferior planets} Mercury or Venus between the Sun
+and Earth, where they appear as tiny black disks on the glaringly
+bright Solar disk. The disk of Venus can be seen with the unaided
+eye\footnote{Never look into the Sun without proper filters!}, while
+Mercury is too small to be discernible.
+
+Observing the transits of Venus from various locations on Earth was an
+important scientific endeavour in previous centuries. It allows a
+direct determination of the distance scale in the Solar
+System. Unfortunately, these transits are rare events: After two such
+transits 8 years apart, there is a gap lasting more than a
+century. The last such transits occurred in 2004 and 2012. Mercury's
+transits are much more frequent.
+
+In the telescope age, this also can be a passage of a Jovian Moon in
+front of Jupiter, or even the passage of a shadow of such a moon over
+Jupiter's disk, or, more recently, the passage of an artificial
+satellite in front of the Sun or Moon.
+
+\subsection{Contact Times}
+\label{sec:Eclipses:ContactTimes}
+
+Eclipse and transit observers like to prepare tables of precomputed
+\indexterm{contact times} for which they use terminology shown in
+Tables~\ref{tab:Eclipses:ContactTimesSolar}-\ref{tab:Eclipses:ContactTimes}.
+
+\begin{table}[p]
+  \centering\small
+  \begin{tabular}{lll}
+\toprule
+\emph{Contact} & \emph{Name}       & \emph{Description}\\\midrule
+First   & Begin of partial eclipse & Moon first touches Sun from the outside\\  
+Second  & Begin of totality        & Moon completely covers the Sun \\  
+        & Mid-eclipse & central time\\
+Third   & End of totality          & Bright Solar edge re-appears from complete occultation\\  
+Fourth  & End of partial eclipse   & Moon leaves Sun completely \\  
+\bottomrule
+\end{tabular}
+\caption{Contact terminology for Total Solar eclipses.}
+\label{tab:Eclipses:ContactTimesSolar}
+\end{table}
+
+\begin{table}[p]
+  \centering\small
+  \begin{tabular}{ll}
+\toprule
+\emph{Contact} & \emph{Name, Description}\\\midrule
+First  Penumbral & Begin of (penumbral) eclipse. Unobservable. \\
+                 & Moon first touches Earth's geometrical shadow cone from the outside. \\  
+Second Penumbral & Begin of total immersion in penumbra\\
+                 & Moon shows a notable darkening \\  
+First  Umbral    & Begin of partial eclipse\\
+                 & Moon first touches the central dark shadow \\  
+Second Umbral    & Begin of totality\\
+                 & Moon completely immersed in Earth's umbra (dark shadow) \\  
+Maximum          & Mid-eclipse, central time\\
+Third  Umbral    & End of totality\\
+                 & A bright Lunar edge re-appears from complete occultation \\  
+Fourth Umbral    & End of partial eclipse\\
+                 & Moon leaves umbra completely \\  
+Third  Penumbral & End of total penumbral phase\\
+                 & Lunar edge leaves penumbra. The opposide side is still darkened\\  
+Fourth Penumbral & End of (penumbral) eclipse. Unobservable. \\
+                 & Moon leaves penumbra completely. \\  
+\bottomrule
+\end{tabular}
+\caption{Contact terminology for Lunar eclipses. Depending on shadow
+  geometry, the second penumbral contact may occur only after the first
+  umbral, and third penumbral contact before fourth umbral.}
+\label{tab:Eclipses:ContactTimesLunar}
+\end{table}
+
+
+\begin{table}[p]
+  \centering\small
+  \begin{tabular}{lll}
+\toprule
+\emph{Contact} & \emph{Name} & \emph{Description}\\\midrule
+First  & Exterior Ingress & Planet/Moon first touches Sun from the outside\\  
+Second & Interior Ingress & Planet/Moon starts to be visible completely inside Sun \\  
+       & Mid-transit & central time\\
+Third  & Interior Egress & Planet/Moon first touches Sun from the inside\\  
+Fourth & Exterior Egress & Planet/Moon leaves Sun completely \\  
+\bottomrule
+\end{tabular}
+\caption{Contact terminology for Transits and Annular Solar eclipses.}
+\label{tab:Eclipses:ContactTimes}
+\end{table}
 
 
 \section{Observing Hints}
@@ -901,9 +1129,9 @@ easily, make the most of it when you are away.
 
 \item[Wrap up warm] The best observing conditions are the same
 conditions that make for cold nights, even in the summer time. Observing
-is not a strenuous physical activity, so you will feel the cold a lot
+is not a strenuous physical activity, so you will feel the cold %a lot
 more than if you were walking around. Wear a lot of warm clothing, don't
-sit/lie on the floor (at least use a camping mat, consider taking a
+sit/lie on the floor (at least use a camping mat, better take a
 deck-chair), and take a flask of hot drink.
 
 \item[Dark adaptation] The true majesty of the night sky only
@@ -943,7 +1171,7 @@ side but concentrating on the object's location can often reveal it.
 \subsection{Atmospheric Extinction}
 \label{sec:phenomena:Extinction}
 
-\begin{figure}[tb]
+\begin{figure}[tbp]
 \centering
 \ifpdf
 \includegraphics[width=\textwidth]{gz_extinctionmag}

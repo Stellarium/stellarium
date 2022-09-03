@@ -174,28 +174,28 @@ bool S3DScene::Material::updateFadeInfo(double currentJD)
 	//find out if we have to fade in or out
 	if(currentJD >= vis_fadeIn[0] && currentJD <= vis_fadeIn[1])
 	{
-		vis_fadeValue = (currentJD - vis_fadeIn[0]) / (vis_fadeIn[1] - vis_fadeIn[0]);
+		vis_fadeValue = static_cast<float>((currentJD - vis_fadeIn[0]) / (vis_fadeIn[1] - vis_fadeIn[0]));
 		traits.isFading = true;
 	}
 	else if(currentJD >= vis_fadeOut[0] && currentJD <= vis_fadeOut[1])
 	{
-		vis_fadeValue = 1.0 - (currentJD - vis_fadeOut[0]) / (vis_fadeOut[1] - vis_fadeOut[0]);
+		vis_fadeValue = 1.0f - static_cast<float>((currentJD - vis_fadeOut[0]) / (vis_fadeOut[1] - vis_fadeOut[0]));
 		traits.isFading = true;
 	}
 	else if (currentJD > vis_fadeIn[1] && currentJD < vis_fadeOut[0])
 	{
-		vis_fadeValue = 1.0;
+		vis_fadeValue = 1.0f;
 		traits.isFading = false;
 	}
 	else
 	{
-		vis_fadeValue = 0.0;
+		vis_fadeValue = 0.0f;
 		traits.isFading = false;
 		traits.isFullyTransparent = true;
 		//we skip drawing this object entirely!
 		return false;
 	}
-	traits.isFullyTransparent = d <= 0.0;
+	traits.isFullyTransparent = d <= 0.0f;
 	return true;
 }
 
@@ -231,16 +231,16 @@ void S3DScene::setModel(const StelOBJ &model)
 	{
 		if(info.altitudeFromModel)
 		{
-			info.location->altitude=static_cast<int>(0.5*(sceneAABB.min[2]+sceneAABB.max[2])+info.modelWorldOffset[2]);
+			info.location->altitude=static_cast<int>(0.5*static_cast<double>(sceneAABB.min[2]+sceneAABB.max[2])+info.modelWorldOffset[2]);
 		}
 	}
 
 	if(info.startPositionFromModel)
 	{
 		//position at the XY center of the model
-		position.v[0] = (sceneAABB.max[0]+sceneAABB.min[0])/2.0;
+		position.v[0] = static_cast<double>(sceneAABB.max[0]+sceneAABB.min[0])/2.0;
 		qCDebug(s3dscene) << "Setting Easting  to BBX center: " << sceneAABB.min[0] << ".." << sceneAABB.max[0] << ": " << -position.v[0];
-		position.v[1] = (sceneAABB.max[1]+sceneAABB.min[1])/2.0;
+		position.v[1] = static_cast<double>(sceneAABB.max[1]+sceneAABB.min[1])/2.0;
 		qCDebug(s3dscene) << "Setting Northing to BBX center: " << sceneAABB.min[1] << ".." << sceneAABB.max[1] << ": " << position.v[1];
 	}
 	else
@@ -283,13 +283,13 @@ void S3DScene::setGround(const StelOBJ &ground)
 	heightmap.setMeshData(groundTmp.getIndexList(), groundPositionList, &groundTmp.getAABBox());
 	if(info.groundNullHeightFromModel)
 	{
-		info.groundNullHeight = ground.getAABBox().min[2];
+		info.groundNullHeight = static_cast<double>(ground.getAABBox().min[2]);
 	}
 }
 
 float S3DScene::getGroundHeightAtViewer() const
 {
-	return heightmap.getHeight(position.v[0],position.v[1]);
+	return heightmap.getHeight(static_cast<float>(position.v[0]),static_cast<float>(position.v[1]));
 }
 
 Vec3d S3DScene::getGridPosition() const
@@ -319,10 +319,10 @@ bool S3DScene::glLoad()
 	modelData.clear();
 
 	//set this here, to respect models without ground OBJ
-	heightmap.setNullHeight(info.groundNullHeight);
+	heightmap.setNullHeight(static_cast<float>(info.groundNullHeight));
 
 	//move the viewer to the ground height
-	position[2] = getGroundHeightAtViewer();
+	position[2] = static_cast<double>(getGroundHeightAtViewer());
 	recalcEyePos();
 
 	double currentJD = StelApp::getInstance().getCore()->getJD();
@@ -363,7 +363,7 @@ void S3DScene::moveViewer(const Vec3d &moveView)
 	eye_height+= moveWorld[2];
 	position[0]+= moveWorld[0];
 	position[1]+= moveWorld[1];
-	position[2] = heightmap.getHeight(position[0],position[1]);
+	position[2] = static_cast<double>(heightmap.getHeight(static_cast<float>(position[0]),static_cast<float>(position[1])));
 	recalcEyePos();
 }
 
@@ -375,7 +375,7 @@ void S3DScene::setViewerPosition(const Vec3d &pos)
 
 void S3DScene::setViewerPositionOnHeightmap(const Vec2d &pos)
 {
-	position = Vec3d(pos[0], pos[1], heightmap.getHeight(pos[0],pos[1]));
+	position = Vec3d(pos[0], pos[1], static_cast<double>(heightmap.getHeight(static_cast<float>(pos[0]),static_cast<float>(pos[1]))));
 	recalcEyePos();
 }
 

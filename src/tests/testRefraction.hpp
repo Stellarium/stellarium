@@ -32,6 +32,8 @@ private slots:
 	void testSaemundssonEquation();
 	void testBennettEquation();
 	void testComplexRefraction();
+private:
+	float pressure, temperature;
 };
 
 #endif // _TESTREFRACTION_HPP

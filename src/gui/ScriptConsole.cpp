@@ -38,6 +38,7 @@
 #include <QDateTime>
 #include <QSyntaxHighlighter>
 #include <QTextDocumentFragment>
+#include <QRegularExpression>
 
 ScriptConsole::ScriptConsole(QObject *parent)
 	: StelDialog("ScriptConsole", parent)
@@ -122,8 +123,12 @@ void ScriptConsole::createDialogContent()
 	// get decent indentation
 	QFont font = ui->scriptEdit->font();
 	QFontMetrics fontMetrics = QFontMetrics(font);
-	int width = fontMetrics.width("0");
+	int width = fontMetrics.boundingRect("0").width();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+	ui->scriptEdit->setTabStopDistance(4*width); // 4 characters
+#else
 	ui->scriptEdit->setTabStopWidth(4*width); // 4 characters
+#endif
 	ui->scriptEdit->setFocus();
 
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -175,7 +180,7 @@ void ScriptConsole::loadScript()
 	if (dirty)
 	{
 		// We are loaded and dirty: don't just overwrite!
-		if (QMessageBox::question(Q_NULLPTR, q_("Caution!"), q_("Are you sure you want to load script without saving changes?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
+        if (QMessageBox::question(&StelMainView::getInstance(), q_("Caution!"), q_("Are you sure you want to load script without saving changes?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
 			return;
 	}
 	
@@ -213,8 +218,9 @@ void ScriptConsole::saveScript()
 	if (saveDir.isEmpty())
 		saveDir = StelFileMgr::getUserDir();
 
-	QString defaultFilter("(*.ssc)");
-	// Let's ask file name, when file is new and overwrite him in other case	
+	QString defaultFilter = q_("Stellarium Script");
+	defaultFilter.append(" (*.ssc)");
+	// Let's ask file name, when file is new and overwrite it in other case
 	if (scriptFileName.isEmpty())
 	{
 		QString aFile = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save Script"), saveDir + "/myscript.ssc", getFileMask(), &defaultFilter);
@@ -232,7 +238,11 @@ void ScriptConsole::saveScript()
 	if (file.open(QIODevice::WriteOnly))
 	{
 		QTextStream out(&file);
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		out.setEncoding(QStringConverter::Utf8);
+#else
 		out.setCodec("UTF-8");
+#endif
 		out << ui->scriptEdit->toPlainText();
 		file.close();
 		dirty = false;
@@ -245,11 +255,7 @@ void ScriptConsole::clearButtonPressed()
 {
 	if (ui->tabs->currentIndex() == 0)
 	{
-		bool doClear = false;
-		if (dirty)
-			doClear = QMessageBox::question(Q_NULLPTR, q_("Caution!"), q_("Are you sure you want to clear script?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes;
-
-		if (doClear)
+		if (QMessageBox::question(&StelMainView::getInstance(), q_("Caution!"), q_("Are you sure you want to clear script?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
 		{
 			ui->scriptEdit->clear();
 			scriptFileName = ""; // OK, it's a new file!
@@ -275,7 +281,7 @@ void ScriptConsole::preprocessScript()
 		StelApp::getInstance().getScriptMgr().preprocessScript( scriptFileName, src, dest, ui->includeEdit->text(), errLoc );
 	}
 	else
-		qWarning() << "[ScriptConsole] WARNING - unknown preprocessor type";
+		qDebug() << "[ScriptConsole] WARNING - unknown preprocessor type";
 
 	ui->scriptEdit->setPlainText(dest);
 	scriptFileName = ""; // OK, it's a new file!
@@ -313,7 +319,7 @@ void ScriptConsole::runScript()
 
 void ScriptConsole::scriptStarted()
 {
-	//prevent strating of scripts while any script is running
+	//prevent starting of scripts while any script is running
 	ui->quickrunCombo->setEnabled(false);
 	ui->runButton->setEnabled(false);
 	ui->stopButton->setEnabled(true);
@@ -324,7 +330,6 @@ void ScriptConsole::scriptStarted()
 void ScriptConsole::scriptEnded()
 {
 	qDebug() << "ScriptConsole::scriptEnded";
-	QString html = ui->logBrowser->toHtml();
 	appendLogLine(QString("Script finished at %1").arg(QDateTime::currentDateTime().toString()));
 	ui->quickrunCombo->setEnabled(true);
 	ui->runButton->setEnabled(true);
@@ -335,8 +340,9 @@ void ScriptConsole::scriptEnded()
 
 void ScriptConsole::appendLogLine(const QString& s)
 {
+	static const QRegularExpression whitespaceExp("^\\s+");
 	QString html = ui->logBrowser->toHtml();
-	html.replace(QRegExp("^\\s+"), "");
+	html.replace(whitespaceExp, "");
 	html += s;
 	ui->logBrowser->setHtml(html);
 }
@@ -349,8 +355,9 @@ void ScriptConsole::appendOutputLine(const QString& s)
 	}
 	else
 	{
+		static const QRegularExpression whitespaceExp("^\\s+");
 		QString html = ui->outputBrowser->toHtml();
-		html.replace(QRegExp("^\\s+"), "");
+		html.replace(whitespaceExp, "");
 		html += s;
 		ui->outputBrowser->setHtml(html);
 	}
@@ -366,8 +373,7 @@ void ScriptConsole::includeBrowse()
 void ScriptConsole::quickRun(int idx)
 {
 	if (idx==0)
-		return;
-	// TODO: Switch to unique keys?
+		return;	
 	static const QMap<int, QString>map = {
 		{2, "LabelMgr.deleteAllLabels();\n"},
 		{3, "ScreenImageMgr.deleteAllImages();\n"},
@@ -381,6 +387,8 @@ void ScriptConsole::quickRun(int idx)
 
 	if (!scriptText.isEmpty())
 	{
+		if(clearOutput)
+			ui->outputBrowser->clear();
 		appendLogLine(QString("Running: %1").arg(scriptText));
 		int errLoc;
 		StelApp::getInstance().getScriptMgr().runScriptDirect( "<>", scriptText, errLoc );

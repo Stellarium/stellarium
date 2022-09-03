@@ -21,7 +21,7 @@
 #ifndef HEIGHTMAP_HPP
 #define HEIGHTMAP_HPP
 
-#include "StelOBJ.hpp"
+#include "GeomMath.hpp"
 
 //! This represents a heightmap for viewer-ground collision
 class Heightmap

@@ -1,9 +1,12 @@
 # Core source files
 src/core/modules/CustomObject.cpp
+src/core/modules/CustomObject.hpp
 src/core/modules/CustomObjectMgr.cpp
 src/core/modules/Asterism.cpp
+src/core/modules/Asterism.hpp
 src/core/modules/AsterismMgr.cpp
 src/core/modules/Constellation.cpp
+src/core/modules/Constellation.hpp
 src/core/modules/ConstellationMgr.cpp
 src/core/modules/StarMgr.cpp
 src/core/modules/GridLinesMgr.cpp
@@ -23,6 +26,7 @@ src/core/modules/MilkyWay.cpp
 src/core/modules/ZodiacalLight.cpp
 src/core/modules/ToastMgr.cpp
 src/core/modules/HipsMgr.cpp
+src/core/modules/SpecificTimeMgr.cpp
 src/core/StelApp.cpp
 src/core/StelObserver.cpp
 src/core/StelCore.cpp
@@ -35,6 +39,7 @@ src/core/StelSkyCultureMgr.cpp
 src/core/StelMovementMgr.cpp
 src/core/SimbadSearcher.cpp
 src/core/StelLocaleMgr.cpp
+src/core/StelModuleMgr.cpp
 src/gui/ConfigurationDialog.cpp
 src/gui/HelpDialog.cpp
 src/gui/StelGui.cpp
@@ -48,19 +53,23 @@ src/gui/SearchDialog.cpp
 src/gui/ShortcutsDialog.cpp
 src/gui/CustomDeltaTEquationDialog.cpp
 src/gui/AstroCalcDialog.cpp
+src/gui/AstroCalcChart.cpp
 src/gui/AstroCalcExtraEphemerisDialog.cpp
 src/gui/AstroCalcCustomStepsDialog.cpp
-src/gui/BookmarksDialog.cpp
+src/gui/ObsListDialog.cpp
+src/gui/ObsListCreateEditDialog.cpp
 src/gui/ConfigureDSOColorsDialog.cpp
 src/gui/ConfigureOrbitColorsDialog.cpp
 src/gui/DateTimeDialog.cpp
+src/gui/LightPollutionWidget.cpp
 src/scripting/StelScriptMgr.cpp
 src/main.cpp
 src/StelMainView.cpp
 
 # Translations of strings not contained in the source code
 src/translations.h
-src/translations_countries.h
+src/translations_regions.h
+skycultures/translations_skycultures.fab
 
 # Translations of GUI files generated at build time
 src/ui_dateTimeDialogGui.h
@@ -77,16 +86,20 @@ src/ui_scriptConsole.h
 src/ui_astroCalcDialog.h
 src/ui_astroCalcExtraEphemerisDialog.h
 src/ui_astroCalcCustomStepsDialog.h
-src/ui_bookmarksDialog.h
+src/ui_obsListDialog.h
+src/ui_obsListCreateEditDialog.h
 src/ui_dsoColorsDialog.h
 src/ui_orbitColorsDialog.h
+src/ui_skylightDialog.h
+src/ui_tonemappingDialog.h
+src/ui_lightPollutionWidget.h
+src/ui_configureScreenshotsDialog.h
 
 # Plug-in translations
 # NOTE: Plugins should be enabled for building
 plugins/AngleMeasure/src/AngleMeasure.cpp
 plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp
 plugins/AngleMeasure/src/ui_angleMeasureDialog.h
-plugins/CompassMarks/src/CompassMarks.cpp
 plugins/Oculars/src/Oculars.cpp
 plugins/Oculars/src/gui/OcularsGuiPanel.cpp
 plugins/Oculars/src/gui/OcularDialog.cpp
@@ -94,11 +107,18 @@ plugins/Oculars/src/ui_ocularDialog.h
 plugins/Oculus/src/Oculus.cpp
 plugins/Satellites/src/Satellites.cpp
 plugins/Satellites/src/Satellite.cpp
+plugins/Satellites/src/Satellite.hpp
 plugins/Satellites/src/gui/SatellitesDialog.cpp
 plugins/Satellites/src/gui/SatellitesImportDialog.cpp
+plugins/Satellites/src/gui/SatellitesFilterDialog.cpp
+plugins/Satellites/src/gui/SatellitesCommDialog.cpp
 plugins/Satellites/src/ui_satellitesDialog.h
 plugins/Satellites/src/ui_satellitesImportDialog.h
+plugins/Satellites/src/ui_satellitesFilterDialog.h
+plugins/Satellites/src/ui_satellitesCommDialog.h
 plugins/TelescopeControl/src/TelescopeControl.cpp
+plugins/TelescopeControl/src/TelescopeClient.cpp
+plugins/TelescopeControl/src/TelescopeClient.hpp
 plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp
 plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h
 plugins/TelescopeControl/src/INDI/ui_INDIControlWidget.h
@@ -125,6 +145,7 @@ plugins/SolarSystemEditor/src/ui_mpcImportWindow.h
 plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h
 plugins/Supernovae/src/Supernovae.cpp
 plugins/Supernovae/src/Supernova.cpp
+plugins/Supernovae/src/Supernova.hpp
 plugins/Supernovae/src/gui/SupernovaeDialog.cpp
 plugins/Supernovae/src/ui_supernovaeDialog.h
 plugins/NavStars/src/NavStars.cpp
@@ -132,14 +153,17 @@ plugins/NavStars/src/gui/NavStarsWindow.cpp
 plugins/NavStars/src/ui_navStarsWindow.h
 plugins/Novae/src/Novae.cpp
 plugins/Novae/src/Nova.cpp
+plugins/Novae/src/Nova.hpp
 plugins/Novae/src/gui/NovaeDialog.cpp
 plugins/Novae/src/ui_novaeDialog.h
 plugins/Quasars/src/Quasars.cpp
 plugins/Quasars/src/Quasar.cpp
+plugins/Quasars/src/Quasar.hpp
 plugins/Quasars/src/gui/QuasarsDialog.cpp
 plugins/Quasars/src/ui_quasarsDialog.h
 plugins/Pulsars/src/Pulsars.cpp
 plugins/Pulsars/src/Pulsar.cpp
+plugins/Pulsars/src/Pulsar.hpp
 plugins/Pulsars/src/gui/PulsarsDialog.cpp
 plugins/Pulsars/src/ui_pulsarsDialog.h
 plugins/RemoteControl/src/RemoteControl.cpp
@@ -150,18 +174,19 @@ plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp
 plugins/RemoteSync/src/ui_remoteSyncDialog.h
 plugins/Exoplanets/src/Exoplanets.cpp
 plugins/Exoplanets/src/Exoplanet.cpp
+plugins/Exoplanets/src/Exoplanet.hpp
 plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp
 plugins/Exoplanets/src/ui_exoplanetsDialog.h
 plugins/Observability/src/Observability.cpp
 plugins/Observability/src/gui/ObservabilityDialog.cpp
 plugins/Observability/src/ui_ObservabilityDialog.h
-plugins/NavStars/src/NavStars.cpp
 plugins/EquationOfTime/src/EquationOfTime.cpp
 plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp
 plugins/EquationOfTime/src/ui_equationOfTimeWindow.h
 plugins/MeteorShowers/src/MeteorShowersMgr.cpp
 plugins/MeteorShowers/src/MeteorShowers.cpp
 plugins/MeteorShowers/src/MeteorShower.cpp
+plugins/MeteorShowers/src/MeteorShower.hpp
 plugins/MeteorShowers/src/MeteorObj.cpp
 plugins/MeteorShowers/src/translations.h
 plugins/MeteorShowers/src/gui/MSConfigDialog.cpp
@@ -180,5 +205,38 @@ plugins/Scenery3d/src/ui_scenery3dDialog.h
 plugins/Scenery3d/src/ui_storedViewDialog.h
 plugins/ArchaeoLines/src/ArchaeoLines.cpp
 plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp
+plugins/ArchaeoLines/src/gui/ArchaeoLinesDialogLocations.cpp
 plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h
+plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h
 plugins/Vts/src/Vts.cpp
+plugins/Calendars/src/Calendars.cpp
+plugins/Calendars/src/ArmenianCalendar.cpp
+plugins/Calendars/src/AztecTonalpohualliCalendar.cpp
+plugins/Calendars/src/AztecXihuitlCalendar.cpp
+plugins/Calendars/src/BalinesePawukonCalendar.cpp
+plugins/Calendars/src/CopticCalendar.cpp
+plugins/Calendars/src/EgyptianCalendar.cpp
+plugins/Calendars/src/EthiopicCalendar.cpp
+plugins/Calendars/src/GregorianCalendar.cpp
+plugins/Calendars/src/ISOCalendar.cpp
+plugins/Calendars/src/IcelandicCalendar.cpp
+plugins/Calendars/src/JulianCalendar.cpp
+plugins/Calendars/src/RevisedJulianCalendar.cpp
+plugins/Calendars/src/MayaLongCountCalendar.cpp
+plugins/Calendars/src/MayaHaabCalendar.cpp
+plugins/Calendars/src/MayaTzolkinCalendar.cpp
+plugins/Calendars/src/OlympicCalendar.cpp
+plugins/Calendars/src/RomanCalendar.cpp
+plugins/Calendars/src/ZoroastrianCalendar.cpp
+plugins/Calendars/src/FrenchArithmeticCalendar.cpp
+plugins/Calendars/src/HebrewCalendar.cpp
+plugins/Calendars/src/IslamicCalendar.cpp
+plugins/Calendars/src/OldHinduLuniSolarCalendar.cpp
+plugins/Calendars/src/OldHinduSolarCalendar.cpp
+plugins/Calendars/src/PersianArithmeticCalendar.cpp
+plugins/Calendars/src/gui/CalendarsDialog.cpp
+plugins/Calendars/src/ui_calendarsDialog.h
+plugins/OnlineQueries/src/HipOnlineQuery.cpp
+plugins/OnlineQueries/src/OnlineQueries.cpp
+plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp
+plugins/OnlineQueries/src/ui_onlineQueriesDialog.h

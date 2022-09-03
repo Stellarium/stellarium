@@ -391,7 +391,7 @@ void SlewDialog::savePointsToFile()
 		storedPointsDescriptions.insert(QString::number(sp.number),point);
 	}
 	//Add the version:
-	storedPointsDescriptions.insert("version", QString(TELESCOPE_CONTROL_PLUGIN_VERSION));
+	storedPointsDescriptions.insert("version", QString(TELESCOPE_CONTROL_CONFIG_VERSION));
 	//Convert the tree to JSON
 	StelJsonParser::write(storedPointsDescriptions, &pointsJsonFile);
 	pointsJsonFile.flush();//Is this necessary?
@@ -410,7 +410,7 @@ void SlewDialog::loadPointsFromFile()
 	}
 	if(!QFileInfo(pointsJsonPath).exists())
 	{
-		qWarning() << "SlewDialog::loadPointsFromFile(): No pointss loaded. File is missing:"
+		qWarning() << "SlewDialog::loadPointsFromFile(): No points loaded. File is missing:"
 				   << QDir::toNativeSeparators(pointsJsonPath);
 		storedPointsDescriptions = result;
 		return;
@@ -441,7 +441,7 @@ void SlewDialog::loadPointsFromFile()
 	}
 
 	QString version = map.value("version", "0.0.0").toString();
-	if(version < QString(TELESCOPE_CONTROL_PLUGIN_VERSION))
+	if(version < QString(TELESCOPE_CONTROL_CONFIG_VERSION))
 	{
 		QString newName = pointsJsonPath + ".backup." + QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
 		if(pointsJsonFile.rename(newName))
@@ -459,9 +459,8 @@ void SlewDialog::loadPointsFromFile()
 			return;
 		}
 	}
-	map.remove("version");//Otherwise it will try to read it as a point
 
-	//Read pointss, if any
+	//Read points, if any
 	QMapIterator<QString, QVariant> node(map);
 
 	if(node.hasNext())
@@ -481,6 +480,7 @@ void SlewDialog::loadPointsFromFile()
 			QVariant var;
 			var.setValue(sp);
 			ui->comboBoxStoredPoints->addItem(sp.name,var);
-		} while (node.hasNext());
+		}
+		while (node.hasNext());
 	}
 }

@@ -72,6 +72,7 @@ class AngleMeasure : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool enabled                          READ isEnabled                  WRITE enableAngleMeasure           NOTIFY flagAngleMeasureChanged)
+	Q_PROPERTY(bool flagFollowCursor                 READ isFollowCursor             WRITE followCursor                 NOTIFY flagFollowCursorChanged )
 	Q_PROPERTY(bool dmsFormat                        READ isDmsFormat                WRITE useDmsFormat                 NOTIFY dmsFormatChanged )
 	Q_PROPERTY(bool flagShowEquatorial               READ isEquatorial               WRITE showEquatorial               NOTIFY flagShowEquatorialChanged )
 	Q_PROPERTY(bool flagShowHorizontal               READ isHorizontal               WRITE showHorizontal               NOTIFY flagShowHorizontalChanged )
@@ -85,18 +86,18 @@ class AngleMeasure : public StelModule
 	Q_PROPERTY(Vec3f horizontalLineColor             READ getHorizontalLineColor     WRITE setHorizontalLineColor       NOTIFY horizontalLineColorChanged )
 public:
 	AngleMeasure();
-	virtual ~AngleMeasure();
+	virtual ~AngleMeasure() Q_DECL_OVERRIDE;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init();
-	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core);
-	virtual double getCallOrder(StelModuleActionName actionName) const;
-	virtual void handleKeys(class QKeyEvent* event);
-	virtual void handleMouseClicks(class QMouseEvent* event);
-	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
-	virtual bool configureGui(bool show=true);
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	virtual void handleKeys(class QKeyEvent* event) Q_DECL_OVERRIDE;
+	virtual void handleMouseClicks(class QMouseEvent* event) Q_DECL_OVERRIDE;
+	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b) Q_DECL_OVERRIDE;
+	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
 
 	//! Restore the plug-in's settings to the default state.
 	//! Replace the plug-in's settings in Stellarium's configuration file
@@ -113,6 +114,7 @@ public:
 
 signals:
 	void flagAngleMeasureChanged(bool b);
+	void flagFollowCursorChanged(bool b);
 	void dmsFormatChanged(bool b);
 	void flagShowEquatorialChanged(bool b);
 	void flagShowHorizontalChanged(bool b);
@@ -120,13 +122,14 @@ signals:
 	void flagShowHorizontalPAChanged(bool b);
 	void flagShowHorizontalStartSkylinkedChanged(bool b);
 	void flagShowHorizontalEndSkylinkedChanged(bool b);
-	void equatorialTextColorChanged(Vec3f c);
-	void equatorialLineColorChanged(Vec3f c);
-	void horizontalTextColorChanged(Vec3f c);
-	void horizontalLineColorChanged(Vec3f c);
+	void equatorialTextColorChanged(const Vec3f &c);
+	void equatorialLineColorChanged(const Vec3f &c);
+	void horizontalTextColorChanged(const Vec3f &c);
+	void horizontalLineColorChanged(const Vec3f &c);
 
 public slots:
 	bool isEnabled() const    { return flagShowAngleMeasure; }
+	bool isFollowCursor() const  { return flagFollowCursor; }
 	bool isDmsFormat() const  { return flagUseDmsFormat; }
 	bool isEquatorial() const { return flagShowEquatorial; }
 	bool isHorizontal() const { return flagShowHorizontal; }
@@ -140,6 +143,7 @@ public slots:
 	Vec3f getHorizontalLineColor() const { return horizontalLineColor; }
 
 	void enableAngleMeasure(bool b);
+	void followCursor(bool b);
 	void useDmsFormat(bool b);      //!< Use d/m/s instead of degree/minute/second symbols.
 	void showEquatorialPA(bool b);
 	void showHorizontalPA(bool b);
@@ -147,10 +151,10 @@ public slots:
 	void showHorizontal(bool b);
 	void showHorizontalStartSkylinked(bool b);
 	void showHorizontalEndSkylinked(bool b);
-	void setEquatorialTextColor(Vec3f color);
-	void setEquatorialLineColor(Vec3f color);
-	void setHorizontalTextColor(Vec3f color);
-	void setHorizontalLineColor(Vec3f color);
+	void setEquatorialTextColor(const Vec3f &color);
+	void setEquatorialLineColor(const Vec3f &color);
+	void setHorizontalTextColor(const Vec3f &color);
+	void setHorizontalLineColor(const Vec3f &color);
 
 private slots:
 	void updateMessageText();
@@ -175,6 +179,7 @@ private:
 	Vec3d perp2StartPoint;
 	Vec3d perp2EndPoint;
 	double angleEquatorial;
+	bool flagFollowCursor;	//!< measurement data block follows cursor rather than start of measurement line
 	bool flagUseDmsFormat;
 	bool flagShowEquatorial;
 	bool flagShowHorizontal;
@@ -202,6 +207,9 @@ private:
 	//! @arg angle in radians
 	QString formatAngleString(double angle) const;
 	QString calculatePositionAngle(const Vec3d p1, const Vec3d p2) const;
+
+	//! draw for one set of coordinate system
+	//! @arg FrameType specifies the coordinate system
 	void drawOne(StelCore *core, const StelCore::FrameType frameType, const StelCore::RefractionMode refractionMode, const Vec3f txtColor, const Vec3f lineColor);
 
 	QSettings* conf;
@@ -220,9 +228,9 @@ class AngleMeasureStelPluginInterface : public QObject, public StelPluginInterfa
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
-	virtual QObjectList getExtensionList() const { return QObjectList(); }
+	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /*ANGLEMEASURE_HPP*/

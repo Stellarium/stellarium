@@ -1,0 +1,120 @@
+//
+// Name: QJSEngine test
+// License: GPL v2 or later
+// Version: 1.0
+// Author: Georg Zotti
+// Description: Test critical functions during Qt6 upgrades
+
+// Make sure infomaps are still available
+core.output(core.mapToString(core.getObjectInfo("Jupiter")));
+
+// Read a Vec3d
+core.output(StelMovementMgr.getViewDirectionJ2000());
+core.output(typeof StelMovementMgr.getViewDirectionJ2000()); // this returns "object". Is it still a Vec3d?
+core.output(typeof new V3d(StelMovementMgr.getViewDirectionJ2000()));
+
+var dir=new V3d(StelMovementMgr.getViewDirectionJ2000()); // does not work, functions of object Vec3d are unknown. (Vec3d not a QObject...)
+core.output(dir); // only "V3d(address)"
+core.output(dir.toVec3d()); // shows values
+core.output(typeof dir);
+
+
+var dir=StelMovementMgr.getViewDirectionJ2000(); 
+core.output(dir);
+core.output(typeof dir); // object
+//core.output("dir is an Array? " + dir.isArray()); // array? JS error: not a function
+//core.output("dir is an Array? " + dir.className()); // array? JS error: not a function
+var dirstr=""+dir;
+core.output(dirstr);
+core.output(typeof dirstr); // string
+var dirArray=JSON.parse(dir);  // Convert a Vec3d to a JS Array.
+core.output(dirArray);
+core.output(typeof dirArray); // reports "object".
+core.output(dirArray[0]);
+core.output(dirArray[1]);
+core.output(dirArray[2]);
+/////////////////////////////////////
+
+// Test a conversion of a Vec3d into a V3d, and how to use the V3d then.
+
+// THIS BLOCK SHOULD WORK:
+
+var dir=StelMovementMgr.getViewDirectionJ2000(); 
+//var dirV3d=core.toV3d(dir); // Does not work properly!
+var dirV3d=new V3d(dir); // This works
+core.output("dirV3d: " + dirV3d); // just prints address
+core.output("typeof dirV3d: " + typeof dirV3d);
+core.output("dirV3d.x: " + dirV3d.x());
+core.output("dirV3d.y: " + dirV3d.y());
+core.output("dirV3d.z: " + dirV3d.z());
+core.output("dirV3d.toVec3d(): " + dirV3d.toVec3d());  // This prints result as a string via the converter functions registered in StelCore
+
+
+// Test a conversion of a Vec3d into an independently named new V3d, and how to use the V3d then.
+
+// There are several versions to operate with Vec3d:
+// You can retrieve it from the program:
+//var dir=StelMovementMgr.getViewDirectionJ2000(); 
+// A simple core.output(dir) "looks" like an array, and is everything needed for data output.
+// If you need access to its internals, there are several options.
+//var dirV3d=core.createNamedV3d("dirV3d", dir);
+//core.createNamedV3d("dirV3d", dir); // does the same, the name is defined in the JSEngine global namespace.
+// This creates a variable dirV3d that can be accessed with the public slots of V3d.
+// The cleanest use looks like:
+//var dirV3d=new V3d(dir);
+
+
+////////////////////////////////////
+
+
+
+// Attempt to set and re-read a Vec3d. 
+// It seems setting does some bogus.
+// With the attempted String->Vec converter in StelCore this fails with an error message.
+//StelMovementMgr.setViewDirectionJ2000([0.730694, 0.129957, 0.670222]);
+core.output(StelMovementMgr.getViewDirectionJ2000());
+
+// We must use an explicit V3d and converter to feed a Vec3d into the core object
+StelMovementMgr.setViewDirectionJ2000(new V3d(0.730694, 0.129957, 0.670222).toVec3d());
+core.output("StelMovementMgr.getViewDirectionJ2000(): " + StelMovementMgr.getViewDirectionJ2000());
+
+
+core.output(core.vec3d(0.730694, 0.129957, 0.670222));  // prints a bracketed list
+core.output(typeof core.vec3d(0.730694, 0.129957, 0.670222)); // "object", so this is an otherwise unscriptable Vec3d indeed.
+core.output([12.3,45.6,78.9]); // The array output comes without brackets
+core.output(typeof [12.3,45.6,78.9]); // also "object"
+//core.output([12.3,45.6,78.9].name); //  no name, no output. NOTE! It seems this inhibits/swallows any output before!
+core.output(typeof [12.3,45.6,78.9]); 
+
+
+// These lines are here just to allow resetting view direction to allow continuous operation
+StelMovementMgr.lookNorth(true);
+core.output(StelMovementMgr.getViewDirectionJ2000());
+
+
+// Test color aspects of Vec3f. We cannot use V3f but must use another glue class, Color. 
+var crimson=core.color("Crimson");
+core.output("Crimson is " + crimson);
+var red=core.color("#ff0000");
+core.output("Red is " + red);
+
+
+// The new JSEngine can also emit entries to the standard logfile. 
+if (core.useQtScript()){
+	core.output("Using QtScript - no console output possible.");
+}else{
+	console.log("standard logfile entry from a script");
+}
+
+// Attempt with the new V3d class which may act as intermediate thing. Not sure how to bring auto-conversion to work correctly! 
+var mydir=new V3d(0.730694, 0.129957, 0.670222);
+core.output(mydir);
+core.output(mydir.x());
+core.output(mydir.y());
+core.output(mydir.z());
+core.output(mydir.toVec3d());
+StelMovementMgr.setViewDirectionJ2000(mydir.toVec3d()); // This seems to work!!!!
+core.output(StelMovementMgr.getViewDirectionJ2000());
+
+StelMovementMgr.setViewDirectionJ2000(new V3d(0., 1., 0.).toVec3d()); // This seems to work!!!!
+core.output(StelMovementMgr.getViewDirectionJ2000());

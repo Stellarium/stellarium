@@ -25,49 +25,62 @@
 
 class SpecialSkyMarker;
 
+//! @class SpecialMarkersMgr
+//! The SpecialMarkersMgr controls the drawing of the special markers, such a rectangular FOV marker
 class SpecialMarkersMgr : public StelModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool fovCenterMarkerDisplayed	READ getFlagFOVCenterMarker		WRITE setFlagFOVCenterMarker		NOTIFY fovCenterMarkerDisplayedChanged)
-	Q_PROPERTY(Vec3f fovCenterMarkerColor		READ getColorFOVCenterMarker	WRITE setColorFOVCenterMarker	NOTIFY fovCenterMarkerColorChanged)
+	Q_PROPERTY(bool fovCenterMarkerDisplayed	READ getFlagFOVCenterMarker
+		   WRITE setFlagFOVCenterMarker		NOTIFY fovCenterMarkerDisplayedChanged)
+	Q_PROPERTY(Vec3f fovCenterMarkerColor		READ getColorFOVCenterMarker
+		   WRITE setColorFOVCenterMarker	NOTIFY fovCenterMarkerColorChanged)
 
-	Q_PROPERTY(bool fovCircularMarkerDisplayed	READ getFlagFOVCircularMarker	WRITE setFlagFOVCircularMarker	NOTIFY fovCircularMarkerDisplayedChanged)
-	Q_PROPERTY(double fovCircularMarkerSize	READ getFOVCircularMarkerSize	WRITE setFOVCircularMarkerSize	NOTIFY fovCircularMarkerSizeChanged)
-	Q_PROPERTY(Vec3f fovCircularMarkerColor		READ getColorFOVCircularMarker	WRITE setColorFOVCircularMarker	NOTIFY fovCircularMarkerColorChanged)
+	Q_PROPERTY(bool fovCircularMarkerDisplayed	READ getFlagFOVCircularMarker
+		   WRITE setFlagFOVCircularMarker	NOTIFY fovCircularMarkerDisplayedChanged)
+	Q_PROPERTY(double fovCircularMarkerSize		READ getFOVCircularMarkerSize
+		   WRITE setFOVCircularMarkerSize	NOTIFY fovCircularMarkerSizeChanged)
+	Q_PROPERTY(Vec3f fovCircularMarkerColor		READ getColorFOVCircularMarker
+		   WRITE setColorFOVCircularMarker	NOTIFY fovCircularMarkerColorChanged)
 
-	Q_PROPERTY(bool fovRectangularMarkerDisplayed	READ getFlagFOVRectangularMarker		WRITE setFlagFOVRectangularMarker		NOTIFY fovRectangularMarkerDisplayedChanged)
-	Q_PROPERTY(double fovRectangularMarkerWidth	READ getFOVRectangularMarkerWidth	WRITE setFOVRectangularMarkerWidth	NOTIFY fovRectangularMarkerWidthChanged)
-	Q_PROPERTY(double fovRectangularMarkerHeight	READ getFOVRectangularMarkerHeight	WRITE setFOVRectangularMarkerHeight	NOTIFY fovRectangularMarkerHeightChanged)
-	Q_PROPERTY(double fovRectangularMarkerRotationAngle	READ getFOVRectangularMarkerRotationAngle	WRITE setFOVRectangularMarkerRotationAngle	NOTIFY fovRectangularMarkerRotationAngleChanged)
-	Q_PROPERTY(Vec3f fovRectangularMarkerColor		READ getColorFOVRectangularMarker	WRITE setColorFOVRectangularMarker	NOTIFY fovRectangularMarkerColorChanged)
+	Q_PROPERTY(bool fovRectangularMarkerDisplayed	READ getFlagFOVRectangularMarker
+		   WRITE setFlagFOVRectangularMarker	NOTIFY fovRectangularMarkerDisplayedChanged)
+	Q_PROPERTY(double fovRectangularMarkerWidth	READ getFOVRectangularMarkerWidth
+		   WRITE setFOVRectangularMarkerWidth	NOTIFY fovRectangularMarkerWidthChanged)
+	Q_PROPERTY(double fovRectangularMarkerHeight	READ getFOVRectangularMarkerHeight
+		   WRITE setFOVRectangularMarkerHeight	NOTIFY fovRectangularMarkerHeightChanged)
+	Q_PROPERTY(double fovRectangularMarkerRotationAngle	READ getFOVRectangularMarkerRotationAngle
+		   WRITE setFOVRectangularMarkerRotationAngle	NOTIFY fovRectangularMarkerRotationAngleChanged)
+	Q_PROPERTY(Vec3f fovRectangularMarkerColor	READ getColorFOVRectangularMarker
+		   WRITE setColorFOVRectangularMarker	NOTIFY fovRectangularMarkerColorChanged)
+
+	Q_PROPERTY(bool compassMarksDisplayed	READ getFlagCompassMarks
+		   WRITE setFlagCompassMarks		NOTIFY compassMarksDisplayedChanged)
+	Q_PROPERTY(Vec3f compassMarksColor	READ getColorCompassMarks
+		   WRITE setColorCompassMarks	NOTIFY compassMarksColorChanged)
 
 public:
 	SpecialMarkersMgr();
-	virtual ~SpecialMarkersMgr();
+	virtual ~SpecialMarkersMgr() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	//! Initialize the GridLinesMgr. This process checks the values in the
+	//! Initialize the SpecialMarkersMgr. This process checks the values in the
 	//! application settings, and according to the settings there
-	//! sets the visibility of the Equatorial Grids, Ecliptical Grids, Azimuthal Grid, Meridian Line,
-	//! Equator Line and Ecliptic Lines.
-	virtual void init();
+	//! sets the visibility of type of the special markers.
+	virtual void init() Q_DECL_OVERRIDE;
 
 	//! Get the module ID, returns "SpecialMarkersMgr".
 	virtual QString getModuleID() const {return "SpecialMarkersMgr";}
 
-	//! Draw the grids and great circle lines.
-	//! Draws the Equatorial Grids, Ecliptical Grids, Azimuthal Grid, Meridian Line, Equator Line,
-	//! Ecliptic Lines, Precession Circles, Conjunction-Opposition Line, east-west vertical and colures according to the
-	//! various flags which control their visibility.
-	virtual void draw(StelCore* core);
+	//! Draw the special markers.
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 
 	//! Update time-dependent features.
-	//! Used to control fading when turning on and off the grid lines and great circles.
-	virtual void update(double deltaTime);
+	//! Used to control fading when turning on and off the special markers.
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
 
 	//! Used to determine the order in which the various modules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Setter and getters
@@ -82,7 +95,7 @@ public slots:
 	//! @param newColor The color of FOV center marker.
 	//! @code
 	//! // example of usage in scripts
-	//! GridLinesMgr.setColorFOVCenterMarker(Vec3f(1.0,0.0,0.0));
+	//! SpecialMarkersMgr.setColorFOVCenterMarker(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setColorFOVCenterMarker(const Vec3f& newColor);
 
@@ -100,7 +113,7 @@ public slots:
 	//! @param newColor The color of circular FOV marker.
 	//! @code
 	//! // example of usage in scripts
-	//! GridLinesMgr.setColorFOVCircularMarker(Vec3f(1.0,0.0,0.0));
+	//! SpecialMarkersMgr.setColorFOVCircularMarker(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setColorFOVCircularMarker(const Vec3f& newColor);
 
@@ -126,26 +139,43 @@ public slots:
 	//! @param newColor The color of rectangular FOV marker.
 	//! @code
 	//! // example of usage in scripts
-	//! GridLinesMgr.setColorFOVRectangularMarker(Vec3f(1.0,0.0,0.0));
+	//! SpecialMarkersMgr.setColorFOVRectangularMarker(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setColorFOVRectangularMarker(const Vec3f& newColor);
 
+	//! Setter for displaying the compass marks
+	void setFlagCompassMarks(const bool displayed);
+	//! Accessor for displaying compass marks.
+	bool getFlagCompassMarks() const;
+	//! Get the current color of the compass marks.
+	Vec3f getColorCompassMarks() const;
+	//! Set the color of the compass marks.
+	//! @param newColor The color of compass marks.
+	//! @code
+	//! // example of usage in scripts
+	//! SpecialMarkersMgr.setColorCompassMarks(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorCompassMarks(const Vec3f& newColor);
+
 signals:
-	void fovCenterMarkerDisplayedChanged(const bool displayed) const;
-	void fovCenterMarkerColorChanged(const Vec3f & newColor) const;
-	void fovCircularMarkerDisplayedChanged(const bool displayed) const;
-	void fovCircularMarkerSizeChanged(const double size) const;
-	void fovCircularMarkerColorChanged(const Vec3f & newColor) const;
-	void fovRectangularMarkerDisplayedChanged(const bool displayed) const;
-	void fovRectangularMarkerWidthChanged(const double size) const;
-	void fovRectangularMarkerHeightChanged(const double size) const;
-	void fovRectangularMarkerRotationAngleChanged(const double size) const;
-	void fovRectangularMarkerColorChanged(const Vec3f & newColor) const;
+	void fovCenterMarkerDisplayedChanged(const bool displayed);
+	void fovCenterMarkerColorChanged(const Vec3f & newColor);
+	void fovCircularMarkerDisplayedChanged(const bool displayed);
+	void fovCircularMarkerSizeChanged(const double size);
+	void fovCircularMarkerColorChanged(const Vec3f & newColor);
+	void fovRectangularMarkerDisplayedChanged(const bool displayed);
+	void fovRectangularMarkerWidthChanged(const double size);
+	void fovRectangularMarkerHeightChanged(const double size);
+	void fovRectangularMarkerRotationAngleChanged(const double size);
+	void fovRectangularMarkerColorChanged(const Vec3f & newColor);
+	void compassMarksDisplayedChanged(const bool displayed);
+	void compassMarksColorChanged(const Vec3f & newColor);
 
 private:
 	SpecialSkyMarker * fovCenterMarker;
 	SpecialSkyMarker * fovCircularMarker;
 	SpecialSkyMarker * fovRectangularMarker;
+	SpecialSkyMarker * compassMarks;
 };
 
 #endif // SPECIALMARKERSMGR_HPP

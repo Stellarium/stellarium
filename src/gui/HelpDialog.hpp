@@ -46,17 +46,17 @@ public:
 	};
 
 	HelpDialog(QObject* parent);
-	~HelpDialog();
+	~HelpDialog() Q_DECL_OVERRIDE;
 
 	//! Notify that the application style changed
-	void styleChanged();
+	virtual void styleChanged() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();	
+	virtual void retranslate() Q_DECL_OVERRIDE;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 
 	Ui_helpDialogForm* ui;
 
@@ -65,6 +65,8 @@ private:
 	UpdateState updateState;
 	QNetworkAccessManager * networkManager;
 	QNetworkReply * downloadReply;
+
+	QString hotkeyTextWrapper(const QString hotkey) const;
 
 signals:
 	void checkUpdatesComplete(void);
@@ -89,6 +91,7 @@ private slots:
 
 	void checkUpdates(void);
 	void downloadComplete(QNetworkReply * reply);
+	void setKeyButtonState(bool state);
 };
 
 #endif /*_HELPDIALOG_HPP*/

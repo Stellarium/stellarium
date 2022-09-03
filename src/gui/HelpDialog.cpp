@@ -38,6 +38,7 @@
 #include <QSysInfo>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QRegularExpression>
 
 #include "ui_helpDialogGui.h"
 #include "HelpDialog.hpp"
@@ -51,6 +52,8 @@
 #include "StelLogger.hpp"
 #include "StelStyle.hpp"
 #include "StelActionMgr.hpp"
+#include "StelMovementMgr.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelJsonParser.hpp"
 
 HelpDialog::HelpDialog(QObject* parent)
@@ -108,9 +111,12 @@ void HelpDialog::createDialogContent()
 
 
 	// Help page
+	StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
 	updateHelpText();
+	setKeyButtonState(mmgr->getFlagEnableMoveKeys());
 	connect(ui->editShortcutsButton, SIGNAL(clicked()), this, SLOT(showShortcutsWindow()));
 	connect(StelApp::getInstance().getStelActionManager(), SIGNAL(shortcutsChanged()), this, SLOT(updateHelpText()));
+	connect(mmgr, SIGNAL(flagEnableMoveKeysChanged(bool)), this, SLOT(setKeyButtonState(bool)));
 
 	// About page
 	updateAboutText();
@@ -129,9 +135,19 @@ void HelpDialog::createDialogContent()
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 }
 
+void HelpDialog::setKeyButtonState(bool state)
+{
+	ui->editShortcutsButton->setEnabled(state);
+}
+
 void HelpDialog::checkUpdates()
 {
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+	// In Qt6 this is no longer available. Here we have to assume we are connected and test the reply.
+	// There is QNetworkInformation in Qt6.1, but it may give wrong results under certain circumstances.
+	// https://doc.qt.io/qt-6/qnetworkinformation.html
 	if (networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
+#endif
 	{
 		if (updateState==HelpDialog::Updating)
 		{
@@ -144,7 +160,9 @@ void HelpDialog::checkUpdates()
 		QNetworkRequest request;
 		request.setUrl(API);
 		request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 		request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+#endif
 		downloadReply = networkManager->get(request);
 
 		updateState = HelpDialog::Updating;
@@ -188,11 +206,17 @@ void HelpDialog::downloadComplete(QNetworkReply *reply)
 
 	QString latestVersion = map["name"].toString();
 	latestVersion.replace("v","", Qt::CaseInsensitive);
+	QStringList v = latestVersion.split(".");
 
-	QString appVersion = StelUtils::getApplicationVersion();
-	QStringList c = appVersion.split(".");	
+	QString appVersion;
+	if (v.count()==3)
+		appVersion = StelUtils::getApplicationVersion();
+	else
+		appVersion = StelUtils::getApplicationPublicVersion();
+
+	QStringList c = StelUtils::getApplicationVersion().split(".");
 	int r = StelUtils::compareVersions(latestVersion, appVersion);
-	if (r==-1 || c.count()>3 || c.last().contains("-"))
+	if (r==-1 || c.count()>v.count() || c.last().contains("-"))
 		message = q_("Looks like you are using the development version of Stellarium.");
 	else if (r==0)
 		message = q_("This is latest stable version of Stellarium.");
@@ -202,7 +226,7 @@ void HelpDialog::downloadComplete(QNetworkReply *reply)
 	reply->deleteLater();
 	downloadReply = Q_NULLPTR;
 
-	emit(checkUpdatesComplete());
+	emit checkUpdatesComplete();
 }
 
 void HelpDialog::showShortcutsWindow()
@@ -239,29 +263,39 @@ void HelpDialog::updateHelpText(void) const
 		    "</a></p>\n";
 
 	htmlText += "<h2 id='keys'>" + q_("Keys").toHtmlEscaped() + "</h2>\n";
-	htmlText += "<table cellpadding=\"10%\">\n";
+	htmlText += "<table cellpadding='10%' width='100%'>\n";
 	// Describe keys for those keys which do not have actions.
 	// navigate
 	htmlText += "<tr><td>" + q_("Pan view around the sky").toHtmlEscaped() + "</td>";
 	htmlText += "<td><b>" + q_("Arrow keys & left mouse drag").toHtmlEscaped() + "</b></td></tr>\n";
 	// zoom in/out
-	htmlText += "<tr><td rowspan='2'>" + q_("Zoom in/out").toHtmlEscaped() +
-		    "</td>";
-	htmlText += "<td><b>" + q_("Page Up/Down").toHtmlEscaped() +
-		    "</b></td></tr>\n";
-	htmlText += "<tr><td><b>" + q_("Ctrl+Up/Down").toHtmlEscaped() +
-		    "</b></td></tr>\n";
+	htmlText += "<tr><td rowspan='2'>" + q_("Zoom in/out").toHtmlEscaped() + "</td>";
+	htmlText += "<td><b>" + hotkeyTextWrapper("Page Up") + "/" + hotkeyTextWrapper("Page Down") + "</b></td></tr>\n";
+	htmlText += "<tr><td><b>" + hotkeyTextWrapper("Ctrl+Up") + "/" + hotkeyTextWrapper("Ctrl+Down") + "</b></td></tr>\n";
 	// time dragging/scrolling
+	QString delimiter = "";
+	#ifdef Q_OS_MACOS
+	// TRANSLATORS: The char mean "and"
+	delimiter = QString(" %1 ").arg(q_("&"));
+	#endif
 	htmlText += "<tr><td>" + q_("Time dragging").toHtmlEscaped() + "</td><td><b>" +
-			q_("Ctrl & left mouse drag").toHtmlEscaped() + "</b></td></tr>";
+			QKeySequence(Qt::CTRL).toString(QKeySequence::NativeText) + delimiter + q_("left mouse drag").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: minutes").toHtmlEscaped() + "</td><td><b>" +
-			q_("Ctrl & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+			QKeySequence(Qt::CTRL).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: hours").toHtmlEscaped() + "</td><td><b>" +
-			q_("Ctrl+Shift & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+	#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+			QKeySequence(Qt::CTRL | Qt::SHIFT).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: days").toHtmlEscaped() + "</td><td><b>" +
-			q_("Ctrl+Alt & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+			QKeySequence(Qt::CTRL | Qt::ALT).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
 	htmlText += "<tr><td>" + q_("Time scrolling: years").toHtmlEscaped() + "</td><td><b>" +
-			q_("Ctrl+Alt+Shift & mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+			QKeySequence(Qt::CTRL | Qt::ALT | Qt::SHIFT).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+	#else
+			QKeySequence(Qt::CTRL + Qt::SHIFT).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+	htmlText += "<tr><td>" + q_("Time scrolling: days").toHtmlEscaped() + "</td><td><b>" +
+			QKeySequence(Qt::CTRL + Qt::ALT).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+	htmlText += "<tr><td>" + q_("Time scrolling: years").toHtmlEscaped() + "</td><td><b>" +
+			QKeySequence(Qt::CTRL + Qt::ALT + Qt::SHIFT).toString(QKeySequence::NativeText) + delimiter + q_("mouse wheel").toHtmlEscaped() + "</b></td></tr>";
+	#endif
 
 	// select object
 	htmlText += "<tr><td>" + q_("Select object").toHtmlEscaped() + "</td>";
@@ -269,33 +303,46 @@ void HelpDialog::updateHelpText(void) const
 	// clear selection
 	htmlText += "<tr><td>";
 	htmlText += q_("Clear selection").toHtmlEscaped() + "</td>";
-#ifdef Q_OS_MAC
-	htmlText += "<td><b>" + q_("Ctrl & left click").toHtmlEscaped() + "</b></td></tr>\n";
-#else
+	#ifdef Q_OS_MACOS
+	htmlText += "<td><b>" + QKeySequence(Qt::CTRL).toString(QKeySequence::NativeText) + delimiter + q_("& left click").toHtmlEscaped() + "</b></td></tr>\n";
+	#else
 	htmlText += "<td><b>" + q_("Right click").toHtmlEscaped() + "</b></td></tr>\n";
-#endif
+	#endif
 	// add custom marker
 	htmlText += "<tr><td>" + q_("Add custom marker").toHtmlEscaped() + "</td>";
-	htmlText += "<td><b>" + q_("Shift & left click").toHtmlEscaped() + "</b></td></tr>\n";
+	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT).toString(QKeySequence::NativeText) + delimiter + q_("left click").toHtmlEscaped() + "</b></td></tr>\n";
 	// delete one custom marker
 	htmlText += "<tr><td>" + q_("Delete marker closest to mouse cursor").toHtmlEscaped() + "</td>";
-	htmlText += "<td><b>" + q_("Shift & right click").toHtmlEscaped() + "</b></td></tr>\n";
+	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT).toString(QKeySequence::NativeText) + delimiter + q_("right click").toHtmlEscaped() + "</b></td></tr>\n";
 	// delete all custom markers
 	htmlText += "<tr><td>" + q_("Delete all custom markers").toHtmlEscaped() + "</td>";
-	htmlText += "<td><b>" + q_("Shift & Alt & right click").toHtmlEscaped() + "</b></td></tr>\n";
+	#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT | Qt::ALT).toString(QKeySequence::NativeText) + delimiter + q_("right click").toHtmlEscaped() + "</b></td></tr>\n";
+	#else
+	htmlText += "<td><b>" + QKeySequence(Qt::SHIFT + Qt::ALT).toString(QKeySequence::NativeText) + delimiter + q_("right click").toHtmlEscaped() + "</b></td></tr>\n";
+	#endif
 
 	htmlText += "</table>\n<p>" +
 			q_("Below are listed only the actions with assigned keys. Further actions may be available via the \"%1\" button.")
 			.arg(ui->editShortcutsButton->text()).toHtmlEscaped() +
-		    "</p><table cellpadding=\"10%\">\n";
+			"</p><table cellpadding='10%' width='100%'>\n";
 
 	// Append all StelAction shortcuts.
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	typedef QPair<QString, QString> KeyDescription;
-	for (auto group : actionMgr->getGroupList())
+	QVector<KeyDescription> groups;
+	const QStringList groupList = actionMgr->getGroupList();
+	for (const auto &group : groupList)
 	{
-		QList<KeyDescription> descriptions;
-		for (auto* action : actionMgr->getActionList(group))
+		groups.append(KeyDescription(q_(group), group));
+	}
+	groups.append(KeyDescription(q_("Text User Interface (TUI)"), "TUI")); // Special case: TUI
+	std::sort(groups.begin(), groups.end());
+	for (const auto &group : groups)
+	{
+		QVector<KeyDescription> descriptions;
+		const QList<StelAction *>actionList = actionMgr->getActionList(group.second);
+		for (auto* action : actionList)
 		{
 			if (action->getShortcut().isEmpty())
 				continue;
@@ -304,24 +351,51 @@ void HelpDialog::updateHelpText(void) const
 			descriptions.append(KeyDescription(text, key));
 		}
 		std::sort(descriptions.begin(), descriptions.end());
-		htmlText += "<tr></tr><tr><td><b><u>" + q_(group) +
-			    ":</u></b></td></tr>\n";
-		for (const auto& desc : descriptions)
+		if (descriptions.count()>0)
 		{
-			htmlText += "<tr><td>" + desc.first.toHtmlEscaped() + "</td>";
-			htmlText += "<td><b>" + desc.second.toHtmlEscaped() +
-				    "</b></td></tr>\n";
+			htmlText += "<tr><td colspan='2'>&nbsp;</td></tr>";
+			htmlText += "<tr><td colspan='2'><b><u>" + group.first.toHtmlEscaped() + ":</u></b></td></tr>\n";
+			for (const auto& desc : descriptions)
+			{
+				htmlText += "<tr><td>" + desc.first.toHtmlEscaped() + "</td>";
+				htmlText += "<td><b>" + desc.second.toHtmlEscaped() + "</b></td></tr>\n";
+			}
+		}
+		if (group.second=="TUI") // Special case: TUI
+		{
+			htmlText += "<tr><td colspan='2'>&nbsp;</td></tr>";
+			htmlText += "<tr><td colspan='2'><b><u>" + group.first.toHtmlEscaped() + ":</u></b></td></tr>\n";
+			htmlText += "<tr><td>" + q_("Activate TUI") + "</td>";
+			htmlText += "<td><b>" + hotkeyTextWrapper("Alt+T") + "</b></td></tr>\n";
 		}
 	}
 
-	htmlText += "<tr></tr><tr><td><b><u>" + q_("Text User Interface (TUI)") +
-		    ":</u></b></td></tr>\n";
-	htmlText += "<tr><td>" + q_("Activate TUI") + "</td>";
-	htmlText += "<td><b>Alt+T</b></td></tr>\n";
+	htmlText += "<tr><td colspan='2'>&nbsp;</td></tr>";
+	htmlText += "<tr><td colspan='2'><b><u>" + q_("Special local keys") +	":</u></b></td></tr>\n";
+	htmlText += "<tr><td colspan='2'>" + q_("All these hotkeys are locally available to run when specific window or tab is opened.") + "</td></tr>";
+	htmlText += "<tr><td colspan='2'><b>" + q_("Script console") +	":</b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Load script from file") + "</td>";
+	htmlText += "<td><b>" + hotkeyTextWrapper("Ctrl+Shift+O") + "</b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Save script to file") + "</td>";
+	htmlText += "<td><b>" + hotkeyTextWrapper("Ctrl+Shift+S") + "</b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Run script") + "</td>";
+	htmlText += "<td><b>" + hotkeyTextWrapper("Ctrl+Return") + "</b></td></tr>\n";
+	htmlText += "<tr><td colspan='2'><b>" + q_("Astronomical calculations") +	":</b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Update positions") + "</td>";
+	QString shiftF10 = hotkeyTextWrapper("Shift+F10");
+	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Calculate ephemeris") + "</td>";
+	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
+	// TRANSLATOR: RTS = rise, transit, set
+	htmlText += "<tr><td>" + q_("Calculate RTS") + "</td>";
+	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Calculate phenomena") + "</td>";
+	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
+
 	htmlText += "</table>";
 
 	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
+	static const QRegularExpression a_rx("[{]([^{]*)[}]");
 
 	// WARNING! Section titles are re-used above!
 	htmlText += "<h2 id=\"links\">" + q_("Further Reading").toHtmlEscaped() + "</h2>\n";
@@ -372,40 +446,51 @@ void HelpDialog::updateHelpText(void) const
 	ui->helpBrowser->scrollToAnchor("top");
 }
 
+QString HelpDialog::hotkeyTextWrapper(const QString hotkey) const
+{
+	return QKeySequence(hotkey).toString(QKeySequence::NativeText);
+}
+
 void HelpDialog::updateAboutText(void) const
 {
-	QStringList contributors;
-	contributors << "Vladislav Bataron" << "Barry Gerdes" << "Peter Walser" << "Michal Sojka"
-		     << "Nick Fedoseev" << "Clement Sommelet" << "Ivan Marti-Vidal" << "Nicolas Martignoni"
-		     << "Oscar Roig Felius" << "M.S. Adityan" << "Tomasz Buchert" << "Adam Majer"
-		     << "Roland Bosa" << "Łukasz 'sil2100' Zemczak" << "Gábor Péterffy"
-		     << "Mircea Lite" << "Alexey Dokuchaev" << "William Formyduval" << "Daniel De Mickey"
-		     << "François Scholder" << "Anton Samoylov" << "Mykyta Sytyi" << "Shantanu Agarwal"
-		     << "Teemu Nätkinniemi" << "Kutaibaa Akraa" << "J.L.Canales" << "Leonid Froenchenko"
-		     << "Peter Mousley" << "Greg Alexander" << "Yuri Chornoivan" << "Daniel Michalik"
-		     << "Hleb Valoshka" << "Matthias Drochner" << "Kenan Dervišević" << "Alex Gamper"
-		     << "Volker Hören" << "Max Digruber" << "Dan Smale" << "Victor Reijs"
-		     << "Tanmoy Saha" << "Oleg Ginzburg" << "Peter Hickey" << "Bernd Kreuss"
-		     << "Alexander Miller" << "Eleni Maria Stea" << "Kirill Snezhko"
-		     << "Simon Parzer" << "Peter Neubauer" << "Andrei Borza" << "Allan Johnson"
-		     << "Felix Zeltner" << "Paolo Cancedda" << "Ross Mitchell" << "David Baucum"
-		     << "Maciej Serylak" << "Adriano Steffler" << "Sibi Antony" << "Tony Furr"
-		     << "misibacsi" << "Pavel Klimenko" << "Rumen G. Bogdanovski" << "Colin Gaudion"
-		     << "Annette S. Lee" << "Vancho Stojkoski" << "Robert S. Fuller" << "Giuseppe Putzolu"
-		     << "henrysky" << "Nick Kanel" << "Petr Kubánek" << "Matwey V. Kornilov"
-		     << "Alessandro Siniscalchi" << "Ruslan Kabatsayev" << "Pawel Stolowski"
-		     << "Antoine Jacoutot" << "Sebastian Jennen" << "Matt Hughes" << "Sun Shuwei"
-		     << "Alexey Sokolov" << "Paul Krizak" << "ChrUnger" << "Minmin Gong" << "Andy Kirkham"
-		     << "Michael Dickens" << "Patrick (zero0cool0)" << "Martín Bernardi" << "Sebastian Garcia"
-		     << "Wolfgang Laun" << "Alexandros Kosiaris";
+    QStringList contributors({
+		     "Vladislav Bataron", "Barry Gerdes", "Peter Walser", "Michal Sojka",
+		     "Nick Fedoseev", "Clement Sommelet", "Ivan Marti-Vidal", "Nicolas Martignoni",
+		     "Oscar Roig Felius", "M.S. Adityan", "Tomasz Buchert", "Adam Majer",
+		     "Roland Bosa", "Łukasz 'sil2100' Zemczak", "Gábor Péterffy",
+		     "Mircea Lite", "Alexey Dokuchaev", "William Formyduval", "Daniel De Mickey",
+		     "François Scholder", "Anton Samoylov", "Mykyta Sytyi", "Shantanu Agarwal",
+		     "Teemu Nätkinniemi", "Kutaibaa Akraa", "J.L.Canales", "Leonid Froenchenko",
+		     "Peter Mousley", "Greg Alexander", "Yuri Chornoivan", "Daniel Michalik",
+		     "Hleb Valoshka", "Matthias Drochner", "Kenan Dervišević", "Alex Gamper",
+		     "Volker Hören", "Max Digruber", "Dan Smale", "Victor Reijs",
+		     "Tanmoy Saha", "Oleg Ginzburg", "Peter Hickey", "Bernd Kreuss",
+		     "Alexander Miller", "Eleni Maria Stea", "Kirill Snezhko",
+		     "Simon Parzer", "Peter Neubauer", "Andrei Borza", "Allan Johnson",
+		     "Felix Zeltner", "Paolo Cancedda", "Ross Mitchell", "David Baucum",
+		     "Maciej Serylak", "Adriano Steffler", "Sibi Antony", "Tony Furr",
+		     "misibacsi", "Pavel Klimenko", "Rumen G. Bogdanovski", "Colin Gaudion",
+		     "Annette S. Lee", "Vancho Stojkoski", "Robert S. Fuller", "Giuseppe Putzolu",
+		     "henrysky", "Nick Kanel", "Petr Kubánek", "Matwey V. Kornilov",
+		     "Alessandro Siniscalchi", "Ruslan Kabatsayev", "Pawel Stolowski",
+		     "Antoine Jacoutot", "Sebastian Jennen", "Matt Hughes", "Sun Shuwei",
+		     "Alexey Sokolov", "Paul Krizak", "ChrUnger", "Minmin Gong", "Andy Kirkham",
+		     "Michael Dickens",  "Patrick (zero0cool0)", "Martín Bernardi", "Sebastian Garcia",
+		     "Wolfgang Laun", "Alexandros Kosiaris", "Alexander Duytschaever", "Jocelyn Girod",
+		     "Atque", "Worachate Boonplod"});
 	contributors.sort();
+
+	// Regexp to replace {text} with an HTML link.
+	static const QRegularExpression a_rx("[{]([^{]*)[}]");
 
 	// populate About tab
 	QString newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
-	// Note: this legal notice is not suitable for translation
-	newHtml += QString("<h3>Copyright &copy; %1 Stellarium Developers</h3>").arg(COPYRIGHT_YEARS);
+	newHtml += QString("<p><strong>%1 %2").arg(q_("Version"), StelUtils::getApplicationVersion());
+	newHtml += QString("<br />%1 %2</strong></p>").arg(q_("Based on Qt"), QT_VERSION_STR);
 	if (!message.isEmpty())
 		newHtml += "<p><strong>" + message + "</strong></p>";
+	// Note: this legal notice is not suitable for translation
+	newHtml += QString("<h3>%1</h3>").arg(STELLARIUM_COPYRIGHT);
 	// newHtml += "<p><em>Version 0.15 is dedicated in memory of our team member Barry Gerdes.</em></p>";
 	newHtml += "<p>This program is free software; you can redistribute it and/or ";
 	newHtml += "modify it under the terms of the GNU General Public License ";
@@ -423,11 +508,12 @@ void HelpDialog::updateAboutText(void) const
 	newHtml += "Boston, MA  02110-1335, USA.\n</pre>";
 	newHtml += "<p><a href=\"http://www.fsf.org\">www.fsf.org</a></p>";
 	newHtml += "<h3>" + q_("Developers").toHtmlEscaped() + "</h3><ul>";
-	newHtml += "<li>" + q_("Project coordinator & lead developer: %1").arg(QString("Fabien Ch%1reau").arg(QChar(0x00E9))).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Project coordinator & lead developer: %1").arg(QString("Fabien Chéreau")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Graphic/other designer: %1").arg(QString("Martín Bernardi")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Guillaume Ch%1reau").arg(QChar(0x00E9))).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Guillaume Chéreau")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Georg Zotti")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Alexander Wolf")).toHtmlEscaped() + "</li></ul>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Alexander V. Wolf")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Sky cultures researcher: %1").arg(QString("Susanne M. Hoffmann")).toHtmlEscaped() + "</li></ul>";
 	newHtml += "<h3>" + q_("Former Developers").toHtmlEscaped() + "</h3>";
 	newHtml += "<p>"  + q_("Several people have made significant contributions, but are no longer active. Their work has made a big difference to the project:").toHtmlEscaped() + "</p><ul>";
 	newHtml += "<li>" + q_("Graphic/other designer: %1").arg(QString("Johan Meuris")).toHtmlEscaped() + "</li>";
@@ -437,17 +523,23 @@ void HelpDialog::updateAboutText(void) const
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Bogdan Marinov")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Timothy Reaves")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Florian Schaukowitsch")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Andr%1s Mohari").arg(QChar(0x00E1))).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("András Mohari")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Mike Storm")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Ferdinand Majerech")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Jörg Müller")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Marcos Cardinot")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Marcos Cardinot")).toHtmlEscaped() + "</li>";	
 	newHtml += "<li>" + q_("OSX Developer: %1").arg(QString("Nigel Kerr")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("OSX Developer: %1").arg(QString("Diego Marcos")).toHtmlEscaped() + "</li></ul>";
 	newHtml += "<li>" + q_("Continuous Integration: %1").arg(QString("Hans Lambermont")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Tester: %1").arg(QString("Khalid AlAjaji")).toHtmlEscaped() + "</li></ul>";
 	newHtml += "<h3>" + q_("Contributors").toHtmlEscaped() + "</h3>";
 	newHtml += "<p>"  + q_("Several people have made contributions to the project and their work has made Stellarium better (sorted alphabetically): %1.").arg(contributors.join(", ")).toHtmlEscaped() + "</p>";
+	newHtml += "<h3>" + q_("Acknowledgment").toHtmlEscaped() + "</h3>";
+	newHtml += "<p>"  + q_("If the Stellarium planetarium was helpful for your research work, the following acknowledgment would be appreciated:").toHtmlEscaped() + "</p>";
+	newHtml += "<p><em>"  + q_("This research has made use of the Stellarium planetarium") + "</em></p>";
+	newHtml += "<p>Zotti, G., Hoffmann, S. M., Wolf, A., Chéreau, F., & Chéreau, G. (2021). The Simulated Sky: Stellarium for Cultural Astronomy Research. Journal of Skyscape Archaeology, 6(2), 221–258. <a href='https://doi.org/10.1558/jsa.17822'>https://doi.org/10.1558/jsa.17822</a></p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	newHtml += "<p>" + q_("Or you may {download the BibTeX file of the paper} to create another citation format.").toHtmlEscaped().replace(a_rx, "<a href=\"https://stellarium.org/files/stellarium.bib\">\\1</a>") + "</p>";
 	newHtml += "<p>";
 
 	ui->aboutBrowser->clear();

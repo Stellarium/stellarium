@@ -58,12 +58,14 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setFlagUseTypeFilters
 		   NOTIFY flagUseTypeFiltersChanged)
 	//StelProperties
-	Q_PROPERTY(Nebula::TypeGroup typeFilters
+	// This used to be of type Nebula::TypeGroup, however on Qt6 this does not work and was changed to int.
+	Q_PROPERTY(int typeFilters
 		   READ getTypeFilters
 		   WRITE setTypeFilters
 		   NOTIFY typeFiltersChanged
 		   )
-	Q_PROPERTY(Nebula::CatalogGroup catalogFilters
+	// This used to be of type Nebula::CatalogGroup, however on Qt6 this does not work and was changed to int.
+	Q_PROPERTY(int catalogFilters
 		   READ getCatalogFilters
 		   WRITE setCatalogFilters
 		   NOTIFY catalogFiltersChanged
@@ -317,7 +319,7 @@ class NebulaMgr : public StelObjectModule
 
 public:
 	NebulaMgr();
-	virtual ~NebulaMgr();
+	virtual ~NebulaMgr() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -328,16 +330,16 @@ public:
 	//!  - Load the pointer texture.
 	//!  - Set flags values from ini parser which relate to nebula display.
 	//!  - call updateI18n() to translate names.
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 
 	//! Draws all nebula objects.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 
 	//! Update state which is time dependent.
-	virtual void update(double deltaTime) {hintsFader.update(static_cast<int>(deltaTime*1000)); flagShow.update(static_cast<int>(deltaTime*1000));}
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE {hintsFader.update(static_cast<int>(deltaTime*1000)); flagShow.update(static_cast<int>(deltaTime*1000));}
 
 	//! Determines the order in which the various modules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
@@ -346,30 +348,30 @@ public:
 	//! @param limitFov the field of view around the position v in which to search for nebulae.
 	//! @param core the StelCore to use for computations.
 	//! @return a list containing the nebulae located inside the limitFov circle around position v.
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
 
 	//! Return the matching nebula object's pointer if exists or an "empty" StelObjectP.
 	//! @param nameI18n The case in-sensitive nebula name or NGC M catalog name : format can
 	//! be M31, M 31, NGC31, NGC 31
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
 
 	//! Return the matching nebula if exists or Q_NULLPTR.
 	//! @param name The case in-sensitive standard program name
-	virtual StelObjectP searchByName(const QString& name) const;
+	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
 
-	virtual StelObjectP searchByID(const QString &id) const { return searchByName(id); }
+	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE { return searchByName(id); }
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const Q_DECL_OVERRIDE;
 	//! @note Loading deep-sky objects with the proper names only.
-	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
-	virtual QString getName() const { return "Deep-sky objects"; }
-	virtual QString getStelObjectType() const { return Nebula::NEBULA_TYPE; }
+	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const Q_DECL_OVERRIDE;
+	virtual QString getName() const Q_DECL_OVERRIDE { return "Deep-sky objects"; }
+	virtual QString getStelObjectType() const Q_DECL_OVERRIDE { return Nebula::NEBULA_TYPE; }
 
 	//! Compute the maximum magntiude for which hints will be displayed.
 	float computeMaxMagHint(const class StelSkyDrawer* skyDrawer) const;
@@ -387,16 +389,26 @@ public:
 	const QVector<NebulaP>& getAllDeepSkyObjects() const { return dsoArray; }
 
 	//! Get the list of deep-sky objects by type.
-	QList<NebulaP> getDeepSkyObjectsByType(const QString& objType) const;
+	const QList<NebulaP> getDeepSkyObjectsByType(const QString& objType) const;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
-	void setCatalogFilters(Nebula::CatalogGroup cflags);
-	Nebula::CatalogGroup getCatalogFilters() const { return Nebula::catalogFilters; }
+	void setCatalogFilters(int cflags);
+	int getCatalogFilters() const { return int(Nebula::catalogFilters); }
+	//! Activate all catalogs
+	void selectAllCatalogs();
+	//! Activate a useful selection of catalogs: M, NGC, IC
+	void selectStandardCatalogs();
+	//! Disable all catalogs
+	void selectNoneCatalogs();
+	//! retrieve configured catalogs from config.ini.
+	void loadCatalogFilters();
+	//! store configured catalogs into config.ini.
+	void storeCatalogFilters();
 
-	void setTypeFilters(Nebula::TypeGroup tflags);
-	Nebula::TypeGroup getTypeFilters() const { return Nebula::typeFilters; }
+	void setTypeFilters(int tflags);
+	int getTypeFilters() const { return int(Nebula::typeFilters); }
 
 	//! Set the default color used to draw the nebula symbols (default circles, etc).
 	//! @param c The color of the nebula symbols
@@ -864,9 +876,9 @@ signals:
 	//! Emitted when filter types are changed.
 	void flagUseTypeFiltersChanged(bool b);
 	//! Emitted when the catalog filter is changed
-	void catalogFiltersChanged(Nebula::CatalogGroup flags);
+	void catalogFiltersChanged(int flags); // emits an int cast of Nebula::CatalogGroup
 	//! Emitted when the type filter is changed
-	void typeFiltersChanged(Nebula::TypeGroup flags);
+	void typeFiltersChanged(int flags); // emits an int cast of Nebula::TypeGroup
 	void hintsProportionalChanged(bool b);
 	void flagOutlinesDisplayedChanged(bool b);
 	void flagAdditionalNamesDisplayedChanged(bool b);

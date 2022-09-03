@@ -1,6 +1,7 @@
 //
 // Name: Transit of Venus
 // License: Public Domain
+// Version: 1.1
 // Author: Peter Hickey
 // With thanks to Barrykgerdes and daggerstab for their contributions
 // Description: Transit of Venus as seen from Sydney Australia, 6th June 2012.
@@ -43,6 +44,9 @@ function clearLabels(ids)
 	}
 }
 
+core.clear("natural");
+core.wait(1);
+
 // Save the current location, if it's from the default list 
 location = core.getObserverLocation();
 
@@ -58,7 +62,6 @@ ids = blockText(Array("NEVER look directly at the Sun!"));
 core.wait(5);
 clearLabels(ids);
 
-core.clear("natural");
 core.selectObjectByName("Sun", false);
 
 ids = blockText(Array("Sydney Australia",

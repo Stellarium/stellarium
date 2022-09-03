@@ -24,7 +24,6 @@
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelLocationMgr.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelTranslator.hpp"
 #include "SolarSystem.hpp"
 
@@ -55,13 +54,13 @@ void LocationService::get(const QByteArray& operation, const APIParameters &para
 
 		response.writeJSON(QJsonDocument(list));
 	}
-	else if(operation == "countrylist")
+	else if(operation == "regionlist")
 	{
 		const StelTranslator& trans = *StelTranslator::globalTranslator;
 
-		QStringList allCountries = StelApp::getInstance().getLocaleMgr().getAllCountryNames();
+		QStringList allRegions = StelApp::getInstance().getLocationMgr().getRegionNames();
 		QJsonArray list;
-		for (auto str : allCountries)
+		for (const auto &str : qAsConst(allRegions))
 		{
 			QJsonObject obj;
 			obj.insert("name",str);
@@ -123,7 +122,7 @@ void LocationService::get(const QByteArray& operation, const APIParameters &para
 
 void LocationService::post(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
-	Q_UNUSED(data);
+	Q_UNUSED(data)
 
 	if (operation == "setlocationfields")
 	{
@@ -144,7 +143,6 @@ void LocationService::post(const QByteArray& operation, const APIParameters &par
 				QMetaObject::invokeMethod(core, "moveObserverTo", SERVICE_DEFAULT_INVOKETYPE,
 							  Q_ARG(StelLocation, loc),
 							  Q_ARG(double,0.0) );
-
 				response.setData("ok");
 				return;
 			}
@@ -164,7 +162,8 @@ void LocationService::post(const QByteArray& operation, const APIParameters &par
 		QString sAltitude = QString::fromUtf8(parameters.value("altitude"));
 
 		QString name = QString::fromUtf8(parameters.value("name"));
-		QString country = QString::fromUtf8(parameters.value("country"));
+		//QString country = QString::fromUtf8(parameters.value("country"));
+		QString region = QString::fromUtf8(parameters.value("region"));
 		QString planet = QString::fromUtf8(parameters.value("planet"));
 
 		//check each field
@@ -193,9 +192,13 @@ void LocationService::post(const QByteArray& operation, const APIParameters &par
 			loc.name = name;
 			doneSomething = true;
 		}
-		if(!country.isEmpty() && country != loc.country)
+		else if (!parameters.contains("name"))
 		{
-			loc.country = country;
+			loc.name=QString("%1, %2").arg(loc.latitude).arg(loc.longitude); // Force a preliminary name
+		}
+		if(!region.isEmpty() && region != loc.region)
+		{
+			loc.region = region;
 			doneSomething = true;
 		}
 

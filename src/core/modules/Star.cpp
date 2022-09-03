@@ -21,7 +21,6 @@
 
 #include "Star.hpp"
 #include "StarMgr.hpp"
-#include "StelUtils.hpp"
 
 #include <QDebug>
 #include <QString>
@@ -32,16 +31,39 @@ QString Star1::getNameI18n(void) const
 {
 	if (getHip())
 	{
-		const QString commonNameI18 = StarMgr::getCommonName(getHip());
-		if (!commonNameI18.isEmpty()) return commonNameI18;
-		if (StarMgr::getFlagSciNames())
+		QStringList starNames;
+		starNames << StarMgr::getCommonName(getHip()) << getDesignation();
+		starNames.removeAll(QString(""));
+		if (starNames.count()>0)
+			return starNames.first();
+		else
+			return QString();
+	}
+	return QString();
+}
+
+QString Star1::getScreenNameI18n(void) const
+{
+	if (getHip())
+	{
+		QStringList starNames;
+		if (!StarMgr::getDesignationUsage())
+			starNames << StarMgr::getCommonName(getHip());
+		if (StarMgr::getFlagSciNames()) // The scientific designations can be used for western sky cultures only
 		{
-			const QString sciName = StarMgr::getSciName(getHip());
-			if (!sciName.isEmpty()) return sciName;
-			const QString varSciName = StarMgr::getGcvsName(getHip());
-			if (!varSciName.isEmpty() && varSciName!=sciName) return varSciName;			
-			return QString("HIP %1").arg(getHip());
+			starNames << StarMgr::getSciName(getHip()).split(" - ");
+			if (StarMgr::getFlagDblStarsDesignation()) // append the traditional designations of double stars
+				starNames << StarMgr::getSciExtraName(getHip()).split(" - ");
+			if (StarMgr::getFlagVarStarsDesignation()) // append the designations of variable stars (from GCVS)
+				starNames << StarMgr::getGcvsName(getHip());
+			if (StarMgr::getFlagHIPDesignation()) // append the HIP numbers of stars
+				starNames << QString("HIP %1").arg(getHip());
 		}
+		starNames.removeAll(QString(""));
+		if (starNames.count()>0)
+			return starNames.first();
+		else
+			return QString();
 	}
 	return QString();
 }
@@ -50,11 +72,16 @@ QString Star1::getDesignation() const
 {
 	if (getHip())
 	{
-		const QString sciName = StarMgr::getSciName(getHip());
-		if (!sciName.isEmpty()) return sciName;
-		const QString varSciName = StarMgr::getGcvsName(getHip());
-		if (!varSciName.isEmpty() && varSciName!=sciName) return varSciName;
-		return QString("HIP %1").arg(getHip());
+		QStringList starNames;
+		starNames << StarMgr::getSciName(getHip()).split(" - ");
+		starNames << StarMgr::getSciExtraName(getHip()).split(" - ");
+		starNames << StarMgr::getGcvsName(getHip());
+		starNames << QString("HIP %1").arg(getHip());
+		starNames.removeAll(QString(""));
+		if (starNames.count()>0)
+			return starNames.first();
+		else
+			return QString();
 	}
 	return QString();
 }

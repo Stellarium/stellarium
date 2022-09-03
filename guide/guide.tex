@@ -56,6 +56,8 @@
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
+% See https://tex.stackexchange.com/questions/581907/extra-endgroup-error
+\RequirePackage[2020-02-02]{latexrelease}
 \ifhtlatex
 \documentclass[12pt,fleqn,dvipdfmx]{book} % Default font size and left-justified equations
 \else
@@ -207,7 +209,6 @@ implying a violation of copyright law.}}\\
 %----------------------------------------------------------------------------------------
 %	PART II
 %----------------------------------------------------------------------------------------
-
 \part{Advanced Use}
 
 %----------------------------------------------------------------------------------------
@@ -222,6 +223,7 @@ implying a violation of copyright law.}}\\
 \include{ch_dso} %% Maybe DSO is more a reference chapter? --> Appendix in this case? Or split?
 \include{ch_skycultures}
 \include{ch_surveys}
+\include{ch_skylight}
 %----------------------------------------------------------------------------------------
 %	PART III
 %----------------------------------------------------------------------------------------
@@ -231,9 +233,10 @@ implying a violation of copyright law.}}\\
 \part{Extending Stellarium}
 %\chapterimage{chapter-t3-bg.png} % Chapter heading image
 \include{ch_plugins}
-\include{plg_interfaces} % TUI, RemoteControl, RemoteSync, (2018: D-BUS?)
+\include{plg_interfaces} % TUI, RemoteControl, RemoteSync, (2021: D-BUS?)
 \include{plg_catalogs}
 \include{plg_archaeolines}
+\include{plg_calendars}
 \include{plg_scenery3d} % move to historical.
 \include{plg_atTheTelescope} % TelescopeControl, Oculars, various hardware projects with Raspberry, Arduino, ...
 \include{ch_scripting}

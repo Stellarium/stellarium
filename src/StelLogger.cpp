@@ -44,24 +44,8 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Operating System: %1").arg(StelUtils::getOperatingSystemInfo()));	
 
 	// write compiler version
-#if defined __GNUC__ && !defined __clang__ && !defined __INTEL_COMPILER
-	#ifdef __MINGW32__
-		#define COMPILER "MinGW GCC"
-	#else
-		#define COMPILER "GCC"
-	#endif
-	writeLog(QString("Compiled using %1 %2.%3.%4").arg(COMPILER).arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__));
-#elif defined __clang__
-	writeLog(QString("Compiled using %1 %2.%3.%4").arg("Clang").arg(__clang_major__).arg(__clang_minor__).arg(__clang_patchlevel__));
-#elif defined __INTEL_COMPILER
-	QString iccVer = QString::number(__INTEL_COMPILER);
-	int iccVL = iccVer.length();
-	writeLog(QString("Compiled using %1 %2.%3.%4.%5").arg("Intel C/C++").arg(iccVer.mid(0, iccVL-2)).arg(iccVer.mid(iccVL-2,1)).arg(iccVer.mid(iccVL-1,1)).arg(__INTEL_COMPILER_BUILD_DATE));
-#elif defined _MSC_VER
-	writeLog(QString("Compiled using %1").arg(getMsvcVersionString(_MSC_VER)));
-#else
-	writeLog("Unknown compiler");
-#endif
+	QString compiler = StelUtils::getCompilerInfo();
+	writeLog(compiler.isEmpty() ? "Unknown compiler" : QString("Compiled using %1").arg(compiler));
 
 	// write Qt version
 	writeLog(QString("Qt runtime version: %1").arg(qVersion()));
@@ -109,7 +93,11 @@ void StelLogger::init(const QString& logFilePath)
 	}
 
 	QProcess lspci;
+	#if (QT_VERSION>=QT_VERSION_CHECK(6, 0, 0))
+	lspci.startCommand("lspci -v", QIODevice::ReadOnly);
+	#else
 	lspci.start("lspci -v", QIODevice::ReadOnly);
+	#endif
 	lspci.waitForFinished(300);
 	const QString pciData(lspci.readAll());
 	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
@@ -137,24 +125,17 @@ void StelLogger::init(const QString& logFilePath)
 
 // Aargh Windows API
 #elif defined Q_OS_WIN
-	// Hopefully doesn't throw a linker error on earlier systems. Not like
-	// I'm gonna test it or anything.
-	if (QSysInfo::WindowsVersion >= QSysInfo::WV_XP)
-	{
-		MEMORYSTATUSEX statex;
-		statex.dwLength = sizeof (statex);
-		GlobalMemoryStatusEx(&statex);
-		writeLog(QString("Total physical memory: %1 MB").arg(statex.ullTotalPhys/(1024<<10)));
-		writeLog(QString("Available physical memory: %1 MB").arg(statex.ullAvailPhys/(1024<<10)));
-		writeLog(QString("Physical memory in use: %1%").arg(statex.dwMemoryLoad));
-		#ifndef _WIN64
-		// This always reports about 8TB on Win64, not really useful to show.
-		writeLog(QString("Total virtual memory: %1 MB").arg(statex.ullTotalVirtual/(1024<<10)));
-		writeLog(QString("Available virtual memory: %1 MB").arg(statex.ullAvailVirtual/(1024<<10)));
-		#endif
-	}
-	else
-		writeLog("Windows version too old to get memory info.");
+	MEMORYSTATUSEX statex;
+	statex.dwLength = sizeof (statex);
+	GlobalMemoryStatusEx(&statex);
+	writeLog(QString("Total physical memory: %1 MB").arg(statex.ullTotalPhys/(1024<<10)));
+	writeLog(QString("Available physical memory: %1 MB").arg(statex.ullAvailPhys/(1024<<10)));
+	writeLog(QString("Physical memory in use: %1%").arg(statex.dwMemoryLoad));
+	#ifndef _WIN64
+	// This always reports about 8TB on Win64, not really useful to show.
+	writeLog(QString("Total virtual memory: %1 MB").arg(statex.ullTotalVirtual/(1024<<10)));
+	writeLog(QString("Available virtual memory: %1 MB").arg(statex.ullAvailVirtual/(1024<<10)));
+	#endif
 
 	HKEY hKey = Q_NULLPTR;
 	DWORD dwType = REG_DWORD;
@@ -173,7 +154,7 @@ void StelLogger::init(const QString& logFilePath)
 
 		if(lRet == ERROR_SUCCESS)
 		{
-			if(RegQueryValueExA(hKey, "~MHz", Q_NULLPTR, &dwType, (LPBYTE)&numVal, &dwSize) == ERROR_SUCCESS)
+			if(RegQueryValueExA(hKey, "~MHz", Q_NULLPTR, &dwType, reinterpret_cast<LPBYTE>(&numVal), &dwSize) == ERROR_SUCCESS)
 				writeLog(QString("Processor speed: %1 MHz").arg(numVal));
 			else
 				writeLog("Could not get processor speed.");
@@ -186,7 +167,7 @@ void StelLogger::init(const QString& logFilePath)
 
 		if (lRet == ERROR_SUCCESS)
 		{
-			if (RegQueryValueExA(hKey, "ProcessorNameString", Q_NULLPTR, &dwType, (LPBYTE)&nameStr, &nameSize) == ERROR_SUCCESS)
+			if (RegQueryValueExA(hKey, "ProcessorNameString", Q_NULLPTR, &dwType, reinterpret_cast<LPBYTE>(&nameStr), &nameSize) == ERROR_SUCCESS)
 				writeLog(QString("Processor name: %1").arg(nameStr));
 			else
 				writeLog("Could not get processor name.");
@@ -197,7 +178,7 @@ void StelLogger::init(const QString& logFilePath)
 	if(i == 0)
 		writeLog("Could not get processor info.");
 
-#elif defined Q_OS_MAC
+#elif defined Q_OS_MACOS
 	QProcess systemProfiler;
 	systemProfiler.start("/usr/sbin/system_profiler -detailLevel mini SPHardwareDataType SPDisplaysDataType");
 	systemProfiler.waitForStarted();
@@ -210,30 +191,34 @@ void StelLogger::init(const QString& logFilePath)
 	#endif
 	for (int i = 0; i<systemLines.size(); i++)
 	{
-		if(systemLines.at(i).contains("Model"))
-		{
+		// hardware overview
+		if(systemLines.at(i).contains("Model", Qt::CaseInsensitive))
 			writeLog(systemLines.at(i).trimmed());
-		}
 
-		if(systemLines.at(i).contains("Processor"))
-		{
+		if(systemLines.at(i).contains("Chip:", Qt::CaseInsensitive))
 			writeLog(systemLines.at(i).trimmed());
-		}
 
-		if(systemLines.at(i).contains("Memory"))
-		{
-			writeLog(systemLines.at(i).trimmed());
-		}
+		if(systemLines.at(i).contains("Processor", Qt::CaseInsensitive))
+			writeLog(systemLines.at(i).trimmed().replace("Unknown", "Apple M1"));
 
-		if(systemLines.at(i).contains("VRAM"))
-		{
+		if(systemLines.at(i).contains("Memory", Qt::CaseInsensitive))
 			writeLog(systemLines.at(i).trimmed());
-		}
+
+		// graphics/display overview
+		if(systemLines.at(i).contains("Resolution", Qt::CaseInsensitive))
+			writeLog(systemLines.at(i).trimmed());
+
+		if(systemLines.at(i).contains("VRAM", Qt::CaseInsensitive))
+			writeLog(systemLines.at(i).trimmed());
 	}
 
 #elif defined Q_OS_BSD4
 	QProcess dmesg;
+	#if (QT_VERSION>=QT_VERSION_CHECK(6, 0, 0))
+	dmesg.startCommand("/sbin/dmesg", QIODevice::ReadOnly);
+	#else
 	dmesg.start("/sbin/dmesg", QIODevice::ReadOnly);
+	#endif
 	dmesg.waitForStarted();
 	dmesg.waitForFinished();
 	const QString dmesgData(dmesg.readAll());
@@ -306,33 +291,8 @@ void StelLogger::writeLog(QString msg)
 		msg.append(QLatin1Char('\n'));
 
 	fileMutex.lock();
-	logFile.write(qPrintable(msg), msg.size());
+	const auto utf8 = msg.toUtf8();
+	logFile.write(utf8.constData(), utf8.size());
 	log += msg;
 	fileMutex.unlock();
-}
-
-QString StelLogger::getMsvcVersionString(int ver)
-{
-	// Defines for _MSC_VER macro: https://docs.microsoft.com/ru-ru/cpp/preprocessor/predefined-macros?view=vs-2019
-	const QMap<int, QString> map = {
-		{1310, "MSVC++ 7.1 (Visual Studio 2003)"     },
-		{1400, "MSVC++ 8.0 (Visual Studio 2005)"     },
-		{1500, "MSVC++ 9.0 (Visual Studio 2008)"     },
-		{1600, "MSVC++ 10.0 (Visual Studio 2010)"    },
-		{1700, "MSVC++ 11.0 (Visual Studio 2012)"    },
-		{1800, "MSVC++ 12.0 (Visual Studio 2013)"    },
-		{1900, "MSVC++ 14.0 (Visual Studio 2015)"    },
-		{1910, "MSVC++ 15.0 (Visual Studio 2017 RTW)"},
-		{1911, "MSVC++ 15.3 (Visual Studio 2017)"    },
-		{1912, "MSVC++ 15.5 (Visual Studio 2017)"    },
-		{1913, "MSVC++ 15.6 (Visual Studio 2017)"    },
-		{1914, "MSVC++ 15.7 (Visual Studio 2017)"    },
-		{1915, "MSVC++ 15.8 (Visual Studio 2017)"    },
-		{1916, "MSVC++ 15.9 (Visual Studio 2017)"    },
-		{1920, "MSVC++ 16.0 (Visual Studio 2019 RTW)"},
-		{1921, "MSVC++ 16.1 (Visual Studio 2019)"    },
-		{1922, "MSVC++ 16.2 (Visual Studio 2019)"    },
-		{1923, "MSVC++ 16.3 (Visual Studio 2019)"    },
-	};
-	return map.value(ver, "unknown MSVC++ version");
 }

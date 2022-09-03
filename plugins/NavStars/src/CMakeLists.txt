@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES(
      ${CMAKE_BINARY_DIR}/plugins/NavStars/src/gui
 )
 
-LINK_DIRECTORIES(${BUILD_DIR}/src)
+LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 
 SET(NavStars_SRCS
      NavStars.hpp
@@ -20,13 +20,17 @@ SET(NavStars_UIS
      gui/navStarsWindow.ui
 )
 
-QT5_WRAP_UI(NavStars_UIS_H ${NavStars_UIS})
-
 SET(NavStars_RES ../resources/NavStars.qrc)
-QT5_ADD_RESOURCES(NavStars_RES_CXX ${NavStars_RES})
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_WRAP_UI(NavStars_UIS_H ${NavStars_UIS})
+     QT5_ADD_RESOURCES(NavStars_RES_CXX ${NavStars_RES})
+ELSE()
+     QT_WRAP_UI(NavStars_UIS_H ${NavStars_UIS})
+     QT_ADD_RESOURCES(NavStars_RES_CXX ${NavStars_RES})
+ENDIF()
 
 ADD_LIBRARY(NavStars-static STATIC ${NavStars_SRCS} ${NavStars_RES_CXX} ${NavStars_UIS_H})
-TARGET_LINK_LIBRARIES(NavStars-static Qt5::Core Qt5::Widgets)
+TARGET_LINK_LIBRARIES(NavStars-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
 
 IF(ENABLE_TESTING)
     add_definitions("-DWITH_TESTING_ON")

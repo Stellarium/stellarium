@@ -1,0 +1,311 @@
+# SOME DESCRIPTIVE TITLE
+# Copyright (C) YEAR Stellarium's team
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Üllar Kivila <landersift@hotmail.com>, 2021
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
+"POT-Creation-Date: 2021-09-19 19:50+0700\n"
+"PO-Revision-Date: 2020-11-24 18:28+0000\n"
+"Last-Translator: Üllar Kivila <landersift@hotmail.com>, 2021\n"
+"Language-Team: Estonian (https://www.transifex.com/stellarium/teams/80998/et/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: et\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. type: Content of: <h2>
+#: ../../scenery3d/Testscene/description.en.utf8:1
+msgid "Testscene"
+msgstr "Teststseen"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:3
+msgid ""
+"This scene is mostly useful as testbed for your own developments. You should"
+" make a copy of the scene folder and modify at will, try material settings "
+"or some other details to find out how this plugin behaves. Then build and "
+"present your own work!"
+msgstr ""
+"See stseen on kasulik oma arenduste tegemisel. Kopeeri selle stseeni kaust "
+"ja muuda materjale ja muid seadeid, saamaks teada, kuidas see lisa töötab. "
+"Seejärel asu oma maailmu rajama!"
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Testscene/description.en.utf8:8
+msgid "Coordinate and orientation tests"
+msgstr "Koordinaatide ja suuna testid"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:10
+msgid ""
+"The pillars shown here, as seen from the structure's center, provide an "
+"approximate view (not hi-precision!) to solstice/equinox sunrise/sunset "
+"positions in central European latitudes. The central pillars provide an "
+"east-west-line. The survey coordinate grid visible on the floor does not "
+"align with geographic north.  A rotation of -4.2 deg (test for meridian "
+"convergence) must be compensated, i.e., while the central pillars must "
+"absolutely and always point west-east, the grid lines hit the northern "
+"horizon slightly (4.2 deg) left of north!"
+msgstr ""
+"Ehitise keskelt vaadates moodustavad sambad ligikaudse (mitte täpse!) "
+"võrdpäevsuste päikesetõusu ja -loojangu suuna Kesk-Euroopa laiustel. "
+"Keskmised sambad moodustavad ida-lääne suunalise joone. Põrandal nähtav "
+"võrgustik ei ühildu geograafilise põhjasuunaga, vaid osutab umbes 4,2° "
+"põhjasuunast vasakule."
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:19
+msgid ""
+"Walkaround ground coordinates (Ctrl-R, T) should display the coordinates "
+"visible along the south and west border of the ground."
+msgstr ""
+"Ruumikoordinaadid (Ctrl-R, T) peaksid näitama pinna lõuna- ja lääneserva "
+"koordinaate."
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Testscene/description.en.utf8:23
+msgid "Material test"
+msgstr "Materjali test"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:25
+msgid ""
+"This model is also used for testing the plugin's graphical capabilities. You"
+" can play with material parameters to create funny effects like "
+"semitransparent or glow-in-the-dark brick spheres."
+msgstr ""
+"See mudel katsetab ühtlasi selle lisa graafikavõimekust - proovi muuta "
+"materjalide seadeid, et luua naljakaid efekte, näiteks poolläbipaistvaid või"
+" pimedas helendavaid kivipalle."
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:29
+msgid ""
+"To test temporal features, the pillars and spheres are visible only from the"
+" years 2000 until 2020.  Edit the material file to change that!"
+msgstr ""
+"Ajalise võimekuse testimiseks on pallid ja sambad nähtavad ainult vahemikus "
+"2000-2020. Seda saab muuta materjali failist."
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Testscene/description.en.utf8:32
+#: ../../scenery3d/Sterngarten/description.en.utf8:56
+msgid "Model"
+msgstr "Mudel"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Testscene/description.en.utf8:33
+msgid ""
+"Testscene for Stellarium/scenery3d development. Export from SU8-Kerkythea-"
+"KT2OBJ."
+msgstr "Stellariumi 3D-stseenide test. Ekspordi allikas SU8-Kerkythea-KT2OBJ."
+
+#. type: Content of: <h2>
+#: ../../scenery3d/Sterngarten/description.en.utf8:1
+msgid "Vienna Sterngarten"
+msgstr "Viini täheaed"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:3
+msgid ""
+"Sterngarten (\"Star Garden\") is an open-air planetarium in the south-west "
+"of Vienna, demonstrating the solar year."
+msgstr ""
+"Sterngarten (sks täheaed) on Viinist edelas asuv vabaõhuplanetaarium, mille "
+"ehitis kujutab päikeseaastat."
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:7
+msgid "Idea"
+msgstr "Idee"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:9
+msgid ""
+"Univ.Prof.Dr.Oswald Thomas (1882 Kronstadt - 1963 Vienna). Founder, "
+"Astronomical Bureau (1907) and Austrian Astronomical Society (1924). "
+"Director of first Vienna Planetarium (1927) and Urania observatory."
+msgstr ""
+"Professor Oswald Thomas (1882 Kroonlinn- 1963 Viin). Astronoomiabüroo (1907)"
+" ja Austria Astronoomiaseltsi (1924) asutaja. Esimese Viini planetaariumi "
+"(1927) ja Urania observatooriumi juhataja."
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:14
+msgid "Construction"
+msgstr "Ehitus"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:16
+msgid ""
+"The Sterngarten was developed by Thomas' student and successor in the "
+"Astronomical Bureau Prof. Hermann Mucke (1935-2019) with his collaborators."
+"  Mucke was also secretary of the Austrian Astronomical Society from "
+"1963-2018, director of Vienna planetarium 1963-2001 and Vienna Urania public"
+" observatory from 1971-2001. For more than 60 years, Mucke and the Society "
+"published the \"Österreichischer Himmelskalender\" (Austrian Celestial "
+"Calendar)  and the monthly journal \"Der Sternenbote\" (The Starry "
+"Messenger)."
+msgstr ""
+"Täheaia planeeris Thomase õpilane ja mantlipärija Astronoomiabüroos - "
+"professor Hermann Mucke (1935-2019) koos kolleegidega. Mucke oli ka Austria "
+"Astronoomiaseltsi sekretär (1963-2018), Viini planetaariumi (1963-2001) ja "
+"Urania tähetorni (1971-2001) juhataja. Üle 60 aasta toimetas Mucke koos "
+"kolleegidega Österreichischer Himmelskalenderit (Austria taevakalender) ning"
+" igakuist ajakirja Der Sternenbote (Taeva sõnumileht)."
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:22
+msgid ""
+"It was built 1997-2001 by the Austrian Astronomical Society, supported by "
+"public and private sponsors."
+msgstr ""
+"Täheaia ehitas sponsorite toel aastatel 1997-2001 Austria Astronoomiaselts."
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:24
+msgid "Purpose"
+msgstr "Eesmärk"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:26
+msgid ""
+"Improvement of basic astronomical knowledge in the general public. "
+"Witnessing celestial facts and changes with the unaided eye, optionally with"
+" a field glass, is offered by our installation, situated in the extreme "
+"southwest of Vienna; always open privately for everybody free of charge. "
+"Frequently guided tours."
+msgstr ""
+"Avalikkuse astronoomia-alaste teadmiste parandamine, taevakehade liikumiste "
+"ja muutuste jälgimine palja silma või optikariistadega. Viinist edelas olev "
+"aed on alati avatud ning külastamine on tasuta, sageli toimub ekskursioone."
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:32
+msgid "Components"
+msgstr "Osad"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:35
+msgid ""
+"Pyramid with platform 7x7m. Seen from 1.5m above Center Plate all angles "
+"fit."
+msgstr ""
+"7 m küljepikkusega püramiid. Vaatepunkt on 1,5 m kõrgusel keskplaadi kohal."
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:36
+msgid "Horizon Railing, representing the mathematical horizon."
+msgstr "Reeling kujutab matemaatilist horisonti."
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:37
+msgid ""
+"Surrounding Steps; 200 seats. Entrance by staircase and wheelchair ramp."
+msgstr "Astmestiku ümber on 200 istet, ligipääsuks on trepp ja kaldtee."
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:38
+msgid ""
+"Pillars for sunrise and sunset at beginning of the seasons.  Pillar "
+"positions are right on the azimuths of equinoxes and solstices.  Arms "
+"indicate horizon and shifting effect due to refraction.  (Observation of "
+"rising/setting on the mathematical horizon is not possible in the field due "
+"to vegetation and landscape)."
+msgstr ""
+"Sambad märgivad Päikese tõusu ja loojangut võrdpäevsustel ja pööripäevadel, "
+"seega aastaaegade vaheldumist koos refraktsioonist põhjustatud nihkega. "
+"(Tegeliku tõusu ja loojangut ei ole maastiku ja taimestiku tõttu näha.)"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:42
+msgid ""
+"South Pillar, marked (10&deg;/10&deg; altitude); Transit marks for sun at "
+"seasons' beginning."
+msgstr "Lõunasammas 10° kõrguse märgetega. Tähised aastaaegade alguses."
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:43
+msgid ""
+"North Pillar, marked (10&deg;/10&deg; altitude); on top Shadow Disc with "
+"central hole: North celestial Pole."
+msgstr ""
+"Põhjasammas 10° kõrguse märgetega, samba tipus olev auk märgib taeva "
+"põhjapoolust."
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:44
+msgid ""
+"Bent Analemma, divided. Spring and summer dates on the horizontal part, "
+"autumn and winter dates on the ascending one, marked (10&deg;/10&deg;) solar"
+" longitude, with zodiacal signs. Ascending part serves as polar gnomon for "
+"the"
+msgstr ""
+"Kaheosaline analemma koos jaotistega. Kevade ja suve kuupäevad "
+"horisontaalsel, sügise ja talve kuupäevad tõusval osal. 10° tähised Päikese "
+"ekliptilise laiuse kohta koos sodiaagimärkidega. Tõusev osa toimib "
+"päikesekella osutina."
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:45
+msgid "Sundial, full hours Vh to VIIh marked."
+msgstr "Päikesekell, märgitud tunnid 5-19."
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:46
+msgid "Information panels."
+msgstr "Infotahvlid."
+
+#. type: Content of: <h4>
+#: ../../scenery3d/Sterngarten/description.en.utf8:49
+msgid "Further Information"
+msgstr "Rohkem infot"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:50
+msgid "Websites in German only."
+msgstr "Veebiinfo saksa keeles."
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:52
+msgid ""
+"Österreichischer Astronomischer Verein: <a "
+"href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
+msgstr ""
+"Österreichischer Astronomischer Verein: <a "
+"href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
+
+#. type: Content of: <ul><li>
+#: ../../scenery3d/Sterngarten/description.en.utf8:53
+msgid ""
+"German Wikipedia article on the <a "
+"href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
+msgstr ""
+"Saksa Vikipeedia artikkel: <a "
+"href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:57
+msgid ""
+"Created by Georg Zotti following plans by H. Mucke; Like countless amateur "
+"and professional astronomers in Austria, Zotti was introduced to astronomy "
+"by Mucke in his primary school days. Mucke's spirit will remain alive in the"
+" Sterngarten."
+msgstr ""
+"Mudeli loonud Georg Zotti H. Mucke plaanide põhjal. Nagu paljusid Austrias, "
+"tõi ka Zotti astronoomia radadele professor Mucke juba põhikooli ajal."
+
+#. type: Content of: <p>
+#: ../../scenery3d/Sterngarten/description.en.utf8:60
+msgid ""
+"Model created in 2010 with Google Sketchup 8, exported from Google Sketchup "
+"8.0.14346."
+msgstr "Mudel loodud 2010. aastal programmis Google Sketchup 8."

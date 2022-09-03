@@ -28,7 +28,6 @@
 struct S3DEnum
 {
 	Q_GADGET
-	Q_ENUMS(CubemappingMode ShadowFilterQuality)
 
 public:
 	//! Determines the method used for cubemap creation
@@ -41,6 +40,7 @@ public:
 		//! Uses a single GL_TEXTURE_CUBEMAP and a geometry shader to render all 6 sides in one pass.
 		CM_CUBEMAP_GSACCEL
 	};
+	Q_ENUM(CubemappingMode)
 
 	//! Contains different shadow filter settings
 	enum ShadowFilterQuality
@@ -58,6 +58,7 @@ public:
 		//! Uses a 64-tap Poisson disk + hardware filtering
 		SFQ_HIGH_HARDWARE
 	};
+	Q_ENUM(ShadowFilterQuality)
 };
 
 #endif

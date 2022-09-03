@@ -24,8 +24,6 @@
 #include <QListWidgetItem>
 
 #include "StelDialog.hpp"
-#include "StelGui.hpp"
-#include "StelTranslator.hpp"
 
 class Ui_remoteSyncDialog;
 class RemoteSync;
@@ -36,13 +34,13 @@ class RemoteSyncDialog : public StelDialog
 
 public:
 	RemoteSyncDialog();
-	~RemoteSyncDialog();
+	~RemoteSyncDialog() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 
 protected:
-	void createDialogContent();
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 private slots:
 	void printErrorMessage(const QString error);

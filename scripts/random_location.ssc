@@ -1,0 +1,28 @@
+//
+// Name: Random location
+// Author: Alexander Wolf
+// Shortcut: Ctrl+D,L
+// License: Public Domain
+// Version: 1.0
+// Description: This script will help you make practical works for celestial navigation - he sets a random location and hides it from the GUI.
+//
+
+function randomFloat(min, max) {
+    return min + (max - min) * Math.random();
+}
+
+if (core.isModuleLoaded("Satellites"))
+{
+    if (Satellites.getFlagHintsVisible()) {
+        Satellites.setFlagHintsVisible(false);
+    }
+}
+if (core.isModuleLoaded("NavStars"))
+{
+    if (!NavStars.getNavStarsMarks()) {
+        NavStars.setNavStarsMarks(true);
+    }
+}
+core.wait(0.5);
+core.setObserverLocation(randomFloat(-180., 180.), randomFloat(-90., 90.), 1., 1., "unknown location", "Earth");
+core.wait(1.);

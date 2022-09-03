@@ -13,7 +13,6 @@
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
 
-#include "Solve.hpp"
 #include "Orbit.hpp"
 #include "StelUtils.hpp"
 
@@ -22,8 +21,6 @@
 #include <cmath>
 #include <cstring>
 #include <QDebug>
-
-using namespace std;
 
 #define EPSILON 1e-10
 //#define EPSILON 1e-4
@@ -127,19 +124,21 @@ void KeplerOrbit::InitEll(const double dt, double &rCosNu, double &rSinNu)
 	rSinNu = h1*sin(E);
 }
 
-KeplerOrbit::KeplerOrbit(double pericenterDistance,
+KeplerOrbit::KeplerOrbit(double epochJDE,
+			double pericenterDistance,
 			double eccentricity,
 			double inclination,
 			double ascendingNode,
 			double argOfPerhelion,
 			double timeAtPerihelion,
 			double orbitGoodDays,
-			double meanMotion,              // GZ: for parabolics, this is W/dt in Heafner's lettering
+			double meanMotion,              // for parabolics, this is W/dt in Heafner's lettering
 			double parentRotObliquity,
 			double parentRotAscendingnode,
 			double parentRotJ2000Longitude,
 			double centralMass)
-	: q(pericenterDistance),
+	: epochJDE(epochJDE),
+	  q(pericenterDistance),
 	  e(eccentricity),
 	  i(inclination),
 	  Om(ascendingNode),
@@ -153,6 +152,11 @@ KeplerOrbit::KeplerOrbit(double pericenterDistance,
 {
 	// For Comets and Minor planets, this just builds a unity matrix. For moons, it rotates into the equatorial system of the parent planet
 	setParentOrientation(parentRotObliquity, parentRotAscendingnode, parentRotJ2000Longitude);
+	if (orbitGood<0.)
+	{
+	    const double period=calculateSiderealPeriod();
+	    orbitGood=(period==0. ? 1000. : period*0.5);
+	}
 }
 
 //! For planet moons which have orbits given in relation to their parent planet's equator.
@@ -188,7 +192,6 @@ void Orbit::setParentOrientation(const double parentRotObliquity, const double p
 	rotateToVsop87[7] =                 s_obl*cj;
 	rotateToVsop87[8] =                 c_obl;
 }
-
 
 void KeplerOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v)
 {
@@ -252,15 +255,35 @@ void KeplerOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v)
 double KeplerOrbit::calculateSiderealPeriod(const double semiMajorAxis, const double centralMass)
 {
 	// Solution for non-Solar central mass (Moons:) we need to take central mass (in Solar units) into account. Tested with comparison of preconfigured Moon data.
-	return (semiMajorAxis >0 ? (2.*M_PI/GAUSS_GRAV_k)*sqrt(semiMajorAxis*semiMajorAxis*semiMajorAxis/centralMass) : std::numeric_limits<double>::max() );
+	return (semiMajorAxis <=0 ? 0. : (2.*M_PI/GAUSS_GRAV_k)*sqrt(semiMajorAxis*semiMajorAxis*semiMajorAxis/centralMass));
 }
 
 double KeplerOrbit::calculateSiderealPeriod() const
 {
 	if (e>=1.)
-		return std::numeric_limits<double>::max();
+		return 0.;
 	const double a = q/(1.0-e); // semimajor axis
 	return calculateSiderealPeriod(a, centralMass);
+}
+
+Vec2d KeplerOrbit::objectDateValidRange(const bool strict) const
+{
+	double min=std::numeric_limits<double>::min();
+	double max=std::numeric_limits<double>::max();
+	if (orbitGood>0)
+	{
+	    if (strict)
+	    {
+		min=epochJDE-qMin(orbitGood, 365.);
+		max=epochJDE+qMin(orbitGood, 365.);
+	    }
+	    else
+	    {
+		min=epochJDE-orbitGood;
+		max=epochJDE+orbitGood;
+	    }
+	}
+	return Vec2d(min, max);
 }
 
 GimbalOrbit::GimbalOrbit(double distance, double longitude, double latitude):

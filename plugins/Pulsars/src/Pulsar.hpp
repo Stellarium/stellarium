@@ -26,6 +26,8 @@
 #include <QList>
 #include <QDateTime>
 
+#include "StelCore.hpp"
+#include "StelTranslator.hpp"
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelFader.hpp"
@@ -46,72 +48,79 @@ public:
 
 	//! @param id The official designation for a pulsar, e.g. "PSR J1919+21"
 	Pulsar(const QVariantMap& map);
-	~Pulsar();
+	~Pulsar() Q_DECL_OVERRIDE;
 
 	//! Get a QVariantMap which describes the pulsar. Could be used to create a duplicate.
-	// TODO: Add proper documentation of these fields!
-	//! - designation
-	//! - parallax
-	//! - bperiod
-	//! - frequency
-	//! - pfrequency
-	//! - pderivative
-	//! - dmeasure
+	//! - designation: pulsar name based on J2000 coordinates
+	//! - bdesignation: pulsar name based on B1950 coordinates
+	//! - parallax: annual parallax (mas)
+	//! - bperiod: binary period of pulsar (days)
+	//! - frequency: barycentric rotation frequency (Hz)
+	//! - pfrequency: time derivative of barycentric rotation frequency (s^-2)
+	//! - pderivative: time derivative of barcycentric period (dimensionless)
+	//! - dmeasure: dispersion measure (pc/cm^3)
 	//! - eccentricity
-	//! - RA
-	//! - DE
-	//! - period
-	//! - w50
-	//! - s400
-	//! - s600
-	//! - s1400
-	//! - distance
-	//! - glitch
-	//! - notes
+	//! - RA: right ascension (J2000) (hh:mm:ss.s)
+	//! - DE: declination (J2000) (+dd:mm:ss)
+	//! - pmRA: proper motion in the right ascension direction (mas/yr)
+	//! - pmDE: proper motion in declination (mas/yr)
+	//! - period: barycentric period of the pulsar (s)
+	//! - w50: width of pulse at 50% of peak (ms). Note, pulse widths are a function of both observing frequency and observational time resolution, so quoted widths are indicative only.
+	//! - s400: mean flux density at 400 MHz (mJy)
+	//! - s600: mean flux density at 1400 MHz (mJy)
+	//! - s1400: mean flux density at 2000 MHz (mJy)
+	//! - distance: best estimate of the pulsar distance using the YMW16 DM-based distance as default (kpc)
+	//! - glitch: number of glitches
+	//! - notes: pulsar types
 	QVariantMap getMap(void) const;
 
 	//! Get the type of object
-	virtual QString getType(void) const
+	virtual QString getType(void) const Q_DECL_OVERRIDE
 	{
 		return PULSAR_TYPE;
 	}
 
-	virtual QString getID(void) const
+	//! Get the type of object
+	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	{
+		return (glitch==0) ? N_("pulsar") : N_("pulsar with glitches");
+	}
+	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE
+	{
+		return q_(getObjectType());
+	}
+
+	virtual QString getID(void) const Q_DECL_OVERRIDE
 	{
 		return designation;
 	}
 
-	virtual float getSelectPriority(const StelCore* core) const;
+	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
+	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 	//! Return a map like StelObject::getInfoMap(), but with a few extra tags also available in getMap(), except for designation, RA and DE fields.
-	virtual QVariantMap getInfoMap(const StelCore *core) const;
-	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const
-	{
-		return XYZ;
-	}
+	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
+	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
+	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! Get the visual magnitude of pulsar
-	virtual float getVMagnitude(const StelCore* core) const;
+	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
 	virtual float getVMagnitudeWithExtinction(const StelCore *core) const;
-	//! Get the angular size of pulsar
-	virtual double getAngularSize(const StelCore* core) const;
 	//! Get the localized name of pulsar
-	virtual QString getNameI18n(void) const;
+	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
 	//! Get the english name of pulsar
-	virtual QString getEnglishName(void) const;
-	//! Get the designation of pulsar
+	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE;
+	//! Get the designation of pulsar (based on J2000 coordinates)
 	QString getDesignation(void) const { return designation; }
+	//! Get the designation of pulsar (based on B1950 coordinates)
+	QString getBDesignation(void) const { return bdesignation; }
 
 	void update(double deltaTime);
 
 private:
 	bool initialized;
-
-	Vec3d XYZ;                         // holds J2000 position	
 
 	static StelTextureSP hintTexture;
 	static StelTextureSP markerTexture;
@@ -125,10 +134,13 @@ private:
 	void draw(StelCore* core, StelPainter *painter);
 
 	//! Variables for description of properties of pulsars
-	QString designation;	//! The designation of the pulsar (J2000 pulsar name)
+	QString designation;	//! The designation of the pulsar (based on J2000 coordinates)
+	QString bdesignation;	//! The designation of the pulsar (based on B1550 coordinates)
 	QString pulsarName;	//! The proper name of the pulsar
 	double RA;		//! J2000 right ascension
 	double DE;		//! J2000 declination
+	double pmRA;		//! proper motion by right ascension (mas/yr)
+	double pmDE;		//! proper motion by declination (mas/yr)
 	float parallax;		//! Annual parallax (mas)
 	double period;		//! Barycentric period of the pulsar (s)
 	double frequency;	//! Barycentric rotation frequency (Hz)

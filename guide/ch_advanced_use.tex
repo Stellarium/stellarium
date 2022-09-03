@@ -16,9 +16,9 @@
 Stellarium has many data files containing such things as star catalogue
 data, nebula images, button icons, font files and configuration files.
 When Stellarium looks for a file, it looks in two places. First, it
-looks in the \emph{user directory} for the account which is running
+looks in the \indexterm{user directory}\footnote{also called \indexterm{user data directory}} for the account which is running
 Stellarium. If the file is not found there, Stellarium looks in the
-\emph{installation directory}\footnote{The installation directory was
+\indexterm{installation directory}\footnote{The installation directory was
   referred to as the config root directory in previous versions of this
   guide}. Thus it is possible for Stellarium to be installed by an
 administrative user and yet have a writable configuration file for
@@ -31,7 +31,7 @@ In addition to the main search path, Stellarium saves some files in
 other locations, for example screens shots and recorded scripts.
 
 The locations of the user directory, installation directory,
-\emph{screenshot save directory} and \emph{script save directory} vary
+\indexterm{screenshot save directory} and \indexterm{script save directory} vary
 according to the operating system and installation options used. The
 following sections describe the locations for various operating systems.
 
@@ -81,7 +81,7 @@ endings''.\footnote{This is a very confusing default setting and in fact
   section~\ref{sec:CommandLineOptions}).
 \end{description}
 
-\subsection{Mac OS X}
+\subsection{macOS}
 \label{sec:FilesAndDirectories:MacOSX}
 
 \begin{description}
@@ -90,9 +90,7 @@ endings''.\footnote{This is a very confusing default setting and in fact
     Bundles}\footnote{\url{http://www.mactipsandtricks.com/articles/Wiley_HT_appBundles.lasso}}
   for more information.
 \item[user directory] This is the sub-directory 
-  \file{Library/Preferences/Stellarium/} (or \\
-  \file{\textasciitilde{}/Library/Application\ Support/Stellarium} on
-  newest versions of Mac OS X) of the user's home
+  \file{\textasciitilde{}/Library/Application\ Support/Stellarium} of the user's home
   directory.
 \item[screenshot save directory] Screenshots are saved to the user's
   Desktop.
@@ -118,7 +116,7 @@ endings''.\footnote{This is a very confusing default setting and in fact
 \subsection{Customized Location}
 \label{sec:FilesAndDirectories:Custom}
 
-Some users\newFeature{v.0.19.0} may prefer non-standard locations for
+Some users\newFeature{0.19.0} may prefer non-standard locations for
 their own data, for example when the Windows \file{C:} drive (which
 usually contains user data), or the Linux \file{/home} partition has
 become too small to hold tens of high-resolution landscapes or
@@ -163,7 +161,7 @@ following sub-directories.
 \item[\file{textures/}] contains miscellaneous texture files, such as the
   graphics for the toolbar buttons, planet texture maps, etc.
 \item[\file{ephem/}] (optional) may contain data files for planetary
-  ephemerides DE430 and DE431 (see~\ref{sec:ExtraData:ephemerides}).
+  ephemerides DE430, DE431, DE440 and DE441 (see~\ref{sec:ExtraData:ephemerides}).
 \end{description}
 
 If any file exists in both the installation directory and user
@@ -182,7 +180,7 @@ updating Stellarium will not risk the loss of your own data.
 \section{The Logfile}
 \label{sec:LogFile}
 
-Stellarium reports various events and confirmations to a logfile, \file{log.txt}, 
+Stellarium reports various events and confirmations to a \indexterm{logfile}, \file{log.txt}, 
 in the \emph{user directory}. This has the same content as you can see on the console 
 on Linux when you start Stellarium on the command line. Normally you don't need to bother with its contents, 
 however, if Stellarium behaves unexpectedly, crashes, or shows other problems, a quick look into this 
@@ -194,29 +192,31 @@ The logfile can also be displayed within the program: press \key{F1} to call the
 \section{The Main Configuration File}
 \label{sec:ConfigurationFile}
 
-The main configuration file is read each time Stellarium starts, and
+The main \indexterm{configuration file} is read each time Stellarium starts, and
 settings such as the observer's location and display preferences are
 taken from it. Ideally this mechanism should be totally transparent to
 the user -- anything that is configurable should be configured ``in''
 the program GUI. However, at time of writing Stellarium isn't quite
 complete in this respect, despite improvements in each version. Some
-settings, esp.\ color values for lines, grids, etc.\ can only be
+settings, esp.\ color values for some lines, grids, etc.\ can only be
 changed by directly editing the configuration file.\footnote{Color
   values can be edited interactively by the Text User Interface plugin
   (see~\ref{sec:plugins:TextUserInterface}).} This section describes
 some of the settings a user may wish to modify in this way, and how to
 do it.
 
+The name of the configuration file is
+\file{config.ini}\footnote{It is possible to specify a different name
+  for the main configuration file using the \texttt{-\/-config-file}
+  command line option. See section~\ref{sec:CommandLineOptions} Command 
+  Line Options for details.}.
 If the configuration file does not exist in the \emph{user directory}
 when Stellarium is started (e.g., the first time the user starts the
 program), one will be created with default values for all settings
 (refer to section~\ref{sec:FilesAndDirectories} Files and
 Directories for the location of the user directory on your operating
-system). The name of the configuration file is
-\file{config.ini}\footnote{It is possible to specify a different name
-  for the main configuration file using the \texttt{-\/-config-file}
-  command line option. See section~\ref{sec:CommandLineOptions} Command 
-  Line Options for details.}.
+system).
+
 
 The configuration file is a regular text file, so all you need to edit
 it is a text editor like \program{Notepad} on Windows, \program{Text Edit} on
@@ -241,26 +241,27 @@ in the \emph{Tools} tab of the \emph{Configuration} dialog (\guibutton[0.25]{2}{
 \subsection{More Deep-Sky Objects}
 \label{sec:ExtraData:DSOs}
 
-\noindent\newFeature{v0.16.1}Stellarium is packaged with over 94 thousand deep-sky 
+\noindent\newFeature{0.16.1}Stellarium is packaged with over 94 thousand deep-sky 
 objects\footnote{Over 83 thousand deep-sky objects in version 0.16.0.} in the normal
-program download (the standard edition of Stellarium DSO catalog, see section \ref{sec:dso:catalog}), 
-but an extended DSO catalog with over one million objects (up to $20.0^m$ for galaxies) may be downloaded
-from Stellarium's Github website\footnote{\url{https://github.com/Stellarium/stellarium-data/releases/tag/dso-3.10}}:
+program download (the \emph{standard edition} of Stellarium DSO catalog\footnote{The first 
+number in the version of Stellarium DSO catalog meaning version of catalog structure 
+and second number meaning version of data.}, see section \ref{sec:dso:catalog}), 
+but an \emph{extended edition} of DSO catalog with over one million objects (up to $20.0^m$ for galaxies) may be downloaded
+from Stellarium's Github website\footnote{\url{https://github.com/Stellarium/stellarium-data/releases/tag/dso-3.16}}:
 
 \noindent\begin{tabular}{lllr}
 \toprule
-\emph{Version}&\emph{Filename}& \emph{MD5 hash}& \emph{Size}\\\midrule
-3.11; extended edition & \file{catalog.dat} &\texttt{95ee3d538b393185563513d20899e7f3}& 27MB\\\bottomrule
+\emph{Version; Edition} & \emph{Filename} & \emph{MD5 hash} & \emph{Size}\\\midrule
+3.16; extended & \file{catalog-3.16.dat} & \texttt{85488951212a13f1d498fad0fa3a5679} & 28MB\\\bottomrule
 \end{tabular}
 
-The file can be placed in a folder named \file{nebulae/default} inside either
-the \emph{installation directory} (replacing of standard catalog) or the \emph{user directory}
-(see section~\ref{sec:FilesAndDirectories:DirectoryStructure}). 
+The file can be placed in a folder named \file{nebulae/default} inside the \emph{user directory}
+(see section~\ref{sec:FilesAndDirectories:DirectoryStructure}).
 
-\subsection{Alternative Planet Ephemerides: DE430, DE431}
+\subsection{Alternative Planet Ephemerides: DE430, DE431, DE440, DE441}
 \label{sec:ExtraData:ephemerides}
 
-\noindent\newFeature{v0.15.0}By default, Stellarium uses the \indexterm{VSOP87} planetary theory,
+\noindent\newFeature{0.15.0}By default, Stellarium uses the \indexterm{VSOP87} planetary theory,
 an analytical solution which is able to deliver planetary positions
 for any input date~\citep{1988A&A...202..309B}. However, its use is recommended only for the year
 range $-4000\ldots+8000$. Outside this range, it seems to be usable
@@ -268,27 +269,29 @@ for a few more millennia without too great errors, but with degrading accuracy.
 Likewise for the moon, Stellarium by default uses ELP~2000-82B~\citep{1982CeMec..26...63C, 1983A&A...124...50C, ELP2000-82B}.
 
 Since v0.15.0 you can install extra data files which allow access to the
-numerical integration runs \indexterm{DE430} and \indexterm{DE431}
-from NASA's Jet Propulsion Laboratory (JPL)~\citep{DE43x}. The data files have to be
-downloaded separately, and most users will likely not need them. DE430
-provides highly accurate data for the years $+1550\ldots+2650$, while
-DE431 covers years $-13000\ldots+17000$, which allows e.g.\ 
-archaeoastronomical research on Mesolithic landscapes. Outside these
+numerical integration runs \indexterm{DE430} and \indexterm{DE431} \citep{DE43x},
+and meanwhile also \newFeature{0.21.2} \indexterm{DE440} and \indexterm{DE441} \citep{DE44x},
+from NASA's Jet Propulsion Laboratory (JPL). The data files have to be
+downloaded separately, and most users will likely not need them. DE430 and DE440
+provide highly accurate data for the years $+1550\ldots+2650$, while
+DE431 and DE441 covers years $-13000\ldots+17000$, which allows e.g.\ 
+archaeoastronomical research on Mesolithic landscapes. (But see Appendix~\ref{ch:Accuracy}!) Outside these
 year ranges, positional computation falls back to VSOP87.
 
-The integration of this feature is still somewhat experimental, and some other current 
-approximations will lead to numerical data which differ slightly from best possible ephemerides.  
+Some current approximations may still lead to numerical data which differ slightly from best possible ephemerides.  
 Please at least compare with JPL Horizons\footnote{\url{https://ssd.jpl.nasa.gov/horizons.cgi}} for dependable results.
 
 To enable use of these data, download the files from
-JPL\footnote{\url{ftp://ssd.jpl.nasa.gov/pub/eph/planets/Linux/}. (Also
+JPL\footnote{\url{https://ssd.jpl.nasa.gov/ftp/eph/planets/Linux/} (Also
   download from this directory if you are not running Linux!)}:
 
 \noindent\begin{tabular}{lllr}
 \toprule
 \emph{Ephemeris}&\emph{Filename}& \emph{MD5 hash}& \emph{Size}\\\midrule
-DE430& \file{linux\_p1550p2650.430} &\texttt{707c4262533d52d59abaaaa5e69c5738}& 97.5\,MB\\
-DE431& \file{lnxm13000p17000.431}   &\texttt{fad0f432ae18c330f9e14915fbf8960a}& 2.59\,GB\\\bottomrule
+DE430& \file{linux\_p1550p2650.430}  &\texttt{707c4262533d52d59abaaaa5e69c5738}& 97.5\,MB\\
+DE431& \file{lnxm13000p17000.431}    &\texttt{fad0f432ae18c330f9e14915fbf8960a}& 2.59\,GB\\
+DE440& \file{linux\_p1550p2650.440}  &\texttt{9dc8a9cefd32b0090002407847e718ba}& 97.5\,MB\\
+DE441& \file{linux\_m13000p17000.441}&\texttt{4e3b924463d17b68ec9c4a18240300cd}& 2.59\,GB\\\bottomrule
 \end{tabular}
 
 
@@ -301,14 +304,18 @@ if you have them already stored elsewhere, you may add the path to
 [astro]
 de430_path = C:/Astrodata/JPL_DE43x/linux_p1550p2650.430
 de431_path = C:/Astrodata/JPL_DE43x/lnxm13000p17000.431
+de440_path = C:/Astrodata/JPL_DE44x/linux_p1550p2650.440
+de441_path = C:/Astrodata/JPL_DE44x/linux_m13000p17000.441
 \end{configfile}
 
 For fast access avoid storing them on a network drive or USB pendrive!
 
 You activate use of either ephemeris in the \emph{Configuration} panel
-(\key{F2}). If you activate both, preference will be given for DE430
-if the simulation time allows it. Outside of the valid times, VSOP87
-will always be used.
+(\key{F2}). If you activate more than one, preference will be given
+for DE440 over DE441 if the simulation time allows it. Only if DE44x
+are not enabled, DE430 is given preference over DE431 if simulation
+time allows it.  Outside of the valid times, VSOP87 will always be
+used.
 
 \paragraph{Acknowledgement}
 The optional use of DE430/431 has been supported by the ESA Summer of
@@ -333,7 +340,7 @@ services concurrently for any interested application. In most cases,
 this will be a \program{gpsd} running on your localhost, receiving
 data from some GPS device plugged in via USB.
 Please follow instructions by the \program{gpsd}
-authors\footnote{\url{http://catb.org/gpsd/index.html}} to properly
+authors\footnote{\url{https://gpsd.gitlab.io/gpsd/index.html}} to properly
 configure this system daemon.  A few hints:
 \begin{itemize}
 \item On Ubuntu 16.04 and likely other systems, USB hotplug devices
@@ -476,7 +483,7 @@ For example, using the option \texttt{-c\ my\_config.ini} would resolve to the f
 -\/-sky-date         & date       & The initial date in \texttt{yyyymmdd} format. \\
 -\/-sky-time         & time       & The initial time in \texttt{hh:mm:ss} format. \\\midrule
 -\/-startup-script   & script name & The name of a script to run after the program has started. [\file{startup.ssc}] \\\midrule
--\/-fov              & angle      & The initial vertical field of view in degrees. \\\midrule
+-\/-fov              & angle (degrees) & The initial vertical field of view in degrees. \\\midrule
 -\/-scale-gui        & scale factor & Scaling the GUI according to scale factor\\\midrule
 -\/-projection-type  & ptype      & The initial projection type (e.g. \texttt{perspective}). \\\midrule
 -\/-spout  or -S     & all or sky & Act as Spout sender (See section \ref{sec:CommandLineOptions:Special:Spout}).%
@@ -485,10 +492,10 @@ For example, using the option \texttt{-c\ my\_config.ini} would resolve to the f
 -\/-verbose          &            & Even more diagnostic output in logfile (esp.\ multimedia handling)\\
 -\/-dump-opengl-details or -d     & {[}none{]} & Dump information about OpenGL support to logfile. 
                                                  Use this is you have graphics problems and want to send a bug report. \\\midrule
--\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect Direct3D version).\footnotemark[1]\\
--\/-angle-d3d9 or -9 & {[}none{]} & Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\
--\/-angle-d3d11      & {[}none{]} & Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\
--\/-angle-warp       & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\
+-\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect Direct3D version).\footnotemark[1]\footnote{Stellarium 0.* series only}\\
+-\/-angle-d3d9 or -9 & {[}none{]} & Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\footnotemark[3]\\
+-\/-angle-d3d11      & {[}none{]} & Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\footnotemark[3]\\
+-\/-angle-warp       & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\footnotemark[3]\\
 -\/-mesa-mode or -m  & {[}none{]} & Use MESA as software OpenGL rendering engine.\footnotemark[1]\\
 -\/-safe-mode or -s  & {[}none{]} & Synonymous to -\/-mesa-mode.\footnotemark[1]\\
 -\/-compat33 or -C   & {[}none{]} & Request OpenGL 3.3 Compatibility Profile. May help for certain driver configurations. Mac?\\
@@ -526,10 +533,10 @@ stellarium --landscape=ocean
 
 \section{Special Options}
 \label{sec:CommandLineOptions:Special}
-\subsection{Spout}\newFeature{v0.15.1} 
+\subsection{Spout}\newFeature{0.15.1} 
 \label{sec:CommandLineOptions:Special:Spout}
 Apart from stand-alone use, Stellarium can be used as multimedia source in larger installations, in museums or science exhibitions. 
-\program{Spout}\footnote{\url{http://spout.zeal.co/}} is a technology which enables use of Stellarium's 
+\program{Spout}\footnote{\url{https://spout.zeal.co/}} is a technology which enables use of Stellarium's 
 output window as texture in DirectX applications on Windows. Simply start Stellarium with 
 the \texttt{-\/-spout=sky} command line option. (Currently \program{Spout} output is limited to the main window 
 without GUI panels, but this may change in future versions.) 
@@ -539,9 +546,37 @@ you can use option \texttt{-\/-spout-name=StelSpout2} in addition to create anot
 In such cases, it may be useful to also have separate user data directories and use option \texttt{-\/-user-dir}. 
 
 This mode does not work in ANGLE mode and requires modern graphics hardware with the \texttt{WGL\_NV\_DX\_interop} 
-driver extension running in OpenGL mode. Some NVidia GPUs work without this extension listed explicitly. 
-On a notebook with NVidia Optimus technology, make sure to launch Stellarium on the NVidia hardware. 
-For permanent setting, use the NVidia configuration dialog to configure Stellarium explicitly to run always on the NVidia card.
+driver extension running in OpenGL mode. Some Nvidia GPUs work without this extension listed explicitly. 
+On a notebook with Nvidia Optimus technology, make sure to launch Stellarium on the Nvidia hardware. 
+For permanent setting, use the Nvidia configuration dialog to configure Stellarium explicitly to run always on the Nvidia card.
+
+Note that Spout use disables any multisampling setting (see Appendix~\ref{sec:config.ini:video}). 
+
+\subsection{Environment Variables}
+\label{sec:Environment}
+
+Some command-line options can be set permanently by storing them into
+environment variables. How to set them depends on the respective
+operating system. Calling the respective options on the command line
+still overrides an environment variable (apart from
+\texttt{STEL\_OPTS}).
+
+This may be especially helpful on Windows systems with older graphics
+cards which may not fully be compatible with OpenGL. Here we recommend
+you either use the program links using the ANGLE-related options, or
+you can set the environment variable once and forget about the
+problems.
+
+\begin{description}
+\item[STEL\_OPTS] may contain a default commandline with options in the syntax of the table above.
+\item[STEL\_USERDIR] may contain the path to a user data directory
+  deviating from the default (see section \ref{sec:Directories}).
+\item[QT\_OPENGL] (Windows only). May be one of \texttt{desktop} (native OpenGL for your GPU, recommended),
+  \texttt{angle} or \texttt{software}. The last activates pure software rendering using the MESA OpenGL library.
+\item[QT\_ANGLE\_PLATFORM] (Windows only). May be one of \texttt{d3d9} (DirectX~9) or \texttt{d3d11} (DirectX~11),
+  or \texttt{warp} for another software-only solution.
+\end{description}
+
 
 %%% Local Variables: 
 %%% mode: latex

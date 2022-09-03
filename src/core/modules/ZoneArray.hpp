@@ -28,7 +28,6 @@
 
 #include "StelCore.hpp"
 #include "StelSkyDrawer.hpp"
-#include "StarMgr.hpp"
 
 #include <QString>
 #include <QFile>
@@ -92,7 +91,7 @@ public:
 	unsigned int getNrOfStars() const { return nr_of_stars; }
 
 	//! Dummy method that does nothing. See subclass implementation.
-	virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {Q_UNUSED(hipIndex);}
+	virtual void updateHipIndex(HipIndexStruct hipIndex[]) const {Q_UNUSED(hipIndex)}
 
 	//! Pure virtual method. See subclass implementation.
 	virtual void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
@@ -101,8 +100,9 @@ public:
 	//! Pure virtual method. See subclass implementation.
 	virtual void draw(StelPainter* sPainter, int index,bool is_inside,
 					  const RCMag* rcmag_table, int limitMagIndex, StelCore* core,
-					  int maxMagStarName, float names_brightness, bool designationUsage,
-					  const QVector<SphericalCap>& boundingCaps) const = 0;
+					  int maxMagStarName, float names_brightness,
+					  const QVector<SphericalCap>& boundingCaps,
+					  const bool withAberration, const Vec3f vel) const = 0;
 
 	//! Get whether or not the catalog was successfully loaded.
 	//! @return @c true if at least one zone was loaded, otherwise @c false
@@ -162,7 +162,7 @@ public:
 	//! @param mag_steps number of steps used to describe values in range
 	SpecialZoneArray(QFile* file,bool byte_swap,bool use_mmap,int level,int mag_min,
 			 int mag_range,int mag_steps);
-	~SpecialZoneArray(void);
+	~SpecialZoneArray(void) Q_DECL_OVERRIDE;
 protected:
 	//! Get an array of all SpecialZoneData objects in this catalog.
 	SpecialZoneData<Star> *getZones(void) const
@@ -173,20 +173,24 @@ protected:
 	//! Draw stars and their names onto the viewport.
 	//! @param sPainter the painter to use 
 	//! @param index zone index to draw
-	//! @param isInsideViewport whether the zone is inside the current viewport
+	//! @param isInsideViewport whether the zone is inside the current viewport. If false, we need to test more to skip stars.
 	//! @param rcmag_table table of magnitudes
 	//! @param limitMagIndex index from rcmag_table at which stars are not visible anymore
 	//! @param core core to use for drawing
 	//! @param maxMagStarName magnitude limit of stars that display labels
-	//! @param names_brightness brightness of labels
+	//! @param names_brightness brightness of labels	
+	//! @param boundingCaps
+	//! @param withAberration true if aberration to be applied
+	//! @param vel velocity vector of observer planet
 	virtual void draw(StelPainter* sPainter, int index, bool isInsideViewport,
 			  const RCMag *rcmag_table, int limitMagIndex, StelCore* core,
-			  int maxMagStarName, float names_brightness, bool designationUsage,
-			  const QVector<SphericalCap>& boundingCaps) const;
+			  int maxMagStarName, float names_brightness,
+			  const QVector<SphericalCap>& boundingCaps,
+			  const bool withAberration, const Vec3f vel) const Q_DECL_OVERRIDE;
 
-	virtual void scaleAxis();
+	virtual void scaleAxis() Q_DECL_OVERRIDE;
 	virtual void searchAround(const StelCore* core, int index,const Vec3d &v,double cosLimFov,
-					  QList<StelObjectP > &result);
+					  QList<StelObjectP > &result) Q_DECL_OVERRIDE;
 
 	Star *stars;
 private:
@@ -206,7 +210,7 @@ public:
 
 	//! Add Hipparcos information for all stars in this catalog into @em hipIndex.
 	//! @param hipIndex array of Hipparcos info structs
-	void updateHipIndex(HipIndexStruct hipIndex[]) const;
+	void updateHipIndex(HipIndexStruct hipIndex[]) const Q_DECL_OVERRIDE;
 };
 
 #endif // ZONEARRAY_HPP

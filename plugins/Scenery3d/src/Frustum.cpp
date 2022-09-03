@@ -51,17 +51,17 @@ Frustum::~Frustum()
 	planes.clear();
 }
 
-const Vec3f &Frustum::getCorner(Corner corner) const
+const Vec3f &Frustum::getCorner(const Corner corner) const
 {
 	return corners[corner];
 }
 
-const Plane &Frustum::getPlane(FrustumPlane plane) const
+const Plane &Frustum::getPlane(const FrustumPlane plane) const
 {
 	return *planes[plane];
 }
 
-void Frustum::calcFrustum(Vec3d p, Vec3d l, Vec3d u)
+void Frustum::calcFrustum(const Vec3d &p, const Vec3d &l, const Vec3d &u)
 {
 	Vec3d Y = -l;
 	Y.normalize();

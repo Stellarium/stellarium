@@ -40,21 +40,18 @@ class StelSkyLayerMgr : public StelModule
 
 public:
 	StelSkyLayerMgr();
-	~StelSkyLayerMgr();
+	~StelSkyLayerMgr() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 
 	//! Draws sky background
-	virtual void draw(StelCore* core);
-
-	//! Update state which is time dependent.
-	virtual void update(double) {;}
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 
 	//! Determines the order in which the various modules are drawn.
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Other specific methods
@@ -100,7 +97,8 @@ public slots:
 	//! @param maxBright the maximum brightness setting for the image
 	//! @param visible initial visibility setting
 	//! @param frameType Coordinate frame type
-	//! @note Last argument has been added 2017-03. Use loadSkyImage(... , StelCore::FrameJ2000) for the previous behaviour!
+	//! @param withAberration the image shall undergo aberration effects. Else it is really fixed to the frame. This flag is only used for images linked to FrameJ2000.
+	//! @note frameType has been added 2017-03. Use loadSkyImage(... , StelCore::FrameJ2000) for the previous behaviour!
 	//! @note For frameType=AzAlt, azimuth currently is counted from South towards East.
 	//! @bug Some image are not visible close to screen center, only when in the corners.
 	bool loadSkyImage(const QString& id, const QString& filename,
@@ -108,7 +106,7 @@ public slots:
 					  double long1, double lat1,
 					  double long2, double lat2,
 					  double long3, double lat3,
-					  double minRes, double maxBright, bool visible, StelCore::FrameType frameType=StelCore::FrameJ2000);
+					  double minRes, double maxBright, bool visible, StelCore::FrameType frameType=StelCore::FrameJ2000, bool withAberration=true);
 
 	//! Decide to show or not to show a layer by its ID.
 	//! @param id the id of the layer whose status is to be changed.

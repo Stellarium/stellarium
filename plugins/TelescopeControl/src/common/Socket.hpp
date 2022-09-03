@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include <QtGlobal>
 
 #ifdef Q_OS_WIN
-#include <winsock2.h>
+#include <WinSock2.h>
 #include <fcntl.h>
 
 //FIXME: Remove these macro-redefinitions, we have no business messing with them
@@ -93,7 +93,7 @@ public:
 		return IS_INVALID_SOCKET(fd);
 	}
 	virtual bool isTcpConnection() const { return false; }
-	virtual void sendPosition(unsigned int ra_int, int dec_int, int status) {Q_UNUSED(ra_int); Q_UNUSED(dec_int); Q_UNUSED(status);}
+	virtual void sendPosition(unsigned int ra_int, int dec_int, int status) {Q_UNUSED(ra_int) Q_UNUSED(dec_int) Q_UNUSED(status)}
 	
 protected:
 	Socket(Server &server, SOCKET fd) : server(server), fd(fd) {}

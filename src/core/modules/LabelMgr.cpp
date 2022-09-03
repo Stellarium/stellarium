@@ -19,11 +19,10 @@
  */
 
 #include "LabelMgr.hpp"
+#include "StelFader.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelApp.hpp"
-#include "StarMgr.hpp"
 #include "StelCore.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 
 #include "StelProjector.hpp"
@@ -43,7 +42,7 @@ class StelLabel
 {
 public:
 	StelLabel(const QString& text, const QFont& font, const Vec3f& color);
-	virtual ~StelLabel() {;}
+	virtual ~StelLabel() {}
 
 	//! draw the label on the sky
 	//! @param core the StelCore object
@@ -94,13 +93,13 @@ public:
 	SkyLabel(const QString& text, StelObjectP bindObject, const QFont& font, Vec3f color,
 			 QString side="NE", double distance=-1.0, SkyLabel::Style style=TextOnly);
 
-	virtual ~SkyLabel();
+	virtual ~SkyLabel() Q_DECL_OVERRIDE;
 	// SkyLabel(const QString& text, Vec3d coords, QString side="NE", double distance=-1.0, SkyLabel::Style style=TextOnly, double enclosureSize=-1.0);
 
 	//! Draw the label on the sky
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, StelPainter& sPainter);
+	virtual bool draw(StelCore* core, StelPainter& sPainter) Q_DECL_OVERRIDE;
 
 	static SkyLabel::Style stringToStyle(const QString& s);
 	
@@ -123,12 +122,12 @@ public:
 	//! @param font the font to use
 	//! @param color the color for the label
 	HorizonLabel(const QString& text, const float az, const float alt, const QFont& font, const Vec3f& color);
-	virtual ~HorizonLabel();
+	virtual ~HorizonLabel() Q_DECL_OVERRIDE;
 
 	//! draw the label on the screen
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, StelPainter& sPainter);
+	virtual bool draw(StelCore* core, StelPainter& sPainter) Q_DECL_OVERRIDE;
 private:
 	Vec3d altaz; // the vector to the coordinates
 };
@@ -146,12 +145,12 @@ public:
 	//! @param color the color for the label
 	//! @param j2000epoch if true, the label starts displayed in equatorial coordinates for epoch J2000.0
 	EquatorialLabel(const QString& text, const float ra, const float dec, const QFont& font, const Vec3f& color, QString side="NE", double distance=-1.0, bool j2000epoch=true);
-	virtual ~EquatorialLabel();
+	virtual ~EquatorialLabel() Q_DECL_OVERRIDE;
 
 	//! draw the label on the screen
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, StelPainter& sPainter);
+	virtual bool draw(StelCore* core, StelPainter& sPainter) Q_DECL_OVERRIDE;
 private:
 	Vec3d equPos; // the vector to the coordinates
 	QString labelSide;
@@ -171,12 +170,12 @@ public:
 	//! @param font the font to use
 	//! @param color the color for the label
 	ScreenLabel(const QString& text, int x, int y, const QFont& font, const Vec3f& color);
-	virtual ~ScreenLabel();
+	virtual ~ScreenLabel() Q_DECL_OVERRIDE;
 
 	//! draw the label on the screen
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
-	virtual bool draw(StelCore* core, StelPainter& sPainter);
+	virtual bool draw(StelCore* core, StelPainter& sPainter) Q_DECL_OVERRIDE;
 
 private:
 	int screenX;
@@ -269,23 +268,23 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 	char hJustify = 'c';
 	char vJustify = 'c';
 
-	if (labelSide.toUpper().contains("N"))
+	if (labelSide.contains("N", Qt::CaseInsensitive))
 	{
 		yOffset = 1.0;
 		vJustify = 'b'; // bottom justify text
 	}
-	else if (labelSide.toUpper().contains("S"))
+	else if (labelSide.contains("S", Qt::CaseInsensitive))
 	{
 		yOffset = -1.0;
-		vJustify = 't'; // top justufy text
+		vJustify = 't'; // top justify text
 	}
 
-	if (labelSide.toUpper().contains("E"))
+	if (labelSide.contains("E", Qt::CaseInsensitive))
 	{
 		xOffset = 1.0;
 		hJustify = 'l'; // right justify text
 	}
-	else if (labelSide.toUpper().contains("W"))
+	else if (labelSide.contains("W", Qt::CaseInsensitive))
 	{
 		xOffset = -1.0;
 		hJustify = 'r'; // left justify text
@@ -298,7 +297,7 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 	}
 	else
 	{
-		float shift = 4.f + static_cast<float>(labelObject->getAngularSize(core))*M_PI_180f*sPainter.getProjector()->getPixelPerRadAtCenter()/1.8f;
+		float shift = 4.f + static_cast<float>(labelObject->getAngularRadius(core))*M_PI_180f*sPainter.getProjector()->getPixelPerRadAtCenter()/1.8f;
 		// use the object size
 		xOffset *= static_cast<double>(shift);
 		yOffset *= static_cast<double>(shift);
@@ -316,7 +315,7 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 	else if (vJustify == 'c')
 		jyOffset = sPainter.getFontMetrics().height() / 2.;
 
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+	sPainter.setColor(labelColor, labelFader.getInterstate());
 	sPainter.drawText(static_cast<float>(labelXY[0]+xOffset-jxOffset), static_cast<float>(labelXY[1]+yOffset-jyOffset), labelText, 0, 0, 0, false);
 
 	if (labelStyle == SkyLabel::Line)
@@ -366,7 +365,7 @@ bool HorizonLabel::draw(StelCore *core, StelPainter& sPainter)
 	if (labelFader.getInterstate() <= 0.f)
 		return false;
 
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+	sPainter.setColor(labelColor, labelFader.getInterstate());
 	sPainter.setFont(labelFont);
 	StelProjectorP keepProj=sPainter.getProjector(); // we must reset after painting!
 	StelProjectorP altazProjector=core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
@@ -403,30 +402,30 @@ bool EquatorialLabel::draw(StelCore *core, StelPainter& sPainter)
 	if (!sPainter.getProjector()->project(equPos, labelXY))
 		return false;
 
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+	sPainter.setColor(labelColor, labelFader.getInterstate());
 	sPainter.setFont(labelFont);
 
 	double xOffset(0.);
 	double yOffset(0.);
 	char hJustify = 'c';
 	char vJustify = 'c';
-	if (labelSide.toUpper().contains("N"))
+	if (labelSide.contains("N", Qt::CaseInsensitive))
 	{
 		yOffset = 1.0;
 		vJustify = 'b'; // bottom justify text
 	}
-	else if (labelSide.toUpper().contains("S"))
+	else if (labelSide.contains("S", Qt::CaseInsensitive))
 	{
 		yOffset = -1.0;
-		vJustify = 't'; // top justufy text
+		vJustify = 't'; // top justify text
 	}
 
-	if (labelSide.toUpper().contains("E"))
+	if (labelSide.contains("E", Qt::CaseInsensitive))
 	{
 		xOffset = 1.0;
 		hJustify = 'l'; // right justify text
 	}
-	else if (labelSide.toUpper().contains("W"))
+	else if (labelSide.contains("W", Qt::CaseInsensitive))
 	{
 		xOffset = -1.0;
 		hJustify = 'r'; // left justify text
@@ -462,11 +461,13 @@ bool EquatorialLabel::draw(StelCore *core, StelPainter& sPainter)
 // ScreenLabel class //
 ///////////////////////
 ScreenLabel::ScreenLabel(const QString& text, int x, int y, const QFont& font, const Vec3f& color)
-	: StelLabel(text, font, color),
-	  screenX(x)
+	: StelLabel(text, font, color)
 {
 	QFontMetrics metrics(font);
-	screenY = StelApp::getInstance().getCore()->getProjection2d()->getViewportHeight() - y - metrics.height();
+	StelCore* core = StelApp::getInstance().getCore();
+	const double ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
+	screenX = x*ppx;
+	screenY = core->getProjection2d()->getViewportHeight() - (y*ppx + metrics.height());
 }
 
 ScreenLabel::~ScreenLabel()
@@ -478,7 +479,7 @@ bool ScreenLabel::draw(StelCore*, StelPainter& sPainter)
 	if (labelFader.getInterstate() <= 0.f)
 		return false;
 
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+	sPainter.setColor(labelColor, labelFader.getInterstate());
 	sPainter.setFont(labelFont);
 	sPainter.drawText(screenX, screenY, labelText, 0, 0, 0, false);
 	return true;
@@ -503,7 +504,7 @@ void LabelMgr::init()
 void LabelMgr::draw(StelCore* core)
 {
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	for (auto* l : allLabels)
+	for (auto* l : qAsConst(allLabels))
 	{
 		l->draw(core, sPainter);
 	}
@@ -512,7 +513,7 @@ void LabelMgr::draw(StelCore* core)
 void LabelMgr::messageTimeout2()
 {
 	QObject* obj = QObject::sender();
-	for (auto* l : allLabels)
+	for (auto* l : qAsConst(allLabels))
 	{
 		if (l->timer == obj)
 		{
@@ -525,7 +526,7 @@ void LabelMgr::messageTimeout2()
 void LabelMgr::messageTimeout1()
 {
 	QObject* obj = QObject::sender();
-	for (auto* l : allLabels)
+	for (auto* l : qAsConst(allLabels))
 	{
 		if (l->timer == obj)
 		{
@@ -746,7 +747,7 @@ void LabelMgr::deleteLabel(int id)
 	
 void LabelMgr::update(double deltaTime)
 {
-	for (auto* l : allLabels) 
+	for (auto* l : qAsConst(allLabels))
 		l->update(deltaTime);
 }
 	
@@ -760,7 +761,7 @@ double LabelMgr::getCallOrder(StelModuleActionName actionName) const
 int LabelMgr::deleteAllLabels(void)
 {
 	int count=0;
-	for (auto* l : allLabels)
+	for (auto* l : qAsConst(allLabels))
 	{
 		delete l;
 		count++;

@@ -17,7 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelUtils.hpp"
 
 #include <cstdlib>
 #include <QCoreApplication>
@@ -56,8 +55,11 @@ void StelFileMgr::init()
 	{
 		userDir = winApiPath + "\\Stellarium";
 	}
-#elif defined(Q_OS_MAC)
+#elif defined(Q_OS_MACOS)
 	userDir = QDir::homePath() + "/Library/Application Support/Stellarium";
+#elif defined(Q_OS_HAIKU)
+	// Use system settings dir
+	userDir = QDir::homePath() + "/config/settings/Stellarium";
 #else
 	userDir = QDir::homePath() + "/.stellarium";
 #endif
@@ -95,13 +97,13 @@ void StelFileMgr::init()
 	QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
 	QString envRoot = env.value("STELLARIUM_DATA_ROOT", ".");
 
-	if (QFileInfo(envRoot + QDir::separator() + QString(CHECK_FILE)).exists())
+	if (QFileInfo::exists(envRoot + QDir::separator() + QString(CHECK_FILE)))
 	{
 		installDir = envRoot;
 	}	
 	else
 	{
-	#if defined(Q_OS_MAC)
+	#if defined(Q_OS_MACOS)
 		QString relativePath = "/../Resources";
 		if (QCoreApplication::applicationDirPath().contains("src")) {
 			relativePath = "/../..";
@@ -208,7 +210,7 @@ QString StelFileMgr::findFile(const QString& path, Flags flags)
 	// explicitly specified relative paths
 	if (path[0] == '.')
 	{
-		if (fileFlagsCheck(path, flags))
+		if (fileFlagsCheck(QFileInfo(path), flags))
 			return path;
 		else
 		{
@@ -220,7 +222,7 @@ QString StelFileMgr::findFile(const QString& path, Flags flags)
 	// explicitly specified absolute paths
 	if (isAbsolute(path))
 	{
-		if (fileFlagsCheck(path, flags))
+		if (fileFlagsCheck(QFileInfo(path), flags))
 			return path;
 		else
 		{
@@ -229,7 +231,7 @@ QString StelFileMgr::findFile(const QString& path, Flags flags)
 		}
 	}
 	
-	for (const auto& i : fileLocations)
+	for (const auto& i : qAsConst(fileLocations))
 	{
 		const QFileInfo finfo(i + "/" + path);
 		if (fileFlagsCheck(finfo, flags))
@@ -258,7 +260,7 @@ QStringList StelFileMgr::findFileInAllPaths(const QString &path, const Flags &fl
 	// explicitly specified relative paths
 	if (path[0] == '.')
 	{
-		if (fileFlagsCheck(path, flags))
+		if (fileFlagsCheck(QFileInfo(path), flags))
 			filePaths.append(path);
 		return filePaths;
 	}
@@ -266,12 +268,12 @@ QStringList StelFileMgr::findFileInAllPaths(const QString &path, const Flags &fl
 	// explicitly specified absolute paths
 	if ( isAbsolute(path) )
 	{
-		if (fileFlagsCheck(path, flags))
+		if (fileFlagsCheck(QFileInfo(path), flags))
 			filePaths.append(path);
 		return filePaths;
 	}
 
-	for (const auto& locationPath : fileLocations)
+	for (const auto& locationPath : qAsConst(fileLocations))
 	{
 		const QFileInfo finfo(locationPath + "/" + path);
 		if (fileFlagsCheck(finfo, flags))
@@ -290,10 +292,10 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 		QSet<QString> dirs = listContents(path, Directory, false);
 		result = listContents(path, flags, false); // root
 		// add results for each sub-directory
-		for (const auto& d : dirs)
+		for (const auto& d : qAsConst(dirs))
 		{
 			QSet<QString> subDirResult = listContents(path + "/" + d, flags, true);
-			for (const auto& r : subDirResult)
+			for (const auto& r : qAsConst(subDirResult))
 			{
 				result.insert(d + "/" + r);
 			}
@@ -305,13 +307,13 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 	// we append relative paths to the search paths maintained by this class.
 	QStringList listPaths = QFileInfo(path).isAbsolute() ? QStringList("/") : fileLocations;
 
-	for (const auto& li : listPaths)
+	for (const auto& li : qAsConst(listPaths))
 	{
 		QFileInfo thisPath(QDir(li).filePath(path));
 		if (!thisPath.isDir())
 			continue;
 
-		QDir thisDir(thisPath.absoluteFilePath());
+		const QDir thisDir(thisPath.absoluteFilePath());
 		for (const auto& fileIt : thisDir.entryList())
 		{
 			if (fileIt == ".." || fileIt == ".")
@@ -332,7 +334,7 @@ void StelFileMgr::setSearchPaths(const QStringList& paths)
 
 bool StelFileMgr::exists(const QString& path)
 {
-	return QFileInfo(path).exists();
+    return QFileInfo::exists(path);
 }
 
 bool StelFileMgr::isAbsolute(const QString& path)
@@ -421,7 +423,7 @@ QString StelFileMgr::getDesktopDir()
 	if (QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).isEmpty())
 		return "";
 
-	QString result = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation)[0];
+	QString result = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).constFirst();
 	if (!QFileInfo(result).isDir())
 		return "";
 	
@@ -469,7 +471,7 @@ QString StelFileMgr::getLocaleDir()
 	else
 	{
 		// If not found, try to look in the standard build directory (useful for developer)
-		localePath = QCoreApplication::applicationDirPath() + "/../translations";
+		localePath = QFileInfo(QCoreApplication::applicationDirPath() + QString("/../translations"));
 		if (localePath.exists())
 		{
 			return localePath.filePath();

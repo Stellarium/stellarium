@@ -24,6 +24,17 @@
 
 #include <QFile>
 
+// Note on changes inflicted by Qt6:
+
+// Apparently the combination of QVector and QList in Qt6 causes issues in getUnion and getIntersection methods. These are currently (2022) not used.
+// We keep them available for the sake of future developers who may be interested in the functions, but will have to debug them first.
+
+// Here are a few defines which may help in debugging. They control verbose data dumps.
+//#define DUMP_OCT_SUBS 1
+//#define DUMP_OCT_SUBS_REV 1
+//#define DUMP_OCT_APPENDSUBS 1
+//#define DUMP_OCT_TESS_ONE 1
+
 const Vec3d OctahedronPolygon::sideDirections[] = {	Vec3d(1,1,1), Vec3d(1,1,-1),Vec3d(-1,1,1),Vec3d(-1,1,-1),
 	Vec3d(1,-1,1),Vec3d(1,-1,-1),Vec3d(-1,-1,1),Vec3d(-1,-1,-1)};
 
@@ -59,6 +70,7 @@ QDataStream& operator>>(QDataStream& in, EdgeVertex& v)
 
 SubContour::SubContour(const QVector<Vec3d>& vertices, bool closed) : QVector<EdgeVertex>(vertices.size(), EdgeVertex(true))
 {
+	Q_ASSERT(size() == vertices.count());
 	// Create the contour list by adding the matching edge flags
 	for (int i=0;i<vertices.size();++i)
 		(*this)[i].vertex = vertices.at(i);
@@ -95,6 +107,7 @@ QString SubContour::toJSON() const
 
 OctahedronPolygon::OctahedronPolygon(const QVector<Vec3d>& contour) : fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines)
 {
+	Q_ASSERT(sides.size()==0);
 	sides.resize(8);
 	appendSubContour(SubContour(contour));
 	tesselate(WindingPositive);
@@ -118,7 +131,6 @@ OctahedronPolygon::OctahedronPolygon(const SubContour& initContour)
 	updateVertexArray();
 }
 
-
 OctahedronPolygon::OctahedronPolygon(const QList<OctahedronPolygon>& octs) : fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines)
 {
 	sides.resize(8);
@@ -136,8 +148,7 @@ OctahedronPolygon::OctahedronPolygon(const QList<OctahedronPolygon>& octs) : fil
 
 void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 {
-	QVarLengthArray<QVector<SubContour>,8 > resultSides;
-	resultSides.resize(8);
+	QVarLengthArray<QVector<SubContour>,8 > resultSides(8);
 	QVector<SubContour> splittedContour1[2];
 	// Split the contour on the plan Y=0
 	splitContourByPlan(1, inContour, splittedContour1);
@@ -181,9 +192,9 @@ void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 	
 	// Re-split the contours on the plan X=0
 	QVector<SubContour> splittedVertices2[4];
-	for (const auto& subContour : splittedContour1[0])
+	for (const auto& subContour : qAsConst(splittedContour1[0]))
 		splitContourByPlan(0, subContour, splittedVertices2);
-	for (const auto& subContour : splittedContour1[1])
+	for (const auto& subContour : qAsConst(splittedContour1[1]))
 		splitContourByPlan(0, subContour, splittedVertices2+2);
 
 	// Now complete the contours which cross the areas from one side to another by adding poles
@@ -213,19 +224,36 @@ void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 				Q_ASSERT(std::fabs(v[0])<0.0000001 || std::fabs(v[1])<0.0000001);
 			}
 		}
-		for (const auto& subContour : splittedVertices2[c])
+		for (const auto& subContour : qAsConst(splittedVertices2[c]))
 		{
 			splitContourByPlan(2, subContour, resultSides.data()+c*2);
 		}
 	}
 	projectOnOctahedron(resultSides);
 
-	// Append the new sides to this
+	// Append the new sides to this.
 	Q_ASSERT(sides.size()==8 && resultSides.size()==8);
 	for (int i=0;i<8;++i)
 	{
 		sides[i] += resultSides[i];
 	}
+#ifdef DUMP_OCT_APPENDSUBS
+	for (int i=0; i<8; i++)
+	{
+		QVector<SubContour> v=sides[i];
+		qDebug() << "sides ["<<i<<"]: size=" << v.size();
+		for (int j=0; j<v.size(); j++)
+		{
+			const SubContour &sub=v.at(j);
+			qDebug() << "sub=sides["<<i<<"]["<<j<<"]" << sub.data();
+			for (int k=0; k<sub.size(); k++)
+			{
+				const EdgeVertex &edgeVertex=sub.at(k);
+				qDebug() << "edgeVertex=sides["<<i<<"]["<<j<<"]["<<k<<"]" << edgeVertex.vertex << "(edge:" << (edgeVertex.edgeFlag ? "yes":"no") << ")";
+			}
+		}
+	}
+#endif
 }
 
 // Return the area in squared degrees.
@@ -256,12 +284,46 @@ Vec3d OctahedronPolygon::getPointInside() const
 	return res;
 }
 
+// The optional debug output dumps vertex lists before and after the actual append.
 void OctahedronPolygon::append(const OctahedronPolygon& other)
 {
 	Q_ASSERT(sides.size()==8 && other.sides.size()==8);
 	for (int i=0;i<8;++i)
 	{
+#ifdef DUMP_OCT_SUBS
+		// sides[i].data() prints a pointer address value. Not meaningful when comparing Qt5/Qt6, but the before/after addresses may have changed.
+		qDebug() << "sides ["<<i<<"]:" << sides[i].data();
+		QVector<SubContour> v=sides[i];
+		qDebug() << "sides ["<<i<<"]: size=" << v.size();
+		for (int j=0; j<v.size(); j++)
+		{
+			const SubContour &sub=v.at(j);
+			qDebug() << "sub=sides["<<i<<"]["<<j<<"]" << sub.data();
+			for (int k=0; k<sub.size(); k++)
+			{
+				const EdgeVertex &edgeVertex=sub.at(k);
+				qDebug() << "edgeVertex=sides["<<i<<"]["<<j<<"]["<<k<<"]" << edgeVertex.vertex << "(edge:" << (edgeVertex.edgeFlag ? "yes":"no") << ")";
+			}
+		}
+		qDebug() << "Appending other.sides[" << i << "] (" << other.sides[i].length() << "elements)";
+#endif
 		sides[i] += other.sides[i];
+#ifdef DUMP_OCT_SUBS
+		// Now dump the sides list again. Check for potential address changes.
+		qDebug() << "sides*["<<i<<"]:" << sides[i].data();
+		v=sides[i];
+		qDebug() << "sides*["<<i<<"]: size=" << v.size();
+		for (int j=0; j<v.size(); j++)
+		{
+			const SubContour &sub=v.at(j);
+			qDebug() << "sub=sides*["<<i<<"]["<<j<<"]" << sub.data();
+			for (int k=0; k<sub.size(); k++)
+			{
+				const EdgeVertex &edgeVertex=sub.at(k);
+				qDebug() << "edgeVertex=sides*["<<i<<"]["<<j<<"]["<<k<<"]" << edgeVertex.vertex << "(edge:" << (edgeVertex.edgeFlag ? "yes":"no") << ")";
+			}
+		}
+#endif
 	}
 }
 
@@ -270,10 +332,44 @@ void OctahedronPolygon::appendReversed(const OctahedronPolygon& other)
 	Q_ASSERT(sides.size()==8 && other.sides.size()==8);
 	for (int i=0;i<8;++i)
 	{
+#ifdef DUMP_OCT_SUBS_REV
+		// sides[i].data() prints a pointer address value. Not meaningful when comparing Qt5/Qt6, but the before/after addresses may have changed.
+		qDebug() << "sides ["<<i<<"]:" << sides[i].data();
+		QVector<SubContour> v=sides[i];
+		qDebug() << "sides ["<<i<<"]: size=" << v.size();
+		for (int j=0; j<v.size(); j++)
+		{
+			const SubContour &sub=v.at(j);
+			qDebug() << "sub=sides["<<i<<"]["<<j<<"]" << sub.data();
+			for (int k=0; k<sub.size(); k++)
+			{
+				const EdgeVertex &edgeVertex=sub.at(k);
+				qDebug() << "edgeVertex=sides["<<i<<"]["<<j<<"]["<<k<<"]" << edgeVertex.vertex << "(edge:" << (edgeVertex.edgeFlag ? "yes":"no") << ")";
+			}
+		}
+		qDebug() << "Appending other.sides[" << i << "] (" << other.sides[i].length() << "elements)";
+#endif
+
 		for (const auto& sub : other.sides[i])
 		{
 			sides[i] += sub.reversed();
 		}
+#ifdef DUMP_OCT_SUBS_REV
+		// Now dump the sides list again:
+		qDebug() << "sides*["<<i<<"]:" << sides[i].data();
+		v=sides[i];
+		qDebug() << "sides*["<<i<<"]: size=" << v.size();
+		for (int j=0; j<v.size(); j++)
+		{
+			const SubContour &sub=v.at(j);
+			qDebug() << "sub=sides*["<<i<<"]["<<j<<"]" << sub.data();
+			for (int k=0; k<sub.size(); k++)
+			{
+				const EdgeVertex &edgeVertex=sub.at(k);
+				qDebug() << "edgeVertex=sides*["<<i<<"]["<<j<<"]["<<k<<"]" << edgeVertex.vertex << "(edge:" << (edgeVertex.edgeFlag ? "yes":"no") << ")";
+			}
+		}
+#endif
 	}
 }
 
@@ -311,16 +407,17 @@ bool OctahedronPolygon::triangleContains2D(const Vec3d& a, const Vec3d& b, const
 			(a[0]-c[0])*(p[1]-c[1])-(a[1]-c[1])*(p[0]-c[0])>=0.;
 }
 
-// Store data for the GLUES tesselation callbacks
+// Store data for the GLUES tesselation callbacks. This is used as tess->polygonData
 struct OctTessTrianglesCallbackData
 {
+	// TODO: Note that QVector and QList are the same in Qt6! Check how they differ in our use here!
 	QVector<Vec3d> result;			//! Contains the resulting tesselated vertices.
 	QList<Vec3d> tempVertices;		//! Used to store the temporary combined vertices
 };
 
 void errorCallback(GLenum errn)
 {
-	qWarning() << "Tesselator error:" << QString::fromLatin1(reinterpret_cast<const char*>(gluesErrorString(errn)));
+	qWarning() << "Tessellator error:" << QString::fromLatin1(reinterpret_cast<const char*>(gluesErrorString(errn)));
 	Q_ASSERT(0);
 }
 
@@ -329,7 +426,7 @@ void vertexTrianglesCallback(Vec3d* vertexData, OctTessTrianglesCallbackData* us
 	userData->result.append(*vertexData);
 }
 
-void noOpCallback(GLboolean) {;}
+void noOpCallback(GLboolean) {}
 
 void combineTrianglesCallback(double coords[3], Vec3d*[4], GLfloat[4], Vec3d** outData, OctTessTrianglesCallbackData* userData)
 {
@@ -353,12 +450,17 @@ QVector<Vec3d> OctahedronPolygon::tesselateOneSideTriangles(GLUEStesselator* tes
 	OctTessTrianglesCallbackData data;
 	gluesTessNormal(tess, 0.,0., (sidenb%2==0 ? -1. : 1.));
 	gluesTessBeginPolygon(tess, &data);
-	for (int c=0;c<contours.size();++c)
+	//qDebug() << "contours.size()=" << contours.size();
+	for (int c=0;c<contours.size();c++)
 	{
+		//qDebug() << "contours.at(" << c << ").size()=" << contours.at(c).size();
 		gluesTessBeginContour(tess);
-		for (int i=0;i<contours.at(c).size();++i)
+		for (auto i=0;i<contours.at(c).size();++i)
 		{
-			gluesTessVertex(tess, const_cast<double*>((const double*)contours[c][i].vertex.data()), (void*)&(contours[c][i].vertex));
+			//const Vec3d vDat(contours[c][i].vertex.v);
+			//if ((abs(vDat[0]) > GLUES_TESS_MAX_COORD) || (abs(vDat[1]) > GLUES_TESS_MAX_COORD) || (abs(vDat[2]) > GLUES_TESS_MAX_COORD))
+			//	qDebug() << "contours[" << c << "][" << i <<  "]: vDat range too large:" << vDat;
+			gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.data())), static_cast<void*>(const_cast<Vec3d *>(&(contours[c][i].vertex))));
 		}
 		gluesTessEndContour(tess);
 	}
@@ -384,12 +486,12 @@ void OctahedronPolygon::updateVertexArray()
 	// Use GLUES tesselation functions to transform the polygon into a list of triangles
 	GLUEStesselator* tess = gluesNewTess();
 #ifndef NDEBUG
-	gluesTessCallback(tess, GLUES_TESS_BEGIN, (GLvoid(*)()) &checkBeginTrianglesCallback);
+	gluesTessCallback(tess, GLUES_TESS_BEGIN,        reinterpret_cast<GLvoid(*)()> (&checkBeginTrianglesCallback));
 #endif
-	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(*)()) &vertexTrianglesCallback);
-	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG, (GLvoid(*)()) &noOpCallback);
-	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid(*)()) &errorCallback);
-	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid(*)()) &combineTrianglesCallback);
+	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA,  reinterpret_cast<GLvoid(*)()> (&vertexTrianglesCallback));
+	gluesTessCallback(tess, GLUES_TESS_EDGE_FLAG,    reinterpret_cast<GLvoid(*)()> (&noOpCallback));
+	gluesTessCallback(tess, GLUES_TESS_ERROR,        reinterpret_cast<GLvoid(*)()> (&errorCallback));
+	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, reinterpret_cast<GLvoid(*)()> (&combineTrianglesCallback));
 	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, GLUES_TESS_WINDING_POSITIVE);
 
 	// Call the tesselator on each side
@@ -418,13 +520,13 @@ void OctahedronPolygon::updateVertexArray()
 			else
 			{
 				//  Discard vertex..
-				//qDebug() << "Found a fucking CW triangle";
+				//qDebug() << "Found a CW triangle - discarding!";
 			}
 		}
 
 		// Now compute the outline contours, getting rid of non edge segments
 		EdgeVertex previous;
-		for (const auto& c : sides[sidenb])
+		for (const auto& c : qAsConst(sides[sidenb]))
 		{
 			Q_ASSERT(!c.isEmpty());
 			previous = c.first();
@@ -449,17 +551,18 @@ void OctahedronPolygon::updateVertexArray()
 			{
 				outlineCachedVertexArray.vertex.append(previous.vertex);
 				outlineCachedVertexArray.vertex.append(c.first().vertex);
+				Q_ASSERT(outlineCachedVertexArray.vertex.last() == outlineCachedVertexArray.vertex.at(outlineCachedVertexArray.vertex.length()-1));
 				unprojectOctahedron(outlineCachedVertexArray.vertex.last(), sideDirection);
 			}
 		}
 	}
 	gluesDeleteTess(tess);
 	computeBoundingCap();
-
 #ifndef NDEBUG
 	// Check that all triangles are properly oriented
-	QVector<Vec3d> c;
+	QVector<Vec3d> c(3);
 	c.resize(3);
+	c.squeeze();
 	for (int j=0;j<fillCachedVertexArray.vertex.size()/3;++j)
 	{
 		c[0]=fillCachedVertexArray.vertex.at(j*3);
@@ -468,10 +571,12 @@ void OctahedronPolygon::updateVertexArray()
 		Q_ASSERT(SphericalConvexPolygon::checkValidContour(c));
 	}
 #else
-	// If I don't let this like that, the bahaviour will fail in Release mode!!!!
+	// If I don't let this like that, the behaviour will fail in Release mode!!!!
 	// It is either a bug in GCC either a memory problem which appears only when optimizations are activated.
-	QVector<Vec3d> c;
-	c.resize(3);
+	QVector<Vec3d> c(3);
+//	c.resize(3);
+//	c.squeeze();
+	Q_UNUSED(c)
 #endif
 }
 
@@ -482,24 +587,44 @@ struct OctTessLineLoopCallbackData
 	QList<EdgeVertex> tempVertices;	//! Used to store the temporary combined vertices
 };
 
+// 8 sides, so sidenb in 0...7
 QVector<SubContour> OctahedronPolygon::tesselateOneSideLineLoop(GLUEStesselator* tess, int sidenb) const
 {
+	Q_ASSERT((0<=sidenb) && (sidenb<8));
 	const QVector<SubContour>& contours = sides[sidenb];
 	Q_ASSERT(!contours.isEmpty());
 	OctTessLineLoopCallbackData data;
 	gluesTessNormal(tess, 0.,0., (sidenb%2==0 ? -1. : 1.));
-	gluesTessBeginPolygon(tess, &data);
+	gluesTessBeginPolygon(tess, &data); // initialize and set tess->polygonData to data
 	for (int c=0;c<contours.size();++c)
 	{
 		gluesTessBeginContour(tess);
 		for (int i=0;i<contours.at(c).size();++i)
 		{
 			Q_ASSERT(contours[c][i].vertex[2]<0.000001);
-			gluesTessVertex(tess, const_cast<double*>((const double*)contours[c][i].vertex.data()), const_cast<void*>((const void*)&(contours[c][i])));
+			//qDebug() << "Before Tessellation:" << contours[c][i].vertex.data();
+			//qDebug() << "call glueTessVertex on " << contours[c][i].vertex;
+			gluesTessVertex(tess, const_cast<double*>(static_cast<const double*>(contours[c][i].vertex.data())), const_cast<void*>(static_cast<const void*>(&(contours[c][i]))));
+			//qDebug() << "Result of Tessellation:" << contours[c][i].vertex.data();
+			//qDebug() << "Result of Tessellation:" << contours[c][i].vertex;
 		}
 		gluesTessEndContour(tess);
 	}
 	gluesTessEndPolygon(tess);
+#ifdef DUMP_OCT_TESS_ONE
+	qDebug() << "End Result of Tessellation of sidenb=" << sidenb;
+	// just dump to output
+	for (int i=0; i<data.resultList.length(); i++)
+	{
+		const SubContour &sc=data.resultList.at(i);
+		if (sc.length()==0)
+			qDebug() << "\tSC" << i << "empty";
+		for (int j=0; i<sc.length(); i++)
+		{
+			qDebug() << "\tSC" << i << "[" << j << "]" << sc.at(j).vertex << "(" << (sc.at(j).edgeFlag ? "edge" : "no edge") << ")";
+		}
+	}
+#endif
 	return data.resultList;
 }
 
@@ -513,9 +638,15 @@ void vertexLineLoopCallback(EdgeVertex* vertexData, OctTessLineLoopCallbackData*
 {
 	Q_ASSERT(vertexData->vertex[2]<0.0000001);
 	if (userData->result.isEmpty() || !tooClose(userData->result.last().vertex, vertexData->vertex))
+	{
+		//qDebug() << "vertexLineLoopCallback: appending";
 		userData->result.append(*vertexData);
+	}
 	else
+	{
+		//qDebug() << "vertexLineLoopCallback: fixing edge flag";
 		userData->result.last().edgeFlag = userData->result.last().edgeFlag && vertexData->edgeFlag;
+	}
 }
 
 void combineLineLoopCallback(double coords[3], EdgeVertex* vertex_data[4], GLfloat[4], EdgeVertex** outData, OctTessLineLoopCallbackData* userData)
@@ -555,12 +686,12 @@ void OctahedronPolygon::tesselate(TessWindingRule windingRule)
 	// Use GLUES tesselation functions to transform the polygon into a list of triangles
 	GLUEStesselator* tess = gluesNewTess();
 #ifndef NDEBUG
-	gluesTessCallback(tess, GLUES_TESS_BEGIN, (GLvoid(*)()) &checkBeginLineLoopCallback);
+	gluesTessCallback(tess, GLUES_TESS_BEGIN, reinterpret_cast<GLvoid(*)()> (&checkBeginLineLoopCallback));
 #endif
-	gluesTessCallback(tess, GLUES_TESS_END_DATA, (GLvoid(*)()) &endLineLoopCallback);
-	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA, (GLvoid(*)()) &vertexLineLoopCallback);
-	gluesTessCallback(tess, GLUES_TESS_ERROR, (GLvoid(*)()) &errorCallback);
-	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, (GLvoid(*)()) &combineLineLoopCallback);
+	gluesTessCallback(tess, GLUES_TESS_END_DATA,     reinterpret_cast<GLvoid(*)()> (&endLineLoopCallback));
+	gluesTessCallback(tess, GLUES_TESS_VERTEX_DATA,  reinterpret_cast<GLvoid(*)()> (&vertexLineLoopCallback));
+	gluesTessCallback(tess, GLUES_TESS_ERROR,        reinterpret_cast<GLvoid(*)()> (&errorCallback));
+	gluesTessCallback(tess, GLUES_TESS_COMBINE_DATA, reinterpret_cast<GLvoid(*)()> (&combineLineLoopCallback));
 	const double windRule = (windingRule==OctahedronPolygon::WindingPositive) ? GLUES_TESS_WINDING_POSITIVE : GLUES_TESS_WINDING_ABS_GEQ_TWO;
 	gluesTessProperty(tess, GLUES_TESS_WINDING_RULE, windRule);
 	gluesTessProperty(tess, GLUES_TESS_BOUNDARY_ONLY, GL_TRUE);
@@ -573,7 +704,6 @@ void OctahedronPolygon::tesselate(TessWindingRule windingRule)
 	}
 	gluesDeleteTess(tess);
 }
-
 
 QString OctahedronPolygon::toJson() const
 {
@@ -675,7 +805,7 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 	for (i=0;i<inputContour.size();++i)
 	{
 		currentVertex = inputContour.at(i);
-		if (currentVertex.vertex[onLine]==0)
+		if (qFuzzyCompare(currentVertex.vertex[onLine], 0.))
 			currentVertex.vertex[onLine]=1e-98;
 		currentQuadrant = getSide(currentVertex.vertex, onLine);
 		if (currentQuadrant==previousQuadrant)
@@ -712,12 +842,12 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 		}
 		previousVertex=currentVertex;
 	}
-	
+	//qDebug() << "i remained at " << i;
 	// Now handle the other ones
 	for (;i<inputContour.size();++i)
 	{
 		currentVertex = inputContour.at(i);
-		if (currentVertex.vertex[onLine]==0)
+		if (qFuzzyCompare(currentVertex.vertex[onLine], 0.))
 			currentVertex.vertex[onLine]=1e-98;
 		currentQuadrant = getSide(currentVertex.vertex, onLine);
 		if (currentQuadrant==previousQuadrant)
@@ -813,7 +943,7 @@ void OctahedronPolygon::computeBoundingCap()
 		capD = 2.;
 		return;
 	}
-	// This is a quite crapy algorithm
+	// This is a quite crappy algorithm
 	capN.set(0,0,0);
 	for (const auto& v : trianglesArray)
 		capN+=v;

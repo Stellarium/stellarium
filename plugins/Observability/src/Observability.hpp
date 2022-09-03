@@ -26,6 +26,7 @@
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 #include "StelFader.hpp"
+#include "StelLocation.hpp"
 
 class QPixmap;
 class StelButton;
@@ -61,14 +62,13 @@ class Observability : public StelModule
 		   )
 public:
 	Observability();
-	virtual ~Observability();
-	virtual void init();
-	virtual void update(double) {;}
-	virtual void draw(StelCore* core);
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual ~Observability() Q_DECL_OVERRIDE;
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this plugin.
-	virtual bool configureGui(bool show=true);
+	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
 
 
 	//! Read (or re-read) settings from the main config file.
@@ -144,6 +144,8 @@ public slots:
 	
 	//! Controls whether an observability report will be displayed.
 	void showReport(bool b);
+    //! Get a JSON string representation of the report.
+    QString getReportAsJson(); 
 
 	
 private slots:
@@ -152,8 +154,41 @@ private slots:
 
 	
 private:
+	//! Recompute data.
+    void recomputeData();
+	//! Perform logic dependent on location.
+    void onLocationChanged(const StelLocation &location);
+	//! Close connections that are dependent on the plugin status.
+    void closeConnections();
+	//! Create connections that are dependent on the plugin status.
+    void createConnections();
+	//! Update the obserability of the selected object.
+    void updateSunMoonData(); 
+	//! Update the obserability of the selected object.
+    void getObjectObservability(); 
+	//! Render obserability report to the screen.
+    void renderResults();
+    bool shouldShowYear();
+    //! Perform logic dependent on language updates.
+    void onLanguageChanged(); 
+
 	//! Configuration window.
 	ObservabilityDialog* configDialog;
+
+	//! Returns whether the first object in the selection is the moon.
+	//! @param List of selected objects.
+	//! @returns true if the moon, false otherwise
+    bool isMoon(QList<StelObjectP> & objectSelection);
+
+	//! Returns whether the first object in the selection is the sun.
+	//! @param List of selected objects.
+	//! @returns true if the sun, false otherwise
+    bool isSun(QList<StelObjectP> & objectSelection);
+
+	//! Returns whether the first object in the selection is not in the solar system. If no object is selected, returns true. SSO stands for "solar system object."
+	//! @param List of selected objects.
+	//! @returns true if in solar system, false otherwise
+    bool isNotSSO(QList<StelObjectP> & objectSelection);
 
 	void setDateFormat(bool b) { dmyFormat=b; }
 	bool getDateFormat(void) { return dmyFormat; }
@@ -271,7 +306,7 @@ private:
 	void updateSunData(StelCore* core);
 
 	//! Computes the Sun's Sid. Times at astronomical twilight (for each year's day)
-	void updateSunH();
+	void updateSunSiderealTime();
 
 	//! Convert an equatorial position vector to RA/Dec.
 	void toRADec(Vec3d vec3d, double& ra, double& dec);
@@ -357,7 +392,7 @@ private:
 	//! Cached copy of the line reporting when the target is observable.
 	QString lineObservableRange;
 	//! Cached copy of the line reporting the acronical/cosmical rise and set.
-	QString lineAcroCos, lineHeli;
+	QString lineAcro, lineCosm, lineHeli;
 
 	//! Strings to save ephemeris Times:
 	QString RiseTime, SetTime, CulmTime;
@@ -368,8 +403,8 @@ private:
 	//! Equatorial and local coordinates of currently-selected source.
 	Vec3d EquPos, LocPos;
 
-	//! Some booleans to check the kind of source selected and the kind of output to produce.
-	bool isStar, isMoon, isSun, isScreen;
+	//! Boolean representing if the screen is selected, i.e., no object is selected.
+	bool isScreen;
 
 	//! This really shouldn't be handled like this...
 	bool hasRisen;
@@ -412,9 +447,9 @@ class ObservabilityStelPluginInterface : public QObject, public StelPluginInterf
        Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
        Q_INTERFACES(StelPluginInterface)
 public:
-       virtual StelModule* getStelModule() const;
-       virtual StelPluginInfo getPluginInfo() const;
-       virtual QObjectList getExtensionList() const { return QObjectList(); }
+       virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
+       virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
+       virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
 };
 
 #endif /*OBSERVABILITY_HPP*/

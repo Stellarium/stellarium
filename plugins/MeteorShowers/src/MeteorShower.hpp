@@ -22,10 +22,7 @@
 
 #include "MeteorObj.hpp"
 #include "MeteorShowersMgr.hpp"
-#include "StelFader.hpp"
 #include "StelObject.hpp"
-#include "StelPainter.hpp"
-#include "StelTextureTypes.hpp"
 #include "StelTranslator.hpp"
 
 //! @class MeteorShower
@@ -54,9 +51,12 @@ public:
 		int year;                  //! The catalog year (0 for generic)
 		int zhr;                   //! The ZHR on peak
 		QList<int> variable;       //! The ZHR range when it's variable
-		QDate start;               //! Initial date of activity
-		QDate finish;              //! Last date of activity
-		QDate peak;                //! Peak activity
+		double start;              //! Initial solar longitude (J2000) of activity
+		double finish;             //! Last solar longitude (J2000) of activity
+		double peak;               //! Peak solar longitude (J2000) of activity
+		int disttype;              //! Distribution type (0 for Guass, 1 for Lorentz)
+		float b1;                  //! B slope before peak
+		float b2;                  //! B slope after peak
 	};
 
 	//! Constructor
@@ -64,7 +64,7 @@ public:
 	MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map);
 
 	//! Destructor
-	~MeteorShower();
+	~MeteorShower() Q_DECL_OVERRIDE;
 
 	//! Update
 	//! @param deltaTime the time increment in seconds since the last call.
@@ -74,14 +74,14 @@ public:
 	void draw(StelCore *core);
 
 	//! Checks if we have generic data for a given date
-	//! @param date QDate
+	//! @param solLong the Solar longitude (J2000)
 	//! @return Activity
-	Activity hasGenericShower(QDate date, bool &found) const;
+	Activity hasGenericShower(double solLong, bool &found) const;
 
 	//! Checks if we have confirmed data for a given date
-	//! @param date QDate
+	//! @param solLong the Solar longitude (J2000)
 	//! @return Activity
-	Activity hasConfirmedShower(QDate date, bool &found) const;
+	Activity hasConfirmedShower(double solLong, bool &found) const;
 
 	//! Checks if this meteor shower is being displayed or not
 	//! @return true if it's being displayed
@@ -95,10 +95,6 @@ public:
 	//! @return status
 	Status getStatus() { return m_status; }
 
-	//! Gets the peak
-	//! @return peak
-	QDate getPeak() { return m_activity.peak; }
-
 	//! Gets the current ZHR
 	//! @return ZHR
 	int getZHR() { return m_activity.zhr; }
@@ -106,7 +102,7 @@ public:
 	//
 	// Methods defined in StelObject class
 	//
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
+	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
 
 	//! Return a map like StelObject, but with a few extra tags:
 	// TODO: Describe the fields!
@@ -117,15 +113,19 @@ public:
 	//! - pop-idx (population index)
 	//! - parent
 	//! - zhr-max (information string)
-	virtual QVariantMap getInfoMap(const StelCore *core) const;
-	virtual QString getType(void) const { return METEORSHOWER_TYPE; }
-	virtual QString getID(void) const { return m_showerID; }
-	virtual QString getEnglishName(void) const { return m_designation.trimmed(); }
-	virtual QString getNameI18n(void) const	{ return q_(m_designation.trimmed()); }
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const { return m_position; }
-	virtual float getSelectPriority(const StelCore*) const { return -4.0; }
-	virtual Vec3f getInfoColor(void) const;
-	virtual double getAngularSize(const StelCore*) const { return 0.001; }
+	virtual QVariantMap getInfoMap(const StelCore *core) const Q_DECL_OVERRIDE;
+	virtual QString getType(void) const Q_DECL_OVERRIDE { return METEORSHOWER_TYPE; }
+	virtual QString getObjectType(void) const Q_DECL_OVERRIDE { return N_("meteor shower"); }
+	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE { return q_(getObjectType()); }
+	virtual QString getID(void) const Q_DECL_OVERRIDE { return m_showerID; }
+	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE { return m_designation.trimmed(); }
+	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE	{ return q_(m_designation.trimmed()); }
+	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const Q_DECL_OVERRIDE { return m_position; }
+	virtual float getSelectPriority(const StelCore*) const Q_DECL_OVERRIDE { return -4.0; }
+	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
+
+	//! @return approximate Julian day calculated from solar longitude (J2000)
+	static double JDfromSolarLongitude(double solarLong, int year);
 
 private:
 	MeteorShowersMgr* m_mgr;           //! MeteorShowersMgr instance
@@ -134,12 +134,13 @@ private:
 	// data from catalog
 	QString m_showerID;                //! The ID of the meteor shower
 	QString m_designation;             //! The designation of the meteor shower
+	QString m_IAUNumber;               //! IAU Number of the meteor shower
 	QList<Activity> m_activities;      //! Activity list
 	int m_speed;                       //! Speed of meteors
 	float m_rAlphaPeak;                //! R.A. for radiant of meteor shower on the peak day
 	float m_rDeltaPeak;                //! Dec. for radiant of meteor shower on the peak day
-	float m_driftAlpha;                //! Drift of R.A. for each day from peak
-	float m_driftDelta;                //! Drift of Dec. for each day from peak
+	float m_driftAlpha;                //! Drift of R.A. for each degree of solar longitude from peak
+	float m_driftDelta;                //! Drift of Dec. for each degree of solar longitude from peak
 	QString m_parentObj;               //! Parent object for meteor shower
 	float m_pidx;                      //! The population index
 	QList<Meteor::ColorPair> m_colors; //! <colorName, 0-100>
@@ -152,20 +153,16 @@ private:
 
 	QList<MeteorObj*> m_activeMeteors; //! List with all the active meteors
 
+	double eclJ2000;                   //! Ecliptic on J2000.0 epoch
+
 	//! Draws the radiant
 	void drawRadiant(StelCore* core);
 
 	//! Draws all active meteors
 	void drawMeteors(StelCore* core);
 
-	//! Calculates the ZHR using normal distribution
-	//! @param current julian day
-	int calculateZHR(const double& currentJD);
-
-	//! Gets the mean solar longitude for a specified date (approximate formula)
-	//! @param date QDate
-	//! @return solar longitude in degree
-	static QString getSolarLongitude(QDate date);
+	//! Calculates the ZHR using two types of distribution function
+	int calculateZHR(StelCore* core);
 };
 
 #endif /* METEORSHOWER_HPP */

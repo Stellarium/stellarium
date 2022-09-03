@@ -24,15 +24,14 @@
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelTranslator.hpp"
-#include "AsterismMgr.hpp"
+#include "StelUtils.hpp"
 
 #include <algorithm>
 #include <QString>
 #include <QTextStream>
 #include <QDebug>
 #include <QFontMetrics>
+#include <QIODevice>
 
 Vec3f Asterism::lineColor = Vec3f(0.4f,0.4f,0.8f);
 Vec3f Asterism::rayHelperColor = Vec3f(1.0f,1.0f,0.0f);
@@ -140,14 +139,14 @@ void Asterism::drawOptim(StelPainter& sPainter, const StelCore* core, const Sphe
 		if (lineFader.getInterstate()<=0.0001f)
 			return;
 
-		sPainter.setColor(lineColor[0], lineColor[1], lineColor[2], lineFader.getInterstate());
+		sPainter.setColor(lineColor, lineFader.getInterstate());
 	}
 	else
 	{
 		if (rayHelperFader.getInterstate()<=0.0001f)
 			return;
 
-		sPainter.setColor(rayHelperColor[0], rayHelperColor[1], rayHelperColor[2], rayHelperFader.getInterstate());
+		sPainter.setColor(rayHelperColor, rayHelperFader.getInterstate());
 	}
 
 	Vec3d star1;
@@ -171,18 +170,8 @@ void Asterism::drawName(StelPainter& sPainter) const
 		return;
 
 	QString name = getNameI18n();
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());
+	sPainter.setColor(labelColor, nameFader.getInterstate());
 	sPainter.drawText(static_cast<float>(XYname[0]), static_cast<float>(XYname[1]), name, 0., -sPainter.getFontMetrics().boundingRect(name).width()/2, 0, false);
-}
-
-const Asterism* Asterism::isStarIn(const StelObject* s) const
-{
-	for(unsigned int i=0;i<numberOfSegments*2;++i)
-	{
-		if (asterism[i]==s)
-			return this;
-	}
-	return Q_NULLPTR;
 }
 
 void Asterism::update(int deltaTime)
@@ -194,7 +183,7 @@ void Asterism::update(int deltaTime)
 
 QString Asterism::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
 {
-	Q_UNUSED(core);
+	Q_UNUSED(core)
 	QString str;
 	QTextStream oss(&str);
 
@@ -202,8 +191,9 @@ QString Asterism::getInfoString(const StelCore *core, const InfoStringGroup &fla
 		oss << "<h2>" << getNameI18n() << "</h2>";
 
 	if (flags&ObjectType)
-		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("asterism")) << "<br />";
+		oss << QString("%1: <b>%2</b>").arg(q_("Type"), getObjectTypeI18n()) << "<br />";
 
+	oss << getSolarLunarInfoString(core, flags);
 	postProcessInfoString(str, flags);
 
 	return str;

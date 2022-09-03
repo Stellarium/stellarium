@@ -33,13 +33,13 @@ class NavStarsWindow : public StelDialog
 
 public:
 	NavStarsWindow();
-	~NavStarsWindow();
+	~NavStarsWindow() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 
 protected:
-	void createDialogContent();
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 private:
 	Ui_navStarsWindowForm* ui;
@@ -51,15 +51,9 @@ private:
 private slots:
 	void saveSettings();
 	void resetSettings();
-	void setDisplayAtStartupEnabled(int checkState);
-	void setHighlightWhenVisibleEnabled(int checkState);
-	void setLimitInfoToNavStarsEnabled(int checkState);
-	void setUpperLimbEnabled(int checkState);
-	void setTabulatedDisplayEnabled(int checkState);
-	void setExtraDecimalsDisplayEnabled(int checkState);
-    
 	void populateNavigationalStarsSets();
 	void setNavigationalStarsSet(int nsSetID);
+	void populateToday();
 };
 
 

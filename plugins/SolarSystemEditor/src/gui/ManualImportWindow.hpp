@@ -39,10 +39,10 @@ class ManualImportWindow : public StelDialog
 	Q_OBJECT
 public:
 	ManualImportWindow();
-	virtual ~ManualImportWindow();
+	virtual ~ManualImportWindow() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 
 private slots:
 	//TODO: Object type
@@ -74,7 +74,7 @@ private:
 	bool verifyPowerOfTwo(int value);
 
 protected:
-	virtual void createDialogContent();
+	virtual void createDialogContent() Q_DECL_OVERRIDE;
 	Ui_manualImportWindow * ui;
 };
 

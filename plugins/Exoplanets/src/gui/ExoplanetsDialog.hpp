@@ -22,8 +22,18 @@
 #define EXOPLANETSDIALOG_HPP
 
 #include <QObject>
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
+#include <QtCharts/QtCharts>
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+using namespace QtCharts;
+#endif
+#include <QXYSeries>
+
 #include "StelDialog.hpp"
 #include "Exoplanets.hpp"
+#include "StelObjectMgr.hpp"
+#include "StelMovementMgr.hpp"
 
 class Ui_exoplanetsDialog;
 class QTimer;
@@ -37,26 +47,38 @@ class ExoplanetsDialog : public StelDialog
 	Q_OBJECT
 
 public:
+	//! @enum ExoplanetsColumns
+	enum ExoplanetsColumns {
+		EPSExoplanetName,
+		EPSExoplanetMass,
+		EPSExoplanetRadius,
+		EPSExoplanetPeriod,
+		EPSExoplanetSemiAxes,
+		EPSExoplanetEccentricity,
+		EPSExoplanetInclination,
+		EPSExoplanetAngleDistance,		
+		EPSStarMagnitude,
+		EPSStarRadius,
+		EPSExoplanetDetectionMethod,
+		EPSCount            //! total number of columns
+	};
+
 	ExoplanetsDialog();
-	~ExoplanetsDialog();
+	~ExoplanetsDialog() Q_DECL_OVERRIDE;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	void createDialogContent();
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 public slots:
-	void retranslate();
+	void retranslate() Q_DECL_OVERRIDE;
 	void refreshUpdateValues(void);
 
 private slots:
 	void setUpdateValues(int hours);
 	void setUpdatesEnabled(int checkState);
-	void setDistributionEnabled(int checkState);
-	void setTimelineEnabled(int checkState);
-	void setHabitableEnabled(int checkState);
 	void setDisplayAtStartupEnabled(int checkState);
-	void setDisplayShowExoplanetsButton(int checkState);
-	void setDisplayShowExoplanetsDesignations(int checkState);
+	void setDisplayShowExoplanetsButton(int checkState);		
 	void updateStateReceiver(Exoplanets::UpdateState state);
         void updateCompleteReceiver();
 	void restoreDefaults(void);
@@ -67,17 +89,46 @@ private slots:
 
 	void populateTemperatureScales();
 	void setTemperatureScale(int tScaleID);
+	void selectCurrentExoplanet(const QModelIndex &modelIndex);
 
 private:
         Ui_exoplanetsDialog* ui;
 	Exoplanets* ep;
+	class StelObjectMgr* objectMgr;
+	class StelMovementMgr* mvMgr;
 	void setAboutHtml(void);
 	void setInfoHtml(void);
 	void setWebsitesHtml(void);
 	void updateGuiFromSettings(void);
 	QTimer* updateTimer;
 
+	//! Update names for table columns
+	void setColumnNames();
+	void fillExoplanetsTable();
+
+	QStringList exoplanetsHeader;
 	typedef QPair<QString, int> axisPair;
+};
+
+// Reimplements the QTreeWidgetItem class to fix the sorting bug
+class EPSTreeWidgetItem : public QTreeWidgetItem
+{
+public:
+	EPSTreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
+	}
+
+private:
+	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
+	{
+		int column = treeWidget()->sortColumn();
+
+		if (column == ExoplanetsDialog::EPSExoplanetName || column == ExoplanetsDialog::EPSExoplanetDetectionMethod)
+			return text(column).toLower() < other.text(column).toLower();
+		else
+			return text(column).toFloat() < other.text(column).toFloat();
+	}
 };
 
 #endif // EXOPLANETSDIALOG_HPP

@@ -6,7 +6,7 @@ INCLUDE_DIRECTORIES(
      ${CMAKE_BINARY_DIR}/plugins/Satellites/src/gui
 )
 
-LINK_DIRECTORIES(/src)
+LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 
 SET(Satellites_SRCS
      gsatellite/gException.hpp
@@ -39,23 +39,36 @@ SET(Satellites_SRCS
      gui/SatellitesDialog.cpp
      gui/SatellitesImportDialog.hpp
      gui/SatellitesImportDialog.cpp
+     gui/SatellitesFilterDialog.hpp
+     gui/SatellitesFilterDialog.cpp
+     gui/SatellitesCommDialog.hpp
+     gui/SatellitesCommDialog.cpp
 )
 
 SET(SatellitesDialog_UIS
      gui/satellitesDialog.ui
      gui/satellitesImportDialog.ui
+     gui/satellitesFilterDialog.ui
+     gui/satellitesCommDialog.ui
 )
-QT5_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
 
 SET(Satellites_RES ../resources/Satellites.qrc)
-QT5_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
+     QT5_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
+ELSE()
+     QT_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
+     QT_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
+ENDIF()
 
 IF(ENABLE_TESTING)
     ADD_SUBDIRECTORY(test)
 ENDIF(ENABLE_TESTING)
 
 ADD_LIBRARY(Satellites-static STATIC ${Satellites_SRCS} ${Satellites_RES_CXX} ${SatellitesDialog_UIS_H})
-TARGET_LINK_LIBRARIES(Satellites-static Qt5::Core Qt5::Network Qt5::Widgets QXlsx Qt5::Compress)
+TARGET_LINK_LIBRARIES(Satellites-static Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets QXlsx
+    Qt${QT_VERSION_MAJOR}::Compress)
 # The library target "Satellites-static" has a default OUTPUT_NAME of "Satellites-static", so change it.
 SET_TARGET_PROPERTIES(Satellites-static PROPERTIES OUTPUT_NAME "Satellites")
 IF(MSVC)

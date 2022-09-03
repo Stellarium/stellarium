@@ -28,7 +28,7 @@
 #ifdef OPENGL_DEBUG_LOGGING
 #include <QOpenGLDebugMessage>
 #endif
-#include "StelUtils.hpp"
+#include "VecMath.hpp"
 
 class StelGLWidget;
 class StelGraphicsScene;
@@ -50,12 +50,13 @@ class StelMainView : public QGraphicsView
 	Q_OBJECT
 	Q_PROPERTY(bool fullScreen                 READ isFullScreen                  WRITE setFullScreen                 NOTIFY fullScreenChanged)
 	Q_PROPERTY(bool flagInvertScreenShotColors READ getFlagInvertScreenShotColors WRITE setFlagInvertScreenShotColors NOTIFY flagInvertScreenShotColorsChanged)
+	Q_PROPERTY(bool flagScreenshotDateFileName READ getFlagScreenshotDateFileName WRITE setFlagScreenshotDateFileName NOTIFY flagScreenshotDateFileNameChanged)
+	Q_PROPERTY(QString screenShotFileMask      READ getScreenshotFileMask         WRITE setScreenshotFileMask         NOTIFY screenshotFileMaskChanged)
 	Q_PROPERTY(bool flagOverwriteScreenshots   READ getFlagOverwriteScreenShots   WRITE setFlagOverwriteScreenShots   NOTIFY flagOverwriteScreenshotsChanged)
-#ifndef USE_OLD_QGLWIDGET
 	Q_PROPERTY(bool flagUseCustomScreenshotSize READ getFlagUseCustomScreenshotSize WRITE setFlagUseCustomScreenshotSize NOTIFY flagUseCustomScreenshotSizeChanged)
 	Q_PROPERTY(int  customScreenshotWidth      READ getCustomScreenshotWidth      WRITE setCustomScreenshotWidth      NOTIFY customScreenshotWidthChanged)
 	Q_PROPERTY(int  customScreenshotHeight     READ getCustomScreenshotHeight     WRITE setCustomScreenshotHeight     NOTIFY customScreenshotHeightChanged)
-#endif
+	Q_PROPERTY(int  screenshotDpi	           READ getScreenshotDpi              WRITE setScreenshotDpi              NOTIFY screenshotDpiChanged)
 	Q_PROPERTY(QString screenShotFormat        READ getScreenshotFormat           WRITE setScreenshotFormat           NOTIFY screenshotFormatChanged)
 	Q_PROPERTY(bool flagCursorTimeout          READ getFlagCursorTimeout          WRITE setFlagCursorTimeout          NOTIFY flagCursorTimeoutChanged)
 	Q_PROPERTY(double cursorTimeout            READ getCursorTimeout              WRITE setCursorTimeout              NOTIFY cursorTimeoutChanged)
@@ -139,31 +140,40 @@ public slots:
 	//! Set whether colors should be inverted when saving screenshot
 	void setFlagInvertScreenShotColors(bool b) {flagInvertScreenShotColors=b; emit flagInvertScreenShotColorsChanged(b);}
 
+	//! Get whether date and time should be used for screenshot naming
+	bool getFlagScreenshotDateFileName() const {return flagScreenshotDateFileName;}
+	//! Set whether date and time should be used for screenshot naming
+	void setFlagScreenshotDateFileName(bool b);
+	void setScreenshotFileMask(const QString filemask);
+	QString getScreenshotFileMask() const {return screenShotFileMask;}
+
 	//! Get whether existing files are overwritten when saving screenshot
 	bool getFlagOverwriteScreenShots() const {return flagOverwriteScreenshots;}
 	//! Set whether existing files are overwritten when saving screenshot
 	void setFlagOverwriteScreenShots(bool b) {flagOverwriteScreenshots=b; emit flagOverwriteScreenshotsChanged(b);}
 
-#ifndef USE_OLD_QGLWIDGET
 	//! Get whether custom size should be used for screenshots
 	bool getFlagUseCustomScreenshotSize() const {return flagUseCustomScreenshotSize;}
 	//! Set whether custom size should be used for screenshots
 	void setFlagUseCustomScreenshotSize(bool b) {flagUseCustomScreenshotSize=b; emit flagUseCustomScreenshotSizeChanged(b);}
 	//! Get custom screenshot width
 	int getCustomScreenshotWidth() const {return customScreenshotWidth;}
-	//! Set whether custom size should be used for screenshots
+	//! Set custom width for screenshots
 	void setCustomScreenshotWidth(int width) {customScreenshotWidth=width; emit customScreenshotWidthChanged(width);}
 	//! Get custom screenshot height
 	int getCustomScreenshotHeight() const {return customScreenshotHeight;}
-	//! Set whether custom size should be used for screenshots
+	//! Set custom height for screenshots
 	void setCustomScreenshotHeight(int height) {customScreenshotHeight=height; emit customScreenshotHeightChanged(height);}
+	//! Get screenshot DPI. This is only an entry in the screenshot image metadata. The raster content is not influenced.
+	int getScreenshotDpi() const {return screenshotDpi;}
+	//! Set screenshot DPI. This is only an entry in the screenshot image metadata. The raster content is not influenced.
+	void setScreenshotDpi(int dpi);
 	//! Get screenshot magnification. This should be used by StarMgr, text drawing and other elements which may
 	//! want to enlarge their output in screenshots to keep them visible.
 	float getCustomScreenshotMagnification() const {return customScreenshotMagnification;}
-#endif
 	//! Get the state of the mouse cursor timeout flag
 	bool getFlagCursorTimeout() const {return flagCursorTimeout;}
-	//! Get the state of the mouse cursor timeout flag
+	//! Set the state of the mouse cursor timeout flag
 	void setFlagCursorTimeout(bool b);
 	//! Get the mouse cursor timeout in seconds
 	double getCursorTimeout() const {return cursorTimeoutTimer->interval() / 1000.0;}
@@ -209,7 +219,11 @@ protected:
 	virtual void resizeEvent(QResizeEvent* event) Q_DECL_OVERRIDE;
 	//! Wake up mouse cursor (if it was hidden)
 	virtual void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+
+	bool eventFilter(QObject *obj, QEvent *event) override;
 signals:
+	//! emitted when window size has changed
+	void sizeChanged(const QSize &sz);
 	//! emitted when saveScreenShot is requested with saveScreenShot().
 	//! doScreenshot() does the actual work (it has to do it in the main
 	//! thread, where as saveScreenShot() might get called from another one.
@@ -226,17 +240,22 @@ signals:
 	void flagInvertScreenShotColorsChanged(bool b);
 	void flagOverwriteScreenshotsChanged(bool b);
 	void flagUseCustomScreenshotSizeChanged(bool use);
+	void flagScreenshotDateFileNameChanged(bool flag);
 	void customScreenshotWidthChanged(int width);
 	void customScreenshotHeightChanged(int height);
+	void screenshotDpiChanged(int dpi);
 	void screenshotFormatChanged(QString format);
+	void screenshotFileMaskChanged(QString format);
 
 	void skyBackgroundColorChanged(Vec3f color);
+
 	void flagCursorTimeoutChanged(bool b);
 	void cursorTimeoutChanged(double t);
 
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
+
 	void fpsTimerUpdate();
 	void hideCursor();
 
@@ -254,7 +273,7 @@ private:
 	//! Returns the desired OpenGL format settings,
 	//! on desktop this corresponds to a GL 2.1 context,
 	//! with 32bit RGBA buffer and 24/8 depth/stencil buffer
-	QSurfaceFormat getDesiredGLFormat() const;
+	static QSurfaceFormat getDesiredGLFormat(QSettings *configuration);
 	//! provide extended OpenGL diagnostics in logfile.
 	void dumpOpenGLdiagnostics() const;
 	//! Startup diagnostics, providing test for various circumstances of bad OS/OpenGL driver combinations
@@ -283,15 +302,16 @@ private:
 
 	bool updateQueued;
 	bool flagInvertScreenShotColors;
+	bool flagScreenshotDateFileName; //! if set to true, screenshot is named by date and time format
 	bool flagOverwriteScreenshots; //! if set to true, screenshot is named exactly screenShotPrefix.png and overwrites existing file
-#ifndef USE_OLD_QGLWIDGET
 	bool flagUseCustomScreenshotSize; //! if true, the next 2 values are observed for screenshots.
 	int customScreenshotWidth;            //! used when flagCustomResolutionScreenshots==true
 	int customScreenshotHeight;           //! used when flagCustomResolutionScreenshots==true
+	int screenshotDpi;                //! Image metadata entry for DPI. This does not influence the screenshot raster image content in any way, but some workflows like to have a configurable entry.
 	float customScreenshotMagnification;  //! tracks the magnification factor customScreenshotHeight/NormalWindowHeight
-#endif
 	QString screenShotPrefix;
 	QString screenShotFormat; //! file type like "png" or "jpg".
+	QString screenShotFileMask;
 	QString screenShotDir;
 
 	bool flagCursorTimeout;

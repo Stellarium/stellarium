@@ -26,17 +26,12 @@
 #include <QColorDialog>
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
 #include "ui_pulsarsDialog.h"
 #include "PulsarsDialog.hpp"
 #include "Pulsars.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelMovementMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelGui.hpp"
-#include "StelMainView.hpp"
-#include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
 PulsarsDialog::PulsarsDialog()
@@ -131,46 +126,34 @@ void PulsarsDialog::createDialogContent()
 
 void PulsarsDialog::setAboutHtml(void)
 {
-	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Pulsars Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + PULSARS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + PULSARS_PLUGIN_LICENSE + "</td></tr>";
-	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf</td></tr>";
 	html += "</table>";
 
 	html += "<p>" + q_("This plugin plots the position of various pulsars, with object information about each one.") + "</p>";
 	html += "<p>" + QString(q_("Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) (%1astro-ph/0412641%2))."))
-			.arg("<a href=\"http://arxiv.org/abs/astro-ph/0412641\">")
-			.arg("</a>") + "</p>";
+			.arg("<a href=\"http://arxiv.org/abs/astro-ph/0412641\">", "</a>") + "</p>";
 	html += "<p>" + q_("Current catalog contains info about %1 pulsars.").arg(psr->getCountPulsars()) + "</p>";
-	html += "<p>" + QString("<strong>%1:</strong> %2")
-			.arg(q_("Note"))
-			.arg(q_("pulsar identifiers have the prefix 'PSR'")) + "</p>";
+	html += "<p>" + QString("<strong>%1:</strong> %2").arg(q_("Note"), q_("pulsar identifiers have the prefix 'PSR'")) + "</p>";
 	html += "<h3>" + q_("Acknowledgment") + "</h3>";
 	html += "<p>" + q_("We thank the following people for their contribution and valuable comments:") + "</p><ul>";
-	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)")
-			.arg(q_("Vladimir Samodourov"))
-			.arg("http://www.prao.ru/")
-			.arg(q_("Pushchino Radio Astronomy Observatory"))
-			.arg(q_("in Russia")) + "</li>";
-	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)")
-			.arg(q_("Maciej Serylak"))
-			.arg("http://www.obs-nancay.fr/")
-			.arg(q_("Nancay Radioastronomical Observatory"))
-			.arg(q_("in France")) + "</li>";
-	html += "</ul><h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Pulsars plugin") + "</p>";
-	html += "<p><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Pulsars_plugin\">\\1</a>") + "</li>";
-	html += "</ul></p></body></html>";
+	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)").arg(
+				 q_("Vladimir Samodourov"),
+				 "http://www.prao.ru/",
+				 q_("Pushchino Radio Astronomy Observatory"),
+				 q_("in Russia")) + "</li>";
+	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)").arg(
+				 q_("Maciej Serylak"),
+				 "http://www.obs-nancay.fr/",
+				 q_("Nancay Radioastronomical Observatory"),
+				 q_("in France")) + "</li>";
+	html += "</ul>";
+
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Pulsars plugin");
+	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if(gui!=Q_NULLPTR)
@@ -248,7 +231,7 @@ void PulsarsDialog::setFilteringEnabled(int checkState)
 
 void PulsarsDialog::setFilterValue(double v)
 {
-	psr->setFilterValue((float)v);
+	psr->setFilterValue(static_cast<float>(v));
 }
 
 void PulsarsDialog::setDisplayAtStartupEnabled(int checkState)

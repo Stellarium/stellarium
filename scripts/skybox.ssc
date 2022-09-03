@@ -29,8 +29,10 @@
 // V2.10 2018-07-29 Include diameters on Sun and Moon.
 // V2.11 2020-04-06 Viewport now set by StelViewportMgr (Fix deprecated/obsolete API use.)
 // V2.12 2020-09-20 Suppress current vertical line.
+// V2.13 2021-01-16 Fixes for running on Linux
 
 // Not finding this environment variable sets DIR to empty string to make storage into default image dir, i.e., "C:/Users/YOU/Pictures/Stellarium"
+// For technical reasons, on Linux you MUST set this variable before running the script.
 DIR=core.getEnv("STEL_SKYBOX_DIR");
 // Base name for the tile textures. Defaults to Unity, can be overridden by setting environment variable STEL_SKYBOX_BASENAME
 BASENAME=core.getEnv("STEL_SKYBOX_BASENAME");
@@ -41,7 +43,7 @@ DATANAME=core.getEnv("STEL_SKYBOX_DATA");
 if (DATANAME.length == 0)
 	DATANAME="unityData.txt"
 
-OUTPUT_DATA=DIR + "\\" + DATANAME;
+OUTPUT_DATA=DIR + "/" + DATANAME;
 
 core.output("Writing images to " + DIR);
 core.output("Writing data to " + OUTPUT_DATA);
@@ -65,8 +67,8 @@ core.setTimeRate(0.0);
 // Keep view direction for restore after sky box tile creation.
 oldAlt=core.getViewAltitudeAngle();
 oldAz=core.getViewAzimuthAngle();
-oldVerticalLineVisible=GridlinesMgr.getFlagCurrentVerticalLine();
-GridlinesMgr.setFlagCurrentVerticalLine(false);
+oldVerticalLineVisible=GridLinesMgr.getFlagCurrentVerticalLine();
+GridLinesMgr.setFlagCurrentVerticalLine(false);
 
 // Make sure to use the right projection:
 core.setProjectionMode("ProjectionPerspective");
@@ -181,7 +183,7 @@ core.saveOutputAs(OUTPUT_DATA);
 // Reset atmosphere auto brightness computation.
 LandscapeMgr.setAtmosphereAverageLuminance(-1.0);
 
-GridlinesMgr.setFlagCurrentVerticalLine(oldVerticalLineVisible);
+GridLinesMgr.setFlagCurrentVerticalLine(oldVerticalLineVisible);
 core.moveToAltAzi(oldAlt, oldAz, 0);
 core.setTimeRate(oldTimeRate);
 

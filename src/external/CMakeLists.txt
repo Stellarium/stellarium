@@ -31,7 +31,7 @@ add_library(glues_stel STATIC EXCLUDE_FROM_ALL ${glues_lib_SRCS})
 target_include_directories(glues_stel PUBLIC glues_stel/source)
 #link the GUI module for the GL headers
 #our stripped version does not call any GL functions, but requires the GL types to be defined
-target_link_libraries(glues_stel Qt5::Gui)
+target_link_libraries(glues_stel Qt${QT_VERSION_MAJOR}::Gui)
 #turn off automoc, not needed here
 set_target_properties(glues_stel PROPERTIES AUTOMOC 0)
 SET_TARGET_PROPERTIES(glues_stel PROPERTIES FOLDER "src/external")
@@ -70,16 +70,6 @@ target_include_directories(zlib_stel PUBLIC zlib)
 set_target_properties(zlib_stel PROPERTIES AUTOMOC 0)
 SET_TARGET_PROPERTIES(zlib_stel PROPERTIES FOLDER "src/external")
 
-# QCustomPlot should not be unbundled, because upstream uses GPL 3, and
-# Stellarium uses GPL 2. Author of QCustomPlot has agreed for GPL 2+ for this.
-set(qcustomplot_SRCS
-    qcustomplot/qcustomplot.cpp
-    qcustomplot/qcustomplot.h
-    )
-add_library(qcustomplot_stel STATIC EXCLUDE_FROM_ALL ${qcustomplot_SRCS})
-target_link_libraries(qcustomplot_stel Qt5::PrintSupport Qt5::Widgets)
-SET_TARGET_PROPERTIES(qcustomplot_stel PROPERTIES FOLDER "src/external")
-
 ################################# INDI ################################
 IF(USE_PLUGIN_TELESCOPECONTROL)
     SET(PREFER_SYSTEM_INDILIB 1 CACHE BOOL
@@ -95,9 +85,9 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
         # Included CMakeLists.txt contains unrelated targets and dependencies of
         # them, therefore DOWNLOAD_ONLY and all the code below
         CPMAddPackage(NAME indiclient
-            URL https://github.com/indilib/indi/archive/v1.6.0.zip
+            URL https://github.com/indilib/indi/archive/v1.8.5.zip
             URL_HASH SHA256=6c89a515b916a833dfb6ffe53972143cbdd274099c9a0834b8a5440e780d9f4a
-            VERSION 1.6.0
+            VERSION 1.8.5
             DOWNLOAD_ONLY YES)
 
         # Installed version has /usr/include/libindi, move these headers to

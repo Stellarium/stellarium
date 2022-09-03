@@ -25,9 +25,14 @@
 #include <QSet>
 #include <QString>
 #include <QTextCharFormat>
+#include <QRegularExpression>
 
 class QTextDocument;
 
+//! This class is used to colorize the ECMAScript syntax elements in the Scripting Console.
+//! It marks keywords, function names, literals, etc.
+//! All StelModules and public slots from StelModules are colorized.
+//! Single non-module objects registered with the StelScriprMgr are not highlighted, but their methods are.
 class StelScriptSyntaxHighlighter : public QSyntaxHighlighter
 {
 	Q_OBJECT
@@ -37,25 +42,16 @@ public:
 	void setFormats(void);
 
 protected:
-	void highlightBlock(const QString &text);
+	virtual void highlightBlock(const QString &text) Q_DECL_OVERRIDE;
 
 private:
 	void locateFunctions( const QMetaObject* metaObject, QString scriptName );
 	struct HighlightingRule
 	{
-		QRegExp pattern;
+		QRegularExpression pattern;
 		QTextCharFormat* format;
 	};
 	QVector<HighlightingRule> highlightingRules;
-
-	QRegExp alertPat;
-	QRegExp identPat;
-	QRegExp functionPat;
-	QRegExp multiLineStartPat;
-	QString multiLineEnd;
-
-	QSet<QString> keywords;
-	QSet<QString> predefineds;
 	
 	QHash<QString,QSet<QString>> mod2funcs;
 	QString lastModule;
@@ -68,6 +64,9 @@ private:
 	QTextCharFormat commentFormat;
 	QTextCharFormat functionFormat;
 	QTextCharFormat noMethFormat;
+
+	static const QStringList keywords;
+	static const QStringList predefineds;
 };
 
 #endif // STELSCRIPTSYNTAXHIGHLIGHTER_HPP

@@ -1,0 +1,33 @@
+<h2>Testscene</h2>
+
+<p>This scene is mostly useful as testbed for your own developments. You should
+make a copy of the scene folder and modify at will, try material settings or
+some other details to find out how this plugin behaves. Then build and
+present your own work!</p>
+
+<h4>Coordinate and orientation tests</h4>
+
+<p>The pillars shown here, as seen from the structure's centre, provide an
+approximate view (not hi-precision!) to solstice/equinox sunrise/sunset
+positions in central European latitudes. The central pillars provide an
+east-west-line. The survey coordinate grid visible on the floor does not
+align with geographic north.  A rotation of -4.2 deg (test for meridian
+convergence) must be compensated, i.e., while the central pillars must
+absolutely and always point west-east, the grid lines hit the northern
+horizon slightly (4.2 deg) left of north!</p>
+
+<p>Walkaround ground coordinates (Ctrl-R, T) should display the coordinates
+visible along the south and west border of the ground.</p>
+
+<h4>Material test</h4>
+
+<p>This model is also used for testing the plugin's graphical capabilities. You
+can play with material parameters to create funny effects like
+semitransparent or glow-in-the-dark brick spheres.</p>
+
+<p>To test temporal features, the pillars and spheres are visible only from the
+years 2000 until 2020.  Edit the material file to change that!</p>
+
+<h4>Model</h4>
+<p>Testscene for Stellarium/scenery3d development. Export from
+SU8-Kerkythea-KT2OBJ.</p>

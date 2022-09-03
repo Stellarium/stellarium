@@ -53,21 +53,20 @@ class StelModule : public QObject
 	// Do not add Q_OBJECT here!!
 	// This make this class compiled by the Qt moc compiler and for some unknown reasons makes it impossible to dynamically
 	// load plugins on windows.
-	Q_ENUMS(StelModuleSelectAction)
-	Q_ENUMS(StelModuleActionName)
 
 public:
+	//! Constructor. Every derived class MUST call setObjectName(className) in its constructor.
 	StelModule();
 
-	virtual ~StelModule() {;}
+	virtual ~StelModule() Q_DECL_OVERRIDE {}
 
 	//! Initialize itself.
 	//! If the initialization takes significant time, the progress should be displayed on the loading bar.
 	virtual void init() = 0;
 
-	//! Called before the module will be delete, and before the openGL context is suppressed.
-	//! Deinitialize all openGL texture in this method.
-	virtual void deinit() {;}
+	//! Called before the module will be deleted, and before the OpenGL context is suppressed.
+	//! Deinitialize all OpenGL texture in this method.
+	virtual void deinit() {}
 
 	//! Return module-specific settings. This can be useful mostly by plugins which may want to keep their settings to their own files.
 	//! The default implementation returns a null pointer!
@@ -75,11 +74,11 @@ public:
 
 	//! Execute all the drawing functions for this module.
 	//! @param core the core to use for the drawing
-	virtual void draw(StelCore* core) {Q_UNUSED(core);}
+	virtual void draw(StelCore* core) {Q_UNUSED(core)}
 
 	//! Update the module with respect to the time.
 	//! @param deltaTime the time increment in second since last call.
-	virtual void update(double deltaTime) = 0;
+	virtual void update(double deltaTime) {Q_UNUSED(deltaTime)}
 
 	//! Get the version of the module, default is stellarium main version
 	virtual QString getModuleVersion() const;
@@ -92,26 +91,26 @@ public:
 
 	//! Handle mouse clicks. Please note that most of the interactions will be done through the GUI module.
 	//! @return set the event as accepted if it was intercepted
-	virtual void handleMouseClicks(class QMouseEvent*) {;}
+	virtual void handleMouseClicks(class QMouseEvent*) {}
 
 	//! Handle mouse wheel. Please note that most of the interactions will be done through the GUI module.
 	//! @return set the event as accepted if it was intercepted
-	virtual void handleMouseWheel(class QWheelEvent*) {;}
+	virtual void handleMouseWheel(class QWheelEvent*) {}
 
 	//! Handle mouse moves. Please note that most of the interactions will be done through the GUI module.
 	//! @return true if the event was intercepted
-	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b) {Q_UNUSED(x); Q_UNUSED(y); Q_UNUSED(b); return false;}
+	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b) {Q_UNUSED(x) Q_UNUSED(y) Q_UNUSED(b) return false;}
 
 	//! Handle key events. Please note that most of the interactions will be done through the GUI module.
 	//! @param e the Key event
 	//! @return set the event as accepted if it was intercepted
-	virtual void handleKeys(class QKeyEvent* e) {Q_UNUSED(e);}
+	virtual void handleKeys(class QKeyEvent* e) {Q_UNUSED(e)}
 
 	//! Handle pinch gesture events.
 	//! @param scale the value of the pinch gesture.
 	//! @param started define whether the pinch has just started.
 	//! @return true if the event was intercepted.
-	virtual bool handlePinch(qreal scale, bool started) {Q_UNUSED(scale); Q_UNUSED(started); return false;}
+	virtual bool handlePinch(qreal scale, bool started) {Q_UNUSED(scale) Q_UNUSED(started) return false;}
 
 	//! Enum used when selecting objects to define whether to add to, replace, or remove from the existing selection list.
 	enum StelModuleSelectAction
@@ -120,9 +119,7 @@ public:
 		ReplaceSelection,	//!< Set the StelObject as the new list of selected ones.
 		RemoveFromSelection	//!< Subtract the StelObject from the current list of selected ones.
 	};
-	#if QT_VERSION >= 0x050500
 	Q_ENUM(StelModuleSelectAction)
-	#endif
 	//! Define the possible action for which an order is defined
 	enum StelModuleActionName
 	{
@@ -132,21 +129,19 @@ public:
 		ActionHandleMouseMoves,  //!< Action associated to the handleMouseMoves() method
 		ActionHandleKeys         //!< Action associated to the handleKeys() method
 	};
-	#if QT_VERSION >= 0x050500
 	Q_ENUM(StelModuleActionName)
-	#endif
 	//! Return the value defining the order of call for the given action
 	//! For example if stars.callOrder[ActionDraw] == 10 and constellation.callOrder[ActionDraw] == 11,
 	//! the stars module will be drawn before the constellations
 	//! @param actionName the name of the action for which we want the call order
 	//! @return the value defining the order. The closer to 0 the earlier the module's action will be called
-	virtual double getCallOrder(StelModuleActionName actionName) const {Q_UNUSED(actionName); return 0;}
+	virtual double getCallOrder(StelModuleActionName actionName) const {Q_UNUSED(actionName) return 0;}
 
 	//! Detect or show the configuration GUI elements for the module.  This is to be used with
 	//! plugins to display a configuration dialog from the plugin list window.
 	//! @param show if true, make the configuration GUI visible.  If false, hide the config GUI if there is one.
 	//! @return true if the module has a configuration GUI, else false.
-	virtual bool configureGui(bool show=true) {Q_UNUSED(show); return false;}
+	virtual bool configureGui(bool show=true) {Q_UNUSED(show) return false;}
 
 protected:
 	//! convenience methods to add an action (call to slot) to the StelActionMgr object.

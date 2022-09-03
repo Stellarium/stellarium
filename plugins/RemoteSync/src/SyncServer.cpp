@@ -31,7 +31,7 @@ Q_LOGGING_CATEGORY(syncServer,"stel.plugin.remoteSync.server")
 
 using namespace SyncProtocol;
 
-SyncServer::SyncServer(QObject* parent)
+SyncServer::SyncServer(QObject* parent, bool allowVersionMismatch)
 	: QObject(parent), stopping(false), timeoutTimerId(-1)
 {
 	qserver = new QTcpServer(this);
@@ -41,7 +41,7 @@ SyncServer::SyncServer(QObject* parent)
 	//create message handlers
 	handlerList.resize(MSGTYPE_SIZE);
 	handlerList[ERROR] =  new ServerErrorHandler();
-	handlerList[CLIENT_CHALLENGE_RESPONSE] = new ServerAuthHandler(this, false);
+	handlerList[CLIENT_CHALLENGE_RESPONSE] = new ServerAuthHandler(this, allowVersionMismatch);
 	handlerList[ALIVE] = new ServerAliveHandler();
 }
 
@@ -50,7 +50,7 @@ SyncServer::~SyncServer()
 	stop();
 
 	//delete handlers
-	for (auto* h : handlerList)
+	for (auto* h : qAsConst(handlerList))
 	{
 		if(h)
 			delete h;
@@ -107,7 +107,7 @@ void SyncServer::broadcastMessage(const SyncMessage &msg)
 		return;
 	}
 
-	for (auto* client : clients)
+	for (auto* client : qAsConst(clients))
 	{
 		if(client->isAuthenticated())
 		{
@@ -126,7 +126,7 @@ void SyncServer::stop()
 		qserver->close();
 
 		//delete senders
-		for (auto* s : senderList)
+		for (auto* s : qAsConst(senderList))
 		{
 			if(s)
 				delete s;
@@ -148,7 +148,7 @@ void SyncServer::stop()
 
 void SyncServer::update()
 {
-	for (auto* s : senderList)
+	for (auto* s : qAsConst(senderList))
 	{
 		s->update();
 	}
@@ -166,7 +166,7 @@ void SyncServer::timerEvent(QTimerEvent *evt)
 void SyncServer::checkTimeouts()
 {
 	//iterate over the connected clients
-	for (auto* client : clients)
+	for (auto* client : qAsConst(clients))
 	{
 		client->checkTimeout();
 	}
@@ -213,7 +213,7 @@ void SyncServer::handleNewConnection()
 void SyncServer::clientAuthenticated(SyncRemotePeer &peer)
 {
 	//we have to send the client the current app state
-	for (auto* s : senderList)
+	for (auto* s : qAsConst(senderList))
 	{
 		s->newClientConnected(peer);
 	}
@@ -235,6 +235,6 @@ void SyncServer::clientDisconnected(bool clean)
 
 void SyncServer::connectionError(QAbstractSocket::SocketError err)
 {
-	Q_UNUSED(err);
+	Q_UNUSED(err)
 	qCWarning(syncServer)<<"Could not accept an incoming connection, socket error is: "<<qserver->errorString();
 }

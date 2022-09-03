@@ -19,9 +19,6 @@
 
 #include "SyncClient.hpp"
 #include "SyncClientHandlers.hpp"
-#include "SyncMessages.hpp"
-
-#include "StelTranslator.hpp"
 
 #include <QDateTime>
 #include <QTcpSocket>
@@ -72,7 +69,7 @@ SyncClient::~SyncClient()
 	delete server;
 
 	//delete handlers
-	for (auto* h : handlerList)
+	for (auto* h : qAsConst(handlerList))
 	{
 		if(h)
 			delete h;

@@ -29,9 +29,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelPropertyMgr.hpp"
-#include "StelScriptMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
-#include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 
 #include <QJsonDocument>
@@ -54,7 +52,9 @@ MainService::MainService(QObject *parent)
 	objMgr = &StelApp::getInstance().getStelObjectMgr();
 	mvmgr = GETSTELMODULE(StelMovementMgr);
 	propMgr = StelApp::getInstance().getStelPropertyManager();
+#ifdef ENABLE_SCRIPTING
 	scriptMgr = &StelApp::getInstance().getScriptMgr();
+#endif
 	skyCulMgr = &StelApp::getInstance().getSkyCultureMgr();
 
 	connect(actionMgr,SIGNAL(actionToggled(QString,bool)),this,SLOT(actionToggled(QString,bool)));
@@ -123,7 +123,7 @@ void MainService::get(const QByteArray& operation, const APIParameters &paramete
 			obj2.insert("latitude",static_cast<double>(loc.latitude));
 			obj2.insert("longitude",static_cast<double>(loc.longitude));
 			obj2.insert("altitude",loc.altitude);
-			obj2.insert("country",loc.country);
+			obj2.insert("region",loc.region);
 			obj2.insert("state",loc.state);
 			obj2.insert("landscapeKey",loc.landscapeKey);
 			obj.insert("location",obj2);
@@ -274,7 +274,7 @@ void MainService::get(const QByteArray& operation, const APIParameters &paramete
 
 void MainService::post(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
-	Q_UNUSED(data);
+	Q_UNUSED(data)
 
 	if(operation == "time")
 	{
@@ -330,12 +330,12 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 	else if(operation == "focus")
 	{
 		QString target = QString::fromUtf8(parameters.value("target"));
-		SelectionMode selMode = Center;
+		MainService::SelectionMode selMode = MainService::Center;
 
 		if(parameters.value("mode") == "zoom")
-			selMode = Zoom;
+			selMode = MainService::Zoom;
 		else if(parameters.value("mode") == "mark")
-			selMode = Mark;
+			selMode = MainService::Mark;
 
 		//check target string first
 		if(target.isEmpty())
@@ -373,7 +373,7 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 		QMetaObject::invokeMethod(this,"focusObject",SERVICE_DEFAULT_INVOKETYPE,
 					  Q_RETURN_ARG(bool,result),
 					  Q_ARG(QString,target),
-					  Q_ARG(SelectionMode,selMode));
+					  Q_ARG(MainService::SelectionMode,selMode));
 
 		response.setData(result ? "true" : "false");
 	}
@@ -534,7 +534,7 @@ QString MainService::getInfoString()
 	return selectedObject->getInfoString(core,StelObject::AllInfo | StelObject::NoFont);
 }
 
-bool MainService::focusObject(const QString &name, SelectionMode mode)
+bool MainService::focusObject(const QString &name, MainService::SelectionMode mode)
 {
 	//StelDialog::gotoObject
 

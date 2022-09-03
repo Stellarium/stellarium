@@ -20,6 +20,7 @@
 #include "StelHips.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "Planet.hpp"
 #include "StelPainter.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelUtils.hpp"
@@ -49,7 +50,7 @@ public:
 
 static QString getExt(const QString& format)
 {
-	for (auto ext : format.split(' '))
+	for (auto &ext : format.split(' '))
 	{
 		if (ext == "jpeg") return "jpg";
 		if (ext == "png") return "png";
@@ -64,25 +65,25 @@ QUrl HipsSurvey::getUrlFor(const QString& path) const
 	if (base.scheme().isEmpty()) base.setScheme("file");
 	if (base.scheme() != "file")
 		args += QString("?v=%1").arg(static_cast<int>(releaseDate));
-	return QString("%1/%2%3").arg(base.url()).arg(path).arg(args);
+	return QString("%1/%2%3").arg(base.url(), path, args);
 }
 
 HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 	url(url_),
 	releaseDate(releaseDate_),
 	planetarySurvey(false),
-	tiles(1000),
+	tiles(1000 * 512 * 512), // Cache max cost in pixels (enough for 1000 512x512 tiles).
 	nbVisibleTiles(0),
 	nbLoadedTiles(0)
 {
-	// Immediatly download the properties.
+	// Immediately download the properties.
 	QNetworkRequest req = QNetworkRequest(getUrlFor("properties"));
 	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
 	req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 	QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	connect(networkReply, &QNetworkReply::finished, [&, networkReply] {
+	connect(networkReply, &QNetworkReply::finished, this, [&, networkReply] {
 		QByteArray data = networkReply->readAll();
-		for (QString line : data.split('\n'))
+		for (const QString line : data.split('\n'))
 		{
 			if (line.startsWith("#")) continue;
 			QString key = line.section("=", 0, 0).trimmed();
@@ -95,10 +96,11 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 			// XXX: StelUtils::getJulianDayFromISO8601String does not work
 			// without the seconds!
 			QDateTime date = QDateTime::fromString(properties["hips_release_date"].toString(), Qt::ISODate);
+			date.setTimeSpec(Qt::UTC);
 			releaseDate = StelUtils::qDateTimeToJd(date);
 		}
 		if (properties.contains("hips_frame"))
-			hipsFrame = properties["hips_frame"].toString();
+			hipsFrame = properties["hips_frame"].toString().toLower();
 
 		QStringList DSSSurveys;
 		DSSSurveys << "equatorial" << "galactic" << "ecliptic"; // HiPS frames for DSS surveys
@@ -169,7 +171,7 @@ bool HipsSurvey::getAllsky()
 		emit statusChanged();
 
 		updateProgressBar(0, 100);
-		connect(networkReply, &QNetworkReply::downloadProgress, [this](qint64 received, qint64 total) {
+		connect(networkReply, &QNetworkReply::downloadProgress, this, [this](qint64 received, qint64 total) {
 			updateProgressBar(static_cast<int>(received), static_cast<int>(total));
 		});
 	}
@@ -185,7 +187,7 @@ bool HipsSurvey::getAllsky()
 		networkReply->deleteLater();
 		networkReply = Q_NULLPTR;
 		emit statusChanged();
-	};
+	}
 	return !allsky.isNull();
 }
 
@@ -198,7 +200,7 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 {
 	// We don't draw anything until we get the properties file and the
 	// allsky texture (if available).
-	bool outside = (angle == 2.0 * M_PI);
+	const bool outside = qFuzzyCompare(angle, 2.0 * M_PI);
 	if (properties.isEmpty()) return;
 	if (!getAllsky()) return;
 	if (fader.getInterstate() == 0.0f) return;
@@ -213,6 +215,28 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 		frame = StelCore::FrameJ2000;
 	if (frame)
 		sPainter->setProjector(core->getProjection(frame));
+
+	Vec3d obsVelocity(0.);
+	// Aberration: retrieve observer velocity to apply, and transform it to frametype-dependent orientation
+	if (core->getUseAberration())
+	{
+		static const Mat4d matVsop87ToGalactic=StelCore::matJ2000ToGalactic*StelCore::matVsop87ToJ2000;
+		obsVelocity=core->getCurrentPlanet()->getHeliocentricEclipticVelocity(); // in VSOP87 frame...
+		switch (frame){
+			case StelCore::FrameJ2000:
+				StelCore::matVsop87ToJ2000.transfo(obsVelocity);
+				break;
+			case StelCore::FrameGalactic:
+				matVsop87ToGalactic.transfo(obsVelocity);
+				break;
+			case StelCore::FrameHeliocentricEclipticJ2000:
+				// do nothing. Assume this frame is equal to VSOP87 (which is slightly incorrect!)
+				break;
+			default:
+				qDebug() << "HiPS: Unexpected Frame: " << hipsFrame;
+		}
+		obsVelocity *= core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+	}
 
 	// Compute the maximum visible level for the tiles according to the view resolution.
 	// We know that each tile at level L represents an angle of 90 / 2^L
@@ -233,7 +257,7 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	const SphericalCap& viewportRegion = sPainter->getProjector()->getBoundingCap();
 	for (int i = 0; i < 12; i++)
 	{
-		drawTile(0, i, drawOrder, splitOrder, outside, viewportRegion, sPainter, callback);
+		drawTile(0, i, drawOrder, splitOrder, outside, viewportRegion, sPainter, obsVelocity, callback);
 	}
 
 	updateProgressBar(nbLoadedTiles, nbVisibleTiles);
@@ -282,7 +306,8 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 			QImage image = allsky.copy(x, y, s, s);
 			tile->allsky = texMgr.createTexture(image, StelTexture::StelTextureParams(true));
 		}
-		tiles.insert(uid, tile);
+		int tileWidth = getPropertyInt("hips_tile_width", 512);
+		tiles.insert(uid, tile, tileWidth * tileWidth);
 	}
 	return tile;
 }
@@ -314,7 +339,7 @@ static bool isClipped(int n, double (*pos)[4])
 
 
 void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, bool outside,
-						  const SphericalCap& viewportShape, StelPainter* sPainter, DrawCallback callback)
+						  const SphericalCap& viewportShape, StelPainter* sPainter, Vec3d observerVelocity, DrawCallback callback)
 {
 	Vec3d pos;
 	Mat3d mat3;
@@ -408,7 +433,7 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 		sPainter->setColor(1, 1, 1, 1);
 	}
 	sPainter->setCullFace(true);
-	nb = fillArrays(order, pix, drawOrder, splitOrder, outside, sPainter,
+	nb = fillArrays(order, pix, drawOrder, splitOrder, outside, sPainter, observerVelocity,
 					vertsArray, texArray, indicesArray);
 	if (!callback) {
 		sPainter->setArrays(vertsArray.constData(), texArray.constData());
@@ -424,15 +449,15 @@ skip_render:
 		for (int i = 0; i < 4; i++)
 		{
 			drawTile(order + 1, pix * 4 + i, drawOrder, splitOrder, outside,
-					 viewportShape, sPainter, callback);
+					 viewportShape, sPainter, observerVelocity, callback);
 		}
 	}
 	// Restore the painter color.
-	sPainter->setColor(color[0], color[1], color[2], color[3]);
+	sPainter->setColor(color);
 }
 
 int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
-						   bool outside, StelPainter* sPainter,
+						   bool outside, StelPainter* sPainter, Vec3d observerVelocity,
 						   QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices)
 {
 	Q_UNUSED(sPainter)
@@ -455,6 +480,14 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 			texPos = Vec2f(static_cast<float>(i) / gridSize, static_cast<float>(j) / gridSize);
 			pos = mat3 * Vec3d(1.0 - static_cast<double>(j) / gridSize, static_cast<double>(i) / gridSize, 1.0);
 			healpix_xy2vec(pos.v, pos.v);
+
+			// Aberration: Assume pos=normalized vertex position on the sphere in HiPS frame equatorial/ecliptical/galactic. Velocity is already transformed to frame
+			if (!planetarySurvey)
+			{
+				pos+=observerVelocity;
+				pos.normalize();
+			}
+
 			verts << pos;
 			tex << texPos;
 		}
@@ -479,17 +512,20 @@ QList<HipsSurveyP> HipsSurvey::parseHipslist(const QString& data)
 	QList<HipsSurveyP> ret;
 	QString url;
 	double releaseDate = 0;
-	for (auto line : data.split('\n'))
+	for (auto &line : data.split('\n'))
 	{
 		if (line.startsWith('#')) continue;
 		QString key = line.section("=", 0, 0).trimmed();
 		QString value = line.section("=", 1, -1).trimmed();
 		if (key == "hips_service_url") url = value;
+		// special case: https://github.com/Stellarium/stellarium/issues/1276
+		if (url.contains("data.stellarium.org/surveys/dss")) continue;
 		if (key == "hips_release_date")
 		{
 			// XXX: StelUtils::getJulianDayFromISO8601String does not work
 			// without the seconds!
 			QDateTime date = QDateTime::fromString(value, Qt::ISODate);
+			date.setTimeSpec(Qt::UTC);
 			releaseDate = StelUtils::qDateTimeToJd(date);
 		}
 		if (key == "hips_status" && value.split(' ').contains("public")) {

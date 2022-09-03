@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <stdexcept>
 #include <QDir>
 #include <QJsonDocument>
 #include <QSettings>
@@ -33,6 +34,7 @@
 #include "StelGui.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelProgressController.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelUtils.hpp"
 #include "SporadicMeteorMgr.hpp"
 
@@ -49,13 +51,14 @@ MeteorShowersMgr::MeteorShowersMgr()
 	, m_enableMarker(true)
 	, m_showEnableButton(true)
 	, m_showSearchButton(true)
-	, m_isUpdating(false)
+	//, m_isUpdating(false)
 	, m_enableAutoUpdates(true)
 	, m_updateFrequencyHours(0)
-	, m_statusOfLastUpdate(OUTDATED)
+	, m_updateState(CompleteNoUpdates)
 	, m_networkManager(Q_NULLPTR)
 	, m_downloadReply(Q_NULLPTR)
 	, m_progressBar(Q_NULLPTR)
+	, m_updateTimer(Q_NULLPTR)
 {
 	setObjectName("MeteorShowers");
 }
@@ -82,22 +85,22 @@ void MeteorShowersMgr::init()
 	StelFileMgr::makeSureDirExistsAndIsWritable(userDir);
 
 	// Loads the JSON catalog
-	m_catalogPath = userDir + "/showers.json";
+	m_catalogPath = userDir + "/MeteorShowers.json";
 	if (!loadCatalog(m_catalogPath))
 	{
 		displayMessage(q_("The current catalog of Meteor Showers is invalid!"), "#bb0000");
 		restoreDefaultCatalog(m_catalogPath);
 	}
 
-	// Sets up the download manager
-	m_networkManager = StelApp::getInstance().getNetworkAccessManager();
-
-	// every 5 min, check if it's time to update
-	QTimer* updateTimer = new QTimer(this);
-	updateTimer->setInterval(300000);
-	connect(updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdates()));
-	updateTimer->start();
-	checkForUpdates();
+	// Set up download manager and the update schedule
+	//m_networkManager = StelApp::getInstance().getNetworkAccessManager();
+	m_networkManager = new QNetworkAccessManager(this);
+	m_updateState = CompleteNoUpdates;
+	m_updateTimer = new QTimer(this);
+	m_updateTimer->setSingleShot(false);   // recurring check for update
+	m_updateTimer->setInterval(300000);    // every 5 min, check if it's time to update
+	connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdates()));
+	m_updateTimer->start();
 
 	// always check if we are on Earth
 	StelCore* core = StelApp::getInstance().getCore();
@@ -146,7 +149,7 @@ void MeteorShowersMgr::createActions()
 	addAction("actionShow_MeteorShowers",               msGroup, N_("Toggle meteor showers"), this,           "enablePlugin", "Ctrl+Shift+M");
 	addAction("actionShow_MeteorShowers_labels",        msGroup, N_("Toggle radiant labels"), this,           "enableLabels", "Shift+M");
 	addAction("actionShow_MeteorShowers_config_dialog", msGroup, N_("Show settings dialog"),  m_configDialog, "visible",      "Ctrl+Alt+Shift+M");
-	addAction("actionShow_MeteorShowers_search_dialog", msGroup, N_("Show search dialog"),    m_searchDialog, "visible",      "Ctrl+Alt+M");
+	addAction("actionShow_MeteorShowers_search_dialog", msGroup, N_("Show meteor showers search dialog"),    m_searchDialog, "visible",      "Ctrl+Alt+M");
 }
 
 void MeteorShowersMgr::loadConfig()
@@ -169,9 +172,12 @@ void MeteorShowersMgr::loadConfig()
 	setEnableMarker(m_conf->value(MS_CONFIG_PREFIX + "/flag_radiant_marker", true).toBool());
 	setUpdateFrequencyHours(m_conf->value(MS_CONFIG_PREFIX + "/update_frequency_hours", 720).toInt());
 	setEnableAutoUpdates(m_conf->value(MS_CONFIG_PREFIX + "/automatic_updates_enabled", true).toBool());
-	setUrl(m_conf->value(MS_CONFIG_PREFIX + "/url", "https://stellarium.org/json/showers.json").toString());
-	setLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update", "2015-07-01T00:00:00").toDateTime());
-	setStatusOfLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update_status", 0).toInt());	
+	if (m_conf->contains(MS_CONFIG_PREFIX + "/url"))
+	{
+		m_conf->remove(MS_CONFIG_PREFIX + "/url");
+	}
+	setUrl(m_conf->value(MS_CONFIG_PREFIX + "/url", "https://stellarium.org/json/MeteorShowers.json").toString());
+	setLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update", "2022-04-27T00:00:00").toDateTime());
 }
 
 void MeteorShowersMgr::saveSettings()
@@ -222,6 +228,7 @@ bool MeteorShowersMgr::loadCatalog(const QString& jsonPath)
 
 	QVariantMap map = json["showers"].toObject().toVariantMap();
 	m_meteorShowers->loadMeteorShowers(map);
+	qDebug() << "[MeteorShowersMgr] Version of the format of the catalog:" << json["version"].toInt();
 
 	return true;
 }
@@ -249,7 +256,7 @@ bool MeteorShowersMgr::restoreDefaultCatalog(const QString& destination)
 		return false;
 	}
 
-	QFile defaultJson(":/MeteorShowers/showers.json");
+	QFile defaultJson(":/MeteorShowers/MeteorShowers.json");
 	if (!defaultJson.copy(destination))
 	{
 		qWarning() << "[MeteorShowersMgr] Cannot copy the default catalog!";
@@ -295,7 +302,11 @@ void MeteorShowersMgr::repaint()
 
 void MeteorShowersMgr::checkForUpdates()
 {
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	if (m_enableAutoUpdates && m_lastUpdate.addSecs(static_cast<qint64>(m_updateFrequencyHours) * 3600) <= QDateTime::currentDateTime())
+#else
 	if (m_enableAutoUpdates && m_lastUpdate.addSecs(static_cast<qint64>(m_updateFrequencyHours) * 3600) <= QDateTime::currentDateTime() && m_networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
+#endif
 	{
 		updateCatalog();
 	}
@@ -340,11 +351,13 @@ void MeteorShowersMgr::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(m_url));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+#endif
 	m_downloadReply = m_networkManager->get(request);
 	connect(m_downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
-
-	setStatusOfLastUpdate(UPDATING);
+	m_updateState = MeteorShowersMgr::Updating;
+	emit updateStateChanged(m_updateState);
 }
 
 void MeteorShowersMgr::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
@@ -360,8 +373,8 @@ void MeteorShowersMgr::updateDownloadProgress(qint64 bytesReceived, qint64 bytes
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = static_cast<qint64>(std::floor(bytesReceived / 1024.));
-			bytesTotal    = static_cast<qint64>(std::floor(bytesTotal / 1024.));
+			bytesReceived = static_cast<qint64>(std::floor(static_cast<double>(bytesReceived) / 1024.));
+			bytesTotal    = static_cast<qint64>(std::floor(static_cast<double>(bytesTotal)    / 1024.));
 		}
 		currentValue = static_cast<int>(bytesReceived);
 		endValue = static_cast<int>(bytesTotal);
@@ -394,54 +407,43 @@ void MeteorShowersMgr::downloadComplete(QNetworkReply *reply)
 	// download completed successfully.
 	try
 	{
-		QString tempPath(m_catalogPath + "_new.json");
-		QFile newCatalog(tempPath);
-		newCatalog.remove(); // always overwrites
-		if (!newCatalog.open(QIODevice::ReadWrite | QIODevice::Text))
+		QString jsonFilePath = StelFileMgr::findFile("modules/MeteorShowers", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/MeteorShowers.json";
+		QFile jsonFile(jsonFilePath);
+		if (jsonFile.exists())
+			jsonFile.remove();
+
+		if (jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
 		{
-			qWarning() << "[MeteorShowersMgr] Cannot write the downloaded catalog!";
-			setStatusOfLastUpdate(FAILED);
-			return;
+			jsonFile.write(reply->readAll());
+			jsonFile.close();
 		}
 
-		newCatalog.write(reply->readAll());
-		newCatalog.close();
-
-		if (!loadCatalog(tempPath))
-		{
-			setStatusOfLastUpdate(FAILED);
-			return;
-		}
-
-		QFile(m_catalogPath).remove();
-		newCatalog.rename(tempPath.remove("_new.json"));
-
-		qDebug() << "[MeteorShowersMgr] The catalog was updated!";
-		setStatusOfLastUpdate(UPDATED);
+		m_updateState = MeteorShowersMgr::CompleteUpdates;
+		qDebug() << "[MeteorShowersMgr] Updating Meteor Showers catalog is complete...";
+		m_lastUpdate = QDateTime::currentDateTime();
+		m_conf->setValue("MeteorShowers/last_update", m_lastUpdate.toString(Qt::ISODate));
 	}
 	catch (std::runtime_error &e)
 	{
 		qWarning() << "[MeteorShowersMgr] Cannot write JSON data to file:" << e.what();
-		setStatusOfLastUpdate(FAILED);
+		m_updateState = MeteorShowersMgr::DownloadError;
 	}
 
+	emit updateStateChanged(m_updateState);
+	emit jsonUpdateComplete();
 	reply->deleteLater();
 	m_downloadReply = Q_NULLPTR;
 }
 
 void MeteorShowersMgr::updateCatalog()
 {
-	if (m_statusOfLastUpdate == UPDATING)
+	if (m_updateState==MeteorShowersMgr::Updating)
 	{
-		qWarning() << "[MeteorShowersMgr] The catalog is being updated already!";
+		qWarning() << "[MeteorShowersMgr] already updating...  will not start again current update is complete.";
 		return;
 	}
 
-	qDebug() << "[MeteorShowersMgr] Starting to update the catalog...";
-	setStatusOfLastUpdate(UPDATING);
-
-	setLastUpdate(QDateTime::currentDateTime());
-
+	qDebug() << "[MeteorShowersMgr] Updating meteor showers catalog...";
 	startDownload(m_url);
 }
 
@@ -476,7 +478,9 @@ void MeteorShowersMgr::setShowEnableButton(const bool& show)
 								  QPixmap(":/MeteorShowers/btMS-on.png"),
 								  QPixmap(":/MeteorShowers/btMS-off.png"),
 								  QPixmap(":/graphicGui/miscGlow32x32.png"),
-								  "actionShow_MeteorShowers");
+								  "actionShow_MeteorShowers",
+								  false,
+								  "actionShow_MeteorShowers_config_dialog");
 			gui->getButtonBar()->addButton(enablePlugin, "065-pluginsGroup");
 		}
 		else
@@ -597,16 +601,6 @@ void MeteorShowersMgr::setLastUpdate(const QDateTime &datetime)
 	m_conf->setValue(MS_CONFIG_PREFIX + "/last_update", m_lastUpdate.toString(Qt::ISODate));
 }
 
-void MeteorShowersMgr::setStatusOfLastUpdate(const int &downloadStatus)
-{
-	m_statusOfLastUpdate = static_cast<DownloadStatus>(downloadStatus);
-	if (m_statusOfLastUpdate != UPDATING)
-	{
-		m_conf->setValue(MS_CONFIG_PREFIX + "/last_update_status", downloadStatus);
-	}
-	emit(downloadStatusChanged(m_statusOfLastUpdate));
-}
-
 QDateTime MeteorShowersMgr::getNextUpdate()
 {
 	return m_lastUpdate.addSecs(m_updateFrequencyHours * 3600);
@@ -638,8 +632,8 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 	info.id = "MeteorShowers";
 	info.displayedName = N_("Meteor Showers");
 	info.authors = "Marcos Cardinot";
-	info.contact = "https://github.com/Stellarium/stellarium";
-	info.acknowledgements = N_("This plugin was created in the 2013 campaign of the ESA Summer of Code in Space programme.");
+	info.contact = STELLARIUM_DEV_URL;
+	info.acknowledgements = N_("This plugin was initially created in the 2013 campaign of the ESA Summer of Code in Space programme.");
 	info.description = N_(
 	"<p>"
 		"This plugin enables you to simulate periodic meteor showers and "
@@ -649,28 +643,7 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 		"By a single click on the radiant's marker, you can see all the "
 		"details about its position and activity. Most data used on this "
 		"plugin comes from the official <a href=\"http://imo.net\">International "
-		"Meteor Organization</a> catalog."
-	"</p>"
-	"<p>"
-		"It has three types of markers:"
-		"<ul>"
-			"<li>"
-				"<b>Confirmed:</b> "
-				"the radiant is active and its data was confirmed."
-				" Thus, this is a historical (really occurred in the past) or predicted"
-				" meteor shower."
-			"</li>"
-			"<li>"
-				"<b>Generic:</b> "
-				"the radiant is active, but its data was not confirmed."
-				" It means that this can occur in real life, but that we do not have proper"
-				" data about its activity for the current year."
-			"</li>"
-			"<li>"
-				"<b>Inactive:</b> "
-				"the radiant is inactive for the current sky date."
-			"</li>"
-		"</ul>"
+		"Meteor Organization</a> catalog and <a href=\"https://www.ta3.sk/IAUC22DB/MDC2007/\">IAU Meteor Data Center</a>."
 	"</p>");
 	info.version = METEORSHOWERS_PLUGIN_VERSION;
 	info.license = METEORSHOWERS_PLUGIN_LICENSE;

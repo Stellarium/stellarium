@@ -1,6 +1,6 @@
 INCLUDE_DIRECTORIES(.)
 
-LINK_DIRECTORIES(/src)
+LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 
 SET(TextUserInterface_SRCS
      DummyDialog.hpp
@@ -30,7 +30,11 @@ SET(TextUserInterface_SRCS
 )
 
 ADD_LIBRARY(TextUserInterface-static STATIC ${TextUserInterface_SRCS})
-TARGET_LINK_LIBRARIES(TextUserInterface-static Qt5::Core Qt5::Widgets)
+IF(ENABLE_SCRIPT_QML)
+TARGET_LINK_LIBRARIES(TextUserInterface-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Qml)
+ELSE()
+TARGET_LINK_LIBRARIES(TextUserInterface-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
+ENDIF()
 # The library target "TextUserInterface-static" has a default OUTPUT_NAME of "TextUserInterface-static", so change it.
 SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES OUTPUT_NAME "TextUserInterface")
 SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")

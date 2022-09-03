@@ -1167,6 +1167,9 @@
               </item>
               <item row="2" column="1">
                <widget class="QDoubleSpinBox" name="ocularFL">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="decimals">
                  <number>2</number>
                 </property>
@@ -1197,8 +1200,14 @@
               </item>
               <item row="1" column="1">
                <widget class="QDoubleSpinBox" name="ocularAFov">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="decimals">
                  <number>2</number>
+                </property>
+                <property name="minimum">
+                 <double>1.000000000000000</double>
                 </property>
                 <property name="maximum">
                  <double>120.000000000000000</double>
@@ -1224,6 +1233,9 @@
               </item>
               <item row="3" column="1">
                <widget class="QDoubleSpinBox" name="ocularFieldStop">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="decimals">
                  <number>3</number>
                 </property>
@@ -1389,6 +1401,9 @@
               </item>
               <item row="1" column="1">
                <widget class="QDoubleSpinBox" name="lensMultiplier">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="decimals">
                  <number>3</number>
                 </property>
@@ -1585,6 +1600,9 @@
              <layout class="QGridLayout" name="gridLayout_13">
               <item row="11" column="1">
                <widget class="QDoubleSpinBox" name="OAGPrismW">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="decimals">
                  <number>2</number>
                 </property>
@@ -1595,6 +1613,9 @@
               </item>
               <item row="10" column="1">
                <widget class="QDoubleSpinBox" name="OAGPrismH">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="decimals">
                  <number>2</number>
                 </property>
@@ -1612,6 +1633,9 @@
               </item>
               <item row="3" column="1">
                <widget class="QDoubleSpinBox" name="ccdChipX">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="decimals">
                  <number>2</number>
                 </property>
@@ -1628,6 +1652,9 @@
               </item>
               <item row="7" column="1">
                <widget class="QSpinBox" name="ccdBinningY">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="minimum">
                  <number>1</number>
                 </property>
@@ -1638,6 +1665,9 @@
               </item>
               <item row="2" column="1">
                <widget class="QSpinBox" name="ccdResY">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="minimum">
                  <number>1</number>
                 </property>
@@ -1648,6 +1678,9 @@
               </item>
               <item row="12" column="1">
                <widget class="QDoubleSpinBox" name="OAGPrismPA">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="decimals">
                  <number>0</number>
                 </property>
@@ -1664,6 +1697,9 @@
               </item>
               <item row="5" column="1">
                <widget class="QDoubleSpinBox" name="ccdRotAngle">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="decimals">
                  <number>0</number>
                 </property>
@@ -1678,7 +1714,7 @@
               <item row="2" column="0">
                <widget class="QLabel" name="CCDResY_lbl">
                 <property name="text">
-                 <string>Resolution y (pixels):</string>
+                 <string>Resolution y:</string>
                 </property>
                </widget>
               </item>
@@ -1692,7 +1728,7 @@
               <item row="1" column="0">
                <widget class="QLabel" name="CCDResX_lbl">
                 <property name="text">
-                 <string>Resolution x (pixels):</string>
+                 <string>Resolution x:</string>
                 </property>
                </widget>
               </item>
@@ -1706,12 +1742,15 @@
               <item row="10" column="0">
                <widget class="QLabel" name="OAGPrismH_lbl">
                 <property name="text">
-                 <string>Prism/CCD height (mm):</string>
+                 <string>Prism/CCD height:</string>
                 </property>
                </widget>
               </item>
               <item row="6" column="1">
                <widget class="QSpinBox" name="ccdBinningX">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="minimum">
                  <number>1</number>
                 </property>
@@ -1729,7 +1768,7 @@
                  <string>This is the distance from the center of the Imaging Sensor to the bottom of the Prism</string>
                 </property>
                 <property name="text">
-                 <string>Prism/CCD distance (mm):</string>
+                 <string>Prism/CCD distance:</string>
                 </property>
                </widget>
               </item>
@@ -1767,6 +1806,9 @@
               </item>
               <item row="4" column="1">
                <widget class="QDoubleSpinBox" name="ccdChipY">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="decimals">
                  <number>2</number>
                 </property>
@@ -1783,6 +1825,9 @@
               </item>
               <item row="9" column="1">
                <widget class="QDoubleSpinBox" name="OAGDist">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="decimals">
                  <number>2</number>
                 </property>
@@ -1793,6 +1838,9 @@
               </item>
               <item row="1" column="1">
                <widget class="QSpinBox" name="ccdResX">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="minimum">
                  <number>1</number>
                 </property>
@@ -1804,7 +1852,7 @@
               <item row="5" column="0">
                <widget class="QLabel" name="ccdRotAngle_lbl">
                 <property name="text">
-                 <string>Rotation Angle (degrees):</string>
+                 <string>Rotation Angle:</string>
                 </property>
                </widget>
               </item>
@@ -1818,28 +1866,28 @@
               <item row="11" column="0">
                <widget class="QLabel" name="OAGPrismW_lbl">
                 <property name="text">
-                 <string>Prism/CCD width (mm):</string>
+                 <string>Prism/CCD width:</string>
                 </property>
                </widget>
               </item>
               <item row="4" column="0">
                <widget class="QLabel" name="CCDChipY_lbl">
                 <property name="text">
-                 <string>Chip height (mm):</string>
+                 <string>Chip height:</string>
                 </property>
                </widget>
               </item>
               <item row="3" column="0">
                <widget class="QLabel" name="CCDChipX_lbl">
                 <property name="text">
-                 <string>Chip width (mm):</string>
+                 <string>Chip width:</string>
                 </property>
                </widget>
               </item>
               <item row="12" column="0">
                <widget class="QLabel" name="OAGPrismPA_lbl">
                 <property name="text">
-                 <string>Position angle (degrees):</string>
+                 <string>Position angle:</string>
                 </property>
                </widget>
               </item>
@@ -1965,6 +2013,9 @@
               </item>
               <item row="1" column="1">
                <widget class="QDoubleSpinBox" name="telescopeFL">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="decimals">
                  <number>2</number>
                 </property>
@@ -1981,6 +2032,9 @@
               </item>
               <item row="2" column="1">
                <widget class="QDoubleSpinBox" name="telescopeDiameter">
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
                 <property name="decimals">
                  <number>2</number>
                 </property>

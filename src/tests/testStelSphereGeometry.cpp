@@ -25,7 +25,6 @@
 
 #include <stdexcept>
 
-#include "StelJsonParser.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelUtils.hpp"
 
@@ -291,10 +290,12 @@ void TestStelSphericalGeometry::benchmarkGetIntersection()
 	SphericalRegionP bug1 = SphericalRegionP::loadFromJson("{\"worldCoords\": [[[123.023842, -49.177087], [122.167613, -49.177087], [122.167613, -48.631248], [123.023842, -48.631248]]]}");
 	SphericalRegionP bug2 = SphericalRegionP::loadFromJson("{\"worldCoords\": [[[123.028902, -49.677124], [122.163995, -49.677124], [122.163995, -49.131382], [123.028902, -49.131382]]]}");
 	QVERIFY(bug1->intersects(bug2));
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	SphericalRegionP res;
 	QBENCHMARK {
 		res = bug1->getIntersection(bug2);
 	}
+#endif
 }
 
 void TestStelSphericalGeometry::testEnlarge()
@@ -315,9 +316,20 @@ void TestStelSphericalGeometry::testSphericalPolygon()
 
 	//Booleans methods
 	QCOMPARE(holySquare.getArea(), bigSquare.getArea()-smallSquare.getArea());
+	// qDebug() << "bigSquare alone has area: " << bigSquare.getArea();
+	// qDebug() << "holySquare (" << holySquare.getOutlineVertexArray().vertex.length() << "):" << holySquare.getOutlineVertexArray().vertex;
+	// qDebug() << "bigSquare  (" << bigSquare.getOutlineVertexArray().vertex.length()  << "):" << bigSquare.getOutlineVertexArray().vertex;
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+	QVector<Vec3d> unionVertex = bigSquare.getUnion(holySquare)->getOutlineVertexArray().vertex;
+	// qDebug() << "unionVertex (" << unionVertex.length() << "):" << unionVertex;
+	// qDebug() << "bigSquareUholy (" << bigSquare.getUnion(holySquare)->getOutlineVertexArray().vertex.length() << "):" << bigSquare.getUnion(holySquare)->getOutlineVertexArray().vertex;
+	// qDebug() << "bigSquare Unioned with holySquare has area:" << bigSquare.getUnion(holySquare)->getArea();
+	// Whoever wants to re-activate the getIntersection() and getUnion() methods in Qt6: Test these here.
+	// Note that even though the results of the previous two lines differ, this next test (and the rest of the test function) passes *sometimes*!
 	QCOMPARE(bigSquare.getUnion(holySquare)->getArea(), bigSquare.getArea());
-	QCOMPARE(bigSquare.getSubtraction(smallSquare)->getArea(), bigSquare.getArea()-smallSquare.getArea());
 	QCOMPARE(bigSquare.getIntersection(smallSquare)->getArea(), smallSquare.getArea());
+#endif
+	QCOMPARE(bigSquare.getSubtraction(smallSquare)->getArea(), bigSquare.getArea()-smallSquare.getArea());
 
 	// Point contain methods
 	Vec3d v0, v1;
@@ -349,7 +361,9 @@ void TestStelSphericalGeometry::testSphericalPolygon()
 	// Another one
 	bug1 = SphericalRegionP::loadFromJson("{\"worldCoords\": [[[52.99403, -27.683551], [53.047302, -27.683551], [53.047302, -27.729923], [52.99403, -27.729923]]]}");
 	bug2 = SphericalRegionP::loadFromJson("{\"worldCoords\": [[[52.993701, -27.683092], [53.047302, -27.683092], [53.047302, -27.729839], [52.993701, -27.729839]]]}");
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	SphericalRegionP bugIntersect = bug1->getIntersection(bug2);
+#endif
 }
 
 void TestStelSphericalGeometry::testLoading()
@@ -441,13 +455,39 @@ void TestStelSphericalGeometry::testOctahedronPolygon()
 	QCOMPARE(splittedSubCopy.getArea(), 0.);
 
 	QCOMPARE(southPoleSquare.getArea(), northPoleSquare.getArea());
+	// Whoever wants to re-activate the getIntersection() and getUnion() methods in Qt6: Test these here.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	QCOMPARE(southPoleSquare.getIntersection(northPoleSquare)->getArea(), 0.);
 	QCOMPARE(southPoleSquare.getUnion(northPoleSquare)->getArea(), 2.*southPoleSquare.getArea());
+#endif
 	QCOMPARE(southPoleSquare.getSubtraction(northPoleSquare)->getArea(), southPoleSquare.getArea());
 
-	QCOMPARE(northPoleSquare.getIntersection(northPoleSquare)->getArea(), northPoleSquare.getArea());
-	QCOMPARE(northPoleSquare.getUnion(northPoleSquare)->getArea(), northPoleSquare.getArea());
+	QCOMPARE(southPoleSquare.getOctahedronPolygon().getOutlineVertexArray().vertex.length(), 16);
+	QCOMPARE(northPoleSquare.getOctahedronPolygon().getOutlineVertexArray().vertex.length(), 16);
+	QVector<Vec3d> outlineVA=northPoleSquare.getOctahedronPolygon().getOutlineVertexArray().vertex;
+	qDebug() << "NorthpoleSquare by itself      (" << outlineVA.length() << "):" << outlineVA;
 	QCOMPARE(northPoleSquare.getSubtraction(northPoleSquare)->getArea(), 0.);
+
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+
+	// The qDebug() lines below dump vertex lists. There are differences between Qt5 (OK) and Qt6 (bugged).
+	SphericalRegionP northIntersectNorth=northPoleSquare.getIntersection(northPoleSquare);
+	QCOMPARE(northIntersectNorth->getOctahedronPolygon().getOutlineVertexArray().vertex.length(), 16); // reports as 18 in Qt6!
+	// qDebug() << "northIntersectNorth is a " << northIntersectNorth->getType() << "(3 indicates \"Polygon\" (class SphericalPolygon))";
+	outlineVA=northIntersectNorth->getOctahedronPolygon().getOutlineVertexArray().vertex;
+	// qDebug() << "NorthpoleSquare self-intersect (" << outlineVA.length() << "):" << outlineVA;
+
+	SphericalRegionP northUnionNorth=northPoleSquare.getUnion(northPoleSquare);
+	// qDebug() << "northSelfUnion.data()" << northUnionNorth.data();
+	outlineVA=northUnionNorth->getOctahedronPolygon().getOutlineVertexArray().vertex;
+	// qDebug() << "NorthpoleSquare self-union (" << outlineVA.length() << "):" << outlineVA;
+
+	// qDebug() << "NorthpoleSquare by itself      has area" << northPoleSquare.getArea();
+	// qDebug() << "NorthpoleSquare self-intersect has area" << northPoleSquare.getIntersection(northPoleSquare)->getArea();
+	// qDebug() << "NorthpoleSquare self-union     has area" << northPoleSquare.getUnion(northPoleSquare)->getArea();
+	QCOMPARE(northIntersectNorth->getArea(), northPoleSquare.getArea());
+	QCOMPARE(northUnionNorth->getArea(), northPoleSquare.getArea());
+#endif
 
 	// Test binary IO
 	QByteArray ar;
@@ -476,7 +516,6 @@ void TestStelSphericalGeometry::testOctahedronPolygon()
 	qDebug() << northCapPoly.getArea() << OctahedronPolygon::getAllSkyOctahedronPolygon().getArea()/2;
 	QVERIFY(northCapPoly.getArea()>OctahedronPolygon::getAllSkyOctahedronPolygon().getArea()/2);
 }
-
 
 void TestStelSphericalGeometry::testSerialize()
 {

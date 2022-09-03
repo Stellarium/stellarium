@@ -28,6 +28,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelLocationMgr.hpp"
 #include "VecMath.hpp"
+#include "StelUtils.hpp"
 
 #include <QDebug>
 #include <QDir>
@@ -96,7 +97,6 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 		info.shadowFarZ = info.camFarZ;
 
 	// In case we don't have an axis-aligned OBJ model, this is the chance to correct it.
-	info.obj2gridMatrix = Mat4d::identity();
 	if (ini.contains("obj2grid_trafo"))
 	{
 		QString str=ini.value("obj2grid_trafo").toString();
@@ -165,7 +165,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 		if (ini.contains("longitude"))
 			info.location->longitude = StelUtils::getDecAngle(ini.value("longitude").toString())*M_180_PI;
 		if (ini.contains("country"))
-			info.location->country = ini.value("country").toString();
+			info.location->region = StelLocationMgr::pickRegionFromCountry(ini.value("country").toString());
 		if (ini.contains("state"))
 			info.location->state = ini.value("state").toString();
 		info.location->ianaTimeZone = StelLocationMgr::sanitizeTimezoneStringFromLocationDB(ini.value("timezone", "LMST").toString());
@@ -339,9 +339,11 @@ QStringList SceneInfo::getAllSceneIDs()
 	QStringList result;
 
 	// We just look over the map of names to IDs and extract the values
-	for (auto i : nameToDirMap.values())
+	QMap<QString,QString>::const_iterator it=nameToDirMap.constBegin();
+	while (it != nameToDirMap.constEnd())
 	{
-		result += i;
+		result += it.value();
+		it++;
 	}
 	return result;
 }
@@ -352,19 +354,20 @@ QStringList SceneInfo::getAllSceneNames()
 	QStringList result;
 
 	// We just look over the map of names to IDs and extract the keys
-	for (auto i : nameToDirMap.keys())
+	QMap<QString,QString>::const_iterator it=nameToDirMap.constBegin();
+	while (it != nameToDirMap.constEnd())
 	{
-		result += i;
+		result += it.key();
+		it++;
 	}
 	return result;
 }
 
 QMap<QString, QString> SceneInfo::getNameToIDMap()
 {
-	QSet<QString> scenery3dDirs;
 	QMap<QString, QString> result;
 
-	scenery3dDirs = StelFileMgr::listContents(SceneInfo::SCENES_PATH, StelFileMgr::Directory);
+	const QSet<QString> scenery3dDirs = StelFileMgr::listContents(SceneInfo::SCENES_PATH, StelFileMgr::Directory);
 
 	for (const auto& dir : scenery3dDirs)
 	{

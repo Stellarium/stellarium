@@ -22,10 +22,10 @@
 #include <QColor>
 
 SatellitesListModel::SatellitesListModel(QList<SatelliteP>* satellites,
-                                         QObject* parent) :
-    QAbstractTableModel(parent),
-    satelliteList(Q_NULLPTR),
-    coloredNames(true)
+					 QObject* parent) :
+	QAbstractTableModel(parent),
+	satelliteList(Q_NULLPTR),
+	coloredNames(true)
 {
 	Q_ASSERT(satellites);
 	
@@ -79,6 +79,12 @@ QVariant SatellitesListModel::data(const QModelIndex& index, int role) const
 			return (sat->stdMag);
 		case SatRCSRole:
 			return (sat->RCS);
+		case SatPerigeeRole:
+			return (sat->perigee);
+		case SatApogeeRole:
+			return (sat->apogee);
+		case SatPeriodRole:
+			return (sat->pSatWrapper->getOrbitalPeriod());
 		case SatTLEEpochRole:
 			return (sat->tleEpoch);
 		case SatFlagsRole:
@@ -121,13 +127,13 @@ bool SatellitesListModel::setData(const QModelIndex& index,
 
 int SatellitesListModel::rowCount(const QModelIndex& parent) const
 {
-	Q_UNUSED(parent);
+	Q_UNUSED(parent)
 	return satelliteList->count();
 }
 
 int SatellitesListModel::columnCount(const QModelIndex& parent) const
 {
-	Q_UNUSED(parent);
+	Q_UNUSED(parent)
 	return 1;
 	//TODO: For now...
 }

@@ -20,8 +20,6 @@
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelGui.hpp"
-#include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -50,6 +48,7 @@
 #include <QStringList>
 #include <QDir>
 #include <QSettings>
+#include <stdexcept>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
@@ -70,7 +69,7 @@ StelPluginInfo SupernovaeStelPluginInterface::getPluginInfo() const
 	info.id = "Supernovae";
 	info.displayedName = N_("Historical Supernovae");
 	info.authors = "Alexander Wolf";
-	info.contact = "https://github.com/Stellarium/stellarium";
+	info.contact = STELLARIUM_DEV_URL;
 	info.description = N_("This plugin allows you to see some bright historical supernovae.");
 	info.version = SUPERNOVAE_PLUGIN_VERSION;
 	info.license = SUPERNOVAE_PLUGIN_LICENSE;
@@ -156,7 +155,7 @@ void Supernovae::init()
 	}
 
 	// If the json file does not already exist, create it from the resource in the Qt resource
-	if(QFileInfo(sneJsonPath).exists())
+	if(QFileInfo::exists(sneJsonPath))
 	{
 		if (!checkJsonFileFormat() || getJsonFileVersion()<CATALOG_FORMAT_VERSION)
 		{
@@ -174,7 +173,8 @@ void Supernovae::init()
 	readJsonFile();
 
 	// Set up download manager and the update schedule
-	networkManager = StelApp::getInstance().getNetworkAccessManager();
+	//networkManager = StelApp::getInstance().getNetworkAccessManager();
+	networkManager = new QNetworkAccessManager(this);
 	updateState = CompleteNoUpdates;
 	updateTimer = new QTimer(this);
 	updateTimer->setSingleShot(false);   // recurring check for update
@@ -197,7 +197,7 @@ void Supernovae::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	for (const auto& sn : snstar)
+	for (const auto& sn : qAsConst(snstar))
 	{
 		if (sn && sn->initialized)
 			sn->draw(core, painter);
@@ -300,7 +300,7 @@ QStringList Supernovae::listAllObjects(bool inEnglish) const
 */
 void Supernovae::restoreDefaultJsonFile(void)
 {
-	if (QFileInfo(sneJsonPath).exists())
+	if (QFileInfo::exists(sneJsonPath))
 		backupJsonFile(true);
 
 	QFile src(":/Supernovae/supernovae.json");
@@ -337,7 +337,7 @@ bool Supernovae::backupJsonFile(bool deleteOriginal)
 	}
 
 	QString backupPath = sneJsonPath + ".old";
-	if (QFileInfo(backupPath).exists())
+	if (QFileInfo::exists(backupPath))
 		QFile(backupPath).remove();
 
 	if (old.copy(backupPath))
@@ -405,7 +405,7 @@ void Supernovae::setSNeMap(const QVariantMap& map)
 	snlist.clear();
 	SNCount = 0;
 	QVariantMap sneMap = map.value("supernova").toMap();
-	for (auto sneKey : sneMap.keys())
+	for (auto &sneKey : sneMap.keys())
 	{
 		QVariantMap sneData = sneMap.value(sneKey).toMap();
 		sneData["designation"] = QString("SN %1").arg(sneKey);
@@ -571,7 +571,11 @@ int Supernovae::getSecondsToUpdate(void)
 
 void Supernovae::checkForUpdate(void)
 {
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime())
+#else
 	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime() && networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
+#endif
 		updateJSON();
 }
 
@@ -616,12 +620,14 @@ void Supernovae::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+#endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
 	updateState = Supernovae::Updating;
-	emit(updateStateChanged(updateState));
+	emit updateStateChanged(updateState);
 }
 
 void Supernovae::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
@@ -637,8 +643,8 @@ void Supernovae::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = qRound(std::floor(bytesReceived / 1024.));
-			bytesTotal    = qRound(std::floor(bytesTotal / 1024.));
+			bytesReceived = qRound(std::floor(static_cast<double>(bytesReceived) / 1024.));
+			bytesTotal    = qRound(std::floor(static_cast<double>(bytesTotal) / 1024.));
 		}
 		currentValue = bytesReceived;
 		endValue = bytesTotal;
@@ -693,13 +699,14 @@ void Supernovae::downloadComplete(QNetworkReply *reply)
 		updateState = Supernovae::DownloadError;
 	}
 
-	emit(updateStateChanged(updateState));
-	emit(jsonUpdateComplete());
+	emit updateStateChanged(updateState);
+	emit jsonUpdateComplete();
 
 	reply->deleteLater();
 	downloadReply = Q_NULLPTR;
 
-	readJsonFile();
+	qDebug() << "[Supernovae] Updating supernovae catalog is complete...";
+	//readJsonFile();
 }
 
 void Supernovae::displayMessage(const QString& message, const QString hexColor)
@@ -740,6 +747,7 @@ void Supernovae::reloadCatalog(void)
 	if (hasSelection)
 	{
 		// Restore selection...
-		objMgr->setSelectedObject(selectedObject);
+		StelObjectP obj = selectedObject[0];
+		objMgr->findAndSelect(obj->getEnglishName(), obj->getType());
 	}
 }

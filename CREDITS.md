@@ -1,6 +1,6 @@
 ## LICENSE
 ```
-   Copyright (C) 2004-2019 Fabien Chereau et al.
+   Copyright (C) 2004-2022 Fabien Chereau et al.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -132,11 +132,11 @@
 		Astronomy&Astrophysics 534, A22 (2011); 
 		DOI: 10.1051/0004-6361/201117274
 	1.6 Nutation: 
-		Dennis D. McCarthy and Brian J. Lizum: An Abridged Model of the
+		Dennis D. McCarthy and Brian J. Luzum: An Abridged Model of the
 		Precession-Nutation of the Celestial Pole.
 		Celestial Mechanics and Dynamical Astronomy 85: 37-49, 2003.
 		This model provides accuracy better than 1 milli-arcsecond in the
-		time 1995-2050. It is applied for years 1500..2500 only.
+		time 1995-2050. It is applied for years -4000..+8000 only.
 
 2. Included source code
 	2.1 Some computation of the sideral time (sidereal_time.h/c) and pluto
@@ -382,16 +382,17 @@
 	4.24 The Vesta and Ceres map was taken from USGS website
 	     https://astrogeology.usgs.gov/
 	     and colored by RVS. License: public domain.
-	4.25 Images of M15, M24, M51, M58, M63, M76,
-	     M81, M82, M96, M101, M105, M106, IC405, IC443, IC1727, NGC246, 
-	     NGC457, NGC467, NGC470, NGC474, NGC488, NGC672, NGC691, NGC1514, 
-	     NGC1961, NGC2174, NGC2371, NGC2392, NGC2403, NGC2655, NGC2685, 
-	     NGC2805, NGC2814, NGC2820, NGC2841, NGC3166, NGC3310, NGC3344, 
-	     NGC3359, NGC3504, NGC3512, NGC3521, NGC3628, NGC3938, NGC4151, 
-	     NGC4535, NGC4559, NGC4631, NGC4656, NGC4657, NGC5033, NGC7008, 
-	     NGC7318, NGC7331, NGC7479, NGC7635, NGC7640, NGC7789, 
-	     PGC1803573, Barnard 142, Barnard 173, Sh2-101, 
-	     LDN1235, Sadr region (Gamma Cygni), Jones-Emberson 1, Medusa
+	4.25 Images of M15, M24, M51, M58, M63, M76, M81, M82, M96, M101,
+	     M105, M106, IC405, IC443, IC1727, NGC246, NGC457, NGC467,
+	     NGC470, NGC474, NGC488, NGC672, NGC691, NGC1514, NGC1961,
+	     NGC2174, NGC2371, NGC2392, NGC2403, NGC2506, NGC2655, NGC2685,
+	     NGC2805, NGC2814, NGC2820, NGC2841, NGC3079, NGC3166, NGC3227,
+	     NGC3310, NGC3344, NGC3359, NGC3504, NGC3512, NGC3521, NGC3628,
+	     NGC3938, NGC4151, NGC4274, NGC4535, NGC4559, NGC4631, NGC4656,
+	     NGC4657, NGC5033, NGC5363, NGC7008, NGC7318, NGC7331, NGC7479,
+	     NGC7635, NGC7640, NGC7789, PGC1803573, Barnard 142, Barnard 173,
+	     Sh2-101, Sh2-188, LDN1235, Sadr region (Gamma Cygni), Medusa,
+	     Jones-Emberson 1, NGC2146
 	     from Peter Vasey, Plover Hill Observatory
 	     http://www.madpc.co.uk/~peterv/
 	4.26 Image of IC3568 from Howard Bond (Space Telescope Science Institute), Robin Ciardullo (Pennsylvania State University) and NASA
@@ -442,7 +443,7 @@
 	     as long as you follow any licensing requirements mentioned on this page.
 	4.41 Images of M61, M64, M65, M66, M91, M99, M100, NGC613, NGC772, NGC918, NGC1042, NGC1360, NGC1398,
 	     NGC1501, NGC1535, NGC1555, NGC2158, NGC2282, NGC2346, NGC2362, NGC2440, NGC2683, NGC2775, NGC3132,
-	     NGC3242, NGC3750, NGC4170, NGC4216, NGC4361, NGC4395, NGC4414,,NGC4450, NGC4676, NGC4725,
+	     NGC3242, NGC3486, NGC3750, NGC4170, NGC4216, NGC4361, NGC4395, NGC4414,,NGC4450, NGC4676, NGC4725,
 	     NGC5216, NGC5248, NGC5426, NGC5466, NGC6302, NGC6522, NGC6543, NGC6563, NGC6781, NGC6894, NGC7000,
 	     NGC7354, NGC7822, SH2-136, UGC3697, Abell31, Abell33, Abell39, Cassiopeia A, LBN438, Wild's Triplet
 	     from Adam Block/Mount Lemmon SkyCenter/University of Arizona
@@ -695,9 +696,9 @@
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
 	4.105 Images of NGC6496
-	     from Mohamad Abbas
-	     https://commons.wikimedia.org/wiki/
-	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	      from Mohamad Abbas
+	      https://commons.wikimedia.org/wiki/
+	      License: Creative Commons Attribution-Share Alike 3.0 Unported
 	4.106 Images of PGC3589
 	      from ESA/Hubble, Digitized Sky Survey 2
 	      https://www.spacetelescope.org/
@@ -718,6 +719,13 @@
 	      from Tayson82
 	      https://commons.wikimedia.org/wiki/
 	      License: Creative Commons Attribution-Share Alike 4.0 International
+	4.111 Images of Sh2-170
+	      from Wang Wei
+	      License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.112 Images of NGC2613
+	      from ESO/IDA/Danish 1.5 m/R. Gendler, J.-E. Ovaldsen, C. Thone and C. Feron
+	      http://eso.org/public/
+	      License: Creative Commons Attribution 4.0 International
 ```
 
 ## Appendix

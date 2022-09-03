@@ -30,7 +30,6 @@
 #include <QDebug>
 #include <QString>
 #include <QSettings>
-#include <QLinkedList>
 #include <QPainter>
 #include <QMutex>
 #include <QVarLengthArray>
@@ -233,6 +232,15 @@ void StelPainter::setBlending(bool enableBlending, GLenum blendSrc, GLenum blend
 	}
 }
 
+bool StelPainter::getBlending(GLenum *src, GLenum *dst) const
+{
+	if (dst!=Q_NULLPTR)
+		*dst=glState.blendDst;
+	if (src!=Q_NULLPTR)
+		*src=glState.blendSrc;
+	return glState.blend;
+}
+
 void StelPainter::setDepthTest(bool enable)
 {
 	if(glState.depthTest != enable)
@@ -308,7 +316,7 @@ void StelPainter::drawViewportShape(void)
 	setColor(0.f,0.f,0.f);
 
 	GLfloat innerRadius = 0.5f*static_cast<float>(prj->viewportFovDiameter);
-	GLfloat outerRadius = prj->getViewportWidth()+prj->getViewportHeight();
+	GLfloat outerRadius = static_cast<float>(prj->getViewportWidth()+prj->getViewportHeight());
 	GLint slices = 239;
 
 	GLfloat sinCache[240];
@@ -329,7 +337,7 @@ void StelPainter::drawViewportShape(void)
 	/* Cache is the vertex locations cache */
 	for (int i=0; i<=slices; i++)
 	{
-		GLfloat angle=(M_PIf*2.0f)*i/slices;
+		GLfloat angle=(M_PIf*2.0f)*static_cast<float>(i)/static_cast<float>(slices);
 		sinCache[i]=static_cast<GLfloat>(sin(angle));
 		cosCache[i]=static_cast<GLfloat>(cos(angle));
 	}
@@ -363,6 +371,7 @@ void StelPainter::computeFanDisk(float radius, uint innerFanSlices, uint level, 
 	float rad[64];
 	uint i,j;
 	rad[level] = radius;
+#pragma warning(suppress: 4146)
 	for (i=level-1u;i!=-1u;--i)
 	{
 		rad[i] = rad[i+1]*(1.f-M_PIf/(innerFanSlices<<(i+1)))*2.f/3.f;
@@ -476,7 +485,7 @@ void StelPainter::sSphereMap(double radius, unsigned int slices, unsigned int st
 	const float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
 	const float* cos_sin_theta_p;
 
-	float drho = M_PIf / stacks;
+	float drho = M_PIf / static_cast<float>(stacks);
 	drho/=textureFov;
 
 	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
@@ -552,11 +561,12 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 	if (d>qMax(prj->viewportXywh[3], prj->viewportXywh[2])*2 || ws.isEmpty())
 		return;
 
+	float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
 	float cWidth = static_cast<float>(getFontMetrics().boundingRect(ws).width())/ws.length();
 	float stdWidth = static_cast<float>(getFontMetrics().boundingRect("a").width());
 	theta = std::atan2(dy - 1, dx);
 	theta_o = M_PIf + std::atan2(dx, dy - 1);	
-	psi = std::atan2(cWidth, d + 1) * M_180_PIf;
+	psi = std::atan2(ppx*cWidth, d + 1) * M_180_PIf;
 	if (psi>5)
 		psi = 5;
 
@@ -573,9 +583,9 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 		{
 			if (d<limit)
 			{
-				drawText(xom, yom, ws[i], -theta_o*M_180_PIf+psi*i, 0., 0.);
-				xom += cWidth*std::cos(-theta_o+psi*i * M_PI_180f);
-				yom += cWidth*std::sin(-theta_o+psi*i * M_PI_180f);
+				drawText(xom, yom, ws[i], -theta_o*M_180_PIf+psi*static_cast<float>(i), 0., 0.);
+				xom += cWidth*std::cos(-theta_o+psi*static_cast<float>(i) * M_PI_180f);
+				yom += cWidth*std::sin(-theta_o+psi*static_cast<float>(i) * M_PI_180f);
 			}
 			else
 			{
@@ -598,9 +608,9 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 		{
 			if (d<limit)
 			{
-				drawText(xom, yom, ws[slen-1-i], -theta_o*M_180_PIf+psi*i, 0., 0.);
-				xom += cWidth*std::cos(-theta_o+psi*i * M_PI_180f);
-				yom += cWidth*std::sin(-theta_o+psi*i * M_PI_180f);
+				drawText(xom, yom, ws[slen-1-i], -theta_o*M_180_PIf+psi*static_cast<float>(i), 0., 0.);
+				xom += cWidth*std::cos(-theta_o+psi*static_cast<float>(i) * M_PI_180f);
+				yom += cWidth*std::sin(-theta_o+psi*static_cast<float>(i) * M_PI_180f);
 			}
 			else
 			{
@@ -700,8 +710,8 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			const float sinr = std::sin(angleDeg * static_cast<float>(M_PI/180.));
 			for (int i = 0; i < 8; i+=2)
 			{
-				vertexData[i] = int(x + (tex->size.width()*vertexBase[i]+xshift) * cosr - (tex->size.height()*vertexBase[i+1]+yshift) * sinr);
-				vertexData[i+1] = int(y  + (tex->size.width()*vertexBase[i]+xshift) * sinr + (tex->size.height()*vertexBase[i+1]+yshift) * cosr);
+				vertexData[i]   = int(x + (tex->size.width()*vertexBase[i]+xshift) * cosr - (tex->size.height()*vertexBase[i+1]+yshift) * sinr);
+				vertexData[i+1] = int(y + (tex->size.width()*vertexBase[i]+xshift) * sinr + (tex->size.height()*vertexBase[i+1]+yshift) * cosr);
 			}
 		}
 		else
@@ -710,8 +720,8 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			for (int i = 0; i < 8; i+=2)
 			{
-				vertexData[i] = int(x + tex->size.width()*vertexBase[i]+xshift);
-				vertexData[i+1] = int(y  + tex->size.height()*vertexBase[i+1]+yshift);
+				vertexData[i]   = int(x + tex->size.width()*vertexBase[i]+xshift);
+				vertexData[i+1] = int(y + tex->size.height()*vertexBase[i+1]+yshift);
 			}
 		}
 
@@ -789,7 +799,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 }
 
 // Recursive method cutting a small circle in small segments
-inline void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, Vec3d& win1, Vec3d& win2, QLinkedList<Vec3d>& vertexList, const QLinkedList<Vec3d>::iterator& iter, double radius, const Vec3d& center, int nbI=0, bool checkCrossDiscontinuity=true)
+inline void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, Vec3d& win1, Vec3d& win2, std::list<Vec3d>& vertexList, const std::list<Vec3d>::const_iterator& iter, double radius, const Vec3d& center, int nbI=0, bool checkCrossDiscontinuity=true)
 {
 	const bool crossDiscontinuity = checkCrossDiscontinuity && prj->intersectViewportDiscontinuity(p1+center, p2+center);
 	if (crossDiscontinuity && nbI>=10)
@@ -872,11 +882,11 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 {
 	Q_ASSERT(smallCircleVertexArray.empty());
 
-	QLinkedList<Vec3d> tessArc;	// Contains the list of projected points from the tesselated arc
+	std::list<Vec3d> tessArc;	// Contains the list of projected points from the tesselated arc. (QLinkedList no longer available in Qt6.)
 	Vec3d win1, win2;
 	win1[2] = prj->project(start, win1) ? 1.0 : -1.;
 	win2[2] = prj->project(stop, win2) ? 1.0 : -1.;
-	tessArc.append(win1);
+	tessArc.push_back(win1);
 
 
 	if (rotCenter.lengthSquared()<1e-11)
@@ -894,8 +904,9 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 	}
 
 	// And draw.
-	QLinkedList<Vec3d>::ConstIterator i = tessArc.constBegin();
-	while (i+1 != tessArc.constEnd())
+	std::list<Vec3d>::const_iterator i = tessArc.cbegin();
+	//while (i<tessArc.cend())
+	while (std::next(i, 1) != tessArc.cend())
 	{
 		const Vec3d& p1 = *i;
 		const Vec3d& p2 = *(++i);
@@ -903,10 +914,10 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 		const bool p2InViewport = prj->checkInViewport(p2);
 		if ((p1[2]>0 && p1InViewport) || (p2[2]>0 && p2InViewport))
 		{
-			smallCircleVertexArray.append(Vec3f(static_cast<float>(p1[0]), static_cast<float>(p1[1]), static_cast<float>(p1[2])));
-			if (i+1==tessArc.constEnd())
+			smallCircleVertexArray.append(p1.toVec3f()); //Vec3f(static_cast<float>(p1[0]), static_cast<float>(p1[1]), static_cast<float>(p1[2])));
+			if (std::next(i,1)==tessArc.cend())
 			{
-				smallCircleVertexArray.append(Vec3f(static_cast<float>(p2[0]), static_cast<float>(p2[1]), static_cast<float>(p2[2])));
+				smallCircleVertexArray.append(p2.toVec3f()); //Vec3f(static_cast<float>(p2[0]), static_cast<float>(p2[1]), static_cast<float>(p2[2])));
 				drawSmallCircleVertexArray();
 			}
 			if (viewportEdgeIntersectCallback && p1InViewport!=p2InViewport)
@@ -1519,7 +1530,11 @@ public:
 						   unsigned int, unsigned int, unsigned) const
 	{
 		// XXX: we may optimize more by putting the declaration and the test outside of this method.
-		const Vec3d tmpVertex[3] = {*v0, *v1, *v2};
+		Vec3d tmpVertex[3] = {*v0, *v1, *v2};
+		// required, else assertion at begin of projectSphericalTriangle() fails!
+		tmpVertex[0].normalize();
+		tmpVertex[1].normalize();
+		tmpVertex[2].normalize();
 		if ( (outTexturePos) && (outColors))
 		{
 			const Vec2f tmpTexture[3] = {*t0, *t1, *t2};
@@ -1555,7 +1570,6 @@ public:
 	}
 
 private:
-	//const StelVertexArray& vertexArray; // UNUSED?
 	StelPainter* painter;
 	const SphericalCap* clippingCap;
 	QVarLengthArray<Vec3f, 4096>* outVertices;
@@ -1564,16 +1578,31 @@ private:
 	double maxSqDistortion;
 };
 
-void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity)
+void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity, Vec3d aberration)
 {
 	if (checkDiscontinuity && prj->hasDiscontinuity())
 	{
 		// The projection has discontinuities, so we need to make sure that no triangle is crossing them.
-		drawStelVertexArray(arr.removeDiscontinuousTriangles(this->getProjector().data()), false);
+		drawStelVertexArray(arr.removeDiscontinuousTriangles(this->getProjector().data()), false, aberration);
 		return;
 	}
 
-	setVertexPointer(3, GL_DOUBLE, arr.vertex.constData());
+	if (aberration==Vec3d(0.))
+	{
+		setVertexPointer(3, GL_DOUBLE, arr.vertex.constData());
+	}
+	else
+	{
+		QVector<Vec3d> aberredVertex(arr.vertex.size());
+		for (int i=0; i<arr.vertex.size(); i++)
+		{
+			Q_ASSERT(qFuzzyCompare(arr.vertex.at(i).lengthSquared(), 1.0));
+			Vec3d vec=arr.vertex.at(i)+aberration;
+			vec.normalize();
+			aberredVertex[i]=vec;
+		}
+		setVertexPointer(3, GL_DOUBLE, aberredVertex.constData());
+	}
 	if (arr.isTextured())
 	{
 		setTexCoordPointer(2, GL_FLOAT, arr.texCoords.constData());
@@ -1631,7 +1660,7 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 }
 
 // Draw the given SphericalPolygon.
-void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap, const bool doSubDivise, const double maxSqDistortion)
+void StelPainter::drawSphericalRegion(SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap, const bool doSubDivise, const double maxSqDistortion, const Vec3d &observerVelocity)
 {
 	if (!prj->getBoundingCap().intersects(poly->getBoundingCap()))
 		return;
@@ -1650,12 +1679,12 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 		case SphericalPolygonDrawModeTextureFill:
 		case SphericalPolygonDrawModeTextureFillColormodulated:
 			setCullFace(true);
-			// The polygon is already tesselated as triangles
+			// The polygon is already tessellated as triangles
 			if (doSubDivise || prj->intersectViewportDiscontinuity(poly->getBoundingCap()))
 				// flag for color-modulated textured mode (e.g. for Milky Way/extincted)
-				drawSphericalTriangles(poly->getFillVertexArray(), drawMode>=SphericalPolygonDrawModeTextureFill, drawMode==SphericalPolygonDrawModeTextureFillColormodulated, clippingCap, doSubDivise, maxSqDistortion);
+				drawSphericalTriangles(poly->getFillVertexArray(observerVelocity), drawMode>=SphericalPolygonDrawModeTextureFill, drawMode==SphericalPolygonDrawModeTextureFillColormodulated, clippingCap, doSubDivise, maxSqDistortion);
 			else
-				drawStelVertexArray(poly->getFillVertexArray(), false);
+				drawStelVertexArray(poly->getFillVertexArray(observerVelocity), false);
 
 			setCullFace(oldCullFace);
 			break;
@@ -1840,7 +1869,7 @@ void StelPainter::sSphere(const double radius, const double oneMinusOblateness,
 		cos_sin_rho = StelUtils::ComputeCosSinRho(stacks);
 	else
 	{
-		const float drho = (bottomAngle-topAngle) / stacks; // deltaRho:  originally just 180degrees/stacks, now the range clamped.
+		const float drho = (bottomAngle-topAngle) / static_cast<float>(stacks); // deltaRho:  originally just 180degrees/stacks, now the range clamped.
 		cos_sin_rho = StelUtils::ComputeCosSinRhoZone(drho, stacks, M_PIf-bottomAngle);
 	}
 	// Allow parameters so that pole regions may remain free.
@@ -1853,8 +1882,8 @@ void StelPainter::sSphere(const double radius, const double oneMinusOblateness,
 	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
 	// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
 	// If the texture is flipped, we iterate the coordinates backward.
-	const GLfloat ds = (flipTexture ? -1.f : 1.f) / slices;
-	const GLfloat dt = nsign / stacks; // from inside texture is reversed
+	const GLfloat ds = (flipTexture ? -1.f : 1.f) / static_cast<float>(slices);
+	const GLfloat dt = nsign / static_cast<float>(stacks); // from inside texture is reversed
 
 	// draw intermediate as quad strips
 	static QVector<double> vertexArr;
@@ -1925,7 +1954,7 @@ StelVertexArray StelPainter::computeSphereNoLight(double radius, double oneMinus
 		cos_sin_rho = StelUtils::ComputeCosSinRho(stacks);
 	else
 	{
-		const float drho = (bottomAngle-topAngle) / stacks; // deltaRho:  originally just 180degrees/stacks, now the range clamped.
+		const float drho = (bottomAngle-topAngle) / static_cast<float>(stacks); // deltaRho:  originally just 180degrees/stacks, now the range clamped.
 		cos_sin_rho = StelUtils::ComputeCosSinRhoZone(drho, stacks, M_PIf-bottomAngle);
 	}
 	// Allow parameters so that pole regions may remain free.
@@ -1938,8 +1967,8 @@ StelVertexArray StelPainter::computeSphereNoLight(double radius, double oneMinus
 	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
 	// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
 	// If the texture is flipped, we iterate the coordinates backward.
-	const GLfloat ds = (flipTexture ? -1.f : 1.f) / slices;
-	const GLfloat dt = nsign / stacks; // from inside texture is reversed
+	const GLfloat ds = (flipTexture ? -1.f : 1.f) / static_cast<float>(slices);
+	const GLfloat dt = nsign / static_cast<float>(stacks); // from inside texture is reversed
 
 	// draw intermediate as quad strips
 	// LGTM comments: the floats are always <=1. We still prefer float multiplication (with insignificant accuracy loss) for speed.
@@ -1983,7 +2012,7 @@ void StelPainter::sCylinder(double radius, double height, int slices, int orient
 	vertexArray.clear();
 	float s = 0.f;
 	double x, y;
-	const float ds = 1.f / slices;
+	const float ds = 1.f / static_cast<float>(slices);
 	const double da = 2. * M_PI / slices;
 	for (int i = 0; i <= slices; ++i)
 	{

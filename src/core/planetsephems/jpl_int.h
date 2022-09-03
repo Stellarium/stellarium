@@ -29,6 +29,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 
 #pragma pack(1)
 
+#include <stdio.h>
+#include <stdint.h>
+
 struct interpolation_info
    {
    double posn_coeff[MAX_CHEBY], vel_coeff[MAX_CHEBY], twot;

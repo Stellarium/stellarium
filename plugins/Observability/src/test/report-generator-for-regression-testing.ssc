@@ -1,0 +1,68 @@
+// Name: Observability Plugin Report Generator For Regression Testing
+// License: Public Domain
+// Author: colossatr0n
+// Version: 1.0
+// Description: Generates reports to be used for regression testing. Run this script in two different versions of Stellarium and compare the output using some kind of differ (vim, git, diff).
+
+const objectNames = [
+    "Sun",      // Sun
+    "Moon",     // Moon
+    "Jupiter",  // Solar system planet
+    "Vesta",    // Solar system non-planet
+    "Achernar", // Star object
+]
+
+// Locations from different continents
+const observerLocations = [
+    "Boise, Northern America",
+    "Brasilia, Southern America",
+    "Palestine, Northern America",
+    "Barnaul, Northern Asia",
+    "Albany, Australasia",
+    "Prague, Eastern Europe"
+]
+
+Observability.showReport(true)
+
+core.resetOutput()
+var reports = []
+for (i=0; i < observerLocations.length; i++) {
+    var location = observerLocations[i]
+    core.setObserverLocation(location, 0.0)
+    var actualLocation = core.getObserverLocation()
+    var attempts = 0
+    while (location != actualLocation) {
+        if (attempts > 20) {
+            core.debug("Couldn't update location. It appears that the location ID '" + location + "' is incorrect or the attempted location change happened too slowly.")
+            break
+        }
+        core.wait(0.1)
+        actualLocation = core.getObserverLocation()
+        attempts++
+    }
+    for (j=0; j < objectNames.length; j++) {
+        var objectName = objectNames[j]
+        core.selectObjectByName(objectName, false)
+        // Need to wait a sufficient amount of time to allow the object selection to take place.
+        core.wait(1)
+
+        var reportJson = Observability.getReportAsJson()
+        var reportObj = JSON.parse(reportJson)
+
+        var augmentedReportObj = { objectName: objectName, location: actualLocation, report: reportObj }
+        reports.push(augmentedReportObj)
+    }
+}
+core.output(JSON.stringify(reports))
+
+const d = new Date()
+time = d.getTime()
+core.saveOutputAs("observability-report-" + time + ".json")
+if (core.getPlatformName() == "macOS") {
+    core.debug("Output was saved to:")
+    core.debug("~/Library/Application\\ Support/Stellarium/observability-report-" + time + ".json")
+} else {
+    core.debug("Output saved in the  user data directory as:")
+    core.debug("observability-report-" + time + ".json")
+}
+

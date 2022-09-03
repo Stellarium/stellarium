@@ -26,6 +26,7 @@ using std::asin;
 using std::acos;
 
 bool NavStarsCalculator::useExtraDecimals = false;
+bool NavStarsCalculator::useDecimalDegrees = false;
 
 #ifdef _DEBUG
 static void examineCalc(NavStarsCalculator& calc);
@@ -38,6 +39,8 @@ NavStarsCalculator::~NavStarsCalculator()
 {}
 
 NavStarsCalculator::NavStarsCalculator(const NavStarCalculatorDegreeInputs* ip)
+	: lmst(0.), lmst_rad(0.), lha(0.), hc_rad(0.), zn_rad(0.), gha_rad(0.), gmst(0.)
+	, gmst_rad(0.), gp_lat_deg(0.), gp_lat_rad(0.), gp_lon_deg(0.), gp_lon_rad(0.)
 {
 	setUTC(ip->utc);
 	setLatDeg(ip->lat);
@@ -92,24 +95,25 @@ void NavStarsCalculator::execute()
 	setGpLatRad(dec_rad);
 }
 
-QString NavStarsCalculator::radToDm(double rad, const QString pos, const QString neg)
+QString NavStarsCalculator::radToDm(double rad, const QString& pos, const QString& neg)
 {
 	QString rval;
-	bool sign;
-	double s, md;
-	unsigned int d, m;
-	StelUtils::radToDms(rad, sign, d, m, s);
-	md = static_cast<double>(m);
-	md += (s / 60.);
-	rval += (sign ? pos : neg)
-		+ QString::number(d, 'f', 0) + QString("&deg;")
-		+ QString::number(md, 'f', useExtraDecimals ? 4 : 1) + "'";
-#ifdef _DEBUG
-	// An easier to use display when working with Google Earth, 
-	// Google Maps, custom software tools, etc. Keep everything
-	// decimal. Only need DDMM.m for Almanac display.
-	rval += " (" + (sign ? pos : neg) + QString::number(RAD2DEG(rad), 'f', 3) + ")";
-#endif
+	bool sign;	
+	if (useDecimalDegrees)
+	{
+		double dd = rad * M_180_PI;
+		rval = QString("%1%2&deg;").arg((dd>=0. ? pos : neg), QString::number(dd, 'f', useExtraDecimals ? 6 : 5));
+	}
+	else
+	{
+		double s, md;
+		unsigned int d, m;
+		StelUtils::radToDms(rad, sign, d, m, s);
+
+		md = static_cast<double>(m);
+		md += (s / 60.);
+		rval = QString("%1%2&deg;%3'").arg((sign ? pos : neg), QString::number(d, 'f', 0), QString::number(md, 'f', useExtraDecimals ? 4 : 1));
+	}
 	return rval;
 }
 

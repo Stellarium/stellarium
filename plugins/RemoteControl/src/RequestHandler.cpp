@@ -33,9 +33,7 @@
 #include "ViewService.hpp"
 
 #include "StelApp.hpp"
-#include "StelUtils.hpp"
 #include "StelTranslator.hpp"
-#include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 
 #include <QDir>
@@ -85,7 +83,11 @@ private:
 	StelTranslator* rcTranslator;
 };
 
+#if (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
+RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QObject* parent) : HttpRequestHandler(parent), usePassword(false), enableCors(false), templateMutex()
+#else
 RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QObject* parent) : HttpRequestHandler(parent), usePassword(false), enableCors(false), templateMutex(QMutex::Recursive)
+#endif
 {
 	apiController = new APIController(QByteArray("/api/").size(),this);
 
@@ -94,7 +96,9 @@ RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QOb
 	//executed in the HTTP handler threads
 	apiController->registerService(new MainService(apiController));
 	apiController->registerService(new ObjectService(apiController));
+#ifdef ENABLE_SCRIPTING
 	apiController->registerService(new ScriptService(apiController));
+#endif
 	apiController->registerService(new SimbadService(apiController));
 	apiController->registerService(new StelActionService(apiController));
 	apiController->registerService(new StelPropertyService(apiController));

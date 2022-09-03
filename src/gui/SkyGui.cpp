@@ -24,19 +24,21 @@
 #include "StelGui.hpp"
 #include "StelCore.hpp"
 #include "StelMainView.hpp"
+#include "StelModuleMgr.hpp"
 #include <QGraphicsView>
 #include <QDebug>
 #include <QTimeLine>
 #include <QGraphicsSceneMouseEvent>
 #include <QSettings>
 #include <QTextDocument>
+#include <QRegularExpression>
 
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 	infoPixmap(Q_NULLPTR)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-	QString objectInfo = conf->value("gui/selected_object_info", "all").toString();
+	QString objectInfo = conf->value("gui/selected_object_info", "default").toString();
 	if (objectInfo == "all")
 	{
 		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
@@ -51,61 +53,13 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 	}
 	else if (objectInfo == "custom")
 	{
-		infoTextFilters = StelObject::InfoStringGroup(StelObject::None);
-		
-		conf->beginGroup("custom_selected_info");
-		if (conf->value("flag_show_name", false).toBool())
-			infoTextFilters |= StelObject::Name;
-		if (conf->value("flag_show_catalognumber", false).toBool())
-			infoTextFilters |= StelObject::CatalogNumber;
-		if (conf->value("flag_show_magnitude", false).toBool())
-			infoTextFilters |= StelObject::Magnitude;
-		if (conf->value("flag_show_absolutemagnitude", false).toBool())
-			infoTextFilters |= StelObject::AbsoluteMagnitude;
-		if (conf->value("flag_show_radecj2000", false).toBool())
-			infoTextFilters |= StelObject::RaDecJ2000;
-		if (conf->value("flag_show_radecofdate", false).toBool())
-			infoTextFilters |= StelObject::RaDecOfDate;
-		if (conf->value("flag_show_hourangle", false).toBool())
-			infoTextFilters |= StelObject::HourAngle;
-		if (conf->value("flag_show_altaz", false).toBool())
-			infoTextFilters |= StelObject::AltAzi;
-		if (conf->value("flag_show_elongation", false).toBool())
-			infoTextFilters |= StelObject::Elongation;
-		if (conf->value("flag_show_distance", false).toBool())
-			infoTextFilters |= StelObject::Distance;
-		if (conf->value("flag_show_velocity", false).toBool())
-			infoTextFilters |= StelObject::Velocity;
-		if (conf->value("flag_show_propermotion", false).toBool())
-			infoTextFilters |= StelObject::ProperMotion;
-		if (conf->value("flag_show_size", false).toBool())
-			infoTextFilters |= StelObject::Size;
-		if (conf->value("flag_show_extra", false).toBool())
-			infoTextFilters |= StelObject::Extra;
-		if (conf->value("flag_show_type", false).toBool())
-			infoTextFilters |= StelObject::ObjectType;
-		if (conf->value("flag_show_galcoord", false).toBool())
-			infoTextFilters |= StelObject::GalacticCoord;
-		if (conf->value("flag_show_supergalcoord", false).toBool())
-			infoTextFilters |= StelObject::SupergalacticCoord;
-		if (conf->value("flag_show_othercoord", false).toBool())
-			infoTextFilters |= StelObject::OtherCoord;
-		if (conf->value("flag_show_eclcoordofdate", false).toBool())
-			infoTextFilters |= StelObject::EclipticCoordOfDate;
-		if (conf->value("flag_show_eclcoordj2000", false).toBool())
-			infoTextFilters |= StelObject::EclipticCoordJ2000;
-		if (conf->value("flag_show_constellation", false).toBool())
-			infoTextFilters |= StelObject::IAUConstellation;
-		if (conf->value("flag_show_sidereal_time", false).toBool())
-			infoTextFilters |= StelObject::SiderealTime;
-		if (conf->value("flag_show_rts_time", false).toBool())
-			infoTextFilters |= StelObject::RTSTime;
-		conf->endGroup();
+		infoTextFilters = GETSTELMODULE(StelObjectMgr)->getCustomInfoStrings();
 	}
 	else
 	{
-		qWarning() << "config.ini option gui/selected_object_info is invalid, using \"all\"";
-		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
+		if (objectInfo != "default")
+			qWarning() << "config.ini option gui/selected_object_info is invalid, using \"default\"";
+		infoTextFilters = StelObject::InfoStringGroup(StelObject::DefaultInfo);
 	}
 	if (qApp->property("text_texture")==true) // CLI option -t given?
 		infoPixmap=new QGraphicsPixmapItem(this);
@@ -143,7 +97,7 @@ QPixmap getInfoPixmap(const QStringList& strList, QFont font, QColor color)
 	titleFont.setPixelSize(font.pixelSize()+7);
 
 	QRect strRect = QFontMetrics(titleFont).boundingRect(strList.at(maxLenIdx));
-	int w = strRect.width()+1+static_cast<int>(0.02f*strRect.width());
+	int w = strRect.width()+1+static_cast<int>(0.02f*static_cast<float>(strRect.width()));
 	int h = strRect.height()*strList.count()+8;
 
 	QPixmap strPixmap(w, h);
@@ -190,12 +144,12 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
 			// Extract color from HTML.
-			QRegExp colorRegExp("<font color=(#[0-9a-f]{6,6})>");
-			int colorInt=colorRegExp.indexIn(s);
+			static const QRegularExpression colorRegExp("<font color=(#[0-9a-f]{6,6})>");
+			int colorInt=s.indexOf(colorRegExp);
 			QString colorStr;
 
 			if (colorInt>-1)
-				colorStr=colorRegExp.cap(1);
+				colorStr=colorRegExp.match(s).captured(1);
 			else
 				colorStr="#ffffff";
 
@@ -251,11 +205,11 @@ SkyGui::SkyGui(QGraphicsItem * parent)
 	buttonBarPath = new StelBarsPath(this);
 
 	animLeftBarTimeLine = new QTimeLine(200, this);
-	animLeftBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);
+	animLeftBarTimeLine->setEasingCurve(QEasingCurve(QEasingCurve::InOutSine));
 	connect(animLeftBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos()));
 
 	animBottomBarTimeLine = new QTimeLine(200, this);
-	animBottomBarTimeLine->setCurveShape(QTimeLine::EaseInOutCurve);
+	animBottomBarTimeLine->setEasingCurve(QEasingCurve(QEasingCurve::InOutSine));
 	connect(animBottomBarTimeLine, SIGNAL(valueChanged(qreal)), this, SLOT(updateBarsPos()));
 
 	setAcceptHoverEvents(true);
@@ -359,6 +313,16 @@ int SkyGui::getSkyGuiHeight() const
 	return static_cast<int>(geometry().height());
 }
 
+qreal SkyGui::getBottomBarHeight() const
+{
+	return buttonBar->boundingRect().height();
+}
+
+qreal SkyGui::getLeftBarWidth() const
+{
+	return winBar->boundingRect().width();
+}
+
 //! Update the position of the button bars in the main window
 void SkyGui::updateBarsPos()
 {
@@ -370,7 +334,7 @@ void SkyGui::updateBarsPos()
 	double rangeX = winBar->boundingRectNoHelpLabel().width()+2.*buttonBarPath->getRoundSize()+1.;
 	const qreal newWinBarX = buttonBarPath->getRoundSize()-(1.-animLeftBarTimeLine->currentValue())*rangeX-0.5;
 	const qreal newWinBarY = hh-winBar->boundingRectNoHelpLabel().height()-buttonBar->boundingRectNoHelpLabel().height()-20;
-	if (winBar->pos().x()!=newWinBarX || winBar->pos().y()!=newWinBarY)
+	if (!qFuzzyCompare(winBar->pos().x(), newWinBarX) || !qFuzzyCompare(winBar->pos().y(), newWinBarY))
 	{
 		winBar->setPos(qRound(newWinBarX), qRound(newWinBarY));
 		updatePath = true;
@@ -379,13 +343,13 @@ void SkyGui::updateBarsPos()
 	double rangeY = buttonBar->boundingRectNoHelpLabel().height()+0.5-7.-buttonBarPath->getRoundSize();
 	const qreal newButtonBarX = winBar->boundingRectNoHelpLabel().right()+buttonBarPath->getRoundSize();
 	const qreal newButtonBarY = hh-buttonBar->boundingRectNoHelpLabel().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY;
-	if (buttonBar->pos().x()!=newButtonBarX || buttonBar->pos().y()!=newButtonBarY)
+	if (!qFuzzyCompare(buttonBar->pos().x(), newButtonBarX) || !qFuzzyCompare(buttonBar->pos().y(), newButtonBarY))
 	{
 		buttonBar->setPos(qRound(newButtonBarX), qRound(newButtonBarY));
 		updatePath = true;
 	}
 
-	if (lastButtonbarWidth != buttonBar->boundingRectNoHelpLabel().width())
+	if (lastButtonbarWidth != static_cast<int>(buttonBar->boundingRectNoHelpLabel().width()))
 	{
 		updatePath = true;
 		lastButtonbarWidth = static_cast<int>(buttonBar->boundingRectNoHelpLabel().width());
@@ -410,7 +374,7 @@ void SkyGui::updateBarsPos()
 
 void SkyGui::setStelStyle(const QString& style)
 {
-	Q_UNUSED(style);
+	Q_UNUSED(style)
 	buttonBarPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
 	buttonBarPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
 	buttonBar->setColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));

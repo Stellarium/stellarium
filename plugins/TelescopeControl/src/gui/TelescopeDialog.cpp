@@ -40,6 +40,7 @@
 #include <QHeaderView>
 #include <QSettings>
 #include <QStandardItem>
+#include <QRegularExpression>
 
 using namespace TelescopeControlGlobals;
 
@@ -256,19 +257,19 @@ void TelescopeDialog::createDialogContent()
 void TelescopeDialog::setAboutText()
 {
 	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
+	QRegularExpression a_rx("[{]([^{]*)[}]");
 
 	//TODO: Expand
 	QString aboutPage = "<html><head></head><body>";
 	aboutPage += "<h2>" + q_("Telescope Control plug-in") + "</h2><table width=\"90%\">";
 	aboutPage += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + TELESCOPE_CONTROL_PLUGIN_VERSION + "</td></tr>";
 	aboutPage += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + TELESCOPE_CONTROL_PLUGIN_LICENSE + "</td></tr>";
-	aboutPage += "<tr><td rowspan=6><strong>" + q_("Authors") + "</strong></td><td>Johannes Gajdosik</td></td>";
+	aboutPage += "<tr><td rowspan=5><strong>" + q_("Authors") + "</strong></td><td>Johannes Gajdosik</td></td>";
 	aboutPage += "<tr><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt; (" + q_("Plug-in and GUI programming") + ")</td></tr>";
 	aboutPage += "<tr><td>Gion Kunz &lt;gion.kunz@gmail.com&gt; (" + q_("ASCOM Telescope Client") + ")</td></tr>";
 	aboutPage += "<tr><td>Petr Kubánek (" + q_("RTS2 support") + ")</td></tr>";
 	aboutPage += "<tr><td>Alessandro Siniscalchi &lt;asiniscalchi@gmail.com&gt; (" + q_("INDI Telescope Client") + ")</td></tr>";
-	aboutPage += "<tr><td rowspan=3><strong>" + q_("Contributors") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	aboutPage += "<tr><td rowspan=3><strong>" + q_("Contributors") + ":</strong></td><td>Alexander Wolf</td></tr>";
 	aboutPage += "<tr><td>Michael Heinz</td></tr>";
 	aboutPage += "<tr><td>Alexandros Kosiaris</td></tr>";
 	aboutPage += "</table>";
@@ -281,16 +282,8 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "<li>" + q_("the TelescopeServerNexStar telescope server core code (originally licensed under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>.") + "</li>";
 	aboutPage += "<li>" + q_("INDI by <b>Alessandro Siniscalchi</b>.") + "</li></ul>";
 
-	aboutPage += "<h3>" + q_("Links") + "</h3>";
-	aboutPage += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Telescope Control plug-in") + "</p>";
-	aboutPage += "<p><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	aboutPage += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	aboutPage += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	aboutPage += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_plug\">\\1</a>") + "</li>";
-	aboutPage += "</ul></p></body></html>";
+	aboutPage += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Telescope Control plugin");
+	aboutPage += "</body></html>";
 	
 	QString helpPage = "<html><head></head><body>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
@@ -525,7 +518,7 @@ void TelescopeDialog::setHeaderNames()
 {
 	QStringList headerStrings;
 	// TRANSLATORS: Symbol for "number"
-	headerStrings << q_("#");
+	headerStrings << qc_("#", "numero sign");
 	//headerStrings << "Start";
 	headerStrings << q_("Status");
 	headerStrings << q_("Type");
@@ -538,7 +531,7 @@ void TelescopeDialog::updateWarningTexts()
 	QString text;
 	if (telescopeCount > 0)
 	{
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MACOS
 		QString modifierName = "Command";
 #else
 		QString modifierName = "Ctrl";
@@ -1016,25 +1009,29 @@ void TelescopeDialog::updateStatusButtonForSlot(int selectedSlot)
 
 void TelescopeDialog::setStatusButtonToStart()
 {
-        ui->pushButtonChangeStatus->setText(q_("Start"));
+	ui->pushButtonChangeStatus->setText(q_("Start"));
+	ui->pushButtonChangeStatus->setIcon(QIcon(":/graphicGui/uibtStart.png"));
         ui->pushButtonChangeStatus->setToolTip(q_("Start the selected local telescope"));
 }
 
 void TelescopeDialog::setStatusButtonToStop()
 {
-        ui->pushButtonChangeStatus->setText(q_("Stop"));
+	ui->pushButtonChangeStatus->setText(q_("Stop"));
+	ui->pushButtonChangeStatus->setIcon(QIcon(":/graphicGui/uibtStop.png"));
         ui->pushButtonChangeStatus->setToolTip(q_("Stop the selected local telescope"));
 }
 
 void TelescopeDialog::setStatusButtonToConnect()
 {
         ui->pushButtonChangeStatus->setText(q_("Connect"));
+	ui->pushButtonChangeStatus->setIcon(QIcon(":/graphicGui/uibtStart.png"));
         ui->pushButtonChangeStatus->setToolTip(q_("Connect to the selected telescope"));
 }
 
 void TelescopeDialog::setStatusButtonToDisconnect()
 {
         ui->pushButtonChangeStatus->setText(q_("Disconnect"));
+	ui->pushButtonChangeStatus->setIcon(QIcon(":/graphicGui/uibtStop.png"));
         ui->pushButtonChangeStatus->setToolTip(q_("Disconnect from the selected telescope"));
 }
 

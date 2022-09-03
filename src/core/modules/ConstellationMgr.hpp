@@ -23,7 +23,6 @@
 
 #include "StelObjectType.hpp"
 #include "StelObjectModule.hpp"
-#include "StelProjectorType.hpp"
 
 #include <vector>
 #include <QString>
@@ -99,57 +98,48 @@ class ConstellationMgr : public StelObjectModule
 		   READ getConstellationBoundariesThickness
 		   WRITE setConstellationBoundariesThickness
 		   NOTIFY constellationBoundariesThicknessChanged)
-	Q_ENUMS(ConstellationDisplayStyle)
 
 public:
 	//! Constructor
 	ConstellationMgr(StarMgr *stars);
 	//! Destructor
-	virtual ~ConstellationMgr();
+	virtual ~ConstellationMgr() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the ConstellationMgr.
 	//! Reads from the configuration parser object and updates the loading bar
 	//! as constellation objects are loaded for the required sky culture.
-	virtual void init();
+	virtual void init() Q_DECL_OVERRIDE;
 
 	//! Draw constellation lines, art, names and boundaries.
-	virtual void draw(StelCore* core);
+	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 
 	//! Updates time-varying state for each Constellation.
-	virtual void update(double deltaTime);
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
 
 	//! Return the value defining the order of call for the given action
 	//! @param actionName the name of the action for which we want the call order
 	//! @return the value defining the order. The closer to 0 the earlier the module's action will be called
-	virtual double getCallOrder(StelModuleActionName actionName) const;
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectModule class
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
 
 	//! @return the matching constellation object's pointer if exists or Q_NULLPTR
 	//! @param nameI18n The case in-sensitive constellation name
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
 
 	//! @return the matching constellation if exists or Q_NULLPTR
 	//! @param name The case in-sensitive standard program name (three letter abbreviation)
-	virtual StelObjectP searchByName(const QString& name) const;
+	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
 
-	virtual StelObjectP searchByID(const QString &id) const;
+	virtual StelObjectP searchByID(const QString &id) const Q_DECL_OVERRIDE;
 
-	// GZ: I see dubious descriptions and non-fitting var names: objPrefix should just be "string" or "obj",
-	// and useStartOfWord likely should be described as "decide if start of word is searched"  (2x)
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
-	//! @param objPrefix the case insensitive first letters of the searched object
-	//! @param maxNbItem the maximum number of returned object names
-	//! @param useStartOfWords the autofill mode for returned objects names
-	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing matches
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
-	virtual QStringList listAllObjects(bool inEnglish) const;
-	virtual QString getName() const { return "Constellations"; }
-	virtual QString getStelObjectType() const;
+	virtual QStringList listAllObjects(bool inEnglish) const Q_DECL_OVERRIDE;
+	virtual QString getName() const Q_DECL_OVERRIDE { return "Constellations"; }
+	virtual QString getStelObjectType() const Q_DECL_OVERRIDE;
 	//! Describes how to display constellation labels. The viewDialog GUI has a combobox which corresponds to these values.
 	enum ConstellationDisplayStyle
 	{
@@ -158,6 +148,7 @@ public:
 		constellationsTranslated	= 2,
 		constellationsEnglish		= 3 // Maybe this is not useful?
 	};	
+	Q_ENUM(ConstellationDisplayStyle)
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
@@ -257,10 +248,10 @@ public slots:
 	//! Get the font size used for constellation names display
 	float getFontSize() const;
 
-	//! Set the way how constellation names are displayed: abbbreviated/as-given/translated
+	//! Set the way how constellation names are displayed: abbreviated/as-given/translated
 	//! @param style the new display style
 	void setConstellationDisplayStyle(ConstellationMgr::ConstellationDisplayStyle style);
-	//! get the way how constellation names are displayed: abbbreviated/as-given/translated
+	//! get the way how constellation names are displayed: abbreviated/as-given/translated
 	ConstellationMgr::ConstellationDisplayStyle getConstellationDisplayStyle();
 	//! Returns the currently set constellation display style as string, instead of enum
 	//! @see getConstellationDisplayStyle()
@@ -284,24 +275,54 @@ public slots:
 	//! Select all constellations
 	void selectAllConstellations(void);
 
+	//! Select the constellation by his English name. Calling this method will enable
+	//! isolated selection for the constellations if it is not enabled yet.
+	//! @param englishName the English name of the constellation
+	//! @code
+	//! // example of usage in scripts: select the Orion constellation
+	//! ConstellationMgr.selectConstellation("Orion");
+	//! @endcode
+	void selectConstellation(const QString& englishName);
+	//! Select the constellation where celestial body with English name is located.
+	//! Calling this method will enable isolated selection for the constellations if it is
+	//! not enabled yet.
+	//! @param englishName the English name of the celestial body
+	//! @code
+	//! // example of usage in scripts: select constellation where Venus is located
+	//! ConstellationMgr.selectConstellationByObjectName("Venus");
+	//! @endcode
+	//! @note the method will be correct work for sky cultures with boundaries
+	//! otherwise you may use star names from constellation lines as celestial body
+	void selectConstellationByObjectName(const QString& englishName);
+	//! Remove the constellation from list of selected constellations by his English
+	//! name. Calling this method will enable isolated selection for the constellations
+	//! if it is not enabled yet.
+	//! @param englishName the English name of the constellation
+	//! @code
+	//! // example of usage in scripts: remove selection from the Orion constellation
+	//! ConstellationMgr.deselectConstellation("Orion");
+	//! @endcode
+	//! @note all constellations will be hided when list of selected constellations will be empty
+	void deselectConstellation(const QString& englishName);
+
 	//! Get the list of English names of all constellations for loaded sky culture
 	QStringList getConstellationsEnglishNames();
 
 signals:
-	void artDisplayedChanged(const bool displayed) const;
-	void artFadeDurationChanged(const float duration) const;
-	void artIntensityChanged(const double intensity) const;
-	void boundariesColorChanged(const Vec3f & color) const;
-	void boundariesDisplayedChanged(const bool displayed) const;
-	void fontSizeChanged(const float newSize) const;
-	void isolateSelectedChanged(const bool isolate) const;	
-	void linesColorChanged(const Vec3f & color) const;
-	void linesDisplayedChanged(const bool displayed) const;
-	void namesColorChanged(const Vec3f & color) const;
-	void namesDisplayedChanged(const bool displayed) const;
-	void constellationsDisplayStyleChanged(const ConstellationMgr::ConstellationDisplayStyle style) const;
-	void constellationLineThicknessChanged(int thickness) const;
-	void constellationBoundariesThicknessChanged(int thickness) const;
+	void artDisplayedChanged(const bool displayed);
+	void artFadeDurationChanged(const float duration);
+	void artIntensityChanged(const double intensity);
+	void boundariesColorChanged(const Vec3f & color);
+	void boundariesDisplayedChanged(const bool displayed);
+	void fontSizeChanged(const float newSize);
+	void isolateSelectedChanged(const bool isolate);
+	void linesColorChanged(const Vec3f & color);
+	void linesDisplayedChanged(const bool displayed);
+	void namesColorChanged(const Vec3f & color);
+	void namesDisplayedChanged(const bool displayed);
+	void constellationsDisplayStyleChanged(const ConstellationMgr::ConstellationDisplayStyle style);
+	void constellationLineThicknessChanged(int thickness);
+	void constellationBoundariesThicknessChanged(int thickness);
 
 private slots:
 	//! Limit the number of constellations to draw based on selected stars.
@@ -322,10 +343,10 @@ private slots:
 
 	void reloadSkyCulture(void);
 
+private:
 	void setFlagCheckLoadingData(const bool flag) { checkLoadingData = flag; }
 	bool getFlagCheckLoadingData(void) const { return checkLoadingData; }
 
-private:
 	//! Read constellation names from the given file.
 	//! @param namesFile Name of the file containing the constellation names
 	//!        in a format consisting of abbreviation, native name and translatable english name.
@@ -360,12 +381,13 @@ private:
 
 	//! Draw the constellation lines at the epoch given by the StelCore.
 	void drawLines(StelPainter& sPainter, const StelCore* core) const;
-	//! Draw the constellation art.
-	void drawArt(StelPainter& sPainter) const;
+	//! Draw the constellation art. obsVelocity required for aberration
+	void drawArt(StelPainter& sPainter, const Vec3d &obsVelocity) const;
 	//! Draw the constellation name labels.
-	void drawNames(StelPainter& sPainter) const;
+	void drawNames(StelPainter& sPainter, const Vec3d &obsVelocity) const;
 	//! Draw the constellation boundaries.
-	void drawBoundaries(StelPainter& sPainter) const;
+	//! @param obsVelocity is the speed vector of the observer planet to distort boundaries by aberration.
+	void drawBoundaries(StelPainter& sPainter, const Vec3d &obsVelocity) const;
 	//! Handle single and multi-constellation selections.
 	void setSelectedConst(Constellation* c);
 	//! Handle unselecting a single constellation.
@@ -380,7 +402,7 @@ private:
 	void deselect() { setSelected(Q_NULLPTR); }
 	//! Get the first selected constellation.
 	//! NOTE: this function should return a list of all, or may be deleted. Please
-	//! do not use until it exhibits the proper behaviour.
+	//! do not use until it exhibits the proper behavior.
 	StelObject* getSelected(void) const;
 
 	std::vector<Constellation*> selected; // More than one can be selected at a time

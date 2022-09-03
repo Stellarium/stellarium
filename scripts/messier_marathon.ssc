@@ -1,7 +1,7 @@
 //
 // Name: Messier Marathon
 // Author: ultrapre@github.com
-// Version: 1.0
+// Version: 1.2
 // License: Public Domain
 // Description: Messier Marathon on March 20, 2020. The data for the script are taken from GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm
 
@@ -10,16 +10,17 @@
 include("i18n.inc");
 include("common_objects.inc");
 core.clear("natural");
+core.wait(1);
 
 LandscapeMgr.setCurrentLandscapeName("Guereins",1);
-LandscapeMgr.setFlagCardinalsPoints(true);
+LandscapeMgr.setFlagCardinalPoints(true);
 
 var TitleNow = tr("Messier Marathon");
 var MyLocation = core.getObserverLocationInfo();
 
 core.setTimezone("LMST");
 
-LandscapeMgr.setFlagCardinalsPoints(true);
+LandscapeMgr.setFlagCardinalPoints(true);
 
 LabelMgr.labelScreen(TitleNow,200,200,true,30,"#ff0000");
 core.wait(3);

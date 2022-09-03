@@ -1,0 +1,85 @@
+#
+# Implementation of Continuous Integration process for linux and macOS by Github actions (with extra additionals...)
+#
+name: "CI (beta)"
+
+on:
+  push:
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [master]
+
+jobs:
+  # CI on Linux
+  cib-linux:
+    name: "Linux"
+    runs-on: ubuntu-22.04
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]')"
+
+    steps:
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        # using force-overwrite due to
+        # https://github.com/actions/virtual-environments/issues/2703
+        sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
+        sudo apt install -y qt6-base-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev libqt6charts6 libqt6core5compat6-dev libqt6core5compat6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev libgps-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
+
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Configure CMake
+      shell: bash
+      run: |
+        wget https://github.com/10110111/CalcMySky/releases/download/v0.0.5/CalcMySky-v0.0.5-linux-amd64-qt6.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
+        tar xf "${{ github.workspace }}/../CalcMySky.tar.xz" -C "${{ github.workspace }}/.."
+        mv "${{ github.workspace }}/../CalcMySky"{-*,}
+        mkdir -p build
+        cd build
+        cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=On ${{ github.workspace }} -DCMAKE_PREFIX_PATH="${{ github.workspace }}/../CalcMySky"
+
+    - name: Compile
+      working-directory: build
+      run: make -j3
+
+    - name: Run unit tests
+      uses: GabrielBB/xvfb-action@v1
+      with:
+        working-directory: build
+        run: ctest --output-on-failure
+
+  # CI on macOS
+  cib-macos:
+    name: "macOS"
+    runs-on: macos-12
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]')"
+
+    # @TODO Enable gpsd on macOS instance for CI testing
+    # @BODY At the moment after installing gpsd (brew install gpsd) library can be found by cmake, but not headers! Apparently we should add some magic for environment variables or something else on macOS Catalina to make headers available for cmake/make
+    steps:
+    - name: Install dependencies
+      run: brew install qt@6
+
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Configure CMake
+      shell: bash
+      run: |
+        export PATH="/usr/local/opt/qt@6/bin:$PATH"
+        wget https://github.com/10110111/CalcMySky/releases/download/v0.0.5/CalcMySky-v0.0.5-macos-amd64-qt6.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
+        tar xf "${{ github.workspace }}/../CalcMySky.tar.xz" -C "${{ github.workspace }}/.."
+        mv "${{ github.workspace }}/../CalcMySky"{-*,}
+        mkdir -p build
+        cd build
+        cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_OSX_ARCHITECTURES=x86_64 -DENABLE_TESTING=On ${{ github.workspace }} -DCMAKE_PREFIX_PATH="${{ github.workspace }}/../CalcMySky"
+
+    - name: Compile
+      working-directory: build
+      run: make -j3
+
+    - name: Run unit tests
+      uses: GabrielBB/xvfb-action@v1
+      with:
+        working-directory: build
+        run: ctest --output-on-failure

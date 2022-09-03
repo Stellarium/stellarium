@@ -25,17 +25,12 @@
 #include <QFileDialog>
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
 #include "ui_supernovaeDialog.h"
 #include "SupernovaeDialog.hpp"
 #include "Supernovae.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelMovementMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelGui.hpp"
-#include "StelMainView.hpp"
-#include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
 SupernovaeDialog::SupernovaeDialog()
@@ -115,14 +110,11 @@ void SupernovaeDialog::createDialogContent()
 
 void SupernovaeDialog::setAboutHtml(void)
 {
-	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Historical Supernovae Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + SUPERNOVAE_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + SUPERNOVAE_PLUGIN_LICENSE + "</td></tr>";
-	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf</td></tr>";
 	html += "</table>";
 
 	html += "<p>" + q_("This plugin allows you to see some bright historical supernovae: ");
@@ -135,21 +127,15 @@ void SupernovaeDialog::setAboutHtml(void)
 
 	html += "<h3>" + q_("Acknowledgments") + "</h3>";
 	html += "<p>" + q_("We thank the following people for their contribution and valuable comments:") + "</p><ul>";
-	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)")
-			.arg(q_("Sergei Blinnikov"))
-			.arg("http://www.itep.ru/")
-			.arg(q_("Institute for Theoretical and Experimental Physics"))
-			.arg(q_("in Russia")) + "</li>";
-	html += "</ul><h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Historical Supernovae plugin") + "</p>";
-	html += "<p><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Historical_Supernovae_plugin\">\\1</a>") + "</li>";
-	html += "</ul></p></body></html>";
+	html += "<li>" + QString("%1 (<a href='%2'>%3</a> %4)").arg(
+				 q_("Sergei Blinnikov"),
+				 "http://www.itep.ru/",
+				 q_("Institute for Theoretical and Experimental Physics"),
+				 q_("in Russia")) + "</li>";
+	html += "</ul>";
+
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Historical Supernovae plugin");
+	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if(gui!=Q_NULLPTR)

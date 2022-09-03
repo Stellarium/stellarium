@@ -30,7 +30,10 @@ int SphericalRegionP::metaTypeId = SphericalRegionP::initialize();
 int SphericalRegionP::initialize()
 {
 	int id = qRegisterMetaType<SphericalRegionP>("SphericalRegionP");
+
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	qRegisterMetaTypeStreamOperators<SphericalRegionP>("SphericalRegionP");
+#endif
 	return id;
 }
 
@@ -168,6 +171,8 @@ bool SphericalRegion::intersects(const SphericalRegion* r) const
 	//return false;
 }
 
+// These are too buggy in Qt6 to be useful.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 SphericalRegionP SphericalRegion::getIntersection(const SphericalRegion* r) const
 {
 	switch (r->getType())
@@ -225,7 +230,7 @@ SphericalRegionP SphericalRegion::getUnion(const SphericalCap& r) const {return 
 SphericalRegionP SphericalRegion::getUnion(const SphericalPoint& r) const {return getUnionDefault(&r);}
 SphericalRegionP SphericalRegion::getUnion(const AllSkySphericalRegion&) const {return SphericalRegionP(new AllSkySphericalRegion());}
 SphericalRegionP SphericalRegion::getUnion(const EmptySphericalRegion& r) const {return getUnionDefault(&r);}
-
+#endif
 
 SphericalRegionP SphericalRegion::getSubtraction(const SphericalRegion* r) const
 {
@@ -272,6 +277,8 @@ bool SphericalRegion::intersectsDefault(const SphericalRegion* r) const
 	return getOctahedronPolygon().intersects(r->getOctahedronPolygon());
 }
 
+// These are too buggy in Qt6 to be useful.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 // Return a new SphericalPolygon consisting of the intersection of this and the given SphericalPolygon.
 SphericalRegionP SphericalRegion::getIntersectionDefault(const SphericalRegion* r) const
 {
@@ -289,6 +296,7 @@ SphericalRegionP SphericalRegion::getUnionDefault(const SphericalRegion* r) cons
 	resOct.inPlaceUnion(r->getOctahedronPolygon());
 	return SphericalRegionP(new SphericalPolygon(resOct));
 }
+#endif
 
 // Return a new SphericalPolygon consisting of the subtraction of the given SphericalPolygon from this.
 SphericalRegionP SphericalRegion::getSubtractionDefault(const SphericalRegion* r) const
@@ -756,6 +764,8 @@ SphericalRegionP SphericalPolygon::deserialize(QDataStream& in)
 }
 
 bool SphericalPolygon::contains(const SphericalConvexPolygon& r) const {return octahedronPolygon.contains(r.getOctahedronPolygon());}
+// These are too buggy in Qt6 to be useful.
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 bool SphericalPolygon::intersects(const SphericalConvexPolygon& r) const {return r.intersects(*this);}
 
 SphericalRegionP SphericalPolygon::multiUnion(const QList<SphericalRegionP>& regions, bool optimizeByPreGrouping)
@@ -767,7 +777,7 @@ SphericalRegionP SphericalPolygon::multiUnion(const QList<SphericalRegionP>& reg
 		static const double minOverlap = 0.2;
 		// Try to first split the set of regions into groups of intersecting regions
 		QList<QList<SphericalRegionP> > res;
-		QList<SphericalCap> groupReferenceCap;
+		QVector<SphericalCap> groupReferenceCap;
 		for (const auto& newReg : regions)
 		{
 			bool createNewGroup = true;
@@ -794,7 +804,7 @@ SphericalRegionP SphericalPolygon::multiUnion(const QList<SphericalRegionP>& reg
 		}
 		// res now contains n list of regions to union together		
 		QList<SphericalRegionP> mappedRegions;
-		for (const auto& l : res)
+		for (const auto& l : qAsConst(res))
 		{
 			mappedRegions.append(SphericalPolygon::multiUnion(l));
 		}
@@ -819,6 +829,7 @@ SphericalRegionP SphericalPolygon::multiIntersection(const QList<SphericalRegion
 		reg = reg->getIntersection(regions.at(i));
 	return reg;
 }
+#endif
 
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalTexturedPolygon
@@ -850,6 +861,53 @@ bool SphericalConvexPolygon::checkValidContour(const QVector<Vec3d>& contour)
 		res &= sideHalfSpaceContains(contour.first(), contour.last(), contour[(p+contour.size()+1)%contour.size()]);
 	return res;
 }
+
+StelVertexArray SphericalConvexPolygon::getFillVertexArray() const
+{
+	return StelVertexArray(contour, StelVertexArray::TriangleFan);
+}
+
+StelVertexArray SphericalConvexPolygon::getFillVertexArray(const Vec3d &observerVelocityForAberration)
+{
+	if (observerVelocityForAberration==Vec3d(0.))
+		return StelVertexArray(contour, StelVertexArray::TriangleFan);
+	else
+	{
+		aberratedContour.clear();
+		for (const Vec3d &v: qAsConst(contour))
+		{
+			Q_ASSERT(qAbs(v.lengthSquared()-1.0)<0.0001);
+			Vec3d vec=v+observerVelocityForAberration;
+			aberratedContour.append(vec);
+		}
+
+		return StelVertexArray(aberratedContour, StelVertexArray::TriangleFan);
+	}
+}
+
+StelVertexArray SphericalConvexPolygon::getOutlineVertexArray() const
+{
+	return StelVertexArray(contour, StelVertexArray::LineLoop);
+}
+
+StelVertexArray SphericalConvexPolygon::getOutlineVertexArray(Vec3d observerVelocityForAberration)
+{
+	if (observerVelocityForAberration==Vec3d(0.))
+		return StelVertexArray(contour, StelVertexArray::LineLoop);
+	else
+	{
+		aberratedContour.clear();
+		for (const Vec3d &v: qAsConst(contour))
+		{
+			Q_ASSERT(qAbs(v.lengthSquared()-1.0)<0.0001);
+			Vec3d vec=v+observerVelocityForAberration;
+			aberratedContour.append(vec);
+		}
+
+		return StelVertexArray(aberratedContour, StelVertexArray::LineLoop);
+	}
+}
+
 
 //! Return the area of the region in steradians.
 double SphericalConvexPolygon::getArea() const
@@ -1001,11 +1059,11 @@ void SphericalConvexPolygon::updateBoundingCap()
 	Q_ASSERT(contour.size()>2);
 	// Use this crapy algorithm instead
 	cachedBoundingCap.n.set(0,0,0);
-	for (const auto& v : contour)
+	for (const auto& v : qAsConst(contour))
 		cachedBoundingCap.n+=v;
 	cachedBoundingCap.n.normalize();
 	cachedBoundingCap.d = 1.;
-	for (const auto& v : contour)
+	for (const auto& v : qAsConst(contour))
 	{
 		if (cachedBoundingCap.n*v<cachedBoundingCap.d)
 			cachedBoundingCap.d = cachedBoundingCap.n*v;
@@ -1044,6 +1102,30 @@ SphericalRegionP SphericalConvexPolygon::deserialize(QDataStream& in)
 ///////////////////////////////////////////////////////////////////////////////
 // Methods for SphericalTexturedConvexPolygon
 ///////////////////////////////////////////////////////////////////////////////
+StelVertexArray SphericalTexturedConvexPolygon::getFillVertexArray(const Vec3d &observerVelocityForAberration)
+{
+	if (observerVelocityForAberration==Vec3d(0.))
+		return StelVertexArray(contour, StelVertexArray::TriangleFan, textureCoords);
+	else
+	{
+		aberratedContour.clear();
+		for (const Vec3d &v: qAsConst(contour))
+		{
+			Q_ASSERT(qAbs(v.lengthSquared()-1.0)<0.0001);
+			Vec3d vec=v+observerVelocityForAberration;
+			aberratedContour.append(vec);
+		}
+
+		return StelVertexArray(aberratedContour, StelVertexArray::TriangleFan, textureCoords);
+	}
+}
+
+StelVertexArray SphericalTexturedConvexPolygon::getFillVertexArray() const
+{
+		return StelVertexArray(contour, StelVertexArray::TriangleFan, textureCoords);
+}
+
+
 QVariantList SphericalTexturedConvexPolygon::toQVariant() const
 {
 	QVariantList res = SphericalConvexPolygon::toQVariant();
@@ -1156,7 +1238,7 @@ struct TriangleDumper
 	inline void operator=(const TriangleDumper &other){triangleList=other.triangleList;}
 	inline void operator()(const Vec3d* v1, const Vec3d* v2, const Vec3d* v3,
 			       const Vec2f* , const Vec2f* , const Vec2f* ,
-			       const Vec3f* , const Vec3f* , const Vec3f* , // GZ NEW
+			       const Vec3f* , const Vec3f* , const Vec3f* ,
 						   unsigned int , unsigned int , unsigned int )
 	{
 		QVector<Vec3d> triangle;
@@ -1252,7 +1334,11 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& l)
 {
 	if (l.isEmpty())
 		return EmptySphericalRegion::staticInstance;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	if (l.at(0).metaType()==QMetaType(QMetaType::QVariantList))
+#else
 	if (l.at(0).type()==QVariant::List)
+#endif
 	{
 		// The region is composed of either:
 		// - a list of regions, which are assumed to be combined using the positive winding rule.
@@ -1272,13 +1358,21 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& l)
 				const QVariantList& subL = l.at(i).toList();
 				if (subL.isEmpty())
 					throw std::runtime_error(qPrintable(QString("invalid region definition: %1").arg(l.at(i).toString())));
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+				if (subL.at(0).metaType()==QMetaType(QMetaType::QVariantList))
+#else
 				if (subL.at(0).type()==QVariant::List)
+#endif
 				{
 					// Special optimization for basic contours (if no type is provided, assume a polygon)
 					contours.append(singleContourFromQVariantList(subL));
 					continue;
 				}
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+				Q_ASSERT(subL.at(0).metaType()==QMetaType(QMetaType::QString) || subL.at(0).metaType()==QMetaType(QMetaType::QByteArray));
+#else
 				Q_ASSERT(subL.at(0).type()==QVariant::String || subL.at(0).type()==QVariant::ByteArray);
+#endif
 				const SphericalRegionP& reg = loadFromQVariant(subL);
 				if (!reg->isEmpty())
 					contours << reg->getSimplifiedContours();
@@ -1287,7 +1381,11 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& l)
 		return SphericalRegionP(new SphericalPolygon(contours));
 	}
 	
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	Q_ASSERT(l.at(0).metaType()==QMetaType(QMetaType::QString) || l.at(0).metaType()==QMetaType(QMetaType::QByteArray));
+#else
 	Q_ASSERT(l.at(0).type()==QVariant::String || l.at(0).type()==QVariant::ByteArray);
+#endif
 	const QString& code=l.at(0).toString();
 	if (code=="CAP")
 		return capFromQVariantList(l);
@@ -1297,8 +1395,12 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& l)
 		SphericalRegionP reg1 = loadFromQVariant(l.at(1).toList());
 		for (int n=2;n<l.size();++n)
 		{
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+			qWarning() << "INTERSECTION not available in Qt6 based builds!";
+#else
 			SphericalRegionP reg2 = loadFromQVariant(l.at(n).toList());
 			reg1 = reg1->getIntersection(reg2.data());
+#endif
 		}
 		return reg1;
 	}
@@ -1306,9 +1408,13 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantList& l)
 	{
 		Q_ASSERT(l.size()==3);
 		SphericalRegionP reg1 = loadFromQVariant(l.at(1).toList());
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		qWarning() << "SUBTRACTION not available in Qt6 based builds!";
+#else
 		SphericalRegionP reg2 = loadFromQVariant(l.at(2).toList());
 		SphericalRegionP regIntersection = reg1->getIntersection(reg2.data());
 		reg1 = reg1->getSubtraction(regIntersection.data());
+#endif
 		return reg1;
 	}
 	else if (code=="PATH")

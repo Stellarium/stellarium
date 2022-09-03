@@ -28,6 +28,7 @@
 #include <QGuiApplication>
 #include <QStandardPaths>
 #include <QDir>
+#include <QRegularExpression>
 
 #include <cstdio>
 #include <iostream>
@@ -42,9 +43,10 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 
 	if (argsGetOption(argList, "-h", "--help"))
 	{
+		static const QRegularExpression beginRe("^.*[/\\\\]");
 		// Get the basename of binary
 		QString binName = argList.at(0);
-		binName.remove(QRegExp("^.*[/\\\\]"));
+		binName.remove(beginRe);
 
 		std::cout << "Usage:\n"
 		          << "  "
@@ -108,28 +110,28 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 
 	#ifdef Q_OS_WIN
 	if (argsGetOption(argList, "-s", "--safe-mode"))
-		qApp->setProperty("onetime_mesa_mode", true);
+		qputenv("QT_OPENGL", "software");
 
 	if (argsGetOption(argList, "-a", "--angle-mode"))
-		qApp->setProperty("onetime_angle_mode", true);
+		qputenv("QT_OPENGL", "angle");
 
 	if (argsGetOption(argList, "-9", "--angle-d3d9"))
 	{
+		qputenv("QT_OPENGL", "angle");
 		qputenv("QT_ANGLE_PLATFORM", "d3d9");
-		qApp->setProperty("onetime_angle_mode", true);
 	}
 	if (argsGetOption(argList, "", "--angle-d3d11"))
 	{
+		qputenv("QT_OPENGL", "angle");
 		qputenv("QT_ANGLE_PLATFORM", "d3d11");
-		qApp->setProperty("onetime_angle_mode", true);
 	}
 	if (argsGetOption(argList, "", "--angle-warp"))
 	{
+		qputenv("QT_OPENGL", "angle");
 		qputenv("QT_ANGLE_PLATFORM", "warp");
-		qApp->setProperty("onetime_angle_mode", true);
 	}
 	if (argsGetOption(argList, "-m", "--mesa-mode"))
-		qApp->setProperty("onetime_mesa_mode", true);
+		qputenv("QT_OPENGL", "software");
 
 	#endif
 	if (argsGetOption(argList, "", "--list-landscapes"))
@@ -227,18 +229,20 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 		// Over-ride the skyDatePart if the user specified the date using --sky-date
 		if (!skyDate.isEmpty())
 		{
-			// validate the argument format, we will tolerate yyyy-mm-dd by removing all -'s
-			QRegExp dateRx("\\d{8}");
-			if (dateRx.exactMatch(skyDate.remove("-")))
-				skyDatePart = QDate::fromString(skyDate, "yyyyMMdd").toJulianDay();
+			// validate the argument format, we will tolerate yyyy-mm-dd.
+			static const QRegularExpression dateRx("(-?\\d{4})-?(\\d{2})-?(\\d{2})");
+			static const QRegularExpression boundaryRx("\\b-");
+			QRegularExpressionMatch dateMatch=dateRx.match(skyDate);
+			if (dateMatch.hasMatch())
+			    StelUtils::getJDFromDate(&skyDatePart, dateMatch.captured(1).toInt(), dateMatch.captured(2).toInt(), dateMatch.captured(3).toInt(), 12, 0, 0);
 			else
-				qWarning() << "WARNING: --sky-date argument has unrecognised format  (I want yyyymmdd)";
+			    qWarning() << "WARNING: --sky-date argument has unrecognised format  (I want [-]yyyymmdd)" << skyDate.remove(boundaryRx);
 		}
 
 		if (!skyTime.isEmpty())
 		{
-			QRegExp timeRx("\\d{1,2}:\\d{2}:\\d{2}");
-			if (timeRx.exactMatch(skyTime))
+			static const QRegularExpression timeRx("\\d{1,2}:\\d{2}:\\d{2}");
+			if (timeRx.match(skyTime).hasMatch())
 				skyTimePart = StelUtils::qTimeToJDFraction(QTime::fromString(skyTime, "hh:mm:ss"));
 			else
 				qWarning() << "WARNING: --sky-time argument has unrecognised format (I want hh:mm:ss)";
@@ -303,6 +307,8 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 		qApp->setProperty("spout", "none");
 	if (!spoutName.isEmpty())
 		qApp->setProperty("spoutName", spoutName);
+#else
+	qApp->setProperty("spout", "none");
 #endif
 }
 

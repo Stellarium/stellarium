@@ -6,15 +6,17 @@
 # Translators:
 # אני ואתה <elishamasw@gmail.com>, 2018
 # אלעזר ז. <ezalo05484@gmail.com>, 2019
+# cardinot <mcardinot@gmail.com>, 2022
+# חיים שלמה רוזנבך, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2020-06-22 00:46+0700\n"
+"POT-Creation-Date: 2022-06-19 21:37+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
-"Last-Translator: אלעזר ז. <ezalo05484@gmail.com>, 2019\n"
+"Last-Translator: חיים שלמה רוזנבך, 2022\n"
 "Language-Team: Hebrew (https://www.transifex.com/stellarium/teams/80998/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -71,11 +73,11 @@ msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/search.js:35
 msgid "querying"
-msgstr ""
+msgstr "שאילתה"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:44
 msgid "Error (%1)"
-msgstr ""
+msgstr "שגיאה (%1)"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:60
 msgid "Error performing Simbad lookup"
@@ -108,8 +110,8 @@ msgid "Could not retrieve landscape list"
 msgstr ""
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:628
-#: index.html:685 tablet7in.html:733 tablet7in.html:793
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:638
+#: index.html:695 tablet7in.html:733 tablet7in.html:793
 msgid "-none-"
 msgstr ""
 
@@ -129,7 +131,7 @@ msgstr ""
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
 msgid "off"
-msgstr ""
+msgstr "כבוי"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:58
 msgid "Show All Items"
@@ -145,7 +147,7 @@ msgstr ""
 
 #: index.html:5 tablet7in.html:5
 msgid "Stellarium remote control plugin"
-msgstr ""
+msgstr "סטלריום תוסף שלט רחוק"
 
 #: index.html:17 tablet7in.html:18
 msgid "Please wait, loading"
@@ -153,7 +155,7 @@ msgstr ""
 
 #: index.html:26 tablet7in.html:27
 msgid "Stellarium remote control"
-msgstr ""
+msgstr "סטלריום שלט רחוק"
 
 #: index.html:30 tablet7in.html:31
 msgid "Main controls"
@@ -161,7 +163,7 @@ msgstr ""
 
 #: index.html:33 tablet7in.html:38
 msgid "DSO"
-msgstr ""
+msgstr "עצמי שמים עמוקים"
 
 #: index.html:36
 msgid "Actions and scripts"
@@ -181,19 +183,19 @@ msgstr ""
 
 #: index.html:86 tablet7in.html:187
 msgid "Solar hour"
-msgstr ""
+msgstr "שעת שמש"
 
 #: index.html:87 tablet7in.html:188
 msgid "Solar day"
-msgstr ""
+msgstr "יממת שמש"
 
 #: index.html:88 tablet7in.html:189
 msgid "Solar week"
-msgstr ""
+msgstr "שבוע שמש"
 
 #: index.html:91 tablet7in.html:192
 msgid "Sidereal year"
-msgstr ""
+msgstr "שנת כוכבים"
 
 #: index.html:92 tablet7in.html:193
 msgid "Sidereal century"
@@ -201,27 +203,27 @@ msgstr ""
 
 #: index.html:94 tablet7in.html:195
 msgid "Synodic month"
-msgstr ""
+msgstr "חודש סינודי"
 
 #: index.html:95 tablet7in.html:196
 msgid "Draconic month"
-msgstr ""
+msgstr "חודש דרקוני"
 
 #: index.html:96 tablet7in.html:197
 msgid "Draconic year"
-msgstr ""
+msgstr "שנה דרקונית"
 
 #: index.html:98 tablet7in.html:210
 msgid "Gaussian year"
-msgstr ""
+msgstr "שנה גאוסית"
 
 #: index.html:101 tablet7in.html:200
 msgid "Anomalistic month"
-msgstr ""
+msgstr "חודש אנומליסטי"
 
 #: index.html:102 tablet7in.html:201
 msgid "Anomalistic year"
-msgstr ""
+msgstr "שנה אנומליסטית"
 
 #: index.html:103 tablet7in.html:202
 msgid "Anomalistic century"
@@ -229,11 +231,11 @@ msgstr ""
 
 #: index.html:105 tablet7in.html:204
 msgid "Mean tropical month"
-msgstr ""
+msgstr "חודש טרופי ממוצע"
 
 #: index.html:106 tablet7in.html:205
 msgid "Mean tropical year"
-msgstr ""
+msgstr "שנה טרופית ממוצעת"
 
 #: index.html:107 tablet7in.html:206
 msgid "Mean tropical century"
@@ -241,11 +243,11 @@ msgstr ""
 
 #: index.html:109 tablet7in.html:208
 msgid "Tropical year"
-msgstr ""
+msgstr "שנה טרופית"
 
 #: index.html:110 tablet7in.html:209
 msgid "Julian year"
-msgstr ""
+msgstr "שנה יוליאנית"
 
 #: index.html:111 tablet7in.html:211
 msgid "Julian century"
@@ -259,13 +261,9 @@ msgstr ""
 msgid "Vertical View offset"
 msgstr ""
 
-#: index.html:154 tablet7in.html:133
-msgid "Reset"
-msgstr ""
-
 #: index.html:160 tablet7in.html:138
 msgid "FOV"
-msgstr ""
+msgstr "שדה הראייה"
 
 #: index.html:213 tablet7in.html:229
 msgid "Enter search term. Use TAB to navigate results."
@@ -281,7 +279,7 @@ msgstr ""
 
 #: index.html:240 tablet7in.html:259
 msgid "Center on object"
-msgstr ""
+msgstr "מרכז על האובייקט"
 
 #: index.html:240 tablet7in.html:259
 msgid "Center and zoom to object"
@@ -301,7 +299,7 @@ msgstr "כדור הארץ"
 
 #: index.html:246 tablet7in.html:265
 msgid "Pluto"
-msgstr ""
+msgstr "פלוטו"
 
 #: index.html:252 tablet7in.html:294
 msgid "Current selection"
@@ -309,7 +307,7 @@ msgstr ""
 
 #: index.html:268 tablet7in.html:321
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Milky Way brightness:"
 
 #: index.html:272 tablet7in.html:333
 msgid "Digitized Sky Survey"
@@ -317,11 +315,15 @@ msgstr ""
 
 #: index.html:273 tablet7in.html:334
 msgid "HiPS Survey"
-msgstr ""
+msgstr "סקר HiPS"
+
+#: index.html:286 tablet7in.html:350
+msgid "Show planet markers"
+msgstr "הצג סימון כוכבי לכת"
 
 #: index.html:287 tablet7in.html:351
 msgid "Show planet orbits"
-msgstr ""
+msgstr "הצג מסלול כוכבי לכת"
 
 #: index.html:288 tablet7in.html:352
 msgid "Show planet orbits only"
@@ -329,7 +331,7 @@ msgstr ""
 
 #: index.html:289 tablet7in.html:353
 msgid "Show orbit for selected planet"
-msgstr ""
+msgstr "Show orbit for selected planet"
 
 #: index.html:290 tablet7in.html:354
 msgid "Show planet trails"
@@ -337,7 +339,19 @@ msgstr ""
 
 #: index.html:291 tablet7in.html:355
 msgid "Show trail only for selected planet"
+msgstr "Show trail only for selected planet"
+
+#: index.html:294 tablet7in.html:359
+msgid "Scale Moon:"
+msgstr "Scale Moon:"
+
+#: index.html:295 tablet7in.html:363
+msgid "Scale minor bodies:"
 msgstr ""
+
+#: index.html:318 tablet7in.html:404
+msgid "Extinction Coefficient:"
+msgstr "מקדם הפחתה:"
 
 #: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"
@@ -355,152 +369,156 @@ msgstr ""
 "עיגולים מיידיים של ציר כדור הארץ בתנועתו סביב קטבים אקליפטיים. מוצג על כדור "
 "הארץ בלבד."
 
-#: index.html:377 tablet7in.html:472
+#: index.html:378 tablet7in.html:472
 msgid "Solstices"
-msgstr ""
+msgstr "נקודות היפוך"
 
-#: index.html:378 tablet7in.html:473
+#: index.html:379 tablet7in.html:473
 msgid "Crossquarters"
 msgstr ""
 
-#: index.html:379 tablet7in.html:474
+#: index.html:380 tablet7in.html:474
 msgid "Major Standstill"
 msgstr ""
 
-#: index.html:380 tablet7in.html:475
+#: index.html:381 tablet7in.html:475
 msgid "Minor Standstill"
 msgstr ""
 
-#: index.html:389 tablet7in.html:484
+#: index.html:390 tablet7in.html:484
 msgid "Current Planet:"
 msgstr ""
 
-#: index.html:429 tablet7in.html:524
+#: index.html:426 tablet7in.html:524
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
-msgstr ""
+msgstr "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 
-#: index.html:447 tablet7in.html:542
+#: index.html:444 tablet7in.html:542
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
 msgstr ""
 
-#: index.html:502
+#: index.html:512
 msgid "Objects without identifier"
 msgstr ""
 
-#: index.html:527 tablet7in.html:616
+#: index.html:537 tablet7in.html:616
 msgid "Bright Nebulae"
-msgstr ""
+msgstr "ערפיליות בהירות"
 
-#: index.html:528 tablet7in.html:617
+#: index.html:538 tablet7in.html:617
 msgid "Dark Nebulae"
-msgstr ""
+msgstr "ערפיליות אפלות"
 
-#: index.html:529 tablet7in.html:618
+#: index.html:539 tablet7in.html:618
 msgid "Planetary Nebulae"
-msgstr ""
+msgstr "ערפיליות פלנטריות"
 
-#: index.html:538 tablet7in.html:627
+#: index.html:548 tablet7in.html:627
 msgid "Labels and markers"
-msgstr ""
+msgstr "תוויות וסמנים"
 
-#: index.html:572 tablet7in.html:661
+#: index.html:573 tablet7in.html:652
+msgid "Use associated planet and position"
+msgstr "Use associated planet and position"
+
+#: index.html:582 tablet7in.html:661
 msgid "Show illumination"
 msgstr ""
 
-#: index.html:577 tablet7in.html:667
+#: index.html:587 tablet7in.html:667
 msgid "Current landscape"
 msgstr ""
 
-#: index.html:589 tablet7in.html:680
+#: index.html:599 tablet7in.html:680
 msgid "Show lines with thickness"
 msgstr ""
 
-#: index.html:594 tablet7in.html:685
+#: index.html:604 tablet7in.html:685
 msgid "Show asterisms with thickness"
 msgstr ""
 
-#: index.html:598 tablet7in.html:689
+#: index.html:608 tablet7in.html:689
 msgid "Show ray helpers with thickness"
 msgstr ""
 
-#: index.html:606 tablet7in.html:699
+#: index.html:616 tablet7in.html:699
 msgid "Show boundaries with thickness"
 msgstr ""
 
-#: index.html:611 tablet7in.html:704
+#: index.html:621 tablet7in.html:704
 msgid "Constellation selection isolated"
 msgstr ""
 
-#: index.html:615 tablet7in.html:708
+#: index.html:625 tablet7in.html:708
 msgid "Current sky culture"
 msgstr ""
 
-#: index.html:628 tablet7in.html:733
+#: index.html:638 tablet7in.html:733
 msgid "Active script:"
 msgstr ""
 
-#: index.html:629 tablet7in.html:734
+#: index.html:639 tablet7in.html:734
 msgid "Run selected script"
 msgstr ""
 
-#: index.html:629 tablet7in.html:734
+#: index.html:639 tablet7in.html:734
 msgid "Stop current script"
 msgstr ""
 
-#: index.html:634 tablet7in.html:41 tablet7in.html:718
+#: index.html:644 tablet7in.html:41 tablet7in.html:718
 msgid "Actions"
 msgstr ""
 
-#: index.html:638 tablet7in.html:722
+#: index.html:648 tablet7in.html:722
 msgid "Run/toggle action"
 msgstr ""
 
-#: index.html:649 tablet7in.html:757
+#: index.html:659 tablet7in.html:757
 msgid "Planet map"
 msgstr ""
 
-#: index.html:650 tablet7in.html:758
+#: index.html:660 tablet7in.html:758
 msgid "Planet map pointer"
 msgstr ""
 
-#: index.html:654 tablet7in.html:762
+#: index.html:664 tablet7in.html:762
 msgid "Type to search location"
 msgstr ""
 
-#: index.html:683 tablet7in.html:791
+#: index.html:693 tablet7in.html:791
 msgid "Interaction"
 msgstr ""
 
-#: index.html:684 tablet7in.html:792
+#: index.html:694 tablet7in.html:792
 msgid "Current scene:"
 msgstr ""
 
-#: index.html:687 tablet7in.html:795
+#: index.html:697 tablet7in.html:795
 msgid "View controls"
 msgstr ""
 
-#: index.html:693 tablet7in.html:801
+#: index.html:703 tablet7in.html:801
 msgid "Movement controls"
 msgstr ""
 
-#: index.html:705 tablet7in.html:813
+#: index.html:715 tablet7in.html:813
 msgid "Torchlight"
 msgstr ""
 
-#: index.html:712 tablet7in.html:820
+#: index.html:722 tablet7in.html:820
 msgid "Scene selection"
 msgstr ""
 
-#: index.html:716 tablet7in.html:824
+#: index.html:726 tablet7in.html:824
 msgid "Load selected scene"
 msgstr ""
 
-#: index.html:740 tablet7in.html:849
+#: index.html:750 tablet7in.html:849
 msgid "No response from server"
 msgstr ""
 
-#: index.html:741 tablet7in.html:850
+#: index.html:751 tablet7in.html:850
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 
@@ -510,7 +528,7 @@ msgstr ""
 
 #: tablet7in.html:37
 msgid "Grids"
-msgstr ""
+msgstr "רשת"
 
 #: tablet7in.html:97
 msgid "Up/Left"
@@ -554,31 +572,31 @@ msgstr ""
 
 #: tablet7in.html:266
 msgid "Sirius"
-msgstr ""
+msgstr "סִירִיּוּס (אַבְרֵק)"
 
 #: tablet7in.html:267
 msgid "Arcturus"
-msgstr ""
+msgstr "ארקטורוס"
 
 #: tablet7in.html:268
 msgid "Capella"
-msgstr ""
+msgstr "קאפלה"
 
 #: tablet7in.html:269
 msgid "Vega"
-msgstr ""
+msgstr "וגה"
 
 #: tablet7in.html:270
 msgid "Deneb"
-msgstr ""
+msgstr "דֶנֶבּ"
 
 #: tablet7in.html:271
 msgid "Altair"
-msgstr ""
+msgstr "אלטאיר"
 
 #: tablet7in.html:272
 msgid "Andromeda Galaxy"
-msgstr ""
+msgstr "גלקסיית אנדרומדה"
 
 #: tablet7in.html:273
 msgid "Hercules Cluster"
@@ -586,7 +604,7 @@ msgstr ""
 
 #: tablet7in.html:274
 msgid "Orion Nebula"
-msgstr ""
+msgstr "ערפילית אוריון"
 
 #: tablet7in.html:275
 msgid "Eta Carinae Nebula"
@@ -594,55 +612,59 @@ msgstr ""
 
 #: tablet7in.html:276
 msgid "47 Tucanae Cluster"
-msgstr ""
+msgstr "הצביר הכדורי 47 טוקאן"
 
 #: tablet7in.html:277
 msgid "Aries"
-msgstr ""
+msgstr "טלה"
 
 #: tablet7in.html:278
 msgid "Taurus"
-msgstr ""
+msgstr "שור"
 
 #: tablet7in.html:279
 msgid "Gemini"
-msgstr ""
+msgstr "תאומים"
 
 #: tablet7in.html:280
 msgid "Cancer"
-msgstr ""
+msgstr "סרטן"
 
 #: tablet7in.html:281
 msgid "Leo"
-msgstr ""
+msgstr "אריה"
 
 #: tablet7in.html:282
 msgid "Virgo"
-msgstr ""
+msgstr "בתולה"
 
 #: tablet7in.html:283
 msgid "Libra"
-msgstr ""
+msgstr "מאזניים"
 
 #: tablet7in.html:284
 msgid "Scorpius"
-msgstr ""
+msgstr "עקרב"
 
 #: tablet7in.html:285
 msgid "Sagittarius"
-msgstr ""
+msgstr "קשת"
 
 #: tablet7in.html:286
 msgid "Capricornus"
-msgstr ""
+msgstr "גדי"
 
 #: tablet7in.html:287
 msgid "Aquarius"
-msgstr ""
+msgstr "דלי"
 
 #: tablet7in.html:288
 msgid "Pisces"
-msgstr ""
+msgstr "דגים"
+
+#: tablet7in.html:507
+msgid "Compass Marks"
+msgstr "סימני מצפן"
 
 #: tablet7in.html:742
 msgid "Favorites"

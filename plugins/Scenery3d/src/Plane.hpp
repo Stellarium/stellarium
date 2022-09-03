@@ -38,7 +38,7 @@ public:
 	float distance, sDistance;
 
 	void setPoints(const Vec3f &v1, const Vec3f &v2, const Vec3f &v3, SPolygon::Order o = SPolygon::CCW);
-	float calcDistance(const Vec3f p) const;
+	float calcDistance(const Vec3f &p) const;
 	bool isBehind(const Vec3f& p) const;
 	void saveValues();
 	void resetValues();

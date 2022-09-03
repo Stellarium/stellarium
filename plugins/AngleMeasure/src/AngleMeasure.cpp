@@ -17,20 +17,19 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "StelProjector.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelFileMgr.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelVertexArray.hpp"
 #include "AngleMeasure.hpp"
 #include "AngleMeasureDialog.hpp"
 
+#include <QApplication>
 #include <QDebug>
 #include <QTimer>
 #include <QPixmap>
@@ -38,6 +37,7 @@
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <cmath>
+#include <stdexcept>
 
 //! This method is the one called automatically by the StelModuleMgr just
 //! after loading the dynamic library
@@ -55,7 +55,7 @@ StelPluginInfo AngleMeasureStelPluginInterface::getPluginInfo() const
 	info.id = "AngleMeasure";
 	info.displayedName = N_("Angle Measure");
 	info.authors = "Matthew Gates, Georg Zotti";
-	info.contact = "https://github.com/Stellarium/stellarium";
+	info.contact = STELLARIUM_DEV_URL;
 	info.description = N_("Provides an angle measurement tool");	
 	info.version = ANGLEMEASURE_PLUGIN_VERSION;
 	info.license = ANGLEMEASURE_PLUGIN_LICENSE;
@@ -67,6 +67,7 @@ AngleMeasure::AngleMeasure()
 	, withDecimalDegree(false)
 	, dragging(false)
 	, angleEquatorial(0.)
+	, flagFollowCursor(false)
 	, flagUseDmsFormat(false)
 	, flagShowEquatorial(false)
 	, flagShowHorizontal(false)
@@ -83,6 +84,7 @@ AngleMeasure::AngleMeasure()
 	perp1EndPoint.set(0.,0.,0.);
 	perp2StartPoint.set(0.,0.,0.);
 	perp2EndPoint.set(0.,0.,0.);
+
 	startPointHor.set(0.,0.,0.);
 	endPointHor.set(0.,0.,0.);
 	perp1StartPointHor.set(0.,0.,0.);
@@ -135,7 +137,8 @@ void AngleMeasure::init()
 	StelApp& app = StelApp::getInstance();
 
 	// Create action for enable/disable & hook up signals	
-	addAction("actionShow_Angle_Measure", N_("Angle Measure"), N_("Angle measure"), "enabled", "Ctrl+A");
+	addAction("actionShow_Angle_Measure",        N_("Angle Measure"), N_("Angle measure"),                          "enabled", "Ctrl+A");
+	addAction("actionShow_Angle_Measure_dialog", N_("Angle Measure"), N_("Angle measure settings"),  configDialog,  "visible" ); // no default hotkey
 
 	// Initialize the message strings and make sure they are translated when
 	// the language changes.
@@ -152,7 +155,9 @@ void AngleMeasure::init()
 						       QPixmap(":/angleMeasure/bt_anglemeasure_on.png"),
 						       QPixmap(":/angleMeasure/bt_anglemeasure_off.png"),
 						       QPixmap(":/graphicGui/miscGlow32x32.png"),
-						       "actionShow_Angle_Measure");
+						       "actionShow_Angle_Measure",
+						       false,
+						       "actionShow_Angle_Measure_dialog");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
 	}
@@ -162,6 +167,7 @@ void AngleMeasure::init()
 	}
 }
 
+// handle time updates
 void AngleMeasure::update(double deltaTime)
 {
 	messageFader.update(static_cast<int>(deltaTime*1000));
@@ -192,11 +198,11 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 
 	if (lineVisible.getInterstate() > 0.000001f)
 	{
-		Vec3d xy;
+		Vec3f xy; // plot position of data text block
 		QString displayedText;
 		if (frameType==StelCore::FrameEquinoxEqu)
 		{
-			if (prj->project(perp1EndPoint,xy))
+			if (prj->project(flagFollowCursor ? perp2StartPoint.toVec3f() : perp1EndPoint.toVec3f() ,xy))
 			{
 				painter.setColor(txtColor, lineVisible.getInterstate());
 				if (flagShowEquatorialPA)
@@ -208,7 +214,7 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 		}
 		else
 		{
-			if (prj->project(perp1EndPointHor,xy))
+			if (prj->project(flagFollowCursor ? perp2StartPointHor.toVec3f() : perp1EndPointHor.toVec3f(), xy))
 			{
 				painter.setColor(txtColor, lineVisible.getInterstate());
 				if (flagShowHorizontalPA)
@@ -244,10 +250,12 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 	}
 	if (messageFader.getInterstate() > 0.000001f)
 	{
+		// text block (bottom left)
 		painter.setColor(txtColor[0], txtColor[1], txtColor[2], messageFader.getInterstate());
-		int x = 83;
-		int y = 120;
-		int ls = painter.getFontMetrics().lineSpacing();
+		const double ppx = core->getCurrentStelProjectorParams().devicePixelsPerPixel;
+		int x  = static_cast<int>(83*ppx);
+		int y  = static_cast<int>(120*ppx);
+		int ls = static_cast<int>(ppx*painter.getFontMetrics().lineSpacing());
 		painter.drawText(x, y, messageEnabled);
 		y -= ls;
 		painter.drawText(x, y, messageLeftButton);
@@ -282,13 +290,10 @@ QString AngleMeasure::calculatePositionAngle(const Vec3d p1, const Vec3d p2) con
 	if (r<0)
 		r+= 2*M_PI;
 
-	unsigned int d, m;
 	double s;
-	bool sign;
-
 	if (withDecimalDegree)
 	{
-		StelUtils::radToDecDeg(r, sign, s);
+		s = std::abs(r * M_180_PI);
 		if (flagUseDmsFormat)
 			return QString("%1d").arg(s, 0, 'f', 5);
 		else
@@ -296,6 +301,8 @@ QString AngleMeasure::calculatePositionAngle(const Vec3d p1, const Vec3d p2) con
 	}
 	else
 	{
+		unsigned int d, m;
+		bool sign;
 		StelUtils::radToDms(r, sign, d, m, s);
 		if (flagUseDmsFormat)
 			return QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
@@ -320,16 +327,30 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	if (event->type()==QEvent::MouseButtonPress && event->button()==Qt::LeftButton)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		if (prj->unProject(event->position().x(),event->position().y(),startPoint))
+#else
 		if (prj->unProject(event->x(),event->y(),startPoint))
+#endif
 		{ // Nick Fedoseev patch: improve click match
 			Vec3d win;
 			prj->project(startPoint,win);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+			double dx = event->position().x() - win.v[0];
+			double dy = event->position().y() - win.v[1];
+			prj->unProject(event->position().x()+dx, event->position().y()+dy, startPoint);
+#else
 			double dx = event->x() - win.v[0];
 			double dy = event->y() - win.v[1];
 			prj->unProject(event->x()+dx, event->y()+dy, startPoint);
+#endif
 		}
 		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		prjHor->unProject(event->position().x(),event->position().y(),startPointHor);
+#else
 		prjHor->unProject(event->x(),event->y(),startPointHor);
+#endif
 
 		// first click reset the line... only draw it after we've dragged a little.
 		if (!dragging)
@@ -356,16 +377,30 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	else if (event->type()==QEvent::MouseButtonPress && event->button()==Qt::RightButton)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		if (prj->unProject(event->position().x(),event->position().y(),endPoint))
+#else
 		if (prj->unProject(event->x(),event->y(),endPoint))
+#endif
 		{ // Nick Fedoseev patch: improve click match
 			Vec3d win;
 			prj->project(endPoint,win);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+			double dx = event->position().x() - win.v[0];
+			double dy = event->position().y() - win.v[1];
+			prj->unProject(event->position().x()+dx, event->position().y()+dy, endPoint);
+#else
 			double dx = event->x() - win.v[0];
 			double dy = event->y() - win.v[1];
 			prj->unProject(event->x()+dx, event->y()+dy, endPoint);
+#endif
 		}
 		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		prjHor->unProject(event->position().x(),event->position().y(),endPointHor);
+#else
 		prjHor->unProject(event->x(),event->y(),endPointHor);
+#endif
 		calculateEnds();
 		event->setAccepted(true);
 		return;
@@ -424,14 +459,10 @@ void AngleMeasure::calculateEndsOneLine(const Vec3d &start, const Vec3d &end, Ve
 
 QString AngleMeasure::formatAngleString(double angle) const
 {
-	unsigned int d, m;
 	double s;
-	bool sign;
-
 	if (withDecimalDegree)
 	{
-		StelUtils::radToDecDeg(angle, sign, s);
-
+		s = std::abs(angle * M_180_PI);
 		if (flagUseDmsFormat)
 			return QString("%1d").arg(s, 0, 'f', 5);
 		else
@@ -439,6 +470,8 @@ QString AngleMeasure::formatAngleString(double angle) const
 	}
 	else
 	{
+		unsigned int d, m;
+		bool sign;
 		StelUtils::radToDms(angle, sign, d, m, s);
 
 		if (flagUseDmsFormat)
@@ -459,9 +492,21 @@ void AngleMeasure::enableAngleMeasure(bool b)
 		{
 			//qDebug() << "AngleMeasure::enableAngleMeasure starting timer";
 			messageTimer->start();
+			QApplication::setOverrideCursor(QCursor(Qt::CrossCursor));
 		}
-		// Immediate saving of settings
-		conf->setValue("AngleMeasure/enable_at_startup", flagShowAngleMeasure);
+		else 
+		{
+			// restore the cursor before Angle Measure was invoked
+
+			// if the cursor was hidden (blank cursor), pop that
+			if (QGuiApplication::overrideCursor() && (QGuiApplication::overrideCursor()->shape() == Qt::BlankCursor) )
+			{	
+				QGuiApplication::restoreOverrideCursor();
+			}
+
+			// finally, pop the cross cursor
+			QApplication::restoreOverrideCursor();
+		}
 
 		emit flagAngleMeasureChanged(b);
 	}
@@ -482,6 +527,7 @@ void AngleMeasure::showHorizontalPA(bool b)
 	conf->setValue("AngleMeasure/show_position_angle_horizontal", flagShowHorizontalPA);
 	emit flagShowHorizontalPAChanged(b);
 }
+
 void AngleMeasure::showEquatorial(bool b)
 {
 	flagShowEquatorial = b;
@@ -489,6 +535,7 @@ void AngleMeasure::showEquatorial(bool b)
 	conf->setValue("AngleMeasure/show_equatorial", flagShowEquatorial);
 	emit flagShowEquatorialChanged(b);
 }
+
 void AngleMeasure::showHorizontal(bool b)
 {
 	flagShowHorizontal = b;
@@ -496,6 +543,7 @@ void AngleMeasure::showHorizontal(bool b)
 	conf->setValue("AngleMeasure/show_horizontal", flagShowHorizontal);
 	emit flagShowHorizontalChanged(b);
 }
+
 void AngleMeasure::showHorizontalStartSkylinked(bool b)
 {
 	flagShowHorizontalStartSkylinked = b;
@@ -503,6 +551,7 @@ void AngleMeasure::showHorizontalStartSkylinked(bool b)
 	conf->setValue("AngleMeasure/link_horizontal_start_to_sky", flagShowHorizontalStartSkylinked);
 	emit flagShowHorizontalStartSkylinkedChanged(b);
 }
+
 void AngleMeasure::showHorizontalEndSkylinked(bool b)
 {
 	flagShowHorizontalEndSkylinked = b;
@@ -510,6 +559,15 @@ void AngleMeasure::showHorizontalEndSkylinked(bool b)
 	conf->setValue("AngleMeasure/link_horizontal_end_to_sky", flagShowHorizontalEndSkylinked);
 	emit flagShowHorizontalEndSkylinkedChanged(b);
 }
+
+void AngleMeasure::followCursor(bool b)
+{
+	flagFollowCursor=b;
+	// persistent
+	conf->setValue("AngleMeasure/follow_cursor", flagFollowCursor);
+	emit flagFollowCursorChanged(b);
+}
+
 void AngleMeasure::useDmsFormat(bool b)
 {
 	flagUseDmsFormat=b;
@@ -518,7 +576,7 @@ void AngleMeasure::useDmsFormat(bool b)
 	emit dmsFormatChanged(b);
 }
 
-void AngleMeasure::setEquatorialTextColor(Vec3f color)
+void AngleMeasure::setEquatorialTextColor(const Vec3f &color)
 {
 	if (equatorialTextColor != color)
 	{
@@ -527,7 +585,8 @@ void AngleMeasure::setEquatorialTextColor(Vec3f color)
 		emit equatorialTextColorChanged(color);
 	}
 }
-void AngleMeasure::setEquatorialLineColor(Vec3f color)
+
+void AngleMeasure::setEquatorialLineColor(const Vec3f &color)
 {
 	if (equatorialLineColor != color)
 	{
@@ -536,7 +595,8 @@ void AngleMeasure::setEquatorialLineColor(Vec3f color)
 		emit equatorialLineColorChanged(color);
 	}
 }
-void AngleMeasure::setHorizontalTextColor(Vec3f color)
+
+void AngleMeasure::setHorizontalTextColor(const Vec3f &color)
 {
 	if (horizontalTextColor != color)
 	{
@@ -545,7 +605,8 @@ void AngleMeasure::setHorizontalTextColor(Vec3f color)
 		emit horizontalTextColorChanged(color);
 	}
 }
-void AngleMeasure::setHorizontalLineColor(Vec3f color)
+
+void AngleMeasure::setHorizontalLineColor(const Vec3f &color)
 {
 	if (horizontalLineColor != color)
 	{
@@ -591,7 +652,7 @@ void AngleMeasure::restoreDefaultSettings()
 
 void AngleMeasure::loadSettings()
 {
-	enableAngleMeasure(conf->value("AngleMeasure/enable_at_startup", false).toBool());
+	followCursor(conf->value("AngleMeasure/follow_cursor", false).toBool());
 	useDmsFormat(conf->value("AngleMeasure/angle_format_dms", false).toBool());
 	equatorialTextColor = Vec3f(conf->value("AngleMeasure/text_color", "0,0.5,1").toString());
 	equatorialLineColor = Vec3f(conf->value("AngleMeasure/line_color", "0,0.5,1").toString());

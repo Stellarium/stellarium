@@ -19,8 +19,6 @@
 #include "StelProjector.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelGui.hpp"
-#include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -50,6 +48,7 @@
 #include <QVariant>
 #include <QVariantMap>
 #include <QDir>
+#include <stdexcept>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
@@ -70,7 +69,7 @@ StelPluginInfo NovaeStelPluginInterface::getPluginInfo() const
 	info.id = "Novae";
 	info.displayedName = N_("Bright Novae");
 	info.authors = "Alexander Wolf";
-	info.contact = "https://github.com/Stellarium/stellarium";
+	info.contact = STELLARIUM_DEV_URL;
 	info.description = N_("A plugin that shows some bright novae in the Milky Way galaxy.");
 	info.version = NOVAE_PLUGIN_VERSION;
 	info.license = NOVAE_PLUGIN_LICENSE;
@@ -136,7 +135,7 @@ void Novae::init()
 		// populate settings from main config file.
 		readSettingsFromConfig();
 
-		novaeJsonPath = StelFileMgr::findFile("modules/Novae", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/novae.json";
+		novaeJsonPath = StelFileMgr::findFile("modules/Novae", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/novae.json";
 		if (novaeJsonPath.isEmpty())
 			return;
 
@@ -150,7 +149,7 @@ void Novae::init()
 	}
 
 	// If the json file does not already exist, create it from the resource in the Qt resource
-	if(QFileInfo(novaeJsonPath).exists())
+	if(QFileInfo::exists(novaeJsonPath))
 	{
 		if (!checkJsonFileFormat() || getJsonFileVersion()<CATALOG_FORMAT_VERSION)
 		{
@@ -168,7 +167,8 @@ void Novae::init()
 	readJsonFile();
 
 	// Set up download manager and the update schedule
-	networkManager = StelApp::getInstance().getNetworkAccessManager();
+	//networkManager = StelApp::getInstance().getNetworkAccessManager();
+	networkManager = new QNetworkAccessManager(this);
 	updateState = CompleteNoUpdates;
 	updateTimer = new QTimer(this);
 	updateTimer->setSingleShot(false);   // recurring check for update
@@ -191,7 +191,7 @@ void Novae::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	for (const auto& n : nova)
+	for (const auto& n : qAsConst(nova))
 	{
 		if (n && n->initialized)
 		{
@@ -213,7 +213,7 @@ void Novae::drawPointer(StelCore* core, StelPainter &painter)
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		Vec3d screenpos;
+		Vec3f screenpos;
 		// Compute 2D pos and return if outside screen
 		if (!painter.getProjector()->project(pos, screenpos))
 			return;
@@ -273,46 +273,38 @@ StelObjectP Novae::searchByNameI18n(const QString& nameI18n) const
 	return Q_NULLPTR;
 }
 
-QStringList Novae::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
+QStringList Novae::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem <= 0)
-	{
 		return result;
-	}
 
 	QStringList names;
-	if (inEnglish)
+	for (const auto& n : nova)
 	{
-		for (const auto& n : nova)
-		{
-			names.append(n->getEnglishName());
-			names.append(n->getDesignation());
-		}
-	}
-	else
-	{
-		for (const auto& n : nova)
-		{
-			names.append(n->getNameI18n());
-		}
+		names.append(n->getNameI18n());
+		names.append(n->getEnglishName());
+		names.append(n->getDesignation());
 	}
 
+	QString fullMatch = "";
 	for (const auto& name : names)
 	{
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
-		{
 			continue;
-		}
 
-		result.append(name);
+		if (name==objPrefix)
+			fullMatch = name;
+		else
+			result.append(name);
+
 		if (result.size() >= maxNbItem)
-		{
 			break;
-		}
 	}
 
 	result.sort();
+	if (!fullMatch.isEmpty())
+		result.prepend(fullMatch);
 	return result;
 }
 
@@ -341,7 +333,7 @@ QStringList Novae::listAllObjects(bool inEnglish) const
 */
 void Novae::restoreDefaultJsonFile(void)
 {
-	if (QFileInfo(novaeJsonPath).exists())
+    if (QFileInfo::exists(novaeJsonPath))
 		backupJsonFile(true);
 
 	QFile src(":/Novae/novae.json");
@@ -378,7 +370,7 @@ bool Novae::backupJsonFile(bool deleteOriginal)
 	}
 
 	QString backupPath = novaeJsonPath + ".old";
-	if (QFileInfo(backupPath).exists())
+	if (QFileInfo::exists(backupPath))
 		QFile(backupPath).remove();
 
 	if (old.copy(backupPath))
@@ -446,7 +438,7 @@ void Novae::setNovaeMap(const QVariantMap& map)
 	novalist.clear();
 	NovaCnt=0;
 	QVariantMap novaeMap = map.value("nova").toMap();
-	for (auto novaeKey : novaeMap.keys())
+	for (auto &novaeKey : novaeMap.keys())
 	{
 		QVariantMap novaeData = novaeMap.value(novaeKey).toMap();
 		novaeData["designation"] = QString("%1").arg(novaeKey);
@@ -582,7 +574,11 @@ int Novae::getSecondsToUpdate(void)
 
 void Novae::checkForUpdate(void)
 {
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime())
+#else
 	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime() && networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
+#endif
 		updateJSON();
 }
 
@@ -627,12 +623,14 @@ void Novae::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+#endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
 	updateState = Novae::Updating;
-	emit(updateStateChanged(updateState));
+	emit updateStateChanged(updateState);
 }
 
 void Novae::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
@@ -648,8 +646,8 @@ void Novae::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = static_cast<qint64>(std::floor(bytesReceived / 1024.));
-			bytesTotal    = static_cast<qint64>(std::floor(bytesTotal / 1024.));
+			bytesReceived = static_cast<qint64>(std::floor(static_cast<double>(bytesReceived) / 1024.));
+			bytesTotal    = static_cast<qint64>(std::floor(static_cast<double>(bytesTotal) / 1024.));
 		}
 		currentValue = static_cast<int>(bytesReceived);
 		endValue = static_cast<int>(bytesTotal);
@@ -704,13 +702,14 @@ void Novae::downloadComplete(QNetworkReply *reply)
 		updateState = Novae::DownloadError;
 	}
 
-	emit(updateStateChanged(updateState));
-	emit(jsonUpdateComplete());
+	emit updateStateChanged(updateState);
+	emit jsonUpdateComplete();
 
 	reply->deleteLater();
 	downloadReply = Q_NULLPTR;
 
-	readJsonFile();
+	qDebug() << "[Novae] Updating novae catalog is complete...";
+	//readJsonFile();
 }
 
 
@@ -780,6 +779,7 @@ void Novae::reloadCatalog(void)
 	if (hasSelection)
 	{
 		// Restore selection...
-		objMgr->setSelectedObject(selectedObject);
+		StelObjectP obj = selectedObject[0];
+		objMgr->findAndSelect(obj->getEnglishName(), obj->getType());
 	}
 }

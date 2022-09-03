@@ -2,6 +2,7 @@
  * Stellarium
  * Copyright (C) 2003 Fabien Chereau
  * Copyright (C) 2012 Timothy Reaves
+ * Copyright (C) 2020 Ruslan Kabatsayev
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,35 +19,41 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef ATMOSTPHERE_HPP
-#define ATMOSTPHERE_HPP
+#ifndef ATMOSPHERE_HPP
+#define ATMOSPHERE_HPP
 
-#include "Skylight.hpp"
+#include "StelCore.hpp"
 #include "VecMath.hpp"
 
-#include "Skybright.hpp"
 #include "StelFader.hpp"
 
 #include <QOpenGLBuffer>
 
 class StelProjector;
 class StelToneReproducer;
+class StelLocation;
 class StelCore;
+class Planet;
 
-//! Compute and display the daylight sky color using openGL.
-//! The sky brightness is computed with the SkyBright class, the color with the SkyLight.
-//! Don't use this class directly but use it through the LandscapeMgr.
 class Atmosphere
 {
 public:
-	Atmosphere();
-	virtual ~Atmosphere();
-	
+    struct LoadingStatus
+    {
+        int stepsDone;
+        int stepsToDo;
+    };
+public:
+	virtual ~Atmosphere() = default;
 	//! Compute sky brightness values and average luminance.
-	void computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase, float moonMagnitude, StelCore* core,
-		float latitude = 45.f, float altitude = 200.f,
-		float temperature = 15.f, float relativeHumidity = 40.f);
-	void draw(StelCore* core);
+	//! @param noScatter true to suppress the actual sky brightness modelling. This will keep refraction/extinction working for didactic reasons.
+	virtual void computeColor(StelCore* core, double JD, const Planet& currentPlanet, const Planet& sun, const Planet* moon,
+							  const StelLocation& location, float temperature, float relativeHumidity, float extinctionCoefficient,
+							  bool noScatter) = 0;
+	virtual void draw(StelCore* core) = 0;
+	virtual bool isLoading() = 0;
+	virtual bool isReadyToRender() = 0;
+	virtual LoadingStatus stepDataLoading() = 0;
 	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
 
 	//! Set fade in/out duration in seconds
@@ -75,49 +82,32 @@ public:
 
 	//! override computable luminance. This is for special operations only, e.g. for scripting of brightness-balanced image export.
 	//! To return to auto-computed values, set any negative value at the end of the script.
-	void setAverageLuminance(float overrideLum);
+	void setAverageLuminance(float overrideLum)
+	{
+		if (overrideLum<0.f)
+		{
+			overrideAverageLuminance=false;
+			averageLuminance=0.f;
+		}
+		else
+		{
+			overrideAverageLuminance=true;
+			averageLuminance=overrideLum;
+		}
+	}
+
 	//! Set the light pollution luminance in cd/m^2
 	void setLightPollutionLuminance(float f) { lightPollutionLuminance = f; }
 	//! Get the light pollution luminance in cd/m^2
 	float getLightPollutionLuminance() const { return lightPollutionLuminance; }
 
-private:
-	Vec4i viewport;
-	Skylight sky;
-	Skybright skyb;
-	unsigned int skyResolutionY,skyResolutionX;
-
-	Vec2f* posGrid;
-	QOpenGLBuffer posGridBuffer;
-	QOpenGLBuffer indicesBuffer;
-	Vec4f* colorGrid;
-	QOpenGLBuffer colorGridBuffer;
-
+protected:
 	//! The average luminance of the atmosphere in cd/m2
-	float averageLuminance;
-	bool overrideAverageLuminance; // if true, don't compute but keep value set via setAverageLuminance(float)
-	float eclipseFactor;
+	float averageLuminance = 0;
+	bool overrideAverageLuminance = false; // if true, don't compute but keep value set via setAverageLuminance(float)
+	float eclipseFactor = 1;
 	LinearFader fader;
-	float lightPollutionLuminance;
-
-	//! Vertex shader used for xyYToRGB computation
-	class QOpenGLShaderProgram* atmoShaderProgram;
-	struct {
-		int bayerPattern;
-		int rgbMaxValue;
-		int alphaWaOverAlphaDa;
-		int oneOverGamma;
-		int term2TimesOneOverMaxdLpOneOverGamma;
-		int brightnessScale;
-		int sunPos;
-		int term_x, Ax, Bx, Cx, Dx, Ex;
-		int term_y, Ay, By, Cy, Dy, Ey;
-		int projectionMatrix;
-		int skyVertex;
-		int skyColor;
-	} shaderAttribLocations;
-
-	GLuint bayerPatternTex=0;
+	float lightPollutionLuminance = 0;
 };
 
-#endif // ATMOSTPHERE_HPP
+#endif // ATMOSPHERE_HPP

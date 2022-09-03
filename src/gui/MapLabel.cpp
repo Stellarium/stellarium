@@ -43,27 +43,46 @@ void MapLabel::setCursorPos(double longitude, double latitude)
 	const int y = (static_cast<int>((latitude-90.)/-180.*map.height() / scale));
 	//draws the location cursor on the map every time position is changed
 	QPainter painter(&map);
-	painter.drawPixmap(x-locCursor.width()/2,y-locCursor.height()/2,locCursor.width(),locCursor.height(),locCursor);
+	int sif = 1;
+	if (origMap.width()>512) // standard width of texture is 512 pixels
+		sif = static_cast<int>(origMap.width()/512);
+	const int w = static_cast<int>(locCursor.width()/scale)*sif;
+	const int h = static_cast<int>(locCursor.height()/scale)*sif;
+	painter.drawPixmap(x-w/2, y-h/2, w, h, locCursor);
 	resizePixmap();
 }
 
 void MapLabel::mousePressEvent(QMouseEvent* event)
 {
 	const int scale = devicePixelRatio();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	const int offsetX = (width() * scale - pixmap(Qt::ReturnByValue).width())/2;
+	const int offsetY = (height() * scale - pixmap(Qt::ReturnByValue).height())/2;
+#else
 	const int offsetX = (width() * scale - pixmap()->width())/2;
 	const int offsetY = (height() * scale - pixmap()->height())/2;
+#endif
 
 	const int posX = event->pos().x() * scale;
 	const int posY = event->pos().y() * scale;
 
 	//checks if position of mouse click is inside the map
-	if((unsigned)(posX-offsetX) > (unsigned)pixmap()->width() || (unsigned)(posY-offsetY) > (unsigned)pixmap()->height())
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	if(static_cast<unsigned>(posX-offsetX) > static_cast<unsigned>(pixmap(Qt::ReturnByValue).width()) || static_cast<unsigned>(posY-offsetY) > static_cast<unsigned>(pixmap(Qt::ReturnByValue).height()))
+#else
+	if(static_cast<unsigned>(posX-offsetX) > static_cast<unsigned>(pixmap()->width()) || static_cast<unsigned>(posY-offsetY) > static_cast<unsigned>(pixmap()->height()))
+#endif
 	{
 		return;
 	}
-	const double lon = ((double)(posX-offsetX))/pixmap()->size().width()*360.-180.;
-	const double lat = 90.-((double)(posY-offsetY))/pixmap()->size().height()*180.;
-	emit(positionChanged(lon, lat));
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+	const double lon = (static_cast<double>(posX-offsetX))/pixmap(Qt::ReturnByValue).size().width()*360.-180.;
+	const double lat = 90.-(static_cast<double>(posY-offsetY))/pixmap(Qt::ReturnByValue).size().height()*180.;
+#else
+	const double lon = (static_cast<double>(posX-offsetX))/pixmap()->size().width()*360.-180.;
+	const double lat = 90.-(static_cast<double>(posY-offsetY))/pixmap()->size().height()*180.;
+#endif
+	emit positionChanged(lon, lat);
 }
 
 void MapLabel::setPixmap(const QPixmap &pixmap)

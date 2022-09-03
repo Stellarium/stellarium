@@ -23,8 +23,6 @@
 #include "StelCore.hpp"
 #include "StelApp.hpp"
 #include "StelTranslator.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelSkyLayerMgr.hpp"
 #include "StelUtils.hpp"
 
 #include <QNetworkReply>
@@ -39,7 +37,10 @@ HipsMgr::HipsMgr()
 
 HipsMgr::~HipsMgr()
 {
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+	// This function is no longer available in Qt6. We assume it is OK to run the code in any case, even if we were not connected.
 	if (StelApp::getInstance().getNetworkAccessManager()->networkAccessible()==QNetworkAccessManager::Accessible)
+#endif
 	{
 		// Store active HiPS to config.ini if network is available
 		QSettings* conf = StelApp::getInstance().getSettings();
@@ -50,7 +51,7 @@ HipsMgr::~HipsMgr()
 		conf->remove("visible");
 
 		QStringList surveyUrls;
-		for (auto survey: surveys)
+		for (auto &survey: surveys)
 		{
 			if (survey->isVisible() && survey->planet.isEmpty())
 				surveyUrls << survey->getUrl();
@@ -105,16 +106,16 @@ void HipsMgr::loadSources()
 			<< "https://data.stellarium.org/surveys/hipslist";
 	}
 
-	for (QUrl source: sources)
+	for (QUrl source: qAsConst(sources))
 	{
 		if (source.scheme().isEmpty()) source.setScheme("file");
 		QNetworkRequest req = QNetworkRequest(source);
 		req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 		QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-		connect(networkReply, &QNetworkReply::finished, [=] {
+		connect(networkReply, &QNetworkReply::finished, this, [=] {
 			QByteArray data = networkReply->readAll();
 			QList<HipsSurveyP> newSurveys = HipsSurvey::parseHipslist(data);
-			for (HipsSurveyP survey: newSurveys)
+			for (HipsSurveyP &survey: newSurveys)
 			{
 				connect(survey.data(), SIGNAL(propertiesChanged()), this, SIGNAL(surveysChanged()));
 				emit gotNewSurvey(survey);
@@ -142,12 +143,16 @@ void HipsMgr::init()
 	conf->endGroup();
 	bool hasVisibleSurvey = size>0 ? true: false;
 
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
+	// In Qt6 we don't have the online check. We could ping somewhere, or just live with it.
+	// There is QNetworkInformation in Qt6.1, but it may give wrong results under certain circumstances.
+	// https://doc.qt.io/qt-6/qnetworkinformation.html
 	if (StelApp::getInstance().getNetworkAccessManager()->networkAccessible()==QNetworkAccessManager::NotAccessible)
 	{
 		setFlagShow(false);
 		hasVisibleSurvey = false;
 	}
-
+#endif
 	addAction("actionShow_Hips_Surveys", N_("Display Options"), N_("Toggle Hierarchical Progressive Surveys"), "flagShow", "Ctrl+Alt+D");
 
 	// Start loading the sources only after stellarium has time to set up the proxy.
@@ -191,7 +196,7 @@ void HipsMgr::draw(StelCore* core)
 {
 	if (!visible) return;
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	for (auto survey: surveys)
+	for (auto &survey: surveys)
 	{
 		if (survey->isVisible() && survey->planet.isEmpty())
 		{
@@ -202,7 +207,7 @@ void HipsMgr::draw(StelCore* core)
 
 void HipsMgr::update(double deltaTime)
 {
-	for (auto survey: surveys)
+	for (auto &survey: surveys)
 	{
 		survey->fader.update(static_cast<int>(deltaTime * 1000));
 	}
@@ -217,11 +222,11 @@ double HipsMgr::getCallOrder(StelModuleActionName actionName) const
 
 HipsSurveyP HipsMgr::getSurveyByUrl(const QString &url)
 {
-	for (auto survey: surveys)
+	for (auto &survey: surveys)
 	{
 		if (survey->getUrl() == url) return survey;
 	}
-	return HipsSurveyP(NULL);
+	return HipsSurveyP(Q_NULLPTR);
 }
 
 bool HipsMgr::getFlagShow(void) const

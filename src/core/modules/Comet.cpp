@@ -24,19 +24,15 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
-#include "StelObserver.hpp"
 
 #include "StelTexture.hpp"
-#include "StelTextureMgr.hpp"
 #include "StelToneReproducer.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
-#include "StelFileMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "LandscapeMgr.hpp"
 
-#include <QRegExp>
 #include <QDebug>
 #include <QElapsedTimer>
 
@@ -101,7 +97,7 @@ Comet::Comet(const QString& englishName,
 	  dustTailBrightnessFactor(dustTailBrightnessFact),
 	  intensityFovScale(1.0f),
 	  intensityMinFov(0.001f), // when zooming in further, Coma is no longer visible.
-	  intensityMaxFov(0.010f) // when zooming out further, MilkyComa is fully visible (when enabled).
+	  intensityMaxFov(0.010f) // when zooming out further, Coma is fully visible (when enabled).
 {
 	this->outgas_intensity =outgas_intensity;
 	this->outgas_falloff   =outgas_falloff;
@@ -121,16 +117,12 @@ Comet::~Comet()
 
 void Comet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope)
 {
-	if ((slope < -1.f) || (slope > 20.0f))
+	if ((slope < -2.5f) || (slope > 25.0f))
 	{
 		// Slope G can become slightly smaller than 0. -10 is mark of invalidity.
-		qDebug() << "Comet::setAbsoluteMagnitudeAndSlope(): Possibly invalid slope parameter value:" << slope <<  "(should be between -1 and 20)";
+		qDebug() << "Warning: Suspect slope parameter value" << slope << "for comet" << englishName << "(rarely exceeding -1...20)";
 		return;
 	}
-
-	//TODO: More checks?
-	//TODO: Make it set-once like the number?
-
 	absoluteMagnitude = magnitude;
 	slopeParameter = slope;
 }
@@ -297,7 +289,7 @@ void Comet::update(int deltaTime)
 
 				// 2014-08 for 0.13.1 Moved from drawTail() to save lots of computation per frame (There *are* folks downloading all 730 MPC current comet elements...)
 				// Find rotation matrix from 0/0/1 to eclipticPosition: crossproduct for axis (normal vector), dotproduct for angle.
-				Vec3d eclposNrm=eclipticPos; eclposNrm.normalize();
+				Vec3d eclposNrm=eclipticPos+aberrationPush; eclposNrm.normalize();
 				gasTailRot=Mat4d::rotation(Vec3d(0.0, 0.0, 1.0)^(eclposNrm), std::acos(Vec3d(0.0, 0.0, 1.0).dot(eclposNrm)) );
 
 				Vec3d velocity=static_cast<KeplerOrbit*>(orbitPtr)->getVelocity(); // [AU/d]
@@ -422,22 +414,22 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	}
 	if (!static_cast<KeplerOrbit*>(orbitPtr)->objectDateValid(core->getJDE())) return; // don't draw at all if out of useful date range. This allows having hundreds of comet elements.
 
-	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
+	Mat4d mat = Mat4d::translation(eclipticPos+aberrationPush) * rotLocalToParent;
 	// This removed totally the Planet shaking bug!!!
 	StelProjector::ModelViewTranformP transfo = core->getHeliocentricEclipticModelViewTransform();
 	transfo->combine(mat);
 
 	// Compute the 2D position and check if in the screen
 	const StelProjectorP prj = core->getProjection(transfo);
-	const double screenSz = (getAngularSize(core))*M_PI_180*static_cast<double>(prj->getPixelPerRadAtCenter());
+	const double screenRd = (getAngularRadius(core))*M_PI_180*static_cast<double>(prj->getPixelPerRadAtCenter());
 	const double viewport_left = prj->getViewportPosX();
 	const double viewport_bottom = prj->getViewportPosY();
 	const bool projectionValid=prj->project(Vec3d(0.), screenPos);
 	if (projectionValid
-		&& screenPos[1] > viewport_bottom - screenSz
-		&& screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
-		&& screenPos[0] > viewport_left - screenSz
-		&& screenPos[0] < viewport_left + prj->getViewportWidth() + screenSz)
+		&& screenPos[1] > viewport_bottom - screenRd
+		&& screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenRd
+		&& screenPos[0] > viewport_left - screenRd
+		&& screenPos[0] < viewport_left + prj->getViewportWidth() + screenRd)
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlapping (ie for jupiter satellites)
@@ -450,7 +442,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 		labelsFader = (flagLabels && ang_dist>0.25f && maxMagLabels>getVMagnitude(core));
 		drawHints(core, planetNameFont);
 
-		draw3dModel(core,transfo,static_cast<float>(screenSz));
+		draw3dModel(core,transfo,static_cast<float>(screenRd));
 	}
 	else
 		if (!projectionValid && prj.data()->getNameI18() == q_("Orthographic"))
@@ -497,7 +489,7 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 {
 	// Find rotation matrix from 0/0/1 to viewdirection! crossproduct for axis (normal vector), dotproduct for angle.
-	Vec3d eclposNrm=eclipticPos - core->getObserverHeliocentricEclipticPos()  ; eclposNrm.normalize();
+	Vec3d eclposNrm=eclipticPos+aberrationPush - core->getObserverHeliocentricEclipticPos()  ; eclposNrm.normalize();
 	Mat4d comarot=Mat4d::rotation(Vec3d(0.0, 0.0, 1.0)^(eclposNrm), std::acos(Vec3d(0.0, 0.0, 1.0).dot(eclposNrm)) );
 	StelProjector::ModelViewTranformP transfo2 = transfo->clone();
 	transfo2->combine(comarot);

@@ -22,7 +22,7 @@ bright novae in the Milky Way galaxy.
 If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), bright
 novae from the past will be presented in the sky at the correct
 times. For example, set date and time to 30 August 1975, look at the constellation \emph{Cygnus} to see
-\emph{Nova Cygni 1975}\footnote{\url{http://en.wikipedia.org/wiki/V1500_Cygni}} (Fig.~\ref{fig:NovaCygni1975}).
+\emph{Nova Cygni 1975}\footnote{\url{https://en.wikipedia.org/wiki/V1500_Cygni}} (Fig.~\ref{fig:NovaCygni1975}).
 
 
 \subsection{Section \big[Novae\big] in config.ini file}
@@ -265,19 +265,29 @@ To add a new nova, open a new line after line 5 and paste the following, note co
 \end{figure}
 
 \noindent This plugin plots the position of stars with
-exoplanets. Exoplanets data is derived from ``The Extrasolar Planets
+\indexterm{exoplanets}. Exoplanets data is derived from ``The Extrasolar Planets
 Encyclopaedia''\footnote{\url{http://exoplanet.eu/}}. List of
 potential habitable exoplanets and data about them were taken from
 ``The Habitable Exoplanets
-Catalog''\footnote{\url{http://phl.upr.edu/projects/habitable-exoplanets-catalog}}
+Catalog''\footnote{\url{https://phl.upr.edu/projects/habitable-exoplanets-catalog}}
 by the Planetary Habitability
-Laboratory\footnote{\url{http://phl.upr.edu/home}}.  If enabled (see
+Laboratory\footnote{\url{https://phl.upr.edu/home}}.  If enabled (see
 section~\ref{sec:Plugins:EnablingPlugins}), just click on the
 Exoplanet button \guibutton{0.6}{btExoplanets-off.png} on the bottom
 toolbar to display markers for the stars with known exoplanets. You
 can then either click on such a marked star or find the stars with
 exoplanets by their designation (e.g., \emph{24 Sex}) in the \key{F3} dialog (see~\ref{sec:gui:search}).
 
+A large number of exoplanets was discovered by the \indexterm[Kepler, exoplanets]{Kepler} 
+space observatory mission (2009--18) which in its primary mission observed a small field in the Cyg/Lib/Dra area. Accordingly 
+you will find a huge concentration of exoplanets there. This should give us a hint about how many more must be out there.
+Its extended mission added many more exoplanet systems along the ecliptic.
+
+The second tab in the plugin's dialog shows a scatter plot relating
+two selectable properties.  In some cases a logarithmic axis is more
+useful, but if the original values can be negative only the positive
+data are shown in log plots. Additional entry fields allow filtering
+the data range.
 
 \subsection{Potential habitable exoplanets}
 \label{sec:plugins:Exoplanets:habitable}
@@ -290,13 +300,13 @@ This plugin can display potential habitable exoplanets (orange marker) and some 
   zone (hot, warm, cold) and size (miniterran, subterran, terran,
   superterran, jovian, neptunian) (Earth = G-Warm Terran).
 \item[Equilibrium Temperature] The planetary equilibrium
-  temperature\footnote{\url{http://lasp.colorado.edu/~bagenal/3720/CLASS6/6EquilibriumTemp.html}}
+  temperature\footnote{\url{https://en.wikipedia.org/wiki/Planetary_equilibrium_temperature}}
   is a theoretical temperature (in \degree C) that the planet would be
   at when considered simply as if it were a black body being heated
   only by its parent star (assuming a 0.3 bond albedo). As example the
   planetary equilibrium temperature of Earth is -18.15\degree C (255~K).
 \item[Earth Similarity Index (ESI)] Similarity to
-  Earth\footnote{\url{http://phl.upr.edu/projects/earth-similarity-index-esi}}
+  Earth\footnote{\url{https://phl.upr.edu/projects/earth-similarity-index-esi}}
   on a scale from 0 to 1, with 1 being the most Earth-like. ESI
   depends on the planet's radius, density, escape velocity, and
   surface temperature.
@@ -582,7 +592,7 @@ In December 2015\footnote{%
 
 All names with asterix mark (*) are modified based on the original proposals, to be consistent with the IAU rules.
 
-\newpage
+%\newpage
 \subsection{Section \big[Exoplanets\big] in config.ini file}
 %\label{sec:plugins:Exoplanets:configuration}
 
@@ -590,29 +600,31 @@ You can edit \file{config.ini} file by yourself for changes of the
 settings for the Exoplanets plugin -- just make it carefully!
 
 \noindent%
-\begin{tabularx}{\textwidth}{l|l|X}\toprule
+%\begin{tabularx}{\textwidth}{l|l|X}\toprule
+\begin{longtable}{l|l|p{75mm}}\toprule
 \emph{ID}               & \emph{Type} & \emph{Description}\\\midrule
-last\_update                 & string & Date and time of last update \\%\midrule
-update\_frequency\_hours       & int  & Frequency of updates, in hours \\%\midrule
-updates\_enable                & bool & Enable updates of exoplanets catalog from Internet \\%\midrule
-url                          & string & URL of exoplanets catalog \\%\midrule
-flag\_show\_exoplanets\_button & bool & Enable showing button of exoplanets on bottom bar \\%\midrule
-distribution\_enabled          & bool & Enable distribution mode of display \\%\midrule
-timeline\_enabled              & bool & Enable timeline mode of display \\%\midrule
-habitable\_enabled             & bool & Enable habitable mode of display \\%\midrule
-enable\_at\_startup            & bool & Enable displaying exoplanets at startup of the plugin \\%\midrule
-exoplanet\_marker\_color      & R,G,B & Color for marker of star with planetary system \\%\midrule
-habitable\_exoplanet\_marker\_color & R,G,B & Color for marker of star with planetary system with potential habitable exoplanets\\%\midrule
+last\_update                 & string & Date and time of last update \\
+update\_frequency\_hours       & int  & Frequency of updates, in hours \\
+updates\_enable                & bool & Enable updates of exoplanets catalog from Internet \\
+url                          & string & URL of exoplanets catalog \\
+flag\_show\_exoplanets\_button & bool & Enable showing button of exoplanets on bottom bar \\
+distribution\_enabled          & bool & Enable distribution mode of display \\
+timeline\_enabled              & bool & Enable timeline mode of display \\
+habitable\_enabled             & bool & Enable habitable mode of display \\
+enable\_at\_startup            & bool & Enable displaying exoplanets at startup of the plugin \\
+exoplanet\_marker\_color      & R,G,B & Color for marker of star with planetary system \\
+habitable\_exoplanet\_marker\_color & R,G,B & Color for marker of star with planetary system with potential habitable exoplanets\\
 temperature\_scale           & string & Temperature scale for equilibrium temperature of exoplanets. 
                                         Possible values: \emph{Kelvin}, \emph{Celsius}, \emph{Fahrenheit}. Default value: \emph{Celsius}. \\\bottomrule
-\end{tabularx}
+%\end{tabularx}
+\end{longtable}
 
 \subsection{Format of exoplanets catalog}
 \label{sec:plugins:Exoplanets:format}
 
 To add a new exoplanet system, open a new line after line 5 and paste the following, note commas and brackets, they are important:
 
-\begin{configfile}
+\begin{configfile}[\footnotesize]
 "Star designation":
 {
 	"exoplanets":
@@ -631,7 +643,7 @@ To add a new exoplanet system, open a new line after line 5 and paste the follow
 		"pclass": "planetary class",
 		"EqTemp": equilibrium temperature (K),
 		"conservative": conservative or optimistic 
-						habitability of the exoplanet,
+				habitability of the exoplanet,
 		"ESI": Earth Similarity Index (*100),
 		"planetProperName": "proper name of planet",
 		"planetName": "designation of planet"
@@ -650,7 +662,7 @@ To add a new exoplanet system, open a new line after line 5 and paste the follow
 		"pclass": "planetary class",
 		"EqTemp": equilibrium temperature (K),
 		"conservative": conservative or optimistic 
-						habitability of the exoplanet,
+				habitability of the exoplanet,
 		"ESI": Earth Similarity Index (*100),
 		"planetProperName": "proper name of planet",
 		"planetName": "designation of planet"
@@ -672,7 +684,7 @@ To add a new exoplanet system, open a new line after line 5 and paste the follow
 \end{configfile}
 
 \noindent For example, the record for \textit{24 Sex} looks like:
-\begin{configfile}
+\begin{configfile}[\footnotesize]
 "24 Sex":
 {
 		"exoplanets":
@@ -940,6 +952,11 @@ distributions where bright meteors are more frequent than average,
 while values above 3.0 mean that the share of faint meteors is larger
 than usual.
 
+\paragraph{Solar longitude}
+
+The \indexterm{solar longitude} (equinox J2000) gives the position of the Earth on its orbit.
+It is a more appropriate information on a meteor shower than the date.
+
 \subsection{Section \big[MeteorShowers\big] in config.ini file}
 %\label{sec:plugins:MeteorShowers:configuration}
 
@@ -964,72 +981,109 @@ colorARR               & R,G,B & Color for marker of active meteor showers with 
 colorIR                & R,G,B & Color for marker of inactive meteor showers \\\bottomrule
 \end{tabularx}
 
-\newpage
+
 \subsection{Format of Meteor Showers catalog}
 \label{sec:plugins:MeteorShowers:format}
 
 To add a new meteor shower, you just need to:
 \begin{enumerate}
 \item Copy the code of some valid meteor shower;
-\item Paste it in the line 6 (right after the ``showers'': \{) of the showers.json document;
+\item Paste it in the line 6 (right after the ``showers'': \{) of the MeteorShowers.json document;
 \item Replace the information according with your needs.
 \end{enumerate}
-Note commas and brackets, they are very important! For example, below is a record for \textit{Northern Taurids}:
+Note commas and brackets, they are very important!
 
-\begin{configfile}
-"NTA":
-	{
-		"designation": "Northern Taurids",
-		"activity":
-		[
-		{
-			"year": "generic",
-			"zhr": 5,
-			"start": "09.25",
-			"finish": "11.25",
-			"peak": "11.12"
-		},
-		{
-			"year": "2014",
-			"start": "10.20",
-			"finish": "12.10"
-		},
-		{
-			"year": "2013",
-			"start": "10.20",
-			"finish": "12.10"
-		},
-		{
-			"year": "2012",
-			"start": "10.20",
-			"finish": "12.10"
-		},
-		{
-			"year": "2011",
-			"start": "10.20",
-			"finish": "12.10"
-		}
-		],
-		"speed": 29,
-		"radiantAlpha": "58",
-		"radiantDelta": "+22",
-		"driftAlpha": "5",
-		"driftDelta": "1",
-		"colors":
-		[
-		{
-			"color": "yellow",
-			"intensity": 80
-		},
-		{
-			"color": "white",
-			"intensity": 20
-		}
-		],
-		"parentObj": "Comet C/1917 F1 (Mellish)",
-		"pidx": 2.3
-	},
+\begin{configfile}[\footnotesize]
+"Three-letter code":
+    {
+        "designation": "Name",
+        "IAUNo": "IAU shower number",
+        "activity":
+        [
+        {
+            "year": "generic",
+            "zhr": Maximum ZHR (-1 if variable),
+            "variable": "Minimum-maximum (if variable)",
+            "start": Solar longitude at start,
+            "finish": Solar longitude at finish,
+            "peak": Solar longitude at peak,
+            "disttype": Type of distribution function
+                        (0=Gauss, 1=Lorentz),
+            "b1": Slope of distribution function
+                  before peak,
+            "b2": Slope of distribution function
+                  after peak
+        }
+        ],
+        "speed": Geocentric speed (km/s),
+        "radiantAlpha": Right Ascension (J2000) (degree),
+        "radiantDelta": Declination (J2000) (degree),
+        "driftAlpha": Radiant drift in Right Ascension,
+        "driftDelta": Radiant drift in Declination,
+        "colors":
+        [
+        {
+            "color": "white",
+            "intensity": 70
+        },
+        {
+            "color": "blueGreen",
+            "intensity": 30
+        }
+        ],
+        "parentObj": "Parent object",
+        "pidx": population index
+    },
 \end{configfile}
+
+For example, below is a record for \textit{Northern Taurids}:
+
+\begin{configfile}[\footnotesize]
+"NTA":
+    {
+        "designation": "Northern Taurids",
+        "IAUNo": "17",
+        "activity":
+        [
+        {
+            "year": "generic",
+            "zhr": 5,
+            "start": 206,
+            "finish": 258,
+            "peak": 230
+        }
+        ],
+        "speed": 29,
+        "radiantAlpha": 58,
+        "radiantDelta": 22,
+        "driftAlpha": 1.03,
+        "driftDelta": 0.26,
+        "colors":
+        [
+        {
+            "color": "yellow",
+            "intensity": 80
+        },
+        {
+            "color": "white",
+            "intensity": 20
+        }
+        ],
+        "parentObj": "Comet 2P/Encke",
+        "pidx": 2.3
+    },
+\end{configfile}
+
+\subsection{Notes}
+\begin{itemize}
+\item This plugin uses two models \citep{1994A&A...287..990J} and \citep{1998Jenniskens} to calculate ZHR,
+  assuming that the activity profile of meteor shower follows a double exponential shape.
+\item To predict the local hourly rate, altitude of radiant and limiting magnitude of the sky are taken into account.
+  Moonlight can also reduce the hourly rate, but is not taken into account.
+\item Most of the numerical data for past meteor outbursts (Leonids, etc.) come from \citep{2006Jenniskens.book}.
+  There is a wide range of reported values for the maximum ZHR for the 1833 and 1966 Leonids \citep{1999Brown}.
+  We decided to use a maximum number of 150,000 to demonstrate meteor outbursts with very high rate.
+\end{itemize}
 
 \subsection{Further Information}
 \label{sec:plugins:MeteorShowers:Further}
@@ -1037,11 +1091,12 @@ Note commas and brackets, they are very important! For example, below is a recor
 You can get more info about meteor showers here:
 \begin{itemize}
 \item Wikipedia about Meteor showers: \url{https://en.wikipedia.org/wiki/Meteor_Showers}
-\item International Meteor Organization: \url{http://www.imo.net/}
+\item International Meteor Organization: \url{https://www.imo.net/}
+\item IAU Meteor Data Center: \url{https://www.ta3.sk/IAUC22DB/MDC2007/}
 \end{itemize}
 
 \subsection*{Acknowledgements}
-This plugin was created as project of ESA Summer of Code in Space 2013\footnote{\url{http://sophia.estec.esa.int/socis2013/?q=about}}.
+This plugin was initially created as project of ESA Summer of Code in Space 2013\footnote{\url{http://sophia.estec.esa.int/socis2013/?q=about}}.
 
 
 \newpage
@@ -1055,14 +1110,17 @@ This plugin was created as project of ESA Summer of Code in Space 2013\footnote{
 \label{fig:plugin:NavigationalStars}
 \end{figure}
 
-\noindent This plugin marks navigational stars from a selected set:
+\noindent This plugin marks navigational stars from a selected set (Figure~\ref{fig:plugin:NavigationalStars:Settings}):
 \begin{description}
-	\item[Anglo-American] --- the 57 ``selected stars'' that are listed in \emph{The Nautical Almanac}\footnote{The Nautical Almanac
-		website -- \url{http://aa.usno.navy.mil/publications/docs/na.php}} jointly published by Her Majesty's Nautical Almanac Office and the US Naval Observatory since 1958; consequently, these stars are also used in navigational aids such as the \emph{2102-D Star Finder}\footnote{Rude Starfinder 2102-D
-		description and usage instruction --
-		\url{http://oceannavigation.blogspot.ru/2008/12/rude-starfinder-2102-d.html}} and \emph{Identifier}. 
-	\item[French] --- the 81 stars that are listed in the \emph{Ephémérides Nautiques} published by the French Bureau des Longitudes.
-	\item[Russian] --- the 160 stars that are listed in the Russian Nautical Almanac.
+\item[Anglo-American] --- the 57 ``selected stars'' that are listed in \emph{The Nautical Almanac}\footnote{The Nautical Almanac
+  website -- \url{https://aa.usno.navy.mil/publications/docs/na.php}} jointly published by Her Majesty's Nautical Almanac Office
+  and the US Naval Observatory since 1958; consequently, these stars are also used in navigational aids such as the
+  \emph{2102-D Star Finder}\footnote{Rude Starfinder 2102-D description and usage instruction --
+    \url{https://oceannavigation.blogspot.com/2008/12/rude-starfinder-2102-d.html}} and \emph{Identifier}. 
+\item[French] --- the 81 stars that are listed in the \emph{Ephémérides Nautiques} published by the French Bureau des Longitudes.
+\item[Russian] --- the 160 stars that are listed in the Russian Nautical Almanac.
+\item[German] --- the 80 stars that are listed in the German Nautical Almanac (The original German title is \textit{Nautisches Jahrbuch})
+  published by the Federal Maritime and Hydrographic Agency of Germany.
 \end{description}
 If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), just click
 on the Sextant button \guibutton{0.6}{bt_NavStars-off.png} on
@@ -1071,6 +1129,32 @@ can help you in training your skills in astronomical navigation before
 you cruise the ocean in the traditional way, with your sextant and
 chronometer.
 
+\begin{figure}[htbp]
+  \centering\includegraphics[width=0.8\textwidth]{navstars_plugin_settings.jpg}
+  \caption{Settings of the Navigational stars plugin}
+  \label{fig:plugin:NavigationalStars:Settings}
+\end{figure}
+
+In the second tab (``Today'', see Figure~\ref{fig:plugin:NavigationalStars:Today}) in the plugin's dialog (right-click the button)
+you can see times of sunrise and sunset, twilights, moonrise and moonset. 
+
+\begin{figure}[htbp]
+  \centering\includegraphics[width=0.8\textwidth]{navstars_plugin_today.jpg}
+  \caption{Today tab in the Navigational stars plugin}
+  \label{fig:plugin:NavigationalStars:Today}
+\end{figure}
+
+\begin{description}
+\item[Civil Twilight] occurs when the zenith angle of the center of the Sun is less than $96\degree$ ($6\degree$ below the horizon)
+  and the available skylight is still typically sufficient for most civilian outdoor activities. The apparent horizon is still
+  clearly visible against the glowing sky and only the brightest stars are beginning to show.
+\item[Nautical Twilight] occurs when the zenith angle of the center of the Sun is less than $102\degree$ ($12\degree$ below the horizon)
+  and the available skylight is no longer sufficient for detailed outdoor activities. However, the outline of the apparent horizon,
+  as well as most large topographical features, are still distinguishable and the key stars used for navigational purposes have all typically become visible.
+\item[Astronomical Twilight] occurs when the zenith angle of the center of the Sun is less than $108\degree$ ($18\degree$ below the horizon)
+  and the available skylight is effectively imperceptible compared to moonlight and starlight. Beyond this angle there is
+  no longer any discernible atmospheric scattering of sunlight, so the time after astronomical twilight is basically night.
+\end{description}
 
 \subsection{Section \big[NavigationalStars\big] in config.ini file}
 %\label{sec:plugins:NavigationalStars:configuration}
@@ -1080,12 +1164,104 @@ settings for the Navigational Stars plugin -- just make it carefully!
 
 \noindent%
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
-\emph{ID}			& \emph{Type} 	& \emph{Description}\\\midrule
-navstars\_color 	& R,G,B 		& Color of markers of navigational stars  \\
-enable\_at\_startup & bool 		    & Set to \emph{true} to display navigational stars at startup of planetarium  \\
-current\_ns\_set	& string		& Current set of navigational stars. Possible values: \emph{AngloAmerican}, \emph{French} and \emph{Russian}. \\
+\emph{ID}              & \emph{Type} & \emph{Description}\\\midrule
+navstars\_color             & R,G,B  & Color of markers of navigational stars  \\
+enable\_at\_startup         & bool   & Set to \emph{true} to display navigational stars at startup of planetarium  \\
+use\_utc\_time              & bool   & Set to \emph{true} to use UTC time when navigational stars are displayed \\
+extra\_decimals             & bool   & Set to \emph{true} to show extra decimals in info \\
+upper\_limb                 & bool   & Set to \emph{true} to use upper limb for Sun and Moon \\
+tabulated\_display          & bool   & Set to \emph{true} to show information as a tabulated list \\
+limit\_info\_to\_nav\_stars & bool   & Set to \emph{true} to show extra information only for marked Navigation Stars \\ 
+highlight\_when\_visible    & bool   & Set to \emph{true} to highlight only visible stars \\
+current\_ns\_set            & string & Current set of navigational stars. Possible values: \emph{AngloAmerican}, \emph{French}, \emph{Russian} and \emph{German}. \\
 \bottomrule
 \end{tabularx}
+
+
+\newpage
+\section{OnlineQueries Plugin}
+\label{sec:plugins:OnlineQueries}
+
+Stellarium includes and provides lots of information about many kinds
+of objects. However, there are scientific websites which provide even
+more specialized information about particular objects. This plugin
+\newFeature{0.21.1} allows online access to several websites on a
+variety of special topics. To retrieve information, select the
+respective tab and press \button{Query}. The result is displayed in a
+browser view\footnote{%
+  For technical reasons, on some platforms the
+  result is displayed in the system's default web browser.  On some
+  other platforms, e.g. Windows/WSL with Ubuntu or some ARM computers, the
+  web view fails to work properly.  On these platforms you should
+  manually edit \file{config.ini} and set the
+  \texttt{disable\_webview} entry in the config file.}.
+
+\begin{description}
+\item[Wikipedia] The free online encyclopedia provides information
+  about many bright stars, the planets, moons and many asteroids, as
+  well as many deep-sky objects. The lookup is based on the English
+  proper name.
+\item[AAVSO] The \indexterm{International Variable Star
+  Index}\footnote{\url{https://www.aavso.org/vsx/}} of the
+  \indexterm{American Association of Variable Star Observers} (AAVSO)
+  provides data about variable stars.
+\item[GCVS] The \indexterm{General Catalogue of Variable
+  Stars}\footnote{\url{http://www.sai.msu.su/gcvs/}} of the Sternberg
+  Astronomical Institute and the Institute of Astronomy of the Russian
+  Academy of Sciences in Moscow.
+\item[Ancient-Skies] A private project founded in preparation of the
+  \indexterm{International Year of Astronomy} 2009 which collects
+  information about star names and their mythologies
+  \citep{AncientSkies:2011}. The site is preparing a relaunch in 2021.
+\end{description}
+
+In addition, you can configure up to three further websites. These
+must provide some public website which takes a query for a Hipparcos
+star number or object name.  For example, the website
+\url{https://biblicalastronomy.co/playground/fetch.cfm?Hipp=n}
+provides various data and cross-references for a star with Hipparcos
+number \texttt{n}.
+
+Regardless of the current program language, the result is always
+presented in English or the language of the respective website.
+
+% \paragraph{Note:}
+
+\subsection{Section \big[OnlineQueries\big] in config.ini file}
+%\label{sec:plugins:OnlineQueries:configuration}
+
+You can edit the \file{config.ini} file to change settings of the
+OnlineQueries plugin.  The only strings you should need to touch are
+the \texttt{customN\_\ldots} entries ($\mathtt{N}\in \left\{ 1, 2,
+3\right\}$). The placeholder \texttt{\%1} will be filled by either the
+Hipparcos number (if the respective \texttt{customN\_use\_hip} is
+\texttt{true}) or by the first English name used in Stellarium. The
+\texttt{customN\_use\_hip} should be \texttt{true} to use a star's
+Hipparcos number, or \texttt{false} to use the English name as key.
+
+
+\begin{center}
+{\small
+\begin{tabular}{l|l|l}\toprule
+\emph{ID} & \emph{Type} & \emph{Default}\\\midrule
+ancientskies\_url    &string & (don't override)\\ % https://www.ancient-skies.org/api.php?apikey=fZdn9QsNdCAY4KggkV2T\&response=HTML\&entity=star\&catalog=HIPPARCOS\&id=\%1 \\
+aavso\_hip\_url      &string & (don't override)\\ % https://www.aavso.org/vsx/index.php?view=api.object\&ident=HIP\%1 \\
+aavso\_oid\_url      &string & (don't override)\\ % https://www.aavso.org/vsx/index.php?view=detail.top\&oid=\%1      \\
+gcvs\_url            &string & (don't override)\\ % http://www.sai.msu.su/gcvs/cgi-bin/ident.cgi?cat=Hip+\&num=\%1    \\
+wikipedia\_url       &string & (don't override)\\ % https://en.wikipedia.org/wiki/\%1 \\
+\midrule
+custom1\_url         &string & https://biblicalastronomy.co/playground/fetch.cfm?Hipp=\%1 \\
+custom2\_url         &string & \\
+custom3\_url         &string & \\
+custom1\_use\_hip    &boolean& true \\
+custom2\_use\_hip    &boolean& true \\
+custom3\_use\_hip    &boolean& true \\\midrule
+disable\_webview     &boolean&false \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
 
 \newpage
 \section{Satellites Plugin}
@@ -1102,37 +1278,87 @@ file URLs.
 To calculate satellite positions, the plugin uses an implementation of
 the SGP4/SDP4 algorithms (J.L. Canales' \program{gsat} library), using
 as its input data in NORAD's two-line element set
-(TLE\footnote{TLE: \url{https://en.wikipedia.org/wiki/Two-line_element_set}})
+(\indexterm[TLE, two-line element]{TLE}\footnote{TLE: \url{https://en.wikipedia.org/wiki/Two-line_element_set}})
 format. Lists with TLEs for hundreds of satellites are available
 online and are regularly updated. The plugin downloads the lists
-prepared by \url{http://celestrak.com} to keep itself up-to-date, but the users can
+prepared by \url{https://celestrak.com} to keep itself up-to-date, but the users can
 specify other sources online or load updates from local files.
 
-If enabled (see
+\begin{figure}[htbp]
+	\centering\includegraphics[width=0.8\textwidth]{satellites_plugin_configuration.jpg}
+	\caption{Configuration of the Satellites plugin}
+	\label{fig:plugins:Satellites:Configuration}
+\end{figure}
+
+If the plugin has been enabled (see
 section~\ref{sec:Plugins:EnablingPlugins}), just click on the
 Satellite button \guibutton{0.6}{bt_hint.png}  on the bottom
-toolbar to display markers for the satellites.
+toolbar to display markers for the satellites, or use right click to call the GUI.
 
-It should now be possible to search for artificial satellites using
+You can search for artificial satellites using
 the regular search dialog (\key{F3}). Note that at any given time, most
 Satellites will be below the horizon.
 
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.8\textwidth]{satellites_plugin_configuration.png}
-\caption{Configuration of the Satellites plugin.}
-\label{fig:plugins:Satellites:Configuration}
-\end{figure}
+Satellites can be either shown as white dots of appropriate brightness
+similar to moving stars (just like they appear to the naked eye), or
+as satellite-shaped markers (icons). Especially this latter view shows
+the huge number of satellites in orbit, most of which are invisible to
+the unaided eye.
+
+You can display \newFeature{0.22.2} circles representing the Earth's
+shadow (penumbra and umbra, defined just like for Lunar eclipses, see
+section~\ref{sec:Eclipses:lunar}), at the distance of the currently
+selected satellite, or at a fixed (configurable) distance from Earth's surface.
 
 \subsection{Satellite Properties}
 \label{sec:plugins:Satellites:properties}
 
+\begin{figure}[tbp]
+	\centering\includegraphics[width=0.8\textwidth]{satellites_plugin_satellites.jpg}
+	\caption{Configuration of the Satellites plugin: satellite properties}
+	\label{fig:plugins:Satellites:Configuration:Satellites}
+\end{figure}
+
 \begin{description}
-\item[Name and identifiers] Each satellite has a name. It's displayed as a label of the satellite hint and in the list of satellites. Names are not unique though, so they are used only
-for presentation purposes.
-
-\item[Satellite Catalog] In the \emph{Satellite Catalog} satellites are uniquely identified by their NORAD number, which is encoded in TLEs.
-
-\item[Grouping]
+\item[Name] Each satellite has a name. It's displayed as a label of
+  the satellite hint and in the list of satellites. Names are not
+  unique though, so they are used only for presentation purposes.
+\item[Catalog number] In the \emph{Satellite Catalog} satellites are
+  uniquely identified by their NORAD number, which is encoded in
+  \indexterm[TLE, two-line element]{TLE}s.
+\item[I.D. (The International Designator)] In the \emph{Satellite
+  Catalog} satellites are also uniquely identified by their
+  International Designator also known as \indexterm[COSPAR ID (satellite ID)]{COSPAR ID},
+  which is encoded in TLEs.
+\item[Standard magnitude] The \indexterm[standard magnitude
+  (satellites)]{standard magnitude} may be an estimate based on the
+  mean cross-sectional area derived from its dimensions, or it may be
+  a mean value derived from visual observations.\footnote{The standard
+    magnitude and RCS data were obtained from Mike McCants' quicksat
+    catalog with his kind permission.}
+\item[RCS] The \indexterm[RCS, Radar Cross Section]{Radar Cross
+  Section} is a median value derived from the last several years of
+  values in the Satellite Situation Report. The units of the RCS are
+  square meters.
+\item[Perigee] The \indexterm{perigee} is the nearest point respectively of a
+  satellite's direct orbit around the Earth. The unit of perigee is
+  kilometers.
+\item[Apogee] The \indexterm{apogee} is the farthest point
+  respectively of a satellite's direct orbit around the Earth. The
+  unit of apogee is kilometers.
+\item[Period] The orbital period is simply how long an orbiting
+  satellite takes to complete one orbit. The unit of period is
+  minutes.
+\item[Displayed] In the \emph{Satellite Catalog} tab this property
+  controls whether the selected satellite should be displayed on the
+  sky.
+\item[Orbit] In the \emph{Satellite Catalog} tab this property
+  controls whether the orbit of the selected satellite should be
+  displayed in the sky.
+\item[Do not update] In the \emph{Satellite Catalog} tab this property
+  marks satellites for which TLE should not be updated.
+\item[Description] The user-defined notes for the selected satellite.
+\item[Groups]
 A satellite can belong to one or more groups such as ``amateur'',
 ``geostationary'' or ``navigation''. They have no other function but
 to help the user organize the satellite collection.  Group names are
@@ -1141,24 +1367,64 @@ and are more similar to the concept of tags than a hierarchical
 grouping. A satellite may also not belong to any group at all.
 
 By convention, group names are in lowercase. The GUI translates some of the groups used in the default catalog.
+
+The group names also can be used as an additional filters for the satellites (see UI elements on the left side).
+
+\item[TLE set] The raw TLE data of selected satellite. A two-line
+  element set (TLE) is a data format encoding a list of orbital
+  elements of an Earth-orbiting object for a given point in time, the
+  epoch. Using a suitable prediction model, the state (position and
+  velocity) at any point in the past or future can be estimated to
+  some accuracy.
+
+\item[Epoch of the TLE] Human-readable epoch of current TLE set.
 \end{description}
 
-\begin{figure}[tbp]
-	\centering\includegraphics[width=0.8\textwidth]{satellites_plugin_satellites.png}
-	\caption{Configuration of the Satellites plugin --- satellites properties.}
-	\label{fig:plugins:Satellites:Configuration:Satellites}
+On the left side of this tab you may see tools for filtering the
+satellites. The upper part shows a drop-down list with many predefined
+filters. Some filters are connected to user defined groups to quickly
+get a list of satellites in some group, such as all satellites from
+group ``navigation''. Some filters are connected to orbital properties
+of satellites, e.g., selecting the filter ``[LEO]'' will show all
+low-orbital satellites.
+
+\begin{figure}[t]
+	\centering\includegraphics[width=0.6\textwidth]{satellites_plugin_filters.jpg}
+	\caption{Configuration of the Satellites plugin: satellites custom filter}
+	\label{fig:plugins:Satellites:Configuration:SatellitesFilter}
 \end{figure}
 
+You can display \newFeature{0.22.2} a list of satellites by specific
+selection of their properties, when the filter ``[custom filter]'' has
+been selected (Fig.~\ref{fig:plugins:Satellites:Configuration:SatellitesFilter}). The
+settings of this filter are available through the button
+\guibutton{0.6}{uibtSettings.png}, which is located at the right of
+the drop-down list.
+
+\begin{figure}[tb]
+	\centering\includegraphics[width=0.6\textwidth]{satellites_plugin_comms.jpg}
+	\caption{Configuration of the Satellites plugin: satellite communication data}
+	\label{fig:plugins:Satellites:Configuration:SatellitesComms}
+\end{figure}
+
+You can edit communication data for individual satellites by pressing \guibutton{0.6}{bt_comms_sat.png}
+(Fig.~\ref{fig:plugins:Satellites:Configuration:SatellitesComms}),
+where ``Description'' and ``Frequency'' are required fields and field
+``Modulation'' is optional. Some individual satellites and their
+groups already have the communication data filled in the default
+catalog.
 
 \subsection{Satellite Catalog}
 \label{sec:plugins:Satellites:catalog}
 
-The satellite catalog is stored on the disk in JSON\footnote{\url{http://www.json.org/}}
-format, in a file named \file{satellites.json}. A default copy is embedded in the plug-in at compile time. A working copy is kept in the user data directory.
+The satellite catalog is stored on disk in JSON\footnote{\url{https://www.json.org/}}
+format, in a file named \file{satellites.json}. A default copy is embedded in the
+plug-in at compile time. A working copy is kept in the user data directory.
 
 %   Used in Satellites plug-in 0.7.1 and later (Stellarium 0.11.2 and later) 
 
-To add a new satellite, open a new line after line 5 and paste the following, note commas and brackets, they are important:
+To add a new satellite, open a new line after line 5 and paste the following.
+Note the structure of commas and brackets, they are important:
 \begin{configfileScr}
 "NORAD number": 
 {
@@ -1187,44 +1453,49 @@ Explanation of the fields:
 \begin{description}
 \item[NORAD number]  required parameter, surrounded by double quotes (\texttt{"}),
 followed by a colon (\texttt{:}). It is used internally to identify the
-satellite. You should replace the text \texttt{"NORAD number"} with the first number on both lines of the TLE set (in this case, \texttt{"12345"}). It must match the number of the satellite in the source you are adding from if you want the TLE to be automatically updated.
+satellite. You should replace the text \texttt{"NORAD number"} with the first number
+on both lines of the TLE set (in this case, \texttt{"12345"}).
+It must match the number of the satellite in the source you are adding from if you want the TLE to be automatically updated.
 \end{description}
-The remaining parameters should be listed between two curly brackets and the closing curly bracket must be followed by a comma to separate it from the next satellite in the list:
+The remaining parameters should be listed between two curly brackets,
+and the closing curly bracket must be followed by a comma to separate it from the next satellite in the list:
 
 \begin{description}
-\item[name] required parameter. It will be displayed on the screen and used
+\item[name]  required parameter. It will be displayed on the screen and used
 when searching for the satellite with the Find window. Use the
-description field for a more readable name if you like. (The
-description field can accept HTML tags such as \texttt{<br/>} (new line), \texttt{<b></b>} (bold), etc.)
-
-\item[description] optional parameter, double quoted. Appears when you click on the satellite \item[comms] optional parameter, square bracketed list of curly bracketed communications information.
-\item[groups]  optional parameter, comma separated list of double quoted group names contained in square brackets. Used for grouping satellites in the drop down box on the config (see above)
+description field for a more readable name if you like.
+\item[description]  optional parameter, double quoted. Appears when you click on the satellite.
+  The description field can accept HTML tags such as \texttt{<br/>} (new line), \texttt{<b>}\textbf{bold}\texttt{</b>}, etc.
+\item[comms]  optional parameter, square bracketed list of curly bracketed communications information.
+\item[groups]  optional parameter, comma separated list of double quoted group names contained in square brackets.
+  Used for grouping satellites in the drop down box on the config (see above)
 \item[tle1]  required, line 1 of the TLE, must be contained in double quotes and begin with \texttt{"1~"}
 \item[tle2]  required, line 2 of the TLE, must be contained in double quotes and begin with \texttt{"2~"}
 \item[visible]  required parameter, set to true if you want to see it, this can be toggled from the configuration window once the satellite is loaded. 
-\item[stdMag]  optional parameter, contained standard magnitude of satellite. 
+\item[stdMag]  optional parameter, containing standard magnitude of satellite. 
+\item[rcs] optional parameter, containing the satellite's  \indexterm[RCS, Radar Cross Section]{Radar Cross
+	Section}. The units of the RCS are square meters.
 \end{description}
 You can edit the tags for a satellite, modify the description and comms data, and even add new satellites. 
 
 \subsection{Configuration}
 %\label{sec:plugins:Satellites:configuration}
 
-The plug-in's configuration data is stored in Stellarium's main configuration
-file.
+The plug-in's configuration data is stored in Stellarium's main configuration file.
 
 \subsection{Sources for TLE data}
 
 \begin{figure}[tbp]
 	\centering\includegraphics[width=0.8\textwidth]{satellites_plugin_sources.png}
-	\caption{Configuration of the Satellites plugin --- sources for TLE data.}
+	\caption{Configuration of the Satellites plugin: sources for TLE data}
 	\label{fig:plugins:Satellites:Configuration:Sources}
 \end{figure}
 
 \begin{description}
-\item[Celestrak]\footnote{\url{http://celestrak.com/NORAD/elements/}} used as default update source, it also has TLE lists
+\item[Celestrak]\footnote{\url{https://celestrak.com/NORAD/elements/}} used as default update source, it also has TLE lists
   beyond those included by default in Satellite plug-in
-\item[TLE.info]\footnote{\url{http://www.tle.info/joomla/index.php}}
-\item[Space Track]\footnote{\url{http://www.space-track.org/}} the definitive source, requires signup, operated by
+\item[TLE.info]\footnote{\url{https://www.tle.info/joomla/index.php}}
+\item[Space Track]\footnote{\url{https://www.space-track.org/}} the definitive source, requires sign-up, operated by
   United States Department of Defense
 \end{description}
 
@@ -1239,7 +1510,7 @@ file.
 %The generation of satellites with highly reflective antennae which
 %caused predictable flares has been de-orbited by end of 2019 and
 %replaced by models with different geometry which do not cause these
-%bright spectacles. \newFeature{v0.20.2} A few defunct satellites are still in orbit, but
+%bright spectacles. \newFeature{0.20.2} A few defunct satellites are still in orbit, but
 %their orientations and flare events are no longer predictable, therefore the
 %``Iridium flares'' dialog has been removed.
 

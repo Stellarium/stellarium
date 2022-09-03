@@ -37,15 +37,14 @@ class StelCore;
 class StelObjectMgr : public StelModule
 {
 	Q_OBJECT
+
 public:
 	StelObjectMgr();
-	virtual ~StelObjectMgr();
+	virtual ~StelObjectMgr() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init();
-	virtual void draw(StelCore*) {;}
-	virtual void update(double) {;}
+	virtual void init() Q_DECL_OVERRIDE;
 
 	///////////////////////////////////////////////////////////////////////////
 	//! Add a new StelObject manager into the list of supported modules.
@@ -65,6 +64,7 @@ public:
 	//! @param y the y screen position in pixel
 	//! @param action define whether to add to, replace, or remove from the existing selection
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
+	//! @note If aberration is computed, this first applies aberration backwards and then searches for an object.
 	bool findAndSelect(const StelCore* core, int x, int y, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	//! Find and select an object from its translated name.
@@ -73,18 +73,32 @@ public:
 	//! @return true if a object with the passed name was found
 	bool findAndSelectI18n(const QString &nameI18n, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
+	//! Find and select an object from its translated name and object type name.
+	//! @param action define whether to add to, replace, or remove from the existing selection
+	//! @param nameI18n the case sensitive object translated name
+	//! @param objtype the type of the object
+	//! @return true if a object with the passed name was found
+	bool findAndSelectI18n(const QString &name, const QString &objtype, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
+
 	//! Find and select an object from its standard program name.
 	//! @param action define whether to add to, replace, or remove from the existing selection
 	//! @param name the case sensitive object translated name
 	//! @return true if a object with the passed name was found
 	bool findAndSelect(const QString &name, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
+	//! Find and select an object from its standard program name and object type name.
+	//! @param action define whether to add to, replace, or remove from the existing selection
+	//! @param name the case sensitive object translated name
+	//! @param objtype the type of the object
+	//! @return true if a object with the passed name was found
+	bool findAndSelect(const QString &name, const QString &objtype, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
+
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names.
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object names by order of relevance, or an empty list if nothing match
-	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=true) const;
+	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 
 	QStringList listAllModuleObjects(const QString& moduleId, bool inEnglish) const;
 	QMap<QString, QString> objectModulesMap() const;
@@ -122,8 +136,14 @@ public:
 	//! Find any kind of object by its translated name.
 	StelObjectP searchByNameI18n(const QString &name) const;
 
+	//! Find any kind of object by its translated name and its object type name.
+	StelObjectP searchByNameI18n(const QString &name, const QString &objType) const;
+
 	//! Find any kind of object by its standard program name.
 	StelObjectP searchByName(const QString &name) const;
+
+	//! Find any kind of object by its standard program name and its object type name.
+	StelObjectP searchByName(const QString &name, const QString &objType) const;
 
 	//! Find an object of the given type and ID
 	//! @param type the type of the object as given by StelObject::getType()
@@ -146,27 +166,37 @@ public:
 	//! If obj is Q_NULLPTR, returns a 1-element map [["found", false]]
 	static QVariantMap getObjectInfo(const StelObjectP obj);
 
+	//! Return a list of enabled fields (custom info strings)
+	StelObject::InfoStringGroup getCustomInfoStrings();
+
+	//! Retrieve an (unsorted) QStringList of all extra info strings that match flags.
+	//! Normally the order matches the order of addition, but this cannot be guaranteed.
+	QStringList getExtraInfoStrings(const StelObject::InfoStringGroup& flags) const;
+
 public slots:
-	//! Set simulation time to the time of next transit of selected object
-	void nextTransit();
-	//! Set simulation time to the time of previous transit of selected object
-	void previousTransit();
-	//! Set simulation time to the time of today's transit of selected object
-	void todayTransit();
 
-	//! Set simulation time to the time of next rising of selected object (if applicable)
-	void nextRising();
-	//! Set simulation time to the time of previous rising of selected object (if applicable)
-	void previousRising();
-	//! Set simulation time to the time of today's rising of selected object (if applicable)
-	void todayRising();
+	//! @note These functions were copied over from StelObject. Given that setExtraInfoString is non-const and some functions where these methods are useful are const, we can use the StelObjectMgr as "carrier object".
+	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
+	//! Hard-set this string group to a single str, or delete all messages when str==""
+	//! @note This should be used with caution. Usually you want to use addToExtraInfoString().
+	virtual void setExtraInfoString(const StelObject::InfoStringGroup& flags, const QString &str);
 
-	//! Set simulation time to the time of next setting of selected object (if applicable)
-	void nextSetting();
-	//! Set simulation time to the time of previous setting of selected object (if applicable)
-	void previousSetting();
-	//! Set simulation time to the time of today's setting of selected object (if applicable)
-	void todaySetting();
+	//! Add str to the extra string. This should be preferrable over hard setting.
+	//! Can be used by plugins to show extra info for the selected object, or for debugging.
+	//! The strings will be shown in the InfoString for the selected object, below the default fields per-flag.
+	//! Additional coordinates not fitting into one of the predefined coordinate sets should be flagged with OtherCoords,
+	//! and must be adapted to table or non-table layout as required.
+	//! The line ending must be given explicitly, usually just end a line with "<br/>", except when it may end up in a Table or appended to a line.
+	//! See getCommonInfoString() or the respective getInfoString() in the subclasses for details of use.
+	virtual void addToExtraInfoString(const StelObject::InfoStringGroup& flags, const QString &str);
+
+	//! Remove the extraInfoStrings with the given flags.
+	//! This is a finer-grained removal than just extraInfoStrings.remove(flags), as it allows a combination of flags.
+	//! After display, InfoPanel::setTextFromObjects() auto-clears the strings of the selected object using the AllInfo constant.
+	//! extraInfoStrings having been set with the DebugAid and Script flags have to be removed by separate calls of this method.
+	//! Those which have been set by scripts have to persist at least as long as the selection remains active.
+	//! The behaviour of DebugAid texts depends on the use case.
+	void removeExtraInfoStrings(const StelObject::InfoStringGroup& flags);
 
 signals:
 	//! Indicate that the selected StelObjects has changed.
@@ -184,17 +214,25 @@ private:
 	// Should selected object pointer be drawn
 	bool objectPointerVisibility;
 
-	//! Find in a "clever" way an object from its equatorial position.
+	//! Find in a "clever" way an object from its equatorial J2000.0 position.
 	StelObjectP cleverFind(const StelCore* core, const Vec3d& pos) const;
 
 	//! Find in a "clever" way an object from its screen position.
+	//! @note If aberration is computed, this first applies aberration backwards and then searches for an object.
 	StelObjectP cleverFind(const StelCore* core, int x, int y) const;
 
-	// Radius in pixel in which objects will be searched when clicking on a point in sky.
+	//! Radius in pixel in which objects will be searched when clicking on a point in sky.
 	double searchRadiusPixel;
 
-	// Weight of the distance factor when choosing the best object to select.
+	//! Weight of the distance factor when choosing the best object to select.
 	float distanceWeight;
+
+	//! Location for additional object info that can be set for special purposes (at least for debugging, but maybe others), even via scripting.
+	//! Modules are allowed to add new strings to be displayed in the various getInfoString() methods of subclasses.
+	//! This helps avoiding screen collisions if a plugin wants to display some additional object information.
+	//! This string map gets cleared by InfoPanel::setTextFromObjects(), with the exception of strings with Script or DebugAid flags,
+	//! which have been injected by scripts or for debugging (take care of those yourself!).
+	QMultiMap<StelObject::InfoStringGroup, QString> extraInfoStrings;
 };
 
 #endif // _SELECTIONMGR_HPP

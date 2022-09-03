@@ -1,19 +1,19 @@
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
-find_package(Qt5Test)
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Test REQUIRED)
 
 add_executable(testTelescopeControl_INDI testTelescopeControl_INDI.cpp testTelescopeControl_INDI.hpp)
-target_link_libraries(testTelescopeControl_INDI Qt5::Test TelescopeControl_INDI stelMain)
+target_link_libraries(testTelescopeControl_INDI Qt${QT_VERSION_MAJOR}::Test TelescopeControl_INDI stelMain)
 add_test(testTelescopeControl_INDI testTelescopeControl_INDI)
 SET_TARGET_PROPERTIES(testTelescopeControl_INDI PROPERTIES FOLDER "plugins/TelescopeControl/test")
 
 add_executable(testINDIConnection testINDIConnection.cpp testINDIConnection.hpp)
-target_link_libraries(testINDIConnection Qt5::Test TelescopeControl_INDI stelMain)
+target_link_libraries(testINDIConnection Qt${QT_VERSION_MAJOR}::Test TelescopeControl_INDI stelMain)
 add_test(testINDIConnection testINDIConnection)
 SET_TARGET_PROPERTIES(testINDIConnection PROPERTIES FOLDER "plugins/TelescopeControl/test")
 
 add_executable(testTelescopeClientINDI testTelescopeClientINDI.cpp testTelescopeClientINDI.hpp)
-target_link_libraries(testTelescopeClientINDI Qt5::Test TelescopeControl_INDI stelMain)
+target_link_libraries(testTelescopeClientINDI Qt${QT_VERSION_MAJOR}::Test TelescopeControl_INDI stelMain)
 add_test(testTelescopeClientINDI testTelescopeClientINDI)
 SET_TARGET_PROPERTIES(testTelescopeClientINDI PROPERTIES FOLDER "plugins/TelescopeControl/test")

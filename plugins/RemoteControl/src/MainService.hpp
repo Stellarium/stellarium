@@ -49,7 +49,6 @@ class MainService : public AbstractAPIService
 {
 	Q_OBJECT
 
-	Q_ENUMS(SelectionMode)
 public:
 	enum SelectionMode
 	{
@@ -57,6 +56,7 @@ public:
 		Zoom,
 		Mark
 	};
+	Q_ENUM(SelectionMode)
 
 	MainService(QObject* parent = Q_NULLPTR);
 
@@ -77,7 +77,7 @@ private slots:
 	QString getInfoString();
 
 	//! Like StelDialog::gotoObject
-	bool focusObject(const QString& name, SelectionMode mode);
+	bool focusObject(const QString& name, MainService::SelectionMode mode);
 	void focusPosition(const Vec3d& pos);
 
 	void updateMovement(double x, double y, bool xUpdated, bool yUpdated);
@@ -96,7 +96,9 @@ private:
 	StelMovementMgr* mvmgr;
 	StelObjectMgr* objMgr;
 	StelPropertyMgr* propMgr;
+#ifdef ENABLE_SCRIPTING
 	StelScriptMgr* scriptMgr;
+#endif
 	StelSkyCultureMgr* skyCulMgr;
 
 	double moveX,moveY;

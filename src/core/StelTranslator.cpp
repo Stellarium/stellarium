@@ -24,7 +24,7 @@
 #include <QFile>
 #include <QDebug>
 #include <QStringList>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QLocale>
 #include <QDir>
 #include <QTranslator>
@@ -123,7 +123,7 @@ QString StelTranslator::iso639_1CodeToNativeName(const QString& languageCode)
 QString StelTranslator::nativeNameToIso639_1Code(const QString& languageName)
 {
 	QMap<QString, QString>::ConstIterator iter;
-	for (iter=iso639codes.begin();iter!=iso639codes.end();++iter)
+	for (iter=iso639codes.constBegin();iter!=iso639codes.constEnd();++iter)
 		if (iter.value() == languageName)
 			return iter.key();
 
@@ -138,7 +138,7 @@ QStringList StelTranslator::getAvailableLanguagesNamesNative(const QString& loca
 		tmpDir.append("/stellarium/");
 	else
 		tmpDir.append("/stellarium-" + section + "/");
-	QStringList codeList = getAvailableIso639_1Codes(tmpDir);
+	const QStringList codeList = getAvailableIso639_1Codes(tmpDir);
 	QStringList output;
 	for (const auto& lang : codeList)
 	{
@@ -186,7 +186,12 @@ void StelTranslator::initIso639_1LanguageCodes(const QString& fileName)
 	while (!inf.atEnd())
 	{
 		QString record = QString::fromUtf8(inf.readLine());
-		record.remove(QRegExp("[\\n\\r]*$")); // chomp new lines
+
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty()) // skip comments and empty lines
+			continue;
+
+		static const QRegularExpression nlExp("[\\n\\r]*$");
+		record.remove(nlExp); // chomp new lines
 		#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
 		const QStringList& fields = record.split("\t", Qt::SkipEmptyParts);
 		#else

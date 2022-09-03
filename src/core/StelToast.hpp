@@ -109,7 +109,8 @@ private:
 
 	// QList<SphericalRegionP> skyConvexPolygons;
 	//! OpenGL arrays
-	QVector<Vec3d> vertexArray;
+	QVector<Vec3d> originalVertexArray; // used to store unprocessed data
+	QVector<Vec3d> vertexArray;         // patch with aberration before drawing.
 	QVector<Vec2f> textureArray;
 	QVector<unsigned short> indexArray;
 	QVector<Vec3f> colorArray; // for extinction

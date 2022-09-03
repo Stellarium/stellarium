@@ -66,7 +66,11 @@ void ShortcutLineEdit::setContents(QKeySequence ks)
 	clear();
 	for (int i = 0; i < ks.count(); ++i)
 	{
-		keys.append(ks[i]);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+		keys.append(QKeyCombination(ks[static_cast<uint>(i)]).toCombined());
+#else
+		keys.append(ks[static_cast<uint>(i)]);
+#endif
 	}
 	
 	// Show Ctrl button as Cmd on Mac

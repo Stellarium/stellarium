@@ -26,17 +26,12 @@
 #include <QColorDialog>
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
 #include "ui_quasarsDialog.h"
 #include "QuasarsDialog.hpp"
 #include "Quasars.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelMovementMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelGui.hpp"
-#include "StelMainView.hpp"
-#include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
 QuasarsDialog::QuasarsDialog()
@@ -118,32 +113,21 @@ void QuasarsDialog::createDialogContent()
 
 void QuasarsDialog::setAboutHtml(void)
 {
-	// Regexp to replace {text} with an HTML link.
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Quasars Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + QUASARS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("License") + ":</strong></td><td>" + QUASARS_PLUGIN_LICENSE + "</td></tr>";
-	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf</td></tr>";
 	html += "</table>";
 
-	html += QString("<p>%1 (<a href=\"%2\">%3</a>)</p>")
-			.arg(q_("The Quasars plugin provides visualization of some quasars brighter than visual magnitude 18. The catalogue of quasars was compiled from \"Quasars and Active Galactic Nuclei\" (13th Ed.)"))
-			.arg("http://adsabs.harvard.edu/abs/2010A%26A...518A..10V")
-			.arg(q_("Veron+ 2010"));
+	html += QString("<p>%1 (<a href=\"%2\">%3</a>)</p>").arg(
+			q_("The Quasars plugin provides visualization of some quasars brighter than visual magnitude 18. The catalogue of quasars was compiled from \"Quasars and Active Galactic Nuclei\" (13th Ed.)"),
+			"http://adsabs.harvard.edu/abs/2010A%26A...518A..10V",
+			q_("Veron+ 2010"));
 
 	html += "</ul><p>" + q_("The current catalog contains info about %1 quasars.").arg(qsr->getCountQuasars()) + "</p>";
-	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Quasars plugin") + "</p>";
-	html += "<p><ul>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Quasars_plugin\">\\1</a>") + "</li>";
-	html += "</ul></p></body></html>";
+	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Quasars plugin");
+	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if(gui!=Q_NULLPTR)

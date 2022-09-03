@@ -33,7 +33,7 @@ class SyncServerEventSender : public QObject
 	Q_OBJECT
 public:
 	SyncServerEventSender();
-	virtual ~SyncServerEventSender() {}
+	virtual ~SyncServerEventSender() Q_DECL_OVERRIDE {}
 
 protected slots:
 
@@ -46,7 +46,7 @@ protected slots:
 	//! This is automatically called by the SyncServer whenever a new client connects.
 	//! Use this to set clients to the current server state.
 	//! The default implementation does nothing.
-	virtual void newClientConnected(SyncRemotePeer& client) { Q_UNUSED(client); }
+	virtual void newClientConnected(SyncRemotePeer& client) { Q_UNUSED(client) }
 protected:
 	//! This is guaranteed to be called once per frame (usually after all other StelModules have been updated).
 	//! It is can be used to defer state broadcasts until the frame is finished to only send a single message.

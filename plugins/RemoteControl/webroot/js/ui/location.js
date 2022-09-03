@@ -12,7 +12,7 @@ define(["jquery", "api/location", "settings", "api/trunc", "./combobox"], functi
 	var $loc_longitude;
 	var $loc_altitude;
 	var $loc_name;
-	var $loc_country;
+	var $loc_region;
 	var $loc_planet;
 
 	var locSearchTimeout;
@@ -87,11 +87,11 @@ define(["jquery", "api/location", "settings", "api/trunc", "./combobox"], functi
 		return 0;
 	}
 
-	function fillCountryList(data) {
+	function fillRegionList(data) {
 
 		//detach for performance
-		var parent = $loc_country.parent();
-		$loc_country.detach();
+		var parent = $loc_region.parent();
+		$loc_region.detach();
 
 		//sort by localized text
 		data.sort(localizedSort);
@@ -100,10 +100,10 @@ define(["jquery", "api/location", "settings", "api/trunc", "./combobox"], functi
 			var op = document.createElement("option");
 			op.innerHTML = data[i].name_i18n; //translated
 			op.value = data[i].name;
-			$loc_country[0].appendChild(op);
+		        $loc_region[0].appendChild(op);
 		}
 
-		parent.append($loc_country);
+		parent.append($loc_region);
 	}
 
 	function fillPlanetList(data) {
@@ -149,7 +149,7 @@ define(["jquery", "api/location", "settings", "api/trunc", "./combobox"], functi
 		$loc_longitude = $("#loc_longitude");
 		$loc_altitude = $("#loc_altitude");
 		$loc_name = $("#loc_name");
-		$loc_country = $("#loc_country");
+		$loc_region = $("#loc_region");
 		$loc_planet = $("#loc_planet");
 
 		$("#loc_latitude, #loc_longitude").spinner({
@@ -181,7 +181,7 @@ define(["jquery", "api/location", "settings", "api/trunc", "./combobox"], functi
 			locationApi.setName($loc_name.val());
 		});
 
-		$loc_country.combobox({
+		$loc_region.combobox({
 			select: function(evt, data) {
 				locationApi.setPlanet(data.item.value);
 			}
@@ -193,15 +193,15 @@ define(["jquery", "api/location", "settings", "api/trunc", "./combobox"], functi
 		});
 
 		locationApi.loadPlanetList(fillPlanetList);
-		locationApi.loadCountryList(fillCountryList);
+		locationApi.loadRegionList(fillRegionList);
 	}
 
 	$(locationApi).on("nameChanged", function(evt, name) {
 		$loc_name.val(name);
 	});
 
-	$(locationApi).on("countryChanged", function(evt, country) {
-		$loc_country.combobox("autocomplete", country);
+	$(locationApi).on("regionChanged", function(evt, region) {
+		$loc_region.combobox("autocomplete", region);
 	});
 
 	$(locationApi).on("planetChanged", function(evt, planet) {

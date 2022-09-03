@@ -27,23 +27,20 @@
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelMovementMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
-#include "StelSkyDrawer.hpp"
-#include "SolarSystem.hpp"
+#include "Planet.hpp"
+#include "StelUtils.hpp"
 
 #include <vector>
 #include <QDebug>
 #include <QFile>
 #include <QSettings>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QString>
 #include <QStringList>
 #include <QDir>
-
-using namespace std;
 
 // constructor which loads all data from appropriate files
 AsterismMgr::AsterismMgr(StarMgr *_hip_stars)
@@ -52,8 +49,9 @@ AsterismMgr::AsterismMgr(StarMgr *_hip_stars)
 	, rayHelpersDisplayed(false)
 	, namesDisplayed(false)
 	, hasAsterism(false)
+	, isolateAsterismSelected(false)
 	, asterismLineThickness(1)
-	, rayHelperThickness(1)
+	, rayHelperThickness(1)	
 {
 	setObjectName("AsterismMgr");
 	Q_ASSERT(hipStarMgr);
@@ -88,6 +86,8 @@ void AsterismMgr::init()
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
+	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
+			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(const QString&)));
@@ -95,6 +95,7 @@ void AsterismMgr::init()
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Asterism_Lines", displayGroup, N_("Asterism lines"), "linesDisplayed", "Alt+A");	
 	addAction("actionShow_Asterism_Labels", displayGroup, N_("Asterism labels"), "namesDisplayed", "Alt+V");
+	addAction("actionShow_Asterism_Isolated", displayGroup, N_("Toggle single asterism selection mode"), "switchSelectionMode()");
 	addAction("actionShow_Ray_Helpers", displayGroup, N_("Ray helpers"), "rayHelpersDisplayed", "Alt+R");
 }
 
@@ -236,11 +237,11 @@ void AsterismMgr::loadLines(const QString &fileName)
 
 	int totalRecords=0;
 	QString record;
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
 	while (!in.atEnd())
 	{
 		record = QString::fromUtf8(in.readLine());
-		if (!commentRx.exactMatch(record))
+		if (!commentRx.match(record).hasMatch())
 			totalRecords++;
 	}
 	in.seek(0);
@@ -259,7 +260,7 @@ void AsterismMgr::loadLines(const QString &fileName)
 	{
 		record = QString::fromUtf8(in.readLine());
 		currentLineNumber++;
-		if (commentRx.exactMatch(record))
+		if (commentRx.match(record).hasMatch())
 			continue;
 
 		aster = new Asterism;
@@ -302,9 +303,10 @@ void AsterismMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 	if (!hasAsterism)
 		return;
 
+	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 	sPainter.setBlending(true);
-	if (asterismLineThickness>1)
-		sPainter.setLineWidth(asterismLineThickness); // set line thickness
+	if (asterismLineThickness>1 || ppx>1.f)
+		sPainter.setLineWidth(asterismLineThickness*ppx); // set line thickness
 	sPainter.setLineSmooth(true);
 
 	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
@@ -313,7 +315,7 @@ void AsterismMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 		if (asterism->isAsterism())
 			asterism->drawOptim(sPainter, core, viewportHalfspace);
 	}
-	if (asterismLineThickness>1)
+	if (asterismLineThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(1); // restore line thickness
 	sPainter.setLineSmooth(false);
 }
@@ -324,9 +326,10 @@ void AsterismMgr::drawRayHelpers(StelPainter& sPainter, const StelCore* core) co
 	if (!hasAsterism)
 		return;
 
+	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 	sPainter.setBlending(true);
-	if (rayHelperThickness>1)
-		sPainter.setLineWidth(rayHelperThickness); // set line thickness
+	if (rayHelperThickness>1 || ppx>1.f)
+		sPainter.setLineWidth(rayHelperThickness*ppx); // set line thickness
 	sPainter.setLineSmooth(true);
 
 	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
@@ -335,7 +338,7 @@ void AsterismMgr::drawRayHelpers(StelPainter& sPainter, const StelCore* core) co
 		if (!asterism->isAsterism())
 			asterism->drawOptim(sPainter, core, viewportHalfspace);
 	}
-	if (rayHelperThickness>1)
+	if (rayHelperThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(1); // restore line thickness
 	sPainter.setLineSmooth(false);
 }
@@ -346,26 +349,27 @@ void AsterismMgr::drawNames(StelPainter& sPainter) const
 	if (!hasAsterism)
 		return;
 
+	StelCore *core=StelApp::getInstance().getCore();
+	Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+	vel=StelCore::matVsop87ToJ2000*vel;
+	vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+
 	sPainter.setBlending(true);
 	for (auto* asterism : asterisms)
 	{
 		if (!asterism->flagAsterism) continue;
 		// Check if in the field of view
-		if (sPainter.getProjector()->projectCheck(asterism->XYZname, asterism->XYname))
+		Vec3d XYZname=asterism->XYZname;
+		if (core->getUseAberration())
+		{
+			XYZname.normalize();
+			XYZname+=vel;
+			XYZname.normalize();
+		}
+
+		if (sPainter.getProjector()->projectCheck(XYZname, asterism->XYname))
 			asterism->drawName(sPainter);
 	}
-}
-
-Asterism *AsterismMgr::isStarIn(const StelObject* s) const
-{
-	for (auto* asterism : asterisms)
-	{
-		if (asterism->isStarIn(s))
-		{
-			return asterism;
-		}
-	}
-	return Q_NULLPTR;
 }
 
 Asterism* AsterismMgr::findFromAbbreviation(const QString& abbreviation) const
@@ -406,13 +410,9 @@ void AsterismMgr::loadNames(const QString& namesFile)
 
 	// Now parse the file
 	// lines to ignore which start with a # or are empty
-	QRegExp commentRx("^(\\s*#.*|\\s*)$");
-	QRegExp recRx("^\\s*(\\w+)\\s+_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
-	QRegExp ctxRx("(.*)\",\\s*\"(.*)");
-
-	// Some more variables to use in the parsing
-	Asterism *aster;
-	QString record, shortName, ctxt;
+	static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
+	static const QRegularExpression recRx("^\\s*(\\S+)\\s+_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
+	static const QRegularExpression ctxRx("(.*)\",\\s*\"(.*)");
 
 	// keep track of how many records we processed.
 	int totalRecords=0;
@@ -420,31 +420,33 @@ void AsterismMgr::loadNames(const QString& namesFile)
 	int lineNumber=0;
 	while (!commonNameFile.atEnd())
 	{
-		record = QString::fromUtf8(commonNameFile.readLine());
+		QString record = QString::fromUtf8(commonNameFile.readLine());
 		lineNumber++;
 
 		// Skip comments
-		if (commentRx.exactMatch(record))
+		if (commentRx.match(record).hasMatch())
 			continue;
 
 		totalRecords++;
 
-		if (!recRx.exactMatch(record))
+		QRegularExpressionMatch recMatch=recRx.match(record);
+		if (!recMatch.hasMatch())
 		{
 			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in asterism names file" << QDir::toNativeSeparators(namesFile) << ":" << record;
 		}
 		else
 		{
-			shortName = recRx.cap(1);
-			aster = findFromAbbreviation(shortName);
+			QString shortName = recMatch.captured(1);
+			Asterism *aster = findFromAbbreviation(shortName);
 			// If the asterism exists, set the English name
 			if (aster != Q_NULLPTR)
 			{
-				ctxt = recRx.cap(2);
-				if (ctxRx.exactMatch(ctxt))
+				QString ctxt = recMatch.captured(2);
+				QRegularExpressionMatch ctxMatch=ctxRx.match(ctxt);
+				if (ctxMatch.hasMatch())
 				{
-					aster->englishName = ctxRx.cap(1);
-					aster->context = ctxRx.cap(2);
+					aster->englishName = ctxMatch.captured(1);
+					aster->context = ctxMatch.captured(2);
 				}
 				else
 				{
@@ -487,9 +489,15 @@ void AsterismMgr::setFlagLines(const bool displayed)
 	if(linesDisplayed != displayed)
 	{
 		linesDisplayed = displayed;
-		for (auto* asterism : asterisms)
+		if (!selected.empty() && getFlagIsolateAsterismSelected())
 		{
-			asterism->setFlagLines(linesDisplayed);
+			for (auto* asterism : selected)
+				asterism->setFlagLines(linesDisplayed);
+		}
+		else
+		{
+			for (auto* asterism : asterisms)
+				asterism->setFlagLines(linesDisplayed);
 		}
 		emit linesDisplayedChanged(displayed);
 	}
@@ -523,9 +531,16 @@ void AsterismMgr::setFlagLabels(const bool displayed)
 	if (namesDisplayed != displayed)
 	{
 		namesDisplayed = displayed;
-		for (auto* asterism : asterisms)
-			asterism->setFlagLabels(namesDisplayed);
-
+		if (!selected.empty() && getFlagIsolateAsterismSelected())
+		{
+			for (auto* asterism : selected)
+				asterism->setFlagLabels(namesDisplayed);
+		}
+		else
+		{
+			for (auto* asterism : asterisms)
+				asterism->setFlagLabels(namesDisplayed);
+		}
 		emit namesDisplayedChanged(displayed);
 	}
 }
@@ -559,33 +574,6 @@ StelObjectP AsterismMgr::searchByName(const QString& name) const
 		if (objwcap == objw) return asterism;
 	}
 	return Q_NULLPTR;
-}
-
-QStringList AsterismMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
-{
-	QStringList result;
-	if (maxNbItem <= 0)
-	{
-		return result;
-	}
-
-	for (auto* asterism : asterisms)
-	{
-		QString name = inEnglish ? asterism->getEnglishName() : asterism->getNameI18n();
-		if (!matchObjectName(name, objPrefix, useStartOfWords))
-		{
-			continue;
-		}
-
-		result.append(name);
-		if (result.size() >= maxNbItem)
-		{
-			break;
-		}
-	}
-
-	result.sort();
-	return result;
 }
 
 QStringList AsterismMgr::listAllObjects(bool inEnglish) const
@@ -622,4 +610,241 @@ StelObjectP AsterismMgr::searchByID(const QString &id) const
 QString AsterismMgr::getStelObjectType() const
 {
 	return Asterism::ASTERISM_TYPE;
+}
+
+void AsterismMgr::setFlagIsolateAsterismSelected(const bool isolate)
+{
+	if (isolateAsterismSelected != isolate)
+	{
+		isolateAsterismSelected = isolate;
+
+		// when turning off isolated selection mode, clear existing isolated selections.
+		if (!isolateAsterismSelected)
+		{
+			for (auto* asterism : asterisms)
+			{
+				asterism->setFlagLines(getFlagLines());
+				asterism->setFlagLabels(getFlagLabels());
+			}
+		}
+		emit isolateAsterismSelectedChanged(isolate);
+	}
+}
+
+bool AsterismMgr::getFlagIsolateAsterismSelected(void) const
+{
+	return isolateAsterismSelected;
+}
+
+void AsterismMgr::setSelectedAsterism(Asterism *a)
+{
+	// update states for other asterisms to fade them out
+	if (a != Q_NULLPTR)
+	{
+		selected.push_back(a);
+
+		if (getFlagIsolateAsterismSelected())
+		{
+			// Propagate current settings to newly selected asterism
+			a->setFlagLines(getFlagLines());
+			a->setFlagLabels(getFlagLabels());
+
+			for (auto* asterism : asterisms)
+			{
+				bool match = false;
+				for (auto* selected_asterisms : selected)
+				{
+					if (asterism == selected_asterisms)
+					{
+						match=true; // this is a selected asterism
+						break;
+					}
+				}
+
+				if(!match)
+				{
+					// Not selected asterism
+					asterism->setFlagLines(false);
+					asterism->setFlagLabels(false);
+				}
+			}
+		}
+		else
+		{
+			for (auto* asterism : asterisms)
+			{
+				asterism->setFlagLines(false);
+				asterism->setFlagLabels(false);
+			}
+
+			// Propagate current settings to newly selected asterism
+			a->setFlagLines(getFlagLines());
+			a->setFlagLabels(getFlagLabels());
+		}
+	}
+	else
+	{
+		if (selected.empty()) return;
+
+		// Otherwise apply standard flags to all asterisms
+		for (auto* asterism : asterisms)
+		{
+			asterism->setFlagLines(getFlagLines());
+			asterism->setFlagLabels(getFlagLabels());
+		}
+
+		// And remove all selections
+		selected.clear();
+	}
+}
+
+//! Remove a asterism from the selected asterism list
+void AsterismMgr::unsetSelectedAsterism(Asterism *a)
+{
+	if (a != Q_NULLPTR)
+	{
+		for (auto iter = selected.begin(); iter != selected.end();)
+		{
+			if( (*iter)->getEnglishName().toLower() == a->getEnglishName().toLower() )
+				iter = selected.erase(iter);
+			else
+				++iter;
+		}
+
+		// If no longer any selection, restore all flags on all asterisms
+		if (selected.empty())
+		{
+			// Otherwise apply standard flags to all asterisms
+			for (auto* asterism : asterisms)
+			{
+				asterism->setFlagLines(getFlagLines());
+				asterism->setFlagLabels(getFlagLabels());
+			}
+		}
+		else if(isolateAsterismSelected)
+		{
+			// No longer selected asterism
+			a->setFlagLines(false);
+			a->setFlagLabels(false);
+		}
+	}
+}
+
+void AsterismMgr::selectAsterism(const QString &englishName)
+{
+	if (!getFlagIsolateAsterismSelected())
+		setFlagIsolateAsterismSelected(true); // Enable isolated selection
+
+	bool found = false;
+	for (auto* asterism : asterisms)
+	{
+		if (asterism->getEnglishName().toLower()==englishName.toLower())
+		{
+			setSelectedAsterism(asterism);
+			found = true;
+			break;
+		}
+	}
+	if (!found)
+		qDebug() << "The asterism" << englishName << "is not found";
+}
+
+void AsterismMgr::deselectAsterism(const QString &englishName)
+{
+	if (!getFlagIsolateAsterismSelected())
+		setFlagIsolateAsterismSelected(true); // Enable isolated selection
+
+	bool found = false;
+	for (auto* asterism : asterisms)
+	{
+		if (asterism->getEnglishName().toLower()==englishName.toLower())
+		{
+			unsetSelectedAsterism(asterism);
+			found = true;
+			break;
+		}
+	}
+
+	if (selected.size()==0 && found)
+	{
+		// Let's remove the selection for all asterisms if the list of selected asterisms is empty
+		for (auto* asterism : asterisms)
+		{
+			asterism->setFlagLines(false);
+			asterism->setFlagLabels(false);
+		}
+	}
+
+	if (!found)
+		qDebug() << "The asterism" << englishName << "is not found";
+}
+
+void AsterismMgr::deselectAsterisms(void)
+{
+	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	Q_ASSERT(omgr);
+	if (getFlagIsolateAsterismSelected())
+	{
+		// The list of selected asterisms is empty, but...
+		if (selected.size()==0)
+		{
+			// ...let's unselect all asterisms for guarantee
+			for (auto* asterism : asterisms)
+			{
+				asterism->setFlagLines(false);
+				asterism->setFlagLabels(false);
+			}
+		}
+
+		// If any asterism is selected at the moment, then let's do not touch to it!
+		if (omgr->getWasSelected() && selected.size()>0)
+			selected.pop_back();
+
+		// Let's hide all previously selected asterisms
+		for (auto* asterism : selected)
+		{
+			asterism->setFlagLines(false);
+			asterism->setFlagLabels(false);
+		}
+	}
+	else
+	{
+		const QList<StelObjectP> newSelectedConst = omgr->getSelectedObject("Asterism");
+		if (!newSelectedConst.empty())
+			omgr->unSelect();
+	}
+	selected.clear();
+}
+
+void AsterismMgr::selectAllAsterisms()
+{
+	for (auto* asterism : asterisms)
+		setSelectedAsterism(asterism);
+}
+
+void AsterismMgr::selectedObjectChange(StelModule::StelModuleSelectAction action)
+{
+	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	Q_ASSERT(omgr);
+	const QList<StelObjectP> newSelected = omgr->getSelectedObject();
+	if (newSelected.empty())
+		return;
+
+	const QList<StelObjectP> newSelectedAsterisms = omgr->getSelectedObject("Asterism");
+	if (!newSelectedAsterisms.empty())
+	{
+		// If removing this selection
+		if(action == StelModule::RemoveFromSelection)
+			unsetSelectedAsterism(static_cast<Asterism *>(newSelectedAsterisms[0].data()));
+		else // Add asterism to selected list (do not select a star, just the constellation)
+			setSelectedAsterism(static_cast<Asterism *>(newSelectedAsterisms[0].data()));
+	}
+}
+
+void AsterismMgr::switchSelectionMode()
+{
+	bool state = getFlagIsolateAsterismSelected();
+	setFlagIsolateAsterismSelected(!state);
+	if (!state)
+		deselectAsterisms();
 }

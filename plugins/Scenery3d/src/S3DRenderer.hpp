@@ -51,7 +51,7 @@ class S3DRenderer : public QObject, protected QOpenGLFunctions
 public:
 	//! Initializes an empty Scenery3d object.
 	S3DRenderer(QObject* parent = Q_NULLPTR);
-	virtual ~S3DRenderer();
+	virtual ~S3DRenderer() Q_DECL_OVERRIDE;
 
 	//! Draw scenery, called by Scenery3dMgr.
 	void draw(StelCore* core, S3DScene &scene);
@@ -135,7 +135,7 @@ public:
 	bool isANGLEContext() const { return isANGLE; }
 	int getMaximumFramebufferSize() const { return maximumFramebufferSize; }
 signals:
-	void message(const QString& msg) const;
+	void message(const QString& msg) const; // ignore clazy warning here
 
 private:
 	ShaderMgr shaderManager;
@@ -343,7 +343,7 @@ private:
 	//Computes the crop matrix to focus the light
 	void computeCropMatrix(QMatrix4x4& cropMatrix, QVector4D &orthoScale, Polyhedron &focusBody, const QMatrix4x4 &lightProj, const QMatrix4x4 &lightMVP);
 	//Computes the light projection values
-	void computeOrthoProjVals(const Vec3f shadowDir, float &orthoExtent, float &orthoNear, float &orthoFar);
+	void computeOrthoProjVals(const Vec3f &shadowDir, float &orthoExtent, float &orthoNear, float &orthoFar);
 
 	void rendererMessage(const QString& msg) const;
 };

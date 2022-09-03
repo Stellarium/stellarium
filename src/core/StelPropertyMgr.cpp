@@ -45,7 +45,11 @@ QMetaType::Type StelProperty::getType() const
 	//Qt is quite funky when it comes to QVariant::Type vs QMetaType::Type, see
 	//https://doc.qt.io/qt-5/qvariant.html#type
 	//and https://stackoverflow.com/questions/31290606/qmetatypefloat-not-in-qvarianttype
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	return static_cast<QMetaType::Type>(prop.typeId());
+#else
 	return static_cast<QMetaType::Type>(prop.type());
+#endif
 }
 
 void StelProperty::propertyChanged()
@@ -196,8 +200,8 @@ StelPropertyProxy::StelPropertyProxy(StelProperty *prop, QObject *parent)
 	connect(prop, &StelProperty::changed, this, &StelPropertyProxy::onPropertyChanged);
 }
 
-StelPropertyIntProxy::StelPropertyIntProxy(StelProperty *prop, QObject *parent)
-	: StelPropertyProxy(prop,parent)
+StelPropertyIntProxy::StelPropertyIntProxy(StelProperty *pr, QObject *parent)
+	: StelPropertyProxy(pr,parent)
 {
 }
 
@@ -206,8 +210,8 @@ void StelPropertyIntProxy::onPropertyChanged(const QVariant &value)
 	emit propertyChanged(value.toInt());
 }
 
-StelPropertyBoolProxy::StelPropertyBoolProxy(StelProperty *prop, QObject *parent)
-	: StelPropertyProxy(prop,parent)
+StelPropertyBoolProxy::StelPropertyBoolProxy(StelProperty *pr, QObject *parent)
+	: StelPropertyProxy(pr,parent)
 {
 }
 
@@ -216,8 +220,8 @@ void StelPropertyBoolProxy::onPropertyChanged(const QVariant &value)
 	emit propertyChanged(value.toBool());
 }
 
-StelPropertyDoubleProxy::StelPropertyDoubleProxy(StelProperty *prop, QObject *parent)
-	: StelPropertyProxy(prop,parent)
+StelPropertyDoubleProxy::StelPropertyDoubleProxy(StelProperty *pr, QObject *parent)
+	: StelPropertyProxy(pr,parent)
 {
 }
 
@@ -226,8 +230,8 @@ void StelPropertyDoubleProxy::onPropertyChanged(const QVariant &value)
 	emit propertyChanged(value.toDouble());
 }
 
-StelPropertyStringProxy::StelPropertyStringProxy(StelProperty *prop, QObject *parent)
-	: StelPropertyProxy(prop,parent)
+StelPropertyStringProxy::StelPropertyStringProxy(StelProperty *pr, QObject *parent)
+	: StelPropertyProxy(pr,parent)
 {
 }
 

@@ -2,7 +2,7 @@
 // Name: Planet Objects Tour
 // License: Public Domain
 // Author: C. Gaudion, Alchymylab
-// Version: 1.0
+// Version: 1.1
 // Description: A tour of the Solar System planets
 
 // load data array in inc file
@@ -10,7 +10,7 @@
 include("common_objects.inc");
 
 
-LandscapeMgr.setFlagCardinalsPoints(false);
+LandscapeMgr.setFlagCardinalPoints(false);
 LandscapeMgr.setFlagLandscape(false);
 LandscapeMgr.setFlagAtmosphere(false);
 

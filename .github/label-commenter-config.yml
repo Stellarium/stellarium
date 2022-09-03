@@ -1,0 +1,122 @@
+labels:
+  - name: invalid
+    labeled:
+      issue:
+        body: Sorry, we just do not understand your problem (probably the log is not attached and hardware info is missing - so, please follow the issue templates).
+        action: close
+      pr:
+        body: Hello @{{ pull_request.user.login }}! Thank you for suggesting this, but please follow the pull request templates.
+        action: draft
+    unlabeled:
+      issue:
+        body: Thank you for following the template. The repository owner will reply.
+        action: open
+      pr:
+        body: Thank you for following the template. The repository owner will review this.
+        action: ready
+  - name: not a bug
+    labeled:
+      issue:
+        body: This is not a bug! This is a feature...
+        action: close
+    unlabeled:
+      issue:
+        body: Oops... Sorry for mistake @{{ issue.user.login }}
+        action: open
+  - name: "state: outdated"
+    labeled:
+      issue:
+        body: This report is outdated, such, the problematic code replaced by new tool or feature...
+        action: close
+      pr:
+        body: This pull request is outdated, such, the problematic code replaced by new tool or feature...
+        action: close
+    unlabeled:
+      issue:
+        body: Oops... Sorry for mistake @{{ issue.user.login }}
+        action: open
+  - name: duplicate
+    labeled:
+      issue:
+        body: This issue already exists.
+        action: close
+  - name: good first issue
+    labeled:
+      issue:
+        body: This is a good task for the community to participate in the contribution into Stellarium. Who wants to help us?
+  - name: more info
+    labeled:
+      issue:
+        body: The hardware info, steps of reproduction and log file are really important and help us resolve over 90% issues fast. Of course, in some specific cases we need more data, but we ask the required data separately...
+  - name: enhancement
+    labeled:
+      issue:
+        body: Hello @{{ issue.user.login }}! Thank you for suggesting this enhancement.
+      pr:
+        body: Hello @{{ pull_request.user.login }}! Thank you for this enhancement.
+  - name: feature request
+    labeled:
+      issue:
+        body: Hello @{{ issue.user.login }}! Thank you for suggesting this feature.
+  - name: wishlist
+    labeled:
+      issue:
+        body: Hello @{{ issue.user.login }}! Thank you for this suggestion.
+  - name: "state: confirmed"
+    labeled:
+      issue:
+        body: Hello @{{ issue.user.login }}! OK, developers can reproduce the issue. Thanks for the report!
+  - name: "state: won't fix"
+    labeled:
+      issue:
+        body: |
+          We have a strong reason not to do it! Some reasons for it in the FAQ:
+          https://github.com/Stellarium/stellarium/wiki/FAQ#Why_dont_you_implement
+        action: close
+    unlabeled:
+      issue:
+        body: Hello @{{ issue.user.login }}! This has become active again.
+        action: open
+  - name: FAQ
+    labeled:
+      issue:
+        body: |
+          Hello @{{ issue.user.login }}! Please see FAQ in the wiki:
+          https://github.com/Stellarium/stellarium/wiki/FAQ or https://github.com/Stellarium/stellarium/wiki/Common-Problems-for-the-current-version
+        action: close
+  - name: mobile
+    labeled:
+      issue:
+        body: |
+          This site actually does not discuss the Mobile version. Please use its own feedback system:
+          https://www.stellarium-labs.com/support/
+        action: close
+  - name: documentation
+    labeled:
+      issue:
+        body: Thank you for suggesting documentation improvement.
+  - name: translations
+    labeled:
+      issue:
+        body: |
+          Thank you @{{ issue.user.login }}! In future please use Transifex to fix and improve translations:
+          https://www.transifex.com/stellarium/stellarium/dashboard/
+  - name: "state: fix committed"
+    labeled:
+      issue:
+        body: |
+          Hello @{{ issue.user.login }}! Please check the fresh version (development snapshot) of Stellarium:
+          https://github.com/Stellarium/stellarium-data/releases/tag/weekly-snapshot
+      pr:
+        body: |
+          Hello @{{ pull_request.user.login }}! Please check the fresh version (development snapshot) of Stellarium:
+          https://github.com/Stellarium/stellarium-data/releases/tag/weekly-snapshot
+    unlabeled:
+      issue:
+        body: |
+          Hello @{{ issue.user.login }}! Please check the latest stable version of Stellarium:
+          https://github.com/Stellarium/stellarium/releases/latest
+      pr:
+        body: |
+          Hello @{{ pull_request.user.login }}! Please check the latest stable version of Stellarium:
+          https://github.com/Stellarium/stellarium/releases/latest

@@ -1,652 +1,652 @@
 {
-	"version": "1",
-	"limit": 9.0,
-	"shortName": "List of bright novae in the Milky Way galaxy",
-	"nova":
-	{
-		"T Aur":
-		{
-			"name": "Nova Aurigae 1892",
-			"type": "NB+EA",
-			"maxMagnitude": 4.1,
-			"minMagnitude": 15.5,
-			"peakJD": 2412088,
-			"m2": 80,
-			"m3": 84,
-			"m6": 96,
-			"m9": 6300,
-			"RA": "05h31m59.1s",
-			"Dec": "30d26m46s"
-		},
-		"V1059 Sgr":
-		{
-			"name": "Nova Sagittarii 1898",
-			"type": "NA",
-			"maxMagnitude": 4.5,
-			"minMagnitude": 16.5,
-			"peakJD": 2414360,
-			"RA": "19h01m50.6s",
-			"Dec": "13d09m42s"
-		},
-		"V0606 Aql":
-		{
-			"name": "Nova Aquilae 1899",
-			"type": "NA",
-			"maxMagnitude": 5.5,
-			"minMagnitude": 17.3,
-			"peakJD": 2414754,
-			"RA": "19h20m24.3s",
-			"Dec": "-00d08m02s"
-		},
-		"GK Per":
-		{
-			"name": "Nova Persei 1901",
-			"type": "NA+XP",
-			"distance": 1.5,
-			"maxMagnitude": 0.2,
-			"minMagnitude": 14,
-			"peakJD": 2415439,
-			"m2": 6,
-			"m3": 13,
-			"m6": 179,
-			"m9": 444,
-			"RA": "03h31m12s",
-			"Dec": "43d54m15s"
-		},
-		"DM Gem":
-		{
-			"name": "Nova Geminorum 1903",
-			"type": "NA",
-			"maxMagnitude": 4.8,
-			"minMagnitude": 16.5,
-			"peakJD": 2416179,
-			"RA": "06h44m12.1s",
-			"Dec": "29d56m42s"
-		},
-		"V0604 Aql":
-		{
-			"name": "Nova Aquilae 1905",
-			"type": "NA",
-			"maxMagnitude": 7.6,
-			"minMagnitude": 18,
-			"peakJD": 2417072,
-			"RA": "19h02m06.2s",
-			"Dec": "-04d26m45s"
-		},
-		"DI Lac":
-		{
-			"name": "Nova Lacertae 1910",
-			"type": "NA",
-			"maxMagnitude": 4.3,
-			"minMagnitude": 14.91,
-			"peakJD": 2419000.5,
-			"RA": "22h35m48.6s",
-			"Dec": "52d43m00s"
-		},
-		"V0603 Aql":
-		{
-			"name": "Nova Aquilae 1918",
-			"type": "NA+E+X",
-			"maxMagnitude": -1.4,
-			"minMagnitude": 12.03,
-			"peakJD": 2421755,
-			"m2": 5,
-			"m3": 12,
-			"m6": 149,
-			"m9": 743,
-			"RA": "18h48m54.6s",
-			"Dec": "00d35m03s"
-		},
-		"HR Lyr":
-		{
-			"name": "Nova Lyrae 1919",
-			"type": "NA",
-			"maxMagnitude": 6.5,
-			"minMagnitude": 15.8,
-			"peakJD": 2422299,
-			"RA": "18h53m24.9s",
-			"Dec": "29d13m38s"
-		},
-		"V0849 Oph":
-		{
-			"name": "Nova Ophiuchi 1919",
-			"type": "NB",
-			"maxMagnitude": 7.2,
-			"minMagnitude": 17.5,
-			"peakJD": 2422268,
-			"m2": 140,
-			"m3": 270,
-			"m6": 2010,
-			"RA": "18h14m07.3s",
-			"Dec": "11d36m43s"
-		},
-		"V0476 Cyg":
-		{
-			"name": "Nova Cygni 1920",
-			"type": "NA",
-			"maxMagnitude": 2.0,
-			"minMagnitude": 17.09,
-			"peakJD": 2422561,
-			"m2": 6,
-			"m3": 16,
-			"m6": 43,
-			"m9": 1076,
-			"RA": "19h58m24.5s",
-			"Dec": "53d37m07s"
-		},
-		"RR Pic":
-		{
-			"name": "Nova Pictoris 1925",
-			"type": "NB",
-			"maxMagnitude": 1.2,
-			"minMagnitude": 12.52,
-			"peakJD": 2424310,
-			"m2": 73,
-			"m3": 122,
-			"m6": 1008,
-			"m9": 5805,
-			"RA": "06h35m36.1s",
-			"Dec": "-62d38m24s"
-		},
-		"EL Aql":
-		{
-			"name": "Nova Aquilae 1927",
-			"type": "NA",
-			"maxMagnitude": 5.5,
-			"minMagnitude": 19,
-			"peakJD": 2425043,
-			"RA": "18h56m02s",
-			"Dec": "-03d19m20s"
-		},
-		"XX Tau":
-		{
-			"name": "Nova Tauri 1927",
-			"type": "NA",
-			"maxMagnitude": 6,
-			"minMagnitude": 16.5,
-			"peakJD": 2425154,
-			"RA": "05h19m24.4s",
-			"Dec": "16d43m00s"
-		},
-		"DQ Her":
-		{
-			"name": "Nova Herculis 1934",
-			"type": "NB+EA",
-			"maxMagnitude": 1.3,
-			"minMagnitude": 18.08,
-			"peakJD": 2427794,
-			"m2": 76,
-			"m3": 100,
-			"m6": 645,
-			"m9": 2010,
-			"distance": 0.3162,
-			"RA": "18h07m30.2s",
-			"Dec": "45d51m32s"
-		},
-		"CP Lac":
-		{
-			"name": "Nova Lacertae 1936",
-			"type": "NA",
-			"maxMagnitude": 2.1,
-			"minMagnitude": 16.6,
-			"peakJD": 2428340,
-			"m2": 5,
-			"m3": 9,
-			"m6": 78,
-			"m9": 436,
-			"RA": "22h15m41.1s",
-			"Dec": "55d37m02s"
-		},
-		"V0368 Aql":
-		{
-			"name": "Nova Aquilae 1936",
-			"type": "NA",
-			"maxMagnitude": 5,
-			"minMagnitude": 15.7,
-			"peakJD": 2428438.4,
-			"RA": "19h26m34.4s",
-			"Dec": "07d36m14s"
-		},
-		"BT Mon":
-		{
-			"name": "Nova Monocerotis 1939",
-			"type": "NA+EA",
-			"maxMagnitude": 4,
-			"minMagnitude": 18.7,
-			"peakJD": 2429503,
-			"m2": 118,
-			"m3": 182,
-			"m6": 610,
-			"RA": "06h43m47.2s",
-			"Dec": "-02d01m13s"
-		},
-		"V0450 Cyg":
-		{
-			"name": "Nova Cygni 1942",
-			"type": "NB",
-			"maxMagnitude": 7,
-			"minMagnitude": 17,
-			"peakJD": 2430510,
-			"RA": "20h58m47.6s",
-			"Dec": "35d56m30s"
-		},
-		"CP Pup":
-		{
-			"name": "Nova Puppis 1942",
-			"type": "NA",
-			"maxMagnitude": 0.5,
-			"minMagnitude": 17,
-			"peakJD": 2430675,
-			"m2": 4,
-			"m3": 8,
-			"m6": 114,
-			"m9": 748,
-			"distance": 3.72,
-			"RA": "08h11m46.1s",
-			"Dec": "-35d21m05s"
-		},
-		"V0500 Aql":
-		{
-			"name": "Nova Aquilae 1943",
-			"type": "NA",
-			"maxMagnitude": 6.1,
-			"minMagnitude": 17.8,
-			"peakJD": 2430845,
-			"RA": "19h52m28s",
-			"Dec": "08d28m47s"
-		},
-		"V0528 Aql":
-		{
-			"name": "Nova Aquilae 1945",
-			"type": "NA",
-			"maxMagnitude": 7.2,
-			"minMagnitude": 18.1,
-			"peakJD": 2431695,
-			"m2": 16,
-			"m3": 38,
-			"m6": 119,
-			"RA": "19h19m19.1s",
-			"Dec": "00d37m53s"
-		},
-		"CT Ser":
-		{
-			"name": "Nova Serpentis 1948",
-			"type": "NA",
-			"maxMagnitude": 6,
-			"minMagnitude": 16.6,
-			"peakJD": 2432600,
-			"RA": "15h45m39.1s",
-			"Dec": "14d22m32s"
-		},
-		"V0465 Cyg":
-		{
-			"name": "Nova Cygni 1948",
-			"type": "NB",
-			"maxMagnitude": 7.3,
-			"minMagnitude": 17.9,
-			"peakJD": 2432704,
-			"RA": "19h52m37.9s",
-			"Dec": "36d33m52s"
-		},
-		"DK Lac":
-		{
-			"name": "Nova Lacertae 1950",
-			"type": "NA",
-			"maxMagnitude": 5,
-			"minMagnitude": 15.5,
-			"peakJD": 2433304,
-			"m2": 55,
-			"m3": 202,
-			"m6": 488,
-			"RA": "22h49m47s",
-			"Dec": "53d17m20s"
-		},
-		"RW UMi":
-		{
-			"name": "Nova Ursae Minoris 1956",
-			"type": "NA",
-			"maxMagnitude": 6,
-			"minMagnitude": 21,
-			"peakJD": 2435741,
-			"RA": "16h47m54.8s",
-			"Dec": "77d02m12s"
-		},
-		"V0446 Her":
-		{
-			"name": "Nova Herculis 1960",
-			"type": "NA",
-			"maxMagnitude": 2.8,
-			"minMagnitude": 18.8,
-			"peakJD": 2436997,
-			"m2": 20,
-			"m3": 42,
-			"m6": 197,
-			"m9": 997,
-			"RA": "18h57m21.6s",
-			"Dec": "13d14m29s"
-		},
-		"V0533 Her":
-		{
-			"name": "Nova Herculis 1963",
-			"type": "NA",
-			"maxMagnitude": 3,
-			"minMagnitude": 16.2,
-			"peakJD": 2438060,
-			"m2": 30,
-			"m3": 43,
-			"m6": 238,
-			"m9": 688,
-			"RA": "18h14m20.5s",
-			"Dec": "41d51m23s"
-		},
-		"QZ Aur":
-		{
-			"name": "Nova Aurigae 1964",
-			"type": "NA+E",
-			"maxMagnitude": 6,
-			"minMagnitude": 18,
-			"peakJD": 2438440,
-			"RA": "05h28m34.1s",
-			"Dec": "33d18m22s"
-		},
-		"HR Del":
-		{
-			"name": "Nova Delphini 1967",
-			"type": "NB",
-			"maxMagnitude": 3.7,
-			"minMagnitude": 12.4,
-			"peakJD": 2439838,
-			"m2": 167,
-			"m3": 231,
-			"m6": 1387,
-			"RA": "20h42m20.4s",
-			"Dec": "19d09m39s"
-		},
-		"LV Vul":
-		{
-			"name": "Nova Vulpeculae 1968",
-			"type": "NA",
-			"maxMagnitude": 5.17,
-			"minMagnitude": 16.9,
-			"peakJD": 2439964,
-			"m2": 20,
-			"m3": 38,
-			"m6": 280,
-			"m9": 784,
-			"RA": "19h48m00.7s",
-			"Dec": "27d10m20s"
-		},
-		"FH Ser":
-		{
-			"name": "Nova Serpentis 1970",
-			"type": "NA",
-			"maxMagnitude": 4.39,
-			"minMagnitude": 16,
-			"peakJD": 2440636,
-			"m2": 49,
-			"m3": 62,
-			"m6": 410,
-			"m9": 1666,
-			"RA": "18h30m47s",
-			"Dec": "02d36m52s"
-		},
-		"V1229 Aql":
-		{
-			"name": "Nova Aquilae 1970",
-			"type": "NA",
-			"maxMagnitude": 6.7,
-			"minMagnitude": 18,
-			"peakJD": 2440687,
-			"m2": 18,
-			"m3": 32,
-			"m6": 56,
-			"RA": "19h24m44.6s",
-			"Dec": "04d14m48s"
-		},
-		"V1330 Cyg":
-		{
-			"name": "Nova Cygni 1970",
-			"type": "NA",
-			"maxMagnitude": 7.5,
-			"minMagnitude": 18.1,
-			"peakJD": 2440722,
-			"m2": 161,
-			"m3": 217,
-			"RA": "20h52m44.8s",
-			"Dec": "35d59m28s"
-		},
-		"IV Cep":
-		{
-			"name": "Nova Cephei 1971",
-			"type": "NA",
-			"maxMagnitude": 7,
-			"minMagnitude": 19.3,
-			"peakJD": 2441139,
-			"RA": "22h04m37s",
-			"Dec": "53d30m24s"
-		},
-		"V0373 Sct":
-		{
-			"name": "Nova Scuti 1975",
-			"type": "NA",
-			"maxMagnitude": 6,
-			"minMagnitude": 18.5,
-			"peakJD": 2442541,
-			"m2": 47,
-			"m3": 79,
-			"m6": 237,
-			"m9": 700,
-			"RA": "18h55m26.8s",
-			"Dec": "-07d43m05s"
-		},
-		"V1500 Cyg":
-		{
-			"name": "Nova Cygni 1975",
-			"type": "NA",
-			"maxMagnitude": 1.69,
-			"minMagnitude": 21,
-			"peakJD": 2442655,
-			"m2": 2,
-			"m3": 4,
-			"m6": 32,
-			"m9": 263,
-			"distance": 6.36,
-			"RA": "21h11m36.6s",
-			"Dec": "48d09m02s"
-		},
-		"NQ Vul":
-		{
-			"name": "Nova Vulpeculae 1976",
-			"type": "NB",
-			"maxMagnitude": 6.01,
-			"minMagnitude": 18,
-			"peakJD": 2443085,
-			"RA": "19h29m14.8s",
-			"Dec": "20d28m00s"
-		},
-		"HS Sge":
-		{
-			"name": "Nova Sagittae 1977",
-			"type": "NA",
-			"maxMagnitude": 7.2,
-			"minMagnitude": 20,
-			"peakJD": 2443151,
-			"m2": 15,
-			"m3": 21,
-			"m6": 537,
-			"RA": "19h39m22.1s",
-			"Dec": "18d07m55s"
-		},
-		"V1668 Cyg":
-		{
-			"name": "Nova Cygni 1978",
-			"type": "NA",
-			"maxMagnitude": 6,
-			"minMagnitude": 20,
-			"peakJD": 2443764,
-			"m2": 11,
-			"m3": 26,
-			"m6": 219,
-			"m9": 948,
-			"RA": "21h42m35.3s",
-			"Dec": "44d01m55s"
-		},
-		"V1370 Aql":
-		{
-			"name": "Nova Cygni 1978",
-			"type": "NA",
-			"maxMagnitude": 6,
-			"minMagnitude": 20,
-			"peakJD": 2443764,
-			"m2": 15,
-			"m3": 28,
-			"m6": 199,
-			"RA": "21h42m35.3s",
-			"Dec": "44d01m55s"
-		},
-		"OS And":
-		{
-			"name": "Nova Andromedae 1986",
-			"type": "NA",
-			"maxMagnitude": 6.3,
-			"minMagnitude": 18,
-			"peakJD": 2446772,
-			"m2": 11,
-			"m3": 23,
-			"m6": 199,
-			"m9": 770,
-			"RA": "23h12m06s",
-			"Dec": "47d28m20s"
-		},
-		"V1494 Aql":
-		{
-			"name": "Nova Aquilae 1999 #2",
-			"type": "NA",
-			"maxMagnitude": 4.1,
-			"minMagnitude": 17.4,
-			"peakJD": 2451516,
-			"distance": 5.216,
-			"RA": "19h23m05.36s",
-			"Dec": "+04d57m19.8s"
-		},
-		"V382 Vel":
-		{
-			"name": "Nova Velorum 1999",
-			"type": "NA",
-			"maxMagnitude": 2.5,
-			"minMagnitude": 15,
-			"peakJD": 2451321,
-			"m2": 6,
-			"m3": 11,
-			"m6": 132,
-			"m9": 497,
-			"distance": 5.542,
-			"RA": "10h44m48.40s",
-			"Dec": "-52d25m31.1s"
-		},
-		"V0445 Pup":
-		{
-			"name": "Nova Puppis 2000",
-			"type": "NC:",
-			"maxMagnitude": 8.6,
-			"minMagnitude": 14,
-			"peakJD": 2451869,
-			"m2": 215,
-			"m3": 240,
-			"RA": "07h37m56.9s",
-			"Dec": "-25d56m59s"
-		},
-		"V1280 Sco":
-		{
-			"name": "Nova Scorpii 2007",
-			"type": "NA",
-			"maxMagnitude": 3.8,
-			"minMagnitude": 20,
-			"peakJD": 2454148,
-			"RA": "16h57m41.2s",
-			"Dec": "-32d20m36s"
-		},
-		"KT Eri":
-		{
-			"name": "Nova Eridani 2009",
-			"type": "NA",
-			"maxMagnitude": 7.34,
-			"minMagnitude": 15,
-			"peakJD": 2455155,
-			"RA": "04h47m54.2s",
-			"Dec": "-10d10m43s"
-		},
-		"V339 Del":
-		{
-			"name": "Nova Delphini 2013",
-			"type": "NA",
-			"maxMagnitude": 4.3,
-			"minMagnitude": 16.9,
-			"peakJD": 2456521,
-			"m2": 8,
-			"m3": 20,
-			"RA": "20h23m30.68s",
-			"Dec": "20d46m03.8s"
-		},
-		"V1369 Cen":
-		{
-			"name": "Nova Centauri 2013",
-			"type": "NB",
-			"maxMagnitude": 3.3,
-			"minMagnitude": 11,
-			"peakJD": 2456640.95833,
-			"RA": "13h54m45.34s",
-			"Dec": "-59d09m04.2s"
-		},
-		"PNV J18365700-2855420":
-		{
-			"name": "Nova Sagittarii 2015 #2",
-			"type": "NA",
-			"maxMagnitude": 4.4,
-			"minMagnitude": 11,
-			"peakJD": 2457103.6,
-			"RA": "18h36m56.85s",
-			"Dec": "-28d55m40s"
-		},
-		"V5669 Sgt":
-		{
-			"name": "Nova Sagittarii 2015 #3",
-			"type": "NA",
-			"maxMagnitude": 9.0,
-			"minMagnitude": 11,
-			"peakJD": 2457298.9,
-			"RA": "18h03m32.77s",
-			"Dec": "-28d16m05.3s"
-		},
-		"ASASSN-16kt":
-		{
-			"name": "Nova Lupi 2016",
-			"type": "NA",
-			"maxMagnitude": 5.6,
-			"minMagnitude": 18.5,
-			"peakJD": 2457656.9028,
-			"RA": "15h29m01.82s",
-			"Dec": "-44d49m40.9s"
-		},
-		"TCP J18102829-2729590":
-		{
-			"name": "Nova Sagittarii 2016",
-			"type": "NA",
-			"maxMagnitude": 7.9,
-			"minMagnitude": 14.0,
-			"peakJD": 2457687.04306,
-			"RA": "18h10m28.29s",
-			"Dec": "-27d29m59.0s"
-		},
-		"ASASSN-17hx":
-		{
-			"name": "Nova Scuti 2017",
-			"type": "NA",
-			"maxMagnitude": 8.7,
-			"minMagnitude": 15.0,
-			"peakJD": 2457962,
-			"RA": "18h31m45.86s",
-			"Dec": "-14d18m55.5s"
-		}
-	}
+    "version": "1",
+    "limit": 9.0,
+    "shortName": "List of bright novae in the Milky Way galaxy",
+    "nova":
+    {
+        "T Aur":
+        {
+            "name": "Nova Aurigae 1892",
+            "type": "NB+EA",
+            "maxMagnitude": 4.1,
+            "minMagnitude": 15.5,
+            "peakJD": 2412088,
+            "m2": 80,
+            "m3": 84,
+            "m6": 96,
+            "m9": 6300,
+            "RA": "05h31m59.1s",
+            "Dec": "30d26m46s"
+        },
+        "V1059 Sgr":
+        {
+            "name": "Nova Sagittarii 1898",
+            "type": "NA",
+            "maxMagnitude": 4.5,
+            "minMagnitude": 16.5,
+            "peakJD": 2414360,
+            "RA": "19h01m50.6s",
+            "Dec": "13d09m42s"
+        },
+        "V0606 Aql":
+        {
+            "name": "Nova Aquilae 1899",
+            "type": "NA",
+            "maxMagnitude": 5.5,
+            "minMagnitude": 17.3,
+            "peakJD": 2414754,
+            "RA": "19h20m24.3s",
+            "Dec": "-00d08m02s"
+        },
+        "GK Per":
+        {
+            "name": "Nova Persei 1901",
+            "type": "NA+XP",
+            "distance": 1.5,
+            "maxMagnitude": 0.2,
+            "minMagnitude": 14,
+            "peakJD": 2415439,
+            "m2": 6,
+            "m3": 13,
+            "m6": 179,
+            "m9": 444,
+            "RA": "03h31m12s",
+            "Dec": "43d54m15s"
+        },
+        "DM Gem":
+        {
+            "name": "Nova Geminorum 1903",
+            "type": "NA",
+            "maxMagnitude": 4.8,
+            "minMagnitude": 16.5,
+            "peakJD": 2416179,
+            "RA": "06h44m12.1s",
+            "Dec": "29d56m42s"
+        },
+        "V0604 Aql":
+        {
+            "name": "Nova Aquilae 1905",
+            "type": "NA",
+            "maxMagnitude": 7.6,
+            "minMagnitude": 18,
+            "peakJD": 2417072,
+            "RA": "19h02m06.2s",
+            "Dec": "-04d26m45s"
+        },
+        "DI Lac":
+        {
+            "name": "Nova Lacertae 1910",
+            "type": "NA",
+            "maxMagnitude": 4.3,
+            "minMagnitude": 14.91,
+            "peakJD": 2419000.5,
+            "RA": "22h35m48.6s",
+            "Dec": "52d43m00s"
+        },
+        "V0603 Aql":
+        {
+            "name": "Nova Aquilae 1918",
+            "type": "NA+E+X",
+            "maxMagnitude": -1.4,
+            "minMagnitude": 12.03,
+            "peakJD": 2421755,
+            "m2": 5,
+            "m3": 12,
+            "m6": 149,
+            "m9": 743,
+            "RA": "18h48m54.6s",
+            "Dec": "00d35m03s"
+        },
+        "HR Lyr":
+        {
+            "name": "Nova Lyrae 1919",
+            "type": "NA",
+            "maxMagnitude": 6.5,
+            "minMagnitude": 15.8,
+            "peakJD": 2422299,
+            "RA": "18h53m24.9s",
+            "Dec": "29d13m38s"
+        },
+        "V0849 Oph":
+        {
+            "name": "Nova Ophiuchi 1919",
+            "type": "NB",
+            "maxMagnitude": 7.2,
+            "minMagnitude": 17.5,
+            "peakJD": 2422268,
+            "m2": 140,
+            "m3": 270,
+            "m6": 2010,
+            "RA": "18h14m07.3s",
+            "Dec": "11d36m43s"
+        },
+        "V0476 Cyg":
+        {
+            "name": "Nova Cygni 1920",
+            "type": "NA",
+            "maxMagnitude": 2.0,
+            "minMagnitude": 17.09,
+            "peakJD": 2422561,
+            "m2": 6,
+            "m3": 16,
+            "m6": 43,
+            "m9": 1076,
+            "RA": "19h58m24.5s",
+            "Dec": "53d37m07s"
+        },
+        "RR Pic":
+        {
+            "name": "Nova Pictoris 1925",
+            "type": "NB",
+            "maxMagnitude": 1.2,
+            "minMagnitude": 12.52,
+            "peakJD": 2424310,
+            "m2": 73,
+            "m3": 122,
+            "m6": 1008,
+            "m9": 5805,
+            "RA": "06h35m36.1s",
+            "Dec": "-62d38m24s"
+        },
+        "EL Aql":
+        {
+            "name": "Nova Aquilae 1927",
+            "type": "NA",
+            "maxMagnitude": 5.5,
+            "minMagnitude": 19,
+            "peakJD": 2425043,
+            "RA": "18h56m02s",
+            "Dec": "-03d19m20s"
+        },
+        "XX Tau":
+        {
+            "name": "Nova Tauri 1927",
+            "type": "NA",
+            "maxMagnitude": 6,
+            "minMagnitude": 16.5,
+            "peakJD": 2425154,
+            "RA": "05h19m24.4s",
+            "Dec": "16d43m00s"
+        },
+        "DQ Her":
+        {
+            "name": "Nova Herculis 1934",
+            "type": "NB+EA",
+            "maxMagnitude": 1.3,
+            "minMagnitude": 18.08,
+            "peakJD": 2427794,
+            "m2": 76,
+            "m3": 100,
+            "m6": 645,
+            "m9": 2010,
+            "distance": 0.3162,
+            "RA": "18h07m30.2s",
+            "Dec": "45d51m32s"
+        },
+        "CP Lac":
+        {
+            "name": "Nova Lacertae 1936",
+            "type": "NA",
+            "maxMagnitude": 2.1,
+            "minMagnitude": 16.6,
+            "peakJD": 2428340,
+            "m2": 5,
+            "m3": 9,
+            "m6": 78,
+            "m9": 436,
+            "RA": "22h15m41.1s",
+            "Dec": "55d37m02s"
+        },
+        "V0368 Aql":
+        {
+            "name": "Nova Aquilae 1936",
+            "type": "NA",
+            "maxMagnitude": 5,
+            "minMagnitude": 15.7,
+            "peakJD": 2428438.4,
+            "RA": "19h26m34.4s",
+            "Dec": "07d36m14s"
+        },
+        "BT Mon":
+        {
+            "name": "Nova Monocerotis 1939",
+            "type": "NA+EA",
+            "maxMagnitude": 4,
+            "minMagnitude": 18.7,
+            "peakJD": 2429503,
+            "m2": 118,
+            "m3": 182,
+            "m6": 610,
+            "RA": "06h43m47.2s",
+            "Dec": "-02d01m13s"
+        },
+        "V0450 Cyg":
+        {
+            "name": "Nova Cygni 1942",
+            "type": "NB",
+            "maxMagnitude": 7,
+            "minMagnitude": 17,
+            "peakJD": 2430510,
+            "RA": "20h58m47.6s",
+            "Dec": "35d56m30s"
+        },
+        "CP Pup":
+        {
+            "name": "Nova Puppis 1942",
+            "type": "NA",
+            "maxMagnitude": 0.5,
+            "minMagnitude": 17,
+            "peakJD": 2430675,
+            "m2": 4,
+            "m3": 8,
+            "m6": 114,
+            "m9": 748,
+            "distance": 3.72,
+            "RA": "08h11m46.1s",
+            "Dec": "-35d21m05s"
+        },
+        "V0500 Aql":
+        {
+            "name": "Nova Aquilae 1943",
+            "type": "NA",
+            "maxMagnitude": 6.1,
+            "minMagnitude": 17.8,
+            "peakJD": 2430845,
+            "RA": "19h52m28s",
+            "Dec": "08d28m47s"
+        },
+        "V0528 Aql":
+        {
+            "name": "Nova Aquilae 1945",
+            "type": "NA",
+            "maxMagnitude": 7.2,
+            "minMagnitude": 18.1,
+            "peakJD": 2431695,
+            "m2": 16,
+            "m3": 38,
+            "m6": 119,
+            "RA": "19h19m19.1s",
+            "Dec": "00d37m53s"
+        },
+        "CT Ser":
+        {
+            "name": "Nova Serpentis 1948",
+            "type": "NA",
+            "maxMagnitude": 6,
+            "minMagnitude": 16.6,
+            "peakJD": 2432600,
+            "RA": "15h45m39.1s",
+            "Dec": "14d22m32s"
+        },
+        "V0465 Cyg":
+        {
+            "name": "Nova Cygni 1948",
+            "type": "NB",
+            "maxMagnitude": 7.3,
+            "minMagnitude": 17.9,
+            "peakJD": 2432704,
+            "RA": "19h52m37.9s",
+            "Dec": "36d33m52s"
+        },
+        "DK Lac":
+        {
+            "name": "Nova Lacertae 1950",
+            "type": "NA",
+            "maxMagnitude": 5,
+            "minMagnitude": 15.5,
+            "peakJD": 2433304,
+            "m2": 55,
+            "m3": 202,
+            "m6": 488,
+            "RA": "22h49m47s",
+            "Dec": "53d17m20s"
+        },
+        "RW UMi":
+        {
+            "name": "Nova Ursae Minoris 1956",
+            "type": "NA",
+            "maxMagnitude": 6,
+            "minMagnitude": 21,
+            "peakJD": 2435741,
+            "RA": "16h47m54.8s",
+            "Dec": "77d02m12s"
+        },
+        "V0446 Her":
+        {
+            "name": "Nova Herculis 1960",
+            "type": "NA",
+            "maxMagnitude": 2.8,
+            "minMagnitude": 18.8,
+            "peakJD": 2436997,
+            "m2": 20,
+            "m3": 42,
+            "m6": 197,
+            "m9": 997,
+            "RA": "18h57m21.6s",
+            "Dec": "13d14m29s"
+        },
+        "V0533 Her":
+        {
+            "name": "Nova Herculis 1963",
+            "type": "NA",
+            "maxMagnitude": 3,
+            "minMagnitude": 16.2,
+            "peakJD": 2438060,
+            "m2": 30,
+            "m3": 43,
+            "m6": 238,
+            "m9": 688,
+            "RA": "18h14m20.5s",
+            "Dec": "41d51m23s"
+        },
+        "QZ Aur":
+        {
+            "name": "Nova Aurigae 1964",
+            "type": "NA+E",
+            "maxMagnitude": 6,
+            "minMagnitude": 18,
+            "peakJD": 2438440,
+            "RA": "05h28m34.1s",
+            "Dec": "33d18m22s"
+        },
+        "HR Del":
+        {
+            "name": "Nova Delphini 1967",
+            "type": "NB",
+            "maxMagnitude": 3.7,
+            "minMagnitude": 12.4,
+            "peakJD": 2439838,
+            "m2": 167,
+            "m3": 231,
+            "m6": 1387,
+            "RA": "20h42m20.4s",
+            "Dec": "19d09m39s"
+        },
+        "LV Vul":
+        {
+            "name": "Nova Vulpeculae 1968",
+            "type": "NA",
+            "maxMagnitude": 5.17,
+            "minMagnitude": 16.9,
+            "peakJD": 2439964,
+            "m2": 20,
+            "m3": 38,
+            "m6": 280,
+            "m9": 784,
+            "RA": "19h48m00.7s",
+            "Dec": "27d10m20s"
+        },
+        "FH Ser":
+        {
+            "name": "Nova Serpentis 1970",
+            "type": "NA",
+            "maxMagnitude": 4.39,
+            "minMagnitude": 16,
+            "peakJD": 2440636,
+            "m2": 49,
+            "m3": 62,
+            "m6": 410,
+            "m9": 1666,
+            "RA": "18h30m47s",
+            "Dec": "02d36m52s"
+        },
+        "V1229 Aql":
+        {
+            "name": "Nova Aquilae 1970",
+            "type": "NA",
+            "maxMagnitude": 6.7,
+            "minMagnitude": 18,
+            "peakJD": 2440687,
+            "m2": 18,
+            "m3": 32,
+            "m6": 56,
+            "RA": "19h24m44.6s",
+            "Dec": "04d14m48s"
+        },
+        "V1330 Cyg":
+        {
+            "name": "Nova Cygni 1970",
+            "type": "NA",
+            "maxMagnitude": 7.5,
+            "minMagnitude": 18.1,
+            "peakJD": 2440722,
+            "m2": 161,
+            "m3": 217,
+            "RA": "20h52m44.8s",
+            "Dec": "35d59m28s"
+        },
+        "IV Cep":
+        {
+            "name": "Nova Cephei 1971",
+            "type": "NA",
+            "maxMagnitude": 7,
+            "minMagnitude": 19.3,
+            "peakJD": 2441139,
+            "RA": "22h04m37s",
+            "Dec": "53d30m24s"
+        },
+        "V0373 Sct":
+        {
+            "name": "Nova Scuti 1975",
+            "type": "NA",
+            "maxMagnitude": 6,
+            "minMagnitude": 18.5,
+            "peakJD": 2442541,
+            "m2": 47,
+            "m3": 79,
+            "m6": 237,
+            "m9": 700,
+            "RA": "18h55m26.8s",
+            "Dec": "-07d43m05s"
+        },
+        "V1500 Cyg":
+        {
+            "name": "Nova Cygni 1975",
+            "type": "NA",
+            "maxMagnitude": 1.69,
+            "minMagnitude": 21,
+            "peakJD": 2442655,
+            "m2": 2,
+            "m3": 4,
+            "m6": 32,
+            "m9": 263,
+            "distance": 6.36,
+            "RA": "21h11m36.6s",
+            "Dec": "48d09m02s"
+        },
+        "NQ Vul":
+        {
+            "name": "Nova Vulpeculae 1976",
+            "type": "NB",
+            "maxMagnitude": 6.01,
+            "minMagnitude": 18,
+            "peakJD": 2443085,
+            "RA": "19h29m14.8s",
+            "Dec": "20d28m00s"
+        },
+        "HS Sge":
+        {
+            "name": "Nova Sagittae 1977",
+            "type": "NA",
+            "maxMagnitude": 7.2,
+            "minMagnitude": 20,
+            "peakJD": 2443151,
+            "m2": 15,
+            "m3": 21,
+            "m6": 537,
+            "RA": "19h39m22.1s",
+            "Dec": "18d07m55s"
+        },
+        "V1668 Cyg":
+        {
+            "name": "Nova Cygni 1978",
+            "type": "NA",
+            "maxMagnitude": 6,
+            "minMagnitude": 20,
+            "peakJD": 2443764,
+            "m2": 11,
+            "m3": 26,
+            "m6": 219,
+            "m9": 948,
+            "RA": "21h42m35.3s",
+            "Dec": "44d01m55s"
+        },
+        "V1370 Aql":
+        {
+            "name": "Nova Cygni 1978",
+            "type": "NA",
+            "maxMagnitude": 6,
+            "minMagnitude": 20,
+            "peakJD": 2443764,
+            "m2": 15,
+            "m3": 28,
+            "m6": 199,
+            "RA": "21h42m35.3s",
+            "Dec": "44d01m55s"
+        },
+        "OS And":
+        {
+            "name": "Nova Andromedae 1986",
+            "type": "NA",
+            "maxMagnitude": 6.3,
+            "minMagnitude": 18,
+            "peakJD": 2446772,
+            "m2": 11,
+            "m3": 23,
+            "m6": 199,
+            "m9": 770,
+            "RA": "23h12m06s",
+            "Dec": "47d28m20s"
+        },
+        "V1494 Aql":
+        {
+            "name": "Nova Aquilae 1999 #2",
+            "type": "NA",
+            "maxMagnitude": 4.1,
+            "minMagnitude": 17.4,
+            "peakJD": 2451516,
+            "distance": 5.216,
+            "RA": "19h23m05.36s",
+            "Dec": "+04d57m19.8s"
+        },
+        "V382 Vel":
+        {
+            "name": "Nova Velorum 1999",
+            "type": "NA",
+            "maxMagnitude": 2.5,
+            "minMagnitude": 15,
+            "peakJD": 2451321,
+            "m2": 6,
+            "m3": 11,
+            "m6": 132,
+            "m9": 497,
+            "distance": 5.542,
+            "RA": "10h44m48.40s",
+            "Dec": "-52d25m31.1s"
+        },
+        "V0445 Pup":
+        {
+            "name": "Nova Puppis 2000",
+            "type": "NC:",
+            "maxMagnitude": 8.6,
+            "minMagnitude": 14,
+            "peakJD": 2451869,
+            "m2": 215,
+            "m3": 240,
+            "RA": "07h37m56.9s",
+            "Dec": "-25d56m59s"
+        },
+        "V1280 Sco":
+        {
+            "name": "Nova Scorpii 2007",
+            "type": "NA",
+            "maxMagnitude": 3.8,
+            "minMagnitude": 20,
+            "peakJD": 2454148,
+            "RA": "16h57m41.2s",
+            "Dec": "-32d20m36s"
+        },
+        "KT Eri":
+        {
+            "name": "Nova Eridani 2009",
+            "type": "NA",
+            "maxMagnitude": 7.34,
+            "minMagnitude": 15,
+            "peakJD": 2455155,
+            "RA": "04h47m54.2s",
+            "Dec": "-10d10m43s"
+        },
+        "V339 Del":
+        {
+            "name": "Nova Delphini 2013",
+            "type": "NA",
+            "maxMagnitude": 4.3,
+            "minMagnitude": 16.9,
+            "peakJD": 2456521,
+            "m2": 8,
+            "m3": 20,
+            "RA": "20h23m30.68s",
+            "Dec": "20d46m03.8s"
+        },
+        "V1369 Cen":
+        {
+            "name": "Nova Centauri 2013",
+            "type": "NB",
+            "maxMagnitude": 3.3,
+            "minMagnitude": 11,
+            "peakJD": 2456640.95833,
+            "RA": "13h54m45.34s",
+            "Dec": "-59d09m04.2s"
+        },
+        "PNV J18365700-2855420":
+        {
+            "name": "Nova Sagittarii 2015 #2",
+            "type": "NA",
+            "maxMagnitude": 4.4,
+            "minMagnitude": 11,
+            "peakJD": 2457103.6,
+            "RA": "18h36m56.85s",
+            "Dec": "-28d55m40s"
+        },
+        "V5669 Sgt":
+        {
+            "name": "Nova Sagittarii 2015 #3",
+            "type": "NA",
+            "maxMagnitude": 9.0,
+            "minMagnitude": 11,
+            "peakJD": 2457298.9,
+            "RA": "18h03m32.77s",
+            "Dec": "-28d16m05.3s"
+        },
+        "ASASSN-16kt":
+        {
+            "name": "Nova Lupi 2016",
+            "type": "NA",
+            "maxMagnitude": 5.6,
+            "minMagnitude": 18.5,
+            "peakJD": 2457656.9028,
+            "RA": "15h29m01.82s",
+            "Dec": "-44d49m40.9s"
+        },
+        "TCP J18102829-2729590":
+        {
+            "name": "Nova Sagittarii 2016",
+            "type": "NA",
+            "maxMagnitude": 7.9,
+            "minMagnitude": 14.0,
+            "peakJD": 2457687.04306,
+            "RA": "18h10m28.29s",
+            "Dec": "-27d29m59.0s"
+        },
+        "ASASSN-17hx":
+        {
+            "name": "Nova Scuti 2017",
+            "type": "NA",
+            "maxMagnitude": 8.7,
+            "minMagnitude": 15.0,
+            "peakJD": 2457962,
+            "RA": "18h31m45.86s",
+            "Dec": "-14d18m55.5s"
+        }
+    }
 }
