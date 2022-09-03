@@ -405,6 +405,9 @@ SET(ENABLE_QTWEBENGINE 1 CACHE BOOL "Define whether QtWebEngine module should be
 # - Other systems: libgps if possible and NMEA emitter as fallback.
 SET(ENABLE_GPS 1 CACHE BOOL "Define whether GPS queries should be supported.")
 
+# Activate support for ShowMySky atmosphere
+SET(ENABLE_SHOWMYSKY 1 CACHE BOOL "Define whether to support ShowMySky atmosphere model")
+
 # SPOUT allows relaying the Stellarium OpenGL framebuffer as DirectX texture in other programs.
 # It exists on Windows only. Syphon is a similar system for MacOS, this might be added by a Mac developer.
 IF(WIN32)
@@ -655,6 +658,12 @@ SET(CMAKE_AUTOUIC ON) # ?
 # As moc files are generated in the binary dir, tell CMake to always look for includes there:
 SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+IF(ENABLE_SHOWMYSKY)
+    FIND_PACKAGE(ShowMySky REQUIRED)
+    ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
+    GET_TARGET_PROPERTY(ShowMySky_INCLUDE_DIRECTORIES ShowMySky::ShowMySky INTERFACE_INCLUDE_DIRECTORIES)
+ENDIF(ENABLE_SHOWMYSKY)
+
 IF(ENABLE_SCRIPTING)
      IF(ENABLE_SCRIPT_QML)
           FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Qml REQUIRED)
@@ -825,6 +834,10 @@ IF(WIN32)
      ELSE()
           SET(ISS_SPOUT "; Spout support is disabled")
      ENDIF(ENABLE_SPOUT)
+     IF(ENABLE_SHOWMYSKY)
+         SET(SHOWMYSKY_LIBRARY "${ShowMySky_INCLUDE_DIRECTORIES}/../ShowMySky.dll")
+         SET(ISS_STELLARIUM_STUFF "${ISS_STELLARIUM_STUFF}\nSource: \"${SHOWMYSKY_LIBRARY}\"; DestDir: \"{app}\"; Flags: ignoreversion")
+     ENDIF()
 ENDIF(WIN32)
 
 
