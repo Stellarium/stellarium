@@ -406,7 +406,7 @@ SET(ENABLE_QTWEBENGINE 1 CACHE BOOL "Define whether QtWebEngine module should be
 SET(ENABLE_GPS 1 CACHE BOOL "Define whether GPS queries should be supported.")
 
 # Activate support for ShowMySky atmosphere
-SET(ENABLE_SHOWMYSKY 0 CACHE BOOL "Define whether to support ShowMySky atmosphere model")
+SET(ENABLE_SHOWMYSKY 1 CACHE BOOL "Define whether to support ShowMySky atmosphere model")
 
 # SPOUT allows relaying the Stellarium OpenGL framebuffer as DirectX texture in other programs.
 # It exists on Windows only. Syphon is a similar system for MacOS, this might be added by a Mac developer.
