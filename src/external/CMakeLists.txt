@@ -131,12 +131,12 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
             ${CMAKE_CURRENT_BINARY_DIR}/libindi/config.h )
         add_library(indiclient STATIC
             ${indiclient_SOURCE_DIR}/libs/lilxml.c
-			${indiclient_SOURCE_DIR}/base64.c
-			${indiclient_SOURCE_DIR}/libs/indibase/basedevice.cpp
-			${indiclient_SOURCE_DIR}/libs/indibase/baseclient.cpp
-			${indiclient_SOURCE_DIR}/libs/indibase/indiproperty.cpp
-			${indiclient_SOURCE_DIR}/libs/indibase/indistandardproperty.cpp
-			${indiclient_SOURCE_DIR}/libs/indicom.c)
+            ${indiclient_SOURCE_DIR}/base64.c
+            ${indiclient_SOURCE_DIR}/libs/indibase/basedevice.cpp
+            ${indiclient_SOURCE_DIR}/libs/indibase/baseclient.cpp
+            ${indiclient_SOURCE_DIR}/libs/indibase/indiproperty.cpp
+            ${indiclient_SOURCE_DIR}/libs/indibase/indistandardproperty.cpp
+            ${indiclient_SOURCE_DIR}/libs/indicom.c)
         target_include_directories(indiclient PUBLIC
             ${CMAKE_CURRENT_BINARY_DIR}
             ${indiclient_SOURCE_DIR}

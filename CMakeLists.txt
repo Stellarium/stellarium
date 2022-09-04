@@ -748,31 +748,21 @@ ENDIF()
 # TODO: switch to something like vcpkg or conan, and plain find_package,
 # without the fallback of cmake downloading the dep itself.
 # But some libraries are not available there yet.
+# This commit id is v1.4.4 + https://github.com/QtExcel/QXlsx/pull/228
 CPMFindPackage(NAME QXlsx
-    URL https://github.com/QtExcel/QXlsx/archive/v1.3.55.2.zip
-    URL_HASH SHA256=8b08e5af85e4262a421ff1fd4b516d8479eed0562dda0e9812984d0cf67cb90b
-    DOWNLOAD_ONLY yes)
-if(QXlsx_ADDED)
-    # MSVC has issues with __declspec linkage, so add the library manually
-    # instead of using one defined in QXlsx's CMakeLists.txt
-    file(GLOB_RECURSE QXLSX_FILES
-        ${QXlsx_SOURCE_DIR}/QXlsx/source/*.cpp
-        ${QXlsx_SOURCE_DIR}/QXlsx/header/*.h)
-    add_library(QXlsx STATIC EXCLUDE_FROM_ALL ${QXLSX_FILES})
-    target_link_libraries(QXlsx PUBLIC Qt${QT_VERSION_MAJOR}::Core
-        Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::GuiPrivate)
-    target_include_directories(QXlsx PUBLIC ${QXlsx_SOURCE_DIR}/QXlsx/header)
-    add_library(QXlsx::QXlsx ALIAS QXlsx)
-endif()
+    URL https://github.com/QtExcel/QXlsx/archive/8e83402db866ae7a67582da28aa68c83545f13c8.zip
+    URL_HASH SHA256=46f9b82c99021b967dc41dab3ba44809ccc14b29e587daa31d34fa2bd8b31b90
+    EXCLUDE_FROM_ALL ON
+    SOURCE_SUBDIR QXlsx)
 
-CPMFindPackage(NAME Qt5Compress
+CPMFindPackage(NAME Qt${QT_VERSION_MAJOR}Compress
     # Version from 13 May 2018
     URL https://github.com/nezticle/qtcompress/archive/23f8831826cd72aedf99fc3699148b6c994fd677.zip
     URL_HASH SHA256=82d03b9bfed767e3a13d2be7346d55c24ce218b0f0f6247eaafd7689be18ef57
     DOWNLOAD_ONLY yes)
-if(Qt5Compress_ADDED)
+if(Qt${QT_VERSION_MAJOR}Compress_ADDED)
     function(PatchQtCompress filename)
-        file(READ ${Qt5Compress_SOURCE_DIR}/src/compress/${filename} CONTENT)
+        file(READ ${Qt${QT_VERSION_MAJOR}Compress_SOURCE_DIR}/src/compress/${filename} CONTENT)
         string(REGEX REPLACE "#include <qtcompressglobal.h>" ""
             CONTENT "${CONTENT}")
         string(REGEX REPLACE "QTCOMPRESS_EXPORT" ""
@@ -784,14 +774,14 @@ if(Qt5Compress_ADDED)
     PatchQtCompress("qzipreader.h")
     PatchQtCompress("qzipwriter.h")
     PatchQtCompress("qzip.cpp")
-    add_library(Qt5Compress STATIC EXCLUDE_FROM_ALL
+    add_library(Qt${QT_VERSION_MAJOR}Compress STATIC EXCLUDE_FROM_ALL
         ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched/qzip.cpp)
-    target_include_directories(Qt5Compress PUBLIC
+    target_include_directories(Qt${QT_VERSION_MAJOR}Compress PUBLIC
         ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched)
-    target_link_libraries(Qt5Compress Qt5::Core ${ZLIB_LIBRARIES})
+    target_link_libraries(Qt${QT_VERSION_MAJOR}Compress Qt${QT_VERSION_MAJOR}::Core ${ZLIB_LIBRARIES})
     #turn off automoc, not needed here
-    set_target_properties(Qt5Compress PROPERTIES AUTOMOC 0)
-    add_library(Qt5::Compress ALIAS Qt5Compress)
+    set_target_properties(Qt${QT_VERSION_MAJOR}Compress PROPERTIES AUTOMOC 0)
+    add_library(Qt${QT_VERSION_MAJOR}::Compress ALIAS Qt${QT_VERSION_MAJOR}Compress)
 endif()
 
 ########### Set some global variables ###########
