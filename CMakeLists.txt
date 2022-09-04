@@ -767,8 +767,10 @@ if(Qt${QT_VERSION_MAJOR}Compress_ADDED)
             CONTENT "${CONTENT}")
         string(REGEX REPLACE "QTCOMPRESS_EXPORT" ""
             CONTENT "${CONTENT}")
-        file(GENERATE OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched/${filename}
-            CONTENT "${CONTENT}")
+        file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched/new.${filename} "${CONTENT}")
+        configure_file(${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched/new.${filename}
+            ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched/${filename}
+            COPYONLY)
     endfunction()
     file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched)
     PatchQtCompress("qzipreader.h")
