@@ -76,10 +76,11 @@ Type: files; Name: "{userappdata}\Stellarium\log.txt"
 [Icons]
 ; Programs
 Name: "{group}\Stellarium"; Filename: "{app}\stellarium.exe"; Parameters: "-platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
-Name: "{group}\Stellarium {cm:SingleBuffer}"; Filename: "{app}\stellarium.exe"; Parameters: "--single-buffer -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
 #if "Qt5_@Qt5_FOUND@" == "Qt5_1"
 Name: "{group}\Stellarium {cm:AngleMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-d3d9 -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
 Name: "{group}\Stellarium {cm:AngleD3D11Mode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-d3d11 -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+#else
+Name: "{group}\Stellarium {cm:SingleBuffer}"; Filename: "{app}\stellarium.exe"; Parameters: "--single-buffer -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
 #endif
 Name: "{group}\Stellarium {cm:MesaMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--mesa-mode -platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
 @ISS_SPOUT@
