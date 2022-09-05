@@ -552,14 +552,8 @@ IF(APPLE)
 	 MESSAGE(STATUS \"Running macdeployqt...\")
         "
      )
-    IF(ENABLE_SHOWMYSKY)
-	FIND_FILE(SHOWMYSKY_LIBRARY_MAC libShowMySky.dylib)
-	IF(EXISTS ${SHOWMYSKY_LIBRARY_MAC})
-	    MESSAGE(STATUS "Found ShowMySky library: ${SHOWMYSKY_LIBRARY_MAC}")
-	    INSTALL(FILES ${SHOWMYSKY_LIBRARY_MAC} DESTINATION Frameworks)
-	ELSE()
-	    MESSAGE(STATUS "Could NOT found ShowMySky library")
-	ENDIF()
+    IF(ENABLE_SHOWMYSKY AND EXISTS ${ShowMySky_LIBRARY})
+        INSTALL(FILES ${ShowMySky_LIBRARY} DESTINATION Frameworks)
     ENDIF()
     INSTALL(CODE
         "
