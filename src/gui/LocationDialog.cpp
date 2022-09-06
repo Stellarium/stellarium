@@ -483,11 +483,9 @@ void LocationDialog::populateTimeZonesList()
 	tzCombo->addItem(q_("System default"), "system_default");
 	//Restore the selection
 	index = tzCombo->findData(selectedTzId, Qt::UserRole, Qt::MatchCaseSensitive);
-	// TODO: Handle notfound!?
-	if (index==-1)
-	{
+	if (index==-1) // the TZ is not found
 		index=tzCombo->count()-1; // should point to system_default.
-	}
+
 	Q_ASSERT(index!=-1);
 	tzCombo->setCurrentIndex(index);
 	tzCombo->blockSignals(false);

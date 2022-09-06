@@ -549,18 +549,20 @@ private:
 	//! of two bodies), and current solution is not accurate and slow.
 	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation
 	QMap<double, double> findClosestApproach(PlanetP& object1, StelObjectP& object2, const double startJD, const double stopJD, const double maxSeparation, const int mode);
-	// TODO: Doc?
+	//! Finding the angular distance between two celestial bodies at some Julian date
 	double findDistance(double JD, PlanetP object1, StelObjectP object2, int mode);
-	// TODO: Doc?
+	//! Finding the initial time steps for interations
 	double findInitialStep(double startJD, double stopJD, QStringList objects);
-	// TODO: Doc?
+	//! Finding the celestial event
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign, int mode);
-	// TODO: Doc?
+	//! Wrapper for filling the table of phenomena between planet and star
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2, int mode);
-	// TODO: Doc?
+	//! Wrapper for filling the table of phenomena between planet and deep-sky object
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const NebulaP object2);
+	//! Wrapper for filling the table of phenomena between two planets
 	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, int mode);
+	//! Filling the table of phenomena
 	void fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, float firstObjectMagnitude,
 				   QString secondObjectName, float secondObjectMagnitude, QString separation, QString elevation,
 				   QString elongation, QString angularDistance, QString elongTooltip="", QString angDistTooltip="");

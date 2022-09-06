@@ -602,11 +602,7 @@ void Oculars::init()
 		setFlagScalingFOVForTelrad(settings->value("use_telrad_fov_scaling", true).toBool());
 		setFlagScalingFOVForCCD(settings->value("use_ccd_fov_scaling", true).toBool());
 		setFlagShowResolutionCriteria(settings->value("show_resolution_criteria", false).toBool());
-		// TODO: Remove this conversion tool in version 0.21 or 0.22
-		if (settings->value("arrow_scale").toDouble()<100.) // convert old value and type
-			setArrowButtonScale(static_cast<int>(settings->value("arrow_scale", 1.5).toDouble()*100.));
-		else
-			setArrowButtonScale(settings->value("arrow_scale", 150).toInt());
+		setArrowButtonScale(settings->value("arrow_scale", 150).toInt());
 		setFlagShowOcularsButton(settings->value("show_toolbar_button", false).toBool());
 		relativeStarScaleOculars=settings->value("stars_scale_relative", 1.0).toDouble();
 		absoluteStarScaleOculars=settings->value("stars_scale_absolute", 1.0).toDouble();
