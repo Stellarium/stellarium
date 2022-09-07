@@ -565,11 +565,8 @@ IF(${QT_VERSION} VERSION_LESS MINIMAL_QT_VERSION)
 ELSE()
      MESSAGE(STATUS "Found Qt${QT_VERSION_MAJOR}: ${QMAKE_LOCATION} (found suitable version ${QT_VERSION})")
 ENDIF()
-FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Concurrent REQUIRED)
-FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Gui REQUIRED)
-FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Network REQUIRED)
-FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
-FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Charts REQUIRED)
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS
+     Concurrent Gui Network Widgets Charts)
 IF(USE_PLUGIN_TELESCOPECONTROL OR ENABLE_GPS)
      FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS SerialPort REQUIRED)
 ENDIF()
@@ -754,37 +751,6 @@ CPMFindPackage(NAME QXlsx
     URL_HASH SHA256=46f9b82c99021b967dc41dab3ba44809ccc14b29e587daa31d34fa2bd8b31b90
     EXCLUDE_FROM_ALL ON
     SOURCE_SUBDIR QXlsx)
-
-CPMFindPackage(NAME Qt${QT_VERSION_MAJOR}Compress
-    # Version from 13 May 2018
-    URL https://github.com/nezticle/qtcompress/archive/23f8831826cd72aedf99fc3699148b6c994fd677.zip
-    URL_HASH SHA256=82d03b9bfed767e3a13d2be7346d55c24ce218b0f0f6247eaafd7689be18ef57
-    DOWNLOAD_ONLY yes)
-if(Qt${QT_VERSION_MAJOR}Compress_ADDED)
-    function(PatchQtCompress filename)
-        file(READ ${Qt${QT_VERSION_MAJOR}Compress_SOURCE_DIR}/src/compress/${filename} CONTENT)
-        string(REGEX REPLACE "#include <qtcompressglobal.h>" ""
-            CONTENT "${CONTENT}")
-        string(REGEX REPLACE "QTCOMPRESS_EXPORT" ""
-            CONTENT "${CONTENT}")
-        file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched/new.${filename} "${CONTENT}")
-        configure_file(${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched/new.${filename}
-            ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched/${filename}
-            COPYONLY)
-    endfunction()
-    file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched)
-    PatchQtCompress("qzipreader.h")
-    PatchQtCompress("qzipwriter.h")
-    PatchQtCompress("qzip.cpp")
-    add_library(Qt${QT_VERSION_MAJOR}Compress STATIC EXCLUDE_FROM_ALL
-        ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched/qzip.cpp)
-    target_include_directories(Qt${QT_VERSION_MAJOR}Compress PUBLIC
-        ${CMAKE_CURRENT_BINARY_DIR}/qtcompress_patched)
-    target_link_libraries(Qt${QT_VERSION_MAJOR}Compress Qt${QT_VERSION_MAJOR}::Core ${ZLIB_LIBRARIES})
-    #turn off automoc, not needed here
-    set_target_properties(Qt${QT_VERSION_MAJOR}Compress PROPERTIES AUTOMOC 0)
-    add_library(Qt${QT_VERSION_MAJOR}::Compress ALIAS Qt${QT_VERSION_MAJOR}Compress)
-endif()
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)

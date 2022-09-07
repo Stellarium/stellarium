@@ -37,8 +37,8 @@
 #include "StelPainter.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelUtils.hpp"
-#include "qzipreader.h"
 
+#include <private/qzipreader_p.h>
 #include <QDebug>
 #include <QSettings>
 #include <QString>
@@ -1612,7 +1612,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const 
 
 	//Detect top directory
 	QString topDir, iniPath;
-	const QList<QZipReader::FileInfo> infoList = reader.fileInfoList();
+	const auto infoList = reader.fileInfoList();
 	for (const auto& info : infoList)
 	{
 		QFileInfo fileInfo(info.filePath);
