@@ -726,6 +726,17 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 	if (std::isnan(sunPos.length()))
 		sunPos.set(0.,0.,-1.*AU);
 
+	// Avoid burning the GPU
+	float f1=prj->getFov(), i1=fader.getInterstate();
+	Vec3d s1;
+	prj->project(sunPos,s1);
+	if (qAbs(prevFov-f1) < 1e-3*f1 && qAbs(prevFad-i1) < 1e-3 && (prevSun-s1).length() < 1.0)
+		return;
+
+	prevFov=f1;
+	prevFad=i1;
+	prevSun=s1;
+
 	const auto sunDir = sunPos / sunPos.length();
 	const double sunAngularRadius = atan(sun.getEquatorialRadius()/sunPos.length());
 

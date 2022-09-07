@@ -91,6 +91,8 @@ private:
 
 	GLuint bayerPatternTex_=0;
 
+	float prevFad = 0, prevFov = 0;
+	Vec3d prevSun = Vec3d(0,0,0);
 	int prevWidth_=0, prevHeight_=0;
 	GLuint renderVAO_=0, luminanceToScreenVAO_=0, zenithProbeVAO_=0, vbo_=0;
 	std::unique_ptr<ShowMySky::AtmosphereRenderer> renderer_;
