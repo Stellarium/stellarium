@@ -724,24 +724,28 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 
 	auto sunPos  =  sun.getAltAzPosAuto(core);
 	if (std::isnan(sunPos.length()))
-		sunPos.set(0.,0.,-1.*AU);
+		sunPos.set(0.,0.,-1.);
 
-	// Avoid burning the GPU
+	// GPU load
 	float f1=prj->getFov(), i1=fader.getInterstate();
-	Vec3d s1;
-	prj->project(sunPos,s1);
-	if (qAbs(prevFov-f1) < 1e-3*f1 && qAbs(prevFad-i1) < 1e-3 && (prevSun-s1).length() < 1.0)
+	Vec3d p1=sunPos, s1;
+	prj->project(p1,s1);
+	float df=qAbs(prevFov-f1)/(prevFov+f1), di=qAbs(prevFad-i1);
+	double dp=(prevPos-p1).length(), ds=(prevSun-s1).length();
+	if (df+di+dp<10e-3 && ds<1)
 		return;
 
+	// qDebug() << "Fov" << df << "Fad" << di << "Pos" << dp << "Sun" << ds;
 	prevFov=f1;
 	prevFad=i1;
+	prevPos=p1;
 	prevSun=s1;
 
 	const auto sunDir = sunPos / sunPos.length();
 	const double sunAngularRadius = atan(sun.getEquatorialRadius()/sunPos.length());
 
 	// If we have no moon, just put it into nadir at 1 AU distance
-	Vec3d moonPos{0.,0.,-1.*AU};
+	Vec3d moonPos{0.,0.,-1.};
 	Vec3d moonDir{0.,0.,-1.};
 
 	double earthMoonDistance = 0;
