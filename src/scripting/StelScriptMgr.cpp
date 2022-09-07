@@ -39,6 +39,7 @@
 #include "StelSkyLayerMgr.hpp"
 #include "StelUtils.hpp"
 
+#include <QCoreApplication>
 #include <QDateTime>
 #include <QDebug>
 #include <QDir>
@@ -49,15 +50,44 @@
 #include <QStringList>
 #include <QTemporaryFile>
 #include <QVariant>
-#include <QtScript>
 
 #include <cmath>
 
+
+#ifdef ENABLE_SCRIPT_QML
+#include <QJSEngine>
+
+void StelScriptMgr::defVecClasses(QJSEngine *engine)
+{
+	qRegisterMetaType<V3d>();
+	QMetaType::registerConverter<V3d,QString>(&V3d::toString);
+	QMetaType::registerConverter<V3d, Vec3d>(&V3d::toVec3d);
+	//QMetaType::registerConverter<Vec3d, V3d>(&V3d::fromVec3d);
+	QJSValue v3dMetaObject = engine->newQMetaObject(&V3d::staticMetaObject);
+	engine->globalObject().setProperty("V3d", v3dMetaObject);
+
+	qRegisterMetaType<V3f>();
+	QMetaType::registerConverter<V3f,QString>(&V3f::toString);
+	QMetaType::registerConverter<V3f, Vec3f>(&V3f::toVec3f);
+	//QMetaType::registerConverter<Vec3f, V3f>(&V3f::fromVec3f);
+	QJSValue v3fMetaObject = engine->newQMetaObject(&V3f::staticMetaObject);
+	engine->globalObject().setProperty("V3f", v3fMetaObject);
+
+	qRegisterMetaType<Color>();
+	QMetaType::registerConverter<Color,QString>(&Color::toRGBString);
+	QMetaType::registerConverter<Color, Vec3f>(&Color::toVec3f);
+	//QMetaType::registerConverter<Vec3f, Color>(&Color::fromVec3f);
+	QJSValue colorMetaObject = engine->newQMetaObject(&Color::staticMetaObject);
+	engine->globalObject().setProperty("Color", colorMetaObject);
+}
+
+#else
+#include <QtScript>
 // 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f - 3f
 
 /***
 The C++ type Vec3f is an array of three floats, used for representing
-colors according to the terms of the RGB color model. It is mapped to
+colors according to the terms of the RGB color model. In Qt5-based versions it is mapped to
 a JavaScript class with a constructor Vec3f, properties 'r', 'g' and 'b',
 and methods toString and toHex. The latter returns a string according to
 the pattern '#hhhhhh' (six hexadecimal digits). A second constructor,
@@ -66,9 +96,12 @@ argument to return  'white', a single argument which is either a color name
 or a '#hhhhhh' string, or three arguments, specifying the RGB values,
 floating point numbers between 0 and 1. Color names correspond to the names
 defined in https://www.w3.org/TR/SVG11/types.htm.
+
+This functionality is however deprecated. We strongly advise not to use it in scripts.
+Scripts using it will only work on Qt5-based builds of Stellarium (series 0.*)
 ***/
 
-QScriptValue vec3fToString(QScriptContext* context, QScriptEngine *engine)
+static QScriptValue vec3fToString(QScriptContext* context, QScriptEngine *engine)
 {
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
@@ -79,7 +112,7 @@ QScriptValue vec3fToString(QScriptContext* context, QScriptEngine *engine)
             "b:" + bVal.toString() + "]";
 }
 
-QScriptValue vec3fToHex(QScriptContext* context, QScriptEngine *engine)
+static QScriptValue vec3fToHex(QScriptContext* context, QScriptEngine *engine)
 {
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
@@ -92,27 +125,98 @@ QScriptValue vec3fToHex(QScriptContext* context, QScriptEngine *engine)
 		.arg(qMin(255, int(bVal.toNumber() * 255)), 2, 16, QChar('0'));
 }
 
-void vec3fFromScriptValue(const QScriptValue& obj, Vec3f& c)
+// This just ensures that Color.toVec3f does nothing in Qt5/QtScript
+static QScriptValue vec3fNop(QScriptContext* context, QScriptEngine *engine)
+{
+	Q_UNUSED(engine)
+	return context->thisObject();
+}
+
+static QScriptValue vec3fGetR(QScriptContext* context, QScriptEngine *engine)
+{
+	Q_UNUSED(engine)
+	QScriptValue that = context->thisObject();
+	QScriptValue rVal = that.property( "r", QScriptValue::ResolveLocal );
+	return rVal;
+}
+
+static QScriptValue vec3fGetG(QScriptContext* context, QScriptEngine *engine)
+{
+	Q_UNUSED(engine)
+	QScriptValue that = context->thisObject();
+	QScriptValue rVal = that.property( "g", QScriptValue::ResolveLocal );
+	return rVal;
+}
+
+static QScriptValue vec3fGetB(QScriptContext* context, QScriptEngine *engine)
+{
+	Q_UNUSED(engine)
+	QScriptValue that = context->thisObject();
+	QScriptValue rVal = that.property( "b", QScriptValue::ResolveLocal );
+	return rVal;
+}
+
+// This does not work.
+static QScriptValue vec3fSetR(QScriptContext* context, QScriptEngine *engine)
+{
+	Q_UNUSED(engine)
+	qDebug() << "setR() does not work. Create a new Color.";
+	QScriptValue callee = context->callee();
+	if (context->argumentCount() == 1) // writing?
+		callee.setProperty("r", context->argument(0));
+	return callee.property("r");
+}
+// This does not work.
+static QScriptValue vec3fSetG(QScriptContext* context, QScriptEngine *engine)
+{
+	qDebug() << "setG() does not work. Create a new Color.";
+	//qDebug() << "setG called. argcount=" << context->argumentCount() << "value=" << context->argument(0).toNumber();
+	//Q_UNUSED(engine)
+	QScriptValue callee = context->callee();
+	if (context->argumentCount() == 1) // writing?
+		callee.setProperty("g", QScriptValue(engine, static_cast<qsreal>(context->argument(0).toNumber())));
+	return callee.property("g");
+}
+// This does not work.
+static QScriptValue vec3fSetB(QScriptContext* context, QScriptEngine *engine)
+{
+	Q_UNUSED(engine)
+	qDebug() << "setB() does not work. Create a new Color.";
+	QScriptValue callee = context->callee();
+	if (context->argumentCount() == 1) // writing?
+		callee.setProperty("b", context->argument(0));
+	return callee.property("b");
+}
+
+static void vec3fFromScriptValue(const QScriptValue& obj, Vec3f& c)
 {
 	c[0] = static_cast<float>(obj.property("r").toNumber());
 	c[1] = static_cast<float>(obj.property("g").toNumber());
 	c[2] = static_cast<float>(obj.property("b").toNumber());
 }
 
-QScriptValue vec3fToScriptValue(QScriptEngine *engine, const Vec3f& c)
+static QScriptValue vec3fToScriptValue(QScriptEngine *engine, const Vec3f& c)
 {
 	QScriptValue obj = engine->newObject();
 	obj.setProperty("r", QScriptValue(engine, static_cast<qsreal>(c[0])));
 	obj.setProperty("g", QScriptValue(engine, static_cast<qsreal>(c[1])));
 	obj.setProperty("b", QScriptValue(engine, static_cast<qsreal>(c[2])));
 	obj.setProperty("toString", engine->newFunction( vec3fToString ));
+	obj.setProperty("toRGBString", engine->newFunction( vec3fToString ));  // alias, compatibility to Qt6 scripting
 	obj.setProperty("toHex",    engine->newFunction( vec3fToHex ));
+	obj.setProperty("toVec3f",  engine->newFunction( vec3fNop )); // do nothing. Useful for a Color object. Compatibility for Qt6 scripting.
+	obj.setProperty("getR",     engine->newFunction( vec3fGetR ));
+	obj.setProperty("getG",     engine->newFunction( vec3fGetG ));
+	obj.setProperty("getB",     engine->newFunction( vec3fGetB ));
+	obj.setProperty("setR",     engine->newFunction( vec3fSetR, 1 )); // does nothing but emits a warning.
+	obj.setProperty("setG",     engine->newFunction( vec3fSetG, 1 )); // does nothing but emits a warning.
+	obj.setProperty("setB",     engine->newFunction( vec3fSetB, 1 )); // does nothing but emits a warning.
 	return obj;
 }
 
 // Constructor Vec3f
 // Three arguments are r, g, b. One argument is "#hhhhhh", or, perhaps, a color name.
-QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
+static QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 {
 	Vec3f c;
 	switch( context->argumentCount() )
@@ -163,7 +267,7 @@ QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 	return vec3fToScriptValue(engine, c);
 }
 
-QScriptValue createColor(QScriptContext* context, QScriptEngine *engine)
+static QScriptValue createColor(QScriptContext* context, QScriptEngine *engine)
 {
 	return engine->globalObject().property("Vec3f").construct(context->argumentsObject());
 }
@@ -173,7 +277,7 @@ QScriptValue createColor(QScriptContext* context, QScriptEngine *engine)
 /***
 The C++ type Vec3d is an array of three doubles, used for representing
 vectors (points or directions) in three-dimensional space. The coordinate
-system is implied by the context.  It is mapped to a JavaScript class with
+system is implied by the context.  In Qt5-based versions it is mapped to a JavaScript class with
 the constructor Vec3d, properties 'x', 'y' and 'z' (and, for historical
 reasons, also named 'r', 'g' and 'b') and a method toString. The 
 constructor may be called without an argument, returning the null vector,
@@ -182,6 +286,10 @@ interpreted to mean longtitude and latitude angles (or azimuth and
 altitude angles). These angles may be given as double values for degrees,
 or as string values denoting angles according to the patterns accepted
 by StelUtils::getDecAngle. 
+
+
+This functionality is however deprecated. We strongly advise not to use it in scripts.
+Scripts using it will only work on Qt5-based builds of Stellarium (series 0.*)
 ***/
 
 
@@ -198,18 +306,21 @@ QScriptValue vec3dToString(QScriptContext* context, QScriptEngine *engine)
 
 QScriptValue getX(QScriptContext* context, QScriptEngine *engine)
 {
+	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	return that.property( "r", QScriptValue::ResolveLocal );
 }
 QScriptValue getY(QScriptContext* context, QScriptEngine *engine)
 {
+	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	return that.property( "g", QScriptValue::ResolveLocal );
 }
 QScriptValue getZ(QScriptContext* context, QScriptEngine *engine)
 {
+	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	return that.property( "b", QScriptValue::ResolveLocal );
@@ -217,6 +328,7 @@ QScriptValue getZ(QScriptContext* context, QScriptEngine *engine)
 
 QScriptValue setX(QScriptContext* context, QScriptEngine *engine)
 {
+	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	that.setProperty("r", context->argument(0).toNumber());
@@ -224,6 +336,7 @@ QScriptValue setX(QScriptContext* context, QScriptEngine *engine)
 }
 QScriptValue setY(QScriptContext* context, QScriptEngine *engine)
 {
+	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	that.setProperty("g", context->argument(0).toNumber());
@@ -231,6 +344,7 @@ QScriptValue setY(QScriptContext* context, QScriptEngine *engine)
 }
 QScriptValue setZ(QScriptContext* context, QScriptEngine *engine)
 {
+	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	Q_UNUSED(engine)
 	QScriptValue that = context->thisObject();
 	that.setProperty("b", context->argument(0).toNumber());
@@ -239,6 +353,7 @@ QScriptValue setZ(QScriptContext* context, QScriptEngine *engine)
 
 void vec3dFromScriptValue(const QScriptValue& obj, Vec3d& c)
 {
+	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	c[0] = obj.property("r").toNumber();
 	c[1] = obj.property("g").toNumber();
 	c[2] = obj.property("b").toNumber();
@@ -246,6 +361,7 @@ void vec3dFromScriptValue(const QScriptValue& obj, Vec3d& c)
 
 QScriptValue vec3dToScriptValue(QScriptEngine *engine, const Vec3d& v)
 {
+	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use V3d.";
 	QScriptValue obj = engine->newObject();
 	obj.setProperty("r", QScriptValue(engine, static_cast<qsreal>(v[0])));
 	obj.setProperty("g", QScriptValue(engine, static_cast<qsreal>(v[1])));
@@ -262,6 +378,7 @@ QScriptValue vec3dToScriptValue(QScriptEngine *engine, const Vec3d& v)
 
 QScriptValue createVec3d(QScriptContext* context, QScriptEngine *engine)
 {
+	qWarning() << "The Vec3d script object is deprecated and will not work in future versions of Stellarium. Use core.vec3d() or a V3d object.";
 	Vec3d c;
 	switch( context->argumentCount() )
 	{
@@ -301,8 +418,8 @@ public:
 	explicit StelScriptEngineAgent(QScriptEngine *engine);
 	virtual ~StelScriptEngineAgent() Q_DECL_OVERRIDE {}
 
-	void setPauseScript(bool pause) { isPaused=pause; }
-	bool getPauseScript() { return isPaused; }
+	void setPauseScript(bool pause) { qWarning() << "setPauseScript() is deprecated and will no longer be available in future versions of Stellarium."; isPaused=pause; }
+	bool getPauseScript() { qWarning() << "getPauseScript() is deprecated and will no longer be available in future versions of Stellarium."; return isPaused; }
 
 	void positionChange(qint64 scriptId, int lineNumber, int columnNumber) Q_DECL_OVERRIDE;
 
@@ -322,26 +439,53 @@ void StelScriptMgr::defVecClasses(QScriptEngine *engine)
 	qScriptRegisterMetaType(engine, vec3dToScriptValue, vec3dFromScriptValue);
 	QScriptValue ctorVec3d = engine->newFunction(createVec3d);
 	engine->globalObject().setProperty("Vec3d", ctorVec3d);
+
+	// Configure the new replacement types so that new scripts should work also with the old engine.
+
+	qRegisterMetaType<V3d>();
+	QMetaType::registerConverter<V3d,QString>(&V3d::toString);
+	QMetaType::registerConverter<V3d, Vec3d>(&V3d::toVec3d);
+	//QMetaType::registerConverter<Vec3d, V3d>(&V3d::fromVec3d);
+	QScriptValue v3dMetaObject = engine->newQMetaObject(&V3d::staticMetaObject);
+	engine->globalObject().setProperty("V3d", v3dMetaObject);
+
+	qRegisterMetaType<V3f>();
+	QMetaType::registerConverter<V3f,QString>(&V3f::toString);
+	QMetaType::registerConverter<V3f, Vec3f>(&V3f::toVec3f);
+	//QMetaType::registerConverter<Vec3f, V3f>(&V3f::fromVec3f);
+	QScriptValue v3fMetaObject = engine->newQMetaObject(&V3f::staticMetaObject);
+	engine->globalObject().setProperty("V3f", v3fMetaObject);
 }
+#endif
 
 StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 {
 	waitEventLoop = new QEventLoop();
+#ifdef ENABLE_SCRIPT_QML
+	engine = new QJSEngine(this);
+	engine->installExtensions(QJSEngine::ConsoleExtension); // TBD: Maybe remove as unnecessary for us?
+#else
 	engine = new QScriptEngine(this);
+	// This is enough for a simple Array access for a QVector<int> input or return type (e.g. Calendars plugin)
+	qScriptRegisterSequenceMetaType<QVector<int>>(engine); // no longer needed with QJSEngine!
+#endif
 	connect(&StelApp::getInstance(), SIGNAL(aboutToQuit()), this, SLOT(stopScript()), Qt::DirectConnection);
+
 	// Scripting images
 	ScreenImageMgr* scriptImages = new ScreenImageMgr();
 	scriptImages->init();
 	StelApp::getInstance().getModuleMgr().registerModule(scriptImages);
 
-	defVecClasses(engine);
-
-	// This is enough for a simple Array access for a QVector<int> input or return type (e.g. Calendars plugin)
-	qScriptRegisterSequenceMetaType<QVector<int>>(engine);
+	defVecClasses(engine); // Install handling of Vec3d[deprecated]/Vec3f[deprecated]/V3d/V3f/Color classes
 
 	// Add the core object to access methods related to core
 	mainAPI = new StelMainScriptAPI(this);
+#ifdef ENABLE_SCRIPT_QML
+	QJSValue objectValue = engine->newQObject(mainAPI);
+	mainAPI->setEngine(engine);
+#else
 	QScriptValue objectValue = engine->newQObject(mainAPI);
+#endif
 	engine->globalObject().setProperty("core", objectValue);
 
 	// Add other classes which we want to be directly accessible from scripts
@@ -353,12 +497,13 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	engine->globalObject().setProperty("StelSkyDrawer", objectValue);
 
 	setScriptRate(1.0);
-	
+
+#ifndef ENABLE_SCRIPT_QML
 	engine->setProcessEventsInterval(1); // was 10, let's allow a smoother script execution
 
 	agent = new StelScriptEngineAgent(engine);
 	engine->setAgent(agent);
-
+#endif
 	initActions();
 }
 
@@ -377,6 +522,12 @@ void StelScriptMgr::initActions()
 
 StelScriptMgr::~StelScriptMgr()
 {
+#ifdef ENABLE_SCRIPT_QML
+	engine->collectGarbage();
+	delete engine;
+#else
+	delete engine; // We never did that before?
+#endif
 }
 
 void StelScriptMgr::addModules() 
@@ -386,14 +537,22 @@ void StelScriptMgr::addModules()
 	const QList allModules = mmgr->getAllModules();
 	for (auto* m : allModules)
 	{
-		QScriptValue objectValue = engine->newQObject(m);
+		#ifdef ENABLE_SCRIPT_QML
+			QJSValue objectValue = engine->newQObject(m);
+		#else
+			QScriptValue objectValue = engine->newQObject(m);
+		#endif
 		engine->globalObject().setProperty(m->objectName(), objectValue);
 	}
 }
 
 void StelScriptMgr::addObject(QObject *obj)
 {
-	QScriptValue objectValue = engine->newQObject(obj);
+	#ifdef ENABLE_SCRIPT_QML
+		QJSValue objectValue = engine->newQObject(obj);
+	#else
+		QScriptValue objectValue = engine->newQObject(obj);
+	#endif
 	engine->globalObject().setProperty(obj->objectName(), objectValue);
 }
 
@@ -411,9 +570,21 @@ QStringList StelScriptMgr::getScriptList() const
 	return scriptFiles;
 }
 
+#ifdef ENABLE_SCRIPT_QML
+bool StelScriptMgr::scriptIsRunning()
+{
+	if (mutex.tryLock())
+	{
+		mutex.unlock();
+		return false;
+	}
+	else
+		return true;
+#else
 bool StelScriptMgr::scriptIsRunning() const
 {
 	return engine->isEvaluating();
+#endif
 }
 
 QString StelScriptMgr::runningScriptId() const
@@ -434,8 +605,11 @@ QString StelScriptMgr::getHeaderSingleLineCommentText(const QString& s, const QS
 
 	//use a buffered stream instead of QFile::readLine - much faster!
 	QTextStream textStream(&file);
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	textStream.setEncoding(QStringConverter::Utf8);
+#else
 	textStream.setCodec("UTF-8");
-
+#endif
 	QRegularExpression nameExp("^\\s*//\\s*" + id + ":\\s*(.+)$");
 	while (!textStream.atEnd())
 	{
@@ -531,8 +705,11 @@ QString StelScriptMgr::getDescription(const QString& s)
 
 	//use a buffered stream instead of QFile::readLine - much faster!
 	QTextStream textStream(&file);
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+	textStream.setEncoding(QStringConverter::Utf8);
+#else
 	textStream.setCodec("UTF-8");
-
+#endif
 	QString desc = "";
 	bool inDesc = false;
 	static const QRegularExpression descExp("^\\s*//\\s*Description:\\s*([^\\s].+)\\s*$");
@@ -573,7 +750,11 @@ QString StelScriptMgr::getDescription(const QString& s)
 
 bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript, const QString& scriptId)
 {
+#ifdef ENABLE_SCRIPT_QML
+	if (!mutex.tryLock())
+#else
 	if (engine->isEvaluating())
+#endif
 	{
 		QString msg = QString("ERROR: there is already a script running, please wait until it's over.");
 		emit scriptDebug(msg);
@@ -592,12 +773,20 @@ bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript, con
 	emit scriptRunning();
 	emit runningScriptIdChanged(scriptId);
 
+#ifdef ENABLE_SCRIPT_QML
+	engine->setInterrupted(false);
+	//QStringList stackTrace;
+	//result=engine->evaluate(preprocessedScript, QString(), 1, &stackTrace);
+	result=engine->evaluate(preprocessedScript, QString(), 1);
+	scriptEnded();
+#else
 	// run that script in a new context
 	QScriptContext *context = engine->pushContext();
 	engine->evaluate(preprocessedScript);
 	engine->popContext();
 	scriptEnded();
 	Q_UNUSED(context)
+#endif
 	return true;
 }
 
@@ -681,6 +870,20 @@ void StelScriptMgr::stopScript()
 		return;
 	}
 	
+#ifdef ENABLE_SCRIPT_QML
+	if (!mutex.tryLock())
+	{
+		engine->setInterrupted(true);
+		GETSTELMODULE(LabelMgr)->deleteAllLabels();
+		GETSTELMODULE(MarkerMgr)->deleteAllMarkers();
+		GETSTELMODULE(ScreenImageMgr)->deleteAllImages();
+		QString msg = QString("INFO: asking running script to exit");
+		emit scriptDebug(msg);
+		//qDebug() << msg;
+	}
+	else
+		mutex.unlock(); // all was OK, no script was running.
+#else
 	if (engine->isEvaluating())
 	{
 		GETSTELMODULE(LabelMgr)->deleteAllLabels();
@@ -695,22 +898,31 @@ void StelScriptMgr::stopScript()
 		engine->abortEvaluation();
 	}
 	// "Script finished..." is emitted after return from engine->evaluate().
+#endif
 }
 
 void StelScriptMgr::setScriptRate(double r)
 {
 	//qDebug() << "StelScriptMgr::setScriptRate(" << r << ")";
+#ifdef ENABLE_SCRIPT_QML
+	if (mutex.tryLock())
+	{
+		engine->globalObject().setProperty("scriptRateReadOnly", r);
+		mutex.unlock();
+		return;
+	}
+#else
 	if (!engine->isEvaluating())
 	{
 		engine->globalObject().setProperty("scriptRateReadOnly", r);
 		return;
 	}
-	
-	qsreal currentScriptRate = engine->globalObject().property("scriptRateReadOnly").toNumber();
+#endif
+	qreal currentScriptRate = engine->globalObject().property("scriptRateReadOnly").toNumber();
 	
 	// pre-calculate the new time rate in an effort to prevent there being much latency
 	// between setting the script rate and the time rate.
-	qsreal factor = r / currentScriptRate;
+	qreal factor = r / currentScriptRate;
 	
 	StelCore* core = StelApp::getInstance().getCore();
 	core->setTimeRate(core->getTimeRate() * factor);
@@ -721,13 +933,23 @@ void StelScriptMgr::setScriptRate(double r)
 
 void StelScriptMgr::pauseScript()
 {
+#ifdef ENABLE_SCRIPT_QML
+	qWarning() << "pauseScript() is no longer available and does nothing.";
+#else
+	qWarning() << "pauseScript() is deprecated and will no longer be available in future versions of Stellarium.";
 	emit scriptPaused();
 	agent->setPauseScript(true);
+#endif
 }
 
 void StelScriptMgr::resumeScript()
 {
+#ifdef ENABLE_SCRIPT_QML
+	qWarning() << "resumeScript() is no longer available and does nothing.";
+#else
+	qWarning() << "resumeScript() is deprecated and will no longer be available in future versions of Stellarium.";
 	agent->setPauseScript(false);
+#endif
 }
 
 double StelScriptMgr::getScriptRate()
@@ -759,6 +981,24 @@ void StelScriptMgr::saveOutputAs(const QString &filename)
 
 void StelScriptMgr::scriptEnded()
 {
+#ifdef ENABLE_SCRIPT_QML
+	if (result.isError())
+	{
+		static const QMap<QJSValue::ErrorType, QString>errorMap={
+			{QJSValue::GenericError, "Generic"},
+			{QJSValue::RangeError, "Range"},
+			{QJSValue::ReferenceError, "Reference"},
+			{QJSValue::SyntaxError, "Syntax"},
+			{QJSValue::TypeError, "Type"},
+			{QJSValue::URIError, "URI"}};
+		QString msg = QString("script error: '%1'  @ line %2: %3").arg(errorMap.value(result.errorType()), result.property("lineNumber").toString(), result.toString());
+		emit scriptDebug(msg);
+		qWarning() << msg;
+		qWarning() << "Error name:" << result.property("name").toString() << "message" << result.property("message").toString()
+			   << "fileName" << result.property("fileName").toString() << "lineNumber" << result.property("lineNumber").toString() << "stack" << result.property("stack").toString();
+	}
+	mutex.unlock();
+#else
 	if (engine->hasUncaughtException())
 	{
 		int outputPos = engine->uncaughtExceptionLineNumber();
@@ -767,23 +1007,23 @@ void StelScriptMgr::scriptEnded()
 		emit scriptDebug(msg);
 		qWarning() << msg;
 	}
-
+#endif
 	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(1.0);
 	scriptFileName = QString();
 	emit runningScriptIdChanged(scriptFileName);
 	emit scriptStopped();
 }
 
-QMap<QString, QString> StelScriptMgr::mappify(const QStringList& args, bool lowerKey)
-{
-	QMap<QString, QString> map;
-	for(int i=0; i+1<args.size(); i++)
-		if (lowerKey)
-			map[args.at(i).toLower()] = args.at(i+1);
-		else
-			map[args.at(i)] = args.at(i+1);
-	return map;
-}
+//QMap<QString, QString> StelScriptMgr::mappify(const QStringList& args, bool lowerKey)
+//{
+//	QMap<QString, QString> map;
+//	for(int i=0; i+1<args.size(); i++)
+//		if (lowerKey)
+//			map[args.at(i).toLower()] = args.at(i+1);
+//		else
+//			map[args.at(i)] = args.at(i+1);
+//	return map;
+//}
 
 bool StelScriptMgr::strToBool(const QString& str)
 {
@@ -933,6 +1173,7 @@ QString StelScriptMgr::lookup( int outputPos )
 	return msg;
 }
 
+#ifndef ENABLE_SCRIPT_QML
 StelScriptEngineAgent::StelScriptEngineAgent(QScriptEngine *engine) 
 	: QScriptEngineAgent(engine)
 	, isPaused(false)
@@ -949,4 +1190,4 @@ void StelScriptEngineAgent::positionChange(qint64 scriptId, int lineNumber, int 
 		QCoreApplication::processEvents();
 	}
 }
-
+#endif

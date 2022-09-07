@@ -101,7 +101,7 @@ void SpecificTimeMgr::init()
 
 void SpecificTimeMgr::deinit()
 {
-
+	//
 }
 
 //void SpecificTimeMgr::draw(StelCore* core)

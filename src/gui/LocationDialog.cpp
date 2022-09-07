@@ -28,9 +28,7 @@
 #include "StelModuleMgr.hpp"
 #include "SolarSystem.hpp"
 #include "StelFileMgr.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelGui.hpp"
-#include "StelGuiItems.hpp"
 #include "StelSkyCultureMgr.hpp"
 
 #include <QSettings>
@@ -345,7 +343,6 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	core->setCurrentTimeZone(tz);
 
 	setMapForLocation(loc);
-	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
 
 	ui->deleteLocationFromListPushButton->setEnabled(StelApp::getInstance().getLocationMgr().canDeleteUserLocation(loc.getID()));
 
@@ -370,38 +367,38 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 void LocationDialog::setMapForLocation(const StelLocation& loc)
 {
 	// Avoids useless processing
-	if (lastPlanet==loc.planetName)
-		return;
-
-	QPixmap pixmap;
-	// Try to set the proper planet map image
-	if (loc.planetName=="Earth")
+	if (lastPlanet!=loc.planetName)
 	{
-		// Special case for earth, we don't want to see the clouds
-		pixmap = QPixmap(":/graphicGui/miscWorldMap.png");
-	}
-	else
-	{
-		SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-		PlanetP p = ssm->searchByEnglishName(loc.planetName);
-		if (p)
+		QPixmap pixmap;
+		// Try to set the proper planet map image
+		if (loc.planetName=="Earth")
 		{
-			QString path = StelFileMgr::findFile("textures/"+p->getTextMapName());
-			if (path.isEmpty())
-			{
-				qWarning() << "ERROR - could not find planet map for " << loc.planetName;
-				return;
-			}
-			pixmap = QPixmap(path);
+			// Special case for earth, we don't want to see the clouds
+			pixmap = QPixmap(":/graphicGui/miscWorldMap.png");
 		}
+		else
+		{
+			SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+			PlanetP p = ssm->searchByEnglishName(loc.planetName);
+			if (p)
+			{
+				QString path = StelFileMgr::findFile("textures/"+p->getTextMapName());
+				if (path.isEmpty())
+				{
+					qWarning() << "ERROR - could not find planet map for " << loc.planetName;
+					return;
+				}
+				pixmap = QPixmap(path);
+			}
+		}
+		StelCore * core = StelApp::getInstance().getCore();
+		pixmap.setDevicePixelRatio(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
+		ui->mapLabel->setPixmap(pixmap);
+		ui->mapLabel->resizePixmap();
+		// For caching
+		lastPlanet = loc.planetName;
 	}
-	StelCore * core = StelApp::getInstance().getCore();
-	pixmap.setDevicePixelRatio(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
-	ui->mapLabel->setPixmap(pixmap);
-	ui->mapLabel->resizePixmap();
 	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
-	// For caching
-	lastPlanet = loc.planetName;
 }
 
 void LocationDialog::populatePlanetList()
@@ -486,11 +483,9 @@ void LocationDialog::populateTimeZonesList()
 	tzCombo->addItem(q_("System default"), "system_default");
 	//Restore the selection
 	index = tzCombo->findData(selectedTzId, Qt::UserRole, Qt::MatchCaseSensitive);
-	// TODO: Handle notfound!?
-	if (index==-1)
-	{
+	if (index==-1) // the TZ is not found
 		index=tzCombo->count()-1; // should point to system_default.
-	}
+
 	Q_ASSERT(index!=-1);
 	tzCombo->setCurrentIndex(index);
 	tzCombo->blockSignals(false);
@@ -554,6 +549,7 @@ void LocationDialog::setLocationFromMap(double longitude, double latitude)
 	StelLocation loc = locationFromFields();
 	loc.latitude = latitude;
 	loc.longitude = longitude;
+	loc.name= QString("%1, %2").arg(loc.latitude).arg(loc.longitude); // Force a preliminary name
 	setFieldsFromLocation(loc);
 	core->moveObserverTo(loc, 0.);
 	// Only for locations on Earth: set zone to LMST.

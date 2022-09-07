@@ -29,16 +29,26 @@
 #include <QPair>
 #include <QSet>
 
-#include "StelMainScriptAPI.hpp"
-
+#ifdef ENABLE_SCRIPT_QML
+#include <QMutex>
+#include <QJSValue>
+#include "V3d.hpp"
+class QJSEngine;
+#else
 class StelScriptEngineAgent;
 class QScriptEngine;
+#endif
+
+#include "StelMainScriptAPI.hpp"
 
 #ifdef ENABLE_SCRIPT_CONSOLE
 class ScriptConsole;
 #endif
 
 //! Manage scripting in Stellarium
+//! Notes on migration from QtScript to QJSEngine
+//! - The old engine had isEvaluating(). We must use a mutex for the same idea.
+//! - There is no script.pause() function. We can only stop a running script.
 class StelScriptMgr : public QObject
 {
 	Q_OBJECT
@@ -57,7 +67,11 @@ public:
 
 	//! Find out if a script is running
 	//! @return true if a script is running, else false
+	#ifdef ENABLE_SCRIPT_QML
+	bool scriptIsRunning();
+	#else
 	bool scriptIsRunning() const;
+	#endif
 	//! Get the ID (usually filename) of the currently running script
 	//! @return Empty string if no script is running, else the 
 	//! ID of the script which is running.
@@ -80,7 +94,11 @@ public:
 	void addObject(QObject *obj);
 
 	//! Define JS classes Vec3f, Vec3d
+	#ifdef ENABLE_SCRIPT_QML
+	static void defVecClasses(QJSEngine *engine);
+	#else
 	static void defVecClasses(QScriptEngine *engine);
+	#endif
 
 	//! Permit access to StelScriptMainAPI's methods
 	const QMetaObject * getMetaOfStelMainScriptAPI(){ return mainAPI->metaObject(); }
@@ -224,9 +242,11 @@ public slots:
 	void saveOutputAs(const QString &filename);
 
 	//! Pause a running script.
+	//! @note This method only works with the Qt5-based scripting engine.
 	void pauseScript();
 
 	//! Resume a paused script.
+	//! @note This method only works with the Qt5-based scripting engine.
 	void resumeScript();
 
 private slots:
@@ -247,8 +267,8 @@ signals:
 	void scriptOutput(const QString&);
 
 private:
-	// Utility functions for preprocessor
-	QMap<QString, QString> mappify(const QStringList& args, bool lowerKey=false);
+	// Utility functions for preprocessor. DEAD CODE!
+	//QMap<QString, QString> mappify(const QStringList& args, bool lowerKey=false);
 	bool strToBool(const QString& str);
 	// The recursive preprocessing workhorse.
 	void expand(const QString fileName, const QString &input, QString &output, const QString &scriptDir, int &errLoc);
@@ -264,8 +284,16 @@ private:
 	//! @return the text following the id and : on a comment line near the top of 
 	//! the script file (i.e. before there is a non-comment line).
 	QString getHeaderSingleLineCommentText(const QString& s, const QString& id, const QString& notFoundText="");
+
+#ifdef ENABLE_SCRIPT_QML
+	QJSEngine *engine;
+	QMutex mutex; // we need to lock this while a script is running.
+	QJSValue result;
+#else
 	QScriptEngine* engine;
-	
+	//Script engine agent
+	StelScriptEngineAgent *agent;
+#endif
 	//! The thread in which scripts are run
 	StelMainScriptAPI *mainAPI;
 
@@ -274,8 +302,6 @@ private:
 	
 	QString scriptFileName;
 	
-	//Script engine agent
-	StelScriptEngineAgent *agent;
 
 	// Map line numbers of output to <path>:<line>
 	int outline;

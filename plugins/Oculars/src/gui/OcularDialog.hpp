@@ -25,7 +25,6 @@
 #include "Ocular.hpp"
 #include "PropertyBasedTableModel.hpp"
 #include "StelDialog.hpp"
-#include "StelStyle.hpp"
 #include "Telescope.hpp"
 #include "Lens.hpp"
 #include "VecMath.hpp"
@@ -94,6 +93,7 @@ private slots:
 	void setupTelradFOVspins(Vec4f fov);
 	void updateGuiOptions();
 	void updateCCDRotationAngles();
+	void updateSuffixes();
 
 private:
 	Oculars* plugin;

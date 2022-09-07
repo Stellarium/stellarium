@@ -20,11 +20,7 @@
 #include "Oculars.hpp"
 #include "OcularsGuiPanel.hpp"
 
-#include "GridLinesMgr.hpp"
 #include "LabelMgr.hpp"
-#include "ConstellationMgr.hpp"
-#include "AsterismMgr.hpp"
-#include "MilkyWay.hpp"
 #include "SkyGui.hpp"
 #include "StelActionMgr.hpp"
 #include "StelApp.hpp"
@@ -32,7 +28,6 @@
 #include "StelFileMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
@@ -45,7 +40,6 @@
 #include "NebulaMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelPropertyMgr.hpp"
-#include "LandscapeMgr.hpp"
 
 #include <QAction>
 #include <QDebug>
@@ -608,11 +602,7 @@ void Oculars::init()
 		setFlagScalingFOVForTelrad(settings->value("use_telrad_fov_scaling", true).toBool());
 		setFlagScalingFOVForCCD(settings->value("use_ccd_fov_scaling", true).toBool());
 		setFlagShowResolutionCriteria(settings->value("show_resolution_criteria", false).toBool());
-		// TODO: Remove this conversion tool in version 0.21 or 0.22
-		if (settings->value("arrow_scale").toDouble()<100.) // convert old value and type
-			setArrowButtonScale(static_cast<int>(settings->value("arrow_scale", 1.5).toDouble()*100.));
-		else
-			setArrowButtonScale(settings->value("arrow_scale", 150).toInt());
+		setArrowButtonScale(settings->value("arrow_scale", 150).toInt());
 		setFlagShowOcularsButton(settings->value("show_toolbar_button", false).toBool());
 		relativeStarScaleOculars=settings->value("stars_scale_relative", 1.0).toDouble();
 		absoluteStarScaleOculars=settings->value("stars_scale_absolute", 1.0).toDouble();
@@ -1753,7 +1743,7 @@ void Oculars::paintCCDBounds()
 						QString resolutionOverlayText = QString("%1%3 %4 %2%3")
 								.arg(QString::number(actualCropOverlayX, 'd', 0))
 								.arg(QString::number(actualCropOverlayY, 'd', 0))
-								.arg(qc_("px", "pixel"))
+								.arg(qc_("px", "pixels"))
 								.arg(QChar(0x00D7));
 						if(actualCropOverlayX!=ccdCropOverlayHSize || actualCropOverlayY!=ccdCropOverlayVSize)
 							resolutionOverlayText.append(" [*]");
@@ -1980,13 +1970,14 @@ void Oculars::paintText(const StelCore* core)
 
 	// Get the X & Y positions, and the line height
 	painter.setFont(font);
-	QString widthString = "MMMMMMMMMMMMMMMMMMMMM";
+	QString widthString = "MMMMMMMMMMMMMMMMMMMMMM";
 	const double insetFromRHS = painter.getFontMetrics().boundingRect(widthString).width();
 	StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
 	int yPositionOffset = qRound(projectorParams.viewportXywh[3]*projectorParams.viewportCenterOffset[1]);
-	int xPosition = qRound(projectorParams.devicePixelsPerPixel*projectorParams.viewportXywh[2] - insetFromRHS);
-	int yPosition = qRound(projectorParams.devicePixelsPerPixel*projectorParams.viewportXywh[3] - yPositionOffset - 20);
-	const int lineHeight = painter.getFontMetrics().height();
+	const double ppx = projectorParams.devicePixelsPerPixel;
+	int xPosition = qRound(ppx*(projectorParams.viewportXywh[2] - insetFromRHS));
+	int yPosition = qRound(ppx*(projectorParams.viewportXywh[3] - 20) - yPositionOffset);
+	const int lineHeight = qRound(ppx*painter.getFontMetrics().height());
 
 	// The Ocular
 	if (flagShowOculars && ocular!=Q_NULLPTR)
@@ -2629,7 +2620,7 @@ bool Oculars::getFlagScalingFOVForTelrad() const
 	return  flagScalingFOVForTelrad;
 }
 
-void Oculars::setTelradFOV(Vec4f fov)
+void Oculars::setTelradFOV(const Vec4f &fov)
 {
 	telradFOV = fov;
 	settings->setValue("telrad_fov", fov.toStr());

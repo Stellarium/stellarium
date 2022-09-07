@@ -20,15 +20,13 @@
 #ifndef ARCHAEOLINESDIALOGLOCATIONS_HPP
 #define ARCHAEOLINESDIALOGLOCATIONS_HPP
 
-#include "StelDialog.hpp"
-#include "StelGui.hpp"
-#include "StelTranslator.hpp"
 
 #include <QString>
 #include <QColor>
 #include <QColorDialog>
 #include <QStringListModel>
 #include <QSortFilterProxyModel>
+#include "StelDialog.hpp"
 
 class Ui_archaeoLinesDialogLocations;
 class ArchaeoLines;

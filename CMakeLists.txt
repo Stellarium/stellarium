@@ -35,7 +35,6 @@ IF(Qt6_FOUND)
 ELSE()
      SET(STELLARIUM_MAJOR 0)
 ENDIF()
-
 # Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MINOR 22)
 SET(STELLARIUM_PATCH 2)
@@ -45,6 +44,12 @@ ADD_DEFINITIONS(
      -DSTELLARIUM_PATCH=${STELLARIUM_PATCH}
 )
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
+# Public version has format YY.V, where:
+# -- YY - two last digits of the year of release
+# -- V  - version of the release
+# Example: first release in year 2023 has version 1.23.0 and public version 23.1
+MATH(EXPR STELLARIUM_V "${STELLARIUM_PATCH} + 1" OUTPUT_FORMAT DECIMAL)
+SET(STELLARIUM_PUBLIC_VERSION "${STELLARIUM_MINOR}.${STELLARIUM_V}")
 SET(PACKAGE stellarium)
 STRING(TIMESTAMP CURRENTYEAR "%Y")
 SET(COPYRIGHT_YEARS "2000-${CURRENTYEAR}")
@@ -66,6 +71,7 @@ SET(PACKAGE_VERSION "${VERSION}")
 ADD_DEFINITIONS(-DPACKAGE_VERSION="${PACKAGE_VERSION}")
 ADD_DEFINITIONS(-DCOPYRIGHT_YEARS="${COPYRIGHT_YEARS}")
 ADD_DEFINITIONS(-DSTELLARIUM_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
+ADD_DEFINITIONS(-DSTELLARIUM_PUBLIC_VERSION="${STELLARIUM_PUBLIC_VERSION}")
 
 # Qt 5.15+ is preferred as it provides version-less CMake functions (QT_WRAP_UI etc.)
 IF(Qt6_FOUND)
@@ -86,10 +92,18 @@ SET(MINIMAL_GPS_API_VERSION "6.0")
 # Use installer for checking minimum requirements
 # Stellarium/MSVC require Windows 7 (6.1) for work
 # Details: http://www.jrsoftware.org/ishelp/index.php?topic=winvernotes
-SET(ISS_MIN_WIN_VERSION "6.1")
+IF(Qt6_FOUND)
+     SET(ISS_MIN_WIN_VERSION "10.0")
+ELSE()
+     SET(ISS_MIN_WIN_VERSION "6.1")
+ENDIF()
 # Define required version for MSVC
 # Details: https://docs.microsoft.com/ru-ru/windows/win32/winprog/using-the-windows-headers
-SET(MIN_WIN_VERSION "0x0601")
+IF(Qt6_FOUND)
+     SET(MIN_WIN_VERSION "0x0A00")
+ELSE()
+     SET(MIN_WIN_VERSION "0x0601")
+ENDIF()
 
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
@@ -99,6 +113,7 @@ MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")
 
 ########### Main global variables ###########
 SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
+SET(ENABLE_LTO 0 CACHE BOOL "Define whether the Link Time Optimization should be activated.")
 
 IF(NOT CMAKE_BUILD_TYPE)
      SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind ASan UBSan Release RelWithDebInfo MinSizeRel." FORCE)
@@ -122,7 +137,7 @@ ENDIF()
 SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
 IF(STELLARIUM_RELEASE_BUILD)
      ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
-     SET(SERIES "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}")
+     SET(SERIES "${STELLARIUM_MINOR}.x")
      SET(WINDOWS_PACKAGE_VERSION "${VERSION}.0")
 ELSE()
      SET(SERIES "head")
@@ -159,20 +174,20 @@ ELSE()
                     STRING(TIMESTAMP GIT_COMMITS "1%j")
                ENDIF()
                # better way to numbering
-               SET(WINDOWS_PACKAGE_VERSION "${VERSION}.${GIT_COMMITS}")
+	       SET(WINDOWS_PACKAGE_VERSION "${VERSION}.${GIT_COMMITS}")
           ENDIF()
      ELSE()
           STRING(TIMESTAMP TODAY "%j%H%M")
-          SET(PACKAGE_VERSION "${VERSION}-${TODAY}")
+	  SET(PACKAGE_VERSION "${VERSION}-${TODAY}")
           ADD_DEFINITIONS(-DGIT_REVISION="${TODAY}")
           ADD_DEFINITIONS(-DGIT_BRANCH="tarball")
      ENDIF()
      IF(STELLARIUM_VERSION)
-          SET(PACKAGE_VERSION "${STELLARIUM_VERSION}")
+	  SET(PACKAGE_VERSION "${STELLARIUM_VERSION}")
           ADD_DEFINITIONS(-DSTELLARIUM_VERSION="${STELLARIUM_VERSION}")
      ENDIF()     
 ENDIF()
-MESSAGE(STATUS "Building ${PROJECT_NAME} ${PACKAGE_VERSION} (Mode: ${CMAKE_BUILD_TYPE})")
+MESSAGE(STATUS "Building ${PROJECT_NAME} ${STELLARIUM_PUBLIC_VERSION} (v${PACKAGE_VERSION}; Mode: ${CMAKE_BUILD_TYPE})")
 
 # Write version and series of Stellarium to Stellarium User Guide
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
@@ -208,9 +223,15 @@ ENDIF()
 
 # Add ASan (AddressSanitizer) build options if necessary
 # Details: https://github.com/google/sanitizers/wiki/AddressSanitizer
+#          https://docs.microsoft.com/ru-ru/cpp/build/reference/fsanitize?view=msvc-150
 IF(${CMAKE_BUILD_TYPE} MATCHES "ASan")
-     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -O1 -fno-omit-frame-pointer -g")
-     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -O1 -fno-omit-frame-pointer -g")
+     IF(MSVC)
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /fsanitize=address")
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /fsanitize=address")
+     ELSE()
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -O1 -fno-omit-frame-pointer -g")
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -O1 -fno-omit-frame-pointer -g")
+     ENDIF()
 ENDIF()
 
 # Add UBSan (UndefinedBehaviorSanitizer) build options if necessary
@@ -218,6 +239,19 @@ ENDIF()
 IF(${CMAKE_BUILD_TYPE} MATCHES "UBSan")
      SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=undefined -g")
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined -g")
+ENDIF()
+
+# Add Fuzzer (Fuzzer Sanitizer) build options if necessary
+# Details: https://llvm.org/docs/LibFuzzer.html
+#          https://docs.microsoft.com/ru-ru/cpp/build/reference/fsanitize?view=msvc-150
+IF(${CMAKE_BUILD_TYPE} MATCHES "Fuzzer")
+     IF(MSVC)
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /fsanitize=fuzzer")
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /fsanitize=fuzzer")
+     ELSE()
+          SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=fuzzer -O1 -g")
+          SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=fuzzer -O1 -g")
+     ENDIF()
 ENDIF()
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
@@ -328,15 +362,6 @@ IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
      IF(APPLE)
           SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra -Wno-unknown-warning-option")
-          # macOS architectures: x86_64 or arm64 (default: current system's processor architecture)
-          IF(NOT CMAKE_OSX_ARCHITECTURES)
-	       IF(${QT_VERSION_MAJOR} EQUAL 6)
-		    # Qt6: by default - universal binary + minimal operating system is macOS Big Sur
-		    SET(CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE STRING "macOS architectures" FORCE)
-	       ELSE()
-		    SET(CMAKE_OSX_ARCHITECTURES "${CMAKE_HOST_SYSTEM_PROCESSOR}" CACHE STRING "macOS architectures" FORCE)
-	       ENDIF()
-          ENDIF()
      ENDIF()
 ENDIF()
 
@@ -347,12 +372,20 @@ IF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -Wno-unused-local-typedefs")
 ENDIF()
 
-# This activates Link Time Optimization on recent GCC
-# Unfortunately, it also seems to break static plugins
-# It's providing a 20% size reduction, and probably a faster code when activated
-#SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden -ffunction-sections -flto")
-#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -ffunction-sections -flto")
-#SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--gc-sections -flto -ffunction-sections -fuse-linker-plugin")
+# This activates Link Time Optimization
+# LTO has longer build times but optimizes code (smaller by 15-20 percents)
+# LTO fails a test for unknown reasons on Linux/GCC and on Windows/MSVC.
+IF(ENABLE_LTO)
+     IF(WIN32 AND MSVC)
+	  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /GL")
+	  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /GL")
+	  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /LTCG")
+     ELSE()
+	  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -flto")
+	  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -flto")
+	  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${CMAKE_CXX_FLAGS}")
+     ENDIF()
+ENDIF()
 
 ########### Others ###########
 # Activate translation
@@ -371,6 +404,9 @@ SET(ENABLE_QTWEBENGINE 1 CACHE BOOL "Define whether QtWebEngine module should be
 # - Windows: Only directly-attached serial NMEA emitter.
 # - Other systems: libgps if possible and NMEA emitter as fallback.
 SET(ENABLE_GPS 1 CACHE BOOL "Define whether GPS queries should be supported.")
+
+# Activate support for ShowMySky atmosphere
+SET(ENABLE_SHOWMYSKY 1 CACHE BOOL "Define whether to support ShowMySky atmosphere model")
 
 # SPOUT allows relaying the Stellarium OpenGL framebuffer as DirectX texture in other programs.
 # It exists on Windows only. Syphon is a similar system for MacOS, this might be added by a Mac developer.
@@ -418,19 +454,25 @@ IF(ENABLE_SPOUT)
      MARK_AS_ADVANCED(SPOUT_LIBRARY_DLL)
 ENDIF(ENABLE_SPOUT)
 
-IF(Qt5_FOUND)
-     SET(ENABLE_SCRIPTING 1 CACHE BOOL "Define whether scripting features should be activated.")
-     IF(ENABLE_SCRIPTING)
-          ADD_DEFINITIONS(-DENABLE_SCRIPTING)
-          # (De-)Activate the script edit console
-          SET(ENABLE_SCRIPT_CONSOLE 1 CACHE BOOL "Define whether to build the script console feature.")
-          IF(ENABLE_SCRIPT_CONSOLE)
-               ADD_DEFINITIONS(-DENABLE_SCRIPT_CONSOLE)
-          ENDIF()
-     ENDIF()
-ELSE(Qt5_FOUND)
-     SET(ENABLE_SCRIPTING 0 CACHE BOOL "Define whether scripting features should be activated. Currently strictly no Scripting on Qt6!")
-ENDIF(Qt5_FOUND)
+SET(ENABLE_SCRIPTING 1 CACHE BOOL "Define whether scripting features should be activated.")
+IF(ENABLE_SCRIPTING)
+     ADD_DEFINITIONS(-DENABLE_SCRIPTING)
+     # (De-)Activate the script edit console
+     SET(ENABLE_SCRIPT_CONSOLE 1 CACHE BOOL "Define whether to build the script console feature.")
+     IF(ENABLE_SCRIPT_CONSOLE)
+          ADD_DEFINITIONS(-DENABLE_SCRIPT_CONSOLE)
+     ENDIF(ENABLE_SCRIPT_CONSOLE)
+     IF(Qt5_FOUND)
+          SET(ENABLE_SCRIPT_QML 0 CACHE BOOL "Define whether scripting should be handled by the QML module, not the deprecated QtScript. Requires Qt5.14 or later.")
+     ELSE(Qt5_FOUND)
+          # With Qt6, this is compulsory.
+          SET(ENABLE_SCRIPT_QML 1)
+     ENDIF(Qt5_FOUND)
+     IF(ENABLE_SCRIPT_QML)
+          SET(MINIMAL_QT_VERSION "5.14.0")
+          ADD_DEFINITIONS(-DENABLE_SCRIPT_QML)
+     ENDIF(ENABLE_SCRIPT_QML)
+ENDIF(ENABLE_SCRIPTING)
 
 SET(STELLARIUM_GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None")
 
@@ -616,9 +658,25 @@ SET(CMAKE_AUTOUIC ON) # ?
 # As moc files are generated in the binary dir, tell CMake to always look for includes there:
 SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+IF(ENABLE_SHOWMYSKY)
+    FIND_PACKAGE(ShowMySky REQUIRED)
+    ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
+    GET_TARGET_PROPERTY(ShowMySky_INCLUDE_DIRECTORIES ShowMySky::ShowMySky INTERFACE_INCLUDE_DIRECTORIES)
+    GET_TARGET_PROPERTY(ShowMySky_LIBRARY ShowMySky::ShowMySky LOCATION)
+    IF(EXISTS ${ShowMySky_LIBRARY})
+	MESSAGE(STATUS "Found ShowMySky library: ${ShowMySky_LIBRARY}")
+    ELSE()
+	MESSAGE(STATUS "Could NOT found ShowMySky library")
+    ENDIF()
+ENDIF(ENABLE_SHOWMYSKY)
+
 IF(ENABLE_SCRIPTING)
-     FIND_PACKAGE(Qt5Script REQUIRED)
-ENDIF()
+     IF(ENABLE_SCRIPT_QML)
+          FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Qml REQUIRED)
+     ELSE(ENABLE_SCRIPT_QML)
+          FIND_PACKAGE(Qt5Script REQUIRED)
+     ENDIF(ENABLE_SCRIPT_QML)
+ENDIF(ENABLE_SCRIPTING)
 
 IF(ENABLE_MEDIA)
      SET(USE_QTOPENGL 1)
@@ -727,7 +785,7 @@ IF(WIN32)
      #######################################################
 
      IF(STELLARIUM_RELEASE_BUILD)
-          SET(PACKAGE_VERSION_RC "${PACKAGE_VERSION},0")
+	  SET(PACKAGE_VERSION_RC "${PACKAGE_VERSION},0")
      ELSE()
           SET(PACKAGE_VERSION_RC "${WINDOWS_PACKAGE_VERSION}")
      ENDIF()
@@ -779,12 +837,12 @@ IF(WIN32)
                SET(ISS_STELLARIUM_STUFF "${ISS_STELLARIUM_STUFF}\nSource: \"${SPOUT_LIBRARY_LICENCE}\"; DestDir: \"{app}\"; DestName: \"Spout_licence.txt\"; Flags: ignoreversion")
           ENDIF()
           SET(ISS_SPOUT "Name: \"{group}\\Stellarium {cm:SpoutMode}\"; Filename: \"{app}\\stellarium.exe\"; Parameters: \"--spout=sky\"; WorkingDir: \"{app}\"; IconFilename: \"{app}\\data\\stellarium.ico\"\n")
-          # SET(ISS_SPOUT "${ISS_SPOUT}\nName: \"{group}\\Stellarium {cm:SpoutMode2K}\"; Filename: \"{app}\\stellarium.exe\"; Parameters: \"--spout=sky --spoutRes=2048.2048\"; WorkingDir: \"{app}\"; IconFilename: \"{app}\\data\\stellarium.ico\"\n")
-          # SET(ISS_SPOUT "${ISS_SPOUT}\nName: \"{group}\\Stellarium {cm:SpoutMode4K}\"; Filename: \"{app}\\stellarium.exe\"; Parameters: \"--spout=sky --spoutRes=4096.4096\"; WorkingDir: \"{app}\"; IconFilename: \"{app}\\data\\stellarium.ico\"\n")
-          # SET(ISS_SPOUT "${ISS_SPOUT}\nName: \"{group}\\Stellarium {cm:SpoutMode8K}\"; Filename: \"{app}\\stellarium.exe\"; Parameters: \"--spout=sky --spoutRes=8192.8192\"; WorkingDir: \"{app}\"; IconFilename: \"{app}\\data\\stellarium.ico\"\n")
      ELSE()
           SET(ISS_SPOUT "; Spout support is disabled")
      ENDIF(ENABLE_SPOUT)
+     IF(ENABLE_SHOWMYSKY)
+         SET(ISS_STELLARIUM_STUFF "${ISS_STELLARIUM_STUFF}\nSource: \"${ShowMySky_LIBRARY}\"; DestDir: \"{app}\"; Flags: ignoreversion")
+     ENDIF()
 ENDIF(WIN32)
 
 
@@ -820,7 +878,7 @@ IF(GENERATE_PACKAGE_TARGET)
      SET(CPACK_PACKAGE_VERSION_MINOR "${STELLARIUM_MINOR}")
      SET(CPACK_PACKAGE_VERSION_PATCH "${STELLARIUM_PATCH}")
      SET(CPACK_PACKAGE_INSTALL_DIRECTORY "stellarium")
-     SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${PACKAGE_VERSION}")
+     SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${STELLARIUM_PUBLIC_VERSION}")
      SET(CPACK_SOURCE_GENERATOR "TGZ")
      SET(CPACK_GENERATOR "TGZ")
      SET(CPACK_STRIP_FILES "bin/stellarium")
@@ -837,7 +895,7 @@ IF(GENERATE_PACKAGE_TARGET)
      INCLUDE(CPack)
 ENDIF()
 
-########### OS X Bundling ###############
+########### macOS Bundling ###############
 IF(APPLE)
      GET_FILENAME_COMPONENT(_qt_bin_dir "${QMAKE_LOCATION}" DIRECTORY)
      FIND_PROGRAM(MACDEPLOYQT_COMMAND macdeployqt HINTS "${_qt_bin_dir}")
@@ -845,6 +903,22 @@ IF(APPLE)
 	  MESSAGE(STATUS "Found macdeployqt: ${MACDEPLOYQT_COMMAND}")
      ELSE()
 	  MESSAGE(STATUS "Could NOT find macdeployqt")
+     ENDIF()
+
+     # macOS architectures: x86_64 or arm64
+     IF(NOT CMAKE_OSX_ARCHITECTURES)
+	  # find utilite 'lipo'
+	  FIND_PROGRAM(LIPO_COMMAND lipo)
+	  IF(LIPO_COMMAND)
+	       MESSAGE(STATUS "Found lipo: ${LIPO_COMMAND}")
+	       # get architecture of Qt framework
+	       EXECUTE_PROCESS(COMMAND ${LIPO_COMMAND} -archs ${QMAKE_LOCATION} TIMEOUT 30 OUTPUT_VARIABLE QT_ARCHS OUTPUT_STRIP_TRAILING_WHITESPACE)
+	       STRING(REPLACE " " ";" QT_ARCHS ${QT_ARCHS})
+	       SET(CMAKE_OSX_ARCHITECTURES "${QT_ARCHS}" CACHE STRING "macOS architectures" FORCE)
+	  ELSE()
+	       # current system's processor architecture
+	       SET(CMAKE_OSX_ARCHITECTURES "${CMAKE_HOST_SYSTEM_PROCESSOR}" CACHE STRING "macOS architectures" FORCE)
+	  ENDIF()
      ENDIF()
 
      IF(NOT CMAKE_OSX_DEPLOYMENT_TARGET)

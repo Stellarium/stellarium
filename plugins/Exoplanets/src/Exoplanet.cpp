@@ -18,7 +18,6 @@
 
 
 #include "Exoplanet.hpp"
-#include "Exoplanets.hpp"
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"

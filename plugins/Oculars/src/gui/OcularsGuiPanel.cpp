@@ -20,7 +20,6 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "Oculars.hpp"
 #include "OcularsGuiPanel.hpp"
 #include "StelApp.hpp"
-#include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
@@ -170,10 +169,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldLensMultipler->setTextWidth(maxWidth);
 
 	// Retrieve value from setting directly, because at this stage the plugin has not parsed it yet.
-	// TODO: Remove this conversion tool in version 0.21 or 0.22
 	float scv = plugin->getSettings()->value("arrow_scale", 150.f).toFloat();
-	if (scv<100.f) // convert old value and type
-		scv *= 100.f;
 	int scale=static_cast<int>(lineHeight*scv*0.01f);
 	// TODO: change this load-once to interactively editable value of scaling coefficient
 	QPixmap pa(":/graphicGui/btTimeRewind-on.png");

@@ -20,7 +20,7 @@
 #ifndef SYNCSERVERHANDLERS_HPP
 #define SYNCSERVERHANDLERS_HPP
 
-#include "SyncMessages.hpp"
+#include "SyncProtocol.hpp"
 
 class SyncServer;
 

@@ -42,6 +42,18 @@ protected:
 	virtual void createDialogContent() Q_DECL_OVERRIDE;
         Ui_atmosphereDialogForm *ui;
 
+private:
+	bool hasValidModelPath() const;
+	void onModelChoiceChanged(const QString& model);
+	void onPathToModelEditingFinished();
+	void onPathToModelChanged();
+    void updatePathToModelStyle();
+	void onErrorStateChanged(bool error);
+	void browsePathToModel();
+	void setCurrentValues();
+	void clearStatus();
+	bool eventFilter(QObject* object, QEvent* event);
+
 private slots:
 	void setStandardAtmosphere();
 	void setTfromK(double k);

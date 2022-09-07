@@ -165,7 +165,10 @@ SET(stellarium_lib_SRCS
      core/planetsephems/de441.hpp
      core/planetsephems/htc20b.cpp
      core/planetsephems/htc20b.hpp
-     core/modules/Atmosphere.cpp
+     core/modules/AtmospherePreetham.cpp
+     core/modules/AtmospherePreetham.hpp
+     core/modules/AtmosphereShowMySky.cpp
+     core/modules/AtmosphereShowMySky.hpp
      core/modules/Atmosphere.hpp
      core/modules/Asterism.cpp
      core/modules/Asterism.hpp
@@ -260,6 +263,8 @@ IF(ENABLE_SCRIPTING)
      SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
           scripting/StelScriptOutput.hpp
           scripting/StelScriptOutput.cpp
+          scripting/V3d.cpp
+          scripting/V3d.hpp
           scripting/StelScriptMgr.cpp
           scripting/StelScriptMgr.hpp
           scripting/ScreenImageMgr.hpp
@@ -473,8 +478,12 @@ ENDIF()
 IF(ENABLE_MEDIA)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::Multimedia Qt${QT_VERSION_MAJOR}::MultimediaWidgets)
 ENDIF()
-IF((ENABLE_SCRIPTING) AND (${QT_VERSION_MAJOR} EQUAL "5"))
-     SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Script)
+IF(ENABLE_SCRIPTING)
+    IF(ENABLE_SCRIPT_QML)
+         SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::Qml)
+    ELSE(ENABLE_SCRIPT_QML)
+         SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt5::Script)
+    ENDIF(ENABLE_SCRIPT_QML)
 ENDIF()
 IF(ENABLE_GPS)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::Positioning Qt${QT_VERSION_MAJOR}::SerialPort)
@@ -513,6 +522,9 @@ ELSE()
 	  SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
      ENDIF()
 ENDIF()
+IF(ENABLE_SHOWMYSKY)
+    TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${ShowMySky_INCLUDE_DIRECTORIES}")
+ENDIF()
 
 ADD_DEPENDENCIES(stellarium AllStaticPlugins)
 
@@ -537,21 +549,30 @@ IF(APPLE)
              OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/macdeployqt.log\"
              ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/macdeployqt.err\"
          )
-         MESSAGE(\"Running macdeployqt...\")
+	 MESSAGE(STATUS \"Running macdeployqt...\")
         "
      )
+    IF(ENABLE_SHOWMYSKY AND EXISTS ${ShowMySky_LIBRARY})
+        INSTALL(FILES ${ShowMySky_LIBRARY} DESTINATION Frameworks)
+    ENDIF()
     INSTALL(CODE
         "
         EXECUTE_PROCESS(
              COMMAND \"../../util/macfix.sh\"
         )
-        MESSAGE(\"Fixing Qt' paths for macOS bundle...\")
+	MESSAGE(STATUS \"Fixing Qt' paths for macOS bundle...\")
         "
      )
 ELSE()
      INSTALL(TARGETS stellarium DESTINATION bin)
 ENDIF()
 IF(WIN32)
+     IF((${QT_VERSION_MAJOR} EQUAL "5") AND (Qt5Core_VERSION VERSION_LESS "5.15"))
+          SET(VIRTUAL_KBD_SETTING "")
+     ELSE()
+          SET(VIRTUAL_KBD_SETTING "--no-virtualkeyboard")
+     ENDIF()
+
      INSTALL(CODE
         "
          EXECUTE_PROCESS(
@@ -559,14 +580,14 @@ IF(WIN32)
 		     --dir \"\${CMAKE_INSTALL_PREFIX}/qtstuff\"
                      --no-translations
 		     --verbose 1
-		     --no-virtualkeyboard
+                     ${VIRTUAL_KBD_SETTING}
 		     --compiler-runtime
                      \"\${CMAKE_INSTALL_PREFIX}/bin/stellarium.exe\"
-             WORKING_DIRECTORY \"\${CMAKE_INSTALL_PRERIX}/bin\"
+             WORKING_DIRECTORY \"\${CMAKE_INSTALL_PREFIX}/bin\"
              OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.log\"
              ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.err\"
          )
-         MESSAGE(\"Running windeployqt...\")
+	 MESSAGE(STATUS \"Running windeployqt...\")
         "
      )
      IF(GENERATE_STELMAINLIB)
@@ -576,10 +597,10 @@ IF(WIN32)
                   COMMAND \"${WINDEPLOYQT_COMMAND}\"
 			  --dir \"\${CMAKE_INSTALL_PREFIX}/qtstuff\"
                           --no-translations
-			  --no-virtualkeyboard
+                          ${VIRTUAL_KBD_SETTING}
                           --compiler-runtime
                           \"\${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"
-                  WORKING_DIRECTORY \"\${CMAKE_INSTALL_PRERIX}/bin\"
+                  WORKING_DIRECTORY \"\${CMAKE_INSTALL_PREFIX}/bin\"
                   OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.log\"
                   ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.err\"
          )

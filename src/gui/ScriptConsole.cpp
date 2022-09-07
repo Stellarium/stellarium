@@ -218,8 +218,9 @@ void ScriptConsole::saveScript()
 	if (saveDir.isEmpty())
 		saveDir = StelFileMgr::getUserDir();
 
-	QString defaultFilter("(*.ssc)");
-	// Let's ask file name, when file is new and overwrite him in other case	
+	QString defaultFilter = q_("Stellarium Script");
+	defaultFilter.append(" (*.ssc)");
+	// Let's ask file name, when file is new and overwrite it in other case
 	if (scriptFileName.isEmpty())
 	{
 		QString aFile = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save Script"), saveDir + "/myscript.ssc", getFileMask(), &defaultFilter);
@@ -237,7 +238,11 @@ void ScriptConsole::saveScript()
 	if (file.open(QIODevice::WriteOnly))
 	{
 		QTextStream out(&file);
+#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		out.setEncoding(QStringConverter::Utf8);
+#else
 		out.setCodec("UTF-8");
+#endif
 		out << ui->scriptEdit->toPlainText();
 		file.close();
 		dirty = false;
@@ -314,7 +319,7 @@ void ScriptConsole::runScript()
 
 void ScriptConsole::scriptStarted()
 {
-	//prevent strating of scripts while any script is running
+	//prevent starting of scripts while any script is running
 	ui->quickrunCombo->setEnabled(false);
 	ui->runButton->setEnabled(false);
 	ui->stopButton->setEnabled(true);
@@ -382,6 +387,8 @@ void ScriptConsole::quickRun(int idx)
 
 	if (!scriptText.isEmpty())
 	{
+		if(clearOutput)
+			ui->outputBrowser->clear();
 		appendLogLine(QString("Running: %1").arg(scriptText));
 		int errLoc;
 		StelApp::getInstance().getScriptMgr().runScriptDirect( "<>", scriptText, errLoc );

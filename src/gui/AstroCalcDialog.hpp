@@ -31,14 +31,13 @@
 #include <QTimer>
 #include <QRegularExpression>
 #include <QMutex>
-#include <QtCharts>
 
 #include "AstroCalcChart.hpp"
+#include "QtCharts/qchartview.h"
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
-#include "Nebula.hpp"
 #include "NebulaMgr.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StarMgr.hpp"
@@ -187,6 +186,20 @@ public:
 		LunarEclipseCount		//! total number of columns
 	};
 
+	//! Defines the number and the order of the columns in the lunar eclipse contact table
+	//! @enum LunarEclipseContactColumns
+	enum LunarEclipseContactColumns {
+		LunarEclipseContact,		//! circumstance of lunar eclipse
+		LunarEclipseContactDate,	//! date and time
+		LunarEclipseContactAltitude,	//! altitude of the Moon
+		LunarEclipseContactAzimuth,	//! azimuth of the Moon
+		LunarEclipseContactLatitude,	//! latitude where the Moon appears in the zenith
+		LunarEclipseContactLongitude,	//! longitude where the Moon appears in the zenith
+		LunarEclipseContactPA,		//! position angle of shadow
+		LunarEclipseContactDistance,	//! angular distance between the Moon and shadow
+		LunarEclipseContactCount	//! total number of columns
+	};
+
 	//! Defines the number and the order of the columns in the global solar eclipse table
 	//! @enum SolarEclipseColumns
 	enum SolarEclipseColumns {
@@ -290,7 +303,10 @@ private slots:
 	void generateLunarEclipses();
 	void cleanupLunarEclipses();
 	void selectCurrentLunarEclipse(const QModelIndex &modelIndex);
+	void selectCurrentLunarEclipseDate(const QModelIndex &modelIndex);
+	void selectCurrentLunarEclipseContact(const QModelIndex &modelIndex);
 	void saveLunarEclipses();
+	void saveLunarEclipseCircumstances();
 
 	//! Calculating solar eclipses to fill the list.
 	//! Algorithm taken from calculating the rises, transits and sets.
@@ -431,7 +447,6 @@ private:
 	QSettings* conf;
 	QTimer *currentTimeLine;
 	QHash<QString,int> wutCategories;
-	QPair<double, double> getLunarEclipseXY() const;
 	QList<HECPosition> hecObjects;
 
 	void saveTableAsCSV(const QString& fileName, QTreeWidget* tWidget, QStringList& headers);
@@ -455,6 +470,8 @@ private:
 	void setWUTHeaderNames(const bool magnitude = true, const bool separation = false);
 	//! update header names for lunar eclipse table
 	void setLunarEclipseHeaderNames();
+	//! update header names for lunar eclipse contact table
+	void setLunarEclipseContactsHeaderNames();
 	//! update header names for solar eclipse table
 	void setSolarEclipseHeaderNames();
 	//! update header names for local solar eclipse table
@@ -476,6 +493,8 @@ private:
 	void initListWUT(const bool magnitude = true, const bool separation = false);
 	//! Init header and list of lunar eclipse
 	void initListLunarEclipse();
+	//! Init header and list of lunar eclipse contact
+	void initListLunarEclipseContact();
 	//! Init header and list of solar eclipse
 	void initListSolarEclipse();
 	//! Init header and list of local solar eclipse
@@ -515,7 +534,7 @@ private:
 	//! @arg southAzimuth (relevant only for horizontal=true) count azimuth from south.
 	//! @arg decimalDegrees use decimal format, not DMS/HMS
 	//! @return QPair(lngStr, latStr) formatted output strings
-	static QPair<QString, QString> getStringCoordinates(const Vec3d coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees);
+	static QPair<QString, QString> getStringCoordinates(const Vec3d &coord, const bool horizontal, const bool southAzimuth, const bool decimalDegrees);
 	void fillWUTTable(QString objectName, QString designation, float magnitude, Vec4d RTSTime, double maxElevation,
 			  double angularSize, QString constellation, QString otype, bool decimalDegrees = false);
 	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, double magnitude,
@@ -530,18 +549,20 @@ private:
 	//! of two bodies), and current solution is not accurate and slow.
 	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation
 	QMap<double, double> findClosestApproach(PlanetP& object1, StelObjectP& object2, const double startJD, const double stopJD, const double maxSeparation, const int mode);
-	// TODO: Doc?
+	//! Finding the angular distance between two celestial bodies at some Julian date
 	double findDistance(double JD, PlanetP object1, StelObjectP object2, int mode);
-	// TODO: Doc?
+	//! Finding the initial time steps for interations
 	double findInitialStep(double startJD, double stopJD, QStringList objects);
-	// TODO: Doc?
+	//! Finding the celestial event
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign, int mode);
-	// TODO: Doc?
+	//! Wrapper for filling the table of phenomena between planet and star
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2, int mode);
-	// TODO: Doc?
+	//! Wrapper for filling the table of phenomena between planet and deep-sky object
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const NebulaP object2);
+	//! Wrapper for filling the table of phenomena between two planets
 	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, int mode);
+	//! Filling the table of phenomena
 	void fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, float firstObjectMagnitude,
 				   QString secondObjectName, float secondObjectMagnitude, QString separation, QString elevation,
 				   QString elongation, QString angularDistance, QString elongTooltip="", QString angDistTooltip="");
@@ -564,7 +585,7 @@ private:
 	// Signal that a plot has to be redone
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotLunarElongationGraph, plotAziVsTime;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration, graphsStep;
-	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, solareclipseHeader, solareclipselocalHeader, transitHeader;
+	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, lunareclipsecontactsHeader, solareclipseHeader, solareclipselocalHeader, transitHeader;
 	static double brightLimit;
 	static const QString dash, delimiter;
 
@@ -573,6 +594,8 @@ private:
 	void updateTabBarListWidgetWidth();
 
 	void enableAngularLimits(bool enable);
+
+	QString getSelectedObjectNameI18n(StelObjectP selectedObject);
 
 	//! Memorize day for detecting rollover to next/prev one
 	int oldGraphJD;
@@ -836,6 +859,30 @@ private:
 		{
 			return text(column).toLower() < other.text(column).toLower();
 		}
+	}
+};
+
+//! Besselian elements for lunar eclipse
+class LunarEclipseBessel
+{
+public:
+	LunarEclipseBessel(double &besX, double &besY, double &besL1, double &besL2, double &besL3, double &latDeg, double &lngDeg);
+};
+
+//! Iteration to compute contact times of lunar eclipse
+class LunarEclipseIteration
+{
+public:
+	LunarEclipseIteration(double &JD, double &positionAngle, double &axisDistance, bool beforeMaximum, int eclipseType);
+};
+
+// Reimplements the QTreeWidgetItem class to fix the sorting bug
+class ACLunarEclipseContactsTreeWidgetItem : public QTreeWidgetItem
+{
+public:
+	ACLunarEclipseContactsTreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
 	}
 };
 

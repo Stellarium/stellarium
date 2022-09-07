@@ -67,10 +67,11 @@ To install all of these, use the following commands:
 ```
 sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc g++ \
                  graphviz doxygen gettext git \
+                 gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio gstreamer1.0-libav gstreamer1.0-vaapi \
                  qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev \
                  qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev \
                  qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins \
-                 qtwebengine5-dev libqt5charts5-dev
+                 qtwebengine5-dev libqt5charts5-dev                  
 ```
 
 ##### Qt6
@@ -80,11 +81,12 @@ Ubuntu 22.04 comes with Qt5.15 and Qt6.2. To build with Qt6:
 ```
 sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc g++ \
                  graphviz doxygen gettext git \
+                 gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio gstreamer1.0-libav gstreamer1.0-vaapi \
                  qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools linguist-qt6 libqt6svg6-dev \
                  qt6-multimedia-dev libqt6serialport6-dev \
                  qt6-positioning-dev libqt6positioning6-plugins libgps-dev \
                  libqt6webchannel6-dev libqt6webenginewidgets6 qt6-webengine-dev qt6-webengine-dev-tools \
-                 libqt6webenginecore6-bin libqt6webengine6-data libqt6charts6-dev libqt6opengl6-dev
+                 libqt6webenginecore6-bin libqt6webengine6-data libqt6charts6-dev libqt6opengl6-dev 
 ```
 
 
@@ -130,8 +132,8 @@ export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
 #### Linux without QtWebEngine
 
 On some distributions (known for ARM systems, like Raspberry OS (Raspbian)) there is no QtWebEngine. The 
-CMake script will check installed `qtwebengine5` package and if then is not in system then Stellarium will 
-build without QtWebEngine support. The result is shown in the system web browser.
+CMake script will check installed `qtwebengine5` package and if it is not found emits a warning, but 
+Stellarium will be built without QtWebEngine support. The result is shown in the system web browser.
 
 #### MacOS
 
@@ -191,25 +193,24 @@ Stellarium will build without QtWebEngine support. The result is shown in the sy
 
 #### Windows
 
-- Install the [Microsoft Visual Studio Community 2017](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15) 
-  or [later (VS2019 or VS2022)](https://visualstudio.microsoft.com/downloads/) (or "better" - e.g. 
-  Professional) from Microsoft Website. Qt 5.15 requires MSVC2019.
+- Install the [Microsoft Visual Studio Community 2019 or 2022](https://visualstudio.microsoft.com/downloads/) 
+  (or "better" - e.g. Professional) from Microsoft Website. Qt 5.15 requires MSVC2019.
 - To get the source code of Stellarium you need to install some git environment. 
   [Git for Windows](https://git-scm.com/download/win) seems ok, or the Git Bash and Git GUI, whatever 
   seems suitable for you. But it is not necessary.
 - Get the [latest version of Qt5 from Qt Company](http://www.qt.io/download-open-source/). We recommend 
-  to use Qt 5.12 or later. You must select Qt Script and msvc2017/msvc2019 among so many checkboxes.
+  to use Qt 5.15 or, better, Qt6. For Qt5 you must select Qt Script and msvc2019 among so many checkboxes.
 
 After installing all required libraries and tools you should configure the build environment.
 
-Add `C:\Qt\Qt5.15.12` to your `PATH` variable - you should add string `C:\Qt\Qt5.15.12\msvc2019;C:\Qt\Qt5.15.12\msvc2019\bin` 
-for 32-bit or `C:\Qt\Qt5.15.12\msvc2019_64;C:\Qt\Qt5.15.12\msvc2019_64\bin` for 64-bit to `PATH` variable.
+Add `C:\Qt\Qt5.15.2` to your `PATH` variable - you should add string `C:\Qt\Qt5.15.2\msvc2019;C:\Qt\Qt5.15.2\msvc2019\bin` 
+for 32-bit or `C:\Qt\Qt5.15.2\msvc2019_64;C:\Qt\Qt5.15.2\msvc2019_64\bin` for 64-bit to `PATH` variable.
 (Replace the version numbers of Qt and the version of Visual Studio (2017/2019) with the version that you 
 have installed)
 
 **ANGLE issues:**
 
-- The ANGLE library should be taken from Qt 5.6, all later versions don't work and can be downloaded 
+- The ANGLE library for Qt5-based builds should be taken from Qt 5.6 (all later versions don't work) and can be downloaded 
 - for [x64](https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-x64.zip) 
 - and [x32](https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-Win32.zip). 
 - (Don't ask us why. Find a solution!)

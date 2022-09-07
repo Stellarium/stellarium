@@ -574,11 +574,11 @@ void AstroCalcChart::setYrangeR(Series series, qreal min, qreal max)
 	const double logYDiff=log10(yMaxR-yMinR);
 	const double s=pow(10., floor(logYDiff)-1.);
 
-	qreal rMin=floor(yMinR/s);
-	qreal rMax=ceil(yMaxR/s);
+	qreal rMin=floor(yMinR/s)*s;
+	qreal rMax=ceil(yMaxR/s)*s;
 
 	//qDebug() << "Setting yrangeR from" << min << "/" << max << "-->" << rMin*s << "/" << rMax*s;
-	yAxisR->setRange(rMin*s, rMax*s);
+	yAxisR->setRange(rMin, rMax);
 	if (rMax-rMin > 3*s)
 	{
 		yAxisR->setTickCount(6+1);

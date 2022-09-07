@@ -82,11 +82,14 @@
 //! @namespace StelUtils contains general purpose utility functions.
 namespace StelUtils
 {
-	//! Return the full name of stellarium, i.e. "stellarium 0.9.0"
+	//! Return the full name of stellarium, i.e. "Stellarium 23.1"
 	QString getApplicationName();
 
-	//! Return the version of stellarium, i.e. "0.9.0"
+	//! Return the version of stellarium, i.e. "0.23.1"
 	QString getApplicationVersion();
+
+	//! Return the public version of stellarium, i.e. "23.1"
+	QString getApplicationPublicVersion();
 
 	//! Return the name and the version of operating system, i.e. "macOS 12.5"
 	QString getOperatingSystemInfo();
@@ -400,7 +403,7 @@ namespace StelUtils
 	//! Floor integer division provides truncating to the next lower integer, also for negative numerators.
 	//! https://stackoverflow.com/questions/2622441/c-integer-floor-function
 	//! @returns floor(num/den)
-	inline long intFloorDiv (long num, long den)
+	inline int intFloorDiv (int num, int den)
 	{
 	  if (0 < (num^den)) // lgtm [cpp/bitwise-sign-check]
 	    return num/den;
@@ -413,16 +416,16 @@ namespace StelUtils
 	}
 
 	//! version of intFloorDiv() for large integers.
-	inline long intFloorDivLL(long long num, long long den)
+	inline int intFloorDivLL(qint64 num, qint64 den)
 	{
 	  if (0 < (num^den)) // lgtm [cpp/bitwise-sign-check]
-	    return static_cast<long>(num/den);
+	    return int(num/den);
 	  else
 	    {
 	      lldiv_t res = lldiv(num,den);
-	      long long ret=  (res.rem)? res.quot-1
+	      qint64 ret= (res.rem)? res.quot-1
 			      : res.quot;
-	      return static_cast<long>(ret);
+	      return int(ret);
 	    }
 	}
 

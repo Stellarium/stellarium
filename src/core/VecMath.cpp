@@ -65,6 +65,44 @@ template<> QString Vec2d::toStr() const
 			.arg(v[1],0,'f',10);
 }
 
+template<> Vec2i Vec2i::fromBracketedString(QString s)
+{
+	static const QRegularExpression re("\\[\\s*([0-9]*)\\s*,\\s*([0-9]*)\\s*\\]");
+	Vec2i vec(0);
+	QRegularExpressionMatch match=re.match(s);
+	if (match.hasMatch())
+	{
+		vec.v[0]=match.captured(1).toInt();
+		vec.v[1]=match.captured(2).toInt();
+	}
+	return vec;
+}
+
+template<> Vec2f Vec2f::fromBracketedString(QString s)
+{
+	static const QRegularExpression re("\\[\\s*([0-9.]*)\\s*,\\s*([0-9.]*)\\s*\\]");
+	Vec2f vec(0.0f);
+	QRegularExpressionMatch match=re.match(s);
+	if (match.hasMatch())
+	{
+		vec.v[0]=match.captured(1).toFloat();
+		vec.v[1]=match.captured(2).toFloat();
+	}
+	return vec;
+}
+
+template<> Vec2d Vec2d::fromBracketedString(QString s)
+{
+	static const QRegularExpression re("\\[\\s*([0-9.]*)\\s*,\\s*([0-9.]*)\\s*\\]");
+	Vec2d vec(0.);
+	QRegularExpressionMatch match=re.match(s);
+	if (match.hasMatch())
+	{
+		vec.v[0]=match.captured(1).toDouble();
+		vec.v[1]=match.captured(2).toDouble();
+	}
+	return vec;
+}
 ///// Vector3 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Obtains a Vec3i/Vec3f/Vec3d from a stringlist with the form x,y,z  (use C++11 type delegating constructors)
@@ -223,6 +261,63 @@ template<> QVector3D Vec3d::toQVector3D() const
 	return QVector3D(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
 }
 
+template<> Vec3i Vec3i::fromBracketedString(QString s)
+{
+	static const QRegularExpression re("\\[\\s*([0-9]*)\\s*,\\s*([0-9]*)\\s*,\\s*([0-9]*)\\s*\\]");
+	Vec3i vec(0);
+	QRegularExpressionMatch match=re.match(s);
+	if (match.hasMatch())
+	{
+		vec.v[0]=match.captured(1).toInt();
+		vec.v[1]=match.captured(2).toInt();
+		vec.v[2]=match.captured(3).toInt();
+	}
+	return vec;
+}
+
+template<> Vec3f Vec3f::fromBracketedString(QString s)
+{
+	static const QRegularExpression re("\\[\\s*([0-9.]*)\\s*,\\s*([0-9.]*)\\s*,\\s*([0-9.]*)\\s*\\]");
+	Vec3f vec(0.0f);
+	QRegularExpressionMatch match=re.match(s);
+	if (match.hasMatch())
+	{
+		vec.v[0]=match.captured(1).toFloat();
+		vec.v[1]=match.captured(2).toFloat();
+		vec.v[2]=match.captured(3).toFloat();
+	}
+	return vec;
+}
+
+template<> Vec3d Vec3d::fromBracketedString(QString s)
+{
+	static const QRegularExpression re("\\[\\s*([0-9.]*)\\s*,\\s*([0-9.]*)\\s*,\\s*([0-9.]*)\\s*\\]");
+	Vec3d vec(0.);
+	QRegularExpressionMatch match=re.match(s);
+	if (match.hasMatch())
+	{
+		vec.v[0]=match.captured(1).toDouble();
+		vec.v[1]=match.captured(2).toDouble();
+		vec.v[2]=match.captured(3).toDouble();
+	}
+	return vec;
+}
+
+
+template<> Vec3i Vec3i::fromQVector3D(QVector3D v)
+{
+	return Vec3i(qRound(v.x()), qRound(v.y()), qRound(v.z()));
+}
+
+template<> Vec3f Vec3f::fromQVector3D(QVector3D v)
+{
+	return Vec3f(v.x(), v.y(), v.z());
+}
+template<> Vec3d Vec3d::fromQVector3D(QVector3D v)
+{
+	return Vec3d(v.x(), v.y(), v.z());
+}
+
 ///// Vector4 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Obtains a Vec4i/Vec4f/Vec4d from a stringlist with the form x,y,z,w  (use C++11 type delegating constructors)
@@ -286,4 +381,49 @@ template<> QColor Vec4f::toQColor() const
 template<> QColor Vec4d::toQColor() const
 {
 	return QColor::fromRgbF(v[0], v[1], v[2], v[3]);
+}
+
+template<> Vec4i Vec4i::fromBracketedString(QString s)
+{
+	static const QRegularExpression re("\\[\\s*([0-9]*)\\s*,\\s*([0-9]*)\\s*,\\s*([0-9]*)\\s*,\\s*([0-9]*)\\s*\\]");
+	Vec4i vec(0);
+	QRegularExpressionMatch match=re.match(s);
+	if (match.hasMatch())
+	{
+		vec.v[0]=match.captured(1).toInt();
+		vec.v[1]=match.captured(2).toInt();
+		vec.v[2]=match.captured(3).toInt();
+		vec.v[3]=match.captured(4).toInt();
+	}
+	return vec;
+}
+
+template<> Vec4f Vec4f::fromBracketedString(QString s)
+{
+	static const QRegularExpression re("\\[\\s*([0-9.]*)\\s*,\\s*([0-9.]*)\\s*,\\s*([0-9.]*)\\s*,\\s*([0-9.]*)\\s*\\]");
+	Vec4f vec(0.0f);
+	QRegularExpressionMatch match=re.match(s);
+	if (match.hasMatch())
+	{
+		vec.v[0]=match.captured(1).toFloat();
+		vec.v[1]=match.captured(2).toFloat();
+		vec.v[2]=match.captured(3).toFloat();
+		vec.v[3]=match.captured(4).toFloat();
+	}
+	return vec;
+}
+
+template<> Vec4d Vec4d::fromBracketedString(QString s)
+{
+	static const QRegularExpression re("\\[\\s*([0-9.]*)\\s*,\\s*([0-9.]*)\\s*,\\s*([0-9.]*)\\s*,\\s*([0-9.]*)\\s*\\]");
+	Vec4d vec(0.);
+	QRegularExpressionMatch match=re.match(s);
+	if (match.hasMatch())
+	{
+		vec.v[0]=match.captured(1).toDouble();
+		vec.v[1]=match.captured(2).toDouble();
+		vec.v[2]=match.captured(3).toDouble();
+		vec.v[3]=match.captured(4).toDouble();
+	}
+	return vec;
 }

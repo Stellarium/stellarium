@@ -23,8 +23,12 @@
 #include <QObject>
 #include <QVariant>
 #include <QStringList>
-#include "StelObject.hpp"
+#include "V3d.hpp"
+#ifdef ENABLE_SCRIPT_QML
+#include <QJSEngine>
+#endif
 #include "StelCore.hpp"
+#include "VecMath.hpp"
 
 class QScriptEngine;
 
@@ -44,8 +48,45 @@ public:
 	StelMainScriptAPI(QObject *parent = Q_NULLPTR);
 	~StelMainScriptAPI() Q_DECL_OVERRIDE;
 
+#ifdef ENABLE_SCRIPT_QML
+	void setEngine(QJSEngine *eng){m_engine=eng;}
+#endif
+
 // These functions will be available in scripts
 public slots:
+
+	//! Create a Vec3d object. This is very important for many functions, but can only be created indirectly.
+	//! Either use this function or use an intermediary V3d object like
+	//! @code
+	//! var myV3d=new V3d(vec);
+	//! var myVec3d=myV3d.toVec3d();
+	//! @endcode
+	static Vec3d vec3d(const double x, const double y, const double z);
+
+	//! Create a Vec3f object. This is very important for many functions, but can only be created indirectly.
+	//! Either use this function or use an intermediary V3f object like
+	//! @code
+	//! var myV3f=new V3f(vec);
+	//! var myVec3f=myV3f.toVec3f();
+	//! @endcode
+	static Vec3f vec3f(const float x, const float y, const float z);
+
+#ifdef ENABLE_SCRIPT_QML
+	//! @returns Color object from a color hexstring or even color name definition.
+	//! @code
+	//! var crimson=core.color("Crimson");
+	//! var red=core.color("#ff0000");
+	//! @endcode
+	//! almost an alias for vec3f(cstr)
+	static Color color(const QString &cstr);
+#endif
+
+	//! Returns true if the script is running on the older, Qt5-based QtScript JavaScript engine.
+	//! Note that it is possible to build Stellarium on Qt5.14 and later also with the newer scripting engine.
+	//! Use this to make code paths work with all versions of Stellarium.
+	//! @todo Should we rename this method?
+	static bool useQtScript();
+
 	//! Set the current date as Julian Day number
 	//! @param JD the Julian Day number
 	static void setJDay(double JD);
@@ -721,7 +762,7 @@ public slots:
 	//! Set the alpha value of a video when visible.
 	//! @param id the identifier used when loadVideo() was called
 	//! @param alpha the new alpha value to set.
-	//! @bug With Qt5/V0.13+, @param alpha does not work properly, only @param alpha=0 makes it invisible.
+	//! @bug With Qt5, @param alpha does not work properly, only @param alpha=0 makes it invisible.
 	void setVideoAlpha(const QString& id, float alpha);
 
 	//! Resize the video widget to the specified width, height.
@@ -951,6 +992,11 @@ signals:
 	void requestSetDiskViewport(bool b);
 	void requestExit();
 	void requestSetHomePosition();
+
+private:
+#ifdef ENABLE_SCRIPT_QML
+	QJSEngine *m_engine;
+#endif
 };
 
 #endif // STELMAINSCRIPTAPI_HPP

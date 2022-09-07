@@ -32,24 +32,17 @@
 #include "StelCore.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelModuleMgr.hpp"
-#include "StarMgr.hpp"
-#include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 #include "NebulaMgr.hpp"
 #include "AsterismMgr.hpp"
 #include "StelStyle.hpp"
-#include "StelSkyLayerMgr.hpp"
 #include "StelGuiBase.hpp"
 #include "StelGui.hpp"
-#include "StelGuiItems.hpp"
 #include "StelActionMgr.hpp"
-#include "StelMovementMgr.hpp"
 #include "StelPropertyMgr.hpp"
-#include "StelUtils.hpp"
 #include "StelHips.hpp"
 
 #include <QDebug>
@@ -293,13 +286,15 @@ void ViewDialog::createDialogContent()
 	// DSO tab contents
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 	updateSelectedCatalogsCheckBoxes();
-	connect(nmgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(updateSelectedCatalogsCheckBoxes()));
-	connect(ui->selectAllCatalogs, SIGNAL(clicked()), this, SLOT(selectAllCatalogs()));
-	connect(ui->selectStandardCatalogs, SIGNAL(clicked()), this, SLOT(selectStandardCatalogs()));
-	connect(ui->selectNoneCatalogs, SIGNAL(clicked()), this, SLOT(selectNoneCatalogs()));
+	connect(nmgr, SIGNAL(catalogFiltersChanged(int)), this, SLOT(updateSelectedCatalogsCheckBoxes()));
+	connect(ui->selectAllCatalogs, SIGNAL(clicked()), nmgr, SLOT(selectAllCatalogs()));
+	connect(ui->selectStandardCatalogs, SIGNAL(clicked()), nmgr, SLOT(selectStandardCatalogs()));
+	connect(ui->selectPreferredCatalogs, SIGNAL(clicked()), nmgr, SLOT(loadCatalogFilters()));
+	connect(ui->storePreferredCatalogs, SIGNAL(clicked()), nmgr, SLOT(storeCatalogFilters()));
+	connect(ui->selectNoneCatalogs, SIGNAL(clicked()), nmgr, SLOT(selectNoneCatalogs()));
 	connect(ui->buttonGroupDisplayedDSOCatalogs, SIGNAL(buttonClicked(QAbstractButton *)), this, SLOT(setSelectedCatalogsFromCheckBoxes()));
 	updateSelectedTypesCheckBoxes();
-	connect(nmgr, SIGNAL(typeFiltersChanged(Nebula::TypeGroup)), this, SLOT(updateSelectedTypesCheckBoxes()));
+	connect(nmgr, SIGNAL(typeFiltersChanged(int)), this, SLOT(updateSelectedTypesCheckBoxes()));
 	connect(ui->buttonGroupDisplayedDSOTypes, SIGNAL(buttonClicked(QAbstractButton *)), this, SLOT(setSelectedTypesFromCheckBoxes()));
 	connectGroupBox(ui->groupBoxDSOTypeFilters,"actionSet_Nebula_TypeFilterUsage");
 	// DSO Labels section
@@ -824,7 +819,7 @@ void ViewDialog::setSelectedTypesFromCheckBoxes()
 
 void ViewDialog::updateSelectedCatalogsCheckBoxes()
 {
-	const Nebula::CatalogGroup& flags = GETSTELMODULE(NebulaMgr)->getCatalogFilters();
+	const Nebula::CatalogGroup flags = static_cast<Nebula::CatalogGroup>(GETSTELMODULE(NebulaMgr)->getCatalogFilters());
 	ui->checkBoxNGC->setChecked(flags & Nebula::CatNGC);
 	ui->checkBoxIC->setChecked(flags & Nebula::CatIC);
 	ui->checkBoxM->setChecked(flags & Nebula::CatM);
@@ -857,28 +852,9 @@ void ViewDialog::updateSelectedCatalogsCheckBoxes()
 	ui->checkBoxOther->setChecked(flags & Nebula::CatOther);	
 }
 
-void ViewDialog::selectAllCatalogs()
-{
-	GETSTELMODULE(NebulaMgr)->setCatalogFilters(Nebula::CatAll);
-}
-
-void ViewDialog::selectStandardCatalogs()
-{
-	Nebula::CatalogGroup catalogs = Nebula::CatNone;
-	catalogs |= Nebula::CatNGC;
-	catalogs |= Nebula::CatIC;
-	catalogs |= Nebula::CatM;
-	GETSTELMODULE(NebulaMgr)->setCatalogFilters(catalogs);
-}
-
-void ViewDialog::selectNoneCatalogs()
-{
-	GETSTELMODULE(NebulaMgr)->setCatalogFilters(Nebula::CatNone);
-}
-
 void ViewDialog::updateSelectedTypesCheckBoxes()
 {
-	const Nebula::TypeGroup& flags = GETSTELMODULE(NebulaMgr)->getTypeFilters();
+	const Nebula::TypeGroup flags = static_cast<Nebula::TypeGroup>(GETSTELMODULE(NebulaMgr)->getTypeFilters());
 	ui->checkBoxGalaxiesType->setChecked(flags & Nebula::TypeGalaxies);
 	ui->checkBoxActiveGalaxiesType->setChecked(flags & Nebula::TypeActiveGalaxies);
 	ui->checkBoxInteractingGalaxiesType->setChecked(flags & Nebula::TypeInteractingGalaxies);

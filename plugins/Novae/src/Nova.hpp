@@ -28,7 +28,6 @@
 
 #include "StelObject.hpp"
 #include "StelFader.hpp"
-#include "StelProjectorType.hpp"
 #include "StelTranslator.hpp"
 
 class StelPainter;

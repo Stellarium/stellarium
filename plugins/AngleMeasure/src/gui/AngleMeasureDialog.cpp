@@ -21,8 +21,9 @@
 #include "AngleMeasureDialog.hpp"
 #include "ui_angleMeasureDialog.h"
 
+#include "StelGui.hpp"
+#include "StelTranslator.hpp"
 #include "StelApp.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
 
@@ -60,6 +61,7 @@ void AngleMeasureDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
+	connectBoolProperty(ui->panAndSelectCheckBox,			"AngleMeasure.flagPanAndSelect");
 	connectBoolProperty(ui->followCursorCheckBox, 			"AngleMeasure.flagFollowCursor");
 	connectBoolProperty(ui->useDmsFormatCheckBox, 			"AngleMeasure.dmsFormat");
 	connectBoolProperty(ui->showPositionAngleCheckBox, 		"AngleMeasure.flagShowEquatorialPA");

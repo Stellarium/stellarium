@@ -21,13 +21,10 @@
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelFileMgr.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelVertexArray.hpp"
 #include "ArchaeoLines.hpp"
 #include "ArchaeoLinesDialog.hpp"
 #include "SolarSystem.hpp"
@@ -794,7 +791,7 @@ void ArchaeoLines::showCurrentPlanet(ArchaeoLine::Line l)
 		emit currentPlanetChanged(l);
 	}
 }
-void ArchaeoLines::showCurrentPlanetNamed(QString planet)
+void ArchaeoLines::showCurrentPlanetNamed(const QString &planet)
 {
 	if (planet=="none")
 		enumShowCurrentPlanet=ArchaeoLine::CurrentPlanetNone;
@@ -921,7 +918,7 @@ void ArchaeoLines::setGeographicLocation1Latitude(double lat)
 	geographicLocation1Line->setDefiningAngle(az);
 	emit geographicLocation1Changed();
 }
-void ArchaeoLines::setGeographicLocation1Label(QString label)
+void ArchaeoLines::setGeographicLocation1Label(const QString &label)
 {
 	geographicLocation1Line->setLabel(label);
 	conf->setValue("ArchaeoLines/geographic_location_1_label", label);
@@ -949,7 +946,7 @@ void ArchaeoLines::setGeographicLocation2Latitude(double lat)
 	geographicLocation2Line->setDefiningAngle(az);
 	emit geographicLocation2Changed();
 }
-void ArchaeoLines::setGeographicLocation2Label(QString label)
+void ArchaeoLines::setGeographicLocation2Label(const QString &label)
 {
 	geographicLocation2Line->setLabel(label);
 	conf->setValue("ArchaeoLines/geographic_location_2_label", label);
@@ -981,13 +978,13 @@ void ArchaeoLines::setCustomAzimuth2(double az)
 		emit customAzimuth2Changed(az);
 	}
 }
-void ArchaeoLines::setCustomAzimuth1Label(QString label)
+void ArchaeoLines::setCustomAzimuth1Label(const QString &label)
 {
 	customAzimuth1Line->setLabel(label);
 	conf->setValue("ArchaeoLines/custom_azimuth_1_label", label);
 	emit customAzimuth1LabelChanged(label);
 }
-void ArchaeoLines::setCustomAzimuth2Label(QString label)
+void ArchaeoLines::setCustomAzimuth2Label(const QString &label)
 {
 	customAzimuth2Line->setLabel(label);
 	conf->setValue("ArchaeoLines/custom_azimuth_2_label", label);
@@ -1012,13 +1009,13 @@ void ArchaeoLines::setCustomAltitude2(double alt)
 		emit customAltitude2Changed(alt);
 	}
 }
-void ArchaeoLines::setCustomAltitude1Label(QString label)
+void ArchaeoLines::setCustomAltitude1Label(const QString &label)
 {
 	customAltitude1Line->setLabel(label);
 	conf->setValue("ArchaeoLines/custom_altitude_1_label", label);
 	emit customAltitude1LabelChanged(label);
 }
-void ArchaeoLines::setCustomAltitude2Label(QString label)
+void ArchaeoLines::setCustomAltitude2Label(const QString &label)
 {
 	customAltitude2Line->setLabel(label);
 	conf->setValue("ArchaeoLines/custom_altitude_2_label", label);
@@ -1043,20 +1040,20 @@ void ArchaeoLines::setCustomDeclination2(double dec)
 		emit customDeclination2Changed(dec);
 	}
 }
-void ArchaeoLines::setCustomDeclination1Label(QString label)
+void ArchaeoLines::setCustomDeclination1Label(const QString &label)
 {
 	customDeclination1Line->setLabel(label);
 	conf->setValue("ArchaeoLines/custom_declination_1_label", label);
 	emit customDeclination1LabelChanged(label);
 }
-void ArchaeoLines::setCustomDeclination2Label(QString label)
+void ArchaeoLines::setCustomDeclination2Label(const QString &label)
 {
 	customDeclination2Line->setLabel(label);
 	conf->setValue("ArchaeoLines/custom_declination_2_label", label);
 	emit customDeclination2LabelChanged(label);
 }
 
-void ArchaeoLines::setEquinoxColor(Vec3f color)
+void ArchaeoLines::setEquinoxColor(const Vec3f &color)
 {
 	if (color!=getEquinoxColor())
 	{
@@ -1064,7 +1061,7 @@ void ArchaeoLines::setEquinoxColor(Vec3f color)
 		emit equinoxColorChanged(color);
 	}
 }
-void ArchaeoLines::setSolsticesColor(Vec3f color)
+void ArchaeoLines::setSolsticesColor(const Vec3f &color)
 {
 	if (color!=getSolsticesColor())
 	{
@@ -1072,7 +1069,7 @@ void ArchaeoLines::setSolsticesColor(Vec3f color)
 		emit solsticesColorChanged(color);
 	}
 }
-void ArchaeoLines::setCrossquartersColor(Vec3f color)
+void ArchaeoLines::setCrossquartersColor(const Vec3f &color)
 {
 	if (color!=getCrossquartersColor())
 	{
@@ -1080,7 +1077,7 @@ void ArchaeoLines::setCrossquartersColor(Vec3f color)
 		emit crossquartersColorChanged(color);
 	}
 }
-void ArchaeoLines::setMajorStandstillColor(Vec3f color)
+void ArchaeoLines::setMajorStandstillColor(const Vec3f &color)
 {
 	if (color!=getMajorStandstillColor())
 	{
@@ -1088,7 +1085,7 @@ void ArchaeoLines::setMajorStandstillColor(Vec3f color)
 		emit majorStandstillColorChanged(color);
 	}
 }
-void ArchaeoLines::setMinorStandstillColor(Vec3f color)
+void ArchaeoLines::setMinorStandstillColor(const Vec3f &color)
 {
 	if (color!=getMinorStandstillColor())
 	{
@@ -1096,7 +1093,7 @@ void ArchaeoLines::setMinorStandstillColor(Vec3f color)
 		emit minorStandstillColorChanged(color);
 	}
 }
-void ArchaeoLines::setPolarCirclesColor(Vec3f color)
+void ArchaeoLines::setPolarCirclesColor(const Vec3f &color)
 {
 	if (color!=getPolarCirclesColor())
 	{
@@ -1104,7 +1101,7 @@ void ArchaeoLines::setPolarCirclesColor(Vec3f color)
 		emit polarCirclesColorChanged(color);
 	}
 }
-void ArchaeoLines::setZenithPassageColor(Vec3f color)
+void ArchaeoLines::setZenithPassageColor(const Vec3f &color)
 {
 	if (color!=getZenithPassageColor())
 	{
@@ -1112,7 +1109,7 @@ void ArchaeoLines::setZenithPassageColor(Vec3f color)
 		emit zenithPassageColorChanged(color);
 	}
 }
-void ArchaeoLines::setNadirPassageColor(Vec3f color)
+void ArchaeoLines::setNadirPassageColor(const Vec3f &color)
 {
 	if (color!=getNadirPassageColor())
 	{
@@ -1120,7 +1117,7 @@ void ArchaeoLines::setNadirPassageColor(Vec3f color)
 		emit nadirPassageColorChanged(color);
 	}
 }
-void ArchaeoLines::setSelectedObjectColor(Vec3f color)
+void ArchaeoLines::setSelectedObjectColor(const Vec3f &color)
 {
 	if (color!=getSelectedObjectColor())
 	{
@@ -1128,7 +1125,7 @@ void ArchaeoLines::setSelectedObjectColor(Vec3f color)
 		emit selectedObjectColorChanged(color);
 	}
 }
-void ArchaeoLines::setSelectedObjectAzimuthColor(Vec3f color)
+void ArchaeoLines::setSelectedObjectAzimuthColor(const Vec3f &color)
 {
 	if (color!=getSelectedObjectAzimuthColor())
 	{
@@ -1136,7 +1133,7 @@ void ArchaeoLines::setSelectedObjectAzimuthColor(Vec3f color)
 		emit selectedObjectAzimuthColorChanged(color);
 	}
 }
-void ArchaeoLines::setSelectedObjectHourAngleColor(Vec3f color)
+void ArchaeoLines::setSelectedObjectHourAngleColor(const Vec3f &color)
 {
 	if (color!=getSelectedObjectHourAngleColor())
 	{
@@ -1144,7 +1141,7 @@ void ArchaeoLines::setSelectedObjectHourAngleColor(Vec3f color)
 		emit selectedObjectHourAngleColorChanged(color);
 	}
 }
-void ArchaeoLines::setCurrentSunColor(Vec3f color)
+void ArchaeoLines::setCurrentSunColor(const Vec3f &color)
 {
 	if (color!=getCurrentSunColor())
 	{
@@ -1152,7 +1149,7 @@ void ArchaeoLines::setCurrentSunColor(Vec3f color)
 		emit currentSunColorChanged(color);
 	}
 }
-void ArchaeoLines::setCurrentMoonColor(Vec3f color)
+void ArchaeoLines::setCurrentMoonColor(const Vec3f &color)
 {
 	if (color!=getCurrentMoonColor())
 	{
@@ -1160,7 +1157,7 @@ void ArchaeoLines::setCurrentMoonColor(Vec3f color)
 		emit currentMoonColorChanged(color);
 	}
 }
-void ArchaeoLines::setCurrentPlanetColor(Vec3f color)
+void ArchaeoLines::setCurrentPlanetColor(const Vec3f &color)
 {
 	if (color!=getCurrentPlanetColor())
 	{
@@ -1168,7 +1165,7 @@ void ArchaeoLines::setCurrentPlanetColor(Vec3f color)
 		emit currentPlanetColorChanged(color);
 	}
 }
-void ArchaeoLines::setGeographicLocation1Color(Vec3f color)
+void ArchaeoLines::setGeographicLocation1Color(const Vec3f &color)
 {
 	if (color!=getGeographicLocation1Color())
 	{
@@ -1176,7 +1173,7 @@ void ArchaeoLines::setGeographicLocation1Color(Vec3f color)
 		emit geographicLocation1ColorChanged(color);
 	}
 }
-void ArchaeoLines::setGeographicLocation2Color(Vec3f color)
+void ArchaeoLines::setGeographicLocation2Color(const Vec3f &color)
 {
 	if (color!=getGeographicLocation2Color())
 	{
@@ -1184,7 +1181,7 @@ void ArchaeoLines::setGeographicLocation2Color(Vec3f color)
 		emit geographicLocation2ColorChanged(color);
 	}
 }
-void ArchaeoLines::setCustomAzimuth1Color(Vec3f color)
+void ArchaeoLines::setCustomAzimuth1Color(const Vec3f &color)
 {
 	if (color!=getCustomAzimuth1Color())
 	{
@@ -1192,7 +1189,7 @@ void ArchaeoLines::setCustomAzimuth1Color(Vec3f color)
 		emit customAzimuth1ColorChanged(color);
 	}
 }
-void ArchaeoLines::setCustomAzimuth2Color(Vec3f color)
+void ArchaeoLines::setCustomAzimuth2Color(const Vec3f &color)
 {
 	if (color!=getCustomAzimuth2Color())
 	{
@@ -1200,7 +1197,7 @@ void ArchaeoLines::setCustomAzimuth2Color(Vec3f color)
 		emit customAzimuth2ColorChanged(color);
 	}
 }
-void ArchaeoLines::setCustomAltitude1Color(Vec3f color)
+void ArchaeoLines::setCustomAltitude1Color(const Vec3f &color)
 {
 	if (color!=getCustomAltitude1Color())
 	{
@@ -1208,7 +1205,7 @@ void ArchaeoLines::setCustomAltitude1Color(Vec3f color)
 		emit customAltitude1ColorChanged(color);
 	}
 }
-void ArchaeoLines::setCustomAltitude2Color(Vec3f color)
+void ArchaeoLines::setCustomAltitude2Color(const Vec3f &color)
 {
 	if (color!=getCustomAltitude2Color())
 	{
@@ -1216,7 +1213,7 @@ void ArchaeoLines::setCustomAltitude2Color(Vec3f color)
 		emit customAltitude2ColorChanged(color);
 	}
 }
-void ArchaeoLines::setCustomDeclination1Color(Vec3f color)
+void ArchaeoLines::setCustomDeclination1Color(const Vec3f &color)
 {
 	if (color!=getCustomDeclination1Color())
 	{
@@ -1224,7 +1221,7 @@ void ArchaeoLines::setCustomDeclination1Color(Vec3f color)
 		emit customDeclination1ColorChanged(color);
 	}
 }
-void ArchaeoLines::setCustomDeclination2Color(Vec3f color)
+void ArchaeoLines::setCustomDeclination2Color(const Vec3f &color)
 {
 	if (color!=getCustomDeclination2Color())
 	{

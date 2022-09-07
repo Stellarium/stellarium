@@ -459,7 +459,7 @@
                   <enum>Qt::NoFocus</enum>
                  </property>
                  <property name="toolTip">
-                  <string>Refraction/Extinction settings: pressure, temperature, extinction coefficient, etc.</string>
+                  <string>Atmosphere settings: visual model, pressure, temperature, extinction coefficient, etc.</string>
                  </property>
                  <property name="icon">
                   <iconset resource="../../data/gui/guiRes.qrc">
@@ -2047,6 +2047,20 @@
                  </property>
                  <property name="text">
                   <string>select standard</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="selectPreferredCatalogs">
+                 <property name="text">
+                  <string>select preference</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="storePreferredCatalogs">
+                 <property name="text">
+                  <string>store preference</string>
                  </property>
                 </widget>
                </item>
@@ -5283,12 +5297,12 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>

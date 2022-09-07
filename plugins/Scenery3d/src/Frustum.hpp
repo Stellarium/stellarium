@@ -59,9 +59,9 @@ public:
 		this->zFar = zFar;
 	}
 
-	void calcFrustum(Vec3d p, Vec3d l, Vec3d u);
-	const Vec3f &getCorner(Corner corner) const;
-	const Plane &getPlane(FrustumPlane plane) const;
+	void calcFrustum(const Vec3d &p, const Vec3d &l, const Vec3d &u);
+	const Vec3f &getCorner(const Corner corner) const;
+	const Plane &getPlane(const FrustumPlane plane) const;
 	int pointInFrustum(const Vec3f &p);
 	int boxInFrustum(const AABBox &bbox);
 

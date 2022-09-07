@@ -592,7 +592,7 @@ void SolarSystem::loadPlanets()
 			//If the file is in the user data directory, rename it:
 			if (solarSystemFile.contains(StelFileMgr::getUserDir()))
 			{
-				QString newName = QString("%1/data/ssystem-%2.ini").arg(StelFileMgr::getUserDir(), QDateTime::currentDateTime().toString("yyyyMMddThhmmss"));
+				QString newName = QString("%1/data/ssystem_minor-%2.ini").arg(StelFileMgr::getUserDir(), QDateTime::currentDateTime().toString("yyyyMMddThhmmss"));
 				if (QFile::rename(solarSystemFile, newName))
 					qWarning() << "Invalid Solar System file" << QDir::toNativeSeparators(solarSystemFile) << "has been renamed to" << QDir::toNativeSeparators(newName);
 				else

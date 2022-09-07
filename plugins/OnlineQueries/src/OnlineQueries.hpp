@@ -20,7 +20,6 @@
 #ifndef ONLINEQUERIES_HPP
 #define ONLINEQUERIES_HPP
 
-#include "StelGui.hpp"
 #include "StelModule.hpp"
 #include "HipOnlineQuery.hpp"
 

@@ -81,7 +81,7 @@ void Plane::setPoints(const Vec3f &v1,const Vec3f &v2,const Vec3f &v3, SPolygon:
 	distance = v1.dot(normal);
 }
 
-float Plane::calcDistance(const Vec3f p) const
+float Plane::calcDistance(const Vec3f &p) const
 {
 	return p.dot(normal) - distance;
 }

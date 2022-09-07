@@ -50,16 +50,7 @@
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
-#include "StelUtils.hpp"
 #include "StelMainView.hpp"
-
-#include "external/qxlsx/xlsxdocument.h"
-#include "external/qxlsx/xlsxchartsheet.h"
-#include "external/qxlsx/xlsxcellrange.h"
-#include "external/qxlsx/xlsxchart.h"
-#include "external/qxlsx/xlsxrichstring.h"
-#include "external/qxlsx/xlsxworkbook.h"
-using namespace QXlsx;
 
 const QString SatellitesDialog::dash = QChar(0x2014);
 
@@ -191,6 +182,7 @@ void SatellitesDialog::createDialogContent()
 	connectIntProperty(ui->orbitSegmentsSpin,   "Satellites.orbitLineSegments");
 	connectIntProperty(ui->orbitFadeSpin,       "Satellites.orbitLineFadeSegments");
 	connectIntProperty(ui->orbitDurationSpin,   "Satellites.orbitLineSegmentDuration");
+	connectIntProperty(ui->orbitThicknessSpin,  "Satellites.orbitLineThickness");
 	connect(ui->orbitLinesCheckBox, SIGNAL(clicked(bool)), this, SLOT(handleOrbitLinesGroup(bool)));
 	handleOrbitLinesGroup(ui->orbitLinesCheckBox->isChecked());
 	// Logic sub-group: Umbra
@@ -348,6 +340,7 @@ void SatellitesDialog::handleOrbitLinesGroup(bool state)
 	ui->orbitSegmentsSpin->setEnabled(state);
 	ui->orbitFadeSpin->setEnabled(state);
 	ui->orbitDurationSpin->setEnabled(state);
+	ui->orbitThicknessSpin->setEnabled(state);
 }
 
 void SatellitesDialog::handleUmbraGroup(bool state)
@@ -1163,6 +1156,7 @@ void SatellitesDialog::populateInfo()
 	ui->updateFrequencySpinBox->setSuffix(QString(" %1").arg(qc_("h","time")));
 	// TRANSLATORS: Unit of measure for distance - kilometers
 	QString km = qc_("km", "distance");
+	QString px = qc_("px", "pixels");
 	ui->minAltitude->setSuffix(QString(" %1").arg(km));
 	ui->minAltitude->setToolTip(QString("%1: %2..%3 %4").arg(vr, QString::number(ui->minAltitude->minimum(), 'f', 0), QString::number(ui->minAltitude->maximum(), 'f', 0), km));
 	ui->maxAltitude->setSuffix(QString(" %1").arg(km));
@@ -1173,6 +1167,8 @@ void SatellitesDialog::populateInfo()
 	ui->orbitSegmentsSpin->setToolTip(QString("<p>%1. %2: %3..%4</p>").arg(q_("Number of segments: number of segments used to draw the line"), vr, QString::number(ui->orbitSegmentsSpin->minimum()), QString::number(ui->orbitSegmentsSpin->maximum())));
 	ui->orbitDurationSpin->setToolTip(QString("<p>%1. %2: %3..%4 %5</p>").arg(q_("Segment length: duration of a single segment in seconds"), vr, QString::number(ui->orbitDurationSpin->minimum()), QString::number(ui->orbitDurationSpin->maximum()), s));
 	ui->orbitFadeSpin->setToolTip(QString("<p>%1. %2: %3..%4</p>").arg(q_("Fade length: number of segments used to draw each end of the line"), vr, QString::number(ui->orbitFadeSpin->minimum()), QString::number(ui->orbitFadeSpin->maximum())));
+	ui->orbitThicknessSpin->setToolTip(QString("%1: %2..%3 %4").arg(q_("Orbit line thickness"), QString::number(ui->orbitThicknessSpin->minimum()), QString::number(ui->orbitThicknessSpin->maximum()), px));
+	ui->orbitThicknessSpin->setSuffix(QString(" %1").arg(px));
 	ui->minMagnitude->setToolTip(QString("%1: %2..%3").arg(vr, QString::number(ui->minMagnitude->minimum(), 'f', 2), QString::number(ui->minMagnitude->maximum(), 'f', 2)));
 	ui->maxMagnitude->setToolTip(QString("%1: %2..%3").arg(vr, QString::number(ui->maxMagnitude->minimum(), 'f', 2), QString::number(ui->maxMagnitude->maximum(), 'f', 2)));
 }

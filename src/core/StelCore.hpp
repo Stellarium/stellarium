@@ -72,12 +72,12 @@ public:
 	{
 		FrameUninitialized,			//!< Reference frame is not set (FMajerech: Added to avoid condition on uninitialized value in StelSkyLayerMgr::draw())
 		FrameAltAz,				//!< Altazimuthal reference frame centered on observer.
-		FrameHeliocentricEclipticJ2000,		//!< Fixed-ecliptic reference frame centered on the Sun. GZ: This is J2000 ecliptical / almost VSOP87.
-		FrameObservercentricEclipticJ2000,	//!< Fixed-ecliptic reference frame centered on the Observer. GZ: was ObservercentricEcliptic, but renamed because it is Ecliptic of J2000!
-		FrameObservercentricEclipticOfDate,	//!< Moving ecliptic reference frame centered on the Observer. GZ new for V0.14: Ecliptic of date, i.e. includes the precession of the ecliptic.
+		FrameHeliocentricEclipticJ2000,		//!< Fixed-ecliptic reference frame centered on the Sun. This is J2000 ecliptical / almost VSOP87.
+		FrameObservercentricEclipticJ2000,	//!< Fixed-ecliptic reference frame centered on the Observer. Was ObservercentricEcliptic, but renamed because it is Ecliptic of J2000!
+		FrameObservercentricEclipticOfDate,	//!< Moving ecliptic reference frame centered on the Observer. Ecliptic of date, i.e. includes the precession of the ecliptic.
 		FrameEquinoxEqu,			//!< Equatorial reference frame at the current equinox centered on the observer.
 							//!< The north pole follows the precession of the planet on which the observer is located.
-							//!< On Earth, this may include nutation if so configured. Has been corrected for V0.14 to really properly reflect ecliptical motion and precession (Vondrak 2011 model) and nutation.
+							//!< On Earth, this may include nutation if so configured. Models ecliptical motion and precession (Vondrak 2011 model) and nutation.
 		FrameJ2000,				//!< Equatorial reference frame at the J2000 equinox centered on the observer. This is also the ICRS reference frame.
 		FrameFixedEquatorial,			//!< Fixed equatorial frame (hour angle/declination). Note that hour angle is counted backwards here and must be treated specially for user I/O.
 		FrameGalactic,				//!< Galactic reference frame centered on observer.
@@ -436,7 +436,7 @@ public slots:
 	//! Setting to a negative value will move the visible horizon down, this may be desired esp. in cylindrical projection.
 	//! Animation is available via StelMovementMgr::moveViewport()
 	void setViewportVerticalOffset(double newOffsetPct);
-	// Set both viewport offsets. Arguments will be clamped to be inside [-50...50]. I (GZ) hope this will avoid some of the shaking.
+	// Set both viewport offsets. Arguments will be clamped to be inside [-50...50].
 	void setViewportOffset(double newHorizontalOffsetPct, double newVerticalOffsetPct);
 
 	//! Can be used in specialized setups, intended e.g. for multi-projector installations with edge blending.
@@ -725,7 +725,7 @@ public slots:
 	void setDeltaTCustomNDot(double v) { deltaTCustomNDot=v; }
 	//! Set coefficients for custom equation for calculation of DeltaT
 	//! @param c the coefficients, e.g. -20,0,32
-	void setDeltaTCustomEquationCoefficients(Vec3d c) { deltaTCustomEquationCoeff=c; }
+	void setDeltaTCustomEquationCoefficients(const Vec3d &c) { deltaTCustomEquationCoeff=c; }
 
 	//! Get central year for custom equation for calculation of DeltaT
 	double getDeltaTCustomYear() const { return deltaTCustomYear; }
@@ -757,7 +757,7 @@ public slots:
 	//! Follows 1987PASP...99..695R: Nancy Roman: Identification of a Constellation from a Position
 	//! Data file from ADC catalog VI/42 with its amendment from 1999-12-30.
 	//! @param positionEqJnow position vector in rectangular equatorial coordinates of current epoch&equinox.
-	QString getIAUConstellation(const Vec3d positionEqJnow) const;
+	QString getIAUConstellation(const Vec3d &positionEqJnow) const;
 
 	//! Returns naked-eye limiting magnitude corresponding to the given sky luminance in cd/m².
 	static float luminanceToNELM(float luminance);
@@ -892,7 +892,7 @@ private:
 	// Time variables
 	double timeSpeed;           // Positive : forward, Negative : Backward, 1 = 1sec/sec
 	//double JDay;              // Current time in Julian day. IN V0.12 TO V0.14, this was JD in TT, and all places where UT was required had to subtract getDeltaT() explicitly.
-	QPair<double,double> JD;    // From 0.14 on: JD.first=JD_UT, JD.second=DeltaT=TT-UT. To gain JD_TT, compute JDE=JD.first+JD.second or better just call getJDE()
+	QPair<double,double> JD;    // From 0.14 on: JD.first=JD_UT, JD.second=DeltaT[seconds]=(TT-UT)*86400. To gain JD_TT, compute JDE=JD.first+JD.second/86400 or better just call getJDE()
 				    // Use is best with calls getJD()/setJD() and getJDE()/setJDE() to explicitly state which flavour of JD you need.
 	double presetSkyTime;
 	QTime initTodayTime;

@@ -21,7 +21,6 @@
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
-#include "StelLocation.hpp"
 #include "StelCore.hpp"
 #include "StelTexture.hpp"
 #include "VecMath.hpp"
@@ -40,7 +39,7 @@
 #include <QMatrix4x4>
 
 #include "gsatellite/gTime.hpp"
-#include "gsatellite/stdsat.h"
+//#include "gsatellite/stdsat.h"
 
 #include <cmath>
 
@@ -57,6 +56,7 @@ SphericalCap Satellite::viewportHalfspace = SphericalCap();
 int Satellite::orbitLineSegments = 90;
 int Satellite::orbitLineFadeSegments = 4;
 int Satellite::orbitLineSegmentDuration = 20;
+int Satellite::orbitLineThickness = 1;
 bool Satellite::orbitLinesFlag = true;
 bool Satellite::iconicModeFlag = false;
 bool Satellite::hideInvisibleSatellitesFlag = false;
@@ -1099,6 +1099,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 {
 	int size = orbitPoints.size();
+	const float ppx = static_cast<float>(painter.getProjector()->getDevicePixelsPerPixel());
 
 	if (size>0)
 	{
@@ -1137,7 +1138,15 @@ void Satellite::drawOrbit(StelCore *core, StelPainter& painter)
 			}
 		}
 
+		painter.enableClientStates(true, false, false);
+		if (orbitLineThickness>1 || ppx>1.f)
+			painter.setLineWidth(orbitLineThickness*ppx);
+
 		painter.drawPath(vertexArray, colorArray); // (does client state switching as needed internally)
+
+		painter.enableClientStates(false);
+		if (orbitLineThickness>1 || ppx>1.f)
+			painter.setLineWidth(1);
 	}
 }
 

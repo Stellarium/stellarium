@@ -58,12 +58,14 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setFlagUseTypeFilters
 		   NOTIFY flagUseTypeFiltersChanged)
 	//StelProperties
-	Q_PROPERTY(Nebula::TypeGroup typeFilters
+	// This used to be of type Nebula::TypeGroup, however on Qt6 this does not work and was changed to int.
+	Q_PROPERTY(int typeFilters
 		   READ getTypeFilters
 		   WRITE setTypeFilters
 		   NOTIFY typeFiltersChanged
 		   )
-	Q_PROPERTY(Nebula::CatalogGroup catalogFilters
+	// This used to be of type Nebula::CatalogGroup, however on Qt6 this does not work and was changed to int.
+	Q_PROPERTY(int catalogFilters
 		   READ getCatalogFilters
 		   WRITE setCatalogFilters
 		   NOTIFY catalogFiltersChanged
@@ -392,11 +394,21 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
-	void setCatalogFilters(Nebula::CatalogGroup cflags);
-	Nebula::CatalogGroup getCatalogFilters() const { return Nebula::catalogFilters; }
+	void setCatalogFilters(int cflags);
+	int getCatalogFilters() const { return int(Nebula::catalogFilters); }
+	//! Activate all catalogs
+	void selectAllCatalogs();
+	//! Activate a useful selection of catalogs: M, NGC, IC
+	void selectStandardCatalogs();
+	//! Disable all catalogs
+	void selectNoneCatalogs();
+	//! retrieve configured catalogs from config.ini.
+	void loadCatalogFilters();
+	//! store configured catalogs into config.ini.
+	void storeCatalogFilters();
 
-	void setTypeFilters(Nebula::TypeGroup tflags);
-	Nebula::TypeGroup getTypeFilters() const { return Nebula::typeFilters; }
+	void setTypeFilters(int tflags);
+	int getTypeFilters() const { return int(Nebula::typeFilters); }
 
 	//! Set the default color used to draw the nebula symbols (default circles, etc).
 	//! @param c The color of the nebula symbols
@@ -864,9 +876,9 @@ signals:
 	//! Emitted when filter types are changed.
 	void flagUseTypeFiltersChanged(bool b);
 	//! Emitted when the catalog filter is changed
-	void catalogFiltersChanged(Nebula::CatalogGroup flags);
+	void catalogFiltersChanged(int flags); // emits an int cast of Nebula::CatalogGroup
 	//! Emitted when the type filter is changed
-	void typeFiltersChanged(Nebula::TypeGroup flags);
+	void typeFiltersChanged(int flags); // emits an int cast of Nebula::TypeGroup
 	void hintsProportionalChanged(bool b);
 	void flagOutlinesDisplayedChanged(bool b);
 	void flagAdditionalNamesDisplayedChanged(bool b);

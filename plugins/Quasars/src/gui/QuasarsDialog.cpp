@@ -26,17 +26,12 @@
 #include <QColorDialog>
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
 #include "ui_quasarsDialog.h"
 #include "QuasarsDialog.hpp"
 #include "Quasars.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelMovementMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelGui.hpp"
-#include "StelMainView.hpp"
-#include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
 QuasarsDialog::QuasarsDialog()

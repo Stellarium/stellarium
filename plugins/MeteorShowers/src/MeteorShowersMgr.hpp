@@ -24,9 +24,10 @@
 #include <QNetworkAccessManager>
 
 #include "StelGuiItems.hpp"
-#include "StelTextureMgr.hpp"
-#include "StelObjectModule.hpp"
-#include "StelLocationMgr.hpp"
+#include "StelModule.hpp"
+#include "StelLocation.hpp"
+#include "StelTextureTypes.hpp"
+#include "VecMath.hpp"
 
 #define MS_CATALOG_VERSION 2
 #define MS_CONFIG_PREFIX QString("MeteorShowers")
@@ -317,7 +318,7 @@ private:
 	StelTextureSP m_pointerTexture; //! Pointer texture
 	StelTextureSP m_radiantTexture; //! Radiant texture
 
-	bool m_isUpdating;
+	//bool m_isUpdating;
 	bool m_enableAutoUpdates;
 	int m_updateFrequencyHours;
 	QString m_url;

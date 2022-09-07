@@ -235,7 +235,7 @@ int HebrewCalendar::fixedFromHebrew(QVector<int> hebrew)
 
 QVector<int> HebrewCalendar::hebrewFromFixed(int rd)
 {
-	const int approx = StelUtils::intFloorDivLL(98496*(rd-hebrewEpoch), 35975351)+1;
+	const qint64 approx = StelUtils::intFloorDivLL(98496LL*qint64(rd-hebrewEpoch), 35975351LL)+1;
 
 	int year=approx-1;
 	while (hebrewNewYear(year+1)<=rd)

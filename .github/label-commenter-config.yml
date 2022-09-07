@@ -6,11 +6,14 @@ labels:
         action: close
       pr:
         body: Hello @{{ pull_request.user.login }}! Thank you for suggesting this, but please follow the pull request templates.
-        action: close
+        action: draft
     unlabeled:
       issue:
         body: Thank you for following the template. The repository owner will reply.
         action: open
+      pr:
+        body: Thank you for following the template. The repository owner will review this.
+        action: ready
   - name: not a bug
     labeled:
       issue:
@@ -88,6 +91,10 @@ labels:
           This site actually does not discuss the Mobile version. Please use its own feedback system:
           https://www.stellarium-labs.com/support/
         action: close
+  - name: documentation
+    labeled:
+      issue:
+        body: Thank you for suggesting documentation improvement.
   - name: translations
     labeled:
       issue:

@@ -20,7 +20,7 @@
 #ifndef MSCONFIGDIALOG_HPP
 #define MSCONFIGDIALOG_HPP
 
-#include "MeteorShowers.hpp"
+#include "MeteorShowersMgr.hpp"
 #include "StelDialog.hpp"
 
 class Ui_MSConfigDialog;

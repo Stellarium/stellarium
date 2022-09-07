@@ -1,0 +1,13 @@
+// Name: Up vector test
+// Author: Georg Zotti
+// License: Public Domain
+// Description: This script tests a move by the script command 
+// core.moveToAltAzi(90,180,1), i.e., a move within 1 second 
+// towards 90 degrees altitude (zenith), with south at the screen bottom.
+// This move is dangerous as the view UP vector would usually fall parallel 
+// to the view direction vector, causing either black screen or orientation disorder.
+// The mitigation is storing the final UP vector when the move is set up and setting it 
+// explicitly at the end of the move.
+
+core.moveToAltAzi(90, 180, 1);
+

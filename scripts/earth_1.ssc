@@ -1,10 +1,10 @@
 // Author: Qam1
-// Version: 12.0
+// Version: 12.2
 // License: Public Domain
 // Name: Earth best views from other bodies
 // Description: Best views of Earth from other Solar System bodies in the 21st Century.
 
-// Made on Stellarium 0.20.2
+// Made on Stellarium 0.22.2
 
 //basics
 var spd = 5; // speed for screen saver mode in seconds
@@ -297,8 +297,7 @@ od = NebulaMgr.getFlagHints();
 of = LandscapeMgr.getFlagFog();
 os = StarMgr.getFlagStars(); 
 
-oq = LandscapeMgr.getFlagCardinalsPoints();
-
+oq = LandscapeMgr.getFlagCardinalPoints();
 
 while (d == 1)
 {
@@ -333,6 +332,9 @@ if (cd != od)
 i = i+1
 d =2
 NebulaMgr.setFlagHints(od);
+
+
+
 
 }
 

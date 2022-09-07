@@ -18,7 +18,6 @@
 
 #include "HipOnlineQuery.hpp"
 
-#include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include <QNetworkReply>
 #include <QNetworkAccessManager>

@@ -20,6 +20,7 @@
 #ifndef METEORSHOWERS_HPP
 #define METEORSHOWERS_HPP
 
+#include "StelObjectModule.hpp"
 #include "MeteorShower.hpp"
 #include "MeteorShowersMgr.hpp"
 

@@ -22,11 +22,10 @@
 #include "ui_pointerCoordinatesWindow.h"
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelGui.hpp"
+#include "StelTranslator.hpp"
 
 PointerCoordinatesWindow::PointerCoordinatesWindow()
 	: StelDialog("PointerCoordinates")

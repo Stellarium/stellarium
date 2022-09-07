@@ -53,9 +53,8 @@
 #include "StelSkyLayerMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelGuiBase.hpp"
-#include "MilkyWay.hpp"
 #include "ZodiacalLight.hpp"
-#include "ToastMgr.hpp"
+//#include "ToastMgr.hpp"
 #include "StelToneReproducer.hpp"
 
 #include <QDateTime>
@@ -104,10 +103,52 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestSetSkyCulture(QString)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureID(QString)));
 	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelApp::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));	
 	connect(this, SIGNAL(requestSetHomePosition()), StelApp::getInstance().getCore(), SLOT(returnToHome()));
+
+	//QMetaType::registerConverter<V3d,QString>(&V3d::toString);
+	//QMetaType::registerConverter<V3f,QString>(&V3f::toString);
+	//QMetaType::registerConverter<Color,QString>(&Color::toString);
 }
 
 StelMainScriptAPI::~StelMainScriptAPI()
 {
+}
+
+Vec3d StelMainScriptAPI::vec3d(const double x, const double y, const double z)
+{
+	return Vec3d(x, y, z);
+}
+
+Vec3f StelMainScriptAPI::vec3f(const float x, const float y, const float z)
+{
+	return Vec3f(x, y, z);
+}
+
+//Col StelMainScriptAPI::vec3f(const QString &cstr){return color(cstr);}
+#ifdef ENABLE_SCRIPT_QML
+Color StelMainScriptAPI::color(const QString &cstr)
+{
+	Color res(0,0,0);
+
+	QColor qcol = QColor(cstr);
+	if(qcol.isValid())
+		res.set( static_cast<float>(qcol.redF()), static_cast<float>(qcol.greenF()), static_cast<float>(qcol.blueF()) );
+	else
+		qWarning() << "Color: invalid color name: " << cstr;
+	return res;
+}
+#endif
+//V3d StelMainScriptAPI::toV3d(const Vec3d &vec)
+//{
+//	return V3d(vec);
+//}
+
+bool StelMainScriptAPI::useQtScript()
+{
+#ifdef ENABLE_SCRIPT_QML
+	return false;
+#else
+	return true;
+#endif
 }
 
 //! Set the current date in Julian Day
@@ -689,7 +730,11 @@ void StelMainScriptAPI::setScriptRate(double r)
 
 void StelMainScriptAPI::pauseScript()
 {
+#ifdef ENABLE_SCRIPT_QML
+	qDebug() << "NOTE: pauseScript() is no longer supported. Ignoring.";
+#else
 	return StelApp::getInstance().getScriptMgr().pauseScript();
+#endif
 }
 
 void StelMainScriptAPI::setSelectedObjectInfo(const QString& level)
@@ -856,6 +901,7 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 void StelMainScriptAPI::wait(double t)
 {
 	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
+	QCoreApplication::processEvents();
 	QEventLoop* loop = scriptMgr->getWaitEventLoop();
 	QTimer::singleShot(qRound(1000*t), loop, SLOT(quit()));
 	if( loop->exec() != 0 )

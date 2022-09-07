@@ -72,6 +72,7 @@ class AngleMeasure : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool enabled                          READ isEnabled                  WRITE enableAngleMeasure           NOTIFY flagAngleMeasureChanged)
+	Q_PROPERTY(bool flagPanAndSelect                 READ isPanAndSelect             WRITE panAndSelect                 NOTIFY flagPanAndSelectChanged )
 	Q_PROPERTY(bool flagFollowCursor                 READ isFollowCursor             WRITE followCursor                 NOTIFY flagFollowCursorChanged )
 	Q_PROPERTY(bool dmsFormat                        READ isDmsFormat                WRITE useDmsFormat                 NOTIFY dmsFormatChanged )
 	Q_PROPERTY(bool flagShowEquatorial               READ isEquatorial               WRITE showEquatorial               NOTIFY flagShowEquatorialChanged )
@@ -114,6 +115,7 @@ public:
 
 signals:
 	void flagAngleMeasureChanged(bool b);
+	void flagPanAndSelectChanged(bool b);
 	void flagFollowCursorChanged(bool b);
 	void dmsFormatChanged(bool b);
 	void flagShowEquatorialChanged(bool b);
@@ -122,13 +124,14 @@ signals:
 	void flagShowHorizontalPAChanged(bool b);
 	void flagShowHorizontalStartSkylinkedChanged(bool b);
 	void flagShowHorizontalEndSkylinkedChanged(bool b);
-	void equatorialTextColorChanged(Vec3f c);
-	void equatorialLineColorChanged(Vec3f c);
-	void horizontalTextColorChanged(Vec3f c);
-	void horizontalLineColorChanged(Vec3f c);
+	void equatorialTextColorChanged(const Vec3f &c);
+	void equatorialLineColorChanged(const Vec3f &c);
+	void horizontalTextColorChanged(const Vec3f &c);
+	void horizontalLineColorChanged(const Vec3f &c);
 
 public slots:
 	bool isEnabled() const    { return flagShowAngleMeasure; }
+	bool isPanAndSelect() const { return flagPanAndSelect; }
 	bool isFollowCursor() const  { return flagFollowCursor; }
 	bool isDmsFormat() const  { return flagUseDmsFormat; }
 	bool isEquatorial() const { return flagShowEquatorial; }
@@ -151,10 +154,11 @@ public slots:
 	void showHorizontal(bool b);
 	void showHorizontalStartSkylinked(bool b);
 	void showHorizontalEndSkylinked(bool b);
-	void setEquatorialTextColor(Vec3f color);
-	void setEquatorialLineColor(Vec3f color);
-	void setHorizontalTextColor(Vec3f color);
-	void setHorizontalLineColor(Vec3f color);
+	void panAndSelect(bool b);
+	void setEquatorialTextColor(const Vec3f &color);
+	void setEquatorialLineColor(const Vec3f &color);
+	void setHorizontalTextColor(const Vec3f &color);
+	void setHorizontalLineColor(const Vec3f &color);
 
 private slots:
 	void updateMessageText();
@@ -172,6 +176,8 @@ private:
 	QString messageRightButton;
 	QString messagePA;
 	bool dragging;
+	bool picked;
+	bool olddblclick;
 	Vec3d startPoint;
 	Vec3d endPoint;
 	Vec3d perp1StartPoint;
@@ -179,6 +185,7 @@ private:
 	Vec3d perp2StartPoint;
 	Vec3d perp2EndPoint;
 	double angleEquatorial;
+	bool flagPanAndSelect;	//!< this keeps the left mouse button for panning and selecting objects - only the right mouse button is used for angle measurement
 	bool flagFollowCursor;	//!< measurement data block follows cursor rather than start of measurement line
 	bool flagUseDmsFormat;
 	bool flagShowEquatorial;

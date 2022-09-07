@@ -21,6 +21,7 @@
 #define STELOBJECT_HPP
 
 #include "VecMath.hpp"
+// Ignore clangd warning! Inclusion is OK.
 #include "StelObjectType.hpp"
 #include "StelRegionObject.hpp"
 
@@ -274,7 +275,7 @@ public:
 	//! with the circle center assumed to be at getJ2000EquatorialPos().
 	//! @return radius in degree. This value is the apparent angular size of the object, and is independent of the current FOV.
 	//! @note The default implementation just returns zero.
-	virtual double getAngularRadius(const StelCore* core) const {Q_UNUSED(core); return 0;}
+	virtual double getAngularRadius(const StelCore* core) const { Q_UNUSED(core) return 0.; }
 
 	//! Return airmass value for the object (for atmosphere-dependent calculations)
 	//! @param core

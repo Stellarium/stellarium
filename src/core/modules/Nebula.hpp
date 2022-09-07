@@ -43,104 +43,102 @@ public:
 
 	enum CatalogGroupFlags
 	{
-		CatNone		= 0x00000000, //!< Nothing selected
-		CatNGC		= 0x00000001, //!< New General Catalogue (NGC)
-		CatIC		= 0x00000002, //!< Index Catalogue (IC)
-		CatM		= 0x00000004, //!< Messier Catalog (M)
-		CatC		= 0x00000008, //!< Caldwell Catalogue (C)
-		CatB		= 0x00000010, //!< Barnard Catalogue (B)
-		CatSh2		= 0x00000020, //!< Sharpless Catalogue (Sh 2)
-		CatLBN		= 0x00000040, //!< Lynds' Catalogue of Bright Nebulae (LBN)
-		CatLDN		= 0x00000080, //!< Lynds' Catalogue of Dark Nebulae (LDN)
-		CatRCW		= 0x00000100, //!< A catalogue of Hα-emission regions in the southern Milky Way (RCW)
-		CatVdB		= 0x00000200, //!< van den Bergh Catalogue of reflection nebulae (vdB)
-		CatCr		= 0x00000400, //!< Collinder Catalogue (Cr or Col)
-		CatMel		= 0x00000800, //!< Melotte Catalogue of Deep Sky Objects (Mel)
-		CatPGC		= 0x00001000, //!< HYPERLEDA. I. Catalog of galaxies (PGC)
-		CatUGC		= 0x00002000, //!< The Uppsala General Catalogue of Galaxies
-		CatCed		= 0x00004000, //!< Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
-		CatArp		= 0x00008000, //!< Atlas of Peculiar Galaxies (Arp)
-		CatVV		= 0x00010000, //!< Interacting galaxies catalogue by Vorontsov-Velyaminov (VV)
-		CatPK		= 0x00020000, //!< Catalogue of Galactic Planetary Nebulae (PK)
-		CatPNG		= 0x00040000, //!< Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992) (PN G)
-		CatSNRG		= 0x00080000, //!< A catalogue of Galactic supernova remnants (Green, 2014) (SNR G)
-		CatACO		= 0x00100000, //!< A Catalog of Rich Clusters of Galaxies (Abell+, 1989) (ACO)
-		CatHCG		= 0x00200000, //!< Hickson, Compact Group (Hickson+ 1982) (HCG)		
-		CatESO		= 0x00400000, //!< ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982) (ESO)
-		CatVdBH		= 0x00800000, //!< Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975) (vdBH)
-		CatDWB		= 0x01000000, //!< Catalogue and distances of optically visible H II regions (Dickel+, 1969) (DWB)
-		CatTr		= 0x02000000, //!< Trumpler Catalogue (Tr)
-		CatSt		= 0x04000000, //!< Stock Catalogue (St)
-		CatRu		= 0x08000000, //!< Ruprecht Catalogue (Ru)
-		CatVdBHa	= 0x10000000, //!< van den Bergh-Hagen Catalogue (vdB-Ha)
-		CatOther		= 0x20000000, //!< without ID
-		CatAll              = 0xFFFFFFFF  //!< All catalogs selected
+		CatNone         = 0x00000000, //!< Nothing selected
+		CatNGC          = 0x00000001, //!< New General Catalogue (NGC)
+		CatIC           = 0x00000002, //!< Index Catalogue (IC)
+		CatM            = 0x00000004, //!< Messier Catalog (M)
+		CatC            = 0x00000008, //!< Caldwell Catalogue (C)
+		CatB            = 0x00000010, //!< Barnard Catalogue (B)
+		CatSh2          = 0x00000020, //!< Sharpless Catalogue (Sh 2)
+		CatLBN          = 0x00000040, //!< Lynds' Catalogue of Bright Nebulae (LBN)
+		CatLDN          = 0x00000080, //!< Lynds' Catalogue of Dark Nebulae (LDN)
+		CatRCW          = 0x00000100, //!< A catalogue of Hα-emission regions in the southern Milky Way (RCW)
+		CatVdB          = 0x00000200, //!< van den Bergh Catalogue of reflection nebulae (vdB)
+		CatCr           = 0x00000400, //!< Collinder Catalogue (Cr or Col)
+		CatMel          = 0x00000800, //!< Melotte Catalogue of Deep Sky Objects (Mel)
+		CatPGC          = 0x00001000, //!< HYPERLEDA. I. Catalog of galaxies (PGC)
+		CatUGC          = 0x00002000, //!< The Uppsala General Catalogue of Galaxies
+		CatCed          = 0x00004000, //!< Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
+		CatArp          = 0x00008000, //!< Atlas of Peculiar Galaxies (Arp)
+		CatVV           = 0x00010000, //!< Interacting galaxies catalogue by Vorontsov-Velyaminov (VV)
+		CatPK           = 0x00020000, //!< Catalogue of Galactic Planetary Nebulae (PK)
+		CatPNG          = 0x00040000, //!< Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992) (PN G)
+		CatSNRG         = 0x00080000, //!< A catalogue of Galactic supernova remnants (Green, 2014) (SNR G)
+		CatACO          = 0x00100000, //!< A Catalog of Rich Clusters of Galaxies (Abell+, 1989) (ACO)
+		CatHCG          = 0x00200000, //!< Hickson, Compact Group (Hickson+ 1982) (HCG)
+		CatESO          = 0x00400000, //!< ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982) (ESO)
+		CatVdBH         = 0x00800000, //!< Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975) (vdBH)
+		CatDWB          = 0x01000000, //!< Catalogue and distances of optically visible H II regions (Dickel+, 1969) (DWB)
+		CatTr           = 0x02000000, //!< Trumpler Catalogue (Tr)
+		CatSt           = 0x04000000, //!< Stock Catalogue (St)
+		CatRu           = 0x08000000, //!< Ruprecht Catalogue (Ru)
+		CatVdBHa        = 0x10000000, //!< van den Bergh-Hagen Catalogue (vdB-Ha)
+		CatOther        = 0x20000000, //!< without ID
+		CatAll          = 0xFFFFFFFF  //!< All catalogs selected
 	};
 	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
 	Q_FLAG(CatalogGroup)
 
 	enum TypeGroupFlags
 	{
-		TypeNone				= 0x00000000, //!< Nothing selected
-		TypeGalaxies				= 0x00000001, //!< Galaxies
-		TypeActiveGalaxies		= 0x00000002, //!< Different Active Galaxies
-		TypeInteractingGalaxies	= 0x00000004, //!< Interacting Galaxies
-		TypeOpenStarClusters		= 0x00000008, //!< Open Star Clusters
-		TypeGlobularStarClusters	= 0x00000010, //!< Globular Star Clusters
-		TypeHydrogenRegions		= 0x00000020, //!< Hydrogen Regions
-		TypeBrightNebulae			= 0x00000040, //!< Bright Nebulae
-		TypeDarkNebulae			= 0x00000080, //!< Dark Nebulae
-		TypePlanetaryNebulae		= 0x00000100, //!< Planetary Nebulae
-		TypeSupernovaRemnants	= 0x00000200, //!< Supernova Remnants
-		TypeGalaxyClusters		= 0x00000400, //!< Galaxy Clusters
-		TypeOther				= 0x00000800  //!< Other objects
+		TypeNone                 = 0x00000000, //!< Nothing selected
+		TypeGalaxies             = 0x00000001, //!< Galaxies
+		TypeActiveGalaxies       = 0x00000002, //!< Different Active Galaxies
+		TypeInteractingGalaxies	 = 0x00000004, //!< Interacting Galaxies
+		TypeOpenStarClusters     = 0x00000008, //!< Open Star Clusters
+		TypeGlobularStarClusters = 0x00000010, //!< Globular Star Clusters
+		TypeHydrogenRegions      = 0x00000020, //!< Hydrogen Regions
+		TypeBrightNebulae        = 0x00000040, //!< Bright Nebulae
+		TypeDarkNebulae	         = 0x00000080, //!< Dark Nebulae
+		TypePlanetaryNebulae     = 0x00000100, //!< Planetary Nebulae
+		TypeSupernovaRemnants    = 0x00000200, //!< Supernova Remnants
+		TypeGalaxyClusters       = 0x00000400, //!< Galaxy Clusters
+		TypeOther                = 0x00000800, //!< Other types
+		TypeAll                  = 0xFFFFFFFF  //!< All types
 	};
 	Q_DECLARE_FLAGS(TypeGroup, TypeGroupFlags)
 	Q_FLAG(TypeGroup)
 
-	//! A pre-defined set of specifiers for the catalogs filter
-	static constexpr TypeGroup    AllTypes    = static_cast<TypeGroup>(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeOpenStarClusters|TypeGlobularStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeGalaxyClusters|TypeOther);
-
 	//! @enum NebulaType Nebula types
 	enum NebulaType
 	{
-		NebGx			= 0,		//!< m Galaxy
-		NebAGx			= 1,  	//!< Active galaxy
-		NebRGx			= 2,		//!< m Radio galaxy
-		NebIGx			= 3,		//!< Interacting galaxy
-		NebQSO			= 4,		//!< Quasar
-		NebCl			= 5,		//!< Star cluster
-		NebOc			= 6,		//!< Open star cluster
-		NebGc			= 7,		//!< Globular star cluster, usually in the Milky Way Galaxy
-		NebSA			= 8,		//!< Stellar association
-		NebSC			= 9,		//!< Star cloud
-		NebN			= 10,	//!< A nebula
-		NebPn			= 11,	//!< Planetary nebula
-		NebDn			= 12,	//!< Dark Nebula
-		NebRn			= 13,	//!< Reflection nebula
-		NebBn			= 14,	//!< Bipolar nebula
-		NebEn			= 15,	//!< Emission nebula
-		NebCn			= 16,	//!< Cluster associated with nebulosity
-		NebHII			= 17,	//!< HII Region
-		NebSNR			= 18,	//!< Supernova remnant
-		NebISM			= 19,	//!< Interstellar matter
-		NebEMO			= 20,	//!< Emission object
-		NebBLL			= 21,	//!< BL Lac object
-		NebBLA			= 22,	//!< Blazar
-		NebMolCld	        = 23, 	//!< Molecular Cloud
-		NebYSO			= 24, 	//!< Young Stellar Object
-		NebPossQSO		= 25, 	//!< Possible Quasar
-		NebPossPN		= 26, 	//!< Possible Planetary Nebula
-		NebPPN			= 27, 	//!< Protoplanetary Nebula
-		NebStar			= 28, 	//!< Star
-		NebSymbioticStar	= 29, 	//!< Symbiotic Star
-		NebEmissionLineStar	= 30, 	//!< Emission-line Star
-		NebSNC			= 31, 	//!< Supernova Candidate
-		NebSNRC			= 32, 	//!< Supernova Remnant Candidate
-		NebGxCl			= 33,	//!< Cluster of Galaxies
-		NebPartOfGx		= 34,	//!< Part of a Galaxy
-		NebRegion		= 35,	//!< Region of the sky
-		NebUnknown		= 36		//!< m Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebGx			= 0,   //!< m Galaxy
+		NebAGx			= 1,   //!< Active galaxy
+		NebRGx			= 2,   //!< m Radio galaxy
+		NebIGx			= 3,   //!< Interacting galaxy
+		NebQSO			= 4,   //!< Quasar
+		NebCl			= 5,   //!< Star cluster
+		NebOc			= 6,   //!< Open star cluster
+		NebGc			= 7,   //!< Globular star cluster, usually in the Milky Way Galaxy
+		NebSA			= 8,   //!< Stellar association
+		NebSC			= 9,   //!< Star cloud
+		NebN			= 10,  //!< A nebula
+		NebPn			= 11,  //!< Planetary nebula
+		NebDn			= 12,  //!< Dark Nebula
+		NebRn			= 13,  //!< Reflection nebula
+		NebBn			= 14,  //!< Bipolar nebula
+		NebEn			= 15,  //!< Emission nebula
+		NebCn			= 16,  //!< Cluster associated with nebulosity
+		NebHII			= 17,  //!< HII Region
+		NebSNR			= 18,  //!< Supernova remnant
+		NebISM			= 19,  //!< Interstellar matter
+		NebEMO			= 20,  //!< Emission object
+		NebBLL			= 21,  //!< BL Lac object
+		NebBLA			= 22,  //!< Blazar
+		NebMolCld	        = 23,  //!< Molecular Cloud
+		NebYSO			= 24,  //!< Young Stellar Object
+		NebPossQSO		= 25,  //!< Possible Quasar
+		NebPossPN		= 26,  //!< Possible Planetary Nebula
+		NebPPN			= 27,  //!< Protoplanetary Nebula
+		NebStar			= 28,  //!< Star
+		NebSymbioticStar	= 29,  //!< Symbiotic Star
+		NebEmissionLineStar	= 30,  //!< Emission-line Star
+		NebSNC			= 31,  //!< Supernova Candidate
+		NebSNRC			= 32,  //!< Supernova Remnant Candidate
+		NebGxCl			= 33,  //!< Cluster of Galaxies
+		NebPartOfGx		= 34,  //!< Part of a Galaxy
+		NebRegion		= 35,  //!< Region of the sky
+		NebUnknown		= 36   //!< m Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 	Q_ENUM(NebulaType)
 
@@ -321,7 +319,7 @@ private:
 	NebulaType nType;
 
 	SphericalRegionP pointRegion;
-	QStringList designations;
+	QStringList designations;       // List of Catalog number entries
 
 	static StelTextureSP texCircle;				// The symbolic circle texture
 	static StelTextureSP texCircleLarge;			// The symbolic circle texture for large objects

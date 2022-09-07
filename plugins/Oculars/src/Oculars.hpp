@@ -26,7 +26,7 @@
 #include "Ocular.hpp"
 #include "OcularDialog.hpp"
 #include "StelModule.hpp"
-#include "StelTexture.hpp"
+#include "StelTextureTypes.hpp"
 #include "Telescope.hpp"
 #include "VecMath.hpp"
 
@@ -213,16 +213,16 @@ public slots:
 	void setGuiPanelFontSize(int size);
 	int getGuiPanelFontSize()const {return guiPanelFontSize;}
 
-	void setTextColor(Vec3f color) {textColor=color; emit textColorChanged(color);}
+	void setTextColor(const Vec3f &color) {textColor=color; emit textColorChanged(color);}
 	Vec3f getTextColor() const {return textColor;}
 
-	void setLineColor(Vec3f color) {lineColor=color; emit lineColorChanged(color);}
+	void setLineColor(const Vec3f &color) {lineColor=color; emit lineColorChanged(color);}
 	Vec3f getLineColor() const {return lineColor;}
 
-	void setFocuserColor(Vec3f color) { focuserColor=color; emit focuserColorChanged(color);}
+	void setFocuserColor(const Vec3f &color) { focuserColor=color; emit focuserColorChanged(color);}
 	Vec3f getFocuserColor() const {return focuserColor;}
 
-	void setTelradFOV(Vec4f fov);
+	void setTelradFOV(const Vec4f &fov);
 	Vec4f getTelradFOV() const;
 
 	void setFlagDMSDegrees(const bool b);
@@ -325,9 +325,9 @@ signals:
 
 	void flagGuiPanelEnabledChanged(bool value);
 	void guiPanelFontSizeChanged(int value);
-	void textColorChanged(Vec3f color);
-	void lineColorChanged(Vec3f color);
-	void focuserColorChanged(Vec3f color);
+	void textColorChanged(const Vec3f &color);
+	void lineColorChanged(const Vec3f &color);
+	void focuserColorChanged(const Vec3f &color);
 	void flagHideGridsLinesChanged(bool value);
 	void flagAutosetMountForCCDChanged(bool value);
 	void flagScalingFOVForTelradChanged(bool value);

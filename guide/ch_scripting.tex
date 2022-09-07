@@ -2,41 +2,39 @@
 \chapter{Scripting}
 \label{ch:scripting}
 
-\sectionauthor*{Alexander Wolf, with additions by Wolfgang Laun}
+\sectionauthor*{A. Wolf, G. Zotti, with additions by Wolfgang Laun}
 
 \section{Introduction}
 \label{sec:scripting:introduction}
 
-
-The development of a powerful scripting system has been continuing for
-a number of years now and can now be called operational. The use of a
-script was recognized as a perfect way of arranging a display of a
-sequence of astronomical events from the earliest versions of
-Stellarium and a simple system called \emph{Stratoscript} was
-implemented. The scripting facility is Stellarium's version of a
+The scripting facility is Stellarium's version of a
 \emph{Presentation}, a feature that may be used to run an astronomical
-or other presentation for instruction or entertainment from within the
-Stellarium program. The original \emph{Stratoscript} was quite limited in
-what it could do so a new Stellarium Scripting System has been
-developed.
+or other show for instruction or entertainment from within the
+Stellarium program. The use of scripts was recognized as a perfect way 
+of arranging a presentation of a sequence of astronomical events 
+from the earliest versions of Stellarium. 
+
+The original \emph{Stratoscript} was quite limited in what it could do, 
+and so a new Stellarium Scripting System has been developed.
 
 Since version 0.10.1, Stellarium has included a scripting feature based on
-the Qt Scripting
+the Qt5 Scripting
 Engine\footnote{\url{https://doc.qt.io/qt-5/qtscript-index.html}}. This
-makes it possible to write small programs within Stellarium to produce
+made it possible to write small programs within Stellarium to produce
 automatic presentations, set up custom configurations, and to automate
 repetitive tasks. 
 
-As of version 0.14.0 a new scripting engine has reached a level where
-it has all required features for usage, however new commands may be
-added from time to time. Since version 0.14.0 support of scripts for
-the \emph{Stratoscript} engine has been discontinued.
+By version 0.14.0 a new scripting engine had reached a level where
+it had all required features for usage, and support of scripts for
+the old \emph{Stratoscript} engine has been discontinued.
 
 The programming language
-ECMAScript\footnote{\url{https://en.wikipedia.org/wiki/ECMAScript}}
-(also known as JavaScript) gives users access to all basic ECMAScript
+\indexterm{ECMAScript}\footnote{\url{https://en.wikipedia.org/wiki/ECMAScript}}
+(also known as \indexterm{JavaScript}) gives users access to all basic ECMAScript
 language features such as flow control, variables, string manipulation
-and so on.
+and so on. Its integration with Qt's QtScript module and the way Stellarium's main 
+components (``StelModule''s) have been designed to work means that all module 
+functions which are labeled as ``slots'' can be called from JavaScript.
 
 Interaction with Stellarium-specific features is done via a collection
 of objects which represent components of Stellarium itself.  The
@@ -46,6 +44,14 @@ display of objects, etc.  You can write text output into text files
 with the \command{output()} command.  You can call all public slots
 which are documented in the scripting API documentation\footnote{
 \url{https://www.stellarium.org/doc/\StelSeries/scripting.html}}.
+
+With the adaptation to Qt6 in versions 1.0 and later we had to switch to 
+yet another scripting engine in 2022. Qt6 comes with QJSEngine, another 
+JavaScript engine which behaves mostly similar to the older QtScript. 
+However, small differences exist, so that care must be taken if scripts 
+should be developed for both series of Stellarium. Some older scripts 
+will not work on versions 1.0 and later or at least require some adaptations 
+described in section~\ref{sec:scripting:differences}. 
 
 % Section 2020-03-26 by Wolfgang Laun
 \section{The Script Console}
@@ -62,6 +68,8 @@ text field receives all errors and other messages resulting from the
 script's execution; the ``Output'' text field will show the results of
 \texttt{core.output()} function calls. 
 
+The fourth tab, ``Settings'', provides some configuration options.
+
 \subsection{The Menu Bar}
 
 The menu bar contains buttons for loading and saving a script. A file
@@ -70,9 +78,11 @@ clear the contents of the text field in the currently selected tab.
 The drop-down menu ``Execute:'' offers a selection of menu entries, mainly
 intended to let you restore the sky to a clean state. The entry
 ``selected text as script'' executes selected text in the ``Script'' text
-field. Entries ``remove screen text'', ``remove screen images'' and 
+field, allowing to test scripts during development. 
+Entries ``remove screen text'', ``remove screen images'' and 
 ``remove screen markers'' remove labels, images and markers, respectively,
-that may have been shown on the screen. Each of the ``clear map'' entries
+that may have been left over on the screen from previous script actions. 
+Each of the ``clear map'' entries
 results in a call to \texttt{core.clear()}, using one of the arguments
 ``natural'', ``starchart'', ``deepspace'', ``galactic'' or ``supergalactic''.
 These calls reset Stellarium's state, resulting in a basic state
@@ -82,7 +92,7 @@ your script.
 The button SSC runs the Stellarium Script Preprocessor with the script in the text
 field as input and produces an output by recursively inserting all
 included scripts into the text.
-\emph{This output replaces the contents of the Script text field.}
+\emph{This output replaces the contents of the Script text field. Store the original script if you need it!}
 
 \subsection{German Keyboards}
 
@@ -91,13 +101,14 @@ is responsible for keyboard handling. It affects users of Windows and
 Linux systems with a German, and probably also other international
 keyboards: The key combinations \key{AltGr+8} and \key{AltGr+9} cannot
 be used for typing \verb+[+ and \verb+]+. You need to work around by
-copy-pasting these two characters.
+copy-pasting these two characters. You can also try to use a command 
+line argument like \texttt{-platform windows:altgr}.
 
 \section{Includes}
 \label{sec:scripting:includes}
 
 Stellarium provides a mechanism for splitting scripts into different
-files. Typical functions or lists of variables can be stored in
+files. Typical functions or lists of variables or celestial objects can be stored in
 separate \file{.inc} files and used within other scripts through the
 \textbf{include()} command:
 \begin{script}
@@ -130,6 +141,95 @@ var label=LabelMgr.labelScreen("Hello Universe", 200, 200,
 core.wait(3);
 LabelMgr.deleteLabel(label);
 \end{script}
+
+\section{Critical Scripting Differences introduced with version 1.0}
+\label{sec:scripting:differences}
+
+Qt5's QtScript module which has been used in versions 0.10 to 0.22 was more flexible and easier to fine-tune than Qt6's QJSEngine, 
+which is used in the 1.* series of the program, i.e., versions 1.0 (22.3) and later. 
+Still, most scripts that have been developed for Stellarium versions 0.10 to 0.22 
+still run without or with just minor modifications as described in this section. 
+
+\subsection{Pause/Resume}
+\label{sec:scripting:differences:pause}
+
+The Qt6-based builds (version 1.0 and later) do not offer a way to pause and resume a script as was available in the Qt5-based builds (0.10 to 0.22). 
+
+\subsection{The Vec3f problem}
+\label{sec:scripting:differences:Vec3f}
+
+One of the most important little helper classes in the main program are three-dimensional vectors. 
+\texttt{Vec3f} describe those with single-precision floating point data, 
+and \texttt{Vec3d} are those with double-precision floating point data.
+
+\begin{sidewaystable}
+{\ttfamily\scriptsize
+\begin{tabular}{rlll}
+ &Input                                         & Result with Qt5                                                       & Result with Qt6                          \\\hline
+x&\textbf{var f1=new V3d(.1,.2,.3);}            &                                                                       &                                          \\
+ &core.output(f1);                              &  [0.1, 0.2, 0.3]                                                      &  V3d(0x249a1cf37c0) [some address]       \\
+ &core.output(+f1.toString());                  &  [0.1, 0.2, 0.3]                                                      &  V3d(0x249a1cf37c0) [some address]       \\
+x&\textbf{core.output(f1.toHex());}             &  \#19334c                                                             &  \#19334c                                \\
+x&\textbf{core.output(f1.toVec3d());}           &  [0.1, 0.2, 0.3]                                                      &  [0.1, 0.2, 0.3]                         \\\hline
+x&\textbf{var f2=new V3d(f1.x(), 2*f1.y(), 3*f1.z());}   &                                                              &                                          \\
+ &core.output(f2);                              &  [0.1, 0.4, 0.9]                                                      &  V3d(0x249a1cf3a60) [some address]       \\
+x&\textbf{core.output(f2.toVec3d());}           &  [0.1, 0.4, 0.8999999999999999]                                       &  [0.1, 0.4, 0.9]                         \\\hline
+x&\textbf{var crimson=new Color("Crimson");}    &                                                              &                                          \\
+x&\textbf{core.output(crimson.toHex());}        &  \#dc143c                                                             &  \#dc143c                                \\
+ &core.output(crimson.toVec3f());               &  [r:0.8627451062202454, g:0.0784313753247261, b:0.23529411852359772]  &  [0.862745, 0.0784314, 0.235294]         \\
+ &core.output(crimson.r);                       &  0.8627451062202454                                                   &  error                                   \\
+ &core.output(crimson.r());                     &  error                                                                &  0.8627451062202454                      \\
+x&\textbf{core.output(crimson.getR());}         &  0.8627451062202454                                                   &  0.8627451062202454                      \\
+x&\textbf{core.output(crimson.getG());}         &  0.0784313753247261                                                   &  0.0784313753247261                      \\
+x&\textbf{core.output(crimson.getB());}         &  0.23529411852359772                                                  &  0.23529411852359772                     \\
+ &crimson.g=0.444;                              &  (works)                                                              & (error)                                  \\
+ &crimson.setG(0.444);                          &  (error)                                                              & (works)                                  \\
+x&\textbf{crimson=new Color(crimson.getR(), 0.444, crimson.getB());} & (reassign crimson; recommended for Qt5 and Qt6)  & \\
+x&\textbf{core.output(crimson.toRGBString());}  &  [r:0.862745, g:0.444, b:0.235294]                                    & [r:0.862745, g:0.444, b:0.235294]        \\\hline
+
+x&\multicolumn{2}{l}{\textbf{var eq=new Color(GridLinesMgr.getColorEquatorJ2000Grid());}}                               &                                          \\
+x&\textbf{core.output(eq.toHex());}             &  \#00aaff                                                             &  \#00aaff                                \\
+ &core.output(eq.toVec3f());                    &  [r:0, g:0.6666669845581055, b:1]                                     &  [0, 0.666667, 1]                        \\
+ &core.output(eq.toVec3d());                    &  (n.a.)                                                               &  [0, 0.666667, 1]                        \\
+ &core.output(eq.toString());                   &  [0, 0.666667, 1]                                                     &  Color(0x24a11712910) [some address]     \\
+x&\textbf{core.output(eq.toRGBString());}       &  [r:0, g:0.666667, b:1]                                               &  [r:0, g:0.666667, b:1]                  \\\hline
+
+x&\textbf{var c=new Color(core.vec3f(.3, .4, .5));}      &                                                              &                                          \\
+ &core.output(c.toString());                    &  [0.3, 0.4, 0.5]                                                      &  Color(0x249a1e078b0) [some address]     \\
+ &core.output(c.toVec3f());                     &  [r:0.30000001192092896, g:0.4000000059604645, b:0.5]                 &  [0.3, 0.4, 0.5]                         \\
+x&\textbf{var d=c;} // assign to other          &                                                                       &                                          \\
+ &core.output(d.toVec3f());                     &  [r:0.30000001192092896, g:0.4000000059604645, b:0.5]                 &  [0.3, 0.4, 0.5]                         \\\hline
+x&\textbf{var c2=new Color(.3, .4, .5);}        &                                                                       &                                          \\
+ &core.output(c2.toString());                   &  [0.3, 0.4, 0.5]                                                      &  Color(0x24a11712a60) [some address]     \\
+ &core.output(c2.toVec3f());                    &  [r:0.30000001192092896, g:0.4000000059604645, b:0.5]                 &  [0.3, 0.4, 0.5]                         \\
+x&\textbf{var d2=c2;} // assign to other        &                                                                       &                                          \\
+ &core.output(d2.toVec3f());                    &  [r:0.30000001192092896, g:0.4000000059604645, b:0.5]                 &  [0.3, 0.4, 0.5]                                            
+\end{tabular}}
+\caption{Use of V3d, V3f and Color wrapper classes. Only use the calls marked with \texttt{x} in scripts targeted at all versions of Stellarium.}
+\label{tab:scripting:Vec3f}
+\end{sidewaystable}
+
+
+
+As late as in version 0.19 we added \texttt{Vec3f} and later \texttt{Vec3d} data types to the Javascript environment. 
+These allowed addressing variables of C++ classes \texttt{Vec3f} or \texttt{Vec3d} with named sub-fields \texttt{r}, \texttt{g}, \texttt{b} 
+(if used to describe colors), or \texttt{x}, \texttt{y}, \texttt{z} (same data but contextually understood as 3D data).
+These functions may have pleased the JavaScript connoisseur when running scripts with Qt5-based builds of 
+Stellarium (series 0.*, now usually found on 32-bit systems), but we recommend to abstain from their use in new scripts.
+
+Qt6's scripting module cannot be extended that easily. The \texttt{Vec3d} and \texttt{Vec3f} data types are not directly scriptable, 
+but we can deal with method arguments of these types when they are mentioned in the API documentation (see \ref{sec:scripting:introduction}). 
+To access internals of these classes, we must use wrapper classes which bear different names:
+\begin{description}
+\item[\texttt{V3d}] can be used where \texttt{Vec3d} must be accessed.
+\item[\texttt{V3f}] can be used where \texttt{Vec3f} must be accessed.
+\item[\texttt{Color}] can be used where a \texttt{Vec3f} must be accessed which represents a color value.
+\end{description}
+
+They behave slightly different when run using Qt5 or Qt6, as shown in Table~\ref{tab:scripting:Vec3f}. If you aim for maximum compatibility between versions, 
+only use the calls which provide equal results in both series. This current state is far from optimal or even pretty, but a pragmatic solution that works. 
+We invite advanced developers to find a better solution that works with both Qt5 and Qt6.
+
 
 \section{Example: Retrograde motion of Mars}
 \label{sec:scripting:RetrogradeMotionOfMars}

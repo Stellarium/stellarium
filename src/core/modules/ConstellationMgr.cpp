@@ -817,7 +817,7 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 	// lines which look like records - we use the RE to extract the fields
 	// which will be available in recRx.capturedTexts()
 	// abbreviation is allowed to start with a dot to mark as "hidden".
-	static const QRegularExpression recRx("^\\s*(\\.?\\w+)\\s+\"(.*)\"\\s+_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
+	static const QRegularExpression recRx("^\\s*(\\.?\\S+)\\s+\"(.*)\"\\s+_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
 	static const QRegularExpression ctxRx("(.*)\",\\s*\"(.*)");
 
 	// keep track of how many records we processed.

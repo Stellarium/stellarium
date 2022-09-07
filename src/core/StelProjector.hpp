@@ -21,7 +21,6 @@
 #ifndef STELPROJECTOR_HPP
 #define STELPROJECTOR_HPP
 
-#include "StelProjectorType.hpp"
 #include "VecMath.hpp"
 #include "StelSphereGeometry.hpp"
 

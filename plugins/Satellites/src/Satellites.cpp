@@ -26,10 +26,8 @@
 #include "StelLocation.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTextureMgr.hpp"
-#include "StelIniParser.hpp"
 #include "Satellites.hpp"
 #include "Satellite.hpp"
 #include "SatellitesListModel.hpp"
@@ -497,7 +495,7 @@ StelObjectP Satellites::searchByInternationalDesignator(const QString &intlDesig
 		return Q_NULLPTR;
 
 	// If the search string is an international designator...
-	QRegularExpression regExp("^(\\d+)-(\\w*)\\s*$");
+	static const QRegularExpression regExp("^(\\d+)-(\\w*)\\s*$");
 	QRegularExpressionMatch match=regExp.match(intlDesignator);
 	if (match.hasMatch())
 	{
@@ -534,7 +532,7 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 	QString objw = objPrefix.toUpper();
 
 	QString numberPrefix;
-	QRegularExpression regExp("^(NORAD)\\s*(\\d+)\\s*$");
+	static const QRegularExpression regExp("^(NORAD)\\s*(\\d+)\\s*$");
 	QRegularExpressionMatch match=regExp.match(objw);
 	if (match.hasMatch())
 	{
@@ -546,7 +544,7 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 	}
 
 	QString designatorPrefix;
-	QRegularExpression regExp2("^(\\d+)-(\\w*)\\s*$");
+	static const QRegularExpression regExp2("^(\\d+)-(\\w*)\\s*$");
 	QRegularExpressionMatch match2=regExp2.match(objw);
 	if (match2.hasMatch())
 		designatorPrefix = QString("%1-%2").arg(match2.captured(1), match2.captured(2));
@@ -759,7 +757,7 @@ void Satellites::loadSettings()
 	// Backward compatibility: try to detect and read an old-style array.
 	// TODO: Assume that the user hasn't modified their conf in a stupid way?
 //	if (conf->contains("tle_url0")) // This can skip some operations...
-	QRegularExpression keyRE("^tle_url\\d+$");
+	static const QRegularExpression keyRE("^tle_url\\d+$");
 	QStringList urls;
 	for (const auto& key : conf->childKeys())
 	{
@@ -828,6 +826,7 @@ void Satellites::loadSettings()
 	Satellite::orbitLineSegments = conf->value("orbit_line_segments", 180).toInt();
 	Satellite::orbitLineFadeSegments = conf->value("orbit_fade_segments", 5).toInt();
 	Satellite::orbitLineSegmentDuration = conf->value("orbit_segment_duration", 5).toInt();
+	Satellite::orbitLineThickness = conf->value("orbit_line_thickness", 1).toInt();
 	setInvisibleSatelliteColor(Vec3f(conf->value("invisible_satellite_color", "0.2,0.2,0.2").toString()));
 	setTransitSatelliteColor(Vec3f(conf->value("transit_satellite_color", "0.0,0.0,0.0").toString()));
 	Satellite::timeRateLimit = conf->value("time_rate_limit", 1.0).toDouble();
@@ -923,6 +922,7 @@ void Satellites::saveSettingsToConfig()
 	conf->setValue("orbit_line_segments", Satellite::orbitLineSegments);
 	conf->setValue("orbit_fade_segments", Satellite::orbitLineFadeSegments);
 	conf->setValue("orbit_segment_duration", Satellite::orbitLineSegmentDuration);
+	conf->setValue("orbit_line_thickness", Satellite::orbitLineThickness);
 
 	conf->setValue("valid_epoch_age", Satellite::tleEpochAge);
 
@@ -1047,7 +1047,7 @@ const QString Satellites::readCatalogVersion()
 	if (map.contains("version"))
 	{
 		QString version = map.value("version").toString();
-		QRegularExpression vRx("(\\d+\\.\\d+\\.\\d+)");
+		static const QRegularExpression vRx("(\\d+\\.\\d+\\.\\d+)");
 		QRegularExpressionMatch match=vRx.match(version);
 		if (match.hasMatch())
 			jsonVersion = match.captured(1);
@@ -1055,7 +1055,7 @@ const QString Satellites::readCatalogVersion()
 	else if (map.contains("creator"))
 	{
 		QString creator = map.value("creator").toString();
-		QRegularExpression vRx(".*(\\d+\\.\\d+\\.\\d+).*");
+		static const QRegularExpression vRx(".*(\\d+\\.\\d+\\.\\d+).*");
 		QRegularExpressionMatch match=vRx.match(creator);
 		if (match.hasMatch())
 			jsonVersion = match.captured(1);
@@ -2156,6 +2156,16 @@ void Satellites::setOrbitLineFadeSegments(int s)
 	}
 }
 
+void Satellites::setOrbitLineThickness(int s)
+{
+	if (s != Satellite::orbitLineThickness)
+	{
+		Satellite::orbitLineThickness=s;
+		emit orbitLineThicknessChanged(s);
+		recalculateOrbitLines();
+	}
+}
+
 void Satellites::setOrbitLineSegmentDuration(int s)
 {
 	if (s != Satellite::orbitLineSegmentDuration)
@@ -2598,7 +2608,7 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 			
 			// The thing in square brackets after the name is actually
 			// Celestrak's "status code". Parse it!
-			QRegularExpression statusRx("\\s*\\[(\\D{1})\\]\\s*$", QRegularExpression::InvertedGreedinessOption );
+			static const QRegularExpression statusRx("\\s*\\[(\\D{1})\\]\\s*$", QRegularExpression::InvertedGreedinessOption );
 			QRegularExpressionMatch match;
 			if (line.indexOf(statusRx, 0, &match)>-1)
 				lastData.status = satOpStatusMap.value(match.captured(1).toUpper(), Satellite::StatusUnknown);
@@ -2611,9 +2621,11 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 		else
 		{
 			// TODO: Yet another place suitable for a standard TLE regex. --BM
-			if (QRegularExpression("^1 .*").match(line).hasMatch())
+			static const QRegularExpression reL1("^1 .*");
+			static const QRegularExpression reL2("^2 .*");
+			if (reL1.match(line).hasMatch())
 				lastData.first = line;
-			else if (QRegularExpression("^2 .*").match(line).hasMatch())
+			else if (reL2.match(line).hasMatch())
 			{
 				lastData.second = line;
 				// The Satellite Catalogue Number is the second number

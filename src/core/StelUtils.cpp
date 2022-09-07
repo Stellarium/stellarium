@@ -39,13 +39,13 @@
 
 namespace StelUtils
 {
-//! Return the full name of stellarium, e.g. "Stellarium 0.19.0"
+//! Return the full name of stellarium, e.g. "Stellarium 23.1"
 QString getApplicationName()
 {
-	return QString("Stellarium")+" "+StelUtils::getApplicationVersion();
+	return QString("Stellarium %1").arg(StelUtils::getApplicationPublicVersion());
 }
 
-//! Return the version of stellarium, e.g. "0.19.0"
+//! Return the version of stellarium, e.g. "0.23.1"
 QString getApplicationVersion()
 {
 #if defined(STELLARIUM_VERSION)
@@ -55,6 +55,12 @@ QString getApplicationVersion()
 #else
 	return QString(PACKAGE_VERSION);
 #endif
+}
+
+//! Return the public version of stellarium, e.g. "23.1"
+QString getApplicationPublicVersion()
+{
+	return QString(STELLARIUM_PUBLIC_VERSION);
 }
 
 QString getUserAgentString()
@@ -69,7 +75,7 @@ QString getUserAgentString()
 		os = "OpenBSD";
 
 	// Set user agent as "Stellarium/$version$ ($operating system$; $CPU architecture$)"
-	return QString("Stellarium/%1 (%2; %3)").arg(StelUtils::getApplicationVersion(), os, QSysInfo::currentCpuArchitecture());
+	return QString("Stellarium/%1 (%2; %3)").arg(StelUtils::getApplicationPublicVersion(), os, QSysInfo::currentCpuArchitecture());
 }
 
 QString getOperatingSystemInfo()

@@ -1228,7 +1228,7 @@ void BaseDevice::addMessage(const std::string &msg)
     messageLog.push_back(msg);
 
     if (mediator)
-        mediator->newMessage(this, messageLog.size() - 1);
+	mediator->newMessage(this, int(messageLog.size()) - 1);
 }
 
 std::string BaseDevice::messageQueue(int index) const

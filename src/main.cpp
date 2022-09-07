@@ -161,7 +161,7 @@ int main(int argc, char **argv)
 	qsrand(QDateTime::currentMSecsSinceEpoch());
 #endif
 	QCoreApplication::setApplicationName("stellarium");
-	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
+	QCoreApplication::setApplicationVersion(StelUtils::getApplicationPublicVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
 
@@ -232,6 +232,10 @@ int main(int argc, char **argv)
 	//vsync needs to be set on the default format for it to work
 	//fmt.setSwapInterval(0);
 
+	// avoid screen blanking on Intel UHD
+	if (argList.contains("--single-buffer"))
+		fmt.setSwapBehavior(QSurfaceFormat::SingleBuffer);
+
 	QSurfaceFormat::setDefaultFormat(fmt);
 
 	/////////////////////////////////////////////////////////////////////////////////
@@ -288,7 +292,7 @@ int main(int argc, char **argv)
 
 	// OK we start the full program.
 	// Print the console splash and get on with loading the program
-	QString versionLine = QString("This is %1 - %2").arg(StelUtils::getApplicationName(), STELLARIUM_URL);
+	QString versionLine = QString("This is %1 (v%2) - %3").arg(StelUtils::getApplicationName(), StelUtils::getApplicationVersion(), STELLARIUM_URL);
 	QString copyrightLine = STELLARIUM_COPYRIGHT;
 	int maxLength = qMax(versionLine.size(), copyrightLine.size());
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
@@ -338,7 +342,7 @@ int main(int argc, char **argv)
 		if (!restoreDefaultConfigFile)
 		{
 			QString version = confSettings->value("main/version", "0.0.0").toString();
-			if (version!=QString(PACKAGE_VERSION))
+			if (version!=QString(STELLARIUM_PUBLIC_VERSION))
 			{
 				QTextStream istr(&version);
 				char tmp;
@@ -357,7 +361,7 @@ int main(int argc, char **argv)
 				else
 				{
 					qDebug() << "Attempting to use an existing older config file.";
-					confSettings->setValue("main/version", QString(PACKAGE_VERSION)); // Upgrade version of config.ini
+					confSettings->setValue("main/version", QString(STELLARIUM_PUBLIC_VERSION)); // Upgrade version of config.ini
 					clearCache();
 					qDebug() << "Cleared cache and updated config.ini...";
 				}

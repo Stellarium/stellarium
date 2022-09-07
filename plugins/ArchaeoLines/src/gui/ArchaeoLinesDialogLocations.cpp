@@ -22,12 +22,10 @@
 #include "ui_archaeoLinesDialogLocations.h"
 
 #include "StelApp.hpp"
-#include "StelLocaleMgr.hpp"
+#include "StelGui.hpp"
 #include "StelLocationMgr.hpp"
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
-//#include "StelMainView.hpp"
-//#include "StelOpenGL.hpp"
 
 ArchaeoLinesDialogLocations::ArchaeoLinesDialogLocations()
 	: StelDialog("ArchaeoLinesLocations")

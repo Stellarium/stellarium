@@ -51,7 +51,7 @@
 
 // Define version of valid Stellarium DSO Catalog
 // This number must be incremented each time the content or file format of the stars catalogs change
-static const QString StellariumDSOCatalogVersion = "3.16";
+static const QString StellariumDSOCatalogVersion = "3.17";
 
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c; emit labelsColorChanged(c);}
 const Vec3f NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
@@ -352,6 +352,83 @@ void NebulaMgr::init()
 
 	setFlagUseTypeFilters(conf->value("astro/flag_use_type_filter", false).toBool());
 
+	loadCatalogFilters();
+
+	Nebula::TypeGroup typeFilters = Nebula::TypeGroup(Nebula::TypeNone);
+
+	conf->beginGroup("dso_type_filters");
+	if (conf->value("flag_show_galaxies", true).toBool())
+		typeFilters	|= Nebula::TypeGalaxies;
+	if (conf->value("flag_show_active_galaxies", true).toBool())
+		typeFilters	|= Nebula::TypeActiveGalaxies;
+	if (conf->value("flag_show_interacting_galaxies", true).toBool())
+		typeFilters	|= Nebula::TypeInteractingGalaxies;
+	if (conf->value("flag_show_open_clusters", true).toBool())
+		typeFilters	|= Nebula::TypeOpenStarClusters;
+	if (conf->value("flag_show_globular_clusters", true).toBool())
+		typeFilters	|= Nebula::TypeGlobularStarClusters;
+	if (conf->value("flag_show_bright_nebulae", true).toBool())
+		typeFilters	|= Nebula::TypeBrightNebulae;
+	if (conf->value("flag_show_dark_nebulae", true).toBool())
+		typeFilters	|= Nebula::TypeDarkNebulae;
+	if (conf->value("flag_show_planetary_nebulae", true).toBool())
+		typeFilters	|= Nebula::TypePlanetaryNebulae;
+	if (conf->value("flag_show_hydrogen_regions", true).toBool())
+		typeFilters	|= Nebula::TypeHydrogenRegions;
+	if (conf->value("flag_show_supernova_remnants", true).toBool())
+		typeFilters	|= Nebula::TypeSupernovaRemnants;
+	if (conf->value("flag_show_galaxy_clusters", true).toBool())
+		typeFilters	|= Nebula::TypeGalaxyClusters;
+	if (conf->value("flag_show_other", true).toBool())
+		typeFilters	|= Nebula::TypeOther;
+	conf->endGroup();
+
+	setTypeFilters(typeFilters);
+
+	// TODO: mechanism to specify which sets get loaded at start time.
+	// candidate methods:
+	// 1. config file option (list of sets to load at startup)
+	// 2. load all
+	// 3. flag in nebula_textures.fab (yuk)
+	// 4. info.ini file in each set containing a "load at startup" item
+	// For now (0.9.0), just load the default set
+	loadNebulaSet("default");
+
+	updateI18n();
+
+	StelApp *app = &StelApp::getInstance();
+	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(const QString&)));
+	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
+
+	addAction("actionShow_Nebulas", N_("Display Options"), N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
+	addAction("actionSet_Nebula_TypeFilterUsage", N_("Display Options"), N_("Toggle DSO type filter"), "flagTypeFiltersUsage");
+}
+
+void NebulaMgr::selectAllCatalogs()
+{
+	setCatalogFilters(Nebula::CatAll);
+}
+
+void NebulaMgr::selectStandardCatalogs()
+{
+	Nebula::CatalogGroup catalogs = Nebula::CatNone;
+	catalogs |= Nebula::CatNGC;
+	catalogs |= Nebula::CatIC;
+	catalogs |= Nebula::CatM;
+	setCatalogFilters(catalogs);
+}
+
+void NebulaMgr::selectNoneCatalogs()
+{
+	setCatalogFilters(Nebula::CatNone);
+}
+
+void NebulaMgr::loadCatalogFilters()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
 	Nebula::CatalogGroup catalogFilters = Nebula::CatalogGroup(Nebula::CatNone);
 
 	conf->beginGroup("dso_catalog_filters");
@@ -418,57 +495,49 @@ void NebulaMgr::init()
 	conf->endGroup();
 
 	// NB: nebula set loaded inside setter of catalog filter
-	setCatalogFilters(catalogFilters);
+	setCatalogFilters(int(catalogFilters));
+}
 
-	Nebula::TypeGroup typeFilters = Nebula::TypeGroup(Nebula::TypeNone);
+void NebulaMgr::storeCatalogFilters()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
 
-	conf->beginGroup("dso_type_filters");
-	if (conf->value("flag_show_galaxies", true).toBool())
-		typeFilters	|= Nebula::TypeGalaxies;
-	if (conf->value("flag_show_active_galaxies", true).toBool())
-		typeFilters	|= Nebula::TypeActiveGalaxies;
-	if (conf->value("flag_show_interacting_galaxies", true).toBool())
-		typeFilters	|= Nebula::TypeInteractingGalaxies;
-	if (conf->value("flag_show_open_clusters", true).toBool())
-		typeFilters	|= Nebula::TypeOpenStarClusters;
-	if (conf->value("flag_show_globular_clusters", true).toBool())
-		typeFilters	|= Nebula::TypeGlobularStarClusters;
-	if (conf->value("flag_show_bright_nebulae", true).toBool())
-		typeFilters	|= Nebula::TypeBrightNebulae;
-	if (conf->value("flag_show_dark_nebulae", true).toBool())
-		typeFilters	|= Nebula::TypeDarkNebulae;
-	if (conf->value("flag_show_planetary_nebulae", true).toBool())
-		typeFilters	|= Nebula::TypePlanetaryNebulae;
-	if (conf->value("flag_show_hydrogen_regions", true).toBool())
-		typeFilters	|= Nebula::TypeHydrogenRegions;
-	if (conf->value("flag_show_supernova_remnants", true).toBool())
-		typeFilters	|= Nebula::TypeSupernovaRemnants;
-	if (conf->value("flag_show_galaxy_clusters", true).toBool())
-		typeFilters	|= Nebula::TypeGalaxyClusters;
-	if (conf->value("flag_show_other", true).toBool())
-		typeFilters	|= Nebula::TypeOther;
+	// view dialog / DSO tag settings
+	const Nebula::CatalogGroup cflags = static_cast<Nebula::CatalogGroup>(getCatalogFilters());
+
+	conf->beginGroup("dso_catalog_filters");
+	conf->setValue("flag_show_ngc",		static_cast<bool>(cflags & Nebula::CatNGC));
+	conf->setValue("flag_show_ic",		static_cast<bool>(cflags & Nebula::CatIC));
+	conf->setValue("flag_show_m",		static_cast<bool>(cflags & Nebula::CatM));
+	conf->setValue("flag_show_c",		static_cast<bool>(cflags & Nebula::CatC));
+	conf->setValue("flag_show_b",		static_cast<bool>(cflags & Nebula::CatB));
+	conf->setValue("flag_show_vdb",		static_cast<bool>(cflags & Nebula::CatVdB));
+	conf->setValue("flag_show_sh2",		static_cast<bool>(cflags & Nebula::CatSh2));
+	conf->setValue("flag_show_rcw",		static_cast<bool>(cflags & Nebula::CatRCW));
+	conf->setValue("flag_show_lbn",		static_cast<bool>(cflags & Nebula::CatLBN));
+	conf->setValue("flag_show_ldn",		static_cast<bool>(cflags & Nebula::CatLDN));
+	conf->setValue("flag_show_cr",		static_cast<bool>(cflags & Nebula::CatCr));
+	conf->setValue("flag_show_mel",		static_cast<bool>(cflags & Nebula::CatMel));
+	conf->setValue("flag_show_ced",		static_cast<bool>(cflags & Nebula::CatCed));
+	conf->setValue("flag_show_pgc",		static_cast<bool>(cflags & Nebula::CatPGC));
+	conf->setValue("flag_show_ugc",		static_cast<bool>(cflags & Nebula::CatUGC));
+	conf->setValue("flag_show_arp",		static_cast<bool>(cflags & Nebula::CatArp));
+	conf->setValue("flag_show_vv",		static_cast<bool>(cflags & Nebula::CatVV));
+	conf->setValue("flag_show_pk",		static_cast<bool>(cflags & Nebula::CatPK));
+	conf->setValue("flag_show_png",		static_cast<bool>(cflags & Nebula::CatPNG));
+	conf->setValue("flag_show_snrg",		static_cast<bool>(cflags & Nebula::CatSNRG));
+	conf->setValue("flag_show_aco",		static_cast<bool>(cflags & Nebula::CatACO));
+	conf->setValue("flag_show_hcg",		static_cast<bool>(cflags & Nebula::CatHCG));
+	conf->setValue("flag_show_eso",		static_cast<bool>(cflags & Nebula::CatESO));
+	conf->setValue("flag_show_vdbh",		static_cast<bool>(cflags & Nebula::CatVdBH));
+	conf->setValue("flag_show_dwb",		static_cast<bool>(cflags & Nebula::CatDWB));
+	conf->setValue("flag_show_tr",		static_cast<bool>(cflags & Nebula::CatTr));
+	conf->setValue("flag_show_st",		static_cast<bool>(cflags & Nebula::CatSt));
+	conf->setValue("flag_show_ru",		static_cast<bool>(cflags & Nebula::CatRu));
+	conf->setValue("flag_show_vdbha",	static_cast<bool>(cflags & Nebula::CatVdBHa));
+	conf->setValue("flag_show_other",		static_cast<bool>(cflags & Nebula::CatOther));
 	conf->endGroup();
-
-	setTypeFilters(typeFilters);
-
-	// TODO: mechanism to specify which sets get loaded at start time.
-	// candidate methods:
-	// 1. config file option (list of sets to load at startup)
-	// 2. load all
-	// 3. flag in nebula_textures.fab (yuk)
-	// 4. info.ini file in each set containing a "load at startup" item
-	// For now (0.9.0), just load the default set
-	loadNebulaSet("default");
-
-	updateI18n();
-
-	StelApp *app = &StelApp::getInstance();
-	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-	connect(&app->getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(updateSkyCulture(const QString&)));
-	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
-
-	addAction("actionShow_Nebulas", N_("Display Options"), N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
-	addAction("actionSet_Nebula_TypeFilterUsage", N_("Display Options"), N_("Toggle DSO type filter"), "flagTypeFiltersUsage");
 }
 
 struct DrawNebulaFuncObject
@@ -488,9 +557,7 @@ struct DrawNebulaFuncObject
 			return;
 
 		Nebula* n = static_cast<Nebula*>(obj);
-		float mag = n->vMag;
-		if (mag>90.f)
-			mag = n->bMag;
+		float mag=n->getVisibilityLevelByMagnitude();
 
 		StelSkyDrawer *drawer = core->getSkyDrawer();
 		// filter out DSOs which are too dim to be seen (e.g. for bino observers)
@@ -519,20 +586,20 @@ struct DrawNebulaFuncObject
 	bool checkMaxMagHints;
 };
 
-void NebulaMgr::setCatalogFilters(Nebula::CatalogGroup cflags)
+void NebulaMgr::setCatalogFilters(int cflags)
 {
-	if(static_cast<int>(cflags) != static_cast<int>(Nebula::catalogFilters))
+	if(cflags != static_cast<int>(Nebula::catalogFilters))
 	{
-		Nebula::catalogFilters = cflags;
+		Nebula::catalogFilters = static_cast<Nebula::CatalogGroup>(cflags);
 		emit catalogFiltersChanged(cflags);
 	}
 }
 
-void NebulaMgr::setTypeFilters(Nebula::TypeGroup tflags)
+void NebulaMgr::setTypeFilters(int tflags)
 {
-	if(static_cast<int>(tflags) != static_cast<int>(Nebula::typeFilters))
+	if(tflags != static_cast<int>(Nebula::typeFilters))
 	{
-		Nebula::typeFilters = tflags;
+		Nebula::typeFilters = static_cast<Nebula::TypeGroup>(tflags);
 		emit typeFiltersChanged(tflags);
 	}
 }

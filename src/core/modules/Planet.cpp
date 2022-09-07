@@ -1523,48 +1523,48 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 	map.insert("type", getType());
 	map.insert("object-type", getObjectType());
 
-	if (onEarth && (getEnglishName()=="Moon"))
+	if (onEarth)
 	{
-		// Everything around libration:
-		QPair<Vec4d, Vec3d>phys=getSubSolarObserverPoints(core);
-		map.insert("libration_l", -phys.first[2]*M_180_PI); // longitude counted the other way!
-		map.insert("libration_b", phys.first[1]*M_180_PI);
-		map.insert("pa_axis", phys.first[3]*M_180_PI);
-		map.insert("subsolar_l", -phys.second[2]*M_180_PI);
-		map.insert("subsolar_b", phys.second[1]*M_180_PI);
-		map.insert("colongitude", StelUtils::fmodpos(450.0+phys.second[2]*M_PI_180, 360.));
-
-		QPair<double,double> magnitudes = getLunarEclipseMagnitudes();
-		map.insert("penumbral-eclipse-magnitude", magnitudes.first);
-		map.insert("umbral-eclipse-magnitude", magnitudes.second);
-	}
-	else if (onEarth && (getEnglishName()!="Sun"))
-	{
-		QPair<Vec4d, Vec3d>phys=getSubSolarObserverPoints(core);
-		map.insert("central_l", phys.first[2]*M_180_PI);
-		map.insert("central_b", phys.first[1]*M_180_PI);
-		map.insert("pa_axis", phys.first[3]*M_180_PI);
-		map.insert("subsolar_l", phys.second[2]*M_180_PI);
-		map.insert("subsolar_b", phys.second[1]*M_180_PI);
-		// some users require not "modern elongation" but just the DeltaLambda (GH:#1786)
-		double raSun, deSun, ra, de, lSun, ecLong, bSun, ecLat;
-		double obl=earth->getRotObliquity(core->getJDE());
-		if (core->getUseNutation())
+		if (getEnglishName()!="Sun")
 		{
-			double dEps, dPsi;
-			getNutationAngles(core->getJDE(), &dPsi, &dEps);
-			obl+=dEps;
+			QPair<Vec4d, Vec3d>phys=getSubSolarObserverPoints(core);
+			map.insert("central_l", phys.first[2]*M_180_PI);
+			map.insert("central_b", phys.first[1]*M_180_PI);
+			map.insert("pa_axis", phys.first[3]*M_180_PI);
+			map.insert("subsolar_l", phys.second[2]*M_180_PI);
+			map.insert("subsolar_b", phys.second[1]*M_180_PI);
+			// some users require not "modern elongation" but just the DeltaLambda (GH:#1786)
+			double raSun, deSun, ra, de, lSun, ecLong, bSun, ecLat;
+			double obl=earth->getRotObliquity(core->getJDE());
+			if (core->getUseNutation())
+			{
+				double dEps, dPsi;
+				getNutationAngles(core->getJDE(), &dPsi, &dEps);
+				obl+=dEps;
+			}
+			StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+			StelUtils::rectToSphe(&ra, &de, getEquinoxEquatorialPos(core));
+			StelUtils::equToEcl(raSun, deSun, obl, &lSun, &bSun);
+			StelUtils::equToEcl(ra, de, obl, &ecLong, &ecLat);
+			double elongAlongEcliptic = StelUtils::fmodpos(ecLong-lSun, M_PI*2.);
+			if (elongAlongEcliptic > M_PI) elongAlongEcliptic-=2.*M_PI;
+			map.insert("ecl-elongation", elongAlongEcliptic);
+			map.insert("ecl-elongation-dms", StelUtils::radToDmsStr(elongAlongEcliptic));
+			map.insert("ecl-elongation-deg", StelUtils::radToDecDegStr(elongAlongEcliptic));
+
+			if (getEnglishName()=="Moon")
+			{
+				map.insert("libration_l", -phys.first[2]*M_180_PI); // longitude counted the other way!
+				map.insert("libration_b", phys.first[1]*M_180_PI);
+				map.insert("colongitude", StelUtils::fmodpos(450.0+phys.second[2]*M_PI_180, 360.));
+
+				QPair<double,double> magnitudes = getLunarEclipseMagnitudes();
+				map.insert("penumbral-eclipse-magnitude", magnitudes.first);
+				map.insert("umbral-eclipse-magnitude", magnitudes.second);
+			}
 		}
-		StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
-		StelUtils::rectToSphe(&ra, &de, getEquinoxEquatorialPos(core));
-		StelUtils::equToEcl(raSun, deSun, obl, &lSun, &bSun);
-		StelUtils::equToEcl(ra, de, obl, &ecLong, &ecLat);
-		double elongAlongEcliptic = StelUtils::fmodpos(ecLong-lSun, M_PI*2.);
-		if (elongAlongEcliptic > M_PI) elongAlongEcliptic-=2.*M_PI;
-		map.insert("ecl-elongation", elongAlongEcliptic);
-		map.insert("ecl-elongation-dms", StelUtils::radToDmsStr(elongAlongEcliptic));
-		map.insert("ecl-elongation-deg", StelUtils::radToDecDegStr(elongAlongEcliptic));
 	}
+
 	return map;
 }
 

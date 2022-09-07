@@ -28,6 +28,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelLocationMgr.hpp"
 #include "VecMath.hpp"
+#include "StelUtils.hpp"
 
 #include <QDebug>
 #include <QDir>

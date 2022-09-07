@@ -23,8 +23,6 @@
 #include "StelObjectModule.hpp"
 #include "Satellite.hpp"
 #include "StelFader.hpp"
-#include "StelGui.hpp"
-#include "StelDialog.hpp"
 #include "StelLocation.hpp"
 
 #include <QDateTime>
@@ -162,6 +160,7 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(int  orbitLineSegments		READ getOrbitLineSegments		WRITE setOrbitLineSegments		NOTIFY orbitLineSegmentsChanged)
 	Q_PROPERTY(int  orbitLineFadeSegments		READ getOrbitLineFadeSegments		WRITE setOrbitLineFadeSegments		NOTIFY orbitLineFadeSegmentsChanged)
 	Q_PROPERTY(int  orbitLineSegmentDuration	READ getOrbitLineSegmentDuration	WRITE setOrbitLineSegmentDuration	NOTIFY orbitLineSegmentDurationChanged)
+	Q_PROPERTY(int  orbitLineThickness		READ getOrbitLineThickness		WRITE setOrbitLineThickness		NOTIFY orbitLineThicknessChanged)
 	Q_PROPERTY(int  tleEpochAgeDays			READ getTleEpochAgeDays			WRITE setTleEpochAgeDays		NOTIFY tleEpochAgeDaysChanged)
 	Q_PROPERTY(Vec3f invisibleSatelliteColor	READ getInvisibleSatelliteColor		WRITE setInvisibleSatelliteColor	NOTIFY invisibleSatelliteColorChanged)
 	Q_PROPERTY(Vec3f transitSatelliteColor		READ getTransitSatelliteColor		WRITE setTransitSatelliteColor		NOTIFY transitSatelliteColorChanged)
@@ -430,6 +429,7 @@ signals:
 	void autoRemoveEnabledChanged(bool b);
 	void orbitLineSegmentsChanged(int i);
 	void orbitLineFadeSegmentsChanged(int i);
+	void orbitLineThicknessChanged(int i);
 	void orbitLineSegmentDurationChanged(int i);
 	void tleEpochAgeDaysChanged(int i);
 	void invisibleSatelliteColorChanged(Vec3f);
@@ -588,6 +588,11 @@ public slots:
 	int getOrbitLineFadeSegments() {return Satellite::orbitLineFadeSegments;}
 	//! set number of fading segments at end of orbit
 	void setOrbitLineFadeSegments(int s);
+
+	//! return the thickness of orbit
+	int getOrbitLineThickness() {return Satellite::orbitLineThickness;}
+	//! set the thickness of orbit
+	void setOrbitLineThickness(int s);
 
 	//! return duration of a single segments
 	int getOrbitLineSegmentDuration() {return Satellite::orbitLineSegmentDuration;}

@@ -1,5 +1,5 @@
 [main]
-version                             = @PACKAGE_VERSION@
+version                             = @STELLARIUM_PUBLIC_VERSION@
 invert_screenshots_colors           = false
 
 [plugins_load_at_startup]

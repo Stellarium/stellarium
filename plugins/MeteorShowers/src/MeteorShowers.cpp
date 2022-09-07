@@ -23,7 +23,7 @@
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelTextureMgr.hpp"
+#include "StelPainter.hpp"
 #include "StelUtils.hpp"
 #include "SolarSystem.hpp"
 

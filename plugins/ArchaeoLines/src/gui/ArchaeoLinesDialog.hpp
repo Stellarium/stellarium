@@ -21,8 +21,6 @@
 #define ARCHAEOLINESDIALOG_HPP
 
 #include "StelDialog.hpp"
-#include "StelGui.hpp"
-#include "StelTranslator.hpp"
 
 #include <QString>
 #include <QColor>

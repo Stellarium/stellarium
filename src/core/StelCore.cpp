@@ -1282,13 +1282,18 @@ double StelCore::getUTCOffset(const double JD) const
 	StelLocation loc = getCurrentLocation();
 	QString tzName = getCurrentTimeZone();
 	QTimeZone tz(tzName.toUtf8());
-	if (!tz.isValid() && !QString("LMST LTST system_default").contains(tzName))
+	// We must fight a bug in Qt6.2 on Linux. For some reason tz.isValid() is true even for our self-named zones LMST,LTST,system_default.
+	// We must use an intermediate Boolean which we set to false where needed.
+	bool tzValid=tz.isValid();
+	if (QString("LMST LTST system_default").contains(tzName))
+		tzValid=false;
+	if (!tzValid && !QString("LMST LTST system_default").contains(tzName))
 	{
 		qWarning() << "Invalid timezone: " << tzName;
 	}
 
 	qint64 shiftInSeconds = 0;
-	if (tzName=="system_default" || (loc.planetName=="Earth" && !tz.isValid() && !QString("LMST LTST").contains(tzName)))
+	if (tzName=="system_default" || (loc.planetName=="Earth" && !tzValid && !QString("LMST LTST").contains(tzName)))
 	{
 		QDateTime local = universal.toLocalTime();
 		//Both timezones should be interpreted as UTC because secsTo() converts both
@@ -1303,7 +1308,7 @@ double StelCore::getUTCOffset(const double JD) const
 	else
 	{
 		// The first adoption of a standard time was on December 1, 1847 in Great Britain
-		if (tz.isValid() && loc.planetName=="Earth" && (JD>=StelCore::TZ_ERA_BEGINNING || getUseCustomTimeZone()))
+		if (tzValid && loc.planetName=="Earth" && (JD>=StelCore::TZ_ERA_BEGINNING || getUseCustomTimeZone()))
 		{
 			if (getUseDST())
 				shiftInSeconds = tz.offsetFromUtc(universal);
@@ -1327,6 +1332,7 @@ double StelCore::getUTCOffset(const double JD) const
 		if (tzName=="LTST")
 			shiftInSeconds += qRound(getSolutionEquationOfTime()*60);
 	}
+	//qDebug() << "ShiftInSeconds:" << shiftInSeconds;
 	#ifdef Q_OS_WIN
 	// A dirty hack for report: https://github.com/Stellarium/stellarium/issues/686
 	// TODO: switch to IANA TZ on all operating systems
@@ -1337,7 +1343,7 @@ double StelCore::getUTCOffset(const double JD) const
 	// Extraterrestrial: Either use the configured Terrestrial timezone, or even a pseudo-LMST based on planet's rotation speed?
 	if (loc.planetName!="Earth")
 	{
-		if (tz.isValid() && (JD>=StelCore::TZ_ERA_BEGINNING || getUseCustomTimeZone()))
+		if (tzValid && (JD>=StelCore::TZ_ERA_BEGINNING || getUseCustomTimeZone()))
 		{
 			if (getUseDST())
 				shiftInSeconds = tz.offsetFromUtc(universal);
@@ -1965,6 +1971,7 @@ void StelCore::registerMathMetaTypes()
 	qRegisterMetaTypeStreamOperators<Mat3f>();
 #endif
 	//for debugging QVariants with these types, it helps if we register the string converters
+	// This is also required for QJSEngine.
 	QMetaType::registerConverter(&Vec2d::toString);
 	QMetaType::registerConverter(&Vec2f::toString);
 	QMetaType::registerConverter(&Vec2i::toString);
@@ -1974,6 +1981,19 @@ void StelCore::registerMathMetaTypes()
 	QMetaType::registerConverter(&Vec4d::toString);
 	QMetaType::registerConverter(&Vec4f::toString);
 	QMetaType::registerConverter(&Vec4i::toString);
+
+	//Hopefully this works to convert types in scripts when given as String "[...]"
+	// Maybe even make brackets optional!
+	// Nope, does not work for QJSEngine.
+//	QMetaType::registerConverter<QString, Vec2d>(&Vec2d::fromBracketedString);
+//	QMetaType::registerConverter<QString, Vec2f>(&Vec2f::fromBracketedString);
+//	QMetaType::registerConverter<QString, Vec2i>(&Vec2i::fromBracketedString);
+//	QMetaType::registerConverter<QString, Vec3d>(&Vec3d::fromBracketedString);
+//	QMetaType::registerConverter<QString, Vec3f>(&Vec3f::fromBracketedString);
+//	QMetaType::registerConverter<QString, Vec3i>(&Vec3i::fromBracketedString);
+//	QMetaType::registerConverter<QString, Vec4d>(&Vec4d::fromBracketedString);
+//	QMetaType::registerConverter<QString, Vec4f>(&Vec4f::fromBracketedString);
+//	QMetaType::registerConverter<QString, Vec4i>(&Vec4i::fromBracketedString);
 }
 
 void StelCore::setStartupTimeMode(const QString& s)
@@ -2686,7 +2706,7 @@ static bool iau_constlineVecInitialized=false;
 
 // File iau_constellations_spans.dat is converted from file data.dat from ADC catalog VI/42.
 // We converted back to HH:MM:SS format to avoid the inherent rounding errors present in that file (Bug LP:#1690615).
-QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
+QString StelCore::getIAUConstellation(const Vec3d &positionEqJnow) const
 {
 	// Precess positionJ2000 to 1875.0
 	const Vec3d pos1875=j2000ToJ1875(equinoxEquToJ2000(positionEqJnow, RefractionOff));

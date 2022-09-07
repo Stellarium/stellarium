@@ -18,8 +18,6 @@
  */
 
 #include "StelGuiBase.hpp"
-#include "StelMainView.hpp"
-#include "StelTranslator.hpp"
 #include <QAction>
 
 

@@ -28,10 +28,10 @@
 #include <QLineEdit>
 
 // this is adapted from DummyDialog.cpp
-class CustomProxy : public QGraphicsProxyWidget
+class DummyCustomProxy : public QGraphicsProxyWidget
 {
 	public:
-		CustomProxy(QGraphicsItem *parent = Q_NULLPTR, Qt::WindowFlags wFlags = Qt::WindowFlags()) : QGraphicsProxyWidget(parent, wFlags)
+		DummyCustomProxy(QGraphicsItem *parent = Q_NULLPTR, Qt::WindowFlags wFlags = Qt::WindowFlags()) : QGraphicsProxyWidget(parent, wFlags)
 		{
 			setFocusPolicy(Qt::StrongFocus);
 		}
@@ -99,7 +99,7 @@ void DummyDialog::setVisible(bool v)
 		connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
 		createDialogContent();
 		
-		proxy = new CustomProxy(Q_NULLPTR, Qt::Tool);
+		proxy = new DummyCustomProxy(Q_NULLPTR, Qt::Tool);
 		proxy->setWidget(dialog);
 		StelMainView::getInstance().scene()->addItem(proxy);
 		// Invisible frame around the window to make resizing easier

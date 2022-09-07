@@ -28,7 +28,6 @@
 
 #include "StelCore.hpp"
 #include "StelTranslator.hpp"
-#include "StelUtils.hpp"
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelFader.hpp"

@@ -212,8 +212,10 @@ public slots:
 	void decreaseScriptSpeed();
 	void setRealScriptSpeed();
 	void stopScript();
+	#ifndef ENABLE_SCRIPT_QML
 	void pauseScript();
 	void resumeScript();
+	#endif
 #endif
 
 	void displayAllInfo();

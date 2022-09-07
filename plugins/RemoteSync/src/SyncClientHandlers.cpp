@@ -23,7 +23,6 @@
 #include "SyncMessages.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelTranslator.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelObserver.hpp"
 #include "StelObjectMgr.hpp"

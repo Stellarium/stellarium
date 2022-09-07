@@ -6,6 +6,6 @@ LandscapeMgr.setCurrentLandscapeName("Ocean");
 LandscapeMgr.setFlagLandscape(true);
 LandscapeMgr.setFlagAtmosphere(true);
 GridLinesMgr.setFlagHorizonLine(true);
-LandscapeMgr.setFlagCardinalsPoints(true);
+LandscapeMgr.setFlagCardinalPoints(true);
 core.setDate("2020-01-13T07:12:34");
 core.setTimeRate(0);
