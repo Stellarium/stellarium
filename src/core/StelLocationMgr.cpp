@@ -1048,8 +1048,8 @@ void StelLocationMgr::positionUpdated(QGeoPositionInfo info)
 		loc.isUserLocation = true;
 		loc.planetName = "Earth";
 		loc.name = QString("GPS %1%2 %3%4")
-			.arg(loc.latitude<0?"S":"N").arg(floor(.5+abs(loc.latitude)))
-			.arg(loc.longitude<0?"W":"E").arg(floor(.5+abs(loc.longitude)));
+			.arg(loc.latitude<0?"S":"N").arg(qRound(abs(loc.latitude)))
+			.arg(loc.longitude<0?"W":"E").arg(qRound(abs(loc.longitude)));
 		core->moveObserverTo(loc, 0.0, 0.0);
 		emit gpsQueryFinished(true);
 	}
