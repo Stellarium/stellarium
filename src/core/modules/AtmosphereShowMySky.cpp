@@ -224,7 +224,7 @@ void AtmosphereShowMySky::loadShaders()
 	// Shader program that converts XYZW texture to sRGB image
 	{
 		static constexpr char vShaderSrc[]=R"(
-#version 130
+#version 330
 in vec4 vertex;
 out vec2 texCoord;
 void main()
@@ -504,9 +504,7 @@ void AtmosphereShowMySky::regenerateGrid()
 		for(int x=0; x<=gridMaxX; ++x)
 		{
 			Vec2f& v=posGrid[y*(1+gridMaxX)+x];
-			v[0] = viewportLeft + (x == 0 ? 0
-										  : x == gridMaxX ? width
-														  : (x-0.5*(y&1))*stepX);
+			v[0] = viewportLeft + (x == 0 ? 0 : x == gridMaxX ? width : (x-0.5*(y&1))*stepX);
 			v[1] = viewportBottom+y*stepY;
 		}
 	}
@@ -732,8 +730,8 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 	prj->project(p1,s1);
 	float df=qAbs(prevFov-f1)/(prevFov+f1), di=qAbs(prevFad-i1);
 	double dp=(prevPos-p1).length(), ds=(prevSun-s1).length();
-	if (df+di+dp<10e-3 && ds<1)
-		return;
+//	if (df+di+dp<10e-3 && ds<1)
+//		return;
 
 	// qDebug() << "Fov" << df << "Fad" << di << "Pos" << dp << "Sun" << ds;
 	prevFov=f1;
