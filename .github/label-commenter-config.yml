@@ -44,10 +44,12 @@ labels:
     labeled:
       issue:
         body: This is a good task for the community to participate in the contribution into Stellarium. Who wants to help us?
-  - name: more info
+  - name: "need more info"
     labeled:
       issue:
-        body: The hardware info, steps of reproduction and log file are really important and help us resolve over 90% issues fast. Of course, in some specific cases we need more data, but we ask the required data separately...
+        body: |
+          Hello @{{ issue.user.login }}, we need more info and feedback!\n\n
+          The hardware info, steps of reproduction and log file are really important and help us resolve over 90% issues fast. Of course, in some specific cases we need more data, but we ask the required data separately...
   - name: enhancement
     labeled:
       issue:
