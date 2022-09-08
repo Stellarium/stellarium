@@ -549,15 +549,18 @@ IF(APPLE)
              OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/macdeployqt.log\"
              ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/macdeployqt.err\"
          )
-         MESSAGE(\"Running macdeployqt...\")
+	 MESSAGE(STATUS \"Running macdeployqt...\")
         "
      )
+    IF(ENABLE_SHOWMYSKY AND EXISTS ${ShowMySky_LIBRARY})
+        INSTALL(FILES ${ShowMySky_LIBRARY} DESTINATION Frameworks)
+    ENDIF()
     INSTALL(CODE
         "
         EXECUTE_PROCESS(
              COMMAND \"../../util/macfix.sh\"
         )
-        MESSAGE(\"Fixing Qt' paths for macOS bundle...\")
+	MESSAGE(STATUS \"Fixing Qt' paths for macOS bundle...\")
         "
      )
 ELSE()
@@ -584,7 +587,7 @@ IF(WIN32)
              OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.log\"
              ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.err\"
          )
-         MESSAGE(\"Running windeployqt...\")
+	 MESSAGE(STATUS \"Running windeployqt...\")
         "
      )
      IF(GENERATE_STELMAINLIB)
