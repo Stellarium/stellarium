@@ -61,12 +61,7 @@ labels:
           Hello @{{ issue.user.login }}! 
 
           Thank you for suggesting this enhancement.
-      pr:
-        body: |
-          Hello @{{ pull_request.user.login }}! 
-
-          Thank you for this enhancement.
-  - name: feature request
+  - name: feature
     labeled:
       issue:
         body: |
