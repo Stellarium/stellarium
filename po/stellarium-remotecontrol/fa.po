@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-06-19 21:37+0700\n"
+"POT-Creation-Date: 2022-08-14 15:23+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
 "Last-Translator: cardinot <mcardinot@gmail.com>, 2022\n"
 "Language-Team: Persian (https://www.transifex.com/stellarium/teams/80998/fa/)\n"
@@ -108,8 +108,8 @@ msgid "Could not retrieve landscape list"
 msgstr "امکان بازیابی فهرست منظر زمینی وجود ندارد"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:638
-#: index.html:695 tablet7in.html:733 tablet7in.html:793
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:673
+#: index.html:735 tablet7in.html:733 tablet7in.html:793
 msgid "-none-"
 msgstr "هیچکدام"
 
@@ -303,63 +303,71 @@ msgstr "پلوتون"
 msgid "Current selection"
 msgstr "انتخاب کنونی"
 
-#: index.html:268 tablet7in.html:321
+#: index.html:269 tablet7in.html:321
 msgid "Milky Way brightness:"
 msgstr "روشنایی راه شیری:"
 
-#: index.html:272 tablet7in.html:333
+#: index.html:274 tablet7in.html:333
 msgid "Digitized Sky Survey"
 msgstr "بررسی دیجیتالی آسمان"
 
-#: index.html:273 tablet7in.html:334
+#: index.html:275 tablet7in.html:334
 msgid "HiPS Survey"
 msgstr "بررسی HiPS"
 
-#: index.html:286 tablet7in.html:350
+#: index.html:288 tablet7in.html:350
 msgid "Show planet markers"
 msgstr "نشان دادن نشانگر سیاره‌ها"
 
-#: index.html:287 tablet7in.html:351
+#: index.html:289 tablet7in.html:351
 msgid "Show planet orbits"
 msgstr "نمایش مدار سیاره‌ ها"
 
-#: index.html:288 tablet7in.html:352
+#: index.html:290 tablet7in.html:352
 msgid "Show planet orbits only"
 msgstr "فقط نمایش مدار سیاره ها"
 
-#: index.html:289 tablet7in.html:353
+#: index.html:291 tablet7in.html:353
 msgid "Show orbit for selected planet"
 msgstr "نمایش مدار سیاره انتخاب شده"
 
-#: index.html:290 tablet7in.html:354
+#: index.html:292 tablet7in.html:354
 msgid "Show planet trails"
 msgstr "نمایش دنباله سیاره ها"
 
-#: index.html:291 tablet7in.html:355
+#: index.html:293 tablet7in.html:355
 msgid "Show trail only for selected planet"
 msgstr "نمایش دنباله فقط برای سیاره انتخاب شده"
 
-#: index.html:294 tablet7in.html:359
+#: index.html:298 tablet7in.html:359
 msgid "Scale Moon:"
 msgstr ""
 
-#: index.html:295 tablet7in.html:363
+#: index.html:299
+msgid "Scale Sun:"
+msgstr ""
+
+#: index.html:300
+msgid "Scale Planets:"
+msgstr ""
+
+#: index.html:301 tablet7in.html:363
 msgid "Scale minor bodies:"
 msgstr ""
 
-#: index.html:318 tablet7in.html:404
+#: index.html:326 tablet7in.html:404
 msgid "Extinction Coefficient:"
 msgstr "ضریب خاموشی:"
 
-#: index.html:322 tablet7in.html:409
+#: index.html:330 tablet7in.html:409
 msgid "Shooting Stars"
 msgstr "شهاب ها"
 
-#: index.html:323 tablet7in.html:410
+#: index.html:331 tablet7in.html:410
 msgid "ZHR:"
 msgstr "آهنگ بارش شهاب ساعتی"
 
-#: index.html:368 tablet7in.html:463
+#: index.html:373 tablet7in.html:463
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
@@ -367,156 +375,172 @@ msgstr ""
 "دوایر لحظه ای حاصل از حرکت زمین حول محوری که در راستای قطبین دایره البروج "
 "است.فقط برروی زمین قابل نمایش است."
 
-#: index.html:378 tablet7in.html:472
+#: index.html:389
+msgid "Center"
+msgstr ""
+
+#: index.html:407 tablet7in.html:472
 msgid "Solstices"
 msgstr "انقلابین"
 
-#: index.html:379 tablet7in.html:473
+#: index.html:408 tablet7in.html:473
 msgid "Crossquarters"
 msgstr "حدوسط اعتدالین و انقلابین"
 
-#: index.html:380 tablet7in.html:474
+#: index.html:409 tablet7in.html:474
 msgid "Major Standstill"
 msgstr "وقفه بزرگ"
 
-#: index.html:381 tablet7in.html:475
+#: index.html:410 tablet7in.html:475
 msgid "Minor Standstill"
 msgstr "وقفه کوچک"
 
-#: index.html:390 tablet7in.html:484
+#: index.html:420 tablet7in.html:484
 msgid "Current Planet:"
 msgstr "سیاره کنونی :"
 
-#: index.html:426 tablet7in.html:524
+#: index.html:458 tablet7in.html:524
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr "کاتالوگ سحابی ها (ون دن برگ، 1966)"
 
-#: index.html:444 tablet7in.html:542
+#: index.html:505 tablet7in.html:542
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
 msgstr ""
 
-#: index.html:512
+#: index.html:543
 msgid "Objects without identifier"
 msgstr "اجسام بدون شاخص"
 
-#: index.html:537 tablet7in.html:616
+#: index.html:561
+msgid "Open Star clusters"
+msgstr ""
+
+#: index.html:562
+msgid "Globular Star clusters"
+msgstr ""
+
+#: index.html:569 tablet7in.html:616
 msgid "Bright Nebulae"
 msgstr "سحابی‌ روشن"
 
-#: index.html:538 tablet7in.html:617
+#: index.html:570 tablet7in.html:617
 msgid "Dark Nebulae"
 msgstr "سحابی‌تاریک"
 
-#: index.html:539 tablet7in.html:618
+#: index.html:571 tablet7in.html:618
 msgid "Planetary Nebulae"
 msgstr "سحابی سیاره‌نما"
 
-#: index.html:548 tablet7in.html:627
+#: index.html:573
+msgid "Galaxy clusters"
+msgstr ""
+
+#: index.html:581 tablet7in.html:627
 msgid "Labels and markers"
 msgstr "برچسب ها و نشانه ها"
 
-#: index.html:573 tablet7in.html:652
+#: index.html:606 tablet7in.html:652
 msgid "Use associated planet and position"
 msgstr "از سیاره و موقعیت مرتبط استفاده کنید"
 
-#: index.html:582 tablet7in.html:661
+#: index.html:617 tablet7in.html:661
 msgid "Show illumination"
 msgstr "نمایش روشنایى"
 
-#: index.html:587 tablet7in.html:667
+#: index.html:622 tablet7in.html:667
 msgid "Current landscape"
 msgstr "منظر کنونی"
 
-#: index.html:599 tablet7in.html:680
+#: index.html:634 tablet7in.html:680
 msgid "Show lines with thickness"
 msgstr "نمایش خطوط با ذخامت"
 
-#: index.html:604 tablet7in.html:685
+#: index.html:639 tablet7in.html:685
 msgid "Show asterisms with thickness"
 msgstr "نمایش صورت های فلکی با ذخامت"
 
-#: index.html:608 tablet7in.html:689
+#: index.html:643 tablet7in.html:689
 msgid "Show ray helpers with thickness"
 msgstr ""
 
-#: index.html:616 tablet7in.html:699
+#: index.html:651 tablet7in.html:699
 msgid "Show boundaries with thickness"
 msgstr "نمایش مرز ها با ذخامت"
 
-#: index.html:621 tablet7in.html:704
+#: index.html:656 tablet7in.html:704
 msgid "Constellation selection isolated"
 msgstr "صورت فلکی منفرد"
 
-#: index.html:625 tablet7in.html:708
+#: index.html:660 tablet7in.html:708
 msgid "Current sky culture"
 msgstr "فرهنگ آسمان کنونی"
 
-#: index.html:638 tablet7in.html:733
+#: index.html:673 tablet7in.html:733
 msgid "Active script:"
 msgstr "اسکریپت فعال :"
 
-#: index.html:639 tablet7in.html:734
+#: index.html:674 tablet7in.html:734
 msgid "Run selected script"
 msgstr "اجرای اسکریپت انتخاب شده"
 
-#: index.html:639 tablet7in.html:734
+#: index.html:674 tablet7in.html:734
 msgid "Stop current script"
 msgstr "توقف اسکریپت کنونی"
 
-#: index.html:644 tablet7in.html:41 tablet7in.html:718
+#: index.html:679 tablet7in.html:41 tablet7in.html:718
 msgid "Actions"
 msgstr "فعالیتها"
 
-#: index.html:648 tablet7in.html:722
+#: index.html:683 tablet7in.html:722
 msgid "Run/toggle action"
 msgstr "اجرا/کنترل عملیات"
 
-#: index.html:659 tablet7in.html:757
+#: index.html:694 tablet7in.html:757
 msgid "Planet map"
 msgstr "نقشه سیاره"
 
-#: index.html:660 tablet7in.html:758
+#: index.html:695 tablet7in.html:758
 msgid "Planet map pointer"
 msgstr "نشانگر نقشه سیاره"
 
-#: index.html:664 tablet7in.html:762
+#: index.html:699 tablet7in.html:762
 msgid "Type to search location"
 msgstr "نوشتن برای جستجوی موقعیت"
 
-#: index.html:693 tablet7in.html:791
+#: index.html:733 tablet7in.html:791
 msgid "Interaction"
 msgstr "اثر مقابل"
 
-#: index.html:694 tablet7in.html:792
+#: index.html:734 tablet7in.html:792
 msgid "Current scene:"
 msgstr "صحنه فعلی:"
 
-#: index.html:697 tablet7in.html:795
+#: index.html:737 tablet7in.html:795
 msgid "View controls"
 msgstr "نمایش کنترل ها"
 
-#: index.html:703 tablet7in.html:801
+#: index.html:743 tablet7in.html:801
 msgid "Movement controls"
 msgstr "کنترل جابجایی"
 
-#: index.html:715 tablet7in.html:813
+#: index.html:755 tablet7in.html:813
 msgid "Torchlight"
 msgstr "چراغ قوه"
 
-#: index.html:722 tablet7in.html:820
+#: index.html:762 tablet7in.html:820
 msgid "Scene selection"
 msgstr "انتخاب صحنه"
 
-#: index.html:726 tablet7in.html:824
+#: index.html:766 tablet7in.html:824
 msgid "Load selected scene"
 msgstr "بارگیری صحنه انتخاب شده"
 
-#: index.html:750 tablet7in.html:849
+#: index.html:790 tablet7in.html:849
 msgid "No response from server"
 msgstr "عدم پاسخ ازطرف سرور"
 
-#: index.html:751 tablet7in.html:850
+#: index.html:791 tablet7in.html:850
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "عدم پاسخ از طرف سروربمدت چندثانیه. آیا استلاریوم همچنان درحال اجرااست؟"

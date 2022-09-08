@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-09-02 20:03+0700\n"
+"POT-Creation-Date: 2022-09-06 10:01+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,14 +58,14 @@ msgstr ""
 #: src/core/modules/ConstellationMgr.cpp:131 src/core/modules/StarMgr.cpp:461
 #: src/core/modules/GridLinesMgr.cpp:1885
 #: src/core/modules/SpecialMarkersMgr.cpp:265
-#: src/core/modules/LandscapeMgr.cpp:586
+#: src/core/modules/LandscapeMgr.cpp:741
 #: src/core/modules/NomenclatureMgr.cpp:79 src/core/modules/NebulaMgr.cpp:404
 #: src/core/modules/NebulaMgr.cpp:405 src/core/modules/SolarSystem.cpp:297
 #: src/core/modules/MilkyWay.cpp:85 src/core/modules/ZodiacalLight.cpp:87
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
 #: src/core/StelApp.cpp:648 src/core/StelCore.cpp:269
 #: src/core/StelSkyLayerMgr.cpp:85 src/core/StelSkyLayerMgr.cpp:86
-#: src/StelMainView.cpp:842
+#: src/StelMainView.cpp:856
 msgid "Display Options"
 msgstr ""
 
@@ -532,153 +532,171 @@ msgid "Compass marks"
 msgstr ""
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:216 src/core/modules/Planet.cpp:1248
+#: src/core/modules/LandscapeMgr.cpp:227 src/core/modules/Planet.cpp:1248
 msgctxt "compass direction"
 msgid "N"
 msgstr ""
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:218 src/core/modules/Planet.cpp:1240
+#: src/core/modules/LandscapeMgr.cpp:229 src/core/modules/Planet.cpp:1240
 msgctxt "compass direction"
 msgid "S"
 msgstr ""
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:220 src/core/modules/Planet.cpp:1252
+#: src/core/modules/LandscapeMgr.cpp:231 src/core/modules/Planet.cpp:1252
 msgctxt "compass direction"
 msgid "E"
 msgstr ""
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:222 src/core/modules/Planet.cpp:1244
+#: src/core/modules/LandscapeMgr.cpp:233 src/core/modules/Planet.cpp:1244
 msgctxt "compass direction"
 msgid "W"
 msgstr ""
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:224 src/core/modules/Planet.cpp:1250
+#: src/core/modules/LandscapeMgr.cpp:235 src/core/modules/Planet.cpp:1250
 msgctxt "compass direction"
 msgid "NE"
 msgstr ""
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:226 src/core/modules/Planet.cpp:1254
+#: src/core/modules/LandscapeMgr.cpp:237 src/core/modules/Planet.cpp:1254
 msgctxt "compass direction"
 msgid "SE"
 msgstr ""
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:228 src/core/modules/Planet.cpp:1242
+#: src/core/modules/LandscapeMgr.cpp:239 src/core/modules/Planet.cpp:1242
 msgctxt "compass direction"
 msgid "SW"
 msgstr ""
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:230 src/core/modules/Planet.cpp:1246
+#: src/core/modules/LandscapeMgr.cpp:241 src/core/modules/Planet.cpp:1246
 msgctxt "compass direction"
 msgid "NW"
 msgstr ""
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:232 src/core/modules/Planet.cpp:1249
+#: src/core/modules/LandscapeMgr.cpp:243 src/core/modules/Planet.cpp:1249
 msgctxt "compass direction"
 msgid "NNE"
 msgstr ""
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:234 src/core/modules/Planet.cpp:1251
+#: src/core/modules/LandscapeMgr.cpp:245 src/core/modules/Planet.cpp:1251
 msgctxt "compass direction"
 msgid "ENE"
 msgstr ""
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:236 src/core/modules/Planet.cpp:1253
+#: src/core/modules/LandscapeMgr.cpp:247 src/core/modules/Planet.cpp:1253
 msgctxt "compass direction"
 msgid "ESE"
 msgstr ""
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:238 src/core/modules/Planet.cpp:1255
+#: src/core/modules/LandscapeMgr.cpp:249 src/core/modules/Planet.cpp:1255
 msgctxt "compass direction"
 msgid "SSE"
 msgstr ""
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:240 src/core/modules/Planet.cpp:1241
+#: src/core/modules/LandscapeMgr.cpp:251 src/core/modules/Planet.cpp:1241
 msgctxt "compass direction"
 msgid "SSW"
 msgstr ""
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:242 src/core/modules/Planet.cpp:1243
+#: src/core/modules/LandscapeMgr.cpp:253 src/core/modules/Planet.cpp:1243
 msgctxt "compass direction"
 msgid "WSW"
 msgstr ""
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:244 src/core/modules/Planet.cpp:1245
+#: src/core/modules/LandscapeMgr.cpp:255 src/core/modules/Planet.cpp:1245
 msgctxt "compass direction"
 msgid "WNW"
 msgstr ""
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:246 src/core/modules/Planet.cpp:1247
+#: src/core/modules/LandscapeMgr.cpp:257 src/core/modules/Planet.cpp:1247
 msgctxt "compass direction"
 msgid "NNW"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:587
+#: src/core/modules/LandscapeMgr.cpp:343
+#, qt-format
+msgid "Loading... %1% done"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:348
+msgid "Switching models..."
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:389 src/core/modules/LandscapeMgr.cpp:628
+msgid "Loaded successfully"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:633
+#, c-format
+msgid "Loading... 0% done"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:742
 msgid "Atmosphere"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:588
+#: src/core/modules/LandscapeMgr.cpp:743
 msgid "Fog"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:589 src/ui_viewDialog.h:3731
+#: src/core/modules/LandscapeMgr.cpp:744 src/ui_viewDialog.h:3731
 #: src/ui_configurationDialog.h:1894
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:343
 msgid "Cardinal points"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:590
+#: src/core/modules/LandscapeMgr.cpp:745
 msgid "Ordinal (Intercardinal) points"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:591
+#: src/core/modules/LandscapeMgr.cpp:746
 msgid "Secondary Intercardinal points"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:592
+#: src/core/modules/LandscapeMgr.cpp:747
 msgid "Ground"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:593
+#: src/core/modules/LandscapeMgr.cpp:748
 msgid "Landscape illumination"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:594
+#: src/core/modules/LandscapeMgr.cpp:749
 msgid "Landscape labels"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:595
+#: src/core/modules/LandscapeMgr.cpp:750
 msgid "Light pollution data from locations database"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:597
+#: src/core/modules/LandscapeMgr.cpp:752
 msgid "Increase light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:598
+#: src/core/modules/LandscapeMgr.cpp:753
 msgid "Reduce light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:599
+#: src/core/modules/LandscapeMgr.cpp:754
 msgid "Cyclic change in light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1011 src/scripting/StelScriptMgr.cpp:644
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
+#: src/core/modules/LandscapeMgr.cpp:1166 src/scripting/StelScriptMgr.cpp:644
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
 #: plugins/Oculars/src/gui/OcularDialog.cpp:625
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:238
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
@@ -698,7 +716,7 @@ msgid "Author"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:1017 src/gui/StelGuiItems.cpp:816
+#: src/core/modules/LandscapeMgr.cpp:1172 src/gui/StelGuiItems.cpp:816
 #: plugins/Satellites/src/Satellite.cpp:431
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1149
 #: plugins/Satellites/src/gui/SatellitesFilterDialog.cpp:134
@@ -706,7 +724,7 @@ msgctxt "distance"
 msgid "m"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1020 src/gui/ObsListDialog.cpp:152
+#: src/core/modules/LandscapeMgr.cpp:1175 src/gui/ObsListDialog.cpp:152
 #: src/gui/ObsListCreateEditDialog.cpp:161 src/ui_locationDialogGui.h:481
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
@@ -714,36 +732,36 @@ msgid "Location"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:1042
+#: src/core/modules/LandscapeMgr.cpp:1197
 msgctxt "pressure"
 msgid "hPa"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1052
+#: src/core/modules/LandscapeMgr.cpp:1207
 msgid "extinction coefficient"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1055
+#: src/core/modules/LandscapeMgr.cpp:1210
 msgid "Atmospheric conditions"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1062
+#: src/core/modules/LandscapeMgr.cpp:1217
 msgid "cd/m<sup>2</sup>"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1066
+#: src/core/modules/LandscapeMgr.cpp:1221
 msgid "ncd/m<sup>2</sup>"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1071
+#: src/core/modules/LandscapeMgr.cpp:1226
 msgid "&mu;cd/m<sup>2</sup>"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1076
+#: src/core/modules/LandscapeMgr.cpp:1231
 msgid "mcd/m<sup>2</sup>"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1078
+#: src/core/modules/LandscapeMgr.cpp:1233
 #, qt-format
 msgid "<b>Light pollution</b>: %1 %2 (NELM: %3; Bortle class: %4)"
 msgstr ""
@@ -2073,7 +2091,7 @@ msgid "Toggle DSO type filter"
 msgstr ""
 
 #: src/core/modules/NebulaMgr.cpp:1443 src/gui/StelDialog.cpp:327
-#: src/StelMainView.cpp:972
+#: src/StelMainView.cpp:986
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:776
 msgid "Attention!"
 msgstr ""
@@ -3936,7 +3954,7 @@ msgstr ""
 
 #: src/core/StelSkyCultureMgr.cpp:277 src/gui/ConfigurationDialog.cpp:1299
 #: src/scripting/StelScriptMgr.cpp:649
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:624
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:782
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
@@ -3969,7 +3987,7 @@ msgid "References"
 msgstr ""
 
 #: src/core/StelMovementMgr.cpp:231 src/gui/StelGui.cpp:219
-#: src/StelMainView.cpp:840 src/StelMainView.cpp:841
+#: src/StelMainView.cpp:854 src/StelMainView.cpp:855
 msgid "Miscellaneous"
 msgstr ""
 
@@ -4403,7 +4421,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1298 src/gui/HelpDialog.cpp:488
 #: src/scripting/StelScriptMgr.cpp:654
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Oculars/src/gui/OcularDialog.cpp:623
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:781
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
@@ -4999,7 +5017,7 @@ msgid "Tester: %1"
 msgstr ""
 
 #: src/gui/HelpDialog.cpp:535
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Oculars/src/gui/OcularDialog.cpp:626
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:785
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:272
@@ -7479,70 +7497,70 @@ msgstr ""
 msgid "Shortcut"
 msgstr ""
 
-#: src/StelMainView.cpp:840
+#: src/StelMainView.cpp:854
 msgid "Save screenshot"
 msgstr ""
 
-#: src/StelMainView.cpp:841
+#: src/StelMainView.cpp:855
 msgid "Reload shaders (for development)"
 msgstr ""
 
-#: src/StelMainView.cpp:842
+#: src/StelMainView.cpp:856
 msgid "Full-screen mode"
 msgstr ""
 
-#: src/StelMainView.cpp:972
+#: src/StelMainView.cpp:986
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
 msgstr ""
 
-#: src/StelMainView.cpp:1055
+#: src/StelMainView.cpp:1069
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr ""
 
-#: src/StelMainView.cpp:1057
+#: src/StelMainView.cpp:1071
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
 msgstr ""
 
-#: src/StelMainView.cpp:1061
+#: src/StelMainView.cpp:1075
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 
-#: src/StelMainView.cpp:1104
+#: src/StelMainView.cpp:1118
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1155
+#: src/StelMainView.cpp:1169
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1215
+#: src/StelMainView.cpp:1229
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1256
+#: src/StelMainView.cpp:1270
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1368
+#: src/StelMainView.cpp:1382
 #, qt-format
 msgid "Stellarium %1"
 msgstr ""
@@ -8751,7 +8769,7 @@ msgstr ""
 
 #: src/translations.h:586
 msgid ""
-"Screensaver of various happenings in the Solar System. 313 events in all!"
+"Screensaver of various happenings in the Solar System. 321 events in all!"
 msgstr ""
 
 #: src/translations.h:587
@@ -10565,60 +10583,65 @@ msgstr ""
 
 #: skycultures/translations_skycultures.fab:88
 msgctxt "sky culture"
-msgid "Sardinian"
+msgid "Samoan"
 msgstr ""
 
 #: skycultures/translations_skycultures.fab:90
 msgctxt "sky culture"
-msgid "Tongan"
+msgid "Sardinian"
 msgstr ""
 
 #: skycultures/translations_skycultures.fab:92
 msgctxt "sky culture"
-msgid "Tukano"
+msgid "Tongan"
 msgstr ""
 
 #: skycultures/translations_skycultures.fab:94
 msgctxt "sky culture"
-msgid "Tupi-Guarani"
+msgid "Tukano"
 msgstr ""
 
 #: skycultures/translations_skycultures.fab:96
 msgctxt "sky culture"
-msgid "Vanuatu (Netwar)"
+msgid "Tupi-Guarani"
 msgstr ""
 
 #: skycultures/translations_skycultures.fab:98
 msgctxt "sky culture"
-msgid "Western"
+msgid "Vanuatu (Netwar)"
 msgstr ""
 
 #: skycultures/translations_skycultures.fab:100
 msgctxt "sky culture"
-msgid "Western (H.A. Rey)"
+msgid "Western"
 msgstr ""
 
 #: skycultures/translations_skycultures.fab:102
 msgctxt "sky culture"
-msgid "Western (O.Hlad)"
+msgid "Western (H.A. Rey)"
 msgstr ""
 
 #: skycultures/translations_skycultures.fab:104
 msgctxt "sky culture"
-msgid "Western (Sky & Telescope)"
+msgid "Western (O.Hlad)"
 msgstr ""
 
 #: skycultures/translations_skycultures.fab:106
 msgctxt "sky culture"
-msgid "Western (Sternenkarten)"
+msgid "Western (Sky & Telescope)"
 msgstr ""
 
 #: skycultures/translations_skycultures.fab:108
 msgctxt "sky culture"
-msgid "Xhosa"
+msgid "Western (Sternenkarten)"
 msgstr ""
 
 #: skycultures/translations_skycultures.fab:110
+msgctxt "sky culture"
+msgid "Xhosa"
+msgstr ""
+
+#: skycultures/translations_skycultures.fab:112
 msgctxt "sky culture"
 msgid "Zulu"
 msgstr ""
@@ -10966,7 +10989,7 @@ msgstr ""
 #: src/ui_searchDialogGui.h:952 src/ui_viewDialog.h:4103
 #: src/ui_viewDialog.h:4134 src/ui_configurationDialog.h:2088
 #: src/ui_configurationDialog.h:2099
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:336
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:342
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:436
 msgid "Options"
 msgstr ""
@@ -11021,7 +11044,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:3331
 msgid ""
-"Refraction/Extinction settings: pressure, temperature, extinction "
+"Atmosphere settings: visual model, pressure, temperature, extinction "
 "coefficient, etc."
 msgstr ""
 
@@ -12392,7 +12415,7 @@ msgid "Restore the default settings that came with Stellarium"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1751
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:342
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:352
 #: plugins/Satellites/src/ui_satellitesDialog.h:1304
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:264
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:242
@@ -13119,23 +13142,63 @@ msgstr ""
 msgid "Restore All Defaults"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:215
+#: src/ui_atmosphereDialog.h:384
 msgid "Atmosphere Details"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:217
+#: src/ui_atmosphereDialog.h:386
+msgid "Visual Model"
+msgstr ""
+
+#: src/ui_atmosphereDialog.h:387
+msgid "Choose &model:"
+msgstr ""
+
+#: src/ui_atmosphereDialog.h:388
+msgid "Preetham"
+msgstr ""
+
+#: src/ui_atmosphereDialog.h:389
+msgid "ShowMySky"
+msgstr ""
+
+#: src/ui_atmosphereDialog.h:392
+msgid "Path to &data:"
+msgstr ""
+
+#: src/ui_atmosphereDialog.h:394
+msgid "Eclipse simulation &quality:"
+msgstr ""
+
+#: src/ui_atmosphereDialog.h:395
+msgid "Show debugging options"
+msgstr ""
+
+#: src/ui_atmosphereDialog.h:396
+msgid "Render zero-order scattering"
+msgstr ""
+
+#: src/ui_atmosphereDialog.h:397
+msgid "Render single scattering"
+msgstr ""
+
+#: src/ui_atmosphereDialog.h:398
+msgid "Render multiple scattering"
+msgstr ""
+
+#: src/ui_atmosphereDialog.h:399
 msgid "Refraction Settings"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:218
+#: src/ui_atmosphereDialog.h:400
 msgid "Pressure (mbar):"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:219
+#: src/ui_atmosphereDialog.h:401
 msgid "Temperature (C):"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:224 src/ui_greatRedSpotDialog.h:183
+#: src/ui_atmosphereDialog.h:406 src/ui_greatRedSpotDialog.h:183
 #: src/ui_tonemappingDialog.h:206
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
@@ -13143,37 +13206,37 @@ msgid ""
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:226
+#: src/ui_atmosphereDialog.h:408
 msgid "Extinction Coefficient (k):"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:228
+#: src/ui_atmosphereDialog.h:410
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:231
+#: src/ui_atmosphereDialog.h:413
 msgid "Set the International Standard Atmosphere at the height 0 km MSL"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:233
+#: src/ui_atmosphereDialog.h:415
 msgid "Standard Atmosphere"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:234
+#: src/ui_atmosphereDialog.h:416
 msgid "Experimental"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:235
+#: src/ui_atmosphereDialog.h:417
 msgid "Suppress scattering (only refraction/extinction)"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:236
+#: src/ui_atmosphereDialog.h:418
 msgid "T=25(k-0.16)+1 -- or T="
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:237
+#: src/ui_atmosphereDialog.h:419
 msgid "T=2/5(default)/6 at k=0.16/0.32/0.36. "
 msgstr ""
 
@@ -14515,64 +14578,64 @@ msgstr ""
 msgid "Filename mask:"
 msgstr ""
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:56
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:140
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:141
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:343
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:57
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:142
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:143
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:353
 msgid "Angle Measure"
 msgstr ""
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:59
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
 msgstr ""
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:140
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:142
 msgid "Angle measure"
 msgstr ""
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:141
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:143
 msgid "Angle measure settings"
 msgstr ""
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:622
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:677
 msgid "The Angle Measure is enabled:"
 msgstr ""
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:624
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:679
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:626
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:681
 msgid "Right-clicking changes the end point only."
 msgstr ""
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:628
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:683
 msgid "PA="
 msgstr ""
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:97
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
 msgid "Angle Measure Plug-in"
 msgstr ""
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:106
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
 msgid ""
 "The Angle Measure plugin is a small tool which is used to measure the "
 "angular distance between two points on the sky (and calculation of position "
 "angle between those two points)."
 msgstr ""
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
 msgid ""
 "Start and end points in horizontal mode can be linked to the rotating sky, "
 "which may be helpful to keep relations between landscape and some celestial "
 "object or (with both linked) for Dobsonian starhopping."
 msgstr ""
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
 msgid ""
 "*goes misty eyed* I recall measuring the size of the Cassini Division when I "
 "was a student. It was not the high academic glamor one might expect... It "
@@ -14581,68 +14644,78 @@ msgid ""
 "the lab. We measured. We calculated. We wished we were in Hawaii."
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:316
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:322
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:327
 msgid "Pulsars Configuration"
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:317
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:323
 msgid "Angle Measure Plug-in Configuration"
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:319
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:325
 msgid "Show in Equatorial Coordinates"
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:320
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:326
 msgid "Display with position angle"
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:322
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:333
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:328
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:337
 msgid "Text"
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:324
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:335
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:330
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:339
 msgid "Line"
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:325
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:331
 msgid "Show in Horizontal Coordinates"
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:326
-msgid "Attach start point to rotating sky"
-msgstr ""
-
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:327
-msgid "Attach end point to rotating sky"
-msgstr ""
-
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:329
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:333
 msgid "(e.g. for Dobson starhopping)"
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:331
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:335
 msgid "Display with position angle "
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:337
-msgid "Use dms format for angles"
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:340
+msgid "Attach start point to rotating sky"
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:339
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:341
+msgid "Attach end point to rotating sky"
+msgstr ""
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:344
 msgid ""
 "When set, measurements are shown near the end of the line instead of its "
 "starting point."
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:341
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:346
 msgid "Show measurements near mouse"
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:344
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:347
+msgid "Use dms format for angles"
+msgstr ""
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:349
+msgid ""
+"When set, only the right mouse button is used to measure angles, the left "
+"mouse button pans and selects as usual"
+msgstr ""
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:351
+msgid "Allow snap to selected object"
+msgstr ""
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:354
 #: plugins/Oculars/src/ui_ocularDialog.h:1601
 #: plugins/Satellites/src/ui_satellitesDialog.h:1424
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:438
@@ -14833,127 +14906,127 @@ msgstr ""
 msgid "\"/px"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1990
+#: plugins/Oculars/src/Oculars.cpp:1991
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:482
 msgid "Ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1992
+#: plugins/Oculars/src/Oculars.cpp:1993
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:484
 msgid "Binocular"
 msgstr ""
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:2012
+#: plugins/Oculars/src/Oculars.cpp:2013
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:527
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr ""
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:2019
+#: plugins/Oculars/src/Oculars.cpp:2020
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:536
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2030
+#: plugins/Oculars/src/Oculars.cpp:2031
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:566
 #, qt-format
 msgid "Lens #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2034
+#: plugins/Oculars/src/Oculars.cpp:2035
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:570
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2039
+#: plugins/Oculars/src/Oculars.cpp:2040
 msgid "Lens: none"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2054 plugins/Oculars/src/Oculars.cpp:2115
+#: plugins/Oculars/src/Oculars.cpp:2055 plugins/Oculars/src/Oculars.cpp:2116
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:812
 #, qt-format
 msgid "Telescope #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2063
+#: plugins/Oculars/src/Oculars.cpp:2064
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:914
 #, qt-format
 msgid "Magnification: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2070
+#: plugins/Oculars/src/Oculars.cpp:2071
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:925
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2077
+#: plugins/Oculars/src/Oculars.cpp:2078
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:933
 #, qt-format
 msgid "FOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2098
+#: plugins/Oculars/src/Oculars.cpp:2099
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:680
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:856
 #, qt-format
 msgid "Dimensions: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2099
+#: plugins/Oculars/src/Oculars.cpp:2100
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:686
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:860
 msgid "Binning"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2103
+#: plugins/Oculars/src/Oculars.cpp:2104
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:640
 #, qt-format
 msgid "Sensor #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2107
+#: plugins/Oculars/src/Oculars.cpp:2108
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:644
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2120
+#: plugins/Oculars/src/Oculars.cpp:2121
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2459
+#: plugins/Oculars/src/Oculars.cpp:2460
 msgid "&Lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2460
+#: plugins/Oculars/src/Oculars.cpp:2461
 msgid "&Previous lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2461
+#: plugins/Oculars/src/Oculars.cpp:2462
 msgid "&Next lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2463
+#: plugins/Oculars/src/Oculars.cpp:2464
 #: plugins/Observability/src/Observability.cpp:167
 msgid "None"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2490
+#: plugins/Oculars/src/Oculars.cpp:2491
 msgid "&Telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2491
+#: plugins/Oculars/src/Oculars.cpp:2492
 msgid "&Previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2492
+#: plugins/Oculars/src/Oculars.cpp:2493
 msgid "&Next telescope"
 msgstr ""
 
