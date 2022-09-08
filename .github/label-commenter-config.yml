@@ -5,7 +5,10 @@ labels:
         body: Sorry, we just do not understand your problem (probably the log is not attached and hardware info is missing - so, please follow the issue templates).
         action: close
       pr:
-        body: Hello @{{ pull_request.user.login }}! Thank you for suggesting this, but please follow the pull request templates.
+        body: |
+          Hello @{{ pull_request.user.login }}! 
+
+          Thank you for suggesting this, but please follow the pull request templates.
         action: draft
     unlabeled:
       issue:
@@ -48,26 +51,37 @@ labels:
     labeled:
       issue:
         body: |
-          Hello @{{ issue.user.login }}, we need more info and feedback!\n\n
+          Hello @{{ issue.user.login }}, we need more info and feedback!
+
           The hardware info, steps of reproduction and log file are really important and help us resolve over 90% issues fast. Of course, in some specific cases we need more data, but we ask the required data separately...
   - name: enhancement
     labeled:
       issue:
-        body: Hello @{{ issue.user.login }}! Thank you for suggesting this enhancement.
-      pr:
-        body: Hello @{{ pull_request.user.login }}! Thank you for this enhancement.
-  - name: feature request
+        body: |
+          Hello @{{ issue.user.login }}! 
+
+          Thank you for suggesting this enhancement.
+  - name: feature
     labeled:
       issue:
-        body: Hello @{{ issue.user.login }}! Thank you for suggesting this feature.
+        body: |
+          Hello @{{ issue.user.login }}! 
+
+          Thank you for suggesting this feature.
   - name: wishlist
     labeled:
       issue:
-        body: Hello @{{ issue.user.login }}! Thank you for this suggestion.
+        body: |
+          Hello @{{ issue.user.login }}! 
+
+          Thank you for this suggestion.
   - name: "state: confirmed"
     labeled:
       issue:
-        body: Hello @{{ issue.user.login }}! OK, developers can reproduce the issue. Thanks for the report!
+        body: |
+          Hello @{{ issue.user.login }}! 
+
+          OK, developers can reproduce the issue. Thanks for the report!
   - name: "state: won't fix"
     labeled:
       issue:
@@ -77,13 +91,18 @@ labels:
         action: close
     unlabeled:
       issue:
-        body: Hello @{{ issue.user.login }}! This has become active again.
+        body: |
+          Hello @{{ issue.user.login }}! 
+
+          This has become active again.
         action: open
   - name: FAQ
     labeled:
       issue:
         body: |
-          Hello @{{ issue.user.login }}! Please see FAQ in the wiki:
+          Hello @{{ issue.user.login }}! 
+
+          Please see FAQ in the wiki:
           https://github.com/Stellarium/stellarium/wiki/FAQ or https://github.com/Stellarium/stellarium/wiki/Common-Problems-for-the-current-version
         action: close
   - name: mobile
@@ -101,24 +120,58 @@ labels:
     labeled:
       issue:
         body: |
-          Thank you @{{ issue.user.login }}! In future please use Transifex to fix and improve translations:
+          Thank you @{{ issue.user.login }}! 
+
+          In future please use Transifex to fix and improve translations:
           https://www.transifex.com/stellarium/stellarium/dashboard/
-  - name: "state: fix committed"
+  - name: "state: implemented"
     labeled:
       issue:
         body: |
-          Hello @{{ issue.user.login }}! Please check the fresh version (development snapshot) of Stellarium:
+          Hello @{{ issue.user.login }}!
+
+          The enhancement or feature has been implemented! You may test it via building Stellarium from source code or wait the weekly development snapshot...
+      pr:
+        body: |
+          Hello @{{ pull_request.user.login }}!
+
+          The enhancement or feature has been merged into source code and you may test it via building Stellarium from source code or wait the weekly development snapshot...
+  - name: "state: fixed"
+    labeled:
+      issue:
+        body: |
+          Hello @{{ issue.user.login }}!
+
+          The bug or issue has been fixed! You may test it via building Stellarium from source code or wait the weekly development snapshot...
+      pr:
+        body: |
+          Hello @{{ pull_request.user.login }}!
+
+          The fix has been merged into source code and you may test it via building Stellarium from source code or wait the weekly development snapshot...
+  - name: "state: published"
+    labeled:
+      issue:
+        body: |
+          Hello @{{ issue.user.login }}! 
+
+          Please check the fresh version (development snapshot) of Stellarium:
           https://github.com/Stellarium/stellarium-data/releases/tag/weekly-snapshot
       pr:
         body: |
-          Hello @{{ pull_request.user.login }}! Please check the fresh version (development snapshot) of Stellarium:
+          Hello @{{ pull_request.user.login }}! 
+
+          Please check the fresh version (development snapshot) of Stellarium:
           https://github.com/Stellarium/stellarium-data/releases/tag/weekly-snapshot
     unlabeled:
       issue:
         body: |
-          Hello @{{ issue.user.login }}! Please check the latest stable version of Stellarium:
+          Hello @{{ issue.user.login }}! 
+
+          Please check the latest stable version of Stellarium:
           https://github.com/Stellarium/stellarium/releases/latest
       pr:
         body: |
-          Hello @{{ pull_request.user.login }}! Please check the latest stable version of Stellarium:
+          Hello @{{ pull_request.user.login }}! 
+
+          Please check the latest stable version of Stellarium:
           https://github.com/Stellarium/stellarium/releases/latest
