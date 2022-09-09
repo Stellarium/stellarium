@@ -87,7 +87,7 @@ private:
 		int term2TimesOneOverMaxdLpOneOverGamma; // original
 		int term2TimesOneOverMaxdL;              // challenge by Ruslan
 		int flagUseTmGamma;                      // switch between their use, true to use the first expression.
-		int sRGB;
+		int doSRGB;
 	} shaderAttribLocations;
 
 	GLuint bayerPatternTex_=0;

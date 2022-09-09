@@ -471,7 +471,7 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 		shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma
 		                                             = prog.uniformLocation("term2TimesOneOverMaxdLpOneOverGamma");
 		shaderAttribLocations.flagUseTmGamma         = prog.uniformLocation("flagUseTmGamma");
-		shaderAttribLocations.sRGB                   = prog.uniformLocation("doSRGB");
+		shaderAttribLocations.doSRGB                   = prog.uniformLocation("doSRGB");
 
 		prog.release();
 	}
@@ -846,7 +846,7 @@ void AtmosphereShowMySky::draw(StelCore* core)
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.term2TimesOneOverMaxdL, d));
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.flagUseTmGamma, useTmGamma));
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.brightnessScale, atm_intensity));
-	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.sRGB, sRGB));
+	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.doSRGB, sRGB));
 
 	StelPainter sPainter(core->getProjection2d());
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
