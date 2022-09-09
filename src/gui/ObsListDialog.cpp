@@ -456,7 +456,6 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
 
             listOfObjects = loadListFromJson(map, listOlud);
 
-            // TODO check if it is possible to have an empty list. If no the delete button must be disabled.
             ui->obsListDeleteButton->setEnabled(true);
 
             if (!listOfObjects.isEmpty()) {

@@ -295,10 +295,8 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
             bool visibleFlag = false;
             StelUtils::rectToSphe(&ra, &dec, selectedObject[0]->getJ2000EquatorialPos(core));
 
-            if (ui->obsListRaCheckBox->isChecked() || objectType == CUSTOM_OBJECT || objectName.isEmpty()) {
+            if (ui->obsListCoordinatesCheckBox->isChecked() || objectType == CUSTOM_OBJECT || objectName.isEmpty()) {
                 objectRaStr = StelUtils::radToHmsStr(ra, false).trimmed();
-            }
-            if (ui->obsListDecCheckBox->isChecked() || objectType == CUSTOM_OBJECT || objectName.isEmpty()) {
                 objectDecStr = StelUtils::radToDmsStr(dec, false).trimmed();
             }
 

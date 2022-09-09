@@ -178,28 +178,15 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayoutCheckBoxRacDecFov">
            <item>
-            <widget class="QCheckBox" name="obsListRaCheckBox">
+            <widget class="QCheckBox" name="obsListCoordinatesCheckBox">
              <property name="toolTip">
-              <string>Add right ascension</string>
+              <string>Add Ra &amp; Dec coordinates</string>
              </property>
              <property name="toolTipDuration">
               <number>3</number>
              </property>
              <property name="text">
-              <string>Ra</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="obsListDecCheckBox">
-             <property name="toolTip">
-              <string>Add declination</string>
-             </property>
-             <property name="toolTipDuration">
-              <number>3</number>
-             </property>
-             <property name="text">
-              <string>Dec</string>
+              <string>Coordinates (RA and DEC)</string>
              </property>
             </widget>
            </item>
