@@ -23,6 +23,7 @@
 #include "StelPropertyMgr.hpp"
 #include "AtmosphereDialog.hpp"
 #include "StelPropertyMgr.hpp"
+#include "StelFileMgr.hpp"
 #include "ui_atmosphereDialog.h"
 
 #include <QFileInfo>
@@ -107,7 +108,7 @@ void AtmosphereDialog::createDialogContent()
 	connectBoolProperty(ui->showMySky_multipleScatteringEnabled, "LandscapeMgr.flagAtmosphereMultipleScattering");
 	connectIntProperty(ui->showMySky_eclipseSimulationQualitySpinBox, ECLIPSE_SIM_QUALITY_PROPERTY);
 #else
-    ui->visualModelConfigGroup->hide();
+	ui->visualModelConfigGroup->hide();
 #endif
 
 	setCurrentValues();
@@ -147,7 +148,7 @@ void AtmosphereDialog::setTfromK(double k)
 void AtmosphereDialog::clearStatus()
 {
 	ui->showMySky_statusLabel->setText("");
-    ui->showMySky_statusLabel->setStyleSheet("");
+	ui->showMySky_statusLabel->setStyleSheet("");
 }
 
 void AtmosphereDialog::onModelChoiceChanged(const QString& model)
@@ -162,7 +163,8 @@ void AtmosphereDialog::onModelChoiceChanged(const QString& model)
 
 void AtmosphereDialog::browsePathToModel()
 {
-	const auto path=QFileDialog::getExistingDirectory(nullptr, q_("Open ShowMySky model"));
+	const QString dataDir = QDir::toNativeSeparators(QString("%1/atmosphere").arg(StelFileMgr::getInstallationDir()));
+	const auto path=QFileDialog::getExistingDirectory(nullptr, q_("Open ShowMySky model"), dataDir);
 	if(path.isNull()) return;
 
 	const auto mgr = StelApp::getInstance().getStelPropertyManager();
@@ -172,9 +174,9 @@ void AtmosphereDialog::browsePathToModel()
 	ui->showMySky_pathToModelEdit->setText(path);
 	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(MODEL_PATH_PROPERTY, path);
 
-    const auto selectedModel = ui->atmosphereModel->currentText();
-    if(selectedModel.toLower() != currentModel.toLower())
-        onModelChoiceChanged(selectedModel);
+	const auto selectedModel = ui->atmosphereModel->currentText();
+	if(selectedModel.toLower() != currentModel.toLower())
+		onModelChoiceChanged(selectedModel);
 }
 
 bool AtmosphereDialog::hasValidModelPath() const
@@ -197,9 +199,9 @@ void AtmosphereDialog::onPathToModelEditingFinished()
 	const auto path = ui->showMySky_pathToModelEdit->text();
 	StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(MODEL_PATH_PROPERTY, path);
 
-    const auto selectedModel = ui->atmosphereModel->currentText();
-    if(selectedModel.toLower() != currentModel.toLower())
-        onModelChoiceChanged(selectedModel);
+	const auto selectedModel = ui->atmosphereModel->currentText();
+	if(selectedModel.toLower() != currentModel.toLower())
+		onModelChoiceChanged(selectedModel);
 }
 
 void AtmosphereDialog::updatePathToModelStyle()
@@ -213,7 +215,7 @@ void AtmosphereDialog::updatePathToModelStyle()
 void AtmosphereDialog::onPathToModelChanged()
 {
 	clearStatus();
-    updatePathToModelStyle();
+	updatePathToModelStyle();
 }
 
 void AtmosphereDialog::onErrorStateChanged(const bool error)

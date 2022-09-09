@@ -1,0 +1,121 @@
+version: 5
+# These spectra override the spectra further down the document. This is to make sure
+# we have all the required spectra inlined, rather than just references to files.
+wavelengths: min=360nm,max=830nm,count=16
+solar irradiance at toa: 1.03699994,1.24899995,1.68400002,1.97500002,1.96800005,1.87699997,1.85399997,1.81799996,1.72300005,1.60399997,1.51600003,1.40799999,1.30900002,1.23000002,1.14199996,1.06200004
+
+#Copy of original atmosphere description
+version: 5
+
+transmittance texture size for VZA: 256
+transmittance texture size for altitude: 64
+
+irradiance texture size for SZA: 64
+irradiance texture size for altitude: 16
+
+scattering texture size for VZA: 128 # must be even
+scattering texture size for dot(view,sun): 8
+scattering texture size for SZA: 32
+scattering texture size for altitude: 32
+
+eclipsed scattering texture size for relative azimuth: 32
+eclipsed scattering texture size for VZA: 128
+
+eclipsed double scattering texture size for relative azimuth: 16
+eclipsed double scattering texture size for VZA: 128
+eclipsed double scattering texture size for SZA: 16
+eclipsed double scattering number of azimuth pairs to sample: 2
+eclipsed double scattering number of elevation pairs to sample: 10
+
+light pollution texture size for VZA: 128
+light pollution texture size for altitude: 64
+light pollution angular integration points: 200
+
+transmittance integration points: 500
+radial integration points: 50
+angular integration points: 512
+angular integration points for eclipse: 512
+scattering orders: 4
+
+Earth-Sun distance: 1.01208 AU # on 2017-08-21 at 12:12:12 UTC
+Earth-Moon distance: 371925 km # on 2017-08-21 at 12:12:12 UTC
+Earth radius: 6371 km # FIXME: at R=6371km and h=120km highest altitude layer appears to have some artifacts in first scattering from near horizon
+atmosphere height: 120 km
+
+wavelengths: min=360nm,max=830nm,count=16
+# Data for solar irradiance were taken from
+# https://www.nrel.gov/grid/solar-resource/assets/data/astmg173.zip
+# which is linked to at https://www.nrel.gov/grid/solar-resource/spectra-am1.5.html
+# Values are in W/(m^2*nm).
+solar irradiance at TOA: 1.037,1.249,1.684,1.975,1.968,1.877,1.854,1.818,1.723,1.604,1.516,1.408,1.309,1.23,1.142,1.062
+# Taken from http://gsp.humboldt.edu/olm/Courses/GSP_216/lessons/reflectance.html, in particular, the file link:
+#  http://gsp.humboldt.edu/olm/Courses/GSP_216/lessons/reflect.csv
+# The data set chosen is that for grass.
+ground albedo: 0.035,0.037,0.04,0.041,0.043,0.067,0.107,0.09,0.07,0.057,0.047,0.138,0.367,0.468,0.483,0.491
+# This spectrum was taken from a measurement of a single HPS lamp and dividing the measured spectrum by its luminance.
+light pollution relative radiance: 0,0,4.3e-7,1.623e-6,2.15e-6,1.114e-6,3.858e-6,0.0000241,0.0000335,0.00001331,9.5e-6,4.304e-6,3.805e-6,4.315e-6,4.956e-6,0.00003008
+
+Scatterer "molecules": # Rayleigh scattering
+{
+    number density: # in m^-3
+    ```
+        const float rayleighScaleHeight=8*km;
+        return 3.08458e25*exp(-1/rayleighScaleHeight * altitude);
+    ```
+    phase function:
+    ```
+        return vec4(3./(16*PI)*(1+sqr(dotViewSun)));
+    ```
+    cross section at 1 um: 0.04022 fm^2
+    angstrom exponent: 4
+    phase function type: smooth
+    needs interpolation guides
+}
+Scatterer "aerosols": # Mie scattering
+{
+    number density: # in m^-3
+    ```
+        const float mieScaleHeight=1.2*km;
+        return 1.03333e8*exp(-1/mieScaleHeight*altitude);
+    ```
+    phase function:
+    ```
+        const float g=0.76;
+        const float g2=g*g;
+        const float k = 3/(8*PI)*(1-g2)/(2+g2);
+        return vec4(k * (1+sqr(dotViewSun)) / pow(1+g2 - 2*g*dotViewSun, 1.5) + 1/((1-dotViewSun)*600+0.05))*0.904;
+    ```
+    cross section at 1 um: 0.042968 um^2
+    angstrom exponent: 0
+    phase function type: achromatic
+}
+Absorber "ozone":
+{
+    number density:
+    ```
+        const float totalOzoneAmount=370*dobsonUnit;
+
+        float density;
+
+        // A fit to AFGL atmospheric constituent profile. U.S. standard atmosphere 1976. (AFGL-TR-86-0110)
+        // Reference was taken from data supplied with libRadtran.
+        if(altitude < 8*km)
+            density = 7.2402403521159135e-6 - 1.206527437798165e-7/km * altitude;
+        else if(altitude < 21.5*km)
+            density = -0.000020590185333577628 + 3.3581504669318765e-6/km * altitude;
+        else if(altitude < 39*km)
+            density = 0.00010542813563268143 - 2.50316678731273e-6/km * altitude;
+        else
+            density = 0.04298160111157969 * exp(-0.2208669270720561/km * altitude);
+
+        density *= totalOzoneAmount;
+
+        return density;
+    ```
+    # Data were taken from
+    # http://www.iup.uni-bremen.de/gruppen/molspec/downloads/serdyuchenkogorshelevversionjuly2013.zip
+    # which is linked to at
+    # http://www.iup.uni-bremen.de/gruppen/molspec/databases/referencespectra/o3spectra2011/index.html
+    # Data are for 233K. Values are in m^2/molecule.
+    cross section: 1.394e-26,6.052e-28,4.923e-27,2.434e-26,7.361e-26,1.831e-25,3.264e-25,4.514e-25,4.544e-25,2.861e-25,1.571e-25,7.902e-26,4.452e-26,2.781e-26,1.764e-26,5.369e-27
+}
