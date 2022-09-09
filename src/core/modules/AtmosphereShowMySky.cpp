@@ -471,7 +471,7 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 		shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma
 		                                             = prog.uniformLocation("term2TimesOneOverMaxdLpOneOverGamma");
 		shaderAttribLocations.flagUseTmGamma         = prog.uniformLocation("flagUseTmGamma");
-		shaderAttribLocations.doSRGB                   = prog.uniformLocation("doSRGB");
+		shaderAttribLocations.doSRGB                 = prog.uniformLocation("doSRGB");
 
 		prog.release();
 	}
@@ -579,9 +579,9 @@ void AtmosphereShowMySky::drawAtmosphere(Mat4f const& projectionMatrix, const fl
 	const auto& m = projectionMatrix;
 	auto& settings = *static_cast<SkySettings*>(skySettings_.get());
 	settings.projectionMatrix_ = QMatrix4x4(m[0], m[4], m[8] , m[12],
-											m[1], m[5], m[9] , m[13],
-											m[2], m[6], m[10], m[14],
-											m[3], m[7], m[11], m[15]);
+						m[1], m[5], m[9] , m[13],
+						m[2], m[6], m[10], m[14],
+						m[3], m[7], m[11], m[15]);
 	settings.altitude_=altitude;
 	settings.sunAzimuth_=sunAzimuth;
 	settings.sunZenithAngle_=sunZenithAngle;
@@ -725,20 +725,21 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 	if (std::isnan(sunPos.length()))
 		sunPos.set(0.,0.,-1.);
 
-	// GPU load
+#ifdef GPU_LOAD
 	float f1=prj->getFov(), i1=fader.getInterstate();
 	Vec3d p1=sunPos, s1;
 	prj->project(p1,s1);
 	float df=qAbs(prevFov-f1)/(prevFov+f1), di=qAbs(prevFad-i1);
 	double dp=(prevPos-p1).length(), ds=(prevSun-s1).length();
-//	if (df+di+dp<10e-3 && ds<1)
-//		return;
+	if (df+di+dp<10e-3 && ds<1)
+		return;
 
 	// qDebug() << "Fov" << df << "Fad" << di << "Pos" << dp << "Sun" << ds;
 	prevFov=f1;
 	prevFad=i1;
 	prevPos=p1;
 	prevSun=s1;
+#endif
 
 	const auto sunDir = sunPos / sunPos.length();
 	const double sunAngularRadius = atan(sun.getEquatorialRadius()/sunPos.length());
