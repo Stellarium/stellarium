@@ -61,12 +61,7 @@ labels:
           Hello @{{ issue.user.login }}! 
 
           Thank you for suggesting this enhancement.
-      pr:
-        body: |
-          Hello @{{ pull_request.user.login }}! 
-
-          Thank you for this enhancement.
-  - name: feature request
+  - name: feature
     labeled:
       issue:
         body: |
@@ -129,7 +124,31 @@ labels:
 
           In future please use Transifex to fix and improve translations:
           https://www.transifex.com/stellarium/stellarium/dashboard/
-  - name: "state: fix committed"
+  - name: "state: implemented"
+    labeled:
+      issue:
+        body: |
+          Hello @{{ issue.user.login }}!
+
+          The enhancement or feature has been implemented! You may test it via building Stellarium from source code or wait the weekly development snapshot...
+      pr:
+        body: |
+          Hello @{{ pull_request.user.login }}!
+
+          The enhancement or feature has been merged into source code and you may test it via building Stellarium from source code or wait the weekly development snapshot...
+  - name: "state: fixed"
+    labeled:
+      issue:
+        body: |
+          Hello @{{ issue.user.login }}!
+
+          The bug or issue has been fixed! You may test it via building Stellarium from source code or wait the weekly development snapshot...
+      pr:
+        body: |
+          Hello @{{ pull_request.user.login }}!
+
+          The fix has been merged into source code and you may test it via building Stellarium from source code or wait the weekly development snapshot...
+  - name: "state: published"
     labeled:
       issue:
         body: |

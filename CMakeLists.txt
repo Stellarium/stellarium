@@ -1020,6 +1020,10 @@ IF(USE_PLUGIN_SCENERY3D)
      # add scenery3d scenes
      ADD_SUBDIRECTORY( scenery3d )
 ENDIF()
+IF(ENABLE_SHOWMYSKY)
+     # add atmosphere models
+     ADD_SUBDIRECTORY( atmosphere )
+ENDIF()
 IF(ENABLE_NLS)
      ADD_SUBDIRECTORY( po )
 ENDIF()
