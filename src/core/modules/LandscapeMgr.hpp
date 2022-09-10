@@ -127,6 +127,8 @@ class LandscapeMgr : public StelModule
 		   READ getAtmosphereModelPath
 		   WRITE setAtmosphereModelPath
 		   NOTIFY atmosphereModelPathChanged)
+	Q_PROPERTY(QString defaultAtmosphereModelPath
+		   READ getDefaultAtmosphereModelPath)
 	Q_PROPERTY(bool atmosphereShowMySkyStoppedWithError
 		   READ getAtmosphereShowMySkyStoppedWithError
 		   WRITE setAtmosphereShowMySkyStoppedWithError
@@ -471,6 +473,8 @@ public slots:
 
 	QString getAtmosphereModelPath() const;
 	void setAtmosphereModelPath(const QString& path);
+
+	QString getDefaultAtmosphereModelPath() const;
 
 	bool getAtmosphereShowMySkyStoppedWithError() const;
 	void setAtmosphereShowMySkyStoppedWithError(bool error);
