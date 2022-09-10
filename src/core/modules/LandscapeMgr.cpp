@@ -699,6 +699,10 @@ void LandscapeMgr::init()
 	setFlagLandscapeUseMinimalBrightness(conf->value("landscape/flag_minimal_brightness", false).toBool());
 	setFlagLandscapeSetsMinimalBrightness(conf->value("landscape/flag_landscape_sets_minimal_brightness",false).toBool());
 
+	const auto var = conf->value(ATMOSPHERE_MODEL_PATH_CONFIG_KEY);
+	if(!var.isValid())
+		conf->setValue(ATMOSPHERE_MODEL_PATH_CONFIG_KEY, getDefaultAtmosphereModelPath());
+
 	createAtmosphere();
 	// Put the atmosphere's Skylight under the StelProperty system (simpler and more consistent GUI)
 	StelApp::getInstance().getStelPropertyManager()->registerObject(&skylight);
@@ -1419,7 +1423,16 @@ QString LandscapeMgr::getAtmosphereModel() const
 QString LandscapeMgr::getAtmosphereModelPath() const
 {
 	const auto conf=StelApp::getInstance().getSettings();
-	return conf->value(ATMOSPHERE_MODEL_PATH_CONFIG_KEY, "").toString();
+
+	const auto var = conf->value(ATMOSPHERE_MODEL_PATH_CONFIG_KEY);
+	if(var.isValid()) return var.toString();
+
+	return getDefaultAtmosphereModelPath();
+}
+
+QString LandscapeMgr::getDefaultAtmosphereModelPath() const
+{
+	return QDir::toNativeSeparators(QString("%1/atmosphere/default").arg(StelFileMgr::getInstallationDir()));
 }
 
 bool LandscapeMgr::getAtmosphereShowMySkyStoppedWithError() const

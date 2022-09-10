@@ -33,6 +33,7 @@ namespace
 {
 constexpr char MODEL_PROPERTY[]      = "LandscapeMgr.atmosphereModel";
 constexpr char MODEL_PATH_PROPERTY[] = "LandscapeMgr.atmosphereModelPath";
+constexpr char DEFAULT_MODEL_PATH_PROPERTY[] = "LandscapeMgr.defaultAtmosphereModelPath";
 constexpr char ERROR_PROPERTY[]       = "LandscapeMgr.atmosphereShowMySkyStoppedWithError";
 constexpr char STATUS_TEXT_PROPERTY[] = "LandscapeMgr.atmosphereShowMySkyStatusText";
 constexpr char ECLIPSE_SIM_QUALITY_PROPERTY[] = "LandscapeMgr.atmosphereEclipseSimulationQuality";
@@ -163,11 +164,11 @@ void AtmosphereDialog::onModelChoiceChanged(const QString& model)
 
 void AtmosphereDialog::browsePathToModel()
 {
-	const QString dataDir = QDir::toNativeSeparators(QString("%1/atmosphere").arg(StelFileMgr::getInstallationDir()));
+	const auto mgr = StelApp::getInstance().getStelPropertyManager();
+	const auto dataDir = mgr->getProperty(DEFAULT_MODEL_PATH_PROPERTY)->getValue().toString() + "/..";
 	const auto path=QFileDialog::getExistingDirectory(nullptr, q_("Open ShowMySky model"), dataDir);
 	if(path.isNull()) return;
 
-	const auto mgr = StelApp::getInstance().getStelPropertyManager();
 	const auto currentModel = mgr->getProperty(MODEL_PROPERTY)->getValue().toString();
 
 	clearStatus();
@@ -241,7 +242,15 @@ void AtmosphereDialog::setCurrentValues()
 	onModelChoiceChanged(ui->atmosphereModel->currentText());
 
 	const auto currentModelPath = mgr->getProperty(MODEL_PATH_PROPERTY)->getValue().toString();
-	ui->showMySky_pathToModelEdit->setText(currentModelPath);
+	if(currentModelPath.isEmpty())
+	{
+		const auto modelPath = mgr->getProperty(DEFAULT_MODEL_PATH_PROPERTY)->getValue().toString();
+		ui->showMySky_pathToModelEdit->setText(modelPath);
+	}
+	else
+	{
+		ui->showMySky_pathToModelEdit->setText(currentModelPath);
+	}
 	const auto currentStatusText = mgr->getProperty(STATUS_TEXT_PROPERTY)->getValue().toString();
 	ui->showMySky_statusLabel->setText(currentStatusText);
 	const bool currentErrorStatus = mgr->getProperty(ERROR_PROPERTY)->getValue().toBool();
