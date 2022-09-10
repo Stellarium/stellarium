@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-09-04 00:58+0700\n"
+"POT-Creation-Date: 2022-09-09 13:37+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/stellarium/teams/80998/zh_TW/)\n"
@@ -733,9 +733,9 @@ msgid "m"
 msgstr "公尺"
 
 #: src/core/modules/LandscapeMgr.cpp:1175 src/gui/ObsListDialog.cpp:152
-#: src/gui/ObsListCreateEditDialog.cpp:161 src/ui_locationDialogGui.h:480
+#: src/gui/ObsListCreateEditDialog.cpp:161 src/ui_locationDialogGui.h:481
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Location"
 msgstr "位置"
 
@@ -1817,7 +1817,7 @@ msgctxt "parallax"
 msgid "mas"
 msgstr "mas"
 
-#: src/core/modules/Nebula.cpp:433 src/ui_searchDialogGui.h:915
+#: src/core/modules/Nebula.cpp:433 src/ui_searchDialogGui.h:916
 msgid "Morphological description"
 msgstr "型態說明"
 
@@ -2966,8 +2966,8 @@ msgstr "載入外掛"
 #: src/core/StelCore.cpp:267 src/gui/StelGui.cpp:224
 #: src/gui/AstroCalcDialog.cpp:1847 src/gui/AstroCalcDialog.cpp:2517
 #: src/gui/AstroCalcDialog.cpp:2541 src/gui/AstroCalcDialog.cpp:3276
-#: src/gui/AstroCalcDialog.cpp:5851 src/ui_dateTimeDialogGui.h:372
-#: src/ui_dateTimeDialogGui.h:375
+#: src/gui/AstroCalcDialog.cpp:5851 src/ui_dateTimeDialogGui.h:373
+#: src/ui_dateTimeDialogGui.h:376
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
 msgstr "日期與時間"
@@ -5183,7 +5183,7 @@ msgstr "視窗"
 msgid "Selected object information"
 msgstr "選擇天體的資訊"
 
-#: src/gui/StelGui.cpp:221 plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
+#: src/gui/StelGui.cpp:221 plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
 msgid "Quit"
 msgstr "離開"
 
@@ -5223,7 +5223,7 @@ msgstr "說明"
 msgid "Configuration window"
 msgstr "設定視窗"
 
-#: src/gui/StelGui.cpp:240 src/ui_searchDialogGui.h:829
+#: src/gui/StelGui.cpp:240 src/ui_searchDialogGui.h:830
 msgid "Search window"
 msgstr "搜尋"
 
@@ -5363,7 +5363,7 @@ msgid "FOV"
 msgstr "FOV"
 
 #: src/gui/StelGuiItems.cpp:892
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:490
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
 msgid "Field of view"
 msgstr "視野大小"
 
@@ -5553,23 +5553,23 @@ msgid ""
 "toggle off to let other programs access the GPS device."
 msgstr "切換讀取GPS位置（不改變時區），取得位置資訊後關閉連線好讓其他程式連結GPS裝置。"
 
-#: src/gui/LocationDialog.cpp:808
+#: src/gui/LocationDialog.cpp:806
 msgid "GPS listening..."
 msgstr "GPS 讀取中..."
 
-#: src/gui/LocationDialog.cpp:815
+#: src/gui/LocationDialog.cpp:813
 msgid "GPS disconnecting..."
 msgstr "GPS 切斷連線..."
 
-#: src/gui/LocationDialog.cpp:827
+#: src/gui/LocationDialog.cpp:825
 msgid "GPS location fix"
 msgstr "GPS 位置修正"
 
-#: src/gui/LocationDialog.cpp:850
+#: src/gui/LocationDialog.cpp:848
 msgid "GPS:FAILED"
 msgstr "GPS:失敗"
 
-#: src/gui/LocationDialog.cpp:862 src/ui_locationDialogGui.h:510
+#: src/gui/LocationDialog.cpp:860 src/ui_locationDialogGui.h:511
 msgid "Get location from GPS"
 msgstr "自GPS取得位置"
 
@@ -8959,8 +8959,8 @@ msgstr ""
 
 #: src/translations.h:586
 msgid ""
-"Screensaver of various happenings in the Solar System. 313 events in all!"
-msgstr "使用 313 個發生在太陽系的事件所製作的螢幕保護"
+"Screensaver of various happenings in the Solar System. 321 events in all!"
+msgstr ""
 
 #: src/translations.h:587
 msgid "A tour of the western constellations."
@@ -11006,69 +11006,74 @@ msgstr "薩米 Sami"
 
 #: skycultures/translations_skycultures.fab:88
 msgctxt "sky culture"
+msgid "Samoan"
+msgstr ""
+
+#: skycultures/translations_skycultures.fab:90
+msgctxt "sky culture"
 msgid "Sardinian"
 msgstr "薩丁尼亞 Sardinian"
 
-#: skycultures/translations_skycultures.fab:90
+#: skycultures/translations_skycultures.fab:92
 msgctxt "sky culture"
 msgid "Tongan"
 msgstr "東加 Tongan"
 
-#: skycultures/translations_skycultures.fab:92
+#: skycultures/translations_skycultures.fab:94
 msgctxt "sky culture"
 msgid "Tukano"
 msgstr "圖卡諾 Tukano"
 
-#: skycultures/translations_skycultures.fab:94
+#: skycultures/translations_skycultures.fab:96
 msgctxt "sky culture"
 msgid "Tupi-Guarani"
 msgstr "圖皮-瓜拉尼 Tupi-Guarani"
 
-#: skycultures/translations_skycultures.fab:96
+#: skycultures/translations_skycultures.fab:98
 msgctxt "sky culture"
 msgid "Vanuatu (Netwar)"
 msgstr "萬那杜 (Netwar)"
 
-#: skycultures/translations_skycultures.fab:98
+#: skycultures/translations_skycultures.fab:100
 msgctxt "sky culture"
 msgid "Western"
 msgstr "西方"
 
-#: skycultures/translations_skycultures.fab:100
+#: skycultures/translations_skycultures.fab:102
 msgctxt "sky culture"
 msgid "Western (H.A. Rey)"
 msgstr "西方 (H.A. Rey)"
 
-#: skycultures/translations_skycultures.fab:102
+#: skycultures/translations_skycultures.fab:104
 msgctxt "sky culture"
 msgid "Western (O.Hlad)"
 msgstr "西方 (O.Hlad)"
 
-#: skycultures/translations_skycultures.fab:104
+#: skycultures/translations_skycultures.fab:106
 msgctxt "sky culture"
 msgid "Western (Sky & Telescope)"
 msgstr "西方 (Sky & Telescope)"
 
-#: skycultures/translations_skycultures.fab:106
+#: skycultures/translations_skycultures.fab:108
 msgctxt "sky culture"
 msgid "Western (Sternenkarten)"
 msgstr "西方 (Sternenkarten)"
 
-#: skycultures/translations_skycultures.fab:108
+#: skycultures/translations_skycultures.fab:110
 msgctxt "sky culture"
 msgid "Xhosa"
 msgstr ""
 
-#: skycultures/translations_skycultures.fab:110
+#: skycultures/translations_skycultures.fab:112
 msgctxt "sky culture"
 msgid "Zulu"
 msgstr "祖魯"
 
-#: src/ui_dateTimeDialogGui.h:377 src/ui_dateTimeDialogGui.h:382
+#: src/ui_dateTimeDialogGui.h:378 src/ui_dateTimeDialogGui.h:383
 msgid "Julian Day"
 msgstr "儒略日"
 
-#: src/ui_dateTimeDialogGui.h:380
+#: src/ui_dateTimeDialogGui.h:381
 msgid "Modified Julian Day"
 msgstr "修正儒略日"
 
@@ -11098,313 +11103,313 @@ msgstr "檢查更新"
 msgid "Refresh"
 msgstr "重新整理"
 
-#: src/ui_locationDialogGui.h:484 src/ui_locationDialogGui.h:487
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:155
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:158
+#: src/ui_locationDialogGui.h:485 src/ui_locationDialogGui.h:488
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:156
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:159
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr "僅包含英文名字(不含讀音!)的標準位置列表"
 
-#: src/ui_locationDialogGui.h:490
+#: src/ui_locationDialogGui.h:491
 msgid "Reset Location List"
 msgstr "重設位置列表"
 
-#: src/ui_locationDialogGui.h:491
+#: src/ui_locationDialogGui.h:492
 msgid "Current location information"
 msgstr "目前觀測位置資訊"
 
-#: src/ui_locationDialogGui.h:492
+#: src/ui_locationDialogGui.h:493
 msgid "Add to list"
 msgstr "加入列表"
 
-#: src/ui_locationDialogGui.h:493
+#: src/ui_locationDialogGui.h:494
 msgid "Delete from list"
 msgstr "從列表中刪除"
 
-#: src/ui_locationDialogGui.h:494
+#: src/ui_locationDialogGui.h:495
 msgid "Return to default location"
 msgstr "回到預設的位置"
 
-#: src/ui_locationDialogGui.h:495
+#: src/ui_locationDialogGui.h:496
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Latitude:"
 msgstr "緯度:"
 
-#: src/ui_locationDialogGui.h:497
+#: src/ui_locationDialogGui.h:498
 msgid "Enter the elevation in meter"
 msgstr "以公尺為單位輸入海拔高度"
 
-#: src/ui_locationDialogGui.h:499
+#: src/ui_locationDialogGui.h:500
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:500
+#: src/ui_locationDialogGui.h:501
 msgid "Get location from Network"
 msgstr "從網路取得位置資訊"
 
-#: src/ui_locationDialogGui.h:501
+#: src/ui_locationDialogGui.h:502
 msgid "Use current location as default"
 msgstr "使用現在的位置當作預設值"
 
-#: src/ui_locationDialogGui.h:502
+#: src/ui_locationDialogGui.h:503
 msgid "Elevation:"
 msgstr "高度:"
 
-#: src/ui_locationDialogGui.h:504 src/ui_locationDialogGui.h:508
+#: src/ui_locationDialogGui.h:505 src/ui_locationDialogGui.h:509
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr "您可以輸入十進位制的度數，或是使用 dms 格式，例如: +1d 12m 8s"
 
-#: src/ui_locationDialogGui.h:506
+#: src/ui_locationDialogGui.h:507
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:149
 msgid "Longitude:"
 msgstr "經度:"
 
-#: src/ui_locationDialogGui.h:511
+#: src/ui_locationDialogGui.h:512
 msgid "New Location"
 msgstr "新位置"
 
-#: src/ui_locationDialogGui.h:512
+#: src/ui_locationDialogGui.h:513
 msgid "Planet:"
 msgstr "行星:"
 
-#: src/ui_locationDialogGui.h:513
+#: src/ui_locationDialogGui.h:514
 msgid "Use custom time zone"
 msgstr "使用偏好的時區"
 
-#: src/ui_locationDialogGui.h:514
+#: src/ui_locationDialogGui.h:515
 msgid "Time zone:"
 msgstr "時區:"
 
-#: src/ui_locationDialogGui.h:515
+#: src/ui_locationDialogGui.h:516
 msgid "Name/City:"
 msgstr "地名/城市名稱:"
 
-#: src/ui_locationDialogGui.h:516
+#: src/ui_locationDialogGui.h:517
 msgid "Region:"
 msgstr "區域 : "
 
-#: src/ui_locationDialogGui.h:520
+#: src/ui_locationDialogGui.h:521
 msgid "Enable daylight saving time"
 msgstr "啟用日光節約時間"
 
-#: src/ui_searchDialogGui.h:825
+#: src/ui_searchDialogGui.h:826
 msgid "Find Object"
 msgstr "尋找天體"
 
-#: src/ui_searchDialogGui.h:832
+#: src/ui_searchDialogGui.h:833
 msgid "Use tab key for select of found items"
 msgstr "使用 tab 鍵來選取發現的項目"
 
-#: src/ui_searchDialogGui.h:837
+#: src/ui_searchDialogGui.h:838
 msgid "iota"
 msgstr "ι"
 
-#: src/ui_searchDialogGui.h:840
+#: src/ui_searchDialogGui.h:841
 msgid "alpha"
 msgstr "α"
 
-#: src/ui_searchDialogGui.h:843
+#: src/ui_searchDialogGui.h:844
 msgid "beta"
 msgstr "β"
 
-#: src/ui_searchDialogGui.h:846
+#: src/ui_searchDialogGui.h:847
 msgid "gamma"
 msgstr "γ"
 
-#: src/ui_searchDialogGui.h:849
+#: src/ui_searchDialogGui.h:850
 msgid "delta"
 msgstr "δ"
 
-#: src/ui_searchDialogGui.h:852
+#: src/ui_searchDialogGui.h:853
 msgid "epsilon"
 msgstr "ε"
 
-#: src/ui_searchDialogGui.h:855
+#: src/ui_searchDialogGui.h:856
 msgid "zeta"
 msgstr "ζ"
 
-#: src/ui_searchDialogGui.h:858
+#: src/ui_searchDialogGui.h:859
 msgid "eta"
 msgstr "η"
 
-#: src/ui_searchDialogGui.h:861
+#: src/ui_searchDialogGui.h:862
 msgid "theta"
 msgstr "θ"
 
-#: src/ui_searchDialogGui.h:864
+#: src/ui_searchDialogGui.h:865
 msgid "kappa"
 msgstr "κ"
 
-#: src/ui_searchDialogGui.h:867
+#: src/ui_searchDialogGui.h:868
 msgid "lambda"
 msgstr "λ"
 
-#: src/ui_searchDialogGui.h:870
+#: src/ui_searchDialogGui.h:871
 msgid "mu"
 msgstr "µ"
 
-#: src/ui_searchDialogGui.h:873
+#: src/ui_searchDialogGui.h:874
 msgid "nu"
 msgstr "ν"
 
-#: src/ui_searchDialogGui.h:876
+#: src/ui_searchDialogGui.h:877
 msgid "xi"
 msgstr "ξ"
 
-#: src/ui_searchDialogGui.h:879
+#: src/ui_searchDialogGui.h:880
 msgid "omicron"
 msgstr "ο"
 
-#: src/ui_searchDialogGui.h:882
+#: src/ui_searchDialogGui.h:883
 msgid "pi"
 msgstr "π"
 
-#: src/ui_searchDialogGui.h:885
+#: src/ui_searchDialogGui.h:886
 msgid "rho"
 msgstr "ρ"
 
-#: src/ui_searchDialogGui.h:888
+#: src/ui_searchDialogGui.h:889
 msgid "sigma"
 msgstr "σ"
 
-#: src/ui_searchDialogGui.h:891
+#: src/ui_searchDialogGui.h:892
 msgid "tau"
 msgstr "τ"
 
-#: src/ui_searchDialogGui.h:894
+#: src/ui_searchDialogGui.h:895
 msgid "upsilon"
 msgstr "υ"
 
-#: src/ui_searchDialogGui.h:897
+#: src/ui_searchDialogGui.h:898
 msgid "phi"
 msgstr "φ"
 
-#: src/ui_searchDialogGui.h:900
+#: src/ui_searchDialogGui.h:901
 msgid "chi"
 msgstr "χ"
 
-#: src/ui_searchDialogGui.h:903
+#: src/ui_searchDialogGui.h:904
 msgid "psi"
 msgstr "ψ"
 
-#: src/ui_searchDialogGui.h:906
+#: src/ui_searchDialogGui.h:907
 msgid "omega"
 msgstr "ω"
 
-#: src/ui_searchDialogGui.h:908
+#: src/ui_searchDialogGui.h:909
 msgid "Greek letters for Bayer designations"
 msgstr "拜耳命名法用的希臘字母"
 
-#: src/ui_searchDialogGui.h:909
+#: src/ui_searchDialogGui.h:910
 msgid "Object"
 msgstr "天體"
 
-#: src/ui_searchDialogGui.h:910
+#: src/ui_searchDialogGui.h:911
 msgid "Query SIMBAD about selected object"
 msgstr "詢問 SIMBAD 關於選取的天體"
 
-#: src/ui_searchDialogGui.h:911
+#: src/ui_searchDialogGui.h:912
 msgid "All IDs"
 msgstr "所有識別符號"
 
-#: src/ui_searchDialogGui.h:912
+#: src/ui_searchDialogGui.h:913
 msgid "Types"
 msgstr "類型"
 
-#: src/ui_searchDialogGui.h:913
+#: src/ui_searchDialogGui.h:914
 msgid "Spectral Class"
 msgstr "光譜分類"
 
-#: src/ui_searchDialogGui.h:917
+#: src/ui_searchDialogGui.h:918
 msgid "Morph. Descr."
 msgstr "形態描述"
 
-#: src/ui_searchDialogGui.h:918
+#: src/ui_searchDialogGui.h:919
 msgid "Dimensions"
 msgstr "尺寸"
 
-#: src/ui_searchDialogGui.h:919
+#: src/ui_searchDialogGui.h:920
 msgid "Max. search radius"
 msgstr "最大搜尋半徑"
 
-#: src/ui_searchDialogGui.h:920
+#: src/ui_searchDialogGui.h:921
 msgid "arcseconds"
 msgstr "弧秒"
 
-#: src/ui_searchDialogGui.h:921
+#: src/ui_searchDialogGui.h:922
 msgid "Max. results "
 msgstr "最多筆數"
 
-#: src/ui_searchDialogGui.h:923
+#: src/ui_searchDialogGui.h:924
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
 msgstr "備註: 這項工具並不適用於座標系的折射修正。"
 
-#: src/ui_searchDialogGui.h:925
+#: src/ui_searchDialogGui.h:926
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:600
 msgid "Coordinate system:"
 msgstr "座標系統:"
 
-#: src/ui_searchDialogGui.h:927
+#: src/ui_searchDialogGui.h:928
 msgid "Position"
 msgstr "位置"
 
-#: src/ui_searchDialogGui.h:929
+#: src/ui_searchDialogGui.h:930
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr "有些天體需要啟動相應的外掛程式後方能顯現"
 
-#: src/ui_searchDialogGui.h:931
+#: src/ui_searchDialogGui.h:932
 msgid "names in English"
 msgstr "英文命名"
 
-#: src/ui_searchDialogGui.h:932 src/ui_astroCalcDialog.h:2324
+#: src/ui_searchDialogGui.h:933 src/ui_astroCalcDialog.h:2324
 msgid "Search in list..."
 msgstr "在列表中搜索..."
 
-#: src/ui_searchDialogGui.h:933
+#: src/ui_searchDialogGui.h:934
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Lists"
 msgstr "列表"
 
-#: src/ui_searchDialogGui.h:934
+#: src/ui_searchDialogGui.h:935
 msgid "Search options"
 msgstr "搜尋選項"
 
-#: src/ui_searchDialogGui.h:935
+#: src/ui_searchDialogGui.h:936
 msgid "Use autofill only from the beginning of words"
 msgstr "僅在詞彙開頭處進行自動填寫"
 
-#: src/ui_searchDialogGui.h:936
+#: src/ui_searchDialogGui.h:937
 msgid "Lock position when coordinates are used"
 msgstr "使用座標系時鎖定位置"
 
-#: src/ui_searchDialogGui.h:937
+#: src/ui_searchDialogGui.h:938
 msgid "Show FOV center marker when position is search"
 msgstr "當位置搜尋確定後顯示視野中心標記"
 
-#: src/ui_searchDialogGui.h:939
+#: src/ui_searchDialogGui.h:940
 msgid "Use on-line astronomical database SIMBAD"
 msgstr "使用 SIMBAD 線上天文資料庫"
 
-#: src/ui_searchDialogGui.h:941
+#: src/ui_searchDialogGui.h:942
 msgid "Use SIMBAD"
 msgstr "使用 SIMBAD"
 
-#: src/ui_searchDialogGui.h:942
+#: src/ui_searchDialogGui.h:943
 msgid "Server:"
 msgstr "伺服器:"
 
-#: src/ui_searchDialogGui.h:943
+#: src/ui_searchDialogGui.h:944
 msgid "Recent Searches"
 msgstr "最近的搜尋"
 
-#: src/ui_searchDialogGui.h:947
+#: src/ui_searchDialogGui.h:948
 msgid "Max items to display:"
 msgstr "最多可顯示的項目: "
 
-#: src/ui_searchDialogGui.h:951 src/ui_viewDialog.h:4103
+#: src/ui_searchDialogGui.h:952 src/ui_viewDialog.h:4103
 #: src/ui_viewDialog.h:4134 src/ui_configurationDialog.h:2088
 #: src/ui_configurationDialog.h:2099
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:342
@@ -12730,7 +12735,7 @@ msgstr "圖形使用介面的額外設定"
 
 #: src/ui_configurationDialog.h:1708
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1501
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
 msgid "Time"
 msgstr "時間"
 
@@ -12822,7 +12827,7 @@ msgstr "儲存目前的設置，下次啟動時自動套用。"
 #: plugins/Quasars/src/ui_quasarsDialog.h:313
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:354
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:271
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:505
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:506
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:600
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:260
@@ -12844,7 +12849,7 @@ msgstr "還原至Stellarium預設值設置"
 #: plugins/Quasars/src/ui_quasarsDialog.h:312
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:353
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:270
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:504
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:505
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:599
 #: plugins/Observability/src/ui_ObservabilityDialog.h:344
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:259
@@ -13563,63 +13568,63 @@ msgstr "應用"
 msgid "Restore All Defaults"
 msgstr "全部重置為預設值"
 
-#: src/ui_atmosphereDialog.h:382
+#: src/ui_atmosphereDialog.h:384
 msgid "Atmosphere Details"
 msgstr "大氣層細節"
 
-#: src/ui_atmosphereDialog.h:384
+#: src/ui_atmosphereDialog.h:386
 msgid "Visual Model"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:385
+#: src/ui_atmosphereDialog.h:387
 msgid "Choose &model:"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:386
+#: src/ui_atmosphereDialog.h:388
 msgid "Preetham"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:387
+#: src/ui_atmosphereDialog.h:389
 msgid "ShowMySky"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:390
+#: src/ui_atmosphereDialog.h:392
 msgid "Path to &data:"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:392
+#: src/ui_atmosphereDialog.h:394
 msgid "Eclipse simulation &quality:"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:393
+#: src/ui_atmosphereDialog.h:395
 msgid "Show debugging options"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:394
+#: src/ui_atmosphereDialog.h:396
 msgid "Render zero-order scattering"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:395
+#: src/ui_atmosphereDialog.h:397
 msgid "Render single scattering"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:396
+#: src/ui_atmosphereDialog.h:398
 msgid "Render multiple scattering"
 msgstr ""
 
-#: src/ui_atmosphereDialog.h:397
+#: src/ui_atmosphereDialog.h:399
 msgid "Refraction Settings"
 msgstr "折光設置"
 
-#: src/ui_atmosphereDialog.h:398
+#: src/ui_atmosphereDialog.h:400
 msgid "Pressure (mbar):"
 msgstr "大氣壓力(毫巴)"
 
-#: src/ui_atmosphereDialog.h:399
+#: src/ui_atmosphereDialog.h:401
 msgid "Temperature (C):"
 msgstr "溫度(攝氏)"
 
-#: src/ui_atmosphereDialog.h:404 src/ui_greatRedSpotDialog.h:183
+#: src/ui_atmosphereDialog.h:406 src/ui_greatRedSpotDialog.h:183
 #: src/ui_tonemappingDialog.h:206
 msgid ""
 "Extinction is the loss of star brightness due to Earth's atmosphere. It is "
@@ -13629,37 +13634,37 @@ msgstr ""
 "消光意指由於大氣層的影響使恆星的可視亮度降低，單位是 "
 "亮度/大氣質量，其中大氣質量指天體發射的光通過大氣層的光程(海平面上天頂的大氣質量為1，在地平面約為40)"
 
-#: src/ui_atmosphereDialog.h:406
+#: src/ui_atmosphereDialog.h:408
 msgid "Extinction Coefficient (k):"
 msgstr "消光係數 (k):"
 
-#: src/ui_atmosphereDialog.h:408
+#: src/ui_atmosphereDialog.h:410
 msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr "極好的山頂環境使用約0.12的數值，良好的田園環境使用0.2，嚴重霧霾環境下使用0.35。"
 
-#: src/ui_atmosphereDialog.h:411
+#: src/ui_atmosphereDialog.h:413
 msgid "Set the International Standard Atmosphere at the height 0 km MSL"
 msgstr "設定為平均海拔高度0公里的國際標準大氣"
 
-#: src/ui_atmosphereDialog.h:413
+#: src/ui_atmosphereDialog.h:415
 msgid "Standard Atmosphere"
 msgstr "標準大氣"
 
-#: src/ui_atmosphereDialog.h:414
+#: src/ui_atmosphereDialog.h:416
 msgid "Experimental"
 msgstr "實驗性的"
 
-#: src/ui_atmosphereDialog.h:415
+#: src/ui_atmosphereDialog.h:417
 msgid "Suppress scattering (only refraction/extinction)"
 msgstr "抑制散射（僅折射/消光）"
 
-#: src/ui_atmosphereDialog.h:416
+#: src/ui_atmosphereDialog.h:418
 msgid "T=25(k-0.16)+1 -- or T="
 msgstr "T=25(k-0.16)+1 -- 或 T="
 
-#: src/ui_atmosphereDialog.h:417
+#: src/ui_atmosphereDialog.h:419
 msgid "T=2/5(default)/6 at k=0.16/0.32/0.36. "
 msgstr "T=2/5(預設值)/6 當 k=0.16/0.32/0.36 時。"
 
@@ -14304,7 +14309,7 @@ msgid "Ephemeris line thickness:"
 msgstr "星曆表線條粗細:"
 
 #: src/ui_astroCalcExtraEphemerisDialog.h:204
-#: plugins/Oculars/src/Oculars.cpp:1750
+#: plugins/Oculars/src/Oculars.cpp:1746
 #: plugins/Oculars/src/gui/OcularDialog.cpp:596
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1159
 #: plugins/Satellites/src/ui_satellitesDialog.h:1284
@@ -14415,7 +14420,7 @@ msgstr "列表的名稱 : "
 
 #: src/ui_obsListCreateEditDialog.h:268
 #: plugins/Satellites/src/ui_satellitesDialog.h:1384
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:215
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:216
 msgid "Description:"
 msgstr "說明:"
 
@@ -15157,7 +15162,7 @@ msgstr ""
 #: plugins/Quasars/src/ui_quasarsDialog.h:315
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:356
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:283
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:503
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:504
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:622
 #: plugins/Observability/src/ui_ObservabilityDialog.h:347
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:262
@@ -15169,8 +15174,8 @@ msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "關於"
 
-#: plugins/Oculars/src/Oculars.cpp:75 plugins/Oculars/src/Oculars.cpp:1478
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:188
+#: plugins/Oculars/src/Oculars.cpp:75 plugins/Oculars/src/Oculars.cpp:1474
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:185
 #: plugins/Oculars/src/ui_ocularDialog.h:1446
 msgid "Oculars"
 msgstr "望遠鏡模擬"
@@ -15182,59 +15187,59 @@ msgid ""
 "frame and a Telrad sight."
 msgstr "顯示透過望遠鏡接目鏡觀看的天空(僅模擬視野與放大倍率)，它也可以顯示影像感測器畫框或是Telrad尋星鏡畫面。"
 
-#: plugins/Oculars/src/Oculars.cpp:966
+#: plugins/Oculars/src/Oculars.cpp:962
 msgid "Please select an object before switching to ocular view."
 msgstr "請先選取一個天體後再轉到望遠鏡模擬觀看。"
 
-#: plugins/Oculars/src/Oculars.cpp:1072
+#: plugins/Oculars/src/Oculars.cpp:1068
 msgid "&Previous ocular"
 msgstr "前一台望遠鏡(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:1073
+#: plugins/Oculars/src/Oculars.cpp:1069
 msgid "&Next ocular"
 msgstr "下一台望遠鏡(&N)"
 
-#: plugins/Oculars/src/Oculars.cpp:1074
+#: plugins/Oculars/src/Oculars.cpp:1070
 msgid "Select &ocular"
 msgstr "選取望遠鏡(&o)"
 
-#: plugins/Oculars/src/Oculars.cpp:1116
+#: plugins/Oculars/src/Oculars.cpp:1112
 msgid "Toggle &crosshair"
 msgstr "切換顯示十字准線(&c)"
 
-#: plugins/Oculars/src/Oculars.cpp:1126
+#: plugins/Oculars/src/Oculars.cpp:1122
 msgid "Configure &Oculars"
 msgstr "設定望遠鏡模擬"
 
-#: plugins/Oculars/src/Oculars.cpp:1135
+#: plugins/Oculars/src/Oculars.cpp:1131
 msgid "Toggle &CCD"
 msgstr "切換顯示 CCD (&C)"
 
-#: plugins/Oculars/src/Oculars.cpp:1143
+#: plugins/Oculars/src/Oculars.cpp:1139
 msgid "Toggle &Telrad"
 msgstr "切換Telrad尋星鏡(&T)"
 
-#: plugins/Oculars/src/Oculars.cpp:1152
+#: plugins/Oculars/src/Oculars.cpp:1148
 msgid "&Previous CCD"
 msgstr "前一個 CCD (&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:1153
+#: plugins/Oculars/src/Oculars.cpp:1149
 msgid "&Next CCD"
 msgstr "下一個 CCD (&N)"
 
-#: plugins/Oculars/src/Oculars.cpp:1154
+#: plugins/Oculars/src/Oculars.cpp:1150
 msgid "&Select CCD"
 msgstr "選取 CCD (&C)"
 
-#: plugins/Oculars/src/Oculars.cpp:1175
+#: plugins/Oculars/src/Oculars.cpp:1171
 msgid "&Rotate CCD"
 msgstr "旋轉 CCD (&C)"
 
-#: plugins/Oculars/src/Oculars.cpp:1187
+#: plugins/Oculars/src/Oculars.cpp:1183
 msgid "&Reset rotation"
 msgstr "旋轉歸位(&R)"
 
-#: plugins/Oculars/src/Oculars.cpp:1351
+#: plugins/Oculars/src/Oculars.cpp:1347
 #: plugins/Oculars/src/gui/OcularDialog.cpp:118
 #: plugins/Oculars/src/gui/OcularDialog.cpp:135
 #: plugins/Oculars/src/gui/OcularDialog.cpp:152
@@ -15243,33 +15248,33 @@ msgstr "旋轉歸位(&R)"
 msgid "Warning!"
 msgstr "警告！"
 
-#: plugins/Oculars/src/Oculars.cpp:1351
+#: plugins/Oculars/src/Oculars.cpp:1347
 msgid ""
 "Unable to display a sensor boundary: No sensors or telescopes are defined."
 msgstr "無法顯示感應器的邊界：沒有定義感應器或望遠鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:1479
+#: plugins/Oculars/src/Oculars.cpp:1475
 #: plugins/Oculars/src/ui_ocularDialog.h:1481
 msgid "Ocular view"
 msgstr "望遠鏡模擬顯示"
 
-#: plugins/Oculars/src/Oculars.cpp:1480
+#: plugins/Oculars/src/Oculars.cpp:1476
 msgid "Oculars popup menu"
 msgstr "望遠鏡模擬的彈出式選單"
 
-#: plugins/Oculars/src/Oculars.cpp:1481
+#: plugins/Oculars/src/Oculars.cpp:1477
 msgid "Show crosshairs"
 msgstr "顯示十字准線"
 
-#: plugins/Oculars/src/Oculars.cpp:1482
+#: plugins/Oculars/src/Oculars.cpp:1478
 msgid "Image sensor frame"
 msgstr "影像感測器畫框"
 
-#: plugins/Oculars/src/Oculars.cpp:1483
+#: plugins/Oculars/src/Oculars.cpp:1479
 msgid "Telrad sight"
 msgstr "Telrad尋星鏡視野"
 
-#: plugins/Oculars/src/Oculars.cpp:1484
+#: plugins/Oculars/src/Oculars.cpp:1480
 #: plugins/Satellites/src/Satellites.cpp:166
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:207
 #: plugins/NavStars/src/NavStars.cpp:127 plugins/Quasars/src/Quasars.cpp:172
@@ -15285,418 +15290,418 @@ msgstr "Telrad尋星鏡視野"
 msgid "Show settings dialog"
 msgstr "顯示設置對話框"
 
-#: plugins/Oculars/src/Oculars.cpp:1485
+#: plugins/Oculars/src/Oculars.cpp:1481
 msgid "Toggle Oculars button bar"
 msgstr "切換望遠鏡模擬按鍵列"
 
-#: plugins/Oculars/src/Oculars.cpp:1487
+#: plugins/Oculars/src/Oculars.cpp:1483
 msgid "Select next telescope"
 msgstr "選取下一台望遠鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:1489
+#: plugins/Oculars/src/Oculars.cpp:1485
 msgid "Select previous telescope"
 msgstr "選取前一台望遠鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:1491
+#: plugins/Oculars/src/Oculars.cpp:1487
 msgid "Select next eyepiece"
 msgstr "選取下一個目鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:1493
+#: plugins/Oculars/src/Oculars.cpp:1489
 msgid "Select previous eyepiece"
 msgstr "選取前一個目鏡"
 
-#: plugins/Oculars/src/Oculars.cpp:1494
+#: plugins/Oculars/src/Oculars.cpp:1490
 msgid "Rotate reticle pattern of the eyepiece clockwise"
 msgstr "順時鐘旋轉目鏡的標線圖案"
 
-#: plugins/Oculars/src/Oculars.cpp:1495
+#: plugins/Oculars/src/Oculars.cpp:1491
 msgid "Rotate reticle pattern of the eyepiece counterclockwise"
 msgstr "逆時鐘旋轉目鏡的標線圖案"
 
-#: plugins/Oculars/src/Oculars.cpp:1496
+#: plugins/Oculars/src/Oculars.cpp:1492
 msgid "Toggle sensor crop overlay"
 msgstr "切換顯示感應器切割輪廓"
 
-#: plugins/Oculars/src/Oculars.cpp:1497
+#: plugins/Oculars/src/Oculars.cpp:1493
 msgid "Toggle sensor pixel grid"
 msgstr "切換感應器像數格線"
 
-#: plugins/Oculars/src/Oculars.cpp:1498
+#: plugins/Oculars/src/Oculars.cpp:1494
 msgid "Toggle focuser overlay"
 msgstr "切換顯示對焦器重疊"
 
-#: plugins/Oculars/src/Oculars.cpp:1720
+#: plugins/Oculars/src/Oculars.cpp:1716
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "十字中心的赤經/赤緯(J2000.0)"
 
 #. TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1731
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:692
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:864
+#: plugins/Oculars/src/Oculars.cpp:1727
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:689
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:861
 msgid "\"/px"
 msgstr "\"/px"
 
-#: plugins/Oculars/src/Oculars.cpp:1991
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:482
+#: plugins/Oculars/src/Oculars.cpp:1987
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:479
 msgid "Ocular"
 msgstr "望遠鏡模擬"
 
-#: plugins/Oculars/src/Oculars.cpp:1993
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:484
+#: plugins/Oculars/src/Oculars.cpp:1989
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:481
 msgid "Binocular"
 msgstr "雙筒望遠鏡"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:2013
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:527
+#: plugins/Oculars/src/Oculars.cpp:2009
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:524
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "望遠鏡焦距: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:2020
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:536
+#: plugins/Oculars/src/Oculars.cpp:2016
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:533
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "可視視野(aFOV): %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2031
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:566
+#: plugins/Oculars/src/Oculars.cpp:2027
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:563
 #, qt-format
 msgid "Lens #%1"
 msgstr "鏡片 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2035
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:570
+#: plugins/Oculars/src/Oculars.cpp:2031
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:567
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "鏡片 #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2040
+#: plugins/Oculars/src/Oculars.cpp:2036
 msgid "Lens: none"
 msgstr "鏡片: 無"
 
-#: plugins/Oculars/src/Oculars.cpp:2055 plugins/Oculars/src/Oculars.cpp:2116
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:812
+#: plugins/Oculars/src/Oculars.cpp:2051 plugins/Oculars/src/Oculars.cpp:2112
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:809
 #, qt-format
 msgid "Telescope #%1"
 msgstr "望遠鏡 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2064
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:914
+#: plugins/Oculars/src/Oculars.cpp:2060
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:911
 #, qt-format
 msgid "Magnification: %1"
 msgstr "放大倍率望: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2071
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:925
+#: plugins/Oculars/src/Oculars.cpp:2067
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:922
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "出射光瞳: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:2078
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:933
+#: plugins/Oculars/src/Oculars.cpp:2074
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:930
 #, qt-format
 msgid "FOV: %1"
 msgstr "視野(FOV): %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2099
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:680
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:856
+#: plugins/Oculars/src/Oculars.cpp:2095
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:677
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:853
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "尺寸: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2100
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:686
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:860
+#: plugins/Oculars/src/Oculars.cpp:2096
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:683
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:857
 msgid "Binning"
 msgstr "像素合併"
 
-#: plugins/Oculars/src/Oculars.cpp:2104
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:640
+#: plugins/Oculars/src/Oculars.cpp:2100
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:637
 #, qt-format
 msgid "Sensor #%1"
 msgstr "感測器 #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2108
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:644
+#: plugins/Oculars/src/Oculars.cpp:2104
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:641
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "感測器 #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2121
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:816
+#: plugins/Oculars/src/Oculars.cpp:2117
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:813
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "望遠鏡 #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2460
+#: plugins/Oculars/src/Oculars.cpp:2456
 msgid "&Lens"
 msgstr "鏡片(&L)"
 
-#: plugins/Oculars/src/Oculars.cpp:2461
+#: plugins/Oculars/src/Oculars.cpp:2457
 msgid "&Previous lens"
 msgstr "前一個鏡片(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:2462
+#: plugins/Oculars/src/Oculars.cpp:2458
 msgid "&Next lens"
 msgstr "下一個鏡片(&N)"
 
-#: plugins/Oculars/src/Oculars.cpp:2464
+#: plugins/Oculars/src/Oculars.cpp:2460
 #: plugins/Observability/src/Observability.cpp:167
 msgid "None"
 msgstr "不顯示"
 
-#: plugins/Oculars/src/Oculars.cpp:2491
+#: plugins/Oculars/src/Oculars.cpp:2487
 msgid "&Telescope"
 msgstr "望遠鏡(&T)"
 
-#: plugins/Oculars/src/Oculars.cpp:2492
+#: plugins/Oculars/src/Oculars.cpp:2488
 msgid "&Previous telescope"
 msgstr "前一台望遠鏡(&P)"
 
-#: plugins/Oculars/src/Oculars.cpp:2493
+#: plugins/Oculars/src/Oculars.cpp:2489
 msgid "&Next telescope"
 msgstr "下一台望遠鏡(&N)"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:189
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:215
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:212
 msgid "Previous ocular"
 msgstr "前一台望遠鏡模式"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:190
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:217
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:187
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:214
 msgid "Next ocular"
 msgstr "下一台望遠鏡模式"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:191
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:219
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:188
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Previous lens"
 msgstr "前一個鏡片"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:221
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:189
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:218
 msgid "Next lens"
 msgstr "下一個鏡片"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:193
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:223
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:190
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:220
 msgid "Previous CCD frame"
 msgstr "前一個 CCD 畫框"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:194
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:225
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:191
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:222
 msgid "Next CCD frame"
 msgstr "下一個 CCD 畫框"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:195
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:227
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:224
 msgid "Previous telescope"
 msgstr "前一台望遠鏡"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:196
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:229
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:193
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:226
 msgid "Next telescope"
 msgstr "下一台望遠鏡"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:279
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:195
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:276
 msgid "Reset the sensor frame rotation"
 msgstr "感測器畫框旋轉歸位"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:199
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:249
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:196
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:246
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
 msgstr "感測器畫框逆時針旋轉15度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:200
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:259
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:197
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:256
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
 msgstr "感測器畫框逆時針旋轉 5度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:201
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:269
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:266
 msgid "Rotate the sensor frame 1 degree counterclockwise"
 msgstr "感測器畫框逆時針旋轉 1度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:202
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:309
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:199
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:306
 msgid "Rotate the sensor frame 15 degrees clockwise"
 msgstr "感測器畫框順時針旋轉15度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:203
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:299
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:200
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:296
 msgid "Rotate the sensor frame 5 degrees clockwise"
 msgstr "感測器畫框順時針旋轉 5度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:289
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:201
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:286
 msgid "Rotate the sensor frame 1 degree clockwise"
 msgstr "感測器畫框順時針旋轉 1度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:206
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:281
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:203
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:278
 msgid "Reset the prism rotation"
 msgstr "重設稜鏡旋轉"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:251
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:248
 msgid "Rotate the prism 15 degrees counterclockwise"
 msgstr "逆時針旋轉稜鏡 15 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:208
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:261
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:205
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:258
 msgid "Rotate the prism 5 degrees counterclockwise"
 msgstr "逆時針旋轉稜鏡 5 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:209
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:271
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:206
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:268
 msgid "Rotate the prism 1 degree counterclockwise"
 msgstr "逆時針旋轉稜鏡 1 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:311
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:308
 msgid "Rotate the prism 15 degrees clockwise"
 msgstr "順時針旋轉稜鏡 15 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:211
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:301
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:208
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:298
 msgid "Rotate the prism 5 degrees clockwise"
 msgstr "順時針旋轉稜鏡 5 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:212
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:291
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:209
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:288
 msgid "Rotate the prism 1 degree clockwise"
 msgstr "順時針旋轉稜鏡 1 度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:529
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:526
 msgid "Effective focal length of the ocular"
 msgstr "望遠鏡模擬的有效焦距"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:539
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:536
 msgid "Apparent field of view of the ocular"
 msgstr "望遠鏡模擬的可視視野"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:572
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:569
 #, qt-format
 msgid "Multiplicity: %1"
 msgstr "放大率: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:577
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:574
 msgid "Lens: None"
 msgstr "鏡片: 無"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:578
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:575
 msgid "Multiplicity: N/A"
 msgstr "放大率: 未知"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:582
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:579
 msgid "Focal length of eyepiece"
 msgstr "目鏡的焦距"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:682
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:858
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:679
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:855
 msgid "Dimensions field of view"
 msgstr "視野大小"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:693
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:865
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:690
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:862
 msgid "X scale"
 msgstr "X軸刻度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:694
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:866
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:691
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:863
 msgid "Horizontal scale"
 msgstr "水平刻度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:698
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:867
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:695
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:864
 msgid "Y scale"
 msgstr "Y軸刻度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:699
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:868
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:696
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:865
 msgid "Vertical scale"
 msgstr "垂直刻度"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:705
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:702
 #, qt-format
 msgid "Rotation: %1"
 msgstr "旋轉角度: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:743
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:740
 #, qt-format
 msgid "PA of prism: %1"
 msgstr "稜鏡的方位角 : %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:746
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:743
 msgid "Position angle of the off-axis guider' prism"
 msgstr "離軸導星稜鏡的方位角"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:895
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:892
 msgid "Magnification provided by these binoculars"
 msgstr "這些雙筒望遠鏡提供的放大倍率"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:896
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:893
 msgid "Actual field of view provided by these binoculars"
 msgstr "這些雙筒望遠鏡提拱的真實視野"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:897
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:894
 msgid "Exit pupil provided by these binoculars"
 msgstr "這些雙筒望遠鏡提拱的出射光瞳"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:905
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:902
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr "由這組目鏡/鏡片/望遠鏡組合所提供的放大倍率"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:906
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:903
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr "由這組目鏡/鏡片/望遠鏡組合所提供的真實視野"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:907
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:904
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr "由這組目鏡/鏡片/望遠鏡組合所提供的出射光瞳"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:950
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:947
 msgid "Rayleigh criterion"
 msgstr "瑞立 (Rayleigh) 準則"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:952
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:949
 msgid "The Rayleigh resolution criterion"
 msgstr "瑞立 (Rayleigh) 分辨率準則"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:957
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:954
 msgid "Dawes' limit"
 msgstr "道斯 (Dawes) 極限"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:959
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:956
 msgid "Dawes' resolution criterion"
 msgstr "道斯 (Dawes) 分辨率準則"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:964
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:961
 msgid "Abbe's limit"
 msgstr "阿貝 (Abbe) 極限"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:966
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:963
 msgid "Abbe’s diffraction resolution limit"
 msgstr "阿貝 (Abbe) 繞射分辨率極限"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:971
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:968
 msgid "Sparrow's limit"
 msgstr "麻雀 (Sparrow) 極限"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:973
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:970
 msgid "Sparrow's resolution limit"
 msgstr "麻雀 (Sparrow) 分辨率極限"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:999
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:996
 msgid "Visual resolution"
 msgstr "目視鑑別率"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:1001
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:998
 msgid "Visual resolution is based on eye properties and magnification"
 msgstr "目視鑑別率是基於人眼的特性與大小"
 
@@ -19825,7 +19830,7 @@ msgid "On"
 msgstr "開"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Off"
 msgstr "關"
 
@@ -21047,7 +21052,7 @@ msgid "Not active."
 msgstr "非運作中"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:266
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:464
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
 msgid "Remote Control Configuration"
 msgstr "遠端控制設定"
 
@@ -21108,7 +21113,7 @@ msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
 msgstr "伺服器停用 - 或伺服器正在監聽 IP: aaa.bbb.ccc.ddd"
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:51
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:483
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Remote Sync"
 msgstr "遠端同步"
 
@@ -21130,12 +21135,12 @@ msgid "ERROR: %1"
 msgstr "錯誤: %1"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:146
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:470
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:471
 msgid "Start server"
 msgstr "啟動伺服器"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:151
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:473
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
 msgid "Connect to server"
 msgstr "連接伺服器"
 
@@ -21219,97 +21224,97 @@ msgstr "伺服器名稱"
 msgid "Server not active."
 msgstr "伺服器未啟動。"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
 msgid "Remote Sync Plug-in Configuration"
 msgstr "遠端同步外掛程式設定"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:467
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:473
 msgid "Status:"
 msgstr "狀態:"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:469
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:470
 msgid "Server mode"
 msgstr "伺服器模式"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:471
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:472
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:477
 msgid "Server port"
 msgstr "伺服器通訊埠"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:472
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:473
 msgid "Client mode"
 msgstr "客戶端模式"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:475
 msgid "Server host address/name"
 msgstr "伺服器主機位址/名稱"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:475
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
 msgid "127.0.0.1"
 msgstr "127.0.0.1"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:477
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
 msgid "When connection is lost"
 msgstr "當連接遺失時"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
 msgid "Do nothing"
 msgstr "不做任何事"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
 msgid "Try reconnecting"
 msgstr "嘗試重新連接"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:483
 msgid "When server quits"
 msgstr "當伺服器停止"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
 msgid "Changes on this page require a re-connection to the server"
 msgstr "這個頁面上的修改需要重新連接到伺服器"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
 msgid "Settings applied on this client"
 msgstr "應用於客戶端的設置"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
 msgid "Selection"
 msgstr "選取"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:490
 msgid "View direction"
 msgstr "視野方向"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:492
 msgid "Property filters"
 msgstr "屬性過濾"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:492
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:493
 msgid "Exclude GUI-related properties"
 msgstr "排除GUI相關的屬性"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:494
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:495
 msgid "These are all available properties."
 msgstr "這些是所有可用的屬性"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:497
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:498
 msgid "These are the properties currently excluded from synchronisation."
 msgstr "這些屬性目前排除在同步之外"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:499
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:500
 msgid "Excluded Properties"
 msgstr "排除的屬性"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:500
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:501
 msgid "Synchronized Properties"
 msgstr "排除的屬性"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:501
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:502
 msgid "Additional excluded properties:"
 msgstr "額外排除的屬性:"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:502
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:503
 msgid "Client settings"
 msgstr "客戶端設定值"
 
@@ -25595,152 +25600,152 @@ msgstr "幾何著色"
 msgid "Grid coordinates (%1): %2m, %3m, %4m"
 msgstr "格線座標(%1): %2m, %3m, %4m"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:476
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
 msgid "3D Scenery"
 msgstr "3D場景"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Set as default scene"
 msgstr "設為預設場景"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Load/save viewpoints"
 msgstr "載入(儲存)觀察點"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Torch strength:"
 msgstr "光照強度:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Torch range:"
 msgstr "光照範圍:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 #, qt-format
 msgid "Torchlight (%1)"
 msgstr "光照 (%1)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 #, qt-format
 msgid "Show grid coordinates (%1)"
 msgstr "顯示格線座標 (%1)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid ""
 "Overdraw horizon polygon defined in your landscape. This displays the "
 "inaccuracies in a very large planar model compared to Earth curvature, of "
 "course only for a single point of observation."
 msgstr "覆蓋您的景觀中定義的地平線多邊形。 ，這在與地球曲率相比的巨大平面模型中顯示了誤差，當然這僅適用於單個觀察點。"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:487
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:488
 msgid "Draw horizon polyline in foreground"
 msgstr "在前景繪製地平線多邊形線"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:488
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
 msgid "Visual options"
 msgstr "視覺選項"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Per-Pixel lighting"
 msgstr "每像素亮度"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Shadows"
 msgstr "陰影"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Simple shadows"
 msgstr "簡單的陰影"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "Bump mapping"
 msgstr "凹凸貼圖"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "Cubemap size:"
 msgstr "立體映射尺寸:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:495
 msgid "Shadowmap size:"
 msgstr "陰影映射尺寸:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:495
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "Filtering Quality:"
 msgstr "過濾畫質:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Hardware"
 msgstr "硬體"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Low"
 msgstr "低"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Low + Hardware"
 msgstr "低 + 硬體"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "High (slow)"
 msgstr "高(慢)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "High + Hardware (slow)"
 msgstr "高 + 硬體(慢)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:504
 msgid "PCSS"
 msgstr "PCSS 技術"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:504
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:505
 msgid "Cubemapping mode:"
 msgstr "立體映射模式:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:505
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:506
 msgid "Full cubemap shadows"
 msgstr "全立體映射陰影"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:506
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:507
 msgid "Lazy cubemap re-rendering"
 msgstr "惰性立體映射重新繪製"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:507
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:508
 msgid "Interval:"
 msgstr "間隔:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:508
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:509
 msgid "Only update dominant face when moving"
 msgstr "當移動時僅更新主要表面"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:509
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:510
 msgid "Also update second-most dominant face"
 msgstr "也更新第二個主要表面"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:510
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:511
 msgid "Quality/Performance settings"
 msgstr "品質/執行設置"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:208
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:209
 msgid "Stored views"
 msgstr "儲存視圖"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:210
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:211
 msgid "Load view"
 msgstr "載入視圖"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:211
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:212
 msgid "Delete view"
 msgstr "刪除視圖"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:212
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:213
 msgid "Add current view"
 msgstr "加入目前的視圖"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:213
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:214
 msgid "Load/store with date"
 msgstr "載入/儲存 含日期"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:214
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:215
 msgid "Title:"
 msgstr "標題:"
 
@@ -26133,7 +26138,7 @@ msgstr "回復預設設置"
 msgid "Custom Lines"
 msgstr "自訂線條"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:152
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:153
 msgid "Locations"
 msgstr "位置"
 
