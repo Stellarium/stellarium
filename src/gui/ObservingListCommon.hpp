@@ -105,6 +105,8 @@ static constexpr int COLUMN_NUMBER_CONSTELLATION = 7;
 
 static constexpr char const *CUSTOM_OBJECT = "CustomObject";
 
+static const QString dash = QChar(0x2014);
+
 class ObservingListUtil {
 public:
 
@@ -135,21 +137,20 @@ public:
         QString objectMagnitudeStr;
         QString type = selectedObject[0]->getType();
         float objectMagnitude = selectedObject[0]->getVMagnitude(core);
-        const float unknownMagnitude = 99;
-        if (objectMagnitude == unknownMagnitude) {
+        if (objectMagnitude > 98.f) {
             if (QString::compare(type, "Nebula", Qt::CaseSensitive) == 0) {
                 auto &r_nebula = dynamic_cast<Nebula &>(*selectedObject[0]);
                 float mB = r_nebula.getBMagnitude(core);
-                if (mB == unknownMagnitude) {
-                    objectMagnitudeStr = "–";
+                if (mB > 98.f) {
+                    objectMagnitudeStr = dash;
                 } else {
                     objectMagnitudeStr = QString::number(mB);
                 }
             } else {
-                objectMagnitudeStr = "–";
+                objectMagnitudeStr = dash;
             }
         } else {
-            objectMagnitudeStr = QString::number(objectMagnitude);
+            objectMagnitudeStr = QString::number(objectMagnitude, 'f', 2);
         }
 
         return objectMagnitudeStr;

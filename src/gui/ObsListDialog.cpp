@@ -688,7 +688,7 @@ void ObsListDialog::loadBookmarksInObservingList() {
                     if (!nameI18n.isEmpty()) {
                         item.nameI18n = nameI18n;
                     } else {
-                        item.nameI18n = "";
+                        item.nameI18n = dash;
                     }
 
                     // JDs

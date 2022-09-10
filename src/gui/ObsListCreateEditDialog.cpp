@@ -276,6 +276,11 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed() {
             // Object name (designation) and object name I18n
             QString objectName = selectedObject[0]->getEnglishName();
             QString objectNameI18n = selectedObject[0]->getNameI18n();
+
+            if(objectNameI18n.isEmpty()){
+                objectNameI18n = dash;
+            }
+
             StelObjectP object = objectMgr->searchByNameI18n(objectNameI18n);
             if (selectedObject[0]->getType() == "Nebula" && objectName.isEmpty()) {
                 objectName = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
