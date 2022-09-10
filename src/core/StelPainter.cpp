@@ -162,8 +162,8 @@ void StelPainter::setProjector(const StelProjectorP& p)
 
 StelPainter::~StelPainter()
 {
-	if(bayerPatternTex)
-		glDeleteTextures(1, &bayerPatternTex);
+	if(ditherPatternTex)
+		glDeleteTextures(1, &ditherPatternTex);
 	//reset opengl state
 	glState.reset();
 
@@ -2135,7 +2135,7 @@ void StelPainter::initGLShaders()
 	texturesShaderVars.vertex = texturesShaderProgram->attributeLocation("vertex");
 	texturesShaderVars.texColor = texturesShaderProgram->uniformLocation("texColor");
 	texturesShaderVars.texture = texturesShaderProgram->uniformLocation("tex");
-	texturesShaderVars.bayerPattern = texturesShaderProgram->uniformLocation("bayerPattern");
+	texturesShaderVars.ditherPattern = texturesShaderProgram->uniformLocation("ditherPattern");
 	texturesShaderVars.rgbMaxValue = texturesShaderProgram->uniformLocation("rgbMaxValue");
 
 	// Texture shader program + interpolated color per vertex
@@ -2182,7 +2182,7 @@ void StelPainter::initGLShaders()
 	texturesColorShaderVars.vertex = texturesColorShaderProgram->attributeLocation("vertex");
 	texturesColorShaderVars.color = texturesColorShaderProgram->attributeLocation("color");
 	texturesColorShaderVars.texture = texturesColorShaderProgram->uniformLocation("tex");
-	texturesColorShaderVars.bayerPattern = texturesColorShaderProgram->uniformLocation("bayerPattern");
+	texturesColorShaderVars.ditherPattern = texturesColorShaderProgram->uniformLocation("ditherPattern");
 	texturesColorShaderVars.rgbMaxValue = texturesColorShaderProgram->uniformLocation("rgbMaxValue");
 	texturesColorShaderVars.saturation = texturesColorShaderProgram->uniformLocation("saturation");
 }
@@ -2267,10 +2267,10 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->enableAttributeArray(texturesShaderVars.texCoord);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
 		glActiveTexture(GL_TEXTURE1);
-		if(!bayerPatternTex)
-			bayerPatternTex=makeBayerPatternTexture(*this);
-		glBindTexture(GL_TEXTURE_2D, bayerPatternTex);
-		pr->setUniformValue(texturesShaderVars.bayerPattern, 1);
+		if(!ditherPatternTex)
+			ditherPatternTex=makeDitherPatternTexture(*this);
+		glBindTexture(GL_TEXTURE_2D, ditherPatternTex);
+		pr->setUniformValue(texturesShaderVars.ditherPattern, 1);
 		pr->setUniformValue(texturesShaderVars.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
 	}
 	else if (texCoordArray.enabled && colorArray.enabled && !normalArray.enabled)
@@ -2286,10 +2286,10 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->enableAttributeArray(texturesColorShaderVars.color);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
 		glActiveTexture(GL_TEXTURE1);
-		if(!bayerPatternTex)
-			bayerPatternTex=makeBayerPatternTexture(*this);
-		glBindTexture(GL_TEXTURE_2D, bayerPatternTex);
-		pr->setUniformValue(texturesColorShaderVars.bayerPattern, 1);
+		if(!ditherPatternTex)
+			ditherPatternTex=makeDitherPatternTexture(*this);
+		glBindTexture(GL_TEXTURE_2D, ditherPatternTex);
+		pr->setUniformValue(texturesColorShaderVars.ditherPattern, 1);
 		pr->setUniformValue(texturesColorShaderVars.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
 		pr->setUniformValue(texturesColorShaderVars.saturation, saturation);
 	}

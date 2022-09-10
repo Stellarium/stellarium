@@ -10,6 +10,7 @@ IF(ENABLE_SPOUT)
 ENDIF()
 
 SET(stellarium_lib_SRCS
+     core/BlueNoiseTriangleRemapped.hpp
      core/Dithering.hpp
      core/SaturationShader.hpp
      core/healpix.c
