@@ -751,12 +751,26 @@ ENDIF()
 # TODO: switch to something like vcpkg or conan, and plain find_package,
 # without the fallback of cmake downloading the dep itself.
 # But some libraries are not available there yet.
-# This commit id is v1.4.4 + https://github.com/QtExcel/QXlsx/pull/228
 CPMFindPackage(NAME QXlsx
-    URL https://github.com/QtExcel/QXlsx/archive/8e83402db866ae7a67582da28aa68c83545f13c8.zip
-    URL_HASH SHA256=46f9b82c99021b967dc41dab3ba44809ccc14b29e587daa31d34fa2bd8b31b90
+    URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.4.4.zip
+    URL_HASH SHA256=3efbd6f63a1ffd521c535dce7b5a5a7e9ebd23db51e6ae8e3e2eb89796e57675
+    DOWNLOAD_ONLY yes
     EXCLUDE_FROM_ALL ON
     SOURCE_SUBDIR QXlsx)
+if(QXlsx_ADDED)
+    # Can't use embedded CMakeLists.txt due to
+    # https://github.com/QtExcel/QXlsx/issues/134
+    file(GLOB_RECURSE QXLSX_FILES
+        ${QXlsx_SOURCE_DIR}/QXlsx/source/*.cpp
+        ${QXlsx_SOURCE_DIR}/QXlsx/header/*.h)
+    add_library(QXlsx STATIC EXCLUDE_FROM_ALL ${QXLSX_FILES})
+    target_link_libraries(QXlsx PUBLIC
+        Qt${QT_VERSION_MAJOR}::Core
+        Qt${QT_VERSION_MAJOR}::Gui
+        Qt${QT_VERSION_MAJOR}::GuiPrivate)
+    target_include_directories(QXlsx PUBLIC ${QXlsx_SOURCE_DIR}/QXlsx/header)
+    add_library(QXlsx::QXlsx ALIAS QXlsx)
+endif()
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
