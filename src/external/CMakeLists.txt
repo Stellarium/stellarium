@@ -107,8 +107,10 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
         string(REGEX REPLACE
             "ln_lnlat_posn lnobserver { 0, 0 };" ""
             INDITELESCOPE_H "${INDITELESCOPE_H}")
-        file(GENERATE OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libindi/inditelescope.h
-            CONTENT "${INDITELESCOPE_H}")
+        file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/libindi/inditelescope.h.new
+            "${INDITELESCOPE_H}")
+        configure_file(${CMAKE_CURRENT_BINARY_DIR}/libindi/inditelescope.h.new
+            ${CMAKE_CURRENT_BINARY_DIR}/libindi/inditelescope.h COPYONLY)
 
         # Fix build in windows
         file(READ
@@ -117,8 +119,22 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
         string(REGEX REPLACE "#include <sys/time.h>"
             "#ifdef Q_OS_WIN\n#include <windows.h>\n#else\n#include <sys/time.h>\n#endif"
             INDILOGGER_H "${INDILOGGER_H}")
-        file(GENERATE OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libindi/indilogger.h
-            CONTENT "${INDILOGGER_H}")
+        file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/libindi/indilogger.h.new
+            "${INDILOGGER_H}")
+        configure_file(${CMAKE_CURRENT_BINARY_DIR}/libindi/indilogger.h.new
+            ${CMAKE_CURRENT_BINARY_DIR}/libindi/indilogger.h COPYONLY)
+
+        # https://devblogs.microsoft.com/cppblog/msvc-preprocessor-progress-towards-conformance/
+        file(READ ${indiclient_SOURCE_DIR}/libs/locale_compat.h INDILOCALE_H)
+        if (INDILOCALE_H)
+            string(REGEX REPLACE "L#s" "L\"\"#s" INDILOCALE_H "${INDILOCALE_H}")
+            file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/libindi/locale_compat.h.new
+                "${INDILOCALE_H}")
+            configure_file(${CMAKE_CURRENT_BINARY_DIR}/libindi/locale_compat.h.new
+                ${CMAKE_CURRENT_BINARY_DIR}/libindi/locale_compat.h COPYONLY)
+            file(RENAME ${indiclient_SOURCE_DIR}/libs/locale_compat.h
+                ${indiclient_SOURCE_DIR}/libs/locale_compat.h.bak)
+        endif()
 
         set(INDI_SOVERSION "1")
         set(CMAKE_INDI_VERSION_MAJOR 1)
@@ -137,12 +153,13 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
             ${indiclient_SOURCE_DIR}/libs/indibase/indiproperty.cpp
             ${indiclient_SOURCE_DIR}/libs/indibase/indistandardproperty.cpp
             ${indiclient_SOURCE_DIR}/libs/indicom.c)
-        target_include_directories(indiclient PUBLIC
+        target_include_directories(indiclient
+            PRIVATE
+            ${CMAKE_CURRENT_BINARY_DIR}/libindi
+            PUBLIC
             ${CMAKE_CURRENT_BINARY_DIR}
             ${indiclient_SOURCE_DIR}
-            ${indiclient_SOURCE_DIR}/libs
-            PRIVATE
-            ${CMAKE_CURRENT_BINARY_DIR}/libindi)
+            ${indiclient_SOURCE_DIR}/libs)
         target_link_libraries(indiclient ${ZLIB_LIBRARIES})
     endif()
 ENDIF()
