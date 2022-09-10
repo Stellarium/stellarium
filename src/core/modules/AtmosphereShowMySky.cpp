@@ -308,7 +308,7 @@ vec3 calcViewDir()
 
 void AtmosphereShowMySky::resizeRenderTarget(int width, int height)
 {
-	renderer_->resizeEvent(width/ar, height/ar);
+	renderer_->resizeEvent(width/ppxatmo, height/ppxatmo);
 
 	prevWidth_=width;
 	prevHeight_=height;
@@ -710,38 +710,42 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 	{
 		viewport = prj->getViewport();
 		regenerateGrid();
+		dynResTimer=0;
 	}
 	const auto width=viewport[2], height=viewport[3];
 	if(width!=prevWidth_ || height!=prevHeight_)
+	{
 		resizeRenderTarget(width, height);
-
+		dynResTimer=0;
+	}
 	if(location.altitude != lastUsedAltitude_)
 	{
 		lastUsedAltitude_ = location.altitude;
 		probeZenithLuminances(location.altitude);
+		dynResTimer=0;
 	}
 
 	auto sunPos  =  sun.getAltAzPosAuto(core);
 	if (std::isnan(sunPos.length()))
 		sunPos.set(0.,0.,-1.*AU);
 
-#ifndef DYNAMIC_RESOLUTION
+#ifdef DYNAMIC_RESOLUTION
 	float f1=prj->getFov(), i1=fader.getInterstate();
 	Vec3d p1=sunPos, s1;
 	prj->project(p1,s1);
 	float df=qAbs(prevFov-f1)/(prevFov+f1), di=qAbs(prevFad-i1);
 	double dp=(prevPos-p1).length(), ds=(prevSun-s1).length();
-	arCounter++;
-	if (df+di+dp<10e-3 && ds<1 && arCounter<8)
+	dynResTimer++;
+	if (df+di+dp<10e-3 && ds<1 && dynResTimer<0)
 		return;
 
-	ar=arCounter<8?4:1;
-	if (prevAr!=ar)
+	ppxatmo=dynResTimer<0?4:1;
+	if (prevPxa!=ppxatmo)
 		resizeRenderTarget(width, height);	// causes flicker in menu
 
 	// qDebug() << "Fov" << df << "Fad" << di << "Pos" << dp << "Sun" << ds;
-	arCounter=0;
-	prevAr=ar;
+	dynResTimer=-8;
+	prevPxa=ppxatmo;
 	prevFov=f1;
 	prevFad=i1;
 	prevPos=p1;
@@ -796,7 +800,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 	for (int i=0; i<numViewRayGridPoints; ++i)
 	{
 		Vec3d point(1, 0, 0);
-		prj->unProject(posGrid[i][0]*ar,posGrid[i][1]*ar,point);
+		prj->unProject(posGrid[i][0]*ppxatmo,posGrid[i][1]*ppxatmo,point);
 
 		viewRayGrid[i].set(point[0], point[1], point[2], 0);
 	}
@@ -823,7 +827,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 
 	if (!overrideAverageLuminance)
 	{
-		const auto meanPixelValue=getMeanPixelValue(width/ar, height/ar);
+		const auto meanPixelValue=getMeanPixelValue(width/ppxatmo, height/ppxatmo);
 		const auto meanY=meanPixelValue[1];
 		Q_ASSERT(std::isfinite(meanY));
 
