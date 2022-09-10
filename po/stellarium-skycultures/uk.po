@@ -4,8 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# cardinot <mcardinot@gmail.com>, 2017
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2021
+# cardinot <mcardinot@gmail.com>, 2022
 # Yuri Chornoivan <yurchor@ukr.net>, 2022
 # 
 #, fuzzy
@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-08-14 15:23+0700\n"
+"POT-Creation-Date: 2022-09-09 13:37+0700\n"
 "PO-Revision-Date: 2017-11-29 01:17+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -9895,7 +9895,6 @@ msgstr "Рак"
 
 #: skycultures/arabic_al-sufi/constellation_names.eng.fab:26
 #: skycultures/chinese_contemporary/constellation_names.eng.fab:49
-#: skycultures/egyptian_dendera/constellation_names.eng.fab:10
 #: skycultures/hawaiian_starlines/constellation_names.eng.fab:4
 #: skycultures/indian/constellation_names.eng.fab:91
 #: skycultures/western/constellation_names.eng.fab:49
@@ -54884,24 +54883,28 @@ msgid "Horus, the Bull of Heaven"
 msgstr "Гор, Небесний Бик"
 
 #: skycultures/egyptian_dendera/constellation_names.eng.fab:1
-msgid "Ox Thigh"
-msgstr "Стегно Бика"
+msgid "Thigh of Bull"
+msgstr ""
 
 #: skycultures/egyptian_dendera/constellation_names.eng.fab:2
 msgid "Hathor Cow (Egypt.)"
 msgstr "Корова Хатор (Єгипет)"
 
 #: skycultures/egyptian_dendera/constellation_names.eng.fab:3
-msgid "Horus-Canopus (Egypt.)"
-msgstr "Гор-Канопус (Єгипет)"
+msgid "Canopus (Egypt.)"
+msgstr ""
 
 #: skycultures/egyptian_dendera/constellation_names.eng.fab:4
-msgid "Sothis"
-msgstr "Сотіс"
+msgid "Goddess Satis"
+msgstr ""
 
 #: skycultures/egyptian_dendera/constellation_names.eng.fab:5
 msgid "Field (Sum.)"
 msgstr "Поле (Шумер)"
+
+#: skycultures/egyptian_dendera/constellation_names.eng.fab:10
+msgid "Leo + Berenike(?)"
+msgstr ""
 
 #: skycultures/egyptian_dendera/constellation_names.eng.fab:18
 msgid "King Osiris"
@@ -54920,8 +54923,8 @@ msgid "? (Egypt.)"
 msgstr "? (Єгипет)"
 
 #: skycultures/egyptian_dendera/constellation_names.eng.fab:22
-msgid "Sum. Gula Egyptised?"
-msgstr "Шум. Гула (єгиптизований?)"
+msgid " ? "
+msgstr ""
 
 #: skycultures/egyptian_dendera/constellation_names.eng.fab:23
 msgid "Guard (Arkturos)"
@@ -54932,8 +54935,8 @@ msgid "Goat (Capella)"
 msgstr "Козел (Капелла)"
 
 #: skycultures/egyptian_dendera/constellation_names.eng.fab:25
-msgid "Thot's Baboon"
-msgstr "Бабуїн Тота"
+msgid "Baboon"
+msgstr ""
 
 #: skycultures/egyptian_dendera/constellation_names.eng.fab:26
 msgid "Falcon"
@@ -57960,6 +57963,7 @@ msgid "Chamberlain"
 msgstr "Камергер"
 
 #: skycultures/korean/constellation_names.eng.fab:30
+#: skycultures/samoan/planet_names.fab:1
 msgid "Sun"
 msgstr "Сонце"
 
@@ -58294,6 +58298,7 @@ msgid "Ear and Eye of"
 msgstr "Вухо і око"
 
 #: skycultures/korean/constellation_names.eng.fab:125
+#: skycultures/samoan/planet_names.fab:2
 msgid "Moon"
 msgstr "Місяць"
 
@@ -59112,6 +59117,7 @@ msgid "Hawk"
 msgstr "Яструб"
 
 #: skycultures/macedonian/constellation_names.eng.fab:12
+#: skycultures/samoan/constellation_names.eng.fab:11
 msgid "Tongs"
 msgstr "Щіпці"
 
@@ -61436,6 +61442,121 @@ msgstr "Галла"
 #: skycultures/sami/constellation_names.eng.fab:10
 msgid "The Ski Runners"
 msgstr "Бігуни на лижах"
+
+#: skycultures/samoan/constellation_names.eng.fab:1
+msgid "Triggerfish"
+msgstr "Спиноріг"
+
+#: skycultures/samoan/constellation_names.eng.fab:2
+msgid "Two men"
+msgstr "Двоє Чоловіків"
+
+#: skycultures/samoan/constellation_names.eng.fab:3
+msgid "Triad of moons"
+msgstr "Трійко місяців"
+
+#: skycultures/samoan/constellation_names.eng.fab:4
+msgid "Wild duck"
+msgstr "Дика качка"
+
+#: skycultures/samoan/constellation_names.eng.fab:5
+msgid "Fishhook lure"
+msgstr "Приманка на гачку"
+
+#: skycultures/samoan/constellation_names.eng.fab:6
+msgid "Pigeon Perch"
+msgstr "Голубине Сідало"
+
+#: skycultures/samoan/constellation_names.eng.fab:7
+msgid "Kingfisher"
+msgstr "Рибалочка"
+
+#: skycultures/samoan/constellation_names.eng.fab:8
+msgid "Grasshopper"
+msgstr "Коник"
+
+#: skycultures/samoan/constellation_names.eng.fab:9
+msgid "Carrying pole"
+msgstr "Коромисло"
+
+#: skycultures/samoan/constellation_names.eng.fab:10
+msgid "Candlenut torch"
+msgstr "Факел зі свічкового дерева"
+
+#: skycultures/samoan/constellation_names.eng.fab:12
+msgid "Sea monster"
+msgstr "Морське Чудовисько"
+
+#: skycultures/samoan/constellation_names.eng.fab:13
+msgid "Heirloom Warclub"
+msgstr "Родова бойова палиця"
+
+#: skycultures/samoan/constellation_names.eng.fab:14
+msgid "Great Adze"
+msgstr "Велике Тесло"
+
+#: skycultures/samoan/star_names.fab:1
+msgid "Gliding Star"
+msgstr "Ковзаюча Зірка"
+
+#: skycultures/samoan/star_names.fab:3
+msgid "Mea"
+msgstr "Меа"
+
+#: skycultures/samoan/star_names.fab:5
+msgid "Filo"
+msgstr "Філо"
+
+#. TRANSLATORS: Native name of Mercury in Samoan
+#: skycultures/samoan/planet_names.fab:4
+msgid "Brownish"
+msgstr "Брунатнуватий"
+
+#. TRANSLATORS: Native name of Venus in Samoan
+#: skycultures/samoan/planet_names.fab:6
+msgid "Morning Star / Forbidden Radiance"
+msgstr "Ранкова Зірка / Заборонене Сяйво"
+
+#: skycultures/samoan/planet_names.fab:7
+msgid "Earth"
+msgstr "Земля"
+
+#. TRANSLATORS: Native name of Mars in Samoan
+#: skycultures/samoan/planet_names.fab:9
+msgid "Reddish Face/Surface"
+msgstr "Червонясте Обличчя/Поверхня"
+
+#. TRANSLATORS: Native name of Jupiter in Samoan
+#: skycultures/samoan/planet_names.fab:11
+msgid "Undying Mystery"
+msgstr "Невмируща Таємниця"
+
+#. TRANSLATORS: Native name of Saturn in Samoan
+#: skycultures/samoan/planet_names.fab:13
+msgid "Garland Star"
+msgstr "Зірка-Вінок"
+
+#: skycultures/samoan/dso_names.fab:1
+msgid "Face of Liʻi"
+msgstr "Обличчя Ліʼі"
+
+#: skycultures/samoan/dso_names.fab:3
+msgid "Pale Cloud"
+msgstr "Бліда Хмара"
+
+#: skycultures/samoan/dso_names.fab:5
+msgid "Flying Cloud"
+msgstr "Летюча Хмара"
+
+#. TRANSLATORS: Samoan Name
+#: skycultures/samoan/dso_names.fab:8
+msgid "Suga"
+msgstr "Суга"
+
+#. TRANSLATORS: Samoan Name
+#: skycultures/samoan/dso_names.fab:10
+msgid "Pae"
+msgstr "Пае"
 
 #: skycultures/sardinian/constellation_names.eng.fab:1
 msgid "The Hut"
