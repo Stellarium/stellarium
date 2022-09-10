@@ -60,9 +60,7 @@ your distribution. Here's a list.
 
 If these are not found on the system, they are downloaded automatically.
 
-- [QCustomPlot](https://www.qcustomplot.com)
 - [INDI](https://indilib.org)
-- [QtCompress](https://github.com/nezticle/qtcompress)
 - [QXlsx](https://github.com/QtExcel/QXlsx)
 
 ### Installing these packages
