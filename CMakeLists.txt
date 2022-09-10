@@ -1,6 +1,5 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
-INCLUDE(cmake/CPM.cmake)
 
 # Fix behavior of CMAKE_CXX_STANDARD and CMAKE_C_STANDARD when targeting macOS.
 IF(POLICY CMP0025)
@@ -108,6 +107,7 @@ ENDIF()
 
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
+INCLUDE(CPM)
 
 # Show platform info
 MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")

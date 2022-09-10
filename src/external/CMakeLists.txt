@@ -125,8 +125,9 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
             ${CMAKE_CURRENT_BINARY_DIR}/libindi/indilogger.h COPYONLY)
 
         # https://devblogs.microsoft.com/cppblog/msvc-preprocessor-progress-towards-conformance/
-        file(READ ${indiclient_SOURCE_DIR}/libs/locale_compat.h INDILOCALE_H)
+        file(GLOB INDILOCALE_H ${indiclient_SOURCE_DIR}/libs/locale_compat.h)
         if (INDILOCALE_H)
+            file(READ ${indiclient_SOURCE_DIR}/libs/locale_compat.h INDILOCALE_H)
             string(REGEX REPLACE "L#s" "L\"\"#s" INDILOCALE_H "${INDILOCALE_H}")
             file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/libindi/locale_compat.h.new
                 "${INDILOCALE_H}")
