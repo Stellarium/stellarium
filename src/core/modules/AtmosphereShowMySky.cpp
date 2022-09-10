@@ -725,17 +725,17 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 	if (std::isnan(sunPos.length()))
 		sunPos.set(0.,0.,-1.*AU);
 
-#ifdef DYNAMIC_RESOLUTION
+#ifndef DYNAMIC_RESOLUTION
 	float f1=prj->getFov(), i1=fader.getInterstate();
 	Vec3d p1=sunPos, s1;
 	prj->project(p1,s1);
 	float df=qAbs(prevFov-f1)/(prevFov+f1), di=qAbs(prevFad-i1);
 	double dp=(prevPos-p1).length(), ds=(prevSun-s1).length();
 	arCounter++;
-	if (df+di+dp<10e-3 && ds<1 && arCounter<4)
+	if (df+di+dp<10e-3 && ds<1 && arCounter<8)
 		return;
 
-	ar=arCounter<4 ? 4 : 1;
+	ar=arCounter<8?4:1;
 	if (prevAr!=ar)
 		resizeRenderTarget(width, height);	// causes flicker in menu
 
