@@ -743,7 +743,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 	if (prevPxa!=ppxatmo)
 		resizeRenderTarget(width, height);	// causes flicker in menu
 
-	qDebug() << "ppxatmo" << ppxatmo;
+	// qDebug() << "ppxatmo" << ppxatmo;
 	// qDebug() << "Fov" << df << "Fad" << di << "Pos" << dp << "Sun" << ds;
 	dynResTimer=-8;
 	prevPxa=ppxatmo;
