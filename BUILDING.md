@@ -56,6 +56,13 @@ your distribution. Here's a list.
 - [Graphviz](http://www.graphviz.org/) - required to build the API documentation and include fancy class diagrams
 - [libgps](https://gpsd.gitlab.io/gpsd/index.html) - if you want to build Stellarium with GPS support (Linux/macOS only)
 
+### Optionally bundled dependencies
+
+If these are not found on the system, they are downloaded automatically.
+
+- [INDI](https://indilib.org)
+- [QXlsx](https://github.com/QtExcel/QXlsx)
+
 ### Installing these packages
 
 To install all of these, use the following commands:

@@ -66,7 +66,9 @@ IF(ENABLE_TESTING)
 ENDIF(ENABLE_TESTING)
 
 ADD_LIBRARY(Satellites-static STATIC ${Satellites_SRCS} ${Satellites_RES_CXX} ${SatellitesDialog_UIS_H})
-TARGET_LINK_LIBRARIES(Satellites-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets)
+TARGET_LINK_LIBRARIES(Satellites-static QXlsx Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::GuiPrivate)
 # The library target "Satellites-static" has a default OUTPUT_NAME of "Satellites-static", so change it.
 SET_TARGET_PROPERTIES(Satellites-static PROPERTIES OUTPUT_NAME "Satellites")
 IF(MSVC)
