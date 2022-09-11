@@ -386,63 +386,63 @@ QCheckBox::indicator:checked,
 QListWidget::indicator:checked,
 QListView::indicator:checked,
 QGroupBox::indicator:checked {
-	image: url(:/graphicGui/uieCheckbox-checked.png);
+	image: url(:/graphicGui/uieCheckbox-checked.svg);
 }
 
 QCheckBox::indicator:indeterminate,
 QListWidget::indicator:indeterminate,
 QListView::indicator:indeterminate,
 QGroupBox::indicator:indeterminate {
-	image: url(:/graphicGui/uieCheckbox-partial.png);
+	image: url(:/graphicGui/uieCheckbox-partial.svg);
 }
 
 QCheckBox::indicator:unchecked,
 QListWidget::indicator:unchecked,
 QListView::indicator:unchecked,
 QGroupBox::indicator:unchecked {
-	image: url(:/graphicGui/uieCheckbox-unchecked.png);
+	image: url(:/graphicGui/uieCheckbox-unchecked.svg);
 }
 
 QCheckBox::indicator:hover:checked,
 QListWidget::indicator:hover:checked,
 QListView::indicator:hover:checked,
 QGroupBox::indicator:hover:checked {
-	image: url(:/graphicGui/uieCheckbox-checked-hover.png);
+	image: url(:/graphicGui/uieCheckbox-checked-hover.svg);
 }
 
 QCheckBox::indicator:hover:indeterminate,
 QListWidget::indicator:hover:indeterminate,
 QListView::indicator:hover:indeterminate,
 QGroupBox::indicator:hover:indeterminate {
-	image: url(:/graphicGui/uieCheckbox-partial-hover.png);
+	image: url(:/graphicGui/uieCheckbox-partial-hover.svg);
 }
 
 QCheckBox::indicator:hover:unchecked,
 QListWidget::indicator:hover:unchecked,
 QListView::indicator:hover:unchecked,
 QGroupBox::indicator:hover:unchecked {
-	image: url(:/graphicGui/uieCheckbox-unchecked-hover.png);
+	image: url(:/graphicGui/uieCheckbox-unchecked-hover.svg);
 }
 
 QCheckBox::indicator:checked:disabled,
 QListWidget::indicator:checked:disabled,
 QListView::indicator:checked:disabled,
 QGroupBox::indicator:checked:disabled {
-	image: url(:/graphicGui/uieCheckbox-checked-disabled.png);
+	image: url(:/graphicGui/uieCheckbox-checked-disabled.svg);
 }
 
 QCheckBox::indicator:indeterminate:disabled,
 QListWidget::indicator:indeterminate:disabled,
 QListView::indicator:indeterminate:disabled,
 QGroupBox::indicator:indeterminate:disabled {
-	image: url(:/graphicGui/uieCheckbox-partial-disabled.png);
+	image: url(:/graphicGui/uieCheckbox-partial-disabled.svg);
 }
 
 QCheckBox::indicator:unchecked:disabled,
 QListWidget::indicator:unchecked:disabled,
 QListView::indicator:unchecked:disabled,
 QGroupBox::indicator:unchecked:disabled {
-	image: url(:/graphicGui/uieCheckbox-unchecked-disabled.png);
+	image: url(:/graphicGui/uieCheckbox-unchecked-disabled.svg);
 }
 
 /*
