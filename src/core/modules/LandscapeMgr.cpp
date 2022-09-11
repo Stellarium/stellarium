@@ -37,8 +37,8 @@
 #include "StelPainter.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelUtils.hpp"
-#include "qzipreader.h"
 
+#include <private/qzipreader_p.h>
 #include <QDebug>
 #include <QSettings>
 #include <QString>
@@ -1615,8 +1615,8 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const 
 	}
 	QDir destinationDir (parentDestinationDir.absoluteFilePath("landscapes"));
 
-	Stel::QZipReader reader(sourceFilePath);
-	if (reader.status() != Stel::QZipReader::NoError)
+	QZipReader reader(sourceFilePath);
+	if (reader.status() != QZipReader::NoError)
 	{
 		qWarning() << "LandscapeMgr: Unable to open as a ZIP archive:" << QDir::toNativeSeparators(sourceFilePath);
 		emit errorNotArchive();
@@ -1625,7 +1625,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const 
 
 	//Detect top directory
 	QString topDir, iniPath;
-	const QList<Stel::QZipReader::FileInfo> infoList = reader.fileInfoList();
+	const auto infoList = reader.fileInfoList();
 	for (const auto& info : infoList)
 	{
 		QFileInfo fileInfo(info.filePath);
