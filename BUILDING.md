@@ -59,6 +59,7 @@ your distribution. Here's a list.
 ### Optionally bundled dependencies
 
 If these are not found on the system, they are downloaded automatically.
+See MAINTAINER_BUSINESS.md for details.
 
 - [INDI](https://indilib.org)
 - [QXlsx](https://github.com/QtExcel/QXlsx)

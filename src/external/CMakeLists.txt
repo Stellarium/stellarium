@@ -125,6 +125,9 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
             ${CMAKE_CURRENT_BINARY_DIR}/libindi/indilogger.h COPYONLY)
 
         # https://devblogs.microsoft.com/cppblog/msvc-preprocessor-progress-towards-conformance/
+        # This patch is upstreamed at
+        # https://github.com/indilib/indi/pull/1728 so after version 1.9.8
+        # shouldn't be needed
         file(GLOB INDILOCALE_H ${indiclient_SOURCE_DIR}/libs/locale_compat.h)
         if (INDILOCALE_H)
             file(READ ${indiclient_SOURCE_DIR}/libs/locale_compat.h INDILOCALE_H)
