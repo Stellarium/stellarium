@@ -31,7 +31,7 @@ jobs:
     - name: Configure CMake
       shell: bash
       run: |
-        wget https://github.com/10110111/CalcMySky/releases/download/v0.0.5/CalcMySky-v0.0.5-linux-amd64-qt5.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
+        wget https://github.com/10110111/CalcMySky/releases/download/v0.0.6/CalcMySky-v0.0.6-linux-amd64-qt5.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
         tar xf "${{ github.workspace }}/../CalcMySky.tar.xz" -C "${{ github.workspace }}/.."
         mv "${{ github.workspace }}/../CalcMySky"{-*,}
         mkdir -p build
@@ -67,7 +67,7 @@ jobs:
       shell: bash
       run: |
         export PATH="/usr/local/opt/qt@5/bin:$PATH"
-        wget https://github.com/10110111/CalcMySky/releases/download/v0.0.5/CalcMySky-v0.0.5-macos-amd64-qt5.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
+        wget https://github.com/10110111/CalcMySky/releases/download/v0.0.6/CalcMySky-v0.0.6-macos-amd64-qt5.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
         tar xf "${{ github.workspace }}/../CalcMySky.tar.xz" -C "${{ github.workspace }}/.."
         mv "${{ github.workspace }}/../CalcMySky"{-*,}
         mkdir -p build
