@@ -94,7 +94,7 @@ private:
 
 	float prevFad=0, prevFov=0;
 	Vec3d prevPos=Vec3d(0,0,0), prevSun=Vec3d(0,0,0);
-	int prevWidth_=0, prevHeight_=0, dynResTimer=0, prevPxa=0, ppxatmo=2;
+	int prevWidth_=0, prevHeight_=0, dynResTimer=0, prevPxa=0, ppxatmo=4;
 	GLuint renderVAO_=0, luminanceToScreenVAO_=0, zenithProbeVAO_=0, vbo_=0;
 	std::unique_ptr<ShowMySky::AtmosphereRenderer> renderer_;
 	std::unique_ptr<ShowMySky::Settings> skySettings_;
