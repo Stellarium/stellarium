@@ -597,10 +597,40 @@ to limit the vertical field of view so that you won't ever zoom out too far.
 
 An auxiliary dialog opens when you select \guibutton[1.0]{0.75}{uibtSettings.png}
 and contains detail settings for the atmosphere. Here
-you can set atmospheric pressure and temperature which influence
-refraction (see section~\ref{sec:phenomena:Refraction}), and the
+you can choose visual model of atmosphere, set atmospheric pressure and temperature which influence
+refraction (see section~\ref{sec:phenomena:Refraction}) and the
 opacity factor $k_v$ for extinction, \emph{magnitude loss per airmass} 
 (see section~\ref{sec:phenomena:Extinction}).
+
+There are two visual models of atmosphere available:
+\begin{description}
+  \item[Preetham] This is the legacy model (see chapter~\ref{ch:skylight}), fallback for the cases
+    when the other one doesn't work.
+  \item[ShowMySky] This model is the more realistic visual model of atmosphere. It relies on a
+    precomputed dataset that can be chosen in the user interface after ShowMySky model is enabled.
+    \begin{description}
+      \item[To choose a dataset] press \guibutton[1.0]{0.75}{uibtFolder.png} near the \emph{Path to
+        data} entry field, and in the dialog that opens, choose the directory with the dataset.
+        Stellarium comes with a default dataset that's automatically chosen after fresh installation.
+        Power users can use CalcMySky\footnote{\url{https://github.com/10110111/CalcMySky}} to
+        generate other atmospheres (creating a new dataset requires some understanding of physics of
+        light scattering).
+      \item[Eclipse simulation quality] option lets one configure the balance between realism of
+        simulation of the sky light during a solar eclipse. The values of this option can be:
+      \begin{description}
+        \item[0] This is the fastest and crudest mode. The atmosphere is simply dimmed to account
+          for lower amount of direct sunlight.
+        \item[1] This is the first mode that actually tries to simulate an eclipse. It uses
+          precomputed textures, and may look blocky in some cases like e.g. very low Sun (and Moon).
+        \item[2] This mode is much slower than the previous one (2.5 FPS on NVIDIA GeForce GTX
+          750Ti). In this mode part of the calculation is done on the fly for the current eclipse
+          phase to improve correctness of the simulation, unlike the previous mode where a texture
+          was used that contains data only for totality, other phases being approximated from this.
+        \item[3] This is the slowest mode (1.1 FPS on NVIDIA GeForce GTX 750Ti), but computation is
+          done on the fly for the whole simulation, which yields best quality.
+      \end{description}
+    \end{description}
+\end{description}
 
 \subsection{The Solar System Objects (SSO) Tab}
 \label{sec:gui:view:sso}
