@@ -1,7 +1,18 @@
 #version 330
-#extension GL_ARB_shading_language_420pack : require
+#line 1 1 // version.h.glsl
+#ifndef INCLUDE_ONCE_EF4160B0_E881_42C8_BB48_A408AF2E4354
+#define INCLUDE_ONCE_EF4160B0_E881_42C8_BB48_A408AF2E4354
 
-#line 1 1 // const.h.glsl
+#extension GL_ARB_shading_language_420pack : enable
+#ifdef GL_ARB_shading_language_420pack
+# define CONST const
+#else
+# define CONST
+#endif
+
+#endif
+#line 3 0 // direct-irradiance.frag
+#line 1 2 // const.h.glsl
 #ifndef INCLUDE_ONCE_2B59AE86_E78B_4D75_ACDF_5DA644F8E9A3
 #define INCLUDE_ONCE_2B59AE86_E78B_4D75_ACDF_5DA644F8E9A3
 const float earthRadius=6.371e+06; // must be in meters
@@ -34,8 +45,8 @@ const vec4 lightPollutionRelativeRadiance=vec4(2.15e-06,1.11400004e-06,3.8580001
 const vec4 wavelengths=vec4(485.333344,516.666687,548,579.333313);
 const int wlSetIndex=1;
 #endif
-#line 5 0 // direct-irradiance.frag
-#line 1 2 // texture-sampling-functions.h.glsl
+#line 4 0 // direct-irradiance.frag
+#line 1 3 // texture-sampling-functions.h.glsl
 #ifndef INCLUDE_ONCE_AF5AE9F4_8A9A_4521_838A_F8281B8FEB53
 #define INCLUDE_ONCE_AF5AE9F4_8A9A_4521_838A_F8281B8FEB53
 vec4 transmittanceToAtmosphereBorder(const float cosViewZenithAngle, const float altitude);
@@ -47,7 +58,7 @@ vec4 scattering(const float cosSunZenithAngle, const float cosViewZenithAngle,
                 const int scatteringOrder);
 vec4 lightPollutionScattering(const float altitude, const float cosViewZenithAngle, const bool viewRayIntersectsGround);
 #endif
-#line 6 0 // direct-irradiance.frag
+#line 5 0 // direct-irradiance.frag
 
 vec4 computeDirectGroundIrradiance(const float cosSunZenithAngle, const float altitude)
 {
@@ -58,7 +69,7 @@ vec4 computeDirectGroundIrradiance(const float cosSunZenithAngle, const float al
     //   value in the center of the solar disk, assuming it to be a kind of "average".
     // * When the Sun is partially behind the astronomical horizon, we approximate the radiative view factor (i.e.
     //   cosine factor integrated over the solar disk) with a simple quadratic spline.
-    const float averageCosFactor = cosSunZenithAngle < -sunAngularRadius ? 0
+    CONST float averageCosFactor = cosSunZenithAngle < -sunAngularRadius ? 0
                                       : cosSunZenithAngle > sunAngularRadius ? cosSunZenithAngle
                                       : sqr(cosSunZenithAngle+sunAngularRadius)/(4*sunAngularRadius);
     return solarIrradianceAtTOA * transmittanceToAtmosphereBorder(cosSunZenithAngle, altitude) * averageCosFactor;

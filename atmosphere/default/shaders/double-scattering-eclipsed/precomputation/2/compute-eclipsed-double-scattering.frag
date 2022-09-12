@@ -1,7 +1,18 @@
 #version 330
-#extension GL_ARB_shading_language_420pack : require
+#line 1 1 // version.h.glsl
+#ifndef INCLUDE_ONCE_EF4160B0_E881_42C8_BB48_A408AF2E4354
+#define INCLUDE_ONCE_EF4160B0_E881_42C8_BB48_A408AF2E4354
 
-#line 1 1 // const.h.glsl
+#extension GL_ARB_shading_language_420pack : enable
+#ifdef GL_ARB_shading_language_420pack
+# define CONST const
+#else
+# define CONST
+#endif
+
+#endif
+#line 3 0 // compute-eclipsed-double-scattering.frag
+#line 1 2 // const.h.glsl
 #ifndef INCLUDE_ONCE_2B59AE86_E78B_4D75_ACDF_5DA644F8E9A3
 #define INCLUDE_ONCE_2B59AE86_E78B_4D75_ACDF_5DA644F8E9A3
 const float earthRadius=6.371e+06; // must be in meters
@@ -34,13 +45,13 @@ const vec4 lightPollutionRelativeRadiance=vec4(3.35000004e-05,1.33100002e-05,9.4
 const vec4 wavelengths=vec4(610.666687,642,673.333313,704.666687);
 const int wlSetIndex=2;
 #endif
-#line 5 0 // compute-eclipsed-double-scattering.frag
-#line 1 2 // phase-functions.h.glsl
+#line 4 0 // compute-eclipsed-double-scattering.frag
+#line 1 3 // phase-functions.h.glsl
 vec4 phaseFunction_molecules(float dotViewSun);
 vec4 phaseFunction_aerosols(float dotViewSun);
 vec4 currentPhaseFunction(float dotViewSun);
-#line 6 0 // compute-eclipsed-double-scattering.frag
-#line 1 3 // common-functions.h.glsl
+#line 5 0 // compute-eclipsed-double-scattering.frag
+#line 1 4 // common-functions.h.glsl
 #ifndef INCLUDE_ONCE_B0879E51_5608_481B_9832_C7D601BD6AB1
 #define INCLUDE_ONCE_B0879E51_5608_481B_9832_C7D601BD6AB1
 float distanceToAtmosphereBorder(const float cosZenithAngle, const float observerAltitude);
@@ -72,8 +83,8 @@ void setDebugData(float a,float b);
 void setDebugData(float a,float b,float c);
 void setDebugData(float a,float b,float c,float d);
 #endif
-#line 7 0 // compute-eclipsed-double-scattering.frag
-#line 1 4 // texture-coordinates.h.glsl
+#line 6 0 // compute-eclipsed-double-scattering.frag
+#line 1 5 // texture-coordinates.h.glsl
 #ifndef INCLUDE_ONCE_72E237D7_42B6_462B_90E4_73AB6B6E4DE4
 #define INCLUDE_ONCE_72E237D7_42B6_462B_90E4_73AB6B6E4DE4
 
@@ -142,19 +153,19 @@ LightPollutionTexVars scatteringTexIndicesToLightPollutionTexVars(const vec2 tex
 vec2 lightPollutionTexVarsToTexCoords(const float altitude, const float cosViewZenithAngle, const bool viewRayIntersectsGround);
 
 #endif
-#line 8 0 // compute-eclipsed-double-scattering.frag
-#line 1 5 // radiance-to-luminance.h.glsl
+#line 7 0 // compute-eclipsed-double-scattering.frag
+#line 1 6 // radiance-to-luminance.h.glsl
 const mat4 radianceToLuminance=mat4(21296.1113,10585.7773,6.80903196,807.40564,  8819.19727,3416.5498,0.346691847,67.973465,  1511.18506,551.902527,0,6.17586422,  177.630722,64.1456985,0,0.693584085);
-#line 9 0 // compute-eclipsed-double-scattering.frag
-#line 1 6 // eclipsed-direct-irradiance.h.glsl
+#line 8 0 // compute-eclipsed-double-scattering.frag
+#line 1 7 // eclipsed-direct-irradiance.h.glsl
 #ifndef INCLUDE_ONCE_8E9C53B3_83A0_4DD7_9106_32A13BD8935D
 #define INCLUDE_ONCE_8E9C53B3_83A0_4DD7_9106_32A13BD8935D
 
 vec4 calcEclipsedDirectGroundIrradiance(const vec3 pointOnGround, const vec3 sunDir, const vec3 moonPos);
 
 #endif
-#line 10 0 // compute-eclipsed-double-scattering.frag
-#line 1 7 // texture-sampling-functions.h.glsl
+#line 9 0 // compute-eclipsed-double-scattering.frag
+#line 1 8 // texture-sampling-functions.h.glsl
 #ifndef INCLUDE_ONCE_AF5AE9F4_8A9A_4521_838A_F8281B8FEB53
 #define INCLUDE_ONCE_AF5AE9F4_8A9A_4521_838A_F8281B8FEB53
 vec4 transmittanceToAtmosphereBorder(const float cosViewZenithAngle, const float altitude);
@@ -166,8 +177,8 @@ vec4 scattering(const float cosSunZenithAngle, const float cosViewZenithAngle,
                 const int scatteringOrder);
 vec4 lightPollutionScattering(const float altitude, const float cosViewZenithAngle, const bool viewRayIntersectsGround);
 #endif
-#line 11 0 // compute-eclipsed-double-scattering.frag
-#line 1 8 // single-scattering-eclipsed.h.glsl
+#line 10 0 // compute-eclipsed-double-scattering.frag
+#line 1 9 // single-scattering-eclipsed.h.glsl
 #ifndef INCLUDE_ONCE_050024D2_BD56_434E_8D40_2055DA0B78EC
 #define INCLUDE_ONCE_050024D2_BD56_434E_8D40_2055DA0B78EC
 
@@ -175,10 +186,10 @@ vec4 computeSingleScatteringEclipsed(const vec3 camera, const vec3 viewDir, cons
                                      const bool viewRayIntersectsGround);
 
 #endif
-#line 12 0 // compute-eclipsed-double-scattering.frag
-#line 1 9 // total-scattering-coefficient.h.glsl
+#line 11 0 // compute-eclipsed-double-scattering.frag
+#line 1 10 // total-scattering-coefficient.h.glsl
 vec4 totalScatteringCoefficient(float altitude, float dotViewInc);
-#line 13 0 // compute-eclipsed-double-scattering.frag
+#line 12 0 // compute-eclipsed-double-scattering.frag
 
 in vec3 position;
 out vec4 partialRadiance;
@@ -186,8 +197,8 @@ out vec4 partialRadiance;
 vec4 computeDoubleScatteringEclipsedDensitySample(const int directionIndex, const vec3 cameraViewDir, const vec3 scatterer,
                                                   const vec3 sunDir, const vec3 moonPos)
 {
-    const vec3 zenith=vec3(0,0,1);
-    const float altitude=pointAltitude(scatterer);
+    CONST vec3 zenith=vec3(0,0,1);
+    CONST float altitude=pointAltitude(scatterer);
     // XXX: Might be a good idea to increase sampling density near horizon and decrease near zenith&nadir.
     // XXX: Also sampling should be more dense near the light source, since there often is a strong forward
     //       scattering peak like that of Mie phase functions.
@@ -197,16 +208,16 @@ vec4 computeDoubleScatteringEclipsedDensitySample(const int directionIndex, cons
     // Instead of iterating over all directions, we compute only one sample, for only one direction, to
     // facilitate parallelization. The summation will be done after this parallel computation of the samples.
 
-    const float dSolidAngle = sphereIntegrationSolidAngleDifferential(eclipseAngularIntegrationPoints);
+    CONST float dSolidAngle = sphereIntegrationSolidAngleDifferential(eclipseAngularIntegrationPoints);
     // Direction to the source of incident ray
-    const vec3 incDir = sphereIntegrationSampleDir(directionIndex, eclipseAngularIntegrationPoints);
+    CONST vec3 incDir = sphereIntegrationSampleDir(directionIndex, eclipseAngularIntegrationPoints);
 
     // NOTE: we don't recalculate sunDir as we do in computeScatteringDensity(), because it would also require
     // at least recalculating the position of the Moon. Instead we take into account scatterer's position to
     // calculate zenith direction and the direction to the incident ray.
-    const vec3 zenithAtScattererPos=normalize(scatterer-earthCenter);
-    const float cosIncZenithAngle=dot(incDir, zenithAtScattererPos);
-    const bool incRayIntersectsGround=rayIntersectsGround(cosIncZenithAngle, altitude);
+    CONST vec3 zenithAtScattererPos=normalize(scatterer-earthCenter);
+    CONST float cosIncZenithAngle=dot(incDir, zenithAtScattererPos);
+    CONST bool incRayIntersectsGround=rayIntersectsGround(cosIncZenithAngle, altitude);
 
     float distToGround=0;
     vec4 transmittanceToGround=vec4(0);
@@ -220,16 +231,16 @@ vec4 computeDoubleScatteringEclipsedDensitySample(const int directionIndex, cons
     // XXX: keep this ground-scattered radiation logic in sync with that in computeScatteringDensity().
     {
         // The point where incident light originates on the ground, with current incDir
-        const vec3 pointOnGround = scatterer+incDir*distToGround;
-        const vec4 groundIrradiance = calcEclipsedDirectGroundIrradiance(pointOnGround, sunDir, moonPos);
+        CONST vec3 pointOnGround = scatterer+incDir*distToGround;
+        CONST vec4 groundIrradiance = calcEclipsedDirectGroundIrradiance(pointOnGround, sunDir, moonPos);
         // Radiation scattered by the ground
-        const float groundBRDF = 1/PI; // Assuming Lambertian BRDF, which is constant
+        CONST float groundBRDF = 1/PI; // Assuming Lambertian BRDF, which is constant
         incidentRadiance += transmittanceToGround*groundAlbedo*groundIrradiance*groundBRDF;
     }
     // Radiation scattered by the atmosphere
     incidentRadiance+=computeSingleScatteringEclipsed(scatterer,incDir,sunDir,moonPos,incRayIntersectsGround);
 
-    const float dotViewInc = dot(cameraViewDir, incDir);
+    CONST float dotViewInc = dot(cameraViewDir, incDir);
     return dSolidAngle * incidentRadiance * totalScatteringCoefficient(altitude, dotViewInc);
 }
 
@@ -240,22 +251,22 @@ uniform vec3 moonPositionRelativeToSunAzimuth;
 
 void main()
 {
-    const vec3 sunDir=vec3(sin(sunZenithAngle), 0, cos(sunZenithAngle));
-    const vec3 cameraPos=vec3(0,0,cameraAltitude);
-    const bool viewRayIntersectsGround=rayIntersectsGround(cameraViewDir.z, cameraAltitude);
+    CONST vec3 sunDir=vec3(sin(sunZenithAngle), 0, cos(sunZenithAngle));
+    CONST vec3 cameraPos=vec3(0,0,cameraAltitude);
+    CONST bool viewRayIntersectsGround=rayIntersectsGround(cameraViewDir.z, cameraAltitude);
 
-    const float radialIntegrInterval=distanceToNearestAtmosphereBoundary(cameraViewDir.z, cameraAltitude,
+    CONST float radialIntegrInterval=distanceToNearestAtmosphereBoundary(cameraViewDir.z, cameraAltitude,
                                                                          viewRayIntersectsGround);
 
-    const int directionIndex=int(gl_FragCoord.x);
-    const float radialDistIndex=gl_FragCoord.y;
+    CONST int directionIndex=int(gl_FragCoord.x);
+    CONST float radialDistIndex=gl_FragCoord.y;
 
     // Using midpoint rule for quadrature
-    const float dl=radialIntegrInterval/radialIntegrationPoints;
-    const float dist=(radialDistIndex+0.5)*dl;
-    const vec4 scDensity=computeDoubleScatteringEclipsedDensitySample(directionIndex, cameraViewDir, cameraPos+cameraViewDir*dist,
+    CONST float dl=radialIntegrInterval/radialIntegrationPoints;
+    CONST float dist=(radialDistIndex+0.5)*dl;
+    CONST vec4 scDensity=computeDoubleScatteringEclipsedDensitySample(directionIndex, cameraViewDir, cameraPos+cameraViewDir*dist,
                                                                       sunDir, moonPositionRelativeToSunAzimuth);
-    const vec4 xmittance=transmittance(cameraViewDir.z, cameraAltitude, dist, viewRayIntersectsGround);
+    CONST vec4 xmittance=transmittance(cameraViewDir.z, cameraAltitude, dist, viewRayIntersectsGround);
     partialRadiance = scDensity*xmittance*dl;
 
 }

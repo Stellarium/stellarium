@@ -1,7 +1,18 @@
 #version 330
-#extension GL_ARB_shading_language_420pack : require
+#line 1 1 // version.h.glsl
+#ifndef INCLUDE_ONCE_EF4160B0_E881_42C8_BB48_A408AF2E4354
+#define INCLUDE_ONCE_EF4160B0_E881_42C8_BB48_A408AF2E4354
 
-#line 1 1 // const.h.glsl
+#extension GL_ARB_shading_language_420pack : enable
+#ifdef GL_ARB_shading_language_420pack
+# define CONST const
+#else
+# define CONST
+#endif
+
+#endif
+#line 3 0 // densities.frag
+#line 1 2 // const.h.glsl
 #ifndef INCLUDE_ONCE_2B59AE86_E78B_4D75_ACDF_5DA644F8E9A3
 #define INCLUDE_ONCE_2B59AE86_E78B_4D75_ACDF_5DA644F8E9A3
 const float earthRadius=6.371e+06; // must be in meters
@@ -34,20 +45,20 @@ const vec4 lightPollutionRelativeRadiance=vec4(2.15e-06,1.11400004e-06,3.8580001
 const vec4 wavelengths=vec4(485.333344,516.666687,548,579.333313);
 const int wlSetIndex=1;
 #endif
-#line 5 0 // densities.frag
+#line 4 0 // densities.frag
 float scattererNumberDensity_molecules(float altitude)
 {
-        const float rayleighScaleHeight=8*km;
+        CONST float rayleighScaleHeight=8*km;
         return 3.08458e25*exp(-1/rayleighScaleHeight * altitude);
 }
 float scattererNumberDensity_aerosols(float altitude)
 {
-        const float mieScaleHeight=1.2*km;
+        CONST float mieScaleHeight=1.2*km;
         return 1.03333e8*exp(-1/mieScaleHeight*altitude);
 }
 float absorberNumberDensity_ozone(float altitude)
 {
-        const float totalOzoneAmount=370*dobsonUnit;
+        CONST float totalOzoneAmount=370*dobsonUnit;
 
         float density;
 
