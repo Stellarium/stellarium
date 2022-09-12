@@ -149,7 +149,14 @@ StelPainter::StelPainter(const StelProjectorP& proj) : QOpenGLFunctions(QOpenGLC
 	setProjector(proj);
 
 	QSettings*const conf = StelApp::getInstance().getSettings();
-	ditheringMode = parseDitheringMode(conf->value("video/dithering_mode").toString());
+	QVariant selectedDitherFormat = conf->value("video/dithering_mode");
+	if(!selectedDitherFormat.isValid())
+	{
+		constexpr char defaultValue[] = "color888";
+		selectedDitherFormat = defaultValue;
+		conf->setValue("video/dithering_mode", defaultValue);
+	}
+	ditheringMode = parseDitheringMode(selectedDitherFormat.toString());
 }
 
 void StelPainter::setProjector(const StelProjectorP& p)
