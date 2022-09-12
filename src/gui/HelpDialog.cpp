@@ -47,14 +47,13 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelGui.hpp"
-#include "StelGuiItems.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelLogger.hpp"
 #include "StelStyle.hpp"
 #include "StelActionMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelJsonParser.hpp"
+#include "StelTranslator.hpp"
 
 HelpDialog::HelpDialog(QObject* parent)
 	: StelDialog("Help", parent)
@@ -122,9 +121,14 @@ void HelpDialog::createDialogContent()
 	updateAboutText();
 
 	// Log page	
-	ui->logPathLabel->setText(QString("%1/log.txt:").arg(StelFileMgr::getUserDir()));
+	ui->logPathLabel->setText(QString("%1:").arg(StelLogger::getLogFileName()));
 	connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(updateLog(int)));
 	connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(refreshLog()));
+
+	// Config page
+	ui->configPathLabel->setText(QString("%1:").arg(StelApp::getInstance().getSettings()->fileName()));
+	connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(updateConfig(int)));
+	connect(ui->refreshConfigButton, SIGNAL(clicked()), this, SLOT(refreshConfig()));
 
 	// Set up download manager for checker of updates
 	networkManager = StelApp::getInstance().getNetworkAccessManager();
@@ -242,10 +246,30 @@ void HelpDialog::updateLog(int)
 		refreshLog();
 }
 
+void HelpDialog::updateConfig(int)
+{
+	if (ui->stackedWidget->currentWidget() == ui->pageConfig)
+		refreshConfig();
+}
+
 void HelpDialog::refreshLog() const
 {
 	ui->logBrowser->setPlainText(StelLogger::getLog());
 	QScrollBar *sb = ui->logBrowser->verticalScrollBar();
+	sb->setValue(sb->maximum());
+}
+
+void HelpDialog::refreshConfig() const
+{
+	QFile config(StelApp::getInstance().getSettings()->fileName());
+	if(config.open(QIODevice::ReadOnly))
+	{
+		ui->configBrowser->setPlainText(config.readAll());
+		ui->configBrowser->setFont(QFont("Courier New"));
+		config.close();
+	}
+
+	QScrollBar *sb = ui->configBrowser->verticalScrollBar();
 	sb->setValue(sb->maximum());
 }
 

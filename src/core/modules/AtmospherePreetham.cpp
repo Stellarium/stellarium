@@ -83,7 +83,7 @@ AtmospherePreetham::AtmospherePreetham(Skylight& sky)
 	StelPainter::linkProg(atmoShaderProgram, "Preetham atmosphere");
 
 	GL(atmoShaderProgram->bind());
-	GL(shaderAttribLocations.bayerPattern = atmoShaderProgram->uniformLocation("bayerPattern"));
+	GL(shaderAttribLocations.ditherPattern = atmoShaderProgram->uniformLocation("ditherPattern"));
 	GL(shaderAttribLocations.rgbMaxValue = atmoShaderProgram->uniformLocation("rgbMaxValue"));
 	GL(shaderAttribLocations.alphaWaOverAlphaDa = atmoShaderProgram->uniformLocation("alphaWaOverAlphaDa"));
 	GL(shaderAttribLocations.oneOverGamma = atmoShaderProgram->uniformLocation("oneOverGamma"));
@@ -407,10 +407,10 @@ void AtmospherePreetham::draw(StelCore* core)
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]));
 	auto& gl=*sPainter.glFuncs();
 	gl.glActiveTexture(GL_TEXTURE1);
-	if(!bayerPatternTex)
-		bayerPatternTex=makeBayerPatternTexture(*sPainter.glFuncs());
-	gl.glBindTexture(GL_TEXTURE_2D, bayerPatternTex);
-	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.bayerPattern, 1));
+	if(!ditherPatternTex)
+		ditherPatternTex=makeDitherPatternTexture(*sPainter.glFuncs());
+	gl.glBindTexture(GL_TEXTURE_2D, ditherPatternTex);
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.ditherPattern, 1));
 	
 	GL(colorGridBuffer.bind());
 	GL(atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyColor, GL_FLOAT, 0, 4, 0));

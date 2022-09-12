@@ -1,7 +1,18 @@
 #version 330
-#extension GL_ARB_shading_language_420pack : require
+#line 1 1 // version.h.glsl
+#ifndef INCLUDE_ONCE_EF4160B0_E881_42C8_BB48_A408AF2E4354
+#define INCLUDE_ONCE_EF4160B0_E881_42C8_BB48_A408AF2E4354
 
-#line 1 1 // const.h.glsl
+#extension GL_ARB_shading_language_420pack : enable
+#ifdef GL_ARB_shading_language_420pack
+# define CONST const
+#else
+# define CONST
+#endif
+
+#endif
+#line 3 0 // texture-coordinates.frag
+#line 1 2 // const.h.glsl
 #ifndef INCLUDE_ONCE_2B59AE86_E78B_4D75_ACDF_5DA644F8E9A3
 #define INCLUDE_ONCE_2B59AE86_E78B_4D75_ACDF_5DA644F8E9A3
 const float earthRadius=6.371e+06; // must be in meters
@@ -34,8 +45,8 @@ const vec4 lightPollutionRelativeRadiance=vec4(0,0,4.3e-07,1.623e-06);
 const vec4 wavelengths=vec4(360,391.333344,422.666656,454);
 const int wlSetIndex=0;
 #endif
-#line 5 0 // texture-coordinates.frag
-#line 1 2 // texture-coordinates.h.glsl
+#line 4 0 // texture-coordinates.frag
+#line 1 3 // texture-coordinates.h.glsl
 #ifndef INCLUDE_ONCE_72E237D7_42B6_462B_90E4_73AB6B6E4DE4
 #define INCLUDE_ONCE_72E237D7_42B6_462B_90E4_73AB6B6E4DE4
 
@@ -104,8 +115,8 @@ LightPollutionTexVars scatteringTexIndicesToLightPollutionTexVars(const vec2 tex
 vec2 lightPollutionTexVarsToTexCoords(const float altitude, const float cosViewZenithAngle, const bool viewRayIntersectsGround);
 
 #endif
-#line 6 0 // texture-coordinates.frag
-#line 1 3 // common-functions.h.glsl
+#line 5 0 // texture-coordinates.frag
+#line 1 4 // common-functions.h.glsl
 #ifndef INCLUDE_ONCE_B0879E51_5608_481B_9832_C7D601BD6AB1
 #define INCLUDE_ONCE_B0879E51_5608_481B_9832_C7D601BD6AB1
 float distanceToAtmosphereBorder(const float cosZenithAngle, const float observerAltitude);
@@ -137,7 +148,7 @@ void setDebugData(float a,float b);
 void setDebugData(float a,float b,float c);
 void setDebugData(float a,float b,float c,float d);
 #endif
-#line 7 0 // texture-coordinates.frag
+#line 6 0 // texture-coordinates.frag
 
 const float LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA=sqrt(atmosphereHeight*(atmosphereHeight+2*earthRadius));
 
@@ -205,18 +216,18 @@ vec3 indicesToTexCoords(const vec3 indices, const vec3 texSizes)
 
 TransmittanceTexVars transmittanceTexCoordToTexVars(const vec2 texCoord)
 {
-    const float distToHorizon=LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA *
+    CONST float distToHorizon=LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA *
                                 texCoordToUnitRange(texCoord.t,transmittanceTextureSize.t);
     // Distance from Earth center to camera
-    const float r=sqrt(sqr(distToHorizon)+sqr(earthRadius));
-    const float altitude=r-earthRadius;
+    CONST float r=sqrt(sqr(distToHorizon)+sqr(earthRadius));
+    CONST float altitude=r-earthRadius;
 
-    const float dMin=atmosphereHeight-altitude; // distance to zenith
-    const float dMax=LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA+distToHorizon;
+    CONST float dMin=atmosphereHeight-altitude; // distance to zenith
+    CONST float dMax=LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA+distToHorizon;
     // distance to border of visible atmosphere from the view point
-    const float d=dMin+(dMax-dMin)*texCoordToUnitRange(texCoord.s,transmittanceTextureSize.s);
+    CONST float d=dMin+(dMax-dMin)*texCoordToUnitRange(texCoord.s,transmittanceTextureSize.s);
     // d==0 can happen when altitude==atmosphereHeight
-    const float cosVZA = d==0 ? 1 : (2*r*dMin+sqr(dMin)-sqr(d))/(2*r*d);
+    CONST float cosVZA = d==0 ? 1 : (2*r*dMin+sqr(dMin)-sqr(d))/(2*r*d);
     return TransmittanceTexVars(cosVZA,altitude);
 }
 
@@ -235,53 +246,53 @@ vec2 transmittanceTexVarsToTexCoord(const float cosVZA, float altitude)
     if(altitude<0)
         altitude=0;
 
-    const float distToHorizon=sqrt(sqr(altitude)+2*altitude*earthRadius);
-    const float t=unitRangeToTexCoord(distToHorizon / LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA,
+    CONST float distToHorizon=sqrt(sqr(altitude)+2*altitude*earthRadius);
+    CONST float t=unitRangeToTexCoord(distToHorizon / LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA,
                                       transmittanceTextureSize.t);
-    const float dMin=atmosphereHeight-altitude; // distance to zenith
-    const float dMax=LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA+distToHorizon;
-    const float d=distanceToAtmosphereBorder(cosVZA,altitude);
-    const float s=unitRangeToTexCoord((d-dMin)/(dMax-dMin), transmittanceTextureSize.s);
+    CONST float dMin=atmosphereHeight-altitude; // distance to zenith
+    CONST float dMax=LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA+distToHorizon;
+    CONST float d=distanceToAtmosphereBorder(cosVZA,altitude);
+    CONST float s=unitRangeToTexCoord((d-dMin)/(dMax-dMin), transmittanceTextureSize.s);
     return vec2(s,t);
 }
 
 // Output: vec2(cos(sunZenithAngle), altitude)
 IrradianceTexVars irradianceTexCoordToTexVars(const vec2 texCoord)
 {
-    const float cosSZA=2*texCoordToUnitRange(texCoord.s, irradianceTextureSize.s)-1;
-    const float alt=atmosphereHeight*texCoordToUnitRange(texCoord.t, irradianceTextureSize.t);
+    CONST float cosSZA=2*texCoordToUnitRange(texCoord.s, irradianceTextureSize.s)-1;
+    CONST float alt=atmosphereHeight*texCoordToUnitRange(texCoord.t, irradianceTextureSize.t);
     return IrradianceTexVars(cosSZA,alt);
 }
 
 vec2 irradianceTexVarsToTexCoord(const float cosSunZenithAngle, const float altitude)
 {
-    const float s=unitRangeToTexCoord((cosSunZenithAngle+1)/2, irradianceTextureSize.s);
-    const float t=unitRangeToTexCoord(altitude/atmosphereHeight, irradianceTextureSize.t);
+    CONST float s=unitRangeToTexCoord((cosSunZenithAngle+1)/2, irradianceTextureSize.s);
+    CONST float t=unitRangeToTexCoord(altitude/atmosphereHeight, irradianceTextureSize.t);
     return vec2(s,t);
 }
 
 float cosSZAToUnitRangeTexCoord(const float cosSunZenithAngle)
 {
     // Distance to top atmosphere border along the ray groundUnderCamera-sun: (altitude, cosSunZenithAngle)
-    const float distFromGroundToTopAtmoBorder=distanceToAtmosphereBorder(cosSunZenithAngle, 0.);
-    const float distMin=atmosphereHeight;
-    const float distMax=LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
+    CONST float distFromGroundToTopAtmoBorder=distanceToAtmosphereBorder(cosSunZenithAngle, 0.);
+    CONST float distMin=atmosphereHeight;
+    CONST float distMax=LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
     // TODO: choose a more descriptive name
-    const float a=(distFromGroundToTopAtmoBorder-distMin)/(distMax-distMin);
+    CONST float a=(distFromGroundToTopAtmoBorder-distMin)/(distMax-distMin);
     // TODO: choose a more descriptive name
-    const float A=2*earthRadius/(distMax-distMin);
+    CONST float A=2*earthRadius/(distMax-distMin);
     return max(0.,1-a/A)/(a+1);
 }
 
 float unitRangeTexCoordToCosSZA(const float texCoord)
 {
-    const float distMin=atmosphereHeight;
-    const float distMax=LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
+    CONST float distMin=atmosphereHeight;
+    CONST float distMax=LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
     // TODO: choose a more descriptive name, same as in cosSZAToUnitRangeTexCoord()
-    const float A=2*earthRadius/(distMax-distMin);
+    CONST float A=2*earthRadius/(distMax-distMin);
     // TODO: choose a more descriptive name, same as in cosSZAToUnitRangeTexCoord()
-    const float a=(A-A*texCoord)/(1+A*texCoord);
-    const float distFromGroundToTopAtmoBorder=distMin+min(a,A)*(distMax-distMin);
+    CONST float a=(A-A*texCoord)/(1+A*texCoord);
+    CONST float distFromGroundToTopAtmoBorder=distMin+min(a,A)*(distMax-distMin);
     return distFromGroundToTopAtmoBorder==0 ? 1 :
         clampCosine((sqr(LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA)-sqr(distFromGroundToTopAtmoBorder)) /
                     (2*earthRadius*distFromGroundToTopAtmoBorder));
@@ -292,24 +303,24 @@ Scattering4DCoords scatteringTexVarsTo4DCoords(const float cosSunZenithAngle, co
                                                const float dotViewSun, const float altitude,
                                                const bool viewRayIntersectsGround)
 {
-    const float r=earthRadius+altitude;
+    CONST float r=earthRadius+altitude;
 
-    const float distToHorizon    = sqrt(sqr(altitude)+2*altitude*earthRadius);
-    const float altCoord = distToHorizon / LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
+    CONST float distToHorizon    = sqrt(sqr(altitude)+2*altitude*earthRadius);
+    CONST float altCoord = distToHorizon / LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
 
     // ------------------------------------
     float cosVZACoord; // Coordinate for cos(viewZenithAngle)
-    const float rCvza=r*cosViewZenithAngle;
+    CONST float rCvza=r*cosViewZenithAngle;
     // Discriminant of the quadratic equation for the intersections of the ray (altitiude, cosViewZenithAngle) with the ground.
-    const float discriminant=sqr(rCvza)-sqr(r)+sqr(earthRadius);
+    CONST float discriminant=sqr(rCvza)-sqr(r)+sqr(earthRadius);
     if(viewRayIntersectsGround)
     {
         // Distance from camera to the ground along the view ray (altitude, cosViewZenithAngle)
-        const float distToGround = -rCvza-safeSqrt(discriminant);
+        CONST float distToGround = -rCvza-safeSqrt(discriminant);
         // Minimum possible value of distToGround
-        const float distMin = altitude;
+        CONST float distMin = altitude;
         // Maximum possible value of distToGround
-        const float distMax = distToHorizon;
+        CONST float distMax = distToHorizon;
         cosVZACoord = distMax==distMin ? 0. : (distToGround-distMin)/(distMax-distMin);
     }
     else
@@ -317,24 +328,24 @@ Scattering4DCoords scatteringTexVarsTo4DCoords(const float cosSunZenithAngle, co
         // Distance from camera to the atmosphere border along the view ray (altitude, cosViewZenithAngle)
         // sqr(LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA) added to sqr(earthRadius) term in discriminant changes
         // sqr(earthRadius) to sqr(earthRadius+atmosphereHeight), so that we target the top atmosphere boundary instead of bottom.
-        const float distToTopAtmoBorder = -rCvza+safeSqrt(discriminant+sqr(LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA));
-        const float distMin = atmosphereHeight-altitude;
-        const float distMax = distToHorizon+LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
+        CONST float distToTopAtmoBorder = -rCvza+safeSqrt(discriminant+sqr(LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA));
+        CONST float distMin = atmosphereHeight-altitude;
+        CONST float distMax = distToHorizon+LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
         cosVZACoord = distMax==distMin ? 0. : (distToTopAtmoBorder-distMin)/(distMax-distMin);
     }
 
     // ------------------------------------
-    const float dotVSCoord=(dotViewSun+1)/2;
+    CONST float dotVSCoord=(dotViewSun+1)/2;
 
     // ------------------------------------
-    const float cosSZACoord=cosSZAToUnitRangeTexCoord(cosSunZenithAngle);
+    CONST float cosSZACoord=cosSZAToUnitRangeTexCoord(cosSunZenithAngle);
 
     return Scattering4DCoords(cosSZACoord, cosVZACoord, dotVSCoord, altCoord, viewRayIntersectsGround);
 }
 
 TexCoordPair scattering4DCoordsToTexCoords(const Scattering4DCoords coords)
 {
-    const float cosVZAtc = coords.viewRayIntersectsGround ?
+    CONST float cosVZAtc = coords.viewRayIntersectsGround ?
                             // Coordinate is in ~[0,0.5]
                             0.5-0.5*unitRangeToTexCoord(coords.cosViewZenithAngle, scatteringTextureSize[0]/2) :
                             // Coordinate is in ~[0.5,1]
@@ -342,16 +353,16 @@ TexCoordPair scattering4DCoordsToTexCoords(const Scattering4DCoords coords)
 
     // Width and height of the 2D subspace of the 4D texture - the subspace spanned by
     // the texture coordinates we combine into a single sampler3D coordinate.
-    const float texW = scatteringTextureSize[1];
-    const float texH = scatteringTextureSize[2];
-    const float cosSZAIndex=coords.cosSunZenithAngle*(texH-1);
-    const vec2 combiCoordUnitRange=vec2(floor(cosSZAIndex)*texW+coords.dotViewSun*(texW-1),
+    CONST float texW = scatteringTextureSize[1];
+    CONST float texH = scatteringTextureSize[2];
+    CONST float cosSZAIndex=coords.cosSunZenithAngle*(texH-1);
+    CONST vec2 combiCoordUnitRange=vec2(floor(cosSZAIndex)*texW+coords.dotViewSun*(texW-1),
                                         ceil (cosSZAIndex)*texW+coords.dotViewSun*(texW-1)) / (texW*texH-1);
-    const vec2 combinedCoord=unitRangeToTexCoord(combiCoordUnitRange, texW*texH);
+    CONST vec2 combinedCoord=unitRangeToTexCoord(combiCoordUnitRange, texW*texH);
 
-    const float altitude = unitRangeToTexCoord(coords.altitude, scatteringTextureSize[3]);
+    CONST float altitude = unitRangeToTexCoord(coords.altitude, scatteringTextureSize[3]);
 
-    const float alphaUpper=fract(cosSZAIndex);
+    CONST float alphaUpper=fract(cosSZAIndex);
     return TexCoordPair(vec3(cosVZAtc, combinedCoord.x, altitude), float(1-alphaUpper),
                         vec3(cosVZAtc, combinedCoord.y, altitude), float(alphaUpper));
 }
@@ -359,9 +370,9 @@ TexCoordPair scattering4DCoordsToTexCoords(const Scattering4DCoords coords)
 vec4 sample4DTexture(const sampler3D tex, const float cosSunZenithAngle, const float cosViewZenithAngle,
                      const float dotViewSun, const float altitude, const bool viewRayIntersectsGround)
 {
-    const Scattering4DCoords coords4d = scatteringTexVarsTo4DCoords(cosSunZenithAngle,cosViewZenithAngle,
+    CONST Scattering4DCoords coords4d = scatteringTexVarsTo4DCoords(cosSunZenithAngle,cosViewZenithAngle,
                                                                     dotViewSun,altitude,viewRayIntersectsGround);
-    const TexCoordPair texCoords=scattering4DCoordsToTexCoords(coords4d);
+    CONST TexCoordPair texCoords=scattering4DCoordsToTexCoords(coords4d);
     return texture(tex, texCoords.lower) * texCoords.alphaLower +
            texture(tex, texCoords.upper) * texCoords.alphaUpper;
 }
@@ -369,17 +380,17 @@ vec4 sample4DTexture(const sampler3D tex, const float cosSunZenithAngle, const f
 // 3D texture is the 3D single-altitude slice of a 4D texture
 vec3 scattering4DCoordsToTex3DCoords(const Scattering4DCoords coords)
 {
-    const float cosVZAtc = coords.viewRayIntersectsGround ?
+    CONST float cosVZAtc = coords.viewRayIntersectsGround ?
                             // Coordinate is in ~[0,0.5]
                             0.5-0.5*unitRangeToTexCoord(coords.cosViewZenithAngle, scatteringTextureSize[0]/2) :
                             // Coordinate is in ~[0.5,1]
                             0.5+0.5*unitRangeToTexCoord(coords.cosViewZenithAngle, scatteringTextureSize[0]/2);
 
-    const float dvsSize = scatteringTextureSize[1];
-    const float dotVStc = unitRangeToTexCoord(coords.dotViewSun, dvsSize);
+    CONST float dvsSize = scatteringTextureSize[1];
+    CONST float dotVStc = unitRangeToTexCoord(coords.dotViewSun, dvsSize);
 
-    const float cszaSize = scatteringTextureSize[2];
-    const float cosSZAtc = unitRangeToTexCoord(coords.cosSunZenithAngle, cszaSize);
+    CONST float cszaSize = scatteringTextureSize[2];
+    CONST float cosSZAtc = unitRangeToTexCoord(coords.cosSunZenithAngle, cszaSize);
 
     return vec3(cosVZAtc, dotVStc, cosSZAtc);
 }
@@ -394,39 +405,39 @@ float findGuide01Angle(const sampler3D guides, const vec3 indices)
     // Row is the line along VZA coordinate.
     // Position between rows means the position along dotViewSun coordinate.
 
-    const float texCoordVerbatim = indexToTexCoord(indices[2], scatteringTextureSize[2]);
-    const float rowLen = scatteringTextureSize[0];
-    const float numRows = scatteringTextureSize[1];
-    const float posOfRow = indices[1];
-    const float posInRow = indices[0];
-    const float currRow = floor(posOfRow);
-    const float posBetweenRows = posOfRow - currRow;
+    CONST float texCoordVerbatim = indexToTexCoord(indices[2], scatteringTextureSize[2]);
+    CONST float rowLen = scatteringTextureSize[0];
+    CONST float numRows = scatteringTextureSize[1];
+    CONST float posOfRow = indices[1];
+    CONST float posInRow = indices[0];
+    CONST float currRow = floor(posOfRow);
+    CONST float posBetweenRows = posOfRow - currRow;
 
     // A & B are the endpoints of binary search inside the row
     float posInRow_A = 0;
     float posInRow_B = rowLen-1;
 
-    const float angle_A = PI/2*sampleGuide(guides, vec3(indexToTexCoord(posInRow_A, rowLen),
+    CONST float angle_A = PI/2*sampleGuide(guides, vec3(indexToTexCoord(posInRow_A, rowLen),
                                                         indexToTexCoord(currRow, numRows-1),
                                                         texCoordVerbatim));
-    const float posInRowAtPosBetweenRows_A = posInRow_A + (posBetweenRows-0.5) * tan(angle_A);
+    CONST float posInRowAtPosBetweenRows_A = posInRow_A + (posBetweenRows-0.5) * tan(angle_A);
     if(posInRowAtPosBetweenRows_A > posInRow)
     {
         swap(posInRow_A, posInRow_B);
     }
     for(int n=0; n<8; ++n)
     {
-        const float currPosInRow = (posInRow_A + posInRow_B)/2;
-        const float currAngle = PI/2*sampleGuide(guides, vec3(indexToTexCoord(currPosInRow, rowLen),
+        CONST float currPosInRow = (posInRow_A + posInRow_B)/2;
+        CONST float currAngle = PI/2*sampleGuide(guides, vec3(indexToTexCoord(currPosInRow, rowLen),
                                                               indexToTexCoord(currRow, numRows-1),
                                                               texCoordVerbatim));
-        const float currPosInRowAtPosBetweenRows = currPosInRow + (posBetweenRows-0.5) * tan(currAngle);
+        CONST float currPosInRowAtPosBetweenRows = currPosInRow + (posBetweenRows-0.5) * tan(currAngle);
         if(currPosInRowAtPosBetweenRows < posInRow)
             posInRow_A = currPosInRow;
         else
             posInRow_B = currPosInRow;
     }
-    const float finalPosInRow = (posInRow_A + posInRow_B)/2;
+    CONST float finalPosInRow = (posInRow_A + posInRow_B)/2;
     return PI/2*sampleGuide(guides, vec3(indexToTexCoord(finalPosInRow, rowLen),
                                          indexToTexCoord(currRow, numRows-1),
                                          texCoordVerbatim));
@@ -434,14 +445,14 @@ float findGuide01Angle(const sampler3D guides, const vec3 indices)
 vec4 sample3DTextureGuided01_log(const sampler3D tex, const sampler3D interpolationGuides01Tex,
                                  const vec3 indices)
 {
-    const float interpAngle = findGuide01Angle(interpolationGuides01Tex, indices);
+    CONST float interpAngle = findGuide01Angle(interpolationGuides01Tex, indices);
 
-    const float cosVZAIndex = indices[0];
-    const float dotVSIndex = indices[1];
-    const float currRow = floor(dotVSIndex);
-    const float posBetweenRows = dotVSIndex - currRow;
-    const float cvzaPosInCurrRow = cosVZAIndex - posBetweenRows*tan(interpAngle);
-    const float cvzaPosInNextRow = cosVZAIndex + (1-posBetweenRows)*tan(interpAngle);
+    CONST float cosVZAIndex = indices[0];
+    CONST float dotVSIndex = indices[1];
+    CONST float currRow = floor(dotVSIndex);
+    CONST float posBetweenRows = dotVSIndex - currRow;
+    CONST float cvzaPosInCurrRow = cosVZAIndex - posBetweenRows*tan(interpAngle);
+    CONST float cvzaPosInNextRow = cosVZAIndex + (1-posBetweenRows)*tan(interpAngle);
 
     vec3 indicesCurrRow = indices, indicesNextRow = indices;
     indicesCurrRow[0] = clamp(cvzaPosInCurrRow, 0., scatteringTextureSize[0]-1.);
@@ -449,14 +460,14 @@ vec4 sample3DTextureGuided01_log(const sampler3D tex, const sampler3D interpolat
     indicesCurrRow[1] =     currRow;
     indicesNextRow[1] = min(currRow+1, scatteringTextureSize[1]-1.);
 
-    const vec3 coordsNextRow = indicesToTexCoords(indicesNextRow, scatteringTextureSize.stp);
-    const vec3 coordsCurrRow = indicesToTexCoords(indicesCurrRow, scatteringTextureSize.stp);
+    CONST vec3 coordsNextRow = indicesToTexCoords(indicesNextRow, scatteringTextureSize.stp);
+    CONST vec3 coordsCurrRow = indicesToTexCoords(indicesCurrRow, scatteringTextureSize.stp);
 
-    const vec4 valueCurrRow = texture(tex, coordsCurrRow);
-    const vec4 valueNextRow = texture(tex, coordsNextRow);
-    const float epsilon = 1e-37; // Prevents passing zero to log
-    const vec4 logValNextRow = log(max(valueNextRow, vec4(epsilon)));
-    const vec4 logValCurrRow = log(max(valueCurrRow, vec4(epsilon)));
+    CONST vec4 valueCurrRow = texture(tex, coordsCurrRow);
+    CONST vec4 valueNextRow = texture(tex, coordsNextRow);
+    CONST float epsilon = 1e-37; // Prevents passing zero to log
+    CONST vec4 logValNextRow = log(max(valueNextRow, vec4(epsilon)));
+    CONST vec4 logValCurrRow = log(max(valueCurrRow, vec4(epsilon)));
     return (logValNextRow-logValCurrRow) * posBetweenRows + logValCurrRow;
 }
 
@@ -465,37 +476,37 @@ float findGuide02Angle(const sampler3D guides, const vec3 indices)
     // Row is the line along VZA coordinate.
     // Position between rows means the position along SZA coordinate.
 
-    const float texCoordVerbatim = indexToTexCoord(indices[1], scatteringTextureSize[1]);
-    const float rowLen = scatteringTextureSize[0];
-    const float numRows = scatteringTextureSize[2];
-    const float posOfRow = indices[2];
-    const float posInRow = indices[0];
-    const float currRow = floor(posOfRow);
-    const float posBetweenRows = posOfRow - currRow;
+    CONST float texCoordVerbatim = indexToTexCoord(indices[1], scatteringTextureSize[1]);
+    CONST float rowLen = scatteringTextureSize[0];
+    CONST float numRows = scatteringTextureSize[2];
+    CONST float posOfRow = indices[2];
+    CONST float posInRow = indices[0];
+    CONST float currRow = floor(posOfRow);
+    CONST float posBetweenRows = posOfRow - currRow;
 
     // A & B are the endpoints of binary search inside the row
     float posInRow_A = 0;
     float posInRow_B = rowLen-1;
 
-    const float angle_A = PI/2*sampleGuide(guides, vec3(indexToTexCoord(posInRow_A, rowLen),
+    CONST float angle_A = PI/2*sampleGuide(guides, vec3(indexToTexCoord(posInRow_A, rowLen),
                                                         texCoordVerbatim, indexToTexCoord(currRow, numRows-1)));
-    const float posInRowAtPosBetweenRows_A = posInRow_A + (posBetweenRows-0.5) * tan(angle_A);
+    CONST float posInRowAtPosBetweenRows_A = posInRow_A + (posBetweenRows-0.5) * tan(angle_A);
     if(posInRowAtPosBetweenRows_A > posInRow)
     {
         swap(posInRow_A, posInRow_B);
     }
     for(int n=0; n<8; ++n)
     {
-        const float currPosInRow = (posInRow_A + posInRow_B)/2;
-        const float currAngle = PI/2*sampleGuide(guides, vec3(indexToTexCoord(currPosInRow, rowLen),
+        CONST float currPosInRow = (posInRow_A + posInRow_B)/2;
+        CONST float currAngle = PI/2*sampleGuide(guides, vec3(indexToTexCoord(currPosInRow, rowLen),
                                                               texCoordVerbatim, indexToTexCoord(currRow, numRows-1)));
-        const float currPosInRowAtPosBetweenRows = currPosInRow + (posBetweenRows-0.5) * tan(currAngle);
+        CONST float currPosInRowAtPosBetweenRows = currPosInRow + (posBetweenRows-0.5) * tan(currAngle);
         if(currPosInRowAtPosBetweenRows < posInRow)
             posInRow_A = currPosInRow;
         else
             posInRow_B = currPosInRow;
     }
-    const float finalPosInRow = (posInRow_A + posInRow_B)/2;
+    CONST float finalPosInRow = (posInRow_A + posInRow_B)/2;
     return PI/2*sampleGuide(guides, vec3(indexToTexCoord(finalPosInRow, rowLen),
                                          texCoordVerbatim, indexToTexCoord(currRow, numRows-1)));
 }
@@ -505,19 +516,19 @@ vec4 sample3DTextureGuided(const sampler3D tex,
                            const float cosSunZenithAngle, const float cosViewZenithAngle,
                            const float dotViewSun, const float altitude, const bool viewRayIntersectsGround)
 {
-    const Scattering4DCoords coords4d = scatteringTexVarsTo4DCoords(cosSunZenithAngle, cosViewZenithAngle,
+    CONST Scattering4DCoords coords4d = scatteringTexVarsTo4DCoords(cosSunZenithAngle, cosViewZenithAngle,
                                                                     dotViewSun, altitude, viewRayIntersectsGround);
     // Handle the external interpolation guides: the guides between a pair of VZA-dotViewSun 2D "pictures".
-    const vec3 tc = scattering4DCoordsToTex3DCoords(coords4d);
-    const vec3 indices = texCoordsToIndices(tc, scatteringTextureSize.stp);
-    const float interpAngle = findGuide02Angle(interpolationGuides02Tex, indices);
+    CONST vec3 tc = scattering4DCoordsToTex3DCoords(coords4d);
+    CONST vec3 indices = texCoordsToIndices(tc, scatteringTextureSize.stp);
+    CONST float interpAngle = findGuide02Angle(interpolationGuides02Tex, indices);
 
-    const float cvzaIndex = indices[0];
-    const float cszaIndex = indices[2];
-    const float currRow = floor(cszaIndex);
-    const float posBetweenRows = cszaIndex - currRow;
-    const float cvzaPosInCurrRow = cvzaIndex - posBetweenRows*tan(interpAngle);
-    const float cvzaPosInNextRow = cvzaIndex + (1-posBetweenRows)*tan(interpAngle);
+    CONST float cvzaIndex = indices[0];
+    CONST float cszaIndex = indices[2];
+    CONST float currRow = floor(cszaIndex);
+    CONST float posBetweenRows = cszaIndex - currRow;
+    CONST float cvzaPosInCurrRow = cvzaIndex - posBetweenRows*tan(interpAngle);
+    CONST float cvzaPosInNextRow = cvzaIndex + (1-posBetweenRows)*tan(interpAngle);
 
     vec3 indicesCurrRow = indices, indicesNextRow = indices;
     indicesCurrRow[0] = clamp(cvzaPosInCurrRow, 0., scatteringTextureSize[0]-1.);
@@ -526,58 +537,58 @@ vec4 sample3DTextureGuided(const sampler3D tex,
     indicesNextRow[2] = min(currRow+1, scatteringTextureSize[2]-1);
 
     // The caller will handle the internal interpolation guides: the ones between rows in each 2D "picture".
-    const vec4 logValCurrRow = sample3DTextureGuided01_log(tex, interpolationGuides01Tex, indicesCurrRow);
-    const vec4 logValNextRow = sample3DTextureGuided01_log(tex, interpolationGuides01Tex, indicesNextRow);
+    CONST vec4 logValCurrRow = sample3DTextureGuided01_log(tex, interpolationGuides01Tex, indicesCurrRow);
+    CONST vec4 logValNextRow = sample3DTextureGuided01_log(tex, interpolationGuides01Tex, indicesNextRow);
     return exp((logValNextRow-logValCurrRow) * posBetweenRows + logValCurrRow);
 }
 
 vec4 sample3DTexture(const sampler3D tex, const float cosSunZenithAngle, const float cosViewZenithAngle,
                      const float dotViewSun, const float altitude, const bool viewRayIntersectsGround)
 {
-    const Scattering4DCoords coords4d = scatteringTexVarsTo4DCoords(cosSunZenithAngle,cosViewZenithAngle,
+    CONST Scattering4DCoords coords4d = scatteringTexVarsTo4DCoords(cosSunZenithAngle,cosViewZenithAngle,
                                                                     dotViewSun,altitude,viewRayIntersectsGround);
-    const vec3 texCoords=scattering4DCoordsToTex3DCoords(coords4d);
+    CONST vec3 texCoords=scattering4DCoordsToTex3DCoords(coords4d);
     return texture(tex, texCoords);
 }
 
 ScatteringTexVars scatteringTex4DCoordsToTexVars(const Scattering4DCoords coords)
 {
-    const float distToHorizon = coords.altitude*LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
+    CONST float distToHorizon = coords.altitude*LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
     // Rounding errors can result in altitude>max, breaking the code after this calculation, so we have to clamp.
-    const float altitude=clampAltitude(sqrt(sqr(distToHorizon)+sqr(earthRadius))-earthRadius);
+    CONST float altitude=clampAltitude(sqrt(sqr(distToHorizon)+sqr(earthRadius))-earthRadius);
 
     // ------------------------------------
     float cosViewZenithAngle;
     if(coords.viewRayIntersectsGround)
     {
-        const float distMin=altitude;
-        const float distMax=distToHorizon;
-        const float distToGround=coords.cosViewZenithAngle*(distMax-distMin)+distMin;
+        CONST float distMin=altitude;
+        CONST float distMax=distToHorizon;
+        CONST float distToGround=coords.cosViewZenithAngle*(distMax-distMin)+distMin;
         cosViewZenithAngle = distToGround==0 ? -1 :
             clampCosine(-(sqr(distToHorizon)+sqr(distToGround)) / (2*distToGround*(altitude+earthRadius)));
     }
     else
     {
-        const float distMin=atmosphereHeight-altitude;
-        const float distMax=distToHorizon+LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
-        const float distToTopAtmoBorder=coords.cosViewZenithAngle*(distMax-distMin)+distMin;
+        CONST float distMin=atmosphereHeight-altitude;
+        CONST float distMax=distToHorizon+LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
+        CONST float distToTopAtmoBorder=coords.cosViewZenithAngle*(distMax-distMin)+distMin;
         cosViewZenithAngle = distToTopAtmoBorder==0 ? 1 :
             clampCosine((sqr(LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA)-sqr(distToHorizon)-sqr(distToTopAtmoBorder)) /
                         (2*distToTopAtmoBorder*(altitude+earthRadius)));
     }
 
     // ------------------------------------
-    const float dotViewSun=coords.dotViewSun*2-1;
+    CONST float dotViewSun=coords.dotViewSun*2-1;
 
     // ------------------------------------
-    const float cosSunZenithAngle=unitRangeTexCoordToCosSZA(coords.cosSunZenithAngle);
+    CONST float cosSunZenithAngle=unitRangeTexCoordToCosSZA(coords.cosSunZenithAngle);
 
     return ScatteringTexVars(cosSunZenithAngle, cosViewZenithAngle, dotViewSun, altitude, coords.viewRayIntersectsGround);
 }
 
 Scattering4DCoords scatteringTexIndicesTo4DCoords(const vec3 texIndices)
 {
-    const vec4 indexMax=scatteringTextureSize-vec4(1);
+    CONST vec4 indexMax=scatteringTextureSize-vec4(1);
     Scattering4DCoords coords4d;
     coords4d.viewRayIntersectsGround = texIndices[0] < indexMax[0]/2;
     // The following formulas assume that scatteringTextureSize[0] is even. For odd sizes they would change.
@@ -593,8 +604,8 @@ Scattering4DCoords scatteringTexIndicesTo4DCoords(const vec3 texIndices)
 
     // Width and height of the 2D subspace of the 4D texture - the subspace spanned by
     // the texture indices we combine into a single sampler3D coordinate.
-    const float texW=scatteringTextureSize[1], texH=scatteringTextureSize[2];
-    const float combinedIndex=texIndices[1];
+    CONST float texW=scatteringTextureSize[1], texH=scatteringTextureSize[2];
+    CONST float combinedIndex=texIndices[1];
     coords4d.dotViewSun=mod(combinedIndex,texW)/(texW-1);
     coords4d.cosSunZenithAngle=floor(combinedIndex/texW)/(texH-1);
 
@@ -608,11 +619,11 @@ Scattering4DCoords scatteringTexIndicesTo4DCoords(const vec3 texIndices)
 
 ScatteringTexVars scatteringTexIndicesToTexVars(const vec3 texIndices)
 {
-    const Scattering4DCoords coords4d=scatteringTexIndicesTo4DCoords(texIndices);
+    CONST Scattering4DCoords coords4d=scatteringTexIndicesTo4DCoords(texIndices);
     ScatteringTexVars vars=scatteringTex4DCoordsToTexVars(coords4d);
     // Clamp dotViewSun to its valid range of values, given cosViewZenithAngle and cosSunZenithAngle. This is
     // needed to prevent NaNs when computing the scattering texture.
-    const float cosVZA=vars.cosViewZenithAngle,
+    CONST float cosVZA=vars.cosViewZenithAngle,
                 cosSZA=vars.cosSunZenithAngle;
     vars.dotViewSun=clamp(vars.dotViewSun,
                           cosVZA*cosSZA-safeSqrt((1-sqr(cosVZA))*(1-sqr(cosSZA))),
@@ -622,54 +633,54 @@ ScatteringTexVars scatteringTexIndicesToTexVars(const vec3 texIndices)
 
 EclipseScatteringTexVars eclipseTexCoordsToTexVars(const vec2 texCoords, const float altitude)
 {
-    const float distToHorizon = sqrt(sqr(altitude)+2*altitude*earthRadius);
+    CONST float distToHorizon = sqrt(sqr(altitude)+2*altitude*earthRadius);
 
-    const bool viewRayIntersectsGround = texCoords.t<0.5;
+    CONST bool viewRayIntersectsGround = texCoords.t<0.5;
     float cosViewZenithAngle;
     if(viewRayIntersectsGround)
     {
-        const float cosVZACoord = texCoordToUnitRange(1-2*texCoords.t, eclipsedSingleScatteringTextureSize.t/2);
-        const float distMin=altitude;
-        const float distMax=distToHorizon;
-        const float distToGround=cosVZACoord*(distMax-distMin)+distMin;
+        CONST float cosVZACoord = texCoordToUnitRange(1-2*texCoords.t, eclipsedSingleScatteringTextureSize.t/2);
+        CONST float distMin=altitude;
+        CONST float distMax=distToHorizon;
+        CONST float distToGround=cosVZACoord*(distMax-distMin)+distMin;
         cosViewZenithAngle = distToGround==0 ? -1 :
             clampCosine(-(sqr(distToHorizon)+sqr(distToGround)) / (2*distToGround*(altitude+earthRadius)));
     }
     else
     {
-        const float cosVZACoord = texCoordToUnitRange(2*texCoords.t-1, eclipsedSingleScatteringTextureSize.t/2);
-        const float distMin=atmosphereHeight-altitude;
-        const float distMax=distToHorizon+LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
-        const float distToTopAtmoBorder=cosVZACoord*(distMax-distMin)+distMin;
+        CONST float cosVZACoord = texCoordToUnitRange(2*texCoords.t-1, eclipsedSingleScatteringTextureSize.t/2);
+        CONST float distMin=atmosphereHeight-altitude;
+        CONST float distMax=distToHorizon+LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
+        CONST float distToTopAtmoBorder=cosVZACoord*(distMax-distMin)+distMin;
         cosViewZenithAngle = distToTopAtmoBorder==0 ? 1 :
             clampCosine((sqr(LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA)-sqr(distToHorizon)-sqr(distToTopAtmoBorder)) /
                         (2*distToTopAtmoBorder*(altitude+earthRadius)));
     }
 
-    const float azimuthRelativeToSun = 2*PI*(texCoords.s - 1/(2*eclipsedSingleScatteringTextureSize.s));
+    CONST float azimuthRelativeToSun = 2*PI*(texCoords.s - 1/(2*eclipsedSingleScatteringTextureSize.s));
     return EclipseScatteringTexVars(azimuthRelativeToSun, cosViewZenithAngle, viewRayIntersectsGround);
 }
 
 EclipseScattering2DCoords eclipseTexVarsTo2DCoords(const float azimuthRelativeToSun, const float cosViewZenithAngle,
                                                    const float altitude, const bool viewRayIntersectsGround)
 {
-    const float r=earthRadius+altitude;
+    CONST float r=earthRadius+altitude;
 
-    const float distToHorizon    = sqrt(sqr(altitude)+2*altitude*earthRadius);
+    CONST float distToHorizon    = sqrt(sqr(altitude)+2*altitude*earthRadius);
 
     // ------------------------------------
     float cosVZACoord; // Coordinate for cos(viewZenithAngle)
-    const float rCvza=r*cosViewZenithAngle;
+    CONST float rCvza=r*cosViewZenithAngle;
     // Discriminant of the quadratic equation for the intersections of the ray (altitiude, cosViewZenithAngle) with the ground.
-    const float discriminant=sqr(rCvza)-sqr(r)+sqr(earthRadius);
+    CONST float discriminant=sqr(rCvza)-sqr(r)+sqr(earthRadius);
     if(viewRayIntersectsGround)
     {
         // Distance from camera to the ground along the view ray (altitude, cosViewZenithAngle)
-        const float distToGround = -rCvza-safeSqrt(discriminant);
+        CONST float distToGround = -rCvza-safeSqrt(discriminant);
         // Minimum possible value of distToGround
-        const float distMin = altitude;
+        CONST float distMin = altitude;
         // Maximum possible value of distToGround
-        const float distMax = distToHorizon;
+        CONST float distMax = distToHorizon;
         cosVZACoord = distMax==distMin ? 0. : (distToGround-distMin)/(distMax-distMin);
     }
     else
@@ -677,13 +688,13 @@ EclipseScattering2DCoords eclipseTexVarsTo2DCoords(const float azimuthRelativeTo
         // Distance from camera to the atmosphere border along the view ray (altitude, cosViewZenithAngle)
         // sqr(LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA) added to sqr(earthRadius) term in discriminant changes
         // sqr(earthRadius) to sqr(earthRadius+atmosphereHeight), so that we target the top atmosphere boundary instead of bottom.
-        const float distToTopAtmoBorder = -rCvza+safeSqrt(discriminant+sqr(LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA));
-        const float distMin = atmosphereHeight-altitude;
-        const float distMax = distToHorizon+LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
+        CONST float distToTopAtmoBorder = -rCvza+safeSqrt(discriminant+sqr(LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA));
+        CONST float distMin = atmosphereHeight-altitude;
+        CONST float distMax = distToHorizon+LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
         cosVZACoord = distMax==distMin ? 0. : (distToTopAtmoBorder-distMin)/(distMax-distMin);
     }
 
-    const float azimuthCoord = azimuthRelativeToSun/(2*PI);
+    CONST float azimuthCoord = azimuthRelativeToSun/(2*PI);
 
     return EclipseScattering2DCoords(azimuthCoord, cosVZACoord);
 }
@@ -691,14 +702,14 @@ EclipseScattering2DCoords eclipseTexVarsTo2DCoords(const float azimuthRelativeTo
 vec2 eclipseTexVarsToTexCoords(const float azimuthRelativeToSun, const float cosViewZenithAngle,
                                const float altitude, const bool viewRayIntersectsGround, const vec2 texSize)
 {
-    const EclipseScattering2DCoords coords=eclipseTexVarsTo2DCoords(azimuthRelativeToSun, cosViewZenithAngle, altitude,
+    CONST EclipseScattering2DCoords coords=eclipseTexVarsTo2DCoords(azimuthRelativeToSun, cosViewZenithAngle, altitude,
                                                                     viewRayIntersectsGround);
-    const float cosVZAtc = viewRayIntersectsGround ?
+    CONST float cosVZAtc = viewRayIntersectsGround ?
                             // Coordinate is in ~[0,0.5]
                             0.5-0.5*unitRangeToTexCoord(coords.cosViewZenithAngle, texSize.t/2) :
                             // Coordinate is in ~[0.5,1]
                             0.5+0.5*unitRangeToTexCoord(coords.cosViewZenithAngle, texSize.t/2);
-    const float azimuthTC = coords.azimuth + 1/(2*texSize.s);
+    CONST float azimuthTC = coords.azimuth + 1/(2*texSize.s);
 
     return vec2(azimuthTC, cosVZAtc);
 }
@@ -707,42 +718,42 @@ vec4 sampleEclipseDoubleScattering3DTexture(const sampler3D tex, const float cos
                                             const float cosViewZenithAngle, const float azimuthRelativeToSun,
                                             const float altitude, const bool viewRayIntersectsGround)
 {
-    const vec2 coords2d=eclipseTexVarsToTexCoords(azimuthRelativeToSun, cosViewZenithAngle, altitude, viewRayIntersectsGround,
+    CONST vec2 coords2d=eclipseTexVarsToTexCoords(azimuthRelativeToSun, cosViewZenithAngle, altitude, viewRayIntersectsGround,
                                                   eclipsedDoubleScatteringTextureSize.st);
-    const float cosSZACoord=unitRangeToTexCoord(cosSZAToUnitRangeTexCoord(cosSunZenithAngle), eclipsedDoubleScatteringTextureSize[2]);
-    const vec3 texCoords=vec3(coords2d, cosSZACoord);
+    CONST float cosSZACoord=unitRangeToTexCoord(cosSZAToUnitRangeTexCoord(cosSunZenithAngle), eclipsedDoubleScatteringTextureSize[2]);
+    CONST vec3 texCoords=vec3(coords2d, cosSZACoord);
 
     return texture(tex, texCoords);
 }
 
 LightPollutionTexVars scatteringTexIndicesToLightPollutionTexVars(const vec2 texIndices)
 {
-    const vec2 indexMax=lightPollutionTextureSize-vec2(1);
+    CONST vec2 indexMax=lightPollutionTextureSize-vec2(1);
 
-    const float altitudeURCoord = texIndices[1] / (indexMax[1]-1);
-    const float distToHorizon = altitudeURCoord*LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
+    CONST float altitudeURCoord = texIndices[1] / (indexMax[1]-1);
+    CONST float distToHorizon = altitudeURCoord*LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
     // Rounding errors can result in altitude>max, breaking the code after this calculation, so we have to clamp.
-    const float altitude=clampAltitude(sqrt(sqr(distToHorizon)+sqr(earthRadius))-earthRadius);
+    CONST float altitude=clampAltitude(sqrt(sqr(distToHorizon)+sqr(earthRadius))-earthRadius);
 
-    const bool viewRayIntersectsGround = texIndices[0] < indexMax[0]/2;
-    const float cosViewZenithAngleCoord = viewRayIntersectsGround ?
+    CONST bool viewRayIntersectsGround = texIndices[0] < indexMax[0]/2;
+    CONST float cosViewZenithAngleCoord = viewRayIntersectsGround ?
                                    1-2*texIndices[0]/(indexMax[0]-1) :
                                    2*(texIndices[0]-1)/(indexMax[0]-1)-1;
     // ------------------------------------
     float cosViewZenithAngle;
     if(viewRayIntersectsGround)
     {
-        const float distMin=altitude;
-        const float distMax=distToHorizon;
-        const float distToGround=cosViewZenithAngleCoord*(distMax-distMin)+distMin;
+        CONST float distMin=altitude;
+        CONST float distMax=distToHorizon;
+        CONST float distToGround=cosViewZenithAngleCoord*(distMax-distMin)+distMin;
         cosViewZenithAngle = distToGround==0 ? -1 :
             clampCosine(-(sqr(distToHorizon)+sqr(distToGround)) / (2*distToGround*(altitude+earthRadius)));
     }
     else
     {
-        const float distMin=atmosphereHeight-altitude;
-        const float distMax=distToHorizon+LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
-        const float distToTopAtmoBorder=cosViewZenithAngleCoord*(distMax-distMin)+distMin;
+        CONST float distMin=atmosphereHeight-altitude;
+        CONST float distMax=distToHorizon+LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
+        CONST float distToTopAtmoBorder=cosViewZenithAngleCoord*(distMax-distMin)+distMin;
         cosViewZenithAngle = distToTopAtmoBorder==0 ? 1 :
             clampCosine((sqr(LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA)-sqr(distToHorizon)-sqr(distToTopAtmoBorder)) /
                         (2*distToTopAtmoBorder*(altitude+earthRadius)));
@@ -753,23 +764,23 @@ LightPollutionTexVars scatteringTexIndicesToLightPollutionTexVars(const vec2 tex
 
 LightPollution2DCoords lightPollutionTexVarsTo2DCoords(const float altitude, const float cosViewZenithAngle, const bool viewRayIntersectsGround)
 {
-    const float r=earthRadius+altitude;
+    CONST float r=earthRadius+altitude;
 
-    const float distToHorizon = sqrt(sqr(altitude)+2*altitude*earthRadius);
+    CONST float distToHorizon = sqrt(sqr(altitude)+2*altitude*earthRadius);
 
     // ------------------------------------
     float cosVZACoord; // Coordinate for cos(viewZenithAngle)
-    const float rCvza=r*cosViewZenithAngle;
+    CONST float rCvza=r*cosViewZenithAngle;
     // Discriminant of the quadratic equation for the intersections of the ray (altitiude, cosViewZenithAngle) with the ground.
-    const float discriminant=sqr(rCvza)-sqr(r)+sqr(earthRadius);
+    CONST float discriminant=sqr(rCvza)-sqr(r)+sqr(earthRadius);
     if(viewRayIntersectsGround)
     {
         // Distance from camera to the ground along the view ray (altitude, cosViewZenithAngle)
-        const float distToGround = -rCvza-safeSqrt(discriminant);
+        CONST float distToGround = -rCvza-safeSqrt(discriminant);
         // Minimum possible value of distToGround
-        const float distMin = altitude;
+        CONST float distMin = altitude;
         // Maximum possible value of distToGround
-        const float distMax = distToHorizon;
+        CONST float distMax = distToHorizon;
         cosVZACoord = distMax==distMin ? 0. : (distToGround-distMin)/(distMax-distMin);
     }
     else
@@ -777,27 +788,27 @@ LightPollution2DCoords lightPollutionTexVarsTo2DCoords(const float altitude, con
         // Distance from camera to the atmosphere border along the view ray (altitude, cosViewZenithAngle)
         // sqr(LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA) added to sqr(earthRadius) term in discriminant changes
         // sqr(earthRadius) to sqr(earthRadius+atmosphereHeight), so that we target the top atmosphere boundary instead of bottom.
-        const float distToTopAtmoBorder = -rCvza+safeSqrt(discriminant+sqr(LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA));
-        const float distMin = atmosphereHeight-altitude;
-        const float distMax = distToHorizon+LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
+        CONST float distToTopAtmoBorder = -rCvza+safeSqrt(discriminant+sqr(LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA));
+        CONST float distMin = atmosphereHeight-altitude;
+        CONST float distMax = distToHorizon+LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
         cosVZACoord = distMax==distMin ? 0. : (distToTopAtmoBorder-distMin)/(distMax-distMin);
     }
 
     // ------------------------------------
-    const float altCoord = distToHorizon / LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
+    CONST float altCoord = distToHorizon / LENGTH_OF_HORIZ_RAY_FROM_GROUND_TO_TOA;
 
     return LightPollution2DCoords(cosVZACoord, altCoord);
 }
 
 vec2 lightPollutionTexVarsToTexCoords(const float altitude, const float cosViewZenithAngle, const bool viewRayIntersectsGround)
 {
-    const LightPollution2DCoords coords = lightPollutionTexVarsTo2DCoords(altitude, cosViewZenithAngle, viewRayIntersectsGround);
-    const vec2 texSize = lightPollutionTextureSize;
-    const float cosVZAtc = viewRayIntersectsGround ?
+    CONST LightPollution2DCoords coords = lightPollutionTexVarsTo2DCoords(altitude, cosViewZenithAngle, viewRayIntersectsGround);
+    CONST vec2 texSize = lightPollutionTextureSize;
+    CONST float cosVZAtc = viewRayIntersectsGround ?
                             // Coordinate is in ~[0,0.5]
                             0.5-0.5*unitRangeToTexCoord(coords.cosViewZenithAngle, texSize[0]/2) :
                             // Coordinate is in ~[0.5,1]
                             0.5+0.5*unitRangeToTexCoord(coords.cosViewZenithAngle, texSize[0]/2);
-    const float altitudeTC = unitRangeToTexCoord(coords.altitude, texSize[1]);
+    CONST float altitudeTC = unitRangeToTexCoord(coords.altitude, texSize[1]);
     return vec2(cosVZAtc, altitudeTC);
 }

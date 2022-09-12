@@ -1,7 +1,18 @@
 #version 330
-#extension GL_ARB_shading_language_420pack : require
+#line 1 1 // version.h.glsl
+#ifndef INCLUDE_ONCE_EF4160B0_E881_42C8_BB48_A408AF2E4354
+#define INCLUDE_ONCE_EF4160B0_E881_42C8_BB48_A408AF2E4354
 
-#line 1 1 // const.h.glsl
+#extension GL_ARB_shading_language_420pack : enable
+#ifdef GL_ARB_shading_language_420pack
+# define CONST const
+#else
+# define CONST
+#endif
+
+#endif
+#line 3 0 // phase-functions.frag
+#line 1 2 // const.h.glsl
 #ifndef INCLUDE_ONCE_2B59AE86_E78B_4D75_ACDF_5DA644F8E9A3
 #define INCLUDE_ONCE_2B59AE86_E78B_4D75_ACDF_5DA644F8E9A3
 const float earthRadius=6.371e+06; // must be in meters
@@ -34,7 +45,7 @@ const vec4 lightPollutionRelativeRadiance=vec4(0,0,4.3e-07,1.623e-06);
 const vec4 wavelengths=vec4(360,391.333344,422.666656,454);
 const int wlSetIndex=0;
 #endif
-#line 5 0 // phase-functions.frag
+#line 4 0 // phase-functions.frag
 
 vec4 phaseFunction_molecules(float dotViewSun)
 {
@@ -42,9 +53,9 @@ vec4 phaseFunction_molecules(float dotViewSun)
 }
 vec4 phaseFunction_aerosols(float dotViewSun)
 {
-        const float g=0.76;
-        const float g2=g*g;
-        const float k = 3/(8*PI)*(1-g2)/(2+g2);
+        CONST float g=0.76;
+        CONST float g2=g*g;
+        CONST float k = 3/(8*PI)*(1-g2)/(2+g2);
         return vec4(k * (1+sqr(dotViewSun)) / pow(1+g2 - 2*g*dotViewSun, 1.5) + 1/((1-dotViewSun)*600+0.05))*0.904;
 }
 vec4 currentPhaseFunction(float dotViewSun) { return phaseFunction_aerosols(dotViewSun); }

@@ -79,7 +79,7 @@ private:
 
 	struct {
 		int rgbMaxValue;
-		int bayerPattern;
+		int ditherPattern;
 		int oneOverGamma;
 		int brightnessScale;
 		int luminanceTexture;
@@ -90,7 +90,7 @@ private:
 		int doSRGB;
 	} shaderAttribLocations;
 
-	GLuint bayerPatternTex_=0;
+	GLuint ditherPatternTex_=0;
 
 	float prevFad=0, prevFov=0;
 	Vec3d prevPos=Vec3d(0,0,0), prevSun=Vec3d(0,0,0);

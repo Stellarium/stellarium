@@ -462,7 +462,7 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 		prog.bind();
 
 		shaderAttribLocations.rgbMaxValue            = prog.uniformLocation("rgbMaxValue");
-		shaderAttribLocations.bayerPattern           = prog.uniformLocation("bayerPattern");
+		shaderAttribLocations.ditherPattern          = prog.uniformLocation("ditherPattern");
 		shaderAttribLocations.oneOverGamma           = prog.uniformLocation("oneOverGamma");
 		shaderAttribLocations.brightnessScale        = prog.uniformLocation("brightnessScale");
 		shaderAttribLocations.luminanceTexture       = prog.uniformLocation("luminance");
@@ -873,10 +873,10 @@ void AtmosphereShowMySky::draw(StelCore* core)
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.luminanceTexture, 0));
 
 	GL(gl.glActiveTexture(GL_TEXTURE1));
-	if(!bayerPatternTex_)
-		bayerPatternTex_=makeBayerPatternTexture(*sPainter.glFuncs());
-	GL(gl.glBindTexture(GL_TEXTURE_2D, bayerPatternTex_));
-	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.bayerPattern, 1));
+	if(!ditherPatternTex_)
+		ditherPatternTex_=makeDitherPatternTexture(*sPainter.glFuncs());
+	GL(gl.glBindTexture(GL_TEXTURE_2D, ditherPatternTex_));
+	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.ditherPattern, 1));
 
 	GL(gl.glBindVertexArray(luminanceToScreenVAO_));
 	GL(gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
