@@ -1,7 +1,21 @@
 #version 330
-#extension GL_ARB_shading_language_420pack : require
 
-#line 1 1 // const.h.glsl
+
+
+#line 1 1 // version.h.glsl
+#ifndef INCLUDE_ONCE_EF4160B0_E881_42C8_BB48_A408AF2E4354
+#define INCLUDE_ONCE_EF4160B0_E881_42C8_BB48_A408AF2E4354
+
+#extension GL_ARB_shading_language_420pack : enable
+#ifdef GL_ARB_shading_language_420pack
+# define CONST const
+#else
+# define CONST
+#endif
+
+#endif
+#line 6 0 // single-scattering-eclipsed.frag
+#line 1 2 // const.h.glsl
 #ifndef INCLUDE_ONCE_2B59AE86_E78B_4D75_ACDF_5DA644F8E9A3
 #define INCLUDE_ONCE_2B59AE86_E78B_4D75_ACDF_5DA644F8E9A3
 const float earthRadius=6.371e+06; // must be in meters
@@ -34,15 +48,15 @@ const vec4 lightPollutionRelativeRadiance=vec4(2.15e-06,1.11400004e-06,3.8580001
 const vec4 wavelengths=vec4(485.333344,516.666687,548,579.333313);
 const int wlSetIndex=1;
 #endif
-#line 5 0 // single-scattering-eclipsed.frag
-#line 1 2 // densities.h.glsl
+#line 7 0 // single-scattering-eclipsed.frag
+#line 1 3 // densities.h.glsl
 float scattererNumberDensity_molecules(float altitude);
 float scattererNumberDensity_aerosols(float altitude);
 float absorberNumberDensity_ozone(float altitude);
 vec4 scatteringCrossSection();
 float scattererDensity(float altitude);
-#line 6 0 // single-scattering-eclipsed.frag
-#line 1 3 // common-functions.h.glsl
+#line 8 0 // single-scattering-eclipsed.frag
+#line 1 4 // common-functions.h.glsl
 #ifndef INCLUDE_ONCE_B0879E51_5608_481B_9832_C7D601BD6AB1
 #define INCLUDE_ONCE_B0879E51_5608_481B_9832_C7D601BD6AB1
 float distanceToAtmosphereBorder(const float cosZenithAngle, const float observerAltitude);
@@ -74,8 +88,8 @@ void setDebugData(float a,float b);
 void setDebugData(float a,float b,float c);
 void setDebugData(float a,float b,float c,float d);
 #endif
-#line 7 0 // single-scattering-eclipsed.frag
-#line 1 4 // texture-sampling-functions.h.glsl
+#line 9 0 // single-scattering-eclipsed.frag
+#line 1 5 // texture-sampling-functions.h.glsl
 #ifndef INCLUDE_ONCE_AF5AE9F4_8A9A_4521_838A_F8281B8FEB53
 #define INCLUDE_ONCE_AF5AE9F4_8A9A_4521_838A_F8281B8FEB53
 vec4 transmittanceToAtmosphereBorder(const float cosViewZenithAngle, const float altitude);
@@ -87,12 +101,12 @@ vec4 scattering(const float cosSunZenithAngle, const float cosViewZenithAngle,
                 const int scatteringOrder);
 vec4 lightPollutionScattering(const float altitude, const float cosViewZenithAngle, const bool viewRayIntersectsGround);
 #endif
-#line 8 0 // single-scattering-eclipsed.frag
-#line 1 5 // phase-functions.h.glsl
+#line 10 0 // single-scattering-eclipsed.frag
+#line 1 6 // phase-functions.h.glsl
 vec4 phaseFunction_molecules(float dotViewSun);
 vec4 phaseFunction_aerosols(float dotViewSun);
 vec4 currentPhaseFunction(float dotViewSun);
-#line 9 0 // single-scattering-eclipsed.frag
+#line 11 0 // single-scattering-eclipsed.frag
 
 float cosZenithAngle(vec3 origin, vec3 direction)
 {
@@ -105,13 +119,13 @@ vec4 computeSingleScatteringIntegrandEclipsed(const float cosSunZenithAngle, con
                                               const float dist, const bool viewRayIntersectsGround,
                                               const vec3 scatterer, const vec3 sunDir, const vec3 moonPos)
 {
-    const float r=earthRadius+altitude;
+    CONST float r=earthRadius+altitude;
     // Clamping only guards against rounding errors here, we don't try to handle here the case when the
     // endpoint of the view ray intentionally appears in outer space.
-    const float altAtDist=clampAltitude(sqrt(sqr(dist)+sqr(r)+2*r*dist*cosViewZenithAngle)-earthRadius);
-    const float cosSunZenithAngleAtDist=clampCosine((r*cosSunZenithAngle+dist*dotViewSun)/(earthRadius+altAtDist));
+    CONST float altAtDist=clampAltitude(sqrt(sqr(dist)+sqr(r)+2*r*dist*cosViewZenithAngle)-earthRadius);
+    CONST float cosSunZenithAngleAtDist=clampCosine((r*cosSunZenithAngle+dist*dotViewSun)/(earthRadius+altAtDist));
 
-    const vec4 xmittance=transmittance(cosViewZenithAngle, altitude, dist, viewRayIntersectsGround)
+    CONST vec4 xmittance=transmittance(cosViewZenithAngle, altitude, dist, viewRayIntersectsGround)
                                                     *
                          transmittanceToAtmosphereBorder(cosSunZenithAngleAtDist, altAtDist)
                                                     *
@@ -133,19 +147,19 @@ vec4 computeSingleScatteringIntegrandEclipsed(const float cosSunZenithAngle, con
 vec4 computeSingleScatteringEclipsed(const vec3 camera, const vec3 viewDir, const vec3 sunDir, const vec3 moonPos,
                                      const bool viewRayIntersectsGround)
 {
-    const float cosViewZenithAngle=cosZenithAngle(camera,viewDir);
-    const float cosSunZenithAngle=cosZenithAngle(camera,sunDir);
-    const float altitude=pointAltitude(camera);
-    const float dotViewSun=dot(viewDir,sunDir);
-    const float integrInterval=distanceToNearestAtmosphereBoundary(cosViewZenithAngle, altitude,
+    CONST float cosViewZenithAngle=cosZenithAngle(camera,viewDir);
+    CONST float cosSunZenithAngle=cosZenithAngle(camera,sunDir);
+    CONST float altitude=pointAltitude(camera);
+    CONST float dotViewSun=dot(viewDir,sunDir);
+    CONST float integrInterval=distanceToNearestAtmosphereBoundary(cosViewZenithAngle, altitude,
                                                                    viewRayIntersectsGround);
 
     // Using the midpoint rule for quadrature
     vec4 spectrum=vec4(0);
-    const float dl=integrInterval/radialIntegrationPoints;
+    CONST float dl=integrInterval/radialIntegrationPoints;
     for(int n=0; n<radialIntegrationPoints; ++n)
     {
-        const float dist=(n+0.5)*dl;
+        CONST float dist=(n+0.5)*dl;
         spectrum += computeSingleScatteringIntegrandEclipsed(cosSunZenithAngle, cosViewZenithAngle, dotViewSun,
                                                              altitude, dist, viewRayIntersectsGround,
                                                              camera+viewDir*dist, sunDir, moonPos);

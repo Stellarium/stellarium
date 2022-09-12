@@ -1,7 +1,18 @@
 #version 330
-#extension GL_ARB_shading_language_420pack : require
+#line 1 1 // version.h.glsl
+#ifndef INCLUDE_ONCE_EF4160B0_E881_42C8_BB48_A408AF2E4354
+#define INCLUDE_ONCE_EF4160B0_E881_42C8_BB48_A408AF2E4354
 
-#line 1 1 // const.h.glsl
+#extension GL_ARB_shading_language_420pack : enable
+#ifdef GL_ARB_shading_language_420pack
+# define CONST const
+#else
+# define CONST
+#endif
+
+#endif
+#line 3 0 // eclipsed-direct-irradiance.frag
+#line 1 2 // const.h.glsl
 #ifndef INCLUDE_ONCE_2B59AE86_E78B_4D75_ACDF_5DA644F8E9A3
 #define INCLUDE_ONCE_2B59AE86_E78B_4D75_ACDF_5DA644F8E9A3
 const float earthRadius=6.371e+06; // must be in meters
@@ -34,8 +45,8 @@ const vec4 lightPollutionRelativeRadiance=vec4(3.80500001e-06,4.31499984e-06,4.9
 const vec4 wavelengths=vec4(736,767.333313,798.666687,830);
 const int wlSetIndex=3;
 #endif
-#line 5 0 // eclipsed-direct-irradiance.frag
-#line 1 2 // common-functions.h.glsl
+#line 4 0 // eclipsed-direct-irradiance.frag
+#line 1 3 // common-functions.h.glsl
 #ifndef INCLUDE_ONCE_B0879E51_5608_481B_9832_C7D601BD6AB1
 #define INCLUDE_ONCE_B0879E51_5608_481B_9832_C7D601BD6AB1
 float distanceToAtmosphereBorder(const float cosZenithAngle, const float observerAltitude);
@@ -67,16 +78,16 @@ void setDebugData(float a,float b);
 void setDebugData(float a,float b,float c);
 void setDebugData(float a,float b,float c,float d);
 #endif
-#line 6 0 // eclipsed-direct-irradiance.frag
-#line 1 3 // direct-irradiance.h.glsl
+#line 5 0 // eclipsed-direct-irradiance.frag
+#line 1 4 // direct-irradiance.h.glsl
 #ifndef INCLUDE_ONCE_58AEF899_1A84_4A2F_AD71_4E7680B83E29
 #define INCLUDE_ONCE_58AEF899_1A84_4A2F_AD71_4E7680B83E29
 
 vec4 computeDirectGroundIrradiance(const float cosSunZenithAngle, const float altitude);
 
 #endif
-#line 7 0 // eclipsed-direct-irradiance.frag
-#line 1 4 // texture-sampling-functions.h.glsl
+#line 6 0 // eclipsed-direct-irradiance.frag
+#line 1 5 // texture-sampling-functions.h.glsl
 #ifndef INCLUDE_ONCE_AF5AE9F4_8A9A_4521_838A_F8281B8FEB53
 #define INCLUDE_ONCE_AF5AE9F4_8A9A_4521_838A_F8281B8FEB53
 vec4 transmittanceToAtmosphereBorder(const float cosViewZenithAngle, const float altitude);
@@ -88,15 +99,15 @@ vec4 scattering(const float cosSunZenithAngle, const float cosViewZenithAngle,
                 const int scatteringOrder);
 vec4 lightPollutionScattering(const float altitude, const float cosViewZenithAngle, const bool viewRayIntersectsGround);
 #endif
-#line 8 0 // eclipsed-direct-irradiance.frag
+#line 7 0 // eclipsed-direct-irradiance.frag
 
 vec4 calcEclipsedDirectGroundIrradiance(const vec3 pointOnGround, const vec3 sunDir, const vec3 moonPos)
 {
-    const float altitude=0; // we are on the ground, after all
-    const vec3 zenith=normalize(pointOnGround-earthCenter);
-    const float cosSunZenithAngle=dot(sunDir,zenith);
+    CONST float altitude=0; // we are on the ground, after all
+    CONST vec3 zenith=normalize(pointOnGround-earthCenter);
+    CONST float cosSunZenithAngle=dot(sunDir,zenith);
 
-    const float visibility=sunVisibilityDueToMoon(pointOnGround, sunDir, moonPos)
+    CONST float visibility=sunVisibilityDueToMoon(pointOnGround, sunDir, moonPos)
                                                     *
                       // FIXME: this ignores orientation of the crescent of eclipsed Sun WRT horizon
                                     sunVisibility(cosSunZenithAngle, altitude);

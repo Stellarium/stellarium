@@ -23,8 +23,9 @@
 #include "StelOpenGL.hpp"
 #include "StelPainter.hpp"
 #include "VecMath.hpp"
+#include "BlueNoiseTriangleRemapped.hpp"
 
-inline GLuint makeBayerPatternTexture(QOpenGLFunctions& gl)
+inline GLuint makeDitherPatternTexture(QOpenGLFunctions& gl)
 {
 	GLuint tex;
 	gl.glGenTextures(1, &tex);
@@ -33,23 +34,14 @@ inline GLuint makeBayerPatternTexture(QOpenGLFunctions& gl)
 	gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	static constexpr float bayerPattern[8*8] =
-	{
-		// 8x8 Bayer ordered dithering pattern.
-		0/64.f, 32/64.f,  8/64.f, 40/64.f,  2/64.f, 34/64.f, 10/64.f, 42/64.f,
-		48/64.f, 16/64.f, 56/64.f, 24/64.f, 50/64.f, 18/64.f, 58/64.f, 26/64.f,
-		12/64.f, 44/64.f,  4/64.f, 36/64.f, 14/64.f, 46/64.f,  6/64.f, 38/64.f,
-		60/64.f, 28/64.f, 52/64.f, 20/64.f, 62/64.f, 30/64.f, 54/64.f, 22/64.f,
-		3/64.f, 35/64.f, 11/64.f, 43/64.f,  1/64.f, 33/64.f,  9/64.f, 41/64.f,
-		51/64.f, 19/64.f, 59/64.f, 27/64.f, 49/64.f, 17/64.f, 57/64.f, 25/64.f,
-		15/64.f, 47/64.f,  7/64.f, 39/64.f, 13/64.f, 45/64.f,  5/64.f, 37/64.f,
-		63/64.f, 31/64.f, 55/64.f, 23/64.f, 61/64.f, 29/64.f, 53/64.f, 21/64.f
-	};
+
 // OpenGL ES has different defined formats. However, the shader will use the red channel, so this should work:
 #if defined(QT_OPENGL_ES_2)
-	gl.glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 8, 8, 0, GL_LUMINANCE, GL_FLOAT, bayerPattern);
+	gl.glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, std::size(blueNoiseTriangleRemapped), std::size(blueNoiseTriangleRemapped[0]),
+					0, GL_LUMINANCE, GL_FLOAT, blueNoiseTriangleRemapped);
 #else
-	gl.glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, 8, 8, 0, GL_RED, GL_FLOAT, bayerPattern);
+	gl.glTexImage2D(GL_TEXTURE_2D, 0, GL_R16F, std::size(blueNoiseTriangleRemapped), std::size(blueNoiseTriangleRemapped[0]),
+					0, GL_RED, GL_FLOAT, blueNoiseTriangleRemapped);
 #endif
 	return tex;
 }
@@ -74,21 +66,37 @@ inline Vec3f calcRGBMaxValue(StelPainter::DitheringMode mode)
 
 inline QString makeDitheringShader()
 {
-	return
-			R"(uniform mediump vec3 rgbMaxValue;
-			uniform sampler2D bayerPattern;
-			mediump vec3 dither(mediump vec3 c)
-			{
-			if(rgbMaxValue.r==0.) return c;
-			mediump float bayer=texture2D(bayerPattern,gl_FragCoord.xy/8.).r;
+	return 1+R"(
+uniform mediump vec3 rgbMaxValue;
+uniform sampler2D ditherPattern;
+mediump vec3 dither(mediump vec3 c)
+{
+	c = clamp(c, 0., 1.);
 
-			mediump vec3 rgb=c*rgbMaxValue;
-			mediump vec3 head=floor(rgb);
-			mediump vec3 tail=rgb-head;
-			return (head+1.-step(tail,vec3(bayer)))/rgbMaxValue;
-			}
-			mediump vec4 dither(mediump vec4 c) { return vec4(dither(c.xyz),c.w); }
-			)";
+	if(rgbMaxValue.r==0.) return c;
+
+	mediump vec3 noise=texture2D(ditherPattern,gl_FragCoord.xy/64.).rrr;
+
+	{
+		// Prevent undershoot (imperfect white) due to clipping of positive noise contributions
+		mediump vec3 antiUndershootC = 1.+(0.5-sqrt(2.*rgbMaxValue*(1.-c)))/rgbMaxValue;
+		mediump vec3 edge = 1.-1./(2.*rgbMaxValue);
+		// Per-component version of: c = c > edge ? antiUndershootC : c;
+		c = antiUndershootC + step(-edge, -c) * (c-antiUndershootC);
+	}
+
+	{
+		// Prevent overshoot (imperfect black) due to clipping of negative noise contributions
+		mediump vec3 antiOvershootC  = (-1.+sqrt(8.*rgbMaxValue*c))/(2.*rgbMaxValue);
+		mediump vec3 edge = 1./(2.*rgbMaxValue);
+		// Per-component version of: c = c < edge ? antiOvershootC : c;
+		c = antiOvershootC + step(edge, c) * (c-antiOvershootC);
+	}
+
+	return c+noise/rgbMaxValue;
+}
+mediump vec4 dither(mediump vec4 c) { return vec4(dither(c.xyz),c.w); }
+)";
 }
 
 #endif

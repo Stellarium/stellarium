@@ -433,7 +433,7 @@ private:
 		int vertex;
 		int texColor;
 		int texture;
-		int bayerPattern;
+		int ditherPattern;
 		int rgbMaxValue;
 	};
 	static TexturesShaderVars texturesShaderVars;
@@ -444,13 +444,13 @@ private:
 		int vertex;
 		int color;
 		int texture;
-		int bayerPattern;
+		int ditherPattern;
 		int rgbMaxValue;
 		int saturation;
 	};
 	static TexturesColorShaderVars texturesColorShaderVars;
 
-	GLuint bayerPatternTex=0;
+	GLuint ditherPatternTex=0;
 	DitheringMode ditheringMode;
 	static DitheringMode parseDitheringMode(QString const& s);
 

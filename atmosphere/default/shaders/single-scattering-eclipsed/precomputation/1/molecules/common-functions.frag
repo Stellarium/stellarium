@@ -1,7 +1,18 @@
 #version 330
-#extension GL_ARB_shading_language_420pack : require
+#line 1 1 // version.h.glsl
+#ifndef INCLUDE_ONCE_EF4160B0_E881_42C8_BB48_A408AF2E4354
+#define INCLUDE_ONCE_EF4160B0_E881_42C8_BB48_A408AF2E4354
 
-#line 1 1 // const.h.glsl
+#extension GL_ARB_shading_language_420pack : enable
+#ifdef GL_ARB_shading_language_420pack
+# define CONST const
+#else
+# define CONST
+#endif
+
+#endif
+#line 3 0 // common-functions.frag
+#line 1 2 // const.h.glsl
 #ifndef INCLUDE_ONCE_2B59AE86_E78B_4D75_ACDF_5DA644F8E9A3
 #define INCLUDE_ONCE_2B59AE86_E78B_4D75_ACDF_5DA644F8E9A3
 const float earthRadius=6.371e+06; // must be in meters
@@ -34,7 +45,7 @@ const vec4 lightPollutionRelativeRadiance=vec4(2.15e-06,1.11400004e-06,3.8580001
 const vec4 wavelengths=vec4(485.333344,516.666687,548,579.333313);
 const int wlSetIndex=1;
 #endif
-#line 5 0 // common-functions.frag
+#line 4 0 // common-functions.frag
 
 bool dbgDataPresent=false;
 bool debugDataPresent()
@@ -69,7 +80,7 @@ void setDebugData(float a,float b, float c, float d)
 
 void swap(inout float x, inout float y)
 {
-    const float t = x;
+    CONST float t = x;
     x = y;
     y = t;
 }
@@ -83,7 +94,7 @@ float safeSqrt(const float x)
 
 float safeAtan(const float y, const float x)
 {
-    const float a = atan(y,x);
+    CONST float a = atan(y,x);
     return x==0 && y==0 ? 0 : a;
 }
 
@@ -116,23 +127,23 @@ float pointAltitude(vec3 point)
 
 float distanceToAtmosphereBorder(const float cosZenithAngle, const float observerAltitude)
 {
-    const float Robs=earthRadius+observerAltitude;
-    const float Ratm=earthRadius+atmosphereHeight;
-    const float discriminant=sqr(Ratm)-sqr(Robs)*(1-sqr(cosZenithAngle));
+    CONST float Robs=earthRadius+observerAltitude;
+    CONST float Ratm=earthRadius+atmosphereHeight;
+    CONST float discriminant=sqr(Ratm)-sqr(Robs)*(1-sqr(cosZenithAngle));
     return clampDistance(safeSqrt(discriminant)-Robs*cosZenithAngle);
 }
 
 float distanceToGround(const float cosZenithAngle, const float observerAltitude)
 {
-    const float Robs=earthRadius+observerAltitude;
-    const float discriminant=sqr(earthRadius)-sqr(Robs)*(1-sqr(cosZenithAngle));
+    CONST float Robs=earthRadius+observerAltitude;
+    CONST float discriminant=sqr(earthRadius)-sqr(Robs)*(1-sqr(cosZenithAngle));
     return clampDistance(-safeSqrt(discriminant)-Robs*cosZenithAngle);
 }
 
 float cosZenithAngleOfHorizon(const float altitude)
 {
-    const float R=earthRadius;
-    const float h=max(0.,altitude); // negative values would result in sqrt(-|x|)
+    CONST float R=earthRadius;
+    CONST float h=max(0.,altitude); // negative values would result in sqrt(-|x|)
     return -sqrt(2*h*R+sqr(h))/(R+h);
 }
 
@@ -151,8 +162,8 @@ float distanceToNearestAtmosphereBoundary(const float cosZenithAngle, const floa
 float sunVisibility(const float cosSunZenithAngle, float altitude)
 {
     if(altitude<0) altitude=0;
-    const float sinHorizonZenithAngle = earthRadius/(earthRadius+altitude);
-    const float cosHorizonZenithAngle = -sqrt(1-sqr(sinHorizonZenithAngle));
+    CONST float sinHorizonZenithAngle = earthRadius/(earthRadius+altitude);
+    CONST float cosHorizonZenithAngle = -sqrt(1-sqr(sinHorizonZenithAngle));
     /* Approximating visible fraction of solar disk by smoothstep between the position of the Sun
      * touching the horizon by its upper part and the position with lower part touching the horizon.
      * The calculation assumes that solar angular radius is small and thus approximately equals its sine.
@@ -182,13 +193,13 @@ float circlesIntersectionArea(float R1, float R2, float d)
 
 float angleBetween(const vec3 a, const vec3 b)
 {
-    const float d=dot(a,b);
-    const float c=length(cross(a,b));
+    CONST float d=dot(a,b);
+    CONST float c=length(cross(a,b));
     // To avoid loss of precision, don't use dot product near the singularity
     // of acos, and cross product near the singularity of asin
     if(abs(d) < abs(c))
         return acos(d/(length(a)*length(b)));
-    const float smallerAngle = asin(c/(length(a)*length(b)));
+    CONST float smallerAngle = asin(c/(length(a)*length(b)));
     if(d<0) return PI-smallerAngle;
     return smallerAngle;
 }
@@ -205,11 +216,11 @@ float moonAngularRadius(const vec3 cameraPosition, const vec3 moonPosition)
 
 float visibleSolidAngleOfSun(const vec3 camera, const vec3 sunDir, const vec3 moonPos)
 {
-    const float Rs=sunAngularRadius;
-    const float Rm=moonAngularRadius(camera,moonPos);
+    CONST float Rs=sunAngularRadius;
+    CONST float Rm=moonAngularRadius(camera,moonPos);
     float visibleSolidAngle=PI*sqr(Rs);
 
-    const float dSM=angleBetweenSunAndMoon(camera,sunDir,moonPos);
+    CONST float dSM=angleBetweenSunAndMoon(camera,sunDir,moonPos);
     if(dSM<Rs+Rm)
     {
         visibleSolidAngle -= circlesIntersectionArea(Rm,Rs,dSM);
@@ -229,12 +240,12 @@ float sphereIntegrationSolidAngleDifferential(const int pointCountOnSphere)
 }
 vec3 sphereIntegrationSampleDir(const int index, const int pointCountOnSphere)
 {
-    const float goldenRatio=1.6180339887499;
+    CONST float goldenRatio=1.6180339887499;
     // The range of n is 0.5, 1.5, ..., pointCountOnSphere-0.5
-    const float n=index+0.5;
+    CONST float n=index+0.5;
     // Explanation of the Fibonacci grid generation can be seen at https://stackoverflow.com/a/44164075/673852
-    const float zenithAngle=acos(clamp(1-(2.*n)/pointCountOnSphere, -1.,1.));
-    const float azimuth=n*(2*PI*goldenRatio);
+    CONST float zenithAngle=acos(clamp(1-(2.*n)/pointCountOnSphere, -1.,1.));
+    CONST float azimuth=n*(2*PI*goldenRatio);
     return vec3(cos(azimuth)*sin(zenithAngle),
                 sin(azimuth)*sin(zenithAngle),
                 cos(zenithAngle));

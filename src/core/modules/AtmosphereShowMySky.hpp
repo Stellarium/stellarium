@@ -79,7 +79,7 @@ private:
 
 	struct {
 		int rgbMaxValue;
-		int bayerPattern;
+		int ditherPattern;
 		int oneOverGamma;
 		int brightnessScale;
 		int luminanceTexture;
@@ -89,7 +89,7 @@ private:
 		int flagUseTmGamma;                      // switch between their use, true to use the first expression.
 	} shaderAttribLocations;
 
-	GLuint bayerPatternTex_=0;
+	GLuint ditherPatternTex_=0;
 
 	int prevWidth_=0, prevHeight_=0;
 	GLuint renderVAO_=0, luminanceToScreenVAO_=0, zenithProbeVAO_=0, vbo_=0;
