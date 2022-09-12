@@ -627,6 +627,21 @@ IF(APPLE)
      IF(${QT_VERSION_MAJOR} EQUAL 6)
 	  FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS DBus REQUIRED)
      ENDIF()
+     # macOS architectures: x86_64 or arm64
+     IF(NOT CMAKE_OSX_ARCHITECTURES)
+	  # find utilite 'lipo'
+	  FIND_PROGRAM(LIPO_COMMAND lipo)
+	  IF(LIPO_COMMAND)
+	       MESSAGE(STATUS "Found lipo: ${LIPO_COMMAND}")
+	       # get architecture of Qt framework
+	       EXECUTE_PROCESS(COMMAND ${LIPO_COMMAND} -archs ${QMAKE_LOCATION} TIMEOUT 30 OUTPUT_VARIABLE QT_ARCHS OUTPUT_STRIP_TRAILING_WHITESPACE)
+	       STRING(REPLACE " " ";" QT_ARCHS ${QT_ARCHS})
+	       SET(CMAKE_OSX_ARCHITECTURES "${QT_ARCHS}" CACHE STRING "macOS architectures" FORCE)
+	  ELSE()
+	       # current system's processor architecture
+	       SET(CMAKE_OSX_ARCHITECTURES "${CMAKE_HOST_SYSTEM_PROCESSOR}" CACHE STRING "macOS architectures" FORCE)
+	  ENDIF()
+     ENDIF()
 ENDIF()
 
 # Since Qt 5.4, linking to OpenGL is basically not required anymore,
@@ -925,22 +940,6 @@ IF(APPLE)
 	  MESSAGE(STATUS "Found macdeployqt: ${MACDEPLOYQT_COMMAND}")
      ELSE()
 	  MESSAGE(STATUS "Could NOT find macdeployqt")
-     ENDIF()
-
-     # macOS architectures: x86_64 or arm64
-     IF(NOT CMAKE_OSX_ARCHITECTURES)
-	  # find utilite 'lipo'
-	  FIND_PROGRAM(LIPO_COMMAND lipo)
-	  IF(LIPO_COMMAND)
-	       MESSAGE(STATUS "Found lipo: ${LIPO_COMMAND}")
-	       # get architecture of Qt framework
-	       EXECUTE_PROCESS(COMMAND ${LIPO_COMMAND} -archs ${QMAKE_LOCATION} TIMEOUT 30 OUTPUT_VARIABLE QT_ARCHS OUTPUT_STRIP_TRAILING_WHITESPACE)
-	       STRING(REPLACE " " ";" QT_ARCHS ${QT_ARCHS})
-	       SET(CMAKE_OSX_ARCHITECTURES "${QT_ARCHS}" CACHE STRING "macOS architectures" FORCE)
-	  ELSE()
-	       # current system's processor architecture
-	       SET(CMAKE_OSX_ARCHITECTURES "${CMAKE_HOST_SYSTEM_PROCESSOR}" CACHE STRING "macOS architectures" FORCE)
-	  ENDIF()
      ENDIF()
 
      IF(NOT CMAKE_OSX_DEPLOYMENT_TARGET)
