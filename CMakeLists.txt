@@ -642,6 +642,15 @@ IF(APPLE)
 	       SET(CMAKE_OSX_ARCHITECTURES "${CMAKE_HOST_SYSTEM_PROCESSOR}" CACHE STRING "macOS architectures" FORCE)
 	  ENDIF()
      ENDIF()
+     # macOS deployment targets
+     IF(NOT CMAKE_OSX_DEPLOYMENT_TARGET)
+	  IF(${QT_VERSION_MAJOR} EQUAL 6)
+	       # Qt6: by default - universal binary + minimal operating system is macOS Big Sur
+	       SET(CMAKE_OSX_DEPLOYMENT_TARGET "11.0" CACHE STRING "Minimum macOS deployment version" FORCE)
+	  ELSE()
+	       SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum macOS deployment version" FORCE)
+	  ENDIF()
+     ENDIF()
 ENDIF()
 
 # Since Qt 5.4, linking to OpenGL is basically not required anymore,
@@ -942,14 +951,6 @@ IF(APPLE)
 	  MESSAGE(STATUS "Could NOT find macdeployqt")
      ENDIF()
 
-     IF(NOT CMAKE_OSX_DEPLOYMENT_TARGET)
-	  IF(${QT_VERSION_MAJOR} EQUAL 6)
-	       # Qt6: by default - universal binary + minimal operating system is macOS Big Sur
-	       SET(CMAKE_OSX_DEPLOYMENT_TARGET "11.0" CACHE STRING "Minimum macOS deployment version" FORCE)
-	  ELSE()
-	       SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum macOS deployment version" FORCE)
-	  ENDIF()
-     ENDIF()
      MESSAGE(STATUS "macOS deployment target: ${CMAKE_OSX_DEPLOYMENT_TARGET} (${CMAKE_OSX_ARCHITECTURES})")
      SET(PACKAGE_OSX_TARGET ${CMAKE_OSX_DEPLOYMENT_TARGET})
      ADD_DEFINITIONS(-DPACKAGE_OSX_TARGET)
