@@ -265,6 +265,7 @@ void HelpDialog::refreshConfig() const
 	if(config.open(QIODevice::ReadOnly))
 	{
 		ui->configBrowser->setPlainText(config.readAll());
+		ui->configBrowser->setFont(QFont("Courier New"));
 		config.close();
 	}
 
