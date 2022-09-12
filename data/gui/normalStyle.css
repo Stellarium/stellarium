@@ -182,11 +182,11 @@ QHeaderView::section {
 }
 
 QHeaderView::up-arrow {
-	image: url(:/graphicGui/uieSpinup.png);
+	image: url(:/graphicGui/uieSpinup.svg);
 }
 
 QHeaderView::down-arrow {
-	image: url(:/graphicGui/uieSpindown.png);
+	image: url(:/graphicGui/uieSpindown.svg);
 }
 
 QMenu {
@@ -512,7 +512,7 @@ QDateTimeEdit::up-button {
 	border: 1px solid rgba(0, 0, 0, 0%);
 	border-top: 1px solid rgb(0, 0, 0);
 	border-right: 1px solid rgb(0, 0, 0);
-	image: url(:/graphicGui/uieSpinup.png);
+	image: url(:/graphicGui/uieSpinup.svg);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 97), stop: 1 rgb(70, 70, 70));
 }
 
@@ -527,7 +527,7 @@ QDateTimeEdit::down-button {
 	border: 1px solid rgba(0, 0, 0, 0%);
 	border-right: 1px solid rgb(0, 0, 0);
 	border-bottom: 1px solid rgb(0, 0, 0);
-	image: url(:/graphicGui/uieSpindown.png);
+	image: url(:/graphicGui/uieSpindown.svg);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(70, 70, 70), stop: 1 rgb(40, 40, 40));
 }
 
@@ -542,7 +542,7 @@ QDateTimeEdit::up-button:hover {
 	border: 1px solid rgba(0, 0, 0, 0%);
 	border-top: 1px solid rgb(0, 0, 0);
 	border-right: 1px solid rgb(0, 0, 0);
-	image: url(:/graphicGui/uieSpinup.png);
+	image: url(:/graphicGui/uieSpinup.svg);
     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(87, 87, 77), stop: 1 rgb(70, 70, 70));
 }
 
@@ -557,7 +557,7 @@ QDateTimeEdit::down-button:hover {
 	border: 1px solid rgba(0, 0, 0, 0%);
 	border-right: 1px solid rgb(0, 0, 0);
 	border-bottom: 1px solid rgb(0, 0, 0);
-	image: url(:/graphicGui/uieSpindown.png);
+	image: url(:/graphicGui/uieSpindown.svg);
     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(70, 70, 70), stop: 1 rgb(30, 30, 20));
 }
 
@@ -565,14 +565,14 @@ QSpinBox::down-button:pressed,
 QTimeEdit::down-button:pressed,
 QDoubleSpinBox::down-button:pressed,
 AngleSpinBox::down-button:pressed {
-	image: url(:/graphicGui/uieSpindown-pressed.png);
+	image: url(:/graphicGui/uieSpindown-pressed.svg);
 }
 
 QSpinBox::up-button:pressed,
 QTimeEdit::up-button:pressed,
 QDoubleSpinBox::up-button:pressed,
 AngleSpinBox::up-button:pressed {
-	image: url(:/graphicGui/uieSpinup-pressed.png);
+	image: url(:/graphicGui/uieSpinup-pressed.svg);
 }
 
 /*
@@ -591,13 +591,13 @@ QComboBox::down-arrow,
 .QDateTimeEdit::down-arrow {
 	width: 20px;
 	height: 22px;
-	image: url(:/graphicGui/uieSpindown.png);
+	image: url(:/graphicGui/uieSpindown.svg);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(97, 97, 92), stop: 1 rgb(40, 40, 40));
 }
 
 QComboBox::down-arrow:on,
 .QDateTimeEdit::down-arrow:pressed {
-	image: url(:/graphicGui/uieSpindown-pressed.png);
+	image: url(:/graphicGui/uieSpindown-pressed.svg);
 }
 
 QComboBox QAbstractItemView {
@@ -695,7 +695,7 @@ QScrollBar::up-arrow {
 	subcontrol-position: top; /* position at the top right corner */
 	width: 16px;
 	height: 20px;
-	image: url(:/graphicGui/uieSpinup.png);
+	image: url(:/graphicGui/uieScrollup.svg);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(54, 54, 57), stop: 1 rgb(34, 34, 35));
 }
 
@@ -704,7 +704,7 @@ QScrollBar::down-arrow {
 	subcontrol-position: bottom; /* position at the bottom right corner */
 	width: 16px;
 	height: 20px;
-	image: url(:/graphicGui/uieSpindown.png);
+	image: url(:/graphicGui/uieScrolldown.svg);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(54, 54, 57), stop: 1 rgb(34, 34, 35));
 }
 
@@ -854,7 +854,7 @@ QLineEdit[collision="true"] {
 
 #dateTimeDialogForm QSpinBox::up-arrow,
 #dateTimeDialogForm QDoubleSpinBox::up-arrow {
-	image: url(:/graphicGui/uieSpinup.png);
+	image: url(:/graphicGui/uieSpinup.svg);
 	subcontrol-origin: border;
 	subcontrol-position: bottom center;
 	padding-bottom: 20px;
@@ -873,7 +873,7 @@ QLineEdit[collision="true"] {
 
 #dateTimeDialogForm QSpinBox::down-arrow,
 #dateTimeDialogForm QDoubleSpinBox::down-arrow {
-	image: url(:/graphicGui/uieSpindown.png);
+	image: url(:/graphicGui/uieSpindown.svg);
 	subcontrol-origin: border;
 	subcontrol-position: top center;
 	padding-top: 20px;
@@ -1008,14 +1008,14 @@ QPushButton#pushButtonMoveSensorUp,
 QPushButton#pushButtonMoveOcularUp,
 QPushButton#pushButtonMoveTelescopeUp,
 QPushButton#pushButtonMoveLensUp {
-	image: url(:/graphicGui/uieSpinup.png);
+	image: url(:/graphicGui/uieSpinup.svg);
 }
 
 QPushButton#pushButtonMoveSensorDown,
 QPushButton#pushButtonMoveOcularDown,
 QPushButton#pushButtonMoveTelescopeDown,
 QPushButton#pushButtonMoveLensDown {
-	image: url(:/graphicGui/uieSpindown.png);
+	image: url(:/graphicGui/uieSpindown.svg);
 }
 
 QLabel#lensNote {
