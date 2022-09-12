@@ -36,6 +36,7 @@
 #include "LandscapeMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "Planet.hpp"
+#include "StelObjectMgr.hpp"
 
 #include <QDebug>
 #include <QSettings>
@@ -181,13 +182,16 @@ void MilkyWay::draw(StelCore* core)
 	// intensity of 1.0 is "proper", but allow boost for dim screens
 	c*=aLum*static_cast<float>(intensity*intensityFovScale);
 
-
+	StelObjectMgr *omgr=GETSTELMODULE(StelObjectMgr);
+	Q_ASSERT(omgr);
 	// TODO: Find an even better balance with sky brightness, MW should be hard to see during Full Moon and at least somewhat reduced in smaller phases.
 	// adapt brightness by atmospheric brightness. This block developed for ZodiacalLight, hopefully similarly applicable...
 	const float atmLum = GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
 	// 10cd/m^2 at sunset, 3.3 at civil twilight (sun at -6deg). 0.0145 sun at -12, 0.0004 sun at -18,  0.01 at Full Moon!?
 	//qDebug() << "AtmLum: " << atmLum;
+	omgr->setExtraInfoString(StelObject::DebugAid, QString("AtmLum: %1<br/>").arg(QString::number(atmLum, 'f', 4)));
 	float atmFactor=qMax(0.35f, 50.0f*(0.02f-atmLum)); // keep visible in twilight, but this is enough for some effect with the moon.
+	omgr->addToExtraInfoString(StelObject::DebugAid, QString("AtmFactor: %1<br/>").arg(QString::number(atmFactor, 'f', 4)));
 	c*=atmFactor*atmFactor;
 
 	if (c[0]<0) c[0]=0;
