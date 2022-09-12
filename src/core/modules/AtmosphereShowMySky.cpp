@@ -493,9 +493,10 @@ AtmosphereShowMySky::~AtmosphereShowMySky()
 void AtmosphereShowMySky::regenerateGrid()
 {
 	const float width=viewport[2], height=viewport[3];
-	flagDynamicResolution = StelApp::getInstance().getSettings()->value("landscape/flag_dynamic_resolution", false).toBool();
-	ppxmax = ppxatmo = StelApp::getInstance().getSettings()->value("landscape/ppxatmo", 1).toInt();
-	gridMaxY = StelApp::getInstance().getSettings()->value("landscape/atmosphereybin", 44).toInt();
+	QSettings* conf = StelApp::getInstance().getSettings();
+	flagDynamicResolution = conf->value("landscape/flag_dynamic_resolution", false).toBool();
+	ppxmax = ppxatmo = conf->value("landscape/ppxatmo", 1).toInt();
+	gridMaxY = conf->value("landscape/atmosphereybin", 44).toInt();
 	gridMaxX = std::floor(0.5+gridMaxY*(0.5*std::sqrt(3.0))*width/height);
 	const auto gridSize=(1+gridMaxX)*(1+gridMaxY);
 	posGrid.resize(gridSize);
