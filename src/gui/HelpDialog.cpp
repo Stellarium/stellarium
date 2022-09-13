@@ -512,7 +512,7 @@ void HelpDialog::updateAboutText(void) const
 		// Organizations
 		{ "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 520 }, { "Triplebyte", 280 }
 	};
-	qSort(financialContributors.begin(), financialContributors.end(), [](donator i, donator j){ return i.second > j.second; });
+	std::sort(financialContributors.begin(), financialContributors.end(), [](donator i, donator j){ return i.second > j.second; });
 	QStringList bestFinancialContributors;
 	for (auto fc = financialContributors.begin(); fc != financialContributors.end(); ++fc)
 	{
