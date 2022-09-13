@@ -461,27 +461,27 @@ QRadioButton::indicator {
 }
 
 QRadioButton::indicator:checked {
-	image: url(:/graphicGui/uieRadio-checked.png);
+	image: url(:/graphicGui/uieRadio-checked.svg);
 }
 
 QRadioButton::indicator:unchecked {
-	image: url(:/graphicGui/uieRadio-unchecked.png);
+	image: url(:/graphicGui/uieRadio-unchecked.svg);
 }
 
 QRadioButton::indicator:checked:hover {
-	image: url(:/graphicGui/uieRadio-checked-hover.png);
+	image: url(:/graphicGui/uieRadio-checked-hover.svg);
 }
 
 QRadioButton::indicator:unchecked:hover {
-	image: url(:/graphicGui/uieRadio-unchecked-hover.png);
+	image: url(:/graphicGui/uieRadio-unchecked-hover.svg);
 }
 
 QRadioButton::indicator:checked:disabled {
-	image: url(:/graphicGui/uieRadio-checked-disabled.png);
+	image: url(:/graphicGui/uieRadio-checked-disabled.svg);
 }
 
 QRadioButton::indicator:unchecked:disabled {
-	image: url(:/graphicGui/uieRadio-unchecked-disabled.png);
+	image: url(:/graphicGui/uieRadio-unchecked-disabled.svg);
 }
 
 /*
