@@ -167,10 +167,10 @@ void MilkyWay::draw(StelCore* core)
 	// We must also adjust milky way to light pollution.
 	// Is there any way to calibrate this?
 	float atmFadeIntensity = GETSTELMODULE(LandscapeMgr)->getAtmosphereFadeIntensity();
-    const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
-	float bortleIntensity = 1.f+(15.5f-2*nelm)*atmFadeIntensity; // smoothed Bortle index moderated by atmosphere fader.
+	const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
+	const float bortleIntensity = 1.f+(15.5f-2*nelm)*atmFadeIntensity; // smoothed Bortle index moderated by atmosphere fader.
 
-	float lum = drawer->surfaceBrightnessToLuminance(12.f+0.15f*bortleIntensity); // was 11.5; Source? How to calibrate the new texture?
+	const float lum = drawer->surfaceBrightnessToLuminance(12.f+0.15f*bortleIntensity); // was 11.5; Source? How to calibrate the new texture?
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
@@ -190,7 +190,18 @@ void MilkyWay::draw(StelCore* core)
 	// 10cd/m^2 at sunset, 3.3 at civil twilight (sun at -6deg). 0.0145 sun at -12, 0.0004 sun at -18,  0.01 at Full Moon!?
 	//qDebug() << "AtmLum: " << atmLum;
 	omgr->setExtraInfoString(StelObject::DebugAid, QString("AtmLum: %1<br/>").arg(QString::number(atmLum, 'f', 4)));
-	float atmFactor=qMax(0.35f, 50.0f*(0.02f-atmLum)); // keep visible in twilight, but this is enough for some effect with the moon.
+	// The atmLum of Bruneton's model is about 1/2 higher than of Preetham/Schaefer. We must rebalance that!
+	float atmFactor=0.35;
+	if (GETSTELMODULE(LandscapeMgr)->getAtmosphereModel()=="showmysky")
+	{
+		//atmFactor=qMax(0.35f, 50.0f*(0.02f-0.66*atmLum)); // keep visible in twilight, but this is enough for some effect with the moon.
+		// Even brighter?
+		atmFactor=qMax(0.35f, 50.0f*(0.02f-0.2f*atmLum)); // keep visible in twilight, but this is enough for some effect with the moon.
+	}
+	else
+	{
+		atmFactor=qMax(0.35f, 50.0f*(0.02f-atmLum)); // keep visible in twilight, but this is enough for some effect with the moon.
+	}
 	omgr->addToExtraInfoString(StelObject::DebugAid, QString("AtmFactor: %1<br/>").arg(QString::number(atmFactor, 'f', 4)));
 	c*=atmFactor*atmFactor;
 

@@ -184,8 +184,8 @@ void ZodiacalLight::draw(StelCore* core)
 	if ( (drawer->getFlagHasAtmosphere()) && (bortle > 5) ) return;
 
 	float atmFadeIntensity = GETSTELMODULE(LandscapeMgr)->getAtmosphereFadeIntensity();
-    const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
-	float bortleIntensity = 1.f+(15.5f-2*nelm)*atmFadeIntensity; // smoothed Bortle index moderated by atmosphere fader.
+	const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
+	const float bortleIntensity = 1.f+(15.5f-2*nelm)*atmFadeIntensity; // smoothed Bortle index moderated by atmosphere fader.
 
 	// The ZL is best observed from Earth only. On the Moon, we must be happy with ZL along the J2000 ecliptic. (Sorry for LP:1628765, I don't find a general solution.)
 	StelProjector::ModelViewTranformP transfo;
@@ -203,7 +203,7 @@ void ZodiacalLight::draw(StelCore* core)
 	Vec3f c = color;
 
 	// ZL is quite sensitive to light pollution. I scale to make it less visible.
-	float lum = drawer->surfaceBrightnessToLuminance(13.5f + 0.5f*bortleIntensity); // (8.0f + 0.5*bortle);
+	const float lum = drawer->surfaceBrightnessToLuminance(13.5f + 0.5f*bortleIntensity); // (8.0f + 0.5*bortle);
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
@@ -219,7 +219,12 @@ void ZodiacalLight::draw(StelCore* core)
 	const float atmLum = GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
 	if (atmLum>0.05f) return; // 10cd/m^2 at sunset, 3.3 at civil twilight (sun at -6deg). 0.0145 sun at -12, 0.0004 sun at -18,  0.01 at Full Moon!?
 	//qDebug() << "AtmLum: " << atmLum;
-	float atmFactor=20.0f*(0.05f-atmLum);
+	float atmFactor=20.0f;
+	if (GETSTELMODULE(LandscapeMgr)->getAtmosphereModel()=="showmysky")
+		atmFactor=20.0f*(0.05f-0.4f*atmLum);
+	else
+		atmFactor=20.0f*(0.05f-atmLum);
+
 	Q_ASSERT(atmFactor<=1.0f);
 	Q_ASSERT(atmFactor>=0.0f);
 	c*=atmFactor*atmFactor;

@@ -805,8 +805,6 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 		Q_ASSERT(std::isfinite(meanY));
 
 		averageLuminance = meanY+0.0001f; // Add (assumed) star background luminance
-		// GZ Quick fix to increase visibility of Milky Way
-		averageLuminance *= 0.25;
 	}
 }
 
