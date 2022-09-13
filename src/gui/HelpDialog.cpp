@@ -506,8 +506,10 @@ void HelpDialog::updateAboutText(void) const
 
 	typedef QPair<QString, int> donator;
 	QVector<donator> financialContributors = {
+		// Individuals
 		{ "Laurence Holt", 1000 }, { "John Bellora", 470 }, { "Vernon Hermsen", 324 },
 		{ "Satish Mallesh", 260 }, { "Marla Pinaire", 260 }, { "Vlad Magdalin", 250  },
+		// Organizations
 		{ "Astronomie-Werkstatt \"Sterne ohne Grenzen\"", 520 }, { "Triplebyte", 280 }
 	};
 	qSort(financialContributors.begin(), financialContributors.end(), [](donator i, donator j){ return i.second > j.second; });
