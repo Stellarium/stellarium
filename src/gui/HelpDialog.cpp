@@ -576,7 +576,7 @@ void HelpDialog::updateAboutText(void) const
 	newHtml += "<h3>" + q_("Financial support").toHtmlEscaped() + "</h3>";
 	newHtml += "<p>"  + q_("Many individuals and organizations are supporting the development of Stellarium by donations, and the most generous financial contributors (with donations of $250 or more) are %1.").arg(bestFinancialContributors.join(", ")).toHtmlEscaped();
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	newHtml += " " + q_("The full list of ficancial contributors you may see on our {Open Collective page}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://opencollective.com/stellarium\">\\1</a>") + "</p>";
+	newHtml += " " + q_("The full list of financial contributors you may see on our {Open Collective page}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://opencollective.com/stellarium\">\\1</a>") + "</p>";
 	newHtml += "<h3>" + q_("Acknowledgment").toHtmlEscaped() + "</h3>";
 	newHtml += "<p>"  + q_("If the Stellarium planetarium was helpful for your research work, the following acknowledgment would be appreciated:").toHtmlEscaped() + "</p>";
 	newHtml += "<p><em>"  + q_("This research has made use of the Stellarium planetarium") + "</em></p>";
