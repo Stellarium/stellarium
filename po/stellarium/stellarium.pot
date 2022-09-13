@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-09-12 18:57+0700\n"
+"POT-Creation-Date: 2022-09-13 20:37+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4419,7 +4419,7 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1298 src/gui/HelpDialog.cpp:512
+#: src/gui/ConfigurationDialog.cpp:1298 src/gui/HelpDialog.cpp:527
 #: src/scripting/StelScriptMgr.cpp:654
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Oculars/src/gui/OcularDialog.cpp:623
@@ -4668,7 +4668,7 @@ msgid "Custom equation of %1T"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1935 src/gui/ConfigurationDialog.cpp:1972
-#: src/gui/StelGuiItems.cpp:732 src/gui/LocationDialog.cpp:483
+#: src/gui/StelGuiItems.cpp:732 src/gui/LocationDialog.cpp:488
 msgid "System default"
 msgstr ""
 
@@ -4952,71 +4952,71 @@ msgstr ""
 msgid "{Open Collective} - donations to the Stellarium development team."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:513
+#: src/gui/HelpDialog.cpp:528
 msgid "Based on Qt"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:534
+#: src/gui/HelpDialog.cpp:549
 msgid "Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:535
+#: src/gui/HelpDialog.cpp:550
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:536 src/gui/HelpDialog.cpp:543
+#: src/gui/HelpDialog.cpp:551 src/gui/HelpDialog.cpp:558
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:537 src/gui/HelpDialog.cpp:538
-#: src/gui/HelpDialog.cpp:539 src/gui/HelpDialog.cpp:545
-#: src/gui/HelpDialog.cpp:546 src/gui/HelpDialog.cpp:547
-#: src/gui/HelpDialog.cpp:548 src/gui/HelpDialog.cpp:549
-#: src/gui/HelpDialog.cpp:550 src/gui/HelpDialog.cpp:551
 #: src/gui/HelpDialog.cpp:552 src/gui/HelpDialog.cpp:553
-#: src/gui/HelpDialog.cpp:554
+#: src/gui/HelpDialog.cpp:554 src/gui/HelpDialog.cpp:560
+#: src/gui/HelpDialog.cpp:561 src/gui/HelpDialog.cpp:562
+#: src/gui/HelpDialog.cpp:563 src/gui/HelpDialog.cpp:564
+#: src/gui/HelpDialog.cpp:565 src/gui/HelpDialog.cpp:566
+#: src/gui/HelpDialog.cpp:567 src/gui/HelpDialog.cpp:568
+#: src/gui/HelpDialog.cpp:569
 #, qt-format
 msgid "Developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:540
+#: src/gui/HelpDialog.cpp:555
 #, qt-format
 msgid "Sky cultures researcher: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:541
+#: src/gui/HelpDialog.cpp:556
 msgid "Former Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:542
+#: src/gui/HelpDialog.cpp:557
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:544
+#: src/gui/HelpDialog.cpp:559
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:555 src/gui/HelpDialog.cpp:556
+#: src/gui/HelpDialog.cpp:570 src/gui/HelpDialog.cpp:571
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:557
+#: src/gui/HelpDialog.cpp:572
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:558
+#: src/gui/HelpDialog.cpp:573
 #, qt-format
 msgid "Tester: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:559
+#: src/gui/HelpDialog.cpp:574
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Oculars/src/gui/OcularDialog.cpp:626
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:785
@@ -5030,29 +5030,48 @@ msgstr ""
 msgid "Contributors"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:560
+#: src/gui/HelpDialog.cpp:575
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:561 plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
+#: src/gui/HelpDialog.cpp:576
+msgid "Financial support"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:577
+#, qt-format
+msgid ""
+"Many individuals and organizations are supporting the development of "
+"Stellarium by donations, and the most generous financial contributors (with "
+"donations of $250 or more) are %1."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:579
+msgid ""
+"The full list of financial contributors you may see on our {Open Collective "
+"page}."
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:580 plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
 msgid "Acknowledgment"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:562
+#: src/gui/HelpDialog.cpp:581
 msgid ""
 "If the Stellarium planetarium was helpful for your research work, the "
 "following acknowledgment would be appreciated:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:563
+#: src/gui/HelpDialog.cpp:582
 msgid "This research has made use of the Stellarium planetarium"
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:566
+#: src/gui/HelpDialog.cpp:585
 msgid ""
 "Or you may {download the BibTeX file of the paper} to create another "
 "citation format."
@@ -5179,11 +5198,11 @@ msgstr ""
 msgid "Time zone"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:737 src/gui/LocationDialog.cpp:481
+#: src/gui/StelGuiItems.cpp:737 src/gui/LocationDialog.cpp:486
 msgid "Local Mean Solar Time"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:740 src/gui/LocationDialog.cpp:482
+#: src/gui/StelGuiItems.cpp:740 src/gui/LocationDialog.cpp:487
 msgid "Local True Solar Time"
 msgstr ""
 
@@ -5426,23 +5445,23 @@ msgid ""
 "toggle off to let other programs access the GPS device."
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:806
+#: src/gui/LocationDialog.cpp:811
 msgid "GPS listening..."
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:813
+#: src/gui/LocationDialog.cpp:818
 msgid "GPS disconnecting..."
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:825
+#: src/gui/LocationDialog.cpp:830
 msgid "GPS location fix"
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:848
+#: src/gui/LocationDialog.cpp:853
 msgid "GPS:FAILED"
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:860 src/ui_locationDialogGui.h:510
+#: src/gui/LocationDialog.cpp:865 src/ui_locationDialogGui.h:510
 msgid "Get location from GPS"
 msgstr ""
 
@@ -10654,39 +10673,35 @@ msgstr ""
 msgid "Modified Julian Day"
 msgstr ""
 
-#: src/ui_helpDialogGui.h:270 src/ui_helpDialogGui.h:276
+#: src/ui_helpDialogGui.h:271 src/ui_helpDialogGui.h:277
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:437
 msgid "Help"
 msgstr ""
 
-#: src/ui_helpDialogGui.h:278
+#: src/ui_helpDialogGui.h:279
 #: plugins/OnlineQueries/src/ui_onlineQueriesDialog.h:249
 msgid "About"
 msgstr ""
 
-#: src/ui_helpDialogGui.h:280 src/ui_scriptConsole.h:413
+#: src/ui_helpDialogGui.h:281 src/ui_scriptConsole.h:413
 msgid "Log"
 msgstr ""
 
-#: src/ui_helpDialogGui.h:282
+#: src/ui_helpDialogGui.h:283
 msgid "Config"
 msgstr ""
 
-#: src/ui_helpDialogGui.h:285 src/ui_configurationDialog.h:1988
+#: src/ui_helpDialogGui.h:286 src/ui_configurationDialog.h:1988
 msgid "Edit keyboard shortcuts..."
 msgstr ""
 
-#: src/ui_helpDialogGui.h:286
+#: src/ui_helpDialogGui.h:287
 msgid "Check updates"
 msgstr ""
 
-#: src/ui_helpDialogGui.h:287 src/ui_helpDialogGui.h:289
+#: src/ui_helpDialogGui.h:288 src/ui_helpDialogGui.h:289
 #: plugins/NavStars/src/ui_navStarsWindow.h:588
 msgid "Refresh"
-msgstr ""
-
-#: src/ui_helpDialogGui.h:288
-msgid "xxx"
 msgstr ""
 
 #: src/ui_locationDialogGui.h:484 src/ui_locationDialogGui.h:487
