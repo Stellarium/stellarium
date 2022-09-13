@@ -514,7 +514,7 @@ void HelpDialog::updateAboutText(void) const
 	QStringList bestFinancialContributors;
 	for (auto fc = financialContributors.begin(); fc != financialContributors.end(); ++fc)
 	{
-		bestFinancialContributors << QString("%1 ($%2 USD)").arg(fc->first, QString::number(fc->second));
+		bestFinancialContributors << fc->first;
 	}
 
 	// Regexp to replace {text} with an HTML link.
@@ -571,8 +571,8 @@ void HelpDialog::updateAboutText(void) const
 	newHtml += "<li>" + q_("Tester: %1").arg(QString("Khalid AlAjaji")).toHtmlEscaped() + "</li></ul>";
 	newHtml += "<h3>" + q_("Contributors").toHtmlEscaped() + "</h3>";
 	newHtml += "<p>"  + q_("Several people have made contributions to the project and their work has made Stellarium better (sorted alphabetically): %1.").arg(contributors.join(", ")).toHtmlEscaped() + "</p>";
-	newHtml += "<h3>" + q_("Financial contributors").toHtmlEscaped() + "</h3>";
-	newHtml += "<p>"  + q_("Many people and organizations are supporting the development the Stellarium by the money and the best financial contributors (with donations $250+ USD) are %1.").arg(bestFinancialContributors.join(", ")).toHtmlEscaped();
+	newHtml += "<h3>" + q_("Financial support").toHtmlEscaped() + "</h3>";
+	newHtml += "<p>"  + q_("Many individuals and organizations are supporting the development of Stellarium by donations, and the most generous financial contributors (with donations of $250 or more) are %1.").arg(bestFinancialContributors.join(", ")).toHtmlEscaped();
 	// TRANSLATORS: The text between braces is the text of an HTML link.
 	newHtml += " " + q_("The full list of ficancial contributors you may see on our {Open Collective page}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://opencollective.com/stellarium\">\\1</a>") + "</p>";
 	newHtml += "<h3>" + q_("Acknowledgment").toHtmlEscaped() + "</h3>";
