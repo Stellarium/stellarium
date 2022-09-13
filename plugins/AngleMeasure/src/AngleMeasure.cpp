@@ -397,7 +397,7 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 			bool dblclick = event->type() == QEvent::MouseButtonDblClick;
 			bool press = event->type() == QEvent::MouseButtonPress;
 			bool erase = olddblclick && dblclick;
-			if (erase || release && !picked)
+			if (erase || (release && !picked))
 			{
 				if (dragging)
 					QApplication::restoreOverrideCursor();
