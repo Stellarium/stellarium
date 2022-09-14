@@ -35,13 +35,12 @@ $prefix = "        ";
 # bots and synonyms
 @exclude_list = ('Alexander Wolf', 'Launchpad Translations', 'Marcos CARDINOT', 'treaves', 'gzotti',
 				 'whitesource-bolt-for-github\[bot\]', 'Александр Вольф', 'fossabot', 'toshaevil',
-				 't4saha', 'jess');
+				 't4saha', 'jess', 'pjw', 'wlaun');
 # replacements for nicks
-%replacements = ('wlaun'=>'Wolfgang Laun', 'holgerno'=>'Holger Nießner', 'Hans'=>'Hans Lambermont',
-				 'pjw'=>'Peter Walser', 'rossmitchell'=>'Ross Mitchell', 'seescho'=>'Edgar Scholz',
-				 'martinber'=>'Martin Bernardi', 'daniel.adastra'=>'Daniel Adastra', 'arya-s'=>'Andrei Borza',
-				 'alex'=>'Alexander Duytschaever','GunChleoc'=>'Fòram na Gàidhlig', 'miroslavbroz'=>'Miroslav Broz',
-				 'espie'=>'Marc Espie', 'rich'=>'Pavel Klimenko');
+%replacements = ('holgerno'=>'Holger Nießner', 'Hans'=>'Hans Lambermont', 'rossmitchell'=>'Ross Mitchell',
+				 'seescho'=>'Edgar Scholz', 'martinber'=>'Martin Bernardi', 'daniel.adastra'=>'Daniel Adastra',
+				 'arya-s'=>'Andrei Borza', 'alex'=>'Alexander Duytschaever','GunChleoc'=>'Fòram na Gàidhlig',
+				 'miroslavbroz'=>'Miroslav Broz', 'espie'=>'Marc Espie', 'rich'=>'Pavel Klimenko', 'Snow Sailor'=>'Nick Kanel');
 $data = "";
 
 open(GITSL, "git shortlog -sn |") or die "Can't execute git shortlog: $!";
