@@ -178,8 +178,8 @@ void LocationDialog::createDialogContent()
 #endif
 	connect(ui->useIpQueryCheckBox, SIGNAL(clicked(bool)), this, SLOT(ipQueryLocation(bool)));
 	connect(ui->useAsDefaultLocationCheckBox, SIGNAL(clicked(bool)), this, SLOT(setDefaultLocation(bool)));
-	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), core, SLOT(returnToDefaultLocation()));
 	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), this, SLOT(resetLocationList()));
+	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), core, SLOT(returnToDefaultLocation()));
 	connectBoolProperty(ui->dstCheckBox, "StelCore.flagUseDST");
 	connectBoolProperty(ui->useCustomTimeZoneCheckBox, "StelCore.flagUseCTZ");
 	connect(ui->useCustomTimeZoneCheckBox, SIGNAL(toggled(bool)), ui->timeZoneNameComboBox, SLOT(setEnabled(bool)));
@@ -236,6 +236,10 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 	if (!dialog)
 		return;
 
+	if (currentLocation.name.contains("->")) // avoid extra updates
+		return;
+
+	populateRegionList(currentLocation.planetName);
 	StelCore* stelCore = StelApp::getInstance().getCore();
 
 	isEditingNew = false;
@@ -297,7 +301,7 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	ui->altitudeSpinBox->setValue(loc.altitude);
 
 	int idx = ui->planetNameComboBox->findData(loc.planetName, Qt::UserRole, Qt::MatchCaseSensitive);
-	if (idx==-1)
+	if (idx<0)
 	{
 		// Use Earth as default
 		idx = ui->planetNameComboBox->findData(QVariant("Earth"), Qt::UserRole, Qt::MatchCaseSensitive);
@@ -305,7 +309,8 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	ui->planetNameComboBox->setCurrentIndex(idx);
 
 	idx = ui->regionNameComboBox->findData(loc.region, Qt::UserRole, Qt::MatchCaseSensitive);
-	if (idx==-1)
+	qWarning() << "[2]" << loc.region << idx;
+	if (idx<0)
 	{
 		if (ui->planetNameComboBox->currentData(Qt::UserRole).toString()=="Earth")
 		{
@@ -483,11 +488,9 @@ void LocationDialog::populateTimeZonesList()
 	tzCombo->addItem(q_("System default"), "system_default");
 	//Restore the selection
 	index = tzCombo->findData(selectedTzId, Qt::UserRole, Qt::MatchCaseSensitive);
-	// TODO: Handle notfound!?
-	if (index==-1)
-	{
+	if (index==-1) // the TZ is not found
 		index=tzCombo->count()-1; // should point to system_default.
-	}
+
 	Q_ASSERT(index!=-1);
 	tzCombo->setCurrentIndex(index);
 	tzCombo->blockSignals(false);

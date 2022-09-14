@@ -10,6 +10,7 @@ IF(ENABLE_SPOUT)
 ENDIF()
 
 SET(stellarium_lib_SRCS
+     core/BlueNoiseTriangleRemapped.hpp
      core/Dithering.hpp
      core/SaturationShader.hpp
      core/healpix.c
@@ -358,6 +359,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/TonemappingDialog.cpp
           gui/SkylightDialog.hpp
           gui/SkylightDialog.cpp
+	  gui/ContributorsList.hpp
      )
 
      ################# compiles .ui files ############
@@ -471,7 +473,7 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
 ENDIF()
 
 # Setup Qt5/6 dependencies
-SET(STELLARIUM_QT_LIBRARIES Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Concurrent Qt${QT_VERSION_MAJOR}::Gui ${STEL_GLES_LIBS} Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts)
+SET(STELLARIUM_QT_LIBRARIES Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Concurrent Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::GuiPrivate ${STEL_GLES_LIBS} Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts)
 IF(APPLE AND Qt6_FOUND)
      SET(STELLARIUM_QT_LIBRARIES ${STELLARIUM_QT_LIBRARIES} Qt${QT_VERSION_MAJOR}::DBus)
 ENDIF()
@@ -494,7 +496,7 @@ IF(ENABLE_SPOUT AND SPOUT_LIBRARY_DLL)
      CONFIGURE_FILE(${SPOUT_LIBRARY_DLL} ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 ENDIF()
 
-SET(STELMAIN_DEPS ${ZLIB_LIBRARIES} qtcompress_stel glues_stel qxlsx_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY})
+SET(STELMAIN_DEPS ${ZLIB_LIBRARIES} glues_stel QXlsx::QXlsx ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY})
 IF(ENABLE_LIBGPS)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} ${GPS_LIBRARY})
 ENDIF()
@@ -549,15 +551,18 @@ IF(APPLE)
              OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/macdeployqt.log\"
              ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/macdeployqt.err\"
          )
-         MESSAGE(\"Running macdeployqt...\")
+	 MESSAGE(STATUS \"Running macdeployqt...\")
         "
      )
+    IF(ENABLE_SHOWMYSKY AND EXISTS ${ShowMySky_LIBRARY})
+        INSTALL(FILES ${ShowMySky_LIBRARY} DESTINATION Frameworks)
+    ENDIF()
     INSTALL(CODE
         "
         EXECUTE_PROCESS(
              COMMAND \"../../util/macfix.sh\"
         )
-        MESSAGE(\"Fixing Qt' paths for macOS bundle...\")
+	MESSAGE(STATUS \"Fixing Qt' paths for macOS bundle...\")
         "
      )
 ELSE()
@@ -584,7 +589,7 @@ IF(WIN32)
              OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.log\"
              ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.err\"
          )
-         MESSAGE(\"Running windeployqt...\")
+	 MESSAGE(STATUS \"Running windeployqt...\")
         "
      )
      IF(GENERATE_STELMAINLIB)

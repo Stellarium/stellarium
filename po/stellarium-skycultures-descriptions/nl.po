@@ -7,19 +7,20 @@
 # Dirk Devlies <dirk.devlies@telenet.be>, 2021
 # bb4713398ff25b15ca398fdfd7cd6958_563a200 <e3e20db5fb3e1853af1e851959210c55_710271>, 2021
 # Gerard Prins <gejepe@manquehue.net>, 2022
-# cardinot <mcardinot@gmail.com>, 2022
 # alex <alex.a.nder.duy.tschaever@gmail.com>, 2022
 # Harry Mensch, 2022
 # Alex Rijckaert, 2022
+# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
+# cardinot <mcardinot@gmail.com>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-06-02 21:15+0700\n"
+"POT-Creation-Date: 2022-09-09 13:37+0700\n"
 "PO-Revision-Date: 2020-01-06 16:35+0000\n"
-"Last-Translator: Alex Rijckaert, 2022\n"
+"Last-Translator: cardinot <mcardinot@gmail.com>, 2022\n"
 "Language-Team: Dutch (https://www.transifex.com/stellarium/teams/80998/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -222,7 +223,7 @@ msgstr "Octopustentakel"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/anutan/description.en.utf8:20
-#: ../../skycultures/egyptian_dendera/description.en.utf8:197
+#: ../../skycultures/egyptian_dendera/description.en.utf8:198
 msgid "Aries"
 msgstr "Ram"
 
@@ -421,7 +422,7 @@ msgstr "De morgenster"
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:83
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:377
 #: ../../skycultures/boorong/description.en.utf8:36
-#: ../../skycultures/egyptian_dendera/description.en.utf8:199
+#: ../../skycultures/egyptian_dendera/description.en.utf8:200
 #: ../../skycultures/lokono/description.en.utf8:26
 #: ../../skycultures/tongan/description.en.utf8:58
 msgid "Venus"
@@ -444,11 +445,12 @@ msgstr "Venus(?)"
 
 #. type: Content of: <h2>
 #: ../../skycultures/anutan/description.en.utf8:37
-#: ../../skycultures/greek_almagest/description.en.utf8:486
+#: ../../skycultures/greek_almagest/description.en.utf8:489
 #: ../../skycultures/greek_farnese/description.en.utf8:293
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:275
 #: ../../skycultures/indian/description.en.utf8:35
 #: ../../skycultures/lokono/description.en.utf8:381
+#: ../../skycultures/samoan/description.en.utf8:93
 #: ../../skycultures/tongan/description.en.utf8:30
 msgid "References"
 msgstr "Referenties"
@@ -491,6 +493,7 @@ msgstr ""
 #: ../../skycultures/navajo/description.en.utf8:17
 #: ../../skycultures/norse/description.en.utf8:9
 #: ../../skycultures/sami/description.en.utf8:63
+#: ../../skycultures/samoan/description.en.utf8:119
 #: ../../skycultures/sardinian/description.en.utf8:11
 #: ../../skycultures/tongan/description.en.utf8:85
 #: ../../skycultures/tupi/description.en.utf8:23
@@ -933,7 +936,16 @@ msgid ""
 "href=\"#footnote-2\">[2]</a></sup>. This region is inhabited by Arabs and "
 "covers Jordan, Saudi Arabia, Kuwait, Bahrain, Qatar, United Arab Emirates, "
 "Oman, Yemen, and parts of Syria and Iraq."
-msgstr " "
+msgstr ""
+"Het Arabisch Schiereiland is een regio die de zuidwestelijke hoek van Azië "
+"bestrijkt, begrensd door de Golf van Aden en de Arabische Zee in het zuiden,"
+" de Golf van Oman en de Perzische Golf in het oosten, de Rode Zee in het "
+"westen. De noordelijke grens is niet duidelijk bepaald, maar volgens oude "
+"geografen wordt deze begrensd door rivieren, namelijk de rivier de "
+"Eufraat<sup><a href=\"#footnote-1\">[1] </a></sup><sup><a "
+"href=\"#footnote-2\">[2]</a></sup>. Deze regio wordt bewoond door Arabieren "
+"en omvat Jordanië, Saudi-Arabië, Koeweit, Bahrein, Qatar, de Verenigde "
+"Arabische Emiraten, Oman, Jemen, en delen van Syrië en Irak."
 
 #. type: Content of: <p>
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:9
@@ -1108,7 +1120,7 @@ msgstr ""
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:69
 #: ../../skycultures/belarusian/description.en.utf8:8
 #: ../../skycultures/chinese_contemporary/description.en.utf8:5
-#: ../../skycultures/egyptian_dendera/description.en.utf8:208
+#: ../../skycultures/egyptian_dendera/description.en.utf8:209
 #: ../../skycultures/macedonian/description.en.utf8:4
 #: ../../skycultures/mongolian/description.en.utf8:15
 #: ../../skycultures/tupi/description.en.utf8:4
@@ -2773,8 +2785,8 @@ msgstr "al-Naayem 2"
 #: ../../skycultures/boorong/description.en.utf8:220
 #: ../../skycultures/chinese/description.en.utf8:2980
 #: ../../skycultures/dakota/description.en.utf8:57
-#: ../../skycultures/egyptian_dendera/description.en.utf8:235
-#: ../../skycultures/greek_almagest/description.en.utf8:503
+#: ../../skycultures/egyptian_dendera/description.en.utf8:236
+#: ../../skycultures/greek_almagest/description.en.utf8:506
 #: ../../skycultures/inuit/description.en.utf8:31
 #: ../../skycultures/khoi-san/description.en.utf8:13
 #: ../../skycultures/lokono/description.en.utf8:377
@@ -4222,7 +4234,7 @@ msgstr ""
 
 #. type: Content of: <h3>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:14
-#: ../../skycultures/egyptian_dendera/description.en.utf8:209
+#: ../../skycultures/egyptian_dendera/description.en.utf8:210
 msgid "Zodiac"
 msgstr "Dierenriem"
 
@@ -4283,7 +4295,7 @@ msgstr ""
 #. type: Content of: <h2>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:31
 #: ../../skycultures/chinese_medieval/description.en.utf8:20
-#: ../../skycultures/egyptian_dendera/description.en.utf8:192
+#: ../../skycultures/egyptian_dendera/description.en.utf8:193
 msgid "Planets"
 msgstr "Planeten"
 
@@ -5099,7 +5111,7 @@ msgstr ""
 
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:382
-#: ../../skycultures/egyptian_dendera/description.en.utf8:202
+#: ../../skycultures/egyptian_dendera/description.en.utf8:203
 #: ../../skycultures/tongan/description.en.utf8:59
 msgid "Mars"
 msgstr "Mars"
@@ -5115,7 +5127,7 @@ msgstr ""
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:387
-#: ../../skycultures/egyptian_dendera/description.en.utf8:203
+#: ../../skycultures/egyptian_dendera/description.en.utf8:204
 msgid "Saturn"
 msgstr "Saturnus"
 
@@ -5133,7 +5145,7 @@ msgstr ""
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:393
-#: ../../skycultures/egyptian_dendera/description.en.utf8:201
+#: ../../skycultures/egyptian_dendera/description.en.utf8:202
 msgid "Mercury"
 msgstr "Mercury"
 
@@ -5334,7 +5346,7 @@ msgstr "15 STER<sup>s</sup> van <sup>GOD</sup>Ea"
 #. type: Content of: <h2>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:503
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:12
-#: ../../skycultures/egyptian_dendera/description.en.utf8:218
+#: ../../skycultures/egyptian_dendera/description.en.utf8:219
 msgid "Source(s)"
 msgstr "Bron(nen)"
 
@@ -5375,7 +5387,7 @@ msgstr ""
 
 #. type: Content of: <h2>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:513
-#: ../../skycultures/egyptian_dendera/description.en.utf8:221
+#: ../../skycultures/egyptian_dendera/description.en.utf8:222
 msgid "Sources / Further Reading"
 msgstr "Bronnen / Verder lezen"
 
@@ -5452,8 +5464,8 @@ msgstr ""
 
 #. type: Content of: <h2>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:522
-#: ../../skycultures/egyptian_dendera/description.en.utf8:232
-#: ../../skycultures/greek_almagest/description.en.utf8:496
+#: ../../skycultures/egyptian_dendera/description.en.utf8:233
+#: ../../skycultures/greek_almagest/description.en.utf8:499
 #: ../../skycultures/greek_farnese/description.en.utf8:299
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:288
 msgid "Fair Use"
@@ -5524,7 +5536,7 @@ msgstr ""
 
 #. type: Content of: <p>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:539
-#: ../../skycultures/egyptian_dendera/description.en.utf8:237
+#: ../../skycultures/egyptian_dendera/description.en.utf8:238
 msgid "<em>Susanne M. Hoffmann: service@uhura-uraniae.com </em>"
 msgstr "<em>Susanne M. Hoffmann: service@uhura-uraniae.com</em>"
 
@@ -5539,7 +5551,7 @@ msgstr ""
 
 #. type: Content of: <h5>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:541
-#: ../../skycultures/egyptian_dendera/description.en.utf8:238
+#: ../../skycultures/egyptian_dendera/description.en.utf8:239
 #: ../../skycultures/greek_farnese/description.en.utf8:305
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:294
 msgid "written in English:"
@@ -5547,7 +5559,7 @@ msgstr "written in English:"
 
 #. type: Content of: <h5>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:541
-#: ../../skycultures/egyptian_dendera/description.en.utf8:238
+#: ../../skycultures/egyptian_dendera/description.en.utf8:239
 msgid "SMH"
 msgstr "SMH"
 
@@ -6804,7 +6816,7 @@ msgstr "Geelkuifkakatoe; optrekkend daglicht"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:71
-#: ../../skycultures/egyptian_dendera/description.en.utf8:200
+#: ../../skycultures/egyptian_dendera/description.en.utf8:201
 #: ../../skycultures/lokono/description.en.utf8:46
 msgid "Jupiter"
 msgstr "Jupiter"
@@ -6817,7 +6829,7 @@ msgstr "Dag; Zon"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:76
 #: ../../skycultures/chinese/description.en.utf8:66
-#: ../../skycultures/egyptian_dendera/description.en.utf8:197
+#: ../../skycultures/egyptian_dendera/description.en.utf8:198
 #: ../../skycultures/lokono/description.en.utf8:16
 #: ../../skycultures/mongolian/description.en.utf8:141
 #: ../../skycultures/tongan/description.en.utf8:53
@@ -6894,7 +6906,7 @@ msgstr "Buidelmarter"
 #. type: Content of: <table><tr><td>
 #: ../../skycultures/boorong/description.en.utf8:116
 #: ../../skycultures/chinese/description.en.utf8:67
-#: ../../skycultures/egyptian_dendera/description.en.utf8:198
+#: ../../skycultures/egyptian_dendera/description.en.utf8:199
 #: ../../skycultures/lokono/description.en.utf8:21
 #: ../../skycultures/tongan/description.en.utf8:52
 msgid "Moon"
@@ -8653,7 +8665,7 @@ msgstr "Celestial Spring - Hemelse lente"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/chinese/description.en.utf8:1464
-#: ../../skycultures/greek_almagest/description.en.utf8:399
+#: ../../skycultures/greek_almagest/description.en.utf8:402
 #: ../../skycultures/greek_farnese/description.en.utf8:241
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:222
 msgid "Dog"
@@ -9484,7 +9496,7 @@ msgstr "Bee - Bij"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/chinese/description.en.utf8:2773
-#: ../../skycultures/greek_almagest/description.en.utf8:263
+#: ../../skycultures/greek_almagest/description.en.utf8:266
 #: ../../skycultures/greek_farnese/description.en.utf8:139
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:113
 msgid "Triangle"
@@ -9866,7 +9878,7 @@ msgstr ""
 
 #. type: Content of: <p><h2>
 #: ../../skycultures/chinese_contemporary/description.en.utf8:9
-#: ../../skycultures/greek_almagest/description.en.utf8:45
+#: ../../skycultures/greek_almagest/description.en.utf8:48
 #: ../../skycultures/western/description.en.utf8:7
 #: ../../skycultures/western_SnT/description.en.utf8:9
 msgid "Star names"
@@ -10825,11 +10837,9 @@ msgstr "<b>Tweelingen</b>"
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/egyptian_dendera/description.en.utf8:22
 msgid ""
-"a couple, i.e. a woman and a man (neither the Babylonian warriors nor the "
-"Greek heros)"
+"a couple (Shu & Tefnut), i.e. a woman and a man (neither the Babylonian "
+"warriors nor the Greek heros)"
 msgstr ""
-"een paar, d.w.z. een vrouw en een man (noch de Babylonische krijgers, noch "
-"de Griekse helden)"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/egyptian_dendera/description.en.utf8:27
@@ -10898,11 +10908,9 @@ msgstr "<b>Boogschutter</b>"
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/egyptian_dendera/description.en.utf8:52
 msgid ""
-"this figure is an egyptised version of the Babylonian god Pabilsang; the "
+"this figure is an Egyptised version of the Babylonian god Pabilsang; the "
 "double-head indicates a mythical context"
 msgstr ""
-"deze figuur is een geëgyptiseerde versie van de Babylonische god Pabilsang; "
-"het dubbele hoofd wijst op een mythische context"
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/egyptian_dendera/description.en.utf8:57
@@ -10940,18 +10948,18 @@ msgstr ""
 
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/egyptian_dendera/description.en.utf8:71
-#: ../../skycultures/egyptian_dendera/description.en.utf8:81
-#: ../../skycultures/egyptian_dendera/description.en.utf8:86
-#: ../../skycultures/egyptian_dendera/description.en.utf8:116
-#: ../../skycultures/egyptian_dendera/description.en.utf8:121
-#: ../../skycultures/egyptian_dendera/description.en.utf8:126
-#: ../../skycultures/egyptian_dendera/description.en.utf8:131
-#: ../../skycultures/egyptian_dendera/description.en.utf8:136
-#: ../../skycultures/egyptian_dendera/description.en.utf8:161
-#: ../../skycultures/egyptian_dendera/description.en.utf8:171
-#: ../../skycultures/egyptian_dendera/description.en.utf8:176
-#: ../../skycultures/egyptian_dendera/description.en.utf8:181
-#: ../../skycultures/egyptian_dendera/description.en.utf8:186
+#: ../../skycultures/egyptian_dendera/description.en.utf8:82
+#: ../../skycultures/egyptian_dendera/description.en.utf8:87
+#: ../../skycultures/egyptian_dendera/description.en.utf8:117
+#: ../../skycultures/egyptian_dendera/description.en.utf8:122
+#: ../../skycultures/egyptian_dendera/description.en.utf8:127
+#: ../../skycultures/egyptian_dendera/description.en.utf8:132
+#: ../../skycultures/egyptian_dendera/description.en.utf8:137
+#: ../../skycultures/egyptian_dendera/description.en.utf8:162
+#: ../../skycultures/egyptian_dendera/description.en.utf8:172
+#: ../../skycultures/egyptian_dendera/description.en.utf8:177
+#: ../../skycultures/egyptian_dendera/description.en.utf8:182
+#: ../../skycultures/egyptian_dendera/description.en.utf8:187
 msgid "north"
 msgstr "noord"
 
@@ -10963,36 +10971,33 @@ msgstr "<b>Grote Beer</b>"
 #. type: Content of: <p><table><tr><td>
 #: ../../skycultures/egyptian_dendera/description.en.utf8:72
 msgid ""
-"the Ox Thigh is Egyptian (also depicted on diagonal star clocks, two "
-"millennia earlier), the Fox and the Sheep are at the places of the "
+"the Bull's Thigh is Egyptian (also depicted on diagonal star clocks, two "
+"millennia earlier), the Jackal and the Sheep are at the places of the "
 "Babylonian asterisms \"Fox\" and \"Ewe\""
 msgstr ""
-"de Osse Dij is Egyptisch (ook afgebeeld op diagonale sterrenklokken, twee "
-"millennia eerder), de Vos en het Schaap staan op de plaatsen van de "
-"Babylonische asterismen \"Vos\" en \"Ooi\""
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:76
-#: ../../skycultures/egyptian_dendera/description.en.utf8:91
-#: ../../skycultures/egyptian_dendera/description.en.utf8:96
-#: ../../skycultures/egyptian_dendera/description.en.utf8:101
-#: ../../skycultures/egyptian_dendera/description.en.utf8:106
-#: ../../skycultures/egyptian_dendera/description.en.utf8:111
-#: ../../skycultures/egyptian_dendera/description.en.utf8:141
-#: ../../skycultures/egyptian_dendera/description.en.utf8:146
-#: ../../skycultures/egyptian_dendera/description.en.utf8:151
-#: ../../skycultures/egyptian_dendera/description.en.utf8:156
-#: ../../skycultures/egyptian_dendera/description.en.utf8:166
+#: ../../skycultures/egyptian_dendera/description.en.utf8:77
+#: ../../skycultures/egyptian_dendera/description.en.utf8:92
+#: ../../skycultures/egyptian_dendera/description.en.utf8:97
+#: ../../skycultures/egyptian_dendera/description.en.utf8:102
+#: ../../skycultures/egyptian_dendera/description.en.utf8:107
+#: ../../skycultures/egyptian_dendera/description.en.utf8:112
+#: ../../skycultures/egyptian_dendera/description.en.utf8:142
+#: ../../skycultures/egyptian_dendera/description.en.utf8:147
+#: ../../skycultures/egyptian_dendera/description.en.utf8:152
+#: ../../skycultures/egyptian_dendera/description.en.utf8:157
+#: ../../skycultures/egyptian_dendera/description.en.utf8:167
 msgid "south"
 msgstr "zuid"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:77
+#: ../../skycultures/egyptian_dendera/description.en.utf8:78
 msgid "<b>Lupus</b>"
 msgstr "<b>Wolf</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:77
+#: ../../skycultures/egyptian_dendera/description.en.utf8:78
 msgid ""
 "the beast is at the place of the Babylonian \"Mad Dog\" (rabid dog) and the "
 "Greco-Roman Lupus"
@@ -11001,26 +11006,24 @@ msgstr ""
 " de Grieks-Romeinse Wolf"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:82
+#: ../../skycultures/egyptian_dendera/description.en.utf8:83
 msgid "<b>Bootes, Corona Borealis and others</b>"
 msgstr "Laarzen, Corona Borealis en anderen"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:82
+#: ../../skycultures/egyptian_dendera/description.en.utf8:83
 msgid ""
 "the hippo goddess is an old Egyptian goddess who guards the celestial pole "
-"and the Ox Thigh (constellation)"
+"and the Bull's Thigh (constellation)"
 msgstr ""
-"de nijlpaardgodin is een oude Egyptische godin die de hemelpool en de "
-"ossenhoeder (sterrenbeeld) bewaakt"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:87
+#: ../../skycultures/egyptian_dendera/description.en.utf8:88
 msgid "<b>Hydra and Corvus</b>"
 msgstr "<b>Waterman en Raaf</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:87
+#: ../../skycultures/egyptian_dendera/description.en.utf8:88
 msgid ""
 "the huge snake with the bird on its tail is the new interpretation of the "
 "Babylonian constellations Snake (Mush-Dragon) and Raven"
@@ -11029,22 +11032,22 @@ msgstr ""
 "de Babylonische sterrenbeelden Slang (Mush-Dragon) en Raaf"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:92
+#: ../../skycultures/egyptian_dendera/description.en.utf8:93
 msgid "<b>Orion</b>"
 msgstr "<b>Orion</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:92
+#: ../../skycultures/egyptian_dendera/description.en.utf8:93
 msgid "Osiris is a deified Egyptian king"
 msgstr "Osiris is een vergoddelijkte Egyptische koning"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:97
+#: ../../skycultures/egyptian_dendera/description.en.utf8:98
 msgid "<b>southwesternmost part of Argo plus Columba</b>"
 msgstr "<b>het meest westelijke deel van Argo plus Columba</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:97
+#: ../../skycultures/egyptian_dendera/description.en.utf8:98
 msgid ""
 "a falcon sitting on a canopy - obviously an Egyptian constellation that "
 "remains today as a star name"
@@ -11053,12 +11056,12 @@ msgstr ""
 "vandaag de dag nog steeds een sterrennaam is"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:102
+#: ../../skycultures/egyptian_dendera/description.en.utf8:103
 msgid "<b>Canis Major</b>"
 msgstr "<b>Grote Hond</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:102
+#: ../../skycultures/egyptian_dendera/description.en.utf8:103
 msgid ""
 "Sothis is the Egyptian name of a constellation around Sirius; in Babylon, "
 "there is a goddess with Bow and Arrow at this place"
@@ -11067,12 +11070,12 @@ msgstr ""
 " er een godin met pijl en boog op deze plaats"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:107
+#: ../../skycultures/egyptian_dendera/description.en.utf8:108
 msgid "<b>Canis Minor</b>"
 msgstr "<b>Kleine Hond</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:107
+#: ../../skycultures/egyptian_dendera/description.en.utf8:108
 msgid ""
 "as all other bright stars in the area are already decorated, this heavenly "
 "cow apparently needs to be placed on Procyon"
@@ -11081,12 +11084,12 @@ msgstr ""
 "moet deze hemelse koe blijkbaar op Procyon geplaatst worden"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:112
+#: ../../skycultures/egyptian_dendera/description.en.utf8:113
 msgid "<b>Lepus</b>"
 msgstr "<b>Haas</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:112
+#: ../../skycultures/egyptian_dendera/description.en.utf8:113
 msgid ""
 "in Babylonian uranology, a rooster is placed below the Orion-constellation "
 "in the modern Lepus; this bird is apparently the Egyptian version of it"
@@ -11096,12 +11099,12 @@ msgstr ""
 "versie van"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:117
+#: ../../skycultures/egyptian_dendera/description.en.utf8:118
 msgid "<b>Pegasus area</b>"
 msgstr "<b>Pegasus gebied</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:117
+#: ../../skycultures/egyptian_dendera/description.en.utf8:118
 msgid ""
 "the Babylonian constellation of The Field is a quadrilateral of bright "
 "stars. It looks like the Egyptian hieroglyph for \"water\" which makes sense"
@@ -11112,12 +11115,12 @@ msgstr ""
 "buurt van vissen."
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:122
+#: ../../skycultures/egyptian_dendera/description.en.utf8:123
 msgid "<b>Aquila area</b>"
 msgstr "<b>Watergebied</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:122
+#: ../../skycultures/egyptian_dendera/description.en.utf8:123
 msgid ""
 "this small dark bird (a duck?) apparently is located in the area of Aquila. "
 "For the time being, I put it on the bright star (Altair)."
@@ -11126,12 +11129,12 @@ msgstr ""
 " van Waterman. Voorlopig zet ik hem op de heldere ster (Altair)."
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:127
+#: ../../skycultures/egyptian_dendera/description.en.utf8:128
 msgid "<b>Delphinus area</b>"
 msgstr "<b>Delphinus gebied</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:127
+#: ../../skycultures/egyptian_dendera/description.en.utf8:128
 msgid ""
 "next to this bird, there is a cadaver of an animal - interestingly at the "
 "place of the Babylonian constellation of \"the Corpse\""
@@ -11140,24 +11143,24 @@ msgstr ""
 "plaats van het Babylonische sterrenbeeld \"het Lijk\""
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:132
+#: ../../skycultures/egyptian_dendera/description.en.utf8:133
 msgid "<b>Cygnus / Cepheus area</b>"
 msgstr "<b>Cygnus / Cepheus gebied</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:132
-#: ../../skycultures/egyptian_dendera/description.en.utf8:142
-#: ../../skycultures/egyptian_dendera/description.en.utf8:187
+#: ../../skycultures/egyptian_dendera/description.en.utf8:133
+#: ../../skycultures/egyptian_dendera/description.en.utf8:143
+#: ../../skycultures/egyptian_dendera/description.en.utf8:188
 msgid "?"
 msgstr "?"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:137
+#: ../../skycultures/egyptian_dendera/description.en.utf8:138
 msgid "<b>Lyra / Ophiuchus area</b>"
 msgstr "<b>Lier / Ophiuchus gebied</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:137
+#: ../../skycultures/egyptian_dendera/description.en.utf8:138
 msgid ""
 "there is a huge Egyptian figure in the area of Lyra and Ophiuchus. In Lyra "
 "was the Babylonian constellation of the goddess of medicine, while Ophiuchus"
@@ -11170,17 +11173,17 @@ msgstr ""
 "mythologische grondlegger van de geneeskunde, Imhotep, kunnen zijn."
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:142
+#: ../../skycultures/egyptian_dendera/description.en.utf8:143
 msgid "<b>Cetus area</b>"
 msgstr "<b>Cetus gebied</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:147
+#: ../../skycultures/egyptian_dendera/description.en.utf8:148
 msgid "<b>Centaurus area</b>"
 msgstr "<b>Stier gebied</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:147
+#: ../../skycultures/egyptian_dendera/description.en.utf8:148
 msgid ""
 "the Egyptian figure shows a landworker and at this place, there is the "
 "Babylonian god of agriculture and war (Ningirsu), so this might be a very "
@@ -11193,12 +11196,12 @@ msgstr ""
 "late tijdperken werd samengevoegd met de Griekse Pan"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:152
+#: ../../skycultures/egyptian_dendera/description.en.utf8:153
 msgid "<b>eastern and southern Argo area</b>"
 msgstr "<b>oostelijk en zuidelijk Argo gebied</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:152
+#: ../../skycultures/egyptian_dendera/description.en.utf8:153
 msgid ""
 "the image shows a mother goddess, in Egyptian this is Isis and in Babylonian"
 " this would be Ninmakh (who is indeed positioned at this place)"
@@ -11207,12 +11210,12 @@ msgstr ""
 "Babylonisch zou dit Ninmakh zijn (die inderdaad op deze plaats is geplaatst)"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:157
+#: ../../skycultures/egyptian_dendera/description.en.utf8:158
 msgid "<b>northwestern Argo area</b>"
 msgstr "<b>noordwestelijk Argo gebied</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:157
+#: ../../skycultures/egyptian_dendera/description.en.utf8:158
 msgid ""
 "the hat of this woman resembles the Egyptian goddess Anuket, the goddess of "
 "the Nile flood. In Babylonian uranology of the middle first millennium, "
@@ -11225,12 +11228,12 @@ msgstr ""
 " is een verwisseling of overdracht waarschijnlijk."
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:162
+#: ../../skycultures/egyptian_dendera/description.en.utf8:163
 msgid "<b>Auriga</b>"
 msgstr "<b>Auriga</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:162
+#: ../../skycultures/egyptian_dendera/description.en.utf8:163
 msgid ""
 "goat is at the position of the constellation Auriga (neither in Babylonian "
 "nor in Greek tradition, there is a goat at this place. Highly likely, the "
@@ -11242,12 +11245,12 @@ msgstr ""
 "Egyptische sterrenbeeld."
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:167
+#: ../../skycultures/egyptian_dendera/description.en.utf8:168
 msgid "<b>alpha Centauri area</b>"
 msgstr "<b>alpha Centauri gebied</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:167
+#: ../../skycultures/egyptian_dendera/description.en.utf8:168
 msgid ""
 "the ceiling clearly depicts an Egyptian Chenti Irti figure: this little "
 "creature should be positioned in the area around/ above the bright star "
@@ -11264,47 +11267,46 @@ msgstr ""
 "boven de horizon staat (2e eeuw v. Chr. in Egypte)"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:172
+#: ../../skycultures/egyptian_dendera/description.en.utf8:173
 msgid "<b>\"above\" Aries</b>"
 msgstr "<b>\"boven\" Ram</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:172
+#: ../../skycultures/egyptian_dendera/description.en.utf8:173
 msgid "the udjat eye in this context probably refers to the spring equinox"
 msgstr ""
 "het udjat oog in deze context waarschijnlijk verwijst naar de lente-equinox"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:177
+#: ../../skycultures/egyptian_dendera/description.en.utf8:178
 msgid "<b>Perseus area</b>"
 msgstr "<b>Perseus gebied</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:177
+#: ../../skycultures/egyptian_dendera/description.en.utf8:178
 msgid ""
 "the baboon is an attribute or representation of the Egyptian god Thoth and "
-"therefore worshipped"
+"therefore worshipped. However, it is uncertain whether this particular "
+"baboon is connected to Thoth."
 msgstr ""
-"de baviaan is een attribuut of voorstelling van de Egyptische god Thoth en "
-"wordt daarom vereerd"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:182
+#: ../../skycultures/egyptian_dendera/description.en.utf8:183
 msgid "<b>Ursa Minor area</b>"
 msgstr "<b>Kleine Beer gebied</b>"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:182
+#: ../../skycultures/egyptian_dendera/description.en.utf8:183
 msgid "a falcon (one of the many falcon deities)"
 msgstr "een valk (een van de vele valkgodheden)"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:187
-msgid "<b>Cassiopeia area</b>"
-msgstr "<b>Cassiopeia gebied</b>"
+#: ../../skycultures/egyptian_dendera/description.en.utf8:188
+msgid "<b>Cassiopeia area (or Cas/And)</b>"
+msgstr ""
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:193
+#: ../../skycultures/egyptian_dendera/description.en.utf8:194
 msgid ""
 "In this sky culture, some Egyptian names are attached to the planets. "
 "Honestly, each planet had many names, sometimes depending on the context "
@@ -11320,7 +11322,7 @@ msgstr ""
 "godheden."
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:194
+#: ../../skycultures/egyptian_dendera/description.en.utf8:195
 msgid ""
 "The planets are depicted as deities in their \"standard position\". As "
 "planets move, they can only be presented in the sky by defining fixed "
@@ -11334,42 +11336,42 @@ msgstr ""
 "vinden."
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:195
+#: ../../skycultures/egyptian_dendera/description.en.utf8:196
 msgid "These standard positions:"
 msgstr "Deze standaard posities:"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:198
+#: ../../skycultures/egyptian_dendera/description.en.utf8:199
 msgid "Taurus"
 msgstr "Stier"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:199
+#: ../../skycultures/egyptian_dendera/description.en.utf8:200
 msgid "Pisces"
 msgstr "Vissen"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:200
+#: ../../skycultures/egyptian_dendera/description.en.utf8:201
 msgid "Cancer (or betw. Cnc and Leo)"
 msgstr "Kreeft (of tussen Cnc en Leeuw)"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:201
+#: ../../skycultures/egyptian_dendera/description.en.utf8:202
 msgid "Virgo"
 msgstr "Maagd"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:202
+#: ../../skycultures/egyptian_dendera/description.en.utf8:203
 msgid "Capricornus"
 msgstr "Steenbok"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:203
+#: ../../skycultures/egyptian_dendera/description.en.utf8:204
 msgid "Libra"
 msgstr "Weegschaal"
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:205
+#: ../../skycultures/egyptian_dendera/description.en.utf8:206
 msgid ""
 "These positions are equal to the \"secret places\" in Babylonian astrology "
 "and the \"hypsomata\" (exaltation points) in Greek astrology."
@@ -11378,7 +11380,7 @@ msgstr ""
 "astrologie en de \"hypsomata\" (exaltatiepunten) in de Griekse astrologie."
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:206
+#: ../../skycultures/egyptian_dendera/description.en.utf8:207
 msgid ""
 "Additionally, the equinoxes are marked with great disks: One in Libra and "
 "one Aries."
@@ -11387,7 +11389,7 @@ msgstr ""
 " en een in Ram."
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:210
+#: ../../skycultures/egyptian_dendera/description.en.utf8:211
 msgid ""
 "The zodiac came to Greece from Babylonian sources. It is unknown whether or "
 "not the Egyptians had similar figures: The origin of the zodiac is the path "
@@ -11403,7 +11405,7 @@ msgstr ""
 "de Babylonische."
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:211
+#: ../../skycultures/egyptian_dendera/description.en.utf8:212
 msgid ""
 "The Zodiac is the Babylonian one with the semi-exception of Pisces: Pisces "
 "are depicted as two fish which is never found in Babylon and only an "
@@ -11421,7 +11423,7 @@ msgstr ""
 "(Steele 2018)."
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:212
+#: ../../skycultures/egyptian_dendera/description.en.utf8:213
 msgid ""
 "The other constellations of the zodiac are the Babylonian versions, "
 "partially egyptized. Virgo is depicted as the Babylonian Goddess Shala with "
@@ -11443,12 +11445,12 @@ msgstr ""
 "Tweelingen maar als een paar, de Stier is niet gehalveerd."
 
 #. type: Content of: <h3>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:213
+#: ../../skycultures/egyptian_dendera/description.en.utf8:214
 msgid "Outside the Zodiac"
 msgstr "Buiten de Dierenriem"
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:214
+#: ../../skycultures/egyptian_dendera/description.en.utf8:215
 msgid ""
 "The rest of the sky also shows a mixture of several cultures: The hippo "
 "goddess who guards the Ox Thigh is a clearly Egyptian constellation. "
@@ -11463,7 +11465,7 @@ msgstr ""
 "Babylonische constellaties van de Vos en de Schapen."
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:215
+#: ../../skycultures/egyptian_dendera/description.en.utf8:216
 msgid ""
 "In contrast to these native Egyptian constellations, there are also native "
 "Sumerian ones that are depicted in an Egyptized way: This is marked in the "
@@ -11474,7 +11476,7 @@ msgstr ""
 "afgebeeld: Dit is aangegeven in de \"Vertaling\" van de Stellarium labels."
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:216
+#: ../../skycultures/egyptian_dendera/description.en.utf8:217
 msgid ""
 "Interestingly, this depiction explains several Greek names of single stars: "
 "e.g. at the position of Capella, there is a whitish Goat in the Dendera "
@@ -11493,7 +11495,7 @@ msgstr ""
 "sterrennamen om de verouderde sterrenbeelden te herdenken."
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:219
+#: ../../skycultures/egyptian_dendera/description.en.utf8:220
 msgid ""
 "This <em>sky culture</em> is a mapping of historical figures onto the stars."
 " The figures are directly copied by hand from the digital photographs that "
@@ -11510,7 +11512,7 @@ msgstr ""
 "2013)</a>."
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:223
+#: ../../skycultures/egyptian_dendera/description.en.utf8:224
 msgid ""
 "<a "
 "href=\"https://collections.louvre.fr/en/ark:/53355/cl010028871#\">Photographs"
@@ -11520,35 +11522,35 @@ msgstr ""
 "van de collectie van het Louvre</a>"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:224
-msgid ""
-"Aubourg, E. (1995), ‘La date de conception du zodiaque du temple d’Hathor à "
-"Dendera’, Bulletin de l’Institut Français d’Archéologie Orientale 95, 1–10"
-msgstr ""
-"Aubourg, E. (1995), ‘La date de conception du zodiaque du temple d’Hathor à "
-"Dendera’, Bulletin de l’Institut Français d’Archéologie Orientale 95, 1–10"
-
-#. type: Content of: <ul><li>
 #: ../../skycultures/egyptian_dendera/description.en.utf8:225
 msgid ""
-"Biot, J.-B. (1846), ‘Mémoire sur le zodiaque circulaire de denderah.’, "
-"Mémoires de l’Institutnational de France16(2ème partie), 1–101"
+"Aubourg, E. (1995), ‘La date de conception du zodiaque du temple d’Hathor à "
+"Dendera’, Bulletin de l’Institut Français d’Archéologie Orientale 95, 1–10"
 msgstr ""
-"Biot, J.-B. (1846), ‘Mémoire sur le zodiaque circulaire de denderah.’, "
-"Mémoires de l’Institutnational de France16(2ème partie), 1–101"
+"Aubourg, E. (1995), ‘La date de conception du zodiaque du temple d’Hathor à "
+"Dendera’, Bulletin de l’Institut Français d’Archéologie Orientale 95, 1–10"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/egyptian_dendera/description.en.utf8:226
 msgid ""
-"Hoffmann, Susanne M. (2017), Hipparchs Himmelsglobus, Springer, Wiesbaden/ "
-"New York, Chapter 4.2.2"
+"Biot, J.-B. (1846), ‘Mémoire sur le zodiaque circulaire de denderah.’, "
+"Mémoires de l’Institutnational de France16(2ème partie), 1–101"
 msgstr ""
-"Hoffmann, Susanne M. (2017), Hipparchs Himmelsglobus, Springer, Wiesbaden/ "
-"New York, Chapter 4.2.2"
+"Biot, J.-B. (1846), ‘Mémoire sur le zodiaque circulaire de denderah.’, "
+"Mémoires de l’Institutnational de France16(2ème partie), 1–101"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/egyptian_dendera/description.en.utf8:227
 msgid ""
+"Hoffmann, Susanne M. (2017), Hipparchs Himmelsglobus, Springer, Wiesbaden/ "
+"New York, Chapter 4.2.2"
+msgstr ""
+"Hoffmann, Susanne M. (2017), Hipparchs Himmelsglobus, Springer, Wiesbaden/ "
+"New York, Chapter 4.2.2"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/egyptian_dendera/description.en.utf8:228
+msgid ""
 "Hoffmann, Susanne M. (2022), Preliminary Observations on the Dendera Zodiac "
 "(Egypt), in: Hoffmann and Wolfschmidt (ed.), Astronomy in Culture - Cultures"
 " of Astronomy, Nuncius Hamburgensis, Vol. 57, tredition, Hamburg"
@@ -11558,7 +11560,7 @@ msgstr ""
 " of Astronomy, Nuncius Hamburgensis, Vol. 57, tredition, Hamburg"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:228
+#: ../../skycultures/egyptian_dendera/description.en.utf8:229
 msgid ""
 "Steele, John M. (2018), The development of the Babylonian zodiac: Some "
 "preliminary observations.’, Mediterranean Archaeology and Archaeometry, 18, "
@@ -11569,14 +11571,14 @@ msgstr ""
 "4, 97-105"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:229
+#: ../../skycultures/egyptian_dendera/description.en.utf8:230
 msgid ""
 "<a href=\"https://en.wikipedia.org/wiki/Dendera_zodiac\">wikipedia</a> (some"
 " things wrong)"
 msgstr ""
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:233
+#: ../../skycultures/egyptian_dendera/description.en.utf8:234
 msgid ""
 "This sky culture originates from research. We provide this for free but the "
 "authors of contributions certainly deserve to be cited according to the "
@@ -11584,7 +11586,7 @@ msgid ""
 msgstr ""
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:236
+#: ../../skycultures/egyptian_dendera/description.en.utf8:237
 msgid ""
 "This Greco-Egyptian sky culture was painted and added to Stellarium by:"
 msgstr ""
@@ -11599,36 +11601,27 @@ msgstr "Grieks (Almagest)"
 #. type: Content of: <p>
 #: ../../skycultures/greek_almagest/description.en.utf8:3
 msgid ""
-"This ancient Greek sky culture is based on the Almagest, a compilation of "
-"astronomical knowledge of former astronomers including results from "
-"observations and mathematical astronomy. Pieced together by Claudius "
-"Ptolemy, using older, as well as his own, observations, it was written in "
-"Greek, published in the Second Century and remained the main astronomical "
-"work for the following 1500 years. It was originally written with the title "
-"<i>Mathematike Syntaxis</i>, in Ancient Greek.  The name <i>Almagest</i>, "
-"meaning &ldquo;The Largest [Book]&rdquo;, was developed from Arabian "
-"translations. To create this sky culture we used the English translation by "
-"Toomer (1984), reworked it in some details (e.g. using more literal "
-"translations from Greek instead of Latin terms that are common today) and we"
-" made use of computer readable tables prepared by Ernie Wright."
+"This ancient Greek sky culture is compiled in a book that is today known by "
+"its Arabic title \"Almagest\".  This book was written in Roman time (under "
+"the reign of Roman emperor Hadrian) at Alexandria (Africa) in Greek "
+"language, with dates given in Egyptian month names and years counted after a"
+" Babylonian king, so it is clearly a multi-cultural compendium of knowledge."
+" It is a compilation of astronomical knowledge of former astronomers "
+"including results from observations and mathematical astronomy. Pieced "
+"together by Claudius Ptolemy, using older, as well as his own, observations,"
+" it was written in Greek, published in the Second Century and remained the "
+"main astronomical work for the following 1500 years. It was originally "
+"written with the title <i>Mathematike Syntaxis</i>, in Ancient Greek.  The "
+"name <i>Almagest</i>, meaning &ldquo;The Largest [Book]&rdquo;, was "
+"developed from Arabian translations. To create this sky culture we used the "
+"English translation by Toomer (1984), reworked it in some details (e.g. "
+"using more literal translations from Greek instead of Latin terms that are "
+"common today) and we made use of computer readable tables prepared by Ernie "
+"Wright."
 msgstr ""
-"Deze oude Griekse hemelcultuur is gebaseerd op de Almagest, een compilatie "
-"van astronomische kennis van voormalige astronomen, inclusief resultaten van"
-" waarnemingen en wiskundige astronomie. Samengevoegd door Claudius "
-"Ptolemaeus, gebruikmakend van zowel oudere als zijn eigen waarnemingen, werd"
-" in het Grieks geschreven, gepubliceerd in de tweede eeuw en bleef het het "
-"belangrijkste astronomische werk voor de volgende 1500 jaar.  Het is "
-"oorspronkelijk geschreven met de titel <i>Mathematike Syntaxis</i>, in het "
-"Oudgrieks. De naam <i>Almagest</i>, wat &ldquo;Het grootste [boek]&rdquo;, "
-"betekent, werd ontwikkeld op basis van Arabische vertalingen. Om deze "
-"memelcultuur te creëren, gebruikten we de Engelse vertaling van Toomer "
-"(1984)., herwerkte het in sommige details (bijvoorbeeld door meer "
-"letterlijke vertalingen uit het Grieks te gebruiken in plaats van Latijnse "
-"termen die tegenwoordig gebruikelijk zijn) en we hebben gebruik gemaakt van "
-"computerleesbare tabellen die zijn opgesteld door Ernie Wright."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_almagest/description.en.utf8:17
+#: ../../skycultures/greek_almagest/description.en.utf8:20
 msgid ""
 "The Almagest consists of 13 sections, called books. In the seventh and "
 "eighth book, Ptolemy listed a total of 1022 stars in 48 constellations "
@@ -11656,7 +11649,7 @@ msgstr ""
 "nog zichtbare sterren."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_almagest/description.en.utf8:30
+#: ../../skycultures/greek_almagest/description.en.utf8:33
 msgid ""
 "For the computation of planet positions Ptolemy used a geocentric model "
 "(which is allowed because the observer always stands on Earth) and, thus, "
@@ -11687,12 +11680,12 @@ msgstr ""
 "lengtegraad."
 
 #. type: Content of: <h2>
-#: ../../skycultures/greek_almagest/description.en.utf8:43
+#: ../../skycultures/greek_almagest/description.en.utf8:46
 msgid "How this sky culture was made"
 msgstr "Hoe deze hemelcultuur is gemaakt"
 
 #. type: Content of: outside any tag (error?)
-#: ../../skycultures/greek_almagest/description.en.utf8:47
+#: ../../skycultures/greek_almagest/description.en.utf8:50
 msgid ""
 "Out of more than 1,000 stars, Ptolemy mentions a proper name for only 15.  "
 "The rest are identified by fairly long descriptions such as \"The star on "
@@ -11723,12 +11716,12 @@ msgstr ""
 "boven in het scherm."
 
 #. type: Content of: <h3>
-#: ../../skycultures/greek_almagest/description.en.utf8:61
+#: ../../skycultures/greek_almagest/description.en.utf8:64
 msgid "Constellation lines"
 msgstr "Sterrenbeeldlijnen"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_almagest/description.en.utf8:63
+#: ../../skycultures/greek_almagest/description.en.utf8:66
 msgid ""
 "The process can be described as sketched here with the example of Corvus:"
 msgstr ""
@@ -11736,7 +11729,7 @@ msgstr ""
 "Corvus:"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_almagest/description.en.utf8:66
+#: ../../skycultures/greek_almagest/description.en.utf8:69
 msgid ""
 "In the constellation of Corvus (Raven), &alpha; Crv is the star in the "
 "&quot;head of the raven&quot;. It is connected with the &quot;star in the "
@@ -11755,7 +11748,7 @@ msgstr ""
 " de raaf&quot;, de ster &beta; Crv."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_almagest/description.en.utf8:77
+#: ../../skycultures/greek_almagest/description.en.utf8:80
 msgid ""
 "After identifying the stars based on their coordinates and names, we "
 "reconnected the stars according to the descriptions in the table presented "
@@ -11766,7 +11759,7 @@ msgstr ""
 " gepresenteerd in de <i>Almagest</i>."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_almagest/description.en.utf8:81
+#: ../../skycultures/greek_almagest/description.en.utf8:84
 msgid ""
 "The names of stars and names of deep sky objects rely on the Almagest only, "
 "e.g. Ptolemy uses the name "
@@ -11783,7 +11776,7 @@ msgstr ""
 "omdat het niet opduikt in de Almagest."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_almagest/description.en.utf8:87
+#: ../../skycultures/greek_almagest/description.en.utf8:90
 msgid ""
 "The following table displays the original constellation name in Greek and "
 "its English translation (column 2 and 3) and denotes our uncertainties in "
@@ -11794,64 +11787,64 @@ msgstr ""
 "reconstructie (kolom 6)."
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:93
+#: ../../skycultures/greek_almagest/description.en.utf8:96
 #: ../../skycultures/greek_farnese/description.en.utf8:17
 msgid "<b>Abbreviation</b>"
 msgstr "<b>Afkorting</b>"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:94
+#: ../../skycultures/greek_almagest/description.en.utf8:97
 msgid "<b>Original name</b>"
 msgstr "<b>\tOriginele naam</b>"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:95
+#: ../../skycultures/greek_almagest/description.en.utf8:98
 msgid "<b>Translation</b> (direct)"
 msgstr "<b>Vertaling</b> (direct)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:96
+#: ../../skycultures/greek_almagest/description.en.utf8:99
 msgid "<b>IAU (Latin) name</b>"
 msgstr "<b>IAU (Latijnse) naam</b>"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:97
+#: ../../skycultures/greek_almagest/description.en.utf8:100
 msgid "<b>hints to constellation</b>"
 msgstr "<b>hints naar sterrenbeeld</b>"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:98
+#: ../../skycultures/greek_almagest/description.en.utf8:101
 msgid "<b>freedom of art</b>"
 msgstr "<b>vrijheid van kunst</b>"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:103
+#: ../../skycultures/greek_almagest/description.en.utf8:106
 msgid "Small She-Bear"
 msgstr "Kleine vrouwelijke beer"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:105
-#: ../../skycultures/greek_almagest/description.en.utf8:113
-#: ../../skycultures/greek_almagest/description.en.utf8:425
-#: ../../skycultures/greek_almagest/description.en.utf8:441
-#: ../../skycultures/greek_almagest/description.en.utf8:465
+#: ../../skycultures/greek_almagest/description.en.utf8:108
+#: ../../skycultures/greek_almagest/description.en.utf8:116
+#: ../../skycultures/greek_almagest/description.en.utf8:428
+#: ../../skycultures/greek_almagest/description.en.utf8:444
+#: ../../skycultures/greek_almagest/description.en.utf8:468
 msgid "like IAU constellation"
 msgstr "zoals het IAU sterrenbeeld"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:111
+#: ../../skycultures/greek_almagest/description.en.utf8:114
 #: ../../skycultures/greek_farnese/description.en.utf8:31
 msgid "Great She-Bear"
 msgstr "Grote vrouwelijke beer"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:119
+#: ../../skycultures/greek_almagest/description.en.utf8:122
 #: ../../skycultures/greek_farnese/description.en.utf8:37
 msgid "Dragon"
 msgstr "Dragon"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:121
+#: ../../skycultures/greek_almagest/description.en.utf8:124
 msgid ""
 "all triangles or squares are vertebra or parts of the body; line at the head"
 " is the tongue"
@@ -11860,18 +11853,18 @@ msgstr ""
 "hoofd is de tong"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:127
+#: ../../skycultures/greek_almagest/description.en.utf8:130
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:35
 msgid "Kepheus"
 msgstr "Kepheus"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:129
+#: ../../skycultures/greek_almagest/description.en.utf8:132
 msgid "king, upside down"
 msgstr "koning, op zijn kop"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:130
+#: ../../skycultures/greek_almagest/description.en.utf8:133
 msgid ""
 "three head stars are tiara; &beta; seen as part of the belt, although "
 "Almagest says beneath belt"
@@ -11880,91 +11873,91 @@ msgstr ""
 "hoewel de Almagest zegt onder de gordel"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:135
+#: ../../skycultures/greek_almagest/description.en.utf8:138
 msgid "Ploughman"
 msgstr "Ploeger"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:137
+#: ../../skycultures/greek_almagest/description.en.utf8:140
 msgid "has a shepherd's staff in his hand (&omega;)"
 msgstr "heeft een herdersstaf in zijn hand (&omega;)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:138
+#: ../../skycultures/greek_almagest/description.en.utf8:141
 msgid "star HIP 72582 added as neck star"
 msgstr "ster HIP 72582 toegevoegd als nekster"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:143
+#: ../../skycultures/greek_almagest/description.en.utf8:146
 msgid "Crown"
 msgstr "Kroon"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:145
+#: ../../skycultures/greek_almagest/description.en.utf8:148
 msgid "like IAU constellation; no details for lines in the text"
 msgstr "zoals het IAU sterrenbeeld; geen details voor de regels in de tekst"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:151
+#: ../../skycultures/greek_almagest/description.en.utf8:154
 #: ../../skycultures/greek_farnese/description.en.utf8:61
 msgid "Kneeler"
 msgstr "Kneeler"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:153
+#: ../../skycultures/greek_almagest/description.en.utf8:156
 msgid "one of the foot stars is top of staff of Bootes"
 msgstr "een van de voet sterren is de top van de staf van de Ossenhoeder"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:154
+#: ../../skycultures/greek_almagest/description.en.utf8:157
 msgid "star HIP 82764 added as neck star"
 msgstr "ster HIP 82764 toegevoegd als nekster"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:159
+#: ../../skycultures/greek_almagest/description.en.utf8:162
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:59
 msgid "Lyre"
 msgstr "Lier"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:167
+#: ../../skycultures/greek_almagest/description.en.utf8:170
 msgid "Bird"
 msgstr "Vogel"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:169
+#: ../../skycultures/greek_almagest/description.en.utf8:172
 msgid "swan with legs"
 msgstr "zwaan met poten"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:170
+#: ../../skycultures/greek_almagest/description.en.utf8:173
 msgid "Tips of wings connected with tail"
 msgstr "Vleugelpunten verbonden met de start"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:175
+#: ../../skycultures/greek_almagest/description.en.utf8:178
 msgid "Kassiepeia"
 msgstr "Kassiepeia"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:177
+#: ../../skycultures/greek_almagest/description.en.utf8:180
 msgid "Queen sitting on a throne"
 msgstr "De koningin zittend op een troon"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:178
+#: ../../skycultures/greek_almagest/description.en.utf8:181
 msgid "to avoid confusion we did not draw the throne"
 msgstr "om confusie te voorkomen hebben we de troon niet getekend"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:183
+#: ../../skycultures/greek_almagest/description.en.utf8:186
 #: ../../skycultures/greek_farnese/description.en.utf8:85
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:77
 msgid "Perseus"
 msgstr "Perseus"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:185
+#: ../../skycultures/greek_almagest/description.en.utf8:188
 msgid ""
 "Double star cluster NGC 869 and NGC 884 as Deep Sky Object - &gt;one of the "
 "stars in the cluster was used for drawing"
@@ -11973,7 +11966,7 @@ msgstr ""
 "sterren in de cluster werd gebruikt om te tekenen"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:186
+#: ../../skycultures/greek_almagest/description.en.utf8:189
 msgid ""
 "one of the stars in Gorgon-head is added to make the head look more "
 "spherical"
@@ -11982,67 +11975,67 @@ msgstr ""
 "bolvormig uit te laten zien"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:191
+#: ../../skycultures/greek_almagest/description.en.utf8:194
 #: ../../skycultures/greek_farnese/description.en.utf8:91
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:83
 msgid "Charioteer"
 msgstr "Charioteer"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:193
+#: ../../skycultures/greek_almagest/description.en.utf8:196
 msgid "wears long garment; garment limited through shoulders and hem"
 msgstr ""
 "draagt een lang kledingstuk; kledingstuk beperkt door schouders en zoom"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:194
+#: ../../skycultures/greek_almagest/description.en.utf8:197
 msgid "o Aur added as neck star; 1 Aur added as hem star"
 msgstr "o Aur toegevoegd als nekster; 1 Aur toegevoegd als zoomster"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:199
+#: ../../skycultures/greek_almagest/description.en.utf8:202
 msgid "Serpent Bearer"
 msgstr "Slangendrager"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:201
+#: ../../skycultures/greek_almagest/description.en.utf8:204
 msgid "has serpent in his hand"
 msgstr "heeft een slang in zijn hand"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:202
+#: ../../skycultures/greek_almagest/description.en.utf8:205
 msgid "a star added as neck star"
 msgstr "een ster toegevoegd als nekster"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:207
+#: ../../skycultures/greek_almagest/description.en.utf8:210
 msgid "Snake"
 msgstr "Slang"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:209
+#: ../../skycultures/greek_almagest/description.en.utf8:212
 msgid "two separate parts of the snake (head and tail); square is head"
 msgstr "twee aparte delen van de slang (kop en staart); vierkant is de kop"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:215
+#: ../../skycultures/greek_almagest/description.en.utf8:218
 #: ../../skycultures/greek_farnese/description.en.utf8:103
 msgid "Arrow"
 msgstr "Pijl"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:217
+#: ../../skycultures/greek_almagest/description.en.utf8:220
 msgid "Like IAU constellation, &eta; Sge is missing"
 msgstr "Zoals het IAU sterrenbeeld, &eta; Sge ontbreekt"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:223
+#: ../../skycultures/greek_almagest/description.en.utf8:226
 #: ../../skycultures/greek_farnese/description.en.utf8:109
 msgid "Eagle"
 msgstr "Adelaar"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:225
+#: ../../skycultures/greek_almagest/description.en.utf8:228
 msgid ""
 "&tau; Aql as head star, &beta; as neck, Altair is between shoulders, &gamma;"
 " and &mu; are shoulders"
@@ -12051,129 +12044,129 @@ msgstr ""
 "&gamma; en &mu; zijn de schouders"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:231
+#: ../../skycultures/greek_almagest/description.en.utf8:234
 #: ../../skycultures/greek_farnese/description.en.utf8:115
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:95
 msgid "Dolphin"
 msgstr "Dolfijn"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:234
+#: ../../skycultures/greek_almagest/description.en.utf8:237
 msgid "refined shape"
 msgstr "verfijnde vorm"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:239
+#: ../../skycultures/greek_almagest/description.en.utf8:242
 #: ../../skycultures/greek_farnese/description.en.utf8:121
 msgid "Bust [of a horse]"
 msgstr "Borst [van een paard]"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:247
+#: ../../skycultures/greek_almagest/description.en.utf8:250
 msgid "Horse"
 msgstr "Paard"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:249
+#: ../../skycultures/greek_almagest/description.en.utf8:252
 msgid "with mane and one wing"
 msgstr "met manen en een vleugel"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:255
+#: ../../skycultures/greek_almagest/description.en.utf8:258
 msgid "Andromeda"
 msgstr "Andromeda"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:257
+#: ../../skycultures/greek_almagest/description.en.utf8:260
 msgid "dress and belt"
 msgstr "jurk en gordel"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:265
+#: ../../skycultures/greek_almagest/description.en.utf8:268
 msgid "four given stars &#61664; middle star of one side"
 msgstr "vier gegeven sterren &#61664; middelste ster aan een kant"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:271
+#: ../../skycultures/greek_almagest/description.en.utf8:274
 #: ../../skycultures/greek_farnese/description.en.utf8:145
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:119
 msgid "Ram"
 msgstr "Ram"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:273
+#: ../../skycultures/greek_almagest/description.en.utf8:276
 msgid "turned head; only one horn"
 msgstr "gedraaide kop; allen een hoorn"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:279
+#: ../../skycultures/greek_almagest/description.en.utf8:282
 #: ../../skycultures/greek_farnese/description.en.utf8:151
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:125
 msgid "Bull"
 msgstr "Stier"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:281
+#: ../../skycultures/greek_almagest/description.en.utf8:284
 msgid "half body, only two legs visible; direction of view to observer"
 msgstr ""
 "half lichaam, alleen twee poten zichtbaar; richting van beeld naar waarnemer"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:287
+#: ../../skycultures/greek_almagest/description.en.utf8:290
 #: ../../skycultures/greek_farnese/description.en.utf8:157
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:137
 msgid "Twins"
 msgstr "Tweelingen"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:289
+#: ../../skycultures/greek_almagest/description.en.utf8:292
 msgid "one star in common; touching each other with hands"
 msgstr "een ster in het algemeen; elkaar met handen aanraken"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:295
+#: ../../skycultures/greek_almagest/description.en.utf8:298
 msgid "Crab"
 msgstr "Krab"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:297
+#: ../../skycultures/greek_almagest/description.en.utf8:300
 msgid "square body"
 msgstr "vierkant lichaam"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:303
+#: ../../skycultures/greek_almagest/description.en.utf8:306
 #: ../../skycultures/greek_farnese/description.en.utf8:169
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:149
 msgid "Lion"
 msgstr "Leeuw"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:305
+#: ../../skycultures/greek_almagest/description.en.utf8:308
 msgid "opens jaw"
 msgstr "opent kaak"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:311
+#: ../../skycultures/greek_almagest/description.en.utf8:314
 msgid "Maiden"
 msgstr "Meisje"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:313
+#: ../../skycultures/greek_almagest/description.en.utf8:316
 msgid "no separate head"
 msgstr "geen aparte kop"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:314
+#: ../../skycultures/greek_almagest/description.en.utf8:317
 msgid "fainter stars added to draw the wings"
 msgstr "zwakkere sterren toegevoegd om de vleugels te tekenen"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:319
+#: ../../skycultures/greek_almagest/description.en.utf8:322
 msgid "Claws [of the Scorpion]"
 msgstr "Klauwen [van de schorpioen]"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:321
+#: ../../skycultures/greek_almagest/description.en.utf8:324
 msgid ""
 "Ptolemy always uses the term &quot;claws&quot;, never &quot;the "
 "balance&quot;."
@@ -12182,29 +12175,29 @@ msgstr ""
 "balans&quot;."
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:327
+#: ../../skycultures/greek_almagest/description.en.utf8:330
 #: ../../skycultures/greek_farnese/description.en.utf8:187
 msgid "Scorpion"
 msgstr "Schorpioen"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:330
+#: ../../skycultures/greek_almagest/description.en.utf8:333
 msgid "arms added around the head: &nu; and &rho;"
 msgstr "armen rond het hoofd toegevoegd: &nu; en &rho;"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:335
+#: ../../skycultures/greek_almagest/description.en.utf8:338
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:174
 msgid "Archer"
 msgstr "Archer"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:337
+#: ../../skycultures/greek_almagest/description.en.utf8:340
 msgid "a centaur with bow ahead; &bdquo;cloak&ldquo; behind"
 msgstr "een centaur met boog vooruit; &bdquo;mantel&ldquo; achter"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:338
+#: ../../skycultures/greek_almagest/description.en.utf8:341
 msgid ""
 "we included many faint stars in our stick figure in order to make the "
 "picture clear."
@@ -12213,32 +12206,32 @@ msgstr ""
 " duidelijker te maken."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:343
+#: ../../skycultures/greek_almagest/description.en.utf8:346
 msgid "The One with the Goat's Horn"
 msgstr "De gene met de geitenhoorn"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:345
+#: ../../skycultures/greek_almagest/description.en.utf8:348
 msgid "fish tail; two legs visible"
 msgstr "vissenstaart; twee poten zichtbaar"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:351
+#: ../../skycultures/greek_almagest/description.en.utf8:354
 msgid "Water-Carrier"
 msgstr "Waterdrager"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:353
+#: ../../skycultures/greek_almagest/description.en.utf8:356
 msgid "water out of jug"
 msgstr "water uit de kan"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:359
+#: ../../skycultures/greek_almagest/description.en.utf8:362
 msgid "[2] Fish"
 msgstr "[2] Vis"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:362
+#: ../../skycultures/greek_almagest/description.en.utf8:365
 msgid ""
 "northern fish: 68(h), 67(k), and 65(i) described as head in Almagest but we "
 "took them as fin because mouth should be at g and &tau; Psc. Additional "
@@ -12249,18 +12242,18 @@ msgstr ""
 "Psc. verder een verandering aan de staartvin: uitgebreid tot &rho;"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:367
+#: ../../skycultures/greek_almagest/description.en.utf8:370
 #: ../../skycultures/greek_farnese/description.en.utf8:217
 msgid "Sea Monster"
 msgstr "Zeemonster"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:370
+#: ../../skycultures/greek_almagest/description.en.utf8:373
 msgid "Body does not go through star &tau;, but through star &upsilon;"
 msgstr "Lichaam gaat niet door de ster &tau;, maar door de ster &upsilon;"
 
 #. type: Content of: <h3>
-#: ../../skycultures/greek_almagest/description.en.utf8:375
+#: ../../skycultures/greek_almagest/description.en.utf8:378
 #: ../../skycultures/greek_farnese/description.en.utf8:223
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:204
 #: ../../skycultures/lokono/description.en.utf8:116
@@ -12269,7 +12262,7 @@ msgid "Orion"
 msgstr "Orion"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:378
+#: ../../skycultures/greek_almagest/description.en.utf8:381
 msgid ""
 "The &quot;head&quot; is labeled as &quot;nebulous&quot; which means Ptolemy "
 "interpreted &phi;<sub>1</sub>, &phi;<sub>2</sub>, and &lambda;, together "
@@ -12287,34 +12280,34 @@ msgstr ""
 "schouders."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:383
+#: ../../skycultures/greek_almagest/description.en.utf8:386
 msgid "River [nameless]"
 msgstr "Rivier [naamloos]"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:385
+#: ../../skycultures/greek_almagest/description.en.utf8:388
 msgid "Like IAU constellation, but shorter"
 msgstr "Zoals het IAU sterrenbeeld maar korter"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:391
+#: ../../skycultures/greek_almagest/description.en.utf8:394
 #: ../../skycultures/greek_farnese/description.en.utf8:235
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:216
 msgid "Hare"
 msgstr "Haas"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:394
+#: ../../skycultures/greek_almagest/description.en.utf8:397
 msgid "took the \"4 stars over the ear\" as ear"
 msgstr "nam de \"4 sterren over het oor\" als oor"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:407
+#: ../../skycultures/greek_almagest/description.en.utf8:410
 msgid "The One before the Dog"
 msgstr "De gene voor de hond"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:410
+#: ../../skycultures/greek_almagest/description.en.utf8:413
 msgid ""
 "In Almagest, the name of the constellation is &quot;The One before the "
 "Dog&quot; or &quot;Harbinger of Sirius&quot; as Toomer puts it. However, "
@@ -12332,19 +12325,19 @@ msgstr ""
 " HIP37634"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:415
+#: ../../skycultures/greek_almagest/description.en.utf8:418
 #: ../../skycultures/greek_farnese/description.en.utf8:253
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:234
 msgid "Ship &quot;Argo&quot;"
 msgstr "Ship &quot;Argo&quot;"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:417
+#: ../../skycultures/greek_almagest/description.en.utf8:420
 msgid "smaller than the sum of the IAU-constellations Pup+Pyx+Car+Vel"
 msgstr "kleiner dan de som van de AIU-sterrenbeelden Pup+Pyx+Car+Vel"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:418
+#: ../../skycultures/greek_almagest/description.en.utf8:421
 msgid ""
 "Many stars not integrated in the constellation, to create a boat-like shape;"
 " in many depictions (including the ancient Farnese globe), only a half of a "
@@ -12355,17 +12348,17 @@ msgstr ""
 "is slechts een half schip geschilderd."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:423
+#: ../../skycultures/greek_almagest/description.en.utf8:426
 msgid "Water Snake"
 msgstr "Waterslang"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:431
+#: ../../skycultures/greek_almagest/description.en.utf8:434
 msgid "Krater (vessel)"
 msgstr "Krater (vaartuig)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:434
+#: ../../skycultures/greek_almagest/description.en.utf8:437
 msgid ""
 "a Krater is special Greek wine mixing vessel which looks like an amphora or "
 "vase: <a "
@@ -12380,19 +12373,19 @@ msgstr ""
 "handvatten (&eta;, &theta; Crt)"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:439
+#: ../../skycultures/greek_almagest/description.en.utf8:442
 msgid "Raven"
 msgstr "Raaf"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:447
+#: ../../skycultures/greek_almagest/description.en.utf8:450
 #: ../../skycultures/greek_farnese/description.en.utf8:265
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:246
 msgid "Kentauros"
 msgstr "Kentauros"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:450
+#: ../../skycultures/greek_almagest/description.en.utf8:453
 msgid ""
 "deviation from description: HIP 65373 instead of &omega; Cen (cluster) taken"
 " as star on the back. &lsquo;Thyrsus&lsquo; not drawn (to avoid confusion), "
@@ -12403,12 +12396,12 @@ msgstr ""
 "confusie te voorkomen), achterwaartse arm toegevoegd."
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:455
+#: ../../skycultures/greek_almagest/description.en.utf8:458
 msgid "Beast"
 msgstr "Beest"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:458
+#: ../../skycultures/greek_almagest/description.en.utf8:461
 msgid ""
 "&beta; described as &lsquo;End of hind leg&lsquo; -> taken as star in the "
 "belly; &tau;<sub>1</sub> as hindleg &Chi; removed from head, because "
@@ -12419,19 +12412,19 @@ msgstr ""
 "kop, omdat anders vormloosheid ontstaat; HIP73493 genomen als voorpoot"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:463
+#: ../../skycultures/greek_almagest/description.en.utf8:466
 #: ../../skycultures/greek_farnese/description.en.utf8:277
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:258
 msgid "Altar"
 msgstr "Altaar"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:471
+#: ../../skycultures/greek_almagest/description.en.utf8:474
 msgid "Southern Crown"
 msgstr "Zuiderkroon"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:473
+#: ../../skycultures/greek_almagest/description.en.utf8:476
 msgid ""
 "like IAU constellation; only uncertainty with stars that only got a BSC "
 "number in the Almagest, because these are not clearly to identify in "
@@ -12442,19 +12435,19 @@ msgstr ""
 "identificeren in Stellarium"
 
 #. type: Content of: <p><table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:479
+#: ../../skycultures/greek_almagest/description.en.utf8:482
 #: ../../skycultures/greek_farnese/description.en.utf8:289
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:270
 msgid "Southern Fish"
 msgstr "Zuidelijke vis"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:481
+#: ../../skycultures/greek_almagest/description.en.utf8:484
 msgid "the fish is laying on his back"
 msgstr "de vis ligt op zijn rug"
 
 #. type: Content of: <table><tr><td>
-#: ../../skycultures/greek_almagest/description.en.utf8:482
+#: ../../skycultures/greek_almagest/description.en.utf8:485
 msgid ""
 "we added a few stars to mark the tail as such (&beta; should be the tip of "
 "the tail but we used it as its root)"
@@ -12464,7 +12457,7 @@ msgstr ""
 "als zijn root)"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/greek_almagest/description.en.utf8:488
+#: ../../skycultures/greek_almagest/description.en.utf8:491
 msgid ""
 "Grasshoff, G.: The History of Ptolemy's Star Catalog, Springer, New York, "
 "1990"
@@ -12473,7 +12466,7 @@ msgstr ""
 "1990"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/greek_almagest/description.en.utf8:489
+#: ../../skycultures/greek_almagest/description.en.utf8:492
 #: ../../skycultures/greek_farnese/description.en.utf8:295
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:284
 msgid ""
@@ -12484,7 +12477,7 @@ msgstr ""
 "Leipzig, 1898"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/greek_almagest/description.en.utf8:490
+#: ../../skycultures/greek_almagest/description.en.utf8:493
 msgid ""
 "Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden / New York, "
 "2017"
@@ -12493,14 +12486,14 @@ msgstr ""
 "2017"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/greek_almagest/description.en.utf8:491
+#: ../../skycultures/greek_almagest/description.en.utf8:494
 #: ../../skycultures/greek_farnese/description.en.utf8:297
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:286
 msgid "Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984"
 msgstr "Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984"
 
 #. type: Content of: <ul><li>
-#: ../../skycultures/greek_almagest/description.en.utf8:492
+#: ../../skycultures/greek_almagest/description.en.utf8:495
 msgid ""
 "Ernie Wright: <a href=\"http://www.etwright.org/astro/almagest.html#cat\" "
 "class='external text' rel=\"nofollow\"> Seeing Ancient Stars, Visualization "
@@ -12511,7 +12504,7 @@ msgstr ""
 "of the Almagest Catalog</a>, 2006"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_almagest/description.en.utf8:497
+#: ../../skycultures/greek_almagest/description.en.utf8:500
 msgid ""
 "This sky culture originates from a student's year of research. We provide "
 "this for free but authors of contributions certainly deserve to be cited "
@@ -12519,12 +12512,12 @@ msgid ""
 msgstr ""
 
 #. type: Content of: <h2>
-#: ../../skycultures/greek_almagest/description.en.utf8:500
+#: ../../skycultures/greek_almagest/description.en.utf8:503
 msgid "Thanks"
 msgstr "Dank"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_almagest/description.en.utf8:501
+#: ../../skycultures/greek_almagest/description.en.utf8:504
 msgid ""
 "The authors thank Patrick Gleason and Georg Zotti for English proofreading "
 "and interesting discussions."
@@ -12533,7 +12526,7 @@ msgstr ""
 " en interessante discussies."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_almagest/description.en.utf8:504
+#: ../../skycultures/greek_almagest/description.en.utf8:507
 msgid ""
 "This sky culture was compiled and added to Stellarium by Alina Schmidt, Lea "
 "Jabschinski, Marie von Seggern and Susanne M. Hoffmann: service@uhura-"
@@ -12544,7 +12537,7 @@ msgstr ""
 "service@uhura-uraniae.com"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_almagest/description.en.utf8:505
+#: ../../skycultures/greek_almagest/description.en.utf8:508
 msgid "Written in English: the authors"
 msgstr "Geschreven in het Engels: de auteurs"
 
@@ -20372,6 +20365,441 @@ msgstr ""
 msgid "Jonas Persson (jonas.persson@physics.org)"
 msgstr "Jonas Persson (jonas.persson@physics.org)"
 
+#. type: Content of: <h2>
+#: ../../skycultures/samoan/description.en.utf8:1
+msgid "Samoan"
+msgstr ""
+
+#. type: Content of: <p>
+#: ../../skycultures/samoan/description.en.utf8:2
+msgid ""
+"Formerly known as the <i>Navigator Islands</i>, the Samoan archipelago has "
+"been the launch site for countless ocean voyages since its settlement 3,000 "
+"years ago by the ancestors of today’s Polynesians.  Like other Pacific "
+"Islander societies, the Samoans possessed an incredible body of astronomical"
+" knowledge, cultivated through generations of scientific observational study"
+" (tofāmamao).  Over time, indigenous wayfinding science has been almost "
+"completely replaced by digital navigation technologies, but the names and "
+"stories attached to some celestial features have persisted through oral "
+"traditions and colonial era publications. Beside their value as nautical "
+"aids, the moon, stars, and planets also marked the lunar months, annual "
+"socioreligious festivals, and the timing of agricultural cycles."
+msgstr ""
+
+#. type: Content of: <h3>
+#: ../../skycultures/samoan/description.en.utf8:8
+msgid "General Terminology"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:10
+msgid "star"
+msgstr "ster"
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:11
+msgid "sun"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:12
+msgid "moon"
+msgstr "maan"
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:13
+msgid "sky"
+msgstr "hemel"
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:14
+msgid "constellation (\"star clusters\")"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:15
+msgid "twinkling"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:16
+msgid "observed halo or reflective ring around star/moon"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:17
+msgid "light emitted by sun/star, reflected by moon"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:18
+msgid "outer space (\"immeasurable space\"/\"expanse\"/\"dark void\")"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:19
+msgid "meteor/shooting star (\"fire star\"/\"flying star\"/\"fire-carrying star\")"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:20
+msgid "comet (\"smoke plume\")"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:21
+msgid "rainbow"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:22
+msgid "starpath/orbit"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:23
+msgid ""
+"endpoint of starpath/orbit (point on the horizon where star/sun/moon/planet "
+"is seen to rise/set from)"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:24
+msgid ""
+"the moment at which a star/moon/planet becomes visible at the horizon "
+"(\"obscured in the sea mist\")"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:25
+msgid "to set (descent of star/moon/sun/planet below the horizon)"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:26
+msgid "to rise (ascent of star/moon/sun /planet above the horizon)"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:27
+msgid ""
+"navigational path formed by a series of constellations/stars rising in "
+"sequence"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:28
+msgid "solar eclipse"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:29
+msgid "lunar eclipse"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:30
+msgid "zenith position"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:31
+msgid "to descend from zenith position toward horizon"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:32
+msgid "spatial division of the sky/horizon"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:33
+msgid "horizon"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:34
+msgid "to catch a fleeting glance of star/moon during cloudy conditions"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:35
+msgid "obstructed view of star/moon"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:36
+msgid "view of sky obstructed by clouds"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:37
+msgid "period of time when star/moon/planet is not visible"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:38
+msgid "clear view of sky"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:39
+msgid "the act of watching the sky for stars/signs"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:40
+msgid "to lay down in the hull to observe the sky above"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:41
+msgid "appearance of star/moon/sun/planet"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:42
+msgid "disappearance of star/moon/sun/planet"
+msgstr ""
+
+#. type: Content of: <h3>
+#: ../../skycultures/samoan/description.en.utf8:45
+msgid "Planet Terminology"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:47
+msgid ""
+"(\"Undying Mystery\") Jupiter; associated with the ritual observance of the "
+"Amo o Ātua iā Tupualēgase (the Ātua chiefdomʻs annual celebration of the "
+"deity Tupualēgase, who is embodied by the planet Jupiter)."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:48
+msgid ""
+"(\"Forbidden Radiance\") Venus; associated with the cannibal demigoddess "
+"Tapuʻitea who self-exiled herself to outer space to spare her son Toʻivā "
+"from her insatiable appetite; Toʻivā (abbreviation of "
+"Toʻivaitotonuoleʻatoatufuga) is also seen in the night sky as an adze-shaped"
+" constellation (Sickle of Leo); Venus is known to pass through Leo once "
+"(sometimes twice)  a year, acknowledging the relationship between mother and"
+" son."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:51
+msgid ""
+"(\"Morning Star\") Venus when seen before sunrise; associated with the "
+"legend of Tapuʻitea."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:52
+msgid "(\"Reddish Face/Surface\") Mars."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:53
+msgid "(\"Brownish\") Mercury."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:54
+msgid "(\"Garland Star\") Saturn."
+msgstr ""
+
+#. type: Content of: <h3>
+#: ../../skycultures/samoan/description.en.utf8:57
+msgid "Star Terminology"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:59
+msgid ""
+"(\"Two Men\") Alpha and Beta Centauri collectively; associated with the "
+"legend of Sumu (Crux, Southern Cross)."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:60
+msgid ""
+"Alpha and Beta Centauri individually (no distinction between the two); "
+"associated with the legend of Sumu (Crux, Southern Cross)."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:61
+msgid ""
+"M4 and M80 within Scorpius (no distinction between the two); associated with"
+" the legend of Toloa (head of Scorpius)."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:62
+msgid ""
+"(\"Gliding Star\") Sirius; considered zenith star for traveling between "
+"Sāmoa and Fiji."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:63
+msgid ""
+"(\"Slow-Moving\") Sirius; considered zenith star for traveling between Sāmoa"
+" and Fiji."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:64
+msgid ""
+"(\"Two Salutations\") refers to Sirius during the part of the year when it "
+"is visible both at sunrise and sunset (thus \"greeted twice\" on the same "
+"day)."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:65
+msgid "(\"Taʻulua Eastward\") Sirius seen at sunrise."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:66
+msgid "(\"Taʻulua Westward\") Sirius seen at sunset."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:67
+msgid "(\"Flying Cloud\") Small Magellanic Cloud."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:68
+msgid "(\"Pale Cloud\") Large Magellanic Cloud."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:69
+msgid "(\"Expanse\") Milky Way."
+msgstr ""
+
+#. type: Content of: <h3>
+#: ../../skycultures/samoan/description.en.utf8:72
+msgid "Constellations and Asterisms"
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:74
+msgid ""
+"(\"Triggerfish\") Crux/Southern Cross; associated with the legend of Filo "
+"and Mea (Alpha and Beta Centauri) fishing for the Sumu."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:75
+msgid ""
+"(\"Fishhook Lure\") the entire hook shaped constellation of Scorpius; "
+"associated with the legend of ʻAloʻalolelā and the magic fishhook (pā)."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:76
+msgid ""
+"(\"Wild Duck\") asterism within Faipā, representing a flying duck (head of "
+"Scorpius); associated with the legend of Suga and Pae (M4 and M80) hunting "
+"the Toloa; the duckʻs head (Antares) is recorded as having been used to sail"
+" from Pukapuka to ʻUpolu when the star was \"low in the sky to the "
+"westward\"."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:78
+msgid ""
+"(\"Pigeon Perch\") asterism within Faipā (distal tail of Scorpius); "
+"associated with the chiefly sport of pigeon snaring."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:79
+msgid ""
+"(\"Face of Liʻi\") Pleiades (grouping of seven stars representing eyes, "
+"ears, nostrils, and mouth of demigod Liʻi); associated with the legend of a "
+"Tanifā (Cetus)  pursuing a canoe paddled by Liʻi; acronychal rising of "
+"Matāliʻi signaled the beginning of the new year (Vāipālolo season) and "
+"ushered in the festivities of the first fruits (Talomua)  during the lunar "
+"months of Taumafamua and Toetaumafa. Note: for display clarity and ease of "
+"use Matāliʻi is assigned to the star Alcyone."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:82
+msgid ""
+"(\"Sea Monster\") Cetus (tail of Cetus is the head of Tanifā), pursuing Liʻi"
+" (Pleiades)."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:83
+msgid "(\"Tongs\") Taurus; associated with the legend of Tiʻitiʻiatalaga/Maui."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:84
+msgid ""
+"(\"Carrying Pole\") constellation stretching from Pi-3 Orionis to Gamma "
+"Monocerotis; associated with the legend of Tiʻitiʻiatalaga; zenith star for "
+"traveling between Sāmoa and Tonga."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:85
+msgid ""
+"(\"Triad of Moons\") asterism within Amoga (three stars of Orionʻs Belt); "
+"associated with legend of Tiʻitiʻiatalaga; noted as the \"star course\" to "
+"sail from Manuʻa to Pukapuka."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:86
+msgid "(\"Warclub\") constellation found largely within Ursa Major."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:87
+msgid ""
+"(\"Kingfisher\") Delphinus; associated with the legend of the tiʻotala "
+"(kingfisher) ambushing the grasshopper (sē)."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:88
+msgid ""
+"(\"Grasshopper\") constellation found within Pegasus; associated with the "
+"legend of the tiʻotala (kingfisher) ambushing the grasshopper (sē)."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:89
+msgid ""
+"(\"Candlenut Torch\") Orionʻs arm/club; associated with the legend of "
+"Tiʻitiʻiatalaga."
+msgstr ""
+
+#. type: Content of: <dl><dd>
+#: ../../skycultures/samoan/description.en.utf8:90
+msgid ""
+"(\"Great Adze\") Sickle of Leo; associated with the legend of Tapuʻitea "
+"(Venus) and her son Toʻivāitotonuoleʻatoatufuga (\"Great Adze Within the "
+"Builderʻs Tool Basket\")."
+msgstr ""
+
+#. type: Content of: <p>
+#: ../../skycultures/samoan/description.en.utf8:120
+msgid ""
+"This sky culture was contributed by Jake Fitisemanu (jjfitisemanu (a^t^) "
+"gmail.com) with consultation of Samoan cultural custodians and published "
+"historical sources. Programming support from Dan Smale"
+msgstr ""
+
 #. type: Content of: <h1>
 #: ../../skycultures/sardinian/description.en.utf8:1
 msgid "Sardinian"
@@ -20393,11 +20821,10 @@ msgstr ""
 #. type: Content of: <ul><li>
 #: ../../skycultures/sardinian/description.en.utf8:6
 msgid ""
-"<a href=\"http://www.sarabu.it/193_521_news_2863.php\">Stars and "
-"constellations in sardinian language</a>"
+"<a "
+"href=\"https://web.archive.org/web/20201029082540/http://www.sarabu.it/193_521_news_2863.php\">Stars"
+" and constellations in sardinian language</a>"
 msgstr ""
-"<a href=\"http://www.sarabu.it/193_521_news_2863.php\">Sterren en "
-"sterrenbeelden in de Sardinische taal</a>"
 
 #. type: Content of: <ul><li>
 #: ../../skycultures/sardinian/description.en.utf8:7

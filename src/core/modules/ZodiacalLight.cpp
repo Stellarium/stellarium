@@ -21,6 +21,8 @@
 #include "ZodiacalLight.hpp"
 #include "SolarSystem.hpp"
 #include "StelFader.hpp"
+// For debugging draw() only:
+//#include "StelObjectMgr.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
 #include "StelFileMgr.hpp"
@@ -184,8 +186,8 @@ void ZodiacalLight::draw(StelCore* core)
 	if ( (drawer->getFlagHasAtmosphere()) && (bortle > 5) ) return;
 
 	float atmFadeIntensity = GETSTELMODULE(LandscapeMgr)->getAtmosphereFadeIntensity();
-    const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
-	float bortleIntensity = 1.f+(15.5f-2*nelm)*atmFadeIntensity; // smoothed Bortle index moderated by atmosphere fader.
+	const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
+	const float bortleIntensity = 1.f+(15.5f-2*nelm)*atmFadeIntensity; // smoothed Bortle index moderated by atmosphere fader.
 
 	// The ZL is best observed from Earth only. On the Moon, we must be happy with ZL along the J2000 ecliptic. (Sorry for LP:1628765, I don't find a general solution.)
 	StelProjector::ModelViewTranformP transfo;
@@ -203,7 +205,7 @@ void ZodiacalLight::draw(StelCore* core)
 	Vec3f c = color;
 
 	// ZL is quite sensitive to light pollution. I scale to make it less visible.
-	float lum = drawer->surfaceBrightnessToLuminance(13.5f + 0.5f*bortleIntensity); // (8.0f + 0.5*bortle);
+	const float lum = drawer->surfaceBrightnessToLuminance(13.5f + 0.5f*bortleIntensity); // (8.0f + 0.5*bortle);
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
@@ -217,9 +219,15 @@ void ZodiacalLight::draw(StelCore* core)
 
 	// Better: adapt brightness by atmospheric brightness
 	const float atmLum = GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
-	if (atmLum>0.05f) return; // 10cd/m^2 at sunset, 3.3 at civil twilight (sun at -6deg). 0.0145 sun at -12, 0.0004 sun at -18,  0.01 at Full Moon!?
-	//qDebug() << "AtmLum: " << atmLum;
-	float atmFactor=20.0f*(0.05f-atmLum);
+	if (atmLum>0.05f) return; // Approximate values for Preetham: 10cd/m^2 at sunset, 3.3 at civil twilight (sun at -6deg). 0.0145 sun at -12, 0.0004 sun at -18,  0.01 at Full Moon!?
+	// The atmLum of Bruneton's model is about 1/2 higher than that of Preetham/Schaefer. We must rebalance that!
+	float atmFactor=20.0f;
+	if (GETSTELMODULE(LandscapeMgr)->getAtmosphereModel()=="showmysky")
+		atmFactor=20.0f*(0.05f-0.2f*atmLum); // The factor 0.2f was found empirically. Nominally it should be 0.667, but 0.2 or at least 0.4 looks better.
+	else
+		atmFactor=20.0f*(0.05f-atmLum);
+
+	//GETSTELMODULE(StelObjectMgr)->addToExtraInfoString(StelObject::DebugAid, QString("ZL AtmFactor: %1<br/>").arg(QString::number(atmFactor, 'f', 4)));
 	Q_ASSERT(atmFactor<=1.0f);
 	Q_ASSERT(atmFactor>=0.0f);
 	c*=atmFactor*atmFactor;

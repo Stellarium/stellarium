@@ -2745,9 +2745,17 @@ float Planet::getVMagnitude(const StelCore* core) const
 					return static_cast<float>(-6.85 + d);
 				if (englishName=="Neptune")
 					return static_cast<float>(-7.05 + d);
-				// Original formulae doesn't have equation for Pluto
+				// Additionals from Explanatory Supplement to the Astronomical Ephemeris, 1961
 				if (englishName=="Pluto")
-					return static_cast<float>(-1.0 + d);
+					return static_cast<float>(-1.01 + d);
+				if (englishName.contains("Ceres", Qt::CaseInsensitive))
+					return static_cast<float>(3.38 + d);
+				if (englishName.contains("Vesta", Qt::CaseInsensitive))
+					return static_cast<float>(3.55 + d);
+				if (englishName.contains("Pallas", Qt::CaseInsensitive))
+					return static_cast<float>(4.51 + d);
+				if (englishName.contains("Juno", Qt::CaseInsensitive))
+					return static_cast<float>(5.58 + d);
 
 				break;
 			}

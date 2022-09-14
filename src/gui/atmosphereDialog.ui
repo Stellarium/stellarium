@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>337</width>
-    <height>491</height>
+    <width>317</width>
+    <height>530</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -142,6 +142,18 @@
       <string>Visual Model</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_5">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
@@ -186,6 +198,18 @@
       <item>
        <widget class="QFrame" name="showMySky_optionsGroup">
         <layout class="QVBoxLayout" name="verticalLayout_2">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QLabel" name="showMySky_statusLabel">
            <property name="text">
@@ -226,7 +250,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="../../data/gui/guiRes.qrc">
                <normaloff>:/graphicGui/uibtFolder.png</normaloff>
                <disabledoff>:/graphicGui/uibtFolder-disabled.png</disabledoff>:/graphicGui/uibtFolder.png</iconset>
              </property>
@@ -515,6 +539,8 @@
   <tabstop>checkBox_TfromK</tabstop>
   <tabstop>doubleSpinBox_T</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections/>
 </ui>

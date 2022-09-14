@@ -83,7 +83,7 @@ AtmospherePreetham::AtmospherePreetham(Skylight& sky)
 	StelPainter::linkProg(atmoShaderProgram, "Preetham atmosphere");
 
 	GL(atmoShaderProgram->bind());
-	GL(shaderAttribLocations.bayerPattern = atmoShaderProgram->uniformLocation("bayerPattern"));
+	GL(shaderAttribLocations.ditherPattern = atmoShaderProgram->uniformLocation("ditherPattern"));
 	GL(shaderAttribLocations.rgbMaxValue = atmoShaderProgram->uniformLocation("rgbMaxValue"));
 	GL(shaderAttribLocations.alphaWaOverAlphaDa = atmoShaderProgram->uniformLocation("alphaWaOverAlphaDa"));
 	GL(shaderAttribLocations.oneOverGamma = atmoShaderProgram->uniformLocation("oneOverGamma"));
@@ -291,7 +291,6 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 	Vec3d point(1., 0., 0.);
 	float lumi=0.f;
 
-	skylightStruct2 skylight;
 	// Compute the sky color for every point above the ground
 	for (unsigned int i=0; i<(1+skyResolutionX)*(1+skyResolutionY); ++i)
 	{
@@ -319,6 +318,7 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 			}
 			else // Experimental: Re-allow CIE/Preetham brightness instead.
 			{
+				skylightStruct2 skylight;
 				skylight.pos[0]=pointF.v[0];
 				skylight.pos[1]=pointF.v[1];
 				skylight.pos[2]=pointF.v[2];
@@ -407,10 +407,10 @@ void AtmospherePreetham::draw(StelCore* core)
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]));
 	auto& gl=*sPainter.glFuncs();
 	gl.glActiveTexture(GL_TEXTURE1);
-	if(!bayerPatternTex)
-		bayerPatternTex=makeBayerPatternTexture(*sPainter.glFuncs());
-	gl.glBindTexture(GL_TEXTURE_2D, bayerPatternTex);
-	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.bayerPattern, 1));
+	if(!ditherPatternTex)
+		ditherPatternTex=makeDitherPatternTexture(*sPainter.glFuncs());
+	gl.glBindTexture(GL_TEXTURE_2D, ditherPatternTex);
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.ditherPattern, 1));
 	
 	GL(colorGridBuffer.bind());
 	GL(atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyColor, GL_FLOAT, 0, 4, 0));

@@ -78,6 +78,9 @@ private slots:
 	//! On tab change, if the Log tab is selected, call refreshLog().
 	void updateLog(int);
 
+	//! On tab change, if the Config tab is selected, call refreshConfig().
+	void updateConfig(int);
+
 	//! Updated text in Help tab.
 	void updateHelpText(void) const;
 
@@ -86,6 +89,9 @@ private slots:
 
 	//! Sync the displayed log.
 	void refreshLog() const;
+
+	//! Sync the displayed config.
+	void refreshConfig() const;
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 

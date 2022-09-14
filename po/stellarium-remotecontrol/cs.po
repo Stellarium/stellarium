@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-06-19 21:37+0700\n"
+"POT-Creation-Date: 2022-09-09 13:37+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
 "Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2022\n"
 "Language-Team: Czech (https://www.transifex.com/stellarium/teams/80998/cs/)\n"
@@ -24,7 +24,7 @@ msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
-msgstr "Nedaří se získat seznam akcí"
+msgstr "Nelze načíst seznam akcí"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
@@ -42,15 +42,15 @@ msgstr "Chyba při hledání"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:125
 msgid "Could not retrieve country list"
-msgstr "Nedaří se získat seznam zemí"
+msgstr "Nelze načíst seznam zemí"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:138
 msgid "Could not retrieve planet list"
-msgstr "Nedaří se získat seznam planet"
+msgstr "Nelze načíst seznam planet"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:28
 msgid "Could not retrieve property list"
-msgstr "Nedaří se získat seznam vlastností"
+msgstr "Nelze načíst seznam vlastností"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:89
 #: plugins/RemoteControl/webroot/js/api/properties.js:110
@@ -67,7 +67,7 @@ msgstr "Chyba při odesílání příkazu na server: "
 
 #: plugins/RemoteControl/webroot/js/api/scripts.js:27
 msgid "Could not retrieve script list"
-msgstr "Nedaří se získat seznam skriptu"
+msgstr "Nelze načíst seznam skriptů"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:35
 msgid "querying"
@@ -100,16 +100,16 @@ msgstr "čeká se"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:38
 msgid "Could not retrieve projection list"
-msgstr "Nedaří se získat seznam projekcí"
+msgstr "Nelze načíst seznam projekcí"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:51
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
 msgid "Could not retrieve landscape list"
-msgstr "Nedaří se získat seznam krajin"
+msgstr "Nelze načíst seznam krajin"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:638
-#: index.html:695 tablet7in.html:733 tablet7in.html:793
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:673
+#: index.html:735 tablet7in.html:733 tablet7in.html:793
 msgid "-none-"
 msgstr "-žádné-"
 
@@ -119,7 +119,7 @@ msgstr "(Právě se načítá: %1)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
-msgstr "Nedaří se získat seznam 3D scenérií"
+msgstr "Nelze načíst seznam 3D scenérií"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
@@ -141,7 +141,7 @@ msgstr "Vstup neodpovídá žádné z položek"
 
 #: plugins/RemoteControl/webroot/js/ui/search.js:285
 msgid "No current selection"
-msgstr "Žádný stávající výběr"
+msgstr "Žádný aktuální výběr"
 
 #: index.html:5 tablet7in.html:5
 msgid "Stellarium remote control plugin"
@@ -302,223 +302,247 @@ msgstr "Pluto"
 
 #: index.html:252 tablet7in.html:294
 msgid "Current selection"
-msgstr "Stávající výběr"
+msgstr "Aktuální výběr"
 
-#: index.html:268 tablet7in.html:321
+#: index.html:269 tablet7in.html:321
 msgid "Milky Way brightness:"
 msgstr "Jas Mléčné dráhy:"
 
-#: index.html:272 tablet7in.html:333
+#: index.html:274 tablet7in.html:333
 msgid "Digitized Sky Survey"
 msgstr "Digitalizovaný průzkum oblohy"
 
-#: index.html:273 tablet7in.html:334
+#: index.html:275 tablet7in.html:334
 msgid "HiPS Survey"
 msgstr "HiPS přehlídka oblohy"
 
-#: index.html:286 tablet7in.html:350
+#: index.html:288 tablet7in.html:350
 msgid "Show planet markers"
 msgstr "Zobrazit značky planet"
 
-#: index.html:287 tablet7in.html:351
+#: index.html:289 tablet7in.html:351
 msgid "Show planet orbits"
 msgstr "Zobrazit oběžné dráhy planet"
 
-#: index.html:288 tablet7in.html:352
+#: index.html:290 tablet7in.html:352
 msgid "Show planet orbits only"
 msgstr "Zobrazit pouze oběžné dráhy planet"
 
-#: index.html:289 tablet7in.html:353
+#: index.html:291 tablet7in.html:353
 msgid "Show orbit for selected planet"
 msgstr "Zobrazit dráhu vybrané planety"
 
-#: index.html:290 tablet7in.html:354
+#: index.html:292 tablet7in.html:354
 msgid "Show planet trails"
 msgstr "Zobrazit stopy planet"
 
-#: index.html:291 tablet7in.html:355
+#: index.html:293 tablet7in.html:355
 msgid "Show trail only for selected planet"
 msgstr "Zobrazit stopu pouze pro vybranou planetu"
 
-#: index.html:294 tablet7in.html:359
+#: index.html:298 tablet7in.html:359
 msgid "Scale Moon:"
 msgstr "Zvětšení Měsíce:"
 
-#: index.html:295 tablet7in.html:363
+#: index.html:299
+msgid "Scale Sun:"
+msgstr "Škála pro Slunce:"
+
+#: index.html:300
+msgid "Scale Planets:"
+msgstr "Škála pro planety:"
+
+#: index.html:301 tablet7in.html:363
 msgid "Scale minor bodies:"
 msgstr "Zvětšení malých těles:"
 
-#: index.html:318 tablet7in.html:404
+#: index.html:326 tablet7in.html:404
 msgid "Extinction Coefficient:"
 msgstr "Extinkční koeficient"
 
-#: index.html:322 tablet7in.html:409
+#: index.html:330 tablet7in.html:409
 msgid "Shooting Stars"
 msgstr "Létavice"
 
-#: index.html:323 tablet7in.html:410
+#: index.html:331 tablet7in.html:410
 msgid "ZHR:"
-msgstr "ZHR:"
+msgstr "ZHF:"
 
-#: index.html:368 tablet7in.html:463
+#: index.html:373 tablet7in.html:463
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
 msgstr ""
-"Momentální kruhy osy země a jejího pohybu okolo eliptických pólů. Zobrazeno "
-"pouze na Zemi."
+"Kružnice zobrazující pohyb zemské osy kolem pólu ekliptiky v daném okamžiku."
+" Zobrazuje se pouze pro Zemi."
 
-#: index.html:378 tablet7in.html:472
+#: index.html:389
+msgid "Center"
+msgstr "Vycentrovat"
+
+#: index.html:407 tablet7in.html:472
 msgid "Solstices"
 msgstr "Slunovraty"
 
-#: index.html:379 tablet7in.html:473
+#: index.html:408 tablet7in.html:473
 msgid "Crossquarters"
-msgstr "Křížové čtvrti"
+msgstr "Půlobratníky"
 
-#: index.html:380 tablet7in.html:474
+#: index.html:409 tablet7in.html:474
 msgid "Major Standstill"
 msgstr "Vysoký lunovrat"
 
-#: index.html:381 tablet7in.html:475
+#: index.html:410 tablet7in.html:475
 msgid "Minor Standstill"
 msgstr "Nízký lunovrat"
 
-#: index.html:390 tablet7in.html:484
+#: index.html:420 tablet7in.html:484
 msgid "Current Planet:"
-msgstr "Stávající planeta:"
+msgstr "Aktuální planeta:"
 
-#: index.html:426 tablet7in.html:524
+#: index.html:458 tablet7in.html:524
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr "Katalog reflexních mlhovin (Van den Bergh, 1966)"
 
-#: index.html:444 tablet7in.html:542
+#: index.html:505 tablet7in.html:542
 msgid ""
 "Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975)"
 msgstr ""
 "Katalog hvězd jižní oblohy vnořených do mlhoviny (van den Bergh+, 1975)"
 
-#: index.html:512
+#: index.html:543
 msgid "Objects without identifier"
 msgstr "Objekty bez označení"
 
-#: index.html:537 tablet7in.html:616
+#: index.html:561
+msgid "Open Star clusters"
+msgstr "Otevřené hvězdokupy"
+
+#: index.html:562
+msgid "Globular Star clusters"
+msgstr "Kulové hvězdokupy"
+
+#: index.html:569 tablet7in.html:616
 msgid "Bright Nebulae"
 msgstr "Jasná mlhovina"
 
-#: index.html:538 tablet7in.html:617
+#: index.html:570 tablet7in.html:617
 msgid "Dark Nebulae"
 msgstr "Temná mlhovina"
 
-#: index.html:539 tablet7in.html:618
+#: index.html:571 tablet7in.html:618
 msgid "Planetary Nebulae"
 msgstr "Planetární mlhovina"
 
-#: index.html:548 tablet7in.html:627
+#: index.html:573
+msgid "Galaxy clusters"
+msgstr ""
+
+#: index.html:581 tablet7in.html:627
 msgid "Labels and markers"
 msgstr "Popisky a značky"
 
-#: index.html:573 tablet7in.html:652
+#: index.html:606 tablet7in.html:652
 msgid "Use associated planet and position"
 msgstr "Použít přidruženou planetu a pozici"
 
-#: index.html:582 tablet7in.html:661
+#: index.html:617 tablet7in.html:661
 msgid "Show illumination"
 msgstr "Zobrazit přisvětlení"
 
-#: index.html:587 tablet7in.html:667
+#: index.html:622 tablet7in.html:667
 msgid "Current landscape"
-msgstr "Stávající krajina"
+msgstr "Aktuální krajina"
 
-#: index.html:599 tablet7in.html:680
+#: index.html:634 tablet7in.html:680
 msgid "Show lines with thickness"
 msgstr "Zobrazit čáry s tloušťkou"
 
-#: index.html:604 tablet7in.html:685
+#: index.html:639 tablet7in.html:685
 msgid "Show asterisms with thickness"
 msgstr "Zobrazit skupinku hvězd s tloušťkou"
 
-#: index.html:608 tablet7in.html:689
+#: index.html:643 tablet7in.html:689
 msgid "Show ray helpers with thickness"
 msgstr "Zobrazit pomocné paprsky s tloušťkou"
 
-#: index.html:616 tablet7in.html:699
+#: index.html:651 tablet7in.html:699
 msgid "Show boundaries with thickness"
 msgstr "Zobrazit hranice s tloušťkou"
 
-#: index.html:621 tablet7in.html:704
+#: index.html:656 tablet7in.html:704
 msgid "Constellation selection isolated"
 msgstr "Izolovaný výběr souhvězdí"
 
-#: index.html:625 tablet7in.html:708
+#: index.html:660 tablet7in.html:708
 msgid "Current sky culture"
-msgstr "Stávající zvěrokruh"
+msgstr "Aktuální nebeská mytologie"
 
-#: index.html:638 tablet7in.html:733
+#: index.html:673 tablet7in.html:733
 msgid "Active script:"
 msgstr "Aktivní skript:"
 
-#: index.html:639 tablet7in.html:734
+#: index.html:674 tablet7in.html:734
 msgid "Run selected script"
 msgstr "Spustit vybraný skript"
 
-#: index.html:639 tablet7in.html:734
+#: index.html:674 tablet7in.html:734
 msgid "Stop current script"
-msgstr "Zastavit stávající skript"
+msgstr "Zastavit aktuální skript"
 
-#: index.html:644 tablet7in.html:41 tablet7in.html:718
+#: index.html:679 tablet7in.html:41 tablet7in.html:718
 msgid "Actions"
 msgstr "Akce"
 
-#: index.html:648 tablet7in.html:722
+#: index.html:683 tablet7in.html:722
 msgid "Run/toggle action"
 msgstr "Spustit/přepnout akci"
 
-#: index.html:659 tablet7in.html:757
+#: index.html:694 tablet7in.html:757
 msgid "Planet map"
 msgstr "Mapa planet"
 
-#: index.html:660 tablet7in.html:758
+#: index.html:695 tablet7in.html:758
 msgid "Planet map pointer"
 msgstr "Ukazatel mapy planet"
 
-#: index.html:664 tablet7in.html:762
+#: index.html:699 tablet7in.html:762
 msgid "Type to search location"
 msgstr "Psaním vyhledejte umístění"
 
-#: index.html:693 tablet7in.html:791
+#: index.html:733 tablet7in.html:791
 msgid "Interaction"
 msgstr "Interakce"
 
-#: index.html:694 tablet7in.html:792
+#: index.html:734 tablet7in.html:792
 msgid "Current scene:"
-msgstr "Stávající scéna:"
+msgstr "Aktuální scéna:"
 
-#: index.html:697 tablet7in.html:795
+#: index.html:737 tablet7in.html:795
 msgid "View controls"
 msgstr "Zobrazit ovládací prvky"
 
-#: index.html:703 tablet7in.html:801
+#: index.html:743 tablet7in.html:801
 msgid "Movement controls"
 msgstr "Ovládací prvky pohybu"
 
-#: index.html:715 tablet7in.html:813
+#: index.html:755 tablet7in.html:813
 msgid "Torchlight"
 msgstr "Svítilna"
 
-#: index.html:722 tablet7in.html:820
+#: index.html:762 tablet7in.html:820
 msgid "Scene selection"
 msgstr "Výběr scény"
 
-#: index.html:726 tablet7in.html:824
+#: index.html:766 tablet7in.html:824
 msgid "Load selected scene"
 msgstr "Načíst vybranou scénu"
 
-#: index.html:750 tablet7in.html:849
+#: index.html:790 tablet7in.html:849
 msgid "No response from server"
 msgstr "Server neodpovídá"
 
-#: index.html:751 tablet7in.html:850
+#: index.html:791 tablet7in.html:850
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "Už %s sekund nebyla obdržena žádná odpověď od serveru. Je Stellarium pořád "

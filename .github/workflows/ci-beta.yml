@@ -23,7 +23,7 @@ jobs:
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
         sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
-        sudo apt install -y qt6-base-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev libqt6charts6 libqt6core5compat6-dev libqt6core5compat6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev libgps-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
+        sudo apt install -y qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev libqt6charts6 libqt6core5compat6-dev libqt6core5compat6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev libgps-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
 
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -31,7 +31,7 @@ jobs:
     - name: Configure CMake
       shell: bash
       run: |
-        wget https://github.com/10110111/CalcMySky/releases/download/v0.0.5/CalcMySky-v0.0.5-linux-amd64-qt6.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
+        wget https://github.com/10110111/CalcMySky/releases/download/v0.0.6/CalcMySky-v0.0.6-linux-amd64-qt6.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
         tar xf "${{ github.workspace }}/../CalcMySky.tar.xz" -C "${{ github.workspace }}/.."
         mv "${{ github.workspace }}/../CalcMySky"{-*,}
         mkdir -p build
@@ -67,7 +67,7 @@ jobs:
       shell: bash
       run: |
         export PATH="/usr/local/opt/qt@6/bin:$PATH"
-        wget https://github.com/10110111/CalcMySky/releases/download/v0.0.5/CalcMySky-v0.0.5-macos-amd64-qt6.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
+        wget https://github.com/10110111/CalcMySky/releases/download/v0.0.6/CalcMySky-v0.0.6-macos-amd64-qt6.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
         tar xf "${{ github.workspace }}/../CalcMySky.tar.xz" -C "${{ github.workspace }}/.."
         mv "${{ github.workspace }}/../CalcMySky"{-*,}
         mkdir -p build

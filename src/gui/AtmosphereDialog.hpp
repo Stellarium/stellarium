@@ -47,7 +47,7 @@ private:
 	void onModelChoiceChanged(const QString& model);
 	void onPathToModelEditingFinished();
 	void onPathToModelChanged();
-    void updatePathToModelStyle();
+	void updatePathToModelStyle();
 	void onErrorStateChanged(bool error);
 	void browsePathToModel();
 	void setCurrentValues();
