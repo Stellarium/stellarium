@@ -153,7 +153,9 @@ private slots:
 #ifdef ENABLE_GPS
 	void changeLocationFromGPSQuery(const StelLocation& loc);
 	void gpsQueryError(const QString& err);
+	#ifdef Q_OS_WIN
 	void positionUpdated(QGeoPositionInfo gpsPos);
+	#endif
 #endif
 private:
 	void loadRegions();
