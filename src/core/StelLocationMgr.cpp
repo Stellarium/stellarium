@@ -413,7 +413,11 @@ void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 
 void NMEALookupHelper::nmeaError(QGeoPositionInfoSource::Error error)
 {
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	emit queryError(QString("NMEA general error: %1").arg(QVariant::fromValue(error).toString()));
+#else
+	emit queryError(QString("NMEA general error: %1").arg(error));
+#endif
 }
 #if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 void NMEALookupHelper::nmeaTimeout()
