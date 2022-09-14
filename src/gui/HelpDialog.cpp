@@ -480,6 +480,7 @@ void HelpDialog::updateAboutText(void) const
 {
 	QStringList allContributors = StelContributors::contributorsList;
 	allContributors.sort();
+	allContributors.removeDuplicates();
 
 	typedef QPair<QString, int> donator;
 	QVector<donator> financialContributors = {
