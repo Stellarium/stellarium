@@ -28,7 +28,7 @@
 
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-set(CURRENT_CPM_VERSION 0.35.5)
+set(CURRENT_CPM_VERSION 0.35.6)
 
 get_filename_component(CPM_CURRENT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}" REALPATH)
 if(CPM_DIRECTORY)
@@ -235,6 +235,9 @@ function(cpm_find_package NAME VERSION)
   string(REPLACE " " ";" EXTRA_ARGS "${ARGN}")
   find_package(${NAME} ${VERSION} ${EXTRA_ARGS} QUIET)
   if(${CPM_ARGS_NAME}_FOUND)
+    if(DEFINED ${CPM_ARGS_NAME}_VERSION)
+      set(VERSION ${${CPM_ARGS_NAME}_VERSION})
+    endif()
     message(STATUS "${CPM_INDENT} using local package ${CPM_ARGS_NAME}@${VERSION}")
     CPMRegisterPackage(${CPM_ARGS_NAME} "${VERSION}")
     set(CPM_PACKAGE_FOUND
@@ -709,7 +712,7 @@ function(CPMAddPackage)
       )
       cpm_get_fetch_properties("${CPM_ARGS_NAME}")
 
-      if(DEFINED CPM_ARGS_GIT_TAG)
+      if(DEFINED CPM_ARGS_GIT_TAG AND NOT (PATCH_COMMAND IN_LIST CPM_ARGS_UNPARSED_ARGUMENTS))
         # warn if cache has been changed since checkout
         cpm_check_git_working_dir_is_clean(${download_directory} ${CPM_ARGS_GIT_TAG} IS_CLEAN)
         if(NOT ${IS_CLEAN})
