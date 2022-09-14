@@ -26,21 +26,21 @@ namespace StelContributors {
         "Fabien Chereau", "Georg Zotti", "Alexander V. Wolf", "Matthew Gates", "Bogdan Marinov", 
         "Rob Spearman", "Marcos Cardinot", "Guillaume Chereau", "Florian Schaukowitsch", "Ferdinand Majerech", 
         "Johannes Gajdosik", "Timothy Reaves", "Susanne M Hoffmann", "Tony Furr", "Eleni Maria Stea", 
-        "arya-s", "sunshuwei", "Teresa Huertas", "Diego Marcos", "Johan Meuris", 
+        "Andrei Borza", "sunshuwei", "Teresa Huertas", "Diego Marcos", "Johan Meuris", 
         "J.L.Canales", "Andras Mohari", "Ivan Marti-Vidal", "Ruslan Kabatsayev", "Nicolas Martignoni", 
         "Michael Storm", "Petr Kubánek", "Holger Nießner", "Worachate Boonplod", "Yuri Chornoivan", 
         "Simon Parzer", "Qam1", "misibacsi", "Barry Gerdes", "Anton Samoylov", 
-        "Adriano Steffler", "Khalid AlAjaji", "Minmin Gong", "alex", "Nick Fedoseev", 
+        "Adriano Steffler", "Khalid AlAjaji", "Minmin Gong", "Alexander Duytschaever", "Nick Fedoseev", 
         "Sibi Antony", "Pluton Helleformer", "Tanmoy Saha", "Alex Gamper", "Alexey Sokolov", 
         "Vladislav Bataron", "Alessandro Siniscalchi", "Elaina", "Kutaibaa Akraa", "Peter Mousley", 
         "ultrapre", "Jörg Müller", "Vishvas Vasuki विश्वासः", "Wolfgang Laun", "Atque", 
         "Peter Vasey", "Rumen Bogdanovski", "Andy Kirkham", "Dan Smale", "henrysky", 
         "FreewareTips", "RVS", "Wolfgang Laun", "Allan Johnson", "Emmanuel", 
         "Greg Alexander", "Michal Sojka", "Peter Walser", "William Formyduval", "Giuseppe Putzolu", 
-        "GunChleoc", "Paolo Cancedda (Pac)", "Pawel Stolowski", "Ralph Schäfermeier", "Teemu Nätkinniemi", 
+        "Fòram na Gàidhlig", "Paolo Cancedda (Pac)", "Pawel Stolowski", "Ralph Schäfermeier", "Teemu Nätkinniemi", 
         "Volker Hören", "ChrUnger", "Chris Xiao", "Hleb Valoshka", "Iceflower", 
         "Mircea Lite", "Paul Krizak", "Ray", "Sergej Krivonos", "Shantanu Agarwal", 
-        "Snow Sailor", "colossatr0n", "Martin Bernardi", "miroslavbroz", "uwes-ufo", 
+        "Snow Sailor", "colossatr0n", "Martin Bernardi", "Miroslav Broz", "uwes-ufo", 
         "ysjbserver", "Alexandros Kosiaris", "Alexey Dokuchaev", "Clement Sommelet", "Colin Gaudion", 
         "David Baucum", "EuklidAlexandria", "Felix Z", "Freeman Li", "Hans Lambermont", 
         "Kirill Snezhko", "Konrad Rybka", "Maciej Serylak", "Max Digruber", "Peter Neubauer", 
@@ -59,9 +59,9 @@ namespace StelContributors {
         "Roland Bosa", "Sam Lanning", "Sebastian Jennen", "SilverAstro", "Song Li", 
         "Sripath Roy Koganti", "Sveinn í Felli", "Thomas1664", "Tig la Pomme", "Tomasz Buchert", 
         "TotalCaesar659", "Tuomas Teipainen", "Tēvita O. Kaʻili", "Vancho Stojkoski", "Vicente Reyes", 
-        "Wonkyo Choe", "Yury Solomonov", "adalava", "chithihuynh", "espie", 
-        "jess", "leonardcj", "Peter Walser", "rich", "rikardfalkeborn", 
-        "riodoro1", "Ross Mitchell", "Edgar Scholz", "zhu1995zpb", "Łukasz 'sil2100' Zemczak"
+        "Wonkyo Choe", "Yury Solomonov", "adalava", "chithihuynh", "Marc Espie", 
+        "leonardcj", "Peter Walser", "Pavel Klimenko", "rikardfalkeborn", "riodoro1", 
+        "Ross Mitchell", "Edgar Scholz", "zhu1995zpb", "Łukasz 'sil2100' Zemczak"
     };
     
 }
