@@ -309,9 +309,13 @@ NMEALookupHelper::NMEALookupHelper(QObject *parent)
 	{
 		nmea->setDevice(serial);
 		qDebug() << "Query GPS NMEA device at port " << serial->portName();
-		connect(nmea, SIGNAL(error(QGeoPositionInfoSource::Error)), this, SLOT(nmeaError(QGeoPositionInfoSource::Error)));
 		connect(nmea, SIGNAL(positionUpdated(const QGeoPositionInfo)),this,SLOT(nmeaUpdated(const QGeoPositionInfo)));
+		#if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
+		connect(nmea, SIGNAL(errorOccurred(QGeoPositionInfoSource::Error)), this, SLOT(nmeaError(QGeoPositionInfoSource::Error)));
+		#else
+		connect(nmea, SIGNAL(error(QGeoPositionInfoSource::Error)), this, SLOT(nmeaError(QGeoPositionInfoSource::Error)));
 		connect(nmea, SIGNAL(updateTimeout()),this,SLOT(nmeaTimeout()));
+		#endif
 	}
 	else qWarning() << "Cannot open serial port to NMEA device at port " << serial->portName();
 	// This may leave an un-ready object. Must be cleaned-up later.
@@ -409,13 +413,14 @@ void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 
 void NMEALookupHelper::nmeaError(QGeoPositionInfoSource::Error error)
 {
-	emit queryError(QString("NMEA general error: %1").arg(error));
+	emit queryError(QString("NMEA general error: %1").arg(QVariant::fromValue(error).toString()));
 }
-
+#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 void NMEALookupHelper::nmeaTimeout()
 {
 	emit queryError("NMEA timeout");
 }
+#endif
 #endif
 
 StelLocationMgr::StelLocationMgr()
