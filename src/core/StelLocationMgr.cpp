@@ -1053,7 +1053,7 @@ void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &locin)
 		.arg(loc.latitude<0?"S":"N").arg(qRound(abs(loc.latitude)))
 		.arg(loc.longitude<0?"W":"E").arg(qRound(abs(loc.longitude)));
 
-	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.0, 0.0);
+	core->moveObserverTo(loc, 0.0, 0.0);
 	if (nmeaHelper)
 	{
 		if (verbose)
