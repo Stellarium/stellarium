@@ -22,8 +22,8 @@
 #define STELMOVEMENTMGR_HPP
 
 #include "StelModule.hpp"
-#include "StelProjector.hpp"
 #include "StelObjectType.hpp"
+#include "VecMath.hpp"
 #include <QTimeLine>
 #include <QTimer>
 #include <QCursor>
