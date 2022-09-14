@@ -374,7 +374,6 @@ void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 	}
 	if (update.isValid()) // emit queryFinished(loc) with new location
 	{
-		StelCore *core=StelApp::getInstance().getCore();
 		StelLocation loc;
 		loc.longitude=static_cast<float>(coord.longitude());
 		loc.latitude=static_cast<float>(coord.latitude());
