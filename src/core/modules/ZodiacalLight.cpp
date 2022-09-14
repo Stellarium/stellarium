@@ -21,6 +21,8 @@
 #include "ZodiacalLight.hpp"
 #include "SolarSystem.hpp"
 #include "StelFader.hpp"
+// For debugging draw() only:
+//#include "StelObjectMgr.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
 #include "StelFileMgr.hpp"
@@ -217,14 +219,15 @@ void ZodiacalLight::draw(StelCore* core)
 
 	// Better: adapt brightness by atmospheric brightness
 	const float atmLum = GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
-	if (atmLum>0.05f) return; // 10cd/m^2 at sunset, 3.3 at civil twilight (sun at -6deg). 0.0145 sun at -12, 0.0004 sun at -18,  0.01 at Full Moon!?
-	//qDebug() << "AtmLum: " << atmLum;
+	if (atmLum>0.05f) return; // Approximate values for Preetham: 10cd/m^2 at sunset, 3.3 at civil twilight (sun at -6deg). 0.0145 sun at -12, 0.0004 sun at -18,  0.01 at Full Moon!?
+	// The atmLum of Bruneton's model is about 1/2 higher than that of Preetham/Schaefer. We must rebalance that!
 	float atmFactor=20.0f;
 	if (GETSTELMODULE(LandscapeMgr)->getAtmosphereModel()=="showmysky")
-		atmFactor=20.0f*(0.05f-0.4f*atmLum);
+		atmFactor=20.0f*(0.05f-0.2f*atmLum); // The factor 0.2f was found empirically. Nominally it should be 0.667, but 0.2 or at least 0.4 looks better.
 	else
 		atmFactor=20.0f*(0.05f-atmLum);
 
+	//GETSTELMODULE(StelObjectMgr)->addToExtraInfoString(StelObject::DebugAid, QString("ZL AtmFactor: %1<br/>").arg(QString::number(atmFactor, 'f', 4)));
 	Q_ASSERT(atmFactor<=1.0f);
 	Q_ASSERT(atmFactor>=0.0f);
 	c*=atmFactor*atmFactor;
