@@ -61,8 +61,7 @@ namespace StelContributors {
         "TotalCaesar659", "Tuomas Teipainen", "Tēvita O. Kaʻili", "Vancho Stojkoski", "Vicente Reyes", 
         "Wonkyo Choe", "Yury Solomonov", "adalava", "chithihuynh", "espie", 
         "jess", "leonardcj", "Peter Walser", "rich", "rikardfalkeborn", 
-        "riodoro1", "Ross Mitchell", "Edgar Scholz", "Tanmoy Saha", "zhu1995zpb", 
-        "Łukasz 'sil2100' Zemczak"
+        "riodoro1", "Ross Mitchell", "Edgar Scholz", "zhu1995zpb", "Łukasz 'sil2100' Zemczak"
     };
     
 }
