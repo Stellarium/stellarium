@@ -222,14 +222,6 @@ void LibGPSLookupHelper::query()
 	if (verbose)
 		qDebug() << "GPSD location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
 
-	loc.lightPollutionLuminance=StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
-	// Usually you don't leave your time zone with GPS.
-	loc.ianaTimeZone=StelApp::getInstance().getCore()->getCurrentTimeZone();
-	loc.isUserLocation=true;
-	loc.planetName="Earth";
-	loc.name=QString("GPS %1%2 %3%4")
-			.arg(loc.latitude<0?"S":"N").arg(floor(loc.latitude))
-			.arg(loc.longitude<0?"W":"E").arg(floor(loc.longitude));
 	emit queryFinished(loc);
 }
 
@@ -382,25 +374,11 @@ void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 	}
 	if (update.isValid()) // emit queryFinished(loc) with new location
 	{
-		StelCore *core=StelApp::getInstance().getCore();
 		StelLocation loc;
 		loc.longitude=static_cast<float>(coord.longitude());
 		loc.latitude=static_cast<float>(coord.latitude());
 		// 2D fix may have only long/lat, invalid altitude.
 		loc.altitude=( qIsNaN(coord.altitude()) ? 0 : static_cast<int>(floor(coord.altitude())));
-		if (verbose)
-			qDebug() << "Location in progress: Long=" << loc.longitude << " Lat=" << loc.latitude << " Alt" << loc.altitude;
-		loc.lightPollutionLuminance=StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
-		// Usually you don't leave your time zone with GPS.
-		loc.ianaTimeZone=core->getCurrentTimeZone();
-		loc.isUserLocation=true;
-		loc.planetName="Earth";
-		loc.name=QString("GPS %1%2 %3%4")
-				.arg(loc.longitude<0?"W":"E").arg(floor(loc.longitude))
-				.arg(loc.latitude<0?"S":"N").arg(floor(loc.latitude));
-		if (verbose)
-			qDebug() << "New location named " << loc.name;
-
 		emit queryFinished(loc);
 	}
 	else
@@ -1002,13 +980,78 @@ void StelLocationMgr::locationFromGPS(int interval)
 			qDebug() << "nmeaHelper not ready. Something went wrong.";
 		delete nmeaHelper;
 		nmeaHelper=Q_NULLPTR;
+#ifndef Q_OS_WIN
+		emit gpsQueryFinished(false);
+#else
+		if (!positionSource)
+			positionSource = QGeoPositionInfoSource::createDefaultSource(this);
+		if (positionSource)
+		{
+			if (interval)
+			{
+				if (verbose)
+					qDebug() << "Creating new positionSource...";
+				positionSource->setUpdateInterval(interval);
+				connect(positionSource, SIGNAL(positionUpdated(QGeoPositionInfo)), this, SLOT(positionUpdated(QGeoPositionInfo)));
+				positionSource->startUpdates();
+				if (verbose)
+					qDebug() << "Creating new positionSource...done";
+			}
+			else
+			{
+				if (verbose)
+					qDebug() << "Deactivating and deleting gps...";
+				positionSource->stopUpdates();
+				delete positionSource;
+				positionSource=Q_NULLPTR;
+			}
+			emit gpsQueryFinished(true); // signal "successful operation", avoid showing any error in GUI.
+		}
+		else
+		{
+			emit gpsQueryFinished(false);
+		}
+#endif
+	}
+}
+
+void StelLocationMgr::positionUpdated(QGeoPositionInfo info)
+{
+	bool verbose=qApp->property("verbose").toBool();
+	StelLocation loc;
+	if (info.isValid())
+	{
+		loc.longitude = info.coordinate().longitude();
+		loc.latitude = info.coordinate().latitude();
+		double a = info.coordinate().altitude();
+		loc.altitude = qIsNaN(a) ? 0 : qRound(a);
+		changeLocationFromGPSQuery(loc);
+	}
+	else
+	{
+		// something went wrong. However, a dysfunctional positionSource may still exist, better delete it.
+		if (verbose)
+			qDebug() << "gps not ready. Something went wrong.";
+		positionSource->stopUpdates();
+		delete positionSource;
+		positionSource=Q_NULLPTR;
 		emit gpsQueryFinished(false);
 	}
 }
 
-void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &loc)
+void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &locin)
 {
 	bool verbose=qApp->property("verbose").toBool();
+	StelCore *core=StelApp::getInstance().getCore();
+	StelLocation loc=locin;
+	loc.lightPollutionLuminance=StelLocation::DEFAULT_LIGHT_POLLUTION_LUMINANCE;
+	// Usually you don't leave your time zone with GPS.
+	loc.ianaTimeZone=core->getCurrentTimeZone();
+	loc.isUserLocation=true;
+	loc.planetName="Earth";
+	loc.name=QString("GPS %1%2 %3%4")
+		.arg(loc.latitude<0?"S":"N").arg(qRound(abs(loc.latitude)))
+		.arg(loc.longitude<0?"W":"E").arg(qRound(abs(loc.longitude)));
 
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.0, 0.0);
 	if (nmeaHelper)
@@ -1017,7 +1060,11 @@ void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &loc)
 			qDebug() << "Change location from NMEA... successful. NMEAhelper stays active.";
 	}
 	if (verbose)
+	{
+		qDebug() << "Location in progress: Long=" << loc.longitude << " Lat=" << loc.latitude << " Alt" << loc.altitude;
+		qDebug() << "New location named " << loc.name;
 		qDebug() << "queryOK, resetting GUI";
+	}
 	emit gpsQueryFinished(true);
 }
 
