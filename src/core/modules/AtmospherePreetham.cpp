@@ -291,7 +291,6 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 	Vec3d point(1., 0., 0.);
 	float lumi=0.f;
 
-	skylightStruct2 skylight;
 	// Compute the sky color for every point above the ground
 	for (unsigned int i=0; i<(1+skyResolutionX)*(1+skyResolutionY); ++i)
 	{
@@ -319,6 +318,7 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 			}
 			else // Experimental: Re-allow CIE/Preetham brightness instead.
 			{
+				skylightStruct2 skylight;
 				skylight.pos[0]=pointF.v[0];
 				skylight.pos[1]=pointF.v[1];
 				skylight.pos[2]=pointF.v[2];

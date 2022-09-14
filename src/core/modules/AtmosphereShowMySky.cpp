@@ -27,7 +27,6 @@
 #include "StelToneReproducer.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
-#include "StelFileMgr.hpp"
 #include "Dithering.hpp"
 #include "StelTranslator.hpp"
 
@@ -805,7 +804,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 		const auto meanY=meanPixelValue[1];
 		Q_ASSERT(std::isfinite(meanY));
 
-		averageLuminance = meanY;
+		averageLuminance = meanY+0.0001f; // Add (assumed) star background luminance
 	}
 }
 
