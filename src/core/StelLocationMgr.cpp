@@ -1015,6 +1015,7 @@ void StelLocationMgr::locationFromGPS(int interval)
 	}
 }
 
+#ifdef Q_OS_WIN
 void StelLocationMgr::positionUpdated(QGeoPositionInfo info)
 {
 	bool verbose=qApp->property("verbose").toBool();
@@ -1038,6 +1039,7 @@ void StelLocationMgr::positionUpdated(QGeoPositionInfo info)
 		emit gpsQueryFinished(false);
 	}
 }
+#endif
 
 void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &locin)
 {
