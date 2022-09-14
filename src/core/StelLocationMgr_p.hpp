@@ -95,9 +95,11 @@ public slots:
 	virtual void query() Q_DECL_OVERRIDE;
 	virtual void setPeriodicQuery(int interval) Q_DECL_OVERRIDE;
 private slots:
-	void nmeaError(QGeoPositionInfoSource::Error error);
 	void nmeaUpdated(const QGeoPositionInfo &update);
+	void nmeaError(QGeoPositionInfoSource::Error error);
+	#if (QT_VERSION<QT_VERSION_CHECK(6,0,0))
 	void nmeaTimeout();
+	#endif
 private:
 	QSerialPort* serial;
 	QNmeaPositionInfoSource* nmea;
