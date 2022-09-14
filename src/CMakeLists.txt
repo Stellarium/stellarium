@@ -359,6 +359,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/TonemappingDialog.cpp
           gui/SkylightDialog.hpp
           gui/SkylightDialog.cpp
+	  gui/ContributorsList.hpp
      )
 
      ################# compiles .ui files ############

@@ -54,6 +54,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelTranslator.hpp"
+#include "ContributorsList.hpp"
 
 HelpDialog::HelpDialog(QObject* parent)
 	: StelDialog("Help", parent)
@@ -477,34 +478,8 @@ QString HelpDialog::hotkeyTextWrapper(const QString hotkey) const
 
 void HelpDialog::updateAboutText(void) const
 {
-	QStringList contributors({
-		     "Vladislav Bataron", "Barry Gerdes", "Peter Walser", "Michal Sojka",
-		     "Nick Fedoseev", "Clement Sommelet", "Ivan Marti-Vidal", "Nicolas Martignoni",
-		     "Oscar Roig Felius", "M.S. Adityan", "Tomasz Buchert", "Adam Majer",
-		     "Roland Bosa", "Łukasz 'sil2100' Zemczak", "Gábor Péterffy",
-		     "Mircea Lite", "Alexey Dokuchaev", "William Formyduval", "Daniel De Mickey",
-		     "François Scholder", "Anton Samoylov", "Mykyta Sytyi", "Shantanu Agarwal",
-		     "Teemu Nätkinniemi", "Kutaibaa Akraa", "J.L.Canales", "Leonid Froenchenko",
-		     "Peter Mousley", "Greg Alexander", "Yuri Chornoivan", "Daniel Michalik",
-		     "Hleb Valoshka", "Matthias Drochner", "Kenan Dervišević", "Alex Gamper",
-		     "Volker Hören", "Max Digruber", "Dan Smale", "Victor Reijs",
-		     "Tanmoy Saha", "Oleg Ginzburg", "Peter Hickey", "Bernd Kreuss",
-		     "Alexander Miller", "Eleni Maria Stea", "Kirill Snezhko",
-		     "Simon Parzer", "Peter Neubauer", "Andrei Borza", "Allan Johnson",
-		     "Felix Zeltner", "Paolo Cancedda", "Ross Mitchell", "David Baucum",
-		     "Maciej Serylak", "Adriano Steffler", "Sibi Antony", "Tony Furr",
-		     "misibacsi", "Pavel Klimenko", "Rumen G. Bogdanovski", "Colin Gaudion",
-		     "Annette S. Lee", "Vancho Stojkoski", "Robert S. Fuller", "Giuseppe Putzolu",
-		     "henrysky", "Nick Kanel", "Petr Kubánek", "Matwey V. Kornilov",
-		     "Alessandro Siniscalchi", "Ruslan Kabatsayev", "Pawel Stolowski",
-		     "Antoine Jacoutot", "Sebastian Jennen", "Matt Hughes", "Sun Shuwei",
-		     "Alexey Sokolov", "Paul Krizak", "ChrUnger", "Minmin Gong", "Andy Kirkham",
-		     "Michael Dickens",  "Patrick (zero0cool0)", "Martín Bernardi", "Sebastian Garcia",
-		     "Wolfgang Laun", "Alexandros Kosiaris", "Alexander Duytschaever", "Jocelyn Girod",
-		     "Atque", "Worachate Boonplod", "Alexander Belopolsky", "Brian Kloppenborg",
-		     "Andrew Jeddeloh", "Dhia (mk-dhia)", "Ian Smith", "EuklidAlexandria", "adalava",
-		     "sebagr", "Chi Huynh", "uwes-ufo"});
-	contributors.sort();
+	QStringList allContributors = StelContributors::contributorsList;
+	allContributors.sort();
 
 	typedef QPair<QString, int> donator;
 	QVector<donator> financialContributors = {
@@ -574,7 +549,7 @@ void HelpDialog::updateAboutText(void) const
 	newHtml += "<li>" + q_("Continuous Integration: %1").arg(QString("Hans Lambermont")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Tester: %1").arg(QString("Khalid AlAjaji")).toHtmlEscaped() + "</li></ul>";
 	newHtml += "<h3>" + q_("Contributors").toHtmlEscaped() + "</h3>";
-	newHtml += "<p>"  + q_("Several people have made contributions to the project and their work has made Stellarium better (sorted alphabetically): %1.").arg(contributors.join(", ")).toHtmlEscaped() + "</p>";
+	newHtml += "<p>"  + q_("Many individuals have made contributions to the project and their work has made Stellarium better. Alphabetically sorted list of all contributors: %1.").arg(allContributors.join(", ")).toHtmlEscaped() + "</p>";
 	newHtml += "<h3>" + q_("Financial support").toHtmlEscaped() + "</h3>";
 	newHtml += "<p>"  + q_("Many individuals and organizations are supporting the development of Stellarium by donations, and the most generous financial contributors (with donations of $250 or more) are %1.").arg(bestFinancialContributors.join(", ")).toHtmlEscaped();
 	// TRANSLATORS: The text between braces is the text of an HTML link.

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-09-13 20:37+0700\n"
+"POT-Creation-Date: 2022-09-14 16:32+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,7 @@ msgstr ""
 #: src/core/modules/LandscapeMgr.cpp:745
 #: src/core/modules/NomenclatureMgr.cpp:79 src/core/modules/NebulaMgr.cpp:404
 #: src/core/modules/NebulaMgr.cpp:405 src/core/modules/SolarSystem.cpp:297
-#: src/core/modules/MilkyWay.cpp:85 src/core/modules/ZodiacalLight.cpp:87
+#: src/core/modules/MilkyWay.cpp:87 src/core/modules/ZodiacalLight.cpp:89
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
 #: src/core/StelApp.cpp:648 src/core/StelCore.cpp:269
 #: src/core/StelSkyLayerMgr.cpp:85 src/core/StelSkyLayerMgr.cpp:86
@@ -2647,11 +2647,11 @@ msgstr ""
 msgid "Separation"
 msgstr ""
 
-#: src/core/modules/MilkyWay.cpp:86
+#: src/core/modules/MilkyWay.cpp:88
 msgid "Milky Way"
 msgstr ""
 
-#: src/core/modules/ZodiacalLight.cpp:88
+#: src/core/modules/ZodiacalLight.cpp:90
 msgid "Zodiacal Light"
 msgstr ""
 
@@ -4419,7 +4419,7 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1298 src/gui/HelpDialog.cpp:527
+#: src/gui/ConfigurationDialog.cpp:1298 src/gui/HelpDialog.cpp:504
 #: src/scripting/StelScriptMgr.cpp:654
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Oculars/src/gui/OcularDialog.cpp:623
@@ -4725,217 +4725,217 @@ msgstr ""
 msgid "10/10/10 bits"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:193 src/gui/HelpDialog.cpp:205
+#: src/gui/HelpDialog.cpp:194 src/gui/HelpDialog.cpp:206
 msgid "Cannot check updates..."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:224
+#: src/gui/HelpDialog.cpp:225
 msgid "Looks like you are using the development version of Stellarium."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:226
+#: src/gui/HelpDialog.cpp:227
 msgid "This is latest stable version of Stellarium."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:228
+#: src/gui/HelpDialog.cpp:229
 msgid "This version of Stellarium is outdated!"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:228
+#: src/gui/HelpDialog.cpp:229
 msgid "Download new version."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:279
+#: src/gui/HelpDialog.cpp:280
 msgid "Stellarium Help"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:284 src/gui/HelpDialog.cpp:289
+#: src/gui/HelpDialog.cpp:285 src/gui/HelpDialog.cpp:290
 msgid "Keys"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:286 src/gui/HelpDialog.cpp:425
+#: src/gui/HelpDialog.cpp:287 src/gui/HelpDialog.cpp:426
 msgid "Further Reading"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:293
+#: src/gui/HelpDialog.cpp:294
 msgid "Pan view around the sky"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:294
+#: src/gui/HelpDialog.cpp:295
 msgid "Arrow keys & left mouse drag"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:296
+#: src/gui/HelpDialog.cpp:297
 msgid "Zoom in/out"
 msgstr ""
 
 #. TRANSLATORS: The char mean "and"
-#: src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:304
 msgid "&"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:305
+#: src/gui/HelpDialog.cpp:306
 msgid "Time dragging"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:306
+#: src/gui/HelpDialog.cpp:307
 msgid "left mouse drag"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:307
+#: src/gui/HelpDialog.cpp:308
 msgid "Time scrolling: minutes"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:308 src/gui/HelpDialog.cpp:311
-#: src/gui/HelpDialog.cpp:313 src/gui/HelpDialog.cpp:315
-#: src/gui/HelpDialog.cpp:317 src/gui/HelpDialog.cpp:319
-#: src/gui/HelpDialog.cpp:321
+#: src/gui/HelpDialog.cpp:309 src/gui/HelpDialog.cpp:312
+#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:318 src/gui/HelpDialog.cpp:320
+#: src/gui/HelpDialog.cpp:322
 msgid "mouse wheel"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:309
+#: src/gui/HelpDialog.cpp:310
 msgid "Time scrolling: hours"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:312 src/gui/HelpDialog.cpp:318
+#: src/gui/HelpDialog.cpp:313 src/gui/HelpDialog.cpp:319
 msgid "Time scrolling: days"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:314 src/gui/HelpDialog.cpp:320
+#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:321
 msgid "Time scrolling: years"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:325
+#: src/gui/HelpDialog.cpp:326
 msgid "Select object"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:327
 msgid "Left click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:329
+#: src/gui/HelpDialog.cpp:330
 msgid "Clear selection"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:331
+#: src/gui/HelpDialog.cpp:332
 msgid "& left click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:333
+#: src/gui/HelpDialog.cpp:334
 msgid "Right click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:336
+#: src/gui/HelpDialog.cpp:337
 msgid "Add custom marker"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:337
+#: src/gui/HelpDialog.cpp:338
 msgid "left click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:339
+#: src/gui/HelpDialog.cpp:340
 msgid "Delete marker closest to mouse cursor"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:340 src/gui/HelpDialog.cpp:344
-#: src/gui/HelpDialog.cpp:346
+#: src/gui/HelpDialog.cpp:341 src/gui/HelpDialog.cpp:345
+#: src/gui/HelpDialog.cpp:347
 msgid "right click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:342
+#: src/gui/HelpDialog.cpp:343
 msgid "Delete all custom markers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:350
+#: src/gui/HelpDialog.cpp:351
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:363
+#: src/gui/HelpDialog.cpp:364
 msgid "Text User Interface (TUI)"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:392
+#: src/gui/HelpDialog.cpp:393
 msgid "Activate TUI"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:398
+#: src/gui/HelpDialog.cpp:399
 msgid "Special local keys"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:399
+#: src/gui/HelpDialog.cpp:400
 msgid ""
 "All these hotkeys are locally available to run when specific window or tab "
 "is opened."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:400 src/ui_scriptConsole.h:380
+#: src/gui/HelpDialog.cpp:401 src/ui_scriptConsole.h:380
 msgid "Script console"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:401 src/ui_scriptConsole.h:383
+#: src/gui/HelpDialog.cpp:402 src/ui_scriptConsole.h:383
 msgid "Load script from file"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:403 src/ui_scriptConsole.h:387
+#: src/gui/HelpDialog.cpp:404 src/ui_scriptConsole.h:387
 msgid "Save script to file"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:405 src/ui_scriptConsole.h:405
+#: src/gui/HelpDialog.cpp:406 src/ui_scriptConsole.h:405
 msgid "Run script"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:407 src/ui_astroCalcDialog.h:2105
+#: src/gui/HelpDialog.cpp:408 src/ui_astroCalcDialog.h:2105
 msgid "Astronomical calculations"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:408 src/ui_astroCalcDialog.h:2159
+#: src/gui/HelpDialog.cpp:409 src/ui_astroCalcDialog.h:2159
 #: src/ui_astroCalcDialog.h:2164
 msgid "Update positions"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:411 src/ui_astroCalcDialog.h:2221
+#: src/gui/HelpDialog.cpp:412 src/ui_astroCalcDialog.h:2221
 msgid "Calculate ephemeris"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:414
+#: src/gui/HelpDialog.cpp:415
 msgid "Calculate RTS"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:416 src/ui_astroCalcDialog.h:2264
+#: src/gui/HelpDialog.cpp:417 src/ui_astroCalcDialog.h:2264
 msgid "Calculate phenomena"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:426
+#: src/gui/HelpDialog.cpp:427
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:430
+#: src/gui/HelpDialog.cpp:431
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:435
+#: src/gui/HelpDialog.cpp:436
 msgid "{The Stellarium Wiki} - general information."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:440
+#: src/gui/HelpDialog.cpp:441
 msgid "{The landscapes} - user-contributed landscapes for Stellarium."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:445
+#: src/gui/HelpDialog.cpp:446
 msgid "{The scripts} - user-contributed and official scripts for Stellarium."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:450
+#: src/gui/HelpDialog.cpp:451
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -4943,80 +4943,80 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:455
+#: src/gui/HelpDialog.cpp:456
 msgid "{Google Groups} - discuss Stellarium with other users."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:460
+#: src/gui/HelpDialog.cpp:461
 msgid "{Open Collective} - donations to the Stellarium development team."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:528
+#: src/gui/HelpDialog.cpp:505
 msgid "Based on Qt"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:549
+#: src/gui/HelpDialog.cpp:526
 msgid "Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:550
+#: src/gui/HelpDialog.cpp:527
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:551 src/gui/HelpDialog.cpp:558
+#: src/gui/HelpDialog.cpp:528 src/gui/HelpDialog.cpp:535
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:552 src/gui/HelpDialog.cpp:553
-#: src/gui/HelpDialog.cpp:554 src/gui/HelpDialog.cpp:560
-#: src/gui/HelpDialog.cpp:561 src/gui/HelpDialog.cpp:562
-#: src/gui/HelpDialog.cpp:563 src/gui/HelpDialog.cpp:564
-#: src/gui/HelpDialog.cpp:565 src/gui/HelpDialog.cpp:566
-#: src/gui/HelpDialog.cpp:567 src/gui/HelpDialog.cpp:568
-#: src/gui/HelpDialog.cpp:569
+#: src/gui/HelpDialog.cpp:529 src/gui/HelpDialog.cpp:530
+#: src/gui/HelpDialog.cpp:531 src/gui/HelpDialog.cpp:537
+#: src/gui/HelpDialog.cpp:538 src/gui/HelpDialog.cpp:539
+#: src/gui/HelpDialog.cpp:540 src/gui/HelpDialog.cpp:541
+#: src/gui/HelpDialog.cpp:542 src/gui/HelpDialog.cpp:543
+#: src/gui/HelpDialog.cpp:544 src/gui/HelpDialog.cpp:545
+#: src/gui/HelpDialog.cpp:546
 #, qt-format
 msgid "Developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:555
+#: src/gui/HelpDialog.cpp:532
 #, qt-format
 msgid "Sky cultures researcher: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:556
+#: src/gui/HelpDialog.cpp:533
 msgid "Former Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:557
+#: src/gui/HelpDialog.cpp:534
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:559
+#: src/gui/HelpDialog.cpp:536
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:570 src/gui/HelpDialog.cpp:571
+#: src/gui/HelpDialog.cpp:547 src/gui/HelpDialog.cpp:548
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:572
+#: src/gui/HelpDialog.cpp:549
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:573
+#: src/gui/HelpDialog.cpp:550
 #, qt-format
 msgid "Tester: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:574
+#: src/gui/HelpDialog.cpp:551
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Oculars/src/gui/OcularDialog.cpp:626
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:785
@@ -5030,18 +5030,18 @@ msgstr ""
 msgid "Contributors"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:575
+#: src/gui/HelpDialog.cpp:552
 #, qt-format
 msgid ""
-"Several people have made contributions to the project and their work has "
-"made Stellarium better (sorted alphabetically): %1."
+"Many individuals have made contributions to the project and their work has "
+"made Stellarium better. Alphabetically sorted list of all contributors: %1."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:576
+#: src/gui/HelpDialog.cpp:553
 msgid "Financial support"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:577
+#: src/gui/HelpDialog.cpp:554
 #, qt-format
 msgid ""
 "Many individuals and organizations are supporting the development of "
@@ -5050,28 +5050,28 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:579
+#: src/gui/HelpDialog.cpp:556
 msgid ""
 "The full list of financial contributors you may see on our {Open Collective "
 "page}."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:580 plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
+#: src/gui/HelpDialog.cpp:557 plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
 msgid "Acknowledgment"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:581
+#: src/gui/HelpDialog.cpp:558
 msgid ""
 "If the Stellarium planetarium was helpful for your research work, the "
 "following acknowledgment would be appreciated:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:582
+#: src/gui/HelpDialog.cpp:559
 msgid "This research has made use of the Stellarium planetarium"
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:585
+#: src/gui/HelpDialog.cpp:562
 msgid ""
 "Or you may {download the BibTeX file of the paper} to create another "
 "citation format."
