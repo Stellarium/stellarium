@@ -190,7 +190,7 @@ public:
 	//! @enum LunarEclipseContactColumns
 	enum LunarEclipseContactColumns {
 		LunarEclipseContact,		//! circumstance of lunar eclipse
-		LunarEclipseContactDate,	//! date and time
+		LunarEclipseContactDate,	//! date and time of circumstance
 		LunarEclipseContactAltitude,	//! altitude of the Moon
 		LunarEclipseContactAzimuth,	//! azimuth of the Moon
 		LunarEclipseContactLatitude,	//! latitude where the Moon appears in the zenith
@@ -214,6 +214,16 @@ public:
 		SolarEclipsePathwidth,	//! pathwidth of total or annular solar eclipse
 		SolarEclipseDuration,		//! central duration of total or annular solar eclipse
 		SolarEclipseCount		//! total number of columns
+	};
+
+	//! Defines the number and the order of the columns in the global solar eclipse contact table
+	//! @enum SolarEclipseContactColumns
+	enum SolarEclipseContactColumns {
+		SolarEclipseContact,		//! circumstance of solar eclipse
+		SolarEclipseContactDate,	//! date and time of circumstance
+		SolarEclipseContactLatitude,	//! latitude at contact time
+		SolarEclipseContactLongitude,	//! longitude at contact time
+		SolarEclipseContactCount	//! total number of columns
 	};
 
 	//! Defines the number and the order of the columns in the local solar eclipse table
@@ -313,7 +323,10 @@ private slots:
 	void generateSolarEclipses();
 	void cleanupSolarEclipses();
 	void selectCurrentSolarEclipse(const QModelIndex &modelIndex);
+	void selectCurrentSolarEclipseDate(const QModelIndex &modelIndex);
+	void selectCurrentSolarEclipseContact(const QModelIndex &modelIndex);
 	void saveSolarEclipses();
+	void saveSolarEclipseCircumstances();
 
 	//! Calculating local solar eclipses to fill the list.
 	//! Algorithm taken from calculating the rises, transits and sets.
@@ -474,6 +487,8 @@ private:
 	void setLunarEclipseContactsHeaderNames();
 	//! update header names for solar eclipse table
 	void setSolarEclipseHeaderNames();
+	//! update header names for solar eclipse contact table
+	void setSolarEclipseContactsHeaderNames();
 	//! update header names for local solar eclipse table
 	void setSolarEclipseLocalHeaderNames();
 	//! update header names for transit table
@@ -497,6 +512,14 @@ private:
 	void initListLunarEclipseContact();
 	//! Init header and list of solar eclipse
 	void initListSolarEclipse();
+	//! Init header and list of solar eclipse contact
+	void initListSolarEclipseContact();
+	//! Iteration to calculate minimum distance from Besselian elements
+	double getJDofMinimumDistance(double JD);
+	//! Iteration to calculate JD of solar eclipse contacts
+	double getJDofContact(double JD, bool beginning, bool penumbral, bool external);
+	//! Iteration to calculate contact times of solar eclipse
+	double getDeltaTofContact(double JD, bool beginning, bool penumbra, bool external);
 	//! Init header and list of local solar eclipse
 	void initListSolarEclipseLocal();
 	//! Init header and list of transit
@@ -585,7 +608,7 @@ private:
 	// Signal that a plot has to be redone
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotLunarElongationGraph, plotAziVsTime;
 	int altVsTimePositiveLimit, monthlyElevationPositiveLimit, graphsDuration, graphsStep;
-	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, lunareclipsecontactsHeader, solareclipseHeader, solareclipselocalHeader, transitHeader;
+	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, hecPositionsHeader, wutHeader, rtsHeader, lunareclipseHeader, lunareclipsecontactsHeader, solareclipseHeader, solareclipsecontactsHeader, solareclipselocalHeader, transitHeader;
 	static double brightLimit;
 	static const QString dash, delimiter;
 
@@ -913,6 +936,37 @@ private:
 			return text(column).toLower() < other.text(column).toLower();
 		}
 	}
+};
+
+class ACSolarEclipseContactsTreeWidgetItem : public QTreeWidgetItem
+{
+public:
+	ACSolarEclipseContactsTreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
+	}
+
+private:
+	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
+	{
+		int column = treeWidget()->sortColumn();
+
+		if (column == AstroCalcDialog::SolarEclipseContactDate)
+		{
+			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
+		}
+		else
+		{
+			return text(column).toLower() < other.text(column).toLower();
+		}
+	}
+};
+
+// Class to compute parameters from Besselian elements
+class BesselParameters
+{
+public:
+	BesselParameters(double &xdot, double &ydot, double &ddot, double &mudot, double &etadot);
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
