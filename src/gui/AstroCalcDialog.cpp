@@ -3310,6 +3310,9 @@ void AstroCalcDialog::setSolarEclipseContactsHeaderNames()
 	solareclipsecontactsHeader << q_("Date and Time");
 	solareclipsecontactsHeader << q_("Latitude");
 	solareclipsecontactsHeader << q_("Longitude");
+	solareclipsecontactsHeader << qc_("Path Width", "column name");
+	solareclipsecontactsHeader << qc_("Central Duration", "column name");
+	solareclipsecontactsHeader << q_("Type");
 	ui->solareclipsecontactsTreeWidget->setHeaderLabels(solareclipsecontactsHeader);
 
 	// adjust the column width
@@ -4014,10 +4017,11 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 {
 	initListSolarEclipseContact();
 	const bool saveTopocentric = core->getUseTopocentricCoordinates();
-	double currentJD = core->getJD();
+	const double currentJD = core->getJD();
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	QPair<QString, QString> coordStrings;
-	QString altitudeStr, azimuthStr, latitudeStr, longitudeStr, JDStr;
+	QString altitudeStr, azimuthStr, latitudeStr, longitudeStr, pathWidthStr, durationStr, eclipseTypeStr;
+	QString km = qc_("km", "distance");
 	double JDMid = modelIndex.sibling(modelIndex.row(), SolarEclipseDate).data(Qt::UserRole).toDouble();
 	double JD = JDMid;
 
@@ -4044,7 +4048,19 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 		if (i==1 && !nonCentralEclipse) // C1
 		{
 			JD = getJDofContact(JDMid,true,false,false);
+			// Workaround to mostly eliminate 0.1 second of fluctuation
+			// that can noticebly move coordinates of shadow.
+			JD = int(JD)+(int((JD-int(JD))*86400.)-1)/86400.;
 			SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+			// Make sure that the shadow axis is really touching Earth,
+			// otherwise path width and duration will be zero.
+			int steps = 0;
+			while (pathWidth<0.0001 && steps<20)
+			{
+				JD += .1/86400.;
+				SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+				steps += 1;
+			}
 			event = true;
 		}
 		else if (i==2) // Greatest Eclipse
@@ -4056,7 +4072,19 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 		else if (i==3 && !nonCentralEclipse) // C2
 		{
 			JD = getJDofContact(JDMid,false,false,false);
+			// Workaround to mostly eliminate 0.1 second of fluctuation
+			// that can noticebly move coordinates of shadow.
+			JD = int(JD)+(int((JD-int(JD))*86400.)+1)/86400.;
 			SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+			// Make sure that the shadow axis is really touching Earth,
+			// otherwise path width and duration will be zero.
+			int steps = 0;
+			while (pathWidth<0.0001 && steps<20)
+			{
+				JD -= .1/86400.;
+				SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+				steps += 1;
+			}
 			event = true;
 		}
 		else if (i==4) // P4
@@ -4096,12 +4124,75 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 			treeItem->setText(SolarEclipseContactLongitude, longitudeStr);
 			treeItem->setData(SolarEclipseContactLongitude, Qt::UserRole, lngDeg);
 			treeItem->setToolTip(SolarEclipseContactLongitude, q_("Geographic longitude of contact point"));
+			switch (i)
+			{
+				case 0:
+				case 4:
+				{
+					pathWidthStr = dash;
+					durationStr = dash;
+					eclipseTypeStr = qc_("Partial", "eclipse type");
+					break;
+				}
+				case 1:
+				case 2:
+				case 3:
+				{
+					if (nonCentralEclipse)
+					{
+						if (abs(gamma) < 0.9972 + abs(L2) && dRatio > 1.)
+						{
+							eclipseTypeStr = qc_("Total", "eclipse type"); // Non-central total eclipse
+						}
+						else if (abs(gamma) < 0.9972 + abs(L2) && dRatio < 1.)
+						{
+							eclipseTypeStr = qc_("Annular", "eclipse type"); // Non-central annular eclipse
+						}
+						else
+						{
+							eclipseTypeStr = qc_("Partial", "eclipse type");
+							
+						}
+						pathWidthStr = dash;
+						durationStr = dash;
+					}
+					else
+					{
+						pathWidthStr = QString("%1 %2").arg(QString::number(round(pathWidth)), km);
+						double centralDuration = abs(duration);
+						int durationMinute = int(centralDuration);
+						int durationSecond = qRound((centralDuration - durationMinute) * 60.);
+						if (durationSecond>59)
+						{
+							durationMinute += 1;
+							durationSecond = 0;
+						}
+						if (durationSecond>9)
+							durationStr = QString("%1m %2s").arg(QString::number(durationMinute), QString::number(durationSecond));
+						else
+							durationStr = QString("%1m 0%2s").arg(QString::number(durationMinute), QString::number(durationSecond));
+						if (duration<=0)
+							eclipseTypeStr = qc_("Total", "eclipse type");
+						else
+							eclipseTypeStr = qc_("Annular", "eclipse type");
+					}
+					break;
+				}
+			}
+			treeItem->setText(SolarEclipseContactPathwidth, pathWidthStr);
+			treeItem->setData(SolarEclipseContactPathwidth, Qt::UserRole, pathWidth);
+			treeItem->setToolTip(SolarEclipseContactPathwidth, q_("Width of the path of totality or annularity"));
+			treeItem->setText(SolarEclipseContactDuration, durationStr);
+			treeItem->setToolTip(SolarEclipseContactDuration, q_("Duration of total or annular phase"));
+			treeItem->setText(SolarEclipseContactType, eclipseTypeStr);
 			treeItem->setTextAlignment(SolarEclipseContact, Qt::AlignLeft);
 			treeItem->setTextAlignment(SolarEclipseContactDate, Qt::AlignRight);
 			treeItem->setTextAlignment(SolarEclipseContactLatitude, Qt::AlignRight);
 			treeItem->setTextAlignment(SolarEclipseContactLongitude, Qt::AlignRight);
+			treeItem->setTextAlignment(SolarEclipseContactPathwidth, Qt::AlignRight);
+			treeItem->setTextAlignment(SolarEclipseContactDuration, Qt::AlignRight);
+			treeItem->setTextAlignment(SolarEclipseContactType, Qt::AlignLeft);
 		}
-		ui->solareclipsecontactsTreeWidget->setColumnHidden(4,true);
 		event = false;
 	}
 	core->setJD(currentJD);
