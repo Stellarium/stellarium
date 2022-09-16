@@ -4151,7 +4151,6 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 						else
 						{
 							eclipseTypeStr = qc_("Partial", "eclipse type");
-							
 						}
 						pathWidthStr = dash;
 						durationStr = dash;
