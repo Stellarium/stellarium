@@ -381,7 +381,7 @@ public slots:
 	//! @param lon the galactic longitude
 	//! @param dec the galactic latitude
 	//! @param duration the duration of the movement in seconds
-	static void moveToGalLongLat(const QString& lon, const QString& lat, float duration);
+	static void moveToGalLongLat(const QString& lon, const QString& lat, float duration=1.);
 
 	//! Set the observer location
 	//! @param longitude the longitude in degrees. E is +ve.

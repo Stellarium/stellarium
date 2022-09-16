@@ -26,6 +26,7 @@
 #include "ConstellationMgr.hpp"
 #include "AsterismMgr.hpp"
 #include "GridLinesMgr.hpp"
+#include "SpecialMarkersMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "SporadicMeteorMgr.hpp"
 #include "NebulaMgr.hpp"
@@ -1045,6 +1046,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		StarMgr* smgr = GETSTELMODULE(StarMgr);
 		NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 		GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
+		SpecialMarkersMgr* spmgr = GETSTELMODULE(SpecialMarkersMgr);
 		StelMovementMgr* movmgr = GETSTELMODULE(StelMovementMgr);
 		ZodiacalLight* zl = GETSTELMODULE(ZodiacalLight);
 		StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
@@ -1064,6 +1066,10 @@ void StelMainScriptAPI::clear(const QString& state)
 		ssmgr->setFlagMinorBodyScale(false);
 		ssmgr->setFlagTrails(false);
 		lmgr->setFlagCardinalPoints(false);
+		spmgr->setFlagCompassMarks(false);
+		spmgr->setFlagFOVCenterMarker(false);
+		spmgr->setFlagFOVCircularMarker(false);
+		spmgr->setFlagFOVRectangularMarker(false);
 		amgr->setFlagLines(false);
 		amgr->setFlagLabels(false);
 		amgr->setFlagRayHelpers(false);
