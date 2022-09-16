@@ -121,9 +121,9 @@ AtmospherePreetham::~AtmospherePreetham(void)
 	atmoShaderProgram = Q_NULLPTR;
 }
 
-void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Planet& currentPlanet, const Planet& sun, const Planet*const moon,
-									  const StelLocation& location, const float temperature, const float relativeHumidity,
-									  const float extinctionCoefficient, const bool noScatter)
+void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Planet& currentPlanet, const Planet& sun,
+				      const Planet*const moon, const StelLocation& location, const float temperature,
+				      const float relativeHumidity, const float extinctionCoefficient, const bool noScatter)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	if (viewport != prj->getViewport())

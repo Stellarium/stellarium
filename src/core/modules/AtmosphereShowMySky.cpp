@@ -576,12 +576,13 @@ void AtmosphereShowMySky::drawAtmosphere(Mat4f const& projectionMatrix, const fl
 	                                     const float lightPollutionGroundLuminance, const float airglowRelativeBrightness,
 	                                     const bool drawAsEclipse, const bool clearTarget)
 {
+	Q_UNUSED(airglowRelativeBrightness)
 	const auto& m = projectionMatrix;
 	auto& settings = *static_cast<SkySettings*>(skySettings_.get());
 	settings.projectionMatrix_ = QMatrix4x4(m[0], m[4], m[8] , m[12],
-											m[1], m[5], m[9] , m[13],
-											m[2], m[6], m[10], m[14],
-											m[3], m[7], m[11], m[15]);
+						m[1], m[5], m[9] , m[13],
+						m[2], m[6], m[10], m[14],
+						m[3], m[7], m[11], m[15]);
 	settings.altitude_=altitude;
 	settings.sunAzimuth_=sunAzimuth;
 	settings.sunZenithAngle_=sunZenithAngle;
@@ -591,7 +592,7 @@ void AtmosphereShowMySky::drawAtmosphere(Mat4f const& projectionMatrix, const fl
 	settings.earthMoonDistance_=earthMoonDistance;
 	settings.lightPollutionGroundLuminance_=lightPollutionGroundLuminance;
 
-    const double brightness = brightness_; // Silence CodeQL's "Multiplication result converted to larger type"
+	const double brightness = brightness_; // Silence CodeQL's "Multiplication result converted to larger type"
 	if(drawAsEclipse)
 	{
 		if(eclipseSimulationQuality_ == EclipseSimulationQuality::AllPrecomputed &&
@@ -695,10 +696,14 @@ Vec4f AtmosphereShowMySky::getMeanPixelValue(int texW, int texH)
 	return pixel;
 }
 
-void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Planet& currentPlanet, const Planet& sun, const Planet*const moon,
-									   const StelLocation& location, const float temperature, const float relativeHumidity,
-									   const float extinctionCoefficient, const bool noScatter)
+void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Planet& currentPlanet, const Planet& sun,
+				       const Planet*const moon, const StelLocation& location, const float temperature,
+				       const float relativeHumidity, const float extinctionCoefficient, const bool noScatter)
 {
+	Q_UNUSED(JD)
+	Q_UNUSED(temperature)
+	Q_UNUSED(relativeHumidity)
+	Q_UNUSED(extinctionCoefficient)
 	initProperties();
 
 	// The majority of calculations is done in fragment shader, but we still need a nontrivial
