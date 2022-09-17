@@ -173,7 +173,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="closeStelWindow">
+       <widget class="StelCloseButton" name="closeStelWindow">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -711,6 +711,11 @@
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>StelCloseButton</class>
+   <extends>QPushButton</extends>
+   <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>
