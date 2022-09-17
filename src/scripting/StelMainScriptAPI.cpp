@@ -785,6 +785,29 @@ void StelMainScriptAPI::output(const QString &s)
 QString StelMainScriptAPI::mapToString(const QVariantMap& map)
 {
 	QString res = QString("[\n");
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	QList<QMetaType::Type> simpleTypeList;
+	simpleTypeList.push_back(QMetaType::Bool);
+	simpleTypeList.push_back(QMetaType::Int);
+	simpleTypeList.push_back(QMetaType::UInt);
+	simpleTypeList.push_back(QMetaType::Double);
+
+	for (auto i = map.constBegin(); i != map.constEnd(); ++i)
+	{
+		if (i.value().typeId()==QMetaType::QString)
+		{
+			res.append(QString("[ \"%1\" = \"%2\" ]\n").arg(i.key(), i.value().toString()));
+		}
+		else if (simpleTypeList.contains(i.value().typeId()))
+		{
+			res.append(QString("[ \"%1\" = %2 ]\n").arg(i.key(), i.value().toString()));
+		}
+		else
+		{
+			res.append(QString("[ \"%1\" = \"<%2>:%3\" ]\n").arg(i.key(), i.value().typeName(), i.value().toString()));
+		}
+	}
+#else
 	QList<QVariant::Type> simpleTypeList;
 	simpleTypeList.push_back(QVariant::Bool);
 	simpleTypeList.push_back(QVariant::Int);
@@ -806,6 +829,7 @@ QString StelMainScriptAPI::mapToString(const QVariantMap& map)
 			res.append(QString("[ \"%1\" = \"<%2>:%3\" ]\n").arg(i.key(), i.value().typeName(), i.value().toString()));
 		}
 	}
+#endif
 	res.append( QString("]\n"));
 	return res;
 }
@@ -1392,7 +1416,7 @@ QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const Q
 
 QString StelMainScriptAPI::getEnv(const QString &var)
 {
-#if QT_VERSION >= 0x050A00
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	return qEnvironmentVariable(var.toLocal8Bit().constData());
 #else
 	return QString::fromLocal8Bit(qgetenv(var.toLocal8Bit().constData()));
