@@ -269,9 +269,6 @@ void HelpDialog::refreshConfig() const
 		ui->configBrowser->setFont(QFont("Courier New"));
 		config.close();
 	}
-
-	QScrollBar *sb = ui->configBrowser->verticalScrollBar();
-	sb->setValue(sb->maximum());
 }
 
 void HelpDialog::updateHelpText(void) const
