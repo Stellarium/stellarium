@@ -116,7 +116,8 @@ public:
 
 	//! Get the width of the button image.
 	//! The width is based on pixOn.
-	int getButtonPixmapWidth() const {return pixOn.width();}
+	int getButtonPixmapWidth() const {return pixOn.width() / GUI_PIXMAPS_SCALE;}
+	int getButtonPixmapHeight() const {return pixOn.height() / GUI_PIXMAPS_SCALE;}
 
 	//! Set the button opacity
 	void setOpacity(double v) {opacity=v; updateIcon();}
@@ -132,6 +133,10 @@ public:
 	//! Configure the button to trigger its action when the mouse click
 	//! is released (by default buttons trigger on press event).
 	void setTriggerOnRelease(bool b) { triggerOnRelease = b;}
+
+	QRectF boundingRect() const override;
+
+	static double getPixmapsDevicePixelRatio() { return GUI_PIXMAPS_SCALE; }
 
 signals:
 	//! Triggered when the button state changes
@@ -153,6 +158,7 @@ protected:
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* event) Q_DECL_OVERRIDE;
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) Q_DECL_OVERRIDE;
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) Q_DECL_OVERRIDE;
+	void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
 private slots:
 	void animValueChanged(qreal value);
 	void updateIcon();
@@ -172,6 +178,7 @@ private:
 	QPixmap pixNoChange;
 	QPixmap pixHover;
 	QPixmap pixBackground;
+	QPixmap scaledCurrentPixmap;
 
 	int checked;
 	bool flagChangeFocus;
@@ -184,6 +191,8 @@ private:
 	double opacity;
 	double hoverOpacity;
 	bool triggerOnRelease = false;
+	// All pixmaps are supposed to be 500% scaled compared to their appearance on the screen when high-DPI scale factor is 100%
+	static constexpr double GUI_PIXMAPS_SCALE = 5;
 };
 
 // The button bar on the left containing windows toggle buttons
