@@ -1,5 +1,5 @@
 
-\chapter{Stellarium's Skylight Model}
+\chapter{Stellarium's Skylight Models}
 \label{ch:skylight}
 \chapterauthor*{Georg Zotti}
 
@@ -14,7 +14,9 @@ Stellarium has used models from the computer graphics literature to
 achieve its goals. For most users, the models seem to work well, but
 more advanced users may want to tweak some of the values.
 
-\section{The Skylight Model}
+\section{The Skylight Models}
+\subsection{Legacy Mode: The Preetham Skylight Model}
+\label{sec:skylight:Preetham}
 
 A well-known fast computer graphics model for daylight has been
 presented by \citet{Preetham:1999}. Its brightness distribution is
@@ -41,7 +43,7 @@ and therefore you must enable this manually by editing \file{config.ini}:
 \end{configfile}
 
 Only with this setting, a button \guibutton[1.0]{0.75}{uibtEdit.png} will be
-available in the View settings, Sky tab.
+available in the View settings, Sky tab (section~\ref{sec:gui:view:sky:atmosphere}).
 
 All settings described here will immediately be stored in \file{config.ini}. 
 
@@ -68,6 +70,60 @@ Some more parameters fine-tune some aspects of rendering of the Solar
 disk and the solar glare. It makes a slight difference whether the
 Sun's disk is plotted before or after the glare, and whether the solar
 sphere is rendered after the atmosphere. 
+
+\subsection{Advanced Mode: The Bruneton Skylight Model}
+\label{sec:skylight:Bruneton}
+
+A much more advanced skylight model has been presented by
+\citet{Bruneton:2008}. An implementation of this has been developed by
+Ruslan Kabatsayev just in time for inclusion in version 1.0. Switching
+between the models is described in
+section~\ref{sec:gui:view:sky:atmosphere}.
+
+It requires graphics hardware which uses OpenGL~3 or better and
+consists of two components.  Atmospheric data (a description of gas
+composition) is processed by an auxiliary program,
+\program{CalcMySky}, which creates a lot of textures and shader
+programs. For final display, a software component (the
+\program{ShowMySky} library) is used and processes these data in
+real-time to compute the final sky colors. This model and its default
+atmosphere data especially can deliver stunning reality of twilight
+colors in a dry atmosphere, and also provides special modes for the
+``circular twilight'' during a Total Solar Eclipse.
+
+\begin{description}
+\item[To choose a dataset] press \guibutton[1.0]{0.75}{uibtFolder.png}
+  near the \emph{Path to data} entry field, and in the dialog that
+  opens, choose the directory with the dataset.  Stellarium comes with
+  a default dataset that's automatically chosen after a fresh
+  installation.  Power users can use
+  \program{CalcMySky}\footnote{\url{https://github.com/10110111/CalcMySky}}
+  to generate other atmospheres. Creating a new dataset requires some
+  understanding of the physics of light scattering.
+\item[Eclipse simulation quality] option lets you configure the
+  balance between realism of skylight simulation during a solar
+  eclipse. The values of this option can be:
+  \begin{description}
+  \item[0] This is the fastest and crudest mode. The atmosphere is
+    simply dimmed to account for the lower amount of direct sunlight.
+  \item[1] This is the first mode that actually tries to simulate an
+    eclipse. It uses precomputed textures, and may look blocky in some
+    cases like e.g.\ very low Sun (and Moon).
+  \item[2] This mode is much slower than the previous one (2.5~FPS on
+    an NVIDIA GeForce GTX~750Ti).  In this mode part of the
+    calculation is done on the fly for the current eclipse phase to
+    improve correctness of the simulation, unlike the previous mode
+    where a texture was used that contains data only for totality,
+    other phases being approximated from this.
+  \item[3] This is the slowest mode (1.1 FPS on NVIDIA GeForce
+    GTX~750Ti), but computation is done on the fly for the whole
+    simulation, which yields best quality.
+  \end{description}
+\end{description}
+
+\noindent A more detailed description of how to create a custom atmosphere will
+be given in a future version of this User Guide.
+
 
 \section{Light Pollution}
 
@@ -107,8 +163,9 @@ settings dialog after pressing \guibutton[1.0]{0.75}{uibtProcess.png}.
 \begin{description}
 \item[Display max luminance] maximal brightness of the used
   screen. This used to be $100 \cdpmQ$ applicable for CRT monitors,
-  but more modern screens can achieve much higher luminances of
-  $250 \cdpmQ$ or more, to be found in the spec sheets.
+  but more modern screens can achieve much higher luminances of $250
+  \cdpmQ$ or more, to be found in the spec sheets. Adjust this value
+  to influence the displayed brightness along the horizon.
 \item[Display adaptation luminance] describes the view environment
   where the screen is set up. For an average office environment,
   $50 \cdpmQ$ seems a usable default. In an outdoor setting, much
@@ -116,11 +173,12 @@ settings dialog after pressing \guibutton[1.0]{0.75}{uibtProcess.png}.
 \item[Display Gamma] describes the exponent of a nonlinear correlation
   between input values and output luminance of the screen. Higher
   values push the average image brightness.
-\item[Use extra Gamma term] The original implementation of tone mapping
-  included a gamma term which did not exactly follow the description
-  from \citet{Larson:1997}, but looks better (more colorful) than the
-  implementation without the gamma term. You can now play with it to
-  find your preferred setting.
+\item[Use extra Gamma term] The original implementation of tone
+  mapping included a gamma term which did not exactly follow the
+  description from \citet{Larson:1997}, but looks better (more
+  colorful) than the implementation without the gamma term. You can
+  now play with it to find your preferred setting. This flag is only
+  used with the Preetham skylight model.
 \item[Use sRGB] The final step of color creation is a transformation
   from CIE Yxy to some display RGB color space. Nowadays most monitors
   can display the sRGB color space, therefore this flag is usually
