@@ -504,6 +504,7 @@ For example, using the option \texttt{-c\ my\_config.ini} would resolve to the f
 -\/-angle-warp       & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\footnotemark[3]\\
 -\/-mesa-mode or -m  & {[}none{]} & Use MESA as software OpenGL rendering engine.\footnotemark[1]\\
 -\/-safe-mode or -s  & {[}none{]} & Synonymous to -\/-mesa-mode.\footnotemark[1]\\
+-\/-single-buffer    & {[}none{]} & Use single-buffering. This reportedly avoids screen blanking problems with some Intel GPUs. \\
 -\/-compat33 or -C   & {[}none{]} & Request OpenGL 3.3 Compatibility Profile. May help for certain driver configurations. Mac?\\
 -\/-fix-text or -t   & {[}none{]} & Alternative way of creating the Info text, required on some systems.\footnote{E.g., Raspberry Pi 2/3 with Raspbian Jessie and VC4 drivers from Mesa 11 (2016).}\\\bottomrule
 \end{longtable}
@@ -577,9 +578,9 @@ problems.
 \item[STEL\_OPTS] may contain a default commandline with options in the syntax of the table above.
 \item[STEL\_USERDIR] may contain the path to a user data directory
   deviating from the default (see section \ref{sec:Directories}).
-\item[QT\_OPENGL] (Windows only). May be one of \texttt{desktop} (native OpenGL for your GPU, recommended),
-  \texttt{angle} or \texttt{software}. The last activates pure software rendering using the MESA OpenGL library.
-\item[QT\_ANGLE\_PLATFORM] (Windows only). May be one of \texttt{d3d9} (DirectX~9) or \texttt{d3d11} (DirectX~11),
+\item[QT\_OPENGL]\footnote{Windows only} May be one of \texttt{desktop} (native OpenGL for your GPU, recommended),
+  \texttt{angle}\footnote{Stellarium 0.* series only} or \texttt{software}. The last activates pure software rendering using the MESA OpenGL library.
+\item[QT\_ANGLE\_PLATFORM]\footnote{Windows and Stellarium 0.* series only} May be one of \texttt{d3d9} (DirectX~9) or \texttt{d3d11} (DirectX~11),
   or \texttt{warp} for another software-only solution.
 \end{description}
 
