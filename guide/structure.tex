@@ -125,7 +125,14 @@
 %% A command to show the version number when a feature was introduced in the margin.
 %% Inside, give ONLY the version number like \newFeature{0.21.2}
 %% TODO Decide on formatting etc.
-\newcommand{\newFeature}[1]{\marginpar{\centering{\small v#1}}}
+%% Starting with the 1.0 release, we suppress marginpar notes of new features for version hints starting with 0. 
+\usepackage{xstring}
+\newcommand{\newFeature}[1]{
+\IfBeginWith{\StelVersion}{0}%
+        {\marginpar{\centering{\small v #1}}}
+        {\IfBeginWith{#1}{0}%
+                {}% Gobble content of 0.x numbers
+                {\marginpar{\centering{\small v #1}}}}}
 
 %% A few units. Add what you need in the same style here.
 \newcommand{\cm}{\ensuremath{\,\mathrm{cm}}}
