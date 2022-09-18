@@ -88,7 +88,7 @@ Ubuntu 22.04 comes with Qt5.15 and Qt6.2. To build with Qt6:
 
 ```
 sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc g++ \
-                 graphviz doxygen gettext git \
+                 graphviz doxygen gettext git libxkbcommon-x11-dev \
                  gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio gstreamer1.0-libav gstreamer1.0-vaapi \
                  qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools linguist-qt6 libqt6svg6-dev \
                  qt6-multimedia-dev libqt6serialport6-dev \
