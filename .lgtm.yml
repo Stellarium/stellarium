@@ -23,7 +23,7 @@ extraction:
       - "libdrm-dev"
     configure:
       command:
-      - wget https://github.com/10110111/CalcMySky/releases/download/v0.0.6/CalcMySky-v0.0.6-linux-amd64-qt5.tar.xz -O CalcMySky.tar.xz
+      - wget https://github.com/10110111/CalcMySky/releases/download/v0.1.0/CalcMySky-v0.1.0-linux-amd64-qt5.tar.xz -O CalcMySky.tar.xz
       - tar xvf CalcMySky.tar.xz
       - mv CalcMySky{-*,}
       - mkdir build && cd build
