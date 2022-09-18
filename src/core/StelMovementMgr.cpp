@@ -1133,6 +1133,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			// For aiming at objects, we can assume simple up vector.
 			move.startUp=getViewUpVectorJ2000();
 			move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.));
+			//move.aimUp=Vec3d(0., 0., 1.);
 			move.aimUpCopy=move.aimUp;
 		}
 		else // no targetObject:
@@ -1141,18 +1142,38 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			move.aimUp=mountFrameToJ2000(Vec3d(0., 0., 1.));
 		}
 		move.coef+=move.speed*static_cast<float>(deltaTime)*1000;
-		setViewUpVectorJ2000(move.aimUp);
+		//setViewUpVectorJ2000(mountFrameToJ2000(move.aimUp)); // Is this the little flicker? --> NO This would show tited view.
+		setViewUpVectorJ2000(move.aimUp); // Is this the little flicker? --> NO This would show tited view.
+		qDebug() << "transitional upVectorMountFrame=" << upVectorMountFrame;
+
 		if (move.coef>=1.f)
 		{
-			//qDebug() << "AutoMove finished. Setting Up vector (in mount frame) to " << upVectorMountFrame.v[0] << "/" << upVectorMountFrame.v[1] << "/" << upVectorMountFrame.v[2];
+			qDebug() << "AutoMove finished. Setting Up vector (in mount frame) to " << upVectorMountFrame.v[0] << "/" << upVectorMountFrame.v[1] << "/" << upVectorMountFrame.v[2];
 			flagAutoMove=false;
 			move.coef=1.f;
 
-			if (qFuzzyCompare(fabs(upVectorMountFrame.v[2]), 1.))
+			qDebug() << "Mount/Pole difference =" << fabs((fabs(viewDirectionMountFrame.v[2]) - 1.));
+			if (fabs((fabs(viewDirectionMountFrame.v[2]) - 1.)) < 0.01 )
 			{
-				//qDebug() << "View towards the pole of the mount frame. This would cause black screen or orientation jitter.";
-				//qDebug() << "Recreating up vector from stored copy." << move.aimUpCopy << " - transformed to " << mountFrameToJ2000(move.aimUpCopy);
-				setViewUpVectorJ2000(mountFrameToJ2000(move.aimUpCopy));
+				qDebug() << "ATTENTION: View towards or near the pole of the mount frame. This would cause black screen or orientation jitter.";
+				qDebug() << "\tviewDirectionMountFrame=" << viewDirectionMountFrame;
+				qDebug() << "\tviewDirectionJ2000=" << viewDirectionJ2000;
+				qDebug() << "\tupVectorMountFrame=" << upVectorMountFrame;
+				qDebug() << "\tmove.aimUpCopy=" << move.aimUpCopy;
+
+				qDebug() << "Recreating up vector from stored copy." << move.aimUpCopy << " - transformed to " << mountFrameToJ2000(move.aimUpCopy);
+				//setViewUpVectorJ2000(mountFrameToJ2000(move.aimUpCopy)); // THIS causes the brief flicker.
+				// OK, this is super annoying. It seems we must indeed check in this place for mountframe and branch another time... REWRITE THIS CLASS!
+				// CURRENT CHANGE:
+				//if (mountMode==StelMovementMgr::MountAltAzimuthal)
+					setViewUpVector(move.aimUpCopy);
+				//else
+				//	setViewUpVectorJ2000(move.aimUpCopy);
+
+				qDebug() << "NEW VECTORS";
+				qDebug() << "\tviewDirectionMountFrame=" << viewDirectionMountFrame;
+				qDebug() << "\tviewDirectionJ2000=" << viewDirectionJ2000;
+				qDebug() << "\tupVectorMountFrame=" << upVectorMountFrame;
 			}
 		}
 
@@ -1257,6 +1278,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 			}
 		}
 	}
+	GETSTELMODULE(StelObjectMgr)->setExtraInfoString(StelObject::DebugAid, QString("upVectorMountFrame: %1<br/>").arg(upVectorMountFrame.toString()));
 }
 
 void StelMovementMgr::deselection(void)
@@ -1381,7 +1403,7 @@ void StelMovementMgr::moveToJ2000(const Vec3d& aim, const Vec3d& aimUp, float mo
 	move.aim=aim;
 	move.aim.normalize();
 	move.aim*=2.;
-	move.aimUp=aimUp; // the new up vector. We cannot simply keep vertical axis, there may be the intention to look into the zenith or so.
+	move.aimUp=aimUp; // the new up vector. We cannot simply keep vertical axis, there may be the intention to look into the pole or so.
 	move.aimUp.normalize();
 	move.aimUpCopy=move.aimUp;
 	move.start=viewDirectionJ2000;	
