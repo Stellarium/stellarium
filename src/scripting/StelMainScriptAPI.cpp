@@ -1281,7 +1281,13 @@ void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float
 	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
 	Vec3d aimUp;
 	if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(dDec)> (0.9*M_PI/2.0)) )
-		aimUp=core->equinoxEquToJ2000(Vec3d(-cos(dRa), -sin(dRa), 0.) * (dDec>0. ? 1. : -1. ), StelCore::RefractionOff);
+	{
+		//qDebug() << "ATTENTION: Aiming into pole!";
+		//qDebug() << "\tdRa=" << dRa << "dDec=" << dDec;
+		aimUp=//core->equinoxEquToJ2000(
+					Vec3d(-cos(dRa), -sin(dRa), 0.) * (dDec>0. ? 1. : -1. ); //, StelCore::RefractionOff);
+		//qDebug() << "\taimUp=" << aimUp;
+	}
 	else
 		aimUp=core->equinoxEquToJ2000(Vec3d(0., 0., 1.), StelCore::RefractionOff);
 
