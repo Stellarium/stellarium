@@ -92,11 +92,11 @@ sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc
                  graphviz doxygen gettext git libxkbcommon-x11-dev libgps-dev \
                  gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio \
                  gstreamer1.0-libav gstreamer1.0-vaapi \
-                 qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev qt6-tools-dev-tools \
-                 qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins qt6-l10n-tools qt6-webengine-dev \
-                 qt6-webengine-dev-tools libqt6charts6-dev libqt6charts6 libqt6core5compat6-dev libqt6core5compat6 \
-                 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev qt6-base-dev \
-                 libqt6webenginecore6-bin libqt6webengine6-data 
+                 qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev \
+                 qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins \
+                 qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev \
+                 libqt6charts6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev \
+                 qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data 
 ```
 
 
