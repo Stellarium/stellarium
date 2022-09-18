@@ -175,7 +175,7 @@ public:
 	void moveToObject(const StelObjectP& target, float moveDuration = 1., ZoomingMode zooming = ZoomNone);
 
 public slots:
-	// UNUSED!
+	// UNUSED, but scriptable
 	//! Toggle current mount mode between equatorial and altazimuthal
 	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquinoxEquatorial); else setMountMode(MountAltAzimuthal);}
 	//! Define whether we should use equatorial mount or altazimuthal
@@ -249,7 +249,7 @@ public slots:
 	//! StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	//! mvmgr->moveToJ2000(pos, mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)), mvmgr->getAutoMoveDuration());
 	//! @endcode
-	//! @note core::moveToRaDecJ2000 provides a simpler signature for the same function.
+	//! @note The scripting function StelMainScriptAPI::moveToRaDecJ2000() (scripting object core.moveToRaDecJ2000()) provides a simpler signature for the same function.
 	//! @note Objects of class Vec3d are 3-dimensional vectors in a rectangular coordinate system. For
 	//!       J2000 positions, the x-axis points to 0h,0°, the y-axis to 6h,0° and the z-axis points to the
 	//!       celestial pole. You may use a constructor defining three components (x,y,z) or the

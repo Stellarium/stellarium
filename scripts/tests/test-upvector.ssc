@@ -9,5 +9,9 @@
 // The mitigation is storing the final UP vector when the move is set up and setting it 
 // explicitly at the end of the move.
 
+// Run these tests by marking single lines!
+
 core.moveToAltAzi(90, 180, 1);
+
+core.moveToRaDec("12h", "90", 2);
 
