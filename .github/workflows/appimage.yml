@@ -46,7 +46,7 @@ jobs:
         cd ${{ github.workspace }}/builds/appimage
         export APP_VERSION="edge"
         export PATH="${{ github.workspace }}/../CalcMySky/bin:${{ github.workspace }}/../CalcMySky/lib:${{ github.workspace }}/../CalcMySky/include:${{ github.workspace }}/../CalcMySky/share:$PATH"
-        appimage-builder --recipe ${{ github.workspace }}/util/appimage/stellarium-appimage-x86_64.yml
+        appimage-builder --recipe ${{ github.workspace }}/util/appimage/stellarium-appimage-x86_64.yml --skip-test
         cp ${{ github.workspace }}/builds/appimage/*.AppImage ${{ github.workspace }}/artifact
 
     - name: Upload AppImage
