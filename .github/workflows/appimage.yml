@@ -1,0 +1,54 @@
+#
+# Build and upload AppImage packages
+#
+name: "AppImage"
+
+on: [push]
+
+jobs:
+  # AppImage x86_64
+  appimage-amd64:
+    name: "x86_64"
+    runs-on: ubuntu-20.04
+    if: "contains(github.event.head_commit.message, '[publish]') || contains(github.ref, 'heads/release')"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Build AppImage
+      working-directory: ${{ github.workspace }}
+      shell: bash
+      run: |
+        # Update installed packages
+        sudo apt remove php7.* -y
+        sudo apt remove php8.* -y
+        sudo apt update
+        # using force-overwrite due to
+        # https://github.com/actions/virtual-environments/issues/2703
+        sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
+        # Installing dependencies
+        sudo apt install -y qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
+        sudo pip3 install appimage-builder
+        sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O /usr/local/bin/appimagetool
+        sudo chmod +x /usr/local/bin/appimagetool
+        # ShowMySky
+        wget https://github.com/10110111/CalcMySky/releases/download/v0.0.6/CalcMySky-v0.0.6-linux-amd64-qt5.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
+        tar xf "${{ github.workspace }}/../CalcMySky.tar.xz" -C "${{ github.workspace }}/.."
+        mv "${{ github.workspace }}/../CalcMySky"{-*,}
+        # Prepare to building
+        mkdir -p ${{ github.workspace }}/artifact
+        mkdir -p ${{ github.workspace }}/builds/appimage
+        cd ${{ github.workspace }}/builds/appimage
+        export APP_VERSION="edge"
+        export SHOWMYSKY="-DCMAKE_PREFIX_PATH=${{ github.workspace }}/../CalcMySky"
+        appimage-builder --recipe ${{ github.workspace }}/util/appimage/stellarium-appimage-x86_64.yml --skip-test
+        cp ${{ github.workspace }}/builds/appimage/*.AppImage ${{ github.workspace }}/artifact
+
+    - name: Upload AppImage
+      uses: actions/upload-artifact@v3
+      if: success()
+      with:
+        name: 'Stellarium-edge-x86_64'
+        path: ${{ github.workspace }}/artifact/*.AppImage
+
