@@ -33,7 +33,7 @@ jobs:
         sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O /usr/local/bin/appimagetool
         sudo chmod +x /usr/local/bin/appimagetool
         # ShowMySky
-        wget https://github.com/10110111/CalcMySky/releases/download/v0.0.6/CalcMySky-v0.0.6-linux-amd64-qt5.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
+        wget https://github.com/10110111/CalcMySky/releases/download/v0.1.0/CalcMySky-v0.1.0-linux-amd64-qt5.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
         tar xf "${{ github.workspace }}/../CalcMySky.tar.xz" -C "${{ github.workspace }}/.."
         mv "${{ github.workspace }}/../CalcMySky"{-*,}
         # Prepare to building
@@ -41,7 +41,7 @@ jobs:
         mkdir -p ${{ github.workspace }}/builds/appimage
         cd ${{ github.workspace }}/builds/appimage
         export APP_VERSION="edge"
-        export SHOWMYSKY="-DCMAKE_PREFIX_PATH=${{ github.workspace }}/../CalcMySky"
+        export PATH="${{ github.workspace }}/../CalcMySky/bin:${{ github.workspace }}/../CalcMySky/lib:${{ github.workspace }}/../CalcMySky/include:${{ github.workspace }}/../CalcMySky/share:$PATH"
         appimage-builder --recipe ${{ github.workspace }}/util/appimage/stellarium-appimage-x86_64.yml --skip-test
         cp ${{ github.workspace }}/builds/appimage/*.AppImage ${{ github.workspace }}/artifact
 
