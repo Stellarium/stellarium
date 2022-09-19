@@ -16,6 +16,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Add ShowMySky library
+      working-directory: ${{ github.workspace }}
+      shell: bash
+      run: |
+        wget https://github.com/10110111/CalcMySky/releases/download/v0.1.0/CalcMySky-v0.1.0-linux-amd64-qt5.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
+        tar xf "${{ github.workspace }}/../CalcMySky.tar.xz" -C "${{ github.workspace }}/.."
+        mv "${{ github.workspace }}/../CalcMySky"{-*,}
+
     - name: Build AppImage
       working-directory: ${{ github.workspace }}
       shell: bash
@@ -32,10 +40,6 @@ jobs:
         sudo pip3 install appimage-builder
         sudo wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O /usr/local/bin/appimagetool
         sudo chmod +x /usr/local/bin/appimagetool
-        # ShowMySky
-        wget https://github.com/10110111/CalcMySky/releases/download/v0.1.0/CalcMySky-v0.1.0-linux-amd64-qt5.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
-        tar xf "${{ github.workspace }}/../CalcMySky.tar.xz" -C "${{ github.workspace }}/.."
-        mv "${{ github.workspace }}/../CalcMySky"{-*,}
         # Prepare to building
         mkdir -p ${{ github.workspace }}/artifact
         mkdir -p ${{ github.workspace }}/builds/appimage
