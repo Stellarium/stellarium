@@ -629,16 +629,16 @@ IF(APPLE)
      ENDIF()
      # macOS architectures: x86_64 or arm64
      IF(NOT CMAKE_OSX_ARCHITECTURES)
-	  # find utilite 'lipo'
+	  # Find 'lipo' utility
 	  FIND_PROGRAM(LIPO_COMMAND lipo)
 	  IF(LIPO_COMMAND)
 	       MESSAGE(STATUS "Found lipo: ${LIPO_COMMAND}")
-	       # get architecture of Qt framework
+	       # Get architecture of Qt
 	       EXECUTE_PROCESS(COMMAND ${LIPO_COMMAND} -archs ${QMAKE_LOCATION} TIMEOUT 30 OUTPUT_VARIABLE QT_ARCHS OUTPUT_STRIP_TRAILING_WHITESPACE)
 	       STRING(REPLACE " " ";" QT_ARCHS ${QT_ARCHS})
 	       SET(CMAKE_OSX_ARCHITECTURES "${QT_ARCHS}" CACHE STRING "macOS architectures" FORCE)
 	  ELSE()
-	       # current system's processor architecture
+	       # If we can't find architecture of Qt, use that of the host system's CPU
 	       SET(CMAKE_OSX_ARCHITECTURES "${CMAKE_HOST_SYSTEM_PROCESSOR}" CACHE STRING "macOS architectures" FORCE)
 	  ENDIF()
      ENDIF()
