@@ -44,10 +44,10 @@ jobs:
         mkdir -p ${{ github.workspace }}/artifact
         mkdir -p ${{ github.workspace }}/builds/appimage
         cd ${{ github.workspace }}/builds/appimage
-        mkdir -p ./AppDir/usr/lib/x86_64-linux-gnu
-        cp $(whereis libShowMySky | sed 's/libShowMySky://i') ./AppDir/usr/lib/x86_64-linux-gnu/libShowMySky.so
         export APP_VERSION="edge"
         export PATH="${{ github.workspace }}/../CalcMySky/bin:${{ github.workspace }}/../CalcMySky/lib:${{ github.workspace }}/../CalcMySky/include:${{ github.workspace }}/../CalcMySky/share:$PATH"
+        mkdir -p ./AppDir/usr/lib/x86_64-linux-gnu
+        cp $(whereis libShowMySky | sed 's/libShowMySky://i') ./AppDir/usr/lib/x86_64-linux-gnu/libShowMySky.so
         appimage-builder --recipe ${{ github.workspace }}/util/appimage/stellarium-appimage.yml --skip-test
         cp ${{ github.workspace }}/builds/appimage/*.AppImage ${{ github.workspace }}/artifact
 
