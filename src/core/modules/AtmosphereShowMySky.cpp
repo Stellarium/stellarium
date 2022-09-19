@@ -223,7 +223,7 @@ void AtmosphereShowMySky::loadShaders()
 	// Shader program that converts XYZW texture to sRGB image
 	{
 		static constexpr char vShaderSrc[]=R"(
-#version 130
+#version 330
 in vec4 vertex;
 out vec2 texCoord;
 void main()
@@ -307,7 +307,7 @@ vec3 calcViewDir()
 
 void AtmosphereShowMySky::resizeRenderTarget(int width, int height)
 {
-	renderer_->resizeEvent(width, height);
+	renderer_->resizeEvent(width/ppxatmo, height/ppxatmo);
 
 	prevWidth_=width;
 	prevHeight_=height;
@@ -408,6 +408,8 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 	, indexBuffer(QOpenGLBuffer::IndexBuffer)
 	, viewRayGridBuffer(QOpenGLBuffer::VertexBuffer)
 	, luminanceToScreenProgram_(new QOpenGLShaderProgram())
+	, ppxatmo(1)
+	, flagDynamicResolution(false)
 {
 	indexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
 	indexBuffer.create();
@@ -470,6 +472,7 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 		shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma
 		                                             = prog.uniformLocation("term2TimesOneOverMaxdLpOneOverGamma");
 		shaderAttribLocations.flagUseTmGamma         = prog.uniformLocation("flagUseTmGamma");
+		shaderAttribLocations.doSRGB                 = prog.uniformLocation("doSRGB");
 
 		prog.release();
 	}
@@ -489,7 +492,10 @@ AtmosphereShowMySky::~AtmosphereShowMySky()
 void AtmosphereShowMySky::regenerateGrid()
 {
 	const float width=viewport[2], height=viewport[3];
-	gridMaxY = StelApp::getInstance().getSettings()->value("landscape/atmosphereybin", 44).toInt();
+	QSettings* conf = StelApp::getInstance().getSettings();
+	flagDynamicResolution = conf->value("landscape/flag_dynamic_resolution", false).toBool();
+	ppxmax = ppxatmo = conf->value("landscape/ppxatmo", 1).toInt();
+	gridMaxY = conf->value("landscape/atmosphereybin", 44).toInt();
 	gridMaxX = std::floor(0.5+gridMaxY*(0.5*std::sqrt(3.0))*width/height);
 	const auto gridSize=(1+gridMaxX)*(1+gridMaxY);
 	posGrid.resize(gridSize);
@@ -503,9 +509,7 @@ void AtmosphereShowMySky::regenerateGrid()
 		for(int x=0; x<=gridMaxX; ++x)
 		{
 			Vec2f& v=posGrid[y*(1+gridMaxX)+x];
-			v[0] = viewportLeft + (x == 0 ? 0
-										  : x == gridMaxX ? width
-														  : (x-0.5*(y&1))*stepX);
+			v[0] = viewportLeft + (x == 0 ? 0 : x == gridMaxX ? width : (x-0.5*(y&1))*stepX);
 			v[1] = viewportBottom+y*stepY;
 		}
 	}
@@ -724,11 +728,37 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 	{
 		lastUsedAltitude_ = location.altitude;
 		probeZenithLuminances(location.altitude);
+		dynResTimer=0;
 	}
 
 	auto sunPos  =  sun.getAltAzPosAuto(core);
 	if (std::isnan(sunPos.length()))
 		sunPos.set(0.,0.,-1.*AU);
+
+	if (flagDynamicResolution)
+	{
+		float f1=prj->getFov(), i1=fader.getInterstate();
+		Vec3d p1=sunPos, s1;
+		prj->project(p1,s1);
+		float df=qAbs(prevFov-f1)/(prevFov+f1), di=qAbs(prevFad-i1);
+		double dp=(prevPos-p1).length(), ds=(prevSun-s1).length();
+		dynResTimer++;
+		if (df+di+dp<10e-3 && ds<1 && dynResTimer<0)
+			return;
+
+		ppxatmo=dynResTimer<0?ppxmax:1;
+		if (prevPxa!=ppxatmo)
+			resizeRenderTarget(width, height);	// causes flicker in menu
+
+		// qDebug() << "ppxatmo" << ppxatmo;
+		// qDebug() << "Fov" << df << "Fad" << di << "Pos" << dp << "Sun" << ds;
+		dynResTimer=-8;
+		prevPxa=ppxatmo;
+		prevFov=f1;
+		prevFad=i1;
+		prevPos=p1;
+		prevSun=s1;
+	}
 
 	const auto sunDir = sunPos / sunPos.length();
 	const double sunAngularRadius = atan(sun.getEquatorialRadius()/sunPos.length());
@@ -778,7 +808,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 	for (int i=0; i<numViewRayGridPoints; ++i)
 	{
 		Vec3d point(1, 0, 0);
-		prj->unProject(posGrid[i][0],posGrid[i][1],point);
+		prj->unProject(posGrid[i][0]*ppxatmo,posGrid[i][1]*ppxatmo,point);
 
 		viewRayGrid[i].set(point[0], point[1], point[2], 0);
 	}
@@ -805,7 +835,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 
 	if (!overrideAverageLuminance)
 	{
-		const auto meanPixelValue=getMeanPixelValue(width, height);
+		const auto meanPixelValue=getMeanPixelValue(width/ppxatmo, height/ppxatmo);
 		const auto meanY=meanPixelValue[1];
 		Q_ASSERT(std::isfinite(meanY));
 
@@ -834,8 +864,9 @@ void AtmosphereShowMySky::draw(StelCore* core)
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.oneOverGamma, b));
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma, c));
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.term2TimesOneOverMaxdL, d));
-	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.flagUseTmGamma, false));
+	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.flagUseTmGamma, useTmGamma));
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.brightnessScale, atm_intensity));
+	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.doSRGB, sRGB));
 
 	StelPainter sPainter(core->getProjection2d());
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
@@ -868,6 +899,7 @@ bool AtmosphereShowMySky::isLoading()
 
 bool AtmosphereShowMySky::isReadyToRender()
 {
+	prevWidth_=0;
 	return renderer_->isReadyToRender();
 }
 
