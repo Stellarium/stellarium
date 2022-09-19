@@ -413,6 +413,12 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
 	htmlText += "<tr><td>" + q_("Calculate phenomena") + "</td>";
 	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Calculate solar eclipses") + "</td>";
+	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Calculate lunar eclipses") + "</td>";
+	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Calculate transits") + "</td>";
+	htmlText += "<td><b>" + shiftF10 + "</b></td></tr>\n";
 
 	htmlText += "</table>";
 
