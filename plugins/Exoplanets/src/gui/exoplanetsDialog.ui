@@ -108,7 +108,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="closeStelWindow">
+       <widget class="StelCloseButton" name="closeStelWindow">
         <property name="minimumSize">
          <size>
           <width>16</width>
@@ -763,6 +763,11 @@
    <class>QChartView</class>
    <extends>QGraphicsView</extends>
    <header location="global">qchartview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>StelCloseButton</class>
+   <extends>QPushButton</extends>
+   <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>

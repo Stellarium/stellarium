@@ -96,7 +96,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="closeStelWindow">
+       <widget class="StelCloseButton" name="closeStelWindow">
         <property name="minimumSize">
          <size>
           <width>16</width>
@@ -295,6 +295,11 @@
    <slots>
     <slot>backspace()</slot>
    </slots>
+  </customwidget>
+  <customwidget>
+   <class>StelCloseButton</class>
+   <extends>QPushButton</extends>
+   <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources>

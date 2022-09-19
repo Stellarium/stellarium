@@ -360,6 +360,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/SkylightDialog.hpp
           gui/SkylightDialog.cpp
 	  gui/ContributorsList.hpp
+          gui/StelCloseButton.hpp
+          gui/StelCloseButton.cpp
      )
 
      ################# compiles .ui files ############
