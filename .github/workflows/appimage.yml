@@ -16,7 +16,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Add ShowMySky library
+    - name: Download ShowMySky library
       working-directory: ${{ github.workspace }}
       shell: bash
       run: |
