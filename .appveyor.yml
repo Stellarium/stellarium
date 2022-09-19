@@ -59,7 +59,7 @@ before_build:
   - ps: if($env:qtver.contains('5.')) { $env:QT_VER_MAJOR=5 }
   - ps: if($env:suffix.contains('32')) { $env:BITS=32 }
   - ps: if($env:suffix.contains('64')) { $env:BITS=64 }
-  - appveyor DownloadFile https://github.com/10110111/CalcMySky/releases/download/v0.0.6/CalcMySky-v0.0.6-win%BITS%-qt%QT_VER_MAJOR%.zip -FileName c:\CalcMySky.zip
+  - appveyor DownloadFile https://github.com/10110111/CalcMySky/releases/download/v0.1.0/CalcMySky-v0.1.0-win%BITS%-qt%QT_VER_MAJOR%.zip -FileName c:\CalcMySky.zip
   - cd c:\
   - 7z x CalcMySky.zip
   - bash -c 'mv CalcMySky{-*,}'
