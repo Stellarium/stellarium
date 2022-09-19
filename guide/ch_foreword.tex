@@ -1,0 +1,170 @@
+% Status info:
+% 2022-09-19 Foreword for V1.0
+
+\chapter*{Foreword for Stellarium 1.0}
+\label{ch:Foreword}
+
+\section*{Version 1.0?}
+
+More than twenty years have elapsed since Fabien Ch\'ereau typed the
+first lines of code of a desktop planetarium which should be based on
+modern algorithms from computer graphics to provide a trustworthy
+simulation of the night sky, utilizing OpenGL technology which best
+runs on dedicated graphics hardware. What evolved from these first
+attempts has evolved into a beautiful program which has been
+downloaded millions of times to run on desktop computers and notebooks
+all around the planet, on various operating systems and in dozens of
+languages.
+
+Already around 2010 the first team of developers started to discuss
+when the ``zero'' from the version number should be dropped. This step
+is important in software development: the zero version signals a
+program is not finished yet, may be unstable, may deliver wrong
+results or may have other deficiencies. My stance for a long time was
+to keep the ``zero'' until Stellarium's astronomical accuracy would
+allow its use for historical research without headaches or
+warnings. Stellarium should be a system that at least works as good as
+other systems deemed ``reliable''. However, for a long time I always
+had to warn my peers from the historical domains that results should
+be cross-checked with ``better'' tools. Cross-checking still is
+recommended, but it has become hard to find tools that were better and
+not just based on the same best physics-based models which we have
+been starting to use in recent years. Appendix~\ref{ch:Accuracy}
+provides some more details into this topic.
+
+In the first phase of development until around 2012, Stellarium's look
+and feel were shaped. Since the time I first took notice of the
+program, around 2008, it has featured many functionalities for amateur
+astronomers who want to know what to expect when they leave their
+house. Some user reactions from this time praised its completeness in
+observer-specific features, e.g.\ the Telescope Control and Oculars
+plugins, but also its ease of use. Its Satellites plugin was capable of
+simulating even Iridium flares, which are however no longer visible as
+the satellites have been de-orbited.
+
+After the switch to the Qt5 programming foundation for the 0.13
+release, most of the first developer team, whose work still forms the
+core of the program, retreated, leaving maintenance and further
+development mostly to the two of us, a computer scientist researching
+in the domain of cultural astronomy, and another whose daytime job is
+high school physics teacher. This somewhat influenced further
+development. For simulation of historical sky views, more accurate
+astronomical models had to be implemented. I admit, finding my way
+through the code written by others was not easy, and despite some
+institutional support we also cannot invest too much of our time into
+software development. Still, my work to improve the astronomical
+features of Stellarium concentrated on replacing, figuratively
+speaking, ``sprockets'' by full-grown ``gears'' described in the
+current scientific literature, until, finally, in mid-2021 we had a
+program that fulfilled my demands. Time to drop the zero? Almost!
+
+For more than a decade the Qt programming framework has been the
+technical foundation of Stellarium which allows its deployment on
+multiple platforms. Especially the Qt5 framework, which unified all
+graphics output utilizing the OpenGL graphics technology, allowed
+deployment on Windows, Mac and Linux systems ranging from 2008
+Windows~XP PCs to the tiny Raspberry Pi~3 or 4 platforms. Windows~7/10
+PCs with insufficient graphics hardware could utilize Google's ANGLE
+library which translated OpenGL ES2.0 (a limited subset of OpenGL
+which does everything Stellarium needs) to DirectX. Almost all desktop
+computer systems were capable of running Stellarium!
+
+The Qt project has released its next generation of the framework, Qt6,
+in late 2020. Stellarium has to follow Qt's development quite closely,
+and so we rapidly decided that ``Stellarium 1.0'' still had to wait
+until we upgraded the software onto the new Qt6.
+
+However, also computer platforms evolve. OpenGL has fallen out of
+favour for Apple and Microsoft who favour their own graphics
+libraries, and Vulkan has been introduced as modernized technical
+successor of OpenGL. Therefore, the ANGLE library on Windows is no
+longer supported with Qt6, and future developments may move away from
+OpenGL. For the time being, we continue to use it, though.
+
+Over the past year, we put most effort into this upgrade. Finally, in
+summer of 2022, Stellarium is ready for Qt6. But: is your computer
+ready for it?
+
+Qt6 has left some computers behind: it requires 64-bit
+processors. Windows~10 is seen as minimum version of this operating
+system. This poleaxes all those of us who try to keep running
+e.g.\ observatory gear with somewhat older or outdated systems or
+simply cannot afford the latest hardware.
+
+What can we do about this?
+
+
+The last purely Qt5-based version was version 0.22.2 released at June
+solstice 2022. For several years now, the number after the zero has
+indicated the year of release, and many users have already dropped the
+zero mentally when discussing versions.  The logical new number for
+the autum 2022 release would have been 0.22.3.
+
+In fact, we can still produce Qt5-based builds with the same
+functionality from the same source code. But we wanted to base ``1.0''
+on Qt6, right? Yes, and we still do, but not as we had hoped. We
+cannot leave behind Qt5 so fast!
+
+
+Instead, we decided the following: We keep the internal series
+number 0 for Qt5-based builds, and use series 1 for Qt6-based
+builds. This is the number which is part of the downloaded
+installation package.  But is version 1.22.3 ``better'' than 0.22.3?
+Not necessarily. It is the more modern, sure, but it provides the same
+astronomical results. It requires more modern hardware (64-bit and
+esp.\ full OpenGL driver support on Windows!), and has tiny
+differences in the scripting capabilities (see
+chapter~\ref{ch:scripting}). However, in terms of features, both could
+be called ``Version 22.3''. Just like that? No, sorry.
+We really want to mark this release, which marks both ``accurate'' and
+``future-proof'', as something special. Therefore we give this release
+the version number 1.0 to mark ``\emph{Stellarium is finished}''.
+
+Of course, software is never finished. The next release, probably due
+at December solstice 2022, will be called version 1.1, but then we
+will go back to year-based numbers like 23.0, 23.1, etc. We will see
+from our download counters how much demand will there be for future
+Qt5-based builds and when it will be time to drop the 0 series. 
+
+
+\section*{What changed visibly in version 1.0?}
+
+Just as we prepared for this release, our contributor Ruslan
+Kabatsayev came forward and said his development of a new skylight
+model has come to a point where it is ready for deployment. I had
+followed this development for years with great interest as it really
+provides a stunning simlation of twilight colors. So, apart from minor
+improvements elsewhere, the most notable change you will be able to
+enjoy is this new skylight model. Unfortunately though, for technical
+reasons, this mode is not available for Apple computers with their
+peculiar OpenGL implementation.  See chapter~\ref{ch:skylight} for
+details.
+
+Another notable recent development are contributions of Worachate
+Boonplod wo concentrated on eclipse predictions in the AstroCalc
+module (see section~\ref{sec:gui:AstroCalc:Eclipses}).  This also
+combines superbly with the new eclipse sky simulation!
+
+\vspace{2\baselineskip}
+
+
+
+In the name of all prior developers we wish you much enjoyment with
+this and future versions of the Stellarium desktop planetarium!
+
+
+\vspace{2\baselineskip}
+
+Georg Zotti in September 2022.
+
+\vspace{2\baselineskip}
+
+% TODO: Greetings/notes from Alexander Wolf
+% Alexander Wolf in September 2022.
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-PDF-mode: t
+%%% TeX-master: "guide"
+%%% End: 
