@@ -33,6 +33,7 @@
 #include <cassert>
 #include <cstring>
 
+#include <QApplication>
 #include <QDir>
 #include <QFile>
 #include <QDebug>
@@ -748,10 +749,12 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 
 		ppxatmo=dynResTimer<0?ppxmax:1;
 		if (prevPxa!=ppxatmo)
-			resizeRenderTarget(width, height);	// causes flicker in menu
+			resizeRenderTarget(width, height);
 
-		// qDebug() << "ppxatmo" << ppxatmo;
-		// qDebug() << "Fov" << df << "Fad" << di << "Pos" << dp << "Sun" << ds;
+		bool verbose=qApp->property("verbose").toBool();
+		if (verbose)
+			qDebug() << "dynResTimer" << dynResTimer << "ppxatmo" << ppxatmo << "Fov" << df << "Fad" << di << "Pos" << dp << "Sun" << ds;
+
 		dynResTimer=-8;
 		prevPxa=ppxatmo;
 		prevFov=f1;
