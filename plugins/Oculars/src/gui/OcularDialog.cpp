@@ -318,6 +318,7 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->semiTransparencyCheckBox,	"Oculars.flagSemiTransparency");
 	connectIntProperty(ui->transparencySpinBox,	        "Oculars.transparencyMask");
 	connectBoolProperty(ui->checkBoxDMSDegrees,		"Oculars.flagDMSDegrees");
+	connectBoolProperty(ui->checkBoxHorizontalCoordinates,	"Oculars.flagHorizontalCoordinates");
 	connectBoolProperty(ui->checkBoxTypeOfMount,		"Oculars.flagAutosetMountForCCD");
 	connectBoolProperty(ui->checkBoxTelradFOVScaling,	"Oculars.flagScalingFOVForTelrad");
 	connectBoolProperty(ui->checkBoxCCDFOVScaling,		"Oculars.flagScalingFOVForCCD");
