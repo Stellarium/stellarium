@@ -880,6 +880,7 @@ void AtmosphereShowMySky::draw(StelCore* core)
 	auto& gl=glfuncs();
 	GL(gl.glActiveTexture(GL_TEXTURE0));
 	GL(gl.glBindTexture(GL_TEXTURE_2D, renderer_->getLuminanceTexture()));
+	GL(gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.luminanceTexture, 0));
 
 	GL(gl.glActiveTexture(GL_TEXTURE1));
