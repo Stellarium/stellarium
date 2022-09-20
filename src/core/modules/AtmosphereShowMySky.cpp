@@ -755,7 +755,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 		if (verbose)
 			qDebug() << "dynResTimer" << dynResTimer << "ppxatmo" << ppxatmo << "Fov" << df << "Fad" << di << "Pos" << dp << "Sun" << ds;
 
-		dynResTimer=-8;
+		dynResTimer=dynResTimer<0?-2:-18;
 		prevPxa=ppxatmo;
 		prevFov=f1;
 		prevFad=i1;
