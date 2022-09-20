@@ -86,45 +86,46 @@ class Oculars : public StelModule
 	Q_PROPERTY(int selectedOcularIndex    READ getSelectedOcularIndex    WRITE selectOcularAtIndex    NOTIFY selectedOcularChanged)
 	Q_PROPERTY(int selectedTelescopeIndex READ getSelectedTelescopeIndex WRITE selectTelescopeAtIndex NOTIFY selectedTelescopeChanged)
 	Q_PROPERTY(int selectedLensIndex      READ getSelectedLensIndex      WRITE selectLensAtIndex      NOTIFY selectedLensChanged)
-	Q_PROPERTY(double selectedCCDRotationAngle READ getSelectedCCDRotationAngle WRITE setSelectedCCDRotationAngle NOTIFY selectedCCDRotationAngleChanged)
+	Q_PROPERTY(double selectedCCDRotationAngle      READ getSelectedCCDRotationAngle      WRITE setSelectedCCDRotationAngle      NOTIFY selectedCCDRotationAngleChanged)
 	Q_PROPERTY(double selectedCCDPrismPositionAngle READ getSelectedCCDPrismPositionAngle WRITE setSelectedCCDPrismPositionAngle NOTIFY selectedCCDPrismPositionAngleChanged)
 
-	Q_PROPERTY(bool flagGuiPanelEnabled          READ getFlagGuiPanelEnabled          WRITE enableGuiPanel NOTIFY flagGuiPanelEnabledChanged)
-	Q_PROPERTY(bool flagInitFOVUsage             READ getFlagInitFovUsage             WRITE setFlagInitFovUsage NOTIFY flagInitFOVUsageChanged) 
-	Q_PROPERTY(bool flagInitDirectionUsage       READ getFlagInitDirectionUsage       WRITE setFlagInitDirectionUsage NOTIFY flagInitDirectionUsageChanged) 
-	Q_PROPERTY(bool flagShowResolutionCriteria   READ getFlagShowResolutionCriteria   WRITE setFlagShowResolutionCriteria  NOTIFY flagShowResolutionCriteriaChanged)
-	Q_PROPERTY(bool flagRequireSelection   READ getFlagRequireSelection    WRITE setFlagRequireSelection    NOTIFY flagRequireSelectionChanged) 
-	Q_PROPERTY(bool flagAutoLimitMagnitude READ getFlagAutoLimitMagnitude  WRITE setFlagAutoLimitMagnitude  NOTIFY flagAutoLimitMagnitudeChanged)
-	Q_PROPERTY(bool flagHideGridsLines     READ getFlagHideGridsLines      WRITE setFlagHideGridsLines      NOTIFY flagHideGridsLinesChanged)
-	Q_PROPERTY(bool flagScaleImageCircle   READ getFlagScaleImageCircle    WRITE setFlagScaleImageCircle    NOTIFY flagScaleImageCircleChanged)// flag scale image circle scaleImageCirclCheckBox
-	Q_PROPERTY(bool flagSemiTransparency   READ getFlagUseSemiTransparency WRITE setFlagUseSemiTransparency NOTIFY flagUseSemiTransparencyChanged) 
-	Q_PROPERTY(int transparencyMask        READ getTransparencyMask        WRITE setTransparencyMask        NOTIFY transparencyMaskChanged)
-	Q_PROPERTY(bool flagDMSDegrees         READ getFlagDMSDegrees          WRITE setFlagDMSDegrees          NOTIFY flagDMSDegreesChanged)
-	Q_PROPERTY(bool flagAutosetMountForCCD READ getFlagAutosetMountForCCD  WRITE setFlagAutosetMountForCCD  NOTIFY flagAutosetMountForCCDChanged)
-	Q_PROPERTY(bool flagScalingFOVForTelrad	READ getFlagScalingFOVForTelrad  WRITE setFlagScalingFOVForTelrad  NOTIFY flagScalingFOVForTelradChanged) // TODO: Rename to flagTelradAutozoom etc. to be clearer.
-	Q_PROPERTY(Vec4f telradFOV              READ getTelradFOV             WRITE setTelradFOV             NOTIFY telradFOVChanged)
-	Q_PROPERTY(bool flagScalingFOVForCCD	READ getFlagScalingFOVForCCD  WRITE setFlagScalingFOVForCCD  NOTIFY flagScalingFOVForCCDChanged)
-	Q_PROPERTY(bool flagShowOcularsButton	READ getFlagShowOcularsButton  WRITE setFlagShowOcularsButton  NOTIFY flagShowOcularsButtonChanged)
-	Q_PROPERTY(bool flagShowContour		READ getFlagShowContour   WRITE setFlagShowContour   NOTIFY flagShowContourChanged)
-	Q_PROPERTY(bool flagShowCardinals	READ getFlagShowCardinals   WRITE setFlagShowCardinals   NOTIFY flagShowCardinalsChanged)
-	Q_PROPERTY(bool flagAlignCrosshair	READ getFlagAlignCrosshair   WRITE setFlagAlignCrosshair   NOTIFY flagAlignCrosshairChanged)
+	Q_PROPERTY(bool flagGuiPanelEnabled        READ getFlagGuiPanelEnabled        WRITE enableGuiPanel                NOTIFY flagGuiPanelEnabledChanged)
+	Q_PROPERTY(bool flagInitFOVUsage           READ getFlagInitFovUsage           WRITE setFlagInitFovUsage           NOTIFY flagInitFOVUsageChanged)
+	Q_PROPERTY(bool flagInitDirectionUsage     READ getFlagInitDirectionUsage     WRITE setFlagInitDirectionUsage     NOTIFY flagInitDirectionUsageChanged)
+	Q_PROPERTY(bool flagShowResolutionCriteria READ getFlagShowResolutionCriteria WRITE setFlagShowResolutionCriteria NOTIFY flagShowResolutionCriteriaChanged)
+	Q_PROPERTY(bool flagRequireSelection       READ getFlagRequireSelection       WRITE setFlagRequireSelection       NOTIFY flagRequireSelectionChanged)
+	Q_PROPERTY(bool flagAutoLimitMagnitude     READ getFlagAutoLimitMagnitude     WRITE setFlagAutoLimitMagnitude     NOTIFY flagAutoLimitMagnitudeChanged)
+	Q_PROPERTY(bool flagHideGridsLines         READ getFlagHideGridsLines         WRITE setFlagHideGridsLines         NOTIFY flagHideGridsLinesChanged)
+	Q_PROPERTY(bool flagScaleImageCircle       READ getFlagScaleImageCircle       WRITE setFlagScaleImageCircle       NOTIFY flagScaleImageCircleChanged)// flag scale image circle scaleImageCirclCheckBox
+	Q_PROPERTY(bool flagSemiTransparency       READ getFlagUseSemiTransparency    WRITE setFlagUseSemiTransparency    NOTIFY flagUseSemiTransparencyChanged)
+	Q_PROPERTY(int transparencyMask            READ getTransparencyMask           WRITE setTransparencyMask           NOTIFY transparencyMaskChanged)
+	Q_PROPERTY(bool flagDMSDegrees             READ getFlagDMSDegrees             WRITE setFlagDMSDegrees             NOTIFY flagDMSDegreesChanged)
+	Q_PROPERTY(bool flagHorizontalCoordinates  READ getFlagHorizontalCoordinates  WRITE setFlagHorizontalCoordinates  NOTIFY flagHorizontalCoordinatesChanged)
+	Q_PROPERTY(bool flagAutosetMountForCCD     READ getFlagAutosetMountForCCD     WRITE setFlagAutosetMountForCCD     NOTIFY flagAutosetMountForCCDChanged)
+	Q_PROPERTY(bool flagScalingFOVForTelrad	   READ getFlagScalingFOVForTelrad    WRITE setFlagScalingFOVForTelrad    NOTIFY flagScalingFOVForTelradChanged) // TODO: Rename to flagTelradAutozoom etc. to be clearer.
+	Q_PROPERTY(Vec4f telradFOV                 READ getTelradFOV                  WRITE setTelradFOV                  NOTIFY telradFOVChanged)
+	Q_PROPERTY(bool flagScalingFOVForCCD	   READ getFlagScalingFOVForCCD       WRITE setFlagScalingFOVForCCD       NOTIFY flagScalingFOVForCCDChanged)
+	Q_PROPERTY(bool flagShowOcularsButton	   READ getFlagShowOcularsButton      WRITE setFlagShowOcularsButton      NOTIFY flagShowOcularsButtonChanged)
+	Q_PROPERTY(bool flagShowContour		   READ getFlagShowContour            WRITE setFlagShowContour            NOTIFY flagShowContourChanged)
+	Q_PROPERTY(bool flagShowCardinals	   READ getFlagShowCardinals          WRITE setFlagShowCardinals          NOTIFY flagShowCardinalsChanged)
+	Q_PROPERTY(bool flagAlignCrosshair	   READ getFlagAlignCrosshair         WRITE setFlagAlignCrosshair         NOTIFY flagAlignCrosshairChanged)
 
-	Q_PROPERTY(int arrowButtonScale        READ getArrowButtonScale        WRITE setArrowButtonScale        NOTIFY arrowButtonScaleChanged)
-	Q_PROPERTY(int guiPanelFontSize        READ getGuiPanelFontSize        WRITE setGuiPanelFontSize        NOTIFY guiPanelFontSizeChanged)
-	Q_PROPERTY(Vec3f textColor             READ getTextColor               WRITE setTextColor               NOTIFY textColorChanged)
-	Q_PROPERTY(Vec3f lineColor             READ getLineColor               WRITE setLineColor               NOTIFY textColorChanged)
+	Q_PROPERTY(int arrowButtonScale READ getArrowButtonScale WRITE setArrowButtonScale NOTIFY arrowButtonScaleChanged)
+	Q_PROPERTY(int guiPanelFontSize READ getGuiPanelFontSize WRITE setGuiPanelFontSize NOTIFY guiPanelFontSizeChanged)
+	Q_PROPERTY(Vec3f textColor      READ getTextColor        WRITE setTextColor        NOTIFY textColorChanged)
+	Q_PROPERTY(Vec3f lineColor      READ getLineColor        WRITE setLineColor        NOTIFY textColorChanged)
 
-	Q_PROPERTY(bool flagShowCcdCropOverlay READ getFlagShowCcdCropOverlay  WRITE setFlagShowCcdCropOverlay  NOTIFY flagShowCcdCropOverlayChanged)
+	Q_PROPERTY(bool flagShowCcdCropOverlay READ getFlagShowCcdCropOverlay  WRITE setFlagShowCcdCropOverlay NOTIFY flagShowCcdCropOverlayChanged)
 	Q_PROPERTY(bool flagShowCcdCropOverlayPixelGrid READ getFlagShowCcdCropOverlayPixelGrid WRITE setFlagShowCcdCropOverlayPixelGrid NOTIFY flagShowCcdCropOverlayPixelGridChanged)
-	//Q_PROPERTY(int ccdCropOverlaySize      READ getCcdCropOverlaySize      WRITE setCcdCropOverlaySize      NOTIFY ccdCropOverlaySizeChanged)
-	Q_PROPERTY(int ccdCropOverlayHSize      READ getCcdCropOverlayHSize      WRITE setCcdCropOverlayHSize      NOTIFY ccdCropOverlayHSizeChanged)
-	Q_PROPERTY(int ccdCropOverlayVSize      READ getCcdCropOverlayVSize      WRITE setCcdCropOverlayVSize      NOTIFY ccdCropOverlayVSizeChanged)
+	//Q_PROPERTY(int ccdCropOverlaySize      READ getCcdCropOverlaySize      WRITE setCcdCropOverlaySize   NOTIFY ccdCropOverlaySizeChanged)
+	Q_PROPERTY(int ccdCropOverlayHSize     READ getCcdCropOverlayHSize      WRITE setCcdCropOverlayHSize   NOTIFY ccdCropOverlayHSizeChanged)
+	Q_PROPERTY(int ccdCropOverlayVSize     READ getCcdCropOverlayVSize      WRITE setCcdCropOverlayVSize   NOTIFY ccdCropOverlayVSizeChanged)
 
-	Q_PROPERTY(bool flagShowFocuserOverlay		READ getFlagShowFocuserOverlay		WRITE setFlagShowFocuserOverlay		NOTIFY flagShowFocuserOverlayChanged)
-	Q_PROPERTY(bool flagUseSmallFocuserOverlay	READ getFlagUseSmallFocuserOverlay	WRITE setFlagUseSmallFocuserOverlay	NOTIFY flagUseSmallFocuserOverlayChanged)
-	Q_PROPERTY(bool flagUseMediumFocuserOverlay	READ getFlagUseMediumFocuserOverlay	WRITE setFlagUseMediumFocuserOverlay	NOTIFY flagUseMediumFocuserOverlayChanged)
-	Q_PROPERTY(bool flagUseLargeFocuserOverlay	READ getFlagUseLargeFocuserOverlay	WRITE setFlagUseLargeFocuserOverlay	NOTIFY flagUseLargeFocuserOverlayChanged)
-	Q_PROPERTY(Vec3f focuserColor READ getFocuserColor WRITE setFocuserColor NOTIFY focuserColorChanged)
+	Q_PROPERTY(bool flagShowFocuserOverlay      READ getFlagShowFocuserOverlay	WRITE setFlagShowFocuserOverlay      NOTIFY flagShowFocuserOverlayChanged)
+	Q_PROPERTY(bool flagUseSmallFocuserOverlay  READ getFlagUseSmallFocuserOverlay	WRITE setFlagUseSmallFocuserOverlay  NOTIFY flagUseSmallFocuserOverlayChanged)
+	Q_PROPERTY(bool flagUseMediumFocuserOverlay READ getFlagUseMediumFocuserOverlay	WRITE setFlagUseMediumFocuserOverlay NOTIFY flagUseMediumFocuserOverlayChanged)
+	Q_PROPERTY(bool flagUseLargeFocuserOverlay  READ getFlagUseLargeFocuserOverlay	WRITE setFlagUseLargeFocuserOverlay  NOTIFY flagUseLargeFocuserOverlayChanged)
+	Q_PROPERTY(Vec3f focuserColor               READ getFocuserColor                WRITE setFocuserColor                NOTIFY focuserColorChanged)
 
 	//BM: Temporary, until the GUI is finalized and some other method of getting
 	//info from the main class is implemented.
@@ -227,6 +228,9 @@ public slots:
 
 	void setFlagDMSDegrees(const bool b);
 	bool getFlagDMSDegrees(void) const;
+
+	void setFlagHorizontalCoordinates(const bool b);
+	bool getFlagHorizontalCoordinates(void) const;
 
 	void setFlagRequireSelection(const bool b);
 	bool getFlagRequireSelection(void) const;
@@ -342,6 +346,7 @@ signals:
 	void flagRequireSelectionChanged(bool value);
 	void flagAutoLimitMagnitudeChanged(bool value);
 	void flagDMSDegreesChanged(bool value);
+	void flagHorizontalCoordinatesChanged(bool value);
 	void flagScaleImageCircleChanged(bool value);
 	void flagShowOcularsButtonChanged(bool value);
 	void flagShowCcdCropOverlayChanged(bool value);	
@@ -483,6 +488,7 @@ private:
 
 	bool flagGuiPanelEnabled;        //!< Display the GUI control panel
 	bool flagDMSDegrees;             //!< Use decimal degrees in CCD frame display
+	bool flagHorizontalCoordinates;  //!< Use horizontal coordinates instead equatorial coordinates for cross of center CCD
 	bool flagSemiTransparency;       //!< Draw the area outside the ocular circle not black but let some stars through.
 	int transparencyMask;		 //!< Value of transparency for semi-transparent mask
 	bool flagHideGridsLines;         //!< Switch off all grids and lines of GridMgr while in Ocular view

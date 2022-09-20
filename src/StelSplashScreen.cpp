@@ -27,31 +27,13 @@ SplashScreen::SplashScreenWidget* SplashScreen::instance;
 static QPixmap makePixmap()
 {
 	QPixmap pixmap(StelFileMgr::findFile("data/splash.png"));
-	QPainter p(&pixmap);
-	p.setRenderHint(QPainter::Antialiasing);
-	p.setPen(Qt::white);
-	#if defined(GIT_REVISION)
-	QFontMetrics metrics(p.font());
-	p.drawText(QPointF(metrics.averageCharWidth(), 1.3*metrics.height()), QString("%1 (v%2)").arg(StelUtils::getApplicationPublicVersion(), StelUtils::getApplicationVersion()));
-	#else
-	QFont versionFont;
-	QString version = StelUtils::getApplicationPublicVersion();
-	versionFont.setPixelSize(25);
-	versionFont.setBold(true);
-	QFontMetrics versionMetrics(versionFont);
-	p.setFont(versionFont);
-	p.drawText(365 - versionMetrics.horizontalAdvance(version), 290, version);
-	#endif
 	return pixmap;
 }
 
 void SplashScreen::present()
 {
-	QFont splashFont;
-	splashFont.setPixelSize(11);
 	Q_ASSERT(!instance);
 	instance=new SplashScreenWidget(makePixmap());
-	instance->setFont(splashFont);
 	instance->show();
 	instance->ensureFirstPaint();
 }
@@ -74,4 +56,46 @@ void SplashScreen::clearMessage()
 {
 	Q_ASSERT(instance);
 	instance->clearMessage();
+}
+
+SplashScreen::SplashScreenWidget::SplashScreenWidget(QPixmap const& pixmap)
+	: QSplashScreen(pixmap)
+{
+	splashFont.setPixelSize(11);
+
+	// Fix concrete font family and rendering mode, so that even if default
+	// application font changes, we still render app version in the same font
+	// on each repaint.
+	QFontInfo info(splashFont);
+	splashFont.setFamily(info.family());
+	splashFont.setHintingPreference(QFont::PreferFullHinting);
+	splashFont.setStyleHint(QFont::AnyStyle, QFont::PreferAntialias);
+
+	setFont(splashFont);
+}
+
+void SplashScreen::SplashScreenWidget::paintEvent(QPaintEvent* event)
+{
+	QSplashScreen::paintEvent(event);
+
+	// Add version text
+	QPainter p(this);
+	p.setRenderHint(QPainter::Antialiasing);
+	p.setPen(Qt::white);
+#if defined(GIT_REVISION)
+	QFontMetrics metrics(splashFont);
+	p.drawText(QPointF(metrics.averageCharWidth(), 1.3*metrics.height()),
+			   QString("%1 (v%2)").arg(StelUtils::getApplicationPublicVersion(),
+									   StelUtils::getApplicationVersion()));
+#else
+	QFont versionFont(splashFont);
+	QString version = StelUtils::getApplicationPublicVersion();
+	versionFont.setPixelSize(25);
+	versionFont.setBold(true);
+	QFontMetrics versionMetrics(versionFont);
+	p.setFont(versionFont);
+	p.drawText(365 - versionMetrics.horizontalAdvance(version), 290, version);
+#endif
+
+	painted=true;
 }

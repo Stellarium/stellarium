@@ -11,36 +11,38 @@ first lines of code of a desktop planetarium which should be based on
 modern algorithms from computer graphics to provide a trustworthy
 simulation of the night sky, utilizing OpenGL technology which best
 runs on dedicated graphics hardware. What evolved from these first
-attempts has evolved into a beautiful program which has been
+attempts has turned into a beautiful program which has been
 downloaded millions of times to run on desktop computers and notebooks
 all around the planet, on various operating systems and in dozens of
 languages.
 
+In the first phase of development until around 2012, Stellarium's look
+and feel were shaped. Since the time I first took notice of the
+program, around 2008, it had already featured many functionalities for
+amateur astronomers or simply laypersons who wanted to know what to
+expect when they leave their house. Some user reactions from this time
+praised its completeness in observer-specific features, e.g.\ the
+Telescope Control and Oculars plugins, but also its ease of use. Its
+Satellites plugin was capable of simulating even Iridium flares, which
+are however no longer visible as the satellites have been de-orbited. 
+
 Already around 2010 the first team of developers started to discuss
 when the ``zero'' from the version number should be dropped. This step
-is important in software development: the zero version signals a
-program is not finished yet, may be unstable, may deliver wrong
-results or may have other deficiencies. My stance for a long time was
+is important in software development: a zero version signals a
+program in development --- having rough corners, may be unstable, may
+deliver wrong results or may have other deficiencies. Around version 0.11,
+the user interface looked almost like that of today, a good decade later.
+My stance in all those years was still 
 to keep the ``zero'' until Stellarium's astronomical accuracy would
 allow its use for historical research without headaches or
 warnings. Stellarium should be a system that at least works as good as
 other systems deemed ``reliable''. However, for a long time I always
-had to warn my peers from the historical domains that results should
+had to warn my peers from the historical domains that in critical cases results should always 
 be cross-checked with ``better'' tools. Cross-checking still is
-recommended, but it has become hard to find tools that were better and
-not just based on the same best physics-based models which we have
+recommended, but it has become hard to find tools that were still better and
+not just based on the same best professional computational models which we have
 been starting to use in recent years. Appendix~\ref{ch:Accuracy}
 provides some more details into this topic.
-
-In the first phase of development until around 2012, Stellarium's look
-and feel were shaped. Since the time I first took notice of the
-program, around 2008, it has featured many functionalities for amateur
-astronomers who want to know what to expect when they leave their
-house. Some user reactions from this time praised its completeness in
-observer-specific features, e.g.\ the Telescope Control and Oculars
-plugins, but also its ease of use. Its Satellites plugin was capable of
-simulating even Iridium flares, which are however no longer visible as
-the satellites have been de-orbited.
 
 After the switch to the Qt5 programming foundation for the 0.13
 release, most of the first developer team, whose work still forms the
@@ -63,7 +65,7 @@ technical foundation of Stellarium which allows its deployment on
 multiple platforms. Especially the Qt5 framework, which unified all
 graphics output utilizing the OpenGL graphics technology, allowed
 deployment on Windows, Mac and Linux systems ranging from 2008
-Windows~XP PCs to the tiny Raspberry Pi~3 or 4 platforms. Windows~7/10
+Windows~XP PCs to the tiny Raspberry Pi~3 or 4 and similar SBC platforms. Windows~7/10
 PCs with insufficient graphics hardware could utilize Google's ANGLE
 library which translated OpenGL ES2.0 (a limited subset of OpenGL
 which does everything Stellarium needs) to DirectX. Almost all desktop
@@ -82,7 +84,7 @@ longer supported with Qt6, and future developments may move away from
 OpenGL. For the time being, we continue to use it, though.
 
 Over the past year, we put most effort into this upgrade. Finally, in
-summer of 2022, Stellarium is ready for Qt6. But: is your computer
+late summer of 2022, Stellarium is ready for Qt6. But: is your computer
 ready for it?
 
 Qt6 has left some computers behind: it requires 64-bit
@@ -90,23 +92,22 @@ processors. Windows~10 is seen as minimum version of this operating
 system. This poleaxes all those of us who try to keep running
 e.g.\ observatory gear with somewhat older or outdated systems or
 simply cannot afford the latest hardware.
-
 What can we do about this?
 
 
 The last purely Qt5-based version was version 0.22.2 released at June
 solstice 2022. For several years now, the number after the zero has
 indicated the year of release, and many users have already dropped the
-zero mentally when discussing versions.  The logical new number for
-the autum 2022 release would have been 0.22.3.
+zero mentally when discussing versions.  The logical next number for
+the autumn 2022 release would have been 0.22.3.
 
 In fact, we can still produce Qt5-based builds with the same
 functionality from the same source code. But we wanted to base ``1.0''
 on Qt6, right? Yes, and we still do, but not as we had hoped. We
-cannot leave behind Qt5 so fast!
+cannot leave behind Qt5 so fast without alienating you, our users!
 
 
-Instead, we decided the following: We keep the internal series
+Instead, we resolved upon the following: We keep the internal series
 number 0 for Qt5-based builds, and use series 1 for Qt6-based
 builds. This is the number which is part of the downloaded
 installation package.  But is version 1.22.3 ``better'' than 0.22.3?
@@ -116,24 +117,26 @@ esp.\ full OpenGL driver support on Windows!), and has tiny
 differences in the scripting capabilities (see
 chapter~\ref{ch:scripting}). However, in terms of features, both could
 be called ``Version 22.3''. Just like that? No, sorry.
-We really want to mark this release, which marks both ``accurate'' and
+We really want to label this release, which signifies both ``accurate'' and
 ``future-proof'', as something special. Therefore we give this release
 the version number 1.0 to mark ``\emph{Stellarium is finished}''.
 
-Of course, software is never finished. The next release, probably due
-at December solstice 2022, will be called version 1.1, but then we
-will go back to year-based numbers like 23.0, 23.1, etc. We will see
-from our download counters how much demand will there be for future
-Qt5-based builds and when it will be time to drop the 0 series. 
+Of course, software is never finished, as over 250 ``issues'' on
+Github still are unresolved, and we still have ideas for more. The
+next release, probably due at December solstice 2022, will be called
+version 1.1, but then we will go back to year-based numbers like 23.0,
+23.1, etc. We will see from our download counters how much demand will
+there be from you for future Qt5-based builds and when it will be time to retire
+the 0 series.
 
 
 \section*{What changed visibly in version 1.0?}
 
 Just as we prepared for this release, our contributor Ruslan
-Kabatsayev came forward and said his development of a new skylight
+Kabatsayev came forward and announced that his development of a new skylight
 model has come to a point where it is ready for deployment. I had
 followed this development for years with great interest as it really
-provides a stunning simlation of twilight colors. So, apart from minor
+provides a stunning simulation of twilight colors. So, apart from minor
 improvements elsewhere, the most notable change you will be able to
 enjoy is this new skylight model. Unfortunately though, for technical
 reasons, this mode is not available for Apple computers with their
@@ -141,7 +144,7 @@ peculiar OpenGL implementation.  See chapter~\ref{ch:skylight} for
 details.
 
 Another notable recent development are contributions of Worachate
-Boonplod wo concentrated on eclipse predictions in the AstroCalc
+Boonplod who concentrated on eclipse predictions in the AstroCalc
 module (see section~\ref{sec:gui:AstroCalc:Eclipses}).  This also
 combines superbly with the new eclipse sky simulation!
 
@@ -149,7 +152,7 @@ combines superbly with the new eclipse sky simulation!
 
 
 
-In the name of all prior developers we wish you much enjoyment with
+\noindent In the name of all prior and current developers we wish you much enjoyment with
 this and future versions of the Stellarium desktop planetarium!
 
 

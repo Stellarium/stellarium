@@ -122,6 +122,7 @@ Oculars::Oculars()
 	, flagScaleImageCircle(true)
 	, flagGuiPanelEnabled(false)
 	, flagDMSDegrees(false)
+	, flagHorizontalCoordinates(false)
 	, flagSemiTransparency(false)
 	, transparencyMask(85)
 	, flagHideGridsLines(false)
@@ -589,6 +590,7 @@ void Oculars::init()
 
 		// For historical reasons, name of .ini entry and description of checkbox (and therefore flag name) are reversed.
 		setFlagDMSDegrees( ! settings->value("use_decimal_degrees", false).toBool());
+		setFlagHorizontalCoordinates(settings->value("use_horizontal_coordinates", false).toBool());
 		setFlagAutoLimitMagnitude(settings->value("autolimit_stellar_magnitude", true).toBool());
 		flagLimitStarsOculars=settings->value("limit_stellar_magnitude_oculars", false).toBool();
 		magLimitStarsOculars=settings->value("limit_stellar_magnitude_oculars_val", 12.).toDouble();
@@ -1698,25 +1700,50 @@ void Oculars::paintCCDBounds()
 					Vec3d centerPosition;
 					projector->unProject(centerScreen[0], centerScreen[1], centerPosition);
 					double cx, cy;
-					QString cxt, cyt;
-					StelUtils::rectToSphe(&cx,&cy,core->equinoxEquToJ2000(centerPosition, StelCore::RefractionOff)); // Calculate RA/DE (J2000.0) and show it...
+					QString cxt, cyt, coords;
 					bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-					if (withDecimalDegree)
+					if (getFlagHorizontalCoordinates())
 					{
-						cxt = StelUtils::radToDecDegStr(cx, 5, false, true);
-						cyt = StelUtils::radToDecDegStr(cy);
+						bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+						coords = QString("%1:").arg(qc_("Az/Alt of cross", "abbreviated in the plugin"));
+						StelUtils::rectToSphe(&cy,&cx,core->equinoxEquToAltAz(centerPosition, StelCore::RefractionAuto));
+						const double direction = (useSouthAzimuth ? 2. : 3.); // N is zero, E is 90 degrees
+						cy = direction*M_PI - cy;
+						if (cy > M_PI*2)
+							cy -= M_PI*2;
+
+						if (withDecimalDegree)
+						{
+							cxt = StelUtils::radToDecDegStr(cy);
+							cyt = StelUtils::radToDecDegStr(cx);
+						}
+						else
+						{
+							cxt = StelUtils::radToDmsStr(cy);
+							cyt = StelUtils::radToDmsStr(cx);
+						}
 					}
 					else
 					{
-						cxt = StelUtils::radToHmsStr(cx, true);
-						cyt = StelUtils::radToDmsStr(cy, true);
+						coords = QString("%1:").arg(qc_("RA/Dec (J2000.0) of cross", "abbreviated in the plugin"));
+						StelUtils::rectToSphe(&cx,&cy,core->equinoxEquToJ2000(centerPosition, StelCore::RefractionOff)); // Calculate RA/DE (J2000.0) and show it...
+						if (withDecimalDegree)
+						{
+							cxt = StelUtils::radToDecDegStr(cx, 5, false, true);
+							cyt = StelUtils::radToDecDegStr(cy);
+						}
+						else
+						{
+							cxt = StelUtils::radToHmsStr(cx, true);
+							cyt = StelUtils::radToDmsStr(cy, true);
+						}
 					}
+
 					float scaleFactor = static_cast<float>(1.2 * params.devicePixelsPerPixel);
 					// Coordinates of center of visible field of view for CCD (red rectangle)
-					QString coords = QString("%1:").arg(qc_("RA/Dec (J2000.0) of cross", "abbreviated in the plugin"));
 					a = transform.map(QPoint(qRound(-width*0.5f), qRound(height*0.5f + 5.f + fontSize*scaleFactor)));
 					painter.drawText(a.x(), a.y(), coords, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
-					coords = QString("%1/%2").arg(cxt.simplified()).arg(cyt);
+					coords = QString("%1/%2").arg(cxt.simplified(), cyt);
 					a = transform.map(QPoint(qRound(-width*0.5f), qRound(height*0.5f + 5.f)));
 					painter.drawText(a.x(), a.y(), coords, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					// Dimensions of visible field of view for CCD (red rectangle)
@@ -2521,6 +2548,19 @@ void Oculars::setFlagDMSDegrees(const bool b)
 bool Oculars::getFlagDMSDegrees() const
 {
 	return flagDMSDegrees;
+}
+
+void Oculars::setFlagHorizontalCoordinates(const bool b)
+{
+	flagHorizontalCoordinates = b;
+	settings->setValue("use_horizontal_coordinates", !b);
+	settings->sync();
+	emit flagHorizontalCoordinatesChanged(b);
+}
+
+bool Oculars::getFlagHorizontalCoordinates() const
+{
+	return flagHorizontalCoordinates;
 }
 
 void Oculars::setFlagRequireSelection(const bool b)
