@@ -27,6 +27,15 @@ StelCloseButton::StelCloseButton(QWidget* parent)
 {
 	// Qt 5.15 regression: QBushButton without borders does not respond to clicks
 	setStyleSheet("border: 1px solid rgba(0, 0, 0, 0); background: none;");
+
+	// In Qt 5.12.8 the icon stretches too much for some reason, so let's
+	// simply make it the expected size. This will break high-DPI scaled mode,
+	// but I think such high-end systems should use newer Qt anyway.
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+	iconNormal = QIcon(iconNormal.pixmap(16,16));
+	iconHover  = QIcon(iconHover.pixmap(16,16));
+#endif
+
 	setIcon(iconNormal);
 }
 

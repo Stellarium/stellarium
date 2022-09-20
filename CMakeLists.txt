@@ -21,7 +21,10 @@ SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 ########### Project name ###########
 PROJECT(Stellarium C CXX)
 ########### Detect Qt version
-FIND_PACKAGE(Qt6 COMPONENTS Core QUIET)
+SET(ENABLE_QT6 1 CACHE BOOL "Whether to try building with Qt6. If Qt6 is not found, Qt5 will be used.")
+IF(ENABLE_QT6)
+    FIND_PACKAGE(Qt6 COMPONENTS Core QUIET)
+ENDIF()
 if (NOT Qt6_FOUND)
     FIND_PACKAGE(Qt5 REQUIRED COMPONENTS Core)
 ENDIF()

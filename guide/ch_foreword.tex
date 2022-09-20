@@ -79,7 +79,7 @@ until we upgraded the software onto the new Qt6.
 However, also computer platforms evolve. OpenGL has fallen out of
 favour for Apple and Microsoft who favour their own graphics
 libraries, and Vulkan has been introduced as modernized technical
-successor of OpenGL. Therefore, the ANGLE library on Windows is no
+successor of OpenGL (Metal on macOS). Therefore, the ANGLE library on Windows is no
 longer supported with Qt6, and future developments may move away from
 OpenGL. For the time being, we continue to use it, though.
 
@@ -88,7 +88,7 @@ late summer of 2022, Stellarium is ready for Qt6. But: is your computer
 ready for it?
 
 Qt6 has left some computers behind: it requires 64-bit
-processors. Windows~10 is seen as minimum version of this operating
+processors. Windows~10 (or macOS 11.0 ``Big Sur'') is seen as minimum version of this operating
 system. This poleaxes all those of us who try to keep running
 e.g.\ observatory gear with somewhat older or outdated systems or
 simply cannot afford the latest hardware.
@@ -124,8 +124,8 @@ the version number 1.0 to mark ``\emph{Stellarium is finished}''.
 Of course, software is never finished, as over 250 ``issues'' on
 Github still are unresolved, and we still have ideas for more. The
 next release, probably due at December solstice 2022, will be called
-version 1.1, but then we will go back to year-based numbers like 23.0,
-23.1, etc. We will see from our download counters how much demand will
+version 1.1, but then we will go back to year-based numbers like 23.1,
+23.2, etc. We will see from our download counters how much demand will
 there be from you for future Qt5-based builds and when it will be time to retire
 the 0 series.
 
@@ -144,7 +144,7 @@ peculiar OpenGL implementation.  See chapter~\ref{ch:skylight} for
 details.
 
 Another notable recent development are contributions of Worachate
-Boonplod who concentrated on eclipse predictions in the AstroCalc
+Boonplod who concentrated on eclipse and transits predictions in the AstroCalc
 module (see section~\ref{sec:gui:AstroCalc:Eclipses}).  This also
 combines superbly with the new eclipse sky simulation!
 
@@ -158,12 +158,23 @@ this and future versions of the Stellarium desktop planetarium!
 
 \vspace{2\baselineskip}
 
-Georg Zotti in September 2022.
+\begin{flushright}
+\textbf{Georg Zotti} \\ \emph{September 2022}
+\end{flushright}
 
 \vspace{2\baselineskip}
 
-% TODO: Greetings/notes from Alexander Wolf
-% Alexander Wolf in September 2022.
+It has been a long and difficult road to reach version 1.0...
+
+I was joined the team in 2010, first as translator, then with increasing program contributions, with translatability for skycultures the first main contribution appearing in version 0.10.6. I remember my first meeting with other developers in IRC around middle of November 2010, where one of agenda item was... ``Releasing version 1.0''. We was very, very optimistic in those days. In our imagination after version 0.10.6 will be released Stellarium 0.11.0, maybe 0.11.1 and we will ready to version 1.0, because the list of features for version 1.0 in Matthew's list was almost complete. 
+
+Well, the next 12 years we're fixed thousands bugs and adding hundreds missing and new features to really reach the version 1.0. It was time of painful migration from Qt4 to Qt5, the time of rewriting many parts of planetarium, the time of fixing the ``minuscule issues'', which really was huge and bloated problems...
+
+I'm happy and proud that we have overcome all these troubles and reaching version 1.0! But this is not finish, this is beginning of other long way... My congratulations to all prior and current community members!
+
+\begin{flushright}
+\textbf{Alexander Wolf} \\ \emph{September 2022}
+\end{flushright}
 
 
 %%% Local Variables: 
