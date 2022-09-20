@@ -27,16 +27,10 @@ class SplashScreen
 {
 	class SplashScreenWidget : public QSplashScreen
 	{
+		QFont splashFont;
 		bool painted=false;
-		void paintEvent(QPaintEvent* e) override
-		{
-			QSplashScreen::paintEvent(e);
-			painted=true;
-		}
 	public:
-		SplashScreenWidget(QPixmap const& pixmap)
-			: QSplashScreen(pixmap)
-		{}
+		SplashScreenWidget(QPixmap const& pixmap);
 		void ensureFirstPaint() const
 		{
 			while(!painted)
@@ -45,6 +39,9 @@ class SplashScreen
 				qApp->processEvents();
 			}
 		}
+
+	protected:
+		void paintEvent(QPaintEvent*) override;
 	};
 
 	static SplashScreenWidget* instance;
