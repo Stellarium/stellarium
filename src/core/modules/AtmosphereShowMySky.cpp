@@ -33,6 +33,7 @@
 #include <cassert>
 #include <cstring>
 
+#include <QApplication>
 #include <QDir>
 #include <QFile>
 #include <QDebug>
@@ -307,7 +308,7 @@ vec3 calcViewDir()
 
 void AtmosphereShowMySky::resizeRenderTarget(int width, int height)
 {
-	renderer_->resizeEvent(width, height);
+	renderer_->resizeEvent(width/ppxatmo, height/ppxatmo);
 
 	prevWidth_=width;
 	prevHeight_=height;
@@ -408,6 +409,8 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 	, indexBuffer(QOpenGLBuffer::IndexBuffer)
 	, viewRayGridBuffer(QOpenGLBuffer::VertexBuffer)
 	, luminanceToScreenProgram_(new QOpenGLShaderProgram())
+	, ppxatmo(1)
+	, flagDynamicResolution(false)
 {
 	indexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
 	indexBuffer.create();
@@ -489,7 +492,10 @@ AtmosphereShowMySky::~AtmosphereShowMySky()
 void AtmosphereShowMySky::regenerateGrid()
 {
 	const float width=viewport[2], height=viewport[3];
-	gridMaxY = StelApp::getInstance().getSettings()->value("landscape/atmosphereybin", 44).toInt();
+	QSettings* conf = StelApp::getInstance().getSettings();
+	flagDynamicResolution = conf->value("landscape/flag_dynamic_resolution", false).toBool();
+	ppxmax = ppxatmo = conf->value("landscape/ppxatmo", 1).toInt();
+	gridMaxY = conf->value("landscape/atmosphereybin", 44).toInt();
 	gridMaxX = std::floor(0.5+gridMaxY*(0.5*std::sqrt(3.0))*width/height);
 	const auto gridSize=(1+gridMaxX)*(1+gridMaxY);
 	posGrid.resize(gridSize);
@@ -724,11 +730,39 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 	{
 		lastUsedAltitude_ = location.altitude;
 		probeZenithLuminances(location.altitude);
+		dynResTimer=0;
 	}
 
 	auto sunPos  =  sun.getAltAzPosAuto(core);
 	if (std::isnan(sunPos.length()))
 		sunPos.set(0.,0.,-1.*AU);
+
+	if (flagDynamicResolution)
+	{
+		float f1=prj->getFov(), i1=fader.getInterstate();
+		Vec3d p1=sunPos, s1;
+		prj->project(p1,s1);
+		float df=qAbs(prevFov-f1)/(prevFov+f1), di=qAbs(prevFad-i1);
+		double dp=(prevPos-p1).length(), ds=(prevSun-s1).length();
+		dynResTimer++;
+		if (df+di+dp<10e-3 && ds<1 && dynResTimer<0)
+			return;
+
+		ppxatmo=dynResTimer<0?ppxmax:1;
+		if (prevPxa!=ppxatmo)
+			resizeRenderTarget(width, height);
+
+		bool verbose=qApp->property("verbose").toBool();
+		if (verbose)
+			qDebug() << "dynResTimer" << dynResTimer << "ppxatmo" << ppxatmo << "Fov" << df << "Fad" << di << "Pos" << dp << "Sun" << ds;
+
+		dynResTimer=dynResTimer<0?-2:-18;
+		prevPxa=ppxatmo;
+		prevFov=f1;
+		prevFad=i1;
+		prevPos=p1;
+		prevSun=s1;
+	}
 
 	const auto sunDir = sunPos / sunPos.length();
 	const double sunAngularRadius = atan(sun.getEquatorialRadius()/sunPos.length());
@@ -778,7 +812,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 	for (int i=0; i<numViewRayGridPoints; ++i)
 	{
 		Vec3d point(1, 0, 0);
-		prj->unProject(posGrid[i][0],posGrid[i][1],point);
+		prj->unProject(posGrid[i][0]*ppxatmo,posGrid[i][1]*ppxatmo,point);
 
 		viewRayGrid[i].set(point[0], point[1], point[2], 0);
 	}
@@ -805,7 +839,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 
 	if (!overrideAverageLuminance)
 	{
-		const auto meanPixelValue=getMeanPixelValue(width, height);
+		const auto meanPixelValue=getMeanPixelValue(width/ppxatmo, height/ppxatmo);
 		const auto meanY=meanPixelValue[1];
 		Q_ASSERT(std::isfinite(meanY));
 
@@ -868,6 +902,7 @@ bool AtmosphereShowMySky::isLoading()
 
 bool AtmosphereShowMySky::isReadyToRender()
 {
+	prevWidth_=0;
 	return renderer_->isReadyToRender();
 }
 
