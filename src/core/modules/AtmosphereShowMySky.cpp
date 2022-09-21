@@ -732,7 +732,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 
 	auto sunPos  =  sun.getAltAzPosAuto(core);
 	if (std::isnan(sunPos.length()))
-		sunPos.set(0.,0.,-1.*AU);
+		sunPos.set(0, 0, -1);
 
 	const auto sunDir = sunPos / sunPos.length();
 	const double sunAngularRadius = atan(sun.getEquatorialRadius()/sunPos.length());
@@ -746,7 +746,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 	{
 		auto moonPos = moon->getAltAzPosAuto(core);
 		if (std::isnan(moonPos.length()))
-			moonPos.set(0.,0.,-1.*AU);
+			moonPos.set(0, 0, -1);
 		moonDir = moonPos / moonPos.length();
 
 		const double moonAngularRadius = atan(moon->getEquatorialRadius()/moonPos.length());
