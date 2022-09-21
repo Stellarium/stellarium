@@ -686,13 +686,17 @@ void AtmosphereShowMySky::drawAtmosphere(Mat4f const& projectionMatrix, const fl
 	}
 }
 
-Vec4f AtmosphereShowMySky::getMeanPixelValue(int texW, int texH)
+Vec4f AtmosphereShowMySky::getMeanPixelValue()
 {
 	auto& gl=glfuncs();
 
 	GL(gl.glActiveTexture(GL_TEXTURE0));
 	GL(gl.glBindTexture(GL_TEXTURE_2D, renderer_->getLuminanceTexture()));
 	GL(gl.glGenerateMipmap(GL_TEXTURE_2D));
+
+	int texW=-1, texH=-1;
+	GL(gl.glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &texW));
+	GL(gl.glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &texH));
 
 	using namespace std;
 	// Formula from the glspec, "Mipmapping" subsection in section 3.8.11 Texture Minification
@@ -870,7 +874,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 
 	if (!overrideAverageLuminance)
 	{
-		const auto meanPixelValue=getMeanPixelValue(width/ppxatmo, height/ppxatmo);
+		const auto meanPixelValue=getMeanPixelValue();
 		const auto meanY=meanPixelValue[1];
 		Q_ASSERT(std::isfinite(meanY));
 
@@ -927,12 +931,12 @@ void AtmosphereShowMySky::draw(StelCore* core)
 	GL(luminanceToScreenProgram_->release());
 }
 
-bool AtmosphereShowMySky::isLoading()
+bool AtmosphereShowMySky::isLoading() const
 {
 	return renderer_->isLoading();
 }
 
-bool AtmosphereShowMySky::isReadyToRender()
+bool AtmosphereShowMySky::isReadyToRender() const
 {
 	return renderer_->isReadyToRender();
 }

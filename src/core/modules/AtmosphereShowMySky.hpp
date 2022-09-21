@@ -52,8 +52,8 @@ public:
 					  const StelLocation& location, float temperature, float relativeHumidity,
 					  float extinctionCoefficient, bool noScatter) override;
 	void draw(StelCore* core) override;
-	bool isLoading() override;
-	bool isReadyToRender() override;
+	bool isLoading() const override;
+	bool isReadyToRender() const override;
 	LoadingStatus stepDataLoading() override;
 
 	struct InitFailure : std::runtime_error
@@ -120,7 +120,7 @@ private:
 	void regenerateGrid();
 	void setupRenderTarget();
 	// Gets average value of the pixels rendered to the FBO texture as the value of the deepest mipmap level
-	Vec4f getMeanPixelValue(int texW, int texH);
+	Vec4f getMeanPixelValue();
 	void resizeRenderTarget(int width, int height);
 	void drawAtmosphere(Mat4f const& projectionMatrix, float sunAzimuth, float sunZenithAngle, float sunAngularRadius,
 						float moonAzimuth, float moonZenithAngle, float earthMoonDistance, float altitude,

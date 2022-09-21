@@ -74,12 +74,14 @@ computer systems were capable of running Stellarium!
 The Qt project has released its next generation of the framework, Qt6,
 in late 2020. Stellarium has to follow Qt's development quite closely,
 and so we rapidly decided that ``Stellarium 1.0'' still had to wait
-until we upgraded the software onto the new Qt6.
+until we upgraded the software onto the new Qt6, so that it will be
+ready for further development in the coming years.
 
 However, also computer platforms evolve. OpenGL has fallen out of
 favour for Apple and Microsoft who favour their own graphics
-libraries, and Vulkan has been introduced as modernized technical
-successor of OpenGL (Metal on macOS). Therefore, the ANGLE library on Windows is no
+libraries (Metal on macOS, DirectX on Windows), and Vulkan has been
+introduced as modernized technical
+successor of OpenGL. Therefore, the ANGLE library on Windows is no
 longer supported with Qt6, and future developments may move away from
 OpenGL. For the time being, we continue to use it, though.
 
@@ -87,13 +89,12 @@ Over the past year, we put most effort into this upgrade. Finally, in
 late summer of 2022, Stellarium is ready for Qt6. But: is your computer
 ready for it?
 
-Qt6 has left some computers behind: it requires 64-bit
-processors. Windows~10 (or macOS 11.0 ``Big Sur'') is seen as minimum version of this operating
-system. This poleaxes all those of us who try to keep running
-e.g.\ observatory gear with somewhat older or outdated systems or
-simply cannot afford the latest hardware.
-What can we do about this?
-
+Qt6 has left some computers behind: it requires 64-bit processors.
+Windows~10 and macOS 11.0 ``Big Sur'' are seen as minimum versions of
+these operating systems. This poleaxes all those of us who try to keep
+running e.g.\ observatory gear with somewhat older or outdated systems
+or simply cannot afford the latest hardware.  What can we do about
+this?
 
 The last purely Qt5-based version was version 0.22.2 released at June
 solstice 2022. For several years now, the number after the zero has
@@ -105,7 +106,6 @@ In fact, we can still produce Qt5-based builds with the same
 functionality from the same source code. But we wanted to base ``1.0''
 on Qt6, right? Yes, and we still do, but not as we had hoped. We
 cannot leave behind Qt5 so fast without alienating you, our users!
-
 
 Instead, we resolved upon the following: We keep the internal series
 number 0 for Qt5-based builds, and use series 1 for Qt6-based
@@ -144,7 +144,7 @@ peculiar OpenGL implementation.  See chapter~\ref{ch:skylight} for
 details.
 
 Another notable recent development are contributions of Worachate
-Boonplod who concentrated on eclipse and transits predictions in the AstroCalc
+Boonplod who concentrated on eclipse and transit predictions in the AstroCalc
 module (see section~\ref{sec:gui:AstroCalc:Eclipses}).  This also
 combines superbly with the new eclipse sky simulation!
 
@@ -164,13 +164,29 @@ this and future versions of the Stellarium desktop planetarium!
 
 \vspace{2\baselineskip}
 
-It has been a long and difficult road to reach version 1.0...
+\noindent It has been a long and difficult road to reach version 1.0\ldots
 
-I was joined the team in 2010, first as translator, then with increasing program contributions, with translatability for skycultures the first main contribution appearing in version 0.10.6. I remember my first meeting with other developers in IRC around middle of November 2010, where one of agenda item was... ``Releasing version 1.0''. We was very, very optimistic in those days. In our imagination after version 0.10.6 will be released Stellarium 0.11.0, maybe 0.11.1 and we will ready to version 1.0, because the list of features for version 1.0 in Matthew's list was almost complete. 
+I joined the team in 2010, first as translator, then with increasing
+program contributions, with translatability for skycultures the first
+main contribution appearing in version 0.10.6. I remember my first
+meeting with other developers in IRC around middle of November 2010,
+where one item of the agenda was\ldots ``Releasing version 1.0''. We were
+very, very optimistic in those days. In our imagination after version
+0.10.6 would be released Stellarium 0.11.0, maybe 0.11.1 and we would
+be ready for version 1.0, because the list of features for version 1.0
+in Matthew's list was almost complete.
 
-Well, the next 12 years we're fixed thousands bugs and adding hundreds missing and new features to really reach the version 1.0. It was time of painful migration from Qt4 to Qt5, the time of rewriting many parts of planetarium, the time of fixing the ``minuscule issues'', which really was huge and bloated problems...
+Well, the next 12 years we've fixed thousands of bugs and added
+hundreds of missing and new features to really reach the version
+1.0. It included a painful time of migration from Qt4 to Qt5, the time
+of rewriting many parts of the planetarium, the time of fixing the
+``minuscule issues'', which in reality often turned into huge and
+bloated problems\ldots
 
-I'm happy and proud that we have overcome all these troubles and reaching version 1.0! But this is not finish, this is beginning of other long way... My congratulations to all prior and current community members!
+I'm happy and proud that we have overcome all these troubles and have
+reached version 1.0! But this is not the finish, this is just the
+beginning of another long way\ldots My congratulations to all prior
+and current community members!
 
 \begin{flushright}
 \textbf{Alexander Wolf} \\ \emph{September 2022}

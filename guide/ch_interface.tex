@@ -91,7 +91,7 @@ There are a few ways you can set your location:
   your click, then choose from the shortlist.
 \item Enter a new location using the longitude, latitude and other
   data.
-\item Click on \button{Get Location from GPS} if you have a GPS
+\item Click on \menu{Get Location from GPS} if you have a GPS
   receiver. \newFeature{0.16/0.18.1} You activate a periodic request
   for GPS fixes. After a few seconds, the button should change color
   and give a textual feedback. Green indicates a good position, yellow
@@ -439,7 +439,7 @@ platform and may not work.
 Plugins (see chapter~\ref{ch:Plugins} for an introduction) can be
 enabled here (Fig.~\ref{fig:gui:configuration:plugins}) to be loaded the next time
 you start Stellarium. When loaded, many plugins allow additional configuration
-which is available by pressing the \button{configure} button on this tab.
+which is available by pressing the \menu{configure} button on this tab.
 
 
 \section{The View Settings Window}
@@ -1127,17 +1127,24 @@ with heliocentric ecliptic positions of the major planets and a graphical repres
 Select an object, start and end time, and compute an ephemeris (list of positions and magnitudes evolving over time) for that object. 
 The positions are marked in the sky with yellow disks (Fig.~\ref{fig:gui:AstroCalc:Ephemeris}). 
 
-\begin{figure}[tbp]
-	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_tab.png}
+\begin{figure}[p]
+	\centering\includegraphics[width=0.8\textwidth,trim=0 15 0 15,clip]{astrocalc_dialog_ephemeris_tab.png}
 	\caption{Astronomical Calculations (AstroCalc): Plot trace of planet}
 	\label{fig:gui:AstroCalc:Ephemeris}
 \end{figure}
 
-\begin{figure}[tbp]
-	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_extra.png}
+\begin{figure}[p]
+	\centering\includegraphics[width=0.8\textwidth,trim=0 15 0 15,clip]{astrocalc_dialog_ephemeris_extra.png}
 	\caption{Astronomical Calculations (AstroCalc): Extra options for ephemeris}
 	\label{fig:gui:AstroCalc:Ephemeris:Extra}
 \end{figure}
+
+\begin{figure}[p]
+	\centering\includegraphics[width=0.8\textwidth,trim=0 15 0 15,clip]{astrocalc_dialog_ephemeris_analemma.png}
+	\caption{Astronomical Calculations (AstroCalc): Analemma on the Earth}
+	\label{fig:gui:AstroCalc:Ephemeris:Analemma}
+\end{figure}
+
 
 When you click on a date, an orange disk indicates this date and/or magnitude. 
 Double-clicking sets the respective date and brings the object to focus. 
@@ -1145,14 +1152,9 @@ Dates and/or magnitudes will show up near position markers when \emph{Show dates
 and/or \emph{Show magnitudes} checkboxes are active. \newFeature{0.19.2} 
 To show a line between markers please tick checkbox \emph{Show line}. 
 You may customize the format of displayed data near markers and their frequency in the \emph{Extra options} window (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Extra}).
+You can also\newFeature{0.19.2} define the color of markers and enable display markers for all naked-eye visible planets.
 
 You can export the calculated ephemeris into an XLSX or CSV file. 
-
-\begin{figure}[tbp]
-	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_analemma.png}
-	\caption{Astronomical Calculations (AstroCalc): Analemma on the Earth}
-	\label{fig:gui:AstroCalc:Ephemeris:Analemma}
-\end{figure}
 
 \begin{figure}[p]
 	\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_ephemeris_analemma_mars.png}
@@ -1172,10 +1174,7 @@ For example, you can get an analemma of the Sun for any location (Fig.~\ref{fig:
 and \ref{fig:gui:AstroCalc:Ephemeris:AnalemmaMars}), 
 or observe the visibility of Mercury, Venus or a comet in the twilight sky.
 
-Since version 0.19.2\newFeature{0.19.2} you may define the color of markers and 
-enable display markers for all naked-eye visible planets.
-
-Since version 0.20.3\newFeature{0.20.3} we added ability to draw an ephemeris of 
+You can \newFeature{0.20.3}  draw an ephemeris of 
 two objects at the same time and define custom time step for the ephemeris 
 (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Asteroids}).
 
@@ -1236,8 +1235,9 @@ Four columns in the table may be helpful for planning observation of phenomena:
 \caption{Astronomical Calculations (AstroCalc): Graphs / Azimuth vs.\ Time}
 \label{fig:gui:AstroCalc:Graphs:AziVsTime}
 \end{figure}
+
 \begin{figure}[p]
-\centering\includegraphics[width=0.7\textwidth]{astrocalc_dialog_graphs_tab_me.jpg}
+\centering\includegraphics[width=0.65\textwidth]{astrocalc_dialog_graphs_tab_me.jpg}
 \caption{Astronomical Calculations (AstroCalc): Graphs / Monthly Elevation}
 \label{fig:gui:AstroCalc:Graphs:ME}
 \end{figure}
@@ -1275,8 +1275,8 @@ This tool was introduced for planning yearly observations (Fig.~\ref{fig:gui:Ast
 \subsubsection{The ``Graphs'' Subtab}
 \label{sec:gui:AstroCalc:Graphs:Graphs}
     
-\begin{figure}[tbp]
-\centering\includegraphics[width=0.7\textwidth]{astrocalc_dialog_graphs_tab_graphs.jpg}
+\begin{figure}[p]
+\centering\includegraphics[width=0.65\textwidth]{astrocalc_dialog_graphs_tab_graphs.jpg}
 \caption{Astronomical Calculations (AstroCalc): Graphs}
 \label{fig:gui:AstroCalc:Graphs:Graphs}
 \end{figure}
@@ -1309,8 +1309,8 @@ or expect a long delay where the program may seem unresponsive.
 \subsubsection{The ``Lunar Elongation'' Subtab}
 \label{sec:gui:AstroCalc:Graphs:LE}
 
-\begin{figure}[tbp]
-\centering\includegraphics[width=0.7\textwidth]{astrocalc_dialog_graphs_tab_ad.jpg}
+\begin{figure}[p]
+\centering\includegraphics[width=0.65\textwidth]{astrocalc_dialog_graphs_tab_ad.jpg}
 \caption{Astronomical Calculations (AstroCalc): Graphs / Lunar Elongation}
 \label{fig:gui:AstroCalc:Graphs:LE}
 \end{figure}
@@ -1329,10 +1329,21 @@ The ``What's Up Tonight'' (WUT) tool\newFeature{0.16.0}%
 	\footnote{This tool has been partially ported from the \program{KStars} planetarium: \url{https://edu.kde.org/kstars/}}
  displays a list of objects that will be visible at night for the current date and location.
 
-\begin{figure}[tbp]
+\begin{figure}[p]
 \centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_wut_tab.png}
 \caption{Astronomical Calculations (AstroCalc): What's Up Tonight (WUT)}
 \label{fig:gui:AstroCalc:WUT}
+\end{figure}
+
+\begin{figure}[p]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_pc_tab.png}
+\caption{Astronomical Calculations (AstroCalc): Planetary Calculator (PC), Data Tab}
+\label{fig:gui:AstroCalc:PC:Data}
+\end{figure}
+\begin{figure}[p]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_pc_graphs_tab.jpg}
+\caption{Astronomical Calculations (AstroCalc): Planetary Calculator (PC), Graphs Tab}
+\label{fig:gui:AstroCalc:PC:Graphs}
 \end{figure}
 
 The objects are organized into type categories. Select an object type in the box labeled 
@@ -1355,6 +1366,7 @@ the filter for magnitudes was moved to the right, and we added a new filter here
 In addition to the names we added 5 new sortable columns: magnitude, rising time, transit time, setting time and angular size of object.
 
 
+
 \subsection{The ``Planetary Calculator'' (PC) Tab}
 \label{sec:gui:AstroCalc:PC}
 
@@ -1362,22 +1374,11 @@ The ``Planetary Calculator'' (PC) tool\newFeature{0.17.0} has been added after u
 It computes the relations between two Solar system bodies for the current date and location --- linear and angular distances, 
 orbital resonances and orbital velocities.
 
-\begin{figure}[tbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_pc_tab.png}
-\caption{Astronomical Calculations (AstroCalc): Planetary Calculator (PC), Data Tab}
-\label{fig:gui:AstroCalc:PC:Data}
-\end{figure}
-
-The \emph{Graphs} tab \newFeature{0.18.2} (Fig.~\ref{fig:gui:AstroCalc:PC:Graphs})
+The \emph{Graphs} tab\newFeature{0.18.2} (Fig.~\ref{fig:gui:AstroCalc:PC:Graphs})
 shows the change in the linear and angular distances between
 selected celestial bodies over a range of 600 days (centered on the
 current date) as graphs.
 
-\begin{figure}[tbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_pc_graphs_tab.jpg}
-\caption{Astronomical Calculations (AstroCalc): Planetary Calculator (PC), Graphs Tab}
-\label{fig:gui:AstroCalc:PC:Graphs}
-\end{figure}
 
 \subsection{The ``Eclipses'' Tab}
 \label{sec:gui:AstroCalc:Eclipses}
@@ -1394,22 +1395,28 @@ is not reliable due to the principal unpredictability of $\Delta T$, caused by f
 \subsubsection{The ``All Solar Eclipses'' Subtab}
 \label{sec:gui:AstroCalc:Eclipses:AllSolarEclipses}
 
-This subtab (Fig.~\ref{fig:gui:AstroCalc:Eclipses:AllSolarEclipses}) contains data for all solar eclipses on the Earth in the selected time range. 
 
-\begin{figure}[htbp]
+\begin{figure}[hb]
 \centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_eclipses_ase.jpg}
 \caption{Astronomical Calculations (AstroCalc): Eclipses / All Solar Eclipses}
 \label{fig:gui:AstroCalc:Eclipses:AllSolarEclipses}
 \end{figure}
 
+\noindent This subtab (Fig.~\ref{fig:gui:AstroCalc:Eclipses:AllSolarEclipses}) contains data for all solar eclipses on the Earth in the selected time range. 
 Double click on a line in the table will set location and time of greatest eclipse. Click on the table row will show circumstances of selected eclipse in the lower table.
 
-The quantity gamma is the minimum distance of the lunar shadow cone axis to the center of the Earth, in units of Earth’s equatorial radius.
+The quantity Gamma is the minimum distance of the lunar shadow cone axis to the center of the Earth, in units of Earth’s equatorial radius.
 This distance is positive or negative, depending on whether the axis of the shadow cone passes north or south of the Earth's center.
 
-Click the ``Export KML...'' button will create KML file of selected eclipse. KML is a file format used to display geographic data in Earth browser, such as Marble, Google Earth, Google Maps. The file can be opened in applications that support KML version 2.2. Description of lines for solar eclipse are shown below (Fig.~\ref{fig:gui:AstroCalc:Eclipses:EclipseMap}).
-
-Different colors are used to draw path of central eclipse. Red = total eclipse, blue = annular eclipse, and purple = hybrid eclipse. Limits of penumbral or partial eclipse are green.
+Click the \menu{Export KML\ldots} button to create a KML file of the
+selected eclipse. KML is a file format used to display geographic data
+in Earth browsers, such as \program{Marble}, \program{Google Earth} or
+\program{Google Maps}. The file can be opened in applications that
+support KML version~2.2. A description of the lines for solar eclipses
+is shown in Fig.~\ref{fig:gui:AstroCalc:Eclipses:EclipseMap}.
+Different colors are used to draw path of central eclipse. Red = total
+eclipse, blue = annular eclipse, and purple = hybrid eclipse. Limits
+of penumbral or partial eclipse are green.
 
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.95\textwidth]{eclipsemap.pdf}
@@ -1422,7 +1429,7 @@ Different colors are used to draw path of central eclipse. Red = total eclipse, 
 
 This subtab (Fig.~\ref{fig:gui:AstroCalc:Eclipses:LocalSolarEclipses}) contains data for solar eclipses for the current location (on the Earth!) in defined time range. 
 
-\begin{figure}[tbp]
+\begin{figure}[p]
 \centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_eclipses_lse.jpg}
 \caption{Astronomical Calculations (AstroCalc): Eclipses / Local Solar Eclipses}
 \label{fig:gui:AstroCalc:Eclipses:LocalSolarEclipses}
@@ -1449,10 +1456,16 @@ The visibility conditions are based on the altitude of the Moon at greatest ecli
   \item[Perfect] --- perfect visibility conditions for current location (altitude range is 45---90$\degree$).
 \end{description}
 
-\begin{figure}[tbp]
+\begin{figure}[p]
 \centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_eclipses_le.jpg}
 \caption{Astronomical Calculations (AstroCalc): Eclipses / Lunar Eclipses}
 \label{fig:gui:AstroCalc:Eclipses:LunarEclipses}
+\end{figure}
+
+\begin{figure}[p]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_transits.jpg}
+\caption{Astronomical Calculations (AstroCalc): Eclipses / Planetary Transits}
+\label{fig:gui:AstroCalc:Eclipses:PlanetaryTransits}
 \end{figure}
 
 
@@ -1470,20 +1483,13 @@ and setting times into account.
 
 Double click on the table row will set time of mid-transit.
 
-\begin{figure}[tbp]
-\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_transits.jpg}
-\caption{Astronomical Calculations (AstroCalc): Eclipses / Planetary Transits}
-\label{fig:gui:AstroCalc:Eclipses:PlanetaryTransits}
-\end{figure}
-
-
 \section{The Help Window}
 \label{sec:gui:help}
 
 \subsection{The Help Tab}
 \label{sec:gui:help:help}
 \begin{figure}[htp]
-\centering\includegraphics[width=0.65\textwidth]{help_dialog.png}
+\centering\includegraphics[width=0.625\textwidth]{help_dialog.png}
 \caption{Help Window}
 \label{fig:gui:help}
 \end{figure}
@@ -1495,7 +1501,7 @@ a browse of the information in this window.
 \subsection{The About Tab}
 \label{sec:gui:help:about}
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.65\textwidth]{help_dialog_about.png}
+\centering\includegraphics[width=0.625\textwidth]{help_dialog_about.png}
 \caption{Help Window: About}
 \label{fig:gui:help:about}
 \end{figure}
