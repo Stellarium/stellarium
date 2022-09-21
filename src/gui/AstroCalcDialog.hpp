@@ -225,8 +225,7 @@ public:
 		SolarEclipseContactLongitude,	//! longitude at contact time
 		SolarEclipseContactPathwidth,	//! pathwidth of total or annular solar eclipse
 		SolarEclipseContactDuration,	//! central duration of total or annular solar eclipse
-		SolarEclipseContactType,	//! type of solar eclipse
-		SolarEclipseContactJD,		//! Julian day of contact time
+		SolarEclipseContactType,	//! type of solar eclipse		
 		SolarEclipseContactCount	//! total number of columns
 	};
 

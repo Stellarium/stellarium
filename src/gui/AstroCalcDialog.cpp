@@ -3313,8 +3313,7 @@ void AstroCalcDialog::setSolarEclipseContactsHeaderNames()
 	solareclipsecontactsHeader << q_("Longitude");
 	solareclipsecontactsHeader << qc_("Path Width", "column name");
 	solareclipsecontactsHeader << qc_("Central Duration", "column name");
-	solareclipsecontactsHeader << q_("Type");
-	solareclipsecontactsHeader << q_("JD");
+	solareclipsecontactsHeader << q_("Type");	
 	ui->solareclipsecontactsTreeWidget->setHeaderLabels(solareclipsecontactsHeader);
 
 	// adjust the column width
@@ -3340,7 +3339,7 @@ void AstroCalcDialog::initListSolarEclipseContact()
 	ui->solareclipsecontactsTreeWidget->setColumnCount(SolarEclipseContactCount);
 	setSolarEclipseContactsHeaderNames();
 	ui->solareclipsecontactsTreeWidget->header()->setSectionsMovable(false);
-	ui->solareclipsecontactsTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);
+	ui->solareclipsecontactsTreeWidget->header()->setDefaultAlignment(Qt::AlignCenter);	
 }
 
 // Local solar eclipse parameters
@@ -4188,9 +4187,7 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 			treeItem->setToolTip(SolarEclipseContactPathwidth, q_("Width of the path of totality or annularity"));
 			treeItem->setText(SolarEclipseContactDuration, durationStr);
 			treeItem->setToolTip(SolarEclipseContactDuration, q_("Duration of total or annular phase"));
-			treeItem->setText(SolarEclipseContactType, eclipseTypeStr);
-			JDStr = QString("%1").arg(QString::number(JD, 'f', 6));
-			treeItem->setText(SolarEclipseContactJD, JDStr);
+			treeItem->setText(SolarEclipseContactType, eclipseTypeStr);			
 			treeItem->setTextAlignment(SolarEclipseContact, Qt::AlignLeft);
 			treeItem->setTextAlignment(SolarEclipseContactDate, Qt::AlignRight);
 			treeItem->setTextAlignment(SolarEclipseContactLatitude, Qt::AlignRight);
@@ -4629,9 +4626,8 @@ void AstroCalcDialog::saveSolarEclipseKML()
 		const double currentJD = core->getJD(); // save current JD
 		const bool saveTopocentric = core->getUseTopocentricCoordinates();
 		core->setUseTopocentricCoordinates(false);
-		core->update(0);
-		QString sJD = ui->solareclipsecontactsTreeWidget->topLevelItem(1)->text(7).trimmed();
-		double JD = sJD.toDouble(); // get JD from hidden column
+		core->update(0);		
+		double JD = ui->solareclipsecontactsTreeWidget->topLevelItem(1)->data(SolarEclipseContactDate, Qt::UserRole).toDouble();
 		// Find exact time of minimum distance between axis of lunar shadow cone to the center of Earth
 		JD = getJDofMinimumDistance(JD);
 		double JDMid = JD;
