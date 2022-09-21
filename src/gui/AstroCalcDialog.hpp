@@ -225,7 +225,7 @@ public:
 		SolarEclipseContactLongitude,	//! longitude at contact time
 		SolarEclipseContactPathwidth,	//! pathwidth of total or annular solar eclipse
 		SolarEclipseContactDuration,	//! central duration of total or annular solar eclipse
-		SolarEclipseContactType,	//! type of solar eclipse
+		SolarEclipseContactType,	//! type of solar eclipse		
 		SolarEclipseContactCount	//! total number of columns
 	};
 
@@ -330,6 +330,7 @@ private slots:
 	void selectCurrentSolarEclipseContact(const QModelIndex &modelIndex);
 	void saveSolarEclipses();
 	void saveSolarEclipseCircumstances();
+	void saveSolarEclipseKML();
 
 	//! Calculating local solar eclipses to fill the list.
 	//! Algorithm taken from calculating the rises, transits and sets.
@@ -523,6 +524,16 @@ private:
 	double getJDofContact(double JD, bool beginning, bool penumbral, bool external);
 	//! Iteration to calculate contact times of solar eclipse
 	double getDeltaTofContact(double JD, bool beginning, bool penumbra, bool external);
+	//! Geographic coordinates where solar eclipse begins/ends at sunrise/sunset
+	QPair<double, double> getRiseSetLineCoordinates(bool rise, double x,double y,double d,double L,double mu);
+	//! Geographic coordinates where maximum solar eclipse occurs at sunrise/sunset
+	QPair<double, double> getMaximumEclipseAtRiseSet(bool rise, double JD);
+	//! Geographic coordinates of shadow outline
+	QPair<double, double> getShadowOutlineCoordinates(double angle, double x, double y, double d, double L, double tf,double mu);
+	//! Geographic coordinates of northern and southern limit of shadow
+	QPair<double, double> getNSLimitofShadow(double JD, bool northernLimit, bool penumbra);
+	//! Geographic coordinates of extreme northern and southern limits of shadow
+	QPair<double, double> getExtremeNSLimitofShadow(double JD, bool northernLimit, bool penumbra, bool begin);
 	//! Init header and list of local solar eclipse
 	void initListSolarEclipseLocal();
 	//! Init header and list of transit
@@ -969,7 +980,8 @@ private:
 class BesselParameters
 {
 public:
-	BesselParameters(double &xdot, double &ydot, double &ddot, double &mudot, double &etadot);
+	BesselParameters(double &xdot, double &ydot, double &ddot, double &mudot,
+	double &ldot, double &etadot, double &bdot, double &cdot, bool penumbra);
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
