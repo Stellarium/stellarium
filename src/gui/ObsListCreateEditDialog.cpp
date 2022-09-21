@@ -696,7 +696,6 @@ void ObsListCreateEditDialog::obsListExitButtonPressed() {
     ui->obsListErrorMessage->setHidden(true);
     ui->obsListErrorMessage->clear();
     this->close();
-    emit exitButtonClicked();
 }
 
 /*
