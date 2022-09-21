@@ -99,7 +99,9 @@
 \newcommand{\guibutton[3]}[0.45]{\fbox{\includegraphics[scale=#1]{#3}}}
 \fi
 % Will become a boxed text, representing a GUI button label.
-\newcommand{\button}[1]{\fbox{\textbf{\textsf{\scriptsize #1}}}}
+%\newcommand{\button}[1]{\fbox{\textbf{\textsf{\scriptsize #1}}}}
+% V1.0: Better use menu
+\newcommand{\button}[1]{\menu{#1}}
 %% Person names. In some places they have been italicised, in others bold. Make them appear the same with this, and add them to the index.
 %% Names should be given with First names and surnames like \name[Johann]{Bayer}. The index will be built sorted by entry surnames.
 %% Unfortunately, these cause problems (Ugly rendering, and Stack size exceeded) with tex4ht. But we don't have an index in the HTML version, so just ignore.
@@ -127,9 +129,9 @@
 %% TODO Decide on formatting etc.
 %% Starting with the 1.0 release, we suppress marginpar notes of new features for version hints starting with 0. 
 \usepackage{xstring}
-\newcommand{\newFeature}[1]{
+\newcommand{\newFeature}[1]{%
 \IfBeginWith{\StelVersion}{0}%
-        {\marginpar{\centering{\small v #1}}}
+        {\marginpar{\centering{\small v #1}}}%
         {\IfBeginWith{#1}{0}%
                 {}% Gobble content of 0.x numbers
                 {\marginpar{\centering{\small v #1}}}}}
