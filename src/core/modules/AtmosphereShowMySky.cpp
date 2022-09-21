@@ -502,10 +502,6 @@ void AtmosphereShowMySky::regenerateGrid()
 	const float width=viewport[2]/ppxatmo, height=viewport[3]/ppxatmo;
 	gridMaxY = conf->value("landscape/atmosphereybin", 44).toInt();
 	gridMaxX = std::floor(0.5+gridMaxY*(0.5*std::sqrt(3.0))*width/height);
-	bool verbose=qApp->property("verbose").toBool();
-	if (verbose)
-		qDebug() << "gridMaxX =" << gridMaxX << "gridMaxY =" << gridMaxY;
-
 	const auto gridSize=(1+gridMaxX)*(1+gridMaxY);
 	posGrid.resize(gridSize);
 	viewRayGrid.resize(gridSize);
