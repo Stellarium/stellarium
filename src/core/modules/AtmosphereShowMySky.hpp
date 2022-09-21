@@ -126,6 +126,7 @@ private:
 						float moonAzimuth, float moonZenithAngle, float earthMoonDistance, float altitude,
 	                    float brightness, float lightPollutionGroundLuminance, float airglowRelativeBrightness,
 	                    bool drawAsEclipse, bool clearTarget);
+	bool dynamicResolution(StelProjectorP prj, Vec3d &sunPos, int width, int height);
 	void probeZenithLuminances(float altitude);
 #endif // ENABLE_SHOWMYSKY
 };
