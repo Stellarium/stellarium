@@ -4648,6 +4648,8 @@ void AstroCalcDialog::saveSolarEclipseKML()
 								filter,
 								&defaultFilter);
 
+		if (filePath!=Q_NULLPTR)
+			QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 		bool partialEclipse = false;
 		bool nonCentralEclipse = false;
 		double x,y,d,tf1,tf2,L1,L2,mu;
@@ -5077,6 +5079,7 @@ void AstroCalcDialog::saveSolarEclipseKML()
 			}
 			stream << "</Document>\n</kml>\n";
 			file.close();
+			QGuiApplication::restoreOverrideCursor();
 		}
 		core->setJD(currentJD);
 		core->setUseTopocentricCoordinates(saveTopocentric);

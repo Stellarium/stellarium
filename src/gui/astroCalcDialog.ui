@@ -2600,7 +2600,10 @@
                 <item>
                  <widget class="QPushButton" name="solareclipsesKMLSaveButton">
                   <property name="text">
-                   <string>Save KML of eclipse...</string>
+                   <string>Export KML...</string>
+                  </property>
+                  <property name="toolTip">
+                   <string>Export KML for visibility map of selected eclipse</string>
                   </property>
                  </widget>
                 </item>
