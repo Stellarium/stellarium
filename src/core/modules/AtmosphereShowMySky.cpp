@@ -848,7 +848,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 	for (int i=0; i<numViewRayGridPoints; ++i)
 	{
 		Vec3d point(1, 0, 0);
-		prj->unProject(posGrid[i][0]*(float)ppxatmo,posGrid[i][1]*(float)ppxatmo,point);
+		prj->unProject(posGrid[i][0]*(double)ppxatmo,posGrid[i][1]*(double)ppxatmo,point);
 
 		viewRayGrid[i].set(point[0], point[1], point[2], 0);
 	}
