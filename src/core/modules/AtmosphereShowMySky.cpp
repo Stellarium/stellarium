@@ -737,15 +737,14 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 	const auto sunDir = sunPos / sunPos.length();
 	const double sunAngularRadius = atan(sun.getEquatorialRadius()/sunPos.length());
 
-	// If we have no moon, just put it into nadir at 1 AU distance
-	Vec3d moonPos{0.,0.,-1.*AU};
+	// If we have no moon, just put it into nadir
 	Vec3d moonDir{0.,0.,-1.};
 
 	double earthMoonDistance = 0;
 
 	if (moon)
 	{
-		moonPos = moon->getAltAzPosAuto(core);
+		auto moonPos = moon->getAltAzPosAuto(core);
 		if (std::isnan(moonPos.length()))
 			moonPos.set(0.,0.,-1.*AU);
 		moonDir = moonPos / moonPos.length();
