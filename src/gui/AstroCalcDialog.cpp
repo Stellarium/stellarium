@@ -359,6 +359,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->solareclipsesSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipses()));
 	initListSolarEclipseContact();
 	connect(ui->solareclipsescontactsSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipseCircumstances()));
+	connect(ui->solareclipsesKMLSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipseKML()));
 	connect(ui->solareclipseTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipse(QModelIndex)));
 	connect(ui->solareclipseTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipseDate(QModelIndex)));
 	connect(ui->solareclipsecontactsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipseContact(QModelIndex)));
@@ -3313,6 +3314,7 @@ void AstroCalcDialog::setSolarEclipseContactsHeaderNames()
 	solareclipsecontactsHeader << qc_("Path Width", "column name");
 	solareclipsecontactsHeader << qc_("Central Duration", "column name");
 	solareclipsecontactsHeader << q_("Type");
+	solareclipsecontactsHeader << q_("JD");
 	ui->solareclipsecontactsTreeWidget->setHeaderLabels(solareclipsecontactsHeader);
 
 	// adjust the column width
@@ -3376,8 +3378,8 @@ LocalSEparams localSolarEclipse(double JD,int contact,bool central) {
 	core->setJD(JD);
 	core->update(0);
 
-	double xdot,ydot,ddot,mudot,etadot;
-	BesselParameters(xdot,ydot,ddot,mudot,etadot);
+	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
+	BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,true);
 	double x,y,d,tf1,tf2,L1,L2,mu;
 	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 	double theta = (mu + lon) * M_PI_180;
@@ -3425,8 +3427,8 @@ double AstroCalcDialog::getDeltaTofContact(double JD, bool beginning, bool penum
 	static const double e2 = f*(2.-f);
 	core->setJD(JD);
 	core->update(0);
-	double xdot,ydot,ddot,mudot,etadot;
-	BesselParameters(xdot,ydot,ddot,mudot,etadot);
+	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
+	BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
 	double x,y,d,tf1,tf2,L1,L2,mu,L=0.;
 	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 	double rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
@@ -3476,21 +3478,24 @@ double AstroCalcDialog::getJDofContact(double JD, bool beginning, bool penumbra,
 
 double AstroCalcDialog::getJDofMinimumDistance(double JD)
 {
+	const double currentJD = core->getJD(); // save current JD
 	double dt = 1.;
 	int iterations = 0;
-	double xdot,ydot,ddot,mudot,etadot;
+	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
 	double x,y,d,tf1,tf2,L1,L2,mu;
 	while (std::abs(dt)>(0.1/86400.) && (iterations < 20)) // 0.1 second of accuracy
 	{
 		core->setJD(JD);
 		core->update(0);
-		BesselParameters(xdot,ydot,ddot,mudot,etadot);
+		BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,false);
 		SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 		double n2 = xdot*xdot + ydot*ydot;
 		dt = -(x*xdot + y*ydot)/n2;
 		JD += dt/24.;
 		iterations++;
 	}
+	core->setJD(currentJD);
+	core->update(0);
 	return JD;
 }
 
@@ -4020,7 +4025,7 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 	const double currentJD = core->getJD();
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	QPair<QString, QString> coordStrings;
-	QString altitudeStr, azimuthStr, latitudeStr, longitudeStr, pathWidthStr, durationStr, eclipseTypeStr;
+	QString altitudeStr, azimuthStr, latitudeStr, longitudeStr, pathWidthStr, durationStr, eclipseTypeStr, JDStr;
 	QString km = qc_("km", "distance");
 	double JDMid = modelIndex.sibling(modelIndex.row(), SolarEclipseDate).data(Qt::UserRole).toDouble();
 	double JD = JDMid;
@@ -4184,6 +4189,8 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 			treeItem->setText(SolarEclipseContactDuration, durationStr);
 			treeItem->setToolTip(SolarEclipseContactDuration, q_("Duration of total or annular phase"));
 			treeItem->setText(SolarEclipseContactType, eclipseTypeStr);
+			JDStr = QString("%1").arg(QString::number(JD, 'f', 6));
+			treeItem->setText(SolarEclipseContactJD, JDStr);
 			treeItem->setTextAlignment(SolarEclipseContact, Qt::AlignLeft);
 			treeItem->setTextAlignment(SolarEclipseContactDate, Qt::AlignRight);
 			treeItem->setTextAlignment(SolarEclipseContactLatitude, Qt::AlignRight);
@@ -4192,6 +4199,7 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 			treeItem->setTextAlignment(SolarEclipseContactDuration, Qt::AlignRight);
 			treeItem->setTextAlignment(SolarEclipseContactType, Qt::AlignLeft);
 		}
+		ui->solareclipsecontactsTreeWidget->setColumnHidden(7,true);
 		event = false;
 	}
 	core->setJD(currentJD);
@@ -4347,7 +4355,7 @@ void AstroCalcDialog::saveSolarEclipseCircumstances()
 		header.setBorderStyle(QXlsx::Format::BorderThin);
 		header.setBorderColor(Qt::black);
 		header.setFontBold(true);
-		for (int i = 0; i < columns; i++)
+		for (int i = 0; i < columns-1; i++)
 		{
 			// Row 1: Names of columns
 			sData = solareclipsecontactsHeader.at(i).trimmed();
@@ -4359,7 +4367,7 @@ void AstroCalcDialog::saveSolarEclipseCircumstances()
 		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
 		for (int i = 0; i < count; i++)
 		{
-			for (int j = 0; j < columns; j++)
+			for (int j = 0; j < columns-1; j++)
 			{
 				// Row 2 and next: the data
 				sData = ui->solareclipsecontactsTreeWidget->topLevelItem(i)->text(j).trimmed();
@@ -4374,7 +4382,7 @@ void AstroCalcDialog::saveSolarEclipseCircumstances()
 
 		xlsx.write(count+3, 1, q_("Note: Path of eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
 		
-		for (int i = 0; i < columns; i++)
+		for (int i = 0; i < columns-1; i++)
 		{
 			xlsx.setColumnWidth(i+1, width[i]+2);
 		}
@@ -4419,11 +4427,164 @@ void AstroCalcDialog::selectCurrentSolarEclipseDate(const QModelIndex& modelInde
 	}
 }
 
-BesselParameters::BesselParameters(double &xdot, double &ydot, double &ddot, double &mudot, double &etadot)
+QPair<double, double> AstroCalcDialog::getRiseSetLineCoordinates(bool rise, double x,double y,double d,double L,double mu)
+{
+	// Source: Explanatory Supplement to the Astronomical Ephemeris 
+	// and the American Ephemeris and Nautical Almanac (1961)
+	QPair<double, double> coordinates;
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
+	static const double ff = 1./(1.-f);
+	double m2 = x*x+y*y;
+	double cgm = (m2+1.-L*L)/(2.*std::sqrt(m2));
+	if (std::abs(cgm)>1.)
+	{
+		coordinates.first = 99.;
+		coordinates.second = 0.;
+	}
+	else
+	{
+		double gamma = std::acos(cgm)+std::atan2(x,y);
+		if (!rise)
+			gamma = M_PI*2.-std::acos(cgm)+std::atan2(x,y);
+		double xi = std::sin(gamma);
+		double eta = std::cos(gamma);
+		double b = -eta*std::sin(d);
+		double theta = std::atan2(xi,b)*M_180_PI;
+		double lngDeg = theta-mu;
+		lngDeg = StelUtils::fmodpos(lngDeg, 360.);
+		if (lngDeg > 180.) lngDeg -= 360.;
+		double sfn1 = eta*std::cos(d);
+		double cfn1 = std::sqrt(1.-sfn1*sfn1);
+		double latDeg = ff*sfn1/cfn1;
+		coordinates.first = std::atan(latDeg)*M_180_PI;
+		coordinates.second = lngDeg;
+	}
+	return coordinates;
+}
+
+QPair<double, double> AstroCalcDialog::getShadowOutlineCoordinates(double angle,double x,double y,double d,double L,double tf,double mu)
+{
+	// Source: Explanatory Supplement to the Astronomical Ephemeris 
+	// and the American Ephemeris and Nautical Almanac (1961)
+	QPair<double, double> coordinates;
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
+	static const double e2 = f*(2.-f);
+	static const double ff = 1./(1.-f);
+	double rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
+	double sd1 = std::sin(d)/rho1;
+	double cd1 = std::sqrt(1.-e2)*std::cos(d)/rho1;
+	double xi0 = x-L*std::sin(angle);
+	double eta0 = y-L*std::cos(angle);
+	double zeta0 = 1.-xi0*xi0-eta0*eta0;
+	if (zeta0 < 0)
+	{
+		coordinates.first = 99.;
+		coordinates.second = 0.;
+	}
+	else
+	{
+		double L1 = L-zeta0*tf;
+		double xi = x-L1*std::sin(angle);
+		double eta1 = (y-L1*std::cos(angle))/rho1;
+		double pp = 1.-xi*xi-eta1*eta1;
+		if (pp < 0)
+		{
+			coordinates.first = 99.;
+			coordinates.second = 0.;
+		}
+		else
+		{
+			double zeta0 = std::sqrt(pp);
+			double L1 = L-zeta0*tf;
+			double xi = x-L1*std::sin(angle);
+			double eta1 = (y-L1*std::cos(angle))/rho1;
+			double pp = 1.-xi*xi-eta1*eta1;
+			if (pp < 0)
+			{
+				coordinates.first = 99.;
+				coordinates.second = 0.;
+			}
+			else
+			{
+				double zeta1 = std::sqrt(pp);
+				double b = -eta1*sd1+zeta1*cd1;
+				double theta = std::atan2(xi,b)*M_180_PI;
+				double lngDeg = theta-mu;
+				lngDeg = StelUtils::fmodpos(lngDeg, 360.);
+				if (lngDeg > 180.) lngDeg -= 360.;
+
+				double sfn1 = eta1*cd1+zeta1*sd1;
+				double cfn1 = std::sqrt(1.-sfn1*sfn1);
+				double latDeg = ff*sfn1/cfn1;
+				coordinates.first = std::atan(latDeg)*M_180_PI;
+				coordinates.second = lngDeg;
+			}
+		}
+	}
+	return coordinates;
+}
+
+QPair<double, double> AstroCalcDialog::getMaximumEclipseAtRiseSet(bool rise, double JD)
+{
+	// Source: Explanatory Supplement to the Astronomical Ephemeris 
+	// and the American Ephemeris and Nautical Almanac (1961)
+	QPair<double, double> coordinates;
+	StelCore* core = StelApp::getInstance().getCore();
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
+	static const double ff = 1./(1.-f);
+	core->setJD(JD);
+	core->update(0);
+	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
+	BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,true);
+	double x,y,d,tf1,tf2,L1,L2,mu;
+	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+
+	double qa = std::atan2(bdot,cdot);
+	if (!rise)
+		qa += M_PI;
+	double sgqa = x*std::cos(qa)-y*std::sin(qa);
+	if (std::abs(sgqa)<1.)
+	{
+		double gqa = std::asin(sgqa);
+		double ga = gqa+qa;
+		double xxia = x-std::sin(ga);
+		double yetaa = y-std::cos(ga);
+		if (xxia*xxia+yetaa*yetaa < L1*L1)
+		{
+			double b = -std::cos(ga)*std::sin(d);
+			double theta = std::atan2(std::sin(ga),b)*M_180_PI;
+			double lngDeg = theta-mu;
+			lngDeg = StelUtils::fmodpos(lngDeg, 360.);
+			if (lngDeg > 180.) lngDeg -= 360.;
+			double sfn1 = std::cos(ga)*std::cos(d);
+			double cfn1 = std::sqrt(1.-sfn1*sfn1);
+			double latDeg = ff*sfn1/cfn1;
+			coordinates.first = std::atan(latDeg)*M_180_PI;
+			coordinates.second = lngDeg;
+		}
+		else
+		{
+			coordinates.first = 99.;
+			coordinates.second = 0.;
+		}
+	}
+	else
+	{
+		coordinates.first = 99.;
+		coordinates.second = 0.;
+	}
+	return coordinates;
+}
+
+BesselParameters::BesselParameters(double &xdot, double &ydot, double &ddot, double &mudot,
+	double &ldot, double &etadot, double &bdot, double &cdot, bool penumbra)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	double JD = core->getJD();
-	double tf1,tf2;
+	double tf,tf1,tf2,L;
 	core->setJD(JD - 5./1440.);
 	core->update(0);
 	double x1,y1,d1,mu1,L11,L21;
@@ -4443,7 +4604,715 @@ BesselParameters::BesselParameters(double &xdot, double &ydot, double &ddot, dou
 	core->update(0);
 	double x,y,d,L1,L2,mu;
 	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	if (penumbra)
+	{
+		L = L1;
+		tf = tf1;
+		ldot = (L12-L11)*6.;
+	}
+	else
+	{
+		L = L2;
+		tf = tf2;
+		ldot = (L22-L21)*6.;
+	}
 	etadot = mudot*x*std::sin(d);
+	bdot = -(ydot-etadot);
+	cdot = xdot+mudot*y*std::sin(d)+mudot*L*tf*std::cos(d);
+}
+
+void AstroCalcDialog::saveSolarEclipseKML()
+{
+	int count = ui->solareclipsecontactsTreeWidget->topLevelItemCount();
+	if (count>0) // Should be a way to make sure that we have circumstances of an eclipse in the table
+	{
+		const double currentJD = core->getJD(); // save current JD
+		const bool saveTopocentric = core->getUseTopocentricCoordinates();
+		core->setUseTopocentricCoordinates(false);
+		core->update(0);
+		QString sJD = ui->solareclipsecontactsTreeWidget->topLevelItem(1)->text(7).trimmed();
+		double JD = sJD.toDouble(); // get JD from hidden column
+		// Find exact time of minimum distance between axis of lunar shadow cone to the center of Earth
+		JD = getJDofMinimumDistance(JD);
+		double JDMid = JD;
+		int Year, Month, Day;
+		StelUtils::getDateFromJulianDay(JDMid, &Year, &Month, &Day);
+		// Use year-month-day in the file name
+		QString eclipseDateStr = QString("-%1-%2-%3").arg(QString::number(Year), QString::number(Month), QString::number(Day));
+		QString filter = "KML";
+		filter.append(" (*.kml)");
+		QString defaultFilter("(*.kml)");
+		QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+								q_("Save KML as..."),
+								QDir::homePath() + "/solareclipse"+eclipseDateStr+".kml",
+								filter,
+								&defaultFilter);
+
+		if (filePath!=Q_NULLPTR)
+			QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+		bool partialEclipse = false;
+		bool nonCentralEclipse = false;
+		double x,y,d,tf1,tf2,L1,L2,mu;
+		double dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude;
+		core->setJD(JDMid);
+		core->update(0);
+		SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+		double gamma = std::sqrt(x*x+y*y);
+		// Type of eclipse
+		if (abs(gamma) > 0.9972 && abs(gamma) < (1.5433 + L2))
+		{
+			if (abs(gamma) < 0.9972 + abs(L2))
+			{
+				partialEclipse = false;
+				nonCentralEclipse = true; // non-central total/annular eclipse
+			}
+			else
+				partialEclipse = true;
+		}
+		const double JDP1 = getJDofContact(JDMid,true,true,true);
+		const double JDP4 = getJDofContact(JDMid,false,true,true);
+
+		QFile file(filePath);
+		if(file.open(QIODevice::WriteOnly | QIODevice::Text))
+		{
+			QTextStream stream(&file);
+			QPair<double, double> coordinates;
+			stream << "<?xml version='1.0' encoding='UTF-8'?>\n<kml xmlns='http://www.opengis.net/kml/2.2'>\n<Document>" << '\n';
+			stream << "<name>"+q_("Solar Eclipse")+eclipseDateStr+"</name>\n<description>"+q_("Created by Stellarium")+"</description>\n";
+			stream << "<Style id='Hybrid'>\n<LineStyle>\n<color>ff800080</color>\n<width>1</width>\n</LineStyle>\n";
+			stream << "<PolyStyle>\n<color>ff800080</color>\n</PolyStyle>\n</Style>\n";
+			stream << "<Style id='Total'>\n<LineStyle>\n<color>ff0000ff</color>\n<width>1</width>\n</LineStyle>\n";
+			stream << "<PolyStyle>\n<color>ff0000ff</color>\n</PolyStyle>\n</Style>\n";
+			stream << "<Style id='Annular'>\n<LineStyle>\n<color>ffff0000</color>\n<width>1</width>\n</LineStyle>\n";
+			stream << "<PolyStyle>\n<color>ffff0000</color>\n</PolyStyle>\n</Style>\n";
+			stream << "<Style id='PLimits'>\n<LineStyle>\n<color>ff00ff00</color>\n<width>1</width>\n</LineStyle>\n";
+			stream << "<PolyStyle>\n<color>ff00ff00</color>\n</PolyStyle>\n</Style>\n";
+
+			// Plot GE
+			SolarEclipseData(JDMid,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+			stream << "<Placemark>\n<name>"+q_("Greatest eclipse")+"</name>\n<Point>\n<coordinates>";
+			stream << lngDeg << "," << latDeg << ",0.0\n";
+			stream << "</coordinates>\n</Point>\n</Placemark>\n";
+
+			// Plot P1
+			SolarEclipseData(JDP1,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+			stream << "<Placemark>\n<name>"+q_("First contact with Earth")+"</name>\n<Point>\n<coordinates>";
+			stream << lngDeg << "," << latDeg << ",0.0\n";
+			stream << "</coordinates>\n</Point>\n</Placemark>\n";
+
+			// Plot P4
+			SolarEclipseData(JDP4,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+			stream << "<Placemark>\n<name>"+q_("Last contact with Earth")+"</name>\n<Point>\n<coordinates>";
+			stream << lngDeg << "," << latDeg << ",0.0\n";
+			stream << "</coordinates>\n</Point>\n</Placemark>\n";
+
+			// Northern Limit of penumbra
+			stream << "<Placemark>\n<name>PenumbraLimit</name>\n<styleUrl>#PLimits</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+			stream << "<tessellate>1</tessellate>\n<altitudeMode>absoluto</altitudeMode>\n<coordinates>\n";
+			JD = JDP1;
+			int i = 0;
+			while (JD < JDP4)
+			{
+				JD = JDP1 + i/1440.0;
+				coordinates = getNSLimitofShadow(JD,true,true);
+				if (coordinates.first <= 90.)
+					stream << coordinates.second << "," << coordinates.first << ",0.0\n";
+				i++;
+			}
+			stream << "</coordinates>\n</LineString>\n</Placemark>\n";
+
+			// Southern Limit of penumbra
+			stream << "<Placemark>\n<name>PenumbraLimit</name>\n<styleUrl>#PLimits</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+			stream << "<tessellate>1</tessellate>\n<altitudeMode>absoluto</altitudeMode>\n<coordinates>\n";
+			JD = JDP1;
+			i = 0;
+			while (JD < JDP4)
+			{
+				JD = JDP1 + i/1440.0;
+				coordinates = getNSLimitofShadow(JD,false,true);
+				if (coordinates.first <= 90.)
+					stream << coordinates.second << "," << coordinates.first << ",0.0\n";
+				i++;
+			}
+			stream << "</coordinates>\n</LineString>\n</Placemark>\n";
+
+			// Rise/set curve 1
+			stream << "<Placemark>\n<name>RiseSetLimit</name>\n<styleUrl>#PLimits</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+			stream << "<tessellate>1</tessellate>\n<altitudeMode>absoluto</altitudeMode>\n<coordinates>\n";
+			JD = JDP1;
+			i = 0;
+			double x,y,d,tf1,tf2,L1,L2,mu;
+			double lat0, lon0, dlat, dlon, diff;
+			while (JD < JDP4)
+			{
+				JD = JDP1 + i/1440.0;
+				core->setJD(JD);
+				core->update(0);
+				SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+				if (i==0)
+				{
+					lat0 = 0.;
+					lon0 = 0.;
+				}
+				coordinates = getRiseSetLineCoordinates(true,x,y,d,L1,mu);
+				if (coordinates.first <= 90.)
+				{
+					dlat = lat0-coordinates.first;
+					dlon = lon0-coordinates.second;
+					diff = std::sqrt(dlat*dlat+dlon*dlon);
+					if (diff>5.)
+					{
+						stream << "</coordinates>\n</LineString>\n</Placemark>\n";
+						stream << "<Placemark>\n<name>RiseSetLimit</name>\n<styleUrl>#PLimits</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+						stream << "<tessellate>1</tessellate>\n<altitudeMode>absoluto</altitudeMode>\n<coordinates>\n";
+					}
+					stream << coordinates.second << "," << coordinates.first << ",0.0\n";
+					lat0 = coordinates.first;
+					lon0 = coordinates.second;
+				}
+				i++;
+			}
+			stream << "</coordinates>\n</LineString>\n</Placemark>\n";
+
+			// Rise/set curve 2
+			stream << "<Placemark>\n<name>RiseSetLimit</name>\n<styleUrl>#PLimits</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+			stream << "<tessellate>1</tessellate>\n<altitudeMode>absoluto</altitudeMode>\n<coordinates>\n";
+			JD = JDP1;
+			i = 0;
+			while (JD < JDP4)
+			{
+				JD = JDP1 + i/1440.0;
+				core->setJD(JD);
+				core->update(0);
+				SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+				if (i==0)
+				{
+					lat0 = 0.;
+					lon0 = 0.;
+				}
+				coordinates = getRiseSetLineCoordinates(false,x,y,d,L1,mu);
+				if (coordinates.first <= 90.)
+				{
+					dlat = lat0-coordinates.first;
+					dlon = lon0-coordinates.second;
+					diff = std::sqrt(dlat*dlat+dlon*dlon);
+					if (diff>5.)
+					{
+						stream << "</coordinates>\n</LineString>\n</Placemark>\n";
+						stream << "<Placemark>\n<name>RiseSetLimit</name>\n<styleUrl>#PLimits</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+						stream << "<tessellate>1</tessellate>\n<altitudeMode>absoluto</altitudeMode>\n<coordinates>\n";
+					}
+					stream << coordinates.second << "," << coordinates.first << ",0.0\n";
+					lat0 = coordinates.first;
+					lon0 = coordinates.second;
+				}
+				i++;
+			}
+			stream << "</coordinates>\n</LineString>\n</Placemark>\n";
+
+			// Line of maximum eclipse at sunrise
+			stream << "<Placemark>\n<name>MaximumEclipseatSunrise</name>\n<styleUrl>#PLimits</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+			stream << "<tessellate>1</tessellate>\n<altitudeMode>absoluto</altitudeMode>\n<coordinates>\n";
+			JD = JDP1;
+			i = 0;
+			while (JD < JDP4)
+			{
+				JD = JDP1 + i/1440.0;
+				double lat0, lon0;
+				if (i==0)
+				{
+					lat0 = 0.;
+					lon0 = 0.;
+				}
+				QPair<double, double> coordinates = getMaximumEclipseAtRiseSet(true,JD);
+				if (abs(coordinates.first) <= 90.)
+				{
+					dlat = lat0-coordinates.first;
+					dlon = lon0-coordinates.second;
+					diff = std::sqrt(dlat*dlat+dlon*dlon);
+					if (diff>10.)
+					{
+						stream << "</coordinates>\n</LineString>\n</Placemark>\n";
+						stream << "<Placemark>\n<name>MaximumEclipseatSunrise</name>\n<styleUrl>#PLimits</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+						stream << "<tessellate>1</tessellate>\n<altitudeMode>absoluto</altitudeMode>\n<coordinates>\n";
+					}
+					stream << coordinates.second << "," << coordinates.first << ",0.0\n";
+					lat0 = coordinates.first;
+					lon0 = coordinates.second;
+				}
+				i++;
+			}
+			stream << "</coordinates>\n</LineString>\n</Placemark>\n";
+
+			// Line of maximum eclipse at sunset
+			stream << "<Placemark>\n<name>MaximumEclipseatSunset</name>\n<styleUrl>#PLimits</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+			stream << "<tessellate>1</tessellate>\n<altitudeMode>absoluto</altitudeMode>\n<coordinates>\n";
+			JD = JDP1;
+			i = 0;
+			while (JD < JDP4)
+			{
+				JD = JDP1 + i/1440.0;
+				double lat0, lon0;
+				if (i==0)
+				{
+					lat0 = 0.;
+					lon0 = 0.;
+				}
+				QPair<double, double> coordinates = getMaximumEclipseAtRiseSet(false,JD);
+				if (abs(coordinates.first) <= 90.)
+				{
+					dlat = lat0-coordinates.first;
+					dlon = lon0-coordinates.second;
+					diff = sqrt(dlat*dlat+dlon*dlon);
+					if (diff>10.)
+					{
+						stream << "</coordinates>\n</LineString>\n</Placemark>\n";
+						stream << "<Placemark>\n<name>MaximumEclipseatSunset</name>\n<styleUrl>#PLimits</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+						stream << "<tessellate>1</tessellate>\n<altitudeMode>absoluto</altitudeMode>\n<coordinates>\n";
+					}
+					stream << coordinates.second << "," << coordinates.first << ",0.0\n";
+					lat0 = coordinates.first;
+					lon0 = coordinates.second;
+				}
+				i++;
+			}
+			stream << "</coordinates>\n</LineString>\n</Placemark>\n";
+
+			if (!partialEclipse)
+			{
+				double JDC1 = JDMid, JDC2 = JDMid;
+				const double JDU1 = getJDofContact(JDMid,true,false,true); // beginning of external (ant)umbral contact
+				const double JDU4 = getJDofContact(JDMid,false,false,true); // end of external (ant)umbral contact
+				SolarEclipseData(JDC1,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+				if (!nonCentralEclipse)
+				{
+					// C1
+					JD = getJDofContact(JDMid,true,false,false);
+					JD = int(JD)+(int((JD-int(JD))*86400.)-1)/86400.;
+					SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+					int steps = 0;
+					while (pathWidth<0.0001 && steps<20)
+					{
+						JD += .1/86400.;
+						SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+						steps += 1;
+					}
+					JDC1 = JD;
+					// C2
+					JD = getJDofContact(JDMid,false,false,false);
+					JD = int(JD)+(int((JD-int(JD))*86400.)+1)/86400.;
+					SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+					steps = 0;
+					while (pathWidth<0.0001 && steps<20)
+					{
+						JD -= .1/86400.;
+						SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+						steps += 1;
+					}
+					JDC2 = JD;
+
+					// Center line
+					JD = JDC1;
+					i = 0;
+					double dRatioC1 = dRatio;
+					SolarEclipseData(JDMid,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+					double dRatioMid = dRatio;
+					SolarEclipseData(JDC2,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+					double dRatioC2 = dRatio;
+					if (dRatioC1 >= 1. && dRatioMid >= 1. && dRatioC2 >= 1.)
+						stream << "<Placemark>\n<name>Center line</name>\n<styleUrl>#Total</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+					else if (dRatioC1 < 1. && dRatioMid < 1. && dRatioC2 < 1.)
+						stream << "<Placemark>\n<name>Center line</name>\n<styleUrl>#Annular</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+					else
+						stream << "<Placemark>\n<name>Center line</name>\n<styleUrl>#Hybrid</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+					stream << "<tessellate>1</tessellate>\n<altitudeMode>absoluto</altitudeMode>\n<coordinates>\n";
+					while (JD+(1./1440.) < JDC2)
+					{
+						JD = JDC1 + i/1440.; // plot every one minute
+						SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+						stream << lngDeg << "," << latDeg << ",0.0\n";
+						i++;
+					}
+					SolarEclipseData(JDC2,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+					stream << lngDeg << "," << latDeg << ",0.0\n";
+					stream << "</coordinates>\n</LineString>\n</Placemark>\n";
+				}
+				else
+				{
+					JDC1 = JDMid;
+					JDC2 = JDMid;
+				}
+
+				double dRatioC1 = dRatio;
+				SolarEclipseData(JDMid,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+				double dRatioMid = dRatio;
+				SolarEclipseData(JDC2,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+				double dRatioC2 = dRatio;
+				// Umbra/antumbra outline
+				// we want to draw (ant)umbral shadow on world map at exact times like 09:00, 09:10, 09:20, ...
+				double beginJD = int(JDU1)+(10.*int(1440.*(JDU1-int(JDU1))/10.)+10.)/1440.;
+				double endJD = int(JDU4)+(10.*int(1440.*(JDU4-int(JDU4))/10.))/1440.;
+				JD = beginJD;
+				i = 0;
+				double lat0 = 0., lon0 = 0.;
+				while (JD < endJD)
+				{
+					JD = beginJD + i/144.; // plot every 10 minutes
+					core->setJD(JD);
+					core->update(0);
+					SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+					SolarEclipseData(JD,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+					double angle = 0.;
+					bool firstPoint = false;
+					QString eclipseTime = localeMgr->getPrintableTimeLocal(JD);
+					if (dRatio>=1.)
+						stream << "<Placemark>\n<name>"+eclipseTime+"</name>\n<styleUrl>#Total</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+					else
+						stream << "<Placemark>\n<name>"+eclipseTime+"</name>\n<styleUrl>#Annular</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+					stream << "<tessellate>1</tessellate>\n<altitudeMode>absoluto</altitudeMode>\n<coordinates>\n";
+					int pointNumber = 0;
+					while (pointNumber < 60)
+					{
+						angle = pointNumber*M_PI*2./60.;
+						coordinates = getShadowOutlineCoordinates(angle,x,y,d,L2,tf2,mu);
+						if (coordinates.first <= 90.)
+						{
+							stream << coordinates.second << "," << coordinates.first << ",0.0\n";
+							if (!firstPoint)
+							{
+								lat0 = coordinates.first;
+								lon0 = coordinates.second;
+								firstPoint = true;
+							}
+						}
+						pointNumber++;
+					}
+					stream << lon0 << "," << lat0 << ",0.0\n"; // completing the circle
+					stream << "</coordinates>\n</LineString>\n</Placemark>\n";
+					i++;
+				}
+
+				// Extreme northern limit of umbra (southern for antumbra) at C1
+				QPair<double, double> C1a = getExtremeNSLimitofShadow(JDC1,true,false,true);
+				QPair<double, double> C1b = getExtremeNSLimitofShadow(JDC1,false,false,true);
+
+				// Extreme southern limit of umbra (northern for antumbra) at C2
+				QPair<double, double> C2a = getExtremeNSLimitofShadow(JDC2,true,false,false);
+				QPair<double, double> C2b = getExtremeNSLimitofShadow(JDC2,false,false,false);
+
+				double dRatio,altitude,pathWidth,duration,magnitude;
+				SolarEclipseData(JDC1,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+
+				if (dRatioC1 >= 1. && dRatioMid >= 1. && dRatioC2 >= 1.)
+					stream << "<Placemark>\n<name>Limit</name>\n<styleUrl>#Total</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+				else if (dRatioC1 < 1. && dRatioMid < 1. && dRatioC2 < 1.)
+					stream << "<Placemark>\n<name>Limit</name>\n<styleUrl>#Annular</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+				else
+					stream << "<Placemark>\n<name>Limit</name>\n<styleUrl>#Hybrid</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+				stream << "<tessellate>1</tessellate>\n<altitudeMode>absoluto</altitudeMode>\n<coordinates>\n";
+				// 1st extreme limit at C1
+				if (C1a.first <= 90. || C1b.first <= 90.)
+				{
+					if (dRatio>=1.)
+						stream << C1a.second << "," << C1a.first << ",0.0\n";
+					else
+						stream << C1b.second << "," << C1b.first << ",0.0\n";
+				}
+				JD = JDC1-20./1440.;
+				i = 0;
+				while (JD < JDC2+20./1440.)
+				{
+					JD = JDC1+(i-20.)/1440.;
+					coordinates = getNSLimitofShadow(JD,true,false);
+					if (coordinates.first <= 90.)
+						stream << coordinates.second << "," << coordinates.first << ",0.0\n";
+					i++;
+				}
+
+				SolarEclipseData(JDC2,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+				// 1st extreme limit at C2
+				if (C2a.first <= 90. || C2b.first <= 90.)
+				{
+					if (dRatio>=1.)
+						stream << C2a.second << "," << C2a.first << ",0.0\n";
+					else
+						stream << C2b.second << "," << C2b.first << ",0.0\n";
+				}
+				stream << "</coordinates>\n</LineString>\n</Placemark>\n";
+
+				// 2nd extreme limit at C1
+				if (dRatioC1 >= 1. && dRatioMid >= 1. && dRatioC2 >= 1.)
+					stream << "<Placemark>\n<name>Limit</name>\n<styleUrl>#Total</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+				else if (dRatioC1 < 1. && dRatioMid < 1. && dRatioC2 < 1.)
+					stream << "<Placemark>\n<name>Limit</name>\n<styleUrl>#Annular</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+				else
+					stream << "<Placemark>\n<name>Limit</name>\n<styleUrl>#Hybrid</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
+				stream << "<tessellate>1</tessellate>\n<altitudeMode>absoluto</altitudeMode>\n<coordinates>\n";
+				SolarEclipseData(JDC1,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+				if (C1a.first <= 90. || C1b.first <= 90.)
+				{
+					if (dRatio>=1.)
+						stream << C1b.second << "," << C1b.first << ",0.0\n";
+					else
+						stream << C1a.second << "," << C1a.first << ",0.0\n";
+				}
+				JD = JDC1-20./1440.;
+				i = 0;
+				while (JD < JDC2+20./1440.)
+				{
+					JD = JDC1+(i-20.)/1440.;
+					coordinates = getNSLimitofShadow(JD,false,false);
+					if (coordinates.first <= 90.)
+						stream << coordinates.second << "," << coordinates.first << ",0.0\n";
+					i++;
+				}
+				SolarEclipseData(JDC2,dRatio,latDeg,lngDeg,altitude,pathWidth,duration,magnitude);
+				// 2nd extreme limit at C2
+				if (C2a.first <= 90. || C2b.first <= 90.)
+				{
+					if (dRatio>=1.)
+						stream << C2b.second << "," << C2b.first << ",0.0\n";
+					else
+						stream << C2a.second << "," << C2a.first << ",0.0\n";
+				}
+				stream << "</coordinates>\n</LineString>\n</Placemark>\n";
+			}
+			stream << "</Document>\n</kml>\n";
+			file.close();
+			QGuiApplication::restoreOverrideCursor();
+		}
+		core->setJD(currentJD);
+		core->setUseTopocentricCoordinates(saveTopocentric);
+		core->update(0);
+	}
+}
+
+QPair<double, double> AstroCalcDialog::getNSLimitofShadow(double JD, bool northernLimit, bool penumbra)
+{
+	// Source: Explanatory Supplement to the Astronomical Ephemeris 
+	// and the American Ephemeris and Nautical Almanac (1961)
+	QPair<double, double> coordinates;
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
+	static const double e2 = f*(2.-f);
+	static const double ff = 1./(1.-f);
+	double tf1,tf2,L;
+	core->setJD(JD);
+	core->update(0);
+	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
+	BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
+	double x,y,d,L1,L2,mu,tf;
+	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	double rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
+	double y1 = y/rho1;
+	double eta1 = y1;
+	double sd1 = std::sin(d)/rho1;
+	double cd1 = std::sqrt(1.-e2)*std::cos(d)/rho1;
+	double rho2 = std::sqrt(1.-e2*std::sin(d)*std::sin(d));
+	double sd1d2 = e2*std::sin(d)*std::cos(d)/(rho1*rho2);
+	double cd1d2 = std::sqrt(1.-sd1d2*sd1d2);
+	double zeta = rho2*(-eta1*sd1d2);
+	if (penumbra)
+	{
+		L = L1;
+		tf = tf1;
+	}
+	else
+	{
+		L = L2;
+		tf = tf2;
+	}
+	double Lb = L-zeta*tf;
+	double xidot = mudot*(-y*std::sin(d)+zeta*std::cos(d));
+	double tq = -(ydot-etadot)/(xdot-xidot);
+	double sq = std::sin(std::atan(tq));
+	double cq = std::cos(std::atan(tq));
+	if (!northernLimit)
+	{
+		sq *= -1.;
+		cq *= -1.;
+	}
+	double xi = x-Lb*sq;
+	eta1 = y1-Lb*cq/rho1;
+	zeta = 1.-xi*xi-eta1*eta1;
+
+	if (zeta < 0.)
+	{
+		coordinates.first = 99.;
+		coordinates.second = 0.;
+	}
+	else
+	{
+		double zeta1 = std::sqrt(zeta);
+		zeta = rho2*(zeta1*cd1d2-eta1*sd1d2);
+		double adot = -ldot-mudot*x*tf*std::cos(d);
+		double tq = (bdot-zeta*ddot-(adot/cq))/(cdot-zeta*mudot*std::cos(d));
+		double Lb = L-zeta*tf;
+		sq = std::sin(std::atan(tq));
+		cq = std::cos(std::atan(tq));
+		if (!northernLimit)
+		{
+			sq *= -1.;
+			cq *= -1.;
+		}
+		xi = x-Lb*sq;
+		eta1 = y1-Lb*cq/rho1;
+		zeta = 1.-xi*xi-eta1*eta1;
+		if (zeta < 0.)
+		{
+			coordinates.first = 99.;
+			coordinates.second = 0.;
+		}	
+		else
+		{
+			zeta1 = std::sqrt(zeta);
+			zeta = rho2*(zeta1*cd1d2-eta1*sd1d2);
+			tq = bdot-zeta*ddot-adot/cq;
+			tq = tq/(cdot-zeta*mudot*std::cos(d));
+			double b = -eta1*sd1+zeta1*cd1;
+			double theta = std::atan2(xi,b)*M_180_PI;
+			double lngDeg = theta - mu;
+			lngDeg = StelUtils::fmodpos(lngDeg, 360.);
+			if (lngDeg > 180.) lngDeg -= 360.;
+			double sfn1 = eta1*cd1+zeta1*sd1;
+			double cfn1 = std::sqrt(1.-sfn1*sfn1);
+			double latDeg = ff*sfn1/cfn1;
+			coordinates.first = std::atan(latDeg)*M_180_PI;
+			coordinates.second = lngDeg;
+		}
+	}
+	return coordinates;
+}
+
+QPair<double, double> AstroCalcDialog::getExtremeNSLimitofShadow(double JD, bool northernLimit, bool penumbra, bool begin)
+{
+	// Source: Explanatory Supplement to the Astronomical Ephemeris 
+	// and the American Ephemeris and Nautical Almanac (1961)
+	QPair<double, double> coordinates;
+	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
+	static const double e2 = f*(2.-f);
+	static const double ff = 1./(1.-f);
+	core->setJD(JD+0.1);
+	core->update(0);
+	double xdot,ydot,ddot,mudot,ldot,etadot,bdot1,cdot1;
+	BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot1,cdot1,penumbra);
+	core->setJD(JD-0.1);
+	core->update(0);
+	double bdot2,cdot2,L;
+	BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot2,cdot2,penumbra);
+	double bdd = 5.*(bdot1-bdot2);
+	double cdd = 5.*(cdot1-cdot2);
+	core->setJD(JD);
+	core->update(0);
+	double x,y,d,tf1,tf2,L1,L2,mu;
+	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	double bdot,cdot,xidot;
+	BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
+	double e = std::sqrt(bdot*bdot+cdot*cdot);
+	double rho1 = std::sqrt(1-e2*std::cos(d)*std::cos(d));
+	double scq = e/cdot;
+	double tq = bdot/cdot;
+	double cq = 1./scq;
+	if (penumbra)
+		L = L1;
+	else
+		L = L2;
+	if (northernLimit)
+	{
+		if (L<0.)
+			cq = std::abs(cq);
+		else
+			cq = -std::abs(cq);
+	}
+	else
+	{
+		if (L<0.)
+			cq = -std::abs(cq);
+		else
+			cq = std::abs(cq);
+	}
+	double sq = tq*cq;
+	if (cq>0.)
+	{
+		xidot = xdot-L*bdd/e;
+		etadot = (ydot-L*cdd/e)/rho1;
+	}
+	else
+	{
+		xidot = xdot+L*bdd/e;
+		etadot = (ydot+L*cdd/e)/rho1;
+	}
+	double n2 = xidot*xidot+etadot*etadot;
+	double xi = x-L*sq;
+	double eta = (y-L*cq)/rho1;
+	double szi = (xi*etadot-xidot*eta)/std::sqrt(n2);
+	if (std::abs(szi)<=1.)
+	{
+		double czi = -std::sqrt(1.-szi*szi);
+		if (!begin) czi *= -1.;
+		double tc = (czi/std::sqrt(n2))-(xi*xidot+eta*etadot)/n2;
+		core->setJD(JD+tc/24.);
+		core->update(0);
+		SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+		BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
+		tq = bdot/cdot;
+		e = std::sqrt(bdot*bdot+cdot*cdot);
+		rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
+		scq = e/cdot;
+		tq = bdot/cdot;
+		cq = 1./scq;
+		if (penumbra)
+			L = L1;
+		else
+			L = L2;
+		if (northernLimit)
+		{
+			if (L<0.)
+				cq = std::abs(cq);
+			else
+				cq = -std::abs(cq);
+		}
+		else
+		{
+			if (L<0.)
+				cq = -std::abs(cq);
+			else
+				cq = std::abs(cq);
+		}
+		sq = tq*cq;
+		if (cq>0.)
+		{
+			xidot = xdot-L*bdd/e;
+			etadot = (ydot-L*cdd/e)/rho1;
+		}
+		else
+		{
+			xidot = xdot+L*bdd/e;
+			etadot = (ydot+L*cdd/e)/rho1;
+		}
+		n2 = xidot*xidot+etadot*etadot;
+		xi = x-L*sq;
+		eta = (y-L*cq)/rho1;
+		double sd1 = std::sin(d)/rho1;
+		double cd1 = std::sqrt(1.-e2)*std::cos(d)/rho1;
+		double b = -eta*sd1;
+		double theta = std::atan2(xi,b)*M_180_PI;
+		double lngDeg = theta-mu;
+		lngDeg = StelUtils::fmodpos(lngDeg, 360.);
+		if (lngDeg > 180.) lngDeg -= 360.;
+		double sfn1 = eta*cd1;
+		double cfn1 = std::sqrt(1.-sfn1*sfn1);
+		double latDeg = ff*sfn1/cfn1;
+		coordinates.first = std::atan(latDeg)*M_180_PI;
+		coordinates.second = lngDeg;
+	}
+	else
+	{
+		coordinates.first = 99.;
+		coordinates.second = 0.;
+	}
+	return coordinates;
 }
 
 void AstroCalcDialog::cleanupSolarEclipsesLocal()
