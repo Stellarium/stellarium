@@ -496,15 +496,12 @@ AtmosphereShowMySky::~AtmosphereShowMySky()
 
 void AtmosphereShowMySky::regenerateGrid()
 {
-	const float width=viewport[2], height=viewport[3];
 	QSettings* conf = StelApp::getInstance().getSettings();
 //	flagDynamicResolution = conf->value("landscape/flag_dynamic_resolution", false).toBool();
 //	ppxmax = ppxatmo = conf->value("landscape/ppxatmo", 1).toInt();
+	const float width=viewport[2]/ppxatmo, height=viewport[3]/ppxatmo;
 	gridMaxY = conf->value("landscape/atmosphereybin", 44).toInt();
 	gridMaxX = std::floor(0.5+gridMaxY*(0.5*std::sqrt(3.0))*width/height);
-	const auto rppx=qRound(sqrt(ppxatmo));
-	gridMaxX*=rppx;
-	gridMaxY*=rppx;
 	bool verbose=qApp->property("verbose").toBool();
 	if (verbose)
 		qDebug() << "gridMaxX =" << gridMaxX << "gridMaxY =" << gridMaxY;
@@ -839,10 +836,13 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 
 	// FIXME: ignoring the "additional luminance" like star background etc.; see AtmospherePreetham for all potentially needed terms
 	const auto numViewRayGridPoints=(1+gridMaxX)*(1+gridMaxY);
+	const auto ppxw=(double)width/(width/ppxatmo);
+	const auto ppxh=(double)height/(height/ppxatmo);
+//	qDebug() << "ppxw =" << ppxw << "ppxh =" << ppxh;
 	for (int i=0; i<numViewRayGridPoints; ++i)
 	{
 		Vec3d point(1, 0, 0);
-		prj->unProject(posGrid[i][0]*(double)ppxatmo,posGrid[i][1]*(double)ppxatmo,point);
+		prj->unProject(posGrid[i][0]*ppxw,posGrid[i][1]*ppxh,point);
 
 		viewRayGrid[i].set(point[0], point[1], point[2], 0);
 	}
