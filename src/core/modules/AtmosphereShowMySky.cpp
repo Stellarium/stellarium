@@ -308,14 +308,6 @@ vec3 calcViewDir()
 
 void AtmosphereShowMySky::resizeRenderTarget(int width, int height)
 {
-	bool verbose=qApp->property("verbose").toBool();
-	if (verbose)
-	{
-		qDebug() << "***************** resizeRenderTarget *******************";
-		qDebug() << "*** ppxatmo" << ppxatmo << "width" << width << "height" << height;
-		qDebug() << "********************************************************";
-	}
-
 	renderer_->resizeEvent(width/ppxatmo, height/ppxatmo);
 
 	prevWidth_=width;
@@ -324,14 +316,6 @@ void AtmosphereShowMySky::resizeRenderTarget(int width, int height)
 
 void AtmosphereShowMySky::setupRenderTarget()
 {
-	bool verbose=qApp->property("verbose").toBool();
-	if (verbose)
-	{
-		qDebug() << "***************** setupRenderTarget ********************";
-		qDebug() << "*** ppxatmo" << ppxatmo;
-		qDebug() << "********************************************************";
-	}
-
 	auto& gl=glfuncs();
 
 	GLint viewport[4];
@@ -518,6 +502,11 @@ void AtmosphereShowMySky::regenerateGrid()
 //	ppxmax = ppxatmo = conf->value("landscape/ppxatmo", 1).toInt();
 	gridMaxY = conf->value("landscape/atmosphereybin", 44).toInt();
 	gridMaxX = std::floor(0.5+gridMaxY*(0.5*std::sqrt(3.0))*width/height);
+	int rppx=qRound(sqrt(ppxatmo)); gridMaxX*=rppx; gridMaxY*=rppx;
+	bool verbose=qApp->property("verbose").toBool();
+	if (verbose)
+		qDebug() << "gridMaxX =" << gridMaxX << "gridMaxY =" << gridMaxY;
+
 	const auto gridSize=(1+gridMaxX)*(1+gridMaxY);
 	posGrid.resize(gridSize);
 	viewRayGrid.resize(gridSize);
@@ -745,7 +734,10 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &pos1, int
 	// if the change is too large, we draw with reduced resolution
 	ppxatmo=dynResTimer>0?ppxmax:1;
 	if (prevPxa!=ppxatmo)
+	{
+		regenerateGrid();
 		resizeRenderTarget(width, height);
+	}
 
 	bool verbose=qApp->property("verbose").toBool();
 	if (verbose)
