@@ -114,7 +114,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="closeStelWindow">
+       <widget class="StelCloseButton" name="closeStelWindow">
         <property name="minimumSize">
          <size>
           <width>16</width>
@@ -968,6 +968,11 @@
    <extends>QWidget</extends>
    <header>TelescopeClientINDIWidget.hpp</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>StelCloseButton</class>
+   <extends>QPushButton</extends>
+   <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>

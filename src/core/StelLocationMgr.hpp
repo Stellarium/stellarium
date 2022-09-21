@@ -24,6 +24,9 @@
 #include <QObject>
 #include <QMetaType>
 #include <QMap>
+#ifdef Q_OS_WIN
+#include <QtPositioning/QGeoPositionInfoSource>
+#endif
 
 typedef QList<StelLocation> LocationList;
 typedef QMap<QString,StelLocation> LocationMap;
@@ -150,6 +153,9 @@ private slots:
 #ifdef ENABLE_GPS
 	void changeLocationFromGPSQuery(const StelLocation& loc);
 	void gpsQueryError(const QString& err);
+	#ifdef Q_OS_WIN
+	void positionUpdated(QGeoPositionInfo gpsPos);
+	#endif
 #endif
 private:
 	void loadRegions();
@@ -180,6 +186,9 @@ private:
 	StelLocation lastResortLocation;
 
 	GPSLookupHelper *nmeaHelper,*libGpsHelper;
+#ifdef Q_OS_WIN
+	QGeoPositionInfoSource *positionSource=Q_NULLPTR;
+#endif
 };
 
 #endif // STELLOCATIONMGR_HPP

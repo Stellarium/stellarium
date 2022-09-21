@@ -23,8 +23,6 @@
 #define ATMOSPHERE_HPP
 
 #include "StelCore.hpp"
-#include "VecMath.hpp"
-
 #include "StelFader.hpp"
 
 #include <QOpenGLBuffer>

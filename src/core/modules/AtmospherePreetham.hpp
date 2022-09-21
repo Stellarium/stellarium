@@ -68,7 +68,7 @@ private:
 	//! Vertex shader used for xyYToRGB computation
 	class QOpenGLShaderProgram* atmoShaderProgram;
 	struct {
-		int bayerPattern;
+		int ditherPattern;
 		int rgbMaxValue;
 		int alphaWaOverAlphaDa;
 		int oneOverGamma;
@@ -85,7 +85,7 @@ private:
 		int doSRGB;
 	} shaderAttribLocations;
 
-	GLuint bayerPatternTex=0;
+	GLuint ditherPatternTex=0;
 };
 
 #endif // ATMOSPHERE_PREETHAM_HPP

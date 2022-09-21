@@ -120,7 +120,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="closeStelWindow">
+       <widget class="StelCloseButton" name="closeStelWindow">
         <property name="minimumSize">
          <size>
           <width>16</width>
@@ -481,6 +481,11 @@ margin-bottom:10px;</string>
    <class>AngleSpinBox</class>
    <extends>QSpinBox</extends>
    <header location="global">AngleSpinBox.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>StelCloseButton</class>
+   <extends>QPushButton</extends>
+   <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>

@@ -21,7 +21,10 @@ SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 ########### Project name ###########
 PROJECT(Stellarium C CXX)
 ########### Detect Qt version
-FIND_PACKAGE(Qt6 COMPONENTS Core QUIET)
+SET(ENABLE_QT6 1 CACHE BOOL "Whether to try building with Qt6. If Qt6 is not found, Qt5 will be used.")
+IF(ENABLE_QT6)
+    FIND_PACKAGE(Qt6 COMPONENTS Core QUIET)
+ENDIF()
 if (NOT Qt6_FOUND)
     FIND_PACKAGE(Qt5 REQUIRED COMPONENTS Core)
 ENDIF()
@@ -107,6 +110,7 @@ ENDIF()
 
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
+INCLUDE(CPM)
 
 # Show platform info
 MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")
@@ -564,11 +568,8 @@ IF(${QT_VERSION} VERSION_LESS MINIMAL_QT_VERSION)
 ELSE()
      MESSAGE(STATUS "Found Qt${QT_VERSION_MAJOR}: ${QMAKE_LOCATION} (found suitable version ${QT_VERSION})")
 ENDIF()
-FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Concurrent REQUIRED)
-FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Gui REQUIRED)
-FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Network REQUIRED)
-FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
-FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Charts REQUIRED)
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS
+     Concurrent Gui Network Widgets Charts)
 IF(USE_PLUGIN_TELESCOPECONTROL OR ENABLE_GPS)
      FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS SerialPort REQUIRED)
 ENDIF()
@@ -628,6 +629,30 @@ ENDIF()
 IF(APPLE)
      IF(${QT_VERSION_MAJOR} EQUAL 6)
 	  FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS DBus REQUIRED)
+     ENDIF()
+     # macOS architectures: x86_64 or arm64
+     IF(NOT CMAKE_OSX_ARCHITECTURES)
+	  # Find 'lipo' utility
+	  FIND_PROGRAM(LIPO_COMMAND lipo)
+	  IF(LIPO_COMMAND)
+	       MESSAGE(STATUS "Found lipo: ${LIPO_COMMAND}")
+	       # Get architecture of Qt
+	       EXECUTE_PROCESS(COMMAND ${LIPO_COMMAND} -archs ${QMAKE_LOCATION} TIMEOUT 30 OUTPUT_VARIABLE QT_ARCHS OUTPUT_STRIP_TRAILING_WHITESPACE)
+	       STRING(REPLACE " " ";" QT_ARCHS ${QT_ARCHS})
+	       SET(CMAKE_OSX_ARCHITECTURES "${QT_ARCHS}" CACHE STRING "macOS architectures" FORCE)
+	  ELSE()
+	       # If we can't find architecture of Qt, use that of the host system's CPU
+	       SET(CMAKE_OSX_ARCHITECTURES "${CMAKE_HOST_SYSTEM_PROCESSOR}" CACHE STRING "macOS architectures" FORCE)
+	  ENDIF()
+     ENDIF()
+     # macOS deployment targets
+     IF(NOT CMAKE_OSX_DEPLOYMENT_TARGET)
+	  IF(${QT_VERSION_MAJOR} EQUAL 6)
+	       # Qt6: by default - universal binary + minimal operating system is macOS Big Sur
+	       SET(CMAKE_OSX_DEPLOYMENT_TARGET "11.0" CACHE STRING "Minimum macOS deployment version" FORCE)
+	  ELSE()
+	       SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum macOS deployment version" FORCE)
+	  ENDIF()
      ENDIF()
 ENDIF()
 
@@ -749,6 +774,30 @@ IF(NOT USE_SYSTEM_ZLIB)
 ELSE()
      MESSAGE(STATUS "Using system-provided zlib at ${ZLIB_LIBRARIES}")
 ENDIF()
+
+# TODO: switch to something like vcpkg or conan, and plain find_package,
+# without the fallback of cmake downloading the dep itself.
+# But some libraries are not available there yet.
+CPMFindPackage(NAME QXlsx
+    URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.4.4.zip
+    URL_HASH SHA256=3efbd6f63a1ffd521c535dce7b5a5a7e9ebd23db51e6ae8e3e2eb89796e57675
+    DOWNLOAD_ONLY yes
+    EXCLUDE_FROM_ALL ON
+    SOURCE_SUBDIR QXlsx)
+if(QXlsx_ADDED)
+    # Can't use embedded CMakeLists.txt due to
+    # https://github.com/QtExcel/QXlsx/issues/134
+    file(GLOB_RECURSE QXLSX_FILES
+        ${QXlsx_SOURCE_DIR}/QXlsx/source/*.cpp
+        ${QXlsx_SOURCE_DIR}/QXlsx/header/*.h)
+    add_library(QXlsx STATIC EXCLUDE_FROM_ALL ${QXLSX_FILES})
+    target_link_libraries(QXlsx PUBLIC
+        Qt${QT_VERSION_MAJOR}::Core
+        Qt${QT_VERSION_MAJOR}::Gui
+        Qt${QT_VERSION_MAJOR}::GuiPrivate)
+    target_include_directories(QXlsx PUBLIC ${QXlsx_SOURCE_DIR}/QXlsx/header)
+    add_library(QXlsx::QXlsx ALIAS QXlsx)
+endif()
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
@@ -905,30 +954,6 @@ IF(APPLE)
 	  MESSAGE(STATUS "Could NOT find macdeployqt")
      ENDIF()
 
-     # macOS architectures: x86_64 or arm64
-     IF(NOT CMAKE_OSX_ARCHITECTURES)
-	  # find utilite 'lipo'
-	  FIND_PROGRAM(LIPO_COMMAND lipo)
-	  IF(LIPO_COMMAND)
-	       MESSAGE(STATUS "Found lipo: ${LIPO_COMMAND}")
-	       # get architecture of Qt framework
-	       EXECUTE_PROCESS(COMMAND ${LIPO_COMMAND} -archs ${QMAKE_LOCATION} TIMEOUT 30 OUTPUT_VARIABLE QT_ARCHS OUTPUT_STRIP_TRAILING_WHITESPACE)
-	       STRING(REPLACE " " ";" QT_ARCHS ${QT_ARCHS})
-	       SET(CMAKE_OSX_ARCHITECTURES "${QT_ARCHS}" CACHE STRING "macOS architectures" FORCE)
-	  ELSE()
-	       # current system's processor architecture
-	       SET(CMAKE_OSX_ARCHITECTURES "${CMAKE_HOST_SYSTEM_PROCESSOR}" CACHE STRING "macOS architectures" FORCE)
-	  ENDIF()
-     ENDIF()
-
-     IF(NOT CMAKE_OSX_DEPLOYMENT_TARGET)
-	  IF(${QT_VERSION_MAJOR} EQUAL 6)
-	       # Qt6: by default - universal binary + minimal operating system is macOS Big Sur
-	       SET(CMAKE_OSX_DEPLOYMENT_TARGET "11.0" CACHE STRING "Minimum macOS deployment version" FORCE)
-	  ELSE()
-	       SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum macOS deployment version" FORCE)
-	  ENDIF()
-     ENDIF()
      MESSAGE(STATUS "macOS deployment target: ${CMAKE_OSX_DEPLOYMENT_TARGET} (${CMAKE_OSX_ARCHITECTURES})")
      SET(PACKAGE_OSX_TARGET ${CMAKE_OSX_DEPLOYMENT_TARGET})
      ADD_DEFINITIONS(-DPACKAGE_OSX_TARGET)
@@ -997,6 +1022,10 @@ ENDIF()
 IF(USE_PLUGIN_SCENERY3D)
      # add scenery3d scenes
      ADD_SUBDIRECTORY( scenery3d )
+ENDIF()
+IF(ENABLE_SHOWMYSKY)
+     # add atmosphere models
+     ADD_SUBDIRECTORY( atmosphere )
 ENDIF()
 IF(ENABLE_NLS)
      ADD_SUBDIRECTORY( po )

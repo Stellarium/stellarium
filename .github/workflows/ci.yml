@@ -23,7 +23,7 @@ jobs:
         # using force-overwrite due to
         # https://github.com/actions/virtual-environments/issues/2703
         sudo ACCEPT_EULA=Y apt upgrade -o Dpkg::Options::="--force-overwrite" --yes
-        sudo apt install -y qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
+        sudo apt install -y qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev zlib1g-dev libgl1-mesa-dev libdrm-dev cmake
 
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -31,7 +31,7 @@ jobs:
     - name: Configure CMake
       shell: bash
       run: |
-        wget https://github.com/10110111/CalcMySky/releases/download/v0.0.5/CalcMySky-v0.0.5-linux-amd64-qt5.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
+        wget https://github.com/10110111/CalcMySky/releases/download/v0.1.0/CalcMySky-v0.1.0-linux-amd64-qt5.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
         tar xf "${{ github.workspace }}/../CalcMySky.tar.xz" -C "${{ github.workspace }}/.."
         mv "${{ github.workspace }}/../CalcMySky"{-*,}
         mkdir -p build
@@ -67,7 +67,7 @@ jobs:
       shell: bash
       run: |
         export PATH="/usr/local/opt/qt@5/bin:$PATH"
-        wget https://github.com/10110111/CalcMySky/releases/download/v0.0.5/CalcMySky-v0.0.5-macos-amd64-qt5.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
+        wget https://github.com/10110111/CalcMySky/releases/download/v0.1.0/CalcMySky-v0.1.0-macos-amd64-qt5.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
         tar xf "${{ github.workspace }}/../CalcMySky.tar.xz" -C "${{ github.workspace }}/.."
         mv "${{ github.workspace }}/../CalcMySky"{-*,}
         mkdir -p build

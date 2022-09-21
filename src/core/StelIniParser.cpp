@@ -43,7 +43,9 @@ bool readStelIniFile(QIODevice &device, QSettings::SettingsMap &map)
 	QString currentSection = "";
 	static const QRegularExpression sectionRe("^\\[(.+)\\]$");
 	static const QRegularExpression keyRe("^([^=]+)\\s*=\\s*(.+)$");
-	static const QRegularExpression cleanComment("[#;].*$");
+	// Remove char ";" from list of chars for comments within config data
+	// Details: https://github.com/Stellarium/stellarium/issues/2571
+	static const QRegularExpression cleanComment("[#].*$");
 	static const QRegularExpression initialWhiteSpace("^\\s+");
 	static const QRegularExpression appendedWhitespace("\\s+$");
 

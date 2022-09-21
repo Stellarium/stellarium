@@ -47,12 +47,12 @@ private:
 	void onModelChoiceChanged(const QString& model);
 	void onPathToModelEditingFinished();
 	void onPathToModelChanged();
-    void updatePathToModelStyle();
+	void updatePathToModelStyle();
 	void onErrorStateChanged(bool error);
 	void browsePathToModel();
 	void setCurrentValues();
 	void clearStatus();
-	bool eventFilter(QObject* object, QEvent* event);
+	bool eventFilter(QObject* object, QEvent* event) Q_DECL_OVERRIDE;
 
 private slots:
 	void setStandardAtmosphere();

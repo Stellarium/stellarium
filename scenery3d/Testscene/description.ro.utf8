@@ -1,0 +1,37 @@
+<h2>Scenă de testare</h2>
+
+<p>Această scenă este utilă în special ca zonă de testare pentru progresul
+propriu. Ar trebui să faceți o copie a dosarului scenei și să îl modificați
+după bunul plac, să încercați configurările materialelor sau alte detalii
+pentru a afla cum se comportă acest plugin. Apoi asamblează și prezintă-ți
+propria muncă!</p>
+
+<h4>Teste de coordonare și orientare</h4>
+
+<p>Coloanele prezentate aici, așa cum se văd din centrul structurii, oferă o
+vedere aproximativă (nu de mare precizie!) a pozițiilor de răsărit/apus de
+soare la solstițiu/echinocțiu la latitudinile Europei Centrale. Coloanele
+centrale furnizează o linie est-vest. Grila de coordonate de măsurare
+vizibilă în partea de jos nu se aliniază cu nordul geografic. O rotație de
+-4,2 grade (faceți test pentru convergența meridianelor) trebuie compensată,
+adică, în timp ce coloanele centrale trebuie să indice în mod absolut și
+întotdeauna pe direcția vest-est, liniile grilei ating orizontul nordic
+puțin  (4,2 grade) mai în stânga nordului!</p>
+
+<p>Coordonatele de la sol (Ctrl-R, T) ar trebui să afișeze coordonatele
+vizibile de-a lungul granițelor de sud și de vest ale solului.</p>
+
+<h4>Test al materialului</h4>
+
+<p>Acest model este folosit și pentru testarea capacităților grafice ale
+pluginului. Vă puteți juca cu parametrii materialului pentru a crea efecte
+amuzante, cum ar fi sfere de cărămidă semitransparente sau care strălucesc
+în întuneric.</p>
+
+<p>Pentru a testa caracteristicile temporale, coloanele și sferele sunt
+vizibile doar din anul 2000 și până în 2020. Editați fișierul materialului
+pentru a schimba acest aspect!</p>
+
+<h4>Model</h4>
+<p>Scenă de testare pentru dezvoltarea Stellarium/scenery3d. Se face export de
+la SU8-Kerkythea-KT2OBJ.</p>

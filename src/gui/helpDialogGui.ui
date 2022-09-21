@@ -99,7 +99,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="closeStelWindow">
+       <widget class="StelCloseButton" name="closeStelWindow">
         <property name="minimumSize">
          <size>
           <width>16</width>
@@ -236,6 +236,17 @@
           <iconset>
            <normalon>:/graphicGui/tabLogs.png</normalon>
            <selectedon>:/graphicGui/tabLogs-selected.png</selectedon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Config</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabTools.png</normalon>
+           <selectedon>:/graphicGui/tabTools-selected.png</selectedon>
           </iconset>
          </property>
         </item>
@@ -388,6 +399,42 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="pageConfig">
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <property name="spacing">
+           <number>4</number>
+          </property>
+          <property name="leftMargin">
+           <number>4</number>
+          </property>
+          <property name="topMargin">
+           <number>4</number>
+          </property>
+          <property name="rightMargin">
+           <number>4</number>
+          </property>
+          <property name="bottomMargin">
+           <number>4</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="configPathLabel">
+            <property name="text">
+             <string notr="true">xxx</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextBrowser" name="configBrowser"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="refreshConfigButton">
+            <property name="text">
+             <string>Refresh</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -401,6 +448,11 @@
    <extends>QFrame</extends>
    <header>Dialog.hpp</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>StelCloseButton</class>
+   <extends>QPushButton</extends>
+   <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>

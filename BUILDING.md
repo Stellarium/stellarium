@@ -56,6 +56,14 @@ your distribution. Here's a list.
 - [Graphviz](http://www.graphviz.org/) - required to build the API documentation and include fancy class diagrams
 - [libgps](https://gpsd.gitlab.io/gpsd/index.html) - if you want to build Stellarium with GPS support (Linux/macOS only)
 
+### Optionally bundled dependencies
+
+If these are not found on the system, they are downloaded automatically.
+See [MAINTAINER BUSINESS](MAINTAINER_BUSINESS.md) for details.
+
+- [INDI](https://indilib.org)
+- [QXlsx](https://github.com/QtExcel/QXlsx)
+
 ### Installing these packages
 
 To install all of these, use the following commands:
@@ -66,12 +74,13 @@ To install all of these, use the following commands:
 
 ```
 sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc g++ \
-                 graphviz doxygen gettext git \
-                 gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio gstreamer1.0-libav gstreamer1.0-vaapi \
-                 qtbase5-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools qttools5-dev libqt5opengl5-dev \
-                 qtmultimedia5-dev libqt5multimedia5-plugins libqt5serialport5 libqt5serialport5-dev \
-                 qtpositioning5-dev libgps-dev libqt5positioning5 libqt5positioning5-plugins \
-                 qtwebengine5-dev libqt5charts5-dev                  
+                 graphviz doxygen gettext git libgps-dev \
+                 gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio \
+                 gstreamer1.0-libav gstreamer1.0-vaapi qtbase5-dev \                
+                 qtbase5-private-dev qtscript5-dev libqt5svg5-dev qttools5-dev-tools \
+                 qttools5-dev libqt5opengl5-dev qtmultimedia5-dev libqt5multimedia5-plugins \
+                 libqt5serialport5 libqt5serialport5-dev qtpositioning5-dev libqt5positioning5 \
+                 libqt5positioning5-plugins qtwebengine5-dev libqt5charts5-dev
 ```
 
 ##### Qt6
@@ -80,13 +89,14 @@ Ubuntu 22.04 comes with Qt5.15 and Qt6.2. To build with Qt6:
 
 ```
 sudo apt install build-essential cmake zlib1g-dev libgl1-mesa-dev libdrm-dev gcc g++ \
-                 graphviz doxygen gettext git \
-                 gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio gstreamer1.0-libav gstreamer1.0-vaapi \
-                 qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools linguist-qt6 libqt6svg6-dev \
-                 qt6-multimedia-dev libqt6serialport6-dev \
-                 qt6-positioning-dev libqt6positioning6-plugins libgps-dev \
-                 libqt6webchannel6-dev libqt6webenginewidgets6 qt6-webengine-dev qt6-webengine-dev-tools \
-                 libqt6webenginecore6-bin libqt6webengine6-data libqt6charts6-dev libqt6opengl6-dev 
+                 graphviz doxygen gettext git libxkbcommon-x11-dev libgps-dev \
+                 gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio \
+                 gstreamer1.0-libav gstreamer1.0-vaapi \
+                 qt6-base-private-dev qt6-multimedia-dev qt6-positioning-dev qt6-tools-dev \
+                 qt6-tools-dev-tools qt6-base-dev-tools qt6-qpa-plugins qt6-image-formats-plugins \
+                 qt6-l10n-tools qt6-webengine-dev qt6-webengine-dev-tools libqt6charts6-dev \
+                 libqt6charts6 libqt6opengl6-dev libqt6positioning6-plugins libqt6serialport6-dev \
+                 qt6-base-dev libqt6webenginecore6-bin libqt6webengine6-data 
 ```
 
 

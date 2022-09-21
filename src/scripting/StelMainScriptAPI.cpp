@@ -26,6 +26,7 @@
 #include "ConstellationMgr.hpp"
 #include "AsterismMgr.hpp"
 #include "GridLinesMgr.hpp"
+#include "SpecialMarkersMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "SporadicMeteorMgr.hpp"
 #include "NebulaMgr.hpp"
@@ -784,6 +785,29 @@ void StelMainScriptAPI::output(const QString &s)
 QString StelMainScriptAPI::mapToString(const QVariantMap& map)
 {
 	QString res = QString("[\n");
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	QList<QMetaType::Type> simpleTypeList;
+	simpleTypeList.push_back(QMetaType::Bool);
+	simpleTypeList.push_back(QMetaType::Int);
+	simpleTypeList.push_back(QMetaType::UInt);
+	simpleTypeList.push_back(QMetaType::Double);
+
+	for (auto i = map.constBegin(); i != map.constEnd(); ++i)
+	{
+		if (i.value().typeId()==QMetaType::QString)
+		{
+			res.append(QString("[ \"%1\" = \"%2\" ]\n").arg(i.key(), i.value().toString()));
+		}
+		else if (simpleTypeList.contains(i.value().typeId()))
+		{
+			res.append(QString("[ \"%1\" = %2 ]\n").arg(i.key(), i.value().toString()));
+		}
+		else
+		{
+			res.append(QString("[ \"%1\" = \"<%2>:%3\" ]\n").arg(i.key(), i.value().typeName(), i.value().toString()));
+		}
+	}
+#else
 	QList<QVariant::Type> simpleTypeList;
 	simpleTypeList.push_back(QVariant::Bool);
 	simpleTypeList.push_back(QVariant::Int);
@@ -805,6 +829,7 @@ QString StelMainScriptAPI::mapToString(const QVariantMap& map)
 			res.append(QString("[ \"%1\" = \"<%2>:%3\" ]\n").arg(i.key(), i.value().typeName(), i.value().toString()));
 		}
 	}
+#endif
 	res.append( QString("]\n"));
 	return res;
 }
@@ -1045,6 +1070,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		StarMgr* smgr = GETSTELMODULE(StarMgr);
 		NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 		GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
+		SpecialMarkersMgr* spmgr = GETSTELMODULE(SpecialMarkersMgr);
 		StelMovementMgr* movmgr = GETSTELMODULE(StelMovementMgr);
 		ZodiacalLight* zl = GETSTELMODULE(ZodiacalLight);
 		StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
@@ -1064,6 +1090,10 @@ void StelMainScriptAPI::clear(const QString& state)
 		ssmgr->setFlagMinorBodyScale(false);
 		ssmgr->setFlagTrails(false);
 		lmgr->setFlagCardinalPoints(false);
+		spmgr->setFlagCompassMarks(false);
+		spmgr->setFlagFOVCenterMarker(false);
+		spmgr->setFlagFOVCircularMarker(false);
+		spmgr->setFlagFOVRectangularMarker(false);
 		amgr->setFlagLines(false);
 		amgr->setFlagLabels(false);
 		amgr->setFlagRayHelpers(false);
@@ -1251,7 +1281,13 @@ void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float
 	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
 	Vec3d aimUp;
 	if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(dDec)> (0.9*M_PI/2.0)) )
-		aimUp=core->equinoxEquToJ2000(Vec3d(-cos(dRa), -sin(dRa), 0.) * (dDec>0. ? 1. : -1. ), StelCore::RefractionOff);
+	{
+		//qDebug() << "ATTENTION: Aiming into pole!";
+		//qDebug() << "\tdRa=" << dRa << "dDec=" << dDec;
+		aimUp=//core->equinoxEquToJ2000(
+					Vec3d(-cos(dRa), -sin(dRa), 0.) * (dDec>0. ? 1. : -1. ); //, StelCore::RefractionOff);
+		//qDebug() << "\taimUp=" << aimUp;
+	}
 	else
 		aimUp=core->equinoxEquToJ2000(Vec3d(0., 0., 1.), StelCore::RefractionOff);
 
@@ -1386,7 +1422,7 @@ QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const Q
 
 QString StelMainScriptAPI::getEnv(const QString &var)
 {
-#if QT_VERSION >= 0x050A00
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	return qEnvironmentVariable(var.toLocal8Bit().constData());
 #else
 	return QString::fromLocal8Bit(qgetenv(var.toLocal8Bit().constData()));

@@ -169,6 +169,11 @@ void LocationDialog::createDialogContent()
 	}
 
 #ifdef ENABLE_GPS
+#ifdef Q_OS_WIN
+	ui->gpsToolButton->setText(q_("Get location from GPS or system service"));
+#else
+	ui->gpsToolButton->setText(q_("Get location from GPS"));
+#endif
 	connect(ui->gpsToolButton, SIGNAL(toggled(bool)), this, SLOT(gpsEnableQueryLocation(bool)));
 	ui->gpsToolButton->setStyleSheet(QString("QToolButton{ background: gray; }")); // ? Missing default style?
 	connect(locMgr, SIGNAL(gpsQueryFinished(bool)), this, SLOT(gpsReturn(bool)));
@@ -178,8 +183,8 @@ void LocationDialog::createDialogContent()
 #endif
 	connect(ui->useIpQueryCheckBox, SIGNAL(clicked(bool)), this, SLOT(ipQueryLocation(bool)));
 	connect(ui->useAsDefaultLocationCheckBox, SIGNAL(clicked(bool)), this, SLOT(setDefaultLocation(bool)));
-	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), core, SLOT(returnToDefaultLocation()));
 	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), this, SLOT(resetLocationList()));
+	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), core, SLOT(returnToDefaultLocation()));
 	connectBoolProperty(ui->dstCheckBox, "StelCore.flagUseDST");
 	connectBoolProperty(ui->useCustomTimeZoneCheckBox, "StelCore.flagUseCTZ");
 	connect(ui->useCustomTimeZoneCheckBox, SIGNAL(toggled(bool)), ui->timeZoneNameComboBox, SLOT(setEnabled(bool)));
@@ -227,7 +232,11 @@ void LocationDialog::reloadLocations()
 void LocationDialog::populateTooltips()
 {
 	ui->resetListPushButton->setToolTip(q_("Reset location list to show all known locations"));
+#ifdef Q_OS_WIN
+	ui->gpsToolButton->setToolTip(QString("<p>%1</p>").arg(q_("Toggle fetching location from GPS or system location service. (Does not change time zone!) When satisfied, toggle off to let other programs access the GPS device.")));
+#else
 	ui->gpsToolButton->setToolTip(QString("<p>%1</p>").arg(q_("Toggle fetching GPS location. (Does not change time zone!) When satisfied, toggle off to let other programs access the GPS device.")));
+#endif
 }
 
 // Update the widget to make sure it is synchrone if the location is changed programmatically
@@ -236,6 +245,10 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 	if (!dialog)
 		return;
 
+	if (currentLocation.name.contains("->")) // avoid extra updates
+		return;
+
+	populateRegionList(currentLocation.planetName);
 	StelCore* stelCore = StelApp::getInstance().getCore();
 
 	isEditingNew = false;
@@ -297,7 +310,7 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	ui->altitudeSpinBox->setValue(loc.altitude);
 
 	int idx = ui->planetNameComboBox->findData(loc.planetName, Qt::UserRole, Qt::MatchCaseSensitive);
-	if (idx==-1)
+	if (idx<0)
 	{
 		// Use Earth as default
 		idx = ui->planetNameComboBox->findData(QVariant("Earth"), Qt::UserRole, Qt::MatchCaseSensitive);
@@ -305,7 +318,8 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	ui->planetNameComboBox->setCurrentIndex(idx);
 
 	idx = ui->regionNameComboBox->findData(loc.region, Qt::UserRole, Qt::MatchCaseSensitive);
-	if (idx==-1)
+	qWarning() << "[2]" << loc.region << idx;
+	if (idx<0)
 	{
 		if (ui->planetNameComboBox->currentData(Qt::UserRole).toString()=="Earth")
 		{
@@ -822,7 +836,6 @@ void LocationDialog::gpsReturn(bool success)
 		StelCore* core = StelApp::getInstance().getCore();
 
 		gpsCount++;
-		ui->gpsToolButton->setText(QString("%1 %2").arg(q_("GPS location fix")).arg(gpsCount));
 		ui->useAsDefaultLocationCheckBox->setChecked(false);
 		ui->pushButtonReturnToDefault->setEnabled(true);
 		//ui->useCustomTimeZoneCheckBox->setChecked(true); // done by updateTimeZoneControls(true) below.
@@ -833,10 +846,12 @@ void LocationDialog::gpsReturn(bool success)
 		setFieldsFromLocation(loc);
 		if (loc.altitude==0) // give feedback of fix quality.
 		{
+			ui->gpsToolButton->setText(QString("%1 %2").arg(q_("2D location fix")).arg(gpsCount));
 			ui->gpsToolButton->setStyleSheet(QString("QToolButton{ background: yellow; }"));
 		}
 		else
 		{
+			ui->gpsToolButton->setText(QString("%1 %2").arg(q_("3D location fix")).arg(gpsCount));
 			ui->gpsToolButton->setStyleSheet(QString("QToolButton{ background: green; }"));
 		}
 		QSettings* conf = StelApp::getInstance().getSettings();
@@ -857,7 +872,11 @@ void LocationDialog::gpsReturn(bool success)
 void LocationDialog::resetGPSbuttonLabel()
 {
 	ui->gpsToolButton->setChecked(false);
+#ifdef Q_OS_WIN
+	ui->gpsToolButton->setText(q_("Get location from GPS or system service"));
+#else
 	ui->gpsToolButton->setText(q_("Get location from GPS"));
+#endif
 	ui->gpsToolButton->setStyleSheet(QString("QToolButton{ background: gray; }"));
 }
 #endif

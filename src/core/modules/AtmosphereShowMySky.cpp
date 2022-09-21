@@ -27,7 +27,6 @@
 #include "StelToneReproducer.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
-#include "StelFileMgr.hpp"
 #include "Dithering.hpp"
 #include "StelTranslator.hpp"
 
@@ -462,7 +461,7 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 		prog.bind();
 
 		shaderAttribLocations.rgbMaxValue            = prog.uniformLocation("rgbMaxValue");
-		shaderAttribLocations.bayerPattern           = prog.uniformLocation("bayerPattern");
+		shaderAttribLocations.ditherPattern          = prog.uniformLocation("ditherPattern");
 		shaderAttribLocations.oneOverGamma           = prog.uniformLocation("oneOverGamma");
 		shaderAttribLocations.brightnessScale        = prog.uniformLocation("brightnessScale");
 		shaderAttribLocations.luminanceTexture       = prog.uniformLocation("luminance");
@@ -577,12 +576,13 @@ void AtmosphereShowMySky::drawAtmosphere(Mat4f const& projectionMatrix, const fl
 	                                     const float lightPollutionGroundLuminance, const float airglowRelativeBrightness,
 	                                     const bool drawAsEclipse, const bool clearTarget)
 {
+	Q_UNUSED(airglowRelativeBrightness)
 	const auto& m = projectionMatrix;
 	auto& settings = *static_cast<SkySettings*>(skySettings_.get());
 	settings.projectionMatrix_ = QMatrix4x4(m[0], m[4], m[8] , m[12],
-											m[1], m[5], m[9] , m[13],
-											m[2], m[6], m[10], m[14],
-											m[3], m[7], m[11], m[15]);
+						m[1], m[5], m[9] , m[13],
+						m[2], m[6], m[10], m[14],
+						m[3], m[7], m[11], m[15]);
 	settings.altitude_=altitude;
 	settings.sunAzimuth_=sunAzimuth;
 	settings.sunZenithAngle_=sunZenithAngle;
@@ -592,7 +592,7 @@ void AtmosphereShowMySky::drawAtmosphere(Mat4f const& projectionMatrix, const fl
 	settings.earthMoonDistance_=earthMoonDistance;
 	settings.lightPollutionGroundLuminance_=lightPollutionGroundLuminance;
 
-    const double brightness = brightness_; // Silence CodeQL's "Multiplication result converted to larger type"
+	const double brightness = brightness_; // Silence CodeQL's "Multiplication result converted to larger type"
 	if(drawAsEclipse)
 	{
 		if(eclipseSimulationQuality_ == EclipseSimulationQuality::AllPrecomputed &&
@@ -696,10 +696,14 @@ Vec4f AtmosphereShowMySky::getMeanPixelValue(int texW, int texH)
 	return pixel;
 }
 
-void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Planet& currentPlanet, const Planet& sun, const Planet*const moon,
-									   const StelLocation& location, const float temperature, const float relativeHumidity,
-									   const float extinctionCoefficient, const bool noScatter)
+void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Planet& currentPlanet, const Planet& sun,
+				       const Planet*const moon, const StelLocation& location, const float temperature,
+				       const float relativeHumidity, const float extinctionCoefficient, const bool noScatter)
 {
+	Q_UNUSED(JD)
+	Q_UNUSED(temperature)
+	Q_UNUSED(relativeHumidity)
+	Q_UNUSED(extinctionCoefficient)
 	initProperties();
 
 	// The majority of calculations is done in fragment shader, but we still need a nontrivial
@@ -805,7 +809,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 		const auto meanY=meanPixelValue[1];
 		Q_ASSERT(std::isfinite(meanY));
 
-		averageLuminance = meanY;
+		averageLuminance = meanY+0.0001f; // Add (assumed) star background luminance
 	}
 }
 
@@ -845,10 +849,10 @@ void AtmosphereShowMySky::draw(StelCore* core)
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.luminanceTexture, 0));
 
 	GL(gl.glActiveTexture(GL_TEXTURE1));
-	if(!bayerPatternTex_)
-		bayerPatternTex_=makeBayerPatternTexture(*sPainter.glFuncs());
-	GL(gl.glBindTexture(GL_TEXTURE_2D, bayerPatternTex_));
-	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.bayerPattern, 1));
+	if(!ditherPatternTex_)
+		ditherPatternTex_=makeDitherPatternTexture(*sPainter.glFuncs());
+	GL(gl.glBindTexture(GL_TEXTURE_2D, ditherPatternTex_));
+	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.ditherPattern, 1));
 
 	GL(gl.glBindVertexArray(luminanceToScreenVAO_));
 	GL(gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));

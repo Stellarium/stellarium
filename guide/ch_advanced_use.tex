@@ -443,8 +443,14 @@ see the logfile for diagnostic messages.
 
 \paragraph{Bluetooth GPS} Most smartphones provide GPS and Bluetooth
 hardware. You can install a virtual COM port in your Windows Bluetooth
-settings and use a smartphone app like \program{BlueNMEA} to provide
-the NMEA strings.
+settings and use a smartphone app like \program{Share
+  GPS}\footnote{\url{https://play.google.com/store/apps/details?id=com.jillybunch.shareGPS}}
+to provide the NMEA strings.
+
+\paragraph{Windows location service} On Windows devices, you can get your location
+using the Windows location service. The result depends on available
+hardware and other settings, e.g. real GPS sensor or network and WiFi
+detection.\footnote{\url{https://support.microsoft.com/en-us/windows/windows-location-service-and-privacy-3a8eee0a-5b0b-dc07-eede-2a5ca1c49088}}
 
 \chapter{Command Line Options}
 %\label{command-line-options}
@@ -498,6 +504,7 @@ For example, using the option \texttt{-c\ my\_config.ini} would resolve to the f
 -\/-angle-warp       & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\footnotemark[3]\\
 -\/-mesa-mode or -m  & {[}none{]} & Use MESA as software OpenGL rendering engine.\footnotemark[1]\\
 -\/-safe-mode or -s  & {[}none{]} & Synonymous to -\/-mesa-mode.\footnotemark[1]\\
+-\/-single-buffer    & {[}none{]} & Use single-buffering. This reportedly avoids screen blanking problems with some Intel GPUs. \\
 -\/-compat33 or -C   & {[}none{]} & Request OpenGL 3.3 Compatibility Profile. May help for certain driver configurations. Mac?\\
 -\/-fix-text or -t   & {[}none{]} & Alternative way of creating the Info text, required on some systems.\footnote{E.g., Raspberry Pi 2/3 with Raspbian Jessie and VC4 drivers from Mesa 11 (2016).}\\\bottomrule
 \end{longtable}
@@ -571,9 +578,9 @@ problems.
 \item[STEL\_OPTS] may contain a default commandline with options in the syntax of the table above.
 \item[STEL\_USERDIR] may contain the path to a user data directory
   deviating from the default (see section \ref{sec:Directories}).
-\item[QT\_OPENGL] (Windows only). May be one of \texttt{desktop} (native OpenGL for your GPU, recommended),
-  \texttt{angle} or \texttt{software}. The last activates pure software rendering using the MESA OpenGL library.
-\item[QT\_ANGLE\_PLATFORM] (Windows only). May be one of \texttt{d3d9} (DirectX~9) or \texttt{d3d11} (DirectX~11),
+\item[QT\_OPENGL]\footnote{Windows only} May be one of \texttt{desktop} (native OpenGL for your GPU, recommended),
+  \texttt{angle}\footnote{Stellarium 0.* series only} or \texttt{software}. The last activates pure software rendering using the MESA OpenGL library.
+\item[QT\_ANGLE\_PLATFORM]\footnote{Windows and Stellarium 0.* series only} May be one of \texttt{d3d9} (DirectX~9) or \texttt{d3d11} (DirectX~11),
   or \texttt{warp} for another software-only solution.
 \end{description}
 

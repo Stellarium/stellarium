@@ -597,10 +597,22 @@ to limit the vertical field of view so that you won't ever zoom out too far.
 
 An auxiliary dialog opens when you select \guibutton[1.0]{0.75}{uibtSettings.png}
 and contains detail settings for the atmosphere. Here
-you can set atmospheric pressure and temperature which influence
-refraction (see section~\ref{sec:phenomena:Refraction}), and the
+you can choose visual model of atmosphere, set atmospheric pressure and temperature which influence
+refraction (see section~\ref{sec:phenomena:Refraction}) and the
 opacity factor $k_v$ for extinction, \emph{magnitude loss per airmass} 
 (see section~\ref{sec:phenomena:Extinction}).
+
+There are two visual models for the atmosphere available:
+\begin{description}
+  \item[Preetham] This is the legacy model (see section~\ref{sec:skylight:Preetham}), fallback for the cases
+    when the other one doesn't work.
+  \item[ShowMySky] This model is the more realistic visual model of
+    the atmosphere colors (see section~\ref{sec:skylight:Bruneton}). It
+    relies on a precomputed dataset that can be chosen in the user
+    interface after the \program{ShowMySky} model is enabled.
+    \footnote{Due to compatibility issues, this mode is currently not
+      available on the Apple Mac platforms.}
+\end{description}
 
 \subsection{The Solar System Objects (SSO) Tab}
 \label{sec:gui:view:sso}
@@ -1390,10 +1402,20 @@ This subtab (Fig.~\ref{fig:gui:AstroCalc:Eclipses:AllSolarEclipses}) contains da
 \label{fig:gui:AstroCalc:Eclipses:AllSolarEclipses}
 \end{figure}
 
-Double click on a line in the table will set location and time of greatest eclipse.
+Double click on a line in the table will set location and time of greatest eclipse. Click on the table row will show circumstances of selected eclipse in the lower table.
 
 The quantity gamma is the minimum distance of the lunar shadow cone axis to the center of the Earth, in units of Earth’s equatorial radius.
 This distance is positive or negative, depending on whether the axis of the shadow cone passes north or south of the Earth's center.
+
+Click the ``Export KML...'' button will create KML file of selected eclipse. KML is a file format used to display geographic data in Earth browser, such as Marble, Google Earth, Google Maps. The file can be opened in applications that support KML version 2.2. Description of lines for solar eclipse are shown below (Fig.~\ref{fig:gui:AstroCalc:Eclipses:EclipseMap}).
+
+Different colors are used to draw path of central eclipse. Red = total eclipse, blue = annular eclipse, and purple = hybrid eclipse. Limits of penumbral or partial eclipse are green.
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.95\textwidth]{eclipsemap.pdf}
+\caption{Key to solar eclipse map}
+\label{fig:gui:AstroCalc:Eclipses:EclipseMap}
+\end{figure}
 
 \subsubsection{The ``Local Solar Eclipses'' Subtab}
 \label{sec:gui:AstroCalc:Eclipses:LocalSolarEclipses}
@@ -1413,7 +1435,7 @@ Double click on a line in the table will set the time of greatest eclipse.
 \label{sec:gui:AstroCalc:Eclipses:LunarEclipses}
 
 This subtab (Fig.~\ref{fig:gui:AstroCalc:Eclipses:LunarEclipses}) contains data for all lunar eclipses on the Earth in defined time range.
-Double click on the table row will set time of greatest eclipse.
+Double click on the table row will set time of greatest eclipse. Click on the table row will show circumstances of selected eclipse in the lower table.
 
 The quantity gamma is the minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone, in units of Earth’s equatorial radius.
 This distance is positive or negative, depending on whether the Moon passes north or south of the shadow cone axis.

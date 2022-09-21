@@ -37,8 +37,8 @@
 #include "StelPainter.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelUtils.hpp"
-#include "qzipreader.h"
 
+#include <private/qzipreader_p.h>
 #include <QDebug>
 #include <QSettings>
 #include <QString>
@@ -698,6 +698,10 @@ void LandscapeMgr::init()
 	setDefaultMinimalBrightness(conf->value("landscape/minimal_brightness", 0.01).toDouble());
 	setFlagLandscapeUseMinimalBrightness(conf->value("landscape/flag_minimal_brightness", false).toBool());
 	setFlagLandscapeSetsMinimalBrightness(conf->value("landscape/flag_landscape_sets_minimal_brightness",false).toBool());
+
+	const auto var = conf->value(ATMOSPHERE_MODEL_PATH_CONFIG_KEY);
+	if(!var.isValid())
+		conf->setValue(ATMOSPHERE_MODEL_PATH_CONFIG_KEY, getDefaultAtmosphereModelPath());
 
 	createAtmosphere();
 	// Put the atmosphere's Skylight under the StelProperty system (simpler and more consistent GUI)
@@ -1419,7 +1423,16 @@ QString LandscapeMgr::getAtmosphereModel() const
 QString LandscapeMgr::getAtmosphereModelPath() const
 {
 	const auto conf=StelApp::getInstance().getSettings();
-	return conf->value(ATMOSPHERE_MODEL_PATH_CONFIG_KEY, "").toString();
+
+	const auto var = conf->value(ATMOSPHERE_MODEL_PATH_CONFIG_KEY);
+	if(var.isValid()) return var.toString();
+
+	return getDefaultAtmosphereModelPath();
+}
+
+QString LandscapeMgr::getDefaultAtmosphereModelPath() const
+{
+	return QDir::toNativeSeparators(QString("%1/atmosphere/default").arg(StelFileMgr::getInstallationDir()));
 }
 
 bool LandscapeMgr::getAtmosphereShowMySkyStoppedWithError() const
@@ -1602,8 +1615,8 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const 
 	}
 	QDir destinationDir (parentDestinationDir.absoluteFilePath("landscapes"));
 
-	Stel::QZipReader reader(sourceFilePath);
-	if (reader.status() != Stel::QZipReader::NoError)
+	QZipReader reader(sourceFilePath);
+	if (reader.status() != QZipReader::NoError)
 	{
 		qWarning() << "LandscapeMgr: Unable to open as a ZIP archive:" << QDir::toNativeSeparators(sourceFilePath);
 		emit errorNotArchive();
@@ -1612,7 +1625,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const 
 
 	//Detect top directory
 	QString topDir, iniPath;
-	const QList<Stel::QZipReader::FileInfo> infoList = reader.fileInfoList();
+	const auto infoList = reader.fileInfoList();
 	for (const auto& info : infoList)
 	{
 		QFileInfo fileInfo(info.filePath);
