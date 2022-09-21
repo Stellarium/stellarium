@@ -502,7 +502,9 @@ void AtmosphereShowMySky::regenerateGrid()
 //	ppxmax = ppxatmo = conf->value("landscape/ppxatmo", 1).toInt();
 	gridMaxY = conf->value("landscape/atmosphereybin", 44).toInt();
 	gridMaxX = std::floor(0.5+gridMaxY*(0.5*std::sqrt(3.0))*width/height);
-	int rppx=qRound(sqrt(ppxatmo)); gridMaxX*=rppx; gridMaxY*=rppx;
+	const auto rppx=qRound(sqrt(ppxatmo));
+	gridMaxX*=rppx;
+	gridMaxY*=rppx;
 	bool verbose=qApp->property("verbose").toBool();
 	if (verbose)
 		qDebug() << "gridMaxX =" << gridMaxX << "gridMaxY =" << gridMaxY;
@@ -715,16 +717,16 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &pos1, int
 	if (!flagDynamicResolution)
 		return false;
 
-	auto fov1=prj->getFov(), fad1=fader.getInterstate();
+	const auto fov1=prj->getFov(), fad1=fader.getInterstate();
 	Vec3d sun1;
 	prj->project(pos1,sun1);
-	auto dFov=2e3*qAbs(fov1-prevFov)/(fov1+prevFov);	// per thousand of the field of view
-	auto dFad=1e3*qAbs(fad1-prevFad);			// per thousand of the fader
-	auto dPos=1e3*(pos1-prevPos).length();			// milli-AU :)
-	auto dSun=(sun1-prevSun).length();			// pixel
-	auto changeOfView=dFov+dFad+dPos+dSun;
+	const auto dFov=2e3*qAbs(fov1-prevFov)/(fov1+prevFov);	// per thousand of the field of view
+	const auto dFad=1e3*qAbs(fad1-prevFad);			// per thousand of the fader
+	const auto dPos=1e3*(pos1-prevPos).length();		// milli-AU :)
+	const auto dSun=(sun1-prevSun).length();		// pixel
+	const auto changeOfView=dFov+dFad+dPos+dSun;
 	// hysteresis avoids frequent changing of the resolution
-	float allowedChangeOfView=ppxatmo==1?1:200e-3;
+	const float allowedChangeOfView=ppxatmo==1?1:200e-3;
 	dynResTimer--;						// count down to redraw
 	// if we have neither a timeout nor a change that is too large, we do nothing...
 	if (changeOfView<allowedChangeOfView && dynResTimer>0)
