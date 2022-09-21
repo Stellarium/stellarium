@@ -50,8 +50,8 @@ public:
 					  float extinctionCoefficient, bool noScatter) override;
 	void draw(StelCore* core) override;
 	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
-	bool isLoading() override { return false; }
-	bool isReadyToRender() override { return true; }
+	bool isLoading() const override { return false; }
+	bool isReadyToRender() const override { return true; }
 	LoadingStatus stepDataLoading() override { return {0,0}; }
 private:
 	Vec4i viewport;

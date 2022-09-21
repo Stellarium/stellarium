@@ -49,8 +49,8 @@ public:
 							  const StelLocation& location, float temperature, float relativeHumidity, float extinctionCoefficient,
 							  bool noScatter) = 0;
 	virtual void draw(StelCore* core) = 0;
-	virtual bool isLoading() = 0;
-	virtual bool isReadyToRender() = 0;
+	virtual bool isLoading() const = 0;
+	virtual bool isReadyToRender() const = 0;
 	virtual LoadingStatus stepDataLoading() = 0;
 	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
 

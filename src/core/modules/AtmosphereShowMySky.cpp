@@ -865,12 +865,12 @@ void AtmosphereShowMySky::draw(StelCore* core)
 	GL(luminanceToScreenProgram_->release());
 }
 
-bool AtmosphereShowMySky::isLoading()
+bool AtmosphereShowMySky::isLoading() const
 {
 	return renderer_->isLoading();
 }
 
-bool AtmosphereShowMySky::isReadyToRender()
+bool AtmosphereShowMySky::isReadyToRender() const
 {
 	return renderer_->isReadyToRender();
 }

@@ -52,8 +52,8 @@ public:
 					  const StelLocation& location, float temperature, float relativeHumidity,
 					  float extinctionCoefficient, bool noScatter) override;
 	void draw(StelCore* core) override;
-	bool isLoading() override;
-	bool isReadyToRender() override;
+	bool isLoading() const override;
+	bool isReadyToRender() const override;
 	LoadingStatus stepDataLoading() override;
 
 	struct InitFailure : std::runtime_error
