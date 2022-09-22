@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-09-21 22:54+0700\n"
+"POT-Creation-Date: 2022-09-22 17:40+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:889 src/gui/AstroCalcDialog.cpp:2525
 #: src/gui/AstroCalcDialog.cpp:3284 src/gui/AstroCalcDialog.cpp:3316
 #: src/gui/AstroCalcDialog.cpp:3706 src/gui/AstroCalcDialog.cpp:8919
-#: src/gui/ObsListDialog.cpp:146 src/gui/ObsListCreateEditDialog.cpp:155
+#: src/gui/ObsListDialog.cpp:172 src/gui/ObsListCreateEditDialog.cpp:181
 #: src/ui_configurationDialog.h:1815 plugins/Satellites/src/Satellite.cpp:337
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:149
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:524
@@ -724,8 +724,9 @@ msgctxt "distance"
 msgid "m"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:1179 src/gui/ObsListDialog.cpp:152
-#: src/gui/ObsListCreateEditDialog.cpp:161 src/ui_locationDialogGui.h:482
+#: src/core/modules/LandscapeMgr.cpp:1179 src/gui/ObsListDialog.cpp:178
+#: src/gui/ObsListCreateEditDialog.cpp:187 src/ui_locationDialogGui.h:482
+#: src/ui_obsListDialog.h:328
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:490
 msgid "Location"
@@ -1662,7 +1663,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:188 src/core/StelObject.cpp:316
 #: src/gui/AstroCalcChart.cpp:95 src/gui/AstroCalcChart.cpp:105
 #: src/gui/AstroCalcChart.cpp:434 src/gui/AstroCalcChart.cpp:460
-#: src/gui/ObsListDialog.cpp:149 src/gui/ObsListCreateEditDialog.cpp:158
+#: src/gui/ObsListDialog.cpp:175 src/gui/ObsListCreateEditDialog.cpp:184
 #: plugins/Supernovae/src/Supernova.cpp:127
 msgid "Magnitude"
 msgstr ""
@@ -5707,15 +5708,15 @@ msgid "Ecliptic (J2000.0)"
 msgstr ""
 
 #: src/gui/SearchDialog.cpp:296 src/gui/AstroCalcChart.cpp:442
-#: src/gui/AstroCalcChart.cpp:468 src/gui/ObsListDialog.cpp:147
-#: src/gui/ObsListCreateEditDialog.cpp:156
+#: src/gui/AstroCalcChart.cpp:468 src/gui/ObsListDialog.cpp:173
+#: src/gui/ObsListCreateEditDialog.cpp:182
 msgid "Right ascension"
 msgstr ""
 
 #: src/gui/SearchDialog.cpp:299 src/gui/AstroCalcChart.cpp:91
 #: src/gui/AstroCalcChart.cpp:101 src/gui/AstroCalcChart.cpp:425
-#: src/gui/AstroCalcChart.cpp:451 src/gui/ObsListDialog.cpp:148
-#: src/gui/ObsListCreateEditDialog.cpp:157
+#: src/gui/AstroCalcChart.cpp:451 src/gui/ObsListDialog.cpp:174
+#: src/gui/ObsListCreateEditDialog.cpp:183
 msgid "Declination"
 msgstr ""
 
@@ -6345,7 +6346,7 @@ msgid "Duration of total or annular phase at greatest eclipse"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:3705 src/gui/AstroCalcChart.cpp:378
-#: src/gui/ObsListDialog.cpp:151 src/gui/ObsListCreateEditDialog.cpp:160
+#: src/gui/ObsListDialog.cpp:177 src/gui/ObsListCreateEditDialog.cpp:186
 msgid "Date"
 msgstr ""
 
@@ -7521,28 +7522,33 @@ msgctxt "unit of measurement"
 msgid "saros"
 msgstr ""
 
-#: src/gui/ObsListDialog.cpp:144 src/gui/ObsListCreateEditDialog.cpp:153
+#: src/gui/ObsListDialog.cpp:170 src/gui/ObsListCreateEditDialog.cpp:179
+msgid "Object designation"
+msgstr ""
+
+#: src/gui/ObsListDialog.cpp:171 src/gui/ObsListCreateEditDialog.cpp:180
 msgid "Object name"
 msgstr ""
 
-#: src/gui/ObsListDialog.cpp:145 src/gui/ObsListCreateEditDialog.cpp:154
-msgid "Localized Object Name"
-msgstr ""
-
-#: src/gui/ObsListDialog.cpp:150 src/gui/ObsListCreateEditDialog.cpp:159
+#: src/gui/ObsListDialog.cpp:176 src/gui/ObsListCreateEditDialog.cpp:185
 #: src/ui_configurationDialog.h:1824
 msgid "Constellation"
 msgstr ""
 
-#: src/gui/ObsListCreateEditDialog.cpp:258
+#: src/gui/ObsListDialog.cpp:525
+msgid "Location not found"
+msgstr ""
+
+#: src/gui/ObsListCreateEditDialog.cpp:346
+#: src/gui/ObsListCreateEditDialog.cpp:348
 msgid "Unnamed object"
 msgstr ""
 
-#: src/gui/ObsListCreateEditDialog.cpp:466
+#: src/gui/ObsListCreateEditDialog.cpp:591
 msgid "Export observing list as..."
 msgstr ""
 
-#: src/gui/ObsListCreateEditDialog.cpp:481
+#: src/gui/ObsListCreateEditDialog.cpp:603
 msgid "Import observing list"
 msgstr ""
 
@@ -11144,7 +11150,7 @@ msgstr ""
 msgid "Markings"
 msgstr ""
 
-#: src/ui_viewDialog.h:3411
+#: src/ui_viewDialog.h:3411 src/ui_obsListCreateEditDialog.h:332
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:480
 msgid "Landscape"
 msgstr ""
@@ -12807,7 +12813,7 @@ msgstr ""
 msgid "Enable a feature to store favorite views."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1882 src/ui_obsListDialog.h:249
+#: src/ui_configurationDialog.h:1882 src/ui_obsListDialog.h:296
 msgid "Observing lists"
 msgstr ""
 
@@ -14022,103 +14028,139 @@ msgstr ""
 msgid "Unit of measurement:"
 msgstr ""
 
-#: src/ui_obsListDialog.h:251
-msgid "List(s):"
+#: src/ui_obsListDialog.h:298
+msgid "List:"
 msgstr ""
 
-#: src/ui_obsListDialog.h:252
-msgid "Observing list description:"
-msgstr ""
-
-#: src/ui_obsListDialog.h:254 src/ui_obsListCreateEditDialog.h:251
+#: src/ui_obsListDialog.h:300 src/ui_obsListCreateEditDialog.h:307
 msgid "Highlight all the objects of the selected list"
 msgstr ""
 
-#: src/ui_obsListDialog.h:256
+#: src/ui_obsListDialog.h:302
 msgid "Highlight all"
 msgstr ""
 
-#: src/ui_obsListDialog.h:258 src/ui_obsListCreateEditDialog.h:255
+#: src/ui_obsListDialog.h:304 src/ui_obsListCreateEditDialog.h:311
 msgid "Clear all the highlight objects"
 msgstr ""
 
-#: src/ui_obsListDialog.h:260
+#: src/ui_obsListDialog.h:306
 msgid "Clear highlight(s)"
 msgstr ""
 
-#: src/ui_obsListDialog.h:262 src/ui_obsListCreateEditDialog.h:259
+#: src/ui_obsListDialog.h:308
 msgid "Create a new observing list"
 msgstr ""
 
-#: src/ui_obsListDialog.h:264
+#: src/ui_obsListDialog.h:310
 msgid "New list"
 msgstr ""
 
-#: src/ui_obsListDialog.h:266 src/ui_obsListCreateEditDialog.h:263
+#: src/ui_obsListDialog.h:312
 msgid "Edit the selected list"
 msgstr ""
 
-#: src/ui_obsListDialog.h:268
+#: src/ui_obsListDialog.h:314
 msgid "Edit list"
 msgstr ""
 
-#: src/ui_obsListDialog.h:270
+#: src/ui_obsListDialog.h:316
 msgid "Delete the selected list"
 msgstr ""
 
-#: src/ui_obsListDialog.h:272
+#: src/ui_obsListDialog.h:318
 msgid "Delete list"
 msgstr ""
 
-#: src/ui_obsListDialog.h:274 src/ui_obsListDialog.h:276
-#: src/ui_obsListCreateEditDialog.h:267
+#: src/ui_obsListDialog.h:320 src/ui_obsListDialog.h:322
+#: src/ui_obsListCreateEditDialog.h:323
 msgid "Exit"
 msgstr ""
 
-#: src/ui_obsListDialog.h:277
+#: src/ui_obsListDialog.h:323
+msgid "Observing list description:"
+msgstr ""
+
+#: src/ui_obsListDialog.h:324
+msgid "Defined as default list"
+msgstr ""
+
+#: src/ui_obsListDialog.h:325
 msgid "Creation date:"
 msgstr ""
 
-#: src/ui_obsListCreateEditDialog.h:244
-msgid "Observing Lists creation/edition"
+#: src/ui_obsListDialog.h:326
+msgid "Use:"
 msgstr ""
 
-#: src/ui_obsListCreateEditDialog.h:247
-msgid "Set the list as default"
+#: src/ui_obsListDialog.h:327
+msgid "Jd"
 msgstr ""
 
-#: src/ui_obsListCreateEditDialog.h:249
-msgid "Set list as default"
+#: src/ui_obsListCreateEditDialog.h:295
+msgid "Observing Lists editor"
 msgstr ""
 
-#: src/ui_obsListCreateEditDialog.h:253
-msgid "Add object"
-msgstr ""
-
-#: src/ui_obsListCreateEditDialog.h:257
-msgid "Remove object"
-msgstr ""
-
-#: src/ui_obsListCreateEditDialog.h:261
-msgid "Export list"
-msgstr ""
-
-#: src/ui_obsListCreateEditDialog.h:265
-msgid "Import list"
-msgstr ""
-
-#: src/ui_obsListCreateEditDialog.h:266
-msgid "Save and Close "
-msgstr ""
-
-#: src/ui_obsListCreateEditDialog.h:268
-msgid "Name of the list:"
-msgstr ""
-
-#: src/ui_obsListCreateEditDialog.h:269
+#: src/ui_obsListCreateEditDialog.h:297
 #: plugins/Satellites/src/ui_satellitesDialog.h:1385
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:217
 msgid "Description:"
+msgstr ""
+
+#: src/ui_obsListCreateEditDialog.h:299
+msgid "Add Ra & Dec coordinates"
+msgstr ""
+
+#: src/ui_obsListCreateEditDialog.h:301
+msgid "Coordinates (RA and DEC)"
+msgstr ""
+
+#: src/ui_obsListCreateEditDialog.h:303
+msgid "Add field of view"
+msgstr ""
+
+#: src/ui_obsListCreateEditDialog.h:305
+msgid "Fov"
+msgstr ""
+
+#: src/ui_obsListCreateEditDialog.h:309
+msgid "Add object"
+msgstr ""
+
+#: src/ui_obsListCreateEditDialog.h:313
+msgid "Remove object"
+msgstr ""
+
+#: src/ui_obsListCreateEditDialog.h:315 src/ui_obsListCreateEditDialog.h:317
+msgid "Export list"
+msgstr ""
+
+#: src/ui_obsListCreateEditDialog.h:319 src/ui_obsListCreateEditDialog.h:321
+msgid "Import list"
+msgstr ""
+
+#: src/ui_obsListCreateEditDialog.h:322
+msgid "Save and close "
+msgstr ""
+
+#: src/ui_obsListCreateEditDialog.h:324
+msgid "TextLabel"
+msgstr ""
+
+#: src/ui_obsListCreateEditDialog.h:326
+msgid "Set the list as default"
+msgstr ""
+
+#: src/ui_obsListCreateEditDialog.h:328
+msgid "Set list as default"
+msgstr ""
+
+#: src/ui_obsListCreateEditDialog.h:330
+msgid "Add landscape"
+msgstr ""
+
+#: src/ui_obsListCreateEditDialog.h:333
+msgid "Name of the list:"
 msgstr ""
 
 #: src/ui_dsoColorsDialog.h:545 src/ui_orbitColorsDialog.h:387
