@@ -429,8 +429,6 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 		const auto& conf=*StelApp::getInstance().getSettings();
 		const auto defaultPath = QDir::homePath() + "/cms";
 		const auto pathToData = conf.value("landscape/atmosphere_model_path", defaultPath).toString();
-		flagDynamicResolution = conf.value("landscape/flag_dynamic_resolution", false).toBool();
-		maxRes = atmoRes = conf.value("landscape/atmosphere_resolution", 1).toInt();
 		auto& gl=glfuncs();
 		qDebug() << "Will load CalcMySky atmosphere model from" << pathToData;
 		skySettings_.reset(new SkySettings);
@@ -496,8 +494,10 @@ AtmosphereShowMySky::~AtmosphereShowMySky()
 void AtmosphereShowMySky::regenerateGrid()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-//	flagDynamicResolution = conf->value("landscape/flag_dynamic_resolution", false).toBool();
-//	maxRes = atmoRes = conf->value("landscape/atmosphere_resolution", 1).toInt();
+	flagDynamicResolution = conf->value("landscape/flag_dynamic_resolution", false).toBool();
+	maxRes = conf->value("landscape/atmosphere_resolution", 1).toInt();
+	if (!flagDynamicResolution)
+		atmoRes = maxRes;
 	const float width=viewport[2]/atmoRes, height=viewport[3]/atmoRes;
 	gridMaxY = conf->value("landscape/atmosphereybin", 44).toInt();
 	gridMaxX = std::floor(0.5+gridMaxY*(0.5*std::sqrt(3.0))*width/height);
