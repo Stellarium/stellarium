@@ -224,7 +224,7 @@ void AtmosphereShowMySky::loadShaders()
 	// Shader program that converts XYZW texture to sRGB image
 	{
 		static constexpr char vShaderSrc[]=R"(
-#version 130
+#version 330
 in vec4 vertex;
 out vec2 texCoord;
 void main()
