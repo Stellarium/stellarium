@@ -837,13 +837,12 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 
 	// FIXME: ignoring the "additional luminance" like star background etc.; see AtmospherePreetham for all potentially needed terms
 	const auto numViewRayGridPoints=(1+gridMaxX)*(1+gridMaxY);
-	const auto ppxw=(double)width/(width/atmoRes);
-	const auto ppxh=(double)height/(height/atmoRes);
-//	qDebug() << "ppxw =" << ppxw << "ppxh =" << ppxh;
+	const auto resX=(double)width/(width/atmoRes);
+	const auto resY=(double)height/(height/atmoRes);
 	for (int i=0; i<numViewRayGridPoints; ++i)
 	{
 		Vec3d point(1, 0, 0);
-		prj->unProject(posGrid[i][0]*ppxw,posGrid[i][1]*ppxh,point);
+		prj->unProject(posGrid[i][0]*resX,posGrid[i][1]*resY,point);
 
 		viewRayGrid[i].set(point[0], point[1], point[2], 0);
 	}
