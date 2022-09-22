@@ -741,7 +741,7 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, 
 
 	bool verbose=qApp->property("verbose").toBool();
 	if (verbose)
-		qDebug() << "dynResTimer =" << dynResTimer << "\tatmoRes =" << atmoRes << "\tchangeOfView =" << changeOfView.length() << changeOfView;
+		qDebug() << "dynResTimer" << dynResTimer << "atmoRes" << atmoRes << "changeOfView" << changeOfView.length() << changeOfView;
 
 	// At reduced resolution, we hurry to redraw - at full resolution, we have time.
 	dynResTimer=dynResTimer>0?6:18;
