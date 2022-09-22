@@ -245,15 +245,8 @@ void AstroCalcDialog::createDialogContent()
 	populateTimeIntervalsList();
 	populateWutGroups();
 	populateToolTips();
-	// Buttons state
-	bool state = false;
-	enableEphemerisButtons(state);
-	enableRTSButtons(state);
-	enablePhenomenaButtons(state);
-	enableSolarEclipsesButtons(state);
-	enableSolarEclipsesLocalButtons(state);
-	enableLunarEclipsesButtons(state);
-	enableTransitsButtons(state);
+	// Default buttons state
+	bool buttonState = false;
 
 	ui->lunarElongationLimitSpinBox->setSuffix("°");
 	ui->positiveAltitudeLimitSpinBox->setSuffix("°");
@@ -324,6 +317,7 @@ void AstroCalcDialog::createDialogContent()
 	connectBoolProperty(ui->ephemerisHorizontalCoordinatesCheckBox, "SolarSystem.ephemerisHorizontalCoordinates");
 	initListEphemeris();
 	initEphemerisFlagNakedEyePlanets();
+	enableEphemerisButtons(buttonState);
 	connect(ui->ephemerisHorizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(reGenerateEphemeris()));
 	connect(ui->allNakedEyePlanetsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveEphemerisFlagNakedEyePlanets(bool)));
 	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
@@ -346,6 +340,7 @@ void AstroCalcDialog::createDialogContent()
 
 	// Tab: Transits
 	initListRTS();
+	enableRTSButtons(buttonState);
 	connect(ui->rtsCalculateButton, SIGNAL(clicked()), this, SLOT(generateRTS()));
 	connect(ui->rtsCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupRTS()));
 	connect(ui->rtsSaveButton, SIGNAL(clicked()), this, SLOT(saveRTS()));
@@ -354,6 +349,7 @@ void AstroCalcDialog::createDialogContent()
 
 	// Tab: Eclipses
 	initListLunarEclipse();
+	enableLunarEclipsesButtons(buttonState);
 	connect(ui->lunareclipsesCalculateButton, SIGNAL(clicked()), this, SLOT(generateLunarEclipses()));
 	connect(ui->lunareclipsesCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupLunarEclipses()));
 	connect(ui->lunareclipsesSaveButton, SIGNAL(clicked()), this, SLOT(saveLunarEclipses()));
@@ -363,6 +359,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->lunareclipseTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentLunarEclipseDate(QModelIndex)));
 	connect(ui->lunareclipsecontactsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentLunarEclipseContact(QModelIndex)));
 	initListSolarEclipse();
+	enableSolarEclipsesButtons(buttonState);
 	connect(ui->solareclipsesCalculateButton, SIGNAL(clicked()), this, SLOT(generateSolarEclipses()));
 	connect(ui->solareclipsesCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupSolarEclipses()));
 	connect(ui->solareclipsesSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipses()));
@@ -373,11 +370,13 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->solareclipseTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipseDate(QModelIndex)));
 	connect(ui->solareclipsecontactsTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipseContact(QModelIndex)));
 	initListSolarEclipseLocal();
+	enableSolarEclipsesLocalButtons(buttonState);
 	connect(ui->solareclipseslocalCalculateButton, SIGNAL(clicked()), this, SLOT(generateSolarEclipsesLocal()));
 	connect(ui->solareclipseslocalCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupSolarEclipsesLocal()));
 	connect(ui->solareclipseslocalSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipsesLocal()));
 	connect(ui->solareclipselocalTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipseLocal(QModelIndex)));
 	initListTransit();
+	enableTransitsButtons(buttonState);
 	connect(ui->transitsCalculateButton, SIGNAL(clicked()), this, SLOT(generateTransits()));
 	connect(ui->transitsCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupTransits()));
 	connect(ui->transitsSaveButton, SIGNAL(clicked()), this, SLOT(saveTransits()));
@@ -389,6 +388,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->allowedSeparationSpinBox->setMinimum(0.0, true);
 	ui->allowedSeparationSpinBox->setMaximum(20.0, true);
 	ui->allowedSeparationSpinBox->setWrapping(false);
+	enablePhenomenaButtons(buttonState);
 
 	ui->phenomenaOppositionCheckBox->setChecked(conf->value("astrocalc/flag_phenomena_opposition", false).toBool());
 	connect(ui->phenomenaOppositionCheckBox, SIGNAL(toggled(bool)), this, SLOT(savePhenomenaOppositionFlag(bool)));
@@ -483,6 +483,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->wutAltitudeMinSpinBox->setMinimum(0.0, true);
 	ui->wutAltitudeMinSpinBox->setMaximum(90.0, true);
 	ui->wutAltitudeMinSpinBox->setWrapping(false);
+	ui->saveObjectsButton->setEnabled(buttonState);
 
 	// Convert from angular minutes
 	ui->wutAngularSizeLimitMinSpinBox->setDegrees(conf->value("astrocalc/wut_angular_limit_min", 10.0).toDouble()/60.0);
@@ -9720,8 +9721,14 @@ void AstroCalcDialog::calculateWutObjects()
 		enableAngularLimits(enableAngular);
 		core->setJD(JD);
 		adjustWUTColumns();
+		if (objectsList.size()>0)
+			ui->saveObjectsButton->setEnabled(true);
+		else
+			ui->saveObjectsButton->setEnabled(false);
 		objectsList.clear();		
 	}
+	else
+		ui->saveObjectsButton->setEnabled(false);
 }
 
 void AstroCalcDialog::selectWutObject(const QModelIndex &index)
