@@ -495,7 +495,7 @@ AtmosphereShowMySky::~AtmosphereShowMySky()
 void AtmosphereShowMySky::regenerateGrid()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	flagDynamicResolution = conf->value("landscape/flag_dynamic_resolution", false).toBool();
+	flagDynamicResolution = conf->value("landscape/flag_atmosphere_dynamic_resolution", false).toBool();
 	maxRes = conf->value("landscape/atmosphere_resolution_reduction", 1).toInt();
 	if (!flagDynamicResolution)
 		atmoRes = maxRes;
