@@ -193,7 +193,7 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 
 	auto sunPos  =  sun.getAltAzPosAuto(core);
 	if (qIsNaN(sunPos.length()))
-		sunPos.set(0.,0.,-1.*AU);
+		sunPos.set(0.,0.,-1.);
 
 	Vec3d moonPos = sunPos;
 	// Calculate the atmosphere RGB for each point of the grid. We can use abbreviated numbers here.
@@ -207,7 +207,7 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 	{
 		moonPos = moon->getAltAzPosAuto(core);
 		if (qIsNaN(moonPos.length()))
-			moonPos.set(0.,0.,-1.*AU);
+			moonPos.set(0.,0.,-1.);
 
 		// Update the eclipse intensity factor to apply on atmosphere model
 		// these are for radii

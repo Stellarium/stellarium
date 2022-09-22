@@ -562,6 +562,14 @@ private:
 	void adjustWUTColumns();
 	void adjustPhenomenaColumns();
 
+	void enableEphemerisButtons(bool enable);
+	void enableRTSButtons(bool enable);
+	void enablePhenomenaButtons(bool enable);
+	void enableSolarEclipsesButtons(bool enable);
+	void enableSolarEclipsesLocalButtons(bool enable);
+	void enableLunarEclipsesButtons(bool enable);
+	void enableTransitsButtons(bool enable);
+
 	void enableCustomEphemerisTimeStepButton();
 	double getCustomTimeStep();
 	void reGenerateEphemeris(bool withSelection);
