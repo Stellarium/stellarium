@@ -72,8 +72,8 @@ using namespace QtCharts;
 #include "AstroCalcCustomStepsDialog.hpp"
 #include "ui_astroCalcDialog.h"
 
-#include "xlsxdocument.h"
-#include "xlsxcellrange.h"
+#include <xlsxdocument.h>
+#include <xlsxcellrange.h>
 using namespace QXlsx;
 
 QVector<Ephemeris> AstroCalcDialog::EphemerisList;
