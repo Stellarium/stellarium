@@ -165,6 +165,18 @@
          <enum>QFrame::Raised</enum>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_4">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayoutButtons">
            <property name="topMargin">
@@ -389,8 +401,11 @@
         </item>
         <item>
          <widget class="QCheckBox" name="obsListJdCheckBox">
+          <property name="toolTip">
+           <string>Julian Day</string>
+          </property>
           <property name="text">
-           <string>Jd</string>
+           <string notr="true">JD</string>
           </property>
          </widget>
         </item>
