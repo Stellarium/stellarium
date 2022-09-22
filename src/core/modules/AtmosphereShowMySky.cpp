@@ -308,7 +308,7 @@ vec3 calcViewDir()
 
 void AtmosphereShowMySky::resizeRenderTarget(int width, int height)
 {
-	renderer_->resizeEvent(width/ppxatmo, height/ppxatmo);
+	renderer_->resizeEvent(width/atmoRes, height/atmoRes);
 
 	prevWidth_=width;
 	prevHeight_=height;
@@ -411,7 +411,7 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 	, indexBuffer(QOpenGLBuffer::IndexBuffer)
 	, viewRayGridBuffer(QOpenGLBuffer::VertexBuffer)
 	, luminanceToScreenProgram_(new QOpenGLShaderProgram())
-	, ppxatmo(1)
+	, atmoRes(1)
 	, flagDynamicResolution(false)
 {
 	indexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
@@ -430,7 +430,7 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 		const auto defaultPath = QDir::homePath() + "/cms";
 		const auto pathToData = conf.value("landscape/atmosphere_model_path", defaultPath).toString();
 		flagDynamicResolution = conf.value("landscape/flag_dynamic_resolution", false).toBool();
-		ppxmax = ppxatmo = conf.value("landscape/ppxatmo", 1).toInt();
+		maxRes = atmoRes = conf.value("landscape/atmo_resolution", 1).toInt();
 		auto& gl=glfuncs();
 		qDebug() << "Will load CalcMySky atmosphere model from" << pathToData;
 		skySettings_.reset(new SkySettings);
@@ -497,8 +497,8 @@ void AtmosphereShowMySky::regenerateGrid()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 //	flagDynamicResolution = conf->value("landscape/flag_dynamic_resolution", false).toBool();
-//	ppxmax = ppxatmo = conf->value("landscape/ppxatmo", 1).toInt();
-	const float width=viewport[2]/ppxatmo, height=viewport[3]/ppxatmo;
+//	maxRes = atmoRes = conf->value("landscape/atmo_resolution", 1).toInt();
+	const float width=viewport[2]/atmoRes, height=viewport[3]/atmoRes;
 	gridMaxY = conf->value("landscape/atmosphereybin", 44).toInt();
 	gridMaxX = std::floor(0.5+gridMaxY*(0.5*std::sqrt(3.0))*width/height);
 	const auto gridSize=(1+gridMaxX)*(1+gridMaxY);
@@ -724,7 +724,7 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, 
 	const auto dSun=(currSun-prevSun).length();			// pixel
 	const auto changeOfView=dFov+dFad+dPos+dSun;
 	// hysteresis avoids frequent changing of the resolution
-	const float allowedChangeOfView=ppxatmo==1?1:200e-3;
+	const float allowedChangeOfView=atmoRes==1?1:200e-3;
 	dynResTimer--;							// count down to redraw
 	// if we have neither a timeout nor a change that is too large, we do nothing...
 	if (changeOfView<allowedChangeOfView && dynResTimer>0)
@@ -732,8 +732,8 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, 
 
 	// if there is a timeout, we draw with full resolution
 	// if the change is too large, we draw with reduced resolution
-	ppxatmo=dynResTimer>0?ppxmax:1;
-	if (prevPxa!=ppxatmo)
+	atmoRes=dynResTimer>0?maxRes:1;
+	if (prevRes!=atmoRes)
 	{
 		regenerateGrid();
 		resizeRenderTarget(width, height);
@@ -741,12 +741,12 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, 
 
 	bool verbose=qApp->property("verbose").toBool();
 	if (verbose)
-//		qDebug() << "dynResTimer" << dynResTimer << "ppxatmo" << ppxatmo << "dFov" << dFov << "dFad" << dFad << "dPos" << dPos << "dSun" << dSun;
-		qDebug() << "dynResTimer =" << dynResTimer << "\tppxatmo =" << ppxatmo << "\tchangeOfView =" << changeOfView;
+//		qDebug() << "dynResTimer" << dynResTimer << "atmoRes" << atmoRes << "dFov" << dFov << "dFad" << dFad << "dPos" << dPos << "dSun" << dSun;
+		qDebug() << "dynResTimer =" << dynResTimer << "\tatmoRes =" << atmoRes << "\tchangeOfView =" << changeOfView;
 
 	// At reduced resolution, we hurry to redraw - at full resolution, we have time.
 	dynResTimer=dynResTimer>0?4:18;
-	prevPxa=ppxatmo;
+	prevRes=atmoRes;
 	prevFov=currFov;
 	prevFad=currFad;
 	prevPos=currPos;
@@ -837,8 +837,8 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 
 	// FIXME: ignoring the "additional luminance" like star background etc.; see AtmospherePreetham for all potentially needed terms
 	const auto numViewRayGridPoints=(1+gridMaxX)*(1+gridMaxY);
-	const auto ppxw=(double)width/(width/ppxatmo);
-	const auto ppxh=(double)height/(height/ppxatmo);
+	const auto ppxw=(double)width/(width/atmoRes);
+	const auto ppxh=(double)height/(height/atmoRes);
 //	qDebug() << "ppxw =" << ppxw << "ppxh =" << ppxh;
 	for (int i=0; i<numViewRayGridPoints; ++i)
 	{
