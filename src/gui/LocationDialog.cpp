@@ -365,7 +365,7 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	StelModule* ls = StelApp::getInstance().getModule("LandscapeMgr");
 	if (ls->property("flagEnvironmentAutoEnable").toBool())
 	{
-		if (loc.planetName != StelApp::getInstance().getCore()->getCurrentLocation().planetName)
+		if (loc.planetName != core->getCurrentLocation().planetName)
 		{
 			QSettings* conf = StelApp::getInstance().getSettings();
 			ls->setProperty("atmosphereDisplayed", p->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());

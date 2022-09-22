@@ -107,7 +107,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	newProjectorParams.viewportXywh[0] = (screen_w-newProjectorParams.viewportXywh[2]) >> 1;
 	newProjectorParams.viewportXywh[1] = (screen_h-newProjectorParams.viewportXywh[3]) >> 1;
 
-	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(newProjectorParams);
+	core->setCurrentStelProjectorParams(newProjectorParams);
 
 	// init transformation
 	VertexPoint *vertex_point_array = Q_NULLPTR;

@@ -966,37 +966,37 @@ SolarEclipseData::SolarEclipseData(double JD, double &dRatio, double &latDeg,
 	core->setJD(JD);
 	core->update(0);
 
-	double x,y,d,tf1,tf2,L1,L2,mu;
-	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
-
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	static const double earthRadius = ssystem->getEarth()->getEquatorialRadius()*AU;
 	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
-	const double earthRadius = ssystem->getEarth()->getEquatorialRadius()*AU;
 	static const double e2 = f*(2.-f);
 	static const double ff = 1./(1.-f);
-	const double rho1 = sqrt(1. - e2 * cos(d) *cos(d));
+
+	double x,y,d,tf1,tf2,L1,L2,mu;
+	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
+	const double rho1 = sqrt(1. - e2 * cos(d) * cos(d));
 	const double eta1 = y / rho1;
 	const double sd1 = sin(d) / rho1;
 	const double cd1 = sqrt(1. - e2) * cos(d) / rho1;
 	const double rho2 = sqrt(1.- e2 * sin(d) * sin(d));
-	const double sd1d2 = e2*sin(d)*cos(d)/(rho1*rho2);
-	const double cd1d2 = sqrt(1. - sd1d2 * sd1d2); 
+	const double sd1d2 = e2*sin(d)*cos(d) / (rho1*rho2);
+	const double cd1d2 = sqrt(1. - sd1d2 * sd1d2);
 	const double p = 1. - x * x - eta1 * eta1;
 
 	if (p > 0.) // Central eclipse : Moon's shadow axis is touching Earth
 	{
 		const double zeta1 = sqrt(p);
 		const double zeta = rho2 * (zeta1 * cd1d2 - eta1 * sd1d2);
-		double L2a = L2 - zeta * tf2;
+		const double L2a = L2 - zeta * tf2;
 		const double b = -y * sin(d) + zeta * cos(d);
-		double theta = atan2(x, b) * M_180_PI;
+		const double theta = atan2(x, b) * M_180_PI;
 		lngDeg = theta - mu;
 		lngDeg = StelUtils::fmodpos(lngDeg, 360.);
 		if (lngDeg > 180.) lngDeg -= 360.;
 		const double sfn1 = eta1 * cd1 + zeta1 * sd1;
 		const double cfn1 = sqrt(1. - sfn1 * sfn1);
 		latDeg = atan(ff * sfn1 / cfn1) / M_PI_180;
-		double L1a = L1 - zeta * tf1;
+		const double L1a = L1 - zeta * tf1;
 		magnitude = L1a / (L1a + L2a);
 		dRatio = 1.+(magnitude-1.)*2.;
 
