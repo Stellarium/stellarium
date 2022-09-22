@@ -718,16 +718,16 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, 
 	const auto currFov=prj->getFov(), currFad=fader.getInterstate();
 	Vec3d currSun;
 	prj->project(currPos,currSun);
-	const auto dFov=2e3*qAbs(currFov-prevFov)/(currFov+prevFov);	// per thousand of the field of view
-	const auto dFad=1e3*qAbs(currFad-prevFad);			// per thousand of the fader
+	const auto dFad=1e3*(currFad-prevFad);				// per thousand of the fader
+	const auto dFov=2e3*(currFov-prevFov)/(currFov+prevFov);	// per thousand of the field of view
 	const auto dPos=1e3*(currPos-prevPos).length();			// milli-AU :)
 	const auto dSun=(currSun-prevSun).length();			// pixel
-	const auto changeOfView=dFov+dFad+dPos+dSun;
+	const auto changeOfView=Vec4d(dFad,dFov,dPos,dSun);
 	// hysteresis avoids frequent changing of the resolution
 	const float allowedChangeOfView=eclipseFactor<1?10e-3:atmoRes==1?1:200e-3;
 	dynResTimer--;							// count down to redraw
 	// if we have neither a timeout nor a change that is too large, we do nothing...
-	if (changeOfView<allowedChangeOfView && dynResTimer>0)
+	if (changeOfView.length()<allowedChangeOfView && dynResTimer>0)
 		return true;
 
 	// if there is a timeout, we draw with full resolution
@@ -741,8 +741,7 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, 
 
 	bool verbose=qApp->property("verbose").toBool();
 	if (verbose)
-//		qDebug() << "dynResTimer" << dynResTimer << "atmoRes" << atmoRes << "dFov" << dFov << "dFad" << dFad << "dPos" << dPos << "dSun" << dSun;
-		qDebug() << "dynResTimer =" << dynResTimer << "\tatmoRes =" << atmoRes << "\tchangeOfView =" << changeOfView;
+		qDebug() << "dynResTimer =" << dynResTimer << "\tatmoRes =" << atmoRes << "\tchangeOfView =" << changeOfView.length() << changeOfView;
 
 	// At reduced resolution, we hurry to redraw - at full resolution, we have time.
 	dynResTimer=dynResTimer>0?6:18;
