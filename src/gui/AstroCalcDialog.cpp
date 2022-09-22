@@ -3443,7 +3443,6 @@ LocalSEparams localSolarEclipse(double JD,int contact,bool central) {
 
 double AstroCalcDialog::getDeltaTofContact(double JD, bool beginning, bool penumbra, bool external)
 {
-	StelCore* core = StelApp::getInstance().getCore();
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
 	static const double e2 = f*(2.-f);
@@ -4562,7 +4561,6 @@ QPair<double, double> AstroCalcDialog::getMaximumEclipseAtRiseSet(bool rise, dou
 	// Source: Explanatory Supplement to the Astronomical Ephemeris 
 	// and the American Ephemeris and Nautical Almanac (1961)
 	QPair<double, double> coordinates;
-	StelCore* core = StelApp::getInstance().getCore();
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
 	static const double ff = 1./(1.-f);
