@@ -17,7 +17,7 @@ issue in this case, you may join the discussion.
 
 If you want to report a bug, please make sure to update and verify the bug 
 still exists in the current version.  In this case please also check 
-[current beta builds](https://github.com/Stellarium/stellarium-data/releases/tag/beta) (i.e., the latest development version).
+[current beta builds](https://github.com/Stellarium/stellarium-data/releases/tag/weekly-snapshot) (i.e., the latest development version).
 
 Also look into the [wiki](https://github.com/Stellarium/stellarium/wiki/Common-Problems-for-the-current-version) 
 and [FAQ](https://github.com/Stellarium/stellarium/wiki/FAQ) and check if you are 

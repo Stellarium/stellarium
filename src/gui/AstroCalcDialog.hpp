@@ -31,9 +31,9 @@
 #include <QTimer>
 #include <QRegularExpression>
 #include <QMutex>
+#include <QtCharts/qchartview.h>
 
 #include "AstroCalcChart.hpp"
-#include "QtCharts/qchartview.h"
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
 #include "Planet.hpp"
