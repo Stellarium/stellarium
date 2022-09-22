@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>677</width>
-    <height>396</height>
+    <height>401</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
@@ -175,12 +175,24 @@
          <enum>QFrame::Raised</enum>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_4">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayoutCheckBoxRacDecFov">
            <item>
             <widget class="QCheckBox" name="obsListCoordinatesCheckBox">
              <property name="toolTip">
-              <string>Add Ra &amp; Dec coordinates</string>
+              <string>Add equatorial coordinates (J2000.0)</string>
              </property>
              <property name="toolTipDuration">
               <number>3</number>
@@ -199,7 +211,7 @@
               <number>3</number>
              </property>
              <property name="text">
-              <string>Fov</string>
+              <string>FOV</string>
              </property>
             </widget>
            </item>
@@ -282,7 +294,7 @@
            <item>
             <widget class="QPushButton" name="obsListSaveButton">
              <property name="text">
-              <string>Save and close </string>
+              <string>Save and close</string>
              </property>
             </widget>
            </item>
@@ -319,7 +331,7 @@
            <string notr="true">QLabel {color : red;}</string>
           </property>
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>
