@@ -709,22 +709,22 @@ Vec4f AtmosphereShowMySky::getMeanPixelValue()
 	return pixel;
 }
 
-bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &pos1, int width, int height)
+bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, int width, int height)
 {
 	if (!flagDynamicResolution)
 		return false;
 
-	const auto fov1=prj->getFov(), fad1=fader.getInterstate();
-	Vec3d sun1;
-	prj->project(pos1,sun1);
-	const auto dFov=2e3*qAbs(fov1-prevFov)/(fov1+prevFov);	// per thousand of the field of view
-	const auto dFad=1e3*qAbs(fad1-prevFad);			// per thousand of the fader
-	const auto dPos=1e3*(pos1-prevPos).length();		// milli-AU :)
-	const auto dSun=(sun1-prevSun).length();		// pixel
+	const auto currFov=prj->getFov(), currFad=fader.getInterstate();
+	Vec3d currSun;
+	prj->project(currPos,currSun);
+	const auto dFov=2e3*qAbs(currFov-prevFov)/(currFov+prevFov);	// per thousand of the field of view
+	const auto dFad=1e3*qAbs(currFad-prevFad);			// per thousand of the fader
+	const auto dPos=1e3*(currPos-prevPos).length();			// milli-AU :)
+	const auto dSun=(currSun-prevSun).length();			// pixel
 	const auto changeOfView=dFov+dFad+dPos+dSun;
 	// hysteresis avoids frequent changing of the resolution
 	const float allowedChangeOfView=ppxatmo==1?1:200e-3;
-	dynResTimer--;						// count down to redraw
+	dynResTimer--;							// count down to redraw
 	// if we have neither a timeout nor a change that is too large, we do nothing...
 	if (changeOfView<allowedChangeOfView && dynResTimer>0)
 		return true;
@@ -746,10 +746,10 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &pos1, int
 	// At reduced resolution, we hurry to redraw - at full resolution, we have time.
 	dynResTimer=dynResTimer>0?4:18;
 	prevPxa=ppxatmo;
-	prevFov=fov1;
-	prevFad=fad1;
-	prevPos=pos1;
-	prevSun=sun1;
+	prevFov=currFov;
+	prevFad=currFad;
+	prevPos=currPos;
+	prevSun=currSun;
 	return false;
 }
 
