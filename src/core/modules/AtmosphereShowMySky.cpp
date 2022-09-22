@@ -322,7 +322,8 @@ void AtmosphereShowMySky::setupRenderTarget()
 	GL(gl.glGetIntegerv(GL_VIEWPORT, viewport));
 	resizeRenderTarget(viewport[2], viewport[3]);
 
-	prevWidth_=0;				// suspicious workaround :)
+	// force resize on first render because the renderer may change framebuffer size after data loading
+	prevWidth_=0;
 }
 
 void AtmosphereShowMySky::setupBuffers()
@@ -496,7 +497,7 @@ void AtmosphereShowMySky::regenerateGrid()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	flagDynamicResolution = conf->value("landscape/flag_dynamic_resolution", false).toBool();
-	maxRes = conf->value("landscape/atmosphere_resolution", 1).toInt();
+	maxRes = conf->value("landscape/atmosphere_resolution_reduction", 1).toInt();
 	if (!flagDynamicResolution)
 		atmoRes = maxRes;
 	const float width=viewport[2]/atmoRes, height=viewport[3]/atmoRes;
