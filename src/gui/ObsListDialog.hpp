@@ -22,6 +22,7 @@
 
 #include <QObject>
 #include <QStandardItemModel>
+#include <QSortFilterProxyModel>
 
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
@@ -30,84 +31,131 @@
 
 class Ui_obsListDialogForm;
 
-class ObsListDialog : public StelDialog
-{
-	Q_OBJECT
+class ObsListDialog : public StelDialog {
+Q_OBJECT
 
 public:
-	ObsListDialog ( QObject* parent );
-	virtual ~ObsListDialog() Q_DECL_OVERRIDE;
+    explicit ObsListDialog(QObject *parent);
 
-	//! Notify that the application style changed
-	virtual void styleChanged() Q_DECL_OVERRIDE;
+    ~ObsListDialog() override;
+
+    //! Notify that the application style changed
+    void styleChanged() override;
+
+    void setVisible(bool v) override;
 
 protected:
-	Ui_obsListDialogForm *ui;
-	//! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+    Ui_obsListDialogForm *ui;
+
+    //! Initialize the dialog widgets and connect the signals/slots.
+    void createDialogContent() override;
 
 private:
-	QStandardItemModel * obsListListModel;
-	class StelCore* core;
-	class StelObjectMgr* objectMgr;
-	class LabelMgr* labelMgr;
-	std::string selectedObservingListUuid;
-	QString observingListJsonPath;
-	QHash<QString, observingListItem> observingListItemCollection;
-	QList<int> highlightLabelIDs;
-	QString defaultListUuid_;
+    QStandardItemModel *obsListListModel;
 
-	//! Set header names for observing list table
-	void setObservingListHeaderNames();
+    class StelCore *core;
 
-	void invokeObsListCreateEditDialog ( std::string listUuid );
+    class StelObjectMgr *objectMgr;
 
-	ObsListCreateEditDialog * createEditDialog_instance;
+    class LandscapeMgr *landscapeMgr;
 
-	//! Add row in the obsListListModel
-	//! @param number row number
-	//! @param uuid id of the record
-	//! @param name name or the designation of the object
-	//! @param type type of the object
-	//! @param ra right ascencion of the object
-	//! @param dec declination of the object
-	//! @param magnitude magnitude of the object
-	//! @param constellation constellation in which the object is located
-	void addModelRow ( int number, QString uuid, QString name, QString nameI18n, QString type, QString ra, QString dec, QString magnitude, QString constellation );
+    class LabelMgr *labelMgr;
 
-	//! Load the selected observing list
-	//! @param listUuid the uuid of the list
-	void loadObservingList ( QString listUuid );
+    std::string selectedObservingListUuid;
+    QString observingListJsonPath;
+    QString bookmarksJsonPath;
+    QHash<QString, observingListItem> observingListItemCollection;
+    QList<int> highlightLabelIDs;
+    QString defaultListOlud_;
+    QList<QString> listName_;
+    QStringList listNamesModel;
+    double currentJd;
+    ObservingListUtil util;
 
-	//! Load the lists names for populate the combo box and get the default list uuid
-	void loadListsName();
+    //! Set header names for observing list table
+    void setObservingListHeaderNames();
 
-	//! Load the default list
-	void loadDefaultList();
+    void invokeObsListCreateEditDialog(std::string listOlud);
 
-	//! Load list from JSON file
-	QVariantList loadListFromJson(QFile &jsonFile, QString listUuid);
+    ObsListCreateEditDialog *createEditDialog_instance;
+
+    //! Add row in the obsListListModel
+    //! @param number row number
+    //! @param olud id of the record
+    //! @param name name or the designation of the object
+    //! @param type type of the object
+    //! @param ra right assencion of the object
+    //! @param dec declination of the object
+    //! @param magnitude magnitude of the object
+    //! @param constellation constellation in which the object is located
+    void addModelRow(int number, const QString &olud, const QString &name, const QString &nameI18n, const QString &type,
+                     const QString &ra, const QString &dec, const QString &magnitude, const QString &constellation,
+                     const QString &date, const QString &location);
+
+    //! Load the selected observing list from Json file into dialog.
+    //! @param listOlud the olud (id) of the list
+    void loadSelectedObservingListFromJsonFile(const QString &listOlud);
+
+    //! Load the lists names from Json file to populate the combo box and get the default list olud
+    void loadListsNameFromJsonFile();
+
+    //! Load the default list
+    void loadDefaultList();
+
+    //! Load the bookmarks of bookmarks.json file into observing lists file
+    void loadBookmarksInObservingList();
+
+    void saveBookmarksInObsListJsonFile(const QHash<QString, observingListItem> &bookmarksCollection);
+
+    static auto checkIfBookmarksListExists(const QVariantMap &allListsMap) -> bool;
+
+    //! Load list from JSON file
+    auto loadListFromJson(const QVariantMap &map, const QString& listOlud) -> QVariantList;
+
+    //! Populate list names into combo box
+    void populateListNameInComboBox(QVariantMap map);
+
+    //! Populate data into combo box
+    void populateDataInComboBox(QVariantMap map, const QString &defaultListOlud);
+
+    //! Sort the obsListTreeView by the column name given in parameter
+    void sortObsListTreeViewByColumnName(const QString &columnName);
+
+    //! Clear highlights
+    void clearHighlight();
+
+    //! get the defaultListOlud from Json file
+    QString extractDefaultListOludFromJsonFile();
 
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+
+    void retranslate();
 
 private slots:
-	void obsListHighLightAllButtonPressed();
-	void obsListClearHighLightButtonPressed();
-	void obsListNewListButtonPressed();
-	void obsListEditButtonPressed();
-	void obsListCreateEditDialogClosed();
-	void obsListExitButtonPressed();
-	void obsListDeleteButtonPressed();
 
-	//! Method called when a list name is selected in the combobox
-	//! @param selectedIndex the index of the list name in the combo box
-	void loadSelectedObservingList ( int selectedIndex );
+    void obsListHighLightAllButtonPressed();
 
-	//! Select and go to object
-	//! @param index the QModelIndex of the list
-	void selectAndGoToObject ( QModelIndex index );
+    void obsListClearHighLightButtonPressed();
+
+    void obsListNewListButtonPressed();
+
+    void obsListEditButtonPressed();
+
+    void obsListCreateEditDialogClosed();
+
+    void obsListExitButtonPressed();
+
+    void obsListDeleteButtonPressed();
+
+
+    //! Method called when a list name is selected in the combobox
+    //! @param selectedIndex the index of the list name in the combo box
+    void loadSelectedObservingList(int selectedIndex);
+
+    //! Select and go to object
+    //! @param index the QModelIndex of the list
+    void selectAndGoToObject(QModelIndex index);
 };
 
 #endif // OBSLISTDIALOG_H
