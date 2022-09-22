@@ -30,79 +30,118 @@
 
 class Ui_obsListCreateEditDialogForm;
 
-class ObsListCreateEditDialog : public StelDialog
-{
-	Q_OBJECT
+class ObsListCreateEditDialog : public StelDialog {
+Q_OBJECT
 
 public:
-	static ObsListCreateEditDialog * Instance ( std::string listUuid );
-	static void kill();
+    static auto Instance(std::string listUuid) -> ObsListCreateEditDialog *;
 
-	//! Notify that the application style changed
-	void styleChanged() Q_DECL_OVERRIDE;
+    static void kill();
 
-	//! called when click on button close in top right corner
-	void close() Q_DECL_OVERRIDE;
+    //! Notify that the application style changed
+    void styleChanged() override;
+
+    //! called when click on button close in top right corner
+    void close() override;
+
+    void setListName(QList<QString> listName);
 
 protected:
-	static ObsListCreateEditDialog * m_instance;
-	Ui_obsListCreateEditDialogForm *ui;
-	//! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+    //! Initialize the dialog widgets and connect the signals/slots.
+    void createDialogContent() override;
 
 private:
-	//! To know if the dialog is open in creation mode or editionn mode
-	// if true we are in creation mode otherwise in edition mode
-	bool isCreationMode;
-	QStandardItemModel * obsListListModel;
-	class StelCore* core;
-	class StelObjectMgr* objectMgr;
-	std::string listUuid_;
-	QString observingListJsonPath;
-	QHash<QString, observingListItem> observingListItemCollection;
+    static ObsListCreateEditDialog *m_instance;
+    Ui_obsListCreateEditDialogForm *ui;
+    //! To know if the dialog is open in creation mode or editionn mode
+    // if true we are in creation mode otherwise in edition mode
+    bool isCreationMode{};
+    bool isSaveAs{};
+    QStandardItemModel *obsListListModel;
 
-	//! Sorting of the list ex: right ascencion
-	QString sorting;
+    class StelCore *core;
 
-	//! Set header names for observing list table
-	void setObservingListHeaderNames();
+    class StelObjectMgr *objectMgr;
 
-	//! Add row in the obsListListModel
-	//! @param number row number
-	//! @param uuid id of the record
-	//! @param name name or the designation of the object
-	//! @param type type of the object
-	//! @param ra right ascencion of the object
-	//! @param dec declination of the object
-	//! @param magnitude magnitude of the object
-	//! @param constellation constellation in which the object is located
-	void addModelRow ( int number, QString uuid, QString name, QString nameI18n, QString type, QString ra, QString dec, QString magnitude, QString constellation );
+    class LandscapeMgr *landscapeMgr;
 
-	//! Save the object informations into json file
-	void saveObservedObject();
+    std::string listOlud_;
+    QString observingListJsonPath;
+    ObservingListUtil util;
 
-	//! Load the observing liste in case of edit mode
-	void loadObservingList();
+    // Data for observed objects
+    QHash<QString, observingListItem> observingListItemCollection;
 
-	//Private constructor and destructor
-	ObsListCreateEditDialog ( std::string listUuid );
-	virtual ~ObsListCreateEditDialog() Q_DECL_OVERRIDE;
+    //List names
+    QList<QString> listNames_;
 
+    //Current list name
+    QString currentListName;
+
+    //! Sorting of the list ex: right ascension
+    QString sorting;
+
+    //! Set header names for observing list table
+    void setObservingListHeaderNames();
+
+    //! Add row in the obsListListModel
+    //! @param number row number
+    //! @param olud id of the record
+    //! @param name name or the designation of the object
+    //! @param type type of the object
+    //! @param ra right ascension of the object
+    //! @param dec declination of the object
+    //! @param magnitude magnitude of the object
+    //! @param constellation constellation in which the object is located
+    void addModelRow(int number, const QString &olud, const QString &name, const QString &nameI18n, const QString &type,
+                     const QString &ra, const QString &dec, const QString &magnitude, const QString &constellation);
+
+    //! Save the object informations into json file
+    void saveObservedObjectsInJsonFile();
+
+    //! Load the observing liste in case of edit mode
+    void loadObservingList();
+
+    //! Load bookmark in observing list for import.
+    void loadBookmarksInObservingList();
+
+    //! Initialize the error message (obsListErrorMessage).
+    void initErrorMessage();
+
+    //! Display the error message.
+    void displayErrorMessage(const char *message);
+
+    //Private constructor and destructor
+    explicit ObsListCreateEditDialog(std::string listUuid);
+
+    ~ObsListCreateEditDialog() override;
 
 public slots:
-	void retranslate() Q_DECL_OVERRIDE;
+
+    void retranslate() override;
+
 private slots:
-	void obsListAddObjectButtonPressed();
-	void obsListRemoveObjectButtonPressed();
-	void obsListExportListButtonPressed();
-	void obsListImportListButtonPresssed();
-	void obsListSaveButtonPressed();
-	void obsListExitButtonPressed();
-	void headerClicked ( int index );
+
+    void obsListAddObjectButtonPressed();
+
+    void obsListRemoveObjectButtonPressed();
+
+    void obsListExportListButtonPressed();
+
+    void obsListImportListButtonPresssed();
+
+    void obsListSaveButtonPressed();
+
+    void obsListExitButtonPressed();
+
+    void headerClicked(int index);
+
+    void nameOfListTextChange();
 
 signals:
-	//To notified that the exit button is clicked
-	void exitButtonClicked();
+
+    //To notified that the exit button is clicked
+    void exitButtonClicked();
 };
 
 #endif // OBSLISTCREATEEDITDIALOG_H
