@@ -1649,7 +1649,8 @@ void StelMainView::doScreenshot(void)
 	QOpenGLPaintDevice fbObjPaintDev(static_cast<int>(static_cast<float>(imgWidth) * pixelRatio), static_cast<int>(static_cast<float>(imgHeight) * pixelRatio));
 
 	// It seems the projector has its own knowledge about image size. We must adjust fov and image size, but reset afterwards.
-	StelProjector::StelProjectorParams pParams=StelApp::getInstance().getCore()->getCurrentStelProjectorParams();
+	StelCore *core=StelApp::getInstance().getCore();
+	StelProjector::StelProjectorParams pParams=core->getCurrentStelProjectorParams();
 	StelProjector::StelProjectorParams sParams=pParams;
 	//qCDebug(mainview) << "Screenshot Viewport: x" << pParams.viewportXywh[0] << "/y" << pParams.viewportXywh[1] << "/w" << pParams.viewportXywh[2] << "/h" << pParams.viewportXywh[3];
 	sParams.viewportXywh[2]=imgWidth;
@@ -1663,7 +1664,7 @@ void StelMainView::doScreenshot(void)
 #endif
 	sParams.viewportCenter.set(0.0+(0.5+pParams.viewportCenterOffset.v[0])*imgWidth, 0.0+(0.5+pParams.viewportCenterOffset.v[1])*imgHeight);
 	sParams.viewportFovDiameter = qMin(imgWidth,imgHeight);
-	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(sParams);
+	core->setCurrentStelProjectorParams(sParams);
 
 	QPainter painter;
 	painter.begin(&fbObjPaintDev);
@@ -1694,7 +1695,7 @@ void StelMainView::doScreenshot(void)
 	fbObj->release();
 	delete fbObj;
 	// reset viewport and GUI
-	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(pParams);
+	core->setCurrentStelProjectorParams(pParams);
 	customScreenshotMagnification=1.0f;
 	nightModeEffect->setEnabled(nightModeWasEnabled);
 	stelScene->setSceneRect(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);

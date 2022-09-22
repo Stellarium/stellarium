@@ -147,8 +147,8 @@ void ConfigurationDialog::retranslate()
 
 void ConfigurationDialog::createDialogContent()
 {
-	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000);
 	StelCore* core = StelApp::getInstance().getCore();
+	const StelProjectorP proj = core->getProjection(StelCore::FrameJ2000);
 
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 
@@ -496,15 +496,16 @@ void ConfigurationDialog::selectSkyLanguage(const int id)
 
 void ConfigurationDialog::setStartupTimeMode()
 {
+	StelCore *core=StelApp::getInstance().getCore();
 	if (ui->systemTimeRadio->isChecked())
-		StelApp::getInstance().getCore()->setStartupTimeMode("actual");
+		core->setStartupTimeMode("actual");
 	else if (ui->todayRadio->isChecked())
-		StelApp::getInstance().getCore()->setStartupTimeMode("today");
+		core->setStartupTimeMode("today");
 	else
-		StelApp::getInstance().getCore()->setStartupTimeMode("preset");
+		core->setStartupTimeMode("preset");
 
-	StelApp::getInstance().getCore()->setInitTodayTime(ui->todayTimeSpinBox->time());
-	StelApp::getInstance().getCore()->setPresetSkyTime(ui->fixedDateTimeEdit->dateTime());
+	core->setInitTodayTime(ui->todayTimeSpinBox->time());
+	core->setPresetSkyTime(ui->fixedDateTimeEdit->dateTime());
 }
 
 void ConfigurationDialog::setButtonBarDTFormat()
@@ -1083,7 +1084,7 @@ void ConfigurationDialog::saveAllSettings()
 	scmgr->setProperty("defaultSkyCultureID", scmgr->property("currentSkyCultureID"));
 
 	// Save default location
-	StelApp::getInstance().getCore()->setDefaultLocationID(core->getCurrentLocation().getID());
+	core->setDefaultLocationID(core->getCurrentLocation().getID());
 
 	// configuration dialog / main tab
 	QString langName = StelApp::getInstance().getLocaleMgr().getAppLanguage();
@@ -1660,91 +1661,96 @@ void ConfigurationDialog::downloadFinished()
 
 void ConfigurationDialog::de430ButtonClicked()
 {
+	StelCore *core=StelApp::getInstance().getCore();
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	StelApp::getInstance().getCore()->setDe430Active(!StelApp::getInstance().getCore()->de430IsActive());
-	conf->setValue("astro/flag_use_de430", StelApp::getInstance().getCore()->de430IsActive());
+	core->setDe430Active(!core->de430IsActive());
+	conf->setValue("astro/flag_use_de430", core->de430IsActive());
 
 	resetEphemControls(); //refresh labels
 }
 
 void ConfigurationDialog::de431ButtonClicked()
 {
+	StelCore *core=StelApp::getInstance().getCore();
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	StelApp::getInstance().getCore()->setDe431Active(!StelApp::getInstance().getCore()->de431IsActive());
-	conf->setValue("astro/flag_use_de431", StelApp::getInstance().getCore()->de431IsActive());
+	core->setDe431Active(!core->de431IsActive());
+	conf->setValue("astro/flag_use_de431", core->de431IsActive());
 
 	resetEphemControls(); //refresh labels
 }
 
 void ConfigurationDialog::de440ButtonClicked()
 {
+	StelCore *core=StelApp::getInstance().getCore();
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	StelApp::getInstance().getCore()->setDe440Active(!StelApp::getInstance().getCore()->de440IsActive());
-	conf->setValue("astro/flag_use_de440", StelApp::getInstance().getCore()->de440IsActive());
+	core->setDe440Active(!core->de440IsActive());
+	conf->setValue("astro/flag_use_de440", core->de440IsActive());
 
 	resetEphemControls(); //refresh labels
 }
 
 void ConfigurationDialog::de441ButtonClicked()
 {
+	StelCore *core=StelApp::getInstance().getCore();
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	StelApp::getInstance().getCore()->setDe441Active(!StelApp::getInstance().getCore()->de441IsActive());
-	conf->setValue("astro/flag_use_de441", StelApp::getInstance().getCore()->de441IsActive());
+	core->setDe441Active(!core->de441IsActive());
+	conf->setValue("astro/flag_use_de441", core->de441IsActive());
 
 	resetEphemControls(); //refresh labels
 }
 
 void ConfigurationDialog::resetEphemControls()
 {
-	ui->de430checkBox->setEnabled(StelApp::getInstance().getCore()->de430IsAvailable());
-	ui->de431checkBox->setEnabled(StelApp::getInstance().getCore()->de431IsAvailable());
-	ui->de430checkBox->setChecked(StelApp::getInstance().getCore()->de430IsActive());
-	ui->de431checkBox->setChecked(StelApp::getInstance().getCore()->de431IsActive());
-	ui->de440checkBox->setEnabled(StelApp::getInstance().getCore()->de440IsAvailable());
-	ui->de441checkBox->setEnabled(StelApp::getInstance().getCore()->de441IsAvailable());
-	ui->de440checkBox->setChecked(StelApp::getInstance().getCore()->de440IsActive());
-	ui->de441checkBox->setChecked(StelApp::getInstance().getCore()->de441IsActive());
+	StelCore *core=StelApp::getInstance().getCore();
+	ui->de430checkBox->setEnabled(core->de430IsAvailable());
+	ui->de431checkBox->setEnabled(core->de431IsAvailable());
+	ui->de430checkBox->setChecked(core->de430IsActive());
+	ui->de431checkBox->setChecked(core->de431IsActive());
+	ui->de440checkBox->setEnabled(core->de440IsAvailable());
+	ui->de441checkBox->setEnabled(core->de441IsAvailable());
+	ui->de440checkBox->setChecked(core->de440IsActive());
+	ui->de441checkBox->setChecked(core->de441IsActive());
 
-	if(StelApp::getInstance().getCore()->de430IsActive())
+	if(core->de430IsActive())
 		ui->de430label->setText("1550..2650");
 	else
 	{
-		if (StelApp::getInstance().getCore()->de430IsAvailable())
+		if (core->de430IsAvailable())
 			ui->de430label->setText(q_("Available"));
 		else
 			ui->de430label->setText(q_("Not Available"));
 	}
-	if(StelApp::getInstance().getCore()->de431IsActive())
+	if(core->de431IsActive())
 		ui->de431label->setText("-13000..17000");
 	else
 	{
-		if (StelApp::getInstance().getCore()->de431IsAvailable())
+		if (core->de431IsAvailable())
 			ui->de431label->setText(q_("Available"));
 		else
 			ui->de431label->setText(q_("Not Available"));
 	}
-	if(StelApp::getInstance().getCore()->de440IsActive())
+	if(core->de440IsActive())
 		ui->de440label->setText("1550..2650");
 	else
 	{
-		if (StelApp::getInstance().getCore()->de440IsAvailable())
+		if (core->de440IsAvailable())
 			ui->de440label->setText(q_("Available"));
 		else
 			ui->de440label->setText(q_("Not Available"));
 	}
-	if(StelApp::getInstance().getCore()->de441IsActive())
+	if(core->de441IsActive())
 		ui->de441label->setText("-13000..17000");
 	else
 	{
-		if (StelApp::getInstance().getCore()->de441IsAvailable())
+		if (core->de441IsAvailable())
 			ui->de441label->setText(q_("Available"));
 		else
 			ui->de441label->setText(q_("Not Available"));

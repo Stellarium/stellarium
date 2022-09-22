@@ -271,7 +271,7 @@ void ViewDialog::createDialogContent()
 	// Link Solar System Editor button if available...
 	StelModule *sse=StelApp::getInstance().getModuleMgr().getModule("SolarSystemEditor", true);
 	if (sse)
-		connect(ui->pushButtonSSE, &QPushButton::clicked, [=]{sse->configureGui(true);});
+		connect(ui->pushButtonSSE, &QPushButton::clicked, sse, [=]{sse->configureGui(true);});
 	else
 		ui->pushButtonSSE->hide();
 
@@ -590,9 +590,9 @@ void ViewDialog::updateHips()
 
 	l->blockSignals(true);
 	l->clear();
-	QList<HipsSurveyP> hipslist = hipsmgr->property("surveys").value<QList<HipsSurveyP>>();
+	const QList<HipsSurveyP> hipslist = hipsmgr->property("surveys").value<QList<HipsSurveyP>>();
 
-	for (auto hips: hipslist)
+	for (auto &hips: hipslist)
 	{
 		if (getHipsType(hips) != selectedType)
 			continue;
