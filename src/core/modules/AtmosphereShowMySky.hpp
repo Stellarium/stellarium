@@ -68,31 +68,31 @@ private:
 	Vec4i viewport;
 	int gridMaxY,gridMaxX;
 
-	//! In order to achieve higher frame rates on slow systems, the configuration parameter:
-	//!	config.ini
-	//!	[landscape]
-	//!	atmosphere_resolution_reduction
-	//! allows reducing the resolution of the skylight texture.
-	//! Preferred values are:
-	//!	1 ~> full resolution (default)
-	//!	2 ~> half resolution
-	//!	4 ~> quarter resolution
+	/*!	In order to achieve higher frame rates on slow systems, the configuration parameter:
+	 *		config.ini
+	 *		[landscape]
+	 *		atmosphere_resolution_reduction
+	 *	allows reducing the resolution of the skylight texture.
+	 *	Preferred values are:
+	 *		1 ~> full resolution (default)
+	 *		2 ~> half resolution
+	 *		4 ~> quarter resolution		*/
 	int atmoRes;
 
-	//! The configuration switch:
-	//!	config.ini
-	//!	[landscape]
-	//!	flag_atmosphere_dynamic_resolution
-	//! allows to use the reduced resolution only while moving the view,
-	//! when panning, zooming, dimming or in time-lapse mode.
-	//! With the real-time display, on the other hand, the full resolution is retained.
-	//! Possible values are:
-	//!	false ~> static resolution (default)
-	//!	true ~> dynamic resolution
-	//! A notice:
-	//! In dynamic resolution mode, a motion detector selects either full or reduced resolution.
-	//! The change in resolution could be particularly visible in close proximity to the Sun.
-	//! Especially at full resolution, frames will be skipped depending on the speed of movement.
+	/*!	The configuration switch:
+	 *		config.ini
+	 *		[landscape]
+	 *		flag_atmosphere_dynamic_resolution
+	 *	allows to use the reduced resolution only while moving the view,
+	 *	when panning, zooming, dimming or in time-lapse mode.
+	 *	With the real-time display, on the other hand, the full resolution is retained.
+	 *	Possible values are:
+	 *		false ~> static resolution (default)
+	 *		true ~> dynamic resolution
+	 *	A notice:
+	 *	In dynamic resolution mode, a motion detector selects either full or reduced resolution.
+	 *	The change in resolution could be particularly visible in close proximity to the Sun.
+	 *	Especially at full resolution, frames will be skipped depending on the speed of movement.	*/
 	bool flagDynamicResolution;
 
 	QVector<Vec2f> posGrid;
