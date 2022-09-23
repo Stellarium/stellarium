@@ -724,8 +724,9 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, 
 	const auto dPos=1e3*(currPos-prevPos).length();			// milli-AU :)
 	const auto dSun=(currSun-prevSun).length();			// pixel
 	const auto changeOfView=Vec4d(dFad,dFov,dPos,dSun);
+	// for solar eclipses, prioritize speed over resolution
 	// hysteresis avoids frequent changing of the resolution
-	const float allowedChangeOfView=eclipseFactor<1?10e-3:atmoRes==1?1:200e-3;
+	const float allowedChangeOfView=(eclipseFactor<1?10e-3:1)*(atmoRes==1?1:200e-3);
 	dynResTimer--;							// count down to redraw
 	// if we have neither a timeout nor a change that is too large, we do nothing...
 	if (changeOfView.length()<allowedChangeOfView && dynResTimer>0)
