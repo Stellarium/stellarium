@@ -67,7 +67,8 @@ private:
 	QLibrary showMySkyLib;
 	Vec4i viewport;
 	int gridMaxY,gridMaxX;
-	int atmoRes;			/*!	In order to achieve higher frame rates on slow systems, the configuration parameter:
+	int atmoRes;			/*!	In order to achieve higher frame rates on slow systems,
+					 *	the configuration parameter:
 					 *		config.ini
 					 *		[landscape]
 					 *		atmosphere_resolution_reduction
@@ -75,7 +76,8 @@ private:
 					 *	Preferred values are:
 					 *		1 ~> full resolution (default)
 					 *		2 ~> half resolution
-					 *		4 ~> quarter resolution		*/
+					 *		4 ~> quarter resolution
+					 */
 	bool flagDynamicResolution;	/*!	The configuration switch:
 					 *		config.ini
 					 *		[landscape]
@@ -89,7 +91,8 @@ private:
 					 *	A notice:
 					 *	In dynamic resolution mode, a motion detector selects either full or reduced resolution.
 					 *	The change in resolution could be particularly visible in close proximity to the Sun.
-					 *	Especially at full resolution, frames will be skipped depending on the speed of movement.	*/
+					 *	Especially at full resolution, frames will be skipped depending on the speed of movement.
+					 */
 	QVector<Vec2f> posGrid;
 	QOpenGLBuffer posGridBuffer;
 	QOpenGLBuffer indexBuffer;
