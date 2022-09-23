@@ -4401,7 +4401,7 @@ void AstroCalcDialog::saveSolarEclipseCircumstances()
 		header.setBorderStyle(QXlsx::Format::BorderThin);
 		header.setBorderColor(Qt::black);
 		header.setFontBold(true);
-		for (int i = 0; i < columns-1; i++)
+		for (int i = 0; i < columns; i++)
 		{
 			// Row 1: Names of columns
 			sData = solareclipsecontactsHeader.at(i).trimmed();
@@ -4413,7 +4413,7 @@ void AstroCalcDialog::saveSolarEclipseCircumstances()
 		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
 		for (int i = 0; i < count; i++)
 		{
-			for (int j = 0; j < columns-1; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				// Row 2 and next: the data
 				sData = ui->solareclipsecontactsTreeWidget->topLevelItem(i)->text(j).trimmed();
