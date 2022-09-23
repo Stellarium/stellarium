@@ -566,8 +566,10 @@ private:
 	void enableRTSButtons(bool enable);
 	void enablePhenomenaButtons(bool enable);
 	void enableSolarEclipsesButtons(bool enable);
+	void enableSolarEclipsesCircumstancesButtons(bool enable);
 	void enableSolarEclipsesLocalButtons(bool enable);
 	void enableLunarEclipsesButtons(bool enable);
+	void enableLunarEclipsesCircumstancesButtons(bool enable);
 	void enableTransitsButtons(bool enable);
 
 	void enableCustomEphemerisTimeStepButton();

@@ -354,6 +354,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->lunareclipsesCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupLunarEclipses()));
 	connect(ui->lunareclipsesSaveButton, SIGNAL(clicked()), this, SLOT(saveLunarEclipses()));
 	initListLunarEclipseContact();
+	enableLunarEclipsesCircumstancesButtons(buttonState);
 	connect(ui->lunareclipsescontactsSaveButton, SIGNAL(clicked()), this, SLOT(saveLunarEclipseCircumstances()));
 	connect(ui->lunareclipseTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(selectCurrentLunarEclipse(QModelIndex)));
 	connect(ui->lunareclipseTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentLunarEclipseDate(QModelIndex)));
@@ -364,6 +365,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->solareclipsesCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupSolarEclipses()));
 	connect(ui->solareclipsesSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipses()));
 	initListSolarEclipseContact();
+	enableSolarEclipsesCircumstancesButtons(buttonState);
 	connect(ui->solareclipsescontactsSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipseCircumstances()));
 	connect(ui->solareclipsesKMLSaveButton, SIGNAL(clicked()), this, SLOT(saveSolarEclipseKML()));
 	connect(ui->solareclipseTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(selectCurrentSolarEclipse(QModelIndex)));
@@ -2890,6 +2892,7 @@ void AstroCalcDialog::generateLunarEclipses()
 		// sort-by-date
 		ui->lunareclipseTreeWidget->sortItems(LunarEclipseDate, Qt::AscendingOrder);
 		enableLunarEclipsesButtons(true);
+		enableLunarEclipsesCircumstancesButtons(false);
 	}
 	else
 		cleanupLunarEclipses();
@@ -2900,12 +2903,17 @@ void AstroCalcDialog::cleanupLunarEclipses()
 	ui->lunareclipseTreeWidget->clear();
 	ui->lunareclipsecontactsTreeWidget->clear();
 	enableLunarEclipsesButtons(false);
+	enableLunarEclipsesCircumstancesButtons(false);
 }
 
 void AstroCalcDialog::enableLunarEclipsesButtons(bool enable)
 {
 	ui->lunareclipsesCleanupButton->setEnabled(enable);
 	ui->lunareclipsesSaveButton->setEnabled(enable);
+}
+
+void AstroCalcDialog::enableLunarEclipsesCircumstancesButtons(bool enable)
+{
 	ui->lunareclipsescontactsSaveButton->setEnabled(enable);
 }
 
@@ -3131,6 +3139,7 @@ void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 		ui->lunareclipsecontactsTreeWidget->resizeColumnToContents(i);
 	}
 	core->setJD(currentJD);
+	enableLunarEclipsesCircumstancesButtons(true);
 }
 
 void AstroCalcDialog::selectCurrentLunarEclipseContact(const QModelIndex& modelIndex)
@@ -3717,6 +3726,7 @@ void AstroCalcDialog::generateSolarEclipses()
 		// sort-by-date
 		ui->solareclipseTreeWidget->sortItems(SolarEclipseDate, Qt::AscendingOrder);
 		enableSolarEclipsesButtons(true);
+		enableSolarEclipsesCircumstancesButtons(false);
 	}
 	else
 		cleanupSolarEclipses();
@@ -4040,13 +4050,18 @@ void AstroCalcDialog::cleanupSolarEclipses()
 	ui->solareclipseTreeWidget->clear();
 	ui->solareclipsecontactsTreeWidget->clear();
 	enableSolarEclipsesButtons(false);
+	enableSolarEclipsesCircumstancesButtons(false);
 }
 
 void AstroCalcDialog::enableSolarEclipsesButtons(bool enable)
 {
 	ui->solareclipsesCleanupButton->setEnabled(enable);
-	ui->solareclipsesKMLSaveButton->setEnabled(enable);
 	ui->solareclipsesSaveButton->setEnabled(enable);
+}
+
+void AstroCalcDialog::enableSolarEclipsesCircumstancesButtons(bool enable)
+{
+	ui->solareclipsesKMLSaveButton->setEnabled(enable);
 	ui->solareclipsescontactsSaveButton->setEnabled(enable);
 }
 
@@ -4244,6 +4259,7 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 
 	// sort-by-date
 	ui->solareclipsecontactsTreeWidget->sortItems(SolarEclipseContactDate, Qt::AscendingOrder);
+	enableSolarEclipsesCircumstancesButtons(true);
 }
 
 void AstroCalcDialog::selectCurrentSolarEclipseContact(const QModelIndex& modelIndex)
@@ -4385,7 +4401,7 @@ void AstroCalcDialog::saveSolarEclipseCircumstances()
 		header.setBorderStyle(QXlsx::Format::BorderThin);
 		header.setBorderColor(Qt::black);
 		header.setFontBold(true);
-		for (int i = 0; i < columns-1; i++)
+		for (int i = 0; i < columns; i++)
 		{
 			// Row 1: Names of columns
 			sData = solareclipsecontactsHeader.at(i).trimmed();
@@ -4397,7 +4413,7 @@ void AstroCalcDialog::saveSolarEclipseCircumstances()
 		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
 		for (int i = 0; i < count; i++)
 		{
-			for (int j = 0; j < columns-1; j++)
+			for (int j = 0; j < columns; j++)
 			{
 				// Row 2 and next: the data
 				sData = ui->solareclipsecontactsTreeWidget->topLevelItem(i)->text(j).trimmed();
