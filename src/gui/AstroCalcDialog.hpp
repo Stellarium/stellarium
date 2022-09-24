@@ -947,7 +947,7 @@ private:
 	{
 		int column = treeWidget()->sortColumn();
 
-		if (column == AstroCalcDialog::SolarEclipseDate || column == AstroCalcDialog::SolarEclipseLatitude || column == AstroCalcDialog::SolarEclipseLongitude || column == AstroCalcDialog::SolarEclipsePathwidth || column == AstroCalcDialog::SolarEclipseAltitude)
+		if (column == AstroCalcDialog::SolarEclipseDate || column == AstroCalcDialog::SolarEclipseLatitude || column == AstroCalcDialog::SolarEclipseLongitude || column == AstroCalcDialog::SolarEclipsePathwidth || column == AstroCalcDialog::SolarEclipseAltitude || column == AstroCalcDialog::SolarEclipseDuration)
 		{
 			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
 		}
