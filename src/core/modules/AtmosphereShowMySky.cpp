@@ -412,7 +412,7 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 	, indexBuffer(QOpenGLBuffer::IndexBuffer)
 	, viewRayGridBuffer(QOpenGLBuffer::VertexBuffer)
 	, luminanceToScreenProgram_(new QOpenGLShaderProgram())
-	, atmoRes(1)
+	, reducedResolution(1)
 	, flagDynamicResolution(false)
 {
 	indexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
@@ -497,9 +497,13 @@ void AtmosphereShowMySky::regenerateGrid()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	flagDynamicResolution = conf->value("landscape/flag_atmosphere_dynamic_resolution", false).toBool();
-	maxRes = conf->value("landscape/atmosphere_resolution_reduction", 1).toInt();
+	reducedResolution = conf->value("landscape/atmosphere_resolution_reduction", 1).toInt();
 	if (!flagDynamicResolution)
-		atmoRes = maxRes;
+	{
+		atmoRes = reducedResolution;
+		if (reducedResolution>1)
+			qDebug() << "Atmosphere runs with statically reduced resolution:" << reducedResolution;
+	}
 	const float width=viewport[2]/atmoRes, height=viewport[3]/atmoRes;
 	gridMaxY = conf->value("landscape/atmosphereybin", 44).toInt();
 	gridMaxX = std::floor(0.5+gridMaxY*(0.5*std::sqrt(3.0))*width/height);
@@ -726,14 +730,17 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, 
 	const auto allowedChange=eclipseFactor<1?10e-3:1;		// for solar eclipses, prioritize speed over resolution
 	const auto hysteresis=atmoRes==1?1:200e-3;			// hysteresis avoids frequent changing of the resolution
 	const auto allowedChangeOfView=allowedChange*hysteresis;
-	dynResTimer--;							// count down to redraw
-	// if we have neither a timeout nor a change that is too large, we do nothing...
-	if (changeOfView.length()<allowedChangeOfView && dynResTimer>0)
+	const auto changed=changeOfView.length()>allowedChangeOfView;	// change is too big
+	const auto timeout=dynResTimer<=0;				// do we have a timeout?
+	// if we don't have a timeout or too much change, we skip the frame
+	if (!changed && !timeout)
+	{
+		dynResTimer--;						// count down to redraw
 		return true;
-
+	}
 	// if there is a timeout, we draw with full resolution
 	// if the change is too large, we draw with reduced resolution
-	atmoRes=dynResTimer>0?maxRes:1;
+	atmoRes=timeout?1:reducedResolution;
 	if (prevRes!=atmoRes)
 	{
 		regenerateGrid();
@@ -743,7 +750,7 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, 
 			qDebug() << "dynResTimer" << dynResTimer << "atmoRes" << atmoRes << "changeOfView" << changeOfView.length() << changeOfView;
 	}
 	// At reduced resolution, we hurry to redraw - at full resolution, we have time.
-	dynResTimer=dynResTimer>0?6:18;
+	dynResTimer=timeout?17:5;
 	prevRes=atmoRes;
 	prevFov=currFov;
 	prevFad=currFad;
@@ -787,7 +794,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 	if (std::isnan(sunPos.length()))
 		sunPos.set(0, 0, -1);
 
-	// if we have neither a timeout nor a change that is too large, we do nothing...
+	// if we run dynamic resolution mode and don't have a timeout or too much change, we skip the frame
 	if (dynamicResolution(prj, sunPos, width, height))
 		return;
 

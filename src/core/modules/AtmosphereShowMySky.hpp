@@ -67,32 +67,34 @@ private:
 	QLibrary showMySkyLib;
 	Vec4i viewport;
 	int gridMaxY,gridMaxX;
-	int atmoRes;			/*!	In order to achieve higher frame rates on slow systems,
-					 *	the configuration parameter:
-					 *		config.ini
-					 *		[landscape]
-					 *		atmosphere_resolution_reduction
-					 *	allows reducing the resolution of the skylight texture.
-					 *	Preferred values are:
-					 *		1 ~> full resolution (default)
-					 *		2 ~> half resolution
-					 *		4 ~> quarter resolution
-					 */
-	bool flagDynamicResolution;	/*!	The configuration switch:
-					 *		config.ini
-					 *		[landscape]
-					 *		flag_atmosphere_dynamic_resolution
-					 *	allows to use the reduced resolution only while moving the view,
-					 *	when panning, zooming, dimming or in time-lapse mode.
-					 *	With the real-time display, on the other hand, the full resolution is retained.
-					 *	Possible values are:
-					 *		false ~> static resolution (default)
-					 *		true ~> dynamic resolution
-					 *	A notice:
-					 *	In dynamic resolution mode, a motion detector selects either full or reduced resolution.
-					 *	The change in resolution could be particularly visible in close proximity to the Sun.
-					 *	Especially at full resolution, frames will be skipped depending on the speed of movement.
-					 */
+	/*!	In order to achieve higher frame rates on slow systems,
+	 *	the configuration parameter:
+	 *		config.ini
+	 *		[landscape]
+	 *		atmosphere_resolution_reduction
+	 *	allows reducing the resolution of the skylight texture.
+	 *	Preferred values are:
+	 *		1 ~> full resolution (default)
+	 *		2 ~> half resolution
+	 *		4 ~> quarter resolution
+	 */
+	int reducedResolution;
+	/*!	The configuration switch:
+	 *		config.ini
+	 *		[landscape]
+	 *		flag_atmosphere_dynamic_resolution
+	 *	allows to use the reduced resolution only while moving the view,
+	 *	when panning, zooming, dimming or in time-lapse mode.
+	 *	With the real-time display, on the other hand, the full resolution is retained.
+	 *	Possible values are:
+	 *		false ~> static resolution (default)
+	 *		true ~> dynamic resolution
+	 *	A notice:
+	 *	In dynamic resolution mode, a motion detector selects either full or reduced resolution.
+	 *	The change in resolution could be particularly visible in close proximity to the Sun.
+	 *	Especially at full resolution, frames will be skipped depending on the speed of movement.
+	 */
+	bool flagDynamicResolution;
 	QVector<Vec2f> posGrid;
 	QOpenGLBuffer posGridBuffer;
 	QOpenGLBuffer indexBuffer;
@@ -119,7 +121,7 @@ private:
 
 	float prevFad=0, prevFov=0;
 	Vec3d prevPos=Vec3d(0,0,0), prevSun=Vec3d(0,0,0);
-	int prevWidth_=0, prevHeight_=0, dynResTimer=0, prevRes=0, maxRes=1;
+	int prevWidth_=0, prevHeight_=0, dynResTimer=0, prevRes=0, atmoRes=1;
 	GLuint renderVAO_=0, luminanceToScreenVAO_=0, zenithProbeVAO_=0, vbo_=0;
 	std::unique_ptr<ShowMySky::AtmosphereRenderer> renderer_;
 	std::unique_ptr<ShowMySky::Settings> skySettings_;
