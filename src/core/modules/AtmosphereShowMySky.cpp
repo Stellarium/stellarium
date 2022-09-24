@@ -519,7 +519,9 @@ void AtmosphereShowMySky::regenerateGrid()
 		for(int x=0; x<=gridMaxX; ++x)
 		{
 			Vec2f& v=posGrid[y*(1+gridMaxX)+x];
-			v[0] = viewportLeft + (x == 0 ? 0 : x == gridMaxX ? width : (x-0.5*(y&1))*stepX);
+			v[0] = viewportLeft + (x == 0 ? 0
+										  : x == gridMaxX ? width
+														  : (x-0.5*(y&1))*stepX);
 			v[1] = viewportBottom+y*stepY;
 		}
 	}
