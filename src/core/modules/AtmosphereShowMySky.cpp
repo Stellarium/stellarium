@@ -411,12 +411,12 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 	, viewport(0,0,0,0)
 	, gridMaxY(44)
 	, gridMaxX(44)
+	, reducedResolution(1)
+	, flagDynamicResolution(false)
 	, posGridBuffer(QOpenGLBuffer::VertexBuffer)
 	, indexBuffer(QOpenGLBuffer::IndexBuffer)
 	, viewRayGridBuffer(QOpenGLBuffer::VertexBuffer)
 	, luminanceToScreenProgram_(new QOpenGLShaderProgram())
-	, reducedResolution(1)
-	, flagDynamicResolution(false)
 {
 	indexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
 	indexBuffer.create();
