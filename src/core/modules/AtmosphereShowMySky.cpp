@@ -44,6 +44,9 @@
 # include <QOpenGLVersionFunctionsFactory>
 #endif
 
+// ShowMySky library API is documented online at https://10110111.github.io/CalcMySky/showmysky-api.html
+// Or you can build the documentation from the CalcMySky sources, using CMake doc target: `cmake --build . --target doc`
+
 namespace
 {
 
