@@ -3644,7 +3644,6 @@ void AstroCalcDialog::generateSolarEclipses()
 					double eclipseLatitude = 0.;
 					double eclipseLongitude = 0.;
 					double eclipseAltitude = 0.;
-					double pathwidth = 0.;
 
 					if (noncentraleclipse)
 					{
@@ -3697,9 +3696,10 @@ void AstroCalcDialog::generateSolarEclipses()
 					treeItem->setData(SolarEclipseAltitude, Qt::UserRole, eclipseAltitude);
 					treeItem->setToolTip(SolarEclipseAltitude, q_("Sun's altitude at greatest eclipse"));
 					treeItem->setText(SolarEclipsePathwidth, pathWidthStr);
-					treeItem->setData(SolarEclipsePathwidth, Qt::UserRole, pathwidth);
+					treeItem->setData(SolarEclipsePathwidth, Qt::UserRole, pathWidth);
 					treeItem->setToolTip(SolarEclipsePathwidth, q_("Width of the path of totality or annularity at greatest eclipse"));
 					treeItem->setText(SolarEclipseDuration, durationStr);
+					treeItem->setData(SolarEclipseDuration, Qt::UserRole, abs(duration));
 					treeItem->setToolTip(SolarEclipseDuration, q_("Duration of total or annular phase at greatest eclipse"));
 					treeItem->setTextAlignment(SolarEclipseDate, Qt::AlignRight);
 					treeItem->setTextAlignment(SolarEclipseSaros, Qt::AlignRight);
