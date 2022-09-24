@@ -67,9 +67,8 @@ private:
 	QLibrary showMySkyLib;
 	Vec4i viewport;
 	int gridMaxY,gridMaxX;
-	/*!	In order to achieve higher frame rates on slow systems,
-	 *	the configuration parameter:
-	 *		config.ini
+	/*!	To achieve higher frame rates on slow systems,
+	 *	the configuration parameter in config.ini:
 	 *		[landscape]
 	 *		atmosphere_resolution_reduction
 	 *	allows reducing the resolution of the skylight texture.
@@ -79,8 +78,7 @@ private:
 	 *		4 ~> quarter resolution
 	 */
 	int reducedResolution;
-	/*!	The configuration switch:
-	 *		config.ini
+	/*!	The configuration switch in config.ini:
 	 *		[landscape]
 	 *		flag_atmosphere_dynamic_resolution
 	 *	allows to use the reduced resolution only while moving the view,
@@ -89,8 +87,8 @@ private:
 	 *	Possible values are:
 	 *		false ~> static resolution (default)
 	 *		true ~> dynamic resolution
-	 *	A notice:
-	 *	In dynamic resolution mode, a motion detector selects either full or reduced resolution.
+	 *	Note:
+	 *	In dynamic resolution mode, a motion analyzer selects either full or reduced resolution.
 	 *	The change in resolution could be particularly visible in close proximity to the Sun.
 	 *	Especially at full resolution, frames will be skipped depending on the speed of movement.
 	 */
