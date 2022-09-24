@@ -90,6 +90,7 @@ void StelButton::initCtor(const QPixmap& apixOn,
 
 	pixOn.setDevicePixelRatio(GUI_PIXMAPS_SCALE);
 	pixOff.setDevicePixelRatio(GUI_PIXMAPS_SCALE);
+	pixHover.setDevicePixelRatio(GUI_PIXMAPS_SCALE);
 	pixNoChange.setDevicePixelRatio(GUI_PIXMAPS_SCALE);
 
 	noBckground = noBackground;
