@@ -121,9 +121,41 @@ colors in a dry atmosphere, and also provides special modes for the
   \end{description}
 \end{description}
 
+\begin{description}
+\item[To achieve higher frame rates] on slow systems,
+the configuration parameter in \file{config.ini}:
+\begin{configfile}
+[landscape]
+atmosphere_resolution_reduction = 4
+\end{configfile}
+allows reducing the resolution of the skylight texture.
+Preferred values are:
+\begin{description}
+\item[1] full resolution (default)
+\item[2] half resolution
+\item[4] quarter resolution
+\end{description}
+\item[The configuration switch] in \file{config.ini}:
+\begin{configfile}
+[landscape]
+flag_atmosphere_dynamic_resolution = true
+\end{configfile}
+allows to use the reduced resolution only while moving the view, when panning, 
+zooming, dimming or in time-lapse mode. With the real-time display, on the other hand, 
+the full resolution is retained.
+Possible values are:
+\begin{description}
+\item[false] static resolution (default)
+\item[true] dynamic resolution
+\end{description}
+\item[Note:]
+In dynamic resolution mode, a motion analyzer selects either full or reduced resolution.
+The change in resolution could be particularly visible in close proximity to the Sun.
+Especially at full resolution, frames will be skipped depending on the speed of movement.
+\end{description}
+
 \noindent A more detailed description of how to create a custom atmosphere will
 be given in a future version of this User Guide.
-
 
 \section{Light Pollution}
 

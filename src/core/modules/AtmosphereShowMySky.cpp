@@ -33,6 +33,7 @@
 #include <cassert>
 #include <cstring>
 
+#include <QApplication>
 #include <QDir>
 #include <QFile>
 #include <QDebug>
@@ -310,7 +311,7 @@ vec3 calcViewDir()
 
 void AtmosphereShowMySky::resizeRenderTarget(int width, int height)
 {
-	renderer_->resizeEvent(width, height);
+	renderer_->resizeEvent(width/atmoRes, height/atmoRes);
 
 	prevWidth_=width;
 	prevHeight_=height;
@@ -323,6 +324,9 @@ void AtmosphereShowMySky::setupRenderTarget()
 	GLint viewport[4];
 	GL(gl.glGetIntegerv(GL_VIEWPORT, viewport));
 	resizeRenderTarget(viewport[2], viewport[3]);
+
+	// force resize on first render because the renderer may change framebuffer size after data loading
+	prevWidth_=0;
 }
 
 void AtmosphereShowMySky::setupBuffers()
@@ -407,6 +411,8 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 	, viewport(0,0,0,0)
 	, gridMaxY(44)
 	, gridMaxX(44)
+	, reducedResolution(1)
+	, flagDynamicResolution(false)
 	, posGridBuffer(QOpenGLBuffer::VertexBuffer)
 	, indexBuffer(QOpenGLBuffer::IndexBuffer)
 	, viewRayGridBuffer(QOpenGLBuffer::VertexBuffer)
@@ -491,8 +497,17 @@ AtmosphereShowMySky::~AtmosphereShowMySky()
 
 void AtmosphereShowMySky::regenerateGrid()
 {
-	const float width=viewport[2], height=viewport[3];
-	gridMaxY = StelApp::getInstance().getSettings()->value("landscape/atmosphereybin", 44).toInt();
+	QSettings* conf = StelApp::getInstance().getSettings();
+	flagDynamicResolution = conf->value("landscape/flag_atmosphere_dynamic_resolution", false).toBool();
+	reducedResolution = conf->value("landscape/atmosphere_resolution_reduction", 1).toInt();
+	if (!flagDynamicResolution)
+	{
+		atmoRes = reducedResolution;
+		if (reducedResolution>1)
+			qDebug() << "Atmosphere runs with statically reduced resolution:" << reducedResolution;
+	}
+	const float width=viewport[2]/atmoRes, height=viewport[3]/atmoRes;
+	gridMaxY = conf->value("landscape/atmosphereybin", 44).toInt();
 	gridMaxX = std::floor(0.5+gridMaxY*(0.5*std::sqrt(3.0))*width/height);
 	const auto gridSize=(1+gridMaxX)*(1+gridMaxY);
 	posGrid.resize(gridSize);
@@ -703,6 +718,51 @@ Vec4f AtmosphereShowMySky::getMeanPixelValue()
 	return pixel;
 }
 
+bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, int width, int height)
+{
+	if (!flagDynamicResolution)
+		return false;
+
+	const auto currFov=prj->getFov(), currFad=fader.getInterstate();
+	Vec3d currSun;
+	prj->project(currPos,currSun);
+	const auto dFad=1e3*(currFad-prevFad);				// per thousand of the fader
+	const auto dFov=2e3*(currFov-prevFov)/(currFov+prevFov);	// per thousand of the field of view
+	const auto dPos=1e3*(currPos-prevPos).length();			// milli-AU :)
+	const auto dSun=(currSun-prevSun).length();			// pixel
+	const auto changeOfView=Vec4d(dFad,dFov,dPos,dSun);
+	const auto allowedChange=eclipseFactor<1?10e-3:1;		// for solar eclipses, prioritize speed over resolution
+	const auto hysteresis=atmoRes==1?1:200e-3;			// hysteresis avoids frequent changing of the resolution
+	const auto allowedChangeOfView=allowedChange*hysteresis;
+	const auto changed=changeOfView.length()>allowedChangeOfView;	// change is too big
+	const auto timeout=dynResTimer<=0;				// do we have a timeout?
+	// if we don't have a timeout or too much change, we skip the frame
+	if (!changed && !timeout)
+	{
+		dynResTimer--;						// count down to redraw
+		return true;
+	}
+	// if there is a timeout, we draw with full resolution
+	// if the change is too large, we draw with reduced resolution
+	atmoRes=timeout?1:reducedResolution;
+	if (prevRes!=atmoRes)
+	{
+		regenerateGrid();
+		resizeRenderTarget(width, height);
+		bool verbose=qApp->property("verbose").toBool();
+		if (verbose)
+			qDebug() << "dynResTimer" << dynResTimer << "atmoRes" << atmoRes << "changeOfView" << changeOfView.length() << changeOfView;
+	}
+	// At reduced resolution, we hurry to redraw - at full resolution, we have time.
+	dynResTimer=timeout?17:5;
+	prevRes=atmoRes;
+	prevFov=currFov;
+	prevFad=currFad;
+	prevPos=currPos;
+	prevSun=currSun;
+	return false;
+}
+
 void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Planet& currentPlanet, const Planet& sun,
 				       const Planet*const moon, const StelLocation& location, const float temperature,
 				       const float relativeHumidity, const float extinctionCoefficient, const bool noScatter)
@@ -731,11 +791,16 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 	{
 		lastUsedAltitude_ = location.altitude;
 		probeZenithLuminances(location.altitude);
+		dynResTimer=0;
 	}
 
 	auto sunPos  =  sun.getAltAzPosAuto(core);
 	if (std::isnan(sunPos.length()))
 		sunPos.set(0, 0, -1);
+
+	// if we run dynamic resolution mode and don't have a timeout or too much change, we skip the frame
+	if (dynamicResolution(prj, sunPos, width, height))
+		return;
 
 	const auto sunDir = sunPos / sunPos.length();
 	const double sunAngularRadius = atan(sun.getEquatorialRadius()/sunPos.length());
@@ -778,13 +843,14 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 		return;
 	}
 
-
 	// FIXME: ignoring the "additional luminance" like star background etc.; see AtmospherePreetham for all potentially needed terms
 	const auto numViewRayGridPoints=(1+gridMaxX)*(1+gridMaxY);
+	const auto resX=(double)width/(width/atmoRes);
+	const auto resY=(double)height/(height/atmoRes);
 	for (int i=0; i<numViewRayGridPoints; ++i)
 	{
 		Vec3d point(1, 0, 0);
-		prj->unProject(posGrid[i][0],posGrid[i][1],point);
+		prj->unProject(posGrid[i][0]*resX,posGrid[i][1]*resY,point);
 
 		viewRayGrid[i].set(point[0], point[1], point[2], 0);
 	}
@@ -852,6 +918,7 @@ void AtmosphereShowMySky::draw(StelCore* core)
 	auto& gl=glfuncs();
 	GL(gl.glActiveTexture(GL_TEXTURE0));
 	GL(gl.glBindTexture(GL_TEXTURE_2D, renderer_->getLuminanceTexture()));
+	GL(gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.luminanceTexture, 0));
 
 	GL(gl.glActiveTexture(GL_TEXTURE1));
