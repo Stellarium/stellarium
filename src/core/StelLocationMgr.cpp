@@ -412,6 +412,8 @@ StelLocationMgr::StelLocationMgr()
 	// The first entry is the DB name, the second is as we display it in the program.
 	if (locationDBToIANAtranslations.count()==0)
 	{
+		// Seen on September 26, 2022. Officially renamed.
+		locationDBToIANAtranslations.insert("Europe/Kyiv",      "Europe/Kiev");
 		// reported in SF forum on 2017-03-27
 		locationDBToIANAtranslations.insert("Europe/Minsk",     "UTC+03:00");
 		locationDBToIANAtranslations.insert("Europe/Samara",    "UTC+04:00");
