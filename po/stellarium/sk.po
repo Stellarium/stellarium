@@ -7,8 +7,8 @@
 # Miroslav Sido <miro_redhawk@hotmail.com>, 2019
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2021
 # Juraj Kubica <juraj.kubica@seznam.cz>, 2022
-# Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2022
 # cardinot <mcardinot@gmail.com>, 2022
+# Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2022
 # 
 #, fuzzy
 msgid ""
@@ -17,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2022-09-22 17:56+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2022\n"
+"Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2022\n"
 "Language-Team: Slovak (https://www.transifex.com/stellarium/teams/80998/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -7825,7 +7825,7 @@ msgstr "saros"
 
 #: src/gui/ObsListDialog.cpp:170 src/gui/ObsListCreateEditDialog.cpp:179
 msgid "Object designation"
-msgstr ""
+msgstr "Označenie objektu"
 
 #: src/gui/ObsListDialog.cpp:171 src/gui/ObsListCreateEditDialog.cpp:180
 msgid "Object name"
@@ -7838,7 +7838,7 @@ msgstr "Súhvezdie"
 
 #: src/gui/ObsListDialog.cpp:525
 msgid "Location not found"
-msgstr ""
+msgstr "Poloha nenájdená"
 
 #: src/gui/ObsListCreateEditDialog.cpp:346
 #: src/gui/ObsListCreateEditDialog.cpp:348
@@ -14790,7 +14790,7 @@ msgstr "Jednotka merania:"
 
 #: src/ui_obsListDialog.h:300
 msgid "List:"
-msgstr ""
+msgstr "Zoznam:"
 
 #: src/ui_obsListDialog.h:302 src/ui_obsListCreateEditDialog.h:308
 msgid "Highlight all the objects of the selected list"
@@ -14843,7 +14843,7 @@ msgstr "Popis zoznamu pozorovaní:"
 
 #: src/ui_obsListDialog.h:326
 msgid "Defined as default list"
-msgstr ""
+msgstr "Definovaný ako predvolený zoznam"
 
 #: src/ui_obsListDialog.h:327
 msgid "Creation date:"
@@ -14851,11 +14851,11 @@ msgstr "Dátum vytvorenia:"
 
 #: src/ui_obsListDialog.h:328
 msgid "Use:"
-msgstr ""
+msgstr "Použitie:"
 
 #: src/ui_obsListCreateEditDialog.h:296
 msgid "Observing Lists editor"
-msgstr ""
+msgstr "Editor zoznamov pozorovaní"
 
 #: src/ui_obsListCreateEditDialog.h:298
 #: plugins/Satellites/src/ui_satellitesDialog.h:1385
@@ -14865,15 +14865,15 @@ msgstr "Opis:"
 
 #: src/ui_obsListCreateEditDialog.h:300
 msgid "Add equatorial coordinates (J2000.0)"
-msgstr ""
+msgstr "Pridať rovníkové súradnice (J2000,0)"
 
 #: src/ui_obsListCreateEditDialog.h:302
 msgid "Coordinates (RA and DEC)"
-msgstr ""
+msgstr "Súradnice (RA a DEC)"
 
 #: src/ui_obsListCreateEditDialog.h:304
 msgid "Add field of view"
-msgstr ""
+msgstr "Pridať zorné pole"
 
 #: src/ui_obsListCreateEditDialog.h:306
 msgid "FOV"
@@ -14897,7 +14897,7 @@ msgstr "Importovať zoznam"
 
 #: src/ui_obsListCreateEditDialog.h:323
 msgid "Save and close"
-msgstr ""
+msgstr "Uložiť a zavrieť"
 
 #: src/ui_obsListCreateEditDialog.h:327
 msgid "Set the list as default"
@@ -14909,7 +14909,7 @@ msgstr "Nastaviť predvolený"
 
 #: src/ui_obsListCreateEditDialog.h:331
 msgid "Add landscape"
-msgstr ""
+msgstr "Pridať terén"
 
 #: src/ui_obsListCreateEditDialog.h:334
 msgid "Name of the list:"

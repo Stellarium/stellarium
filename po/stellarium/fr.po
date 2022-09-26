@@ -9,11 +9,12 @@
 # Alexandre Blin, 2018
 # Bruno Averty <bruno.averty@gmail.com>, 2020
 # Mathieu Corbett <mathieu.corbett@outlook.com>, 2020
-# Guillaume Communie <gui-co@posteo.net>, 2022
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
 # Lionel HANNEQUIN <commerces-publicites+transifex-1@protonmail.com>, 2022
 # Nicolas Martignoni, 2022
 # cardinot <mcardinot@gmail.com>, 2022
+# Georg Zotti <Georg.Zotti@univie.ac.at>, 2022
+# Guillaume Communie <gui-co@posteo.net>, 2022
 # 
 #, fuzzy
 msgid ""
@@ -22,7 +23,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2022-09-22 17:56+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2022\n"
+"Last-Translator: Guillaume Communie <gui-co@posteo.net>, 2022\n"
 "Language-Team: French (https://www.transifex.com/stellarium/teams/80998/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -643,7 +644,7 @@ msgstr "NNO"
 #: src/core/modules/LandscapeMgr.cpp:343
 #, qt-format
 msgid "Loading... %1% done"
-msgstr ""
+msgstr "Chargement... %1% fait"
 
 #: src/core/modules/LandscapeMgr.cpp:348
 msgid "Switching models..."
@@ -651,12 +652,12 @@ msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:389 src/core/modules/LandscapeMgr.cpp:628
 msgid "Loaded successfully"
-msgstr ""
+msgstr "Chargé avec succès"
 
 #: src/core/modules/LandscapeMgr.cpp:633
 #, c-format
 msgid "Loading... 0% done"
-msgstr ""
+msgstr "Chargement... 0% fait"
 
 #: src/core/modules/LandscapeMgr.cpp:746
 msgid "Atmosphere"
@@ -2795,51 +2796,51 @@ msgstr ""
 
 #: src/core/modules/SpecificTimeMgr.cpp:83
 msgid "March equinox at current year"
-msgstr ""
+msgstr "Équinoxe de mars de cette année"
 
 #: src/core/modules/SpecificTimeMgr.cpp:84
 msgid "March equinox at next year"
-msgstr ""
+msgstr "Équinoxe de mars de l'année prochaine"
 
 #: src/core/modules/SpecificTimeMgr.cpp:85
 msgid "March equinox at previous year"
-msgstr ""
+msgstr "Équinoxe de mars de l'année passée"
 
 #: src/core/modules/SpecificTimeMgr.cpp:87
 msgid "September equinox at current year"
-msgstr ""
+msgstr "Équinoxe de septembre de cette année"
 
 #: src/core/modules/SpecificTimeMgr.cpp:88
 msgid "September equinox at next year"
-msgstr ""
+msgstr "Équinoxe de septembre de l'année prochaine"
 
 #: src/core/modules/SpecificTimeMgr.cpp:89
 msgid "September equinox at previous year"
-msgstr ""
+msgstr "Équinoxe de septembre de l'année passée"
 
 #: src/core/modules/SpecificTimeMgr.cpp:91
 msgid "June solstice at current year"
-msgstr ""
+msgstr "Solstice de juin de cette année"
 
 #: src/core/modules/SpecificTimeMgr.cpp:92
 msgid "June solstice at next year"
-msgstr ""
+msgstr "Solstice de juin de l'année prochaine"
 
 #: src/core/modules/SpecificTimeMgr.cpp:93
 msgid "June solstice at previous year"
-msgstr ""
+msgstr "Solstice de juin de l'année passée"
 
 #: src/core/modules/SpecificTimeMgr.cpp:95
 msgid "December solstice at current year"
-msgstr ""
+msgstr "Solstice de décembre de cette année"
 
 #: src/core/modules/SpecificTimeMgr.cpp:96
 msgid "December solstice at next year"
-msgstr ""
+msgstr "Solstice de décembre de l'année prochaine"
 
 #: src/core/modules/SpecificTimeMgr.cpp:97
 msgid "December solstice at previous year"
-msgstr ""
+msgstr "Solstice de décembre de l'année passée"
 
 #: src/core/StelApp.cpp:453
 msgid "Initializing textures..."
@@ -3958,14 +3959,14 @@ msgstr "Recharger les images d'arrière plan des objets du ciel profond"
 #: src/core/StelSkyLayerMgr.cpp:201
 #, qt-format
 msgid "Loading '%1'"
-msgstr ""
+msgstr "Chargement de '%1'"
 
 #. TRANSLATORS: The full phrase is "Loading '%SHORT_NAME%' from %URL%" in
 #. progress bar
 #: src/core/StelSkyLayerMgr.cpp:206
 #, qt-format
 msgid "Loading '%1' from %2"
-msgstr ""
+msgstr "Chargement de '%1' depuis %2"
 
 #: src/core/StelSkyCultureMgr.cpp:171
 msgctxt "sky culture classification"
@@ -4009,7 +4010,7 @@ msgstr ""
 #: src/core/StelSkyCultureMgr.cpp:186
 msgctxt "sky culture classification"
 msgid "comparative"
-msgstr ""
+msgstr "comparative"
 
 #: src/core/StelSkyCultureMgr.cpp:187
 msgid ""
@@ -4072,13 +4073,15 @@ msgstr "Classification"
 
 #: src/core/StelSkyCultureMgr.cpp:225
 msgid "unknown"
-msgstr ""
+msgstr "inconnue"
 
 #: src/core/StelSkyCultureMgr.cpp:226
 msgid ""
 "This sky culture is provided under unknown license. Please ask authors for "
 "details about license for this sky culture."
 msgstr ""
+"Cette culture céleste est fournie sans licence connue. Demandez aux auteurs "
+"les détails concernant la licence."
 
 #: src/core/StelSkyCultureMgr.cpp:233
 msgid ""
@@ -4086,16 +4089,22 @@ msgid ""
 "it for commercial and non-commercial purposes, freely adapt it and share "
 "adapted work."
 msgstr ""
+"Cette culture céleste est fournie sous licence publique générale GNU. Vous "
+"pouvez l'utiliser à des fins commerciales et non commerciales, l'adapter "
+"librement et la partager."
 
 #: src/core/StelSkyCultureMgr.cpp:237
 msgid "This sky culture is provided under Creative Commons License."
-msgstr ""
+msgstr "Cette culture céleste est fournie sous licence Creative Commons."
 
 #: src/core/StelSkyCultureMgr.cpp:245
 msgid ""
 "You may distribute, remix, adapt, and build upon this sky culture, even "
 "commercially, as long as you credit authors for the original creation."
 msgstr ""
+"Vous pouvez distribuer, modifier, adapter ou vous baser sur cette culture "
+"céleste, même à des fins commerciale, du moment que vous créditez les "
+"auteurs du projet original."
 
 #: src/core/StelSkyCultureMgr.cpp:246
 msgid ""
@@ -4104,6 +4113,11 @@ msgid ""
 "the identical terms. This license is often compared to “copyleft” free and "
 "open source software licenses."
 msgstr ""
+"Vous pouvez modifier, adapter ou vous baser sur cette culture céleste, même "
+"à des fins commerciale, du moment que vous créditez les auteurs du projet "
+"original et que vous utilisez une licence identique. Cette licence est "
+"souvent comparée aux licences de logiciels libres et open source "
+"\"copyleft\"."
 
 #: src/core/StelSkyCultureMgr.cpp:247
 msgid ""
@@ -4134,7 +4148,7 @@ msgstr ""
 
 #: src/core/StelSkyCultureMgr.cpp:262
 msgid "This sky culture is distributed as public domain."
-msgstr ""
+msgstr "Cette culture céleste fait partie du domaine public."
 
 #. TRANSLATORS: A phrase like "Please credit: XY Museum". The creditee is in a
 #. skyculture's info.ini.
@@ -4582,7 +4596,7 @@ msgstr "Sélectionner le dossier d'enregistrement des captures d'écran"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:596
 msgctxt "millimeters"
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 #: src/gui/ConfigurationDialog.cpp:805
 msgid "Dots per Inch (for image metadata)."
@@ -4738,6 +4752,9 @@ msgid ""
 "Show time of rising, transit and setting of celestial object. The rising and"
 " setting events are defined with the upper limb of the celestial body."
 msgstr ""
+"Montrer l'heure du lever, de la culmination et du coucher de l'objet "
+"céleste. Le lever et le coucher sont définis par rapport au limbe supérieur "
+"du corps céleste."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1828
@@ -5129,15 +5146,15 @@ msgstr "Calculer les phénomènes"
 
 #: src/gui/HelpDialog.cpp:416
 msgid "Calculate solar eclipses"
-msgstr ""
+msgstr "Calculer les éclipses solaires"
 
 #: src/gui/HelpDialog.cpp:418
 msgid "Calculate lunar eclipses"
-msgstr ""
+msgstr "Calculer les éclipses lunaires"
 
 #: src/gui/HelpDialog.cpp:420 src/ui_astroCalcDialog.h:2403
 msgid "Calculate transits"
-msgstr "Calculer les culminations"
+msgstr "Calculer les transits"
 
 #: src/gui/HelpDialog.cpp:430
 msgid ""
@@ -5194,7 +5211,7 @@ msgstr "{Open Collective} - Dons à l'équipe de développement de Stellarium."
 
 #: src/gui/HelpDialog.cpp:509
 msgid "Based on Qt"
-msgstr ""
+msgstr "Basée sur Qt"
 
 #: src/gui/HelpDialog.cpp:530
 msgid "Developers"
@@ -5279,10 +5296,13 @@ msgid ""
 "Many individuals have made contributions to the project and their work has "
 "made Stellarium better. Alphabetically sorted list of all contributors: %1."
 msgstr ""
+"Beaucoup de personnes ont participé au projet et leur travail a contribué a "
+"rendre Stellarium meilleur. La liste de tous les contributeurs, par ordre "
+"alphabétique : %1"
 
 #: src/gui/HelpDialog.cpp:559
 msgid "Financial support"
-msgstr ""
+msgstr "Support financier"
 
 #: src/gui/HelpDialog.cpp:560
 #, qt-format
@@ -5291,6 +5311,9 @@ msgid ""
 "Stellarium by donations, and the most generous financial contributors (with "
 "donations of $250 or more) are %1."
 msgstr ""
+"Beaucoup de personnes et d'organisations supportent le développement de "
+"Stellarium au travers de dons. Nos plus généreux donateurs (250$ ou plus) "
+"sont %1"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:562
@@ -5703,7 +5726,7 @@ msgstr "Magnitude visuelle en fonction de l'angle de phase et de l'albédo."
 
 #: src/gui/LocationDialog.cpp:173 src/gui/LocationDialog.cpp:876
 msgid "Get location from GPS or system service"
-msgstr ""
+msgstr "Obtenir la localisation depuis un GPS ou un service système"
 
 #: src/gui/LocationDialog.cpp:175 src/gui/LocationDialog.cpp:878
 #: src/ui_locationDialogGui.h:512
@@ -6113,7 +6136,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:625
 msgid "Save graph"
-msgstr ""
+msgstr "Enregistrer le graphique"
 
 #: src/gui/AstroCalcDialog.cpp:799
 msgid "Please select object to plot its graph 'Azimuth vs. Time'."
@@ -6296,7 +6319,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1734 src/ui_astroCalcDialog.h:2192
 msgid "Major planets"
-msgstr ""
+msgstr "Planètes majeures"
 
 #. TRANSLATORS: phase
 #: src/gui/AstroCalcDialog.cpp:1871 src/gui/AstroCalcChart.cpp:97
@@ -6324,23 +6347,27 @@ msgstr "Élongation lunaire"
 
 #: src/gui/AstroCalcDialog.cpp:2367
 msgid "Altitude of celestial object at transit"
-msgstr ""
+msgstr "Altitude de l'objet céleste au moment du transit"
 
 #: src/gui/AstroCalcDialog.cpp:2371
 msgid "Magnitude of celestial object at transit"
-msgstr ""
+msgstr "Magnitude de l'objet céleste au moment du transit"
 
 #: src/gui/AstroCalcDialog.cpp:2374
 msgid "Celestial object's angular distance from the Sun at transit"
 msgstr ""
+"Distance angulaire de l'objet céleste par rapport au Soleil au moment du "
+"transit"
 
 #: src/gui/AstroCalcDialog.cpp:2377
 msgid "Celestial object's angular distance from the Moon at transit"
 msgstr ""
+"Distance angulaire de l'objet céleste par rapport à la Lune au moment du "
+"transit"
 
 #: src/gui/AstroCalcDialog.cpp:2460
 msgid "Save calculated data as..."
-msgstr ""
+msgstr "Enregistrer les données calculées sous..."
 
 #: src/gui/AstroCalcDialog.cpp:2475 src/ui_configurationDialog.h:1820
 #: src/ui_astroCalcDialog.h:2146
@@ -6525,7 +6552,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:3147
 msgid "Save calculated lunar eclipses as..."
-msgstr ""
+msgstr "Enregistrer les éclipses lunaires calculées sous..."
 
 #: src/gui/AstroCalcDialog.cpp:3162 src/ui_astroCalcDialog.h:2399
 msgid "Lunar Eclipses"
@@ -6720,7 +6747,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:4260 src/gui/AstroCalcDialog.cpp:5353
 msgid "Save calculated solar eclipses as..."
-msgstr ""
+msgstr "Enregistrer les éclipses solaires calculées sous..."
 
 #: src/gui/AstroCalcDialog.cpp:4275 src/gui/AstroCalcDialog.cpp:5368
 msgid "Solar Eclipses"
@@ -6869,7 +6896,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:6094
 msgid "Save calculated transits as..."
-msgstr "Enregistrer les culminations calculées sous..."
+msgstr "Enregistrer les transits calculés sous..."
 
 #: src/gui/AstroCalcDialog.cpp:6109
 msgid "Transits across the Sun"
@@ -13482,10 +13509,12 @@ msgstr "Informations supplémentaires"
 #: src/ui_configurationDialog.h:1845
 msgid "Show Solar and Lunar positions if observed from Earth"
 msgstr ""
+"Montrer les positions du Soleil et de la Lune si l'observation se fait "
+"depuis la Terre"
 
 #: src/ui_configurationDialog.h:1847
 msgid "Solar and Lunar position"
-msgstr ""
+msgstr "Position du Soleil et de la Lune"
 
 #: src/ui_configurationDialog.h:1848
 msgid "Show additional buttons"
@@ -14317,7 +14346,7 @@ msgstr "Exporter les positions…"
 
 #: src/ui_astroCalcDialog.h:2186
 msgid "Seen now"
-msgstr ""
+msgstr "Visible maintenant"
 
 #: src/ui_astroCalcDialog.h:2189 src/ui_astroCalcDialog.h:2304
 #: src/ui_astroCalcDialog.h:2306 src/ui_astroCalcDialog.h:2319
@@ -14506,7 +14535,7 @@ msgstr "Effacer la liste des phénomènes"
 
 #: src/ui_astroCalcDialog.h:2286
 msgid "Export phenomena..."
-msgstr "Experter les phénomènes…"
+msgstr "Exporter les phénomènes…"
 
 #: src/ui_astroCalcDialog.h:2291
 msgid "Calculate also:"
@@ -14745,11 +14774,11 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:2401
 msgid "Cleanup transits"
-msgstr "Effacer la liste des culminations"
+msgstr "Effacer la liste des transits"
 
 #: src/ui_astroCalcDialog.h:2402
 msgid "Export transits..."
-msgstr "Exporter les culminations…"
+msgstr "Exporter les transits…"
 
 #: src/ui_astroCalcDialog.h:2404
 msgid "Planetary Transits"
@@ -14917,7 +14946,7 @@ msgstr "Exporter la liste"
 
 #: src/ui_obsListCreateEditDialog.h:323
 msgid "Save and close"
-msgstr ""
+msgstr "Enregistrer et fermer"
 
 #: src/ui_obsListCreateEditDialog.h:327
 msgid "Set the list as default"
@@ -21487,7 +21516,7 @@ msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:551
 msgid "Today:"
-msgstr ""
+msgstr "Aujourd'hui :"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:554
 msgid "Duration of nautical twilight (including daytime)"
@@ -21503,7 +21532,7 @@ msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:571
 msgid "Moonrise"
-msgstr ""
+msgstr "Levé de Lune"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:573
 msgid "End"
@@ -21511,15 +21540,15 @@ msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:578
 msgid "Moonset"
-msgstr ""
+msgstr "Couché de Lune"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:579
 msgid "Duration"
-msgstr ""
+msgstr "Durée"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:581
 msgid "Duration of daytime"
-msgstr ""
+msgstr "Durée du jour"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:588
 msgid "Begin"
@@ -21527,7 +21556,7 @@ msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:590
 msgid "Today"
-msgstr ""
+msgstr "Aujourd'hui"
 
 #: plugins/Novae/src/Novae.cpp:70 plugins/Novae/src/Novae.cpp:143
 msgid "Bright Novae"
@@ -22451,7 +22480,7 @@ msgstr "Distance angulaire"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:367
 msgid "Discovery year"
-msgstr ""
+msgstr "Année de découverte"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:368
 msgid "Detection method"
@@ -26360,7 +26389,7 @@ msgstr "Mise à jour…"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:178
 msgid "Successfully updated"
-msgstr ""
+msgstr "Mise à jour terminée"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:245
 msgid "Meteor Showers Plug-in"
@@ -31142,6 +31171,8 @@ msgstr ""
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:354
 msgid "We can request data for stars, planets and deep-sky objects only."
 msgstr ""
+"Seules les requêtes concernant les étoiles, les planètes ou les objets du "
+"ciel profond sont possibles"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:107
 msgctxt "GUI label"
@@ -31163,7 +31194,7 @@ msgstr "(personnalisé 3)"
 #, qt-format
 msgctxt "OnlineQueries"
 msgid "Opened %1 in your web browser"
-msgstr ""
+msgstr "Ouvrir %1 dans votre navigateur web"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:179
 msgid "OnlineQueries Plug-in"

@@ -5,8 +5,8 @@
 # 
 # Translators:
 # Tahmid Wasif <twrak007@gmail.com>, 2020
-# Tanmoy Saha <t4saha@gmail.com>, 2022
 # cardinot <mcardinot@gmail.com>, 2022
+# Tanmoy Saha <t4saha@gmail.com>, 2022
 # 
 #, fuzzy
 msgid ""
@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2022-09-22 17:56+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2022\n"
+"Last-Translator: Tanmoy Saha <t4saha@gmail.com>, 2022\n"
 "Language-Team: Bengali (https://www.transifex.com/stellarium/teams/80998/bn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -349,7 +349,7 @@ msgstr "ভূ-বিষুব স্থানাঙ্ক ব্যবস্থ
 
 #: src/core/modules/GridLinesMgr.cpp:1888 src/ui_viewDialog.h:4120
 msgid "Fixed Equatorial grid"
-msgstr ""
+msgstr "অবস্থান অনুযায়ী ভূ-বিষুব ছক (স্থির)"
 
 #: src/core/modules/GridLinesMgr.cpp:1889 src/ui_viewDialog.h:3754
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
@@ -384,7 +384,7 @@ msgstr "J2000.0 অনুযায়ী নিরক্ষরেখা"
 
 #: src/core/modules/GridLinesMgr.cpp:1896
 msgid "Fixed Equator line"
-msgstr ""
+msgstr "নিরক্ষরেখা (স্থির)"
 
 #: src/core/modules/GridLinesMgr.cpp:1897
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
@@ -434,7 +434,7 @@ msgstr "প্রতিযোগ / সংযোগ দ্রাঘিমা"
 
 #: src/core/modules/GridLinesMgr.cpp:1907
 msgid "Quadrature line"
-msgstr ""
+msgstr "সৌরপাদ বিভাজন বৃত্ত"
 
 #: src/core/modules/GridLinesMgr.cpp:1908
 msgid "Precession Circles"
@@ -636,20 +636,20 @@ msgstr "উঃউঃপঃ"
 #: src/core/modules/LandscapeMgr.cpp:343
 #, qt-format
 msgid "Loading... %1% done"
-msgstr ""
+msgstr "%1% সম্পন্ন ..."
 
 #: src/core/modules/LandscapeMgr.cpp:348
 msgid "Switching models..."
-msgstr ""
+msgstr "প্রতিরূপ বদলানো হচ্ছে ..."
 
 #: src/core/modules/LandscapeMgr.cpp:389 src/core/modules/LandscapeMgr.cpp:628
 msgid "Loaded successfully"
-msgstr ""
+msgstr "পুরোপুরি সম্পন্ন হয়েছে"
 
 #: src/core/modules/LandscapeMgr.cpp:633
 #, c-format
 msgid "Loading... 0% done"
-msgstr ""
+msgstr "0% সম্পন্ন ..."
 
 #: src/core/modules/LandscapeMgr.cpp:746
 msgid "Atmosphere"
@@ -2689,7 +2689,7 @@ msgstr "মহাকাশ নীরিক্ষা"
 
 #: src/core/modules/SpecificTimeMgr.cpp:57
 msgid "Specific Time"
-msgstr ""
+msgstr "বিশেষ সময়"
 
 #: src/core/modules/SpecificTimeMgr.cpp:59
 msgid "Next transit of the selected object"
@@ -2777,51 +2777,51 @@ msgstr "নির্বাচিত জ্যোতিষ্কটিকে স�
 
 #: src/core/modules/SpecificTimeMgr.cpp:83
 msgid "March equinox at current year"
-msgstr ""
+msgstr "বর্তমান বছরের মহাবিষুবের দিন যান"
 
 #: src/core/modules/SpecificTimeMgr.cpp:84
 msgid "March equinox at next year"
-msgstr ""
+msgstr "পরের বছরের মহাবিষুবের দিন যান"
 
 #: src/core/modules/SpecificTimeMgr.cpp:85
 msgid "March equinox at previous year"
-msgstr ""
+msgstr "আগের বছরের মহাবিষুবের দিন যান"
 
 #: src/core/modules/SpecificTimeMgr.cpp:87
 msgid "September equinox at current year"
-msgstr ""
+msgstr "বর্তমান বছরের জলবিষুবের দিন যান"
 
 #: src/core/modules/SpecificTimeMgr.cpp:88
 msgid "September equinox at next year"
-msgstr ""
+msgstr "পরের বছরের জলবিষুবের দিন যান"
 
 #: src/core/modules/SpecificTimeMgr.cpp:89
 msgid "September equinox at previous year"
-msgstr ""
+msgstr "আগের বছরের জলবিষুবের দিন যান"
 
 #: src/core/modules/SpecificTimeMgr.cpp:91
 msgid "June solstice at current year"
-msgstr ""
+msgstr "বর্তমান বছরের কর্কট সংক্রান্তির দিন যান"
 
 #: src/core/modules/SpecificTimeMgr.cpp:92
 msgid "June solstice at next year"
-msgstr ""
+msgstr "পরের বছরের কর্কট সংক্রান্তির দিন যান"
 
 #: src/core/modules/SpecificTimeMgr.cpp:93
 msgid "June solstice at previous year"
-msgstr ""
+msgstr "আগের বছরের কর্কট সংক্রান্তির দিন যান"
 
 #: src/core/modules/SpecificTimeMgr.cpp:95
 msgid "December solstice at current year"
-msgstr ""
+msgstr "বর্তমান বছরের মকর সংক্রান্তির দিন যান"
 
 #: src/core/modules/SpecificTimeMgr.cpp:96
 msgid "December solstice at next year"
-msgstr ""
+msgstr "পরের বছরের মকর সংক্রান্তির দিন যান"
 
 #: src/core/modules/SpecificTimeMgr.cpp:97
 msgid "December solstice at previous year"
-msgstr ""
+msgstr "আগের বছরের মকর সংক্রান্তির দিন যান"
 
 #: src/core/StelApp.cpp:453
 msgid "Initializing textures..."
@@ -2937,7 +2937,7 @@ msgstr "পছন্দসই আকর্ষনগুলি সক্রিয় 
 
 #: src/core/StelApp.cpp:623
 msgid "Initializing specific time..."
-msgstr ""
+msgstr "নির্দিষ্ট বিশেষ দিনে নিয়ে যাওয়া হচ্ছে ..."
 
 #: src/core/StelApp.cpp:631
 msgid "Initializing scripting..."
@@ -18715,11 +18715,11 @@ msgstr "উৎকেন্দ্রতা"
 
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:302
 msgid "Perigee"
-msgstr ""
+msgstr "অনুদূর"
 
 #: plugins/Satellites/src/ui_satellitesFilterDialog.h:303
 msgid "Apogee"
-msgstr ""
+msgstr "অপদূর"
 
 #: plugins/Satellites/src/ui_satellitesCommDialog.h:211
 msgid "Frequencies"
@@ -18845,7 +18845,7 @@ msgstr "Sky-Watcher SynScan AZ GoTo বিচলন বা আলম্বযু
 
 #: plugins/TelescopeControl/src/TelescopeClient.hpp:79
 msgid "telescope"
-msgstr ""
+msgstr "দূরবীন"
 
 #: plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp:288
 msgid "Read-only telescope"
@@ -19891,7 +19891,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
 msgctxt "numero sign"
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:523
 msgid "Status"
@@ -20435,7 +20435,7 @@ msgstr "ছায়াপথের তীব্রতা :"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:509
 msgid "Milky Way saturation:"
-msgstr ""
+msgstr "ছায়াপথের বর্ণ :"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:515
 msgid "Zodiacal light intensity:"
@@ -20560,7 +20560,7 @@ msgstr "ফাইল বাছুন"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:743
 msgid "Searching..."
-msgstr ""
+msgstr "অনুসন্ধান চলছে ..."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:105
@@ -21029,7 +21029,7 @@ msgstr "দিগংশ (পরিমিত)"
 #. TRANSLATORS: full phrase is "XX° below the horizon"
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:218
 msgid "below the horizon"
-msgstr ""
+msgstr "দিগন্তের নীচে"
 
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:237
@@ -21246,7 +21246,7 @@ msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:551
 msgid "Today:"
-msgstr ""
+msgstr "আজ :"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:554
 msgid "Duration of nautical twilight (including daytime)"
@@ -21262,7 +21262,7 @@ msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:571
 msgid "Moonrise"
-msgstr ""
+msgstr "চান্দ্রদয়"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:573
 msgid "End"
@@ -25847,7 +25847,7 @@ msgstr "১০৯পি/সুইফ্ট-টাট্টেল ধূমকে
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:193
 msgid "Comet C/1861 G1 (Thatcher)"
-msgstr ""
+msgstr "ধূমকেতু C/1861 G1 (থ্যাচার)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:195
@@ -25892,7 +25892,7 @@ msgstr "সি/১৯৬৪ এন১ (ইকেয়া) ধূমকেতু"
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:211
 msgid "Comet 73P/Schwassmann-Wachmann 3"
-msgstr ""
+msgstr "ধুমকেতু 73P/স্বোয়াসম্যান-ওয়াচম্যান 3"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:213
@@ -25927,17 +25927,17 @@ msgstr "ফেইথন গ্রহাণু (৩২০০)"
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:225
 msgid "Comet C/1911 N1 (Kiess)"
-msgstr ""
+msgstr "ধুমকেতু C/1911 N1 (কিয়েস)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:227
 msgid "Comet C/1852 K1 (Chacornac)?"
-msgstr ""
+msgstr "ধূমকেতু C/1852 K1 (চারকর্নাক)?"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:229
 msgid "Comet C/1979 Y1 (Bradfield)"
-msgstr ""
+msgstr "ধূমকেতু C/1979 Y1 (ব্র্যাডফিল্ড)"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:158
 msgid "Updating..."
@@ -26255,7 +26255,7 @@ msgstr "উল্কাবৃষ্টি অনুসন্ধান"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:182
 msgid "Year:"
-msgstr ""
+msgstr "বছর :"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:184
 msgid "Results"
@@ -27526,13 +27526,13 @@ msgstr "নব্য হিন্দু পঞ্চাঙ্গম"
 #: plugins/Calendars/src/ui_calendarsDialog.h:943
 msgctxt "calendar"
 msgid "Hindu Astro Solar"
-msgstr ""
+msgstr "হিন্দু সৌর নাক্ষত্রিক"
 
 #: plugins/Calendars/src/Calendars.cpp:361
 #: plugins/Calendars/src/ui_calendarsDialog.h:944
 msgctxt "calendar"
 msgid "Hindu Astro Lunisolar"
-msgstr ""
+msgstr "হিন্দু সৌর-চন্দ্র নাক্ষত্রিক"
 
 #: plugins/Calendars/src/Calendars.cpp:362
 #: plugins/Calendars/src/ui_calendarsDialog.h:940
@@ -30404,7 +30404,7 @@ msgstr "প্রাচীন হিন্দু সৌর চন্দ্র �
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:210
 msgid "New Hindu Solar and Lunar calendars"
-msgstr ""
+msgstr "হিন্দু সৌর ও চান্দ্র পঞ্জিকা (নব্য)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:211
 msgid "Astronomically 'accurate' Hindu Solar and Lunar calendars"
@@ -30457,7 +30457,7 @@ msgstr "পঞ্জিকা সরঞ্জামটির রূপরেখ�
 #: plugins/Calendars/src/ui_calendarsDialog.h:916
 msgctxt "calendar"
 msgid "New Hindu Lunar"
-msgstr ""
+msgstr "হিন্দু চান্দ্র (নব্য)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:925
 #: plugins/Calendars/src/ui_calendarsDialog.h:961
@@ -30474,7 +30474,7 @@ msgstr "আন্তর্জাতিক প্রামান্য সপ্�
 #: plugins/Calendars/src/ui_calendarsDialog.h:936
 msgctxt "calendar"
 msgid "Persian (arithmetic)"
-msgstr ""
+msgstr "পারসিক (গাণিতিক)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:937
 msgctxt "calendar"
@@ -30484,7 +30484,7 @@ msgstr ""
 #: plugins/Calendars/src/ui_calendarsDialog.h:938
 msgctxt "calendar"
 msgid "French Revolution (arithmetic)"
-msgstr ""
+msgstr "ফরাসী বিপ্লব (গাণিতিক)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:939
 msgctxt "calendar"
@@ -30494,7 +30494,7 @@ msgstr ""
 #: plugins/Calendars/src/ui_calendarsDialog.h:941
 msgctxt "calendar"
 msgid "Old Hindu Lunar"
-msgstr ""
+msgstr "হিন্দু চান্দ্র (প্রাচীন)"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:946
 msgid "Override automatic text color"
