@@ -6,8 +6,8 @@
 # Translators:
 # Nattee <ntte.pon@gmail.com>, 2019
 # Chaiyapong Ruangsuwan <chaiyapg@kku.ac.th>, 2021
-# Worachate Boonplod, 2022
 # cardinot <mcardinot@gmail.com>, 2022
+# Worachate Boonplod, 2022
 # 
 #, fuzzy
 msgid ""
@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2022-09-22 17:56+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2022\n"
+"Last-Translator: Worachate Boonplod, 2022\n"
 "Language-Team: Thai (https://www.transifex.com/stellarium/teams/80998/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -7812,7 +7812,7 @@ msgstr "ซารอส"
 
 #: src/gui/ObsListDialog.cpp:170 src/gui/ObsListCreateEditDialog.cpp:179
 msgid "Object designation"
-msgstr ""
+msgstr "ชื่อวัตถุ"
 
 #: src/gui/ObsListDialog.cpp:171 src/gui/ObsListCreateEditDialog.cpp:180
 msgid "Object name"
@@ -7825,7 +7825,7 @@ msgstr "กลุ่มดาว"
 
 #: src/gui/ObsListDialog.cpp:525
 msgid "Location not found"
-msgstr ""
+msgstr "ไม่พบตำแหน่งที่ตั้ง"
 
 #: src/gui/ObsListCreateEditDialog.cpp:346
 #: src/gui/ObsListCreateEditDialog.cpp:348
@@ -14583,7 +14583,7 @@ msgstr "เทห์ฟ้าที่ 2:"
 
 #: src/ui_astroCalcDialog.h:2366
 msgid "Synodic period:"
-msgstr "คาบซินอดิก:"
+msgstr "คาบซินโนดิก:"
 
 #: src/ui_astroCalcDialog.h:2368
 msgid "Orbital velocity of first celestial body:"
@@ -14756,7 +14756,7 @@ msgstr "หน่วยของการวัด:"
 
 #: src/ui_obsListDialog.h:300
 msgid "List:"
-msgstr ""
+msgstr "รายชื่อ:"
 
 #: src/ui_obsListDialog.h:302 src/ui_obsListCreateEditDialog.h:308
 msgid "Highlight all the objects of the selected list"
@@ -14809,7 +14809,7 @@ msgstr "คำอธิบายรายชื่อเพื่อการส
 
 #: src/ui_obsListDialog.h:326
 msgid "Defined as default list"
-msgstr ""
+msgstr "กำหนดให้เป็นรายชื่อโดยปริยาย"
 
 #: src/ui_obsListDialog.h:327
 msgid "Creation date:"
@@ -14817,11 +14817,11 @@ msgstr "วันที่สร้าง:"
 
 #: src/ui_obsListDialog.h:328
 msgid "Use:"
-msgstr ""
+msgstr "ใช้:"
 
 #: src/ui_obsListCreateEditDialog.h:296
 msgid "Observing Lists editor"
-msgstr ""
+msgstr "เครื่องมือแก้ไขรายชื่อเพื่อการสังเกตการณ์"
 
 #: src/ui_obsListCreateEditDialog.h:298
 #: plugins/Satellites/src/ui_satellitesDialog.h:1385
@@ -14831,19 +14831,19 @@ msgstr "รายละเอียด:"
 
 #: src/ui_obsListCreateEditDialog.h:300
 msgid "Add equatorial coordinates (J2000.0)"
-msgstr ""
+msgstr "เพิ่มพิกัดศูนย์สูตร (J2000.0)"
 
 #: src/ui_obsListCreateEditDialog.h:302
 msgid "Coordinates (RA and DEC)"
-msgstr ""
+msgstr "พิกัด (ไรต์แอสเซนชันและเดคลิเนชัน)"
 
 #: src/ui_obsListCreateEditDialog.h:304
 msgid "Add field of view"
-msgstr ""
+msgstr "เพิ่มขอบเขตภาพ"
 
 #: src/ui_obsListCreateEditDialog.h:306
 msgid "FOV"
-msgstr "ขอบเขตการมองเห็น"
+msgstr "ขอบเขตภาพ"
 
 #: src/ui_obsListCreateEditDialog.h:310
 msgid "Add object"
@@ -14863,7 +14863,7 @@ msgstr "นำเข้ารายการ"
 
 #: src/ui_obsListCreateEditDialog.h:323
 msgid "Save and close"
-msgstr ""
+msgstr "บันทึกแล้วปิด"
 
 #: src/ui_obsListCreateEditDialog.h:327
 msgid "Set the list as default"
@@ -14875,7 +14875,7 @@ msgstr "ตั้งรายการให้เป็นค่าปริย
 
 #: src/ui_obsListCreateEditDialog.h:331
 msgid "Add landscape"
-msgstr ""
+msgstr "เพิ่มภูมิทัศน์"
 
 #: src/ui_obsListCreateEditDialog.h:334
 msgid "Name of the list:"
@@ -20908,7 +20908,7 @@ msgstr "Sergei Blinnikov"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
 msgid "Institute for Theoretical and Experimental Physics"
-msgstr "Institute for Theoretical and Experimental Physics"
+msgstr "สถาบันฟิสิกส์ทฤษฎีและฟิสิกส์ทดลอง"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:134
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:147
@@ -23268,7 +23268,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:447
 msgid "Horna is hell or the underworld from Finnic mythology."
-msgstr ""
+msgstr "ฮอร์นาคือนรกหรือบาดาลในเทพนิยายของชาวฟิน"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:448
 msgid ""
@@ -23436,6 +23436,8 @@ msgid ""
 "Mesopotamia situated along an ancient channel of the Euphrates river in "
 "modern-day Iraq."
 msgstr ""
+"อูรุกเป็นเมืองโบราณในอารยธรรมซูเมอร์และบาบิโลนในเมโสโปเตเมียตามลุ่มน้ำยูเฟรตีส"
+" ปัจจุบันอยู่ในประเทศอิรัก"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:476
 msgid ""
