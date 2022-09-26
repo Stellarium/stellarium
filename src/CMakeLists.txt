@@ -306,8 +306,8 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/ShortcutsDialog.cpp
           gui/Dialog.hpp
           gui/Dialog.cpp
-          gui/MapLabel.hpp
-          gui/MapLabel.cpp
+          gui/MapWidget.hpp
+          gui/MapWidget.cpp
           gui/AngleSpinBox.hpp
           gui/AngleSpinBox.cpp
           gui/LocationDialog.hpp

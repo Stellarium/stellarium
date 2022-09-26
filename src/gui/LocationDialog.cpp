@@ -82,11 +82,6 @@ void LocationDialog::createDialogContent()
 	// We try to directly connect to the observer slots as much as we can
 	ui->setupUi(dialog);
 
-	//enable resizability
-	ui->mapLabel->setMinimumSize(0,0);
-	ui->mapLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
-	ui->mapLabel->setScaledContents(false);
-
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(app, SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(setDisplayFormatForSpins(bool)));
@@ -133,7 +128,7 @@ void LocationDialog::createDialogContent()
 	// Connect all the QT signals
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
-	connect(ui->mapLabel, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)));
+	connect(ui->mapWidget, SIGNAL(positionChanged(double, double)), this, SLOT(setLocationFromMap(double, double)));
 
 	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));
 	connect(ui->deleteLocationFromListPushButton, SIGNAL(clicked()), this, SLOT(deleteCurrentLocationFromList()));
@@ -221,7 +216,7 @@ void LocationDialog::handleDialogSizeChanged(QSizeF size)
 	StelDialog::handleDialogSizeChanged(size);
 	StelLocation loc = locationFromFields();
 	//resizePixmap();
-	//ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
+	//ui->mapWidget->setMarkerPos(loc.longitude, loc.latitude);
 }
 
 void LocationDialog::reloadLocations()
@@ -405,14 +400,11 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 				pixmap = QPixmap(path);
 			}
 		}
-		StelCore * core = StelApp::getInstance().getCore();
-		pixmap.setDevicePixelRatio(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
-		ui->mapLabel->setPixmap(pixmap);
-		ui->mapLabel->resizePixmap();
+		ui->mapWidget->setMap(pixmap);
 		// For caching
 		lastPlanet = loc.planetName;
 	}
-	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
+	ui->mapWidget->setMarkerPos(loc.longitude, loc.latitude);
 }
 
 void LocationDialog::populatePlanetList()
@@ -636,7 +628,7 @@ void LocationDialog::setLocationFromCoords(int i)
 	StelLocation loc = locationFromFields();
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
 	//Update the position of the map pointer
-	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
+	ui->mapWidget->setMarkerPos(loc.longitude, loc.latitude);
 }
 
 void LocationDialog::saveTimeZone()
