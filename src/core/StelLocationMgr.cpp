@@ -703,6 +703,10 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 			return iter.value();
 		}
 	}
+	// Maybe a full Location line? (e.g. ObservationLists)
+	if (s.count("\t")>6) // heuristic. Regular locations should not have tabs in the name.
+		return StelLocation::createFromLine(s);
+
 	StelLocation ret;
 	// Maybe it is a coordinate set with elevation?
 	static const QRegularExpression csreg("(.+),\\s*(.+),\\s*(.+)");
