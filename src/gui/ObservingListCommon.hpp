@@ -58,7 +58,7 @@ enum ObsListColumns {
 };
 
 static constexpr char const *JSON_FILE_NAME = "observingList.json";
-static constexpr char const *FILE_VERSION = "2.1";
+static constexpr char const *FILE_VERSION = "2.0";
 
 static constexpr char const *JSON_BOOKMARKS_FILE_NAME = "bookmarks.json";
 static constexpr char const *BOOKMARKS_LIST_NAME = "bookmarks list";
