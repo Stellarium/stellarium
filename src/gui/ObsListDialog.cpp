@@ -472,8 +472,15 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
 		qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators(JSON_FILE_NAME);
 	else
 	{
-		// We must keep selection for the user!
+		// We must keep selection for the user. It is not enough to store/restore the existingSelection.
+		// The QList<StelObjectP> objects are apparently volatile. WE must take out the actual object.
 		const QList<StelObjectP>&existingSelection = objectMgr->getSelectedObject();
+		StelObject *preSelectedObject=Q_NULLPTR;
+		if (existingSelection.length()>0)
+		{
+			preSelectedObject=existingSelection[0].data();
+			qDebug() << "\t Selected object: " << existingSelection[0]->getEnglishName();
+		}
 
 		try {
 			map = StelJsonParser::parse(jsonFile.readAll()).toMap();
@@ -553,11 +560,8 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
 						QString LocationStr;
 						if (!item.location.isEmpty())
 						{
-							qDebug() << "loadSelectedObservingListFromJsonFile30a: dissect location" << item.location;
-
 							StelLocation loc=StelApp::getInstance().getLocationMgr().locationForString(item.location);
 							LocationStr=loc.name;
-							qDebug() << "loadSelectedObservingListFromJsonFile30a: location name" << loc.name;
 						}
 
 						addModelRow(objectOlud,
@@ -588,9 +592,6 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
 				//ui->obsListDeleteButton->setEnabled(false);
 			}
 
-			//objectMgr->unSelect();
-			// Restore selection that was active before calling this
-			objectMgr->setSelectedObject(existingSelection, StelModule::ReplaceSelection);
 			// Sorting for the objects list.
 			QString sortingBy = observingListMap.value(KEY_SORTING).toString();
 			if (!sortingBy.isEmpty())
@@ -601,7 +602,10 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
 			jsonFile.close();
 		}
 		// Restore selection that was active before calling this
-		objectMgr->setSelectedObject(existingSelection, StelModule::ReplaceSelection);
+		if (preSelectedObject)
+			objectMgr->setSelectedObject(StelObjectP(preSelectedObject), StelModule::ReplaceSelection);
+		else
+			objectMgr->unSelect();
 	}
 }
 
@@ -654,6 +658,13 @@ void ObsListDialog::loadBookmarksInObservingList()
 
 		// We must keep selection for the user!
 		const QList<StelObjectP>&existingSelection = objectMgr->getSelectedObject();
+		StelObject *preSelectedObject=Q_NULLPTR;
+		if (existingSelection.length()>0)
+		{
+			preSelectedObject=existingSelection[0].data();
+			qDebug() << "\t Selected object: " << existingSelection[0]->getEnglishName();
+		}
+
 		try {
 			map = StelJsonParser::parse(jsonFile.readAll()).toMap();
 			jsonFile.close();
@@ -717,11 +728,14 @@ void ObsListDialog::loadBookmarksInObservingList()
 			qWarning() << "[ObservingList] Load bookmarks in observing list: File format is wrong! Error: " << e.what();
 		}
 		// Restore selection that was active before calling this
-		objectMgr->setSelectedObject(existingSelection, StelModule::ReplaceSelection);
+		if (preSelectedObject)
+			objectMgr->setSelectedObject(StelObjectP(preSelectedObject), StelModule::ReplaceSelection);
+		else
+			objectMgr->unSelect();
+
 		core->setJD(currentJD);
 		core->setMilliSecondsOfLastJDUpdate(millis); // restore millis.
 		core->update(0); // enforce update to the previous positions
-
 	}
 }
 
@@ -757,8 +771,7 @@ void ObsListDialog::saveBookmarksInObsListJsonFile(const QHash<QString, observin
 		}
 
 		// Description
-		QString description = QString(BOOKMARKS_LIST_DESCRIPTION);
-		observingListDataList.insert(QString(KEY_DESCRIPTION), description);
+		observingListDataList.insert(QString(KEY_DESCRIPTION), QString(BOOKMARKS_LIST_DESCRIPTION));
 
 		// Creation date
 		double JD = core->getJD();
@@ -825,7 +838,7 @@ void ObsListDialog::saveBookmarksInObsListJsonFile(const QHash<QString, observin
 
 /*
  * Check if bookmarks list already exists in observing list file,
- * in fact if the file of bookarks has already be loaded.
+ * in fact if the file of bookmarks has already be loaded.
 */
 bool ObsListDialog::checkIfBookmarksListExists(const QVariantMap &allListsMap)
 {
@@ -1066,8 +1079,8 @@ QString ObsListDialog::extractDefaultListOludFromJsonFile()
 }
 
 /*
- * Override of the StelDialog::setVisible((bool) methode
- * We need to load the default liste when opening the obsListDialog
+ * Override of the StelDialog::setVisible((bool) method
+ * We need to load the default list when opening the obsListDialog
 */
 void ObsListDialog::setVisible(bool v)
 {

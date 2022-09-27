@@ -137,7 +137,7 @@ private slots:
 
 	void headerClicked(int index);
 
-	void nameOfListTextChange();
+	void nameOfListTextChange(const QString &newText);
 
 signals:
 
