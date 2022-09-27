@@ -50,7 +50,7 @@ your distribution. Here's a list.
 
 ### Dependencies
 
-Since version 1.0 by default Stellarium compiling with ShowMySky module (the feature can be used via loading an optional library). To disable support ShowMySky module please configure the project with `-DENABLE_SHOWMYSKY=Off` parameter otherwise please follow instructions for [CalcMySky/ShowMySky](https://10110111.github.io/CalcMySky/) tools.
+Since version 1.0 by default Stellarium build requires ShowMySky module (the feature can be used via loading an optional library). To install this module, refer to [CalcMySky documentation](https://10110111.github.io/CalcMySky/). If you need a Stellarium build without ShowMySky support, you can configure it with `-DENABLE_SHOWMYSKY=OFF` CMake parameter.
 
 ### Optional dependencies
 
@@ -372,7 +372,7 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 | CMAKE_OSX_DEPLOYMENT_TARGET   | string | 11.0    | Minimum macOS deployment version**
 | OPENGL_DEBUG_LOGGING          | bool   | OFF     | Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger
 | ENABLE_NLS                    | bool   | ON      | Enable interface translation
-| ENABLE_SHOWMYSKY              | bool   | ON      | Enable support ShowMySky module for Brenetton's atmosphere model
+| ENABLE_SHOWMYSKY              | bool   | ON      | Enable support for ShowMySky module that implements a realistic atmosphere model
 | ENABLE_GPS                    | bool   | ON      | Enable GPS support
 | ENABLE_LIBGPS                 | bool   | ON      | Enable GPS support with libGPS library (N/A on Windows)
 | ENABLE_MEDIA                  | bool   | ON      | Enable sound and video support
