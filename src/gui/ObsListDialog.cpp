@@ -297,7 +297,12 @@ void ObsListDialog::obsListHighLightAllButtonPressed()
 
 	// Restore selection that was active before calling this
 	if (preSelectedObject)
+	{
+		qDebug() << "buup";
+
+		qDebug() << "obsListHighLightAllButtonPressed(): Re-selecting" << preSelectedObject->getEnglishName();
 		objectMgr->setSelectedObject(StelObjectP(preSelectedObject), StelModule::ReplaceSelection);
+	}
 	else
 		objectMgr->unSelect();
 }
@@ -479,10 +484,13 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
 		// The QList<StelObjectP> objects are apparently volatile. We must retrieve the actual object.
 		const QList<StelObjectP>&existingSelection = objectMgr->getSelectedObject();
 		StelObject *preSelectedObject=Q_NULLPTR;
+		QString preselectedName;
 		if (existingSelection.length()>0)
 		{
 			preSelectedObject=existingSelection[0].data();
-			qDebug() << "\t Selected object: " << existingSelection[0]->getEnglishName();
+			preselectedName = existingSelection[0]->getEnglishName();
+			qDebug() << "\t Selected object: " << preselectedName;
+			qDebug() << "check again:" << preSelectedObject->getEnglishName();
 		}
 
 		try {
@@ -602,7 +610,16 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
 
 		// Restore selection that was active before calling this
 		if (preSelectedObject)
-			objectMgr->setSelectedObject(StelObjectP(preSelectedObject), StelModule::ReplaceSelection);
+		{
+			// HERE WE CRASH when working with the preselectedObject.
+			// It works with the preselectedName, but this works only for objects with names. How to deal with
+			// dim stars, custom_markers, ... (other selectabled stuff)
+			qDebug() << "baap";
+			qDebug() << "loadSelectedObservingListFromJsonFile:  Re-selecting" << preselectedName;
+			//qDebug() << "loadSelectedObservingListFromJsonFile:  Re-selecting" << preSelectedObject->getEnglishName();
+			// objectMgr->setSelectedObject(StelObjectP(preSelectedObject), StelModule::ReplaceSelection);
+			objectMgr->findAndSelect(preselectedName);
+		}
 		else
 			objectMgr->unSelect();
 	}
@@ -658,10 +675,12 @@ void ObsListDialog::loadBookmarksInObservingList()
 		// We must keep selection for the user!
 		const QList<StelObjectP>&existingSelection = objectMgr->getSelectedObject();
 		StelObject *preSelectedObject=Q_NULLPTR;
+		QString preselectedName;
 		if (existingSelection.length()>0)
 		{
 			preSelectedObject=existingSelection[0].data();
-			qDebug() << "\t Selected object: " << existingSelection[0]->getEnglishName();
+			preselectedName= existingSelection[0]->getEnglishName();
+			qDebug() << "\t Selected object: " << preselectedName;
 		}
 
 		try {
@@ -728,8 +747,13 @@ void ObsListDialog::loadBookmarksInObservingList()
 			qWarning() << "[ObservingList] Load bookmarks in observing list: File format is wrong! Error: " << e.what();
 		}
 		// Restore selection that was active before calling this
-		if (preSelectedObject)
-			objectMgr->setSelectedObject(StelObjectP(preSelectedObject), StelModule::ReplaceSelection);
+		if (preSelectedObject){
+			qDebug() << "beep";
+			qDebug() << "loadBookmarksInObservingList: Re-selecting" << preselectedName;
+			//qDebug() << "loadBookmarksInObservingList: Re-selecting" << preSelectedObject->getEnglishName();
+			objectMgr->findAndSelect(preselectedName);
+			//objectMgr->setSelectedObject(StelObjectP(preSelectedObject), StelModule::ReplaceSelection);
+		}
 		else
 			objectMgr->unSelect();
 
