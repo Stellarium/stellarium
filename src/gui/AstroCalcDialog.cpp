@@ -4912,6 +4912,8 @@ void AstroCalcDialog::saveSolarEclipseKML()
 			// Curve of maximum eclipse at sunrise/sunset
 			// There are two parts of the curve
 			bool first = true;
+			double startLat1 = 0., startLon1 = 0., endLat1 = 0., endLon1 = 0.;
+			double endJD1 = JDMid, startJD1 = JDMid, endJD2 = JDMid, startJD2 = JDMid;
 			for (int j = 0; j < 2; j++)
 			{
 				if ( j!= 0) first = false;
@@ -4936,11 +4938,33 @@ void AstroCalcDialog::saveSolarEclipseKML()
 							stream << "<Placemark>\n<name>MaxEclipseSunriseSunset</name>\n<styleUrl>#PLimits</styleUrl>\n<LineString>\n<extrude>1</extrude>\n";
 							stream << "<tessellate>1</tessellate>\n<altitudeMode>absoluto</altitudeMode>\n<coordinates>\n";
 						}
+						if (!first && count == 1) startJD2 = JD;
+						if (!first && count == 1 && bothPenumbralLimits && (startJD1 < JDMid) && (startJD2 < JDMid))
+						{
+							stream << startLon1 << "," << startLat1 << ",0.0\n"; // connect start of part 1 to start of part 2
+						}
 						stream << coordinates.second << "," << coordinates.first << ",0.0\n";
+						if (first && bothPenumbralLimits)
+						{
+							endJD1 = JD;
+							endLat1 = coordinates.first;
+							endLon1 = coordinates.second;
+						}
+						if (first && count == 1 && bothPenumbralLimits)
+						{
+							startJD1 = JD;
+							startLat1 = coordinates.first;
+							startLon1 = coordinates.second;
+						}
 						lat0 = coordinates.first;
 						lon0 = coordinates.second;
 					}
 					i++;
+				}
+				if (!first && bothPenumbralLimits) endJD2 = JD;
+				if (!first && bothPenumbralLimits && (endJD1 > JDMid) && (endJD2 > JDMid))
+				{
+					stream << endLon1 << "," << endLat1 << ",0.0\n"; // connect end of part 2 to end of part 1
 				}
 				stream << "</coordinates>\n</LineString>\n</Placemark>\n";
 			}
