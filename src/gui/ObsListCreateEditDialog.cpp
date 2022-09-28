@@ -589,8 +589,17 @@ void ObsListCreateEditDialog::obsListSaveButtonPressed()
 	QString listName = ui->nameOfListLineEdit->text().trimmed();
 	qDebug() << "ObsListCreateEditDialog::obsListSaveButtonPressed(): list:" << listName;
 
-	bool isListAlreadyExists = !this->listNames_.isEmpty() && this->listNames_.contains(listName) &&
-			(isCreationMode || (listName.compare(currentListName) != 0 && !isCreationMode));
+//	bool isListAlreadyExists = !this->listNames_.isEmpty() && this->listNames_.contains(listName) &&
+//			(isCreationMode || (listName.compare(currentListName) != 0 && !isCreationMode));
+	// JG 2022-09-28 19:16.
+	bool isListAlreadyExists = false;
+	    if(!this->listNames_.isEmpty() && this->listNames_.contains(listName) && isCreationMode){
+		isListAlreadyExists = true;
+	 }
+// Will be simplified
+//	bool isListAlreadyExists = (!this->listNames_.isEmpty() && this->listNames_.contains(listName) && isCreationMode);
+
+
 
 	if (isListAlreadyExists) {
 		qWarning() << "[ObservingList Creation/Edition] Error: a list with the name " << ui->nameOfListLineEdit->text()
