@@ -56,7 +56,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	buttonOcular = new StelButton(buttonBar,
 				      QPixmap(":/ocular/bt_ocular_on.png"),
 				      QPixmap(":/ocular/bt_ocular_off.png"),
-				      QPixmap(),
+				      QPixmap(":/graphicGui/miscGlow32x32.png"),
 				      ocularsPlugin->actionShowOcular,
 				      true); //No background
 	buttonOcular->setToolTip(ocularsPlugin->actionShowOcular->getText());
@@ -65,7 +65,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	buttonCrosshairs = new StelButton(buttonBar,
 					  QPixmap(":/ocular/bt_crosshairs_on.png"),
 					  QPixmap(":/ocular/bt_crosshairs_off.png"),
-					  QPixmap(),
+					  QPixmap(":/graphicGui/miscGlow32x32.png"),
 					  ocularsPlugin->actionShowCrosshairs,
 					  true);
 	buttonCrosshairs->setToolTip(ocularsPlugin->actionShowCrosshairs->getText());
@@ -75,7 +75,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	buttonCcd = new StelButton(buttonBar,
 				   QPixmap(":/ocular/bt_sensor_on.png"),
 				   QPixmap(":/ocular/bt_sensor_off.png"),
-				   QPixmap(),
+				   QPixmap(":/graphicGui/miscGlow32x32.png"),
 				   ocularsPlugin->actionShowSensor,
 				   true);
 	buttonCcd->setToolTip(ocularsPlugin->actionShowSensor->getText());
@@ -84,7 +84,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	buttonTelrad = new StelButton(buttonBar,
 				      QPixmap(":/ocular/bt_telrad_on.png"),
 				      QPixmap(":/ocular/bt_telrad_off.png"),
-				      QPixmap(),
+				      QPixmap(":/graphicGui/miscGlow32x32.png"),
 				      ocularsPlugin->actionShowTelrad,
 				      true);
 	buttonTelrad->setToolTip(ocularsPlugin->actionShowTelrad->getText());
@@ -93,7 +93,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	buttonConfiguration = new StelButton(buttonBar,
 					     QPixmap(":/ocular/bt_settings_on.png"),
 					     QPixmap(":/ocular/bt_settings_off.png"),
-					     QPixmap(),
+					     QPixmap(":/graphicGui/miscGlow32x32.png"),
 					     ocularsPlugin->actionConfiguration,
 					     true);
 	buttonConfiguration->setToolTip(ocularsPlugin->actionConfiguration->getText());
