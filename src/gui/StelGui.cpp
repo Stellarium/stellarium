@@ -324,7 +324,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 	pxmapOn = QPixmap(":/graphicGui/btFullScreen-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btFullScreen-off.png");
-	buttonFullscreen = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionSet_Full_Screen_Global");
+	buttonFullscreen = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionSet_Full_Screen_Global", false, "actionSet_Full_Screen_Exclusive");
 	buttonFullscreen->setTriggerOnRelease(true);
 	skyGui->buttonBar->addButton(buttonFullscreen, "060-othersGroup");
 
@@ -1129,7 +1129,7 @@ void StelGui::setFlagShowFullscreenButton(bool b)
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btFullScreen-on.png");
 				QPixmap pxmapOff(":/graphicGui/btFullScreen-off.png");
-				buttonFullscreen = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionSet_Full_Screen_Global");
+				buttonFullscreen = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionSet_Full_Screen_Global", false, "actionSet_Full_Screen_Exclusive");
 			}
 			getButtonBar()->addButton(buttonFullscreen, "060-othersGroup");
 		} else {

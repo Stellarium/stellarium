@@ -750,7 +750,7 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, 
 	{
 		regenerateGrid();
 		resizeRenderTarget(width, height);
-		bool verbose=qApp->property("verbose").toBool();
+		const auto verbose=qApp->property("verbose").toBool();
 		if (verbose)
 			qDebug() << "dynResTimer" << dynResTimer << "atmoRes" << atmoRes << "changeOfView" << changeOfView.length() << changeOfView;
 	}

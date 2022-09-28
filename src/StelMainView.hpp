@@ -29,6 +29,7 @@
 #include <QOpenGLDebugMessage>
 #endif
 #include "VecMath.hpp"
+#include "TopMost.hpp"
 
 class StelGLWidget;
 class StelGraphicsScene;
@@ -266,6 +267,7 @@ private slots:
 	void updateNightModeProperty(bool b);
 
 	void reloadShaders();
+	void fullScreenExclusive();
 
 private:
 	//! The graphics scene notifies us when a draw finished, so that we can queue the next one
@@ -325,6 +327,7 @@ private:
 	//! The maximum desired frame rate in frame per second.
 	float maxfps;
 	QTimer* fpsTimer;
+	TopMost *topMost=Q_NULLPTR;
 
 #ifdef OPENGL_DEBUG_LOGGING
 	QOpenGLDebugLogger* glLogger;

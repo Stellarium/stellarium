@@ -13,6 +13,8 @@ SET(stellarium_lib_SRCS
      core/BlueNoiseTriangleRemapped.hpp
      core/Dithering.hpp
      core/SaturationShader.hpp
+     core/TopMost.hpp
+     core/TopMost.cpp
      core/healpix.c
      core/StelAudioMgr.hpp
      core/StelAudioMgr.cpp
@@ -388,6 +390,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/orbitColorsDialog.ui
           gui/tonemappingDialog.ui
           gui/skylightDialog.ui
+          gui/topmost.ui
      )
 
      IF(ENABLE_SCRIPTING)
