@@ -632,7 +632,7 @@ QVariantList ObsListDialog::loadListFromJson(const QVariantMap &map, const QStri
 		qCritical() << "[ObservingList] conversion error";
 
 	// Clear model
-	obsListListModel->clear(); //removeRows(0, obsListListModel->rowCount());
+	obsListListModel->removeRows(0, obsListListModel->rowCount()); // don't use clear() here!
 	return listOfObjects;
 }
 
@@ -996,8 +996,7 @@ void ObsListDialog::obsListDeleteButtonPressed()
 				observingListItemCollection.clear();
 
 				// Clear row in model
-				//obsListListModel->removeRows(0, obsListListModel->rowCount());
-				obsListListModel->clear(); // simpler
+				obsListListModel->removeRows(0, obsListListModel->rowCount()); // don't just clear()!
 				ui->obsListCreationDateLineEdit->setText("");
 				ui->obsListDescriptionTextEdit->setPlainText("");
 				int currentIndex = ui->obsListComboBox->currentIndex();
