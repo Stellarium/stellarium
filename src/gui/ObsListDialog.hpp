@@ -29,6 +29,22 @@
 #include "ObsListCreateEditDialog.hpp"
 #include "ObservingListCommon.hpp"
 
+//! @class ObsListDialog
+//! Since V0.21.2, this class manages the ObservingLists, successor of the Bookmarks feature available since 0.15.
+//! Updated in Version 1.0: ObservingLists Version 2.0
+//!
+//! This tool manages Observing Lists based on a unique list identifier, the OLUD = Observing List Unique Designation
+//! Old bookmarks.json files are auto-imported at first run. The old file is then not touched any further and could still be used in older versions of Stellarium.
+//! This first bookmarks list is then the first stored ObservingList.
+//! You can create new lists, edit them, delete them, export them and exchange with other users etc.
+//!
+//! When creating an entry for a selected object, you can optionally store current time, location, landscapeID and field of view.
+//! This helps to retrieve the possible same view if location and/or time matter. Obviously, a list of favourite DSOs would not need those data (but maybe FoV is still meaningful).
+//! On retrieval, the same optional elements can again be selected, so you can retrieve an object without stored time or location, if that is meaningful.
+//! If location or landscape IDs cannot be found, they are not changed.
+
+
+
 class Ui_obsListDialogForm;
 
 class ObsListDialog : public StelDialog
@@ -88,8 +104,7 @@ private:
 
 	ObsListCreateEditDialog *createEditDialog_instance;
 
-	//! Add row in the obsListListModel
-	// //! @param number row number BAD: The name implies "add row to the end of the list". Why bother with giving a number?
+	//! Append row in the obsListListModel (the table to display/select list entries)
 	//! @param olud id of the record
 	//! @param name name or the designation of the object
 	//! @param type type of the object
@@ -100,8 +115,7 @@ private:
 	//! @param date human-redable event date (optional)
 	//! @param location name of location (optional)
 	//! @param landscapeID of observation (optional)
-	void addModelRow(//const int number,
-			 const QString &olud, const QString &name, const QString &nameI18n, const QString &type,
+	void addModelRow(const QString &olud, const QString &name, const QString &nameI18n, const QString &type,
 			 const QString &ra, const QString &dec, const QString &magnitude, const QString &constellation,
 			 const QString &date, const QString &location, const QString &landscapeID);
 
@@ -120,10 +134,8 @@ private:
 
 	void saveBookmarksInObsListJsonFile(const QHash<QString, observingListItem> &bookmarksCollection);
 
-	static auto checkIfBookmarksListExists(const QVariantMap &allListsMap) -> bool;
-
 	//! Load list from JSON file
-	auto loadListFromJson(const QVariantMap &map, const QString& listOlud) -> QVariantList;
+	QVariantList loadListFromJson(const QVariantMap &map, const QString& listOlud);
 
 	//! Populate list names into combo box
 	void populateListNameInComboBox(QVariantMap map);
@@ -140,6 +152,7 @@ private:
 	//! get the defaultListOlud from Json file
 	QString extractDefaultListOludFromJsonFile();
 
+	static bool checkIfBookmarksListExists(const QVariantMap &allListsMap);
 signals:
 	void flagUseJDChanged(bool b);
 	void flagUseLandscapeChanged(bool b);
@@ -170,7 +183,7 @@ private slots:
 
 	void obsListCreateEditDialogClosed();
 
-	void obsListExitButtonPressed();
+	// void obsListExitButtonPressed();
 
 	void obsListDeleteButtonPressed();
 

@@ -97,7 +97,8 @@ void ObsListDialog::createDialogContent()
 	connect(ui->obsListEditListButton,       SIGNAL(clicked()), this, SLOT(obsListEditButtonPressed()));
 	connect(ui->obsListClearHighlightButton, SIGNAL(clicked()), this, SLOT(obsListClearHighLightButtonPressed()));
 	connect(ui->obsListHighlightAllButton,   SIGNAL(clicked()), this, SLOT(obsListHighLightAllButtonPressed()));
-	connect(ui->obsListExitButton,           SIGNAL(clicked()), this, SLOT(obsListExitButtonPressed()));
+	//connect(ui->obsListExitButton,           SIGNAL(clicked()), this, SLOT(obsListExitButtonPressed())); // No need for an extra button! Just use close.
+	connect(ui->closeStelWindow,             SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->obsListDeleteButton,         SIGNAL(clicked()), this, SLOT(obsListDeleteButtonPressed()));
 	connect(ui->obsListTreeView,             SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectAndGoToObject(QModelIndex)));
 
@@ -130,7 +131,6 @@ void ObsListDialog::createDialogContent()
 	//Enable the sort for columns
 	ui->obsListTreeView->setSortingEnabled(true);
 
-
 	//By default buttons are disable
 	ui->obsListEditListButton->setEnabled(false);
 	ui->obsListHighlightAllButton->setEnabled(false);
@@ -139,7 +139,9 @@ void ObsListDialog::createDialogContent()
 
 	// We hide the closeStelWindow to have only two possibilities to close the dialog:
 	// Exit
-	ui->closeStelWindow->setHidden(true);
+	// GZ: Actually we don't need an extra exit button! The close button is available in all other dialogs.
+	// ui->closeStelWindow->setHidden(true);
+	ui->obsListExitButton->setHidden(true);
 
 	// For no regression we must take into account the legacy bookmarks file
 	QFile jsonBookmarksFile(bookmarksJsonPath);
@@ -596,11 +598,12 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
 			QString sortingBy = observingListMap.value(KEY_SORTING).toString();
 			if (!sortingBy.isEmpty())
 				sortObsListTreeViewByColumnName(sortingBy);
-			jsonFile.close();
 		} catch (std::runtime_error &e) {
 			qWarning() << "[ObservingList] Load selected observing list: File format is wrong! Error: " << e.what();
-			jsonFile.close();
 		}
+
+		jsonFile.close();
+
 		// Restore selection that was active before calling this
 		if (preSelectedObject)
 			objectMgr->setSelectedObject(StelObjectP(preSelectedObject), StelModule::ReplaceSelection);
@@ -872,7 +875,13 @@ void ObsListDialog::selectAndGoToObject(QModelIndex index)
 	if (getFlagUseLandscape() && !item.landscapeID.isEmpty())
 		GETSTELMODULE(LandscapeMgr)->setCurrentLandscapeID(item.landscapeID, 0);
 	if (getFlagUseLocation() && !item.location.isEmpty())
-		core->moveObserverTo(StelApp::getInstance().getLocationMgr().locationForString(item.location));
+	{
+		StelLocation loc=StelApp::getInstance().getLocationMgr().locationForString(item.location);
+		if (loc.isValid())
+			core->moveObserverTo(loc);
+		else
+			qWarning() << "ObservingLists: Cannot retrieve valid location for" << item.location;
+	}
 	// We also use stored jd only if the checkbox JD is checked.
 	if (getFlagUseJD() && item.jd != 0.0)
 		core->setJD(item.jd);
@@ -1023,11 +1032,12 @@ void ObsListDialog::obsListDeleteButtonPressed()
 
 /*
  * Slot for button obsListExitButton
+ * Actually not required. To close the window, just use the top-right close button.
 */
-void ObsListDialog::obsListExitButtonPressed()
-{
-	this->close();
-}
+//void ObsListDialog::obsListExitButtonPressed()
+//{
+//	this->close();
+//}
 
 /*
  * Slot to manage the close of obsListCreateEditDialog.

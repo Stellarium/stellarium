@@ -605,7 +605,7 @@ void ObsListCreateEditDialog::obsListSaveButtonPressed()
 		qDebug() << "ObsListCreateEditDialog::obsListSaveButtonPressed(): isSaveAs:" << isSaveAs;
 		saveObservedObjectsInJsonFile();
 		this->close();
-		emit exitButtonClicked();
+		// emit exitButtonClicked();
 	}
 }
 
@@ -625,7 +625,7 @@ void ObsListCreateEditDialog::obsListExitButtonPressed()
 void ObsListCreateEditDialog::close()
 {
 	this->setVisible(false);
-	emit this->exitButtonClicked();
+	//emit this->exitButtonClicked();
 }
 
 /*
