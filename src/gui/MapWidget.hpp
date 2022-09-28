@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Fabien Chereau
+ * Copyright (C) 2022 Ruslan Kabatsayev
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,44 +19,41 @@
  */
 
 
-#ifndef MAPLABEL_HPP
-#define MAPLABEL_HPP
+#ifndef MAPWIDGET_HPP
+#define MAPWIDGET_HPP
 
-#include <QLabel>
+#include <QRect>
+#include <QWidget>
+#include <QPixmap>
 
-//! @class MapLabel
-//! Special QLabel that shows a world map 
-class MapLabel : public QLabel
+//! @class MapWidget
+//! Special widget that shows a world map
+class MapWidget : public QWidget
 {
 	Q_OBJECT
 
 public:
-	MapLabel(QWidget *parent = Q_NULLPTR);
-	~MapLabel() Q_DECL_OVERRIDE;
-	//! Set the current cursor position
+	MapWidget(QWidget *parent = nullptr);
+	//! Set the current marker position
 	//! @param longitude longitude in degree in range [-180;180[
 	//! @param latitude latitude in degree in range [-90;90]
-	void setCursorPos(double longitude, double latitude);
+	void setMarkerPos(double longitude, double latitude);
 
-	void setPixmap(const QPixmap &pixmap);
-	void resizePixmap();
+	void setMap(const QPixmap &map);
 	
 signals:
 	//! Signal emitted when we click on the map
 	void positionChanged(double longitude, double latitude);
 
 protected:
-	void mousePressEvent(QMouseEvent * event) Q_DECL_OVERRIDE;
-	void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
+	void mousePressEvent(QMouseEvent* event) override;
+	void paintEvent(QPaintEvent* event) override;
 
 private:
-	//QLabel* cursor;
-
+	double markerLat=0, markerLon=0;
 	QPixmap map;
-	//map without location cursor drawn on
-	QPixmap origMap;
-
-	QPixmap locCursor;
+	QPixmap locationMarker;
+	QRectF mapRect; // in device pixels
 };
 
-#endif // _MAPLABEL_HPP
+#endif // MAPWIDGET_HPP
