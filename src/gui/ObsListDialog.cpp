@@ -50,7 +50,6 @@ ObsListDialog::ObsListDialog(QObject *parent) :
 	ui(new Ui_obsListDialogForm()),
 	obsListListModel(new QStandardItemModel(0, ColumnCount)),
 	core(StelApp::getInstance().getCore()),
-	//currentJd(core->getJD()),
 	createEditDialog_instance(Q_NULLPTR)
 {
 	setObjectName("ObsListDialog");
@@ -97,7 +96,6 @@ void ObsListDialog::createDialogContent()
 	connect(ui->obsListEditListButton,       SIGNAL(clicked()), this, SLOT(obsListEditButtonPressed()));
 	connect(ui->obsListClearHighlightButton, SIGNAL(clicked()), this, SLOT(obsListClearHighLightButtonPressed()));
 	connect(ui->obsListHighlightAllButton,   SIGNAL(clicked()), this, SLOT(obsListHighLightAllButtonPressed()));
-	//connect(ui->obsListExitButton,           SIGNAL(clicked()), this, SLOT(obsListExitButtonPressed())); // No need for an extra button! Just use close.
 	connect(ui->closeStelWindow,             SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->obsListDeleteButton,         SIGNAL(clicked()), this, SLOT(obsListDeleteButtonPressed()));
 	connect(ui->obsListTreeView,             SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectAndGoToObject(QModelIndex)));
@@ -111,7 +109,7 @@ void ObsListDialog::createDialogContent()
 	connect(ui->obsListComboBox, SIGNAL(activated(int)), this, SLOT(loadSelectedObservingList(int)));
 
 	//Initialize the list of observing lists
-	//obsListListModel->setColumnCount(ColumnCount); Has been done in constructor.
+	//obsListListModel->setColumnCount(ColumnCount); //Has been done in constructor.
 	setObservingListHeaderNames();
 
 	ui->obsListTreeView->setModel(obsListListModel);
@@ -136,12 +134,6 @@ void ObsListDialog::createDialogContent()
 	ui->obsListHighlightAllButton->setEnabled(false);
 	ui->obsListClearHighlightButton->setEnabled(false);
 	ui->obsListDeleteButton->setEnabled(false);
-
-	// We hide the closeStelWindow to have only two possibilities to close the dialog:
-	// Exit
-	// GZ: Actually we don't need an extra exit button! The close button is available in all other dialogs.
-	// ui->closeStelWindow->setHidden(true);
-	ui->obsListExitButton->setHidden(true);
 
 	// For no regression we must take into account the legacy bookmarks file
 	QFile jsonBookmarksFile(bookmarksJsonPath);
@@ -194,8 +186,7 @@ void ObsListDialog::setObservingListHeaderNames()
 /*
  * Add row in the obsListListModel
 */
-void ObsListDialog::addModelRow(//const int number,
-				const QString &olud, const QString &name, const QString &nameI18n,
+void ObsListDialog::addModelRow(const QString &olud, const QString &name, const QString &nameI18n,
                                 const QString &type, const QString &ra,
                                 const QString &dec, const QString &magnitude, const QString &constellation,
 				const QString &date, const QString &location, const QString &landscapeID)
@@ -256,8 +247,15 @@ void ObsListDialog::addModelRow(//const int number,
 */
 void ObsListDialog::obsListHighLightAllButtonPressed()
 {
-	// We must keep selection for the user!
+	// We must keep selection for the user. It is not enough to store/restore the existingSelection.
+	// The QList<StelObjectP> objects are apparently volatile. We must retrieve the actual object.
 	const QList<StelObjectP>&existingSelection = objectMgr->getSelectedObject();
+	StelObject *preSelectedObject=Q_NULLPTR;
+	if (existingSelection.length()>0)
+	{
+		preSelectedObject=existingSelection[0].data();
+		qDebug() << "\t Selected object: " << existingSelection[0]->getEnglishName();
+	}
 
 	QList<Vec3d> highlights;
 	highlights.clear();
@@ -291,14 +289,17 @@ void ObsListDialog::obsListHighLightAllButtonPressed()
 		if (usablePosition)
 			highlights.append(pos);
 
-		//objectMgr->unSelect();
 		// Add labels for named highlights (name in top right corner)
 		highlightLabelIDs.append(labelMgr->labelObject(name, name, true, fontSize, color, "NE", distance));
 	}
 
 	hlMgr->fillHighlightList(highlights);
+
 	// Restore selection that was active before calling this
-	objectMgr->setSelectedObject(existingSelection, StelModule::ReplaceSelection);
+	if (preSelectedObject)
+		objectMgr->setSelectedObject(StelObjectP(preSelectedObject), StelModule::ReplaceSelection);
+	else
+		objectMgr->unSelect();
 }
 
 /*
@@ -475,7 +476,7 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
 	else
 	{
 		// We must keep selection for the user. It is not enough to store/restore the existingSelection.
-		// The QList<StelObjectP> objects are apparently volatile. WE must take out the actual object.
+		// The QList<StelObjectP> objects are apparently volatile. We must retrieve the actual object.
 		const QList<StelObjectP>&existingSelection = objectMgr->getSelectedObject();
 		StelObject *preSelectedObject=Q_NULLPTR;
 		if (existingSelection.length()>0)
@@ -490,12 +491,6 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
 
 			// Check or not default list checkbox information
 			ui->obsListIsDefaultListCheckBox->setChecked(listOlud.compare(defaultListOlud_, Qt::CaseSensitive) == 0);
-
-			//// Landscape
-			//QString landscapeId = observingListMap.value(KEY_LANDSCAPE_ID).toString();
-			//if (!landscapeId.isEmpty()) {
-			//    landscapeMgr->setCurrentLandscapeID(landscapeId);
-			//}
 
 			listOfObjects = loadListFromJson(map, listOlud);
 
@@ -519,9 +514,10 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
 						item.nameI18n = objectMap.value(QString(KEY_NAME_I18N)).toString();
 						double fov = -1.0;
 
-						// FIXME?: There was a mismatch!
-						item.type    = objectMap.value(QString(KEY_TYPE)).toString();
-						item.objtype = objectMap.value(QString(KEY_OBJECTS_TYPE)).toString();
+						// Caveat - Please make the code more readable!
+						// We assign KEY_TYPE to item.objtype and KEY_OBJECTS_TYPE to item.type.
+						item.objtype    = objectMap.value(QString(KEY_TYPE)).toString();
+						item.type = objectMap.value(QString(KEY_OBJECTS_TYPE)).toString();
 
 						item.ra  = objectMap.value(QString(KEY_RA)).toString();
 						item.dec = objectMap.value(QString(KEY_DEC)).toString();
@@ -716,7 +712,9 @@ void ObsListDialog::loadBookmarksInObservingList()
 					item.location = bookmarkData.value(KEY_LOCATION).toString();
 					// No landscape in original bookmarks. Just leave empty.
 					//item.landscapeID = bookmarkData.value(KEY_LANDSCAPE_ID).toString();
-					item.fov = bookmarkData.value(KEY_FOV).toDouble();
+					double bmFov = bookmarkData.value(KEY_FOV).toDouble();
+					if (bmFov>1.e-10) // FoV may look like 3.121251e-310, which is bogus.
+						item.fov=bmFov;
 					item.isVisibleMarker = bookmarkData.value(KEY_IS_VISIBLE_MARKER, false).toBool();
 
 					bookmarksCollection.insert(it.key(), item);
@@ -724,7 +722,6 @@ void ObsListDialog::loadBookmarksInObservingList()
 			}
 
 			saveBookmarksInObsListJsonFile(bookmarksCollection);
-			//objectMgr->unSelect();
 		}
 		catch (std::runtime_error &e)
 		{
@@ -1031,15 +1028,6 @@ void ObsListDialog::obsListDeleteButtonPressed()
 }
 
 /*
- * Slot for button obsListExitButton
- * Actually not required. To close the window, just use the top-right close button.
-*/
-//void ObsListDialog::obsListExitButtonPressed()
-//{
-//	this->close();
-//}
-
-/*
  * Slot to manage the close of obsListCreateEditDialog.
 */
 void ObsListDialog::obsListCreateEditDialogClosed()
@@ -1117,7 +1105,7 @@ void ObsListDialog::sortObsListTreeViewByColumnName(const QString &columnName)
 		{SORTING_BY_CONSTELLATION, COLUMN_NUMBER_CONSTELLATION},
 		{SORTING_BY_DATE,          COLUMN_NUMBER_DATE},
 		{SORTING_BY_LOCATION,      COLUMN_NUMBER_LOCATION},
-		{SORTING_BY_LANDSCAPE,     COLUMN_NUMBER_LANDSCAPE}
+		{SORTING_BY_LANDSCAPE_ID,  COLUMN_NUMBER_LANDSCAPE}
 	};
 	obsListListModel->sort(map.value(columnName), Qt::AscendingOrder);
 }

@@ -183,8 +183,6 @@ private slots:
 
 	void obsListCreateEditDialogClosed();
 
-	// void obsListExitButtonPressed();
-
 	void obsListDeleteButtonPressed();
 
 

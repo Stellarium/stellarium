@@ -47,7 +47,7 @@ public:
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
-	void createDialogContent() override;
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 private:
 	static ObsListCreateEditDialog *m_instance;

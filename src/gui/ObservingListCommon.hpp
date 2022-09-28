@@ -27,8 +27,8 @@ struct observingListItem
 {
 	QString name;
 	QString nameI18n;
-	QString type;
-	QString objtype;
+	QString type;         // type oriented on Stellarium's object class: Star, Planet (also for sun and moons!), Nebula, ...
+	QString objtype;      // More physical type description: star (also Sun!), planet, moon, open cluster, galaxy, region in the sky, ...
 	QString ra;
 	QString dec;
 	QString magnitude;
@@ -98,7 +98,7 @@ static constexpr char const *SORTING_BY_MAGNITUDE = "magnitude";
 static constexpr char const *SORTING_BY_CONSTELLATION = "constellation";
 static constexpr char const *SORTING_BY_DATE = "date";
 static constexpr char const *SORTING_BY_LOCATION = "location";
-static constexpr char const *SORTING_BY_LANDSCAPE = "landscape";
+static constexpr char const *SORTING_BY_LANDSCAPE_ID = "landscapeID";
 
 static constexpr int COLUMN_NUMBER_NAME = 1;
 static constexpr int COLUMN_NUMBER_NAMEI18N = 2;

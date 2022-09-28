@@ -71,7 +71,7 @@ ObsListCreateEditDialog::~ObsListCreateEditDialog() {
 }
 
 /**
- * Get instance of class
+ * Get singleton instance of class
  */
 ObsListCreateEditDialog * ObsListCreateEditDialog::Instance(std::string listUuid)
 {
@@ -164,7 +164,10 @@ void ObsListCreateEditDialog::createDialogContent()
 void ObsListCreateEditDialog::retranslate()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+		setObservingListHeaderNames();
+	}
 }
 
 /*
@@ -643,7 +646,7 @@ void ObsListCreateEditDialog::headerClicked(int index)
 		{ColumnConstellation, QString(SORTING_BY_CONSTELLATION)},
 		{ColumnDate,          QString(SORTING_BY_DATE)},
 		{ColumnLocation,      QString(SORTING_BY_LOCATION)},
-		{ColumnLandscapeID,   QString(SORTING_BY_LANDSCAPE)}};
+		{ColumnLandscapeID,   QString(SORTING_BY_LANDSCAPE_ID)}};
 	sorting=map.value(index, "");
 	qDebug() << "Sorting = " << sorting;
 }
