@@ -390,7 +390,6 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/orbitColorsDialog.ui
           gui/tonemappingDialog.ui
           gui/skylightDialog.ui
-          gui/topmost.ui
      )
 
      IF(ENABLE_SCRIPTING)
