@@ -264,40 +264,7 @@
           <number>0</number>
          </property>
          <item row="1" column="0">
-          <widget class="MapLabel" name="mapLabel">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>400</width>
-             <height>180</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>1440</width>
-             <height>720</height>
-            </size>
-           </property>
-           <property name="lineWidth">
-            <number>0</number>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="pixmap">
-            <pixmap>../../data/gui/miscWorldMap.png</pixmap>
-           </property>
-           <property name="scaledContents">
-            <bool>true</bool>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
+          <widget class="MapWidget" name="mapWidget">
           </widget>
          </item>
          <item row="1" column="1">
@@ -873,9 +840,9 @@
    <header>AngleSpinBox.hpp</header>
   </customwidget>
   <customwidget>
-   <class>MapLabel</class>
-   <extends>QLabel</extends>
-   <header>MapLabel.hpp</header>
+   <class>MapWidget</class>
+   <extends>QWidget</extends>
+   <header>MapWidget.hpp</header>
   </customwidget>
   <customwidget>
    <class>StelCloseButton</class>
