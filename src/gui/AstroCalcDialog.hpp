@@ -523,7 +523,7 @@ private:
 	//! Iteration to calculate JD of solar eclipse contacts
 	double getJDofContact(double JD, bool beginning, bool penumbral, bool external, bool outerContact);
 	//! Iteration to calculate contact times of solar eclipse
-	double getDeltaTofContact(double JD, bool beginning, bool penumbra, bool external, bool outerContact);
+	double getDeltaTimeofContact(double JD, bool beginning, bool penumbra, bool external, bool outerContact);
 	//! Geographic coordinates where solar eclipse begins/ends at sunrise/sunset
 	QPair<double, double> getRiseSetLineCoordinates(bool first, double x, double y, double d, double L, double mu);
 	//! Geographic coordinates where maximum solar eclipse occurs at sunrise/sunset

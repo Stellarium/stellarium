@@ -3450,7 +3450,7 @@ LocalSEparams localSolarEclipse(double JD,int contact,bool central) {
 	return result;
 }
 
-double AstroCalcDialog::getDeltaTofContact(double JD, bool beginning, bool penumbra, bool external, bool outerContact)
+double AstroCalcDialog::getDeltaTimeofContact(double JD, bool beginning, bool penumbra, bool external, bool outerContact)
 {
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
@@ -3508,7 +3508,7 @@ double AstroCalcDialog::getJDofContact(double JD, bool beginning, bool penumbra,
 	int iterations = 0;
 	while (std::abs(dt)>(0.1/86400.) && (iterations < 10))
 	{
-		dt = getDeltaTofContact(JD,beginning,penumbra,external,outerContact);
+		dt = getDeltaTimeofContact(JD,beginning,penumbra,external,outerContact);
 		JD += dt/24.;
 		iterations++;
 	}
