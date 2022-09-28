@@ -740,6 +740,9 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 		ret.planetName = "Earth";
 		return ret;
 	}
+	// All attempts to decode have failed. Return invalid location with this name.
+	ret.name=s;
+	ret.planetName = "Earth";
 	ret.role = '!';
 	return ret;
 }
