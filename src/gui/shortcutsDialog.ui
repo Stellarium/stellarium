@@ -10,6 +10,9 @@
     <height>436</height>
    </rect>
   </property>
+  <property name="focusPolicy">
+   <enum>Qt::StrongFocus</enum>
+  </property>
   <property name="windowTitle">
    <string notr="true"/>
   </property>
@@ -109,6 +112,9 @@
           <height>16</height>
          </size>
         </property>
+        <property name="focusPolicy">
+         <enum>Qt::ClickFocus</enum>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -203,9 +209,12 @@
           </widget>
          </item>
          <item row="1" column="2">
-          <widget class="QPushButton" name="primaryBackspaceButton">
+          <widget class="SpacePushButton" name="primaryBackspaceButton">
            <property name="enabled">
             <bool>false</bool>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
            </property>
            <property name="icon">
             <iconset resource="../../data/gui/guiRes.qrc">
@@ -215,9 +224,12 @@
           </widget>
          </item>
          <item row="2" column="3">
-          <widget class="QPushButton" name="restoreDefaultsButton">
+          <widget class="SpacePushButton" name="restoreDefaultsButton">
            <property name="enabled">
             <bool>false</bool>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
            </property>
            <property name="text">
             <string>Restore Defaults</string>
@@ -225,9 +237,12 @@
           </widget>
          </item>
          <item row="1" column="3">
-          <widget class="QPushButton" name="applyButton">
+          <widget class="SpacePushButton" name="applyButton">
            <property name="enabled">
             <bool>false</bool>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
            </property>
            <property name="text">
             <string>Apply</string>
@@ -235,9 +250,12 @@
           </widget>
          </item>
          <item row="2" column="2">
-          <widget class="QPushButton" name="altBackspaceButton">
+          <widget class="SpacePushButton" name="altBackspaceButton">
            <property name="enabled">
             <bool>false</bool>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
            </property>
            <property name="icon">
             <iconset resource="../../data/gui/guiRes.qrc">
@@ -261,12 +279,15 @@
           </widget>
          </item>
          <item row="1" column="4" rowspan="2">
-          <widget class="QPushButton" name="restoreAllDefaultsButton">
+          <widget class="SpacePushButton" name="restoreAllDefaultsButton">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
            </property>
            <property name="text">
             <string>Restore All Defaults</string>
@@ -301,7 +322,24 @@
    <extends>QPushButton</extends>
    <header>gui/StelCloseButton.hpp</header>
   </customwidget>
+  <customwidget>
+   <class>SpacePushButton</class>
+   <extends>QPushButton</extends>
+   <header>SpacePushButton.hpp</header>
+  </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>shortcutsTreeView</tabstop>
+  <tabstop>lineEditSearch</tabstop>
+  <tabstop>primaryShortcutEdit</tabstop>
+  <tabstop>primaryBackspaceButton</tabstop>
+  <tabstop>altShortcutEdit</tabstop>
+  <tabstop>altBackspaceButton</tabstop>
+  <tabstop>applyButton</tabstop>
+  <tabstop>restoreDefaultsButton</tabstop>
+  <tabstop>restoreAllDefaultsButton</tabstop>
+  <tabstop>closeStelWindow</tabstop>
+ </tabstops>
  <resources>
   <include location="../../data/gui/guiRes.qrc"/>
  </resources>
