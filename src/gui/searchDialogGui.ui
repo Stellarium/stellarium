@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>505</width>
-    <height>437</height>
+    <height>444</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -189,8 +189,16 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="font">
-             <font/>
+             <font>
+              <pointsize>15</pointsize>
+             </font>
             </property>
             <property name="focusPolicy">
              <enum>Qt::StrongFocus</enum>
@@ -211,26 +219,13 @@
           </item>
           <item>
            <widget class="QPushButton" name="pushButtonGotoSearchSkyObject">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>45</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>30</height>
-             </size>
-            </property>
             <property name="focusPolicy">
              <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="icon">
+             <iconset resource="../../data/gui/guiRes.qrc">
+              <normaloff>:/graphicGui/uibtSearch.png</normaloff>
+              <disabledoff>:/graphicGui/uibtSearch.png</disabledoff>:/graphicGui/uibtSearch.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -886,6 +881,31 @@
        <item>
         <widget class="QFrame" name="j2000Frame">
          <layout class="QGridLayout" name="gridLayout_2">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="3" column="0" colspan="2">
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
           <item row="0" column="0" colspan="2">
            <layout class="QHBoxLayout" name="coordinateSystemLayout">
             <item>
@@ -900,63 +920,19 @@
             </item>
            </layout>
           </item>
-          <item row="5" column="0" colspan="2">
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
+          <item row="1" column="0" colspan="2">
+           <layout class="QGridLayout" name="coordinates">
+            <property name="topMargin">
+             <number>5</number>
             </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="1" column="1">
-           <layout class="QVBoxLayout" name="AxisYLayout">
-            <item>
+            <item row="0" column="1">
              <widget class="QLabel" name="AxisYLabel">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="AngleSpinBox" name="AxisYSpinBox">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="4" column="0" colspan="2">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Note: this tool doesn't apply the refraction correction for coordinates.</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <layout class="QVBoxLayout" name="AxisXLayout">
-            <item>
-             <widget class="QLabel" name="AxisXLabel">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item>
+            <item row="1" column="0">
              <widget class="AngleSpinBox" name="AxisXSpinBox">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -966,31 +942,50 @@
               </property>
              </widget>
             </item>
+            <item row="1" column="1">
+             <widget class="AngleSpinBox" name="AxisYSpinBox">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="AxisXLabel">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QPushButton" name="goPushButton">
+              <property name="toolTip">
+               <string>Go to position</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../data/gui/guiRes.qrc">
+                <normaloff>:/graphicGui/uibtProcess.png</normaloff>
+                <disabledoff>:/graphicGui/uibtProcess.png</disabledoff>:/graphicGui/uibtProcess.png</iconset>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
-          <item row="3" column="0" colspan="2">
-           <widget class="Line" name="line">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>1</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>1</height>
-             </size>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
           <item row="2" column="0" colspan="2">
-           <widget class="QPushButton" name="goPushButton">
+           <widget class="QLabel" name="label">
             <property name="text">
-             <string>Go</string>
+             <string>Note: this tool doesn't apply the refraction correction for coordinates.</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -1326,8 +1321,6 @@
  <tabstops>
   <tabstop>tabWidget</tabstop>
   <tabstop>lineEditSearchSkyObject</tabstop>
-  <tabstop>AxisXSpinBox</tabstop>
-  <tabstop>AxisYSpinBox</tabstop>
  </tabstops>
  <resources>
   <include location="../../data/gui/guiRes.qrc"/>
