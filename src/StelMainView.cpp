@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelGuiItems.hpp"
 #define MOUSE_TRACKING
 
 #include "StelMainView.hpp"
@@ -1017,7 +1018,13 @@ void StelMainView::fullScreenExclusive()
 	else
 		topMost->show();
 
-	auto verbose=qApp->property("verbose").toBool();
+	const auto button=dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->buttonFullscreen;
+	const auto pixOnExclusive=QPixmap(":/graphicGui/btFullScreen-off.png");
+	const auto pixOnManaged=QPixmap(":/graphicGui/btFullScreen-on.png");
+	button->pixOn=exclusive?pixOnExclusive:pixOnManaged;
+	button->updateIcon();
+
+	const auto verbose=qApp->property("verbose").toBool();
 	if (verbose)
 		qDebug() << "running" << (exclusive?"exclusive":"managed") << "fullscreen";
 }
@@ -1411,6 +1418,9 @@ void StelMainView::setFullScreen(bool b)
 	}
 	else
 	{
+		const auto button=dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->buttonFullscreen;
+		const auto pixOnManaged=QPixmap(":/graphicGui/btFullScreen-on.png");
+		button->pixOn=pixOnManaged;
 		topMost->hide();
 		showNormal();
 		// Not enough. If we had started in fullscreen, the inner part of the window is at 0/0, with the frame extending to top/left off screen.

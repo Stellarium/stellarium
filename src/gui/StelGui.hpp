@@ -79,7 +79,8 @@ class StelGui : public QObject, public StelGuiBase
 
 public:
 	friend class ViewDialog;
-	
+	friend class StelMainView;
+
 	StelGui();
 	virtual ~StelGui() Q_DECL_OVERRIDE;
 

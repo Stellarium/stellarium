@@ -66,6 +66,7 @@ class StelButton : public QObject, public QGraphicsPixmapItem
 {
 	friend class BottomStelBar;
 	friend class LeftStelBar;
+	friend class StelMainView;
 	Q_OBJECT
 public:
 	//! Constructor
