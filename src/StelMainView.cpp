@@ -1019,12 +1019,6 @@ void StelMainView::fullScreenExclusive()
 	else
 		topMost->show();
 
-	const auto button=dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->buttonFullscreen;
-	const auto pix=button->pixOn;
-	button->pixOn=button->pixNoChange;
-	button->pixNoChange=pix;
-	button->updateIcon();
-
 	const auto verbose=qApp->property("verbose").toBool();
 	if (verbose)
 		qDebug() << "running" << (exclusive?"exclusive":"managed") << "fullscreen";
@@ -1410,9 +1404,8 @@ void StelMainView::initTitleI18n()
 	setWindowTitle(appNameI18n);
 }
 
-void StelMainView::setFullScreen(int b)
+void StelMainView::setFullScreen(bool b)
 {
-	qDebug() << "setFullScreen" << b;
 	if (b)
 	{
 		topMost->show();

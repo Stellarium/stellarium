@@ -324,8 +324,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 	pxmapOn = QPixmap(":/graphicGui/btFullScreen-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btFullScreen-off.png");
-	pxmapDefault = QPixmap(":/graphicGui/btTimePause-on.png");
-	buttonFullscreen = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapDefault, pxmapGlow32x32, "actionSet_Full_Screen_Global", false, "actionSet_Full_Screen_Exclusive");
+	buttonFullscreen = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionSet_Full_Screen_Global", false, "actionSet_Full_Screen_Exclusive");
 	buttonFullscreen->setTriggerOnRelease(true);
 	skyGui->buttonBar->addButton(buttonFullscreen, "060-othersGroup");
 
