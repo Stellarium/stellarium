@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>505</width>
-    <height>416</height>
+    <height>437</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -886,18 +886,32 @@
        <item>
         <widget class="QFrame" name="j2000Frame">
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="2" column="0" colspan="2">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Note: this tool doesn't apply the refraction correction for coordinates.</string>
+          <item row="0" column="0" colspan="2">
+           <layout class="QHBoxLayout" name="coordinateSystemLayout">
+            <item>
+             <widget class="QLabel" name="coordinateSystemLabel">
+              <property name="text">
+               <string>Coordinate system:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="coordinateSystemComboBox"/>
+            </item>
+           </layout>
+          </item>
+          <item row="5" column="0" colspan="2">
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
             </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
             </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
+           </spacer>
           </item>
           <item row="1" column="1">
            <layout class="QVBoxLayout" name="AxisYLayout">
@@ -920,19 +934,18 @@
             </item>
            </layout>
           </item>
-          <item row="0" column="0" colspan="2">
-           <layout class="QHBoxLayout" name="coordinateSystemLayout">
-            <item>
-             <widget class="QLabel" name="coordinateSystemLabel">
-              <property name="text">
-               <string>Coordinate system:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="coordinateSystemComboBox"/>
-            </item>
-           </layout>
+          <item row="4" column="0" colspan="2">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Note: this tool doesn't apply the refraction correction for coordinates.</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
           <item row="1" column="0">
            <layout class="QVBoxLayout" name="AxisXLayout">
@@ -956,17 +969,30 @@
            </layout>
           </item>
           <item row="3" column="0" colspan="2">
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
+           <widget class="Line" name="line">
+            <property name="minimumSize">
              <size>
-              <width>20</width>
-              <height>40</height>
+              <width>0</width>
+              <height>1</height>
              </size>
             </property>
-           </spacer>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>1</height>
+             </size>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="2">
+           <widget class="QPushButton" name="goPushButton">
+            <property name="text">
+             <string>Go</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -1217,7 +1243,6 @@
               </property>
               <property name="font">
                <font>
-                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -1288,14 +1313,14 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>AngleSpinBox</class>
-   <extends>QSpinBox</extends>
-   <header>AngleSpinBox.hpp</header>
-  </customwidget>
-  <customwidget>
    <class>StelCloseButton</class>
    <extends>QPushButton</extends>
    <header>gui/StelCloseButton.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>AngleSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>AngleSpinBox.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>
