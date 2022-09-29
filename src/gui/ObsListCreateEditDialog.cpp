@@ -873,7 +873,7 @@ void ObsListCreateEditDialog::nameOfListTextChange(const QString &newText)
 	ui->obsListErrorMessage->setHidden(true);
 	//delete whitespace -> no list with only white space as name
 	QString listName = newText.trimmed();
-	qDebug() << "listName:" << listName;
+	//qDebug() << "listName:" << listName;
 	ui->obsListSaveButton->setEnabled(!(listName.isEmpty()));
 }
 
