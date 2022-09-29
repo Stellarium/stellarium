@@ -352,6 +352,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/ObsListDialog.cpp
           gui/ObsListCreateEditDialog.hpp
           gui/ObsListCreateEditDialog.cpp
+          gui/ObservingListCommon.hpp
           gui/StelDialog.hpp
           gui/StelDialog_p.hpp
           gui/StelDialog.cpp

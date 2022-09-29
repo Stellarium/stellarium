@@ -190,9 +190,16 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayoutCheckBoxRacDecFov">
            <item>
+            <widget class="QLabel" name="alsoStoreLabel">
+             <property name="text">
+              <string>Also store: </string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QCheckBox" name="obsListCoordinatesCheckBox">
              <property name="toolTip">
-              <string>Add equatorial coordinates (J2000.0)</string>
+              <string>Store with equatorial coordinates (J2000.0)</string>
              </property>
              <property name="toolTipDuration">
               <number>3</number>
@@ -203,9 +210,42 @@
             </widget>
            </item>
            <item>
+            <widget class="QCheckBox" name="obsListJDCheckBox">
+             <property name="toolTip">
+              <string>Store with current JD</string>
+             </property>
+             <property name="text">
+              <string>Date</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="obsListLocationCheckBox">
+             <property name="toolTip">
+              <string>Store with current location</string>
+             </property>
+             <property name="text">
+              <string>Location</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="obsListLandscapeCheckBox">
+             <property name="toolTip">
+              <string>Store with current landscape</string>
+             </property>
+             <property name="toolTipDuration">
+              <number>3</number>
+             </property>
+             <property name="text">
+              <string>Landscape</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QCheckBox" name="obsListFovCheckBox">
              <property name="toolTip">
-              <string>Add field of view</string>
+              <string>Store with current field of view</string>
              </property>
              <property name="toolTipDuration">
               <number>3</number>
@@ -314,7 +354,7 @@
            <item>
             <widget class="QPushButton" name="obsListExitButton">
              <property name="text">
-              <string>Exit</string>
+              <string>Cancel</string>
              </property>
             </widget>
            </item>
@@ -371,19 +411,6 @@
            </size>
           </property>
          </spacer>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="obsListLandscapeCheckBox">
-          <property name="toolTip">
-           <string>Add landscape</string>
-          </property>
-          <property name="toolTipDuration">
-           <number>3</number>
-          </property>
-          <property name="text">
-           <string>Landscape</string>
-          </property>
-         </widget>
         </item>
        </layout>
       </item>
