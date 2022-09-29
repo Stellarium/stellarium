@@ -44,6 +44,7 @@ class QSettings;
 //! It is the class creating the singleton GL Widget, the main StelApp instance as well as the main GUI.
 class StelMainView : public QGraphicsView
 {
+	friend class StelGui;
 	friend class StelGuiItem;
 	friend class StelRootItem;
 	friend class StelGraphicsScene;

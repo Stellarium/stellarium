@@ -324,7 +324,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 	pxmapOn = QPixmap(":/graphicGui/btFullScreen-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btFullScreen-off.png");
-	buttonFullscreen = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionSet_Full_Screen_Global", false, "actionSet_Full_Screen_Exclusive");
+	pxmapDefault = QPixmap(":/graphicGui/btFullScreen-exclusive.png");
+	buttonFullscreen = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapDefault, pxmapGlow32x32, "actionSet_Full_Screen_Global", false, false, "actionSet_Full_Screen_Exclusive");
 	buttonFullscreen->setTriggerOnRelease(true);
 	skyGui->buttonBar->addButton(buttonFullscreen, "060-othersGroup");
 
@@ -589,7 +590,14 @@ void StelGui::update()
 	if (getAction("actionShow_Night_Mode")->isChecked() != flag)
 		getAction("actionShow_Night_Mode")->setChecked(flag);
 
-	flag = StelMainView::getInstance().isFullScreen();
+	const auto &stel=StelMainView::getInstance();
+	flag = stel.isFullScreen();
+	const auto exclusive=!stel.topMost->isVisible();
+	if (buttonFullscreen->secondState != exclusive)
+	{
+		buttonFullscreen->secondState=exclusive;
+		buttonFullscreen->updateIcon();
+	}
 	if (getAction("actionSet_Full_Screen_Global")->isChecked() != flag)
 		getAction("actionSet_Full_Screen_Global")->setChecked(flag);
 
@@ -1129,7 +1137,8 @@ void StelGui::setFlagShowFullscreenButton(bool b)
 				QPixmap pxmapGlow32x32(":/graphicGui/miscGlow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btFullScreen-on.png");
 				QPixmap pxmapOff(":/graphicGui/btFullScreen-off.png");
-				buttonFullscreen = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionSet_Full_Screen_Global", false, "actionSet_Full_Screen_Exclusive");
+				QPixmap pxmapExclusive(":/graphicGui/btFullScreen-exclusive.png");
+				buttonFullscreen = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapExclusive, pxmapGlow32x32, "actionSet_Full_Screen_Global", false, false, "actionSet_Full_Screen_Exclusive");
 			}
 			getButtonBar()->addButton(buttonFullscreen, "060-othersGroup");
 		} else {

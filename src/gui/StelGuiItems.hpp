@@ -64,6 +64,7 @@ private:
 //! A Button Graphicsitem for use in Stellarium's graphic widgets
 class StelButton : public QObject, public QGraphicsPixmapItem
 {
+	friend class StelGui;
 	friend class BottomStelBar;
 	friend class LeftStelBar;
 	Q_OBJECT
@@ -106,8 +107,9 @@ public:
 		   const QPixmap& pixHover,
 		   const QString& actionId=QString(),
 		   bool noBackground=false,
-		   bool isTristate=true);
-	
+		   bool isTristate=true,
+		   const QString& otherActionId="");
+
 	//! Button states
 	enum {ButtonStateOff = 0, ButtonStateOn = 1, ButtonStateNoChange = 2};
 
@@ -181,6 +183,7 @@ private:
 	QPixmap scaledCurrentPixmap;
 
 	int checked;
+	bool secondState;
 	bool flagChangeFocus;
 
 	QTimeLine* timeLine;
