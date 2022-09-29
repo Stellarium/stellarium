@@ -1020,9 +1020,9 @@ void StelMainView::fullScreenExclusive()
 		topMost->show();
 
 	const auto button=dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->buttonFullscreen;
-	const auto pixOnExclusive=QPixmap(":/graphicGui/btFullScreen-off.png");
-	const auto pixOnManaged=QPixmap(":/graphicGui/btFullScreen-on.png");
-	button->pixOn=exclusive?pixOnExclusive:pixOnManaged;
+	const auto pix=button->pixOn;
+	button->pixOn=button->pixNoChange;
+	button->pixNoChange=pix;
 	button->updateIcon();
 
 	const auto verbose=qApp->property("verbose").toBool();
@@ -1410,8 +1410,9 @@ void StelMainView::initTitleI18n()
 	setWindowTitle(appNameI18n);
 }
 
-void StelMainView::setFullScreen(bool b)
+void StelMainView::setFullScreen(int b)
 {
+	qDebug() << "setFullScreen" << b;
 	if (b)
 	{
 		topMost->show();
@@ -1419,9 +1420,6 @@ void StelMainView::setFullScreen(bool b)
 	}
 	else
 	{
-		const auto button=dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->buttonFullscreen;
-		const auto pixOnManaged=QPixmap(":/graphicGui/btFullScreen-on.png");
-		button->pixOn=pixOnManaged;
 		topMost->hide();
 		showNormal();
 		// Not enough. If we had started in fullscreen, the inner part of the window is at 0/0, with the frame extending to top/left off screen.

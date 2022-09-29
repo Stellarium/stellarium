@@ -49,7 +49,7 @@ class StelMainView : public QGraphicsView
 	friend class StelGraphicsScene;
 	friend class NightModeGraphicsEffect;
 	Q_OBJECT
-	Q_PROPERTY(bool fullScreen                 READ isFullScreen                  WRITE setFullScreen                 NOTIFY fullScreenChanged)
+	Q_PROPERTY(int fullScreen                  READ isFullScreen                  WRITE setFullScreen                 NOTIFY fullScreenChanged)
 	Q_PROPERTY(bool flagInvertScreenShotColors READ getFlagInvertScreenShotColors WRITE setFlagInvertScreenShotColors NOTIFY flagInvertScreenShotColorsChanged)
 	Q_PROPERTY(bool flagScreenshotDateFileName READ getFlagScreenshotDateFileName WRITE setFlagScreenshotDateFileName NOTIFY flagScreenshotDateFileNameChanged)
 	Q_PROPERTY(QString screenShotFileMask      READ getScreenshotFileMask         WRITE setScreenshotFileMask         NOTIFY screenshotFileMaskChanged)
@@ -112,7 +112,7 @@ public:
 public slots:
 
 	//! Set whether fullscreen is activated or not
-	void setFullScreen(bool);
+	void setFullScreen(int);
 
 	//! Return focus to the sky item.  To be used when we close a dialog.
 	void focusSky();
