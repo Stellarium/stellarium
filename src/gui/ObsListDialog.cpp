@@ -674,6 +674,8 @@ QVariantList ObsListDialog::loadListFromJson(const QVariantMap &map, const QStri
 */
 void ObsListDialog::loadBookmarksInObservingList()
 {
+	qDebug() << "LOADING OLD BOOKMARKS...";
+
 	QHash<QString, observingListItem> bookmarksCollection;
 	QVariantMap map;
 
@@ -683,7 +685,7 @@ void ObsListDialog::loadBookmarksInObservingList()
 	}
 	else
 	{
-		const double currentJD=core->getJD(); // Restore at end
+		const double currentJD=core->getJDOfLastJDUpdate();// Restore at end
 		const qint64 millis = core->getMilliSecondsOfLastJDUpdate();
 
 		// We must keep selection for the user!
