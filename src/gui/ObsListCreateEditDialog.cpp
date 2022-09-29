@@ -17,16 +17,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#include <QDateTime>
 #include <QDir>
 #include <QFileDialog>
 #include <QUuid>
 #include <StelTranslator.hpp>
-#include <utility>
-#include <Planet.hpp>
-#include <StelOBJ.hpp>
 #include <QMessageBox>
-#include <QRegularExpression>
 
 #include "NebulaMgr.hpp"
 #include "StelCore.hpp"
@@ -44,14 +39,14 @@
 
 ObsListCreateEditDialog *ObsListCreateEditDialog::m_instance = nullptr;
 
-ObsListCreateEditDialog::ObsListCreateEditDialog(std::string listUuid) :
+ObsListCreateEditDialog::ObsListCreateEditDialog(const QString &listUuid) :
 	StelDialog("ObservingListCreateEdit"),
 	ui(new Ui_obsListCreateEditDialogForm()),
 	isCreationMode(false),
 	isSaveAs(false),
 	obsListListModel(new QStandardItemModel(0, ColumnCount)),
 	core(StelApp::getInstance().getCore()),
-	listOlud_(std::move(listUuid)),
+	listOlud_(listUuid),
 	sorting("")
 {
 	objectMgr = GETSTELMODULE(StelObjectMgr);
@@ -73,10 +68,10 @@ ObsListCreateEditDialog::~ObsListCreateEditDialog() {
 /**
  * Get singleton instance of class
  */
-ObsListCreateEditDialog * ObsListCreateEditDialog::Instance(std::string listUuid)
+ObsListCreateEditDialog * ObsListCreateEditDialog::Instance(const QString &listUuid)
 {
 	if (!m_instance)
-		m_instance = new ObsListCreateEditDialog(std::move(listUuid));
+		m_instance = new ObsListCreateEditDialog(listUuid);
 	return m_instance;
 }
 
@@ -141,7 +136,7 @@ void ObsListCreateEditDialog::createDialogContent()
 	ui->nameOfListLineEdit->setText(QString(ui->nameOfListLineEdit->text()).trimmed());
 	ui->obsListSaveButton->setEnabled(!(ui->nameOfListLineEdit->text().isEmpty()));
 
-	if (listOlud_.empty())
+	if (listOlud_.isEmpty())
 	{
 		// case of creation mode
 		isCreationMode = true;
@@ -406,7 +401,7 @@ void ObsListCreateEditDialog::saveObservedObjectsInJsonFile()
 	try {
 		QVariantMap mapFromJsonFile; // Maps the whole JSON file
 		QVariantMap allListsMap;     // Extracts just the observingLists, not the global metadata of the JSON file
-		const QString oludQs = QString::fromStdString(this->listOlud_);
+		const QString oludQs = this->listOlud_;
 		const QVariantMap currentList = allListsMap.value(oludQs).toMap();
 		if (jsonFile.size() > 0)
 		{
@@ -460,7 +455,7 @@ void ObsListCreateEditDialog::saveObservedObjectsInJsonFile()
 		observingListDataList.insert(QString(KEY_SORTING), (sorting.isEmpty() ? existingSorting : sorting));
 
 		// Olud
-		QString oblListOlud = (isCreationMode || isSaveAs) ? QUuid::createUuid().toString() : QString::fromStdString(listOlud_);
+		QString oblListOlud = (isCreationMode || isSaveAs) ? QUuid::createUuid().toString() : listOlud_;
 
 		// Default list
 		if (ui->obsListDefaultListCheckBox->isChecked())
@@ -471,7 +466,7 @@ void ObsListCreateEditDialog::saveObservedObjectsInJsonFile()
 			if (defaultListUuid.isEmpty())
 				mapFromJsonFile.insert(KEY_DEFAULT_LIST_OLUD, "");
 			else
-				if (QString::compare(defaultListUuid, QString::fromStdString(listOlud_), Qt::CaseSensitive) == 0)
+				if (QString::compare(defaultListUuid, listOlud_, Qt::CaseSensitive) == 0)
 					mapFromJsonFile.insert(KEY_DEFAULT_LIST_OLUD, "");
 		}
 
@@ -538,7 +533,7 @@ void ObsListCreateEditDialog::obsListImportListButtonPresssed()
 				QVariantMap observingListMap = map.value(QString(KEY_OBSERVING_LISTS)).toMap();
 				if (!observingListMap.isEmpty() && observingListMap.size() == 1)
 					//listOlud_ = observingListMap.keys().at(0).toStdString();
-					listOlud_ = observingListMap.firstKey().toStdString();
+					listOlud_ = observingListMap.firstKey();
 				else
 				{
 					qWarning() << "[ObservingList Creation/Edition import] there is no list or more than one list:" << observingListMap.size();
@@ -558,7 +553,7 @@ void ObsListCreateEditDialog::obsListImportListButtonPresssed()
 				if (!bookmarksListMap.isEmpty())
 				{
 					//listOlud_ = bookmarksListMap.keys().at(0).toStdString();
-					listOlud_ = bookmarksListMap.firstKey().toStdString();
+					listOlud_ = bookmarksListMap.firstKey();
 					QString originalobservingListJsonPath = observingListJsonPath;
 					observingListJsonPath = fileToImportJsonPath;
 					loadBookmarksInObservingList();
@@ -677,30 +672,21 @@ void ObsListCreateEditDialog::loadObservingList()
 
 			// Get the default list uuid
 			QString defaultListOlud = map.value(KEY_DEFAULT_LIST_OLUD).toString();
-			if (defaultListOlud.toStdString() == listOlud_)
+			if (defaultListOlud == listOlud_)
 				ui->obsListDefaultListCheckBox->setChecked(true);
 
 			observingListItemCollection.clear();
-			const QString keyOlud = QString::fromStdString(listOlud_);
+			const QString keyOlud = listOlud_;
 			QVariantMap observingListMap = map.value(QString(KEY_OBSERVING_LISTS)).toMap().value(keyOlud).toMap();
 			QVariantList listOfObjects;
 
-			QString listName = observingListMap.value(QString(KEY_NAME)).toString();
-
 			// List name
-			currentListName = listName;
-			ui->nameOfListLineEdit->setText(listName);
+			currentListName = observingListMap.value(QString(KEY_NAME)).toString();
+			ui->nameOfListLineEdit->setText(currentListName);
 
 			// List description
 			QString listDescription = observingListMap.value(QString(KEY_DESCRIPTION)).toString();
 			ui->descriptionLineEdit->setText(listDescription);
-
-			// FIXME: Misunderstanding?
-			//// Landscape
-			//QString landscape = observingListMap.value(QString(KEY_LANDSCAPE_ID)).toString();
-			//if (!landscape.isEmpty()) {
-			//	ui->obsListLandscapeCheckBox->setChecked(true);
-			//}
 
 			if (observingListMap.value(QString(KEY_OBJECTS)).canConvert<QVariantList>())
 			{
@@ -768,10 +754,6 @@ void ObsListCreateEditDialog::loadObservingList()
 					return;
 				}
 			}
-
-			//objectMgr->unSelect();
-			//qDebug() << "ObsListCreateEditDialog::loadObservingList() Called unselect";
-
 		} catch (std::runtime_error &e) {
 			qWarning() << "[ObservingList Creation/Edition] File format is wrong! Error: " << e.what();
 			return;
@@ -786,13 +768,10 @@ void ObsListCreateEditDialog::loadObservingList()
 void ObsListCreateEditDialog::loadBookmarksInObservingList() {
 	// We must keep selection for the user!
 	const QList<StelObjectP>&existingSelection = objectMgr->getSelectedObject();
-	StelObject *preSelectedObject=Q_NULLPTR;
-	qDebug() << "ObsListCreateEditDialog::loadBookmarksInObservingList(): Remember selection of length"
-		 << existingSelection.length();
+	QList<StelObjectP> existingSelectionToRestore;
 	if (existingSelection.length()>0)
 	{
-		preSelectedObject=existingSelection[0].data();
-		qDebug() << "\t Selected object: " << existingSelection[0]->getEnglishName();
+		existingSelectionToRestore.append(existingSelection.at(0));
 	}
 
 	QVariantMap map;
@@ -869,8 +848,7 @@ void ObsListCreateEditDialog::loadBookmarksInObservingList() {
 						StelLocation loc=StelApp::getInstance().getLocationMgr().locationForString(item.location);
 						LocationStr=loc.name;
 					}
-					addModelRow(//lastRow,
-						    objectUuid,
+					addModelRow(objectUuid,
 						    item.name,
 						    item.nameI18n,
 						    item.objtype,
@@ -880,35 +858,26 @@ void ObsListCreateEditDialog::loadBookmarksInObservingList() {
 						    item.constellation,
 						    dateStr,
 						    LocationStr,
-						    item.landscapeID
-						    );
+						    item.landscapeID);
 
 					observingListItemCollection.insert(objectUuid, item);
 				}
 			}
-			//objectMgr->unSelect();
 		} catch (std::runtime_error &e) {
 			qWarning() << "[ObservingList] Load bookmarks in observing list: File format is wrong! Error: " << e.what();
 		}
 	}
 	// Restore selection that was active before calling this
-
 	qDebug() << "ObsListCreateEditDialog::loadBookmarksInObservingList(): Restore selection of length"
 		 << existingSelection.length();
 	if (existingSelection.length()>0)
 		qDebug() << "\t Selected object: " << existingSelection[0]->getEnglishName();
 
-	//objectMgr->setSelectedObject(existingSelection, StelModule::ReplaceSelection);
-	if (preSelectedObject)
-	{
-		qDebug() << "We have a single preseleced object: " << preSelectedObject->getEnglishName();
-		objectMgr->setSelectedObject(StelObjectP(preSelectedObject), StelModule::ReplaceSelection);
-	}
+	// Restore selection that was active before calling this
+	if (existingSelectionToRestore.length()>0)
+		objectMgr->setSelectedObject(existingSelectionToRestore, StelModule::ReplaceSelection);
 	else
-	{
-		qDebug() << "No object had been selected to begin with. Unselect()";
 		objectMgr->unSelect();
-	}
 
 	core->setJD(currentJD);
 	core->setMilliSecondsOfLastJDUpdate(millis); // restore millis.
@@ -930,9 +899,9 @@ void ObsListCreateEditDialog::nameOfListTextChange(const QString &newText)
 /*
  * Setter for listName
  */
-void ObsListCreateEditDialog::setListName(QList<QString> listName)
+void ObsListCreateEditDialog::setListName(const QList<QString> &listName)
 {
-	this->listNames_ = std::move(listName);
+	this->listNames_ = listName;
 }
 
 /*

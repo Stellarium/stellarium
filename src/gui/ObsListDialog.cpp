@@ -39,11 +39,6 @@
 #include "LabelMgr.hpp"
 
 #include "ui_obsListDialog.h"
-#include <QSortFilterProxyModel>
-#include <utility>
-
-using namespace std;
-
 
 ObsListDialog::ObsListDialog(QObject *parent) :
 	StelDialog("ObservingList", parent),
@@ -140,7 +135,7 @@ void ObsListDialog::createDialogContent()
 	QFile jsonBookmarksFile(bookmarksJsonPath);
 	if (jsonBookmarksFile.exists())
 	{
-		qDebug() << "OLD BOOKMARKS FOUND: TRY IF WE NEED TO PROCESS/IMPORT THEM";
+		//qDebug() << "OLD BOOKMARKS FOUND: TRY IF WE NEED TO PROCESS/IMPORT THEM";
 
 		// check if already loaded.
 		QFile jsonFile(observingListJsonPath);
@@ -164,14 +159,14 @@ void ObsListDialog::createDialogContent()
 
 		if (!checkIfBookmarksListExists(allListsMap))
 		{
-			qDebug() << "NO BOOKMARK LIST SO FAR. IMPORTING...";
+			//qDebug() << "NO BOOKMARK LIST SO FAR. IMPORTING...";
 			QHash<QString, observingListItem> bookmarksForImport=loadBookmarksInObservingList();
 			saveBookmarksInObsListJsonFile(allListsMap, bookmarksForImport);
-			qDebug() << "read into allListMap of size" << allListsMap.size();
+			//qDebug() << "read into allListMap of size" << allListsMap.size();
 			mapFromJsonFile.insert(QString(KEY_OBSERVING_LISTS), allListsMap);
 		}
-		else
-			qDebug() << "BOOKMARK LIST EXISTS. WE CAN SKIP THE IMPORT";
+		//else
+		//	qDebug() << "BOOKMARK LIST EXISTS. WE CAN SKIP THE IMPORT";
 
 		mapFromJsonFile.insert(QString(KEY_VERSION), QString(FILE_VERSION));
 		mapFromJsonFile.insert(QString(KEY_SHORT_NAME), QString(SHORT_NAME_VALUE));
@@ -366,7 +361,7 @@ void ObsListDialog::clearHighlight()
 */
 void ObsListDialog::obsListNewListButtonPressed()
 {
-	string olud = string();
+	QString olud;
 	invokeObsListCreateEditDialog(olud);
 }
 /*
@@ -374,7 +369,7 @@ void ObsListDialog::obsListNewListButtonPressed()
 */
 void ObsListDialog::obsListEditButtonPressed()
 {
-	if (!selectedObservingListUuid.empty())
+	if (!selectedObservingListUuid.isEmpty())
 		invokeObsListCreateEditDialog(selectedObservingListUuid);
 	else
 		qWarning() << "The selected observing list olud is empty";
@@ -383,8 +378,8 @@ void ObsListDialog::obsListEditButtonPressed()
 /**
  * Open the observing list create/edit dialog
 */
-void ObsListDialog::invokeObsListCreateEditDialog(string listOlud) {
-	createEditDialog_instance = ObsListCreateEditDialog::Instance(std::move(listOlud));
+void ObsListDialog::invokeObsListCreateEditDialog(QString listOlud) {
+	createEditDialog_instance = ObsListCreateEditDialog::Instance(listOlud);
 	connect(createEditDialog_instance, SIGNAL (exitButtonClicked()), this, SLOT (obsListCreateEditDialogClosed()));
 	createEditDialog_instance->setListName(listName_);
 	createEditDialog_instance->setVisible(true);
@@ -484,7 +479,7 @@ void ObsListDialog::loadDefaultList()
 		{
 			ui->obsListComboBox->setCurrentIndex(index);
 			ui->obsListEditListButton->setEnabled(true);
-			selectedObservingListUuid = defaultListOlud_.toStdString();
+			selectedObservingListUuid = defaultListOlud_;
 			loadSelectedObservingListFromJsonFile(defaultListOlud_);
 		}
 	}
@@ -679,7 +674,7 @@ QVariantList ObsListDialog::loadListFromJson(const QVariantMap &map, const QStri
 */
 QHash<QString, observingListItem> ObsListDialog::loadBookmarksInObservingList()
 {
-	qDebug() << "LOADING OLD BOOKMARKS...";
+	//qDebug() << "LOADING OLD BOOKMARKS...";
 
 	QHash<QString, observingListItem> bookmarksCollection;
 	QVariantMap map;
@@ -950,7 +945,7 @@ void ObsListDialog::loadSelectedObservingList(int selectedIndex)
 	ui->obsListEditListButton->setEnabled(true);
 	ui->obsListDeleteButton->setEnabled(true);
 	QString listUuid = ui->obsListComboBox->itemData(selectedIndex).toString();
-	selectedObservingListUuid = listUuid.toStdString();
+	selectedObservingListUuid = listUuid;
 	loadSelectedObservingListFromJsonFile(listUuid);
 }
 
@@ -978,7 +973,7 @@ void ObsListDialog::obsListDeleteButtonPressed()
 				QMap<QString, QVariant>::iterator i;
 				for (i = obsListMap.begin(); i != obsListMap.end(); ++i)
 				{
-					if (i.key().compare(QString::fromStdString(selectedObservingListUuid)) != 0)
+					if (i.key().compare(selectedObservingListUuid) != 0)
 						newObsListMap.insert(i.key(), i.value());
 				}
 
@@ -1031,8 +1026,8 @@ void ObsListDialog::obsListCreateEditDialogClosed()
 	// We must reload the list name
 	loadListsNameFromJsonFile();
 	int index = 0;
-	if (!selectedObservingListUuid.empty())
-		index = ui->obsListComboBox->findData(QString::fromStdString(selectedObservingListUuid));
+	if (!selectedObservingListUuid.isEmpty())
+		index = ui->obsListComboBox->findData(selectedObservingListUuid);
 
 	// Reload of the selected observing list.
 	if (index != -1) {

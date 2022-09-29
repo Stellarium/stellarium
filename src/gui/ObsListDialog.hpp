@@ -22,7 +22,6 @@
 
 #include <QObject>
 #include <QStandardItemModel>
-#include <QSortFilterProxyModel>
 
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
@@ -61,7 +60,7 @@ public:
 
 	~ObsListDialog() Q_DECL_OVERRIDE;
 
-	//! Notify that the application style changed
+	// Notify that the application style changed
 	//void styleChanged() Q_DECL_OVERRIDE;
 
 	void setVisible(bool v) Q_DECL_OVERRIDE;
@@ -79,8 +78,7 @@ private:
 	class LandscapeMgr *landscapeMgr;
 	class LabelMgr *labelMgr;
 
-	// FIXME: Explain why we need a std::string here
-	std::string selectedObservingListUuid;
+	QString selectedObservingListUuid;
 	QString observingListJsonPath;
 	QString bookmarksJsonPath;
 	QHash<QString, observingListItem> observingListItemCollection;
@@ -88,7 +86,6 @@ private:
 	QString defaultListOlud_;
 	QList<QString> listName_;
 	QStringList listNamesModel;
-	//double currentJd;
 	ObservingListUtil util;
 
 	//properties:
@@ -100,7 +97,7 @@ private:
 	//! Set header names for observing list table
 	void setObservingListHeaderNames();
 
-	void invokeObsListCreateEditDialog(std::string listOlud);
+	void invokeObsListCreateEditDialog(QString listOlud);
 
 	ObsListCreateEditDialog *createEditDialog_instance;
 

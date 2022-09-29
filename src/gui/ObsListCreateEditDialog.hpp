@@ -23,8 +23,6 @@
 #include <QObject>
 #include <QStandardItemModel>
 
-#include <string>
-
 #include "StelDialog.hpp"
 #include "ObservingListCommon.hpp"
 
@@ -34,7 +32,7 @@ class ObsListCreateEditDialog : public StelDialog {
 	Q_OBJECT
 
 public:
-	static ObsListCreateEditDialog * Instance(std::string listUuid);
+	static ObsListCreateEditDialog * Instance(const QString &listUuid);
 
 	static void kill();
 
@@ -43,7 +41,7 @@ public:
 	//! called when clicking on close button in top right corner
 	void close() Q_DECL_OVERRIDE;
 
-	void setListName(QList<QString> listName);
+	void setListName(const QList<QString> &listName);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
@@ -64,8 +62,7 @@ private:
 
 	class LandscapeMgr *landscapeMgr;
 
-	// FIXME: Explain why this has to be a std::string and not a QString
-	std::string listOlud_;
+	QString listOlud_;
 	QString observingListJsonPath;
 	ObservingListUtil util;
 
@@ -85,7 +82,6 @@ private:
 	void setObservingListHeaderNames();
 
 	//! Add row in the end of obsListListModel
-	// // @param number row number
 	//! @param olud id of the record
 	//! @param name name or the designation of the object
 	//! @param type type of the object
@@ -113,7 +109,7 @@ private:
 	void displayErrorMessage(const QString &message);
 
 	//Private constructor and destructor
-	explicit ObsListCreateEditDialog(std::string listUuid);
+	explicit ObsListCreateEditDialog(const QString &listUuid);
 
 	~ObsListCreateEditDialog() Q_DECL_OVERRIDE;
 
