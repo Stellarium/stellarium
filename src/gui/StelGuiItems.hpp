@@ -107,7 +107,7 @@ public:
 		   const QString& actionId=QString(),
 		   bool noBackground=false,
 		   bool isTristate=true);
-
+	
 	//! Button states
 	enum {ButtonStateOff = 0, ButtonStateOn = 1, ButtonStateNoChange = 2};
 
