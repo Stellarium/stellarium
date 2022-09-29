@@ -246,33 +246,6 @@
            </item>
           </layout>
          </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayoutExit">
-           <item>
-            <spacer name="horizontalSpacer">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QPushButton" name="obsListExitButton">
-             <property name="toolTip">
-              <string>Exit</string>
-             </property>
-             <property name="text">
-              <string>Exit</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
         </layout>
        </widget>
       </item>
@@ -393,26 +366,49 @@
       <item row="11" column="0">
        <layout class="QHBoxLayout" name="horizontalLayoutLJdLocation">
         <item>
-         <widget class="QLabel" name="useJdLocationLabel">
+         <widget class="QLabel" name="useOptionalElementsLabel">
           <property name="text">
-           <string>Use:</string>
+           <string>Also load:</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QCheckBox" name="obsListJdCheckBox">
           <property name="toolTip">
-           <string>Julian Day</string>
+           <string>Retrieve stored Julian Day</string>
           </property>
           <property name="text">
-           <string notr="true">JD</string>
+           <string notr="true">Date</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QCheckBox" name="obsListLocationCheckBox">
+          <property name="toolTip">
+           <string>Retrieve stored location</string>
+          </property>
           <property name="text">
            <string>Location</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="obsListLandscapeCheckBox">
+          <property name="toolTip">
+           <string>Retrieve stored landscape</string>
+          </property>
+          <property name="text">
+           <string>Landscape</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="obsListFovCheckBox">
+          <property name="toolTip">
+           <string>Retrieve stored field of view</string>
+          </property>
+          <property name="text">
+           <string>FoV</string>
           </property>
          </widget>
         </item>
