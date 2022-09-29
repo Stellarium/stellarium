@@ -530,17 +530,16 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
 						const QString objectOlud = QUuid::createUuid().toString();
 						item.name = objectMap.value(QString(KEY_DESIGNATION)).toString();
 						item.nameI18n = objectMap.value(QString(KEY_NAME_I18N)).toString();
-						double fov = -1.0;
 
 						// Caveat - Please make the code more readable!
 						// We assign KEY_TYPE to item.objtype and KEY_OBJECTS_TYPE to item.type.
 						item.objtype    = objectMap.value(QString(KEY_TYPE)).toString();
-						item.type = objectMap.value(QString(KEY_OBJECTS_TYPE)).toString();
+						//item.type = objectMap.value(QString(KEY_OBJECTS_TYPE)).toString();
 
 						item.ra  = objectMap.value(QString(KEY_RA)).toString();
 						item.dec = objectMap.value(QString(KEY_DEC)).toString();
 
-						if (objectMgr->findAndSelect(item.name) && !objectMgr->getSelectedObject().isEmpty())
+						if (objectMgr->findAndSelect(item.name, item.objtype) && !objectMgr->getSelectedObject().isEmpty())
 						{
 							const QList<StelObjectP> &selectedObject = objectMgr->getSelectedObject();
 							double ra, dec;
@@ -550,6 +549,7 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
 								item.ra = StelUtils::radToHmsStr(ra, false).trimmed();
 							if (item.dec.isEmpty())
 								item.dec = StelUtils::radToDmsStr(dec, false).trimmed();
+							item.type = selectedObject[0]->getObjectTypeI18n();
 						}
 						else
 							qWarning() << "[ObservingList] object: " << item.name << " not found or empty !";

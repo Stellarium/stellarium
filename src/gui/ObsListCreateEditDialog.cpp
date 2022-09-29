@@ -303,23 +303,22 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
 			item.nameI18n = selectedObject[0]->getNameI18n();
 			if(item.nameI18n.isEmpty())
 				item.nameI18n = dash;
-			else
-			{
-				StelObjectP object = objectMgr->searchByNameI18n(item.nameI18n);
-				if (selectedObject[0]->getType() == "Nebula" && item.name.isEmpty())
-					item.name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
-			}
 			// Check if the object name is empty.
-			// FIXME: Decide whether translated versions of "Unnamed object" are really better than "dash".
-			if (item.name.isEmpty()) {
-				item.name = q_("Unnamed object");
-				if (item.nameI18n.isEmpty()) {
-					item.nameI18n = q_("Unnamed object");
+			if (item.name.isEmpty())
+			{
+				if (selectedObject[0]->getType() == "Nebula")
+					item.name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+				else
+				{
+					item.name = "Unnamed object";
+					if (item.nameI18n.isEmpty()) {
+						item.nameI18n = q_("Unnamed object");
+					}
 				}
 			}
 			// Type, Object Type
 			item.type = selectedObject[0]->getType();
-			item.objtype = selectedObject[0]->getObjectType();
+			item.objtype = selectedObject[0]->getObjectTypeI18n();
 
 			// Ra & Dec
 			if (ui->obsListCoordinatesCheckBox->isChecked() || item.objtype == CUSTOM_OBJECT || item.name.isEmpty()) {
@@ -439,7 +438,7 @@ void ObsListCreateEditDialog::saveObservedObjectsInJsonFile()
 			obl.insert(QString(KEY_DESIGNATION),       item.name);
 			obl.insert(QString(KEY_NAME_I18N),         item.nameI18n);
 			obl.insert(QString(KEY_TYPE),              item.type);
-			obl.insert(QString(KEY_OBJECTS_TYPE),      item.objtype);
+			//obl.insert(QString(KEY_OBJECTS_TYPE),      item.objtype);
 			obl.insert(QString(KEY_RA),                item.ra);
 			obl.insert(QString(KEY_DEC),               item.dec);
 			obl.insert(QString(KEY_MAGNITUDE),         item.magnitude);
