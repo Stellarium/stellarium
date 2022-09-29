@@ -173,13 +173,13 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	int scale=static_cast<int>(lineHeight*scv*0.01f);
 	// TODO: change this load-once to interactively editable value of scaling coefficient
 	QPixmap pa(":/graphicGui/btTimeRewind-on.png");
-	QPixmap prevArrow = pa.scaledToHeight(scale, Qt::SmoothTransformation);
+	QPixmap prevArrow = pa.scaledToHeight(scale * StelButton::getPixmapsDevicePixelRatio(), Qt::SmoothTransformation);
 	QPixmap paOff(":/graphicGui/btTimeRewind-off.png");
-	QPixmap prevArrowOff = paOff.scaledToHeight(scale, Qt::SmoothTransformation);
+	QPixmap prevArrowOff = paOff.scaledToHeight(scale * StelButton::getPixmapsDevicePixelRatio(), Qt::SmoothTransformation);
 	QPixmap na(":/graphicGui/btTimeForward-on.png");
-	QPixmap nextArrow = na.scaledToHeight(scale, Qt::SmoothTransformation);
+	QPixmap nextArrow = na.scaledToHeight(scale * StelButton::getPixmapsDevicePixelRatio(), Qt::SmoothTransformation);
 	QPixmap naOff(":/graphicGui/btTimeForward-off.png");
-	QPixmap nextArrowOff = naOff.scaledToHeight(scale, Qt::SmoothTransformation);
+	QPixmap nextArrowOff = naOff.scaledToHeight(scale * StelButton::getPixmapsDevicePixelRatio(), Qt::SmoothTransformation);
 
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	QString ocularsGroup = N_("Oculars"); // Possible group name: Oculars on-screen control panel
@@ -454,8 +454,8 @@ void OcularsGuiPanel::updatePosition()
 	//Update border/shading
 	QPainterPath newBorderPath;
 	double cornerRadius = 12.0;
-	QPointF verticalBorderStart = geometry().topLeft();
-	QPointF horizontalBorderEnd = geometry().bottomRight();
+	QPointF verticalBorderStart = geometry().topLeft() + QPointF(-0.5,0.5);
+	QPointF horizontalBorderEnd = geometry().bottomRight() + QPointF(-0.5,0.5);
 	QPointF cornerArcStart(verticalBorderStart.x(),
 			       horizontalBorderEnd.y() - cornerRadius);
 	newBorderPath.moveTo(verticalBorderStart);
@@ -1258,8 +1258,13 @@ QPixmap OcularsGuiPanel::createPixmapFromText(const QString& text,
 		return QPixmap();
 	}
 
+	width  *= StelButton::getPixmapsDevicePixelRatio();
+	height *= StelButton::getPixmapsDevicePixelRatio();
+
 	QPixmap pixmap(width, height);
 	pixmap.fill(backgroundColor);
+	auto scaledFont(font);
+	scaledFont.setPixelSize(font.pixelSize() * StelButton::getPixmapsDevicePixelRatio());
 
 	if (text.isEmpty())
 	{
@@ -1267,7 +1272,7 @@ QPixmap OcularsGuiPanel::createPixmapFromText(const QString& text,
 	}
 
 	QPainter painter(&pixmap);
-	painter.setFont(font);
+	painter.setFont(scaledFont);
 	painter.setPen(QPen(textColor));
 	painter.drawText(0, 0, width, height, Qt::AlignHCenter | Qt::AlignVCenter | Qt::TextSingleLine, text);
 

@@ -1475,7 +1475,8 @@ void Observability::loadConfiguration()
 
 	// Load date format from main settings.
 	// TODO: Handle date format properly.
-	if (conf->value("localization/date_display_format", "system_default").toString() == "ddmmyyyy")
+	QString dateFormatStr = conf->value("localization/date_display_format", "system_default").toString();
+	if (dateFormatStr == "ddmmyyyy" || dateFormatStr == "wwddmmyyyy")
 		setDateFormat(true);
 	else
 		setDateFormat(false);

@@ -87,6 +87,12 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	pixOff = apixOff;
 	pixHover = apixHover;
 	pixNoChange = apixNoChange;
+
+	pixOn.setDevicePixelRatio(GUI_PIXMAPS_SCALE);
+	pixOff.setDevicePixelRatio(GUI_PIXMAPS_SCALE);
+	pixHover.setDevicePixelRatio(GUI_PIXMAPS_SCALE);
+	pixNoChange.setDevicePixelRatio(GUI_PIXMAPS_SCALE);
+
 	noBckground = noBackground;
 	isTristate_ = isTristate;
 	opacity = 1.;
@@ -267,6 +273,7 @@ void StelButton::updateIcon()
 	if (opacity < 0.)
 		opacity = 0;
 	QPixmap pix(pixOn.size());
+	pix.setDevicePixelRatio(GUI_PIXMAPS_SCALE);
 	pix.fill(QColor(0,0,0,0));
 	QPainter painter(&pix);
 	painter.setOpacity(opacity);
@@ -284,6 +291,7 @@ void StelButton::updateIcon()
 		painter.drawPixmap(0, 0, pixHover);
 	}
 	setPixmap(pix);
+	scaledCurrentPixmap = {};
 }
 
 void StelButton::animValueChanged(qreal value)
@@ -302,6 +310,40 @@ void StelButton::setBackgroundPixmap(const QPixmap &newBackground)
 {
 	pixBackground = newBackground;
 	updateIcon();
+}
+
+QRectF StelButton::boundingRect() const
+{
+	return QRectF(0,0, getButtonPixmapWidth(), getButtonPixmapHeight());
+}
+
+void StelButton::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget*)
+{
+	/* QPixmap::scaled has much better quality than that scaling via QPainter::drawPixmap, so let's
+	 * have our scaled copy of the pixmap.
+	 * NOTE: we cache this copy for two reasons:
+	 * 1. Performance
+	 * 2. Work around a Qt problem (I think it's a bug): when rendering multiple StelButton items
+	 *    in sequence, only the first one gets the necessary texture parameters set, particularly
+	 *    GL_TEXTURE_MIN_FILTER. On deletion of QPixmap the texture is deleted, and its Id gets
+	 *    assigned to the next QPixmap. Apparently, the Id gets cached somewhere in Qt internals, and
+	 *    becomes similar to a dangling pointer, informing Qt as if the necessary setup has already
+	 *    been done. The result is that after the first button all others in the same panel are black
+	 *    rectangles.
+	 *    Our keeping QPixmap alive instead of deleting it on return from this function prevents this.
+	 */
+	const double ratio = painter->device()->devicePixelRatioF();
+	if(scaledCurrentPixmap.isNull() || ratio != scaledCurrentPixmap.devicePixelRatioF())
+	{
+		const auto scale = ratio / GUI_PIXMAPS_SCALE;
+		scaledCurrentPixmap = pixmap().scaled(pixOn.size()*scale, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+		scaledCurrentPixmap.setDevicePixelRatio(ratio);
+	}
+	// Align the pixmap to pixel grid, otherwise we'll get artifacts at some scaling factors.
+	const auto transform = painter->combinedTransform();
+	const auto shift = QPointF(-std::fmod(transform.dx(), 1.),
+							   -std::fmod(transform.dy(), 1.));
+	painter->drawPixmap(shift/ratio, scaledCurrentPixmap);
 }
 
 LeftStelBar::LeftStelBar(QGraphicsItem* parent)
@@ -381,7 +423,7 @@ void LeftStelBar::buttonHoverChanged(bool b)
 				tip += "  [" + shortcut + "]";
 			}
 			helpLabel->setText(tip);
-			helpLabel->setPos(qRound(boundingRectNoHelpLabel().width()+15.5),qRound(button->pos().y()+button->pixmap().size().height()/2-8));
+			helpLabel->setPos(qRound(boundingRectNoHelpLabel().width()+15.5),qRound(button->pos().y()+button->getButtonPixmapHeight()/2-8));
 			if (qApp->property("text_texture")==true)
 			{
 				helpLabel->setVisible(false);
@@ -1049,9 +1091,9 @@ StelBarsPath::StelBarsPath(QGraphicsItem* parent) : QGraphicsPathItem(parent), r
 void StelBarsPath::updatePath(BottomStelBar* bot, LeftStelBar* lef)
 {
 	QPainterPath newPath;
-	QPointF p = lef->pos();
+	QPointF p = lef->pos() + QPointF(-0.5,0.5);
 	QRectF r = lef->boundingRectNoHelpLabel();
-	QPointF p2 = bot->pos();
+	QPointF p2 = bot->pos() + QPointF(-0.5,0.5);
 	QRectF r2 = bot->boundingRectNoHelpLabel();
 
 	newPath.moveTo(p.x()-roundSize, p.y()-roundSize);
