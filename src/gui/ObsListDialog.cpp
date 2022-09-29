@@ -129,24 +129,62 @@ void ObsListDialog::createDialogContent()
 	//Enable the sort for columns
 	ui->obsListTreeView->setSortingEnabled(true);
 
-	//By default buttons are disable
+	//By default buttons are disabled
 	ui->obsListEditListButton->setEnabled(false);
 	ui->obsListHighlightAllButton->setEnabled(false);
 	ui->obsListClearHighlightButton->setEnabled(false);
 	ui->obsListDeleteButton->setEnabled(false);
 
 	// For no regression we must take into account the legacy bookmarks file
+	// TBD: We should load the global list only once!
 	QFile jsonBookmarksFile(bookmarksJsonPath);
 	if (jsonBookmarksFile.exists())
-		loadBookmarksInObservingList();
-
-	QFile jsonFile(observingListJsonPath);
-	if (jsonFile.exists())
 	{
-		loadListsNameFromJsonFile();
-		defaultListOlud_ = extractDefaultListOludFromJsonFile();
-		loadDefaultList();
+		qDebug() << "OLD BOOKMARKS FOUND: TRY IF WE NEED TO PROCESS/IMPORT THEM";
+
+		// check if already loaded.
+		QFile jsonFile(observingListJsonPath);
+		if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text)) {
+			qWarning() << "[ObservingList] bookmarks list can not be saved. A file can not be open for reading and writing:"
+				   << QDir::toNativeSeparators(observingListJsonPath);
+			return;
+		}
+		QVariantMap mapFromJsonFile;
+		QVariantMap allListsMap;
+		if (jsonFile.size() > 0) {
+			mapFromJsonFile = StelJsonParser::parse(jsonFile.readAll()).toMap();
+			allListsMap = mapFromJsonFile.value(QString(KEY_OBSERVING_LISTS)).toMap();
+		}
+
+		// QString defaultListValue = mapFromJsonFile.value(QString(KEY_DEFAULT_LIST_OLUD)).toString();
+		// if (defaultListValue.isEmpty()) {
+		// 	// If empty, set to empty? Is that useful?
+		// 	mapFromJsonFile.insert(KEY_DEFAULT_LIST_OLUD, "");
+		// }
+
+		if (!checkIfBookmarksListExists(allListsMap))
+		{
+			qDebug() << "NO BOOKMARK LIST SO FAR. IMPORTING...";
+			QHash<QString, observingListItem> bookmarksForImport=loadBookmarksInObservingList();
+			saveBookmarksInObsListJsonFile(allListsMap, bookmarksForImport);
+			qDebug() << "read into allListMap of size" << allListsMap.size();
+			mapFromJsonFile.insert(QString(KEY_OBSERVING_LISTS), allListsMap);
+		}
+		else
+			qDebug() << "BOOKMARK LIST EXISTS. WE CAN SKIP THE IMPORT";
+
+		mapFromJsonFile.insert(QString(KEY_VERSION), QString(FILE_VERSION));
+		mapFromJsonFile.insert(QString(KEY_SHORT_NAME), QString(SHORT_NAME_VALUE));
+
+		jsonFile.resize(0);
+		StelJsonParser::write(mapFromJsonFile, &jsonFile);
+		jsonFile.flush();
+		jsonFile.close();
 	}
+	// Now we certainly have a json file.
+	loadListsNameFromJsonFile();
+	defaultListOlud_ = extractDefaultListOludFromJsonFile();
+	loadDefaultList();
 }
 
 /*
@@ -251,13 +289,9 @@ void ObsListDialog::obsListHighLightAllButtonPressed()
 	// The QList<StelObjectP> objects are apparently volatile. We must retrieve the actual object.
 	const QList<StelObjectP>&existingSelection = objectMgr->getSelectedObject();
 	QList<StelObjectP> existingSelectionToRestore;
-	StelObject *preSelectedObject=Q_NULLPTR;
 	if (existingSelection.length()>0)
 	{
-		// Does this perform a shallow copy with reference counter that does not destroy the object?
 		existingSelectionToRestore.append(existingSelection.at(0));
-		preSelectedObject=existingSelection[0].data();
-		qDebug() << "\t Selected object: " << existingSelection[0]->getEnglishName();
 	}
 
 	QList<Vec3d> highlights;
@@ -299,17 +333,8 @@ void ObsListDialog::obsListHighLightAllButtonPressed()
 	hlMgr->fillHighlightList(highlights);
 
 	// Restore selection that was active before calling this
-//	if (preSelectedObject)
-//	{
-//		qDebug() << "buup";
-//
-//		qDebug() << "obsListHighLightAllButtonPressed(): Re-selecting" << preSelectedObject->getEnglishName();
-//		objectMgr->setSelectedObject(StelObjectP(preSelectedObject), StelModule::ReplaceSelection);
 	if (existingSelectionToRestore.length()>0)
-	{
-		qDebug() << "buup";
 		objectMgr->setSelectedObject(existingSelectionToRestore, StelModule::ReplaceSelection);
-	}
 	else
 		objectMgr->unSelect();
 }
@@ -491,16 +516,9 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
 		// The QList<StelObjectP> objects are apparently volatile. We must retrieve the actual object.
 		const QList<StelObjectP>&existingSelection = objectMgr->getSelectedObject();
 		QList<StelObjectP> existingSelectionToRestore;
-		StelObject *preSelectedObject=Q_NULLPTR;
-		QString preselectedName;
 		if (existingSelection.length()>0)
 		{
-			// Does this perform a shallow copy with reference counter that does not destroy the object?
 			existingSelectionToRestore.append(existingSelection.at(0));
-			preSelectedObject=existingSelection[0].data();
-			preselectedName = existingSelection[0]->getEnglishName();
-			qDebug() << "\t Selected object: " << preselectedName;
-			qDebug() << "check again:" << preSelectedObject->getEnglishName();
 		}
 
 		try {
@@ -619,21 +637,8 @@ void ObsListDialog::loadSelectedObservingListFromJsonFile(const QString &listOlu
 		jsonFile.close();
 
 		// Restore selection that was active before calling this
-//		if (preSelectedObject)
-//		{
-//			// HERE WE CRASH when working with the preselectedObject.
-//			// It works with the preselectedName, but this works only for objects with names. How to deal with
-//			// dim stars, custom_markers, ... (other selectabled stuff)
-//			qDebug() << "baap";
-//			qDebug() << "loadSelectedObservingListFromJsonFile:  Re-selecting" << preselectedName;
-//			//qDebug() << "loadSelectedObservingListFromJsonFile:  Re-selecting" << preSelectedObject->getEnglishName();
-//			// objectMgr->setSelectedObject(StelObjectP(preSelectedObject), StelModule::ReplaceSelection);
-//			objectMgr->findAndSelect(preselectedName);
 		if (existingSelectionToRestore.length()>0)
-		{
-			qDebug() << "baap";
 			objectMgr->setSelectedObject(existingSelectionToRestore, StelModule::ReplaceSelection);
-		}
 		else
 			objectMgr->unSelect();
 	}
@@ -672,7 +677,7 @@ QVariantList ObsListDialog::loadListFromJson(const QVariantMap &map, const QStri
  * Load the bookmarks of bookmarks.json file into observing lists file
  * For no regression with must take into account the legacy bookmarks.json file
 */
-void ObsListDialog::loadBookmarksInObservingList()
+QHash<QString, observingListItem> ObsListDialog::loadBookmarksInObservingList()
 {
 	qDebug() << "LOADING OLD BOOKMARKS...";
 
@@ -691,15 +696,9 @@ void ObsListDialog::loadBookmarksInObservingList()
 		// We must keep selection for the user!
 		const QList<StelObjectP>&existingSelection = objectMgr->getSelectedObject();
 		QList<StelObjectP> existingSelectionToRestore;
-		StelObject *preSelectedObject=Q_NULLPTR;
-		QString preselectedName;
 		if (existingSelection.length()>0)
 		{
-			// Does this perform a shallow copy with reference counter that does not destroy the object?
 			existingSelectionToRestore.append(existingSelection.at(0));
-			preSelectedObject=existingSelection[0].data();
-			preselectedName= existingSelection[0]->getEnglishName();
-			qDebug() << "\t Selected object: " << preselectedName;
 		}
 
 		try {
@@ -759,24 +758,15 @@ void ObsListDialog::loadBookmarksInObservingList()
 				}
 			}
 
-			saveBookmarksInObsListJsonFile(bookmarksCollection);
+			//saveBookmarksInObsListJsonFile(bookmarksCollection);
 		}
 		catch (std::runtime_error &e)
 		{
 			qWarning() << "[ObservingList] Load bookmarks in observing list: File format is wrong! Error: " << e.what();
 		}
 		// Restore selection that was active before calling this
-//		if (preSelectedObject){
-//			qDebug() << "beep";
-//			qDebug() << "loadBookmarksInObservingList: Re-selecting" << preselectedName;
-//			//qDebug() << "loadBookmarksInObservingList: Re-selecting" << preSelectedObject->getEnglishName();
-//			objectMgr->findAndSelect(preselectedName);
-//			//objectMgr->setSelectedObject(StelObjectP(preSelectedObject), StelModule::ReplaceSelection);
 		if (existingSelectionToRestore.length()>0)
-		{
-			qDebug() << "beep";
 			objectMgr->setSelectedObject(existingSelectionToRestore, StelModule::ReplaceSelection);
-		}
 		else
 			objectMgr->unSelect();
 
@@ -784,53 +774,24 @@ void ObsListDialog::loadBookmarksInObservingList()
 		core->setMilliSecondsOfLastJDUpdate(millis); // restore millis.
 		core->update(0); // enforce update to the previous positions
 	}
+	return bookmarksCollection;
 }
 
 /*
  * Save the bookmarks into observing list file
 */
-void ObsListDialog::saveBookmarksInObsListJsonFile(const QHash<QString, observingListItem> &bookmarksCollection)
+void ObsListDialog::saveBookmarksInObsListJsonFile(QVariantMap &allListsMap, const QHash<QString, observingListItem> &bookmarksCollection)
 {
-	QFile jsonFile(observingListJsonPath);
-	if (!jsonFile.open(QIODevice::ReadWrite | QIODevice::Text)) {
-		qWarning() << "[ObservingList] bookmarks list can not be saved. A file can not be open for reading and writing:"
-			   << QDir::toNativeSeparators(observingListJsonPath);
-		return;
-	}
+		QVariantMap bookmarksObsList;
 
-	try {
-		QVariantMap mapFromJsonFile;
-		QVariantMap allListsMap;
-		QVariantMap observingListDataList;
-		if (jsonFile.size() > 0) {
-			mapFromJsonFile = StelJsonParser::parse(jsonFile.readAll()).toMap();
-			allListsMap = mapFromJsonFile.value(QString(KEY_OBSERVING_LISTS)).toMap();
-		}
-
-		QString defaultListValue = mapFromJsonFile.value(QString(KEY_DEFAULT_LIST_OLUD)).toString();
-		if (defaultListValue.isEmpty()) {
-			mapFromJsonFile.insert(KEY_DEFAULT_LIST_OLUD, "");
-		}
-
-		if (checkIfBookmarksListExists(allListsMap)) {
-			//the bookmarks file is already loaded
-			return;
-		}
-
-		// Description
-		observingListDataList.insert(QString(KEY_DESCRIPTION), QString(BOOKMARKS_LIST_DESCRIPTION));
+		// Name, Description
+		bookmarksObsList.insert(QString(KEY_NAME), BOOKMARKS_LIST_NAME);
+		bookmarksObsList.insert(QString(KEY_DESCRIPTION), QString(BOOKMARKS_LIST_DESCRIPTION));
 
 		// Creation date
-		double JD = core->getJD();
+		double JD = core->getJD(); // TODO: Replace by current system time
 		QString listCreationDate = StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD) / 24.).replace("T", " ");
-		observingListDataList.insert(QString(KEY_CREATION_DATE), listCreationDate);
-
-		//// Landscape
-		//QString landscapeId = landscapeMgr->getCurrentLandscapeID();
-		//observingListDataList.insert(QString(KEY_LANDSCAPE_ID), landscapeId);
-
-		// Name of the liste
-		observingListDataList.insert(QString(KEY_NAME), BOOKMARKS_LIST_NAME);
+		bookmarksObsList.insert(QString(KEY_CREATION_DATE), listCreationDate);
 
 		// List of objects
 		QVariantList listOfObjects;
@@ -859,28 +820,13 @@ void ObsListDialog::saveBookmarksInObsListJsonFile(const QHash<QString, observin
 			listOfObjects.push_back(obl);
 		}
 
-		observingListDataList.insert(QString(KEY_OBJECTS), listOfObjects);
-		observingListDataList.insert(QString(KEY_SORTING), SORTING_BY_NAME);
+		bookmarksObsList.insert(QString(KEY_OBJECTS), listOfObjects);
+		bookmarksObsList.insert(QString(KEY_SORTING), QString(SORTING_BY_NAME));
 
 		QList<QString> keys = bookmarksCollection.keys();
 		QString oblListUuid= (keys.empty() ? QUuid::createUuid().toString() : keys.at(0));
 
-		mapFromJsonFile.insert(KEY_VERSION, FILE_VERSION);
-		mapFromJsonFile.insert(KEY_SHORT_NAME, SHORT_NAME_VALUE);
-
-		allListsMap.insert(oblListUuid, observingListDataList);
-		mapFromJsonFile.insert(QString(KEY_OBSERVING_LISTS), allListsMap);
-
-		jsonFile.resize(0);
-		StelJsonParser::write(mapFromJsonFile, &jsonFile);
-		jsonFile.flush();
-		jsonFile.close();
-	}
-	catch (std::runtime_error &e)
-	{
-		qCritical() << "[ObservingList] File format is wrong! Error: " << e.what();
-		return;
-	}
+		allListsMap.insert(oblListUuid, bookmarksObsList);
 }
 
 /*

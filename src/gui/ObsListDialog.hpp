@@ -70,7 +70,7 @@ protected:
 	Ui_obsListDialogForm *ui;
 
 	//! Initialize the dialog widgets and connect the signals/slots.
-	void createDialogContent() override;
+	void createDialogContent() Q_DECL_OVERRIDE;
 
 private:
 	QStandardItemModel *obsListListModel;
@@ -129,10 +129,10 @@ private:
 	//! Load the default list
 	void loadDefaultList();
 
-	//! Load the bookmarks of bookmarks.json file into observing lists file
-	void loadBookmarksInObservingList();
+	//! Load the bookmarks of bookmarks.json file into a temporary structure
+	QHash<QString, observingListItem> loadBookmarksInObservingList();
 
-	void saveBookmarksInObsListJsonFile(const QHash<QString, observingListItem> &bookmarksCollection);
+	void saveBookmarksInObsListJsonFile(QVariantMap &allListsMap, const QHash<QString, observingListItem> &bookmarksCollection);
 
 	//! Load list from JSON file
 	QVariantList loadListFromJson(const QVariantMap &map, const QString& listOlud);
