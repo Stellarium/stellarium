@@ -17,7 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelGuiItems.hpp"
 #define MOUSE_TRACKING
 
 #include "StelMainView.hpp"
