@@ -454,8 +454,8 @@ void OcularsGuiPanel::updatePosition()
 	//Update border/shading
 	QPainterPath newBorderPath;
 	double cornerRadius = 12.0;
-	QPointF verticalBorderStart = geometry().topLeft();
-	QPointF horizontalBorderEnd = geometry().bottomRight();
+	QPointF verticalBorderStart = geometry().topLeft() + QPointF(-0.5,0.5);
+	QPointF horizontalBorderEnd = geometry().bottomRight() + QPointF(-0.5,0.5);
 	QPointF cornerArcStart(verticalBorderStart.x(),
 			       horizontalBorderEnd.y() - cornerRadius);
 	newBorderPath.moveTo(verticalBorderStart);

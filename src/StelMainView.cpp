@@ -664,6 +664,8 @@ StelMainView::StelMainView(QSettings* settings)
 
 	// We cannot use global mousetracking. Only if mouse is hidden!
 	//setMouseTracking(true);
+
+    setRenderHint(QPainter::Antialiasing);
 }
 
 void StelMainView::resizeEvent(QResizeEvent* event)

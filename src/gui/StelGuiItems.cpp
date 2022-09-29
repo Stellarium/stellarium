@@ -1091,9 +1091,9 @@ StelBarsPath::StelBarsPath(QGraphicsItem* parent) : QGraphicsPathItem(parent), r
 void StelBarsPath::updatePath(BottomStelBar* bot, LeftStelBar* lef)
 {
 	QPainterPath newPath;
-	QPointF p = lef->pos();
+	QPointF p = lef->pos() + QPointF(-0.5,0.5);
 	QRectF r = lef->boundingRectNoHelpLabel();
-	QPointF p2 = bot->pos();
+	QPointF p2 = bot->pos() + QPointF(-0.5,0.5);
 	QRectF r2 = bot->boundingRectNoHelpLabel();
 
 	newPath.moveTo(p.x()-roundSize, p.y()-roundSize);
