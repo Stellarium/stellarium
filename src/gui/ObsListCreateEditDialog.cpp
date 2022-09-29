@@ -379,7 +379,6 @@ void ObsListCreateEditDialog::obsListRemoveObjectButtonPressed()
  */
 void ObsListCreateEditDialog::saveObservedObjectsInJsonFile()
 {
-	qDebug() << "ObsListCreateEditDialog::saveObservedObjectsInJsonFile()...";
 	if (observingListJsonPath.isEmpty())
 	{
 		qWarning() << "[ObservingList Creation/Edition] Error saving observing list: empty filename";
@@ -487,7 +486,6 @@ void ObsListCreateEditDialog::saveObservedObjectsInJsonFile()
 		qCritical() << "[ObservingList Creation/Edition] File format is wrong! Error: " << e.what();
 		return;
 	}
-	qDebug() << "ObsListCreateEditDialog::saveObservedObjectsInJsonFile(): done";
 }
 
 /*
@@ -528,9 +526,9 @@ void ObsListCreateEditDialog::obsListImportListButtonPresssed()
 			map = StelJsonParser::parse(jsonFile.readAll()).toMap();
 			jsonFile.close();
 
-			if (map.contains(KEY_OBSERVING_LISTS)) { // Case of observingList import
-				qDebug() << "ObservingList import";
-
+			if (map.contains(KEY_OBSERVING_LISTS))
+			{
+				// Case of observingList import
 				QVariantMap observingListMap = map.value(QString(KEY_OBSERVING_LISTS)).toMap();
 				if (!observingListMap.isEmpty() && observingListMap.size() == 1)
 					//listOlud_ = observingListMap.keys().at(0).toStdString();
@@ -548,8 +546,8 @@ void ObsListCreateEditDialog::obsListImportListButtonPresssed()
 				observingListJsonPath = originalobservingListJsonPath;
 			}
 			else if (map.contains(KEY_BOOKMARKS))
-			{ // Case of legacy bookmarks import
-				qDebug() << "Legacy bookmarks import";
+			{
+				// Case of legacy bookmarks import
 				QVariantMap bookmarksListMap = map.value(QString(KEY_BOOKMARKS)).toMap();
 				if (!bookmarksListMap.isEmpty())
 				{
@@ -582,19 +580,8 @@ void ObsListCreateEditDialog::obsListSaveButtonPressed()
 {
 	initErrorMessage();
 	QString listName = ui->nameOfListLineEdit->text().trimmed();
-	qDebug() << "ObsListCreateEditDialog::obsListSaveButtonPressed(): list:" << listName;
 
-//	bool isListAlreadyExists = !this->listNames_.isEmpty() && this->listNames_.contains(listName) &&
-//			(isCreationMode || (listName.compare(currentListName) != 0 && !isCreationMode));
-	// JG 2022-09-28 19:16.
-	bool isListAlreadyExists = false;
-	    if(!this->listNames_.isEmpty() && this->listNames_.contains(listName) && isCreationMode){
-		isListAlreadyExists = true;
-	 }
-// Will be simplified
-//	bool isListAlreadyExists = (!this->listNames_.isEmpty() && this->listNames_.contains(listName) && isCreationMode);
-
-
+	bool isListAlreadyExists = (!this->listNames_.isEmpty() && this->listNames_.contains(listName) && isCreationMode);
 
 	if (isListAlreadyExists) {
 		qWarning() << "[ObservingList Creation/Edition] Error: a list with the name " << ui->nameOfListLineEdit->text()
@@ -609,7 +596,7 @@ void ObsListCreateEditDialog::obsListSaveButtonPressed()
 	else
 	{
 		isSaveAs = listName.compare(currentListName) != 0 && !isCreationMode;
-		qDebug() << "ObsListCreateEditDialog::obsListSaveButtonPressed(): isSaveAs:" << isSaveAs;
+		//qDebug() << "ObsListCreateEditDialog::obsListSaveButtonPressed(): isSaveAs:" << isSaveAs;
 		saveObservedObjectsInJsonFile();
 		this->close();
 		emit exitButtonClicked();
@@ -654,7 +641,7 @@ void ObsListCreateEditDialog::headerClicked(int index)
 		{ColumnLocation,      QString(SORTING_BY_LOCATION)},
 		{ColumnLandscapeID,   QString(SORTING_BY_LANDSCAPE_ID)}};
 	sorting=map.value(index, "");
-	qDebug() << "Sorting = " << sorting;
+	//qDebug() << "Sorting = " << sorting;
 }
 
 /*
@@ -780,7 +767,6 @@ void ObsListCreateEditDialog::loadBookmarksInObservingList() {
 	const double currentJD = core->getJDOfLastJDUpdate();
 	const qint64 millis = core->getMilliSecondsOfLastJDUpdate();
 
-
 	QFile jsonFile(observingListJsonPath);
 	if (!jsonFile.open(QIODevice::ReadOnly))
 		qWarning() << "[ObservingList] cannot open" << QDir::toNativeSeparators(observingListJsonPath);
@@ -868,12 +854,6 @@ void ObsListCreateEditDialog::loadBookmarksInObservingList() {
 			qWarning() << "[ObservingList] Load bookmarks in observing list: File format is wrong! Error: " << e.what();
 		}
 	}
-	// Restore selection that was active before calling this
-	qDebug() << "ObsListCreateEditDialog::loadBookmarksInObservingList(): Restore selection of length"
-		 << existingSelection.length();
-	if (existingSelection.length()>0)
-		qDebug() << "\t Selected object: " << existingSelection[0]->getEnglishName();
-
 	// Restore selection that was active before calling this
 	if (existingSelectionToRestore.length()>0)
 		objectMgr->setSelectedObject(existingSelectionToRestore, StelModule::ReplaceSelection);
