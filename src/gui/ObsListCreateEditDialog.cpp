@@ -270,24 +270,25 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
 
 	if (!selectedObject.isEmpty())
 	{
-		// No duplicate item in the same list
-		bool is_already_in_list = false;
-		QHash<QString, observingListItem>::iterator i;
-		for (i = observingListItemCollection.begin(); i != observingListItemCollection.end(); i++)
-		{
-			if ((i.value().name.compare(selectedObject[0]->getEnglishName()) == 0) &&
-				(ui->obsListJDCheckBox->isChecked()        && i.value().jd == JD) &&
-				(ui->obsListFovCheckBox->isChecked()       && i.value().fov == fov) &&
-				(ui->obsListLandscapeCheckBox->isChecked() && i.value().landscapeID == landscapeID) &&
-				(ui->obsListLocationCheckBox->isChecked()  && i.value().location == Location))
-			{
-				is_already_in_list = true;
-				break;
-			}
-		}
-
-		if (!is_already_in_list)
-		{
+// TBD: this test should prevent adding duplicate entries, but fails. Maybe for V1.1!
+//		// No duplicate item in the same list
+//		bool is_already_in_list = false;
+//		QHash<QString, observingListItem>::iterator i;
+//		for (i = observingListItemCollection.begin(); i != observingListItemCollection.end(); i++)
+//		{
+//			if ((i.value().name.compare(selectedObject[0]->getEnglishName()) == 0) &&
+//				(ui->obsListJDCheckBox->isChecked()        && i.value().jd == JD) &&
+//				(ui->obsListFovCheckBox->isChecked()       && i.value().fov == fov) &&
+//				(ui->obsListLandscapeCheckBox->isChecked() && i.value().landscapeID == landscapeID) &&
+//				(ui->obsListLocationCheckBox->isChecked()  && i.value().location == Location))
+//			{
+//				is_already_in_list = true;
+//				break;
+//			}
+//		}
+//
+//		if (!is_already_in_list)
+//		{
 			observingListItem item;
 			util.initItem(item);
 
@@ -342,7 +343,7 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
 
 			observingListItemCollection.insert(objectOlud, item);
 
-			// Add objects in row model
+			// Add object in row model
 			StelLocation loc=StelLocation::createFromLine(Location);
 			addModelRow(objectOlud,
 				    item.name,
@@ -355,7 +356,7 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
 				    ui->obsListJDCheckBox->isChecked() ? StelUtils::julianDayToISO8601String(JD + core->getUTCOffset(JD) / 24.).replace("T", " ") : "",
 				    ui->obsListLocationCheckBox->isChecked() ? loc.name : "",
 				    item.landscapeID);
-		}
+//		}
 	}
 	else
 		qWarning() << "Selected object is empty!";
