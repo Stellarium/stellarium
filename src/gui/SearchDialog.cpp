@@ -372,6 +372,10 @@ void SearchDialog::createDialogContent()
 	connect(ui->lineEditSearchSkyObject, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showContextMenu(QPoint)));
 
 	ui->lineEditSearchSkyObject->installEventFilter(this);	
+	QSize bs = QSize(24, 24);
+	ui->recentSearchClearDataPushButton->setFixedSize(bs);
+	ui->goPushButton->setFixedSize(bs);
+	ui->pushButtonGotoSearchSkyObject->setFixedSize(QSize(40, 30));
 
 	// Kinetic scrolling
 	kineticScrollingList << ui->objectsListView;
