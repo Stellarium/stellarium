@@ -251,8 +251,8 @@ QVariantMap Satellite::getMap(void)
 	map["stdMag"] = stdMag;
 	map["rcs"] = RCS;
 	map["status"] = status;
-	map["tle1"] = tleElements.first.data();
-	map["tle2"] = tleElements.second.data();
+	map["tle1"] = (QString)tleElements.first.data();
+	map["tle2"] = (QString)tleElements.second.data();
 
 	if (!description.isEmpty())
 		map["description"] = description;
