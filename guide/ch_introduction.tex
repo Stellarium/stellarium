@@ -71,7 +71,8 @@ arrival on the project:
 \item[Georg Zotti] astronomical computations, Scenery 3D plugin, ArchaeoLines and Calendars plugins, general development, user guide, user support
 \item[Marcos Cardinot] MeteorShowers plugin
 \item[Florian Schaukowitsch] Scenery 3D plugin, Remote Control plugin, RemoteSync plugin, OBJ rendering, Qt/OpenGL internals
-\item[Teresa Huertas Rold\'an] Planetary nomenclature 
+\item[Teresa Huertas Rold\'an] Planetary nomenclature
+\item[Jocelyn Girod] Observing Lists
 \item[Ruslan Kabatsayev] ShowMySky (Bruneton) Skylight model
 \item[Worachate Boonplod] Eclipse computations
 \end{description}
@@ -124,11 +125,11 @@ milestones for the project:
 \item[2020-09] v0.20.3: Accurate seasons' beginnings
 \item[2021-03] v0.21.0: Accurate planet rotation (Libration, central meridians, subsolar points, \ldots) 
 \item[2021-09] v0.21.2: Annual aberration, DE440\&441. Accuracy goals reached.
-\item[2022-09] v0.22.3 and v1.22.3: \textbf{Stellarium 1.0}.  
+\item[2022-10] \textbf{Stellarium 1.0}: Switch to Qt6, ShowMySky (Bruneton) sky model, Eclipse details. 
 \end{description}
 
 \section{Version Numbers}
-Since its inception, Stellarium's version number started with 0 to
+Since its inception, Stellarium's version number had started with 0 to
 indicate ``work in progress''. The numbers after that have followed a
 year.release convention with approximately seasonal releases since
 2018. (For example, 0.18.2 was the third release in 2018 which
@@ -150,7 +151,7 @@ differences in the underlying frameworks, both series should retain
 feature equivalence. The only notable difference for now lies in the
 Scripting functionality (see chapter~\ref{ch:scripting}).
 
-Our version numbers therefore indicate which version of Qt is used:
+Our ``internal'' version numbers therefore indicate which version of Qt is used:
 series 0.* will continue to be based on Qt5, and series 1.* will be
 based on Qt6.
 
@@ -161,7 +162,7 @@ Space initiatives, which so far has resulted in better planetary rendering
 control and an alternative solution for planetary positions based on
 the DE430/DE431 ephemeris (2015), the RemoteSync plugin and OBJ models (2016), 
 and the planet nomenclature labels (2017). Some of Georg's work is
-in part supported by the Ludwig Boltzmann Institute for Archaeological
+supported by the Ludwig Boltzmann Institute for Archaeological
 Prospection and Virtual Archaeology, Vienna, Austria.
 
 \section{Scientific use}
@@ -169,7 +170,8 @@ Prospection and Virtual Archaeology, Vienna, Austria.
 Stellarium has gained wide popularity in the research areas of
 cultural astronomy. Please note limitations of Stellarium mentioned in
 Appendix~\ref{ch:Accuracy}. If you used Stellarium in scientific work,
-please cite our recent paper \citep{Zotti-etal:JSA2020.6.2}.
+please cite our recent paper \citep{Zotti-etal:JSA2020.6.2} or those
+mentioned in the respective feature descriptions.
 
 \section{About this User Guide}
 This guide is based on the user guide written by Matthew Gates for
@@ -185,8 +187,9 @@ reading. The PDF version of this guide has a clickable table of
 contents and clickable hyperlinks.
 
 These new editions of the Guide (since v0.15) will not contain notes about using
-earlier versions than 0.13 or using very outdated hardware. 
-New features are marked with a version number like v0.15.2 in the margin. 
+earlier versions than 0.13 or using very outdated hardware.
+%% (No such margin notes in 1.0!)
+%New features are marked with a version number like v0.15.2 in the margin. 
 Some references to previous versions may still be made for completeness, 
 but if you are using earlier versions of Stellarium 
 for particular reasons, please use the older guides.
