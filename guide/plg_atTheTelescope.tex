@@ -235,24 +235,25 @@ The options are grouped by areas of usage: \emph{Interface}, \emph{Ocular view},
 		 It can however be very useful in comparing two eyepieces. 
 		 If you set this option, the  on-screen image will be scaled based on the eyepieces and telescopes you define. 
 		 See section \ref{sec:sec:plugins:Oculars:ScalingTheEyepieceView} for information on what scaling means, and why you might want to use it.
-   \item[Use semi-transparent mask] uncheck this option if you want to see visible field of view as in real telescope. Since version 0.20.3 you may define level of transparency for mask\newFeature{0.20.3}.
+   \item[Use semi-transparent mask] uncheck this option if you want to see visible field of view as in real telescope. You may define level of transparency for mask\newFeature{0.20.3}.
    \item[Hide grids and lines when enabled] allows to hide grids and lines when you observe the sky through the eyepiece and re-enables their visibility when leaving visual observation mode.
    \item[Show FOV outline] option\newFeature{0.19.3} enables drawing the border of the eyepiece's FOV and it may be helpful in combination with a semi-transparent mask.
    \item[Show compass rose] option\newFeature{0.19.3} enables drawing cardinal directions in the equatorial coordinate system.
    \item[Align crosshair] option\newFeature{0.19.3} enables alignment of the cross-hair according to the equatorial coordinate system.
  \end{description}
 \item[Sensor view] is group of options allows to change behavior of the plugin for photographic observations mode.
- \begin{description}
-   \item[Use degrees and minutes for FOV of CCD] -- for many cases the use of decimal degrees for the value of the field of view is not comfortable, and this option allows to use the more human readable format for FOV.
-   \item[Enable automatic switch of mount type] allows to store the CCD frame orientation when the type of telescope mount is changed.
-   \item[Show sensor crop overlay] option\newFeature{0.19.0} toggle drawing a crop box within the CCD frame. In version 0.20.3\newFeature{0.20.3} we added the ability drawing pixel grid within crop overlay especially for astrophotographers.
-   \item[Show focuser overlay] option\newFeature{0.20.2} allows drawing a circle of mask, which is obtained by the telescope's focuser. We added masks of 3 common modern focusers to allow users check the visible aberrations in the FOV of the telescope.
+  \begin{description}
+  \item[Use degrees and minutes for FOV of CCD] -- for many cases the use of decimal degrees for the value of the field of view is not comfortable, and this option allows to use the more human readable format for FOV.
+  \item[Enable automatic switch of mount type] allows to store the CCD frame orientation when the type of telescope mount is changed.
+  \item[Show sensor crop overlay]\newFeature{0.19.0} toggles drawing a crop box within the CCD frame.
+    In addition,\newFeature{0.20.3} a pixel grid can be drawn within the crop overlay especially for astrophotographers.
+  \item[Show focuser overlay]\newFeature{0.20.2} allows drawing a circle which represents the telescope's focuser.
+    We added sizes of 3 common modern focusers to allow users to check the visible aberrations in the FOV of the telescope.
  \end{description}
 \item[Telrad view] is a group\newFeature{0.19.0} of options which allows to change behavior of the plugin for Telrad mode.
  \begin{description}
- \item[Enable scaling FOV for Telrad] option allows you to define whether or not to scale the Telrad circles to half of apparent FOV.
-   When activated, the Telrad circles will fill your screen. 
- \item[FOV:] --- since version 0.20.2\newFeature{0.20.2} you may define up to 4 circles to show specific FOV in the sky.
+ \item[Enable autozoom when switching Telrad] option allows you to define whether or not to zoom the field of view to twice the size of the Telrad circles.
+ \item[FOV:]\newFeature{0.20.2} If you don't use the original Telrad but a similar device, you may define up to 4 circles to show its specific FOV in the sky. 
  \end{description}
 \end{description}
 
@@ -899,8 +900,7 @@ the Configure Telescope dialog.
 
 Note that Stellarium supports ASCOM telescopes natively since version 0.19.3. There's no need to 
   use StellariumScope in order to use your ASCOM telescopes with Stellarium anymore. We are 
-  encouraging our users to switch to the native ASCOM option going forward and the use of
-  StellariumScope is most likely not recommended in the future, unless you need particular features.
+  encouraging our users to use the native ASCOM option unless they need particular features of StellariumScope.
 
 % \begin{figure}[htp]
 % \begin{center}
