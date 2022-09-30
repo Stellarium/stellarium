@@ -236,6 +236,8 @@ int main(int argc, char **argv)
 	if (argList.contains("--single-buffer"))
 		fmt.setSwapBehavior(QSurfaceFormat::SingleBuffer);
 
+	fmt.setColorSpace(QSurfaceFormat::sRGBColorSpace);
+
 	QSurfaceFormat::setDefaultFormat(fmt);
 
 	/////////////////////////////////////////////////////////////////////////////////
