@@ -21,6 +21,9 @@
 #include "StoredPointsDialog.hpp"
 #include "ui_storedPointsDialog.h"
 
+#include "StelApp.hpp"
+#include "StelTranslator.hpp"
+
 StoredPointsDialog::StoredPointsDialog(): StelDialog("TelescopeControlStoredPoints")
 {
 	ui = new Ui_StoredPoints;

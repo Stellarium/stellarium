@@ -21,11 +21,7 @@
 #include "TelescopeConfigurationDialog.hpp"
 #include "Dialog.hpp"
 #include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelFileMgr.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelStyle.hpp"
 #include "StelTranslator.hpp"
 #include "TelescopeControl.hpp"
 #include "ui_telescopeConfigurationDialog.h"
@@ -167,8 +163,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(buttonSavePressed()));
 	connect(ui->pushButtonDiscard, SIGNAL(clicked()), this, SLOT(buttonDiscardPressed()));
 
-	connect(ui->comboBoxDeviceModel, SIGNAL(currentIndexChanged(const QString&)), this,
-	  SLOT(deviceModelSelected(const QString&)));
+	connect(ui->comboBoxDeviceModel, SIGNAL(currentIndexChanged(int)), this, SLOT(deviceModelSelected(int)));
 
 	// Setting validators
 	ui->lineEditTelescopeName->setValidator(telescopeNameValidator);
@@ -567,8 +562,9 @@ void TelescopeConfigurationDialog::buttonDiscardPressed()
 	emit changesDiscarded();
 }
 
-void TelescopeConfigurationDialog::deviceModelSelected(const QString& deviceModelName)
+void TelescopeConfigurationDialog::deviceModelSelected(int modelIndex)
 {
+	const QString& deviceModelName=ui->comboBoxDeviceModel->itemText(modelIndex);
 	ui->labelDeviceModelDescription->setText(
 	  q_(telescopeManager->getDeviceModels().value(deviceModelName).description));
 	ui->doubleSpinBoxTelescopeDelay->setValue(

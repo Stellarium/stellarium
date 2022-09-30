@@ -75,11 +75,11 @@ private slots:
 	void toggleTypeASCOM(bool enabled);
 	#endif
 	
-	void deviceModelSelected(const QString&);
+	void deviceModelSelected(int modelIndex);
 
 
 signals:
-	void changesSaved(QString name, ConnectionType type);
+	void changesSaved(QString name, TelescopeControlGlobals::ConnectionType type);
 	void changesDiscarded();
 	
 private:

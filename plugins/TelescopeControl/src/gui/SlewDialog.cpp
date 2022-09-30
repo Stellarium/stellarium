@@ -21,10 +21,10 @@
 #include <QDebug>
 
 #include "Dialog.hpp"
+#include "StelFileMgr.hpp"
+
 #include "AngleSpinBox.hpp"
 #include "StelApp.hpp"
-#include "StelLocaleMgr.hpp"
-#include "StelStyle.hpp"
 #include "VecMath.hpp"
 #include "TelescopeControl.hpp"
 #include "SlewDialog.hpp"
@@ -146,10 +146,11 @@ void SlewDialog::updateTelescopeList()
 	ui->comboBoxTelescope->clear();
 
 	QHash<int, QString> connectedSlotsByNumber = telescopeManager->getConnectedClientsNames();
-	for (const auto slot : connectedSlotsByNumber.keys())
+	QHash<int, QString> ::const_iterator it=connectedSlotsByNumber.constBegin();
+	while (it!=connectedSlotsByNumber.constEnd())
 	{
-		QString telescopeName = connectedSlotsByNumber.value(slot);
-		connectedSlotsByName.insert(telescopeName, slot);
+		QString telescopeName = connectedSlotsByNumber.value(it.key());
+		connectedSlotsByName.insert(telescopeName, it.key());
 		ui->comboBoxTelescope->addItem(telescopeName);
 	}
 	
@@ -408,7 +409,7 @@ void SlewDialog::loadPointsFromFile()
 		qWarning() << "SlewDialog: Error loading points";
 		return;
 	}
-	if(!QFileInfo(pointsJsonPath).exists())
+	if(!QFileInfo::exists(pointsJsonPath))
 	{
 		qWarning() << "SlewDialog::loadPointsFromFile(): No points loaded. File is missing:"
 				   << QDir::toNativeSeparators(pointsJsonPath);

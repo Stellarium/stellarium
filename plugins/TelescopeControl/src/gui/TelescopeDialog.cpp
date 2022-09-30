@@ -20,10 +20,7 @@
 
 #include "Dialog.hpp"
 #include "StelApp.hpp"
-#include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelFileMgr.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelTranslator.hpp"
 #include "TelescopeControl.hpp"
@@ -257,7 +254,7 @@ void TelescopeDialog::createDialogContent()
 void TelescopeDialog::setAboutText()
 {
 	// Regexp to replace {text} with an HTML link.
-	QRegularExpression a_rx("[{]([^{]*)[}]");
+	static const QRegularExpression a_rx("[{]([^{]*)[}]");
 
 	//TODO: Expand
 	QString aboutPage = "<html><head></head><body>";
