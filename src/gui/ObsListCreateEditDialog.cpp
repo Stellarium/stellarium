@@ -560,8 +560,8 @@ void ObsListCreateEditDialog::obsListImportListButtonPresssed()
 				}
 				else
 				{
-					qWarning() << "[ObservingList Creation/Edition import] the file is empty or doesn't contains legacy bookmarks.";
-					displayErrorMessage(q_("Error: the file is empty or doesn't contains legacy bookmarks."));
+					qWarning() << "[ObservingList Creation/Edition import] the file is empty or doesn't contain legacy bookmarks.";
+					displayErrorMessage(q_("Error: the file is empty or doesn't contain legacy bookmarks."));
 					return;
 				}
 			}
