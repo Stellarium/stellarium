@@ -685,7 +685,7 @@ QScrollBar::up-arrow {
 	subcontrol-position: top; /* position at the top right corner */
 	width: 16px;
 	height: 20px;
-	image: url(:/graphicGui/uieSpinup.png);
+	image: url(:/graphicGui/uieScrollup.png);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(54, 54, 57), stop: 1 rgb(34, 34, 35));
 }
 
@@ -694,7 +694,7 @@ QScrollBar::down-arrow {
 	subcontrol-position: bottom; /* position at the bottom right corner */
 	width: 16px;
 	height: 20px;
-	image: url(:/graphicGui/uieSpindown.png);
+	image: url(:/graphicGui/uieScrolldown.png);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(54, 54, 57), stop: 1 rgb(34, 34, 35));
 }
 
@@ -739,7 +739,7 @@ QScrollBar::right-arrow {
 	subcontrol-position: left; /* position at the top right corner */
 	height: 16px;
 	width: 20px;
-	image: url(:/graphicGui/uieSpinleft.png);
+	image: url(:/graphicGui/uieScrollleft.png);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(54, 54, 57), stop: 1 rgb(34, 34, 35));
 }
 
@@ -748,7 +748,7 @@ QScrollBar::left-arrow {
 	subcontrol-position: right; /* position at the bottom right corner */
 	height: 16px;
 	width: 20px;
-	image: url(:/graphicGui/uieSpinright.png);
+	image: url(:/graphicGui/uieScrollright.png);
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(54, 54, 57), stop: 1 rgb(34, 34, 35));
 }
 
@@ -835,16 +835,16 @@ QLineEdit[collision="true"] {
 #dateTimeDialogForm QDoubleSpinBox::up-button {
 	subcontrol-origin: border;
 	subcontrol-position: top center;
-	margin: 0;
+	margin: 0 14px 8px 12px;
 	width: 32px;
 	border: none;
 	background: none;
-	image: none;
+	image: url(:/graphicGui/uieSpinup.png);
 }
 
 #dateTimeDialogForm QSpinBox::up-arrow,
 #dateTimeDialogForm QDoubleSpinBox::up-arrow {
-	image: url(:/graphicGui/uieSpinup.png);
+	image: none;
 	subcontrol-origin: border;
 	subcontrol-position: bottom center;
 	padding-bottom: 20px;
@@ -854,16 +854,16 @@ QLineEdit[collision="true"] {
 #dateTimeDialogForm QDoubleSpinBox::down-button {
 	subcontrol-origin: border;
 	subcontrol-position: bottom center;
-	margin: 0;
+	margin: 8px 14px 0 12px;
 	border: none;
 	width: 32px;
 	background: none;
-	image: none;
+	image: url(:/graphicGui/uieSpindown.png);
 }
 
 #dateTimeDialogForm QSpinBox::down-arrow,
 #dateTimeDialogForm QDoubleSpinBox::down-arrow {
-	image: url(:/graphicGui/uieSpindown.png);
+	image: none;
 	subcontrol-origin: border;
 	subcontrol-position: top center;
 	padding-top: 20px;

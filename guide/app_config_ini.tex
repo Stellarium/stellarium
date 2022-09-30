@@ -133,7 +133,7 @@ flag\_ephemeris\_smart\_dates  & bool   & true  & Set to \emph{true} to use smar
 flag\_ephemeris\_scale\_markers  & bool   & false  & Set to \emph{true} to use small ephemeris markers, when line is enabled.\\%\midrule
 ephemeris\_celestial\_body     & string & Moon  & Default celestial body for computation of ephemerides.\\%\midrule
 ephemeris\_time\_step          & int    & 6     & Identificator for time step category.\\%\midrule
-ephemeris\_data\_step          & int    & 0     & Value of skipping step when skipping option is enabled (lable each N steps, where N is step).\\%\midrule
+ephemeris\_data\_step          & int    & 0     & Value of skipping step when skipping option is enabled (label each N steps, where N is step).\\%\midrule
 celestial\_magnitude\_limit    & float  & 6.0   & Value of limiting magnitude for the celestial objects in computation of their positions.\\%\midrule
 celestial\_category            & int    & 200   & Identificator for default category of celestial bodies.\\%\midrule
 flag\_horizontal\_coordinates  & bool   & false & Set to \emph{true} to use horizontal coordinates for compute of positions for the celestial objects.\\%\midrule
@@ -141,7 +141,7 @@ flag\_phenomena\_opposition    & bool   & false & Set to \emph{true} to compute 
 flag\_phenomena\_perihelion    & bool   & false & Set to \emph{true} to compute perihelion and aphelion for Solar system bodies (except moons).\\%\midrule
 phenomena\_angular\_separation & float  & 1.0   & Allowed angular separation between celestial bodies for computation of phenomena.\\%\midrule
 phenomena\_celestial\_body     & string & Venus & Default celestial body for computation of phenomena.\\%\midrule
-phenomena\_celestial\_group    & int    & 0     & Identificator for group of celestial bodies for computation of phenomenae.\\%\midrule
+phenomena\_celestial\_group    & int    & 0     & Identificator for group of celestial bodies for computation of phenomena.\\%\midrule
 wut\_magnitude\_limit          & float  & 10.0  & Value of limiting magnitude for calculations within What's Up Tonight feature.\\%\midrule
 wut\_time\_interval            & int    & 0     & Identificator for time interval within What's Up Tonight feature computations.\\%\midrule
 wut\_angular\_limit\_flag      & bool   & false & Set to \emph{true} to use the angular size filter.\\%\midrule
@@ -592,7 +592,7 @@ date\_display\_format & string & date display format: can be \emph{system\_defau
 
 \begin{longtable}{l|l|p{77mm}}\toprule
 \emph{ID}                 & \emph{Type} & \emph{Description}\\\midrule
-invert\_screenshots\_colors & bool   & If \emph{true}, Stellarium will saving the screenshorts with inverted colors.\\%\midrule
+invert\_screenshots\_colors & bool   & If \emph{true}, Stellarium will save the screenshots with inverted colors.\\%\midrule
 screenshot\_dir             & string & Path for saving screenshots\\%\midrule
 screenshot\_format          & string & File format. One of \texttt{png|jpg|jpeg|tif|tiff| webp|pbm|pgm|ppm|xbm|xpm|ico}\\
 screenshot\_custom\_size    & bool   & \emph{true} if you want to specify particular dimensions next:\\
@@ -801,7 +801,7 @@ This section controls how stars are rendered.
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}                & \emph{Type} & \emph{Description}\\\midrule
 relative\_scale          & float       & relative size of bright and faint stars. Higher values mean that bright stars 
-                                         are comparitively larger when rendered. Typical value: \emph{1.0}\\%\midrule
+                                         are comparatively larger when rendered. Typical value: \emph{1.0}\\%\midrule
 absolute\_scale          & float       & Changes how large stars are rendered. larger value lead to larger depiction. Typical value: \emph{1.0}\\%\midrule
 star\_twinkle\_amount    & float       & amount of twinkling. Typical value: \emph{0.3}\\%\midrule
 flag\_star\_twinkle      & bool        & \emph{true} to allow twinkling (but only when atmosphere is active!).\\%\midrule
