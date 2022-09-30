@@ -34,8 +34,8 @@ public:
 	DateTimeDialog(QObject* parent);
 	~DateTimeDialog() Q_DECL_OVERRIDE;
 	double newJd();
-	bool valid(int y, int m, int d, int h, int min, int s);
-	bool validJd(double jday);	
+	bool makeValidAndApply(int y, int m, int d, int h, int min, int s);
+	bool applyJD(double jday);
 public slots:
 	virtual void retranslate() Q_DECL_OVERRIDE;
 	virtual void close() Q_DECL_OVERRIDE;

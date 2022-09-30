@@ -122,7 +122,7 @@ void DateTimeDialog::disconnectSpinnerEvents()const
 
 //! take in values, adjust for calendrical correctness if needed, and push to
 //! the widgets and signals
-bool DateTimeDialog::valid(int y, int m, int d, int h, int min, int s)
+bool DateTimeDialog::makeValidAndApply(int y, int m, int d, int h, int min, int s)
 {
 	if (!StelUtils::changeDateTimeForRollover(y, m, d, h, min, s, &year, &month, &day, &hour, &minute, &second)) {
 		year =  y;
@@ -138,7 +138,7 @@ bool DateTimeDialog::valid(int y, int m, int d, int h, int min, int s)
 	return true;
 }
 
-bool DateTimeDialog::validJd(double jday)
+bool DateTimeDialog::applyJD(double jday)
 {
 	pushToWidgets();
 	core->setJD(jday);
@@ -166,7 +166,7 @@ void DateTimeDialog::yearChanged(int newyear)
 {
 	if ( year != newyear )
 	{
-		valid( newyear, month, day, hour, minute, second );
+		makeValidAndApply( newyear, month, day, hour, minute, second );
 	}
 }
 
@@ -174,43 +174,43 @@ void DateTimeDialog::monthChanged(int newmonth)
 {
 	if ( month != newmonth )
 	{
-		valid( year, newmonth, day, hour, minute, second );
+		makeValidAndApply( year, newmonth, day, hour, minute, second );
 	}
 }
 
 void DateTimeDialog::dayChanged(int newday)
 {
 	int delta = newday - day;
-	validJd(jd + delta);
+	applyJD(jd + delta);
 }
 
 void DateTimeDialog::hourChanged(int newhour)
 {
 	int delta = newhour - hour;
-	validJd(jd + delta/24.);
+	applyJD(jd + delta/24.);
 }
 
 void DateTimeDialog::minuteChanged(int newminute)
 {
 	int delta = newminute - minute;
-	validJd(jd + delta/1440.);
+	applyJD(jd + delta/1440.);
 }
 
 void DateTimeDialog::secondChanged(int newsecond)
 {
 	int delta = newsecond - second;
-	validJd(jd + delta/86400.);
+	applyJD(jd + delta/86400.);
 }
 
 void DateTimeDialog::jdChanged(double njd)
 {
-	validJd(njd);
+	applyJD(njd);
 }
 
 void DateTimeDialog::mjdChanged(double nmjd)
 {
 	double delta = nmjd - getMjd();
-	validJd(jd + delta);
+	applyJD(jd + delta);
 }
 
 double DateTimeDialog::newJd()
