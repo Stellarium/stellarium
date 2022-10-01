@@ -90,7 +90,7 @@ private slots:
 	void buttonBrowseServerDirectoryPressed(void);
 	
 	//! Slot for receiving information from TelescopeConfigurationDialog
-	void saveChanges(QString name, ConnectionType type);
+	void saveChanges(QString name, TelescopeControlGlobals::ConnectionType type);
 	//! Slot for receiving information from TelescopeConfigurationDialog
 	void discardChanges(void);
 	

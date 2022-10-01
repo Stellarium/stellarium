@@ -61,7 +61,7 @@ private slots:
 
 	//Download
 	void pasteClipboardURL();
-	void bookmarkSelected(QString);
+	void bookmarkSelected(int bookmarkIndex);
 
 	//Buttons for the list tab
 	void acquireObjectData();

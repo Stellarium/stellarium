@@ -28,9 +28,7 @@
 
 #include "StoredPointsDialog.hpp"
 
-#include "StelStyle.hpp"
 #include "StelDialog.hpp"
-#include "StelFileMgr.hpp"
 
 class Ui_slewDialog;
 class TelescopeControl;

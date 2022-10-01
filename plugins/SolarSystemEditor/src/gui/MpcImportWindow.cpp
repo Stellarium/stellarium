@@ -100,46 +100,32 @@ void MpcImportWindow::createDialogContent()
 
 	//Signals
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
+	connect(ui->closeStelWindow,     SIGNAL(clicked()),         this, SLOT(close()));
+	connect(ui->TitleBar,            SIGNAL(movedTo(QPoint)),   this, SLOT(handleMovedTo(QPoint)));
 
-	connect(ui->pushButtonAcquire, SIGNAL(clicked()),
-	        this, SLOT(acquireObjectData()));
-	connect(ui->pushButtonAbortDownload, SIGNAL(clicked()),
-	        this, SLOT(abortDownload()));
-	connect(ui->pushButtonAdd, SIGNAL(clicked()), this, SLOT(addObjects()));
-	connect(ui->pushButtonDiscard, SIGNAL(clicked()),
-	        this, SLOT(discardObjects()));
+	connect(ui->pushButtonAcquire,       SIGNAL(clicked()), this, SLOT(acquireObjectData()));
+	connect(ui->pushButtonAbortDownload, SIGNAL(clicked()), this, SLOT(abortDownload()));
+	connect(ui->pushButtonAdd,           SIGNAL(clicked()), this, SLOT(addObjects()));
+	connect(ui->pushButtonDiscard,       SIGNAL(clicked()), this, SLOT(discardObjects()));
 
-	connect(ui->pushButtonBrowse, SIGNAL(clicked()), this, SLOT(selectFile()));
-	connect(ui->comboBoxBookmarks, SIGNAL(currentIndexChanged(QString)),
-	        this, SLOT(bookmarkSelected(QString)));
+	connect(ui->pushButtonBrowse,        SIGNAL(clicked()), this, SLOT(selectFile()));
+	connect(ui->comboBoxBookmarks,       SIGNAL(currentIndexChanged(int)),this, SLOT(bookmarkSelected(int)));
 
-	connect(ui->radioButtonFile, SIGNAL(toggled(bool)),
-	        ui->frameFile, SLOT(setVisible(bool)));
-	connect(ui->radioButtonURL, SIGNAL(toggled(bool)),
-	        ui->frameURL, SLOT(setVisible(bool)));
+	connect(ui->radioButtonFile,         SIGNAL(toggled(bool)), ui->frameFile, SLOT(setVisible(bool)));
+	connect(ui->radioButtonURL,          SIGNAL(toggled(bool)), ui->frameURL,  SLOT(setVisible(bool)));
 
-	connect(ui->radioButtonAsteroids, SIGNAL(toggled(bool)),
-	        this, SLOT(switchImportType(bool)));
-	connect(ui->radioButtonComets, SIGNAL(toggled(bool)),
-	        this, SLOT(switchImportType(bool)));
+	connect(ui->radioButtonAsteroids,    SIGNAL(toggled(bool)), this, SLOT(switchImportType(bool)));
+	connect(ui->radioButtonComets,       SIGNAL(toggled(bool)), this, SLOT(switchImportType(bool)));
 
-	connect(ui->pushButtonMarkAll, SIGNAL(clicked()),
-	        this, SLOT(markAll()));
-	connect(ui->pushButtonMarkNone, SIGNAL(clicked()),
-	        this, SLOT(unmarkAll()));
+	connect(ui->pushButtonMarkAll,       SIGNAL(clicked()), this, SLOT(markAll()));
+	connect(ui->pushButtonMarkNone,      SIGNAL(clicked()), this, SLOT(unmarkAll()));
 
-	connect(ui->pushButtonSendQuery, SIGNAL(clicked()),
-	        this, SLOT(sendQuery()));
-	connect(ui->lineEditQuery, SIGNAL(returnPressed()),
-		this, SLOT(sendQuery()));
-	connect(ui->pushButtonAbortQuery, SIGNAL(clicked()),
-	        this, SLOT(abortQuery()));
-	connect(ui->lineEditQuery, SIGNAL(textEdited(QString)),
-	        this, SLOT(resetNotFound()));
-	//connect(ui->lineEditQuery, SIGNAL(editingFinished()), this, SLOT(sendQuery()));
-	connect(countdownTimer, SIGNAL(timeout()), this, SLOT(updateCountdown()));
+	connect(ui->pushButtonSendQuery,     SIGNAL(clicked()),           this, SLOT(sendQuery()));
+	connect(ui->lineEditQuery,           SIGNAL(returnPressed()),     this, SLOT(sendQuery()));
+	connect(ui->pushButtonAbortQuery,    SIGNAL(clicked()),           this, SLOT(abortQuery()));
+	connect(ui->lineEditQuery,           SIGNAL(textEdited(QString)), this, SLOT(resetNotFound()));
+	//connect(ui->lineEditQuery,         SIGNAL(editingFinished()),   this, SLOT(sendQuery()));
+	connect(countdownTimer,              SIGNAL(timeout()),           this, SLOT(updateCountdown()));
 
 	QSortFilterProxyModel * filterProxyModel = new QSortFilterProxyModel(this);
 	filterProxyModel->setSourceModel(candidateObjectsModel);
@@ -356,8 +342,9 @@ void MpcImportWindow::selectFile()
 	ui->lineEditFilePath->setText(filePath);
 }
 
-void MpcImportWindow::bookmarkSelected(QString bookmarkTitle)
+void MpcImportWindow::bookmarkSelected(int bookmarkIndex)
 {
+	const QString bookmarkTitle=ui->comboBoxBookmarks->itemText(bookmarkIndex);
 	if (bookmarkTitle.isEmpty() || bookmarks.value(importType).value(bookmarkTitle).isEmpty())
 	{
 		ui->lineEditURL->clear();

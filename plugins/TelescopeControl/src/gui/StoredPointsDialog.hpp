@@ -24,15 +24,12 @@
 #include <QDialog>
 #include <QStandardItemModel>
 
-#include "StelApp.hpp"
-#include "StelStyle.hpp"
-#include "StelTranslator.hpp"
+
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelUtils.hpp"
-
 #include "AngleSpinBox.hpp"
 
 class Ui_StoredPoints;
