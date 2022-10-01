@@ -414,6 +414,8 @@ StelLocationMgr::StelLocationMgr()
 	{
 		// Seen on September 26, 2022. Officially renamed.
 		locationDBToIANAtranslations.insert("Europe/Kyiv",      "Europe/Kiev");
+		// Seen in an unrelated bug report, 2022-08-30
+		locationDBToIANAtranslations.insert("Asia/Pyongyang",   "UTC+09:00");
 		// reported in SF forum on 2017-03-27
 		locationDBToIANAtranslations.insert("Europe/Minsk",     "UTC+03:00");
 		locationDBToIANAtranslations.insert("Europe/Samara",    "UTC+04:00");
