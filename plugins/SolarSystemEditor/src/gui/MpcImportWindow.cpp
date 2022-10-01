@@ -1035,7 +1035,6 @@ void MpcImportWindow::loadBookmarks()
 	//Initialize with hard-coded values
 	// NOTE: this list is reordered anyway when loaded
 
-	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2018", 		"https://www.minorplanetcenter.net/iau/Ephemerides/Bright/2018/Soft00Bright.txt");
 	bookmarks[MpcMinorPlanets].insert("MPC's list of observable critical-list numbered minor planets", 	"https://www.minorplanetcenter.net/iau/Ephemerides/CritList/Soft00CritList.txt");
 	bookmarks[MpcMinorPlanets].insert("MPC's list of observable distant minor planets", 			"https://www.minorplanetcenter.net/iau/Ephemerides/Distant/Soft00Distant.txt");
 	bookmarks[MpcMinorPlanets].insert("MPC's list of observable unusual minor planets", 			"https://www.minorplanetcenter.net/iau/Ephemerides/Unusual/Soft00Unusual.txt");
