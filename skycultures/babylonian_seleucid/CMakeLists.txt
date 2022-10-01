@@ -8,5 +8,6 @@ INSTALL(FILES info.ini star_names.fab DESTINATION ${SDATALOC}/skycultures/babylo
 INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/babylonian_seleucid
 	FILES_MATCHING PATTERN "constellation*" 
 	PATTERN "*.fab" 
+	PATTERN "*.png"
 	PATTERN "description.*.utf8" 
 	PATTERN "CMakeFiles" EXCLUDE )
