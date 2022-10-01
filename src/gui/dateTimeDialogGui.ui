@@ -303,7 +303,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinner_month">
+           <widget class="ExternalStepSpinBox" name="spinner_month">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -323,10 +323,10 @@
              <set>Qt::AlignCenter</set>
             </property>
             <property name="minimum">
-             <number>0</number>
+             <number>1</number>
             </property>
             <property name="maximum">
-             <number>13</number>
+             <number>12</number>
             </property>
            </widget>
           </item>
@@ -353,7 +353,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinner_day">
+           <widget class="ExternalStepSpinBox" name="spinner_day">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -373,10 +373,10 @@
              <set>Qt::AlignCenter</set>
             </property>
             <property name="minimum">
-             <number>0</number>
+             <number>1</number>
             </property>
             <property name="maximum">
-             <number>32</number>
+             <number>31</number>
             </property>
            </widget>
           </item>
@@ -414,7 +414,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QSpinBox" name="spinner_hour">
+           <widget class="ExternalStepSpinBox" name="spinner_hour">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -431,10 +431,10 @@
              <set>Qt::AlignCenter</set>
             </property>
             <property name="minimum">
-             <number>-1</number>
+             <number>0</number>
             </property>
             <property name="maximum">
-             <number>24</number>
+             <number>23</number>
             </property>
            </widget>
           </item>
@@ -461,7 +461,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinner_minute">
+           <widget class="ExternalStepSpinBox" name="spinner_minute">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -478,10 +478,10 @@
              <set>Qt::AlignCenter</set>
             </property>
             <property name="minimum">
-             <number>-1</number>
+             <number>0</number>
             </property>
             <property name="maximum">
-             <number>60</number>
+             <number>59</number>
             </property>
            </widget>
           </item>
@@ -511,7 +511,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinner_second">
+           <widget class="ExternalStepSpinBox" name="spinner_second">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -540,10 +540,10 @@
              <string/>
             </property>
             <property name="minimum">
-             <number>-1</number>
+             <number>0</number>
             </property>
             <property name="maximum">
-             <number>60</number>
+             <number>59</number>
             </property>
            </widget>
           </item>
@@ -716,6 +716,11 @@
    <class>StelCloseButton</class>
    <extends>QPushButton</extends>
    <header>gui/StelCloseButton.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>ExternalStepSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>ExternalStepSpinBox.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>
