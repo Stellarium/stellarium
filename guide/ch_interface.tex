@@ -1380,7 +1380,7 @@ selected celestial bodies over a range of 600 days (centered on the
 current date) as graphs.
 
 
-\subsection{The ``Eclipses'' Tab}
+\subsection{The Eclipses Tab}
 \label{sec:gui:AstroCalc:Eclipses}
 
 The Eclipses tool\newFeature{0.22.0} has four subtabs: ``All Solar Eclipses'', ``Local Solar Eclipses'', ``Lunar Eclipses'' and ``Planetary Transits''. 
@@ -1429,13 +1429,13 @@ of penumbral or partial eclipse are green.
 
 This subtab (Fig.~\ref{fig:gui:AstroCalc:Eclipses:LocalSolarEclipses}) contains data for solar eclipses for the current location (on the Earth!) in defined time range. 
 
-\begin{figure}[p]
-\centering\includegraphics[width=0.85\textwidth]{astrocalc_dialog_eclipses_lse.jpg}
+Double click on a line in the table will set the time of greatest eclipse.
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_eclipses_lse.jpg}
 \caption{Astronomical Calculations (AstroCalc): Eclipses / Local Solar Eclipses}
 \label{fig:gui:AstroCalc:Eclipses:LocalSolarEclipses}
 \end{figure}
-
-Double click on a line in the table will set the time of greatest eclipse.
 
 
 \subsubsection{The ``Lunar Eclipses'' Subtab}
@@ -1447,6 +1447,12 @@ Double click on the table row will set time of greatest eclipse. Click on the ta
 The quantity gamma is the minimum distance from the center of the Moon to the axis of Earth’s umbral shadow cone, in units of Earth’s equatorial radius.
 This distance is positive or negative, depending on whether the Moon passes north or south of the shadow cone axis.
 
+\begin{figure}[p]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_eclipses_le.jpg}
+\caption{Astronomical Calculations (AstroCalc): Eclipses / Lunar Eclipses}
+\label{fig:gui:AstroCalc:Eclipses:LunarEclipses}
+\end{figure}
+
 The visibility conditions are based on the altitude of the Moon at greatest eclipse:
 \begin{description}
   \item[Invisible] --- the greatest eclipse is invisible at the current location (altitude is negative);
@@ -1455,19 +1461,6 @@ The visibility conditions are based on the altitude of the Moon at greatest ecli
   \item[Good] --- good visibility conditions for current location (altitude range is 30---45$\degree$; i.e., ``photometric altitude'');
   \item[Perfect] --- perfect visibility conditions for current location (altitude range is 45---90$\degree$).
 \end{description}
-
-\begin{figure}[p]
-\centering\includegraphics[width=0.85\textwidth]{astrocalc_dialog_eclipses_le.jpg}
-\caption{Astronomical Calculations (AstroCalc): Eclipses / Lunar Eclipses}
-\label{fig:gui:AstroCalc:Eclipses:LunarEclipses}
-\end{figure}
-
-\begin{figure}[p]
-\centering\includegraphics[width=0.85\textwidth]{astrocalc_dialog_transits.jpg}
-\caption{Astronomical Calculations (AstroCalc): Eclipses / Planetary Transits}
-\label{fig:gui:AstroCalc:Eclipses:PlanetaryTransits}
-\end{figure}
-
 
 \subsubsection{The ``Planetary Transits'' Subtab}\newFeature{0.22.2}
 \label{sec:gui:AstroCalc:Eclipses:PlanetaryTransits}
@@ -1483,13 +1476,20 @@ and setting times into account.
 
 Double click on the table row will set time of mid-transit.
 
+\begin{figure}[htp]
+\centering\includegraphics[width=0.8\textwidth]{astrocalc_dialog_transits.jpg}
+\caption{Astronomical Calculations (AstroCalc): Eclipses / Planetary Transits}
+\label{fig:gui:AstroCalc:Eclipses:PlanetaryTransits}
+\end{figure}
+
+\clearpage
 \section{The Help Window}
 \label{sec:gui:help}
 
 \subsection{The Help Tab}
 \label{sec:gui:help:help}
 \begin{figure}[htp]
-\centering\includegraphics[width=0.625\textwidth]{help_dialog.png}
+\centering\includegraphics[width=0.51\textwidth]{help_dialog.png}
 \caption{Help Window}
 \label{fig:gui:help}
 \end{figure}
