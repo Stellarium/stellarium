@@ -1,3 +1,40 @@
+1.0 [2022-10-01]
+The Stellarium team did it. Stellarium 1.0 is here!
+
+What makes this 1.0?
+
+- After more than 20 years of development the program is finally accurate 
+  enough for historical application.
+- This is the first release based on the Qt6 framework, so the project is 
+  safe for future development. These packages are tagged with a version 
+  number like 1.22.3.
+- We keep releasing Qt5-based packages for legacy or obsolete systems. 
+  This may include many Windows users who have to run ANGLE mode.
+  These packages are tagged with a version number like 0.22.3.
+
+What is new for users?
+
+- A new, much better skylight model (Not for MacOS and OpenGL ES2 systems, 
+  sorry.)
+- Many details around eclipses
+- Updated Observation List features
+- New features in AstroCalc tool
+- HiDPI improvements
+- Better dithering
+- Able to use Windows location service (Windows)
+- New skyculture: Samoan
+- Updated several skycultures
+- Updates in Angle Measure, Satellites, Oculars, Remote Control, Pulsars 
+  plugins
+- Many more bugfixes.
+
+A huge thanks to the people who helped us a lot by reporting bugs, and
+especially contributed in development!
+
+Clear Skies!
+
+Alexander and Georg
+
 0.22.2 [2022-07-07]
 The major changes of this version:
 - Added recognition licenses for skycultures
