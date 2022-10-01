@@ -204,7 +204,7 @@ void OnlineQueries::createToolbarButton() const
 			StelButton* button =	new StelButton(Q_NULLPTR,
 							       QPixmap(":/OnlineQueries/bt_OnlineQueries_On.png"),
 							       QPixmap(":/OnlineQueries/bt_OnlineQueries_Off.png"),
-							       QPixmap(":/graphicGui/glow32x32.png"),
+							       QPixmap(":/graphicGui/miscGlow32x32.png"),
 							       "actionShow_OnlineQueries");
 			//qCDebug(onlineQueries) << "adding Button to toolbar ...";
 
