@@ -411,7 +411,7 @@ SET(ENABLE_QTWEBENGINE 1 CACHE BOOL "Define whether QtWebEngine module should be
 SET(ENABLE_GPS 1 CACHE BOOL "Define whether GPS queries should be supported.")
 
 # Activate support for ShowMySky atmosphere
-SET(ENABLE_SHOWMYSKY 1 CACHE BOOL "Define whether to support ShowMySky atmosphere model")
+SET(ENABLE_SHOWMYSKY 1 CACHE BOOL "Define whether to support ShowMySky atmosphere model if installed")
 
 # SPOUT allows relaying the Stellarium OpenGL framebuffer as DirectX texture in other programs.
 # It exists on Windows only. Syphon is a similar system for MacOS, this might be added by a Mac developer.
@@ -685,15 +685,20 @@ SET(CMAKE_AUTOUIC ON) # ?
 SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 IF(ENABLE_SHOWMYSKY)
-    FIND_PACKAGE(ShowMySky REQUIRED)
-    ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
-    GET_TARGET_PROPERTY(ShowMySky_INCLUDE_DIRECTORIES ShowMySky::ShowMySky INTERFACE_INCLUDE_DIRECTORIES)
-    GET_TARGET_PROPERTY(ShowMySky_LIBRARY ShowMySky::ShowMySky LOCATION)
-    IF(EXISTS ${ShowMySky_LIBRARY})
-	MESSAGE(STATUS "Found ShowMySky library: ${ShowMySky_LIBRARY}")
-    ELSE()
-	MESSAGE(STATUS "Could NOT found ShowMySky library")
-    ENDIF()
+    FIND_PACKAGE(ShowMySky QUIET)
+    IF(ShowMySky_FOUND)
+         ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
+         GET_TARGET_PROPERTY(ShowMySky_INCLUDE_DIRECTORIES ShowMySky::ShowMySky INTERFACE_INCLUDE_DIRECTORIES)
+         GET_TARGET_PROPERTY(ShowMySky_LIBRARY ShowMySky::ShowMySky LOCATION)
+         IF(EXISTS ${ShowMySky_LIBRARY})
+             MESSAGE(STATUS "Found ShowMySky library: ${ShowMySky_LIBRARY}")
+         ELSE()
+             MESSAGE(STATUS "Could NOT found ShowMySky library")
+         ENDIF()
+    ELSE(ShowMySky_FOUND)
+         MESSAGE(WARNING "ShowMySky not found although you have selected to use it. \
+                          Make sure to add -DCMAKE_PREFIX_PATH=<CalcMySky_install>/CalcMySky/lib/ShowMySky")
+    ENDIF(ShowMySky_FOUND)
 ENDIF(ENABLE_SHOWMYSKY)
 
 IF(ENABLE_SCRIPTING)
