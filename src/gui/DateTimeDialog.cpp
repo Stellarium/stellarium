@@ -75,6 +75,13 @@ void DateTimeDialog::createDialogContent()
 	ui->dateDelimiterLabel2->setText(delimiter);
 
 	connectSpinnerEvents();
+
+	connect(ui->spinner_second, &ExternalStepSpinBox::stepsRequested, this, [this](int steps){secondChanged(second+steps);});
+	connect(ui->spinner_minute, &ExternalStepSpinBox::stepsRequested, this, [this](int steps){minuteChanged(minute+steps);});
+	connect(ui->spinner_hour  , &ExternalStepSpinBox::stepsRequested, this, [this](int steps){  hourChanged(hour  +steps);});
+	connect(ui->spinner_day   , &ExternalStepSpinBox::stepsRequested, this, [this](int steps){   dayChanged(day   +steps);});
+	connect(ui->spinner_month , &ExternalStepSpinBox::stepsRequested, this, [this](int steps){ monthChanged(month +steps);});
+
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)
 	{
@@ -226,14 +233,27 @@ double DateTimeDialog::newJd()
 void DateTimeDialog::pushToWidgets()
 {
 	disconnectSpinnerEvents();
-	ui->spinner_year->setValue(year);
-	ui->spinner_month->setValue(month);
-	ui->spinner_day->setValue(day);
-	ui->spinner_hour->setValue(hour);
-	ui->spinner_minute->setValue(minute);
-	ui->spinner_second->setValue(second);
+
+	// Don't touch spinboxes that don't change. Otherwise it interferes with
+	// typing (e.g. when starting a number with leading zero), and sometimes
+	// even with stepping (e.g. the user clicks an arrow, but the number
+	// remains the same, although the time did change).
+	if(ui->spinner_year->value() != year)
+		ui->spinner_year->setValue(year);
+	if(ui->spinner_month->value() != month)
+		ui->spinner_month->setValue(month);
+	if(ui->spinner_day->value() != day)
+		ui->spinner_day->setValue(day);
+	if(ui->spinner_hour->value() != hour)
+		ui->spinner_hour->setValue(hour);
+	if(ui->spinner_minute->value() != minute)
+		ui->spinner_minute->setValue(minute);
+	if(ui->spinner_second->value() != second)
+		ui->spinner_second->setValue(second);
+
 	ui->spinner_jd->setValue(jd);
 	ui->spinner_mjd->setValue(getMjd());
+
 	if (jd<2299161) // 1582-10-15
 	{
 		ui->dateTimeTab->setToolTip(q_("Date and Time in Julian calendar"));
@@ -244,6 +264,7 @@ void DateTimeDialog::pushToWidgets()
 		ui->dateTimeTab->setToolTip(q_("Date and Time in Gregorian calendar"));
 		ui->dateTimeTabWidget->setTabToolTip(0, q_("Date and Time in Gregorian calendar"));
 	}
+
 	connectSpinnerEvents();
 }
 

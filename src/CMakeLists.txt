@@ -365,6 +365,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
 	  gui/ContributorsList.hpp
           gui/StelCloseButton.hpp
           gui/StelCloseButton.cpp
+		  gui/ExternalStepSpinBox.hpp
      )
 
      ################# compiles .ui files ############

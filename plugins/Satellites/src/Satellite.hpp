@@ -313,7 +313,7 @@ private:
 	int status;
 	//! Contains the J2000 position.
 	Vec3d XYZ;
-	QPair< QByteArray, QByteArray > tleElements;
+	QPair< QString, QString> tleElements;
 	double height, range, rangeRate;
 	QList<CommLink> comms;
 	Vec3f hintColor;	
