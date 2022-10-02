@@ -141,7 +141,7 @@ void TelescopeDialog::createDialogContent()
 	
 	//In other dialogs:
 	connect(&configurationDialog, SIGNAL(changesDiscarded()), this, SLOT(discardChanges()));
-	connect(&configurationDialog, SIGNAL(changesSaved(QString, ConnectionType)), this, SLOT(saveChanges(QString, ConnectionType)));
+	connect(&configurationDialog, SIGNAL(changesSaved(QString, TelescopeControlGlobals::ConnectionType)), this, SLOT(saveChanges(QString, TelescopeControlGlobals::ConnectionType)));
 	
 	//Initialize the style
 	updateStyle();
