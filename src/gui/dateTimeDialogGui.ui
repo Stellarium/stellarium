@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>449</width>
-    <height>111</height>
+    <width>334</width>
+    <height>85</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -149,7 +149,6 @@
         </property>
         <property name="font">
          <font>
-          <weight>75</weight>
           <italic>false</italic>
           <bold>true</bold>
          </font>
@@ -270,10 +269,10 @@
              <set>Qt::AlignCenter</set>
             </property>
             <property name="minimum">
-             <number>-1000000</number>
+             <number>-100000</number>
             </property>
             <property name="maximum">
-             <number>1000000</number>
+             <number>100000</number>
             </property>
            </widget>
           </item>
