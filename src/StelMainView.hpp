@@ -110,6 +110,10 @@ public:
 
 	//! Returns the information about the GL context, this does not require the context to be active.
 	GLInfo getGLInformation() const { return glInfo; }
+
+	//! Returns the desired OpenGL format settings.
+	static QSurfaceFormat getDesiredGLFormat(QSettings *configuration);
+
 public slots:
 
 	//! Set whether fullscreen is activated or not
@@ -272,10 +276,6 @@ private slots:
 private:
 	//! The graphics scene notifies us when a draw finished, so that we can queue the next one
 	void drawEnded();
-	//! Returns the desired OpenGL format settings,
-	//! on desktop this corresponds to a GL 2.1 context,
-	//! with 32bit RGBA buffer and 24/8 depth/stencil buffer
-	static QSurfaceFormat getDesiredGLFormat(QSettings *configuration);
 	//! provide extended OpenGL diagnostics in logfile.
 	void dumpOpenGLdiagnostics() const;
 	//! Startup diagnostics, providing test for various circumstances of bad OS/OpenGL driver combinations
