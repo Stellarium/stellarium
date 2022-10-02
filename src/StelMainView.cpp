@@ -126,7 +126,7 @@ public:
 		qDebug() << "OpenGL supported version: " << QString(reinterpret_cast<const char*>(ctx->functions()->glGetString(GL_VERSION)));
 		qDebug() << "Current Format: " << this->format();
 
-		if (qApp->property("onetime_compat33")==true)
+		if (qApp->property("onetime_opengl_compat").toBool())
 		{
 			// This may not return the version number set previously!
 			qDebug() << "StelGLWidget context format version:" << ctx->format().majorVersion() << "." << context()->format().minorVersion();
@@ -618,34 +618,7 @@ StelMainView::StelMainView(QSettings* settings)
 	}
 #endif
 
-	//get the desired opengl format parameters
 	QSurfaceFormat glFormat = getDesiredGLFormat(configuration);
-	// VSync control
-	#ifdef Q_OS_MACOS
-	// FIXME: workaround for bug LP:#1705832 (https://bugs.launchpad.net/stellarium/+bug/1705832)
-	// Qt: https://bugreports.qt.io/browse/QTBUG-53273
-	const bool vsdef = false; // use vsync=false by default on macOS
-	#else
-	const bool vsdef = true;
-	#endif
-	if (configuration->value("video/vsync", vsdef).toBool())
-		glFormat.setSwapInterval(1);
-	else
-		glFormat.setSwapInterval(0);
-
-	qDebug()<<"Desired surface format: "<<glFormat;
-
-	//we set the default format to our required format, if possible
-	//this only works with Qt 5.4+
-	QSurfaceFormat defFmt = glFormat;
-	//we don't need these buffers in the background
-	defFmt.setAlphaBufferSize(0);
-	defFmt.setStencilBufferSize(0);
-	defFmt.setDepthBufferSize(0);
-	qDebug() << "setDefaultFormat";
-	QSurfaceFormat::setDefaultFormat(defFmt); // Causes a warning in Qt5.
-
-	//QOpenGLWidget should set the format in constructor to prevent creating an unnecessary temporary context
 	glWidget = new StelGLWidget(glFormat, this);
 	setViewport(glWidget);
 
@@ -740,56 +713,56 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 	QSurfaceFormat fmt = QSurfaceFormat::defaultFormat();
 	qDebug() << "Default surface format: " << fmt;
 
-	#ifdef Q_OS_MACOS
-	fmt.setMajorVersion(3);
-	fmt.setMinorVersion(3);
-	fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
-	#else
 	//if on an GLES build, do not set the format
-	const QOpenGLContext::OpenGLModuleType openGLModuleType=QOpenGLContext::openGLModuleType();
+	const auto openGLModuleType = QOpenGLContext::openGLModuleType();
+	qDebug() << "OpenGL module type:" << openGLModuleType;
 	if (openGLModuleType==QOpenGLContext::LibGL)
 	{
-		// OGL 2.1 + FBOs should basically be the minimum required for Stellarium
 		fmt.setRenderableType(QSurfaceFormat::OpenGL);
-		fmt.setMajorVersion(2);
-		fmt.setMinorVersion(1);
-		if (qApp->property("onetime_compat33")==true)
+		fmt.setMajorVersion(3);
+		fmt.setMinorVersion(3);
+		fmt.setProfile(QSurfaceFormat::CoreProfile);
+
+		if (qApp && qApp->property("onetime_opengl_compat").toBool())
 		{
-			// Observations: 3.2:core has a transparent window. No black sky, no lines, but line labels. (on Qt6)
-			qDebug() << "Setting 3.3 compatibility profile from command line...";
-			fmt.setMajorVersion(3);
-			fmt.setMinorVersion(3);
+			qDebug() << "Setting OpenGL Compatibility profile from command line...";
 			fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
 		}
-		// The following is NOT needed (or even supported) when we request a 2.1 context
-		// The implementation may give us a newer context,
-		// but compatibility with 2.1 should be ensured automatically
-		//fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
-		//fmt.setOption(QSurfaceFormat::DeprecatedFunctions);
 	}
-	#endif
 
 	// Note: this only works if --mesa-mode was given on the command line. Auto-switch to Mesa or the driver name apparently cannot be detected at this early stage.
-	const bool isMesa= (QString(getenv("QT_OPENGL"))=="software");
+	const bool isMesa = QString(getenv("QT_OPENGL"))=="software";
 
 	//request some sane buffer formats
 	fmt.setRedBufferSize(8);
 	fmt.setGreenBufferSize(8);
 	fmt.setBlueBufferSize(8);
-	fmt.setAlphaBufferSize(8);
 	fmt.setDepthBufferSize(24);
-	//Stencil buffer seems necessary for GUI boxes
-	fmt.setStencilBufferSize(8);
-	const int multisamplingLevel = configuration->value("video/multisampling", 0).toInt();
-	if(  multisamplingLevel  && (qApp->property("spout").toString() == "none") && (!isMesa) )
+
+	if(qApp && qApp->property("onetime_single_buffer").toBool())
+		fmt.setSwapBehavior(QSurfaceFormat::SingleBuffer);
+
+	const int multisamplingLevel = configuration ? configuration->value("video/multisampling", 0).toInt() : 0;
+	if(multisamplingLevel && qApp && qApp->property("spout").toString() == "none" && !isMesa)
 		fmt.setSamples(multisamplingLevel);
+
+	// VSync control. NOTE: it must be applied to the default format (QSurfaceFormat::setDefaultFormat) to take effect.
+#ifdef Q_OS_MACOS
+	// FIXME: workaround for bug LP:#1705832 (https://bugs.launchpad.net/stellarium/+bug/1705832)
+	// Qt: https://bugreports.qt.io/browse/QTBUG-53273
+	const bool vsdef = false; // use vsync=false by default on macOS
+#else
+	const bool vsdef = true;
+#endif
+	if (configuration->value("video/vsync", vsdef).toBool())
+		fmt.setSwapInterval(1);
+	else
+		fmt.setSwapInterval(0);
 
 #ifdef OPENGL_DEBUG_LOGGING
 	//try to enable GL debugging using GL_KHR_debug
 	fmt.setOption(QSurfaceFormat::DebugContext);
 #endif
-	//vsync needs to be set on the default format for it to work
-	//fmt.setSwapInterval(0);
 
 	return fmt;
 }

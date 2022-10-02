@@ -185,62 +185,6 @@ int main(int argc, char **argv)
 
 	QGuiApplication::setDesktopSettingsAware(false);
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-	////////////////////////////////////////////////////////////////////////////////////////////////
-	/// We can define our default OpenGL context only with Qt6 when we have no more dynamic OpenGL/ANGLE.
-	/// IMPORTANT: OpenGL default context/formats must be configured before constructing app!
-	/// Copy from StelMainView
-	/// TODO: adapt/remove code from StelMainView?
-	/// TODO: Find out of this works on GLES devices!
-
-	//use the default format as basis
-	QSurfaceFormat fmt = QSurfaceFormat::defaultFormat();
-
-	//if on an GLES build, do not set the format
-	//if (fmt.renderableType()==QSurfaceFormat::OpenGL) // Probably at this point it is only QSurfaceFormat::DefaultRenderableType
-	{
-#ifdef Q_OS_MACOS
-		// On OSX, you should get what you ask for. Setting format later may not work.
-		// Let's assume all MacOSX deliver at least 3.3 compatibility profile.
-		fmt.setMajorVersion(3);
-		fmt.setMinorVersion(3);
-		fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
-#else
-		// OGL 2.1 + FBOs should basically be the minimum required for Stellarium
-		fmt.setMajorVersion(2);
-		fmt.setMinorVersion(1);
-		//fmt.setProfile(QSurfaceFormat::CoreProfile);
-#endif
-	}
-
-	//request some sane buffer formats
-	fmt.setRedBufferSize(8);
-	fmt.setGreenBufferSize(8);
-	fmt.setBlueBufferSize(8);
-	fmt.setAlphaBufferSize(8);
-	fmt.setDepthBufferSize(24);
-	//Stencil buffer seems necessary for GUI boxes
-	fmt.setStencilBufferSize(8);
-	//const int multisamplingLevel = configuration->value("video/multisampling", 0).toInt();
-	//if(  multisamplingLevel  && (qApp->property("spout").toString() == "none") && (!isMesa) )
-	//	fmt.setSamples(multisamplingLevel);
-
-#ifdef OPENGL_DEBUG_LOGGING
-	//try to enable GL debugging using GL_KHR_debug
-	fmt.setOption(QSurfaceFormat::DebugContext);
-#endif
-	//vsync needs to be set on the default format for it to work
-	//fmt.setSwapInterval(0);
-
-	// avoid screen blanking on Intel UHD
-	if (argList.contains("--single-buffer"))
-		fmt.setSwapBehavior(QSurfaceFormat::SingleBuffer);
-
-	QSurfaceFormat::setDefaultFormat(fmt);
-
-	/////////////////////////////////////////////////////////////////////////////////
-#endif
-
 	// This must be run before QGuiApplication, otherwise it'll have no effect.
 	CLIProcessor::parseCLIArgsPreQApp(argList);
 
@@ -396,6 +340,8 @@ int main(int argc, char **argv)
 
 	Q_ASSERT(confSettings);
 	qDebug() << "Config file is: " << QDir::toNativeSeparators(configFileFullPath);
+
+	QSurfaceFormat::setDefaultFormat(StelMainView::getDesiredGLFormat(confSettings));
 
 	#ifdef ENABLE_SCRIPTING
 	QString outputFile = StelFileMgr::getUserDir()+"/output.txt";
