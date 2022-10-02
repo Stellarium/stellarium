@@ -1,10 +1,10 @@
 // Author: Qam1
 // Name: Earth and Mars Greatest Elongations and Transits from Callisto
 // License: Public Domain
-// Version: 12.0
+// Version: 12.1
 // Description: Earth Greatest Elongations and Transits from Callisto 2000-3000. Why Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's moons, Callisto will be the one.
 
-// Made on Stellarium 0.22.2
+// Made on Stellarium 0.22.3
 
 
 long =  -73.71
@@ -14508,6 +14508,7 @@ r = d;
 while (d==r)
 {
 r = Math.floor(core.getJDay());
+core.wait(0.05);
 }
 
 
@@ -15057,7 +15058,7 @@ if (ij[i] < 10)
 
 core.setObserverLocation(rlong, 0.00, 2, 0, "", "Callisto");
 
-txt1 = LabelMgr.labelScreen("Lat: "+ 0, 10 * x, 650*y, false, 15, "#FF0000");
+txt1 = LabelMgr.labelScreen("Lat: "+ 0, 10 * x, 670*y, false, 15, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
 }
@@ -15387,13 +15388,13 @@ if (ij[i] < 10 )
 
 if (ij[i]/2 != Math.floor(ij[i]/2))
 {
-txt1 = LabelMgr.labelScreen("Greatest Elongation Morning", 10*x, 450*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Greatest Elongation Morning", 10*x, 490*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 }
 
 else
 {
-txt1 = LabelMgr.labelScreen("Greatest Elongation Evening", 10*x, 450*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Greatest Elongation Evening", 10*x, 490*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 }
 
@@ -15410,13 +15411,13 @@ if (Math.floor(ij[i]) == 54) // Mars
 
 if (ij[i] == 54)
 {
-txt1 = LabelMgr.labelScreen("Mars Transit", 10*x, 450*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Mars Transit", 10*x, 490*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 }
 
 else
 {
-txt1 = LabelMgr.labelScreen("Mars Grazing Transit", 10*x, 450*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Mars Grazing Transit", 10*x, 490*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 }
 
@@ -15432,24 +15433,24 @@ LabelMgr.setLabelShow(txt1, true);
 if (Math.floor(ij[i]) == 53) // Earth
 {
 
-txt1 = LabelMgr.labelScreen("Earth Transit", 10*x, 450*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Earth Transit", 10*x, 490*y, false, 20, "#AAFFAA");
 
 
 if (ij[i] == 53.1)
 {
-txt1 = LabelMgr.labelScreen("Earth Grazing Transit", 10*x, 450*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Earth Grazing Transit", 10*x, 490*y, false, 20, "#AAFFAA");
 
 }
 
 
 if (ij[i] == 53.2)
 {
-txt1 = LabelMgr.labelScreen("Earth Transit (Without Moon!)", 10*x, 450*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Earth Transit (Without Moon!)", 10*x, 490*y, false, 20, "#AAFFAA");
 }
 
 if (ij[i] == 53.3)
 {
-txt1 = LabelMgr.labelScreen("Moon Transit (Without Earth!)", 10*x, 450*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Moon Transit (Without Earth!)", 10*x, 490*y, false, 20, "#AAFFAA");
 
 core.selectObjectByName("Moon", pointer = true);
 StelMovementMgr.setFlagTracking(true);
@@ -15465,11 +15466,11 @@ LabelMgr.setLabelShow(txt1, true);
 
 if (ij[i] < 10)
 {
-txt1 = LabelMgr.labelScreen("Elongation:    " + ik[i].toFixed(3) + degstring + woes, 10*x, 480*y, false, 25, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Elongation:    " + ik[i].toFixed(3) + degstring + woes, 10*x, 520*y, false, 25, "#AAFFAA");
 }
 else
 {
-txt1 = LabelMgr.labelScreen("From Sun Center: " + ik[i].toFixed(3) + degstring, 10*x, 480*y, false, 25, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("From Sun Center: " + ik[i].toFixed(3) + degstring, 10*x, 520*y, false, 25, "#AAFFAA");
 }
 
 LabelMgr.setLabelShow(txt1, true);
@@ -15478,26 +15479,24 @@ LabelMgr.setLabelShow(txt1, true);
 if (ij[i] < 3 || Math.floor(ij[i]) == 53)
 {
 
-txt1 = LabelMgr.labelScreen("Magnitude:      " + efv.toFixed(3) , 10*x, 510*y, false, 25, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Magnitude:      " + efv.toFixed(3) , 10*x, 550*y, false, 25, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
-txt1 = LabelMgr.labelScreen("Illumination:  " + fv.toFixed(3) + "%", 10*x, 540*y, false, 25,"#AAFFAA");
+txt1 = LabelMgr.labelScreen("Illumination:  " + fv.toFixed(3) + "%", 10*x, 580*y, false, 25,"#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
 
-txt1 = LabelMgr.labelScreen("Moon Elong:    " + im[i] + degstring, 10*x, 570*y, false, 25,"#AADDAA");
+txt1 = LabelMgr.labelScreen("Moon Elong:    " + im[i] + degstring, 10*x, 610*y, false, 25,"#AADDAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
-txt1 = LabelMgr.labelScreen("Moon Mag:      " + mfv.toFixed(3), 10*x, 600*y, false, 25,"#AADDAA");
+txt1 = LabelMgr.labelScreen("Moon Mag:      " + mfv.toFixed(3), 10*x, 640*y, false, 25,"#AADDAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
-txt1 = LabelMgr.labelScreen("Light Travel Time: " + lmin + mstring, 700*x, 
-
-670*y, false, 15, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Light Travel Time: " + lmin + mstring, 720*x,690*y, false, 15, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -15512,7 +15511,7 @@ dlong = 360 + dlong
 }
 
 
-txt1 = LabelMgr.labelScreen("Long:"+ dlong, 10 * x, 670*y, false, 15, "#FF0000");
+txt1 = LabelMgr.labelScreen("Long:"+ dlong, 10 * x, 690*y, false, 15, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -15553,6 +15552,7 @@ r = Math.floor(core.getJDay()) + 1;
 while (d == r) 
 {
 r = Math.floor(core.getJDay());
+core.wait(0.07);
 }
 
 LabelMgr.deleteAllLabels();

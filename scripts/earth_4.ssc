@@ -1,10 +1,10 @@
 // Author: Qam1
 // Name: Earth Events from Mars
 // License: Public Domain
-// Version: 12.0 
+// Version: 12.1 
 // Description: Earth Events from Mars
 
-// Made on Stellarium 0.22.2
+// Made on Stellarium 0.23.0
 
 
 spd = 4; // speed for screen saver mode in seconds
@@ -67962,6 +67962,8 @@ r = d;
 while (d==r)
 {
 r = Math.floor(core.getJDay());
+
+core.wait(0.07);
 }
 
 if (r - d == 1) 
@@ -69792,6 +69794,7 @@ r = Math.floor(core.getJDay()) + 1;
 while (d == r) 
 {
 r = Math.floor(core.getJDay());
+core.wait(0.05);
 }
 
 LabelMgr.deleteAllLabels();

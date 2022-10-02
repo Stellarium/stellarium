@@ -1,10 +1,10 @@
 // Author: Qam1
 // Name: Earth and other planet's Greatest Elongations and Oppositions from Mars
 // License: Public Domain
-// Version: 12.0
+// Version: 12.1
 // Description: Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-3000
 
-// Made on Stellarium 0.22.2
+// Made on Stellarium 0.23.0
 
 
 
@@ -22156,6 +22156,7 @@ r = d;
 while (d==r)
 {
 r = Math.floor(core.getJDay());
+core.wait(0.07);
 }
 
 if (r - d == 1) 
@@ -23012,21 +23013,10 @@ LabelMgr.setLabelShow(txt1, true);
 if(ij[i] > 6)
 
 {
-txt1 = LabelMgr.labelScreen("Opposition", 10*x, 500*y, false, 20, "#AAFFAA");
+txt1 = LabelMgr.labelScreen("Opposition", 10*x, 525*y, false, 20, "#AAFFAA");
 LabelMgr.setLabelShow(txt1, true);
 
 
-if(ij[i] < 9)
-{
-
-oppolong = 180 - ik[i]
-
-}
-
-
-
-txt1 = LabelMgr.labelScreen("Elongation:    " + oppolong.toFixed(2) +degstring, 10*x, 530*y, false, 25, "#AAFFAA");
-LabelMgr.setLabelShow(txt1, true);
 
 
 }
@@ -23163,6 +23153,7 @@ r = Math.floor(core.getJDay()) + 1;
 while (d == r) 
 {
 r = Math.floor(core.getJDay());
+core.wait(0.07);
 }
 
 LabelMgr.deleteAllLabels();
