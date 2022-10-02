@@ -251,8 +251,8 @@ QVariantMap Satellite::getMap(void)
 	map["stdMag"] = stdMag;
 	map["rcs"] = RCS;
 	map["status"] = status;
-	map["tle1"] = tleElements.first.data();
-	map["tle2"] = tleElements.second.data();
+	map["tle1"] = tleElements.first;
+	map["tle2"] = tleElements.second;
 
 	if (!description.isEmpty())
 		map["description"] = description;
@@ -544,8 +544,8 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 
 	map.insert("description", QString(description).replace("\n", " - "));
 	map.insert("catalog", id);
-	map.insert("tle1", tleElements.first.data());
-	map.insert("tle2", tleElements.second.data());
+	map.insert("tle1", tleElements.first);
+	map.insert("tle2", tleElements.second);
 	map.insert("tle-epoch", tleEpoch);
 
 	if (!internationalDesignator.isEmpty())
@@ -788,8 +788,8 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 		delete old;
 	}
 
-	tleElements.first = tle1.toUtf8();
-	tleElements.second = tle2.toUtf8();
+	tleElements.first = tle1;
+	tleElements.second = tle2;
 
 	pSatWrapper = new gSatWrapper(id, tle1, tle2);
 	orbitPoints.clear();
@@ -802,8 +802,8 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 
 void Satellite::recomputeSatData()
 {
-	calculateEpochFromLine1(tleElements.first.data());
-	calculateSatDataFromLine2(tleElements.second.data());
+	calculateEpochFromLine1(tleElements.first);
+	calculateSatDataFromLine2(tleElements.second);
 }
 
 void Satellite::update(double)
