@@ -25,12 +25,15 @@
 #include "StelTextureTypes.hpp"
 #include "VecMath.hpp"
 
+#include <memory>
 #include <QObject>
 #include <QImage>
 #include <QSettings>
 #include <QOpenGLFunctions>
 
+class QOpenGLVertexArrayObject;
 class StelToneReproducer;
+class QOpenGLBuffer;
 class StelCore;
 class StelPainter;
 
@@ -432,6 +435,9 @@ private:
 
 	StelCore* core;
 	StelToneReproducer* eye;
+
+	std::unique_ptr<QOpenGLVertexArrayObject> vao;
+	std::unique_ptr<QOpenGLBuffer> vbo;
 
 	Extinction extinction;
 	Refraction refraction;
