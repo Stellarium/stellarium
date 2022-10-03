@@ -25,12 +25,15 @@
 #include "StelTextureTypes.hpp"
 #include "VecMath.hpp"
 
+#include <memory>
 #include <QObject>
 #include <QImage>
 #include <QSettings>
 #include <QOpenGLFunctions>
 
+class QOpenGLVertexArrayObject;
 class StelToneReproducer;
+class QOpenGLBuffer;
 class StelCore;
 class StelPainter;
 
@@ -430,8 +433,18 @@ private:
 	//! is displayed with a halo of size targetRadius
 	float findWorldLumForMag(float mag, float targetRadius) const;
 
+	//! Binds actual VAO if it's supported, sets up the relevant state manually otherwise.
+	void bindVAO();
+	//! Sets the vertex attribute states for the currently bound VAO so that glDraw* commands can work.
+	void setupCurrentVAO();
+	//! Binds zero VAO if VAO is supported, manually disables the relevant vertex attributes otherwise.
+	void releaseVAO();
+
 	StelCore* core;
 	StelToneReproducer* eye;
+
+	std::unique_ptr<QOpenGLVertexArrayObject> vao;
+	std::unique_ptr<QOpenGLBuffer> vbo;
 
 	Extinction extinction;
 	Refraction refraction;
