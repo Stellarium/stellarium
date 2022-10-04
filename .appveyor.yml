@@ -24,42 +24,37 @@ environment:
     qtbin: msvc2019_64
     msvcname: Visual Studio 16 2019
     packaging: true
-    suffix: Win64
-    cmake_args: -A x64
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     qtver: 5.12
     qtbin: msvc2017_64
     msvcname: Visual Studio 15 2017 Win64
     packaging: false
-    suffix: Win64
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     qtver: 5.12
     qtbin: msvc2017
     msvcname: Visual Studio 15 2017
     packaging: true
-    suffix: Win32
 #  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
 #    qtver: 6.4
 #    qtbin: msvc2019_64
 #    msvcname: Visual Studio 17 2022
 #    packaging: false
-#    suffix: Win64
-#    cmake_args: -A x64
 
 before_build:
+  - ps: if($env:qtver.contains('6.')) { $env:QT_VER_MAJOR=6 } else { $env:QT_VER_MAJOR=5 }
+  - ps: if($env:qtbin.contains('_64')) { $env:BITS=64 } else { $env:BITS=32 }
+  - ps: if($env:qtbin.contains('_64')) { $env:cmake_args:="-A x64" }
+  - set SMS_VER="0.1.0"
   - set PUBLISH_BINARY=false
   - set USE_EXT_LIBGLES=false
+  - set SIGNING=false
   - set INNSPATH=C:\Program Files (x86)\Inno Setup 5;C:\Program Files (x86)\Inno Setup 6
-  - set OPENSSLPATH=C:\OpenSSL-%suffix%\bin;C:\OpenSSL-v111-%suffix%\bin
+  - set OPENSSLPATH=C:\OpenSSL-Win%BITS%\bin;C:\OpenSSL-v111-Win%BITS%\bin
   - set PATH=C:\Qt\%qtver%\%qtbin%\bin;%INNSPATH%;%OPENSSLPATH%;%PATH%
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "release" -and $env:packaging -eq "true") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]') -and $env:packaging -eq "true") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:qtver.contains('5.')) { $env:USE_EXT_LIBGLES = 'true' }
-  - ps: if($env:qtver.contains('6.')) { $env:QT_VER_MAJOR=6 }
-  - ps: if($env:qtver.contains('5.')) { $env:QT_VER_MAJOR=5 }
-  - ps: if($env:suffix.contains('32')) { $env:BITS=32 }
-  - ps: if($env:suffix.contains('64')) { $env:BITS=64 }
-  - appveyor DownloadFile https://github.com/10110111/CalcMySky/releases/download/v0.1.0/CalcMySky-v0.1.0-win%BITS%-qt%QT_VER_MAJOR%.zip -FileName c:\CalcMySky.zip
+  - appveyor DownloadFile https://github.com/10110111/CalcMySky/releases/download/v%SMS_VER%/CalcMySky-v%SMS_VER%-win%BITS%-qt%QT_VER_MAJOR%.zip -FileName c:\CalcMySky.zip
   - cd c:\
   - 7z x CalcMySky.zip
   - bash -c 'mv CalcMySky{-*,}'
@@ -80,7 +75,7 @@ test_script:
 
 after_test:
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target install
-  - if [%USE_EXT_LIBGLES%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-%suffix%.zip -FileName c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip
+  - if [%USE_EXT_LIBGLES%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-Win%BITS%.zip -FileName c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip
   - if [%USE_EXT_LIBGLES%]==[true] 7z e c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip -aoa -oc:\stellarium-%qtver%-%qtbin%\qtstuff
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
   - if [%PUBLISH_BINARY%]==[true] cd c:\stellarium\installers
