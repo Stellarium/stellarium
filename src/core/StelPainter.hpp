@@ -20,6 +20,7 @@
 #ifndef STELPAINTER_HPP
 #define STELPAINTER_HPP
 
+#include <memory>
 #include "StelOpenGL.hpp"
 #include "VecMath.hpp"
 #include "StelSphereGeometry.hpp"
@@ -29,7 +30,9 @@
 #include <QVarLengthArray>
 #include <QFontMetrics>
 
+class QOpenGLBuffer;
 class QOpenGLShaderProgram;
+class QOpenGLVertexArrayObject;
 
 //! @class StelPainter
 //! Provides functions for performing openGL drawing operations.
@@ -374,6 +377,7 @@ private:
 		GLenum type;				// The data type of each coordinate (GL_SHORT, GL_INT, GL_FLOAT, or GL_DOUBLE).
 		const void* pointer;	// Pointer to the first coordinate of the first vertex in the array.
 		bool enabled;			// Define whether the array is enabled or not.
+		size_t vertexSizeInBytes() const;
 	} ArrayDesc;
 
 	//! Project an array using the current projection.
@@ -462,6 +466,10 @@ private:
 	ArrayDesc normalArray;
 	//! The descriptor for the current opengl color array
 	ArrayDesc colorArray;
+
+	std::unique_ptr<QOpenGLVertexArrayObject> vao;
+	std::unique_ptr<QOpenGLBuffer> verticesVBO;
+	std::unique_ptr<QOpenGLBuffer> indicesVBO;
 };
 
 Q_DECLARE_METATYPE(StelPainter::DitheringMode)
