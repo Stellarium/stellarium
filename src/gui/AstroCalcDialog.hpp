@@ -467,6 +467,7 @@ private:
 	QList<HECPosition> hecObjects;
 
 	void saveTableAsCSV(const QString& fileName, QTreeWidget* tWidget, QStringList& headers);
+	void saveTableAsXLSX(const QString& fileName, QTreeWidget* tWidget, QStringList& headers, const QString& title, const QString& sheetName, const QString &note = "");
 	void saveTableAsBookmarks(const QString& fileName, QTreeWidget* tWidget);
 
 	void populateToolTips();

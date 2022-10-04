@@ -1429,67 +1429,7 @@ void AstroCalcDialog::saveCelestialPositions()
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
 		saveTableAsCSV(filePath, ui->celestialPositionsTreeWidget, positionsHeader);
 	else
-	{
-		int count = ui->celestialPositionsTreeWidget->topLevelItemCount();
-		int columns = positionsHeader.size();
-		int *width = new int[static_cast<unsigned int>(columns)];
-		QString sData;
-
-		QXlsx::Document xlsx;
-		xlsx.setDocumentProperty("title", q_("Celestial positions of objects"));
-		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet(ui->celestialCategoryComboBox->currentData(Qt::DisplayRole).toString(), AbstractSheet::ST_WorkSheet);
-
-		QXlsx::Format header;
-		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		header.setPatternBackgroundColor(Qt::yellow);
-		header.setBorderStyle(QXlsx::Format::BorderThin);
-		header.setBorderColor(Qt::black);
-		header.setFontBold(true);
-		for (int i = 0; i < columns; i++)
-		{
-			// Row 1: Names of columns
-			sData = positionsHeader.at(i).trimmed();
-			xlsx.write(1, i + 1, sData, header);
-			width[i] = sData.size();
-		}
-
-		QXlsx::Format data;
-		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
-		for (int i = 0; i < count; i++)
-		{
-			for (int j = 0; j < columns; j++)
-			{
-				// Row 2 and next: the data
-				sData = ui->celestialPositionsTreeWidget->topLevelItem(i)->text(j).trimmed();
-				xlsx.write(i + 2, j + 1, sData, data);
-				int w = sData.size();
-				if (w > width[j])
-				{
-					width[j] = w;
-				}
-			}
-		}
-
-		for (int i = 0; i < columns; i++)
-		{
-			xlsx.setColumnWidth(i+1, width[i]+2);
-		}
-
-		delete[] width;
-
-		// Add the date and time info for celestial positions
-		xlsx.write(count + 2, 1, ui->celestialPositionsTimeLabel->text());
-		QXlsx::CellRange range = CellRange(count+2, 1, count+2, columns);
-		QXlsx::Format extraData;
-		extraData.setBorderStyle(QXlsx::Format::BorderThin);
-		extraData.setBorderColor(Qt::black);
-		extraData.setPatternBackgroundColor(Qt::yellow);
-		extraData.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		xlsx.mergeCells(range, extraData);
-
-		xlsx.saveAs(filePath);
-	}
+		saveTableAsXLSX(filePath, ui->celestialPositionsTreeWidget, positionsHeader, q_("Celestial positions of objects"), ui->celestialCategoryComboBox->currentData(Qt::DisplayRole).toString(), ui->celestialPositionsTimeLabel->text());
 }
 
 void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex& modelIndex)
@@ -1734,67 +1674,7 @@ void AstroCalcDialog::saveHECPositions()
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
 		saveTableAsCSV(filePath, ui->hecPositionsTreeWidget, hecPositionsHeader);
 	else
-	{
-		int count = ui->hecPositionsTreeWidget->topLevelItemCount();
-		int columns = hecPositionsHeader.size();
-		int *width = new int[static_cast<unsigned int>(columns)];
-		QString sData;
-
-		QXlsx::Document xlsx;
-		xlsx.setDocumentProperty("title", q_("Heliocentric ecliptic positions of the major planets"));
-		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet(q_("Major planets"), AbstractSheet::ST_WorkSheet);
-
-		QXlsx::Format header;
-		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		header.setPatternBackgroundColor(Qt::yellow);
-		header.setBorderStyle(QXlsx::Format::BorderThin);
-		header.setBorderColor(Qt::black);
-		header.setFontBold(true);
-		for (int i = 0; i < columns; i++)
-		{
-			// Row 1: Names of columns
-			sData = hecPositionsHeader.at(i).trimmed();
-			xlsx.write(1, i + 1, sData, header);
-			width[i] = sData.size();
-		}
-
-		QXlsx::Format data;
-		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
-		for (int i = 0; i < count; i++)
-		{
-			for (int j = 0; j < columns; j++)
-			{
-				// Row 2 and next: the data
-				sData = ui->hecPositionsTreeWidget->topLevelItem(i)->text(j).trimmed();
-				xlsx.write(i + 2, j + 1, sData, data);
-				int w = sData.size();
-				if (w > width[j])
-				{
-					width[j] = w;
-				}
-			}
-		}
-
-		for (int i = 0; i < columns; i++)
-		{
-			xlsx.setColumnWidth(i+1, width[i]+2);
-		}
-
-		delete[] width;
-
-		// Add the date and time info for celestial positions
-		xlsx.write(count + 2, 1, ui->hecPositionsTimeLabel->text());
-		QXlsx::CellRange range = CellRange(count+2, 1, count+2, columns);
-		QXlsx::Format extraData;
-		extraData.setBorderStyle(QXlsx::Format::BorderThin);
-		extraData.setBorderColor(Qt::black);
-		extraData.setPatternBackgroundColor(Qt::yellow);
-		extraData.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		xlsx.mergeCells(range, extraData);
-
-		xlsx.saveAs(filePath);
-	}
+		saveTableAsXLSX(filePath, ui->hecPositionsTreeWidget, hecPositionsHeader, q_("Heliocentric ecliptic positions of the major planets"), q_("Major planets"), ui->hecPositionsTimeLabel->text());
 }
 
 void AstroCalcDialog::selectCurrentHECPosition(const QModelIndex& modelIndex)
@@ -2191,56 +2071,7 @@ void AstroCalcDialog::saveEphemeris()
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
 		saveTableAsCSV(filePath, ui->ephemerisTreeWidget, ephemerisHeader);
 	else
-	{
-		int count = ui->ephemerisTreeWidget->topLevelItemCount();
-		int columns = ephemerisHeader.size();
-		int *width = new int[static_cast<unsigned int>(columns)];
-		QString sData;
-
-		QXlsx::Document xlsx;
-		xlsx.setDocumentProperty("title", q_("Ephemeris"));
-		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet(ui->celestialBodyComboBox->currentData(Qt::DisplayRole).toString(), AbstractSheet::ST_WorkSheet);
-
-		QXlsx::Format header;
-		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		header.setPatternBackgroundColor(Qt::yellow);
-		header.setBorderStyle(QXlsx::Format::BorderThin);
-		header.setBorderColor(Qt::black);
-		header.setFontBold(true);
-		for (int i = 0; i < columns; i++)
-		{
-			// Row 1: Names of columns
-			sData = ephemerisHeader.at(i).trimmed();
-			xlsx.write(1, i + 1, sData, header);
-			width[i] = sData.size();
-		}
-
-		QXlsx::Format data;
-		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
-		for (int i = 0; i < count; i++)
-		{
-			for (int j = 0; j < columns; j++)
-			{
-				// Row 2 and next: the data
-				sData = ui->ephemerisTreeWidget->topLevelItem(i)->text(j).trimmed();
-				xlsx.write(i + 2, j + 1, sData, data);
-				int w = sData.size();
-				if (w > width[j])
-				{
-					width[j] = w;
-				}
-			}
-		}
-
-		for (int i = 0; i < columns; i++)
-		{
-			xlsx.setColumnWidth(i+1, width[i]+2);
-		}
-
-		delete[] width;
-		xlsx.saveAs(filePath);
-	}
+		saveTableAsXLSX(filePath, ui->ephemerisTreeWidget, ephemerisHeader, q_("Ephemeris"), ui->celestialBodyComboBox->currentData(Qt::DisplayRole).toString());
 }
 
 void AstroCalcDialog::cleanupEphemeris()
@@ -2481,56 +2312,7 @@ void AstroCalcDialog::saveRTS()
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
 		saveTableAsCSV(filePath, ui->rtsTreeWidget, rtsHeader);
 	else
-	{
-		int count = ui->rtsTreeWidget->topLevelItemCount();
-		int columns = rtsHeader.size();
-		int *width = new int[static_cast<unsigned int>(columns)];
-		QString sData;
-
-		QXlsx::Document xlsx;
-		xlsx.setDocumentProperty("title", q_("Risings, Transits, and Settings"));
-		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet(ui->rtsCelestialBodyNameLabel->text(), AbstractSheet::ST_WorkSheet);
-
-		QXlsx::Format header;
-		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		header.setPatternBackgroundColor(Qt::yellow);
-		header.setBorderStyle(QXlsx::Format::BorderThin);
-		header.setBorderColor(Qt::black);
-		header.setFontBold(true);
-		for (int i = 0; i < columns; i++)
-		{
-			// Row 1: Names of columns
-			sData = rtsHeader.at(i).trimmed();
-			xlsx.write(1, i + 1, sData, header);
-			width[i] = sData.size();
-		}
-
-		QXlsx::Format data;
-		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
-		for (int i = 0; i < count; i++)
-		{
-			for (int j = 0; j < columns; j++)
-			{
-				// Row 2 and next: the data
-				sData = ui->rtsTreeWidget->topLevelItem(i)->text(j).trimmed();
-				xlsx.write(i + 2, j + 1, sData, data);
-				int w = sData.size();
-				if (w > width[j])
-				{
-					width[j] = w;
-				}
-			}
-		}
-
-		for (int i = 0; i < columns; i++)
-		{
-			xlsx.setColumnWidth(i+1, width[i]+2);
-		}
-
-		delete[] width;
-		xlsx.saveAs(filePath);
-	}
+		saveTableAsXLSX(filePath, ui->rtsTreeWidget, rtsHeader, q_("Risings, Transits, and Settings"), ui->rtsCelestialBodyNameLabel->text());
 }
 
 void AstroCalcDialog::setLunarEclipseHeaderNames()
@@ -3184,58 +2966,7 @@ void AstroCalcDialog::saveLunarEclipses()
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
 		saveTableAsCSV(filePath, ui->lunareclipseTreeWidget, lunareclipseHeader);
 	else
-	{
-		int count = ui->lunareclipseTreeWidget->topLevelItemCount();
-		int columns = lunareclipseHeader.size();
-		int *width = new int[static_cast<unsigned int>(columns)];
-		QString sData;
-
-		QXlsx::Document xlsx;
-		xlsx.setDocumentProperty("title", q_("Lunar Eclipses"));
-		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet("Lunar Eclipses", AbstractSheet::ST_WorkSheet);
-
-		QXlsx::Format header;
-		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		header.setPatternBackgroundColor(Qt::yellow);
-		header.setBorderStyle(QXlsx::Format::BorderThin);
-		header.setBorderColor(Qt::black);
-		header.setFontBold(true);
-		for (int i = 0; i < columns; i++)
-		{
-			// Row 1: Names of columns
-			sData = lunareclipseHeader.at(i).trimmed();
-			xlsx.write(1, i + 1, sData, header);
-			width[i] = sData.size();
-		}
-
-		QXlsx::Format data;
-		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
-		for (int i = 0; i < count; i++)
-		{
-			for (int j = 0; j < columns; j++)
-			{
-				// Row 2 and next: the data
-				sData = ui->lunareclipseTreeWidget->topLevelItem(i)->text(j).trimmed();
-				xlsx.write(i + 2, j + 1, sData, data);
-				int w = sData.size();
-				if (w > width[j])
-				{
-					width[j] = w;
-				}
-			}
-		}
-
-		xlsx.write(count+3, 1, q_("Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
-
-		for (int i = 0; i < columns; i++)
-		{
-			xlsx.setColumnWidth(i+1, width[i]+2);
-		}
-
-		delete[] width;
-		xlsx.saveAs(filePath);
-	}
+		saveTableAsXLSX(filePath, ui->lunareclipseTreeWidget, lunareclipseHeader, q_("Lunar Eclipses"), q_("Lunar Eclipses"), q_("Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
 }
 
 void AstroCalcDialog::saveLunarEclipseCircumstances()
@@ -3254,58 +2985,7 @@ void AstroCalcDialog::saveLunarEclipseCircumstances()
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
 		saveTableAsCSV(filePath, ui->lunareclipsecontactsTreeWidget, lunareclipsecontactsHeader);
 	else
-	{
-		int count = ui->lunareclipsecontactsTreeWidget->topLevelItemCount();
-		int columns = lunareclipsecontactsHeader.size();
-		int *width = new int[static_cast<unsigned int>(columns)];
-		QString sData;
-
-		QXlsx::Document xlsx;
-		xlsx.setDocumentProperty("title", q_("Circumstances of Lunar Eclipse"));
-		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet("Circumstances of Lunar Eclipse", AbstractSheet::ST_WorkSheet);
-
-		QXlsx::Format header;
-		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		header.setPatternBackgroundColor(Qt::yellow);
-		header.setBorderStyle(QXlsx::Format::BorderThin);
-		header.setBorderColor(Qt::black);
-		header.setFontBold(true);
-		for (int i = 0; i < columns; i++)
-		{
-			// Row 1: Names of columns
-			sData = lunareclipsecontactsHeader.at(i).trimmed();
-			xlsx.write(1, i + 1, sData, header);
-			width[i] = sData.size();
-		}
-
-		QXlsx::Format data;
-		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
-		for (int i = 0; i < count; i++)
-		{
-			for (int j = 0; j < columns; j++)
-			{
-				// Row 2 and next: the data
-				sData = ui->lunareclipsecontactsTreeWidget->topLevelItem(i)->text(j).trimmed();
-				xlsx.write(i + 2, j + 1, sData, data);
-				int w = sData.size();
-				if (w > width[j])
-				{
-					width[j] = w;
-				}
-			}
-		}
-
-		xlsx.write(count+3, 1, q_("Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
-
-		for (int i = 0; i < columns; i++)
-		{
-			xlsx.setColumnWidth(i+1, width[i]+2);
-		}
-
-		delete[] width;
-		xlsx.saveAs(filePath);
-	}
+		saveTableAsXLSX(filePath, ui->lunareclipsecontactsTreeWidget, lunareclipsecontactsHeader, q_("Circumstances of Lunar Eclipse"), q_("Circumstances of Lunar Eclipse"), q_("Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
 }
 
 void AstroCalcDialog::setSolarEclipseHeaderNames()
@@ -4336,58 +4016,7 @@ void AstroCalcDialog::saveSolarEclipses()
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
 		saveTableAsCSV(filePath, ui->solareclipseTreeWidget, solareclipseHeader);
 	else
-	{
-		int count = ui->solareclipseTreeWidget->topLevelItemCount();
-		int columns = solareclipseHeader.size();
-		int *width = new int[static_cast<unsigned int>(columns)];
-		QString sData;
-
-		QXlsx::Document xlsx;
-		xlsx.setDocumentProperty("title", q_("Solar Eclipses"));
-		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet("Solar Eclipses", AbstractSheet::ST_WorkSheet);
-
-		QXlsx::Format header;
-		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		header.setPatternBackgroundColor(Qt::yellow);
-		header.setBorderStyle(QXlsx::Format::BorderThin);
-		header.setBorderColor(Qt::black);
-		header.setFontBold(true);
-		for (int i = 0; i < columns; i++)
-		{
-			// Row 1: Names of columns
-			sData = solareclipseHeader.at(i).trimmed();
-			xlsx.write(1, i + 1, sData, header);
-			width[i] = sData.size();
-		}
-
-		QXlsx::Format data;
-		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
-		for (int i = 0; i < count; i++)
-		{
-			for (int j = 0; j < columns; j++)
-			{
-				// Row 2 and next: the data
-				sData = ui->solareclipseTreeWidget->topLevelItem(i)->text(j).trimmed();
-				xlsx.write(i + 2, j + 1, sData, data);
-				int w = sData.size();
-				if (w > width[j])
-				{
-					width[j] = w;
-				}
-			}
-		}
-
-		xlsx.write(count+3, 1, q_("Note: Path of eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
-
-		for (int i = 0; i < columns; i++)
-		{
-			xlsx.setColumnWidth(i+1, width[i]+2);
-		}
-
-		delete[] width;
-		xlsx.saveAs(filePath);
-	}
+		saveTableAsXLSX(filePath, ui->solareclipseTreeWidget, solareclipseHeader, q_("Solar Eclipses"), q_("Solar Eclipses"), q_("Note: Path of eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
 }
 
 void AstroCalcDialog::saveSolarEclipseCircumstances()
@@ -4406,58 +4035,7 @@ void AstroCalcDialog::saveSolarEclipseCircumstances()
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
 		saveTableAsCSV(filePath, ui->solareclipsecontactsTreeWidget, solareclipsecontactsHeader);
 	else
-	{
-		int count = ui->solareclipsecontactsTreeWidget->topLevelItemCount();
-		int columns = solareclipsecontactsHeader.size();
-		int *width = new int[static_cast<unsigned int>(columns)];
-		QString sData;
-
-		QXlsx::Document xlsx;
-		xlsx.setDocumentProperty("title", q_("Circumstances of Solar Eclipse"));
-		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet("Circumstances of Solar Eclipse", AbstractSheet::ST_WorkSheet);
-
-		QXlsx::Format header;
-		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		header.setPatternBackgroundColor(Qt::yellow);
-		header.setBorderStyle(QXlsx::Format::BorderThin);
-		header.setBorderColor(Qt::black);
-		header.setFontBold(true);
-		for (int i = 0; i < columns; i++)
-		{
-			// Row 1: Names of columns
-			sData = solareclipsecontactsHeader.at(i).trimmed();
-			xlsx.write(1, i + 1, sData, header);
-			width[i] = sData.size();
-		}
-
-		QXlsx::Format data;
-		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
-		for (int i = 0; i < count; i++)
-		{
-			for (int j = 0; j < columns; j++)
-			{
-				// Row 2 and next: the data
-				sData = ui->solareclipsecontactsTreeWidget->topLevelItem(i)->text(j).trimmed();
-				xlsx.write(i + 2, j + 1, sData, data);
-				int w = sData.size();
-				if (w > width[j])
-				{
-					width[j] = w;
-				}
-			}
-		}
-
-		xlsx.write(count+3, 1, q_("Note: Path of eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
-		
-		for (int i = 0; i < columns-1; i++)
-		{
-			xlsx.setColumnWidth(i+1, width[i]+2);
-		}
-
-		delete[] width;
-		xlsx.saveAs(filePath);
-	}
+		saveTableAsXLSX(filePath, ui->solareclipsecontactsTreeWidget, solareclipsecontactsHeader, q_("Circumstances of Solar Eclipse"), q_("Circumstances of Solar Eclipse"), q_("Note: Path of eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
 }
 
 void AstroCalcDialog::selectCurrentSolarEclipseDate(const QModelIndex& modelIndex)
@@ -5510,58 +5088,7 @@ void AstroCalcDialog::saveSolarEclipsesLocal()
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
 		saveTableAsCSV(filePath, ui->solareclipselocalTreeWidget, solareclipselocalHeader);
 	else
-	{
-		int count = ui->solareclipselocalTreeWidget->topLevelItemCount();
-		int columns = solareclipselocalHeader.size();
-		int *width = new int[static_cast<unsigned int>(columns)];
-		QString sData;
-
-		QXlsx::Document xlsx;
-		xlsx.setDocumentProperty("title", q_("Solar Eclipses"));
-		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet("Solar Eclipses", AbstractSheet::ST_WorkSheet);
-
-		QXlsx::Format header;
-		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		header.setPatternBackgroundColor(Qt::yellow);
-		header.setBorderStyle(QXlsx::Format::BorderThin);
-		header.setBorderColor(Qt::black);
-		header.setFontBold(true);
-		for (int i = 0; i < columns; i++)
-		{
-			// Row 1: Names of columns
-			sData = solareclipselocalHeader.at(i).trimmed();
-			xlsx.write(1, i + 1, sData, header);
-			width[i] = sData.size();
-		}
-
-		QXlsx::Format data;
-		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
-		for (int i = 0; i < count; i++)
-		{
-			for (int j = 0; j < columns; j++)
-			{
-				// Row 2 and next: the data
-				sData = ui->solareclipselocalTreeWidget->topLevelItem(i)->text(j).trimmed();
-				xlsx.write(i + 2, j + 1, sData, data);
-				int w = sData.size();
-				if (w > width[j])
-				{
-					width[j] = w;
-				}
-			}
-		}
-
-		xlsx.write(count+3, 1, q_("Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
-
-		for (int i = 0; i < columns; i++)
-		{
-			xlsx.setColumnWidth(i+1, width[i]+2);
-		}
-
-		delete[] width;
-		xlsx.saveAs(filePath);
-	}
+		saveTableAsXLSX(filePath, ui->solareclipselocalTreeWidget, solareclipselocalHeader, q_("Solar Eclipses"), q_("Solar Eclipses"), q_("Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
 }
 
 void AstroCalcDialog::setTransitHeaderNames()
@@ -6265,58 +5792,7 @@ void AstroCalcDialog::saveTransits()
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
 		saveTableAsCSV(filePath, ui->transitTreeWidget, transitHeader);
 	else
-	{
-		int count = ui->transitTreeWidget->topLevelItemCount();
-		int columns = transitHeader.size();
-		int *width = new int[static_cast<unsigned int>(columns)];
-		QString sData;
-
-		QXlsx::Document xlsx;
-		xlsx.setDocumentProperty("title", q_("Transits across the Sun"));
-		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet("Transits across the Sun", AbstractSheet::ST_WorkSheet);
-
-		QXlsx::Format header;
-		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		header.setPatternBackgroundColor(Qt::yellow);
-		header.setBorderStyle(QXlsx::Format::BorderThin);
-		header.setBorderColor(Qt::black);
-		header.setFontBold(true);
-		for (int i = 0; i < columns; i++)
-		{
-			// Row 1: Names of columns
-			sData = transitHeader.at(i).trimmed();
-			xlsx.write(1, i + 1, sData, header);
-			width[i] = sData.size();
-		}
-
-		QXlsx::Format data;
-		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
-		for (int i = 0; i < count; i++)
-		{
-			for (int j = 0; j < columns; j++)
-			{
-				// Row 2 and next: the data
-				sData = ui->transitTreeWidget->topLevelItem(i)->text(j).trimmed();
-				xlsx.write(i + 2, j + 1, sData, data);
-				int w = sData.size();
-				if (w > width[j])
-				{
-					width[j] = w;
-				}
-			}
-		}
-
-		xlsx.write(count+3, 1, q_("Notes: Time in parentheses means the contact is invisible at current location. Transit times during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
-
-		for (int i = 0; i < columns; i++)
-		{
-			xlsx.setColumnWidth(i+1, width[i]+2);
-		}
-
-		delete[] width;
-		xlsx.saveAs(filePath);
-	}
+		saveTableAsXLSX(filePath, ui->transitTreeWidget, transitHeader, q_("Transits across the Sun"), q_("Transits across the Sun"), q_("Notes: Time in parentheses means the contact is invisible at current location. Transit times during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
 }
 
 void AstroCalcDialog::populateCelestialBodyList()
@@ -7621,59 +7097,7 @@ void AstroCalcDialog::savePhenomena()
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
 		saveTableAsCSV(filePath, ui->phenomenaTreeWidget, phenomenaHeader);
 	else
-	{
-		int count = ui->phenomenaTreeWidget->topLevelItemCount();
-		int columns = phenomenaHeader.size();
-
-		int *width;
-		width = new int[columns];
-		QString sData;
-		int w;
-
-		QXlsx::Document xlsx;
-		xlsx.setDocumentProperty("title", q_("Phenomena"));
-		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet(q_("Phenomena"), AbstractSheet::ST_WorkSheet);
-
-		QXlsx::Format header;
-		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		header.setPatternBackgroundColor(Qt::yellow);
-		header.setBorderStyle(QXlsx::Format::BorderThin);
-		header.setBorderColor(Qt::black);
-		header.setFontBold(true);
-		for (int i = 0; i < columns; i++)
-		{
-			// Row 1: Names of columns
-			sData = phenomenaHeader.at(i).trimmed();
-			xlsx.write(1, i + 1, sData, header);
-			width[i] = sData.size();
-		}
-
-		QXlsx::Format data;
-		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
-		for (int i = 0; i < count; i++)
-		{
-			for (int j = 0; j < columns; j++)
-			{
-				// Row 2 and next: the data
-				sData = ui->phenomenaTreeWidget->topLevelItem(i)->text(j).trimmed();
-				xlsx.write(i + 2, j + 1, sData, data);
-				w = sData.size();
-				if (w > width[j])
-				{
-					width[j] = w;
-				}
-			}
-		}
-
-		for (int i = 0; i < columns; i++)
-		{
-			xlsx.setColumnWidth(i+1, width[i]+2);
-		}
-
-		delete[] width;
-		xlsx.saveAs(filePath);
-	}
+		saveTableAsXLSX(filePath, ui->phenomenaTreeWidget, phenomenaHeader, q_("Phenomena"), q_("Phenomena"));
 }
 
 void AstroCalcDialog::fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, float firstObjectMagnitude,
@@ -9886,62 +9310,7 @@ void AstroCalcDialog::saveWutObjects()
 	else if (defaultFilter.contains(".json", Qt::CaseInsensitive))
 		saveTableAsBookmarks(filePath, ui->wutMatchingObjectsTreeWidget);
 	else
-	{
-		int count = ui->wutMatchingObjectsTreeWidget->topLevelItemCount();
-		int columns = wutHeader.size();
-
-		int *width;
-		width = new int[static_cast<unsigned int>(columns)];
-		QString sData;
-		int w;
-
-		QXlsx::Document xlsx;
-		xlsx.setDocumentProperty("title", q_("What's Up Tonight"));
-		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		if (ui->wutCategoryListWidget->currentRow()>0) // Fixed crash when category of objects is not selected
-			xlsx.addSheet(ui->wutCategoryListWidget->currentItem()->text(), AbstractSheet::ST_WorkSheet);
-
-		QXlsx::Format header;
-		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		header.setPatternBackgroundColor(Qt::yellow);
-		header.setBorderStyle(QXlsx::Format::BorderThin);
-		header.setBorderColor(Qt::black);
-		header.setFontBold(true);
-		for (int i = 0; i < columns; i++)
-		{
-			// Row 1: Names of columns
-			sData = wutHeader.at(i).trimmed();
-			xlsx.write(1, i + 1, sData, header);
-			width[i] = sData.size();
-		}
-
-		QXlsx::Format data;
-		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
-		QXlsx::Format left;
-		left.setHorizontalAlignment(QXlsx::Format::AlignLeft);
-		for (int i = 0; i < count; i++)
-		{
-			for (int j = 0; j < columns; j++)
-			{
-				// Row 2 and next: the data
-				sData = ui->wutMatchingObjectsTreeWidget->topLevelItem(i)->text(j).trimmed();
-				xlsx.write(i + 2, j + 1, sData, j==0 ? left : data);
-				w = sData.size();
-				if (w > width[j])
-				{
-					width[j] = w;
-				}
-			}
-		}
-
-		for (int i = 0; i < columns; i++)
-		{
-			xlsx.setColumnWidth(i+1, width[i]+2);
-		}
-
-		delete[] width;
-		xlsx.saveAs(filePath);
-	}
+		saveTableAsXLSX(filePath, ui->wutMatchingObjectsTreeWidget, wutHeader, q_("What's Up Tonight"), ui->wutCategoryListWidget->currentItem()->text());
 }
 
 void AstroCalcDialog::saveFirstCelestialBody(int index)
@@ -10298,6 +9667,72 @@ void AstroCalcDialog::saveTableAsCSV(const QString &fileName, QTreeWidget* tWidg
 	}
 
 	table.close();
+}
+
+void AstroCalcDialog::saveTableAsXLSX(const QString& fileName, QTreeWidget* tWidget, QStringList& headers, const QString &title, const QString &sheetName, const QString &note)
+{
+	int count = tWidget->topLevelItemCount();
+	int columns = headers.size();
+	int *width = new int[static_cast<unsigned int>(columns)];
+	QString sData;
+
+	QXlsx::Document xlsx;
+	xlsx.setDocumentProperty("title", title);
+	xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
+	xlsx.addSheet(sheetName, AbstractSheet::ST_WorkSheet);
+
+	QXlsx::Format header;
+	header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
+	header.setPatternBackgroundColor(Qt::yellow);
+	header.setBorderStyle(QXlsx::Format::BorderThin);
+	header.setBorderColor(Qt::black);
+	header.setFontBold(true);
+	for (int i = 0; i < columns; i++)
+	{
+		// Row 1: Names of columns
+		sData = headers.at(i).trimmed();
+		xlsx.write(1, i + 1, sData, header);
+		width[i] = sData.size();
+	}
+
+	QXlsx::Format data;
+	data.setHorizontalAlignment(QXlsx::Format::AlignRight);
+	for (int i = 0; i < count; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			// Row 2 and next: the data
+			sData = tWidget->topLevelItem(i)->text(j).trimmed();
+			xlsx.write(i + 2, j + 1, sData, data);
+			int w = sData.size();
+			if (w > width[j])
+			{
+				width[j] = w;
+			}
+		}
+	}
+
+	for (int i = 0; i < columns; i++)
+	{
+		xlsx.setColumnWidth(i+1, width[i]+2);
+	}
+
+	delete[] width;
+
+	if (!note.isEmpty())
+	{
+		// Add the important note
+		xlsx.write(count + 2, 1, note);
+		QXlsx::CellRange range = CellRange(count+2, 1, count+2, columns);
+		QXlsx::Format extraData;
+		extraData.setBorderStyle(QXlsx::Format::BorderThin);
+		extraData.setBorderColor(Qt::black);
+		extraData.setPatternBackgroundColor(Qt::yellow);
+		extraData.setHorizontalAlignment(QXlsx::Format::AlignLeft);
+		xlsx.mergeCells(range, extraData);
+	}
+
+	xlsx.saveAs(fileName);
 }
 
 void AstroCalcDialog::saveTableAsBookmarks(const QString &fileName, QTreeWidget* tWidget)
