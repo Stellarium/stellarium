@@ -10,7 +10,7 @@ jobs:
   appimage-amd64:
     name: "x86_64"
     runs-on: ubuntu-20.04
-    if: "contains(github.event.head_commit.message, '[publish]') || contains(github.ref, 'heads/stellarium-next' || contains(github.ref, 'heads/stellarium-stable')"
+    if: "contains(github.event.head_commit.message, '[publish]') || contains(github.ref, 'heads/stellarium-next') || contains(github.ref, 'heads/stellarium-stable')"
 
     steps:
     - name: Checkout repository
