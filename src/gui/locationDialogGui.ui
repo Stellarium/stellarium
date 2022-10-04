@@ -140,7 +140,6 @@
         </property>
         <property name="font">
          <font>
-          <weight>75</weight>
           <italic>false</italic>
           <bold>true</bold>
          </font>
@@ -264,8 +263,7 @@
           <number>0</number>
          </property>
          <item row="1" column="0">
-          <widget class="MapWidget" name="mapWidget">
-          </widget>
+          <widget class="MapWidget" name="mapWidget" native="true"/>
          </item>
          <item row="1" column="1">
           <widget class="QFrame" name="frame_2">
@@ -622,6 +620,43 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="palette">
+               <palette>
+                <active>
+                 <colorrole role="ButtonText">
+                  <brush brushstyle="SolidPattern">
+                   <color alpha="255">
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                   </color>
+                  </brush>
+                 </colorrole>
+                </active>
+                <inactive>
+                 <colorrole role="ButtonText">
+                  <brush brushstyle="SolidPattern">
+                   <color alpha="255">
+                    <red>208</red>
+                    <green>208</green>
+                    <blue>208</blue>
+                   </color>
+                  </brush>
+                 </colorrole>
+                </inactive>
+                <disabled>
+                 <colorrole role="ButtonText">
+                  <brush brushstyle="SolidPattern">
+                   <color alpha="96">
+                    <red>164</red>
+                    <green>166</green>
+                    <blue>168</blue>
+                   </color>
+                  </brush>
+                 </colorrole>
+                </disabled>
+               </palette>
               </property>
               <property name="text">
                <string>Get location from GPS</string>
