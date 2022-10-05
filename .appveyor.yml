@@ -47,7 +47,7 @@ before_build:
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable") { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]')) { $env:PUBLISH_BINARY = 'true' }
-  - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next" -or $env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]')) { $env:USE_EXTRA_EXE=true } else { $env:USE_EXTRA_EXE=false }
+  - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next" -or $env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]')) { $env:USE_EXTRA_EXE = 'true' } else { $env:USE_EXTRA_EXE = 'false' }
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:qtver.contains('5.')) { $env:USE_EXT_LIBGLES = 'true' }
   - appveyor DownloadFile https://github.com/10110111/CalcMySky/releases/download/v%SMS_VER%/CalcMySky-v%SMS_VER%-win%BITS%-qt%QT_VER_MAJOR%.zip -FileName c:\CalcMySky.zip
   - cd c:\
