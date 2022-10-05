@@ -10,6 +10,7 @@ on:
 jobs:
   checklist_job:
     runs-on: ubuntu-latest
+    if: "!contains(github.actor, 'transifex')"
     name: Checklist job
     steps:
       - name: Checkout

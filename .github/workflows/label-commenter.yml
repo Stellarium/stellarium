@@ -16,6 +16,7 @@ on:
 jobs:
   comment:
     runs-on: ubuntu-latest
+    if: "!contains(github.actor, 'transifex')"
     name: Comment
     steps:
       - name: Checkout repository

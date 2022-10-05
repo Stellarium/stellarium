@@ -9,6 +9,7 @@ on:
 jobs:
   greeting:
     runs-on: ubuntu-latest
+    if: "!contains(github.actor, 'transifex')"
     name: Greeting
     steps:
     - uses: actions/first-interaction@v1

@@ -11,6 +11,7 @@ jobs:
   #
   check-quality:
     runs-on: ubuntu-latest
+    if: "!contains(github.actor, 'transifex')"
     name: "Codiga"
     steps:
     - name: Check code meets quality standards
@@ -34,6 +35,7 @@ jobs:
   coveralls:
     name: "Coveralls"
     runs-on: ubuntu-latest
+    if: "!contains(github.actor, 'transifex')"
     steps:
     - name: Install dependencies
       run: |
