@@ -72,9 +72,11 @@ using namespace QtCharts;
 #include "AstroCalcCustomStepsDialog.hpp"
 #include "ui_astroCalcDialog.h"
 
+#ifdef ENABLE_XLSX
 #include <xlsxdocument.h>
 #include <xlsxcellrange.h>
 using namespace QXlsx;
+#endif
 
 QVector<Ephemeris> AstroCalcDialog::EphemerisList;
 int AstroCalcDialog::DisplayedPositionIndex = -1;
@@ -9549,6 +9551,7 @@ void AstroCalcDialog::saveTableAsCSV(const QString &fileName, QTreeWidget* tWidg
 
 void AstroCalcDialog::saveTableAsXLSX(const QString& fileName, QTreeWidget* tWidget, QStringList& headers, const QString &title, const QString &sheetName, const QString &note)
 {
+#ifdef ENABLE_XLSX
 	int count = tWidget->topLevelItemCount();
 	int columns = headers.size();
 	int *width = new int[static_cast<unsigned int>(columns)];
@@ -9611,15 +9614,22 @@ void AstroCalcDialog::saveTableAsXLSX(const QString& fileName, QTreeWidget* tWid
 	}
 
 	xlsx.saveAs(fileName);
+#endif
 }
 
 QPair<QString, QString> AstroCalcDialog::askTableFilePath(const QString &caption, const QString& fileName)
 {
 	QString csv  = QString("%1 (*.csv)").arg(q_("CSV (Comma delimited)"));
 	QString xlsx = QString("%1 (*.xlsx)").arg(q_("Microsoft Excel Open XML Spreadsheet"));
-	QString filter, defaultExtension = "xlsx";
+	QString filter, defaultExtension;
 
+	#ifdef ENABLE_XLSX
+	defaultExtension = "xlsx";
 	filter = QString("%1;;%2").arg(xlsx, csv);
+	#else
+	defaultExtension = "csv";
+	filter = csv;
+	#endif
 
 	QString dir  = QString("%1/%2.%3").arg(QDir::homePath(), fileName, defaultExtension);
 	QString defaultFilter = QString("(*.%1)").arg(defaultExtension);

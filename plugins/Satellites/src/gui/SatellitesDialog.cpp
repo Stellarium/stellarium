@@ -1624,6 +1624,7 @@ void SatellitesDialog::savePredictedIridiumFlares()
 	}
 	else
 	{
+		#ifdef ENABLE_XLSX
 		int *width;
 		width = new int[columns];
 		QString sData;
@@ -1672,6 +1673,7 @@ void SatellitesDialog::savePredictedIridiumFlares()
 
 		delete[] width;
 		xlsx.saveAs(filePath);
+		#endif
 	}
 }
 #endif
