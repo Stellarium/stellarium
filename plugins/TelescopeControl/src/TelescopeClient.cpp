@@ -53,15 +53,6 @@ const QString TelescopeClient::TELESCOPECLIENT_TYPE = QStringLiteral("Telescope"
 
 TelescopeClient *TelescopeClient::create(const QString &url)
 {
-	// example url: My_first_telescope:TCP:J2000:localhost:10000:500000
-	// split to:
-	// name    = My_first_telescope
-	// type    = TCP
-	// equinox = J2000
-	// params  = localhost:10000:500000
-	//
-	// The params part is optional.  We will use QRegularExpression to validate
-	// the url and extract the components.
 
 	// note: in a reg exp, [^:] matches any chararacter except ':'
 	static const QRegularExpression urlSchema("^([^:]*):([^:]*):([^:]*)(?::(.*))?$");
@@ -78,14 +69,14 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	else
 	{
 		qWarning() << "WARNING - telescope definition" << url << "not recognised";
-		return Q_NULLPTR;
+		return nullptr;
 	}
 
 	const TelescopeControl::Equinox eq = (equinox == "JNow" ? TelescopeControl::EquinoxJNow : TelescopeControl::EquinoxJ2000);
 
 	qDebug() << "Creating telescope" << url << "; name/type/equinox/params:" << name << type << ((eq == TelescopeControl::EquinoxJNow) ? "JNow" : "J2000") << params;
 
-	TelescopeClient * newTelescope = Q_NULLPTR;
+	TelescopeClient * newTelescope = nullptr;
 	
 	//if (type == "Dummy")
 	if (type == "TelescopeServerDummy")
@@ -127,7 +118,7 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	{
 		qDebug() << "TelescopeClient::create(): Unable to create a telescope client.";
 		delete newTelescope;
-		newTelescope = Q_NULLPTR;
+		newTelescope = nullptr;
 	}
 	return newTelescope;
 }
@@ -172,7 +163,7 @@ qint64 TelescopeClient::getNow(void)
 	t = (*(reinterpret_cast<qint64*>(&file_time))/10) - 86400000000LL*134774;
 #else
 	struct timeval tv;
-	gettimeofday(&tv, Q_NULLPTR);
+	gettimeofday(&tv, nullptr);
 	t = tv.tv_sec * 1000000LL + tv.tv_usec;
 #endif
 	return t;

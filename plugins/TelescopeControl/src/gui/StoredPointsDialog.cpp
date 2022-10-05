@@ -137,7 +137,7 @@ void StoredPointsDialog::buttonClearPressed()
 
 void StoredPointsDialog::addModelRow(int number, QString name, QString RA, QString Dec)
 {
-	QStandardItem* tempItem = Q_NULLPTR;
+	QStandardItem* tempItem = nullptr;
 
 	tempItem = new QStandardItem(QString::number(number+1));
 	tempItem->setEditable(false);

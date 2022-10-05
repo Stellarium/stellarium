@@ -69,7 +69,7 @@ void INDIConnection::setPosition(INDIConnection::Coordinates coords)
 		sendNewSwitch(switchVector);
 	}
 
-	INumberVectorProperty *property = Q_NULLPTR;
+	INumberVectorProperty *property = nullptr;
 	property = mTelescope->getNumber("EQUATORIAL_EOD_COORD");
 	if (!property)
 	{
@@ -110,7 +110,7 @@ void INDIConnection::syncPosition(INDIConnection::Coordinates coords)
 	sync->s = ISS_ON;
 	sendNewSwitch(switchVector);
 
-	INumberVectorProperty *property = Q_NULLPTR;
+	INumberVectorProperty *property = nullptr;
 	property = mTelescope->getNumber("EQUATORIAL_EOD_COORD");
 	if (!property)
 	{
@@ -349,7 +349,7 @@ void INDIConnection::removeDevice(INDI::BaseDevice *dp)
 		mDevices.removeAt(index);
 
 	if (mTelescope == dp)
-		mTelescope = Q_NULLPTR;
+		mTelescope = nullptr;
 
 	emit removeDeviceReceived(name);
 }

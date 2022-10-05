@@ -43,17 +43,17 @@ class TelescopeConfigurationDialog : public StelDialog
 	Q_OBJECT
 public:
 	TelescopeConfigurationDialog();
-	virtual ~TelescopeConfigurationDialog() Q_DECL_OVERRIDE;
+	virtual ~TelescopeConfigurationDialog() override;
 	
 	void initExistingTelescopeConfiguration(int slot);
 	void initNewTelescopeConfiguration(int slot);
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	virtual void retranslate() override;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	virtual void createDialogContent() override;
 	Ui_telescopeConfigurationDialog* ui;
 	
 private:

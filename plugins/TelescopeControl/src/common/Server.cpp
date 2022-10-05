@@ -67,7 +67,7 @@ void Server::step(long long int timeout_micros)
 		timeout_micros = 0;
 	tv.tv_sec = static_cast<long>(timeout_micros / 1000000);
 	tv.tv_usec = static_cast<long>(timeout_micros % 1000000);
-	const int select_rc = select(fd_max+1, &read_fds, &write_fds, Q_NULLPTR, &tv);
+	const int select_rc = select(fd_max+1, &read_fds, &write_fds, nullptr, &tv);
 	if (select_rc > 0)
 	{
 		auto it = socket_list.begin();

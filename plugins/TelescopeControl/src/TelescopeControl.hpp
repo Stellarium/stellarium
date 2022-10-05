@@ -116,33 +116,33 @@ public:
 	Q_ENUM(Equinox)
 
 	TelescopeControl();
-	virtual ~TelescopeControl() Q_DECL_OVERRIDE;
+	virtual ~TelescopeControl() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual void deinit() Q_DECL_OVERRIDE;
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	virtual void init() override;
+	virtual void deinit() override;
+	virtual void update(double deltaTime) override;
+	virtual void draw(StelCore* core) override;
+	virtual double getCallOrder(StelModuleActionName actionName) const override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelObjectModule class
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
-	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
-	virtual StelObjectP searchByID(const QString& id) const Q_DECL_OVERRIDE { return searchByName(id); }
+	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
+	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const override;
+	virtual StelObjectP searchByName(const QString& name) const override;
+	virtual StelObjectP searchByID(const QString& id) const override { return searchByName(id); }
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem = 5, bool useStartOfWords = false) const Q_DECL_OVERRIDE;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem = 5, bool useStartOfWords = false) const override;
 	// empty as its not celestial objects
-	virtual QStringList listAllObjects(bool) const Q_DECL_OVERRIDE { return QStringList(); }
-	virtual QString getName() const Q_DECL_OVERRIDE { return "Telescope Control"; }
-	virtual QString getStelObjectType() const Q_DECL_OVERRIDE;
-	virtual bool configureGui(bool show = true) Q_DECL_OVERRIDE;
+	virtual QStringList listAllObjects(bool) const override { return QStringList(); }
+	virtual QString getName() const override { return "Telescope Control"; }
+	virtual QString getStelObjectType() const override;
+	virtual bool configureGui(bool show = true) override;
 
 	QSharedPointer<TelescopeClient> telescopeClient(int index) const;
 
@@ -362,10 +362,10 @@ private:
 	//! Send a J2000-goto-command to the specified telescope
 	//! @param telescopeNr the number of the telescope
 	//! @param j2000Pos the direction in equatorial J2000 frame
-	//! @param selectObject selected object (if any; Q_NULLPTR if move is not based on an object)
-	void telescopeGoto(int telescopeNr, const Vec3d& j2000Pos, StelObjectP selectObject = Q_NULLPTR);
+	//! @param selectObject selected object (if any; nullptr if move is not based on an object)
+	void telescopeGoto(int telescopeNr, const Vec3d& j2000Pos, StelObjectP selectObject = nullptr);
 
-	void telescopeSync(int telescopeNr, const Vec3d &j2000Pos, StelObjectP selectObject = Q_NULLPTR);
+	void telescopeSync(int telescopeNr, const Vec3d &j2000Pos, StelObjectP selectObject = nullptr);
 
 	//! Draw a nice animated pointer around the object if it's selected
 	void drawPointer(const StelProjectorP& prj, const StelCore* core, StelPainter& sPainter);
@@ -475,9 +475,9 @@ class TelescopeControlStelPluginInterface : public QObject, public StelPluginInt
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
-	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	virtual StelModule* getStelModule() const override;
+	virtual StelPluginInfo getPluginInfo() const override;
+	virtual QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* TELESCOPECONTROL_HPP */
