@@ -33,19 +33,13 @@
 #include <QTcpSocket>
 #include <QObject>
 
-#include "StelApp.hpp"
 #include "StelObject.hpp"
 #include "StelTranslator.hpp"
+#include "TelescopeControl.hpp"
 #include "common/InterpolatedPosition.hpp"
 
 class StelCore;
 
-qint64 getNow(void);
-
-enum Equinox {
-	EquinoxJ2000,
-	EquinoxJNow
-};
 
 //! An abstract base class that should never be used directly, only inherited.
 //! This class used to be called Telescope, but it has been renamed
@@ -112,6 +106,9 @@ protected:
 		Q_UNUSED(flags)
 		return QString();
 	}
+
+	//! returns the current system time in microseconds since the Epoch
+	static qint64 getNow(void);
 private:
 	virtual bool isInitialized(void) const {return true;}
 	float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE {Q_UNUSED(core) return -10.f;}
@@ -183,7 +180,7 @@ class TelescopeTCP : public TelescopeClient
 {
 	Q_OBJECT
 public:
-	TelescopeTCP(const QString &name, const QString &params, Equinox eq = EquinoxJ2000);
+	TelescopeTCP(const QString &name, const QString &params, TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000);
 	~TelescopeTCP(void) Q_DECL_OVERRIDE
 	{
 		hangup();
@@ -226,7 +223,7 @@ private:
 		return interpolatedPosition.isKnown();
 	}
 
-	Equinox equinox;
+	TelescopeControl::Equinox equinox;
 	
 private slots:
 	void socketConnected(void);

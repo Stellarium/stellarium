@@ -46,18 +46,6 @@ namespace TelescopeControlGlobals {
 	#define MICROSECONDS_FROM_SECONDS(X) (X * 1000000)
 	#define SECONDS_FROM_MICROSECONDS(X) (static_cast<double>(X) / 1000000)
 	
-	enum ConnectionType {
-		ConnectionNA = 0,
-		ConnectionVirtual,
-		ConnectionInternal,
-		ConnectionLocal,
-		ConnectionRemote,
-		ConnectionRTS2,
-		ConnectionINDI,
-		ConnectionASCOM,
-		ConnectionCount
-	};
-	
 	struct DeviceModel
 	{
  		QString name;

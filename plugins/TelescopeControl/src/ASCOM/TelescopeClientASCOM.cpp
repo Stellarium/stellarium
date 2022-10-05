@@ -28,26 +28,7 @@
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 
-bool useJNow(ASCOMDevice::ASCOMEquatorialCoordinateType coordinateType, bool mAscomUseDeviceEqCoordType, Equinox mEquinox)
-{
-	if (mAscomUseDeviceEqCoordType)
-	{
-		return coordinateType == ASCOMDevice::ASCOMEquatorialCoordinateType::Topocentric
-			   // Assume Other as JNow too
-			   || coordinateType == ASCOMDevice::ASCOMEquatorialCoordinateType::Other;
-	}
-	else
-	{
-		return mEquinox == EquinoxJNow;
-	}
-}
-
-bool areSimilar(double a, double b)
-{
-	return std::abs(a - b) < std::numeric_limits<double>::epsilon();
-}
-
-TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& params, Equinox eq)
+TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& params, TelescopeControl::Equinox eq)
 	: TelescopeClient(name)
 	, mEquinox(eq)
 {
@@ -99,7 +80,7 @@ void TelescopeClientASCOM::performCommunication()
 			  mDoesRefraction ? StelCore::RefractionOff : StelCore::RefractionOn);
 		}
 
-		if (!(areSimilar(mLastCoord.RA, currentCoords.RA) && areSimilar(mLastCoord.DEC, currentCoords.DEC)))
+		if (!(qFuzzyCompare(mLastCoord.RA, currentCoords.RA) && qFuzzyCompare(mLastCoord.DEC, currentCoords.DEC)))
 		{
 			mCurrentTargetPosition = position;
 			mLastCoord.RA = currentCoords.RA;
@@ -198,4 +179,18 @@ void TelescopeClientASCOM::move(double angle, double speed)
 {
 	Q_UNUSED(angle)
 	Q_UNUSED(speed)
+}
+
+bool TelescopeClientASCOM::useJNow(ASCOMDevice::ASCOMEquatorialCoordinateType coordinateType, bool ascomUseDeviceEqCoordType, TelescopeControl::Equinox equinox)
+{
+	if (ascomUseDeviceEqCoordType)
+	{
+		return coordinateType == ASCOMDevice::ASCOMEquatorialCoordinateType::Topocentric
+			   // Assume Other as JNow too
+			   || coordinateType == ASCOMDevice::ASCOMEquatorialCoordinateType::Other;
+	}
+	else
+	{
+		return equinox == TelescopeControl::EquinoxJNow;
+	}
 }

@@ -27,7 +27,7 @@
 #include <QStringList>
 #include <QRegularExpressionValidator>
 #include "StelDialog.hpp"
-#include "TelescopeControlGlobals.hpp"
+#include "TelescopeControl.hpp"
 
 #ifdef Q_OS_WIN
 #include "../ASCOM/TelescopeClientASCOMWidget.hpp"
@@ -36,7 +36,6 @@
 using namespace TelescopeControlGlobals;
 
 class Ui_telescopeConfigurationDialog;
-class TelescopeControl;
 class StelStyle;
 
 class TelescopeConfigurationDialog : public StelDialog
@@ -79,7 +78,7 @@ private slots:
 
 
 signals:
-	void changesSaved(QString name, TelescopeControlGlobals::ConnectionType type);
+	void changesSaved(QString name, TelescopeControl::ConnectionType type);
 	void changesDiscarded();
 	
 private:

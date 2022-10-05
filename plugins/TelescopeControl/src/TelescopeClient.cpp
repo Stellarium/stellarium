@@ -23,12 +23,12 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "TelescopeControl.hpp"
 #include "TelescopeClient.hpp"
 #include "Rts2/TelescopeClientJsonRts2.hpp"
 #include "Lx200/TelescopeClientDirectLx200.hpp"
 #include "NexStar/TelescopeClientDirectNexStar.hpp"
 #include "INDI/TelescopeClientINDI.hpp"
-#include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelCore.hpp"
 
@@ -61,10 +61,10 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	// params  = localhost:10000:500000
 	//
 	// The params part is optional.  We will use QRegularExpression to validate
-	// the url and extact the components.
+	// the url and extract the components.
 
-	// note, in a reg exp, [^:] matches any chararacter except ':'
-	QRegularExpression urlSchema("^([^:]*):([^:]*):([^:]*)(?::(.*))?$");
+	// note: in a reg exp, [^:] matches any chararacter except ':'
+	static const QRegularExpression urlSchema("^([^:]*):([^:]*):([^:]*)(?::(.*))?$");
 	QRegularExpressionMatch urlMatch=urlSchema.match(url);
 	QString name, type, equinox, params;
 	if (urlMatch.hasMatch())
@@ -81,11 +81,9 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 		return Q_NULLPTR;
 	}
 
-	Equinox eq = EquinoxJ2000;
-	if (equinox == "JNow")
-		eq = EquinoxJNow;
+	const TelescopeControl::Equinox eq = (equinox == "JNow" ? TelescopeControl::EquinoxJNow : TelescopeControl::EquinoxJ2000);
 
-	qDebug() << "Creating telescope" << url << "; name/type/equinox/params:" << name << type << ((eq == EquinoxJNow) ? "JNow" : "J2000") << params;
+	qDebug() << "Creating telescope" << url << "; name/type/equinox/params:" << name << type << ((eq == TelescopeControl::EquinoxJNow) ? "JNow" : "J2000") << params;
 
 	TelescopeClient * newTelescope = Q_NULLPTR;
 	
@@ -162,11 +160,7 @@ void TelescopeClient::move(double angle, double speed)
 	qDebug() << "TelescopeClient::move not implemented";
 }
 
-//! returns the current system time in microseconds since the Epoch
-//! Prior to revision 6308, it was necessary to put this method in an
-//! #ifdef block, as duplicate function definition caused errors during static
-//! linking.
-qint64 getNow(void)
+qint64 TelescopeClient::getNow(void)
 {
 // At the moment this can't be done in a platform-independent way with Qt
 // (QDateTime and QTime don't support microsecond precision)
@@ -184,7 +178,7 @@ qint64 getNow(void)
 	return t;
 }
 
-TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Equinox eq)
+TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, TelescopeControl::Equinox eq)
 	: TelescopeClient(name)
 	, port(0)
 	, tcpSocket(new QTcpSocket())
@@ -282,7 +276,7 @@ void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject
 		return;
 
 	Vec3d position = j2000Pos;
-	if (equinox == EquinoxJNow)
+	if (equinox == TelescopeControl::EquinoxJNow)
 	{
 		const StelCore* core = StelApp::getInstance().getCore();
 		position = core->j2000ToEquinoxEqu(j2000Pos, StelCore::RefractionOff);
@@ -456,7 +450,7 @@ void TelescopeTCP::performReading(void)
 					const double cdec = cos(dec);
 					Vec3d position(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
 					Vec3d j2000Position = position;
-					if (equinox == EquinoxJNow)
+					if (equinox == TelescopeControl::EquinoxJNow)
 					{
 						const StelCore* core = StelApp::getInstance().getCore();
 						j2000Position = core->equinoxEquToJ2000(position, StelCore::RefractionOff);

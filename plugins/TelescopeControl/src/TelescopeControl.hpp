@@ -84,6 +84,37 @@ class TelescopeControl : public StelObjectModule
 	Q_OBJECT
 
 public:
+
+	enum ConnectionType {
+		ConnectionNA = 0,
+		ConnectionVirtual,
+		ConnectionInternal,
+		ConnectionLocal,
+		ConnectionRemote,
+		ConnectionRTS2,
+		ConnectionINDI,
+		ConnectionASCOM,
+		ConnectionCount
+	};
+	Q_ENUM(ConnectionType)
+
+	enum TelescopeStatus {
+		StatusNA = 0,
+		StatusStarting,
+		StatusConnecting,
+		StatusConnected,
+		StatusDisconnected,
+		StatusStopped,
+		StatusCount
+	};
+	Q_ENUM(TelescopeStatus)
+
+	enum Equinox {
+		EquinoxJ2000,
+		EquinoxJNow
+	};
+	Q_ENUM(Equinox)
+
 	TelescopeControl();
 	virtual ~TelescopeControl() Q_DECL_OVERRIDE;
 

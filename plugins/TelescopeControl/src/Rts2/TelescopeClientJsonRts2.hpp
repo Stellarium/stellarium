@@ -36,7 +36,7 @@ class TelescopeClientJsonRts2 : public TelescopeClient
 {
 	Q_OBJECT
 public:
-	TelescopeClientJsonRts2(const QString &name, const QString &params, Equinox eq = EquinoxJ2000);
+	TelescopeClientJsonRts2(const QString &name, const QString &params, TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000);
 	~TelescopeClientJsonRts2(void) Q_DECL_OVERRIDE;
 	virtual bool isConnected(void) const Q_DECL_OVERRIDE;
 
@@ -53,7 +53,7 @@ protected:
 private:
 	QNetworkAccessManager networkManager;
 	QNetworkRequest cfgRequest;
-	Equinox equinox;
+	TelescopeControl::Equinox equinox;
 	QUrl baseurl;
 	QString telName;
 	bool telReadonly;

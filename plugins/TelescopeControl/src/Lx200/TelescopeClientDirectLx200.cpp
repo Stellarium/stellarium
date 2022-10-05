@@ -30,12 +30,11 @@
 #include "Lx200Command.hpp"
 #include "common/LogFile.hpp"
 #include "StelCore.hpp"
-#include "StelUtils.hpp"
 
 #include <QRegularExpression>
 #include <QStringList>
 
-TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, const QString &parameters, Equinox eq)
+TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, const QString &parameters, TelescopeControl::Equinox eq)
 	: TelescopeClient(name)
 	, time_delay(0)
 	, equinox(eq)
@@ -108,7 +107,7 @@ void TelescopeClientDirectLx200::telescopeGoto(const Vec3d &j2000Pos, StelObject
 		return;
 
 	Vec3d position = j2000Pos;
-	if (equinox == EquinoxJNow)
+	if (equinox == TelescopeControl::EquinoxJNow)
 	{
 		const StelCore* core = StelApp::getInstance().getCore();
 		position = core->j2000ToEquinoxEqu(j2000Pos, StelCore::RefractionOff);
@@ -132,7 +131,7 @@ void TelescopeClientDirectLx200::telescopeSync(const Vec3d &j2000Pos, StelObject
 		return;
 
 	Vec3d position = j2000Pos;
-	if (equinox == EquinoxJNow)
+	if (equinox == TelescopeControl::EquinoxJNow)
 	{
 		const StelCore* core = StelApp::getInstance().getCore();
 		position = core->j2000ToEquinoxEqu(j2000Pos, StelCore::RefractionOff);
@@ -262,7 +261,7 @@ void TelescopeClientDirectLx200::sendPosition(unsigned int ra_int, int dec_int, 
 	const double cdec = cos(dec);
 	Vec3d position(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
 	Vec3d j2000Position = position;
-	if (equinox == EquinoxJNow)
+	if (equinox == TelescopeControl::EquinoxJNow)
 	{
 		const StelCore* core = StelApp::getInstance().getCore();
 		j2000Position = core->equinoxEquToJ2000(position, StelCore::RefractionOff);
