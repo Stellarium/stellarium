@@ -36,7 +36,7 @@ void StelOpenGLArray::initGL()
 	gl = ctx->functions();
 
 	//disable VAOs on Intel because of serious bugs in their implemenation...
-	QString vendor(reinterpret_cast<const char*>(gl->glGetString(GL_VENDOR)));
+//	QString vendor(reinterpret_cast<const char*>(gl->glGetString(GL_VENDOR)));
 //	if(vendor.contains("Intel",Qt::CaseInsensitive))
 //	{
 //		s_vaosSupported = false;
