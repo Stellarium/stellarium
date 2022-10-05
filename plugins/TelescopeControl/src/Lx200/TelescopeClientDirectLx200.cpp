@@ -24,15 +24,19 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
  
+#include <QRegularExpression>
+#include <QStringList>
+
 #include "TelescopeClientDirectLx200.hpp"
 
 #include "Lx200Connection.hpp"
 #include "Lx200Command.hpp"
 #include "common/LogFile.hpp"
 #include "StelCore.hpp"
+#ifndef QT_NO_DEBUG
+#include "StelUtils.hpp"
+#endif
 
-#include <QRegularExpression>
-#include <QStringList>
 
 TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, const QString &parameters, TelescopeControl::Equinox eq)
 	: TelescopeClient(name)

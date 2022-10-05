@@ -24,15 +24,18 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
  
+#include <QRegularExpression>
+#include <QStringList>
+
 #include "TelescopeClientDirectNexStar.hpp"
 
 #include "NexStarConnection.hpp"
 #include "NexStarCommand.hpp"
 #include "common/LogFile.hpp"
 #include "StelCore.hpp"
-
-#include <QRegularExpression>
-#include <QStringList>
+#ifndef QT_NO_DEBUG
+#include "StelUtils.hpp"
+#endif
 
 TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, const QString &parameters, TelescopeControl::Equinox eq)
 	: TelescopeClient(name)
