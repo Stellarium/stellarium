@@ -20,6 +20,8 @@
 #ifndef PLANET_HPP
 #define PLANET_HPP
 
+#include <memory>
+#include <qopengl.h>
 #include "StelObject.hpp"
 #include "StelProjector.hpp"
 #include "StelPropertyMgr.hpp"
@@ -57,6 +59,7 @@ class QOpenGLBuffer;
 class QOpenGLFunctions;
 class QOpenGLShaderProgram;
 class QOpenGLTexture;
+class QOpenGLVertexArrayObject;
 #ifdef DEBUG_SHADOWMAP
 class QOpenGLFramebufferObject;
 #endif
@@ -779,6 +782,11 @@ private:
 	// File path for texture and normal map; both variables used for saving original names of files
 	QString texMapFileOrig;
 	QString normalMapFileOrig;
+
+	std::unique_ptr<QOpenGLVertexArrayObject> sphereVAO;
+	std::unique_ptr<QOpenGLVertexArrayObject> ringsVAO;
+	GLuint sphereVBO=0;
+	GLuint ringsVBO=0;
 
 	const QString getContextString() const;
 	QPair<double, double> getLunarEclipseMagnitudes() const;
