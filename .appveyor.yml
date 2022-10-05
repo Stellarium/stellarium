@@ -74,6 +74,7 @@ after_test:
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
   - if [%PUBLISH_BINARY%]==[true] cd c:\stellarium\installers
   - if [%PUBLISH_BINARY%]==[true] for %%i in (*.exe) do appveyor PushArtifact %%i
+  - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next" -or $env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]')) { appveyor PushArtifact c:\stellarium\build-%qtver%-%qtbin%\src\Release\stellarium.exe }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable" -and $env:packaging -eq "true" -and $env:qtver.contains('6.')) { $env:SIGNING = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable" -and $env:packaging -eq "true" -and $env:qtver.contains('5.')) { $env:SIGNING = 'true' }
 
