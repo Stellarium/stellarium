@@ -15,6 +15,7 @@ jobs:
   main:
     name: "Check conflicts"
     runs-on: ubuntu-latest
+    if: "!contains(github.actor, 'transifex')"
     steps:
       - name: check if prs are dirty
         uses: eps1lon/actions-label-merge-conflict@releases/2.x

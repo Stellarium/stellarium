@@ -12,6 +12,7 @@ on:
 jobs:
   add-reviews:
     runs-on: ubuntu-latest
+    if: "!contains(github.actor, 'transifex')"
     name: Add reviews
     steps:
       - uses: kentaro-m/auto-assign-action@v1.2.1
