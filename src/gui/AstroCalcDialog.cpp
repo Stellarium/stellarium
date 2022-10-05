@@ -1415,21 +1415,11 @@ QPair<QString, QString> AstroCalcDialog::getStringCoordinates(const Vec3d &coord
 
 void AstroCalcDialog::saveCelestialPositions()
 {
-	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
-	filter.append(" (*.xlsx);;");
-	filter.append(q_("CSV (Comma delimited)"));
-	filter.append(" (*.csv)");
-	QString defaultFilter("(*.xlsx)");
-	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
-							q_("Save celestial positions of objects as..."),
-							QDir::homePath() + "/positions.xlsx",
-							filter,
-							&defaultFilter);
-
-	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-		saveTableAsCSV(filePath, ui->celestialPositionsTreeWidget, positionsHeader);
+	QPair<QString, QString> fileData = askTableFilePath(q_("Save celestial positions of objects as..."), "positions");
+	if (fileData.second.contains(".csv", Qt::CaseInsensitive))
+		saveTableAsCSV(fileData.first, ui->celestialPositionsTreeWidget, positionsHeader);
 	else
-		saveTableAsXLSX(filePath, ui->celestialPositionsTreeWidget, positionsHeader, q_("Celestial positions of objects"), ui->celestialCategoryComboBox->currentData(Qt::DisplayRole).toString(), ui->celestialPositionsTimeLabel->text());
+		saveTableAsXLSX(fileData.first, ui->celestialPositionsTreeWidget, positionsHeader, q_("Celestial positions of objects"), ui->celestialCategoryComboBox->currentData(Qt::DisplayRole).toString(), ui->celestialPositionsTimeLabel->text());
 }
 
 void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex& modelIndex)
@@ -1660,21 +1650,11 @@ void AstroCalcDialog::drawHECGraph(QString selectedObject)
 
 void AstroCalcDialog::saveHECPositions()
 {
-	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
-	filter.append(" (*.xlsx);;");
-	filter.append(q_("CSV (Comma delimited)"));
-	filter.append(" (*.csv)");
-	QString defaultFilter("(*.xlsx)");
-	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
-							q_("Save celestial positions of objects as..."),
-							QDir::homePath() + "/positions.xlsx",
-							filter,
-							&defaultFilter);
-
-	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-		saveTableAsCSV(filePath, ui->hecPositionsTreeWidget, hecPositionsHeader);
+	QPair<QString, QString> fileData = askTableFilePath(q_("Save celestial positions of objects as..."), "positions");
+	if (fileData.second.contains(".csv", Qt::CaseInsensitive))
+		saveTableAsCSV(fileData.first, ui->hecPositionsTreeWidget, hecPositionsHeader);
 	else
-		saveTableAsXLSX(filePath, ui->hecPositionsTreeWidget, hecPositionsHeader, q_("Heliocentric ecliptic positions of the major planets"), q_("Major planets"), ui->hecPositionsTimeLabel->text());
+		saveTableAsXLSX(fileData.first, ui->hecPositionsTreeWidget, hecPositionsHeader, q_("Heliocentric ecliptic positions of the major planets"), q_("Major planets"), ui->hecPositionsTimeLabel->text());
 }
 
 void AstroCalcDialog::selectCurrentHECPosition(const QModelIndex& modelIndex)
@@ -2057,21 +2037,11 @@ double AstroCalcDialog::getCustomTimeStep()
 
 void AstroCalcDialog::saveEphemeris()
 {
-	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
-	filter.append(" (*.xlsx);;");
-	filter.append(q_("CSV (Comma delimited)"));
-	filter.append(" (*.csv)");
-	QString defaultFilter("(*.xlsx)");
-	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
-							q_("Save calculated ephemeris as..."),
-							QDir::homePath() + "/ephemeris.xlsx",
-							filter,
-							&defaultFilter);
-
-	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-		saveTableAsCSV(filePath, ui->ephemerisTreeWidget, ephemerisHeader);
+	QPair<QString, QString> fileData = askTableFilePath(q_("Save calculated ephemeris as..."), "ephemeris");
+	if (fileData.second.contains(".csv", Qt::CaseInsensitive))
+		saveTableAsCSV(fileData.first, ui->ephemerisTreeWidget, ephemerisHeader);
 	else
-		saveTableAsXLSX(filePath, ui->ephemerisTreeWidget, ephemerisHeader, q_("Ephemeris"), ui->celestialBodyComboBox->currentData(Qt::DisplayRole).toString());
+		saveTableAsXLSX(fileData.first, ui->ephemerisTreeWidget, ephemerisHeader, q_("Ephemeris"), ui->celestialBodyComboBox->currentData(Qt::DisplayRole).toString());
 }
 
 void AstroCalcDialog::cleanupEphemeris()
@@ -2298,21 +2268,11 @@ void AstroCalcDialog::setRTSCelestialBodyName()
 
 void AstroCalcDialog::saveRTS()
 {
-	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
-	filter.append(" (*.xlsx);;");
-	filter.append(q_("CSV (Comma delimited)"));
-	filter.append(" (*.csv)");
-	QString defaultFilter("(*.xlsx)");
-	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
-							q_("Save calculated data as..."),
-							QDir::homePath() + "/RTS.xlsx",
-							filter,
-							&defaultFilter);
-
-	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-		saveTableAsCSV(filePath, ui->rtsTreeWidget, rtsHeader);
+	QPair<QString, QString> fileData = askTableFilePath(q_("Save calculated data as..."), "RTS");
+	if (fileData.second.contains(".csv", Qt::CaseInsensitive))
+		saveTableAsCSV(fileData.first, ui->rtsTreeWidget, rtsHeader);
 	else
-		saveTableAsXLSX(filePath, ui->rtsTreeWidget, rtsHeader, q_("Risings, Transits, and Settings"), ui->rtsCelestialBodyNameLabel->text());
+		saveTableAsXLSX(fileData.first, ui->rtsTreeWidget, rtsHeader, q_("Risings, Transits, and Settings"), ui->rtsCelestialBodyNameLabel->text());
 }
 
 void AstroCalcDialog::setLunarEclipseHeaderNames()
@@ -2952,40 +2912,20 @@ void AstroCalcDialog::selectCurrentLunarEclipseContact(const QModelIndex& modelI
 
 void AstroCalcDialog::saveLunarEclipses()
 {
-	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
-	filter.append(" (*.xlsx);;");
-	filter.append(q_("CSV (Comma delimited)"));
-	filter.append(" (*.csv)");
-	QString defaultFilter("(*.xlsx)");
-	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
-							q_("Save calculated lunar eclipses as..."),
-							QDir::homePath() + "/lunareclipses.xlsx",
-							filter,
-							&defaultFilter);
-
-	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-		saveTableAsCSV(filePath, ui->lunareclipseTreeWidget, lunareclipseHeader);
+	QPair<QString, QString> fileData = askTableFilePath(q_("Save calculated lunar eclipses as..."), "lunareclipses");
+	if (fileData.second.contains(".csv", Qt::CaseInsensitive))
+		saveTableAsCSV(fileData.first, ui->lunareclipseTreeWidget, lunareclipseHeader);
 	else
-		saveTableAsXLSX(filePath, ui->lunareclipseTreeWidget, lunareclipseHeader, q_("Lunar Eclipses"), q_("Lunar Eclipses"), q_("Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
+		saveTableAsXLSX(fileData.first, ui->lunareclipseTreeWidget, lunareclipseHeader, q_("Lunar Eclipses"), q_("Lunar Eclipses"), q_("Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
 }
 
 void AstroCalcDialog::saveLunarEclipseCircumstances()
 {
-	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
-	filter.append(" (*.xlsx);;");
-	filter.append(q_("CSV (Comma delimited)"));
-	filter.append(" (*.csv)");
-	QString defaultFilter("(*.xlsx)");
-	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
-							q_("Save lunar eclipse circumstances as..."),
-							QDir::homePath() + "/lunareclipse-circumstances.xlsx",
-							filter,
-							&defaultFilter);
-
-	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-		saveTableAsCSV(filePath, ui->lunareclipsecontactsTreeWidget, lunareclipsecontactsHeader);
+	QPair<QString, QString> fileData = askTableFilePath(q_("Save lunar eclipse circumstances as..."), "lunareclipse-circumstances");
+	if (fileData.second.contains(".csv", Qt::CaseInsensitive))
+		saveTableAsCSV(fileData.first, ui->lunareclipsecontactsTreeWidget, lunareclipsecontactsHeader);
 	else
-		saveTableAsXLSX(filePath, ui->lunareclipsecontactsTreeWidget, lunareclipsecontactsHeader, q_("Circumstances of Lunar Eclipse"), q_("Circumstances of Lunar Eclipse"), q_("Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
+		saveTableAsXLSX(fileData.first, ui->lunareclipsecontactsTreeWidget, lunareclipsecontactsHeader, q_("Circumstances of Lunar Eclipse"), q_("Circumstances of Lunar Eclipse"), q_("Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
 }
 
 void AstroCalcDialog::setSolarEclipseHeaderNames()
@@ -4002,40 +3942,20 @@ void AstroCalcDialog::selectCurrentSolarEclipseContact(const QModelIndex& modelI
 
 void AstroCalcDialog::saveSolarEclipses()
 {
-	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
-	filter.append(" (*.xlsx);;");
-	filter.append(q_("CSV (Comma delimited)"));
-	filter.append(" (*.csv)");
-	QString defaultFilter("(*.xlsx)");
-	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
-							q_("Save calculated solar eclipses as..."),
-							QDir::homePath() + "/solareclipses.xlsx",
-							filter,
-							&defaultFilter);
-
-	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-		saveTableAsCSV(filePath, ui->solareclipseTreeWidget, solareclipseHeader);
+	QPair<QString, QString> fileData = askTableFilePath(q_("Save calculated solar eclipses as..."), "solareclipses");
+	if (fileData.second.contains(".csv", Qt::CaseInsensitive))
+		saveTableAsCSV(fileData.first, ui->solareclipseTreeWidget, solareclipseHeader);
 	else
-		saveTableAsXLSX(filePath, ui->solareclipseTreeWidget, solareclipseHeader, q_("Solar Eclipses"), q_("Solar Eclipses"), q_("Note: Path of eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
+		saveTableAsXLSX(fileData.first, ui->solareclipseTreeWidget, solareclipseHeader, q_("Solar Eclipses"), q_("Solar Eclipses"), q_("Note: Path of eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
 }
 
 void AstroCalcDialog::saveSolarEclipseCircumstances()
 {
-	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
-	filter.append(" (*.xlsx);;");
-	filter.append(q_("CSV (Comma delimited)"));
-	filter.append(" (*.csv)");
-	QString defaultFilter("(*.xlsx)");
-	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
-							q_("Save solar eclipse circumstances as..."),
-							QDir::homePath() + "/solareclipse-circumstances.xlsx",
-							filter,
-							&defaultFilter);
-
-	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-		saveTableAsCSV(filePath, ui->solareclipsecontactsTreeWidget, solareclipsecontactsHeader);
+	QPair<QString, QString> fileData = askTableFilePath(q_("Save solar eclipse circumstances as..."), "solareclipse-circumstances");
+	if (fileData.second.contains(".csv", Qt::CaseInsensitive))
+		saveTableAsCSV(fileData.first, ui->solareclipsecontactsTreeWidget, solareclipsecontactsHeader);
 	else
-		saveTableAsXLSX(filePath, ui->solareclipsecontactsTreeWidget, solareclipsecontactsHeader, q_("Circumstances of Solar Eclipse"), q_("Circumstances of Solar Eclipse"), q_("Note: Path of eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
+		saveTableAsXLSX(fileData.first, ui->solareclipsecontactsTreeWidget, solareclipsecontactsHeader, q_("Circumstances of Solar Eclipse"), q_("Circumstances of Solar Eclipse"), q_("Note: Path of eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
 }
 
 void AstroCalcDialog::selectCurrentSolarEclipseDate(const QModelIndex& modelIndex)
@@ -5074,21 +4994,11 @@ void AstroCalcDialog::selectCurrentSolarEclipseLocal(const QModelIndex& modelInd
 
 void AstroCalcDialog::saveSolarEclipsesLocal()
 {
-	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
-	filter.append(" (*.xlsx);;");
-	filter.append(q_("CSV (Comma delimited)"));
-	filter.append(" (*.csv)");
-	QString defaultFilter("(*.xlsx)");
-	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
-							q_("Save calculated solar eclipses as..."),
-							QDir::homePath() + "/solareclipses-local.xlsx",
-							filter,
-							&defaultFilter);
-
-	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-		saveTableAsCSV(filePath, ui->solareclipselocalTreeWidget, solareclipselocalHeader);
+	QPair<QString, QString> fileData = askTableFilePath(q_("Save calculated solar eclipses as..."), "solareclipses-local");
+	if (fileData.second.contains(".csv", Qt::CaseInsensitive))
+		saveTableAsCSV(fileData.first, ui->solareclipselocalTreeWidget, solareclipselocalHeader);
 	else
-		saveTableAsXLSX(filePath, ui->solareclipselocalTreeWidget, solareclipselocalHeader, q_("Solar Eclipses"), q_("Solar Eclipses"), q_("Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
+		saveTableAsXLSX(fileData.first, ui->solareclipselocalTreeWidget, solareclipselocalHeader, q_("Solar Eclipses"), q_("Solar Eclipses"), q_("Note: Local circumstances for eclipses during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
 }
 
 void AstroCalcDialog::setTransitHeaderNames()
@@ -5778,21 +5688,11 @@ void AstroCalcDialog::selectCurrentTransit(const QModelIndex& modelIndex)
 
 void AstroCalcDialog::saveTransits()
 {
-	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
-	filter.append(" (*.xlsx);;");
-	filter.append(q_("CSV (Comma delimited)"));
-	filter.append(" (*.csv)");
-	QString defaultFilter("(*.xlsx)");
-	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
-							q_("Save calculated transits as..."),
-							QDir::homePath() + "/transits.xlsx",
-							filter,
-							&defaultFilter);
-
-	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-		saveTableAsCSV(filePath, ui->transitTreeWidget, transitHeader);
+	QPair<QString, QString> fileData = askTableFilePath(q_("Save calculated transits as..."), "transits");
+	if (fileData.second.contains(".csv", Qt::CaseInsensitive))
+		saveTableAsCSV(fileData.first, ui->transitTreeWidget, transitHeader);
 	else
-		saveTableAsXLSX(filePath, ui->transitTreeWidget, transitHeader, q_("Transits across the Sun"), q_("Transits across the Sun"), q_("Notes: Time in parentheses means the contact is invisible at current location. Transit times during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
+		saveTableAsXLSX(fileData.first, ui->transitTreeWidget, transitHeader, q_("Transits across the Sun"), q_("Transits across the Sun"), q_("Notes: Time in parentheses means the contact is invisible at current location. Transit times during thousands of years in the past and future are not reliable due to uncertainty in ΔT which is caused by fluctuations in Earth's rotation."));
 }
 
 void AstroCalcDialog::populateCelestialBodyList()
@@ -7083,21 +6983,11 @@ void AstroCalcDialog::enablePhenomenaButtons(bool enable)
 
 void AstroCalcDialog::savePhenomena()
 {
-	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
-	filter.append(" (*.xlsx);;");
-	filter.append(q_("CSV (Comma delimited)"));
-	filter.append(" (*.csv)");
-	QString defaultFilter("(*.xlsx)");
-	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
-							q_("Save calculated phenomena as..."),
-							QDir::homePath() + "/phenomena.xlsx",
-							filter,
-							&defaultFilter);
-
-	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-		saveTableAsCSV(filePath, ui->phenomenaTreeWidget, phenomenaHeader);
+	QPair<QString, QString> fileData = askTableFilePath(q_("Save calculated phenomena as..."), "phenomena");
+	if (fileData.second.contains(".csv", Qt::CaseInsensitive))
+		saveTableAsCSV(fileData.first, ui->phenomenaTreeWidget, phenomenaHeader);
 	else
-		saveTableAsXLSX(filePath, ui->phenomenaTreeWidget, phenomenaHeader, q_("Phenomena"), q_("Phenomena"));
+		saveTableAsXLSX(fileData.first, ui->phenomenaTreeWidget, phenomenaHeader, q_("Phenomena"), q_("Phenomena"));
 }
 
 void AstroCalcDialog::fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, float firstObjectMagnitude,
@@ -9292,25 +9182,13 @@ void AstroCalcDialog::selectWutObject(const QModelIndex &index)
 
 void AstroCalcDialog::saveWutObjects()
 {
-	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
-	filter.append(" (*.xlsx);;");
-	filter.append(q_("CSV (Comma delimited)"));
-	filter.append(" (*.csv)");
-	// filter.append(q_("JSON (Stellarium bookmarks)"));
-	// filter.append(" (*.json)");
-	QString defaultFilter("(*.xlsx)");
-	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
-							q_("Save list of objects as..."),
-							QDir::homePath() + "/wut-objects.xlsx",
-							filter,
-							&defaultFilter);
-
-	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-		saveTableAsCSV(filePath, ui->wutMatchingObjectsTreeWidget, wutHeader);
-	else if (defaultFilter.contains(".json", Qt::CaseInsensitive))
-		saveTableAsBookmarks(filePath, ui->wutMatchingObjectsTreeWidget);
+	QPair<QString, QString> fileData = askTableFilePath(q_("Save list of objects as..."), "wut-objects");
+	if (fileData.second.contains(".csv", Qt::CaseInsensitive))
+		saveTableAsCSV(fileData.first, ui->wutMatchingObjectsTreeWidget, wutHeader);
+	else if (fileData.second.contains(".json", Qt::CaseInsensitive))
+		saveTableAsBookmarks(fileData.first, ui->wutMatchingObjectsTreeWidget);
 	else
-		saveTableAsXLSX(filePath, ui->wutMatchingObjectsTreeWidget, wutHeader, q_("What's Up Tonight"), ui->wutCategoryListWidget->currentItem()->text());
+		saveTableAsXLSX(fileData.first, ui->wutMatchingObjectsTreeWidget, wutHeader, q_("What's Up Tonight"), ui->wutCategoryListWidget->currentItem()->text());
 }
 
 void AstroCalcDialog::saveFirstCelestialBody(int index)
@@ -9733,6 +9611,21 @@ void AstroCalcDialog::saveTableAsXLSX(const QString& fileName, QTreeWidget* tWid
 	}
 
 	xlsx.saveAs(fileName);
+}
+
+QPair<QString, QString> AstroCalcDialog::askTableFilePath(const QString &caption, const QString& fileName)
+{
+	QString csv  = QString("%1 (*.csv)").arg(q_("CSV (Comma delimited)"));
+	QString xlsx = QString("%1 (*.xlsx)").arg(q_("Microsoft Excel Open XML Spreadsheet"));
+	QString filter, defaultExtension = "xlsx";
+
+	filter = QString("%1;;%2").arg(xlsx, csv);
+
+	QString dir  = QString("%1/%2.%3").arg(QDir::homePath(), fileName, defaultExtension);
+	QString defaultFilter = QString("(*.%1)").arg(defaultExtension);
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR, caption, dir, filter, &defaultFilter);
+
+	return QPair<QString, QString>(filePath, defaultFilter);
 }
 
 void AstroCalcDialog::saveTableAsBookmarks(const QString &fileName, QTreeWidget* tWidget)
