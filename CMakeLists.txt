@@ -710,7 +710,6 @@ IF(ENABLE_SCRIPTING)
 ENDIF(ENABLE_SCRIPTING)
 
 IF(ENABLE_MEDIA)
-     SET(USE_QTOPENGL 1)
      ADD_DEFINITIONS(-DENABLE_MEDIA)
      FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS Multimedia REQUIRED)
      FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS MultimediaWidgets REQUIRED)
@@ -744,9 +743,8 @@ ELSE()
      MESSAGE(STATUS "GPS: disabled.")
 ENDIF()
 
-IF(USE_QTOPENGL)
-     # QtOpenGL module is deprecated. After merging the QOpenGLWidget branch, we don't use this module directly anymore,
-     # but the QtMultimediaWidgets module requires it internally, so we still have to package it.
+IF(ENABLE_MEDIA OR USE_PLUGIN_SCENERY3D)
+     # The Scenery3D plugin requires it directly and the QtMultimediaWidgets module requires it internally
      FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS OpenGL REQUIRED)
 ENDIF()
 
