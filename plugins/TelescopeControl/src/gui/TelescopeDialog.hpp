@@ -29,9 +29,10 @@
 
 #include "StelDialog.hpp"
 #include "TelescopeControlGlobals.hpp"
+#include "TelescopeControl.hpp"
 #include "TelescopeConfigurationDialog.hpp"
 
-using namespace TelescopeControlGlobals;
+//using namespace TelescopeControlGlobals;
 
 class Ui_telescopeDialogForm;
 class TelescopeConfigurationDialog;
@@ -54,15 +55,7 @@ protected:
 	Ui_telescopeDialogForm* ui;
 	
 private:
-	enum TelescopeStatus {
-		StatusNA = 0,
-		StatusStarting,
-		StatusConnecting,
-		StatusConnected,
-		StatusDisconnected,
-		StatusStopped,
-		StatusCount
-	};
+
 	
 	//! Update the text and the tooltip of the ChangeStatus button
 	void updateStatusButtonForSlot(int slot);
@@ -76,9 +69,9 @@ private:
 	void setHeaderNames();
 	void updateWarningTexts();
 	
-	QString getTypeLabel(ConnectionType type);
-	void addModelRow(int slotNumber, ConnectionType type, TelescopeStatus status, const QString& name);
-	void updateModelRow(int rowNumber, ConnectionType type, TelescopeStatus status, const QString& name);
+	QString getTypeLabel(TelescopeControl::ConnectionType type);
+	void addModelRow(int slotNumber, TelescopeControl::ConnectionType type, TelescopeControl::TelescopeStatus status, const QString& name);
+	void updateModelRow(int rowNumber, TelescopeControl::ConnectionType type, TelescopeControl::TelescopeStatus status, const QString& name);
 	
 private slots:
 	void buttonChangeStatusPressed(void);
@@ -90,7 +83,7 @@ private slots:
 	void buttonBrowseServerDirectoryPressed(void);
 	
 	//! Slot for receiving information from TelescopeConfigurationDialog
-	void saveChanges(QString name, TelescopeControlGlobals::ConnectionType type);
+	void saveChanges(QString name, TelescopeControl::ConnectionType type);
 	//! Slot for receiving information from TelescopeConfigurationDialog
 	void discardChanges(void);
 	
@@ -118,8 +111,8 @@ private:
 	
 	TelescopeControl * telescopeManager;
 	
-	TelescopeStatus telescopeStatus[SLOT_NUMBER_LIMIT];
-	ConnectionType telescopeType[SLOT_NUMBER_LIMIT];
+	TelescopeControl::TelescopeStatus telescopeStatus[SLOT_NUMBER_LIMIT];
+	TelescopeControl::ConnectionType telescopeType[SLOT_NUMBER_LIMIT];
 	
 	int telescopeCount;
 	int configuredSlot;

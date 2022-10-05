@@ -268,7 +268,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 
 	// Read the telescope properties
 	QString name;
-	ConnectionType connectionType;
+	TelescopeControl::ConnectionType connectionType;
 	QString equinox;
 	QString host;
 	int portTCP;
@@ -293,7 +293,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	}
 	ui->lineEditTelescopeName->setText(name);
 
-	if (connectionType == ConnectionInternal && !deviceModelName.isEmpty())
+	if (connectionType == TelescopeControl::ConnectionInternal && !deviceModelName.isEmpty())
 	{
 		ui->radioButtonTelescopeLocal->setChecked(true);
 		ui->lineEditHostName->setText("localhost"); // TODO: Remove magic word!
@@ -317,21 +317,21 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 #endif
 		ui->comboSerialPort->setEditText(serialPortName);
 	}
-	else if (connectionType == ConnectionRemote)
+	else if (connectionType == TelescopeControl::ConnectionRemote)
 	{
 		ui->radioButtonTelescopeConnection->setChecked(true); // Calls toggleTypeConnection(true)
 		ui->lineEditHostName->setText(host);
 	}
-	else if (connectionType == ConnectionLocal)
+	else if (connectionType == TelescopeControl::ConnectionLocal)
 	{
 		ui->radioButtonTelescopeConnection->setChecked(true);
 		ui->lineEditHostName->setText("localhost");
 	}
-	else if (connectionType == ConnectionVirtual)
+	else if (connectionType == TelescopeControl::ConnectionVirtual)
 	{
 		ui->radioButtonTelescopeVirtual->setChecked(true);
 	}
-	else if (connectionType == ConnectionRTS2)
+	else if (connectionType == TelescopeControl::ConnectionRTS2)
 	{
 		ui->radioButtonTelescopeRTS2->setChecked(true);
 		ui->lineEditRTS2Url->setText(rts2Url);
@@ -339,7 +339,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		ui->lineEditRTS2Password->setText(rts2Password);
 		ui->doubleSpinBoxRTS2Refresh->setValue(SECONDS_FROM_MICROSECONDS(rts2Refresh));
 	}
-	else if (connectionType == ConnectionINDI)
+	else if (connectionType == TelescopeControl::ConnectionINDI)
 	{
 		ui->radioButtonTelescopeINDI->setChecked(true);
 		ui->INDIProperties->setHost(host);
@@ -347,7 +347,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		ui->INDIProperties->setSelectedDevice(deviceModelName);
 	}
 	#ifdef Q_OS_WIN
-	else if (connectionType == ConnectionASCOM)
+	else if (connectionType == TelescopeControl::ConnectionASCOM)
 	{
 		ui->radioButtonTelescopeASCOM->setChecked(true);
 		ascomWidget->setSelectedDevice(ascomDeviceId);
@@ -506,33 +506,33 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 
 	// Type and server properties
 	// TODO: When adding, check for success!
-	ConnectionType type = ConnectionNA;
+	TelescopeControl::ConnectionType type = TelescopeControl::ConnectionNA;
 	if (ui->radioButtonTelescopeLocal->isChecked())
 	{
 		// Read the serial port
 		QString serialPortName = ui->comboSerialPort->currentText();
-		type = ConnectionInternal;
+		type = TelescopeControl::ConnectionInternal;
 		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay,
 		  connectAtStartup, circles, ui->comboBoxDeviceModel->currentText(), serialPortName);
 	}
 	else if (ui->radioButtonTelescopeConnection->isChecked())
 	{
 		if (host == "localhost")
-			type = ConnectionLocal;
+			type = TelescopeControl::ConnectionLocal;
 		else
-			type = ConnectionRemote;
+			type = TelescopeControl::ConnectionRemote;
 		telescopeManager->addTelescopeAtSlot(
 		  configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles);
 	}
 	else if (ui->radioButtonTelescopeVirtual->isChecked())
 	{
-		type = ConnectionVirtual;
+		type = TelescopeControl::ConnectionVirtual;
 		telescopeManager->addTelescopeAtSlot(
 		  configuredSlot, type, name, equinox, QString(), portTCP, delay, connectAtStartup, circles);
 	}
 	else if (ui->radioButtonTelescopeRTS2->isChecked())
 	{
-		type = ConnectionRTS2;
+		type = TelescopeControl::ConnectionRTS2;
 		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay,
 		  connectAtStartup, circles, QString(), QString(), ui->lineEditRTS2Url->text(),
 		  ui->lineEditRTS2Username->text(), ui->lineEditRTS2Password->text(),
@@ -540,14 +540,14 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	}
 	else if (ui->radioButtonTelescopeINDI->isChecked())
 	{
-		type = ConnectionINDI;
+		type = TelescopeControl::ConnectionINDI;
 		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, ui->INDIProperties->host(),
 		  ui->INDIProperties->port(), delay, connectAtStartup, circles, ui->INDIProperties->selectedDevice());
 	}
 	#ifdef Q_OS_WIN
 	else if (ui->radioButtonTelescopeASCOM->isChecked())
 	{
-		type = ConnectionASCOM;
+		type = TelescopeControl::ConnectionASCOM;
 		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay,
 		  connectAtStartup, circles, QString(), QString(), QString(), QString(), QString(), -1,
 		  ascomWidget->selectedDevice(), ascomWidget->useDeviceEqCoordType());

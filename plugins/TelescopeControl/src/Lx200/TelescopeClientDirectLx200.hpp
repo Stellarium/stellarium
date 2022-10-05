@@ -35,6 +35,7 @@
 
 #include "common/Server.hpp" //from the telescope server source tree
 #include "TelescopeClient.hpp" //from the plug-in's source tree
+#include "TelescopeControl.hpp"
 
 class Lx200Connection;
 
@@ -44,7 +45,7 @@ class TelescopeClientDirectLx200 : public TelescopeClient, public Server
 {
 	Q_OBJECT
 public:
-	TelescopeClientDirectLx200(const QString &name, const QString &parameters, Equinox eq = EquinoxJ2000);
+	TelescopeClientDirectLx200(const QString &name, const QString &parameters, TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000);
 	~TelescopeClientDirectLx200(void) Q_DECL_OVERRIDE
 	{
 		//hangup();
@@ -89,7 +90,7 @@ private:
 		return interpolatedPosition.isKnown();
 	}
 
-	Equinox equinox;
+	TelescopeControl::Equinox equinox;
 	
 	//======================================================================
 	// Members inherited from ServerLx200
