@@ -26,7 +26,8 @@
 #include <QOpenGLContext>
 #include <QTimer>
 #ifdef OPENGL_DEBUG_LOGGING
-#include <QOpenGLDebugMessage>
+class QOpenGLDebugLogger;
+class QOpenGLDebugMessage;
 #endif
 #include "VecMath.hpp"
 

@@ -804,11 +804,8 @@ void StelMainView::init()
 		if(glLogger->initialize())
 		{
 			qDebug()<<"OpenGL debug logger initialized";
-			QVector<GLuint> disabledMsgs;
-			//if your GL implementation spams some output you are not interested in,
-			//you can disable their message IDs here
-			//disabledMsgs.append(100);
-			glLogger->disableMessages(disabledMsgs);
+			glLogger->disableMessages(QOpenGLDebugMessage::AnySource, QOpenGLDebugMessage::AnyType,
+									  QOpenGLDebugMessage::NotificationSeverity);
 			glLogger->startLogging(QOpenGLDebugLogger::SynchronousLogging);
 			//the internal log buffer may not be empty, so check it
 			for (const auto& msg : glLogger->loggedMessages())
