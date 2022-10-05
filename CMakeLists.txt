@@ -413,8 +413,8 @@ SET(ENABLE_GPS 1 CACHE BOOL "Define whether GPS queries should be supported.")
 # Activate support for ShowMySky atmosphere
 SET(ENABLE_SHOWMYSKY 1 CACHE BOOL "Define whether to support ShowMySky atmosphere model if installed")
 
-# Activate support for XLSX files
-SET(ENABLE_XLSX 1 CACHE BOOL "Define whether to support XLSX files")
+# Activate support for XLSX (Excel) files
+SET(ENABLE_XLSX 1 CACHE BOOL "Define whether to support XLSX (Excel) files")
 IF(ENABLE_XLSX)
      ADD_DEFINITIONS(-DENABLE_XLSX)
 ENDIF()
