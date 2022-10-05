@@ -164,7 +164,8 @@ class NightModeGraphicsEffect : public QGraphicsEffect
 public:
 	NightModeGraphicsEffect(StelMainView* parent = Q_NULLPTR)
 		: QGraphicsEffect(parent),
-		  parent(parent), fbo(Q_NULLPTR)
+		  parent(parent), fbo(Q_NULLPTR),
+		  vbo(QOpenGLBuffer::VertexBuffer)
 	{
 		Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
 
@@ -193,6 +194,25 @@ public:
 		vars.pos = program->attributeLocation("a_pos");
 		vars.texCoord = program->attributeLocation("a_texCoord");
 		vars.source = program->uniformLocation("u_source");
+
+		vbo.create();
+		struct VBOData
+		{
+			const GLfloat pos[8] = {-1, -1, +1, -1, -1, +1, +1, +1};
+			const GLfloat texCoord[8] = {0, 0, 1, 0, 0, 1, 1, 1};
+		} vboData;
+		posOffset = offsetof(VBOData, pos);
+		texCoordOffset = offsetof(VBOData, texCoord);
+		vbo.bind();
+		vbo.setUsagePattern(QOpenGLBuffer::StaticDraw);
+		vbo.allocate(&vboData.pos, sizeof vboData);
+		if(vao.create())
+		{
+			vao.bind();
+			setupCurrentVAO();
+			vao.release();
+		}
+		vbo.release();
 	}
 
 	virtual ~NightModeGraphicsEffect() Q_DECL_OVERRIDE
@@ -246,19 +266,45 @@ protected:
 
 		painter->begin(paintDevice);
 
+		bindVAO();
 		//painter->beginNativePainting();
 		program->bind();
-		const GLfloat pos[] = {-1, -1, +1, -1, -1, +1, +1, +1};
-		const GLfloat texCoord[] = {0, 0, 1, 0, 0, 1, 1, 1};
 		program->setUniformValue(vars.source, 0);
-		program->setAttributeArray(vars.pos, pos, 2);
-		program->setAttributeArray(vars.texCoord, texCoord, 2);
-		program->enableAttributeArray(vars.pos);
-		program->enableAttributeArray(vars.texCoord);
 		gl->glBindTexture(GL_TEXTURE_2D, fbo->texture());
 		gl->glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		program->release();
 		//painter->endNativePainting();
+		releaseVAO();
+	}
+
+	//! Binds actual VAO if it's supported, sets up the relevant state manually otherwise.
+	void bindVAO()
+	{
+		if(vao.isCreated())
+			vao.bind();
+		else
+			setupCurrentVAO();
+	}
+	//! Sets the vertex attribute states for the currently bound VAO so that glDraw* commands can work.
+	void setupCurrentVAO()
+	{
+		program->setAttributeBuffer(vars.pos, GL_FLOAT, posOffset, 2, 0);
+		program->setAttributeBuffer(vars.texCoord, GL_FLOAT, texCoordOffset, 2, 0);
+		program->enableAttributeArray(vars.pos);
+		program->enableAttributeArray(vars.texCoord);
+	}
+	//! Binds zero VAO if VAO is supported, manually disables the relevant vertex attributes otherwise.
+	void releaseVAO()
+	{
+		if(vao.isCreated())
+		{
+			vao.release();
+		}
+		else
+		{
+			program->disableAttributeArray(vars.pos);
+			program->disableAttributeArray(vars.texCoord);
+		}
 	}
 
 private:
@@ -270,6 +316,9 @@ private:
 		int texCoord;
 		int source;
 	} vars;
+	int posOffset, texCoordOffset;
+	QOpenGLVertexArrayObject vao;
+	QOpenGLBuffer vbo;
 };
 
 class StelGraphicsScene : public QGraphicsScene
