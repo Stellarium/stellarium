@@ -4,26 +4,28 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Marc L., 2018
-# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2018
-# Daniel Sieler <asieler971@gmail.com>, 2018
-# T Exnicer <transifex@texnicer.de>, 2019
-# Alexander Stohr <alexander.stohr@gmx.de>, 2020
-# Jan Willing <yesn.wanting@gmail.com>, 2020
-# Frank Tönies <fraies@web.de>, 2021
-# Susanne M Hoffmann <susanne.m.hoffmann@gmail.com>, 2021
-# cardinot <mcardinot@gmail.com>, 2022
+# Jan Willing <yesn.wanting@gmail.com>, 2022
+# T Exnicer <transifex@texnicer.de>, 2022
+# Susanne M Hoffmann <susanne.m.hoffmann@gmail.com>, 2022
+# xilentura <vdevelopment@posteo.de>, 2022
+# Susanne Hoffmann <service@urania-uhura.de>, 2022
+# Daniel Sieler <asieler971@gmail.com>, 2022
+# Marc L., 2022
+# Frank Tönies <fraies@web.de>, 2022
+# Alexander Stohr <alexander.stohr@gmx.de>, 2022
 # Latein Lebt, 2022
 # Georg Zotti <Georg.Zotti@univie.ac.at>, 2022
+# cardinot <mcardinot@gmail.com>, 2022
+# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-09-30 13:16+0700\n"
-"PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2022\n"
+"POT-Creation-Date: 2022-10-05 20:44+0700\n"
+"PO-Revision-Date: 2022-10-05 14:25+0000\n"
+"Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022\n"
 "Language-Team: German (https://www.transifex.com/stellarium/teams/80998/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,7 +46,7 @@ msgstr ""
 #: src/gui/ObsListDialog.cpp:206 src/gui/ObsListCreateEditDialog.cpp:178
 #: src/ui_configurationDialog.h:1812 plugins/Satellites/src/Satellite.cpp:337
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:149
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:524
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:521
 #: plugins/Supernovae/src/Supernova.cpp:143 plugins/Novae/src/Nova.cpp:150
 #: plugins/Quasars/src/Quasar.cpp:125 plugins/Pulsars/src/Pulsar.cpp:189
 #: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Exoplanets/src/Exoplanet.cpp:319
@@ -66,7 +68,7 @@ msgstr "Markierung"
 
 #: src/core/modules/Asterism.hpp:62
 msgid "asterism"
-msgstr "Sterngruppe"
+msgstr "Asterismus"
 
 #: src/core/modules/AsterismMgr.cpp:95
 #: src/core/modules/ConstellationMgr.cpp:131 src/core/modules/StarMgr.cpp:461
@@ -739,10 +741,10 @@ msgid "m"
 msgstr "m"
 
 #: src/core/modules/LandscapeMgr.cpp:1179 src/gui/ObsListDialog.cpp:212
-#: src/gui/ObsListCreateEditDialog.cpp:184 src/ui_locationDialogGui.h:471
+#: src/gui/ObsListCreateEditDialog.cpp:184 src/ui_locationDialogGui.h:470
 #: src/ui_obsListDialog.h:326 src/ui_obsListCreateEditDialog.h:329
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:490
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Location"
 msgstr "Standort"
 
@@ -1708,7 +1710,7 @@ msgstr "Objekt unbekannter Natur"
 #: src/gui/ObsListDialog.cpp:209 src/gui/ObsListCreateEditDialog.cpp:181
 #: plugins/Supernovae/src/Supernova.cpp:127
 msgid "Magnitude"
-msgstr "Visuelle Helligkeit"
+msgstr "Größenklasse"
 
 #: src/core/modules/Nebula.cpp:190
 msgid "Opacity"
@@ -4203,7 +4205,7 @@ msgstr ""
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:625
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:782
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:263
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:268
@@ -4657,7 +4659,7 @@ msgstr "Danksagungen"
 
 #: src/gui/ConfigurationDialog.cpp:1296
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:783
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:269
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
@@ -4673,7 +4675,7 @@ msgstr "Ansprechpartner"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Oculars/src/gui/OcularDialog.cpp:624
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:781
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:267
@@ -5313,7 +5315,7 @@ msgstr "OSX Entwickler: %1"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Oculars/src/gui/OcularDialog.cpp:627
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:785
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:272
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:239
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:140
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
@@ -5363,8 +5365,8 @@ msgid ""
 "If the Stellarium planetarium was helpful for your research work, the "
 "following acknowledgment would be appreciated:"
 msgstr ""
-"Falls das Stellarium Planetarium für Ihre Forschung nützlich war, freuen wir"
-" uns über eine Würdigung in Ihrer Danksagung: "
+"Falls Sie Stellarium in Ihrer wissenschaftlichen Arbeit einsetzen, würden "
+"wir uns über folgende Zitierung freuen:"
 
 #: src/gui/HelpDialog.cpp:565
 msgid "This research has made use of the Stellarium planetarium"
@@ -5390,7 +5392,7 @@ msgstr "Fenster"
 msgid "Selected object information"
 msgstr "Informationen über das angewählte Objekt"
 
-#: src/gui/StelGui.cpp:221 plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
+#: src/gui/StelGui.cpp:221 plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
 msgid "Quit"
 msgstr "Beenden"
 
@@ -5570,7 +5572,7 @@ msgid "FOV"
 msgstr "FOV"
 
 #: src/gui/StelGuiItems.cpp:934
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:492
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
 msgid "Field of view"
 msgstr "Sichtfeld"
 
@@ -5762,7 +5764,7 @@ msgid "Get location from GPS or system service"
 msgstr "Standort über GPS oder den Systemdienst ermitteln"
 
 #: src/gui/LocationDialog.cpp:170 src/gui/LocationDialog.cpp:870
-#: src/ui_locationDialogGui.h:500
+#: src/ui_locationDialogGui.h:499
 msgid "Get location from GPS"
 msgstr "GPS-Standortabfrage"
 
@@ -6190,8 +6192,8 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:842 src/gui/AstroCalcDialog.cpp:929
 #: src/gui/AstroCalcDialog.cpp:1864 src/gui/AstroCalcDialog.cpp:2256
 #: src/gui/AstroCalcDialog.cpp:9071 src/ui_configurationDialog.h:1832
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:525
-#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:522
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:98
 #: plugins/Exoplanets/src/Exoplanet.cpp:359
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:183
 msgid "Name"
@@ -7937,7 +7939,7 @@ msgid "Error: here is no list or more than one list."
 msgstr "Fehler: hier stehen keine oder mehr als eine Liste."
 
 #: src/gui/ObsListCreateEditDialog.cpp:564
-msgid "Error: the file is empty or doesn't contains legacy bookmarks."
+msgid "Error: the file is empty or doesn't contain legacy bookmarks."
 msgstr ""
 "Fehler: Die Datei ist leer oder enthält keine früheren Lesezeichen "
 "(bookmarks)."
@@ -7955,11 +7957,11 @@ msgstr "Fehler: eine Liste mit Namen %1 existiert bereits!"
 msgid "Error: the list name is empty."
 msgstr "Fehler: Listenname ist leer."
 
-#: src/gui/DateTimeDialog.cpp:239 src/gui/DateTimeDialog.cpp:240
+#: src/gui/DateTimeDialog.cpp:259 src/gui/DateTimeDialog.cpp:260
 msgid "Date and Time in Julian calendar"
 msgstr "Datum und Zeit im Julianischen Kalender"
 
-#: src/gui/DateTimeDialog.cpp:244 src/gui/DateTimeDialog.cpp:245
+#: src/gui/DateTimeDialog.cpp:264 src/gui/DateTimeDialog.cpp:265
 msgid "Date and Time in Gregorian calendar"
 msgstr "Datum und Zeit im Gregorianischen Kalender"
 
@@ -8977,12 +8979,12 @@ msgstr "Bäume"
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:439
 msgid "Hurricane"
-msgstr "Hurricane Ridge"
+msgstr "Hurricane"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:441
 msgid "Ocean"
-msgstr "Meer"
+msgstr "Ozean"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:443
@@ -9260,12 +9262,12 @@ msgstr "Mars-Analemma"
 #. TRANSLATORS: Name of script
 #: src/translations.h:559
 msgid "Saturnian analemma"
-msgstr "Saturn-Analemma"
+msgstr "Analemma des Saturn"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:561
 msgid "Uranian analemma"
-msgstr "Uranus-Analemma"
+msgstr "Analemma des Uranus"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:563
@@ -11578,60 +11580,60 @@ msgstr "Nach Update suchen"
 msgid "Refresh"
 msgstr "Aktualisieren"
 
-#: src/ui_locationDialogGui.h:474 src/ui_locationDialogGui.h:477
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:156
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:159
+#: src/ui_locationDialogGui.h:473 src/ui_locationDialogGui.h:476
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:155
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:158
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
 "Die Standardliste der Orte enthält nur englische Namen (ohne Umlaute etc.)!"
 
-#: src/ui_locationDialogGui.h:480
+#: src/ui_locationDialogGui.h:479
 msgid "Reset Location List"
 msgstr "Ortsliste zurücksetzen"
 
-#: src/ui_locationDialogGui.h:481
+#: src/ui_locationDialogGui.h:480
 msgid "Current location information"
 msgstr "Standortinformationen"
 
-#: src/ui_locationDialogGui.h:482
+#: src/ui_locationDialogGui.h:481
 msgid "Add to list"
 msgstr "Zur Liste hinzufügen"
 
-#: src/ui_locationDialogGui.h:483
+#: src/ui_locationDialogGui.h:482
 msgid "Delete from list"
 msgstr "Aus Liste entfernen"
 
-#: src/ui_locationDialogGui.h:484
+#: src/ui_locationDialogGui.h:483
 msgid "Return to default location"
 msgstr "Zum Standardort zurückkehren"
 
-#: src/ui_locationDialogGui.h:485
+#: src/ui_locationDialogGui.h:484
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Latitude:"
 msgstr "Breitengrad:"
 
-#: src/ui_locationDialogGui.h:487
+#: src/ui_locationDialogGui.h:486
 msgid "Enter the elevation in meter"
 msgstr "Eingabe der Höhe in Metern"
 
-#: src/ui_locationDialogGui.h:489
+#: src/ui_locationDialogGui.h:488
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:490
+#: src/ui_locationDialogGui.h:489
 msgid "Get location from Network"
 msgstr "Standort automatisch aus Netzwerk ermitteln"
 
-#: src/ui_locationDialogGui.h:491
+#: src/ui_locationDialogGui.h:490
 msgid "Use current location as default"
 msgstr "Aktuellen Ort als Standard setzen"
 
-#: src/ui_locationDialogGui.h:492
+#: src/ui_locationDialogGui.h:491
 msgid "Elevation:"
 msgstr "Höhe:"
 
-#: src/ui_locationDialogGui.h:494 src/ui_locationDialogGui.h:498
+#: src/ui_locationDialogGui.h:493 src/ui_locationDialogGui.h:497
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
@@ -11639,36 +11641,36 @@ msgstr ""
 "Sie können Gradangaben in dezimaler oder in Bogendarstellung (+1° 12' 8\") "
 "angeben."
 
-#: src/ui_locationDialogGui.h:496
+#: src/ui_locationDialogGui.h:495
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:149
 msgid "Longitude:"
 msgstr "Längengrad:"
 
-#: src/ui_locationDialogGui.h:501
+#: src/ui_locationDialogGui.h:500
 msgid "New Location"
 msgstr "Neuer Standort"
 
-#: src/ui_locationDialogGui.h:502
+#: src/ui_locationDialogGui.h:501
 msgid "Planet:"
 msgstr "Planet:"
 
-#: src/ui_locationDialogGui.h:503
+#: src/ui_locationDialogGui.h:502
 msgid "Use custom time zone"
 msgstr "Zeitzone wählen"
 
-#: src/ui_locationDialogGui.h:504
+#: src/ui_locationDialogGui.h:503
 msgid "Time zone:"
 msgstr "Zeitzone:"
 
-#: src/ui_locationDialogGui.h:505
+#: src/ui_locationDialogGui.h:504
 msgid "Name/City:"
 msgstr "Name/Stadt:"
 
-#: src/ui_locationDialogGui.h:506
+#: src/ui_locationDialogGui.h:505
 msgid "Region:"
 msgstr "Region:"
 
-#: src/ui_locationDialogGui.h:510
+#: src/ui_locationDialogGui.h:509
 msgid "Enable daylight saving time"
 msgstr "Sommerzeit aktivieren"
 
@@ -13289,7 +13291,7 @@ msgstr "Weitere Einstellungen der graphischen Benutzeroberfläche"
 
 #: src/ui_configurationDialog.h:1706
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1501
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
 msgid "Time"
 msgstr "Zeit"
 
@@ -13389,7 +13391,7 @@ msgstr ""
 #: plugins/Quasars/src/ui_quasarsDialog.h:314
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:355
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:272
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:507
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:506
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:601
 #: plugins/Observability/src/ui_ObservabilityDialog.h:346
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:261
@@ -13411,7 +13413,7 @@ msgstr "Die Standardeinstellungen von Stellarium wieder herstellen."
 #: plugins/Quasars/src/ui_quasarsDialog.h:313
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:354
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:271
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:506
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:505
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:600
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:260
@@ -15024,7 +15026,7 @@ msgstr "Beobachtungslisteneditor"
 
 #: src/ui_obsListCreateEditDialog.h:316
 #: plugins/Satellites/src/ui_satellitesDialog.h:1385
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:217
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:216
 msgid "Description:"
 msgstr "Beschreibung:"
 
@@ -15863,7 +15865,7 @@ msgstr "Einrasten an ausgewähltem Objekt"
 #: plugins/Quasars/src/ui_quasarsDialog.h:316
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:357
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:284
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:505
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:504
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:623
 #: plugins/Observability/src/ui_ObservabilityDialog.h:348
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:263
@@ -16574,7 +16576,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:601
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:348
 msgid "Notes"
-msgstr "Bemerkungen"
+msgstr "Anmerkungen"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:656
 msgid ""
@@ -19301,7 +19303,7 @@ msgstr ""
 msgid "Use Stellarium settings"
 msgstr "Nutze die Einstellungen von Stellarium"
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:186
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:181
 msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
 "Stellarium. Increase this value if the reticle is skipping."
@@ -19309,7 +19311,7 @@ msgstr ""
 "Die geschätzte Zeit, bis ein Signal vom Teleskop an Stellarium übertragen "
 "wurde. Vergrößern, wenn das Fadenkreuz unruhig läuft."
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:190
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:185
 msgid ""
 "Refresh rate of the RTS2 telescope. Delay before sending next telescope "
 "status request. The default value of 0.5 second works fine with most setups."
@@ -19318,59 +19320,59 @@ msgstr ""
 "Statusabfrage. Der Standardwert von 0.5 Sekunden funktioniert in den meisten"
 " Fällen."
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:262
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:257
 msgid "Add New Telescope"
 msgstr "Neues Teleskop hinzufügen"
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:272
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:267
 msgid "Configure Telescope"
 msgstr "Teleskop einrichten"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:64
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:61
 msgid "N/A"
 msgstr "Nicht verfügbar"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:65
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:62
 msgid "Starting"
 msgstr "Wird gestartet"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:66
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:63
 msgid "Connecting"
 msgstr "Verbindung wird hergestellt"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:67
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:64
 msgid "Connected"
 msgstr "Verbunden"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:68
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:65
 msgid "Disconnected"
 msgstr "Getrennt"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:69
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:66
 msgid "Stopped"
 msgstr "Angehalten"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 msgid "Telescope Control plug-in"
 msgstr "Teleskopsteuerungs-Erweiterung"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 msgid "Plug-in and GUI programming"
 msgstr "Programmierung des Plugins und seiner Benutzeroberfläche"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 msgid "ASCOM Telescope Client"
 msgstr "ASCOM Teleskop-Client"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:270
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "RTS2 support"
 msgstr "RTS2-Support"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "INDI Telescope Client"
 msgstr "INDI Teleskop-Client"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
 msgid ""
 "This plug-in is based on and reuses a lot of code under the GNU General "
 "Public License:"
@@ -19378,7 +19380,7 @@ msgstr ""
 "Dieses plugin basiert auf und verwendet Quellcode unter der GNU General "
 "Public License:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:278
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
 msgid ""
 "the Telescope, TelescopeDummy, TelescopeTcp and TelescopeMgr classes in "
 "Stellarium's code (the client side of Stellarium's original telescope "
@@ -19388,11 +19390,11 @@ msgstr ""
 "Stellariums Code (der \"client\"-Teil von Stellariums ursprünglicher "
 "Teleskopkontrolle);"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 msgid "the telescope server core code (licensed under the LGPL)"
 msgstr "der  \"telescope server core\" Code (lizensiert unter der LGPL)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
 msgid ""
 "the TelescopeServerLx200 telescope server core code (originally licensed "
 "under the LGPL)"
@@ -19400,7 +19402,7 @@ msgstr ""
 "der \"TelescopeServerLx200 telescope server core\" Code (ursprünglich "
 "lizensiert unter der LGPL)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:278
 msgid ""
 "Author of all of the above - the client, the server core, and the LX200 "
 "server, along with the Stellarium telescope control network protocol (over "
@@ -19410,7 +19412,7 @@ msgstr ""
 "Stellarium telescope control network protocol (über TCP/IP), ist <b>Johannes"
 " Gajdosik</b>."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
 msgid ""
 "the TelescopeServerNexStar telescope server core code (originally licensed "
 "under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>."
@@ -19419,12 +19421,12 @@ msgstr ""
 "lizensiert unter der LGPL, basiert auf TelescopeServerLx200) von <b>Michael "
 "Heinz</b>."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 msgid "INDI by <b>Alessandro Siniscalchi</b>."
 msgstr "INDI von <b>Alessandro Siniscalchi</b>."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
 msgid ""
 "A more complete and up-to-date documentation for this plug-in can be found "
 "on the {Telescope Control} page in the Stellarium Wiki."
@@ -19432,83 +19434,83 @@ msgstr ""
 "Vollständige und aktuelle Dokumentation für dieses Plugin gibt es auf der "
 "Seite {Telescope Control}  im Stellarium Wiki."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 msgid "Contents"
 msgstr "Inhalt"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:307
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:289
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
 msgid "Abilities and limitations"
 msgstr "Möglichkeiten und Einschränkungen"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:293
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
 msgid "The original telescope control feature"
 msgstr "Hinweis zur alten Teleskopsteuerung"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:294
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:319
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
 msgid "Using this plug-in"
 msgstr "Verwendung"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:295
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:343
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:340
 msgid "Main window ('Telescopes')"
 msgstr "Hauptfenster (\"Teleskope\")"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:367
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:293
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:364
 msgid "Telescope configuration window"
 msgstr "Teleskop Konfigurationsfenster"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:294
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:366
 msgid "Connection type"
 msgstr "Verbindungstyp"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:383
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:295
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:380
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:595
 msgid "Telescope properties"
 msgstr "Teleskopeigenschaften"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:391
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:388
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 msgid "Device settings"
 msgstr "Geräteeinstellungen"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:407
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:611
 msgid "Connection settings"
 msgstr "Verbindungseinstellungen"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:427
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:424
 msgid "Field of view indicators"
 msgstr "Gesichtsfeldmarkierungen"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:438
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:435
 msgid "'Slew telescope to' window"
 msgstr "\"Bewege Teleskop auf\"-Fenster"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:303
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
 msgid "Telescope commands"
 msgstr "Teleskop-Kommandos"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:471
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:468
 msgid "Supported devices"
 msgstr "Unterstützte Geräte"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:493
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:490
 msgid "Virtual telescope"
 msgstr "Virtuelles Teleskop"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
 msgid ""
 "This plug-in allows Stellarium to send only '<b>slew</b>' ('go to') commands"
 " to the device and to receive its current position. It cannot issue any "
@@ -19523,7 +19525,7 @@ msgstr ""
 "Schwenk abzubrechen, kann ein anderer Schwenkbefehl in eine sichere Position"
 " abgesetzt werden.)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
 msgid ""
 "As of the current version, this plug-in doesn't allow satellite tracking, "
 "and is not very suitable for lunar or planetary observations."
@@ -19531,7 +19533,7 @@ msgstr ""
 "Gegenwärtig erlaubt das Plugin nicht die Verfolgung von Satelliten, und es "
 "ist auch nicht speziell angepaßt für Mond- und Planetenbeobachtung."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:307
 msgid ""
 "WARNING: Stellarium CANNOT prevent your telescope from being pointed at the "
 "Sun."
@@ -19539,7 +19541,7 @@ msgstr ""
 "WARNUNG: Stellarium kann NICHT verhindern, daß das Teleskop automatisch zur "
 "SONNE gesteuert wird."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
 msgid ""
 "Never point your telescope at the Sun without a proper solar filter "
 "installed. The powerful light amplified by the telescope WILL cause "
@@ -19549,7 +19551,7 @@ msgstr ""
 "verwenden. Die durch das Teleskop verstärkte Strahlung wird sonst "
 "unweigerlich IRREVERSIBLE SCHÄDEN an AUGEN oder GERÄT hervorrufen."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
 msgid ""
 "Even if you don't do it deliberately, a slew during daylight hours may cause"
 " your telescope to point at the sun on its way to the given destination, so "
@@ -19561,23 +19563,23 @@ msgstr ""
 "Teleskopsteuerung sicherheitshalber tagsüber nur mit geeigneten "
 "Schutzmaßnahmen zu betreiben."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:341
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:365
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:389
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:408
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:425
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:436
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:453
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:469
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:491
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:503
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:378
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:386
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:405
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:433
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:466
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:488
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:500
 msgid "Back to top"
 msgstr "Zurück zum Seitenanfang"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
 msgid ""
 "As of Stellarium 0.10.5, the original telescope control feature has been "
 "removed. There is no longer a way to control a telescope with Stellarium "
@@ -19586,7 +19588,7 @@ msgstr ""
 "Mit Version 0.10.5 wurde die ursprüngliche Teleskopsteuerung aus dem "
 "Programm entfernt. Teleskopsteuerung erfordert nunmehr diese Erweiterung."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:320
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
 msgid ""
 "Here are two general ways to control a device with this plug-in, depending "
 "on the situation:"
@@ -19594,12 +19596,12 @@ msgstr ""
 "Es gibt prinzipiell zwei Arten, ein Gerät mit diesem Plugin zu steuern, je "
 "nach Situation:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid "DIRECT CONNECTION"
 msgstr "DIREKTE VERBINDUNG"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:324
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
 msgid ""
 "A {device supported by the plug-in} is connected with a cable to the "
 "computer running Stellarium;"
@@ -19607,12 +19609,12 @@ msgstr ""
 "Ein {direkt unterstütztes Gerät} ist über ein Kabel mit dem Computer "
 "verbunden, auf dem Stellarium läuft;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:323
 msgid "INDIRECT CONNECTION"
 msgstr "INDIREKTE VERBINDUNG"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:329
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
 msgid ""
 "A device is connected to the same computer but it is driven by a {stand-"
 "alone telescope server program}"
@@ -19621,13 +19623,13 @@ msgstr ""
 "einem {eigenständigen Teleskop Server-Programm}"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:331
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:328
 msgid "or a {third-party application} <b>that can 'talk' to Stellarium</b>;"
 msgstr ""
 "oder einer {Anwendung eines Drittanbieters}, <b> die mit Stellarium "
 "kommunizieren kann </b> ;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:333
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:330
 msgid ""
 "A device is connected to a remote computer and the software that drives it "
 "can 'talk' to Stellarium <i>over the network</i>; this software can be "
@@ -19640,7 +19642,7 @@ msgstr ""
 " eine Anwendung eines Drittanbireters sein."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:336
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:333
 msgid ""
 "Most older telescopes use cables that connect to a {serial port} (RS-232), "
 "the newer ones use USB (Universal Serial Bus)."
@@ -19648,7 +19650,7 @@ msgstr ""
 "Die meisten älteren Teleskope verwenden serielle Kabel über die {Serielle "
 "Schnittstelle} (RS-232), neuere nutzen USB (Universal Serial Bus)."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:337
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:334
 msgid ""
 "On Linux and Mac OS X both cases are handled identically by the plug-in. On "
 "Windows, a USB connection may require a 'virtual serial port' software, if "
@@ -19658,7 +19660,7 @@ msgstr ""
 "Unter Windows benötigt eine USB-Verbindung ein 'virtual serial port', diese "
 "Software wird meist nicht mit Kabel oder Teleskop mitgeliefert."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:335
 msgid ""
 "Such a software creates a virtual ('fake') COM port that corresponds to the "
 "real USB port so it can be used by the plug-in."
@@ -19667,7 +19669,7 @@ msgstr ""
 "Verfügung, das mit dem physischen USB-Port zusammenarbeitet und so den "
 "Betrieb eines Teleskops mit diesem Plugin ermöglicht."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:339
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:336
 msgid ""
 "On all three platforms, if the computer has no 'classic' serial ports and "
 "the telescope can connect only to a serial port, a serial-to-USB (RS-232-to-"
@@ -19677,7 +19679,7 @@ msgstr ""
 " wenn der Computer keine RS-232-Schnittstelle hat und das Teleskop nur "
 "serielle Verbindung zuläßt."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:340
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:337
 msgid ""
 "Telescope set-up (setting geographical coordinates, performing alignment, "
 "etc.) should be done before connecting the telescope to Stellarium."
@@ -19686,11 +19688,11 @@ msgstr ""
 "Einrichten der Montierung, ...) sollte mit Hilfe der Teleskopsteuerung "
 "erfolgen, bevor Stellarium mit dem Teleskop verbunden wird."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:344
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:341
 msgid "The plug-in's main window can be opened:"
 msgstr "Das Hauptfenster des Plugins kann wie folgt geöffnet werden:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:345
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:342
 msgid ""
 "By pressing the 'configure' button for the plug-in in the 'Plugins' tab of "
 "Stellarium's Configuration window (opened by pressing <b>F2</b> or the "
@@ -19701,7 +19703,7 @@ msgstr ""
 " entsprechenden Knopf in der linken Werkzeugleiste)."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:345
 msgid ""
 "By pressing the 'Configure telescopes...' button in the {'Slew to' window} "
 "(opened by pressing <b>Ctrl+0</b> or the respective button on the bottom "
@@ -19711,7 +19713,7 @@ msgstr ""
 "{Bewege Teleskop zu} (öffnen desselben mit Tasten <b>Ctrl+0</b> oder der "
 "entsprechenden Schaltfläche auf der unteren Werkzeugleiste."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:350
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
 msgid ""
 "The <b>Telescopes</b> tab displays a list of the telescope connections that "
 "have been set up:"
@@ -19719,7 +19721,7 @@ msgstr ""
 "Der Reiter <b>Teleskope</b> zeigt eine Liste der eingerichteten "
 "Teleskopverbindungen:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:351
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
 msgid ""
 "The number (<b>#</b>) column shows the number used to control this "
 "telescope. For example, for telescope #2, the shortcut is Ctrl+2."
@@ -19728,7 +19730,7 @@ msgstr ""
 " wird. Beispielsweise gilt zum Schwenken des Teleskops Nr.~2 der Tastendruck"
 " Ctrl+2."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:352
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:349
 msgid ""
 "The <b>Status</b> column indicates if this connection is currently active or"
 " not. Unfortunately, there are some cases in which 'Connected' is displayed "
@@ -19738,18 +19740,18 @@ msgstr ""
 "die Anzeige manchmal fehlerhaft, und es wird 'Verbunden' angezeigt, auch "
 "ohne funktionierende Verbindung."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:353
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:350
 msgid "The <b>Type</b> field indicates what kind of connection is this:"
 msgstr ""
 "Die Spalte <b>Typ</b> zeigt an, um welche Verbindungsart es sich handelt:"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:356
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:353
 msgid "<b>virtual</b> means a {virtual telescope};"
 msgstr "<b>virtuell</b> bedeutet ein {virtuelles Teleskop};"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:360
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
 msgid ""
 "<b>local, Stellarium</b> means a DIRECT connection to the telescope (see "
 "{above});"
@@ -19757,7 +19759,7 @@ msgstr ""
 "<b>lokal, Stellarium</b> bedeutet eine DIREKTE serielle Verbindung zum "
 "Teleskop (siehe {oben});"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:359
 msgid ""
 "<b>local, external</b> means an INDIRECT connection to a program running on "
 "the same computer;"
@@ -19765,7 +19767,7 @@ msgstr ""
 "<b>lokal, externe Anwendung</b> bedeutet eine INDIREKTE Verbindung zu einem "
 "Program, das auf demselben Computer läuft;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:363
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:360
 msgid ""
 "<b>remote, unknown</b> means an INDIRECT connection over a network to a "
 "remote machine."
@@ -19773,7 +19775,7 @@ msgstr ""
 "<b>Fernverbindung, unbekannt</b> bedeutet eine INDIREKTE Verbindung über das"
 " Netzwerk zu Steuersoftware auf einem entfernten Rechner."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:364
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:361
 msgid ""
 "To set up a new telescope connection, press the <b>Add</b> button. To modify"
 " the configuration of an existing connection, select it in the list and "
@@ -19787,7 +19789,7 @@ msgstr ""
 "'Teleskop einrichten'."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:372
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
 msgid ""
 "The topmost field represents the choice between the two types of connections"
 " (see {above}):"
@@ -19795,23 +19797,23 @@ msgstr ""
 "Das oberste Feld bietet eine Auswahl zwischen den beiden Verbindungsarten "
 "(siehe {oben}):"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:374
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:371
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:581
 msgid "Telescope controlled by:"
 msgstr "Teleskop kontrolliert von:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:375
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:372
 msgid "<b>Stellarium, directly through a serial port</b> is the DIRECT case"
 msgstr ""
 "<p>Stellarium, direkt über einen seriellen Anschluß</b> ist der DIREKTE Fall"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:376
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:373
 msgid "<b>External software or a remote computer</b> is the INDIRECT case"
 msgstr ""
 "<b>Externe Software oder entfernter Rechner</b> ist der INDIREKTE Fall"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:379
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:376
 msgid ""
 "<b>Nothing, just simulate one (a moving reticle)</b> is a {virtual "
 "telescope} (no connection)"
@@ -19819,13 +19821,13 @@ msgstr ""
 "<b>Nichts, nur eine Simulation (ein bewegtes Fadenkreuz)</b> ist ein "
 "{virtuelles Teleskop} (keine Verbindung)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:384
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
 msgid ""
 "<b>Name</b> is the label that will be displayed on the screen next to the "
 "telescope reticle."
 msgstr "<b>Name</b> ist der Bezeichner für das Fadenkreuz auf dem Bildschirm."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:382
 msgid ""
 "<b>Connection delay</b>: If the movement of the telescope reticle on the "
 "screen is uneven, you can try increasing or decreasing this value."
@@ -19833,7 +19835,7 @@ msgstr ""
 "<b>Verbindungsverzögerung</b>: Wenn die Bewegung des Fadenkreuzes auf dem "
 "Bildschirm unruhig ist, hilft manchmal eine Anpassung dieses Wertes."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:386
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:383
 msgid ""
 "<b>Coordinate system</b>: Some Celestron telescopes have had their firmware "
 "updated and now interpret the coordinates they receive as coordinates that "
@@ -19845,7 +19847,7 @@ msgstr ""
 "Äquinoktium des Datums (EOD, auch JNow), das ist in diesem Falle "
 "einzustellen."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:387
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:384
 msgid ""
 "<b>Start/connect at startup</b>: Check this option if you want Stellarium to"
 " attempt to connect to the telescope immediately after it starts."
@@ -19853,7 +19855,7 @@ msgstr ""
 "<b>Start/Verbinde beim Programmstart</b>: Aktiviere diese Option um "
 "Stellarium gleich beim Start mit diesem Teleskop zu verbinden."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:388
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
 msgid ""
 "Otherwise, to start the telescope, you need to open the main window, select "
 "that telescope and press the 'Start/Connect' button."
@@ -19862,25 +19864,25 @@ msgstr ""
 "wählen und \"Verbinde\" drücken."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:394
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:391
 msgid "This section is active only for DIRECT connections (see {above})."
 msgstr ""
 "Dieser Abschnitt ist nur für DIREKTE Verbindungen aktiv (siehe {oben})."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:396
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
 msgid "<b>Serial port</b> sets the serial port used by the telescope."
 msgstr ""
 "<b>Serieller Anschluss</b> wählt den seriellen Anschluss für das Teleskop."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:394
 msgid "There is a pop-up box that suggests some default values:"
 msgstr "Es gibt eine Liste von Vorgaben:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:398
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:395
 msgid "On Windows, serial ports COM1 to COM10;"
 msgstr "Unter Windows, serielle Schnittstellen COM1 bis COM10;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:399
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:396
 msgid ""
 "On Linux, serial ports /dev/ttyS0 to /dev/ttyS3 and USB ports /dev/ttyUSB0 "
 "to /dev/ttyUSB3;"
@@ -19888,14 +19890,14 @@ msgstr ""
 "Unter Linux, serielle Ports /dev/ttyS0 bis /dev/ttyS3 und USB Ports "
 "/dev/ttyUSB0 bis /dev/ttyUSB3;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:400
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
 msgid ""
 "On Mac OS X, the list is empty as it names its ports in a peculiar way."
 msgstr ""
 "Unter Mac OS X ist die Liste leer, da Ports eher eigentümlich benannt "
 "werden."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:401
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:398
 msgid ""
 "If you are using an USB cable, the default serial port of your telescope "
 "most probably is not in the list of suggestions."
@@ -19903,14 +19905,14 @@ msgstr ""
 "Bei Verwendung eines USB-Kabels ist das serielle Port des Teleskops "
 "vermutlich nicht in der Auswahlliste."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:402
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:399
 msgid ""
 "To list all valid serial port names in Mac OS X, open a terminal and type:"
 msgstr ""
 "Um die Namen der seriellen Ports unter Mac OS X zu finden, öffne ein "
 "Terminal und tippe:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:403
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:400
 msgid ""
 "This will list all devices, the full name of your serial port should be "
 "somewhere in the list (for example, '/dev/cu.usbserial-FTDFZVMK')."
@@ -19919,26 +19921,26 @@ msgstr ""
 "irgendwo in der Liste aufscheinen (z.B.  '/dev/cu.usbserial-FTDFZVMK')."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:406
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:403
 msgid "<b>Device model</b>: see {Supported devices} below."
 msgstr "<b>Gerätemodell</b>: siehe {Unterstützte Geräte} unten."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:413
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
 msgid "Both fields here refer to communication over a network ({TCP/IP})."
 msgstr ""
 "Beide Felder betreffen Kommunikationseinstellungen über Netzwerk  "
 "({TCP/IP})."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:415
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:412
 msgid ""
 "Doing something with them is necessary only for INDIRECT connections (see "
 "{above})."
 msgstr "Diese betreffen nur INDIREKTE Verbindungen (siehe {oben})."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:419
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:416
 msgid ""
 "<b>Host</b> can be either a host name or an {IPv4} address such as "
 "'127.0.0.1'. The default value of 'localhost' means 'this computer'."
@@ -19947,7 +19949,7 @@ msgstr ""
 "wie z.B. '127.0.0.1' sein. Die Vorgabe 'localhost' bedeutet 'dieser "
 "Computer'."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:421
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:418
 msgid ""
 "<b>Port</b> refers to the TCP port used for communication. The default value"
 " depends on the telescope number and ranges between 10001 and 10009."
@@ -19955,11 +19957,11 @@ msgstr ""
 "<b>TCP Port</b> bezeichnet das TCP port für die Kommunikation. Die Vorgabe "
 "liegt je nach Teleskopnummer im Bereich 10001 bis 10009."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:419
 msgid "Both values are ignored for DIRECT connections."
 msgstr "Beide Angaben sind für DIREKTE Verbindungen irrelevant."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:423
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:420
 msgid ""
 "For INDIRECT connections, modifying the default host name value makes sense "
 "only if you are attempting a remote connection over a network."
@@ -19967,7 +19969,7 @@ msgstr ""
 "Für INDIREKTE Verbindungen muß die Vorgabe nur für Verbindungen zu einem "
 "entfernten Rechner geändert werden."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:424
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:421
 msgid ""
 "In this case, it should be the name or IP address of the computer that runs "
 "a program that runs the telescope."
@@ -19975,7 +19977,7 @@ msgstr ""
 "In diesem Fall sollte es der Name oder IP-Adresse des Computers sein, auf "
 "dem die Steuersoftware für das Teleskop läuft."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:425
 msgid ""
 "A series of circles representing different fields of view can be added "
 "around the telescope marker. This is a relic from the times before the "
@@ -19985,12 +19987,12 @@ msgstr ""
 " kann um das Fadenkreuz gelegt werden. Ein Relikt aus der Zeit vor dem "
 "<strong>Okulare</strong>-Plugin."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:429
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:426
 msgid ""
 "In the telescope configuration window, click on 'User Interface Settings'."
 msgstr "Wähle den Reiter 'Einstellungen' Im Teleskop-Konfigurationsfenster."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:430
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:427
 msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
 "separated with commas in the field below."
@@ -19998,12 +20000,12 @@ msgstr ""
 "Aktiviere die Option 'Gesichtsfeldmarkierungen benutzen', und dann die "
 "Werteliste (mit Komma getrennt) im Feld darunter."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:431
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
 msgid "The values are interpreted as degrees of arc."
 msgstr "Die Werte sind Angaben in Winkelgraden."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:434
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:431
 msgid ""
 "This can be used in combination with a {virtual telescope} to display a "
 "moving reticle with the Telrad circles."
@@ -20011,7 +20013,7 @@ msgstr ""
 "Das kann in Kombination mit einem  {Virtuellen Teleskop} verwendet werden, "
 "um einem Telrad-Sucher darzustellen."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:439
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:436
 msgid ""
 "The 'Slew telescope to' window can be opened by pressing <b>Ctrl+0</b> or "
 "the respective button in the bottom toolbar."
@@ -20020,7 +20022,7 @@ msgstr ""
 "<b>Strg+0</b> oder mit der Teleskop-Schaltfläche in der unteren "
 "Werkzeugleiste aufgerufen werden."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:440
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:437
 msgid ""
 "It contains two fields for entering celestial coordinates, selectors for the"
 " preferred format (Hours-Minutes-Seconds, Degrees-Minutes-Seconds, or "
@@ -20030,13 +20032,13 @@ msgstr ""
 "Winkelformat (Stunden/Minuten/Sekunden, Grad/Minuten/Sekunden oder "
 "Dezimalgrad), eine Auswahlliste und zwei Schaltflächen."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:441
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:438
 msgid ""
 "The drop-down list contains the names of the currently connected devices."
 msgstr ""
 "Die Dropdown-Liste beinhaltet die Namen der derzeit verbundenen Geräte."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:442
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:439
 msgid ""
 "If no devices are connected, it will remain empty, and the 'Slew' button "
 "will be disabled."
@@ -20044,7 +20046,7 @@ msgstr ""
 "Wenn kein Gerät verbunden ist, bleibt die Liste leer, und der "
 "'Schwenken'-Button bleibt deaktiviert."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:443
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:440
 msgid ""
 "Pressing the <b>Slew</b> button slews the selected device to the selected "
 "set of coordinates."
@@ -20053,7 +20055,7 @@ msgstr ""
 "gewählten Instruments auf die gewählten Koordinaten aus."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:445
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:442
 msgid ""
 "See the section about {keyboard commands} below for other ways of "
 "controlling the device."
@@ -20062,7 +20064,7 @@ msgstr ""
 "Steuerungsmöglichkeiten."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:446
 msgid ""
 "Pressing the <b>Configure telescopes...</b> button opens the {main window} "
 "of the plug-in."
@@ -20070,7 +20072,7 @@ msgstr ""
 "Ein Klick auf die Schaltfläche <b>Teleskope konfigurieren...</b> öffnet das"
 "  {Hauptfenster} des Plugins."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:451
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:448
 msgid ""
 "<b>TIP:</b> Inside the 'Slew' window, underlined letters indicate that "
 "pressing 'Alt + underlined letter' can be used instead of clicking."
@@ -20079,7 +20081,7 @@ msgstr ""
 "Buchstaben die Tasten T, die mit 'Alt+T' anstelle eines Mausklicks gedrückt "
 "werden können."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:452
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid ""
 "For example, pressing <b>Alt+S</b> is equivalent to clicking the 'Slew' "
 "button, pressing <b>Alt+E</b> switches to decimal degree format, etc."
@@ -20087,11 +20089,11 @@ msgstr ""
 "Zum Beispiel ist <b>Alt+S</b> gleichbedeutend wie ein Klick auf 'Schwenken',"
 " <b>Alt+E</b> schaltet auf Dezimalgrad, etc."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:455
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:452
 msgid "Sending commands"
 msgstr "Senden von Befehlen"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:456
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:453
 msgid ""
 "Once a telescope is successfully started/connected, Stellarium displays a "
 "telescope reticle labelled with the telescope's name on its current position"
@@ -20101,7 +20103,7 @@ msgstr ""
 "Fadenkreuz, bezeichnet mit dem Teleskopnamen, das die gegenwärtige "
 "Blickrichtung des Teleskops zeigt."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:457
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:454
 msgid ""
 "The reticle is an object like every other in Stellarium - it can be selected"
 " with the mouse, it can be tracked and it appears as an object in the "
@@ -20111,7 +20113,7 @@ msgstr ""
 " der Maus ausgewählt werden, verfolgt werden, und es kann im Suchdialog "
 "gefunden werden."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:458
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:455
 msgid ""
 "<b>To point a device to an object:</b> Select an object (e.g. a star) and "
 "press the number of the device while holding down the <b>Ctrl</b> key."
@@ -20120,17 +20122,17 @@ msgstr ""
 "und drücke <b>Strg+&lt;N&gt;</b>, wobei &lt;N&gt; die Nummer des Teleskops "
 "ist."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:459
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:456
 msgid "For example, Ctrl+1 for telescope #1."
 msgstr "Zum Beispiel, Ctrl+1 für Teleskop #1."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:460
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:457
 msgid "This will move the telescope to the selected object."
 msgstr ""
 "Das löst einen GOTO-Befehl aus und sollte das Teleskop zum gewählten Objekt "
 "bewegen."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:461
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:458
 msgid ""
 "<b>To point a device to the center of the view:</b> Press the number of the "
 "device while holding down the <b>Alt</b> key."
@@ -20138,16 +20140,16 @@ msgstr ""
 "<b>Um ein Gerät in die Bildschirmmitte zu fahren:</b> Drücke "
 "<b>Alt+&lt;N&gt;</b>, wobei &lt;N&gt; die Nummer des Teleskops ist."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:462
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:459
 msgid "For example, Alt+1 for telescope #1."
 msgstr "Zum Beispiel, Alt+1 für Teleskop Nr. 1."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:463
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:460
 msgid ""
 "This will slew the device to the point in the center of the current view."
 msgstr "Das löst einen Schwenkbefehl in die Bildschirmmitte aus."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:464
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:461
 msgid ""
 "If you move the view after issuing the command, the target won't change "
 "unless you issue another command."
@@ -20156,7 +20158,7 @@ msgstr ""
 "das anzufahrende Ziel nicht ohne einen weiteren Steuerbefehl."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:467
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:464
 msgid ""
 "<b>To point a device to a given set of coordinates:</b> Use the {'Slew to' "
 "window} (press <b>Ctrl+0</b>)."
@@ -20165,7 +20167,7 @@ msgstr ""
 "{'Bewege Telesop zu'-Fenster} (drücke <b>Strg+0</b>)."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:474
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:471
 msgid ""
 "All devices listed in the {'Device model' list} are convenience definitions "
 "using one of the two built-in interfaces: the Meade LX200 (the Meade "
@@ -20175,15 +20177,15 @@ msgstr ""
 "implementierten Schnittstellen: Meade LX200 (Meade Autostar Controller) oder"
 " Celestron NexStar-Schnittstelle."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:476
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:473
 msgid "The device list contains the following:"
 msgstr "Die Geräteliste beinhaltet:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:477
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:474
 msgid "Any device using the NexStar interface."
 msgstr "Alle Geräte mit Unterstützung der NexStar-Schnittstelle."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:478
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:475
 msgid ""
 "A computerized telescope mount made by Losmandy (Meade LX-200/Autostar "
 "interface)."
@@ -20191,12 +20193,12 @@ msgstr ""
 "Eine robotische Teleskopmontierung von Losmandy (LX-200/Autostar-"
 "Schnittstelle)."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:479
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:484
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:476
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:481
 msgid "Any device using the LX-200/Autostar interface."
 msgstr "Alle Geräte mit Unterstützung der LX-200/Autostar-Schnittstelle."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:480
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:477
 msgid ""
 "The Meade ETX-70 telescope with the #494 Autostar controller and the #506 "
 "Connector Cable Set."
@@ -20205,7 +20207,7 @@ msgstr ""
 "Anschlußkabelset."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:482
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:479
 #, qt-format
 msgid ""
 "According to the tester, it is a bit slow, so its default setting of "
@@ -20214,14 +20216,14 @@ msgstr ""
 "Nach Angaben des Testers ist sie etwas träge, daher ist die Vorgabe für "
 "%1'Verbindungsverzögerung'%2 1.5 statt 0.5 Sekunden."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:485
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:482
 msgid ""
 "The Sky-Watcher SynScan AZ GoTo mount is used in a number of telescopes."
 msgstr ""
 "Die Sky-Watcher SynScan AZ GoTo Montierung wird für eine ganze Reihe von "
 "Teleskopen genutzt."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:486
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:483
 msgid ""
 "<b>SynScan</b> is also the name of the hand controller used in other Sky-"
 "Watcher GoTo mounts, and it seems that any mount that uses a SynScan "
@@ -20233,12 +20235,12 @@ msgstr ""
 "Controller ab Version 3.0 von diesem PLugin unterstützt, da sie das NexStar-"
 "Protokoll verwenden."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:487
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:484
 msgid "Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations."
 msgstr ""
 "Argo Navis ist ein 'Digitaler Teleskop-Computer' von Wildcard Innovations."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:488
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:485
 msgid ""
 "It is an advanced digital setting circle that turns an ordinary telescope "
 "(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses"
@@ -20249,7 +20251,7 @@ msgstr ""
 "Computer zur Objektsuche und Positionierungsunterstützung, aber händischer "
 "Bewegung des Teleskops)."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:489
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:486
 msgid ""
 "Just don't forget to set it to Meade compatibility mode and set the baud "
 "rate to 9600B"
@@ -20257,7 +20259,7 @@ msgstr ""
 "Es muß auf Meade-Kompatibilitätsmodus eingestellt werden, mit Baudrate "
 "9600B."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:494
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:491
 msgid ""
 "If you want to test this plug-in without an actual device connected to the "
 "computer, choose <b>Nothing, just simulate one (a moving reticle)</b> in the"
@@ -20271,7 +20273,7 @@ msgstr ""
 "wie ein physisches Teleskop vom Plugin gesteuert werden kann."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:497
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:494
 msgid ""
 "See the section above about {field of view indicators} for a possible "
 "practical application (emulating 'Telrad' circles)."
@@ -20280,7 +20282,7 @@ msgstr ""
 "Anwendung (Darstellung von 'Telrad'-Markierungen)."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:501
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:498
 msgid ""
 "This feature is equivalent to the 'Dummy' type of telescope supported by "
 "{Stellarium's original telescope control feature}."
@@ -20289,17 +20291,17 @@ msgstr ""
 "Teleskopsteuerung}."
 
 #. TRANSLATORS: Symbol for "number"
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:521
-#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:518
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:97
 msgctxt "numero sign"
 msgid "#"
 msgstr "#"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:523
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:520
 msgid "Status"
 msgstr "Zustand"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:540
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:537
 #, qt-format
 msgid ""
 "To slew a connected telescope to an object (for example, a star), select "
@@ -20314,7 +20316,7 @@ msgstr ""
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually
 #. see this text. :)
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:547
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:544
 msgid ""
 "No device model descriptions are available. Stellarium will not be able to "
 "control a telescope on its own, but it is still possible to do it through an"
@@ -20326,93 +20328,93 @@ msgstr ""
 
 #. TRANSLATORS: The translated name of the Add button is automatically
 #. inserted.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:552
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:549
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
 msgstr "Drücke die Taste \"%1\" für eine neue Teleskopverbindung"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:566
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:563
 msgid "local, Stellarium"
 msgstr "lokal, Stellarium"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:570
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:567
 msgid "local, external"
 msgstr "lokal, externe Anwendung"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:574
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:571
 msgid "remote, unknown"
 msgstr "Fernverbindung, unbekannt"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:578
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:575
 msgid "virtual"
 msgstr "virtuell"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:582
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:579
 msgid "remote, RTS2"
 msgstr "Ethernet, RTS2"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:586
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:583
 msgid "remote, INDI/INDIGO"
 msgstr "entfernt, INDI/INDIGO"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:590
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:587
 msgid "local, ASCOM"
 msgstr "lokal, ASCOM"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1012
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1009
 msgid "Start"
 msgstr "Start"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1014
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1011
 msgid "Start the selected local telescope"
 msgstr "Starte das ausgewählte Teleskop"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1019
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1016
 msgid "Stop"
 msgstr "Anhalten"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1021
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1018
 msgid "Stop the selected local telescope"
 msgstr "Halte das ausgewählte Teleskop an"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1026
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1023
 msgid "Connect"
 msgstr "Verbinde"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1028
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1025
 msgid "Connect to the selected telescope"
 msgstr "Verbindung zum ausgewählten Teleskop herstellen"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1033
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1030
 msgid "Disconnect"
 msgstr "Verbindung trennen"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1035
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1032
 msgid "Disconnect from the selected telescope"
 msgstr "Verbindung zum ausgewählten Teleskop trennen"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1055
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1052
 msgid "Select a directory"
 msgstr "Verzeichnis auswählen"
 
-#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:96
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:99
 msgid "Right Ascension (J2000)"
 msgstr "Rektaszension (J2000)"
 
-#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:97
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:100
 msgid "Declination (J2000)"
 msgstr "Deklination (J2000)"
 
-#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:291
-#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:320
-#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:468
+#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:292
+#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:321
+#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:469
 msgid "Select one"
 msgstr "Wählen Sie"
 
@@ -20878,7 +20880,7 @@ msgid "On"
 msgstr "Ein"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Off"
 msgstr "Aus"
 
@@ -20915,16 +20917,16 @@ msgstr "Bahnelemente im MPC-Format importieren..."
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris
 #. Service" is inserted.
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:162
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
 #, qt-format
 msgid "Query the MPC's %1:"
 msgstr "Abfrage der  MPCs %1:"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:165
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
 msgid "Only one result will be returned if the query is successful."
 msgstr "Bei erfolgreicher Suche wird nur ein Resultat angezeigt."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:166
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
@@ -20932,7 +20934,7 @@ msgstr ""
 "Sowohl Kometen als auch Asteroiden können mit ihrer Nummer, ihrem "
 "(englischen) Namen oder ihrer vorläufigen Bezeichnung identifiziert werden."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:173
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
 #, qt-format
 msgid ""
 "Comet <i>names</i> need to be prefixed with %1 or %2. If more than one comet"
@@ -20943,23 +20945,23 @@ msgstr ""
 "Kometen<i>namen</i> muss %1 oder %2 vorangestellt werden. Falls mehrere Kometen gefunden werden, wird nur das erste Ergebnis angezeigt. \r\n"
 "Zum Beispiel ergibt die Suche nach \"%3\" %4, den Halleyschen Kometen; aber eine Suche nach \"%5\" ergibt den Asteroiden %6."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:214
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:200
 msgid "Select bookmark..."
 msgstr "Lesezeichen wählen..."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:351
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:337
 msgid "Plain Text File"
 msgstr "Textdatei"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:353
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:339
 msgid "All Files"
 msgstr "Alle Dateien"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:355
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:341
 msgid "Select a file"
 msgstr "Datei auswählen"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:743
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:730
 msgid "Searching..."
 msgstr "Suche..."
 
@@ -22175,7 +22177,7 @@ msgid "Not active."
 msgstr "Inaktiv."
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:267
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
 msgid "Remote Control Configuration"
 msgstr "Fernbedienungs-Konfiguration"
 
@@ -22240,7 +22242,7 @@ msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
 msgstr "Server inaktiv - oder Server aktiv auf IP: aaa.bbb.ccc.ddd"
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:51
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Remote Sync"
 msgstr "Remote Sync"
 
@@ -22266,12 +22268,12 @@ msgid "ERROR: %1"
 msgstr "FEHLER: %1"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:146
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:472
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:471
 msgid "Start server"
 msgstr "Server starten"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:151
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:475
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
 msgid "Connect to server"
 msgstr "Verbinde mit Server"
 
@@ -22361,98 +22363,98 @@ msgstr "Servername"
 msgid "Server not active."
 msgstr "Server nicht aktiv."
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:467
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
 msgid "Remote Sync Plug-in Configuration"
 msgstr "Remote Sync Plugin-Konfiguration"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:469
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:474
 msgid "Status:"
 msgstr "Status:"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:471
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:470
 msgid "Server mode"
 msgstr "Server-Modus"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:473
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:472
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:477
 msgid "Server port"
 msgstr "Server-Port"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:473
 msgid "Client mode"
 msgstr "Client-Modus"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:475
 msgid "Server host address/name"
 msgstr "Server-Hostadresse/-name"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:477
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
 msgid "127.0.0.1"
 msgstr "127.0.0.1"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
 msgid "When connection is lost"
 msgstr "Bei Verbindungsabbruch"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
 msgid "Do nothing"
 msgstr "Nichts tun"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
 msgid "Try reconnecting"
 msgstr "Versuche wieder zu verbinden"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:483
 msgid "When server quits"
 msgstr "Wenn Server Dienst beendet"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
 msgid "Changes on this page require a re-connection to the server"
 msgstr "Änderungen auf dieser Seite erfordern eine Neuverbindung zum Server"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
 msgid "Settings applied on this client"
 msgstr "Einstellungen für diesen Client"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
 msgid "Selection"
 msgstr "Auswahl"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:490
 msgid "View direction"
 msgstr "Blickrichtung"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:493
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:492
 msgid "Property filters"
 msgstr "Property-Filter"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:494
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:493
 msgid "Exclude GUI-related properties"
 msgstr "GUI-bezogene Properties ausschließen"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:496
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:495
 msgid "These are all available properties."
 msgstr "Hier sind alle verfügbaren Properties"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:499
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:498
 msgid "These are the properties currently excluded from synchronisation."
 msgstr ""
 "Hier sind die Properties, die gegenwärtig nicht synchronisiert werden."
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:501
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:500
 msgid "Excluded Properties"
 msgstr "Ausgeschlossene Properties"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:502
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:501
 msgid "Synchronized Properties"
 msgstr "Synchronisierte Properties"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:503
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:502
 msgid "Additional excluded properties:"
 msgstr "Weitere ausgeschlossene Properties:"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:504
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:503
 msgid "Client settings"
 msgstr "Client-Einstellungen"
 
@@ -27435,37 +27437,37 @@ msgstr "Geometry Shader"
 msgid "Grid coordinates (%1): %2m, %3m, %4m"
 msgstr "Grid-Koordinaten (%1): %2m, %3m, %4m"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
 msgid "3D Scenery"
 msgstr "3D-Szenerie"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Set as default scene"
 msgstr "Als Standardszenerie"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Load/save viewpoints"
 msgstr "Lade/speichere Blickpunkte"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Torch strength:"
 msgstr "Lampenhelligkeit:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Torch range:"
 msgstr "Lampenreichweite:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 #, qt-format
 msgid "Torchlight (%1)"
 msgstr "Lampe (%1)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 #, qt-format
 msgid "Show grid coordinates (%1)"
 msgstr "Zeige Grid-Koordinaten (%1)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:487
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid ""
 "Overdraw horizon polygon defined in your landscape. This displays the "
 "inaccuracies in a very large planar model compared to Earth curvature, of "
@@ -27477,115 +27479,115 @@ msgstr ""
 " gerechnete Horizontlinie kann dies zumindest für einen Beobachtungsort "
 "zeigen."
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:488
 msgid "Draw horizon polyline in foreground"
 msgstr "Zeichne Horizont-Polygonzug im Vordergrund"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
 msgid "Visual options"
 msgstr "Darstellungsoptionen"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Per-Pixel lighting"
 msgstr "Per-Pixel-Beleuchtung"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Shadows"
 msgstr "Schatten"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Simple shadows"
 msgstr "Einfache Schatten"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "Bump mapping"
 msgstr "Bump Mapping"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:495
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "Cubemap size:"
 msgstr "Cubemap-Größe:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:495
 msgid "Shadowmap size:"
 msgstr "Shadowmap-Größe:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "Filtering Quality:"
 msgstr "Filter-Qualität:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Hardware"
 msgstr "Hardware"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Low"
 msgstr "Low (niedrig)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Low + Hardware"
 msgstr "Low + Hardware"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "High (slow)"
 msgstr "High (langsam)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "High + Hardware (slow)"
 msgstr "High + Hardware (langsam)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:505
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:504
 msgid "PCSS"
 msgstr "PCSS"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:506
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:505
 msgid "Cubemapping mode:"
 msgstr "Cubemapping-Modus:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:507
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:506
 msgid "Full cubemap shadows"
 msgstr "Komplette Cubemap-Schatten"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:508
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:507
 msgid "Lazy cubemap re-rendering"
 msgstr "Träges Cubemap-Update"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:509
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:508
 msgid "Interval:"
 msgstr "Intervall:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:510
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:509
 msgid "Only update dominant face when moving"
 msgstr "Bei Bewegung nur zentrale Cubemap-Fläche auffrischen"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:511
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:510
 msgid "Also update second-most dominant face"
 msgstr "Auch zweitwichtigstes Feld auffrischen"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:512
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:511
 msgid "Quality/Performance settings"
 msgstr "Qualität-/Leistungseinstellungen"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:210
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:209
 msgid "Stored views"
 msgstr "Gespeicherte Blickpunkte"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:212
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:211
 msgid "Load view"
 msgstr "Lade Blickpunkt"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:213
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:212
 msgid "Delete view"
 msgstr "Blickpunkt löschen"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:214
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:213
 msgid "Add current view"
 msgstr "Aktuellen Blickpunkt hinzufügen"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:215
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:214
 msgid "Load/store with date"
 msgstr "Laden/speichern mit Datum"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:216
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:215
 msgid "Title:"
 msgstr "Name:"
 
@@ -27995,7 +27997,7 @@ msgstr "Standardwerte wiederherstellen"
 msgid "Custom Lines"
 msgstr "Benutzerdefinierte Linien"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:153
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:152
 msgid "Locations"
 msgstr "Orte"
 
