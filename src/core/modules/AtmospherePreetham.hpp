@@ -28,6 +28,7 @@
 #include "StelFader.hpp"
 
 #include <QOpenGLBuffer>
+#include <QOpenGLVertexArrayObject>
 
 class StelProjector;
 class StelToneReproducer;
@@ -64,6 +65,7 @@ private:
 	QOpenGLBuffer indicesBuffer;
 	Vec4f* colorGrid;
 	QOpenGLBuffer colorGridBuffer;
+	QOpenGLVertexArrayObject vao;
 
 	//! Vertex shader used for xyYToRGB computation
 	class QOpenGLShaderProgram* atmoShaderProgram;
