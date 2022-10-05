@@ -44,7 +44,7 @@ bool ASCOMDevice::connect()
 
 	v1 = OleBoolToVariant(TRUE);
 
-	hResult = OlePropertyPut(pTelescopeDispatch, Q_NULLPTR, const_cast<wchar_t*>(LConnected), 1, v1);
+	hResult = OlePropertyPut(pTelescopeDispatch, nullptr, const_cast<wchar_t*>(LConnected), 1, v1);
 
 	if (FAILED(hResult))
 	{
@@ -65,7 +65,7 @@ bool ASCOMDevice::disconnect()
 
 	v1 = OleBoolToVariant(FALSE);
 
-	hResult = OlePropertyPut(pTelescopeDispatch, Q_NULLPTR, const_cast<wchar_t*>(LConnected), 1, v1);
+	hResult = OlePropertyPut(pTelescopeDispatch, nullptr, const_cast<wchar_t*>(LConnected), 1, v1);
 
 	if (FAILED(hResult))
 	{
@@ -95,7 +95,7 @@ void ASCOMDevice::slewToCoordinates(ASCOMDevice::ASCOMCoordinates coords)
 	v1 = OleDoubleToVariant(coords.RA);
 	v2 = OleDoubleToVariant(coords.DEC);
 
-	hResult = OleMethodCall(pTelescopeDispatch, Q_NULLPTR, const_cast<wchar_t*>(LSlewToCoordinatesAsync), 2, v1, v2);
+	hResult = OleMethodCall(pTelescopeDispatch, nullptr, const_cast<wchar_t*>(LSlewToCoordinatesAsync), 2, v1, v2);
 }
 
 void ASCOMDevice::syncToCoordinates(ASCOMCoordinates coords)
@@ -108,7 +108,7 @@ void ASCOMDevice::syncToCoordinates(ASCOMCoordinates coords)
 	v1 = OleDoubleToVariant(coords.RA);
 	v2 = OleDoubleToVariant(coords.DEC);
 
-	hResult = OleMethodCall(pTelescopeDispatch, Q_NULLPTR, const_cast<wchar_t*>(LSyncToCoordinates), 2, v1, v2);
+	hResult = OleMethodCall(pTelescopeDispatch, nullptr, const_cast<wchar_t*>(LSyncToCoordinates), 2, v1, v2);
 	if (FAILED(hResult))
 	{
 		qDebug() << "Could not sync to coordinates for device: " << mAscomDeviceId;
@@ -120,7 +120,7 @@ void ASCOMDevice::abortSlew()
 	if (!mConnected) return;
 
 	HRESULT hResult;
-	hResult = OleMethodCall(pTelescopeDispatch, Q_NULLPTR, const_cast<wchar_t*>(LAbortSlew));
+	hResult = OleMethodCall(pTelescopeDispatch, nullptr, const_cast<wchar_t*>(LAbortSlew));
 	if (FAILED(hResult))
 	{
 		qDebug() << "Could not abort slew for device: " << mAscomDeviceId;

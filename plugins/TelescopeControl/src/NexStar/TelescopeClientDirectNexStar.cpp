@@ -41,7 +41,7 @@ TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, 
 	: TelescopeClient(name)
 	, time_delay(0)
 	, equinox(eq)
-	, nexstar(Q_NULLPTR)
+	, nexstar(nullptr)
 	, last_ra(0)
 	, queue_get_position(true)
 	, next_pos_time(0)

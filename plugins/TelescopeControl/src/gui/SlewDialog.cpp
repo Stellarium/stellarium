@@ -37,7 +37,8 @@ using namespace TelescopeControlGlobals;
 
 SlewDialog::SlewDialog()
 	: StelDialog("TelescopeControlSlew")
-	, storedPointsDialog(Q_NULLPTR)
+	, telescopeManager(nullptr)
+	, storedPointsDialog(nullptr)
 {
 	ui = new Ui_slewDialog();
 	
@@ -48,7 +49,7 @@ SlewDialog::SlewDialog()
 SlewDialog::~SlewDialog()
 {	
 	delete ui;
-	storedPointsDialog = Q_NULLPTR;
+	storedPointsDialog = nullptr;
 }
 
 void SlewDialog::retranslate()
@@ -221,7 +222,7 @@ void SlewDialog::slew()
 	if (!telescope)
 		return;
 
-	StelObjectP selectObject = Q_NULLPTR;
+	StelObjectP selectObject = nullptr;
 	telescope->telescopeGoto(targetPosition, selectObject);
 }
 
@@ -237,7 +238,7 @@ void SlewDialog::sync()
 	if (!telescope)
 		return;
 
-	StelObjectP selectObject = Q_NULLPTR;
+	StelObjectP selectObject = nullptr;
 	telescope->telescopeSync(targetPosition, selectObject);
 }
 
@@ -343,7 +344,7 @@ void SlewDialog::onCurrentTelescopeChanged()
 {
 	// remove previous controlWidget
 	QLayoutItem* child;
-	while ((child = ui->controlWidgetLayout->takeAt(0)) != Q_NULLPTR)
+	while ((child = ui->controlWidgetLayout->takeAt(0)) != nullptr)
 	{
 		delete child->widget();
 		delete child;

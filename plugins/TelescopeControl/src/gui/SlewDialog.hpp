@@ -41,14 +41,14 @@ class SlewDialog : public StelDialog
 
 public:
 	SlewDialog();
-	virtual ~SlewDialog() Q_DECL_OVERRIDE;
+	virtual ~SlewDialog() override;
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	virtual void retranslate() override;
 	
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	virtual void createDialogContent() override;
 	Ui_slewDialog* ui;
 	
 private slots:
@@ -103,8 +103,8 @@ private:
 	void savePointsToFile();
 	void loadPointsFromFile();
 
-	TelescopeControl * telescopeManager =  Q_NULLPTR;
-	StoredPointsDialog * storedPointsDialog = Q_NULLPTR;
+	TelescopeControl * telescopeManager;
+	StoredPointsDialog * storedPointsDialog;
 	QHash<QString, int> connectedSlotsByName;
 	QVariantMap storedPointsDescriptions;
 };

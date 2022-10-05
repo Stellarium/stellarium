@@ -51,7 +51,7 @@ void TelescopeClientASCOMWidget::retranslate()
 
 void TelescopeClientASCOMWidget::onChooseButtonClicked()
 {
-	mSelectedDevice = ASCOMDevice::showDeviceChooser(mSelectedDevice != Q_NULLPTR ? mSelectedDevice : "");
+	mSelectedDevice = ASCOMDevice::showDeviceChooser(mSelectedDevice != nullptr ? mSelectedDevice : "");
 	setSelectedDevice(mSelectedDevice);
 }
 

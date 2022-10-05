@@ -140,7 +140,7 @@ void TelescopeClientASCOM::telescopeGoto(const Vec3d& j2000Pos, StelObjectP sele
 
 	if (mAscomDevice->isParked())
 	{
-		QMessageBox::warning(Q_NULLPTR, "Stellarium",
+		QMessageBox::warning(nullptr, "Stellarium",
 		  q_("Can't slew a telescope which is parked. Unpark before performing any goto command."));
 		return;
 	}

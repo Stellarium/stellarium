@@ -599,7 +599,7 @@ void TelescopeDialog::addModelRow(int number,
 {
 	Q_ASSERT(telescopeListModel);
 	
-	QStandardItem* tempItem = Q_NULLPTR;
+	QStandardItem* tempItem = nullptr;
 	int lastRow = telescopeListModel->rowCount();
 	// Number
 	tempItem = new QStandardItem(QString::number(number));
@@ -1049,7 +1049,7 @@ void TelescopeDialog::checkBoxUseExecutablesToggled(bool useExecutables)
 
 void TelescopeDialog::buttonBrowseServerDirectoryPressed()
 {
-	QString newPath = QFileDialog::getExistingDirectory (Q_NULLPTR, QString(q_("Select a directory")), telescopeManager->getServerExecutablesDirectoryPath());
+	QString newPath = QFileDialog::getExistingDirectory (nullptr, QString(q_("Select a directory")), telescopeManager->getServerExecutablesDirectoryPath());
 	//TODO: Validation? Directory exists and contains servers?
 	if(!newPath.isEmpty())
 	{

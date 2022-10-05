@@ -40,9 +40,9 @@ SerialPort::SerialPort(Server &server, const char *serial_device)
 {
 #ifdef Q_OS_WIN
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
-	handle = CreateFile(LPCWSTR(serial_device), GENERIC_READ|GENERIC_WRITE, 0, Q_NULLPTR, OPEN_EXISTING, 0, Q_NULLPTR);
+	handle = CreateFile(LPCWSTR(serial_device), GENERIC_READ|GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, 0, nullptr);
 #else
-	handle = CreateFile(serial_device, GENERIC_READ|GENERIC_WRITE, 0, Q_NULLPTR, OPEN_EXISTING, 0, Q_NULLPTR);
+	handle = CreateFile(serial_device, GENERIC_READ|GENERIC_WRITE, 0, nullptr, OPEN_EXISTING, 0, nullptr);
 #endif
 	if (handle == INVALID_HANDLE_VALUE)
 	{
@@ -178,7 +178,7 @@ SerialPort::~SerialPort(void)
 int SerialPort::readNonblocking(char *buf, int count)
 {
 	DWORD rval;
-	if (ReadFile(handle, buf, static_cast<DWORD>(count), &rval, Q_NULLPTR))
+	if (ReadFile(handle, buf, static_cast<DWORD>(count), &rval, nullptr))
 		return static_cast<int>(rval);
 	if (GetLastError() == ERROR_IO_PENDING)
 		return 0;
@@ -188,7 +188,7 @@ int SerialPort::readNonblocking(char *buf, int count)
 int SerialPort::writeNonblocking(const char *buf, int count)
 {
 	DWORD rval;
-	if (WriteFile(handle, buf, static_cast<DWORD>(count), &rval, Q_NULLPTR))
+	if (WriteFile(handle, buf, static_cast<DWORD>(count), &rval, nullptr))
 		return static_cast<int>(rval);
 	if (GetLastError() == ERROR_IO_PENDING)
 		return 0;

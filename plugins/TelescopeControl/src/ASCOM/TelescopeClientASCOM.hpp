@@ -30,7 +30,7 @@ class TelescopeClientASCOM : public TelescopeClient
 
 public:
 	TelescopeClientASCOM(const QString& name = "ASCOM", const QString& params = QString(), TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000);
-	~TelescopeClientASCOM() Q_DECL_OVERRIDE;
+	~TelescopeClientASCOM() override;
 
 	Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
 	void move(double angle, double speed) override;
@@ -42,8 +42,8 @@ public:
 
 
 private:
- 	bool prepareCommunication() Q_DECL_OVERRIDE;
- 	void performCommunication() Q_DECL_OVERRIDE;
+	bool prepareCommunication() override;
+	void performCommunication() override;
 	static bool useJNow(ASCOMDevice::ASCOMEquatorialCoordinateType coordinateType, bool ascomUseDeviceEqCoordType, TelescopeControl::Equinox equinox);
 
 	ASCOMDevice::ASCOMCoordinates j2000PosToAscomCoord(const Vec3d& j2000Pos);

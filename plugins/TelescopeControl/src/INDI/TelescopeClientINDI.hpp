@@ -37,7 +37,7 @@ public:
 	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) override;
 	bool isConnected() const override;
 	bool hasKnownPosition() const override;
-	QWidget *createControlWidget(QSharedPointer<TelescopeClient> telescope, QWidget* parent = Q_NULLPTR) const override;
+	QWidget *createControlWidget(QSharedPointer<TelescopeClient> telescope, QWidget* parent = nullptr) const override;
 
 private:
 	int toINDISpeed(double speed) const;

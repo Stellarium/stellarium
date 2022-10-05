@@ -89,11 +89,11 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor and destructor
 TelescopeControl::TelescopeControl()
-	: toolbarButton(Q_NULLPTR)
+	: toolbarButton(nullptr)
 	, useTelescopeServerLogs(false)
 	, useServerExecutables(false)
-	, telescopeDialog(Q_NULLPTR)
-	, slewDialog(Q_NULLPTR)
+	, telescopeDialog(nullptr)
+	, slewDialog(nullptr)
 	, actionGroupId("PluginTelescopeControl")
 	, moveToSelectedActionId("actionMove_Telescope_To_Selection_%1")
 	, syncActionId("actionSync_Telescope_To_Selection_%1")
@@ -114,8 +114,8 @@ TelescopeControl::TelescopeControl()
 
 TelescopeControl::~TelescopeControl()
 {
-	delete slewDialog; slewDialog = Q_NULLPTR;
-	delete telescopeDialog; telescopeDialog = Q_NULLPTR;
+	delete slewDialog; slewDialog = nullptr;
+	delete telescopeDialog; telescopeDialog = nullptr;
 }
 
 
@@ -208,9 +208,9 @@ void TelescopeControl::init()
 
 		//Create toolbar button
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		if (gui!=Q_NULLPTR)
+		if (gui!=nullptr)
 		{
-			toolbarButton =	new StelButton(Q_NULLPTR,
+			toolbarButton =	new StelButton(nullptr,
 						       QPixmap(":/telescopeControl/button_Slew_Dialog_on.png"),
 						       QPixmap(":/telescopeControl/button_Slew_Dialog_off.png"),
 						       QPixmap(":/graphicGui/miscGlow32x32.png"),
@@ -377,7 +377,7 @@ StelObjectP TelescopeControl::searchByNameI18n(const QString &nameI18n) const
 		if (telescope->getNameI18n() == nameI18n)
 			return qSharedPointerCast<StelObject>(telescope);
 	}
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 StelObjectP TelescopeControl::searchByName(const QString &name) const
@@ -387,7 +387,7 @@ StelObjectP TelescopeControl::searchByName(const QString &name) const
 		if (telescope->getEnglishName() == name)
 			return qSharedPointerCast<StelObject>(telescope);
 	}
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 QString TelescopeControl::getStelObjectType() const
@@ -773,7 +773,7 @@ void TelescopeControl::loadTelescopes()
 			qWarning() << "[TelescopeControl] The existing version of telescopes.json is obsolete. Unable to rename.";
 
 		telescopeDescriptions = result;
-		QMessageBox::warning(Q_NULLPTR, q_("Attention!"), q_("The existing version of the configuration data for telescopes in the Telescope Control plugin is obsolete."), QMessageBox::Ok);
+		QMessageBox::warning(nullptr, q_("Attention!"), q_("The existing version of the configuration data for telescopes in the Telescope Control plugin is obsolete."), QMessageBox::Ok);
 		return;
 	}
 
