@@ -1576,6 +1576,7 @@ void SatellitesDialog::selectCurrentIridiumFlare(const QModelIndex &modelIndex)
 
 void SatellitesDialog::savePredictedIridiumFlares()
 {
+	#ifdef ENABLE_XLSX
 	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
 	filter.append(" (*.xlsx);;");
 	filter.append(q_("CSV (Comma delimited)"));
@@ -1586,6 +1587,16 @@ void SatellitesDialog::savePredictedIridiumFlares()
 							QDir::homePath() + "/iridium_flares.xlsx",
 							filter,
 							&defaultFilter);
+	#else
+	QString filter = q_("CSV (Comma delimited)");
+	filter.append(" (*.csv)");
+	QString defaultFilter("(*.csv)");
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save predicted Iridium flares as..."),
+							QDir::homePath() + "/iridium_flares.csv",
+							filter,
+							&defaultFilter);
+	#endif
 
 	int count = ui->iridiumFlaresTreeWidget->topLevelItemCount();
 	int columns = iridiumFlaresHeader.size();
@@ -1622,9 +1633,9 @@ void SatellitesDialog::savePredictedIridiumFlares()
 		}
 		predictedIridiumFlares.close();
 	}
+	#ifdef ENABLE_XLSX
 	else
 	{
-		#ifdef ENABLE_XLSX
 		int *width;
 		width = new int[columns];
 		QString sData;
@@ -1673,7 +1684,7 @@ void SatellitesDialog::savePredictedIridiumFlares()
 
 		delete[] width;
 		xlsx.saveAs(filePath);
-		#endif
 	}
+	#endif
 }
 #endif
