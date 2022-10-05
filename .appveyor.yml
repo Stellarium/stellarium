@@ -12,6 +12,7 @@ skip_tags: true
 # Skipping commits
 skip_commits:
   message: /(GHA|skip)/
+  author: /transifex/
   files:
     - guide/*
 # Maximum number of concurrent jobs for the project
