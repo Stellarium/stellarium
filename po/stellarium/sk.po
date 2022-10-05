@@ -4,8 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Miroslav Sido <miro_redhawk@hotmail.com>, 2019
-# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2021
+# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
+# Miroslav Sido <miro_redhawk@hotmail.com>, 2022
 # Juraj Kubica <juraj.kubica@seznam.cz>, 2022
 # cardinot <mcardinot@gmail.com>, 2022
 # Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2022
@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-09-30 13:16+0700\n"
-"PO-Revision-Date: 2017-11-29 00:51+0000\n"
+"POT-Creation-Date: 2022-10-05 20:44+0700\n"
+"PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2022\n"
 "Language-Team: Slovak (https://www.transifex.com/stellarium/teams/80998/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr ""
 #: src/gui/ObsListDialog.cpp:206 src/gui/ObsListCreateEditDialog.cpp:178
 #: src/ui_configurationDialog.h:1812 plugins/Satellites/src/Satellite.cpp:337
 #: plugins/TelescopeControl/src/TelescopeClient.cpp:149
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:524
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:521
 #: plugins/Supernovae/src/Supernova.cpp:143 plugins/Novae/src/Nova.cpp:150
 #: plugins/Quasars/src/Quasar.cpp:125 plugins/Pulsars/src/Pulsar.cpp:189
 #: plugins/Pulsars/src/Pulsar.cpp:191 plugins/Exoplanets/src/Exoplanet.cpp:319
@@ -733,10 +733,10 @@ msgid "m"
 msgstr "m"
 
 #: src/core/modules/LandscapeMgr.cpp:1179 src/gui/ObsListDialog.cpp:212
-#: src/gui/ObsListCreateEditDialog.cpp:184 src/ui_locationDialogGui.h:471
+#: src/gui/ObsListCreateEditDialog.cpp:184 src/ui_locationDialogGui.h:470
 #: src/ui_obsListDialog.h:326 src/ui_obsListCreateEditDialog.h:329
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:490
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Location"
 msgstr "Zemepisná poloha"
 
@@ -4163,7 +4163,7 @@ msgstr ""
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:625
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:782
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:263
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:268
@@ -4616,7 +4616,7 @@ msgstr "Poďakovanie"
 
 #: src/gui/ConfigurationDialog.cpp:1296
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:783
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:269
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
@@ -4632,7 +4632,7 @@ msgstr "Kontakt"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Oculars/src/gui/OcularDialog.cpp:624
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:781
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:267
@@ -5268,7 +5268,7 @@ msgstr "Vývoj pre OSX: %1"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Oculars/src/gui/OcularDialog.cpp:627
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:785
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:272
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:239
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:140
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
@@ -5344,7 +5344,7 @@ msgstr "Okná"
 msgid "Selected object information"
 msgstr "Informácie o vybratom objekte"
 
-#: src/gui/StelGui.cpp:221 plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
+#: src/gui/StelGui.cpp:221 plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
 msgid "Quit"
 msgstr "Ukončiť"
 
@@ -5524,7 +5524,7 @@ msgid "FOV"
 msgstr "FOV"
 
 #: src/gui/StelGuiItems.cpp:934
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:492
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
 msgid "Field of view"
 msgstr "Zorné pole"
 
@@ -5715,7 +5715,7 @@ msgid "Get location from GPS or system service"
 msgstr "Získať polohu z GPS alebo služby systému"
 
 #: src/gui/LocationDialog.cpp:170 src/gui/LocationDialog.cpp:870
-#: src/ui_locationDialogGui.h:500
+#: src/ui_locationDialogGui.h:499
 msgid "Get location from GPS"
 msgstr "Zistiť polohu pomocou GPS"
 
@@ -6132,8 +6132,8 @@ msgstr "Prosím vyberte objekt pre vykreslene grafu 'Azimut / čas'."
 #: src/gui/AstroCalcDialog.cpp:842 src/gui/AstroCalcDialog.cpp:929
 #: src/gui/AstroCalcDialog.cpp:1864 src/gui/AstroCalcDialog.cpp:2256
 #: src/gui/AstroCalcDialog.cpp:9071 src/ui_configurationDialog.h:1832
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:525
-#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:522
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:98
 #: plugins/Exoplanets/src/Exoplanet.cpp:359
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:183
 msgid "Name"
@@ -6786,11 +6786,11 @@ msgstr "Posledný kontakt so Zemou"
 
 #: src/gui/AstroCalcDialog.cpp:5001
 msgid "Central eclipse begins"
-msgstr ""
+msgstr "Stred zatmenia začína"
 
 #: src/gui/AstroCalcDialog.cpp:5026
 msgid "Central eclipse ends"
-msgstr ""
+msgstr "Stred zatmenia končí"
 
 #: src/gui/AstroCalcDialog.cpp:5570
 msgctxt "column name"
@@ -7866,30 +7866,30 @@ msgstr "Importovať zoznam pozorovaní"
 
 #: src/gui/ObsListCreateEditDialog.cpp:539
 msgid "Error: here is no list or more than one list."
-msgstr ""
+msgstr "Chyba: žiadny zoznam alebo viac ako jeden."
 
 #: src/gui/ObsListCreateEditDialog.cpp:564
-msgid "Error: the file is empty or doesn't contains legacy bookmarks."
-msgstr ""
+msgid "Error: the file is empty or doesn't contain legacy bookmarks."
+msgstr "Chyba: súbor je prázdny alebo neobsahuje záložky."
 
 #: src/gui/ObsListCreateEditDialog.cpp:570
 msgid "File format is wrong!"
-msgstr ""
+msgstr "Nesprávny formát súboru!"
 
 #: src/gui/ObsListCreateEditDialog.cpp:589
 #, qt-format
 msgid "Error: a list with the name %1 already exists!"
-msgstr ""
+msgstr "Chyba: zoznam s menom %1 už existuje!"
 
 #: src/gui/ObsListCreateEditDialog.cpp:594
 msgid "Error: the list name is empty."
-msgstr ""
+msgstr "Chyba: chýba meno zoznamu."
 
-#: src/gui/DateTimeDialog.cpp:239 src/gui/DateTimeDialog.cpp:240
+#: src/gui/DateTimeDialog.cpp:259 src/gui/DateTimeDialog.cpp:260
 msgid "Date and Time in Julian calendar"
 msgstr "Dátum a čas v juliánskom kalendári"
 
-#: src/gui/DateTimeDialog.cpp:244 src/gui/DateTimeDialog.cpp:245
+#: src/gui/DateTimeDialog.cpp:264 src/gui/DateTimeDialog.cpp:265
 msgid "Date and Time in Gregorian calendar"
 msgstr "Dátum a čas v gregoriánskom kalendári"
 
@@ -8963,7 +8963,7 @@ msgstr "Plochý horizont"
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
 #: src/translations.h:466
 msgid "Vienna Sterngarten"
-msgstr "Viedenská Sterngarten"
+msgstr "Viedeňská Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
 #: src/translations.h:468
@@ -11487,96 +11487,96 @@ msgstr "Overiť aktualizácie"
 msgid "Refresh"
 msgstr "Obnoviť"
 
-#: src/ui_locationDialogGui.h:474 src/ui_locationDialogGui.h:477
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:156
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:159
+#: src/ui_locationDialogGui.h:473 src/ui_locationDialogGui.h:476
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:155
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:158
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
 "Štandardný zoznam lokalít obsahuje iba anglické názvy (bez diakritiky)"
 
-#: src/ui_locationDialogGui.h:480
+#: src/ui_locationDialogGui.h:479
 msgid "Reset Location List"
 msgstr "Vynulovať zoznam lokalít"
 
-#: src/ui_locationDialogGui.h:481
+#: src/ui_locationDialogGui.h:480
 msgid "Current location information"
 msgstr "Informácie o súčasnej zemepisnej polohe"
 
-#: src/ui_locationDialogGui.h:482
+#: src/ui_locationDialogGui.h:481
 msgid "Add to list"
 msgstr "Pridať do zoznamu"
 
-#: src/ui_locationDialogGui.h:483
+#: src/ui_locationDialogGui.h:482
 msgid "Delete from list"
 msgstr "Vymazať zo zoznamu"
 
-#: src/ui_locationDialogGui.h:484
+#: src/ui_locationDialogGui.h:483
 msgid "Return to default location"
 msgstr "Návrat do predvolenej polohy"
 
-#: src/ui_locationDialogGui.h:485
+#: src/ui_locationDialogGui.h:484
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Latitude:"
 msgstr "Zemepisná šírka:"
 
-#: src/ui_locationDialogGui.h:487
+#: src/ui_locationDialogGui.h:486
 msgid "Enter the elevation in meter"
 msgstr "Zadajte nadmorskú výšku v metroch"
 
-#: src/ui_locationDialogGui.h:489
+#: src/ui_locationDialogGui.h:488
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:490
+#: src/ui_locationDialogGui.h:489
 msgid "Get location from Network"
 msgstr "Určiť polohu podľa internetu"
 
-#: src/ui_locationDialogGui.h:491
+#: src/ui_locationDialogGui.h:490
 msgid "Use current location as default"
 msgstr "Použiť aktuálnu polohu ako predvolenú"
 
-#: src/ui_locationDialogGui.h:492
+#: src/ui_locationDialogGui.h:491
 msgid "Elevation:"
 msgstr "Nadmorská výška:"
 
-#: src/ui_locationDialogGui.h:494 src/ui_locationDialogGui.h:498
+#: src/ui_locationDialogGui.h:493 src/ui_locationDialogGui.h:497
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr ""
 "Hodnoty môžete zadať v stupňoch, alebo vo formáte DMS, napríklad: +1d 12m 8s"
 
-#: src/ui_locationDialogGui.h:496
+#: src/ui_locationDialogGui.h:495
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:149
 msgid "Longitude:"
 msgstr "Zemepisná dĺžka:"
 
-#: src/ui_locationDialogGui.h:501
+#: src/ui_locationDialogGui.h:500
 msgid "New Location"
 msgstr "Nová poloha"
 
-#: src/ui_locationDialogGui.h:502
+#: src/ui_locationDialogGui.h:501
 msgid "Planet:"
 msgstr "Planéta:"
 
-#: src/ui_locationDialogGui.h:503
+#: src/ui_locationDialogGui.h:502
 msgid "Use custom time zone"
 msgstr "Použiť vlastné časové pásmo"
 
-#: src/ui_locationDialogGui.h:504
+#: src/ui_locationDialogGui.h:503
 msgid "Time zone:"
 msgstr "Časové pásmo:"
 
-#: src/ui_locationDialogGui.h:505
+#: src/ui_locationDialogGui.h:504
 msgid "Name/City:"
 msgstr "Názov miesta:"
 
-#: src/ui_locationDialogGui.h:506
+#: src/ui_locationDialogGui.h:505
 msgid "Region:"
 msgstr "Región:"
 
-#: src/ui_locationDialogGui.h:510
+#: src/ui_locationDialogGui.h:509
 msgid "Enable daylight saving time"
 msgstr "Povoliť letný čas"
 
@@ -11735,7 +11735,7 @@ msgstr "Súradnicový systém:"
 
 #: src/ui_searchDialogGui.h:935
 msgid "Go to position"
-msgstr ""
+msgstr "Ísť na polohu"
 
 #: src/ui_searchDialogGui.h:937
 msgid ""
@@ -13182,7 +13182,7 @@ msgstr "Ďalšie nastavenia grafického používateľského rozhrania"
 
 #: src/ui_configurationDialog.h:1706
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1501
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
 msgid "Time"
 msgstr "Čas"
 
@@ -13281,7 +13281,7 @@ msgstr ""
 #: plugins/Quasars/src/ui_quasarsDialog.h:314
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:355
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:272
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:507
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:506
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:601
 #: plugins/Observability/src/ui_ObservabilityDialog.h:346
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:261
@@ -13303,7 +13303,7 @@ msgstr "Obnoviť predvolené nastavenia Stellaria"
 #: plugins/Quasars/src/ui_quasarsDialog.h:313
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:354
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:271
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:506
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:505
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:600
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:260
@@ -14877,27 +14877,27 @@ msgstr "Dátum vytvorenia:"
 
 #: src/ui_obsListDialog.h:319
 msgid "Also load:"
-msgstr ""
+msgstr "Nahrať aj:"
 
 #: src/ui_obsListDialog.h:321
 msgid "Retrieve stored Julian Day"
-msgstr ""
+msgstr "Obnoviť uložený Juliánsky deň"
 
 #: src/ui_obsListDialog.h:324
 msgid "Retrieve stored location"
-msgstr ""
+msgstr "Obnoviť uloženú polohu"
 
 #: src/ui_obsListDialog.h:328
 msgid "Retrieve stored landscape"
-msgstr ""
+msgstr "Obnoviť uložený terén"
 
 #: src/ui_obsListDialog.h:332
 msgid "Retrieve stored field of view"
-msgstr ""
+msgstr "Obnoviť uložené zorné pole"
 
 #: src/ui_obsListDialog.h:334
 msgid "FoV"
-msgstr ""
+msgstr "FoV"
 
 #: src/ui_obsListCreateEditDialog.h:314
 msgid "Observing Lists editor"
@@ -14905,17 +14905,17 @@ msgstr "Editor zoznamov pozorovaní"
 
 #: src/ui_obsListCreateEditDialog.h:316
 #: plugins/Satellites/src/ui_satellitesDialog.h:1385
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:217
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:216
 msgid "Description:"
 msgstr "Opis:"
 
 #: src/ui_obsListCreateEditDialog.h:317
 msgid "Also store: "
-msgstr ""
+msgstr "Uložiť aj:"
 
 #: src/ui_obsListCreateEditDialog.h:319
 msgid "Store with equatorial coordinates (J2000.0)"
-msgstr ""
+msgstr "Uložiť s rovníkovými súradnicami (J2000,0)"
 
 #: src/ui_obsListCreateEditDialog.h:321
 msgid "Coordinates (RA and DEC)"
@@ -14923,19 +14923,19 @@ msgstr "Súradnice (RA a DEC)"
 
 #: src/ui_obsListCreateEditDialog.h:323
 msgid "Store with current JD"
-msgstr ""
+msgstr "Uložiť s aktuálnym JD"
 
 #: src/ui_obsListCreateEditDialog.h:327
 msgid "Store with current location"
-msgstr ""
+msgstr "Uložiť s aktuálnou polohou"
 
 #: src/ui_obsListCreateEditDialog.h:331
 msgid "Store with current landscape"
-msgstr ""
+msgstr "Uložiť s aktuálnym terénom"
 
 #: src/ui_obsListCreateEditDialog.h:335
 msgid "Store with current field of view"
-msgstr ""
+msgstr "Uložiť s aktuálnym pohľadom"
 
 #: src/ui_obsListCreateEditDialog.h:337
 msgid "FOV"
@@ -15743,7 +15743,7 @@ msgstr "Umožniť pripnutie k vybranému objektu"
 #: plugins/Quasars/src/ui_quasarsDialog.h:316
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:357
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:284
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:505
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:504
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:623
 #: plugins/Observability/src/ui_ObservabilityDialog.h:348
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:263
@@ -19150,7 +19150,7 @@ msgstr ""
 msgid "Use Stellarium settings"
 msgstr "Použiť nastavenia Stellaria"
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:186
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:181
 msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
 "Stellarium. Increase this value if the reticle is skipping."
@@ -19158,7 +19158,7 @@ msgstr ""
 "Približný čas, za ktorý sa signály z ďalekohľadu zaregistrujú v Stellariu. "
 "Zvýšte túto hodnotu, ak je pohyb zameriavacieho kríža trhaný."
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:190
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:185
 msgid ""
 "Refresh rate of the RTS2 telescope. Delay before sending next telescope "
 "status request. The default value of 0.5 second works fine with most setups."
@@ -19167,59 +19167,59 @@ msgstr ""
 "povelu na zistenie stavu. Predvolená hodnota 0,5 sekundy je vhodná pre "
 "väčšinu montáží."
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:262
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:257
 msgid "Add New Telescope"
 msgstr "Pridať nový ďalekohľad"
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:272
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:267
 msgid "Configure Telescope"
 msgstr "Nastaviť ďalekohľad"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:64
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:61
 msgid "N/A"
 msgstr "Nie je dostupný"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:65
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:62
 msgid "Starting"
 msgstr "Spúšťanie"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:66
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:63
 msgid "Connecting"
 msgstr "Pripájanie"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:67
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:64
 msgid "Connected"
 msgstr "Pripojený"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:68
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:65
 msgid "Disconnected"
 msgstr "Odpojený"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:69
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:66
 msgid "Stopped"
 msgstr "Zastavený"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 msgid "Telescope Control plug-in"
 msgstr "Modul riadenia ďalekohľadu"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 msgid "Plug-in and GUI programming"
 msgstr "Programovanie modulov a rozhrania"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 msgid "ASCOM Telescope Client"
 msgstr "ASCOM klient ďalekohľadu"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:270
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:267
 msgid "RTS2 support"
 msgstr "Podpora RTS2"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "INDI Telescope Client"
 msgstr "INDI klient ďalekohľadu"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
 msgid ""
 "This plug-in is based on and reuses a lot of code under the GNU General "
 "Public License:"
@@ -19227,7 +19227,7 @@ msgstr ""
 "Tento modul je založený a využíva rozsiahle časti kódu podľa licencie GNU "
 "General Public License:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:278
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
 msgid ""
 "the Telescope, TelescopeDummy, TelescopeTcp and TelescopeMgr classes in "
 "Stellarium's code (the client side of Stellarium's original telescope "
@@ -19237,11 +19237,11 @@ msgstr ""
 "Stellaria (klientská strana pôvodného vybavenia na ovládanie ďalekohľadu v "
 "Stellariu);"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 msgid "the telescope server core code (licensed under the LGPL)"
 msgstr "Kód serverového jadra ďalekohľadu (licencované pod LGPL)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
 msgid ""
 "the TelescopeServerLx200 telescope server core code (originally licensed "
 "under the LGPL)"
@@ -19249,7 +19249,7 @@ msgstr ""
 "Kód serverového jadra ďalekohľadu TelescopeServerLx200 (pôvodne zverejnené "
 "pod licenciou LGPL)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:278
 msgid ""
 "Author of all of the above - the client, the server core, and the LX200 "
 "server, along with the Stellarium telescope control network protocol (over "
@@ -19259,7 +19259,7 @@ msgstr ""
 "so sieťovým protokolom riadenia ďalekohľadu v Stellariu (prostredníctvom "
 "TCP/IP) je <b>Johannes Gajdosik</b>."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
 msgid ""
 "the TelescopeServerNexStar telescope server core code (originally licensed "
 "under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>."
@@ -19268,12 +19268,12 @@ msgstr ""
 "licenciou LGPL, na základe kódu TelescopeServerLx200) vytvoril <b>Michael "
 "Heinz</b>."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 msgid "INDI by <b>Alessandro Siniscalchi</b>."
 msgstr "INDI vytvoril <b>Alessandro Siniscalchi</b>"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
 msgid ""
 "A more complete and up-to-date documentation for this plug-in can be found "
 "on the {Telescope Control} page in the Stellarium Wiki."
@@ -19281,83 +19281,83 @@ msgstr ""
 "Kompletnú aktuálnu dokumentáciu k tomuto modulu je možné nájsť na stránke "
 "{Telescope Control} na Stellarium Wiki."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:288
 msgid "Contents"
 msgstr "Obsah"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:307
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:289
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
 msgid "Abilities and limitations"
 msgstr "Možnosti a obmedzenia"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:293
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
 msgid "The original telescope control feature"
 msgstr "Pôvodná funkcia na ovládanie ďalekohľadu"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:294
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:319
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
 msgid "Using this plug-in"
 msgstr "Použitie tohto modulu"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:295
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:343
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:340
 msgid "Main window ('Telescopes')"
 msgstr "Hlavné okno ('Ďalekohľady')"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:367
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:293
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:364
 msgid "Telescope configuration window"
 msgstr "Okno nastavenia ďalekohľadu"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:294
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:366
 msgid "Connection type"
 msgstr "Druh pripojenia"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:383
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:295
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:380
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:595
 msgid "Telescope properties"
 msgstr "Vlastnosti ďalekohľadu"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:391
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:388
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 msgid "Device settings"
 msgstr "Nastavenie zariadenia"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:407
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:611
 msgid "Connection settings"
 msgstr "Nastavenie pripojenia"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:427
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:424
 msgid "Field of view indicators"
 msgstr "Zobrazenie zorného poľa"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:438
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:435
 msgid "'Slew telescope to' window"
 msgstr "Okno 'Natočiť ďalekohľad na'"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:303
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:300
 msgid "Telescope commands"
 msgstr "Príkazy pre ďalekohľad"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:471
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:468
 msgid "Supported devices"
 msgstr "Podporované zariadenia"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:493
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:490
 msgid "Virtual telescope"
 msgstr "Virtuálny ďalekohľad"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
 msgid ""
 "This plug-in allows Stellarium to send only '<b>slew</b>' ('go to') commands"
 " to the device and to receive its current position. It cannot issue any "
@@ -19370,7 +19370,7 @@ msgstr ""
 "žiadne iné príkazy, takže používateľ by mal mať na pamäti možné kolízie "
 "montáže a ďalšie situácie. (Natáčanie môžete prerušiť zadaním novej polohy.)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
 msgid ""
 "As of the current version, this plug-in doesn't allow satellite tracking, "
 "and is not very suitable for lunar or planetary observations."
@@ -19378,14 +19378,14 @@ msgstr ""
 "V aktuálnej verzii tento modul neumožňuje sledovanie družíc a nehodí sa ani "
 "na pozorovania Mesiaca či planét."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:307
 msgid ""
 "WARNING: Stellarium CANNOT prevent your telescope from being pointed at the "
 "Sun."
 msgstr ""
 "VAROVANIE: Stellarium NEMÔŽE zabrániť ďalekohľadu, aby sa namieril na Slnko."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
 msgid ""
 "Never point your telescope at the Sun without a proper solar filter "
 "installed. The powerful light amplified by the telescope WILL cause "
@@ -19395,7 +19395,7 @@ msgstr ""
 "filter. Intenzívne žiarenie sústredené ďalekohľadom nenávratne poškodí "
 "nielen ľudský zrak, ale aj vybavenie ďalekohľadu."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
 msgid ""
 "Even if you don't do it deliberately, a slew during daylight hours may cause"
 " your telescope to point at the sun on its way to the given destination, so "
@@ -19406,23 +19406,23 @@ msgstr ""
 "omylom namieriť ďalekohľad na Slnko pri otáčaní do želanej polohy, preto "
 "počas denných hodín používajte diaľkové ovládanie ďalekohľadu opatrne."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:341
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:365
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:389
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:408
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:425
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:436
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:453
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:469
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:491
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:503
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:310
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:378
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:386
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:405
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:433
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:450
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:466
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:488
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:500
 msgid "Back to top"
 msgstr "Návrat na začiatok"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:316
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
 msgid ""
 "As of Stellarium 0.10.5, the original telescope control feature has been "
 "removed. There is no longer a way to control a telescope with Stellarium "
@@ -19432,7 +19432,7 @@ msgstr ""
 "0.10.5 odstránená. Bez tohto modulu už nie je možné ovládať ďalekohľad v "
 "Stellariu."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:320
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
 msgid ""
 "Here are two general ways to control a device with this plug-in, depending "
 "on the situation:"
@@ -19440,12 +19440,12 @@ msgstr ""
 "Zariadenie môžete pomocou tohto modulu vo všeobecnosti ovládať dvomi "
 "spôsobmi, podľa situácie:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid "DIRECT CONNECTION"
 msgstr "PRIAME PRIPOJENIE"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:324
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
 msgid ""
 "A {device supported by the plug-in} is connected with a cable to the "
 "computer running Stellarium;"
@@ -19453,12 +19453,12 @@ msgstr ""
 "{Zariadenie podporované modulom} je pripojené káblom k počítaču, na ktorom "
 "je spustené Stellarium;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:323
 msgid "INDIRECT CONNECTION"
 msgstr "NEPRIAME PRIPOJENIE"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:329
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
 msgid ""
 "A device is connected to the same computer but it is driven by a {stand-"
 "alone telescope server program}"
@@ -19467,13 +19467,13 @@ msgstr ""
 " programom serveru k ďalekohľadu}"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:331
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:328
 msgid "or a {third-party application} <b>that can 'talk' to Stellarium</b>;"
 msgstr ""
 "alebo {aplikáciou od tretej strany}, <b>ktorá nevie komunikovať</b> <b>so "
 "Stellariom</b>;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:333
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:330
 msgid ""
 "A device is connected to a remote computer and the software that drives it "
 "can 'talk' to Stellarium <i>over the network</i>; this software can be "
@@ -19486,7 +19486,7 @@ msgstr ""
 "tretej strany."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:336
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:333
 msgid ""
 "Most older telescopes use cables that connect to a {serial port} (RS-232), "
 "the newer ones use USB (Universal Serial Bus)."
@@ -19494,7 +19494,7 @@ msgstr ""
 "Väčšina starších ďalekohľadov používa káble na pripojenie k {sériovému "
 "portu} (RS-232), novšie používajú USB (Universal Serial Bus)."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:337
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:334
 msgid ""
 "On Linux and Mac OS X both cases are handled identically by the plug-in. On "
 "Windows, a USB connection may require a 'virtual serial port' software, if "
@@ -19505,7 +19505,7 @@ msgstr ""
 "softvér na virtuálny sériový port, ak tento nie je dodávaný spolu s káblom "
 "alebo s ďalekohľadom."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:338
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:335
 msgid ""
 "Such a software creates a virtual ('fake') COM port that corresponds to the "
 "real USB port so it can be used by the plug-in."
@@ -19513,7 +19513,7 @@ msgstr ""
 "Takýto program vytvára virtuálny (nepravý) COM port, ktorý zodpovedá "
 "reálnemu USB portu, takže sa dá používať s týmto modulom."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:339
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:336
 msgid ""
 "On all three platforms, if the computer has no 'classic' serial ports and "
 "the telescope can connect only to a serial port, a serial-to-USB (RS-232-to-"
@@ -19523,7 +19523,7 @@ msgstr ""
 " rozhraním a ďalekohľad sa dá pripojiť jedine do sériového portu, môže byť "
 "potrebné použitie adaptéra medzi sériovým a USB rozhraním (RS-232-to-USB)."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:340
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:337
 msgid ""
 "Telescope set-up (setting geographical coordinates, performing alignment, "
 "etc.) should be done before connecting the telescope to Stellarium."
@@ -19531,11 +19531,11 @@ msgstr ""
 "Nastavenie ďalekohľadu (nastavenie súradníc, nastavenie počiatočného smeru a"
 " pod.) by sa malo vykonať pred pripojením k programu Stellarium."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:344
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:341
 msgid "The plug-in's main window can be opened:"
 msgstr "Hlavné okno modulu sa dá otvoriť:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:345
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:342
 msgid ""
 "By pressing the 'configure' button for the plug-in in the 'Plugins' tab of "
 "Stellarium's Configuration window (opened by pressing <b>F2</b> or the "
@@ -19546,7 +19546,7 @@ msgstr ""
 "paneli nástrojov)."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:345
 msgid ""
 "By pressing the 'Configure telescopes...' button in the {'Slew to' window} "
 "(opened by pressing <b>Ctrl+0</b> or the respective button on the bottom "
@@ -19556,7 +19556,7 @@ msgstr ""
 " (otvoríte ho stlačením <b>Ctrl+0</b> alebo príslušného tlačidla na spodnom "
 "paneli nástrojov)."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:350
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:347
 msgid ""
 "The <b>Telescopes</b> tab displays a list of the telescope connections that "
 "have been set up:"
@@ -19564,7 +19564,7 @@ msgstr ""
 "Záložka <b>Ďalekohľady</b> zobrazí zoznam nadviazaných spojení s "
 "ďalekohľadmi:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:351
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:348
 msgid ""
 "The number (<b>#</b>) column shows the number used to control this "
 "telescope. For example, for telescope #2, the shortcut is Ctrl+2."
@@ -19572,7 +19572,7 @@ msgstr ""
 "Stĺpec s číslami (<b>#</b>) zobrazuje číslo, pod ktorým je ovládanie tohto "
 "ďalekohľadu. Napríklad ďalekohľad číslo 2 má klávesovú skratku Ctrl+2."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:352
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:349
 msgid ""
 "The <b>Status</b> column indicates if this connection is currently active or"
 " not. Unfortunately, there are some cases in which 'Connected' is displayed "
@@ -19582,17 +19582,17 @@ msgstr ""
 "niektorých prípadoch sa zobrazuje stav 'Pripojené' aj vtedy, ak neexistuje "
 "žiadne funkčné pripojenie."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:353
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:350
 msgid "The <b>Type</b> field indicates what kind of connection is this:"
 msgstr "Políčko <b>Typ</b> označuje, aký druh pripojenia je nadviazaný:"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:356
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:353
 msgid "<b>virtual</b> means a {virtual telescope};"
 msgstr "<b>virtuálne</b> znamená {virtuálny ďalekohľad};"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:360
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:357
 msgid ""
 "<b>local, Stellarium</b> means a DIRECT connection to the telescope (see "
 "{above});"
@@ -19600,7 +19600,7 @@ msgstr ""
 "<b>lokálne, Stellarium</b> znamená PRIAME pripojenie k ďalekohľadu (pozri "
 "{vyššie});"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:359
 msgid ""
 "<b>local, external</b> means an INDIRECT connection to a program running on "
 "the same computer;"
@@ -19608,7 +19608,7 @@ msgstr ""
 "<b>miestne, vonkajšie</b> znamená NEPRIAME pripojenie k programu, ktorý je "
 "spustený na rovnakom počítači;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:363
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:360
 msgid ""
 "<b>remote, unknown</b> means an INDIRECT connection over a network to a "
 "remote machine."
@@ -19616,7 +19616,7 @@ msgstr ""
 "<b>vzdialené, neznáme</b> znamená NEPRIAME pripojenie cez sieť k vzdialenému"
 " zariadeniu."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:364
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:361
 msgid ""
 "To set up a new telescope connection, press the <b>Add</b> button. To modify"
 " the configuration of an existing connection, select it in the list and "
@@ -19629,7 +19629,7 @@ msgstr ""
 " pripojenia."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:372
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
 msgid ""
 "The topmost field represents the choice between the two types of connections"
 " (see {above}):"
@@ -19637,22 +19637,22 @@ msgstr ""
 "Najvrchnejšie pole reprezentuje výber medzi dvoma typmi pripojenia (pozri "
 "{vyššie}):"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:374
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:371
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:581
 msgid "Telescope controlled by:"
 msgstr "Ďalekohľad je ovládaný:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:375
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:372
 msgid "<b>Stellarium, directly through a serial port</b> is the DIRECT case"
 msgstr "<b>Stellariom, priamo cez sériový port</b> PRIAMYM pripojením"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:376
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:373
 msgid "<b>External software or a remote computer</b> is the INDIRECT case"
 msgstr ""
 "<b>Externým softvérom alebo vzdialeným počítačom</b> NEPRIAMYM pripojením"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:379
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:376
 msgid ""
 "<b>Nothing, just simulate one (a moving reticle)</b> is a {virtual "
 "telescope} (no connection)"
@@ -19660,7 +19660,7 @@ msgstr ""
 "<b>Ničím, len simulovaný (zameriavací kríž)</b> teda je {virtuálny "
 "ďalekohľad} (bez pripojenia)"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:384
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:381
 msgid ""
 "<b>Name</b> is the label that will be displayed on the screen next to the "
 "telescope reticle."
@@ -19668,7 +19668,7 @@ msgstr ""
 "<b>Názov</b> je označenie, ktoré sa zobrazí na obrazovke vedľa "
 "zameriavacieho kríža ďalekohľadu."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:382
 msgid ""
 "<b>Connection delay</b>: If the movement of the telescope reticle on the "
 "screen is uneven, you can try increasing or decreasing this value."
@@ -19676,7 +19676,7 @@ msgstr ""
 "<b>Oneskorenie spojenia</b>: ak je pohyb zameriavacieho kríža na obrazovke "
 "trhaný, môžete zvýšiť alebo znížiť zadanú hodnotu."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:386
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:383
 msgid ""
 "<b>Coordinate system</b>: Some Celestron telescopes have had their firmware "
 "updated and now interpret the coordinates they receive as coordinates that "
@@ -19688,7 +19688,7 @@ msgstr ""
 "zodpovedajú aktuálnemu ekvinokciu (označuje sa JNow), preto je potrebné toto"
 " prestavenie."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:387
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:384
 msgid ""
 "<b>Start/connect at startup</b>: Check this option if you want Stellarium to"
 " attempt to connect to the telescope immediately after it starts."
@@ -19696,7 +19696,7 @@ msgstr ""
 "<b>Nadviazať spojenie pri spustení</b>: Označením políčka určíte, aby sa "
 "Stellarium pokúsilo pripojiť k ďalekohľadu ihneď po spustení."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:388
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:385
 msgid ""
 "Otherwise, to start the telescope, you need to open the main window, select "
 "that telescope and press the 'Start/Connect' button."
@@ -19705,23 +19705,23 @@ msgstr ""
 "vybrať príslušný ďalekohľad a stlačiť tlačidlo Spustiť/Pripojiť."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:394
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:391
 msgid "This section is active only for DIRECT connections (see {above})."
 msgstr "Táto sekcia je aktívna len pre PRIAME pripojenia (pozri {vyššie})."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:396
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:393
 msgid "<b>Serial port</b> sets the serial port used by the telescope."
 msgstr "<b>Sériové rozhranie</b> nastaví sériový port používaný ďalekohľadom."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:394
 msgid "There is a pop-up box that suggests some default values:"
 msgstr "Vyskakovacie okno navrhuje niektoré predvolené hodnoty:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:398
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:395
 msgid "On Windows, serial ports COM1 to COM10;"
 msgstr "Vo Windows, sériové porty COM1 až COM10;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:399
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:396
 msgid ""
 "On Linux, serial ports /dev/ttyS0 to /dev/ttyS3 and USB ports /dev/ttyUSB0 "
 "to /dev/ttyUSB3;"
@@ -19729,14 +19729,14 @@ msgstr ""
 "V systéme Linux, sériové porty sú /dev/ttyS0 až /dev/ttyS3 a USB porty "
 "/dev/ttyUSB0 až /dev/ttyUSB3;"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:400
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:397
 msgid ""
 "On Mac OS X, the list is empty as it names its ports in a peculiar way."
 msgstr ""
 "V systéme Mac OS X je zoznam prázdny, lebo pomenováva porty zvláštnym "
 "spôsobom."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:401
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:398
 msgid ""
 "If you are using an USB cable, the default serial port of your telescope "
 "most probably is not in the list of suggestions."
@@ -19744,14 +19744,14 @@ msgstr ""
 "Ak používate USB kábel, predvolený sériový port vášho ďalekohľadu "
 "pravdepodobne nie je uvedený v zozname návrhov."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:402
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:399
 msgid ""
 "To list all valid serial port names in Mac OS X, open a terminal and type:"
 msgstr ""
 "Ak chcete vypísať všetky platné názvy sériových portov v systéme Mac OS X, "
 "otvorte v Mac OS X terminál a napíšte:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:403
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:400
 msgid ""
 "This will list all devices, the full name of your serial port should be "
 "somewhere in the list (for example, '/dev/cu.usbserial-FTDFZVMK')."
@@ -19760,24 +19760,24 @@ msgstr ""
 " tomto zozname (napr. '/dev/cu.usbserial-FTDFZVMK')."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:406
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:403
 msgid "<b>Device model</b>: see {Supported devices} below."
 msgstr "<b>Model zariadenia</b>: pozri {podporované zariadenia} nižšie."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:413
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:410
 msgid "Both fields here refer to communication over a network ({TCP/IP})."
 msgstr "Obe nasledujúce polia sa týkajú komunikácie po sieti ({TCP/IP})."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:415
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:412
 msgid ""
 "Doing something with them is necessary only for INDIRECT connections (see "
 "{above})."
 msgstr "Meniť ich je potrebné iba pre NEPRIAME spojenia (pozri {vyššie})."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:419
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:416
 msgid ""
 "<b>Host</b> can be either a host name or an {IPv4} address such as "
 "'127.0.0.1'. The default value of 'localhost' means 'this computer'."
@@ -19785,7 +19785,7 @@ msgstr ""
 "<b>Hostiteľ</b> môže byť meno hostiteľa alebo adresa {IPv4} ako '127.0.0.1'."
 " Predvolená hodnota 'localhost' znamená 'tento počítač'."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:421
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:418
 msgid ""
 "<b>Port</b> refers to the TCP port used for communication. The default value"
 " depends on the telescope number and ranges between 10001 and 10009."
@@ -19793,11 +19793,11 @@ msgstr ""
 "<b>Port</b> označuje TCP port používaný na komunikáciu. Predvolená hodnota "
 "závisí na čísle ďalekohľadu a má rozpätie 10001 až 10009."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:422
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:419
 msgid "Both values are ignored for DIRECT connections."
 msgstr "Obidve hodnoty sú ignorované pre PRIAME pripojenia."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:423
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:420
 msgid ""
 "For INDIRECT connections, modifying the default host name value makes sense "
 "only if you are attempting a remote connection over a network."
@@ -19805,7 +19805,7 @@ msgstr ""
 "Pre NEPRIAME pripojenia zmena predvolenej hodnoty názvu hostiteľa má zmysel "
 "iba ak sa pokúšate pripojiť vzdialene prostredníctvom siete."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:424
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:421
 msgid ""
 "In this case, it should be the name or IP address of the computer that runs "
 "a program that runs the telescope."
@@ -19813,7 +19813,7 @@ msgstr ""
 "V tomto prípade by to malo byť meno alebo IP adresa počítača, na ktorom je "
 "spustený program ovládajúci ďalekohľad."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:425
 msgid ""
 "A series of circles representing different fields of view can be added "
 "around the telescope marker. This is a relic from the times before the "
@@ -19823,14 +19823,14 @@ msgstr ""
 "ďalekohľadu. Toto je pozostatok z čias pred zavedením modulu "
 "<strong>Okuláre</strong>."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:429
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:426
 msgid ""
 "In the telescope configuration window, click on 'User Interface Settings'."
 msgstr ""
 "V okne nastavení ďalekohľadu kliknite na 'Nastavenia užívateľského "
 "rozhrania'."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:430
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:427
 msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
 "separated with commas in the field below."
@@ -19838,12 +19838,12 @@ msgstr ""
 "Označte možnosť 'Použi indikátory zorného poľa' a potom do spodného políčka "
 "zadajte zoznam hodnôt oddelených čiarkami."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:431
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:428
 msgid "The values are interpreted as degrees of arc."
 msgstr "Tieto hodnoty sa interpretujú ako uhlové stupne."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:434
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:431
 msgid ""
 "This can be used in combination with a {virtual telescope} to display a "
 "moving reticle with the Telrad circles."
@@ -19851,7 +19851,7 @@ msgstr ""
 "Toto môže byť použité v kombinácii s {virtuálnym ďalekohľadom} na zobrazenie"
 " zameriavacieho kríža s hľadáčikmi Telrad."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:439
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:436
 msgid ""
 "The 'Slew telescope to' window can be opened by pressing <b>Ctrl+0</b> or "
 "the respective button in the bottom toolbar."
@@ -19859,7 +19859,7 @@ msgstr ""
 "Okno 'Natočiť ďalekohľad na' je možné otvoriť stlačením <b>Ctrl+0</b> alebo "
 "príslušného tlačidla na spodnom paneli nástrojov."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:440
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:437
 msgid ""
 "It contains two fields for entering celestial coordinates, selectors for the"
 " preferred format (Hours-Minutes-Seconds, Degrees-Minutes-Seconds, or "
@@ -19869,12 +19869,12 @@ msgstr ""
 "(hodiny-minúty-sekundy, stupne-minúty-sekundy alebo desatinné stupne), "
 "rozbaľovací zoznam a dve tlačidlá."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:441
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:438
 msgid ""
 "The drop-down list contains the names of the currently connected devices."
 msgstr "Rozbaľovací zoznam obsahuje mená aktuálne pripojených zariadení."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:442
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:439
 msgid ""
 "If no devices are connected, it will remain empty, and the 'Slew' button "
 "will be disabled."
@@ -19882,7 +19882,7 @@ msgstr ""
 "Ak nie je pripojené žiadne zariadenie, zostane prázdny a tlačidlo 'Natočiť' "
 "bude nefunkčné."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:443
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:440
 msgid ""
 "Pressing the <b>Slew</b> button slews the selected device to the selected "
 "set of coordinates."
@@ -19891,7 +19891,7 @@ msgstr ""
 "súradnice."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:445
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:442
 msgid ""
 "See the section about {keyboard commands} below for other ways of "
 "controlling the device."
@@ -19900,7 +19900,7 @@ msgstr ""
 "príkazoch} nižšie."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:446
 msgid ""
 "Pressing the <b>Configure telescopes...</b> button opens the {main window} "
 "of the plug-in."
@@ -19908,7 +19908,7 @@ msgstr ""
 "Stlačenie tlačidla <b>Nastaviť ďalekohľad...</b> otvorí {hlavné okno} "
 "modulu."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:451
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:448
 msgid ""
 "<b>TIP:</b> Inside the 'Slew' window, underlined letters indicate that "
 "pressing 'Alt + underlined letter' can be used instead of clicking."
@@ -19916,7 +19916,7 @@ msgstr ""
 "<b>TIP:</b> tlačidlá s podčiarknutými písmenami v okne 'Natočiť' je možné "
 "zvoliť aj stlačením 'Alt + podčiarknuté písmeno' namiesto klikania."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:452
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid ""
 "For example, pressing <b>Alt+S</b> is equivalent to clicking the 'Slew' "
 "button, pressing <b>Alt+E</b> switches to decimal degree format, etc."
@@ -19924,11 +19924,11 @@ msgstr ""
 "Napríklad stlačenie <b>Alt+N</b> je rovnaké ako kliknutie na 'Natočiť', "
 "stlačenie <b>Alt+E</b> prepne na formát desatinných stupňov atď."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:455
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:452
 msgid "Sending commands"
 msgstr "Posielanie príkazov"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:456
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:453
 msgid ""
 "Once a telescope is successfully started/connected, Stellarium displays a "
 "telescope reticle labelled with the telescope's name on its current position"
@@ -19937,7 +19937,7 @@ msgstr ""
 "Keď je ďalekohľad úspešne spustený/pripojený, Stellarium zobrazí zameriavací"
 " kríž s názvom ďalekohľadu na oblohe v aktuálnej polohe ďalekohľadu."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:457
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:454
 msgid ""
 "The reticle is an object like every other in Stellarium - it can be selected"
 " with the mouse, it can be tracked and it appears as an object in the "
@@ -19947,7 +19947,7 @@ msgstr ""
 "myšou, môže byť sledovaný a tiež je zobrazený ako objekt v okne "
 "'Vyhľadávanie'."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:458
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:455
 msgid ""
 "<b>To point a device to an object:</b> Select an object (e.g. a star) and "
 "press the number of the device while holding down the <b>Ctrl</b> key."
@@ -19955,15 +19955,15 @@ msgstr ""
 "<b>Pre nasmerovanie zariadenia na objekt:</b> Vyberte objekt (napr. hviezdu)"
 " a stlačte číslo zariadenia pri súčasnom podržaní klávesu <b>Ctrl</b>."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:459
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:456
 msgid "For example, Ctrl+1 for telescope #1."
 msgstr "Napríklad Ctrl+1 pre ďalekohľad č.1."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:460
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:457
 msgid "This will move the telescope to the selected object."
 msgstr "Toto presunie ďalekohľad na vybratý objekt."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:461
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:458
 msgid ""
 "<b>To point a device to the center of the view:</b> Press the number of the "
 "device while holding down the <b>Alt</b> key."
@@ -19971,16 +19971,16 @@ msgstr ""
 "<b>Pre nasmerovanie zariadenia na stred pohľadu:</b> Stlačte číslo "
 "zariadenia pri súčasnom podržaní klávesu <b>Alt</b>."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:462
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:459
 msgid "For example, Alt+1 for telescope #1."
 msgstr "Napríklad Alt+1 pre ďalekohľad č.1."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:463
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:460
 msgid ""
 "This will slew the device to the point in the center of the current view."
 msgstr "Toto natočí ďalekohľad na stred aktuálneho pohľadu."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:464
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:461
 msgid ""
 "If you move the view after issuing the command, the target won't change "
 "unless you issue another command."
@@ -19989,7 +19989,7 @@ msgstr ""
 "príkaz."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:467
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:464
 msgid ""
 "<b>To point a device to a given set of coordinates:</b> Use the {'Slew to' "
 "window} (press <b>Ctrl+0</b>)."
@@ -19998,7 +19998,7 @@ msgstr ""
 "{'Natočiť ďalekohľad na'} (stlačte <b>Ctrl+0</b>)."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:474
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:471
 msgid ""
 "All devices listed in the {'Device model' list} are convenience definitions "
 "using one of the two built-in interfaces: the Meade LX200 (the Meade "
@@ -20008,26 +20008,26 @@ msgstr ""
 "použitím jedného z dvoch vstavaných rozhraní: Meade LX200 (ovládač Meade "
 "Autostar) a Celestron NexStar."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:476
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:473
 msgid "The device list contains the following:"
 msgstr "Zoznam zariadení obsahuje:"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:477
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:474
 msgid "Any device using the NexStar interface."
 msgstr "Ľubovoľné zariadenie s rozhraním NexStar."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:478
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:475
 msgid ""
 "A computerized telescope mount made by Losmandy (Meade LX-200/Autostar "
 "interface)."
 msgstr "Počítačom ovládaná montáž od Losmandy (rozhranie LX-200/Autostar)."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:479
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:484
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:476
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:481
 msgid "Any device using the LX-200/Autostar interface."
 msgstr "Ľubovoľné zariadenie s rozhraním LX-200/Autostar."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:480
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:477
 msgid ""
 "The Meade ETX-70 telescope with the #494 Autostar controller and the #506 "
 "Connector Cable Set."
@@ -20036,7 +20036,7 @@ msgstr ""
 "#506."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:482
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:479
 #, qt-format
 msgid ""
 "According to the tester, it is a bit slow, so its default setting of "
@@ -20045,13 +20045,13 @@ msgstr ""
 "Podľa testera je to trochu pomalé. Preto predvolené nastavenie "
 "%1'Oneskorenia pripojenia'%2 je 1,5 sekundy namiesto 0,5 sekundy."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:485
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:482
 msgid ""
 "The Sky-Watcher SynScan AZ GoTo mount is used in a number of telescopes."
 msgstr ""
 "Montáž Sky-Watcher SynScan AZ Goto je používaná pri množstve ďalekohľadov."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:486
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:483
 msgid ""
 "<b>SynScan</b> is also the name of the hand controller used in other Sky-"
 "Watcher GoTo mounts, and it seems that any mount that uses a SynScan "
@@ -20063,12 +20063,12 @@ msgstr ""
 " verzii 3.0 a novšej je podporovaná v tomto module, pretože používa NexStar "
 "protokol."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:487
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:484
 msgid "Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations."
 msgstr ""
 "Argo Navis je 'Digitálny počítač k ďalekohľadu' od Wildcard Innovations."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:488
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:485
 msgid ""
 "It is an advanced digital setting circle that turns an ordinary telescope "
 "(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses"
@@ -20078,7 +20078,7 @@ msgstr ""
 " Dobson) na ďalekohľad typu 'Push To' (ďalekohľad, ktorý používa počítač na "
 "nájdenie cieľov a ľudskú silu na navádzanie ďalekohľadu samotného)."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:489
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:486
 msgid ""
 "Just don't forget to set it to Meade compatibility mode and set the baud "
 "rate to 9600B"
@@ -20086,7 +20086,7 @@ msgstr ""
 "Len nezabudnite zvoliť režim kompatibility Meade a nastaviť prenosovú "
 "rýchlosť na 9600B"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:494
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:491
 msgid ""
 "If you want to test this plug-in without an actual device connected to the "
 "computer, choose <b>Nothing, just simulate one (a moving reticle)</b> in the"
@@ -20101,7 +20101,7 @@ msgstr ""
 "modulom."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:497
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:494
 msgid ""
 "See the section above about {field of view indicators} for a possible "
 "practical application (emulating 'Telrad' circles)."
@@ -20110,7 +20110,7 @@ msgstr ""
 "využitie (emuláciu kruhov 'Telradu')."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:501
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:498
 msgid ""
 "This feature is equivalent to the 'Dummy' type of telescope supported by "
 "{Stellarium's original telescope control feature}."
@@ -20119,17 +20119,17 @@ msgstr ""
 "fuknciou ovládania ďalekohľadu v Stellariu}."
 
 #. TRANSLATORS: Symbol for "number"
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:521
-#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:518
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:97
 msgctxt "numero sign"
 msgid "#"
 msgstr "č."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:523
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:520
 msgid "Status"
 msgstr "Stav"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:540
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:537
 #, qt-format
 msgid ""
 "To slew a connected telescope to an object (for example, a star), select "
@@ -20144,7 +20144,7 @@ msgstr ""
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually
 #. see this text. :)
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:547
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:544
 msgid ""
 "No device model descriptions are available. Stellarium will not be able to "
 "control a telescope on its own, but it is still possible to do it through an"
@@ -20156,93 +20156,93 @@ msgstr ""
 
 #. TRANSLATORS: The translated name of the Add button is automatically
 #. inserted.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:552
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:549
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
 msgstr "Stlačením tlačidla \"%1\" nastavíte nové spojenie s ďalekohľadom."
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:566
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:563
 msgid "local, Stellarium"
 msgstr "miestne, Stellarium"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:570
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:567
 msgid "local, external"
 msgstr "miestne, vonkajšie"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:574
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:571
 msgid "remote, unknown"
 msgstr "vzdialené, neznáme"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:578
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:575
 msgid "virtual"
 msgstr "virtuálne"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:582
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:579
 msgid "remote, RTS2"
 msgstr "vzdialené, RTS2"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:586
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:583
 msgid "remote, INDI/INDIGO"
 msgstr "vzdialené, INDI/INDIGO"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:590
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:587
 msgid "local, ASCOM"
 msgstr "lokálne, ASCOM"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1012
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1009
 msgid "Start"
 msgstr "Štart"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1014
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1011
 msgid "Start the selected local telescope"
 msgstr "Spustiť vybratý miestny ďalekohľad"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1019
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1016
 msgid "Stop"
 msgstr "Zastaviť"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1021
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1018
 msgid "Stop the selected local telescope"
 msgstr "Zastaviť vybratý miestny ďalekohľad"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1026
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1023
 msgid "Connect"
 msgstr "Pripojiť"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1028
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1025
 msgid "Connect to the selected telescope"
 msgstr "Pripojiť sa k vybratému ďalekohľadu"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1033
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1030
 msgid "Disconnect"
 msgstr "Odpojiť"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1035
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1032
 msgid "Disconnect from the selected telescope"
 msgstr "Odpojiť sa od vybratého ďalekohľadu"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1055
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1052
 msgid "Select a directory"
 msgstr "Vyberte priečinok"
 
-#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:96
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:99
 msgid "Right Ascension (J2000)"
 msgstr "Rektascenzia (J2000)"
 
-#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:97
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:100
 msgid "Declination (J2000)"
 msgstr "Deklinácia (J2000)"
 
-#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:291
-#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:320
-#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:468
+#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:292
+#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:321
+#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:469
 msgid "Select one"
 msgstr "Vyberte jedno"
 
@@ -20708,7 +20708,7 @@ msgid "On"
 msgstr "Zapnúť"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Off"
 msgstr "Vypnúť"
 
@@ -20745,16 +20745,16 @@ msgstr "Importovať dráhové elementy vo formáte MPC..."
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris
 #. Service" is inserted.
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:162
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:148
 #, qt-format
 msgid "Query the MPC's %1:"
 msgstr "Dopyt do MPC: %1:"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:165
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:151
 msgid "Only one result will be returned if the query is successful."
 msgstr "Pri úspešnom dopyte sa zobrazí iba jeden výsledok."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:166
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:152
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
@@ -20762,7 +20762,7 @@ msgstr ""
 "Kométy a planéty môžu byť identifikované podľa ich čísla, názvu (v "
 "angličtine) alebo dočasného názvu."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:173
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
 #, qt-format
 msgid ""
 "Comet <i>names</i> need to be prefixed with %1 or %2. If more than one comet"
@@ -20774,23 +20774,23 @@ msgstr ""
 "vyhovuje viac komét, použije sa iba prvý výsledok. Ak napríklad vyhľadávate "
 "\"%3\" vráti sa %4, Halleyova kométa, ale hľadanie \"%5\" vráti planétku %6."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:214
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:200
 msgid "Select bookmark..."
 msgstr "Vybrať záložku..."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:351
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:337
 msgid "Plain Text File"
 msgstr "Jednoduchý textový súbor"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:353
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:339
 msgid "All Files"
 msgstr "Všetky súbory"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:355
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:341
 msgid "Select a file"
 msgstr "Vybrať súbor"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:743
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:730
 msgid "Searching..."
 msgstr "Vyhľadávam..."
 
@@ -21985,7 +21985,7 @@ msgid "Not active."
 msgstr "Nie je aktívny."
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:267
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
 msgid "Remote Control Configuration"
 msgstr "Nastavenie vzdialenej kontroly"
 
@@ -22049,7 +22049,7 @@ msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
 msgstr "Server blokovaný - alebo server počúva na IP: aaa.bbb.ccc.ddd"
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:51
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Remote Sync"
 msgstr "Vzdialená synchronizácia"
 
@@ -22075,12 +22075,12 @@ msgid "ERROR: %1"
 msgstr "CHYBA: %1"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:146
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:472
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:471
 msgid "Start server"
 msgstr "Spustiť server"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:151
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:475
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
 msgid "Connect to server"
 msgstr "Pripojiť k serveru"
 
@@ -22170,97 +22170,97 @@ msgstr "Meno servera"
 msgid "Server not active."
 msgstr "Server nie je aktívny."
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:467
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
 msgid "Remote Sync Plug-in Configuration"
 msgstr "Konfigurácia vzdialenej synchronizácie modulu"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:469
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:474
 msgid "Status:"
 msgstr "Stav:"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:471
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:470
 msgid "Server mode"
 msgstr "Režim servera"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:473
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:472
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:477
 msgid "Server port"
 msgstr "Port servera"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:474
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:473
 msgid "Client mode"
 msgstr "Režim klienta"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:475
 msgid "Server host address/name"
 msgstr "Adresa/meno hostiteľského servera"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:477
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
 msgid "127.0.0.1"
 msgstr "127.0.0.1"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:478
 msgid "When connection is lost"
 msgstr "Keď spojenie vypadne"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
 msgid "Do nothing"
 msgstr "Neurobiť nič"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
 msgid "Try reconnecting"
 msgstr "Pokúsiť sa o nové spojenie"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:483
 msgid "When server quits"
 msgstr "Keď server ukončí spojenie"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
 msgid "Changes on this page require a re-connection to the server"
 msgstr "Zmeny na tejto stránke si vyžadujú opätovné pripojenie k serveru"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
 msgid "Settings applied on this client"
 msgstr "Nastavenia tohto klienta"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
 msgid "Selection"
 msgstr "Výber"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:490
 msgid "View direction"
 msgstr "Smer pohľadu"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:493
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:492
 msgid "Property filters"
 msgstr "Filtre vlastností"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:494
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:493
 msgid "Exclude GUI-related properties"
 msgstr "Vylúčiť vlastnosti týkajúce sa GUI"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:496
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:495
 msgid "These are all available properties."
 msgstr "Toto sú všetky dostupné vlastnosti."
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:499
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:498
 msgid "These are the properties currently excluded from synchronisation."
 msgstr "Tieto vlastnosti sú momentálne vylúčené zo synchronizácie."
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:501
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:500
 msgid "Excluded Properties"
 msgstr "Vylúčené vlastnosti"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:502
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:501
 msgid "Synchronized Properties"
 msgstr "Vlastnosti synchronizácie"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:503
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:502
 msgid "Additional excluded properties:"
 msgstr "Ďalšie vylúčené vlastnosti:"
 
-#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:504
+#: plugins/RemoteSync/src/ui_remoteSyncDialog.h:503
 msgid "Client settings"
 msgstr "Nastavenia klienta"
 
@@ -27093,37 +27093,37 @@ msgstr "Geometrický shader"
 msgid "Grid coordinates (%1): %2m, %3m, %4m"
 msgstr "Súradnice mriežky (%1): %2m, %3m, %4m"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
 msgid "3D Scenery"
 msgstr "3D scenéria"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Set as default scene"
 msgstr "Nastaviť ako predvolenú"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Load/save viewpoints"
 msgstr "Nahrať/uložiť pohľady"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Torch strength:"
 msgstr "Intanzita fakle:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Torch range:"
 msgstr "Dosah fakle:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 #, qt-format
 msgid "Torchlight (%1)"
 msgstr "Svetlo fakle (%1)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 #, qt-format
 msgid "Show grid coordinates (%1)"
 msgstr "Zobraziť súradnice mriežky (%1)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:487
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid ""
 "Overdraw horizon polygon defined in your landscape. This displays the "
 "inaccuracies in a very large planar model compared to Earth curvature, of "
@@ -27133,115 +27133,115 @@ msgstr ""
 " nepresnosti vo veľkom rovinnom modeli v porovnaní so zakrivením Zeme, ale "
 "samozrejme pre jediný bod pozorovania."
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:488
 msgid "Draw horizon polyline in foreground"
 msgstr "Vykresliť čiaru horizontu v popredí"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
 msgid "Visual options"
 msgstr "Nastavenia obrazu"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Per-Pixel lighting"
 msgstr "Osvetlenie každého pixelu"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Shadows"
 msgstr "Tiene"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Simple shadows"
 msgstr "Jednoduché tiene"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "Bump mapping"
 msgstr "Bump mapping"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:495
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "Cubemap size:"
 msgstr "Veľkosť kockovej mapy:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:495
 msgid "Shadowmap size:"
 msgstr "Veľkosť mapy tieňov:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "Filtering Quality:"
 msgstr "Kvalita filtrovania:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Hardware"
 msgstr "Hardvérová"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Low"
 msgstr "Nízka"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Low + Hardware"
 msgstr "Nízka + hardvérová"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "High (slow)"
 msgstr "Vysoká (pomalá)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "High + Hardware (slow)"
 msgstr "Vysoká + hardvérová (pomalá)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:505
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:504
 msgid "PCSS"
 msgstr "PCSS"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:506
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:505
 msgid "Cubemapping mode:"
 msgstr "Režim kockovej mapy:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:507
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:506
 msgid "Full cubemap shadows"
 msgstr "Plné tiene kockovej mapy"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:508
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:507
 msgid "Lazy cubemap re-rendering"
 msgstr "'Lenivé' vykresľovanie kockovej mapy"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:509
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:508
 msgid "Interval:"
 msgstr "Interval:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:510
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:509
 msgid "Only update dominant face when moving"
 msgstr "Aktualizovať len hlavnú stranu pri pohybe"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:511
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:510
 msgid "Also update second-most dominant face"
 msgstr "Tiež aktualizovať druhú najhlavnejšiu stranu"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:512
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:511
 msgid "Quality/Performance settings"
 msgstr "Nastavenia kvality/výkonu"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:210
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:209
 msgid "Stored views"
 msgstr "Uložené pohľady"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:212
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:211
 msgid "Load view"
 msgstr "Nahrať pohľad"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:213
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:212
 msgid "Delete view"
 msgstr "Vymazať pohľad"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:214
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:213
 msgid "Add current view"
 msgstr "Pridať aktuálny pohľad"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:215
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:214
 msgid "Load/store with date"
 msgstr "Nahrať/uložiť s dátumom"
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:216
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:215
 msgid "Title:"
 msgstr "Nadpis:"
 
@@ -27647,7 +27647,7 @@ msgstr "Obnoviť predvolené nastavenia"
 msgid "Custom Lines"
 msgstr "Vlastné čiary"
 
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:153
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialogLocations.h:152
 msgid "Locations"
 msgstr "Polohy"
 
