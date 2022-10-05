@@ -39,12 +39,12 @@ public:
 	void telescopeAbortSlew() override;
 	bool isConnected() const override;
 	bool hasKnownPosition() const override;
+	static bool useJNow(ASCOMDevice::ASCOMEquatorialCoordinateType coordinateType, bool ascomUseDeviceEqCoordType, TelescopeControl::Equinox equinox);
 
 
 private:
 	bool prepareCommunication() override;
 	void performCommunication() override;
-	static bool useJNow(ASCOMDevice::ASCOMEquatorialCoordinateType coordinateType, bool ascomUseDeviceEqCoordType, TelescopeControl::Equinox equinox);
 
 	ASCOMDevice::ASCOMCoordinates j2000PosToAscomCoord(const Vec3d& j2000Pos);
 	QString mAscomDeviceId;
