@@ -28,6 +28,7 @@
 #include "StelFader.hpp"
 
 #include <QOpenGLBuffer>
+#include <QOpenGLVertexArrayObject>
 
 class StelProjector;
 class StelToneReproducer;
@@ -54,6 +55,15 @@ public:
 	bool isReadyToRender() const override { return true; }
 	LoadingStatus stepDataLoading() override { return {0,0}; }
 private:
+
+	//! Binds actual VAO if it's supported, sets up the relevant state manually otherwise.
+	void bindVAO();
+	//! Sets the vertex attribute states for the currently bound VAO so that glDraw* commands can work.
+	void setupCurrentVAO();
+	//! Binds zero VAO if VAO is supported, manually disables the relevant vertex attributes otherwise.
+	void releaseVAO();
+
+private:
 	Vec4i viewport;
     Skylight& sky;
 	Skybright skyb;
@@ -64,6 +74,7 @@ private:
 	QOpenGLBuffer indicesBuffer;
 	Vec4f* colorGrid;
 	QOpenGLBuffer colorGridBuffer;
+	QOpenGLVertexArrayObject vao;
 
 	//! Vertex shader used for xyYToRGB computation
 	class QOpenGLShaderProgram* atmoShaderProgram;
