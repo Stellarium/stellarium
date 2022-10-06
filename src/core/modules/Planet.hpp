@@ -788,6 +788,9 @@ private:
 	GLuint sphereVBO=0;
 	GLuint ringsVBO=0;
 
+	std::unique_ptr<QOpenGLVertexArrayObject> surveyVAO;
+	GLuint surveyVBO=0;
+
 	const QString getContextString() const;
 	QPair<double, double> getLunarEclipseMagnitudes() const;
 
