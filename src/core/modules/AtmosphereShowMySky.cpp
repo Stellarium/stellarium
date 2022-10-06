@@ -125,12 +125,12 @@ private:
 	}
 };
 
-QOpenGLFunctions_3_3_Core& glfuncs()
+QOpenGLFunctions_3_3_Core* glfuncs()
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-	return *QOpenGLVersionFunctionsFactory::get<QOpenGLFunctions_3_3_Core>(QOpenGLContext::currentContext());
+	return QOpenGLVersionFunctionsFactory::get<QOpenGLFunctions_3_3_Core>(QOpenGLContext::currentContext());
 #else
-	return *QOpenGLContext::currentContext()->versionFunctions<QOpenGLFunctions_3_3_Core>();
+	return QOpenGLContext::currentContext()->versionFunctions<QOpenGLFunctions_3_3_Core>();
 #endif
 }
 
@@ -319,7 +319,7 @@ void AtmosphereShowMySky::resizeRenderTarget(int width, int height)
 
 void AtmosphereShowMySky::setupRenderTarget()
 {
-	auto& gl=glfuncs();
+	auto& gl = *glfuncs();
 
 	GLint viewport[4];
 	GL(gl.glGetIntegerv(GL_VIEWPORT, viewport));
@@ -331,7 +331,7 @@ void AtmosphereShowMySky::setupRenderTarget()
 
 void AtmosphereShowMySky::setupBuffers()
 {
-	auto& gl=glfuncs();
+	auto& gl = *glfuncs();
 
 	GL(gl.glGenBuffers(1, &vbo_));
 	GL(gl.glBindBuffer(GL_ARRAY_BUFFER, vbo_));
@@ -433,7 +433,10 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 		const auto& conf=*StelApp::getInstance().getSettings();
 		const auto defaultPath = QDir::homePath() + "/cms";
 		const auto pathToData = conf.value("landscape/atmosphere_model_path", defaultPath).toString();
-		auto& gl=glfuncs();
+		const auto gl = glfuncs();
+		if(!gl)
+			throw InitFailure(q_("Failed to get OpenGL 3.3 support functions"));
+
 		qDebug() << "Will load CalcMySky atmosphere model from" << pathToData;
 		skySettings_.reset(new SkySettings);
 		renderSurfaceFunc_=[this](QOpenGLShaderProgram& prog)
@@ -441,7 +444,7 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 				const auto& settings = *static_cast<SkySettings*>(skySettings_.get());
 				prog.setUniformValue("projectionMatrix", settings.projectionMatrix_);
 
-				auto& gl=glfuncs();
+				auto& gl = *glfuncs();
 
 				GL(gl.glBindVertexArray(renderVAO_));
 
@@ -455,7 +458,7 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 
 				GL(gl.glBindVertexArray(0));
 			};
-		renderer_.reset(ShowMySky_AtmosphereRenderer_create(&gl, &pathToData, skySettings_.get(), &renderSurfaceFunc_));
+		renderer_.reset(ShowMySky_AtmosphereRenderer_create(gl, &pathToData, skySettings_.get(), &renderSurfaceFunc_));
 		loadShaders();
 		setupRenderTarget();
 		setupBuffers();
@@ -488,7 +491,7 @@ AtmosphereShowMySky::~AtmosphereShowMySky()
 {
 	if(auto*const ctx=QOpenGLContext::currentContext())
 	{
-		auto& gl=glfuncs();
+		auto& gl = *glfuncs();
 		GL(gl.glDeleteBuffers(1, &vbo_));
 		GL(gl.glDeleteVertexArrays(1, &luminanceToScreenVAO_));
 		GL(gl.glDeleteVertexArrays(1, &zenithProbeVAO_));
@@ -558,7 +561,7 @@ void AtmosphereShowMySky::probeZenithLuminances(const float altitude)
 	// modes and get the resulting colors to determine the coefficients to
 	// render light pollution and airglow correctly
 
-	auto& gl=glfuncs();
+	auto& gl = *glfuncs();
 
 	GLint origScissor[4];
 	GL(gl.glGetIntegerv(GL_SCISSOR_BOX, origScissor));
@@ -568,7 +571,7 @@ void AtmosphereShowMySky::probeZenithLuminances(const float altitude)
 	                                      const auto& settings = *static_cast<SkySettings*>(skySettings_.get());
 	                                      prog.setUniformValue("projectionMatrix", settings.projectionMatrix_);
 
-	                                      auto& gl=glfuncs();
+	                                      auto& gl = *glfuncs();
 	                                      GL(gl.glBindVertexArray(zenithProbeVAO_));
 	                                      GL(gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
 	                                      GL(gl.glBindVertexArray(0));
@@ -689,7 +692,7 @@ void AtmosphereShowMySky::drawAtmosphere(Mat4f const& projectionMatrix, const fl
 
 Vec4f AtmosphereShowMySky::getMeanPixelValue()
 {
-	auto& gl=glfuncs();
+	auto& gl = *glfuncs();
 
 	GL(gl.glActiveTexture(GL_TEXTURE0));
 	GL(gl.glBindTexture(GL_TEXTURE_2D, renderer_->getLuminanceTexture()));
@@ -915,7 +918,7 @@ void AtmosphereShowMySky::draw(StelCore* core)
 	const auto rgbMaxValue=calcRGBMaxValue(sPainter.getDitheringMode());
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]));
 
-	auto& gl=glfuncs();
+	auto& gl = *glfuncs();
 	GL(gl.glActiveTexture(GL_TEXTURE0));
 	GL(gl.glBindTexture(GL_TEXTURE_2D, renderer_->getLuminanceTexture()));
 	GL(gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
