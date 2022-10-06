@@ -728,7 +728,7 @@ void TelescopeControl::loadTelescopes()
 		qWarning() << "[TelescopeControl] Error loading telescopes";
 		return;
 	}
-	if(!QFileInfo(telescopesJsonPath).exists())
+	if(!QFileInfo::exists(telescopesJsonPath))
 	{
 		qWarning() << "[TelescopeControl] loadTelescopes(): No telescopes loaded. File is missing:" << QDir::toNativeSeparators(telescopesJsonPath);
 		telescopeDescriptions = result;
@@ -1197,9 +1197,9 @@ bool TelescopeControl::startTelescopeAtSlot(int slot)
 	QString rts2Url;
 	QString rts2Username;
 	QString rts2Password;
-	int rts2Refresh;
+	int rts2Refresh=0;
 	QString ascomDeviceId;
-	bool ascomUseDeviceEqCoordType;
+	bool ascomUseDeviceEqCoordType=false;
 
 	if(!getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, portSerial, rts2Url, rts2Username, rts2Password, rts2Refresh, ascomDeviceId, ascomUseDeviceEqCoordType))
 	{
@@ -1472,7 +1472,7 @@ void TelescopeControl::loadDeviceModels()
 	//Make sure that the device models file exists
 	bool useDefaultList = false;
 	QString deviceModelsJsonPath = StelFileMgr::findFile("modules/TelescopeControl", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/device_models.json";
-	if(!QFileInfo(deviceModelsJsonPath).exists())
+	if(!QFileInfo::exists(deviceModelsJsonPath))
 	{
 		if(!restoreDeviceModelsListTo(deviceModelsJsonPath))
 		{
