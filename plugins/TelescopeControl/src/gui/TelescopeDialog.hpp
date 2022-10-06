@@ -28,7 +28,6 @@
 #include <QStandardItemModel>
 
 #include "StelDialog.hpp"
-#include "TelescopeControlGlobals.hpp"
 #include "TelescopeControl.hpp"
 #include "TelescopeConfigurationDialog.hpp"
 
@@ -111,8 +110,8 @@ private:
 	
 	TelescopeControl * telescopeManager;
 	
-	TelescopeControl::TelescopeStatus telescopeStatus[SLOT_NUMBER_LIMIT];
-	TelescopeControl::ConnectionType telescopeType[SLOT_NUMBER_LIMIT];
+	TelescopeControl::TelescopeStatus telescopeStatus[TelescopeControl::SLOT_NUMBER_LIMIT];
+	TelescopeControl::ConnectionType telescopeType[TelescopeControl::SLOT_NUMBER_LIMIT];
 	
 	int telescopeCount;
 	int configuredSlot;

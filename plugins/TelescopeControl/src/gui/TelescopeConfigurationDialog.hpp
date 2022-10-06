@@ -33,8 +33,6 @@
 #include "../ASCOM/TelescopeClientASCOMWidget.hpp"
 #endif
 
-using namespace TelescopeControlGlobals;
-
 class Ui_telescopeConfigurationDialog;
 class StelStyle;
 

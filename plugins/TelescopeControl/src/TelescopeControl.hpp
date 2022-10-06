@@ -30,11 +30,9 @@
 
 #include "StelFader.hpp"
 #include "StelGui.hpp"
-#include "StelJsonParser.hpp"
 #include "StelObjectModule.hpp"
 #include "StelProjectorType.hpp"
 #include "StelTextureTypes.hpp"
-#include "TelescopeControlGlobals.hpp"
 #include "VecMath.hpp"
 
 #include <QFile>
@@ -54,8 +52,6 @@ class StelProjector;
 class TelescopeClient;
 class TelescopeDialog;
 class SlewDialog;
-
-using namespace TelescopeControlGlobals;
 
 typedef QSharedPointer<TelescopeClient> TelescopeClientP;
 
@@ -82,6 +78,15 @@ setting up the connection.
 class TelescopeControl : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool flagTelescopeReticles              READ getFlagTelescopeReticles           WRITE setFlagTelescopeReticles          NOTIFY flagTelescopeReticlesChanged)
+	Q_PROPERTY(bool flagTelescopeLabels                READ getFlagTelescopeLabels             WRITE setFlagTelescopeLabels            NOTIFY flagTelescopeLabelsChanged)
+	Q_PROPERTY(bool flagTelescopeCircles               READ getFlagTelescopeCircles            WRITE setFlagTelescopeCircles           NOTIFY flagTelescopeCirclesChanged)
+	Q_PROPERTY(Vec3f reticleColor                      READ getReticleColor                    WRITE setReticleColor                   NOTIFY reticleColorChanged)
+	Q_PROPERTY(Vec3f labelColor                        READ getLabelColor                      WRITE setLabelColor                     NOTIFY labelColorChanged)
+	Q_PROPERTY(Vec3f circleColor                       READ getCircleColor                     WRITE setCircleColor                    NOTIFY circleColorChanged)
+	Q_PROPERTY(bool useTelescopeServerLogs             READ getFlagUseTelescopeServerLogs      WRITE setFlagUseTelescopeServerLogs     NOTIFY flagUseTelescopeServerLogsChanged)
+	Q_PROPERTY(bool useTelescopeServerExecutables      READ getFlagUseServerExecutables        WRITE setFlagUseServerExecutables       NOTIFY getFlagUseServerExecutablesChanged)
+	Q_PROPERTY(QString serverExecutablesDirectoryPath  READ getServerExecutablesDirectoryPath  WRITE setServerExecutablesDirectoryPath NOTIFY serverExecutablesDirectoryPathChanged)
 
 public:
 
@@ -114,6 +119,15 @@ public:
 		EquinoxJNow
 	};
 	Q_ENUM(Equinox)
+
+	struct DeviceModel
+	{
+		QString name;
+		QString description;
+		QString server;
+		int defaultDelay;
+		bool useExecutable;
+	};
 
 	TelescopeControl();
 	virtual ~TelescopeControl() override;
@@ -150,7 +164,7 @@ public:
 	void deleteAllTelescopes();
 
 	//! Safe access to the loaded list of telescope models
-	const QHash<QString, DeviceModel>& getDeviceModels();
+	const QHash<QString, DeviceModel> &getDeviceModels();
 
 	//! Loads the module's configuration from the configuration file.
 	void loadConfiguration();
@@ -212,6 +226,23 @@ public:
 
 	bool getFlagUseTelescopeServerLogs() const { return useTelescopeServerLogs; }
 
+	// Ex TelescopeControlGlobals
+	static constexpr int MIN_SLOT_NUMBER = 1;
+	static constexpr int SLOT_COUNT = 9;
+	static constexpr int SLOT_NUMBER_LIMIT = MIN_SLOT_NUMBER + SLOT_COUNT;
+	static constexpr int MAX_SLOT_NUMBER = SLOT_NUMBER_LIMIT - 1;
+
+	static constexpr int BASE_TCP_PORT = 10000;
+	#define DEFAULT_TCP_PORT_FOR_SLOT(X) (TelescopeControl::BASE_TCP_PORT + X)
+	static constexpr int DEFAULT_TCP_PORT = DEFAULT_TCP_PORT_FOR_SLOT(MIN_SLOT_NUMBER);
+
+	static constexpr int MAX_CIRCLE_COUNT = 10;
+	static const QString TELESCOPE_SERVER_PATH;
+	static constexpr int DEFAULT_DELAY = 500000; //Microseconds; == 0.5 seconds
+	#define MICROSECONDS_FROM_SECONDS(X) (X * 1000000)
+	#define SECONDS_FROM_MICROSECONDS(X) (static_cast<double>(X) / 1000000)
+	static const QStringList EMBEDDED_TELESCOPE_SERVERS;
+
 public slots:
 	//! Set display flag for telescope reticles
 	//! @param b boolean flag
@@ -219,7 +250,7 @@ public slots:
 	//! // example of usage in scripts
 	//! TelescopeControl.setFlagTelescopeReticles(true);
 	//! @endcode
-	void setFlagTelescopeReticles(bool b) { reticleFader = b; }
+	void setFlagTelescopeReticles(bool b) { reticleFader = b; emit flagTelescopeReticlesChanged(b);}
 	//! Get display flag for telescope reticles
 	//! @return true if telescope reticles is visible
 	//! @code
@@ -234,7 +265,7 @@ public slots:
 	//! // example of usage in scripts
 	//! TelescopeControl.setFlagTelescopeLabels(true);
 	//! @endcode
-	void setFlagTelescopeLabels(bool b) { labelFader = b; }
+	void setFlagTelescopeLabels(bool b) { labelFader = b; emit flagTelescopeLabelsChanged(b);}
 	//! Get display flag for telescope name labels
 	//! @return true if telescope name labels is visible
 	//! @code
@@ -249,7 +280,7 @@ public slots:
 	//! // example of usage in scripts
 	//! TelescopeControl.setFlagTelescopeCircles(true);
 	//! @endcode
-	void setFlagTelescopeCircles(bool b) { circleFader = b; }
+	void setFlagTelescopeCircles(bool b) { circleFader = b; emit flagTelescopeCirclesChanged(b);}
 	//! Get display flag for telescope field of view circles
 	//! @return true if telescope field of view circles is visible
 	//! @code
@@ -263,7 +294,7 @@ public slots:
 	//! // example of usage in scripts
 	//! TelescopeControl.setReticleColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
-	void setReticleColor(const Vec3f& c) { reticleColor = c; }
+	void setReticleColor(const Vec3f& c) { reticleColor = c; emit reticleColorChanged(c);}
 	//! Get the telescope reticle color
 	//! @return the telescope reticle color
 	//! @code
@@ -284,14 +315,14 @@ public slots:
 	//! // example of usage in scripts
 	//! TelescopeControl.setLabelColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
-	void setLabelColor(const Vec3f& c) { labelColor = c; }
+	void setLabelColor(const Vec3f& c) { labelColor = c; emit labelColorChanged(c);}
 
 	//! Set the field of view circles color
 	//! @code
 	//! // example of usage in scripts
 	//! TelescopeControl.setCircleColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
-	void setCircleColor(const Vec3f& c) { circleColor = c; }
+	void setCircleColor(const Vec3f& c) { circleColor = c; emit circleColorChanged(c);}
 	//! Get the field of view circles color
 	//! @return the field of view circles color
 	//! @code
@@ -346,11 +377,22 @@ public slots:
 	void centeringScreenByTelescope(const int idx);
 
 	//! Used in the GUI
-	void setFlagUseTelescopeServerLogs(bool b) { useTelescopeServerLogs = b; }
+	void setFlagUseTelescopeServerLogs(bool b) { useTelescopeServerLogs = b; emit flagUseTelescopeServerLogsChanged(b); }
 
 signals:
 	void clientConnected(int slot, QString name);
 	void clientDisconnected(int slot);
+
+	void flagTelescopeReticlesChanged(bool b);
+	void flagTelescopeLabelsChanged(bool b);
+	void flagTelescopeCirclesChanged(bool b);
+	void reticleColorChanged(const Vec3f &c);
+	void labelColorChanged(const Vec3f &c);
+	void circleColorChanged(const Vec3f &c);
+	void flagUseTelescopeServerLogsChanged(bool b);
+	void useTelescopeServerExecutables(bool b);
+	void getFlagUseServerExecutablesChanged(bool b);
+	void serverExecutablesDirectoryPathChanged(const QString &s);
 
 private slots:
 	//! Set translated keyboard shortcut descriptions.

@@ -257,7 +257,7 @@ void TelescopeConfigurationDialog::initNewTelescopeConfiguration(int slot)
 	ui->stelWindowTitle->setText(q_("Add New Telescope"));
 	ui->lineEditTelescopeName->setText(QString("New Telescope %1").arg(QString::number(configuredSlot)));
 
-	ui->doubleSpinBoxTelescopeDelay->setValue(SECONDS_FROM_MICROSECONDS(DEFAULT_DELAY));
+	ui->doubleSpinBoxTelescopeDelay->setValue(SECONDS_FROM_MICROSECONDS(TelescopeControl::DEFAULT_DELAY));
 }
 
 void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
@@ -495,7 +495,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 
 		for (int i = 0; i < circleStrings.size(); i++)
 		{
-			if (i >= MAX_CIRCLE_COUNT) break;
+			if (i >= TelescopeControl::MAX_CIRCLE_COUNT) break;
 			double circle = circleStrings.at(i).toDouble();
 			if (circle > 0.0) circles.append(circle);
 		}

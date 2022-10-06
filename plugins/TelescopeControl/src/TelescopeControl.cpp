@@ -37,17 +37,15 @@
 #include "StelFileMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelIniParser.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelProjector.hpp"
-#include "StelStyle.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelActionMgr.hpp"
+#include "StelJsonParser.hpp"
 
 #include <QDateTime>
 #include <QDir>
@@ -300,7 +298,7 @@ void TelescopeControl::draw(StelCore* core)
 	StelPainter sPainter(prj);
 	sPainter.setFont(labelFont);
 	reticleTexture->bind();
-	for (const auto& telescope : telescopeClients)
+	for (const auto& telescope : qAsConst(telescopeClients))
 	{
 		if (telescope->isConnected() && telescope->hasKnownPosition())
 		{
@@ -587,7 +585,7 @@ void TelescopeControl::loadTelescopeServerExecutables(void)
 	QList<QFileInfo> telescopeServerExecutables = serverDirectory.entryInfoList(QStringList("TelescopeServer*"), (QDir::Files|QDir::Executable|QDir::CaseSensitive), QDir::Name);
 	if(!telescopeServerExecutables.isEmpty())
 	{
-		for (auto telescopeServerExecutable : telescopeServerExecutables)
+		for (auto &telescopeServerExecutable : qAsConst(telescopeServerExecutables))
 			telescopeServers.append(telescopeServerExecutable.baseName());//This strips the ".exe" suffix on Windows
 	}
 	else
@@ -664,9 +662,9 @@ void TelescopeControl::saveConfiguration()
 	settings->setValue("flag_telescope_circles", getFlagTelescopeCircles());
 
 	//Save colours
-	settings->setValue("color_telescope_reticles", getReticleColor().toHtmlColor());
-	settings->setValue("color_telescope_labels", getLabelColor().toHtmlColor());
-	settings->setValue("color_telescope_circles", getCircleColor().toHtmlColor());
+	settings->setValue("color_telescope_reticles", getReticleColor().toStr());
+	settings->setValue("color_telescope_labels",   getLabelColor().toStr());
+	settings->setValue("color_telescope_circles",  getCircleColor().toStr());
 
 	//Save telescope server executables flag and directory
 	settings->setValue("flag_use_server_executables", useServerExecutables);
@@ -1623,7 +1621,7 @@ void TelescopeControl::loadDeviceModels()
 	}
 }
 
-const QHash<QString, DeviceModel>& TelescopeControl::getDeviceModels()
+const QHash<QString, TelescopeControl::DeviceModel>& TelescopeControl::getDeviceModels()
 {
 	return deviceModels;
 }
@@ -1682,9 +1680,12 @@ bool TelescopeControl::setServerExecutablesDirectoryPath(const QString& newPath)
 
 	//If everything is fine...
 	serverExecutablesDirectoryPath = newPath;
+	QSettings *settings=StelApp::getInstance().getSettings();
+	settings->setValue("TelescopeControl/server_executables_path", serverExecutablesDirectoryPath);
 
 	stopAllTelescopes();
 	loadDeviceModels();
+	emit serverExecutablesDirectoryPathChanged(newPath);
 	return true;
 }
 
@@ -1697,6 +1698,7 @@ void TelescopeControl::setFlagUseServerExecutables(bool useExecutables)
 	useServerExecutables = useExecutables;
 	stopAllTelescopes();
 	loadDeviceModels();
+	emit getFlagUseServerExecutablesChanged(useExecutables);
 }
 
 void TelescopeControl::addLogAtSlot(int slot)
@@ -1789,6 +1791,17 @@ QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int 
 
 	return result;
 }
+
+#ifdef Q_OS_WIN
+const QString TelescopeControl::TELESCOPE_SERVER_PATH = QString("/%1.exe");
+#else
+const QString TelescopeControl::TELESCOPE_SERVER_PATH = QString("/%1");
+#endif
+
+const QStringList TelescopeControl::EMBEDDED_TELESCOPE_SERVERS = {
+	"TelescopeServerDummy",
+	"TelescopeServerLx200",
+	"TelescopeServerNexStar"};
 
 void TelescopeControl::translations()
 {

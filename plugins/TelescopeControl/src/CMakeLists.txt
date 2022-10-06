@@ -18,7 +18,6 @@ ELSE()
 ENDIF()
 
 ADD_LIBRARY(TelescopeControl-static STATIC
-    TelescopeControlGlobals.hpp
     TelescopeControl.hpp
     TelescopeControl.cpp
     TelescopeClient.hpp
