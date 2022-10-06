@@ -340,6 +340,8 @@ Planet::~Planet()
 			gl->glDeleteBuffers(1, &sphereVBO);
 		if(ringsVAO)
 			gl->glDeleteBuffers(1, &ringsVBO);
+		if(surveyVBO)
+			gl->glDeleteBuffers(1, &surveyVBO);
 	}
 }
 
@@ -4214,13 +4216,44 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 			v = Mat4d::zrotation(M_PI * 0.5) * v;
 			vertsArray[i] = v.toVec3f();
 		}
-		GL(shader->setAttributeArray(shaderVars->vertex, reinterpret_cast<const GLfloat*>(projectedVertsArray.constData()), 3));
+		if(!surveyVAO)
+		{
+			surveyVAO.reset(new QOpenGLVertexArrayObject);
+			surveyVAO->create();
+			gl->glGenBuffers(1, &surveyVBO);
+		}
+		surveyVAO->bind();
+		gl->glBindBuffer(GL_ARRAY_BUFFER, surveyVBO);
+		gl->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, surveyVBO);
+
+		const auto projectedVertArrSize = projectedVertsArray.size() * GLsizeiptr(sizeof projectedVertsArray[0]);
+
+		const auto modelVertArrOffset = projectedVertArrSize;
+		const auto modelVertArrSize = vertsArray.size() * GLsizeiptr(sizeof vertsArray[0]);
+
+		const auto texCoordsOffset = modelVertArrOffset + modelVertArrSize;
+		const auto texCoordsSize = tex.size() * GLsizeiptr(sizeof tex[0]);
+
+		const auto indicesOffset = texCoordsOffset + texCoordsSize;
+		const auto indicesSize = indices.size() * GLsizeiptr(sizeof indices[0]);
+
+		gl->glBufferData(GL_ARRAY_BUFFER, projectedVertArrSize+modelVertArrSize+texCoordsSize+indicesSize, nullptr, GL_STREAM_DRAW);
+		gl->glBufferSubData(GL_ARRAY_BUFFER, 0, projectedVertArrSize, projectedVertsArray.constData());
+		gl->glBufferSubData(GL_ARRAY_BUFFER, modelVertArrOffset, modelVertArrSize, vertsArray.constData());
+		gl->glBufferSubData(GL_ARRAY_BUFFER, texCoordsOffset, texCoordsSize, tex.constData());
+		gl->glBufferSubData(GL_ARRAY_BUFFER, indicesOffset, indicesSize, indices.constData());
+
+		GL(shader->setAttributeBuffer(shaderVars->vertex, GL_FLOAT, 0, 3));
 		GL(shader->enableAttributeArray(shaderVars->vertex));
-		GL(shader->setAttributeArray(shaderVars->unprojectedVertex, reinterpret_cast<const GLfloat*>(vertsArray.constData()), 3));
+		GL(shader->setAttributeBuffer(shaderVars->unprojectedVertex, GL_FLOAT, modelVertArrOffset, 3));
 		GL(shader->enableAttributeArray(shaderVars->unprojectedVertex));
-		GL(shader->setAttributeArray(shaderVars->texCoord, reinterpret_cast<const GLfloat*>(tex.constData()), 2));
+		GL(shader->setAttributeBuffer(shaderVars->texCoord, GL_FLOAT, texCoordsOffset, 2));
 		GL(shader->enableAttributeArray(shaderVars->texCoord));
-		GL(gl->glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, indices.constData()));
+		GL(gl->glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, reinterpret_cast<void*>(indicesOffset)));
+
+		gl->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		gl->glBindBuffer(GL_ARRAY_BUFFER, 0);
+		surveyVAO->release();
 	});
 
 	// Restore painter state.
