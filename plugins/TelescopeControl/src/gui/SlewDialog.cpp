@@ -30,9 +30,7 @@
 #include "SlewDialog.hpp"
 #include "ui_slewDialog.h"
 #include "TelescopeClient.hpp"
-#include "INDI/TelescopeClientINDI.hpp"
-
-using namespace TelescopeControlGlobals;
+#include "StelJsonParser.hpp"
 
 
 SlewDialog::SlewDialog()

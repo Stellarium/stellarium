@@ -39,8 +39,6 @@
 #include <QStandardItem>
 #include <QRegularExpression>
 
-using namespace TelescopeControlGlobals;
-
 
 TelescopeDialog::TelescopeDialog()
 	: StelDialog("TelescopeControl")
@@ -157,7 +155,7 @@ void TelescopeDialog::createDialogContent()
 	
 	//Populating the list
 	//Cycle the slots
-	for (int slotNumber = MIN_SLOT_NUMBER; slotNumber < SLOT_NUMBER_LIMIT; slotNumber++)
+	for (int slotNumber = TelescopeControl::MIN_SLOT_NUMBER; slotNumber < TelescopeControl::SLOT_NUMBER_LIMIT; slotNumber++)
 	{
 		//Slot #
 		//int slotNumber = (i+1)%SLOT_COUNT;//Making sure slot 0 is last
@@ -228,19 +226,30 @@ void TelescopeDialog::createDialogContent()
 	}
 	updateWarningTexts();
 	
-	if(telescopeCount >= SLOT_COUNT)
+	if(telescopeCount >= TelescopeControl::SLOT_COUNT)
 		ui->pushButtonAdd->setEnabled(false);
 	
 	//Checkboxes
-	ui->checkBoxReticles->setChecked(telescopeManager->getFlagTelescopeReticles());
-	ui->checkBoxLabels->setChecked(telescopeManager->getFlagTelescopeLabels());
-	ui->checkBoxCircles->setChecked(telescopeManager->getFlagTelescopeCircles());
-	ui->checkBoxEnableLogs->setChecked(telescopeManager->getFlagUseTelescopeServerLogs());
-	
+	//ui->checkBoxReticles->setChecked(telescopeManager->getFlagTelescopeReticles());
+	//ui->checkBoxLabels->setChecked(telescopeManager->getFlagTelescopeLabels());
+	//ui->checkBoxCircles->setChecked(telescopeManager->getFlagTelescopeCircles());
+	//ui->checkBoxEnableLogs->setChecked(telescopeManager->getFlagUseTelescopeServerLogs());
+
+	connectBoolProperty(ui->checkBoxReticles, "TelescopeControl.flagTelescopeReticles");
+	connectBoolProperty(ui->checkBoxLabels, "TelescopeControl.flagTelescopeLabels");
+	connectBoolProperty(ui->checkBoxCircles, "TelescopeControl.flagTelescopeCircles");
+	connectColorButton(ui->reticleColorButton, "TelescopeControl.reticleColor", "TelescopeControl/color_telescope_reticles");
+	connectColorButton(ui->labelColorButton,   "TelescopeControl.labelColor",   "TelescopeControl/color_telescope_labels");
+	connectColorButton(ui->circleColorButton,  "TelescopeControl.circleColor",  "TelescopeControl/color_telescope_circles");
+
 	//Telescope server directory
-	ui->checkBoxUseExecutables->setChecked(telescopeManager->getFlagUseServerExecutables());
-	ui->lineEditExecutablesDirectory->setText(telescopeManager->getServerExecutablesDirectoryPath());
-	
+	connectBoolProperty(ui->checkBoxEnableLogs, "TelescopeControl.useTelescopeServerLogs");
+	//ui->checkBoxUseExecutables->setChecked(telescopeManager->getFlagUseServerExecutables());
+	connectBoolProperty(ui->checkBoxUseExecutables, "TelescopeControl.useTelescopeServerExecutables");
+	//ui->lineEditExecutablesDirectory->setText(telescopeManager->getServerExecutablesDirectoryPath());
+
+	connectStringProperty(ui->lineEditExecutablesDirectory, "TelescopeControl.serverExecutablesDirectoryPath");
+
 	//About page
 	setAboutText();
 	
@@ -763,13 +772,13 @@ void TelescopeDialog::buttonConfigurePressed()
 
 void TelescopeDialog::buttonAddPressed()
 {
-	if(telescopeCount >= SLOT_COUNT)
+	if(telescopeCount >= TelescopeControl::SLOT_COUNT)
 		return;
 	
 	configuredTelescopeIsNew = true;
 	
 	//Find the first unoccupied slot (there is at least one)
-	for (configuredSlot = MIN_SLOT_NUMBER; configuredSlot < SLOT_NUMBER_LIMIT; configuredSlot++)
+	for (configuredSlot = TelescopeControl::MIN_SLOT_NUMBER; configuredSlot < TelescopeControl::SLOT_NUMBER_LIMIT; configuredSlot++)
 	{
 		//configuredSlot = (i+1)%SLOT_COUNT;
 		if(telescopeStatus[configuredSlot] == TelescopeControl::StatusNA)
@@ -821,7 +830,7 @@ void TelescopeDialog::buttonRemovePressed()
 	telescopeListModel->removeRow(ui->telescopeTreeView->currentIndex().row());
 	
 	//If there are less than the maximal number of telescopes now, new ones can be added
-	if(telescopeCount < SLOT_COUNT)
+	if(telescopeCount < TelescopeControl::SLOT_COUNT)
 		ui->pushButtonAdd->setEnabled(true);
 	
 	//If there are no telescopes left, disable some buttons
@@ -884,7 +893,7 @@ void TelescopeDialog::saveChanges(QString name, TelescopeControl::ConnectionType
 	ui->telescopeTreeView->sortByColumn(ColumnSlot, Qt::AscendingOrder);
 	
 	//Can't add more telescopes if they have reached the maximum number
-	if (telescopeCount >= SLOT_COUNT)
+	if (telescopeCount >= TelescopeControl::SLOT_COUNT)
 		ui->pushButtonAdd->setEnabled(false);
 	
 	//
@@ -915,7 +924,7 @@ void TelescopeDialog::discardChanges()
 	configurationDialog.setVisible(false);
 	setVisible(true);//Brings the current window to the foreground
 	
-	if (telescopeCount >= SLOT_COUNT)
+	if (telescopeCount >= TelescopeControl::SLOT_COUNT)
 		ui->pushButtonAdd->setEnabled(false);
 	if (telescopeCount == 0)
 		ui->pushButtonRemove->setEnabled(false);
