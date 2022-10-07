@@ -353,7 +353,8 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vSha
 
 	if(!vShader.isEmpty())
 	{
-		if(!program.addShaderFromSourceCode(QOpenGLShader::Vertex,vShader))
+		const auto prefix = StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER);
+		if(!program.addShaderFromSourceCode(QOpenGLShader::Vertex, prefix + vShader))
 		{
 			qCCritical(shaderMgr) << "Unable to compile vertex shader";
 			qCCritical(shaderMgr) << program.log();
@@ -395,7 +396,46 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vSha
 
 	if(!fShader.isEmpty())
 	{
-		if(!program.addShaderFromSourceCode(QOpenGLShader::Fragment,fShader))
+		const auto globalPrefix = StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER);
+		const bool prefixHasVersion = globalPrefix.contains("#version");
+		const bool shaderHasVersion = fShader.contains("#version");
+		QByteArray prefix;
+		QByteArray finalShader = fShader;
+		if(shaderHasVersion && prefixHasVersion)
+		{
+			const auto shaderVersionString = QString(fShader.simplified()).replace(QRegularExpression("^#version ([0-9]+)\\b.*"), "\\1");
+			bool svOK = false;
+			const auto shaderVersion = shaderVersionString.toInt(&svOK);
+
+			const auto prefixVersionString = QString(globalPrefix.simplified()).replace(QRegularExpression("^#version ([0-9]+)\\b.*"), "\\1");
+			bool pvOK = false;
+			const auto prefixVersion = prefixVersionString.toInt(&pvOK);
+
+			if(!svOK)
+				qCCritical(shaderMgr) << "Failed to get shader version, string:" << shaderVersionString;
+
+			if(!pvOK)
+				qCCritical(shaderMgr) << "Failed to get prefix version, string:" << prefixVersionString;
+
+			if(!svOK || !pvOK)
+				return false;
+
+			if(shaderVersion > prefixVersion)
+			{
+				prefix = QString(globalPrefix).replace(QRegularExpression("(^|\n)(#version[ \t]+)([0-9]+)\\b"),
+													   QString("\\1\\2%1").arg(shaderVersion)).toUtf8();
+			}
+			else
+			{
+				prefix = globalPrefix;
+			}
+			finalShader = QString(fShader).replace(QRegularExpression("(^|\n)(#version[ \t]+)([0-9]+)\\b"), "//\\1\\2\\3").toUtf8();
+		}
+		else
+		{
+			prefix = globalPrefix;
+		}
+		if(!program.addShaderFromSourceCode(QOpenGLShader::Fragment, prefix + finalShader))
 		{
 			qCCritical(shaderMgr) << "Unable to compile fragment shader";
 			qCCritical(shaderMgr) << program.log();
