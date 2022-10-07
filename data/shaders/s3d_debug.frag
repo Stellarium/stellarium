@@ -1,4 +1,3 @@
-#version 110
 
 /*
  * Stellarium Scenery3d Plug-in
@@ -31,5 +30,5 @@ uniform vec4 u_vColor;
 
 void main(void)
 {
-    gl_FragColor = u_vColor * gl_Color;
+    FRAG_COLOR = u_vColor * gl_Color;
 }
