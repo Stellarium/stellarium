@@ -21,8 +21,8 @@
   This is the fragment shader for solar system object rendering
  */
 
-varying mediump vec2 texc; //texture coord
-varying highp vec3 P; //original vertex pos in model space
+VARYING mediump vec2 texc; //texture coord
+VARYING highp vec3 P; //original vertex pos in model space
 
 uniform sampler2D tex;
 uniform mediump vec2 poleLat; //latitudes of pole caps, in terms of texture coordinate. x>0...north, y<1...south. 
@@ -49,7 +49,7 @@ uniform bool isRing;
 
 #ifdef SHADOWMAP
 uniform highp sampler2D shadowTex;
-varying highp vec4 shadowCoord;
+VARYING highp vec4 shadowCoord;
 #endif
 
 #if defined(IS_OBJ) || defined(IS_MOON)
@@ -64,12 +64,12 @@ varying highp vec4 shadowCoord;
     uniform mediump float eclipsePush;
     uniform sampler2D normalMap;
 
-    varying highp vec3 normalX;
-    varying highp vec3 normalY;
-    varying highp vec3 normalZ;
+    VARYING highp vec3 normalX;
+    VARYING highp vec3 normalY;
+    VARYING highp vec3 normalZ;
 #else
-    varying mediump float lambertIllum;
-    varying mediump vec3 normalVS; //pre-calculated normals or spherical normals in model space
+    VARYING mediump float lambertIllum;
+    VARYING mediump vec3 normalVS; //pre-calculated normals or spherical normals in model space
 #endif
 
 const highp float M_PI=3.1415926535897932384626433832795;
@@ -333,7 +333,7 @@ void main()
     //apply white rimlight
     finalColor.xyz = clamp( finalColor.xyz + vec3(outgas), 0.0, 1.0);
 
-    gl_FragColor = finalColor;
+    FRAG_COLOR = finalColor;
     //to debug texture issues, uncomment and reload shader
-    //gl_FragColor = texColor;
+    //FRAG_COLOR = texColor;
 }
