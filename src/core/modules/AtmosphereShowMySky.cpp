@@ -270,12 +270,8 @@ void main()
 			qFatal("Failed to open ToneReproducer shader source");
 
 		QOpenGLShader toneReproducerShader(QOpenGLShader::Fragment);
-//		handleCompileStatus(toneReproducerShader.compileSourceFile(":/shaders/xyYToRGB.glsl"),
-//							toneReproducerShader, "ShowMySky atmosphere tone reproducer fragment shader");
-
 		handleCompileStatus(toneReproducerShader.compileSourceCode("#version 330\n\n"+toneRepro.readAll()),
 				toneReproducerShader, "ShowMySky atmosphere tone reproducer fragment shader");
-
 
 		luminanceToScreenProgram_->addShader(&toneReproducerShader);
 

@@ -182,7 +182,7 @@ public:
 				"}\n";
 		QString fragmentCode =
 				"#version 330\n"
-				"out highp vec2 v_texCoord;\n"
+				"in highp vec2 v_texCoord;\n"
 				"uniform sampler2D  u_source;\n"
 				"layout(location=0) out vec4 fragColor;\n"
 				"void main(void)\n"

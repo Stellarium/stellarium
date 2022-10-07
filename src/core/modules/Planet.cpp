@@ -3201,8 +3201,8 @@ bool Planet::initShader()
 				"in vec4 unprojectedVertex;\n"
 			#ifdef DEBUG_SHADOWMAP
 				"attribute mediump vec2 texCoord;\n"
-				"varying mediump vec2 texc; //texture coord\n"
-				"varying highp vec4 pos; //projected pos\n"
+				"out mediump vec2 texc; //texture coord\n"
+				"out highp vec4 pos; //projected pos\n"
 			#endif
 				"void main()\n"
 				"{\n"
@@ -3217,13 +3217,14 @@ bool Planet::initShader()
 #ifdef DEBUG_SHADOWMAP
 	const QByteArray transformFShader(
 				"uniform lowp sampler2D tex;\n"
-				"varying mediump vec2 texc; //texture coord\n"
-				"varying highp vec4 pos; //projected pos\n"
+				"in mediump vec2 texc; //texture coord\n"
+				"in highp vec4 pos; //projected pos\n"
+				"layout(location=0) out vec4 fragColor;\n"
 				"void main()\n"
 				"{\n"
 				"   lowp vec4 texCol = texture2D(tex,texc);\n"
 				"   highp float zNorm = (pos.z + 1.0) / 2.0;\n" //from [-1,1] to [0,1]
-				"   gl_FragColor = vec4(texCol.rgb,zNorm);\n"
+				"   fragColor = vec4(texCol.rgb,zNorm);\n"
 				"}\n"
 				);
 #else
