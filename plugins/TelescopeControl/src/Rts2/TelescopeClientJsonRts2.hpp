@@ -38,7 +38,7 @@ class TelescopeClientJsonRts2 : public TelescopeClient
 public:
 	TelescopeClientJsonRts2(const QString &name, const QString &params, TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000);
 	~TelescopeClientJsonRts2(void) override;
-	virtual bool isConnected(void) const override;
+	bool isConnected(void) const override;
 
 	Vec3d getJ2000EquatorialPos(const StelCore* core=nullptr) const override;
 
@@ -48,7 +48,7 @@ public:
 
 protected:
 	void timerEvent(QTimerEvent *event) override;
-	virtual QString getTelescopeInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
+	QString getTelescopeInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
 
 private:
 	QNetworkAccessManager networkManager;

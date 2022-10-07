@@ -57,7 +57,7 @@ public:
 	
 	//======================================================================
 	// Methods inherited from Server
-	virtual void step(long long int timeout_micros) override;
+	void step(long long int timeout_micros) override;
 	void communicationResetReceived(void);
 	void raReceived(unsigned int ra_int);
 	void decReceived(unsigned int dec_int);
@@ -84,7 +84,7 @@ private:
 	int time_delay;
 	
 	InterpolatedPosition interpolatedPosition;
-	virtual bool hasKnownPosition(void) const override
+	bool hasKnownPosition(void) const override
 	{
 		return interpolatedPosition.isKnown();
 	}

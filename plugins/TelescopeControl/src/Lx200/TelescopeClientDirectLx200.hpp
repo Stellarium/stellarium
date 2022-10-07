@@ -57,7 +57,7 @@ public:
 	
 	//======================================================================
 	// Methods inherited from Server
-	virtual void step(long long int timeout_micros) override;
+	void step(long long int timeout_micros) override;
 	void communicationResetReceived(void);
 	void longFormatUsedReceived(bool long_format);
 	void raReceived(unsigned int ra_int);

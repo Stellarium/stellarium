@@ -42,14 +42,14 @@ protected:
 	void performReading(void);
 	//! Sends the contents of the write buffer over a TCP/IP connection.
 	void performWriting(void);
-	virtual void prepareSelectFds(fd_set &read_fds, fd_set &write_fds, int &fd_max) override;
+	void prepareSelectFds(fd_set &read_fds, fd_set &write_fds, int &fd_max) override;
 	
 private:
 	//! Returns true, as by default Connection implements a TCP/IP connection.
-	virtual bool isTcpConnection(void) const override {return true;}
+	bool isTcpConnection(void) const override {return true;}
 	//! Returns false, as by default Connection implements a TCP/IP connection.
 	virtual bool isAsciiConnection(void) const {return false;}
-	virtual void handleSelectFds(const fd_set &read_fds, const fd_set &write_fds) override;
+	void handleSelectFds(const fd_set &read_fds, const fd_set &write_fds) override;
 	//! Parses the read buffer and handles any messages contained within it.
 	//! If the data contains a Stellarium telescope control command,
 	//! dataReceived() calls the appropriate method of Server.
@@ -58,7 +58,7 @@ private:
 	//! Composes a "MessageCurrentPosition" in the write buffer.
 	//! This is a Stellarium telescope control protocol message containing
 	//! the current right ascension, declination and status of the telescope mount.
-	virtual void sendPosition(unsigned int ra_int, int dec_int, int status) override;
+	void sendPosition(unsigned int ra_int, int dec_int, int status) override;
 	
 protected:
 	char read_buff[120];

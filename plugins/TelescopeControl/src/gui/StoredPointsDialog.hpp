@@ -49,7 +49,7 @@ public:
 	void populatePointsList(QVariantList list);
 
 public slots:
-	virtual void retranslate() override;
+	void retranslate() override;
 
 private slots:
 	void buttonAddPressed();
@@ -66,7 +66,7 @@ signals:
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent() override;
+	void createDialogContent() override;
 	Ui_StoredPoints *ui;
 private:
 	//! @enum ModelColumns This enum defines the number and the order of the columns in the table that lists points
