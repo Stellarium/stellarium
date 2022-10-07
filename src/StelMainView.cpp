@@ -170,23 +170,23 @@ public:
 		Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
 
 		program = new QOpenGLShaderProgram(this);
-		QString vertexCode =
-				"attribute highp vec4 a_pos;\n"
-				"attribute highp vec2 a_texCoord;\n"
-				"varying highp   vec2 v_texCoord;\n"
+		const auto vertexCode = StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) +
+				"ATTRIBUTE highp vec4 a_pos;\n"
+				"ATTRIBUTE highp vec2 a_texCoord;\n"
+				"VARYING highp   vec2 v_texCoord;\n"
 				"void main(void)\n"
 				"{\n"
 				"v_texCoord = a_texCoord;\n"
 				"gl_Position = a_pos;\n"
 				"}\n";
-		QString fragmentCode =
-				"varying highp vec2 v_texCoord;\n"
+		const auto fragmentCode = StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
+				"VARYING highp vec2 v_texCoord;\n"
 				"uniform sampler2D  u_source;\n"
 				"void main(void)\n"
 				"{\n"
 				"	mediump vec3 color = texture2D(u_source, v_texCoord).rgb;\n"
 				"	mediump float luminance = max(max(color.r, color.g), color.b);\n"
-				"	gl_FragColor = vec4(luminance, luminance * 0.3, 0.0, 1.0);\n"
+				"	FRAG_COLOR = vec4(luminance, luminance * 0.3, 0.0, 1.0);\n"
 				"}\n";
 		program->addShaderFromSourceCode(QOpenGLShader::Vertex, vertexCode);
 		program->addShaderFromSourceCode(QOpenGLShader::Fragment, fragmentCode);
