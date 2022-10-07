@@ -35,7 +35,7 @@ OutputBaseFilename=stellarium-@VERSION@-patch-@PACKAGE_VERSION@-@ISS_PACKAGE_PLA
 OutputDir=@CMAKE_SOURCE_DIR@\installers
 ; In 64-bit mode, {pf} is equivalent to {pf64},
 ; see http://www.jrsoftware.org/ishelp/index.php?topic=32vs64bitinstalls
-DDefaultDirName={pf}\Stellarium
+DefaultDirName={pf}\Stellarium
 DefaultGroupName=Stellarium
 UninstallDisplayIcon={app}\data\stellarium.ico
 LicenseFile=@CMAKE_SOURCE_DIR@\COPYING
