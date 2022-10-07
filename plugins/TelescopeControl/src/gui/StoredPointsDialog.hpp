@@ -26,11 +26,6 @@
 
 
 #include "StelDialog.hpp"
-#include "StelCore.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelUtils.hpp"
-#include "AngleSpinBox.hpp"
 
 class Ui_StoredPoints;
 
@@ -48,7 +43,7 @@ class StoredPointsDialog : public StelDialog
 	Q_OBJECT
 
 public:
-	StoredPointsDialog();
+	StoredPointsDialog(const QString &dialogName=QString("TelescopeControlStoredPoints"), QObject* parent=nullptr);
 	~StoredPointsDialog() override;
 
 	void populatePointsList(QVariantList list);

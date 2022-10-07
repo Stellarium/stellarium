@@ -40,7 +40,7 @@ class SlewDialog : public StelDialog
 	Q_OBJECT
 
 public:
-	SlewDialog();
+	SlewDialog(const QString &dialogName=QString("TelescopeDialogSlew"), QObject* parent=nullptr);
 	virtual ~SlewDialog() override;
 
 public slots:

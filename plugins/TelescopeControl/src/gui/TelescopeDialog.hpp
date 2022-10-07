@@ -31,8 +31,6 @@
 #include "TelescopeControl.hpp"
 #include "TelescopeConfigurationDialog.hpp"
 
-//using namespace TelescopeControlGlobals;
-
 class Ui_telescopeDialogForm;
 class TelescopeConfigurationDialog;
 class TelescopeControl;
@@ -41,7 +39,7 @@ class TelescopeDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	TelescopeDialog();
+	TelescopeDialog(const QString &dialogName=QString("TelescopeDialog"), QObject* parent=nullptr);
 	virtual ~TelescopeDialog() override;
 	void updateStyle();
 
@@ -54,8 +52,6 @@ protected:
 	Ui_telescopeDialogForm* ui;
 	
 private:
-
-	
 	//! Update the text and the tooltip of the ChangeStatus button
 	void updateStatusButtonForSlot(int slot);
 	
@@ -78,7 +74,6 @@ private slots:
 	void buttonAddPressed(void);
 	void buttonRemovePressed(void);
 	
-	void checkBoxUseExecutablesToggled(bool);
 	void buttonBrowseServerDirectoryPressed(void);
 	
 	//! Slot for receiving information from TelescopeConfigurationDialog
@@ -105,13 +100,11 @@ private:
 		ColumnCount		//!< total number of columns
 	};
 	
+	TelescopeControl * telescopeManager;
 	QMap<int, QString> statusString;
 	TelescopeConfigurationDialog configurationDialog;
-	
 	QStandardItemModel * telescopeListModel;
-	
-	TelescopeControl * telescopeManager;
-	
+
 	TelescopeControl::TelescopeStatus telescopeStatus[TelescopeControl::SLOT_NUMBER_LIMIT];
 	TelescopeControl::ConnectionType connectionTypes[TelescopeControl::SLOT_NUMBER_LIMIT];
 	
