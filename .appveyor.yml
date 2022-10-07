@@ -74,9 +74,9 @@ after_test:
   - if [%USE_EXT_LIBGLES%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-Win%BITS%.zip -FileName c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip
   - if [%USE_EXT_LIBGLES%]==[true] 7z e c:\stellarium\build-%qtver%-%qtbin%\libGLES.zip -aoa -oc:\stellarium-%qtver%-%qtbin%\qtstuff
   - if [%PUBLISH_BINARY%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-installer
+  - if [%USE_EXTRA_EXE%]==[true] cmake --build c:\stellarium\build-%qtver%-%qtbin%\ --config %configuration% --target stellarium-patch-installer
   - if [%PUBLISH_BINARY%]==[true] cd c:\stellarium\installers
   - if [%PUBLISH_BINARY%]==[true] for %%i in (*.exe) do appveyor PushArtifact %%i
-  - if [%USE_EXTRA_EXE%]==[true] appveyor PushArtifact c:\stellarium\build-%qtver%-%qtbin%\src\Release\Stellarium.exe
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-stable" -and $env:packaging -eq "true" -and $env:qtver.contains('6.')) { $env:SIGNING = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-oldstable" -and $env:packaging -eq "true" -and $env:qtver.contains('5.')) { $env:SIGNING = 'true' }
 
