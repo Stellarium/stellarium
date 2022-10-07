@@ -30,7 +30,7 @@ uniform lowp float u_fAlphaThresh;
 uniform sampler2D u_texDiffuse;
 #endif
 
-varying mediump vec2 v_texcoord;
+VARYING mediump vec2 v_texcoord;
 
 void main(void)
 {

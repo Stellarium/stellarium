@@ -26,9 +26,9 @@ This is a shader that applies cubemapping to pre-transformed geometry
 //this is a samplerCube instead of a sampler2D here
 uniform samplerCube u_texDiffuse;
 
-varying highp vec3 v_texcoord;
+VARYING highp vec3 v_texcoord;
 
 void main(void)
 {
-	gl_FragColor = textureCube(u_texDiffuse, v_texcoord);
+	FRAG_COLOR = textureCube(u_texDiffuse, v_texcoord);
 }
