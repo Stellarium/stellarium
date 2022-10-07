@@ -40,15 +40,15 @@ class TelescopeDialog : public StelDialog
 	Q_OBJECT
 public:
 	TelescopeDialog(const QString &dialogName=QString("TelescopeDialog"), QObject* parent=nullptr);
-	virtual ~TelescopeDialog() override;
+	~TelescopeDialog() override;
 	void updateStyle();
 
 public slots:
-	virtual void retranslate() override;
+	void retranslate() override;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent() override;
+	void createDialogContent() override;
 	Ui_telescopeDialogForm* ui;
 	
 private:

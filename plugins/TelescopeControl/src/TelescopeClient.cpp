@@ -53,7 +53,6 @@ const QString TelescopeClient::TELESCOPECLIENT_TYPE = QStringLiteral("Telescope"
 
 TelescopeClient *TelescopeClient::create(const QString &url)
 {
-
 	// note: in a reg exp, [^:] matches any chararacter except ':'
 	static const QRegularExpression urlSchema("^([^:]*):([^:]*):([^:]*)(?::(.*))?$");
 	QRegularExpressionMatch urlMatch=urlSchema.match(url);
@@ -78,7 +77,6 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 
 	TelescopeClient * newTelescope = nullptr;
 	
-	//if (type == "Dummy")
 	if (type == "TelescopeServerDummy")
 	{
 		newTelescope = new TelescopeClientDummy(name, params);

@@ -59,7 +59,7 @@ public:
 	//!
 	//! The params part is optional.  We use QRegularExpression to validate the url and extract the components.
 	static TelescopeClient *create(const QString &url);
-	virtual ~TelescopeClient(void) override {}
+	~TelescopeClient(void) override {}
 	
 	// Methods inherited from StelObject
 	QString getEnglishName(void) const override {return name;}
@@ -228,7 +228,7 @@ private:
 	int time_delay;
 
 	InterpolatedPosition interpolatedPosition;
-	virtual bool hasKnownPosition(void) const override
+	bool hasKnownPosition(void) const override
 	{
 		return interpolatedPosition.isKnown();
 	}
