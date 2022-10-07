@@ -1205,6 +1205,7 @@ void S3DRenderer::drawFromCubeMap()
 	//transform vertices on CPU side - maybe we could do this multithreaded, kicked off at the beginning of the frame?
 	altAzProjector->project(cubeVertices.count(),cubeVertices.constData(),transformedCubeVertices.data());
 
+	vao.bind();
 	//setup shader params
 	projectionMatrix = altAzProjector->getProjectionMatrix().convertToQMatrix();
 	cubeShader->setUniformValue(shaderManager.uniformLocation(cubeShader,ShaderMgr::UNIFORM_MAT_PROJECTION), projectionMatrix);
@@ -1255,6 +1256,8 @@ void S3DRenderer::drawFromCubeMap()
 		}
 	}
 	cubeIndexBuffer.release();
+
+	vao.release();
 
 	cubeShader->disableAttributeArray(StelOpenGLArray::ATTLOC_TEXCOORD);
 	cubeShader->disableAttributeArray(StelOpenGLArray::ATTLOC_VERTEX);
@@ -1656,6 +1659,8 @@ void S3DRenderer::init()
 	glExtFuncs = new GLExtFuncs();
 	glExtFuncs->init(ctx);
 #endif
+
+	vao.create();
 
 	//save opengl ES state
 	shaderParameters.openglES = ctx->isOpenGLES();
