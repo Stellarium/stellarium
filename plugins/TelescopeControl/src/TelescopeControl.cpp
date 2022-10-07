@@ -1786,8 +1786,11 @@ QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, cons
 	}
 	result.sort();
 	if (result.size()>maxNbItem)
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+		result.erase(result.begin()+maxNbItem, result.end());
+#else
 		result.erase(result.constBegin()+maxNbItem, result.constEnd());
-
+#endif
 	return result;
 }
 
