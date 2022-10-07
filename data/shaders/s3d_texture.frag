@@ -25,9 +25,9 @@ This is a shader that applies a texture to pre-transformed geometry
  
 uniform sampler2D u_texDiffuse;
 
-varying mediump vec2 v_texcoord;
+VARYING mediump vec2 v_texcoord;
 
 void main(void)
 {
-	gl_FragColor = texture2D(u_texDiffuse, v_texcoord);
+	FRAG_COLOR = texture2D(u_texDiffuse, v_texcoord);
 }
