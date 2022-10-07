@@ -264,8 +264,7 @@ void TelescopeControl::deinit()
 	//Destroy all clients first in order to avoid displaying a TCP error
 	deleteAllTelescopes();
 
-	for (auto iterator = telescopeServerProcess.constBegin(); iterator != telescopeServerProcess.constEnd();
-		 ++iterator)
+	for (auto iterator = telescopeServerProcess.constBegin(); iterator != telescopeServerProcess.constEnd(); ++iterator)
 	{
 		int slotNumber = iterator.key();
 #ifdef Q_OS_WIN
@@ -278,7 +277,6 @@ void TelescopeControl::deinit()
 		qDebug() << "[TelescopeControl] deinit(): Server process at slot" << slotNumber << "terminated successfully.";
 	}
 
-	//TODO: Decide if it should be saved on change
 	//Save the configuration on exit
 	saveConfiguration();
 }
@@ -328,7 +326,7 @@ void TelescopeControl::draw(StelCore* core)
 					sPainter.drawText(XY[0], XY[1], telescope->getNameI18n(), 0, 6 + 10, -4, false);
 					//Same position as the other objects: doesn't work, telescope label overlaps object label
 					//sPainter.drawText(XY[0], XY[1], scope->getNameI18n(), 0, 10, 10, false);
-					reticleTexture->bind();
+					//reticleTexture->bind(); // 2022: WHY???
 				}
 			}
 		}
@@ -570,7 +568,8 @@ void TelescopeControl::loadTelescopeServerExecutables(void)
 {
 	telescopeServers = QStringList();
 
-	//TODO: I don't like how this turned out
+	//TODO: I don't like how this turned out (FC, 2010)
+	//FIXME: elaborate on this? (GZ, 2022)
 	if(serverExecutablesDirectoryPath.isEmpty())
 		return;
 
@@ -1027,7 +1026,7 @@ void TelescopeControl::loadTelescopes()
 bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionType, QString name, QString equinox, QString host, int portTCP, int delay, bool connectAtStartup, QList<double> circles, QString deviceModelName, QString portSerial, QString rts2Url, QString rts2Username, QString rts2Password, int rts2Refresh, QString ascomDeviceId, bool ascomUseDeviceEqCoordType)
 {
 	//Validation
-	if(!isValidSlotNumber(slot) || name.isEmpty() || equinox.isEmpty() || connectionType <= ConnectionNA || connectionType >= ConnectionCount)
+	if(!isValidSlotNumber(slot) || name.isEmpty() || equinox.isEmpty() || connectionType <= ConnectionNA || connectionType >= ConnectionTypeCount)
 		return false;
 
 	//Create a new map node and fill it with parameters

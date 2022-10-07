@@ -85,7 +85,7 @@ public:
 	// Methods specific to telescope
 	virtual void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;
 	virtual void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;
-	virtual void telescopeAbortSlew() {}
+	virtual void telescopeAbortSlew() { qWarning() << "Telescope" << getID() << "does not support AbortSlew()!"; }
 
 	//!
 	//! \brief move
@@ -95,8 +95,10 @@ public:
 	virtual void move(double angle, double speed);
 	virtual bool isConnected(void) const = 0;
 	virtual bool hasKnownPosition(void) const = 0;
-	void addOcular(double fov) {if (fov>=0.0) oculars.push_back(fov);}
-	const QList<double> &getOculars(void) const {return oculars;}
+	//! Store field of view for an ocular circle (unrelated to Oculars plugin)
+	void addOcular(double fov) {if (fov>=0.0) ocularFovs.push_back(fov);}
+	//! Retrieve list of fields of view for this telescope
+	const QList<double> &getOculars(void) const {return ocularFovs;}
 	
 	virtual bool prepareCommunication() {return false;}
 	virtual void performCommunication() {}
@@ -121,7 +123,7 @@ private:
 	virtual bool isInitialized(void) const {return true;}
 	float getSelectPriority(const StelCore* core) const override {Q_UNUSED(core) return -10.f;}
 private:
-	QList<double> oculars; // fov of the oculars
+	QList<double> ocularFovs; // fov of the oculars
 };
 
 //! Example Telescope class. A physical telescope does not exist.

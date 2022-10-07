@@ -123,7 +123,7 @@ void ASCOMDevice::abortSlew()
 	hResult = OleMethodCall(pTelescopeDispatch, nullptr, const_cast<wchar_t*>(LAbortSlew));
 	if (FAILED(hResult))
 	{
-		qDebug() << "Could not abort slew for device: " << mAscomDeviceId;
+		qCritical() << "Could not abort slew for device: " << mAscomDeviceId;
 	}
 }
 

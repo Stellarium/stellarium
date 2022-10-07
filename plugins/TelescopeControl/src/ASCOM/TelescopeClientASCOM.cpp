@@ -116,7 +116,7 @@ ASCOMDevice::ASCOMCoordinates TelescopeClientASCOM::j2000PosToAscomCoord(const V
 	{
 		const StelCore* core = StelApp::getInstance().getCore();
 		position = core->j2000ToEquinoxEqu(j2000Pos,
-		  // If telescope dones refraction correction, we don't correct for it in Stellarium
+		  // If telescope does refraction correction, we don't correct for it in Stellarium
 		  mDoesRefraction ? StelCore::RefractionOff : StelCore::RefractionOn);
 	}
 

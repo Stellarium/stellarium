@@ -99,7 +99,7 @@ public:
 		ConnectionRTS2,
 		ConnectionINDI,
 		ConnectionASCOM,
-		ConnectionCount
+		ConnectionTypeCount
 	};
 	Q_ENUM(ConnectionType)
 
@@ -109,8 +109,8 @@ public:
 		StatusConnecting,
 		StatusConnected,
 		StatusDisconnected,
-		StatusStopped,
-		StatusCount
+		StatusStopped
+		//StatusCount
 	};
 	Q_ENUM(TelescopeStatus)
 
