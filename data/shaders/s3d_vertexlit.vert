@@ -50,9 +50,9 @@ uniform mediump vec3 u_vMixTorchDiffuse;
 uniform mediump float u_fTorchAttenuation;
 #endif
 
-attribute vec4 a_vertex;
-attribute vec3 a_normal;
-attribute mediump vec2 a_texcoord;
+ATTRIBUTE vec4 a_vertex;
+ATTRIBUTE vec3 a_normal;
+ATTRIBUTE mediump vec2 a_texcoord;
 
 #if GEOMETRY_SHADER
 #define VAR_TEXCOORD v_texcoordGS
@@ -64,10 +64,10 @@ attribute mediump vec2 a_texcoord;
 #define VAR_SPECILLUMINATION v_specillumination
 #endif
 
-varying mediump vec2 VAR_TEXCOORD;
-varying mediump vec3 VAR_TEXILLUMINATION;
+VARYING mediump vec2 VAR_TEXCOORD;
+VARYING mediump vec3 VAR_TEXILLUMINATION;
 #if MAT_SPECULAR
-varying mediump vec3 VAR_SPECILLUMINATION;
+VARYING mediump vec3 VAR_SPECILLUMINATION;
 #endif
 
 void calcLighting(vec3 normal, vec3 viewPos, out vec3 texIll, out vec3 specIll)
