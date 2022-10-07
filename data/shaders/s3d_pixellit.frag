@@ -284,18 +284,18 @@ uniform vec3 u_vMixTorchDiffuse;
 uniform float u_fTorchAttenuation;
 #endif
 
-varying vec3 v_normal;
-varying vec2 v_texcoord;
-varying vec3 v_lightVec; //light vector, in VIEW or TBN space according to bump settings
-varying vec3 v_viewPos; //position of fragment in view space
+VARYING vec3 v_normal;
+VARYING vec2 v_texcoord;
+VARYING vec3 v_lightVec; //light vector, in VIEW or TBN space according to bump settings
+VARYING vec3 v_viewPos; //position of fragment in view space
 
 #if SHADOWS
 //varying arrays seem to cause some problems, so we use 4 vecs for now...
-varying vec4 v_shadowCoord0;
+VARYING vec4 v_shadowCoord0;
 #if !SINGLE_SHADOW_FRUSTUM
-varying vec4 v_shadowCoord1;
-varying vec4 v_shadowCoord2;
-varying vec4 v_shadowCoord3;
+VARYING vec4 v_shadowCoord1;
+VARYING vec4 v_shadowCoord2;
+VARYING vec4 v_shadowCoord3;
 #endif
 #endif
 
@@ -588,12 +588,12 @@ void main(void)
 	
 #if MAT_DIFFUSETEX
 	#if BLENDING
-	gl_FragColor = vec4(texCol * texVal.rgb + specCol,u_vMatAlpha * texVal.a);
+	FRAG_COLOR = vec4(texCol * texVal.rgb + specCol,u_vMatAlpha * texVal.a);
     #else
-	//gl_FragColor = vec4(texCol * texVal.rgb + specCol, 1.0);
-	gl_FragColor = vec4(texCol * texVal.rgb + specCol, 1.0);
+	//FRAG_COLOR = vec4(texCol * texVal.rgb + specCol, 1.0);
+	FRAG_COLOR = vec4(texCol * texVal.rgb + specCol, 1.0);
 	#endif
 #else
-	gl_FragColor = vec4(texCol + specCol,u_vMatAlpha); //u_vMatAlpha is automatically set to 1.0 if blending is disabled
+	FRAG_COLOR = vec4(texCol + specCol,u_vMatAlpha); //u_vMatAlpha is automatically set to 1.0 if blending is disabled
 #endif
 }
