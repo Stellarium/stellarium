@@ -55,7 +55,8 @@ AtmospherePreetham::AtmospherePreetham(Skylight& sky)
 		QFile toneRepro(":/shaders/xyYToRGB.glsl");
 		if(!toneRepro.open(QFile::ReadOnly))
 			qFatal("Failed to open ToneReproducer shader source");
-		if (!vShader.compileSourceCode(vert.readAll()+toneRepro.readAll()))
+		if (!vShader.compileSourceCode(StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) +
+									   vert.readAll()+toneRepro.readAll()))
 			qFatal("Error while compiling atmosphere vertex shader: %s", vShader.log().toLatin1().constData());
 	}
 	if (!vShader.log().isEmpty())
@@ -64,11 +65,12 @@ AtmospherePreetham::AtmospherePreetham(Skylight& sky)
 	}
 	QOpenGLShader fShader(QOpenGLShader::Fragment);
 	if (!fShader.compileSourceCode(
+					StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
 					makeDitheringShader()+
-					"varying mediump vec3 resultSkyColor;\n"
+					"VARYING mediump vec3 resultSkyColor;\n"
 					"void main()\n"
 					"{\n"
-					 "   gl_FragColor = vec4(dither(resultSkyColor), 1.);\n"
+					 "   FRAG_COLOR = vec4(dither(resultSkyColor), 1.);\n"
 					 "}"))
 	{
 		qFatal("Error while compiling Preetham atmosphere fragment shader: %s", fShader.log().toLatin1().constData());
