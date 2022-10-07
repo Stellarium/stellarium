@@ -35,7 +35,9 @@
 #include "Landscape.hpp"
 
 #include <QOpenGLContext>
+#include <QOpenGLVertexArrayObject>
 #include <QOpenGLShaderProgram>
+#include <QOpenGLBuffer>
 #include <QStringList>
 #include <QSettings>
 #include <QDebug>
@@ -48,6 +50,8 @@
 StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	core(acore),
 	eye(acore->getToneReproducer()),
+	vao(new QOpenGLVertexArrayObject),
+	vbo(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer)),
 	maxAdaptFov(180.f),
 	minAdaptFov(0.1f),
 	lnfovFactor(0.f),
@@ -160,12 +164,13 @@ void StelSkyDrawer::init()
 	// Create shader program
 	QOpenGLShader vshader(QOpenGLShader::Vertex);
 	const char *vsrc =
-		"attribute mediump vec2 pos;\n"
-		"attribute mediump vec2 texCoord;\n"
-		"attribute mediump vec3 color;\n"
+		"#version 330\n"
+		"in mediump vec2 pos;\n"
+		"in mediump vec2 texCoord;\n"
+		"in mediump vec3 color;\n"
 		"uniform mediump mat4 projectionMatrix;\n"
-		"varying mediump vec2 texc;\n"
-		"varying mediump vec3 outColor;\n"
+		"out mediump vec2 texc;\n"
+		"out mediump vec3 outColor;\n"
 		"void main(void)\n"
 		"{\n"
 		"    gl_Position = projectionMatrix * vec4(pos.x, pos.y, 0, 1);\n"
@@ -177,12 +182,14 @@ void StelSkyDrawer::init()
 
 	QOpenGLShader fshader(QOpenGLShader::Fragment);
 	const char *fsrc =
-		"varying mediump vec2 texc;\n"
-		"varying mediump vec3 outColor;\n"
+		"#version 330\n"
+		"in mediump vec2 texc;\n"
+		"in mediump vec3 outColor;\n"
 		"uniform sampler2D tex;\n"
+		"layout(location=0) out vec4 fragColor;\n"
 		"void main(void)\n"
 		"{\n"
-		"    gl_FragColor = texture2D(tex, texc)*vec4(outColor, 1.);\n"
+		"    fragColor = texture(tex, texc)*vec4(outColor, 1.);\n"
 		"}\n";
 	fshader.compileSourceCode(fsrc);
 	if (!fshader.log().isEmpty()) { qWarning() << "StelSkyDrawer::init(): Warnings while compiling fshader: " << fshader.log(); }
@@ -196,6 +203,21 @@ void StelSkyDrawer::init()
 	starShaderVars.pos = starShaderProgram->attributeLocation("pos");
 	starShaderVars.color = starShaderProgram->attributeLocation("color");
 	starShaderVars.texture = starShaderProgram->uniformLocation("tex");
+
+	vao->create();
+	vao->bind();
+	vbo->create();
+	vbo->bind();
+	vbo->setUsagePattern(QOpenGLBuffer::StreamDraw);
+	vbo->allocate(maxPointSources*6*sizeof(StarVertex) + maxPointSources*6*2);
+	starShaderProgram->setAttributeBuffer(starShaderVars.pos, GL_FLOAT, 0, 2, sizeof(StarVertex));
+	starShaderProgram->setAttributeBuffer(starShaderVars.color, GL_UNSIGNED_BYTE, offsetof(StarVertex,color), 3, sizeof(StarVertex));
+	starShaderProgram->setAttributeBuffer(starShaderVars.texCoord, GL_UNSIGNED_BYTE, maxPointSources*6*sizeof(StarVertex), 2, 0);
+	starShaderProgram->enableAttributeArray(starShaderVars.pos);
+	starShaderProgram->enableAttributeArray(starShaderVars.color);
+	starShaderProgram->enableAttributeArray(starShaderVars.texCoord);
+	vbo->release();
+	vao->release();
 
 	update(0);
 }
@@ -397,20 +419,18 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 	const Mat4f& m = sPainter->getProjector()->getProjectionMatrix();
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
 	
+	vbo->bind();
+	vbo->write(0, vertexArray, nbPointSources*6*sizeof(StarVertex));
+	vbo->write(maxPointSources*6*sizeof(StarVertex), textureCoordArray, nbPointSources*6*2);
+	vbo->release();
+
 	starShaderProgram->bind();
-	starShaderProgram->setAttributeArray(starShaderVars.pos, GL_FLOAT, reinterpret_cast<GLfloat*>(vertexArray), 2, sizeof(StarVertex));
-	starShaderProgram->enableAttributeArray(starShaderVars.pos);
-	starShaderProgram->setAttributeArray(starShaderVars.color, GL_UNSIGNED_BYTE, reinterpret_cast<GLubyte*>(&(vertexArray[0].color)), 3, sizeof(StarVertex));
-	starShaderProgram->enableAttributeArray(starShaderVars.color);
 	starShaderProgram->setUniformValue(starShaderVars.projectionMatrix, qMat);
-	starShaderProgram->setAttributeArray(starShaderVars.texCoord, GL_UNSIGNED_BYTE, static_cast<GLubyte*>(textureCoordArray), 2, 0);
-	starShaderProgram->enableAttributeArray(starShaderVars.texCoord);
 	
+	vao->bind();
 	glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(nbPointSources)*6);
-	
-	starShaderProgram->disableAttributeArray(starShaderVars.pos);
-	starShaderProgram->disableAttributeArray(starShaderVars.color);
-	starShaderProgram->disableAttributeArray(starShaderVars.texCoord);
+	vao->release();
+
 	starShaderProgram->release();
 	
 	nbPointSources = 0;

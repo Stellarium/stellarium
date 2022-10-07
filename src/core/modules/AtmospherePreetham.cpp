@@ -65,10 +65,11 @@ AtmospherePreetham::AtmospherePreetham(Skylight& sky)
 	QOpenGLShader fShader(QOpenGLShader::Fragment);
 	if (!fShader.compileSourceCode(
 					makeDitheringShader()+
-					"varying mediump vec3 resultSkyColor;\n"
+					"in mediump vec3 resultSkyColor;\n"
+					"layout(location=0) out vec4 fragColor;\n"
 					"void main()\n"
 					"{\n"
-					 "   gl_FragColor = vec4(dither(resultSkyColor), 1.);\n"
+					 "   fragColor = vec4(dither(resultSkyColor), 1.);\n"
 					 "}"))
 	{
 		qFatal("Error while compiling Preetham atmosphere fragment shader: %s", fShader.log().toLatin1().constData());
@@ -109,6 +110,8 @@ AtmospherePreetham::AtmospherePreetham(Skylight& sky)
 	GL(shaderAttribLocations.skyVertex = atmoShaderProgram->attributeLocation("skyVertex"));
 	GL(shaderAttribLocations.skyColor = atmoShaderProgram->attributeLocation("skyColor"));
 	GL(atmoShaderProgram->release());
+
+	GL(vao.create());
 }
 
 AtmospherePreetham::~AtmospherePreetham(void)
@@ -189,6 +192,17 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 		colorGridBuffer.bind();
 		colorGridBuffer.allocate(colorGrid, static_cast<int>((1+skyResolutionX)*(1+skyResolutionY)*4*4));
 		colorGridBuffer.release();
+
+		GL(vao.bind());
+		GL(colorGridBuffer.bind());
+		GL(atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyColor, GL_FLOAT, 0, 4, 0));
+		GL(colorGridBuffer.release());
+		GL(atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyColor));
+		GL(posGridBuffer.bind());
+		GL(atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyVertex, GL_FLOAT, 0, 2, 0));
+		GL(posGridBuffer.release());
+		GL(atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyVertex));
+		GL(vao.release());
 	}
 
 	auto sunPos  =  sun.getAltAzPosAuto(core);
@@ -412,16 +426,9 @@ void AtmospherePreetham::draw(StelCore* core)
 	gl.glBindTexture(GL_TEXTURE_2D, ditherPatternTex);
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.ditherPattern, 1));
 	
-	GL(colorGridBuffer.bind());
-	GL(atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyColor, GL_FLOAT, 0, 4, 0));
-	GL(colorGridBuffer.release());
-	GL(atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyColor));
-	GL(posGridBuffer.bind());
-	GL(atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyVertex, GL_FLOAT, 0, 2, 0));
-	GL(posGridBuffer.release());
-	GL(atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyVertex));
 
 	// And draw everything at once
+	GL(vao.bind());
 	GL(indicesBuffer.bind());
 	std::size_t shift=0;
 	for (unsigned int y=0;y<skyResolutionY;++y)
@@ -430,9 +437,8 @@ void AtmospherePreetham::draw(StelCore* core)
 		shift += static_cast<size_t>((skyResolutionX+1)*2*2);
 	}
 	GL(indicesBuffer.release());
+	GL(vao.release());
 	
-	GL(atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyVertex));
-	GL(atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyColor));
 	GL(atmoShaderProgram->release());
 	// debug output
 	// sPainter.setColor(0.7f, 0.7f, 0.7f);

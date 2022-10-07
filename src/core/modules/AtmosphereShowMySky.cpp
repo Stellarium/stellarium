@@ -265,9 +265,18 @@ void main()
 							"ShowMySky atmosphere dithering shader");
 		luminanceToScreenProgram_->addShader(&ditherShader);
 
+		QFile toneRepro(":/shaders/xyYToRGB.glsl");
+		if(!toneRepro.open(QFile::ReadOnly))
+			qFatal("Failed to open ToneReproducer shader source");
+
 		QOpenGLShader toneReproducerShader(QOpenGLShader::Fragment);
-		handleCompileStatus(toneReproducerShader.compileSourceFile(":/shaders/xyYToRGB.glsl"),
-							toneReproducerShader, "ShowMySky atmosphere tone reproducer fragment shader");
+//		handleCompileStatus(toneReproducerShader.compileSourceFile(":/shaders/xyYToRGB.glsl"),
+//							toneReproducerShader, "ShowMySky atmosphere tone reproducer fragment shader");
+
+		handleCompileStatus(toneReproducerShader.compileSourceCode("#version 330\n\n"+toneRepro.readAll()),
+				toneReproducerShader, "ShowMySky atmosphere tone reproducer fragment shader");
+
+
 		luminanceToScreenProgram_->addShader(&toneReproducerShader);
 
 		QOpenGLShader luminanceToScreenShader(QOpenGLShader::Fragment);

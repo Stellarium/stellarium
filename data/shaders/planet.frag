@@ -21,8 +21,10 @@
   This is the fragment shader for solar system object rendering
  */
 
-varying mediump vec2 texc; //texture coord
-varying highp vec3 P; //original vertex pos in model space
+layout(location=0) out vec4 fragColor;
+
+in mediump vec2 texc; //texture coord
+in highp vec3 P; //original vertex pos in model space
 
 uniform sampler2D tex;
 uniform mediump vec2 poleLat; //latitudes of pole caps, in terms of texture coordinate. x>0...north, y<1...south. 
@@ -49,7 +51,7 @@ uniform bool isRing;
 
 #ifdef SHADOWMAP
 uniform highp sampler2D shadowTex;
-varying highp vec4 shadowCoord;
+in highp vec4 shadowCoord;
 #endif
 
 #if defined(IS_OBJ) || defined(IS_MOON)
@@ -64,12 +66,12 @@ varying highp vec4 shadowCoord;
     uniform mediump float eclipsePush;
     uniform sampler2D normalMap;
 
-    varying highp vec3 normalX;
-    varying highp vec3 normalY;
-    varying highp vec3 normalZ;
+    in highp vec3 normalX;
+    in highp vec3 normalY;
+    in highp vec3 normalZ;
 #else
-    varying mediump float lambertIllum;
-    varying mediump vec3 normalVS; //pre-calculated normals or spherical normals in model space
+    in mediump float lambertIllum;
+    in mediump vec3 normalVS; //pre-calculated normals or spherical normals in model space
 #endif
 
 const highp float M_PI=3.1415926535897932384626433832795;
@@ -89,7 +91,7 @@ lowp float offset_lookup(in highp sampler2D sTex, in highp vec4 loc, in highp ve
     //I'm 99% certain this is some bug in the GL driver, 
     //because adding ANY bias here makes it work correctly
     //It should have no effect on platforms which don't have this bug
-    highp float texVal = texture2DProj(sTex, coords, -1000.0).r;
+    highp float texVal = textureProj(sTex, coords, -1000.0).r;
     //perform shadow comparison
     return texVal > (loc.z-zbias)/loc.w ? 1.0 : 0.0;
 }
@@ -199,7 +201,7 @@ void main()
                 if(ring_radius > innerRadius && ring_radius < outerRadius)
                 {
                     ring_radius = (ring_radius - innerRadius) / (outerRadius - innerRadius);
-                    lowp float ringAlpha = texture2D(ringS, vec2(ring_radius, 0.5)).w;
+                    lowp float ringAlpha = texture(ringS, vec2(ring_radius, 0.5)).w;
                     final_illumination = 1.0 - ringAlpha;
                 }
             }
@@ -260,7 +262,7 @@ void main()
     }
 
 #ifdef IS_MOON
-    mediump vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);
+    mediump vec3 normal = texture(normalMap, texc).rgb-vec3(0.5, 0.5, 0);
     normal = normalize(normalX*normal.x+normalY*normal.y+normalZ*normal.z);
     // normal now contains the real surface normal taking normal map into account
 #else
@@ -298,7 +300,7 @@ void main()
     //apply texture-colored rimlight
     //litColor.xyz = clamp( litColor.xyz + vec3(outgas), 0.0, 1.0);
 
-    lowp vec4 texColor = texture2D(tex, texc);
+    lowp vec4 texColor = texture(tex, texc);
 
     mediump vec4 finalColor = texColor;
 	// apply (currently only Martian) pole caps. texc.t=0 at south pole, 1 at north pole. 
@@ -319,7 +321,7 @@ void main()
 #ifdef IS_MOON
     if(final_illumination < 0.9999)
     {
-        lowp vec4 shadowColor = texture2D(earthShadow, vec2(final_illumination, 0.5));
+        lowp vec4 shadowColor = texture(earthShadow, vec2(final_illumination, 0.5));
         finalColor =
 		eclipsePush*(1.0-0.75*shadowColor.a)*
 		mix(finalColor * litColor, shadowColor, clamp(shadowColor.a, 0.0, 0.7)); // clamp alpha to allow some maria detail.
@@ -333,7 +335,7 @@ void main()
     //apply white rimlight
     finalColor.xyz = clamp( finalColor.xyz + vec3(outgas), 0.0, 1.0);
 
-    gl_FragColor = finalColor;
+    fragColor = finalColor;
     //to debug texture issues, uncomment and reload shader
     //gl_FragColor = texColor;
 }

@@ -126,7 +126,7 @@ public:
 		qDebug() << "OpenGL supported version: " << QString(reinterpret_cast<const char*>(ctx->functions()->glGetString(GL_VERSION)));
 		qDebug() << "Current Format: " << this->format();
 
-		if (qApp->property("onetime_compat33")==true)
+		if (qApp->property("onetime_opengl_compat").toBool())
 		{
 			// This may not return the version number set previously!
 			qDebug() << "StelGLWidget context format version:" << ctx->format().majorVersion() << "." << context()->format().minorVersion();
@@ -164,28 +164,32 @@ class NightModeGraphicsEffect : public QGraphicsEffect
 public:
 	NightModeGraphicsEffect(StelMainView* parent = Q_NULLPTR)
 		: QGraphicsEffect(parent),
-		  parent(parent), fbo(Q_NULLPTR)
+		  parent(parent), fbo(Q_NULLPTR),
+		  vbo(QOpenGLBuffer::VertexBuffer)
 	{
 		Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
 
 		program = new QOpenGLShaderProgram(this);
 		QString vertexCode =
-				"attribute highp vec4 a_pos;\n"
-				"attribute highp vec2 a_texCoord;\n"
-				"varying highp   vec2 v_texCoord;\n"
+				"#version 330\n"
+				"in highp vec4 a_pos;\n"
+				"in highp vec2 a_texCoord;\n"
+				"out highp   vec2 v_texCoord;\n"
 				"void main(void)\n"
 				"{\n"
-				"v_texCoord = a_texCoord;\n"
-				"gl_Position = a_pos;\n"
+				"	v_texCoord = a_texCoord;\n"
+				"	gl_Position = a_pos;\n"
 				"}\n";
 		QString fragmentCode =
-				"varying highp vec2 v_texCoord;\n"
+				"#version 330\n"
+				"out highp vec2 v_texCoord;\n"
 				"uniform sampler2D  u_source;\n"
+				"layout(location=0) out vec4 fragColor;\n"
 				"void main(void)\n"
 				"{\n"
-				"	mediump vec3 color = texture2D(u_source, v_texCoord).rgb;\n"
+				"	mediump vec3 color = texture(u_source, v_texCoord).rgb;\n"
 				"	mediump float luminance = max(max(color.r, color.g), color.b);\n"
-				"	gl_FragColor = vec4(luminance, luminance * 0.3, 0.0, 1.0);\n"
+				"	fragColor = vec4(luminance, luminance * 0.3, 0.0, 1.0);\n"
 				"}\n";
 		program->addShaderFromSourceCode(QOpenGLShader::Vertex, vertexCode);
 		program->addShaderFromSourceCode(QOpenGLShader::Fragment, fragmentCode);
@@ -193,6 +197,24 @@ public:
 		vars.pos = program->attributeLocation("a_pos");
 		vars.texCoord = program->attributeLocation("a_texCoord");
 		vars.source = program->uniformLocation("u_source");
+
+		vao.create();
+		vbo.create();
+		struct VBOData
+		{
+			const GLfloat pos[8] = {-1, -1, +1, -1, -1, +1, +1, +1};
+			const GLfloat texCoord[8] = {0, 0, 1, 0, 0, 1, 1, 1};
+		} vboData;
+		vao.bind();
+		vbo.bind();
+		vbo.setUsagePattern(QOpenGLBuffer::StaticDraw);
+		vbo.allocate(&vboData.pos, sizeof vboData);
+		program->setAttributeBuffer(vars.pos, GL_FLOAT, 0, 2, 0);
+		program->setAttributeBuffer(vars.texCoord, GL_FLOAT, offsetof(VBOData, texCoord), 2, 0);
+		program->enableAttributeArray(vars.pos);
+		program->enableAttributeArray(vars.texCoord);
+		vbo.release();
+		vao.release();
 	}
 
 	virtual ~NightModeGraphicsEffect() Q_DECL_OVERRIDE
@@ -246,19 +268,15 @@ protected:
 
 		painter->begin(paintDevice);
 
+		vao.bind();
 		//painter->beginNativePainting();
 		program->bind();
-		const GLfloat pos[] = {-1, -1, +1, -1, -1, +1, +1, +1};
-		const GLfloat texCoord[] = {0, 0, 1, 0, 0, 1, 1, 1};
 		program->setUniformValue(vars.source, 0);
-		program->setAttributeArray(vars.pos, pos, 2);
-		program->setAttributeArray(vars.texCoord, texCoord, 2);
-		program->enableAttributeArray(vars.pos);
-		program->enableAttributeArray(vars.texCoord);
 		gl->glBindTexture(GL_TEXTURE_2D, fbo->texture());
 		gl->glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		program->release();
 		//painter->endNativePainting();
+		vao.release();
 	}
 
 private:
@@ -270,6 +288,8 @@ private:
 		int texCoord;
 		int source;
 	} vars;
+	QOpenGLVertexArrayObject vao;
+	QOpenGLBuffer vbo;
 };
 
 class StelGraphicsScene : public QGraphicsScene
@@ -618,34 +638,7 @@ StelMainView::StelMainView(QSettings* settings)
 	}
 #endif
 
-	//get the desired opengl format parameters
 	QSurfaceFormat glFormat = getDesiredGLFormat(configuration);
-	// VSync control
-	#ifdef Q_OS_MACOS
-	// FIXME: workaround for bug LP:#1705832 (https://bugs.launchpad.net/stellarium/+bug/1705832)
-	// Qt: https://bugreports.qt.io/browse/QTBUG-53273
-	const bool vsdef = false; // use vsync=false by default on macOS
-	#else
-	const bool vsdef = true;
-	#endif
-	if (configuration->value("video/vsync", vsdef).toBool())
-		glFormat.setSwapInterval(1);
-	else
-		glFormat.setSwapInterval(0);
-
-	qDebug()<<"Desired surface format: "<<glFormat;
-
-	//we set the default format to our required format, if possible
-	//this only works with Qt 5.4+
-	QSurfaceFormat defFmt = glFormat;
-	//we don't need these buffers in the background
-	defFmt.setAlphaBufferSize(0);
-	defFmt.setStencilBufferSize(0);
-	defFmt.setDepthBufferSize(0);
-	qDebug() << "setDefaultFormat";
-	QSurfaceFormat::setDefaultFormat(defFmt); // Causes a warning in Qt5.
-
-	//QOpenGLWidget should set the format in constructor to prevent creating an unnecessary temporary context
 	glWidget = new StelGLWidget(glFormat, this);
 	setViewport(glWidget);
 
@@ -741,56 +734,58 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 	QSurfaceFormat fmt = QSurfaceFormat::defaultFormat();
 	qDebug() << "Default surface format: " << fmt;
 
-	#ifdef Q_OS_MACOS
-	fmt.setMajorVersion(3);
-	fmt.setMinorVersion(3);
-	fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
-	#else
 	//if on an GLES build, do not set the format
-	const QOpenGLContext::OpenGLModuleType openGLModuleType=QOpenGLContext::openGLModuleType();
+	const auto openGLModuleType = QOpenGLContext::openGLModuleType();
+	qDebug() << "OpenGL module type:" << openGLModuleType;
 	if (openGLModuleType==QOpenGLContext::LibGL)
 	{
-		// OGL 2.1 + FBOs should basically be the minimum required for Stellarium
 		fmt.setRenderableType(QSurfaceFormat::OpenGL);
-		fmt.setMajorVersion(2);
-		fmt.setMinorVersion(1);
-		if (qApp->property("onetime_compat33")==true)
+		fmt.setMajorVersion(3);
+		fmt.setMinorVersion(3);
+		fmt.setProfile(QSurfaceFormat::CoreProfile);
+
+		if (qApp && qApp->property("onetime_opengl_compat").toBool())
 		{
-			// Observations: 3.2:core has a transparent window. No black sky, no lines, but line labels. (on Qt6)
-			qDebug() << "Setting 3.3 compatibility profile from command line...";
-			fmt.setMajorVersion(3);
-			fmt.setMinorVersion(3);
+			qDebug() << "Setting OpenGL Compatibility profile from command line...";
 			fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
 		}
-		// The following is NOT needed (or even supported) when we request a 2.1 context
-		// The implementation may give us a newer context,
-		// but compatibility with 2.1 should be ensured automatically
-		//fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
-		//fmt.setOption(QSurfaceFormat::DeprecatedFunctions);
 	}
-	#endif
 
 	// Note: this only works if --mesa-mode was given on the command line. Auto-switch to Mesa or the driver name apparently cannot be detected at this early stage.
-	const bool isMesa= (QString(getenv("QT_OPENGL"))=="software");
+	const bool isMesa = QString(getenv("QT_OPENGL"))=="software";
 
 	//request some sane buffer formats
 	fmt.setRedBufferSize(8);
 	fmt.setGreenBufferSize(8);
 	fmt.setBlueBufferSize(8);
-	fmt.setAlphaBufferSize(8);
 	fmt.setDepthBufferSize(24);
-	//Stencil buffer seems necessary for GUI boxes
-	fmt.setStencilBufferSize(8);
-	const int multisamplingLevel = configuration->value("video/multisampling", 0).toInt();
-	if(  multisamplingLevel  && (qApp->property("spout").toString() == "none") && (!isMesa) )
+
+	if(qApp && qApp->property("onetime_single_buffer").toBool())
+		fmt.setSwapBehavior(QSurfaceFormat::SingleBuffer);
+
+	const int multisamplingLevel = configuration ? configuration->value("video/multisampling", 0).toInt() : 0;
+	if(multisamplingLevel && qApp && qApp->property("spout").toString() == "none" && !isMesa)
 		fmt.setSamples(multisamplingLevel);
+
+	// VSync control. NOTE: it must be applied to the default format (QSurfaceFormat::setDefaultFormat) to take effect.
+#ifdef Q_OS_MACOS
+	// FIXME: workaround for bug LP:#1705832 (https://bugs.launchpad.net/stellarium/+bug/1705832)
+	// Qt: https://bugreports.qt.io/browse/QTBUG-53273
+	const bool vsdef = false; // use vsync=false by default on macOS
+#else
+	const bool vsdef = true;
+#endif
+	if (configuration->value("video/vsync", vsdef).toBool())
+		fmt.setSwapInterval(1);
+	else
+		fmt.setSwapInterval(0);
 
 #ifdef OPENGL_DEBUG_LOGGING
 	//try to enable GL debugging using GL_KHR_debug
 	fmt.setOption(QSurfaceFormat::DebugContext);
 #endif
-	//vsync needs to be set on the default format for it to work
-	//fmt.setSwapInterval(0);
+
+	fmt.setColorSpace(QSurfaceFormat::sRGBColorSpace);
 
 	return fmt;
 }
@@ -829,6 +824,10 @@ void StelMainView::init()
 	glInfo.functions = glInfo.mainContext->functions();
 	glInfo.vendor = QString(reinterpret_cast<const char*>(glInfo.functions->glGetString(GL_VENDOR)));
 	glInfo.renderer = QString(reinterpret_cast<const char*>(glInfo.functions->glGetString(GL_RENDERER)));
+	const auto format = glInfo.mainContext->format();
+	glInfo.supportsLuminanceTextures = format.profile() == QSurfaceFormat::CompatibilityProfile ||
+									   format.majorVersion() < 3;
+	qDebug().nospace() << "Luminance textures are " << (glInfo.supportsLuminanceTextures ? "" : "not ") << "supported";
 
 	gui = new StelGui();
 

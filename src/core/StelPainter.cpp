@@ -35,7 +35,9 @@
 #include <QVarLengthArray>
 #include <QPaintEngine>
 #include <QCache>
+#include <QOpenGLVertexArrayObject>
 #include <QOpenGLPaintDevice>
+#include <QOpenGLBuffer>
 #include <QOpenGLShader>
 #include <QOpenGLTexture>
 #include <QApplication>
@@ -121,7 +123,12 @@ StelPainter::DitheringMode StelPainter::parseDitheringMode(QString const& str)
 	return DitheringMode::Disabled;
 }
 
-StelPainter::StelPainter(const StelProjectorP& proj) : QOpenGLFunctions(QOpenGLContext::currentContext()), glState(this)
+StelPainter::StelPainter(const StelProjectorP& proj)
+	: QOpenGLFunctions(QOpenGLContext::currentContext())
+	, glState(this)
+	, vao(new QOpenGLVertexArrayObject)
+	, verticesVBO(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer))
+	, indicesVBO(new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer))
 {
 	Q_ASSERT(proj);
 
@@ -157,6 +164,12 @@ StelPainter::StelPainter(const StelProjectorP& proj) : QOpenGLFunctions(QOpenGLC
 		conf->setValue("video/dithering_mode", defaultValue);
 	}
 	ditheringMode = parseDitheringMode(selectedDitherFormat.toString());
+
+	vao->create();
+	indicesVBO->create();
+	indicesVBO->setUsagePattern(QOpenGLBuffer::StreamDraw);
+	verticesVBO->create();
+	verticesVBO->setUsagePattern(QOpenGLBuffer::StreamDraw);
 }
 
 void StelPainter::setProjector(const StelProjectorP& p)
@@ -2044,7 +2057,8 @@ void StelPainter::initGLShaders()
 	// Basic shader: just vertex filled with plain color
 	QOpenGLShader vshader3(QOpenGLShader::Vertex);
 	const char *vsrc3 =
-		"attribute mediump vec3 vertex;\n"
+		"#version 330\n"
+		"in mediump vec3 vertex;\n"
 		"uniform mediump mat4 projectionMatrix;\n"
 		"void main(void)\n"
 		"{\n"
@@ -2054,10 +2068,12 @@ void StelPainter::initGLShaders()
 	if (!vshader3.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling vshader3: " << vshader3.log(); }
 	QOpenGLShader fshader3(QOpenGLShader::Fragment);
 	const char *fsrc3 =
+		"#version 330\n"
 		"uniform mediump vec4 color;\n"
+		"layout(location=0) out vec4 fragColor;\n"
 		"void main(void)\n"
 		"{\n"
-		"    gl_FragColor = color;\n"
+		"    fragColor = color;\n"
 		"}\n";
 	fshader3.compileSourceCode(fsrc3);
 	if (!fshader3.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshader3: " << fshader3.log(); }
@@ -2073,10 +2089,11 @@ void StelPainter::initGLShaders()
 	// Basic shader: vertex filled with interpolated color
 	QOpenGLShader vshaderInterpolatedColor(QOpenGLShader::Vertex);
 	const char *vshaderInterpolatedColorSrc =
-		"attribute mediump vec3 vertex;\n"
-		"attribute mediump vec4 color;\n"
+		"#version 330\n"
+		"in mediump vec3 vertex;\n"
+		"in mediump vec4 color;\n"
 		"uniform mediump mat4 projectionMatrix;\n"
-		"varying mediump vec4 fragcolor;\n"
+		"out mediump vec4 fragcolor;\n"
 		"void main(void)\n"
 		"{\n"
 		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
@@ -2088,10 +2105,12 @@ void StelPainter::initGLShaders()
 	}
 	QOpenGLShader fshaderInterpolatedColor(QOpenGLShader::Fragment);
 	const char *fshaderInterpolatedColorSrc =
-		"varying mediump vec4 fragcolor;\n"
+		"#version 330\n"
+		"in mediump vec4 fragcolor;\n"
+		"layout(location=0) out vec4 fragColor;\n"
 		"void main(void)\n"
 		"{\n"
-		"    gl_FragColor = fragcolor;\n"
+		"    fragColor = fragcolor;\n"
 		"}\n";
 	fshaderInterpolatedColor.compileSourceCode(fshaderInterpolatedColorSrc);
 	if (!fshaderInterpolatedColor.log().isEmpty()) {
@@ -2108,10 +2127,11 @@ void StelPainter::initGLShaders()
 	// Basic texture shader program
 	QOpenGLShader vshader2(QOpenGLShader::Vertex);
 	const char *vsrc2 =
-		"attribute highp vec3 vertex;\n"
-		"attribute mediump vec2 texCoord;\n"
+		"#version 330\n"
+		"in highp vec3 vertex;\n"
+		"in mediump vec2 texCoord;\n"
 		"uniform mediump mat4 projectionMatrix;\n"
-		"varying mediump vec2 texc;\n"
+		"out mediump vec2 texc;\n"
 		"void main(void)\n"
 		"{\n"
 		"    gl_Position = projectionMatrix * vec4(vertex, 1.);\n"
@@ -2123,12 +2143,13 @@ void StelPainter::initGLShaders()
 	QOpenGLShader fshader2(QOpenGLShader::Fragment);
 	const auto fsrc2 =
 		makeDitheringShader()+
-		"varying mediump vec2 texc;\n"
+		"in mediump vec2 texc;\n"
 		"uniform sampler2D tex;\n"
 		"uniform mediump vec4 texColor;\n"
+		"layout(location=0) out vec4 fragColor;\n"
 		"void main(void)\n"
 		"{\n"
-		"    gl_FragColor = dither(texture2D(tex, texc)*texColor);\n"
+		"    fragColor = dither(texture(tex, texc)*texColor);\n"
 		"}\n";
 	fshader2.compileSourceCode(fsrc2);
 	if (!fshader2.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshader2: " << fshader2.log(); }
@@ -2148,12 +2169,13 @@ void StelPainter::initGLShaders()
 	// Texture shader program + interpolated color per vertex
 	QOpenGLShader vshader4(QOpenGLShader::Vertex);
 	const char *vsrc4 =
-		"attribute highp vec3 vertex;\n"
-		"attribute mediump vec2 texCoord;\n"
-		"attribute mediump vec4 color;\n"
+		"#version 330\n"
+		"in highp vec3 vertex;\n"
+		"in mediump vec2 texCoord;\n"
+		"in mediump vec4 color;\n"
 		"uniform mediump mat4 projectionMatrix;\n"
-		"varying mediump vec2 texc;\n"
-		"varying mediump vec4 outColor;\n"
+		"out mediump vec2 texc;\n"
+		"out mediump vec4 outColor;\n"
 		"void main(void)\n"
 		"{\n"
 		"    gl_Position = projectionMatrix * vec4(vertex, 1.);\n"
@@ -2167,15 +2189,16 @@ void StelPainter::initGLShaders()
 	const auto fsrc4 =
 		makeDitheringShader()+
 		makeSaturationShader()+
-		"varying mediump vec2 texc;\n"
-		"varying mediump vec4 outColor;\n"
+		"in mediump vec2 texc;\n"
+		"in mediump vec4 outColor;\n"
 		"uniform sampler2D tex;\n"
 		"uniform lowp float saturation;\n"
+		"layout(location=0) out vec4 fragColor;\n"
 		"void main(void)\n"
 		"{\n"
-		"    gl_FragColor = dither(texture2D(tex, texc)*outColor);\n"
+		"    fragColor = dither(texture(tex, texc)*outColor);\n"
 		"    if (saturation != 1.0)\n"
-		"        gl_FragColor.rgb = saturate(gl_FragColor.rgb, saturation);\n"
+		"        fragColor.rgb = saturate(fragColor.rgb, saturation);\n"
 		"}\n";
 	fshader4.compileSourceCode(fsrc4);
 	if (!fshader4.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshader4: " << fshader4.log(); }
@@ -2237,6 +2260,8 @@ void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool
 
 void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned short* indices)
 {
+	if(!count) return;
+
 	ArrayDesc projectedVertexArray = vertexArray;
 	if (doProj)
 	{
@@ -2252,12 +2277,25 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	const Mat4f& m = getProjector()->getProjectionMatrix();
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
 
+	vao->bind();
+	verticesVBO->bind();
+	GLsizeiptr numberOfVerticesToCopy = count + offset;
+	if(indices)
+	{
+		indicesVBO->bind();
+		indicesVBO->allocate(indices+offset, count * sizeof indices[0]);
+		numberOfVerticesToCopy = 1 + *std::max_element(indices + offset, indices + offset + count);
+	}
+
 	const auto rgbMaxValue=calcRGBMaxValue(ditheringMode);
 	if (!texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
 		pr = basicShaderProgram;
 		pr->bind();
-		pr->setAttributeArray(basicShaderVars.vertex, projectedVertexArray.type, projectedVertexArray.pointer, projectedVertexArray.size);
+
+		verticesVBO->allocate(projectedVertexArray.pointer, projectedVertexArray.vertexSizeInBytes()*numberOfVerticesToCopy);
+
+		pr->setAttributeBuffer(basicShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
 		pr->enableAttributeArray(basicShaderVars.vertex);
 		pr->setUniformValue(basicShaderVars.projectionMatrix, qMat);
 		pr->setUniformValue(basicShaderVars.color, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
@@ -2266,11 +2304,21 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	{
 		pr = texturesShaderProgram;
 		pr->bind();
-		pr->setAttributeArray(texturesShaderVars.vertex, projectedVertexArray.type, projectedVertexArray.pointer, projectedVertexArray.size);
+
+		const auto bufferSize = projectedVertexArray.vertexSizeInBytes()*numberOfVerticesToCopy +
+								texCoordArray.vertexSizeInBytes()*numberOfVerticesToCopy;
+		verticesVBO->allocate(bufferSize);
+		const auto vertexDataSize = projectedVertexArray.vertexSizeInBytes()*numberOfVerticesToCopy;
+		verticesVBO->write(0, projectedVertexArray.pointer, vertexDataSize);
+		const auto texCoordDataOffset = vertexDataSize;
+		const auto texCoordDataSize = texCoordArray.vertexSizeInBytes()*numberOfVerticesToCopy;
+		verticesVBO->write(texCoordDataOffset, texCoordArray.pointer, texCoordDataSize);
+
+		pr->setAttributeBuffer(texturesShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
 		pr->enableAttributeArray(texturesShaderVars.vertex);
 		pr->setUniformValue(texturesShaderVars.projectionMatrix, qMat);
 		pr->setUniformValue(texturesShaderVars.texColor, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
-		pr->setAttributeArray(texturesShaderVars.texCoord, texCoordArray.type, texCoordArray.pointer, texCoordArray.size);
+		pr->setAttributeBuffer(texturesShaderVars.texCoord, texCoordArray.type, texCoordDataOffset, texCoordArray.size);
 		pr->enableAttributeArray(texturesShaderVars.texCoord);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
 		glActiveTexture(GL_TEXTURE1);
@@ -2284,12 +2332,26 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	{
 		pr = texturesColorShaderProgram;
 		pr->bind();
-		pr->setAttributeArray(texturesColorShaderVars.vertex, projectedVertexArray.type, projectedVertexArray.pointer, projectedVertexArray.size);
+
+		const auto bufferSize = projectedVertexArray.vertexSizeInBytes()*numberOfVerticesToCopy +
+								texCoordArray.vertexSizeInBytes()*numberOfVerticesToCopy +
+								colorArray.vertexSizeInBytes()*numberOfVerticesToCopy;
+		verticesVBO->allocate(bufferSize);
+		const auto vertexDataSize = projectedVertexArray.vertexSizeInBytes()*numberOfVerticesToCopy;
+		verticesVBO->write(0, projectedVertexArray.pointer, vertexDataSize);
+		const auto texCoordDataOffset = vertexDataSize;
+		const auto texCoordDataSize = texCoordArray.vertexSizeInBytes()*numberOfVerticesToCopy;
+		verticesVBO->write(texCoordDataOffset, texCoordArray.pointer, texCoordDataSize);
+		const auto colorDataOffset = vertexDataSize + texCoordDataSize;
+		const auto colorDataSize = colorArray.vertexSizeInBytes()*numberOfVerticesToCopy;
+		verticesVBO->write(colorDataOffset, colorArray.pointer, colorDataSize);
+
+		pr->setAttributeBuffer(texturesColorShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
 		pr->enableAttributeArray(texturesColorShaderVars.vertex);
 		pr->setUniformValue(texturesColorShaderVars.projectionMatrix, qMat);
-		pr->setAttributeArray(texturesColorShaderVars.texCoord, texCoordArray.type, texCoordArray.pointer, texCoordArray.size);
+		pr->setAttributeBuffer(texturesColorShaderVars.texCoord, texCoordArray.type, texCoordDataOffset, texCoordArray.size);
 		pr->enableAttributeArray(texturesColorShaderVars.texCoord);
-		pr->setAttributeArray(texturesColorShaderVars.color, colorArray.type, colorArray.pointer, colorArray.size);
+		pr->setAttributeBuffer(texturesColorShaderVars.color, colorArray.type, colorDataOffset, colorArray.size);
 		pr->enableAttributeArray(texturesColorShaderVars.color);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
 		glActiveTexture(GL_TEXTURE1);
@@ -2304,10 +2366,20 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	{
 		pr = colorShaderProgram;
 		pr->bind();
-		pr->setAttributeArray(colorShaderVars.vertex, projectedVertexArray.type, projectedVertexArray.pointer, projectedVertexArray.size);
+
+		const auto bufferSize = projectedVertexArray.vertexSizeInBytes()*numberOfVerticesToCopy +
+								colorArray.vertexSizeInBytes()*numberOfVerticesToCopy;
+		verticesVBO->allocate(bufferSize);
+		const auto vertexDataSize = projectedVertexArray.vertexSizeInBytes()*numberOfVerticesToCopy;
+		verticesVBO->write(0, projectedVertexArray.pointer, vertexDataSize);
+		const auto colorDataOffset = vertexDataSize;
+		const auto colorDataSize = colorArray.vertexSizeInBytes()*numberOfVerticesToCopy;
+		verticesVBO->write(colorDataOffset, colorArray.pointer, colorDataSize);
+
+		pr->setAttributeBuffer(colorShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
 		pr->enableAttributeArray(colorShaderVars.vertex);
 		pr->setUniformValue(colorShaderVars.projectionMatrix, qMat);
-		pr->setAttributeArray(colorShaderVars.color, colorArray.type, colorArray.pointer, colorArray.size);
+		pr->setAttributeBuffer(colorShaderVars.color, colorArray.type, colorDataOffset, colorArray.size);
 		pr->enableAttributeArray(colorShaderVars.color);
 	}
 	else
@@ -2318,34 +2390,41 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	}
 	
 	if (indices)
-		glDrawElements(mode, count, GL_UNSIGNED_SHORT, indices + offset);
+		glDrawElements(mode, count, GL_UNSIGNED_SHORT, 0);
 	else
 		glDrawArrays(mode, offset, count);
 
-	if (pr==texturesColorShaderProgram)
-	{
-		pr->disableAttributeArray(texturesColorShaderVars.texCoord);
-		pr->disableAttributeArray(texturesColorShaderVars.vertex);
-		pr->disableAttributeArray(texturesColorShaderVars.color);
-	}
-	else if (pr==texturesShaderProgram)
-	{
-		pr->disableAttributeArray(texturesShaderVars.texCoord);
-		pr->disableAttributeArray(texturesShaderVars.vertex);
-	}
-	else if (pr == basicShaderProgram)
-	{
-		pr->disableAttributeArray(basicShaderVars.vertex);
-	}
-	else if (pr == colorShaderProgram)
-	{
-		pr->disableAttributeArray(colorShaderVars.vertex);
-		pr->disableAttributeArray(colorShaderVars.color);
-	}
+	verticesVBO->release();
+	indicesVBO->release();
+	vao->release();
+
 	if (pr)
 		pr->release();
 }
 
+size_t StelPainter::ArrayDesc::vertexSizeInBytes() const
+{
+	size_t elemSize = 1;
+	switch(type)
+	{
+	case GL_SHORT:
+		elemSize = sizeof(GLshort);
+		break;
+	case GL_INT:
+		elemSize = sizeof(GLint);
+		break;
+	case GL_FLOAT:
+		elemSize = sizeof(GLfloat);
+		break;
+	case GL_DOUBLE:
+		elemSize = sizeof(GLdouble);
+		break;
+	default:
+		Q_ASSERT_X(false, Q_FUNC_INFO, "Unexpected element type");
+		break;
+	}
+	return elemSize * size;
+}
 
 StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& array, int offset, int count, const unsigned short* indices)
 {

@@ -23,6 +23,7 @@
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 #include "StelPainter.hpp"
+#include "StelMainView.hpp"
 
 #include <QImageReader>
 #include <QSize>
@@ -281,7 +282,7 @@ QByteArray StelTexture::convertToGLFormat(const QImage& image, GLint *format, GL
 	QByteArray ret;
 	const int width = image.width();
 	const int height = image.height();
-	if (image.isGrayscale())
+	if (StelMainView::getInstance().getGLInformation().supportsLuminanceTextures && image.isGrayscale())
 	{
 		*format = image.hasAlphaChannel() ? GL_LUMINANCE_ALPHA : GL_LUMINANCE;
 	}
