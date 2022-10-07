@@ -2056,8 +2056,9 @@ void StelPainter::initGLShaders()
 	qDebug() << "Initializing basic GL shaders... ";
 	// Basic shader: just vertex filled with plain color
 	QOpenGLShader vshader3(QOpenGLShader::Vertex);
-	const char *vsrc3 =
-		"attribute mediump vec3 vertex;\n"
+	const auto vsrc3 =
+		StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) +
+		"ATTRIBUTE mediump vec3 vertex;\n"
 		"uniform mediump mat4 projectionMatrix;\n"
 		"void main(void)\n"
 		"{\n"
@@ -2066,11 +2067,12 @@ void StelPainter::initGLShaders()
 	vshader3.compileSourceCode(vsrc3);
 	if (!vshader3.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling vshader3: " << vshader3.log(); }
 	QOpenGLShader fshader3(QOpenGLShader::Fragment);
-	const char *fsrc3 =
+	const auto fsrc3 =
+		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
 		"uniform mediump vec4 color;\n"
 		"void main(void)\n"
 		"{\n"
-		"    gl_FragColor = color;\n"
+		"    FRAG_COLOR = color;\n"
 		"}\n";
 	fshader3.compileSourceCode(fsrc3);
 	if (!fshader3.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshader3: " << fshader3.log(); }
@@ -2085,11 +2087,12 @@ void StelPainter::initGLShaders()
 
 	// Basic shader: vertex filled with interpolated color
 	QOpenGLShader vshaderInterpolatedColor(QOpenGLShader::Vertex);
-	const char *vshaderInterpolatedColorSrc =
-		"attribute mediump vec3 vertex;\n"
-		"attribute mediump vec4 color;\n"
+	const auto vshaderInterpolatedColorSrc =
+		StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) +
+		"ATTRIBUTE mediump vec3 vertex;\n"
+		"ATTRIBUTE mediump vec4 color;\n"
 		"uniform mediump mat4 projectionMatrix;\n"
-		"varying mediump vec4 fragcolor;\n"
+		"VARYING mediump vec4 fragcolor;\n"
 		"void main(void)\n"
 		"{\n"
 		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
@@ -2100,11 +2103,12 @@ void StelPainter::initGLShaders()
 	  qWarning() << "StelPainter: Warnings while compiling vshaderInterpolatedColor: " << vshaderInterpolatedColor.log();
 	}
 	QOpenGLShader fshaderInterpolatedColor(QOpenGLShader::Fragment);
-	const char *fshaderInterpolatedColorSrc =
-		"varying mediump vec4 fragcolor;\n"
+	const auto fshaderInterpolatedColorSrc =
+		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
+		"VARYING mediump vec4 fragcolor;\n"
 		"void main(void)\n"
 		"{\n"
-		"    gl_FragColor = fragcolor;\n"
+		"    FRAG_COLOR = fragcolor;\n"
 		"}\n";
 	fshaderInterpolatedColor.compileSourceCode(fshaderInterpolatedColorSrc);
 	if (!fshaderInterpolatedColor.log().isEmpty()) {
@@ -2120,11 +2124,12 @@ void StelPainter::initGLShaders()
 	
 	// Basic texture shader program
 	QOpenGLShader vshader2(QOpenGLShader::Vertex);
-	const char *vsrc2 =
-		"attribute highp vec3 vertex;\n"
-		"attribute mediump vec2 texCoord;\n"
+	const auto vsrc2 =
+		StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) +
+		"ATTRIBUTE highp vec3 vertex;\n"
+		"ATTRIBUTE mediump vec2 texCoord;\n"
 		"uniform mediump mat4 projectionMatrix;\n"
-		"varying mediump vec2 texc;\n"
+		"VARYING mediump vec2 texc;\n"
 		"void main(void)\n"
 		"{\n"
 		"    gl_Position = projectionMatrix * vec4(vertex, 1.);\n"
@@ -2135,13 +2140,14 @@ void StelPainter::initGLShaders()
 
 	QOpenGLShader fshader2(QOpenGLShader::Fragment);
 	const auto fsrc2 =
+		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
 		makeDitheringShader()+
-		"varying mediump vec2 texc;\n"
+		"VARYING mediump vec2 texc;\n"
 		"uniform sampler2D tex;\n"
 		"uniform mediump vec4 texColor;\n"
 		"void main(void)\n"
 		"{\n"
-		"    gl_FragColor = dither(texture2D(tex, texc)*texColor);\n"
+		"    FRAG_COLOR = dither(texture2D(tex, texc)*texColor);\n"
 		"}\n";
 	fshader2.compileSourceCode(fsrc2);
 	if (!fshader2.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshader2: " << fshader2.log(); }
@@ -2160,13 +2166,14 @@ void StelPainter::initGLShaders()
 
 	// Texture shader program + interpolated color per vertex
 	QOpenGLShader vshader4(QOpenGLShader::Vertex);
-	const char *vsrc4 =
-		"attribute highp vec3 vertex;\n"
-		"attribute mediump vec2 texCoord;\n"
-		"attribute mediump vec4 color;\n"
+	const auto vsrc4 =
+		StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) +
+		"ATTRIBUTE highp vec3 vertex;\n"
+		"ATTRIBUTE mediump vec2 texCoord;\n"
+		"ATTRIBUTE mediump vec4 color;\n"
 		"uniform mediump mat4 projectionMatrix;\n"
-		"varying mediump vec2 texc;\n"
-		"varying mediump vec4 outColor;\n"
+		"VARYING mediump vec2 texc;\n"
+		"VARYING mediump vec4 outColor;\n"
 		"void main(void)\n"
 		"{\n"
 		"    gl_Position = projectionMatrix * vec4(vertex, 1.);\n"
@@ -2178,17 +2185,18 @@ void StelPainter::initGLShaders()
 
 	QOpenGLShader fshader4(QOpenGLShader::Fragment);
 	const auto fsrc4 =
+		StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
 		makeDitheringShader()+
 		makeSaturationShader()+
-		"varying mediump vec2 texc;\n"
-		"varying mediump vec4 outColor;\n"
+		"VARYING mediump vec2 texc;\n"
+		"VARYING mediump vec4 outColor;\n"
 		"uniform sampler2D tex;\n"
 		"uniform lowp float saturation;\n"
 		"void main(void)\n"
 		"{\n"
-		"    gl_FragColor = dither(texture2D(tex, texc)*outColor);\n"
+		"    FRAG_COLOR = dither(texture2D(tex, texc)*outColor);\n"
 		"    if (saturation != 1.0)\n"
-		"        gl_FragColor.rgb = saturate(gl_FragColor.rgb, saturation);\n"
+		"        FRAG_COLOR.rgb = saturate(FRAG_COLOR.rgb, saturation);\n"
 		"}\n";
 	fshader4.compileSourceCode(fsrc4);
 	if (!fshader4.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshader4: " << fshader4.log(); }
