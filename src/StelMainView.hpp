@@ -73,6 +73,7 @@ public:
 		QOpenGLContext* mainContext;
 		QOpenGLFunctions* functions;
 		bool supportsLuminanceTextures = false;
+		bool isCoreProfile = false;
 	};
 
 	StelMainView(QSettings* settings);

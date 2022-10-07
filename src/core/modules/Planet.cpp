@@ -3000,7 +3000,7 @@ QOpenGLShaderProgram* Planet::createShader(const QString& name, PlanetShaderVars
 	if(!vSrc.isEmpty())
 	{
 		QOpenGLShader* shd = new QOpenGLShader(QOpenGLShader::Vertex, program);
-		bool ok = shd->compileSourceCode(prefix + vSrc);
+		bool ok = shd->compileSourceCode(StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) + prefix + vSrc);
 		QString log = shd->log();
 		if (!log.isEmpty() && !log.contains("no warnings", Qt::CaseInsensitive)) { qWarning() << "Planet: Warnings/Errors while compiling" << name << "vertex shader: " << log; }
 		if(!ok)
@@ -3020,7 +3020,7 @@ QOpenGLShaderProgram* Planet::createShader(const QString& name, PlanetShaderVars
 	if(!fSrc.isEmpty())
 	{
 		QOpenGLShader* shd = new QOpenGLShader(QOpenGLShader::Fragment, program);
-		bool ok = shd->compileSourceCode(prefix + fSrc);
+		bool ok = shd->compileSourceCode(StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) + prefix + fSrc);
 		QString log = shd->log();
 		if (!log.isEmpty() && !log.contains("no warnings", Qt::CaseInsensitive)) { qWarning() << "Planet: Warnings/Errors while compiling" << name << "fragment shader: " << log; }
 		if(!ok)
@@ -3198,11 +3198,11 @@ bool Planet::initShader()
 	//this is a simple transform-only shader (used for filling the depth map for OBJ shadows)
 	QByteArray transformVShader(
 				"uniform mat4 projectionMatrix;\n"
-				"attribute vec4 unprojectedVertex;\n"
+				"ATTRIBUTE vec4 unprojectedVertex;\n"
 			#ifdef DEBUG_SHADOWMAP
-				"attribute mediump vec2 texCoord;\n"
-				"varying mediump vec2 texc; //texture coord\n"
-				"varying highp vec4 pos; //projected pos\n"
+				"ATTRIBUTE mediump vec2 texCoord;\n"
+				"VARYING mediump vec2 texc; //texture coord\n"
+				"VARYING highp vec4 pos; //projected pos\n"
 			#endif
 				"void main()\n"
 				"{\n"
@@ -3217,8 +3217,8 @@ bool Planet::initShader()
 #ifdef DEBUG_SHADOWMAP
 	const QByteArray transformFShader(
 				"uniform lowp sampler2D tex;\n"
-				"varying mediump vec2 texc; //texture coord\n"
-				"varying highp vec4 pos; //projected pos\n"
+				"VARYING mediump vec2 texc; //texture coord\n"
+				"VARYING highp vec4 pos; //projected pos\n"
 				"void main()\n"
 				"{\n"
 				"   lowp vec4 texCol = texture2D(tex,texc);\n"
