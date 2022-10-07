@@ -21,6 +21,7 @@
 #ifndef STELOPENGL_HPP
 #define STELOPENGL_HPP
 
+#include <QByteArray>
 #include <QOpenGLFunctions>
 
 #ifndef QT_NO_DEBUG
@@ -46,6 +47,15 @@ namespace StelOpenGL
 	int checkGLErrors(const char *file, int line);
 	//! Clears all queued-up OpenGL errors without handling them
 	void clearGLErrors();
+
+	enum ShaderType
+	{
+		VERTEX_SHADER,
+		FRAGMENT_SHADER,
+	};
+	//! Returns a prefix containing #version directive and a few defines for
+	//  the GLSL version supported in current GL context.
+	QByteArray globalShaderPrefix(ShaderType);
 }
 
 // This is still needed for the ARM platform (armhf)
