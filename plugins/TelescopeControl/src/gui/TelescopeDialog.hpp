@@ -89,7 +89,9 @@ private slots:
 	void selectTelecope(const QModelIndex &);
 	void configureTelescope(const QModelIndex &);
 	
-	//! Update the list of telescopes with their current states
+	//! Update the list of telescopes with their current states.
+	//! This is called every 200ms by a QTimer!
+	// FIXME! This should be triggered by signals from the telescopes!
 	void updateTelescopeStates(void);
 
 private:
@@ -103,7 +105,7 @@ private:
 		ColumnCount		//!< total number of columns
 	};
 	
-	QHash<int, QString> statusString;
+	QMap<int, QString> statusString;
 	TelescopeConfigurationDialog configurationDialog;
 	
 	QStandardItemModel * telescopeListModel;
@@ -111,7 +113,7 @@ private:
 	TelescopeControl * telescopeManager;
 	
 	TelescopeControl::TelescopeStatus telescopeStatus[TelescopeControl::SLOT_NUMBER_LIMIT];
-	TelescopeControl::ConnectionType telescopeType[TelescopeControl::SLOT_NUMBER_LIMIT];
+	TelescopeControl::ConnectionType connectionTypes[TelescopeControl::SLOT_NUMBER_LIMIT];
 	
 	int telescopeCount;
 	int configuredSlot;
