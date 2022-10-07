@@ -40,8 +40,8 @@
 #include <QRegularExpression>
 
 
-TelescopeDialog::TelescopeDialog()
-	: StelDialog("TelescopeControl")
+TelescopeDialog::TelescopeDialog(const QString &dialogName, QObject *parent)
+	: StelDialog(dialogName, parent)
 	, telescopeCount(0)
 	, configuredSlot(0)
 	, configuredTelescopeIsNew(false)
@@ -53,6 +53,7 @@ TelescopeDialog::TelescopeDialog()
 
 	//TODO: Fix this - it's in the same plugin
 	telescopeManager = GETSTELMODULE(TelescopeControl);
+
 	telescopeListModel = new QStandardItemModel(0, ColumnCount);
 
 	//TODO: (FC 2010) This shouldn't be a hash...--> GZ (2022): OK, it's map now.
@@ -122,22 +123,25 @@ void TelescopeDialog::createDialogContent()
 	//connect(ui->telescopeTreeView, SIGNAL(activated (const QModelIndex &)), this, SLOT(configureTelescope(const QModelIndex &)));
 	
 	//Page: Options:
-	connect(ui->checkBoxReticles, SIGNAL(clicked(bool)),
-	        telescopeManager, SLOT(setFlagTelescopeReticles(bool)));
-	connect(ui->checkBoxLabels, SIGNAL(clicked(bool)),
-	        telescopeManager, SLOT(setFlagTelescopeLabels(bool)));
-	connect(ui->checkBoxCircles, SIGNAL(clicked(bool)),
-	        telescopeManager, SLOT(setFlagTelescopeCircles(bool)));
-	
-	connect(ui->checkBoxEnableLogs, SIGNAL(toggled(bool)), telescopeManager, SLOT(setFlagUseTelescopeServerLogs(bool)));
-	
+	connectBoolProperty(ui->checkBoxReticles,   "TelescopeControl.flagTelescopeReticles");
+	connectBoolProperty(ui->checkBoxLabels,     "TelescopeControl.flagTelescopeLabels");
+	connectBoolProperty(ui->checkBoxCircles,    "TelescopeControl.flagTelescopeCircles");
+	connectColorButton(ui->reticleColorButton,  "TelescopeControl.reticleColor", "TelescopeControl/color_telescope_reticles");
+	connectColorButton(ui->labelColorButton,    "TelescopeControl.labelColor",   "TelescopeControl/color_telescope_labels");
+	connectColorButton(ui->circleColorButton,   "TelescopeControl.circleColor",  "TelescopeControl/color_telescope_circles");
+	connectBoolProperty(ui->checkBoxEnableLogs, "TelescopeControl.useTelescopeServerLogs");
+
 	connect(ui->checkBoxUseExecutables, SIGNAL(toggled(bool)), ui->labelExecutablesDirectory, SLOT(setEnabled(bool)));
 	connect(ui->checkBoxUseExecutables, SIGNAL(toggled(bool)), ui->lineEditExecutablesDirectory, SLOT(setEnabled(bool)));
 	connect(ui->checkBoxUseExecutables, SIGNAL(toggled(bool)), ui->pushButtonPickExecutablesDirectory, SLOT(setEnabled(bool)));
-	connect(ui->checkBoxUseExecutables, SIGNAL(toggled(bool)), this, SLOT(checkBoxUseExecutablesToggled(bool)));
-	
+
 	connect(ui->pushButtonPickExecutablesDirectory, SIGNAL(clicked()), this, SLOT(buttonBrowseServerDirectoryPressed()));
-	
+	//Telescope server directory
+	connectBoolProperty(ui->checkBoxUseExecutables, "TelescopeControl.useTelescopeServerExecutables");
+	ui->lineEditExecutablesDirectory->setText(telescopeManager->getServerExecutablesDirectoryPath());
+
+	connectStringProperty(ui->lineEditExecutablesDirectory, "TelescopeControl.serverExecutablesDirectoryPath");
+
 	//In other dialogs:
 	connect(&configurationDialog, SIGNAL(changesDiscarded()), this, SLOT(discardChanges()));
 	connect(&configurationDialog, SIGNAL(changesSaved(QString, TelescopeControl::ConnectionType)), this, SLOT(saveChanges(QString, TelescopeControl::ConnectionType)));
@@ -230,26 +234,6 @@ void TelescopeDialog::createDialogContent()
 	if(telescopeCount >= TelescopeControl::SLOT_COUNT)
 		ui->pushButtonAdd->setEnabled(false);
 	
-	//Checkboxes
-	//ui->checkBoxReticles->setChecked(telescopeManager->getFlagTelescopeReticles());
-	//ui->checkBoxLabels->setChecked(telescopeManager->getFlagTelescopeLabels());
-	//ui->checkBoxCircles->setChecked(telescopeManager->getFlagTelescopeCircles());
-	//ui->checkBoxEnableLogs->setChecked(telescopeManager->getFlagUseTelescopeServerLogs());
-
-	connectBoolProperty(ui->checkBoxReticles, "TelescopeControl.flagTelescopeReticles");
-	connectBoolProperty(ui->checkBoxLabels, "TelescopeControl.flagTelescopeLabels");
-	connectBoolProperty(ui->checkBoxCircles, "TelescopeControl.flagTelescopeCircles");
-	connectColorButton(ui->reticleColorButton, "TelescopeControl.reticleColor", "TelescopeControl/color_telescope_reticles");
-	connectColorButton(ui->labelColorButton,   "TelescopeControl.labelColor",   "TelescopeControl/color_telescope_labels");
-	connectColorButton(ui->circleColorButton,  "TelescopeControl.circleColor",  "TelescopeControl/color_telescope_circles");
-
-	//Telescope server directory
-	connectBoolProperty(ui->checkBoxEnableLogs, "TelescopeControl.useTelescopeServerLogs");
-	//ui->checkBoxUseExecutables->setChecked(telescopeManager->getFlagUseServerExecutables());
-	connectBoolProperty(ui->checkBoxUseExecutables, "TelescopeControl.useTelescopeServerExecutables");
-	//ui->lineEditExecutablesDirectory->setText(telescopeManager->getServerExecutablesDirectoryPath());
-
-	connectStringProperty(ui->lineEditExecutablesDirectory, "TelescopeControl.serverExecutablesDirectoryPath");
 
 	//About page
 	setAboutText();
@@ -1050,11 +1034,6 @@ void TelescopeDialog::updateStyle()
 		if (gui)
 			ui->textBrowserAbout->document()->setDefaultStyleSheet(gui->getStelStyle().htmlStyleSheet);
 	}
-}
-
-void TelescopeDialog::checkBoxUseExecutablesToggled(bool useExecutables)
-{
-	telescopeManager->setFlagUseServerExecutables(useExecutables);
 }
 
 void TelescopeDialog::buttonBrowseServerDirectoryPressed()

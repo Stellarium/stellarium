@@ -43,7 +43,7 @@
 #include <QColorDialog>
 #include <QMessageBox>
 
-StelDialog::StelDialog(QString dialogName, QObject* parent)
+StelDialog::StelDialog(const QString &dialogName, QObject* parent)
 	: QObject(parent)
 	, dialog(Q_NULLPTR)
 	, proxy(Q_NULLPTR)

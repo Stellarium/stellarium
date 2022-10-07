@@ -22,31 +22,34 @@
 
 #include "Dialog.hpp"
 #include "StelFileMgr.hpp"
-
 #include "AngleSpinBox.hpp"
 #include "StelApp.hpp"
 #include "VecMath.hpp"
+#include "StelJsonParser.hpp"
+#include "StelUtils.hpp"
+#include "StelCore.hpp"
+#include "StelObjectMgr.hpp"
+#include "StelModuleMgr.hpp"
+
 #include "TelescopeControl.hpp"
 #include "SlewDialog.hpp"
 #include "ui_slewDialog.h"
 #include "TelescopeClient.hpp"
-#include "StelJsonParser.hpp"
 
-
-SlewDialog::SlewDialog()
-	: StelDialog("TelescopeControlSlew")
-	, telescopeManager(nullptr)
+SlewDialog::SlewDialog(const QString &dialogName, QObject *parent)
+	: StelDialog(dialogName, parent)
 	, storedPointsDialog(nullptr)
 {
 	ui = new Ui_slewDialog();
 	
-    //TODO: Fix this - it's in the same plugin
-    telescopeManager = GETSTELMODULE(TelescopeControl);
+	//TODO: Fix this - it's in the same plugin
+	telescopeManager = GETSTELMODULE(TelescopeControl);
 }
 
 SlewDialog::~SlewDialog()
 {	
 	delete ui;
+	delete storedPointsDialog;
 	storedPointsDialog = nullptr;
 }
 
@@ -87,7 +90,7 @@ void SlewDialog::createDialogContent()
 	//Coordinates are in HMS by default:
 	ui->radioButtonHMS->setChecked(true);
 
-	storedPointsDialog = new StoredPointsDialog;
+	storedPointsDialog = new StoredPointsDialog();
 	// add point and remove
 	connect(storedPointsDialog, SIGNAL(addStoredPoint(int, QString, double, double)), this, SLOT(addStoredPointToComboBox(int, QString, double, double)));
 	// remove point
@@ -151,6 +154,7 @@ void SlewDialog::updateTelescopeList()
 		QString telescopeName = connectedSlotsByNumber.value(it.key());
 		connectedSlotsByName.insert(telescopeName, it.key());
 		ui->comboBoxTelescope->addItem(telescopeName);
+		++it;
 	}
 	
 	updateTelescopeControls();

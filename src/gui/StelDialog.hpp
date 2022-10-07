@@ -78,7 +78,7 @@ class StelDialog : public QObject
 	Q_OBJECT
 	Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
 public:
-	StelDialog(QString dialogName="Default", QObject* parent=Q_NULLPTR);
+	StelDialog(const QString &dialogName=QString("Default"), QObject* parent=Q_NULLPTR);
 	virtual ~StelDialog() Q_DECL_OVERRIDE;
 
 	//! Notify that the application style changed
