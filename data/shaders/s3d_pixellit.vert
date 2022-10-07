@@ -49,11 +49,11 @@ uniform mat4 u_mShadow3;
 #endif
 #endif
 
-attribute vec4 a_vertex;
-attribute vec3 a_normal;
-attribute vec2 a_texcoord;
+ATTRIBUTE vec4 a_vertex;
+ATTRIBUTE vec3 a_normal;
+ATTRIBUTE vec2 a_texcoord;
 #if BUMP
-attribute vec4 a_tangent;
+ATTRIBUTE vec4 a_tangent;
 #endif
 
 #if GEOMETRY_SHADER
@@ -76,18 +76,18 @@ attribute vec4 a_tangent;
 #define VAR_SHADOWCOORD3 v_shadowCoord3
 #endif
 
-varying vec3 VAR_NORMAL; //normal in view space
-varying vec2 VAR_TEXCOORD;
-varying vec3 VAR_LIGHTVEC; //light vector, in VIEW or TBN space according to bump settings
-varying vec3 VAR_VIEWPOS; //position of fragment in view space
+VARYING vec3 VAR_NORMAL; //normal in view space
+VARYING vec2 VAR_TEXCOORD;
+VARYING vec3 VAR_LIGHTVEC; //light vector, in VIEW or TBN space according to bump settings
+VARYING vec3 VAR_VIEWPOS; //position of fragment in view space
 
 #if SHADOWS
 //varying arrays seem to cause some problems, so we use 4 vecs for now...
-varying vec4 VAR_SHADOWCOORD0;
+VARYING vec4 VAR_SHADOWCOORD0;
 #if !SINGLE_SHADOW_FRUSTUM 
-varying vec4 VAR_SHADOWCOORD1;
-varying vec4 VAR_SHADOWCOORD2;
-varying vec4 VAR_SHADOWCOORD3;
+VARYING vec4 VAR_SHADOWCOORD1;
+VARYING vec4 VAR_SHADOWCOORD2;
+VARYING vec4 VAR_SHADOWCOORD3;
 #endif
 #endif
 
