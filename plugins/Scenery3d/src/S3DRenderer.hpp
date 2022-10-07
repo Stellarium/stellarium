@@ -37,6 +37,7 @@
 #include "ShaderManager.hpp"
 
 #include <QMatrix4x4>
+#include <QOpenGLVertexArrayObject>
 
 //predeclarations
 class LandscapeMgr;
@@ -138,6 +139,7 @@ signals:
 	void message(const QString& msg) const; // ignore clazy warning here
 
 private:
+	QOpenGLVertexArrayObject vao;
 	ShaderMgr shaderManager;
 	PlanetP sun,moon,venus;
 	// a pointer to the scene currently being drawn. only valid during draw() calls
