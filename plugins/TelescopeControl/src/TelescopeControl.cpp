@@ -1744,7 +1744,7 @@ void TelescopeControl::logAtSlot(int slot)
 		log_file = telescopeServerLogStreams.value(slot);
 }
 
-QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, const int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem<=0)
@@ -1786,7 +1786,7 @@ QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int 
 	}
 	result.sort();
 	if (result.size()>maxNbItem)
-		result.erase(result.begin()+maxNbItem, result.end());
+		result.erase(result.constBegin()+maxNbItem, result.constEnd());
 
 	return result;
 }
