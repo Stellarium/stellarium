@@ -1,4 +1,3 @@
-#version 110
 
 /*
  * Stellarium Scenery3d Plug-in
