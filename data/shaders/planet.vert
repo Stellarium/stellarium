@@ -21,33 +21,33 @@
   This is the vertex shader for solar system object rendering
  */
 
-attribute highp vec4 vertex; // vertex projected by CPU
-attribute mediump vec2 texCoord;
-attribute highp vec4 unprojectedVertex; //original vertex coordinate (in km for OBJ models, in AU otherwise)
+ATTRIBUTE highp vec4 vertex; // vertex projected by CPU
+ATTRIBUTE mediump vec2 texCoord;
+ATTRIBUTE highp vec4 unprojectedVertex; //original vertex coordinate (in km for OBJ models, in AU otherwise)
 #ifdef IS_OBJ
-    attribute mediump vec3 normalIn; // OBJs have pre-calculated normals
+    ATTRIBUTE mediump vec3 normalIn; // OBJs have pre-calculated normals
 #endif
 
 uniform highp mat4 projectionMatrix;
 #ifdef SHADOWMAP
 uniform highp mat4 shadowMatrix;
-varying highp vec4 shadowCoord;
+VARYING highp vec4 shadowCoord;
 #endif
 
-varying mediump vec2 texc; //texture coord
-varying highp vec3 P; //original unprojected position (in AU)
+VARYING mediump vec2 texc; //texture coord
+VARYING highp vec3 P; //original unprojected position (in AU)
 
 #ifdef IS_MOON
     //Luna uses normal mapping
-    varying highp vec3 normalX;
-    varying highp vec3 normalY;
-    varying highp vec3 normalZ;
+    VARYING highp vec3 normalX;
+    VARYING highp vec3 normalY;
+    VARYING highp vec3 normalZ;
 #else
-    varying mediump vec3 normalVS;
+    VARYING mediump vec3 normalVS;
     //normal objects use gouraud shading
     //good enough for our spheres
     uniform highp vec3 lightDirection;
-    varying mediump float lambertIllum;
+    VARYING mediump float lambertIllum;
 #endif
 
 void main()
