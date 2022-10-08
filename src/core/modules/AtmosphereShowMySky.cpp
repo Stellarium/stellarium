@@ -261,12 +261,17 @@ void main()
 		luminanceToScreenProgram_->addShader(&vShader);
 
 		QOpenGLShader ditherShader(QOpenGLShader::Fragment);
-		handleCompileStatus(ditherShader.compileSourceCode(makeDitheringShader()), ditherShader,
-							"ShowMySky atmosphere dithering shader");
+		const auto fPrefix = StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER);
+		handleCompileStatus(ditherShader.compileSourceCode(fPrefix + makeDitheringShader()),
+							ditherShader, "ShowMySky atmosphere dithering shader");
 		luminanceToScreenProgram_->addShader(&ditherShader);
 
 		QOpenGLShader toneReproducerShader(QOpenGLShader::Fragment);
-		handleCompileStatus(toneReproducerShader.compileSourceFile(":/shaders/xyYToRGB.glsl"),
+		auto xyYToRGBFile = QFile(":/shaders/xyYToRGB.glsl");
+		if(!xyYToRGBFile.open(QFile::ReadOnly))
+			throw InitFailure("Failed to open atmosphere tone reproducer fragment shader file");
+		const auto xyYToRGBShader = xyYToRGBFile.readAll();
+		handleCompileStatus(toneReproducerShader.compileSourceCode(fPrefix + xyYToRGBShader),
 							toneReproducerShader, "ShowMySky atmosphere tone reproducer fragment shader");
 		luminanceToScreenProgram_->addShader(&toneReproducerShader);
 
