@@ -313,7 +313,7 @@ float sampleShadow(in SHADOWSAMPLER tex, in vec4 coord, in vec2 filterRadiusUV)
 		vec2 offset = poissonDisk[i] * filterRadiusUV;
 		//TODO offsets should probably depend on light ortho size?
 		#if HW_SHADOW_SAMPLERS
-		sum+=shadow2D(tex,vec3(texC.xy + offset, texC.z)).x;
+		sum+=shadow2D_x(tex,vec3(texC.xy + offset, texC.z));
 		#else
 		//texture is a normal sampler2D because we need depth values in blocker calculation
 		//opengl does not allow to sample this texture in 2 different ways (unless sampler objects are used, but needs version >= 3.3)
@@ -324,7 +324,7 @@ float sampleShadow(in SHADOWSAMPLER tex, in vec4 coord, in vec2 filterRadiusUV)
 	return sum / FILTER_STEPS;
 	#elif HW_SHADOW_SAMPLERS
 	//no filtering performed, just return the sampled tex
-	return shadow2DProj(tex,coord).x;
+	return shadow2DProj_x(tex,coord);
 	#else
 	vec3 texC = coord.xyz / coord.w;
 	return texture2D(tex,texC.xy).x > texC.z ? 1.0f : 0.0f;
