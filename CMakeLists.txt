@@ -695,10 +695,10 @@ IF(ENABLE_SHOWMYSKY)
          ELSE()
              MESSAGE(STATUS "Could NOT found ShowMySky library")
          ENDIF()
-    ELSE(ShowMySky_FOUND)
+    ELSE(ShowMySky-Qt6_FOUND)
          MESSAGE(WARNING "ShowMySky not found although you have selected to use it. \
                           Make sure to add -DCMAKE_PREFIX_PATH=<CalcMySky_install>/CalcMySky/lib/ShowMySky")
-    ENDIF(ShowMySky_FOUND)
+    ENDIF(ShowMySky-Qt6_FOUND)
 ENDIF(ENABLE_SHOWMYSKY)
 
 IF(ENABLE_SCRIPTING)
