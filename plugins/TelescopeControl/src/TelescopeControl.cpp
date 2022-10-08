@@ -1631,10 +1631,12 @@ QHash<int, QString> TelescopeControl::getConnectedClientsNames()
 	if (telescopeClients.isEmpty())
 		return connectedClientsNames;
 
-	for (const auto slotNumber : telescopeClients.keys())
+	QMapIterator<int, TelescopeClientP> it(telescopeClients);
+	while (it.hasNext())
 	{
-		if (telescopeClients.value(slotNumber)->isConnected())
-			connectedClientsNames.insert(slotNumber, telescopeClients.value(slotNumber)->getNameI18n());
+		it.next();
+		if (telescopeClients.value(it.key())->isConnected())
+			connectedClientsNames.insert(it.key(), it.value()->getNameI18n());
 	}
 
 	return connectedClientsNames;

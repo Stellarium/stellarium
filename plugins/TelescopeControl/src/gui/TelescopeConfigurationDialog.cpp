@@ -288,7 +288,8 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		  connectAtStartup, circles, deviceModelName, serialPortName, rts2Url, rts2Username, rts2Password,
 		  rts2Refresh, ascomDeviceId, ascomUseDeviceEqCoordType))
 	{
-		// TODO: Add debug
+		// TODO: Add better debug
+		qDebug() << "Cannot get telescope for slot" << slot;
 		return;
 	}
 	ui->lineEditTelescopeName->setText(name);
