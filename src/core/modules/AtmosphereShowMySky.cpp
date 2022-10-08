@@ -405,7 +405,11 @@ void AtmosphereShowMySky::resolveFunctions()
 }
 
 AtmosphereShowMySky::AtmosphereShowMySky()
+#ifdef SHOWMYSKY_LIB_NAME
+	: showMySkyLib(SHOWMYSKY_LIB_NAME, ShowMySky_ABI_version)
+#else // for compatibility with legacy unversioned naming
 	: showMySkyLib("ShowMySky")
+#endif
 	, viewport(0,0,0,0)
 	, gridMaxY(44)
 	, gridMaxX(44)
