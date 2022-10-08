@@ -89,7 +89,7 @@ lowp float offset_lookup(in highp sampler2D sTex, in highp vec4 loc, in highp ve
     //I'm 99% certain this is some bug in the GL driver, 
     //because adding ANY bias here makes it work correctly
     //It should have no effect on platforms which don't have this bug
-    highp float texVal = texture2DProj(sTex, coords, -1000.0).r;
+    highp float texVal = texture2DProj_3(sTex, coords, -1000.0).r;
     //perform shadow comparison
     return texVal > (loc.z-zbias)/loc.w ? 1.0 : 0.0;
 }
