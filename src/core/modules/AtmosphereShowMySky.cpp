@@ -182,27 +182,27 @@ void AtmosphereShowMySky::initProperties()
 
 	const auto prop = StelApp::getInstance().getStelPropertyManager()->getProperty("LandscapeMgr.atmosphereEclipseSimulationQuality");
 	auto updateEclipseSimQuality = [this](const QVariant& v)
+	{
+		const auto n = std::max(0, v.toInt());
+		switch(n)
 		{
-			const auto n = std::max(0, v.toInt());
-			switch(n)
-			{
-			case 0:
-				eclipseSimulationQuality_ = EclipseSimulationQuality::Fastest;
-				break;
-			case 1:
-				eclipseSimulationQuality_ = EclipseSimulationQuality::AllPrecomputed;
-				break;
-			case 2:
-				eclipseSimulationQuality_ = EclipseSimulationQuality::Order2OnTheFly_Order1Precomp;
-				break;
-			case 3:
-				eclipseSimulationQuality_ = EclipseSimulationQuality::AllOnTheFly;
-				break;
-			default: // all larger values mean highest quality
-				eclipseSimulationQuality_ = EclipseSimulationQuality::AllOnTheFly;
-				break;
-			}
-		};
+		case 0:
+			eclipseSimulationQuality_ = EclipseSimulationQuality::Fastest;
+			break;
+		case 1:
+			eclipseSimulationQuality_ = EclipseSimulationQuality::AllPrecomputed;
+			break;
+		case 2:
+			eclipseSimulationQuality_ = EclipseSimulationQuality::Order2OnTheFly_Order1Precomp;
+			break;
+		case 3:
+			eclipseSimulationQuality_ = EclipseSimulationQuality::AllOnTheFly;
+			break;
+		default: // all larger values mean highest quality
+			eclipseSimulationQuality_ = EclipseSimulationQuality::AllOnTheFly;
+			break;
+		}
+	};
 	QObject::connect(prop, &StelProperty::changed, this, updateEclipseSimQuality);
 	updateEclipseSimQuality(prop->getValue());
 
@@ -212,17 +212,17 @@ void AtmosphereShowMySky::initProperties()
 void AtmosphereShowMySky::loadShaders()
 {
 	const auto handleCompileStatus=[](bool success, QOpenGLShader const& shader, const char* what)
+	{
+		if(!success)
 		{
-			if(!success)
-			{
-				qCritical("Error while compiling %s: %s", what, shader.log().toLatin1().constData());
-				throw InitFailure("Shader compilation failed");
-			}
-			if(!shader.log().isEmpty())
-			{
-				qWarning("Warnings while compiling %s: %s", what, shader.log().toLatin1().constData());
-			}
-		};
+			qCritical("Error while compiling %s: %s", what, shader.log().toLatin1().constData());
+			throw InitFailure("Shader compilation failed");
+		}
+		if(!shader.log().isEmpty())
+		{
+			qWarning("Warnings while compiling %s: %s", what, shader.log().toLatin1().constData());
+		}
+	};
 
 	// Shader program that converts XYZW texture to sRGB image
 	{
@@ -236,7 +236,7 @@ void main()
 	texCoord=vertex.xy*0.5+0.5;
 }
 )";
-	static constexpr char fShaderSrc[]=R"(
+		static constexpr char fShaderSrc[]=R"(
 #version 330
 
 uniform sampler2D luminanceXYZW;
@@ -278,7 +278,6 @@ void main()
 		if(!StelPainter::linkProg(luminanceToScreenProgram_.get(), "atmosphere luminance-to-screen"))
 			throw InitFailure("Shader program linking failed");
 	}
-
 	{
 		static constexpr char viewDirVertShaderSrc[]=R"(
 #version 330
@@ -371,7 +370,6 @@ void AtmosphereShowMySky::setupBuffers()
 									reinterpret_cast<const void*>(VIEW_RAYS_OFFSET_IN_VBO)));
 		GL(gl.glEnableVertexAttribArray(VIEW_RAY_ATTRIB_INDEX));
 	}
-
 	{
 		GL(gl.glGenVertexArrays(1, &renderVAO_));
 		GL(gl.glBindVertexArray(renderVAO_));
@@ -440,24 +438,24 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 		qDebug() << "Will load CalcMySky atmosphere model from" << pathToData;
 		skySettings_.reset(new SkySettings);
 		renderSurfaceFunc_=[this](QOpenGLShaderProgram& prog)
+		{
+			const auto& settings = *static_cast<SkySettings*>(skySettings_.get());
+			prog.setUniformValue("projectionMatrix", settings.projectionMatrix_);
+
+			auto& gl = *glfuncs();
+
+			GL(gl.glBindVertexArray(renderVAO_));
+
+			std::size_t shift=0;
+			for (int y=0;y<gridMaxY;++y)
 			{
-				const auto& settings = *static_cast<SkySettings*>(skySettings_.get());
-				prog.setUniformValue("projectionMatrix", settings.projectionMatrix_);
+				GL(gl.glDrawElements(GL_TRIANGLE_STRIP, (gridMaxX+1)*2,
+						     GL_UNSIGNED_SHORT,	reinterpret_cast<void*>(shift)));
+				shift += (gridMaxX+1)*2*2;
+			}
 
-				auto& gl = *glfuncs();
-
-				GL(gl.glBindVertexArray(renderVAO_));
-
-				std::size_t shift=0;
-				for (int y=0;y<gridMaxY;++y)
-				{
-					GL(gl.glDrawElements(GL_TRIANGLE_STRIP, (gridMaxX+1)*2, GL_UNSIGNED_SHORT,
-										 reinterpret_cast<void*>(shift)));
-					shift += (gridMaxX+1)*2*2;
-				}
-
-				GL(gl.glBindVertexArray(0));
-			};
+			GL(gl.glBindVertexArray(0));
+		};
 		renderer_.reset(ShowMySky_AtmosphereRenderer_create(gl, &pathToData, skySettings_.get(), &renderSurfaceFunc_));
 		loadShaders();
 		setupRenderTarget();
@@ -467,7 +465,6 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 	{
 		throw InitFailure(error.what());
 	}
-
 	{
 		auto& prog=*luminanceToScreenProgram_;
 		prog.bind();
@@ -524,9 +521,7 @@ void AtmosphereShowMySky::regenerateGrid()
 		for(int x=0; x<=gridMaxX; ++x)
 		{
 			Vec2f& v=posGrid[y*(1+gridMaxX)+x];
-			v[0] = viewportLeft + (x == 0 ? 0
-										  : x == gridMaxX ? width
-														  : (x-0.5*(y&1))*stepX);
+			v[0] = viewportLeft + (x == 0 ? 0 : x == gridMaxX ? width : (x-0.5*(y&1))*stepX);
 			v[1] = viewportBottom+y*stepY;
 		}
 	}
@@ -567,15 +562,15 @@ void AtmosphereShowMySky::probeZenithLuminances(const float altitude)
 	GL(gl.glGetIntegerv(GL_SCISSOR_BOX, origScissor));
 
 	renderer_->setDrawSurfaceCallback([this](QOpenGLShaderProgram& prog)
-	                                  {
-	                                      const auto& settings = *static_cast<SkySettings*>(skySettings_.get());
-	                                      prog.setUniformValue("projectionMatrix", settings.projectionMatrix_);
+	{
+		const auto& settings = *static_cast<SkySettings*>(skySettings_.get());
+		prog.setUniformValue("projectionMatrix", settings.projectionMatrix_);
 
-	                                      auto& gl = *glfuncs();
-	                                      GL(gl.glBindVertexArray(zenithProbeVAO_));
-	                                      GL(gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
-	                                      GL(gl.glBindVertexArray(0));
-	                                  });
+		auto& gl = *glfuncs();
+		GL(gl.glBindVertexArray(zenithProbeVAO_));
+		GL(gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
+		GL(gl.glBindVertexArray(0));
+	});
 
 	const auto unitMat = Mat4f(1,0,0,0,
 	                           0,1,0,0,
