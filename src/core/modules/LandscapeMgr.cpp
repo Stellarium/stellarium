@@ -333,16 +333,16 @@ void LandscapeMgr::update(double deltaTime)
 			// Use no more than 1/60th of a second for this batch of loading
 			QElapsedTimer timer;
 			timer.start();
-            Atmosphere::LoadingStatus status;
+			Atmosphere::LoadingStatus status;
 			while(loadingAtmosphere->isLoading() && timer.elapsed() < 1000/60)
 				status = loadingAtmosphere->stepDataLoading();
 			if(loadingAtmosphere->isLoading())
-            {
-                setAtmosphereShowMySkyStoppedWithError(false);
+			{
+				setAtmosphereShowMySkyStoppedWithError(false);
 				const auto percentDone = std::lround(100.*status.stepsDone/status.stepsToDo);
-                setAtmosphereShowMySkyStatusText(q_("Loading... %1% done").arg(percentDone));
+				setAtmosphereShowMySkyStatusText(q_("Loading... %1% done").arg(percentDone));
 				qDebug() << "Finished this batch of loading at" << percentDone << "%, will continue in the next frame";
-            }
+			}
 			else
 			{
 				setAtmosphereShowMySkyStatusText(q_("Switching models..."));
@@ -352,44 +352,44 @@ void LandscapeMgr::update(double deltaTime)
 		{
 			qWarning() << "ERROR: Failed to load atmosphere model data:" << error.what();
 			qWarning() << "WARNING: Falling back to the Preetham's model";
-            setAtmosphereShowMySkyStoppedWithError(true);
-            setAtmosphereShowMySkyStatusText(error.what());
+			setAtmosphereShowMySkyStoppedWithError(true);
+			setAtmosphereShowMySkyStatusText(error.what());
 			loadingAtmosphere.reset();
 		}
 	}
 
 	if(loadingAtmosphere && loadingAtmosphere->isReadyToRender())
 	{
-        bool loaded = false;
+		bool loaded = false;
 		if(drawer->getFlagHasAtmosphere())
-        {
-            // Fade out current atmosphere, then fade in the new one
-            if(atmosphere->getFlagShow())
-            {
-                atmosphere->setFlagShow(false);
-            }
-            else if(atmosphere->getFadeIntensity() == 0)
-            {
-                loadingAtmosphere->setFlagShow(true);
-                loadingAtmosphere->setFadeDuration(atmosphere->getFadeDuration());
-                loadingAtmosphere->setLightPollutionLuminance(atmosphere->getLightPollutionLuminance());
-                loaded = true;
-            }
-        }
-        else
-        {
-            loaded = true;
-        }
+		{
+			// Fade out current atmosphere, then fade in the new one
+			if(atmosphere->getFlagShow())
+			{
+				atmosphere->setFlagShow(false);
+			}
+			else if(atmosphere->getFadeIntensity() == 0)
+			{
+				loadingAtmosphere->setFlagShow(true);
+				loadingAtmosphere->setFadeDuration(atmosphere->getFadeDuration());
+				loadingAtmosphere->setLightPollutionLuminance(atmosphere->getLightPollutionLuminance());
+				loaded = true;
+			}
+		}
+		else
+		{
+			loaded = true;
+		}
 
-        if(loaded)
-        {
-            atmosphere = std::move(loadingAtmosphere);
+		if(loaded)
+		{
+			atmosphere = std::move(loadingAtmosphere);
 #ifdef ENABLE_SHOWMYSKY
-            if(dynamic_cast<AtmosphereShowMySky*>(atmosphere.get()))
-                setAtmosphereShowMySkyStatusText(q_("Loaded successfully"));
+			if(dynamic_cast<AtmosphereShowMySky*>(atmosphere.get()))
+				setAtmosphereShowMySkyStatusText(q_("Loaded successfully"));
 #endif
-            emit atmosphereModelChanged(getAtmosphereModel());
-        }
+			emit atmosphereModelChanged(getAtmosphereModel());
+		}
 	}
 
 	atmosphere->update(deltaTime);
@@ -502,7 +502,7 @@ void LandscapeMgr::update(double deltaTime)
 	}
 
 	// GZ: 2013-09-25 Take light pollution into account!
-    const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
+	const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
 	float pollutionAddonBrightness=(15.5f-2*nelm)*0.025f; // 0..8, so we assume empirical linear brightening 0..0.02
 	float lunarAddonBrightness=0.f;
 	if (currentIsEarth && moonPos[2] > -0.1/1.5)
@@ -614,9 +614,9 @@ void LandscapeMgr::createAtmosphere()
 	{
 		try
 		{
-            // Clear status so that if a repeated error happens, we do emit a signal that will update the GUI.
-            setAtmosphereShowMySkyStatusText("");
-            setAtmosphereShowMySkyStoppedWithError(false);
+			// Clear status so that if a repeated error happens, we do emit a signal that will update the GUI.
+			setAtmosphereShowMySkyStatusText("");
+			setAtmosphereShowMySkyStoppedWithError(false);
 
 			loadingAtmosphere.reset(new AtmosphereShowMySky());
 			if(!atmosphere)
@@ -624,14 +624,15 @@ void LandscapeMgr::createAtmosphere()
 				// We're just loading the first atmosphere in the run of Stellarium. Initialize it synchronously.
 				while(loadingAtmosphere->isLoading())
 					loadingAtmosphere->stepDataLoading();
-                setAtmosphereShowMySkyStoppedWithError(false);
-                setAtmosphereShowMySkyStatusText(q_("Loaded successfully"));
+
+				setAtmosphereShowMySkyStoppedWithError(false);
+				setAtmosphereShowMySkyStatusText(q_("Loaded successfully"));
 			}
-            else
-            {
-                setAtmosphereShowMySkyStoppedWithError(false);
-                setAtmosphereShowMySkyStatusText(q_("Loading... 0% done"));
-            }
+			else
+			{
+				setAtmosphereShowMySkyStoppedWithError(false);
+				setAtmosphereShowMySkyStatusText(q_("Loading... 0% done"));
+			}
 		}
 		catch(AtmosphereShowMySky::InitFailure const& error)
 		{
@@ -640,8 +641,8 @@ void LandscapeMgr::createAtmosphere()
 			loadingAtmosphere.reset(new AtmospherePreetham(skylight));
 			needResetConfig=true;
 
-            setAtmosphereShowMySkyStoppedWithError(true);
-            setAtmosphereShowMySkyStatusText(error.what());
+			setAtmosphereShowMySkyStoppedWithError(true);
+			setAtmosphereShowMySkyStatusText(error.what());
 		}
 	}
 #endif
@@ -656,12 +657,12 @@ void LandscapeMgr::createAtmosphere()
 		// We're just loading the first atmosphere in the run of Stellarium. The atmosphere is fully loaded by this point.
 		atmosphere = std::move(loadingAtmosphere);
 
-        const auto conf=StelApp::getInstance().getSettings();
-        setFlagAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
-        setAtmosphereFadeDuration(conf->value("landscape/atmosphere_fade_duration",0.5).toFloat());
+		const auto conf=StelApp::getInstance().getSettings();
+		setFlagAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
+		setAtmosphereFadeDuration(conf->value("landscape/atmosphere_fade_duration",0.5).toFloat());
 
-        const auto drawer = StelApp::getInstance().getCore()->getSkyDrawer();
-        setAtmosphereLightPollutionLuminance(drawer->getLightPollutionLuminance());
+		const auto drawer = StelApp::getInstance().getCore()->getSkyDrawer();
+		setAtmosphereLightPollutionLuminance(drawer->getLightPollutionLuminance());
 	}
 
 	if(needResetConfig)
