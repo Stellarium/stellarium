@@ -177,11 +177,9 @@ HRESULT OleCreateInstance(LPCOLESTR lpszProgID, IDispatch** ppIDispatch)
 
 BOOL OleInit(DWORD dwInitType)
 {
-	HRESULT hResult;
-
 	if (!dwInitType) dwInitType = COINIT_MULTITHREADED;
 
-	hResult = CoInitializeEx(nullptr, dwInitType);
+	HRESULT hResult = CoInitializeEx(nullptr, dwInitType);
 	if (FAILED(hResult))
 	{
 		return FALSE;
