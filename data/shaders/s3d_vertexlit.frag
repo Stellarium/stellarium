@@ -43,10 +43,10 @@ uniform lowp float u_fAlphaThresh;
 uniform mediump vec3 u_vMixEmissive; //material emissive modulated by light angle
 uniform mediump float u_vMatAlpha;
 
-varying mediump vec2 v_texcoord;
-varying mediump vec3 v_texillumination;
+VARYING mediump vec2 v_texcoord;
+VARYING mediump vec3 v_texillumination;
 #if MAT_SPECULAR
-varying mediump vec3 v_specillumination;
+VARYING mediump vec3 v_specillumination;
 #endif
 
 void main(void)
@@ -76,11 +76,11 @@ void main(void)
 
 #if MAT_DIFFUSETEX
 	#if BLENDING
-	gl_FragColor = vec4(color, texVal.a * u_vMatAlpha);
+	FRAG_COLOR = vec4(color, texVal.a * u_vMatAlpha);
 	#else
-	gl_FragColor = vec4(color, 1.0);
+	FRAG_COLOR = vec4(color, 1.0);
 	#endif
 #else	
-	gl_FragColor = vec4(color,u_vMatAlpha); //u_vMatAlpha is automatically set to 1.0 if blending is disabled
+	FRAG_COLOR = vec4(color,u_vMatAlpha); //u_vMatAlpha is automatically set to 1.0 if blending is disabled
 #endif
 }

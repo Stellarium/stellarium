@@ -18,6 +18,7 @@
 
 #include "StelOpenGL.hpp"
 #include <QDebug>
+#include "StelMainView.hpp"
 
 QOpenGLContext* StelOpenGL::mainContext = Q_NULLPTR;
 
@@ -54,4 +55,55 @@ void StelOpenGL::clearGLErrors()
 {
 	while(mainContext->functions()->glGetError()!=GL_NO_ERROR)
 	{ }
+}
+
+QByteArray StelOpenGL::globalShaderPrefix(const ShaderType type)
+{
+	const auto glInfo = StelMainView::getInstance().getGLInformation();
+	if(glInfo.isCoreProfile)
+	{
+		if(type == VERTEX_SHADER)
+		{
+			static const QByteArray prefix = 1+R"(
+#version 330
+#define ATTRIBUTE in
+#define VARYING out
+#define texture2D(a,b) texture(a,b)
+#define texture2DProj(a,b,c) textureProj(a,b,c)
+#line 1
+)";
+			return prefix;
+		}
+		else // FRAGMENT_SHADER
+		{
+			static const QByteArray prefix = 1+R"(
+#version 330
+#define VARYING in
+out vec4 FRAG_COLOR;
+#define texture2D(a,b) texture(a,b)
+#define texture2DProj(a,b,c) textureProj(a,b,c)
+#line 1
+)";
+			return prefix;
+		}
+	}
+
+	if(type == VERTEX_SHADER)
+	{
+		static const QByteArray prefix = 1+R"(
+#define ATTRIBUTE attribute
+#define VARYING varying
+#line 1
+)";
+		return prefix;
+	}
+	else // FRAGMENT_SHADER
+	{
+		static const QByteArray prefix = 1+R"(
+#define VARYING varying
+#define FRAG_COLOR gl_FragColor
+#line 1
+)";
+		return prefix;
+	}
 }

@@ -164,34 +164,31 @@ void StelSkyDrawer::init()
 	// Create shader program
 	QOpenGLShader vshader(QOpenGLShader::Vertex);
 	const char *vsrc =
-		"#version 330\n"
-		"in mediump vec2 pos;\n"
-		"in mediump vec2 texCoord;\n"
-		"in mediump vec3 color;\n"
+		"ATTRIBUTE mediump vec2 pos;\n"
+		"ATTRIBUTE mediump vec2 texCoord;\n"
+		"ATTRIBUTE mediump vec3 color;\n"
 		"uniform mediump mat4 projectionMatrix;\n"
-		"out mediump vec2 texc;\n"
-		"out mediump vec3 outColor;\n"
+		"VARYING mediump vec2 texc;\n"
+		"VARYING mediump vec3 outColor;\n"
 		"void main(void)\n"
 		"{\n"
 		"    gl_Position = projectionMatrix * vec4(pos.x, pos.y, 0, 1);\n"
 		"    texc = texCoord;\n"
 		"    outColor = color;\n"
 		"}\n";
-	vshader.compileSourceCode(vsrc);
+	vshader.compileSourceCode(StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) + vsrc);
 	if (!vshader.log().isEmpty()) { qWarning() << "StelSkyDrawer::init(): Warnings while compiling vshader: " << vshader.log(); }
 
 	QOpenGLShader fshader(QOpenGLShader::Fragment);
 	const char *fsrc =
-		"#version 330\n"
-		"in mediump vec2 texc;\n"
-		"in mediump vec3 outColor;\n"
+		"VARYING mediump vec2 texc;\n"
+		"VARYING mediump vec3 outColor;\n"
 		"uniform sampler2D tex;\n"
-		"layout(location=0) out vec4 fragColor;\n"
 		"void main(void)\n"
 		"{\n"
-		"    fragColor = texture(tex, texc)*vec4(outColor, 1.);\n"
+		"    FRAG_COLOR = texture2D(tex, texc)*vec4(outColor, 1.);\n"
 		"}\n";
-	fshader.compileSourceCode(fsrc);
+	fshader.compileSourceCode(StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) + fsrc);
 	if (!fshader.log().isEmpty()) { qWarning() << "StelSkyDrawer::init(): Warnings while compiling fshader: " << fshader.log(); }
 
 	starShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());

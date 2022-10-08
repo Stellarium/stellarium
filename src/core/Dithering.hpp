@@ -67,7 +67,6 @@ inline Vec3f calcRGBMaxValue(StelPainter::DitheringMode mode)
 inline QString makeDitheringShader()
 {
 	return 1+R"(
-#version 330
 uniform mediump vec3 rgbMaxValue;
 uniform sampler2D ditherPattern;
 mediump vec3 dither(mediump vec3 c)

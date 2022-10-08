@@ -17,8 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#version 330
-
 // Variables for the color computation
 uniform highp vec3 sunPos;
 uniform mediump float term_x, Ax, Bx, Cx, Dx, Ex;
@@ -28,13 +26,13 @@ uniform mediump float term_y, Ay, By, Cy, Dy, Ey;
 uniform mediump mat4 projectionMatrix;
 
 // Contains the 2d position of the point on the screen (before multiplication by the projection matrix)
-in mediump vec2 skyVertex;
+ATTRIBUTE mediump vec2 skyVertex;
 
 // Contains the r,g,b,Y (luminosity) components.
-in highp vec4 skyColor;
+ATTRIBUTE highp vec4 skyColor;
 
 // The output variable passed to the fragment shader
-out mediump vec3 resultSkyColor;
+VARYING mediump vec3 resultSkyColor;
 
 vec3 xyYToRGB(highp float x, highp float y, highp float Y);
 

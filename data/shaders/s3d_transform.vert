@@ -28,10 +28,10 @@ This is a shader for MVP transformation only. Used to fill depth maps.
 //matrices
 uniform mat4 u_mMVP;
 
-attribute vec4 a_vertex;
+ATTRIBUTE vec4 a_vertex;
 #if ALPHATEST
-attribute vec2 a_texcoord;
-varying mediump vec2 v_texcoord;
+ATTRIBUTE vec2 a_texcoord;
+VARYING mediump vec2 v_texcoord;
 #endif
 
 void main(void)
