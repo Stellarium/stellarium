@@ -68,6 +68,8 @@ QByteArray StelOpenGL::globalShaderPrefix(const ShaderType type)
 #version 330
 #define ATTRIBUTE in
 #define VARYING out
+#define texture2D(a,b) texture(a,b)
+#define texture2DProj(a,b,c) textureProj(a,b,c)
 #line 1
 )";
 			return prefix;
@@ -78,6 +80,8 @@ QByteArray StelOpenGL::globalShaderPrefix(const ShaderType type)
 #version 330
 #define VARYING in
 out vec4 FRAG_COLOR;
+#define texture2D(a,b) texture(a,b)
+#define texture2DProj(a,b,c) textureProj(a,b,c)
 #line 1
 )";
 			return prefix;
