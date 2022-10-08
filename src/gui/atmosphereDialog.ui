@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>317</width>
-    <height>530</height>
+    <height>549</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -168,14 +168,17 @@
         </item>
         <item>
          <widget class="QComboBox" name="atmosphereModel">
+          <property name="currentText">
+           <string notr="true">Preetham</string>
+          </property>
           <item>
            <property name="text">
-            <string>Preetham</string>
+            <string notr="true">Preetham</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>ShowMySky</string>
+            <string notr="true">ShowMySky</string>
            </property>
           </item>
          </widget>
