@@ -17,7 +17,7 @@
  */
 
 #include "StelApp.hpp"
-#include "StelLocaleMgr.hpp"
+#include "StelTranslator.hpp"
 #include "TelescopeClientASCOMWidget.hpp"
 #include "ui_TelescopeClientASCOMWidget.h"
 
