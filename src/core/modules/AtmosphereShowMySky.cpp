@@ -412,7 +412,7 @@ void AtmosphereShowMySky::resolveFunctions()
 }
 
 AtmosphereShowMySky::AtmosphereShowMySky()
-	: showMySkyLib("ShowMySky")
+	: showMySkyLib("ShowMySky-Qt6")
 	, viewport(0,0,0,0)
 	, gridMaxY(44)
 	, gridMaxX(44)
