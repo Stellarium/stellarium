@@ -67,6 +67,9 @@ private:
 	QNetworkReply * downloadReply;
 
 	QString hotkeyTextWrapper(const QString hotkey) const;
+	//! Make sure that no tabs icons are outside of the viewport.
+	//! @todo Limit the width to the width of the screen *available to the window*.
+	void updateTabBarListWidgetWidth();
 
 signals:
 	void checkUpdatesComplete(void);

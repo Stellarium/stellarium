@@ -79,6 +79,7 @@ void HelpDialog::retranslate()
 		ui->retranslateUi(dialog);
 		updateHelpText();
 		updateAboutText();
+		updateTabBarListWidgetWidth();
 	}
 }
 
@@ -138,6 +139,7 @@ void HelpDialog::createDialogContent()
 	connect(this, SIGNAL(checkUpdatesComplete(void)), this, SLOT(updateAboutText()));
 
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+	updateTabBarListWidgetWidth();
 }
 
 void HelpDialog::setKeyButtonState(bool state)
@@ -581,4 +583,32 @@ void HelpDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
 	if (!current)
 		current = previous;
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
+}
+
+void HelpDialog::updateTabBarListWidgetWidth()
+{
+	ui->stackListWidget->setWrapping(false);
+	// Update list item sizes after translation
+	ui->stackListWidget->adjustSize();
+	QAbstractItemModel* model = ui->stackListWidget->model();
+	if (!model)
+		return;
+
+	// stackListWidget->font() does not work properly!
+	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
+	QFont font;
+	font.setPixelSize(14);
+	font.setWeight(QFont::Bold);
+	QFontMetrics fontMetrics(font);
+	int iconSize = ui->stackListWidget->iconSize().width();
+	int width = 0;
+	for (int row = 0; row < model->rowCount(); row++)
+	{
+		int textWidth = fontMetrics.boundingRect(ui->stackListWidget->item(row)->text()).width();
+		width += iconSize > textWidth ? iconSize : textWidth; // use the wider one
+		width += 24; // margin - 12px left and 12px right
+	}
+	// Hack to force the window to be resized...
+	ui->stackListWidget->setMinimumWidth(width);
+	ui->stackListWidget->updateGeometry();
 }
