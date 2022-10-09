@@ -368,7 +368,7 @@ void LandscapeMgr::update(double deltaTime)
 			{
 				atmosphere->setFlagShow(false);
 			}
-//			else if(atmosphere->getFadeIntensity() == 0)
+			else if(atmosphere->getFadeIntensity() == 0)
 			{
 				loadingAtmosphere->setFlagShow(true);
 				loadingAtmosphere->setFadeDuration(atmosphere->getFadeDuration());
