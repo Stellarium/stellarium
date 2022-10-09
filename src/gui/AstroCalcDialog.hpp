@@ -467,7 +467,9 @@ private:
 	QList<HECPosition> hecObjects;
 
 	void saveTableAsCSV(const QString& fileName, QTreeWidget* tWidget, QStringList& headers);
+	void saveTableAsXLSX(const QString& fileName, QTreeWidget* tWidget, QStringList& headers, const QString& title, const QString& sheetName, const QString &note = "");
 	void saveTableAsBookmarks(const QString& fileName, QTreeWidget* tWidget);
+	QPair<QString, QString> askTableFilePath(const QString& caption, const QString& fileName);
 
 	void populateToolTips();
 	//! Get the list of selected dwarf and minor planets

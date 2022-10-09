@@ -413,6 +413,12 @@ SET(ENABLE_GPS 1 CACHE BOOL "Define whether GPS queries should be supported.")
 # Activate support for ShowMySky atmosphere
 SET(ENABLE_SHOWMYSKY 1 CACHE BOOL "Define whether to support ShowMySky atmosphere model if installed")
 
+# Activate support for XLSX (Excel) files
+SET(ENABLE_XLSX 1 CACHE BOOL "Define whether to support XLSX (Excel) files")
+IF(ENABLE_XLSX)
+     ADD_DEFINITIONS(-DENABLE_XLSX)
+ENDIF()
+
 # SPOUT allows relaying the Stellarium OpenGL framebuffer as DirectX texture in other programs.
 # It exists on Windows only. Syphon is a similar system for MacOS, this might be added by a Mac developer.
 IF(WIN32)
@@ -792,29 +798,31 @@ ELSE()
      MESSAGE(STATUS "Using system-provided zlib at ${ZLIB_LIBRARIES}")
 ENDIF()
 
-# TODO: switch to something like vcpkg or conan, and plain find_package,
-# without the fallback of cmake downloading the dep itself.
-# But some libraries are not available there yet.
-CPMFindPackage(NAME QXlsx
-    URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.4.4.zip
-    URL_HASH SHA256=3efbd6f63a1ffd521c535dce7b5a5a7e9ebd23db51e6ae8e3e2eb89796e57675
-    DOWNLOAD_ONLY yes
-    EXCLUDE_FROM_ALL ON
-    SOURCE_SUBDIR QXlsx)
-if(QXlsx_ADDED)
-    # Can't use embedded CMakeLists.txt due to
-    # https://github.com/QtExcel/QXlsx/issues/134
-    file(GLOB_RECURSE QXLSX_FILES
-        ${QXlsx_SOURCE_DIR}/QXlsx/source/*.cpp
-        ${QXlsx_SOURCE_DIR}/QXlsx/header/*.h)
-    add_library(QXlsx STATIC EXCLUDE_FROM_ALL ${QXLSX_FILES})
-    target_link_libraries(QXlsx PUBLIC
-        Qt${QT_VERSION_MAJOR}::Core
-        Qt${QT_VERSION_MAJOR}::Gui
-        Qt${QT_VERSION_MAJOR}::GuiPrivate)
-    target_include_directories(QXlsx PUBLIC ${QXlsx_SOURCE_DIR}/QXlsx/header)
-    add_library(QXlsx::QXlsx ALIAS QXlsx)
-endif()
+IF(ENABLE_XLSX)
+     # TODO: switch to something like vcpkg or conan, and plain find_package,
+     # without the fallback of cmake downloading the dep itself.
+     # But some libraries are not available there yet.
+     CPMFindPackage(NAME QXlsx
+	 URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.4.4.zip
+	 URL_HASH SHA256=3efbd6f63a1ffd521c535dce7b5a5a7e9ebd23db51e6ae8e3e2eb89796e57675
+	 DOWNLOAD_ONLY yes
+	 EXCLUDE_FROM_ALL ON
+	 SOURCE_SUBDIR QXlsx)
+     if(QXlsx_ADDED)
+	 # Can't use embedded CMakeLists.txt due to
+	 # https://github.com/QtExcel/QXlsx/issues/134
+	 file(GLOB_RECURSE QXLSX_FILES
+	     ${QXlsx_SOURCE_DIR}/QXlsx/source/*.cpp
+	     ${QXlsx_SOURCE_DIR}/QXlsx/header/*.h)
+	 add_library(QXlsx STATIC EXCLUDE_FROM_ALL ${QXLSX_FILES})
+	 target_link_libraries(QXlsx PUBLIC
+	     Qt${QT_VERSION_MAJOR}::Core
+	     Qt${QT_VERSION_MAJOR}::Gui
+	     Qt${QT_VERSION_MAJOR}::GuiPrivate)
+	 target_include_directories(QXlsx PUBLIC ${QXlsx_SOURCE_DIR}/QXlsx/header)
+	 add_library(QXlsx::QXlsx ALIAS QXlsx)
+     endif()
+ENDIF()
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
@@ -980,15 +988,23 @@ ENDIF()
 ########### Windows packaging ###############
 IF(WIN32)
      CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss @ONLY)
+     CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/stellarium-patch.iss.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium-patch.iss @ONLY)
      FIND_PACKAGE(ISCC)
      IF(ISS_COMPILER_FOUND)
-          # Add installer target
+	  # Add a full installer target
           ADD_CUSTOM_TARGET(
                stellarium-installer
 	       COMMAND ${ISS_COMPILER_EXECUTABLE} "${CMAKE_CURRENT_BINARY_DIR}/stellarium.iss"
                COMMENT "Making an installer package for Windows..."
                VERBATIM
           )
+	  # Add installer target
+	  ADD_CUSTOM_TARGET(
+	       stellarium-patch-installer
+	       COMMAND ${ISS_COMPILER_EXECUTABLE} "${CMAKE_CURRENT_BINARY_DIR}/stellarium-patch.iss"
+	       COMMENT "Making an installer package for Windows..."
+	       VERBATIM
+	  )
      ELSE()
 	  MESSAGE(STATUS "Could NOT find Inno Setup compiler. You won't be able to build setup files.")
      ENDIF()
