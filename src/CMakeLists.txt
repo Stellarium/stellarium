@@ -615,6 +615,11 @@ IF(WIN32)
         "
      )
      ENDIF()
+     # workaround for https://bugreports.qt.io/browse/QTBUG-105984
+     IF(ENABLE_MEDIA AND (${QT_VERSION} VERSION_GREATER_EQUAL "6.4.0"))
+	  GET_FILENAME_COMPONENT(_qt_bin_dir "${WINDEPLOYQT_COMMAND}" DIRECTORY)
+	  INSTALL(FILES ${_qt_bin_dir}/../plugins/multimedia/windowsmediaplugin.dll DESTINATION ${CMAKE_INSTALL_PREFIX}/qtstuff/multimedia)
+     ENDIF()
 ENDIF()
 
 SET_TARGET_PROPERTIES(stelMain PROPERTIES FOLDER "src/core")
