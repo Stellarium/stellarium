@@ -155,6 +155,8 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 	{
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 		qDebug() << "Loading " << url;
+#elif (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
+		qDebug() << "Loading " << content.request().url();
 #else
 		qDebug() << "Loading " << content.canonicalUrl();
 #endif
@@ -162,6 +164,8 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 		qDebug() << "\tSTATUS:        " << videoObjects[id]->player->mediaStatus();
 #if (QT_VERSION>=QT_VERSION_CHECK(6,0,0))
 		qDebug() << "\tFile:          " << videoObjects[id]->player->source();
+#elif (QT_VERSION>=QT_VERSION_CHECK(5,14,0))
+		qDebug() << "\tFile:          " << videoObjects[id]->player->currentMedia().request().url();
 #else
 		qDebug() << "\tFile:          " << videoObjects[id]->player->currentMedia().canonicalUrl();
 #endif
@@ -734,20 +738,6 @@ void StelVideoMgr::handleDurationChanged(qint64 duration)
 		videoObjects[id]->duration=duration;
 	}
 }
-
-/*
-// This gets called in loadVideo with player->setMedia(content). Unnecessary, disabled.
-void StelVideoMgr::handleCurrentMediaChanged(const QMediaContent & media)
-{
-	qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ": Current media changed:" << media.canonicalUrl();
-}
-
-// This gets called in loadVideo with player->setMedia(content). Unnecessary, disabled.
-void StelVideoMgr::handleMediaChanged(const QMediaContent & media)
-{
-	qDebug() << "QMediaPlayer: " << QObject::sender()->property("Stel_id").toString() << ": Media changed:" << media.canonicalUrl();
-}
-*/
 
 // This may have been useful to trigger the pause-at-end if it was fast enough.
 // It seems that this is too slow! At EndOfMedia the player window disappears, then reappears. This is ugly!

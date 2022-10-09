@@ -93,11 +93,7 @@ void StelLogger::init(const QString& logFilePath)
 	}
 
 	QProcess lspci;
-	#if (QT_VERSION>=QT_VERSION_CHECK(6, 0, 0))
-	lspci.startCommand("lspci -v", QIODevice::ReadOnly);
-	#else
-	lspci.start("lspci -v", QIODevice::ReadOnly);
-	#endif
+	lspci.start("lspci", { "-v" }, QIODevice::ReadOnly);
 	lspci.waitForFinished(300);
 	const QString pciData(lspci.readAll());
 	#if (QT_VERSION>=QT_VERSION_CHECK(5, 14, 0))
@@ -180,7 +176,7 @@ void StelLogger::init(const QString& logFilePath)
 
 #elif defined Q_OS_MACOS
 	QProcess systemProfiler;
-	systemProfiler.start("/usr/sbin/system_profiler -detailLevel mini SPHardwareDataType SPDisplaysDataType");
+	systemProfiler.start("/usr/sbin/system_profiler", {"-detailLevel mini SPHardwareDataType SPDisplaysDataType"});
 	systemProfiler.waitForStarted();
 	systemProfiler.waitForFinished();
 	const QString systemData(systemProfiler.readAllStandardOutput());
@@ -214,11 +210,7 @@ void StelLogger::init(const QString& logFilePath)
 
 #elif defined Q_OS_BSD4
 	QProcess dmesg;
-	#if (QT_VERSION>=QT_VERSION_CHECK(6, 0, 0))
-	dmesg.startCommand("/sbin/dmesg", QIODevice::ReadOnly);
-	#else
-	dmesg.start("/sbin/dmesg", QIODevice::ReadOnly);
-	#endif
+	dmesg.start("/sbin/dmesg", {}, QIODevice::ReadOnly);
 	dmesg.waitForStarted();
 	dmesg.waitForFinished();
 	const QString dmesgData(dmesg.readAll());

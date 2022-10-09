@@ -83,7 +83,7 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 	QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	connect(networkReply, &QNetworkReply::finished, this, [&, networkReply] {
 		QByteArray data = networkReply->readAll();
-		for (const QString line : data.split('\n'))
+		for (const QString &line : data.split('\n'))
 		{
 			if (line.startsWith("#")) continue;
 			QString key = line.section("=", 0, 0).trimmed();
@@ -233,7 +233,8 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 				// do nothing. Assume this frame is equal to VSOP87 (which is slightly incorrect!)
 				break;
 			default:
-				qDebug() << "HiPS: Unexpected Frame: " << hipsFrame;
+				if (!planetarySurvey)
+					qDebug() << "HiPS: Unexpected Frame: " << hipsFrame;
 		}
 		obsVelocity *= core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
 	}
