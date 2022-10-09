@@ -72,8 +72,8 @@ QByteArray StelOpenGL::globalShaderPrefix(const ShaderType type)
 #define texture2D_3(a,b,c) texture(a,b,c)
 #define texture2DProj(a,b) textureProj(a,b)
 #define texture2DProj_3(a,b,c) textureProj(a,b,c)
+#define shadow2D_x(a,b) texture(a,b)
 #define shadow2DProj_x(a,b) textureProj(a,b)
-#define shadow2D_x(a,b) textureProj(a,b)
 #line 1
 )";
 			return prefix;
@@ -88,8 +88,8 @@ out vec4 FRAG_COLOR;
 #define texture2D_3(a,b,c) texture(a,b,c)
 #define texture2DProj(a,b) textureProj(a,b)
 #define texture2DProj_3(a,b,c) textureProj(a,b,c)
+#define shadow2D_x(a,b) texture(a,b)
 #define shadow2DProj_x(a,b) textureProj(a,b)
-#define shadow2D_x(a,b) textureProj(a,b)
 #line 1
 )";
 			return prefix;
@@ -103,8 +103,8 @@ out vec4 FRAG_COLOR;
 #define VARYING varying
 #define texture2D_3(a,b,c) texture2D(a,b,c)
 #define texture2DProj_3(a,b,c) texture2DProj(a,b,c)
-#define shadow2DProj_x(a,b) shadow2DProj(a,b).x
 #define shadow2D_x(a,b) shadow2D(a,b).x
+#define shadow2DProj_x(a,b) shadow2DProj(a,b).x
 #line 1
 )";
 		return prefix;
@@ -116,8 +116,8 @@ out vec4 FRAG_COLOR;
 #define FRAG_COLOR gl_FragColor
 #define texture2D_3(a,b,c) texture2D(a,b,c)
 #define texture2DProj_3(a,b,c) texture2DProj(a,b,c)
-#define shadow2DProj_x(a,b) shadow2DProj(a,b).x
 #define shadow2D_x(a,b) shadow2D(a,b).x
+#define shadow2DProj_x(a,b) shadow2DProj(a,b).x
 #line 1
 )";
 		return prefix;

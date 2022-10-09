@@ -401,7 +401,7 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vSha
 		const bool shaderHasVersion = fShader.contains("#version");
 		QByteArray prefix;
 		QByteArray finalShader = fShader;
-		if(shaderHasVersion && prefixHasVersion)
+		if(shaderHasVersion)
 		{
 			const auto shaderVersionString = QString(fShader.simplified()).replace(QRegularExpression("^#version ([0-9]+)\\b.*"), "\\1");
 			bool svOK = false;
@@ -411,16 +411,26 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vSha
 			bool pvOK = false;
 			const auto prefixVersion = prefixVersionString.toInt(&pvOK);
 
+			bool failed = false;
 			if(!svOK)
+			{
 				qCCritical(shaderMgr) << "Failed to get shader version, string:" << shaderVersionString;
+				failed = true;
+			}
 
-			if(!pvOK)
+			if(prefixHasVersion && !pvOK)
+			{
 				qCCritical(shaderMgr) << "Failed to get prefix version, string:" << prefixVersionString;
+				failed = true;
+			}
 
-			if(!svOK || !pvOK)
-				return false;
+			if(failed) return false;
 
-			if(shaderVersion > prefixVersion)
+			if(!prefixHasVersion)
+			{
+				prefix = QString("#version %1\n").arg(shaderVersion).toUtf8() + globalPrefix;
+			}
+			else if(shaderVersion > prefixVersion)
 			{
 				prefix = QString(globalPrefix).replace(QRegularExpression("(^|\n)(#version[ \t]+)([0-9]+)\\b"),
 													   QString("\\1\\2%1").arg(shaderVersion)).toUtf8();
