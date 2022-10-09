@@ -30,7 +30,7 @@ constexpr int GUI_PIXMAPS_SCALE = 5;
 
 MapWidget::MapWidget(QWidget* parent)
 	: QWidget(parent)
-	, map(":/graphicGui/miscWorldMap.png")
+	, map(":/graphicGui/miscWorldMap.jpg")
 	, locationMarker(":/graphicGui/uieMapPointer.png")
 {
 }
