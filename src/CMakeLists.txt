@@ -564,7 +564,11 @@ IF(APPLE)
         "
      )
     IF(ENABLE_SHOWMYSKY AND EXISTS ${ShowMySky_LIBRARY})
-        INSTALL(FILES ${ShowMySky_LIBRARY} DESTINATION Frameworks)
+	GET_FILENAME_COMPONENT(_sms_lib_dir "${ShowMySky_LIBRARY}" DIRECTORY)
+	INSTALL(DIRECTORY ${_sms_lib_dir}/ DESTINATION Frameworks
+		PATTERN "*.dylib"
+		PATTERN "ShowMySky*" EXCLUDE
+	)
     ENDIF()
     INSTALL(CODE
         "
