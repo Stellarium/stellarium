@@ -74,6 +74,8 @@ QByteArray StelOpenGL::globalShaderPrefix(const ShaderType type)
 #define texture2DProj_3(a,b,c) textureProj(a,b,c)
 #define shadow2D_x(a,b) texture(a,b)
 #define shadow2DProj_x(a,b) textureProj(a,b)
+#define textureCube(a,b) texture(a,b)
+#define textureCube_3(a,b,c) texture(a,b,c)
 #line 1
 )";
 			return prefix;
@@ -90,6 +92,8 @@ out vec4 FRAG_COLOR;
 #define texture2DProj_3(a,b,c) textureProj(a,b,c)
 #define shadow2D_x(a,b) texture(a,b)
 #define shadow2DProj_x(a,b) textureProj(a,b)
+#define textureCube(a,b) texture(a,b)
+#define textureCube_3(a,b,c) texture(a,b,c)
 #line 1
 )";
 			return prefix;
@@ -105,6 +109,7 @@ out vec4 FRAG_COLOR;
 #define texture2DProj_3(a,b,c) texture2DProj(a,b,c)
 #define shadow2D_x(a,b) shadow2D(a,b).x
 #define shadow2DProj_x(a,b) shadow2DProj(a,b).x
+#define textureCube_3(a,b,c) textureCube(a,b,c)
 #line 1
 )";
 		return prefix;
@@ -118,6 +123,7 @@ out vec4 FRAG_COLOR;
 #define texture2DProj_3(a,b,c) texture2DProj(a,b,c)
 #define shadow2D_x(a,b) shadow2D(a,b).x
 #define shadow2DProj_x(a,b) shadow2DProj(a,b).x
+#define textureCube_3(a,b,c) textureCube(a,b,c)
 #line 1
 )";
 		return prefix;
