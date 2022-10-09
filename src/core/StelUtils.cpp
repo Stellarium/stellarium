@@ -85,11 +85,7 @@ QString getOperatingSystemInfo()
 	#if (defined(Q_OS_FREEBSD) || defined(Q_OS_NETBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_SOLARIS))
 	// Check FreeBSD, OpenBSD, NetBSD and Sun Solaris operating systems
 	QProcess uname;
-	#if (QT_VERSION>=QT_VERSION_CHECK(6, 0, 0))
-	uname.startCommand("/usr/bin/uname -srm");
-	#else
-	uname.start("/usr/bin/uname -srm");
-	#endif
+	uname.start("/usr/bin/uname", { "-srm" });
 	uname.waitForStarted();
 	uname.waitForFinished();
 	const QString BSDsystem = uname.readAllStandardOutput();
