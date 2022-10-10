@@ -34,6 +34,7 @@
 
 class Atmosphere;
 class QSettings;
+class QTimer;
 
 
 //! @class Cardinals manages the display of cardinal points
@@ -619,6 +620,9 @@ public slots:
 		return landscape->getOpacity(azalt);
 	}
 
+	void showMessage(const QString& message);
+	void clearMessage();
+
 signals:
 	void atmosphereDisplayedChanged(const bool displayed);
 	void atmosphereModelChanged(const QString& model);
@@ -720,6 +724,11 @@ private:
 	Cardinals* cardinalPoints;		// Cardinals points
 	Landscape* landscape;			// The landscape i.e. the fog, the ground and "decor"
 	Landscape* oldLandscape;		// Used only during transitions to newly loaded landscape.
+
+	// Used to display error messages: e.g. when atmosphere model fails
+    LinearFader messageFader;
+	QString messageToShow;
+	QTimer* messageTimer = nullptr;
 
 	// Define whether the observer location is to be updated when the landscape is updated.
 	bool flagLandscapeSetsLocation;

@@ -779,121 +779,128 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 				       const Planet*const moon, const StelLocation& location, const float temperature,
 				       const float relativeHumidity, const float extinctionCoefficient, const bool noScatter)
 {
-	Q_UNUSED(JD)
-	Q_UNUSED(temperature)
-	Q_UNUSED(relativeHumidity)
-	Q_UNUSED(extinctionCoefficient)
-	initProperties();
-
-	// The majority of calculations is done in fragment shader, but we still need a nontrivial
-	// grid to pass view rays, corresponding to the chosen projection, to the shader. Of course,
-	// best quality results would be if we did projection inside the shader, but that'd require
-	// having two implementations for each projection type: one for CPU and one for GPU.
-	const auto prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-	if (viewport != prj->getViewport())
+	try
 	{
-		viewport = prj->getViewport();
-		regenerateGrid();
+		Q_UNUSED(JD)
+		Q_UNUSED(temperature)
+		Q_UNUSED(relativeHumidity)
+		Q_UNUSED(extinctionCoefficient)
+		initProperties();
+
+		// The majority of calculations is done in fragment shader, but we still need a nontrivial
+		// grid to pass view rays, corresponding to the chosen projection, to the shader. Of course,
+		// best quality results would be if we did projection inside the shader, but that'd require
+		// having two implementations for each projection type: one for CPU and one for GPU.
+		const auto prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+		if (viewport != prj->getViewport())
+		{
+			viewport = prj->getViewport();
+			regenerateGrid();
+		}
+		const auto width=viewport[2], height=viewport[3];
+		if(width!=prevWidth_ || height!=prevHeight_)
+			resizeRenderTarget(width, height);
+
+		if(location.altitude != lastUsedAltitude_)
+		{
+			lastUsedAltitude_ = location.altitude;
+			probeZenithLuminances(location.altitude);
+			dynResTimer=0;
+		}
+
+		auto sunPos  =  sun.getAltAzPosAuto(core);
+		if (std::isnan(sunPos.length()))
+			sunPos.set(0, 0, -1);
+
+		// if we run dynamic resolution mode and don't have a timeout or too much change, we skip the frame
+		if (dynamicResolution(prj, sunPos, width, height))
+			return;
+
+		const auto sunDir = sunPos / sunPos.length();
+		const double sunAngularRadius = atan(sun.getEquatorialRadius()/sunPos.length());
+
+		// If we have no moon, just put it into nadir
+		Vec3d moonDir{0.,0.,-1.};
+
+		double earthMoonDistance = 0;
+
+		if (moon)
+		{
+			auto moonPos = moon->getAltAzPosAuto(core);
+			if (std::isnan(moonPos.length()))
+				moonPos.set(0, 0, -1);
+			moonDir = moonPos / moonPos.length();
+
+			const double moonAngularRadius = atan(moon->getEquatorialRadius()/moonPos.length());
+			const double separationAngle = std::acos(sunDir.dot(moonDir));  // angle between them
+
+			sunVisibility_ = sunVisibilityDueToMoon(sunAngularRadius, moonAngularRadius, separationAngle);
+			const double min = 0.0025; // the sky still glows during the totality
+			eclipseFactor = static_cast<float>(min + (1-min)*sunVisibility_);
+
+			const Vec3d earthGeomPos = currentPlanet.getAltAzPosGeometric(core);
+			const Vec3d moonGeomPos = moon->getAltAzPosGeometric(core);
+			earthMoonDistance = (earthGeomPos - moonGeomPos).length() * (AU*1000);
+		}
+		else
+		{
+			eclipseFactor = 1;
+		}
+		// TODO: compute eclipse factor also for Lunar eclipses! (lp:#1471546)
+
+		// No need to calculate if not visible
+		if (!fader.getInterstate())
+		{
+			// GZ 20180114: Why did we add light pollution if atmosphere was not visible?????
+			// And what is the meaning of 0.001? Approximate contribution of stellar background? Then why is it 0.0001 below???
+			averageLuminance = 0.001f;
+			return;
+		}
+
+		// FIXME: ignoring the "additional luminance" like star background etc.; see AtmospherePreetham for all potentially needed terms
+		const auto numViewRayGridPoints=(1+gridMaxX)*(1+gridMaxY);
+		const auto resX=(double)width/(width/atmoRes);
+		const auto resY=(double)height/(height/atmoRes);
+		for (int i=0; i<numViewRayGridPoints; ++i)
+		{
+			Vec3d point(1, 0, 0);
+			prj->unProject(posGrid[i][0]*resX,posGrid[i][1]*resY,point);
+
+			viewRayGrid[i].set(point[0], point[1], point[2], 0);
+		}
+
+		viewRayGridBuffer.bind();
+		viewRayGridBuffer.write(0, &viewRayGrid[0], viewRayGrid.size()*sizeof viewRayGrid[0]);
+		viewRayGridBuffer.release();
+
+		const auto sunAzimuth = std::atan2(sunDir[1], sunDir[0]);
+		const auto sunZenithAngle = std::acos(sunDir[2]);
+		const auto moonAzimuth = std::atan2(moonDir[1], moonDir[0]);
+		const auto moonZenithAngle = std::acos(moonDir[2]);
+
+		const auto lightPollutionRelativeBrightness = fader.getInterstate() * lightPollutionLuminance / lightPollutionUnitLuminance_;
+		const auto airglowRelativeBrightness = 1.f;
+		const auto sunRelativeBrightness = noScatter ? 0.f : 1.f;
+		drawAtmosphere(prj->getProjectionMatrix(), sunAzimuth, sunZenithAngle, sunAngularRadius, moonAzimuth, moonZenithAngle, earthMoonDistance,
+					   location.altitude, sunRelativeBrightness, lightPollutionRelativeBrightness, airglowRelativeBrightness,
+					   eclipseFactor < 1, true);
+		const auto nonExtLunarMagnitude = moon ? moon->getVMagnitude(core) : 100.f;
+		const auto moonRelativeBrightness = noScatter ? 0.f : std::pow(10.f, 0.4f*(nonExtinctedSolarMagnitude-nonExtLunarMagnitude));
+		drawAtmosphere(prj->getProjectionMatrix(), moonAzimuth, moonZenithAngle, 0, 0, M_PI, 0, location.altitude,
+					   moonRelativeBrightness, 0, 0, false, false);
+
+		if (!overrideAverageLuminance)
+		{
+			const auto meanPixelValue=getMeanPixelValue();
+			const auto meanY=meanPixelValue[1];
+			Q_ASSERT(std::isfinite(meanY));
+
+			averageLuminance = meanY+0.0001f; // Add (assumed) star background luminance
+		}
 	}
-	const auto width=viewport[2], height=viewport[3];
-	if(width!=prevWidth_ || height!=prevHeight_)
-		resizeRenderTarget(width, height);
-
-	if(location.altitude != lastUsedAltitude_)
+	catch(ShowMySky::Error const& error)
 	{
-		lastUsedAltitude_ = location.altitude;
-		probeZenithLuminances(location.altitude);
-		dynResTimer=0;
-	}
-
-	auto sunPos  =  sun.getAltAzPosAuto(core);
-	if (std::isnan(sunPos.length()))
-		sunPos.set(0, 0, -1);
-
-	// if we run dynamic resolution mode and don't have a timeout or too much change, we skip the frame
-	if (dynamicResolution(prj, sunPos, width, height))
-		return;
-
-	const auto sunDir = sunPos / sunPos.length();
-	const double sunAngularRadius = atan(sun.getEquatorialRadius()/sunPos.length());
-
-	// If we have no moon, just put it into nadir
-	Vec3d moonDir{0.,0.,-1.};
-
-	double earthMoonDistance = 0;
-
-	if (moon)
-	{
-		auto moonPos = moon->getAltAzPosAuto(core);
-		if (std::isnan(moonPos.length()))
-			moonPos.set(0, 0, -1);
-		moonDir = moonPos / moonPos.length();
-
-		const double moonAngularRadius = atan(moon->getEquatorialRadius()/moonPos.length());
-		const double separationAngle = std::acos(sunDir.dot(moonDir));  // angle between them
-
-		sunVisibility_ = sunVisibilityDueToMoon(sunAngularRadius, moonAngularRadius, separationAngle);
-		const double min = 0.0025; // the sky still glows during the totality
-		eclipseFactor = static_cast<float>(min + (1-min)*sunVisibility_);
-
-		const Vec3d earthGeomPos = currentPlanet.getAltAzPosGeometric(core);
-		const Vec3d moonGeomPos = moon->getAltAzPosGeometric(core);
-		earthMoonDistance = (earthGeomPos - moonGeomPos).length() * (AU*1000);
-	}
-	else
-	{
-		eclipseFactor = 1;
-	}
-	// TODO: compute eclipse factor also for Lunar eclipses! (lp:#1471546)
-
-	// No need to calculate if not visible
-	if (!fader.getInterstate())
-	{
-		// GZ 20180114: Why did we add light pollution if atmosphere was not visible?????
-		// And what is the meaning of 0.001? Approximate contribution of stellar background? Then why is it 0.0001 below???
-		averageLuminance = 0.001f;
-		return;
-	}
-
-	// FIXME: ignoring the "additional luminance" like star background etc.; see AtmospherePreetham for all potentially needed terms
-	const auto numViewRayGridPoints=(1+gridMaxX)*(1+gridMaxY);
-	const auto resX=(double)width/(width/atmoRes);
-	const auto resY=(double)height/(height/atmoRes);
-	for (int i=0; i<numViewRayGridPoints; ++i)
-	{
-		Vec3d point(1, 0, 0);
-		prj->unProject(posGrid[i][0]*resX,posGrid[i][1]*resY,point);
-
-		viewRayGrid[i].set(point[0], point[1], point[2], 0);
-	}
-
-	viewRayGridBuffer.bind();
-	viewRayGridBuffer.write(0, &viewRayGrid[0], viewRayGrid.size()*sizeof viewRayGrid[0]);
-	viewRayGridBuffer.release();
-
-	const auto sunAzimuth = std::atan2(sunDir[1], sunDir[0]);
-	const auto sunZenithAngle = std::acos(sunDir[2]);
-	const auto moonAzimuth = std::atan2(moonDir[1], moonDir[0]);
-	const auto moonZenithAngle = std::acos(moonDir[2]);
-
-	const auto lightPollutionRelativeBrightness = fader.getInterstate() * lightPollutionLuminance / lightPollutionUnitLuminance_;
-	const auto airglowRelativeBrightness = 1.f;
-	const auto sunRelativeBrightness = noScatter ? 0.f : 1.f;
-	drawAtmosphere(prj->getProjectionMatrix(), sunAzimuth, sunZenithAngle, sunAngularRadius, moonAzimuth, moonZenithAngle, earthMoonDistance,
-				   location.altitude, sunRelativeBrightness, lightPollutionRelativeBrightness, airglowRelativeBrightness,
-				   eclipseFactor < 1, true);
-	const auto nonExtLunarMagnitude = moon ? moon->getVMagnitude(core) : 100.f;
-	const auto moonRelativeBrightness = noScatter ? 0.f : std::pow(10.f, 0.4f*(nonExtinctedSolarMagnitude-nonExtLunarMagnitude));
-	drawAtmosphere(prj->getProjectionMatrix(), moonAzimuth, moonZenithAngle, 0, 0, M_PI, 0, location.altitude,
-				   moonRelativeBrightness, 0, 0, false, false);
-
-	if (!overrideAverageLuminance)
-	{
-		const auto meanPixelValue=getMeanPixelValue();
-		const auto meanY=meanPixelValue[1];
-		Q_ASSERT(std::isfinite(meanY));
-
-		averageLuminance = meanY+0.0001f; // Add (assumed) star background luminance
+		throw InitFailure(error.what());
 	}
 }
 

@@ -39,6 +39,7 @@
 #include "StelUtils.hpp"
 
 #include <private/qzipreader_p.h>
+#include <QTimer>
 #include <QDebug>
 #include <QSettings>
 #include <QString>
@@ -264,6 +265,7 @@ LandscapeMgr::LandscapeMgr()
 	, cardinalPoints(Q_NULLPTR)
 	, landscape(Q_NULLPTR)
 	, oldLandscape(Q_NULLPTR)
+	, messageTimer(new QTimer(this))
 	, flagLandscapeSetsLocation(false)
 	, flagLandscapeAutoSelection(false)
 	, flagLightPollutionFromDatabase(false)
@@ -287,6 +289,10 @@ LandscapeMgr::LandscapeMgr()
 	}
 	packagedLandscapeIDs.removeDuplicates();
 	landscapeCache.clear();
+
+	messageTimer->setInterval(5000);
+	messageTimer->setSingleShot(true);
+	connect(messageTimer, &QTimer::timeout, this, &LandscapeMgr::clearMessage);
 }
 
 LandscapeMgr::~LandscapeMgr()
@@ -427,8 +433,19 @@ void LandscapeMgr::update(double deltaTime)
 	const bool currentIsEarth = currentPlanet->getID() == earth->getID();
 	// First parameter in next call is used for particularly earth-bound computations in Schaefer's sky brightness model. Difference DeltaT makes no difference here.
 	// Temperature = 15°C, relative humidity = 40%
-	atmosphere->computeColor(core, core->getJDE(), *currentPlanet, *sun, currentIsEarth ? moon.data() : nullptr, core->getCurrentLocation(),
-							 15.f, 40.f, static_cast<float>(drawer->getExtinctionCoefficient()), atmosphereNoScatter);
+	try
+	{
+		atmosphere->computeColor(core, core->getJDE(), *currentPlanet, *sun,
+								 currentIsEarth ? moon.data() : nullptr, core->getCurrentLocation(),
+								 15.f, 40.f, static_cast<float>(drawer->getExtinctionCoefficient()), atmosphereNoScatter);
+	}
+	catch(AtmosphereShowMySky::InitFailure const& error)
+	{
+		qWarning().noquote() << "ShowMySky atmosphere model crashed:" << error.what();
+		qWarning() << "Loading Preetham model";
+		showMessage("ShowMySky atmosphere model crashed. Loading Preetham model as a fallback.");
+		resetToFallbackAtmosphere();
+	}
 
 	core->getSkyDrawer()->reportLuminanceInFov(3.75f+atmosphere->getAverageLuminance()*3.5f, true);
 
@@ -547,6 +564,8 @@ void LandscapeMgr::update(double deltaTime)
 	}
 
 	landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
+
+	messageFader.update(static_cast<int>(deltaTime*1000));
 }
 
 void LandscapeMgr::draw(StelCore* core)
@@ -576,6 +595,17 @@ void LandscapeMgr::draw(StelCore* core)
 
 	// Draw the cardinal points
 	cardinalPoints->draw(core, static_cast<double>(StelApp::getInstance().getCore()->getCurrentLocation().latitude));
+
+	if(messageFader.getInterstate())
+	{
+		const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
+		StelPainter painter(prj);
+		QFont font;
+		font.setPixelSize(16);
+		painter.setFont(font);
+		painter.setColor(1, 0, 0, messageFader.getInterstate());
+		painter.drawText(83, 70, messageToShow);
+	}
 
 	// Workaround for a bug with spherical mirror mode when we don't show the cardinal points.
 	// I am not really sure why this seems to fix the problem.  If you want to
@@ -1968,3 +1998,15 @@ void LandscapeMgr::handleMouseClicks(QMouseEvent *event)
 	return;
 }
 */
+
+void LandscapeMgr::showMessage(const QString& message)
+{
+	messageToShow=message;
+	messageFader=true;
+	messageTimer->start();
+}
+
+void LandscapeMgr::clearMessage()
+{
+	messageFader = false;
+}
