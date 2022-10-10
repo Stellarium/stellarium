@@ -726,6 +726,9 @@
 	      from ESO/IDA/Danish 1.5 m/R. Gendler, J.-E. Ovaldsen, C. Thone and C. Feron
 	      http://eso.org/public/
 	      License: Creative Commons Attribution 4.0 International
+	4.113 The miscWorldMap.jpg image was created from NASA Blue Marble Next Generation
+	      dataset for July 2004. Public domain.
+	      https://visibleearth.nasa.gov/images/74092/july-blue-marble-next-generation
 ```
 
 ## Appendix
