@@ -429,6 +429,7 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 	, viewRayGridBuffer(QOpenGLBuffer::VertexBuffer)
 	, luminanceToScreenProgram_(new QOpenGLShaderProgram())
 {
+	StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 	indexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
 	indexBuffer.create();
 	viewRayGridBuffer.setUsagePattern(QOpenGLBuffer::DynamicDraw);
