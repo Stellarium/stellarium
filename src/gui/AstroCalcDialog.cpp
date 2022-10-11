@@ -2932,23 +2932,23 @@ void AstroCalcDialog::saveLunarEclipseCircumstances()
 
 void AstroCalcDialog::setSolarEclipseHeaderNames()
 {
-	solareclipseHeader.clear();
-	solareclipseHeader << q_("Date and Time");
-	solareclipseHeader << q_("Saros");
-	solareclipseHeader << q_("Type");
-	solareclipseHeader << q_("Gamma");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	solareclipseHeader << qc_("Eclipse Magnitude", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	solareclipseHeader << qc_("Latitude", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	solareclipseHeader << qc_("Longitude", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	solareclipseHeader << qc_("Altitude", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	solareclipseHeader << qc_("Path Width", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	solareclipseHeader << qc_("Central Duration", "column name");
+	solareclipseHeader = {
+		q_("Date and Time"),
+		q_("Saros"),
+		q_("Type"),
+		q_("Gamma"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+		qc_("Eclipse Magnitude", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+		qc_("Latitude", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+		qc_("Longitude", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+		qc_("Altitude", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+		qc_("Path Width", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+		qc_("Central Duration", "column name")};
 	ui->solareclipseTreeWidget->setHeaderLabels(solareclipseHeader);
 
 	// adjust the column width
@@ -2960,14 +2960,14 @@ void AstroCalcDialog::setSolarEclipseHeaderNames()
 
 void AstroCalcDialog::setSolarEclipseContactsHeaderNames()
 {
-	solareclipsecontactsHeader.clear();
-	solareclipsecontactsHeader << qc_("Circumstances", "column name");
-	solareclipsecontactsHeader << q_("Date and Time");
-	solareclipsecontactsHeader << q_("Latitude");
-	solareclipsecontactsHeader << q_("Longitude");
-	solareclipsecontactsHeader << qc_("Path Width", "column name");
-	solareclipsecontactsHeader << qc_("Central Duration", "column name");
-	solareclipsecontactsHeader << q_("Type");	
+	solareclipsecontactsHeader = {
+		qc_("Circumstances", "column name"),
+		q_("Date and Time"),
+		q_("Latitude"),
+		q_("Longitude"),
+		qc_("Path Width", "column name"),
+		qc_("Central Duration", "column name"),
+		q_("Type")};
 	ui->solareclipsecontactsTreeWidget->setHeaderLabels(solareclipsecontactsHeader);
 
 	// adjust the column width
@@ -3365,23 +3365,23 @@ void AstroCalcDialog::generateSolarEclipses()
 
 void AstroCalcDialog::setSolarEclipseLocalHeaderNames()
 {
-	solareclipselocalHeader.clear();
-	solareclipselocalHeader << q_("Date");
-	solareclipselocalHeader << q_("Type");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	solareclipselocalHeader << qc_("Partial Eclipse Begins", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	solareclipselocalHeader << qc_("Central Eclipse Begins", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	solareclipselocalHeader << qc_("Maximum Eclipse", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	solareclipselocalHeader << qc_("Eclipse Magnitude", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	solareclipselocalHeader << qc_("Central Eclipse Ends", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	solareclipselocalHeader << qc_("Partial Eclipse Ends", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	solareclipselocalHeader << qc_("Duration", "column name");
+	solareclipselocalHeader = {
+		q_("Date"),
+		q_("Type"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+		qc_("Partial Eclipse Begins", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+		qc_("Central Eclipse Begins", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+		qc_("Maximum Eclipse", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+		qc_("Eclipse Magnitude", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+		qc_("Central Eclipse Ends", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+		qc_("Partial Eclipse Ends", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+		qc_("Duration", "column name")};
 	ui->solareclipselocalTreeWidget->setHeaderLabels(solareclipselocalHeader);
 
 	// adjust the column width
@@ -3703,8 +3703,8 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 	const double currentJD = core->getJD();
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	QPair<QString, QString> coordStrings;
-	QString altitudeStr, azimuthStr, latitudeStr, longitudeStr, pathWidthStr, durationStr, eclipseTypeStr, JDStr;
-	QString km = qc_("km", "distance");
+	QString pathWidthStr, durationStr, eclipseTypeStr;
+	const QString km = qc_("km", "distance");
 	double JDMid = modelIndex.sibling(modelIndex.row(), SolarEclipseDate).data(Qt::UserRole).toDouble();
 	double JD = JDMid;
 
@@ -3812,12 +3812,10 @@ void AstroCalcDialog::selectCurrentSolarEclipse(const QModelIndex& modelIndex)
 			}
 			treeItem->setText(SolarEclipseContactDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
 			treeItem->setData(SolarEclipseContactDate, Qt::UserRole, JD);
-			latitudeStr = StelUtils::decDegToLatitudeStr(latDeg, !withDecimalDegree);
-			longitudeStr = StelUtils::decDegToLongitudeStr(lngDeg, true, false, !withDecimalDegree);
-			treeItem->setText(SolarEclipseContactLatitude, latitudeStr);
+			treeItem->setText(SolarEclipseContactLatitude, StelUtils::decDegToLatitudeStr(latDeg, !withDecimalDegree));
 			treeItem->setData(SolarEclipseContactLatitude, Qt::UserRole, latDeg);
 			treeItem->setToolTip(SolarEclipseContactLatitude, q_("Geographic latitude of contact point"));
-			treeItem->setText(SolarEclipseContactLongitude, longitudeStr);
+			treeItem->setText(SolarEclipseContactLongitude, StelUtils::decDegToLongitudeStr(lngDeg, true, false, !withDecimalDegree));
 			treeItem->setData(SolarEclipseContactLongitude, Qt::UserRole, lngDeg);
 			treeItem->setToolTip(SolarEclipseContactLongitude, q_("Geographic longitude of contact point"));
 			switch (i)
@@ -4940,15 +4938,14 @@ QPair<double, double> AstroCalcDialog::getContactCoordinates(double x, double y,
 	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
 	static const double e2 = f*(2.-f);
 	static const double ff = 1./(1.-f);
-	double rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
-	double yy1 = y/rho1;
-	double m1 = std::sqrt(x*x+yy1*yy1);
-	double eta1 = yy1/m1;
-	double sd1 = std::sin(d)/rho1;
-	double cd1 = std::sqrt(1.-e2)*std::cos(d)/rho1;
-	double theta = std::atan2(x/m1,-eta1*sd1)*M_180_PI;
-	double lngDeg = theta-mu;
-	lngDeg = StelUtils::fmodpos(lngDeg, 360.);
+	const double rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
+	const double yy1 = y/rho1;
+	const double m1 = std::sqrt(x*x+yy1*yy1);
+	const double eta1 = yy1/m1;
+	const double sd1 = std::sin(d)/rho1;
+	const double cd1 = std::sqrt(1.-e2)*std::cos(d)/rho1;
+	const double theta = std::atan2(x/m1,-eta1*sd1)*M_180_PI;
+	double lngDeg = StelUtils::fmodpos(theta-mu, 360.);
 	if (lngDeg > 180.) lngDeg -= 360.;
 	double latDeg = ff*std::tan(std::asin(eta1*cd1));
 	coordinates.first = std::atan(latDeg)*M_180_PI;
@@ -5005,26 +5002,26 @@ void AstroCalcDialog::saveSolarEclipsesLocal()
 
 void AstroCalcDialog::setTransitHeaderNames()
 {
-	transitHeader.clear();
-	transitHeader << qc_("Date of mid-transit", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-	transitHeader << q_("Planet");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-	transitHeader << qc_("Exterior Ingress", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-	transitHeader << qc_("Interior Ingress", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-	transitHeader << qc_("Mid-transit", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-	transitHeader << qc_("Angular Distance", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-	transitHeader << qc_("Interior Egress", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-	transitHeader << qc_("Exterior Egress", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-	transitHeader << qc_("Duration", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-	transitHeader << qc_("Observable Duration", "column name");
+	transitHeader = {
+		qc_("Date of mid-transit", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
+		q_("Planet"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
+		qc_("Exterior Ingress", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
+		qc_("Interior Ingress", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
+		qc_("Mid-transit", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
+		qc_("Angular Distance", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
+		qc_("Interior Egress", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
+		qc_("Exterior Egress", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
+		qc_("Duration", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
+		qc_("Observable Duration", "column name")};
 	ui->transitTreeWidget->setHeaderLabels(transitHeader);
 
 	// adjust the column width
@@ -5064,9 +5061,9 @@ LocalTransitparams localTransit(double JD, int contact, bool central, PlanetP ob
 
 	StelCore* core = StelApp::getInstance().getCore();
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-	double lat = static_cast<double>(core->getCurrentLocation().latitude);
-	double lon = static_cast<double>(core->getCurrentLocation().longitude);
-	double elevation = static_cast<double>(core->getCurrentLocation().altitude);
+	const double lat = static_cast<double>(core->getCurrentLocation().latitude);
+	const double lon = static_cast<double>(core->getCurrentLocation().longitude);
+	const double elevation = static_cast<double>(core->getCurrentLocation().altitude);
 	double rc = 0., rs = 0.;
 	if (topocentric)
 	{
@@ -5150,8 +5147,8 @@ TransitBessel::TransitBessel(PlanetP object, double &besX, double &besY,
 	StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
 	StelUtils::rectToSphe(&raPlanet, &dePlanet, object->getEquinoxEquatorialPos(core));
 
-	double sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core).length();
-	const double earthRadius = ssystem->getEarth()->getEquatorialRadius()*AU;
+	const double sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core).length();
+	static const double earthRadius = ssystem->getEarth()->getEquatorialRadius()*AU;
 	// Planet's distance in Earth's radius
 	double pdistanceER = object->getEquinoxEquatorialPos(core).length() * AU / earthRadius;
 	// Greenwich Apparent Sidereal Time
@@ -5160,7 +5157,7 @@ TransitBessel::TransitBessel(PlanetP object, double &besX, double &besY,
 	double raDiff = StelUtils::fmodpos(raPlanet-raSun, 2.*M_PI);
 	if (raDiff>M_PI) raDiff-=2.*M_PI;
 
-	constexpr double SunEarth = 109.12278; // ratio of Sun-Earth radius : 109.12278 = 696000/6378.1366
+	static constexpr double SunEarth = 109.12278; // ratio of Sun-Earth radius : 109.12278 = 696000/6378.1366
 	const double rss = sdistanceAu * 23454.7925; // from 1 AU/Earth's radius : 149597870.8/6378.1366
 	const double b = pdistanceER / rss;
 	const double a = raSun - ((b * cos(dePlanet) * raDiff) / ((1 - b) * cos(deSun)));
@@ -5203,8 +5200,8 @@ void AstroCalcDialog::generateTransits()
 			double startJD, stopJD;
 			StelUtils::getJDFromDate(&startJD, startyear, 1, 1, 0, 0, 0);
 			StelUtils::getJDFromDate(&stopJD, startyear+years, 12, 31, 23, 59, 59);
-			startJD = startJD - core->getUTCOffset(startJD) / 24.;
-			stopJD = stopJD - core->getUTCOffset(stopJD) / 24.;
+			startJD -= core->getUTCOffset(startJD) / 24.;
+			stopJD  -= core->getUTCOffset(stopJD)  / 24.;
 			QString planetStr, separationStr, durationStr, observableDurationStr;
 			double approxJD, synodicPeriod;
 			if (p == 0)
@@ -6621,19 +6618,19 @@ void AstroCalcDialog::handleVisibleEnabled()
 
 void AstroCalcDialog::setPhenomenaHeaderNames()
 {
-	phenomenaHeader.clear();
-	phenomenaHeader << q_("Phenomenon");
-	phenomenaHeader << q_("Date and Time");
-	phenomenaHeader << q_("Object 1");
-	// TRANSLATORS: Magnitude of object 1
-	phenomenaHeader << q_("Mag. 1");
-	phenomenaHeader << q_("Object 2");
-	// TRANSLATORS: Magnitude of object 2
-	phenomenaHeader << q_("Mag. 2");
-	phenomenaHeader << q_("Separation");
-	phenomenaHeader << q_("Elevation");
-	phenomenaHeader << q_("Solar Elongation");
-	phenomenaHeader << q_("Lunar Elongation");
+	phenomenaHeader = {
+		q_("Phenomenon"),
+		q_("Date and Time"),
+		q_("Object 1"),
+		// TRANSLATORS: Magnitude of object 1
+		q_("Mag. 1"),
+		q_("Object 2"),
+		// TRANSLATORS: Magnitude of object 2
+		q_("Mag. 2"),
+		q_("Separation"),
+		q_("Elevation"),
+		q_("Solar Elongation"),
+		q_("Lunar Elongation")};
 	ui->phenomenaTreeWidget->setHeaderLabels(phenomenaHeader);
 	adjustPhenomenaColumns();
 }
@@ -7414,7 +7411,7 @@ double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringLi
 	double limit, step = (stopJD - startJD) / 16.0;
 	static const QRegularExpression mp("^[(](\\d+)[)]\\s(.+)$");
 
-	const QMap<QString, double> steps = {
+	static const QMap<QString, double> steps = {
 		{ "Moon",     0.25 },
 		{ "C/",       0.5  },
 		{ "P/",       0.5  },
