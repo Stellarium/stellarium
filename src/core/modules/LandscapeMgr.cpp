@@ -443,7 +443,7 @@ void LandscapeMgr::update(double deltaTime)
 	{
 		qWarning().noquote() << "ShowMySky atmosphere model crashed:" << error.what();
 		qWarning() << "Loading Preetham model";
-		showMessage("ShowMySky atmosphere model crashed. Loading Preetham model as a fallback.");
+		showMessage(q_("ShowMySky atmosphere model crashed. Loading Preetham model as a fallback."));
 		resetToFallbackAtmosphere();
 	}
 
@@ -708,6 +708,7 @@ void LandscapeMgr::createAtmosphere()
 void LandscapeMgr::resetToFallbackAtmosphere()
 {
 	StelApp::getInstance().getSettings()->setValue(ATMOSPHERE_MODEL_CONFIG_KEY, ATMOSPHERE_MODEL_CONF_VAL_PREETHAM);
+	atmosphere.reset();
 	createAtmosphere();
 }
 
