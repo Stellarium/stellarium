@@ -708,6 +708,7 @@ void LandscapeMgr::createAtmosphere()
 void LandscapeMgr::resetToFallbackAtmosphere()
 {
 	StelApp::getInstance().getSettings()->setValue(ATMOSPHERE_MODEL_CONFIG_KEY, ATMOSPHERE_MODEL_CONF_VAL_PREETHAM);
+	atmosphere.reset();
 	createAtmosphere();
 }
 
