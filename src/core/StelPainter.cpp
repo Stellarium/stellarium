@@ -326,7 +326,9 @@ void StelPainter::setLineWidth(float width)
 	}
 //	GLfloat lineWidthRange[2] = {0.0f, 0.0f};
 //	glGetFloatv(GL_ALIASED_LINE_WIDTH_RANGE, lineWidthRange);
-//	qDebug() << "supported line width are"  << lineWidthRange[0] << "to" << lineWidthRange[1];
+//	qDebug() << "supported aliased line widths are" << lineWidthRange[0] << "to" << lineWidthRange[1];
+//	glGetFloatv(GL_SMOOTH_LINE_WIDTH_RANGE, lineWidthRange);
+//	qDebug() << "supported smooth line widths are" << lineWidthRange[0] << "to" << lineWidthRange[1];
 	stel.queryOpenglError("StelPainter::setLineWidth " + QString::number(width) + " end");
 }
 
