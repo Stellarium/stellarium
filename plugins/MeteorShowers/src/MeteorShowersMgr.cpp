@@ -288,7 +288,6 @@ void MeteorShowersMgr::update(double deltaTime)
 
 void MeteorShowersMgr::draw(StelCore* core)
 {
-	auto& stel=StelApp::getInstance();
 	if (m_enablePlugin && m_onEarth)
 	{
 		m_meteorShowers->draw(core);

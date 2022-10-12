@@ -45,7 +45,7 @@ int StelOpenGL::checkGLErrors(const char *file, int line)
 	for(GLenum x; (x=mainContext->functions()->glGetError())!=GL_NO_ERROR; )
 	{
 		++errors;
-		qCritical("%s:%d: OpenGL error: %d (%s)",
+		qCritical("%s:%d: OpenGL error: %d (%s)\n",
 			  file, line, x, getGLErrorText(x));
 	}
 	return errors;

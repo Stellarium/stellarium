@@ -378,6 +378,7 @@ protected:
 		app.update(dt); // may also issue GL calls
 		app.draw();
 		painter->endNativePainting();
+
 		mainView->drawEnded();
 	}
 
