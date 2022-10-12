@@ -354,6 +354,7 @@ public:
 protected:
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE
 	{
+		StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 		Q_UNUSED(option)
 		Q_UNUSED(widget)
 
@@ -366,7 +367,9 @@ protected:
 		previousPaintTime = now;
 
 		//important to call this, or Qt may have invalid state after we have drawn (wrong textures, etc...)
+		StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 		painter->beginNativePainting();
+		StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 
 		//fix for bug LP:1628072 caused by QTBUG-56798
 #ifndef QT_NO_DEBUG
@@ -737,15 +740,15 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 	if (openGLModuleType==QOpenGLContext::LibGL)
 	{
 		fmt.setRenderableType(QSurfaceFormat::OpenGL);
-		fmt.setMajorVersion(3);
-		fmt.setMinorVersion(3);
+		fmt.setMajorVersion(4);
+		fmt.setMinorVersion(6);
 		fmt.setProfile(QSurfaceFormat::CoreProfile);
 
 		if (qApp && qApp->property("onetime_opengl_compat").toBool())
 		{
 			qDebug() << "Setting OpenGL Compatibility profile from command line...";
-//			fmt.setMajorVersion(2);
-//			fmt.setMinorVersion(1);
+			fmt.setMajorVersion(2);
+			fmt.setMinorVersion(1);
 			fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
 		}
 	}

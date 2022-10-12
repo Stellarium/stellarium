@@ -712,7 +712,6 @@ StringTexture* StelPainter::getTexTexture(const QString& str, int pixelSize) con
 
 void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
 {
-	StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 	if (prj->gravityLabels && !noGravity)
 	{
 		drawTextGravity180(x, y, str, xshift, yshift);
@@ -796,7 +795,6 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		y = prj->getViewportHeight()-y;
 		yshift = -yshift;
 
-		StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 		// Translate/rotate
 		if (!noGravity)
 			angleDeg += prj->defaultAngleForGravityText;
@@ -807,6 +805,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			m.translate(static_cast<qreal>(x), static_cast<qreal>(y));
 			m.rotate(static_cast<qreal>(-angleDeg));
 			painter.setTransform(m);
+			StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 			painter.drawText(qRound(xshift), qRound(yshift), str);
 			StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 		}
@@ -816,20 +815,19 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			painter.drawText(qRound(x+xshift), qRound(y+yshift), str);
 			StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 		}
-		StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 
 		//important to call this before GL state restore
+		StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 		painter.end();
+		StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 
 		//fix for bug 1628072 caused by QTBUG-56798
 #ifndef QT_NO_DEBUG
 		StelOpenGL::clearGLErrors();
 #endif
-		StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 
 		//QPainter messes up some GL state, begin/endNativePainting or save/restore does not help
 		glState.apply();
-		StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 	}
 }
 
