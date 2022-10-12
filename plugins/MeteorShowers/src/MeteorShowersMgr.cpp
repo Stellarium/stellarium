@@ -289,12 +289,10 @@ void MeteorShowersMgr::update(double deltaTime)
 void MeteorShowersMgr::draw(StelCore* core)
 {
 	auto& stel=StelApp::getInstance();
-	stel.queryOpenglError("MeteorShowersMgr::draw start");
 	if (m_enablePlugin && m_onEarth)
 	{
 		m_meteorShowers->draw(core);
 	}
-	stel.queryOpenglError("MeteorShowersMgr::draw end");
 }
 
 void MeteorShowersMgr::repaint()

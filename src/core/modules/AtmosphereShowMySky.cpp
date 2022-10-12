@@ -698,7 +698,6 @@ void AtmosphereShowMySky::drawAtmosphere(Mat4f const& projectionMatrix, const fl
 		settings.useEclipseShader_ = false;
 		settings.onTheFlySingleScatteringEnabled_ = false;
 		settings.onTheFlyPrecompDoubleScatteringEnabled_ = false;
-		StelApp::getInstance().queryOpenglError("AtmosphereShowMySky::drawAtmosphere before renderer_->draw");
 		renderer_->draw(brightness, clearTarget);
 	}
 }
