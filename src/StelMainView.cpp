@@ -375,15 +375,10 @@ protected:
 
 		//update and draw
 		StelApp& app = StelApp::getInstance();
-		app.queryOpenglError("paint before app.update()");
 		app.update(dt); // may also issue GL calls
-		app.queryOpenglError("paint after app.update()");
 		app.draw();
-		app.queryOpenglError("paint after app.draw()");
 		painter->endNativePainting();
-		app.queryOpenglError("paint after painter->endNativePainting()");
 		mainView->drawEnded();
-		app.queryOpenglError("paint after mainView->drawEnded()");
 	}
 
 	virtual QRectF boundingRect() const Q_DECL_OVERRIDE

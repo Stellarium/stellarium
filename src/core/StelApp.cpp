@@ -99,10 +99,6 @@
 #include <QMessageBox>
 #include "SpoutSender.hpp"
 #endif
-#include <QOpenGLFunctions_3_3_Core>
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-# include <QOpenGLVersionFunctionsFactory>
-#endif
 
 #ifdef USE_STATIC_PLUGIN_HELLOSTELMODULE
 Q_IMPORT_PLUGIN(HelloStelModuleStelPluginInterface)
@@ -761,7 +757,6 @@ void StelApp::removeProgressBar(StelProgressController* p)
 
 void StelApp::update(double deltaTime)
 {
-	queryOpenglError("StelApp::update start");
 	if (!initialized)
 		return;
 
@@ -786,7 +781,6 @@ void StelApp::update(double deltaTime)
 	}
 
 	stelObjectMgr->update(deltaTime);
-	queryOpenglError("StelApp::update end");
 }
 
 void StelApp::prepareRenderBuffer()
@@ -812,7 +806,6 @@ void StelApp::applyRenderBuffer(GLuint drawFbo)
 //! Main drawing function called at each frame
 void StelApp::draw()
 {
-	queryOpenglError("StelApp::draw start");
 	if (!initialized)
 		return;
 
@@ -830,7 +823,8 @@ void StelApp::draw()
 	for (auto* module : modules)
 	{
 		module->draw(core);
-		queryOpenglError("StelApp::draw " + QString(module->metaObject()->className()));
+		if (StelOpenGL::checkGLErrors(__FILE__,__LINE__))
+			qDebug() << module;
 	}
 	core->postDraw();
 #ifdef ENABLE_SPOUT
@@ -839,7 +833,6 @@ void StelApp::draw()
 		spoutSender->captureAndSendFrame(static_cast<GLuint>(drawFbo));
 #endif
 	applyRenderBuffer(static_cast<GLuint>(drawFbo));
-	queryOpenglError("StelApp::draw end");
 }
 
 /*************************************************************************
@@ -1196,37 +1189,4 @@ QString StelApp::getVersion() const
 {
 	QStringList ver = StelUtils::getApplicationVersion().split(".");
 	return QString("%1.%2.%3").arg(ver[0], ver[1], ver[2]);
-}
-
-QOpenGLFunctions_3_3_Core* glfuncs()
-{
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-	return QOpenGLVersionFunctionsFactory::get<QOpenGLFunctions_3_3_Core>(QOpenGLContext::currentContext());
-#else
-	return QOpenGLContext::currentContext()->versionFunctions<QOpenGLFunctions_3_3_Core>();
-#endif
-}
-
-std::string openglErrorString(const GLenum error)
-{
-    switch(error)
-    {
-    case GL_NO_ERROR: return "No error";
-    case GL_INVALID_ENUM: return "Invalid enumerator";
-    case GL_INVALID_VALUE: return "Invalid value";
-    case GL_INVALID_OPERATION: return "Invalid operation";
-    case GL_STACK_OVERFLOW: return "Stack overflow";
-    case GL_STACK_UNDERFLOW: return "Stack underflow";
-    case GL_OUT_OF_MEMORY: return "Out of memory";
-    case GL_TABLE_TOO_LARGE: return "Table too large";
-    case GL_INVALID_FRAMEBUFFER_OPERATION: return "Invalid framebuffer operation";
-    }
-    return "Error code " + std::to_string(error);
-}
-
-void StelApp::queryOpenglError(QString text) const
-{
-	auto& gl = *glfuncs();
-	if(const auto err=gl.glGetError(); err!=GL_NO_ERROR)
-		qDebug() << text.toStdString().c_str() << "~>" << openglErrorString(err).c_str();
 }

@@ -316,7 +316,6 @@ void StelPainter::setLineSmooth(bool enable)
 void StelPainter::setLineWidth(float width)
 {
 	auto& stel=StelApp::getInstance();
-	stel.queryOpenglError("StelPainter::setLineWidth start");
 	int mv;
 	glGetIntegerv(GL_CONTEXT_PROFILE_MASK, &mv);
 	if(mv&GL_CONTEXT_CORE_PROFILE_BIT)
@@ -324,16 +323,9 @@ void StelPainter::setLineWidth(float width)
 	if(fabs(glState.lineWidth - width) > 1.e-10f)
 	{
 		glState.lineWidth = width;
-		stel.queryOpenglError("StelPainter::setLineWidth " + QString::number(width) + " before glLineWidth");
 		glLineWidth(width);
-		stel.queryOpenglError("StelPainter::setLineWidth " + QString::number(width) + " after glLineWidth");
+		StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 	}
-//	GLfloat lineWidthRange[2] = {0.0f, 0.0f};
-//	glGetFloatv(GL_ALIASED_LINE_WIDTH_RANGE, lineWidthRange);
-//	qDebug() << "supported aliased line widths are" << lineWidthRange[0] << "to" << lineWidthRange[1];
-//	glGetFloatv(GL_SMOOTH_LINE_WIDTH_RANGE, lineWidthRange);
-//	qDebug() << "supported smooth line widths are" << lineWidthRange[0] << "to" << lineWidthRange[1];
-	stel.queryOpenglError("StelPainter::setLineWidth " + QString::number(width) + " end");
 }
 
 ///////////////////////////////////////////////////////////////////////////

@@ -248,9 +248,6 @@ public:
 	//! Dump diagnostics about action call priorities
 	void dumpModuleActionPriorities(StelModule::StelModuleActionName actionName) const;
 	
-	//! query opengl errors
-	void queryOpenglError(QString text) const;
-
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
