@@ -684,10 +684,14 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 
 void ConstellationMgr::draw(StelCore* core)
 {
+	auto& stel=StelApp::getInstance();
+	stel.queryOpenglError("ConstellationMgr::draw start");
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 	sPainter.setFont(asterFont);
+	stel.queryOpenglError("ConstellationMgr::draw after sPainter.setFont");
 	drawLines(sPainter, core);
+	stel.queryOpenglError("ConstellationMgr::draw after drawLines");
 	Vec3d vel(0.);
 	if (core->getUseAberration())
 	{
@@ -696,8 +700,11 @@ void ConstellationMgr::draw(StelCore* core)
 		vel*=core->getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
 	}
 	drawNames(sPainter, vel);
+	stel.queryOpenglError("ConstellationMgr::draw after drawNames");
 	drawArt(sPainter, vel);
+	stel.queryOpenglError("ConstellationMgr::draw after drawArt");
 	drawBoundaries(sPainter, vel);
+	stel.queryOpenglError("ConstellationMgr::draw after drawBoundaries");
 }
 
 // Draw constellations art textures
@@ -718,11 +725,15 @@ void ConstellationMgr::drawArt(StelPainter& sPainter, const Vec3d &obsVelocity) 
 // Draw constellations lines
 void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 {
+	auto& stel=StelApp::getInstance();
+	stel.queryOpenglError("ConstellationMgr::drawLines start");
 	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 	sPainter.setBlending(true);
+	stel.queryOpenglError("ConstellationMgr::drawLines after sPainter.setBlending");
 	if (constellationLineThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(constellationLineThickness*ppx); // set line thickness
 	sPainter.setLineSmooth(true);
+	stel.queryOpenglError("ConstellationMgr::drawLines after sPainter.setLineWidth");
 
 	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
 	for (auto* constellation : constellations)
@@ -732,6 +743,7 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) co
 	if (constellationLineThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(1); // restore line thickness
 	sPainter.setLineSmooth(false);
+	stel.queryOpenglError("ConstellationMgr::drawLines end");
 }
 
 // Draw the names of all the constellations
@@ -1441,18 +1453,24 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 
 void ConstellationMgr::drawBoundaries(StelPainter& sPainter, const Vec3d &obsVelocity) const
 {
+	auto& stel=StelApp::getInstance();
+	stel.queryOpenglError("ConstellationMgr::drawBoundaries start");
 	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 	sPainter.setBlending(false);
+	stel.queryOpenglError("ConstellationMgr::drawBoundaries after sPainter.setBlending");
 	if (constellationBoundariesThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(constellationBoundariesThickness*ppx); // set line thickness
 	sPainter.setLineSmooth(true);
+	stel.queryOpenglError("ConstellationMgr::drawBoundaries after sPainter.setLineWidth");
 	for (auto* constellation : constellations)
 	{
 		constellation->drawBoundaryOptim(sPainter, obsVelocity);
+		stel.queryOpenglError("ConstellationMgr::drawBoundaries after constellation->drawBoundaryOptim");
 	}
 	if (constellationBoundariesThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(1); // restore line thickness
 	sPainter.setLineSmooth(false);
+	stel.queryOpenglError("ConstellationMgr::drawBoundaries end");
 }
 
 StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const

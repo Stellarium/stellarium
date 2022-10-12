@@ -326,6 +326,7 @@ double LandscapeMgr::getCallOrder(StelModuleActionName actionName) const
 
 void LandscapeMgr::update(double deltaTime)
 {
+	StelApp::getInstance().queryOpenglError("LandscapeMgr::update start");
 	if(needToRecreateAtmosphere && !loadingAtmosphere)
 		createAtmosphere();
 
@@ -566,10 +567,13 @@ void LandscapeMgr::update(double deltaTime)
 	landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
 
 	messageFader.update(static_cast<int>(deltaTime*1000));
+	StelApp::getInstance().queryOpenglError("LandscapeMgr::update end");
 }
 
 void LandscapeMgr::draw(StelCore* core)
 {
+	auto& stel=StelApp::getInstance();
+	stel.queryOpenglError("LandscapeMgr::draw start");
 	StelSkyDrawer* drawer=core->getSkyDrawer();
 
 	// Draw the atmosphere
@@ -615,6 +619,7 @@ void LandscapeMgr::draw(StelCore* core)
 	QOpenGLPaintDevice device;
 	device.setSize(QSize(prj->getViewportWidth(), prj->getViewportHeight()));
 	QPainter painter(&device);
+	stel.queryOpenglError("LandscapeMgr::draw end");
 }
 
 // Some element in drawing order behind LandscapeMgr can call this at the end of its own draw() to overdraw with the polygon line and gazetteer.

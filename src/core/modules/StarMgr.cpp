@@ -1278,6 +1278,8 @@ int StarMgr::getMaxSearchLevel() const
 // Draw all the stars
 void StarMgr::draw(StelCore* core)
 {
+	auto& stel=StelApp::getInstance();
+	stel.queryOpenglError("StarMgr::draw start");
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
 	// If stars are turned off don't waste time below
@@ -1365,6 +1367,7 @@ void StarMgr::draw(StelCore* core)
 
 	if (objectMgr->getFlagSelectedObjectPointer())
 		drawPointer(sPainter, core);
+	stel.queryOpenglError("StarMgr::draw end");
 }
 
 

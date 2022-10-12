@@ -567,6 +567,7 @@ void AtmosphereShowMySky::regenerateGrid()
 
 void AtmosphereShowMySky::probeZenithLuminances(const float altitude)
 {
+	StelApp::getInstance().queryOpenglError("AtmosphereShowMySky::probeZenithLuminances start");
 	// Here we'll draw zenith part of the sky into a 1×1 texture in several
 	// modes and get the resulting colors to determine the coefficients to
 	// render light pollution and airglow correctly
@@ -696,6 +697,7 @@ void AtmosphereShowMySky::drawAtmosphere(Mat4f const& projectionMatrix, const fl
 		settings.useEclipseShader_ = false;
 		settings.onTheFlySingleScatteringEnabled_ = false;
 		settings.onTheFlyPrecompDoubleScatteringEnabled_ = false;
+		StelApp::getInstance().queryOpenglError("AtmosphereShowMySky::drawAtmosphere before renderer_->draw");
 		renderer_->draw(brightness, clearTarget);
 	}
 }
@@ -779,6 +781,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 				       const Planet*const moon, const StelLocation& location, const float temperature,
 				       const float relativeHumidity, const float extinctionCoefficient, const bool noScatter)
 {
+	StelApp::getInstance().queryOpenglError("AtmosphereShowMySky::computeColor start");
 	try
 	{
 		Q_UNUSED(JD)

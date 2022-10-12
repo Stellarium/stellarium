@@ -289,25 +289,36 @@ void AsterismMgr::loadLines(const QString &fileName)
 
 void AsterismMgr::draw(StelCore* core)
 {
+	auto& stel=StelApp::getInstance();
+	stel.queryOpenglError("AsterismMgr::draw start");
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 	sPainter.setFont(asterFont);
+	stel.queryOpenglError("AsterismMgr::draw after sPainter.setFont");
 	drawLines(sPainter, core);
+	stel.queryOpenglError("AsterismMgr::draw after drawLines");
 	drawRayHelpers(sPainter, core);
+	stel.queryOpenglError("AsterismMgr::draw after drawRayHelpers");
 	drawNames(sPainter);
+	stel.queryOpenglError("AsterismMgr::draw after drawNames");
 }
 
 // Draw asterisms lines
 void AsterismMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 {
+	auto& stel=StelApp::getInstance();
+	stel.queryOpenglError("AsterismMgr::drawLines start");
 	if (!hasAsterism)
 		return;
 
 	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 	sPainter.setBlending(true);
+	stel.queryOpenglError("AsterismMgr::drawLines after sPainter.setBlending");
 	if (asterismLineThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(asterismLineThickness*ppx); // set line thickness
+	stel.queryOpenglError("AsterismMgr::drawLines after sPainter.setLineWidth");
 	sPainter.setLineSmooth(true);
+	stel.queryOpenglError("AsterismMgr::drawLines after sPainter.setLineSmooth");
 
 	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
 	for (auto* asterism : asterisms)
@@ -318,19 +329,25 @@ void AsterismMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 	if (asterismLineThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(1); // restore line thickness
 	sPainter.setLineSmooth(false);
+	stel.queryOpenglError("AsterismMgr::drawLines end");
 }
 
 // Draw asterisms lines
 void AsterismMgr::drawRayHelpers(StelPainter& sPainter, const StelCore* core) const
 {
+	auto& stel=StelApp::getInstance();
+	stel.queryOpenglError("AsterismMgr::drawRayHelpers start");
 	if (!hasAsterism)
 		return;
 
 	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 	sPainter.setBlending(true);
+	stel.queryOpenglError("AsterismMgr::drawRayHelpers after sPainter.setBlending");
 	if (rayHelperThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(rayHelperThickness*ppx); // set line thickness
+	stel.queryOpenglError("AsterismMgr::drawRayHelpers after sPainter.setLineWidth");
 	sPainter.setLineSmooth(true);
+	stel.queryOpenglError("AsterismMgr::drawRayHelpers after sPainter.setLineSmooth");
 
 	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
 	for (auto* asterism : asterisms)
@@ -341,6 +358,7 @@ void AsterismMgr::drawRayHelpers(StelPainter& sPainter, const StelCore* core) co
 	if (rayHelperThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(1); // restore line thickness
 	sPainter.setLineSmooth(false);
+	stel.queryOpenglError("AsterismMgr::drawRayHelpers end");
 }
 
 // Draw the names of all the asterisms

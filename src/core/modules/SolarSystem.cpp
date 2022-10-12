@@ -1318,6 +1318,8 @@ struct biggerDistance : public StelUtils::binary_function<PlanetP, PlanetP, bool
 // We are supposed to be in heliocentric coordinate
 void SolarSystem::draw(StelCore* core)
 {
+	auto& stel=StelApp::getInstance();
+	stel.queryOpenglError("SolarSystem::draw start");
 	// AstroCalcDialog
 	drawEphemerisItems(core);
 
@@ -1362,6 +1364,7 @@ void SolarSystem::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagPointer())
 		drawPointer(core);
+	stel.queryOpenglError("SolarSystem::draw end");
 }
 
 void SolarSystem::drawEphemerisItems(const StelCore* core)

@@ -176,16 +176,15 @@ public:
 				"VARYING highp   vec2 v_texCoord;\n"
 				"void main(void)\n"
 				"{\n"
-				"	v_texCoord = a_texCoord;\n"
-				"	gl_Position = a_pos;\n"
+				"v_texCoord = a_texCoord;\n"
+				"gl_Position = a_pos;\n"
 				"}\n";
 		const auto fragmentCode = StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
 				"VARYING highp vec2 v_texCoord;\n"
 				"uniform sampler2D  u_source;\n"
-				"layout(location=0) out vec4 fragColor;\n"
 				"void main(void)\n"
 				"{\n"
-				"	mediump vec3 color = texture(u_source, v_texCoord).rgb;\n"
+				"	mediump vec3 color = texture2D(u_source, v_texCoord).rgb;\n"
 				"	mediump float luminance = max(max(color.r, color.g), color.b);\n"
 				"	FRAG_COLOR = vec4(luminance, luminance * 0.3, 0.0, 1.0);\n"
 				"}\n";
@@ -376,11 +375,15 @@ protected:
 
 		//update and draw
 		StelApp& app = StelApp::getInstance();
+		app.queryOpenglError("paint before app.update()");
 		app.update(dt); // may also issue GL calls
+		app.queryOpenglError("paint after app.update()");
 		app.draw();
+		app.queryOpenglError("paint after app.draw()");
 		painter->endNativePainting();
-
+		app.queryOpenglError("paint after painter->endNativePainting()");
 		mainView->drawEnded();
+		app.queryOpenglError("paint after mainView->drawEnded()");
 	}
 
 	virtual QRectF boundingRect() const Q_DECL_OVERRIDE

@@ -315,11 +315,19 @@ void StelPainter::setLineSmooth(bool enable)
 
 void StelPainter::setLineWidth(float width)
 {
+	auto& stel=StelApp::getInstance();
+	stel.queryOpenglError("StelPainter::setLineWidth start");
 	if(fabs(glState.lineWidth - width) > 1.e-10f)
 	{
 		glState.lineWidth = width;
-		glLineWidth(width);
+		stel.queryOpenglError("StelPainter::setLineWidth " + QString::number(width) + " before glLineWidth");
+		glLineWidth(1);
+		stel.queryOpenglError("StelPainter::setLineWidth " + QString::number(width) + " after glLineWidth");
 	}
+//	GLfloat lineWidthRange[2] = {0.0f, 0.0f};
+//	glGetFloatv(GL_ALIASED_LINE_WIDTH_RANGE, lineWidthRange);
+//	qDebug() << "supported line width are"  << lineWidthRange[0] << "to" << lineWidthRange[1];
+	stel.queryOpenglError("StelPainter::setLineWidth " + QString::number(width) + " end");
 }
 
 ///////////////////////////////////////////////////////////////////////////

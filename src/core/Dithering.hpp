@@ -75,7 +75,7 @@ mediump vec3 dither(mediump vec3 c)
 
 	if(rgbMaxValue.r==0.) return c;
 
-	mediump vec3 noise=texture(ditherPattern,gl_FragCoord.xy/64.).rrr;
+	mediump vec3 noise=texture2D(ditherPattern,gl_FragCoord.xy/64.).rrr;
 
 	{
 		// Prevent undershoot (imperfect white) due to clipping of positive noise contributions
