@@ -317,11 +317,15 @@ void StelPainter::setLineWidth(float width)
 {
 	auto& stel=StelApp::getInstance();
 	stel.queryOpenglError("StelPainter::setLineWidth start");
+	int mv;
+	glGetIntegerv(GL_CONTEXT_PROFILE_MASK, &mv);
+	if(mv&GL_CONTEXT_CORE_PROFILE_BIT)
+		width=1;
 	if(fabs(glState.lineWidth - width) > 1.e-10f)
 	{
 		glState.lineWidth = width;
 		stel.queryOpenglError("StelPainter::setLineWidth " + QString::number(width) + " before glLineWidth");
-		glLineWidth(1);
+		glLineWidth(width);
 		stel.queryOpenglError("StelPainter::setLineWidth " + QString::number(width) + " after glLineWidth");
 	}
 //	GLfloat lineWidthRange[2] = {0.0f, 0.0f};
