@@ -316,10 +316,9 @@ void StelPainter::setLineSmooth(bool enable)
 void StelPainter::setLineWidth(float width)
 {
 	auto& stel=StelApp::getInstance();
-	int ma, mi;
+	int ma;
 	glGetIntegerv(GL_MAJOR_VERSION, &ma);
-	glGetIntegerv(GL_MINOR_VERSION, &mi);
-	if(ma==3&&mi==3)
+	if(ma>2)
 		width=1;
 	if(fabs(glState.lineWidth - width) > 1.e-10f)
 	{
@@ -805,26 +804,18 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 			m.translate(static_cast<qreal>(x), static_cast<qreal>(y));
 			m.rotate(static_cast<qreal>(-angleDeg));
 			painter.setTransform(m);
-			StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 			painter.drawText(qRound(xshift), qRound(yshift), str);
-			StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 		}
 		else
 		{
-			StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 			painter.drawText(qRound(x+xshift), qRound(y+yshift), str);
-			StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 		}
 
 		//important to call this before GL state restore
-		StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 		painter.end();
-		StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 
 		//fix for bug 1628072 caused by QTBUG-56798
-#ifndef QT_NO_DEBUG
 		StelOpenGL::clearGLErrors();
-#endif
 
 		//QPainter messes up some GL state, begin/endNativePainting or save/restore does not help
 		glState.apply();

@@ -425,7 +425,6 @@ AtmosphereShowMySky::AtmosphereShowMySky()
 	, viewRayGridBuffer(QOpenGLBuffer::VertexBuffer)
 	, luminanceToScreenProgram_(new QOpenGLShaderProgram())
 {
-	StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 	indexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
 	indexBuffer.create();
 	viewRayGridBuffer.setUsagePattern(QOpenGLBuffer::DynamicDraw);
@@ -563,7 +562,6 @@ void AtmosphereShowMySky::regenerateGrid()
 
 void AtmosphereShowMySky::probeZenithLuminances(const float altitude)
 {
-	StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 	// Here we'll draw zenith part of the sky into a 1×1 texture in several
 	// modes and get the resulting colors to determine the coefficients to
 	// render light pollution and airglow correctly
@@ -604,7 +602,6 @@ void AtmosphereShowMySky::drawAtmosphere(Mat4f const& projectionMatrix, const fl
 	                                     const float lightPollutionGroundLuminance, const float airglowRelativeBrightness,
 	                                     const bool drawAsEclipse, const bool clearTarget)
 {
-	StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 	Q_UNUSED(airglowRelativeBrightness)
 	const auto& m = projectionMatrix;
 	auto& settings = *static_cast<SkySettings*>(skySettings_.get());
@@ -700,7 +697,6 @@ void AtmosphereShowMySky::drawAtmosphere(Mat4f const& projectionMatrix, const fl
 
 Vec4f AtmosphereShowMySky::getMeanPixelValue()
 {
-	StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 	auto& gl = *glfuncs();
 
 	GL(gl.glActiveTexture(GL_TEXTURE0));
@@ -778,7 +774,6 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 				       const Planet*const moon, const StelLocation& location, const float temperature,
 				       const float relativeHumidity, const float extinctionCoefficient, const bool noScatter)
 {
-	StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 	try
 	{
 		Q_UNUSED(JD)
@@ -906,7 +901,6 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 
 void AtmosphereShowMySky::draw(StelCore* core)
 {
-	StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 	if (StelApp::getInstance().getVisionModeNight())
 		return;
 
@@ -967,7 +961,6 @@ bool AtmosphereShowMySky::isReadyToRender() const
 
 auto AtmosphereShowMySky::stepDataLoading() -> LoadingStatus
 {
-	StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 	try
 	{
 		const auto status = renderer_->stepDataLoading();
