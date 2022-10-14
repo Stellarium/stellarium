@@ -20,6 +20,7 @@
 #include "StelPainter.hpp"
 
 #include "StelApp.hpp"
+#include "StelMainView.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
@@ -315,11 +316,19 @@ void StelPainter::setLineSmooth(bool enable)
 
 void StelPainter::setLineWidth(float width)
 {
-	if(fabs(glState.lineWidth - width) > 1.e-10f)
+	if(fabs(glState.lineWidth - width) < 1.e-10f)
+		return;
+
+	glState.lineWidth = width;
+
+	if(width > 1 && StelMainView::getInstance().getGLInformation().isCoreProfile)
 	{
-		glState.lineWidth = width;
-		glLineWidth(width);
+		// FIXME: ignoring this command, because it's not valid in OpenGL Core profile
+		// The correct way of following it would be to draw the lines as quads (pairs of triangles).
+		return;
 	}
+
+	glLineWidth(width);
 }
 
 ///////////////////////////////////////////////////////////////////////////
