@@ -2553,7 +2553,7 @@ bool Oculars::getFlagDMSDegrees() const
 void Oculars::setFlagHorizontalCoordinates(const bool b)
 {
 	flagHorizontalCoordinates = b;
-	settings->setValue("use_horizontal_coordinates", !b);
+	settings->setValue("use_horizontal_coordinates", b);
 	settings->sync();
 	emit flagHorizontalCoordinatesChanged(b);
 }
