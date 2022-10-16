@@ -92,6 +92,11 @@ public:
 	//! argument list, as is the case with the StelMainWindow version.
 	static void parseCLIArgsPreConfig(const QStringList& argList);
 
+	//! Processing of command-line options which must be processed before QGuiApplication is created.
+	//! This includes the options that set environment variables like QT_OPENGL
+	//! that are read in the constructor of QGuiApplication.
+	static void parseCLIArgsPreQApp(const QStringList argList);
+
 	//! Processing of command line options which is to be done after the config file is
 	//! read.  This gives us the chance to over-ride settings which are in the configuration
 	//! file.

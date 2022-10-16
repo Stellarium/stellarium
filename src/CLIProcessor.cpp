@@ -33,6 +33,35 @@
 #include <cstdio>
 #include <iostream>
 
+void CLIProcessor::parseCLIArgsPreQApp(const QStringList argList)
+{
+#ifdef Q_OS_WIN
+	if (argsGetOption(argList, "-s", "--safe-mode"))
+		qputenv("QT_OPENGL", "software");
+
+	if (argsGetOption(argList, "-a", "--angle-mode"))
+		qputenv("QT_OPENGL", "angle");
+
+	if (argsGetOption(argList, "-9", "--angle-d3d9"))
+	{
+		qputenv("QT_OPENGL", "angle");
+		qputenv("QT_ANGLE_PLATFORM", "d3d9");
+	}
+	if (argsGetOption(argList, "", "--angle-d3d11"))
+	{
+		qputenv("QT_OPENGL", "angle");
+		qputenv("QT_ANGLE_PLATFORM", "d3d11");
+	}
+	if (argsGetOption(argList, "", "--angle-warp"))
+	{
+		qputenv("QT_OPENGL", "angle");
+		qputenv("QT_ANGLE_PLATFORM", "warp");
+	}
+	if (argsGetOption(argList, "-m", "--mesa-mode"))
+		qputenv("QT_OPENGL", "software");
+#endif
+}
+
 void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 {
 	if (argsGetOption(argList, "-v", "--version"))
@@ -58,8 +87,8 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "--user-dir (or -u)      : Use an alternative user data directory\n"
 			  << "--verbose               : Even more diagnostic output in logfile \n"
 			  << "                          (esp. multimedia handling)\n"
-			  << "--opengl-compat (or -C) : Request OpenGL Compatibility profile\n"
-			  << "                          May help for certain driver configurations.\n"
+			  << "--compat33 (or -C)      : Request OpenGL 3.3 Compatibility Profile\n"
+			  << "                          May help for certain driver configurations. Mac?\n"
 			  << "--fix-text (or -t)      : May fix text rendering problems\n"
 			  << "--single-buffer         : Use single buffer swap (avoid screen blanking on Intel UHD)\n"
 			  << "--scale-gui  <scale factor>  : Scaling the GUI according to scale factor\n"
@@ -103,41 +132,12 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 	if (argsGetOption(argList, "", "--verbose"))
 		qApp->setProperty("verbose", true);
 
-	if (argsGetOption(argList, "-C", "--opengl-compat"))
-		qApp->setProperty("onetime_opengl_compat", true);
+	if (argsGetOption(argList, "-C", "--compat33"))
+		qApp->setProperty("onetime_compat33", true);
 
 	if (argsGetOption(argList, "-t", "--fix-text"))
 		qApp->setProperty("text_texture", true); // Will be observed in StelPainter::drawText()
 
-	if (argsGetOption(argList, "", "--single-buffer"))
-		qApp->setProperty("onetime_single_buffer", true);
-
-	#ifdef Q_OS_WIN
-	if (argsGetOption(argList, "-s", "--safe-mode"))
-		qputenv("QT_OPENGL", "software");
-
-	if (argsGetOption(argList, "-a", "--angle-mode"))
-		qputenv("QT_OPENGL", "angle");
-
-	if (argsGetOption(argList, "-9", "--angle-d3d9"))
-	{
-		qputenv("QT_OPENGL", "angle");
-		qputenv("QT_ANGLE_PLATFORM", "d3d9");
-	}
-	if (argsGetOption(argList, "", "--angle-d3d11"))
-	{
-		qputenv("QT_OPENGL", "angle");
-		qputenv("QT_ANGLE_PLATFORM", "d3d11");
-	}
-	if (argsGetOption(argList, "", "--angle-warp"))
-	{
-		qputenv("QT_OPENGL", "angle");
-		qputenv("QT_ANGLE_PLATFORM", "warp");
-	}
-	if (argsGetOption(argList, "-m", "--mesa-mode"))
-		qputenv("QT_OPENGL", "software");
-
-	#endif
 	if (argsGetOption(argList, "", "--list-landscapes"))
 	{
 		const QSet<QString>& landscapeIds = StelFileMgr::listContents("landscapes", StelFileMgr::Directory);
