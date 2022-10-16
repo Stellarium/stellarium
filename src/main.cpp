@@ -236,6 +236,9 @@ int main(int argc, char **argv)
 	if (argList.contains("--single-buffer"))
 		fmt.setSwapBehavior(QSurfaceFormat::SingleBuffer);
 
+	// shorter blinking backlight on exclusive fullscreen
+	fmt.setColorSpace(QSurfaceFormat::sRGBColorSpace);
+
 	QSurfaceFormat::setDefaultFormat(fmt);
 
 	/////////////////////////////////////////////////////////////////////////////////
