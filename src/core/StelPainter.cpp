@@ -20,6 +20,7 @@
 #include "StelPainter.hpp"
 
 #include "StelApp.hpp"
+#include "StelMainView.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
@@ -315,17 +316,19 @@ void StelPainter::setLineSmooth(bool enable)
 
 void StelPainter::setLineWidth(float width)
 {
-	auto& stel=StelApp::getInstance();
-	int ma;
-	glGetIntegerv(GL_MAJOR_VERSION, &ma);
-	if(ma>2)
-		width=1;
-	if(fabs(glState.lineWidth - width) > 1.e-10f)
+	if(fabs(glState.lineWidth - width) < 1.e-10f)
+		return;
+
+	glState.lineWidth = width;
+
+	if(width > 1 && StelMainView::getInstance().getGLInformation().isCoreProfile)
 	{
-		glState.lineWidth = width;
-		glLineWidth(width);
-		StelOpenGL::checkGLErrors(__FILE__,__LINE__);
+		// FIXME: ignoring this command, because it's not valid in OpenGL Core profile
+		// The correct way of following it would be to draw the lines as quads (pairs of triangles).
+		return;
 	}
+
+	glLineWidth(width);
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -810,12 +813,14 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 		{
 			painter.drawText(qRound(x+xshift), qRound(y+yshift), str);
 		}
-
+		
 		//important to call this before GL state restore
 		painter.end();
 
 		//fix for bug 1628072 caused by QTBUG-56798
+#ifndef QT_NO_DEBUG
 		StelOpenGL::clearGLErrors();
+#endif
 
 		//QPainter messes up some GL state, begin/endNativePainting or save/restore does not help
 		glState.apply();
