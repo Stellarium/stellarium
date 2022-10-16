@@ -241,6 +241,9 @@ int main(int argc, char **argv)
 	/////////////////////////////////////////////////////////////////////////////////
 #endif
 
+	// This must be run before QGuiApplication, otherwise it'll have no effect.
+	CLIProcessor::parseCLIArgsPreQApp(argList);
+
 #ifndef USE_QUICKVIEW
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 	// The QApplication MUST be created before the StelFileMgr is initialized.

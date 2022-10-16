@@ -33,6 +33,35 @@
 #include <cstdio>
 #include <iostream>
 
+void CLIProcessor::parseCLIArgsPreQApp(const QStringList argList)
+{
+#ifdef Q_OS_WIN
+	if (argsGetOption(argList, "-s", "--safe-mode"))
+		qputenv("QT_OPENGL", "software");
+
+	if (argsGetOption(argList, "-a", "--angle-mode"))
+		qputenv("QT_OPENGL", "angle");
+
+	if (argsGetOption(argList, "-9", "--angle-d3d9"))
+	{
+		qputenv("QT_OPENGL", "angle");
+		qputenv("QT_ANGLE_PLATFORM", "d3d9");
+	}
+	if (argsGetOption(argList, "", "--angle-d3d11"))
+	{
+		qputenv("QT_OPENGL", "angle");
+		qputenv("QT_ANGLE_PLATFORM", "d3d11");
+	}
+	if (argsGetOption(argList, "", "--angle-warp"))
+	{
+		qputenv("QT_OPENGL", "angle");
+		qputenv("QT_ANGLE_PLATFORM", "warp");
+	}
+	if (argsGetOption(argList, "-m", "--mesa-mode"))
+		qputenv("QT_OPENGL", "software");
+#endif
+}
+
 void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 {
 	if (argsGetOption(argList, "-v", "--version"))
@@ -109,32 +138,6 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 	if (argsGetOption(argList, "-t", "--fix-text"))
 		qApp->setProperty("text_texture", true); // Will be observed in StelPainter::drawText()
 
-	#ifdef Q_OS_WIN
-	if (argsGetOption(argList, "-s", "--safe-mode"))
-		qputenv("QT_OPENGL", "software");
-
-	if (argsGetOption(argList, "-a", "--angle-mode"))
-		qputenv("QT_OPENGL", "angle");
-
-	if (argsGetOption(argList, "-9", "--angle-d3d9"))
-	{
-		qputenv("QT_OPENGL", "angle");
-		qputenv("QT_ANGLE_PLATFORM", "d3d9");
-	}
-	if (argsGetOption(argList, "", "--angle-d3d11"))
-	{
-		qputenv("QT_OPENGL", "angle");
-		qputenv("QT_ANGLE_PLATFORM", "d3d11");
-	}
-	if (argsGetOption(argList, "", "--angle-warp"))
-	{
-		qputenv("QT_OPENGL", "angle");
-		qputenv("QT_ANGLE_PLATFORM", "warp");
-	}
-	if (argsGetOption(argList, "-m", "--mesa-mode"))
-		qputenv("QT_OPENGL", "software");
-
-	#endif
 	if (argsGetOption(argList, "", "--list-landscapes"))
 	{
 		const QSet<QString>& landscapeIds = StelFileMgr::listContents("landscapes", StelFileMgr::Directory);
