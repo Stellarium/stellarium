@@ -899,6 +899,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/apparent_magnitude_algorithm",	Planet::getApparentMagnitudeAlgorithmString());
 	conf->setValue("astro/flag_planets_nomenclature",		propMgr->getStelPropertyValue("NomenclatureMgr.nomenclatureDisplayed").toBool());
 	conf->setValue("astro/flag_hide_local_nomenclature",		propMgr->getStelPropertyValue("NomenclatureMgr.localNomenclatureHided").toBool());
+	conf->setValue("astro/flag_special_nomenclature_only",		propMgr->getStelPropertyValue("NomenclatureMgr.specialNomenclatureOnlyDisplayed").toBool());
 
 	// view dialog / markings tab settings
 	conf->setValue("viewing/flag_gridlines",				propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool());

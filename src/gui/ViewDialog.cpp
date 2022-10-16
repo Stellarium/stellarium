@@ -250,9 +250,13 @@ void ViewDialog::createDialogContent()
 	populateTrailsControls(ssmgr->getFlagTrails());
 	connect(ssmgr,SIGNAL(trailsDisplayedChanged(bool)), this, SLOT(populateTrailsControls(bool)));
 	connectBoolProperty(ui->hidePlanetNomenclatureCheckBox, "NomenclatureMgr.localNomenclatureHided");
+	connectBoolProperty(ui->showSpecialNomenclatureOnlyCheckBox, "NomenclatureMgr.specialNomenclatureOnlyDisplayed");
 	StelModule* mnmgr = StelApp::getInstance().getModule("NomenclatureMgr");
-	ui->hidePlanetNomenclatureCheckBox->setEnabled(mnmgr->property("nomenclatureDisplayed").toBool());
+	bool state = mnmgr->property("nomenclatureDisplayed").toBool();
+	ui->hidePlanetNomenclatureCheckBox->setEnabled(state);
 	connect(mnmgr,SIGNAL(nomenclatureDisplayedChanged(bool)),ui->hidePlanetNomenclatureCheckBox, SLOT(setEnabled(bool)));
+	ui->showSpecialNomenclatureOnlyCheckBox->setEnabled(state);
+	connect(mnmgr,SIGNAL(nomenclatureDisplayedChanged(bool)),ui->showSpecialNomenclatureOnlyCheckBox, SLOT(setEnabled(bool)));
 
 	populatePlanetMagnitudeAlgorithmsList();
 	int idx = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::getApparentMagnitudeAlgorithm(), Qt::UserRole, Qt::MatchCaseSensitive);

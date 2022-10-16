@@ -69,6 +69,7 @@ void NomenclatureMgr::init()
 	setColor(Vec3f(conf->value("color/planet_nomenclature_color", "0.1,1.0,0.1").toString()));
 	setFlagLabels(conf->value("astro/flag_planets_nomenclature", false).toBool());
 	setFlagHideLocalNomenclature(conf->value("astro/flag_hide_local_nomenclature", true).toBool());
+	setFlagShowSpecialNomenclatureOnly(conf->value("astro/flag_special_nomenclature_only", false).toBool());
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
@@ -78,6 +79,7 @@ void NomenclatureMgr::init()
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Planets_Nomenclature", displayGroup, N_("Nomenclature labels"), "nomenclatureDisplayed", "Alt+N");
+	addAction("actionShow_Planets_Nomenclature_SpecialPoints_Only", displayGroup, N_("Special nomenclature points only"), "specialNomenclatureOnlyDisplayed");
 }
 
 void NomenclatureMgr::updateNomenclatureData()
@@ -514,6 +516,17 @@ void NomenclatureMgr::setFlagHideLocalNomenclature(bool b)
 bool NomenclatureMgr::getFlagHideLocalNomenclature() const
 {
 	return NomenclatureItem::hideLocalNomenclature;
+}
+
+void NomenclatureMgr::setFlagShowSpecialNomenclatureOnly(bool b)
+{
+	NomenclatureItem::showSpecialNomenclatureOnly = b;
+	emit specialNomenclatureOnlyDisplayingChanged(b);
+}
+
+bool NomenclatureMgr::getFlagShowSpecialNomenclatureOnly() const
+{
+	return NomenclatureItem::showSpecialNomenclatureOnly;
 }
 
 // Update i18 names from english names according to current sky culture translator

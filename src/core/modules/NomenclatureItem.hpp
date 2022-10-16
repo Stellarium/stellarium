@@ -190,6 +190,8 @@ public:
 	static bool getFlagLabels(void){ return labelsFader;}
 	void setFlagHideLocalNomenclature(bool b) { hideLocalNomenclature=b; }
 	bool getFlagHideLocalNomenclature() const { return hideLocalNomenclature; }
+	void setFlagShowSpecialNomenclatureOnly(bool b) { showSpecialNomenclatureOnly=b; }
+	bool getFlagShowSpecialNomenclatureOnly() const { return showSpecialNomenclatureOnly; }
 	//QString getEnglishPlanetName(void) const {return planet->getEnglishName();}
 	PlanetP getPlanet(void) const { return planet;}
 	//! get latitude [degrees]
@@ -211,6 +213,7 @@ private:
 	mutable double jde;    // jde time of XYZ value
 	static Vec3f color;
 	static bool hideLocalNomenclature;
+	static bool showSpecialNomenclatureOnly;
 
 	// ratio of angular size of feature to the FOV
 	float getAngularDiameterRatio(const StelCore *core) const;

@@ -29,6 +29,7 @@
 const QString NomenclatureItem::NOMENCLATURE_TYPE = QStringLiteral("NomenclatureItem");
 Vec3f NomenclatureItem::color = Vec3f(0.1f,1.0f,0.1f);
 bool NomenclatureItem::hideLocalNomenclature = false;
+bool NomenclatureItem::showSpecialNomenclatureOnly = false;
 LinearFader NomenclatureItem::labelsFader;
 
 NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
@@ -371,6 +372,14 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	Vec3d srcPos;
 	const float scale = getAngularDiameterRatio(core);
 	NomenclatureItem::NomenclatureItemType niType = getNomenclatureType();
+
+	if (getFlagShowSpecialNomenclatureOnly())
+	{
+		// show special points only
+		if (niType<NomenclatureItem::niSpecialPointPole)
+			return;
+	}
+
 	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.lengthSquared() >= XYZ.lengthSquared())
 	    && (scale>0.04f && (scale<0.5f || niType>=NomenclatureItem::niSpecialPointPole )))
 	{
