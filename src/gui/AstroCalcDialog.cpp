@@ -926,16 +926,16 @@ void AstroCalcDialog::initListHECPositions()
 
 void AstroCalcDialog::setHECPositionsHeaderNames()
 {
-	hecPositionsHeader.clear();
-	// TRANSLATORS: name of object
-	hecPositionsHeader << q_("Name");
-	hecPositionsHeader << q_("Symbol");
-	// TRANSLATORS: ecliptic latitude
-	hecPositionsHeader << q_("Latitude");
-	// TRANSLATORS: ecliptic longitude
-	hecPositionsHeader << q_("Longitude");
-	// TRANSLATORS: distance
-	hecPositionsHeader << q_("Distance");
+	hecPositionsHeader = {
+		// TRANSLATORS: name of object
+		q_("Name"),
+		q_("Symbol"),
+		// TRANSLATORS: ecliptic latitude
+		q_("Latitude"),
+		// TRANSLATORS: ecliptic longitude
+		q_("Longitude"),
+		// TRANSLATORS: distance
+		q_("Distance")};
 
 	ui->hecPositionsTreeWidget->setHeaderLabels(hecPositionsHeader);
 	adjustHECPositionsColumns();
@@ -1499,7 +1499,7 @@ void AstroCalcDialog::currentHECPositions()
 	const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	const bool minorPlanets = ui->hecSelectedMinorPlanetsCheckBox->isChecked();
 
-	const QMap<QString, QChar> symbol = {
+	static const QMap<QString, QChar> symbol = {
 		{ "Mercury", QChar(0x263F) }, { "Venus",   QChar(0x2640) }, { "Earth",   QChar(0x2641) },
 		{ "Mars",    QChar(0x2642) }, { "Jupiter", QChar(0x2643) }, { "Saturn",  QChar(0x2644) },
 		{ "Uranus",  QChar(0x2645) }, { "Neptune", QChar(0x2646) }, { "Pluto",   QChar(0x2647) }
@@ -2055,17 +2055,17 @@ void AstroCalcDialog::cleanupEphemeris()
 
 void AstroCalcDialog::setRTSHeaderNames()
 {
-	rtsHeader.clear();
-	rtsHeader << q_("Name");
-	rtsHeader << qc_("Rise", "celestial event");
-	rtsHeader << qc_("Transit", "celestial event; passage across a meridian");
-	rtsHeader << qc_("Set", "celestial event");
-	// TRANSLATORS: altitude
-	rtsHeader << q_("Altitude");
-	// TRANSLATORS: magnitude
-	rtsHeader << q_("Mag.");
-	rtsHeader << q_("Solar Elongation");
-	rtsHeader << q_("Lunar Elongation");
+	rtsHeader = {
+		q_("Name"),
+		qc_("Rise", "celestial event"),
+		qc_("Transit", "celestial event; passage across a meridian"),
+		qc_("Set", "celestial event"),
+		// TRANSLATORS: altitude
+		q_("Altitude"),
+		// TRANSLATORS: magnitude
+		q_("Mag."),
+		q_("Solar Elongation"),
+		q_("Lunar Elongation")};
 	ui->rtsTreeWidget->setHeaderLabels(rtsHeader);
 
 	// adjust the column width
@@ -2279,17 +2279,17 @@ void AstroCalcDialog::saveRTS()
 
 void AstroCalcDialog::setLunarEclipseHeaderNames()
 {
-	lunareclipseHeader.clear();
-	lunareclipseHeader << q_("Date and Time");
-	lunareclipseHeader << q_("Saros");
-	lunareclipseHeader << q_("Type");
-	lunareclipseHeader << q_("Gamma");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	lunareclipseHeader << qc_("Penumbral eclipse magnitude", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	lunareclipseHeader << qc_("Umbral eclipse magnitude", "column name");	
-	// TRANSLATORS: Visibility conditions; the name of column in AstroCalc/Eclipses tool
-	lunareclipseHeader << qc_("Vis. Cond.", "column name");
+	lunareclipseHeader = {
+		q_("Date and Time"),
+		q_("Saros"),
+		q_("Type"),
+		q_("Gamma"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+		qc_("Penumbral eclipse magnitude", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+		qc_("Umbral eclipse magnitude", "column name"),
+		// TRANSLATORS: Visibility conditions; the name of column in AstroCalc/Eclipses tool
+		qc_("Vis. Cond.", "column name")};
 	ui->lunareclipseTreeWidget->setHeaderLabels(lunareclipseHeader);
 
 	// adjust the column width
@@ -2301,18 +2301,18 @@ void AstroCalcDialog::setLunarEclipseHeaderNames()
 
 void AstroCalcDialog::setLunarEclipseContactsHeaderNames()
 {
-	lunareclipsecontactsHeader.clear();
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	lunareclipsecontactsHeader << qc_("Circumstances", "column name");
-	lunareclipsecontactsHeader << q_("Date and Time");
-	lunareclipsecontactsHeader << q_("Altitude");
-	lunareclipsecontactsHeader << q_("Azimuth");
-	lunareclipsecontactsHeader << q_("Latitude");
-	lunareclipsecontactsHeader << q_("Longitude");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	lunareclipsecontactsHeader << qc_("Position Angle", "column name");
-	// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-	lunareclipsecontactsHeader << qc_("Axis Distance", "column name");
+	lunareclipsecontactsHeader = {
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+		qc_("Circumstances", "column name"),
+		q_("Date and Time"),
+		q_("Altitude"),
+		q_("Azimuth"),
+		q_("Latitude"),
+		q_("Longitude"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+		qc_("Position Angle", "column name"),
+		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
+		qc_("Axis Distance", "column name")};
 	ui->lunareclipsecontactsTreeWidget->setHeaderLabels(lunareclipsecontactsHeader);
 
 	// adjust the column width
@@ -2845,34 +2845,18 @@ void AstroCalcDialog::selectCurrentLunarEclipse(const QModelIndex& modelIndex)
 			treeItem->setTextAlignment(LunarEclipseContactDate, Qt::AlignRight);
 			if (alt<0.)
 			{
+				for (auto column : {LunarEclipseContact,         LunarEclipseContactDate,      LunarEclipseContactAltitude, LunarEclipseContactAzimuth,
+						    LunarEclipseContactLatitude, LunarEclipseContactLongitude, LunarEclipseContactPA,       LunarEclipseContactDistance})
 #if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
-				treeItem->setForeground(LunarEclipseContact, Qt::gray);
-				treeItem->setForeground(LunarEclipseContactDate, Qt::gray);
-				treeItem->setForeground(LunarEclipseContactAltitude, Qt::gray);
-				treeItem->setForeground(LunarEclipseContactAzimuth, Qt::gray);
-				treeItem->setForeground(LunarEclipseContactLatitude, Qt::gray);
-				treeItem->setForeground(LunarEclipseContactLongitude, Qt::gray);
-				treeItem->setForeground(LunarEclipseContactPA, Qt::gray);
-				treeItem->setForeground(LunarEclipseContactDistance, Qt::gray);
+					treeItem->setForeground(column, Qt::gray);
 #else
-				treeItem->setTextColor(LunarEclipseContact, Qt::gray);
-				treeItem->setTextColor(LunarEclipseContactDate, Qt::gray);
-				treeItem->setTextColor(LunarEclipseContactAltitude, Qt::gray);
-				treeItem->setTextColor(LunarEclipseContactAzimuth, Qt::gray);
-				treeItem->setTextColor(LunarEclipseContactLatitude, Qt::gray);
-				treeItem->setTextColor(LunarEclipseContactLongitude, Qt::gray);
-				treeItem->setTextColor(LunarEclipseContactPA, Qt::gray);
-				treeItem->setTextColor(LunarEclipseContactDistance, Qt::gray);
+					treeItem->setTextColor(column, Qt::gray);
 #endif
 			}
 			treeItem->setTextAlignment(LunarEclipseContact, Qt::AlignLeft);
-			treeItem->setTextAlignment(LunarEclipseContactDate, Qt::AlignRight);
-			treeItem->setTextAlignment(LunarEclipseContactAltitude, Qt::AlignRight);
-			treeItem->setTextAlignment(LunarEclipseContactAzimuth, Qt::AlignRight);
-			treeItem->setTextAlignment(LunarEclipseContactLatitude, Qt::AlignRight);
-			treeItem->setTextAlignment(LunarEclipseContactLongitude, Qt::AlignRight);
-			treeItem->setTextAlignment(LunarEclipseContactPA, Qt::AlignRight);
-			treeItem->setTextAlignment(LunarEclipseContactDistance, Qt::AlignRight);
+			for (auto column : {LunarEclipseContactDate, LunarEclipseContactAltitude, LunarEclipseContactAzimuth, LunarEclipseContactLatitude,
+					    LunarEclipseContactLongitude, LunarEclipseContactPA, LunarEclipseContactDistance})
+				treeItem->setTextAlignment(column, Qt::AlignRight);
 		}
 		event = false;
 	}
@@ -3017,9 +3001,9 @@ LocalSEparams localSolarEclipse(double JD,int contact,bool central) {
 	// and the American Ephemeris and Nautical Almanac (1961)
 
 	StelCore* core = StelApp::getInstance().getCore();
-	double lat = static_cast<double>(core->getCurrentLocation().latitude);
-	double lon = static_cast<double>(core->getCurrentLocation().longitude);
-	double elevation = static_cast<double>(core->getCurrentLocation().altitude);
+	const double lat = static_cast<double>(core->getCurrentLocation().latitude);
+	const double lon = static_cast<double>(core->getCurrentLocation().longitude);
+	const double elevation = static_cast<double>(core->getCurrentLocation().altitude);
 
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	Vec4d geocentricCoords = ssystem->getEarth()->getRectangularCoordinates(lon,lat,elevation);
@@ -3050,8 +3034,7 @@ LocalSEparams localSolarEclipse(double JD,int contact,bool central) {
 	const double delta = (u*vdot - udot*v)/std::sqrt(n2);
 	L1 = L1 - zeta * tf1;
 	L2 = L2 - zeta * tf2;
-	double L = L1;
-	if (central) L = L2;
+	const double L = central ? L2 : L1;
 	const double sfi = delta/L;
 	const double ce = 1.- sfi*sfi;
 	double cfi = 0.; 
@@ -3077,29 +3060,24 @@ double AstroCalcDialog::getDeltaTimeofContact(double JD, bool beginning, bool pe
 	static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	static const double f = 1.0 - ssystem->getEarth()->getOneMinusOblateness(); // flattening
 	static const double e2 = f*(2.-f);
-	int sign = 1;
+	const int sign = outerContact ? 1 : -1; // there are outer & inner contacts
 	core->setJD(JD);
 	core->update(0);
 	double xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot;
 	BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
-	double x,y,d,tf1,tf2,L1,L2,mu,L=0.;
+	double x,y,d,tf1,tf2,L1,L2,mu;
 	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
-	double rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
+	const double rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
 	double s,dt;
 	if (!penumbra)
 		ydot = ydot/rho1;
-	double n = std::sqrt(xdot*xdot+ydot*ydot);
-	double y1 = y/rho1;
-	double m = std::sqrt(x*x+y*y);
-	double m1 = std::sqrt(x*x+y1*y1);
-	double rho = m/m1;
-	if (penumbra)
-		L = L1;
-	else
-		L = L2;
+	const double n = std::sqrt(xdot*xdot+ydot*ydot);
+	const double y1 = y/rho1;
+	const double m = std::sqrt(x*x+y*y);
+	const double m1 = std::sqrt(x*x+y1*y1);
+	const double rho = m/m1;
+	const double L = penumbra ? L1 : L2;
 
-	if (!outerContact) // there are outer & inner contacts
-		sign = -1;
 	if (external)
 	{
 		s = (x*ydot-y*xdot)/(n*(L+sign*rho)); // shadow's limb
@@ -3259,13 +3237,12 @@ void AstroCalcDialog::generateSolarEclipses()
 					// Saros numbers calculated here are matching well with NASA's Five Millennium Catalog of Solar Eclipses
 
 					// ln = Brown Lunation number : = 1 at the first New Moon of 1923
-					double q = (JD-2423436.40347)/29.530588;
-					q = round(q);
-					int ln = int(q) + 1 - 953;
-					int nd = ln + 105;
-					int s = 136 + 38 * nd;
-					int nx = -61 * nd;
-					int nc = qFloor(nx / 358. + 0.5 - nd / (12. * 358 * 358));
+					const double q = round ((JD-2423436.40347)/29.530588);
+					const int ln = int(q) + 1 - 953;
+					const int nd = ln + 105;
+					const int s = 136 + 38 * nd;
+					const int nx = -61 * nd;
+					const int nc = qFloor(nx / 358. + 0.5 - nd / (12. * 358 * 358));
 					int saros = 1 + ((s + nc * 223 - 1) % 223);
 					if ((s + nc * 223 - 1) < 0) saros -= 223;
 					if (saros < -223) saros += 223;
@@ -3332,15 +3309,9 @@ void AstroCalcDialog::generateSolarEclipses()
 					treeItem->setText(SolarEclipseDuration, durationStr);
 					treeItem->setData(SolarEclipseDuration, Qt::UserRole, abs(duration));
 					treeItem->setToolTip(SolarEclipseDuration, q_("Duration of total or annular phase at greatest eclipse"));
-					treeItem->setTextAlignment(SolarEclipseDate, Qt::AlignRight);
-					treeItem->setTextAlignment(SolarEclipseSaros, Qt::AlignRight);
-					treeItem->setTextAlignment(SolarEclipseGamma, Qt::AlignRight);
-					treeItem->setTextAlignment(SolarEclipseMag, Qt::AlignRight);
-					treeItem->setTextAlignment(SolarEclipseLatitude, Qt::AlignRight);
-					treeItem->setTextAlignment(SolarEclipseLongitude, Qt::AlignRight);
-					treeItem->setTextAlignment(SolarEclipseAltitude, Qt::AlignRight);
-					treeItem->setTextAlignment(SolarEclipsePathwidth, Qt::AlignRight);
-					treeItem->setTextAlignment(SolarEclipseDuration, Qt::AlignRight);
+					for (auto column: {SolarEclipseDate,      SolarEclipseSaros,    SolarEclipseGamma,     SolarEclipseMag,      SolarEclipseLatitude,
+							   SolarEclipseLongitude, SolarEclipseAltitude, SolarEclipsePathwidth, SolarEclipseDuration})
+						treeItem->setTextAlignment(column, Qt::AlignRight);
 				}
 			}
 		}
@@ -3645,14 +3616,9 @@ void AstroCalcDialog::generateSolarEclipsesLocal()
 							else
 								treeItem->setText(SolarEclipseLocalDuration, dash);
 							treeItem->setToolTip(SolarEclipseLocalDuration, q_("Duration of total or annular eclipse"));
-							treeItem->setTextAlignment(SolarEclipseLocalDate, Qt::AlignRight);
-							treeItem->setTextAlignment(SolarEclipseLocalMagnitude, Qt::AlignRight);
-							treeItem->setTextAlignment(SolarEclipseLocalFirstContact, Qt::AlignRight);
-							treeItem->setTextAlignment(SolarEclipseLocal2ndContact, Qt::AlignRight);
-							treeItem->setTextAlignment(SolarEclipseLocalMaximum, Qt::AlignRight);
-							treeItem->setTextAlignment(SolarEclipseLocal3rdContact, Qt::AlignRight);
-							treeItem->setTextAlignment(SolarEclipseLocalLastContact, Qt::AlignRight);
-							treeItem->setTextAlignment(SolarEclipseLocalDuration, Qt::AlignRight);
+							for (auto column: {SolarEclipseLocalDate,    SolarEclipseLocalMagnitude,  SolarEclipseLocalFirstContact, SolarEclipseLocal2ndContact,
+									   SolarEclipseLocalMaximum, SolarEclipseLocal3rdContact, SolarEclipseLocalLastContact,  SolarEclipseLocalDuration})
+								treeItem->setTextAlignment(column, Qt::AlignRight);
 						}
 					}
 				}
@@ -4717,14 +4683,14 @@ QPair<double, double> AstroCalcDialog::getNSLimitofShadow(double JD, bool northe
 	BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
 	double x,y,d,L1,L2,mu,tf;
 	SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
-	double rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
-	double y1 = y/rho1;
+	const double rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
+	const double y1 = y/rho1;
 	double eta1 = y1;
-	double sd1 = std::sin(d)/rho1;
-	double cd1 = std::sqrt(1.-e2)*std::cos(d)/rho1;
-	double rho2 = std::sqrt(1.-e2*std::sin(d)*std::sin(d));
-	double sd1d2 = e2*std::sin(d)*std::cos(d)/(rho1*rho2);
-	double cd1d2 = std::sqrt(1.-sd1d2*sd1d2);
+	const double sd1 = std::sin(d)/rho1;
+	const double cd1 = std::sqrt(1.-e2)*std::cos(d)/rho1;
+	const double rho2 = std::sqrt(1.-e2*std::sin(d)*std::sin(d));
+	const double sd1d2 = e2*std::sin(d)*std::cos(d)/(rho1*rho2);
+	const double cd1d2 = std::sqrt(1.-sd1d2*sd1d2);
 	double zeta = rho2*(-eta1*sd1d2);
 	if (penumbra)
 	{
@@ -4781,13 +4747,10 @@ QPair<double, double> AstroCalcDialog::getNSLimitofShadow(double JD, bool northe
 		{
 			zeta1 = std::sqrt(zeta);
 			zeta = rho2*(zeta1*cd1d2-eta1*sd1d2);
-			tq = bdot-zeta*ddot-adot/cq;
-			tq = tq/(cdot-zeta*mudot*std::cos(d));
+			//tq = bdot-zeta*ddot-adot/cq;
+			//tq = tq/(cdot-zeta*mudot*std::cos(d));
 			double b = -eta1*sd1+zeta1*cd1;
-			double theta = std::atan2(xi,b)*M_180_PI;
-			double lngDeg = theta - mu;
-			lngDeg = StelUtils::fmodpos(lngDeg, 360.);
-			if (lngDeg > 180.) lngDeg -= 360.;
+			double lngDeg = StelUtils::fmodpos(std::atan2(xi,b)*M_180_PI - mu + 180., 360.) - 180.;
 			double sfn1 = eta1*cd1+zeta1*sd1;
 			double cfn1 = std::sqrt(1.-sfn1*sfn1);
 			double latDeg = ff*sfn1/cfn1;
@@ -4809,14 +4772,13 @@ QPair<double, double> AstroCalcDialog::getExtremeNSLimitofShadow(double JD, bool
 	static const double ff = 1./(1.-f);
 	core->setJD(JD+0.1);
 	core->update(0);
-	double xdot,ydot,ddot,mudot,ldot,etadot,bdot1,cdot1;
+	double xdot,ydot,ddot,mudot,ldot,etadot,bdot1,cdot1,bdot2,cdot2;
 	BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot1,cdot1,penumbra);
 	core->setJD(JD-0.1);
 	core->update(0);
-	double bdot2,cdot2,L;
 	BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot2,cdot2,penumbra);
-	double bdd = 5.*(bdot1-bdot2);
-	double cdd = 5.*(cdot1-cdot2);
+	const double bdd = 5.*(bdot1-bdot2);
+	const double cdd = 5.*(cdot1-cdot2);
 	core->setJD(JD);
 	core->update(0);
 	double x,y,d,tf1,tf2,L1,L2,mu;
@@ -4828,10 +4790,7 @@ QPair<double, double> AstroCalcDialog::getExtremeNSLimitofShadow(double JD, bool
 	double scq = e/cdot;
 	double tq = bdot/cdot;
 	double cq = 1./scq;
-	if (penumbra)
-		L = L1;
-	else
-		L = L2;
+	const double L = penumbra ? L1 : L2;
 	if (northernLimit)
 	{
 		if (L<0.)
@@ -4857,7 +4816,7 @@ QPair<double, double> AstroCalcDialog::getExtremeNSLimitofShadow(double JD, bool
 		xidot = xdot+L*bdd/e;
 		etadot = (ydot+L*cdd/e)/rho1;
 	}
-	double n2 = xidot*xidot+etadot*etadot;
+	const double n2 = xidot*xidot+etadot*etadot;
 	double xi = x-L*sq;
 	double eta = (y-L*cq)/rho1;
 	double szi = (xi*etadot-xidot*eta)/std::sqrt(n2);
@@ -4870,16 +4829,13 @@ QPair<double, double> AstroCalcDialog::getExtremeNSLimitofShadow(double JD, bool
 		core->update(0);
 		SolarEclipseBessel(x,y,d,tf1,tf2,L1,L2,mu);
 		BesselParameters(xdot,ydot,ddot,mudot,ldot,etadot,bdot,cdot,penumbra);
-		tq = bdot/cdot;
+		//tq = bdot/cdot;
 		e = std::sqrt(bdot*bdot+cdot*cdot);
 		rho1 = std::sqrt(1.-e2*std::cos(d)*std::cos(d));
 		scq = e/cdot;
 		tq = bdot/cdot;
 		cq = 1./scq;
-		if (penumbra)
-			L = L1;
-		else
-			L = L2;
+		const double L = penumbra ? L1 : L2;
 		if (northernLimit)
 		{
 			if (L<0.)
@@ -4895,26 +4851,24 @@ QPair<double, double> AstroCalcDialog::getExtremeNSLimitofShadow(double JD, bool
 				cq = std::abs(cq);
 		}
 		sq = tq*cq;
-		if (cq>0.)
-		{
-			xidot = xdot-L*bdd/e;
-			etadot = (ydot-L*cdd/e)/rho1;
-		}
-		else
-		{
-			xidot = xdot+L*bdd/e;
-			etadot = (ydot+L*cdd/e)/rho1;
-		}
-		n2 = xidot*xidot+etadot*etadot;
+		// clazy warns n2 below and therefore this all is unused!
+		//if (cq>0.)
+		//{
+		//	xidot = xdot-L*bdd/e;
+		//	etadot = (ydot-L*cdd/e)/rho1;
+		//}
+		//else
+		//{
+		//	xidot = xdot+L*bdd/e;
+		//	etadot = (ydot+L*cdd/e)/rho1;
+		//}
+		//n2 = xidot*xidot+etadot*etadot;
 		xi = x-L*sq;
 		eta = (y-L*cq)/rho1;
 		double sd1 = std::sin(d)/rho1;
 		double cd1 = std::sqrt(1.-e2)*std::cos(d)/rho1;
 		double b = -eta*sd1;
-		double theta = std::atan2(xi,b)*M_180_PI;
-		double lngDeg = theta-mu;
-		lngDeg = StelUtils::fmodpos(lngDeg, 360.);
-		if (lngDeg > 180.) lngDeg -= 360.;
+		double lngDeg = StelUtils::fmodpos(std::atan2(xi,b)*M_180_PI - mu +180., 360.) - 180.;
 		double sfn1 = eta*cd1;
 		double cfn1 = std::sqrt(1.-sfn1*sfn1);
 		double latDeg = ff*sfn1/cfn1;
@@ -4945,8 +4899,7 @@ QPair<double, double> AstroCalcDialog::getContactCoordinates(double x, double y,
 	const double sd1 = std::sin(d)/rho1;
 	const double cd1 = std::sqrt(1.-e2)*std::cos(d)/rho1;
 	const double theta = std::atan2(x/m1,-eta1*sd1)*M_180_PI;
-	double lngDeg = StelUtils::fmodpos(theta-mu, 360.);
-	if (lngDeg > 180.) lngDeg -= 360.;
+	double lngDeg = StelUtils::fmodpos(theta - mu + 180., 360.) - 180.;
 	double latDeg = ff*std::tan(std::asin(eta1*cd1));
 	coordinates.first = std::atan(latDeg)*M_180_PI;
 	coordinates.second = lngDeg;
