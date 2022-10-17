@@ -151,6 +151,13 @@ void TelescopeClientDirectLx200::telescopeSync(const Vec3d &j2000Pos, StelObject
 	syncReceived(ra_int, dec_int);
 }
 
+void TelescopeClientDirectLx200::telescopeAbortSlew()
+{
+	if (!isConnected())
+		return;
+	lx200->sendAbort();
+}
+
 void TelescopeClientDirectLx200::gotoReceived(unsigned int ra_int, int dec_int)
 {
 	lx200->sendGoto(ra_int, dec_int);
