@@ -195,23 +195,24 @@ public:
 		vars.texCoord = program->attributeLocation("a_texCoord");
 		vars.source = program->uniformLocation("u_source");
 
-		vao.create();
 		vbo.create();
 		struct VBOData
 		{
 			const GLfloat pos[8] = {-1, -1, +1, -1, -1, +1, +1, +1};
 			const GLfloat texCoord[8] = {0, 0, 1, 0, 0, 1, 1, 1};
 		} vboData;
-		vao.bind();
+		posOffset = offsetof(VBOData, pos);
+		texCoordOffset = offsetof(VBOData, texCoord);
 		vbo.bind();
 		vbo.setUsagePattern(QOpenGLBuffer::StaticDraw);
 		vbo.allocate(&vboData.pos, sizeof vboData);
-		program->setAttributeBuffer(vars.pos, GL_FLOAT, 0, 2, 0);
-		program->setAttributeBuffer(vars.texCoord, GL_FLOAT, offsetof(VBOData, texCoord), 2, 0);
-		program->enableAttributeArray(vars.pos);
-		program->enableAttributeArray(vars.texCoord);
+		if(vao.create())
+		{
+			vao.bind();
+			setupCurrentVAO();
+			vao.release();
+		}
 		vbo.release();
-		vao.release();
 	}
 
 	virtual ~NightModeGraphicsEffect() Q_DECL_OVERRIDE
@@ -265,7 +266,7 @@ protected:
 
 		painter->begin(paintDevice);
 
-		vao.bind();
+		bindVAO();
 		//painter->beginNativePainting();
 		program->bind();
 		program->setUniformValue(vars.source, 0);
@@ -273,7 +274,37 @@ protected:
 		gl->glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		program->release();
 		//painter->endNativePainting();
-		vao.release();
+		releaseVAO();
+	}
+
+	//! Binds actual VAO if it's supported, sets up the relevant state manually otherwise.
+	void bindVAO()
+	{
+		if(vao.isCreated())
+			vao.bind();
+		else
+			setupCurrentVAO();
+	}
+	//! Sets the vertex attribute states for the currently bound VAO so that glDraw* commands can work.
+	void setupCurrentVAO()
+	{
+		program->setAttributeBuffer(vars.pos, GL_FLOAT, posOffset, 2, 0);
+		program->setAttributeBuffer(vars.texCoord, GL_FLOAT, texCoordOffset, 2, 0);
+		program->enableAttributeArray(vars.pos);
+		program->enableAttributeArray(vars.texCoord);
+	}
+	//! Binds zero VAO if VAO is supported, manually disables the relevant vertex attributes otherwise.
+	void releaseVAO()
+	{
+		if(vao.isCreated())
+		{
+			vao.release();
+		}
+		else
+		{
+			program->disableAttributeArray(vars.pos);
+			program->disableAttributeArray(vars.texCoord);
+		}
 	}
 
 private:
@@ -285,6 +316,7 @@ private:
 		int texCoord;
 		int source;
 	} vars;
+	int posOffset, texCoordOffset;
 	QOpenGLVertexArrayObject vao;
 	QOpenGLBuffer vbo;
 };

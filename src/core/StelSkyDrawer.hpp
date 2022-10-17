@@ -433,6 +433,13 @@ private:
 	//! is displayed with a halo of size targetRadius
 	float findWorldLumForMag(float mag, float targetRadius) const;
 
+	//! Binds actual VAO if it's supported, sets up the relevant state manually otherwise.
+	void bindVAO();
+	//! Sets the vertex attribute states for the currently bound VAO so that glDraw* commands can work.
+	void setupCurrentVAO();
+	//! Binds zero VAO if VAO is supported, manually disables the relevant vertex attributes otherwise.
+	void releaseVAO();
+
 	StelCore* core;
 	StelToneReproducer* eye;
 

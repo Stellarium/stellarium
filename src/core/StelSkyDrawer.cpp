@@ -201,22 +201,53 @@ void StelSkyDrawer::init()
 	starShaderVars.color = starShaderProgram->attributeLocation("color");
 	starShaderVars.texture = starShaderProgram->uniformLocation("tex");
 
-	vao->create();
-	vao->bind();
 	vbo->create();
 	vbo->bind();
 	vbo->setUsagePattern(QOpenGLBuffer::StreamDraw);
 	vbo->allocate(maxPointSources*6*sizeof(StarVertex) + maxPointSources*6*2);
+
+	if(vao->create())
+	{
+		vao->bind();
+		setupCurrentVAO();
+		vao->release();
+	}
+
+	vbo->release();
+
+	update(0);
+}
+
+void StelSkyDrawer::setupCurrentVAO()
+{
 	starShaderProgram->setAttributeBuffer(starShaderVars.pos, GL_FLOAT, 0, 2, sizeof(StarVertex));
 	starShaderProgram->setAttributeBuffer(starShaderVars.color, GL_UNSIGNED_BYTE, offsetof(StarVertex,color), 3, sizeof(StarVertex));
 	starShaderProgram->setAttributeBuffer(starShaderVars.texCoord, GL_UNSIGNED_BYTE, maxPointSources*6*sizeof(StarVertex), 2, 0);
 	starShaderProgram->enableAttributeArray(starShaderVars.pos);
 	starShaderProgram->enableAttributeArray(starShaderVars.color);
 	starShaderProgram->enableAttributeArray(starShaderVars.texCoord);
-	vbo->release();
-	vao->release();
+}
 
-	update(0);
+void StelSkyDrawer::bindVAO()
+{
+	if(vao->isCreated())
+		vao->bind();
+	else
+		setupCurrentVAO();
+}
+
+void StelSkyDrawer::releaseVAO()
+{
+	if(vao->isCreated())
+	{
+		vao->release();
+	}
+	else
+	{
+		starShaderProgram->disableAttributeArray(starShaderVars.pos);
+		starShaderProgram->disableAttributeArray(starShaderVars.color);
+		starShaderProgram->disableAttributeArray(starShaderVars.texCoord);
+	}
 }
 
 void StelSkyDrawer::update(double)
@@ -424,9 +455,9 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 	starShaderProgram->bind();
 	starShaderProgram->setUniformValue(starShaderVars.projectionMatrix, qMat);
 	
-	vao->bind();
+	bindVAO();
 	glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(nbPointSources)*6);
-	vao->release();
+	releaseVAO();
 
 	starShaderProgram->release();
 	
