@@ -4136,7 +4136,7 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 	
 	gl->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	gl->glBindBuffer(GL_ARRAY_BUFFER, 0);
-	sphereVAO.release();
+	sphereVAO->release();
 
 	GL(shader->release());
 	

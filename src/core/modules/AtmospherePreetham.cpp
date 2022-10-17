@@ -125,6 +125,40 @@ AtmospherePreetham::~AtmospherePreetham(void)
 	atmoShaderProgram = Q_NULLPTR;
 }
 
+void AtmospherePreetham::setupCurrentVAO()
+{
+	GL(colorGridBuffer.bind());
+	GL(atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyColor, GL_FLOAT, 0, 4, 0));
+	GL(colorGridBuffer.release());
+	GL(atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyColor));
+	GL(posGridBuffer.bind());
+	GL(atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyVertex, GL_FLOAT, 0, 2, 0));
+	GL(posGridBuffer.release());
+	GL(atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyVertex));
+}
+
+void AtmospherePreetham::bindVAO()
+{
+	if(vao.isCreated())
+		GL(vao.bind());
+	else
+		setupCurrentVAO();
+}
+
+void AtmospherePreetham::releaseVAO()
+{
+	if(vao.isCreated())
+	{
+		GL(vao.release());
+	}
+	else
+	{
+		GL(atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyColor));
+		GL(atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyVertex));
+	}
+}
+
+
 void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Planet& currentPlanet, const Planet& sun,
 				      const Planet*const moon, const StelLocation& location, const float temperature,
 				      const float relativeHumidity, const float extinctionCoefficient, const bool noScatter)
@@ -194,16 +228,9 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 		colorGridBuffer.allocate(colorGrid, static_cast<int>((1+skyResolutionX)*(1+skyResolutionY)*4*4));
 		colorGridBuffer.release();
 
-		GL(vao.bind());
-		GL(colorGridBuffer.bind());
-		GL(atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyColor, GL_FLOAT, 0, 4, 0));
-		GL(colorGridBuffer.release());
-		GL(atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyColor));
-		GL(posGridBuffer.bind());
-		GL(atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyVertex, GL_FLOAT, 0, 2, 0));
-		GL(posGridBuffer.release());
-		GL(atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyVertex));
-		GL(vao.release());
+		bindVAO();
+		setupCurrentVAO();
+		releaseVAO();
 	}
 
 	auto sunPos  =  sun.getAltAzPosAuto(core);
@@ -429,7 +456,7 @@ void AtmospherePreetham::draw(StelCore* core)
 	
 
 	// And draw everything at once
-	GL(vao.bind());
+	bindVAO();
 	GL(indicesBuffer.bind());
 	std::size_t shift=0;
 	for (unsigned int y=0;y<skyResolutionY;++y)
@@ -438,7 +465,7 @@ void AtmospherePreetham::draw(StelCore* core)
 		shift += static_cast<size_t>((skyResolutionX+1)*2*2);
 	}
 	GL(indicesBuffer.release());
-	GL(vao.release());
+	releaseVAO();
 	
 	GL(atmoShaderProgram->release());
 	// debug output

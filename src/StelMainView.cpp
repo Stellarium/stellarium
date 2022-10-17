@@ -288,8 +288,10 @@ protected:
 	//! Sets the vertex attribute states for the currently bound VAO so that glDraw* commands can work.
 	void setupCurrentVAO()
 	{
+		vbo.bind();
 		program->setAttributeBuffer(vars.pos, GL_FLOAT, posOffset, 2, 0);
 		program->setAttributeBuffer(vars.texCoord, GL_FLOAT, texCoordOffset, 2, 0);
+		vbo.release();
 		program->enableAttributeArray(vars.pos);
 		program->enableAttributeArray(vars.texCoord);
 	}

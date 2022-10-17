@@ -220,9 +220,11 @@ void StelSkyDrawer::init()
 
 void StelSkyDrawer::setupCurrentVAO()
 {
+	vbo->bind();
 	starShaderProgram->setAttributeBuffer(starShaderVars.pos, GL_FLOAT, 0, 2, sizeof(StarVertex));
 	starShaderProgram->setAttributeBuffer(starShaderVars.color, GL_UNSIGNED_BYTE, offsetof(StarVertex,color), 3, sizeof(StarVertex));
 	starShaderProgram->setAttributeBuffer(starShaderVars.texCoord, GL_UNSIGNED_BYTE, maxPointSources*6*sizeof(StarVertex), 2, 0);
+	vbo->release();
 	starShaderProgram->enableAttributeArray(starShaderVars.pos);
 	starShaderProgram->enableAttributeArray(starShaderVars.color);
 	starShaderProgram->enableAttributeArray(starShaderVars.texCoord);
