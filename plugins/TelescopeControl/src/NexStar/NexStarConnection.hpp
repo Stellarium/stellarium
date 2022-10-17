@@ -39,6 +39,8 @@ public:
 	~NexStarConnection(void) override { resetCommunication(); }
 	void sendGoto(unsigned int ra_int, int dec_int);
 	void sendSync(unsigned int ra_int, int dec_int);
+	//! Delete pending commands and send abort signal.
+	void sendAbort();
 	void sendCommand(NexStarCommand * command);
 	
 private:

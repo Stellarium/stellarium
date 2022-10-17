@@ -59,6 +59,12 @@ void NexStarConnection::sendSync(unsigned int ra_int, int dec_int)
 	sendCommand(new NexStarCommandSync(server, ra_int, dec_int));
 }
 
+void NexStarConnection::sendAbort()
+{
+	command_list.clear(); // remove any queued commands
+	sendCommand(new NexStarCommandAbort(server));
+}
+
 void NexStarConnection::dataReceived(const char *&p,const char *read_buff_end)
 {
 	if (isClosed())
