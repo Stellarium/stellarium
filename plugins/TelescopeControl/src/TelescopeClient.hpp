@@ -167,6 +167,11 @@ public:
 		Q_UNUSED(selectObject)
 		Q_UNUSED(j2000Pos)
 	}
+	void telescopeAbortSlew() override
+	{
+		desired_pos=XYZ;
+		qDebug() << "Telescope" << getID() << "Slew aborted";
+	}
 	bool hasKnownPosition(void) const override
 	{
 		return true;

@@ -74,6 +74,7 @@ void SlewDialog::createDialogContent()
 
 	connect(ui->pushButtonSlew, SIGNAL(clicked()), this, SLOT(slew()));
 	connect(ui->pushButtonSync, SIGNAL(clicked()), this, SLOT(sync()));
+	connect(ui->pushButtonAbort, SIGNAL(clicked()), this, SLOT(abort()));
 	connect(ui->pushButtonConfigure, SIGNAL(clicked()), this, SLOT(showConfiguration()));
 
 	connect(telescopeManager, SIGNAL(clientConnected(int, QString)), this, SLOT(addTelescope(int, QString)));
@@ -242,6 +243,15 @@ void SlewDialog::sync()
 
 	StelObjectP selectObject = nullptr;
 	telescope->telescopeSync(targetPosition, selectObject);
+}
+
+void SlewDialog::abort()
+{
+	auto telescope = currentTelescope();
+	if (!telescope)
+		return;
+
+	telescope->telescopeAbortSlew();
 }
 
 void SlewDialog::getCurrentObjectInfo()
