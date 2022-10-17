@@ -926,7 +926,7 @@ void AstroCalcDialog::initListHECPositions()
 
 void AstroCalcDialog::setHECPositionsHeaderNames()
 {
-	hecPositionsHeader = {
+	hecPositionsHeader = QStringList({
 		// TRANSLATORS: name of object
 		q_("Name"),
 		q_("Symbol"),
@@ -935,7 +935,7 @@ void AstroCalcDialog::setHECPositionsHeaderNames()
 		// TRANSLATORS: ecliptic longitude
 		q_("Longitude"),
 		// TRANSLATORS: distance
-		q_("Distance")};
+		q_("Distance")});
 
 	ui->hecPositionsTreeWidget->setHeaderLabels(hecPositionsHeader);
 	adjustHECPositionsColumns();
@@ -2055,7 +2055,7 @@ void AstroCalcDialog::cleanupEphemeris()
 
 void AstroCalcDialog::setRTSHeaderNames()
 {
-	rtsHeader = {
+	rtsHeader = QStringList({
 		q_("Name"),
 		qc_("Rise", "celestial event"),
 		qc_("Transit", "celestial event; passage across a meridian"),
@@ -2065,7 +2065,7 @@ void AstroCalcDialog::setRTSHeaderNames()
 		// TRANSLATORS: magnitude
 		q_("Mag."),
 		q_("Solar Elongation"),
-		q_("Lunar Elongation")};
+		q_("Lunar Elongation")});
 	ui->rtsTreeWidget->setHeaderLabels(rtsHeader);
 
 	// adjust the column width
@@ -2279,7 +2279,7 @@ void AstroCalcDialog::saveRTS()
 
 void AstroCalcDialog::setLunarEclipseHeaderNames()
 {
-	lunareclipseHeader = {
+	lunareclipseHeader = QStringList({
 		q_("Date and Time"),
 		q_("Saros"),
 		q_("Type"),
@@ -2289,7 +2289,7 @@ void AstroCalcDialog::setLunarEclipseHeaderNames()
 		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 		qc_("Umbral eclipse magnitude", "column name"),
 		// TRANSLATORS: Visibility conditions; the name of column in AstroCalc/Eclipses tool
-		qc_("Vis. Cond.", "column name")};
+		qc_("Vis. Cond.", "column name")});
 	ui->lunareclipseTreeWidget->setHeaderLabels(lunareclipseHeader);
 
 	// adjust the column width
@@ -2301,7 +2301,7 @@ void AstroCalcDialog::setLunarEclipseHeaderNames()
 
 void AstroCalcDialog::setLunarEclipseContactsHeaderNames()
 {
-	lunareclipsecontactsHeader = {
+	lunareclipsecontactsHeader = QStringList({
 		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 		qc_("Circumstances", "column name"),
 		q_("Date and Time"),
@@ -2312,7 +2312,7 @@ void AstroCalcDialog::setLunarEclipseContactsHeaderNames()
 		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 		qc_("Position Angle", "column name"),
 		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-		qc_("Axis Distance", "column name")};
+		qc_("Axis Distance", "column name")});
 	ui->lunareclipsecontactsTreeWidget->setHeaderLabels(lunareclipsecontactsHeader);
 
 	// adjust the column width
@@ -2916,7 +2916,7 @@ void AstroCalcDialog::saveLunarEclipseCircumstances()
 
 void AstroCalcDialog::setSolarEclipseHeaderNames()
 {
-	solareclipseHeader = {
+	solareclipseHeader = QStringList({
 		q_("Date and Time"),
 		q_("Saros"),
 		q_("Type"),
@@ -2932,7 +2932,7 @@ void AstroCalcDialog::setSolarEclipseHeaderNames()
 		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 		qc_("Path Width", "column name"),
 		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-		qc_("Central Duration", "column name")};
+		qc_("Central Duration", "column name")});
 	ui->solareclipseTreeWidget->setHeaderLabels(solareclipseHeader);
 
 	// adjust the column width
@@ -2944,14 +2944,14 @@ void AstroCalcDialog::setSolarEclipseHeaderNames()
 
 void AstroCalcDialog::setSolarEclipseContactsHeaderNames()
 {
-	solareclipsecontactsHeader = {
+	solareclipsecontactsHeader = QStringList({
 		qc_("Circumstances", "column name"),
 		q_("Date and Time"),
 		q_("Latitude"),
 		q_("Longitude"),
 		qc_("Path Width", "column name"),
 		qc_("Central Duration", "column name"),
-		q_("Type")};
+		q_("Type")});
 	ui->solareclipsecontactsTreeWidget->setHeaderLabels(solareclipsecontactsHeader);
 
 	// adjust the column width
@@ -3336,7 +3336,7 @@ void AstroCalcDialog::generateSolarEclipses()
 
 void AstroCalcDialog::setSolarEclipseLocalHeaderNames()
 {
-	solareclipselocalHeader = {
+	solareclipselocalHeader = QStringList({
 		q_("Date"),
 		q_("Type"),
 		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
@@ -3352,7 +3352,7 @@ void AstroCalcDialog::setSolarEclipseLocalHeaderNames()
 		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 		qc_("Partial Eclipse Ends", "column name"),
 		// TRANSLATORS: The name of column in AstroCalc/Eclipses tool
-		qc_("Duration", "column name")};
+		qc_("Duration", "column name")});
 	ui->solareclipselocalTreeWidget->setHeaderLabels(solareclipselocalHeader);
 
 	// adjust the column width
@@ -4955,7 +4955,7 @@ void AstroCalcDialog::saveSolarEclipsesLocal()
 
 void AstroCalcDialog::setTransitHeaderNames()
 {
-	transitHeader = {
+	transitHeader = QStringList({
 		qc_("Date of mid-transit", "column name"),
 		// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
 		q_("Planet"),
@@ -4974,7 +4974,7 @@ void AstroCalcDialog::setTransitHeaderNames()
 		// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
 		qc_("Duration", "column name"),
 		// TRANSLATORS: The name of column in AstroCalc/Eclipses/Transits tool
-		qc_("Observable Duration", "column name")};
+		qc_("Observable Duration", "column name")});
 	ui->transitTreeWidget->setHeaderLabels(transitHeader);
 
 	// adjust the column width
@@ -6571,7 +6571,7 @@ void AstroCalcDialog::handleVisibleEnabled()
 
 void AstroCalcDialog::setPhenomenaHeaderNames()
 {
-	phenomenaHeader = {
+	phenomenaHeader = QStringList({
 		q_("Phenomenon"),
 		q_("Date and Time"),
 		q_("Object 1"),
@@ -6583,7 +6583,7 @@ void AstroCalcDialog::setPhenomenaHeaderNames()
 		q_("Separation"),
 		q_("Elevation"),
 		q_("Solar Elongation"),
-		q_("Lunar Elongation")};
+		q_("Lunar Elongation")});
 	ui->phenomenaTreeWidget->setHeaderLabels(phenomenaHeader);
 	adjustPhenomenaColumns();
 }
@@ -9622,7 +9622,7 @@ void AstroCalcDialog::saveTableAsBookmarks(const QString &fileName, QTreeWidget*
 
 QList<PlanetP> AstroCalcDialog::getSelectedMinorPlanets()
 {
-	// The list of selected dwarf and minor planets is obtainded from Astronomical Almanacs
+	// The list of selected dwarf and minor planets is obtained from Astronomical Almanacs
 	const QStringList minorPlanets = { "Ceres", "Pallas", "Juno", "Vesta" };
 	QList<PlanetP> planets;
 	// special case: Pluto
