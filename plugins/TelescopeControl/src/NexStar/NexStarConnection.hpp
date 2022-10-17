@@ -36,14 +36,14 @@ class NexStarConnection : public SerialPort
 {
 public:
 	NexStarConnection(Server &server, const char *serial_device);
-	~NexStarConnection(void) Q_DECL_OVERRIDE { resetCommunication(); }
+	~NexStarConnection(void) override { resetCommunication(); }
 	void sendGoto(unsigned int ra_int, int dec_int);
 	void sendSync(unsigned int ra_int, int dec_int);
 	void sendCommand(NexStarCommand * command);
 	
 private:
-	virtual void dataReceived(const char *&p, const char *read_buff_end) Q_DECL_OVERRIDE;
-	virtual void sendPosition(unsigned int ra_int, int dec_int, int status) Q_DECL_OVERRIDE {Q_UNUSED(ra_int) Q_UNUSED(dec_int) Q_UNUSED(status)}
+	void dataReceived(const char *&p, const char *read_buff_end) override;
+	void sendPosition(unsigned int ra_int, int dec_int, int status) override {Q_UNUSED(ra_int) Q_UNUSED(dec_int) Q_UNUSED(status)}
 	void resetCommunication(void);
 	
 private:

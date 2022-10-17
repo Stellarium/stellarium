@@ -23,9 +23,6 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
 #include "Socket.hpp"
-#include "StelCore.hpp"
-#include "StelApp.hpp"
-#include "StelUtils.hpp"
 
 #ifdef Q_OS_WIN
   #include <Windows.h> // GetSystemTimeAsFileTime

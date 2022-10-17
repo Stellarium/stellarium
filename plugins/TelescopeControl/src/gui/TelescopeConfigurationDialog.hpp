@@ -27,16 +27,13 @@
 #include <QStringList>
 #include <QRegularExpressionValidator>
 #include "StelDialog.hpp"
-#include "TelescopeControlGlobals.hpp"
+#include "TelescopeControl.hpp"
 
 #ifdef Q_OS_WIN
 #include "../ASCOM/TelescopeClientASCOMWidget.hpp"
 #endif
 
-using namespace TelescopeControlGlobals;
-
 class Ui_telescopeConfigurationDialog;
-class TelescopeControl;
 class StelStyle;
 
 class TelescopeConfigurationDialog : public StelDialog
@@ -44,17 +41,17 @@ class TelescopeConfigurationDialog : public StelDialog
 	Q_OBJECT
 public:
 	TelescopeConfigurationDialog();
-	virtual ~TelescopeConfigurationDialog() Q_DECL_OVERRIDE;
+	~TelescopeConfigurationDialog() override;
 	
 	void initExistingTelescopeConfiguration(int slot);
 	void initNewTelescopeConfiguration(int slot);
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 	Ui_telescopeConfigurationDialog* ui;
 	
 private:
@@ -79,7 +76,7 @@ private slots:
 
 
 signals:
-	void changesSaved(QString name, TelescopeControlGlobals::ConnectionType type);
+	void changesSaved(QString name, TelescopeControl::ConnectionType type);
 	void changesDiscarded();
 	
 private:

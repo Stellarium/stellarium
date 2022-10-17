@@ -28,10 +28,10 @@ static HRESULT OleInternalDispatch(
 {
 	va_list vMarker;
 	HRESULT hResult;
-	DISPPARAMS dp = {Q_NULLPTR, Q_NULLPTR, 0, 0};
+	DISPPARAMS dp = {nullptr, nullptr, 0, 0};
 	DISPID dispNamedId = DISPID_PROPERTYPUT;
 	DISPID dispId;
-	VARIANT* pArgs = Q_NULLPTR;
+	VARIANT* pArgs = nullptr;
 	EXCEPINFO execpInfo;
 	UINT puArgErr = 0;
 
@@ -177,11 +177,9 @@ HRESULT OleCreateInstance(LPCOLESTR lpszProgID, IDispatch** ppIDispatch)
 
 BOOL OleInit(DWORD dwInitType)
 {
-	HRESULT hResult;
-
 	if (!dwInitType) dwInitType = COINIT_MULTITHREADED;
 
-	hResult = CoInitializeEx(Q_NULLPTR, dwInitType);
+	HRESULT hResult = CoInitializeEx(nullptr, dwInitType);
 	if (FAILED(hResult))
 	{
 		return FALSE;

@@ -22,33 +22,35 @@
 
 #include "Dialog.hpp"
 #include "StelFileMgr.hpp"
-
 #include "AngleSpinBox.hpp"
 #include "StelApp.hpp"
 #include "VecMath.hpp"
+#include "StelJsonParser.hpp"
+#include "StelUtils.hpp"
+#include "StelCore.hpp"
+#include "StelObjectMgr.hpp"
+#include "StelModuleMgr.hpp"
+
 #include "TelescopeControl.hpp"
 #include "SlewDialog.hpp"
 #include "ui_slewDialog.h"
 #include "TelescopeClient.hpp"
-#include "INDI/TelescopeClientINDI.hpp"
 
-using namespace TelescopeControlGlobals;
-
-
-SlewDialog::SlewDialog()
-	: StelDialog("TelescopeControlSlew")
-	, storedPointsDialog(Q_NULLPTR)
+SlewDialog::SlewDialog(const QString &dialogName, QObject *parent)
+	: StelDialog(dialogName, parent)
+	, storedPointsDialog(nullptr)
 {
 	ui = new Ui_slewDialog();
 	
-    //TODO: Fix this - it's in the same plugin
-    telescopeManager = GETSTELMODULE(TelescopeControl);
+	//TODO: Fix this - it's in the same plugin
+	telescopeManager = GETSTELMODULE(TelescopeControl);
 }
 
 SlewDialog::~SlewDialog()
 {	
 	delete ui;
-	storedPointsDialog = Q_NULLPTR;
+	delete storedPointsDialog;
+	storedPointsDialog = nullptr;
 }
 
 void SlewDialog::retranslate()
@@ -72,6 +74,7 @@ void SlewDialog::createDialogContent()
 
 	connect(ui->pushButtonSlew, SIGNAL(clicked()), this, SLOT(slew()));
 	connect(ui->pushButtonSync, SIGNAL(clicked()), this, SLOT(sync()));
+	connect(ui->pushButtonAbort, SIGNAL(clicked()), this, SLOT(abort()));
 	connect(ui->pushButtonConfigure, SIGNAL(clicked()), this, SLOT(showConfiguration()));
 
 	connect(telescopeManager, SIGNAL(clientConnected(int, QString)), this, SLOT(addTelescope(int, QString)));
@@ -88,7 +91,7 @@ void SlewDialog::createDialogContent()
 	//Coordinates are in HMS by default:
 	ui->radioButtonHMS->setChecked(true);
 
-	storedPointsDialog = new StoredPointsDialog;
+	storedPointsDialog = new StoredPointsDialog();
 	// add point and remove
 	connect(storedPointsDialog, SIGNAL(addStoredPoint(int, QString, double, double)), this, SLOT(addStoredPointToComboBox(int, QString, double, double)));
 	// remove point
@@ -152,6 +155,7 @@ void SlewDialog::updateTelescopeList()
 		QString telescopeName = connectedSlotsByNumber.value(it.key());
 		connectedSlotsByName.insert(telescopeName, it.key());
 		ui->comboBoxTelescope->addItem(telescopeName);
+		++it;
 	}
 	
 	updateTelescopeControls();
@@ -221,7 +225,7 @@ void SlewDialog::slew()
 	if (!telescope)
 		return;
 
-	StelObjectP selectObject = Q_NULLPTR;
+	StelObjectP selectObject = nullptr;
 	telescope->telescopeGoto(targetPosition, selectObject);
 }
 
@@ -237,8 +241,17 @@ void SlewDialog::sync()
 	if (!telescope)
 		return;
 
-	StelObjectP selectObject = Q_NULLPTR;
+	StelObjectP selectObject = nullptr;
 	telescope->telescopeSync(targetPosition, selectObject);
+}
+
+void SlewDialog::abort()
+{
+	auto telescope = currentTelescope();
+	if (!telescope)
+		return;
+
+	telescope->telescopeAbortSlew();
 }
 
 void SlewDialog::getCurrentObjectInfo()
@@ -343,7 +356,7 @@ void SlewDialog::onCurrentTelescopeChanged()
 {
 	// remove previous controlWidget
 	QLayoutItem* child;
-	while ((child = ui->controlWidgetLayout->takeAt(0)) != Q_NULLPTR)
+	while ((child = ui->controlWidgetLayout->takeAt(0)) != nullptr)
 	{
 		delete child->widget();
 		delete child;

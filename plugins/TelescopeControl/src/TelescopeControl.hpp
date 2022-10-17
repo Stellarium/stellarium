@@ -30,11 +30,9 @@
 
 #include "StelFader.hpp"
 #include "StelGui.hpp"
-#include "StelJsonParser.hpp"
 #include "StelObjectModule.hpp"
 #include "StelProjectorType.hpp"
 #include "StelTextureTypes.hpp"
-#include "TelescopeControlGlobals.hpp"
 #include "VecMath.hpp"
 
 #include <QFile>
@@ -54,8 +52,6 @@ class StelProjector;
 class TelescopeClient;
 class TelescopeDialog;
 class SlewDialog;
-
-using namespace TelescopeControlGlobals;
 
 typedef QSharedPointer<TelescopeClient> TelescopeClientP;
 
@@ -82,36 +78,84 @@ setting up the connection.
 class TelescopeControl : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool flagTelescopeReticles              READ getFlagTelescopeReticles           WRITE setFlagTelescopeReticles          NOTIFY flagTelescopeReticlesChanged)
+	Q_PROPERTY(bool flagTelescopeLabels                READ getFlagTelescopeLabels             WRITE setFlagTelescopeLabels            NOTIFY flagTelescopeLabelsChanged)
+	Q_PROPERTY(bool flagTelescopeCircles               READ getFlagTelescopeCircles            WRITE setFlagTelescopeCircles           NOTIFY flagTelescopeCirclesChanged)
+	Q_PROPERTY(Vec3f reticleColor                      READ getReticleColor                    WRITE setReticleColor                   NOTIFY reticleColorChanged)
+	Q_PROPERTY(Vec3f labelColor                        READ getLabelColor                      WRITE setLabelColor                     NOTIFY labelColorChanged)
+	Q_PROPERTY(Vec3f circleColor                       READ getCircleColor                     WRITE setCircleColor                    NOTIFY circleColorChanged)
+	Q_PROPERTY(bool useTelescopeServerLogs             READ getFlagUseTelescopeServerLogs      WRITE setFlagUseTelescopeServerLogs     NOTIFY flagUseTelescopeServerLogsChanged)
+	Q_PROPERTY(bool useTelescopeServerExecutables      READ getFlagUseServerExecutables        WRITE setFlagUseServerExecutables       NOTIFY getFlagUseServerExecutablesChanged)
+	Q_PROPERTY(QString serverExecutablesDirectoryPath  READ getServerExecutablesDirectoryPath  WRITE setServerExecutablesDirectoryPath NOTIFY serverExecutablesDirectoryPathChanged)
 
 public:
+	enum ConnectionType {
+		ConnectionNA = 0,
+		ConnectionVirtual,
+		ConnectionInternal,
+		ConnectionLocal,
+		ConnectionRemote,
+		ConnectionRTS2,
+		ConnectionINDI,
+		ConnectionASCOM,
+		ConnectionTypeCount
+	};
+	Q_ENUM(ConnectionType)
+
+	enum TelescopeStatus {
+		StatusNA = 0,
+		StatusStarting,
+		StatusConnecting,
+		StatusConnected,
+		StatusDisconnected,
+		StatusStopped
+		//StatusCount
+	};
+	Q_ENUM(TelescopeStatus)
+
+	enum Equinox {
+		EquinoxJ2000,
+		EquinoxJNow
+	};
+	Q_ENUM(Equinox)
+
+	struct DeviceModel
+	{
+		QString name;
+		QString description;
+		QString server;
+		int defaultDelay;
+		bool useExecutable;
+	};
+
 	TelescopeControl();
-	virtual ~TelescopeControl() Q_DECL_OVERRIDE;
+	~TelescopeControl() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() Q_DECL_OVERRIDE;
-	virtual void deinit() Q_DECL_OVERRIDE;
-	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
+	void init() override;
+	void deinit() override;
+	void update(double deltaTime) override;
+	void draw(StelCore* core) override;
+	double getCallOrder(StelModuleActionName actionName) const override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelObjectModule class
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const Q_DECL_OVERRIDE;
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const Q_DECL_OVERRIDE;
-	virtual StelObjectP searchByName(const QString& name) const Q_DECL_OVERRIDE;
-	virtual StelObjectP searchByID(const QString& id) const Q_DECL_OVERRIDE { return searchByName(id); }
+	QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const override;
+	StelObjectP searchByNameI18n(const QString& nameI18n) const override;
+	StelObjectP searchByName(const QString& name) const override;
+	StelObjectP searchByID(const QString& id) const override { return searchByName(id); }
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem = 5, bool useStartOfWords = false) const Q_DECL_OVERRIDE;
+	QStringList listMatchingObjects(const QString& objPrefix, const int maxNbItem = 5, bool useStartOfWords = false) const override;
 	// empty as its not celestial objects
-	virtual QStringList listAllObjects(bool) const Q_DECL_OVERRIDE { return QStringList(); }
-	virtual QString getName() const Q_DECL_OVERRIDE { return "Telescope Control"; }
-	virtual QString getStelObjectType() const Q_DECL_OVERRIDE;
-	virtual bool configureGui(bool show = true) Q_DECL_OVERRIDE;
+	QStringList listAllObjects(bool) const override { return QStringList(); }
+	QString getName() const override { return "Telescope Control"; }
+	QString getStelObjectType() const override;
+	bool configureGui(bool show = true) override;
 
 	QSharedPointer<TelescopeClient> telescopeClient(int index) const;
 
@@ -119,7 +163,7 @@ public:
 	void deleteAllTelescopes();
 
 	//! Safe access to the loaded list of telescope models
-	const QHash<QString, DeviceModel>& getDeviceModels();
+	const QHash<QString, DeviceModel> &getDeviceModels();
 
 	//! Loads the module's configuration from the configuration file.
 	void loadConfiguration();
@@ -181,6 +225,22 @@ public:
 
 	bool getFlagUseTelescopeServerLogs() const { return useTelescopeServerLogs; }
 
+	static constexpr int MIN_SLOT_NUMBER = 1;
+	static constexpr int SLOT_COUNT = 9;
+	static constexpr int SLOT_NUMBER_LIMIT = MIN_SLOT_NUMBER + SLOT_COUNT;
+	static constexpr int MAX_SLOT_NUMBER = SLOT_NUMBER_LIMIT - 1;
+
+	static constexpr int BASE_TCP_PORT = 10000;
+	#define DEFAULT_TCP_PORT_FOR_SLOT(X) (TelescopeControl::BASE_TCP_PORT + X)
+	static constexpr int DEFAULT_TCP_PORT = DEFAULT_TCP_PORT_FOR_SLOT(MIN_SLOT_NUMBER);
+
+	static constexpr int MAX_CIRCLE_COUNT = 10;
+	static const QString TELESCOPE_SERVER_PATH;
+	static constexpr int DEFAULT_DELAY = 500000; //Microseconds; == 0.5 seconds
+	#define MICROSECONDS_FROM_SECONDS(X) (X * 1000000)
+	#define SECONDS_FROM_MICROSECONDS(X) (static_cast<double>(X) / 1000000)
+	static const QStringList EMBEDDED_TELESCOPE_SERVERS;
+
 public slots:
 	//! Set display flag for telescope reticles
 	//! @param b boolean flag
@@ -188,7 +248,7 @@ public slots:
 	//! // example of usage in scripts
 	//! TelescopeControl.setFlagTelescopeReticles(true);
 	//! @endcode
-	void setFlagTelescopeReticles(bool b) { reticleFader = b; }
+	void setFlagTelescopeReticles(bool b) { reticleFader = b; emit flagTelescopeReticlesChanged(b);}
 	//! Get display flag for telescope reticles
 	//! @return true if telescope reticles is visible
 	//! @code
@@ -203,7 +263,7 @@ public slots:
 	//! // example of usage in scripts
 	//! TelescopeControl.setFlagTelescopeLabels(true);
 	//! @endcode
-	void setFlagTelescopeLabels(bool b) { labelFader = b; }
+	void setFlagTelescopeLabels(bool b) { labelFader = b; emit flagTelescopeLabelsChanged(b);}
 	//! Get display flag for telescope name labels
 	//! @return true if telescope name labels is visible
 	//! @code
@@ -218,7 +278,7 @@ public slots:
 	//! // example of usage in scripts
 	//! TelescopeControl.setFlagTelescopeCircles(true);
 	//! @endcode
-	void setFlagTelescopeCircles(bool b) { circleFader = b; }
+	void setFlagTelescopeCircles(bool b) { circleFader = b; emit flagTelescopeCirclesChanged(b);}
 	//! Get display flag for telescope field of view circles
 	//! @return true if telescope field of view circles is visible
 	//! @code
@@ -232,7 +292,7 @@ public slots:
 	//! // example of usage in scripts
 	//! TelescopeControl.setReticleColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
-	void setReticleColor(const Vec3f& c) { reticleColor = c; }
+	void setReticleColor(const Vec3f& c) { reticleColor = c; emit reticleColorChanged(c);}
 	//! Get the telescope reticle color
 	//! @return the telescope reticle color
 	//! @code
@@ -253,14 +313,14 @@ public slots:
 	//! // example of usage in scripts
 	//! TelescopeControl.setLabelColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
-	void setLabelColor(const Vec3f& c) { labelColor = c; }
+	void setLabelColor(const Vec3f& c) { labelColor = c; emit labelColorChanged(c);}
 
 	//! Set the field of view circles color
 	//! @code
 	//! // example of usage in scripts
 	//! TelescopeControl.setCircleColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
-	void setCircleColor(const Vec3f& c) { circleColor = c; }
+	void setCircleColor(const Vec3f& c) { circleColor = c; emit circleColorChanged(c);}
 	//! Get the field of view circles color
 	//! @return the field of view circles color
 	//! @code
@@ -315,11 +375,22 @@ public slots:
 	void centeringScreenByTelescope(const int idx);
 
 	//! Used in the GUI
-	void setFlagUseTelescopeServerLogs(bool b) { useTelescopeServerLogs = b; }
+	void setFlagUseTelescopeServerLogs(bool b) { useTelescopeServerLogs = b; emit flagUseTelescopeServerLogsChanged(b); }
 
 signals:
 	void clientConnected(int slot, QString name);
 	void clientDisconnected(int slot);
+
+	void flagTelescopeReticlesChanged(bool b);
+	void flagTelescopeLabelsChanged(bool b);
+	void flagTelescopeCirclesChanged(bool b);
+	void reticleColorChanged(const Vec3f &c);
+	void labelColorChanged(const Vec3f &c);
+	void circleColorChanged(const Vec3f &c);
+	void flagUseTelescopeServerLogsChanged(bool b);
+	void useTelescopeServerExecutables(bool b);
+	void getFlagUseServerExecutablesChanged(bool b);
+	void serverExecutablesDirectoryPathChanged(const QString &s);
 
 private slots:
 	//! Set translated keyboard shortcut descriptions.
@@ -331,10 +402,10 @@ private:
 	//! Send a J2000-goto-command to the specified telescope
 	//! @param telescopeNr the number of the telescope
 	//! @param j2000Pos the direction in equatorial J2000 frame
-	//! @param selectObject selected object (if any; Q_NULLPTR if move is not based on an object)
-	void telescopeGoto(int telescopeNr, const Vec3d& j2000Pos, StelObjectP selectObject = Q_NULLPTR);
+	//! @param selectObject selected object (if any; nullptr if move is not based on an object)
+	void telescopeGoto(int telescopeNr, const Vec3d& j2000Pos, StelObjectP selectObject = nullptr);
 
-	void telescopeSync(int telescopeNr, const Vec3d &j2000Pos, StelObjectP selectObject = Q_NULLPTR);
+	void telescopeSync(int telescopeNr, const Vec3d &j2000Pos, StelObjectP selectObject = nullptr);
 
 	//! Draw a nice animated pointer around the object if it's selected
 	void drawPointer(const StelProjectorP& prj, const StelCore* core, StelPainter& sPainter);
@@ -444,9 +515,9 @@ class TelescopeControlStelPluginInterface : public QObject, public StelPluginInt
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
-	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	StelModule* getStelModule() const override;
+	StelPluginInfo getPluginInfo() const override;
+	QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* TELESCOPECONTROL_HPP */

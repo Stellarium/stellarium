@@ -422,6 +422,19 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QPushButton" name="pushButtonAbort">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>48</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Abort slew</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>

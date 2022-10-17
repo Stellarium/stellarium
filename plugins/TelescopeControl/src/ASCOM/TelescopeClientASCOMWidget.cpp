@@ -17,7 +17,7 @@
  */
 
 #include "StelApp.hpp"
-#include "StelLocaleMgr.hpp"
+#include "StelTranslator.hpp"
 #include "TelescopeClientASCOMWidget.hpp"
 #include "ui_TelescopeClientASCOMWidget.h"
 
@@ -51,7 +51,7 @@ void TelescopeClientASCOMWidget::retranslate()
 
 void TelescopeClientASCOMWidget::onChooseButtonClicked()
 {
-	mSelectedDevice = ASCOMDevice::showDeviceChooser(mSelectedDevice != Q_NULLPTR ? mSelectedDevice : "");
+	mSelectedDevice = ASCOMDevice::showDeviceChooser(mSelectedDevice != nullptr ? mSelectedDevice : "");
 	setSelectedDevice(mSelectedDevice);
 }
 

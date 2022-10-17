@@ -34,7 +34,7 @@
 
 #include "TelescopeClientJsonRts2.hpp"
 
-TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QString &params, Equinox eq)
+TelescopeClientJsonRts2::TelescopeClientJsonRts2(const QString &name, const QString &params, TelescopeControl::Equinox eq)
 	: TelescopeClient(name)
 	, networkManager(new QNetworkAccessManager)
 	, equinox(eq)

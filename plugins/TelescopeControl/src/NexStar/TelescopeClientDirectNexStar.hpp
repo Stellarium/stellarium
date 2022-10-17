@@ -45,19 +45,19 @@ class TelescopeClientDirectNexStar : public TelescopeClient, public Server
 {
 	Q_OBJECT
 public:
-	TelescopeClientDirectNexStar(const QString &name, const QString &parameters, Equinox eq = EquinoxJ2000);
-	~TelescopeClientDirectNexStar(void) Q_DECL_OVERRIDE
+	TelescopeClientDirectNexStar(const QString &name, const QString &parameters, TelescopeControl::Equinox eq = TelescopeControl::EquinoxJ2000);
+	~TelescopeClientDirectNexStar(void) override
 	{
 		//hangup();
 	}
 	
 	//======================================================================
 	// Methods inherited from TelescopeClient
-	bool isConnected(void) const Q_DECL_OVERRIDE;
+	bool isConnected(void) const override;
 	
 	//======================================================================
 	// Methods inherited from Server
-	virtual void step(long long int timeout_micros) Q_DECL_OVERRIDE;
+	void step(long long int timeout_micros) override;
 	void communicationResetReceived(void);
 	void raReceived(unsigned int ra_int);
 	void decReceived(unsigned int dec_int);
@@ -65,31 +65,31 @@ public:
 private:
 	//======================================================================
 	// Methods inherited from TelescopeClient
-	Vec3d getJ2000EquatorialPos(const StelCore* core=Q_NULLPTR) const Q_DECL_OVERRIDE;
-	bool prepareCommunication() Q_DECL_OVERRIDE;
-	void performCommunication() Q_DECL_OVERRIDE;
-	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) Q_DECL_OVERRIDE;
-	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) Q_DECL_OVERRIDE;
-	bool isInitialized(void) const Q_DECL_OVERRIDE;
+	Vec3d getJ2000EquatorialPos(const StelCore* core=nullptr) const override;
+	bool prepareCommunication() override;
+	void performCommunication() override;
+	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) override;
+	void telescopeSync(const Vec3d &j2000Pos, StelObjectP selectObject) override;
+	bool isInitialized(void) const override;
 	
 	//======================================================================
 	// Methods inherited from Server
 	void sendPosition(unsigned int ra_int, int dec_int, int status);
 	//TODO: Find out if this method is needed. It's called by Connection.
-	void gotoReceived(unsigned int ra_int, int dec_int) Q_DECL_OVERRIDE;
-	void syncReceived(unsigned int ra_int, int dec_int) Q_DECL_OVERRIDE;
+	void gotoReceived(unsigned int ra_int, int dec_int) override;
+	void syncReceived(unsigned int ra_int, int dec_int) override;
 	
 private:
 	void hangup(void);
 	int time_delay;
 	
 	InterpolatedPosition interpolatedPosition;
-	virtual bool hasKnownPosition(void) const Q_DECL_OVERRIDE
+	bool hasKnownPosition(void) const override
 	{
 		return interpolatedPosition.isKnown();
 	}
 
-	Equinox equinox;
+	TelescopeControl::Equinox equinox;
 	
 	//======================================================================
 	// Members taken from ServerNexStar

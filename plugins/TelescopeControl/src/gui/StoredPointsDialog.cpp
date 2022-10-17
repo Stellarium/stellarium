@@ -22,9 +22,14 @@
 #include "ui_storedPointsDialog.h"
 
 #include "StelApp.hpp"
+#include "StelCore.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelObjectMgr.hpp"
+#include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 
-StoredPointsDialog::StoredPointsDialog(): StelDialog("TelescopeControlStoredPoints")
+StoredPointsDialog::StoredPointsDialog(const QString &dialogName, QObject* parent):
+	StelDialog(dialogName, parent)
 {
 	ui = new Ui_StoredPoints;
 	storedPointsListModel = new QStandardItemModel(0, ColumnCount);
@@ -92,12 +97,12 @@ void StoredPointsDialog::populatePointsList(QVariantList list)
 
 void StoredPointsDialog::setHeaderNames()
 {
-	QStringList headerStrings;
-	// TRANSLATORS: Symbol for "number"
-	headerStrings << qc_("#", "numero sign");
-	headerStrings << q_("Name");
-	headerStrings << q_("Right Ascension (J2000)");
-	headerStrings << q_("Declination (J2000)");
+	const QStringList headerStrings = {
+		// TRANSLATORS: Symbol for "number"
+		qc_("#", "numero sign"),
+		q_("Name"),
+		q_("Right Ascension (J2000)"),
+		q_("Declination (J2000)")};
 	storedPointsListModel->setHorizontalHeaderLabels(headerStrings);
 }
 
@@ -137,7 +142,7 @@ void StoredPointsDialog::buttonClearPressed()
 
 void StoredPointsDialog::addModelRow(int number, QString name, QString RA, QString Dec)
 {
-	QStandardItem* tempItem = Q_NULLPTR;
+	QStandardItem* tempItem = nullptr;
 
 	tempItem = new QStandardItem(QString::number(number+1));
 	tempItem->setEditable(false);

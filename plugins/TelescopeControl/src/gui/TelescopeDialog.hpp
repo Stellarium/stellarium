@@ -28,10 +28,8 @@
 #include <QStandardItemModel>
 
 #include "StelDialog.hpp"
-#include "TelescopeControlGlobals.hpp"
+#include "TelescopeControl.hpp"
 #include "TelescopeConfigurationDialog.hpp"
-
-using namespace TelescopeControlGlobals;
 
 class Ui_telescopeDialogForm;
 class TelescopeConfigurationDialog;
@@ -41,29 +39,19 @@ class TelescopeDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	TelescopeDialog();
-	virtual ~TelescopeDialog() Q_DECL_OVERRIDE;
+	TelescopeDialog(const QString &dialogName=QString("TelescopeDialog"), QObject* parent=nullptr);
+	~TelescopeDialog() override;
 	void updateStyle();
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 	Ui_telescopeDialogForm* ui;
 	
 private:
-	enum TelescopeStatus {
-		StatusNA = 0,
-		StatusStarting,
-		StatusConnecting,
-		StatusConnected,
-		StatusDisconnected,
-		StatusStopped,
-		StatusCount
-	};
-	
 	//! Update the text and the tooltip of the ChangeStatus button
 	void updateStatusButtonForSlot(int slot);
 	
@@ -76,9 +64,9 @@ private:
 	void setHeaderNames();
 	void updateWarningTexts();
 	
-	QString getTypeLabel(ConnectionType type);
-	void addModelRow(int slotNumber, ConnectionType type, TelescopeStatus status, const QString& name);
-	void updateModelRow(int rowNumber, ConnectionType type, TelescopeStatus status, const QString& name);
+	QString getTypeLabel(TelescopeControl::ConnectionType type);
+	void addModelRow(int slotNumber, TelescopeControl::ConnectionType type, TelescopeControl::TelescopeStatus status, const QString& name);
+	void updateModelRow(int rowNumber, TelescopeControl::ConnectionType type, TelescopeControl::TelescopeStatus status, const QString& name);
 	
 private slots:
 	void buttonChangeStatusPressed(void);
@@ -86,18 +74,19 @@ private slots:
 	void buttonAddPressed(void);
 	void buttonRemovePressed(void);
 	
-	void checkBoxUseExecutablesToggled(bool);
 	void buttonBrowseServerDirectoryPressed(void);
 	
 	//! Slot for receiving information from TelescopeConfigurationDialog
-	void saveChanges(QString name, TelescopeControlGlobals::ConnectionType type);
+	void saveChanges(QString name, TelescopeControl::ConnectionType type);
 	//! Slot for receiving information from TelescopeConfigurationDialog
 	void discardChanges(void);
 	
 	void selectTelecope(const QModelIndex &);
 	void configureTelescope(const QModelIndex &);
 	
-	//! Update the list of telescopes with their current states
+	//! Update the list of telescopes with their current states.
+	//! This is called every 200ms by a QTimer!
+	// FIXME! This should be triggered by signals from the telescopes!
 	void updateTelescopeStates(void);
 
 private:
@@ -111,15 +100,13 @@ private:
 		ColumnCount		//!< total number of columns
 	};
 	
-	QHash<int, QString> statusString;
-	TelescopeConfigurationDialog configurationDialog;
-	
-	QStandardItemModel * telescopeListModel;
-	
 	TelescopeControl * telescopeManager;
-	
-	TelescopeStatus telescopeStatus[SLOT_NUMBER_LIMIT];
-	ConnectionType telescopeType[SLOT_NUMBER_LIMIT];
+	QMap<int, QString> statusString;
+	TelescopeConfigurationDialog configurationDialog;
+	QStandardItemModel * telescopeListModel;
+
+	TelescopeControl::TelescopeStatus telescopeStatus[TelescopeControl::SLOT_NUMBER_LIMIT];
+	TelescopeControl::ConnectionType connectionTypes[TelescopeControl::SLOT_NUMBER_LIMIT];
 	
 	int telescopeCount;
 	int configuredSlot;
