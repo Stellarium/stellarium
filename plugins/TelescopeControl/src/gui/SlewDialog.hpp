@@ -59,6 +59,9 @@ private slots:
 	void slew();
 	//! reads the fields and sync a telescope
 	void sync();
+	//! Sends the abortSlew command to current telescope.
+	//! @note Not all telescopes support Abort! Only a warning is printed to logfile in this case.
+	void abort();
 
 	void addTelescope(int slot, QString name);
 	void removeTelescope(int slot);
