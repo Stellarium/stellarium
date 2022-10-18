@@ -4757,6 +4757,8 @@ void Planet::drawOrbit(const StelCore* core)
 	if (orbitsThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(orbitsThickness*ppx);
 
+	sPainter.setLineSmooth(true);
+
 	for (int n=0; n<=nbIter; ++n)
 	{
 		if (prj->project(orbit[n],onscreen) && (vertexArray.size()==0 || !prj->intersectViewportDiscontinuity(orbit[n-1], orbit[n])))
@@ -4780,6 +4782,8 @@ void Planet::drawOrbit(const StelCore* core)
 	sPainter.enableClientStates(false);
 	if (orbitsThickness>1 || ppx>1.f)
 		sPainter.setLineWidth(1);
+
+	sPainter.setLineSmooth(false);
 }
 
 bool Planet::hasValidPositionalData(const double JDE, const PositionQuality purpose) const
