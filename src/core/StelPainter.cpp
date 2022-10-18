@@ -54,10 +54,13 @@ QOpenGLShaderProgram* StelPainter::texturesShaderProgram=Q_NULLPTR;
 QOpenGLShaderProgram* StelPainter::basicShaderProgram=Q_NULLPTR;
 QOpenGLShaderProgram* StelPainter::colorShaderProgram=Q_NULLPTR;
 QOpenGLShaderProgram* StelPainter::texturesColorShaderProgram=Q_NULLPTR;
+QOpenGLShaderProgram* StelPainter::wideLineShaderProgram=Q_NULLPTR;
 StelPainter::BasicShaderVars StelPainter::basicShaderVars;
 StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
 StelPainter::BasicShaderVars StelPainter::colorShaderVars;
 StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
+StelPainter::WideLineShaderVars StelPainter::wideLineShaderVars;
+bool StelPainter::multisamplingEnabled=false;
 
 StelPainter::GLState::GLState(QOpenGLFunctions* gl)
 	: blend(false),
@@ -322,11 +325,7 @@ void StelPainter::setLineWidth(float width)
 	glState.lineWidth = width;
 
 	if(width > 1 && StelMainView::getInstance().getGLInformation().isCoreProfile)
-	{
-		// FIXME: ignoring this command, because it's not valid in OpenGL Core profile
-		// The correct way of following it would be to draw the lines as quads (pairs of triangles).
 		return;
-	}
 
 	glLineWidth(width);
 }
@@ -2222,6 +2221,89 @@ void StelPainter::initGLShaders()
 	texturesColorShaderVars.ditherPattern = texturesColorShaderProgram->uniformLocation("ditherPattern");
 	texturesColorShaderVars.rgbMaxValue = texturesColorShaderProgram->uniformLocation("rgbMaxValue");
 	texturesColorShaderVars.saturation = texturesColorShaderProgram->uniformLocation("saturation");
+
+	if(StelMainView::getInstance().getGLInformation().isCoreProfile)
+	{
+		// In Core profile wide lines (width>1px) are not supported, so this shader is used to render them with triangles.
+
+		QOpenGLShader wideLineVertShader(QOpenGLShader::Vertex);
+		wideLineVertShader.compileSourceCode(1+R"(
+#version 330
+in vec3 vertex;
+uniform mat4 projectionMatrix;
+void main()
+{
+    gl_Position = projectionMatrix*vec4(vertex, 1.);
+}
+)");
+		if (!wideLineVertShader.log().isEmpty())
+			qWarning() << "StelPainter: Warnings while compiling wide line vertex shader: " << wideLineVertShader.log();
+
+		QOpenGLShader wideLineGeomShader(QOpenGLShader::Geometry);
+		wideLineGeomShader.compileSourceCode(1+R"(
+#version 330
+
+layout(lines) in;
+layout(triangle_strip, max_vertices=4) out;
+uniform vec2 viewportSize;
+uniform float lineWidth;
+
+void main()
+{
+	vec4 clip0 = gl_in[0].gl_Position;
+	vec4 clip1 = gl_in[1].gl_Position;
+
+	vec3 ndc0 = clip0.xyz / clip0.w;
+	vec3 ndc1 = clip1.xyz / clip1.w;
+
+	vec2 lineDir2d = normalize(ndc1.xy - ndc0.xy);
+	vec2 perpendicularDir2d = vec2(-lineDir2d.y, lineDir2d.x);
+
+	vec2 offset2d = (lineWidth / viewportSize) * perpendicularDir2d;
+
+	gl_Position = vec4(clip0.xy + offset2d*clip0.w, clip0.zw);
+	EmitVertex();
+
+	gl_Position = vec4(clip0.xy - offset2d*clip0.w, clip0.zw);
+	EmitVertex();
+
+	gl_Position = vec4(clip1.xy + offset2d*clip1.w, clip1.zw);
+	EmitVertex();
+
+	gl_Position = vec4(clip1.xy - offset2d*clip1.w, clip1.zw);
+	EmitVertex();
+
+	EndPrimitive();
+}
+)");
+		if (!wideLineGeomShader.log().isEmpty())
+			qWarning() << "StelPainter: Warnings while compiling wide line geometry shader: " << wideLineGeomShader.log();
+
+		QOpenGLShader wideLineFragShader(QOpenGLShader::Fragment);
+		wideLineFragShader.compileSourceCode(1+R"(
+#version 330
+uniform vec4 color;
+out vec4 outputColor;
+void main()
+{
+    outputColor = color;
+}
+)");
+		if (!wideLineFragShader.log().isEmpty())
+			qWarning() << "StelPainter: Warnings while compiling wide line fragment shader: " << wideLineFragShader.log();
+		wideLineShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
+		wideLineShaderProgram->addShader(&wideLineVertShader);
+		wideLineShaderProgram->addShader(&wideLineGeomShader);
+		wideLineShaderProgram->addShader(&wideLineFragShader);
+		linkProg(wideLineShaderProgram, "wideLineShaderProgram");
+		wideLineShaderVars.projectionMatrix = wideLineShaderProgram->uniformLocation("projectionMatrix");
+		wideLineShaderVars.viewportSize     = wideLineShaderProgram->uniformLocation("viewportSize");
+		wideLineShaderVars.lineWidth        = wideLineShaderProgram->uniformLocation("lineWidth");
+		wideLineShaderVars.color            = wideLineShaderProgram->uniformLocation("color");
+		wideLineShaderVars.vertex = wideLineShaderProgram->attributeLocation("vertex");
+	}
+
+	multisamplingEnabled = StelApp::getInstance().getSettings()->value("video/multisampling", 0).toUInt() != 0;
 }
 
 
@@ -2235,6 +2317,8 @@ void StelPainter::deinitGLShaders()
 	texturesShaderProgram = Q_NULLPTR;
 	delete texturesColorShaderProgram;
 	texturesColorShaderProgram = Q_NULLPTR;
+	delete wideLineShaderProgram;
+	wideLineShaderProgram = Q_NULLPTR;
 	texCache.clear();
 }
 
@@ -2294,20 +2378,43 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		numberOfVerticesToCopy = 1 + *std::max_element(indices + offset, indices + offset + count);
 	}
 
+	const bool wideLineMode = (mode==LineStrip || mode==LineLoop) && StelMainView::getInstance().getGLInformation().isCoreProfile;
+#ifdef GL_MULTISAMPLE
+	const bool multisampleWasOn = multisamplingEnabled && glIsEnabled(GL_MULTISAMPLE);
+#endif
+
 	const auto rgbMaxValue=calcRGBMaxValue(ditheringMode);
 	if (!texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
-		pr = basicShaderProgram;
+		pr = wideLineMode ? wideLineShaderProgram : basicShaderProgram;
 		pr->bind();
 
 		verticesVBO->allocate(projectedVertexArray.pointer, projectedVertexArray.vertexSizeInBytes()*numberOfVerticesToCopy);
 
-		pr->setAttributeBuffer(basicShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
-		pr->enableAttributeArray(basicShaderVars.vertex);
-		pr->setUniformValue(basicShaderVars.projectionMatrix, qMat);
-		pr->setUniformValue(basicShaderVars.color, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
+		if(wideLineMode)
+		{
+			pr->setAttributeBuffer(wideLineShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
+			pr->enableAttributeArray(wideLineShaderVars.vertex);
+			pr->setUniformValue(wideLineShaderVars.projectionMatrix, qMat);
+			pr->setUniformValue(wideLineShaderVars.color, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
+			pr->setUniformValue(wideLineShaderVars.lineWidth, glState.lineWidth);
+			GLint viewport[4] = {};
+			glGetIntegerv(GL_VIEWPORT, viewport);
+			pr->setUniformValue(wideLineShaderVars.viewportSize, QVector2D(viewport[2], viewport[3]));
+#ifdef GL_MULTISAMPLE
+			if(multisamplingEnabled && glState.lineSmooth)
+				glEnable(GL_MULTISAMPLE);
+#endif
+		}
+		else
+		{
+			pr->setAttributeBuffer(basicShaderVars.vertex, projectedVertexArray.type, 0, projectedVertexArray.size);
+			pr->enableAttributeArray(basicShaderVars.vertex);
+			pr->setUniformValue(basicShaderVars.projectionMatrix, qMat);
+			pr->setUniformValue(basicShaderVars.color, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
+		}
 	}
-	else if (texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
+	else if (texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled && !wideLineMode)
 	{
 		pr = texturesShaderProgram;
 		pr->bind();
@@ -2335,7 +2442,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setUniformValue(texturesShaderVars.ditherPattern, 1);
 		pr->setUniformValue(texturesShaderVars.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
 	}
-	else if (texCoordArray.enabled && colorArray.enabled && !normalArray.enabled)
+	else if (texCoordArray.enabled && colorArray.enabled && !normalArray.enabled && !wideLineMode)
 	{
 		pr = texturesColorShaderProgram;
 		pr->bind();
@@ -2369,7 +2476,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setUniformValue(texturesColorShaderVars.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
 		pr->setUniformValue(texturesColorShaderVars.saturation, saturation);
 	}
-	else if (!texCoordArray.enabled && colorArray.enabled && !normalArray.enabled)
+	else if (!texCoordArray.enabled && colorArray.enabled && !normalArray.enabled && !wideLineMode)
 	{
 		pr = colorShaderProgram;
 		pr->bind();
@@ -2391,7 +2498,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	}
 	else
 	{
-		qDebug() << "Unhandled parameters." << texCoordArray.enabled << colorArray.enabled << normalArray.enabled;
+		qDebug() << "Unhandled parameters." << texCoordArray.enabled << colorArray.enabled << normalArray.enabled << wideLineMode;
 		Q_ASSERT(0);
 		return;
 	}
@@ -2407,6 +2514,11 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 
 	if (pr)
 		pr->release();
+
+#ifdef GL_MULTISAMPLE
+	if(multisamplingEnabled && !multisampleWasOn && wideLineMode && glState.lineSmooth)
+		glDisable(GL_MULTISAMPLE);
+#endif
 }
 
 size_t StelPainter::ArrayDesc::vertexSizeInBytes() const
