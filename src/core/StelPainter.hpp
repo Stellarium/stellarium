@@ -464,6 +464,16 @@ private:
 	};
 	static WideLineShaderVars wideLineShaderVars;
 
+	static QOpenGLShaderProgram* colorfulWideLineShaderProgram;
+	struct ColorfulWideLineShaderVars {
+		int projectionMatrix;
+		int viewportSize;
+		int lineWidth;
+		int color;
+		int vertex;
+	};
+	static ColorfulWideLineShaderVars colorfulWideLineShaderVars;
+
 	GLuint ditherPatternTex=0;
 	DitheringMode ditheringMode;
 	static DitheringMode parseDitheringMode(QString const& s);
