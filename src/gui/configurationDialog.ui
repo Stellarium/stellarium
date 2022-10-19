@@ -1948,6 +1948,12 @@
                  <property name="toolTip">
                   <string>Pre-select fonts for a particular writing system</string>
                  </property>
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                 <property name="insertPolicy">
+                  <enum>QComboBox::NoInsert</enum>
+                 </property>
                 </widget>
                </item>
                <item>
