@@ -353,10 +353,13 @@ int main(int argc, char **argv)
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
-	// Add the DejaVu font that we use everywhere in the program
-	const QString& fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
-	if (!fName.isEmpty())
-		QFontDatabase::addApplicationFont(fName);
+	// Add the DejaVu fonts that we use everywhere in the program
+	const QString& dejaVuSansFont = StelFileMgr::findFile("data/DejaVuSans.ttf");
+	if (!dejaVuSansFont.isEmpty())
+		QFontDatabase::addApplicationFont(dejaVuSansFont);
+	const QString& dejaVuSansMonoFont = StelFileMgr::findFile("data/DejaVuSansMono.ttf");
+	if (!dejaVuSansMonoFont.isEmpty())
+		QFontDatabase::addApplicationFont(dejaVuSansMonoFont);
 	
 	QString fileFont = confSettings->value("gui/base_font_file", "").toString();
 	if (!fileFont.isEmpty())
@@ -370,21 +373,8 @@ int main(int argc, char **argv)
 
 	// Set the default application font and font size.
 	// Note that style sheet will possibly override this setting.
-#ifdef Q_OS_WIN
-	// Let's try avoid ugly font rendering on Windows.
-	// Details: https://sourceforge.net/p/stellarium/discussion/278769/thread/810a1e5c/
-	QString baseFont = confSettings->value("gui/base_font_name", "Verdana").toString();
-	QFont tmpFont(baseFont);
-	#if (QT_VERSION>=QT_VERSION_CHECK(5,15,0))
-	tmpFont.setHintingPreference(QFont::PreferFullHinting);
-	tmpFont.setStyleHint(QFont::AnyStyle, QFont::PreferAntialias);
-	#else
-	tmpFont.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);
-	#endif
-#else
 	QString baseFont = confSettings->value("gui/base_font_name", "DejaVu Sans").toString();
 	QFont tmpFont(baseFont);
-#endif
 	tmpFont.setPixelSize(confSettings->value("gui/gui_font_size", 13).toInt());
 	QGuiApplication::setFont(tmpFont);
 
