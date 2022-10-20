@@ -71,6 +71,7 @@ public:
 	{
 		QString vendor;
 		QString renderer;
+		QSurface* surface;
 		QOpenGLContext* mainContext;
 		QOpenGLFunctions* functions;
 		bool supportsLuminanceTextures = false;

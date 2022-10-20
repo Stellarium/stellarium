@@ -1262,6 +1262,8 @@ void S3DRenderer::drawFromCubeMap()
 	cubeShader->disableAttributeArray(StelOpenGLArray::ATTLOC_TEXCOORD);
 	cubeShader->disableAttributeArray(StelOpenGLArray::ATTLOC_VERTEX);
 
+	vao.release();
+
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_BLEND);

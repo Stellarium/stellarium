@@ -855,6 +855,7 @@ void StelMainView::init()
 	qDebug()<<"StelMainView::init";
 
 	glInfo.mainContext = QOpenGLContext::currentContext();
+	glInfo.surface = glInfo.mainContext->surface();
 	glInfo.functions = glInfo.mainContext->functions();
 	glInfo.vendor = QString(reinterpret_cast<const char*>(glInfo.functions->glGetString(GL_VENDOR)));
 	glInfo.renderer = QString(reinterpret_cast<const char*>(glInfo.functions->glGetString(GL_RENDERER)));
@@ -911,7 +912,6 @@ void StelMainView::init()
 
 	QSize size = QSize(configuration->value("video/screen_w", screenGeom.width()).toInt(),
 		     configuration->value("video/screen_h", screenGeom.height()).toInt());
-
 	bool fullscreen = configuration->value("video/fullscreen", true).toBool();
 
 	// Without this, the screen is not shown on a Mac + we should use resize() for correct work of fullscreen/windowed mode switch. --AW WTF???
@@ -933,6 +933,18 @@ void StelMainView::init()
 		int x = configuration->value("video/screen_x", 0).toInt();
 		int y = configuration->value("video/screen_y", 0).toInt();
 		move(x + screenGeom.x(), y + screenGeom.y());
+	}
+
+	if(QOpenGLContext::currentContext() != glInfo.mainContext)
+	{
+		// FIXME: the whole idea of resizing during QOpenGLWidget::initializeGL
+		// is bad. This restoration of context is a kludge that shouldn't even
+		// be required if everything is done correctly.
+		// The problem happens on Windows with Qt6 and leads to plugins getting
+		// wrong (i.e. belonging to another context) OpenGL names of VAOs and
+		// other resources that get initialized from here.
+		qWarning().nospace() << __FILE__ << ":" << __LINE__ << ": OpenGL context changed, fixing!";
+		glInfo.mainContext->makeCurrent(glInfo.surface);
 	}
 
 	flagInvertScreenShotColors = configuration->value("main/invert_screenshots_colors", false).toBool();
