@@ -48,9 +48,7 @@ QString getApplicationName()
 //! Return the version of stellarium, e.g. "0.23.1"
 QString getApplicationVersion()
 {
-#if defined(STELLARIUM_VERSION)
-	return QString(STELLARIUM_VERSION);
-#elif defined(GIT_REVISION)
+#if defined(GIT_REVISION)
 	return QString("%1-%2 [%3]").arg(PACKAGE_VERSION, GIT_REVISION, GIT_BRANCH);
 #else
 	return QString(PACKAGE_VERSION);
