@@ -53,6 +53,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		dirToNameEnglish[dir].author = pd.value("info/author").toString();
 		dirToNameEnglish[dir].credit = pd.value("info/credit").toString();		
 		dirToNameEnglish[dir].license = pd.value("info/license", "").toString();
+		dirToNameEnglish[dir].region = pd.value("info/region", "").toString();
 		QString boundariesStr = pd.value("info/boundaries", "none").toString();
 		static const QMap<QString, StelSkyCulture::BOUNDARIES>boundariesMap={
 			{ "none",    StelSkyCulture::NONE},
@@ -279,6 +280,17 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 	return html;
 }
 
+QString StelSkyCultureMgr::getCurrentSkyCultureHtmlRegion() const
+{
+	QString html = "", region = currentSkyCulture.region.trimmed();
+	QString description = q_("The region is understood as the geographical area of origin of a given culture of the sky.");
+
+	if (!region.isEmpty()) // Region marker is always 'green'
+		html = QString("<dl><dt><span style='color:#33ff33;'>%4</span> <strong>%1 %2</strong></dt><dd><em>%3</em></dd></dl>").arg(q_("Region:"), q_(region), description, QChar(0x25CF));
+
+	return html;
+}
+
 bool StelSkyCultureMgr::setCurrentSkyCultureNameI18(const QString& cultureName)
 {
 	return setCurrentSkyCultureID(skyCultureI18ToDirectory(cultureName));
@@ -351,6 +363,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription() const
 	description.append(getCurrentSkyCultureHtmlReferences());
 	description.append(getCurrentSkyCultureHtmlLicense());
 	description.append(getCurrentSkyCultureHtmlClassification());
+	description.append(getCurrentSkyCultureHtmlRegion());
 
 	return description;
 }

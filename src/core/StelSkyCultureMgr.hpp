@@ -94,6 +94,8 @@ public:
 	QString credit;
 	//! The license
 	QString license;
+	//! The name of region
+	QString region;
 	//! Type of the boundaries (enum)
 	BOUNDARIES boundaries;
 	//! Classification of sky culture (enum)
@@ -168,6 +170,9 @@ public slots:
 
 	//! @return a localized HTML description of the license for the current sky culture
 	QString getCurrentSkyCultureHtmlLicense() const;
+
+	//! @return a localized HTML description of the region for the current sky culture
+	QString getCurrentSkyCultureHtmlRegion() const;
 
 	//! @return a localized HTML description of the references for the current sky culture
 	QString getCurrentSkyCultureHtmlReferences() const;
