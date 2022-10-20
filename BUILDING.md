@@ -376,6 +376,7 @@ List of supported parameters (passed as `-DPARAMETER=VALUE`):
 | ENABLE_GPS                    | bool   | ON      | Enable GPS support
 | ENABLE_LIBGPS                 | bool   | ON      | Enable GPS support with libGPS library (N/A on Windows)
 | ENABLE_MEDIA                  | bool   | ON      | Enable sound and video support
+| ENABLE_XLSX                   | bool   | ON      | Enable support for XLSX (Excel) files
 | ENABLE_SCRIPTING              | bool   | ON      | Enable the scripting feature
 | ENABLE_RELEASE_BUILD          | bool   | OFF     | This option flags the build as an official release
 | ENABLE_TESTING                | bool   | OFF     | Enable unit tests
