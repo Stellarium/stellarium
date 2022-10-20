@@ -51,7 +51,7 @@ texture_triangle_base_length        = 8
 flag_use_ext_framebuffer_object     = false
 
 [localization]
-sky_culture                         = western
+sky_culture                         = world
 sky_locale                          = system
 app_locale                          = system
 time_display_format                 = system_default

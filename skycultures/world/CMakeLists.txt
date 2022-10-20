@@ -2,10 +2,10 @@
 ########### install files ###############
 
 # install info.ini
-INSTALL(FILES info.ini DESTINATION ${SDATALOC}/skycultures/western )
+INSTALL(FILES info.ini DESTINATION ${SDATALOC}/skycultures/world )
 
 # install constellations data, artwork and descriptions
-INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/western
+INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/world
 	FILES_MATCHING PATTERN "*.fab" 
 	PATTERN "*.png" 
 	PATTERN "description.*.utf8" 

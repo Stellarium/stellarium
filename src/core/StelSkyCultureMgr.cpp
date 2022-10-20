@@ -100,7 +100,9 @@ StelSkyCultureMgr::~StelSkyCultureMgr()
 //! Init itself from a config file.
 void StelSkyCultureMgr::init()
 {
-	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "western").toString();
+	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "world").toString();
+	if (defaultSkyCultureID=="western") // replace old ID
+		defaultSkyCultureID = "world";
 	setCurrentSkyCultureID(defaultSkyCultureID);
 }
 
