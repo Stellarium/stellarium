@@ -36,13 +36,13 @@ void TestStelSkyCultureMgr::testStelSkyCultureMgr()
 	QVERIFY(scMgr.getDefaultSkyCultureID().isEmpty()); // Shoud be true, because sky culture is not set! (StelSkyCultureMgr::init() isn't called)
 	QVERIFY(scMgr.setCurrentSkyCultureID("arabic_al-sufi"));
 	QVERIFY(scMgr.getCurrentSkyCultureID()=="arabic_al-sufi");
-	QVERIFY(scMgr.setCurrentSkyCultureID("western"));
-	QVERIFY(scMgr.getCurrentSkyCultureID()=="western");
-	QVERIFY(scMgr.getCurrentSkyCultureEnglishName()=="Western");
+	QVERIFY(scMgr.setCurrentSkyCultureID("world"));
+	QVERIFY(scMgr.getCurrentSkyCultureID()=="world");
+	QVERIFY(scMgr.getCurrentSkyCultureEnglishName()=="World");
 	QVERIFY(scMgr.getCurrentSkyCultureBoundariesIdx()==StelSkyCulture::IAU);
 	QVERIFY(scMgr.getCurrentSkyCultureClassificationIdx()==StelSkyCulture::TRADITIONAL);
-	QVERIFY(scMgr.getSkyCultureListEnglish().contains("western", Qt::CaseInsensitive));
-	QVERIFY(scMgr.getDirToNameMap().contains("western"));
+	QVERIFY(scMgr.getSkyCultureListEnglish().contains("world", Qt::CaseInsensitive));
+	QVERIFY(scMgr.getDirToNameMap().contains("world"));
 	QVERIFY(!scMgr.setDefaultSkyCultureID(""));
-	QVERIFY(scMgr.getSkyCultureListIDs().contains("western", Qt::CaseInsensitive));
+	QVERIFY(scMgr.getSkyCultureListIDs().contains("world", Qt::CaseInsensitive));
 }
