@@ -2623,9 +2623,11 @@ size_t StelPainter::ArrayDesc::vertexSizeInBytes() const
 	case GL_FLOAT:
 		elemSize = sizeof(GLfloat);
 		break;
+#if GL_DOUBLE != GL_FLOAT // see StelOpenGL.hpp
 	case GL_DOUBLE:
 		elemSize = sizeof(GLdouble);
 		break;
+#endif
 	default:
 		Q_ASSERT_X(false, Q_FUNC_INFO, "Unexpected element type");
 		break;
