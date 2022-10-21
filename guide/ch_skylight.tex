@@ -71,8 +71,8 @@ disk and the solar glare. It makes a slight difference whether the
 Sun's disk is plotted before or after the glare, and whether the solar
 sphere is rendered after the atmosphere. 
 
-\subsection{Advanced Mode: The Bruneton Skylight Model}
-\label{sec:skylight:Bruneton}
+\subsection{Advanced Mode: The ShowMySky Skylight Model}
+\label{sec:skylight:ShowMySky}
 
 A much more advanced skylight model has been presented by
 \citet{Bruneton:2008}. An implementation of this has been developed by
@@ -80,12 +80,12 @@ Ruslan Kabatsayev just in time for inclusion in version 1.0. Switching
 between the models is described in
 section~\ref{sec:gui:view:sky:atmosphere}.
 
-It requires graphics hardware which uses OpenGL~3 or better and
+It requires graphics hardware which uses OpenGL~3.3 or better and
 consists of two components.  Atmospheric data (a description of gas
 composition) is processed by an auxiliary program,
-\program{CalcMySky}, which creates a lot of textures and shader
-programs. For final display, a software component (the
-\program{ShowMySky} library) is used and processes these data in
+\program{CalcMySky}, which creates a lot of textures and shaders.
+For final display, a software component (the
+\program{ShowMySky} library) is used that processes these data in
 real-time to compute the final sky colors. This model and its default
 atmosphere data especially can deliver stunning reality of twilight
 colors in a dry atmosphere, and also provides special modes for the
