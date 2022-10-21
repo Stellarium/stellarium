@@ -50,8 +50,6 @@ your distribution. Here's a list.
 
 ### Dependencies
 
-Since version 1.0 by default Stellarium build requires ShowMySky module (the feature can be used via loading an optional library). To install this module, refer to [CalcMySky documentation](https://10110111.github.io/CalcMySky/). If you need a Stellarium build without ShowMySky support, you can configure it with `-DENABLE_SHOWMYSKY=OFF` CMake parameter.
-
 ### Optional dependencies
 
 - [Git](https://git-scm.com) - required for obtaining latest changes in source code
@@ -67,6 +65,8 @@ See [MAINTAINER BUSINESS](MAINTAINER_BUSINESS.md) for details.
 
 - [INDI](https://indilib.org)
 - [QXlsx](https://github.com/QtExcel/QXlsx)
+- [ShowMySky](https://10110111.github.io/CalcMySky/), can be disabled with
+  `-DENABLE_SHOWMYSKY=OFF` CMake parameter. If enabled (the default), it also requires `libglm-dev libeigen3-dev`.
 
 ### Installing these packages
 
