@@ -259,7 +259,7 @@ bool StelOpenGLArray::load(const StelOBJ* obj, bool useTangents)
 		m_vao.bind();
 		bindBuffers();
 		m_vao.release();
-		releaseBuffers();
+		m_indexBuffer.release();
 	}
 
 	qCDebug(stelOpenGLArray)<<"Loaded StelOBJ data into OpenGL in"<<timer.elapsed()<<"ms ("<<(static_cast<double>(m_memoryUsage) / 1024.0)<<"kb GL memory)";
