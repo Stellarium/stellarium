@@ -1,7 +1,7 @@
 INCLUDE_DIRECTORIES(. gui
-#	${CMAKE_BINARY_DIR}/plugins/PrintSky/src
+#        ${CMAKE_BINARY_DIR}/plugins/PrintSky/src
 )
-LINK_DIRECTORIES(${BUILD_DIR}/src)
+LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/src)
 
 SET(PrintSky_SRCS
   PrintSky.hpp
@@ -14,13 +14,18 @@ SET(PrintSky_SRCS
 
 ################# compiles resources files ############
 #SET(PrintSky_RES ../PrintSky.qrc)
-#QT4_ADD_RESOURCES(PrintSky_RES_CXX ${PrintSky_RES})
 
 ################# compiles .ui files ############
 SET(PrintSky_UIS
   gui/printskyDialog.ui
 )
-QT5_WRAP_UI(PrintSky_UIS_H ${PrintSky_UIS})
+IF (${QT_VERSION_MAJOR} EQUAL "5")
+     QT5_WRAP_UI(PrintSky_UIS_H ${PrintSky_UIS})
+#     QT5_ADD_RESOURCES(PrintSky_RES_CXX ${PrintSky_RES})
+ELSE()
+     QT_WRAP_UI(PrintSky_UIS_H ${PrintSky_UIS})
+#     QT_ADD_RESOURCES(PrintSky_RES_CXX ${PrintSky_RES})
+ENDIF()
 
 ## Add here all the files which require moc compilation
 ## that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
@@ -57,12 +62,14 @@ SET(extLinkerOption ${FreeType2_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${
 #ENDIF()
 #
 ############### For building the static library ######################
+FIND_PACKAGE(Qt${QT_VERSION_MAJOR} COMPONENTS PrintSupport)
+
 #IF(BUILD_STATIC_PLUGINS)
 #        ADD_LIBRARY(PrintSky-static STATIC ${PrintSky_SRCS} ${PrintSky_MOC_SRCS} ${PrintSky_UIS_H})
-        ADD_LIBRARY(PrintSky-static STATIC ${PrintSky_SRCS} ${PrintSky_UIS_H})
+        ADD_LIBRARY(PrintSky-static STATIC ${PrintSky_SRCS} ${PrintSky_RES_CXX} ${PrintSky_UIS_H})
+        TARGET_LINK_LIBRARIES(PrintSky-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::PrintSupport ${extLinkerOption})
         # The library target "PrintSky-static" has a default OUTPUT_NAME of "PrintSky-static", so change it.
-	SET_TARGET_PROPERTIES(PrintSky-static PROPERTIES OUTPUT_NAME "PrintSky")
-        TARGET_LINK_LIBRARIES(PrintSky-static Qt5::Core Qt5::Widgets Qt5::PrintSupport ${extLinkerOption})
+        SET_TARGET_PROPERTIES(PrintSky-static PROPERTIES OUTPUT_NAME "PrintSky")
 #	SET_TARGET_PROPERTIES(PrintSky-static PROPERTIES COMPILE_FLAGS "-fPIC -DQT_STATICPLUGIN")
         SET_TARGET_PROPERTIES(PrintSky-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
         ADD_DEPENDENCIES(AllStaticPlugins PrintSky-static)

@@ -28,7 +28,6 @@
 #include "PrintSky.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
-#include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMainView.hpp"
 #include "StelTranslator.hpp"
@@ -161,15 +160,15 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 		return;
 	}
 	const int imageYPos=(plugin->getPrintData()? 400: 0);
-	QSize sizeReal=printer->pageRect().size();
+	QSize sizeReal=printer->pageLayout().paintRectPixels(printer->resolution()).size();
 	sizeReal.setHeight(sizeReal.height()-imageYPos);
 	if (plugin->getScaleToFit())
 		img=img.scaled(sizeReal, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-	const int imageXPos=(printer->pageRect().width()-img.width())/2;
+	const int imageXPos=(printer->pageLayout().paintRectPixels(printer->resolution()).width()-img.width())/2;
 	painter.drawImage(imageXPos, 0, img);
 
 
-	//const int fontsize = static_cast<int>(printer->pageRect().width())/60;
+	//const int fontsize = static_cast<int>(printer->pageLayout().paintRectPixels(printer->resolution()).width())/60;
 	//const int fontsize = static_cast<int>(pageLayout.paintRectPixels(300).width())/75;
 	const int fontsize = static_cast<int>(pageLayout.paintRectPixels(300).width())/250;
 	font.setPixelSize(fontsize);
@@ -185,11 +184,11 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 	//printer->setResolution(printer->supportedResolutions())
 	qDebug() << "Current printer resolution:" << printer->resolution();
 	qDebug() << "Supported printer resolutions:" << printer->supportedResolutions();
-	qDebug() << "Page size (size index, 0-30)" << printer->paperSize();
+	qDebug() << "Page size (size index, 0-30)" << printer->pageLayout().pageSize().id();
 	//For the paper size index, see http://doc.qt.nokia.com/qprinter.html#PaperSize-enum
 	qDebug() << "Font Pixel Size:" << font.pixelSize();
-	qDebug() << "Paper Rect (by obsolete functions): "<< printer->paperRect();
-	qDebug() << "Page Rect (by obsolete functions): "<< printer->pageRect();
+	qDebug() << "Paper Rect: "<< printer->pageLayout().fullRectPixels(printer->resolution());
+	qDebug() << "Page Rect: "<< printer->pageLayout().paintRectPixels(printer->resolution());
 
 
 	if (plugin->getPrintData()) // (1a) Basic info below image.
@@ -197,7 +196,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 		qDebug() << "PrintSky: Basic info";
 		int posY=img.height()+lineSpacing;
 
-		QRect surfaceData(printer->pageRect().left(), posY, printer->pageRect().width(), printer->pageRect().height()-posY);
+		QRect surfaceData(printer->pageLayout().paintRectPixels(printer->resolution()).left(), posY, printer->pageLayout().paintRectPixels(printer->resolution()).width(), printer->pageLayout().paintRectPixels(printer->resolution()).height()-posY);
 
 		painter.drawText(surfaceData.adjusted(0, 0, 0, -(surfaceData.height()-lineSpacing)), Qt::AlignCenter, q_("CHART INFORMATION"));
 
@@ -318,7 +317,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 		QTextDocument info(GETSTELMODULE(StelObjectMgr)->getSelectedObject().at(0)->getInfoString(core).toHtmlEscaped());
 
 		int posY=img.height()+lineSpacing;
-		QRect surfaceData(printer->pageRect().left(), posY, printer->pageRect().width(), printer->pageRect().height()-posY);
+		QRect surfaceData(printer->pageLayout().paintRectPixels(printer->resolution()).left(), posY, printer->pageLayout().paintRectPixels(printer->resolution()).width(), printer->pageLayout().paintRectPixels(printer->resolution()).height()-posY);
 
 		// TODO: print selected object info
 		//painter.drawText(surfaceData.adjusted(0, 0, 0, -(surfaceData.height()-lineSpacing)),
@@ -361,14 +360,14 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 				const double ratioWidth=(300.*static_cast<double>(fontsize)/45.);
 				if (doHeader)
 				{
-					double xPos=printer->pageRect().left()-ratioWidth/2;
+					double xPos=printer->pageLayout().paintRectPixels(printer->resolution()).left()-ratioWidth/2;
 					yPos=70+lineSpacing*2;
 					printer->newPage();
 					pageNumber++;
 					//printFooter(printer, &painter, pageNumber);
 					qDebug() << "PrintSky: Ephemerides " << pageNumber;
 
-					painter.drawText(QRectF(0, 0, printer->paperRect().width(), yPos), Qt::AlignCenter, q_("SOLAR SYSTEM EPHEMERIDES"));
+					painter.drawText(QRectF(0, 0, printer->pageLayout().fullRectPixels(printer->resolution()).width(), yPos), Qt::AlignCenter, q_("SOLAR SYSTEM EPHEMERIDES"));
 
 					yPos+=lineSpacing;
 
@@ -386,7 +385,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 				}
 
 				oddLine=!oddLine;
-				double xPos=printer->pageRect().left()-ratioWidth/2;
+				double xPos=printer->pageLayout().paintRectPixels(printer->resolution()).left()-ratioWidth/2;
 
 				painter.setPen(Qt::NoPen);
 				painter.setBrush(oddLine? Qt::white: Qt::lightGray);
@@ -403,7 +402,7 @@ void PrintSkyDialog::printDataSky(QPrinter * printer)
 				painter.drawText(QRectF(xPos+=    ratioWidth, yPos,     ratioWidth, fontsize+lineSpacing), Qt::AlignRight,  QString("%1 ").arg(p->getVMagnitude(core), 0, 'f', 1));
 
 				yPos+=lineSpacing;
-				if (yPos+((lineSpacing)*4)>=printer->pageRect().top()+printer->pageRect().height())
+				if (yPos+((lineSpacing)*4)>=printer->pageLayout().paintRectPixels(printer->resolution()).top()+printer->pageLayout().paintRectPixels(printer->resolution()).height())
 				{
 					doHeader=true;
 				}
@@ -445,7 +444,7 @@ void PrintSkyDialog::executePrinterOutputOption(bool previewOnly)
 	QPrinter printer(QPrinter::ScreenResolution);
 	printer.setResolution(300);
 	printer.setDocName("STELLARIUM REPORT");
-	printer.setOrientation(plugin->getOrientationPortrait() ? QPrinter::Portrait : QPrinter::Landscape);
+	printer.setPageOrientation(plugin->getOrientationPortrait() ? QPageLayout::Portrait : QPageLayout::Landscape);
 
 	if (previewOnly)
 	{
