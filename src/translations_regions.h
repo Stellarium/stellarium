@@ -28,8 +28,8 @@ class GeoRegionsTranslations
 
 		// =====================================================================
 		// List of regions
-		// TRANSLATORS: Name of specific region on Earth - all world
-		N_("World");
+		// TRANSLATORS: Name of pseudo-region on Earth for sky cultures
+		N_("Western");
 		// TRANSLATORS: Name of region on Earth
 		// TRANSLATORS: https://en.wikipedia.org/wiki/North_Africa
 		N_("Northern Africa");

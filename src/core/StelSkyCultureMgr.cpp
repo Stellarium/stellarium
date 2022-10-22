@@ -100,9 +100,7 @@ StelSkyCultureMgr::~StelSkyCultureMgr()
 //! Init itself from a config file.
 void StelSkyCultureMgr::init()
 {
-	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "world").toString();
-	if (defaultSkyCultureID=="western") // replace old ID
-		defaultSkyCultureID = "world";
+	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "western").toString();
 	setCurrentSkyCultureID(defaultSkyCultureID);
 }
 
@@ -285,7 +283,11 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 QString StelSkyCultureMgr::getCurrentSkyCultureHtmlRegion() const
 {
 	QString html = "", region = currentSkyCulture.region.trimmed();
-	QString description = q_("The region is understood as the geographical area of origin of a given culture of the sky.");
+	QString description;
+	if (region.toLower()=="western")
+		description = q_("This pseudo-region is mark that this sky culture follow 'tradition of Western science'");
+	else
+		description = q_("The region is understood as the geographical area of origin of a given culture of the sky.");
 
 	if (!region.isEmpty()) // Region marker is always 'green'
 		html = QString("<dl><dt><span style='color:#33ff33;'>%4</span> <strong>%1 %2</strong></dt><dd><em>%3</em></dd></dl>").arg(q_("Region:"), q_(region), description, QChar(0x25CF));

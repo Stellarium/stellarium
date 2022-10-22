@@ -1953,7 +1953,7 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 		loadCommonNames(fic);
 
 	// Turn on sci names/catalog names for western cultures only
-	setFlagSciNames((skyCultureDir.contains("western", Qt::CaseInsensitive) || skyCultureDir.contains("world", Qt::CaseInsensitive)));
+	setFlagSciNames(skyCultureDir.contains("western", Qt::CaseInsensitive));
 	updateI18n();
 }
 
