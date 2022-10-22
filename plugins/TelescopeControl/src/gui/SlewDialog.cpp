@@ -362,15 +362,15 @@ void SlewDialog::onCurrentTelescopeChanged()
 		delete child;
 	}
 
-    auto telescope = currentTelescope();
-    if (!telescope)
-        return;
+	auto telescope = currentTelescope();
+	if (!telescope)
+		return;
 
-    auto controlWidget = telescope->createControlWidget(telescope);
-    if (!controlWidget)
-        return;
+	auto controlWidget = telescope->createControlWidget(telescope);
+	if (!controlWidget)
+		return;
 
-    ui->controlWidgetLayout->addWidget(controlWidget);
+	ui->controlWidgetLayout->addWidget(controlWidget);
 }
 
 void SlewDialog::savePointsToFile()

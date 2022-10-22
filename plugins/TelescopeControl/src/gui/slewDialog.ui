@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>402</width>
-    <height>432</height>
+    <height>447</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -410,30 +410,34 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButtonSync">
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Sync</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButtonAbort">
-           <property name="minimumSize">
-            <size>
-             <width>50</width>
-             <height>48</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Abort slew</string>
-           </property>
-          </widget>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QPushButton" name="pushButtonSync">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Sync</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButtonAbort">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Abort slew</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </widget>
@@ -491,14 +495,14 @@ margin-bottom:10px;</string>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>AngleSpinBox</class>
-   <extends>QSpinBox</extends>
-   <header location="global">AngleSpinBox.hpp</header>
-  </customwidget>
-  <customwidget>
    <class>StelCloseButton</class>
    <extends>QPushButton</extends>
    <header>gui/StelCloseButton.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>AngleSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header location="global">AngleSpinBox.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>
