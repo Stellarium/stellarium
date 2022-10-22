@@ -786,6 +786,9 @@ void TelescopeControl::loadTelescopes()
 		node.next();
 		QString key = node.key();
 
+		if (key=="version") // skip "version" data
+			continue;
+
 		//If this is not a valid slot number, remove the node
 		int slot = key.toInt(&ok);
 		if(!ok || !isValidSlotNumber(slot))
