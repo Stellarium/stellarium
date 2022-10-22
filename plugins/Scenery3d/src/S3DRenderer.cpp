@@ -1257,8 +1257,6 @@ void S3DRenderer::drawFromCubeMap()
 	}
 	cubeIndexBuffer.release();
 
-	vao.release();
-
 	cubeShader->disableAttributeArray(StelOpenGLArray::ATTLOC_TEXCOORD);
 	cubeShader->disableAttributeArray(StelOpenGLArray::ATTLOC_VERTEX);
 
