@@ -285,7 +285,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlRegion() const
 	QString html = "", region = currentSkyCulture.region.trimmed();
 	QString description;
 	if (region.toLower()=="western")
-		description = q_("This pseudo-region is mark that this sky culture follow 'tradition of Western science'");
+		description = q_("The term 'Western' can be interpreted in several ways. In our context, we speak of 'western science' as the mathematical and astronomical scientific tradition rooted in Mediterranean antiquity and refined since the European age of enlightenment.");
 	else
 		description = q_("The region is understood as the geographical area of origin of a given culture of the sky.");
 
