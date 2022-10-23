@@ -88,7 +88,7 @@ void EquationOfTimeWindow::setAboutHtml()
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf</td></tr>";
 	html += "</table>";
 
-	html += "<p>" + q_("This plugin shows the solution of the equation of time.") + "</p>";
+	html += "<p>" + q_("This plugin shows the value of the equation of time.") + "</p>";
 	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Equation of Time plugin");
 	html += "</body></html>";
 
