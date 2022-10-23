@@ -32,10 +32,10 @@ class ScriptConsole : public StelDialog
 public:
 	ScriptConsole(QObject* parent);
 	virtual ~ScriptConsole() Q_DECL_OVERRIDE;
-	//! Notify that the application style changed
-	virtual void styleChanged() Q_DECL_OVERRIDE;
 
 public slots:
+	//! Apply application style change
+	virtual void styleChanged(const QByteArray &style) Q_DECL_OVERRIDE;
 	virtual void retranslate() Q_DECL_OVERRIDE;
 
 private slots:

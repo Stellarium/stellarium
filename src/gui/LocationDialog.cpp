@@ -69,8 +69,9 @@ void LocationDialog::retranslate()
 	}
 }
 
-void LocationDialog::styleChanged()
+void LocationDialog::styleChanged(const QByteArray &style)
 {
+	StelDialog::styleChanged(style);
 	// Make the map red if needed
 	if (dialog)
 		setMapForLocation(StelApp::getInstance().getCore()->getCurrentLocation());

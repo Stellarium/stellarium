@@ -34,8 +34,8 @@ public:
 	//! The content of the associated Html Style Sheet for styling rich text
 	QByteArray htmlStyleSheet;
 	
-	//! The name of the config.ini section where the modules store style data
-	QString confSectionName;
+//	//! The name of the config.ini section where the modules store style data
+//	QString confSectionName;
 };
 
 #endif // STELSTYLE_HPP

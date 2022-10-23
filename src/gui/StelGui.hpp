@@ -296,6 +296,7 @@ signals:
 	void flagShowCardinalButtonChanged(bool b);
 	void flagShowCompassButtonChanged(bool b);
 	void infoStringChanged();
+	void guiStyleChanged(const QByteArray &style);
 
 private slots:
 	void reloadStyle();

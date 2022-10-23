@@ -83,8 +83,9 @@ void HelpDialog::retranslate()
 	}
 }
 
-void HelpDialog::styleChanged()
+void HelpDialog::styleChanged(const QByteArray &style)
 {
+	StelDialog::styleChanged(style);
 	if (dialog)
 	{
 		updateHelpText();

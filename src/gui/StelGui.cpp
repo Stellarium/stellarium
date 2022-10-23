@@ -446,12 +446,12 @@ void StelGui::reloadStyle()
 }
 
 //! Load color scheme from the given ini file and section name
-//! section "color" is the code name of the default style. Any other name is interpreted as CSS filename.
+//! section "default" is the code name of the default style. Any other name is interpreted as CSS filename.
 void StelGui::setStelStyle(const QString& style)
 {
-	qDebug() << "StelGUI::setStelStyle: section=" << style;
+	qDebug() << "StelGUI::setStelStyle: style=" << style;
 	// Load the style sheets
-	currentStelStyle.confSectionName = "color"; // The only meaningful name. We no longer support custom color sections, this is a relict from the old night mode.
+	//currentStelStyle.confSectionName = "color"; // The only meaningful name. We no longer support custom color sections, this is a relict from the old night mode.
 
 	QString qtStyleFileName = (style=="default" ? ":/graphicGui/normalStyle.css" : StelFileMgr::findFile(style+".css"));
 	QString htmlStyleFileName = ":/graphicGui/normalHtml.css";
@@ -474,16 +474,7 @@ void StelGui::setStelStyle(const QString& style)
 		htmlStyleFile.close();
 	}
 	
-	locationDialog->styleChanged();
-	dateTimeDialog->styleChanged();
-	configurationDialog->styleChanged();
-	searchDialog->styleChanged();
-	viewDialog->styleChanged();
-#ifdef ENABLE_SCRIPT_CONSOLE
-	scriptConsole->styleChanged();
-#endif // ENABLE_SCRIPT_CONSOLE	
-	astroCalcDialog->styleChanged();
-	obsListDialog->styleChanged();
+	emit guiStyleChanged(currentStelStyle.qtStyleSheet);
 }
 
 

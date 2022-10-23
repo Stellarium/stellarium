@@ -48,10 +48,10 @@ public:
 	HelpDialog(QObject* parent);
 	~HelpDialog() Q_DECL_OVERRIDE;
 
-	//! Notify that the application style changed
-	virtual void styleChanged() Q_DECL_OVERRIDE;
 
 public slots:
+	//! Apply application style change
+	virtual void styleChanged(const QByteArray &style) Q_DECL_OVERRIDE;
 	virtual void retranslate() Q_DECL_OVERRIDE;
 
 protected:

@@ -35,10 +35,10 @@ class LocationDialog : public StelDialog
 public:
 	LocationDialog(QObject* parent);
 	virtual ~LocationDialog() Q_DECL_OVERRIDE;
-	//! Notify that the application style changed
-	virtual void styleChanged() Q_DECL_OVERRIDE;
 
 public slots:
+	//! Apply application style change
+	virtual void styleChanged(const QByteArray &style) Q_DECL_OVERRIDE;
 	virtual void retranslate() Q_DECL_OVERRIDE;
 	//! In addition to StelDialog's inherited solution, puts the arrow on the right spot in the map.
 	virtual void handleDialogSizeChanged(QSizeF size) Q_DECL_OVERRIDE;

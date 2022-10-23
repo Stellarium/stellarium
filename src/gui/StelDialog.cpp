@@ -55,6 +55,7 @@ StelDialog::StelDialog(const QString &dialogName, QObject* parent)
 	connect(&StelApp::getInstance(), SIGNAL(fontChanged(QFont)), this, SLOT(handleFontChanged()));
 	connect(&StelApp::getInstance(), SIGNAL(guiFontSizeChanged(int)), this, SLOT(handleFontChanged()));
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(handleColorSchemeChanged()));
+	connect((dynamic_cast<StelGui*>(StelApp::getInstance().getGui())), SIGNAL(guiStyleChanged(const QByteArray &)), this, SLOT(styleChanged(const QByteArray &)));
 }
 
 StelDialog::~StelDialog()
@@ -66,9 +67,11 @@ void StelDialog::close()
 	setVisible(false);
 }
 
-void StelDialog::styleChanged()
+void StelDialog::styleChanged(const QByteArray &style)
 {
-	// Nothing for now
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui && dialog)
+		dialog->setStyleSheet(style);
 }
 
 bool StelDialog::visible() const

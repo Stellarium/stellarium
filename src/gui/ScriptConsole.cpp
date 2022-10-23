@@ -68,8 +68,9 @@ void ScriptConsole::retranslate()
 	}
 }
 
-void ScriptConsole::styleChanged()
+void ScriptConsole::styleChanged(const QByteArray &style)
 {
+	StelDialog::styleChanged(style);
 	if (highlighter)
 	{ 
 		highlighter->setFormats();

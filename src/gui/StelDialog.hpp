@@ -81,14 +81,13 @@ public:
 	StelDialog(const QString &dialogName=QString("Default"), QObject* parent=Q_NULLPTR);
 	virtual ~StelDialog() Q_DECL_OVERRIDE;
 
-	//! Notify that the application style changed
-	virtual void styleChanged();
-
 	//! Returns true if the dialog contents have been constructed and are currently shown
 	bool visible() const;
 	QString getDialogName() const {return dialogName;}
 
 public slots:
+	//! Apply application style change
+	virtual void styleChanged(const QByteArray &style);
 	//! Retranslate the content of the dialog.
 	//! Needs to be connected to StelApp::languageChanged().
 	//! At the very least, if the window is

@@ -106,8 +106,9 @@ void ViewDialog::retranslate()
 	}
 }
 
-void ViewDialog::styleChanged()
+void ViewDialog::styleChanged(const QByteArray &style)
 {
+	StelDialog::styleChanged(style);
 	if (dialog)
 	{
 		populateLists();
