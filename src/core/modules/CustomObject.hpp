@@ -36,50 +36,52 @@ class StelPainter;
 //! TODO GZ says PLEASE Document this thoroughly! If possible recombine CustomObject and StelMarker & derivatives, or remove one of the two. Or describe why we need both.
 //!
 //! The CustomObject is currently used for custom Markers which can be set and removed interactively. It is drawn exactly at the coordinates given and is not subject to aberration.
+//! As discovered in #2769 it is also used to plot Simbad results, which need to be plotted with aberration.
 class CustomObject : public StelObject
 {
 	friend class CustomObjectMgr;
 public:
 	static const QString CUSTOMOBJECT_TYPE;
 
-	CustomObject(const QString& codesignation, const Vec3d& coordJ2000, const bool isVisible);
-	~CustomObject() Q_DECL_OVERRIDE;
+	//!
+	CustomObject(const QString& codesignation, const Vec3d& coordJ2000, const bool isaMarker);
+	~CustomObject() override;
 
 	//! Get the type of object
-	virtual QString getType(void) const Q_DECL_OVERRIDE
+	QString getType(void) const override
 	{
 		return CUSTOMOBJECT_TYPE;
 	}
 
 	//! Get the type of object
-	virtual QString getObjectType(void) const Q_DECL_OVERRIDE
+	QString getObjectType(void) const override
 	{
 		return (isMarker ? N_("custom marker") : N_("custom object"));
 	}
-	virtual QString getObjectTypeI18n(void) const Q_DECL_OVERRIDE
+	QString getObjectTypeI18n(void) const override
 	{
 		return q_(getObjectType());
 	}
 
-	virtual QString getID(void) const Q_DECL_OVERRIDE
+	QString getID(void) const override
 	{
 		return designation;
 	}
 
-	virtual float getSelectPriority(const StelCore* core) const Q_DECL_OVERRIDE;
+	float getSelectPriority(const StelCore* core) const override;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const Q_DECL_OVERRIDE;
-	virtual Vec3f getInfoColor(void) const Q_DECL_OVERRIDE;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore* core) const Q_DECL_OVERRIDE;
+	QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const override;
+	Vec3f getInfoColor(void) const override;
+	Vec3d getJ2000EquatorialPos(const StelCore* core) const override;
 	//! Get the visual magnitude of custom object
-	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
+	float getVMagnitude(const StelCore* core) const override;
 	//! Get the localized name of custom object
-	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE;
+	QString getNameI18n(void) const override;
 	//! Get the english name of custom object
-	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE
+	QString getEnglishName(void) const override
 	{
 		return designation;
 	}
