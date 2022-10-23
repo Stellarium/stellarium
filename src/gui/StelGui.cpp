@@ -29,6 +29,7 @@
 #include "StelObjectMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelPropertyMgr.hpp"
+#include "StelFileMgr.hpp"
 
 #include "StelObjectType.hpp"
 #include "StelObject.hpp"
