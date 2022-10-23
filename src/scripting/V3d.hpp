@@ -143,7 +143,7 @@ public:
 	Color & operator =(const Color &v);
 	//! The usual constructor to create a 3-dimensional vector that can be manipulated in JavaScript
 	Q_INVOKABLE Color(const double x, const double y, const double z): QObject(), m_r(x), m_g(y), m_b(z){};
-	Q_INVOKABLE Color(QString &hexColor);
+	Q_INVOKABLE Color(QString hexColor);
 	Q_INVOKABLE Color(const Vec3f &vec): QObject(), m_r(vec[0]), m_g(vec[1]), m_b(vec[2]){};
 
 public slots:
