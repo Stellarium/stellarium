@@ -32,7 +32,7 @@ class EquationOfTimeWindow;
 
 /*! @defgroup equationOfTime Equation of Time plug-in
 @{
-The %Equation of Time plugin shows the solution of the equation of time.
+The %Equation of Time plugin shows the values of the equation of time.
 
 The equation of time describes the discrepancy between two kinds of solar
 time. These are apparent solar time, which directly tracks the motion of
