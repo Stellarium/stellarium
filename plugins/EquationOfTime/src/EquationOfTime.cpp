@@ -49,7 +49,7 @@ StelPluginInfo EquationOfTimeStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Equation of Time");
 	info.authors = "Alexander Wolf";
 	info.contact = STELLARIUM_URL;
-	info.description = N_("This plugin shows the solution of the equation of time.");
+	info.description = N_("This plugin shows the value of the equation of time.");
 	info.version = EQUATIONOFTIME_PLUGIN_VERSION;
 	info.license = EQUATIONOFTIME_PLUGIN_LICENSE;
 	return info;
