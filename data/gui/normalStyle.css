@@ -1026,3 +1026,13 @@ QMessageBox {
 QColorDialog {
         background-color: rgb(143, 143, 143);
 }
+
+/**************************************************************************************************************
+ * Satellites
+ *************************************************************************************************************/
+
+#satellitesDialog QLabel#labelAutoAdd,
+#satellitesDialog QLabel#labelTle,
+#satellitesDialog QLabel#labelTleEpoch,
+#satellitesDialog QLabel#labelTleEpochData,
+#satellitesDialog QLabel#validAgeLabel { color: rgb(238, 238, 238); }
