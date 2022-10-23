@@ -599,7 +599,7 @@ void SearchDialog::recentSearchSizeEditingFinished()
 	// Update max size in dialog and user data
 	int maxSize = ui->recentSearchSizeSpinBox->value();
 	setRecentSearchSize(maxSize);
-	maxSize = recentObjectSearchesData.maxSize; // Might not be the same
+	// maxSize = recentObjectSearchesData.maxSize; // Might not be the same. BUT USELESS call, dead store!
 
 	// Save maxSize to user's data
 	saveRecentSearches();
@@ -626,8 +626,7 @@ void SearchDialog::setRecentSearchClearDataPushButton()
 	bool toEnable = recentObjectSearchesData.recentList.size() > 0;
 	ui->recentSearchClearDataPushButton->setEnabled(toEnable);
 	// Tool tip depends on recent list size
-	QString toolTipText;
-	toolTipText = toEnable ? q_("Clear search history: delete all search objects data") : q_("Clear search history: no data to delete");
+	QString toolTipText = toEnable ? q_("Clear search history: delete all search objects data") : q_("Clear search history: no data to delete");
 	ui->recentSearchClearDataPushButton->setToolTip(toolTipText);
 }
 

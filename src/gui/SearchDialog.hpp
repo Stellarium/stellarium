@@ -60,7 +60,7 @@ class CompletionListModel : public QStringListModel
 public:
 	CompletionListModel(QObject* parent=Q_NULLPTR);
 	CompletionListModel(const QStringList & strings, QObject* parent =Q_NULLPTR);
-	~CompletionListModel() Q_DECL_OVERRIDE;
+	~CompletionListModel() override;
 
 	QString getSelected(void) const;
 	void setValues(const QStringList&, const QStringList&);
@@ -74,7 +74,7 @@ public:
 	int getSelectedIdx() { return selectedIdx; }
 
 	// Bold recent objects
-	QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
+	QVariant data(const QModelIndex &index, int role) const override;
 
 public slots:
 	void selectNext();
@@ -119,8 +119,8 @@ public:
 	Q_ENUM(CoordinateSystem)
 
 	SearchDialog(QObject* parent);
-	virtual ~SearchDialog() Q_DECL_OVERRIDE;
-	virtual bool eventFilter(QObject *object, QEvent *event) Q_DECL_OVERRIDE;
+	~SearchDialog() override;
+	bool eventFilter(QObject *object, QEvent *event) override;
 
 	//! Replaces all occurences of substrings describing Greek letters (i.e. "alpha", "beta", ...)
 	//! with the actual Greek unicode characters.
@@ -142,9 +142,9 @@ signals:
 	void simbadGetsDimsChanged(bool b);
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 	//! On the first call with "true" populates the window contents. Also sets focus to entry line.
-	virtual void setVisible(bool v) Q_DECL_OVERRIDE;
+	void setVisible(bool v) override;
 	//! This style only displays the text search field and the search button
 	void setSimpleStyle();
 
@@ -177,7 +177,7 @@ public:
 protected:
 	Ui_searchDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 
 private slots:
 	void greekLetterClicked();
@@ -263,43 +263,43 @@ private:
 		//! Greek letters and strings
 		QHash<QString, QString> greekLetters;
 
-		SearchDialogStaticData()
-		{
-			greekLetters.insert("alpha", QString(QChar(0x03B1)));
-			greekLetters.insert("beta", QString(QChar(0x03B2)));
-			greekLetters.insert("gamma", QString(QChar(0x03B3)));
-			greekLetters.insert("delta", QString(QChar(0x03B4)));
-			greekLetters.insert("epsilon", QString(QChar(0x03B5)));
+		SearchDialogStaticData() :
+			greekLetters(QHash<QString,QString>({
+				{"alpha",   QString(QChar(0x03B1))},
+				{"beta",    QString(QChar(0x03B2))},
+				{"beta",    QString(QChar(0x03B2))},
+				{"gamma",   QString(QChar(0x03B3))},
+				{"delta",   QString(QChar(0x03B4))},
+				{"epsilon", QString(QChar(0x03B5))},
 
-			greekLetters.insert("zeta", QString(QChar(0x03B6)));
-			greekLetters.insert("eta", QString(QChar(0x03B7)));
-			greekLetters.insert("theta", QString(QChar(0x03B8)));
-			greekLetters.insert("iota", QString(QChar(0x03B9)));
-			greekLetters.insert("kappa", QString(QChar(0x03BA)));
+				{"zeta",    QString(QChar(0x03B6))},
+				{"eta",     QString(QChar(0x03B7))},
+				{"theta",   QString(QChar(0x03B8))},
+				{"iota",    QString(QChar(0x03B9))},
+				{"kappa",   QString(QChar(0x03BA))},
 
-			greekLetters.insert("lambda", QString(QChar(0x03BB)));
-			greekLetters.insert("mu", QString(QChar(0x03BC)));
-			greekLetters.insert("nu", QString(QChar(0x03BD)));
-			greekLetters.insert("xi", QString(QChar(0x03BE)));
-			greekLetters.insert("omicron", QString(QChar(0x03BF)));
+				{"lambda",  QString(QChar(0x03BB))},
+				{"mu",      QString(QChar(0x03BC))},
+				{"nu",      QString(QChar(0x03BD))},
+				{"xi",      QString(QChar(0x03BE))},
+				{"omicron", QString(QChar(0x03BF))},
 
-			greekLetters.insert("pi", QString(QChar(0x03C0)));
-			greekLetters.insert("rho", QString(QChar(0x03C1)));
-			greekLetters.insert("sigma", QString(QChar(0x03C3))); // second lower-case sigma shouldn't affect anything
-			greekLetters.insert("tau", QString(QChar(0x03C4)));
-			greekLetters.insert("upsilon", QString(QChar(0x03C5)));
+				{"pi",      QString(QChar(0x03C0))},
+				{"rho",     QString(QChar(0x03C1))},
+				{"sigma",   QString(QChar(0x03C3))}, // second lower-case sigma shouldn't affect anything
+				{"tau",     QString(QChar(0x03C4))},
+				{"upsilon", QString(QChar(0x03C5))},
 
-			greekLetters.insert("phi", QString(QChar(0x03C6)));
-			greekLetters.insert("chi", QString(QChar(0x03C7)));
-			greekLetters.insert("psi", QString(QChar(0x03C8)));
-			greekLetters.insert("omega", QString(QChar(0x03C9)));
-		}
+				{"phi",     QString(QChar(0x03C6))},
+				{"chi",     QString(QChar(0x03C7))},
+				{"psi",     QString(QChar(0x03C8))},
+				{"omega",   QString(QChar(0x03C9))}})){}
 	};
 	static SearchDialogStaticData staticData;
 
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
-	QMap<QString, Vec3d> simbadResults;
+	QMap<QString, Vec3d> simbadResults; //! Simbad object name and J2000.0 coordinates
 	class StelObjectMgr* objectMgr;
 	class QSettings* conf;
 	QStringListModel* listModel;

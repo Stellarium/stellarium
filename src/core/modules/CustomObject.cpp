@@ -17,6 +17,7 @@
  */
 
 #include "CustomObject.hpp"
+#include "Planet.hpp"
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
@@ -25,21 +26,21 @@
 #include "StelFileMgr.hpp"
 #include "StelTexture.hpp"
 #include "StelProjector.hpp"
+#include "StelUtils.hpp"
 
 const QString CustomObject::CUSTOMOBJECT_TYPE = QStringLiteral("CustomObject");
 Vec3f CustomObject::markerColor = Vec3f(0.1f,1.0f,0.1f);
 float CustomObject::markerSize = 1.f;
 float CustomObject::selectPriority = 0.f;
 
-CustomObject::CustomObject(const QString& codesignation, const Vec3d& coordJ2000, const bool isVisible)
+CustomObject::CustomObject(const QString& codesignation, const Vec3d& coordJ2000, const bool isaMarker)
 	: initialized(false)
 	, XYZ(coordJ2000)
-	, markerTexture(Q_NULLPTR)
+	, markerTexture(StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png"))
 	, designation(codesignation)
-	, isMarker(isVisible)
+	, isMarker(isaMarker)
 {
 	XYZ.normalize();
-	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");	
 	initialized = true;
 }
 
@@ -93,8 +94,18 @@ Vec3f CustomObject::getInfoColor(void) const
 
 Vec3d CustomObject::getJ2000EquatorialPos(const StelCore* core) const
 {
-	Q_UNUSED(core)
-	return XYZ;
+	if  ((!isMarker) && (core) && (core->getUseAberration()) && (core->getCurrentPlanet()))
+	{
+		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
+		vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));
+		Vec3d pos=XYZ+vel;
+		pos.normalize();
+		return pos;
+	}
+	else
+	{
+		return XYZ;
+	}
 }
 
 float CustomObject::getVMagnitude(const StelCore* core) const
