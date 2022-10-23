@@ -81,7 +81,7 @@ Color & Color::operator =(const Color &v)
 	return *this;
 }
 
-Color::Color(QString &hexColor) : QObject()
+Color::Color(QString hexColor) : QObject()
 {
 	QColor qcol = QColor( hexColor );
 	if( qcol.isValid() )
