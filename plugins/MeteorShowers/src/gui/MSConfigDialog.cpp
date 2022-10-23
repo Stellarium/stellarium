@@ -25,7 +25,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
 #include "ui_MSConfigDialog.h"
-#include "StelMainView.hpp"
 
 MSConfigDialog::MSConfigDialog(MeteorShowersMgr* mgr)
 	: StelDialog("MeteorShowers")
@@ -85,9 +84,9 @@ void MSConfigDialog::createDialogContent()
 	connect(m_ui->enableLabels, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableLabels(bool)));
 	connect(m_ui->fontSize, SIGNAL(valueChanged(int)), m_mgr, SLOT(setFontSize(int)));
 
-	connect(m_ui->setColorARG, SIGNAL(clicked()), this, SLOT(setColorARG()));
-	connect(m_ui->setColorARC, SIGNAL(clicked()), this, SLOT(setColorARC()));
-	connect(m_ui->setColorIR, SIGNAL(clicked()), this, SLOT(setColorIR()));
+	connectColorButton(m_ui->setColorARG, "MeteorShowers.colorARG", "MeteorShowers/colorARG");
+	connectColorButton(m_ui->setColorARC, "MeteorShowers.colorARC", "MeteorShowers/colorARC");
+	connectColorButton(m_ui->setColorIR,  "MeteorShowers.colorIR",  "MeteorShowers/colorIR");
 
 	// Update tab
 	connect(m_ui->enableUpdates, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableAutoUpdates(bool)));
@@ -136,7 +135,6 @@ void MSConfigDialog::init()
 	m_ui->activeRadiantsOnly->setChecked(m_mgr->getActiveRadiantOnly());
 	m_ui->enableLabels->setChecked(m_mgr->getEnableLabels());
 	m_ui->fontSize->setValue(m_mgr->getFontSize());
-	refreshMarkersColor();
 
 	// Update tab
 	refreshUpdateTab();
@@ -186,57 +184,6 @@ void MSConfigDialog::updateGuiFromSettings(void)
 {
 	m_ui->enableUpdates->setChecked(m_mgr->getEnableAutoUpdates());
 	refreshUpdateTab();
-}
-
-void MSConfigDialog::refreshMarkersColor()
-{
-	Vec3d c = m_mgr->getColorARG().toVec3d();
-	QColor color(QColor::fromRgbF(c[0], c[1], c[2]));
-	m_ui->setColorARG->setStyleSheet("background-color:" + color.name() + ";");
-
-	c = m_mgr->getColorARC().toVec3d();
-	color = QColor(QColor::fromRgbF(c[0], c[1], c[2]));
-	m_ui->setColorARC->setStyleSheet("background-color:" + color.name() + ";");
-
-	c = m_mgr->getColorIR().toVec3d();
-	color = QColor(QColor::fromRgbF(c[0], c[1], c[2]));
-	m_ui->setColorIR->setStyleSheet("background-color:" + color.name() + ";");
-}
-
-void MSConfigDialog::setColorARG()
-{
-	Vec3d c = m_mgr->getColorARG().toVec3d();
-	QColor color(QColor::fromRgbF(c[0], c[1], c[2]));
-	color = QColorDialog::getColor(color,&StelMainView::getInstance());
-	if (color.isValid())
-	{
-		m_ui->setColorARG->setStyleSheet("background-color:" + color.name() + ";");
-		m_mgr->setColorARG(Vec3f(static_cast<float>(color.redF()), static_cast<float>(color.greenF()), static_cast<float>(color.blueF())));
-	}
-}
-
-void MSConfigDialog::setColorARC()
-{
-	Vec3d c = m_mgr->getColorARC().toVec3d();
-	QColor color(QColor::fromRgbF(c[0], c[1], c[2]));
-    color = QColorDialog::getColor(color,&StelMainView::getInstance());
-	if (color.isValid())
-	{
-		m_ui->setColorARC->setStyleSheet("background-color:" + color.name() + ";");
-		m_mgr->setColorARC(Vec3f(static_cast<float>(color.redF()), static_cast<float>(color.greenF()), static_cast<float>(color.blueF())));
-	}
-}
-
-void MSConfigDialog::setColorIR()
-{
-	Vec3d c = m_mgr->getColorIR().toVec3d();
-	QColor color(QColor::fromRgbF(c[0], c[1], c[2]));
-	color = QColorDialog::getColor(color,&StelMainView::getInstance());
-	if (color.isValid())
-	{
-		m_ui->setColorIR->setStyleSheet("background-color:" + color.name() + ";");
-		m_mgr->setColorIR(Vec3f(static_cast<float>(color.redF()), static_cast<float>(color.greenF()), static_cast<float>(color.blueF())));
-	}
 }
 
 void MSConfigDialog::setAboutHtml()

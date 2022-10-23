@@ -58,6 +58,9 @@ class MeteorShowersMgr : public StelModule
 	Q_OBJECT
 	Q_PROPERTY(bool enablePlugin READ getEnablePlugin WRITE actionEnablePlugin NOTIFY enablePluginChanged)
 	Q_PROPERTY(bool enableLabels READ getEnableLabels WRITE setEnableLabels NOTIFY enableLabelsChanged)
+	Q_PROPERTY(Vec3f colorARG READ getColorARG WRITE setColorARG NOTIFY colorARGChanged)
+	Q_PROPERTY(Vec3f colorARC READ getColorARC WRITE setColorARC NOTIFY colorARCChanged)
+	Q_PROPERTY(Vec3f colorIR  READ getColorIR  WRITE setColorIR  NOTIFY colorIRChanged)
 
 public:
 	//! @enum UpdateState
@@ -137,6 +140,9 @@ signals:
 	void jsonUpdateComplete(void);
 	void enablePluginChanged(bool b);
 	void enableLabelsChanged(bool b);
+	void colorARGChanged(Vec3f c);
+	void colorARCChanged(Vec3f c);
+	void colorIRChanged(Vec3f c);
 
 public slots:
 	//! Enable the meteor showers plugin at Stellarium startup.

@@ -534,18 +534,21 @@ void MeteorShowersMgr::setColorARG(const Vec3f& rgb)
 {
 	m_colorARG = rgb;	
 	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARG", rgb.toStr());
+	emit colorARGChanged(rgb);
 }
 
 void MeteorShowersMgr::setColorARC(const Vec3f& rgb)
 {
 	m_colorARC = rgb;	
 	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARC", rgb.toStr());
+	emit colorARCChanged(rgb);
 }
 
 void MeteorShowersMgr::setColorIR(const Vec3f& rgb)
 {
 	m_colorIR = rgb;	
 	m_conf->setValue(MS_CONFIG_PREFIX + "/colorIR", rgb.toStr());
+	emit colorIRChanged(rgb);
 }
 
 void MeteorShowersMgr::setEnableAtStartup(const bool& b)
