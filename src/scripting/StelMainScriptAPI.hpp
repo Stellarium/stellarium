@@ -464,7 +464,7 @@ public slots:
 	//! @param cssStyle The file name without ".css"
 	//! The special name "default" can be used to reset everything to defaults.
 	//! @attention Stellarium's normalStyle.css evolves. We cannot give any guarantee that a modified CSS will work with another version of Stellarium.
-	static void setGuiStyle(const QString& cssStyleName);
+	static void setGuiStyle(const QString& cssStyle);
 
 	//! Set the minimum frames per second.  Usually this minimum will
 	//! be switched to after there are no user events for some seconds

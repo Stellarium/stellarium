@@ -449,12 +449,13 @@ void StelGui::reloadStyle()
 //! section "default" is the code name of the default style. Any other name is interpreted as CSS filename.
 void StelGui::setStelStyle(const QString& style)
 {
-	qDebug() << "StelGUI::setStelStyle: style=" << style;
 	// Load the style sheets
-	//currentStelStyle.confSectionName = "color"; // The only meaningful name. We no longer support custom color sections, this is a relict from the old night mode.
-
 	QString qtStyleFileName = (style=="default" ? ":/graphicGui/normalStyle.css" : StelFileMgr::findFile(style+".css"));
-	QString htmlStyleFileName = ":/graphicGui/normalHtml.css";
+	if (qtStyleFileName.isEmpty())
+	{
+		qWarning() << "Cannot find " << style << ".css. Loading default style.";
+		qtStyleFileName = ":/graphicGui/normalStyle.css";
+	}
 
 	// Load Qt style sheet
 	QFile styleFile(qtStyleFileName);
@@ -467,7 +468,7 @@ void StelGui::setStelStyle(const QString& style)
 	else
 		qDebug() << "Cannot find style file" << qtStyleFileName;
 
-	QFile htmlStyleFile(htmlStyleFileName);
+	QFile htmlStyleFile(":/graphicGui/normalHtml.css");
 	if(htmlStyleFile.open(QIODevice::ReadOnly))
 	{
 		currentStelStyle.htmlStyleSheet = htmlStyleFile.readAll();
