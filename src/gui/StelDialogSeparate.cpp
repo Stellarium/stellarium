@@ -39,7 +39,7 @@ public:
 	}
 
 protected:
-	virtual void paintEvent(QPaintEvent *event) override
+	void paintEvent(QPaintEvent *event) override
 	{
 		Q_UNUSED(event)
 		QRect parentRect=reinterpret_cast<QWidget*>(parent())->geometry();

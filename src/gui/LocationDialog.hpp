@@ -34,7 +34,7 @@ class LocationDialog : public StelDialog
 	Q_OBJECT
 public:
 	LocationDialog(QObject* parent);
-	virtual ~LocationDialog() override;
+	~LocationDialog() override;
 
 public slots:
 	//! Apply application style change

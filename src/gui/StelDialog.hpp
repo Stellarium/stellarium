@@ -247,7 +247,7 @@ class CustomProxy : public QGraphicsProxyWidget
 		}
 	signals: void sizeChanged(QSizeF);
 	protected:
-		virtual bool event(QEvent* event) override
+		bool event(QEvent* event) override
 		{
 			if (StelApp::getInstance().getSettings()->value("gui/flag_use_window_transparency", true).toBool())
 			{
@@ -266,7 +266,7 @@ class CustomProxy : public QGraphicsProxyWidget
 			}
 			return QGraphicsProxyWidget::event(event);
 		}
-		virtual void resizeEvent(QGraphicsSceneResizeEvent *event) override
+		void resizeEvent(QGraphicsSceneResizeEvent *event) override
 		{
 			if (event->newSize() != event->oldSize())
 			{

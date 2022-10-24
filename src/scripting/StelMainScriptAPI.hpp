@@ -460,9 +460,11 @@ public slots:
 	static void setGuiVisible(bool b);
 
 	//! Use a custom CSS for the GUI. This is a very advanced feature, designing CSS is an art.
-	//! To use properly, make a private copy of normalStyle.css and edit style, but leave structure as-is.
-	//! The special name "color" can be used to reset everything to defaults.
-	static void setGuiStyle(const QString& cssFileName);
+	//! To use properly, place a private copy of normalStyle.css into your user data directory and edit style, but leave structure as-is.
+	//! @param cssStyle The file name without ".css"
+	//! The special name "default" can be used to reset everything to defaults.
+	//! @attention Stellarium's normalStyle.css evolves. We cannot give any guarantee that a modified CSS will work with another version of Stellarium.
+	static void setGuiStyle(const QString& cssStyleName);
 
 	//! Set the minimum frames per second.  Usually this minimum will
 	//! be switched to after there are no user events for some seconds
