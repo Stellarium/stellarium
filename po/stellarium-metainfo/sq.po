@@ -1,12 +1,13 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2022
+# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
 # Besnik Bleta <besnik@programeshqip.org>, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-10-21 16:56+0700\n"
+"POT-Creation-Date: 2022-10-24 02:08+0700\n"
 "PO-Revision-Date: 2022-10-21 17:42+0000\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>, 2022\n"
 "Language-Team: Albanian (https://www.transifex.com/stellarium/teams/80998/sq/)\n"
@@ -35,7 +36,7 @@ msgid ""
 "simulation and a built-in scripting engine."
 msgstr ""
 "Stellarium-i vizaton qiej 3D me realizëm fotografik, aty për aty, me OpenGL."
-" Shfaq yje, yjësi, planetë dhe mjegullnaja, dhe ka plot veçori të tjera, "
+" Shfaq yje, yjësi, planetë dhe mjegullnaja, si dhe ka plot veçori të tjera, "
 "përfshi peizazhe të shumë panoramikë, mjegull, simulim ndotjeje drite dhe "
 "një mekanizëm të brendshëm skriptimi."
 
@@ -70,7 +71,27 @@ msgstr ""
 " si u dukej qielli astronautëve të Apollos, ose se si duken unazat e "
 "Saturnit prej Titani."
 
+#. (itstool) path: keywords/keyword
+#: org.stellarium.Stellarium.appdata.xml:17
+msgid "astronomy"
+msgstr "astronomi"
+
+#. (itstool) path: keywords/keyword
+#: org.stellarium.Stellarium.appdata.xml:18
+msgid "planetarium"
+msgstr "planetarium"
+
+#. (itstool) path: keywords/keyword
+#: org.stellarium.Stellarium.appdata.xml:19
+msgid "sky"
+msgstr "qielli"
+
+#. (itstool) path: keywords/keyword
+#: org.stellarium.Stellarium.appdata.xml:20
+msgid "universe"
+msgstr "univers"
+
 #. (itstool) path: component/developer_name
-#: org.stellarium.Stellarium.appdata.xml:115
+#: org.stellarium.Stellarium.appdata.xml:126
 msgid "Stellarium team"
 msgstr "Ekipi i Stellarium-it"
