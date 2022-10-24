@@ -490,7 +490,8 @@ For example, using the option \texttt{-c\ my\_config.ini} would resolve to the f
 -\/-sky-time         & time       & The initial time in \texttt{hh:mm:ss} format. \\\midrule
 -\/-startup-script   & script name & The name of a script to run after the program has started. [\file{startup.ssc}] \\\midrule
 -\/-fov              & angle (degrees) & The initial vertical field of view in degrees. \\\midrule
--\/-scale-gui        & scale factor & Scaling the GUI according to scale factor\\\midrule
+-\/-scale-gui        & scale factor & Scaling the GUI according to scale factor\\
+-\/-gui-css style    & name       & Use \file{name.css} to define GUI style\\\midrule
 -\/-projection-type  & ptype      & The initial projection type (e.g. \texttt{perspective}). \\\midrule
 -\/-spout  or -S     & all or sky & Act as Spout sender (See section \ref{sec:CommandLineOptions:Special:Spout}).%
                                     \footnote{On Windows only}\footnote{This function requires running in OpenGL mode.}\\
@@ -584,6 +585,37 @@ problems.
   or \texttt{warp} for another software-only solution. Note that command line options take precedence over this environment variable.
 \end{description}
 
+\subsection{Customized GUI Colors}
+\label{sec:CommandLineOptions:Special:CSS}
+
+Some users have difficulties to read Stellarium's rather dark user
+interface. Some screens may be too dark, or environments too
+bright. Others find it is still too bright, and they would prefer a
+real ``dark mode''. To allow this, you can load an alternative style file.
+
+The appearance of the windows, buttons etc.\ is governed by a CSS
+(Cascaded Style Sheet) file. It certainly requires some knowledge and
+guessing to edit your own, but there is enough help available
+online. You can find the file \file{normalStyle.css} in the program
+directory's \file{data} subfolder. Copy this into your user directory
+and rename it to e.g. \file{myOwnGreatStyle.css}. Edit numbers, but do
+not change the item names!  Then you can either launch Stellarium with
+the added command line option like
+\begin{commands}
+  stellarium --gui-css myOwnGreatStyle
+\end{commands}
+or you could also use the scripting option (see chapter~\ref{ch:scripting}):
+\begin{script}
+  core.setGuiStyle("MyOwnGreatStyle");
+\end{script}
+To go back to Stellarium's default, just use
+\begin{script}
+  core.setGuiStyle("default");
+\end{script}
+
+Note that, as Stellarium evolves, this file also may change from
+version to version. We cannot give any guarantees that one customized
+file will work on later or earlier versions of Stellarium.
 
 %%% Local Variables: 
 %%% mode: latex
