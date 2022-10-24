@@ -20,6 +20,7 @@
 #ifndef STELAPP_HPP
 #define STELAPP_HPP
 
+#include <qguiapplication.h>
 #include <QString>
 #include <QObject>
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
@@ -187,7 +188,12 @@ public:
 	QSettings* getSettings() const {return confSettings;}
 
 	//! Return the currently used style
-	const QString getCurrentStelStyle() const {return "default";}
+	const QString getCurrentStelStyle() const {
+		if (qApp->property("onetime_custom_css").isValid())
+			return qApp->property("onetime_custom_css").toString();
+		else
+			return "default";
+	}
 
 	//! Update all object according to the deltaTime in seconds.
 	void update(double deltaTime);
