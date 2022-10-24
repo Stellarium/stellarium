@@ -141,6 +141,11 @@ void HelpDialog::createDialogContent()
 
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 	updateTabBarListWidgetWidth();
+
+	connect((dynamic_cast<StelGui*>(StelApp::getInstance().getGui())), &StelGui::htmlStyleChanged, this, [=](const QString &style){
+		ui->helpBrowser->document()->setDefaultStyleSheet(style);
+		ui->aboutBrowser->document()->setDefaultStyleSheet(style);
+	});
 }
 
 void HelpDialog::setKeyButtonState(bool state)

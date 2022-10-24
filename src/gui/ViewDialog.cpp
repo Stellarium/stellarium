@@ -537,6 +537,13 @@ void ViewDialog::createDialogContent()
 	updateHips();
 
 	updateTabBarListWidgetWidth();
+
+	connect((dynamic_cast<StelGui*>(StelApp::getInstance().getGui())), &StelGui::htmlStyleChanged, this, [=](const QString &style){
+		ui->surveysTextBrowser->document()->setDefaultStyleSheet(style);
+		ui->projectionTextBrowser->document()->setDefaultStyleSheet(style);
+		ui->landscapeTextBrowser->document()->setDefaultStyleSheet(style);
+		ui->skyCultureTextBrowser->document()->setDefaultStyleSheet(style);
+	});
 }
 
 void ViewDialog::populateOrbitsControls(bool flag)

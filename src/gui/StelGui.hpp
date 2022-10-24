@@ -297,6 +297,7 @@ signals:
 	void flagShowCompassButtonChanged(bool b);
 	void infoStringChanged();
 	void guiStyleChanged(const QString &style);
+	void htmlStyleChanged(const QString &style);
 
 private slots:
 	void reloadStyle();

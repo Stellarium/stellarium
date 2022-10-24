@@ -429,6 +429,12 @@ void ConfigurationDialog::createDialogContent()
 	updateConfigLabels();
 	populateTooltips();
 	updateTabBarListWidgetWidth();
+
+	connect((dynamic_cast<StelGui*>(StelApp::getInstance().getGui())), &StelGui::htmlStyleChanged, this, [=](const QString &style){
+		ui->pluginsInfoBrowser->document()->setDefaultStyleSheet(style);
+		ui->scriptInfoBrowser->document()->setDefaultStyleSheet(style);
+		ui->deltaTAlgorithmDescription->document()->setDefaultStyleSheet(style);
+	});
 }
 
 void ConfigurationDialog::setKeyNavigationState(bool state)

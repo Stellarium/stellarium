@@ -591,7 +591,7 @@ problems.
 Some users have difficulties to read Stellarium's rather dark user
 interface. Some screens may be too dark, or environments too
 bright. Others find it is still too bright, and they would prefer a
-real ``dark mode''. To allow this, you can load an alternative style file.
+real ``dark mode''. To allow this, you can create and load your own alternative style files.
 
 The appearance of the windows, buttons etc.\ is governed by a CSS
 (Cascaded Style Sheet) file. It certainly requires some knowledge and
@@ -599,7 +599,7 @@ guessing to edit your own, but there is enough help available
 online. You can find the file \file{normalStyle.css} in the program
 directory's \file{data} subfolder. Copy this into your user directory
 and rename it to e.g. \file{myOwnGreatStyle.css}. Edit numbers, but do
-not change the item names!  Then you can either launch Stellarium with
+not change the item names! Then you can either launch Stellarium with
 the added command line option like
 \begin{commands}
   stellarium --gui-css myOwnGreatStyle
@@ -613,7 +613,11 @@ To go back to Stellarium's default, just use
   core.setGuiStyle("default");
 \end{script}
 
-Note that, as Stellarium evolves, this file also may change from
+If link colors in text panels are now difficult to read, copy
+\file{normalHtml.css} from the directory given above to
+\file{MyOwnGreatStyleHtml.css} and modify to your taste.
+
+Note that, as Stellarium evolves, these files also may change from
 version to version. We cannot give any guarantees that one customized
 file will work on later or earlier versions of Stellarium.
 
