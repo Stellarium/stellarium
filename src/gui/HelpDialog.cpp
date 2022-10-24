@@ -60,8 +60,8 @@ HelpDialog::HelpDialog(QObject* parent)
 	: StelDialog("Help", parent)
 	, message("")
 	, updateState(CompleteNoUpdates)
-	, networkManager(Q_NULLPTR)
-	, downloadReply(Q_NULLPTR)
+	, networkManager(nullptr)
+	, downloadReply(nullptr)
 {
 	ui = new Ui_helpDialogForm;	
 }
@@ -69,7 +69,7 @@ HelpDialog::HelpDialog(QObject* parent)
 HelpDialog::~HelpDialog()
 {
 	delete ui;
-	ui = Q_NULLPTR;
+	ui = nullptr;
 }
 
 void HelpDialog::retranslate()
@@ -83,7 +83,7 @@ void HelpDialog::retranslate()
 	}
 }
 
-void HelpDialog::styleChanged(const QByteArray &style)
+void HelpDialog::styleChanged(const QString &style)
 {
 	StelDialog::styleChanged(style);
 	if (dialog)
@@ -179,7 +179,7 @@ void HelpDialog::checkUpdates()
 
 void HelpDialog::downloadComplete(QNetworkReply *reply)
 {
-	if (reply == Q_NULLPTR)
+	if (reply == nullptr)
 		return;
 
 	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
@@ -192,7 +192,7 @@ void HelpDialog::downloadComplete(QNetworkReply *reply)
 			   << reply->errorString();
 
 		reply->deleteLater();
-		downloadReply = Q_NULLPTR;
+		downloadReply = nullptr;
 		updateState = HelpDialog::DownloadError;
 		message = q_("Cannot check updates...");
 		return;
@@ -232,7 +232,7 @@ void HelpDialog::downloadComplete(QNetworkReply *reply)
 		message = QString("%1 <a href='%2'>%3</a>").arg(q_("This version of Stellarium is outdated!"), map["html_url"].toString(), q_("Download new version."));
 
 	reply->deleteLater();
-	downloadReply = Q_NULLPTR;
+	downloadReply = nullptr;
 
 	emit checkUpdatesComplete();
 }

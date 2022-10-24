@@ -78,8 +78,8 @@ class StelDialog : public QObject
 	Q_OBJECT
 	Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
 public:
-	StelDialog(const QString &dialogName=QString("Default"), QObject* parent=Q_NULLPTR);
-	virtual ~StelDialog() Q_DECL_OVERRIDE;
+	StelDialog(const QString &dialogName=QString("Default"), QObject* parent=nullptr);
+	~StelDialog() override;
 
 	//! Returns true if the dialog contents have been constructed and are currently shown
 	bool visible() const;
@@ -87,7 +87,7 @@ public:
 
 public slots:
 	//! Apply application style change
-	virtual void styleChanged(const QByteArray &style);
+	virtual void styleChanged(const QString &style);
 	//! Retranslate the content of the dialog.
 	//! Needs to be connected to StelApp::languageChanged().
 	//! At the very least, if the window is
@@ -232,12 +232,12 @@ class CustomProxy : public QGraphicsProxyWidget
 {	private:
 	Q_OBJECT
 	public:
-		CustomProxy(QGraphicsItem *parent = Q_NULLPTR, Qt::WindowFlags wFlags = Qt::Widget) : QGraphicsProxyWidget(parent, wFlags)
+		CustomProxy(QGraphicsItem *parent = nullptr, Qt::WindowFlags wFlags = Qt::Widget) : QGraphicsProxyWidget(parent, wFlags)
 		{
 			setFocusPolicy(Qt::StrongFocus);
 		}
 		//! Reimplement this method to add windows decorations. Currently there are invisible 2 px decorations
-		void paintWindowFrame(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) Q_DECL_OVERRIDE
+		void paintWindowFrame(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override
 		{
 /*			QStyleOptionTitleBar bar;
 			initStyleOption(&bar);
@@ -247,7 +247,7 @@ class CustomProxy : public QGraphicsProxyWidget
 		}
 	signals: void sizeChanged(QSizeF);
 	protected:
-		virtual bool event(QEvent* event) Q_DECL_OVERRIDE
+		virtual bool event(QEvent* event) override
 		{
 			if (StelApp::getInstance().getSettings()->value("gui/flag_use_window_transparency", true).toBool())
 			{
@@ -266,7 +266,7 @@ class CustomProxy : public QGraphicsProxyWidget
 			}
 			return QGraphicsProxyWidget::event(event);
 		}
-		virtual void resizeEvent(QGraphicsSceneResizeEvent *event) Q_DECL_OVERRIDE
+		virtual void resizeEvent(QGraphicsSceneResizeEvent *event) override
 		{
 			if (event->newSize() != event->oldSize())
 			{

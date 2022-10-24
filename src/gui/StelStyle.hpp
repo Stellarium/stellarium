@@ -29,7 +29,7 @@ class StelStyle
 {
 public:
 	//! The content of the associated Qt Style Sheet for styling widgets
-	QByteArray qtStyleSheet;
+	QString qtStyleSheet;
 	
 	//! The content of the associated Html Style Sheet for styling rich text
 	QByteArray htmlStyleSheet;

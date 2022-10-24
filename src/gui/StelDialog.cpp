@@ -45,17 +45,17 @@
 
 StelDialog::StelDialog(const QString &dialogName, QObject* parent)
 	: QObject(parent)
-	, dialog(Q_NULLPTR)
-	, proxy(Q_NULLPTR)
+	, dialog(nullptr)
+	, proxy(nullptr)
 	, dialogName(dialogName)	
 {
-	if (parent == Q_NULLPTR)
+	if (parent == nullptr)
 		setParent(StelMainView::getInstance().getGuiWidget());
 
 	connect(&StelApp::getInstance(), SIGNAL(fontChanged(QFont)), this, SLOT(handleFontChanged()));
 	connect(&StelApp::getInstance(), SIGNAL(guiFontSizeChanged(int)), this, SLOT(handleFontChanged()));
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(handleColorSchemeChanged()));
-	connect((dynamic_cast<StelGui*>(StelApp::getInstance().getGui())), SIGNAL(guiStyleChanged(const QByteArray &)), this, SLOT(styleChanged(const QByteArray &)));
+	connect((dynamic_cast<StelGui*>(StelApp::getInstance().getGui())), SIGNAL(guiStyleChanged(const QString &)), this, SLOT(styleChanged(const QString &)));
 }
 
 StelDialog::~StelDialog()
@@ -67,7 +67,7 @@ void StelDialog::close()
 	setVisible(false);
 }
 
-void StelDialog::styleChanged(const QByteArray &style)
+void StelDialog::styleChanged(const QString &style)
 {
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui && dialog)
@@ -76,7 +76,7 @@ void StelDialog::styleChanged(const QByteArray &style)
 
 bool StelDialog::visible() const
 {
-	return dialog!=Q_NULLPTR && dialog->isVisible();
+	return dialog!=nullptr && dialog->isVisible();
 }
 
 void StelDialog::setVisible(bool v)
@@ -108,7 +108,7 @@ void StelDialog::setVisible(bool v)
 		else
 		{
 			QGraphicsWidget* parent = qobject_cast<QGraphicsWidget*>(this->parent());
-			dialog = new QDialog(Q_NULLPTR);
+			dialog = new QDialog(nullptr);
 			// dialog->setParent(parent);
 			//dialog->setAttribute(Qt::WA_OpaquePaintEvent, true);
 			connect(dialog, SIGNAL(rejected()), this, SLOT(close()));

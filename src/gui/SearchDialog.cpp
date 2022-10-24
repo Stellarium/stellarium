@@ -167,9 +167,9 @@ QString SearchDialog::extSearchText = "";
 
 SearchDialog::SearchDialog(QObject* parent)
 	: StelDialog("Search", parent)
-	, simbadReply(Q_NULLPTR)
-	, listModel(Q_NULLPTR)
-	, proxyModel(Q_NULLPTR)
+	, simbadReply(nullptr)
+	, listModel(nullptr)
+	, proxyModel(nullptr)
 	, flagHasSelectedText(false)
 	, shiftPressed(false)
 {
@@ -210,7 +210,7 @@ SearchDialog::~SearchDialog()
 	if (simbadReply)
 	{
 		simbadReply->deleteLater();
-		simbadReply = Q_NULLPTR;
+		simbadReply = nullptr;
 	}
 }
 
@@ -466,11 +466,6 @@ void SearchDialog::createDialogContent()
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(refreshFocus(bool)));
 	connect(StelApp::getInstance().getCore(), SIGNAL(updateSearchLists()), this, SLOT(updateListTab()));
 	connect(GETSTELMODULE(NomenclatureMgr), SIGNAL(nomenclatureDisplayedChanged(bool)), this, SLOT(updateListTab()));
-
-	QString style = "QLabel { color: rgb(238, 238, 238); }";
-	ui->simbadStatusLabel->setStyleSheet(style);
-	ui->labelGreekLetterTitle->setStyleSheet(style);
-	ui->simbadCooStatusLabel->setStyleSheet(style);
 
 	// Get data from previous session
 	loadRecentSearches();
@@ -782,7 +777,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		{
 			disconnect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
 			delete simbadReply;
-			simbadReply=Q_NULLPTR;
+			simbadReply=nullptr;
 		}
 		simbadResults.clear();
 	}
@@ -1125,7 +1120,7 @@ void SearchDialog::onSimbadStatusChanged()
 	{
 		disconnect(simbadReply, SIGNAL(statusChanged()), this, SLOT(onSimbadStatusChanged()));
 		delete simbadReply;
-		simbadReply=Q_NULLPTR;
+		simbadReply=nullptr;
 
 		// Update push button enabled state
 		setPushButtonGotoSearch();

@@ -51,7 +51,7 @@ public:
 
 public slots:
 	//! Apply application style change
-	virtual void styleChanged(const QByteArray &style) Q_DECL_OVERRIDE;
+	virtual void styleChanged(const QString &style) Q_DECL_OVERRIDE;
 	virtual void retranslate() Q_DECL_OVERRIDE;
 
 protected:

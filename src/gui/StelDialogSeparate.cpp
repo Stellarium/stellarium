@@ -30,37 +30,32 @@
 
 class NightCover: public QWidget{
 public:
-    NightCover(QWidget *parent = Q_NULLPTR, Qt::WindowFlags f = Qt::FramelessWindowHint|Qt::WindowTransparentForInput)
-	: QWidget(parent, f)
-    {
-	setAttribute(Qt::WA_TransparentForMouseEvents);
-	// We cannot define this style in the global QSS file, as the background defined for QWidget gets inherited.
-	setStyleSheet("QWidget{background: none;"
-					 "color: rgba(80, 8, 0, 0.33);"
-			      "background-color: rgba(80, 8, 0, 0.33);"
-			       "selection-color: rgba(80, 8, 0, 0.33);"
-		    "selection-background-color: rgba(80, 8, 0, 0.33);"
-		    "alternate-background-color: rgba(80, 8, 0, 0.33);}");
-    }
+	NightCover(QWidget *parent = nullptr, Qt::WindowFlags f = Qt::FramelessWindowHint|Qt::WindowTransparentForInput)
+		: QWidget(parent, f)
+	{
+		setObjectName("NightCover");
+		setAttribute(Qt::WA_TransparentForMouseEvents);
+		connect((dynamic_cast<StelGui*>(StelApp::getInstance().getGui())), &StelGui::guiStyleChanged, this, [=](const QString &style){setStyleSheet(style);});
+	}
 
 protected:
-    virtual void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE
-    {
-	Q_UNUSED(event)
-	QRect parentRect=reinterpret_cast<QWidget*>(parent())->geometry();
-	setGeometry(0, 0, parentRect.width(), parentRect.height());
-	QPainter painter(this);
-	painter.setRenderHint(QPainter::Antialiasing);
-	painter.setBrush(QBrush(QColor(128,16,0, 50)));
-	painter.setPen(Qt::NoPen);
-	painter.drawRect(rect());
-    }
+	virtual void paintEvent(QPaintEvent *event) override
+	{
+		Q_UNUSED(event)
+		QRect parentRect=reinterpret_cast<QWidget*>(parent())->geometry();
+		setGeometry(0, 0, parentRect.width(), parentRect.height());
+		QPainter painter(this);
+		painter.setRenderHint(QPainter::Antialiasing);
+		painter.setBrush(QBrush(QColor(128,16,0, 50)));
+		painter.setPen(Qt::NoPen);
+		painter.drawRect(rect());
+	}
 };
 
 
 StelDialogSeparate::StelDialogSeparate(QString dialogname, QObject* parent)
 	: StelDialog(dialogname, parent),
-	nightCover(Q_NULLPTR)
+	nightCover(nullptr)
 {
 }
 

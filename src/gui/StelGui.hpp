@@ -81,12 +81,12 @@ public:
 	friend class ViewDialog;
 	
 	StelGui();
-	virtual ~StelGui() Q_DECL_OVERRIDE;
+	~StelGui() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	//! Initialize the StelGui object.
-	virtual void init(QGraphicsWidget* topLevelGraphicsWidget) Q_DECL_OVERRIDE;
+	void init(QGraphicsWidget* topLevelGraphicsWidget) override;
 	void update();
 
 	StelStyle getStelStyle() const {return currentStelStyle;}
@@ -114,18 +114,18 @@ public:
 #endif
 
 	//! Used to force a refreshing of the GUI elements such as the button bars.
-	virtual void forceRefreshGui() Q_DECL_OVERRIDE;
+	void forceRefreshGui() override;
 	
-	virtual void setVisible(bool b) Q_DECL_OVERRIDE;
+	void setVisible(bool b) override;
 
-	virtual bool getVisible() const Q_DECL_OVERRIDE;
+	bool getVisible() const override;
 
 	bool getAstroCalcVisible() const;
 
-	virtual bool isCurrentlyUsed() const Q_DECL_OVERRIDE;
+	bool isCurrentlyUsed() const override;
 	
-	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) Q_DECL_OVERRIDE;
-	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const Q_DECL_OVERRIDE;
+	void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) override;
+	const StelObject::InfoStringGroup& getInfoTextFilters() const override;
 
 public slots:
 	//! Set the state of the flag of usage background for GUI buttons
@@ -296,7 +296,7 @@ signals:
 	void flagShowCardinalButtonChanged(bool b);
 	void flagShowCompassButtonChanged(bool b);
 	void infoStringChanged();
-	void guiStyleChanged(const QByteArray &style);
+	void guiStyleChanged(const QString &style);
 
 private slots:
 	void reloadStyle();
@@ -305,7 +305,7 @@ private slots:
 	void scriptStopped();
 #endif
 	//! Load color scheme from the given ini file and section name
-	virtual void setStelStyle(const QString& style) Q_DECL_OVERRIDE Q_DECL_FINAL;
+	void setStelStyle(const QString& style) override Q_DECL_FINAL;
 	void quit();	
 	void updateI18n();
 	void copySelectedObjectInfo(void);
@@ -424,7 +424,7 @@ public:
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {dummyInfoTextFilter=aflags;}
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const {return dummyInfoTextFilter;}
 	virtual QProgressBar* addProgressBar() {return new QProgressBar;}
-	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false) {return Q_NULLPTR;}
+	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false) {return nullptr;}
 	virtual void forceRefreshGui() {;}
 	virtual void setVisible(bool b) {visible=b;}
 	virtual bool getVisible() const {return visible;}

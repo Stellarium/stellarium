@@ -42,7 +42,7 @@
 
 ScriptConsole::ScriptConsole(QObject *parent)
 	: StelDialog("ScriptConsole", parent)
-	, highlighter(Q_NULLPTR)
+	, highlighter(nullptr)
 	, useUserDir(false)
 	, hideWindowAtScriptRun(false)
 	, clearOutput(false)	
@@ -56,7 +56,7 @@ ScriptConsole::ScriptConsole(QObject *parent)
 ScriptConsole::~ScriptConsole()
 {
 	delete ui;
-	delete highlighter; highlighter = Q_NULLPTR;
+	delete highlighter; highlighter = nullptr;
 }
 
 void ScriptConsole::retranslate()
@@ -68,7 +68,7 @@ void ScriptConsole::retranslate()
 	}
 }
 
-void ScriptConsole::styleChanged(const QByteArray &style)
+void ScriptConsole::styleChanged(const QString &style)
 {
 	StelDialog::styleChanged(style);
 	if (highlighter)
@@ -143,9 +143,6 @@ void ScriptConsole::createDialogContent()
 	connect(ui->closeWindowAtScriptRunCheckbox, SIGNAL(toggled(bool)), this, SLOT(setFlagHideWindow(bool)));
 	connect(ui->clearOutputCheckbox, SIGNAL(toggled(bool)), this, SLOT(setFlagClearOutput(bool)));
 
-	// Let's improve visibility of the text
-	QString style = "QLabel { color: rgb(238, 238, 238); }";
-	ui->quickrunLabel->setStyleSheet(style);
 	dirty = false;
 }
 
@@ -198,7 +195,7 @@ void ScriptConsole::loadScript()
 	QString filter = q_("Stellarium Script Files");
 	filter.append(" (*.ssc *.inc);;");
 	filter.append(getFileMask());
-	QString aFile = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Load Script"), openDir, filter);
+	QString aFile = QFileDialog::getOpenFileName(nullptr, q_("Load Script"), openDir, filter);
 	if (aFile.isNull())
 		return;
 	scriptFileName = aFile;
@@ -224,7 +221,7 @@ void ScriptConsole::saveScript()
 	// Let's ask file name, when file is new and overwrite it in other case
 	if (scriptFileName.isEmpty())
 	{
-		QString aFile = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save Script"), saveDir + "/myscript.ssc", getFileMask(), &defaultFilter);
+		QString aFile = QFileDialog::getSaveFileName(nullptr, q_("Save Script"), saveDir + "/myscript.ssc", getFileMask(), &defaultFilter);
 		if (aFile.isNull())
 			return;
 		scriptFileName = aFile;
@@ -366,7 +363,7 @@ void ScriptConsole::appendOutputLine(const QString& s)
 
 void ScriptConsole::includeBrowse()
 {
-	QString aDir = QFileDialog::getExistingDirectory(Q_NULLPTR, q_("Select Script Include Directory"), StelFileMgr::getInstallationDir() + "/scripts");
+	QString aDir = QFileDialog::getExistingDirectory(nullptr, q_("Select Script Include Directory"), StelFileMgr::getInstallationDir() + "/scripts");
 	if (!aDir.isNull())
 		ui->includeEdit->setText(aDir);
 }
