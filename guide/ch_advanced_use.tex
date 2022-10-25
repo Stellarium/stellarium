@@ -596,9 +596,13 @@ real ``dark mode''. To allow this, you can create and load your own alternative 
 The appearance of the windows, buttons etc.\ is governed by a CSS
 (Cascaded Style Sheet) file. It certainly requires some knowledge and
 guessing to edit your own, but there is enough help available
-online. You can find the file \file{normalStyle.css} in the program
-directory's \file{data} subfolder. Copy this into your user directory
-and rename it to e.g. \file{myOwnGreatStyle.css}. Edit numbers, but do
+online. You can find the CSS files in Stellarium's Github site%
+\footnote{\url{https://github.com/Stellarium/stellarium/blob/stellarium-stable/data/gui/normalStyle.css} and
+  \url{https://github.com/Stellarium/stellarium/blob/stellarium-stable/data/gui/normalHtml.css}}.
+
+
+Copy them into your user directory
+and rename to e.g. \file{myOwnGreatStyle.css}. Edit numbers, but do
 not change the item names! Then you can either launch Stellarium with
 the added command line option like
 \begin{commands}
@@ -614,12 +618,12 @@ To go back to Stellarium's default, just use
 \end{script}
 
 If link colors in text panels are now difficult to read, copy
-\file{normalHtml.css} from the directory given above to
+\file{normalHtml.css} from Github to
 \file{MyOwnGreatStyleHtml.css} and modify to your taste.
 
 Note that, as Stellarium evolves, these files also may change from
 version to version. We cannot give any guarantees that one customized
-file will work on later or earlier versions of Stellarium.
+file will work without adaptation on later or earlier versions of Stellarium.
 
 %%% Local Variables: 
 %%% mode: latex
