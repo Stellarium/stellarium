@@ -292,7 +292,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlRegion() const
 	{
 		// TRANSLATIONS: By the fact this is name of pseudo-region on Earth
 		region = N_("World");
-		description = q_("All modern sky cultures based on approved by IAU 88 constellations with standardized boundaries and used onto whole world. The origins all of these constellations are pan-European.");
+		description = q_("All modern sky cultures are based on the IAU-approved 88 constellations with standardized boundaries and are used worldwide. The origins of all these constellations are pan-European.");
 	}
 
 	if (!region.isEmpty()) // Region marker is always 'green'
