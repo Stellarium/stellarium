@@ -100,7 +100,9 @@ StelSkyCultureMgr::~StelSkyCultureMgr()
 //! Init itself from a config file.
 void StelSkyCultureMgr::init()
 {
-	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "western").toString();
+	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "modern").toString();
+	if (defaultSkyCultureID=="western") // switch to new Sky Culture ID
+		defaultSkyCultureID = "modern";
 	setCurrentSkyCultureID(defaultSkyCultureID);
 }
 
@@ -283,11 +285,15 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 QString StelSkyCultureMgr::getCurrentSkyCultureHtmlRegion() const
 {
 	QString html = "", region = currentSkyCulture.region.trimmed();
-	QString description;
-	if (region.toLower()=="western")
-		description = q_("The term 'Western' can be interpreted in several ways. In our context, we speak of 'western science' as the mathematical and astronomical scientific tradition rooted in Mediterranean antiquity and refined since the European age of enlightenment.");
-	else
-		description = q_("The region is understood as the geographical area of origin of a given culture of the sky.");
+	QString description = q_("The region is understood as the geographical area of origin of a given culture of the sky.");
+
+	// special case: modern sky culture
+	if (getCurrentSkyCultureID().contains("modern", Qt::CaseInsensitive))
+	{
+		// TRANSLATIONS: By the fact this is name of pseudo-region on Earth
+		region = N_("World");
+		description = q_("All modern sky cultures based on approved by IAU 88 constellations with standardized boundaries and used onto whole world. The origins all of these constellations are pan-European.");
+	}
 
 	if (!region.isEmpty()) // Region marker is always 'green'
 		html = QString("<dl><dt><span style='color:#33ff33;'>%4</span> <strong>%1 %2</strong></dt><dd><em>%3</em></dd></dl>").arg(q_("Region:"), q_(region), description, QChar(0x25CF));

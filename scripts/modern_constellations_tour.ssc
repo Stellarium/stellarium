@@ -1,17 +1,17 @@
 //
-// Name: Western Constellations Tour
+// Name: Modern Constellations Tour
 // License: Public Domain
 // Author: Alexander Wolf
 // Shortcut: Ctrl+D,1
 // Version: 1.4
-// Description: A tour of the western constellations.
+// Description: A tour of the modern constellations.
 
 include("common_objects.inc");
 include("i18n.inc");
 
 core.clear("starchart");
 var skyculture = core.getSkyCulture();
-core.setSkyCulture("world");
+core.setSkyCulture("modern");
 GridLinesMgr.setFlagEquatorGrid(false);
 NebulaMgr.setFlagHints(false);
 ConstellationMgr.setFlagArt(false);

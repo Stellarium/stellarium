@@ -427,7 +427,10 @@ QString StelMainScriptAPI::getSkyCulture()
 void StelMainScriptAPI::setSkyCulture(const QString& id)
 {
 	GETSTELMODULE(StelObjectMgr)->unSelect(); // mistake-proofing!
-	emit requestSetSkyCulture(id);
+	if (id=="western") // for backward compatibility of scripts
+		emit requestSetSkyCulture("modern");
+	else
+		emit requestSetSkyCulture(id);
 }
 
 QString StelMainScriptAPI::getSkyCultureName()
