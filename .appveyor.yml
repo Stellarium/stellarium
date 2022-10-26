@@ -34,10 +34,8 @@ environment:
     msvcname: Visual Studio 15 2017
 
 before_build:
-  - ps: if($env:qtver.contains('6.')) { $env:QT_VER_MAJOR=6 } else { $env:QT_VER_MAJOR=5 }
   - ps: if($env:qtbin.contains('_64')) { $env:BITS=64 } else { $env:BITS=32 }
   - ps: if($env:qtbin.contains('_64')) { $env:cmake_args:="-A x64" }
-  - set SMS_VER="0.1.0"
   - set PUBLISH_BINARY=false
   - set USE_EXT_LIBGLES=false
   - set SIGNING=false
@@ -50,16 +48,12 @@ before_build:
   - ps: if($env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]')) { $env:PUBLISH_BINARY = 'true' }
   - ps: if($env:APPVEYOR_REPO_BRANCH -eq "stellarium-next" -or $env:APPVEYOR_REPO_COMMIT_MESSAGE.contains('[publish]')) { $env:USE_EXTRA_EXE = 'true' } else { $env:USE_EXTRA_EXE = 'false' }
   - ps: if($env:PUBLISH_BINARY -eq "true" -and $env:qtver.contains('5.')) { $env:USE_EXT_LIBGLES = 'true' }
-  - appveyor DownloadFile https://github.com/10110111/CalcMySky/releases/download/v%SMS_VER%/CalcMySky-v%SMS_VER%-win%BITS%-qt%QT_VER_MAJOR%.zip -FileName c:\CalcMySky.zip
-  - cd c:\
-  - 7z x CalcMySky.zip
-  - bash -c 'mv CalcMySky{-*,}'
   - if [%PUBLISH_BINARY%]==[true] appveyor DownloadFile https://github.com/Stellarium/stellarium-data/releases/download/guide/guide.pdf -FileName c:\stellarium\guide\guide.pdf
   - mkdir stellarium-%qtver%-%qtbin%
   - cd c:\stellarium
   - mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
-  - if [%PUBLISH_BINARY%]==[true] cmake -DCMAKE_PREFIX_PATH=c:/CalcMySky -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" %cmake_args% ..
-  - if [%PUBLISH_BINARY%]==[false] cmake -DCMAKE_PREFIX_PATH=c:/CalcMySky -DENABLE_TESTING=On -DENABLE_NLS=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" %cmake_args% ..
+  - if [%PUBLISH_BINARY%]==[true] cmake -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" %cmake_args% ..
+  - if [%PUBLISH_BINARY%]==[false] cmake -DENABLE_TESTING=On -DENABLE_NLS=Off -DCMAKE_INSTALL_PREFIX=c:\stellarium-%qtver%-%qtbin% -G "%msvcname%" %cmake_args% ..
 
 build:
   project: c:\stellarium\build-%qtver%-%qtbin%\Stellarium.sln
