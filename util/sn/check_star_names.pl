@@ -28,7 +28,7 @@ use utf8;
 use open qw( :encoding(UTF-8) :std );
 
 $IAU = "./IAU-CSN.txt";
-$SND = "../../skycultures/western/star_names.fab";
+$SND = "../../skycultures/modern/star_names.fab";
 $OUT = "./report.txt";
 $FAB = "./star_names.fab";
 
