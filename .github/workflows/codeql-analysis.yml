@@ -60,12 +60,9 @@ jobs:
     # If this step fails, then you should remove it and run the build manually (see below)
     - name: Build
       run: |
-        wget https://github.com/10110111/CalcMySky/releases/download/v0.2.0/CalcMySky-v0.2.0-linux-amd64-qt5.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
-        tar xf "${{ github.workspace }}/../CalcMySky.tar.xz" -C "${{ github.workspace }}/.."
-        mv "${{ github.workspace }}/../CalcMySky"{-*,}
         mkdir -p build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=Release ${{ github.workspace }} -DCMAKE_PREFIX_PATH="${{ github.workspace }}/../CalcMySky"
+        cmake -DCMAKE_BUILD_TYPE=Release ${{ github.workspace }}
         make
 
     # ℹ️ Command-line programs to run using the OS shell.
@@ -81,3 +78,19 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
+      with:
+        upload: false
+        output: sarif-results
+
+    - name: Filter deps
+      uses: advanced-security/filter-sarif@main
+      with:
+        input: sarif-results/${{ matrix.language }}.sarif
+        output: sarif-results/${{ matrix.language }}.sarif
+        patterns: |
+          -**/_deps/**
+
+    - name: Upload SARIF
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: sarif-results/${{ matrix.language }}.sarif
