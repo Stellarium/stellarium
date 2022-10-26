@@ -35,18 +35,50 @@ void SplashScreen::present()
 	Q_ASSERT(!instance);
 	instance=new SplashScreenWidget(makePixmap());
 	instance->show();
+
+#if !defined(Q_OS_ANDROID)
 	instance->ensureFirstPaint();
+#endif
+}
+#include <StelMainView.hpp>
+#include <StelOpenGL.hpp>
+
+namespace
+{
+   class OpenGLContextPresever
+   {
+   public:
+      QOpenGLContext * prevContext;
+      QSurface *       prevSurface;
+
+      OpenGLContextPresever()
+      {
+         prevContext = QOpenGLContext::currentContext();
+         if (prevContext) {
+            prevSurface = prevContext->surface();
+         }
+      }
+
+      ~OpenGLContextPresever()
+      {
+         if (QOpenGLContext::currentContext() != prevContext) {
+            prevContext->makeCurrent(prevSurface);
+         }
+      }
+   };
 }
 
 void SplashScreen::showMessage(QString const& message)
 {
+   OpenGLContextPresever contextPreserver;
 	Q_ASSERT(instance);
 	instance->showMessage(message, Qt::AlignLeft|Qt::AlignBottom, Qt::white);
 }
 
 void SplashScreen::finish(QWidget* mainWindow)
 {
-	Q_ASSERT(instance);
+   OpenGLContextPresever contextPreserver;
+   Q_ASSERT(instance);
 	instance->finish(mainWindow);
 	delete instance;
 	instance=nullptr;
@@ -54,6 +86,7 @@ void SplashScreen::finish(QWidget* mainWindow)
 
 void SplashScreen::clearMessage()
 {
+   OpenGLContextPresever contextPreserver;
 	Q_ASSERT(instance);
 	instance->clearMessage();
 }
@@ -76,6 +109,8 @@ SplashScreen::SplashScreenWidget::SplashScreenWidget(QPixmap const& pixmap)
 
 void SplashScreen::SplashScreenWidget::paintEvent(QPaintEvent* event)
 {
+   OpenGLContextPresever contextPreserver;
+   
 	QSplashScreen::paintEvent(event);
 
 	// Add version text

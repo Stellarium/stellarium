@@ -82,6 +82,19 @@
 	}
 #endif //Q_OS_WIN
 
+#if defined(Q_OS_ANDROID) && QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) && QT_VERSION < QT_VERSION_CHECK(6, 5, 0)
+namespace QtAndroidPrivate
+{
+   enum PermissionResult
+   {
+      Undetermined,
+      Authorized,
+      Denied
+   };
+   Q_CORE_EXPORT QFuture<QtAndroidPrivate::PermissionResult> requestPermission(const QString & permission);
+}
+#endif
+
 //! @class CustomQTranslator
 //! Provides custom i18n support.
 class CustomQTranslator : public QTranslator
@@ -163,7 +176,9 @@ int main(int argc, char **argv)
 	QCoreApplication::setOrganizationName("stellarium");
 
 	QCoreApplication::setAttribute(Qt::AA_CompressHighFrequencyEvents);
-	// Support high DPI pixmaps and fonts
+#ifdef Q_OS_ANDROID
+   QCoreApplication::setAttribute(Qt::AA_Use96Dpi, true);
+#endif
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
@@ -176,7 +191,7 @@ int main(int argc, char **argv)
 	QDir appDir(appInfo.absolutePath());
 	appDir.cdUp();
 	QCoreApplication::addLibraryPath(appDir.absoluteFilePath("PlugIns"));
-	#elif defined(Q_OS_WIN)
+	#elif defined(Q_OS_WIN) || defined(Q_OS_ANDROID)
 	QFileInfo appInfo(QString::fromUtf8(argv[0]));
 	QCoreApplication::addLibraryPath(appInfo.absolutePath());
 	#endif	
@@ -209,8 +224,22 @@ int main(int argc, char **argv)
 	// otherwise configuration/INI file parsing will be erroneous.
 	setlocale(LC_NUMERIC, "C");
 
+#ifdef Q_OS_ANDROID
+    QFont newFont = QApplication::font();
+    newFont.setPixelSize(14);
+    QApplication::setFont(newFont);
+#endif
+
+
 	// Solution for bug: https://bugs.launchpad.net/stellarium/+bug/1498616
 	qputenv("QT_HARFBUZZ", "old");
+    //#if defined(Q_OS_ANDROID)
+    //    //    QCoreApplication::requestPermission();
+    //    //   		QtAndroid::requestPermissionsSync( QStringList("android.permission.WRITE_EXTERNAL_STORAGE") );
+    //    //   		QtAndroid::requestPermissionsSync( QStringList("android.permission.READ_EXTERNAL_STORAGE") );
+    //    QtAndroidPrivate::requestPermission("android.permission.WRITE_EXTERNAL_STORAGE").waitForFinished();
+    //    QtAndroidPrivate::requestPermission("android.permission.READ_EXTERNAL_STORAGE").waitForFinished();
+    //#endif
 
 	// Init the file manager
 	StelFileMgr::init();

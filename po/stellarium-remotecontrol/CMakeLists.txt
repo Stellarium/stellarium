@@ -1,4 +1,4 @@
-FILE(GLOB porcfiles RELATIVE "${CMAKE_SOURCE_DIR}/po/stellarium-remotecontrol/" "*.po")
+FILE(GLOB porcfiles RELATIVE "${PROJECT_SOURCE_DIR}/po/stellarium-remotecontrol/" "*.po")
 LIST(SORT porcfiles)
 STRING(REGEX REPLACE ".po" "" outporcfiles "${porcfiles}")
 

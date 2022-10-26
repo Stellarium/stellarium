@@ -1,7 +1,7 @@
 
 ########### install files ###############
 INSTALL(FILES ssystem_major.ini ssystem_minor.ini ssystem_1000comets.ini 
-	base_locations.bin.gz default_cfg.ini languages.tab iso3166.tab 
+	base_locations.bin.gzip default_cfg.ini languages.tab iso3166.tab 
 	regions-geoscheme.tab constellation_boundaries.dat constellations_spans.dat 
         nomenclature.dat DESTINATION ${SDATALOC}/data)
 # install fonts
@@ -12,7 +12,6 @@ INSTALL(DIRECTORY shaders/ DESTINATION ${SDATALOC}/data/shaders FILES_MATCHING
 	PATTERN "planet*")
 
 ########### splash target ##############
-ADD_CUSTOM_TARGET(splash ALL)
 SET(_splashFile splash.png)
 SET(_splashDstFile ${CMAKE_CURRENT_BINARY_DIR}/${_splashFile})
 
@@ -22,14 +21,21 @@ ELSE()
 	GET_FILENAME_COMPONENT(_splashSrcFile splash.png ABSOLUTE)
 ENDIF()
 
+
+ADD_CUSTOM_TARGET(splash ALL
+	DEPENDS ${_splashDstFile}
+)
+
 ADD_CUSTOM_COMMAND(
-	TARGET splash
+	OUTPUT  ${_splashDstFile}
+	DEPENDS ${_splashSrcFile}
 	COMMAND ${CMAKE_COMMAND} -E copy ${_splashSrcFile} ${_splashDstFile}
 )
+
+
 SET_TARGET_PROPERTIES(splash PROPERTIES FOLDER "data")
 
 ########### icon target ###############
-ADD_CUSTOM_TARGET(icon ALL)
 IF(APPLE)
 	SET(_iconFile stellarium.icns)
 	IF(NOT STELLARIUM_RELEASE_BUILD)
@@ -47,8 +53,14 @@ ELSE()
 ENDIF()
 
 SET(_iconDstFile ${CMAKE_CURRENT_BINARY_DIR}/${_iconFile})
+
+ADD_CUSTOM_TARGET(icon ALL
+	DEPENDS ${_iconDstFile}
+)
+
 ADD_CUSTOM_COMMAND(
-	TARGET icon
+	OUTPUT  ${_iconDstFile}
+	DEPENDS ${_iconSrcFile}
 	COMMAND ${CMAKE_COMMAND} -E copy ${_iconSrcFile} ${_iconDstFile}
 )
 SET_TARGET_PROPERTIES(icon PROPERTIES FOLDER "data")

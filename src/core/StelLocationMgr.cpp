@@ -487,7 +487,7 @@ StelLocationMgr::StelLocationMgr()
 	if (conf->value("devel/convert_locations_list", false).toBool())
 		generateBinaryLocationFile("data/base_locations.txt", false, "data/base_locations.bin");
 
-	locations = loadCitiesBin("data/base_locations.bin.gz");
+	locations = loadCitiesBin("data/base_locations.bin.gzip");
 #if QT_VERSION >= QT_VERSION_CHECK(5,15,0)
 	locations.insert(loadCities("data/user_locations.txt", true));
 #else
@@ -566,7 +566,7 @@ LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
 		return res;
 	}
 
-	if (fileName.endsWith(".gz"))
+	if (fileName.endsWith(".gzip"))
 	{
 		QDataStream in(StelUtils::uncompress(sourcefile.readAll()));
 		in.setVersion(QDataStream::Qt_5_2);

@@ -276,6 +276,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	//// QGraphicsView based GUI
 	///////////////////////////////////////////////////////////////////////////
 
+	setFlagUseKineticScrolling(conf->value("gui/flag_enable_kinetic_scrolling", false).toBool());
+
 	setFlagUseButtonsBackground(conf->value("gui/flag_show_buttons_background", true).toBool());
 	// Add everything
 	QPixmap pxmapDefault, pxmapOn, pxmapOff;
