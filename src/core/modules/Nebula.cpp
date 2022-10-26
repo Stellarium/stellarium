@@ -682,7 +682,7 @@ float Nebula::getVisibilityLevelByMagnitude(void) const
 		else if (nType==NebHII) // NebHII={Sharpless, LBN, RCW} but also M42.
 		{
 			// artificially increase visibility of (most) Sharpless and LBN objects. No magnitude recorded:-(
-			lim=qMin(lim, 12.0f);
+			lim=qMin(lim, 10.0f);
 		}
 	}
 
