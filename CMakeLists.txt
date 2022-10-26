@@ -719,6 +719,10 @@ IF(ENABLE_SHOWMYSKY)
         ADD_LIBRARY(fake-show-my-sky-client SHARED
             ${CMAKE_CURRENT_BINARY_DIR}/fake-show-my-sky-client.cpp)
         ADD_DEPENDENCIES(fake-show-my-sky-client ShowMySky::ShowMySky)
+	IF(WIN32)
+	    # Hook for InnoSetup Installer
+	    GET_TARGET_PROPERTY(ShowMySky_LIBRARY ShowMySky::ShowMySky LOCATION)
+	ENDIF()
     ELSE()
         GET_TARGET_PROPERTY(ShowMySky_INCLUDE_DIRECTORIES
             ShowMySky::ShowMySky INTERFACE_INCLUDE_DIRECTORIES)
