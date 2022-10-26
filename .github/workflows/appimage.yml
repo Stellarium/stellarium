@@ -16,14 +16,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Download ShowMySky library
-      working-directory: ${{ github.workspace }}
-      shell: bash
-      run: |
-        wget https://github.com/10110111/CalcMySky/releases/download/v0.2.0/CalcMySky-v0.2.0-linux-amd64-qt5.tar.xz -O "${{ github.workspace }}/../CalcMySky.tar.xz"
-        tar xf "${{ github.workspace }}/../CalcMySky.tar.xz" -C "${{ github.workspace }}/.."
-        mv "${{ github.workspace }}/../CalcMySky"{-*,}
-
     - name: Build AppImage
       working-directory: ${{ github.workspace }}
       shell: bash
@@ -45,9 +37,7 @@ jobs:
         mkdir -p ${{ github.workspace }}/builds/appimage
         cd ${{ github.workspace }}/builds/appimage
         export APP_VERSION="latest"
-        export PATH="${{ github.workspace }}/../CalcMySky/bin:${{ github.workspace }}/../CalcMySky/lib:${{ github.workspace }}/../CalcMySky/include:${{ github.workspace }}/../CalcMySky/share:$PATH"
         mkdir -p ./AppDir/usr/lib/x86_64-linux-gnu
-        cp $(whereis libShowMySky-Qt5 | sed 's/libShowMySky-Qt5://i') ./AppDir/usr/lib/x86_64-linux-gnu/libShowMySky-Qt5.so
         appimage-builder --recipe ${{ github.workspace }}/util/appimage/stellarium-appimage.yml --skip-test
         cp ${{ github.workspace }}/builds/appimage/*.AppImage ${{ github.workspace }}/artifact
 

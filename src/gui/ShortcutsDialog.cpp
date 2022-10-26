@@ -81,7 +81,7 @@ ShortcutsDialog::~ShortcutsDialog()
 {
 	collisionItems.clear();
 	delete ui;
-	ui = Q_NULLPTR;
+	ui = nullptr;
 }
 
 void ShortcutsDialog::drawCollisions()
@@ -343,11 +343,6 @@ void ShortcutsDialog::createDialogContent()
 
 	updateTreeData();
 
-	// Let's improve visibility of the text
-	QString style = "QLabel { color: rgb(238, 238, 238); }";
-	ui->primaryLabel->setStyleSheet(style);
-	ui->altLabel->setStyleSheet(style);
-
 	// set initial focus to action search
 	ui->lineEditSearch->setFocus();
 }
@@ -417,26 +412,26 @@ QStandardItem* ShortcutsDialog::findItemByData(QVariant value, int role, int col
 				return subitem;
 		}
 	}
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 void ShortcutsDialog::updateShortcutsItem(StelAction *action,
                                           QStandardItem *shortcutItem)
 {
 	QVariant shortcutId(action->getId());
-	if (shortcutItem == Q_NULLPTR)
+	if (shortcutItem == nullptr)
 	{
 		// search for item
 		shortcutItem = findItemByData(shortcutId, Qt::UserRole, 0);
 	}
 	// we didn't find item, create and add new
-	QStandardItem* groupItem = Q_NULLPTR;
-	if (shortcutItem == Q_NULLPTR)
+	QStandardItem* groupItem = nullptr;
+	if (shortcutItem == nullptr)
 	{
 		// firstly search for group
 		QVariant groupId(action->getGroup());
 		groupItem = findItemByData(groupId, Qt::UserRole, 0);
-		if (groupItem == Q_NULLPTR)
+		if (groupItem == nullptr)
 		{
 			// create and add new group to treeWidget
 			groupItem = updateGroup(action->getGroup());
@@ -521,7 +516,7 @@ void ShortcutsDialog::updateTreeData()
 
 bool ShortcutsDialog::itemIsEditable(QStandardItem *item)
 {
-	if (item == Q_NULLPTR) return false;
+	if (item == nullptr) return false;
 	// non-editable items(not group items) have no Qt::ItemIsSelectable flag
 	return (Qt::ItemIsSelectable & item->flags());
 }

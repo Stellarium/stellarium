@@ -92,6 +92,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "--fix-text (or -t)      : May fix text rendering problems\n"
 			  << "--single-buffer         : Use single buffer swap (avoid screen blanking on Intel UHD)\n"
 			  << "--scale-gui  <scale factor>  : Scaling the GUI according to scale factor\n"
+			  << "--gui-css (or -G) <styleName> : Use customized <styleName>.css file for GUI colors\n"
 			  << "--dump-opengl-details (or -d) : dump information about OpenGL support to logfile.\n"
 			  << "                          Use this is you have graphics problems\n"
 			  << "                          and want to send a bug report\n"
@@ -175,7 +176,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 	int fullScreen, altitude;
 	float fov;
 	QString landscapeId, homePlanet, longitude, latitude, skyDate, skyTime;
-	QString projectionType, screenshotDir, multiresImage, startupScript;
+	QString projectionType, screenshotDir, multiresImage, startupScript, customCSS;
 #ifdef ENABLE_SPOUT
 	QString spoutStr, spoutName;
 #endif
@@ -196,6 +197,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 		screenshotDir = argsGetOptionWithArg(argList, "", "--screenshot-dir", "").toString();
 		multiresImage = argsGetOptionWithArg(argList, "", "--multires-image", "").toString();
 		startupScript = argsGetOptionWithArg(argList, "", "--startup-script", "").toString();
+		customCSS = argsGetOptionWithArg(argList, "-G", "--gui-css", "").toString();
 #ifdef ENABLE_SPOUT
 		// For now, we default to spout=sky when no extra option is given. Later, we should also accept "all".
 		// Unfortunately, this still throws an exception when no optarg string is given.
@@ -269,6 +271,11 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 	if (!startupScript.isEmpty())
 	{
 		qApp->setProperty("onetime_startup_script", startupScript);
+	}
+
+	if (!customCSS.isEmpty())
+	{
+		qApp->setProperty("onetime_custom_css", customCSS);
 	}
 
 	if (fov>0.0f) confSettings->setValue("navigation/init_fov", fov);

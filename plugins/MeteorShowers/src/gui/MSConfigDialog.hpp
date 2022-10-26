@@ -22,6 +22,7 @@
 
 #include "MeteorShowersMgr.hpp"
 #include "StelDialog.hpp"
+#include <QTimer>
 
 class Ui_MSConfigDialog;
 
@@ -56,18 +57,6 @@ private slots:
 
 	void updateStateReceiver(MeteorShowersMgr::UpdateState state);
 	void updateCompleteReceiver();
-
-	//! Refresh the color of all markers
-	void refreshMarkersColor();
-
-	//! Sets the color of the active radiant based on confirmed data.
-	void setColorARC();
-
-	//! Sets the color of the active radiant based on generic data.
-	void setColorARG();
-
-	//! Sets the color of the inactive radiant.
-	void setColorIR();
 
 	void restoreDefaults();
 

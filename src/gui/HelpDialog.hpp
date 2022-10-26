@@ -46,17 +46,17 @@ public:
 	};
 
 	HelpDialog(QObject* parent);
-	~HelpDialog() Q_DECL_OVERRIDE;
+	~HelpDialog() override;
 
-	//! Notify that the application style changed
-	virtual void styleChanged() Q_DECL_OVERRIDE;
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	//! Apply application style change
+	void styleChanged(const QString &style) override;
+	void retranslate() override;
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 
 	Ui_helpDialogForm* ui;
 

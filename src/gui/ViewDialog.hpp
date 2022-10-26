@@ -41,17 +41,17 @@ class ViewDialog : public StelDialog
 Q_OBJECT
 public:
 	ViewDialog(QObject* parent);
-	virtual ~ViewDialog() Q_DECL_OVERRIDE;
-	//! Notify that the application style changed
-	virtual void styleChanged() Q_DECL_OVERRIDE;
+	~ViewDialog() override;
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	//! Apply application style change
+	void styleChanged(const QString &style) override;
+	void retranslate() override;
 
 protected:
 	Ui_viewDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 private slots:
 	void populateLists();
 	void populateToolTips();

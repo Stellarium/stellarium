@@ -363,10 +363,10 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/TonemappingDialog.cpp
           gui/SkylightDialog.hpp
           gui/SkylightDialog.cpp
-	  gui/ContributorsList.hpp
+          gui/ContributorsList.hpp
           gui/StelCloseButton.hpp
           gui/StelCloseButton.cpp
-		  gui/ExternalStepSpinBox.hpp
+          gui/ExternalStepSpinBox.hpp
      )
 
      ################# compiles .ui files ############

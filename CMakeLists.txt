@@ -689,33 +689,47 @@ SET(CMAKE_AUTOUIC ON) # ?
 SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 IF(ENABLE_SHOWMYSKY)
-    FIND_PACKAGE(ShowMySky-Qt${QT_VERSION_MAJOR} QUIET)
-    IF(ShowMySky-Qt${QT_VERSION_MAJOR}_FOUND)
-         ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
-         GET_TARGET_PROPERTY(ShowMySky_INCLUDE_DIRECTORIES ShowMySky::ShowMySky INTERFACE_INCLUDE_DIRECTORIES)
-         GET_TARGET_PROPERTY(ShowMySky_LIBRARY ShowMySky::ShowMySky LOCATION)
-         IF(EXISTS ${ShowMySky_LIBRARY})
-             MESSAGE(STATUS "Found ShowMySky library: ${ShowMySky_LIBRARY}")
-         ELSE()
-             MESSAGE(STATUS "Could NOT found ShowMySky library")
-         ENDIF()
-    ELSE(ShowMySky-Qt${QT_VERSION_MAJOR}_FOUND)
-         # Try the legacy naming
-         FIND_PACKAGE(ShowMySky QUIET)
-         IF(ShowMySky_FOUND)
-             ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
-             GET_TARGET_PROPERTY(ShowMySky_INCLUDE_DIRECTORIES ShowMySky::ShowMySky INTERFACE_INCLUDE_DIRECTORIES)
-             GET_TARGET_PROPERTY(ShowMySky_LIBRARY ShowMySky::ShowMySky LOCATION)
-             IF(EXISTS ${ShowMySky_LIBRARY})
-                 MESSAGE(STATUS "Found ShowMySky library: ${ShowMySky_LIBRARY}")
-             ELSE()
-                 MESSAGE(STATUS "Could NOT found ShowMySky library")
-             ENDIF()
-         ELSE(ShowMySky_FOUND)
-             MESSAGE(WARNING "ShowMySky not found although you have selected to use it. \
-                              Make sure to add -DCMAKE_PREFIX_PATH=<CalcMySky_install>/CalcMySky/lib/ShowMySky")
-         ENDIF(ShowMySky_FOUND)
-    ENDIF(ShowMySky-Qt${QT_VERSION_MAJOR}_FOUND)
+    ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
+    CPMFindPackage(NAME ShowMySky-Qt${QT_VERSION_MAJOR}
+        URL https://github.com/10110111/CalcMySky/archive/74d234e614478017fb4519dd0c45573ebf4528cf.tar.gz
+        #URL https://github.com/10110111/CalcMySky/archive/refs/tags/v0.2.0.tar.gz
+        #URL_HASH SHA256=77760b6022992d8d464deb6935a84fdb30294169677ee6c82eb25c8dd52f7ce6
+        EXCLUDE_FROM_ALL yes
+        OPTIONS "QT_VERSION ${QT_VERSION_MAJOR}")
+    IF(ShowMySky-Qt${QT_VERSION_MAJOR}_ADDED)
+        # Don't want to link to ShowMySky::ShowMySky directly, so find out its
+        # include dir and lib location manually.
+        GET_TARGET_PROPERTY(ShowMySky_INCLUDE_DIRECTORIES
+            ShowMySky::ShowMySky INTERFACE_INCLUDE_DIRECTORIES)
+        SET(ShowMySky_LIBRARY $<TARGET_FILE:ShowMySky::ShowMySky>)
+        MESSAGE(STATUS "Will build ShowMySky library")
+        INCLUDE(GNUInstallDirs)
+	IF(APPLE)
+	    INSTALL(TARGETS ShowMySky LIBRARY DESTINATION Frameworks)
+	ELSE()
+	    INSTALL(TARGETS ShowMySky
+		    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+		    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+	ENDIF()
+        # We used EXCLUDE_FROM_ALL in CPMFindPackage to avoid building
+        # irrelevant binaries of CalcMySky. But we still need to build
+        # libShowMySky, so add some target which would depend on it.
+        # stelMain is not defined at this point yet, so can't use it.
+        FILE(WRITE ${CMAKE_CURRENT_BINARY_DIR}/fake-show-my-sky-client.cpp "")
+        ADD_LIBRARY(fake-show-my-sky-client SHARED
+            ${CMAKE_CURRENT_BINARY_DIR}/fake-show-my-sky-client.cpp)
+        ADD_DEPENDENCIES(fake-show-my-sky-client ShowMySky::ShowMySky)
+    ELSE()
+        GET_TARGET_PROPERTY(ShowMySky_INCLUDE_DIRECTORIES
+            ShowMySky::ShowMySky INTERFACE_INCLUDE_DIRECTORIES)
+        GET_TARGET_PROPERTY(ShowMySky_LIBRARY
+            ShowMySky::ShowMySky LOCATION)
+        IF(EXISTS ${ShowMySky_LIBRARY})
+            MESSAGE(STATUS "Found ShowMySky library: ${ShowMySky_LIBRARY}")
+        ELSE()
+            MESSAGE(FATAL_ERROR "Could NOT found ShowMySky library")
+        ENDIF()
+    ENDIF()
 ENDIF(ENABLE_SHOWMYSKY)
 
 IF(ENABLE_SCRIPTING)

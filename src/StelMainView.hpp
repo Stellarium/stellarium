@@ -79,7 +79,7 @@ public:
 	};
 
 	StelMainView(QSettings* settings);
-	virtual ~StelMainView() Q_DECL_OVERRIDE;
+	~StelMainView() override;
 
 	//! Start the main initialization of Stellarium
 	void init();
@@ -221,14 +221,14 @@ public slots:
 protected:
 	//! Hack to determine current monitor pixel ratio
 	//! @todo Find a better way to handle this
-	virtual void moveEvent(QMoveEvent* event) Q_DECL_OVERRIDE;
+	void moveEvent(QMoveEvent* event) override;
 	//! Handle window closed event, calling StelApp::quit()
-	virtual void closeEvent(QCloseEvent* event) Q_DECL_OVERRIDE;
+	void closeEvent(QCloseEvent* event) override;
 	//! Handle window resized events, and change the size of the underlying
 	//! QGraphicsScene to be the same
-	virtual void resizeEvent(QResizeEvent* event) Q_DECL_OVERRIDE;
+	void resizeEvent(QResizeEvent* event) override;
 	//! Wake up mouse cursor (if it was hidden)
-	virtual void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+	void mouseMoveEvent(QMouseEvent *event) override;
 
 	bool eventFilter(QObject *obj, QEvent *event) override;
 signals:

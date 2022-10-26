@@ -38,15 +38,15 @@ class StelDialogSeparate : public StelDialog
 {
 	Q_OBJECT
 public:
-	StelDialogSeparate(QString dialogName="Default", QObject* parent=Q_NULLPTR);
-	virtual ~StelDialogSeparate() Q_DECL_OVERRIDE;
+	StelDialogSeparate(QString dialogName="Default", QObject* parent=nullptr);
+	~StelDialogSeparate() override;
 
 public slots:
 	//! On the first call with "true" populates the window contents.
-	virtual void setVisible(bool) Q_DECL_OVERRIDE;
+	void setVisible(bool) override;
 
 protected slots:
-	virtual void updateNightModeProperty(bool n) Q_DECL_OVERRIDE;
+	void updateNightModeProperty(bool n) override;
 
 protected:
 	NightCover *nightCover;
@@ -57,7 +57,7 @@ class CustomDialog : public QDialog
 {
 	Q_OBJECT
 public:
-	CustomDialog(QWidget *parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags())
+	CustomDialog(QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags())
 	: QDialog(parent, f)
 	{
 		setFocusPolicy(Qt::StrongFocus);
@@ -67,7 +67,7 @@ signals:
 	void sizeChanged(QSizeF);
 
 protected:
-	virtual void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE
+	void resizeEvent(QResizeEvent *event) override
 	{
 		if (event->size() != event->oldSize())
 		{

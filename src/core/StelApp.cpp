@@ -635,7 +635,7 @@ void StelApp::init(QSettings* conf)
 
 	SplashScreen::showMessage(q_("Initializing color scheme..."));
 	// Initialisation of the color scheme
-	emit colorSchemeChanged("color");
+	emit colorSchemeChanged("default");
 	setVisionModeNight(confSettings->value("viewing/flag_night", false).toBool());
 
 	// Enable viewport effect at startup if he set

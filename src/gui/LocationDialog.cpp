@@ -42,9 +42,9 @@
 LocationDialog::LocationDialog(QObject* parent)
 	: StelDialog("Location", parent)
 	, isEditingNew(false)
-	, allModel(Q_NULLPTR)
-	, pickedModel(Q_NULLPTR)
-	, proxyModel(Q_NULLPTR)
+	, allModel(nullptr)
+	, pickedModel(nullptr)
+	, proxyModel(nullptr)
 #ifdef ENABLE_GPS
 	, gpsCount(0)
 #endif
@@ -69,8 +69,9 @@ void LocationDialog::retranslate()
 	}
 }
 
-void LocationDialog::styleChanged()
+void LocationDialog::styleChanged(const QString &style)
 {
+	StelDialog::styleChanged(style);
 	// Make the map red if needed
 	if (dialog)
 		setMapForLocation(StelApp::getInstance().getCore()->getCurrentLocation());

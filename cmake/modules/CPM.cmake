@@ -28,7 +28,7 @@
 
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-set(CURRENT_CPM_VERSION 0.35.6)
+set(CURRENT_CPM_VERSION 0.36.0)
 
 get_filename_component(CPM_CURRENT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}" REALPATH)
 if(CPM_DIRECTORY)
@@ -806,6 +806,10 @@ macro(cpm_export_variables name)
   )
   set(${name}_ADDED
       "${${name}_ADDED}"
+      PARENT_SCOPE
+  )
+  set(CPM_LAST_PACKAGE_NAME
+      "${name}"
       PARENT_SCOPE
   )
 endmacro()

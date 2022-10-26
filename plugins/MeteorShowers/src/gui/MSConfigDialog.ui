@@ -315,21 +315,9 @@
               <number>0</number>
              </property>
              <item row="0" column="0">
-              <widget class="QPushButton" name="setColorARG">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>100</width>
-                 <height>16777215</height>
-                </size>
-               </property>
+              <widget class="QToolButton" name="setColorARG">
                <property name="text">
-                <string notr="true"/>
+                <string/>
                </property>
               </widget>
              </item>
@@ -370,21 +358,9 @@
               <number>0</number>
              </property>
              <item row="0" column="0">
-              <widget class="QPushButton" name="setColorIR">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>100</width>
-                 <height>16777215</height>
-                </size>
-               </property>
+              <widget class="QToolButton" name="setColorIR">
                <property name="text">
-                <string notr="true"/>
+                <string/>
                </property>
               </widget>
              </item>
@@ -425,21 +401,9 @@
               <number>0</number>
              </property>
              <item row="0" column="0">
-              <widget class="QPushButton" name="setColorARC">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>100</width>
-                 <height>16777215</height>
-                </size>
-               </property>
+              <widget class="QToolButton" name="setColorARC">
                <property name="text">
-                <string notr="true"/>
+                <string/>
                </property>
               </widget>
              </item>

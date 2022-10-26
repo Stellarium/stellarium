@@ -789,6 +789,16 @@ QSlider::handle:horizontal:disabled {
         border: 1px solid rgb(64, 64, 64);
 }
 
+/* solution to night mode for DialogSeparate */
+QWidget#NightCover{
+	background: none;
+	color: rgba(80, 8, 0, 0.33);
+	background-color: rgba(80, 8, 0, 0.33); /* The actual filter color! */
+	selection-color: rgba(80, 8, 0, 0.33);
+	selection-background-color: rgba(80, 8, 0, 0.33);
+	alternate-background-color: rgba(80, 8, 0, 0.33);
+}
+
 /**************************************************************************************************************
  * shortcutsDialog
  *************************************************************************************************************/
@@ -870,6 +880,19 @@ QLineEdit[collision="true"] {
 }
 
 /**************************************************************************************************************
+ * AstroCalc
+ *************************************************************************************************************/
+
+#astroCalcDialogForm QCheckBox,
+#astroCalcDialogForm QLabel {
+	color: rgb(238, 238, 238);
+}
+
+QLabel#monthlyElevationTimeInfo {
+        color: rgb(238, 238, 238);
+        font-size: 18pt;
+}
+/**************************************************************************************************************
  * searchDialog
  *************************************************************************************************************/
 
@@ -908,6 +931,33 @@ QFrame#greekLettersFrame {
 
 QFrame#j2000Frame {
 	padding: 10px 20px;
+}
+
+/**************************************************************************************************************
+ * script console
+ *************************************************************************************************************/
+
+#scriptConsoleForm QLabel#quickrunLabel {
+	color: rgb(238, 238, 238);
+}
+
+/**************************************************************************************************************
+ * search dialog
+ *************************************************************************************************************/
+
+#searchDialogForm QLabel#labelGreekLetterTitle, 
+#searchDialogForm QLabel#simbadStatusLabel, 
+#searchDialogForm QLabel#simbadCooStatusLabel {
+	color: rgb(238, 238, 238);
+}
+
+/**************************************************************************************************************
+ * shortcuts dialog
+ *************************************************************************************************************/
+
+#shortcutsDialogForm QLabel#primaryLabel, 
+#shortcutsDialogForm QLabel#altLabel {
+	color: rgb(238, 238, 238);
 }
 
 /**************************************************************************************************************
@@ -968,6 +1018,14 @@ QTextBrowser#aboutBrowser {
 QListWidget#satellitesList,
 QListWidget#sourceList {
 	font-size: 60%;
+}
+
+#satellitesDialog QLabel#labelAutoAdd,
+#satellitesDialog QLabel#labelTle,
+#satellitesDialog QLabel#labelTleEpoch,
+#satellitesDialog QLabel#labelTleEpochData,
+#satellitesDialog QLabel#validAgeLabel { 
+	color: rgb(238, 238, 238); 
 }
 
 /**************************************************************************************************************
