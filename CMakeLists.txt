@@ -704,9 +704,13 @@ IF(ENABLE_SHOWMYSKY)
         SET(ShowMySky_LIBRARY $<TARGET_FILE:ShowMySky::ShowMySky>)
         MESSAGE(STATUS "Will build ShowMySky library")
         INCLUDE(GNUInstallDirs)
-        INSTALL(TARGETS ShowMySky
-            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+	IF(APPLE)
+	    INSTALL(TARGETS ShowMySky LIBRARY DESTINATION Frameworks)
+	ELSE()
+	    INSTALL(TARGETS ShowMySky
+		    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+		    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+	ENDIF()
         # We used EXCLUDE_FROM_ALL in CPMFindPackage to avoid building
         # irrelevant binaries of CalcMySky. But we still need to build
         # libShowMySky, so add some target which would depend on it.
