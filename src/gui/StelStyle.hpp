@@ -24,18 +24,15 @@
 #include <QByteArray>
 
 //! @class StelStyle 
-//! Holds the information related to a color style for GUI and modules of Stellarium
+//! Holds the contents of CSS style files for GUI and HTML of Stellarium
 class StelStyle
 {
 public:
 	//! The content of the associated Qt Style Sheet for styling widgets
-	QByteArray qtStyleSheet;
+	QString qtStyleSheet;
 	
-	//! The content of the associated Html Style Sheet for styling rich text
-	QByteArray htmlStyleSheet;
-	
-	//! The name of the config.ini section where the modules store style data
-	QString confSectionName;
+	//! The content of the associated HTML Style Sheet for styling rich text
+	QString htmlStyleSheet;
 };
 
 #endif // STELSTYLE_HPP

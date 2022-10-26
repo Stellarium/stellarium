@@ -147,13 +147,12 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 
 void StelScriptSyntaxHighlighter::setFormats(void)
 {
-	QColor col;
 	QString defaultColor = "0.8,0.8,0.8";
 	QSettings* conf = StelApp::getInstance().getSettings();
 	const QString section = StelApp::getInstance().getVisionModeNight() ? "night_color" : "color";
 
 	// comments
-	col = Vec3f(conf->value(section + "/script_console_comment_color", defaultColor).toString()).toQColor();
+	QColor col = Vec3f(conf->value(section + "/script_console_comment_color", defaultColor).toString()).toQColor();
 	commentFormat.setForeground(col);
 
 	// ECMAscript reserved words

@@ -261,14 +261,14 @@ public:
 	};
 
 	AstroCalcDialog(QObject* parent);
-	virtual ~AstroCalcDialog() Q_DECL_OVERRIDE;
+	~AstroCalcDialog() override;
 
 	static QVector<Ephemeris> EphemerisList;
 	static int DisplayedPositionIndex;
 
 
 public slots:
-	void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 		
 signals:
 	//! This signal is emitted when the graph day changed.
@@ -276,7 +276,7 @@ signals:
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
-	virtual void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
         Ui_astroCalcDialogForm *ui;
 
 private slots:
@@ -744,7 +744,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
+	bool operator < (const QTreeWidgetItem &other) const override
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -799,7 +799,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
+	bool operator < (const QTreeWidgetItem &other) const override
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -828,7 +828,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
+	bool operator < (const QTreeWidgetItem &other) const override
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -861,7 +861,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
+	bool operator < (const QTreeWidgetItem &other) const override
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -894,7 +894,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
+	bool operator < (const QTreeWidgetItem &other) const override
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -947,7 +947,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
+	bool operator < (const QTreeWidgetItem &other) const override
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -975,7 +975,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
+	bool operator < (const QTreeWidgetItem &other) const override
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -1008,7 +1008,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
+	bool operator < (const QTreeWidgetItem &other) const override
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -1066,7 +1066,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
+	bool operator < (const QTreeWidgetItem &other) const override
 	{
 		int column = treeWidget()->sortColumn();
 
@@ -1099,7 +1099,7 @@ public:
 	}
 
 private:
-	bool operator < (const QTreeWidgetItem &other) const Q_DECL_OVERRIDE
+	bool operator < (const QTreeWidgetItem &other) const override
 	{
 		int column = treeWidget()->sortColumn();
 

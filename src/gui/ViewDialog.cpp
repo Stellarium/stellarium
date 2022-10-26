@@ -56,13 +56,13 @@
 #include <QJsonArray>
 
 ViewDialog::ViewDialog(QObject* parent) : StelDialog("View", parent)
-	, addRemoveLandscapesDialog(Q_NULLPTR)
-	, atmosphereDialog(Q_NULLPTR)
-	, skylightDialog(Q_NULLPTR)
-	, tonemappingDialog(Q_NULLPTR)
-	, greatRedSpotDialog(Q_NULLPTR)
-	, configureDSOColorsDialog(Q_NULLPTR)
-	, configureOrbitColorsDialog(Q_NULLPTR)
+	, addRemoveLandscapesDialog(nullptr)
+	, atmosphereDialog(nullptr)
+	, skylightDialog(nullptr)
+	, tonemappingDialog(nullptr)
+	, greatRedSpotDialog(nullptr)
+	, configureDSOColorsDialog(nullptr)
+	, configureOrbitColorsDialog(nullptr)
 {
 	ui = new Ui_viewDialogForm;	
 }
@@ -70,21 +70,21 @@ ViewDialog::ViewDialog(QObject* parent) : StelDialog("View", parent)
 ViewDialog::~ViewDialog()
 {
 	delete ui;
-	ui=Q_NULLPTR;
+	ui=nullptr;
 	delete addRemoveLandscapesDialog;
-	addRemoveLandscapesDialog = Q_NULLPTR;
+	addRemoveLandscapesDialog = nullptr;
 	delete atmosphereDialog;
-	atmosphereDialog = Q_NULLPTR;
+	atmosphereDialog = nullptr;
 	delete skylightDialog;
-	skylightDialog = Q_NULLPTR;
+	skylightDialog = nullptr;
 	delete tonemappingDialog;
-	tonemappingDialog = Q_NULLPTR;
+	tonemappingDialog = nullptr;
 	delete greatRedSpotDialog;
-	greatRedSpotDialog = Q_NULLPTR;
+	greatRedSpotDialog = nullptr;
 	delete configureDSOColorsDialog;
-	configureDSOColorsDialog = Q_NULLPTR;
+	configureDSOColorsDialog = nullptr;
 	delete configureOrbitColorsDialog;
-	configureOrbitColorsDialog = Q_NULLPTR;
+	configureOrbitColorsDialog = nullptr;
 }
 
 void ViewDialog::retranslate()
@@ -106,8 +106,9 @@ void ViewDialog::retranslate()
 	}
 }
 
-void ViewDialog::styleChanged()
+void ViewDialog::styleChanged(const QString &style)
 {
+	StelDialog::styleChanged(style);
 	if (dialog)
 	{
 		populateLists();
@@ -536,6 +537,13 @@ void ViewDialog::createDialogContent()
 	updateHips();
 
 	updateTabBarListWidgetWidth();
+
+	connect((dynamic_cast<StelGui*>(StelApp::getInstance().getGui())), &StelGui::htmlStyleChanged, this, [=](const QString &style){
+		ui->surveysTextBrowser->document()->setDefaultStyleSheet(style);
+		ui->projectionTextBrowser->document()->setDefaultStyleSheet(style);
+		ui->landscapeTextBrowser->document()->setDefaultStyleSheet(style);
+		ui->skyCultureTextBrowser->document()->setDefaultStyleSheet(style);
+	});
 }
 
 void ViewDialog::populateOrbitsControls(bool flag)
@@ -589,7 +597,7 @@ void ViewDialog::updateHips()
 
 	QJsonObject currentInfo;
 	QString currentSurvey = l->currentItem() ? l->currentItem()->data(Qt::UserRole).toString() : "";
-	QListWidgetItem* currentItem = Q_NULLPTR;
+	QListWidgetItem* currentItem = nullptr;
 	HipsSurveyP currentHips;
 
 	l->blockSignals(true);
@@ -614,7 +622,7 @@ void ViewDialog::updateHips()
 			currentItem = item;
 			currentHips = hips;
 		}
-		disconnect(hips.data(), Q_NULLPTR, this, Q_NULLPTR);
+		disconnect(hips.data(), nullptr, this, nullptr);
 		connect(hips.data(), SIGNAL(statusChanged()), this, SLOT(updateHips()));
 	}
 	l->sortItems(Qt::AscendingOrder);
@@ -1042,7 +1050,7 @@ void ViewDialog::landscapeChanged(QString id, QString name)
 
 void ViewDialog::showAddRemoveLandscapesDialog()
 {
-	if(addRemoveLandscapesDialog == Q_NULLPTR)
+	if(addRemoveLandscapesDialog == nullptr)
 		addRemoveLandscapesDialog = new AddRemoveLandscapesDialog();
 
 	addRemoveLandscapesDialog->setVisible(true);
@@ -1050,7 +1058,7 @@ void ViewDialog::showAddRemoveLandscapesDialog()
 
 void ViewDialog::showAtmosphereDialog()
 {
-	if(atmosphereDialog == Q_NULLPTR)
+	if(atmosphereDialog == nullptr)
 		atmosphereDialog = new AtmosphereDialog();
 
 	atmosphereDialog->setVisible(true);
@@ -1058,7 +1066,7 @@ void ViewDialog::showAtmosphereDialog()
 
 void ViewDialog::showSkylightDialog()
 {
-    if(skylightDialog == Q_NULLPTR)
+    if(skylightDialog == nullptr)
 	skylightDialog = new SkylightDialog();
 
     skylightDialog->setVisible(true);
@@ -1066,7 +1074,7 @@ void ViewDialog::showSkylightDialog()
 
 void ViewDialog::showTonemappingDialog()
 {
-    if(tonemappingDialog == Q_NULLPTR)
+    if(tonemappingDialog == nullptr)
 	tonemappingDialog = new TonemappingDialog();
 
     tonemappingDialog->setVisible(true);
@@ -1074,7 +1082,7 @@ void ViewDialog::showTonemappingDialog()
 
 void ViewDialog::showGreatRedSpotDialog()
 {
-	if(greatRedSpotDialog == Q_NULLPTR)
+	if(greatRedSpotDialog == nullptr)
 		greatRedSpotDialog = new GreatRedSpotDialog();
 
 	greatRedSpotDialog->setVisible(true);
@@ -1082,7 +1090,7 @@ void ViewDialog::showGreatRedSpotDialog()
 
 void ViewDialog::showConfigureDSOColorsDialog()
 {
-	if(configureDSOColorsDialog == Q_NULLPTR)
+	if(configureDSOColorsDialog == nullptr)
 		configureDSOColorsDialog = new ConfigureDSOColorsDialog();
 
 	configureDSOColorsDialog->setVisible(true);
@@ -1090,7 +1098,7 @@ void ViewDialog::showConfigureDSOColorsDialog()
 
 void ViewDialog::showConfigureOrbitColorsDialog()
 {
-	if(configureOrbitColorsDialog == Q_NULLPTR)
+	if(configureOrbitColorsDialog == nullptr)
 		configureOrbitColorsDialog = new ConfigureOrbitColorsDialog();
 
 	configureOrbitColorsDialog->setVisible(true);

@@ -32,7 +32,6 @@
 #include <QMessageBox>
 
 #include "StelApp.hpp"
-#include "StelCore.hpp"
 #include "ui_satellitesDialog.h"
 #include "SatellitesDialog.hpp"
 #include "SatellitesImportDialog.hpp"
@@ -146,11 +145,11 @@ void SatellitesDialog::createDialogContent()
 
 	// Set size of buttons
 	QSize bs = QSize(26, 26);
-	QList<QPushButton*> buttons;
-	buttons << ui->customFilterButton << ui->addSatellitesButton << ui->removeSatellitesButton << ui->selectAllButton
-		<< ui->satMarkerColorPickerButton << ui->satOrbitColorPickerButton << ui->satInfoColorPickerButton
-		<< ui->addSourceButton << ui->deleteSourceButton << ui->editSourceButton << ui->saveSourceButton
-		<< ui->resetSourcesButton << ui->commSatelliteButton;
+	const QList<QPushButton*> buttons = {
+		ui->customFilterButton, ui->addSatellitesButton, ui->removeSatellitesButton, ui->selectAllButton,
+		ui->satMarkerColorPickerButton, ui->satOrbitColorPickerButton, ui->satInfoColorPickerButton,
+		ui->addSourceButton, ui->deleteSourceButton, ui->editSourceButton, ui->saveSourceButton,
+		ui->resetSourcesButton, ui->commSatelliteButton};
 	for (auto btn: qAsConst(buttons)) { btn->setFixedSize(bs); }
 
 	// Settings tab / updates group
@@ -315,12 +314,6 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->iridiumFlaresTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentIridiumFlare(QModelIndex)));
 #endif
 
-	QString style = "QLabel { color: rgb(238, 238, 238); }";
-	ui->labelAutoAdd->setStyleSheet(style);
-	ui->labelTle->setStyleSheet(style);
-	ui->labelTleEpoch->setStyleSheet(style);
-	ui->labelTleEpochData->setStyleSheet(style);
-	ui->validAgeLabel->setStyleSheet(style);
 }
 
 void SatellitesDialog::enableMinMaxAltitude(bool state)

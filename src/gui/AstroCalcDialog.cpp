@@ -86,17 +86,17 @@ const QString AstroCalcDialog::delimiter(", ");
 
 AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	: StelDialog("AstroCalc", parent)
-	, extraEphemerisDialog(Q_NULLPTR)
-	, customStepsDialog(Q_NULLPTR)
-	, altVsTimeChart(Q_NULLPTR)
-	, azVsTimeChart(Q_NULLPTR)
-	, monthlyElevationChart(Q_NULLPTR)
-	, curvesChart(Q_NULLPTR)
-	, lunarElongationChart(Q_NULLPTR)
-	, pcChart(Q_NULLPTR)
-	//, wutModel(Q_NULLPTR)
-	//, proxyModel(Q_NULLPTR)
-	, currentTimeLine(Q_NULLPTR)
+	, extraEphemerisDialog(nullptr)
+	, customStepsDialog(nullptr)
+	, altVsTimeChart(nullptr)
+	, azVsTimeChart(nullptr)
+	, monthlyElevationChart(nullptr)
+	, curvesChart(nullptr)
+	, lunarElongationChart(nullptr)
+	, pcChart(nullptr)
+	//, wutModel(nullptr)
+	//, proxyModel(nullptr)
+	, currentTimeLine(nullptr)
 	, plotAltVsTime(false)	
 	, plotAltVsTimeSun(false)
 	, plotAltVsTimeMoon(false)
@@ -142,7 +142,7 @@ AstroCalcDialog::~AstroCalcDialog()
 	{
 		currentTimeLine->stop();
 		delete currentTimeLine;
-		currentTimeLine = Q_NULLPTR;
+		currentTimeLine = nullptr;
 	}
 	delete ui;
 	delete extraEphemerisDialog;
@@ -271,7 +271,6 @@ void AstroCalcDialog::createDialogContent()
 	ui->rtsFromDateEdit->setDateTime(currentDT);
 	ui->rtsToDateEdit->setDateTime(currentDT.addMonths(1));
 	ui->eclipseFromYearSpinBox->setValue(currentDT.date().year());
-	ui->monthlyElevationTimeInfo->setStyleSheet("font-size: 18pt; color: rgb(238, 238, 238);");
 
 	// TODO: Replace QDateTimeEdit by a new StelDateTimeEdit widget to apply full range of dates
 	// NOTE: https://github.com/Stellarium/stellarium/issues/711
@@ -581,30 +580,6 @@ void AstroCalcDialog::createDialogContent()
 	ui->lunareclipsesCalculateButton->setShortcut(QKeySequence("Shift+F10"));
 	ui->transitsCalculateButton->setShortcut(QKeySequence("Shift+F10"));
 
-	// Let's improve visibility of the text
-	QString style = "QLabel { color: rgb(238, 238, 238); }";
-	ui->celestialPositionsTimeLabel->setStyleSheet(style);
-	ui->hecPositionsTimeLabel->setStyleSheet(style);
-	ui->graphsFirstLabel->setStyleSheet(style);	
-	ui->graphsSecondLabel->setStyleSheet(style);	
-	ui->graphsDurationLabel->setStyleSheet(style);
-	ui->graphsMonthsLabel->setStyleSheet(style);
-	ui->graphsStepLabel->setStyleSheet(style);
-	ui->lunarElongationNote->setStyleSheet(style);
-	ui->lunarElongationLimitLabel->setStyleSheet(style);
-	ui->graphsNoteLabel->setStyleSheet(style);
-	ui->rtsNotificationLabel->setStyleSheet(style);
-	ui->gammaNoteLabel->setStyleSheet(style);
-	ui->gammaNoteSolarEclipseLabel->setStyleSheet(style);
-	ui->UncertaintiesNoteLabel->setStyleSheet(style);
-	ui->transitNoteLabel->setStyleSheet(style);
-	style = "QCheckBox { color: rgb(238, 238, 238); }";
-	ui->sunAltitudeCheckBox->setStyleSheet(style);
-	ui->moonAltitudeCheckBox->setStyleSheet(style);
-	ui->positiveAltitudeOnlyCheckBox->setStyleSheet(style);
-	ui->monthlyElevationPositiveCheckBox->setStyleSheet(style);
-	ui->hecSelectedMinorPlanetsCheckBox->setStyleSheet(style);
-
 	// chartview exports:
 	connect(ui->hecPositionsExportButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->hecPositionsChartView); });
 	connect(ui->exportAltVsTimePushButton, &QPushButton::clicked, this, [=]{ saveGraph(ui->altVsTimeChartView); });
@@ -636,7 +611,7 @@ void AstroCalcDialog::saveGraph(QChartView *graph)
 		dir = StelFileMgr::getUserDir();
 	QString filter = q_("Images");
 	filter.append(" (*.png)");
-	QString filename = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save graph"), dir + "/stellarium-graph.png", filter);
+	QString filename = QFileDialog::getSaveFileName(nullptr, q_("Save graph"), dir + "/stellarium-graph.png", filter);
 	if (!filename.isEmpty())
 	{
 		QPixmap p = graph->grab();
@@ -652,7 +627,7 @@ void AstroCalcDialog::populateCelestialNames(QString)
 
 void AstroCalcDialog::showExtraEphemerisDialog()
 {
-	if (extraEphemerisDialog == Q_NULLPTR)
+	if (extraEphemerisDialog == nullptr)
 		extraEphemerisDialog = new AstroCalcExtraEphemerisDialog();
 
 	extraEphemerisDialog->setVisible(true);
@@ -660,7 +635,7 @@ void AstroCalcDialog::showExtraEphemerisDialog()
 
 void AstroCalcDialog::showCustomStepsDialog()
 {
-	if (customStepsDialog == Q_NULLPTR)
+	if (customStepsDialog == nullptr)
 		customStepsDialog = new AstroCalcCustomStepsDialog();
 
 	customStepsDialog->setVisible(true);
@@ -4172,13 +4147,13 @@ void AstroCalcDialog::saveSolarEclipseKML()
 		QString filter = "KML";
 		filter.append(" (*.kml)");
 		QString defaultFilter("(*.kml)");
-		QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+		QString filePath = QFileDialog::getSaveFileName(nullptr,
 								q_("Save KML as..."),
 								QDir::homePath() + "/solareclipse"+eclipseDateStr+".kml",
 								filter,
 								&defaultFilter);
 
-		if (filePath!=Q_NULLPTR)
+		if (filePath!=nullptr)
 			QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 		bool partialEclipse = false;
 		bool nonCentralEclipse = false;
@@ -7476,7 +7451,7 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP& object1, Stel
 
 bool AstroCalcDialog::findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign, int mode)
 {
-	if (out == Q_NULLPTR)
+	if (out == nullptr)
 		return false;
 
 	double prevDist = findDistance(JD, object1, object2, mode);
@@ -7585,7 +7560,7 @@ QMap<double, double> AstroCalcDialog::findGreatestElongationApproach(PlanetP& ob
 
 bool AstroCalcDialog::findPreciseGreatestElongation(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step)
 {
-	if (out == Q_NULLPTR)
+	if (out == nullptr)
 		return false;
 
 	double prevDist = findDistance(JD, object1, object2, PhenomenaTypeIndex::Conjunction);
@@ -7676,7 +7651,7 @@ QMap<double, double> AstroCalcDialog::findQuadratureApproach(PlanetP& object1, S
 
 bool AstroCalcDialog::findPreciseQuadrature(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double stopJD, double step)
 {
-	if (out == Q_NULLPTR)
+	if (out == nullptr)
 		return false;
 
 	step = -step / 288.;
@@ -7799,7 +7774,7 @@ bool AstroCalcDialog::findPreciseStationaryPoint(QPair<double, double> *out, Pla
 {
 	double RA, prevRA;
 
-	if (out == Q_NULLPTR)
+	if (out == nullptr)
 		return false;
 
 	prevRA = findRightAscension(JD, object);
@@ -7966,7 +7941,7 @@ bool AstroCalcDialog::findPreciseOrbitalPoint(QPair<double, double>* out, Planet
 {
 	double dist, prevDist, timeDist = qAbs(stopJD-JD);
 
-	if (out == Q_NULLPTR)
+	if (out == nullptr)
 		return false;
 
 	prevDist = findHeliocentricDistance(JD, object1);
@@ -9583,7 +9558,7 @@ QPair<QString, QString> AstroCalcDialog::askTableFilePath(const QString &caption
 
 	QString dir  = QString("%1/%2.%3").arg(QDir::homePath(), fileName, defaultExtension);
 	QString defaultFilter = QString("(*.%1)").arg(defaultExtension);
-	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR, caption, dir, filter, &defaultFilter);
+	QString filePath = QFileDialog::getSaveFileName(nullptr, caption, dir, filter, &defaultFilter);
 
 	return QPair<QString, QString>(filePath, defaultFilter);
 }
