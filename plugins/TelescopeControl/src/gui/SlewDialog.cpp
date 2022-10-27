@@ -396,11 +396,11 @@ void SlewDialog::savePointsToFile()
 	{
 		QVariant var = ui->comboBoxStoredPoints->itemData(i);
 		storedPoint sp = var.value<storedPoint>();
-		QVariantMap point;
-		point.insert("number",        sp.number);
-		point.insert("name",          sp.name);
-		point.insert("radiansRA",     sp.radiansRA);
-		point.insert("radiansDec",    sp.radiansDec);
+		QVariantMap point = {
+			{"number",        sp.number},
+			{"name",          sp.name},
+			{"radiansRA",     sp.radiansRA},
+			{"radiansDec",    sp.radiansDec}};
 
 		storedPointsDescriptions.insert(QString::number(sp.number),point);
 	}

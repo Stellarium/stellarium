@@ -26,8 +26,7 @@ TelescopeClientASCOMWidget::TelescopeClientASCOMWidget(QWidget* parent)
 {
 	ui->setupUi(this);
 	ui->eqCoordTypeSourceASCOMRadio->setChecked(true);
-	QObject::connect(
-	  ui->chooseButton, &QPushButton::clicked, this, &TelescopeClientASCOMWidget::onChooseButtonClicked);
+	connect(ui->chooseButton, &QPushButton::clicked, this, &TelescopeClientASCOMWidget::onChooseButtonClicked);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 }
 
@@ -73,14 +72,6 @@ bool TelescopeClientASCOMWidget::useDeviceEqCoordType() const
 
 void TelescopeClientASCOMWidget::setUseDeviceEqCoordType(const bool& useDevice)
 {
-	if (useDevice)
-	{
-		ui->eqCoordTypeSourceASCOMRadio->setChecked(true);
-		ui->eqCoordTypeSourceStellariumRadio->setChecked(false);
-	}
-	else
-	{
-		ui->eqCoordTypeSourceASCOMRadio->setChecked(false);
-		ui->eqCoordTypeSourceStellariumRadio->setChecked(true);
-	}
+	ui->eqCoordTypeSourceASCOMRadio->setChecked(useDevice);
+	ui->eqCoordTypeSourceStellariumRadio->setChecked(!useDevice);
 }
