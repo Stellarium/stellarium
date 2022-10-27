@@ -30,7 +30,7 @@ use open qw( :encoding(UTF-8) :std );
 $IAU = "./IAU-CSN.txt";
 $OUT = "./star_names.fab";
 
-$sources = "6,12";
+$sources = "2";
 $starnames = "";
 
 %wgsn = ();
