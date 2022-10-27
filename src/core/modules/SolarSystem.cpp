@@ -984,6 +984,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 			const bool hidden = pd.value(secname+"/hidden", false).toBool();
 			const QString normalMapName = ( hidden ? "" : englishName.toLower().append("_normals.png")); // no normal maps for invisible objects!
+			const QString horizonMapName = ( hidden ? "" : englishName.toLower().append("_normals.png")); // no normal maps for invisible objects!
 
 			newP = PlanetP(new MinorPlanet(englishName,
 						    pd.value(secname+"/radius", 1.0).toDouble()/AU,
@@ -993,6 +994,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						    pd.value(secname+"/roughness",0.9f).toFloat(),
 						    pd.value(secname+"/tex_map", "nomap.png").toString(),
 						    pd.value(secname+"/normals_map", normalMapName).toString(),
+						    pd.value(secname+"/horizon_map", horizonMapName).toString(),
 						    pd.value(secname+"/model").toString(),
 						    posfunc,
 						    static_cast<KeplerOrbit*>(orbitPtr), // the KeplerOrbit object created previously
@@ -1072,6 +1074,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       pd.value(secname+"/roughness",0.9f).toFloat(),
 					       pd.value(secname+"/tex_map", "nomap.png").toString(),
 					       pd.value(secname+"/normals_map", englishName.toLower().append("_normals.png")).toString(),
+					       pd.value(secname+"/horizon_map", englishName.toLower().append("_horizon.png")).toString(),
 					       pd.value(secname+"/model").toString(),
 					       posfunc,
 					       static_cast<KeplerOrbit*>(orbitPtr), // This remains Q_NULLPTR for the major planets, or has a KeplerOrbit for planet moons.

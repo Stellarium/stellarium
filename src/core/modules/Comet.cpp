@@ -75,6 +75,7 @@ Comet::Comet(const QString& englishName,
 		  roughness,
 		  atexMapName,
 		  "", // no normalmap.
+		  "", // no horizon map
 		  aobjModelName,
 		  coordFunc,
 		  orbitPtr,

@@ -208,6 +208,7 @@ Planet::Planet(const QString& englishName,
 	       float roughness,
 	       const QString& atexMapName,
 	       const QString& anormalMapName,
+		   const QString& ahorizonMapName,
 	       const QString& aobjModelName,
 	       posFuncType coordFunc,
 	       Orbit* anOrbitPtr,
@@ -226,6 +227,7 @@ Planet::Planet(const QString& englishName,
 	  nativeName(""),
 	  texMapName(atexMapName),
 	  normalMapName(anormalMapName),
+	  horizonMapName(ahorizonMapName),
 	  siderealPeriod(0.),
 	  equatorialRadius(radius),
 	  oneMinusOblateness(1.0-oblateness),
@@ -297,6 +299,16 @@ Planet::Planet(const QString& englishName,
 			normalMapFileOrig = normalMapFile;
 		}
 	}
+	if(!horizonMapName.isEmpty())
+	{
+		// TODO: use StelFileMgr::findFileInAllPaths() after introducing an Add-On Manager
+		QString horizonMapFile = StelFileMgr::findFile("textures/"+horizonMapName, StelFileMgr::File);
+		if (!horizonMapFile.isEmpty())
+		{
+			horizonMap = StelApp::getInstance().getTextureManager().createTextureThread(horizonMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+			horizonMapFileOrig = horizonMapFile;
+		}
+	}
 	//the OBJ is lazily loaded when first required
 	if(!aobjModelName.isEmpty())
 	{
@@ -354,6 +366,9 @@ void Planet::resetTextures()
 	// restore normal map
 	if (!normalMapFileOrig.isEmpty())
 		normalMap = StelApp::getInstance().getTextureManager().createTextureThread(normalMapFileOrig, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+
+	if (!horizonMapFileOrig.isEmpty())
+		horizonMap = StelApp::getInstance().getTextureManager().createTextureThread(horizonMapFileOrig, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 }
 
 void Planet::replaceTexture(const QString &texName)
@@ -2968,6 +2983,7 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	GL(earthShadow = p->uniformLocation("earthShadow"));
 	GL(eclipsePush = p->uniformLocation("eclipsePush"));
 	GL(normalMap = p->uniformLocation("normalMap"));
+	GL(horizonMap = p->uniformLocation("horizonMap"));
 
 	// Rings-specific variables
 	GL(isRing = p->uniformLocation("isRing"));
@@ -3979,6 +3995,8 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 
 			GL(moonShaderProgram->setUniformValue(moonShaderVars.eclipsePush, push)); // constant for now...
 		}
+		GL(horizonMap->bind(4));
+		GL(moonShaderProgram->setUniformValue(moonShaderVars.horizonMap, 4));
 	}
 
 	if (englishName=="Mars")

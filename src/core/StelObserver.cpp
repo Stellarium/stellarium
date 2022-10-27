@@ -52,7 +52,7 @@ private:
 };
 
 ArtificialPlanet::ArtificialPlanet(const PlanetP& orig) :
-		Planet("art", 0, 0, Vec3f(0,0,0), 0, 0, "", "", "", Q_NULLPTR, Q_NULLPTR, Q_NULLPTR, false, true, false, false, "artificial"),
+		Planet("art", 0, 0, Vec3f(0,0,0), 0, 0, "", "", "", "", Q_NULLPTR, Q_NULLPTR, Q_NULLPTR, false, true, false, false, "artificial"),
 		dest(Q_NULLPTR), orig_name(orig->getEnglishName()), orig_name_i18n(orig->getNameI18n())
 {
 	// set parent = sun:
