@@ -46,6 +46,7 @@ public:
 		    float roughness,
 		    const QString& texMapName,
 		    const QString& normalMapName,
+			const QString& horizonMapName,
 		    const QString& objModelName,
 		    posFuncType _coordFunc,
 		    KeplerOrbit *orbitPtr,
