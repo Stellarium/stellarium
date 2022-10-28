@@ -24,7 +24,10 @@
 #include "StelOpenGL.hpp"
 #include "StelPainter.hpp"
 
+namespace ForTextureMgr
+{
 GLuint makeDitherPatternTexture(QOpenGLFunctions& gl);
+}
 
 Vec3f calcRGBMaxValue(StelPainter::DitheringMode mode);
 

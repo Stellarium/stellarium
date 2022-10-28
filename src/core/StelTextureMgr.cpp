@@ -18,6 +18,7 @@
  */
 
 #include "StelApp.hpp"
+#include "Dithering.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
@@ -216,6 +217,32 @@ StelTextureSP StelTextureMgr::wrapperForGLTexture(GLuint texId)
 	{
 		//error while wrapping
 		qWarning()<<newTex->getErrorMessage();
+		return StelTextureSP();
+	}
+}
+
+StelTextureSP StelTextureMgr::getDitheringTexture(const int samplerToBindTo)
+{
+	if(ditheringTexture)
+	{
+		ditheringTexture->bind(samplerToBindTo);
+		return ditheringTexture;
+	}
+
+	QOpenGLFunctions& gl = *QOpenGLContext::currentContext()->functions();
+	gl.glActiveTexture(GL_TEXTURE0 + samplerToBindTo);
+
+	const auto texId = ForTextureMgr::makeDitherPatternTexture(gl);
+
+	ditheringTexture.reset(new StelTexture(this));
+	ditheringTexture->wrapGLTexture(texId);
+	if(!ditheringTexture->errorOccured)
+	{
+		return ditheringTexture;
+	}
+	else
+	{
+		qWarning() << "Failed to wrap dither pattern texture:" << ditheringTexture->getErrorMessage();
 		return StelTextureSP();
 	}
 }

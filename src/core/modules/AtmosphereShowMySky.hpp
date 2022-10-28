@@ -114,7 +114,7 @@ private:
 		int flagUseTmGamma;                      // switch between their use, true to use the first expression.
 	} shaderAttribLocations;
 
-	GLuint ditherPatternTex_=0;
+	StelTextureSP ditherPatternTex_;
 
 	float prevFad=0, prevFov=0;
 	Vec3d prevPos=Vec3d(0,0,0), prevSun=Vec3d(0,0,0);

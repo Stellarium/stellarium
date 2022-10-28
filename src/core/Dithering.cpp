@@ -20,6 +20,8 @@
 #include "Dithering.hpp"
 #include "BlueNoiseTriangleRemapped.hpp"
 
+namespace ForTextureMgr
+{
 GLuint makeDitherPatternTexture(QOpenGLFunctions& gl)
 {
 	GLuint tex;
@@ -42,6 +44,7 @@ GLuint makeDitherPatternTexture(QOpenGLFunctions& gl)
 						0, GL_RED, GL_FLOAT, blueNoiseTriangleRemapped);
 	}
 	return tex;
+}
 }
 
 Vec3f calcRGBMaxValue(StelPainter::DitheringMode mode)

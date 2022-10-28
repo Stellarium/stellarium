@@ -23,6 +23,7 @@
 #include "StelApp.hpp"
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "Dithering.hpp"
@@ -447,12 +448,13 @@ void AtmospherePreetham::draw(StelCore* core)
 
 	const auto rgbMaxValue=calcRGBMaxValue(sPainter.getDitheringMode());
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]));
-	auto& gl=*sPainter.glFuncs();
-	gl.glActiveTexture(GL_TEXTURE1);
+
+	const int ditherTexSampler = 1;
 	if(!ditherPatternTex)
-		ditherPatternTex=makeDitherPatternTexture(*sPainter.glFuncs());
-	gl.glBindTexture(GL_TEXTURE_2D, ditherPatternTex);
-	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.ditherPattern, 1));
+		ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(ditherTexSampler);
+	else
+		GL(ditherPatternTex->bind(ditherTexSampler));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.ditherPattern, ditherTexSampler));
 	
 
 	// And draw everything at once

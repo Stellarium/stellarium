@@ -26,6 +26,7 @@
 #include "StelProjectorClasses.hpp"
 #include "StelUtils.hpp"
 #include "Dithering.hpp"
+#include "StelTextureMgr.hpp"
 #include "SaturationShader.hpp"
 
 #include <QDebug>
@@ -188,8 +189,6 @@ void StelPainter::setProjector(const StelProjectorP& p)
 
 StelPainter::~StelPainter()
 {
-	if(ditherPatternTex)
-		glDeleteTextures(1, &ditherPatternTex);
 	//reset opengl state
 	glState.reset();
 
@@ -2504,11 +2503,12 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setAttributeBuffer(texturesShaderVars.texCoord, texCoordArray.type, texCoordDataOffset, texCoordArray.size);
 		pr->enableAttributeArray(texturesShaderVars.texCoord);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
-		glActiveTexture(GL_TEXTURE1);
+		const int ditherTexSampler = 1;
 		if(!ditherPatternTex)
-			ditherPatternTex=makeDitherPatternTexture(*this);
-		glBindTexture(GL_TEXTURE_2D, ditherPatternTex);
-		pr->setUniformValue(texturesShaderVars.ditherPattern, 1);
+			ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(ditherTexSampler);
+		else
+			ditherPatternTex->bind(ditherTexSampler);
+		pr->setUniformValue(texturesShaderVars.ditherPattern, ditherTexSampler);
 		pr->setUniformValue(texturesShaderVars.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
 	}
 	else if (texCoordArray.enabled && colorArray.enabled && !normalArray.enabled && !wideLineMode)
@@ -2537,11 +2537,12 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setAttributeBuffer(texturesColorShaderVars.color, colorArray.type, colorDataOffset, colorArray.size);
 		pr->enableAttributeArray(texturesColorShaderVars.color);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
-		glActiveTexture(GL_TEXTURE1);
+		const int ditherTexSampler = 1;
 		if(!ditherPatternTex)
-			ditherPatternTex=makeDitherPatternTexture(*this);
-		glBindTexture(GL_TEXTURE_2D, ditherPatternTex);
-		pr->setUniformValue(texturesColorShaderVars.ditherPattern, 1);
+			ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(ditherTexSampler);
+		else
+			ditherPatternTex->bind(ditherTexSampler);
+		pr->setUniformValue(texturesColorShaderVars.ditherPattern, ditherTexSampler);
 		pr->setUniformValue(texturesColorShaderVars.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
 		pr->setUniformValue(texturesColorShaderVars.saturation, saturation);
 	}

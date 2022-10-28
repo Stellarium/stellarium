@@ -25,6 +25,7 @@
 #include "StelApp.hpp"
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "Dithering.hpp"
@@ -941,11 +942,12 @@ void AtmosphereShowMySky::draw(StelCore* core)
 	GL(gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.luminanceTexture, 0));
 
-	GL(gl.glActiveTexture(GL_TEXTURE1));
+	const int ditherTexSampler = 1;
 	if(!ditherPatternTex_)
-		ditherPatternTex_=makeDitherPatternTexture(*sPainter.glFuncs());
-	GL(gl.glBindTexture(GL_TEXTURE_2D, ditherPatternTex_));
-	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.ditherPattern, 1));
+		ditherPatternTex_ = StelApp::getInstance().getTextureManager().getDitheringTexture(ditherTexSampler);
+	else
+		GL(ditherPatternTex_->bind(ditherTexSampler));
+	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.ditherPattern, ditherTexSampler));
 
 	GL(gl.glBindVertexArray(luminanceToScreenVAO_));
 	GL(gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
