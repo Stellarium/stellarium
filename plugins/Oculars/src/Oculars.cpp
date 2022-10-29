@@ -155,6 +155,7 @@ Oculars::Oculars()
 	, textColor(0.)
 	, lineColor(0.)
 	, focuserColor(0.)
+	, selectedSSO(Q_NULLPTR)
 	, actualFOV(0.)
 	, initialFOV(0.)
 	, flagInitFOVUsage(false)
@@ -162,6 +163,7 @@ Oculars::Oculars()
 	, flagAutosetMountForCCD(false)
 	, flagScalingFOVForTelrad(false)
 	, flagScalingFOVForCCD(true)
+	, flagMaxExposureTimeForCCD(false)
 	, flagShowResolutionCriteria(false)
 	, equatorialMountEnabledMain(false)
 	, reticleRotation(0.)
@@ -456,6 +458,15 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 	event->setAccepted(false);
 }
 
+void Oculars::updateLatestSelectedSSO()
+{
+	QList<StelObjectP> selectedObjects = GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	if (!selectedObjects.isEmpty())
+	{
+		selectedSSO = (selectedObjects[0]->getType()=="Planet") ? dynamic_cast<Planet*>(selectedObjects[0].data()) : Q_NULLPTR;
+	}
+}
+
 void Oculars::init()
 {
 	// Load settings from ocular.ini
@@ -603,6 +614,7 @@ void Oculars::init()
 		setFlagAutosetMountForCCD(settings->value("use_mount_autoset", false).toBool());
 		setFlagScalingFOVForTelrad(settings->value("use_telrad_fov_scaling", true).toBool());
 		setFlagScalingFOVForCCD(settings->value("use_ccd_fov_scaling", true).toBool());
+		setFlagMaxExposureTimeForCCD(settings->value("show_ccd_exposure_time", false).toBool());
 		setFlagShowResolutionCriteria(settings->value("show_resolution_criteria", false).toBool());
 		setArrowButtonScale(settings->value("arrow_scale", 150).toInt());
 		setFlagShowOcularsButton(settings->value("show_toolbar_button", false).toBool());
@@ -640,6 +652,8 @@ void Oculars::init()
 	StelCore *core = StelApp::getInstance().getCore();
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
 	connect(skyDrawer, SIGNAL(flagStarMagnitudeLimitChanged(bool)), this, SLOT(handleStarMagLimitToggle(bool)));
+	StelObjectMgr* objectMgr = GETSTELMODULE(StelObjectMgr);
+	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(updateLatestSelectedSSO()));
 }
 
 void Oculars::determineMaxEyepieceAngle()
@@ -1684,7 +1698,7 @@ void Oculars::paintCCDBounds()
 				// frame and equatorial coordinates for epoch J2000.0 of that center.
 				// Details: https://bugs.launchpad.net/stellarium/+bug/1404695
 
-				const double ratioLimit = 0.25;
+				const double ratioLimit = 0.375;
 				const double ratioLimitCrop = 0.75;
 				if (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit)
 				{
@@ -1776,6 +1790,19 @@ void Oculars::paintCCDBounds()
 							resolutionOverlayText.append(" [*]");
 						a = transform.map(QPoint(qRound(overlayWidth*0.5f - painter.getFontMetrics().boundingRect(resolutionOverlayText).width()*params.devicePixelsPerPixel), qRound(-overlayHeight*0.5f - fontSize*scaleFactor)));
 						painter.drawText(a.x(), a.y(), resolutionOverlayText, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
+					}
+
+					if (getFlagMaxExposureTimeForCCD() && selectedSSO!=Q_NULLPTR)
+					{
+						double maxFOV = qMax(fovX*3600*ccd->binningX()/ccd->resolutionX(), fovY*3600*ccd->binningY()/ccd->resolutionY());
+						double properMotion = StelUtils::fmodpos(selectedSSO->getHourlyProperMotion(core)[0], 2.0*M_PI) * M_180_PI;
+						double exposure = maxFOV/properMotion;
+						if (exposure>0.)
+						{
+							QString exposureTime = QString("%1: %2 %3").arg(q_("Max exposure time"), QString::number(qRound(exposure), 'd', 0), qc_("s", "time"));
+							a = transform.map(QPoint(qRound(width*0.5f - painter.getFontMetrics().boundingRect(exposureTime).width()*params.devicePixelsPerPixel), qRound(-height*0.5f - 2.0f*fontSize*scaleFactor)));
+							painter.drawText(a.x(), a.y(), exposureTime, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
+						}
 					}
 				}
 
@@ -2684,6 +2711,19 @@ void Oculars::setFlagScalingFOVForCCD(const bool b)
 bool Oculars::getFlagScalingFOVForCCD() const
 {
 	return  flagScalingFOVForCCD;
+}
+
+void Oculars::setFlagMaxExposureTimeForCCD(const bool b)
+{
+	flagMaxExposureTimeForCCD = b;
+	settings->setValue("show_ccd_exposure_time", b);
+	settings->sync();
+	emit flagMaxExposureTimeForCCDChanged(b);
+}
+
+bool Oculars::getFlagMaxExposureTimeForCCD() const
+{
+	return  flagMaxExposureTimeForCCD;
 }
 
 void Oculars::setFlagUseSemiTransparency(const bool b)

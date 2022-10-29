@@ -576,7 +576,32 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="3" column="0">
+             <item row="8" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <item>
+                <widget class="QToolButton" name="focuserColorToolButton">
+                 <property name="toolTip">
+                  <string>Color for focuser overlay line</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkBoxShowFocuserOverlay">
+                 <property name="text">
+                  <string>Show focuser overlay</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBoxDMSDegrees">
+               <property name="text">
+                <string>Use degrees and minutes for FOV of CCD</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
               <widget class="QCheckBox" name="checkBoxTypeOfMount">
                <property name="toolTip">
                 <string>Enable automatic switch of mount type from the telescope settings for horizontal orientation of CCD frame.</string>
@@ -586,14 +611,75 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="checkBoxCCDFOVScaling">
+             <item row="9" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_14">
+               <item>
+                <spacer name="horizontalSpacer_5">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>22</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLabel" name="labelFocuserOverlay">
+                 <property name="text">
+                  <string>Use size of focuser:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkBoxUseSmallFocuser">
+                 <property name="text">
+                  <string notr="true">1.25&quot;</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkBoxUseMediumFocuser">
+                 <property name="text">
+                  <string notr="true">2.0&quot;</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkBoxUseLargeFocuser">
+                 <property name="text">
+                  <string notr="true">3.3&quot;</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_6">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="checkBoxHorizontalCoordinates">
                <property name="text">
-                <string>Enable autozoom when switching CCD</string>
+                <string>Use horizontal coordinates instead equatorial coordinates</string>
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
+             <item row="6" column="0">
               <layout class="QHBoxLayout" name="guiSensorPanelHorizontalLayout">
                <item>
                 <spacer name="horizontalSpacer_2">
@@ -705,93 +791,7 @@
                </item>
               </layout>
              </item>
-             <item row="7" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_4">
-               <item>
-                <widget class="QToolButton" name="focuserColorToolButton">
-                 <property name="toolTip">
-                  <string>Color for focuser overlay line</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="checkBoxShowFocuserOverlay">
-                 <property name="text">
-                  <string>Show focuser overlay</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="checkBoxDMSDegrees">
-               <property name="text">
-                <string>Use degrees and minutes for FOV of CCD</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_14">
-               <item>
-                <spacer name="horizontalSpacer_5">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeType">
-                  <enum>QSizePolicy::Fixed</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>22</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QLabel" name="labelFocuserOverlay">
-                 <property name="text">
-                  <string>Use size of focuser:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="checkBoxUseSmallFocuser">
-                 <property name="text">
-                  <string notr="true">1.25&quot;</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="checkBoxUseMediumFocuser">
-                 <property name="text">
-                  <string notr="true">2.0&quot;</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="checkBoxUseLargeFocuser">
-                 <property name="text">
-                  <string notr="true">3.3&quot;</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_6">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-             <item row="4" column="0">
+             <item row="5" column="0">
               <widget class="QCheckBox" name="checkBoxShowCcdCropOverlay">
                <property name="toolTip">
                 <string>Enable a rectangular overlay showing the effective size of a number of pixels.</string>
@@ -801,10 +801,20 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="checkBoxHorizontalCoordinates">
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxCCDFOVScaling">
                <property name="text">
-                <string>Use horizontal coordinates instead equatorial coordinates</string>
+                <string>Enable autozoom when switching CCD</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="checkBoxCCDMaxExposureTime">
+               <property name="toolTip">
+                <string>Show max exposure time for Solar system objects when then selected</string>
+               </property>
+               <property name="text">
+                <string>Show max exposure time for moving objects</string>
                </property>
               </widget>
              </item>
