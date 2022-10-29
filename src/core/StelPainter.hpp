@@ -25,6 +25,7 @@
 #include "VecMath.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelProjectorType.hpp"
+#include "StelTextureTypes.hpp"
 #include "StelProjector.hpp"
 #include <QString>
 #include <QVarLengthArray>
@@ -474,7 +475,7 @@ private:
 	};
 	static ColorfulWideLineShaderVars colorfulWideLineShaderVars;
 
-	GLuint ditherPatternTex=0;
+	StelTextureSP ditherPatternTex;
 	DitheringMode ditheringMode;
 	static DitheringMode parseDitheringMode(QString const& s);
 
