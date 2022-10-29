@@ -1800,7 +1800,7 @@ void Oculars::paintCCDBounds()
 						if (exposure>0.)
 						{
 							// TRANSLATORS: "Max exposure" is short version of phrase "Max time of exposure"
-							QString exposureTime = QString("%1: %2 %3").arg(q_("Max exposure"), QString::number(qRound(exposure), 'd', 0), qc_("s", "time"));
+							QString exposureTime = QString("%1: %2 %3").arg(q_("Max exposure"), QString::number(qRound(exposure*10.)/10., 'd', 1), qc_("s", "time"));
 							a = transform.map(QPoint(qRound(width*0.5f - painter.getFontMetrics().boundingRect(exposureTime).width()*params.devicePixelsPerPixel), qRound(-height*0.5f - 2.0f*fontSize*scaleFactor)));
 							painter.drawText(a.x(), a.y(), exposureTime, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 						}
