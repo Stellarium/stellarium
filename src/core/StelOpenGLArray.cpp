@@ -18,6 +18,7 @@
  */
 
 #include "StelOpenGLArray.hpp"
+#include "StelVertexArray.hpp"
 #include "StelOBJ.hpp"
 
 #include <QElapsedTimer>
@@ -255,6 +256,127 @@ bool StelOpenGLArray::load(const StelOBJ* obj, bool useTangents)
 	}
 
 	qCDebug(stelOpenGLArray)<<"Loaded StelOBJ data into OpenGL in"<<timer.elapsed()<<"ms ("<<(static_cast<double>(m_memoryUsage) / 1024.0)<<"kb GL memory)";
+	return true;
+}
+
+bool StelOpenGLArray::load(const StelVertexArray& array)
+{
+	clear();
+
+	QElapsedTimer timer;
+	timer.start();
+
+	if(array.primitiveType != GL_TRIANGLES)
+	{
+		qCritical() << "StelOpenGLArray: got a StelVertexArray primitive type" << array.primitiveType
+					<< "that is not Triangles. This is not supported.";
+		return false;
+	}
+
+	if(s_vaosSupported)
+	{
+		//create vao, also already bind it to be core-profile compatible
+		if(!m_vao.create())
+		{
+			qCCritical(stelOpenGLArray)<<"Could not create OpenGL vertex array object!";
+			clear();
+			return false;
+		}
+		m_vao.bind();
+	}
+
+	if(! (m_vertexBuffer.create() && m_indexBuffer.create()) )
+	{
+		qCCritical(stelOpenGLArray)<<"Could not create OpenGL buffers!";
+		clear();
+		return false;
+	}
+
+	if(m_vertexBuffer.bind())
+	{
+		m_vertexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
+
+		size_t offset = 0;
+		m_offsets[ATTLOC_VERTEX] = offset;
+		m_sizes[ATTLOC_VERTEX] = sizeof array.vertex[0] / sizeof array.vertex[0][0];
+
+		static_assert(std::is_same_v<std::remove_const_t<std::remove_reference_t<decltype(array.vertex[0])>>, Vec3d>);
+		// Convert to GLfloat, so that even GLES2 can accept this
+		std::vector<Vec3f> arrayVertices;
+		arrayVertices.reserve(array.vertex.size());
+		for(const auto& v : array.vertex)
+			arrayVertices.push_back(v.toVec3f());
+		m_types[ATTLOC_VERTEX] = GL_FLOAT;
+
+		const size_t verticesByteSize = arrayVertices.size() * sizeof arrayVertices[0];
+		offset += verticesByteSize;
+
+		size_t texCoordsByteSize = 0;
+		if(array.isTextured())
+		{
+			m_offsets[ATTLOC_TEXCOORD] = offset;
+			m_sizes[ATTLOC_TEXCOORD] = sizeof array.texCoords[0] / sizeof array.texCoords[0][0];
+			m_types[ATTLOC_TEXCOORD] = GL_FLOAT;
+			texCoordsByteSize = array.texCoords.size() * sizeof array.texCoords[0];
+			offset += texCoordsByteSize;
+		}
+
+		m_vertexBuffer.allocate(offset);
+		m_memoryUsage += offset;
+
+		m_vertexBuffer.write(m_offsets[ATTLOC_VERTEX], arrayVertices.data(), verticesByteSize);
+		m_vertexBuffer.write(m_offsets[ATTLOC_TEXCOORD], array.texCoords.data(), texCoordsByteSize);
+
+		if(array.isColored())
+		{
+			qCritical() << "StelOpenGLArray: got a StelVertexArray with a color array. This is not supported.";
+			clear();
+			return false;
+		}
+		m_vertexBuffer.release();
+	}
+	else
+	{
+		qCCritical(stelOpenGLArray)<<"Could not bind vertex buffer";
+		clear();
+		return false;
+	}
+
+	if(!array.isIndexed())
+	{
+		qCritical() << "StelOpenGLArray: got a StelVertexArray without index array. This is not supported.";
+		clear();
+		return false;
+	}
+	if(m_indexBuffer.bind())
+	{
+		m_indexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
+		m_indexBufferType = GL_UNSIGNED_SHORT;
+		m_indexBufferTypeSize = sizeof array.indices[0];
+
+		m_indexCount = array.indices.size();
+		m_indexBuffer.allocate(array.indices.data(), m_indexCount * sizeof array.indices[0]);
+
+		m_memoryUsage += static_cast<size_t>(m_indexCount) * m_indexBufferTypeSize;
+		m_indexBuffer.release();
+	}
+	else
+	{
+		qCCritical(stelOpenGLArray)<<"Could not bind index buffer";
+		clear();
+		return false;
+	}
+
+	if(m_vao.isCreated())
+	{
+		//let the VAO remember the bindBuffers state
+		m_vao.bind();
+		bindBuffers();
+		m_vao.release();
+		m_indexBuffer.release();
+	}
+	qCDebug(stelOpenGLArray).nospace() << "Loaded StelVertexArray data into OpenGL in " << timer.elapsed() << " ms ("
+		<< (static_cast<double>(m_memoryUsage) / 1024.0) << " KiB GL memory)";
 	return true;
 }
 
