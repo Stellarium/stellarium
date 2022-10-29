@@ -311,8 +311,7 @@ void main()
 		mediump float horizElevRight = asin(sinHorizElevRight);
 		mediump float horizElev = horizElevLeft + (horizElevRight-horizElevLeft)*alpha;
 		if(sinSunElevation < sin(horizElev))
-
-horizonShadowCoefficient = 0.;
+			horizonShadowCoefficient = 0.;
 	}
 #else
     // important to normalize here again
