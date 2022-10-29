@@ -452,7 +452,7 @@ public:
 	inline Vector4<T> getColumn(const int column) const;
 
 	//Converts to QMatix4x4 (for use in OpenGL or other Qt classes)
-	inline QMatrix4x4 convertToQMatrix() const;
+	inline QMatrix4x4 toQMatrix() const;
 
 	inline void print(void) const;
 	QString toString(int fieldWidth=0, char format='g', int precision=-1) const {return QString("[[%1, %2, %3, %4], [%5, %6, %7, %8], [%9, %10, %11, %12], [%13, %14, %15, %16]]")
@@ -1703,7 +1703,7 @@ template<class T> Vector4<T> Matrix4<T>::getColumn(const int column) const
 	return Vector4<T>(r[0 + column * 4], r[1 + column * 4], r[2 + column * 4], r[3 + column * 4]);
 }
 
-template<class T> QMatrix4x4 Matrix4<T>::convertToQMatrix() const
+template<class T> QMatrix4x4 Matrix4<T>::toQMatrix() const
 {
 	return QMatrix4x4( r[0], r[4], r[8],r[12],
 			   r[1], r[5], r[9],r[13],
