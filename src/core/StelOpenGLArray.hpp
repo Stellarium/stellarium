@@ -29,6 +29,7 @@
 #include <QVector>
 
 class StelOBJ;
+struct StelVertexArray;
 class QOpenGLFunctions;
 
 Q_DECLARE_LOGGING_CATEGORY(stelOpenGLArray)
@@ -80,6 +81,7 @@ public:
 	//! @param useTangents Whether to also load tangent/bitangent data, or skip it to save GL memory
 	//! @note Requires a valid bound GL context
 	bool load(const StelOBJ* obj, bool useTangents = true);
+	bool load(const StelVertexArray& array);
 
 	//! Binds this array for drawing/manipulating with OpenGL
 	//! @note Requires a valid bound GL context
