@@ -553,31 +553,37 @@ ENDIF(MSVC)
 IF(APPLE)
      INSTALL(TARGETS stellarium DESTINATION MacOS)
      INSTALL(CODE
-        "
-         EXECUTE_PROCESS(
-             COMMAND \"${MACDEPLOYQT_COMMAND}\"
-                     \"\${CMAKE_CURRENT_BINARY_DIR}/Stellarium.app\"
-             WORKING_DIRECTORY \"\${CMAKE_CURRENT_BINARY_DIR}\"
-             OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/macdeployqt.log\"
-             ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/macdeployqt.err\"
-         )
-	 MESSAGE(STATUS \"Running macdeployqt...\")
-        "
+	  "
+	  EXECUTE_PROCESS(
+	       COMMAND \"${MACDEPLOYQT_COMMAND}\"
+		    \"\${CMAKE_CURRENT_BINARY_DIR}/Stellarium.app\"
+	       WORKING_DIRECTORY \"\${CMAKE_CURRENT_BINARY_DIR}\"
+	       OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/macdeployqt.log\"
+	       ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/macdeployqt.err\"
+	  )
+	  MESSAGE(STATUS \"Running macdeployqt...\")
+	  "
      )
-    IF(ENABLE_SHOWMYSKY AND EXISTS ${ShowMySky_LIBRARY})
-	GET_FILENAME_COMPONENT(_sms_lib_dir "${ShowMySky_LIBRARY}" DIRECTORY)
-	INSTALL(DIRECTORY ${_sms_lib_dir}/ DESTINATION Frameworks
-		PATTERN "*.dylib"
-		PATTERN "ShowMySky*" EXCLUDE
-	)
-    ENDIF()
-    INSTALL(CODE
-        "
-        EXECUTE_PROCESS(
-             COMMAND \"../../util/macfix.sh\"
-        )
-	MESSAGE(STATUS \"Fixing Qt' paths for macOS bundle...\")
-        "
+     # for backward compatibility
+     IF(ENABLE_SHOWMYSKY AND EXISTS ${ShowMySky_LIBRARY})
+	  GET_FILENAME_COMPONENT(_sms_lib_dir "${ShowMySky_LIBRARY}" DIRECTORY)
+	  INSTALL(DIRECTORY ${_sms_lib_dir}/ DESTINATION Frameworks
+	       PATTERN "*.dylib"
+	       PATTERN "ShowMySky*" EXCLUDE
+	  )
+     ENDIF()
+     # workaround for https://bugreports.qt.io/browse/QTBUG-105984
+     IF(ENABLE_MEDIA AND (${QT_VERSION} VERSION_GREATER_EQUAL "6.4.0"))
+	  GET_FILENAME_COMPONENT(_qt_bin_dir "${MACDEPLOYQT_COMMAND}" DIRECTORY)
+	  INSTALL(FILES ${_qt_bin_dir}/../plugins/multimedia/libdarwinmediaplugin.dylib DESTINATION PlugIns/multimedia)
+     ENDIF()
+     INSTALL(CODE
+	  "
+	  EXECUTE_PROCESS(
+	       COMMAND \"../../util/macfix.sh\"
+	  )
+	  MESSAGE(STATUS \"Fixing Qt' paths for macOS bundle...\")
+	  "
      )
 ELSE()
      INSTALL(TARGETS stellarium DESTINATION bin)
@@ -590,37 +596,37 @@ IF(WIN32)
      ENDIF()
 
      INSTALL(CODE
-        "
-         EXECUTE_PROCESS(
-             COMMAND \"${WINDEPLOYQT_COMMAND}\"
-		     --dir \"\${CMAKE_INSTALL_PREFIX}/qtstuff\"
-                     --no-translations
-		     --verbose 1
-                     ${VIRTUAL_KBD_SETTING}
-		     --compiler-runtime
-                     \"\${CMAKE_INSTALL_PREFIX}/bin/stellarium.exe\"
-             WORKING_DIRECTORY \"\${CMAKE_INSTALL_PREFIX}/bin\"
-             OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.log\"
-             ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.err\"
-         )
-	 MESSAGE(STATUS \"Running windeployqt...\")
-        "
+	  "
+	  EXECUTE_PROCESS(
+	       COMMAND \"${WINDEPLOYQT_COMMAND}\"
+		    --dir \"\${CMAKE_INSTALL_PREFIX}/qtstuff\"
+		    --no-translations
+		    --verbose 1
+		    ${VIRTUAL_KBD_SETTING}
+		    --compiler-runtime
+		    \"\${CMAKE_INSTALL_PREFIX}/bin/stellarium.exe\"
+	       WORKING_DIRECTORY \"\${CMAKE_INSTALL_PREFIX}/bin\"
+	       OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.log\"
+	       ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.err\"
+	  )
+	  MESSAGE(STATUS \"Running windeployqt...\")
+	  "
      )
      IF(GENERATE_STELMAINLIB)
           INSTALL(CODE
-             "
-              EXECUTE_PROCESS(
-                  COMMAND \"${WINDEPLOYQT_COMMAND}\"
-			  --dir \"\${CMAKE_INSTALL_PREFIX}/qtstuff\"
-                          --no-translations
-                          ${VIRTUAL_KBD_SETTING}
-                          --compiler-runtime
-                          \"\${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"
-                  WORKING_DIRECTORY \"\${CMAKE_INSTALL_PREFIX}/bin\"
-                  OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.log\"
-                  ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.err\"
-         )
-        "
+	       "
+	       EXECUTE_PROCESS(
+		    COMMAND \"${WINDEPLOYQT_COMMAND}\"
+			 --dir \"\${CMAKE_INSTALL_PREFIX}/qtstuff\"
+			 --no-translations
+			 ${VIRTUAL_KBD_SETTING}
+			 --compiler-runtime
+			 \"\${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"
+		    WORKING_DIRECTORY \"\${CMAKE_INSTALL_PREFIX}/bin\"
+		    OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.log\"
+		    ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.err\"
+	       )
+	  "
      )
      ENDIF()
      # workaround for https://bugreports.qt.io/browse/QTBUG-105984
