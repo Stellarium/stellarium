@@ -1766,11 +1766,7 @@ void Oculars::paintCCDBounds()
 					// Horizontal and vertical scales of visible field of view for CCD (red rectangle)
 					//TRANSLATORS: Unit of measure for scale - arc-seconds per pixel
 					QString unit = q_("\"/px");
-					QString scales = QString("%1%3 %4 %2%3")
-							.arg(QString::number(fovX*3600*ccd->binningX()/ccd->resolutionX(), 'f', 4))
-							.arg(QString::number(fovY*3600*ccd->binningY()/ccd->resolutionY(), 'f', 4))
-							.arg(unit)
-							.arg(QChar(0x00D7));
+					QString scales = QString("%1%3 %4 %2%3").arg(QString::number(fovX*3600*ccd->binningX()/ccd->resolutionX(), 'f', 4), QString::number(fovY*3600*ccd->binningY()/ccd->resolutionY(), 'f', 4), unit, QChar(0x00D7));
 					a = transform.map(QPoint(qRound(width*0.5f - painter.getFontMetrics().boundingRect(scales).width()*params.devicePixelsPerPixel), qRound(-height*0.5f - fontSize*scaleFactor)));
 					painter.drawText(a.x(), a.y(), scales, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					// Rotation angle of visible field of view for CCD (red rectangle)
@@ -1781,11 +1777,7 @@ void Oculars::paintCCDBounds()
 					if(flagShowCcdCropOverlay && (ccdXRatio>=ratioLimitCrop || ccdYRatio>=ratioLimitCrop))
 					{
 						// show the CCD crop overlay text
-						QString resolutionOverlayText = QString("%1%3 %4 %2%3")
-								.arg(QString::number(actualCropOverlayX, 'd', 0))
-								.arg(QString::number(actualCropOverlayY, 'd', 0))
-								.arg(qc_("px", "pixels"))
-								.arg(QChar(0x00D7));
+						QString resolutionOverlayText = QString("%1%3 %4 %2%3").arg(QString::number(actualCropOverlayX, 'd', 0), QString::number(actualCropOverlayY, 'd', 0), qc_("px", "pixels"), QChar(0x00D7));
 						if(actualCropOverlayX!=ccdCropOverlayHSize || actualCropOverlayY!=ccdCropOverlayVSize)
 							resolutionOverlayText.append(" [*]");
 						a = transform.map(QPoint(qRound(overlayWidth*0.5f - painter.getFontMetrics().boundingRect(resolutionOverlayText).width()*params.devicePixelsPerPixel), qRound(-overlayHeight*0.5f - fontSize*scaleFactor)));
@@ -1794,15 +1786,18 @@ void Oculars::paintCCDBounds()
 
 					if (getFlagMaxExposureTimeForCCD() && selectedSSO!=Q_NULLPTR)
 					{
-						double maxFOV = qMax(fovX*3600*ccd->binningX()/ccd->resolutionX(), fovY*3600*ccd->binningY()/ccd->resolutionY());
 						double properMotion = StelUtils::fmodpos(selectedSSO->getHourlyProperMotion(core)[0], 2.0*M_PI) * M_180_PI;
-						double exposure = maxFOV/properMotion;
-						if (exposure>0.)
+						if (properMotion>0.)
 						{
-							// TRANSLATORS: "Max exposure" is short version of phrase "Max time of exposure"
-							QString exposureTime = QString("%1: %2 %3").arg(q_("Max exposure"), QString::number(qRound(exposure*10.)/10., 'd', 1), qc_("s", "time"));
-							a = transform.map(QPoint(qRound(width*0.5f - painter.getFontMetrics().boundingRect(exposureTime).width()*params.devicePixelsPerPixel), qRound(-height*0.5f - 2.0f*fontSize*scaleFactor)));
-							painter.drawText(a.x(), a.y(), exposureTime, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
+							double sqf = qMin(fovX*3600*ccd->binningX()/ccd->resolutionX(), fovY*3600*ccd->binningY()/ccd->resolutionY());
+							double exposure = 3600.*sqf/qRound(3600.*properMotion);
+							if (exposure>0.)
+							{
+								// TRANSLATORS: "Max exposure" is short version of phrase "Max time of exposure"
+								QString exposureTime = QString("%1: %2 %3").arg(q_("Max exposure"), QString::number(qRound(exposure*10.)/10., 'd', 1), qc_("s", "time"));
+								a = transform.map(QPoint(qRound(width*0.5f - painter.getFontMetrics().boundingRect(exposureTime).width()*params.devicePixelsPerPixel), qRound(-height*0.5f - 2.0f*fontSize*scaleFactor)));
+								painter.drawText(a.x(), a.y(), exposureTime, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
+							}
 						}
 					}
 				}
