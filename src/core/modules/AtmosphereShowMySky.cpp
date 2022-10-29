@@ -933,7 +933,7 @@ void AtmosphereShowMySky::draw(StelCore* core)
 	StelPainter sPainter(core->getProjection2d());
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 
-	const auto rgbMaxValue=calcRGBMaxValue(sPainter.getDitheringMode());
+	const auto rgbMaxValue=calcRGBMaxValue(core->getDitheringMode());
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]));
 
 	auto& gl = *glfuncs();

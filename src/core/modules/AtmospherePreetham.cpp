@@ -446,7 +446,7 @@ void AtmospherePreetham::draw(StelCore* core)
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.projectionMatrix,
 					      QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15])));
 
-	const auto rgbMaxValue=calcRGBMaxValue(sPainter.getDitheringMode());
+	const auto rgbMaxValue=calcRGBMaxValue(core->getDitheringMode());
 	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]));
 
 	const int ditherTexSampler = 1;
