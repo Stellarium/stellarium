@@ -158,7 +158,7 @@ float NomenclatureItem::getSelectPriority(const StelCore* core) const
 
 	// Exclude if the planet is too faint for view (in deep shadow for example),
 	// or if feature is on far-side of the planet
-	if (planet->getVMagnitude(core)>=20.f || (planet->getJ2000EquatorialPos(core).lengthSquared() < getJ2000EquatorialPos(core).lengthSquared()))
+	if (planet->getVMagnitude(core)>=20.f || (planet->getJ2000EquatorialPos(core).normSquared() < getJ2000EquatorialPos(core).normSquared()))
 		return 1.e12f;
 
 	// Start with a priority just slightly lower than the carrier planet,
@@ -342,7 +342,7 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 // Return apparent semidiameter
 double NomenclatureItem::getAngularRadius(const StelCore* core) const
 {
-	return std::atan2(0.5*size*planet->getSphereScale()/AU, getJ2000EquatorialPos(core).length()) * M_180_PI;
+	return std::atan2(0.5*size*planet->getSphereScale()/AU, getJ2000EquatorialPos(core).norm()) * M_180_PI;
 }
 
 float NomenclatureItem::getAngularDiameterRatio(const StelCore *core) const
@@ -358,7 +358,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	Vec3d XYZ = getJ2000EquatorialPos(core);
 
 	// In case we are located at a labeled site, don't show this label or any labels within 150 km. Else we have bad flicker...
-	if (XYZ.lengthSquared() < 150.*150.*AU_KM*AU_KM )
+	if (XYZ.normSquared() < 150.*150.*AU_KM*AU_KM )
 		return;
 
 	if (getFlagHideLocalNomenclature())
@@ -380,7 +380,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 			return;
 	}
 
-	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.lengthSquared() >= XYZ.lengthSquared())
+	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.normSquared() >= XYZ.normSquared())
 	    && (scale>0.04f && (scale<0.5f || niType>=NomenclatureItem::niSpecialPointPole )))
 	{
 		float brightness=(getSolarAltitude(core)<0. ? 0.25f : 1.0f);

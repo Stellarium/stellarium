@@ -38,7 +38,7 @@ SphericMirrorCalculator::SphericMirrorCalculator(const QSettings& conf)
 				conf.value("spheric_mirror/projector_position_y",1.0).toFloat(),
 				conf.value("spheric_mirror/projector_position_z",-0.2).toFloat());
 	P = (projector_position - mirror_position) * (1.0f/mirror_radius);
-	PP = P.lengthSquared();
+	PP = P.normSquared();
 	lP = std::sqrt(PP);
 	p = P * (1.0f/lP);
 	float image_distance_div_height = conf.value("spheric_mirror/image_distance_div_height",-1e38f).toFloat();
@@ -127,12 +127,12 @@ void SphericMirrorCalculator::initRotMatrix(float alpha, float delta, float phi)
 
 bool SphericMirrorCalculator::transform(const Vec3f &v, float &xb,float &yb) const
 {
-	const Vec3f S = DomeCenter + (v * (DomeRadius/v.length()));
+	const Vec3f S = DomeCenter + (v * (DomeRadius/v.norm()));
 	const Vec3f SmP = S - P;
 	const float P_SmP = P.dot(SmP);
 	const bool rval = ( (PP-1.0f)*SmP.dot(SmP) > P_SmP*P_SmP );
 
-	const float lS = S.length();
+	const float lS = S.norm();
 	const Vec3f s(S/lS);
 	float t_min = 0;
 	float t_max = 1;

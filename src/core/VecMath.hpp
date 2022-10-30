@@ -154,8 +154,16 @@ public:
 
 	inline T dot(const Vector2<T>&) const;
 
-	inline T length() const;
-	inline T lengthSquared() const;
+	T length() const = delete; // Use norm()
+	T lengthSquared() const = delete; // Use normSquared()
+	//! Norm of the vector, also known as length
+	//
+	// The name "length" is not used to avoid mistakes when porting C++ code to
+	// GLSL, where length() method returns number of elements instead of the
+	// norm (and actual norm is computed by a free function called length).
+	inline T norm() const;
+	//! Square of the norm of the vector, same as dot product with itself
+	inline T normSquared() const;
 	inline void normalize();
 
 	//! Formatted string with brackets
@@ -243,8 +251,16 @@ public:
 	inline T angle(const Vector3<T>&) const;
 	inline T angleNormalized(const Vector3<T>&) const;
 
-	inline T length() const;
-	inline T lengthSquared() const;
+	T length() const = delete; // Use norm()
+	T lengthSquared() const = delete; // Use normSquared()
+	//! Norm of the vector, also known as length
+	//
+	// The name "length" is not used to avoid mistakes when porting C++ code to
+	// GLSL, where length() method returns number of elements instead of the
+	// norm (and actual norm is computed by a free function called length).
+	inline T norm() const;
+	//! Square of the norm of the vector, same as dot product with itself
+	inline T normSquared() const;
 	inline void normalize();
 
 	inline void transfo4d(const Mat4d&);
@@ -334,8 +350,16 @@ public:
 
 	inline T dot(const Vector4<T>&) const;
 
-	inline T length() const;
-	inline T lengthSquared() const;
+	T length() const = delete; // Use norm()
+	T lengthSquared() const = delete; // Use normSquared()
+	//! Norm of the vector, also known as length
+	//
+	// The name "length" is not used to avoid mistakes when porting C++ code to
+	// GLSL, where length() method returns number of elements instead of the
+	// norm (and actual norm is computed by a free function called length).
+	inline T norm() const;
+	//! Square of the norm of the vector, same as dot product with itself
+	inline T normSquared() const;
 	inline void normalize();
 
 	inline void transfo4d(const Mat4d&);
@@ -661,12 +685,12 @@ template<class T> T Vector2<T>::dot(const Vector2<T>& b) const
 }
 
 
-template<class T> T Vector2<T>::length() const
+template<class T> T Vector2<T>::norm() const
 {
 	return static_cast<T>(std::sqrt(v[0] * v[0] + v[1] * v[1]));
 }
 
-template<class T> T Vector2<T>::lengthSquared() const
+template<class T> T Vector2<T>::normSquared() const
 {
 	return v[0] * v[0] + v[1] * v[1];
 }
@@ -839,7 +863,7 @@ template<class T> Vector3<T> Vector3<T>::operator^(const Vector3<T>& b) const
 // Angle in radian between two vectors
 template<class T> T Vector3<T>::angle(const Vector3<T>& b) const
 {
-	const T cosAngle = dot(b)/std::sqrt(lengthSquared()*b.lengthSquared());
+	const T cosAngle = dot(b)/std::sqrt(normSquared()*b.normSquared());
 	return cosAngle>=1 ? 0 : (cosAngle<=-1 ? M_PI : std::acos(cosAngle));
 }
 
@@ -850,12 +874,12 @@ template<class T> T Vector3<T>::angleNormalized(const Vector3<T>& b) const
 	return cosAngle>=1 ? 0 : (cosAngle<=-1 ? M_PI : std::acos(cosAngle));
 }
 
-template<class T> T Vector3<T>::length() const
+template<class T> T Vector3<T>::norm() const
 {
 	return static_cast<T>(std::sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]));
 }
 
-template<class T> T Vector3<T>::lengthSquared() const
+template<class T> T Vector3<T>::normSquared() const
 {
 	return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
 }
@@ -899,7 +923,7 @@ template<class T> Vec3d Vector3<T>::toVec3d() const
 // Return latitude in rad
 template<class T> T Vector3<T>::latitude() const
 {
-	return std::asin(v[2]/length());
+	return std::asin(v[2]/norm());
 }
 
 // Return longitude in rad
@@ -1050,12 +1074,12 @@ template<class T> T Vector4<T>::dot(const Vector4<T>& b) const
 	return v[0] * b.v[0] + v[1] * b.v[1] + v[2] * b.v[2] + v[3] * b.v[3];
 }
 
-template<class T> T Vector4<T>::length() const
+template<class T> T Vector4<T>::norm() const
 {
 	return static_cast<T>(std::sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3]));
 }
 
-template<class T> T Vector4<T>::lengthSquared() const
+template<class T> T Vector4<T>::normSquared() const
 {
 	return v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3];
 }

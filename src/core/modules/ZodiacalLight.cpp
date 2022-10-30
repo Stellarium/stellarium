@@ -248,14 +248,14 @@ void ZodiacalLight::draw(StelCore* core)
 		for (int i=0; i<vertexArray->vertex.size(); ++i)
 		{
 			Vec3d eclPos=vertexArray->vertex.at(i);
-			Q_ASSERT(fabs(eclPos.lengthSquared()-1.0) < 0.001);
+			Q_ASSERT(fabs(eclPos.normSquared()-1.0) < 0.001);
 			double ecLon, ecLat, ra, dec;
 			StelUtils::rectToSphe(&ecLon, &ecLat, eclPos);
 			StelUtils::eclToEqu(ecLon, ecLat, epsDate, &ra, &dec);
 			Vec3d eqPos;
 			StelUtils::spheToRect(ra, dec, eqPos);
 			Vec3d vertAltAz=core->equinoxEquToAltAz(eqPos, StelCore::RefractionOn);
-			Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001);
+			Q_ASSERT(fabs(vertAltAz.normSquared()-1.0) < 0.001);
 
 			float oneMag=0.0f;
 			extinction.forward(vertAltAz, &oneMag);

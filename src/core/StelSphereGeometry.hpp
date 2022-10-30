@@ -302,7 +302,7 @@ public:
 	//! @param an a unit vector indicating the direction.
 	//! @param ar cosinus of the aperture.
 	SphericalCap(const Vec3d& an, double ar) : SphericalRegion(), n(an), d(ar) {//n.normalize();
-		Q_ASSERT(d==0 || qFuzzyCompare(n.lengthSquared(),1.));}
+		Q_ASSERT(d==0 || qFuzzyCompare(n.normSquared(),1.));}
 	// FIXME: GZ reports 2013-03-02: apparently the Q_ASSERT is here because n should be normalized at this point, but
 	// for efficiency n.normalize() should not be called at this point.
 	// However, when zooming in a bit in Hammer-Aitoff and Mercator projections, this Assertion fires.
@@ -333,8 +333,8 @@ public:
 	virtual SphericalCap getBoundingCap() const Q_DECL_OVERRIDE {return *this;}
 
 	// Contain and intersect	
-	virtual bool contains(const Vec3d &v) const Q_DECL_OVERRIDE {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.)<0.0000002);return (v*n>=d);}
-	virtual bool contains(const Vec3f &v) const {Q_ASSERT(d==0 || std::fabs(v.lengthSquared()-1.f)<0.000002f);return (v.toVec3d()*n>=d);}
+	virtual bool contains(const Vec3d &v) const Q_DECL_OVERRIDE {Q_ASSERT(d==0 || std::fabs(v.normSquared()-1.)<0.0000002);return (v*n>=d);}
+	virtual bool contains(const Vec3f &v) const {Q_ASSERT(d==0 || std::fabs(v.normSquared()-1.f)<0.000002f);return (v.toVec3d()*n>=d);}
 	virtual bool contains(const SphericalConvexPolygon& r) const Q_DECL_OVERRIDE;
 	virtual bool contains(const SphericalCap& h) const Q_DECL_OVERRIDE
 	{
@@ -449,7 +449,7 @@ inline bool sideHalfSpaceIntersects(const Vec3d& v1, const Vec3d& v2, const Sphe
 class SphericalPoint : public SphericalRegion
 {
 public:
-	SphericalPoint(const Vec3d& an) : n(an) {Q_ASSERT(std::fabs(1.-n.length())<0.0000001);}
+	SphericalPoint(const Vec3d& an) : n(an) {Q_ASSERT(std::fabs(1.-n.norm())<0.0000001);}
 	SphericalPoint(const SphericalPoint &other): n(other.n){}
 	inline SphericalPoint& operator=(const SphericalPoint &other){n=other.n; return *this;}
 	virtual ~SphericalPoint() Q_DECL_OVERRIDE {;}

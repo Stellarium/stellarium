@@ -259,7 +259,7 @@ namespace StelUtils
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(double *lng, double *lat, const Vec3d& v){
-		double r = v.length();
+		double r = v.norm();
 		*lat = asin(v[2]/r);
 		*lng = atan2(v[1],v[0]);
 	}
@@ -269,7 +269,7 @@ namespace StelUtils
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(float *lng, float *lat, const Vec3d& v){
-		double r = v.length();
+		double r = v.norm();
 		*lat = static_cast<float>(asin(v[2]/r));
 		*lng = static_cast<float>(atan2(v[1],v[0]));
 	}
@@ -280,7 +280,7 @@ namespace StelUtils
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(float *lng, float *lat, const Vec3f& v){
-		float r = v.length();
+		float r = v.norm();
 		*lat = asinf(v[2]/r);
 		*lng = atan2f(v[1],v[0]);
 	}
@@ -290,7 +290,7 @@ namespace StelUtils
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
 	inline void rectToSphe(double *lng, double *lat, const Vec3f &v){
-		double r = static_cast<double>(v.length());
+		double r = static_cast<double>(v.norm());
 		*lat = asin(static_cast<double>(v[2])/r);
 		*lng = atan2(static_cast<double>(v[1]),static_cast<double>(v[0]));
 	}
@@ -311,7 +311,7 @@ namespace StelUtils
 	//! @param r double*   length of radius vector (distance)
 	//! @param v the input 3D vector
 	inline void rectToSphe(double *lng, double *lat, double *r, const Vec3d& v){
-		*r = v.length();
+		*r = v.norm();
 		*lat = asin(v[2] / *r);
 		*lng = atan2(v[1],v[0]);
 	}

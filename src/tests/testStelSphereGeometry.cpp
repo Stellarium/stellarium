@@ -262,9 +262,9 @@ void TestStelSphericalGeometry::testPlaneIntersect2()
 	hx.d = std::sqrt(2.)/2.;
 	QVERIFY2(SphericalCap::intersectionPoints(hx, hz, p1, p2)==true, "Plane/convex intersect failed");
 	Vec3d res(p1-Vec3d(hx.d,-hx.d,0));
-	QVERIFY2(res.length()<0.0000001, QString("p1 wrong: %1").arg(p1.toString()).toUtf8());
+	QVERIFY2(res.norm()<0.0000001, QString("p1 wrong: %1").arg(p1.toString()).toUtf8());
 	res = p2-Vec3d(hx.d,hx.d,0);
-	QVERIFY2(res.length()<0.0000001, QString("p2 wrong: %1").arg(p2.toString()).toUtf8());
+	QVERIFY2(res.norm()<0.0000001, QString("p2 wrong: %1").arg(p2.toString()).toUtf8());
 }
 
 void TestStelSphericalGeometry::testGreatCircleIntersection()

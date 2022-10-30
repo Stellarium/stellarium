@@ -172,7 +172,7 @@ QString Comet::getInfoStringSize(const StelCore *core, const InfoStringGroup &fl
 		QString comaEst = q_("Coma diameter (estimate)");
 		const double coma = floor(static_cast<double>(tailFactors[0])*AU/1000.0)*1000.0;
 		const double tail = static_cast<double>(tailFactors[1])*AU;
-		const double distanceKm = AU * getJ2000EquatorialPos(core).length();
+		const double distanceKm = AU * getJ2000EquatorialPos(core).norm();
 		// Try to estimate tail length in degrees.
 		// TODO: Take projection effect into account!
 		// The estimates here assume that the tail is seen from the side.
@@ -231,8 +231,8 @@ float Comet::getVMagnitude(const StelCore* core) const
 	//Calculate distances
 	const Vec3d& observerHeliocentricPosition = core->getObserverHeliocentricEclipticPos();
 	const Vec3d& cometHeliocentricPosition = getHeliocentricEclipticPos();
-	const float cometSunDistance = static_cast<float>(cometHeliocentricPosition.length());
-	const float observerCometDistance = static_cast<float>((observerHeliocentricPosition - cometHeliocentricPosition).length());
+	const float cometSunDistance = static_cast<float>(cometHeliocentricPosition.norm());
+	const float observerCometDistance = static_cast<float>((observerHeliocentricPosition - cometHeliocentricPosition).norm());
 
 	//Calculate apparent magnitude
 	//Sources: http://www.clearskyinstitute.com/xephem/help/xephem.html#mozTocId564354
@@ -284,7 +284,7 @@ void Comet::update(int deltaTime)
 				computeParabola(gasparameter, gasTailEndRadius, -0.5f*gasparameter, gastailVertexArr,  tailTexCoordArr, tailIndices);
 				//gastailColorArr.fill(Vec3f(0.3,0.3,0.3), gastailVertexArr.length());
 				// Now we make a skewed parabola. Skew factor (xOffset, last arg) is rather ad-hoc/empirical. TBD later: Find physically correct solution.
-				computeParabola(dustparameter, dustTailWidthFactor*gasTailEndRadius, -0.5f*dustparameter, dusttailVertexArr, tailTexCoordArr, tailIndices, 25.0f*static_cast<float>(static_cast<KeplerOrbit*>(orbitPtr)->getVelocity().length()));
+				computeParabola(dustparameter, dustTailWidthFactor*gasTailEndRadius, -0.5f*dustparameter, dusttailVertexArr, tailTexCoordArr, tailIndices, 25.0f*static_cast<float>(static_cast<KeplerOrbit*>(orbitPtr)->getVelocity().norm()));
 				//dusttailColorArr.fill(Vec3f(0.3,0.3,0.3), dusttailVertexArr.length());
 
 
@@ -298,7 +298,7 @@ void Comet::update(int deltaTime)
 				//Mat4d dustTailRot=Mat4d::rotation(eclposNrm^(-velocity), 0.15f*std::acos(eclposNrm.dot(-velocity))); // GZ: This scale factor of 0.15 is empirical from photos of Halley and Hale-Bopp.
 				// The curved tail is curved towards positive X. We first rotate around the Z axis into a direction opposite of the motion vector, then again the antisolar rotation applies.
 				// In addition, we let the dust tail already start with a light tilt.
-				dustTailRot=gasTailRot * Mat4d::zrotation(atan2(velocity[1], velocity[0]) + M_PI) * Mat4d::yrotation(5.0*velocity.length());
+				dustTailRot=gasTailRot * Mat4d::zrotation(atan2(velocity[1], velocity[0]) + M_PI) * Mat4d::yrotation(5.0*velocity.norm());
 
 				// Rotate vertex arrays:
 				Vec3d* gasVertices= static_cast<Vec3d*>(gastailVertexArr.data());
@@ -363,7 +363,7 @@ void Comet::update(int deltaTime)
 			// Gastail extinction:
 			Vec3d vertAltAz=core->j2000ToAltAz(gastailVertexArr.at(i), StelCore::RefractionOn);
 			vertAltAz.normalize();
-			Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001);
+			Q_ASSERT(fabs(vertAltAz.normSquared()-1.0) < 0.001);
 			float oneMag=0.0f;
 			extinction.forward(vertAltAz, &oneMag);
 			float extinctionFactor=std::pow(0.4f, oneMag); // drop of one magnitude: factor 2.5 or 40%
@@ -372,7 +372,7 @@ void Comet::update(int deltaTime)
 			// dusttail extinction:
 			vertAltAz=core->j2000ToAltAz(dusttailVertexArr.at(i), StelCore::RefractionOn);
 			vertAltAz.normalize();
-			Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001);
+			Q_ASSERT(fabs(vertAltAz.normSquared()-1.0) < 0.001);
 			oneMag=0.0f;
 			extinction.forward(vertAltAz, &oneMag);
 			extinctionFactor=std::pow(0.4f, oneMag); // drop of one magnitude: factor 2.5 or 40%
@@ -434,7 +434,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlapping (ie for jupiter satellites)
-		float ang_dist = 300.f*static_cast<float>(atan(getEclipticPos().length()/getEquinoxEquatorialPos(core).length())/core->getMovementMgr()->getCurrentFov());
+		float ang_dist = 300.f*static_cast<float>(atan(getEclipticPos().norm()/getEquinoxEquatorialPos(core).norm())/core->getMovementMgr()->getCurrentFov());
 		// if (ang_dist==0.f) ang_dist = 1.f; // if ang_dist == 0, the Planet is sun.. --> GZ: we can remove it.
 
 		// by putting here, only draw orbit if Comet is visible for clarity
@@ -513,7 +513,7 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 // Formula found at http://www.projectpluto.com/update7b.htm#comet_tail_formula
 Vec2f Comet::getComaDiameterAndTailLengthAU() const
 {
-	const float r = static_cast<float>(getHeliocentricEclipticPos().length());
+	const float r = static_cast<float>(getHeliocentricEclipticPos().norm());
 	const float mhelio = absoluteMagnitude + slopeParameter * log10(r);
 	const float Do = powf(10.0f, ((-0.0033f*mhelio - 0.07f) * mhelio + 3.25f));
 	const float common = 1.0f - powf(10.0f, (-2.0f*r));

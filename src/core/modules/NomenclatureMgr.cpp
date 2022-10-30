@@ -286,7 +286,7 @@ void NomenclatureMgr::draw(StelCore* core)
 		// Early exit if the planet is not visible or too small to render the labels.
 		const Vec3d equPos = p->getJ2000EquatorialPos(core);
 		const double r = p->getEquatorialRadius() * static_cast<double>(p->getSphereScale());
-		double angularSize = atan2(r, equPos.length());
+		double angularSize = atan2(r, equPos.norm());
 		double screenSize = angularSize * static_cast<double>(painter.getProjector()->getPixelPerRadAtCenter());
 		if (screenSize < 50)
 			continue;

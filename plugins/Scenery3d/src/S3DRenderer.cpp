@@ -275,8 +275,8 @@ static Vec3f zSortValue;
 bool zSortFunction(const StelOBJ::MaterialGroup* const & mLeft, const StelOBJ::MaterialGroup* const & mRight)
 {
 	//we can avoid taking the sqrt here
-	float dist1 = (mLeft->centroid - zSortValue).lengthSquared();
-	float dist2 = (mRight->centroid - zSortValue).lengthSquared();
+	float dist1 = (mLeft->centroid - zSortValue).normSquared();
+	float dist2 = (mRight->centroid - zSortValue).normSquared();
 	return dist1>dist2;
 }
 
