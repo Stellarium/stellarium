@@ -25,7 +25,6 @@
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
 #include "StelUtils.hpp"
-#include "Dithering.hpp"
 #include "StelTextureMgr.hpp"
 #include "SaturationShader.hpp"
 
@@ -119,17 +118,6 @@ bool StelPainter::linkProg(QOpenGLShaderProgram* prog, const QString& name)
 	return ret;
 }
 
-StelPainter::DitheringMode StelPainter::parseDitheringMode(QString const& str)
-{
-	const auto s=str.trimmed().toLower();
-	if(s=="disabled"   ) return DitheringMode::Disabled;
-	if(s=="color565"   ) return DitheringMode::Color565;
-	if(s=="color666"   ) return DitheringMode::Color666;
-	if(s=="color888"   ) return DitheringMode::Color888;
-	if(s=="color101010") return DitheringMode::Color101010;
-	return DitheringMode::Disabled;
-}
-
 StelPainter::StelPainter(const StelProjectorP& proj)
 	: QOpenGLFunctions(QOpenGLContext::currentContext())
 	, glState(this)
@@ -161,16 +149,6 @@ StelPainter::StelPainter(const StelProjectorP& proj)
 	glStencilMask(0x11111111);
 	glState.apply(); //apply default OpenGL state
 	setProjector(proj);
-
-	QSettings*const conf = StelApp::getInstance().getSettings();
-	QVariant selectedDitherFormat = conf->value("video/dithering_mode");
-	if(!selectedDitherFormat.isValid())
-	{
-		constexpr char defaultValue[] = "color888";
-		selectedDitherFormat = defaultValue;
-		conf->setValue("video/dithering_mode", defaultValue);
-	}
-	ditheringMode = parseDitheringMode(selectedDitherFormat.toString());
 
 	vao->create();
 	indicesVBO->create();
@@ -2451,7 +2429,8 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	const bool multisampleWasOn = multisamplingEnabled && glIsEnabled(GL_MULTISAMPLE);
 #endif
 
-	const auto rgbMaxValue=calcRGBMaxValue(ditheringMode);
+	const auto core = StelApp::getInstance().getCore();
+	const auto rgbMaxValue=calcRGBMaxValue(core->getDitheringMode());
 	if (!texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
 		pr = wideLineMode ? wideLineShaderProgram : basicShaderProgram;

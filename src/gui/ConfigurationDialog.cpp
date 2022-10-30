@@ -2029,10 +2029,15 @@ void ConfigurationDialog::populateDitherList()
 void ConfigurationDialog::setDitherFormat()
 {
 	QString selectedFormat = ui->ditheringComboBox->itemData(ui->ditheringComboBox->currentIndex()).toString();
+
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	conf->setValue("video/dithering_mode", selectedFormat);
 	conf->sync();
+
+	const auto core = StelApp::getInstance().getCore();
+	Q_ASSERT(core);
+	core->setDitheringMode(selectedFormat);
 }
 
 void ConfigurationDialog::populateFontWritingSystemCombo()
