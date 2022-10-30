@@ -215,10 +215,10 @@ float MinorPlanet::getVMagnitude(const StelCore* core) const
 	//(Code copied from Planet::getVMagnitude())
 	//(this is actually vector subtraction + the cosine theorem :))
 	const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
-	const float observerRq = static_cast<float>(observerHelioPos.lengthSquared());
+	const float observerRq = static_cast<float>(observerHelioPos.normSquared());
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
-	const float planetRq = static_cast<float>(planetHelioPos.lengthSquared());
-	const float observerPlanetRq = static_cast<float>((observerHelioPos - planetHelioPos).lengthSquared());
+	const float planetRq = static_cast<float>(planetHelioPos.normSquared());
+	const float observerPlanetRq = static_cast<float>((observerHelioPos - planetHelioPos).normSquared());
 	const float cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0f*std::sqrt(observerPlanetRq*planetRq));
 	const float phaseAngle = std::acos(cos_chi);
 

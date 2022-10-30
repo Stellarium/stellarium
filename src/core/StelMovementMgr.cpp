@@ -656,7 +656,7 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 						{
 							const double deltaT = timeDragHistory.last().runTime-timeDragHistory.first().runTime;
 							Vec2f d(timeDragHistory.last().x-timeDragHistory.first().x, timeDragHistory.last().y-timeDragHistory.first().y);
-							if (d.length()/static_cast<float>(deltaT) < dragTriggerDistance)
+							if (d.norm()/static_cast<float>(deltaT) < dragTriggerDistance)
 							{
 								core->setTimeRate(StelCore::JD_SECOND);
 							}

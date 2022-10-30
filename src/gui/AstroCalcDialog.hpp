@@ -630,7 +630,7 @@ private:
 	//! Calculation of perihelion and aphelion points
 	QMap<double, double> findOrbitalPointApproach(PlanetP& object1, double startJD, double stopJD);
 	bool findPreciseOrbitalPoint(QPair<double, double>* out, PlanetP object1, double JD, double stopJD, double step, bool minimal);
-	inline double findHeliocentricDistance(double JD, PlanetP object1) const {return object1->getHeliocentricEclipticPos(JD+core->computeDeltaT(JD)/86400.).length();}
+	inline double findHeliocentricDistance(double JD, PlanetP object1) const {return object1->getHeliocentricEclipticPos(JD+core->computeDeltaT(JD)/86400.).norm();}
 	bool isSecondObjectRight(double JD, PlanetP object1, StelObjectP object2);
 
 	// Signal that a plot has to be redone

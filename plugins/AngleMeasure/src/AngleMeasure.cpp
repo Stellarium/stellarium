@@ -273,7 +273,7 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 //! Draw any parts on the screen which are for our module
 void AngleMeasure::draw(StelCore* core)
 {
-	if (startPoint.lengthSquared()==0.0) // avoid crash on switch-on, lp:#1455839
+	if (startPoint.normSquared()==0.0) // avoid crash on switch-on, lp:#1455839
 		return;
 	if (lineVisible.getInterstate() < 0.000001f && messageFader.getInterstate() < 0.000001f)
 		return;
@@ -426,7 +426,7 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 				prj->project(endPoint, e1);
 				prj->project(startPoint, s1);
 				// Move the point closest to the mouse
-				if ((c1-e1).length() > (c1-s1).length())
+				if ((c1-e1).norm() > (c1-s1).norm())
 				{
 					startPoint = endPoint;
 					startPointHor = endPointHor;
@@ -445,7 +445,7 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 					const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 					prjHor->unProject(x,y,endPointHor);
 				}
-				if (!startPoint.length())
+				if (!startPoint.norm())
 				{
 					startPoint = endPoint;
 					startPointHor = endPointHor;
@@ -487,13 +487,13 @@ void AngleMeasure::calculateEnds(void)
 void AngleMeasure::calculateEndsOneLine(const Vec3d &start, const Vec3d &end, Vec3d &perp1Start, Vec3d &perp1End, Vec3d &perp2Start, Vec3d &perp2End, double &angle)
 {
 	Vec3d v0 = end - start;
-	Vec3d v1 = start / end.length();
+	Vec3d v1 = start / end.norm();
 	Vec3d p = v0 ^ v1;
 	p *= 0.08;  // end width
 	perp1Start.set(start[0]-p[0],start[1]-p[1],start[2]-p[2]);
 	perp1End.set(start[0]+p[0],start[1]+p[1],start[2]+p[2]);
 
-	v1 = end / start.length();
+	v1 = end / start.norm();
 	p = v0 ^ v1;
 	p *= 0.08;  // end width
 	perp2Start.set(end[0]-p[0],end[1]-p[1],end[2]-p[2]);

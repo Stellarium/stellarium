@@ -472,8 +472,8 @@ bool SphericalCap::intersectionPoints(const SphericalCap& h1, const SphericalCap
 	const double& b2 = n2[1];
 	const double& c2 = n2[2];
 
-	Q_ASSERT(fabs(n1.lengthSquared()-1.)<0.000001);
-	Q_ASSERT(fabs(n2.lengthSquared()-1.)<0.000001);
+	Q_ASSERT(fabs(n1.normSquared()-1.)<0.000001);
+	Q_ASSERT(fabs(n2.normSquared()-1.)<0.000001);
 
 	// Compute the parametric equation of the line at the intersection of the 2 planes
 	Vec3d u = n1^n2;
@@ -521,7 +521,7 @@ bool SphericalCap::intersectionPoints(const SphericalCap& h1, const SphericalCap
 	// The points are on the unit sphere x^2+y^2+z^2=1, replace x, y and z by the parametric equation to get something of the form at^2+b*t+c=0
 	// const double a = 1.;
 	const double b = p0*u*2.;
-	const double c = p0.lengthSquared()-1.;
+	const double c = p0.normSquared()-1.;
 
 	// If discriminant <=0, zero or 1 real solution
 	const double D = b*b-4.*c;
@@ -534,8 +534,8 @@ bool SphericalCap::intersectionPoints(const SphericalCap& h1, const SphericalCap
 	p1 = p0+u*t1;
 	p2 = p0+u*t2;
 
-	Q_ASSERT(fabs(p1.lengthSquared()-1.)<0.000001);
-	Q_ASSERT(fabs(p2.lengthSquared()-1.)<0.000001);
+	Q_ASSERT(fabs(p1.normSquared()-1.)<0.000001);
+	Q_ASSERT(fabs(p2.normSquared()-1.)<0.000001);
 
 	return true;
 }
@@ -592,7 +592,7 @@ QVector<Vec3d> SphericalCap::getClosedOutlineContour() const
 	QVector<Vec3d> contour;
 	Vec3d p(n);
 	Vec3d axis = n^Vec3d(1,0,0);
-	if (axis.lengthSquared()<0.1)
+	if (axis.normSquared()<0.1)
 		axis = n^Vec3d(0,1,0);	// Improve precision
 	p.transfo4d(Mat4d::rotation(axis, std::acos(d)));
 	const Mat4d& rot = Mat4d::rotation(n, -2.*M_PI/nbStep);
@@ -876,7 +876,7 @@ StelVertexArray SphericalConvexPolygon::getFillVertexArray(const Vec3d &observer
 		aberratedContour.clear();
 		for (const Vec3d &v: qAsConst(contour))
 		{
-			Q_ASSERT(qAbs(v.lengthSquared()-1.0)<0.0001);
+			Q_ASSERT(qAbs(v.normSquared()-1.0)<0.0001);
 			Vec3d vec=v+observerVelocityForAberration;
 			aberratedContour.append(vec);
 		}
@@ -899,7 +899,7 @@ StelVertexArray SphericalConvexPolygon::getOutlineVertexArray(Vec3d observerVelo
 		aberratedContour.clear();
 		for (const Vec3d &v: qAsConst(contour))
 		{
-			Q_ASSERT(qAbs(v.lengthSquared()-1.0)<0.0001);
+			Q_ASSERT(qAbs(v.normSquared()-1.0)<0.0001);
 			Vec3d vec=v+observerVelocityForAberration;
 			aberratedContour.append(vec);
 		}
@@ -1111,7 +1111,7 @@ StelVertexArray SphericalTexturedConvexPolygon::getFillVertexArray(const Vec3d &
 		aberratedContour.clear();
 		for (const Vec3d &v: qAsConst(contour))
 		{
-			Q_ASSERT(qAbs(v.lengthSquared()-1.0)<0.0001);
+			Q_ASSERT(qAbs(v.normSquared()-1.0)<0.0001);
 			Vec3d vec=v+observerVelocityForAberration;
 			aberratedContour.append(vec);
 		}
@@ -1180,11 +1180,11 @@ Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& n2,
 		return p1;
 	}
 	Vec3d n1 = p1^p2;
-	Q_ASSERT(std::fabs(n2.lengthSquared()-1.)<0.00000001);
+	Q_ASSERT(std::fabs(n2.normSquared()-1.)<0.00000001);
 	n1.normalize();
 	// Compute the parametric equation of the line at the intersection of the 2 planes
 	Vec3d u = n1^n2;
-	if (u.length()<1e-7)
+	if (u.norm()<1e-7)
 	{
 		// The planes are parallel
 		ok = false;

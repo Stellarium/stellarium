@@ -235,7 +235,7 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 	}
 
 	auto sunPos  =  sun.getAltAzPosAuto(core);
-	if (qIsNaN(sunPos.length()))
+	if (qIsNaN(sunPos.norm()))
 		sunPos.set(0.,0.,-1.);
 
 	Vec3d moonPos = sunPos;
@@ -249,13 +249,13 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 	if (moon)
 	{
 		moonPos = moon->getAltAzPosAuto(core);
-		if (qIsNaN(moonPos.length()))
+		if (qIsNaN(moonPos.norm()))
 			moonPos.set(0.,0.,-1.);
 
 		// Update the eclipse intensity factor to apply on atmosphere model
 		// these are for radii
-		const double sun_angular_radius = atan(sun.getEquatorialRadius()/sunPos.length());
-		const double moon_angular_radius = atan(moon->getEquatorialRadius()/moonPos.length());
+		const double sun_angular_radius = atan(sun.getEquatorialRadius()/sunPos.norm());
+		const double moon_angular_radius = atan(moon->getEquatorialRadius()/moonPos.norm());
 		const double touch_angle = sun_angular_radius + moon_angular_radius;
 
 		// determine luminance falloff during solar eclipses
@@ -340,7 +340,7 @@ void AtmospherePreetham::computeColor(StelCore* core, const double JD, const Pla
 		const Vec2f &v(posGrid[i]);
 		prj->unProject(static_cast<double>(v[0]),static_cast<double>(v[1]),point);
 
-		Q_ASSERT(fabs(point.lengthSquared()-1.0) < 1e-10);
+		Q_ASSERT(fabs(point.normSquared()-1.0) < 1e-10);
 
 		Vec3f pointF=point.toVec3f();
 		if (!noScatter)

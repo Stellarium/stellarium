@@ -89,7 +89,7 @@ void TelescopeClientASCOM::performCommunication()
 	}
 
 	mInterpolatedPosition = mInterpolatedPosition * 10 + mCurrentTargetPosition;
-	const double lq = mInterpolatedPosition.lengthSquared();
+	const double lq = mInterpolatedPosition.normSquared();
 	if (lq > 0.0)
 		mInterpolatedPosition *= (1.0 / std::sqrt(lq));
 	else

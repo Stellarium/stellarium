@@ -1588,7 +1588,7 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 			// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
 			Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
 			middlePoint.normalize();
-			middlePoint*=(p1-rotCenter).length();
+			middlePoint*=(p1-rotCenter).norm();
 			middlePoint+=rotCenter;
 			if (!viewPortSphericalCap.contains(middlePoint))
 			{
