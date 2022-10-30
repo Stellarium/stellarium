@@ -3796,7 +3796,7 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	const StelProjectorP& projector = painter.getProjector();
 
 	const Mat4f& m = projector->getProjectionMatrix();
-	const QMatrix4x4 qMat = m.convertToQMatrix();
+	const QMatrix4x4 qMat = m.toQMatrix();
 
 	computeModelMatrix(data.modelMatrix, false);
 	// used to project from solar system into local space

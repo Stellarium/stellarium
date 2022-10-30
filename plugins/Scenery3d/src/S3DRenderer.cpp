@@ -1207,7 +1207,7 @@ void S3DRenderer::drawFromCubeMap()
 
 	vao.bind();
 	//setup shader params
-	projectionMatrix = altAzProjector->getProjectionMatrix().convertToQMatrix();
+	projectionMatrix = altAzProjector->getProjectionMatrix().toQMatrix();
 	cubeShader->setUniformValue(shaderManager.uniformLocation(cubeShader,ShaderMgr::UNIFORM_MAT_PROJECTION), projectionMatrix);
 	cubeShader->setUniformValue(shaderManager.uniformLocation(cubeShader,ShaderMgr::UNIFORM_TEX_DIFFUSE),0);
 	cubeVertexBuffer.bind();
@@ -1276,7 +1276,7 @@ void S3DRenderer::drawDirect() // for Perspective Projection only!
     float aspect = static_cast<float>(altAzProjector->getViewportWidth()) / static_cast<float>(altAzProjector->getViewportHeight());
 
     //calc modelview transform
-    QMatrix4x4 mvMatrix = altAzProjector->getModelViewTransform()->getApproximateLinearTransfo().convertToQMatrix();
+    QMatrix4x4 mvMatrix = altAzProjector->getModelViewTransform()->getApproximateLinearTransfo().toQMatrix();
     mvMatrix.optimize(); //may make inversion faster?
 
     //recalculate lighting info

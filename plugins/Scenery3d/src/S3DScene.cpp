@@ -204,7 +204,7 @@ S3DScene::S3DScene(const SceneInfo &info)
 	  viewDirection(1.0,0.0,0.0), position(0.0,0.0,0.0), eye_height(1.65), eyePosition(0.0,0.0,1.65)
 {
 	//setup main load transform matrix
-	zRot2Grid = (info.zRotateMatrix*info.obj2gridMatrix).convertToQMatrix();
+	zRot2Grid = (info.zRotateMatrix*info.obj2gridMatrix).toQMatrix();
 }
 
 void S3DScene::setModel(const StelOBJ &model)

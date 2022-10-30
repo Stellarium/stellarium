@@ -1,7 +1,7 @@
 // Author: Qam1
 // Name: Earth Events from a floating city on Venus
 // License: Public Domain
-// Version: 12.0
+// Version: 12.1
 // Description: Earth Events from a floating city on Venus
 
 
@@ -79579,6 +79579,7 @@ r = d;
 
 while (d==r)
 {
+core.wait(0.05);
 r = Math.floor(core.getJDay());
 }
 
