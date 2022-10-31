@@ -227,7 +227,7 @@ void HelpDialog::downloadComplete(QNetworkReply *reply)
 	else
 		appVersion = StelUtils::getApplicationPublicVersion();
 
-	QStringList c = StelUtils::getApplicationVersion().split(".");
+	QStringList c = appVersion.split(".");
 	int r = StelUtils::compareVersions(latestVersion, appVersion);
 	if (r==-1 || c.count()>v.count() || c.last().contains("-"))
 		message = q_("Looks like you are using the development version of Stellarium.");
