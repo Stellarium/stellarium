@@ -117,7 +117,7 @@ void Refraction::updatePrecomputed()
 
 void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 {
-	const double length = altAzPos.length();
+	const double length = altAzPos.norm();
 	if (length==0.0)
 	{
 		// Under some circumstances there are zero coordinates. Just leave them alone.
@@ -162,7 +162,7 @@ void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 // going from observed position to geometrical position.
 void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 {
-	const double length = altAzPos.length();
+	const double length = altAzPos.norm();
 	if (length==0.0)
 	{
 		// Under some circumstances there are zero coordinates. Just leave them alone.

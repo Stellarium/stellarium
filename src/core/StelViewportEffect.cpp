@@ -144,7 +144,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 				rc &= prj->forward(v);
 				const float x = static_cast<float>(newProjectorParams.viewportCenter[0]) + v[0] * view_scaling_factor;
 				const float y = static_cast<float>(newProjectorParams.viewportCenter[1]) + v[1] * view_scaling_factor;
-				vertex_point.h = rc ? static_cast<double>((vX^vY).length()) : 0.0;
+				vertex_point.h = rc ? static_cast<double>((vX^vY).norm()) : 0.0;
 
 				// sharp image up to the border of the fisheye image, at the cost of
 				// accepting clamping artefacts. You can get rid of the clamping

@@ -202,7 +202,7 @@ void Scenery3d::update(double deltaTime)
 
 		//perform movement
 		//when zoomed in more than 5°, we slow down movement
-		if(movementKeyInput.lengthSquared() > 0.00001)
+		if(movementKeyInput.normSquared() > 0.00001)
 			currentScene->moveViewer(movementKeyInput * deltaTime * 0.01 * std::max(5.0, mvMgr->getCurrentFov()));
 
 		//update material fade info, if necessary

@@ -741,13 +741,13 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, 
 	prj->project(currPos,currSun);
 	const auto dFad=1e3*(currFad-prevFad);				// per thousand of the fader
 	const auto dFov=2e3*(currFov-prevFov)/(currFov+prevFov);	// per thousand of the field of view
-	const auto dPos=1e3*(currPos-prevPos).length();			// milli-AU :)
-	const auto dSun=(currSun-prevSun).length();			// pixel
+	const auto dPos=1e3*(currPos-prevPos).norm();			// milli-AU :)
+	const auto dSun=(currSun-prevSun).norm();			// pixel
 	const auto changeOfView=Vec4d(dFad,dFov,dPos,dSun);
 	const auto allowedChange=eclipseFactor<1?10e-3:1;		// for solar eclipses, prioritize speed over resolution
 	const auto hysteresis=atmoRes==1?1:200e-3;			// hysteresis avoids frequent changing of the resolution
 	const auto allowedChangeOfView=allowedChange*hysteresis;
-	const auto changed=changeOfView.length()>allowedChangeOfView;	// change is too big
+	const auto changed=changeOfView.norm()>allowedChangeOfView;	// change is too big
 	const auto timeout=dynResTimer<=0;				// do we have a timeout?
 	// if we don't have a timeout or too much change, we skip the frame
 	if (!changed && !timeout)
@@ -763,7 +763,7 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, 
 		resizeRenderTarget(width, height);
 		const auto verbose=qApp->property("verbose").toBool();
 		if (verbose)
-			qDebug() << "dynResTimer" << dynResTimer << "atmoRes" << atmoRes << "changeOfView" << changeOfView.length() << changeOfView;
+			qDebug() << "dynResTimer" << dynResTimer << "atmoRes" << atmoRes << "changeOfView" << changeOfView.norm() << changeOfView;
 	}
 	// At reduced resolution, we hurry to redraw - at full resolution, we have time.
 	dynResTimer=changed?5:17;
@@ -810,15 +810,15 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 		}
 
 		auto sunPos  =  sun.getAltAzPosAuto(core);
-		if (std::isnan(sunPos.length()))
+		if (std::isnan(sunPos.norm()))
 			sunPos.set(0, 0, -1);
 
 		// if we run dynamic resolution mode and don't have a timeout or too much change, we skip the frame
 		if (dynamicResolution(prj, sunPos, width, height))
 			return;
 
-		const auto sunDir = sunPos / sunPos.length();
-		const double sunAngularRadius = atan(sun.getEquatorialRadius()/sunPos.length());
+		const auto sunDir = sunPos / sunPos.norm();
+		const double sunAngularRadius = atan(sun.getEquatorialRadius()/sunPos.norm());
 
 		// If we have no moon, just put it into nadir
 		Vec3d moonDir{0.,0.,-1.};
@@ -828,11 +828,11 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 		if (moon)
 		{
 			auto moonPos = moon->getAltAzPosAuto(core);
-			if (std::isnan(moonPos.length()))
+			if (std::isnan(moonPos.norm()))
 				moonPos.set(0, 0, -1);
-			moonDir = moonPos / moonPos.length();
+			moonDir = moonPos / moonPos.norm();
 
-			const double moonAngularRadius = atan(moon->getEquatorialRadius()/moonPos.length());
+			const double moonAngularRadius = atan(moon->getEquatorialRadius()/moonPos.norm());
 			const double separationAngle = std::acos(sunDir.dot(moonDir));  // angle between them
 
 			sunVisibility_ = sunVisibilityDueToMoon(sunAngularRadius, moonAngularRadius, separationAngle);
@@ -841,7 +841,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 
 			const Vec3d earthGeomPos = currentPlanet.getAltAzPosGeometric(core);
 			const Vec3d moonGeomPos = moon->getAltAzPosGeometric(core);
-			earthMoonDistance = (earthGeomPos - moonGeomPos).length() * (AU*1000);
+			earthMoonDistance = (earthGeomPos - moonGeomPos).norm() * (AU*1000);
 		}
 		else
 		{

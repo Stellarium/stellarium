@@ -82,7 +82,7 @@ Vec3d InterpolatedPosition::get(qint64 now) const
 			if (pp->client_micros != p->client_micros)
 			{
 				Vec3d rval = p->pos * static_cast<double>(now - pp->client_micros) + pp->pos * static_cast<double>(p->client_micros - now);
-				double f = rval.lengthSquared();
+				double f = rval.normSquared();
 				if (f > 0.0)
 				{
 					return (1.0/std::sqrt(f))*rval;

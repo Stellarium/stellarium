@@ -896,7 +896,7 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 	tessArc.push_back(win1);
 
 
-	if (rotCenter.lengthSquared()<1e-11)
+	if (rotCenter.normSquared()<1e-11)
 	{
 		// Great circle
 		// Perform the tesselation of the arc in small segments in a way so that the lines look smooth
@@ -904,8 +904,8 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 	}
 	else
 	{
-		Vec3d tmp = (rotCenter^start)/rotCenter.length();
-		const double radius = fabs(tmp.length());
+		Vec3d tmp = (rotCenter^start)/rotCenter.norm();
+		const double radius = fabs(tmp.norm());
 		// Perform the tesselation of the arc in small segments in a way so that the lines look smooth
 		fIter(prj, start-rotCenter, stop-rotCenter, win1, win2, tessArc, tessArc.insert(tessArc.end(), win2), radius, rotCenter);
 	}
@@ -1007,9 +1007,9 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
         const Vec2f* texturePos, QVarLengthArray<Vec2f, 4096>* outTexturePos, const Vec3f *colors, QVarLengthArray<Vec3f, 4096> *outColors,
         double maxSqDistortion, int nbI, bool checkDisc1, bool checkDisc2, bool checkDisc3) const
 {
-	Q_ASSERT(fabs(vertices[0].length()-1.)<0.00001);
-	Q_ASSERT(fabs(vertices[1].length()-1.)<0.00001);
-	Q_ASSERT(fabs(vertices[2].length()-1.)<0.00001);
+	Q_ASSERT(fabs(vertices[0].norm()-1.)<0.00001);
+	Q_ASSERT(fabs(vertices[1].norm()-1.)<0.00001);
+	Q_ASSERT(fabs(vertices[2].norm()-1.)<0.00001);
 	if (clippingCap && clippingCap->containsTriangle(vertices))
 		clippingCap = Q_NULLPTR;
 	if (clippingCap && !clippingCap->intersectsTriangle(vertices))
@@ -1603,7 +1603,7 @@ void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDisc
 		QVector<Vec3d> aberredVertex(arr.vertex.size());
 		for (int i=0; i<arr.vertex.size(); i++)
 		{
-			Q_ASSERT(qFuzzyCompare(arr.vertex.at(i).lengthSquared(), 1.0));
+			Q_ASSERT(qFuzzyCompare(arr.vertex.at(i).normSquared(), 1.0));
 			Vec3d vec=arr.vertex.at(i)+aberration;
 			vec.normalize();
 			aberredVertex[i]=vec;
@@ -1710,8 +1710,8 @@ void StelPainter::drawCircle(float x, float y, float r)
 		return;
 	const Vec2f center(x,y);
 	const Vec2f v_center(0.5f*prj->viewportXywh[2],0.5f*prj->viewportXywh[3]);
-	const float R = v_center.length();
-	const float d = (v_center-center).length();
+	const float R = v_center.norm();
+	const float d = (v_center-center).norm();
 	if (d > r+R || d < r-R)
 		return;
 	const int segments = 180;

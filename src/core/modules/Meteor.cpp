@@ -110,7 +110,7 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 	positionAltAz.transfo4d(m_matAltAzToRadiant);
 
 	// find the angle from horizon to meteor
-	float meteorAlt = static_cast<float>(std::asin(positionAltAz[2] / positionAltAz.length()));
+	float meteorAlt = static_cast<float>(std::asin(positionAltAz[2] / positionAltAz.norm()));
 
 	// this meteor should not be visible if it is above the maximum altitude
 	// or if it's below the horizon!
@@ -212,7 +212,7 @@ bool Meteor::update(double deltaTime)
 	}
 
 	// update apparent magnitude based on distance to observer
-	float scale = std::pow(m_minDist / static_cast<float>(m_position.length()), 2);
+	float scale = std::pow(m_minDist / static_cast<float>(m_position.norm()), 2);
 	m_aptMag = m_absMag * qMin(scale, 1.f);
 	m_aptMag = qMax(m_aptMag, 0.f);
 

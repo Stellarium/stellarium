@@ -151,7 +151,7 @@ void ToastTile::prepareDraw(Vec3f color)
 		for (int i=0; i<originalVertexArray.size(); i++)
 		{
 			Vec3d vert=originalVertexArray.at(i);
-			Q_ASSERT_X(fabs(vert.lengthSquared()-1.0)<0.0001, "StelToast aberration", "vertex length not unity");
+			Q_ASSERT_X(fabs(vert.normSquared()-1.0)<0.0001, "StelToast aberration", "vertex length not unity");
 			vert+=vel;
 			vert.normalize();
 
@@ -173,7 +173,7 @@ void ToastTile::prepareDraw(Vec3f color)
 		for (int i=0; i<vertexArray.size(); ++i)
 		{
 			Vec3d vertAltAz=core->j2000ToAltAz(vertexArray.at(i), StelCore::RefractionOn);
-			Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001);
+			Q_ASSERT(fabs(vertAltAz.normSquared()-1.0) < 0.001);
 
 			float oneMag=0.0f;
 			extinction.forward(vertAltAz, &oneMag);

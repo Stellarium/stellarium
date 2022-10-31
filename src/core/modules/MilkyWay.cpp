@@ -133,7 +133,7 @@ void MilkyWay::draw(StelCore* core)
 		for (int i=0; i<vertexArrayNoAberration->vertex.size(); ++i)
 		{
 			Vec3d vert=vertexArrayNoAberration->vertex.at(i);
-			Q_ASSERT_X(fabs(vert.lengthSquared()-1.0)<0.0001, "Milky Way aberration", "vertex length not unity");
+			Q_ASSERT_X(fabs(vert.normSquared()-1.0)<0.0001, "Milky Way aberration", "vertex length not unity");
 			vert+=vel;
 			vert.normalize();
 
@@ -218,7 +218,7 @@ void MilkyWay::draw(StelCore* core)
 		for (int i=0; i<vertexArray->vertex.size(); ++i)
 		{
 			Vec3d vertAltAz=core->j2000ToAltAz(vertexArray->vertex.at(i), StelCore::RefractionOn);
-			Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001);
+			Q_ASSERT(fabs(vertAltAz.normSquared()-1.0) < 0.001);
 
 			float mag=0.0f;
 			extinction.forward(vertAltAz, &mag);

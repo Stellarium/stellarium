@@ -1224,7 +1224,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				else
 					coordStrings = getStringCoordinates(pos, horizon, useSouthAzimuth, withDecimalDegree);
 
-				QString extra = QString::number(pos.length(), 'f', 5); // A.U.
+				QString extra = QString::number(pos.norm(), 'f', 5); // A.U.
 
 				// Convert to arc-seconds the angular size of Solar system object (with rings, if any)
 				QString angularSize = QString::number(planet->getAngularRadius(core) * 120., 'f', 4);
@@ -1500,7 +1500,7 @@ void AstroCalcDialog::currentHECPositions()
 		if (!planet.isNull())
 		{
 			Vec3d pos = planet->getHeliocentricEclipticPos();
-			double distance = pos.length();
+			double distance = pos.norm();
 			double longitude, latitude;
 			StelUtils::rectToSphe(&longitude, &latitude, pos);
 			if (longitude<0) longitude+=2.0*M_PI;
@@ -1954,7 +1954,7 @@ void AstroCalcDialog::generateEphemeris()
 			treeItem->setTextAlignment(EphemerisMagnitude, Qt::AlignRight);
 			treeItem->setText(EphemerisPhase, phaseStr);
 			treeItem->setTextAlignment(EphemerisPhase, Qt::AlignRight);
-			treeItem->setText(EphemerisDistance, QString::number(obj->getJ2000EquatorialPos(core).length(), 'f', 6));
+			treeItem->setText(EphemerisDistance, QString::number(obj->getJ2000EquatorialPos(core).norm(), 'f', 6));
 			treeItem->setTextAlignment(EphemerisDistance, Qt::AlignRight);
 			treeItem->setToolTip(EphemerisDistance, QString("%1, %2").arg(distanceInfo, distanceUM));
 			treeItem->setText(EphemerisElongation, elongStr.replace("+","",Qt::CaseInsensitive)); // remove sign
@@ -2340,7 +2340,7 @@ LunarEclipseBessel::LunarEclipseBessel(double &besX, double &besY, double &besL1
 	const double raDiff = StelUtils::fmodpos(raMoon-raShadow, 2.*M_PI);
 	besX = std::cos(deMoon)*std::sin(raDiff)*3600.*M_180_PI;
 	besY = (std::cos(deShadow)*std::sin(deMoon)-std::sin(deShadow)*std::cos(deMoon)*std::cos(raDiff))*3600.* M_180_PI;
-	const double dist=moon->getEclipticPos().length();  // geocentric Lunar distance [AU]
+	const double dist=moon->getEclipticPos().norm();  // geocentric Lunar distance [AU]
 	const double mSD=atan(moon->getEquatorialRadius()/dist)*M_180_PI*3600.; // arcsec
 	const QPair<Vec3d,Vec3d>shadowRadii=ssystem->getEarthShadowRadiiAtLunarDistance();
 	const double f1 = shadowRadii.second[0]; // radius of penumbra at the distance of the Moon
@@ -2493,7 +2493,7 @@ void AstroCalcDialog::generateLunarEclipses()
 				// and the American Ephemeris and Nautical Almanac (1961)
 				// Algorithm taken from Planet::getLunarEclipseMagnitudes()
 
-				const double dist=moon->getEclipticPos().length();  // geocentric Lunar distance [AU]
+				const double dist=moon->getEclipticPos().norm();  // geocentric Lunar distance [AU]
 				const double mSD=atan(moon->getEquatorialRadius()/dist) * M_180_PI*3600.; // arcsec
 				double x,y,L1,L2,L3,latitude,longitude;
 				LunarEclipseBessel(x,y,L1,L2,L3,latitude,longitude);
@@ -5075,10 +5075,10 @@ TransitBessel::TransitBessel(PlanetP object, double &besX, double &besY,
 	StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
 	StelUtils::rectToSphe(&raPlanet, &dePlanet, object->getEquinoxEquatorialPos(core));
 
-	const double sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core).length();
+	const double sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core).norm();
 	static const double earthRadius = ssystem->getEarth()->getEquatorialRadius()*AU;
 	// Planet's distance in Earth's radius
-	double pdistanceER = object->getEquinoxEquatorialPos(core).length() * AU / earthRadius;
+	double pdistanceER = object->getEquinoxEquatorialPos(core).norm() * AU / earthRadius;
 	// Greenwich Apparent Sidereal Time
 	const double gast = get_apparent_sidereal_time(core->getJD(), core->getJDE());
 	// Avoid bug for special cases happen around Vernal Equinox
@@ -6280,7 +6280,7 @@ double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const AstroCalcC
 			break;
 		case AstroCalcChart::Distance1:
 		case AstroCalcChart::Distance2:
-			value =  ssObj->getJ2000EquatorialPos(core).length();
+			value =  ssObj->getJ2000EquatorialPos(core).norm();
 			if (ssObj->getEnglishName()=="Moon")
 				value*=(AU*0.001);
 			break;
@@ -6302,7 +6302,7 @@ double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const AstroCalcC
 			break;
 		case AstroCalcChart::HeliocentricDistance1:
 		case AstroCalcChart::HeliocentricDistance2:
-			value =  ssObj->getHeliocentricEclipticPos().length();
+			value =  ssObj->getHeliocentricEclipticPos().norm();
 			break;
 		case AstroCalcChart::TransitAltitude1:
 		case AstroCalcChart::TransitAltitude2:
@@ -6873,7 +6873,7 @@ void AstroCalcDialog::calculatePhenomena()
 			StelObjectP mObj = qSharedPointerCast<StelObject>(sun);
 			if (quadrature)
 			{
-				if (planet->getHeliocentricEclipticPos().length()<core->getCurrentPlanet()->getHeliocentricEclipticPos().length())
+				if (planet->getHeliocentricEclipticPos().norm()<core->getCurrentPlanet()->getHeliocentricEclipticPos().norm())
 				{
 					// greatest elongations for inner planets
 					fillPhenomenaTable(findGreatestElongationApproach(planet, mObj, startJD, stopJD), planet, sun, PhenomenaTypeIndex::GreatestElongation);
@@ -6966,8 +6966,8 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		bool occultation = false;
 		const double s1 = object1->getSpheroidAngularRadius(core);
 		const double s2 = object2->getSpheroidAngularRadius(core);
-		const double d1 = object1->getJ2000EquatorialPos(core).length();
-		const double d2 = object2->getJ2000EquatorialPos(core).length();
+		const double d1 = object1->getJ2000EquatorialPos(core).norm();
+		const double d2 = object2->getJ2000EquatorialPos(core).norm();
 		if (mode==PhenomenaTypeIndex::Shadows) // shadows
 		{
 			phenomenType = q_("Shadow transit");
@@ -7046,9 +7046,9 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		}
 		else if (object1 == sun || object2 == sun) // this is may be superior of inferior conjunction for inner planet
 		{
-			double dcp = planet->getHeliocentricEclipticPos().length();
-			double dp  = (object1 == sun) ? object2->getHeliocentricEclipticPos().length() :
-							object1->getHeliocentricEclipticPos().length();
+			double dcp = planet->getHeliocentricEclipticPos().norm();
+			double dp  = (object1 == sun) ? object2->getHeliocentricEclipticPos().norm() :
+							object1->getHeliocentricEclipticPos().norm();
 			if (dp < dcp) // OK, it's inner planet
 			{
 				if (object1 == sun)
@@ -7231,8 +7231,8 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		bool occultation = false;		
 		const double s1 = object1->getSpheroidAngularRadius(core);
 		const double s2 = object2->getAngularRadius(core);
-		const double d1 = object1->getJ2000EquatorialPos(core).length();
-		const double d2 = object2->getJ2000EquatorialPos(core).length();
+		const double d1 = object1->getJ2000EquatorialPos(core).norm();
+		const double d2 = object2->getJ2000EquatorialPos(core).norm();
 		if (mode==PhenomenaTypeIndex::Opposition)
 		{
 			phenomenType = q_("Opposition");
@@ -7264,12 +7264,12 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		}
 		else if (object1 == sun || object2 == sun) // this is may be superior of inferior conjunction for inner planet
 		{
-			double dcp = (planet->getEquinoxEquatorialPos(core) - sun->getEquinoxEquatorialPos(core)).length();
+			double dcp = (planet->getEquinoxEquatorialPos(core) - sun->getEquinoxEquatorialPos(core)).norm();
 			double dp;
 			if (object1 == sun)
-				dp = (object2->getEquinoxEquatorialPos(core) - sun->getEquinoxEquatorialPos(core)).length();
+				dp = (object2->getEquinoxEquatorialPos(core) - sun->getEquinoxEquatorialPos(core)).norm();
 			else
-				dp = (object1->getEquinoxEquatorialPos(core) - sun->getEquinoxEquatorialPos(core)).length();
+				dp = (object1->getEquinoxEquatorialPos(core) - sun->getEquinoxEquatorialPos(core)).norm();
 			if (dp < dcp) // OK, it's inner planet
 			{
 				if (object1 == sun)
@@ -7833,7 +7833,7 @@ double AstroCalcDialog::findRightAscension(double JD, PlanetP object)
 	const double JDE=JD+core->computeDeltaT(JD)/86400.;
 	const Vec3d obs=core->getCurrentPlanet()->getHeliocentricEclipticPos(JDE);
 	Vec3d body=object->getHeliocentricEclipticPos(JDE);
-	const double distanceCorrection=(body-obs).length() * (AU / (SPEED_OF_LIGHT * 86400.));
+	const double distanceCorrection=(body-obs).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
 	body=object->getHeliocentricEclipticPos(JDE-distanceCorrection);
 	Vec3d bodyJ2000=StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(body - obs);
 	double ra, dec;
@@ -9155,7 +9155,7 @@ void AstroCalcDialog::computePlanetaryData()
 	PlanetP secondCBId = solarSystem->searchByEnglishName(secondCelestialBody);
 	Vec3d posSCB = secondCBId->getJ2000EquatorialPos(core);
 
-	const double distanceAu = (posFCB - posSCB).length();
+	const double distanceAu = (posFCB - posSCB).norm();
 	const double distanceKm = AU * distanceAu;
 	QString degree = QChar(0x00B0);
 	// TRANSLATORS: Unit of measure for distance - kilometers
@@ -9226,11 +9226,11 @@ void AstroCalcDialog::computePlanetaryData()
 	// TRANSLATORS: Unit of measure for speed - kilometers per second
 	QString kms = qc_("km/s", "speed");
 
-	double orbVelFCB = firstCBId->getEclipticVelocity().length();
+	double orbVelFCB = firstCBId->getEclipticVelocity().norm();
 	QString orbitalVelocityFCB = orbVelFCB<=0. ? dash : QString("%1 %2").arg(QString::number(orbVelFCB * AU/86400., 'f', 3), kms);
 	ui->labelOrbitalVelocityFCBValue->setText(orbitalVelocityFCB);
 
-	double orbVelSCB = secondCBId->getEclipticVelocity().length();
+	double orbVelSCB = secondCBId->getEclipticVelocity().norm();
 	QString orbitalVelocitySCB = orbVelSCB<=0. ? dash : QString("%1 %2").arg(QString::number(orbVelSCB * AU/86400., 'f', 3), kms);
 	ui->labelOrbitalVelocitySCBValue->setText(orbitalVelocitySCB);
 
@@ -9293,7 +9293,7 @@ void AstroCalcDialog::drawDistanceGraph()
 		core->update(0.0);
 		Vec3d posFCB = firstCBId->getJ2000EquatorialPos(core);
 		Vec3d posSCB = secondCBId->getJ2000EquatorialPos(core);
-		double distanceAu = (posFCB - posSCB).length();
+		double distanceAu = (posFCB - posSCB).norm();
 		pcChart->append(AstroCalcChart::pcDistanceAU, StelUtils::jdToQDateTime(JD+utcOffset, Qt::UTC).toMSecsSinceEpoch(), distanceAu);
 		if (firstCBId != currentPlanet && secondCBId != currentPlanet)
 		{

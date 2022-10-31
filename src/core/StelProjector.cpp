@@ -404,8 +404,8 @@ void StelProjector::computeBoundingCap()
 	bool ok = unProject(static_cast<double>(viewportXywh[0]+0.5f*viewportXywh[2]), static_cast<double>(viewportXywh[1]+0.5f*viewportXywh[3]), boundingCap.n);
 	// The central point should be at a valid position by definition.
 	// When center is offset, this assumption may not hold however.
-	Q_ASSERT(ok || (viewportCenterOffset.lengthSquared()>0) );
-	const bool needNormalization = fabs(boundingCap.n.lengthSquared()-1.)>0.00000001;
+	Q_ASSERT(ok || (viewportCenterOffset.normSquared()>0) );
+	const bool needNormalization = fabs(boundingCap.n.normSquared()-1.)>0.00000001;
 
 	// Now need to determine the aperture
 	Vec3d e0,e1,e2,e3,e4,e5;

@@ -1237,7 +1237,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		for (const auto& p : qAsConst(systemPlanets))
 		{
 			//p->setExtraInfoString(StelObject::DebugAid, "");
-			const double lightTimeDays = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
+			const double lightTimeDays = (p->getHeliocentricEclipticPos()-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
 			Vec3d aberrationPush(0.);
 			if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
 				aberrationPush=lightTimeDays*aberrationPushSpeed;
@@ -1247,7 +1247,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		for (const auto& p : qAsConst(systemPlanets))
 		{
 			//p->setExtraInfoString(StelObject::DebugAid, "");
-			const double lightTimeDays = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
+			const double lightTimeDays = (p->getHeliocentricEclipticPos()-obsPosJDE).norm() * (AU / (SPEED_OF_LIGHT * 86400.));
 			Vec3d aberrationPush(0.);
 			if (withAberration && (observerPlanet->englishName!="Earth" || p->englishName!="Moon"))
 				aberrationPush=lightTimeDays*aberrationPushSpeed;
@@ -1294,7 +1294,7 @@ void SolarSystem::computeTransMatrices(double dateJDE, const Vec3d& observerPos)
 	{
 		for (const auto& p : qAsConst(systemPlanets))
 		{
-			const double light_speed_correction = (p->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
+			const double light_speed_correction = (p->getHeliocentricEclipticPos()-observerPos).norm() * (AU / (SPEED_OF_LIGHT * 86400));
 			p->computeTransMatrix(dateJD-light_speed_correction, dateJDE-light_speed_correction);
 		}
 	}
@@ -2023,14 +2023,14 @@ bool SolarSystem::nearLunarEclipse() const
 	// shadow location at earth + moon distance along earth vector from (aberrated) sun
 	Vec3d en = e-sun;
 	en.normalize();
-	Vec3d shadow = en * (e.length() + m.length());
+	Vec3d shadow = en * (e.norm() + m.norm());
 
 	// find shadow radii in AU
-	double r_penumbra = shadow.length()*702378.1/AU/e.length() - SUN_RADIUS/AU;
+	double r_penumbra = shadow.norm()*702378.1/AU/e.norm() - SUN_RADIUS/AU;
 
 	// modify shadow location for scaled moon
 	Vec3d mdist = shadow - mh;
-	if(mdist.length() > r_penumbra + 2000./AU) return false;   // not visible so don't bother drawing
+	if(mdist.norm() > r_penumbra + 2000./AU) return false;   // not visible so don't bother drawing
 
 	return true;
 }
@@ -3186,14 +3186,14 @@ QPair<double, PlanetP> SolarSystem::getSolarEclipseFactor(const StelCore* core) 
 
 		Vec3d v1 = Lp - P3;
 		Vec3d v2 = C - P3;
-		const double L = v1.length();
-		const double l = v2.length();
+		const double L = v1.norm();
+		const double l = v2.norm();
 		v1 /= L;
 		v2 /= l;
 
 		const double R = RS / L;
 		const double r = radius / l;
-		const double d = ( v1 - v2 ).length();
+		const double d = ( v1 - v2 ).norm();
 		double illumination;
 
 		if(d >= R + r) // distance too far
@@ -3245,8 +3245,8 @@ QPair<Vec3d,Vec3d> SolarSystem::getEarthShadowRadiiAtLunarDistance() const
 	PlanetP sun=getSun();
 	PlanetP moon=getMoon();
 	PlanetP earth=getEarth();
-	const double lunarDistance=moon->getEclipticPos().length(); // Lunar distance [AU]
-	const double earthDistance=earth->getHeliocentricEclipticPos().length(); // Earth distance [AU]
+	const double lunarDistance=moon->getEclipticPos().norm(); // Lunar distance [AU]
+	const double earthDistance=earth->getHeliocentricEclipticPos().norm(); // Earth distance [AU]
 	const double sunHP =asin(earth->getEquatorialRadius()/earthDistance) * M_180_PI*3600.; // arcsec.
 	const double moonHP=asin(earth->getEquatorialRadius()/lunarDistance) * M_180_PI*3600.; // arcsec.
 	const double sunSD  =atan(sun->getEquatorialRadius()/earthDistance)  * M_180_PI*3600.; // arcsec.
