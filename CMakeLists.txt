@@ -139,11 +139,12 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
      ENDIF()
 ENDIF()
 
-SET(STELLARIUM_RELEASE_BUILD 1 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
+SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
 IF(STELLARIUM_RELEASE_BUILD)
      ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
      SET(SERIES "${STELLARIUM_MINOR}.x")
      SET(WINDOWS_PACKAGE_VERSION "${VERSION}.0")
+     SET(ISS_PACKAGE_VERSION "${STELLARIUM_PUBLIC_VERSION}")
 ELSE()
      SET(SERIES "head")
      ########### Get revision number for non-release builds ###########
