@@ -42,4 +42,6 @@ Vec3f calcRGBMaxValue(DitheringMode mode);
 
 QString makeDitheringShader();
 
+Q_DECLARE_METATYPE(DitheringMode)
+
 #endif
