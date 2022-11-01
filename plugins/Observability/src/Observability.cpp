@@ -164,7 +164,7 @@ void Observability::updateMessageText()
 	msgSrcNotObs	= q_("Source is not observable.");
 	msgGreatElong	= q_("Greatest elongation: %1 (at %2 deg.)");
 	msgLargSSep	= q_("Largest Sun separation: %1 (at %2 deg.)");
-	msgNone		= q_("None");
+	msgNone		= qc_("None", "not exist");
 	// TRANSLATORS: The space at the end is significant - another sentence may follow.
 	msgAcroRise	= q_("Acronychal rise/set: %1/%2. ");
 	msgHeliRise	= q_("Heliacal rise/set: %1/%2. ");
