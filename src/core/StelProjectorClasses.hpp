@@ -217,7 +217,7 @@ public:
 class StelProjector2d : public StelProjector
 {
 public:
-	StelProjector2d() : StelProjector(ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity()))) {}
+	StelProjector2d() : StelProjector(ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity(),Mat4d::identity()))) {}
 	virtual QString getNameI18() const Q_DECL_OVERRIDE;
 	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
 	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 360.f;}
