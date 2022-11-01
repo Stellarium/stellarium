@@ -65,7 +65,7 @@ public:
 	class Mat4dTransform: public ModelViewTranform
 	{
 	public:
-        Mat4dTransform(const Mat4d& m);
+        Mat4dTransform(const Mat4d& altAzToWorld, const Mat4d& vertexToAltAzPos);
 	void forward(Vec3d& v) const Q_DECL_OVERRIDE;
 	void backward(Vec3d& v) const Q_DECL_OVERRIDE;
 	void forward(Vec3f& v) const Q_DECL_OVERRIDE;
@@ -81,6 +81,8 @@ public:
 		//! transfo matrix and invert
 		Mat4d transfoMat;
 		Mat4f transfoMatf;
+		//! Transforms a vertex from model space to coordinates where Z is zenith, so zenith angle can easily be computed.
+		Mat4f vertexToAltAzPos;
 	};
 
 	//! @enum StelProjectorMaskType

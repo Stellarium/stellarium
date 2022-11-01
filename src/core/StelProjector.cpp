@@ -25,11 +25,12 @@
 #include <QDebug>
 #include <QString>
 
-StelProjector::Mat4dTransform::Mat4dTransform(const Mat4d& m)
-    : transfoMat(m),
-      transfoMatf(toMat4f(m))
+StelProjector::Mat4dTransform::Mat4dTransform(const Mat4d& altAzToWorld, const Mat4d& vertexToAltAzPos)
+    : transfoMat(altAzToWorld*vertexToAltAzPos)
+    , transfoMatf(toMat4f(transfoMat))
+	, vertexToAltAzPos(toMat4f(vertexToAltAzPos))
 {
-	Q_ASSERT(m[0]==m[0]); // prelude to assert later in Atmosphere rendering... still investigating
+	Q_ASSERT(transfoMat[0]==transfoMat[0]); // prelude to assert later in Atmosphere rendering... still investigating
 }
 
 void StelProjector::Mat4dTransform::forward(Vec3d& v) const
