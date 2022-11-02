@@ -24,6 +24,8 @@
 #include "VecMath.hpp"
 #include "StelSphereGeometry.hpp"
 
+class QOpenGLShaderProgram;
+
 //! @class StelProjector
 //! Provide the main interface to all operations of projecting coordinates from sky to screen.
 //! The StelProjector also defines the viewport size and position.
@@ -60,6 +62,9 @@ public:
 		virtual ModelViewTranformP clone() const=0;
 
 		virtual Mat4d getApproximateLinearTransfo() const=0;
+
+		virtual QByteArray getForwardTransformShader() const = 0;
+		virtual void setForwardTransformUniforms(QOpenGLShaderProgram& program) const = 0;
 	};
 
 	class Mat4dTransform: public ModelViewTranform
@@ -73,6 +78,8 @@ public:
 	void combine(const Mat4d& m) Q_DECL_OVERRIDE;
 	Mat4d getApproximateLinearTransfo() const Q_DECL_OVERRIDE;
 	ModelViewTranformP clone() const Q_DECL_OVERRIDE;
+	QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
+	void setForwardTransformUniforms(QOpenGLShaderProgram& program) const Q_DECL_OVERRIDE;
 
 	private:
 		Mat4dTransform(const Mat4dTransform& src) = default;
@@ -152,6 +159,10 @@ public:
 	virtual bool backward(Vec3d& v) const = 0;
 	//! Return the small zoom increment to use at the given FOV for nice movements
 	virtual float deltaZoom(float fov) const = 0;
+	//! Returns GLSL code that can be used in a shader to implement forward transformation
+	virtual QByteArray getForwardTransformShader() const = 0;
+	//! Sets the necessary uniforms so that the shader returned by getForwardTransformShader can work
+	virtual void setForwardTransformUniforms(QOpenGLShaderProgram& program) const;
 
 	//! Determine whether a great circle connection p1 and p2 intersects with a projection discontinuity.
 	//! For many projections without discontinuity, this should return always false, but for other like
@@ -279,6 +290,9 @@ public:
 	//! @param win2 the second projected vector in the viewport 2D frame.
 	//! @return true if at least one of the projected vector is within the viewport.
 	bool projectLineCheck(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const;
+
+	QByteArray getProjectShader() const;
+	void setProjectUniforms(QOpenGLShaderProgram& program) const;
 
 	//! Get the current model view matrix.
 	ModelViewTranformP getModelViewTransform() const;
