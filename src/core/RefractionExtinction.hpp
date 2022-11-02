@@ -101,6 +101,9 @@ public:
 	//! Rozenberg is infinite at Z=92.17 deg, Young at Z=93.6 deg, so this function RETURNS SUBHORIZONTAL_AIRMASS BELOW -2 DEGREES!
 	float airmass(float cosZ, const bool apparent_z=true) const;
 
+	QByteArray getForwardTransformShader() const;
+	void setForwardTransformUniforms(QOpenGLShaderProgram& program) const;
+
 private:
 	//! k, magnitudes/airmass, in [0.00, ... 1.00], (default 0.20).
 	float ext_coeff;
@@ -150,6 +153,9 @@ public:
 	}
 
 	Mat4d getApproximateLinearTransfo() const Q_DECL_OVERRIDE {return postTransfoMat*preTransfoMat;}
+
+	QByteArray getForwardTransformShader() const override;
+	void setForwardTransformUniforms(QOpenGLShaderProgram& program) const override;
 
 	StelProjector::ModelViewTranformP clone() const Q_DECL_OVERRIDE {Refraction* refr = new Refraction(); *refr=*this; return StelProjector::ModelViewTranformP(refr);}
 

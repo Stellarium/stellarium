@@ -49,6 +49,7 @@
 #include <QFile>
 #include <QDir>
 #include <QRegularExpression>
+#include <QOpenGLShaderProgram>
 
 #include <iostream>
 #include <fstream>
@@ -2912,4 +2913,33 @@ Vec3d StelCore::getMouseJ2000Pos() const
 //		mousePosition.normalize();
 //	}
 	return mousePosition;
+}
+
+QByteArray StelCore::getAberrationShader() const
+{
+	return 1+R"(
+uniform vec3 STELCORE_currentPlanetHeliocentricEclipticVelocity;
+vec3 applyAberrationToObject(vec3 objectDir)
+{
+	vec3 velocity = STELCORE_currentPlanetHeliocentricEclipticVelocity;
+	return normalize(objectDir + velocity);
+}
+)";
+}
+
+void StelCore::setAberrationUniforms(QOpenGLShaderProgram& program) const
+{
+	Vec3d velocity;
+	if(getUseAberration())
+	{
+		const auto p = getCurrentPlanet();
+		const auto hev = p->getHeliocentricEclipticVelocity();
+		velocity = StelCore::matVsop87ToJ2000 * hev;
+		velocity *= getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+	}
+	else
+	{
+		velocity = Vec3d(0,0,0);
+	}
+	program.setUniformValue("STELCORE_currentPlanetHeliocentricEclipticVelocity", velocity.toQVector3D());
 }

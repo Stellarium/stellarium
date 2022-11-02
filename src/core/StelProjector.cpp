@@ -24,6 +24,7 @@
 
 #include <QDebug>
 #include <QString>
+#include <QOpenGLShaderProgram>
 
 StelProjector::Mat4dTransform::Mat4dTransform(const Mat4d& altAzToWorld, const Mat4d& vertexToAltAzPos)
     : transfoMat(altAzToWorld*vertexToAltAzPos)
@@ -83,6 +84,28 @@ StelProjector::ModelViewTranformP StelProjector::Mat4dTransform::clone() const
 	return ModelViewTranformP(new Mat4dTransform(*this));
 }
 
+QByteArray StelProjector::Mat4dTransform::getForwardTransformShader() const
+{
+	return 1+R"(
+uniform mat4 PROJECTOR_vertexToAltAzPosMatrix;
+uniform mat4 PROJECTOR_modelViewMatrix;
+vec3 modelViewForwardTransform(vec3 v)
+{
+	return (PROJECTOR_modelViewMatrix * vec4(v,1)).xyz;
+}
+vec3 vertexToAltAzPos(vec3 v)
+{
+	return (PROJECTOR_vertexToAltAzPosMatrix * vec4(v,1)).xyz;
+}
+)";
+}
+
+void StelProjector::Mat4dTransform::setForwardTransformUniforms(QOpenGLShaderProgram& program) const
+{
+	program.setUniformValue("PROJECTOR_modelViewMatrix", transfoMatf.toQMatrix());
+	program.setUniformValue("PROJECTOR_vertexToAltAzPosMatrix", vertexToAltAzPos.toQMatrix());
+}
+
 const QString StelProjector::maskTypeToString(StelProjectorMaskType type)
 {
 	if (type == MaskDisk )
@@ -125,6 +148,12 @@ void StelProjector::init(const StelProjectorParams& params)
 QString StelProjector::getHtmlSummary() const
 {
 	return QString("<h3>%1</h3><p>%2</p><b>%3</b>%4°").arg(getNameI18(), getDescriptionI18(), q_("Maximum FOV: "), QString::number(static_cast<double>(getMaxFov())));
+}
+
+void StelProjector::setForwardTransformUniforms(QOpenGLShaderProgram& program) const
+{
+	modelViewTransform->setForwardTransformUniforms(program);
+	program.setUniformValue("PROJECTOR_FWD_widthStretch", GLfloat(widthStretch));
 }
 
 bool StelProjector::intersectViewportDiscontinuity(const Vec3d& p1, const Vec3d& p2) const
@@ -391,6 +420,42 @@ bool StelProjector::projectCheck(const Vec3f& v, Vec3f& win) const
 bool StelProjector::unProject(const Vec3d& win, Vec3d& v) const
 {
 	return unProject(win[0], win[1], v);
+}
+
+QByteArray StelProjector::getProjectShader() const
+{
+	static const char*const projectSrc = 1+R"(
+uniform vec2 PROJECTOR_viewportCenter;
+uniform vec2 PROJECTOR_flip;
+uniform float PROJECTOR_pixelPerRad;
+uniform float PROJECTOR_zNear;
+uniform float PROJECTOR_oneOverZNearMinusZFar;
+vec3 project(vec3 modelSpacePoint)
+{
+	float flipHorz = PROJECTOR_flip.x, flipVert = PROJECTOR_flip.y;
+	vec2  viewportCenter = PROJECTOR_viewportCenter;
+	float pixelPerRad = PROJECTOR_pixelPerRad;
+	float zNear = PROJECTOR_zNear;
+	float oneOverZNearMinusZFar = PROJECTOR_oneOverZNearMinusZFar;
+
+	vec3 worldSpacePoint = modelViewForwardTransform(modelSpacePoint);
+	vec3 v = projectorForwardTransform(worldSpacePoint);
+	return vec3(viewportCenter[0] + flipHorz * pixelPerRad * v[0],
+				viewportCenter[1] + flipVert * pixelPerRad * v[1],
+				(v[2] - zNear) * oneOverZNearMinusZFar);
+}
+)";
+	return getForwardTransformShader() + projectSrc;
+}
+
+void StelProjector::setProjectUniforms(QOpenGLShaderProgram& program) const
+{
+	setForwardTransformUniforms(program);
+	program.setUniformValue("PROJECTOR_viewportCenter", QVector2D(viewportCenter[0], viewportCenter[1]));
+	program.setUniformValue("PROJECTOR_flip", QVector2D(flipHorz, flipVert));
+	program.setUniformValue("PROJECTOR_pixelPerRad", GLfloat(pixelPerRad));
+	program.setUniformValue("PROJECTOR_zNear", GLfloat(zNear));
+	program.setUniformValue("PROJECTOR_oneOverZNearMinusZFar", GLfloat(oneOverZNearMinusZFar));
 }
 
 void StelProjector::computeBoundingCap()
