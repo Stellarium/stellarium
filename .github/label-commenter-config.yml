@@ -2,7 +2,7 @@ labels:
   - name: invalid
     labeled:
       issue:
-        body: Sorry, we just do not understand your problem (probably the log is not attached and hardware info is missing - so, please follow the issue templates).
+        body: Sorry, but this report seems invalid (or we just do not understand your problem - so, please follow the issue templates).
         action: close
       pr:
         body: |

@@ -125,34 +125,34 @@ void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 		return;
 	}
 
+	// NOTE: the calculations here *must* be in double, otherwise we'll get wobble of "small" objects like Callisto or Thebe
 	Q_ASSERT(length>0.0);
 	const double sinGeo = altAzPos[2]/length;
 	Q_ASSERT(fabs(sinGeo)<=1.0);
 	double geom_alt_rad = std::asin(sinGeo);
-	float geom_alt_deg = M_180_PIf*static_cast<float>(geom_alt_rad);
+	double geom_alt_deg = M_180_PI*geom_alt_rad;
 	if (geom_alt_deg > MIN_GEO_ALTITUDE_DEG)
 	{
 		// refraction from Saemundsson, S&T1986 p70 / in Meeus, Astr.Alg.
-		float r=press_temp_corr * ( 1.02f / std::tan((geom_alt_deg+10.3f/(geom_alt_deg+5.11f))*M_PI_180f) + 0.0019279f);
+		double r=press_temp_corr * ( 1.02 / std::tan((geom_alt_deg+10.3/(geom_alt_deg+5.11))*M_PI_180) + 0.0019279);
 		geom_alt_deg += r;
-		if (geom_alt_deg > 90.f)
-			geom_alt_deg=90.f;
+		if (geom_alt_deg > 90.)
+			geom_alt_deg=90.;
 	}
 	else if(geom_alt_deg>MIN_GEO_ALTITUDE_DEG-TRANSITION_WIDTH_GEO_DEG)
 	{
 		// Avoids the jump below -5 by interpolating linearly between MIN_GEO_ALTITUDE_DEG and bottom of transition zone
-		float r_m5=press_temp_corr * ( 1.02f / std::tan((MIN_GEO_ALTITUDE_DEG+10.3f/(MIN_GEO_ALTITUDE_DEG+5.11f))*M_PI_180f) + 0.0019279f);
+		double r_m5=press_temp_corr * ( 1.02 / std::tan((MIN_GEO_ALTITUDE_DEG+10.3/(MIN_GEO_ALTITUDE_DEG+5.11))*M_PI_180) + 0.0019279);
 		geom_alt_deg += r_m5*(geom_alt_deg-(MIN_GEO_ALTITUDE_DEG-TRANSITION_WIDTH_GEO_DEG))/TRANSITION_WIDTH_GEO_DEG;
 	}
 	else return;
 	// At this point we have corrected geometric altitude. Note that if we just change altAzPos[2], we would change vector length, so this would change our angles.
 	// We have to shorten X,Y components of the vector as well by the change in cosines of altitude, or (sqrt(1-sin(alt))
 
-	const double refr_alt_rad=static_cast<double>(geom_alt_deg)*M_PI_180;
+	const double refr_alt_rad=geom_alt_deg*M_PI_180;
 	const double sinRef=std::sin(refr_alt_rad);
 
-	const double shortenxy=((fabs(sinGeo)>=1.0) ? 1.0 :
-			std::sqrt((1.-sinRef*sinRef)/(1.-sinGeo*sinGeo))); // we need double's mantissa length here, sorry!
+	const double shortenxy=((fabs(sinGeo)>=1.0) ? 1.0 : std::sqrt((1.-sinRef*sinRef)/(1.-sinGeo*sinGeo)));
 
 	altAzPos[0]*=shortenxy;
 	altAzPos[1]*=shortenxy;
