@@ -668,6 +668,12 @@ void LandscapeOldStyle::draw(StelCore* core, bool onlyPolygon)
 
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
+		const auto gl = painter.glFuncs();
+#ifdef GL_MULTISAMPLE
+		if (multisamplingEnabled_)
+			gl->glEnable(GL_MULTISAMPLE);
+#endif
+
 		if (drawGroundFirst)
 			drawGround(core, painter);
 		drawDecor(core, painter, false);
@@ -681,6 +687,11 @@ void LandscapeOldStyle::draw(StelCore* core, bool onlyPolygon)
 			painter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
 			drawDecor(core, painter, true);
 		}
+
+#ifdef GL_MULTISAMPLE
+		if (multisamplingEnabled_)
+			gl->glDisable(GL_MULTISAMPLE);
+#endif
 	}
 	// If a horizon line also has been defined, draw it.
 	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f)))
@@ -745,12 +756,6 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter, const b
 	else
 		sPainter.setColor(Vec3f(landscapeBrightness), landFader.getInterstate());
 
-    const auto gl = sPainter.glFuncs();
-#ifdef GL_MULTISAMPLE
-	if (multisamplingEnabled_)
-		gl->glEnable(GL_MULTISAMPLE);
-#endif
-
 	for (const auto& side : precomputedSides)
 	{
 		if (side.light==drawLight)
@@ -759,11 +764,6 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter, const b
 			sPainter.drawSphericalTriangles(side.arr, true, false, Q_NULLPTR, false);
 		}
 	}
-
-#ifdef GL_MULTISAMPLE
-	if (multisamplingEnabled_)
-		gl->glDisable(GL_MULTISAMPLE);
-#endif
 }
 
 // Draw the ground
