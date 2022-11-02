@@ -530,7 +530,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	//const int slices_per_side = 3*64/(nbDecorRepeat*nbSide);
 	//if (slices_per_side<=0) // GZ: How can negative ever happen?
 	//	slices_per_side = 1;
-	const unsigned short int slices_per_side = static_cast<const unsigned short>(qMax(3u*64u/(nbDecorRepeat*nbSide), 1u));
+	const auto slices_per_side = static_cast<unsigned short>(qMax(3u*64u/(nbDecorRepeat*nbSide), 1u));
 
 	// draw a fan disk instead of a ordinary disk to that the inner slices
 	// are not so slender. When they are too slender, culling errors occur
