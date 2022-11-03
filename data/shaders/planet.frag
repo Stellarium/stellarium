@@ -267,7 +267,7 @@ void main()
     normal = normalize(normalX*normal.x+normalY*normal.y+normalZ*normal.z);
     // normal now contains the real surface normal taking normal map into account
 
-	mediump float horizonShadowCoefficient = 1;
+	mediump float horizonShadowCoefficient = 1.;
 	{
 		// Check whether the fragment is in the shadow of surrounding mountains or the horizon
 		mediump vec3 lonDir = normalX;
@@ -279,39 +279,39 @@ void main()
 		mediump vec4 sinHorizElevs = sign(horizonElevSample) * horizonElevSample * horizonElevSample;
 		mediump float sinHorizElevLeft, sinHorizElevRight;
 		mediump float alpha;
-		if(sunAzimuth >= PI/2)
+		if(sunAzimuth >= PI/2.)
 		{
 			// Sun is between East and South
 			sinHorizElevLeft = sinHorizElevs[1];
 			sinHorizElevRight = sinHorizElevs[2];
-			alpha = (sunAzimuth - PI/2) / (PI/2);
+			alpha = (sunAzimuth - PI/2.) / (PI/2.);
 		}
-		else if(sunAzimuth >= 0)
+		else if(sunAzimuth >= 0.)
 		{
 			// Sun is between North and East
 			sinHorizElevLeft = sinHorizElevs[0];
 			sinHorizElevRight = sinHorizElevs[1];
-			alpha = sunAzimuth / (PI/2);
+			alpha = sunAzimuth / (PI/2.);
 		}
-		else if(sunAzimuth <= -PI/2)
+		else if(sunAzimuth <= -PI/2.)
 		{
 			// Sun is between South and West
 			sinHorizElevLeft = sinHorizElevs[2];
 			sinHorizElevRight = sinHorizElevs[3];
-			alpha = (sunAzimuth + PI) / (PI/2);
+			alpha = (sunAzimuth + PI) / (PI/2.);
 		}
 		else
 		{
 			// Sun is between West and North
 			sinHorizElevLeft = sinHorizElevs[3];
 			sinHorizElevRight = sinHorizElevs[0];
-			alpha = (sunAzimuth + PI/2) / (PI/2);
+			alpha = (sunAzimuth + PI/2.) / (PI/2.);
 		}
 		mediump float horizElevLeft = asin(sinHorizElevLeft);
 		mediump float horizElevRight = asin(sinHorizElevRight);
 		mediump float horizElev = horizElevLeft + (horizElevRight-horizElevLeft)*alpha;
 		if(sinSunElevation < sin(horizElev))
-			horizonShadowCoefficient = 0;
+			horizonShadowCoefficient = 0.;
 	}
 #else
     // important to normalize here again
