@@ -65,6 +65,8 @@ public:
 
 		virtual QByteArray getForwardTransformShader() const = 0;
 		virtual void setForwardTransformUniforms(QOpenGLShaderProgram& program) const = 0;
+		virtual QByteArray getBackwardTransformShader() const = 0;
+		virtual void setBackwardTransformUniforms(QOpenGLShaderProgram& program) const = 0;
 	};
 
 	class Mat4dTransform: public ModelViewTranform
@@ -80,6 +82,8 @@ public:
 	ModelViewTranformP clone() const Q_DECL_OVERRIDE;
 	QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
 	void setForwardTransformUniforms(QOpenGLShaderProgram& program) const Q_DECL_OVERRIDE;
+	QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
+	void setBackwardTransformUniforms(QOpenGLShaderProgram& program) const Q_DECL_OVERRIDE;
 
 	private:
 		Mat4dTransform(const Mat4dTransform& src) = default;
@@ -90,6 +94,8 @@ public:
 		Mat4f transfoMatf;
 		//! Transforms a vertex from model space to coordinates where Z is zenith, so zenith angle can easily be computed.
 		Mat4f vertexToAltAzPos;
+		//! Transforms view direction from the projector's frame to coordinates where Z is zenith, so zenith angle can easily be computed.
+		Mat4f worldPosToAltAzPos;
 	};
 
 	//! @enum StelProjectorMaskType
@@ -163,6 +169,10 @@ public:
 	virtual QByteArray getForwardTransformShader() const = 0;
 	//! Sets the necessary uniforms so that the shader returned by getForwardTransformShader can work
 	virtual void setForwardTransformUniforms(QOpenGLShaderProgram& program) const;
+	//! Returns GLSL code that can be used in a shader to implement backward transformation
+	virtual QByteArray getBackwardTransformShader() const = 0;
+	//! Sets the necessary uniforms so that the shader returned by getBackwardTransformShader can work
+	virtual void setBackwardTransformUniforms(QOpenGLShaderProgram& program) const;
 
 	//! Determine whether a great circle connection p1 and p2 intersects with a projection discontinuity.
 	//! For many projections without discontinuity, this should return always false, but for other like
@@ -293,6 +303,9 @@ public:
 
 	QByteArray getProjectShader() const;
 	void setProjectUniforms(QOpenGLShaderProgram& program) const;
+
+	QByteArray getUnProjectShader() const;
+	void setUnProjectUniforms(QOpenGLShaderProgram& program) const;
 
 	//! Get the current model view matrix.
 	ModelViewTranformP getModelViewTransform() const;
