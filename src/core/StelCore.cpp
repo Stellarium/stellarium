@@ -2919,10 +2919,23 @@ QByteArray StelCore::getAberrationShader() const
 {
 	return 1+R"(
 uniform vec3 STELCORE_currentPlanetHeliocentricEclipticVelocity;
+// objectDir points to the object as viewed from its comoving frame.
+// Return value represents the apparent direction to this object from a frame
+// that moves with respect to the object at slightly relativistic speeds (v<0.1c).
+// Relative error in aberration angle is about 0.5v/c.
 vec3 applyAberrationToObject(vec3 objectDir)
 {
 	vec3 velocity = STELCORE_currentPlanetHeliocentricEclipticVelocity;
 	return normalize(objectDir + velocity);
+}
+// viewDir is the direction where the object appears to be when viewed from a
+// frame that moves with respect to it at slightly relativistic speeds (v<0.1c).
+// Return value represents the direction to the object as viewed from its comoving frame.
+// Relative error in aberration angle is about 0.5v/c.
+vec3 applyAberrationToViewDir(vec3 viewDir)
+{
+	vec3 velocity = STELCORE_currentPlanetHeliocentricEclipticVelocity;
+	return normalize(viewDir - velocity);
 }
 )";
 }

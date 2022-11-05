@@ -30,6 +30,7 @@ StelProjector::Mat4dTransform::Mat4dTransform(const Mat4d& altAzToWorld, const M
     : transfoMat(altAzToWorld*vertexToAltAzPos)
     , transfoMatf(toMat4f(transfoMat))
 	, vertexToAltAzPos(toMat4f(vertexToAltAzPos))
+	, worldPosToAltAzPos(toMat4f(altAzToWorld.inverse()))
 {
 	Q_ASSERT(transfoMat[0]==transfoMat[0]); // prelude to assert later in Atmosphere rendering... still investigating
 }
@@ -106,6 +107,29 @@ void StelProjector::Mat4dTransform::setForwardTransformUniforms(QOpenGLShaderPro
 	program.setUniformValue("PROJECTOR_vertexToAltAzPosMatrix", vertexToAltAzPos.toQMatrix());
 }
 
+QByteArray StelProjector::Mat4dTransform::getBackwardTransformShader() const
+{
+	return 1+R"(
+uniform mat4 PROJECTOR_modelViewMatrixInverse;
+uniform mat4 PROJECTOR_worldPosToAltAzPosMatrix;
+vec3 modelViewBackwardTransform(vec3 worldPos)
+{
+	return (PROJECTOR_modelViewMatrixInverse * vec4(worldPos,1)).xyz;
+}
+vec3 worldPosToAltAzPos(vec3 worldPos)
+{
+	return (PROJECTOR_worldPosToAltAzPosMatrix * vec4(worldPos,1)).xyz;
+}
+
+)";
+}
+
+void StelProjector::Mat4dTransform::setBackwardTransformUniforms(QOpenGLShaderProgram& program) const
+{
+	program.setUniformValue("PROJECTOR_modelViewMatrixInverse", transfoMatf.toQMatrix().inverted());
+	program.setUniformValue("PROJECTOR_worldPosToAltAzPosMatrix", worldPosToAltAzPos.toQMatrix());
+}
+
 const QString StelProjector::maskTypeToString(StelProjectorMaskType type)
 {
 	if (type == MaskDisk )
@@ -153,6 +177,12 @@ QString StelProjector::getHtmlSummary() const
 void StelProjector::setForwardTransformUniforms(QOpenGLShaderProgram& program) const
 {
 	modelViewTransform->setForwardTransformUniforms(program);
+	program.setUniformValue("PROJECTOR_FWD_widthStretch", GLfloat(widthStretch));
+}
+
+void StelProjector::setBackwardTransformUniforms(QOpenGLShaderProgram& program) const
+{
+	modelViewTransform->setBackwardTransformUniforms(program);
 	program.setUniformValue("PROJECTOR_FWD_widthStretch", GLfloat(widthStretch));
 }
 
@@ -456,6 +486,47 @@ void StelProjector::setProjectUniforms(QOpenGLShaderProgram& program) const
 	program.setUniformValue("PROJECTOR_pixelPerRad", GLfloat(pixelPerRad));
 	program.setUniformValue("PROJECTOR_zNear", GLfloat(zNear));
 	program.setUniformValue("PROJECTOR_oneOverZNearMinusZFar", GLfloat(oneOverZNearMinusZFar));
+}
+
+QByteArray StelProjector::getUnProjectShader() const
+{
+	static const char*const projectSrc = 1+R"(
+uniform vec2 PROJECTOR_viewportCenter;
+uniform vec2 PROJECTOR_flip;
+uniform float PROJECTOR_pixelPerRad;
+vec3 winPosToWorldPos(float x, float y, out bool ok)
+{
+	float flipHorz = PROJECTOR_flip.x, flipVert = PROJECTOR_flip.y;
+	vec2  viewportCenter = PROJECTOR_viewportCenter;
+	float pixelPerRad = PROJECTOR_pixelPerRad;
+
+	vec3 v;
+	v[0] = flipHorz * (x - viewportCenter[0]) / pixelPerRad;
+	v[1] = flipVert * (y - viewportCenter[1]) / pixelPerRad;
+	v[2] = 0.;
+	return projectorBackwardTransform(v, ok);
+}
+
+vec3 unProject(float x, float y, out bool ok)
+{
+	vec3 worldPos = winPosToWorldPos(x, y, ok);
+	// Even when the reprojected point comes from a region of the screen,
+	// where nothing is projected to (rval=false), we finish reprojecting.
+	// This looks good for atmosphere rendering, and it helps avoiding
+	// discontinuities when dragging around with the mouse.
+
+	return modelViewBackwardTransform(worldPos);
+}
+)";
+	return getBackwardTransformShader() + projectSrc;
+}
+
+void StelProjector::setUnProjectUniforms(QOpenGLShaderProgram& program) const
+{
+	setBackwardTransformUniforms(program);
+	program.setUniformValue("PROJECTOR_viewportCenter", QVector2D(viewportCenter[0], viewportCenter[1]));
+	program.setUniformValue("PROJECTOR_flip", QVector2D(flipHorz, flipVert));
+	program.setUniformValue("PROJECTOR_pixelPerRad", GLfloat(pixelPerRad));
 }
 
 void StelProjector::computeBoundingCap()

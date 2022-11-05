@@ -35,6 +35,7 @@ public:
 	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
 	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
 	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
+	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
 protected:
 	virtual bool hasDiscontinuity() const  Q_DECL_OVERRIDE {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const  Q_DECL_OVERRIDE {return false;}
@@ -54,6 +55,7 @@ public:
 	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
 	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
 	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
+	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
 protected:
 	virtual bool hasDiscontinuity() const  Q_DECL_OVERRIDE{return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const  Q_DECL_OVERRIDE {return false;}
@@ -73,6 +75,7 @@ public:
 	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
 	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
 	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
+	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
 protected:
 	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const Q_DECL_OVERRIDE {return false;}
@@ -92,6 +95,7 @@ public:
 	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
 	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
 	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
+	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
 protected:
 	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const Q_DECL_OVERRIDE {return false;}
@@ -111,6 +115,7 @@ public:
 	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
 	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
 	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
+	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
 protected:
 	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return true;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const Q_DECL_OVERRIDE {return p1[0]*p2[0]<0 && !(p1[2]<0 && p2[2]<0);}
@@ -137,6 +142,7 @@ public:
 	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
 	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
 	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
+	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
 protected:
 	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return true;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const Q_DECL_OVERRIDE
@@ -166,6 +172,7 @@ public:
 	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
 	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
 	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
+	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
 protected:
 	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return true;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const Q_DECL_OVERRIDE
@@ -195,6 +202,7 @@ public:
 	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
 	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
 	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
+	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
 protected:
 	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const Q_DECL_OVERRIDE {return false;}
@@ -210,6 +218,7 @@ public:
 	virtual bool forward(Vec3f &win) const Q_DECL_OVERRIDE;
 	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
 	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
+	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
 };
 
 class StelProjectorMiller : public StelProjectorMercator
@@ -222,6 +231,7 @@ public:
 	virtual bool forward(Vec3f &win) const Q_DECL_OVERRIDE;
 	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
 	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
+	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
 };
 
 class StelProjector2d : public StelProjector
@@ -238,6 +248,8 @@ public:
 	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
 	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
 	virtual void setForwardTransformUniforms(QOpenGLShaderProgram& program) const Q_DECL_OVERRIDE;
+	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
+	virtual void setBackwardTransformUniforms(QOpenGLShaderProgram& program) const Q_DECL_OVERRIDE;
 protected:
 	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const Q_DECL_OVERRIDE {Q_ASSERT(0); return false;}

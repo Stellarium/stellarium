@@ -353,11 +353,95 @@ vec3 modelViewForwardTransform(vec3 v)
    .replace("@TRANSITION_WIDTH_GEO_DEG@", std::to_string(TRANSITION_WIDTH_GEO_DEG).c_str());
 }
 
+QByteArray Refraction::getBackwardTransformShader() const
+{
+	return QByteArray(1+R"(
+uniform float REFRACTION_press_temp_corr;
+
+vec3 innerRefractionBackward(vec3 altAzPos)
+{
+	const float PI = 3.14159265;
+	const float M_180_PI = 180./PI;
+	const float M_PI_180 = PI/180.;
+	const float MIN_APP_ALTITUDE_DEG=@MIN_APP_ALTITUDE_DEG@;
+	const float TRANSITION_WIDTH_APP_DEG=@TRANSITION_WIDTH_APP_DEG@;
+	float press_temp_corr = REFRACTION_press_temp_corr;
+
+	float len = length(altAzPos);
+	if (len==0.0)
+	{
+		// Under some circumstances there are zero coordinates. Just leave them alone.
+		return altAzPos;
+	}
+	float sinObs = altAzPos[2]/len;
+	float obs_alt_deg=M_180_PI*asin(sinObs);
+	if (obs_alt_deg > 0.22879)
+	{
+		// refraction from Bennett, in Meeus, Astr.Alg.
+		float r=press_temp_corr * (1. / tan((obs_alt_deg+7.31/(obs_alt_deg+4.4))*M_PI_180) + 0.0013515);
+		obs_alt_deg -= r;
+	}
+	else if (obs_alt_deg > MIN_APP_ALTITUDE_DEG)
+	{
+		// backward refraction from polynomial fit against Saemundson[-5...-0.3]
+		float r=(((((0.0444*obs_alt_deg+.7662)*obs_alt_deg+4.9746)*obs_alt_deg+13.599)*obs_alt_deg+8.052)*obs_alt_deg-11.308)*obs_alt_deg+34.341;
+		obs_alt_deg -= press_temp_corr*r;
+	}
+	else if (obs_alt_deg > MIN_APP_ALTITUDE_DEG-TRANSITION_WIDTH_APP_DEG)
+	{
+		// Compute top value from polynome, apply linear interpolation
+		const float r_min=(((((0.0444*MIN_APP_ALTITUDE_DEG+.7662)*MIN_APP_ALTITUDE_DEG
+				+4.9746)*MIN_APP_ALTITUDE_DEG+13.599)*MIN_APP_ALTITUDE_DEG
+			      +8.052)*MIN_APP_ALTITUDE_DEG-11.308)*MIN_APP_ALTITUDE_DEG+34.341;
+
+		obs_alt_deg -= r_min*press_temp_corr*(obs_alt_deg-(MIN_APP_ALTITUDE_DEG-TRANSITION_WIDTH_APP_DEG))/TRANSITION_WIDTH_APP_DEG;
+	}
+	else return altAzPos;
+	// At this point we have corrected observed altitude. Note that if we just change altAzPos[2], we would change vector length, so this would change our angles.
+	// We have to make X,Y components of the vector a bit longer as well by the change in cosines of altitude, or (sqrt(1-sin(alt))
+
+	float geo_alt_rad=obs_alt_deg*M_PI_180;
+	float sinGeo=sin(geo_alt_rad);
+	float longerxy=((abs(sinObs)>=1.0) ? 1.0 : sqrt((1.-sinGeo*sinGeo)/(1.-sinObs*sinObs)));
+	altAzPos[0]*=longerxy;
+	altAzPos[1]*=longerxy;
+	altAzPos[2]=sinGeo*len;
+
+	return altAzPos;
+}
+
+uniform mat4 REFRACTION_inversePreTransfoMat;
+uniform mat4 REFRACTION_inversePostTransfoMat;
+
+vec3 worldPosToAltAzPos(vec3 worldPos)
+{
+	return (REFRACTION_inversePostTransfoMat * vec4(worldPos,1)).xyz;
+}
+
+vec3 modelViewBackwardTransform(vec3 worldPos)
+{
+	vec3 altAzPosApparent = worldPosToAltAzPos(worldPos);
+	vec3 altAzPosGeometric = innerRefractionBackward(altAzPosApparent);
+	return (REFRACTION_inversePreTransfoMat * vec4(altAzPosGeometric,1)).xyz;
+}
+
+#define HAVE_REFRACTION
+)").replace("@MIN_APP_ALTITUDE_DEG@", std::to_string(MIN_APP_ALTITUDE_DEG).c_str())
+   .replace("@TRANSITION_WIDTH_APP_DEG@", std::to_string(TRANSITION_WIDTH_APP_DEG).c_str());
+}
+
 void Refraction::setForwardTransformUniforms(QOpenGLShaderProgram& program) const
 {
 	program.setUniformValue("REFRACTION_press_temp_corr", GLfloat(press_temp_corr));
 	program.setUniformValue("REFRACTION_preTransfoMat", preTransfoMatf.toQMatrix());
 	program.setUniformValue("REFRACTION_postTransfoMat", postTransfoMatf.toQMatrix());
+}
+
+void Refraction::setBackwardTransformUniforms(QOpenGLShaderProgram& program) const
+{
+	program.setUniformValue("REFRACTION_press_temp_corr", GLfloat(press_temp_corr));
+	program.setUniformValue("REFRACTION_inversePreTransfoMat", invertPreTransfoMatf.toQMatrix());
+	program.setUniformValue("REFRACTION_inversePostTransfoMat", invertPostTransfoMatf.toQMatrix());
 }
 
 void Refraction::setPressure(float p)

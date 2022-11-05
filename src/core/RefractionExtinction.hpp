@@ -156,6 +156,8 @@ public:
 
 	QByteArray getForwardTransformShader() const override;
 	void setForwardTransformUniforms(QOpenGLShaderProgram& program) const override;
+	QByteArray getBackwardTransformShader() const override;
+	void setBackwardTransformUniforms(QOpenGLShaderProgram& program) const override;
 
 	StelProjector::ModelViewTranformP clone() const Q_DECL_OVERRIDE {Refraction* refr = new Refraction(); *refr=*this; return StelProjector::ModelViewTranformP(refr);}
 
