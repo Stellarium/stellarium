@@ -27,6 +27,7 @@
 
 #include <cmath>
 #include <cstring>
+#include <iterator>
 #include <limits>
 #include <QString>
 #include <QMatrix4x4>
@@ -1857,6 +1858,38 @@ inline QVector3D operator*(const QMatrix3x3& mat, const QVector3D& vec)
 		vec.y() * mat(2,1) +
 		vec.z() * mat(2,2);
 	return QVector3D(x,y,z);
+}
+
+inline Mat3f toMat3f(const Mat3d& md)
+{
+	Mat3f out;
+	for(size_t n = 0; n < std::size(md.r); ++n)
+		out.r[n] = static_cast<float>(md.r[n]);
+	return out;
+}
+
+inline Mat3d toMat3d(const Mat3f& md)
+{
+	Mat3d out;
+	for(size_t n = 0; n < std::size(md.r); ++n)
+		out.r[n] = static_cast<double>(md.r[n]);
+	return out;
+}
+
+inline Mat4f toMat4f(const Mat4d& md)
+{
+	Mat4f out;
+	for(size_t n = 0; n < std::size(md.r); ++n)
+		out.r[n] = static_cast<float>(md.r[n]);
+	return out;
+}
+
+inline Mat4d toMat4d(const Mat4f& md)
+{
+	Mat4d out;
+	for(size_t n = 0; n < std::size(md.r); ++n)
+		out.r[n] = static_cast<double>(md.r[n]);
+	return out;
 }
 
 #endif // VECMATH_HPP

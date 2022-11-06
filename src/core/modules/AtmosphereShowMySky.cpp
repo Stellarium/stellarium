@@ -607,12 +607,8 @@ void AtmosphereShowMySky::drawAtmosphere(Mat4f const& projectionMatrix, const fl
 {
 	StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 	Q_UNUSED(airglowRelativeBrightness)
-	const auto& m = projectionMatrix;
 	auto& settings = *static_cast<SkySettings*>(skySettings_.get());
-	settings.projectionMatrix_ = QMatrix4x4(m[0], m[4], m[8] , m[12],
-						m[1], m[5], m[9] , m[13],
-						m[2], m[6], m[10], m[14],
-						m[3], m[7], m[11], m[15]);
+	settings.projectionMatrix_ = projectionMatrix.toQMatrix();
 	settings.altitude_=altitude;
 	settings.sunAzimuth_=sunAzimuth;
 	settings.sunZenithAngle_=sunZenithAngle;

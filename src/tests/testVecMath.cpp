@@ -491,4 +491,43 @@ void TestVecMath::testMatrix3Math()
 	QVERIFY(qAbs(md.trace() + 3.) <= ERROR_LIMIT);
 	md = Mat3d(1.,1.,1.,1.,1.,1.,1.,1.,1.)*Mat3d(5.,5.,5.,5.,5.,5.,5.,5.,5.);
 	QVERIFY(qAbs(md.trace() - 45.) <= ERROR_LIMIT);
+	{
+		mf.set(1.234, 3.456, 4.567, 5.678, 7.89, 10.1112, 13.1415, 16.1718, 19.2021);
+		md = toMat3d(mf);
+		const Mat3f diff = toMat3f(md) - mf;
+		const auto maxDiff = *std::max_element(std::begin(diff.r), std::end(diff.r),
+											   [](auto& x, auto& y) { return std::abs(x) < std::abs(y); });
+		QVERIFY(maxDiff == 0);
+	}
+	{
+		md.set(1.234, 3.456, 4.567, 5.678, 7.89, 10.1112, 13.1415, 16.1718, 19.2021);
+		mf = toMat3f(md);
+		const Mat3d diff = toMat3d(mf) - md;
+		const auto maxDiff = *std::max_element(std::begin(diff.r), std::end(diff.r),
+											   [](auto& x, auto& y) { return std::abs(x) < std::abs(y); });
+		QVERIFY(maxDiff < ERROR_LIMIT);
+	}
+}
+
+void TestVecMath::testMatrix4Math()
+{
+	Mat4f mf;
+	Mat4d md;
+
+	{
+		mf.set(1.234, 3.456, 4.567, 5.678, 7.89, 10.1112, 13.1415, 16.1718, 19.2021, 22.2324, 25.2627, 28.2930, 31.3233, 34.3536, 37.3839, 40.4142);
+		md = toMat4d(mf);
+		const Mat4f diff = toMat4f(md) - mf;
+		const auto maxDiff = *std::max_element(std::begin(diff.r), std::end(diff.r),
+											   [](auto& x, auto& y) { return std::abs(x) < std::abs(y); });
+		QVERIFY(maxDiff == 0);
+	}
+	{
+		md.set(1.234, 3.456, 4.567, 5.678, 7.89, 10.1112, 13.1415, 16.1718, 19.2021, 22.2324, 25.2627, 28.2930, 31.3233, 34.3536, 37.3839, 40.4142);
+		mf = toMat4f(md);
+		const Mat4d diff = toMat4d(mf) - md;
+		const auto maxDiff = *std::max_element(std::begin(diff.r), std::end(diff.r),
+											   [](auto& x, auto& y) { return std::abs(x) < std::abs(y); });
+		QVERIFY(maxDiff < ERROR_LIMIT);
+	}
 }

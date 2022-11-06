@@ -32,6 +32,7 @@ private slots:
 	void testVec3Math();
 	void testVec4Math();
 	void testMatrix3Math();	
+	void testMatrix4Math();
 };
 
 #endif // TESTVECMATH_HPP
