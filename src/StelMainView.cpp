@@ -122,7 +122,7 @@ public:
 		Q_ASSERT(ctx == QOpenGLContext::currentContext());
 		StelOpenGL::mainContext = ctx; //throw an error when StelOpenGL functions are executed in another context
 
-		qDebug() << "initializeGL";
+		qDebug().nospace() << "initializeGL(windowWidth = " << width() << ", windowHeight = " << height() << ")";
 		qDebug() << "OpenGL supported version: " << QString(reinterpret_cast<const char*>(ctx->functions()->glGetString(GL_VERSION)));
 		qDebug() << "Current Format: " << this->format();
 
@@ -577,15 +577,19 @@ private:
 class StelGuiItem : public QGraphicsWidget
 {
 public:
-	StelGuiItem(QGraphicsItem* parent = Q_NULLPTR)
+	StelGuiItem(const QSize& size, QGraphicsItem* parent = Q_NULLPTR)
 		: QGraphicsWidget(parent)
 	{
+		resize(size);
 		StelApp::getInstance().getGui()->init(this);
+		inited=true;
 	}
 
 protected:
 	void resizeEvent(QGraphicsSceneResizeEvent* event) Q_DECL_OVERRIDE
 	{
+		if(!inited) return;
+
 		Q_UNUSED(event)
 		//widget->setGeometry(0, 0, size().width(), size().height());
 		StelApp::getInstance().getGui()->forceRefreshGui();
@@ -593,6 +597,7 @@ protected:
 private:
 	//QGraphicsWidget *widget;
 	// void onSizeChanged();
+	bool inited = false; // guards resize during construction
 };
 
 StelMainView::StelMainView(QSettings* settings)
@@ -887,7 +892,7 @@ void StelMainView::init()
 	
 	StelPainter::initGLShaders();
 
-	guiItem = new StelGuiItem(rootItem);
+	guiItem = new StelGuiItem(size(), rootItem);
 	scene()->addItem(rootItem);
 	//set the default focus to the sky
 	focusSky();
@@ -895,51 +900,6 @@ void StelMainView::init()
 	updateNightModeProperty(StelApp::getInstance().getVisionModeNight());
 	//install the effect on the whole view
 	rootItem->setGraphicsEffect(nightModeEffect);
-
-	int screen = configuration->value("video/screen_number", 0).toInt();
-	if (screen < 0 || screen >= qApp->screens().count())
-	{
-		qWarning() << "WARNING: screen" << screen << "not found";
-		screen = 0;
-	}
-	QRect screenGeom = qApp->screens().at(screen)->geometry();
-
-	QSize size = QSize(configuration->value("video/screen_w", screenGeom.width()).toInt(),
-		     configuration->value("video/screen_h", screenGeom.height()).toInt());
-	bool fullscreen = configuration->value("video/fullscreen", true).toBool();
-
-	// Without this, the screen is not shown on a Mac + we should use resize() for correct work of fullscreen/windowed mode switch. --AW WTF???
-	resize(size);
-
-	if (fullscreen)
-	{
-		// The "+1" below is to work around Linux/Gnome problem with mouse focus.
-		move(screenGeom.x()+1, screenGeom.y()+1);
-		// The fullscreen window appears on screen where is the majority of
-		// the normal window. Therefore we crop the normal window to the
-		// screen area to ensure that the majority is not on another screen.
-		setGeometry(geometry() & screenGeom);
-		setFullScreen(true);
-	}
-	else
-	{
-		setFullScreen(false);
-		int x = configuration->value("video/screen_x", 0).toInt();
-		int y = configuration->value("video/screen_y", 0).toInt();
-		move(x + screenGeom.x(), y + screenGeom.y());
-	}
-
-	if(QOpenGLContext::currentContext() != glInfo.mainContext)
-	{
-		// FIXME: the whole idea of resizing during QOpenGLWidget::initializeGL
-		// is bad. This restoration of context is a kludge that shouldn't even
-		// be required if everything is done correctly.
-		// The problem happens on Windows with Qt6 and leads to plugins getting
-		// wrong (i.e. belonging to another context) OpenGL names of VAOs and
-		// other resources that get initialized from here.
-		qWarning().nospace() << __FILE__ << ":" << __LINE__ << ": OpenGL context changed, fixing!";
-		glInfo.mainContext->makeCurrent(glInfo.surface);
-	}
 
 	flagInvertScreenShotColors = configuration->value("main/invert_screenshots_colors", false).toBool();
 	screenShotFormat = configuration->value("main/screenshot_format", "png").toString();
