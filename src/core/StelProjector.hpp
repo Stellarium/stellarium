@@ -309,6 +309,14 @@ public:
 	//! Get the current type of the mask if any.
 	StelProjectorMaskType getMaskType(void) const;
 
+	//! Check whether the projection represented by \p other is the same as this.
+	//!
+	//! This check is intended to tell whether the shaders returned by #getProjectShader and #getUnProjectShader are
+	//! the same for this and \p other.
+	//! The parameters compared include projection type and whether refraction is on. Numerical
+	//  parameters of the transform like rotation angles, stretch factors etc. (that are passed as uniforms) are ignored.
+	bool isSameProjection(const StelProjector& other) const;
+
 protected:
 	//! Private constructor. Only StelCore can create instances of StelProjector.
 	StelProjector(ModelViewTranformP amodelViewTransform)
