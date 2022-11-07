@@ -550,3 +550,10 @@ StelProjector::StelProjectorMaskType StelProjector::getMaskType(void) const
 {
 	return maskType;
 }
+
+bool StelProjector::isSameProjection(const StelProjector& other) const
+{
+	// *this defines the projection type, modelViewTransform defines how refraction is handled.
+	return typeid(*this) == typeid(other) &&
+		   typeid(*modelViewTransform) == typeid(*other.modelViewTransform);
+}
