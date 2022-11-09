@@ -25,7 +25,7 @@
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
 #include "StelUtils.hpp"
-#include "Dithering.hpp"
+#include "StelTextureMgr.hpp"
 #include "SaturationShader.hpp"
 
 #include <QDebug>
@@ -118,17 +118,6 @@ bool StelPainter::linkProg(QOpenGLShaderProgram* prog, const QString& name)
 	return ret;
 }
 
-StelPainter::DitheringMode StelPainter::parseDitheringMode(QString const& str)
-{
-	const auto s=str.trimmed().toLower();
-	if(s=="disabled"   ) return DitheringMode::Disabled;
-	if(s=="color565"   ) return DitheringMode::Color565;
-	if(s=="color666"   ) return DitheringMode::Color666;
-	if(s=="color888"   ) return DitheringMode::Color888;
-	if(s=="color101010") return DitheringMode::Color101010;
-	return DitheringMode::Disabled;
-}
-
 StelPainter::StelPainter(const StelProjectorP& proj)
 	: QOpenGLFunctions(QOpenGLContext::currentContext())
 	, glState(this)
@@ -161,16 +150,6 @@ StelPainter::StelPainter(const StelProjectorP& proj)
 	glState.apply(); //apply default OpenGL state
 	setProjector(proj);
 
-	QSettings*const conf = StelApp::getInstance().getSettings();
-	QVariant selectedDitherFormat = conf->value("video/dithering_mode");
-	if(!selectedDitherFormat.isValid())
-	{
-		constexpr char defaultValue[] = "color888";
-		selectedDitherFormat = defaultValue;
-		conf->setValue("video/dithering_mode", defaultValue);
-	}
-	ditheringMode = parseDitheringMode(selectedDitherFormat.toString());
-
 	vao->create();
 	indicesVBO->create();
 	indicesVBO->setUsagePattern(QOpenGLBuffer::StreamDraw);
@@ -188,8 +167,6 @@ void StelPainter::setProjector(const StelProjectorP& p)
 
 StelPainter::~StelPainter()
 {
-	if(ditherPatternTex)
-		glDeleteTextures(1, &ditherPatternTex);
 	//reset opengl state
 	glState.reset();
 
@@ -919,7 +896,7 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 	tessArc.push_back(win1);
 
 
-	if (rotCenter.lengthSquared()<1e-11)
+	if (rotCenter.normSquared()<1e-11)
 	{
 		// Great circle
 		// Perform the tesselation of the arc in small segments in a way so that the lines look smooth
@@ -927,8 +904,8 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 	}
 	else
 	{
-		Vec3d tmp = (rotCenter^start)/rotCenter.length();
-		const double radius = fabs(tmp.length());
+		Vec3d tmp = (rotCenter^start)/rotCenter.norm();
+		const double radius = fabs(tmp.norm());
 		// Perform the tesselation of the arc in small segments in a way so that the lines look smooth
 		fIter(prj, start-rotCenter, stop-rotCenter, win1, win2, tessArc, tessArc.insert(tessArc.end(), win2), radius, rotCenter);
 	}
@@ -1030,9 +1007,9 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
         const Vec2f* texturePos, QVarLengthArray<Vec2f, 4096>* outTexturePos, const Vec3f *colors, QVarLengthArray<Vec3f, 4096> *outColors,
         double maxSqDistortion, int nbI, bool checkDisc1, bool checkDisc2, bool checkDisc3) const
 {
-	Q_ASSERT(fabs(vertices[0].length()-1.)<0.00001);
-	Q_ASSERT(fabs(vertices[1].length()-1.)<0.00001);
-	Q_ASSERT(fabs(vertices[2].length()-1.)<0.00001);
+	Q_ASSERT(fabs(vertices[0].norm()-1.)<0.00001);
+	Q_ASSERT(fabs(vertices[1].norm()-1.)<0.00001);
+	Q_ASSERT(fabs(vertices[2].norm()-1.)<0.00001);
 	if (clippingCap && clippingCap->containsTriangle(vertices))
 		clippingCap = Q_NULLPTR;
 	if (clippingCap && !clippingCap->intersectsTriangle(vertices))
@@ -1626,7 +1603,7 @@ void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDisc
 		QVector<Vec3d> aberredVertex(arr.vertex.size());
 		for (int i=0; i<arr.vertex.size(); i++)
 		{
-			Q_ASSERT(qFuzzyCompare(arr.vertex.at(i).lengthSquared(), 1.0));
+			Q_ASSERT(qFuzzyCompare(arr.vertex.at(i).normSquared(), 1.0));
 			Vec3d vec=arr.vertex.at(i)+aberration;
 			vec.normalize();
 			aberredVertex[i]=vec;
@@ -1733,8 +1710,8 @@ void StelPainter::drawCircle(float x, float y, float r)
 		return;
 	const Vec2f center(x,y);
 	const Vec2f v_center(0.5f*prj->viewportXywh[2],0.5f*prj->viewportXywh[3]);
-	const float R = v_center.length();
-	const float d = (v_center-center).length();
+	const float R = v_center.norm();
+	const float d = (v_center-center).norm();
 	if (d > r+R || d < r-R)
 		return;
 	const int segments = 180;
@@ -2452,7 +2429,8 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	const bool multisampleWasOn = multisamplingEnabled && glIsEnabled(GL_MULTISAMPLE);
 #endif
 
-	const auto rgbMaxValue=calcRGBMaxValue(ditheringMode);
+	const auto core = StelApp::getInstance().getCore();
+	const auto rgbMaxValue=calcRGBMaxValue(core->getDitheringMode());
 	if (!texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
 		pr = wideLineMode ? wideLineShaderProgram : basicShaderProgram;
@@ -2504,11 +2482,12 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setAttributeBuffer(texturesShaderVars.texCoord, texCoordArray.type, texCoordDataOffset, texCoordArray.size);
 		pr->enableAttributeArray(texturesShaderVars.texCoord);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
-		glActiveTexture(GL_TEXTURE1);
+		const int ditherTexSampler = 1;
 		if(!ditherPatternTex)
-			ditherPatternTex=makeDitherPatternTexture(*this);
-		glBindTexture(GL_TEXTURE_2D, ditherPatternTex);
-		pr->setUniformValue(texturesShaderVars.ditherPattern, 1);
+			ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(ditherTexSampler);
+		else
+			ditherPatternTex->bind(ditherTexSampler);
+		pr->setUniformValue(texturesShaderVars.ditherPattern, ditherTexSampler);
 		pr->setUniformValue(texturesShaderVars.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
 	}
 	else if (texCoordArray.enabled && colorArray.enabled && !normalArray.enabled && !wideLineMode)
@@ -2537,11 +2516,12 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setAttributeBuffer(texturesColorShaderVars.color, colorArray.type, colorDataOffset, colorArray.size);
 		pr->enableAttributeArray(texturesColorShaderVars.color);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
-		glActiveTexture(GL_TEXTURE1);
+		const int ditherTexSampler = 1;
 		if(!ditherPatternTex)
-			ditherPatternTex=makeDitherPatternTexture(*this);
-		glBindTexture(GL_TEXTURE_2D, ditherPatternTex);
-		pr->setUniformValue(texturesColorShaderVars.ditherPattern, 1);
+			ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(ditherTexSampler);
+		else
+			ditherPatternTex->bind(ditherTexSampler);
+		pr->setUniformValue(texturesColorShaderVars.ditherPattern, ditherTexSampler);
 		pr->setUniformValue(texturesColorShaderVars.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
 		pr->setUniformValue(texturesColorShaderVars.saturation, saturation);
 	}

@@ -96,7 +96,7 @@ private:
 		int doSRGB;
 	} shaderAttribLocations;
 
-	GLuint ditherPatternTex=0;
+	StelTextureSP ditherPatternTex;
 };
 
 #endif // ATMOSPHERE_PREETHAM_HPP

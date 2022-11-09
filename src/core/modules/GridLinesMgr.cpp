@@ -553,7 +553,7 @@ void SkyGrid::draw(const StelCore* core) const
 		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
 		Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
 		middlePoint.normalize();
-		middlePoint*=(p1-rotCenter).length();
+		middlePoint*=(p1-rotCenter).norm();
 		middlePoint+=rotCenter;
 		if (!viewPortSphericalCap.contains(middlePoint))
 		{
@@ -607,7 +607,7 @@ void SkyGrid::draw(const StelCore* core) const
 			// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
 			Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
 			middlePoint.normalize();
-			middlePoint*=(p1-rotCenter).length();
+			middlePoint*=(p1-rotCenter).norm();
 			middlePoint+=rotCenter;
 			if (!viewPortSphericalCap.contains(middlePoint))
 			{
@@ -834,7 +834,7 @@ void SkyLine::draw(StelCore *core) const
 			StelUtils::rectToSphe(&lambda, &beta, dir);
 			const QPair<Vec3d, Vec3d> radii=GETSTELMODULE(SolarSystem)->getEarthShadowRadiiAtLunarDistance();
 			const double radius=(line_type==EARTH_UMBRA ? radii.first[1] : radii.second[1]);
-			const double dist=moon->getEclipticPos().length();  // geocentric Lunar distance [AU]
+			const double dist=moon->getEclipticPos().norm();  // geocentric Lunar distance [AU]
 			const Mat4d rot=Mat4d::zrotation(lambda)*Mat4d::yrotation(-beta);
 
 			StelVertexArray circle(StelVertexArray::LineLoop);
@@ -885,7 +885,7 @@ void SkyLine::draw(StelCore *core) const
 				// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
 				Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
 				middlePoint.normalize();
-				middlePoint*=(p1-rotCenter).length();
+				middlePoint*=(p1-rotCenter).norm();
 				middlePoint+=rotCenter;
 				if (!viewPortSphericalCap.contains(middlePoint))
 				{
@@ -1484,7 +1484,7 @@ void SkyPoint::updateLabel()
 			QSharedPointer<Planet> planet=core->getCurrentObserver()->getHomePlanet();
 			Q_ASSERT(planet);
 			const Vec3d dir=planet->getHeliocentricEclipticVelocity();
-			const double speed=dir.length()*(AU/86400.0);
+			const double speed=dir.norm()*(AU/86400.0);
 			// In some cases we don't have a valid speed vector
 			if (speed>0.)
 			{
@@ -1592,7 +1592,7 @@ void SkyPoint::draw(StelCore *core) const
 			const Vec3d dir= - sun->getAberrationPush() + pos;
 			double lambda, beta;
 			StelUtils::rectToSphe(&lambda, &beta, dir);
-			const double dist=GETSTELMODULE(SolarSystem)->getMoon()->getEclipticPos().length();
+			const double dist=GETSTELMODULE(SolarSystem)->getMoon()->getEclipticPos().norm();
 			const Mat4d rot=Mat4d::zrotation(lambda)*Mat4d::yrotation(-beta);
 
 			Vec3d point(dist, 0.0, 0.0);
@@ -1609,7 +1609,7 @@ void SkyPoint::draw(StelCore *core) const
 			Q_ASSERT(planet);
 			const Vec3d dir=planet->getHeliocentricEclipticVelocity();
 			// In some cases we don't have a valid speed vector
-			if (dir.lengthSquared()>0.)
+			if (dir.normSquared()>0.)
 			{
 				sPainter.drawSprite2dMode(dir, 5.f);
 				sPainter.drawText(dir, northernLabel, 0, shift, shift, false);

@@ -31,6 +31,8 @@
 TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& params, TelescopeControl::Equinox eq)
 	: TelescopeClient(name)
 	, mEquinox(eq)
+	, mInterpolatedPosition(1, 0, 0)
+	, mCurrentTargetPosition(1, 0, 0)
 {
 	static const QRegularExpression paramRx("^([^:]*):([^:]*)$");
 	QRegularExpressionMatch paramMatch=paramRx.match(params);
@@ -46,10 +48,6 @@ TelescopeClientASCOM::TelescopeClientASCOM(const QString& name, const QString& p
 	mAscomDevice->connect();
 	mDoesRefraction = mAscomDevice->doesRefraction();
 	mCoordinateType = mAscomDevice->getEquatorialCoordinateType();
-
-	mCurrentTargetPosition[0] = mInterpolatedPosition[0] = 1;
-	mCurrentTargetPosition[1] = mInterpolatedPosition[1] = 0;
-	mCurrentTargetPosition[2] = mInterpolatedPosition[2] = 0;
 }
 
 TelescopeClientASCOM::~TelescopeClientASCOM()
@@ -91,7 +89,7 @@ void TelescopeClientASCOM::performCommunication()
 	}
 
 	mInterpolatedPosition = mInterpolatedPosition * 10 + mCurrentTargetPosition;
-	const double lq = mInterpolatedPosition.lengthSquared();
+	const double lq = mInterpolatedPosition.normSquared();
 	if (lq > 0.0)
 		mInterpolatedPosition *= (1.0 / std::sqrt(lq));
 	else

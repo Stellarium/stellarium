@@ -1411,7 +1411,7 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 	Vec3d e1 = v + h1;
 	Vec3d e2 = v - h0;
 	Vec3d e3 = v - h1;
-	f = 1.0/e0.length();
+	f = 1.0/e0.norm();
 	e0 *= f;
 	e1 *= f;
 	e2 *= f;
@@ -1952,8 +1952,8 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 	else
 		loadCommonNames(fic);
 
-	// Turn on sci names/catalog names for western cultures only
-	setFlagSciNames(skyCultureDir.contains("western", Qt::CaseInsensitive));
+	// Turn on sci names/catalog names for modern cultures only
+	setFlagSciNames(skyCultureDir.contains("modern", Qt::CaseInsensitive));
 	updateI18n();
 }
 

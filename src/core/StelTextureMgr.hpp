@@ -63,6 +63,11 @@ public:
 	//! @returns the existing or new wrapper for the texture with the given GL name. Returns a null pointer if the texture name is invalid.
 	StelTextureSP wrapperForGLTexture(GLuint texId);
 
+	//! Creates or gets existing dither pattern texture
+	//! @param samplerToBindTo The sampler unit that the texture will be bound to. E.g. for GL_TEXTURE3 this value should be 3.
+	//!        This parameter is necessary because glTexImage2D needs the texture to be bound to a sampler unit.
+	StelTextureSP getDitheringTexture(const int samplerToBindTo);
+
 //	//! Returns the estimated memory usage of all textures currently loaded through StelTexture
 //	int getGLMemoryUsage();
 
@@ -85,6 +90,7 @@ private:
 	QMutex mutex;
 	TexCache textureCache;
 	IdMap idMap;
+	StelTextureSP ditheringTexture;
 	GLint maxTexSize; // Useful to avoid loading too large textures
 };
 

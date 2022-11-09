@@ -24,6 +24,8 @@
 VARYING mediump vec2 texc; //texture coord
 VARYING highp vec3 P; //original vertex pos in model space
 
+const highp float PI = 3.14159265;
+
 uniform sampler2D tex;
 uniform mediump vec2 poleLat; //latitudes of pole caps, in terms of texture coordinate. x>0...north, y<1...south. 
 uniform mediump vec3 ambientLight;
@@ -63,6 +65,7 @@ VARYING highp vec4 shadowCoord;
     uniform sampler2D earthShadow;
     uniform mediump float eclipsePush;
     uniform sampler2D normalMap;
+	uniform sampler2D horizonMap;
 
     VARYING highp vec3 normalX;
     VARYING highp vec3 normalY;
@@ -263,6 +266,53 @@ void main()
     mediump vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);
     normal = normalize(normalX*normal.x+normalY*normal.y+normalZ*normal.z);
     // normal now contains the real surface normal taking normal map into account
+
+	mediump float horizonShadowCoefficient = 1.;
+	{
+		// Check whether the fragment is in the shadow of surrounding mountains or the horizon
+		mediump vec3 lonDir = normalX;
+		mediump vec3 northDir = normalY;
+		mediump vec3 zenith = normalZ;
+		mediump float sunAzimuth = atan(dot(lightDirection,lonDir), dot(lightDirection,northDir));
+		mediump float sinSunElevation = dot(zenith, lightDirection);
+		mediump vec4 horizonElevSample = (texture2D(horizonMap, texc) - 0.5) * 2.;
+		mediump vec4 sinHorizElevs = sign(horizonElevSample) * horizonElevSample * horizonElevSample;
+		mediump float sinHorizElevLeft, sinHorizElevRight;
+		mediump float alpha;
+		if(sunAzimuth >= PI/2.)
+		{
+			// Sun is between East and South
+			sinHorizElevLeft = sinHorizElevs[1];
+			sinHorizElevRight = sinHorizElevs[2];
+			alpha = (sunAzimuth - PI/2.) / (PI/2.);
+		}
+		else if(sunAzimuth >= 0.)
+		{
+			// Sun is between North and East
+			sinHorizElevLeft = sinHorizElevs[0];
+			sinHorizElevRight = sinHorizElevs[1];
+			alpha = sunAzimuth / (PI/2.);
+		}
+		else if(sunAzimuth <= -PI/2.)
+		{
+			// Sun is between South and West
+			sinHorizElevLeft = sinHorizElevs[2];
+			sinHorizElevRight = sinHorizElevs[3];
+			alpha = (sunAzimuth + PI) / (PI/2.);
+		}
+		else
+		{
+			// Sun is between West and North
+			sinHorizElevLeft = sinHorizElevs[3];
+			sinHorizElevRight = sinHorizElevs[0];
+			alpha = (sunAzimuth + PI/2.) / (PI/2.);
+		}
+		mediump float horizElevLeft = asin(sinHorizElevLeft);
+		mediump float horizElevRight = asin(sinHorizElevRight);
+		mediump float horizElev = horizElevLeft + (horizElevRight-horizElevLeft)*alpha;
+		if(sinSunElevation < sin(horizElev))
+			horizonShadowCoefficient = 0.;
+	}
 #else
     // important to normalize here again
     mediump vec3 normal = normalize(normalVS);
@@ -271,6 +321,9 @@ void main()
     // Use an Oren-Nayar model for rough surfaces
     // Ref: http://content.gpwiki.org/index.php/D3DBook:(Lighting)_Oren-Nayar
     lum = orenNayar(normal, lightDirection, eyeDirection, orenNayarParameters.x, orenNayarParameters.y, orenNayarParameters.z, orenNayarParameters.w);
+#endif
+#ifdef IS_MOON
+	lum *= horizonShadowCoefficient;
 #endif
     //calculate pseudo-outgassing/rim-lighting effect
     lowp float outgas = 0.0;

@@ -1,7 +1,7 @@
 // Name: Zodiac
 // Author: Matthew Gates
 // License: Public Domain
-// Version: 1.1
+// Version: 1.2
 // Description: This script displays the constellations of the Zodiac.
 //              That means the constellations which lie along the line which
 //              the Sun traces across the celestial sphere over the course 
@@ -10,6 +10,7 @@
 
 var constellations = new Array("Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpius", "Ophiuchus", "Sagittarius", "Capricornus", "Aquarius", "Pisces", "Aries", "Taurus");
 
+core.setSkyCulture("modern");
 core.clear("deepspace");
 core.wait(1);
 

@@ -27,10 +27,7 @@
 
 StelProjector::Mat4dTransform::Mat4dTransform(const Mat4d& m)
     : transfoMat(m),
-      transfoMatf(static_cast<float>(m[0]),  static_cast<float>(m[1]),  static_cast<float>(m[2]),  static_cast<float>(m[3]),
-		  static_cast<float>(m[4]),  static_cast<float>(m[5]),  static_cast<float>(m[6]),  static_cast<float>(m[7]),
-		  static_cast<float>(m[8]),  static_cast<float>(m[9]),  static_cast<float>(m[10]), static_cast<float>(m[11]),
-		  static_cast<float>(m[12]), static_cast<float>(m[13]), static_cast<float>(m[14]), static_cast<float>(m[15]))
+      transfoMatf(toMat4f(m))
 {
 	Q_ASSERT(m[0]==m[0]); // prelude to assert later in Atmosphere rendering... still investigating
 }
@@ -71,10 +68,7 @@ void StelProjector::Mat4dTransform::backward(Vec3f& v) const
 
 void StelProjector::Mat4dTransform::combine(const Mat4d& m)
 {
-	Mat4f mf(static_cast<float>(m[0]),  static_cast<float>(m[1]) ,  static_cast<float>(m[2]),  static_cast<float>(m[3]),
-		static_cast<float>(m[4]),  static_cast<float>(m[5]),   static_cast<float>(m[6]),  static_cast<float>(m[7]),
-		static_cast<float>(m[8]),  static_cast<float>(m[9]),   static_cast<float>(m[10]), static_cast<float>(m[11]),
-		static_cast<float>(m[12]), static_cast<float>(m[13]),  static_cast<float>(m[14]), static_cast<float>(m[15]));
+	Mat4f mf(toMat4f(m));
 	transfoMat=transfoMat*m;
 	transfoMatf=transfoMatf*mf;
 }
@@ -404,8 +398,8 @@ void StelProjector::computeBoundingCap()
 	bool ok = unProject(static_cast<double>(viewportXywh[0]+0.5f*viewportXywh[2]), static_cast<double>(viewportXywh[1]+0.5f*viewportXywh[3]), boundingCap.n);
 	// The central point should be at a valid position by definition.
 	// When center is offset, this assumption may not hold however.
-	Q_ASSERT(ok || (viewportCenterOffset.lengthSquared()>0) );
-	const bool needNormalization = fabs(boundingCap.n.lengthSquared()-1.)>0.00000001;
+	Q_ASSERT(ok || (viewportCenterOffset.normSquared()>0) );
+	const bool needNormalization = fabs(boundingCap.n.normSquared()-1.)>0.00000001;
 
 	// Now need to determine the aperture
 	Vec3d e0,e1,e2,e3,e4,e5;

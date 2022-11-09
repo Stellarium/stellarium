@@ -25,6 +25,7 @@
 #include "StelApp.hpp"
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "Dithering.hpp"
@@ -605,12 +606,8 @@ void AtmosphereShowMySky::drawAtmosphere(Mat4f const& projectionMatrix, const fl
 {
 	StelOpenGL::checkGLErrors(__FILE__,__LINE__);
 	Q_UNUSED(airglowRelativeBrightness)
-	const auto& m = projectionMatrix;
 	auto& settings = *static_cast<SkySettings*>(skySettings_.get());
-	settings.projectionMatrix_ = QMatrix4x4(m[0], m[4], m[8] , m[12],
-						m[1], m[5], m[9] , m[13],
-						m[2], m[6], m[10], m[14],
-						m[3], m[7], m[11], m[15]);
+	settings.projectionMatrix_ = projectionMatrix.toQMatrix();
 	settings.altitude_=altitude;
 	settings.sunAzimuth_=sunAzimuth;
 	settings.sunZenithAngle_=sunZenithAngle;
@@ -739,13 +736,13 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, 
 	prj->project(currPos,currSun);
 	const auto dFad=1e3*(currFad-prevFad);				// per thousand of the fader
 	const auto dFov=2e3*(currFov-prevFov)/(currFov+prevFov);	// per thousand of the field of view
-	const auto dPos=1e3*(currPos-prevPos).length();			// milli-AU :)
-	const auto dSun=(currSun-prevSun).length();			// pixel
+	const auto dPos=1e3*(currPos-prevPos).norm();			// milli-AU :)
+	const auto dSun=(currSun-prevSun).norm();			// pixel
 	const auto changeOfView=Vec4d(dFad,dFov,dPos,dSun);
 	const auto allowedChange=eclipseFactor<1?10e-3:1;		// for solar eclipses, prioritize speed over resolution
 	const auto hysteresis=atmoRes==1?1:200e-3;			// hysteresis avoids frequent changing of the resolution
 	const auto allowedChangeOfView=allowedChange*hysteresis;
-	const auto changed=changeOfView.length()>allowedChangeOfView;	// change is too big
+	const auto changed=changeOfView.norm()>allowedChangeOfView;	// change is too big
 	const auto timeout=dynResTimer<=0;				// do we have a timeout?
 	// if we don't have a timeout or too much change, we skip the frame
 	if (!changed && !timeout)
@@ -762,7 +759,7 @@ bool AtmosphereShowMySky::dynamicResolution(StelProjectorP prj, Vec3d &currPos, 
 		resizeRenderTarget(width, height);
 		bool verbose=qApp->property("verbose").toBool();
 		if (verbose)
-			qDebug() << "dynResTimer" << dynResTimer << "atmoRes" << atmoRes << "changeOfView" << changeOfView.length() << changeOfView;
+			qDebug() << "dynResTimer" << dynResTimer << "atmoRes" << atmoRes << "changeOfView" << changeOfView.norm() << changeOfView;
 	}
 	// At reduced resolution, we hurry to redraw - at full resolution, we have time.
 	dynResTimer=timeout?17:5;
@@ -809,15 +806,15 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 		}
 
 		auto sunPos  =  sun.getAltAzPosAuto(core);
-		if (std::isnan(sunPos.length()))
+		if (std::isnan(sunPos.norm()))
 			sunPos.set(0, 0, -1);
 
 		// if we run dynamic resolution mode and don't have a timeout or too much change, we skip the frame
 		if (dynamicResolution(prj, sunPos, width, height))
 			return;
 
-		const auto sunDir = sunPos / sunPos.length();
-		const double sunAngularRadius = atan(sun.getEquatorialRadius()/sunPos.length());
+		const auto sunDir = sunPos / sunPos.norm();
+		const double sunAngularRadius = atan(sun.getEquatorialRadius()/sunPos.norm());
 
 		// If we have no moon, just put it into nadir
 		Vec3d moonDir{0.,0.,-1.};
@@ -827,11 +824,11 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 		if (moon)
 		{
 			auto moonPos = moon->getAltAzPosAuto(core);
-			if (std::isnan(moonPos.length()))
+			if (std::isnan(moonPos.norm()))
 				moonPos.set(0, 0, -1);
-			moonDir = moonPos / moonPos.length();
+			moonDir = moonPos / moonPos.norm();
 
-			const double moonAngularRadius = atan(moon->getEquatorialRadius()/moonPos.length());
+			const double moonAngularRadius = atan(moon->getEquatorialRadius()/moonPos.norm());
 			const double separationAngle = std::acos(sunDir.dot(moonDir));  // angle between them
 
 			sunVisibility_ = sunVisibilityDueToMoon(sunAngularRadius, moonAngularRadius, separationAngle);
@@ -840,7 +837,7 @@ void AtmosphereShowMySky::computeColor(StelCore* core, const double JD, const Pl
 
 			const Vec3d earthGeomPos = currentPlanet.getAltAzPosGeometric(core);
 			const Vec3d moonGeomPos = moon->getAltAzPosGeometric(core);
-			earthMoonDistance = (earthGeomPos - moonGeomPos).length() * (AU*1000);
+			earthMoonDistance = (earthGeomPos - moonGeomPos).norm() * (AU*1000);
 		}
 		else
 		{
@@ -932,7 +929,7 @@ void AtmosphereShowMySky::draw(StelCore* core)
 	StelPainter sPainter(core->getProjection2d());
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 
-	const auto rgbMaxValue=calcRGBMaxValue(sPainter.getDitheringMode());
+	const auto rgbMaxValue=calcRGBMaxValue(core->getDitheringMode());
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]));
 
 	auto& gl = *glfuncs();
@@ -941,11 +938,12 @@ void AtmosphereShowMySky::draw(StelCore* core)
 	GL(gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.luminanceTexture, 0));
 
-	GL(gl.glActiveTexture(GL_TEXTURE1));
+	const int ditherTexSampler = 1;
 	if(!ditherPatternTex_)
-		ditherPatternTex_=makeDitherPatternTexture(*sPainter.glFuncs());
-	GL(gl.glBindTexture(GL_TEXTURE_2D, ditherPatternTex_));
-	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.ditherPattern, 1));
+		ditherPatternTex_ = StelApp::getInstance().getTextureManager().getDitheringTexture(ditherTexSampler);
+	else
+		GL(ditherPatternTex_->bind(ditherTexSampler));
+	GL(luminanceToScreenProgram_->setUniformValue(shaderAttribLocations.ditherPattern, ditherTexSampler));
 
 	GL(gl.glBindVertexArray(luminanceToScreenVAO_));
 	GL(gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));

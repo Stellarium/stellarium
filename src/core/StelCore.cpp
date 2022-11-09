@@ -159,12 +159,33 @@ StelCore::~StelCore()
 	delete position; position=Q_NULLPTR;
 }
 
+DitheringMode StelCore::parseDitheringMode(const QString& str)
+{
+	const auto s=str.trimmed().toLower();
+	if(s=="disabled"   ) return DitheringMode::Disabled;
+	if(s=="color565"   ) return DitheringMode::Color565;
+	if(s=="color666"   ) return DitheringMode::Color666;
+	if(s=="color888"   ) return DitheringMode::Color888;
+	if(s=="color101010") return DitheringMode::Color101010;
+	return DitheringMode::Disabled;
+}
+
 /*************************************************************************
  Load core data and initialize with default values
 *************************************************************************/
 void StelCore::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
+
+	const char ditheringModeKey[] = "video/dithering_mode";
+	QVariant selectedDitherFormat = conf->value(ditheringModeKey);
+	if(!selectedDitherFormat.isValid())
+	{
+		constexpr char defaultValue[] = "color888";
+		selectedDitherFormat = defaultValue;
+		conf->setValue(ditheringModeKey, defaultValue);
+	}
+	ditheringMode = parseDitheringMode(selectedDitherFormat.toString());
 
 	if (conf->childGroups().contains("location_run_once"))
 		defaultLocationID = "stellarium_cli";
@@ -1400,6 +1421,21 @@ void StelCore::setUseDST(const bool b)
 	flagUseDST = b;
 	StelApp::getInstance().getSettings()->setValue("localization/flag_dst", b);
 	emit flagUseDSTChanged(b);
+}
+
+void StelCore::setDitheringMode(const DitheringMode newMode)
+{
+	if(newMode == ditheringMode)
+		return;
+
+	ditheringMode = newMode;
+	emit ditheringModeChanged(newMode);
+}
+
+void StelCore::setDitheringMode(const QString& modeName)
+{
+	const auto mode = parseDitheringMode(modeName);
+	setDitheringMode(mode);
 }
 
 bool StelCore::getUseCustomTimeZone() const

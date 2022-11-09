@@ -40,7 +40,7 @@ ELSE()
 ENDIF()
 # Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MINOR 22)
-SET(STELLARIUM_PATCH 3)
+SET(STELLARIUM_PATCH 4)
 ADD_DEFINITIONS(
      -DSTELLARIUM_MAJOR=${STELLARIUM_MAJOR}
      -DSTELLARIUM_MINOR=${STELLARIUM_MINOR}
@@ -53,7 +53,7 @@ SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
 # Example: first release in year 2023 has version 1.23.0 and public version 23.1
 MATH(EXPR STELLARIUM_V "${STELLARIUM_PATCH} + 1" OUTPUT_FORMAT DECIMAL)
 #SET(STELLARIUM_PUBLIC_VERSION "${STELLARIUM_MINOR}.${STELLARIUM_V}")
-SET(STELLARIUM_PUBLIC_VERSION "1.0")
+SET(STELLARIUM_PUBLIC_VERSION "1.1")
 SET(PACKAGE stellarium)
 STRING(TIMESTAMP CURRENTYEAR "%Y")
 SET(COPYRIGHT_YEARS "2000-${CURRENTYEAR}")
@@ -144,6 +144,8 @@ IF(STELLARIUM_RELEASE_BUILD)
      ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
      SET(SERIES "${STELLARIUM_MINOR}.x")
      SET(WINDOWS_PACKAGE_VERSION "${VERSION}.0")
+     SET(ISS_PACKAGE_VERSION "${STELLARIUM_PUBLIC_VERSION}")
+     SET(STELLARIUM_BUNDLE_VERSION "${STELLARIUM_PUBLIC_VERSION}")
 ELSE()
      SET(SERIES "head")
      ########### Get revision number for non-release builds ###########
@@ -171,6 +173,7 @@ ELSE()
                STRING(SUBSTRING ${GIT_REVISION} 0 7 REVISION)
                SET(PACKAGE_VERSION "${VERSION}-${REVISION}")
 	       SET(ISS_PACKAGE_VERSION "${STELLARIUM_PUBLIC_VERSION}-${REVISION}")
+	       SET(STELLARIUM_BUNDLE_VERSION "${STELLARIUM_PUBLIC_VERSION}-${REVISION}")
                ADD_DEFINITIONS(-DGIT_REVISION="${REVISION}")
                ADD_DEFINITIONS(-DGIT_BRANCH="${GIT_BRANCH}")
                # check to use --depth param...
@@ -186,6 +189,7 @@ ELSE()
           STRING(TIMESTAMP TODAY "%j%H%M")
 	  SET(PACKAGE_VERSION "${VERSION}-${TODAY}")
 	  SET(ISS_PACKAGE_VERSION "${STELLARIUM_PUBLIC_VERSION}-${TODAY}")
+	  SET(STELLARIUM_BUNDLE_VERSION "${STELLARIUM_PUBLIC_VERSION}-${TODAY}")
           ADD_DEFINITIONS(-DGIT_REVISION="${TODAY}")
           ADD_DEFINITIONS(-DGIT_BRANCH="tarball")
      ENDIF()     
@@ -691,9 +695,9 @@ SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 IF(ENABLE_SHOWMYSKY)
     ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
     CPMFindPackage(NAME ShowMySky-Qt${QT_VERSION_MAJOR}
-        URL https://github.com/10110111/CalcMySky/archive/74d234e614478017fb4519dd0c45573ebf4528cf.tar.gz
-        #URL https://github.com/10110111/CalcMySky/archive/refs/tags/v0.2.0.tar.gz
-        #URL_HASH SHA256=77760b6022992d8d464deb6935a84fdb30294169677ee6c82eb25c8dd52f7ce6
+        #URL https://github.com/10110111/CalcMySky/archive/74d234e614478017fb4519dd0c45573ebf4528cf.tar.gz
+        URL https://github.com/10110111/CalcMySky/archive/refs/tags/v0.2.1.tar.gz
+        URL_HASH SHA256=5e2290152424d358b1e8b3f31144fcf0f6e076520dd7c4dfc6b7b36cac91cde2
         EXCLUDE_FROM_ALL yes
         OPTIONS "QT_VERSION ${QT_VERSION_MAJOR}")
     IF(ShowMySky-Qt${QT_VERSION_MAJOR}_ADDED)
@@ -965,8 +969,9 @@ IF(GENERATE_PACKAGE_TARGET)
      SET(CPACK_PACKAGE_VERSION_PATCH "${STELLARIUM_PATCH}")
      SET(CPACK_PACKAGE_INSTALL_DIRECTORY "stellarium")
      SET(CPACK_SOURCE_PACKAGE_FILE_NAME "stellarium-${STELLARIUM_PUBLIC_VERSION}")
-     SET(CPACK_SOURCE_GENERATOR "TGZ")
-     SET(CPACK_GENERATOR "TGZ")
+     SET(CPACK_SOURCE_GENERATOR "TBZ2;TXZ;TGZ")
+     SET(CPACK_GENERATOR "TBZ2;TXZ;TGZ")
+     SET(CPACK_PACKAGE_CHECKSUM "SHA256")
      SET(CPACK_STRIP_FILES "bin/stellarium")
      SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
      SET(CPACK_SOURCE_IGNORE_FILES "/.git/" "/.github/" "builds/" "installers/" "po/stellarium-landscapes-descriptions" "po/stellarium-scenery3d-descriptions" "po/stellarium-skycultures-descriptions" "po/stellarium-desktop" "po/stellarium-metainfo" "util/spout2" "util/DSSToStellarium/toastForShape$" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "\\\\.gitignore$" "\\\\.clang-format$" "\\\\.yml$" "~$" "\\\\.swp$" "\\\\.#" "/#")
@@ -983,6 +988,7 @@ ENDIF()
 
 ########### macOS Bundling ###############
 IF(APPLE)
+     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/Info.plist.cmake ${CMAKE_SOURCE_DIR}/data/Info.plist @ONLY)
      GET_FILENAME_COMPONENT(_qt_bin_dir "${QMAKE_LOCATION}" DIRECTORY)
      FIND_PROGRAM(MACDEPLOYQT_COMMAND macdeployqt HINTS "${_qt_bin_dir}")
      IF(MACDEPLOYQT_COMMAND)
@@ -994,7 +1000,6 @@ IF(APPLE)
      MESSAGE(STATUS "macOS deployment target: ${CMAKE_OSX_DEPLOYMENT_TARGET} (${CMAKE_OSX_ARCHITECTURES})")
      SET(PACKAGE_OSX_TARGET ${CMAKE_OSX_DEPLOYMENT_TARGET})
      ADD_DEFINITIONS(-DPACKAGE_OSX_TARGET)
-     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/Info.plist.cmake ${CMAKE_SOURCE_DIR}/data/Info.plist @ONLY)
 ENDIF()
 
 ########### Windows packaging ###############

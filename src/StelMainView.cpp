@@ -868,12 +868,13 @@ void StelMainView::init()
 		processOpenGLdiagnosticsAndWarnings(configuration, glInfo.mainContext);
 	}
 
+	//setup StelOpenGLArray global state
+	StelOpenGLArray::initGL();
+
 	//create and initialize main app
 	stelApp = new StelApp(this);
 	stelApp->setGui(gui);
 	stelApp->init(configuration);
-	//setup StelOpenGLArray global state
-	StelOpenGLArray::initGL();
 	//this makes sure the app knows how large the window is
 	connect(stelScene,SIGNAL(sceneRectChanged(QRectF)),stelApp,SLOT(glWindowHasBeenResized(QRectF)));
 	//also immediately set the current values

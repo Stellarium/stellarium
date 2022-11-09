@@ -62,8 +62,8 @@ void TestVecMath::testVec2Math()
 	QVERIFY(vi.clamp(Vec2i(1,1),Vec2i(10,10))==Vec2i(5,5));
 	QVERIFY(vi.dot(Vec2i(5,5))==50);
 	vi.set(2,2);
-	QVERIFY(vi.length()==2);
-	QVERIFY(vi.lengthSquared()==8);
+	QVERIFY(vi.norm()==2);
+	QVERIFY(vi.normSquared()==8);
 	QVERIFY(vi.toString()==QString("[2, 2]"));
 	Vec2i vt(1,2);
 	QVERIFY(vt==Vec2i(1,2));
@@ -108,8 +108,8 @@ void TestVecMath::testVec2Math()
 	QVERIFY(vf.clamp(Vec2f(1.f,1.f),Vec2f(10.f,10.f))==Vec2f(5.f,5.f));
 	QVERIFY(qAbs(vf.dot(Vec2f(5.f,5.f)) - 50.f) <= ERROR_LIMIT);
 	vf.set(2.f,2.f);
-	QVERIFY(qAbs(vf.length() - 2.82843f) <= ERROR_LIMIT);
-	QVERIFY(qAbs(vf.lengthSquared() - 8.f) <= ERROR_LIMIT);
+	QVERIFY(qAbs(vf.norm() - 2.82843f) <= ERROR_LIMIT);
+	QVERIFY(qAbs(vf.normSquared() - 8.f) <= ERROR_LIMIT);
 	Vec2f vtf(1.f,2.f);
 	QVERIFY(vtf==Vec2f(1.f,2.f));
 	vf = vtf;
@@ -149,8 +149,8 @@ void TestVecMath::testVec2Math()
 	QVERIFY(vd.clamp(Vec2d(1.,1.),Vec2d(10.,10.))==Vec2d(5.,5.));
 	QVERIFY(qAbs(vd.dot(Vec2d(5.,5.)) - 50.) <= ERROR_LIMIT);
 	vd.set(2.,2.);
-	QVERIFY(qAbs(vd.length() - 2.82843) <= ERROR_LIMIT);
-	QVERIFY(qAbs(vd.lengthSquared() - 8.) <= ERROR_LIMIT);
+	QVERIFY(qAbs(vd.norm() - 2.82843) <= ERROR_LIMIT);
+	QVERIFY(qAbs(vd.normSquared() - 8.) <= ERROR_LIMIT);
 	Vec2d vtd(1.,2.);
 	QVERIFY(vtd==Vec2d(1.,2.));
 	vd = vtd;
@@ -219,8 +219,8 @@ void TestVecMath::testVec3Math()
 	vi.set(5,5,5);
 	QVERIFY(vi.dot(Vec3i(5,5,1))==55);
 	vi.set(2,2,2);
-	QVERIFY(vi.length()==3);
-	QVERIFY(vi.lengthSquared()==12);
+	QVERIFY(vi.norm()==3);
+	QVERIFY(vi.normSquared()==12);
 	QVERIFY(vi.toString()==QString("[2, 2, 2]"));
 	vi = Vec3i(1);
 	QVERIFY(vi.toVec3f()==Vec3f(1.f));
@@ -258,8 +258,8 @@ void TestVecMath::testVec3Math()
 	vf.set(5.f,5.f,5.f);
 	QVERIFY(qAbs(vf.dot(Vec3f(5.f,5.f,1.f)) - 55.f) <= ERROR_LIMIT);
 	vf.set(2.f,2.f,2.f);
-	QVERIFY(qAbs(vf.length() - 3.4641016f) <= ERROR_LIMIT);
-	QVERIFY(qAbs(vf.lengthSquared() - 12.f) <= ERROR_LIMIT);
+	QVERIFY(qAbs(vf.norm() - 3.4641016f) <= ERROR_LIMIT);
+	QVERIFY(qAbs(vf.normSquared() - 12.f) <= ERROR_LIMIT);
 	vf = Vec3f(10.f);
 	QVERIFY(vf/2.f==Vec3f(5.f));
 	vf.set(3.f,3.f,3.f);
@@ -302,8 +302,8 @@ void TestVecMath::testVec3Math()
 	vd.set(5.,5.,5.);
 	QVERIFY(qAbs(vd.dot(Vec3d(5.,5.,1.)) - 55.) <= ERROR_LIMIT);
 	vd.set(2.,2.,2.);
-	QVERIFY(qAbs(vd.length() - 3.4641016) <= ERROR_LIMIT);
-	QVERIFY(qAbs(vd.lengthSquared() - 12.) <= ERROR_LIMIT);
+	QVERIFY(qAbs(vd.norm() - 3.4641016) <= ERROR_LIMIT);
+	QVERIFY(qAbs(vd.normSquared() - 12.) <= ERROR_LIMIT);
 	vd = Vec3d(10.);
 	QVERIFY(vd/2.==Vec3d(5.));
 	vd.set(3.,3.,3.);
@@ -377,8 +377,8 @@ void TestVecMath::testVec4Math()
 	vi.set(5,5,5,5);
 	QVERIFY(vi.dot(Vec4i(5,5,1,1))==60);
 	vi.set(2,2,2,2);
-	QVERIFY(vi.length()==4);
-	QVERIFY(vi.lengthSquared()==16);
+	QVERIFY(vi.norm()==4);
+	QVERIFY(vi.normSquared()==16);
 	QVERIFY(vi.toString()==QString("[2, 2, 2, 2]"));
 	Vec4i vt(1,2,3,4);
 	QVERIFY(vt==Vec4i(1,2,3,4));
@@ -414,8 +414,8 @@ void TestVecMath::testVec4Math()
 	vf.set(5.f,5.f,5.f,5.f);
 	QVERIFY(qAbs(vf.dot(Vec4f(5.f,5.f,1.f,1.f))-60.f)<=ERROR_LIMIT);
 	vf.set(2.f,2.f,2.f,2.f);
-	QVERIFY(qAbs(vf.length()-4.f) <= ERROR_LIMIT);
-	QVERIFY(qAbs(vf.lengthSquared()-16.f) <= ERROR_LIMIT);
+	QVERIFY(qAbs(vf.norm()-4.f) <= ERROR_LIMIT);
+	QVERIFY(qAbs(vf.normSquared()-16.f) <= ERROR_LIMIT);
 	Vec4f vg(0.f);
 	QVERIFY2(vg==Vec4f(0.0f, 0.0f, 0.0f, 0.0f), "Vec4f constructor with single constant failed");
 
@@ -440,8 +440,8 @@ void TestVecMath::testVec4Math()
 	vd.set(5.,5.,5.,5.);
 	QVERIFY(qAbs(vd.dot(Vec4d(5.,5.,1.,1.))-60.)<=ERROR_LIMIT);
 	vd.set(2.,2.,2.,2.);
-	QVERIFY(qAbs(vd.length()-4.) <= ERROR_LIMIT);
-	QVERIFY(qAbs(vd.lengthSquared()-16.) <= ERROR_LIMIT);
+	QVERIFY(qAbs(vd.norm()-4.) <= ERROR_LIMIT);
+	QVERIFY(qAbs(vd.normSquared()-16.) <= ERROR_LIMIT);
 
 	QStringList li={"8", "4", "2", "1"};
 	vi=Vec4i(li);
@@ -491,4 +491,43 @@ void TestVecMath::testMatrix3Math()
 	QVERIFY(qAbs(md.trace() + 3.) <= ERROR_LIMIT);
 	md = Mat3d(1.,1.,1.,1.,1.,1.,1.,1.,1.)*Mat3d(5.,5.,5.,5.,5.,5.,5.,5.,5.);
 	QVERIFY(qAbs(md.trace() - 45.) <= ERROR_LIMIT);
+	{
+		mf.set(1.234, 3.456, 4.567, 5.678, 7.89, 10.1112, 13.1415, 16.1718, 19.2021);
+		md = toMat3d(mf);
+		const Mat3f diff = toMat3f(md) - mf;
+		const auto maxDiff = *std::max_element(std::begin(diff.r), std::end(diff.r),
+											   [](auto& x, auto& y) { return std::abs(x) < std::abs(y); });
+		QVERIFY(maxDiff == 0);
+	}
+	{
+		md.set(1.234, 3.456, 4.567, 5.678, 7.89, 10.1112, 13.1415, 16.1718, 19.2021);
+		mf = toMat3f(md);
+		const Mat3d diff = toMat3d(mf) - md;
+		const auto maxDiff = *std::max_element(std::begin(diff.r), std::end(diff.r),
+											   [](auto& x, auto& y) { return std::abs(x) < std::abs(y); });
+		QVERIFY(maxDiff < ERROR_LIMIT);
+	}
+}
+
+void TestVecMath::testMatrix4Math()
+{
+	Mat4f mf;
+	Mat4d md;
+
+	{
+		mf.set(1.234, 3.456, 4.567, 5.678, 7.89, 10.1112, 13.1415, 16.1718, 19.2021, 22.2324, 25.2627, 28.2930, 31.3233, 34.3536, 37.3839, 40.4142);
+		md = toMat4d(mf);
+		const Mat4f diff = toMat4f(md) - mf;
+		const auto maxDiff = *std::max_element(std::begin(diff.r), std::end(diff.r),
+											   [](auto& x, auto& y) { return std::abs(x) < std::abs(y); });
+		QVERIFY(maxDiff == 0);
+	}
+	{
+		md.set(1.234, 3.456, 4.567, 5.678, 7.89, 10.1112, 13.1415, 16.1718, 19.2021, 22.2324, 25.2627, 28.2930, 31.3233, 34.3536, 37.3839, 40.4142);
+		mf = toMat4f(md);
+		const Mat4d diff = toMat4d(mf) - md;
+		const auto maxDiff = *std::max_element(std::begin(diff.r), std::end(diff.r),
+											   [](auto& x, auto& y) { return std::abs(x) < std::abs(y); });
+		QVERIFY(maxDiff < ERROR_LIMIT);
+	}
 }

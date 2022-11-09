@@ -208,6 +208,7 @@ Planet::Planet(const QString& englishName,
 	       float roughness,
 	       const QString& atexMapName,
 	       const QString& anormalMapName,
+		   const QString& ahorizonMapName,
 	       const QString& aobjModelName,
 	       posFuncType coordFunc,
 	       Orbit* anOrbitPtr,
@@ -226,6 +227,7 @@ Planet::Planet(const QString& englishName,
 	  nativeName(""),
 	  texMapName(atexMapName),
 	  normalMapName(anormalMapName),
+	  horizonMapName(ahorizonMapName),
 	  siderealPeriod(0.),
 	  equatorialRadius(radius),
 	  oneMinusOblateness(1.0-oblateness),
@@ -297,6 +299,16 @@ Planet::Planet(const QString& englishName,
 			normalMapFileOrig = normalMapFile;
 		}
 	}
+	if(!horizonMapName.isEmpty())
+	{
+		// TODO: use StelFileMgr::findFileInAllPaths() after introducing an Add-On Manager
+		QString horizonMapFile = StelFileMgr::findFile("textures/"+horizonMapName, StelFileMgr::File);
+		if (!horizonMapFile.isEmpty())
+		{
+			horizonMap = StelApp::getInstance().getTextureManager().createTextureThread(horizonMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+			horizonMapFileOrig = horizonMapFile;
+		}
+	}
 	//the OBJ is lazily loaded when first required
 	if(!aobjModelName.isEmpty())
 	{
@@ -354,6 +366,9 @@ void Planet::resetTextures()
 	// restore normal map
 	if (!normalMapFileOrig.isEmpty())
 		normalMap = StelApp::getInstance().getTextureManager().createTextureThread(normalMapFileOrig, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+
+	if (!horizonMapFileOrig.isEmpty())
+		horizonMap = StelApp::getInstance().getTextureManager().createTextureThread(horizonMapFileOrig, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 }
 
 void Planet::replaceTexture(const QString &texName)
@@ -515,7 +530,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 {
 	QString str;
 	QTextStream oss(&str);
-	const double distanceAu = getJ2000EquatorialPos(core).length();
+	const double distanceAu = getJ2000EquatorialPos(core).norm();
 
 	if (flags&Name)
 	{
@@ -604,29 +619,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	// Second test avoids crash when observer is on spaceship
 	if (flags&ProperMotion && !core->getCurrentObserver()->isObserverLifeOver())
 	{
-		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-		// Setting/resetting the time causes a significant slowdown. We must apply some trickery to keep time in sync.
-		const Vec3d equPos=getEquinoxEquatorialPos(core);
-		double dec_equ, ra_equ;
-		StelUtils::rectToSphe(&ra_equ,&dec_equ,equPos);
-		StelCore* core1 = StelApp::getInstance().getCore(); // we need non-const reference here.
-		const double currentJD=core1->getJDOfLastJDUpdate();
-		const qint64 millis=core1->getMilliSecondsOfLastJDUpdate();
-		StelCore* core2 = StelApp::getInstance().getCore(); // use to fix hourly motion
-		const double JD2=core2->getJD();
-		core2->setJD(JD2-StelCore::JD_HOUR*.1);
-		core2->update(0);
-		Vec3d equPosPrev=getEquinoxEquatorialPos(core2);
-		const double deltaEq=equPos.angle(equPosPrev);
-		double dec_equPrev, ra_equPrev;
-		StelUtils::rectToSphe(&ra_equPrev,&dec_equPrev,equPosPrev);
-		double pa=atan2(ra_equ-ra_equPrev, dec_equ-dec_equPrev); // position angle: From North counterclockwise!
-		if (pa<0) pa += 2.*M_PI;
-		oss << QString("%1: %2 %3 %4%5<br/>").arg(q_("Hourly motion"), withDecimalDegree ? StelUtils::radToDecDegStr(deltaEq*10.) : StelUtils::radToDmsStr(deltaEq*10.), qc_("towards", "into the direction of"), QString::number(pa*M_180_PI, 'f', 1), QChar(0x00B0));
-		oss << QString("%1: d&alpha;=%2 d&delta;=%3<br/>").arg(q_("Hourly motion"), withDecimalDegree ? StelUtils::radToDecDegStr((ra_equ-ra_equPrev)*10.) : StelUtils::radToDmsStr((ra_equ-ra_equPrev)*10.), withDecimalDegree ? StelUtils::radToDecDegStr((dec_equ-dec_equPrev)*10.) : StelUtils::radToDmsStr((dec_equ-dec_equPrev)*10.));
-		core1->setJD(currentJD); // this calls sync() which sets millis
-		core1->setMilliSecondsOfLastJDUpdate(millis); // restore millis.
-		core1->update(0);
+		Vec4d properMotion = getHourlyProperMotion(core);
+		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();	
+		oss << QString("%1: %2 %3 %4%5<br/>").arg(q_("Hourly motion"), withDecimalDegree ? StelUtils::radToDecDegStr(properMotion[0]) : StelUtils::radToDmsStr(properMotion[0]), qc_("towards", "into the direction of"), QString::number(properMotion[1]*M_180_PI, 'f', 1), QChar(0x00B0));
+		oss << QString("%1: d&alpha;=%2 d&delta;=%3<br/>").arg(q_("Hourly motion"), withDecimalDegree ? StelUtils::radToDecDegStr(properMotion[2]) : StelUtils::radToDmsStr(properMotion[2]), withDecimalDegree ? StelUtils::radToDecDegStr(properMotion[3]) : StelUtils::radToDmsStr(properMotion[3]));
 	}
 
 	oss << getInfoStringEloPhase(core, flags, pType<=isMoon);
@@ -634,7 +630,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Distance)
 	{
-		const double hdistanceAu = getHeliocentricEclipticPos().length();
+		const double hdistanceAu = getHeliocentricEclipticPos().norm();
 		const double hdistanceKm = AU * hdistanceAu;
 		// TRANSLATORS: Unit of measure for distance - astronomical unit
 		QString au = qc_("AU", "distance, astronomical unit");
@@ -686,12 +682,12 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		QString kms = qc_("km/s", "speed");
 
 		const Vec3d orbitalVel=getEclipticVelocity();
-		const double orbVel=orbitalVel.length();
+		const double orbVel=orbitalVel.norm();
 		if (orbVel>0.)
 		{ // AU/d * km/AU /24
 			const double orbVelKms=orbVel* AU/86400.;
 			oss << QString("%1: %2 %3<br/>").arg(q_("Orbital velocity")).arg(orbVelKms, 0, 'f', 3).arg(kms);
-			const double helioVel=getHeliocentricEclipticVelocity().length();
+			const double helioVel=getHeliocentricEclipticVelocity().norm();
 			if (!fuzzyEquals(helioVel, orbVel))
 				oss << QString("%1: %2 %3<br/>").arg(q_("Heliocentric velocity")).arg(helioVel* AU/86400., 0, 'f', 3).arg(kms);
 		}
@@ -896,6 +892,36 @@ QString Planet::getInfoStringPeriods(const StelCore *core, const InfoStringGroup
 	return str;
 }
 
+Vec4d Planet::getHourlyProperMotion(const StelCore *core) const
+{
+	if (core->getCurrentObserver()->isObserverLifeOver())
+		return Vec4d(0.);
+	else
+	{
+		// Setting/resetting the time causes a significant slowdown. We must apply some trickery to keep time in sync.
+		const Vec3d equPos=getEquinoxEquatorialPos(core);
+		double dec_equ, ra_equ;
+		StelUtils::rectToSphe(&ra_equ,&dec_equ,equPos);
+		StelCore* core1 = StelApp::getInstance().getCore(); // we need non-const reference here.
+		const double currentJD=core1->getJDOfLastJDUpdate();
+		const qint64 millis=core1->getMilliSecondsOfLastJDUpdate();
+		StelCore* core2 = StelApp::getInstance().getCore(); // use to fix hourly motion
+		const double JD2=core2->getJD();
+		core2->setJD(JD2-StelCore::JD_HOUR*.1);
+		core2->update(0);
+		Vec3d equPosPrev=getEquinoxEquatorialPos(core2);
+		const double deltaEq=equPos.angle(equPosPrev);
+		double dec_equPrev, ra_equPrev;
+		StelUtils::rectToSphe(&ra_equPrev,&dec_equPrev,equPosPrev);
+		double pa=atan2(ra_equ-ra_equPrev, dec_equ-dec_equPrev); // position angle: From North counterclockwise!
+		if (pa<0) pa += 2.*M_PI;
+		core1->setJD(currentJD); // this calls sync() which sets millis
+		core1->setMilliSecondsOfLastJDUpdate(millis); // restore millis.
+		core1->update(0);
+		return Vec4d(deltaEq*10., pa, (ra_equ-ra_equPrev)*10., (dec_equ-dec_equPrev)*10.);
+	}
+}
+
 SolarEclipseBessel::SolarEclipseBessel(double &besX, double &besY,
 	double &besD, double &bestf1, double &bestf2, double &besL1, double &besL2, double &besMu)
 {
@@ -912,10 +938,10 @@ SolarEclipseBessel::SolarEclipseBessel(double &besX, double &besY,
 	StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
 	StelUtils::rectToSphe(&raMoon, &deMoon, ssystem->getMoon()->getEquinoxEquatorialPos(core));
 
-	double sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core).length();
+	double sdistanceAu = ssystem->getSun()->getEquinoxEquatorialPos(core).norm();
 	const double earthRadius = ssystem->getEarth()->getEquatorialRadius()*AU;
 	// Moon's distance in Earth's radius
-	double mdistanceER = ssystem->getMoon()->getEquinoxEquatorialPos(core).length() * AU / earthRadius;
+	double mdistanceER = ssystem->getMoon()->getEquinoxEquatorialPos(core).norm() * AU / earthRadius;
 	// Greenwich Apparent Sidereal Time
 	const double gast = get_apparent_sidereal_time(core->getJD(), core->getJDE());
 
@@ -1491,7 +1517,7 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 	if (getEnglishName()!="Sun")
 	{
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
-		map.insert("distance", getJ2000EquatorialPos(core).length());
+		map.insert("distance", getJ2000EquatorialPos(core).norm());
 		float phase=getPhase(observerHelioPos);
 		map.insert("phase", phase);
 		map.insert("illumination", 100.f*phase);
@@ -1504,9 +1530,9 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
 		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));
 		map.insert("velocity", getEclipticVelocity().toString());
-		map.insert("velocity-kms", QString::number(getEclipticVelocity().length()* AU/86400., 'f', 5));
+		map.insert("velocity-kms", QString::number(getEclipticVelocity().norm()* AU/86400., 'f', 5));
 		map.insert("heliocentric-velocity", getHeliocentricEclipticVelocity().toString());
-		map.insert("heliocentric-velocity-kms", QString::number(getHeliocentricEclipticVelocity().length()* AU/86400., 'f', 5));
+		map.insert("heliocentric-velocity-kms", QString::number(getHeliocentricEclipticVelocity().norm()* AU/86400., 'f', 5));
 		map.insert("scale", sphereScale);		
 		map.insert("albedo", getAlbedo());
 	}
@@ -1603,7 +1629,7 @@ QPair<double,double> Planet::getLunarEclipseMagnitudes() const
 	if (raDiff < 3.*M_PI_180 || raDiff > 357.*M_PI_180)
 	{
 		// Moon's semi-diameter
-		const double mSD=atan(getEquatorialRadius()/eclipticPos.length()) * M_180_PI*3600.; // arcsec
+		const double mSD=atan(getEquatorialRadius()/eclipticPos.norm()) * M_180_PI*3600.; // arcsec
 		const QPair<Vec3d,Vec3d>shadowRadii=ssystem->getEarthShadowRadiiAtLunarDistance();
 		const double f1 = shadowRadii.second[0]; // radius of penumbra at the distance of the Moon
 		const double f2 = shadowRadii.first[0];  // radius of umbra at the distance of the Moon
@@ -1652,16 +1678,16 @@ Vec3f Planet::getInfoColor(void) const
 
 double Planet::getCloseViewFov(const StelCore* core) const
 {
-	return std::atan(equatorialRadius*sphereScale*2./getEquinoxEquatorialPos(core).length())*M_180_PI * 4.;
+	return std::atan(equatorialRadius*sphereScale*2./getEquinoxEquatorialPos(core).norm())*M_180_PI * 4.;
 }
 
 double Planet::getSatellitesFov(const StelCore* core) const
 {
 	// TODO: calculate from satellite orbits rather than hard code
-	if (englishName=="Jupiter") return std::atan(0.005 /getEquinoxEquatorialPos(core).length())*M_180_PI * 4.;
-	if (englishName=="Saturn")  return std::atan(0.005 /getEquinoxEquatorialPos(core).length())*M_180_PI * 4.;
-	if (englishName=="Mars")    return std::atan(0.0001/getEquinoxEquatorialPos(core).length())*M_180_PI * 4.;
-	if (englishName=="Uranus")  return std::atan(0.002 /getEquinoxEquatorialPos(core).length())*M_180_PI * 4.;
+	if (englishName=="Jupiter") return std::atan(0.005 /getEquinoxEquatorialPos(core).norm())*M_180_PI * 4.;
+	if (englishName=="Saturn")  return std::atan(0.005 /getEquinoxEquatorialPos(core).norm())*M_180_PI * 4.;
+	if (englishName=="Mars")    return std::atan(0.0001/getEquinoxEquatorialPos(core).norm())*M_180_PI * 4.;
+	if (englishName=="Uranus")  return std::atan(0.002 /getEquinoxEquatorialPos(core).norm())*M_180_PI * 4.;
 	return -1.;
 }
 
@@ -1755,7 +1781,7 @@ static bool willCastShadow(const Planet* thisPlanet, const Planet* p, const Plan
 	const Vec3d planetPos = p->getHeliocentricEclipticPos();
 	
 	// If the planet p is farther from the sun than this planet, it can't cast shadow on it.
-	if (planetPos.lengthSquared()>thisPos.lengthSquared())
+	if (planetPos.normSquared()>thisPos.normSquared())
 		return false;
 
 	// Very tentative solution
@@ -1764,11 +1790,11 @@ static bool willCastShadow(const Planet* thisPlanet, const Planet* p, const Plan
 	
 	double shadowDistance = ppVector * thisPos;
 	static const double sunRadius = SUN_RADIUS/AU;
-	const double d = planetPos.length() / (p->getEquatorialRadius()/sunRadius+1);
+	const double d = planetPos.norm() / (p->getEquatorialRadius()/sunRadius+1);
 	double penumbraRadius = (shadowDistance-d)/d*sunRadius;
 	// TODO: Note that Earth's shadow should be enlarged a bit. (6-7% following Danjon?)
 	
-	double penumbraCenterToThisPlanetCenterDistance = (ppVector*shadowDistance-thisPos).length();
+	double penumbraCenterToThisPlanetCenterDistance = (ppVector*shadowDistance-thisPos).norm();
 	
 	if (penumbraCenterToThisPlanetCenterDistance<penumbraRadius+thisPlanet->getEquatorialRadius())
 		return true;
@@ -2140,7 +2166,7 @@ Vec3d Planet::getHeliocentricEclipticVelocity() const
 // This is called by SolarSystem::draw()
 double Planet::computeDistance(const Vec3d& obsHelioPos)
 {
-	distance = (obsHelioPos-getHeliocentricEclipticPos()).length();
+	distance = (obsHelioPos-getHeliocentricEclipticPos()).norm();
 	// improve fps by juggling updates for asteroids and other minor bodies. They must be fast if close to observer, but can be slow if further away.
 	if (pType >= Planet::isAsteroid)
 		deltaJDE=distance*StelCore::JD_SECOND;
@@ -2150,20 +2176,20 @@ double Planet::computeDistance(const Vec3d& obsHelioPos)
 // Get the phase angle (radians) for an observer at pos obsPos in heliocentric coordinates (dist in AU)
 double Planet::getPhaseAngle(const Vec3d& obsPos) const
 {
-	const double observerRq = obsPos.lengthSquared();
+	const double observerRq = obsPos.normSquared();
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
-	const double planetRq = planetHelioPos.lengthSquared();
-	const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
+	const double planetRq = planetHelioPos.normSquared();
+	const double observerPlanetRq = (obsPos - planetHelioPos).normSquared();
 	return std::acos((observerPlanetRq + planetRq - observerRq)/(2.0*std::sqrt(observerPlanetRq*planetRq)));
 }
 
 // Get the planet phase ([0..1] illuminated fraction of the planet disk) for an observer at pos obsPos in heliocentric coordinates (in AU)
 float Planet::getPhase(const Vec3d& obsPos) const
 {
-	const double observerRq = obsPos.lengthSquared();
+	const double observerRq = obsPos.normSquared();
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
-	const double planetRq = planetHelioPos.lengthSquared();
-	const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
+	const double planetRq = planetHelioPos.normSquared();
+	const double observerPlanetRq = (obsPos - planetHelioPos).normSquared();
 	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*std::sqrt(observerPlanetRq*planetRq));
 	return 0.5f * static_cast<float>(qAbs(1. + cos_chi));
 }
@@ -2230,7 +2256,7 @@ QPair<Vec4d, Vec3d> Planet::getSubSolarObserverPoints(const StelCore *core, bool
 	Vec3d n=PrecNut*Vec3d(cosd0*cosa0, cosd0*sina0, sind0);
 	// Rotation W is OK for all planets except Jupiter: return simple W_II to remove GRS adaptation shift.
 	const double W= ( ((englishName=="Jupiter") && !jupiterGraphical )  ?
-			re.W0+ remainder( (core->getJDE()-J2000 - Dr.length()*(AU/(SPEED_OF_LIGHT*86400.)))*re.W1, 360.) :
+			re.W0+ remainder( (core->getJDE()-J2000 - Dr.norm()*(AU/(SPEED_OF_LIGHT*86400.)))*re.W1, 360.) :
 			re.currentAxisW);
 	const double sinW=sin(W*M_PI_180);
 	const double sindw=sinW*cosd0;
@@ -2283,10 +2309,10 @@ QPair<Vec4d, Vec3d> Planet::getSubSolarObserverPoints(const StelCore *core, bool
 // Get the elongation angle (radians) for an observer at pos obsPos in heliocentric coordinates (dist in AU)
 double Planet::getElongation(const Vec3d& obsPos) const
 {
-	const double observerRq = obsPos.lengthSquared();
+	const double observerRq = obsPos.normSquared();
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
-	const double planetRq = planetHelioPos.lengthSquared();
-	const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
+	const double planetRq = planetHelioPos.normSquared();
+	const double observerPlanetRq = (obsPos - planetHelioPos).normSquared();
 	return std::acos((observerPlanetRq  + observerRq - planetRq)/(2.0*std::sqrt(observerPlanetRq*observerRq)));
 }
 
@@ -2342,7 +2368,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 	{
 		// Sun, compute the apparent magnitude for the absolute mag (V: 4.83) and observer's distance
 		// Hint: Absolute Magnitude of the Sun in Several Bands: http://mips.as.arizona.edu/~cnaw/sun.html
-		const double distParsec = std::sqrt(core->getObserverHeliocentricEclipticPos().lengthSquared())*AU/PARSEC;
+		const double distParsec = std::sqrt(core->getObserverHeliocentricEclipticPos().normSquared())*AU/PARSEC;
 
 		// check how much of it is visible
 		const double shadowFactor = qMax(0.000128, GETSTELMODULE(SolarSystem)->getSolarEclipseFactor(core).first);
@@ -2354,10 +2380,10 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 	// Compute the phase angle i. We need the intermediate results also below, therefore we don't just call getPhaseAngle.
 	const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
-	const double observerRq = observerHelioPos.lengthSquared();
+	const double observerRq = observerHelioPos.normSquared();
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
-	const double planetRq = planetHelioPos.lengthSquared();
-	const double observerPlanetRq = (observerHelioPos - planetHelioPos).lengthSquared();
+	const double planetRq = planetHelioPos.normSquared();
+	const double observerPlanetRq = (observerHelioPos - planetHelioPos).normSquared();
 	const double dr = std::sqrt(observerPlanetRq*planetRq);
 	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*dr);
 	const double phaseAngle = std::acos(cos_chi);
@@ -2367,7 +2393,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 	if (parent->parent != Q_NULLPTR)
 	{
 		const Vec3d& parentHeliopos = parent->getHeliocentricEclipticPos();
-		const double parent_Rq = parentHeliopos.lengthSquared();
+		const double parent_Rq = parentHeliopos.normSquared();
 		const double pos_times_parent_pos = planetHelioPos * parentHeliopos;
 		if (pos_times_parent_pos > parent_Rq)
 		{
@@ -2377,7 +2403,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 				static const double totalityFactor=2.710e-5; // defined previously by AW
 				const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 				const QPair<Vec3d,Vec3d>shadowRadii=ssm->getEarthShadowRadiiAtLunarDistance();
-				const double dist=getEclipticPos().length();  // Lunar distance [AU]
+				const double dist=getEclipticPos().norm();  // Lunar distance [AU]
 				const double u=shadowRadii.first[0]  / 3600.; // geocentric angle of earth umbra radius at lunar distance [degrees]
 				const double p=shadowRadii.second[0] / 3600.; // geocentric angle of earth penumbra radius at lunar distance [degrees]
 				const double r=atan(getEquatorialRadius()/dist) * M_180_PI; // geocentric angle of Lunar radius at lunar distance [degrees]
@@ -2385,10 +2411,10 @@ float Planet::getVMagnitude(const StelCore* core) const
 				// We must compute an elongation from the aberrated sun. The following is adapted from getElongation(), with a tweak to move the Sun to its apparent position.
 				PlanetP sun=ssm->getSun();
 				const Vec3d obsPos=parent->eclipticPos-sun->getAberrationPush();
-				const double observerRq = obsPos.lengthSquared();
+				const double observerRq = obsPos.normSquared();
 				const Vec3d& planetHelioPos = getHeliocentricEclipticPos() - sun->getAberrationPush();
-				const double planetRq = planetHelioPos.lengthSquared();
-				const double observerPlanetRq = dist*dist; // (obsPos - planetHelioPos).lengthSquared();
+				const double planetRq = planetHelioPos.normSquared();
+				const double observerPlanetRq = dist*dist; // (obsPos - planetHelioPos).normSquared();
 				double aberratedElongation = std::acos((observerPlanetRq  + observerRq - planetRq)/(2.0*std::sqrt(observerPlanetRq*observerRq)));
 				const double od = 180. - aberratedElongation * (180.0/M_PI); // opposition distance [degrees]
 
@@ -2458,8 +2484,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 		fluxIll *= (lunarMeanDistSq/observerPlanetRq);
 
 		// compute flux of ashen light: Agrawal 2016.
-		const double beta=parent->equatorialRadius*parent->equatorialRadius/eclipticPos.lengthSquared();
-		const double gamma=equatorialRadius*equatorialRadius/eclipticPos.lengthSquared();
+		const double beta=parent->equatorialRadius*parent->equatorialRadius/eclipticPos.normSquared();
+		const double gamma=equatorialRadius*equatorialRadius/eclipticPos.normSquared();
 
 		const double slfoe=133100.; // https://www.allthingslighting.org/index.php/2019/02/15/solar-illumination/
 		const double LumEarth=slfoe * static_cast<double>(core->getCurrentObserver()->getHomePlanet()->albedo);
@@ -2825,13 +2851,13 @@ float Planet::getVMagnitude(const StelCore* core) const
 double Planet::getAngularRadius(const StelCore* core) const
 {
 	const double rad = (rings ? rings->getSize() : equatorialRadius);
-	return std::atan2(rad*sphereScale,getJ2000EquatorialPos(core).length()) * M_180_PI;
+	return std::atan2(rad*sphereScale,getJ2000EquatorialPos(core).norm()) * M_180_PI;
 }
 
 
 double Planet::getSpheroidAngularRadius(const StelCore* core) const
 {
-	return std::atan2(equatorialRadius*sphereScale,getJ2000EquatorialPos(core).length()) * M_180_PI;
+	return std::atan2(equatorialRadius*sphereScale,getJ2000EquatorialPos(core).norm()) * M_180_PI;
 }
 
 //the Planet and all the related infos : name, circle etc..
@@ -2910,7 +2936,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlapping (e.g. for Jupiter's satellites)
-		float ang_dist = 300.f*static_cast<float>(atan(getEclipticPos().length()/getEquinoxEquatorialPos(core).length())/core->getMovementMgr()->getCurrentFov());
+		float ang_dist = 300.f*static_cast<float>(atan(getEclipticPos().norm()/getEquinoxEquatorialPos(core).norm())/core->getMovementMgr()->getCurrentFov());
 		if (ang_dist==0.f)
 			ang_dist = 1.f; // if ang_dist == 0, the Planet is sun..
 
@@ -2968,6 +2994,7 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	GL(earthShadow = p->uniformLocation("earthShadow"));
 	GL(eclipsePush = p->uniformLocation("eclipsePush"));
 	GL(normalMap = p->uniformLocation("normalMap"));
+	GL(horizonMap = p->uniformLocation("horizonMap"));
 
 	// Rings-specific variables
 	GL(isRing = p->uniformLocation("isRing"));
@@ -3468,7 +3495,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		if(rings)
 			r+=rings->getSize()*sphereScale;
 
-		const double dist = getEquinoxEquatorialPos(core).length();
+		const double dist = getEquinoxEquatorialPos(core).norm();
 		const double z_near = qMax(0.00001, (dist - r)); //near Z should be as close as possible to the actual geometry
 		const double z_far  = (dist + 10*r); //far Z should be quite a bit further behind (Z buffer accuracy is worse near the far plane)
 		core->setClippingPlanes(z_near,z_far);
@@ -3762,8 +3789,8 @@ void Planet::computeModelMatrix(Mat4d &result, bool solarEclipseCase) const
 		PlanetP sun=GETSTELMODULE(SolarSystem)->getSun();
 		// in our program we have no aberration push for the moon. We must take that info from the Sun's push instead
 		// It seems that a distance proportional to the distance lunarDistance/solarDistance may be the right way (?)
-		const double earthSunDistance=parent->eclipticPos.length();
-		const double earthMoonDistance=eclipticPos.length();
+		const double earthSunDistance=parent->eclipticPos.norm();
+		const double earthMoonDistance=eclipticPos.norm();
 		const double factor=earthMoonDistance/earthSunDistance;
 		result = Mat4d::translation(factor*sun->getAberrationPush()) * result * Mat4d::zrotation(M_PI/180.*static_cast<double>(axisRotation + 90.f));
 	}
@@ -3780,7 +3807,7 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	const StelProjectorP& projector = painter.getProjector();
 
 	const Mat4f& m = projector->getProjectionMatrix();
-	const QMatrix4x4 qMat = m.convertToQMatrix();
+	const QMatrix4x4 qMat = m.toQMatrix();
 
 	computeModelMatrix(data.modelMatrix, false);
 	// used to project from solar system into local space
@@ -3843,7 +3870,7 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 		GL(shader->setUniformValue(shaderVars.orenNayarParameters, vec));
 	}
 
-	float outgas_intensity_distanceScaled=static_cast<float>(static_cast<double>(outgas_intensity)/getHeliocentricEclipticPos().lengthSquared()); // ad-hoc function: assume square falloff by distance.
+	float outgas_intensity_distanceScaled=static_cast<float>(static_cast<double>(outgas_intensity)/getHeliocentricEclipticPos().normSquared()); // ad-hoc function: assume square falloff by distance.
 	GL(shader->setUniformValue(shaderVars.outgasParameters, QVector2D(outgas_intensity_distanceScaled, outgas_falloff)));
 
 	return data;
@@ -3960,15 +3987,15 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 			// Like in getVMagnitude() we must compute an elongation from the aberrated sun.
 			PlanetP sun=ssm->getSun();
 			const Vec3d obsPos=parent->eclipticPos-sun->getAberrationPush();
-			const double observerRq = obsPos.lengthSquared();
+			const double observerRq = obsPos.normSquared();
 			const Vec3d& planetHelioPos = getHeliocentricEclipticPos() - sun->getAberrationPush();
-			const double planetRq = planetHelioPos.lengthSquared();
-			const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
+			const double planetRq = planetHelioPos.normSquared();
+			const double observerPlanetRq = (obsPos - planetHelioPos).normSquared();
 			double aberratedElongation = std::acos((observerPlanetRq  + observerRq - planetRq)/(2.0*std::sqrt(observerPlanetRq*observerRq)));
 			const double od = 180. - aberratedElongation * (180.0/M_PI); // opposition distance [degrees]
 
 			// Compute umbra radius at lunar distance.
-			const double Lambda=getEclipticPos().length();                             // Lunar distance [AU]
+			const double Lambda=getEclipticPos().norm();                             // Lunar distance [AU]
 			const double sigma=ssm->getEarthShadowRadiiAtLunarDistance().first[0]/3600.;
 			const double tau=atan(getEquatorialRadius()/Lambda) * M_180_PI; // geocentric angle of Lunar radius [degrees]
 
@@ -3979,6 +4006,8 @@ void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 
 			GL(moonShaderProgram->setUniformValue(moonShaderVars.eclipsePush, push)); // constant for now...
 		}
+		GL(horizonMap->bind(4));
+		GL(moonShaderProgram->setUniformValue(moonShaderVars.horizonMap, 4));
 	}
 
 	if (englishName=="Mars")
@@ -4562,7 +4591,7 @@ bool Planet::drawObjShadowMap(StelPainter *painter, QMatrix4x4& shadowMatrix)
 	painter->setDepthMask(true);
 	painter->setCullFace(true);
 	gl->glCullFace(GL_BACK);
-	bool useOffset = !qFuzzyIsNull(shadowPolyOffset.lengthSquared());
+	bool useOffset = !qFuzzyIsNull(shadowPolyOffset.normSquared());
 
 	if(useOffset)
 	{

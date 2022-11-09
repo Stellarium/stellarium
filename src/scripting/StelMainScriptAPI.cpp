@@ -432,7 +432,14 @@ QString StelMainScriptAPI::getSkyCulture()
 void StelMainScriptAPI::setSkyCulture(const QString& id)
 {
 	GETSTELMODULE(StelObjectMgr)->unSelect(); // mistake-proofing!
-	emit requestSetSkyCulture(id);
+	if (!StelApp::getInstance().getSkyCultureMgr().getSkyCultureListIDs().contains(id))
+	{
+		qDebug().noquote() << "Could not find skyculture" << id << ". Please check your script.";
+		if (id.startsWith("western", Qt::CaseInsensitive))
+			qDebug() << "Western skycultures have been renamed to modern_*. Please update your scripts.";
+	}
+	else
+		emit requestSetSkyCulture(id);
 }
 
 QString StelMainScriptAPI::getSkyCultureName()

@@ -507,13 +507,13 @@ void TelescopeDialog::setAboutText()
 
 void TelescopeDialog::setHeaderNames()
 {
-	QStringList headerStrings;
-	// TRANSLATORS: Symbol for "number"
-	headerStrings << qc_("#", "numero sign");
-	//headerStrings << "Start";
-	headerStrings << q_("Status");
-	headerStrings << q_("Type");
-	headerStrings << q_("Name");
+	const QStringList headerStrings = {
+		// TRANSLATORS: Symbol for "number"
+		qc_("#", "numero sign"),
+		//"Start";
+		q_("Status"),
+		q_("Type"),
+		q_("Name")};
 	telescopeListModel->setHorizontalHeaderLabels(headerStrings);
 }
 
@@ -549,41 +549,22 @@ void TelescopeDialog::updateWarningTexts()
 
 QString TelescopeDialog::getTypeLabel(TelescopeControl::ConnectionType type)
 {
-	QString typeLabel;
-	switch (type)
-	{
-		case TelescopeControl::ConnectionInternal:
-			// TRANSLATORS: Telescope connection type
-			typeLabel = N_("local, Stellarium");
-			break;
-		case TelescopeControl::ConnectionLocal:
-			// TRANSLATORS: Telescope connection type
-			typeLabel = N_("local, external");
-			break;
-		case TelescopeControl::ConnectionRemote:
-			// TRANSLATORS: Telescope connection type
-			typeLabel = N_("remote, unknown");
-			break;
-		case TelescopeControl::ConnectionVirtual:
-			// TRANSLATORS: Telescope connection type
-			typeLabel = N_("virtual");
-			break;
-		case TelescopeControl::ConnectionRTS2:
-			// TRANSLATORS: Telescope connection type
-			typeLabel = N_("remote, RTS2");
-			break;
-		case TelescopeControl::ConnectionINDI:
-			// TRANSLATORS: Telescope connection type
-			typeLabel = N_("remote, INDI/INDIGO");
-			break;
-		case TelescopeControl::ConnectionASCOM:
-			// TRANSLATORS: Telescope connection type
-			typeLabel = N_("local, ASCOM");
-			break;
-		default:
-			;
-	}
-	return typeLabel;
+	static const QMap<TelescopeControl::ConnectionType, QString>map={
+		// TRANSLATORS: Telescope connection type
+		{ TelescopeControl::ConnectionInternal, N_("local, Stellarium")},
+		// TRANSLATORS: Telescope connection type
+		{ TelescopeControl::ConnectionLocal, N_("local, external")},
+		// TRANSLATORS: Telescope connection type
+		{ TelescopeControl::ConnectionRemote, N_("remote, unknown")},
+		// TRANSLATORS: Telescope connection type
+		{TelescopeControl::ConnectionVirtual, N_("virtual")},
+		// TRANSLATORS: Telescope connection type
+		{TelescopeControl::ConnectionRTS2, N_("remote, RTS2")},
+		// TRANSLATORS: Telescope connection type
+		{TelescopeControl::ConnectionINDI, N_("remote, INDI/INDIGO")},
+		// TRANSLATORS: Telescope connection type
+		{TelescopeControl::ConnectionASCOM, N_("local, ASCOM")}};
+	return map.value(type, "");
 }
 
 void TelescopeDialog::addModelRow(int number,

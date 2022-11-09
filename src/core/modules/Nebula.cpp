@@ -1013,7 +1013,7 @@ void Nebula::readDSO(QDataStream &in)
 	if (VdBHa_nb > 0) designations << QString("vdB-Ha %1").arg(VdBHa_nb);
 
 	StelUtils::spheToRect(ra,dec,XYZ);
-	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<1e-9);
+	Q_ASSERT(fabs(XYZ.normSquared()-1.)<1e-9);
 	nType = static_cast<Nebula::NebulaType>(oType);
 	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(Q_NULLPTR)));
 }
@@ -1424,7 +1424,7 @@ Vec3d Nebula::getJ2000EquatorialPos(const StelCore* core) const
 	if ((core) && (core->getUseAberration()) && (core->getCurrentPlanet()))
 	{
 		Vec3d pos=XYZ;
-		Q_ASSERT_X(fabs(pos.lengthSquared()-1.0)<0.0001, "Nebula aberration", "vertex length not unity");
+		Q_ASSERT_X(fabs(pos.normSquared()-1.0)<0.0001, "Nebula aberration", "vertex length not unity");
 		//pos.normalize(); // Yay - not required!
 		Vec3d vel=core->getCurrentPlanet()->getHeliocentricEclipticVelocity();
 		vel=StelCore::matVsop87ToJ2000*vel*core->getAberrationFactor()*(AU/(86400.0*SPEED_OF_LIGHT));

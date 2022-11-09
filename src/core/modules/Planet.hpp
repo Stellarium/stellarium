@@ -165,6 +165,7 @@ public:
 	       float roughness,
 	       const QString& texMapName,
 	       const QString& normalMapName,
+	       const QString& ahorizonMapName,
 	       const QString& objModelName,
 	       posFuncType _coordFunc,
 	       Orbit *anOrbitPtr,
@@ -393,6 +394,14 @@ public:
 	//! phiPrime=planetocentric latitude
 	//! rho*a=planetocentric distance of point [AU]
 	Vec4d getRectangularCoordinates(const double longDeg, const double latDeg, const double altMetres=0.) const;
+
+	//! Retrieve the hourly proper motion of Solar system bodies
+	//! @return [hourlyMotion, positionAngle, deltaAlpha, deltaDelta]
+	//! where hourlyMotion = hourly proper motion [radians]
+	//! positionAngle = position angle (the direction of proper motion) [radians]
+	//! deltaAlpha = hourly motion in R.A. [radians]
+	//! deltaDelta = hourly motion in Dec. [radians]
+	Vec4d getHourlyProperMotion(const StelCore *core) const;
 
 	//! Get the phase angle (radians) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getPhaseAngle(const Vec3d& obsPos) const;
@@ -698,6 +707,7 @@ protected:
 	QString nativeNameMeaningI18n;   // Can be used in a skyculture
 	QString texMapName;              // Texture file path
 	QString normalMapName;           // Texture file path
+	QString horizonMapName;          // Texture file path
 	RotationElements re;             // Rotation and axis orientation parameters
 	double siderealPeriod;           // sidereal period (Planet year or a moon's sidereal month) [earth days]
 	double equatorialRadius;         // Planet's equatorial radius in AU
@@ -732,6 +742,7 @@ protected:
 					 // i.e. angle between ascending node of body equator w.r.t. ICRF equator and its prime meridian.
 	StelTextureSP texMap;            // Planet map texture
 	StelTextureSP normalMap;         // Planet normal map texture
+	StelTextureSP horizonMap;        // Planet horizon map texture
 
 	PlanetOBJModel* objModel;               // Planet model (when it has been loaded)
 	QFuture<PlanetOBJModel*>* objModelLoader;// For async loading of the OBJ file
@@ -782,6 +793,7 @@ private:
 	// File path for texture and normal map; both variables used for saving original names of files
 	QString texMapFileOrig;
 	QString normalMapFileOrig;
+	QString horizonMapFileOrig;
 
 	std::unique_ptr<QOpenGLVertexArrayObject> sphereVAO;
 	std::unique_ptr<QOpenGLVertexArrayObject> ringsVAO;
@@ -823,6 +835,7 @@ private:
 		int earthShadow;
 		int eclipsePush; // apparent brightness push for partial Lunar Eclipse (make bright rim overbright)
 		int normalMap;
+		int horizonMap;
 
 		// Rings-specific variables
 		int isRing;

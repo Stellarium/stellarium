@@ -149,7 +149,7 @@ public:
 	bool prepareCommunication(void) override
 	{
 		XYZ = XYZ * 31.0 + desired_pos;
-		const double lq = XYZ.lengthSquared();
+		const double lq = XYZ.normSquared();
 		if (lq > 0.0)
 			XYZ *= (1.0/std::sqrt(lq));
 		else

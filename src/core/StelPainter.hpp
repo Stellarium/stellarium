@@ -25,6 +25,7 @@
 #include "VecMath.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelProjectorType.hpp"
+#include "StelTextureTypes.hpp"
 #include "StelProjector.hpp"
 #include <QString>
 #include <QVarLengthArray>
@@ -64,15 +65,6 @@ public:
 		Triangles                   = 0x0004, //!< GL_TRIANGLES
 		TriangleStrip               = 0x0005, //!< GL_TRIANGLE_STRIP
 		TriangleFan                 = 0x0006  //!< GL_TRIANGLE_FAN
-	};
-
-	enum class DitheringMode
-	{
-		Disabled,    //!< Dithering disabled, will leave the infamous color bands
-		Color565,    //!< 16-bit color (AKA High color) with R5_G6_B5 layout
-		Color666,    //!< TN+film typical color depth in TrueColor mode
-		Color888,    //!< 24-bit color (AKA True color)
-		Color101010, //!< 30-bit color (AKA Deep color)
 	};
 
 	explicit StelPainter(const StelProjectorP& prj);
@@ -337,8 +329,6 @@ public:
 	//! @return true if the link was successful.
 	static bool linkProg(class QOpenGLShaderProgram* prog, const QString& name);
 
-	DitheringMode getDitheringMode() const { return ditheringMode; }
-
 private:
 	friend class StelTextureMgr;
 	friend class StelTexture;
@@ -474,9 +464,7 @@ private:
 	};
 	static ColorfulWideLineShaderVars colorfulWideLineShaderVars;
 
-	GLuint ditherPatternTex=0;
-	DitheringMode ditheringMode;
-	static DitheringMode parseDitheringMode(QString const& s);
+	StelTextureSP ditherPatternTex;
 
 	static bool multisamplingEnabled;
 
@@ -493,8 +481,6 @@ private:
 	std::unique_ptr<QOpenGLBuffer> verticesVBO;
 	std::unique_ptr<QOpenGLBuffer> indicesVBO;
 };
-
-Q_DECLARE_METATYPE(StelPainter::DitheringMode)
 
 #endif // STELPAINTER_HPP
 

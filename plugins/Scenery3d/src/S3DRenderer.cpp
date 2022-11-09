@@ -275,8 +275,8 @@ static Vec3f zSortValue;
 bool zSortFunction(const StelOBJ::MaterialGroup* const & mLeft, const StelOBJ::MaterialGroup* const & mRight)
 {
 	//we can avoid taking the sqrt here
-	float dist1 = (mLeft->centroid - zSortValue).lengthSquared();
-	float dist2 = (mRight->centroid - zSortValue).lengthSquared();
+	float dist1 = (mLeft->centroid - zSortValue).normSquared();
+	float dist2 = (mRight->centroid - zSortValue).normSquared();
 	return dist1>dist2;
 }
 
@@ -1207,7 +1207,7 @@ void S3DRenderer::drawFromCubeMap()
 
 	vao.bind();
 	//setup shader params
-	projectionMatrix = altAzProjector->getProjectionMatrix().convertToQMatrix();
+	projectionMatrix = altAzProjector->getProjectionMatrix().toQMatrix();
 	cubeShader->setUniformValue(shaderManager.uniformLocation(cubeShader,ShaderMgr::UNIFORM_MAT_PROJECTION), projectionMatrix);
 	cubeShader->setUniformValue(shaderManager.uniformLocation(cubeShader,ShaderMgr::UNIFORM_TEX_DIFFUSE),0);
 	cubeVertexBuffer.bind();
@@ -1276,7 +1276,7 @@ void S3DRenderer::drawDirect() // for Perspective Projection only!
     float aspect = static_cast<float>(altAzProjector->getViewportWidth()) / static_cast<float>(altAzProjector->getViewportHeight());
 
     //calc modelview transform
-    QMatrix4x4 mvMatrix = altAzProjector->getModelViewTransform()->getApproximateLinearTransfo().convertToQMatrix();
+    QMatrix4x4 mvMatrix = altAzProjector->getModelViewTransform()->getApproximateLinearTransfo().toQMatrix();
     mvMatrix.optimize(); //may make inversion faster?
 
     //recalculate lighting info

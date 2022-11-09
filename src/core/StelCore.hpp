@@ -26,6 +26,7 @@
 #include "StelLocation.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelPropertyMgr.hpp"
+#include "Dithering.hpp"
 #include <QString>
 #include <QStringList>
 #include <QTime>
@@ -64,6 +65,7 @@ class StelCore : public QObject
 	Q_PROPERTY(QString currentTimeZone READ getCurrentTimeZone WRITE setCurrentTimeZone NOTIFY currentTimeZoneChanged)
 	Q_PROPERTY(bool flagUseCTZ READ getUseCustomTimeZone WRITE setUseCustomTimeZone NOTIFY useCustomTimeZoneChanged)
 	Q_PROPERTY(bool flagUseDST READ getUseDST WRITE setUseDST NOTIFY flagUseDSTChanged)
+	Q_PROPERTY(DitheringMode ditheringMode READ getDitheringMode WRITE setDitheringMode NOTIFY ditheringModeChanged)
 
 public:
 	//! @enum FrameType
@@ -488,6 +490,10 @@ public slots:
 	bool getUseDST() const;
 	void setUseDST(const bool b);
 
+	DitheringMode getDitheringMode() const { return ditheringMode; }
+	void setDitheringMode(DitheringMode mode);
+	void setDitheringMode(const QString& modeName);
+
 	bool getUseCustomTimeZone(void) const;
 	void setUseCustomTimeZone(const bool b);
 
@@ -825,10 +831,14 @@ signals:
 	//! Emitted when button "Save settings" is pushed
 	void configurationDataSaved();
 	void updateSearchLists();
+	void ditheringModeChanged(DitheringMode mode);
 
 private slots:
 	//! Call this whenever latitude changes. I.e., just connect it to the locationChanged() signal.
 	void updateFixedEquatorialTransformMatrices();
+private:
+	DitheringMode parseDitheringMode(const QString& s);
+
 private:
 	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device
 	StelSkyDrawer* skyDrawer;
@@ -899,6 +909,8 @@ private:
 	QString startupTimeMode;
 	qint64 milliSecondsOfLastJDUpdate;    // Time in milliseconds when the time rate or time last changed
 	double jdOfLastJDUpdate;         // JD when the time rate or time last changed
+
+	DitheringMode ditheringMode = DitheringMode::Color888;
 
 	QString currentTimeZone;	
 	bool flagUseDST;

@@ -530,7 +530,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	//const int slices_per_side = 3*64/(nbDecorRepeat*nbSide);
 	//if (slices_per_side<=0) // GZ: How can negative ever happen?
 	//	slices_per_side = 1;
-	const unsigned short int slices_per_side = static_cast<const unsigned short>(qMax(3u*64u/(nbDecorRepeat*nbSide), 1u));
+	const auto slices_per_side = static_cast<unsigned short>(qMax(3u*64u/(nbDecorRepeat*nbSide), 1u));
 
 	// draw a fan disk instead of a ordinary disk to that the inner slices
 	// are not so slender. When they are too slender, culling errors occur
@@ -668,6 +668,12 @@ void LandscapeOldStyle::draw(StelCore* core, bool onlyPolygon)
 
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
+		const auto gl = painter.glFuncs();
+#ifdef GL_MULTISAMPLE
+		if (multisamplingEnabled_)
+			gl->glEnable(GL_MULTISAMPLE);
+#endif
+
 		if (drawGroundFirst)
 			drawGround(core, painter);
 		drawDecor(core, painter, false);
@@ -681,6 +687,11 @@ void LandscapeOldStyle::draw(StelCore* core, bool onlyPolygon)
 			painter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
 			drawDecor(core, painter, true);
 		}
+
+#ifdef GL_MULTISAMPLE
+		if (multisamplingEnabled_)
+			gl->glDisable(GL_MULTISAMPLE);
+#endif
 	}
 	// If a horizon line also has been defined, draw it.
 	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f)))
@@ -745,12 +756,6 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter, const b
 	else
 		sPainter.setColor(Vec3f(landscapeBrightness), landFader.getInterstate());
 
-    const auto gl = sPainter.glFuncs();
-#ifdef GL_MULTISAMPLE
-	if (multisamplingEnabled_)
-		gl->glEnable(GL_MULTISAMPLE);
-#endif
-
 	for (const auto& side : precomputedSides)
 	{
 		if (side.light==drawLight)
@@ -759,11 +764,6 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter, const b
 			sPainter.drawSphericalTriangles(side.arr, true, false, Q_NULLPTR, false);
 		}
 	}
-
-#ifdef GL_MULTISAMPLE
-	if (multisamplingEnabled_)
-		gl->glDisable(GL_MULTISAMPLE);
-#endif
 }
 
 // Draw the ground

@@ -65,21 +65,6 @@ public:
 	virtual QString getNameI18() const Q_DECL_OVERRIDE;
 	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
 	virtual float getMaxFov() const  Q_DECL_OVERRIDE {return 235.f;}
-	virtual void project(int n, const Vec3d* in, Vec3f* out) Q_DECL_OVERRIDE
-	{
-		Vec3d v;
-		for (int i = 0; i < n; ++i, ++out)
-		{
-			v = in[i];
-			modelViewTransform->forward(v);
-			out->set(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
-			StelProjectorStereographic::forward(*out);
-			out->set(static_cast<float>(viewportCenter[0]) + flipHorz * pixelPerRad * (*out)[0],
-				static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * (*out)[1],
-				((*out)[2] - static_cast<float>(zNear)) * static_cast<float>(oneOverZNearMinusZFar));
-		}
-	}
-
 	virtual bool forward(Vec3f &v) const Q_DECL_OVERRIDE;
 	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
 	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
@@ -116,20 +101,6 @@ public:
 	virtual QString getNameI18() const Q_DECL_OVERRIDE;
 	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
 	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 185.f;}
-	virtual void project(int n, const Vec3d* in, Vec3f* out) Q_DECL_OVERRIDE
-	{
-		Vec3d v;
-		for (int i = 0; i < n; ++i)
-		{
-			v = in[i];
-			modelViewTransform->forward(v);
-			out[i].set(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
-			StelProjectorHammer::forward(out[i]);
-			out[i][0] = static_cast<float>(viewportCenter[0]) + flipHorz * pixelPerRad * out[i][0];
-			out[i][1] = static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * out[i][1];
-			out[i][2] = (out[i][2] - static_cast<float>(zNear)) * static_cast<float>(oneOverZNearMinusZFar);
-		}
-	}
 	virtual bool forward(Vec3f &v) const Q_DECL_OVERRIDE;
 	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
 	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;

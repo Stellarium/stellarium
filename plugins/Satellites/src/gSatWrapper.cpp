@@ -173,7 +173,7 @@ void  gSatWrapper::getSlantRange(double &ao_slantRange, double &ao_slantRangeRat
 	Vec3d slantRange		= satECIPos - observerECIPos;
 	Vec3d slantRangeVelocity = satECIVel - observerECIVel;
 
-	ao_slantRange		= slantRange.length();
+	ao_slantRange		= slantRange.norm();
 	ao_slantRangeRate	= slantRange.dot(slantRangeVelocity)/ao_slantRange;
 }
 
