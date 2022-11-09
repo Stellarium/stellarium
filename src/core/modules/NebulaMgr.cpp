@@ -1756,7 +1756,7 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 
 		// lines which look like records - we use the RE to extract the fields
 		// which will be available in recMatch.capturedTexts()
-		static const QRegularExpression recRx("^\\s*([\\w\\s]+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
+		static const QRegularExpression recRx("^\\s*([\\w\\s\\-\\+\\.]+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
 
 		QString record, dsoId, nativeName;
 		int totalRecords=0;
@@ -1783,11 +1783,17 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 				dsoId = recMatch.captured(1).trimmed();
 				nativeName = recMatch.captured(2).trimmed(); // Use translatable text
 				NebulaP e = search(dsoId);
-				QString currentName = e->getEnglishName();
-				if (currentName.isEmpty()) // Set native name of DSO
-					e->setProperName(nativeName);
-				else if (currentName!=nativeName) // Add traditional (well-known?) name of DSO as alias
-					e->addNameAlias(nativeName);
+				if (!e.isNull()) // avoid crash
+				{
+					QString currentName = e->getEnglishName();
+					if (currentName.isEmpty()) // Set native name of DSO
+						e->setProperName(nativeName);
+					else if (currentName!=nativeName) // Add traditional (well-known?) name of DSO as alias
+						e->addNameAlias(nativeName);
+				}
+				else
+					qWarning() << "ERROR - could NOT found DSO " << dsoId;
+
 				readOk++;
 			}
 		}
