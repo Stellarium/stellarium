@@ -619,29 +619,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	// Second test avoids crash when observer is on spaceship
 	if (flags&ProperMotion && !core->getCurrentObserver()->isObserverLifeOver())
 	{
-		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-		// Setting/resetting the time causes a significant slowdown. We must apply some trickery to keep time in sync.
-		const Vec3d equPos=getEquinoxEquatorialPos(core);
-		double dec_equ, ra_equ;
-		StelUtils::rectToSphe(&ra_equ,&dec_equ,equPos);
-		StelCore* core1 = StelApp::getInstance().getCore(); // we need non-const reference here.
-		const double currentJD=core1->getJDOfLastJDUpdate();
-		const qint64 millis=core1->getMilliSecondsOfLastJDUpdate();
-		StelCore* core2 = StelApp::getInstance().getCore(); // use to fix hourly motion
-		const double JD2=core2->getJD();
-		core2->setJD(JD2-StelCore::JD_HOUR*.1);
-		core2->update(0);
-		Vec3d equPosPrev=getEquinoxEquatorialPos(core2);
-		const double deltaEq=equPos.angle(equPosPrev);
-		double dec_equPrev, ra_equPrev;
-		StelUtils::rectToSphe(&ra_equPrev,&dec_equPrev,equPosPrev);
-		double pa=atan2(ra_equ-ra_equPrev, dec_equ-dec_equPrev); // position angle: From North counterclockwise!
-		if (pa<0) pa += 2.*M_PI;
-		oss << QString("%1: %2 %3 %4%5<br/>").arg(q_("Hourly motion"), withDecimalDegree ? StelUtils::radToDecDegStr(deltaEq*10.) : StelUtils::radToDmsStr(deltaEq*10.), qc_("towards", "into the direction of"), QString::number(pa*M_180_PI, 'f', 1), QChar(0x00B0));
-		oss << QString("%1: d&alpha;=%2 d&delta;=%3<br/>").arg(q_("Hourly motion"), withDecimalDegree ? StelUtils::radToDecDegStr((ra_equ-ra_equPrev)*10.) : StelUtils::radToDmsStr((ra_equ-ra_equPrev)*10.), withDecimalDegree ? StelUtils::radToDecDegStr((dec_equ-dec_equPrev)*10.) : StelUtils::radToDmsStr((dec_equ-dec_equPrev)*10.));
-		core1->setJD(currentJD); // this calls sync() which sets millis
-		core1->setMilliSecondsOfLastJDUpdate(millis); // restore millis.
-		core1->update(0);
+		Vec4d properMotion = getHourlyProperMotion(core);
+		const bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();	
+		oss << QString("%1: %2 %3 %4%5<br/>").arg(q_("Hourly motion"), withDecimalDegree ? StelUtils::radToDecDegStr(properMotion[0]) : StelUtils::radToDmsStr(properMotion[0]), qc_("towards", "into the direction of"), QString::number(properMotion[1]*M_180_PI, 'f', 1), QChar(0x00B0));
+		oss << QString("%1: d&alpha;=%2 d&delta;=%3<br/>").arg(q_("Hourly motion"), withDecimalDegree ? StelUtils::radToDecDegStr(properMotion[2]) : StelUtils::radToDmsStr(properMotion[2]), withDecimalDegree ? StelUtils::radToDecDegStr(properMotion[3]) : StelUtils::radToDmsStr(properMotion[3]));
 	}
 
 	oss << getInfoStringEloPhase(core, flags, pType<=isMoon);
@@ -909,6 +890,36 @@ QString Planet::getInfoStringPeriods(const StelCore *core, const InfoStringGroup
 			oss << "</table>";
 	}
 	return str;
+}
+
+Vec4d Planet::getHourlyProperMotion(const StelCore *core) const
+{
+	if (core->getCurrentObserver()->isObserverLifeOver())
+		return Vec4d(0.);
+	else
+	{
+		// Setting/resetting the time causes a significant slowdown. We must apply some trickery to keep time in sync.
+		const Vec3d equPos=getEquinoxEquatorialPos(core);
+		double dec_equ, ra_equ;
+		StelUtils::rectToSphe(&ra_equ,&dec_equ,equPos);
+		StelCore* core1 = StelApp::getInstance().getCore(); // we need non-const reference here.
+		const double currentJD=core1->getJDOfLastJDUpdate();
+		const qint64 millis=core1->getMilliSecondsOfLastJDUpdate();
+		StelCore* core2 = StelApp::getInstance().getCore(); // use to fix hourly motion
+		const double JD2=core2->getJD();
+		core2->setJD(JD2-StelCore::JD_HOUR*.1);
+		core2->update(0);
+		Vec3d equPosPrev=getEquinoxEquatorialPos(core2);
+		const double deltaEq=equPos.angle(equPosPrev);
+		double dec_equPrev, ra_equPrev;
+		StelUtils::rectToSphe(&ra_equPrev,&dec_equPrev,equPosPrev);
+		double pa=atan2(ra_equ-ra_equPrev, dec_equ-dec_equPrev); // position angle: From North counterclockwise!
+		if (pa<0) pa += 2.*M_PI;
+		core1->setJD(currentJD); // this calls sync() which sets millis
+		core1->setMilliSecondsOfLastJDUpdate(millis); // restore millis.
+		core1->update(0);
+		return Vec4d(deltaEq*10., pa, (ra_equ-ra_equPrev)*10., (dec_equ-dec_equPrev)*10.);
+	}
 }
 
 SolarEclipseBessel::SolarEclipseBessel(double &besX, double &besY,
