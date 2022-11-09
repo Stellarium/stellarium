@@ -53,6 +53,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		dirToNameEnglish[dir].author = pd.value("info/author").toString();
 		dirToNameEnglish[dir].credit = pd.value("info/credit").toString();		
 		dirToNameEnglish[dir].license = pd.value("info/license", "").toString();
+		dirToNameEnglish[dir].region = pd.value("info/region", "").toString();
 		QString boundariesStr = pd.value("info/boundaries", "none").toString();
 		static const QMap<QString, StelSkyCulture::BOUNDARIES>boundariesMap={
 			{ "none",    StelSkyCulture::NONE},
@@ -99,7 +100,9 @@ StelSkyCultureMgr::~StelSkyCultureMgr()
 //! Init itself from a config file.
 void StelSkyCultureMgr::init()
 {
-	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "western").toString();
+	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "modern").toString();
+	if (defaultSkyCultureID=="western") // switch to new Sky Culture ID
+		defaultSkyCultureID = "modern";
 	setCurrentSkyCultureID(defaultSkyCultureID);
 }
 
@@ -279,6 +282,25 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 	return html;
 }
 
+QString StelSkyCultureMgr::getCurrentSkyCultureHtmlRegion() const
+{
+	QString html = "", region = currentSkyCulture.region.trimmed();
+	QString description = q_("The region is understood as the geographical area of origin of a given culture of the sky.");
+
+	// special case: modern sky culture
+	if (getCurrentSkyCultureID().contains("modern", Qt::CaseInsensitive))
+	{
+		// TRANSLATIONS: By the fact this is name of pseudo-region on Earth
+		region = N_("World");
+		description = q_("All modern sky cultures are based on the IAU-approved 88 constellations with standardized boundaries and are used worldwide. The origins of all these constellations are pan-European.");
+	}
+
+	if (!region.isEmpty()) // Region marker is always 'green'
+		html = QString("<dl><dt><span style='color:#33ff33;'>%4</span> <strong>%1 %2</strong></dt><dd><em>%3</em></dd></dl>").arg(q_("Region:"), q_(region), description, QChar(0x25CF));
+
+	return html;
+}
+
 bool StelSkyCultureMgr::setCurrentSkyCultureNameI18(const QString& cultureName)
 {
 	return setCurrentSkyCultureID(skyCultureI18ToDirectory(cultureName));
@@ -351,6 +373,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription() const
 	description.append(getCurrentSkyCultureHtmlReferences());
 	description.append(getCurrentSkyCultureHtmlLicense());
 	description.append(getCurrentSkyCultureHtmlClassification());
+	description.append(getCurrentSkyCultureHtmlRegion());
 
 	return description;
 }

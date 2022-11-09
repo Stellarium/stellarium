@@ -322,6 +322,7 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxTypeOfMount,		"Oculars.flagAutosetMountForCCD");
 	connectBoolProperty(ui->checkBoxTelradFOVScaling,	"Oculars.flagScalingFOVForTelrad");
 	connectBoolProperty(ui->checkBoxCCDFOVScaling,		"Oculars.flagScalingFOVForCCD");
+	connectBoolProperty(ui->checkBoxCCDMaxExposureTime,     "Oculars.flagMaxExposureTimeForCCD");
 	connectBoolProperty(ui->checkBoxToolbarButton,		"Oculars.flagShowOcularsButton");
 	connectIntProperty(ui->arrowButtonScaleSpinBox,	        "Oculars.arrowButtonScale");
 	connectBoolProperty(ui->checkBoxShowCcdCropOverlay,	"Oculars.flagShowCcdCropOverlay");
@@ -656,6 +657,7 @@ void OcularDialog::initAboutText()
 	html += "<p>" +  q_("The sensor view has a feature to show a sensor crop overlay with information about the crop size. The size of this rectangle may be adjusted when binning is active (e.g. crop size of 100px will be adjusted to 99px by binning 3).") + " ";
 	html +=          q_("In this case, information about crop size overlay will be marked by %1.").arg("[*]") + " ";
 	html +=          q_("This mark is also displayed if the crop size is larger than the sensor size.") + "</p>";
+	html += "<p>" + q_("The sensor view has also a feature to show a max time of exposure for selected solar system objects (the mount has sidereal speed enabled) to avoid a movement of more than 1 pixel width.") + "</p>";
 
 	html += StelApp::getInstance().getModuleMgr().getStandardSupportLinksInfo("Oculars plugin");
 	html += "</body></html>";

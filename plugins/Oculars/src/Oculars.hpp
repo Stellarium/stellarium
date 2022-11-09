@@ -25,6 +25,7 @@
 #include "Lens.hpp"
 #include "Ocular.hpp"
 #include "OcularDialog.hpp"
+#include "SolarSystem.hpp"
 #include "StelModule.hpp"
 #include "StelTextureTypes.hpp"
 #include "Telescope.hpp"
@@ -105,6 +106,7 @@ class Oculars : public StelModule
 	Q_PROPERTY(bool flagScalingFOVForTelrad	   READ getFlagScalingFOVForTelrad    WRITE setFlagScalingFOVForTelrad    NOTIFY flagScalingFOVForTelradChanged) // TODO: Rename to flagTelradAutozoom etc. to be clearer.
 	Q_PROPERTY(Vec4f telradFOV                 READ getTelradFOV                  WRITE setTelradFOV                  NOTIFY telradFOVChanged)
 	Q_PROPERTY(bool flagScalingFOVForCCD	   READ getFlagScalingFOVForCCD       WRITE setFlagScalingFOVForCCD       NOTIFY flagScalingFOVForCCDChanged)
+	Q_PROPERTY(bool flagMaxExposureTimeForCCD  READ getFlagMaxExposureTimeForCCD  WRITE setFlagMaxExposureTimeForCCD  NOTIFY flagMaxExposureTimeForCCDChanged)
 	Q_PROPERTY(bool flagShowOcularsButton	   READ getFlagShowOcularsButton      WRITE setFlagShowOcularsButton      NOTIFY flagShowOcularsButtonChanged)
 	Q_PROPERTY(bool flagShowContour		   READ getFlagShowContour            WRITE setFlagShowContour            NOTIFY flagShowContourChanged)
 	Q_PROPERTY(bool flagShowCardinals	   READ getFlagShowCardinals          WRITE setFlagShowCardinals          NOTIFY flagShowCardinalsChanged)
@@ -256,6 +258,9 @@ public slots:
 	void setFlagScalingFOVForCCD(const bool b);
 	bool getFlagScalingFOVForCCD(void) const;
 
+	void setFlagMaxExposureTimeForCCD(const bool b);
+	bool getFlagMaxExposureTimeForCCD(void) const;
+
 	void setFlagUseSemiTransparency(const bool b);
 	bool getFlagUseSemiTransparency(void) const;
 
@@ -337,6 +342,7 @@ signals:
 	void flagScalingFOVForTelradChanged(bool value);
 	void telradFOVChanged(Vec4f fov);
 	void flagScalingFOVForCCDChanged(bool value);
+	void flagMaxExposureTimeForCCDChanged(bool value);
 	void flagUseSemiTransparencyChanged(bool value);
 	void transparencyMaskChanged(int value);
 	void flagShowResolutionCriteriaChanged(bool value);
@@ -372,7 +378,8 @@ private slots:
 	void toggleCropOverlay();
 	void toggleFocuserOverlay();
 	void handleAutoLimitToggle(bool on);	//!< do a few activities in the background.
-	void handleStarMagLimitToggle(bool on); //!< Handle switching the main program's star limitation flag
+	void handleStarMagLimitToggle(bool on); //!< Handle switching the main program's star limitation flag	
+	void updateLatestSelectedSSO();
 
 private:
 	//! Compute the limiting magnitude for a telescope
@@ -527,6 +534,8 @@ private:
 	Vec3f lineColor;
 	Vec3f focuserColor;
 
+	Planet* selectedSSO;
+
 	//Reticle
 	StelTextureSP reticleTexture;
 	StelTextureSP protractorTexture;
@@ -540,6 +549,7 @@ private:
 	bool flagAutosetMountForCCD;	//!< Flag used to track if we use automatic switch to type of mount for CCD frame
 	bool flagScalingFOVForTelrad;	//!< Flag used to track if we use automatic scaling FOV for Telrad
 	bool flagScalingFOVForCCD;	//!< Flag used to track if we use automatic scaling FOV for CCD
+	bool flagMaxExposureTimeForCCD;	//!< Flag used to track if we show max exposure time for CCD
 	bool flagShowResolutionCriteria;	//!< Show various criteria for angular resolution based on telescope/ocular
 	bool equatorialMountEnabledMain;	//!< Keep track of mount used in main program.
 	double reticleRotation;
