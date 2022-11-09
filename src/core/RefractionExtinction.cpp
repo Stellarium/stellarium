@@ -86,28 +86,16 @@ void Refraction::setPreTransfoMat(const Mat4d& m)
 {
 	preTransfoMat=m;
 	invertPreTransfoMat=m.inverse();
-	preTransfoMatf.set(static_cast<float>(m[0]),  static_cast<float>(m[1]),  static_cast<float>(m[2]),  static_cast<float>(m[3]),
-			   static_cast<float>(m[4]),  static_cast<float>(m[5]),  static_cast<float>(m[6]),  static_cast<float>(m[7]),
-			   static_cast<float>(m[8]),  static_cast<float>(m[9]),  static_cast<float>(m[10]), static_cast<float>(m[11]),
-			   static_cast<float>(m[12]), static_cast<float>(m[13]), static_cast<float>(m[14]), static_cast<float>(m[15]));
-	invertPreTransfoMatf.set(static_cast<float>(invertPreTransfoMat[0]),  static_cast<float>(invertPreTransfoMat[1]),  static_cast<float>(invertPreTransfoMat[2]),  static_cast<float>(invertPreTransfoMat[3]),
-				 static_cast<float>(invertPreTransfoMat[4]),  static_cast<float>(invertPreTransfoMat[5]),  static_cast<float>(invertPreTransfoMat[6]),  static_cast<float>(invertPreTransfoMat[7]),
-				 static_cast<float>(invertPreTransfoMat[8]),  static_cast<float>(invertPreTransfoMat[9]),  static_cast<float>(invertPreTransfoMat[10]), static_cast<float>(invertPreTransfoMat[11]),
-				 static_cast<float>(invertPreTransfoMat[12]), static_cast<float>(invertPreTransfoMat[13]), static_cast<float>(invertPreTransfoMat[14]), static_cast<float>(invertPreTransfoMat[15]));
+	preTransfoMatf=toMat4f(m);
+	invertPreTransfoMatf=toMat4f(invertPreTransfoMat);
 }
 
 void Refraction::setPostTransfoMat(const Mat4d& m)
 {
 	postTransfoMat=m;
 	invertPostTransfoMat=m.inverse();
-	postTransfoMatf.set(static_cast<float>(m[0]),  static_cast<float>(m[1]),  static_cast<float>(m[2]),  static_cast<float>(m[3]),
-			    static_cast<float>(m[4]),  static_cast<float>(m[5]),  static_cast<float>(m[6]),  static_cast<float>(m[7]),
-			    static_cast<float>(m[8]),  static_cast<float>(m[9]),  static_cast<float>(m[10]), static_cast<float>(m[11]),
-			    static_cast<float>(m[12]), static_cast<float>(m[13]), static_cast<float>(m[14]), static_cast<float>(m[15]));
-	invertPostTransfoMatf.set(static_cast<float>(invertPostTransfoMat[0]),  static_cast<float>(invertPostTransfoMat[1]),  static_cast<float>(invertPostTransfoMat[2]),  static_cast<float>(invertPostTransfoMat[3]),
-				  static_cast<float>(invertPostTransfoMat[4]),  static_cast<float>(invertPostTransfoMat[5]),  static_cast<float>(invertPostTransfoMat[6]),  static_cast<float>(invertPostTransfoMat[7]),
-				  static_cast<float>(invertPostTransfoMat[8]),  static_cast<float>(invertPostTransfoMat[9]),  static_cast<float>(invertPostTransfoMat[10]), static_cast<float>(invertPostTransfoMat[11]),
-				  static_cast<float>(invertPostTransfoMat[12]), static_cast<float>(invertPostTransfoMat[13]), static_cast<float>(invertPostTransfoMat[14]), static_cast<float>(invertPostTransfoMat[15]));
+	postTransfoMatf=toMat4f(m);
+	invertPostTransfoMatf=toMat4f(invertPostTransfoMat);
 }
 
 void Refraction::updatePrecomputed()

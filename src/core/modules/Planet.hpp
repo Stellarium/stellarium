@@ -395,6 +395,14 @@ public:
 	//! rho*a=planetocentric distance of point [AU]
 	Vec4d getRectangularCoordinates(const double longDeg, const double latDeg, const double altMetres=0.) const;
 
+	//! Retrieve the hourly proper motion of Solar system bodies
+	//! @return [hourlyMotion, positionAngle, deltaAlpha, deltaDelta]
+	//! where hourlyMotion = hourly proper motion [radians]
+	//! positionAngle = position angle (the direction of proper motion) [radians]
+	//! deltaAlpha = hourly motion in R.A. [radians]
+	//! deltaDelta = hourly motion in Dec. [radians]
+	Vec4d getHourlyProperMotion(const StelCore *core) const;
+
 	//! Get the phase angle (radians) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getPhaseAngle(const Vec3d& obsPos) const;
 	//! Get the elongation angle (radians) for an observer at pos obsPos in heliocentric coordinates (in AU)
