@@ -1735,7 +1735,7 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 		QString dsoNamesPath = StelFileMgr::findFile("nebulae/" + setName + "/names.dat");
 		if (dsoNamesPath.isEmpty())
 		{
-			qWarning() << "ERROR while loading deep-sky names data set " << setName;
+			qWarning().noquote() << "ERROR while loading deep-sky names data set " << setName;
 			return;
 		}
 		loadDSONames(dsoNamesPath);
@@ -1746,7 +1746,7 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 		QFile dsoNamesFile(namesFile);
 		if (!dsoNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
-			qDebug() << "Cannot open file" << QDir::toNativeSeparators(namesFile);
+			qDebug().noquote() << "Cannot open file" << QDir::toNativeSeparators(namesFile);
 			return;
 		}
 
@@ -1756,7 +1756,7 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 
 		// lines which look like records - we use the RE to extract the fields
 		// which will be available in recMatch.capturedTexts()
-		static const QRegularExpression recRx("^\\s*([\\w\\s\\-\\+\\.]+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
+		static const QRegularExpression recRx("^\\s*([\\w\\s\\-\\+\\.]+)\\s*\\|[_]*[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)");
 
 		QString record, dsoId, nativeName;
 		int totalRecords=0;
@@ -1764,7 +1764,7 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 		int lineNumber=0;
 		while (!dsoNamesFile.atEnd())
 		{
-			record = QString::fromUtf8(dsoNamesFile.readLine());
+			record = QString::fromUtf8(dsoNamesFile.readLine()).trimmed();
 			lineNumber++;
 
 			// Skip comments
@@ -1776,7 +1776,7 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 			QRegularExpressionMatch recMatch=recRx.match(record);
 			if (!recMatch.hasMatch())
 			{
-				qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in native deep-sky object names file" << QDir::toNativeSeparators(namesFile);
+				qWarning().noquote() << "ERROR - cannot parse record at line" << lineNumber << "in native deep-sky object names file" << QDir::toNativeSeparators(namesFile);
 			}
 			else
 			{
@@ -1792,13 +1792,13 @@ void NebulaMgr::updateSkyCulture(const QString& skyCultureDir)
 						e->addNameAlias(nativeName);
 				}
 				else
-					qWarning() << "ERROR - could NOT found DSO " << dsoId;
+					qWarning().noquote() << "ERROR - could NOT found DSO " << dsoId;
 
 				readOk++;
 			}
 		}
 		dsoNamesFile.close();
-		qDebug() << "Loaded" << readOk << "/" << totalRecords << "native names of deep-sky objects";
+		qDebug().noquote() << "Loaded" << readOk << "/" << totalRecords << "native names of deep-sky objects";
 	}
 
 	updateI18n();
