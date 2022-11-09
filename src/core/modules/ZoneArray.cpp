@@ -110,7 +110,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			ReadInt(*file,mag_steps) < 0)
 	{
 		dbStr += "error - file format is bad.";
-		qDebug() << dbStr;
+		qDebug().noquote() << dbStr;
 		return Q_NULLPTR;
 	}
 	const bool byte_swap = (magic == FILE_MAGIC_OTHER_ENDIAN);

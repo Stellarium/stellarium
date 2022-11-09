@@ -31,6 +31,7 @@ ADD_SUBDIRECTORY( maori )
 ADD_SUBDIRECTORY( maya )
 ADD_SUBDIRECTORY( modern )
 ADD_SUBDIRECTORY( modern_rey )
+ADD_SUBDIRECTORY( modern_iau )
 ADD_SUBDIRECTORY( modern_hlad )
 ADD_SUBDIRECTORY( modern_st )
 # Exclude from standard package
