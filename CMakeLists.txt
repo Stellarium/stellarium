@@ -818,26 +818,21 @@ IF(ENABLE_XLSX)
      # TODO: switch to something like vcpkg or conan, and plain find_package,
      # without the fallback of cmake downloading the dep itself.
      # But some libraries are not available there yet.
-     CPMFindPackage(NAME QXlsx
-	 URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.4.4.zip
-	 URL_HASH SHA256=3efbd6f63a1ffd521c535dce7b5a5a7e9ebd23db51e6ae8e3e2eb89796e57675
-	 DOWNLOAD_ONLY yes
-	 EXCLUDE_FROM_ALL ON
-	 SOURCE_SUBDIR QXlsx)
-     if(QXlsx_ADDED)
-	 # Can't use embedded CMakeLists.txt due to
-	 # https://github.com/QtExcel/QXlsx/issues/134
-	 file(GLOB_RECURSE QXLSX_FILES
-	     ${QXlsx_SOURCE_DIR}/QXlsx/source/*.cpp
-	     ${QXlsx_SOURCE_DIR}/QXlsx/header/*.h)
-	 add_library(QXlsx STATIC EXCLUDE_FROM_ALL ${QXLSX_FILES})
-	 target_link_libraries(QXlsx PUBLIC
-	     Qt${QT_VERSION_MAJOR}::Core
-	     Qt${QT_VERSION_MAJOR}::Gui
-	     Qt${QT_VERSION_MAJOR}::GuiPrivate)
-	 target_include_directories(QXlsx PUBLIC ${QXlsx_SOURCE_DIR}/QXlsx/header)
-	 add_library(QXlsx::QXlsx ALIAS QXlsx)
-     endif()
+
+     # Version 1.4.4 exports "QXlsx", but future (unreleased as of 10 Nov 2022)
+     # version exports "QXlsxQt5" (or ...Qt6) instead. Try both, but
+     # download newer one, because 1.4.4 doesn't link on windows when
+     # added via add_subdirectory().
+     FIND_PACKAGE(QXlsx NAMES QXlsxQt${QT_VERSION_MAJOR} QXlsx)
+     IF(QXlsx_FOUND)
+         MESSAGE(STATUS "Using system-provided QXlsx ${QXlsx_VERSION}")
+     ELSE()
+         CPMAddPackage(NAME QXlsxQt${QT_VERSION_MAJOR}
+             URL https://github.com/QtExcel/QXlsx/archive/bdda6568230ae8fc199ffcc88c598ce42d77a311.zip
+             #URL_HASH SHA256=3efbd6f63a1ffd521c535dce7b5a5a7e9ebd23db51e6ae8e3e2eb89796e57675
+             EXCLUDE_FROM_ALL ON
+             SOURCE_SUBDIR QXlsx)
+     ENDIF()
 ENDIF()
 
 ########### Set some global variables ###########
