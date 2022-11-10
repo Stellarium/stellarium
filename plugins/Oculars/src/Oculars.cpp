@@ -2317,7 +2317,7 @@ void Oculars::zoom(bool zoomedIn)
 			{
 				// Store current state for later resetting
 				flagGridLinesDisplayedMain		= propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool();
-				flagCardinalPointsMain			= propMgr->getStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed").toBool();
+				flagCardinalPointsMain			= propMgr->getStelPropertyValue("LandscapeMgr.cardinalPointsDisplayed").toBool();
 				flagConstellationLinesMain		= propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool();
 				flagConstellationBoundariesMain	= propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool();
 				flagAsterismLinesMain			= propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool();
@@ -2371,7 +2371,7 @@ void Oculars::toggleLines(bool visible)
 	if (visible)
 	{
 		propMgr->setStelPropertyValue("GridLinesMgr.gridlinesDisplayed", flagGridLinesDisplayedMain);
-		propMgr->setStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed", flagCardinalPointsMain);
+		propMgr->setStelPropertyValue("LandscapeMgr.cardinalPointsDisplayed", flagCardinalPointsMain);
 		propMgr->setStelPropertyValue("ConstellationMgr.linesDisplayed", flagConstellationLinesMain);
 		propMgr->setStelPropertyValue("ConstellationMgr.boundariesDisplayed", flagConstellationBoundariesMain);
 		propMgr->setStelPropertyValue("AsterismMgr.linesDisplayed", flagAsterismLinesMain);
@@ -2380,7 +2380,7 @@ void Oculars::toggleLines(bool visible)
 	else
 	{
 		propMgr->setStelPropertyValue("GridLinesMgr.gridlinesDisplayed", false);
-		propMgr->setStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed", false);
+		propMgr->setStelPropertyValue("LandscapeMgr.cardinalPointsDisplayed", false);
 		propMgr->setStelPropertyValue("ConstellationMgr.linesDisplayed", false);
 		propMgr->setStelPropertyValue("ConstellationMgr.boundariesDisplayed", false);
 		propMgr->setStelPropertyValue("AsterismMgr.linesDisplayed", false);
@@ -2920,7 +2920,7 @@ void Oculars::setFlagHideGridsLines(const bool b)
 			// Store current state for later resetting
 			StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
 			flagGridLinesDisplayedMain	= propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool();
-			flagCardinalPointsMain		= propMgr->getStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed").toBool();
+			flagCardinalPointsMain		= propMgr->getStelPropertyValue("LandscapeMgr.cardinalPointsDisplayed").toBool();
 			flagConstellationLinesMain	= propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool();
 			flagConstellationBoundariesMain	= propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool();
 			flagAsterismLinesMain		= propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool();
