@@ -393,7 +393,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlReferences() const
 		QString record;
 		// Allow empty and comment lines where first char (after optional blanks) is #
 		static const QRegularExpression commentRx("^(\\s*#.*|\\s*)$");
-		reference = QString("<h2>%1</h2><ol>").arg(q_("References"));
+		reference = QString("<h2>%1</h2><ol>").arg(q_("References / Further Reading"));
 		int totalRecords=0;
 		int readOk=0;
 		int lineNumber=0;
