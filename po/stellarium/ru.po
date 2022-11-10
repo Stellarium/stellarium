@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-11-10 01:31+0700\n"
+"POT-Creation-Date: 2022-11-10 13:08+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -4246,9 +4246,8 @@ msgid "No description"
 msgstr "Без описания"
 
 #: src/core/StelSkyCultureMgr.cpp:396
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:227
-msgid "References"
-msgstr "Ссылки"
+msgid "References / Further Reading"
+msgstr "Ссылки / Дополнительная литература"
 
 #: src/core/StelMovementMgr.cpp:231 src/gui/StelGui.cpp:220
 #: src/StelMainView.cpp:884 src/StelMainView.cpp:885
@@ -31046,6 +31045,10 @@ msgid ""
 msgstr ""
 "Для некоторых календарей мы приветствуем предложения по правильному "
 "форматированию от реальных пользователей."
+
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:227
+msgid "References"
+msgstr "Ссылки"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:228
 msgid "This plugin is based on:"
