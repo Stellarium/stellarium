@@ -412,6 +412,9 @@ StelLocationMgr::StelLocationMgr()
 	// The first entry is the DB name, the second is as we display it in the program.
 	if (locationDBToIANAtranslations.count()==0)
 	{
+		// Seen November 11, 2011.
+		locationDBToIANAtranslations.insert("America/Thunder_Bay","America/Toronto");
+		locationDBToIANAtranslations.insert("Europe/Uzhgorod",  "Europe/Kyiv");
 		// Seen on October 27, 2022. TZ Removed?
 		locationDBToIANAtranslations.insert("Europe/Zaporozhye","Europe/Kyiv");
 		// Seen on September 26, 2022. Officially renamed.
