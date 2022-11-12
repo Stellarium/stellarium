@@ -229,6 +229,14 @@ have installed)
 - and [x32](https://github.com/Stellarium/stellarium-data/releases/download/qt-5.6/libGLES-Win32.zip). 
 - (Don't ask us why. Find a solution!)
 
+**WSL: libQt5Core.so.5 not found**
+
+Fresh installations of WSL may have issues not finding libQt5Core.so.5. Run
+```
+sudo strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
+```
+(https://superuser.com/questions/1347723/arch-on-wsl-libqt5core-so-5-not-found-despite-being-installed)
+
 **Known limitations with Qt 5.15.x:**
 
 - Qt 5.15.0 and 5.15.1 have a buggy `lconvert` and should not be used. Also `lconvert` on Qt 5.15.2 
