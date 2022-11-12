@@ -119,7 +119,9 @@ MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")
 ########### Main global variables ###########
 SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
 SET(ENABLE_LTO 0 CACHE BOOL "Define whether the Link Time Optimization should be activated.")
-SET(ENABLE_PCH 1 CACHE BOOL "Define whether to use precompiled headers.")
+# Don't use set here!
+#SET(ENABLE_PCH 1 CACHE BOOL "Define whether to use precompiled headers.")
+OPTION(ENABLE_PCH "Define whether to use precompiled headers." ON)
 
 IF(NOT CMAKE_BUILD_TYPE)
      SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind ASan UBSan Release RelWithDebInfo MinSizeRel." FORCE)

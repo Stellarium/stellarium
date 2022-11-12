@@ -17,15 +17,23 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef STELMAIN_PCH_H
-#define STELMAIN_PCH_H
+#ifndef STELMAIN_PCH_HPP
+#define STELMAIN_PCH_HPP
 
 // Put most-used header files of the project here
 // ignore clangd warnings about unused headers!
 
-#include "StelApp.hpp"
-#include "StelPainter.hpp"
-#include "StelUtils.hpp"
-#include "VecMath.hpp"
+#include<QDebug>
+#include<QString>
+#include<QObject>
+#include<QtGlobal>
+#include<memory>
+#include<QSettings>
+#include<QVariant>
+#include<QStringList>
+#include<QDir>
+#include<QFile>
+#include<QList>
+#include<QRegularExpression>
 
-#endif // STELMAIN_PCH_H
+#endif // STELMAIN_PCH_HPP

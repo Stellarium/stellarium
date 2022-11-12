@@ -263,7 +263,7 @@ SET(stellarium_lib_SRCS
 
 IF(ENABLE_PCH)
      SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
-         stelMain_pch.h
+         stelMain_pch.hpp
      )
 ENDIF(ENABLE_PCH)
 
@@ -522,14 +522,6 @@ ENDIF()
 # Main executable/library setup
 IF(GENERATE_STELMAINLIB)
      ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
-     if(ENABLE_PCH)
-         # prepend an include to each cpp file which itself includes the most frequently used includes.
-#          target_precompile_headers(stelMain PUBLIC core/VecMath.hpp core/StelUtils.h external/SpoutLibrary.h core/*.hpp core/planetsephems/*.h core/planetsephems/*.hpp core/modules/*.hpp gui/*.hpp)
-          target_precompile_headers(stelMain PUBLIC stelMain_pch.hpp)
-          IF(CMAKE_VERSION VERSION_GREATER_EQUAL 3.19)
-               SET(CMAKE_PCH_INSTANTIATE_TEMPLATES ON)
-          ENDIF()
-     ENDIF(ENABLE_PCH)
      TARGET_LINK_LIBRARIES(stelMain ${STELMAIN_DEPS})
      INSTALL(TARGETS stelMain DESTINATION lib)
      # WIN32 creates a windows app without console, no effect on non-win platforms
@@ -546,6 +538,14 @@ ELSE()
 	  SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
      ENDIF()
 ENDIF()
+if(ENABLE_PCH)
+    # prepend an include to each cpp file which itself includes the most frequently used includes.
+#          target_precompile_headers(stelMain PUBLIC core/VecMath.hpp core/StelUtils.h external/SpoutLibrary.h core/*.hpp core/planetsephems/*.h core/planetsephems/*.hpp core/modules/*.hpp gui/*.hpp)
+     target_precompile_headers(stelMain PUBLIC <string> stelMain_pch.hpp )
+     IF(CMAKE_VERSION VERSION_GREATER_EQUAL 3.19)
+          SET(CMAKE_PCH_INSTANTIATE_TEMPLATES ON)
+     ENDIF()
+ENDIF(ENABLE_PCH)
 IF(ENABLE_SHOWMYSKY)
     TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${ShowMySky_INCLUDE_DIRECTORIES}")
 ENDIF()
