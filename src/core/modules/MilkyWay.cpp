@@ -46,6 +46,12 @@
 #include <QSettings>
 #include <QOpenGLShaderProgram>
 
+namespace
+{
+constexpr int FS_QUAD_COORDS_PER_VERTEX = 2;
+constexpr int SKY_VERTEX_ATTRIB_INDEX = 0;
+}
+
 // Class which manages the displaying of the Milky Way
 MilkyWay::MilkyWay()
 	: color(1.f, 1.f, 1.f)
@@ -53,7 +59,6 @@ MilkyWay::MilkyWay()
 	, intensityFovScale(1.0)
 	, intensityMinFov(0.25) // when zooming in further, MilkyWay is no longer visible.
 	, intensityMaxFov(2.5) // when zooming out further, MilkyWay is fully visible (when enabled).
-	, vertexArray()
 {
 	setObjectName("MilkyWay");
 	fader = new LinearFader();
@@ -70,16 +75,35 @@ void MilkyWay::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
+	auto& gl = *QOpenGLContext::currentContext()->functions();
+
 	mainTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/milkyway.png");
+	mainTex->bind(0);
+	gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	mainTex->release();
 	setFlagShow(conf->value("astro/flag_milky_way").toBool());
 	setIntensity(conf->value("astro/milky_way_intensity",1.).toDouble());
 	setSaturation(conf->value("astro/milky_way_saturation", 1.).toDouble());
 
-	// A new texture was provided by Fabien. Better resolution, but in equatorial coordinates. I had to enhance it a bit, and shift it by 90 degrees.
-	// We must create a constant array to take and derive possibly aberrated positions into the vertexArray
-	StelVertexArray vertices(StelPainter::computeSphereNoLight(1.,1.,45,15,1, true)); // GZ orig: slices=stacks=20.
-	vertexArray.reset(new StelOpenGLArray);
-	vertexArray->load(vertices);
+	vbo.reset(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer));
+	vbo->create();
+	vbo->bind();
+	const GLfloat vertices[]=
+	{
+		// full screen quad
+		-1, -1,
+		 1, -1,
+		-1,  1,
+		 1,  1,
+	};
+	gl.glBufferData(GL_ARRAY_BUFFER, sizeof vertices, vertices, GL_STATIC_DRAW);
+	vbo->release();
+
+	vao.reset(new QOpenGLVertexArrayObject);
+	vao->create();
+	bindVAO();
+	setupCurrentVAO();
+	releaseVAO();
 
 	ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(0);
 
@@ -87,6 +111,35 @@ void MilkyWay::init()
 	addAction("actionShow_MilkyWay", displayGroup, N_("Milky Way"), "flagMilkyWayDisplayed", "M");
 }
 
+void MilkyWay::setupCurrentVAO()
+{
+	auto& gl = *QOpenGLContext::currentContext()->functions();
+	vbo->bind();
+	gl.glVertexAttribPointer(0, FS_QUAD_COORDS_PER_VERTEX, GL_FLOAT, false, 0, 0);
+	vbo->release();
+	gl.glEnableVertexAttribArray(SKY_VERTEX_ATTRIB_INDEX);
+}
+
+void MilkyWay::bindVAO()
+{
+	if(vao->isCreated())
+		vao->bind();
+	else
+		setupCurrentVAO();
+}
+
+void MilkyWay::releaseVAO()
+{
+	if(vao->isCreated())
+	{
+		vao->release();
+	}
+	else
+	{
+		auto& gl = *QOpenGLContext::currentContext()->functions();
+		gl.glDisableVertexAttribArray(SKY_VERTEX_ATTRIB_INDEX);
+	}
+}
 
 void MilkyWay::update(double deltaTime)
 {
@@ -134,34 +187,13 @@ void MilkyWay::draw(StelCore* core)
 
 		const auto vert =
 			StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) +
-			projector->getProjectShader() +
-			core->getAberrationShader() +
-			extinction.getForwardTransformShader() +
 			R"(
 ATTRIBUTE highp vec3 vertex;
-ATTRIBUTE vec2 texCoord;
-VARYING vec2 texc;
-VARYING float extinctionFactor;
-uniform mat4 projectionMatrix;
-uniform float bortleIntensity;
-uniform bool extinctionEnabled;
+VARYING highp vec3 ndcPos;
 void main()
 {
-	vec3 aberrated = applyAberrationToObject(vertex);
-
-	vec3 altAzPos = vertexToAltAzPos(aberrated);
-	if(extinctionEnabled)
-	{
-		float mag = extinctionMagnitude(altAzPos);
-		extinctionFactor=pow(0.3, mag) * (1.1-bortleIntensity*0.1); // drop of one magnitude: should be factor 2.5 or 40%. We take 30%, it looks more realistic.
-	}
-	else
-	{
-		extinctionFactor = 1.;
-	}
-
-	gl_Position = projectionMatrix*vec4(project(aberrated), 1);
-	texc = texCoord;
+	gl_Position = vec4(vertex, 1.);
+	ndcPos = vertex;
 }
 )";
 		bool ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Vertex, vert);
@@ -171,16 +203,49 @@ void main()
 
 		const auto frag =
 			StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
+			projector->getUnProjectShader() +
+			core->getAberrationShader() +
+			extinction.getForwardTransformShader() +
 			makeDitheringShader()+
 			makeSaturationShader()+
 			R"(
-VARYING vec2 texc;
-VARYING float extinctionFactor;
+VARYING highp vec3 ndcPos;
 uniform sampler2D mainTex;
 uniform lowp float saturation;
 uniform vec3 brightness;
+uniform mat4 projectionMatrixInverse;
+uniform bool extinctionEnabled;
+uniform float bortleIntensity;
 void main(void)
 {
+	const float PI = 3.14159265;
+	vec4 winPos = projectionMatrixInverse * vec4(ndcPos, 1);
+	bool ok = false;
+	vec3 modelPos = unProject(winPos.x, winPos.y, ok).xyz;
+	if(!ok)
+	{
+		FRAG_COLOR = vec4(0);
+		return;
+	}
+	modelPos = normalize(modelPos);
+	modelPos = applyAberrationToViewDir(modelPos);
+	float modelZenithAngle = acos(-modelPos.z);
+	float modelLongitude = atan(modelPos.x, modelPos.y);
+	vec2 texc = vec2(modelLongitude/(2.*PI), modelZenithAngle/PI);
+
+	float extinctionFactor;
+	if(extinctionEnabled)
+	{
+		vec3 worldPos = winPosToWorldPos(winPos.x, winPos.y, ok);
+		vec3 altAzViewDir = worldPosToAltAzPos(worldPos);
+		float mag = extinctionMagnitude(altAzViewDir);
+		extinctionFactor=pow(0.3, mag) * (1.1-bortleIntensity*0.1); // drop of one magnitude: should be factor 2.5 or 40%. We take 30%, it looks more realistic.
+	}
+	else
+	{
+		extinctionFactor = 1.;
+	}
+
     vec4 color = texture2D(mainTex, texc)*vec4(brightness,1)*extinctionFactor;
 	if(saturation != 1.0)
 		color.rgb = saturate(color.rgb, saturation);
@@ -193,8 +258,7 @@ void main(void)
 
 		if(!ok) return;
 
-		renderProgram->bindAttributeLocation("vertex", StelOpenGLArray::ATTLOC_VERTEX);
-		renderProgram->bindAttributeLocation("texCoord", StelOpenGLArray::ATTLOC_TEXCOORD);
+		renderProgram->bindAttributeLocation("vertex", SKY_VERTEX_ATTRIB_INDEX);
 
 		if(!StelPainter::linkProg(renderProgram.get(), "Milky Way render program"))
 			return;
@@ -207,7 +271,7 @@ void main(void)
 		shaderVars.ditherPattern    = renderProgram->uniformLocation("ditherPattern");
 		shaderVars.bortleIntensity  = renderProgram->uniformLocation("bortleIntensity");
 		shaderVars.extinctionEnabled= renderProgram->uniformLocation("extinctionEnabled");
-		shaderVars.projectionMatrix = renderProgram->uniformLocation("projectionMatrix");
+		shaderVars.projectionMatrixInverse = renderProgram->uniformLocation("projectionMatrixInverse");
 		renderProgram->release();
 	}
 	if(!renderProgram || !renderProgram->isLinked())
@@ -282,22 +346,23 @@ void main(void)
 	ditherPatternTex->bind(ditherTexSampler);
 	renderProgram->setUniformValue(shaderVars.ditherPattern, ditherTexSampler);
 
-	renderProgram->setUniformValue(shaderVars.projectionMatrix, projector->getProjectionMatrix().toQMatrix());
+	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, projector->getProjectionMatrix().toQMatrix().inverted());
 	renderProgram->setUniformValue(shaderVars.brightness, c.toQVector3D());
 	renderProgram->setUniformValue(shaderVars.saturation, GLfloat(saturation));
 	renderProgram->setUniformValue(shaderVars.rgbMaxValue, calcRGBMaxValue(core->getDitheringMode()).toQVector3D());
 
 	core->setAberrationUniforms(*renderProgram);
-	projector->setProjectUniforms(*renderProgram);
+	projector->setUnProjectUniforms(*renderProgram);
 	extinction.setForwardTransformUniforms(*renderProgram);
 
 	auto& gl = *QOpenGLContext::currentContext()->functions();
+
 	gl.glEnable(GL_CULL_FACE);
 	gl.glEnable(GL_BLEND);
 	gl.glBlendFunc(GL_ONE,GL_ONE); // allow colored sky background
-	vertexArray->bind();
-	vertexArray->draw();
-	vertexArray->release();
+	bindVAO();
+	gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	releaseVAO();
 	gl.glDisable(GL_BLEND);
 	gl.glDisable(GL_CULL_FACE);
 }
