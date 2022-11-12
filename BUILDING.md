@@ -233,7 +233,7 @@ have installed)
 
 Fresh installations of WSL may have issues not finding libQt5Core.so.5. Run
 ```
-sudo strip --remove-section=.note.ABI-tag /usr/lib64/libQt5Core.so.5
+sudo strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
 ```
 (https://superuser.com/questions/1347723/arch-on-wsl-libqt5core-so-5-not-found-despite-being-installed)
 
