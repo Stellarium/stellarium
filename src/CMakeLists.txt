@@ -14,7 +14,6 @@ SET(stellarium_lib_SRCS
      core/Dithering.hpp
      core/Dithering.cpp
      core/SaturationShader.hpp
-     core/healpix.c
      core/StelAudioMgr.hpp
      core/StelAudioMgr.cpp
      core/StelVideoMgr.hpp
@@ -165,8 +164,8 @@ SET(stellarium_lib_SRCS
      core/planetsephems/de440.hpp
      core/planetsephems/de441.cpp
      core/planetsephems/de441.hpp
-     core/planetsephems/htc20b.cpp
-     core/planetsephems/htc20b.hpp
+     core/planetsephems/htc20b.c
+     core/planetsephems/htc20b.h
      core/modules/AtmospherePreetham.cpp
      core/modules/AtmospherePreetham.hpp
      core/modules/AtmosphereShowMySky.cpp
