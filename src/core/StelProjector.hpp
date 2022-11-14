@@ -75,6 +75,9 @@ public:
 	ModelViewTranformP clone() const Q_DECL_OVERRIDE;
 
 	private:
+		Mat4dTransform(const Mat4dTransform& src) = default;
+
+	private:
 		//! transfo matrix and invert
 		Mat4d transfoMat;
 		Mat4f transfoMatf;

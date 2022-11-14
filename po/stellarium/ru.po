@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-11-09 17:41+0700\n"
+"POT-Creation-Date: 2022-11-10 13:08+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -4246,9 +4246,8 @@ msgid "No description"
 msgstr "Без описания"
 
 #: src/core/StelSkyCultureMgr.cpp:396
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:227
-msgid "References"
-msgstr "Ссылки"
+msgid "References / Further Reading"
+msgstr "Ссылки / Дополнительная литература"
 
 #: src/core/StelMovementMgr.cpp:231 src/gui/StelGui.cpp:220
 #: src/StelMainView.cpp:884 src/StelMainView.cpp:885
@@ -11421,90 +11420,95 @@ msgstr "Современная (Г. Рей)"
 
 #: skycultures/translations_skycultures.fab:74
 msgctxt "sky culture"
+msgid "Modern (IAU)"
+msgstr "Современная (МАС)"
+
+#: skycultures/translations_skycultures.fab:76
+msgctxt "sky culture"
 msgid "Modern (O. Hlad)"
 msgstr "Современная (О. Глад)"
 
-#: skycultures/translations_skycultures.fab:76
+#: skycultures/translations_skycultures.fab:78
 msgctxt "sky culture"
 msgid "Modern (Sky & Telescope)"
 msgstr "Современная (Sky & Telescope)"
 
-#: skycultures/translations_skycultures.fab:78
+#: skycultures/translations_skycultures.fab:80
 msgctxt "sky culture"
 msgid "Modern (Sternenkarten)"
 msgstr "Современная (Sternenkarten)"
 
-#: skycultures/translations_skycultures.fab:80
+#: skycultures/translations_skycultures.fab:82
 msgctxt "sky culture"
 msgid "Mongolian"
 msgstr "Монгольская"
 
-#: skycultures/translations_skycultures.fab:82
+#: skycultures/translations_skycultures.fab:84
 msgctxt "sky culture"
 msgid "Navajo"
 msgstr "Навахо"
 
-#: skycultures/translations_skycultures.fab:84
+#: skycultures/translations_skycultures.fab:86
 msgctxt "sky culture"
 msgid "Norse"
 msgstr "Скандинавская"
 
-#: skycultures/translations_skycultures.fab:86
+#: skycultures/translations_skycultures.fab:88
 msgctxt "sky culture"
 msgid "Northern Andes"
 msgstr "Северные Анды"
 
-#: skycultures/translations_skycultures.fab:88
+#: skycultures/translations_skycultures.fab:90
 msgctxt "sky culture"
 msgid "Romanian"
 msgstr "Румынская"
 
-#: skycultures/translations_skycultures.fab:90
+#: skycultures/translations_skycultures.fab:92
 msgctxt "sky culture"
 msgid "Russian (Siberian)"
 msgstr "Русская (Сибирская)"
 
-#: skycultures/translations_skycultures.fab:92
+#: skycultures/translations_skycultures.fab:94
 msgctxt "sky culture"
 msgid "Sami"
 msgstr "Саамская"
 
-#: skycultures/translations_skycultures.fab:94
+#: skycultures/translations_skycultures.fab:96
 msgctxt "sky culture"
 msgid "Samoan"
 msgstr "Самоанская"
 
-#: skycultures/translations_skycultures.fab:96
+#: skycultures/translations_skycultures.fab:98
 msgctxt "sky culture"
 msgid "Sardinian"
 msgstr "Сардинская"
 
-#: skycultures/translations_skycultures.fab:98
+#: skycultures/translations_skycultures.fab:100
 msgctxt "sky culture"
 msgid "Tongan"
 msgstr "Тонганская"
 
-#: skycultures/translations_skycultures.fab:100
+#: skycultures/translations_skycultures.fab:102
 msgctxt "sky culture"
 msgid "Tukano"
 msgstr "Тукано"
 
-#: skycultures/translations_skycultures.fab:102
+#: skycultures/translations_skycultures.fab:104
 msgctxt "sky culture"
 msgid "Tupi-Guarani"
 msgstr "Тупи-гуарани"
 
-#: skycultures/translations_skycultures.fab:104
+#: skycultures/translations_skycultures.fab:106
 msgctxt "sky culture"
 msgid "Vanuatu (Netwar)"
 msgstr "Вануату (Нетвар)"
 
-#: skycultures/translations_skycultures.fab:106
+#: skycultures/translations_skycultures.fab:108
 msgctxt "sky culture"
 msgid "Xhosa"
 msgstr "Косанская"
 
-#: skycultures/translations_skycultures.fab:108
+#: skycultures/translations_skycultures.fab:110
 msgctxt "sky culture"
 msgid "Zulu"
 msgstr "Зулусская"
@@ -31041,6 +31045,10 @@ msgid ""
 msgstr ""
 "Для некоторых календарей мы приветствуем предложения по правильному "
 "форматированию от реальных пользователей."
+
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:227
+msgid "References"
+msgstr "Ссылки"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:228
 msgid "This plugin is based on:"

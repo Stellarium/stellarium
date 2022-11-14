@@ -3455,7 +3455,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		Vec3f haloColorToDraw(haloColor[0], powf(0.75f, extinctedMag) * haloColor[1], powf(0.42f, 0.9f*extinctedMag) * haloColor[2]);
 
 		float haloMag=qMin(-18.f, getVMagnitudeWithExtinction(core)); // for sun on horizon, mag can go quite low, shrinking the halo too much.
-		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp.toVec3f(), surfArcMin2, haloMag, haloColorToDraw, (englishName=="Sun"));
+		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, haloMag, haloColorToDraw, (englishName=="Sun"));
 
 		if (core->getCurrentLocation().planetName == "Earth")
 		{
@@ -3627,7 +3627,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			// EXPERIMENTAL: for sun on horizon, mag can go quite low, shrinking the halo too much.
 			if (englishName=="Sun")
 				haloMag=qMin(haloMag, -18.f);
-			core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp.toVec3f(), surfArcMin2, haloMag, haloColorToDraw, this==ssm->getSun());
+			core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, haloMag, haloColorToDraw, this==ssm->getSun());
 		}
 
 		if ((this==ssm->getSun()) && (core->getCurrentLocation().planetName == "Earth"))

@@ -68,9 +68,8 @@ void StelProjector::Mat4dTransform::backward(Vec3f& v) const
 
 void StelProjector::Mat4dTransform::combine(const Mat4d& m)
 {
-	Mat4f mf(toMat4f(m));
 	transfoMat=transfoMat*m;
-	transfoMatf=transfoMatf*mf;
+	transfoMatf=toMat4f(transfoMat);
 }
 
 Mat4d StelProjector::Mat4dTransform::getApproximateLinearTransfo() const
@@ -80,7 +79,7 @@ Mat4d StelProjector::Mat4dTransform::getApproximateLinearTransfo() const
 
 StelProjector::ModelViewTranformP StelProjector::Mat4dTransform::clone() const
 {
-	return ModelViewTranformP(new Mat4dTransform(transfoMat));
+	return ModelViewTranformP(new Mat4dTransform(*this));
 }
 
 const QString StelProjector::maskTypeToString(StelProjectorMaskType type)
