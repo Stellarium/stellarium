@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>900</width>
-    <height>676</height>
+    <width>742</width>
+    <height>558</height>
    </rect>
   </property>
   <property name="font">
@@ -840,52 +840,6 @@
                </item>
               </layout>
              </item>
-             <item row="2" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_starTwinkle">
-               <item>
-                <widget class="QCheckBox" name="starTwinkleCheckBox">
-                 <property name="text">
-                  <string>Twinkle:</string>
-                 </property>
-                 <property name="checked">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="starTwinkleAmountDoubleSpinBox">
-                 <property name="maximumSize">
-                  <size>
-                   <width>75</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="decimals">
-                  <number>2</number>
-                 </property>
-                 <property name="maximum">
-                  <double>1.500000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.100000000000000</double>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="7" column="0">
-              <widget class="QCheckBox" name="checkBoxAdditionalNamesStars">
-               <property name="toolTip">
-                <string>Show all available proper names</string>
-               </property>
-               <property name="text">
-                <string>Show additional star names</string>
-               </property>
-              </widget>
-             </item>
              <item row="3" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_starLimitMag">
                <item>
@@ -946,57 +900,7 @@
                </item>
               </layout>
              </item>
-             <item row="9" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_28">
-               <property name="leftMargin">
-                <number>22</number>
-               </property>
-               <item>
-                <widget class="QCheckBox" name="dblStarsDesignationsCheckBox">
-                 <property name="toolTip">
-                  <string>Show traditional designations of double stars if proper name, Bayer or Flamsteed designations do not exist for the star.</string>
-                 </property>
-                 <property name="text">
-                  <string comment="double stars">Dbl. stars</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="varStarsDesignationsCheckBox">
-                 <property name="toolTip">
-                  <string>Show designations of variable stars if proper name, Bayer or Flamsteed designations, or designation of double star do not exist for the star.</string>
-                 </property>
-                 <property name="text">
-                  <string comment="variable stars">Var. stars</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="hipDesignationsCheckBox">
-                 <property name="toolTip">
-                  <string>Show designations from Hipparcos catalog (HIP) if available and star doesn't have other traditional designations.</string>
-                 </property>
-                 <property name="text">
-                  <string notr="true">HIP</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_5">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-             <item row="8" column="0">
+             <item row="7" column="0">
               <widget class="QCheckBox" name="checkBoxStarDesignationsOnlyUsage">
                <property name="toolTip">
                 <string>Use designations of stars instead of their common names for screen labels</string>
@@ -1005,6 +909,78 @@
                 <string>Use designations for screen labels</string>
                </property>
               </widget>
+             </item>
+             <item row="5" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_starLabel">
+               <item>
+                <widget class="QCheckBox" name="starLabelCheckBox">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                 <property name="text">
+                  <string>Labels and Markers</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSlider" name="starsLabelsHorizontalSlider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>180</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="value">
+                  <number>33</number>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="2" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_starTwinkle">
+               <item>
+                <widget class="QCheckBox" name="starTwinkleCheckBox">
+                 <property name="text">
+                  <string>Twinkle:</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="starTwinkleAmountDoubleSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>75</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="maximum">
+                  <double>1.500000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item row="0" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_starScale">
@@ -1069,63 +1045,73 @@
                </item>
               </layout>
              </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="spikyStarsCheckBox">
+               <property name="toolTip">
+                <string>Show stars with pointed rays</string>
+               </property>
+               <property name="text">
+                <string>Spiky stars</string>
+               </property>
+              </widget>
+             </item>
              <item row="6" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_starLabel">
+              <widget class="QCheckBox" name="checkBoxAdditionalNamesStars">
+               <property name="toolTip">
+                <string>Show all available proper names</string>
+               </property>
+               <property name="text">
+                <string>Show additional star names</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_28">
+               <property name="leftMargin">
+                <number>22</number>
+               </property>
                <item>
-                <widget class="QCheckBox" name="starLabelCheckBox">
-                 <property name="enabled">
-                  <bool>true</bool>
+                <widget class="QCheckBox" name="dblStarsDesignationsCheckBox">
+                 <property name="toolTip">
+                  <string>Show traditional designations of double stars if proper name, Bayer or Flamsteed designations do not exist for the star.</string>
                  </property>
                  <property name="text">
-                  <string>Labels and Markers</string>
+                  <string comment="double stars">Dbl. stars</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QSlider" name="starsLabelsHorizontalSlider">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
+                <widget class="QCheckBox" name="varStarsDesignationsCheckBox">
+                 <property name="toolTip">
+                  <string>Show designations of variable stars if proper name, Bayer or Flamsteed designations, or designation of double star do not exist for the star.</string>
                  </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>180</width>
-                   <height>0</height>
-                  </size>
+                 <property name="text">
+                  <string comment="variable stars">Var. stars</string>
                  </property>
-                 <property name="value">
-                  <number>33</number>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="hipDesignationsCheckBox">
+                 <property name="toolTip">
+                  <string>Show designations from Hipparcos catalog (HIP) if available and star doesn't have other traditional designations.</string>
                  </property>
+                 <property name="text">
+                  <string notr="true">HIP</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_5">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="4" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_2">
-               <item>
-                <widget class="QCheckBox" name="spikyStarsCheckBox">
-                 <property name="toolTip">
-                  <string>Show stars with pointed rays</string>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
                  </property>
-                 <property name="text">
-                  <string>Spiky stars</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="scalingStarsCheckBox">
-                 <property name="toolTip">
-                  <string>Enable scaling the stars on HiDPI devices</string>
-                 </property>
-                 <property name="text">
-                  <string>Scaling stars</string>
-                 </property>
-                </widget>
+                </spacer>
                </item>
               </layout>
              </item>

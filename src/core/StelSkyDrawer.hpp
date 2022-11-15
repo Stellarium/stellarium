@@ -61,7 +61,6 @@ class StelSkyDrawer : public QObject, protected QOpenGLFunctions
 	Q_PROPERTY(double lightPollutionLuminance READ getLightPollutionLuminance WRITE setLightPollutionLuminance NOTIFY lightPollutionLuminanceChanged)
 	Q_PROPERTY(bool flagDrawBigStarHalo READ getFlagDrawBigStarHalo WRITE setFlagDrawBigStarHalo NOTIFY flagDrawBigStarHaloChanged)
 	Q_PROPERTY(bool flagStarSpiky READ getFlagStarSpiky WRITE setFlagStarSpiky NOTIFY flagStarSpikyChanged)
-	Q_PROPERTY(bool flagScaling READ getFlagScaling WRITE setFlagScaling NOTIFY flagScalingChanged)
 
 	Q_PROPERTY(bool flagStarMagnitudeLimit READ getFlagStarMagnitudeLimit WRITE setFlagStarMagnitudeLimit NOTIFY flagStarMagnitudeLimitChanged)
 	Q_PROPERTY(bool flagNebulaMagnitudeLimit READ getFlagNebulaMagnitudeLimit WRITE setFlagNebulaMagnitudeLimit NOTIFY flagNebulaMagnitudeLimitChanged)
@@ -197,11 +196,6 @@ public slots:
 	//! Get flag for enable twinkling of stars without atmosphere.
 	//! @note option for planetariums
 	bool getFlagForcedTwinkle() const {return flagForcedTwinkle;}
-
-	//! Set flag for source scaling.
-	void setFlagScaling(bool b) {if(b!=flagScaling){ flagScaling=b; emit flagScalingChanged(b);}}
-	//! Get flag for source scaling.
-	bool getFlagScaling() const {return flagScaling;}
 
 	//! Set the parameters so that the stars disappear at about the naked-eye limiting magnitude corresponding
 	//! to the given zenith luminance at moonless night.
@@ -360,8 +354,6 @@ signals:
 	void flagDrawBigStarHaloChanged(bool b);
 	//! Emitted on change of star texture
 	void flagStarSpikyChanged(bool b);
-	//! Emitted whenever the scaling flag is toggled
-	void flagScalingChanged(bool b);
 
 	//! Emitted whenever the star magnitude limit flag is toggled
 	void flagStarMagnitudeLimitChanged(bool b);
@@ -463,7 +455,6 @@ private:
 	double twinkleAmount;
 	bool flagDrawBigStarHalo;
 	bool flagStarSpiky;
-	bool flagScaling;
 
 	//! Informing the drawer whether atmosphere is displayed.
 	//! This is used to avoid twinkling/simulate extinction/refraction.
