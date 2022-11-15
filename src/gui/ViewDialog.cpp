@@ -174,6 +174,7 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->starLimitMagnitudeCheckBox,"StelSkyDrawer.flagStarMagnitudeLimit");
 	connectDoubleProperty(ui->starLimitMagnitudeDoubleSpinBox, "StelSkyDrawer.customStarMagLimit");
 	connectBoolProperty(ui->spikyStarsCheckBox, "StelSkyDrawer.flagStarSpiky");
+	connectBoolProperty(ui->scalingStarsCheckBox, "StelSkyDrawer.flagScaling");
 	connectCheckBox(ui->starLabelCheckBox, "actionShow_Stars_Labels");
 	connectDoubleProperty(ui->starsLabelsHorizontalSlider,"StarMgr.labelsAmount",0.0,10.0);
 	connectBoolProperty(ui->checkBoxAdditionalNamesStars, "StarMgr.flagAdditionalNamesDisplayed");

@@ -60,6 +60,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	twinkleAmount(0.0),
 	flagDrawBigStarHalo(true),
 	flagStarSpiky(false),
+	flagScaling(true),
 	flagStarMagnitudeLimit(false),
 	flagNebulaMagnitudeLimit(false),
 	flagPlanetMagnitudeLimit(false),
@@ -91,6 +92,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setFlagTwinkle(conf->value("stars/flag_star_twinkle",true).toBool());
 	setFlagForcedTwinkle(conf->value("stars/flag_forced_twinkle",false).toBool());
 	setFlagDrawBigStarHalo(conf->value("stars/flag_star_halo",true).toBool());
+	setFlagScaling(conf->value("stars/flag_scaling", true).toBool());
 	flagStarSpiky=(conf->value("stars/flag_star_spiky", false).toBool()); // too early to use the set method here!
 	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
 	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
@@ -478,7 +480,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
 		return false;
 
-	const float radius = rcMag.radius*(static_cast<float>(sPainter->getProjector()->getDevicePixelsPerPixel()));
+	const float radius = flagScaling ? rcMag.radius*(static_cast<float>(sPainter->getProjector()->getDevicePixelsPerPixel())) : rcMag.radius;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	const float frand=StelApp::getInstance().getRandF();
 #else
