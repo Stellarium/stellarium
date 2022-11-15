@@ -63,6 +63,13 @@ class QOpenGLFramebufferObject;
 
 typedef QSharedPointer<class HipsSurvey> HipsSurveyP;
 
+struct Moon3DModel
+{
+	QVector<float> vertexArr;
+	QVector<uint32_t> indexArr;
+	bool attemptedToLoad = false;
+};
+
 // Class to manage rings for planets like Saturn
 class Ring
 {
@@ -769,7 +776,7 @@ protected:
 	//! Draws the OBJ model, assuming it is available
 	//! @param screenRd radius in screen pixels.
 	//! @return false if the model can currently not be drawn (not loaded)
-	bool drawObjModel(const StelPainterLight& light, StelPainter* painter, float screenRd);
+	bool drawObjModel(const StelPainterLight& light, StelPainter* painter, bool isMoon, float screenRd);
 
 	bool drawObjShadowMap(const Vec3d& lightPosition, StelPainter *painter, QMatrix4x4& shadowMatrix);
 
@@ -780,11 +787,16 @@ protected:
 	//! Draw the 3D sphere
 	void drawSphere(const StelPainterLight& light, StelPainter* painter, float screenRd, bool drawOnlyRing=false);
 
+	//! Draw the Moon
+	bool drawMoon(const StelPainterLight& light, StelPainter& painter);
+
 	//! Draw the Hips survey.
 	void drawSurvey(const StelPainterLight& light, StelCore* core, StelPainter* painter);
 
 	//! Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, StelPainter &sPainter, const QFont& planetNameFont);
+
+	float computeEclipsePush() const;
 
 	PlanetOBJModel* loadObjModel() const;
 
@@ -891,6 +903,7 @@ private:
 
 	QList<StelObject::CulturalName> culturalNames; //!< names loaded from non-modern Skycultures. Usually just one, but there may be more!
 
+	Moon3DModel model;
 
 	QString texMapFileOrig;     //!< File path for texture; used for saving original filename
 	QString normalMapFileOrig;  //!< File path for normal map; used for saving original filename
