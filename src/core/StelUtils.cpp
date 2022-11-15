@@ -42,7 +42,11 @@ namespace StelUtils
 //! Return the full name of stellarium, e.g. "Stellarium 23.1"
 QString getApplicationName()
 {
+#if defined(GIT_REVISION)
+	return QString("Stellarium %1+").arg(StelUtils::getApplicationPublicVersion());
+#else
 	return QString("Stellarium %1").arg(StelUtils::getApplicationPublicVersion());
+#endif
 }
 
 //! Return the version of stellarium, e.g. "0.23.1"
