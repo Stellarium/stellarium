@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-11-10 01:31+0700\n"
+"POT-Creation-Date: 2022-11-15 19:34+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2022\n"
 "Language-Team: Slovak (https://www.transifex.com/stellarium/teams/80998/sk/)\n"
@@ -3642,7 +3642,7 @@ msgstr "Prijateľný rozsah použitia: medzi rokmi %1 a %2, %3."
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Prijateľný rozsah použitia: medzi rokmi %1 a %2."
 
-#: src/core/StelProjector.cpp:127
+#: src/core/StelProjector.cpp:126
 msgid "Maximum FOV: "
 msgstr "Maximálne zorné pole: "
 
@@ -4223,9 +4223,8 @@ msgid "No description"
 msgstr "Bez popisu"
 
 #: src/core/StelSkyCultureMgr.cpp:396
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:227
-msgid "References"
-msgstr "Literatúra"
+msgid "References / Further Reading"
+msgstr "Zdroje / Ďalšie čítanie"
 
 #: src/core/StelMovementMgr.cpp:231 src/gui/StelGui.cpp:220
 #: src/StelMainView.cpp:884 src/StelMainView.cpp:885
@@ -11274,98 +11273,98 @@ msgstr "Čínska"
 
 #: skycultures/translations_skycultures.fab:34
 msgctxt "sky culture"
-msgid "Chinese Contemporary"
-msgstr "Čínska (súčasná)"
-
-#: skycultures/translations_skycultures.fab:36
-msgctxt "sky culture"
 msgid "Chinese Medieval"
 msgstr "Čínska (stredoveká)"
 
-#: skycultures/translations_skycultures.fab:38
+#: skycultures/translations_skycultures.fab:36
 msgctxt "sky culture"
 msgid "Egyptian"
 msgstr "Egyptská"
 
-#: skycultures/translations_skycultures.fab:40
+#: skycultures/translations_skycultures.fab:38
 msgctxt "sky culture"
 msgid "Egyptian (Dendera)"
 msgstr "Egyptská (Denderská)"
 
-#: skycultures/translations_skycultures.fab:42
+#: skycultures/translations_skycultures.fab:40
 msgctxt "sky culture"
 msgid "Greek (Almagest)"
 msgstr "Grécka (Almagest)"
 
-#: skycultures/translations_skycultures.fab:44
+#: skycultures/translations_skycultures.fab:42
 msgctxt "sky culture"
 msgid "Greek (Farnese + Almagest)"
 msgstr "Grécka (Farnese + Almagest)"
 
-#: skycultures/translations_skycultures.fab:46
+#: skycultures/translations_skycultures.fab:44
 msgctxt "sky culture"
 msgid "Greek (Leiden Aratea + Almagest)"
 msgstr "Grécka (Leidenská Aratea + Almagest)"
 
-#: skycultures/translations_skycultures.fab:48
+#: skycultures/translations_skycultures.fab:46
 msgctxt "sky culture"
 msgid "Hawaiian Starlines"
 msgstr "Havajské spojnice hviezd"
 
-#: skycultures/translations_skycultures.fab:50
+#: skycultures/translations_skycultures.fab:48
 msgctxt "sky culture"
 msgid "Inuit"
 msgstr "Inuitská"
 
-#: skycultures/translations_skycultures.fab:52
+#: skycultures/translations_skycultures.fab:50
 msgctxt "sky culture"
 msgid "Indian Vedic"
 msgstr "Indická védska"
 
-#: skycultures/translations_skycultures.fab:54
+#: skycultures/translations_skycultures.fab:52
 msgctxt "sky culture"
 msgid "Japanese Moon Stations"
 msgstr "Japonské mesačné zastavenia"
 
-#: skycultures/translations_skycultures.fab:56
+#: skycultures/translations_skycultures.fab:54
 msgctxt "sky culture"
 msgid "Kamilaroi/Euahlayi"
 msgstr "Kamilarojská/Euahlajiská"
 
-#: skycultures/translations_skycultures.fab:58
+#: skycultures/translations_skycultures.fab:56
 msgctxt "sky culture"
 msgid "Khoikhoi and San"
 msgstr "Chojchoj a San"
 
-#: skycultures/translations_skycultures.fab:60
+#: skycultures/translations_skycultures.fab:58
 msgctxt "sky culture"
 msgid "Korean"
 msgstr "Kórejská"
 
-#: skycultures/translations_skycultures.fab:62
+#: skycultures/translations_skycultures.fab:60
 msgctxt "sky culture"
 msgid "Lokono"
 msgstr "Lokonoská"
 
-#: skycultures/translations_skycultures.fab:64
+#: skycultures/translations_skycultures.fab:62
 msgctxt "sky culture"
 msgid "Macedonian"
 msgstr "Macedónska"
 
-#: skycultures/translations_skycultures.fab:66
+#: skycultures/translations_skycultures.fab:64
 msgctxt "sky culture"
 msgid "Maori"
 msgstr "Maorská"
 
-#: skycultures/translations_skycultures.fab:68
+#: skycultures/translations_skycultures.fab:66
 msgctxt "sky culture"
 msgid "Maya"
 msgstr "Mayská"
 
-#: skycultures/translations_skycultures.fab:70
+#: skycultures/translations_skycultures.fab:68
 msgctxt "sky culture"
 msgid "Modern"
 msgstr "Moderná"
+
+#: skycultures/translations_skycultures.fab:70
+msgctxt "sky culture"
+msgid "Modern (Chinese)"
+msgstr "Moderná (Čínska)"
 
 #: skycultures/translations_skycultures.fab:72
 msgctxt "sky culture"
@@ -30767,6 +30766,10 @@ msgid ""
 msgstr ""
 "U niektorých kalendárov by sme uvítali návrhy správneho formátovania ich "
 "skutočnými používateľmi."
+
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:227
+msgid "References"
+msgstr "Literatúra"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:228
 msgid "This plugin is based on:"
