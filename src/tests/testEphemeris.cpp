@@ -33,7 +33,7 @@
 #include "de441.hpp"
 #include "l12.h"
 #include "marssat.h"
-#include "htc20b.hpp"
+#include "htc20b.h"
 #include "gust86.h"
 
 #include <math.h>

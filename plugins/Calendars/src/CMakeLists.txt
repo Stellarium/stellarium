@@ -94,6 +94,17 @@ IF(ENABLE_TESTING)
 ENDIF(ENABLE_TESTING)
 
 ADD_LIBRARY(Calendars-static STATIC ${Calendars_SRCS} ${Calendars_RES_CXX} ${Calendars_UIS_H})
+if(ENABLE_PCH)
+    # prepend a few includes to each cpp file.
+     target_precompile_headers(Calendars-static PRIVATE
+          $<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/JulianCalendar.hpp>
+          $<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/GregorianCalendar.hpp>
+          $<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/Calendar.hpp>)
+     IF(CMAKE_VERSION VERSION_GREATER_EQUAL 3.19)
+          SET(CMAKE_PCH_INSTANTIATE_TEMPLATES ON)
+     ENDIF()
+ENDIF(ENABLE_PCH)
+
 IF(ENABLE_SCRIPT_QML)
 TARGET_LINK_LIBRARIES(Calendars-static Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Qml)
 ELSE()

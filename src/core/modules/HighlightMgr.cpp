@@ -166,12 +166,12 @@ void HighlightMgr::drawHighlights(StelCore* core, StelPainter& painter)
 
 void HighlightMgr::addPoint(const QString &ra, const QString &dec)
 {
-	Vec3d J2000;
+	Vec3d j2000;
 	double dRa = StelUtils::getDecAngle(ra);
 	double dDec = StelUtils::getDecAngle(dec);
-	StelUtils::spheToRect(dRa, dDec, J2000);
+	StelUtils::spheToRect(dRa, dDec, j2000);
 
-	highlightList.append(J2000);
+	highlightList.append(j2000);
 }
 
 void HighlightMgr::addPointRaDec(const QString& ra, const QString& dec)
