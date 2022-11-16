@@ -24,6 +24,16 @@ ADD_LIBRARY(TelescopeControl-static STATIC
     TelescopeClient.cpp
     ${TelescopeControl_RES_CXX}
     )
+if(ENABLE_PCH)
+    # prepend a few includes to each cpp file.
+     target_precompile_headers(TelescopeControl-static PRIVATE
+          $<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/TelescopeClient.hpp>
+          $<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/TelescopeControl.hpp>)
+     IF(CMAKE_VERSION VERSION_GREATER_EQUAL 3.19)
+          SET(CMAKE_PCH_INSTANTIATE_TEMPLATES ON)
+     ENDIF()
+ENDIF(ENABLE_PCH)
+
 
 SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES OUTPUT_NAME "TelescopeControl")
 
