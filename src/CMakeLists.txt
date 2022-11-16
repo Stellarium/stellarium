@@ -540,7 +540,8 @@ ENDIF()
 if(ENABLE_PCH)
     # prepend an include to each cpp file which itself includes the most frequently used includes.
 #          target_precompile_headers(stelMain PUBLIC core/VecMath.hpp core/StelUtils.h external/SpoutLibrary.h core/*.hpp core/planetsephems/*.h core/planetsephems/*.hpp core/modules/*.hpp gui/*.hpp)
-     target_precompile_headers(stelMain PUBLIC <string> stelMain_pch.hpp )
+     target_precompile_headers(stelMain PRIVATE
+          $<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/stelMain_pch.hpp>)
      IF(CMAKE_VERSION VERSION_GREATER_EQUAL 3.19)
           SET(CMAKE_PCH_INSTANTIATE_TEMPLATES ON)
      ENDIF()

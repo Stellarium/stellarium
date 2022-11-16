@@ -20,20 +20,48 @@
 #ifndef STELMAIN_PCH_HPP
 #define STELMAIN_PCH_HPP
 
-// Put most-used header files of the project here
-// ignore clangd warnings about unused headers!
+// Put most-used header files of the project here.
+// Obviously, ignore clangd warnings about unused headers!
 
+// The following list was found with a tool taken from https://github.com/KDAB/kdabtv/tree/master/Qt-Widgets-and-more/compileTime
+// I list headers counted from a plugin-free build. The headers here are used 40 or more times, sorted from over 200 uses downward.
+// It seems that inclusion of some headers is actually bad for build time, these are commented away again. More teting or other compiler combinations may have slightly other results.
+
+// Base time was 284s from first test without PCH
+#include "StelApp.hpp"
 #include<QDebug>
-#include<QString>
-#include<QObject>
+#include "StelUtils.hpp"
+//#include<QString>
+#include "StelCore.hpp"
+//#include<QObject>
+#include "StelTranslator.hpp"
+#include "StelModuleMgr.hpp"
 #include<QtGlobal>
-#include<memory>
+//#include<memory>
 #include<QSettings>
 #include<QVariant>
 #include<QStringList>
 #include<QDir>
+#include "StelFileMgr.hpp"
+#include "VecMath.hpp"
+//#include "StelPainter.hpp"
 #include<QFile>
+//#include "StelProjector.hpp"
 #include<QList>
-#include<QRegularExpression>
+#include "StelGui.hpp"
+//#include<QRegularExpression>
+#include "StelObjectMgr.hpp"
+#include "StelDialog.hpp"
+// 166s so far with this set.
+//#include "StelModule.hpp"
+//#include<QMap>
+//#include "StelLocaleMgr.hpp"
+//#include "StelObject.hpp"
+//#include "Planet.hpp"
+//#include<cmath>
+//#include<QDateTime>
+//#include "SolarSystem.hpp"
+//#include<QTimer>
+//#include<QFont>
 
 #endif // STELMAIN_PCH_HPP
