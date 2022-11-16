@@ -163,12 +163,12 @@ void CustomObjectMgr::addCustomObject(QString designation, Vec3d coordinates, bo
 
 void CustomObjectMgr::addCustomObject(QString designation, const QString &ra, const QString &dec, bool isVisible)
 {
-	Vec3d J2000;
+	Vec3d j2000;
 	double dRa = StelUtils::getDecAngle(ra);
 	double dDec = StelUtils::getDecAngle(dec);
-	StelUtils::spheToRect(dRa,dDec,J2000);
+	StelUtils::spheToRect(dRa,dDec,j2000);
 
-	addCustomObject(designation, J2000, isVisible);
+	addCustomObject(designation, j2000, isVisible);
 }
 
 void CustomObjectMgr::addCustomObjectRaDec(QString designation, const QString &ra, const QString &dec, bool isVisible)
