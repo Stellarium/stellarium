@@ -42,6 +42,15 @@
 
 #include <QDebug>
 #include <QSettings>
+#include <QOpenGLBuffer>
+#include <QOpenGLShaderProgram>
+#include <QOpenGLVertexArrayObject>
+
+namespace
+{
+constexpr int FS_QUAD_COORDS_PER_VERTEX = 2;
+constexpr int SKY_VERTEX_ATTRIB_INDEX = 0;
+}
 
 // Class which manages the displaying of the Zodiacal Light
 ZodiacalLight::ZodiacalLight()
@@ -52,7 +61,6 @@ ZodiacalLight::ZodiacalLight()
 	, intensityMinFov(0.25) // when zooming in further, Z.L. is no longer visible.
 	, intensityMaxFov(2.5) // when zooming out further, Z.L. is fully visible (when enabled).
 	, lastJD(-1.0E6)
-	, vertexArray()
 {
 	setObjectName("ZodiacalLight");
 	fader = new LinearFader();
@@ -63,9 +71,6 @@ ZodiacalLight::~ZodiacalLight()
 {
 	delete fader;
 	fader = Q_NULLPTR;
-	
-	delete vertexArray;
-	vertexArray = Q_NULLPTR;
 }
 
 void ZodiacalLight::init()
@@ -73,24 +78,74 @@ void ZodiacalLight::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
+	auto& gl = *QOpenGLContext::currentContext()->functions();
+
 	// The Paper describes brightness values over the complete sky, so also the texture covers the full sky. 
 	// The data hole around the sun has been filled by useful values.
-	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/zodiacallight_2004.png");
+	mainTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/zodiacallight_2004.png");
+	mainTex->bind(0);
+	gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	mainTex->release();
 	setFlagShow(conf->value("astro/flag_zodiacal_light", true).toBool());
 	setIntensity(conf->value("astro/zodiacal_light_intensity",1.).toDouble());
 
-	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.,1.,60,30,1, true)); // 6x6 degree quads
-	vertexArray->colors.resize(vertexArray->vertex.length());
-	vertexArray->colors.fill(color);
+	vbo.reset(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer));
+	vbo->create();
+	vbo->bind();
+	const GLfloat vertices[]=
+	{
+		// full screen quad
+		-1, -1,
+		 1, -1,
+		-1,  1,
+		 1,  1,
+	};
+	gl.glBufferData(GL_ARRAY_BUFFER, sizeof vertices, vertices, GL_STATIC_DRAW);
+	vbo->release();
 
-	eclipticalVertices=vertexArray->vertex;
-	// This vector is used to keep original vertices, these will be modified in update().
+	vao.reset(new QOpenGLVertexArrayObject);
+	vao->create();
+	bindVAO();
+	setupCurrentVAO();
+	releaseVAO();
+
+	ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(0);
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_ZodiacalLight", displayGroup, N_("Zodiacal Light"), "flagZodiacalLightDisplayed", "Ctrl+Shift+Z");
 
 	StelCore* core=StelApp::getInstance().getCore();
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(handleLocationChanged(StelLocation)));
+}
+
+void ZodiacalLight::setupCurrentVAO()
+{
+	auto& gl = *QOpenGLContext::currentContext()->functions();
+	vbo->bind();
+	gl.glVertexAttribPointer(0, FS_QUAD_COORDS_PER_VERTEX, GL_FLOAT, false, 0, 0);
+	vbo->release();
+	gl.glEnableVertexAttribArray(SKY_VERTEX_ATTRIB_INDEX);
+}
+
+void ZodiacalLight::bindVAO()
+{
+	if(vao->isCreated())
+		vao->bind();
+	else
+		setupCurrentVAO();
+}
+
+void ZodiacalLight::releaseVAO()
+{
+	if(vao->isCreated())
+	{
+		vao->release();
+	}
+	else
+	{
+		auto& gl = *QOpenGLContext::currentContext()->functions();
+		gl.glDisableVertexAttribArray(SKY_VERTEX_ATTRIB_INDEX);
+	}
 }
 
 void ZodiacalLight::handleLocationChanged(const StelLocation &loc)
@@ -123,7 +178,6 @@ void ZodiacalLight::update(double deltaTime)
 		// The ZL texture has its bright spot in the winter solstice point.
 		// The computation here returns solar longitude for Earth, and antilongitude for the Moon, therefore we either add or subtract pi/2.
 
-		double lambdaSun;
 		if (core->getCurrentLocation().planetName=="Earth")
 		{
 			double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE());
@@ -138,12 +192,6 @@ void ZodiacalLight::update(double deltaTime)
 			lambdaSun=atan2(obsPos[1], obsPos[0])  -M_PI*0.5;
 		}
 
-		Mat4d rotMat=Mat4d::zrotation(lambdaSun);
-		for (int i=0; i<eclipticalVertices.size(); ++i)
-		{
-			Vec3d tmp=eclipticalVertices.at(i);
-			vertexArray->vertex.replace(i, rotMat * tmp);
-		}
 		lastJD=currentJD;
 	}
 }
@@ -180,7 +228,109 @@ void ZodiacalLight::draw(StelCore* core)
 	// Test if we are not on Earth. Texture would not fit, so don't draw then.
 	if (! QString("Earth Moon").contains(core->getCurrentLocation().planetName)) return;
 
-	StelSkyDrawer *drawer=core->getSkyDrawer();
+	// The ZL is best observed from Earth only. On the Moon, we must be happy with ZL along the J2000 ecliptic. (Sorry for LP:1628765, I don't find a general solution.)
+	StelProjector::ModelViewTranformP transfo;
+	if (core->getCurrentLocation().planetName == "Earth")
+		transfo = core->getObservercentricEclipticOfDateModelViewTransform();
+	else
+		transfo = core->getObservercentricEclipticJ2000ModelViewTransform();
+
+	const StelProjectorP projector = core->getProjection(transfo);
+	const auto drawer=core->getSkyDrawer();
+	const auto& extinction=drawer->getExtinction();
+
+	if(!renderProgram || !prevProjector || !projector->isSameProjection(*prevProjector))
+	{
+		renderProgram.reset(new QOpenGLShaderProgram);
+		prevProjector = projector;
+
+		const auto vert =
+			StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) +
+			R"(
+ATTRIBUTE highp vec3 vertex;
+VARYING highp vec3 ndcPos;
+void main()
+{
+	gl_Position = vec4(vertex, 1.);
+	ndcPos = vertex;
+}
+)";
+		bool ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Vertex, vert);
+		if(!renderProgram->log().isEmpty())
+			qWarning().noquote() << "MilkyWay: Warnings while compiling vertex shader:\n" << renderProgram->log();
+		if(!ok) return;
+
+		const auto frag =
+			StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
+			projector->getUnProjectShader() +
+			extinction.getForwardTransformShader() +
+			makeDitheringShader()+
+			R"(
+VARYING highp vec3 ndcPos;
+uniform sampler2D mainTex;
+uniform vec3 brightness;
+uniform mat4 projectionMatrixInverse;
+uniform bool extinctionEnabled;
+uniform float bortleIntensity;
+uniform float lambdaSun;
+void main(void)
+{
+	const float PI = 3.14159265;
+	vec4 winPos = projectionMatrixInverse * vec4(ndcPos, 1);
+	bool ok = false;
+	vec3 modelPos = unProject(winPos.x, winPos.y, ok).xyz;
+	if(!ok)
+	{
+		FRAG_COLOR = vec4(0);
+		return;
+	}
+	modelPos = normalize(modelPos);
+	float modelZenithAngle = acos(-modelPos.z);
+	float modelLongitude = atan(modelPos.x, modelPos.y) + lambdaSun;
+	vec2 texc = vec2(modelLongitude/(2.*PI), modelZenithAngle/PI);
+
+	float extinctionFactor;
+	if(extinctionEnabled)
+	{
+		vec3 worldPos = winPosToWorldPos(winPos.x, winPos.y, ok);
+		vec3 altAzViewDir = worldPosToAltAzPos(worldPos);
+		float mag = extinctionMagnitude(altAzViewDir);
+		extinctionFactor=pow(0.4, mag) * (1.1-bortleIntensity*0.1); // Drop of one magnitude: factor 2.5 or 40%, and further reduced by light pollution.
+	}
+	else
+	{
+		extinctionFactor = 1.;
+	}
+
+    vec4 color = texture2D(mainTex, texc)*vec4(brightness,1)*extinctionFactor;
+	FRAG_COLOR = dither(color);
+}
+)";
+		ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, frag);
+		if(!renderProgram->log().isEmpty())
+			qWarning().noquote() << "ZodiacalLight: Warnings while compiling fragment shader:\n" << renderProgram->log();
+
+		if(!ok) return;
+
+		renderProgram->bindAttributeLocation("vertex", SKY_VERTEX_ATTRIB_INDEX);
+
+		if(!StelPainter::linkProg(renderProgram.get(), "ZodiacalLight render program"))
+			return;
+
+		renderProgram->bind();
+		shaderVars.mainTex          = renderProgram->uniformLocation("mainTex");
+		shaderVars.lambdaSun        = renderProgram->uniformLocation("lambdaSun");
+		shaderVars.brightness       = renderProgram->uniformLocation("brightness");
+		shaderVars.rgbMaxValue      = renderProgram->uniformLocation("rgbMaxValue");
+		shaderVars.ditherPattern    = renderProgram->uniformLocation("ditherPattern");
+		shaderVars.bortleIntensity  = renderProgram->uniformLocation("bortleIntensity");
+		shaderVars.extinctionEnabled= renderProgram->uniformLocation("extinctionEnabled");
+		shaderVars.projectionMatrixInverse = renderProgram->uniformLocation("projectionMatrixInverse");
+		renderProgram->release();
+	}
+	if(!renderProgram || !renderProgram->isLinked())
+		return;
+
 	int bortle=drawer->getBortleScaleIndex();
 	// Test for light pollution, return if too bad.
 	if ( (drawer->getFlagHasAtmosphere()) && (bortle > 5) ) return;
@@ -189,17 +339,9 @@ void ZodiacalLight::draw(StelCore* core)
 	const float nelm = StelCore::luminanceToNELM(drawer->getLightPollutionLuminance());
 	const float bortleIntensity = 1.f+(15.5f-2*nelm)*atmFadeIntensity; // smoothed Bortle index moderated by atmosphere fader.
 
-	// The ZL is best observed from Earth only. On the Moon, we must be happy with ZL along the J2000 ecliptic. (Sorry for LP:1628765, I don't find a general solution.)
-	StelProjector::ModelViewTranformP transfo;
-	if (core->getCurrentLocation().planetName == "Earth")
-		transfo = core->getObservercentricEclipticOfDateModelViewTransform();
-	else
-		transfo = core->getObservercentricEclipticJ2000ModelViewTransform();
-
-	const StelProjectorP prj = core->getProjection(transfo);
 	StelToneReproducer* eye = core->getToneReproducer();
 
-	Q_ASSERT(tex);	// A texture must be loaded before calling this
+	Q_ASSERT(mainTex);	// A texture must be loaded before calling this
 
 	// Default ZL color is white (sunlight), or whatever has been set e.g. by script.
 	Vec3f c = color;
@@ -236,41 +378,37 @@ void ZodiacalLight::draw(StelCore* core)
 	if (c[1]<0) c[1]=0;
 	if (c[2]<0) c[2]=0;
 
+	renderProgram->bind();
+
 	const bool withExtinction=(drawer->getFlagHasAtmosphere() && drawer->getExtinction().getExtinctionCoefficient()>=0.01f);
 
-	if ((withExtinction) && (core->getCurrentLocation().planetName=="Earth")) // If anybody switches on atmosphere on the moon, there will be no extinction.
-	{
-		// We must process the vertices to find geometric altitudes in order to compute vertex colors.
-		const Extinction& extinction=drawer->getExtinction();
-		const double epsDate=getPrecessionAngleVondrakCurrentEpsilonA();
-		vertexArray->colors.clear();
+	renderProgram->setUniformValue(shaderVars.extinctionEnabled, withExtinction);
+	renderProgram->setUniformValue(shaderVars.bortleIntensity, bortleIntensity);
 
-		for (int i=0; i<vertexArray->vertex.size(); ++i)
-		{
-			Vec3d eclPos=vertexArray->vertex.at(i);
-			Q_ASSERT(fabs(eclPos.normSquared()-1.0) < 0.001);
-			double ecLon, ecLat, ra, dec;
-			StelUtils::rectToSphe(&ecLon, &ecLat, eclPos);
-			StelUtils::eclToEqu(ecLon, ecLat, epsDate, &ra, &dec);
-			Vec3d eqPos;
-			StelUtils::spheToRect(ra, dec, eqPos);
-			Vec3d vertAltAz=core->equinoxEquToAltAz(eqPos, StelCore::RefractionOn);
-			Q_ASSERT(fabs(vertAltAz.normSquared()-1.0) < 0.001);
+	const int mainTexSampler = 0;
+	mainTex->bind(mainTexSampler);
+	renderProgram->setUniformValue(shaderVars.mainTex, mainTexSampler);
 
-			float oneMag=0.0f;
-			extinction.forward(vertAltAz, &oneMag);
-			float extinctionFactor=std::pow(0.4f , oneMag) * (1.1f-bortleIntensity*0.1f);// Drop of one magnitude: factor 2.5 or 40%, and further reduced by light pollution.
-			Vec3f thisColor=Vec3f(c[0]*extinctionFactor, c[1]*extinctionFactor, c[2]*extinctionFactor);
-			vertexArray->colors.append(thisColor);
-		}
-	}
-	else
-		vertexArray->colors.fill(Vec3f(c[0], c[1], c[2]));
+	const int ditherTexSampler = 1;
+	ditherPatternTex->bind(ditherTexSampler);
+	renderProgram->setUniformValue(shaderVars.ditherPattern, ditherTexSampler);
 
-	StelPainter sPainter(prj);
-	sPainter.setCullFace(true);
-	sPainter.setBlending(true, GL_ONE, GL_ONE);
-	tex->bind();
-	sPainter.drawStelVertexArray(*vertexArray);
-	sPainter.setCullFace(false);
+	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, projector->getProjectionMatrix().toQMatrix().inverted());
+	renderProgram->setUniformValue(shaderVars.brightness, c.toQVector3D());
+	renderProgram->setUniformValue(shaderVars.lambdaSun, GLfloat(lambdaSun));
+	renderProgram->setUniformValue(shaderVars.rgbMaxValue, calcRGBMaxValue(core->getDitheringMode()).toQVector3D());
+
+	projector->setUnProjectUniforms(*renderProgram);
+	extinction.setForwardTransformUniforms(*renderProgram);
+
+	auto& gl = *QOpenGLContext::currentContext()->functions();
+
+	gl.glEnable(GL_CULL_FACE);
+	gl.glEnable(GL_BLEND);
+	gl.glBlendFunc(GL_ONE,GL_ONE); // allow colored sky background
+	bindVAO();
+	gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	releaseVAO();
+	gl.glDisable(GL_BLEND);
+	gl.glDisable(GL_CULL_FACE);
 }

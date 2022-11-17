@@ -89,6 +89,9 @@ ELSE()
          SET(QT_VERSION_MAJOR 5)
      ENDIF()
 ENDIF()
+# This will tell QXlsx to use the same Qt version (5 vs 6) as we do.
+# https://github.com/Stellarium/stellarium/pull/2849
+LIST(PREPEND CMAKE_PREFIX_PATH ${Qt${QT_VERSION_MAJOR}_DIR})
 # TODO: Check real minimal supported version of GPSD API
 SET(MINIMAL_GPS_API_VERSION "6.0")
 

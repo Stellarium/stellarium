@@ -537,6 +537,9 @@ public slots:
 	//! Set aberration factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
 	void setAberrationFactor(double factor) { if (!fuzzyEquals(aberrationFactor, factor)) { aberrationFactor=qBound(0.,factor, 5.); emit aberrationFactorChanged(factor); }}
 
+	QByteArray getAberrationShader() const;
+	void setAberrationUniforms(QOpenGLShaderProgram& program) const;
+
 	//! @return whether topocentric coordinates are currently used.
 	bool getUseTopocentricCoordinates() const {return flagUseTopocentricCoordinates;}
 	//! Set whether you want computation and simulation of nutation (a slight wobble of Earth's axis, just a few arcseconds).

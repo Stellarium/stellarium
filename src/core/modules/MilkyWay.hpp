@@ -22,8 +22,11 @@
 
 #include "StelModule.hpp"
 #include "VecMath.hpp"
+#include "StelCore.hpp"
 #include "StelTextureTypes.hpp"
 
+class QOpenGLShaderProgram;
+class QOpenGLVertexArrayObject;
 //! @class MilkyWay 
 //! Manages the displaying of the Milky Way.
 class MilkyWay : public StelModule
@@ -102,7 +105,12 @@ signals:
 	void colorChanged(Vec3f color);
 
 private:
-	StelTextureSP tex;
+	void setupCurrentVAO();
+	void bindVAO();
+	void releaseVAO();
+
+private:
+	StelTextureSP mainTex;
 	Vec3f color; // global color
 	double intensity;
 	double intensityFovScale; // like for constellations: reduce brightness when zooming in.
@@ -111,8 +119,23 @@ private:
 	class LinearFader* fader;
 	double saturation = 1.0;
 
-	struct StelVertexArray* vertexArray;
-	struct StelVertexArray* vertexArrayNoAberration;
+	struct
+	{
+		int mainTex;
+		int brightness;
+		int saturation;
+		int rgbMaxValue;
+		int ditherPattern;
+		int bortleIntensity;
+		int extinctionEnabled;
+		int projectionMatrixInverse;
+	} shaderVars;
+
+	std::unique_ptr<QOpenGLVertexArrayObject> vao;
+	std::unique_ptr<QOpenGLBuffer> vbo;
+	StelTextureSP ditherPatternTex;
+	StelProjectorP prevProjector;
+	std::unique_ptr<QOpenGLShaderProgram> renderProgram;
 };
 
 #endif // MILKYWAY_HPP

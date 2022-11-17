@@ -24,9 +24,13 @@
 #include <QVector>
 #include "StelModule.hpp"
 #include "VecMath.hpp"
+#include "StelCore.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelLocation.hpp"
 #include "StelPropertyMgr.hpp"
+
+class QOpenGLShaderProgram;
+class QOpenGLVertexArrayObject;
 
 //! @class ZodiacalLight 
 //! Manages the displaying of the Zodiacal Light. The brightness values follow the paper:
@@ -114,6 +118,11 @@ public slots:
 	//! Gets whether the Zodiacal Light is displayed
 	bool getFlagShow(void) const;
 
+private:
+	void setupCurrentVAO();
+	void bindVAO();
+	void releaseVAO();
+
 private slots:
 	//! connect to StelCore to force-update ZL.
 	void handleLocationChanged(const StelLocation &loc);
@@ -125,7 +134,7 @@ signals:
 	
 private:
 	StelPropertyMgr* propMgr;
-	StelTextureSP tex;
+	StelTextureSP mainTex;
 	Vec3f color; // global color
 	double intensity;
 	double intensityFovScale; // like for constellations: reduce brightness when zooming in.
@@ -133,9 +142,24 @@ private:
 	double intensityMaxFov;
 	class LinearFader* fader;
 	double lastJD; // keep date of last computation. Position will be updated only if far enough away from last computation.
+	double lambdaSun; // angle of rotation around z to account for position of current planet in orbit
 
-	struct StelVertexArray* vertexArray;
-	QVector<Vec3d> eclipticalVertices;
+	struct
+	{
+		int mainTex;
+		int lambdaSun;
+		int brightness;
+		int rgbMaxValue;
+		int ditherPattern;
+		int bortleIntensity;
+		int extinctionEnabled;
+		int projectionMatrixInverse;
+	} shaderVars;
+	std::unique_ptr<QOpenGLVertexArrayObject> vao;
+	std::unique_ptr<QOpenGLBuffer> vbo;
+	StelTextureSP ditherPatternTex;
+	StelProjectorP prevProjector;
+	std::unique_ptr<QOpenGLShaderProgram> renderProgram;
 };
 
 #endif // ZODIACALLIGHT_HPP

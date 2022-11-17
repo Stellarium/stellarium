@@ -22,6 +22,8 @@
 
 #include <limits>
 
+#include <QOpenGLShaderProgram>
+
 QString StelProjectorPerspective::getNameI18() const
 {
 	return q_("Perspective");
@@ -81,6 +83,58 @@ float StelProjectorPerspective::deltaZoom(float fov) const
 	return vsf / (1.f+vsf*vsf);
 }
 
+QByteArray StelProjectorPerspective::getForwardTransformShader() const
+{
+	return modelViewTransform->getForwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorForwardTransform(vec3 v)
+{
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+	const float FLT_MAX = 3.4028235e38;
+
+	float r = length(v);
+	if(v[2] < 0.)
+	{
+		v[0] *= -widthStretch/v[2];
+		v[1] /= -v[2];
+		v[2] = r;
+	}
+	else if(v[2] > 0.) {
+		v[0] *= widthStretch/v[2];
+		v[1] /= v[2];
+		v[2] = -FLT_MAX;
+	}
+	else
+	{
+		v[0] = FLT_MAX;
+		v[1] = FLT_MAX;
+		v[2] = -FLT_MAX;
+	}
+
+	return v;
+}
+)";
+}
+
+QByteArray StelProjectorPerspective::getBackwardTransformShader() const
+{
+	return modelViewTransform->getBackwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorBackwardTransform(vec3 v, out bool ok)
+{
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	v[0] /= widthStretch;
+	v[2] = sqrt(1.0/(1.0+v[0]*v[0]+v[1]*v[1]));
+	v[0] *= v[2];
+	v[1] *= v[2];
+	v[2] = -v[2];
+	ok = true;
+
+	return v;
+}
+)";
+}
 
 QString StelProjectorEqualArea::getNameI18() const
 {
@@ -140,6 +194,55 @@ float StelProjectorEqualArea::deltaZoom(float fov) const
 	return fov;
 }
 
+QByteArray StelProjectorEqualArea::getForwardTransformShader() const
+{
+	return modelViewTransform->getForwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorForwardTransform(vec3 v)
+{
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	float r = length(v);
+	float f = sqrt(2./(r*(r-v[2])));
+	v[0] *= f*widthStretch;
+	v[1] *= f;
+	v[2] = r;
+	return v;
+}
+)";
+}
+
+QByteArray StelProjectorEqualArea::getBackwardTransformShader() const
+{
+	return modelViewTransform->getBackwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorBackwardTransform(vec3 v, out bool ok)
+{
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	v[0] /= widthStretch;
+	float dq = v[0]*v[0] + v[1]*v[1];
+	float l = 1.0 - 0.25*dq;
+	if (l < 0.)
+	{
+		v[0] = 0.0;
+		v[1] = 0.0;
+		v[2] = 1.0;
+		ok = false;
+	}
+	else
+	{
+		l = sqrt(l);
+		v[0] *= l;
+		v[1] *= l;
+		v[2] = 0.5*dq - 1.0;
+		ok = true;
+	}
+	return v;
+}
+)";
+}
+
 QString StelProjectorStereographic::getNameI18() const
 {
 	return q_("Stereographic");
@@ -192,6 +295,51 @@ float StelProjectorStereographic::deltaZoom(float fov) const
 	return 4.f*vsf / (4.f+vsf*vsf);
 }
 
+QByteArray StelProjectorStereographic::getForwardTransformShader() const
+{
+	return modelViewTransform->getForwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorForwardTransform(vec3 v)
+{
+	const float FLT_MAX = 3.4028235e38;
+	const float FLT_MIN = 1.1754943508e-38;
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	float r = length(v);
+	float h = 0.5*(r-v[2]);
+	if (h <= 0.) {
+		v[0] = FLT_MAX;
+		v[1] = FLT_MAX;
+		v[2] = -FLT_MIN;
+		return v;
+	}
+	float f = 1. / h;
+	v[0] *= f*widthStretch;
+	v[1] *= f;
+	v[2] = r;
+	return v;
+}
+)";
+}
+
+QByteArray StelProjectorStereographic::getBackwardTransformShader() const
+{
+	return modelViewTransform->getBackwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorBackwardTransform(vec3 v, out bool ok)
+{
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	v[0] /= widthStretch;
+	float lqq = 0.25*(v[0]*v[0] + v[1]*v[1]);
+	v[2] = lqq - 1.0;
+	v *= 1.0 / (lqq + 1.0);
+	ok = true;
+
+	return v;
+}
+)";
+}
 
 
 
@@ -254,6 +402,61 @@ float StelProjectorFisheye::deltaZoom(float fov) const
 	return fov;
 }
 
+QByteArray StelProjectorFisheye::getForwardTransformShader() const
+{
+	return modelViewTransform->getForwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorForwardTransform(vec3 v)
+{
+	const float FLT_MAX = 3.4028235e38;
+	const float FLT_MIN = 1.1754943508e-38;
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	float rq1 = v[0]*v[0] + v[1]*v[1];
+	if (rq1 > 0.) {
+		float h = sqrt(rq1);
+		float f = atan(h,-v[2]) / h;
+		v[0] *= f*widthStretch;
+		v[1] *= f;
+		v[2] = sqrt(rq1 + v[2]*v[2]);
+		return v;
+	}
+	if (v[2] < 0.) {
+		v[0] = 0.;
+		v[1] = 0.;
+		v[2] = 1.;
+		return v;
+	}
+	v[0] = FLT_MAX;
+	v[1] = FLT_MAX;
+	v[2] = FLT_MIN;
+	return v;
+}
+)";
+}
+
+QByteArray StelProjectorFisheye::getBackwardTransformShader() const
+{
+	return modelViewTransform->getBackwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorBackwardTransform(vec3 v, out bool ok)
+{
+	const float PI = 3.14159265;
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	v[0] /= widthStretch;
+	float a = sqrt(v[0]*v[0]+v[1]*v[1]);
+	float f = (a > 0.0) ? (sin(a) / a) : 1.0;
+	v[0] *= f;
+	v[1] *= f;
+	v[2] = -cos(a);
+	ok = a<PI;
+
+	return v;
+}
+)";
+}
+
 
 
 QString StelProjectorHammer::getNameI18() const
@@ -309,6 +512,53 @@ float StelProjectorHammer::deltaZoom(float fov) const
 	return fov;
 }
 
+QByteArray StelProjectorHammer::getForwardTransformShader() const
+{
+	return modelViewTransform->getForwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorForwardTransform(vec3 v)
+{
+	const float M_SQRT2 = 1.41421356;
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	// Hammer Aitoff
+	float r = length(v);
+	float alpha = atan(v[0],-v[2]);
+	float cosDelta = sqrt(1.-v[1]*v[1]/(r*r));
+	float z = sqrt(1.+cosDelta*cos(alpha/2.));
+	v[0] = 2.*M_SQRT2*cosDelta*sin(alpha/2.)/z * widthStretch;
+	v[1] = M_SQRT2*v[1]/r/z;
+	v[2] = r;
+
+	return v;
+}
+)";
+}
+
+QByteArray StelProjectorHammer::getBackwardTransformShader() const
+{
+	return modelViewTransform->getBackwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorBackwardTransform(vec3 v, out bool ok)
+{
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	v[0] /= widthStretch;
+	float zsq = 1.-0.25*0.25*v[0]*v[0]-0.5*0.5*v[1]*v[1];
+	float z = zsq<0. ? 0. : sqrt(zsq);
+	ok = 0.25*v[0]*v[0]+v[1]*v[1]<2.0; // This is stolen from glunatic
+	float alpha = 2.*atan(z*v[0],(2.*(2.*zsq-1.)));
+	float delta = asin(v[1]*z);
+	float cd = cos(delta);
+	v[2] = - cd * cos(alpha);
+	v[0] = cd * sin(alpha);
+	v[1] = v[1]*z;
+
+	return v;
+}
+)";
+}
+
 
 
 QString StelProjectorCylinder::getNameI18() const
@@ -358,6 +608,49 @@ float StelProjectorCylinder::viewScalingFactorToFov(float vsf) const
 float StelProjectorCylinder::deltaZoom(float fov) const
 {
 	return fov;
+}
+
+QByteArray StelProjectorCylinder::getForwardTransformShader() const
+{
+	return modelViewTransform->getForwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorForwardTransform(vec3 v)
+{
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	float r = length(v);
+	bool rval = (-r < v[1] && v[1] < r);
+	float alpha = atan(v[0],-v[2]);
+	float delta = asin(v[1]/r);
+	v[0] = alpha*widthStretch;
+	v[1] = delta;
+	v[2] = r;
+
+	return v;
+}
+)";
+}
+
+QByteArray StelProjectorCylinder::getBackwardTransformShader() const
+{
+	return modelViewTransform->getBackwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorBackwardTransform(vec3 v, out bool ok)
+{
+	const float PI = 3.14159265;
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	v[0] /= widthStretch;
+	ok = v[1]<PI/2. && v[1]>-PI/2. && v[0]>-PI && v[0]<PI;
+	float cd = cos(v[1]);
+	float alpha=v[0];
+	v[2] = - cd * cos(alpha);
+	v[0] = cd * sin(alpha);
+	v[1] = sin(v[1]);
+
+	return v;
+}
+)";
 }
 
 QString StelProjectorMercator::getNameI18() const
@@ -412,6 +705,50 @@ float StelProjectorMercator::deltaZoom(float fov) const
 	return fov;
 }
 
+QByteArray StelProjectorMercator::getForwardTransformShader() const
+{
+	return modelViewTransform->getForwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorForwardTransform(vec3 v)
+{
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	float r = length(v);
+	bool rval = (-r < v[1] && v[1] < r);
+	float sin_delta = v[1]/r;
+	v[0] = atan(v[0],-v[2]) * widthStretch;
+	v[1] = 0.5*log((1.+sin_delta)/(1.-sin_delta));
+	v[2] = r;
+
+	return v;
+}
+)";
+}
+
+QByteArray StelProjectorMercator::getBackwardTransformShader() const
+{
+	return modelViewTransform->getBackwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorBackwardTransform(vec3 v, out bool ok)
+{
+	const float PI = 3.14159265;
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	v[0] /= widthStretch;
+	ok = v[0]>-PI && v[0]<PI;
+	float E = exp(v[1]);
+	float h = E*E;
+	float h1 = 1.0/(1.0+h);
+	float sin_delta = (h-1.0)*h1;
+	float cos_delta = 2.0*E*h1;
+	v[2] = - cos_delta * cos(v[0]);
+	v[0] = cos_delta * sin(v[0]);
+	v[1] = sin_delta;
+
+	return v;
+}
+)";
+}
 
 QString StelProjectorOrthographic::getNameI18() const
 {
@@ -465,6 +802,51 @@ float StelProjectorOrthographic::deltaZoom(float fov) const
 	return fov;
 }
 
+QByteArray StelProjectorOrthographic::getForwardTransformShader() const
+{
+	return modelViewTransform->getForwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorForwardTransform(vec3 v)
+{
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	float r = length(v);
+	float h = 1./r;
+	v[0] *= h * widthStretch;
+	v[1] *= h;
+	v[2] = r;
+	return v;
+}
+)";
+}
+
+QByteArray StelProjectorOrthographic::getBackwardTransformShader() const
+{
+	return modelViewTransform->getBackwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorBackwardTransform(vec3 v, out bool ok)
+{
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	v[0] /= widthStretch;
+	float dq = v[0]*v[0] + v[1]*v[1];
+	float h = 1.0 - dq;
+	if (h < 0.) {
+		h = 1.0/sqrt(dq);
+		v[0] *= h;
+		v[1] *= h;
+		v[2] = 0.0;
+		ok = false;
+		return v;
+	}
+	v[2] = -sqrt(h);
+
+	ok = true;
+	return v;
+}
+)";
+}
+
 QString StelProjectorSinusoidal::getNameI18() const
 {
 	return q_("Sinusoidal");
@@ -507,6 +889,59 @@ bool StelProjectorSinusoidal::backward(Vec3d &v) const
 	return rval;
 }
 
+QByteArray StelProjectorSinusoidal::getForwardTransformShader() const
+{
+	return modelViewTransform->getForwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorForwardTransform(vec3 v)
+{
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	float r = length(v);
+	bool rval = (-r < v[1] && v[1] < r);
+	float alpha = atan(v[0],-v[2]);
+	float delta = asin(v[1]/r);
+	v[0] = alpha*cos(delta) * widthStretch;
+	v[1] = delta;
+	v[2] = r;
+
+	return v;
+}
+)";
+}
+
+QByteArray StelProjectorSinusoidal::getBackwardTransformShader() const
+{
+	return modelViewTransform->getBackwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+vec3 projectorBackwardTransform(vec3 v, out bool ok)
+{
+	const float PI = 3.14159265;
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	v[0] /= widthStretch;
+	bool rval = v[1]<PI/2. && v[1]>-PI/2. && v[0]>-PI && v[0]<PI;
+	float cd = cos(v[1]);
+	float pcd = v[0]/cd;
+	if (v[0]<-PI*cd || v[0]>PI*cd)
+	{
+		v[0] = -cd;
+		v[1] = 1.0;
+		// FIXME: It is unclear what happens to v[2] here.
+		v = normalize(v); // make sure the length test in Atmosphere.cpp work.
+		ok = false;
+		return v;
+	}
+	v[2] = -cd * cos(pcd);
+	v[0] = cd * sin(pcd);
+	v[1] = sin(v[1]);
+
+	ok = true;
+	return v;
+}
+)";
+}
+
 QString StelProjectorMiller::getNameI18() const
 {
 	return q_("Miller cylindrical");
@@ -541,6 +976,69 @@ bool StelProjectorMiller::backward(Vec3d &v) const
 	v[1] = sin(lat);
 	v[2]= -cos_lat*cos(lng);
 	return rval;
+}
+
+QByteArray StelProjectorMiller::getForwardTransformShader() const
+{
+	return modelViewTransform->getForwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+
+float asinh(float x)
+{
+	return log(x+sqrt(1.+x*x));
+}
+
+vec3 projectorForwardTransform(vec3 v)
+{
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	float r = length(v);
+	bool rval = (-r < v[1] && v[1] < r);
+	float sin_delta = v[1]/r;
+	float delta=asin(sin_delta);
+	v[0] = atan(v[0],-v[2]) * widthStretch;
+	v[1] = 1.25*asinh(tan(0.8*delta));
+	v[2] = r;
+
+	return v;
+}
+)";
+}
+
+QByteArray StelProjectorMiller::getBackwardTransformShader() const
+{
+	return modelViewTransform->getBackwardTransformShader() + R"(
+uniform float PROJECTOR_FWD_widthStretch;
+
+float asinh(float x)
+{
+	return log(x+sqrt(1.+x*x));
+}
+
+float sinh(float x)
+{
+	float ex = exp(x);
+	return (ex*ex-1.)/(2.*ex);
+}
+
+vec3 projectorBackwardTransform(vec3 v, out bool ok)
+{
+	const float PI = 3.14159265;
+	float widthStretch = PROJECTOR_FWD_widthStretch;
+
+	v[0] /= widthStretch;
+	float yMax=1.25*asinh(tan(PI*2.0/5.0));
+	ok = v[1]<yMax && v[1]>-yMax && v[0]>-PI && v[0]<PI;
+	float lat = 1.25*atan(sinh(0.8*v[1]));
+	float lng = v[0];
+	float cos_lat=cos(lat);
+	v[0] = cos_lat*sin(lng);
+	v[1] = sin(lat);
+	v[2]= -cos_lat*cos(lng);
+
+	return v;
+}
+)";
 }
 
 QString StelProjector2d::getNameI18() const
@@ -581,3 +1079,24 @@ float StelProjector2d::deltaZoom(float fov) const
 	return fov;
 }
 
+QByteArray StelProjector2d::getForwardTransformShader() const
+{
+	Q_ASSERT(0);
+	return {};
+}
+
+void StelProjector2d::setForwardTransformUniforms(QOpenGLShaderProgram& program) const
+{
+	Q_ASSERT(0);
+}
+
+QByteArray StelProjector2d::getBackwardTransformShader() const
+{
+	Q_ASSERT(0);
+	return {};
+}
+
+void StelProjector2d::setBackwardTransformUniforms(QOpenGLShaderProgram& program) const
+{
+	Q_ASSERT(0);
+}

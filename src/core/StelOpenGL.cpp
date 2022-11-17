@@ -126,6 +126,8 @@ out vec4 FRAG_COLOR;
 #define textureCube_3(a,b,c) textureCube(a,b,c)
 #line 1
 )";
+		if(glInfo.isGLES)
+			return "precision mediump float;\n" + prefix;
 		return prefix;
 	}
 }
