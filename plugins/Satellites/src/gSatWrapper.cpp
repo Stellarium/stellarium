@@ -118,10 +118,10 @@ void gSatWrapper::calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_velocity
 		double c = 1/std::sqrt(1 + __f*(__f - 2)*Sqr(sin(radLatitude)));
 		double sq = Sqr(1 - __f)*c;
 
-		double r = (KEARTHRADIUS*c + (loc.altitude/1000))*cos(radLatitude);
+		double r = (KEARTHRADIUS*c + (loc.altitude/1000.))*cos(radLatitude);
 		ao_position[0] = r * cos(theta);/*kilometers*/
 		ao_position[1] = r * sin(theta);
-		ao_position[2] = (KEARTHRADIUS*sq + (loc.altitude/1000))*sin(radLatitude);
+		ao_position[2] = (KEARTHRADIUS*sq + (loc.altitude/1000.))*sin(radLatitude);
 		ao_velocity[0] = -KMFACTOR*ao_position[1];/*kilometers/second*/
 		ao_velocity[1] =  KMFACTOR*ao_position[0];
 		ao_velocity[2] =  0;
