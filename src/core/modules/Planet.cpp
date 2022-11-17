@@ -272,6 +272,7 @@ Planet::Planet(const QString& englishName,
 	}
 	Q_ASSERT(pType != Planet::isUNDEFINED);
 
+	auto& texMan = StelApp::getInstance().getTextureManager();
 	//only try loading textures when there is actually something to load!
 	//prevents some overhead when starting
 	texMapFileOrig = QString();
@@ -281,7 +282,7 @@ Planet::Planet(const QString& englishName,
 		QString texMapFile = StelFileMgr::findFile("textures/"+texMapName, StelFileMgr::File);
 		if (!texMapFile.isEmpty())
 		{
-			texMap = StelApp::getInstance().getTextureManager().createTextureThread(texMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+			texMap = texMan.createTextureThread(texMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 			texMapFileOrig = texMapFile;
 		}
 		else
@@ -295,7 +296,7 @@ Planet::Planet(const QString& englishName,
 		QString normalMapFile = StelFileMgr::findFile("textures/"+normalMapName, StelFileMgr::File);
 		if (!normalMapFile.isEmpty())
 		{
-			normalMap = StelApp::getInstance().getTextureManager().createTextureThread(normalMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+			normalMap = texMan.createTextureThread(normalMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 			normalMapFileOrig = normalMapFile;
 		}
 	}
@@ -305,7 +306,7 @@ Planet::Planet(const QString& englishName,
 		QString horizonMapFile = StelFileMgr::findFile("textures/"+horizonMapName, StelFileMgr::File);
 		if (!horizonMapFile.isEmpty())
 		{
-			horizonMap = StelApp::getInstance().getTextureManager().createTextureThread(horizonMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+			horizonMap = texMan.createTextureThread(horizonMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 			horizonMapFileOrig = horizonMapFile;
 		}
 	}
@@ -359,25 +360,27 @@ Planet::~Planet()
 
 void Planet::resetTextures()
 {
+	auto& texMan = StelApp::getInstance().getTextureManager();
 	// restore texture
 	if (!texMapFileOrig.isEmpty())
-		texMap = StelApp::getInstance().getTextureManager().createTextureThread(texMapFileOrig, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+		texMap = texMan.createTextureThread(texMapFileOrig, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	// restore normal map
 	if (!normalMapFileOrig.isEmpty())
-		normalMap = StelApp::getInstance().getTextureManager().createTextureThread(normalMapFileOrig, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+		normalMap = texMan.createTextureThread(normalMapFileOrig, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	if (!horizonMapFileOrig.isEmpty())
-		horizonMap = StelApp::getInstance().getTextureManager().createTextureThread(horizonMapFileOrig, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+		horizonMap = texMan.createTextureThread(horizonMapFileOrig, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 }
 
 void Planet::replaceTexture(const QString &texName)
 {
 	if(!texName.isEmpty())
 	{
+		auto& texMan = StelApp::getInstance().getTextureManager();
 		QString texMapFile = StelFileMgr::findFile("scripts/" + texName, StelFileMgr::File);
 		if (!texMapFile.isEmpty())
-			texMap = StelApp::getInstance().getTextureManager().createTextureThread(texMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+			texMap = texMan.createTextureThread(texMapFile, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 		else
 			qWarning()<<"Cannot resolve path to texture file"<<texName<<"of object"<<englishName;
 	}
@@ -4316,8 +4319,9 @@ Planet::PlanetOBJModel* Planet::loadObjModel() const
 	}
 	else
 	{
+		auto& texMan = StelApp::getInstance().getTextureManager();
 		//this call starts loading the tex in background
-		mdl->texture = StelApp::getInstance().getTextureManager().createTextureThread(mat.map_Kd,StelTexture::StelTextureParams(true,GL_LINEAR,GL_REPEAT,true),false);
+		mdl->texture = texMan.createTextureThread(mat.map_Kd,StelTexture::StelTextureParams(true,GL_LINEAR,GL_REPEAT,true),false);
 	}
 
 	//extract the pos array into separate vector, it is the only one we need on CPU side for drawing
