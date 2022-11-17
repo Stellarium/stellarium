@@ -73,17 +73,17 @@ public:
 	{
 	public:
         Mat4dTransform(const Mat4d& altAzToWorld, const Mat4d& vertexToAltAzPos);
-	void forward(Vec3d& v) const Q_DECL_OVERRIDE;
-	void backward(Vec3d& v) const Q_DECL_OVERRIDE;
-	void forward(Vec3f& v) const Q_DECL_OVERRIDE;
-	void backward(Vec3f& v) const Q_DECL_OVERRIDE;
-	void combine(const Mat4d& m) Q_DECL_OVERRIDE;
-	Mat4d getApproximateLinearTransfo() const Q_DECL_OVERRIDE;
-	ModelViewTranformP clone() const Q_DECL_OVERRIDE;
-	QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
-	void setForwardTransformUniforms(QOpenGLShaderProgram& program) const Q_DECL_OVERRIDE;
-	QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
-	void setBackwardTransformUniforms(QOpenGLShaderProgram& program) const Q_DECL_OVERRIDE;
+	void forward(Vec3d& v) const override;
+	void backward(Vec3d& v) const override;
+	void forward(Vec3f& v) const override;
+	void backward(Vec3f& v) const override;
+	void combine(const Mat4d& m) override;
+	Mat4d getApproximateLinearTransfo() const override;
+	ModelViewTranformP clone() const override;
+	QByteArray getForwardTransformShader() const override;
+	void setForwardTransformUniforms(QOpenGLShaderProgram& program) const override;
+	QByteArray getBackwardTransformShader() const override;
+	void setBackwardTransformUniforms(QOpenGLShaderProgram& program) const override;
 
 	private:
 		Mat4dTransform(const Mat4dTransform& src) = default;
@@ -164,7 +164,7 @@ public:
 	//! Apply the transformation in the backward projection in place.
 	virtual bool backward(Vec3d& v) const = 0;
 	//! Return the small zoom increment to use at the given FOV for nice movements
-	virtual float deltaZoom(float fov) const = 0;
+	virtual float deltaZoom(float fov) const {return fov;}
 	//! Returns GLSL code that can be used in a shader to implement forward transformation
 	virtual QByteArray getForwardTransformShader() const = 0;
 	//! Sets the necessary uniforms so that the shader returned by getForwardTransformShader can work
@@ -181,9 +181,9 @@ public:
 	bool intersectViewportDiscontinuity(const SphericalCap& cap) const;
 
 	//! Convert a Field Of View radius value in radians in ViewScalingFactor (used internally)
-	virtual float fovToViewScalingFactor(float fov) const = 0;
+	virtual float fovToViewScalingFactor(float fov) const {return fov;}
 	//! Convert a ViewScalingFactor value (used internally) in Field Of View radius in radians
-	virtual float viewScalingFactorToFov(float vsf) const = 0;
+	virtual float viewScalingFactorToFov(float vsf) const { return vsf;}
 
 	//! Get the current state of the flag which decides whether to
 	//! arrage labels so that they are aligned with the bottom of a 2d

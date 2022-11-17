@@ -189,11 +189,6 @@ float StelProjectorEqualArea::viewScalingFactorToFov(float vsf) const
 	return 2.f * std::asin(0.5f * vsf);
 }
 
-float StelProjectorEqualArea::deltaZoom(float fov) const
-{
-	return fov;
-}
-
 QByteArray StelProjectorEqualArea::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
@@ -387,21 +382,6 @@ bool StelProjectorFisheye::backward(Vec3d &v) const
 	return (a < M_PI);
 }
 
-float StelProjectorFisheye::fovToViewScalingFactor(float fov) const
-{
-	return fov;
-}
-
-float StelProjectorFisheye::viewScalingFactorToFov(float vsf) const
-{
-	return vsf;
-}
-
-float StelProjectorFisheye::deltaZoom(float fov) const
-{
-	return fov;
-}
-
 QByteArray StelProjectorFisheye::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
@@ -497,21 +477,6 @@ bool StelProjectorHammer::backward(Vec3d &v) const
 	return ret;
 }
 
-float StelProjectorHammer::fovToViewScalingFactor(float fov) const
-{
-	return fov;
-}
-
-float StelProjectorHammer::viewScalingFactorToFov(float vsf) const
-{
-	return vsf;
-}
-
-float StelProjectorHammer::deltaZoom(float fov) const
-{
-	return fov;
-}
-
 QByteArray StelProjectorHammer::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
@@ -595,21 +560,6 @@ bool StelProjectorCylinder::backward(Vec3d &v) const
 	return rval;
 }
 
-float StelProjectorCylinder::fovToViewScalingFactor(float fov) const
-{
-	return fov;
-}
-
-float StelProjectorCylinder::viewScalingFactorToFov(float vsf) const
-{
-	return vsf;
-}
-
-float StelProjectorCylinder::deltaZoom(float fov) const
-{
-	return fov;
-}
-
 QByteArray StelProjectorCylinder::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
@@ -688,23 +638,6 @@ bool StelProjectorCylinderFill::backward(Vec3d &v) const
 	return rval;
 }
 
-//float StelProjectorCylinderFill::fovToViewScalingFactor(float fov) const
-//{
-//	return fov;
-//}
-//
-//float StelProjectorCylinderFill::viewScalingFactorToFov(float vsf) const
-//{
-//	return vsf;
-//}
-//
-//float StelProjectorCylinderFill::deltaZoom(float fov) const
-//{
-//	return fov;
-//}
-
-
-
 QString StelProjectorMercator::getNameI18() const
 {
 	return q_("Mercator");
@@ -740,21 +673,6 @@ bool StelProjectorMercator::backward(Vec3d &v) const
 	v[0] = cos_delta * std::sin(v[0]);
 	v[1] = sin_delta;
 	return rval;
-}
-
-float StelProjectorMercator::fovToViewScalingFactor(float fov) const
-{
-	return fov;
-}
-
-float StelProjectorMercator::viewScalingFactorToFov(float vsf) const
-{
-	return vsf;
-}
-
-float StelProjectorMercator::deltaZoom(float fov) const
-{
-	return fov;
 }
 
 QByteArray StelProjectorMercator::getForwardTransformShader() const
@@ -847,11 +765,6 @@ float StelProjectorOrthographic::fovToViewScalingFactor(float fov) const
 float StelProjectorOrthographic::viewScalingFactorToFov(float vsf) const
 {
 	return std::asin(vsf);
-}
-
-float StelProjectorOrthographic::deltaZoom(float fov) const
-{
-	return fov;
 }
 
 QByteArray StelProjectorOrthographic::getForwardTransformShader() const
