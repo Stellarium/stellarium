@@ -3511,8 +3511,6 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		#ifdef GL_MULTISAMPLE
 		if(multisamplingEnabled_)
 			gl->glEnable(GL_MULTISAMPLE);
-		else
-			gl->glDisable(GL_MULTISAMPLE);
 		#endif
 		
 		// Set the main source of light to be the sun.
