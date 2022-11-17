@@ -478,7 +478,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
 		return false;
 
-	const float radius = rcMag.radius;
+	const float radius = rcMag.radius * static_cast<float>(sPainter->getProjector()->getDevicePixelsPerPixel());
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	const float frand=StelApp::getInstance().getRandF();
 #else
