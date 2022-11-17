@@ -3882,6 +3882,22 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 void Planet::drawSphere(StelPainter* painter, float screenRd, bool drawOnlyRing)
 {
 	const float sphereScaleF=static_cast<float>(sphereScale);
+	if (horizonMap)
+	{
+		// For lazy loading, return if texture not yet loaded
+		if (!horizonMap->bind(0))
+		{
+			return;
+		}
+	}
+	if (normalMap)
+	{
+		// For lazy loading, return if texture not yet loaded
+		if (!normalMap->bind(0))
+		{
+			return;
+		}
+	}
 	if (texMap)
 	{
 		// For lazy loading, return if texture not yet loaded
