@@ -16,7 +16,6 @@ SET(stellarium_lib_SRCS
      core/SaturationShader.hpp
      core/TopMost.hpp
      core/TopMost.cpp
-     core/healpix.c
      core/StelAudioMgr.hpp
      core/StelAudioMgr.cpp
      core/StelVideoMgr.hpp
@@ -167,8 +166,8 @@ SET(stellarium_lib_SRCS
      core/planetsephems/de440.hpp
      core/planetsephems/de441.cpp
      core/planetsephems/de441.hpp
-     core/planetsephems/htc20b.cpp
-     core/planetsephems/htc20b.hpp
+     core/planetsephems/htc20b.c
+     core/planetsephems/htc20b.h
      core/modules/AtmospherePreetham.cpp
      core/modules/AtmospherePreetham.hpp
      core/modules/AtmosphereShowMySky.cpp
@@ -262,6 +261,12 @@ SET(stellarium_lib_SRCS
      translations.h
      translations_regions.h
 )
+
+IF(ENABLE_PCH)
+     SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
+         stelMain_pch.hpp
+     )
+ENDIF(ENABLE_PCH)
 
 IF(ENABLE_SCRIPTING)
      SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
@@ -534,6 +539,14 @@ ELSE()
 	  SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
      ENDIF()
 ENDIF()
+if(ENABLE_PCH)
+    # prepend an include to each cpp file which itself includes the most frequently used includes.
+     target_precompile_headers(stelMain PRIVATE
+          $<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/stelMain_pch.hpp>)
+     IF(CMAKE_VERSION VERSION_GREATER_EQUAL 3.19)
+          SET(CMAKE_PCH_INSTANTIATE_TEMPLATES ON)
+     ENDIF()
+ENDIF(ENABLE_PCH)
 IF(ENABLE_SHOWMYSKY)
     TARGET_INCLUDE_DIRECTORIES(stelMain PRIVATE "${ShowMySky_INCLUDE_DIRECTORIES}")
 ENDIF()

@@ -62,8 +62,8 @@ details of the implementation encapsulated.
 #include <stdlib.h>
 #include <stdint.h>
 #include <errno.h>
+#include <QDebug>
 
-#include "StelUtils.hpp"
 /**** include variable and type definitions, specific for this C version */
 
 #include "jpleph.h"

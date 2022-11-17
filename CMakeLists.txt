@@ -119,6 +119,7 @@ MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")
 ########### Main global variables ###########
 SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
 SET(ENABLE_LTO 0 CACHE BOOL "Define whether the Link Time Optimization should be activated.")
+SET(ENABLE_PCH 1 CACHE BOOL "Define whether to use precompiled headers.")
 
 IF(NOT CMAKE_BUILD_TYPE)
      SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind ASan UBSan Release RelWithDebInfo MinSizeRel." FORCE)
@@ -146,6 +147,7 @@ IF(STELLARIUM_RELEASE_BUILD)
      SET(WINDOWS_PACKAGE_VERSION "${VERSION}.0")
      SET(ISS_PACKAGE_VERSION "${STELLARIUM_PUBLIC_VERSION}")
      SET(STELLARIUM_BUNDLE_VERSION "${STELLARIUM_PUBLIC_VERSION}")
+     SET(STELLARIUM_BUIDING_VERSION "${STELLARIUM_PUBLIC_VERSION}")
 ELSE()
      SET(SERIES "head")
      ########### Get revision number for non-release builds ###########
@@ -192,9 +194,10 @@ ELSE()
 	  SET(STELLARIUM_BUNDLE_VERSION "${STELLARIUM_PUBLIC_VERSION}-${TODAY}")
           ADD_DEFINITIONS(-DGIT_REVISION="${TODAY}")
           ADD_DEFINITIONS(-DGIT_BRANCH="tarball")
-     ENDIF()     
+     ENDIF()
+     SET(STELLARIUM_BUIDING_VERSION "${STELLARIUM_PUBLIC_VERSION}+")
 ENDIF()
-MESSAGE(STATUS "Building ${PROJECT_NAME} ${STELLARIUM_PUBLIC_VERSION} (v${PACKAGE_VERSION}; Mode: ${CMAKE_BUILD_TYPE})")
+MESSAGE(STATUS "Building ${PROJECT_NAME} ${STELLARIUM_BUIDING_VERSION} (v${PACKAGE_VERSION}; Mode: ${CMAKE_BUILD_TYPE})")
 
 # Write version and series of Stellarium to Stellarium User Guide
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)

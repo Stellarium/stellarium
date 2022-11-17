@@ -51,12 +51,21 @@ Calyp -278795.483  -66349.449   64265.081   292171.217 -836964.572  420403.505
 
 */
 
-#include <math.h>
-#include <stdint.h>
+#ifndef HTC20B_H
+#define HTC20B_H
 
 #define HTC2_HELENE           0
 #define HTC2_TELESTO          1
 #define HTC2_CALYPSO          2
 
-int htc20( const double jd, const int sat_no, double *xyz, double *vxyz);
+#ifdef __cplusplus
+extern "C" {
+#endif
 
+int htc20(const double jd, const int sat_no, double *xyz, double *vxyz);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
