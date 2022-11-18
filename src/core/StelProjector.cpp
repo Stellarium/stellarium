@@ -152,7 +152,7 @@ void StelProjector::init(const StelProjectorParams& params)
 	zNear = params.zNear;
 	oneOverZNearMinusZFar = 1./(zNear-params.zFar);
 	viewportCenterOffset = params.viewportCenterOffset;
-	viewportXywh = params.viewportXywh * static_cast<int>(devicePixelsPerPixel);
+	viewportXywh = params.viewportXywh * devicePixelsPerPixel;
 	viewportCenter = params.viewportCenter * devicePixelsPerPixel;
 	gravityLabels = params.gravityLabels;
 	defaultAngleForGravityText = params.defaultAngleForGravityText;
