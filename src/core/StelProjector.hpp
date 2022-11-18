@@ -72,18 +72,18 @@ public:
 	class Mat4dTransform: public ModelViewTranform
 	{
 	public:
-        Mat4dTransform(const Mat4d& altAzToWorld, const Mat4d& vertexToAltAzPos);
-	void forward(Vec3d& v) const override;
-	void backward(Vec3d& v) const override;
-	void forward(Vec3f& v) const override;
-	void backward(Vec3f& v) const override;
-	void combine(const Mat4d& m) override;
-	Mat4d getApproximateLinearTransfo() const override;
-	ModelViewTranformP clone() const override;
-	QByteArray getForwardTransformShader() const override;
-	void setForwardTransformUniforms(QOpenGLShaderProgram& program) const override;
-	QByteArray getBackwardTransformShader() const override;
-	void setBackwardTransformUniforms(QOpenGLShaderProgram& program) const override;
+		Mat4dTransform(const Mat4d& altAzToWorld, const Mat4d& vertexToAltAzPos);
+		void forward(Vec3d& v) const override;
+		void backward(Vec3d& v) const override;
+		void forward(Vec3f& v) const override;
+		void backward(Vec3f& v) const override;
+		void combine(const Mat4d& m) override;
+		Mat4d getApproximateLinearTransfo() const override;
+		ModelViewTranformP clone() const override;
+		QByteArray getForwardTransformShader() const override;
+		void setForwardTransformUniforms(QOpenGLShaderProgram& program) const override;
+		QByteArray getBackwardTransformShader() const override;
+		void setBackwardTransformUniforms(QOpenGLShaderProgram& program) const override;
 
 	private:
 		Mat4dTransform(const Mat4dTransform& src) = default;
@@ -359,7 +359,7 @@ protected:
 	//! Initialize the bounding cap.
 	virtual void computeBoundingCap();
 
-	ModelViewTranformP modelViewTransform;	// Operator to apply (if not Q_NULLPTR) before the modelview projection step
+	ModelViewTranformP modelViewTransform;	// Operator to apply (if not nullptr) before the modelview projection step
 
 	float flipHorz,flipVert;            // Whether to flip in horizontal or vertical directions. Values only -1 (flip) or +1 (no flip).
 	float pixelPerRad;                  // pixel per rad at the center of the viewport disk
