@@ -244,6 +244,7 @@ void NavStarsWindow::populateNavigationalStarsSets()
 	nsSets->addItem("Gemini APS", "GeminiAPS");
 	nsSets->addItem("Meade LX200", "MeadeLX200");
 	nsSets->addItem("Meade ETX", "MeadeETX");
+	nsSets->addItem("Celestron", "Celestron");
 
 	//Restore the selection
 	index = nsSets->findData(selectedNsSetId, Qt::UserRole, Qt::MatchCaseSensitive);

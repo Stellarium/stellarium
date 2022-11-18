@@ -430,6 +430,11 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 			txt = q_("This list from Meade ETX mount will aid the observer to find alignment stars at various times of the year.");
 			break;
 		}
+		case Celestron:
+		{
+			txt = q_("Even though there are about 250 named stars in the hand control database, only 82 (stars brighter than or equal to magnitude 2.5) can be used for alignment and related tasks.");
+			break;
+		}
 	}
 
 	return txt;
@@ -569,6 +574,24 @@ void NavStars::populateNavigationalStarsSet(void)
 			//    ETX-125EC Astro Telescope
 			starNumbers  << 69673 << 49669 << 65474 << 91262 << 102098 << 97649 << 80763
 				     << 113963 << 113368 << 10826 << 24436 << 27989 << 32349 << 21421;
+			break;
+		}
+		case Celestron:
+		{
+			// Celestron Alignment Star List
+			// Source: https://www.celestron.com/blogs/knowledgebase/can-all-named-stars-listed-in-the-hand-control-be-used-for-alignment
+			starNumbers  <<  32349 <<  30438 <<  69673 <<  91262 <<  24608 <<  24436 <<  37279
+				     <<   7588 <<  27989 <<  68702 <<  97649 <<  21421 <<  65474 <<  80763
+				     <<  37826 << 113368 <<  60718 <<  62434 <<  71683 << 102098 <<  49669
+				     <<  33579 <<  25336 <<  61084 <<  85927 <<  26311 <<  25428 <<  45238
+				     << 109268 <<  15863 <<  34444 <<  39953 <<  54061 <<  62956 <<  28360
+				     <<  31681 <<  41037 <<  67301 <<  82273 <<  86228 <<  90185 << 100751
+				     <<   3419 <<   9884 <<  11767 <<  30324 <<  36850 <<  46390 <<    677
+				     <<   5447 <<  14576 <<  26727 <<  27366 <<  57632 <<  72607 <<  68933
+				     <<  86032 <<  92855 <<   3179 <<  25930 <<  44816 <<  61932 <<  76267
+				     <<  87833 << 100453 <<    746 <<   9640 <<  66811 <<  80404 <<  65378
+				     <<  78401 <<   2081 <<  53910 <<  58001 <<  84012 << 105199 << 107315
+				     << 113881 <<   4427 <<  14135 <<  35904 << 113963;
 			break;
 		}
 	}

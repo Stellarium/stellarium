@@ -82,7 +82,8 @@ public:
 		German,		//!< German set (Nautisches Jahrbuch)
 		GeminiAPS,	//!< Gemini APS Alignment Star List
 		MeadeLX200,	//!< Meade LX200 Alignment Star Library
-		MeadeETX	//!< Meade ETX Alignment Star Library
+		MeadeETX,	//!< Meade ETX Alignment Star Library
+		Celestron	//!< Celestron Alignment Star List
 	};
 	Q_ENUM(NavigationalStarsSet)
 
