@@ -24,6 +24,7 @@
 #include "StelModule.hpp"
 #include "StelObjectType.hpp"
 #include "VecMath.hpp"
+#include "StelCore.hpp"
 #include <QTimeLine>
 #include <QTimer>
 #include <QCursor>
@@ -479,6 +480,9 @@ private:
 	double maxFov;     // Maximum FOV in degrees. Depends on projection.
 	double userMaxFov; // Custom setting. Can be useful in a planetarium context.
 	double deltaFov;   // requested change of FOV (degrees) used during zooming.
+	StelCore* core;          // The core on which the movement are applied
+	QSettings* conf;
+	class StelObjectMgr* objectMgr;
 	void setFov(double f)
 	{
 		if (core->getCurrentProjectionType()==StelCore::ProjectionCylinderFill)
@@ -497,9 +501,6 @@ private:
 	//! Make the first screen position correspond to the second (useful for mouse dragging and also time dragging.)
 	void dragView(int x1, int y1, int x2, int y2);
 
-	StelCore* core;          // The core on which the movement are applied
-	QSettings* conf;
-	class StelObjectMgr* objectMgr;
 	bool flagLockEquPos;     // Define if the equatorial position is locked
 	bool flagTracking;       // Define if the selected object is followed
 	bool flagInhibitAllAutomoves; // Required for special installations: If true, there is no automatic centering etc.
