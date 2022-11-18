@@ -606,12 +606,13 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 
 QString StelProjectorCylinderFill::getNameI18() const
 {
-	return q_("Cylinder fill");
+	return q_("Equirectangular");
 }
 
 QString StelProjectorCylinderFill::getDescriptionI18() const
 {
-	return q_("The full name of this projection mode is <i>plate carr&eacute;e</i>  (French, for 'flat square'). With this projection all parallels are equally spaced.");
+	return q_("The full name of this variant of the Cylindrical projection mode is <i>plate carr&eacute;e</i> (French, for 'flat square'). With this projection all parallels are equally spaced. "
+		  "The view is stretched to always show a 360x180° field of view in a fixed view direction. It is provided for specialized setups.");
 }
 
 bool StelProjectorCylinderFill::forward(Vec3f &v) const

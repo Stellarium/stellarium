@@ -482,6 +482,12 @@ void StelCore::windowHasBeenResized(qreal x, qreal y, qreal width, qreal height)
 	currentProjectorParams.viewportXywh.set(qRound(x), qRound(y), qRound(width), qRound(height));
 	currentProjectorParams.viewportCenter.set(x+(0.5+currentProjectorParams.viewportCenterOffset.v[0])*width, y+(0.5+currentProjectorParams.viewportCenterOffset.v[1])*height);
 	currentProjectorParams.viewportFovDiameter = qMin(width,height);
+
+	if (currentProjectionType==ProjectionType::ProjectionCylinderFill)
+	{
+		currentProjectorParams.widthStretch=0.5*width/height;
+		currentProjectorParams.viewportFovDiameter = height;
+	}
 }
 
 /*************************************************************************
@@ -499,6 +505,11 @@ void StelCore::update(double deltaTime)
 	movementMgr->updateMotion(deltaTime);
 
 	currentProjectorParams.fov = static_cast<float>(movementMgr->getCurrentFov());
+//	if (currentProjectionType==ProjectionType::ProjectionCylinderFill)
+//	{
+//		currentProjectorParams.widthStretch=0.5*currentProjectorParams.viewportXywh[2]/currentProjectorParams.viewportXywh[3];
+//		currentProjectorParams.viewportFovDiameter = currentProjectorParams.viewportXywh[3];
+//	}
 
 	skyDrawer->update(deltaTime);
 }
@@ -549,6 +560,15 @@ void StelCore::setCurrentProjectionType(ProjectionType type)
 	{
 		currentProjectionType=type;
 		updateMaximumFov();
+		if (currentProjectionType==ProjectionType::ProjectionCylinderFill)
+		{
+			currentProjectorParams.fov=180.f;
+			currentProjectorParams.widthStretch=0.5*currentProjectorParams.viewportXywh[2]/currentProjectorParams.viewportXywh[3];
+			currentProjectorParams.viewportFovDiameter = currentProjectorParams.viewportXywh[3];
+			Q_ASSERT(movementMgr);
+			movementMgr->setViewportVerticalOffsetTarget(0.);
+			movementMgr->zoomTo(180., 0.5);
+		}
 
 		emit currentProjectionTypeChanged(type);
 		emit currentProjectionTypeKeyChanged(getCurrentProjectionTypeKey());
