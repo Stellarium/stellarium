@@ -241,6 +241,9 @@ void NavStarsWindow::populateNavigationalStarsSets()
 	nsSets->addItem(q_("Russian"), "Russian");
 	// TRANSLATORS: Part of full phrase: German set of navigational stars
 	nsSets->addItem(q_("German"), "German");
+	nsSets->addItem("Gemini APS", "GeminiAPS");
+	nsSets->addItem("Meade LX200", "MeadeLX200");
+	nsSets->addItem("Meade ETX", "MeadeETX");
 
 	//Restore the selection
 	index = nsSets->findData(selectedNsSetId, Qt::UserRole, Qt::MatchCaseSensitive);

@@ -78,8 +78,11 @@ public:
 	{
 		AngloAmerican,	//!< Anglo-American set (The Nautical Almanac)
 		French,		//!< French set (Ephémérides Nautiques)
-		Russian,		//!< Russian set (Морской астрономический ежегодник)
-		German		//!< German set (Nautisches Jahrbuch)
+		Russian,	//!< Russian set (Морской астрономический ежегодник)
+		German,		//!< German set (Nautisches Jahrbuch)
+		GeminiAPS,	//!< Gemini APS Alignment Star List
+		MeadeLX200,	//!< Meade LX200 Alignment Star Library
+		MeadeETX	//!< Meade ETX Alignment Star Library
 	};
 	Q_ENUM(NavigationalStarsSet)
 
