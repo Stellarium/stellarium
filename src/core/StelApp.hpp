@@ -64,7 +64,7 @@ class SpoutSender;
 //! This is the central class of Stellarium.  Only one singleton instance of
 //! this class is created and can be accessed from anywhere else.  This class
 //! is the access point to several "Manager" class which provide application-wide
-//! services for managment of font, textures, localization, sky culture, and in
+//! services for management of font, textures, localization, sky culture, and in
 //! theory all other services used by the other part of the program.
 //!
 //! The StelApp class is also the one managing the StelModule in a generic manner
@@ -326,7 +326,7 @@ public slots:
 	//! Return the scaled time for animated objects
 	static double getAnimationTime();
 
-	//! Report that a download occured. This is used for statistics purposes.
+	//! Report that a download occurred. This is used for statistics purposes.
 	//! Connect this slot to QNetworkAccessManager::finished() slot to obtain statistics at the end of the program.
 	void reportFileDownloadFinished(QNetworkReply* reply);
 
@@ -397,7 +397,7 @@ private:
 	// Sky cultures manager for the application
 	StelSkyCultureMgr* skyCultureMgr;
 
-	//Actions manager fot the application.  Will replace shortcutMgr.
+	//Actions manager for the application.  Will replace shortcutMgr.
 	StelActionMgr* actionMgr;
 
 	//Property manager for the application

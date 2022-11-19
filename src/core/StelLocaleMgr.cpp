@@ -165,7 +165,7 @@ double StelLocaleMgr::getJdFromISO8601TimeLocal(const QString& t, bool* ok) cons
 }
 
 
-// Return a string with the local date formated according to the dateFormat variable
+// Return a string with the local date formatted according to the dateFormat variable
 QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 {
 	int year, month, day, dayOfWeek;
@@ -203,7 +203,7 @@ QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 	return str;
 }
 
-// Return a string with the local time (according to timeZoneMode variable) formated
+// Return a string with the local time (according to timeZoneMode variable) formatted
 // according to the timeFormat variable
 QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 {

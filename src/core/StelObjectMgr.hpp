@@ -112,13 +112,13 @@ public:
 	//! Notify that we want to select the given object.
 	//! @param obj the StelObject to select
 	//! @param action action define whether to add to, replace, or remove from the existing selection
-	//! @return true if at least 1 object was sucessfully selected
+	//! @return true if at least 1 object was successfully selected
 	bool setSelectedObject(const StelObjectP obj, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	//! Notify that we want to select the given objects.
 	//! @param objs a vector of objects to select
 	//! @param action define whether to add to, replace, or remove from the existing selection
-	//! @return true if at least 1 object was sucessfully selected
+	//! @return true if at least 1 object was successfully selected
 	bool setSelectedObject(const QList<StelObjectP>& objs, StelModule::StelModuleSelectAction action=StelModule::ReplaceSelection);
 
 	//! Get the list of objects which was recently selected by the user.
@@ -181,7 +181,7 @@ public slots:
 	//! @note This should be used with caution. Usually you want to use addToExtraInfoString().
 	virtual void setExtraInfoString(const StelObject::InfoStringGroup& flags, const QString &str);
 
-	//! Add str to the extra string. This should be preferrable over hard setting.
+	//! Add str to the extra string. This should be preferable over hard setting.
 	//! Can be used by plugins to show extra info for the selected object, or for debugging.
 	//! The strings will be shown in the InfoString for the selected object, below the default fields per-flag.
 	//! Additional coordinates not fitting into one of the predefined coordinate sets should be flagged with OtherCoords,

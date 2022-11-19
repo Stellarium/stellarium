@@ -280,7 +280,7 @@ public slots:
 
 	//! Set flag whether to use OBJ models for rendering, where available
 	void setFlagUseObjModels(bool b) { if(b!=flagUseObjModels) { flagUseObjModels = b; emit flagUseObjModelsChanged(b); } }
-	//! Get the current value of the flag which determines wether to use OBJ models for rendering, where available
+	//! Get the current value of the flag which determines whether to use OBJ models for rendering, where available
 	bool getFlagUseObjModels(void) const { return flagUseObjModels; }
 
 	//! Set flag whether OBJ models should render self-shadowing (using a shadow map)

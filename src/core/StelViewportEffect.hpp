@@ -37,7 +37,7 @@ public:
 	//! The default implementation does nothing.
 	virtual void alterBuffer(QOpenGLFramebufferObject*) const {;}
 	//! Draw the viewport on the screen.
-	//! @param buf the GL frame buffer containing the Stellarium viewport alreay drawn.
+	//! @param buf the GL frame buffer containing the Stellarium viewport already drawn.
 	//! The default implementation paints the buffer on the fullscreen.
 	virtual void paintViewportBuffer(const QOpenGLFramebufferObject* buf) const;
 	//! Distort an x,y position according to the distortion.

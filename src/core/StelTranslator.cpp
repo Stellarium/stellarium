@@ -96,7 +96,7 @@ void StelTranslator::initSystemLanguage()
 }
 
 
-//! Convert from ISO639-1 2(+3) letters langage code to native language name
+//! Convert from ISO639-1 2(+3) letters language code to native language name
 QString StelTranslator::iso639_1CodeToNativeName(const QString& languageCode)
 {
 	if (languageCode=="C")
@@ -119,7 +119,7 @@ QString StelTranslator::iso639_1CodeToNativeName(const QString& languageCode)
 	return languageCode;
 }
 
-//! Convert from native language name to ISO639-1 2(+3) letters langage code
+//! Convert from native language name to ISO639-1 2(+3) letters language code
 QString StelTranslator::nativeNameToIso639_1Code(const QString& languageName)
 {
 	QMap<QString, QString>::ConstIterator iter;

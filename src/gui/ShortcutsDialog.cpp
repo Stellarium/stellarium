@@ -509,7 +509,7 @@ void ShortcutsDialog::updateTreeData()
 			updateShortcutsItem(action);
 		}
 	}
-	// ajust columns
+	// adjust columns
 	for(int i=0; i<3; i++)
 		ui->shortcutsTreeView->resizeColumnToContents(i);
 }

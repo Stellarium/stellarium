@@ -91,7 +91,7 @@ public:
 	void setAbsoluteMagnitudeAndSlope(const float magnitude, const float slope);
 
 	//! renders the subscript in a minor planet provisional designation with HTML.
-	//! \returns an emtpy string if the source string is not a provisional
+	//! \returns an empty string if the source string is not a provisional
 	//! designation.
 	static QString renderProvisionalDesignationinHtml(QString plainText);
 

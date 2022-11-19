@@ -26,7 +26,7 @@
 class Planet;
 
 //! @class StelLocation
-//! Store the informations for a location on a planet
+//! Store the information for a location on a planet
 class StelLocation
 {
 public:
@@ -40,7 +40,7 @@ public:
 	//! @arg alt altitude above mean sea level
 	//! @arg populationK population in thousands
 	//! @arg timeZone IANA timezone string like "Europe/Vienna" or "UT-7"
-	//! @arg bortleIndex light polution hint
+	//! @arg bortleIndex light pollution hint
 	//! @arg roleKey code for location role.
 	//! @arg landscapeID a fitting landscape
 	StelLocation(QString lName, QString lState, QString lRegion, float lng, float lat, int alt,

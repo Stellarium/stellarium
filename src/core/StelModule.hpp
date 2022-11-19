@@ -86,7 +86,7 @@ public:
 	//! Get the name of the module author
 	virtual QString getAuthorName() const {return "Stellarium's Team";}
 
-	//! Get the email adress of the module author
+	//! Get the email address of the module author
 	virtual QString getAuthorEmail() const {return "stellarium@googlegroups.com";}
 
 	//! Handle mouse clicks. Please note that most of the interactions will be done through the GUI module.

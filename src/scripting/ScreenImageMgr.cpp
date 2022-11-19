@@ -69,7 +69,7 @@ ScreenImage::ScreenImage(const QString& filename, qreal x, qreal y, bool show, q
 	ScreenImage::setFadeDuration(fadeDuration);
 	connect(fadeTimer, SIGNAL(valueChanged(qreal)), this, SLOT(setOpacity(qreal)));
 
-	// set inital displayed state
+	// set initial displayed state
 	if (show)
 		tex->setOpacity(maxAlpha);
 	else
