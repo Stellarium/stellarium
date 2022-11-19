@@ -73,7 +73,7 @@ public:
 	//! \todo Find better sources for the g,k system
 	virtual float getVMagnitude(const StelCore* core) const Q_DECL_OVERRIDE;
 	//! sets the nameI18 property with the appropriate translation.
-	//! Function overriden to handle the problem with name conflicts.
+	//! Function overridden to handle the problem with name conflicts.
 	virtual void translateName(const StelTranslator& trans) Q_DECL_OVERRIDE;
 	virtual QString getEnglishName(void) const Q_DECL_OVERRIDE {return englishName;}
 	virtual QString getNameI18n(void) const Q_DECL_OVERRIDE {return nameI18;}

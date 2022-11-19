@@ -4243,7 +4243,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 		}
 	}
 
-	// Apply a rotation otherwize the hips surveys don't get rendered at the
+	// Apply a rotation otherwise the hips surveys don't get rendered at the
 	// proper position.  Not sure why...
 	painter->getProjector()->getModelViewTransform()->combine(Mat4d::zrotation(M_PI * 0.5));
 	painter->getProjector()->getModelViewTransform()->combine(Mat4d::scaling(Vec3d(1, 1, oneMinusOblateness)));

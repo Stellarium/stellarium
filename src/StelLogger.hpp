@@ -25,7 +25,7 @@
 #include <QMutex>
 
 //! @class StelLogger
-//! Class wit only static members used to manage logging for Stellarium.
+//! Class with only static members used to manage logging for Stellarium.
 //! The debugLogHandler() method allow to defined it as a standard Qt messages handler
 //! which is then used by qDebug, qWarning and qFatal.
 class StelLogger

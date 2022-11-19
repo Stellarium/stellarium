@@ -204,9 +204,9 @@ public slots:
 	//! @return the number of seconds it takes for an auto-move operation to complete.
 	float getAutoMoveDuration(void) const {return autoMoveDuration;}
 
-	//! Set whether auto zoom out will reset the viewing direction to the inital value
+	//! Set whether auto zoom out will reset the viewing direction to the initial value
 	void setFlagAutoZoomOutResetsDirection(bool b) {if (flagAutoZoomOutResetsDirection != b) { flagAutoZoomOutResetsDirection = b; emit flagAutoZoomOutResetsDirectionChanged(b);}}
-	//! Get whether auto zoom out will reset the viewing direction to the inital value
+	//! Get whether auto zoom out will reset the viewing direction to the initial value
 	bool getFlagAutoZoomOutResetsDirection(void) const {return flagAutoZoomOutResetsDirection;}
 
 	//! Get whether keys can control zoom
@@ -435,7 +435,7 @@ public slots:
 	//! this will avoid any unwanted tracking.
 	void setInhibitAllAutomoves(bool inhibit) { flagInhibitAllAutomoves=inhibit;}
 
-	//! Returns the targetted value of the viewport offset
+	//! Returns the targeted value of the viewport offset
 	Vec2d getViewportOffsetTarget() const { return targetViewportOffset; }
 	double getViewportHorizontalOffsetTarget() const { return targetViewportOffset[0]; }
 	double getViewportVerticalOffsetTarget() const { return targetViewportOffset[1]; }

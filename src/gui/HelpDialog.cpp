@@ -193,7 +193,7 @@ void HelpDialog::downloadComplete(QNetworkReply *reply)
 	{
 		qWarning() << "Error: While trying to access"
 			   << reply->url().toString()
-			   << "the following error occured:"
+			   << "the following error occurred:"
 			   << reply->errorString();
 
 		reply->deleteLater();

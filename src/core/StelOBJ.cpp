@@ -302,19 +302,19 @@ bool StelOBJ::parseFace(const ParseParams& params, const V3Vec& posList, const V
 
 	int vtxAmount = params.size()-1;
 
-	//parse each one seperately
+	//parse each one separately
 	int mode = 0;
 	bool ok = false;
 	//a macro for consistency check
 	#define CHK_MODE(a) if(mode && mode!=a) { qCCritical(stelOBJ)<<"Inconsistent face statement"<<params; return false; } else {mode = a;}
-	//a macro for checking number pasing
+	//a macro for checking number parsing
 	#define CHK_OK(a) do{ a; if(!ok) { qCCritical(stelOBJ)<<"Could not parse number in face statement"<<params; return false; } } while(0)
 	//negative indices indicate relative data, i.e. -1 would mean the last position/texture/normal that was parsed
 	//this macro fixes it up so that it always uses absolute numbers
 	//note: the indices start with 1, this is fixed up later
 	#define FIX_REL(a, list) if(a<0) {a += list.size()+1; }
 
-	//loop to parse each section seperately
+	//loop to parse each section separately
 	for(int i =0; i<vtxAmount;++i)
 	{
 		//split on slash

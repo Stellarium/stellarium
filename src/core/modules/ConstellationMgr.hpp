@@ -302,7 +302,7 @@ public slots:
 	//! // example of usage in scripts: remove selection from the Orion constellation
 	//! ConstellationMgr.deselectConstellation("Orion");
 	//! @endcode
-	//! @note all constellations will be hided when list of selected constellations will be empty
+	//! @note all constellations will be hidden when list of selected constellations will be empty
 	void deselectConstellation(const QString& englishName);
 
 	//! Get the list of English names of all constellations for loaded sky culture

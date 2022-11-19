@@ -44,7 +44,7 @@ public slots:
 	//! Informs the sender about changed buffer dimensions.
 	//! Does not need a GL context.
 	void resize(uint width, uint height);
-	//! True if the sender has been successfuly created
+	//! True if the sender has been successfully created
 	bool isValid() { return valid; }
 private:
 	SPOUTLIBRARY* spoutLib;

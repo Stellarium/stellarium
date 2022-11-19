@@ -41,7 +41,7 @@ template <class Star> struct SpecialZoneData;
 // structs for storing the stars in binary form. The idea is
 // to store much data for bright stars (Star1), but only little or even
 // very little data for faints stars (Star3). Using only 6 bytes for Star3
-// makes it feasable to store hundreds of millions of them in main memory.
+// makes it feasible to store hundreds of millions of them in main memory.
 
 
 static inline float IndexToBV(int bV)

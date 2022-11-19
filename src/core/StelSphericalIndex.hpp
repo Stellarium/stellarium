@@ -326,7 +326,7 @@ private:
 
 			//! The maximum number of objects per node.
 			int maxObjectsPerNode;
-			//! The maximum level of the grid. Prevents grid split into too small triangles if unecessary.
+			//! The maximum level of the grid. Prevents grid split into too small triangles if unnecessary.
 			int maxLevel;
 	};
 

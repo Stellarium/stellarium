@@ -152,7 +152,7 @@ public:
 	virtual QString getDescriptionI18() const {return "No description";}
 	//! Get a HTML version of the short description for this projection type
 	QString getHtmlSummary() const;
-	//! Get the maximum FOV apperture in degree
+	//! Get the maximum FOV aperture in degree
 	virtual float getMaxFov() const = 0;
 	//! Apply the transformation in the forward direction in place.
 	//! After transformation v[2] will always contain the length of the original v: sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2])

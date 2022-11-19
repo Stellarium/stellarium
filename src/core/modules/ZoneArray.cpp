@@ -435,7 +435,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	const Star* lastStar = zoneToDraw->getStars() + zoneToDraw->size;
 	for (const Star* s=zoneToDraw->getStars();s<lastStar;++s)
 	{
-		// Artifical cutoff per magnitude
+		// Artificial cutoff per magnitude
 		if (s->getMag() > cutoffMagStep)
 			break;
     

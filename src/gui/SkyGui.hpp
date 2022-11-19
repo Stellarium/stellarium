@@ -34,7 +34,7 @@ class StelButton;
 class BottomStelBar;
 class StelProgressController;
 
-//! The informations about the currently selected object
+//! The information about the currently selected object
 class InfoPanel : public QGraphicsTextItem
 {
 	public:

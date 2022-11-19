@@ -79,8 +79,8 @@ public:
 	//! @exception runtime_error("optarg_type") the expected argument to
 	//! the option could not be converted. The longOpt value is appended
 	//! in parenthesis.
-	//! @return 1 if the argument to the specified opion is "yes", "y",
-	//! "true", "on" or 1; 0 if the argument to the specified opion is "no",
+	//! @return 1 if the argument to the specified option is "yes", "y",
+	//! "true", "on" or 1; 0 if the argument to the specified option is "no",
 	//! "n", "false", "off" or 0; the value of the defaultValue parameter if
 	//! the option was not found in the argument list before an element which
 	//! has the value "--".

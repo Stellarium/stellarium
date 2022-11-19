@@ -804,7 +804,7 @@ namespace StelUtils
 	//! Get Delta-T estimation for a given date.
 	//! Implementation of algorithm by Reingold & Dershowitz (1997, 2001, 2002, 2007, 2018) for DeltaT computation.
 	//! This is again mostly a data fit based on the table in Meeus, Astronomical Algorithms (1991).
-	//! This is the version given in the 4rd edition ("the ultimate edition"; 2018) which added the fit
+	//! This is the version given in the 4th edition ("the ultimate edition"; 2018) which added the fit
 	//! for -500..1699 and 2006..2150 omitted from previous editions.
 	//! Calendrical Calculations: The Ultimate Edition / Edward M. Reingold, Nachum Dershowitz - 4th Edition,
 	//! Cambridge University Press, 2018. - 660p. ISBN: 9781107057623, DOI: 10.1017/9781107415058

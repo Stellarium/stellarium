@@ -1473,7 +1473,7 @@ template<class T> Vector3<T> Matrix4<T>::multiplyWithoutTranslation(const Vector
 			  r[2]*a.v[0] + r[6]*a.v[1] + r[10]*a.v[2]);
 }
 
-// multiply column vector by a 4x4 matrix in homogeneous coordinate (considere a[3]=1)
+// multiply column vector by a 4x4 matrix in homogeneous coordinate (consider a[3]=1)
 template<class T> Vector4<T> Matrix4<T>::operator*(const Vector4<T>& a) const
 {
 	return Vector4<T>(r[0]*a.v[0] + r[4]*a.v[1] +  r[8]*a.v[2] + r[12]*a.v[3],

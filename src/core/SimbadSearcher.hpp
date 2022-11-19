@@ -40,7 +40,7 @@ public:
 	enum SimbadLookupStatus
 	{
 		SimbadLookupQuerying,		//!< Simbad is still being queried.
-		SimbadLookupErrorOccured,	//!< An error occured while looking up Simbad. Call getErrorString() for a description of the error.
+		SimbadLookupErrorOccured,	//!< An error occurred while looking up Simbad. Call getErrorString() for a description of the error.
 		SimbadLookupFinished,		//!< The query is over. The reply can be deleted.
 		SimbadCoordinateLookupFinished  //!< A coordinate lookup is finished. The reply can be deleted.
 	};
@@ -59,7 +59,7 @@ public:
 	//! Get a I18n string describing the current status. It can be used e.g for reporting in widgets.
 	QString getCurrentStatusString() const;
 
-	//! Get the error description string. Return empty string if no error occured.
+	//! Get the error description string. Return empty string if no error occurred.
 	QString getErrorString() const {return errorString;}
 
 	//! Explicitly delete the internal QNetworkReply. Must not be called from a QNetworkReply signal.
@@ -91,7 +91,7 @@ private:
 	//! Current lookup status.
 	SimbadLookupStatus currentStatus;
 
-	//! The error description. Empty if no errors occured.
+	//! The error description. Empty if no errors occurred.
 	QString errorString;
 };
 
@@ -111,7 +111,7 @@ public:
 	//! @param objectName the possibly truncated object name.
 	//! @param maxNbResult the maximum number of returned result.
 	//! @param delayMs a delay in ms to wait for before actually triggering the lookup.
-	//! This used to group requests, e.g. send only one request when a used types a word insead of one per letter.
+	//! This used to group requests, e.g. send only one request when a used types a word instead of one per letter.
 	//! @return a new SimbadLookupReply which is owned by the caller.
 	SimbadLookupReply* lookup(const QString& serverUrl, const QString& objectName, int maxNbResult=1, int delayMs=500);
 	//! Lookup in Simbad for objects which have a position coordsJ2000

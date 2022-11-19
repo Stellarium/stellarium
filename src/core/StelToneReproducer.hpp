@@ -69,7 +69,7 @@ public:
 	//! Constructor
 	StelToneReproducer();
 	
-	//! Desctructor
+	//! Destructor
 	virtual ~StelToneReproducer() Q_DECL_OVERRIDE;
 
 public slots:

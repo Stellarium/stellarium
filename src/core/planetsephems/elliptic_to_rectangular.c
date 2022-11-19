@@ -64,7 +64,7 @@ SOFTWARE.
    L = mean longitude = Omega + omega + M
    M = mean anomaly
    i = inclination
-   e = excentricity
+   e = eccentricity
 
    Units are suspected to be: Julian days, AU, rad
 */
@@ -87,7 +87,7 @@ EllipticToRectangular(const double a,const double n,
   for (;;) {
     const double cLe = cos(Le);
     const double sLe = sin(Le);
-      /* for excentricity < 1 we have denominator > 0 */
+      /* for eccentricity < 1 we have denominator > 0 */
     const double dLe = (L - Le + elem[2]*sLe - elem[3]*cLe)
                      / (1.0    - elem[2]*cLe - elem[3]*sLe);
     Le += dLe;

@@ -598,11 +598,11 @@ private:
 	//! @note Ported from KStars, should be improved, because this feature calculates
 	//! angular separation ("conjunction" defined as equality of right ascension
 	//! of two bodies), and current solution is not accurate and slow.
-	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation
+	//! @note modes: 0 - conjunction, 1 - opposition, 2 - greatest elongation
 	QMap<double, double> findClosestApproach(PlanetP& object1, StelObjectP& object2, const double startJD, const double stopJD, const double maxSeparation, const int mode);
 	//! Finding the angular distance between two celestial bodies at some Julian date
 	double findDistance(double JD, PlanetP object1, StelObjectP object2, int mode);
-	//! Finding the initial time steps for interations
+	//! Finding the initial time steps for interactions
 	double findInitialStep(double startJD, double stopJD, QStringList objects);
 	//! Finding the celestial event
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign, int mode);
@@ -611,7 +611,7 @@ private:
 	//! Wrapper for filling the table of phenomena between planet and deep-sky object
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const NebulaP object2);
 	//! Wrapper for filling the table of phenomena between two planets
-	//! @note modes: 0 - conjuction, 1 - opposition, 2 - greatest elongation
+	//! @note modes: 0 - conjunction, 1 - opposition, 2 - greatest elongation
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, int mode);
 	//! Filling the table of phenomena
 	void fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, float firstObjectMagnitude,

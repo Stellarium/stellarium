@@ -214,7 +214,7 @@ public slots:
 	//! // example of usage in scripts: remove selection from the "Summer Triangle" asterism
 	//! AsterismMgr.deselectAsterism("Summer Triangle");
 	//! @endcode
-	//! @note all asterisms will be hided when list of selected asterisms will be empty
+	//! @note all asterisms will be hidden when list of selected asterisms will be empty
 	void deselectAsterism(const QString& englishName);
 
 	//! Remove asterisms from selected objects

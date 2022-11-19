@@ -43,7 +43,7 @@ current platform,  and swaps bytes on-the-fly if needed.  (Yes,  this
 can result in a slowdown... sometimes as much as 1%.  The function is
 so mathematically intensive that the byte-swapping is the least of our
 troubles.)  You can also use DE-200, 403, 404, 405,  or 406 without
-recompiling (the constan() function now determines which ephemeris is
+recompiling (the constant() function now determines which ephemeris is
 in use and its byte order).
 
 Also,  I did some minor optimization of the interp() (Chebyshev
