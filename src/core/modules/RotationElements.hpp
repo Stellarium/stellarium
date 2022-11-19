@@ -127,7 +127,7 @@ public:
 		double E11;
 		double E12;
 		double E13;
-		double M1;  // Mars corrections. These are from WGCCRE2015.
+		double M1; // Mars corrections. These are from WGCCRE2015.
 		double M2;
 		double M3;
 		double M4;
@@ -142,7 +142,7 @@ public:
 		double Jc;
 		double Jd;
 		double Je;
-		double Na; // Neptune axix term
+		double Na; // Neptune axis term
 		double J1; // corrective terms for Jupiter' moons, Table 10.10
 		double J2;
 		double J3;

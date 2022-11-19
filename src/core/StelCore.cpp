@@ -359,7 +359,7 @@ QString StelCore::getDefaultProjectionTypeKey() const
 }
 
 // Get the shared instance of StelGeodesicGrid.
-// The returned instance is garanteed to allow for at least maxLevel levels
+// The returned instance is guaranteed to allow for at least maxLevel levels
 const StelGeodesicGrid* StelCore::getGeodesicGrid(int maxLevel) const
 {
 	if (geodesicGrid==Q_NULLPTR)
@@ -1222,7 +1222,7 @@ void StelCore::moveObserverToSelected()
 	mmgr->setFlagTracking(false);
 }
 
-// Get the informations on the current location
+// Get the information on the current location
 const StelLocation& StelCore::getCurrentLocation() const
 {
 	return position->getCurrentLocation();
@@ -1476,7 +1476,7 @@ double StelCore::getSolutionEquationOfTime() const
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, pos);
 
-	// covert radians to degrees and reduce the angle, so that 0 <= angle < 360
+	// convert radians to degrees and reduce the angle, so that 0 <= angle < 360
 	const double alpha = StelUtils::fmodpos(ra*M_180_PI, 360.);
 
 	double deltaPsi, deltaEps;

@@ -99,7 +99,7 @@ public:
 	double getBrightness() const { return static_cast<double>(landscapeBrightness); }
 	//! Returns the lightscape brightness
 	double getLightscapeBrightness() const { return static_cast<double>(lightScapeBrightness); }
-	//! Returns the lightscape brighness modulated with the fader's target state (i.e. binary on/off)
+	//! Returns the lightscape brightness modulated with the fader's target state (i.e. binary on/off)
 	double getTargetLightscapeBrightness() const { return static_cast<double>(lightScapeBrightness * illumFader); }
 	//! Gets the currently effective lightscape brightness (modulated by the fader)
 	double getEffectiveLightscapeBrightness() const { return static_cast<double>(lightScapeBrightness * illumFader.getInterstate()); }

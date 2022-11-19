@@ -2007,7 +2007,7 @@ StelVertexArray StelPainter::computeSphereNoLight(double radius, double oneMinus
 	return result;
 }
 
-// Reimplementation of gluCylinder : glu is overrided for non standard projection
+// Reimplementation of gluCylinder : glu is overridden for non standard projection
 void StelPainter::sCylinder(double radius, double height, int slices, int orientInside)
 {
 	if (orientInside)

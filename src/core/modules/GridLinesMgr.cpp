@@ -624,7 +624,7 @@ void SkyGrid::draw(const StelCore* core) const
 	}
 
 	if (lineThickness>1)
-		sPainter.setLineWidth(1); // reset tickness of line
+		sPainter.setLineWidth(1); // reset thickness of line
 	sPainter.setLineSmooth(false);
 }
 

@@ -910,7 +910,7 @@ void SearchDialog::adjustMatchesResult(QStringList &allMatches, QStringList& rec
 	stringLengthCompare comparator;
 	std::sort(matches.begin(), matches.end(), comparator);
 
-	// Adjust recent matches to prefered max size
+	// Adjust recent matches to preferred max size
 	recentMatches = recentMatches.mid(0, recentObjectSearchesData.maxSize);
 
 	// Find total size of both matches
@@ -1482,7 +1482,7 @@ void SearchDialog::pasteAndGo()
 	// https://wiki.qt.io/Technical_FAQ#Why_does_the_memory_keep_increasing_when_repeatedly_pasting_text_and_calling_clear.28.29_in_a_QLineEdit.3F
 	ui->lineEditSearchSkyObject->setText(""); // clear current text
 	ui->lineEditSearchSkyObject->paste(); // paste text from clipboard
-	gotoObject(); // go to first finded object
+	gotoObject(); // go to first found object
 }
 
 void SearchDialog::setVisible(bool v)

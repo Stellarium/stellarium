@@ -280,7 +280,7 @@ public:
 	//! This method needs to be called once before exit.
 	static void deinitGLShaders();
 
-	// Thoses methods should eventually be replaced by a single setVertexArray
+	// These methods should eventually be replaced by a single setVertexArray
 	//! use instead of glVertexPointer
 	void setVertexPointer(int size, GLenum type, const void* pointer) {
 		vertexArray.size = size; vertexArray.type = type; vertexArray.pointer = pointer;

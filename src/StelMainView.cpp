@@ -852,7 +852,7 @@ void StelMainView::init()
 			qWarning()<<"Failed to initialize OpenGL debug logger";
 
 		connect(QOpenGLContext::currentContext(),SIGNAL(aboutToBeDestroyed()),this,SLOT(contextDestroyed()));
-		//for easier debugging, print the adress of the main GL context
+		//for easier debugging, print the address of the main GL context
 		qDebug()<<"CurCtxPtr:"<<QOpenGLContext::currentContext();
 	}
 #endif
@@ -1477,7 +1477,7 @@ void StelMainView::setFlagCursorTimeout(bool b)
 
 void StelMainView::hideCursor()
 {
-	// timout fired...
+	// timeout fired...
 	// if the feature is not asked, do nothing
 	if (!flagCursorTimeout) return;
 

@@ -55,13 +55,13 @@ public:
 	//! Return the short name for this image to be used in the loading bar.
 	virtual QString getShortName() const Q_DECL_OVERRIDE {return shortName;}
 
-	//! Return true if an error occured while loading the data.
+	//! Return true if an error occurred while loading the data.
 	bool hasErrorOccured() const {return errorOccured;}
 
 	//! Get the depth level in the tree.
 	int getLevel() const {return parent()==Q_NULLPTR ? 0 : (qobject_cast<MultiLevelJsonBase*>(parent()))->getLevel()+1;}
 
-	//! Convert the image informations to a map following the JSON structure.
+	//! Convert the image information to a map following the JSON structure.
 	//! It can be saved as JSON using the StelJsonParser methods.
 	QVariantMap toQVariantMap() const;
 
@@ -95,7 +95,7 @@ protected:
 	//! The list of all the created subtiles for this tile
 	QList<MultiLevelJsonBase*> subTiles;
 
-	//! Set to true if an error occured with this tile and it should not be displayed
+	//! Set to true if an error occurred with this tile and it should not be displayed
 	bool errorOccured;
 
 	void updatePercent(int tot, int numToBeLoaded);

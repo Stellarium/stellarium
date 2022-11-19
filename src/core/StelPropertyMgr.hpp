@@ -28,7 +28,7 @@ class StelProperty;
 //! Abstract base class for a StelProperty proxy implementation, which allow reacting to the
 //! StelProperty::changed event using a specific type instead of reacting to the QVariant version.
 //! This is required for some connections such as in the UI.
-//! The intented use is to subclass this class and implement the onPropertyChanged() slot,
+//! The intended use is to subclass this class and implement the onPropertyChanged() slot,
 //! re-emitting the "changed" event with a type-converted value.
 class StelPropertyProxy : public QObject
 {

@@ -117,7 +117,7 @@ void SpoutSender::captureAndSendFrame(GLuint fbo)
 
 		//manual calling of UpdateSender seems buggy, it creates a new sender name
 		//but we don't need to use it
-		//SendTexture will update the sender automaticallly if the size is wrong, without these bugs
+		//SendTexture will update the sender automatically if the size is wrong, without these bugs
 		//only possible drawback is the sent frame seems to be discarded, only next call will draw properly
 		//spoutLib->UpdateSender(name,width,height);
 		textureDirty = false;

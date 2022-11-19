@@ -62,7 +62,7 @@ extern "C" {
    L = mean longitude = Omega + omega + M
    M = mean anomaly
    i = inclination
-   e = excentricity
+   e = eccentricity
    
    Units are suspected to be: Julian days, AU, rad
 

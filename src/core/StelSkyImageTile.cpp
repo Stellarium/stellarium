@@ -138,7 +138,7 @@ void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& resu
 	}
 #endif
 
-	// An error occured during loading
+	// An error occurred during loading
 	if (errorOccured)
 		return;
 
@@ -554,7 +554,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	withAberration = map.value("withAberration", true).toBool();
 }
 
-// Convert the image informations to a map following the JSON structure.
+// Convert the image information to a map following the JSON structure.
 QVariantMap StelSkyImageTile::toQVariantMap() const
 {
 	QVariantMap res;

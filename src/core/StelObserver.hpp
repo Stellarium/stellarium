@@ -67,7 +67,7 @@ public:
 
 	virtual const QSharedPointer<Planet> getHomePlanet(void) const;
 
-	//! Get the informations on the current location
+	//! Get the information on the current location
 	virtual const StelLocation& getCurrentLocation() const {return currentLocation;}
 
 	//! Get whether the life of this observer is over, and therefore that it should be changed to the next one

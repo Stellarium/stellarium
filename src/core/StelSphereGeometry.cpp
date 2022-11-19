@@ -456,7 +456,7 @@ bool SphericalCap::clipGreatCircle(Vec3d& v1, Vec3d& v2) const
 }
 
 //! Compute the intersection of the circles defined by the 2 caps on the sphere (usually on 2 points) and return it in p1 and p2.
-//! If the 2 SphericalCaps don't interesect or intersect only at 1 point, false is returned and p1 and p2 are undefined.
+//! If the 2 SphericalCaps don't intersect or intersect only at 1 point, false is returned and p1 and p2 are undefined.
 bool SphericalCap::intersectionPoints(const SphericalCap& h1, const SphericalCap& h2, Vec3d& p1, Vec3d& p2)
 {
 	if (!h1.intersects(h2))

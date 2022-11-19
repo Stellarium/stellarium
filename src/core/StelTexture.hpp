@@ -66,7 +66,7 @@ public:
 
 	//! Bind the texture so that it can be used for openGL drawing (calls glBindTexture).
 	//! If the texture is lazyly loaded, this starts the loading and return false immediately.
-	//! @return true if the binding successfully occured, false if the texture is not yet loaded.
+	//! @return true if the binding successfully occurred, false if the texture is not yet loaded.
 	bool bind(uint slot=0);
 
 	//! Releases the currently bound texture without testing if it is currently bound,
@@ -80,7 +80,7 @@ public:
 	//! Return whether the texture can be binded, i.e. it is fully loaded
 	bool canBind() const {return id!=0;}
 
-	//! Return the width and heigth of the texture in pixels
+	//! Return the width and height of the texture in pixels
 	bool getDimensions(int &width, int &height);
 
 	//! Returns whether the texture has an alpha channel (GL_RGBA or GL_LUMINANCE_ALPHA format)
@@ -88,7 +88,7 @@ public:
 	bool hasAlphaChannel() const { return alphaChannel ; }
 
 	//! Get the error message which caused the texture loading to fail
-	//! @return the human friendly error message or empty string if no errors occured
+	//! @return the human friendly error message or empty string if no errors occurred
 	const QString& getErrorMessage() const {return errorMessage;}
 
 	//! Returns true if a loading error occurred
@@ -106,9 +106,9 @@ public:
 
 signals:
 	//! Emitted when the texture is ready to be bind(), i.e. when downloaded, imageLoading and	glLoading is over
-	//! or when an error occured and the texture will never be available
+	//! or when an error occurred and the texture will never be available
 	//! In case of error, you can query what the problem was by calling getErrorMessage()
-	//! @param error is equal to true if an error occured while loading the texture
+	//! @param error is equal to true if an error occurred while loading the texture
 	void loadingProcessFinished(bool error);
 
 private slots:
@@ -149,7 +149,7 @@ private:
 
 	//! Load the texture already in the RAM to the openGL memory
 	//! This function uses openGL routines and must be called in the main thread
-	//! @return false if an error occured
+	//! @return false if an error occurred
 	bool glLoad(const QImage& image);
 	//! Same as glLoad(QImage), but with an image already in OpenGl format
 	bool glLoad(const GLData& data);

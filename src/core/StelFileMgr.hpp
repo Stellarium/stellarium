@@ -31,7 +31,7 @@ class QFileInfo;
 
 //! Provides utilities for locating and handling files.
 //! StelFileMgr provides functions for locating files.  It maintains a list of
-//! directories in which to look for files called the search path. Typcially this
+//! directories in which to look for files called the search path. Typically this
 //! includes the Stellarium installation directory, and a per-user settings
 //! directory (on platforms which support it).
 //! The concept is that the StelFileMgr will be asked for a named path, and it
@@ -217,8 +217,8 @@ private:
 	static QString installDir;
 	
 #ifdef Q_OS_WIN
-	//! For internal use - retreives windows special named directories.
-	//! @param csidlId identifier for directoy, e.g. CSIDL_APPDATA
+	//! For internal use - retrieves windows special named directories.
+	//! @param csidlId identifier for directory, e.g. CSIDL_APPDATA
 	static QString getWin32SpecialDirPath(int csidlId);
 #endif
 };

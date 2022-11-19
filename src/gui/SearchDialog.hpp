@@ -122,7 +122,7 @@ public:
 	~SearchDialog() override;
 	bool eventFilter(QObject *object, QEvent *event) override;
 
-	//! Replaces all occurences of substrings describing Greek letters (i.e. "alpha", "beta", ...)
+	//! Replaces all occurrences of substrings describing Greek letters (i.e. "alpha", "beta", ...)
 	//! with the actual Greek unicode characters.
 	static QString substituteGreek(const QString& keyString);
 	//! Returns the Greek unicode character for the specified letter string (i.e. "alpha", "beta", ...)

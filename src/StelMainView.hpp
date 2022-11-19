@@ -242,7 +242,7 @@ signals:
 	//! @remark FS: is threaded access here even a possibility anymore, or a remnant of older code?
 	void screenshotRequested(void);
 	void fullScreenChanged(bool b);
-	//! Emitted when the "Reload shaders" action is perfomed
+	//! Emitted when the "Reload shaders" action is performed
 	//! Interested objects should subscribe to this signal and reload their shaders
 	//! when this is emitted
 	void reloadShadersRequested();

@@ -32,7 +32,7 @@ class QTimer;
 class StelProgressController;
 class QProgressBar;
 
-// Progess bars in the lower right corner
+// Progress bars in the lower right corner
 class StelProgressBarMgr : public QGraphicsWidget
 {
 	Q_OBJECT

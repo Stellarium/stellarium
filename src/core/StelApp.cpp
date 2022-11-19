@@ -445,7 +445,7 @@ void StelApp::init(QSettings* conf)
 	if (!fuzzyEquals(saveProjW, -1.) && !fuzzyEquals(saveProjH, -1.))
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
 	
-	//Initializing locale at the begining to show all strings translated
+	//Initializing locale at the beginning to show all strings translated
 	localeMgr = new StelLocaleMgr();
 	localeMgr->init();
 	//SplashScreen::showMessage(q_("Initializing locales..."));
@@ -613,7 +613,7 @@ void StelApp::init(QSettings* conf)
 	custObj->init();
 	getModuleMgr().registerModule(custObj);
 
-	// Init hightlights
+	// Init highlights
 	SplashScreen::showMessage(q_("Initializing highlights..."));
 	HighlightMgr* hlMgr = new HighlightMgr();
 	hlMgr->init();
