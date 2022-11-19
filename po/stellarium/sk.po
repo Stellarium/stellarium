@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-11-15 19:34+0700\n"
+"POT-Creation-Date: 2022-11-18 23:39+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2022\n"
 "Language-Team: Slovak (https://www.transifex.com/stellarium/teams/80998/sk/)\n"
@@ -29,8 +29,8 @@ msgstr ""
 #: src/core/modules/CustomObject.cpp:81 src/core/modules/Asterism.cpp:194
 #: src/core/modules/Constellation.cpp:290
 #: src/core/modules/NomenclatureItem.cpp:221 src/core/modules/Nebula.cpp:262
-#: src/core/modules/Nebula.cpp:264 src/core/modules/Planet.cpp:558
-#: src/core/modules/Planet.cpp:561 src/core/modules/StarWrapper.cpp:49
+#: src/core/modules/Nebula.cpp:264 src/core/modules/Planet.cpp:561
+#: src/core/modules/Planet.cpp:564 src/core/modules/StarWrapper.cpp:49
 #: src/core/modules/StarWrapper.cpp:290 src/core/modules/StarWrapper.cpp:292
 #: src/gui/AstroCalcDialog.cpp:878 src/gui/AstroCalcDialog.cpp:2260
 #: src/gui/AstroCalcDialog.cpp:2897 src/gui/AstroCalcDialog.cpp:2929
@@ -69,11 +69,11 @@ msgstr "asterizmus"
 #: src/core/modules/LandscapeMgr.cpp:777
 #: src/core/modules/NomenclatureMgr.cpp:80 src/core/modules/NebulaMgr.cpp:405
 #: src/core/modules/NebulaMgr.cpp:406 src/core/modules/SolarSystem.cpp:297
-#: src/core/modules/MilkyWay.cpp:87 src/core/modules/ZodiacalLight.cpp:89
+#: src/core/modules/MilkyWay.cpp:110 src/core/modules/ZodiacalLight.cpp:114
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
-#: src/core/StelApp.cpp:648 src/core/StelCore.cpp:290
+#: src/core/StelApp.cpp:648 src/core/StelCore.cpp:291
 #: src/core/StelSkyLayerMgr.cpp:85 src/core/StelSkyLayerMgr.cpp:86
-#: src/StelMainView.cpp:886
+#: src/StelMainView.cpp:892
 msgid "Display Options"
 msgstr "Možnosti zobrazenia"
 
@@ -331,8 +331,8 @@ msgid "Antapex"
 msgstr "Antapex"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/GridLinesMgr.cpp:1491 src/core/modules/Planet.cpp:682
-#: src/core/modules/Planet.cpp:1165 src/gui/AstroCalcDialog.cpp:9227
+#: src/core/modules/GridLinesMgr.cpp:1491 src/core/modules/Planet.cpp:685
+#: src/core/modules/Planet.cpp:1168 src/gui/AstroCalcDialog.cpp:9227
 #: plugins/Satellites/src/Satellite.cpp:358
 #: plugins/Satellites/src/Satellite.cpp:401
 #: plugins/MeteorShowers/src/MeteorShower.cpp:564
@@ -540,97 +540,97 @@ msgid "Compass marks"
 msgstr "Značky kompasu"
 
 #. TRANSLATORS: North
-#: src/core/modules/LandscapeMgr.cpp:228 src/core/modules/Planet.cpp:1287
+#: src/core/modules/LandscapeMgr.cpp:228 src/core/modules/Planet.cpp:1290
 msgctxt "compass direction"
 msgid "N"
 msgstr "S"
 
 #. TRANSLATORS: South
-#: src/core/modules/LandscapeMgr.cpp:230 src/core/modules/Planet.cpp:1279
+#: src/core/modules/LandscapeMgr.cpp:230 src/core/modules/Planet.cpp:1282
 msgctxt "compass direction"
 msgid "S"
 msgstr "J"
 
 #. TRANSLATORS: East
-#: src/core/modules/LandscapeMgr.cpp:232 src/core/modules/Planet.cpp:1291
+#: src/core/modules/LandscapeMgr.cpp:232 src/core/modules/Planet.cpp:1294
 msgctxt "compass direction"
 msgid "E"
 msgstr "V"
 
 #. TRANSLATORS: West
-#: src/core/modules/LandscapeMgr.cpp:234 src/core/modules/Planet.cpp:1283
+#: src/core/modules/LandscapeMgr.cpp:234 src/core/modules/Planet.cpp:1286
 msgctxt "compass direction"
 msgid "W"
 msgstr "Z"
 
 #. TRANSLATORS: Northeast
-#: src/core/modules/LandscapeMgr.cpp:236 src/core/modules/Planet.cpp:1289
+#: src/core/modules/LandscapeMgr.cpp:236 src/core/modules/Planet.cpp:1292
 msgctxt "compass direction"
 msgid "NE"
 msgstr "SV"
 
 #. TRANSLATORS: Southeast
-#: src/core/modules/LandscapeMgr.cpp:238 src/core/modules/Planet.cpp:1293
+#: src/core/modules/LandscapeMgr.cpp:238 src/core/modules/Planet.cpp:1296
 msgctxt "compass direction"
 msgid "SE"
 msgstr "JV"
 
 #. TRANSLATORS: Southwest
-#: src/core/modules/LandscapeMgr.cpp:240 src/core/modules/Planet.cpp:1281
+#: src/core/modules/LandscapeMgr.cpp:240 src/core/modules/Planet.cpp:1284
 msgctxt "compass direction"
 msgid "SW"
 msgstr "JZ"
 
 #. TRANSLATORS: Northwest
-#: src/core/modules/LandscapeMgr.cpp:242 src/core/modules/Planet.cpp:1285
+#: src/core/modules/LandscapeMgr.cpp:242 src/core/modules/Planet.cpp:1288
 msgctxt "compass direction"
 msgid "NW"
 msgstr "SZ"
 
 #. TRANSLATORS: North-northeast
-#: src/core/modules/LandscapeMgr.cpp:244 src/core/modules/Planet.cpp:1288
+#: src/core/modules/LandscapeMgr.cpp:244 src/core/modules/Planet.cpp:1291
 msgctxt "compass direction"
 msgid "NNE"
 msgstr "SSV"
 
 #. TRANSLATORS: East-northeast
-#: src/core/modules/LandscapeMgr.cpp:246 src/core/modules/Planet.cpp:1290
+#: src/core/modules/LandscapeMgr.cpp:246 src/core/modules/Planet.cpp:1293
 msgctxt "compass direction"
 msgid "ENE"
 msgstr "VSV"
 
 #. TRANSLATORS: East-southeast
-#: src/core/modules/LandscapeMgr.cpp:248 src/core/modules/Planet.cpp:1292
+#: src/core/modules/LandscapeMgr.cpp:248 src/core/modules/Planet.cpp:1295
 msgctxt "compass direction"
 msgid "ESE"
 msgstr "VJV"
 
 #. TRANSLATORS: South-southeast
-#: src/core/modules/LandscapeMgr.cpp:250 src/core/modules/Planet.cpp:1294
+#: src/core/modules/LandscapeMgr.cpp:250 src/core/modules/Planet.cpp:1297
 msgctxt "compass direction"
 msgid "SSE"
 msgstr "JJV"
 
 #. TRANSLATORS: South-southwest
-#: src/core/modules/LandscapeMgr.cpp:252 src/core/modules/Planet.cpp:1280
+#: src/core/modules/LandscapeMgr.cpp:252 src/core/modules/Planet.cpp:1283
 msgctxt "compass direction"
 msgid "SSW"
 msgstr "JJZ"
 
 #. TRANSLATORS: West-southwest
-#: src/core/modules/LandscapeMgr.cpp:254 src/core/modules/Planet.cpp:1282
+#: src/core/modules/LandscapeMgr.cpp:254 src/core/modules/Planet.cpp:1285
 msgctxt "compass direction"
 msgid "WSW"
 msgstr "ZJZ"
 
 #. TRANSLATORS: West-northwest
-#: src/core/modules/LandscapeMgr.cpp:256 src/core/modules/Planet.cpp:1284
+#: src/core/modules/LandscapeMgr.cpp:256 src/core/modules/Planet.cpp:1287
 msgctxt "compass direction"
 msgid "WNW"
 msgstr "ZSZ"
 
 #. TRANSLATORS: North-northwest
-#: src/core/modules/LandscapeMgr.cpp:258 src/core/modules/Planet.cpp:1286
+#: src/core/modules/LandscapeMgr.cpp:258 src/core/modules/Planet.cpp:1289
 msgctxt "compass direction"
 msgid "NNW"
 msgstr "SSZ"
@@ -819,14 +819,14 @@ msgstr "geologický termín"
 msgid "Linear size"
 msgstr "Veľkosť"
 
-#: src/core/modules/NomenclatureItem.cpp:236 src/core/modules/Planet.cpp:765
+#: src/core/modules/NomenclatureItem.cpp:236 src/core/modules/Planet.cpp:768
 msgid "Diameter"
 msgstr "Priemer"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:237 src/core/modules/Planet.cpp:638
-#: src/core/modules/Planet.cpp:663 src/core/modules/Planet.cpp:766
-#: src/core/modules/Planet.cpp:1481 src/core/modules/Comet.cpp:157
+#: src/core/modules/NomenclatureItem.cpp:237 src/core/modules/Planet.cpp:641
+#: src/core/modules/Planet.cpp:666 src/core/modules/Planet.cpp:769
+#: src/core/modules/Planet.cpp:1484 src/core/modules/Comet.cpp:157
 #: src/core/modules/Comet.cpp:167 src/gui/StelGuiItems.cpp:888
 #: src/gui/AstroCalcDialog.cpp:3133 src/gui/AstroCalcDialog.cpp:3648
 #: src/gui/AstroCalcDialog.cpp:9162 plugins/Satellites/src/Satellites.cpp:2882
@@ -1728,12 +1728,12 @@ msgstr "o"
 msgid "Airmasses"
 msgstr "Vzdušné hmoty"
 
-#: src/core/modules/Nebula.cpp:249 src/core/modules/Planet.cpp:541
+#: src/core/modules/Nebula.cpp:249 src/core/modules/Planet.cpp:544
 #: src/core/modules/StarWrapper.cpp:276
 msgid "Additional names: "
 msgstr "Ďalšie mená:"
 
-#: src/core/modules/Nebula.cpp:255 src/core/modules/Planet.cpp:548
+#: src/core/modules/Nebula.cpp:255 src/core/modules/Planet.cpp:551
 #: src/core/modules/StarWrapper.cpp:282
 msgid "Additional catalog numbers: "
 msgstr "Ďalšie katalógové čísla:"
@@ -1792,7 +1792,7 @@ msgstr "ly"
 
 #. TRANSLATORS: distance
 #: src/core/modules/Nebula.cpp:359 src/core/modules/Nebula.cpp:405
-#: src/core/modules/Planet.cpp:673 src/core/modules/StarWrapper.cpp:341
+#: src/core/modules/Planet.cpp:676 src/core/modules/StarWrapper.cpp:341
 #: src/core/modules/StarWrapper.cpp:343 src/gui/AstroCalcDialog.cpp:913
 #: src/gui/AstroCalcChart.cpp:92 src/gui/AstroCalcChart.cpp:102
 #: src/gui/AstroCalcChart.cpp:427 src/gui/AstroCalcChart.cpp:453
@@ -2131,7 +2131,7 @@ msgid "Toggle DSO type filter"
 msgstr "Prepnúť filter typov DSO"
 
 #: src/core/modules/NebulaMgr.cpp:1444 src/gui/StelDialog.cpp:336
-#: src/StelMainView.cpp:1027
+#: src/StelMainView.cpp:988
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:773
 msgid "Attention!"
 msgstr "Pozor!"
@@ -2213,44 +2213,44 @@ msgstr "sednoid"
 msgid "interstellar object"
 msgstr "medzihviezdny objekt"
 
-#: src/core/modules/Planet.cpp:519 src/core/modules/Comet.cpp:148
+#: src/core/modules/Planet.cpp:522 src/core/modules/Comet.cpp:148
 #: src/core/modules/StarWrapper.cpp:300 plugins/Quasars/src/Quasar.cpp:131
 msgid "Absolute Magnitude"
 msgstr "Absolútna magnitúda"
 
-#: src/core/modules/Planet.cpp:522
+#: src/core/modules/Planet.cpp:525
 msgid "Mean Opposition Magnitude"
 msgstr "Stredná jasnosť v opozícii"
 
-#: src/core/modules/Planet.cpp:556
+#: src/core/modules/Planet.cpp:559
 msgctxt "type of comet"
 msgid "periodic"
 msgstr "periodická"
 
-#: src/core/modules/Planet.cpp:557
+#: src/core/modules/Planet.cpp:560
 msgctxt "type of comet"
 msgid "non-periodic"
 msgstr "neperiodická"
 
 #. TRANSLATORS: Ecliptical rectangular coordinates
-#: src/core/modules/Planet.cpp:613 src/core/modules/Planet.cpp:615
+#: src/core/modules/Planet.cpp:616 src/core/modules/Planet.cpp:618
 msgctxt "coordinates"
 msgid "Ecliptical"
 msgstr "Ekliptikálne"
 
-#: src/core/modules/Planet.cpp:624 src/core/modules/Planet.cpp:625
+#: src/core/modules/Planet.cpp:627 src/core/modules/Planet.cpp:628
 msgid "Hourly motion"
 msgstr "Hodinový pohyb"
 
-#: src/core/modules/Planet.cpp:624 src/core/modules/Planet.cpp:1340
-#: src/core/modules/Planet.cpp:1349 src/core/modules/StarWrapper.cpp:358
+#: src/core/modules/Planet.cpp:627 src/core/modules/Planet.cpp:1343
+#: src/core/modules/Planet.cpp:1352 src/core/modules/StarWrapper.cpp:358
 #: plugins/Pulsars/src/Pulsar.cpp:204
 msgctxt "into the direction of"
 msgid "towards"
 msgstr "vpred"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
-#: src/core/modules/Planet.cpp:636 src/gui/AstroCalcDialog.cpp:859
+#: src/core/modules/Planet.cpp:639 src/gui/AstroCalcDialog.cpp:859
 #: src/gui/AstroCalcDialog.cpp:1169 src/gui/AstroCalcDialog.cpp:1457
 #: src/gui/AstroCalcDialog.cpp:1722 src/gui/AstroCalcDialog.cpp:1769
 #: src/gui/AstroCalcDialog.cpp:9187 src/gui/AstroCalcChart.cpp:427
@@ -2265,256 +2265,256 @@ msgstr "au"
 #. TRANSLATORS: Unit of measure for distance - millions of kilometers
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #. TRANSLATORS: Unit of measure for distance - millions kilometers
-#: src/core/modules/Planet.cpp:652 src/core/modules/Planet.cpp:670
+#: src/core/modules/Planet.cpp:655 src/core/modules/Planet.cpp:673
 #: src/core/modules/Comet.cpp:159 src/gui/AstroCalcDialog.cpp:9164
 msgctxt "distance"
 msgid "M km"
 msgstr "mil. km"
 
-#: src/core/modules/Planet.cpp:655
+#: src/core/modules/Planet.cpp:658
 msgid "Distance from Sun"
 msgstr "Vzdialenosť od Slnka"
 
 #. TRANSLATORS: Distance measured in terms of the speed of light
-#: src/core/modules/Planet.cpp:675
+#: src/core/modules/Planet.cpp:678
 msgid "Light time"
 msgstr "Svetelná vzdialenosť"
 
-#: src/core/modules/Planet.cpp:689
+#: src/core/modules/Planet.cpp:692
 msgid "Orbital velocity"
 msgstr "Obežná rýchlosť"
 
-#: src/core/modules/Planet.cpp:692
+#: src/core/modules/Planet.cpp:695
 msgid "Heliocentric velocity"
 msgstr "Heliocentrická rýchlosť"
 
-#: src/core/modules/Planet.cpp:702
+#: src/core/modules/Planet.cpp:705
 msgid "NOTE: orbital elements outdated -- consider updating!"
 msgstr "POZN.: zastarané dráhové elementy -- zvážte ich aktualizáciu!"
 
-#: src/core/modules/Planet.cpp:733
+#: src/core/modules/Planet.cpp:736
 msgid "with rings"
 msgstr "s prstencami"
 
-#: src/core/modules/Planet.cpp:750
+#: src/core/modules/Planet.cpp:753
 msgid "scaled up to"
 msgstr "zväčšené na"
 
-#: src/core/modules/Planet.cpp:760
+#: src/core/modules/Planet.cpp:763
 msgid "Apparent diameter"
 msgstr "Zdanlivý priemer"
 
-#: src/core/modules/Planet.cpp:765
+#: src/core/modules/Planet.cpp:768
 msgid "Equatorial diameter"
 msgstr "Rovníkový priemer"
 
-#: src/core/modules/Planet.cpp:826 src/core/modules/Planet.cpp:827
-#: src/core/modules/Planet.cpp:835 src/gui/AstroCalcChart.cpp:93
+#: src/core/modules/Planet.cpp:829 src/core/modules/Planet.cpp:830
+#: src/core/modules/Planet.cpp:838 src/gui/AstroCalcChart.cpp:93
 #: src/gui/AstroCalcChart.cpp:103 src/gui/AstroCalcChart.cpp:429
 #: src/gui/AstroCalcChart.cpp:455 src/ui_configurationDialog.h:1838
 msgid "Elongation"
 msgstr "Elongácia"
 
-#: src/core/modules/Planet.cpp:828 src/core/modules/Planet.cpp:837
+#: src/core/modules/Planet.cpp:831 src/core/modules/Planet.cpp:840
 #: src/gui/AstroCalcChart.cpp:96 src/gui/AstroCalcChart.cpp:106
 #: src/gui/AstroCalcChart.cpp:438 src/gui/AstroCalcChart.cpp:464
 #: plugins/Satellites/src/Satellite.cpp:406
 msgid "Phase angle"
 msgstr "Fázový uhol"
 
-#: src/core/modules/Planet.cpp:830 src/core/modules/Planet.cpp:839
+#: src/core/modules/Planet.cpp:833 src/core/modules/Planet.cpp:842
 msgid "Illuminated"
 msgstr "Osvetlené"
 
-#: src/core/modules/Planet.cpp:836
+#: src/core/modules/Planet.cpp:839
 msgid "Elong. in Ecl.Long."
 msgstr "Elong. v Ekl.Dĺžke"
 
-#: src/core/modules/Planet.cpp:851 src/gui/AstroCalcDialog.cpp:9397
+#: src/core/modules/Planet.cpp:854 src/gui/AstroCalcDialog.cpp:9397
 #: src/gui/AstroCalcChart.cpp:472
 msgid "Angular distance"
 msgstr "Uhlová vzdialenosť"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: src/core/modules/Planet.cpp:869 src/core/modules/StarWrapper.cpp:382
+#: src/core/modules/Planet.cpp:872 src/core/modules/StarWrapper.cpp:382
 #: src/gui/AstroCalcDialog.cpp:9198
 msgctxt "duration"
 msgid "days"
 msgstr "dní"
 
-#: src/core/modules/Planet.cpp:878
+#: src/core/modules/Planet.cpp:881
 msgid "Sidereal period"
 msgstr "Siderická perióda"
 
-#: src/core/modules/Planet.cpp:887
+#: src/core/modules/Planet.cpp:890
 msgid "Synodic period"
 msgstr "Synodická perióda"
 
 #. TRANSLATORS: Unit of measure for speed - meters per second
-#: src/core/modules/Planet.cpp:1167
+#: src/core/modules/Planet.cpp:1170
 msgctxt "speed"
 msgid "m/s"
 msgstr "m/s"
 
-#: src/core/modules/Planet.cpp:1182
+#: src/core/modules/Planet.cpp:1185
 msgid "Sidereal day"
 msgstr "Siderický deň"
 
-#: src/core/modules/Planet.cpp:1184
+#: src/core/modules/Planet.cpp:1187
 msgid "Mean solar day"
 msgstr "Stredný slnečný deň"
 
-#: src/core/modules/Planet.cpp:1190
+#: src/core/modules/Planet.cpp:1193
 msgid "The period of rotation is chaotic"
 msgstr "Perióda rotácie je chaotická"
 
-#: src/core/modules/Planet.cpp:1196 src/core/modules/Planet.cpp:1198
-#: src/core/modules/Planet.cpp:1204 src/core/modules/Planet.cpp:1206
+#: src/core/modules/Planet.cpp:1199 src/core/modules/Planet.cpp:1201
+#: src/core/modules/Planet.cpp:1207 src/core/modules/Planet.cpp:1209
 msgid "Equatorial rotation velocity"
 msgstr "Rovníková rýchlosť rotácie"
 
-#: src/core/modules/Planet.cpp:1230
+#: src/core/modules/Planet.cpp:1233
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Nov"
 
-#: src/core/modules/Planet.cpp:1232
+#: src/core/modules/Planet.cpp:1235
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Dorastajúci polmesiac"
 
-#: src/core/modules/Planet.cpp:1234
+#: src/core/modules/Planet.cpp:1237
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Prvá štvrť"
 
-#: src/core/modules/Planet.cpp:1236
+#: src/core/modules/Planet.cpp:1239
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Dorastajúci mesiac"
 
-#: src/core/modules/Planet.cpp:1238
+#: src/core/modules/Planet.cpp:1241
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Spln"
 
-#: src/core/modules/Planet.cpp:1240
+#: src/core/modules/Planet.cpp:1243
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Ubúdajúci mesiac"
 
-#: src/core/modules/Planet.cpp:1242
+#: src/core/modules/Planet.cpp:1245
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Posledná štvrť"
 
-#: src/core/modules/Planet.cpp:1244
+#: src/core/modules/Planet.cpp:1247
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Ubúdajúci polmesiac"
 
-#: src/core/modules/Planet.cpp:1252
+#: src/core/modules/Planet.cpp:1255
 msgid "Moon age"
 msgstr "Vek Mesiaca"
 
-#: src/core/modules/Planet.cpp:1252
+#: src/core/modules/Planet.cpp:1255
 msgid "days old"
 msgstr "dní"
 
-#: src/core/modules/Planet.cpp:1272 src/core/modules/Planet.cpp:1275
+#: src/core/modules/Planet.cpp:1275 src/core/modules/Planet.cpp:1278
 msgid "Position angle of bright limb"
 msgstr "Pozičný uhol jasného okraja"
 
-#: src/core/modules/Planet.cpp:1339 src/core/modules/Planet.cpp:1348
-#: src/core/modules/Planet.cpp:1384 src/core/modules/Planet.cpp:1391
+#: src/core/modules/Planet.cpp:1342 src/core/modules/Planet.cpp:1351
+#: src/core/modules/Planet.cpp:1387 src/core/modules/Planet.cpp:1394
 msgid "Position Angle of axis"
 msgstr "Pozičný uhol osi"
 
-#: src/core/modules/Planet.cpp:1340 src/core/modules/Planet.cpp:1341
-#: src/core/modules/Planet.cpp:1349 src/core/modules/Planet.cpp:1350
+#: src/core/modules/Planet.cpp:1343 src/core/modules/Planet.cpp:1344
+#: src/core/modules/Planet.cpp:1352 src/core/modules/Planet.cpp:1353
 msgid "Libration"
 msgstr "Librácia"
 
-#: src/core/modules/Planet.cpp:1342 src/core/modules/Planet.cpp:1351
-#: src/core/modules/Planet.cpp:1386 src/core/modules/Planet.cpp:1393
+#: src/core/modules/Planet.cpp:1345 src/core/modules/Planet.cpp:1354
+#: src/core/modules/Planet.cpp:1389 src/core/modules/Planet.cpp:1396
 msgid "Subsolar point"
 msgstr "Subsolárny bod"
 
-#: src/core/modules/Planet.cpp:1343 src/core/modules/Planet.cpp:1352
+#: src/core/modules/Planet.cpp:1346 src/core/modules/Planet.cpp:1355
 msgid "Colongitude"
 msgstr "Colongitudo"
 
-#: src/core/modules/Planet.cpp:1385 src/core/modules/Planet.cpp:1392
+#: src/core/modules/Planet.cpp:1388 src/core/modules/Planet.cpp:1395
 msgid "Center point"
 msgstr "Stredový bod"
 
-#: src/core/modules/Planet.cpp:1412
+#: src/core/modules/Planet.cpp:1415
 msgid "Eclipse magnitude"
 msgstr "Magnitúda zákrytu"
 
-#: src/core/modules/Planet.cpp:1414
+#: src/core/modules/Planet.cpp:1417
 msgid "Eclipse obscuration"
 msgstr "Veľkosť zákrytu"
 
-#: src/core/modules/Planet.cpp:1440
+#: src/core/modules/Planet.cpp:1443
 msgid "Moon/Sun diameter ratio"
 msgstr "Pomer priemerov Mesiaca/Slnka"
 
-#: src/core/modules/Planet.cpp:1443
+#: src/core/modules/Planet.cpp:1446
 msgctxt "type of solar eclipse"
 msgid "(annular)"
 msgstr "(prstencové)"
 
-#: src/core/modules/Planet.cpp:1445
+#: src/core/modules/Planet.cpp:1448
 msgctxt "type of solar eclipse"
 msgid "(total)"
 msgstr "(úplné)"
 
-#: src/core/modules/Planet.cpp:1456
+#: src/core/modules/Planet.cpp:1459
 msgid "Central eclipse duration"
 msgstr "Trvanie centrálneho zatmenia"
 
 #. TRANSLATORS: Short for "minutes".
-#: src/core/modules/Planet.cpp:1458
+#: src/core/modules/Planet.cpp:1461
 #: plugins/Observability/src/Observability.cpp:153
 msgid "m"
 msgstr "m"
 
 #. TRANSLATORS: Short for "seconds".
-#: src/core/modules/Planet.cpp:1460
+#: src/core/modules/Planet.cpp:1463
 #: plugins/Observability/src/Observability.cpp:155
 msgid "s"
 msgstr "s"
 
-#: src/core/modules/Planet.cpp:1461
+#: src/core/modules/Planet.cpp:1464
 msgid "Center of solar eclipse (Lat./Long.)"
 msgstr "Stred slnečného zatmenia (Šír./Dĺž.)"
 
-#: src/core/modules/Planet.cpp:1471
+#: src/core/modules/Planet.cpp:1474
 msgid "Shadow center point is"
 msgstr "Stred tieňa je"
 
-#: src/core/modules/Planet.cpp:1473
+#: src/core/modules/Planet.cpp:1476
 msgid "km towards azimuth"
 msgstr "km k azimutu"
 
-#: src/core/modules/Planet.cpp:1476
+#: src/core/modules/Planet.cpp:1479
 msgid "Width of antumbra"
 msgstr "Šírka protitieňa"
 
-#: src/core/modules/Planet.cpp:1478
+#: src/core/modules/Planet.cpp:1481
 msgid "Width of umbra"
 msgstr "Šírka tieňa"
 
-#: src/core/modules/Planet.cpp:1495
+#: src/core/modules/Planet.cpp:1498
 msgid "Penumbral eclipse magnitude"
 msgstr "Magnitúda polotieňového zatmenia"
 
-#: src/core/modules/Planet.cpp:1498
+#: src/core/modules/Planet.cpp:1501
 msgid "Umbral eclipse magnitude"
 msgstr "Magnitúda tieňového zatmenia"
 
-#: src/core/modules/Planet.cpp:1505
+#: src/core/modules/Planet.cpp:1508
 msgid "Albedo"
 msgstr "Albedo"
 
@@ -2545,7 +2545,7 @@ msgstr "Priemer komy (odhad)"
 msgid "Gas tail length (estimate)"
 msgstr "Dĺžka plynového chvosta (odhad)"
 
-#: src/core/modules/Comet.cpp:449 src/core/StelProjectorClasses.cpp:418
+#: src/core/modules/Comet.cpp:449 src/core/StelProjectorClasses.cpp:755
 msgid "Orthographic"
 msgstr "Ortografická"
 
@@ -2690,11 +2690,11 @@ msgstr "Pozičný uhol"
 msgid "Separation"
 msgstr "Uhlová vzdialenosť"
 
-#: src/core/modules/MilkyWay.cpp:88
+#: src/core/modules/MilkyWay.cpp:111
 msgid "Milky Way"
 msgstr "Mliečna cesta"
 
-#: src/core/modules/ZodiacalLight.cpp:90
+#: src/core/modules/ZodiacalLight.cpp:115
 msgid "Zodiacal Light"
 msgstr "Zodiakálne svetlo"
 
@@ -2982,7 +2982,7 @@ msgstr "Nepodarilo sa vytvoriť SPOUT sender. Podrobnosti sú vo výpise."
 msgid "Loading plugin"
 msgstr "Nahrávam modul"
 
-#: src/core/StelCore.cpp:288 src/gui/StelGui.cpp:225
+#: src/core/StelCore.cpp:289 src/gui/StelGui.cpp:225
 #: src/gui/AstroCalcDialog.cpp:1702 src/gui/AstroCalcDialog.cpp:2258
 #: src/gui/AstroCalcDialog.cpp:2282 src/gui/AstroCalcDialog.cpp:2895
 #: src/gui/AstroCalcDialog.cpp:2924 src/gui/AstroCalcDialog.cpp:6551
@@ -2991,247 +2991,247 @@ msgstr "Nahrávam modul"
 msgid "Date and Time"
 msgstr "Dátum a čas"
 
-#: src/core/StelCore.cpp:289 src/core/StelMovementMgr.cpp:230
+#: src/core/StelCore.cpp:290 src/core/StelMovementMgr.cpp:230
 msgid "Movement and Selection"
 msgstr "Pohyb a výber"
 
-#: src/core/StelCore.cpp:292
+#: src/core/StelCore.cpp:293
 msgid "Increase time speed"
 msgstr "Zrýchliť plynutie času"
 
-#: src/core/StelCore.cpp:293
+#: src/core/StelCore.cpp:294
 msgid "Decrease time speed"
 msgstr "Spomaliť plynutie času"
 
-#: src/core/StelCore.cpp:294
+#: src/core/StelCore.cpp:295
 msgid "Increase time speed (a little)"
 msgstr "Mierne zrýchliť plynutie času"
 
-#: src/core/StelCore.cpp:295
+#: src/core/StelCore.cpp:296
 msgid "Decrease time speed (a little)"
 msgstr "Mierne spomaliť plynutie času"
 
-#: src/core/StelCore.cpp:296
+#: src/core/StelCore.cpp:297
 msgid "Set normal time rate"
 msgstr "Nastaviť skutočné plynutie času"
 
-#: src/core/StelCore.cpp:297
+#: src/core/StelCore.cpp:298
 msgid "Set time rate to zero"
 msgstr "Zastaviť plynutie času"
 
-#: src/core/StelCore.cpp:298
+#: src/core/StelCore.cpp:299
 msgid "Set reverse time direction"
 msgstr "Nastaviť opačný smer plynutia času"
 
-#: src/core/StelCore.cpp:299
+#: src/core/StelCore.cpp:300
 msgid "Set time to now"
 msgstr "Nastaviť aktuálny čas"
 
-#: src/core/StelCore.cpp:300
+#: src/core/StelCore.cpp:301
 msgid "Add 1 solar minute"
 msgstr "Pridať 1 slnečnú minútu"
 
-#: src/core/StelCore.cpp:301
+#: src/core/StelCore.cpp:302
 msgid "Add 1 solar hour"
 msgstr "Pridať 1 slnečnú hodinu"
 
-#: src/core/StelCore.cpp:302
+#: src/core/StelCore.cpp:303
 msgid "Add 1 solar day"
 msgstr "Pridať 1 slnečný deň"
 
-#: src/core/StelCore.cpp:303
+#: src/core/StelCore.cpp:304
 msgid "Add 7 solar days"
 msgstr "Pridať 7 slnečných dní"
 
-#: src/core/StelCore.cpp:304
+#: src/core/StelCore.cpp:305
 msgid "Subtract 1 solar minute"
 msgstr "Ubrať 1 slnečnú minútu"
 
-#: src/core/StelCore.cpp:305
+#: src/core/StelCore.cpp:306
 msgid "Subtract 1 solar hour"
 msgstr "Ubrať 1 slnečnú hodinu"
 
-#: src/core/StelCore.cpp:306
+#: src/core/StelCore.cpp:307
 msgid "Subtract 1 solar day"
 msgstr "Ubrať 1 slnečný deň"
 
-#: src/core/StelCore.cpp:307
+#: src/core/StelCore.cpp:308
 msgid "Subtract 7 solar days"
 msgstr "Ubrať 7 slnečných dní"
 
-#: src/core/StelCore.cpp:308
+#: src/core/StelCore.cpp:309
 msgid "Add 1 sidereal day"
 msgstr "Pridať 1 siderický deň"
 
-#: src/core/StelCore.cpp:309
+#: src/core/StelCore.cpp:310
 msgid "Add 7 sidereal days"
 msgstr "Pridať 7 siderických dní"
 
-#: src/core/StelCore.cpp:310
+#: src/core/StelCore.cpp:311
 msgid "Add 1 sidereal year"
 msgstr "Pridať 1 siderický rok"
 
-#: src/core/StelCore.cpp:311
+#: src/core/StelCore.cpp:312
 msgid "Add 100 sidereal years"
 msgstr "Pridať 100 siderických rokov"
 
-#: src/core/StelCore.cpp:312
+#: src/core/StelCore.cpp:313
 msgid "Add 1 synodic month"
 msgstr "Pridať 1 synodický mesiac"
 
-#: src/core/StelCore.cpp:313
+#: src/core/StelCore.cpp:314
 msgid "Add 1 saros"
 msgstr "Pridať 1 saros"
 
-#: src/core/StelCore.cpp:314
+#: src/core/StelCore.cpp:315
 msgid "Add 1 draconic month"
 msgstr "Pridať 1 drakonický mesiac"
 
-#: src/core/StelCore.cpp:315
+#: src/core/StelCore.cpp:316
 msgid "Add 1 draconic year"
 msgstr "Pridať 1 drakonický rok"
 
-#: src/core/StelCore.cpp:316
+#: src/core/StelCore.cpp:317
 msgid "Add 1 anomalistic month"
 msgstr "Pridať 1 anomalistický mesiac"
 
-#: src/core/StelCore.cpp:317
+#: src/core/StelCore.cpp:318
 msgid "Add 1 anomalistic year"
 msgstr "Pridať 1 anomalistický rok"
 
-#: src/core/StelCore.cpp:318
+#: src/core/StelCore.cpp:319
 msgid "Add 100 anomalistic years"
 msgstr "Pridať 100 anomalistických rokov"
 
-#: src/core/StelCore.cpp:319
+#: src/core/StelCore.cpp:320
 msgid "Add 1 mean tropical month"
 msgstr "Pridať 1 stredný tropický mesiac"
 
-#: src/core/StelCore.cpp:320
+#: src/core/StelCore.cpp:321
 msgid "Add 1 mean tropical year"
 msgstr "Pridať 1 stredný tropický rok"
 
-#: src/core/StelCore.cpp:321
+#: src/core/StelCore.cpp:322
 msgid "Add 100 mean tropical years"
 msgstr "Pridať 100 stredných tropických rokov"
 
-#: src/core/StelCore.cpp:322
+#: src/core/StelCore.cpp:323
 msgid "Add 1 tropical year"
 msgstr "Pridať 1 tropický rok"
 
-#: src/core/StelCore.cpp:323
+#: src/core/StelCore.cpp:324
 msgid "Add 1 Julian year"
 msgstr "Pridať 1 juliánsky rok"
 
-#: src/core/StelCore.cpp:324
+#: src/core/StelCore.cpp:325
 msgid "Add 1 Julian century"
 msgstr "Pridať 1 juliánske storočie"
 
-#: src/core/StelCore.cpp:325
+#: src/core/StelCore.cpp:326
 msgid "Add 1 Gaussian year"
 msgstr "Pridať 1 gaussov rok"
 
-#: src/core/StelCore.cpp:326
+#: src/core/StelCore.cpp:327
 msgid "Add 1 calendric month"
 msgstr "Pridať 1 kalendárny mesiac"
 
-#: src/core/StelCore.cpp:327
+#: src/core/StelCore.cpp:328
 msgid "Subtract 1 sidereal day"
 msgstr "Ubrať 1 siderický deň"
 
-#: src/core/StelCore.cpp:328
+#: src/core/StelCore.cpp:329
 msgid "Subtract 7 sidereal days"
 msgstr "Ubrať 7 siderických dní"
 
-#: src/core/StelCore.cpp:329
+#: src/core/StelCore.cpp:330
 msgid "Subtract 1 sidereal year"
 msgstr "Ubrať 1 siderický rok"
 
-#: src/core/StelCore.cpp:330
+#: src/core/StelCore.cpp:331
 msgid "Subtract 100 sidereal years"
 msgstr "Ubrať 100 siderických rokov"
 
-#: src/core/StelCore.cpp:331
+#: src/core/StelCore.cpp:332
 msgid "Subtract 1 synodic month"
 msgstr "Ubrať 1 synodický mesiac"
 
-#: src/core/StelCore.cpp:332
+#: src/core/StelCore.cpp:333
 msgid "Subtract 1 saros"
 msgstr "Ubrať 1 saros"
 
-#: src/core/StelCore.cpp:333
+#: src/core/StelCore.cpp:334
 msgid "Subtract 1 draconic month"
 msgstr "Ubrať 1 drakonický mesiac"
 
-#: src/core/StelCore.cpp:334
+#: src/core/StelCore.cpp:335
 msgid "Subtract 1 draconic year"
 msgstr "Ubrať 1 drakonický rok"
 
-#: src/core/StelCore.cpp:335
+#: src/core/StelCore.cpp:336
 msgid "Subtract 1 anomalistic month"
 msgstr "Ubrať 1 anomalistický mesiac"
 
-#: src/core/StelCore.cpp:336
+#: src/core/StelCore.cpp:337
 msgid "Subtract 1 anomalistic year"
 msgstr "Ubrať 1 anomalistický rok"
 
-#: src/core/StelCore.cpp:337
+#: src/core/StelCore.cpp:338
 msgid "Subtract 100 anomalistic years"
 msgstr "Ubrať 100 anomalistických rokov"
 
-#: src/core/StelCore.cpp:338
+#: src/core/StelCore.cpp:339
 msgid "Subtract 1 mean tropical month"
 msgstr "Ubrať 1 stredný tropický mesiac"
 
-#: src/core/StelCore.cpp:339
+#: src/core/StelCore.cpp:340
 msgid "Subtract 1 mean tropical year"
 msgstr "Ubrať 1 stredný tropický rok"
 
-#: src/core/StelCore.cpp:340
+#: src/core/StelCore.cpp:341
 msgid "Subtract 100 mean tropical years"
 msgstr "Ubrať 100 stredných tropických rokov"
 
-#: src/core/StelCore.cpp:341
+#: src/core/StelCore.cpp:342
 msgid "Subtract 1 tropical year"
 msgstr "Ubrať 1 tropický rok"
 
-#: src/core/StelCore.cpp:342
+#: src/core/StelCore.cpp:343
 msgid "Subtract 1 Julian year"
 msgstr "Ubrať 1 juliánsky rok"
 
-#: src/core/StelCore.cpp:343
+#: src/core/StelCore.cpp:344
 msgid "Subtract 1 Julian century"
 msgstr "Ubrať 1 juliánske storočie"
 
-#: src/core/StelCore.cpp:344
+#: src/core/StelCore.cpp:345
 msgid "Subtract 1 Gaussian year"
 msgstr "Ubrať 1 gaussov rok"
 
-#: src/core/StelCore.cpp:345
+#: src/core/StelCore.cpp:346
 msgid "Subtract 1 calendric month"
 msgstr "Ubrať 1 kalendárny mesiac"
 
-#: src/core/StelCore.cpp:347
+#: src/core/StelCore.cpp:348
 msgid "Set home planet to selected planet"
 msgstr "Presunúť sa na vybratú planétu"
 
-#: src/core/StelCore.cpp:348
+#: src/core/StelCore.cpp:349
 msgid "Go to home"
 msgstr "Návrat domov"
 
-#: src/core/StelCore.cpp:350
+#: src/core/StelCore.cpp:351
 msgid "Flip scene horizontally"
 msgstr "Zrkadliť horizontálne"
 
-#: src/core/StelCore.cpp:351
+#: src/core/StelCore.cpp:352
 msgid "Flip scene vertically"
 msgstr "Zrkadliť vertikálne"
 
-#: src/core/StelCore.cpp:2380
+#: src/core/StelCore.cpp:2381
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Korekcie sú blokované. Používajte len keď viete, čo robíte!"
 
-#: src/core/StelCore.cpp:2383
+#: src/core/StelCore.cpp:2384
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -3242,7 +3242,7 @@ msgstr ""
 "Henrikssonom v jeho článku <em>Einsteinova teória relativity potvrdená "
 "pomocou starodávnych slnečných zatmení</em> (%1). Viac informácii %2tu%3."
 
-#: src/core/StelCore.cpp:2386
+#: src/core/StelCore.cpp:2387
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -3251,7 +3251,7 @@ msgstr ""
 "Túto empirickú rovnicu publikoval G. M. Clemence v článku <em>O sústave "
 "astronomických konštánt</em> (%1)."
 
-#: src/core/StelCore.cpp:2389
+#: src/core/StelCore.cpp:2390
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -3263,7 +3263,7 @@ msgstr ""
 " 1650 Spencerom Jonesom (%1) a použitý Jeanom Meeusom v jeho <em>Asronomické"
 " vzorce pre kalkulačky</em>. Bol využitý v PC programe SunTracker Pro."
 
-#: src/core/StelCore.cpp:2393
+#: src/core/StelCore.cpp:2394
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
@@ -3273,7 +3273,7 @@ msgstr ""
 "<em>Astronomické efemeridy</em> a v <em>Pravidlo zatmení Slnka</em> od "
 "Muckeho a Meeusa (1983)."
 
-#: src/core/StelCore.cpp:2397
+#: src/core/StelCore.cpp:2398
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -3284,7 +3284,7 @@ msgstr ""
 "v 5- a 10-dňových intervaloch od 601 p.n.l. do 1649 n.l. Rovnaký vzťah bol "
 "implicitne prijatý v Goldstineových tabuľkách (1973)."
 
-#: src/core/StelCore.cpp:2401
+#: src/core/StelCore.cpp:2402
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -3295,7 +3295,7 @@ msgstr ""
 "<em>Zrýchľovanie Zeme a Mesiaca od počiatku astronomických pozorovaní</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:2404
+#: src/core/StelCore.cpp:2405
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -3304,7 +3304,7 @@ msgstr ""
 "Túto rovnicu publikoval F. R. Stephenson v článku <em>Astronomické "
 "pozorovania pred vynálezom ďalekohľadu</em> (%1)."
 
-#: src/core/StelCore.cpp:2407
+#: src/core/StelCore.cpp:2408
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -3317,7 +3317,7 @@ msgstr ""
 "<em>Polynomické aproximácie pre korekciu delta T E.T.-U.T. v období "
 "1800-1975</em> (%1) ako preloženie cez dáta Brouwera (1952)."
 
-#: src/core/StelCore.cpp:2410
+#: src/core/StelCore.cpp:2411
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -3327,7 +3327,7 @@ msgstr ""
 "<em>Planetárne programy a tabuľky od -4000 do +2800</em> (1986) a z PC "
 "planetária RedShift."
 
-#: src/core/StelCore.cpp:2413
+#: src/core/StelCore.cpp:2414
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3337,7 +3337,7 @@ msgstr ""
 "Túto rovnicu publikovali F. R. Stephenson a L. V. Morrison v článku "
 "<em>Dlhodobé zmeny rotácie Zeme - 700 p.n.l. až 1980 n.l.</em> (%1)."
 
-#: src/core/StelCore.cpp:2416
+#: src/core/StelCore.cpp:2417
 #, qt-format
 msgid ""
 "This algorithm was published by F. R. Stephenson and M. A. Houlden in the "
@@ -3348,7 +3348,7 @@ msgstr ""
 "<em>Atlas of Historical Eclipse Maps</em>(%1). Algoritmus je použitý v "
 "programe počítačového planetária Guide 7."
 
-#: src/core/StelCore.cpp:2419
+#: src/core/StelCore.cpp:2420
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -3358,7 +3358,7 @@ msgstr ""
 "súhrn slnečných zatmení: 1986-2035</em> (1987) a <em>Päťdesiatročný súhrn "
 "lunárnych zatmení: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2422
+#: src/core/StelCore.cpp:2423
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -3367,7 +3367,7 @@ msgstr ""
 "Tento vzťah bol získaný K.M. Borkowskim (%1) z analýzy 31 slnenčých zatmení "
 "medzi 2137 p.n.l. a 1715 n.l."
 
-#: src/core/StelCore.cpp:2425
+#: src/core/StelCore.cpp:2426
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -3379,7 +3379,7 @@ msgstr ""
 "G. Zechom v článku <em>Empirické transformácie z U.T. do E.T. v období "
 "1800-1988</em> (%1) ako preloženie hodnôt od Stephensona a Morrisona (1984)."
 
-#: src/core/StelCore.cpp:2428
+#: src/core/StelCore.cpp:2429
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -3389,7 +3389,7 @@ msgstr ""
 "verzii ELP 2000-85 mesačnej teórii v <em>Lunárne tabuľky a programy od 4000 "
 "p.n.l. do 8000 n.l.</em> (1991)."
 
-#: src/core/StelCore.cpp:2431
+#: src/core/StelCore.cpp:2432
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3399,7 +3399,7 @@ msgstr ""
 "Túto rovnicu publikovali F. R. Stephenson a L. V. Morrison v článku "
 "<em>Dlhodobé odchýlky rotácie Zeme: 700 p.n.l. až 1990 n.l.</em> (%1)."
 
-#: src/core/StelCore.cpp:2434
+#: src/core/StelCore.cpp:2435
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -3408,7 +3408,7 @@ msgstr ""
 "F. R. Stephenson publikoval tento vzorec vo svojej knihe <em>Historické "
 "zatmenia a rotácia Zeme</em> (%1)."
 
-#: src/core/StelCore.cpp:2437
+#: src/core/StelCore.cpp:2438
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -3418,7 +3418,7 @@ msgstr ""
 "rozšírený. Tabuľka od 1600 do 2000 zahŕňa variant Chapronta, Chapront-"
 "Touzeovej a Francoua (1997) pre dátumy mimo 1620 do 2000."
 
-#: src/core/StelCore.cpp:2440
+#: src/core/StelCore.cpp:2441
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -3427,7 +3427,7 @@ msgstr ""
 "Skupina dynamiky slnečnej sústavy v Laboratóriách prúdového pohonu NASA "
 "používa tento vzťah na ich interaktívnej webstránke %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:2443
+#: src/core/StelCore.cpp:2444
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -3436,7 +3436,7 @@ msgstr ""
 "Tento polynóm bol publikovaný J. Meeusom a L. Simonsom v článku "
 "<em>Polynomiálne aproximácie pre Delta T, 1620-2000 n.l.</em> (%1)."
 
-#: src/core/StelCore.cpp:2446
+#: src/core/StelCore.cpp:2447
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -3446,7 +3446,7 @@ msgstr ""
 "osobnom počítači</em> (2000) poskytuje jednoduchý kubický polynóm na "
 "prekladanie dát z nedávnej minulosti."
 
-#: src/core/StelCore.cpp:2449
+#: src/core/StelCore.cpp:2450
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
@@ -3458,7 +3458,7 @@ msgstr ""
 "ich tabuľkách <em>Calendrical Tabulations</em> (2002). Východiskom je "
 "publikácia Jean Meeus <em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:2452
+#: src/core/StelCore.cpp:2453
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -3469,7 +3469,7 @@ msgstr ""
 "Stephensonom v článku <em>Historické hodnoty chyby zemských hodín %1T a "
 "výpočet zatmení</em> (%2) s dodatkom v (%3)."
 
-#: src/core/StelCore.cpp:2455
+#: src/core/StelCore.cpp:2456
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -3482,7 +3482,7 @@ msgstr ""
 "mocninou. Je založený na možnej periodicite opísanej Stephensonom v (%2). "
 "Viac informácií %3tu%4."
 
-#: src/core/StelCore.cpp:2458
+#: src/core/StelCore.cpp:2459
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -3496,7 +3496,7 @@ msgstr ""
 "použité pre %1NASA Eclipse Web Site%2 a v ich <em>Päťtisícročnom pravidle "
 "solárnych zatmení: -1900 do +3000</em>"
 
-#: src/core/StelCore.cpp:2461
+#: src/core/StelCore.cpp:2462
 msgid ""
 "This solution is modified from F. Espenak and J. Meeus, based on Morrison & "
 "Stephenson (2004) and a polynomial fit through tabulated values for "
@@ -3508,15 +3508,15 @@ msgstr ""
 "pre roky 1600-2000. Vzorec pre 2005-2050 je upravený, aby vyhovoval "
 "pozorovaným hodnotám a predpovediam blízkej budúcnosti."
 
-#: src/core/StelCore.cpp:2461
+#: src/core/StelCore.cpp:2462
 msgid "Used by default."
 msgstr "Použité v predvolenom nastavení."
 
-#: src/core/StelCore.cpp:2464
+#: src/core/StelCore.cpp:2465
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "Opravená verzia bez dodatočného zrýchlenia Mesiaca."
 
-#: src/core/StelCore.cpp:2464
+#: src/core/StelCore.cpp:2465
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
@@ -3525,7 +3525,7 @@ msgstr ""
 "Stephenson (2004) a polynomickom preložení cez tabulované dáta pre roky "
 "1600-2000."
 
-#: src/core/StelCore.cpp:2467
+#: src/core/StelCore.cpp:2468
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -3536,7 +3536,7 @@ msgstr ""
 "publikované v článku <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:2470
+#: src/core/StelCore.cpp:2471
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -3548,7 +3548,7 @@ msgstr ""
 "Minimization of Polynomial Approximation of DeltaT</em> (%1) a revidované S."
 " Islamem v roku 2013."
 
-#: src/core/StelCore.cpp:2473
+#: src/core/StelCore.cpp:2474
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -3559,7 +3559,7 @@ msgstr ""
 " Sultana a Faheema Zaidia publikoval <em>Delta T: Polynomial Approximation "
 "of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2476
+#: src/core/StelCore.cpp:2477
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -3578,7 +3578,7 @@ msgstr ""
 "(modelovaného splajnovým preložením) poskytuje približné hodnoty podľa "
 "paraboly."
 
-#: src/core/StelCore.cpp:2479
+#: src/core/StelCore.cpp:2480
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -3589,7 +3589,7 @@ msgstr ""
 "Acceleration of the Moon and the Universe - the Mass of the Graviton</em> "
 "(%1) a založené na vzorci C. Schocha (Schoch, 1931)"
 
-#: src/core/StelCore.cpp:2482
+#: src/core/StelCore.cpp:2483
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
@@ -3598,12 +3598,12 @@ msgstr ""
 "Toto je kvadratická rovnica pre výpočet %1T s koeficientami definovanými "
 "užívateľom."
 
-#: src/core/StelCore.cpp:2485 src/core/SimbadSearcher.cpp:173
+#: src/core/StelCore.cpp:2486 src/core/SimbadSearcher.cpp:173
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:91
 msgid "Error"
 msgstr "Chyba"
 
-#: src/core/StelCore.cpp:2493
+#: src/core/StelCore.cpp:2494
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -3612,15 +3612,15 @@ msgstr ""
 "Hodnota riešenia %1 pre %2 (sekulárne zrýchlenie Mesiaca) si vyžaduje "
 "prispôsobenie. Podrobnosti sú v príručke."
 
-#: src/core/StelCore.cpp:2537
+#: src/core/StelCore.cpp:2538
 msgid "with zero values outside this range"
 msgstr "s nulovou hodnotou mimo rozsahu"
 
-#: src/core/StelCore.cpp:2540
+#: src/core/StelCore.cpp:2541
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "s typickou presnosťou 1 sekunda a nulová hodnota mimo rozsahu"
 
-#: src/core/StelCore.cpp:2543
+#: src/core/StelCore.cpp:2544
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -3628,29 +3628,29 @@ msgstr ""
 "so strednou odchýlkou menej než 1 sekunda, maximálnou chybou 1,9 s a "
 "hodnotami pre okrajové roky mimo tohto rozsahu"
 
-#: src/core/StelCore.cpp:2550
+#: src/core/StelCore.cpp:2551
 msgid "with values for the limit years outside this range"
 msgstr "s hodnotami pre limitné roky mimo tohto rozsahu"
 
-#: src/core/StelCore.cpp:2560
+#: src/core/StelCore.cpp:2561
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Prijateľný rozsah použitia: medzi rokmi %1 a %2, %3."
 
-#: src/core/StelCore.cpp:2562
+#: src/core/StelCore.cpp:2563
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Prijateľný rozsah použitia: medzi rokmi %1 a %2."
 
-#: src/core/StelProjector.cpp:126
+#: src/core/StelProjector.cpp:174
 msgid "Maximum FOV: "
 msgstr "Maximálne zorné pole: "
 
-#: src/core/StelProjectorClasses.cpp:27
+#: src/core/StelProjectorClasses.cpp:29
 msgid "Perspective"
 msgstr "Perspektívna"
 
-#: src/core/StelProjectorClasses.cpp:32
+#: src/core/StelProjectorClasses.cpp:34
 msgid ""
 "Perspective projection maps the horizon and other great circles like "
 "equator, ecliptic, hour lines, etc. into straight lines. The mathematical "
@@ -3660,11 +3660,11 @@ msgstr ""
 "(rovník, ekliptika, hodinové čiary a pod.) na rovné čiary. Matematický názov"
 " tejto metódy premietania je <i>gnómonická projekcia</i>."
 
-#: src/core/StelProjectorClasses.cpp:87
+#: src/core/StelProjectorClasses.cpp:141
 msgid "Equal Area"
 msgstr "Rovnoplošná"
 
-#: src/core/StelProjectorClasses.cpp:92
+#: src/core/StelProjectorClasses.cpp:146
 msgid ""
 "The full name of this projection method is <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
@@ -3672,11 +3672,11 @@ msgstr ""
 "Úplný názov tejto metódy premietania je <i>Lambertova azimutálna ekviplošná "
 "projekcia</i>. Zachováva plochy, ale nie uhly."
 
-#: src/core/StelProjectorClasses.cpp:145
+#: src/core/StelProjectorClasses.cpp:248
 msgid "Stereographic"
 msgstr "Stereografická"
 
-#: src/core/StelProjectorClasses.cpp:150
+#: src/core/StelProjectorClasses.cpp:253
 msgid ""
 "Stereographic projection is known since antiquity and was originally known "
 "as the planisphere projection. It preserves the angles at which curves cross"
@@ -3686,11 +3686,11 @@ msgstr ""
 "ako planisferická projekcia. Zachováva uhly pretínania kriviek, ale "
 "skresľuje plochy."
 
-#: src/core/StelProjectorClasses.cpp:200
+#: src/core/StelProjectorClasses.cpp:348
 msgid "Fish-eye"
 msgstr "Rybie oko"
 
-#: src/core/StelProjectorClasses.cpp:205
+#: src/core/StelProjectorClasses.cpp:353
 msgid ""
 "In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight"
 " lines become curves when they appear a large angular distance from the "
@@ -3702,11 +3702,11 @@ msgstr ""
 "zorného poľa (tak ako obraz deformujú objektívy s veľmi širokým zorným "
 "poľom)."
 
-#: src/core/StelProjectorClasses.cpp:261
+#: src/core/StelProjectorClasses.cpp:464
 msgid "Hammer-Aitoff"
 msgstr "Hammerova-Aitoffova"
 
-#: src/core/StelProjectorClasses.cpp:266
+#: src/core/StelProjectorClasses.cpp:469
 msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
@@ -3715,11 +3715,11 @@ msgstr ""
 "ktoré popísal Ernst Hammer v roku 1892, pričom sa inšpiroval Aitoffovou "
 "projekciou."
 
-#: src/core/StelProjectorClasses.cpp:316
+#: src/core/StelProjectorClasses.cpp:566
 msgid "Cylinder"
 msgstr "Cylindrická"
 
-#: src/core/StelProjectorClasses.cpp:321
+#: src/core/StelProjectorClasses.cpp:571
 msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
@@ -3727,11 +3727,11 @@ msgstr ""
 "Úplný názov tejto metódy premietania je <i>cylindrická ekvidištančná "
 "projekcia</i>. V tomto premietaní majú všetky rovnobežky rovnaké rozostupy."
 
-#: src/core/StelProjectorClasses.cpp:365
+#: src/core/StelProjectorClasses.cpp:658
 msgid "Mercator"
 msgstr "Mercatorova"
 
-#: src/core/StelProjectorClasses.cpp:370
+#: src/core/StelProjectorClasses.cpp:663
 msgid ""
 "The Mercator projection is one of the most used world map projections. It "
 "preserves direction and shapes but distorts size, in an increasing degree "
@@ -3741,7 +3741,7 @@ msgstr ""
 "Zachováva smery a tvary, ale skresľuje veľkosť s rastúcou vzdialenosťou od "
 "rovníka."
 
-#: src/core/StelProjectorClasses.cpp:423
+#: src/core/StelProjectorClasses.cpp:760
 msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
@@ -3749,11 +3749,11 @@ msgstr ""
 "Ortografické premietanie je podobné perspektívnemu, ale úbežník je "
 "umiestnený do nekonečna."
 
-#: src/core/StelProjectorClasses.cpp:470
+#: src/core/StelProjectorClasses.cpp:852
 msgid "Sinusoidal"
 msgstr "Sínusoidná"
 
-#: src/core/StelProjectorClasses.cpp:475
+#: src/core/StelProjectorClasses.cpp:857
 msgid ""
 "The sinusoidal projection is a <i>pseudocylindrical equal-area map "
 "projection</i>, sometimes called the Sanson-Flamsteed or the Mercator equal-"
@@ -3763,11 +3763,11 @@ msgstr ""
 "zobrazenie</i>, občas nazývané aj Sansonovo–Flamsteedovo, prípadne "
 "Mercatorovo rovnoplošné zobrazenie."
 
-#: src/core/StelProjectorClasses.cpp:512
+#: src/core/StelProjectorClasses.cpp:947
 msgid "Miller cylindrical"
 msgstr "Millerova cylindrická"
 
-#: src/core/StelProjectorClasses.cpp:517
+#: src/core/StelProjectorClasses.cpp:952
 msgid ""
 "The Miller cylindrical projection is a modified Mercator projection, "
 "proposed by Osborn Maitland Miller (1897-1979) in 1942. The poles are no "
@@ -4176,7 +4176,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:268
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:272
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
@@ -4227,7 +4227,7 @@ msgid "References / Further Reading"
 msgstr "Zdroje / Ďalšie čítanie"
 
 #: src/core/StelMovementMgr.cpp:231 src/gui/StelGui.cpp:220
-#: src/StelMainView.cpp:884 src/StelMainView.cpp:885
+#: src/StelMainView.cpp:890 src/StelMainView.cpp:891
 msgid "Miscellaneous"
 msgstr "Rôzne"
 
@@ -4651,7 +4651,7 @@ msgstr "Poďakovanie"
 #: src/gui/ConfigurationDialog.cpp:1303
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:776
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:269
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:273
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
 msgid "Authors"
@@ -4669,7 +4669,7 @@ msgstr "Kontakt"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:256
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:267
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:271
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
@@ -7980,19 +7980,19 @@ msgstr "Skripty"
 msgid "Shortcut"
 msgstr "Klávesová skratka"
 
-#: src/StelMainView.cpp:884
+#: src/StelMainView.cpp:890
 msgid "Save screenshot"
 msgstr "Uložiť snímku obrazovky"
 
-#: src/StelMainView.cpp:885
+#: src/StelMainView.cpp:891
 msgid "Reload shaders (for development)"
 msgstr "Znovu načítať shadery (pre vývojárov)"
 
-#: src/StelMainView.cpp:886
+#: src/StelMainView.cpp:892
 msgid "Full-screen mode"
 msgstr "Režim na celú obrazovku"
 
-#: src/StelMainView.cpp:1027
+#: src/StelMainView.cpp:988
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
@@ -8000,7 +8000,7 @@ msgstr ""
 "Skratky majú konflikty! Stlačte F7 po štarte programu a skontrolujte "
 "nasledovné viacnásobné priradenia"
 
-#: src/StelMainView.cpp:1110
+#: src/StelMainView.cpp:1071
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -8008,7 +8008,7 @@ msgstr ""
 "Nedostatočná verzia OpenGL. Aktualizujte ovládače, grafickú kartu alebo "
 "použite prepínač --angle-mode (alebo --mesa-mode)."
 
-#: src/StelMainView.cpp:1112
+#: src/StelMainView.cpp:1073
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
@@ -8016,14 +8016,14 @@ msgstr ""
 "Nedostatočná verzia OpenGL. Aktualizujte ovládače, grafickú kartu alebo "
 "použite prepínač --mesa-mode."
 
-#: src/StelMainView.cpp:1116
+#: src/StelMainView.cpp:1077
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Nedostatočná verzia OpenGL. Prosím, aktualizujte ovládače alebo grafický "
 "hardvér."
 
-#: src/StelMainView.cpp:1159
+#: src/StelMainView.cpp:1120
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8031,7 +8031,7 @@ msgstr ""
 "Podsystém DirectX/OpenGL ES má problémy. Podrobnosti sú v zázname.\n"
 "Má sa toto hlásenie ignorovať a potlačiť? Potom sa bude pokračovať v obmedzenom režime."
 
-#: src/StelMainView.cpp:1210
+#: src/StelMainView.cpp:1171
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8039,7 +8039,7 @@ msgstr ""
 "Podsystém OpenGL/MESA má problémy. Podrobnosti sú v zázname.\n"
 "Má sa toto hlásenie ignorovať a potlačiť? Potom sa bude pokračovať v obmedzenom režime."
 
-#: src/StelMainView.cpp:1270
+#: src/StelMainView.cpp:1231
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8047,18 +8047,13 @@ msgstr ""
 "Podsystém OpenGL má problémy. Podrobnosti sú v zázname.\n"
 "Má sa toto hlásenie ignorovať a potlačiť? Potom sa bude pokračovať v obmedzenom režime."
 
-#: src/StelMainView.cpp:1311
+#: src/StelMainView.cpp:1272
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
 msgstr ""
 "Podsystém OpenGL ES má problémy. Podrobnosti sú v zázname.\n"
 "Má sa toto hlásenie ignorovať a potlačiť? Potom sa bude pokračovať v obmedzenom režime."
-
-#: src/StelMainView.cpp:1423
-#, qt-format
-msgid "Stellarium %1"
-msgstr "Stellarium %1"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:40
@@ -21158,7 +21153,7 @@ msgid "Navigational Stars"
 msgstr "Navigačné hviezdy"
 
 #: plugins/NavStars/src/NavStars.cpp:59
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:273
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:277
 msgid "This plugin marks navigational stars from a selected set."
 msgstr "Tento modul označí navigačné hviezdy z vybratej sady."
 
@@ -21214,89 +21209,129 @@ msgstr ""
 "názov je <em>%1</em>), ktorú vydáva nemecká Federálna námorná a "
 "hydrografická agentúra."
 
-#: plugins/NavStars/src/NavStars.cpp:598
+#: plugins/NavStars/src/NavStars.cpp:420
+msgid ""
+"Alignment Star List from the Gemini Astronomical Positioning System. The "
+"Gemini Astronomical Positioning System is a professional level computerized "
+"device for controlling small to medium German equatorial telescope mounts."
+msgstr ""
+"Zoznam kalibračných hviezd z astronomického pozičného systému Gemini. Gemini"
+" Astronomical Positioning System je profesionálne počítačové zariadenie na "
+"kontrolu menších až stredných rovníkových montáží ďalekohľadov Gemini."
+
+#: plugins/NavStars/src/NavStars.cpp:425
+msgid ""
+"The Meade LX200 utilizes 33 bright and well known stars to calibrate the "
+"telescope’s Object Library in the ALTAZ and POLAR alignments. These stars "
+"were selected to allow observers from anywhere in the world on any given "
+"night, to be able to easily and quickly make precision alignments."
+msgstr ""
+"Meade LX200 používa 33 jasných a známych hviezd na kalibráciu knižnice "
+"objektov ďalekohľadu pre altazimutálne aj polárne montáže. Tieto hviezdy "
+"boli vybrané tak, aby pozorovateľom na celom svete hociktorú noc umožnili "
+"jednoducho a rýchlo presne kalibrovať. "
+
+#: plugins/NavStars/src/NavStars.cpp:430
+msgid ""
+"This list from Meade ETX mount will aid the observer to find alignment stars"
+" at various times of the year."
+msgstr ""
+"Zoznam z montáže Meade ETX pomôže pozorovateľovi nájsť kalibračné hviezdy v "
+"rôznych nociach roka."
+
+#: plugins/NavStars/src/NavStars.cpp:435
+msgid ""
+"Even though there are about 250 named stars in the hand control database, "
+"only 82 (stars brighter than or equal to magnitude 2.5) can be used for "
+"alignment and related tasks."
+msgstr ""
+"Aj keď sa v databáze ručného ovládača nachádza okolo 250 pomenovaných "
+"hviezd, len 82 (jasnejších alebo rovných 2,5 magnitúde) z nich sa dá použiť "
+"na kalibráciu alebo súvisiace úlohy."
+
+#: plugins/NavStars/src/NavStars.cpp:679
 msgctxt "the highest part of the Sun or Moon"
 msgid "upper limb"
 msgstr "vrchný okraj"
 
-#: plugins/NavStars/src/NavStars.cpp:599
+#: plugins/NavStars/src/NavStars.cpp:680
 msgctxt "the lowest part of the Sun or Moon"
 msgid "lower limb"
 msgstr "spodný okraj"
 
-#: plugins/NavStars/src/NavStars.cpp:614 plugins/NavStars/src/NavStars.cpp:642
-#: plugins/NavStars/src/NavStars.cpp:648
+#: plugins/NavStars/src/NavStars.cpp:695 plugins/NavStars/src/NavStars.cpp:723
+#: plugins/NavStars/src/NavStars.cpp:729
 msgctxt "Greenwich Hour Angle"
 msgid "GHA"
 msgstr "GHA"
 
-#: plugins/NavStars/src/NavStars.cpp:616 plugins/NavStars/src/NavStars.cpp:646
+#: plugins/NavStars/src/NavStars.cpp:697 plugins/NavStars/src/NavStars.cpp:727
 msgctxt "object Sidereal Hour Angle (ERA, Earth rotation angle)"
 msgid "SHA"
 msgstr "SHA"
 
-#: plugins/NavStars/src/NavStars.cpp:618 plugins/NavStars/src/NavStars.cpp:652
+#: plugins/NavStars/src/NavStars.cpp:699 plugins/NavStars/src/NavStars.cpp:733
 msgctxt "Local Hour Angle"
 msgid "LHA"
 msgstr "LHA"
 
-#: plugins/NavStars/src/NavStars.cpp:621
+#: plugins/NavStars/src/NavStars.cpp:702
 msgctxt "Ground Position of object"
 msgid "GP: GHA/DEC"
 msgstr "GP: GHA/DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:624
+#: plugins/NavStars/src/NavStars.cpp:705
 msgctxt "geodetic coordinate system, latitude and longitude of ground point"
 msgid "GP: LAT/LON"
 msgstr "GP: LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:627
+#: plugins/NavStars/src/NavStars.cpp:708
 msgctxt "geodetic coordinate system, assumed latitude and longitude of user"
 msgid "AP: LAT/LON"
 msgstr "AP: LAT/LON"
 
-#: plugins/NavStars/src/NavStars.cpp:630
+#: plugins/NavStars/src/NavStars.cpp:711
 msgctxt ""
 "Navigation/horizontal coordinate system, calculated altitude and azimuth"
 msgid "Hc/Zn"
 msgstr "Hc/Zn"
 
-#: plugins/NavStars/src/NavStars.cpp:637
+#: plugins/NavStars/src/NavStars.cpp:718
 msgctxt "Universal Time Coordinated"
 msgid "UTC"
 msgstr "UTC"
 
-#: plugins/NavStars/src/NavStars.cpp:640
+#: plugins/NavStars/src/NavStars.cpp:721
 msgctxt "Navigation/horizontal coordinate system, sextant measured altitude"
 msgid "Ho"
 msgstr "Ho"
 
-#: plugins/NavStars/src/NavStars.cpp:644
+#: plugins/NavStars/src/NavStars.cpp:725
 msgctxt "Local Hour Angle"
 msgid "LMST"
 msgstr "LMST"
 
-#: plugins/NavStars/src/NavStars.cpp:650
+#: plugins/NavStars/src/NavStars.cpp:731
 msgctxt "Declination"
 msgid "DEC"
 msgstr "DEC"
 
-#: plugins/NavStars/src/NavStars.cpp:654
+#: plugins/NavStars/src/NavStars.cpp:735
 msgctxt "geodetic coordinate system, latitude"
 msgid "LAT"
 msgstr "LAT"
 
-#: plugins/NavStars/src/NavStars.cpp:656
+#: plugins/NavStars/src/NavStars.cpp:737
 msgctxt "geodetic coordinate system, longitude"
 msgid "LON"
 msgstr "LON"
 
-#: plugins/NavStars/src/NavStars.cpp:658
+#: plugins/NavStars/src/NavStars.cpp:739
 msgctxt "Navigation/horizontal coordinate system, calculated altitude"
 msgid "Hc"
 msgstr "Hc"
 
-#: plugins/NavStars/src/NavStars.cpp:660
+#: plugins/NavStars/src/NavStars.cpp:741
 msgctxt "Navigation/horizontal coordinate system, calculated azimuth"
 msgid "Zn"
 msgstr "Zn"
@@ -21326,11 +21361,11 @@ msgstr "Ruská"
 msgid "German"
 msgstr "Nemecký"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:266
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:270
 msgid "Navigational Stars Plug-in"
 msgstr "Modul Navigačné hviezdy"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:277
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:281
 msgid ""
 "Additional information fields can be displayed by selecting \"Information "
 "&gt; Additional coordinates (from plugins)\""
@@ -21338,29 +21373,29 @@ msgstr ""
 "Ďalšie polia s informáciami môžu byť zobrazené zvolením \"Informácie &gt; "
 "Ďalšie súradnice (z modulov)\""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:281
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:285
 msgid "These fields are:"
 msgstr "Tieto polia sú:"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:283
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:304
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:287
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:308
 #, qt-format
 msgid "GHA%1: The Greenwich Hour Angle of the first point of Aries."
 msgstr "GHA%1: Greenwichský hodinový uhol jarného bodu."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:284
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:288
 msgid "SHA: Sidereal Hour Angle of the navigation star."
 msgstr "SHA: Siderický hodinový uhol navigačnej hviezdy."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:285
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:310
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:289
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:314
 msgid "LHA: The observer's Local Hour Angle to the navigation star."
 msgstr "LHA: Hodinový uhol od pozorovateľa k navigačnej hviezde."
 
 #. TRANSLATORS: In Celestial Navigation "GP" is Ground Point, astronomers
 #. often use "sub-point" which is the geodetic location of a point where the
 #. star is at zenith.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:287
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:291
 msgid ""
 "GP: GHA/DEC: The navigation star's ground point as Greenwich Hour Angle and "
 "Declination."
@@ -21370,7 +21405,7 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation "AP" is Assumed Position, a point
 #. close by where the observer knows themselves to be. For example, from dead
 #. reckoning.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:289
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:293
 msgid ""
 "AP: LAT/LON: The observer's Assumed Position as geodetic latitude and "
 "longitude."
@@ -21380,13 +21415,13 @@ msgstr ""
 #. TRANSLATORS: In Celestial Navigation Hc is "computed height" from the
 #. Nautical Almanac where "height" is altitude. Likewise, Zn is computed
 #. azimuth, as seen from the AP.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:291
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:295
 msgid ""
 "Hc/Zn: The calculated height (altitude) and computed azimuth of navigation "
 "star, seen from AP."
 msgstr "Hc/Zn: Vypočítaná výška a vypočítaný azimut navigačnej hviezdy."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:295
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
 msgid ""
 "The user has two different view options selected by \"Show information as a "
 "tabulated list\"."
@@ -21394,7 +21429,7 @@ msgstr ""
 "Užívateľ má dve rôzne možnosti zobrazenia vybraním možnosti \"Zobraziť "
 "informácie ako tabuľkový zoznam\"."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:299
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:303
 msgid ""
 "When 'tabulated list' is selected the fields more closely follow the <em>The"
 " Nautical Almanac</em> format:"
@@ -21404,50 +21439,50 @@ msgstr ""
 
 #. TRANSLATORS: In Celestial Navigation "height" is used where astronomers
 #. would use "altitude", Ho Height Observed
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:303
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:307
 msgid "Ho: Simulated observed altitude of navigation star using a sextant."
 msgstr "Ho: Simulovaná pozorovaná výška navigačnej hviezdy použitím sextantu."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:305
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:309
 msgid "LMST: Local mean sidereal time."
 msgstr "LMST: Miestny stredný siderický čas."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:306
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:310
 msgid "SHA: Sidereal Hour Angle of navigation star."
 msgstr "SHA: Siderický hodinový uhol navigačnej hviezdy."
 
 #. TRANSLATORS: celestial coordinate system, declination.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:308
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:312
 msgid "DEC: The navigation star's declination."
 msgstr "DEC: Deklinácia navigačnej hviezdy."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:309
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:313
 msgid "GHA: The navigation star's Greenwich Hour Angle."
 msgstr "GHA: Greenwichský hodinový uhol navigačnej hviezdy."
 
 #. TRANSLATORS: Geodetic coordinate system, latitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:312
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:316
 msgid "LAT: The observer's geodetic latitude."
 msgstr "LAT: Zemepisná šírka pozorovateľa."
 
 #. TRANSLATORS: Geodetic coordinate system, longitude.
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:314
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:318
 msgid "LON: The observer's geodetic longitude."
 msgstr "LON: Zemepisná dĺžka pozorovateľa."
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Hc
 #. computed height (altitude) for the AP
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:316
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:320
 msgid "Hc: The AP calculated height (altitude) of navigation star."
 msgstr "Hc: Vypočítaná výška navigačnej hviezdy."
 
 #. TRANSLATORS: The process of Sight Reduction outputs computed values. Zn
 #. computed azimuth
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:318
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:322
 msgid "Zn: The AP calculated azimuth of navigation star."
 msgstr "Zn: Vypočítaný azimut navigačnej hviezdy."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:322
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:326
 msgid "For further information please refer to the Stellarium User Guide."
 msgstr "Ďalšie informácie nájdete v užívateľskej príručke Stellaria."
 
