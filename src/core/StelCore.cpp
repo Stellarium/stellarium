@@ -505,11 +505,6 @@ void StelCore::update(double deltaTime)
 	movementMgr->updateMotion(deltaTime);
 
 	currentProjectorParams.fov = static_cast<float>(movementMgr->getCurrentFov());
-//	if (currentProjectionType==ProjectionType::ProjectionCylinderFill)
-//	{
-//		currentProjectorParams.widthStretch=0.5*currentProjectorParams.viewportXywh[2]/currentProjectorParams.viewportXywh[3];
-//		currentProjectorParams.viewportFovDiameter = currentProjectorParams.viewportXywh[3];
-//	}
 
 	skyDrawer->update(deltaTime);
 }

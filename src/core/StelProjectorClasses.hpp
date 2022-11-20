@@ -69,21 +69,6 @@ public:
 	QString getNameI18() const override;
 	QString getDescriptionI18() const override;
 	float getMaxFov() const  override {return 235.f;}
-//	void project(int n, const Vec3d* in, Vec3f* out) override
-//	{
-//		Vec3d v;
-//		for (int i = 0; i < n; ++i, ++out)
-//		{
-//			v = in[i];
-//			modelViewTransform->forward(v);
-//			out->set(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
-//			StelProjectorStereographic::forward(*out);
-//			out->set(static_cast<float>(viewportCenter[0]) + flipHorz * pixelPerRad * (*out)[0],
-//				static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * (*out)[1],
-//				((*out)[2] - static_cast<float>(zNear)) * static_cast<float>(oneOverZNearMinusZFar));
-//		}
-//	}
-
 	bool forward(Vec3f &v) const override;
 	bool backward(Vec3d &v) const override;
 	float fovToViewScalingFactor(float fov) const override;
@@ -123,29 +108,14 @@ public:
 	StelProjectorHammer(ModelViewTranformP func) : StelProjector(func) {}
 	QString getNameI18() const override;
 	QString getDescriptionI18() const override;
-//	float getMaxFov() const override {return 185.f;}
-	float getMaxFov() const override {return 360.f;}
-//	void project(int n, const Vec3d* in, Vec3f* out) override
-//	{
-//		Vec3d v;
-//		for (int i = 0; i < n; ++i)
-//		{
-//			v = in[i];
-//			modelViewTransform->forward(v);
-//			out[i].set(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
-//			StelProjectorHammer::forward(out[i]);
-//			out[i][0] = static_cast<float>(viewportCenter[0]) + flipHorz * pixelPerRad * out[i][0];
-//			out[i][1] = static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * out[i][1];
-//			out[i][2] = (out[i][2] - static_cast<float>(zNear)) * static_cast<float>(oneOverZNearMinusZFar);
-//		}
-//	}
+	float getMaxFov() const override {return 185.f;}
 	bool forward(Vec3f &v) const override;
 	bool backward(Vec3d &v) const override;
 	//float fovToViewScalingFactor(float fov) const override;
 	//float viewScalingFactorToFov(float vsf) const override;
 	//float deltaZoom(float fov) const override;
-	virtual QByteArray getForwardTransformShader() const override;
-	virtual QByteArray getBackwardTransformShader() const override;
+	QByteArray getForwardTransformShader() const override;
+	QByteArray getBackwardTransformShader() const override;
 protected:
 	bool hasDiscontinuity() const override {return true;}
 	bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const override {return p1[0]*p2[0]<0 && !(p1[2]<0 && p2[2]<0);}
@@ -165,8 +135,7 @@ public:
 	StelProjectorCylinder(ModelViewTranformP func) : StelProjector(func) {}
 	QString getNameI18() const override;
 	QString getDescriptionI18() const override;
-//	virtual float getMaxFov() const override {return 200.f;} // slight overshoot
-	float getMaxFov() const override {return 175.f * 4.f/3.f;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
+	virtual float getMaxFov() const override {return 185.f;} // slight overshoot
 	bool forward(Vec3f &win) const override;
 	bool backward(Vec3d &v) const override;
 	//float fovToViewScalingFactor(float fov) const override;
@@ -206,8 +175,7 @@ public:
 	StelProjectorMercator(ModelViewTranformP func) : StelProjector(func) {}
 	QString getNameI18() const override;
 	QString getDescriptionI18() const override;
-//	float getMaxFov() const override {return 270.f; }
-	float getMaxFov() const override {return 175.f * 4.f/3.f;} // assume aspect ration of 4/3 for getting a full 360 degree horizon
+	float getMaxFov() const override {return 270.f; } // Despite being named 270 degrees this does not even show the 180° VFoV.
 	bool forward(Vec3f &win) const override;
 	bool backward(Vec3d &v) const override;
 	//float fovToViewScalingFactor(float fov) const override;
@@ -269,8 +237,7 @@ public:
 	StelProjectorMiller(ModelViewTranformP func) : StelProjectorMercator(func) {}
 	QString getNameI18() const override;
 	QString getDescriptionI18() const override;
-//	float getMaxFov() const override {return 270.f; }
-	float getMaxFov() const override {return 175.f * 4.f/3.f;} // or 180?
+	float getMaxFov() const override {return 270.f; } // Show a slight overshoot of the full map.
 	bool forward(Vec3f &win) const override;
 	bool backward(Vec3d &v) const override;
 	QByteArray getForwardTransformShader() const override;
