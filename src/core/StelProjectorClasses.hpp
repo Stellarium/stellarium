@@ -36,10 +36,6 @@ public:
 	float deltaZoom(float fov) const override;
 	QByteArray getForwardTransformShader() const override;
 	QByteArray getBackwardTransformShader() const override;
-protected:
-	bool hasDiscontinuity() const override {return false;}
-	bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const  override {return false;}
-	bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const override {return false;}
 };
 
 class StelProjectorEqualArea : public StelProjector
@@ -56,10 +52,6 @@ public:
 	// float deltaZoom(float fov) const override;
 	QByteArray getForwardTransformShader() const override;
 	QByteArray getBackwardTransformShader() const override;
-protected:
-	bool hasDiscontinuity() const override {return false;}
-	bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const  override {return false;}
-	bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const  override {return false;}
 };
 
 class StelProjectorStereographic : public StelProjector
@@ -76,10 +68,6 @@ public:
 	float deltaZoom(float fov) const override;
 	QByteArray getForwardTransformShader() const override;
 	QByteArray getBackwardTransformShader() const override;
-protected:
-	bool hasDiscontinuity() const override {return false;}
-	bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const override {return false;}
-	bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const override {return false;}
 };
 
 class StelProjectorFisheye : public StelProjector
@@ -96,10 +84,6 @@ public:
 	//float deltaZoom(float fov) const override;
 	QByteArray getForwardTransformShader() const override;
 	QByteArray getBackwardTransformShader() const override;
-protected:
-	bool hasDiscontinuity() const override {return false;}
-	bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const override {return false;}
-	bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const override {return false;}
 };
 
 class StelProjectorHammer : public StelProjector
@@ -213,10 +197,6 @@ public:
 	//float deltaZoom(float fov) const override;
 	QByteArray getForwardTransformShader() const override;
 	QByteArray getBackwardTransformShader() const override;
-protected:
-	bool hasDiscontinuity() const override {return false;}
-	bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const override {return false;}
-	bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const override {return false;}
 };
 
 class StelProjectorSinusoidal : public StelProjectorCylinder
@@ -261,7 +241,6 @@ public:
 	QByteArray getBackwardTransformShader() const override;
 	void setBackwardTransformUniforms(QOpenGLShaderProgram& program) const override;
 protected:
-	bool hasDiscontinuity() const override {return false;}
 	bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const override {Q_ASSERT(0); return false;}
 	bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const override {Q_ASSERT(0); return false;}
 	void computeBoundingCap() override {}

@@ -347,14 +347,14 @@ protected:
 		  widthStretch(1.0) {}
 
 	//! Return whether the projection presents discontinuities. Used for optimization.
-	virtual bool hasDiscontinuity() const =0;
+	virtual bool hasDiscontinuity() const {return false;}
 	//! Determine whether a great circle connection p1 and p2 intersects with a projection discontinuity.
 	//! For many projections without discontinuity, this should return always false, but for other like
 	//! cylindrical projection it will return true if the line cuts the wrap-around line (i.e. at lon=180 if the observer look at lon=0).
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const = 0;
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
 
 	//! Determine whether a cap intersects with a projection discontinuity.
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const = 0;
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const {return false;}
 
 	//! Initialize the bounding cap.
 	virtual void computeBoundingCap();
