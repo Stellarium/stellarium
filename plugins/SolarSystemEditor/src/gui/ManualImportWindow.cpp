@@ -216,14 +216,14 @@ bool ManualImportWindow::verifyTextureFile(QString filePath)
 
 	if (texture.isNull())
 	{
-		qDebug() << "File doesn't exist or is not an accepted texure format:"
+		qDebug() << "File doesn't exist or is not an accepted texture format:"
 				<< filePath;
 		return false;
 	}
 
 	if (!verifyPowerOfTwo(texture.height()))
 	{
-		qDebug() << "Invalid texure height:" << texture.height()
+		qDebug() << "Invalid texture height:" << texture.height()
 				<< "for file" << filePath;
 		return false;
 	}

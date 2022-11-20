@@ -546,7 +546,7 @@ void S3DRenderer::computeOrthoProjVals(const Vec3f &shadowDir, float& orthoExten
 		orthoExtent = std::max(std::abs(toCam.dot(down)), orthoExtent);
 	}
 
-	//Make sure planes arent too small
+	//Make sure planes aren't too small
 	orthoNear = minZ;
 	orthoFar = maxZ;
 	//orthoNear = std::max(minZ, 0.01f);
@@ -1007,7 +1007,7 @@ void S3DRenderer::renderIntoCubemapGeometryShader()
 	glBindFramebuffer(GL_FRAMEBUFFER,cubeFBO);
 
 	//Hack: because the modelviewmatrix is used for lighting in shader, but we dont want to perform MV transformations 6 times,
-	// we just set the position because that currently is all that is needeed for correct lighting
+	// we just set the position because that currently is all that is needed for correct lighting
 	modelViewMatrix.setToIdentity();
 	Vec3d negEyePos = -currentScene->getEyePosition();
 	modelViewMatrix.translate(static_cast<float>(negEyePos.v[0]), static_cast<float>(negEyePos.v[1]), static_cast<float>(negEyePos.v[2]));
@@ -1194,7 +1194,7 @@ void S3DRenderer::drawFromCubeMap()
 
 	cubeShader->bind();
 
-	//We simulate the generate behavoir of drawStelVertexArray ourselves
+	//We simulate the generate behavior of drawStelVertexArray ourselves
 	//check if discontinuties exist
 	//if(altAzProjector->hasDiscontinuity())
 	//{
@@ -2235,7 +2235,7 @@ bool S3DRenderer::initShadowmapping()
 
 			//we use hardware-accelerated depth compare mode, unless pcss is used
 			shaderParameters.hwShadowSamplers = false;
-			//NOTE: cant use depth compare mode on ES2
+			//NOTE: can't use depth compare mode on ES2
 			if(!pcssEnabled)
 			{
 #ifndef QT_OPENGL_ES_2

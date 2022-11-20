@@ -135,7 +135,7 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 	auto it = m_shaderCache.find(flags);
 
 	// This may also return Q_NULLPTR if the load failed.
-	//We wait until user explictly forces shader reload until we try again to avoid spamming errors.
+	//We wait until user explicitly forces shader reload until we try again to avoid spamming errors.
 	if(it!=m_shaderCache.end())
 		return *it;
 
@@ -514,7 +514,7 @@ void ShaderMgr::buildUniformCache(QOpenGLShaderProgram &program)
 		auto it = uniformStrings.find(str);
 
 		// This may also return Q_NULLPTR if the load failed.
-		//We wait until user explictly forces shader reload until we try again to avoid spamming errors.
+		//We wait until user explicitly forces shader reload until we try again to avoid spamming errors.
 		if(it!=uniformStrings.end())
 		{
 			//this is uniform we recognize

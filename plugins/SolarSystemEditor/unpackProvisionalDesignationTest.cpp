@@ -140,7 +140,7 @@ QString TestClass::unpackCometProvisionalDesignation(QString packedDesignation)
 	QString result = QString("%1 %2%3").arg(year).arg(halfMonthLetter).arg(halfMonthNumber);
 	if (fragmentDesignation != '0')
 		result.append(QString("-%1").arg(fragmentDesignation.toUpper()));
-		//Only uppercase fragment suffixes are alowed/used?
+		//Only uppercase fragment suffixes are allowed/used?
 		//http://www.minorplanetcenter.org/iau/lists/CometResolution.html
 
 	return result;

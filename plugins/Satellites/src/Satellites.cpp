@@ -2716,7 +2716,7 @@ void Satellites::loadExtraData()
 		QVariantMap commMap = StelJsonParser::parse(&commFile).toMap();
 		commFile.close();
 
-		// Communications data for individial satellites
+		// Communications data for individual satellites
 		QVariantMap satellitesCommLink = commMap.value("satellites").toMap();
 		for (const auto& satId : satellitesCommLink.keys())
 			satComms.insert(satId.toInt(), satellitesCommLink.value(satId).toMap());
@@ -3087,7 +3087,7 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 				bool flareFound = false;
 				if (v > i.value().v)
 				{
-					if (i.value().v < 1. // brighness limit
+					if (i.value().v < 1. // brightness limit
 					 && i.value().angleToSun>0.
 					 && i.value().angleToSun<2.)
 					{

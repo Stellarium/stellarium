@@ -3,7 +3,7 @@
 
 # Input parameter $1 is the path to the VTS project file
 # Input parameter $2 is the client application ID
-# Input parameter --serverport is optionnal (8888 by default)
+# Input parameter --serverport is optional (8888 by default)
 
 # Default server port 
 serverport=8888

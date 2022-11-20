@@ -161,7 +161,7 @@ standard Stellarium interface elements. This is supported for:
     The StelProperty to use is identified by the custom attribute \p data-prop.
     Connects to the \c slider widget property \p value.
 
-- \c select elements (also supports the optional \c selectmenu classs)\n
+- \c select elements (also supports the optional \c selectmenu class)\n
     The StelProperty to use is identified by the standard \c select attribute \p name.
     Sets the \c option that has the same \p value as the StelProperty value.
     Useful for single selection out of a list of possibilities.
@@ -341,7 +341,7 @@ define(["jquery", "api/remotecontrol"], function($,rc) {
     //do something when the DOM is ready (because that is not guaranteed while the module is first bein loaded!)
     $(function(){
         console.log("the document is ready, you can access the elements now!");
-        //access an element and modifiy it
+        //access an element and modify it
         $("#myelement").text("hey, this is awesome");
     });
 

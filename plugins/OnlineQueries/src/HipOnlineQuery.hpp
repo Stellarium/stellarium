@@ -38,7 +38,7 @@ public:
 	enum HipQueryStatus
 	{
 		HipQueryQuerying,          //!< Starnames is still being queried.
-		HipQueryErrorOccured,      //!< An error occured while looking up Starnames. Call getErrorString() for a description of the error.
+		HipQueryErrorOccured,      //!< An error occurred while looking up Starnames. Call getErrorString() for a description of the error.
 		HipQueryFinished           //!< The query is over. The reply can be deleted.
 	};
 	Q_ENUM(HipQueryStatus)
@@ -54,7 +54,7 @@ public:
 	//! Get a I18n string describing the current status. It can be used e.g for reporting in widgets.
 	QString getCurrentStatusString() const;
 
-	//! Get the error description string. Return empty string if no error occured.
+	//! Get the error description string. Return empty string if no error occurred.
 	QString getErrorString() const {return errorString;}
 
 	//! Explicitly delete the internal QNetworkReply. Must not be called from a QNetworkReply signal.
@@ -83,7 +83,7 @@ private:
 	//! Current query status.
 	HipQueryStatus currentStatus;
 
-	//! The error description. Empty if no errors occured.
+	//! The error description. Empty if no errors occurred.
 	QString errorString;
 };
 

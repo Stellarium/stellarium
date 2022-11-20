@@ -97,7 +97,7 @@ void S3DScene::Material::fixup()
 		switch(illum)
 		{
 			case I_DIFFUSE:
-				//explicitely set Ka to Kd
+				//explicitly set Ka to Kd
 				Ka = Kd;
 				//explicitly disable specularity and transparency
 				traits.hasSpecularity = false;
@@ -122,7 +122,7 @@ void S3DScene::Material::fixup()
 				if(d<.0f)
 				{
 					d = 1.0f;
-					//here, transparancy is only enabled if
+					//here, transparency is only enabled if
 					//there is actually something transparent!
 					//would be a waste of computing power otherwise
 					traits.hasTransparency = alphaChannel;

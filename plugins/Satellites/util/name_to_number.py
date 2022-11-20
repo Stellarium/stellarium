@@ -1,5 +1,5 @@
 # This Python script reads a satellites.json file in the old format
-# (using names for satellite IDs) and ouputs a file that uses catalog numbers
+# (using names for satellite IDs) and outputs a file that uses catalog numbers
 # as satellite IDs.
 # --Bogdan Marinov
 

@@ -94,7 +94,7 @@ define(["jquery", "./remotecontrol", "./updatequeue", "./trunc"], function($, rc
             jm;
         var IGREG = 15 + 31 * (10 + 12 * 1582); //Greg Calendar adopted 15 Oct 1582
 
-        //Stellarium has a year zero, so the following is ommitted
+        //Stellarium has a year zero, so the following is omitted
         //if(jy<0) ++jy;
         if (m > 2) jm = m + 1;
         else {

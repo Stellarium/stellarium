@@ -968,7 +968,7 @@ void TelescopeControl::loadTelescopes()
 		{
 			if (connectionType == ConnectionInternal)
 			{
-				//Use a sever if necessary
+				//Use a server if necessary
 				if(deviceModels[deviceModelName].useExecutable)
 				{
 					if(startClientAtSlot(slot, connectionType, name, equinox, hostName, portTCP, delay, internalCircles))

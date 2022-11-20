@@ -909,7 +909,7 @@ void TelescopeDialog::updateTelescopeStates()
 	for (int i=0; i<(telescopeListModel->rowCount()); i++)
 	{
 		slotNumber = telescopeListModel->data( telescopeListModel->index(i, ColumnSlot) ).toInt();
-		//TODO: Check if these cover all possibilites
+		//TODO: Check if these cover all possibilities
 		if (telescopeManager->isConnectedClientAtSlot(slotNumber))
 		{
 			telescopeStatus[slotNumber] = TelescopeControl::StatusConnected;
