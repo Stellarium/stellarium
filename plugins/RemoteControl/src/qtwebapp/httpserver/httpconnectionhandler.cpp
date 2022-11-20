@@ -142,7 +142,7 @@ void HttpConnectionHandler::setBusy()
 void HttpConnectionHandler::readTimeout()
 {
 #ifndef NDEBUG
-    qDebug("HttpConnectionHandler (%p): read timeout occured",this);
+    qDebug("HttpConnectionHandler (%p): read timeout occurred",this);
 #endif
     //Commented out because QWebView cannot handle this.
     //socket->write("HTTP/1.1 408 request timeout\r\nConnection: close\r\n\r\n408 request timeout\r\n");
@@ -220,7 +220,7 @@ void HttpConnectionHandler::read()
             }
 
             // In case of HTTP 1.0 protocol add the Connection:close header.
-            // This ensures that the HttpResponse does not activate chunked mode, which is not spported by HTTP 1.0.
+            // This ensures that the HttpResponse does not activate chunked mode, which is not supported by HTTP 1.0.
             else
             {
                 bool http1_0=QString::compare(currentRequest->getVersion(),"HTTP/1.0",Qt::CaseInsensitive)==0;
@@ -238,7 +238,7 @@ void HttpConnectionHandler::read()
             }
             catch (...)
             {
-                qCritical("HttpConnectionHandler (%p): An uncatched exception occured in the request handler",this);
+                qCritical("HttpConnectionHandler (%p): An uncatched exception occurred in the request handler",this);
             }
 
             // Finalize sending the response if not already done

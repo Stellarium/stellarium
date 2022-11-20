@@ -849,7 +849,7 @@ private:
 	//! Path to the satellite catalog file.
 	QString catalogPath;
 	//! Plug-in data directory.
-	//! Intialized by init(). Contains the catalog file (satellites.json),
+	//! Initialized by init(). Contains the catalog file (satellites.json),
 	//! temporary TLE lists downloaded during an online update, or whatever
 	//! other modifiable files the plug-in needs.
 	QDir dataDir;

@@ -85,7 +85,7 @@ public:
 	// Operation: getPos()
 	//! @brief Get the TEME satellite position Vector
 	//! @return Vec3d
-	//!   Satellite position vector meassured in Km.
+	//!   Satellite position vector measured in Km.
 	//!    x: position[0]
 	//!    y: position[1]
 	//!    z: position[2]
@@ -160,7 +160,7 @@ private:
 	//!	   Altitude:  Coord[2]  measured in Km.\n
 	Vec3d computeSubPoint(gTime ai_time);
 
-	// sgp4 proceses variables
+	// sgp4 processes variables
 	double tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2;
 	elsetrec satrec;
 

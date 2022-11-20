@@ -188,7 +188,7 @@ private:
 
 	/// ---- Cubemapping variables ----
 	bool requiresCubemap; //true if cubemapping is required (if projection is anything else than Perspective)
-	bool cubemappingUsedLastFrame; //true if cubemapping was used for the last frame. Used to determine if a projection switch occured.
+	bool cubemappingUsedLastFrame; //true if cubemapping was used for the last frame. Used to determine if a projection switch occurred.
 	bool lazyDrawing; //if lazy-drawing mode is enabled
 	bool updateOnlyDominantOnMoving; //if movement updates only dominant face directly
 	bool updateSecondDominantOnMoving; //if movement also updates the second-most dominant face
@@ -266,7 +266,7 @@ private:
 	//Holds the xy-scaling of the orthographic light cam + pos of near/far planes in view coords
 	//Needed for consistent shadow filter sizes and PCSS effect
 	QVector<QVector4D> shadowFrustumSize;
-	// Frustum of the view camera, constrainted to the shadowFarZ instead of the camFarZ
+	// Frustum of the view camera, constrained to the shadowFarZ instead of the camFarZ
 	Frustum camFrustShadow;
 	//near/far planes for the orthographic light that fits the whole scene
 	float lightOrthoNear;

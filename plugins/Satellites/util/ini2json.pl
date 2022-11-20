@@ -4,7 +4,7 @@
 # contain satellite data, and output a json formatted version of the
 # satellite data.
 #
-# re-direct the output into the satelites.json file, and then
+# re-direct the output into the satellites.json file, and then
 # edit the module.ini file to remove all sections except the
 # [module] section.
 #
@@ -134,7 +134,7 @@ sub jogroup {
 # contain satellite data, and output a json formatted version of the
 # satellite data.
 #
-# re-direct the output into the satelites.json file, and then
+# re-direct the output into the satellites.json file, and then
 # edit the module.ini file to remove all sections except the
 # [module] section.
 #

@@ -269,7 +269,7 @@ public slots:
 	//! @return count of pulsars
 	int getCountPulsars(void) const {return PsrCount;}
 
-	//! Download JSON from web recources described in the module section of the
+	//! Download JSON from web resources described in the module section of the
 	//! module.ini file and update the local JSON file.
 	void updateJSON(void);
 

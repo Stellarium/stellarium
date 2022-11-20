@@ -647,7 +647,7 @@ void MpcImportWindow::downloadComplete(QNetworkReply *reply)
 	{
 		qWarning() << "Download error: While downloading"
 		           << reply->url().toString()
-				   << "the following error occured:"
+				   << "the following error occurred:"
 				   << reply->errorString();
 		enableInterface(true);
 		reply->deleteLater();
@@ -836,7 +836,7 @@ void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 	{
 		qWarning() << "Download error: While trying to access"
 		           << reply->url().toString()
-			   << "the following error occured:"
+			   << "the following error occurred:"
 		           << reply->errorString();
 		ui->labelQueryMessage->setText(reply->errorString());//TODO: Decide if this is a good idea
 		ui->labelQueryMessage->setVisible(true);

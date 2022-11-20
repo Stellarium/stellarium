@@ -84,7 +84,7 @@ public:
 	//! a valid line in MPC format.
 	//! \todo Recognise the long form packed designations (to handle fragments)
 	//! \todo Handle better any unusual symbols in section names (URL encoding?)
-	//! \todo Use column cuts intead of a regular expression?
+	//! \todo Use column cuts instead of a regular expression?
 	SsoElements readMpcOneLineCometElements(QString oneLineElements) const;
 
 	//! Reads a single minor planet's orbital elements from a string.
@@ -242,7 +242,7 @@ private:
 	//! Replaces the user copy of ssystem.ini with the default one.
 	//! This function simply deletes the file, if it exists, and calls
 	//! cloneSolarSystemConfigurationFile().
-	//! \returns true if the replacement has been successfull.
+	//! \returns true if the replacement has been successful.
 	bool resetSolarSystemConfigurationFile() const;
 
 	//! Check encoding of the file

@@ -50,12 +50,12 @@ protected slots:
 protected:
 	//! This is guaranteed to be called once per frame (usually after all other StelModules have been updated).
 	//! It is can be used to defer state broadcasts until the frame is finished to only send a single message.
-	//! Default implentation does nothing.
+	//! Default implementation does nothing.
 	virtual void update() {}
 
 	//! Subclasses can call this to broadcast a message to all valid connected clients
 	void broadcastMessage(const SyncProtocol::SyncMessage& msg);
-	//! Free to use by sublasses. Recommendation: use to track if update() should broadcast a message.
+	//! Free to use by subclasses. Recommendation: use to track if update() should broadcast a message.
 	bool isDirty;
 	//! Direct access to StelCore
 	StelCore* core;

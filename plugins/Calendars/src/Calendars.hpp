@@ -37,7 +37,7 @@ class StelButton;
 The Calendars plugin provides an interface to various calendars
 
 The primary source of this plugin is the book "Calendrical Calculations: The Ultimate Edition"
-by Edward M. Reingold and Nachum Dershowitz (2018). It comtains algorithmic descriptions of dozens of calendars,
+by Edward M. Reingold and Nachum Dershowitz (2018). It contains algorithmic descriptions of dozens of calendars,
 most of which should make their way into this plugin.
 
 This book describes data conversion from and to calendars, using not the commonly used Julian Day number, but an intermediate

@@ -588,7 +588,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 			StelUtils::getDateFromJulianDay(peakJD+utcShift, &Year, &startMonth, &startDay);
 
 			// Find approximate period of activity from ranges of solar longitude
-			// WB: IAU MDC have noticable differences when compared with IMO, but peak dates are around the same
+			// WB: IAU MDC have noticeable differences when compared with IMO, but peak dates are around the same
 			// We will use data from IMO calendars by converting date to solar longtitude
 			// This will allow them to be usable with more realistic activity period in the ancient and far future years
 			// Example : Activity duration of Perseids in recent years ~ July 17 - August 24

@@ -212,7 +212,7 @@ If the optional \p mode parameter is given, it determines how to change the view
 If it is set to \c 'zoom', it automatically zooms in on the object (StelMovementMgr::autoZoomIn) on selection and automatically zooms out when the selection is cleared.
 If it is set to \c 'mark', the selection is just marked, but no view adjustment is done.
 If the \p position parameter is used, it is interpreted as a coordinate in the J2000 frame, and focused using StelMovementMgr::moveToJ2000. The \p mode parameter has no effect here.
-The \p target parameter takes precendence over the \p position parameter, if both are given.
+The \p target parameter takes precedence over the \p position parameter, if both are given.
 
 \paragraph rcMainServiceMove move
 Parameters: <tt>x (Number) y (Number)</tt>\n

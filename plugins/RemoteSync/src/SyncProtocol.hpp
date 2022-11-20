@@ -209,7 +209,7 @@ private:
 	bool isPeerAServer; // True if this identifies a server
 	QUuid id; // An ID value, currently not used for anything else than auth. The server always has a NULL UUID.
 	bool authenticated; // True if the peer ran through the HELLO process and can receive/send all message types
-	bool authResponseSent; //only for client use, tracks if the client has sent a resonse to the server challenge
+	bool authResponseSent; //only for client use, tracks if the client has sent a response to the server challenge
 	bool waitingForBody; //True if waiting for full message body (after header was received)
 	SyncProtocol::SyncHeader msgHeader; //the last message header read/currently being processed
 	qint64 lastReceiveTime; // The time the last data of this peer was received

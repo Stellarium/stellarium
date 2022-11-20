@@ -284,7 +284,7 @@ void Observability::draw(StelCore* core)
 	TempRefr = core->equinoxEquToAltAz(CorrRefr,StelCore::RefractionOff);
 	double RefracAlt = std::asin(TempRefr[2]);
 
-	// If the diference is larger than 1 arcminute...
+	// If the difference is larger than 1 arcminute...
 	if (qAbs(refractedHorizonAlt-RefracAlt)>2.91e-4)
 	{
 		//... configuration for refraction changed notably.
@@ -1304,7 +1304,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 			for (int j=0; j<2; j++)
 			{
-				// Two steps: one for the previos Full Moon and the other for the next one.
+				// Two steps: one for the previous Full Moon and the other for the next one.
 				iniEst1 =  TempFullMoon - 0.25*MoonT;
 				iniEst2 =  TempFullMoon + 0.25*MoonT;
 

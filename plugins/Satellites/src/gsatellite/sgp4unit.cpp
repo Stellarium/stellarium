@@ -1174,14 +1174,14 @@ static void initl(int satn,      gravconsttype whichconst,
 	getgravconst( whichconst, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2 );
 	x2o3   = 2.0 / 3.0;
 
-	/* ------------- calculate auxillary epoch quantities ---------- */
+	/* ------------- calculate auxiliary epoch quantities ----------- */
 	eccsq  = ecco * ecco;
 	omeosq = 1.0 - eccsq;
 	rteosq = std::sqrt(omeosq);
 	cosio  = std::cos(inclo);
 	cosio2 = cosio * cosio;
 
-	/* ------------------ un-kozai the mean motion ----------------- */
+	/* ------------------ un-kozai the mean motion ------------------ */
 	ak    = std::pow(xke / no, x2o3);
 	d1    = 0.75 * j2 * (3.0 * cosio2 - 1.0) / (rteosq * omeosq);
 	del   = d1 / (ak * ak);
@@ -1552,7 +1552,7 @@ bool sgp4init(gravconsttype whichconst, char opsmode,   const int satn,     cons
 		}
 	} // if omeosq = 0 ...
 
-	/* finally propogate to zero epoch to initialize all others. */
+	/* finally propagate to zero epoch to initialize all others. */
 	// sgp4fix take out check to let satellites process until they are actually below earth surface
 	//       if(satrec.error == 0)
 	sgp4(whichconst, satrec, 0.0, r, v);
@@ -1976,7 +1976,7 @@ double gstime(double jdut1)
 *                           function getgravconst
 *
 *  this function gets constants for the propagator. note that mu is identified to
-*    facilitiate comparisons with newer models. the common useage is wgs72.
+*    facilitate comparisons with newer models. the common usage is wgs72.
 *
 *  author        : david vallado                  719-573-2600   21 jul 2006
 *

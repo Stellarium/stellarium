@@ -49,7 +49,7 @@
 //! Other functions with "moment" in their names use double arguments which are RD with fractions of day. Argument names with "_ut" added indicate the RD is given in UT, not local time.
 //!
 //! Most functions are static, with names derived from the functions given in Lisp in CC:UE. Most calendars have dates which can be described in lists of integers.
-//! Some functions require a StelLocation argument. For accessability as Stellarium scripting functions, argument order was changed to place the location argument as last
+//! Some functions require a StelLocation argument. For accessibility as Stellarium scripting functions, argument order was changed to place the location argument as last
 //! and declare it with a default value of the current location, so that it can be used in scripting. Currently, other, non-default StelLocation arguments cannot be used with scripting.
 //!
 //! @note The astronomical functions in parts make use of Stellarium's built-in astronomy instead of the algorithms given in CC. A notable difference consists already around DeltaT,
