@@ -1,0 +1,363 @@
+<h1>Лейденский Арат</h1>
+<p>Это рукопись каролингского периода, две копии которой известны до сих
+пор. Один был найден в Меце (Франция), другой - в Лейдене (Нидерланды). Он
+восходит к правлению каролингского короля Людовика Благочестивого (778-840),
+который, возможно, сам был покровителем (или его жена).</p>
+<p>Рукопись, вероятно, была создана примерно в 816-825 годах в Аахене или Меце
+(Лотарингия) и была сделана из таких дорогих материалов, что подозревают
+королевского покровителя. Он состоит из 99 пергаментных листов, каждый из
+которых имеет размер 22,5 на 20,0 см (т.е. примерно квадрат ширины DIN
+A4). Помимо графических изображений планетных орбит и других дидактических
+визуализаций, эта рукопись также содержит 35 полностраничных миниатюр,
+изображающих древние фигуры позади созвездий. </p>
+<p>Фигуры взяты с не сохранившейся римской модели, а не с глобуса, поэтому нет
+привязки к звёздам. Сами звёзды распределены на рисунках лишь символически,
+т.е. число звезд на фигуру отмечено в рукописи в виде накладных золотых
+листов. Золотые листья, однако, не расположены в истинных местах звёзд на
+фоне фигуры на небе, а указаны лишь в общих чертах. Элли Декер подробно
+обсуждает предложенные ею отождествления в своём эссе. </p>
+<p><img width="800" src="descr_pics/Aratea fol. 3v und 4r.jpg"/></p>
+<p><i>На образце страницы средневекового манускрипта показаны три изображения
+подушки: Дракон, Большая и Малая Медведицы, а текст находится напротив.</i></p>
+
+<h2>Как создавалась эта культура неба</h2>
+<p>Иллюстрации отдельных фигур взяты непосредственно из рукописи
+(предоставленной профессором Д. Блюмом из Йены для использования в
+планетарии). Stellarium работает с координатами точек для звёзд из каталога
+астрометрического спутника HIPPARCOS, так что исторические рисунки должны
+быть привязаны к каждой из трёх точек. Некоторые плоские книжные иллюстрации
+на куполе планетария пришлось немного исказить, чтобы они соответствовали
+звёздам. За исключением иллюстрации Скорпиона и Змееносца, приблизительная
+корректировка была возможна.</p>
+<p> В куполе планетария, то есть на темном фоне, темно-синие и черные части
+рукописи не различимы. Вот почему эти части (например, краб как фигура, рога
+горного козла, козлы возчика...) были инвертированы по цвету. Медведицы,
+которые должны быть темными, лишь немного сместились в красный цвет. Как
+изображение выглядит в оригинале (на фоне голубого лазурита и исходных
+темных цветов) показано в таблице ниже.</p>
+<p>В Лейденской Аратеи есть некоторые созвездия, в частности Центавр + Волк,
+Дева, Весы оставляют на небе огромную брешь. И Дева, и Центавр, вероятно, не
+нарисованы, потому что художник думал, что это варианты изображений Стрельца
+(Центавр) и Андромеды (Дева). Художник Лейденской Аратеи никогда не наносил
+изображения на звезды. Чтобы сделать эти изображения понятными для нас, я
+нанесла их на карту в Stellarium и добавила названия и линии созвездий и
+названия отдельных звезд из Альмагеста. Альмагест — это книга по
+математической астрономии II века (т. е. периода правления римского
+императора Адриана), в то время как поэма Арата описывает гораздо более
+раннюю (~ 300 г. до н. э.) греческую культуру неба. И Альмагест, и поэма
+изначально написаны на греческом языке, но Лейденская Аратея
+предположительно относится к латинскому переводу поэмы Арата и римских
+произведений искусства.</p>
+<p>В следующей таблице перечислены исходные названия созвездий в столбцах 2 и
+3. Созвездия, в столбце 4 - иллюстрации в рукописи.</p>
+<p>
+<table class="nomenclature">
+	<tr valign="top">
+		<td><b>Латинское название, аббревиатура</b></td>
+		<td><b>Исходное греческое название</b></td>
+		<td><b>Перевод</b> (буквальный)</td>
+		<td><b>Изображение</b></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Ursa Minor, Ursa Maior, Draco<br />UMi, UMa, Dra</notr></td>
+		<td><notr>&Mu;&iota;&kappa;&rho;&#942; &#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;, &Mu;&epsilon;&gamma;&alpha;&lambda;&#942; &#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;, &Delta;&rho;&#940;&kappa;&omega;&nu;</notr></td>
+		<td>Маленькая Медведица, Большая Медведица, Дракон (лат.) / Змея (греч.)</td>
+		<td><img width="255" src="descr_pics/aratea_small_dra.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>King Cepheus, Cep</notr></td>
+		<td><notr>&Kappa;&eta;&phi;&epsilon;&#973;&sigmaf;</notr></td>
+		<td>Кефей</td>
+		<td><img width="255" src="descr_pics/aratea_small_cep.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Bootes, Boo</notr></td>
+		<td><notr>&Beta;&omicron;&#974;&tau;&eta;&sigmaf;</notr></td>
+		<td>Погонщик вола (лат.), Пахарь (греч.)</td>
+		<td><img width="255" src="descr_pics/aratea_small_boo.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Northern Crown, CrB</notr></td>
+		<td><notr>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf;</notr></td>
+		<td>Корона (лат.), Венок (греч.)</td>
+		<td><img width="255" src="descr_pics/aratea_small_crB.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Hercules, Her</notr></td>
+		<td><notr>&#702;&Epsilon;&nu;&gamma;&#972;&nu;&alpha;&sigma;&iota;&nu;</notr></td>
+		<td>Геракл (лат.), Коленопреклоненный (греч.)<br />Звезда между ног — известная ошибка на картине: для этой фигуры рисовальщик
+явно взял за образец Волопаса; положение ног, пастуший посох (вместо палицы
+у Геракла) и звезда между коленями - то же самое.</td>
+		<td><img width="255" src="descr_pics/aratea_small_her.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Lyra, Lyr</notr></td>
+		<td><notr>&Lambda;&#973;&rho;&alpha;</notr></td>
+		<td>Лира</td>
+		<td><img width="255" src="descr_pics/aratea_small_lyr.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Cygnus, Cyg</notr></td>
+		<td><notr>&#702;&#714;&Omicron;&rho;&nu;&iota;&sigmaf;</notr></td>
+		<td>Птица [вид не указан] </td>
+		<td><img width="255" src="descr_pics/aratea_small_cyg.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Cassiopeia, Cas</notr></td>
+		<td><notr>&Kappa;&alpha;&sigma;&sigma;&iota;&#941;&pi;&epsilon;&iota;&alpha;</notr></td>
+		<td>Королева Кассиопея </td>
+		<td><img width="255" src="descr_pics/aratea_small_cas.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Perseus, Per</notr></td>
+		<td><notr>&Pi;&epsilon;&rho;&sigma;&epsilon;&#973;&sigmaf;</notr></td>
+		<td>Perseus<br />зеркальное изображение</td>
+		<td><img width="255" src="descr_pics/aratea_small_per.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Auriga, Aur</notr></td>
+		<td><notr>&#703;&Eta;&nu;&#943;&omicron;&chi;&omicron;&sigmaf;</notr></td>
+		<td>Возница</td>
+		<td><img width="255" src="descr_pics/aratea_small_aur.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Aquila et Sagitta,<br />Aql </notr>и<notr> Sge</notr></td>
+		<td><notr>&#702;&Alpha;&epsilon;&tau;&#972;&sigmaf; </notr>и<notr> &#702;&Omicron;&iota;&sigma;&tau;&#972;&sigmaf;</notr></td>
+		<td>Орёл со Стрелой</td>
+		<td><img width="255" src="descr_pics/aratea_small_aql.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Delphinus, Del</notr></td>
+		<td><notr>&Delta;&epsilon;&lambda;&phi;&#943;&sigmaf;</notr></td>
+		<td>Дельфин <br /> В греческом оригинале (Арат, ~300 г. до н.э.) не было созвездия Малого
+коня. Глобус Фарнезе (а также Глобус Майнца и Глобус Кугеля) изображает
+Дельфина довольно крупно, занимая пространство М. Коня. Вот почему я решила
+следовать этой аратской традиции и для лейденской аратеи.</td>
+		<td><img width="255" src="descr_pics/aratea_small_del.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Pegasus, Peg</notr></td>
+		<td><notr>&#703;&#714;&Iota;&pi;&pi;&omicron;&sigmaf;</notr></td>
+		<td>Пегас (название крылатого коня; лат.), Лошадь (греч.)</td>
+		<td><img width="255" src="descr_pics/aratea_small_peg.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Andromeda, And</notr></td>
+		<td><notr>&#702;&Alpha;&nu;&delta;&rho;&omicron;&mu;&#941;&delta;&alpha;</notr></td>
+		<td>Принцесса Андромеда</td>
+		<td><img width="255" src="descr_pics/aratea_small_and.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Triangulum, Tri</notr></td>
+		<td><notr>&Tau;&rho;&#943;&gamma;&omega;&nu;&omicron;&sigmaf;</notr></td>
+		<td>Треугольник</td>
+		<td><img width="255" src="descr_pics/aratea_small_tri.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Aries, Ari</notr></td>
+		<td><notr>&Kappa;&rho;&iota;&#972;&sigmaf;</notr></td>
+		<td>Баран<br />(прыжки через кольцо, которое является символом года; римский новый год
+приходился на весну).</td>
+		<td><img width="255" src="descr_pics/aratea_small_ari.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Taurus, Tau</notr></td>
+		<td><notr>&Tau;&alpha;&upsilon;&#771;&rho;&omicron;&sigmaf;</notr></td>
+		<td>Бык</td>
+		<td><img width="255" src="descr_pics/aratea_small_tau.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>M45, </notr>Плеяды</td>
+		<td></td>
+		<td>Плеяды<br />или Семь сестёр</td>
+		<td><img width="255" src="descr_pics/aratea_small_plei.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Gemini, Gem</notr></td>
+		<td><notr>&Delta;&#943;&delta;&upsilon;&mu;&omicron;&iota;</notr></td>
+		<td>Близнецы</td>
+		<td><img width="255" src="descr_pics/aratea_small_gem.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Cancer, Cnc</notr></td>
+		<td><notr>&Kappa;&alpha;&rho;&kappa;&#943;&nu;&omicron;&sigmaf;</notr></td>
+		<td>Рак<br /><i>Рак был облегчен.</i></td>
+		<td><img width="255" src="descr_pics/aratea_small_cnc.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Leo, Leo</notr></td>
+		<td><notr>&Lambda;&#941;&omega;&nu;</notr></td>
+		<td>Lion<br />зеркальное изображение</td>
+		<td><img width="255" src="descr_pics/aratea_small_leo.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Virgo, Vir</notr></td>
+		<td><notr>&Pi;&alpha;&rho;&theta;&#941;&nu;&omicron;&sigmaf;</notr></td>
+		<td>Барышня<br />Судя по всему, в рукописи есть только один рисунок для фигур, которые
+изображены дважды: как Стрелец изображен в виде кентавра, а созвездие
+Кентавр отсутствует, так и Андромеда изображена как барышня, а вторая
+барышня для созвездия Девы отсутствует.</td>
+		<td>отсутствует</td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Libra, Lib</notr></td>
+		<td><notr>&Chi;&eta;&lambda;&alpha;&#943;</notr></td>
+		<td>Баланс (лат., с 1 в. н.э. в Близнецах и Манилии; перенесен в стиле эпохи
+вавилонского возрождения),
+		<br />Клешни [Скорпиона] (греч.)<br />Клешни Скорпиона действительно покрывают эту область.</td>
+		<td>отсутствует</td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Ophiuchus et Serpens, Scorpius,<br />Oph + Ser </notr>и<notr> Sco</notr></td>
+		<td><notr>&#702;&Omicron;&phi;&iota;&omicron;&#973;&chi;&omicron;&sigmaf;, &#702;&#714;&Omicron;&phi;&iota;&sigmaf; </notr>и<notr> &Sigma;&kappa;&omicron;&rho;&pi;&#943;&omicron;&sigmaf;</notr></td>
+		<td>Змееносец и Скорпион (с тех пор оба в зодиаке)<br />зеркальное изображение</td>
+		<td><img width="255" src="descr_pics/aratea_small_oph.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Sagittarius, Sgr</notr></td>
+		<td><notr>&Tau;&omicron;&xi;&#972;&tau;&eta;&sigmaf;</notr></td>
+		<td>Лучник</td>
+		<td><img width="255" src="descr_pics/aratea_small_sgr.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Capricornus, Cap</notr></td>
+		<td><notr>&Alpha;&#943;&gamma;&#972;&kappa;&epsilon;&rho;&omicron;&sigmaf;</notr></td>
+		<td>Козлорогий</td>
+		<td><img width="255" src="descr_pics/aratea_small_cap.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Aquarius, Aqr</notr></td>
+		<td><notr>&#703;&Upsilon;&delta;&rho;&omicron;&chi;&#972;&omicron;&sigmaf;</notr></td>
+		<td>Водолей<br />зеркальное изображение (хотя вид спереди)</td>
+		<td><img width="255" src="descr_pics/aratea_small_aqr.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Pisces, Psc</notr></td>
+		<td><notr>&#702;&Iota;&chi;&theta;&#973;&epsilon;&sigmaf;</notr></td>
+		<td>Рыбы</td>
+		<td><img width="255" src="descr_pics/aratea_small_psc.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Cetus, Cet</notr></td>
+		<td><notr>&Kappa;&eta;&#771;&tau;&omicron;&sigmaf;</notr></td>
+		<td>морское чудовище, названное Китом</td>
+		<td><img width="255" src="descr_pics/aratea_small_cet.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Orion, Ori</notr></td>
+		<td><notr>&#702;&Omega;&rho;&#943;&omega;&nu;</notr></td>
+		<td>Orion<br /><i>зеркальное изображение</i><br />Заяц на этом изображении был удален и заменен Зайцем из его собственной
+одностраничной картины.</td>
+		<td><img width="255" src="descr_pics/aratea_small_ori.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Eridanus, Eri</notr></td>
+		<td><notr>&Pi;&omicron;&tau;&alpha;&mu;&#972;&sigmaf;</notr></td>
+		<td>река Эридан (лат.), безымянная река (греч.);<br />здесь изображен речной бог</td>
+		<td><img width="255" src="descr_pics/aratea_small_eri.jpg"/></td>
+	</tr>
+	<tr>
+		<td><notr>Lepus, Lep</notr></td>
+		<td><notr>&Lambda;&alpha;&gamma;&omega;&#771;&sigmaf;</notr></td>
+		<td>Заяц<br /><i>показано дважды: один раз между ног Ориона, один раз отдельно; для
+визуализации мы убрали зайца между ног Ориона. Отдельно изображенный заяц
+бежит в направлении письма, а заяц между ног Ориона бежит в направлении
+истинного движения солнца. Таким образом, фигуру созвездия следует
+рассматривать как зеркально отраженную по отношению к иллюстрации в книге:
+это можно увидеть на наброске зайца между ног Ориона.</i></td>
+		<td><img width="255" src="descr_pics/aratea_small_lep.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Canis Maior, CMa</notr></td>
+		<td><notr>&Kappa;&#973;&omega;&nu;</notr></td>
+		<td>Пёс<br />зеркальное изображение маленькой собачки</td>
+		<td><img width="255" src="descr_pics/aratea_small_cma.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Canis Minor (Procyon), CMi</notr></td>
+		<td><notr>&Pi;&rho;&omicron;&kappa;&#973;&omega;&nu;</notr></td>
+		<td>Звезда перед собакой <br /> зеркальное изображение<br />(астеризм из трех звезд, образующих маленькую собачку, упоминается уже
+Эратосфеном, но имя фигуры всегда было «Прокион»). Процион - это
+латинизированный греческий термин (с буквой «к»).</td>
+		<td><img width="255" src="descr_pics/aratea_small_cmi.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Argo, Arg</notr></td>
+		<td><notr>&#702;&Alpha;&rho;&gamma;&omega;</notr></td>
+		<td>Корабль &quot;Арго&quot;<br />зеркальное изображение</td>
+		<td><img width="255" src="descr_pics/aratea_small_arg.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Hydra, Crater, Corvus<br />Hya, Crt, Crv</notr></td>
+		<td><notr>&#703;&#714;&Upsilon;&delta;&rho;&omicron;&sigmaf;, &Kappa;&rho;&alpha;&tau;&#942;&rho;, &Kappa;&oacute;&rho;&alpha;&xi;</notr></td>
+		<td>Водяной Змей, особый сосуд (чаша), Ворон</td>
+		<td><img width="255" src="descr_pics/aratea_small_hya.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Centaurus, Cen</notr></td>
+		<td><notr>&Kappa;&#941;&nu;&tau;&alpha;&upsilon;&rho;&omicron;&sigmaf;</notr></td>
+		<td>Кентавр<br />по-видимому, созвездия, которые являются двойными, были нарисованы только
+один раз: Стрелец изображен в рукописи в виде кентавра, созвездие Центавра
+(кентавр с жертвенным животным) не изображено<br />(аналогично изображена Андромеда, но не Дева)</td>
+		<td>отсутствует</td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Lupus, Lup</notr></td>
+		<td><notr>&Theta;&eta;&rho;&#943;&omicron;&nu;</notr></td>
+		<td>монстр<br />(в греческом оригинале (Арат, ~ 300 г. до н.э.) Волк - это не отдельное
+созвездие, а составная часть созвездия Центавра, которого здесь нет).</td>
+		<td>отсутствует</td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Ara, Ara</notr></td>
+		<td><notr>&Theta;&upsilon;&mu;&iota;&alpha;&tau;&#942;&rho;&iota;&omicron;&nu;</notr></td>
+		<td>Алтарь</td>
+		<td><img width="255" src="descr_pics/aratea_small_ara.jpg"/></td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Corona Australis, CrA</notr></td>
+		<td><notr>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf; &Nu;&#972;&tau;&iota;&omicron;&sigmaf;</notr></td>
+		<td>Южная корона (лат.), Южный венок (греч.)</td>
+		<td>отсутствует</td>
+	</tr>
+	<tr valign="top">
+		<td><notr>Piscis Austrinus, PsA</notr></td>
+		<td><notr>&Nu;&#972;&tau;&iota;&omicron;&sigmaf; &#702;&Iota;&chi;&theta;&#973;&sigmaf;</notr></td>
+		<td>Южная рыба<br />(было «Великая рыба» для Эратосфена и Арата по-гречески)<br />Оно здесь так мрачно нарисовано, что вы не узнаете его среди звезд. Вот
+почему цвета были погружены в сине-зеленую схему вместо исходной
+красно-фиолетовой.</td>
+		<td><img width="255" src="descr_pics/aratea_small_psA.jpg"/></td>
+	</tr>
+</table>
+</p>
+<h2>Ссылки</h2> 
+<h3>О самой Аратеи:</h3> 
+<ul> 
+	<li>Blume, Dieter; Haffner, Mechthild; Metzger, Wolfgang: Sternbilder des
+Mittelalters und der Renaissance: Porträts aus der Geschichte der
+Leibnizschen Wissenschaftsakademie, Band I-II, de Gruyter, 2012-2016</li>
+	<li>Dekker, Elly: The Provenance of the Stars in the Leiden Aratea Picture Book,
+Journal of the Warburg and Courtauld Institutes Vol. 73 (2010), pp. 1-37</li>
+	<li>Katzenstein, Ranee and Savage-Smith, Emily: The Leiden Aratea &mdash;
+Ancient Constellations in a medieval manuscript, The Paul Getty Museum,
+Malibu California, 1988</li>
+</ul>
+<h3>Для Птолемея (в сравнении): звездный каталог Альмагеста.</h3> 
+<ul> 
+	<li>Heiberg, J. L. (Ed.): Claudii Ptolemaei: Syntaxis Mathematica, Teubner,
+Leipzig, 1898</li>
+	<li>Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden/ New York,
+2017</li>
+	<li>Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984</li>
+</ul>
+<h2>Добросовестное использование</h2>
+<p>Мы предоставляем эту культуру неба бесплатно, но авторы заслуживают того,
+чтобы их цитировали по обычным правилам. Благодарю вас!</p>
+
+<h2>Автор</h2>
+<p>Эта культура неба была добавлена в Stellarium Сюзанной М. Хоффманн
+(service@uhura-uraniae.com) и первоначально создана в сотрудничестве с
+профессором, доктором Дитером Блюмом (история искусства, Йена, Германия) для
+Планетария Йены.</p>
+
+<h5 align="center">написано на английском языке: <br/>авторы </h5>
