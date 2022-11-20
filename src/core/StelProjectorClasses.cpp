@@ -615,30 +615,6 @@ QString StelProjectorCylinderFill::getDescriptionI18() const
 		  "The view is stretched to always show a 360x180° field of view in a fixed view direction. It is provided for specialized setups.");
 }
 
-bool StelProjectorCylinderFill::forward(Vec3f &v) const
-{
-	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
-	const bool rval = (-r < v[1] && v[1] < r);
-	const float alpha = std::atan2(v[0],-v[2]);
-	const float delta = std::asin(v[1]/r);
-	v[0] = alpha*static_cast<float>(widthStretch);
-	v[1] = delta;
-	v[2] = r;
-	return rval;
-}
-
-bool StelProjectorCylinderFill::backward(Vec3d &v) const
-{
-	v[0] /= widthStretch;
-	const bool rval = v[1]<M_PI_2 && v[1]>-M_PI_2 && v[0]>-M_PI && v[0]<M_PI;
-	const double cd = std::cos(v[1]);
-	const double alpha=v[0];
-	v[2] = - cd * std::cos(alpha);
-	v[0] = cd * std::sin(alpha);
-	v[1] = std::sin(v[1]);
-	return rval;
-}
-
 QString StelProjectorMercator::getNameI18() const
 {
 	return q_("Mercator");
@@ -659,7 +635,6 @@ bool StelProjectorMercator::forward(Vec3f &v) const
 	v[2] = r;
 	return rval;
 }
-
 
 bool StelProjectorMercator::backward(Vec3d &v) const
 {
