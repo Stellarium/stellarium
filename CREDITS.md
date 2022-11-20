@@ -139,7 +139,7 @@
 		time 1995-2050. It is applied for years -4000..+8000 only.
 
 2. Included source code
-	2.1 Some computation of the sideral time (sidereal_time.h/c) and pluto
+	2.1 Some computation of the sidereal time (sidereal_time.h/c) and pluto
 	    orbit contains code from the libnova library (LGPL) by Liam Girdwood.
 	2.2 The orbit.cpp/h and solve.h files are directly borrowed from
 	    Celestia (Chris Laurel). (GPL license)
@@ -190,7 +190,7 @@
 	       nr_of_measurements, combination of flags, tycho2 number)
 	    -) add all stars from Hipparcos (incl. component solutions), and
 	       tycho2+1st supplement
-	    -) reorganize the stars in several brigthness levels and
+	    -) reorganize the stars in several brigthtness levels and
 	       triangular zones according to position and magnitude
 	    The programs that are used to generate the star files are called
 	    "MakeCombinedCatalogue", "ParseHip", "ParseNomad", and can be
@@ -246,7 +246,7 @@
 	         Edited by Thomas Watson. Taken from CloudyNights
 	         http://www.cloudynights.com/page/articles/cat/articles/the-collinder-catalog-updated-r2467
 	3.10 Cross-identification of objects in consolidated DSO catalog was
-	     maked with:
+	     made with:
 	    [1]  SIMBAD Astronomical Database
 	         http://simbad.u-strasbg.fr
 	    [2]  Merged catalogue of reflection nebulae (Magakian, 2003)

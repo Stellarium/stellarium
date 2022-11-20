@@ -92,7 +92,7 @@
 |	HIP27989	|	زابن الجوزا الشمالي	|	Zabin al-Ǧawza al-Šimalī	|	Northern Claw Of Al-Jawza	|	Name of the star: α Ori, this specific name "Northern Claw of al-Jawza" appeared in "Ibn Bišir, ʿUṯmān ibn ʿAbd Allah (died 1873), ʿInwān al-maǧd fi tarīḫ Naǧd, The title of glory on the history of Najd, (Arabic critical edition print by Dr. Muḥammad ibn Nāṣir al-Šiṯrī), Riyadh, Saudi Arabia, 2012, pg. 292.".	|	5	|
 |	HIP27366	|	رجل الجوزا	|	Riǧl al-Ǧawza	|	Leg Of Al-Jawza	|	Name of the star: κ Ori, from the western region of Saudi Arabia and used by the fishers of the red sea. The source is oral tradition from the seaport Umluj of Saudi Arabia.	|	1	|
 |	HIP24436	|	قرن الجوزا الجنوبي	|	Qarn al-Ǧawza al-Ǧunūbī	|	Southern Horn Of Al-Jawza	|	Name of the star: β Ori, from the western region of Saudi Arabia and used by the fishers of the red sea. The source is oral tradition from the seaport Umluj of Saudi Arabia.	|	1	|
-|	HIP24436	|	زابن الجوزا الجنوبي	|	Zabin al-Ǧawza al-Ǧunūbī	|	Southern Claw Of Al-Jawza	|	Name of the star: β Ori, this name is infered from the name of "Northern Claw of al-Jawza" for α Ori. 1	|
+|	HIP24436	|	زابن الجوزا الجنوبي	|	Zabin al-Ǧawza al-Ǧunūbī	|	Southern Claw Of Al-Jawza	|	Name of the star: β Ori, this name is inferred from the name of "Northern Claw of al-Jawza" for α Ori. 1	|
 |	HIP32349	|	المرزم	|	al-Mirzam	|	Al-Mirzam	|	A common name of α CMa (Sirius) used to time the period of the 5th lunar mansion.	|	2,3	|
 |	HIP32349	|	الشعلى	|	al-Šiʿla	|	Al-Shi'la	|	Another name of α CMa (Sirius) used in the northern parts of the Arabian Peninsula.	|	1	|
 |	HIP30438	|	سهيل	|	Shail	|	Suhayl	|	The star α Car (Canopus). The name is of ancient origin.	|	2,3	|

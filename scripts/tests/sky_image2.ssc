@@ -8,7 +8,7 @@ include("status_label.inc");
 
 useStatusLabel("Sky Images Test 2: ", 50, core.getScreenHeight() - 50, 16, "#ff0000");
 
-status("Load mutliple images, and turn them on and off...");
+status("Load multiple images, and turn them on and off...");
 core.clear("starchart");
 core.selectObjectByName("M31", false);
 StelMovementMgr.setFlagTracking(true);

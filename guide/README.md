@@ -15,7 +15,7 @@ The classic TeX environment on Windows is MikTeX, a very complete TeX environmen
 
 Alternatively, to be inline with the other Systems, consider TeXlive also for Windows (https://www.tug.org/texlive/windows.html). 
 
-Windows is still the most common desktop platform in 2019, like it or not. However, its command shell is an embarassing relic of the DOS era and a far cry from tools available on the tiniest Linux system. 
+Windows is still the most common desktop platform in 2019, like it or not. However, its command shell is an embarrassing relic of the DOS era and a far cry from tools available on the tiniest Linux system. 
 The shortcomings of the command line have brought several Options for Linux-affine working:
 
 * GNUWin32 tools

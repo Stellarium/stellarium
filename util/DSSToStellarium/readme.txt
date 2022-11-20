@@ -1,4 +1,4 @@
-A set of pyton scripts used to process DSS plates for Stellarium
+A set of python scripts used to process DSS plates for Stellarium
 
 Dependencies:
  - astropy: (sudo pip install astropy)

@@ -1558,7 +1558,7 @@ int ReadHipTycFile(Accumulator &accu) {
                                   pm_ra,pm_dec,0.001*mag,0.001*b_v,
                                   Plx,sp[0]=='?'?"":sp);
       if (rc < 0) {
-          // never mind: propably no magnitude for Hiparcos star
+          // never mind: probably no magnitude for Hiparcos star
 //        fprintf(stderr,"File \"%s\", record %d: Error 13 %d %d \"%s\"\n",
 //                fname,count,rc,hip,sp);
 //        exit(-1);
