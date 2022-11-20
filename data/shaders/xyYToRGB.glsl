@@ -48,7 +48,7 @@ vec3 xyYToRGB(highp float x, highp float y, highp float Y)
 			return vec3(0.787077, 0.9898434, 1.9256125) * Y * brightnessScale;
 		}else{
 			Y = pow(abs(Y*pi*1e-4), alphaWaOverAlphaDa) * term2TimesOneOverMaxdL;
-			return pow(vec3(0.787077, 0.9898434, 1.9256125) * Y * brightnessScale, vec3(oneOverGamma));
+			return pow(vec3(0.787077, 0.9898434, 1.9256125) * abs(Y * brightnessScale), vec3(oneOverGamma));
 		}
 	}
 	else
@@ -95,7 +95,7 @@ vec3 xyYToRGB(highp float x, highp float y, highp float Y)
 	  	if (flagUseTmGamma){
 			return XYZ2RGB * XYZ * brightnessScale;
 		}else{
-			return pow(XYZ2RGB * XYZ * brightnessScale, vec3(oneOverGamma));
+			return pow(abs(XYZ2RGB * XYZ * brightnessScale), vec3(oneOverGamma));
 		}
 	}
 }
