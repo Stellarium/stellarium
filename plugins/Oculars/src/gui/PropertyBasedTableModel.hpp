@@ -26,7 +26,7 @@
 //!
 //! To use this class, your domain objects basically just need to use properties (for any properties you want to make
 //! available to the model), and have a Q_INVOKABLE copy constructor.  Then, when you instantiate an
-//! instance, you must call the init methd.  The init method takes the data to model, as well as an instance of your
+//! instance, you must call the init method.  The init method takes the data to model, as well as an instance of your
 //! model class (to use as a model for creating new instances), and a map to know the ordering  of the properties to
 //! their position (as you want them displayed).
 //!

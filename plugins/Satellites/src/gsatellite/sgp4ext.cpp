@@ -282,7 +282,7 @@ void newtonnu(double ecc, double nu, double& e0, double& m)
 *    c1          - v**2 - u/r
 *    rdotv       - r dot v
 *    hk          - hk unit vector
-*    sme         - specfic mechanical energy      km2 / s2
+*    sme         - specific mechanical energy     km2 / s2
 *    i           - index
 *    e           - eccentric, parabolic,
 *                  hyperbolic anomaly             rad
@@ -629,7 +629,7 @@ void invjday(double jd, int& year, int& mon, int& day, int& hr, int& minute, dou
 		days    = temp - ((year - 1900) * 365.0 + leapyrs);
 	}
 
-	/* ----------------- find remaing data  ------------------------- */
+	/* ----------------- find remaining data  ----------------------- */
 	days2mdhms(year, days, mon, day, hr, minute, sec);
 	sec = sec - 0.00000086400;
 }  // end invjday

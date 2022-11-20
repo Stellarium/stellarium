@@ -764,7 +764,7 @@ void Oculars::retranslateGui()
 	{
 		// TODO: Fix this hack!
 		
-		// Delete and re-create the panel to retranslate its trings
+		// Delete and re-create the panel to retranslate its strings
 		guiPanel->hide();
 		delete guiPanel;
 		guiPanel = Q_NULLPTR;
@@ -1559,7 +1559,7 @@ void Oculars::paintCCDBounds()
 			const double fovY = ccd->getActualFOVy(telescope, lens);
 
 			// As the FOV is based on the narrow aspect of the screen, we need to calculate
-			// height & width based soley off of that dimension.
+			// height & width based solely off of that dimension.
 			int aspectIndex = 2;
 			if (params.viewportXywh[2] > params.viewportXywh[3])
 			{

@@ -59,7 +59,7 @@ public:
 	virtual void service(HttpRequest& request, HttpResponse& response) Q_DECL_OVERRIDE;
 
 public slots:
-	//! Sets wether a password set with setPassword() is required by all requests.
+	//! Sets whether a password set with setPassword() is required by all requests.
 	//! It uses HTTP Basic authorization, with an empty username.
 	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
 	void setUsePassword(bool v);
@@ -68,7 +68,7 @@ public slots:
 	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
 	void setPassword(const QString& pw);
 
-	//! Sets wether CORS is enabled.
+	//! Sets whether CORS is enabled.
 	//! @warning Make sure to only call this only when the server is offline because they are not synchronized
 	void setEnableCors(bool v);
 	//! Returns if CORS is enabled

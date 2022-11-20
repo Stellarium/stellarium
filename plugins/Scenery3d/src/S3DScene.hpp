@@ -146,7 +146,7 @@ public:
 
 	//! Makes the scene ready for GL rendering. Needs a valid GL context
 	bool glLoad();
-	//! Returns true if the scene is ready for GL rendering (glLoad succeded)
+	//! Returns true if the scene is ready for GL rendering (glLoad succeeded)
 	bool isGLReady() const { return glReady; }
 	// Basic wrappers alround StelOpenGLArray
 	inline void glBind() { glArray.bind(); }

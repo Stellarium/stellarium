@@ -53,7 +53,7 @@ const QString TelescopeClient::TELESCOPECLIENT_TYPE = QStringLiteral("Telescope"
 
 TelescopeClient *TelescopeClient::create(const QString &url)
 {
-	// note: in a reg exp, [^:] matches any chararacter except ':'
+	// note: in a reg exp, [^:] matches any character except ':'
 	static const QRegularExpression urlSchema("^([^:]*):([^:]*):([^:]*)(?::(.*))?$");
 	QRegularExpressionMatch urlMatch=urlSchema.match(url);
 	QString name, type, equinox, params;
@@ -200,7 +200,7 @@ TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Telescope
 		return;
 	}
 
-	qDebug() << "TelescopeTCP paramaters host, port, time_delay:" << host << port << time_delay;
+	qDebug() << "TelescopeTCP parameters host, port, time_delay:" << host << port << time_delay;
 	
 	if (time_delay <= 0 || time_delay > 10000000)
 	{

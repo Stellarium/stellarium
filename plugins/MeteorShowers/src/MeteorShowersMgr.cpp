@@ -182,7 +182,7 @@ void MeteorShowersMgr::loadConfig()
 
 void MeteorShowersMgr::saveSettings()
 {
-	// Let's interpret hided radiants as "disabled at startup" when main settings are saving
+	// Let's interpret hidden radiants as "disabled at startup" when main settings are saving
 	m_conf->setValue(MS_CONFIG_PREFIX + "/enable_at_startup", getEnablePlugin());
 }
 
@@ -396,7 +396,7 @@ void MeteorShowersMgr::downloadComplete(QNetworkReply *reply)
 	{
 		qWarning() << "[MeteorShowersMgr] Download error: While trying to access"
 			   << reply->url().toString()
-			   << "the following error occured:"
+			   << "the following error occurred:"
 			   << reply->errorString();
 
 		reply->deleteLater();

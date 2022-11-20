@@ -142,7 +142,7 @@ void Scenery3dDialog::createDialogContent()
 	}
 
 	//connectSlotsByName does not work in our case (because this class does not "own" the GUI in the Qt sense)
-	//the "new" syntax is extremly ugly in case signals have overloads
+	//the "new" syntax is extremely ugly in case signals have overloads
 	connect(ui->comboBoxCubemapMode,     static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Scenery3dDialog::on_comboBoxCubemapMode_currentIndexChanged);
 	connect(ui->comboBoxShadowFiltering, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Scenery3dDialog::on_comboBoxShadowFiltering_currentIndexChanged);
 	connect(ui->comboBoxCubemapSize,     static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Scenery3dDialog::on_comboBoxCubemapSize_currentIndexChanged);

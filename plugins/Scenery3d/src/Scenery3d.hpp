@@ -158,7 +158,7 @@ public slots:
     //! Does nothing if no scene is currently loaded.
     //!
     //! The first component specifies movement in the "right" direction, the second
-    //! component in the "forward" directon, and the last value
+    //! component in the "forward" direction, and the last value
     //! is used to adjust the height offset of the viewer (he is still
     //! positioned according to the heightmap).
     void relativeMove(const Vec3d& move);

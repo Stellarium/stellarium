@@ -704,7 +704,7 @@ void Quasars::downloadComplete(QNetworkReply *reply)
 	{
 		qWarning() << "[Quasars] Download error: While trying to access"
 			   << reply->url().toString()
-			   << "the following error occured:"
+			   << "the following error occurred:"
 			   << reply->errorString();
 
 		reply->deleteLater();

@@ -37,7 +37,7 @@
 // Class GTimeSpan
 
 //////////////////////////////////////////////////////////////////////////////
-// Referencies:
+// References:
 // Astronomical Formulae for Calculators.
 //	Jean Meeus
 //	Chapter 3: Julian Day and Calendar Date. PG's 23, 24, 25
@@ -54,7 +54,7 @@ void gTime::setTime(int year, double day)
 	int B = 2 - A + (A / 4);
 
 	double JDforYear = static_cast<int>(365.25 * year) +
-				      static_cast<int>(30.6001 * 14)  +  //MM = 1 then MM=12 + 1 for the expresion (30.6001 * (mm +1))
+				      static_cast<int>(30.6001 * 14)  +  //MM = 1 then MM=12 + 1 for the expression (30.6001 * (mm +1))
 				      1720994.5 + B;
 
 	m_time = JDforYear + day;
