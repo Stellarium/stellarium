@@ -48,21 +48,22 @@ credits=my institute (optional)
 boundaries=none
 classification=personal
 license=CC BY-SA 4.0 International Public License
+region=Western Europe
 \end{configfile}
 
 \noindent (or what seems best for you). The \texttt{name} is used for the list entry in
 the Starlore tab in the View dialog (see \ref{sec:gui:view:starlore}). \texttt{author} should be the actual author(s)' name(s). 
 The optional \texttt{credits} \newFeature{0.22.2} can be used to mention other involved parties. 
 
-\paragraph{boundaries}
+\subsection{Boundaries}
 The option ``boundaries'' is optional and may contain the follow values:
 \begin{description}
 \item[none] --- this value is enabled by default and it designates that this culture doesn't have boundaries of constellations.
-\item[iau] --- use this value for variants of ``western'' cultures to enable using default (IAU) boundaries.
+\item[iau] --- use this value for variants of modern cultures to enable using default (IAU) boundaries.
 \item[own] --- please use it for culture who has own set of boundaries for constellations.
 \end{description}
 
-\paragraph{classification}
+\subsection{Classification}
 The option ``classification'' is also optional. \newFeature{0.19.0} It allows some form of quality control:
 \begin{description}
   \item[personal] -- this is a personally developed skyculture which
@@ -137,7 +138,6 @@ please describe the conditions sufficiently well in a dedicated
 \texttt{h2} section close to the end of your
 \file{description.en.utf8}.
 
-
 \paragraph{Caution for users!} While Stellarium is provided under the free GPL v2.0 licence which allows for commercial use,
 some of our skycultures have been contributed under CC NC/ND licenses,
 i.e., are for noncommercial use only.  Please respect their heritage
@@ -145,6 +145,67 @@ holders and check-out the CC licence version in the description before
 you use sky cultures in public events like TV documentaries, YouTube
 videos, lectures, planetarium shows or printed matter. If in doubt,
 contact the respective authors.
+
+\subsection{Region}
+The option ``region'' is also optional and mark the origin region of sky culture. \newFeature{1.2} It allows some form of additional quality control. The names of regions are follow United Nations geoscheme (UN M49\footnote{Standard country or area codes for statistical use (M49) --- https://unstats.un.org/unsd/methodology/m49/}):
+\begin{description}
+	\item[Northern Africa] -- Algeria, Egypt, Libya, Morocco, Sudan, Tunisia, Western Sahara.
+	\item[Eastern Africa] -- British Indian Ocean Territory, Burundi, Comoros, Djibouti, Eritrea, Ethiopia, French Southern Territories, Kenya, Madagascar, Malawi, Mauritius, Mayotte, Mozambique, Réunion, Rwanda, Seychelles, Somalia, South Sudan, Uganda, United Republic of Tanzania, Zambia, Zimbabwe.
+	\item[Central Africa] -- Angola, Cameroon, Central African Republic, Chad, Congo, Democratic Republic of the Congo, Equatorial Guinea, Gabon, Sao Tome and Principe.
+	\item[Southern Africa] -- Botswana, Eswatini, Lesotho, Namibia, South Africa.
+	\item[Western Africa] -- Benin, Burkina Faso, Cabo Verde, Côte d’Ivoire, Gambia, Ghana, Guinea, Guinea-Bissau, Liberia, Mali, Mauritania, Niger, Nigeria, Saint Helena, Senegal, Sierra Leone, Togo.
+	\item[Caribbean] -- Anguilla, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bonaire, Sint Eustatius and Saba, British Virgin Islands, Cayman Islands, Cuba, Curaçao, Dominica, Dominican Republic, Grenada, Guadeloupe, Haiti, Jamaica, Martinique, Montserrat, Puerto Rico, Saint Barthélemy, Saint Kitts and Nevis, Saint Lucia, Saint Martin (French Part), Saint Vincent and the Grenadines, Sint Maarten (Dutch part), Trinidad and Tobago, Turks and Caicos Islands, United States Virgin Islands.
+	\item[Central America] -- Belize, Costa Rica, El Salvador, Guatemala, Honduras, Mexico, Nicaragua, Panama.
+	\item[Southern America] -- Argentina, Bolivia (Plurinational State of), Bouvet Island, Brazil, Chile, Colombia, Ecuador, Falkland Islands (Malvinas), French Guiana, Guyana, Paraguay, Peru, South Georgia and the South Sandwich Islands, Suriname, Uruguay, Venezuela (Bolivarian Republic of).
+	\item[Northern America] -- Bermuda, Canada, Greenland, Saint Pierre and Miquelon, United States of America.
+	\item[Antarctica] -- Antarctica.
+	\item[Northern Asia] -- Russian Federation (Asian part).
+	\item[Central Asia] -- Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan, Uzbekistan.
+	\item[Eastern Asia] -- China, Hong Kong Special Administrative Region of China, Macao Special Administrative Region of China, Democratic People's Republic of Korea, Japan, Mongolia, Republic of Korea, Taiwan.
+	\item[South-eastern Asia] -- Brunei Darussalam, Cambodia, Indonesia, Lao People's Democratic Republic, Malaysia, Myanmar, Philippines, Singapore, Thailand, Timor-Leste, Viet Nam.
+	\item[Southern Asia] -- Afghanistan, Bangladesh, Bhutan, India, Iran (Islamic Republic of), Maldives, Nepal, Pakistan, Sri Lanka.
+	\item[Western Asia] -- Armenia, Azerbaijan, Bahrain, Cyprus, Georgia, Iraq, Israel, Jordan, Kuwait, Lebanon, Oman, Qatar, Saudi Arabia, State of Palestine, Syrian Arab Republic, Türkiye, United Arab Emirates, Yemen.
+	\item[Eastern Europe] -- Belarus, Bulgaria, Czechia, Hungary, Poland, Republic of Moldova, Romania, Russian Federation (Europeian part), Slovakia, Ukraine.
+	\item[Northern Europe] -- Åland Islands, Channel Islands, Denmark, Estonia, Faroe Islands, Finland, Iceland, Ireland, Isle of Man, Latvia, Lithuania, Norway, Svalbard and Jan Mayen Islands, Sweden, United Kingdom of Great Britain and Northern Ireland.
+	\item[Southern Europe] -- Albania, Andorra, Bosnia and Herzegovina, Croatia, Gibraltar, Greece, Holy See, Italy, Malta, Montenegro, North Macedonia, Portugal, San Marino, Serbia, Slovenia, Spain.
+	\item[Western Europe] -- Austria, Belgium, France, Germany, Liechtenstein, Luxembourg, Monaco, Netherlands, Switzerland.
+	\item[Australasia] -- Australia, Christmas Island, Cocos (Keeling) Islands, Heard Island and McDonald Islands, New Zealand, Norfolk Island.
+	\item[Melanesia] -- Fiji, New Caledonia, Papua New Guinea, Solomon Islands, Vanuatu.
+	\item[Micronesia] -- Guam, Kiribati, Marshall Islands, Micronesia (Federated States of), Nauru, Northern Mariana Islands, Palau, United States Minor Outlying Islands.
+	\item[Polynesia] -- American Samoa, Cook Islands, French Polynesia, Niue, Pitcairn, Samoa, Tokelau, Tonga, Tuvalu, Wallis and Futuna Islands.
+\end{description}
+
+For modern sky cultures we use special region name --- \textbf{World} --- to define worldwide applicable data.
+
+\begin{figure}[htbp]
+	\centering\includegraphics[width=0.75\textwidth]{Africa-regions.png}
+	\caption{Africa: subregions as delineated by United Nations geographic classification scheme: \ccboxdsc{1.0,0.65,0.0} Eastern Africa, \ccboxdsc{1.0,0.0,1.0} Central Africa, \ccboxdsc{0.0,0.0,1.0} Northern Africa, \ccboxdsc{1.0,0.0,0.0} Southern Africa, \ccboxdsc{0.0,1.0,0.0} Western Africa. \emph{Wikipedia / CC BY-SA 3.0}}
+	\label{fig:skycultures:AfricaRegions}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering\includegraphics[width=0.75\textwidth]{Asia-regions.png}
+	\caption{Asia: subregions as delineated by United Nations geographic classification scheme: \ccboxdsc{0.0,0.0,1.0} Central Asia, \ccboxdsc{1.0,0.0,0.0} Eastern Asia, \ccboxdsc{0.0,1.0,0.0} South-eastern Asia, \ccboxdsc{1.0,0.65,0.0} Southern Asia, \ccboxdsc{1.0,1.0,0.0} Western Asia, \ccboxdsc{0.75,0.88,1.0} Northern Asia. \emph{Wikipedia / CC BY-SA 3.0}}
+	\label{fig:skycultures:AsiaRegions}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering\includegraphics[width=0.75\textwidth]{Europe-regions.png}
+	\caption{Europe: subregions as delineated by United Nations geographic classification scheme: \ccboxdsc{1.0,0.5,0.5} Eastern Europe, \ccboxdsc{0.25,0.5,1.0} Northern Europe, \ccboxdsc{0.0,1.0,0.0} Southern Europe, \ccboxdsc{0.0,1.0,1.0} Western Europe. \emph{Wikipedia / CC BY-SA 3.0}}
+	\label{fig:skycultures:EuropeRegions}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering\includegraphics[width=0.7\textwidth]{Americas-regions.png}
+	\caption{Americas: subregions as delineated by United Nations geographic classification scheme: \ccboxdsc{0.0,1.0,1.0} Caribbean, \ccboxdsc{0.0,1.0,0.0} Central America, \ccboxdsc{0.0,0.0,1.0} Northern America, \ccboxdsc{1.0,1.0,0.0} Southern America. \emph{Wikipedia / CC BY-SA 3.0}}
+	\label{fig:skycultures:AmericasRegions}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering\includegraphics[width=\textwidth]{Oceania-regions.png}
+	\caption{Oceania: subregions as delineated by United Nations geographic classification scheme: \ccboxdsc{1.0,0.8,0.2} Australasia, \ccboxdsc{0.6,0.8,0.9} Melanesia, \ccboxdsc{0.8,0.7,0.7} Micronesia, \ccboxdsc{0.62,0.73,0.87} Polynesia. \emph{Wikipedia / CC BY-SA 3.0}}
+	\label{fig:skycultures:OceaniaRegions}
+\end{figure}
 
 \section{Skyculture Description Files}
 \label{sec:skycultures:description}
@@ -168,7 +229,7 @@ If you can provide other languages supported by Stellarium, you can
 provide translations yourself, else Stellarium translators \emph{may}
 translate the English version for you. (It may take years though.) The file
 ending \file{.utf8} indicates that for special characters like ÄÖÜßáé
-you should use UTF8 encoding. If you write only English/ASCII, this may not
+you should use UTF-8 encoding. If you write only English/ASCII, this may not
 be relevant.
 
 \section{Proper Names}
