@@ -285,14 +285,14 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 QString StelSkyCultureMgr::getCurrentSkyCultureHtmlRegion() const
 {
 	QString html = "", region = currentSkyCulture.region.trimmed();
-	QString description = q_("The region is understood as the geographical area of origin of a given culture of the sky.");
+	QString description = q_("The region indicates the geographical area of origin of a given sky culture.");
 
 	// special case: modern sky culture
 	if (getCurrentSkyCultureID().contains("modern", Qt::CaseInsensitive))
 	{
-		// TRANSLATIONS: By the fact this is name of pseudo-region on Earth
+		// TRANSLATIONS: This is the name of a geographical "pseudo-region" on Earth
 		region = N_("World");
-		description = q_("All modern sky cultures are based on the IAU-approved 88 constellations with standardized boundaries and are used worldwide. The origins of all these constellations are pan-European.");
+		description = q_("All 'modern' sky cultures are based on the IAU-approved 88 constellations with standardized boundaries and are used worldwide. The origins of these constellations are pan-European.");
 	}
 
 	if (!region.isEmpty()) // Region marker is always 'green'
