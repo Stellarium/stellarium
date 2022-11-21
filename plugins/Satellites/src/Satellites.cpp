@@ -2347,23 +2347,26 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 		}
 	}
 	else
+	{
 		qWarning() << "[Satellites] FAILED to download" << reply->url().toString(QUrl::RemoveUserInfo) << "Error:" << reply->errorString();
+		emit updateStateChanged(DownloadError);
+	}
 
 	numberDownloadsComplete++;
 	if (progressBar)
 		progressBar->setValue(numberDownloadsComplete);
 
 	// Check if all files have been downloaded.
-	// TODO: It's better to keep track of the network requests themselves. --BM 
+	// TODO: It's better to keep track of the network requests themselves. --BM
 	if (numberDownloadsComplete < updateSources.size())
 		return;
-	
+
 	if (progressBar)
 	{
 		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = Q_NULLPTR;
 	}
-	
+
 	// All files have been downloaded, finish the update
 	TleDataHash newData;
 	for (int i = 0; i < updateSources.count(); i++)
@@ -2378,8 +2381,11 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			updateSources[i].file = Q_NULLPTR;
 		}
 	}
-	updateSources.clear();		
-	updateSatellites(newData);
+	updateSources.clear();
+	if (newData.size()>0)
+		updateSatellites(newData);
+	else
+		emit updateStateChanged(OtherError);
 }
 
 void Satellites::updateObserverLocation(const StelLocation &loc)
