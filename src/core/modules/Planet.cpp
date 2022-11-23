@@ -39,6 +39,7 @@
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "StelOpenGL.hpp"
+#include "StelMainView.hpp"
 #include "StelOBJ.hpp"
 #include "StelOpenGLArray.hpp"
 #include "StelHips.hpp"
@@ -258,6 +259,7 @@ Planet::Planet(const QString& englishName,
 	  atmosphere(hasAtmosphere),
 	  halo(hasHalo),
 	  multisamplingEnabled_(StelApp::getInstance().getSettings()->value("video/multisampling", 0).toUInt() != 0),
+	  planetShadowsSupersampEnabled_(StelApp::getInstance().getSettings()->value("video/planet_shadows_supersampling",false).toBool()),
 	  gl(Q_NULLPTR),
 	  iauMoonNumber(""),
 	  b_v(99.f),
@@ -3525,7 +3527,15 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		#ifdef GL_MULTISAMPLE
 		if(multisamplingEnabled_)
+		{
 			gl->glEnable(GL_MULTISAMPLE);
+			const auto& glInfo = StelMainView::getInstance().getGLInformation();
+			if(glInfo.glMinSampleShading && horizonMap && planetShadowsSupersampEnabled_)
+			{
+				glInfo.glMinSampleShading(1);
+				gl->glEnable(GL_SAMPLE_SHADING);
+			}
+		}
 		#endif
 		
 		// Set the main source of light to be the sun.
@@ -3597,7 +3607,15 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		core->setClippingPlanes(n,f);  // Restore old clipping planes
 		#ifdef GL_MULTISAMPLE
 		if(multisamplingEnabled_)
+		{
 			gl->glDisable(GL_MULTISAMPLE);
+			const auto& glInfo = StelMainView::getInstance().getGLInformation();
+			if(glInfo.glMinSampleShading && horizonMap && planetShadowsSupersampEnabled_)
+			{
+				glInfo.glMinSampleShading(0);
+				gl->glDisable(GL_SAMPLE_SHADING);
+			}
+		}
 		#endif
 	}
 

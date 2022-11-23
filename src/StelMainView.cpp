@@ -899,6 +899,14 @@ void StelMainView::init()
 		qDebug() << "Anisotropic filtering is not supported!";
 	}
 
+	if(format.majorVersion() > 4 || glInfo.mainContext->hasExtension("GL_ARB_sample_shading"))
+	{
+		auto addr = glInfo.mainContext->getProcAddress("glMinSampleShading");
+		if(!addr)
+			addr = glInfo.mainContext->getProcAddress("glMinSampleShadingARB");
+		glInfo.glMinSampleShading = reinterpret_cast<PFNGLMINSAMPLESHADINGPROC>(addr);
+	}
+
 	gui = new StelGui();
 
 	// Should be check of requirements disabled? -- NO! This is intentional here, and does no harm.

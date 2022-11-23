@@ -72,6 +72,7 @@ public:
 		QSurface* surface;
 		QOpenGLContext* mainContext;
 		QOpenGLFunctions* functions;
+		PFNGLMINSAMPLESHADINGPROC glMinSampleShading = nullptr;
 		GLint maxAnisotropy = 0;
 		bool supportsLuminanceTextures = false;
 		bool isCoreProfile = false;
