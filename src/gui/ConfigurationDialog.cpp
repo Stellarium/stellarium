@@ -346,7 +346,7 @@ void ConfigurationDialog::createDialogContent()
 	// Font selection. We use a hidden, but documented entry in config.ini to optionally show a font selection option.
 	connectIntProperty(ui->screenFontSizeSpinBox, "StelApp.screenFontSize");
 	connectIntProperty(ui->guiFontSizeSpinBox, "StelApp.guiFontSize");
-	if (StelApp::getInstance().getSettings()->value("gui/flag_font_selection", false).toBool())
+	if (StelApp::getInstance().getSettings()->value("gui/flag_font_selection", true).toBool())
 	{
 		populateFontWritingSystemCombo();
 		connect(ui->fontWritingSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(handleFontBoxWritingSystem(int)));
