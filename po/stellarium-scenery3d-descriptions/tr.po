@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# 03bfdb1e3bdfa21b80c8160ea93f1c67_2436d66, 2020
+# 03bfdb1e3bdfa21b80c8160ea93f1c67_2436d66, 2022
 # Suleyman Poyraz <zaryob.dev@gmail.com>, 2022
 # 
 #, fuzzy
@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-09-19 19:50+0700\n"
-"PO-Revision-Date: 2020-11-24 18:28+0000\n"
+"POT-Creation-Date: 2022-10-06 00:11+0700\n"
+"PO-Revision-Date: 2022-10-05 17:03+0000\n"
 "Last-Translator: Suleyman Poyraz <zaryob.dev@gmail.com>, 2022\n"
 "Language-Team: Turkish (https://www.transifex.com/stellarium/teams/80998/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -58,6 +58,14 @@ msgid ""
 "absolutely and always point west-east, the grid lines hit the northern "
 "horizon slightly (4.2 deg) left of north!"
 msgstr ""
+"Burada gösterilen sütunlar, yapının merkezinden görüldüğü gibi, orta Avrupa "
+"enlemlerinde gündönümü/ekinoks gün doğumu/gün batımı konumlarına yaklaşık "
+"bir görünüm (yüksek hassasiyette değil!) sağlar. Merkezi sütunlar bir doğu-"
+"batı hattı sağlar. Zeminde görünen anket koordinat ızgarası, coğrafi kuzey "
+"ile aynı hizada değil. -4.2 derecelik bir dönüş (meridyen yakınsama testi) "
+"telafi edilmelidir, yani merkezi sütunlar kesinlikle ve her zaman batı-"
+"doğuyu işaret etmelidir, ızgara çizgileri kuzey ufkuna kuzeyin hafifçe (4,2 "
+"derece) soluna çarpar!"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:19
@@ -65,11 +73,13 @@ msgid ""
 "Walkaround ground coordinates (Ctrl-R, T) should display the coordinates "
 "visible along the south and west border of the ground."
 msgstr ""
+"Gezinme zemin koordinatları (Ctrl-R, T), zeminin güney ve batı sınırı "
+"boyunca görünen koordinatları göstermelidir."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:23
 msgid "Material test"
-msgstr ""
+msgstr "Materyal testi"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:25
@@ -78,6 +88,9 @@ msgid ""
 " can play with material parameters to create funny effects like "
 "semitransparent or glow-in-the-dark brick spheres."
 msgstr ""
+"Bu model, eklentinin grafik yeteneklerini test etmek için de kullanılır. "
+"Yarı saydam veya karanlıkta parlayan tuğla küreler gibi eğlenceli efektler "
+"oluşturmak için malzeme parametreleriyle oynayabilirsiniz."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:29
@@ -85,12 +98,15 @@ msgid ""
 "To test temporal features, the pillars and spheres are visible only from the"
 " years 2000 until 2020.  Edit the material file to change that!"
 msgstr ""
+"Zamansal özellikleri test etmek için sütunlar ve küreler yalnızca 2000'den "
+"2020'ye kadar görülebilir. Bunu değiştirmek için materyal dosyasını "
+"düzenleyin!"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:32
 #: ../../scenery3d/Sterngarten/description.en.utf8:56
 msgid "Model"
-msgstr ""
+msgstr "Model"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:33
@@ -98,6 +114,8 @@ msgid ""
 "Testscene for Stellarium/scenery3d development. Export from SU8-Kerkythea-"
 "KT2OBJ."
 msgstr ""
+"Stellarium/scenery3d geliştirme için test sahnesi. SU8-Kerkythea-KT2OBJ'den "
+"dışa aktarın."
 
 #. type: Content of: <h2>
 #: ../../scenery3d/Sterngarten/description.en.utf8:1
@@ -110,11 +128,13 @@ msgid ""
 "Sterngarten (\"Star Garden\") is an open-air planetarium in the south-west "
 "of Vienna, demonstrating the solar year."
 msgstr ""
+"Sterngarten (\"Yıldız Bahçesi\"), Viyana'nın güneybatısında, güneş yılını "
+"gösteren bir açık hava gökevidir."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:7
 msgid "Idea"
-msgstr ""
+msgstr "Amaç"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:9
@@ -123,11 +143,14 @@ msgid ""
 "Astronomical Bureau (1907) and Austrian Astronomical Society (1924). "
 "Director of first Vienna Planetarium (1927) and Urania observatory."
 msgstr ""
+"Üniv.Prof.Dr.Oswald Thomas (1882 Kronstadt - 1963 Viyana). Kurucu, Astronomi"
+" Bürosu (1907) ve Avusturya Astronomi Derneği (1924). İlk Viyana Gökevi "
+"(1927) ve Urania gözlemevinin yöneticisi."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:14
 msgid "Construction"
-msgstr ""
+msgstr "İnşaa"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:16
@@ -141,6 +164,14 @@ msgid ""
 "Calendar)  and the monthly journal \"Der Sternenbote\" (The Starry "
 "Messenger)."
 msgstr ""
+"Sterngarten, Thomas'ın öğrencisi ve Astronomi Bürosundaki halefi Prof. "
+"Hermann Mucke (1935-2019) tarafından işbirlikçileriyle birlikte "
+"geliştirildi. Mucke ayrıca 1963-2018 yılları arasında Avusturya Astronomi "
+"Derneği sekreteri, 1963-2001 Viyana planetaryumu ve 1971-2001 yılları "
+"arasında Viyana Urania kamu gözlemevi direktörüydü. 60 yıldan fazla bir "
+"süredir Mucke ve Toplum, \"Österreichischer Himmelskalender\" (Avusturya "
+"Göksel Takvimi) ve aylık \"Der Sternenbote\" (Yıldızlı Haberci) dergisini "
+"yayınladı."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:22
@@ -148,6 +179,8 @@ msgid ""
 "It was built 1997-2001 by the Austrian Astronomical Society, supported by "
 "public and private sponsors."
 msgstr ""
+"1997-2001 yılları arasında Avusturya Astronomi Topluluğu tarafından kamu ve "
+"özel sponsorlar tarafından desteklenerek inşa edilmiştir."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:24
@@ -163,6 +196,10 @@ msgid ""
 "southwest of Vienna; always open privately for everybody free of charge. "
 "Frequently guided tours."
 msgstr ""
+"Halkın temel astronomik bilgilerinin geliştirilmesi. Viyana'nın en "
+"güneybatısında yer alan enstalasyonumuz, isteğe bağlı olarak dürbün ile "
+"göksel gerçeklere ve değişimlere çıplak gözle tanık olmakta; her zaman "
+"herkese özel olarak ücretsiz açık. Sıklıkla rehberli turlar düzenlenir."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:32
@@ -200,6 +237,10 @@ msgid ""
 "rising/setting on the mathematical horizon is not possible in the field due "
 "to vegetation and landscape)."
 msgstr ""
+"Mevsimlerin başında gün doğumu ve gün batımı için sütunlar. Sütun konumları,"
+" ekinoksların ve gündönümlerinin azimutlarındadır. Kollar, kırılma nedeniyle"
+" ufuk ve kaydırma etkisini gösterir. (Tarlada bitki örtüsü ve peyzaj "
+"nedeniyle matematiksel ufukta yükselme/akış gözlemi mümkün değildir)."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:42
@@ -207,6 +248,8 @@ msgid ""
 "South Pillar, marked (10&deg;/10&deg; altitude); Transit marks for sun at "
 "seasons' beginning."
 msgstr ""
+"Güney Sütunu, işaretli (10&deg;/10&deg; açısal yükseklik); Mevsimlerin "
+"başında güneş için geçiş işaretleri."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:43
@@ -214,6 +257,8 @@ msgid ""
 "North Pillar, marked (10&deg;/10&deg; altitude); on top Shadow Disc with "
 "central hole: North celestial Pole."
 msgstr ""
+"Kuzey Sütunu, işaretli (10&deg;/10&deg; açısal yükseklik); üstte merkezi "
+"delikli Gölge Diski: Kuzey gök kutbu."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:44
@@ -223,26 +268,30 @@ msgid ""
 " longitude, with zodiacal signs. Ascending part serves as polar gnomon for "
 "the"
 msgstr ""
+"Bent Analemma, bölünmüş. Yatay kısımda ilkbahar ve yaz tarihleri, yükselen "
+"kısımda sonbahar ve kış tarihleri (10&deg;/10&deg;) güneş boylamı, zodyak "
+"işaretleri ile işaretlenmiştir. Yükselen kısım için kutup cücesi görevi "
+"görür."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:45
 msgid "Sundial, full hours Vh to VIIh marked."
-msgstr ""
+msgstr "Güneş saati, Vh ile VIIh arası tam saatler işaretlenmiştir."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:46
 msgid "Information panels."
-msgstr ""
+msgstr "Bilgi panelleri."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:49
 msgid "Further Information"
-msgstr ""
+msgstr "Daha Fazla Bilgi"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:50
 msgid "Websites in German only."
-msgstr ""
+msgstr "Yalnızca Almanca web siteleri."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:52
@@ -250,6 +299,8 @@ msgid ""
 "Österreichischer Astronomischer Verein: <a "
 "href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
 msgstr ""
+"Österreichischer Astronomischer Verein: <a "
+"href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:53
@@ -257,6 +308,8 @@ msgid ""
 "German Wikipedia article on the <a "
 "href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
 msgstr ""
+" <a href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a> ile "
+"ilgili Almanca Wikipedia makalesi"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:57
@@ -266,6 +319,10 @@ msgid ""
 "by Mucke in his primary school days. Mucke's spirit will remain alive in the"
 " Sterngarten."
 msgstr ""
+"H. Mucke'nin planlarını izleyerek Georg Zotti tarafından düzenlendi; "
+"Avusturya'daki sayısız amatör ve profesyonel astronom gibi, Zotti de "
+"astronomiyle Mucke tarafından ilkokul yıllarında tanıştı. Mucke'nin ruhu "
+"Sterngarten'da hayatta kalacak."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:60
@@ -273,3 +330,5 @@ msgid ""
 "Model created in 2010 with Google Sketchup 8, exported from Google Sketchup "
 "8.0.14346."
 msgstr ""
+"2010 yılında Google Sketchup 8 ile oluşturulan model, Google Sketchup "
+"8.0.14346'dan dışa aktarıldı."
