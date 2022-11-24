@@ -24,10 +24,9 @@
 #include "ui_calendarsDialog.h"
 
 #include "StelApp.hpp"
-#include "StelLocaleMgr.hpp"
+#include "StelGui.hpp"
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelMainView.hpp"
 
 // We only need to include calendars when we have to call special functions.
 #include "JulianCalendar.hpp"
@@ -41,14 +40,14 @@
 
 CalendarsDialog::CalendarsDialog()
 	: StelDialog("Calendars")
-	, cal(Q_NULLPTR)
+	, cal(nullptr)
 {
 	ui = new Ui_calendarsDialog();
 }
 
 CalendarsDialog::~CalendarsDialog()
 {
-	delete ui; ui=Q_NULLPTR;
+	delete ui; ui=nullptr;
 }
 
 void CalendarsDialog::retranslate()
@@ -174,7 +173,7 @@ void CalendarsDialog::createDialogContent()
 void CalendarsDialog::setAboutHtml(void)
 {
 	// Regexp to replace {text} with an HTML link.
-	QRegularExpression a_rx("[{]([^{]*)[}]");
+	static const QRegularExpression a_rx("[{]([^{]*)[}]");
 
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Calendars Plug-in") + "</h2><table width=\"90%\">";
@@ -235,7 +234,7 @@ void CalendarsDialog::setAboutHtml(void)
 	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=Q_NULLPTR)
+	if(gui)
 	{
 		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);

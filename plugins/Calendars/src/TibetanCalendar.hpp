@@ -41,25 +41,25 @@ class TibetanCalendar : public Calendar
 public:
 	TibetanCalendar(double jd);
 
-	virtual ~TibetanCalendar() Q_DECL_OVERRIDE {}
+	~TibetanCalendar() override {}
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 	//! Set a calendar date from the Julian day number
-	virtual void setJD(double JD) Q_DECL_OVERRIDE;
+	void setJD(double JD) override;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! {year, month, leap-month, day, leap-day}
-	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+	void setDate(QVector<int> parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! {Year, Month, MonthName, "leap"|"", Day, "leap"|"", WeekDayName}
 	//! The words "leap" (translated) are only given if the respective element before (month or day) are leap. Else an empty string is given.
-	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
+	QStringList getDateStrings() const override;
 
 	//! get a formatted complete string for a date
-	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
+	QString getFormattedDateString() const override;
 
 	//! find RD number for date in the Tibetan calendar (CC:UE 21.4)
 	//! @arg tibetan={year, month, leapMonth, day, leapDay}

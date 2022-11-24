@@ -112,17 +112,17 @@ class Calendars : public StelModule
 
 public:
 	Calendars();
-	virtual ~Calendars() Q_DECL_OVERRIDE;
+	~Calendars() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() Q_DECL_OVERRIDE;
+	void init() override;
 	//! Set all calendars to the Core's JD.
-	virtual void update(double) Q_DECL_OVERRIDE;
+	void update(double) override;
 	//! if enabled, provide a table of calendars on screen.
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
-	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
+	void draw(StelCore* core) override;
+	double getCallOrder(StelModuleActionName actionName) const override;
+	bool configureGui(bool show=true) override;
 
 	//! Restore the plug-in's settings to the default state.
 	//! Replace the plug-in's settings in Stellarium's configuration file
@@ -137,12 +137,12 @@ public:
 	//! @see restoreDefaultSettings()
 	void loadSettings();
 
-	//! Get a pointer to the respective Calendar. Returns Q_NULLPTR if not found.
-	//! Valid names: Julian, Gregorian, ISO, Icelandic, Roman, Olympic, Egyptian,
+	//! Get a pointer to the respective Calendar. Returns nullptr if not found.
+	//! Valid names: Julian, RevisedJulian, Gregorian, ISO, Icelandic, Roman, Olympic, Egyptian,
 	//! Armenian, Zoroastrian, Coptic, Ethiopic, Islamic, Hebrew,
-	//! OldHinduSolar, OldHinduLunar, Balinese
+	//! OldHinduSolar, OldHinduLunar, NewHinduSolar, NewHinduLunar, Balinese, Tibetan,
 	//! MayaLongCount, MayaHaab, MayaTzolkin, AztecXihuitl, AztecTonalpohualli
-	//! TODO: ADD HERE: Chinese, NewHinduSolar, NewHinduLunar, ...
+	//! TODO: ADD HERE: Chinese,  ...
 	Calendar* getCal(QString name);
 
 	#ifdef ENABLE_SCRIPTING
@@ -331,9 +331,9 @@ class CalendarsStelPluginInterface : public QObject, public StelPluginInterface
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
-	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	StelModule* getStelModule() const override;
+	StelPluginInfo getPluginInfo() const override;
+	QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* CALENDARS_HPP */

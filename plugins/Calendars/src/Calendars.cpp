@@ -24,6 +24,7 @@
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelGui.hpp"
 #include "SkyGui.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
@@ -94,7 +95,7 @@ StelPluginInfo CalendarsStelPluginInterface::getPluginInfo() const
  Constructor
 *************************************************************************/
 Calendars::Calendars():
-	toolbarButton(Q_NULLPTR),
+	toolbarButton(nullptr),
 	enabled(true),
 	flagTextColorOverride(false),
 	textColor(0.75f),
@@ -145,7 +146,7 @@ Calendars::Calendars():
 *************************************************************************/
 Calendars::~Calendars()
 {
-	delete configDialog; configDialog=Q_NULLPTR;
+	delete configDialog; configDialog=nullptr;
 	foreach (QString key, calendars.keys())
 	{
 		Calendar *cal = calendars.take(key);
@@ -187,10 +188,10 @@ void Calendars::init()
 	try
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
-		if (gui!=Q_NULLPTR)
+		if (gui)
 		{
 			//qDebug() << "button...";
-			toolbarButton = new StelButton(Q_NULLPTR,
+			toolbarButton = new StelButton(nullptr,
 						       QPixmap(":/Calendars/bt_Calendars_On.png"),
 						       QPixmap(":/Calendars/bt_Calendars_Off.png"),
 						       QPixmap(":/graphicGui/miscGlow32x32.png"),
@@ -398,7 +399,7 @@ void Calendars::draw(StelCore* core)
 // Get a pointer to the respective calendar
 Calendar* Calendars::getCal(QString name)
 {
-	return calendars.value(name, Q_NULLPTR);
+	return calendars.value(name, nullptr);
 }
 
 void Calendars::update(double)

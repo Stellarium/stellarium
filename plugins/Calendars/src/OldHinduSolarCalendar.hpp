@@ -37,24 +37,24 @@ class OldHinduSolarCalendar : public Calendar
 public:
 	OldHinduSolarCalendar(double jd);
 
-	virtual ~OldHinduSolarCalendar() Q_DECL_OVERRIDE {}
+	~OldHinduSolarCalendar() override {}
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 	//! Set a calendar date from the Julian day number
-	virtual void setJD(double JD) Q_DECL_OVERRIDE;
+	void setJD(double JD) override;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...12]-Day[1...30]
-	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+	void setDate(QVector<int> parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! {Year, JovianCycleNr, JovianCycleName, Month, MonthName, Day, DayName}
-	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
+	QStringList getDateStrings() const override;
 
 	//! get a formatted complete string for a date
-	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
+	QString getFormattedDateString() const override;
 
 	//! Return Hindu day count from RD
 	static int hinduDayCount(int rd) {return rd-hinduEpoch;}

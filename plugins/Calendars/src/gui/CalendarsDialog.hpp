@@ -21,8 +21,6 @@
 #define CALENDARSDIALOG_HPP
 
 #include "StelDialog.hpp"
-#include "StelGui.hpp"
-#include "StelTranslator.hpp"
 #include "Calendars.hpp"
 
 #include <QString>
@@ -37,13 +35,13 @@ class CalendarsDialog : public StelDialog
 
 public:
 	CalendarsDialog();
-	~CalendarsDialog() Q_DECL_OVERRIDE;
+	~CalendarsDialog() override;
 
 public slots:
-	void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 protected:
-	void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 
 private:
 	Ui_calendarsDialog* ui;

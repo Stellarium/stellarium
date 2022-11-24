@@ -33,30 +33,30 @@ public:
 
 	HebrewCalendar(double jd);
 
-	virtual ~HebrewCalendar() Q_DECL_OVERRIDE {}
+	~HebrewCalendar() override {}
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 	//! Set a calendar date from the Julian day number
-	virtual void setJD(double JD) Q_DECL_OVERRIDE;
+	void setJD(double JD) override;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...12]-Day[1...31]
-	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+	void setDate(QVector<int> parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! Year, Month, MonthName, Day, DayName
-	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
+	QStringList getDateStrings() const override;
 
 	//! get a formatted complete string for a date
-	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
+	QString getFormattedDateString() const override;
 
 	//! returns true for leap years
 	static bool isLeap(int hYear);
 
 	//! return number of months in a hebrew year
-	static month lastMonthOfHebrewYear(int hYear);
+	static HebrewCalendar::month lastMonthOfHebrewYear(int hYear);
 
 	//! return if hYear is sabbatical
 	static bool hebrewSabbaticalYear(int hYear){ return (StelUtils::imod(hYear, 7) == 0);}

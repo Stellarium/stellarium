@@ -33,24 +33,24 @@ public:
 
 	RomanCalendar(double jd);
 
-	virtual ~RomanCalendar() Q_DECL_OVERRIDE {}
+	~RomanCalendar() override {}
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 	//! Set a calendar date from the Julian day number
-	virtual void setJD(double JD) Q_DECL_OVERRIDE;
+	void setJD(double JD) override;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...12]-[kalends|nones|ides]-[count]-[leap?]
-	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+	void setDate(QVector<int> parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! AUCYear, Month, MonthName(genitive), event, DayName
-	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
+	QStringList getDateStrings() const override;
 
 	//! get a formatted complete string for a date. Years are AUC.
-	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
+	QString getFormattedDateString() const override;
 
 	//! find RD number for date in the Roman calendar. Years are like in the Julian calendar.
 	static int fixedFromRoman(QVector<int> julian);

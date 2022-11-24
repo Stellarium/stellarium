@@ -31,22 +31,22 @@ class AztecTonalpohualliCalendar: public MayaTzolkinCalendar
 public:
 	AztecTonalpohualliCalendar(double jd);
 
-	virtual ~AztecTonalpohualliCalendar() Q_DECL_OVERRIDE {}
+	~AztecTonalpohualliCalendar() override {}
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 	//! Set a calendar date from the Julian day number
-	virtual void setJD(double JD) Q_DECL_OVERRIDE;
+	void setJD(double JD) override;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! dayNumber[1..13]-nameIndex[1..20]
 	//! We face a problem as the date is not unique. We can only find the date before current JD which matches the parts.
-	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+	void setDate(QVector<int> parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! dayNumber[1..13]-name
-	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
+	QStringList getDateStrings() const override;
 
 	//! Return ordinal in Tonalpohualli cycle.
 	//! @arg tonalpohualli is a QVector<int> of {number, name} (typo in book...)

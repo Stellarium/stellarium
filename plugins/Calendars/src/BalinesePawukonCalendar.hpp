@@ -21,8 +21,6 @@
 
 #include <QString>
 #include "Calendar.hpp"
-#include "StelUtils.hpp"
-#include "StelTranslator.hpp"
 
 //! Balinese Pawukon calendar, a cycle count of 10 simultaneous cycles of different lengths. Only cycles 5, 6, 7 are enough to determine a date.
 //! The cycles are not counted into longer periods, therefore no absolute "epoch" dating is possible.
@@ -34,28 +32,28 @@ class BalinesePawukonCalendar : public Calendar
 public:
 	BalinesePawukonCalendar(double jd);
 
-	virtual ~BalinesePawukonCalendar() Q_DECL_OVERRIDE {}
+	~BalinesePawukonCalendar() override {}
 
 public slots:
 	//! Translate e.g. stringlists of part names
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 	//! Set a calendar date from the Julian day number
 	//! This triggers the partsChanged() signal
-	virtual void setJD(double JD) Q_DECL_OVERRIDE;
+	void setJD(double JD) override;
 
 	//! set date from a vector of calendar date elements sorted in canonical order, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	//! This triggers the jdChanged() signal
 	//! Note that this must not change the time of day! You must retrieve the time from the current JD before recomputing a new JD.
 	//! This actually sets bali-on-or-before()
-	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+	void setDate(QVector<int> parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! The order depends on the actual calendar
-	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
+	QStringList getDateStrings() const override;
 
 	//! get a formatted complete string for a date. The default implementation just concatenates all strings from getDateStrings() with a space in between.
-	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
+	QString getFormattedDateString() const override;
 	//! get a formatted string for the 5 first components of a date.
 	QString getFormattedDateString1to5() const;
 	//! get a formatted string for the 5 second components of a date.

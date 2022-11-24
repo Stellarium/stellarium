@@ -31,25 +31,25 @@ class MayaHaabCalendar : public Calendar
 public:
 	MayaHaabCalendar(double jd);
 
-	virtual ~MayaHaabCalendar() Q_DECL_OVERRIDE {}
+	~MayaHaabCalendar() override {}
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 	//! Set a calendar date from the Julian day number
-	virtual void setJD(double JD) Q_DECL_OVERRIDE;
+	void setJD(double JD) override;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! month[1..19]-day[0..19]
 	//! We face a problem as the year is not counted. We can only find the date before current JD which matches the parts.
-	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+	void setDate(QVector<int> parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! monthName-day[0..19]
-	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
+	QStringList getDateStrings() const override;
 
 	//! get a formatted complete string for a date
-	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
+	QString getFormattedDateString() const override;
 
 	//! get tzolkin name index of Haab year bearer (name of 0 Pop) from Haab date
 	//! This must be one of 2, 7, 12, 17. (TODO: write a test!)

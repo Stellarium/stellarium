@@ -69,7 +69,7 @@ public:
 
 	Calendar(double jd):JD(jd) { setObjectName("Calendar"); }
 
-	virtual ~Calendar() Q_DECL_OVERRIDE {}
+	~Calendar() override {}
 
 public slots:
 	//! Translate e.g. stringlists of part names

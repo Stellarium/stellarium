@@ -33,8 +33,8 @@ class CalendarsInfoPanel : public QGraphicsTextItem
 
 public:
 	CalendarsInfoPanel(Calendars* plugin,
-			QGraphicsWidget * parent = Q_NULLPTR);
-	~CalendarsInfoPanel() Q_DECL_OVERRIDE {}
+			QGraphicsWidget * parent = nullptr);
+	~CalendarsInfoPanel() override {}
 
 public slots:
 	//! Update the position of the widget within the parent.

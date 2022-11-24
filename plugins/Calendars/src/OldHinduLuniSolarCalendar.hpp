@@ -37,24 +37,24 @@ class OldHinduLuniSolarCalendar : public OldHinduSolarCalendar
 public:
 	OldHinduLuniSolarCalendar(double jd);
 
-	virtual ~OldHinduLuniSolarCalendar() Q_DECL_OVERRIDE {}
+	~OldHinduLuniSolarCalendar() override {}
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 	//! Set a calendar date from the Julian day number
-	virtual void setJD(double JD) Q_DECL_OVERRIDE;
+	void setJD(double JD) override;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...12]-leap[0|1]-Day[1...30]
-	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+	void setDate(QVector<int> parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! {Year, Month, MonthName, leap[0|1], Day, DayName}
-	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
+	QStringList getDateStrings() const override;
 
 	//! get a formatted complete string for a date
-	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
+	QString getFormattedDateString() const override;
 
 	//! compute RD date from an Old Hindu Lunisolar date
 	//! parts={ year, month, leap, day}
