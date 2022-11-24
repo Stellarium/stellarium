@@ -114,7 +114,7 @@ public:
 	void glContextDoneCurrent();
 
 	//! Returns the information about the GL context, this does not require the context to be active.
-	GLInfo getGLInformation() const { return glInfo; }
+	const GLInfo& getGLInformation() const { return glInfo; }
 
 	//! Returns the desired OpenGL format settings.
 	static QSurfaceFormat getDesiredGLFormat(QSettings *configuration);
