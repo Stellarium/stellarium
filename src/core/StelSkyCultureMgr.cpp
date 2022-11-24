@@ -113,17 +113,21 @@ bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 	if(cultureDir==currentSkyCultureDir)
 		return false;
 
+	QString scID = cultureDir;
+	bool result = true;
 	// make sure culture definition exists before attempting or will die
 	if (directoryToSkyCultureEnglish(cultureDir) == "")
 	{
 		qWarning() << "Invalid sky culture directory: " << QDir::toNativeSeparators(cultureDir);
-		return false;
+		scID = "modern";
+		result = false;
 	}
-	currentSkyCultureDir = cultureDir;
-	currentSkyCulture = dirToNameEnglish[cultureDir];
+
+	currentSkyCultureDir = scID;
+	currentSkyCulture = dirToNameEnglish[scID];
 
 	emit currentSkyCultureChanged(currentSkyCultureDir);
-	return true;
+	return result;
 }
 
 // Set the default sky culture from the ID.
