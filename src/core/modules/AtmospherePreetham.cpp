@@ -37,7 +37,7 @@
 
 AtmospherePreetham::AtmospherePreetham(Skylight& sky)
 	: viewport(0,0,0,0)
-    , sky(sky)
+	, sky(sky)
 	, skyResolutionY(44)
 	, skyResolutionX(44)
 	, posGrid(Q_NULLPTR)
