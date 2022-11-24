@@ -46,10 +46,10 @@ public slots:
 	void setDate(QVector<int> parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
-	//! AUCYear, Month, MonthName(genitive), event, DayName
+	//! AUCYear [standard numbers], Month, MonthName(genitive), event, DayName
 	QStringList getDateStrings() const override;
 
-	//! get a formatted complete string for a date. Years are AUC.
+	//! get a formatted complete string for a date. Years are AUC and, if positive, expressed as Roman number.
 	QString getFormattedDateString() const override;
 
 	//! find RD number for date in the Roman calendar. Years are like in the Julian calendar.
