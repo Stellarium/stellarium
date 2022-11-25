@@ -21,6 +21,7 @@
 #include "BalinesePawukonCalendar.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelTranslator.hpp"
 
 
 BalinesePawukonCalendar::BalinesePawukonCalendar(double jd): Calendar(jd)

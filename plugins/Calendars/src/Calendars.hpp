@@ -37,7 +37,7 @@ class StelButton;
 The Calendars plugin provides an interface to various calendars
 
 The primary source of this plugin is the book "Calendrical Calculations: The Ultimate Edition"
-by Edward M. Reingold and Nachum Dershowitz (2018). It contains algorithmic descriptions of dozens of calendars,
+by Edward M. Reingold and Nachum Dershowitz (2018). It contains algorithmic descriptions of dozens of calendars and auxiliary functions,
 most of which should make their way into this plugin.
 
 This book describes data conversion from and to calendars, using not the commonly used Julian Day number, but an intermediate
@@ -108,6 +108,8 @@ class Calendars : public StelModule
 	Q_PROPERTY(bool flagShowFrenchArithmetic   READ isFrenchArithmeticDisplayed   WRITE showFrenchArithmetic   NOTIFY showFrenchArithmeticChanged)
 	Q_PROPERTY(bool flagShowPersianArithmetic   READ isPersianArithmeticDisplayed   WRITE showPersianArithmetic   NOTIFY showPersianArithmeticChanged)
 	Q_PROPERTY(bool flagShowPersianAstronomical READ isPersianAstronomicalDisplayed WRITE showPersianAstronomical NOTIFY showPersianAstronomicalChanged)
+	Q_PROPERTY(bool flagShowBahaiArithmetic     READ isBahaiArithmeticDisplayed   WRITE showBahaiArithmetic   NOTIFY showBahaiArithmeticChanged)
+	Q_PROPERTY(bool flagShowBahaiAstronomical   READ isBahaiAstronomicalDisplayed WRITE showBahaiAstronomical NOTIFY showBahaiAstronomicalChanged)
 	Q_PROPERTY(bool flagShowTibetan      READ isTibetanDisplayed        WRITE showTibetan       NOTIFY showTibetanChanged)
 
 public:
@@ -141,6 +143,7 @@ public:
 	//! Valid names: Julian, RevisedJulian, Gregorian, ISO, Icelandic, Roman, Olympic, Egyptian,
 	//! Armenian, Zoroastrian, Coptic, Ethiopic, Islamic, Hebrew,
 	//! OldHinduSolar, OldHinduLunar, NewHinduSolar, NewHinduLunar, Balinese, Tibetan,
+	//! BahaiArithmetic, BahaiAstronomical,
 	//! MayaLongCount, MayaHaab, MayaTzolkin, AztecXihuitl, AztecTonalpohualli
 	//! TODO: ADD HERE: Chinese,  ...
 	Calendar* getCal(QString name);
@@ -187,6 +190,8 @@ signals:
 	void showFrenchArithmeticChanged(bool b);
 	void showPersianArithmeticChanged(bool b);
 	void showPersianAstronomicalChanged(bool b);
+	void showBahaiArithmeticChanged(bool b);
+	void showBahaiAstronomicalChanged(bool b);
 	void showTibetanChanged(bool b);
 
 public slots:
@@ -263,6 +268,10 @@ public slots:
 	void showPersianArithmetic(bool b);	//!< activate display of Persian Arithmetic
 	bool isPersianAstronomicalDisplayed() const; //!< display Persian Astronomical?
 	void showPersianAstronomical(bool b);	//!< activate display of Persian Astronomical
+	bool isBahaiArithmeticDisplayed() const;//!< display Bahai Arithmetic?
+	void showBahaiArithmetic(bool b);	//!< activate display of Bahai Arithmetic
+	bool isBahaiAstronomicalDisplayed() const; //!< display Bahai Astronomical?
+	void showBahaiAstronomical(bool b);	//!< activate display of Bahai Astronomical
 	bool isTibetanDisplayed() const;        //!< display Tibetan?
 	void showTibetan(bool b);	        //!< activate display of Tibetan
 
@@ -317,6 +326,8 @@ private:
 	bool flagShowFrenchArithmetic;
 	bool flagShowPersianArithmetic;
 	bool flagShowPersianAstronomical;
+	bool flagShowBahaiArithmetic;
+	bool flagShowBahaiAstronomical;
 	bool flagShowTibetan;
 };
 

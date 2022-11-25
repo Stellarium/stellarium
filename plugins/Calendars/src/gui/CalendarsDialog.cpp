@@ -131,9 +131,11 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->frenchArithmeticCheckBox,   "Calendars.flagShowFrenchArithmetic");
 	connectBoolProperty(ui->persianArithmeticCheckBox,  "Calendars.flagShowPersianArithmetic");
 	connectBoolProperty(ui->persianAstronomicalCheckBox,"Calendars.flagShowPersianAstronomical");
+	connectBoolProperty(ui->bahaiArithmeticCheckBox,    "Calendars.flagShowBahaiArithmetic");
+	connectBoolProperty(ui->bahaiAstronomicalCheckBox,  "Calendars.flagShowBahaiAstronomical");
 
 	connectBoolProperty(ui->overrideTextColorCheckBox,  "Calendars.flagTextColorOverride");
-	connectColorButton(ui->textcolorToolButton,         "Calendars.textColor",		"Calendars/text_color");
+	connectColorButton(ui->textcolorToolButton,         "Calendars.textColor", "Calendars/text_color");
 
 	// MAKE SURE to connect all part edit elements respective ...Changed() method here.
 	connect(ui->julianYearSpinBox,		SIGNAL(valueChanged(int)), this, SLOT(julianChanged()));
@@ -203,6 +205,8 @@ void CalendarsDialog::setAboutHtml(void)
 	html += "<li>" + q_("French Revolution calendar (arithmetic version of 1795)") + "</li>";
 	html += "<li>" + q_("Persian calendar (arithmetic version)") + "</li>";
 	html += "<li>" + q_("Persian calendar (astronomical version)") + "</li>";
+	html += "<li>" + q_("Bahá’í calendar (arithmetic version)") + "</li>";
+	html += "<li>" + q_("Bahá’í calendar (astronomical version)") + "</li>";
 
 //	html += "<li>" + q_("Chinese calendars") + "</li>";
 	html += "<li>" + q_("Old Hindu Solar and Lunar calendars") + "</li>";

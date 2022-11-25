@@ -73,6 +73,10 @@ SET(Calendars_SRCS
     PersianAstronomicalCalendar.cpp
     TibetanCalendar.hpp
     TibetanCalendar.cpp
+    BahaiArithmeticCalendar.hpp
+    BahaiArithmeticCalendar.cpp
+    BahaiAstronomicalCalendar.hpp
+    BahaiAstronomicalCalendar.cpp
 )
 
 SET(Calendars_UIS

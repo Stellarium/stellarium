@@ -18,9 +18,7 @@
 
 #include "StelTranslator.hpp"
 #include "PersianAstronomicalCalendar.hpp"
-#include "JulianCalendar.hpp"
 #include "GregorianCalendar.hpp"
-#include "RomanCalendar.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"

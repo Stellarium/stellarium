@@ -77,6 +77,8 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 	connect (this->plugin, &Calendars::showFrenchArithmeticChanged   , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showPersianArithmeticChanged  , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showPersianAstronomicalChanged, this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showBahaiArithmeticChanged    , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showBahaiAstronomicalChanged  , this, [=](bool){setHtml("a"); updatePosition();});
 
 	//Night mode
 	connect(&stelApp, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setColorScheme(const QString&)));

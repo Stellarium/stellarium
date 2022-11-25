@@ -65,6 +65,8 @@
 #include "FrenchArithmeticCalendar.hpp"
 #include "PersianArithmeticCalendar.hpp"
 #include "PersianAstronomicalCalendar.hpp"
+#include "BahaiArithmeticCalendar.hpp"
+#include "BahaiAstronomicalCalendar.hpp"
 
 /*************************************************************************
  This method is the one called automatically by the StelModuleMgr just 
@@ -130,6 +132,8 @@ Calendars::Calendars():
 	flagShowFrenchArithmetic(false),
 	flagShowPersianArithmetic(false),
 	flagShowPersianAstronomical(false),
+	flagShowBahaiArithmetic(false),
+	flagShowBahaiAstronomical(false),
 	flagShowTibetan(false)
 {
 	setObjectName("Calendars");
@@ -242,6 +246,8 @@ void Calendars::init()
 	calendars.insert("FrenchArithmetic", new FrenchArithmeticCalendar(jd));
 	calendars.insert("PersianArithmetic", new PersianArithmeticCalendar(jd));
 	calendars.insert("PersianAstronomical", new PersianAstronomicalCalendar(jd));
+	calendars.insert("BahaiArithmetic", new BahaiArithmeticCalendar(jd));
+	calendars.insert("BahaiAstronomical", new BahaiAstronomicalCalendar(jd));
 	calendars.insert("Tibetan", new TibetanCalendar(jd));
 	// TODO: Add your Calendar subclasses here.
 
@@ -306,6 +312,8 @@ void Calendars::loadSettings()
 	showFrenchArithmetic(   conf->value("Calendars/show_french_arithmetic", false).toBool());
 	showPersianArithmetic(  conf->value("Calendars/show_persian_arithmetic", false).toBool());
 	showPersianAstronomical(conf->value("Calendars/show_persian_astronomical", false).toBool());
+	showBahaiArithmetic(    conf->value("Calendars/show_bahai_arithmetic", false).toBool());
+	showBahaiAstronomical(  conf->value("Calendars/show_bahai_astronomical", false).toBool());
 	showTibetan(            conf->value("Calendars/show_tibetan", false).toBool());
 }
 
@@ -352,6 +360,8 @@ void Calendars::draw(StelCore* core)
 	if (flagShowHebrew)             oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Hebrew",                "calendar"), getCal("Hebrew")->getFormattedDateString());
 	if (flagShowPersianArithmetic)  oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Persian (Arithm.)",     "calendar"), getCal("PersianArithmetic")->getFormattedDateString());
 	if (flagShowPersianAstronomical)oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Persian (Astron.)",     "calendar"), getCal("PersianAstronomical")->getFormattedDateString());
+	if (flagShowBahaiArithmetic)    oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Bahai (Arithm.)",       "calendar"), getCal("BahaiArithmetic")->getFormattedDateString());
+	if (flagShowBahaiAstronomical)  oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Bahai (Astron.)",       "calendar"), getCal("BahaiAstronomical")->getFormattedDateString());
 	if (flagShowOldHinduSolar)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Old Hindu Solar",       "calendar"), getCal("OldHinduSolar")->getFormattedDateString());
 	if (flagShowOldHinduLunar)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Old Hindu Lunisolar",   "calendar"), getCal("OldHinduLunar")->getFormattedDateString());
 	if (flagShowNewHinduSolar)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("New Hindu Solar",       "calendar"), getCal("NewHinduSolar")->getFormattedDateString());
@@ -404,6 +414,8 @@ Calendar* Calendars::getCal(QString name)
 
 void Calendars::update(double)
 {
+	if (!enabled)
+		return;
 	const double jd=StelApp::getInstance().getCore()->getJD();
 	foreach (Calendar* cal, calendars)
 	{
@@ -760,6 +772,28 @@ void Calendars::showPersianAstronomical(bool b)
 		flagShowPersianAstronomical=b;
 		conf->setValue("Calendars/show_persian_astronomical", b);
 		emit showPersianAstronomicalChanged(b);
+	}
+}
+
+bool Calendars::isBahaiArithmeticDisplayed() const { return flagShowBahaiArithmetic;}
+void Calendars::showBahaiArithmetic(bool b)
+{
+	if (b!=flagShowBahaiArithmetic)
+	{
+		flagShowBahaiArithmetic=b;
+		conf->setValue("Calendars/show_bahai_arithmetic", b);
+		emit showBahaiArithmeticChanged(b);
+	}
+}
+
+bool Calendars::isBahaiAstronomicalDisplayed() const { return flagShowBahaiAstronomical;}
+void Calendars::showBahaiAstronomical(bool b)
+{
+	if (b!=flagShowBahaiAstronomical)
+	{
+		flagShowBahaiAstronomical=b;
+		conf->setValue("Calendars/show_bahai_astronomical", b);
+		emit showBahaiAstronomicalChanged(b);
 	}
 }
 
