@@ -350,7 +350,7 @@
             <item>
              <widget class="QPushButton" name="resetListPushButton">
               <property name="text">
-               <string>Reset Location List</string>
+               <string>Reset Locat&amp;ion List</string>
               </property>
              </widget>
             </item>
@@ -445,7 +445,7 @@
                <enum>Qt::NoFocus</enum>
               </property>
               <property name="text">
-               <string>Add to list</string>
+               <string>&amp;Add to list</string>
               </property>
              </widget>
             </item>
@@ -464,7 +464,7 @@
                <enum>Qt::NoFocus</enum>
               </property>
               <property name="text">
-               <string>Delete from list</string>
+               <string>Delete fro&amp;m list</string>
               </property>
              </widget>
             </item>
@@ -477,7 +477,7 @@
                <enum>Qt::NoFocus</enum>
               </property>
               <property name="text">
-               <string>Return to default location</string>
+               <string>Re&amp;turn to default location</string>
               </property>
              </widget>
             </item>
@@ -523,7 +523,10 @@
             <item row="0" column="0">
              <widget class="QLabel" name="label_5">
               <property name="text">
-               <string>Latitude:</string>
+               <string>&amp;Latitude:</string>
+              </property>
+              <property name="buddy">
+               <cstring>latitudeSpinBox</cstring>
               </property>
              </widget>
             </item>
@@ -558,21 +561,24 @@
             <item row="4" column="0" colspan="2">
              <widget class="QCheckBox" name="useIpQueryCheckBox">
               <property name="text">
-               <string>Get location from Network</string>
+               <string>Get location from Net&amp;work</string>
               </property>
              </widget>
             </item>
             <item row="5" column="0" colspan="2">
              <widget class="QCheckBox" name="useAsDefaultLocationCheckBox">
               <property name="text">
-               <string>Use current location as default</string>
+               <string>Use current location as &amp;default</string>
               </property>
              </widget>
             </item>
             <item row="2" column="0">
              <widget class="QLabel" name="label_7">
               <property name="text">
-               <string>Elevation:</string>
+               <string>&amp;Elevation:</string>
+              </property>
+              <property name="buddy">
+               <cstring>altitudeSpinBox</cstring>
               </property>
              </widget>
             </item>
@@ -595,7 +601,10 @@
             <item row="1" column="0">
              <widget class="QLabel" name="label">
               <property name="text">
-               <string>Longitude:</string>
+               <string>L&amp;ongitude:</string>
+              </property>
+              <property name="buddy">
+               <cstring>longitudeSpinBox</cstring>
               </property>
              </widget>
             </item>
@@ -624,7 +633,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>Get location from GPS</string>
+               <string>Get location from &amp;GPS</string>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -733,28 +742,37 @@
             <item row="2" column="0">
              <widget class="QLabel" name="label_6">
               <property name="text">
-               <string>Planet:</string>
+               <string>&amp;Planet:</string>
+              </property>
+              <property name="buddy">
+               <cstring>planetNameComboBox</cstring>
               </property>
              </widget>
             </item>
             <item row="4" column="0" colspan="2">
              <widget class="QCheckBox" name="useCustomTimeZoneCheckBox">
               <property name="text">
-               <string>Use custom time zone</string>
+               <string>Use c&amp;ustom time zone</string>
               </property>
              </widget>
             </item>
             <item row="3" column="0">
              <widget class="QLabel" name="timeZoneLabel">
               <property name="text">
-               <string>Time zone:</string>
+               <string>Time &amp;zone:</string>
+              </property>
+              <property name="buddy">
+               <cstring>timeZoneNameComboBox</cstring>
               </property>
              </widget>
             </item>
             <item row="0" column="0">
              <widget class="QLabel" name="label_3">
               <property name="text">
-               <string>Name/City:</string>
+               <string>&amp;Name/City:</string>
+              </property>
+              <property name="buddy">
+               <cstring>cityNameLineEdit</cstring>
               </property>
              </widget>
             </item>
@@ -802,7 +820,10 @@
             <item row="1" column="0">
              <widget class="QLabel" name="label_4">
               <property name="text">
-               <string>Region:</string>
+               <string>&amp;Region:</string>
+              </property>
+              <property name="buddy">
+               <cstring>regionNameComboBox</cstring>
               </property>
              </widget>
             </item>
@@ -812,7 +833,7 @@
                <string/>
               </property>
               <property name="text">
-               <string>Enable daylight saving time</string>
+               <string>Enable daylight &amp;saving time</string>
               </property>
              </widget>
             </item>
