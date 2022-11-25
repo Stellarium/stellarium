@@ -35,6 +35,7 @@ uniform mediump float skyBrightness;
 uniform bool hasAtmosphere;
 uniform bool hasNormalMap;
 uniform bool hasHorizonMap;
+uniform bool texCoordsFromFragment;
 
 uniform int shadowCount;
 uniform highp mat4 shadowData;
@@ -171,6 +172,15 @@ lowp float outgasFactor(in mediump vec3 normal, in highp vec3 lightDir, in mediu
     return opac;
 }
 
+vec4 sampleTexDxDy(sampler2D sampler, vec2 texCoord, vec2 texDx, vec2 texDy)
+{
+#ifdef textureGrad_SUPPORTED
+    if(texCoordsFromFragment)
+        return textureGrad(sampler, texCoord, texDx, texDy);
+#endif
+    return texture2D(sampler, texCoord);
+}
+
 void main()
 {
 #ifndef IS_MOON
@@ -288,9 +298,36 @@ void main()
     }
 
 #ifdef IS_MOON
+    mediump vec2 moonTexCoord = texc;
+    mediump vec2 texDx = vec2(0), texDy = vec2(0);
+    if(texCoordsFromFragment)
+    {
+        moonTexCoord = vec2(atan(normalZ.x, -normalZ.y)/(2.*PI)+0.5, asin(normalize(normalZ).z)/PI+0.5);
+
+#ifdef textureGrad_SUPPORTED
+        // The usual automatic computation of derivatives of texture coordinates
+        // breaks down at the discontinuity of atan, resulting in choosing the most
+        // minified mip level instead of the correct one, which looks as a seam on
+        // the screen. Thus, we need to compute them in a custom way, treating atan
+        // as a (continuous) multivalued function. We differentiate
+        // atan(normalZ.x(x,y), -normalZ.y(x,y)) with respect to x and y and yield
+        // gradLongitude vector.
+        vec2 gradNormalZX = vec2(dFdx(normalZ.x), dFdy(normalZ.x));
+        vec2 gradNormalZY = vec2(dFdx(-normalZ.y), dFdy(-normalZ.y));
+        vec2 gradLongitude = vec2(-normalZ.y*gradNormalZX.s-normalZ.x*gradNormalZY.s,
+                                  -normalZ.y*gradNormalZX.t-normalZ.x*gradNormalZY.t)
+                                                       /
+                                             dot(normalZ, normalZ);
+        float texTdx = dFdx(moonTexCoord.t);
+        float texTdy = dFdy(moonTexCoord.t);
+        texDx = vec2(gradLongitude.s/(2.*PI), texTdx);
+        texDy = vec2(gradLongitude.t/(2.*PI), texTdy);
+#endif
+    }
+
     mediump vec3 normal;
     if(hasNormalMap)
-        normal = texture2D(normalMap, texc).rgb-vec3(0.5);
+        normal = sampleTexDxDy(normalMap, moonTexCoord, texDx, texDy).rgb-vec3(0.5);
     else
         normal = vec3(0,0,1);
 
@@ -306,7 +343,7 @@ void main()
         mediump vec3 zenith = normalZ;
         mediump float sunAzimuth = atan(dot(lightDirection,lonDir), dot(lightDirection,northDir));
         mediump float sinSunElevation = dot(zenith, lightDirection);
-        mediump vec4 horizonElevSample = (texture2D(horizonMap, texc) - 0.5) * 2.;
+        mediump vec4 horizonElevSample = (sampleTexDxDy(horizonMap, moonTexCoord, texDx, texDy) - 0.5) * 2.;
         mediump vec4 sinHorizElevs = sign(horizonElevSample) * horizonElevSample * horizonElevSample;
         mediump float sinHorizElevLeft, sinHorizElevRight;
         mediump float alpha;
@@ -390,7 +427,10 @@ void main()
     //litColor.xyz = clamp( litColor.xyz + vec3(outgas), 0.0, 1.0);
 
     lowp vec4 texColor;
-#ifdef RINGS_SUPPORT
+#ifdef IS_MOON
+    texColor = sampleTexDxDy(tex, moonTexCoord, texDx, texDy);
+#else
+# ifdef RINGS_SUPPORT
     if(isRing)
     {
         float radius = length(texc);
@@ -402,10 +442,11 @@ void main()
             texColor = vec4(0);
     }
     else
-#endif
+# endif // RINGS_SUPPORT
     {
         texColor = texture2D(tex, texc);
     }
+#endif // IS_MOON
 
     texColor.rgb = srgbToLinear(texColor.rgb);
 

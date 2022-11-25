@@ -940,6 +940,7 @@ private:
 		int horizonMap;
 		int hasNormalMap;
 		int hasHorizonMap;
+		int texCoordsFromFragment;
 
 		// Rings-specific variables
 		int isRing;
@@ -967,8 +968,8 @@ private:
 	};
 
 	//! Calculates and uploads the common shader uniforms (projection matrix, texture, lighting&shadow data)
-	RenderData setCommonShaderUniforms(const StelPainter& painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars,
-	                                   const StelPainterLight& light, bool hasNormalMap, bool hasHorizonMap);
+	RenderData setCommonShaderUniforms(const StelPainter &painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars,
+                                           const StelPainterLight& light, bool hasNormalMap, bool hasHorizonMap, bool texCoordsFromFragment);
 
 	static PlanetShaderVars planetShaderVars;
 	static QOpenGLShaderProgram* planetShaderProgram;
