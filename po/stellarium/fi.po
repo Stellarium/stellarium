@@ -2160,7 +2160,7 @@ msgstr "Syvän taivaan kohdeluettelon versio ei täsmää"
 #: src/core/SimbadSearcher.cpp:177
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:93
 msgid "Found"
-msgstr "löytyi"
+msgstr "Löytyi"
 
 #: src/core/modules/NebulaMgr.cpp:1444
 msgid "Expected"
@@ -2318,7 +2318,7 @@ msgstr "skaalattuna"
 
 #: src/core/modules/Planet.cpp:763
 msgid "Apparent diameter"
-msgstr "Nennäinen läpimitta"
+msgstr "Näennäinen läpimitta"
 
 #: src/core/modules/Planet.cpp:768
 msgid "Equatorial diameter"
@@ -2340,7 +2340,7 @@ msgstr "Vaihekulma"
 
 #: src/core/modules/Planet.cpp:833 src/core/modules/Planet.cpp:842
 msgid "Illuminated"
-msgstr "Vaihe"
+msgstr "Valaistu"
 
 #: src/core/modules/Planet.cpp:839
 msgid "Elong. in Ecl.Long."
@@ -26724,7 +26724,7 @@ msgstr "%1IAU Meteor Datakeskus%2"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
 #, qt-format
 msgid "%1Major Showers Observations%2"
-msgstr "%1Suuret suihkujen havainnot%2"
+msgstr "%1Suurten suihkujen havainnot%2"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:182
 msgid "Code"
@@ -26781,7 +26781,7 @@ msgstr "Näytä vain aktiiviset radiantit"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:445
 msgid "Label font size (pixels)"
-msgstr "Nimien fonttikoko (pikseliä)"
+msgstr "Nimien kirjasinkoko (pikseliä)"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:447
 msgid "Set radiant color"
@@ -27885,7 +27885,7 @@ msgstr "Maantieteellinen sijainti 1"
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:757
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:776
 msgid "Enter a label (location name) for this line"
-msgstr "Syötä nimi tälle linjalle"
+msgstr "Syötä (paikan) nimi tälle linjalle"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:760
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:773
@@ -28061,7 +28061,7 @@ msgstr "Islamilainen"
 #: plugins/Calendars/src/ui_calendarsDialog.h:935
 msgctxt "calendar"
 msgid "Hebrew"
-msgstr "Hebrealainen"
+msgstr "Heprealainen"
 
 #: plugins/Calendars/src/Calendars.cpp:352
 msgctxt "calendar"
@@ -28226,7 +28226,7 @@ msgstr "Armenian Era"
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:39
 msgctxt "Aztec Tonalpohualli name"
 msgid "Cipactli (Alligator)"
-msgstr "Cipactli (Alligator)"
+msgstr "Cipactli (Alligaattori)"
 
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:40
 msgctxt "Aztec Tonalpohualli name"
@@ -28241,7 +28241,7 @@ msgstr "Calli (Talo)"
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:42
 msgctxt "Aztec Tonalpohualli name"
 msgid "Cuetzpallin (Iguana)"
-msgstr "Cuetzpallin (Iguana)"
+msgstr "Cuetzpallin (Iguaani)"
 
 #: plugins/Calendars/src/AztecTonalpohualliCalendar.cpp:43
 msgctxt "Aztec Tonalpohualli name"
@@ -29444,7 +29444,7 @@ msgstr "Päivä %1, kuukausi %2 vuonna %3 jaksolla %4th Olympiaadia"
 #: plugins/Calendars/src/RomanCalendar.cpp:36
 msgctxt "Roman month name (genitive)"
 msgid "Ianuarii"
-msgstr "Ianuarii"
+msgstr "tammikuu"
 
 #: plugins/Calendars/src/RomanCalendar.cpp:37
 msgctxt "Roman month name (genitive)"
@@ -30975,7 +30975,7 @@ msgstr "Persialainen kalenteri (aritmeettinen versio)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:206
 msgid "Persian calendar (astronomical version)"
-msgstr "persialainen kalenteri (astronominen versio)"
+msgstr "Persialainen kalenteri (astronominen versio)"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:209
 msgid "Old Hindu Solar and Lunar calendars"
@@ -30999,7 +30999,7 @@ msgstr "Mayojen kalenterit"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:214
 msgid "Aztec calendars"
-msgstr "Asteekkien kalenterit"
+msgstr "Atsteekkien kalenterit"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:215
 msgid "Balinese Pawukon calendar"
@@ -31174,7 +31174,7 @@ msgstr "Askel taakse"
 #: plugins/Calendars/src/ui_calendarsDialog.h:983
 msgctxt "calendar"
 msgid "Aztec"
-msgstr "Asteekkien"
+msgstr "Atsteekkien"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:984
 msgctxt "calendar"
@@ -31189,7 +31189,7 @@ msgstr "Tonalpohualli"
 #: plugins/Calendars/src/ui_calendarsDialog.h:998
 msgctxt "calendar"
 msgid "Mesoamerica"
-msgstr "Mesoamerica"
+msgstr "Mesoamerikka"
 
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:55
 #: plugins/OnlineQueries/src/OnlineQueries.cpp:105
@@ -31304,7 +31304,7 @@ msgstr " %1 avattu www-selaimessasi"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:179
 msgid "OnlineQueries Plug-in"
-msgstr "Online-kyselyjen liittännäisohjelma"
+msgstr "Online-kyselyjen laajennusohjelma"
 
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:186
 msgid ""
