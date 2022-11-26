@@ -763,7 +763,7 @@ void StelGui::setFlagShowFlipButtons(bool b)
 	}
 }
 
-// Define whether the button toggling nebulae backround images should be visible
+// Define whether the button toggling nebulae background images should be visible
 void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 {
 	if (b!=flagShowNebulaBackgroundButton)

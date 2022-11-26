@@ -220,7 +220,7 @@ void TestStelSphericalGeometry::testContains()
 	QVERIFY2(square1.intersects(square2), "Square intersect square failure");
 	QVERIFY2(square2.intersects(square1), "Square intersect square failure");
 
-	// Check when the polygons are far appart
+	// Check when the polygons are far apart
 	QVERIFY(!square1.intersects(opositeSquare));
 	QVERIFY(!square2.intersects(opositeSquare));
 	QVERIFY(!holySquare.intersects(opositeSquare));

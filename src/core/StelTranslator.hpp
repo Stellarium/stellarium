@@ -90,11 +90,11 @@ public:
 	//! Get available language name in native language from passed locales directory
 	QStringList getAvailableLanguagesNamesNative(const QString& localeDir="", const QString &section="") const;
 
-	//! Convert from ISO639-1 langage code to native language name
+	//! Convert from ISO639-1 language code to native language name
 	//! @param languageCode the code to look up
 	static QString iso639_1CodeToNativeName(const QString& languageCode);
 	
-	//! Convert from native language name to ISO639-1 2 letters langage code 
+	//! Convert from native language name to ISO639-1 2 letters language code 
 	static QString nativeNameToIso639_1Code(const QString& languageName);
 	
 	//! Initialize Translation
@@ -124,7 +124,7 @@ private:
 	//! Try to determine system language from system configuration
 	static void initSystemLanguage(void);
 	
-	//! Store the system default language name as taken from LANGUAGE environement variable
+	//! Store the system default language name as taken from LANGUAGE environment variable
 	static QString systemLangName;
 	
 	//! Contains the list of all iso639 languages codes

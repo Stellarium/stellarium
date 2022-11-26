@@ -4,7 +4,6 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Juraj Kubica <juraj.kubica@seznam.cz>, 2022
 # cardinot <mcardinot@gmail.com>, 2022
 # Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
 # Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2022
@@ -14,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-10-23 04:06+0700\n"
+"POT-Creation-Date: 2022-11-14 22:49+0700\n"
 "PO-Revision-Date: 2022-10-05 17:12+0000\n"
 "Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2022\n"
 "Language-Team: Slovak (https://www.transifex.com/stellarium/teams/80998/sk/)\n"
@@ -439,8 +438,6 @@ msgstr "Venuša(?)"
 
 #. type: Content of: <h2>
 #: ../../skycultures/anutan/description.en.utf8:37
-#: ../../skycultures/greek_almagest/description.en.utf8:489
-#: ../../skycultures/greek_farnese/description.en.utf8:293
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:275
 #: ../../skycultures/indian/description.en.utf8:35
 #: ../../skycultures/lokono/description.en.utf8:381
@@ -477,13 +474,13 @@ msgstr ""
 #: ../../skycultures/arabic_indigenous/description.en.utf8:32
 #: ../../skycultures/aztec/description.en.utf8:61
 #: ../../skycultures/babylonian_seleucid/description.en.utf8:473
-#: ../../skycultures/chinese_contemporary/description.en.utf8:23
 #: ../../skycultures/chinese_medieval/description.en.utf8:49
 #: ../../skycultures/egyptian/description.en.utf8:17
-#: ../../skycultures/greek_farnese/description.en.utf8:302
+#: ../../skycultures/greek_farnese/description.en.utf8:297
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:291
 #: ../../skycultures/korean/description.en.utf8:12
 #: ../../skycultures/maori/description.en.utf8:10
+#: ../../skycultures/modern_chinese/description.en.utf8:23
 #: ../../skycultures/navajo/description.en.utf8:17
 #: ../../skycultures/norse/description.en.utf8:9
 #: ../../skycultures/sami/description.en.utf8:63
@@ -888,7 +885,7 @@ msgstr "Arabská (Arabský polostrov)"
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:2
 #: ../../skycultures/arabic_indigenous/description.en.utf8:2
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:2
-#: ../../skycultures/western_rey/description.en.utf8:3
+#: ../../skycultures/modern_rey/description.en.utf8:3
 msgid "Introduction"
 msgstr "Úvod"
 
@@ -905,6 +902,8 @@ msgstr ""
 #: ../../skycultures/arabic_arabian_peninsula/description.en.utf8:4
 #: ../../skycultures/arabic_indigenous/description.en.utf8:4
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:4
+#: ../../skycultures/modern/description.en.utf8:6
+#: ../../skycultures/modern_iau/description.en.utf8:7
 msgid "Description"
 msgstr "Opis"
 
@@ -1100,13 +1099,14 @@ msgstr ""
 #: ../../skycultures/arabic_indigenous/description.en.utf8:24
 #: ../../skycultures/arabic_lunar_mansions/description.en.utf8:69
 #: ../../skycultures/belarusian/description.en.utf8:8
-#: ../../skycultures/chinese_contemporary/description.en.utf8:5
 #: ../../skycultures/egyptian_dendera/description.en.utf8:209
 #: ../../skycultures/macedonian/description.en.utf8:4
+#: ../../skycultures/modern/description.en.utf8:48
+#: ../../skycultures/modern_chinese/description.en.utf8:5
+#: ../../skycultures/modern_st/description.en.utf8:4
+#: ../../skycultures/modern_iau/description.en.utf8:34
 #: ../../skycultures/mongolian/description.en.utf8:15
 #: ../../skycultures/tupi/description.en.utf8:4
-#: ../../skycultures/western/description.en.utf8:4
-#: ../../skycultures/western_SnT/description.en.utf8:4
 msgid "Constellations"
 msgstr "Súhvezdia"
 
@@ -2264,16 +2264,16 @@ msgstr "Al-Naayem 2"
 #: ../../skycultures/belarusian/description.en.utf8:42
 #: ../../skycultures/boorong/description.en.utf8:220
 #: ../../skycultures/chinese/description.en.utf8:2980
-#: ../../skycultures/egyptian_dendera/description.en.utf8:236
-#: ../../skycultures/greek_almagest/description.en.utf8:506
+#: ../../skycultures/egyptian_dendera/description.en.utf8:225
+#: ../../skycultures/greek_almagest/description.en.utf8:496
 #: ../../skycultures/inuit/description.en.utf8:31
 #: ../../skycultures/khoi-san/description.en.utf8:13
 #: ../../skycultures/lokono/description.en.utf8:377
 #: ../../skycultures/macedonian/description.en.utf8:73
+#: ../../skycultures/modern_rey/description.en.utf8:78
 #: ../../skycultures/mongolian/description.en.utf8:259
 #: ../../skycultures/northern_andes/description.en.utf8:57
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:59
-#: ../../skycultures/western_rey/description.en.utf8:78
 #: ../../skycultures/xhosa/description.en.utf8:16
 #: ../../skycultures/zulu/description.en.utf8:13
 msgid "Authors"
@@ -3250,7 +3250,6 @@ msgstr ""
 #: ../../skycultures/aztec/description.en.utf8:31
 #: ../../skycultures/belarusian/description.en.utf8:31
 #: ../../skycultures/chinese/description.en.utf8:2969
-#: ../../skycultures/chinese_contemporary/description.en.utf8:14
 #: ../../skycultures/chinese_medieval/description.en.utf8:29
 #: ../../skycultures/egyptian/description.en.utf8:7
 #: ../../skycultures/hawaiian_starlines/description.en.utf8:86
@@ -3259,14 +3258,14 @@ msgstr ""
 #: ../../skycultures/korean/description.en.utf8:7
 #: ../../skycultures/macedonian/description.en.utf8:62
 #: ../../skycultures/maori/description.en.utf8:4
+#: ../../skycultures/modern_chinese/description.en.utf8:14
+#: ../../skycultures/modern_st/description.en.utf8:12
+#: ../../skycultures/modern_rey/description.en.utf8:73
 #: ../../skycultures/navajo/description.en.utf8:6
 #: ../../skycultures/norse/description.en.utf8:3
 #: ../../skycultures/sardinian/description.en.utf8:4
 #: ../../skycultures/tupi/description.en.utf8:17
 #: ../../skycultures/vanuatu_netwar/description.en.utf8:53
-#: ../../skycultures/western/description.en.utf8:14
-#: ../../skycultures/western_SnT/description.en.utf8:12
-#: ../../skycultures/western_rey/description.en.utf8:73
 msgid "External links"
 msgstr "Externé zdroje"
 
@@ -4643,7 +4642,6 @@ msgstr ""
 
 #. type: Content of: <h2>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:513
-#: ../../skycultures/egyptian_dendera/description.en.utf8:222
 msgid "Sources / Further Reading"
 msgstr "Zdroje / Ďalšie čítanie"
 
@@ -4720,9 +4718,9 @@ msgstr ""
 
 #. type: Content of: <h2>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:522
-#: ../../skycultures/egyptian_dendera/description.en.utf8:233
-#: ../../skycultures/greek_almagest/description.en.utf8:499
-#: ../../skycultures/greek_farnese/description.en.utf8:299
+#: ../../skycultures/egyptian_dendera/description.en.utf8:222
+#: ../../skycultures/greek_almagest/description.en.utf8:489
+#: ../../skycultures/greek_farnese/description.en.utf8:294
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:288
 msgid "Fair Use"
 msgstr "Spôsob férového použitia"
@@ -4793,7 +4791,7 @@ msgstr ""
 
 #. type: Content of: <p>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:539
-#: ../../skycultures/egyptian_dendera/description.en.utf8:238
+#: ../../skycultures/egyptian_dendera/description.en.utf8:227
 msgid "<em>Susanne M. Hoffmann: service@uhura-uraniae.com </em>"
 msgstr "<em>Susanne M. Hoffmann: service@uhura-uraniae.com </em>"
 
@@ -4808,15 +4806,15 @@ msgstr ""
 
 #. type: Content of: <h5>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:541
-#: ../../skycultures/egyptian_dendera/description.en.utf8:239
-#: ../../skycultures/greek_farnese/description.en.utf8:305
+#: ../../skycultures/egyptian_dendera/description.en.utf8:228
+#: ../../skycultures/greek_farnese/description.en.utf8:300
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:294
 msgid "written in English:"
 msgstr "napísané v angličtine:"
 
 #. type: Content of: <h5>
 #: ../../skycultures/babylonian_mulapin/description.en.utf8:541
-#: ../../skycultures/egyptian_dendera/description.en.utf8:239
+#: ../../skycultures/egyptian_dendera/description.en.utf8:228
 msgid "SMH"
 msgstr "SMH"
 
@@ -9035,145 +9033,6 @@ msgstr ""
 "pridal popis."
 
 #. type: Content of: <h1>
-#: ../../skycultures/chinese_contemporary/description.en.utf8:1
-msgid "Chinese Contemporary"
-msgstr "Čínska (súčasná)"
-
-#. type: Content of: <p>
-#: ../../skycultures/chinese_contemporary/description.en.utf8:3
-msgid ""
-"The Chinese Contemporary Skyculture is a combination of Chinese traditions "
-"and Western constellations. The Chinese use combinations of Western "
-"constellations and Chinese star names in astronomy. This is the skyculture "
-"that the Chinese actually use now, with a great practical value."
-msgstr ""
-"Súčasná čínska kultúra oblohy je kombináciou čínskych tradícii a západných "
-"súhvezdí. Číňania používajú v astronómii kombináciu západných súhvezdí a "
-"čínskych mien hviezd. Toto je kultúra oblohy, ktorú práve dnes používajú "
-"Číňania a má veľkú praktickú hodnotu."
-
-#. type: Content of: <p>
-#: ../../skycultures/chinese_contemporary/description.en.utf8:7
-msgid ""
-"The contemporary Chinese use the constellations of the International "
-"Astronomical Union. The traditional Chinese constellations have no specific "
-"boundaries between them. They only represent the corresponding set of bright"
-" stars, and do not have the role of dividing the celestial sphere into "
-"different areas, so they are no longer applicable in astronomy."
-msgstr ""
-"Dnešní Číňania používajú súhvezdia Medzinárodnej astronomickej únie (IAU). "
-"Tradičné čínske súhvezdia nemajú medzi sebou žiadne vlastné hranice. "
-"Predstavujú len súvisiace skupiny jasných hviezd a nemajú za úlohu "
-"rozdeľovať nebeskú sféru na rôzne oblasti, takže pre astronómiu už nemajú "
-"význam."
-
-#. type: Content of: <p><h2>
-#: ../../skycultures/chinese_contemporary/description.en.utf8:9
-#: ../../skycultures/greek_almagest/description.en.utf8:48
-#: ../../skycultures/western/description.en.utf8:7
-#: ../../skycultures/western_SnT/description.en.utf8:9
-msgid "Star names"
-msgstr "mená hviezd"
-
-#. type: Content of: <p>
-#: ../../skycultures/chinese_contemporary/description.en.utf8:11
-msgid ""
-"The Chinese now use traditional star names instead of Western star names. "
-"More than 3,000 stars have traditional Chinese star names.  When a foreign "
-"astronomical book is translated into Chinese, the star names will also be "
-"translated into traditional Chinese star names. There are some special stars"
-" that use the names of Western stars, such as Proxima, Van Maanen's star, "
-"which can usually only be seen with a telescope, but with special "
-"astronomical significance."
-msgstr ""
-"Číňania aj dnes používajú tradičné mená hviezd namiesto západných mien "
-"hviezd. Viac ako 3000 hviezd má tradičné čínske mená. Keď sa do čínštiny "
-"prekladá cudzojazyčná kniha, mená hviezd sa takisto prevedú na tradičné "
-"čínske mená. Sú niektoré špeciálne hviezdy, ktoré používajú západné mená, "
-"napríklad Proxima, Van Maanenova hviezda, ktoré sú zvyčajne pozorovateľné "
-"len ďalekohľadom, ale majú zvláštny astronomický význam."
-
-#. type: Content of: <p>
-#: ../../skycultures/chinese_contemporary/description.en.utf8:12
-msgid ""
-"For a detailed introduction to traditional Chinese constellations and "
-"traditional Chinese names, see <i>Chinese traditional Skyculture for "
-"Stellarium</i>."
-msgstr ""
-"Pre detailný úvod k tradičným čínskym súhvezdiam a tradičným čínskym menám, "
-"viď <i>Čínska tradičná kultúra oblohy pre Stellarium</i>."
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/chinese_contemporary/description.en.utf8:17
-msgid ""
-"<a href=\"http://en.wikipedia.org/wiki/Chinese_constellations\">Chinese "
-"constellations </a> Wikipedia"
-msgstr ""
-"<a href=\"http://en.wikipedia.org/wiki/Chinese_constellations\">čínske "
-"súhvezdia</a> (anglická Wikipédia)"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/chinese_contemporary/description.en.utf8:18
-msgid ""
-"<a "
-"href=\"https://en.wikipedia.org/wiki/Traditional_Chinese_star_names\">traditional"
-" Chinese star names</a> Wikipedia"
-msgstr ""
-"<a "
-"href=\"https://en.wikipedia.org/wiki/Traditional_Chinese_star_names\">tradičné"
-" čínske mená hviezd</a> (anglická Wikipédia)"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/chinese_contemporary/description.en.utf8:19
-msgid ""
-"<a href=\"http://en.wikipedia.org/wiki/Constellation\">constellations</a> "
-"Wikipedia"
-msgstr ""
-"<a href=\"http://en.wikipedia.org/wiki/Constellation\">súhvezdia</a> "
-"(anglická Wikipédia)"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/chinese_contemporary/description.en.utf8:20
-msgid ""
-"<a "
-"href=\"http://hubblesource.stsci.edu/sources/illustrations/constellations/\">Constellation"
-" image library</a> of the U.S. Naval Observatory and the Space Telescope "
-"Science Institute. Johannes Hevelius Engravings."
-msgstr ""
-"<a "
-"href=\"http://hubblesource.stsci.edu/sources/illustrations/constellations/\">Knižnica"
-" obrázkov súhvezdí</a> z Amerického námorného observatória (USNO) a "
-"Vedeckého inštitútu vesmírneho ďalekohľadu (STSI). Rytiny Johannesa "
-"Heveliusa."
-
-#. type: Content of: <p>
-#: ../../skycultures/chinese_contemporary/description.en.utf8:25
-msgid ""
-"This skyculture was contributed by Stellarium user <i>Sun Shuwei</i> <a "
-"href=\"mailto:sunshuwei.hi@foxmail.com\">sunshuwei.hi@foxmail.com</a>."
-msgstr ""
-"Túto kultúru oblohy do Stellaria pridal užívateľ <i>Sun Šuwej</i> <a "
-"href=\"mailto:sunshuwei.hi@foxmail.com\">sunshuwei.hi@foxmail.com</a>."
-
-#. type: Content of: <p>
-#: ../../skycultures/chinese_contemporary/description.en.utf8:26
-msgid ""
-"Constellation art，Constellation lines based on <i>Western Skyculture for "
-"Stellarium</i>."
-msgstr ""
-"Obrázky a čiary súhvezdí sú založené na <i>Západnej kultúre oblohy pre "
-"Stellarium</i>."
-
-#. type: Content of: <p>
-#: ../../skycultures/chinese_contemporary/description.en.utf8:27
-msgid ""
-"asterism lines and traditional Chinese star names based on <i>Chinese "
-"Traditional Skyculture for Stellarium</i>."
-msgstr ""
-"čiary asterizmov a tradičné čínske mená hviezd sú založené na <i>Čínskej "
-"tradičnej kultúre oblohy pre Stellarium</i>. "
-
-#. type: Content of: <h1>
 #: ../../skycultures/chinese_medieval/description.en.utf8:1
 msgid "Chinese Medieval"
 msgstr "Čínska (stredoveká)"
@@ -10384,77 +10243,8 @@ msgstr ""
 "href=\"https://en.wikipedia.org/wiki/File:Zodiaque_de_Denderah_aux_couleurs_d'origine.jpg\">farby"
 " sú hrubou rekonštrukciou Alexandrea N. Isisa (wikicommons, 2013)</a>."
 
-#. type: Content of: <ul><li>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:224
-msgid ""
-"<a "
-"href=\"https://collections.louvre.fr/en/ark:/53355/cl010028871#\">Photographs"
-" of the Louvre Collection</a>"
-msgstr ""
-"<a "
-"href=\"https://collections.louvre.fr/en/ark:/53355/cl010028871#\">Fotografie"
-" zo zbierok Louvru</a>"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:225
-msgid ""
-"Aubourg, E. (1995), ‘La date de conception du zodiaque du temple d’Hathor à "
-"Dendera’, Bulletin de l’Institut Français d’Archéologie Orientale 95, 1–10"
-msgstr ""
-"Aubourg, E. (1995), ‘La date de conception du zodiaque du temple d’Hathor à "
-"Dendera’, Bulletin de l’Institut Français d’Archéologie Orientale 95, 1–10"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:226
-msgid ""
-"Biot, J.-B. (1846), ‘Mémoire sur le zodiaque circulaire de denderah.’, "
-"Mémoires de l’Institutnational de France16(2ème partie), 1–101"
-msgstr ""
-"Biot, J.-B. (1846), ‘Mémoire sur le zodiaque circulaire de denderah.’, "
-"Mémoires de l’Institutnational de France16(2ème partie), 1–101"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:227
-msgid ""
-"Hoffmann, Susanne M. (2017), Hipparchs Himmelsglobus, Springer, Wiesbaden/ "
-"New York, Chapter 4.2.2"
-msgstr ""
-"Hoffmann, Susanne M. (2017), Hipparchs Himmelsglobus, Springer, Wiesbaden/ "
-"New York, Chapter 4.2.2"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:228
-msgid ""
-"Hoffmann, Susanne M. (2022), Preliminary Observations on the Dendera Zodiac "
-"(Egypt), in: Hoffmann and Wolfschmidt (ed.), Astronomy in Culture - Cultures"
-" of Astronomy, Nuncius Hamburgensis, Vol. 57, tredition, Hamburg"
-msgstr ""
-"Hoffmann, Susanne M. (2022), Preliminary Observations on the Dendera Zodiac "
-"(Egypt), in: Hoffmann and Wolfschmidt (ed.), Astronomy in Culture - Cultures"
-" of Astronomy, Nuncius Hamburgensis, Vol. 57, tredition, Hamburg"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:229
-msgid ""
-"Steele, John M. (2018), The development of the Babylonian zodiac: Some "
-"preliminary observations.’, Mediterranean Archaeology and Archaeometry, 18, "
-"4, 97-105"
-msgstr ""
-"Steele, John M. (2018), The development of the Babylonian zodiac: Some "
-"preliminary observations.’, Mediterranean Archaeology and Archaeometry, 18, "
-"4, 97-105"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:230
-msgid ""
-"<a href=\"https://en.wikipedia.org/wiki/Dendera_zodiac\">wikipedia</a> (some"
-" things wrong)"
-msgstr ""
-"<a href=\"https://en.wikipedia.org/wiki/Dendera_zodiac\">wikipedia</a> "
-"(niečo nesprávne)"
-
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:234
+#: ../../skycultures/egyptian_dendera/description.en.utf8:223
 msgid ""
 "This sky culture originates from research. We provide this for free but the "
 "authors of contributions certainly deserve to be cited according to the "
@@ -10464,7 +10254,7 @@ msgstr ""
 "si určite zaslúžia byť citovaní podľa bežných pravidiel. Ďakujeme!"
 
 #. type: Content of: <p>
-#: ../../skycultures/egyptian_dendera/description.en.utf8:237
+#: ../../skycultures/egyptian_dendera/description.en.utf8:226
 msgid ""
 "This Greco-Egyptian sky culture was painted and added to Stellarium by:"
 msgstr "Túto grécko-rímsku kultúru oblohy namaľoval a do Stellaria pridal:"
@@ -10569,6 +10359,13 @@ msgstr ""
 #: ../../skycultures/greek_almagest/description.en.utf8:46
 msgid "How this sky culture was made"
 msgstr "Ako sme pripravili túto kultúru oblohy"
+
+#. type: Content of: <p><h2>
+#: ../../skycultures/greek_almagest/description.en.utf8:48
+#: ../../skycultures/modern_chinese/description.en.utf8:9
+#: ../../skycultures/modern_st/description.en.utf8:9
+msgid "Star names"
+msgstr "mená hviezd"
 
 #. type: Content of: outside any tag (error?)
 #: ../../skycultures/greek_almagest/description.en.utf8:50
@@ -11329,55 +11126,8 @@ msgstr ""
 "pridali sme pár hviezd na znázornenie chvosta ako takého (&beta; mala byť "
 "špička chvosta, ale použili sme ju ako koreň)"
 
-#. type: Content of: <ul><li>
-#: ../../skycultures/greek_almagest/description.en.utf8:491
-msgid ""
-"Grasshoff, G.: The History of Ptolemy's Star Catalog, Springer, New York, "
-"1990"
-msgstr ""
-"Grasshoff, G.: The History of Ptolemy's Star Catalog, Springer, New York, "
-"1990"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/greek_almagest/description.en.utf8:492
-#: ../../skycultures/greek_farnese/description.en.utf8:295
-#: ../../skycultures/greek_leidenAratea/description.en.utf8:284
-msgid ""
-"Heiberg, J. L. (Ed.): Claudii Ptolemaei: Syntaxis Mathematica, Teubner, "
-"Leipzig, 1898"
-msgstr ""
-"Heiberg, J. L. (Ed.): Claudii Ptolemaei: Syntaxis Mathematica, Teubner, "
-"Leipzig, 1898"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/greek_almagest/description.en.utf8:493
-msgid ""
-"Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden / New York, "
-"2017"
-msgstr ""
-"Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden / New York, "
-"2017"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/greek_almagest/description.en.utf8:494
-#: ../../skycultures/greek_farnese/description.en.utf8:297
-#: ../../skycultures/greek_leidenAratea/description.en.utf8:286
-msgid "Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984"
-msgstr "Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/greek_almagest/description.en.utf8:495
-msgid ""
-"Ernie Wright: <a href=\"http://www.etwright.org/astro/almagest.html#cat\" "
-"class='external text' rel=\"nofollow\"> Seeing Ancient Stars, Visualization "
-"of the Almagest Catalog</a>, 2006"
-msgstr ""
-"Ernie Wright: <a href=\"http://www.etwright.org/astro/almagest.html#cat\" "
-"class='external text' rel=\"nofollow\"> Seeing Ancient Stars, Visualization "
-"of the Almagest Catalog</a>, 2006"
-
 #. type: Content of: <p>
-#: ../../skycultures/greek_almagest/description.en.utf8:500
+#: ../../skycultures/greek_almagest/description.en.utf8:490
 msgid ""
 "This sky culture originates from a student's year of research. We provide "
 "this for free but authors of contributions certainly deserve to be cited "
@@ -11388,12 +11138,12 @@ msgstr ""
 "pravidiel. Ďakujeme!"
 
 #. type: Content of: <h2>
-#: ../../skycultures/greek_almagest/description.en.utf8:503
+#: ../../skycultures/greek_almagest/description.en.utf8:493
 msgid "Thanks"
 msgstr "Poďakovanie"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_almagest/description.en.utf8:504
+#: ../../skycultures/greek_almagest/description.en.utf8:494
 msgid ""
 "The authors thank Patrick Gleason and Georg Zotti for English proofreading "
 "and interesting discussions."
@@ -11402,7 +11152,7 @@ msgstr ""
 "anglického textu a zaujímavé diskusie."
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_almagest/description.en.utf8:507
+#: ../../skycultures/greek_almagest/description.en.utf8:497
 msgid ""
 "This sky culture was compiled and added to Stellarium by Alina Schmidt, Lea "
 "Jabschinski, Marie von Seggern and Susanne M. Hoffmann: service@uhura-"
@@ -11413,7 +11163,7 @@ msgstr ""
 "uraniae.com"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_almagest/description.en.utf8:508
+#: ../../skycultures/greek_almagest/description.en.utf8:498
 msgid "Written in English: the authors"
 msgstr "napísané v angličtine: autori"
 
@@ -11726,18 +11476,8 @@ msgstr "Južný veniec"
 msgid "missing [covered by the shoulder of Atlas]"
 msgstr "chýba [zakryté plecom Atlasa]"
 
-#. type: Content of: <ul><li>
-#: ../../skycultures/greek_farnese/description.en.utf8:296
-#: ../../skycultures/greek_leidenAratea/description.en.utf8:285
-msgid ""
-"Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden/ New York, "
-"2017"
-msgstr ""
-"Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden/ New York, "
-"2017"
-
 #. type: Content of: <p>
-#: ../../skycultures/greek_farnese/description.en.utf8:300
+#: ../../skycultures/greek_farnese/description.en.utf8:295
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:289
 msgid ""
 "We provide this sky culture free of charge, but the authors deserve to be "
@@ -11747,7 +11487,7 @@ msgstr ""
 "podľa bežných pravidiel. Ďakujeme!"
 
 #. type: Content of: <p>
-#: ../../skycultures/greek_farnese/description.en.utf8:303
+#: ../../skycultures/greek_farnese/description.en.utf8:298
 msgid ""
 "This sky culture was contributed to Stellarium by Susanne M. Hoffmann "
 "(service@uhura-uraniae.com)."
@@ -11756,7 +11496,7 @@ msgstr ""
 "(service@uhura-uraniae.com)."
 
 #. type: Content of: <h5>
-#: ../../skycultures/greek_farnese/description.en.utf8:305
+#: ../../skycultures/greek_farnese/description.en.utf8:300
 msgid "the author"
 msgstr "autor"
 
@@ -12230,6 +11970,29 @@ msgstr ""
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:282
 msgid "For Ptolemaios (in comparison): Almagest star catalogue"
 msgstr "Pre Ptolemaia (v porovnaní): katalóg hviezd Almagest"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/greek_leidenAratea/description.en.utf8:284
+msgid ""
+"Heiberg, J. L. (Ed.): Claudii Ptolemaei: Syntaxis Mathematica, Teubner, "
+"Leipzig, 1898"
+msgstr ""
+"Heiberg, J. L. (Ed.): Claudii Ptolemaei: Syntaxis Mathematica, Teubner, "
+"Leipzig, 1898"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/greek_leidenAratea/description.en.utf8:285
+msgid ""
+"Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden/ New York, "
+"2017"
+msgstr ""
+"Hoffmann, S. M.: Hipparchs Himmelsglobus, Springer, Wiesbaden/ New York, "
+"2017"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/greek_leidenAratea/description.en.utf8:286
+msgid "Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984"
+msgstr "Toomer, G. J.: Ptolemy's Almagest, Duckworth, London, 1984"
 
 #. type: Content of: <p>
 #: ../../skycultures/greek_leidenAratea/description.en.utf8:292
@@ -17371,6 +17134,1206 @@ msgstr ""
 "el tiempo maya</a>"
 
 #. type: Content of: <h1>
+#: ../../skycultures/modern/description.en.utf8:1
+msgid "Modern"
+msgstr "Moderné"
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:2
+#: ../../skycultures/modern_iau/description.en.utf8:2
+msgid ""
+"The modern sky culture is used internationally by modern astronomers, and is"
+" the official scheme of The International Astronomical Union.  It has "
+"historical roots in Ancient Greek astronomy, with influences from Islamic "
+"astronomy."
+msgstr ""
+"Moderná kultúra oblohy je medzinárodne používaná modernými astronómami a je "
+"oficiálnou schémou Medzinárodnej astronomickej únie. Má historické korene v "
+"starovekej gréckej astronómii, s vplyvom islamskej astronómie."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:7
+msgid ""
+"The modern sky culture divides the celestial sphere into 88 areas of various"
+" sizes called constellations, each with precise boundary, issued by the "
+"International Astronomical Union in 1922.  These constellations have become "
+"the standard way to describe the sky, replacing similar sets in other sky "
+"cultures exhaustively in daily usage."
+msgstr ""
+"Moderná kultúra oblohy rozdeľuje nebeskú sféru na 88 oblastí rôznej veľkosti"
+" zvaných súhvezdia, každá s presnou hranicou určenou Medzinárodnou "
+"astronomickou úniou v roku 1922. Tieto súhvezdia sa stali štandardným "
+"spôsobom popisu oblohy a masívne nahradili v každodennom používaní podobné "
+"sady v iných kultúrach."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:10
+msgid ""
+"The constellations in use today are based mainly on ancient Greek "
+"constellations depicted by Ptolemy in his book the Almagest during the 2nd "
+"century CE.  In the subsequent centuries, this book has been translated from"
+" Greek into Arabic (6th to 9th century) and later to medieval Latin.  In the"
+" Arabic more than in the Latin tradition, the Ptolemaic figures were "
+"enriched and transformed by native Arabic constellations and star names."
+msgstr ""
+"Súhvezdia, ktoré sa dnes používajú sú založené hlavne na starovekých "
+"gréckych súhvezdiach popísaných v 2. stor. n.l. Ptolemaiom v jeho diele "
+"Almagest. V nasledujúcich storočiach bolo dielo preložené z gréčtiny do "
+"arabčiny (6.-9. storočie) a neskôr do stredovekej latinčiny. V arabčine "
+"(viac, než v latinčine) boli Ptolemaiove obrazce obohatené o domorodé "
+"arabské súhvezdia a mená hviezd."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:13
+msgid ""
+"In the 16-18th centuries, European astronomers suggested new constellations "
+"to fill the gaps between northern constellations (e.g. the constellation of "
+"\"the lynx\" for an area close to the Great Bear but with stars so faint "
+"that you would need the eyes of a lynx to see them)  and also created new "
+"constellations in the southern part of the sky which had not been visible to"
+" Ptolemy.  These new constellations were usually named after new technical "
+"inventions of the early modern period (e.g. a chemical furnace, a balloon, "
+"an air pump) or exotic animals (e.g. a chamaeleon, a tucan, a paradise "
+"bird).  Among them several constellations were also named with political "
+"consideration to honor certain kings or patrons."
+msgstr ""
+"V 16.-18. storočí navrhli európski astronómovia nové súhvezdia, aby vyplnili"
+" medzery medzi severnými súhvezdiami (napr. súhvezdie \"Rys\" pre oblasť "
+"blízku Veľkej medvedici, ale s tak slabými hviezdami, že potrebujete oči "
+"rysa, aby ste ich videli) a tiež vytvorili nové súhvezdia na južnej časti "
+"oblohy, ktoré Ptolemaios nemohol vidieť. Tieto nové súhvezdia boli väčšinou "
+"pomenované podľa nových technických vynálezov ranej modernej doby (napr. "
+"chemická pec, balón, výveva) alebo exotických zvierat (napr. chameleón, "
+"tukan, rajka). Medzi novými súhvezdiami boli aj niektoré politické nominácie"
+" na počesť kráľov alebo mecenášov."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:19
+msgid ""
+"In the beginning of the 20th century, the IAU (International Astronomical "
+"Union) aimed for a large clean-up: in 1922, it officially accepted the list "
+"of 88 constellation names. In 1928 it also defined precise constellation "
+"boundaries [#40] still in use today."
+msgstr ""
+"Začiatkom 20. storočia sa IAU (medzinárodná astronomická únia) zamerala na "
+"veľké upratovanie: v roku 1922 oficiálne prijala zoznam 88 mien súhvezdí. V "
+"roku 1928 tiež presne zadefinovala hranice súhvezdí [#40] používané dodnes."
+
+#. type: Content of: <h2>
+#: ../../skycultures/modern/description.en.utf8:22
+msgid "Extras"
+msgstr "Extra"
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:23
+msgid ""
+"In the 2nd century CE, Ptolemy in Alexandria published a multi-volume book "
+"which summarised the astronomical knowledge of the time, rooted in a "
+"tradition of mathematical astronomy since Hipparchus (at least 265 years "
+"earlier). In the subsequent centuries, this book has been translated from "
+"Greek into Arabic (6th to 9th century), from Arabic into Latin, and later, "
+"from the original ancient Greek into medieval Latin.  Due to this "
+"transformation, it is now known under the artificial name Almagest, derived "
+"from the Arabic title [#46]."
+msgstr ""
+"V 2. storočí n.l. vydal Ptolemaios v Alexandrii viac-zväzkové dielo, v "
+"ktorom zhrnul všetko astronomické poznanie svojej doby, ukotvené v tradícii "
+"matematickej astronómie od čias Hipparcha (najmenej 265 rokov skôr). V "
+"nasledujúcich storočiach bolo dielo preložené z gréčtiny do arabčiny (6.-9. "
+"storočie), z arabčiny do latinčiny a neskôr z pôvodnej starovekej gréčtiny "
+"do stredovekej latinčiny. Kvôli týmto transformáciám je dnes známe pod "
+"skomoleným menom Almagest, ktoré je odvodené z arabského názvu [#46]."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:27
+msgid ""
+"The Almagest star catalogue (books VII and VIII) has been depicted many "
+"times in the Islamic as well as in the Christian astronomical traditions.  "
+"Often, the figures were re-drawn in order to adapt them to the taste of art "
+"of the epoch. In the Arabic more than in the Latin tradition, the Ptolemaic "
+"figures were enriched and transformed by native Arabic constellations and "
+"star names.  Therefore, this sky culture displays a modern descendant of the"
+" Ptolemaic one with traces of translations, misunderstandings, "
+"transformations, and deliberate additions."
+msgstr ""
+"Katalóg hviezd Almagestu (knihy VII a VIII) bol mnohokrát zobrazený v "
+"islamskej a tiež kresťanskej astronomickej tradícii. Často sa obrazce "
+"prekresľovali, aby sa prispôsobili umeleckému štýlu danej epochy. V arabčine"
+" (viac, než v latinskej tradícii) boli Ptolemaiove obrazce upravené podľa "
+"domorodých arabských súhvezdí a obohatené o mená hviezd. Preto táto kultúra "
+"oblohy zobrazuje moderných potomkov Ptolemaiovských súhvezdí so stopami "
+"prekladov, nedorozumení, zmien a úmyselných prídavkov."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:31
+msgid ""
+"In 1603 the lawyer and hobby astronomer Johann Bayer from Augsburg, Germany,"
+" made a new celestial atlas, called Uranometria [#41].  In this atlas, he "
+"introduced a systematic naming of stars starting with alpha, the brightest, "
+"beta, the second brightest, gamma, the third ... within a constellation.  "
+"Subsequently, it was established to name a star with a Greek letter and the "
+"Latin constellation name in casus genitive."
+msgstr ""
+"V roku 1603 vytvoril právnik a amatérsky astronóm Johann Bayer z Augsburgu v"
+" Nemecku nový atlas oblohy, nazvaný Uranometria [#41]. V tomto atlase "
+"predstavil systematické pomenovanie hviezd začínajúc písmenom alfa pre "
+"najjasnejšiu hviezdu, pokračujúc beta pre druhú, gama pre tretiu atď. v "
+"rámci jedného súhvezdia. Neskôr sa ustálilo pomenovanie hviezd pomocou "
+"gréckeho písmena a latinského mena súhvezdia v genitíve."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:34
+msgid ""
+"In the 18th century, the century of great atlases (Flamsteed, Fortin, Bode: "
+"[#42][#43]), new constellations were added to fill the gaps between northern"
+" constellations.  Additionally, there were suggestions to create new "
+"constellations in the southern part of the sky which had not been visible to"
+" Ptolemy.  European astronomers visited the European colonies and instead of"
+" asking the native people for their constellations, the Europeans were "
+"creative.  This way, many new technical inventions of the early modern "
+"period were depicted in constellations (e.g. a chemical furnace, a balloon, "
+"an air pump)  as well as exotic animals (e.g. a chamaeleon, a tucan, a "
+"paradise bird)."
+msgstr ""
+"V 18. storočí (storočí veľkých atlasov - Flamsteed, Fortin, Bode: "
+"[#42][#43]) boli pridané nové súhvezdia na zaplnenie medzier medzi severnými"
+" súhvezdiami. Dodatočne bolo navrhnuté aj vytvorenie nových súhvezdí pre "
+"južnú časť oblohy, ktorú Ptolemaios nemohol pozorovať. Európski astronómovia"
+" navštívili európske kolónie a miesto toho, aby sa domorodcov pýtali na mená"
+" ich súhvezdí, boli sami kreatívni. Takto sa na súhvezdia premenili mnohé "
+"technické vynálezy ranej modernej doby (napr. chemická pec, balón, výveva) a"
+" tiež exotické zvieratá (napr. chameleón, tukan, rajka)."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:39
+msgid ""
+"The problem was that sometimes astronomers did not agree with each other "
+"and, thus, atlases showed deviations from each other."
+msgstr ""
+"Problémom bolo, že niekedy sa astronómovia medzi sebou nezhodli a tak medzi "
+"jednotlivými atlasmi boli niekde rozdiely."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:40
+msgid ""
+"After many centuries of astronomers taking liberties in interpretation of "
+"the Ptolemaic original, there were many variants of constellations.  As "
+"constellations are a positioning system, i.e. astronomers describe positions"
+" in the sky relative to stars and stars relative to constellations (like "
+"\"Betelgeuse\", Orion's right shoulder), it is necessary to use "
+"constellation names and star names uniformly all over the world."
+msgstr ""
+"Astronómovia po mnoho storočí svojvoľne pristupovali k interpretácii "
+"Ptolemaiovho originálu a tak existovalo viacero variantov súhvezdí. Keďže "
+"súhvezdia sú vlastne systémom polôh, t.j. astronómovia popisujú polohy na "
+"oblohe vzhľadom ku hviezdam a súhvezdiam (napr. \"Betelgeuse\", pravé plece "
+"Orióna), bolo nevyhnutné celosvetovo používať jednotné názvy súhvezdí a mien"
+" hviezd."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:43
+msgid ""
+"In the \"Fin de siècle\", there were upcoming suggestions in the "
+"astronomical community to unify the system of constellations and star names "
+"[#44]."
+msgstr ""
+"Na konci 19. storočia sa množili návrhy astronomickej komunity, aby sa "
+"zjednotil systém súhvezdí a mien hviezd [#44]."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:44
+msgid ""
+"The IAU, only founded in 1919, in 1928 defined the boundaries of these areas"
+" [#43] and not the way of drawing artwork or connecting lines within them.  "
+"Consequently several sub-cultures of painting figures and drawing simplified"
+" stickfigures were developed during the 20th and 21st century.  We provide "
+"some of them as further sky cultures."
+msgstr ""
+"IAU, založená len v roku 1919, už v r. 1928 zadefinovala hranice týchto "
+"oblastí [#43] a nie umelecké obrázky s hviezdami prepojenými čiarami. "
+"Následne sa mnohé obrázky sub-kultúr zjednodušili na paličkové obrazce, "
+"ktoré sa vyvinuli v 20. a 21. storočí. Niektoré z nich tu ponúkame ako "
+"ďalšie kultúry oblohy."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:49
+msgid ""
+"These constellations are based mainly on the Ptolemaic tradition which had "
+"been used in all three Abrahamitic religions and, thus, was common in the "
+"Near East, in Europe and its colonies on all continents.  However, between "
+"the ancient Greek constellations there were gaps of areas with only faint "
+"stars belonging to no constellation.[#47] In the Modern Epoch, several "
+"astronomers suggested constellation figures for these gaps, among them "
+"several political constellations to the honor of certain kings or patrons.  "
+"In the late 19th century, the astronomical research community aimed for a "
+"huge clean-up to avoid ambiguities in assigning stars to constellations."
+msgstr ""
+"Tieto súhvezdia sú založené hlavne na Ptolemaiovskej tradícii, ktorá sa "
+"používala aj vo všetkých troch abrahámskych náboženstvách a je tak spoločná "
+"pre Blízky východ, Európu a jej kolónie na iných kontinentoch. Ale medzi "
+"starovekými gréckymi súhvezdiami boli medzery so slabými hviezdami, ktoré "
+"nepatrili žiadnemu súhvezdiu.[#47] V modernej dobe navrhovali viacerí "
+"astronómovia obrazce súhvezdí, ktoré by tieto medzery zaplnili. Medzi nimi "
+"aj niekoľko politických súhvezdí na počesť konkrétnym kráľom alebo "
+"mecenášom. Na konci 19. storočia sa vedecká astronomická komunita podujala "
+"na veľké upratovanie, aby sa vyhla nejasnostiam pri priraďovaní hviezd "
+"súhvezdiam."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:55
+msgid ""
+"In 1922, the IAU officially approved the list of 88 constellation names and "
+"their official abbreviations with three letters.  The only remaining "
+"political constellation is Scutum, the shield of a Polish king but without "
+"mentioning the political reference anymore.  The Belgian priest E. Delporte "
+"got the task to define constellation boundaries according to coordinates.  "
+"In 1928, he finished the work, based on an atlas from Argentina [#51], and "
+"the IAU accepted his delimitations [#40]."
+msgstr ""
+"V roku 1922 schválila IAU zoznam 88 mien súhvezdí a ich oficiálne "
+"trojpísmenové skratky. Jediným politickým súhvezdím, ktoré ostalo, je Štít, "
+"teda štít poľského kráľa, ale už bez zmienky o tomto politickom prepojení. "
+"Belgický kňaz E. Delporte dostal za úlohu zadefinovať hranice súhvezdí podľa"
+" súradníc. Prácu dokončil v roku 1928 na základe atlasu z Argentíny  [#51] a"
+" IAU prijala jeho rozdelenie [#40]."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:59
+msgid ""
+"These \"constellations\" are naked areas in the sky without any stick "
+"figures or depictions [#44].  The borders simply follow the lines of right "
+"ascension and declination from the epoch 1875.0.  Precession causes a slowly"
+" increasing deviation from the originally rectilinear grid.  These "
+"constellations became the standard way to describe the sky, replacing "
+"similar sets in other sky cultures exhaustively in daily usage."
+msgstr ""
+"Tieto \"súhvezdia\" sú holé oblasti oblohy bez akýchkoľvek paličkových "
+"obrazcov alebo obrázkov [#44]. Hranice jednoducho sledujú čiary rektascenzie"
+" a deklinácie z epochy 1875,0. Precesia spôsobuje postupný odklon od pôvodne"
+" pravouhlej mriežky. Tieto súhvezdia sa stali štandardným spôsobom popisu "
+"oblohy a masívne nahradili v každodennom používaní podobné sady v iných "
+"kultúrach."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:63
+msgid ""
+"Stellarium by default displays the precise RA-DEC-boundaries and a set of "
+"artwork constellations on the basis of Ptolemaic figures but following our "
+"contemporary taste of art."
+msgstr ""
+"Stellarium predvolene zobrazuje presné hranice v RA-DEC a množinu umeleckých"
+" obrázkov na základe Ptolemaiovských obrazov, ale v modernom štýle."
+
+#. type: Content of: <h3>
+#: ../../skycultures/modern/description.en.utf8:65
+msgid "Asterisms"
+msgstr "Asterizmy"
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:66
+msgid ""
+"The term \"asterism\" (assembly of stars) can sometimes be used synonymously"
+" to \"constellation\". In the modern use it describes a figure which is not "
+"part of the official canon.  Sometimes an asterism is a part of a "
+"constellation, e.g. the Big Dipper as part of Ursa Major, or Great Square as"
+" part of Pegasus.  Other asterisms span over several constellations, e.g. "
+"the Summer Triangle or Winter Hexagon.  Yet others are only visible in "
+"binoculars or telescopes and are aptly named \"telescopic asterism\", e.g. "
+"the Coathanger.  They are often discussed in the observing columns of "
+"popular astronomy magazines."
+msgstr ""
+"Termín \"asterizmus\" (súbor hviezd) sa niekedy používa ako synonymum k "
+"slovu \"súhvezdie\". V modernej dobe popisuje obrazec, ktorý nie je súčasťou"
+" oficiálneho zoznamu. Niekedy je asterizmus časť súhvezdia, napr. Veľký voz "
+"je časť Veľkej medvedice, alebo Veľký štvorec časť Pegasa. Iné asterizmy sa "
+"rozprestierajú cez niekoľko súhvezdí, napr. Letný trojuholník, alebo Zimný "
+"šesťuholník. Niektoré ďalšie je vidieť len pomocou binokuláru alebo "
+"ďalekohľadu a preto sa nazývajú \"teleskopické asterizmy\", napr. Vešiak. "
+"Často sa o nich píše v stĺpčekoch pre pozorovateľov v populárnych "
+"astronomických časopisoch."
+
+#. type: Content of: <h3>
+#: ../../skycultures/modern/description.en.utf8:72
+msgid "Ray Helpers"
+msgstr "Lúčové pomôcky"
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:73
+msgid ""
+"Seasoned observers can find their way around the sky easily. One mnemonic "
+"tool are associative chains of stars that span large distances.  We show "
+"them as \"ray helpers\". These are not standardized."
+msgstr ""
+"Skúsení pozorovatelia sa na oblohe zorientujú jednoducho. Jednou z "
+"mnemotechnických pomôcok sú reťazce hviezd, ktoré spájajú veľké "
+"vzdialenosti. Tu ich zobrazujeme ako \"lúčové pomôcky\". Tieto nie sú "
+"štandardizované."
+
+#. type: Content of: <h3>
+#: ../../skycultures/modern/description.en.utf8:76
+#: ../../skycultures/modern_iau/description.en.utf8:70
+msgid "Proper names of stars"
+msgstr "Vlastné mená hviezd"
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:77
+#: ../../skycultures/modern_iau/description.en.utf8:71
+msgid ""
+"Ptolemy's star catalogue had the layout of a table listing the description "
+"of the star's position in the constellation's figure, the ecliptical "
+"coordinates, and the magnitude e.g.: \"The star at the tip of the tail of "
+"Ursa Minor\", \"Gem 0 1/6, +66\", \"Mag 3\"."
+msgstr ""
+"Ptolemaiov hviezdny katalóg mal formu tabuľkových zoznamov s popisom polohy "
+"hviezdy v obrazci súhvezdia, ekliptickými súradnicami a hviezdnou veľkosťou,"
+" napr.: \"Hviezda na špičke chvosta Malého medveďa\", \"Gem 0 1/6, +66\", "
+"\"Mag 3\"."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:79
+msgid ""
+"In most cases, the star names evolved by astronomer's systematical "
+"abbreviations of these descriptions, e.g., a first astronomer abbreviated in"
+" a text \"tip of the tail\", a next astronomer drew a map with less space "
+"and wrote only \"tail\" next to the star and this name remained.  Over "
+"centuries, these descriptions were translated into Arabic and Latin, and in "
+"some cases the translators or scribes made mistakes because of misreading or"
+" misspelling of the Arabic words (e.g. the Arabic \"yad al gauza\", the hand"
+" of the giant woman, was mangled to the common term \"Betelgeuse\")."
+msgstr ""
+"Vo väčšine prípadov sa mená hviezdy vyvinuli cez systematické skracovanie "
+"popisov astronómami. Napr. prvý astronóm skrátil text na \"špic chvosta\", "
+"ďalší nakreslil mapu s menej miestom na popis a vedľa hviezdy zaznačil len "
+"\"chvost\" a toto meno jej už zostalo. Počas storočí boli tieto preklady "
+"preložené do arabčiny, latinčiny a v niektorých prípadoch sa pomýlil "
+"prekladateľ, pretože nesprávne prečítal alebo zapísal arabské slovo (napr. "
+"arabsky \"yad al guza\", ruka obrej ženy, bola spotvorená na bežný termín "
+"\"Betelgeuse\")."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:83
+msgid ""
+"However, there are also a few original Greek words like the red star "
+"\"Antares\", the counterpart of Ares (Mars), and even a few original "
+"Babylonian terms like \"Shargaz\", the Sting, in Scorpius.  Our modern, most"
+" recent IAU star names [#45] are a renewed mixture, also with influences or "
+"even politically wanted additions of star names from the non-Ptolemaic sky "
+"cultures, e.g. the traditional Pingsing, a Chinese star name for a star in "
+"Hydra (its meaning is only \"star\", a reminescence to his lonely position),"
+" or newly adopted star names from Polynesian, Hawaiian, or Aboriginal "
+"cultures for names of stars with exoplanets."
+msgstr ""
+"Ale je v ňom spomenutých aj niekoľko originálnych gréckych mien, ako "
+"napríklad červená hviezda \"Antares\", protivník Áresa (Marsu) a dokonca aj "
+"pár pôvodne babylonských termínov, ako \"Shargaz\", Žihadlo, v Škorpiónovi. "
+"Naše moderné mená hviezd IAU [#45] sú obnovenou zmeskou s vplyvom "
+"neptolemaiovských kultúr oblohy a dokonca s politicky vyžiadanými dodatkami,"
+" napr. tradičné čínske meno Pingsing hviezdy v Hydre (jeho význam je len "
+"\"hviezda\", pripomienka jej osamelej polohy), alebo novoprijaté mená z "
+"polynézskej, havajskej, či aborigénskej kultúry pre mená hviezd s "
+"exoplanétami."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern/description.en.utf8:87
+msgid ""
+"The IAU is the only scientifically accepted authority to assign new names to"
+" stars.  Commercial exploits like \"star name registries\", who sell stars "
+"for commemorative purposes or as gifts, only sell printed pieces of paper.  "
+"These names are not approved and never used by scientists."
+msgstr ""
+"IAU je jediná vedecky akceptovaná autorita, ktorá prideľuje mená hviezd. "
+"Komerčné využitie vo forme \"registrov mien hviezd\", ktoré predávajú "
+"hviezdy ako pamiatkové darčeky, predávajú len potlačený zdrap papiera. Tieto"
+" mená nie sú schválené a nikdy nebudú vedecky používané."
+
+#. type: Content of: <h1>
+#: ../../skycultures/modern_chinese/description.en.utf8:1
+msgid "Modern (Chinese)"
+msgstr "Moderná (Čínska)"
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_chinese/description.en.utf8:3
+msgid ""
+"The Modern (Chinese) Skyculture is a combination of Chinese traditions and "
+"Western constellations. The Chinese use combinations of modern "
+"constellations and Chinese star names in astronomy. This is the skyculture "
+"that the Chinese actually use now, with a great practical value."
+msgstr ""
+"Moderná čínska kultúra oblohy je kombináciou čínskych tradícii a západných "
+"súhvezdí. Číňania používajú v astronómii kombináciu moderných súhvezdí a "
+"čínskych mien hviezd. Toto je kultúra oblohy, ktorú práve dnes používajú "
+"Číňania a má veľkú praktickú hodnotu."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_chinese/description.en.utf8:7
+msgid ""
+"The modern Chinese use the constellations of the International Astronomical "
+"Union. The traditional Chinese constellations have no specific boundaries "
+"between them. They only represent the corresponding set of bright stars, and"
+" do not have the role of dividing the celestial sphere into different areas,"
+" so they are no longer applicable in astronomy."
+msgstr ""
+"Dnešní Číňania používajú súhvezdia Medzinárodnej astronomickej únie (IAU). "
+"Tradičné čínske súhvezdia nemajú medzi sebou žiadne vlastné hranice. "
+"Predstavujú len súvisiace skupiny jasných hviezd a nemajú za úlohu "
+"rozdeľovať nebeskú sféru na rôzne oblasti, takže pre astronómiu sú už "
+"nepoužiteľné."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_chinese/description.en.utf8:11
+msgid ""
+"The Chinese now use traditional star names instead of Western star names. "
+"More than 3,000 stars have traditional Chinese star names.  When a foreign "
+"astronomical book is translated into Chinese, the star names will also be "
+"translated into traditional Chinese star names. There are some special stars"
+" that use the names of Western stars, such as Proxima, Van Maanen's star, "
+"which can usually only be seen with a telescope, but with special "
+"astronomical significance."
+msgstr ""
+"Číňania aj dnes používajú tradičné mená hviezd namiesto západných mien "
+"hviezd. Viac ako 3000 hviezd má tradičné čínske mená. Keď sa do čínštiny "
+"prekladá cudzojazyčná kniha, mená hviezd sa takisto prevedú na tradičné "
+"čínske mená. Sú niektoré špeciálne hviezdy, ktoré používajú západné mená, "
+"napríklad Proxima, Van Maanenova hviezda, ktoré sú zvyčajne pozorovateľné "
+"len ďalekohľadom, ale majú zvláštny astronomický význam."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_chinese/description.en.utf8:12
+msgid ""
+"For a detailed introduction to traditional Chinese constellations and "
+"traditional Chinese names, see <i>Chinese traditional Skyculture for "
+"Stellarium</i>."
+msgstr ""
+"Pre detailný úvod k tradičným čínskym súhvezdiam a tradičným čínskym menám, "
+"viď <i>Čínska tradičná kultúra oblohy pre Stellarium</i>."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/modern_chinese/description.en.utf8:17
+msgid ""
+"<a href=\"http://en.wikipedia.org/wiki/Chinese_constellations\">Chinese "
+"constellations </a> Wikipedia"
+msgstr ""
+"<a href=\"http://en.wikipedia.org/wiki/Chinese_constellations\">čínske "
+"súhvezdia</a> (anglická Wikipédia)"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/modern_chinese/description.en.utf8:18
+msgid ""
+"<a "
+"href=\"https://en.wikipedia.org/wiki/Traditional_Chinese_star_names\">traditional"
+" Chinese star names</a> Wikipedia"
+msgstr ""
+"<a "
+"href=\"https://en.wikipedia.org/wiki/Traditional_Chinese_star_names\">tradičné"
+" čínske mená hviezd</a> (anglická Wikipédia)"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/modern_chinese/description.en.utf8:19
+msgid ""
+"<a href=\"http://en.wikipedia.org/wiki/Constellation\">constellations</a> "
+"Wikipedia"
+msgstr ""
+"<a href=\"http://en.wikipedia.org/wiki/Constellation\">súhvezdia</a> "
+"(anglická Wikipédia)"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/modern_chinese/description.en.utf8:20
+msgid ""
+"<a "
+"href=\"http://hubblesource.stsci.edu/sources/illustrations/constellations/\">Constellation"
+" image library</a> of the U.S. Naval Observatory and the Space Telescope "
+"Science Institute. Johannes Hevelius Engravings."
+msgstr ""
+"<a "
+"href=\"http://hubblesource.stsci.edu/sources/illustrations/constellations/\">Knižnica"
+" obrázkov súhvezdí</a> z Amerického námorného observatória (USNO) a "
+"Vedeckého inštitútu vesmírneho ďalekohľadu (STSI). Rytiny Johannesa "
+"Heveliusa."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_chinese/description.en.utf8:25
+msgid ""
+"This skyculture was contributed by Stellarium user <i>Sun Shuwei</i> <a "
+"href=\"mailto:sunshuwei.hi@foxmail.com\">sunshuwei.hi@foxmail.com</a>."
+msgstr ""
+"Túto kultúru oblohy do Stellaria pridal užívateľ <i>Sun Šuwej</i> <a "
+"href=\"mailto:sunshuwei.hi@foxmail.com\">sunshuwei.hi@foxmail.com</a>."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_chinese/description.en.utf8:26
+msgid ""
+"Constellation art，Constellation lines based on <i>Modern Skyculture for "
+"Stellarium</i>."
+msgstr ""
+"Obrázky a čiary súhvezdí sú založené na <i>Modernej kultúre oblohy pre "
+"Stellarium</i>."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_chinese/description.en.utf8:27
+msgid ""
+"Asterism lines and traditional Chinese star names based on <i>Chinese "
+"Traditional Skyculture for Stellarium</i>."
+msgstr ""
+"Čiary asterizmov a tradičné čínske mená hviezd sú založené na <i>Čínskej "
+"tradičnej kultúre oblohy pre Stellarium</i>. "
+
+#. type: Content of: <h1>
+#: ../../skycultures/modern_st/description.en.utf8:1
+msgid "Modern (Sky & Telescope)"
+msgstr "Moderná (Sky & Telescope)"
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_st/description.en.utf8:2
+msgid ""
+"Modern sky culture is used internationally by modern astronomers, and is the"
+" official scheme of The International Astronomical Union.  It has historical"
+" roots in Ancient Greek astronomy, with influences from Islamic astronomy.  "
+"The constellation figures and star names come from Sky & Telescope's "
+"definitions, and should be familiar to users of Sky & Telescope's Pocket Sky"
+" Atlas, Sky Atlas 2000.0, and the figures in Sky & Telescope magazine."
+msgstr ""
+"Moderná kultúra oblohy je medzinárodné používaná astronómami a je oficiálnou"
+" schémou Medzinárodnej astronomickej únie. Má historické korene v starovekej"
+" gréckej astronómii s vplyvom islamskej astronómie. Obrazce súhvezdí a mená "
+"hviezd pochádzajú z definícií Sky & Telescope a mali by byť povedomé "
+"používateľom Vreckového atlasu oblohy Sky & Telescope, Atlasu oblohy 2000,0 "
+"a obrázkom z časopisu Sky & Telescope."
+
+#. type: Content of: <p><p>
+#: ../../skycultures/modern_st/description.en.utf8:5
+msgid ""
+"The modern culture divides the celestial sphere into 88 areas of various "
+"sizes called <i>constellations</i>, each with precise boundary, issued by "
+"the International Astronomical Union. These constellations have become the "
+"standard way to describe the sky, replacing similar sets in other sky "
+"cultures exhaustively in daily usage."
+msgstr ""
+"Moderná kultúra rozdeľuje nebeskú sféru na 88 oblastí rôznej veľkosti "
+"zvaných <i>súhvezdia</i>, každá s presnou hranicou, určenou Medzinárodnou "
+"astronomickou úniou. Tieto súhvezdia sa stali štandardným spôsobom popisu "
+"oblohy, nahradili v dennom používaní podobné sady v iných kultúrach."
+
+#. type: Content of: <p><p>
+#: ../../skycultures/modern_st/description.en.utf8:7
+msgid ""
+"Note: the Sky & Telescope sky culture does not provide constellation lines "
+"for Microscopium or Mensa."
+msgstr ""
+"Poznámka: Kultúra oblohy Sky & Telescope neobsahuje čiary súhvezdí pre "
+"Mikroskop a Stolovú horu."
+
+#. type: Content of: <p><p>
+#: ../../skycultures/modern_st/description.en.utf8:10
+msgid ""
+"The method used by Sky & Telescope to determine star names is detailed in "
+"the included <i>SnT_star_names.docx</i> file."
+msgstr ""
+"Metóda na určenie mien hviezd používaná Sky & Telescope je detailne popísaná"
+" v priloženom súbore <i>SnT_star_names.docx</i>."
+
+#. type: Content of: <p><p><ul><li>
+#: ../../skycultures/modern_st/description.en.utf8:13
+msgid ""
+"<a href=\"https://www.skyandtelescope.com\" class='external text' "
+"title=\"Sky & Telescope\" rel=\"nofollow\">Sky & Telescope</a> homepage"
+msgstr ""
+"<a href=\"https://www.skyandtelescope.com\" class='external text' "
+"title=\"Sky & Telescope\" rel=\"nofollow\">Sky & Telescope</a> domovská "
+"stránka"
+
+#. type: Content of: <p><p><ul><li>
+#: ../../skycultures/modern_st/description.en.utf8:14
+msgid ""
+"<a href=\"http://en.wikipedia.org/wiki/Constellation\" class='external text'"
+" title=\"http://en.wikipedia.org/wiki/Constellation\" "
+"rel=\"nofollow\">Constellation</a> article at Wikipedia"
+msgstr ""
+"<a href=\"http://en.wikipedia.org/wiki/Constellation\" class='external text'"
+" title=\"http://en.wikipedia.org/wiki/Constellation\" "
+"rel=\"nofollow\">Súhvezdia</a> článok na anglickej Wikipédii"
+
+#. type: Content of: <p><p><ul><li>
+#: ../../skycultures/modern_st/description.en.utf8:15
+msgid ""
+"<a href=\"http://en.wikipedia.org/wiki/Star_catalogue\" class='external "
+"text' title=\"http://en.wikipedia.org/wiki/Star catalogue\" "
+"rel=\"nofollow\">Star Catalogue</a> article at Wikipedia"
+msgstr ""
+"<a href=\"http://en.wikipedia.org/wiki/Star_catalogue\" class='external "
+"text' title=\"http://en.wikipedia.org/wiki/Star catalogue\" "
+"rel=\"nofollow\">Hviezdny katalóg</a> článok na anglickej Wikipédii"
+
+#. type: Content of: <p><p><ul><li>
+#: ../../skycultures/modern_st/description.en.utf8:16
+msgid ""
+"<a href=\"http://www.iau.org/public/constellations/\" class='external text' "
+"title=\"http://www.iau.org/public/constellations\" rel=\"nofollow\">Official"
+" IAU constellation information</a>"
+msgstr ""
+"<a href=\"http://www.iau.org/public/constellations/\" class='external text' "
+"title=\"http://www.iau.org/public/constellations\" "
+"rel=\"nofollow\">Oficiálne informácie IAU o súhvezdiach</a>"
+
+#. type: Content of: <h1>
+#: ../../skycultures/modern_hlad/description.en.utf8:1
+msgid "Modern (O. Hlad)"
+msgstr "Moderná (O. Hlad)"
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_hlad/description.en.utf8:3
+msgid "Constellations according to classical Czech publication:"
+msgstr "Súhvezdia podľa klasickej českej knihy:"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/modern_hlad/description.en.utf8:6
+msgid ""
+"Hlad, Hovorka, Polechová, Weiselová (1988): <em>Hvězdná obloha 2000.0</em>. "
+"Praha: Geodetický a kartografický podnik."
+msgstr ""
+"Hlad, Hovorka, Polechová, Weiselová (1988): <em>Hvězdná obloha 2000.0</em>. "
+"Praha: Geodetický a kartografický podnik."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_hlad/description.en.utf8:9
+msgid "Another (rather similar) Czech and Slovak references are:"
+msgstr "Ďalšie (dosť podobné) české a slovenské zdroje sú:"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/modern_hlad/description.en.utf8:12
+msgid ""
+"Hlad, Hovorka, Sojka, Weiselová (2000): <em>Atlas Coeli Novus 2000.0</em>. "
+"Praha: Hvězdárna a planetárium hl. m. Prahy, ETC publishing."
+msgstr ""
+"Hlad, Hovorka, Sojka, Weiselová (2000): <em>Atlas Coeli Novus 2000.0</em>. "
+"Praha: Hvězdárna a planetárium hl. m. Prahy, ETC publishing."
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/modern_hlad/description.en.utf8:13
+msgid ""
+"Pittich, Kalmančok (1981): <em>Obloha na dlani</em>. Bratislava: Obzor."
+msgstr ""
+"Pittich, Kalmančok (1981): <em>Obloha na dlani</em>. Bratislava: Obzor."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_hlad/description.en.utf8:19
+msgid ""
+"Constellation lines are designed so they mostly connect stars with Greek-"
+"letter (α, β, γ, ...) designations, brightest, or at least similarly bright "
+"stars, and especially if they form a mnemotechnic figure (like 'W' in case "
+"of Cas, or 'hurdles-runner' instead of Vir).  We usually do <em>not</em> use"
+" 5th magnitude stars, because they are difficult to spot in towns affected "
+"by light pollution.  The resulting figures are also a bit simpler and "
+"easier-to-remember for children.  We use these constellations at the "
+"Observatory and Planetarium Hradec Králové (<a "
+"href=\"http://www.astrohk.cz\">http://www.astrohk.cz</a>)."
+msgstr ""
+"Čiary súhvezdí sú navrhnuté tak, aby väčšinou spájali hviezdy značené "
+"gréckymi písmenami (α, β, γ, ...), najjasnejšie alebo aspoň podobne jasné "
+"hviezdy, hlavne, ak vytvárajú mnemotechnické obrazce (ako písmeno 'W' v "
+"prípade Cas, alebo 'bežca cez prekážky' miesto Vir). Zvyčajne "
+"<em>nepoužívame</em> hviezdy 5. veľkosti, pretože ich veľmi ťažko pozorovať "
+"v mestách postihnutých svetelným znečistením. Výsledné obrazce sú o niečo "
+"jednoduchšie a ľahšie zapamätateľné pre deti. Tieto súhvezdia používame na "
+"Hvezdárni a planetáriu v Hradci Králové (<a "
+"href=\"http://www.astrohk.cz\">http://www.astrohk.cz</a>)."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_hlad/description.en.utf8:28
+msgid ""
+"Notes: UMa is taken from Pittich and Kalmančok (1981); M81 and M82 galaxies "
+"are just behind Bear's head.  Gem is a similar case.  Cam seems upside-down "
+"with respect to a mythological figure, but HIP 29997, 33694 stars are indeed"
+" brighter."
+msgstr ""
+"Poznámky: UMa je zobraná z Pittich a Kalmančok (1981); galaxie M81 a M82 sú "
+"hneď za uchom Medvedice. Gem je podobný prípad. Cam sa zdá byť hore nohami "
+"vzhľadom na mytologickú postavu, ale hviezdy HIP 29997 a 33694 sú v "
+"skutočnosti jasnejšie."
+
+#. type: Content of: <h2>
+#: ../../skycultures/modern_hlad/description.en.utf8:33
+msgid "Updates"
+msgstr "Aktualizácie"
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_hlad/description.en.utf8:35
+msgid "Version 1.0 for Stellarium 0.13.1"
+msgstr "Verzia 1.0 pre Stellarium 0.13.1"
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_hlad/description.en.utf8:37
+msgid ""
+"Future updates should be available at <a "
+"href=\"http://sirrah.troja.mff.cuni.cz/~mira/souhvezdi/\">http://sirrah.troja.mff.cuni.cz/~mira/souhvezdi/</a>"
+msgstr ""
+"Ďalšie aktualizácie by mali byť dostupné na <a "
+"href=\"http://sirrah.troja.mff.cuni.cz/~mira/souhvezdi/\">http://sirrah.troja.mff.cuni.cz/~mira/souhvezdi/</a>"
+
+#. type: Content of: <h1>
+#: ../../skycultures/modern_rey/description.en.utf8:1
+msgid "Modern (H.A. Rey)"
+msgstr "Moderná (H.A. Rey)"
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_rey/description.en.utf8:5
+msgid ""
+"During the 19th century the use and further editions of richly illustrated "
+"atlases with sumptuously engraved mythological figures fell out of fashion. "
+"The stars of the constellations in atlases of that time started to be shown "
+"connected with line patterns (\"stick figures\"), which however appear "
+"sometimes only to have been used to indicate which stars belong to which "
+"constellation.  Over several decades the figures had ceased to resemble the "
+"figures they were named after and appeared incomprehensible to beginning "
+"stargazers in the middle of the 20th century."
+msgstr ""
+"V 19. storočí vyšlo z módy používanie nových edícií bohato ilustrovaných "
+"atlasov s prepychovými rezbami mytologických postáv. Hviezdy súhvezdí v "
+"atlasoch tej doby sa začali zobrazovať spojené do čiarových vzorov "
+"(\"paličkové postavy\"), ktoré však vyzerali, že boli použité len na "
+"znázornenie, ktorá hviezda patrí do ktorého súhvezdia. Počas niekoľkých "
+"desaťročí sa prestali ponášať na postavy, podľa ktorých boli pomenované a "
+"pre začínajúcich pozorovateľov oblohy sa uprostred 20. storočia stali "
+"nezrozumiteľnými."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_rey/description.en.utf8:16
+msgid ""
+"H. A. Rey (Hans Augusto Reyersbach) (1898-1977), an artist and author of "
+"children's books of German descent but emigrated to the USA, published his "
+"answer to this problem in 1952 with the book <em>The Stars - A New Way To "
+"See Them</em>."
+msgstr ""
+"H. A. Rey (Hans Augusto Reyersbach) (1898-1977), umelec a spisovateľ "
+"detských kníh nemeckého pôvodu, ktorý emigroval do USA, vydal v r. 1952 "
+"knihu <em>Hviezdy - Nový spôsob, ako sa na ne pozerať</em>, ako svoju "
+"odpoveď na tento problém."
+
+#. type: Content of: <h2>
+#: ../../skycultures/modern_rey/description.en.utf8:22
+msgid "The Constellations"
+msgstr "Súhvezdia"
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_rey/description.en.utf8:24
+msgid ""
+"In this book, which has become very popular especially in the US, Rey "
+"connected the stars of every constellation \"in such a way that the "
+"resulting shape makes sense.\" What surprised him was \"that nobody has done"
+" it before. The basic idea is so simple.\""
+msgstr ""
+"V tejto knihe, ktorá sa stala hlavne v USA veľmi populárna, Rey spojil "
+"hviezdy každého súhvezdia \"takým spôsobom, aby výsledný obrazec dával "
+"zmysel.\" Prekvapilo ho, že \"to nikto predtým neurobil. Základná myšlienka "
+"je taká jednoduchá.\""
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_rey/description.en.utf8:29
+msgid ""
+"Rey's new stick figures make it indeed very simple to recognize the depicted"
+" constellation figures. Rey's work does not include figurative artwork, "
+"therefore this sky culture deliberately only comes with Rey's original stick"
+" figures.  The constellation names were also always given in English by Rey."
+" If you switch to \"Native\" name display mode, you may see exactly the "
+"spelling used in his book. Also the stars named here are limited to those "
+"included in the book."
+msgstr ""
+"Reyove nové paličkové postavy naozaj umožňovali ľahko si predstaviť "
+"zobrazené súhvezdia. Jeho práca neobsahovala figuratívne kresby, preto táto "
+"kultúra hviezdnej oblohy obsahuje len jeho originálne paličkové postavy. "
+"Mená súhvezdí boli ním preložené do angličtiny. Ak si nastavíte režim "
+"zobrazenia na \"Natívny\", uvidíte priamo pôvodné názvy z jeho knihy. "
+"Hviezdy, ktoré sú tu zobrazené, sú obmedzené len na tie, z jeho knihy."
+
+#. type: Content of: <h2>
+#: ../../skycultures/modern_rey/description.en.utf8:37
+msgid "Rey's Figures and the Classic Constellations"
+msgstr "Reyove obrazce a klasické súhvezdia"
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_rey/description.en.utf8:39
+msgid ""
+"Rey's constellations adhere to the tradition of the Western sky culture and "
+"describes the 88 officially acknowledged constellations, with addition of "
+"asterisms of the two Dippers and the \"Great Square\" (of Pegasus).  "
+"However, at several points Rey's figures deviate from the canonical figures "
+"described since Ptolemy's Almagest (2nd century AD), where also positions of"
+" the stars in their constellations had been described in their names. For "
+"example,"
+msgstr ""
+"Reyove súhvezdia sa pridržiavajú tradície západnej kultúry oblohy a popisujú"
+" 88 oficiálne uznaných súhvezdí, s pridaním asterizmov dvoch Vozov a Veľkého"
+" (pegasovho) štvorca. Napriek tomu sa niektoré Reyove obrazce odlišujú od "
+"kánonických postáv popisovaných už od Ptolemajovho Almagestu (2. stor. "
+"n.l.), kde boli okrem polôh hviezd v súhvezdiach zapísané aj ich mená. "
+"Napríklad:"
+
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/modern_rey/description.en.utf8:47
+msgid ""
+"Rey inverted the figure of the Great Bear (<em>Ursa Major</em>)  to look "
+"like a polar bear scenting prey.  This on one hand does not have the usual "
+"problem to explain its long tail. On the other hand, the bear is not shown "
+"to walk around the pole in this orientation."
+msgstr ""
+"Rey otočil obrazec Veľkej medvedice (<em>Ursa Major</em>), aby vyzeral, ako "
+"polárny medveď snoriaci za korisťou. Takto na jednej strane nemal zvyčajný "
+"problém vysvetliť jej dlhý chvost. Na druhej strane, medvedica v tejto "
+"orientácii nekráča okolo pólu."
+
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/modern_rey/description.en.utf8:53
+msgid ""
+"The Bull (<em>Taurus</em>), only the front of which is shown with long "
+"upright horns in usual depictions, is shown with a complete body including "
+"its tail, with horns stretched wide like those of a buffalo. Its bright eye "
+"<em>Aldebaran</em> now lies in its neck."
+msgstr ""
+"Býk (<em>Taurus</em>). V zvyčajných zobrazeniach je naznačený len predok so "
+"vztýčenými rohmi, tu je celé telo vrátane chvosta a rohy sa rozširujú "
+"podobne, ako u bizónov. Jeho jasné oko <em>Aldebaran</em> teraz leží v jeho "
+"krku."
+
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/modern_rey/description.en.utf8:58
+msgid ""
+"The head of <em>Hercules</em> is usually next to the head of "
+"<em>Ophiuchus</em>, the serpent holder, and the four stars known as "
+"\"keystone\" form his body. Rey makes his head out of the keystone, and the "
+"star that usually marks the hero's head is now one of his feet."
+msgstr ""
+"Hlava <em>Herkula</em> je zvyčajne blízko hlavy <em>Hadonosa</em> a štyri "
+"hviezdy, známe ako základný kameň, tvoria jeho telo. Rey jeho hlavu vytvoril"
+" zo základného kameňa a hviezdy, ktoré zvyčajne tvoria hlavu hrdinu, sú "
+"teraz jednou z jeho nôh."
+
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/modern_rey/description.en.utf8:63
+msgid ""
+"The Whale (<em>Cetus</em>) has been turned around, its former mouth now "
+"forming a tail fin."
+msgstr ""
+"Veľryba (<em>Cetus</em>) bola otočená, jej bývalá hlava tvorí teraz "
+"chvostovú plutvu."
+
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/modern_rey/description.en.utf8:66
+msgid "<em>Pegasus</em> exchanged feet and head."
+msgstr "<em>Pegas</em> má vymenené nohy a hlavu."
+
+#. type: Content of: <p><ul><li>
+#: ../../skycultures/modern_rey/description.en.utf8:68
+msgid ""
+"<em>Bootes</em>, the herdsman, is shown sitting and smoking a pipe (no trace"
+" of political correctness in a children's book of the 1950s... :-)"
+msgstr ""
+"<em>Bootes</em>, pastier je zobrazený sediaci a fajčiaci fajku (ani stopa "
+"politickej korektnosti v detskej knihe z päťdesiatich rokov minulého "
+"storočia... :-)"
+
+#. type: Content of: <ul><li>
+#: ../../skycultures/modern_rey/description.en.utf8:75
+msgid "<a href=\"http://en.wikipedia.org/wiki/H._A._Rey\">H.A.Rey (Wikipedia)</a>"
+msgstr ""
+"<a href=\"http://en.wikipedia.org/wiki/H._A._Rey\">H.A.Rey (anglická "
+"Wikipédia)</a>"
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_rey/description.en.utf8:80
+msgid ""
+"This sky culture used to be for a long time an easy user-installable addon "
+"example contributed by Mike Richards.  It has been reworked following the "
+"41st reprint and completed with this description by Georg Zotti."
+msgstr ""
+"Táto kultúra hviezdnej oblohy bývala dlho ľahko užívateľsky inštalovateľným "
+"príkladom doplnku od Mikea Richardsa. Georg Zotti ju prepracoval podľa 41. "
+"vydania a doplnil popisom."
+
+#. type: Content of: <h1>
+#: ../../skycultures/modern_iau/description.en.utf8:1
+msgid "Modern (IAU)"
+msgstr "Moderná (IAU)"
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_iau/description.en.utf8:8
+msgid ""
+"The modern sky culture divides the celestial sphere into 88 areas of various"
+" sizes called constellations, each with precise boundary, issued by the "
+"International Astronomical Union in 1922. These constellations have become "
+"the standard way to describe the sky, replacing similar sets in other sky "
+"cultures exhaustively in daily usage."
+msgstr ""
+"Moderná kultúra oblohy rozdeľuje nebeskú sféru na 88 oblastí rôznej veľkosti"
+" zvaných súhvezdia, každá s presnou hranicou určenou Medzinárodnou "
+"astronomickou úniou v roku 1922. Tieto súhvezdia sa stali štandardným "
+"spôsobom popisu oblohy a nahradili v každodennom používaní podobné sady v "
+"iných kultúrach."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_iau/description.en.utf8:13
+msgid ""
+"The constellations in use today are based mainly on ancient Greek "
+"constellations depicted by Ptolemy in his book the Almagest during the 2nd "
+"century CE. In the subsequent centuries, this book has been translated from "
+"Greek into Arabic (6th to 9th century) and later to medieval Latin.  In the "
+"Arabic more than in the Latin tradition, the Ptolemaic figures were enriched"
+" and transformed by native Arabic constellations and star names."
+msgstr ""
+"Súhvezdia, ktoré sa dnes používajú, sú založené hlavne na starovekých "
+"gréckych súhvezdiach popísaných v 2. stor. n.l. Ptolemaiom v jeho diele "
+"Almagest. V nasledujúcich storočiach bolo dielo preložené z gréčtiny do "
+"arabčiny (6.-9. storočie) a neskôr do stredovekej latinčiny. V arabčine "
+"(viac, než v latinčine) boli Ptolemaiove obrazce obohatené o domorodé "
+"arabské súhvezdia a mená hviezd."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_iau/description.en.utf8:19
+msgid ""
+"In the 16-18th centuries, European astronomers suggested new constellations "
+"to fill the gaps between northern constellations (e.g. the constellation of "
+"\"the lynx\" for an area close to the Great Bear but with stars so faint "
+"that you would need the eyes of a lynx to see them) and also created new "
+"constellations in the southern part of the sky which had not been visible to"
+" Ptolemy. These new constellations were usually named after new technical "
+"inventions of the early modern period (e.g. a chemical furnace, a balloon, "
+"an air pump) or exotic animals (e.g. a chamaeleon, a tucan, a paradise "
+"bird).  Among them several constellations were also named with political "
+"consideration to honor certain kings or patrons."
+msgstr ""
+"V 16.-18. storočí navrhli európski astronómovia nové súhvezdia, aby vyplnili"
+" medzery medzi severnými súhvezdiami (napr. súhvezdie \"Rys\" pre oblasť "
+"blízku Veľkej medvedici, ale s tak slabými hviezdami, že potrebujete oči "
+"rysa, aby ste ich videli) a tiež vytvorili nové súhvezdia na južnej časti "
+"oblohy, ktoré Ptolemaios nemohol vidieť. Tieto nové súhvezdia boli väčšinou "
+"pomenované podľa nových technických vynálezov ranej modernej doby (napr. "
+"chemická pec, balón, výveva) alebo exotických zvierat (napr. chameleón, "
+"tukan, rajka). Medzi nimi niekoľko súhvezdí pomenovaných so zreteľom na "
+"politiku na počesť istých kráľov alebo mecenášov."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_iau/description.en.utf8:29
+msgid ""
+"In the beginning of the 20th century, the IAU (International Astronomical "
+"Union) aimed for a large clean-up: in 1922, it officially accepted the list "
+"of 88 constellation names. In 1928 it also defined precise constellation "
+"boundaries [#4] still in use today."
+msgstr ""
+"Začiatkom 20. storočia sa IAU (medzinárodná astronomická únia) zamerala na "
+"veľké upratovanie: v roku 1922 oficiálne prijala zoznam 88 mien súhvezdí. V "
+"roku 1928 tiež presne zadefinovala hranice súhvezdí [#4] používané dodnes."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_iau/description.en.utf8:35
+msgid ""
+"These constellations are based mainly on the Ptolemaic tradition which had "
+"been used in all three Abrahamitic religions and, thus, was common in the "
+"Near East, in Europe and its colonies on all continents. However, between "
+"the ancient Greek constellations there were gaps of areas with only faint "
+"stars belonging to no constellation.[#5] In the Modern Epoch, several "
+"astronomers suggested constellation figures for these gaps, among them "
+"several political constellations to the honor of certain kings or patrons.  "
+"In the late 19th century, the astronomical research community aimed for a "
+"huge clean-up to avoid ambiguities in assigning stars to constellations."
+msgstr ""
+"Tieto súhvezdia sú založené hlavne na Ptolemaiovskej tradícii, ktorá sa "
+"používala aj vo všetkých troch abrahámskych náboženstvách a je tak spoločná "
+"pre Blízky východ, Európu a jej kolónie na iných kontinentoch. Ale medzi "
+"starovekými gréckymi súhvezdiami boli medzery so slabými hviezdami, ktoré "
+"nepatrili žiadnemu súhvezdiu.[#5] V modernej dobe navrhovali viacerí "
+"astronómovia obrazce súhvezdí, ktoré by tieto medzery zaplnili. Medzi nimi "
+"aj niekoľko politických súhvezdí na počesť konkrétnym kráľom alebo "
+"mecenášom. Na konci 19. storočia sa vedecká astronomická komunita podujala "
+"na veľké upratovanie, aby sa vyhla nejasnostiam pri priraďovaní hviezd "
+"súhvezdiam."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_iau/description.en.utf8:44
+msgid ""
+"In 1922, the IAU officially approved the list of 88 constellation names and "
+"their official abbreviations with three letters. The only remaining "
+"political constellation is Scutum, the shield of a Polish king but without "
+"mentioning the political reference anymore. The Belgian priest E. Delporte "
+"got the task to define constellation boundaries according to coordinates.  "
+"In 1928, he finished the work, based on an atlas from Argentina [#6], and "
+"the IAU accepted his delimitations [#4]."
+msgstr ""
+"V roku 1922 schválila IAU zoznam 88 mien súhvezdí a ich oficiálne "
+"trojpísmenové skratky. Jediným politickým súhvezdím, ktoré ostalo, je Štít, "
+"teda štít poľského kráľa, ale už bez zmienky o tomto politickom prepojení. "
+"Belgický kňaz E. Delporte dostal za úlohu zadefinovať hranice súhvezdí podľa"
+" súradníc. Prácu dokončil v roku 1928 na základe atlasu z Argentíny  [#6] a "
+"IAU prijala jeho rozdelenie [#4]."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_iau/description.en.utf8:51
+msgid ""
+"These \"constellations\" are naked areas in the sky without any stick "
+"figures or depictions [#1]. The borders simply follow the lines of right "
+"ascension and declination from the epoch 1875.0. Precession causes a slowly "
+"increasing deviation from the originally rectilinear grid. These "
+"constellations became the standard way to describe the sky, replacing "
+"similar sets in other sky cultures exhaustively in daily usage."
+msgstr ""
+"Tieto \"súhvezdia\" sú holé oblasti oblohy bez akýchkoľvek paličkových "
+"obrazcov alebo obrázkov [#1]. Hranice jednoducho sledujú čiary rektascenzie "
+"a deklinácie z epochy 1875,0. Precesia spôsobuje postupný odklon od pôvodne "
+"pravoúhlej mriežky. Tieto súhvezdia sa stali štandardným spôsobom popisu "
+"oblohy a masívne nahradili v každodennom používaní podobné sady v iných "
+"kultúrach."
+
+#. type: Content of: <h4>
+#: ../../skycultures/modern_iau/description.en.utf8:58
+msgid "Constellation Figures"
+msgstr "Obrázce súhvezdí"
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_iau/description.en.utf8:59
+msgid ""
+"In star maps it is common to mark line \"patterns\" that represent the "
+"shapes that give the name to the constellations. However, the IAU defines a "
+"constellation by its boundary (indicated by sky coordinates) and not by its "
+"pattern and the same constellation may have several variants in its "
+"representation."
+msgstr ""
+"Vo hviezdnych mapách je bežné značiť \"čiarové vzory\", ktoré predstavujú "
+"tvar, ktorý dal meno súhvezdiu. Ale IAU definuje súhvezdia podľa ich hraníc "
+"(naznačené súradnicami) a nie podľa vzoru. To isté súhvezdie môže mať rôzne "
+"podoby zobrazenia."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_iau/description.en.utf8:64
+msgid ""
+"This sky culture uses constellation figures were produced in collaboration "
+"with \"Sky and Telescope\" magazine (Roger Sinnott and Rick Fienberg) and "
+"published at IAU official website [#1]. Alan MacRobert's constellation "
+"patterns, were influenced by those of H. A. Rey but in many cases were "
+"adjusted to preserve earlier traditions."
+msgstr ""
+"Táto kultúra oblohy používa obrazce súhvezdí vytvorené v spolupráci s "
+"časopisom \"Sky and Telescope\" (Roger Sinnott a Rick Fienberg) a vydaných "
+"na oficiálnej stránke IAU [#1]. Čiarové vzory Alana MacRobertsa boli "
+"ovplyvnené vzorcami H. A. Reya, ale v mnohých prípadoch sú upravené, aby "
+"zachovávali skoršie tradície."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_iau/description.en.utf8:75
+msgid ""
+"In most cases, the star names evolved by astronomer's systematical "
+"abbreviations of these descriptions, e.g., a first astronomer abbreviated in"
+" a text \"tip of the tail\", a next astronomer drew a map with less space "
+"and wrote only \"tail\" next to the star and this name remained. Over "
+"centuries, these descriptions were translated into Arabic and Latin, and in "
+"some cases the translators or scribes made mistakes because of misreading or"
+" misspelling of the Arabic words (e.g. the Arabic \"yad al gauza\", the hand"
+" of the giant woman, was mangled to the common term \"Betelgeuse\")."
+msgstr ""
+"Vo väčšine prípadov sa mená hviezdy vyvinuli cez systematické skracovanie "
+"popisov astronómami. Napr. prvý astronóm skrátil text na \"špic chvosta\", "
+"ďalší nakreslil mapu s menej miestom na popis a vedľa hviezdy zaznačil len "
+"\"chvost\" a toto meno jej už zostalo. Počas storočí boli tieto preklady "
+"preložené do arabčiny, latinčiny a v niektorých prípadoch sa pomýlil "
+"prekladateľ alebo pisár, pretože nesprávne prečítal, či zapísal arabské "
+"slovo (napr. arabsky \"yad al guza\", ruka obrej ženy, bola spotvorená na "
+"bežný termín \"Betelgeuse\")."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_iau/description.en.utf8:83
+msgid ""
+"However, there are also a few original Greek words like the red star "
+"\"Antares\", the counterpart of Ares (Mars), and even a few original "
+"Babylonian terms like \"Shargaz\", the Sting, in Scorpius. Our modern, most "
+"recent IAU star names [#7] are a renewed mixture, also with influences or "
+"even politically wanted additions of star names from the non-Ptolemaic sky "
+"cultures, e.g. the traditional Pingsing, a Chinese star name for a star in "
+"Hydra (its meaning is only \"star\", a reminescence to his lonely position),"
+" or newly adopted star names from Polynesian, Hawaiian, or Aboriginal "
+"cultures for names of stars with exoplanets."
+msgstr ""
+"Ale je v ňom spomenutých aj niekoľko originálnych gréckych mien, ako "
+"napríklad červená hviezda \"Antares\", protivník Áresa (Marsu) a dokonca aj "
+"pár pôvodne babylonských termínov, ako \"Shargaz\", Žihadlo, v Škorpiónovi. "
+"Naše moderné mená hviezd IAU [#7] sú obnovenou zmeskou s vplyvom "
+"neptolemaiovských kultúr oblohy a dokonca s politicky vyžiadanými dodatkami,"
+" napr. tradičné čínske meno Pingsing hviezdy v Hydre (jeho význam je len "
+"\"hviezda\", pripomienka jej osamelej polohy), alebo novoprijaté mená z "
+"polynézskej, havajskej, či aborigénskej kultúry pre mená hviezd s "
+"exoplanétami."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_iau/description.en.utf8:92
+msgid ""
+"The IAU is the only scientifically accepted authority to assign new names to"
+" stars. Commercial exploits like \"star name registries\", who sell stars "
+"for commemorative purposes or as gifts, only sell printed pieces of paper. "
+"These names are not approved and never used by scientists."
+msgstr ""
+"IAU je jediná vedecky akceptovaná autorita, ktorá prideľuje mená hviezd. "
+"Komerčné využitie vo forme \"registrov mien hviezd\", ktoré predávajú "
+"hviezdy ako pamiatkové darčeky, predávajú len potlačený zdrap papiera. Tieto"
+" mená nie sú schválené a nikdy nebudú vedecky používané."
+
+#. type: Content of: <h3>
+#: ../../skycultures/modern_iau/description.en.utf8:97
+msgid "Proper names of deep-sky objects"
+msgstr "Vlastné mená objektov hlbokého vesmíru"
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_iau/description.en.utf8:98
+msgid ""
+"Uranometria 2000.0 is an atlas of the 2000.0 era starry sky prepared by the "
+"Dutch artist Wil Thirion and published in 1987 by the American publishing "
+"house Willmann-Bell, specializing in astronomical literature."
+msgstr ""
+"Uranometria 2000,0 je atlas hviezdnej oblohy pre epochu 2000,0 pripravený "
+"holandským umelcom Wilom Thirionom a vydaný v r. 1987 americkým "
+"vydavateľstvom Willmann-Bell, ktoré sa špecializuje na astronomickú "
+"literatúru."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_iau/description.en.utf8:101
+msgid ""
+"The Atlas of Tirion, respected by astronomers for its accuracy and beauty, "
+"is provided with detailed tables and various indexes. The second volume "
+"contains three transparent overlays designed for precise measurements.  "
+"Uranometriya 2000.0 contains more than 280,000 stars and more than 30,000 "
+"deep-sky objects - in particular, all the objects of the Messier and NGC "
+"catalogs."
+msgstr ""
+"Astronómovia rešpektujú Thirionov atlas pre jeho presnosť a krásu, doplnené "
+"detailné tabuľky a rôzne indexy. Druhá časť obsahuje aj priesvitné fólie "
+"navrhnuté pre presné merania. Uranometria 2000,0 obsahuje viac ako 280 000 "
+"hviezd a viac ako 30 000 objektov hlbokého vesmíru - konkrétne objekty z "
+"Messierovho a NGC katalógu."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_iau/description.en.utf8:107
+msgid ""
+"The second (corrected and most complete) three-volume edition of "
+"\"Uranometria 2000.0\", was published in 2001 under the name \"Uranometria "
+"2000.0 Deep Sky Atlas\" and contains 280035 stars of both hemispheres up to "
+"9.75<sup>m</sup> in size on a scale of 1.85 cm per declination degree on 220"
+" spreads of A3 format. Particular attention in the atlas is paid to deep-sky"
+" objects, there are more than 30 thousand of them in the second edition - "
+"many times more than in any other paper atlas."
+msgstr ""
+"Druhé (upravené a doplnené) vydanie trojdielnej \"Uranometrie 2000,0\" vyšlo"
+" v r. 2001 pod názvom \"Uranometria 2000,0 Deep Sky Atlas\" a obsahuje "
+"280035 hviezd oboch nebeských pologúľ až do 9,75<sup>m</sup> v mierke 1,85 "
+"cm pre stupeň deklinácie na 220-tich hárkoch formátu A3. Zvláštna pozornosť "
+"bola venovaná objektom hlbokého vesmíru, ktorých je v druhom vydaní viac ako"
+" 30 tisíc - mnohokrát viac, ako v iných papierových atlasoch."
+
+#. type: Content of: <p>
+#: ../../skycultures/modern_iau/description.en.utf8:114
+msgid ""
+"The third volume of \"Uranometria 2000.0\" is a guide to deep-sky objects - "
+"Deep Sky Field Guide, consisting of tables with scientific data and proper "
+"names on objects depicted in the first two volumes [#3]."
+msgstr ""
+"Tretí diel \"Uranometrie 2000,0\" je sprievodcom pre objekty hlbokého "
+"vesmíru - Deep Sky Field Guide, pozostávajúci z tabuliek s vedeckými údajmi "
+"a vlastnými menami objektov zobrazených v prvých dvoch dieloch [#3]."
+
+#. type: Content of: <h1>
 #: ../../skycultures/mongolian/description.en.utf8:1
 msgid "Mongolian"
 msgstr "Mongolská"
@@ -20669,451 +21632,6 @@ msgstr ""
 " prispeli k tomuto projektu: Jimmy Napip z Ikumhala, Lomai Tain z Ielkes, "
 "Sylvano Kapalu z Ipai, Iawilu Naumusapen z Lowkweria, Kasékasé z Imapul, "
 "Nausien z Lamlu, Pierrot Nako Yaru z Lowanatom, Joe Natuman z Lowkweria."
-
-#. type: Content of: <h1>
-#: ../../skycultures/western/description.en.utf8:1
-msgid "Western"
-msgstr "Západná"
-
-#. type: Content of: <p>
-#: ../../skycultures/western/description.en.utf8:2
-msgid ""
-"Western sky culture is used internationally by modern astronomers, and is "
-"the official scheme of The International Astronomical Union.  It has "
-"historical roots in Ancient Greek astronomy, with influences from Islamic "
-"astronomy."
-msgstr ""
-"Západná kultúra oblohy je medzinárodne používaná modernými astronómami a je "
-"oficiálnou schémou Medzinárodnej astronomickej únie. Má historické korene v "
-"starovekej gréckej astronómii, s vplyvom islamskej astrnómie."
-
-#. type: Content of: <p><p>
-#: ../../skycultures/western/description.en.utf8:5
-#: ../../skycultures/western_SnT/description.en.utf8:5
-msgid ""
-"The Western culture divides the celestial sphere into 88 areas of various "
-"sizes called <i>constellations</i>, each with precise boundary, issued by "
-"the International Astronomical Union. These constellations have become the "
-"standard way to describe the sky, replacing similar sets in other sky "
-"cultures exhaustively in daily usage."
-msgstr ""
-"Západná kultúra rozdeľuje nebeskú sféru na 88 oblastí rôznej veľkosti "
-"zvaných <i>súhvezdia</i>, každá s presnou hranicou, určenou Medzinárodnou "
-"astronomickou úniou. Tieto súhvezdia sa stali štandardným spôsobom popisu, "
-"nahradili v dennom používaní podobné sady v iných kultúrach."
-
-#. type: Content of: <p>
-#: ../../skycultures/western/description.en.utf8:8
-msgid ""
-"Most of traditional western star names came from Arabic. In astronomy, "
-"Bayer/Flamsteed designations and other star catalogues are widely used "
-"instead of traditional names except few cases where the traditional names "
-"are more famous than the designations."
-msgstr ""
-"Väčšina tradičných západných mien hviezd pochádza z arabčiny. V astronómii "
-"sa často používajú označenia Bayera/Flamsteeda namiesto tradičných mien, "
-"okrem pár prípadov, kedy je tradičné meno známejšie ako označenie."
-
-#. type: Content of: <h2>
-#: ../../skycultures/western/description.en.utf8:10
-msgid "Alternative asterism files for Stellarium"
-msgstr "Súbory alternatívnych asterizmov pre Stellarium"
-
-#. type: Content of: <p>
-#: ../../skycultures/western/description.en.utf8:11
-msgid ""
-"<a "
-"href=\"http://wackymorningdj.users.sourceforge.net/ha_rey_stellarium.zip\" "
-"class='external text' rel=\"nofollow\">Asterisms by H.A. Rey</a>, from his "
-"book \"The Stars: A New Way To See Them\", by <a class='external text' "
-"href=\"http://sourceforge.net/users/wackymorningdj/\" rel=\"nofollow\">Mike "
-"Richards</a>."
-msgstr ""
-"<a "
-"href=\"http://wackymorningdj.users.sourceforge.net/ha_rey_stellarium.zip\" "
-"class='external text' rel=\"nofollow\">Asterizmy od HA.Reya</a>, podľa knihy"
-" \"Hviezdy: Nový spôsob, ako na ne nazerať\" od <a class='external text' "
-"href=\"http://sourceforge.net/users/wackymorningdj/\" rel=\"nofollow\">Mikea"
-" Richardsa</a>."
-
-#. type: Content of: <p><p><ul><li>
-#: ../../skycultures/western/description.en.utf8:15
-#: ../../skycultures/western_SnT/description.en.utf8:14
-msgid ""
-"<a href=\"http://en.wikipedia.org/wiki/Constellation\" class='external text'"
-" title=\"http://en.wikipedia.org/wiki/Constellation\" "
-"rel=\"nofollow\">Constellation</a> article at Wikipedia"
-msgstr ""
-"<a href=\"http://en.wikipedia.org/wiki/Constellation\" class='external text'"
-" title=\"http://en.wikipedia.org/wiki/Constellation\" "
-"rel=\"nofollow\">Súhvezdia</a> článok na anglickej Wikipédii"
-
-#. type: Content of: <p><p><ul><li>
-#: ../../skycultures/western/description.en.utf8:16
-#: ../../skycultures/western_SnT/description.en.utf8:15
-msgid ""
-"<a href=\"http://en.wikipedia.org/wiki/Star_catalogue\" class='external "
-"text' title=\"http://en.wikipedia.org/wiki/Star catalogue\" "
-"rel=\"nofollow\">Star Catalogue</a> article at Wikipedia"
-msgstr ""
-"<a href=\"http://en.wikipedia.org/wiki/Star_catalogue\" class='external "
-"text' title=\"http://en.wikipedia.org/wiki/Star catalogue\" "
-"rel=\"nofollow\">Hviezdny katalóg</a> článok na anglickej Wikipédii"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/western/description.en.utf8:17
-msgid ""
-"<a "
-"href=\"http://hubblesource.stsci.edu/sources/illustrations/constellations/\""
-" class='external text' "
-"title=\"http://hubblesource.stsci.edu/sources/illustrations/constellations/\""
-" rel=\"nofollow\">Constellation image library</a> of the U.S. Naval "
-"Observatory and the Space Telescope Science Institute. Johannes Hevelius "
-"Engravings."
-msgstr ""
-"<a "
-"href=\"http://hubblesource.stsci.edu/sources/illustrations/constellations/\""
-" class='external text' "
-"title=\"http://hubblesource.stsci.edu/sources/illustrations/constellations/\""
-" rel=\"nofollow\">Knižnica obrázkov súhvezdí</a> z Amerického námorného "
-"observatória (USNO) a Vedeckého inštitútu vesmírneho ďalekohľadu (STSI). "
-"Rytiny Johannesa Heveliusa."
-
-#. type: Content of: <h1>
-#: ../../skycultures/western_SnT/description.en.utf8:1
-msgid "Sky & Telescope"
-msgstr "Sky & Telescope"
-
-#. type: Content of: <p>
-#: ../../skycultures/western_SnT/description.en.utf8:2
-msgid ""
-"Western sky culture is used internationally by modern astronomers, and is "
-"the official scheme of The International Astronomical Union.  It has "
-"historical roots in Ancient Greek astronomy, with influences from Islamic "
-"astronomy.  The constellation figures and star names come from Sky & "
-"Telescope's definitions, and should be familiar to users of Sky & "
-"Telescope's Pocket Sky Atlas, Sky Atlas 2000.0, and the figures in Sky & "
-"Telescope magazine."
-msgstr ""
-"Západná kultúra oblohy je medzinárodne používaná modernými astronómami a je "
-"oficiálnou schémou Medzinárodnej astronomickej únie. Má historické korene v "
-"starovekej gréckej astronómii, s vplyvom islamskej astrnómie. Obrázky "
-"súhvezdí a mená hviezd pochádzajú z definícií Sky & Telescope a mali by byť "
-"povedomé pre užívateľov Vreckového atlasu oblohy Sky & Telescope, Atlasu "
-"oblohy 2000.0 a obrázkov v časopise  Sky & Telescope."
-
-#. type: Content of: <p><p>
-#: ../../skycultures/western_SnT/description.en.utf8:7
-msgid ""
-"Note: the Sky & Telescope sky culture does not provide constellation lines "
-"for Microscopium or Mensa."
-msgstr ""
-"Poznámka: Kultúra oblohy Sky & Telescope neobsahuje čiary súhvezdí pre "
-"Mikroskop a Stolovú horu."
-
-#. type: Content of: <p><p>
-#: ../../skycultures/western_SnT/description.en.utf8:10
-msgid ""
-"The method used by Sky & Telescope to determine star names is detailed in "
-"the included <i>SnT_star_names.docx</i> file."
-msgstr ""
-"Metóda na určenie mien hviezd používaná Sky & Telescope je detailne popísaná"
-" v priloženom súbore <i>SnT_star_names.docx</i>."
-
-#. type: Content of: <p><p><ul><li>
-#: ../../skycultures/western_SnT/description.en.utf8:13
-msgid ""
-"<a href=\"https://www.skyandtelescope.com\" class='external text' "
-"title=\"Sky & Telescope\" rel=\"nofollow\">Sky & Telescope</a> homepage"
-msgstr ""
-"<a href=\"https://www.skyandtelescope.com\" class='external text' "
-"title=\"Sky & Telescope\" rel=\"nofollow\">Sky & Telescope</a> domovská "
-"stránka"
-
-#. type: Content of: <p><p><ul><li>
-#: ../../skycultures/western_SnT/description.en.utf8:16
-msgid ""
-"<a href=\"http://www.iau.org/public/constellations/\" class='external text' "
-"title=\"http://www.iau.org/public/constellations\" rel=\"nofollow\">Official"
-" IAU constellation information</a>"
-msgstr ""
-"<a href=\"http://www.iau.org/public/constellations/\" class='external text' "
-"title=\"http://www.iau.org/public/constellations\" "
-"rel=\"nofollow\">Oficiálne informácie IAU o súhvezdiach</a>"
-
-#. type: Content of: <h1>
-#: ../../skycultures/western_hlad/description.en.utf8:1
-msgid "Western (O.Hlad)"
-msgstr "Západná (O.Hlad)"
-
-#. type: Content of: <p>
-#: ../../skycultures/western_hlad/description.en.utf8:3
-msgid "Constellations according to classical Czech publication:"
-msgstr "Súhvezdia podľa klasickej českej knihy:"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/western_hlad/description.en.utf8:6
-msgid ""
-"Hlad, Hovorka, Polechová, Weiselová (1988): <em>Hvězdná obloha 2000.0</em>. "
-"Praha: Geodetický a kartografický podnik."
-msgstr ""
-"Hlad, Hovorka, Polechová, Weiselová (1988): <em>Hvězdná obloha 2000.0</em>. "
-"Praha: Geodetický a kartografický podnik."
-
-#. type: Content of: <p>
-#: ../../skycultures/western_hlad/description.en.utf8:9
-msgid "Another (rather similar) Czech and Slovak references are:"
-msgstr "Ďalšie (dosť podobné) české a slovenské zdroje sú:"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/western_hlad/description.en.utf8:12
-msgid ""
-"Hlad, Hovorka, Sojka, Weiselová (2000): <em>Atlas Coeli Novus 2000.0</em>. "
-"Praha: Hvězdárna a planetárium hl. m. Prahy, ETC publishing."
-msgstr ""
-"Hlad, Hovorka, Sojka, Weiselová (2000): <em>Atlas Coeli Novus 2000.0</em>. "
-"Praha: Hvězdárna a planetárium hl. m. Prahy, ETC publishing."
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/western_hlad/description.en.utf8:13
-msgid ""
-"Pittich, Kalmančok (1981): <em>Obloha na dlani</em>. Bratislava: Obzor."
-msgstr ""
-"Pittich, Kalmančok (1981): <em>Obloha na dlani</em>. Bratislava: Obzor."
-
-#. type: Content of: <p>
-#: ../../skycultures/western_hlad/description.en.utf8:19
-msgid ""
-"Constellation lines are designed so they mostly connect stars with Greek-"
-"letter (α, β, γ, ...) designations, brightest, or at least similarly bright "
-"stars, and especially if they form a mnemotechnic figure (like 'W' in case "
-"of Cas, or 'hurdles-runner' instead of Vir).  We usually do <em>not</em> use"
-" 5th magnitude stars, because they are difficult to spot in towns affected "
-"by light pollution.  The resulting figures are also a bit simpler and "
-"easier-to-remember for children.  We use these constellations at the "
-"Observatory and Planetarium Hradec Králové (<a "
-"href=\"http://www.astrohk.cz\">http://www.astrohk.cz</a>)."
-msgstr ""
-"Čiary súhvezdí sú navrhnuté tak, aby väčšinou spájali hviezdy značené "
-"gréckymi písmenami (α, β, γ, ...), najjasnejšie alebo aspoň podobne jasné "
-"hviezdy, hlavne, ak vytvárajú mnemotechnické obrazce (ako písmeno 'W' v "
-"prípade Cas, alebo 'bežca cez prekážky' miesto Vir). Zvyčajne "
-"<em>nepoužívame</em> hviezdy 5. veľkosti, pretože ich veľmi ťažko pozorovať "
-"v mestách postihnutých svetelným znečistením. Výsledné obrazce sú o niečo "
-"jednoduchšie a ľahšie zapamätateľné pre deti. Tieto súhvezdia používame na "
-"Hvezdárni a planetáriu v Hradci Králové (<a "
-"href=\"http://www.astrohk.cz\">http://www.astrohk.cz</a>)."
-
-#. type: Content of: <p>
-#: ../../skycultures/western_hlad/description.en.utf8:28
-msgid ""
-"Notes: UMa is taken from Pittich and Kalmančok (1981); M81 and M82 galaxies "
-"are just behind Bear's head.  Gem is a similar case.  Cam seems upside-down "
-"with respect to a mythological figure, but HIP 29997, 33694 stars are indeed"
-" brighter."
-msgstr ""
-"Poznámky: UMa je zobraná z Pittich a Kalmančok (1981); galaxie M81 a M82 sú "
-"hneď za uchom Medvedice. Gem je podobný prípad. Cam sa zdá byť hore nohami "
-"vzhľadom na mytologickú postavu, ale hviezdy HIP 29997 a 33694 sú v "
-"skutočnosti jasnejšie."
-
-#. type: Content of: <h2>
-#: ../../skycultures/western_hlad/description.en.utf8:33
-msgid "Updates"
-msgstr "Aktualizácie"
-
-#. type: Content of: <p>
-#: ../../skycultures/western_hlad/description.en.utf8:35
-msgid "Version 1.0 for Stellarium 0.13.1"
-msgstr "Verzia 1.0 pre Stellarium 0.13.1"
-
-#. type: Content of: <p>
-#: ../../skycultures/western_hlad/description.en.utf8:37
-msgid ""
-"Future updates should be available at <a "
-"href=\"http://sirrah.troja.mff.cuni.cz/~mira/souhvezdi/\">http://sirrah.troja.mff.cuni.cz/~mira/souhvezdi/</a>"
-msgstr ""
-"Ďalšie aktualizácie by mali byť dostupné na <a "
-"href=\"http://sirrah.troja.mff.cuni.cz/~mira/souhvezdi/\">http://sirrah.troja.mff.cuni.cz/~mira/souhvezdi/</a>"
-
-#. type: Content of: <h1>
-#: ../../skycultures/western_rey/description.en.utf8:1
-msgid "Western: H.A. Rey"
-msgstr "Západná (H.A.Rey)"
-
-#. type: Content of: <p>
-#: ../../skycultures/western_rey/description.en.utf8:5
-msgid ""
-"During the 19th century the use and further editions of richly illustrated "
-"atlases with sumptuously engraved mythological figures fell out of fashion. "
-"The stars of the constellations in atlases of that time started to be shown "
-"connected with line patterns (\"stick figures\"), which however appear "
-"sometimes only to have been used to indicate which stars belong to which "
-"constellation.  Over several decades the figures had ceased to resemble the "
-"figures they were named after and appeared incomprehensible to beginning "
-"stargazers in the middle of the 20th century."
-msgstr ""
-"V 19. storočí vyšlo z módy používanie nových edícií bohato ilustrovaných "
-"atlasov s prepychovými rezbami mytologických postáv. Hviezdy súhvezdí v "
-"atlasoch tej doby sa začali zobrazovať spojené do čiarových vzorov "
-"(\"paličkové postavy\"), ktoré však vyzerali, že boli použité len na "
-"znázornenie, ktorá hviezda patrí do ktorého súhvezdia. Počas niekoľkých "
-"desaťročí sa prestali ponášať na postavy, podľa ktorých boli pomenované a "
-"pre začínajúcich pozorovateľov oblohy sa uprostred 20. storočia stali "
-"nezrozumiteľnými."
-
-#. type: Content of: <p>
-#: ../../skycultures/western_rey/description.en.utf8:16
-msgid ""
-"H. A. Rey (Hans Augusto Reyersbach) (1898-1977), an artist and author of "
-"children's books of German descent but emigrated to the USA, published his "
-"answer to this problem in 1952 with the book <em>The Stars - A New Way To "
-"See Them</em>."
-msgstr ""
-"H. A. Rey (Hans Augusto Reyersbach) (1898-1977), umelec a spisovateľ "
-"detských kníh nemeckého pôvodu, ktorý emigroval do USA, vydal v r. 1952 "
-"knihu <em>Hviezdy - Nový spôsob, ako sa na ne pozerať</em>, ako svoju "
-"odpoveď na tento problém."
-
-#. type: Content of: <h2>
-#: ../../skycultures/western_rey/description.en.utf8:22
-msgid "The Constellations"
-msgstr "Súhvezdia"
-
-#. type: Content of: <p>
-#: ../../skycultures/western_rey/description.en.utf8:24
-msgid ""
-"In this book, which has become very popular especially in the US, Rey "
-"connected the stars of every constellation \"in such a way that the "
-"resulting shape makes sense.\" What surprised him was \"that nobody has done"
-" it before. The basic idea is so simple.\""
-msgstr ""
-"V tejto knihe, ktorá sa stala hlavne v USA veľmi populárna, Rey spojil "
-"hviezdy každého súhvezdia \"takým spôsobom, aby výsledný obrazec dával "
-"zmysel.\" Prekvapilo ho, že \"to nikto predtým neurobil. Základná myšlienka "
-"je taká jednoduchá.\""
-
-#. type: Content of: <p>
-#: ../../skycultures/western_rey/description.en.utf8:29
-msgid ""
-"Rey's new stick figures make it indeed very simple to recognize the depicted"
-" constellation figures. Rey's work does not include figurative artwork, "
-"therefore this sky culture deliberately only comes with Rey's original stick"
-" figures.  The constellation names were also always given in English by Rey."
-" If you switch to \"Native\" name display mode, you may see exactly the "
-"spelling used in his book. Also the stars named here are limited to those "
-"included in the book."
-msgstr ""
-"Reyove nové paličkové postavy naozaj umožňovali ľahko si predstaviť "
-"zobrazené súhvezdia. Jeho práca neobsahovala figuratívne kresby, preto táto "
-"kultúra hviezdnej oblohy obsahuje len jeho originálne paličkové postavy. "
-"Mená súhvezdí boli ním preložené do angličtiny. Ak si nastavíte režim "
-"zobrazenia na \"Natívny\", uvidíte priamo pôvodné názvy z jeho knihy. "
-"Hviezdy, ktoré sú tu zobrazené, sú obmedzené len na tie, z jeho knihy."
-
-#. type: Content of: <h2>
-#: ../../skycultures/western_rey/description.en.utf8:37
-msgid "Rey's Figures and the Classic Constellations"
-msgstr "Reyove obrazce a klasické súhvezdia"
-
-#. type: Content of: <p>
-#: ../../skycultures/western_rey/description.en.utf8:39
-msgid ""
-"Rey's constellations adhere to the tradition of the Western sky culture and "
-"describes the 88 officially acknowledged constellations, with addition of "
-"asterisms of the two Dippers and the \"Great Square\" (of Pegasus).  "
-"However, at several points Rey's figures deviate from the canonical figures "
-"described since Ptolemy's Almagest (2nd century AD), where also positions of"
-" the stars in their constellations had been described in their names. For "
-"example,"
-msgstr ""
-"Reyove súhvezdia sa pridržiavajú tradície západnej kultúry oblohy a popisujú"
-" 88 oficiálne uznaných súhvezdí, s pridaním asterizmov dvoch Vozov a Veľkého"
-" (pegasovho) štvorca. Napriek tomu sa niektoré Reyove obrazce odlišujú od "
-"kánonických postáv popisovaných už od Ptolemajovho Almagestu (2. stor. "
-"n.l.), kde boli okrem polôh hviezd v súhvezdiach zapísané aj ich mená. "
-"Napríklad:"
-
-#. type: Content of: <p><ul><li>
-#: ../../skycultures/western_rey/description.en.utf8:47
-msgid ""
-"Rey inverted the figure of the Great Bear (<em>Ursa Major</em>)  to look "
-"like a polar bear scenting prey.  This on one hand does not have the usual "
-"problem to explain its long tail. On the other hand, the bear is not shown "
-"to walk around the pole in this orientation."
-msgstr ""
-"Rey otočil obrazec Veľkej medvedice (<em>Ursa Major</em>), aby vyzeral, ako "
-"polárny medveď snoriaci za korisťou. Takto na jednej strane nemal zvyčajný "
-"problém vysvetliť jej dlhý chvost. Na druhej strane, medvedica v tejto "
-"orientácii nekráča okolo pólu."
-
-#. type: Content of: <p><ul><li>
-#: ../../skycultures/western_rey/description.en.utf8:53
-msgid ""
-"The Bull (<em>Taurus</em>), only the front of which is shown with long "
-"upright horns in usual depictions, is shown with a complete body including "
-"its tail, with horns stretched wide like those of a buffalo. Its bright eye "
-"<em>Aldebaran</em> now lies in its neck."
-msgstr ""
-"Býk (<em>Taurus</em>). V zvyčajných zobrazeniach je naznačený len predok so "
-"vztýčenými rohmi, tu je celé telo vrátane chvosta a rohy sa rozširujú "
-"podobne, ako u bizónov. Jeho jasné oko <em>Aldebaran</em> teraz leží v jeho "
-"krku."
-
-#. type: Content of: <p><ul><li>
-#: ../../skycultures/western_rey/description.en.utf8:58
-msgid ""
-"The head of <em>Hercules</em> is usually next to the head of "
-"<em>Ophiuchus</em>, the serpent holder, and the four stars known as "
-"\"keystone\" form his body. Rey makes his head out of the keystone, and the "
-"star that usually marks the hero's head is now one of his feet."
-msgstr ""
-"Hlava <em>Herkula</em> je zvyčajne blízko hlavy <em>Hadonosa</em> a štyri "
-"hviezdy, známe ako základný kameň, tvoria jeho telo. Rey jeho hlavu vytvoril"
-" zo základného kameňa a hviezdy, ktoré zvyčajne tvoria hlavu hrdinu, sú "
-"teraz jednou z jeho nôh."
-
-#. type: Content of: <p><ul><li>
-#: ../../skycultures/western_rey/description.en.utf8:63
-msgid ""
-"The Whale (<em>Cetus</em>) has been turned around, its former mouth now "
-"forming a tail fin."
-msgstr ""
-"Veľryba (<em>Cetus</em>) bola otočená, jej bývalá hlava tvorí teraz "
-"chvostovú plutvu."
-
-#. type: Content of: <p><ul><li>
-#: ../../skycultures/western_rey/description.en.utf8:66
-msgid "<em>Pegasus</em> exchanged feet and head."
-msgstr "<em>Pegas</em> má vymenené nohy a hlavu."
-
-#. type: Content of: <p><ul><li>
-#: ../../skycultures/western_rey/description.en.utf8:68
-msgid ""
-"<em>Bootes</em>, the herdsman, is shown sitting and smoking a pipe (no trace"
-" of political correctness in a children's book of the 1950s... :-)"
-msgstr ""
-"<em>Bootes</em>, pastier je zobrazený sediaci a fajčiaci fajku (ani stopa "
-"politickej korektnosti v detskej knihe z päťdesiatich rokov minulého "
-"storočia... :-)"
-
-#. type: Content of: <ul><li>
-#: ../../skycultures/western_rey/description.en.utf8:75
-msgid "<a href=\"http://en.wikipedia.org/wiki/H._A._Rey\">H.A.Rey (Wikipedia)</a>"
-msgstr ""
-"<a href=\"http://en.wikipedia.org/wiki/H._A._Rey\">H.A.Rey (anglická "
-"Wikipédia)</a>"
-
-#. type: Content of: <p>
-#: ../../skycultures/western_rey/description.en.utf8:80
-msgid ""
-"This sky culture used to be for a long time an easy user-installable addon "
-"example contributed by Mike Richards.  It has been reworked following the "
-"41st reprint and completed with this description by Georg Zotti."
-msgstr ""
-"Táto kultúra hviezdnej oblohy bývala dlho ľahko užívateľsky inštalovateľným "
-"príkladom doplnku od Mikea Richardsa. Georg Zotti ju prepracoval podľa 41. "
-"vydania a doplnil popisom."
 
 #. type: Content of: <h2>
 #: ../../skycultures/xhosa/description.en.utf8:1

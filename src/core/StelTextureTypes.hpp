@@ -28,7 +28,7 @@
 class StelTexture;
 
 //! @typedef StelTextureSP
-//! Use shared pointer to simplify memory managment.
+//! Use shared pointer to simplify memory management.
 typedef QSharedPointer<StelTexture> StelTextureSP;
 
 #endif // STELTEXTURETYPES_HPP

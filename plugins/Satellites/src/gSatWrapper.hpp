@@ -84,7 +84,7 @@ public:
 
 	// Operation getAltAz
 	//! @brief This operation compute the coordinates in StelCore::FrameAltAz
-	//! @return Vect3d Vector with coordinates (meassured in km)
+	//! @return Vect3d Vector with coordinates (measured in km)
 	//! @par References
 	//!  Orbital Coordinate Systems, Part II
 	//!   Dr. T.S. Kelso
@@ -129,7 +129,7 @@ public:
 	// Operation calcObserverECIPosition
 	//! @brief This operation computes the observer ECI coordinates in Geocentric
 	//! Equatorial Coordinate System (IJK) for the ai_epoch time.
-        //! This position can be asumed as observer position in TEME framework without an appreciable error.
+        //! This position can be assumed as observer position in TEME framework without an appreciable error.
         //! ECI axis (IJK) are parallel to StelCore::EquinoxEQ Framework but centered in the earth centre
         //! instead the observer position.
 	//! @par References

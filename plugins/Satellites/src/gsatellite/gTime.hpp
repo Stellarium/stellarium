@@ -41,7 +41,7 @@ static const double JDAY_JAN1_12H_1900 = 2415020.0; // Jan 1.5 1900 = Jan 1 1900
 static const double JDAY_JAN1_12H_2000 = 2451545.0; // Jan 1.5 2000 = Jan 1 2000 12h UTC
 static const double JDAY_JAN1_00H_1970 = 2440587.5;
 
-static const double OMEGA_E = 1.002737909350795; // earth rotation per sideral day
+static const double OMEGA_E = 1.002737909350795; // earth rotation per sidereal day
 
 static const int KSEC_PER_MIN = 60;
 static const int KSEC_PER_HR  = 3600;
@@ -55,7 +55,7 @@ class gTimeSpan
 {
 public:
 	// Constructors
-	gTimeSpan(double timeSpanSrc = 0); // timeSpanSrc is mesured in days and fraction of day
+	gTimeSpan(double timeSpanSrc = 0); // timeSpanSrc is measured in days and fraction of day
 	gTimeSpan(long lDays, int nHours, int nMins, double nSecs);
 
 	gTimeSpan(const gTimeSpan& timeSpanSrc);
@@ -195,21 +195,21 @@ public:
 	//////////////////////////////////////
 
 	// Operation  getCurrentTime();
-	//! @brief Returns a gTime object setted with the actual machine time.
+	//! @brief Returns a gTime object set with the actual machine time.
 	//! @warning This method works with the operating system function time. So it doesn't support seconds fractions
 	//! @return
 	//!    gTime Object assigned with real machine time.
 	static gTime     getCurrentTime();
 
 	// Operation  getTimeToUTC();
-	//! @brief Returns a gTimeSpan object setted with the Local Time Span setted in the machine.
+	//! @brief Returns a gTimeSpan object set with the Local Time Span set in the machine.
 	//! @return
 	//!    gTimeSpan Object assigned with the real machine GMT Diff.
 	static gTimeSpan getTimeToUTC();
 
 	// Operation: isLeapYear
 	//! @brief Leap Year Calculation.
-	//! @details  This Operation use the standart algorithm to
+	//! @details  This Operation uses the standard algorithm to
 	//!     calculate Leap Years. Reference: http://en.wikipedia.org/wiki/Leap_year
 	//! @param ai_year Year number
 	//! @return true if ai_year is a Leap Year

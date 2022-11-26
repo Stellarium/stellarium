@@ -66,7 +66,7 @@ public:
 	//! Get information about the plugin.
 	virtual StelPluginInfo getPluginInfo() const = 0;
 
-	//! A mechanism to provide abitrary QObjects to the StelModuleMgr.
+	//! A mechanism to provide arbitrary QObjects to the StelModuleMgr.
 	//! Introduced to provide some limited form of inter-plugin communication.
 	//! If you do not need this, return an empty list.
 	//!

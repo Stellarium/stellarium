@@ -987,7 +987,7 @@ void Exoplanets::downloadComplete(QNetworkReply *reply)
 	{
 		qWarning() << "[Exoplanets] Download error: While trying to access"
 			   << reply->url().toString()
-			   << "the following error occured:"
+			   << "the following error occurred:"
 			   << reply->errorString();
 
 		reply->deleteLater();

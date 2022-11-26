@@ -288,7 +288,7 @@ public slots:
 	//! @note This should be used with caution. Usually you want to use addToExtraInfoString().
 	//! @note: If this breaks some const declaration, you can use StelObjectMgr::setExtraInfoString() instead.
 	virtual void setExtraInfoString(const InfoStringGroup& flags, const QString &str);
-	//! Add str to the extra string. This should be preferrable over hard setting.
+	//! Add str to the extra string. This should be preferable over hard setting.
 	//! Can be used by plugins to show extra info for the selected object, or for debugging.
 	//! The strings will be shown in the InfoString for the selected object, below the default fields per-flag.
 	//! Additional coordinates not fitting into one of the predefined coordinate sets should be flagged with OtherCoords,

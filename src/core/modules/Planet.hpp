@@ -716,7 +716,7 @@ protected:
 					 // To get heliocentric coordinates, use getHeliocentricEclipticPos()
 	Vec3d eclipticVelocity;          // Speed in AU/d in the rectangular ecliptic coordinate system (J2000) around the parent body.
 					 // NEW FEATURE in late 2017. For now, this may be 0/0/0 when we are not yet able to compute it.
-					 // to get velocity, preferrably read getEclipticVelocity() and getHeliocentricEclipticVelocity()
+					 // to get velocity, preferably read getEclipticVelocity() and getHeliocentricEclipticVelocity()
 					 // The "State Vector" [Heafner 1999] can be formed from (JDE, eclipticPos, eclipticVelocity)
 	Vec3d aberrationPush;            // 0.21.2+: a small displacement to be applied if aberred positions are requested.
 	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen. We need double for moons. Observe Styx from Pluto w/o atmosphere to see that.

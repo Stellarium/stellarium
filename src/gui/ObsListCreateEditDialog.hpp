@@ -93,7 +93,7 @@ private:
 			 const QString &ra, const QString &dec, const QString &magnitude, const QString &constellation,
 			 const QString &date, const QString &location, const QString &landscapeID);
 
-	//! Save the object informations into json file
+	//! Save the object information into json file
 	void saveObservedObjectsInJsonFile();
 
 	//! Load the observing list in case of edit mode

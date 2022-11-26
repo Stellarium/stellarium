@@ -267,7 +267,7 @@ void StelSkyDrawer::update(double)
 
 	if (getFlagHasAtmosphere() && core->getJD()>2387627.5) // JD given is J1825.0; ignore Bortle scale index before that.
 	{
-        // GZ: Light pollution must take global atmosphere setting into acount!
+        // GZ: Light pollution must take global atmosphere setting into account!
         // moved parts from setBortleScale() here
         // This formula is a fit to a set of values calibrated by hand, looking at the faintest star in stellarium at around 40 deg FOV.
         // It should roughly match the scale described at http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
@@ -478,7 +478,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
 		return false;
 
-	const float radius = rcMag.radius;
+	const float radius = rcMag.radius * static_cast<float>(sPainter->getProjector()->getDevicePixelsPerPixel());
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	const float frand=StelApp::getInstance().getRandF();
 #else

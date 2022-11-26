@@ -89,6 +89,9 @@ ELSE()
          SET(QT_VERSION_MAJOR 5)
      ENDIF()
 ENDIF()
+# This will tell QXlsx to use the same Qt version (5 vs 6) as we do.
+# https://github.com/Stellarium/stellarium/pull/2849
+LIST(PREPEND CMAKE_PREFIX_PATH ${Qt${QT_VERSION_MAJOR}_DIR})
 # TODO: Check real minimal supported version of GPSD API
 SET(MINIMAL_GPS_API_VERSION "6.0")
 
@@ -119,6 +122,7 @@ MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM} (${CMAKE_SYSTEM_PROCESSOR})")
 ########### Main global variables ###########
 SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
 SET(ENABLE_LTO 0 CACHE BOOL "Define whether the Link Time Optimization should be activated.")
+SET(ENABLE_PCH 1 CACHE BOOL "Define whether to use precompiled headers.")
 
 IF(NOT CMAKE_BUILD_TYPE)
      SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind ASan UBSan Release RelWithDebInfo MinSizeRel." FORCE)
@@ -146,6 +150,7 @@ IF(STELLARIUM_RELEASE_BUILD)
      SET(WINDOWS_PACKAGE_VERSION "${VERSION}.0")
      SET(ISS_PACKAGE_VERSION "${STELLARIUM_PUBLIC_VERSION}")
      SET(STELLARIUM_BUNDLE_VERSION "${STELLARIUM_PUBLIC_VERSION}")
+     SET(STELLARIUM_BUIDING_VERSION "${STELLARIUM_PUBLIC_VERSION}")
 ELSE()
      SET(SERIES "head")
      ########### Get revision number for non-release builds ###########
@@ -173,7 +178,6 @@ ELSE()
                STRING(SUBSTRING ${GIT_REVISION} 0 7 REVISION)
                SET(PACKAGE_VERSION "${VERSION}-${REVISION}")
 	       SET(ISS_PACKAGE_VERSION "${STELLARIUM_PUBLIC_VERSION}-${REVISION}")
-	       SET(STELLARIUM_BUNDLE_VERSION "${STELLARIUM_PUBLIC_VERSION}-${REVISION}")
                ADD_DEFINITIONS(-DGIT_REVISION="${REVISION}")
                ADD_DEFINITIONS(-DGIT_BRANCH="${GIT_BRANCH}")
                # check to use --depth param...
@@ -189,12 +193,13 @@ ELSE()
           STRING(TIMESTAMP TODAY "%j%H%M")
 	  SET(PACKAGE_VERSION "${VERSION}-${TODAY}")
 	  SET(ISS_PACKAGE_VERSION "${STELLARIUM_PUBLIC_VERSION}-${TODAY}")
-	  SET(STELLARIUM_BUNDLE_VERSION "${STELLARIUM_PUBLIC_VERSION}-${TODAY}")
           ADD_DEFINITIONS(-DGIT_REVISION="${TODAY}")
           ADD_DEFINITIONS(-DGIT_BRANCH="tarball")
-     ENDIF()     
+     ENDIF()
+     SET(STELLARIUM_BUIDING_VERSION "${STELLARIUM_PUBLIC_VERSION}+")
+     SET(STELLARIUM_BUNDLE_VERSION "${STELLARIUM_PUBLIC_VERSION}+")
 ENDIF()
-MESSAGE(STATUS "Building ${PROJECT_NAME} ${STELLARIUM_PUBLIC_VERSION} (v${PACKAGE_VERSION}; Mode: ${CMAKE_BUILD_TYPE})")
+MESSAGE(STATUS "Building ${PROJECT_NAME} ${STELLARIUM_BUIDING_VERSION} (v${PACKAGE_VERSION}; Mode: ${CMAKE_BUILD_TYPE})")
 
 # Write version and series of Stellarium to Stellarium User Guide
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
@@ -818,26 +823,21 @@ IF(ENABLE_XLSX)
      # TODO: switch to something like vcpkg or conan, and plain find_package,
      # without the fallback of cmake downloading the dep itself.
      # But some libraries are not available there yet.
-     CPMFindPackage(NAME QXlsx
-	 URL https://github.com/QtExcel/QXlsx/archive/refs/tags/v1.4.4.zip
-	 URL_HASH SHA256=3efbd6f63a1ffd521c535dce7b5a5a7e9ebd23db51e6ae8e3e2eb89796e57675
-	 DOWNLOAD_ONLY yes
-	 EXCLUDE_FROM_ALL ON
-	 SOURCE_SUBDIR QXlsx)
-     if(QXlsx_ADDED)
-	 # Can't use embedded CMakeLists.txt due to
-	 # https://github.com/QtExcel/QXlsx/issues/134
-	 file(GLOB_RECURSE QXLSX_FILES
-	     ${QXlsx_SOURCE_DIR}/QXlsx/source/*.cpp
-	     ${QXlsx_SOURCE_DIR}/QXlsx/header/*.h)
-	 add_library(QXlsx STATIC EXCLUDE_FROM_ALL ${QXLSX_FILES})
-	 target_link_libraries(QXlsx PUBLIC
-	     Qt${QT_VERSION_MAJOR}::Core
-	     Qt${QT_VERSION_MAJOR}::Gui
-	     Qt${QT_VERSION_MAJOR}::GuiPrivate)
-	 target_include_directories(QXlsx PUBLIC ${QXlsx_SOURCE_DIR}/QXlsx/header)
-	 add_library(QXlsx::QXlsx ALIAS QXlsx)
-     endif()
+
+     # Version 1.4.4 exports "QXlsx", but future (unreleased as of 10 Nov 2022)
+     # version exports "QXlsxQt5" (or ...Qt6) instead. Try both, but
+     # download newer one, because 1.4.4 doesn't link on windows when
+     # added via add_subdirectory().
+     FIND_PACKAGE(QXlsx NAMES QXlsxQt${QT_VERSION_MAJOR} QXlsx)
+     IF(QXlsx_FOUND)
+         MESSAGE(STATUS "Using system-provided QXlsx ${QXlsx_VERSION}")
+     ELSE()
+         CPMAddPackage(NAME QXlsxQt${QT_VERSION_MAJOR}
+             URL https://github.com/QtExcel/QXlsx/archive/bdda6568230ae8fc199ffcc88c598ce42d77a311.zip
+             #URL_HASH SHA256=3efbd6f63a1ffd521c535dce7b5a5a7e9ebd23db51e6ae8e3e2eb89796e57675
+             EXCLUDE_FROM_ALL ON
+             SOURCE_SUBDIR QXlsx)
+     ENDIF()
 ENDIF()
 
 ########### Set some global variables ###########

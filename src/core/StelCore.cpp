@@ -49,6 +49,7 @@
 #include <QFile>
 #include <QDir>
 #include <QRegularExpression>
+#include <QOpenGLShaderProgram>
 
 #include <iostream>
 #include <fstream>
@@ -358,7 +359,7 @@ QString StelCore::getDefaultProjectionTypeKey() const
 }
 
 // Get the shared instance of StelGeodesicGrid.
-// The returned instance is garanteed to allow for at least maxLevel levels
+// The returned instance is guaranteed to allow for at least maxLevel levels
 const StelGeodesicGrid* StelCore::getGeodesicGrid(int maxLevel) const
 {
 	if (geodesicGrid==Q_NULLPTR)
@@ -534,7 +535,7 @@ void StelCore::updateMaximumFov()
 {
 	const float savedFov = currentProjectorParams.fov;
 	currentProjectorParams.fov = 0.0001f;	// Avoid crash
-	const float newMaxFov = getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())))->getMaxFov();
+	const float newMaxFov = getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity(),Mat4d::identity())))->getMaxFov();
 	movementMgr->setMaxFov(static_cast<double>(newMaxFov));
 	currentProjectorParams.fov = qMin(newMaxFov, savedFov);
 }
@@ -688,7 +689,7 @@ QString StelCore::getDefaultLocationID() const
 QString StelCore::projectionTypeKeyToNameI18n(const QString& key) const
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType"));
-	QString s(getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())), static_cast<ProjectionType>(en.keyToValue(key.toLatin1())))->getNameI18());
+	QString s(getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity(),Mat4d::identity())), static_cast<ProjectionType>(en.keyToValue(key.toLatin1())))->getNameI18());
 	return s;
 }
 
@@ -697,7 +698,7 @@ QString StelCore::projectionNameI18nToTypeKey(const QString& nameI18n) const
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType"));
 	for (int i=0;i<en.keyCount();++i)
 	{
-		if (getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())), static_cast<ProjectionType>(i))->getNameI18()==nameI18n)
+		if (getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity(),Mat4d::identity())), static_cast<ProjectionType>(i))->getNameI18()==nameI18n)
 			return en.valueToKey(i);
 	}
 	// Unknown translated name
@@ -857,7 +858,7 @@ Vec3d StelCore::heliocentricEclipticToEarthPosEquinoxEqu(const Vec3d& v) const
 StelProjector::ModelViewTranformP StelCore::getHeliocentricEclipticModelViewTransform(RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matHeliocentricEclipticJ2000ToAltAz));
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView,matHeliocentricEclipticJ2000ToAltAz));
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
 	refr->setPreTransfoMat(matHeliocentricEclipticJ2000ToAltAz);
@@ -869,7 +870,7 @@ StelProjector::ModelViewTranformP StelCore::getHeliocentricEclipticModelViewTran
 StelProjector::ModelViewTranformP StelCore::getObservercentricEclipticJ2000ModelViewTransform(RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matJ2000ToAltAz*matVsop87ToJ2000));
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView,matJ2000ToAltAz*matVsop87ToJ2000));
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
 	refr->setPreTransfoMat(matJ2000ToAltAz*matVsop87ToJ2000);
@@ -882,7 +883,7 @@ StelProjector::ModelViewTranformP StelCore::getObservercentricEclipticOfDateMode
 {
 	double eps_A=getPrecessionAngleVondrakCurrentEpsilonA();
 	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz* Mat4d::xrotation(eps_A)));
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView,matEquinoxEquToAltAz* Mat4d::xrotation(eps_A)));
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
 	refr->setPreTransfoMat(matEquinoxEquToAltAz* Mat4d::xrotation(eps_A));
@@ -894,7 +895,7 @@ StelProjector::ModelViewTranformP StelCore::getObservercentricEclipticOfDateMode
 StelProjector::ModelViewTranformP StelCore::getEquinoxEquModelViewTransform(RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz));
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView,matEquinoxEquToAltAz));
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
 	refr->setPreTransfoMat(matEquinoxEquToAltAz);
@@ -906,7 +907,7 @@ StelProjector::ModelViewTranformP StelCore::getEquinoxEquModelViewTransform(Refr
 StelProjector::ModelViewTranformP StelCore::getFixedEquatorialModelViewTransform(RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matFixedEquatorialToAltAz));
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView,matFixedEquatorialToAltAz));
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
 	refr->setPreTransfoMat(matFixedEquatorialToAltAz);
@@ -921,7 +922,7 @@ StelProjector::ModelViewTranformP StelCore::getAltAzModelViewTransform(Refractio
 	{
 		// Catch problem with improperly initialized matAltAzModelView
 		Q_ASSERT(matAltAzModelView[0]==matAltAzModelView[0]);
-		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView));
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView,Mat4d::identity()));
 	}
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
@@ -933,7 +934,7 @@ StelProjector::ModelViewTranformP StelCore::getAltAzModelViewTransform(Refractio
 StelProjector::ModelViewTranformP StelCore::getJ2000ModelViewTransform(RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu));
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView,matEquinoxEquToAltAz*matJ2000ToEquinoxEqu));
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
 	refr->setPreTransfoMat(matEquinoxEquToAltAz*matJ2000ToEquinoxEqu);
@@ -945,7 +946,7 @@ StelProjector::ModelViewTranformP StelCore::getJ2000ModelViewTransform(Refractio
 StelProjector::ModelViewTranformP StelCore::getGalacticModelViewTransform(RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matGalacticToJ2000));
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView,matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matGalacticToJ2000));
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
 	refr->setPreTransfoMat(matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matGalacticToJ2000);
@@ -957,7 +958,7 @@ StelProjector::ModelViewTranformP StelCore::getGalacticModelViewTransform(Refrac
 StelProjector::ModelViewTranformP StelCore::getSupergalacticModelViewTransform(RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==Q_NULLPTR || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matSupergalacticToJ2000));
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView,matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matSupergalacticToJ2000));
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
 	refr->setPreTransfoMat(matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matSupergalacticToJ2000);
@@ -1221,7 +1222,7 @@ void StelCore::moveObserverToSelected()
 	mmgr->setFlagTracking(false);
 }
 
-// Get the informations on the current location
+// Get the information on the current location
 const StelLocation& StelCore::getCurrentLocation() const
 {
 	return position->getCurrentLocation();
@@ -1475,7 +1476,7 @@ double StelCore::getSolutionEquationOfTime() const
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, pos);
 
-	// covert radians to degrees and reduce the angle, so that 0 <= angle < 360
+	// convert radians to degrees and reduce the angle, so that 0 <= angle < 360
 	const double alpha = StelUtils::fmodpos(ra*M_180_PI, 360.);
 
 	double deltaPsi, deltaEps;
@@ -2912,4 +2913,46 @@ Vec3d StelCore::getMouseJ2000Pos() const
 //		mousePosition.normalize();
 //	}
 	return mousePosition;
+}
+
+QByteArray StelCore::getAberrationShader() const
+{
+	return 1+R"(
+uniform vec3 STELCORE_currentPlanetHeliocentricEclipticVelocity;
+// objectDir points to the object as viewed from its comoving frame.
+// Return value represents the apparent direction to this object from a frame
+// that moves with respect to the object at slightly relativistic speeds (v<0.1c).
+// Relative error in aberration angle is about 0.5v/c.
+vec3 applyAberrationToObject(vec3 objectDir)
+{
+	vec3 velocity = STELCORE_currentPlanetHeliocentricEclipticVelocity;
+	return normalize(objectDir + velocity);
+}
+// viewDir is the direction where the object appears to be when viewed from a
+// frame that moves with respect to it at slightly relativistic speeds (v<0.1c).
+// Return value represents the direction to the object as viewed from its comoving frame.
+// Relative error in aberration angle is about 0.5v/c.
+vec3 applyAberrationToViewDir(vec3 viewDir)
+{
+	vec3 velocity = STELCORE_currentPlanetHeliocentricEclipticVelocity;
+	return normalize(viewDir - velocity);
+}
+)";
+}
+
+void StelCore::setAberrationUniforms(QOpenGLShaderProgram& program) const
+{
+	Vec3d velocity;
+	if(getUseAberration())
+	{
+		const auto p = getCurrentPlanet();
+		const auto hev = p->getHeliocentricEclipticVelocity();
+		velocity = StelCore::matVsop87ToJ2000 * hev;
+		velocity *= getAberrationFactor() * (AU/(86400.0*SPEED_OF_LIGHT));
+	}
+	else
+	{
+		velocity = Vec3d(0,0,0);
+	}
+	program.setUniformValue("STELCORE_currentPlanetHeliocentricEclipticVelocity", velocity.toQVector3D());
 }

@@ -48,21 +48,22 @@ credits=my institute (optional)
 boundaries=none
 classification=personal
 license=CC BY-SA 4.0 International Public License
+region=Western Europe
 \end{configfile}
 
 \noindent (or what seems best for you). The \texttt{name} is used for the list entry in
 the Starlore tab in the View dialog (see \ref{sec:gui:view:starlore}). \texttt{author} should be the actual author(s)' name(s). 
 The optional \texttt{credits} \newFeature{0.22.2} can be used to mention other involved parties. 
 
-\paragraph{boundaries}
-The option ``boundaries'' is optional and may contain the follow values:
+\subsection{Boundaries}
+The option ``boundaries'' is optional and may contain the following values:
 \begin{description}
-\item[none] --- this value is enabled by default and it designates that this culture doesn't have boundaries of constellations.
-\item[iau] --- use this value for variants of ``western'' cultures to enable using default (IAU) boundaries.
-\item[own] --- please use it for culture who has own set of boundaries for constellations.
+\item[none] --- (default) designates that this culture doesn't have constellation boundaries.
+\item[iau] --- use this value for variants of ``modern'' skycultures to enable use of IAU boundaries.
+\item[own] --- used for cultures which have their own set of constellation boundaries.
 \end{description}
 
-\paragraph{classification}
+\subsection{Classification}
 The option ``classification'' is also optional. \newFeature{0.19.0} It allows some form of quality control:
 \begin{description}
   \item[personal] -- this is a personally developed skyculture which
@@ -71,8 +72,8 @@ The option ``classification'' is also optional. \newFeature{0.19.0} It allows so
     approving its contents.
   \item[traditional] -- (default value) content represents ``common'' knowledge by
     several members of an ethnic community, and the skyculture has
-    been developed by members of such community. Our ``Western''
-    skyculture is a key example: it has evolved for about 2500 years,
+    been developed by members of such community. Our ``Modern''
+    skyculture is a key example: it has evolved for about 2500 years in the ``western'' world,
     and modern astronomers use it.
   \item[ethnographic] -- provided by ethnographic researchers based on
     interviews of indigenous people.
@@ -117,7 +118,7 @@ We recommend to use one of the following possible licenses in this section:
     it is a ``copyleft'' license that grants the right to freely copy, distribute, and transform creative works. You can specify, e.g., ``GPL2, FAL'' to indicate that the images are additionally released under Free Art License.
 \end{description}
 
-Creative Commons provides a range of licenses\footnote{Creative
+\noindent Creative Commons provides a range of licenses\footnote{Creative
   Commons License Chooser --
   \url{https://creativecommons.org/choose/}}, each of which grants
 different rights to use the materials licensed under them. All of
@@ -137,7 +138,6 @@ please describe the conditions sufficiently well in a dedicated
 \texttt{h2} section close to the end of your
 \file{description.en.utf8}.
 
-
 \paragraph{Caution for users!} While Stellarium is provided under the free GPL v2.0 licence which allows for commercial use,
 some of our skycultures have been contributed under CC NC/ND licenses,
 i.e., are for noncommercial use only.  Please respect their heritage
@@ -146,20 +146,103 @@ you use sky cultures in public events like TV documentaries, YouTube
 videos, lectures, planetarium shows or printed matter. If in doubt,
 contact the respective authors.
 
+\subsection{Region}
+The option ``region'' is also optional and marks the origin region of the respective skyculture. \newFeature{1.2}
+It allows some form of additional grouping. The names of regions are following the United Nations
+geoscheme UN~M49\footnote{Standard country or area codes for statistical use (M49) --- \url{https://unstats.un.org/unsd/methodology/m49/}}:
+\begin{description}
+	\item[Northern Africa] -- Algeria, Egypt, Libya, Morocco, Sudan, Tunisia, Western Sahara.
+	\item[Eastern Africa] -- British Indian Ocean Territory, Burundi, Comoros, Djibouti, Eritrea, Ethiopia, French Southern Territories, Kenya,
+          Madagascar, Malawi, Mauritius, Mayotte, Mozambique, Réunion, Rwanda, Seychelles, Somalia, South Sudan, Uganda, United Republic of Tanzania, Zambia, Zimbabwe.
+	\item[Central Africa] -- Angola, Cameroon, Central African Republic, Chad, Congo, Democratic Republic of the Congo, Equatorial Guinea, Gabon, Sao Tome and Principe.
+	\item[Southern Africa] -- Botswana, Eswatini, Lesotho, Namibia, South Africa.
+	\item[Western Africa] -- Benin, Burkina Faso, Cabo Verde, Côte d’Ivoire, Gambia, Ghana, Guinea, Guinea-Bissau, Liberia,
+          Mali, Mauritania, Niger, Nigeria, Saint Helena, Senegal, Sierra Leone, Togo.
+	\item[Caribbean] -- Anguilla, Antigua and Barbuda, Aruba, Bahamas, Barbados, Bonaire, Sint Eustatius and Saba, British Virgin Islands,
+          Cayman Islands, Cuba, Curaçao, Dominica, Dominican Republic, Grenada, Guadeloupe, Haiti, Jamaica, Martinique, Montserrat, Puerto Rico, Saint Barthélemy,
+          Saint Kitts and Nevis, Saint Lucia, Saint Martin (French Part), Saint Vincent and the Grenadines, Sint Maarten (Dutch part),
+          Trinidad and Tobago, Turks and Caicos Islands, United States Virgin Islands.
+	\item[Central America] -- Belize, Costa Rica, El Salvador, Guatemala, Honduras, Mexico, Nicaragua, Panama.
+	\item[Southern America] -- Argentina, Bolivia (Plurinational State of), Bouvet Island, Brazil, Chile, Colombia, Ecuador,
+          Falkland Islands (Malvinas), French Guiana, Guyana, Paraguay, Peru, South Georgia and the South Sandwich Islands, Suriname,
+          Uruguay, Venezuela (Bolivarian Republic of).
+	\item[Northern America] -- Bermuda, Canada, Greenland, Saint Pierre and Miquelon, United States of America.
+	\item[Antarctica] -- Antarctica.
+	\item[Northern Asia] -- Russian Federation (Asian part).
+	\item[Central Asia] -- Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan, Uzbekistan.
+	\item[Eastern Asia] -- China, Hong Kong Special Administrative Region of China, Macao Special Administrative Region of China,
+          Democratic People's Republic of Korea, Japan, Mongolia, Republic of Korea, Taiwan.
+	\item[South-eastern Asia] -- Brunei Darussalam, Cambodia, Indonesia, Lao People's Democratic Republic, Malaysia, Myanmar,
+          Philippines, Singapore, Thailand, Timor-Leste, Viet Nam.
+	\item[Southern Asia] -- Afghanistan, Bangladesh, Bhutan, India, Iran (Islamic Republic of), Maldives, Nepal, Pakistan, Sri Lanka.
+	\item[Western Asia] -- Armenia, Azerbaijan, Bahrain, Cyprus, Georgia, Iraq, Israel, Jordan, Kuwait, Lebanon, Oman, Qatar,
+          Saudi Arabia, State of Palestine, Syrian Arab Republic, Türkiye, United Arab Emirates, Yemen.
+	\item[Eastern Europe] -- Belarus, Bulgaria, Czechia, Hungary, Poland, Republic of Moldova, Romania, Russian Federation (European part), Slovakia, Ukraine.
+	\item[Northern Europe] -- Åland Islands, Channel Islands, Denmark, Estonia, Faroe Islands, Finland, Iceland, Ireland, Isle of Man, Latvia, Lithuania,
+          Norway, Svalbard and Jan Mayen Islands, Sweden, United Kingdom of Great Britain and Northern Ireland.
+	\item[Southern Europe] -- Albania, Andorra, Bosnia and Herzegovina, Croatia, Gibraltar, Greece, Holy See, Italy, Malta, Montenegro, North Macedonia, Portugal, San Marino, Serbia, Slovenia, Spain.
+	\item[Western Europe] -- Austria, Belgium, France, Germany, Liechtenstein, Luxembourg, Monaco, Netherlands, Switzerland.
+	\item[Australasia] -- Australia, Christmas Island, Cocos (Keeling) Islands, Heard Island and McDonald Islands, New Zealand, Norfolk Island.
+	\item[Melanesia] -- Fiji, New Caledonia, Papua New Guinea, Solomon Islands, Vanuatu.
+	\item[Micronesia] -- Guam, Kiribati, Marshall Islands, Micronesia (Federated States of), Nauru, Northern Mariana Islands, Palau, United States Minor Outlying Islands.
+	\item[Polynesia] -- American Samoa, Cook Islands, French Polynesia, Niue, Pitcairn, Samoa, Tokelau, Tonga, Tuvalu, Wallis and Futuna Islands.
+\end{description}
+
+For ``modern'' sky cultures we use the special region name \textbf{World} to define worldwide applicable data.
+
+\begin{figure}[htbp]
+	\centering\includegraphics[width=0.75\textwidth]{Africa-regions.png}
+	\caption{Africa: subregions as delineated by United Nations geographic classification scheme:
+          \ccboxdsc{1.0,0.65,0.0} Eastern Africa, \ccboxdsc{1.0,0.0,1.0} Central Africa, \ccboxdsc{0.0,0.0,1.0} Northern Africa,
+          \ccboxdsc{1.0,0.0,0.0} Southern Africa, \ccboxdsc{0.0,1.0,0.0} Western Africa. \emph{Wikipedia / CC BY-SA 3.0}}
+	\label{fig:skycultures:AfricaRegions}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering\includegraphics[width=0.75\textwidth]{Asia-regions.png}
+	\caption{Asia: subregions as delineated by United Nations geographic classification scheme: \ccboxdsc{0.0,0.0,1.0} Central Asia,
+          \ccboxdsc{1.0,0.0,0.0} Eastern Asia, \ccboxdsc{0.0,1.0,0.0} South-eastern Asia, \ccboxdsc{1.0,0.65,0.0} Southern Asia,
+          \ccboxdsc{1.0,1.0,0.0} Western Asia, \ccboxdsc{0.75,0.88,1.0} Northern Asia. \emph{Wikipedia / CC BY-SA 3.0}}
+	\label{fig:skycultures:AsiaRegions}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering\includegraphics[width=0.75\textwidth]{Europe-regions.png}
+	\caption{Europe: subregions as delineated by United Nations geographic classification scheme: \ccboxdsc{1.0,0.5,0.5} Eastern Europe,
+          \ccboxdsc{0.25,0.5,1.0} Northern Europe, \ccboxdsc{0.0,1.0,0.0} Southern Europe, \ccboxdsc{0.0,1.0,1.0} Western Europe. \emph{Wikipedia / CC BY-SA 3.0}}
+	\label{fig:skycultures:EuropeRegions}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering\includegraphics[width=0.7\textwidth]{Americas-regions.png}
+	\caption{Americas: subregions as delineated by United Nations geographic classification scheme: \ccboxdsc{0.0,1.0,1.0} Caribbean,
+          \ccboxdsc{0.0,1.0,0.0} Central America, \ccboxdsc{0.0,0.0,1.0} Northern America, \ccboxdsc{1.0,1.0,0.0} Southern America. \emph{Wikipedia / CC BY-SA 3.0}}
+	\label{fig:skycultures:AmericasRegions}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering\includegraphics[width=\textwidth]{Oceania-regions.png}
+	\caption{Oceania: subregions as delineated by United Nations geographic classification scheme: \ccboxdsc{1.0,0.8,0.2} Australasia, 
+          \ccboxdsc{0.6,0.8,0.9} Melanesia, \ccboxdsc{0.8,0.7,0.7} Micronesia, \ccboxdsc{0.62,0.73,0.87} Polynesia. \emph{Wikipedia / CC BY-SA 3.0}}
+	\label{fig:skycultures:OceaniaRegions}
+\end{figure}
+
 \section{Skyculture Description Files}
 \label{sec:skycultures:description}
 
 
-In order to have translated texts we have files
+In order to have translated texts, Stellarium uses files
 \file{description.<LANG>.utf8}, where \file{<LANG>} is the two-letter
 ISO~639-1 language code, or its extension which contains language and
 country code, like \file{pt\_BR} for Brazilian Portuguese. A minimum
 skyculture must contain the file \file{description.en.utf8}, this is
-\texttt{en=English} text with optional HTML tags for sections, tables,
+\texttt{en=English} text with HTML tags for sections, tables,
 etc. You can also have embedded images in the HTML (your book cover?
 Views of sacred landscapes/buildings/artwork/\ldots?), just make them
-PNG format please. The length of the description texts is not limited,
-you have room for a good description, tables of names/translations,
+PNG or JPG format please. The length of the description texts is not limited.
+You should provide a good description in the interest of future users:
+some cultural/ethnographical background of the users of this skyculture,
+history of skyculture research that provided this work, tables of names/translations,
 links to external resources, whatever seems suitable. When you started
 from a copied skyculture, delete the other \file{description.*.utf8}
 files.
@@ -168,7 +251,7 @@ If you can provide other languages supported by Stellarium, you can
 provide translations yourself, else Stellarium translators \emph{may}
 translate the English version for you. (It may take years though.) The file
 ending \file{.utf8} indicates that for special characters like ÄÖÜßáé
-you should use UTF8 encoding. If you write only English/ASCII, this may not
+you should use UTF-8 encoding. If you write only English/ASCII, this may not
 be relevant.
 
 \section{Proper Names}
@@ -188,29 +271,29 @@ You can \newFeature{0.19.2} add a reference comment after each
 3-column entry. Just add a white-space, and then a comma-separated list
 of numerical references to the books listed in \file{reference.fab}.
 
-The first column (abbreviation) in the Western sky culture provides
+The first column (abbreviation) in the Modern sky culture provides
 the canonical 3-letter abbreviation for constellations as used by the
 International Astronomical Union. Such abbreviations may not be
 available for the skyculture you are working with, so you must invent
 your own. These abbreviations are used as keys in the other files, so
-they must be unique within your skyculture.
-It is not necessary to have 3-letter keys. 
+they must be unique within your skyculture. It is not necessary to have
+3-letter keys, but they should act as mnemonic support, so numerical keys are not recommended. 
 
 The keys can be displayed on screen when labels are requested in the
 Starlore GUI (section~\ref{sec:gui:view:starlore}). If you want to prevent
 certain abbreviations from being displayed, let them start with a
-dot. See the effect in the \file{Western (H.A.Rey)} skyculture: In
+dot. See the effect in the \file{Modern (H.A.Rey)} skyculture: In
 \menu{Abbreviated} mode, only the official abbreviations are
 displayed. In \menu{Native} mode, the second column of
 \file{constellation\_names.eng.fab} is shown. Only with setting
 \menu{Translated}, the text translated from the text shown in the
-third column is shown. If your skyculture is a variant of the Western
+third column is shown. If your skyculture is a variant of the \file{Modern}
 skyculture, please use the canonical Latin names, they have all been translated already.
 
-If your skyculture is not a variant of the generally known Western
+If your skyculture is not a variant of the generally known \file{Modern} (western)
 skyculture, please include an English translation to the name given in
 the native language. Else translators will not be able to translate
-the name. See a good example in the Mongolian skyculture.
+the name. See a good example in the \file{Mongolian} skyculture.
 
 \subsection{Star Names}
 \label{sec:skycultures:starnames}
@@ -220,8 +303,8 @@ numbers and common names for those stars. Each line of the file
 contains one record of two fields (separated by the pipe character
 (\texttt{|})) or three fields (the first pair is separated by the 
 pipe character (\texttt{|}) and the last one separated by the space 
-character). The first field is the Hipparcos catalog number of the
-star, the second is the common name of the star in a format that enables
+character). The first field is the star's Hipparcos catalog number,
+the second is the common name of the star in a format that enables
 translation support, the third is an optional list of references (see \ref{sec:skycultures:references})  
 to the source of the information about this name, e.g:
 \begin{configfile}
@@ -234,7 +317,7 @@ In the sample you can see 3 lines: the first line is a comment, the
 second line has 3 fields and the third line has 2 fields. Both lines 
 with data have the same Hipparcos number of the star --- \textit{Fomalhaut} is 
 the well-known name of HIP 113368, and \textit{Thalim} is an additional 
-(not well-known) name of this star.
+(not well-known) name of this star for which a source reference is unfortunately missing.
 
 \subsection{Planet Names}
 \label{sec:skycultures:planetnames}
@@ -246,7 +329,7 @@ English name of the planet, the second is the native name of the
 planet (can be in the native language, but please for maximum
 utability use an English transliteration) and the third is the
 translatable version of the native name of the planet (translated into
-English). Here is an example from the Egyptian skyculture:
+English). Here is an example from the \file{Egyptian} skyculture:
 
 \begin{configfile}
 Mars	"Horus-Desher"	_("Red Horus")
@@ -275,8 +358,10 @@ NGC 292  |_("Small Magellanic Cloud")
 \section{Stick Figures}
 \label{sec:skycultures:stickfigures}
 
-The modern-style stick figures are coded in \file{constellationship.fab}. Lines
-look like:
+The modern-style stick figures are coded in \file{constellationship.fab}\footnote{%
+  To clarify some apparent misunderstanding of the name: this is not a new word
+  coined with -ship as in ``friendship'', but simply constellations encoded in HIPparcos numbers.}.
+Lines look like:
 
 \begin{configfile}
 Abbr pairs pair1_star1 pair1_star2 pair2_star1 pair2_star2 ...
@@ -299,7 +384,7 @@ Comments can be given in lines starting with \texttt{\#} signs. Empty lines are 
 
 The optional file\footnote{Please define \texttt{boundaries = own} in the file \file{info.ini} to enable using custom boundaries.} 
 \file{constellation\_boundaries.dat} includes data for the boundary lines drawn between constellations. 
-The default boundaries for western constellations are defined in the \file{data/constellation\_boundaries.dat} file.
+The boundaries for the IAU constellations are defined in the \file{data/constellation\_boundaries.dat} file.
 
 The format for this file is a bit more difficult than the other files. It contains sections which may consist of multiple lines, of the format:
 
@@ -319,10 +404,11 @@ where
 
 Constellation artwork is optional, but may give your skyculture the
 final touch, if it requires artwork at all. E.g., H. A. Rey's variant
-of the Western skyculture deliberately does not contain artwork.
+of the \file{Modern} skyculture deliberately does not contain artwork
+other than his new set of stick figures.
 
 Each constellation artwork is linked to 3 stars in its constellation. This
-is programmed in the file \file{constellationsart.fab}. You have to write lines
+is programmed in the file \file{constellationsart.fab}. It consists of lines
 
 \begin{configfile}
   Abbr image_name.png x1 y1 HIP1 x2 y2 HIP2 x3 y3 HIP3
@@ -333,7 +419,8 @@ where
 \item[image\_name.png] is the file name of your texture. It should be
   sized in a power of two, like $512\times512$, $1024\times2048$
   etc. Avoid dimensions larger than 2048, they are not supported on
-  all systems. You can distort images to better exploit the pixels,
+  all systems. Use as little border in your textures as possible instead.
+  You can distort images to better exploit the pixels,
   the texture will be stretched back. The background of the artwork
   image must be absolutely black.
 \item[x\textit{n}, y\textit{n}, HIP\textit{n}] ($n\in[1, 2, 3]$) pixel locations of the
@@ -391,7 +478,9 @@ skycultures collected from various sources to provide traceable references.
 constellation into a figure in its own right, or to merge parts from different 
 constellations into one big figure --- e.g. ``Big Dipper'' as part of Ursa Major or the 
 ``Summer Triangle'' consisting of 3 stars from the constellations Cygnus, Lyra and Aquila. 
-Those features are called ``asterisms''. 
+After the codification of the official 88 constellations by the IAU, those additional figures
+are called ``asterisms''.\footnote{In a more generalized context when describing the sky of
+  other cultures, the distinction may be less strict.}
 
 Other simple figures might be used as navigation helpers --- the help rays. 
 As example to help in orientation in the sky the additional lines between constellations 
@@ -439,13 +528,11 @@ and classification, and may ask for better descriptions for the
 benefit of our users.
 
 Please be prepared to put the imagery and text
-under some compatible open-source license (Creative Commons). Else the
-skyculture cannot be hosted by us.
+under some compatible open-source license (Creative Commons).
+Else the skyculture cannot be hosted by us.
 While we cannot be held responsible for legal problems, it seems that
-CC BY 4.0
-International\footnote{\url{https://creativecommons.org/licenses/by/4.0/}}
-or CC BY-SA 4.0
-International\footnote{\url{https://creativecommons.org/licenses/by-sa/4.0/}}
+CC BY 4.0 International\footnote{\url{https://creativecommons.org/licenses/by/4.0/}} or
+CC BY-SA 4.0 International\footnote{\url{https://creativecommons.org/licenses/by-sa/4.0/}}
 licenses are best suited. See notes in section~\ref{sec:skycultures:licenses} above. 
 
 

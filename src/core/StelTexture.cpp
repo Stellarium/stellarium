@@ -256,7 +256,7 @@ void StelTexture::onNetworkReply()
 }
 
 /*************************************************************************
- Return the width and heigth of the texture in pixels
+ Return the width and height of the texture in pixels
 *************************************************************************/
 bool StelTexture::getDimensions(int &awidth, int &aheight)
 {

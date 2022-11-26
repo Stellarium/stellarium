@@ -217,7 +217,7 @@ public slots:
 	bool getFlagStarSpiky() const {return flagStarSpiky;}
 
 	//! Get the magnitude of the currently faintest visible point source
-	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters
+	//! It depends on the zoom level, on the eye adaptation and on the point source rendering parameters
 	//! @return the limit V mag at which a point source will be displayed
 	float getLimitMagnitude() const {return limitMagnitude;}
 
@@ -257,7 +257,7 @@ public slots:
 	void setCustomPlanetMagnitudeLimit(double limit) { customPlanetMagLimit=limit; emit customPlanetMagLimitChanged(limit);}
 
 	//! Get the luminance of the faintest visible object (e.g. RGB<0.05)
-	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters
+	//! It depends on the zoom level, on the eye adaptation and on the point source rendering parameters
 	//! @return the limit V luminance at which an object will be visible
 	float getLimitLuminance() const {return limitLuminance;}
 

@@ -72,7 +72,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 {
 	//Try to handle an occasional naming conflict between a moon and asteroid. Conflicting names are also shown with appended *.
 	if (englishName.endsWith('*'))
-		properName = englishName.left(englishName.count() - 1);
+		properName = englishName.left(englishName.length() - 1);
 
 	//Try to detect provisional designation	
 	QString provisionalDesignation = renderProvisionalDesignationinHtml(englishName);

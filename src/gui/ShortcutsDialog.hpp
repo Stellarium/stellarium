@@ -114,7 +114,7 @@ private:
 	QStandardItemModel* mainModel;
 	//! Initialize or reset the main model.
 	void resetModel();
-	//! Set the main model's column lables.
+	//! Set the main model's column labels.
 	void setModelHeader();
 };
 

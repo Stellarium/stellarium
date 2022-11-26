@@ -1738,7 +1738,7 @@ void StelMovementMgr::setUserMaxFov(double max)
 		setMaxFov(userMaxFov);
 	else
 	{
-		const float prjMaxFov = StelApp::getInstance().getCore()->getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())))->getMaxFov();
+		const float prjMaxFov = StelApp::getInstance().getCore()->getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity(),Mat4d::identity())))->getMaxFov();
 		setMaxFov(qMin(userMaxFov, static_cast<double>(prjMaxFov)));
 	}
 	emit userMaxFovChanged(userMaxFov);

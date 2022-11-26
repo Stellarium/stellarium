@@ -42,6 +42,7 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
+#include <QScreen>
 #include <QFileInfo>
 #include <QFontDatabase>
 #include <QGuiApplication>
@@ -386,6 +387,37 @@ int main(int argc, char **argv)
 	app.installTranslator(&trans);
 
 	StelMainView mainWin(confSettings);
+
+	int screen = confSettings->value("video/screen_number", 0).toInt();
+	if (screen < 0 || screen >= qApp->screens().count())
+	{
+		qWarning() << "WARNING: screen" << screen << "not found";
+		screen = 0;
+	}
+	const QRect screenGeom = qApp->screens().at(screen)->geometry();
+
+	const auto size = QSize(confSettings->value("video/screen_w", screenGeom.width()).toInt(),
+							confSettings->value("video/screen_h", screenGeom.height()).toInt());
+	mainWin.resize(size);
+
+	const bool fullscreen = confSettings->value("video/fullscreen", true).toBool();
+	if (fullscreen)
+	{
+		// The "+1" below is to work around Linux/Gnome problem with mouse focus.
+		mainWin.move(screenGeom.x()+1, screenGeom.y()+1);
+		// The fullscreen window appears on screen where is the majority of
+		// the normal window. Therefore we crop the normal window to the
+		// screen area to ensure that the majority is not on another screen.
+		mainWin.setGeometry(mainWin.geometry() & screenGeom);
+		mainWin.setFullScreen(true);
+	}
+	else
+	{
+		const int x = confSettings->value("video/screen_x", 0).toInt();
+		const int y = confSettings->value("video/screen_y", 0).toInt();
+		mainWin.move(x + screenGeom.x(), y + screenGeom.y());
+	}
+
 	mainWin.show();
 	SplashScreen::finish(&mainWin);
 	app.exec();

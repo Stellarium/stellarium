@@ -415,6 +415,26 @@ QString NavStars::getCurrentNavigationalStarsSetDescription() const
 			txt = q_("The 80 stars that are listed in the German Nautical Almanac (The original German title is <em>%1</em>) published by the Federal Maritime and Hydrographic Agency of Germany.").arg("Nautisches Jahrbuch");
 			break;
 		}
+		case GeminiAPS:
+		{
+			txt = q_("Alignment Star List from the Gemini Astronomical Positioning System. The Gemini Astronomical Positioning System is a professional level computerized device for controlling small to medium German equatorial telescope mounts.");
+			break;
+		}
+		case MeadeLX200:
+		{
+			txt = q_("The Meade LX200 utilizes 33 bright and well known stars to calibrate the telescope’s Object Library in the ALTAZ and POLAR alignments. These stars were selected to allow observers from anywhere in the world on any given night, to be able to easily and quickly make precision alignments.");
+			break;
+		}
+		case MeadeETX:
+		{
+			txt = q_("This list from Meade ETX mount will aid the observer to find alignment stars at various times of the year.");
+			break;
+		}
+		case Celestron:
+		{
+			txt = q_("Even though there are about 250 named stars in the hand control database, only 82 (stars brighter than or equal to magnitude 2.5) can be used for alignment and related tasks.");
+			break;
+		}
 	}
 
 	return txt;
@@ -497,20 +517,81 @@ void NavStars::populateNavigationalStarsSet(void)
 			// 80 stars from German Nautical Almanac
 			// Original German name: Nautisches Jahrbuch
 			// The numbers are identical to the "Nautisches Jahrbuch"
-			starNumbers <<    677 <<    1067 <<      2081 <<    3179 <<     3419 <<     4427
-					 <<     5447 <<     7588 <<   11767 <<     9640 <<     9884 <<   14135
-					 <<   14576 <<   15863 <<   17702 <<   21421 <<   24436 <<   24608
-					 <<   25336 <<   25428 <<   26311 <<   26727 <<   27366 <<   27989
-					 <<   28360 <<   30324 <<   30438 <<   31681 <<   32349 <<   33579
-					 <<   34444 <<   36850 <<   37279 <<   37826 <<   41037 <<   44816
-					 <<   45238 <<   46390 <<   49669 <<   52419 <<   54061 <<   57632
-					 <<   60718 <<   61084 <<   62434 <<   62956 <<   63608 <<   65378
-					 <<   65474 <<   67301 <<   68702 <<   68933 <<   69673 <<   71683
-					 <<   72105 <<   72622 <<   72607 <<   74785 <<   76267 <<   77070
-					 <<   80763 <<   82273 <<   82396 <<   85927 <<   86032 <<   86228
-					 <<   87833 <<   90185 <<   91262 <<   92855 <<   97649 << 100751
-					 << 102098 << 105199 << 107315 << 109268 << 112122 << 113368
-					 << 113881 << 113963;
+			starNumbers  <<    677 <<   1067 <<   2081 <<   3179 <<   3419 <<   4427
+				     <<   5447 <<   7588 <<  11767 <<   9640 <<   9884 <<  14135
+				     <<  14576 <<  15863 <<  17702 <<  21421 <<  24436 <<  24608
+				     <<  25336 <<  25428 <<  26311 <<  26727 <<  27366 <<  27989
+				     <<  28360 <<  30324 <<  30438 <<  31681 <<  32349 <<  33579
+				     <<  34444 <<  36850 <<  37279 <<  37826 <<  41037 <<  44816
+				     <<  45238 <<  46390 <<  49669 <<  52419 <<  54061 <<  57632
+				     <<  60718 <<  61084 <<  62434 <<  62956 <<  63608 <<  65378
+				     <<  65474 <<  67301 <<  68702 <<  68933 <<  69673 <<  71683
+				     <<  72105 <<  72622 <<  72607 <<  74785 <<  76267 <<  77070
+				     <<  80763 <<  82273 <<  82396 <<  85927 <<  86032 <<  86228
+				     <<  87833 <<  90185 <<  91262 <<  92855 <<  97649 << 100751
+				     << 102098 << 105199 << 107315 << 109268 << 112122 << 113368
+				     << 113881 << 113963;
+			break;
+		}
+		case GeminiAPS:
+		{
+			// Gemini Alignment Star List
+			// Source: Gemini Users Manual, Level 4, René Görlich et. al., April 2006
+			starNumbers  <<    677 <<   1067 <<   3419 <<   5447 <<   7588 <<   9884
+				     <<  11767 <<  14135 <<  15863 <<  18543 <<  21421 <<  24436
+				     <<  24608 <<  27989 <<  30438 <<  32349 <<  36850 <<  37279
+				     <<  37826 <<  46390 <<  49669 <<  54061 <<  54872 <<  57632
+				     <<  59803 <<  60718 <<  63608 <<  65378 <<  65474 <<  68702
+				     <<  69673 <<  71683 <<  72603 <<  77070 <<  80763 <<  80816
+				     <<  85927 <<  86032 <<  90185 <<  91262 <<  92855 <<  95947
+				     <<  97649 << 102098 << 106278 << 107315 << 109074 << 113368
+				     << 113963;
+			break;
+		}
+		case MeadeLX200:
+		{
+			// Meade LX200 Alignment Star Library
+			// Source:
+			//    Meade Instruction Manual
+			//    7" LX200 Maksutov-Cassegrain Telescope
+			//    8", 10", and 12" LX200 Schmidt-Cassegrain Telescopes
+			// HIP 28380 = Bogardus
+			starNumbers  <<   7588 <<  60718 <<  95947 <<  67301 <<  21421 <<  26311
+				     <<  46390 <<  76267 <<  97649 <<  80763 <<  69673 <<  27989
+				     <<  28380 <<  30438 <<  24608 <<  36850 << 102098 <<  57632
+				     <<   3419 << 107315 << 113368 <<  68702 <<   9884 << 113963
+				     <<  10826 <<  11767 <<  37826 <<  37279 <<  49669 <<  24436
+				     <<  32349 <<  65474 <<  91262;
+			break;
+		}
+		case MeadeETX:
+		{
+			// Meade ETX Alignment Star Library
+			// Source:
+			//    Meade Instruction Manual
+			//    ETX-90EC Astro Telescope
+			//    ETX-105EC Astro Telescope
+			//    ETX-125EC Astro Telescope
+			starNumbers  << 69673 << 49669 << 65474 << 91262 << 102098 << 97649 << 80763
+				     << 113963 << 113368 << 10826 << 24436 << 27989 << 32349 << 21421;
+			break;
+		}
+		case Celestron:
+		{
+			// Celestron Alignment Star List
+			// Source: https://www.celestron.com/blogs/knowledgebase/can-all-named-stars-listed-in-the-hand-control-be-used-for-alignment
+			starNumbers  <<  32349 <<  30438 <<  69673 <<  91262 <<  24608 <<  24436 <<  37279
+				     <<   7588 <<  27989 <<  68702 <<  97649 <<  21421 <<  65474 <<  80763
+				     <<  37826 << 113368 <<  60718 <<  62434 <<  71683 << 102098 <<  49669
+				     <<  33579 <<  25336 <<  61084 <<  85927 <<  26311 <<  25428 <<  45238
+				     << 109268 <<  15863 <<  34444 <<  39953 <<  54061 <<  62956 <<  28360
+				     <<  31681 <<  41037 <<  67301 <<  82273 <<  86228 <<  90185 << 100751
+				     <<   3419 <<   9884 <<  11767 <<  30324 <<  36850 <<  46390 <<    677
+				     <<   5447 <<  14576 <<  26727 <<  27366 <<  57632 <<  72607 <<  68933
+				     <<  86032 <<  92855 <<   3179 <<  25930 <<  44816 <<  61932 <<  76267
+				     <<  87833 << 100453 <<    746 <<   9640 <<  66811 <<  80404 <<  65378
+				     <<  78401 <<   2081 <<  53910 <<  58001 <<  84012 << 105199 << 107315
+				     << 113881 <<   4427 <<  14135 <<  35904 << 113963;
 			break;
 		}
 	}

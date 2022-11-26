@@ -71,7 +71,7 @@ private:
 	void addSender(SyncServerEventSender* snd);
 	void checkTimeouts();
 	void checkStopState();
-	//use composition instead of inheritance, cleaner interfaace this way
+	//use composition instead of inheritance, cleaner interface this way
 	//for now, we use TCP, but will test multicast UDP later if the basic setup is working
 	QTcpServer* qserver;
 	QVector<SyncMessageHandler*> handlerList;

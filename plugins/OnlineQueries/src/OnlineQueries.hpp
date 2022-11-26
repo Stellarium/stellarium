@@ -35,7 +35,7 @@ class OnlineQueriesDialog;
 The %Online Queries plugin provides online lookup to retrieve additional data from selected web services.
 
 The results are presented in a QWebEngine view on platforms which support this. Unfortunately on some platforms
-the module seems to be available but fails to intialize properly. A manual entry in the config file can be used
+the module seems to be available but fails to initialize properly. A manual entry in the config file can be used
 to actively disable the QWebEngineView based content box and open the URL in the system webbrowser.
 If none is configured, Qt's own error messages will be visible in stderr.
 

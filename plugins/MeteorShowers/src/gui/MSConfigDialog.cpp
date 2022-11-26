@@ -232,7 +232,7 @@ void MSConfigDialog::setAboutHtml()
 	"</p>"
 	)
 	+ "<p>"
-	+ q_("This plugin uses two models to calculate ZHR, assumming that the activity profile of meteor "
+	+ q_("This plugin uses two models to calculate ZHR, assuming that the activity profile of meteor "
 		"shower follows the double exponential shape. To predict the local hourly rate, altitude of "
 		"radiant and limiting magnitude of the sky are taken into account. "
 		"Moonlight can also reduce the hourly rate, but it doesn't take into account.") +
@@ -274,7 +274,7 @@ void MSConfigDialog::setAboutHtml()
 		   "densest region of meteoroid stream.") +
 	"<br/></dd>" +
 	"<dt><strong>" + q_("Current ZHR") + "</strong></dt><dd>" +
-		q_("The ZHR at given time, assumming that the activity profile of meteor shower follows the double exponential shape.") +
+		q_("The ZHR at given time, assuming that the activity profile of meteor shower follows the double exponential shape.") +
 	"<br/></dd>" +
 	"<dt><strong>" + q_("Local Hourly Rate") + "</strong></dt><dd>" +
 		q_("The number of meteors in one hour for current location, it is the actual expected rate, calculated by "

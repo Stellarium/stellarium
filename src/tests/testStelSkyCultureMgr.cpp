@@ -33,7 +33,7 @@ void TestStelSkyCultureMgr::testStelSkyCultureMgr()
 
 	StelSkyCultureMgr scMgr;
 
-	QVERIFY(scMgr.getDefaultSkyCultureID().isEmpty()); // Shoud be true, because sky culture is not set! (StelSkyCultureMgr::init() isn't called)
+	QVERIFY(scMgr.getDefaultSkyCultureID().isEmpty()); // Should be true, because sky culture is not set! (StelSkyCultureMgr::init() isn't called)
 	QVERIFY(scMgr.setCurrentSkyCultureID("arabic_al-sufi"));
 	QVERIFY(scMgr.getCurrentSkyCultureID()=="arabic_al-sufi");
 	QVERIFY(scMgr.setCurrentSkyCultureID("modern"));

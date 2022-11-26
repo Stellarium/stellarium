@@ -63,7 +63,7 @@ struct SceneInfo
 	QString landscapeName;
 	//! The file name of the scenery .obj model
 	QString modelScenery;
-	//! The file name of the optional seperate ground model (used as a heightmap for walking)
+	//! The file name of the optional separate ground model (used as a heightmap for walking)
 	QString modelGround;
 	//! Optional string depicting vertex order of models (XYZ, ZXY, ...)
 	QString vertexOrder;
@@ -89,7 +89,7 @@ struct SceneInfo
 
 	//! The height at which the observer's eyes are placed. Default 1.65.
 	double eyeLevel;
-	//! The name of the grid space for displaying the world positon
+	//! The name of the grid space for displaying the world position
 	QString gridName;
 	//! Offset of the center of the model in a given grid space
 	Vec3d modelWorldOffset;

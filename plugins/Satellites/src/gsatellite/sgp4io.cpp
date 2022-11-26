@@ -4,7 +4,7 @@
 *
 *    this file contains a function to read two line element sets. while 
 *    not formerly part of the sgp4 mathematical theory, it is 
-*    required for practical implemenation.
+*    required for practical implementation.
 *
 *                            companion code for
 *               fundamentals of astrodynamics and applications
@@ -37,7 +37,7 @@
 *                           function twoline2rv
 *
 *  this function converts the two line element set character string data to
-*    variables and initializes the sgp4 variables. several intermediate varaibles
+*    variables and initializes the sgp4 variables. several intermediate variables
 *    and quantities are determined. note that the result is a structure so multiple
 *    satellites can be processed simultaneously without having to reinitialize. the
 *    verification mode is an important option that permits quick checks of any
@@ -95,7 +95,7 @@ void twoline2rv
 
        satrec.error = 0;
 
-       // set the implied decimal points since doing a formated read
+       // set the implied decimal points since doing a formatted read
        // fixes for bad input data values (missing, ...)
        for (j = 10; j <= 15; j++)
            if (longstr1[j] == ' ')

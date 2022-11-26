@@ -100,7 +100,7 @@ public:
 
 	//! Because the HTML descriptions in Stellarium are often not compatible
 	//! with "clean" HTML5 which is used for the main interface,
-	//! this method can be used to explicitely wrap the given HTML snippet
+	//! this method can be used to explicitly wrap the given HTML snippet
 	//! in a valid HTML 4.01 transitional document for better results, and include the stylesheet
 	//! \c iframestyle.css for consistent styling when used in iframes of the RemoteControl web interface
 	//! @param html The HTML snippet to wrap with HTML document tags

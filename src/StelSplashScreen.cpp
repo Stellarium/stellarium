@@ -84,17 +84,15 @@ void SplashScreen::SplashScreenWidget::paintEvent(QPaintEvent* event)
 	p.setPen(Qt::white);
 #if defined(GIT_REVISION)
 	QFontMetrics metrics(splashFont);
-	p.drawText(QPointF(metrics.averageCharWidth(), 1.3*metrics.height()),
-			   QString("%1 (v%2)").arg(StelUtils::getApplicationPublicVersion(),
-									   StelUtils::getApplicationVersion()));
+	p.drawText(QPointF(metrics.averageCharWidth(), 1.3*metrics.height()), QString("%1+ (v%2)").arg(StelUtils::getApplicationPublicVersion(), StelUtils::getApplicationVersion()));
 #else
 	QFont versionFont(splashFont);
 	QString version = StelUtils::getApplicationPublicVersion();
-	versionFont.setPixelSize(25);
+	versionFont.setPixelSize(23);
 	versionFont.setBold(true);
 	QFontMetrics versionMetrics(versionFont);
 	p.setFont(versionFont);
-	p.drawText(365 - versionMetrics.horizontalAdvance(version), 290, version);
+	p.drawText(365 - versionMetrics.horizontalAdvance(version), 293, version);
 #endif
 
 	painted=true;

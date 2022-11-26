@@ -74,6 +74,7 @@ public:
 		QOpenGLFunctions* functions;
 		bool supportsLuminanceTextures = false;
 		bool isCoreProfile = false;
+		bool isGLES = false;
 	};
 
 	StelMainView(QSettings* settings);
@@ -111,7 +112,7 @@ public:
 	void glContextDoneCurrent();
 
 	//! Returns the information about the GL context, this does not require the context to be active.
-	GLInfo getGLInformation() const { return glInfo; }
+	const GLInfo& getGLInformation() const { return glInfo; }
 
 	//! Returns the desired OpenGL format settings.
 	static QSurfaceFormat getDesiredGLFormat(QSettings *configuration);
@@ -239,7 +240,7 @@ signals:
 	//! @remark FS: is threaded access here even a possibility anymore, or a remnant of older code?
 	void screenshotRequested(void);
 	void fullScreenChanged(bool b);
-	//! Emitted when the "Reload shaders" action is perfomed
+	//! Emitted when the "Reload shaders" action is performed
 	//! Interested objects should subscribe to this signal and reload their shaders
 	//! when this is emitted
 	void reloadShadersRequested();

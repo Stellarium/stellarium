@@ -113,17 +113,21 @@ bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 	if(cultureDir==currentSkyCultureDir)
 		return false;
 
+	QString scID = cultureDir;
+	bool result = true;
 	// make sure culture definition exists before attempting or will die
 	if (directoryToSkyCultureEnglish(cultureDir) == "")
 	{
 		qWarning() << "Invalid sky culture directory: " << QDir::toNativeSeparators(cultureDir);
-		return false;
+		scID = "modern";
+		result = false;
 	}
-	currentSkyCultureDir = cultureDir;
-	currentSkyCulture = dirToNameEnglish[cultureDir];
+
+	currentSkyCultureDir = scID;
+	currentSkyCulture = dirToNameEnglish[scID];
 
 	emit currentSkyCultureChanged(currentSkyCultureDir);
-	return true;
+	return result;
 }
 
 // Set the default sky culture from the ID.
@@ -285,14 +289,14 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlLicense() const
 QString StelSkyCultureMgr::getCurrentSkyCultureHtmlRegion() const
 {
 	QString html = "", region = currentSkyCulture.region.trimmed();
-	QString description = q_("The region is understood as the geographical area of origin of a given culture of the sky.");
+	QString description = q_("The region indicates the geographical area of origin of a given sky culture.");
 
 	// special case: modern sky culture
 	if (getCurrentSkyCultureID().contains("modern", Qt::CaseInsensitive))
 	{
-		// TRANSLATIONS: By the fact this is name of pseudo-region on Earth
+		// TRANSLATIONS: This is the name of a geographical "pseudo-region" on Earth
 		region = N_("World");
-		description = q_("All modern sky cultures are based on the IAU-approved 88 constellations with standardized boundaries and are used worldwide. The origins of all these constellations are pan-European.");
+		description = q_("All 'modern' sky cultures are based on the IAU-approved 88 constellations with standardized boundaries and are used worldwide. The origins of these constellations are pan-European.");
 	}
 
 	if (!region.isEmpty()) // Region marker is always 'green'

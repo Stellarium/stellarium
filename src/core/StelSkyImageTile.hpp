@@ -91,7 +91,7 @@ public:
 	//! Return true if the tile is fully loaded and can be displayed
 	bool isReadyToDisplay() const;
 
-	//! Convert the image informations to a map following the JSON structure.
+	//! Convert the image information to a map following the JSON structure.
 	//! It can be saved as JSON using the StelJsonParser methods.
 	QVariantMap toQVariantMap() const;
 

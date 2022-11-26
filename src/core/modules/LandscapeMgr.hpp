@@ -384,7 +384,7 @@ public slots:
 	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found). True on success.
 	bool setDefaultLandscapeID(const QString& id);
 
-	//! Return a pseudo HTML formatted string with all informations on the current landscape
+	//! Return a pseudo HTML formatted string with all information on the current landscape
 	QString getCurrentLandscapeHtmlDescription() const;
 
 	//! Return a pseudo HTML formatted string with information from description or ini file

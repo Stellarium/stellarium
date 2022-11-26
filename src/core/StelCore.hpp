@@ -196,7 +196,7 @@ public:
 	//! Get the current StelSkyDrawer used in the core.
 	const StelSkyDrawer* getSkyDrawer() const{return skyDrawer;}
 
-	//! Get an instance of StelGeodesicGrid which is garanteed to allow for at least maxLevel levels
+	//! Get an instance of StelGeodesicGrid which is guaranteed to allow for at least maxLevel levels
 	const StelGeodesicGrid* getGeodesicGrid(int maxLevel) const;
 
 	//! Get the instance of movement manager.
@@ -537,6 +537,9 @@ public slots:
 	//! Set aberration factor. Values are clamped to 0...5. (Values above 5 cause graphical problems.)
 	void setAberrationFactor(double factor) { if (!fuzzyEquals(aberrationFactor, factor)) { aberrationFactor=qBound(0.,factor, 5.); emit aberrationFactorChanged(factor); }}
 
+	QByteArray getAberrationShader() const;
+	void setAberrationUniforms(QOpenGLShaderProgram& program) const;
+
 	//! @return whether topocentric coordinates are currently used.
 	bool getUseTopocentricCoordinates() const {return flagUseTopocentricCoordinates;}
 	//! Set whether you want computation and simulation of nutation (a slight wobble of Earth's axis, just a few arcseconds).
@@ -785,7 +788,7 @@ public slots:
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(const StelLocation&);
-	//! This signal is emitted whenever the targetted location changes
+	//! This signal is emitted whenever the targeted location changes
 	void targetLocationChanged(const StelLocation&);
 	//! This signal is emitted when the current timezone name is changed.
 	void currentTimeZoneChanged(const QString& tz);
@@ -921,7 +924,7 @@ private:
 	double deltaTCustomNDot;
 	double deltaTCustomYear;
 	double deltaTnDot; // The currently applied nDot correction. (different per algorithm, and displayed in status line.)
-	bool  deltaTdontUseMoon; // true if the currenctly selected algorithm does not do a lunar correction (?????)
+	bool  deltaTdontUseMoon; // true if the currently selected algorithm does not do a lunar correction (?????)
 	double (*deltaTfunc)(const double JD); // This is a function pointer which must be set to a function which computes DeltaT(JD).
 	int deltaTstart;   // begin year of validity range for the selected DeltaT algorithm. (SET INT_MIN to mark infinite)
 	int deltaTfinish;  // end   year of validity range for the selected DeltaT algorithm. (Set INT_MAX to mark infinite)
