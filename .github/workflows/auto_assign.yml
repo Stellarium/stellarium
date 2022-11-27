@@ -14,4 +14,4 @@ jobs:
     if: "!contains(github.actor, 'transifex')"
     name: Add reviews
     steps:
-      - uses: kentaro-m/auto-assign-action@v1.2.1
+      - uses: kentaro-m/auto-assign-action@v1.2.4
