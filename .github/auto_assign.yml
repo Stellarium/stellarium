@@ -1,4 +1,4 @@
-﻿#
+#
 # See https://github.com/marketplace/actions/auto-assign-action
 #
 # Set to true to add reviewers to pull requests
@@ -11,6 +11,7 @@ addAssignees: author
 reviewers:
   - alex-w
   - gzotti
+  - 10110111
 
 # A list of keywords to be skipped the process that add reviewers if pull requests include it
 skipKeywords:
