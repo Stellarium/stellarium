@@ -8,5 +8,5 @@ INSTALL(FILES info.ini DESTINATION ${SDATALOC}/skycultures/greek_dante )
 INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/skycultures/greek_dante
 	FILES_MATCHING PATTERN "*.fab" 
 	PATTERN "*.utf8"
-	PATTERN "*.png"
+	PATTERN "*.jpg"
 	PATTERN "CMakeFiles" EXCLUDE )
