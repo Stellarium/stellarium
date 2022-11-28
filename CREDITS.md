@@ -190,7 +190,7 @@
 	       nr_of_measurements, combination of flags, tycho2 number)
 	    -) add all stars from Hipparcos (incl. component solutions), and
 	       tycho2+1st supplement
-	    -) reorganize the stars in several brigthtness levels and
+	    -) reorganize the stars in several brightness levels and
 	       triangular zones according to position and magnitude
 	    The programs that are used to generate the star files are called
 	    "MakeCombinedCatalogue", "ParseHip", "ParseNomad", and can be

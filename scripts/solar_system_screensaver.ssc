@@ -1515,7 +1515,6 @@ core.selectObjectByName("Moon", pointer = true);
 StelMovementMgr.setFlagTracking(true);
 
 }
-
 var pick = pick *( Math.floor(Math.random()*9)+1);
 pick = pick/5;
 StelMovementMgr.zoomTo(pick, 1);
