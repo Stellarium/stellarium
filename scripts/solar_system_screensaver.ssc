@@ -1547,7 +1547,6 @@ if (pick == 0)
 {
 core.selectObjectByName("Earth", pointer = true);
 }
-
 StelMovementMgr.setFlagTracking(true);
 pick = Math.floor(Math.random()*6)+1;
 StelMovementMgr.zoomTo(pick, 1);
@@ -2744,7 +2743,6 @@ core.selectObjectByName("Moon", pointer = true);
 StelMovementMgr.setFlagTracking(true);
 
 }
-
 var pick = pick *( Math.floor(Math.random()*7)+1);
 pick = pick/10 + 0.7;
 StelMovementMgr.zoomTo(pick, 1);
@@ -3243,7 +3241,6 @@ core.setDate("2033-07-22T15:36:00", "utc");
 
 core.selectObjectByName("HIP 86742", pointer = true);
 StelMovementMgr.setFlagTracking(true);
-
 core.selectObjectByName("Mars", pointer = true);
 var pick = Math.floor(Math.random()*70)+70;
 StelMovementMgr.zoomTo(pick, 1);
@@ -3999,7 +3996,6 @@ core.setDate("2040-01-22T07:00:00", "utc");
 
 core.selectObjectByName("HIP 25606", pointer = true);
 StelMovementMgr.setFlagTracking(true);
-
 core.selectObjectByName("Mars", pointer = true);
 var pick = Math.floor(Math.random()*70)+100;
 StelMovementMgr.zoomTo(pick, 1);
