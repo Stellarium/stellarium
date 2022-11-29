@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-11-22 10:18+0700\n"
+"POT-Creation-Date: 2022-11-27 20:12+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Lubomir Hambalek <lubomir.hambalek@gmail.com>, 2022\n"
 "Language-Team: Slovak (https://www.transifex.com/stellarium/teams/80998/sk/)\n"
@@ -3966,23 +3966,23 @@ msgstr "Nahrávam '%1'"
 msgid "Loading '%1' from %2"
 msgstr "Nahrávam '%1' z %2"
 
-#: src/core/StelSkyCultureMgr.cpp:174
+#: src/core/StelSkyCultureMgr.cpp:178
 msgctxt "sky culture classification"
 msgid "ethnographic"
 msgstr "etnografická"
 
-#: src/core/StelSkyCultureMgr.cpp:175
+#: src/core/StelSkyCultureMgr.cpp:179
 msgid ""
 "Provided by ethnographic researchers based on interviews of indigenous "
 "people."
 msgstr "Podľa etnografov, na základe rozhovorov s domorodcami."
 
-#: src/core/StelSkyCultureMgr.cpp:179
+#: src/core/StelSkyCultureMgr.cpp:183
 msgctxt "sky culture classification"
 msgid "historical"
 msgstr "historická"
 
-#: src/core/StelSkyCultureMgr.cpp:180
+#: src/core/StelSkyCultureMgr.cpp:184
 msgid ""
 "Provided by historians based on historical written sources from a (usually "
 "short) period of the past."
@@ -3990,12 +3990,12 @@ msgstr ""
 "Podľa historikov, na základe písomných záznamov z (obvykle krátkeho) obdobia"
 " v minulosti."
 
-#: src/core/StelSkyCultureMgr.cpp:184
+#: src/core/StelSkyCultureMgr.cpp:188
 msgctxt "sky culture classification"
 msgid "single"
 msgstr "jednoduchá"
 
-#: src/core/StelSkyCultureMgr.cpp:185
+#: src/core/StelSkyCultureMgr.cpp:189
 msgid ""
 "Represents a single source like a historical atlas, or publications of a "
 "single author."
@@ -4003,23 +4003,23 @@ msgstr ""
 "Predstavuje jeden zdroj, napríklad historický atlas, alebo publikácie "
 "jedného autora."
 
-#: src/core/StelSkyCultureMgr.cpp:189
+#: src/core/StelSkyCultureMgr.cpp:193
 msgctxt "sky culture classification"
 msgid "comparative"
 msgstr "porovnanie"
 
-#: src/core/StelSkyCultureMgr.cpp:190
+#: src/core/StelSkyCultureMgr.cpp:194
 msgid ""
 "Compares and confronts elements from at least two sky cultures with each "
 "other."
 msgstr "Porovná a prirovná navzájom elementy z aspoň dvoch kultúr oblohy."
 
-#: src/core/StelSkyCultureMgr.cpp:194
+#: src/core/StelSkyCultureMgr.cpp:198
 msgctxt "sky culture classification"
 msgid "traditional"
 msgstr "tradičná"
 
-#: src/core/StelSkyCultureMgr.cpp:195
+#: src/core/StelSkyCultureMgr.cpp:199
 msgid ""
 "Content represents 'common' knowledge by several members of an ethnic "
 "community, and the sky culture has been developed by members of such "
@@ -4028,12 +4028,12 @@ msgstr ""
 "Obsah predstavuje \"všeobecne známe\" poznatky mnohých členov etnickej "
 "komunity, pričom zobrazenie súhvezdí navrhli členovia tejto komunity."
 
-#: src/core/StelSkyCultureMgr.cpp:199
+#: src/core/StelSkyCultureMgr.cpp:203
 msgctxt "sky culture classification"
 msgid "personal"
 msgstr "osobná"
 
-#: src/core/StelSkyCultureMgr.cpp:200
+#: src/core/StelSkyCultureMgr.cpp:204
 msgid ""
 "This is a personally developed sky culture which is not founded in published"
 " historical or ethnological research. Stellarium may include it when it is "
@@ -4044,12 +4044,12 @@ msgstr ""
 "môže zahrnúť, ak bude pútavé, ale nezaručujeme sa za jeho obsahovú "
 "správnosť."
 
-#: src/core/StelSkyCultureMgr.cpp:204
+#: src/core/StelSkyCultureMgr.cpp:208
 msgctxt "sky culture classification"
 msgid "incomplete"
 msgstr "neúplná"
 
-#: src/core/StelSkyCultureMgr.cpp:205
+#: src/core/StelSkyCultureMgr.cpp:209
 msgid ""
 "The accuracy of the sky culture description cannot be given, although it "
 "looks like it is built on a solid background. More work would be needed."
@@ -4057,20 +4057,20 @@ msgstr ""
 "Presnosť opisu zobrazenia oblohy nie je známa, hoci sa zdá, že sa zakladá na"
 " pevných základoch. Je potrebný podrobnejší výskum."
 
-#: src/core/StelSkyCultureMgr.cpp:209
+#: src/core/StelSkyCultureMgr.cpp:213
 msgctxt "sky culture classification"
 msgid "undefined"
 msgstr "nedefinovaná"
 
-#: src/core/StelSkyCultureMgr.cpp:216
+#: src/core/StelSkyCultureMgr.cpp:220
 msgid "Classification"
 msgstr "Klasifikácia"
 
-#: src/core/StelSkyCultureMgr.cpp:228
+#: src/core/StelSkyCultureMgr.cpp:232
 msgid "unknown"
 msgstr "neznáme"
 
-#: src/core/StelSkyCultureMgr.cpp:229
+#: src/core/StelSkyCultureMgr.cpp:233
 msgid ""
 "This sky culture is provided under unknown license. Please ask authors for "
 "details about license for this sky culture."
@@ -4078,7 +4078,7 @@ msgstr ""
 "Táto kultúra oblohy je poskytovaná pod neurčenou licenciou. Prosíme, oslovte"
 " autorov ohľadom detailov práv pre túto kultúru oblohy."
 
-#: src/core/StelSkyCultureMgr.cpp:236
+#: src/core/StelSkyCultureMgr.cpp:240
 msgid ""
 "This sky culture is provided under GNU General Public License. You can use "
 "it for commercial and non-commercial purposes, freely adapt it and share "
@@ -4088,12 +4088,12 @@ msgstr ""
 " Môžete je používať na komerčné a nekomerčné účely, voľne upravovať a "
 "zdieľať upravené dielo."
 
-#: src/core/StelSkyCultureMgr.cpp:240
+#: src/core/StelSkyCultureMgr.cpp:244
 msgid "This sky culture is provided under Creative Commons License."
 msgstr ""
 "Táto kultúra oblohy je poskytovaná pod licenciou Creative Commons License."
 
-#: src/core/StelSkyCultureMgr.cpp:248
+#: src/core/StelSkyCultureMgr.cpp:252
 msgid ""
 "You may distribute, remix, adapt, and build upon this sky culture, even "
 "commercially, as long as you credit authors for the original creation."
@@ -4101,7 +4101,7 @@ msgstr ""
 "Túto kultúru oblohy môžete šíriť, pozmeňovať, upravovať, vylepšovať, dokonca"
 " aj komerčne, pokiaľ odcitujete autorov pôvodného diela."
 
-#: src/core/StelSkyCultureMgr.cpp:249
+#: src/core/StelSkyCultureMgr.cpp:253
 msgid ""
 "You may remix, adapt, and build upon this sky culture even for commercial "
 "purposes, as long as you credit authors and license the new creations under "
@@ -4113,7 +4113,7 @@ msgstr ""
 "rovnaké podmienky licencie. Väčšinou je porovnateľná s voľnými otvorenými "
 "softvérovými licenciami."
 
-#: src/core/StelSkyCultureMgr.cpp:250
+#: src/core/StelSkyCultureMgr.cpp:254
 msgid ""
 "You may reuse this sky culture for any purpose, including commercially; "
 "however, adapted work cannot be shared with others, and credit must be "
@@ -4122,7 +4122,7 @@ msgstr ""
 "Túto kultúru oblohy môžete použiť na hocijaký účel, ale upravené dielo nie "
 "je možné zdieľať a musíte uviesť citáciu."
 
-#: src/core/StelSkyCultureMgr.cpp:251
+#: src/core/StelSkyCultureMgr.cpp:255
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, and "
 "although your new works must also acknowledge authors and be non-commercial,"
@@ -4132,7 +4132,7 @@ msgstr ""
 "účely. Aj keď vaše nové diela musia odcitovať autorov a byť nekomerčné, "
 "nemusíte na odvodené diela udeliť licenciu za rovnakých podmienok."
 
-#: src/core/StelSkyCultureMgr.cpp:252
+#: src/core/StelSkyCultureMgr.cpp:256
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, as "
 "long as you credit authors and license your new creations under the "
@@ -4142,7 +4142,7 @@ msgstr ""
 "pokiaľ odcitujete autorov a uvediete pre nové dielo rovnaké podmienky "
 "licencie."
 
-#: src/core/StelSkyCultureMgr.cpp:253
+#: src/core/StelSkyCultureMgr.cpp:257
 msgid ""
 "You may use this sky culture and share them with others as long as you "
 "credit authors, but you can’t change it in any way or use it commercially."
@@ -4150,17 +4150,17 @@ msgstr ""
 "Túto kultúru oblohy môžete používať a zdieľať, pokiaľ odcitujete autorov. "
 "Nemôžete ju však žiadnym spôsobom pozmeniť alebo používať komerčne."
 
-#: src/core/StelSkyCultureMgr.cpp:265
+#: src/core/StelSkyCultureMgr.cpp:269
 msgid "This sky culture is distributed as public domain."
 msgstr "Táto kultúra oblohy je verejne prístupná ako public domain."
 
 #. TRANSLATORS: A phrase like "Please credit: XY Museum". The creditee is in a
 #. skyculture's info.ini.
-#: src/core/StelSkyCultureMgr.cpp:271
+#: src/core/StelSkyCultureMgr.cpp:275
 msgid "Please credit:"
 msgstr "Prosíme, odcitujte:"
 
-#: src/core/StelSkyCultureMgr.cpp:275
+#: src/core/StelSkyCultureMgr.cpp:279
 msgid ""
 "Illustrations are provided under Free Art License that grants the right to "
 "freely copy, distribute, and transform."
@@ -4168,7 +4168,7 @@ msgstr ""
 "Ilustrácie sú poskytované pod voľnou licenciou Free Art License, ktorá dáva "
 "právo ich voľne kopírovať, šíriť a meniť."
 
-#: src/core/StelSkyCultureMgr.cpp:280 src/gui/ConfigurationDialog.cpp:1307
+#: src/core/StelSkyCultureMgr.cpp:284 src/gui/ConfigurationDialog.cpp:1307
 #: src/scripting/StelScriptMgr.cpp:649
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:626
@@ -4193,16 +4193,16 @@ msgstr ""
 msgid "License"
 msgstr "Licencia"
 
-#: src/core/StelSkyCultureMgr.cpp:288
+#: src/core/StelSkyCultureMgr.cpp:292
 msgid ""
 "The region indicates the geographical area of origin of a given sky culture."
 msgstr "Región označuje geografickú oblasť pôvodu danej kultúry oblohy."
 
-#: src/core/StelSkyCultureMgr.cpp:294
+#: src/core/StelSkyCultureMgr.cpp:298
 msgid "World"
 msgstr "Svet"
 
-#: src/core/StelSkyCultureMgr.cpp:295
+#: src/core/StelSkyCultureMgr.cpp:299
 msgid ""
 "All 'modern' sky cultures are based on the IAU-approved 88 constellations "
 "with standardized boundaries and are used worldwide. The origins of these "
@@ -4212,15 +4212,15 @@ msgstr ""
 "IAU so štandardizovanými hranicami a používajú sa na celom svete. Pôvod "
 "týchto súhvezdí je celoeurópsky."
 
-#: src/core/StelSkyCultureMgr.cpp:299 src/ui_locationDialogGui.h:506
+#: src/core/StelSkyCultureMgr.cpp:303 src/ui_locationDialogGui.h:506
 msgid "Region:"
 msgstr "Región:"
 
-#: src/core/StelSkyCultureMgr.cpp:361
+#: src/core/StelSkyCultureMgr.cpp:365
 msgid "No description"
 msgstr "Bez popisu"
 
-#: src/core/StelSkyCultureMgr.cpp:396
+#: src/core/StelSkyCultureMgr.cpp:400
 msgid "References / Further Reading"
 msgstr "Zdroje / Ďalšie čítanie"
 
@@ -11286,175 +11286,180 @@ msgstr "Grécka (Almagest)"
 
 #: skycultures/translations_skycultures.fab:42
 msgctxt "sky culture"
+msgid "Greek (Dante)"
+msgstr "Grécka (Danteho)"
+
+#: skycultures/translations_skycultures.fab:44
+msgctxt "sky culture"
 msgid "Greek (Farnese + Almagest)"
 msgstr "Grécka (Farnese + Almagest)"
 
-#: skycultures/translations_skycultures.fab:44
+#: skycultures/translations_skycultures.fab:46
 msgctxt "sky culture"
 msgid "Greek (Leiden Aratea + Almagest)"
 msgstr "Grécka (Leidenská Aratea + Almagest)"
 
-#: skycultures/translations_skycultures.fab:46
+#: skycultures/translations_skycultures.fab:48
 msgctxt "sky culture"
 msgid "Hawaiian Starlines"
 msgstr "Havajské spojnice hviezd"
 
-#: skycultures/translations_skycultures.fab:48
+#: skycultures/translations_skycultures.fab:50
 msgctxt "sky culture"
 msgid "Inuit"
 msgstr "Inuitská"
 
-#: skycultures/translations_skycultures.fab:50
+#: skycultures/translations_skycultures.fab:52
 msgctxt "sky culture"
 msgid "Indian Vedic"
 msgstr "Indická védska"
 
-#: skycultures/translations_skycultures.fab:52
+#: skycultures/translations_skycultures.fab:54
 msgctxt "sky culture"
 msgid "Japanese Moon Stations"
 msgstr "Japonské mesačné zastavenia"
 
-#: skycultures/translations_skycultures.fab:54
+#: skycultures/translations_skycultures.fab:56
 msgctxt "sky culture"
 msgid "Kamilaroi/Euahlayi"
 msgstr "Kamilarojská/Euahlajiská"
 
-#: skycultures/translations_skycultures.fab:56
+#: skycultures/translations_skycultures.fab:58
 msgctxt "sky culture"
 msgid "Khoikhoi and San"
 msgstr "Chojchoj a San"
 
-#: skycultures/translations_skycultures.fab:58
+#: skycultures/translations_skycultures.fab:60
 msgctxt "sky culture"
 msgid "Korean"
 msgstr "Kórejská"
 
-#: skycultures/translations_skycultures.fab:60
+#: skycultures/translations_skycultures.fab:62
 msgctxt "sky culture"
 msgid "Lokono"
 msgstr "Lokonoská"
 
-#: skycultures/translations_skycultures.fab:62
+#: skycultures/translations_skycultures.fab:64
 msgctxt "sky culture"
 msgid "Macedonian"
 msgstr "Macedónska"
 
-#: skycultures/translations_skycultures.fab:64
+#: skycultures/translations_skycultures.fab:66
 msgctxt "sky culture"
 msgid "Maori"
 msgstr "Maorská"
 
-#: skycultures/translations_skycultures.fab:66
+#: skycultures/translations_skycultures.fab:68
 msgctxt "sky culture"
 msgid "Maya"
 msgstr "Mayská"
 
-#: skycultures/translations_skycultures.fab:68
+#: skycultures/translations_skycultures.fab:70
 msgctxt "sky culture"
 msgid "Modern"
 msgstr "Moderná"
 
-#: skycultures/translations_skycultures.fab:70
+#: skycultures/translations_skycultures.fab:72
 msgctxt "sky culture"
 msgid "Modern (Chinese)"
 msgstr "Moderná (Čínska)"
 
-#: skycultures/translations_skycultures.fab:72
+#: skycultures/translations_skycultures.fab:74
 msgctxt "sky culture"
 msgid "Modern (H.A. Rey)"
 msgstr "Moderná (H.A. Rey)"
 
-#: skycultures/translations_skycultures.fab:74
+#: skycultures/translations_skycultures.fab:76
 msgctxt "sky culture"
 msgid "Modern (IAU)"
 msgstr "Moderná (IAU)"
 
-#: skycultures/translations_skycultures.fab:76
+#: skycultures/translations_skycultures.fab:78
 msgctxt "sky culture"
 msgid "Modern (O. Hlad)"
 msgstr "Moderná (O. Hlad)"
 
-#: skycultures/translations_skycultures.fab:78
+#: skycultures/translations_skycultures.fab:80
 msgctxt "sky culture"
 msgid "Modern (Sky & Telescope)"
 msgstr "Moderná (Sky & Telescope)"
 
-#: skycultures/translations_skycultures.fab:80
+#: skycultures/translations_skycultures.fab:82
 msgctxt "sky culture"
 msgid "Modern (Sternenkarten)"
 msgstr "Moderná (Sternenkarten)"
 
-#: skycultures/translations_skycultures.fab:82
+#: skycultures/translations_skycultures.fab:84
 msgctxt "sky culture"
 msgid "Mongolian"
 msgstr "Mongolská"
 
-#: skycultures/translations_skycultures.fab:84
+#: skycultures/translations_skycultures.fab:86
 msgctxt "sky culture"
 msgid "Navajo"
 msgstr "Navažská"
 
-#: skycultures/translations_skycultures.fab:86
+#: skycultures/translations_skycultures.fab:88
 msgctxt "sky culture"
 msgid "Norse"
 msgstr "Škandinávska"
 
-#: skycultures/translations_skycultures.fab:88
+#: skycultures/translations_skycultures.fab:90
 msgctxt "sky culture"
 msgid "Northern Andes"
 msgstr "Severoandská"
 
-#: skycultures/translations_skycultures.fab:90
+#: skycultures/translations_skycultures.fab:92
 msgctxt "sky culture"
 msgid "Romanian"
 msgstr "Rumunská"
 
-#: skycultures/translations_skycultures.fab:92
+#: skycultures/translations_skycultures.fab:94
 msgctxt "sky culture"
 msgid "Russian (Siberian)"
 msgstr "Ruská (Sibírska)"
 
-#: skycultures/translations_skycultures.fab:94
+#: skycultures/translations_skycultures.fab:96
 msgctxt "sky culture"
 msgid "Sami"
 msgstr "Laponská"
 
-#: skycultures/translations_skycultures.fab:96
+#: skycultures/translations_skycultures.fab:98
 msgctxt "sky culture"
 msgid "Samoan"
 msgstr "Samojská"
 
-#: skycultures/translations_skycultures.fab:98
+#: skycultures/translations_skycultures.fab:100
 msgctxt "sky culture"
 msgid "Sardinian"
 msgstr "Sardínska"
 
-#: skycultures/translations_skycultures.fab:100
+#: skycultures/translations_skycultures.fab:102
 msgctxt "sky culture"
 msgid "Tongan"
 msgstr "Tonganská"
 
-#: skycultures/translations_skycultures.fab:102
+#: skycultures/translations_skycultures.fab:104
 msgctxt "sky culture"
 msgid "Tukano"
 msgstr "Tukanská"
 
-#: skycultures/translations_skycultures.fab:104
+#: skycultures/translations_skycultures.fab:106
 msgctxt "sky culture"
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guaranijská"
 
-#: skycultures/translations_skycultures.fab:106
+#: skycultures/translations_skycultures.fab:108
 msgctxt "sky culture"
 msgid "Vanuatu (Netwar)"
 msgstr "Vanuatská (Netwarská)"
 
-#: skycultures/translations_skycultures.fab:108
+#: skycultures/translations_skycultures.fab:110
 msgctxt "sky culture"
 msgid "Xhosa"
 msgstr "Xhosa"
 
-#: skycultures/translations_skycultures.fab:110
+#: skycultures/translations_skycultures.fab:112
 msgctxt "sky culture"
 msgid "Zulu"
 msgstr "Zulská"
