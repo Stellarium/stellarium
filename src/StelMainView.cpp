@@ -784,6 +784,10 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 			qDebug() << "Setting OpenGL Compatibility profile from command line...";
 			fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
 		}
+		// FIXME: temporary hook for Qt5-based macOS bundles
+		#if defined(Q_OS_MACOS) && (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+		fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
+		#endif
 	}
 
 	// Note: this only works if --mesa-mode was given on the command line. Auto-switch to Mesa or the driver name apparently cannot be detected at this early stage.
