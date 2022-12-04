@@ -85,15 +85,15 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
         # Included CMakeLists.txt contains unrelated targets and dependencies of
         # them, therefore DOWNLOAD_ONLY and all the code below
         CPMAddPackage(NAME indiclient
-            URL https://github.com/indilib/indi/archive/v1.8.5.zip
-            URL_HASH SHA256=57b78afe6d338533e35725e94cf6a9e302e22348ab418811bd41997cddf13fd6
-            VERSION 1.8.5
+            URL https://github.com/indilib/indi/archive/v1.9.9.zip
+            URL_HASH SHA256=17cc4c0cb2559f373aabe1f6c0d76f00508c0608da34a2c5bdcffbc41e3dce01
+            VERSION 1.9.9
             DOWNLOAD_ONLY YES)
 
-        # Installed version has /usr/include/libindi, move these headers to
+        # Installed version has /usr/include/libindi, copy these headers to
         # such directory for a consistent #include
         file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/libindi)
-        file(GLOB INDI_HEADERS "${indiclient_SOURCE_DIR}/libs/indibase/*.h")
+        file(GLOB INDI_HEADERS "${indiclient_SOURCE_DIR}/libs/*/*.h")
         file(COPY ${INDI_HEADERS}
             DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/libindi)
 
@@ -142,29 +142,55 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
 
         set(INDI_SOVERSION "1")
         set(CMAKE_INDI_VERSION_MAJOR 1)
-        set(CMAKE_INDI_VERSION_MINOR 8)
-        set(CMAKE_INDI_VERSION_RELEASE 5)
+        set(CMAKE_INDI_VERSION_MINOR 9)
+        set(CMAKE_INDI_VERSION_RELEASE 9)
         set(CMAKE_INDI_VERSION_STRING "${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE}")
         set(INDI_VERSION ${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE})
         set(DATA_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/share/indi/")
         configure_file(${indiclient_SOURCE_DIR}/config.h.cmake
             ${CMAKE_CURRENT_BINARY_DIR}/libindi/config.h )
+        configure_file(${indiclient_SOURCE_DIR}/libs/indicore/indiapi.h.in
+		    ${indiclient_SOURCE_DIR}/libs/indicore/indiapi.h)
         add_library(indiclient STATIC
-            ${indiclient_SOURCE_DIR}/libs/lilxml.c
-            ${indiclient_SOURCE_DIR}/base64.c
-            ${indiclient_SOURCE_DIR}/libs/indibase/basedevice.cpp
-            ${indiclient_SOURCE_DIR}/libs/indibase/baseclient.cpp
-            ${indiclient_SOURCE_DIR}/libs/indibase/indiproperty.cpp
-            ${indiclient_SOURCE_DIR}/libs/indibase/indistandardproperty.cpp
-            ${indiclient_SOURCE_DIR}/libs/indicom.c)
+            ${indiclient_SOURCE_DIR}/libs/indicore/lilxml.cpp
+            ${indiclient_SOURCE_DIR}/libs/indicore/base64.c
+            ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.c
+            ${indiclient_SOURCE_DIR}/libs/indicore/indicom.c
+            ${indiclient_SOURCE_DIR}/libs/indicore/userio.c
+            ${indiclient_SOURCE_DIR}/libs/indicore/indiuserio.c
+            ${indiclient_SOURCE_DIR}/libs/indiabstractclient/abstractbaseclient.cpp
+            ${indiclient_SOURCE_DIR}/libs/indiclient/baseclient.cpp
+            ${indiclient_SOURCE_DIR}/libs/indidevice/basedevice.cpp
+            ${indiclient_SOURCE_DIR}/libs/indidevice/indibase.cpp
+            ${indiclient_SOURCE_DIR}/libs/indidevice/indistandardproperty.cpp
+            ${indiclient_SOURCE_DIR}/libs/indidevice/parentdevice.cpp
+            ${indiclient_SOURCE_DIR}/libs/indidevice/watchdeviceproperty.cpp
+            ${indiclient_SOURCE_DIR}/libs/indidevice/property/indiproperties.cpp
+            ${indiclient_SOURCE_DIR}/libs/indidevice/property/indipropertybasic.cpp
+            ${indiclient_SOURCE_DIR}/libs/indidevice/property/indipropertyblob.cpp
+            ${indiclient_SOURCE_DIR}/libs/indidevice/property/indiproperty.cpp
+            ${indiclient_SOURCE_DIR}/libs/indidevice/property/indipropertylight.cpp
+            ${indiclient_SOURCE_DIR}/libs/indidevice/property/indipropertynumber.cpp
+            ${indiclient_SOURCE_DIR}/libs/indidevice/property/indipropertyswitch.cpp
+            ${indiclient_SOURCE_DIR}/libs/indidevice/property/indipropertytext.cpp
+            ${indiclient_SOURCE_DIR}/libs/indidevice/property/indipropertyview.cpp
+            ${indiclient_SOURCE_DIR}/libs/sockets/tcpsocket.cpp
+            ${indiclient_SOURCE_DIR}/libs/sockets/tcpsocket_unix.cpp
+            )
         target_include_directories(indiclient
             PRIVATE
             ${CMAKE_CURRENT_BINARY_DIR}/libindi
             PUBLIC
             ${CMAKE_CURRENT_BINARY_DIR}
             ${indiclient_SOURCE_DIR}
+            ${indiclient_SOURCE_DIR}/libs/sockets
+            ${indiclient_SOURCE_DIR}/libs/indiabstractclient
+            ${indiclient_SOURCE_DIR}/libs/indibase
+            ${indiclient_SOURCE_DIR}/libs/indicore
+            ${indiclient_SOURCE_DIR}/libs/indiclient
+            ${indiclient_SOURCE_DIR}/libs/indidevice
+            ${indiclient_SOURCE_DIR}/libs/indidevice/property
             ${indiclient_SOURCE_DIR}/libs)
         target_link_libraries(indiclient ${ZLIB_LIBRARIES})
     endif()
 ENDIF()
-
