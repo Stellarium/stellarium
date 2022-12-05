@@ -151,7 +151,7 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
             ${CMAKE_CURRENT_BINARY_DIR}/libindi/config.h )
         configure_file(${indiclient_SOURCE_DIR}/libs/indicore/indiapi.h.in
 		    ${indiclient_SOURCE_DIR}/libs/indicore/indiapi.h)
-        add_library(indiclient STATIC
+		list(APPEND INDILIB_SOURCES
             ${indiclient_SOURCE_DIR}/libs/indicore/lilxml.cpp
             ${indiclient_SOURCE_DIR}/libs/indicore/base64.c
             ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.c
@@ -175,8 +175,15 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
             ${indiclient_SOURCE_DIR}/libs/indidevice/property/indipropertytext.cpp
             ${indiclient_SOURCE_DIR}/libs/indidevice/property/indipropertyview.cpp
             ${indiclient_SOURCE_DIR}/libs/sockets/tcpsocket.cpp
-            ${indiclient_SOURCE_DIR}/libs/sockets/tcpsocket_unix.cpp
             )
+        if(WIN32)
+            list(APPEND INDILIB_SOURCES ${indiclient_SOURCE_DIR}/libs/sockets/tcpsocket_win.cpp)
+        else()
+            list(APPEND INDILIB_SOURCES ${indiclient_SOURCE_DIR}/libs/sockets/tcpsocket_unix.cpp)
+        endif()
+
+        add_library(indiclient STATIC ${INDILIB_SOURCES})
+
         target_include_directories(indiclient
             PRIVATE
             ${CMAKE_CURRENT_BINARY_DIR}/libindi
