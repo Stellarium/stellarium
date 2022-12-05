@@ -59,11 +59,13 @@ void PointerCoordinatesWindow::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
-	populateValues();
-
-	connect(ui->checkBoxEnableAtStartup, SIGNAL(clicked(bool)), coord, SLOT(setFlagEnableAtStartup(bool)));
-	connect(ui->spinBoxFontSize, SIGNAL(valueChanged(int)), coord, SLOT(setFontSize(int)));
-	connect(ui->checkBoxShowButton, SIGNAL(clicked(bool)), coord, SLOT(setFlagShowCoordinatesButton(bool)));
+	connectBoolProperty(ui->checkBoxEnableAtStartup, "PointerCoordinates.enableAtStartup");
+	connectBoolProperty(ui->checkBoxShowButton,      "PointerCoordinates.showCoordinatesButton");
+	connectBoolProperty(ui->checkBoxConstellation,   "PointerCoordinates.showConstellation");
+	connectBoolProperty(ui->checkBoxCrossedLines,    "PointerCoordinates.showCrossedLines");
+	connectBoolProperty(ui->checkBoxElongation,      "PointerCoordinates.showElongation");
+	connectIntProperty(ui->spinBoxFontSize,          "PointerCoordinates.fontSize");
+	connectColorButton(ui->textColorButton, "PointerCoordinates.fontColor", "PointerCoordinates/text_color");
 
 	// Place of the string with coordinates
 	populateCoordinatesPlacesList();
@@ -88,12 +90,7 @@ void PointerCoordinatesWindow::createDialogContent()
 	ui->coordinateSystemComboBox->setCurrentIndex(idx);
 	connect(ui->coordinateSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCoordinateSystem(int)));
 
-	ui->checkBoxConstellation->setChecked(coord->getFlagShowConstellation());
-	connect(ui->checkBoxConstellation, SIGNAL(toggled(bool)), coord, SLOT(setFlagShowConstellation(bool)));
-
-	ui->checkBoxCrossedLines->setChecked(coord->getFlagShowCrossedLines());
-	connect(ui->checkBoxCrossedLines, SIGNAL(toggled(bool)), coord, SLOT(setFlagShowCrossedLines(bool)));
-
+	populateValues();
 	connect(ui->spinBoxX, SIGNAL(valueChanged(int)), this, SLOT(setCustomCoordinatesPlace()));
 	connect(ui->spinBoxY, SIGNAL(valueChanged(int)), this, SLOT(setCustomCoordinatesPlace()));
 
@@ -109,9 +106,6 @@ void PointerCoordinatesWindow::createDialogContent()
 
 void PointerCoordinatesWindow::populateValues()
 {
-	ui->checkBoxEnableAtStartup->setChecked(coord->getFlagEnableAtStartup());
-	ui->spinBoxFontSize->setValue(coord->getFontSize());
-	ui->checkBoxShowButton->setChecked(coord->getFlagShowCoordinatesButton());
 	QPair<int, int> cc = coord->getCustomCoordinatesPlace();
 	ui->spinBoxX->setValue(cc.first);
 	ui->spinBoxY->setValue(cc.second);

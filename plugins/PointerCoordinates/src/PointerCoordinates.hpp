@@ -50,11 +50,14 @@ file (section [PointerCoordinates]).
 class PointerCoordinates : public StelModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool enabled
-		   READ isEnabled
-		   WRITE enableCoordinates
-		   NOTIFY flagCoordinatesVisibilityChanged
-		   )
+	Q_PROPERTY(bool enabled		READ isEnabled			WRITE enableCoordinates		NOTIFY flagCoordinatesVisibilityChanged)
+	Q_PROPERTY(bool enableAtStartup READ getFlagEnableAtStartup	WRITE setFlagEnableAtStartup	NOTIFY flagEnableAtStartupChanged)
+	Q_PROPERTY(bool showCoordinatesButton	READ getFlagShowCoordinatesButton	WRITE setFlagShowCoordinatesButton	NOTIFY flagShowCoordinatesButtonChanged)
+	Q_PROPERTY(bool showConstellation	READ getFlagShowConstellation		WRITE setFlagShowConstellation		NOTIFY flagShowConstellationChanged)
+	Q_PROPERTY(bool showCrossedLines	READ getFlagShowCrossedLines		WRITE setFlagShowCrossedLines		NOTIFY flagShowCrossedLinesChanged)
+	Q_PROPERTY(bool showElongation	READ getFlagShowElongation	WRITE setFlagShowElongation	NOTIFY flagShowElongationChanged)
+	Q_PROPERTY(int fontSize		READ getFontSize		WRITE setFontSize		NOTIFY fontSizeChanged)
+	Q_PROPERTY(Vec3f fontColor	READ getFontColor		WRITE setFontColor		NOTIFY fontColorChanged)
 
 public:
 	//! @enum CoordinatesPlace
@@ -103,39 +106,29 @@ public:
 	//! Save the settings to the main configuration file.
 	void saveConfiguration(void);
 
-	//! Is plugin enabled?
-	bool isEnabled() const
-	{
-		return flagShowCoordinates;
-	}
-
 	//! Get font size for messages
-	int getFontSize(void)
-	{ 
-		return fontSize;
-	}
-	bool getFlagEnableAtStartup(void)
-	{ 
-		return flagEnableAtStartup;
-	}
-	bool getFlagShowCoordinatesButton(void)
-	{
-		return flagShowCoordinatesButton;
-	}
-	bool getFlagShowCrossedLines(void)
-	{
-		return flagShowCrossedLines;
-	}
+	int getFontSize(void) { return fontSize; }
 
-	QPair<int, int> getCoordinatesPlace(QString text);
+	//! Is plugin enabled?
+	bool isEnabled() const { return flagShowCoordinates; }
+	bool getFlagEnableAtStartup(void) { return flagEnableAtStartup;	}
+	bool getFlagShowCoordinatesButton(void)	{ return flagShowCoordinatesButton; }
+	bool getFlagShowCrossedLines(void) { return flagShowCrossedLines; }
+	bool getFlagShowElongation(void) const { return flagShowElongation; }
+	bool getFlagShowConstellation(void) const { return flagShowConstellation; }
 
-	QPair<int, int> getCustomCoordinatesPlace()
-	{
-		return customPosition;
-	}
+	QPair<int, int> getCoordinatesPlace(QString text, int line = 1);
+	QPair<int, int> getCustomCoordinatesPlace() { return customPosition; }
 
 signals:
 	void flagCoordinatesVisibilityChanged(bool b);
+	void flagEnableAtStartupChanged(bool b);
+	void flagShowCoordinatesButtonChanged(bool b);
+	void flagShowConstellationChanged(bool b);
+	void flagShowCrossedLinesChanged(bool b);
+	void flagShowElongationChanged(bool b);
+	void fontSizeChanged(int i);
+	void fontColorChanged(Vec3f);
 
 private slots:
 	//! Call when button "Save settings" in main GUI are pressed
@@ -145,48 +138,27 @@ public slots:
 	//! Enable plugin usage
 	void enableCoordinates(bool b);
 	//! Enable plugin usage at startup
-	void setFlagEnableAtStartup(bool b)
-	{
-		flagEnableAtStartup=b;
-	}
+	void setFlagEnableAtStartup(bool b) { flagEnableAtStartup=b; }
 	//! Set font size for message
-	void setFontSize(int size)
-	{ 
-		fontSize=size;
-	}
+	void setFontSize(int size) { fontSize=size; }
 	//! Display plugin button on toolbar
 	void setFlagShowCoordinatesButton(bool b);
 
-	void setFlagShowCrossedLines(bool b)
-	{
-		flagShowCrossedLines=b;
-	}
+	void setFlagShowCrossedLines(bool b) { flagShowCrossedLines=b; }
 
 	//! Set the current place of the string with coordinates
-	void setCurrentCoordinatesPlace(PointerCoordinates::CoordinatesPlace place)
-	{
-		currentPlace = place;
-	}
+	void setCurrentCoordinatesPlace(PointerCoordinates::CoordinatesPlace place) { currentPlace = place; }
 	//! Get the current place of the string with coordinates
-	PointerCoordinates::CoordinatesPlace getCurrentCoordinatesPlace() const
-	{
-		return currentPlace;
-	}
+	PointerCoordinates::CoordinatesPlace getCurrentCoordinatesPlace() const { return currentPlace; }
 	//! Get the current place of the string with coordinates
 	QString getCurrentCoordinatesPlaceKey(void) const;
 	//! Set the current place of the string with coordinates from its key
 	void setCurrentCoordinatesPlaceKey(QString key);
 
 	//! Set the current coordinate system
-	void setCurrentCoordinateSystem(PointerCoordinates::CoordinateSystem cs)
-	{
-		currentCoordinateSystem = cs;
-	}
+	void setCurrentCoordinateSystem(PointerCoordinates::CoordinateSystem cs) { currentCoordinateSystem = cs; }
 	//! Get the current coordinate system
-	PointerCoordinates::CoordinateSystem getCurrentCoordinateSystem() const
-	{
-		return currentCoordinateSystem;
-	}
+	PointerCoordinates::CoordinateSystem getCurrentCoordinateSystem() const	{ return currentCoordinateSystem; }
 	//! Get the current coordinate system key
 	QString getCurrentCoordinateSystemKey(void) const;
 	//! Set the current coordinate system from its key
@@ -194,8 +166,20 @@ public slots:
 
 	void setCustomCoordinatesPlace(int x, int y);
 
-	void setFlagShowConstellation(bool b){flagShowConstellation=b;}
-	bool getFlagShowConstellation(void) const {return flagShowConstellation;}
+	void setFlagShowConstellation(bool b){ flagShowConstellation=b; }
+	void setFlagShowElongation(bool b){ flagShowElongation=b; }
+
+	//! Get color for text
+	//! @return color
+	Vec3f getFontColor() const;
+	//! Set color for text
+	//! @param c color
+	//! @code
+	//! // example of usage in scripts
+	//! PointerCoordinates.setFontColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setFontColor(const Vec3f& c);
+
 private:
 	PointerCoordinatesWindow* mainWindow;
 	QSettings* conf;
@@ -212,6 +196,7 @@ private:
 	bool flagShowCoordinatesButton;
 	bool flagShowConstellation;
 	bool flagShowCrossedLines;
+	bool flagShowElongation;
 	Vec3f textColor;
 	Vec3d coordinatesPoint;
 	int fontSize;
