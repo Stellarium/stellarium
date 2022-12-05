@@ -21,12 +21,10 @@
 #include <QStyleOptionGraphicsItem>
 #include <QPainter>
 #include "StelGuiItems.hpp"
-#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelGui.hpp"
 #include "SkyGui.hpp"
-#include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelScriptMgr.hpp"
@@ -67,6 +65,7 @@
 #include "PersianAstronomicalCalendar.hpp"
 #include "BahaiArithmeticCalendar.hpp"
 #include "BahaiAstronomicalCalendar.hpp"
+#include "ChineseCalendar.hpp"
 
 /*************************************************************************
  This method is the one called automatically by the StelModuleMgr just 
@@ -114,6 +113,9 @@ Calendars::Calendars():
 	flagShowCoptic(false),
 	flagShowEthiopic(false),
 	flagShowChinese(true),
+	flagShowJapanese(true),
+	flagShowKorean(true),
+	flagShowVietnamese(true),
 	flagShowIslamic(true),
 	flagShowHebrew(true),
 	flagShowOldHinduSolar(false),
@@ -249,7 +251,11 @@ void Calendars::init()
 	calendars.insert("BahaiArithmetic", new BahaiArithmeticCalendar(jd));
 	calendars.insert("BahaiAstronomical", new BahaiAstronomicalCalendar(jd));
 	calendars.insert("Tibetan", new TibetanCalendar(jd));
+	calendars.insert("Chinese", new ChineseCalendar(jd));
 	// TODO: Add your Calendar subclasses here.
+//	calendars.insert("Japanese", new JapaneseCalendar(jd));
+//	calendars.insert("Korean", new KoreanCalendar(jd));
+//	calendars.insert("Vietnamese", new VietnameseCalendar(jd));
 
 	foreach (Calendar* cal, calendars)
 	{
@@ -294,6 +300,9 @@ void Calendars::loadSettings()
 	showCoptic(	        conf->value("Calendars/show_coptic", false).toBool());
 	showEthiopic(	        conf->value("Calendars/show_ethiopic", false).toBool());
 	showChinese(            conf->value("Calendars/show_chinese", false).toBool());
+	showJapanese(           conf->value("Calendars/show_japanese", false).toBool());
+	showKorean(             conf->value("Calendars/show_korean", false).toBool());
+	showVietnamese(         conf->value("Calendars/show_vietnamese", false).toBool());
 	showIslamic(            conf->value("Calendars/show_islamic", true).toBool());
 	showHebrew(             conf->value("Calendars/show_hebrew", true).toBool());
 	showOldHinduSolar(      conf->value("Calendars/show_old_hindu_solar", false).toBool());
@@ -371,6 +380,10 @@ void Calendars::draw(StelCore* core)
 	if (flagShowAstroHinduSolar)    oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Hindu Astro Solar",     "calendar"), getCal("AstroHinduSolar")->getFormattedDateString());
 	if (flagShowAstroHinduLunar)    oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Hindu Astro Lunisolar", "calendar"), getCal("AstroHinduLunar")->getFormattedDateString());
 	if (flagShowTibetan)            oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Tibetan",               "calendar"), getCal("Tibetan")->getFormattedDateString());
+	if (flagShowChinese) {
+					oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Chinese",               "calendar"), getCal("Chinese")->getFormattedDateString());
+					oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Chinese Solar Terms",   "calendar"), static_cast<ChineseCalendar*>(getCal("Chinese"))->getFormattedSolarTermsString());
+	}
 	if (flagShowMayaLongCount)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Long Count",       "calendar"), getCal("MayaLongCount")->getFormattedDateString());
 	if (flagShowMayaHaab)           oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Haab",             "calendar"), getCal("MayaHaab")->getFormattedDateString());
 	if (flagShowMayaTzolkin)        oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Tzolkin",          "calendar"), getCal("MayaTzolkin")->getFormattedDateString());
@@ -574,6 +587,39 @@ void Calendars::showChinese(bool b)
 		flagShowChinese=b;
 		conf->setValue("Calendars/show_chinese", b);
 		emit showChineseChanged(b);
+	}
+}
+
+bool Calendars::isJapaneseDisplayed() const { return flagShowJapanese;}
+void Calendars::showJapanese(bool b)
+{
+	if (b!=flagShowJapanese)
+	{
+		flagShowJapanese=b;
+		conf->setValue("Calendars/show_japanese", b);
+		emit showJapaneseChanged(b);
+	}
+}
+
+bool Calendars::isKoreanDisplayed() const { return flagShowKorean;}
+void Calendars::showKorean(bool b)
+{
+	if (b!=flagShowKorean)
+	{
+		flagShowKorean=b;
+		conf->setValue("Calendars/show_korean", b);
+		emit showKoreanChanged(b);
+	}
+}
+
+bool Calendars::isVietnameseDisplayed() const { return flagShowVietnamese;}
+void Calendars::showVietnamese(bool b)
+{
+	if (b!=flagShowVietnamese)
+	{
+		flagShowVietnamese=b;
+		conf->setValue("Calendars/show_vietnamese", b);
+		emit showVietnameseChanged(b);
 	}
 }
 

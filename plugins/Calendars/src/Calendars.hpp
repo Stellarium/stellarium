@@ -59,7 +59,12 @@ Take care that some data arguments are internally stored as QVector<int>, and tr
 The various calendars may have array lengths of elements, which are not always checked.
 When a StelLocation argument is used in the internal function, a scripting function is available which allows specifying
 a location name in format "city, region". This also works with user-specified locations.
-Time zones only work correctly when specified (in the location database) as full specification like "Europe/Madrid", not "UT+4".
+Time zones only work correctly when specified (in the location database) as full specification like "Europe/Madrid",
+or in a generic offset spelling like "UTC+04:00" (but not "UT+4"). For use of "calendar locations" that have been used before
+timezones were introduced, we must work out longitude-dependent UTC offset that must be rounded to the nearest minute.
+
+Occasionally, the time zone support will provide different results between Windows and other operating systems, esp. for historical data.
+See Qt documentation on QtTimeZone.
 
 @}
 */
@@ -90,6 +95,9 @@ class Calendars : public StelModule
 	Q_PROPERTY(bool flagShowCoptic        READ isCopticDisplayed        WRITE showCoptic        NOTIFY showCopticChanged)
 	Q_PROPERTY(bool flagShowEthiopic      READ isEthiopicDisplayed      WRITE showEthiopic      NOTIFY showEthiopicChanged)
 	Q_PROPERTY(bool flagShowChinese       READ isChineseDisplayed       WRITE showChinese       NOTIFY showChineseChanged)
+	Q_PROPERTY(bool flagShowJapanese      READ isJapaneseDisplayed      WRITE showJapanese      NOTIFY showJapaneseChanged)
+	Q_PROPERTY(bool flagShowKorean        READ isKoreanDisplayed        WRITE showKorean        NOTIFY showKoreanChanged)
+	Q_PROPERTY(bool flagShowVietnamese    READ isVietnameseDisplayed    WRITE showVietnamese    NOTIFY showVietnameseChanged)
 	Q_PROPERTY(bool flagShowIslamic       READ isIslamicDisplayed       WRITE showIslamic       NOTIFY showIslamicChanged)
 	Q_PROPERTY(bool flagShowHebrew        READ isHebrewDisplayed        WRITE showHebrew        NOTIFY showHebrewChanged)
 	Q_PROPERTY(bool flagShowOldHinduSolar READ isOldHinduSolarDisplayed WRITE showOldHinduSolar NOTIFY showOldHinduSolarChanged)
@@ -172,6 +180,9 @@ signals:
 	void showCopticChanged(bool b);
 	void showEthiopicChanged(bool b);
 	void showChineseChanged(bool b);
+	void showJapaneseChanged(bool b);
+	void showKoreanChanged(bool b);
+	void showVietnameseChanged(bool b);
 	void showIslamicChanged(bool b);
 	void showHebrewChanged(bool b);
 	void showOldHinduSolarChanged(bool b);
@@ -232,6 +243,12 @@ public slots:
 	void showEthiopic(bool b);		//!< activate display of Ethiopic Calendar
 	bool isChineseDisplayed() const;	//!< display Chinese Calendar?
 	void showChinese(bool b);		//!< activate display of Chinese Calendar
+	bool isJapaneseDisplayed() const;	//!< display Japanese Calendar?
+	void showJapanese(bool b);		//!< activate display of Japanese Calendar
+	bool isKoreanDisplayed() const;	//!< display Korean Calendar?
+	void showKorean(bool b);		//!< activate display of Korean Calendar
+	bool isVietnameseDisplayed() const;	//!< display Vietnamese Calendar?
+	void showVietnamese(bool b);		//!< activate display of Vietnamese Calendar
 	bool isIslamicDisplayed() const;	//!< display Islamic Calendar?
 	void showIslamic(bool b);		//!< activate display of Islamic Calendar
 	bool isHebrewDisplayed() const;		//!< display Hebrew Calendar?
@@ -308,6 +325,9 @@ private:
 	bool flagShowCoptic;
 	bool flagShowEthiopic;
 	bool flagShowChinese;
+	bool flagShowJapanese;
+	bool flagShowKorean;
+	bool flagShowVietnamese;
 	bool flagShowIslamic;
 	bool flagShowHebrew;
 	bool flagShowOldHinduSolar;

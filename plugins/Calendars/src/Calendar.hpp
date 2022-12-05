@@ -22,7 +22,6 @@
 #include <QString>
 #include <QObject>
 #include "StelUtils.hpp"
-#include "StelTranslator.hpp"
 #include "StelLocation.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -33,11 +32,11 @@
 //! @ingroup calendars
 //!
 //! Stellarium uses Julian Day numbers internally, and the conventional approach of using the Gregorian calendar for dates after 1582-10-15.
-//! For dates before that, the Julian calendar is used, in the form finalized by Augustus and running unchanged since 8AD.
-//! Astronomical year counting implies having a year 0, while some calendars adhere to historical counting like 1 B.C., 1 A.D.
+//! For dates before that, the Julian calendar is used, in the form finalized by Augustus and running unchanged since 8 A.D.
+//! Astronomical year counting implies having a year 0, while some calendars adhere to historical counting where 1 B.C. immediately precedes 1 A.D.
 //! Some European countries, especially the Protestant countries, delayed the calendar switch well into the 18th century.
 //! Other cultures have various other calendar schemes.
-//! All calendars have a numerical vector of time elements and may have individual string lists for names of elements like "week days" and "months".
+//! All calendars implemented here have a numerical vector of integer time elements and may have individual string lists for names of elements like "week days" and "months".
 //! If the pattern of weeks and months does not apply, the names may refer to other structural elements.
 //!
 //! The most important source used here is:

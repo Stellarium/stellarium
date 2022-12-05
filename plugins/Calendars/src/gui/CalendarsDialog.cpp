@@ -27,6 +27,7 @@
 #include "StelGui.hpp"
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelTranslator.hpp"
 
 // We only need to include calendars when we have to call special functions.
 #include "JulianCalendar.hpp"
@@ -80,8 +81,7 @@ void CalendarsDialog::createDialogContent()
 #ifdef STELLARIUM_RELEASE_BUILD
 	ui->labelRDvalue->hide();
 	ui->labelRD->hide();
-	// DISABLE Chinese etc for now, TBD!
-	ui->chineseCheckBox->hide();
+	// DISABLE handling Chinese etc for now, TBD!
 	ui->tabs->removeTab(2);
 #else
 	connect(cal->getCal("Julian"), &JulianCalendar::jdChanged, this, [=](double jd){ui->labelRDvalue->setText(QString::number(Calendar::fixedFromJD(jd, true)));});
@@ -112,6 +112,9 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->ethiopicCheckBox,           "Calendars.flagShowEthiopic");
 	connectBoolProperty(ui->icelandicCheckBox,          "Calendars.flagShowIcelandic");
 	connectBoolProperty(ui->chineseCheckBox,            "Calendars.flagShowChinese");
+//	connectBoolProperty(ui->japaneseCheckBox,           "Calendars.flagShowJapanese");
+//	connectBoolProperty(ui->koreanCheckBox,             "Calendars.flagShowKorean");
+//	connectBoolProperty(ui->vietnameseCheckBox,         "Calendars.flagShowVietnamese");
 	connectBoolProperty(ui->islamicCheckBox,            "Calendars.flagShowIslamic");
 	connectBoolProperty(ui->hebrewCheckBox,             "Calendars.flagShowHebrew");
 	connectBoolProperty(ui->oldHinduSolarCheckBox,      "Calendars.flagShowOldHinduSolar");
@@ -208,14 +211,17 @@ void CalendarsDialog::setAboutHtml(void)
 	html += "<li>" + q_("Bahá’í calendar (arithmetic version)") + "</li>";
 	html += "<li>" + q_("Bahá’í calendar (astronomical version)") + "</li>";
 
-//	html += "<li>" + q_("Chinese calendars") + "</li>";
 	html += "<li>" + q_("Old Hindu Solar and Lunar calendars") + "</li>";
 	html += "<li>" + q_("New Hindu Solar and Lunar calendars") + "</li>";
 	html += "<li>" + q_("Astronomically 'accurate' Hindu Solar and Lunar calendars") + "</li>";
 	html += "<li>" + q_("Tibetan (Phuglugs, Phug-pa, K&#x101;lacakra) calendar") + "</li>";
+	html += "<li>" + q_("Balinese Pawukon calendar") + "</li>";
+	html += "<li>" + q_("Chinese calendar") + "</li>";
+//	html += "<li>" + q_("Japanese calendar") + "</li>";
+//	html += "<li>" + q_("Korean calendar") + "</li>";
+//	html += "<li>" + q_("Vietnamese calendar") + "</li>";
 	html += "<li>" + q_("Maya calendars") + "</li>";
 	html += "<li>" + q_("Aztec calendars") + "</li>";
-	html += "<li>" + q_("Balinese Pawukon calendar") + "</li>";
 	html += "</ul>";
 	html += "<p>" + q_("The plugin is in an early stage of development. Please cross-check results and report errors.") + "</p>";
 	html += "<p>" + q_("For some calendars, we welcome proper formatting suggestions by actual users.") + "</p>";

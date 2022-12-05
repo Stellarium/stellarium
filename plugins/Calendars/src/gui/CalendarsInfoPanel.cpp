@@ -79,6 +79,10 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 	connect (this->plugin, &Calendars::showPersianAstronomicalChanged, this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showBahaiArithmeticChanged    , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showBahaiAstronomicalChanged  , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showChineseChanged            , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showJapaneseChanged           , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showKoreanChanged             , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showVietnameseChanged         , this, [=](bool){setHtml("a"); updatePosition();});
 
 	//Night mode
 	connect(&stelApp, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setColorScheme(const QString&)));

@@ -385,6 +385,13 @@ namespace StelUtils
 			ret+=b;
 		return ret;
 	}
+	//! Integer interval modulo. [a..b)
+	inline int amod(const int x, const int a, const int b){
+		if (a==b)
+			return x;
+		int ret = imod(x-a, b-a);
+		return ret+a;
+	}
 	//! Double modulo where the result is always nonnegative. [0..(b
 	inline double fmodpos(const double a, const double b){
 		double ret = fmod(a, b);
