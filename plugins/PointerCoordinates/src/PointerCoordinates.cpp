@@ -31,6 +31,7 @@
 #include "SolarSystem.hpp"
 #include "PointerCoordinates.hpp"
 #include "PointerCoordinatesWindow.hpp"
+#include "planetsephems/precession.h"
 
 #include <QFontMetrics>
 #include <QSettings>
@@ -68,6 +69,7 @@ PointerCoordinates::PointerCoordinates()
 	, flagShowCoordinatesButton(false)
 	, flagShowConstellation(false)
 	, flagShowCrossedLines(false)
+	, flagShowElongation(false)
 	, textColor(Vec3f(1,0.5,0))
 	, coordinatesPoint(Vec3d(0,0,0))
 	, fontSize(14)
@@ -105,6 +107,7 @@ void PointerCoordinates::init()
 	setFlagShowCoordinatesButton(flagShowCoordinatesButton);
 	setFlagShowConstellation(flagShowConstellation);
 	setFlagShowCrossedLines(flagShowCrossedLines);
+	setFlagShowElongation(flagShowElongation);
 }
 
 void PointerCoordinates::draw(StelCore *core)
@@ -291,6 +294,39 @@ void PointerCoordinates::draw(StelCore *core)
 	}
 	sPainter.drawText(x, y, coordsText);
 
+	if (flagShowElongation)
+	{
+		// Elongation in ecliptic longitude
+		static SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+		double raSun, deSun, ra, de, lSun, ecLong, bSun, ecLat;
+		double obl=ssystem->getEarth()->getRotObliquity(core->getJDE());
+		if (core->getUseNutation())
+		{
+			double dEps, dPsi;
+			getNutationAngles(core->getJDE(), &dPsi, &dEps);
+			obl+=dEps;
+		}
+		StelUtils::rectToSphe(&raSun, &deSun, ssystem->getSun()->getEquinoxEquatorialPos(core));
+		StelUtils::rectToSphe(&ra, &de, core->j2000ToEquinoxEqu(mousePosition));
+		StelUtils::equToEcl(raSun, deSun, obl, &lSun, &bSun);
+		StelUtils::equToEcl(ra, de, obl, &ecLong, &ecLat);
+		double elongAlongEcliptic = StelUtils::fmodpos(ecLong-lSun, M_PI*2.);
+		if (elongAlongEcliptic > M_PI) elongAlongEcliptic-=2.*M_PI;
+		double elongationDecDeg=elongAlongEcliptic*M_180_PI;
+
+		QString dLam;
+		if (withDecimalDegree)
+			dLam = StelUtils::decDegToLongitudeStr(elongationDecDeg, true, true, false);
+		else
+			dLam = StelUtils::decDegToLongitudeStr(elongationDecDeg);
+
+		coordsText = QString("%1: %2").arg(q_("Elong. in Ecl.Long."), dLam);
+		y = getCoordinatesPlace(coordsText, 2).second;
+		if (getCurrentCoordinatesPlace()!=Custom)
+			y *= ppx;
+		sPainter.drawText(x, y, coordsText);
+	}
+
 	if (flagShowCrossedLines)
 	{
 		QPoint m = StelMainView::getInstance().getMousePos();
@@ -353,6 +389,7 @@ void PointerCoordinates::loadConfiguration(void)
 	setCustomCoordinatesPlace(cc[0].toInt(), cc[1].toInt());
 	flagShowConstellation = conf->value("flag_show_constellation", false).toBool();
 	flagShowCrossedLines = conf->value("flag_show_crossed_lines", false).toBool();
+	flagShowElongation = conf->value("flag_show_elongation", false).toBool();
 
 	conf->endGroup();
 }
@@ -367,12 +404,24 @@ void PointerCoordinates::saveConfiguration(void)
 	conf->setValue("current_coordinate_system", getCurrentCoordinateSystemKey());
 	QPair<int, int> cc = getCustomCoordinatesPlace();
 	conf->setValue("custom_coordinates", QString("%1,%2").arg(cc.first).arg(cc.second));
-	//conf->setValue("text_color", "1,0.5,0");
+	conf->setValue("text_color", getFontColor().toStr());
 	conf->setValue("font_size", getFontSize());
 	conf->setValue("flag_show_constellation", getFlagShowConstellation());
 	conf->setValue("flag_show_crossed_lines", getFlagShowCrossedLines());
+	conf->setValue("flag_show_elongation", getFlagShowElongation());
 
 	conf->endGroup();
+}
+
+Vec3f PointerCoordinates::getFontColor() const
+{
+	return textColor;
+}
+
+void PointerCoordinates::setFontColor(const Vec3f &c)
+{
+	textColor = c;
+	emit fontColorChanged(c);
 }
 
 void PointerCoordinates::setFlagShowCoordinatesButton(bool b)
@@ -424,44 +473,46 @@ QString PointerCoordinates::getCurrentCoordinateSystemKey() const
 	return metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinateSystem")).key(currentCoordinateSystem);
 }
 
-QPair<int, int> PointerCoordinates::getCoordinatesPlace(QString text)
+QPair<int, int> PointerCoordinates::getCoordinatesPlace(QString text, int line)
 {
-	int x = 0, y = 0;
+	int height, x = 0, y = 0, shift = 0;
 	static const float coeff = 1.5;
 	QFontMetrics fm(font);
 	QSize fs = fm.size(Qt::TextSingleLine, text);
+	height = (line>1) ? static_cast<int>((line-1)*fs.height() + fs.height()*coeff) : static_cast<int>(fs.height()*coeff);
 	switch(getCurrentCoordinatesPlace())
 	{
 		case TopCenter:
 		{
 			x = gui->getSkyGui()->getSkyGuiWidth()/2 - fs.width()/2;
-			y = gui->getSkyGui()->getSkyGuiHeight() - static_cast<int>(fs.height()*coeff);
+			y = gui->getSkyGui()->getSkyGuiHeight() - height;
 			break;
 		}
 		case TopRight:
 		{
 			x = 3*gui->getSkyGui()->getSkyGuiWidth()/4 - fs.width()/2;
-			y = gui->getSkyGui()->getSkyGuiHeight() - static_cast<int>(fs.height()*coeff);
+			y = gui->getSkyGui()->getSkyGuiHeight() - height;
 			break;
 		}
 		case RightBottomCorner:
 		{
 			x = gui->getSkyGui()->getSkyGuiWidth() - static_cast<int>(fs.width() + 10*coeff);
-			y = fs.height();
+			y = line*fs.height();
 			break;
 		}
 		case NearMouseCursor:
 		{
 			QPoint m = StelMainView::getInstance().getMousePos();
 			x = m.x() + 3;
-			y = gui->getSkyGui()->getSkyGuiHeight() - m.y() + 5;
+			if (line>1) { shift = line*fs.height() - fs.height(); }
+			y = gui->getSkyGui()->getSkyGuiHeight() - m.y() + 5 - shift;
 			break;
 		}
 		case Custom:
 		{
 			QPair<int, int> xy = getCustomCoordinatesPlace();
 			x = xy.first;
-			y = gui->getSkyGui()->getSkyGuiHeight() - xy.second - fs.height();
+			y = gui->getSkyGui()->getSkyGuiHeight() - xy.second - line*fs.height();
 			break;
 		}
 	}
