@@ -94,6 +94,7 @@ out vec4 FRAG_COLOR;
 #define shadow2DProj_x(a,b) textureProj(a,b)
 #define textureCube(a,b) texture(a,b)
 #define textureCube_3(a,b,c) texture(a,b,c)
+#define textureGrad_SUPPORTED
 #line 1
 )";
 			return prefix;
