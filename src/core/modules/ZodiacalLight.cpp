@@ -394,9 +394,9 @@ void main(void)
 	renderProgram->setUniformValue(shaderVars.ditherPattern, ditherTexSampler);
 
 	renderProgram->setUniformValue(shaderVars.projectionMatrixInverse, projector->getProjectionMatrix().toQMatrix().inverted());
-	renderProgram->setUniformValue(shaderVars.brightness, c.toQVector3D());
+	renderProgram->setUniformValue(shaderVars.brightness, c.toQVector());
 	renderProgram->setUniformValue(shaderVars.lambdaSun, GLfloat(lambdaSun));
-	renderProgram->setUniformValue(shaderVars.rgbMaxValue, calcRGBMaxValue(core->getDitheringMode()).toQVector3D());
+	renderProgram->setUniformValue(shaderVars.rgbMaxValue, calcRGBMaxValue(core->getDitheringMode()).toQVector());
 
 	projector->setUnProjectUniforms(*renderProgram);
 	extinction.setForwardTransformUniforms(*renderProgram);

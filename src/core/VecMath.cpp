@@ -251,12 +251,12 @@ template<> QColor Vec3d::toQColor() const
 	return QColor::fromRgbF(v[0], v[1], v[2]);
 }
 
-template<> QVector3D Vec3f::toQVector3D() const
+template<> QVector3D Vec3f::toQVector() const
 {
 	return QVector3D(v[0], v[1], v[2]);
 }
 
-template<> QVector3D Vec3d::toQVector3D() const
+template<> QVector3D Vec3d::toQVector() const
 {
 	return QVector3D(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
 }

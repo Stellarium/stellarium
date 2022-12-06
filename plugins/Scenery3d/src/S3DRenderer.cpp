@@ -944,7 +944,7 @@ void S3DRenderer::calculateLighting()
 
 	//convert to float
 	lightInfo.lightDirectionV3f = lightPosition.toVec3f();
-	lightInfo.lightDirectionWorld = lightPosition.toQVector3D();
+	lightInfo.lightDirectionWorld = lightPosition.toQVector();
 
 	lightInfo.landscapeOpacity = 0.0f;
 

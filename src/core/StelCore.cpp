@@ -2954,5 +2954,5 @@ void StelCore::setAberrationUniforms(QOpenGLShaderProgram& program) const
 	{
 		velocity = Vec3d(0,0,0);
 	}
-	program.setUniformValue("STELCORE_currentPlanetHeliocentricEclipticVelocity", velocity.toQVector3D());
+	program.setUniformValue("STELCORE_currentPlanetHeliocentricEclipticVelocity", velocity.toQVector());
 }

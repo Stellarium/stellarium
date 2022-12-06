@@ -286,7 +286,7 @@ public:
 	//! Convert to a QColor.
 	QColor toQColor() const;
 	//! Convert to a QVector3D.
-	QVector3D toQVector3D() const;
+	QVector3D toQVector() const;
 
 	T v[3];		// The 3 values
 };
