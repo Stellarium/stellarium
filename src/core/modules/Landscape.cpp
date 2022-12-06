@@ -37,7 +37,16 @@
 #include <QFile>
 #include <QDir>
 #include <QtAlgorithms>
+#include <QOpenGLBuffer>
 #include <QRegularExpression>
+#include <QOpenGLShaderProgram>
+#include <QOpenGLVertexArrayObject>
+
+namespace
+{
+constexpr int FS_QUAD_COORDS_PER_VERTEX = 2;
+constexpr int SKY_VERTEX_ATTRIB_INDEX = 0;
+}
 
 Landscape::Landscape(float _radius)
 	: radius(static_cast<double>(_radius))
@@ -65,6 +74,63 @@ Landscape::Landscape(float _radius)
 Landscape::~Landscape()
 {}
 
+void Landscape::initGL()
+{
+	vbo.reset(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer));
+	vbo->create();
+	vbo->bind();
+	const GLfloat vertices[]=
+	{
+		// full screen quad
+		-1, -1,
+		 1, -1,
+		-1,  1,
+		 1,  1,
+	};
+	auto& gl = *QOpenGLContext::currentContext()->functions();
+	gl.glBufferData(GL_ARRAY_BUFFER, sizeof vertices, vertices, GL_STATIC_DRAW);
+	vbo->release();
+
+	vao.reset(new QOpenGLVertexArrayObject);
+	vao->create();
+	bindVAO();
+	setupCurrentVAO();
+	releaseVAO();
+
+	ditherPatternTex = StelApp::getInstance().getTextureManager().getDitheringTexture(0);
+
+	initialized = true;
+}
+
+void Landscape::setupCurrentVAO()
+{
+	auto& gl = *QOpenGLContext::currentContext()->functions();
+	vbo->bind();
+	gl.glVertexAttribPointer(0, FS_QUAD_COORDS_PER_VERTEX, GL_FLOAT, false, 0, 0);
+	vbo->release();
+	gl.glEnableVertexAttribArray(SKY_VERTEX_ATTRIB_INDEX);
+}
+
+void Landscape::bindVAO()
+{
+	if(vao->isCreated())
+		vao->bind();
+	else
+		setupCurrentVAO();
+}
+
+void Landscape::releaseVAO()
+{
+	if(vao->isCreated())
+	{
+		vao->release();
+	}
+	else
+	{
+		auto& gl = *QOpenGLContext::currentContext()->functions();
+		gl.glDisableVertexAttribArray(SKY_VERTEX_ATTRIB_INDEX);
+	}
+}
 
 // Load attributes common to all landscapes
 void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landscapeId)
@@ -1227,20 +1293,36 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 		memorySize+=static_cast<uint>(mapImage->byteCount());
 #endif
 	}
+
+	auto& gl = *QOpenGLContext::currentContext()->functions();
+
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
 	memorySize+=mapTex->getGlSize();
+	mapTex->bind(0);
+	gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	mapTex->release();
 
 	if (_maptexIllum.length() && (!_maptexIllum.endsWith("/")))
 	{
 		mapTexIllum = StelApp::getInstance().getTextureManager().createTexture(_maptexIllum, StelTexture::StelTextureParams(true));
 		if (mapTexIllum)
+		{
 			memorySize+=mapTexIllum->getGlSize();
+			mapTexIllum->bind(0);
+			gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			mapTexIllum->release();
+		}
 	}
 	if (_maptexFog.length() && (!_maptexFog.endsWith("/")))
 	{
 		mapTexFog = StelApp::getInstance().getTextureManager().createTexture(_maptexFog, StelTexture::StelTextureParams(true));
 		if (mapTexFog)
+		{
 			memorySize+=mapTexFog->getGlSize();
+			mapTexFog->bind(0);
+			gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			mapTexFog->release();
+		}
 	}	
 
 	// Add a bottom cap in case of maptex_bottom.
@@ -1253,52 +1335,201 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 
 void LandscapeSpherical::draw(StelCore* core, bool onlyPolygon)
 {
+	if(!initialized) initGL();
 	if(!validLandscape) return;
 	if(landFader.getInterstate()==0.f) return;
 
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
 	transfo->combine(Mat4d::zrotation(-(static_cast<double>(angleRotateZ+angleRotateZOffset))));
 	const StelProjectorP prj = core->getProjection(transfo);
-	StelPainter sPainter(prj);
-	const float ppx = static_cast<float>(sPainter.getProjector()->getDevicePixelsPerPixel());
 
-	// Normal transparency mode
-	sPainter.setBlending(true);
-	sPainter.setCullFace(true);
+	if(!renderProgram || !prevProjector || !prj->isSameProjection(*prevProjector))
+	{
+		renderProgram.reset(new QOpenGLShaderProgram);
+		prevProjector = prj;
+
+		const auto vert =
+			StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) +
+			R"(
+ATTRIBUTE highp vec3 vertex;
+VARYING highp vec3 ndcPos;
+void main()
+{
+	gl_Position = vec4(vertex, 1.);
+	ndcPos = vertex;
+}
+)";
+		bool ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Vertex, vert);
+		if(!renderProgram->log().isEmpty())
+			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling vertex shader:\n" << renderProgram->log();
+		if(!ok) return;
+
+		const auto frag =
+			StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
+			prj->getUnProjectShader() +
+			makeDitheringShader()+
+			R"(
+VARYING highp vec3 ndcPos;
+uniform sampler2D mapTex;
+uniform mat4 projectionMatrixInverse;
+uniform float mapTexTop;
+uniform float mapTexBottom;
+uniform vec4 bottomCapColor;
+uniform vec4 brightness;
+void main(void)
+{
+	const float PI = 3.14159265;
+	vec4 winPos = projectionMatrixInverse * vec4(ndcPos, 1);
+	bool unprojectSuccess = false;
+	vec3 modelPos = unProject(winPos.x, winPos.y, unprojectSuccess).xyz;
+	// First we must compute the derivatives of texture coordinates, and only
+	// then decide whether we want to display the !unprojectSuccess case.
+	modelPos = normalize(modelPos);
+	float modelZenithAngle = acos(modelPos.z);
+	float modelLongitude = atan(modelPos.x, modelPos.y);
+
+	vec2 texc = vec2(modelLongitude/(2.*PI),
+					 1.-(modelZenithAngle-mapTexTop)/(mapTexBottom-mapTexTop));
+
+#ifdef textureGrad_SUPPORTED
+	// The usual automatic computation of derivatives of texture coordinates
+	// breaks down at the discontinuity of atan, resulting in choosing the most
+	// minified mip level instead of the correct one, which looks as a seam on
+	// the screen. Thus, we need to compute them in a custom way, treating atan
+	// as a (continuous) multivalued function. We differentiate
+	// atan(modelPosX(x,y), modelPosY(x,y)) with respect to x and y and yield
+	// gradLongitude vector.
+	vec2 gradModelPosX = vec2(dFdx(modelPos.x), dFdy(modelPos.x));
+	vec2 gradModelPosY = vec2(dFdx(modelPos.y), dFdy(modelPos.y));
+	vec2 gradLongitude = vec2(modelPos.y*gradModelPosX.s-modelPos.x*gradModelPosY.s,
+							  modelPos.y*gradModelPosX.t-modelPos.x*gradModelPosY.t)
+														/
+											 dot(modelPos, modelPos);
+	float texTdx = dFdx(texc.t);
+	float texTdy = dFdy(texc.t);
+	vec2 texDx = vec2(gradLongitude.s/(2.*PI), texTdx);
+	vec2 texDy = vec2(gradLongitude.t/(2.*PI), texTdy);
+	vec4 color = textureGrad(mapTex, texc, texDx, texDy);
+#else
+	vec4 color = texture2D(mapTex, texc);
+#endif
+
+	// These "early" returns must be done *after* dFdx/dFdy are computed above
+	if(!unprojectSuccess)
+	{
+		FRAG_COLOR = vec4(0);
+		return;
+	}
+	if(modelZenithAngle > mapTexBottom)
+	{
+		FRAG_COLOR = dither(bottomCapColor);
+		return;
+	}
+	if(modelZenithAngle < mapTexTop)
+	{
+		FRAG_COLOR = vec4(0);
+		return;
+	}
+
+	FRAG_COLOR = dither(color * brightness);
+}
+)";
+		ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, frag);
+		if(!renderProgram->log().isEmpty())
+			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling fragment shader:\n" << renderProgram->log();
+
+		if(!ok) return;
+
+		renderProgram->bindAttributeLocation("vertex", SKY_VERTEX_ATTRIB_INDEX);
+
+		if(!StelPainter::linkProg(renderProgram.get(), "Spherical landscape render program"))
+			return;
+
+		renderProgram->bind();
+		shaderVars.mapTex           = renderProgram->uniformLocation("mapTex");
+		shaderVars.mapTexTop        = renderProgram->uniformLocation("mapTexTop");
+		shaderVars.brightness       = renderProgram->uniformLocation("brightness");
+		shaderVars.rgbMaxValue      = renderProgram->uniformLocation("rgbMaxValue");
+		shaderVars.mapTexBottom     = renderProgram->uniformLocation("mapTexBottom");
+		shaderVars.ditherPattern    = renderProgram->uniformLocation("ditherPattern");
+		shaderVars.bottomCapColor   = renderProgram->uniformLocation("bottomCapColor");
+		shaderVars.projectionMatrixInverse = renderProgram->uniformLocation("projectionMatrixInverse");
+		renderProgram->release();
+	}
+	if(!renderProgram || !renderProgram->isLinked())
+		return;
+
+	auto& gl = *QOpenGLContext::currentContext()->functions();
 
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
-		if (bottomCap.d>0.0)
-		{
-			sPainter.setColor(landscapeBrightness*bottomCapColor, landFader.getInterstate());
-			sPainter.drawSphericalRegion(&bottomCap, StelPainter::SphericalPolygonDrawModeFill);
-		}
+		renderProgram->bind();
+		renderProgram->setUniformValue(shaderVars.bottomCapColor,
+									   landscapeBrightness*bottomCapColor[0],
+									   landscapeBrightness*bottomCapColor[1],
+									   landscapeBrightness*bottomCapColor[2],
+									   bottomCapColor[0] < 0 ? 0 : landFader.getInterstate());
 
-		sPainter.setColor(Vec3f(landscapeBrightness), landFader.getInterstate());
-		mapTex->bind();
+		renderProgram->setUniformValue(shaderVars.brightness,
+									   landscapeBrightness, landscapeBrightness,
+									   landscapeBrightness, landFader.getInterstate());
+		const int mainTexSampler = 0;
+		mapTex->bind(mainTexSampler);
+		renderProgram->setUniformValue(shaderVars.mapTex, mainTexSampler);
+		renderProgram->setUniformValue(shaderVars.rgbMaxValue, calcRGBMaxValue(core->getDitheringMode()).toQVector());
 
-		// TODO: verify that this works correctly for custom projections [comment not by GZ]
-		// seam is at East, except if angleRotateZ has been given.
-		sPainter.sSphere(radius, 1.0, cols, rows, true, true, mapTexTop, mapTexBottom);
+		const int ditherTexSampler = 1;
+		ditherPatternTex->bind(ditherTexSampler);
+		renderProgram->setUniformValue(shaderVars.ditherPattern, ditherTexSampler);
+
+		renderProgram->setUniformValue(shaderVars.mapTexTop, mapTexTop);
+		renderProgram->setUniformValue(shaderVars.mapTexBottom, mapTexBottom);
+
+		renderProgram->setUniformValue(shaderVars.projectionMatrixInverse,
+									   prj->getProjectionMatrix().toQMatrix().inverted());
+		prj->setUnProjectUniforms(*renderProgram);
+
+		gl.glEnable(GL_BLEND);
+		gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		bindVAO();
+
+		gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
 		// Since 0.13: Fog also for sphericals...
 		if ((mapTexFog) && (core->getSkyDrawer()->getFlagHasAtmosphere()))
 		{
-			sPainter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_COLOR);
-			sPainter.setColor(Vec3f(landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness)), landFader.getInterstate());
+			gl.glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
+			const float brightness = landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness);
+
+			renderProgram->setUniformValue(shaderVars.bottomCapColor, 0.f, 0.f, 0.f, 0.f);
+			renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
+										   landFader.getInterstate());
 			mapTexFog->bind();
-			sPainter.sSphere(radius, 1.0, cols, static_cast<uint>(ceil(rows*(fogTexTop-fogTexBottom)/(mapTexTop-mapTexBottom))), true, true, fogTexTop, fogTexBottom);
+			renderProgram->setUniformValue(shaderVars.mapTexTop, fogTexTop);
+			renderProgram->setUniformValue(shaderVars.mapTexBottom, fogTexBottom);
+			gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		}
 
 		// Self-luminous layer (Light pollution etc). This looks striking!
 		if (mapTexIllum && (lightScapeBrightness>0.0f) && (illumFader.getInterstate()>0.0f))
 		{
-			sPainter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
-			sPainter.setColor(Vec3f(lightScapeBrightness*illumFader.getInterstate()), landFader.getInterstate());
+			gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+			const float brightness = lightScapeBrightness*illumFader.getInterstate();
+			renderProgram->setUniformValue(shaderVars.bottomCapColor, 0.f, 0.f, 0.f, 0.f);
+			renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
+										   landFader.getInterstate());
 			mapTexIllum->bind();
-			sPainter.sSphere(radius, 1.0, cols, static_cast<uint>(ceil(rows*(illumTexTop-illumTexBottom)/(mapTexTop-mapTexBottom))), true, true, illumTexTop, illumTexBottom);
+			renderProgram->setUniformValue(shaderVars.mapTexTop, illumTexTop);
+			renderProgram->setUniformValue(shaderVars.mapTexBottom, illumTexBottom);
+			gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		}
+
+		releaseVAO();
+		gl.glDisable(GL_BLEND);
+		renderProgram->release();
 	}
 
+	StelPainter sPainter(prj);
 	// If a horizon line also has been defined, draw it.
 	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f)))
 	{
@@ -1307,9 +1538,11 @@ void LandscapeSpherical::draw(StelCore* core, bool onlyPolygon)
 		transfo->combine(Mat4d::zrotation(-static_cast<double>(angleRotateZOffset)));
 		const StelProjectorP prj = core->getProjection(transfo);
 		sPainter.setProjector(prj);
+		sPainter.setCullFace(true);
 		sPainter.setBlending(true);
 		sPainter.setColor(horizonPolygonLineColor, landFader.getInterstate());
 		const float lineWidth=sPainter.getLineWidth();
+		const float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
 		sPainter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
 		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 		sPainter.setLineWidth(lineWidth);

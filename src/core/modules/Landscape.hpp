@@ -25,7 +25,10 @@
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelLocation.hpp"
+#include "StelProjectorType.hpp"
 #include "StelSphereGeometry.hpp"
+
+#include <memory>
 
 #include <QMap>
 #include <QImage>
@@ -37,6 +40,9 @@ class QSettings;
 class StelLocation;
 class StelCore;
 class StelPainter;
+class QOpenGLBuffer;
+class QOpenGLShaderProgram;
+class QOpenGLVertexArrayObject;
 
 //! @class Landscape
 //! Store and manages the displaying of the Landscape.
@@ -70,6 +76,7 @@ public:
 
 	Landscape(float _radius = 2.f);
 	virtual ~Landscape();
+	virtual void initGL();
 	//! Load landscape.
 	//! @param landscapeIni A reference to an existing QSettings object which describes the landscape
 	//! @param landscapeId The name of the directory for the landscape files (e.g. "ocean")
@@ -187,6 +194,9 @@ public:
 	bool hasLandscapePolygon() const {return !horizonPolygon.isNull();}
 
 protected:
+	void setupCurrentVAO();
+	void bindVAO();
+	void releaseVAO();
 	//! Load attributes common to all landscapes
 	//! @param landscapeIni A reference to an existing QSettings object which describes the landscape
 	//! @param landscapeId The name of the directory for the landscape files (e.g. "ocean")
@@ -208,6 +218,13 @@ protected:
 	//! @param landscapeId The landscape ID (directory name) to which the texture belongs
 	//! @note returns an empty string if file not found.
 	static const QString getTexturePath(const QString& basename, const QString& landscapeId);
+
+	std::unique_ptr<QOpenGLVertexArrayObject> vao;
+	std::unique_ptr<QOpenGLBuffer> vbo;
+	StelProjectorP prevProjector;
+	StelTextureSP ditherPatternTex;
+	std::unique_ptr<QOpenGLShaderProgram> renderProgram;
+
 	double radius;
 	QString name;          //! Read from landscape.ini:[landscape]name
 	QString author;        //! Read from landscape.ini:[landscape]author
@@ -251,6 +268,7 @@ protected:
 	Vec3f labelColor; //! Color for the landscape labels.
 	unsigned int memorySize;   //!< holds an approximate value of memory consumption (for cache cost estimate)
     bool multisamplingEnabled_;
+	bool initialized = false;
 };
 
 //! @class LandscapeOldStyle
@@ -432,6 +450,17 @@ private:
 	float illumTexBottom;	   //!< zenithal bottom angle of the illumination texture, radians
 	QImage *mapImage;          //!< The same image as mapTex, but stored in-mem for opacity sampling.
 	Vec3f bottomCapColor;      //!< The bottomCap, if specified, will be drawn in this color
+	struct
+	{
+		int mapTex;
+		int mapTexTop;
+		int brightness;
+		int rgbMaxValue;
+		int mapTexBottom;
+		int ditherPattern;
+		int bottomCapColor;
+		int projectionMatrixInverse;
+	} shaderVars;
 };
 
 #endif // LANDSCAPE_HPP
