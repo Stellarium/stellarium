@@ -93,6 +93,21 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
         # Installed version has /usr/include/libindi, copy these headers to
         # such directory for a consistent #include
         file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/libindi)
+
+        # First, fix a missing include
+        file(READ
+            ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h
+            INDIDEVAPI_H)
+        string(REGEX REPLACE "#include .lilxml.h."
+            "#include \"lilxml.h\"\n#include <stdarg.h>"
+            INDIDEVAPI_H "${INDIDEVAPI_H}")
+        file(WRITE
+            ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h.new
+	        "${INDIDEVAPI_H}")
+        configure_file(${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h.new
+            ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h COPYONLY)
+
+        # Now copy the headers
         file(GLOB INDI_HEADERS "${indiclient_SOURCE_DIR}/libs/*/*.h")
         file(COPY ${INDI_HEADERS}
             DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/libindi)
@@ -150,8 +165,8 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
         configure_file(${indiclient_SOURCE_DIR}/config.h.cmake
             ${CMAKE_CURRENT_BINARY_DIR}/libindi/config.h )
         configure_file(${indiclient_SOURCE_DIR}/libs/indicore/indiapi.h.in
-		    ${indiclient_SOURCE_DIR}/libs/indicore/indiapi.h)
-		list(APPEND INDILIB_SOURCES
+            ${indiclient_SOURCE_DIR}/libs/indiapi.h)
+        list(APPEND INDILIB_SOURCES
             ${indiclient_SOURCE_DIR}/libs/indicore/lilxml.cpp
             ${indiclient_SOURCE_DIR}/libs/indicore/base64.c
             ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.c
@@ -187,6 +202,8 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
         target_include_directories(indiclient
             PRIVATE
             ${CMAKE_CURRENT_BINARY_DIR}/libindi
+            ${indiclient_SOURCE_DIR}/libindi
+            ${indiclient_SOURCE_DIR}/libs
             PUBLIC
             ${CMAKE_CURRENT_BINARY_DIR}
             ${indiclient_SOURCE_DIR}
