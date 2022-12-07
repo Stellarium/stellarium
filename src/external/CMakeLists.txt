@@ -107,6 +107,17 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
         configure_file(${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h.new
             ${indiclient_SOURCE_DIR}/libs/indicore/indidevapi.h COPYONLY)
 
+        # libastro.h doesn't need libnova/utility.h
+        file(READ
+            ${indiclient_SOURCE_DIR}/libs/indicore/libastro.h
+            LIBASTRO_H)
+        string(REGEX REPLACE "#include <libnova/utility.h>" "" LIBASTRO_H "${LIBASTRO_H}")
+        file(WRITE
+            ${indiclient_SOURCE_DIR}/libs/indicore/libastro.h.new
+           "${LIBASTRO_H}")
+        configure_file(${indiclient_SOURCE_DIR}/libs/indicore/libastro.h.new
+            ${indiclient_SOURCE_DIR}/libs/indicore/libastro.h COPYONLY)
+
         # Now copy the headers
         file(GLOB INDI_HEADERS "${indiclient_SOURCE_DIR}/libs/*/*.h")
         file(COPY ${INDI_HEADERS}
