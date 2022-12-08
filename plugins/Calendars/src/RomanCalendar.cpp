@@ -96,11 +96,12 @@ QStringList RomanCalendar::getDateStrings() const
 QString RomanCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
+	const int year=str.at(0).toInt();
 	return QString("%1 %2 %3 %4 %5").arg(
 			str.at(4),
 			str.at(3),
 			str.at(2),
-			str.at(0),
+			year>0 ? romanNumber(year) : str.at(0),
 			qc_("A.U.C.", "ab urbe condita"));// year AUC
 }
 

@@ -37,19 +37,19 @@ class AstroHinduSolarCalendar : public NewHinduCalendar
 public:
 	AstroHinduSolarCalendar(double jd);
 
-	virtual ~AstroHinduSolarCalendar() Q_DECL_OVERRIDE {}
+	~AstroHinduSolarCalendar() override {}
 
 public slots:
 	//! Set a calendar date from the Julian day number
-	virtual void setJD(double JD) Q_DECL_OVERRIDE;
+	void setJD(double JD) override;
 
 	//! set RD date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! parts = {Year, Month[1...12], leapMonth[0|1], Day[1...30], leapDay[0|1] }
-	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+	void setDate(QVector<int> parts) override;
 
 	//! get a stringlist of calendar date elements for the Hindu Astro Solar calendar sorted from the largest to the smallest.
 	//! {Year, Month, MonthName, Day, WeekDayName}
-	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
+	QStringList getDateStrings() const override;
 };
 
 #endif

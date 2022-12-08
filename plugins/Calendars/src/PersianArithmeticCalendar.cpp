@@ -20,7 +20,6 @@
 #include "PersianArithmeticCalendar.hpp"
 #include "JulianCalendar.hpp"
 #include "GregorianCalendar.hpp"
-#include "RomanCalendar.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"

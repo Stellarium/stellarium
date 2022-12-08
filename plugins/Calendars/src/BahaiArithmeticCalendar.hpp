@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Georg Zotti
+ * Copyright (C) 2022 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,26 +16,26 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef ISLAMICCALENDAR_HPP
-#define ISLAMICCALENDAR_HPP
+#ifndef BAHAIARITHMETICCALENDAR_HPP
+#define BAHAIARITHMETICCALENDAR_HPP
 
 #include "Calendar.hpp"
 
-//! The Islamic calendar is a strictly Lunar calendar with no month intercalation. It thus does not observe the Solar year,
-//! and drifts through the seasons in about 32 solar years.
-//! This implementation of the arithmetic Islamic calendar is the easy to compute version, whereas most Muslims follow an
-//! observation-based calendar, which by definition cannot be computed.
-//! Note that Islamic days begin on the evening before the actual date we compute.
-//! Therefore, times lying after sunset will be wrong and should count up one day.
+//! @class BahaiArithmeticCalendar
+//! Functions for the Bahá´á Arithmetic calendar
+//! @author Georg Zotti
+//! @ingroup calendars
+//! The Bahá´í faith, founded in 1844, uses its own calendar, based on the number 19.
+//! Until 2015 the calendar was based on the Gregorian calendar. This is the version implemented here.
 
-class IslamicCalendar : public Calendar
+class BahaiArithmeticCalendar : public Calendar
 {
 	Q_OBJECT
 
 public:
-	IslamicCalendar(double jd);
+	BahaiArithmeticCalendar(double jd);
 
-	~IslamicCalendar() override {}
+	~BahaiArithmeticCalendar() override {}
 
 public slots:
 	void retranslate() override;
@@ -54,20 +54,25 @@ public slots:
 	//! get a formatted complete string for a date
 	QString getFormattedDateString() const override;
 
-	//! Return true if iYear is an Islamic leap year
-	static bool isLeap(int iYear);
+	//! Return R.D. of date given in the Bahai Arithmetic calendar. (CC:UE 16.3)
+	static int fixedFromBahaiArithmetic(QVector<int> bahai5);
 
-	//! find RD number for date in the Islamic calendar
-	static int fixedFromIslamic(QVector<int> islamic);
-	//! find date in the Islamic calendar from RD number
-	static QVector<int> islamicFromFixed(int rd);
+	//! Return R.D. of date given in the Bahai Arithmetic calendar. (CC:UE 16.4)
+	//! return major-cycle-year-month-day for RD date
+	static QVector<int> bahaiArithmeticFromFixed(int rd);
+
+	//! Return R.D. of new year date in the Bahai Arithmetic for the given Gregorian year. (CC:UE 16.10)
+	//! return RD date
+	static int bahaiNewYear(int gYear);
 
 public:
-	static const int islamicEpoch; //! RD of July 16, 622.
+	static const int bahaiEpoch; // =fixedFromGregorian({1844, GregorianCalendar::march, 21});  //! RD of March 21, AD1844 (greg).
+	constexpr static const int ayyam_i_Ha = 0;
 
 protected:
 	static QMap<int, QString> weekDayNames;
-	static QMap<int, QString> monthNames;
+	static QMap<int, QString> cycleNames;
+	static QMap<int, QString> yearNames;
 };
 
 #endif

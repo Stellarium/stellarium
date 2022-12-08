@@ -32,24 +32,24 @@ class IcelandicCalendar : public Calendar
 public:	
 	IcelandicCalendar(double jd);
 
-	virtual ~IcelandicCalendar() Q_DECL_OVERRIDE {}
+	~IcelandicCalendar() override {}
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 	//! Set a calendar date from the Julian day number
-	virtual void setJD(double JD) Q_DECL_OVERRIDE;
+	void setJD(double JD) override;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Season[90=summer/270=winter]-week[1..27]-Day[1...31]
-	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+	void setDate(QVector<int> parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! Year, Season, Month, MonthName, Week, Day, DayName
-	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
+	QStringList getDateStrings() const override;
 
 	//! get a formatted complete string for a date
-	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
+	QString getFormattedDateString() const override;
 
 	//! returns true for leap years (those with 53 weeks)
 	static bool isLeap(int iyear);

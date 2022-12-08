@@ -35,15 +35,15 @@ class RevisedJulianCalendar : public JulianCalendar
 
 public:
 	RevisedJulianCalendar(double jd);
-	virtual ~RevisedJulianCalendar() Q_DECL_OVERRIDE {}
+	~RevisedJulianCalendar() override {}
 
 public slots:
 	//! Set a calendar date from the Julian day number
-	virtual void setJD(double JD) Q_DECL_OVERRIDE;
+	void setJD(double JD) override;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...12]-Day[1...31]
-	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+	void setDate(QVector<int> parts) override;
 
 	//! returns true for leap years. We handle years prior to 325 like in the regular Julian calendar.
 	static bool isLeap(int year);

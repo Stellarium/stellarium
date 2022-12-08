@@ -37,7 +37,7 @@ class StelButton;
 The Calendars plugin provides an interface to various calendars
 
 The primary source of this plugin is the book "Calendrical Calculations: The Ultimate Edition"
-by Edward M. Reingold and Nachum Dershowitz (2018). It contains algorithmic descriptions of dozens of calendars,
+by Edward M. Reingold and Nachum Dershowitz (2018). It contains algorithmic descriptions of dozens of calendars and auxiliary functions,
 most of which should make their way into this plugin.
 
 This book describes data conversion from and to calendars, using not the commonly used Julian Day number, but an intermediate
@@ -59,7 +59,12 @@ Take care that some data arguments are internally stored as QVector<int>, and tr
 The various calendars may have array lengths of elements, which are not always checked.
 When a StelLocation argument is used in the internal function, a scripting function is available which allows specifying
 a location name in format "city, region". This also works with user-specified locations.
-Time zones only work correctly when specified (in the location database) as full specification like "Europe/Madrid", not "UT+4".
+Time zones only work correctly when specified (in the location database) as full specification like "Europe/Madrid",
+or in a generic offset spelling like "UTC+04:00" (but not "UT+4"). For use of "calendar locations" that have been used before
+timezones were introduced, we must work out longitude-dependent UTC offset that must be rounded to the nearest minute.
+
+Occasionally, the time zone support will provide different results between Windows and other operating systems, esp. for historical data.
+See Qt documentation on QtTimeZone.
 
 @}
 */
@@ -90,6 +95,9 @@ class Calendars : public StelModule
 	Q_PROPERTY(bool flagShowCoptic        READ isCopticDisplayed        WRITE showCoptic        NOTIFY showCopticChanged)
 	Q_PROPERTY(bool flagShowEthiopic      READ isEthiopicDisplayed      WRITE showEthiopic      NOTIFY showEthiopicChanged)
 	Q_PROPERTY(bool flagShowChinese       READ isChineseDisplayed       WRITE showChinese       NOTIFY showChineseChanged)
+	Q_PROPERTY(bool flagShowJapanese      READ isJapaneseDisplayed      WRITE showJapanese      NOTIFY showJapaneseChanged)
+	Q_PROPERTY(bool flagShowKorean        READ isKoreanDisplayed        WRITE showKorean        NOTIFY showKoreanChanged)
+	Q_PROPERTY(bool flagShowVietnamese    READ isVietnameseDisplayed    WRITE showVietnamese    NOTIFY showVietnameseChanged)
 	Q_PROPERTY(bool flagShowIslamic       READ isIslamicDisplayed       WRITE showIslamic       NOTIFY showIslamicChanged)
 	Q_PROPERTY(bool flagShowHebrew        READ isHebrewDisplayed        WRITE showHebrew        NOTIFY showHebrewChanged)
 	Q_PROPERTY(bool flagShowOldHinduSolar READ isOldHinduSolarDisplayed WRITE showOldHinduSolar NOTIFY showOldHinduSolarChanged)
@@ -108,21 +116,23 @@ class Calendars : public StelModule
 	Q_PROPERTY(bool flagShowFrenchArithmetic   READ isFrenchArithmeticDisplayed   WRITE showFrenchArithmetic   NOTIFY showFrenchArithmeticChanged)
 	Q_PROPERTY(bool flagShowPersianArithmetic   READ isPersianArithmeticDisplayed   WRITE showPersianArithmetic   NOTIFY showPersianArithmeticChanged)
 	Q_PROPERTY(bool flagShowPersianAstronomical READ isPersianAstronomicalDisplayed WRITE showPersianAstronomical NOTIFY showPersianAstronomicalChanged)
+	Q_PROPERTY(bool flagShowBahaiArithmetic     READ isBahaiArithmeticDisplayed   WRITE showBahaiArithmetic   NOTIFY showBahaiArithmeticChanged)
+	Q_PROPERTY(bool flagShowBahaiAstronomical   READ isBahaiAstronomicalDisplayed WRITE showBahaiAstronomical NOTIFY showBahaiAstronomicalChanged)
 	Q_PROPERTY(bool flagShowTibetan      READ isTibetanDisplayed        WRITE showTibetan       NOTIFY showTibetanChanged)
 
 public:
 	Calendars();
-	virtual ~Calendars() Q_DECL_OVERRIDE;
+	~Calendars() override;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() Q_DECL_OVERRIDE;
+	void init() override;
 	//! Set all calendars to the Core's JD.
-	virtual void update(double) Q_DECL_OVERRIDE;
+	void update(double) override;
 	//! if enabled, provide a table of calendars on screen.
-	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
-	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
-	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
+	void draw(StelCore* core) override;
+	double getCallOrder(StelModuleActionName actionName) const override;
+	bool configureGui(bool show=true) override;
 
 	//! Restore the plug-in's settings to the default state.
 	//! Replace the plug-in's settings in Stellarium's configuration file
@@ -137,12 +147,13 @@ public:
 	//! @see restoreDefaultSettings()
 	void loadSettings();
 
-	//! Get a pointer to the respective Calendar. Returns Q_NULLPTR if not found.
-	//! Valid names: Julian, Gregorian, ISO, Icelandic, Roman, Olympic, Egyptian,
+	//! Get a pointer to the respective Calendar. Returns nullptr if not found.
+	//! Valid names: Julian, RevisedJulian, Gregorian, ISO, Icelandic, Roman, Olympic, Egyptian,
 	//! Armenian, Zoroastrian, Coptic, Ethiopic, Islamic, Hebrew,
-	//! OldHinduSolar, OldHinduLunar, Balinese
+	//! OldHinduSolar, OldHinduLunar, NewHinduSolar, NewHinduLunar, Balinese, Tibetan,
+	//! BahaiArithmetic, BahaiAstronomical,
 	//! MayaLongCount, MayaHaab, MayaTzolkin, AztecXihuitl, AztecTonalpohualli
-	//! TODO: ADD HERE: Chinese, NewHinduSolar, NewHinduLunar, ...
+	//! TODO: ADD HERE: Chinese,  ...
 	Calendar* getCal(QString name);
 
 	#ifdef ENABLE_SCRIPTING
@@ -169,6 +180,9 @@ signals:
 	void showCopticChanged(bool b);
 	void showEthiopicChanged(bool b);
 	void showChineseChanged(bool b);
+	void showJapaneseChanged(bool b);
+	void showKoreanChanged(bool b);
+	void showVietnameseChanged(bool b);
 	void showIslamicChanged(bool b);
 	void showHebrewChanged(bool b);
 	void showOldHinduSolarChanged(bool b);
@@ -187,6 +201,8 @@ signals:
 	void showFrenchArithmeticChanged(bool b);
 	void showPersianArithmeticChanged(bool b);
 	void showPersianAstronomicalChanged(bool b);
+	void showBahaiArithmeticChanged(bool b);
+	void showBahaiAstronomicalChanged(bool b);
 	void showTibetanChanged(bool b);
 
 public slots:
@@ -227,6 +243,12 @@ public slots:
 	void showEthiopic(bool b);		//!< activate display of Ethiopic Calendar
 	bool isChineseDisplayed() const;	//!< display Chinese Calendar?
 	void showChinese(bool b);		//!< activate display of Chinese Calendar
+	bool isJapaneseDisplayed() const;	//!< display Japanese Calendar?
+	void showJapanese(bool b);		//!< activate display of Japanese Calendar
+	bool isKoreanDisplayed() const;	//!< display Korean Calendar?
+	void showKorean(bool b);		//!< activate display of Korean Calendar
+	bool isVietnameseDisplayed() const;	//!< display Vietnamese Calendar?
+	void showVietnamese(bool b);		//!< activate display of Vietnamese Calendar
 	bool isIslamicDisplayed() const;	//!< display Islamic Calendar?
 	void showIslamic(bool b);		//!< activate display of Islamic Calendar
 	bool isHebrewDisplayed() const;		//!< display Hebrew Calendar?
@@ -263,6 +285,10 @@ public slots:
 	void showPersianArithmetic(bool b);	//!< activate display of Persian Arithmetic
 	bool isPersianAstronomicalDisplayed() const; //!< display Persian Astronomical?
 	void showPersianAstronomical(bool b);	//!< activate display of Persian Astronomical
+	bool isBahaiArithmeticDisplayed() const;//!< display Bahai Arithmetic?
+	void showBahaiArithmetic(bool b);	//!< activate display of Bahai Arithmetic
+	bool isBahaiAstronomicalDisplayed() const; //!< display Bahai Astronomical?
+	void showBahaiAstronomical(bool b);	//!< activate display of Bahai Astronomical
 	bool isTibetanDisplayed() const;        //!< display Tibetan?
 	void showTibetan(bool b);	        //!< activate display of Tibetan
 
@@ -299,6 +325,9 @@ private:
 	bool flagShowCoptic;
 	bool flagShowEthiopic;
 	bool flagShowChinese;
+	bool flagShowJapanese;
+	bool flagShowKorean;
+	bool flagShowVietnamese;
 	bool flagShowIslamic;
 	bool flagShowHebrew;
 	bool flagShowOldHinduSolar;
@@ -317,6 +346,8 @@ private:
 	bool flagShowFrenchArithmetic;
 	bool flagShowPersianArithmetic;
 	bool flagShowPersianAstronomical;
+	bool flagShowBahaiArithmetic;
+	bool flagShowBahaiAstronomical;
 	bool flagShowTibetan;
 };
 
@@ -331,9 +362,9 @@ class CalendarsStelPluginInterface : public QObject, public StelPluginInterface
 	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const Q_DECL_OVERRIDE;
-	virtual StelPluginInfo getPluginInfo() const Q_DECL_OVERRIDE;
-	virtual QObjectList getExtensionList() const Q_DECL_OVERRIDE { return QObjectList(); }
+	StelModule* getStelModule() const override;
+	StelPluginInfo getPluginInfo() const override;
+	QObjectList getExtensionList() const override { return QObjectList(); }
 };
 
 #endif /* CALENDARS_HPP */

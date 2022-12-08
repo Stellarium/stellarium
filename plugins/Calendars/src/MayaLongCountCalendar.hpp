@@ -30,24 +30,24 @@ class MayaLongCountCalendar : public Calendar
 public:
 	MayaLongCountCalendar(double jd);
 
-	virtual ~MayaLongCountCalendar() Q_DECL_OVERRIDE {}
+	~MayaLongCountCalendar() override {}
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE {}
+	void retranslate() override {}
 
 	//! Set a calendar date from the Julian day number
-	virtual void setJD(double JD) Q_DECL_OVERRIDE;
+	void setJD(double JD) override;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! baktun[0..19]-katun[0..19]-tun{0..19]-uinal[0..17]-kin[0..19]
-	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+	void setDate(QVector<int> parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! baktun[0..19]-katun[0..19]-tun[0..19]-uinal[0..17]-kin[0..19]
-	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
+	QStringList getDateStrings() const override;
 
 	//! get a formatted complete string for a date
-	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
+	QString getFormattedDateString() const override;
 
 	//! get RD date from Long Count date
 	static int fixedFromMayanLongCount(QVector<int> longCount);
