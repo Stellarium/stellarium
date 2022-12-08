@@ -144,7 +144,7 @@ QString VietnameseCalendar::getFormattedDateString() const
 	QStringList str=getDateStrings();
 	// Format: "Day [D] ([stem/branch]) - Month [M]<sub>[leap]</sub> ([stem/branch]) - year [Y]: [N] in cycle [C] ([stem/branch])")
 	// TRANSLATORS: Vietnamese Calendar output string
-	return QString(qc_("Day %1 (%2) - Month %3 (%4)<sub>%5</sub> (%6) - Year %7", "Vietnamese calendar output")).arg(
+	return QString(qc_("Day %1 (%2) - Month %3 (%4)<sub>%5</sub> (%6) <br/>Year %7", "Vietnamese calendar output")).arg(
 				str.at(5), // 1 dayNr
 				str.at(6), // 2 dayStemBranch
 				str.at(1), // 3 monthNum

@@ -141,7 +141,7 @@ QString BahaiArithmeticCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
 	// TRANSLATORS: Bahai Calendar output string
-	return QString(qc_("%1, day of %2 (%3) of the month of %4 (%5), of the year %6 (%7), of Vāḥid %8, of Kull-i-shay %9 of the Bahá’í Era", "Bahai calendar output")).arg(
+	return QString(qc_("%1, day of %2 (%3) of the month of %4 (%5), <br/>of the year %6 (%7), of Vāḥid %8, of Kull-i-shay %9 of the Bahá’í Era", "Bahai calendar output")).arg(
 			str.at(8), // %1 weekday
 			str.at(7), // %2 dayName
 			str.at(6), // %3 dayNr

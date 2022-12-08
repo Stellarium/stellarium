@@ -52,12 +52,8 @@ public slots:
 	//! The order depends on the actual calendar
 	QStringList getDateStrings() const override;
 
-	//! get a formatted complete string for a date. The default implementation just concatenates all strings from getDateStrings() with a space in between.
+	//! get a formatted complete string for a date. This concatenates all strings from getDateStrings() with a space in between, plus a linebreak after element number 5.
 	QString getFormattedDateString() const override;
-	//! get a formatted string for the 5 first components of a date.
-	QString getFormattedDateString1to5() const;
-	//! get a formatted string for the 5 second components of a date.
-	QString getFormattedDateString6to10() const;
 
 	static QVector<int> baliPawukonFromFixed(const int rd);
 	static int baliDayFromFixed(const int rd);

@@ -158,7 +158,7 @@ QString KoreanCalendar::getFormattedDateString() const
 	QStringList str=getDateStrings();
 	// Format: "Day [D] ([stem/branch]) - Month [M]<sub>[leap]</sub> ([stem/branch]) - year [Y] ([stem/branch])")
 	// TRANSLATORS: Korean Calendar output string
-	return QString(qc_("Day %1 (%2) - Month %3<sub>%4</sub> (%5) - Danki Year %6 (%7)", "Korean Calendar output")).arg(
+	return QString(qc_("Day %1 (%2) - Month %3<sub>%4</sub> (%5) <br/>Danki Year %6 (%7)", "Korean Calendar output")).arg(
 				str.at(7), // 1 dayNr
 				str.at(8), // 2 dayStemBranch
 				str.at(4), // 3 monthNum

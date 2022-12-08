@@ -156,7 +156,7 @@ QString ChineseCalendar::getFormattedDateString() const
 	QStringList str=getDateStrings();
 	// Format: "Day [D] ([stem/branch]) - Month [M]<sub>[leap]</sub> ([stem/branch]) - year [Y]: [N] in cycle [C] ([stem/branch])")
 	// TRANSLATORS: Chinese Calendar output string
-	return QString(qc_("Day %1 (%2) - Month %3<sub>%4</sub> (%5) - Year %6: %7 (%8) in cycle %9", "Chinese calendar output")).arg(
+	return QString(qc_("Day %1 (%2) - Month %3<sub>%4</sub> (%5) <br/>Year %6: %7 (%8) in cycle %9", "Chinese calendar output")).arg(
 				str.at(7), // 1 dayNr
 				str.at(8), // 2 dayStemBranch
 				str.at(4), // 3 monthNum

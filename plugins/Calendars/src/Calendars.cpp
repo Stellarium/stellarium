@@ -396,10 +396,7 @@ void Calendars::draw(StelCore* core)
 					oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Korean Solar Terms",    "calendar"), static_cast<KoreanCalendar*>(getCal("Korean"))->getFormattedSolarTermsString());
 	}
 	if (flagShowVietnamese) 	oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Vietnamese",            "calendar"), getCal("Vietnamese")->getFormattedDateString());
-	if (flagShowBalinese)      {
-		oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Balinese Pawukon", "calendar"), static_cast<BalinesePawukonCalendar*>(getCal("Balinese"))->getFormattedDateString1to5());
-		oss << QString("<tr><td>  </td><td>%1</td></tr>").arg(static_cast<BalinesePawukonCalendar*>(getCal("Balinese"))->getFormattedDateString6to10());
-	}
+	if (flagShowBalinese)           oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Balinese Pawukon",      "calendar"), getCal("Balinese")->getFormattedDateString());
 	if (flagShowMayaLongCount)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Long Count",       "calendar"), getCal("MayaLongCount")->getFormattedDateString());
 	if (flagShowMayaHaab)           oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Haab",             "calendar"), getCal("MayaHaab")->getFormattedDateString());
 	if (flagShowMayaTzolkin)        oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Tzolkin",          "calendar"), getCal("MayaTzolkin")->getFormattedDateString());
