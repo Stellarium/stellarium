@@ -1112,42 +1112,152 @@ void LandscapeFisheye::create(const QString _name, float _texturefov, const QStr
 
 void LandscapeFisheye::draw(StelCore* core, bool onlyPolygon)
 {
+	if(!initialized) initGL();
 	if(!validLandscape) return;
 	if(landFader.getInterstate()==0.f) return;
 
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
 	transfo->combine(Mat4d::zrotation(-static_cast<double>(angleRotateZ+angleRotateZOffset)));
 	const StelProjectorP prj = core->getProjection(transfo);
-	StelPainter painter(prj);
-	const float ppx = static_cast<float>(painter.getProjector()->getDevicePixelsPerPixel());
+
+	if(!renderProgram || !prevProjector || !prj->isSameProjection(*prevProjector))
+	{
+		renderProgram.reset(new QOpenGLShaderProgram);
+		prevProjector = prj;
+
+		const auto vert =
+			StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) +
+			R"(
+ATTRIBUTE highp vec3 vertex;
+VARYING highp vec3 ndcPos;
+void main()
+{
+	gl_Position = vec4(vertex, 1.);
+	ndcPos = vertex;
+}
+)";
+		bool ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Vertex, vert);
+		if(!renderProgram->log().isEmpty())
+			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling vertex shader:\n" << renderProgram->log();
+		if(!ok) return;
+
+		const auto frag =
+			StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) +
+			prj->getUnProjectShader() +
+			makeDitheringShader()+
+			R"(
+VARYING highp vec3 ndcPos;
+uniform sampler2D mapTex;
+uniform mat4 projectionMatrixInverse;
+uniform float texFov;
+uniform vec4 brightness;
+void main(void)
+{
+	const float PI = 3.14159265;
+	vec4 winPos = projectionMatrixInverse * vec4(ndcPos, 1);
+	bool unprojectSuccess = false;
+	vec3 modelPos = unProject(winPos.x, winPos.y, unprojectSuccess).xyz;
+	// First we must compute the derivatives of texture coordinates, and only
+	// then decide whether we want to display the !unprojectSuccess case.
+
+	modelPos = normalize(modelPos);
+	float modelZenithAngle = acos(modelPos.z);
+
+	float r = min(modelZenithAngle / texFov, 0.5);
+	vec2 posFromCenter = dot(modelPos,modelPos)==0 ? vec2(0) : r*normalize(modelPos.yx);
+	vec2 texc = posFromCenter+vec2(0.5);
+
+	vec4 color = texture2D(mapTex, texc);
+
+	// This "early" return must be done *after* derivatives of
+	// texture coordinates are computed above (indirectly by texture2D()).
+	if(!unprojectSuccess)
+	{
+		FRAG_COLOR = vec4(0);
+		return;
+	}
+	FRAG_COLOR = dither(color * brightness);
+}
+)";
+		ok = renderProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, frag);
+		if(!renderProgram->log().isEmpty())
+			qWarning().noquote() << "LandscapeSpherical: Warnings while compiling fragment shader:\n" << renderProgram->log();
+
+		if(!ok) return;
+
+		renderProgram->bindAttributeLocation("vertex", SKY_VERTEX_ATTRIB_INDEX);
+
+		if(!StelPainter::linkProg(renderProgram.get(), "Spherical landscape render program"))
+			return;
+
+		renderProgram->bind();
+		shaderVars.texFov           = renderProgram->uniformLocation("texFov");
+		shaderVars.mapTex           = renderProgram->uniformLocation("mapTex");
+		shaderVars.brightness       = renderProgram->uniformLocation("brightness");
+		shaderVars.rgbMaxValue      = renderProgram->uniformLocation("rgbMaxValue");
+		shaderVars.ditherPattern    = renderProgram->uniformLocation("ditherPattern");
+		shaderVars.projectionMatrixInverse = renderProgram->uniformLocation("projectionMatrixInverse");
+		renderProgram->release();
+	}
+	if(!renderProgram || !renderProgram->isLinked())
+		return;
+
+	auto& gl = *QOpenGLContext::currentContext()->functions();
 
 	if (!onlyPolygon || !horizonPolygon) // Make sure to draw the regular pano when there is no polygon
 	{
-		// Normal transparency mode
-		painter.setBlending(true);
-		painter.setCullFace(true);
-		painter.setColor(Vec3f(static_cast<float>(landscapeBrightness)), landFader.getInterstate());
-		mapTex->bind();
-		painter.sSphereMap(static_cast<double>(radius),cols,rows,texFov,1);
+		renderProgram->bind();
+		renderProgram->setUniformValue(shaderVars.brightness,
+									   landscapeBrightness, landscapeBrightness,
+									   landscapeBrightness, landFader.getInterstate());
+		const int mainTexSampler = 0;
+		mapTex->bind(mainTexSampler);
+		renderProgram->setUniformValue(shaderVars.mapTex, mainTexSampler);
+		renderProgram->setUniformValue(shaderVars.rgbMaxValue, calcRGBMaxValue(core->getDitheringMode()).toQVector());
+
+		const int ditherTexSampler = 1;
+		ditherPatternTex->bind(ditherTexSampler);
+		renderProgram->setUniformValue(shaderVars.ditherPattern, ditherTexSampler);
+
+		renderProgram->setUniformValue(shaderVars.texFov, texFov);
+		renderProgram->setUniformValue(shaderVars.projectionMatrixInverse,
+									   prj->getProjectionMatrix().toQMatrix().inverted());
+		prj->setUnProjectUniforms(*renderProgram);
+
+		gl.glEnable(GL_BLEND);
+		gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		bindVAO();
+
+		gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
 		// NEW since 0.13: Fog also for fisheye...
 		if ((mapTexFog) && (core->getSkyDrawer()->getFlagHasAtmosphere()))
 		{
-			//glBlendFunc(GL_ONE, GL_ONE); // GZ: Take blending mode as found in the old_style landscapes...
-			painter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_COLOR); // GZ: better?
-			painter.setColor(Vec3f(landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*static_cast<float>(landscapeBrightness))), landFader.getInterstate());
+			gl.glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
+			const float brightness = landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness);
+
+			renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
+										   landFader.getInterstate());
 			mapTexFog->bind();
-			painter.sSphereMap(static_cast<double>(radius),cols,rows,texFov,1);
+			gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		}
+
 		if (mapTexIllum && lightScapeBrightness>0.0f && (illumFader.getInterstate()>0.f))
 		{
-			painter.setBlending(true, GL_SRC_ALPHA, GL_ONE);
-			painter.setColor(Vec3f(illumFader.getInterstate()*static_cast<float>(lightScapeBrightness)), landFader.getInterstate());
+			gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+			const float brightness = lightScapeBrightness*illumFader.getInterstate();
+			renderProgram->setUniformValue(shaderVars.brightness, brightness, brightness, brightness,
+										   landFader.getInterstate());
 			mapTexIllum->bind();
-			painter.sSphereMap(static_cast<double>(radius), cols, rows, texFov, 1);
+			gl.glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		}
-		painter.setCullFace(false);
+
+		releaseVAO();
+		gl.glDisable(GL_BLEND);
+		renderProgram->release();
 	}
 
+	StelPainter painter(prj);
 	// If a horizon line also has been defined, draw it.
 	if (horizonPolygon && (horizonPolygonLineColor != Vec3f(-1.f,0.f,0.f)))
 	{
@@ -1156,14 +1266,16 @@ void LandscapeFisheye::draw(StelCore* core, bool onlyPolygon)
 		transfo->combine(Mat4d::zrotation(static_cast<double>(-angleRotateZOffset)));
 		const StelProjectorP prj = core->getProjection(transfo);
 		painter.setProjector(prj);
+		painter.setCullFace(true);
 		painter.setBlending(true, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		painter.setColor(horizonPolygonLineColor, landFader.getInterstate());
 		const float lineWidth=painter.getLineWidth();
+		const float ppx = static_cast<float>(prj->getDevicePixelsPerPixel());
 		painter.setLineWidth(GETSTELMODULE(LandscapeMgr)->getPolyLineThickness()*ppx);
 		painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 		painter.setLineWidth(lineWidth);
 	}
-
+	painter.setCullFace(false);
 	drawLabels(core, &painter);
 }
 
