@@ -129,7 +129,11 @@ void HttpConnectionHandlerPool::loadSslConfig()
             sslConfiguration->setLocalCertificate(certificate);
             sslConfiguration->setPrivateKey(sslKey);
             sslConfiguration->setPeerVerifyMode(QSslSocket::VerifyNone);
+#if QT_VERSION < QT_VERSION_CHECK(6, 3, 0)
 	    sslConfiguration->setProtocol(QSsl::TlsV1_0);
+#else
+	    sslConfiguration->setProtocol(QSsl::TlsV1_2OrLater);
+#endif
 
             qDebug("HttpConnectionHandlerPool: SSL settings loaded");
          #endif
