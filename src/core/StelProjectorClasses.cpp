@@ -611,7 +611,7 @@ QString StelProjectorCylinderFill::getNameI18() const
 
 QString StelProjectorCylinderFill::getDescriptionI18() const
 {
-	return q_("The full name of this variant of the Cylindrical projection mode is <i>plate carr&eacute;e</i> (French, for 'flat square'). With this projection all parallels are equally spaced. "
+	return q_("Another name of this variant of the Cylindrical projection mode is <i>plate carr&eacute;e</i> (French, for 'flat square'). With this projection all parallels are equally spaced. "
 		  "The view is stretched to always show a 360x180° field of view in a fixed view direction. It is provided for specialized setups.");
 }
 
