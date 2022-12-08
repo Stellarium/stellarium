@@ -393,6 +393,15 @@ private:
 	QImage *mapImage;          //!< The same image as mapTex, but stored in-mem for sampling.
 
 	float texFov;
+	struct
+	{
+		int texFov;
+		int mapTex;
+		int brightness;
+		int rgbMaxValue;
+		int ditherPattern;
+		int projectionMatrixInverse;
+	} shaderVars;
 };
 
 //////////////////////////////////////////////////////////////////////////
