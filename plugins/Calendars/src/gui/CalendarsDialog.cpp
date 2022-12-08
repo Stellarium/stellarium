@@ -112,9 +112,9 @@ void CalendarsDialog::createDialogContent()
 	connectBoolProperty(ui->ethiopicCheckBox,           "Calendars.flagShowEthiopic");
 	connectBoolProperty(ui->icelandicCheckBox,          "Calendars.flagShowIcelandic");
 	connectBoolProperty(ui->chineseCheckBox,            "Calendars.flagShowChinese");
-//	connectBoolProperty(ui->japaneseCheckBox,           "Calendars.flagShowJapanese");
-//	connectBoolProperty(ui->koreanCheckBox,             "Calendars.flagShowKorean");
-//	connectBoolProperty(ui->vietnameseCheckBox,         "Calendars.flagShowVietnamese");
+	connectBoolProperty(ui->japaneseCheckBox,           "Calendars.flagShowJapanese");
+	connectBoolProperty(ui->koreanCheckBox,             "Calendars.flagShowKorean");
+	connectBoolProperty(ui->vietnameseCheckBox,         "Calendars.flagShowVietnamese");
 	connectBoolProperty(ui->islamicCheckBox,            "Calendars.flagShowIslamic");
 	connectBoolProperty(ui->hebrewCheckBox,             "Calendars.flagShowHebrew");
 	connectBoolProperty(ui->oldHinduSolarCheckBox,      "Calendars.flagShowOldHinduSolar");
@@ -215,15 +215,15 @@ void CalendarsDialog::setAboutHtml(void)
 	html += "<li>" + q_("New Hindu Solar and Lunar calendars") + "</li>";
 	html += "<li>" + q_("Astronomically 'accurate' Hindu Solar and Lunar calendars") + "</li>";
 	html += "<li>" + q_("Tibetan (Phuglugs, Phug-pa, K&#x101;lacakra) calendar") + "</li>";
-	html += "<li>" + q_("Balinese Pawukon calendar") + "</li>";
 	html += "<li>" + q_("Chinese calendar") + "</li>";
-//	html += "<li>" + q_("Japanese calendar") + "</li>";
-//	html += "<li>" + q_("Korean calendar") + "</li>";
-//	html += "<li>" + q_("Vietnamese calendar") + "</li>";
+	html += "<li>" + q_("Japanese calendar") + "</li>";
+	html += "<li>" + q_("Korean calendar") + "</li>";
+	html += "<li>" + q_("Vietnamese calendar") + "</li>";
+	html += "<li>" + q_("Balinese Pawukon calendar") + "</li>";
 	html += "<li>" + q_("Maya calendars") + "</li>";
 	html += "<li>" + q_("Aztec calendars") + "</li>";
 	html += "</ul>";
-	html += "<p>" + q_("The plugin is in an early stage of development. Please cross-check results and report errors.") + "</p>";
+	html += "<p>" + q_("The plugin is still under development. Please cross-check results and report errors.") + "</p>";
 	html += "<p>" + q_("For some calendars, we welcome proper formatting suggestions by actual users.") + "</p>";
 
 	html += "<h3>" + q_("Publications") + "</h3>";

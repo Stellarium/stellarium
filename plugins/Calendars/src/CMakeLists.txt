@@ -79,12 +79,12 @@ SET(Calendars_SRCS
     BahaiAstronomicalCalendar.cpp
     ChineseCalendar.hpp
     ChineseCalendar.cpp
-#    JapaneseCalendar.hpp
-#    JapaneseCalendar.cpp
-#    KoreanCalendar.hpp
-#    KoreanCalendar.cpp
-#    VietnameseCalendar.hpp
-#    VietnameseCalendar.cpp
+    JapaneseCalendar.hpp
+    JapaneseCalendar.cpp
+    KoreanCalendar.hpp
+    KoreanCalendar.cpp
+    VietnameseCalendar.hpp
+    VietnameseCalendar.cpp
 )
 
 SET(Calendars_UIS

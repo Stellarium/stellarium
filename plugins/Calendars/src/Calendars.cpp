@@ -66,6 +66,9 @@
 #include "BahaiArithmeticCalendar.hpp"
 #include "BahaiAstronomicalCalendar.hpp"
 #include "ChineseCalendar.hpp"
+#include "JapaneseCalendar.hpp"
+#include "KoreanCalendar.hpp"
+#include "VietnameseCalendar.hpp"
 
 /*************************************************************************
  This method is the one called automatically by the StelModuleMgr just 
@@ -252,10 +255,10 @@ void Calendars::init()
 	calendars.insert("BahaiAstronomical", new BahaiAstronomicalCalendar(jd));
 	calendars.insert("Tibetan", new TibetanCalendar(jd));
 	calendars.insert("Chinese", new ChineseCalendar(jd));
+	calendars.insert("Japanese", new JapaneseCalendar(jd));
+	calendars.insert("Korean", new KoreanCalendar(jd));
+	calendars.insert("Vietnamese", new VietnameseCalendar(jd));
 	// TODO: Add your Calendar subclasses here.
-//	calendars.insert("Japanese", new JapaneseCalendar(jd));
-//	calendars.insert("Korean", new KoreanCalendar(jd));
-//	calendars.insert("Vietnamese", new VietnameseCalendar(jd));
 
 	foreach (Calendar* cal, calendars)
 	{
@@ -351,8 +354,8 @@ void Calendars::draw(StelCore* core)
 	oss << "<table>";
 	// Select the drawable calendars from GUI or settings.
 	if (calendars.count()==0) return;
-	if (flagShowJulian)             oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Julian",                "calendar"), getCal("Julian")->getFormattedDateString());
 	if (flagShowGregorian)          oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Gregorian",             "calendar"), getCal("Gregorian")->getFormattedDateString());
+	if (flagShowJulian)             oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Julian",                "calendar"), getCal("Julian")->getFormattedDateString());
 	if (flagShowRevisedJulian)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Revised Julian",        "calendar"), getCal("RevisedJulian")->getFormattedDateString());
 	if (flagShowISO)                oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("ISO week",              "calendar"), getCal("ISO")->getFormattedDateString());
 	if (flagShowIcelandic)          oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Icelandic",             "calendar"), getCal("Icelandic")->getFormattedDateString());
@@ -369,8 +372,8 @@ void Calendars::draw(StelCore* core)
 	if (flagShowHebrew)             oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Hebrew",                "calendar"), getCal("Hebrew")->getFormattedDateString());
 	if (flagShowPersianArithmetic)  oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Persian (Arithm.)",     "calendar"), getCal("PersianArithmetic")->getFormattedDateString());
 	if (flagShowPersianAstronomical)oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Persian (Astron.)",     "calendar"), getCal("PersianAstronomical")->getFormattedDateString());
-	if (flagShowBahaiArithmetic)    oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Bahai (Arithm.)",       "calendar"), getCal("BahaiArithmetic")->getFormattedDateString());
-	if (flagShowBahaiAstronomical)  oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Bahai (Astron.)",       "calendar"), getCal("BahaiAstronomical")->getFormattedDateString());
+	if (flagShowBahaiArithmetic)    oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Bahá’í (Arithm.)",      "calendar"), getCal("BahaiArithmetic")->getFormattedDateString());
+	if (flagShowBahaiAstronomical)  oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Bahá’í (Astron.)",      "calendar"), getCal("BahaiAstronomical")->getFormattedDateString());
 	if (flagShowOldHinduSolar)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Old Hindu Solar",       "calendar"), getCal("OldHinduSolar")->getFormattedDateString());
 	if (flagShowOldHinduLunar)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Old Hindu Lunisolar",   "calendar"), getCal("OldHinduLunar")->getFormattedDateString());
 	if (flagShowNewHinduSolar)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("New Hindu Solar",       "calendar"), getCal("NewHinduSolar")->getFormattedDateString());
@@ -384,15 +387,24 @@ void Calendars::draw(StelCore* core)
 					oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Chinese",               "calendar"), getCal("Chinese")->getFormattedDateString());
 					oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Chinese Solar Terms",   "calendar"), static_cast<ChineseCalendar*>(getCal("Chinese"))->getFormattedSolarTermsString());
 	}
+	if (flagShowJapanese) {
+					oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Japanese",              "calendar"), getCal("Japanese")->getFormattedDateString());
+					oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Japanese Solar Terms",  "calendar"), static_cast<JapaneseCalendar*>(getCal("Japanese"))->getFormattedSolarTermsString());
+	}
+	if (flagShowKorean) {
+					oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Korean",                "calendar"), getCal("Korean")->getFormattedDateString());
+					oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Korean Solar Terms",    "calendar"), static_cast<KoreanCalendar*>(getCal("Korean"))->getFormattedSolarTermsString());
+	}
+	if (flagShowVietnamese) 	oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Vietnamese",            "calendar"), getCal("Vietnamese")->getFormattedDateString());
+	if (flagShowBalinese)      {
+		oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Balinese Pawukon", "calendar"), static_cast<BalinesePawukonCalendar*>(getCal("Balinese"))->getFormattedDateString1to5());
+		oss << QString("<tr><td>  </td><td>%1</td></tr>").arg(static_cast<BalinesePawukonCalendar*>(getCal("Balinese"))->getFormattedDateString6to10());
+	}
 	if (flagShowMayaLongCount)      oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Long Count",       "calendar"), getCal("MayaLongCount")->getFormattedDateString());
 	if (flagShowMayaHaab)           oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Haab",             "calendar"), getCal("MayaHaab")->getFormattedDateString());
 	if (flagShowMayaTzolkin)        oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Maya Tzolkin",          "calendar"), getCal("MayaTzolkin")->getFormattedDateString());
 	if (flagShowAztecXihuitl)       oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Aztec Xihuitl",         "calendar"), getCal("AztecXihuitl")->getFormattedDateString());
 	if (flagShowAztecTonalpohualli) oss << QString("<tr><td>%1&nbsp;</td><td>%2</td></tr>").arg(qc_("Aztec Tonalpohualli",   "calendar"), getCal("AztecTonalpohualli")->getFormattedDateString());
-	if (flagShowBalinese)      {
-		oss << QString("<tr><td>%1</td><td>%2</td></tr>").arg(qc_("Balinese Pawukon", "calendar"), static_cast<BalinesePawukonCalendar*>(getCal("Balinese"))->getFormattedDateString1to5());
-		oss << QString("<tr><td>  </td><td>%1</td></tr>").arg(static_cast<BalinesePawukonCalendar*>(getCal("Balinese"))->getFormattedDateString6to10());
-	}
 	oss << "</table>";
 	Vec3f color(1);
 	if (getFlagTextColorOverride())
