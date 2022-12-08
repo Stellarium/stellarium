@@ -45,7 +45,7 @@ void BahaiArithmeticCalendar::retranslate()
 		{5, qc_("Istijlāl (Majesty)"        , "Bahai day name")},  // Thu
 		{6, qc_("Istiqlāl (Independence)"   , "Bahai day name")}}; // Fri
 	cycleNames={
-		{ 0, qc_("`Ayyām-i-Hā (Days of God)", "Bahai day/month name")},
+		{ 0, qc_("Ayyām-i-Hā (Days of God)" , "Bahai day/month name")},
 		{ 1, qc_("Bahā’ (Splendor)"         , "Bahai day/month name")},
 		{ 2, qc_("Jalāl (Glory)"            , "Bahai day/month name")},
 		{ 3, qc_("Jamāl (Beauty)"           , "Bahai day/month name")},
@@ -140,8 +140,8 @@ QStringList BahaiArithmeticCalendar::getDateStrings() const
 QString BahaiArithmeticCalendar::getFormattedDateString() const
 {
 	QStringList str=getDateStrings();
-
-	return QString("%1, day of %2 (%3) of the month of %4 (%5), of the year %6 (%7), of Vahid %8, of Kull-i-shay %9 of the Bahai Era").arg(
+	// TRANSLATORS: Bahai Calendar output string
+	return QString(qc_("%1, day of %2 (%3) of the month of %4 (%5), of the year %6 (%7), of Vahid %8, of Kull-i-shay %9 of the Bahai Era", "Bahai calendar output")).arg(
 			str.at(8), // %1 weekday
 			str.at(7), // %2 dayName
 			str.at(6), // %3 dayNr
