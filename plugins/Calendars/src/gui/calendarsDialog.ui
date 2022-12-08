@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>606</width>
-    <height>475</height>
+    <width>635</width>
+    <height>490</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -199,7 +199,7 @@
          <item row="12" column="2">
           <widget class="QCheckBox" name="japaneseCheckBox">
            <property name="text">
-            <string>Japanese</string>
+            <string comment="calendar">Japanese</string>
            </property>
           </widget>
          </item>
@@ -276,7 +276,7 @@
          <item row="6" column="1">
           <widget class="QCheckBox" name="bahaiArithmeticCheckBox">
            <property name="text">
-            <string>Bahá’í (arithmetic)</string>
+            <string comment="calendar">Bahá’í (arithmetic)</string>
            </property>
           </widget>
          </item>
@@ -367,7 +367,7 @@
          <item row="6" column="2">
           <widget class="QCheckBox" name="bahaiAstronomicalCheckBox">
            <property name="text">
-            <string>Bahá’í (astronomical)</string>
+            <string comment="calendar">Bahá’í (astronomical)</string>
            </property>
           </widget>
          </item>
@@ -388,7 +388,7 @@
          <item row="12" column="1">
           <widget class="QCheckBox" name="koreanCheckBox">
            <property name="text">
-            <string>Korean</string>
+            <string comment="calendar">Korean</string>
            </property>
           </widget>
          </item>
@@ -402,7 +402,7 @@
          <item row="13" column="1">
           <widget class="QCheckBox" name="vietnameseCheckBox">
            <property name="text">
-            <string>Vietnamese</string>
+            <string comment="calendar">Vietnamese</string>
            </property>
           </widget>
          </item>
