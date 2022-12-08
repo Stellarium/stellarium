@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-11-27 20:12+0700\n"
+"POT-Creation-Date: 2022-12-08 18:49+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,7 +65,7 @@ msgstr ""
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
 #: src/core/StelApp.cpp:648 src/core/StelCore.cpp:291
 #: src/core/StelSkyLayerMgr.cpp:85 src/core/StelSkyLayerMgr.cpp:86
-#: src/StelMainView.cpp:892
+#: src/StelMainView.cpp:896
 msgid "Display Options"
 msgstr ""
 
@@ -712,7 +712,7 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:88
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:196
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:120
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:455
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:215
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:183
@@ -2101,7 +2101,7 @@ msgid "Toggle DSO type filter"
 msgstr ""
 
 #: src/core/modules/NebulaMgr.cpp:1444 src/gui/StelDialog.cpp:336
-#: src/StelMainView.cpp:988
+#: src/StelMainView.cpp:992
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:773
 msgid "Attention!"
 msgstr ""
@@ -2294,6 +2294,7 @@ msgid "Illuminated"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:839
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:323
 msgid "Elong. in Ecl.Long."
 msgstr ""
 
@@ -3980,7 +3981,7 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:87
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:195
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:182
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:181
@@ -4016,7 +4017,7 @@ msgid "References / Further Reading"
 msgstr ""
 
 #: src/core/StelMovementMgr.cpp:231 src/gui/StelGui.cpp:220
-#: src/StelMainView.cpp:890 src/StelMainView.cpp:891
+#: src/StelMainView.cpp:894 src/StelMainView.cpp:895
 msgid "Miscellaneous"
 msgstr ""
 
@@ -4466,7 +4467,7 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:86
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:194
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:124
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:213
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:181
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:180
@@ -5068,7 +5069,7 @@ msgstr ""
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:280
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:197
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:127
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:121
 msgid "Contributors"
 msgstr ""
 
@@ -7671,63 +7672,63 @@ msgstr ""
 msgid "Shortcut"
 msgstr ""
 
-#: src/StelMainView.cpp:890
+#: src/StelMainView.cpp:894
 msgid "Save screenshot"
 msgstr ""
 
-#: src/StelMainView.cpp:891
+#: src/StelMainView.cpp:895
 msgid "Reload shaders (for development)"
 msgstr ""
 
-#: src/StelMainView.cpp:892
+#: src/StelMainView.cpp:896
 msgid "Full-screen mode"
 msgstr ""
 
-#: src/StelMainView.cpp:988
+#: src/StelMainView.cpp:992
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
 msgstr ""
 
-#: src/StelMainView.cpp:1071
+#: src/StelMainView.cpp:1075
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr ""
 
-#: src/StelMainView.cpp:1073
+#: src/StelMainView.cpp:1077
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
 msgstr ""
 
-#: src/StelMainView.cpp:1077
+#: src/StelMainView.cpp:1081
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 
-#: src/StelMainView.cpp:1120
+#: src/StelMainView.cpp:1124
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1171
+#: src/StelMainView.cpp:1175
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1231
+#: src/StelMainView.cpp:1235
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1272
+#: src/StelMainView.cpp:1276
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -12592,7 +12593,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:601
 #: plugins/Observability/src/ui_ObservabilityDialog.h:346
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:261
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:321
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:339
 msgid "Save settings"
 msgstr ""
 
@@ -12615,7 +12616,7 @@ msgstr ""
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:260
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:439
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:320
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:338
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:748
 #: plugins/Calendars/src/ui_calendarsDialog.h:947
 msgid "Restore defaults"
@@ -12690,7 +12691,7 @@ msgid "Equatorial coordinates, equinox of date"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1784
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:203
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
 msgid "Hour angle/Declination"
 msgstr ""
 
@@ -12755,7 +12756,7 @@ msgid "Additional coordinates (from plugins)"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1821
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:299
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:312
 msgid "3-letter IAU constellation abbreviation"
 msgstr ""
 
@@ -14959,7 +14960,7 @@ msgstr ""
 #: plugins/Observability/src/ui_ObservabilityDialog.h:348
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:263
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:473
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:323
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:341
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:820
 #: plugins/Calendars/src/ui_calendarsDialog.h:999
 msgctxt "tab in plugin windows"
@@ -15075,7 +15076,7 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:198
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:92
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:151
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:100
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:102
 #: plugins/Scenery3d/src/Scenery3d.cpp:334
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:272
 #: plugins/Calendars/src/Calendars.cpp:183
@@ -20126,7 +20127,7 @@ msgid "Note:"
 msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:535
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:309
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:327
 msgid "Place of the string with coordinates of the mouse pointer"
 msgstr ""
 
@@ -23630,7 +23631,7 @@ msgid "Color of text"
 msgstr ""
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:259
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:307
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:325
 msgid "Font size:"
 msgstr ""
 
@@ -24537,156 +24538,164 @@ msgstr ""
 msgid "Results"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:54
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:99
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:100
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:293
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:295
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:322
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:55
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:101
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:102
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:306
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:308
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:340
 msgid "Pointer Coordinates"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:57
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:58
 msgid "This plugin shows the coordinates of the mouse pointer."
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:99
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:101
 msgid "Show coordinates of the mouse pointer"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:136
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:139
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:152
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:155
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:173
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:176
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:189
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:192
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:205
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:208
 msgctxt "abbreviated in the plugin"
 msgid "Supergal. Long/Lat"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:224
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:227
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:243
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:246
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:261
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:264
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:123
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:117
 msgid "Pointer Coordinates plug-in"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:124
 msgid "Show coordinates of the mouse cursor on the screen."
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:176
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:170
 msgid "The top center of the screen"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:177
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:171
 msgid "In center of the top right half of the screen"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:178
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:172
 msgid "The right bottom corner of the screen"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:179
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:173
 msgid "Near mouse cursor"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:180
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:174
 msgid "Custom position"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:195
 msgid "Right ascension/Declination (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:202
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:196
 msgid "Right ascension/Declination"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:204
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Ecliptic Longitude/Latitude"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:205
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:199
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:206
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:200
 msgid "Altitude/Azimuth"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:207
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Galactic Longitude/Latitude"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:208
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:202
 msgid "Supergalactic Longitude/Latitude"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:238
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:232
 msgid "Coordinates of custom position:"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:296
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:309
 msgid "Enable display of coordinates at startup"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:310
 msgid "Show plug-in button on toolbar"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:301
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:314
 msgid "Show IAU constellation code"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:315
 msgid "Show crossed lines under mouse cursor"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:304
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
+msgid "Show elongation from the Sun in ecliptic longitude"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:318
 msgid "Which coordinate system will be used for displaying"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:306
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:320
 msgid "Coordinates:"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:311
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:322
+msgid "The color of the screen text"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:329
 msgid "Place of the string:"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:313
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:331
 msgid "Coordinate X"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:317
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:335
 msgid "Coordinate Y"
 msgstr ""
 
