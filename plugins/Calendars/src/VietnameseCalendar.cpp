@@ -86,18 +86,18 @@ void VietnameseCalendar::retranslate()
 		{10, qc_("Dậu" , "Vietnamese calendar, terrestrial branch name")},
 		{11, qc_("Tuất", "Vietnamese calendar, terrestrial branch name")},
 		{12, qc_("Hợi" , "Vietnamese calendar, terrestrial branch name")}};
-	// N.B. Do not change the translation hint. This is identical to the Chinese!
+	// N.B. Do not change the translation hint. This is largely identical to the Chinese!
 	terrestrialBranchesAnimalTotems={
 		{ 1, qc_("Rat"     , "Chinese calendar, terrestrial branch animal totem")},
-		{ 2, qc_("Ox"      , "Chinese calendar, terrestrial branch animal totem")},
+		{ 2, qc_("Water buffalo" , "Vietnamese calendar, terrestrial branch animal totem")},
 		{ 3, qc_("Tiger"   , "Chinese calendar, terrestrial branch animal totem")},
-		{ 4, qc_("Hare"    , "Chinese calendar, terrestrial branch animal totem")},
+		{ 4, qc_("Cat"     , "Vietnamese calendar, terrestrial branch animal totem")},
 		{ 5, qc_("Dragon"  , "Chinese calendar, terrestrial branch animal totem")},
 		{ 6, qc_("Snake"   , "Chinese calendar, terrestrial branch animal totem")},
 		{ 7, qc_("Horse"   , "Chinese calendar, terrestrial branch animal totem")},
-		{ 8, qc_("Sheep"   , "Chinese calendar, terrestrial branch animal totem")},
+		{ 8, qc_("Goat"    , "Vietnamese calendar, terrestrial branch animal totem")},
 		{ 9, qc_("Monkey"  , "Chinese calendar, terrestrial branch animal totem")},
-		{10, qc_("Fowl"    , "Chinese calendar, terrestrial branch animal totem")},
+		{10, qc_("Chicken" , "Vietnamese calendar, terrestrial branch animal totem")},
 		{11, qc_("Dog"     , "Chinese calendar, terrestrial branch animal totem")},
 		{12, qc_("Pig"     , "Chinese calendar, terrestrial branch animal totem")}};
 }
