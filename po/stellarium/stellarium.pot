@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-08 22:42+0700\n"
+"POT-Creation-Date: 2022-12-08 23:40+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25783,6 +25783,7 @@ msgid "Chinese Solar Terms"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:391
+#: plugins/Calendars/src/ui_calendarsDialog.h:950
 msgctxt "calendar"
 msgid "Japanese"
 msgstr ""
@@ -25793,6 +25794,7 @@ msgid "Japanese Solar Terms"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:395
+#: plugins/Calendars/src/ui_calendarsDialog.h:977
 msgctxt "calendar"
 msgid "Korean"
 msgstr ""
@@ -25803,6 +25805,7 @@ msgid "Korean Solar Terms"
 msgstr ""
 
 #: plugins/Calendars/src/Calendars.cpp:398
+#: plugins/Calendars/src/ui_calendarsDialog.h:979
 msgctxt "calendar"
 msgid "Vietnamese"
 msgstr ""
@@ -28738,10 +28741,6 @@ msgstr ""
 msgid "Calendars Plug-in Configuration"
 msgstr ""
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:950
-msgid "Japanese"
-msgstr ""
-
 #: plugins/Calendars/src/ui_calendarsDialog.h:951
 msgctxt "calendar"
 msgid "French Revolution (arithmetic)"
@@ -28764,6 +28763,7 @@ msgid "ISO Week"
 msgstr ""
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:961
+msgctxt "calendar"
 msgid "Bahá’í (arithmetic)"
 msgstr ""
 
@@ -28783,15 +28783,8 @@ msgid "New Hindu Lunar"
 msgstr ""
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:974
+msgctxt "calendar"
 msgid "Bahá’í (astronomical)"
-msgstr ""
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:977
-msgid "Korean"
-msgstr ""
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:979
-msgid "Vietnamese"
 msgstr ""
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:981
