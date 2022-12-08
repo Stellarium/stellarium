@@ -30,26 +30,26 @@ class OlympicCalendar : public JulianCalendar
 public:
 	OlympicCalendar(double jd);
 
-	virtual ~OlympicCalendar() Q_DECL_OVERRIDE {}
+	~OlympicCalendar() override {}
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE {}
+	void retranslate() override {}
 
 	//! Set a calendar date from the Julian day number
-	virtual void setJD(double JD) Q_DECL_OVERRIDE;
+	void setJD(double JD) override;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! The elements only change years. The calendar is else based on the Julian, so
 	//! unless given explicitly, months and days in the Julian calendar will not be changed.
 	//! parts={olympiad, year [, month, day]}
-	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+	void setDate(QVector<int> parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! Olympiad, Year
-	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
+	QStringList getDateStrings() const override;
 
 	//! get a formatted complete string for a date ("nth of the monthname, Year X in the YY olympiad")
-	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
+	QString getFormattedDateString() const override;
 
 	//! return Julian year from { olympiad, year}
 	static int julianYearFromOlympiad(QVector<int>odate);

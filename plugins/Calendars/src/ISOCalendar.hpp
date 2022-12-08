@@ -30,22 +30,22 @@ class ISOCalendar : public GregorianCalendar
 public:
 	ISOCalendar(double jd);
 
-	virtual ~ISOCalendar() Q_DECL_OVERRIDE {}
+	~ISOCalendar() override {}
 
 public slots:
 	//! Set a calendar date from the Julian day number
-	virtual void setJD(double JD) Q_DECL_OVERRIDE;
+	void setJD(double JD) override;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Week[1...53]-Day[1...7]
-	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+	void setDate(QVector<int> parts) override;
 
 //	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 //	//! The order depends on the actual calendar
-//	virtual QStringList getDateStrings() Q_DECL_OVERRIDE;
+//	QStringList getDateStrings() override;
 
 	//! get a formatted complete string for a date
-	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
+	QString getFormattedDateString() const override;
 
 	static QVector<int> isoFromFixed(int rd);
 	static int fixedFromISO(QVector<int> iso);

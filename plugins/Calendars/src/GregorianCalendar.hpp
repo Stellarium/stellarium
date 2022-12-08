@@ -39,22 +39,22 @@ class GregorianCalendar : public JulianCalendar
 public:
 	GregorianCalendar(double jd);
 
-	virtual ~GregorianCalendar() Q_DECL_OVERRIDE {}
+	~GregorianCalendar() override {}
 
 public slots:
 	//! Set a calendar date from the Julian day number
-	virtual void setJD(double JD) Q_DECL_OVERRIDE;
+	void setJD(double JD) override;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...12]-Day[1...31]
-	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+	void setDate(QVector<int> parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! Year, Month, MonthName, Day, DayName
-	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
+	QStringList getDateStrings() const override;
 
 	//! get a formatted complete string for a date
-	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
+	QString getFormattedDateString() const override;
 
 	//! returns true for leap years
 	static bool isLeap(int year);

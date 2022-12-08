@@ -37,22 +37,22 @@ class NewHinduLunarCalendar : public NewHinduCalendar
 public:
 	NewHinduLunarCalendar(double jd);
 
-	virtual ~NewHinduLunarCalendar() Q_DECL_OVERRIDE {}
+	~NewHinduLunarCalendar() override {}
 
 public slots:
 	//! Set a calendar date from the Julian day number
-	virtual void setJD(double JD) Q_DECL_OVERRIDE;
+	void setJD(double JD) override;
 
 	//! set RD date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! parts = {Year, Month[1...12], leapMonth[0|1], Day[1...30], leapDay[0|1] }
-	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+	void setDate(QVector<int> parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! @return {Year, Month, MonthName, leap[0|1], Day, DayName}
-	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
+	QStringList getDateStrings() const override;
 
 	//! get a formatted complete string for a date
-	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
+	QString getFormattedDateString() const override;
 
 	//! get a formatted string for displaying the "panchang", a set of
 	//! tithi (lunar day), day of week, nakshatra, yoga, karana.

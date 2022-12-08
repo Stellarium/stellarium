@@ -37,6 +37,7 @@ private slots:
 	void testIslamic();
 	void testHebrew();
 	void testPersian();
+	void testBahai();
 	void testBalinesePawukon();
 	void testOldHindu();
 	void testNewHindu();

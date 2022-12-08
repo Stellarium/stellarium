@@ -20,11 +20,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "Calendars.hpp"
 #include "CalendarsInfoPanel.hpp"
 #include "StelApp.hpp"
-#include "StelGui.hpp"
 #include "SkyGui.hpp"
-#include "StelGuiItems.hpp"
-#include "StelTranslator.hpp"
-#include "StelActionMgr.hpp"
 
 #include <float.h>
 #include <QGridLayout>
@@ -81,6 +77,12 @@ CalendarsInfoPanel::CalendarsInfoPanel(Calendars* plugin,
 	connect (this->plugin, &Calendars::showFrenchArithmeticChanged   , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showPersianArithmeticChanged  , this, [=](bool){setHtml("a"); updatePosition();});
 	connect (this->plugin, &Calendars::showPersianAstronomicalChanged, this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showBahaiArithmeticChanged    , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showBahaiAstronomicalChanged  , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showChineseChanged            , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showJapaneseChanged           , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showKoreanChanged             , this, [=](bool){setHtml("a"); updatePosition();});
+	connect (this->plugin, &Calendars::showVietnameseChanged         , this, [=](bool){setHtml("a"); updatePosition();});
 
 	//Night mode
 	connect(&stelApp, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setColorScheme(const QString&)));
