@@ -811,10 +811,10 @@
              <item row="3" column="0">
               <widget class="QCheckBox" name="checkBoxCCDMaxExposureTime">
                <property name="toolTip">
-                <string>Show max time of exposure for Solar system objects when then selected</string>
+                <string>Show maximum exposure time for Solar system objects to avoid movement streak</string>
                </property>
                <property name="text">
-                <string>Show max time of exposure for moving objects</string>
+                <string>Show max exposure time for moving objects</string>
                </property>
               </widget>
              </item>
