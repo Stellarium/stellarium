@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-10 19:11+0700\n"
+"POT-Creation-Date: 2022-12-10 23:21+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28594,17 +28594,20 @@ msgid "A.P."
 msgstr ""
 
 #: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:40
-msgctxt "Bahai day name"
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:50
+msgctxt "Bahai day/month name"
 msgid "Jalāl (Glory)"
 msgstr ""
 
 #: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:41
-msgctxt "Bahai day name"
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:51
+msgctxt "Bahai day/month name"
 msgid "Jamāl (Beauty)"
 msgstr ""
 
 #: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:42
-msgctxt "Bahai day name"
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:56
+msgctxt "Bahai day/month name"
 msgid "Kamāl (Perfection)"
 msgstr ""
 
@@ -28634,18 +28637,9 @@ msgid "Ayyām-i-Hā (Days of God)"
 msgstr ""
 
 #: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:49
-msgctxt "Bahai day/month name"
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:77
+msgctxt "Bahai day/month and year-cycle (Vahid) name"
 msgid "Bahā’ (Splendor)"
-msgstr ""
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:50
-msgctxt "Bahai day/month name"
-msgid "Jalāl (Glory)"
-msgstr ""
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:51
-msgctxt "Bahai day/month name"
-msgid "Jamāl (Beauty)"
 msgstr ""
 
 #: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:52
@@ -28666,11 +28660,6 @@ msgstr ""
 #: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:55
 msgctxt "Bahai day/month name"
 msgid "Kalimāt (Words)"
-msgstr ""
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:56
-msgctxt "Bahai day/month name"
-msgid "Kamāl (Perfection)"
 msgstr ""
 
 #: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:57
@@ -28766,11 +28755,6 @@ msgstr ""
 #: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:76
 msgctxt "Bahai year-cycle (Vahid) name"
 msgid "Jād (Generosity)"
-msgstr ""
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:77
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Bahā’ (Splendor)"
 msgstr ""
 
 #: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:78
