@@ -67,7 +67,10 @@ void NomenclatureMgr::init()
 	loadSpecialNomenclature();
 
 	setColor(Vec3f(conf->value("color/planet_nomenclature_color", "0.1,1.0,0.1").toString()));
-	setFlagLabels(conf->value("astro/flag_planets_nomenclature", false).toBool());
+	setFlagShowNomenclature(conf->value("astro/flag_planets_nomenclature", false).toBool());
+	setFlagShowTerminatorZoneOnly(conf->value("astro/flag_planets_nomenclature_terminator_only", false).toBool());
+	setTerminatorMinAltitude(conf->value("astro/planet_nomenclature_solar_altitude_min", -5).toInt());
+	setTerminatorMaxAltitude(conf->value("astro/planet_nomenclature_solar_altitude_max", 40).toInt());
 	setFlagHideLocalNomenclature(conf->value("astro/flag_hide_local_nomenclature", true).toBool());
 	setFlagShowSpecialNomenclatureOnly(conf->value("astro/flag_special_nomenclature_only", false).toBool());
 
@@ -78,17 +81,17 @@ void NomenclatureMgr::init()
 	connect(ssystem, SIGNAL(solarSystemDataReloaded()), this, SLOT(updateNomenclatureData()));
 
 	QString displayGroup = N_("Display Options");
-	addAction("actionShow_Planets_Nomenclature", displayGroup, N_("Nomenclature labels"), "nomenclatureDisplayed", "Alt+N");
+	addAction("actionShow_Planets_Nomenclature", displayGroup, N_("Nomenclature labels"), "flagShowNomenclature", "Alt+N");
 	addAction("actionShow_Planets_Nomenclature_SpecialPoints_Only", displayGroup, N_("Special nomenclature points only"), "specialNomenclatureOnlyDisplayed");
 }
 
 void NomenclatureMgr::updateNomenclatureData()
 {
-	bool flag = getFlagLabels();
+	bool flag = getFlagShowNomenclature();
 	loadNomenclature();
 	loadSpecialNomenclature();
 	updateI18n();
-	setFlagLabels(flag);
+	setFlagShowNomenclature(flag);
 }
 
 void NomenclatureMgr::loadSpecialNomenclature()
@@ -359,7 +362,7 @@ QList<StelObjectP> NomenclatureMgr::searchAround(const Vec3d& av, double limitFo
 
 StelObjectP NomenclatureMgr::searchByName(const QString& englishName) const
 {
-	if (getFlagLabels())
+	if (getFlagShowNomenclature())
 	{
 		NomenclatureItem::NomenclatureItemType niType;
 		for (const auto& nItem : nomenclatureItems)
@@ -376,7 +379,7 @@ StelObjectP NomenclatureMgr::searchByName(const QString& englishName) const
 
 StelObjectP NomenclatureMgr::searchByNameI18n(const QString& nameI18n) const
 {
-	if (getFlagLabels())
+	if (getFlagShowNomenclature())
 	{
 		NomenclatureItem::NomenclatureItemType niType;
 		for (const auto& nItem : nomenclatureItems)
@@ -395,7 +398,7 @@ QStringList NomenclatureMgr::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
 
-	if (getFlagLabels())
+	if (getFlagShowNomenclature())
 	{
 		NomenclatureItem::NomenclatureItemType niType;
 		if (inEnglish)
@@ -424,7 +427,7 @@ QStringList NomenclatureMgr::listAllObjectsByType(const QString &objType, bool i
 {
 	QStringList result;
 
-	if (getFlagLabels())
+	if (getFlagShowNomenclature())
 	{
 		int type = objType.toInt();
 		switch (type)
@@ -468,7 +471,7 @@ QStringList NomenclatureMgr::listAllObjectsByType(const QString &objType, bool i
 
 NomenclatureItemP NomenclatureMgr::searchByEnglishName(QString nomenclatureItemEnglishName) const
 {
-	if (getFlagLabels())
+	if (getFlagShowNomenclature())
 	{
 		NomenclatureItem::NomenclatureItemType niType;
 		for (const auto& p : nomenclatureItems)
@@ -493,18 +496,66 @@ const Vec3f& NomenclatureMgr::getColor(void) const
 	return NomenclatureItem::color;
 }
 
-void NomenclatureMgr::setFlagLabels(bool b)
+void NomenclatureMgr::setFlagShowNomenclature(bool b)
 {
-	if (getFlagLabels() != b)
+	if (getFlagShowNomenclature() != b)
 	{
 		NomenclatureItem::setFlagLabels(b);
-		emit nomenclatureDisplayedChanged(b);
+		emit flagShowNomenclatureChanged(b);
 	}
 }
 
-bool NomenclatureMgr::getFlagLabels() const
+bool NomenclatureMgr::getFlagShowNomenclature() const
 {
 	return NomenclatureItem::getFlagLabels();
+}
+
+// Set flag which determines if only nomenclature along the terminator should be shown.
+void NomenclatureMgr::setFlagShowTerminatorZoneOnly(bool b)
+{
+	if (b!=NomenclatureItem::showTerminatorZoneOnly)
+	{
+		NomenclatureItem::showTerminatorZoneOnly=b;
+		conf->setValue("astro/flag_planets_nomenclature_terminator_only", b);
+		emit flagShowTerminatorZoneOnlyChanged(b);
+	}
+}
+// Get flag which determines if only nomenclature along the terminator should be shown.
+bool NomenclatureMgr::getFlagShowTerminatorZoneOnly() const
+{
+	return NomenclatureItem::showTerminatorZoneOnly;
+}
+
+// Set minimum solar altitude (degrees) to draw only nomenclature along the terminator.
+void NomenclatureMgr::setTerminatorMinAltitude(int deg)
+{
+	if (deg!=NomenclatureItem::terminatorMinAltitude)
+	{
+		NomenclatureItem::terminatorMinAltitude=qBound(-90, deg, 90);
+		conf->setValue("astro/planet_nomenclature_solar_altitude_min", NomenclatureItem::terminatorMinAltitude);
+		emit terminatorMinAltitudeChanged(NomenclatureItem::terminatorMinAltitude);
+	}
+}
+// Get minimum solar altitude (degrees) to draw only nomenclature along the terminator.
+int NomenclatureMgr::getTerminatorMinAltitude() const
+{
+	return NomenclatureItem::terminatorMinAltitude;
+}
+
+// Set maximum solar altitude (degrees) to draw only nomenclature along the terminator.
+void NomenclatureMgr::setTerminatorMaxAltitude(int deg)
+{
+	if (deg!=NomenclatureItem::terminatorMaxAltitude)
+	{
+		NomenclatureItem::terminatorMaxAltitude=qBound(-90, deg, 90);
+		conf->setValue("astro/planet_nomenclature_solar_altitude_max", NomenclatureItem::terminatorMaxAltitude);
+		emit terminatorMaxAltitudeChanged(NomenclatureItem::terminatorMaxAltitude);
+	}
+}
+// Get maximum solar altitude (degrees) to draw only nomenclature along the terminator.
+int NomenclatureMgr::getTerminatorMaxAltitude() const
+{
+	return NomenclatureItem::terminatorMaxAltitude;
 }
 
 void NomenclatureMgr::setFlagHideLocalNomenclature(bool b)
