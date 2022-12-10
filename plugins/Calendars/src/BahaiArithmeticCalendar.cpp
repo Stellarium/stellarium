@@ -37,16 +37,16 @@ void BahaiArithmeticCalendar::retranslate()
 {
 	// fill the name lists with translated month and day names
 	weekDayNames={
-		{0, qc_("Jalāl (Glory)"             , "Bahai day name")},  // Sat
-		{1, qc_("Jamāl (Beauty)"            , "Bahai day name")},  // Sun
-		{2, qc_("Kamāl (Perfection)"        , "Bahai day name")},  // Mon
+		{0, qc_("Jalāl (Glory)"             , "Bahai day/month name")},  // Sat
+		{1, qc_("Jamāl (Beauty)"            , "Bahai day/month name")},  // Sun
+		{2, qc_("Kamāl (Perfection)"        , "Bahai day/month name")},  // Mon
 		{3, qc_("Fiḍāl (Grace)"             , "Bahai day name")},  // Tue
 		{4, qc_("‘Idāl (Justice)"           , "Bahai day name")},  // Wed
 		{5, qc_("Istijlāl (Majesty)"        , "Bahai day name")},  // Thu
 		{6, qc_("Istiqlāl (Independence)"   , "Bahai day name")}}; // Fri
 	cycleNames={
 		{ 0, qc_("Ayyām-i-Hā (Days of God)" , "Bahai day/month name")},
-		{ 1, qc_("Bahā’ (Splendor)"         , "Bahai day/month name")},
+		{ 1, qc_("Bahā’ (Splendor)"         , "Bahai day/month and year-cycle (Vahid) name")},
 		{ 2, qc_("Jalāl (Glory)"            , "Bahai day/month name")},
 		{ 3, qc_("Jamāl (Beauty)"           , "Bahai day/month name")},
 		{ 4, qc_("‘Aẓamat (Grandeur)"       , "Bahai day/month name")},
@@ -74,7 +74,7 @@ void BahaiArithmeticCalendar::retranslate()
 		{ 6, qc_("Vāv (letter V)"           , "Bahai year-cycle (Vahid) name")},
 		{ 7, qc_("Abad (Eternity)"          , "Bahai year-cycle (Vahid) name")},
 		{ 8, qc_("Jād (Generosity)"         , "Bahai year-cycle (Vahid) name")},
-		{ 9, qc_("Bahā’ (Splendor)"         , "Bahai year-cycle (Vahid) name")},
+		{ 9, qc_("Bahā’ (Splendor)"         , "Bahai day/month and year-cycle (Vahid) name")},
 		{10, qc_("Ḥubb (Love)"              , "Bahai year-cycle (Vahid) name")},
 		{11, qc_("Bahhāj (Delightful)"      , "Bahai year-cycle (Vahid) name")},
 		{12, qc_("Javāb (Answer)"           , "Bahai year-cycle (Vahid) name")},
