@@ -18,7 +18,7 @@
 
 #include "StelTranslator.hpp"
 #include "JapaneseCalendar.hpp"
-//#include "GregorianCalendar.hpp"
+#include "GregorianCalendar.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
