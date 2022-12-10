@@ -250,7 +250,10 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->shadowEnlargementDanjonCheckBox, "SolarSystem.earthShadowEnlargementDanjon");
 	populateTrailsControls(ssmgr->getFlagTrails());
 	connect(ssmgr,SIGNAL(trailsDisplayedChanged(bool)), this, SLOT(populateTrailsControls(bool)));
-	connectBoolProperty(ui->hidePlanetNomenclatureCheckBox, "NomenclatureMgr.localNomenclatureHided");
+	connectBoolProperty(ui->hidePlanetNomenclatureCheckBox, "NomenclatureMgr.flagHideLocalNomenclature");
+	connectBoolProperty(ui->showTerminatorNomenclatureOnlyCheckBox, "NomenclatureMgr.flagShowTerminatorZoneOnly");
+	connectIntProperty(ui->terminatorMinAltSpinbox, "NomenclatureMgr.terminatorMinAltitude");
+	connectIntProperty(ui->terminatorMaxAltSpinbox, "NomenclatureMgr.terminatorMaxAltitude");
 	connectBoolProperty(ui->showSpecialNomenclatureOnlyCheckBox, "NomenclatureMgr.specialNomenclatureOnlyDisplayed");
 	StelModule* mnmgr = StelApp::getInstance().getModule("NomenclatureMgr");
 	bool state = mnmgr->property("nomenclatureDisplayed").toBool();
