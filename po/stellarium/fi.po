@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-10 12:01+0700\n"
+"POT-Creation-Date: 2022-12-10 19:11+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Ilpo Kantonen, 2022\n"
 "Language-Team: Finnish (https://www.transifex.com/stellarium/teams/80998/fi/)\n"
@@ -2561,7 +2561,7 @@ msgstr "Koman halkaisija (arvio)"
 msgid "Gas tail length (estimate)"
 msgstr "Kaasupyrstön pituus (arvio)"
 
-#: src/core/modules/Comet.cpp:449 src/core/StelProjectorClasses.cpp:755
+#: src/core/modules/Comet.cpp:449 src/core/StelProjectorClasses.cpp:701
 msgid "Orthographic"
 msgstr "Ortograafinen"
 
@@ -3243,12 +3243,12 @@ msgstr "Peilaa vaakasuunnassa"
 msgid "Flip scene vertically"
 msgstr "Peilaa pystysuunnassa"
 
-#: src/core/StelCore.cpp:2381
+#: src/core/StelCore.cpp:2409
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Korjaus on poistettu käytöstä. Käytä vain, jos tiedät mitä olet tekemässä!"
 
-#: src/core/StelCore.cpp:2384
+#: src/core/StelCore.cpp:2412
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -3259,7 +3259,7 @@ msgstr ""
 "artikkelissaan <em>Einstein's Theory of Relativity Confirmed by Ancient "
 "Solar Eclipses</em> (%1). Katso lisätietoa %2täältä%3."
 
-#: src/core/StelCore.cpp:2387
+#: src/core/StelCore.cpp:2415
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -3268,7 +3268,7 @@ msgstr ""
 "Tämän empiirisen yhtälön julkaisi G. M. Clemence artikkelissaan <em>On the "
 "system of astronomical constants</em> (%1)."
 
-#: src/core/StelCore.cpp:2390
+#: src/core/StelCore.cpp:2418
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -3281,7 +3281,7 @@ msgstr ""
 "teoksessaan <em>Astronomical Formulae for Calculators</em>. Se otettiin "
 "käyttöön myös SunTracker Pro -ohjelmistoon."
 
-#: src/core/StelCore.cpp:2394
+#: src/core/StelCore.cpp:2422
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
@@ -3291,7 +3291,7 @@ msgstr ""
 "<em>Astronomical Ephemeris</em> -almanakkaan, sekä Mucken ja Meeuksen (1983)"
 " <em>Canon of Solar Eclipses</em> -teokseen."
 
-#: src/core/StelCore.cpp:2398
+#: src/core/StelCore.cpp:2426
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -3304,7 +3304,7 @@ msgstr ""
 "aikaa eli 16.00 GMT. Sama suhde otettiin epäsuorasti käyttöön myös "
 "Goldstinen (1973) syzygitaulukoihin."
 
-#: src/core/StelCore.cpp:2402
+#: src/core/StelCore.cpp:2430
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -3315,7 +3315,7 @@ msgstr ""
 "<em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2405
+#: src/core/StelCore.cpp:2433
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -3324,7 +3324,7 @@ msgstr ""
 "Tämän yhtälön julkaisi F. R. Stephenson artikkelissaan <em>Pre-Telescopic "
 "Astronomical Observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2408
+#: src/core/StelCore.cpp:2436
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -3337,7 +3337,7 @@ msgstr ""
 "E.T.-U.T. in the period 1800-1975</em> (%1). Schmadel ja Zech korvasivat "
 "tämän yhtälön uudella vuonna 1988."
 
-#: src/core/StelCore.cpp:2411
+#: src/core/StelCore.cpp:2439
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -3347,7 +3347,7 @@ msgstr ""
 "<em>Planetary Programs and Tables from -4000 to +2800</em> (1986). Sen "
 "otettiin käyttöön myös RedShift-planetaario-ohjelmaan."
 
-#: src/core/StelCore.cpp:2414
+#: src/core/StelCore.cpp:2442
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3358,7 +3358,7 @@ msgstr ""
 "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
 "1980</em> (%1)."
 
-#: src/core/StelCore.cpp:2417
+#: src/core/StelCore.cpp:2445
 #, qt-format
 msgid ""
 "This algorithm was published by F. R. Stephenson and M. A. Houlden in the "
@@ -3369,7 +3369,7 @@ msgstr ""
 "<em>Atlas of Historical Eclipse Maps</em> (%1). Tätä algoritmia käytetään "
 "PC-planetaario-ohjelman oppaassa 7."
 
-#: src/core/StelCore.cpp:2420
+#: src/core/StelCore.cpp:2448
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -3379,7 +3379,7 @@ msgstr ""
 "Solar Eclipses: 1986-2035</em> (1987) ja <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2423
+#: src/core/StelCore.cpp:2451
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -3388,7 +3388,7 @@ msgstr ""
 "Tämän kaavan laski K. M. Borkowski (%1) analysoimalla 31:tä vuosien 2173 "
 "eKr.–1715 jKr. välillä tapahtunutta auringonpimennystä."
 
-#: src/core/StelCore.cpp:2426
+#: src/core/StelCore.cpp:2454
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -3400,7 +3400,7 @@ msgstr ""
 "artikkelissaan <em>Empirical Transformations from U.T. to E.T. for the "
 "Period 1800-1988</em> (%1)."
 
-#: src/core/StelCore.cpp:2429
+#: src/core/StelCore.cpp:2457
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -3410,7 +3410,7 @@ msgstr ""
 "ELP 2000-85 -kuuteoriaan teoksessaan <em>Lunar Tables and Programs from 4000"
 " B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:2432
+#: src/core/StelCore.cpp:2460
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3421,7 +3421,7 @@ msgstr ""
 "<em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:2435
+#: src/core/StelCore.cpp:2463
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -3430,7 +3430,7 @@ msgstr ""
 "F. R. Stephenson julkaisi tämän kaavan kirjassaan <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:2438
+#: src/core/StelCore.cpp:2466
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -3440,7 +3440,7 @@ msgstr ""
 "laajasti käytetty. Taulukko vuosille 1620–2000, sisältää myös Chaprontin, "
 "Chapront-Touzen ja Francoun variantin tämän aikavälin ulkopuolelle."
 
-#: src/core/StelCore.cpp:2441
+#: src/core/StelCore.cpp:2469
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -3449,7 +3449,7 @@ msgstr ""
 "JPL:n Solar System Dynamics -ryhmä käyttää tätä kaavaa interaktiivisella "
 "%1JPL Horizons%2 -sivustollaan."
 
-#: src/core/StelCore.cpp:2444
+#: src/core/StelCore.cpp:2472
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -3458,7 +3458,7 @@ msgstr ""
 "Tämän polynomin julkaisivat J. Meeus ja L. Simons artikkelissaan "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:2447
+#: src/core/StelCore.cpp:2475
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -3468,7 +3468,7 @@ msgstr ""
 "Computer</em> neljäs painos (2000) tarjoaa kolmannen asteen polynomeja "
 "lähimenneisyydelle."
 
-#: src/core/StelCore.cpp:2450
+#: src/core/StelCore.cpp:2478
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
@@ -3480,7 +3480,7 @@ msgstr ""
 "julkaisussaan <em>Calendrical Tabulations</em> (2002).  Se perustuu Jean "
 "Meeuksen julkaisuun<em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:2453
+#: src/core/StelCore.cpp:2481
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -3491,7 +3491,7 @@ msgstr ""
 "artikkelissaan <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2), seuraavin lisäyksin (%3)."
 
-#: src/core/StelCore.cpp:2456
+#: src/core/StelCore.cpp:2484
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -3504,7 +3504,7 @@ msgstr ""
 "neliöfunktion kanssa. Tämä perustuu Stephensonin kuvailemaan mahdolliseen "
 "jaksollisuuteen (%2). Lisätietoa %3täällä%4."
 
-#: src/core/StelCore.cpp:2459
+#: src/core/StelCore.cpp:2487
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -3519,7 +3519,7 @@ msgstr ""
 "käytössä %1NASA:n pimennyssivustolla%2. Käytössä myös aurinko-, kuu-, ja "
 "planeettaefemeridiohjelma SOLEXissa."
 
-#: src/core/StelCore.cpp:2462
+#: src/core/StelCore.cpp:2490
 msgid ""
 "This solution is modified from F. Espenak and J. Meeus, based on Morrison & "
 "Stephenson (2004) and a polynomial fit through tabulated values for "
@@ -3531,15 +3531,15 @@ msgstr ""
 "1600-2000 kautta. Kaavaa vuosille 2005-2050 on muutettu vastaamaan "
 "havaittuja arvoja ja lähiajan ennusteita."
 
-#: src/core/StelCore.cpp:2462
+#: src/core/StelCore.cpp:2490
 msgid "Used by default."
 msgstr "Käytössä oletuksena."
 
-#: src/core/StelCore.cpp:2465
+#: src/core/StelCore.cpp:2493
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "Päivitetty versio ilman erillistä Kuun kiihtyvyyttä"
 
-#: src/core/StelCore.cpp:2465
+#: src/core/StelCore.cpp:2493
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
@@ -3547,7 +3547,7 @@ msgstr ""
 "Tämä F. Espenakin ja J. Meeuksen ratkaisu perustuu Morrison & Stephensoniin "
 "(2004) ja polynomin sovitukseen taulukoitujen arvojen välillä 1600-2000."
 
-#: src/core/StelCore.cpp:2468
+#: src/core/StelCore.cpp:2496
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -3558,7 +3558,7 @@ msgstr ""
 "julkaistiin artikkelissa <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:2471
+#: src/core/StelCore.cpp:2499
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -3570,7 +3570,7 @@ msgstr ""
 "Polynomial Approximation of DeltaT</em> (%1), ja Sana Islam tarkisti sen "
 "2013."
 
-#: src/core/StelCore.cpp:2474
+#: src/core/StelCore.cpp:2502
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -3581,7 +3581,7 @@ msgstr ""
 " M. Khalid, Mariam Sultana ja Faheem Zaidi <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2477
+#: src/core/StelCore.cpp:2505
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -3600,7 +3600,7 @@ msgstr ""
 "ulkopuolella (mallinnettu spline-sovituksella) se tarjoaa arvot "
 "likimääräisestä paraabelista."
 
-#: src/core/StelCore.cpp:2480
+#: src/core/StelCore.cpp:2508
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -3611,7 +3611,7 @@ msgstr ""
 " of the Moon and the Universe - the Mass of the Graviton</em> (%1) ja "
 "perustuu C. Schochin kaavaan (1931)."
 
-#: src/core/StelCore.cpp:2483
+#: src/core/StelCore.cpp:2511
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
@@ -3620,12 +3620,12 @@ msgstr ""
 "Tämä on toisen asteen kaava %1T:n laskemiseksi käyttäjän määrittelemillä "
 "arvoilla."
 
-#: src/core/StelCore.cpp:2486 src/core/SimbadSearcher.cpp:173
+#: src/core/StelCore.cpp:2514 src/core/SimbadSearcher.cpp:173
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:91
 msgid "Error"
 msgstr "Virhe"
 
-#: src/core/StelCore.cpp:2494
+#: src/core/StelCore.cpp:2522
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -3634,15 +3634,15 @@ msgstr ""
 "Ratkaisun arvo %1 arvolle %2 (Kuun sekulaarikiihtyvyys) vaatii "
 "mukauttamista, katso lisätietoja käyttöohjeesta."
 
-#: src/core/StelCore.cpp:2538
+#: src/core/StelCore.cpp:2566
 msgid "with zero values outside this range"
 msgstr "nolla-arvo alueen ulkopuolella"
 
-#: src/core/StelCore.cpp:2541
+#: src/core/StelCore.cpp:2569
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "tyypillinen yhden sekunnin tarkkuus, nolla-arvo alueen ulkopuolella"
 
-#: src/core/StelCore.cpp:2544
+#: src/core/StelCore.cpp:2572
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -3650,16 +3650,16 @@ msgstr ""
 "alle sekunnin keskivirheellä, maksimivirheenä 1,9 s, ja arvot tämän "
 "aikavälin ulkopuolisten vuosien rajoittamiseen"
 
-#: src/core/StelCore.cpp:2551
+#: src/core/StelCore.cpp:2579
 msgid "with values for the limit years outside this range"
 msgstr "tämän aikavälin ulkopuolisten vuosien raja-arvoilla"
 
-#: src/core/StelCore.cpp:2561
+#: src/core/StelCore.cpp:2589
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Käyttökelpoinen aikaväli: vuodesta %1 vuoteen %2, %3."
 
-#: src/core/StelCore.cpp:2563
+#: src/core/StelCore.cpp:2591
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Käyttökelpoinen aikaväli: vuodesta %1 vuoteen %2."
@@ -3694,11 +3694,11 @@ msgstr ""
 "Täydellinen nimi projektiolle on <i>Lambertin atsimutaalinen oikeapintainen "
 "projektio</i>. Se kuvaa pinta-alat oikein, muttei kulmia."
 
-#: src/core/StelProjectorClasses.cpp:248
+#: src/core/StelProjectorClasses.cpp:243
 msgid "Stereographic"
 msgstr "Stereograafinen"
 
-#: src/core/StelProjectorClasses.cpp:253
+#: src/core/StelProjectorClasses.cpp:248
 msgid ""
 "Stereographic projection is known since antiquity and was originally known "
 "as the planisphere projection. It preserves the angles at which curves cross"
@@ -3708,11 +3708,11 @@ msgstr ""
 "tunnettiin nimellä planisfääriprojektio. Se kuvaa käyrien leikkauskohtien "
 "kulmat oikein, mutta vääristää pinta-aloja."
 
-#: src/core/StelProjectorClasses.cpp:348
+#: src/core/StelProjectorClasses.cpp:343
 msgid "Fish-eye"
 msgstr "Kalansilmä"
 
-#: src/core/StelProjectorClasses.cpp:353
+#: src/core/StelProjectorClasses.cpp:348
 msgid ""
 "In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight"
 " lines become curves when they appear a large angular distance from the "
@@ -3724,11 +3724,11 @@ msgstr ""
 "kulmaetäisyyksillä näkökentän keskustasta (kuten erittäin laajakulmaisten "
 "kameraobjektiivien vääristymissä)."
 
-#: src/core/StelProjectorClasses.cpp:464
+#: src/core/StelProjectorClasses.cpp:444
 msgid "Hammer-Aitoff"
 msgstr "Hammer–Aitoff"
 
-#: src/core/StelProjectorClasses.cpp:469
+#: src/core/StelProjectorClasses.cpp:449
 msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
@@ -3736,11 +3736,11 @@ msgstr ""
 "Hammerin projektio on oikeapintainen karttaprojektio, jonka esitteli Ernst "
 "Hammer vuonna 1892, ja joka perustuu suoraan Aitoffin projektioon."
 
-#: src/core/StelProjectorClasses.cpp:566
+#: src/core/StelProjectorClasses.cpp:531
 msgid "Cylinder"
 msgstr "Lieriö"
 
-#: src/core/StelProjectorClasses.cpp:571
+#: src/core/StelProjectorClasses.cpp:536
 msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
@@ -3749,11 +3749,29 @@ msgstr ""
 "lieriöprojektio</i>. Siinä yhdensuuntaiset viivat ovat vakioetäisyyksillä "
 "toisistaan."
 
-#: src/core/StelProjectorClasses.cpp:658
+#: src/core/StelProjectorClasses.cpp:609
+msgid "Equirectangular"
+msgstr "Tasakulmainen"
+
+#: src/core/StelProjectorClasses.cpp:614
+msgid ""
+"Another name of this variant of the Cylindrical projection mode is <i>plate "
+"carr&eacute;e</i> (French, for 'flat square'). With this projection all "
+"parallels are equally spaced. The view is stretched to always show a "
+"360x180° field of view in a fixed view direction. It is provided for "
+"specialized setups."
+msgstr ""
+"Toinen nimi lieriömäisen projektiotilan muunnokselle on <i>plate "
+"carr&eacute;e</i>(ranska, tarkoittaa 'tasainen neliö'). Tällä projektiolla "
+"kaikki yhdensuuntaiset ovat tasavälein. Näkymä on venytetty näyttämään aina "
+"360 x 180°:n näkökenttä kiinteässä katselusuunnassa. Se on tarkoitettu "
+"erikoisasennuksiin."
+
+#: src/core/StelProjectorClasses.cpp:620
 msgid "Mercator"
 msgstr "Mercator"
 
-#: src/core/StelProjectorClasses.cpp:663
+#: src/core/StelProjectorClasses.cpp:625
 msgid ""
 "The Mercator projection is one of the most used world map projections. It "
 "preserves direction and shapes but distorts size, in an increasing degree "
@@ -3763,7 +3781,7 @@ msgstr ""
 " Se kuvaa oikein suunnat ja muodot, mutta vääristää kokoja suurentaen niitä "
 "etäisyyden kasvaessa ekvaattorilta."
 
-#: src/core/StelProjectorClasses.cpp:760
+#: src/core/StelProjectorClasses.cpp:706
 msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
@@ -3771,11 +3789,11 @@ msgstr ""
 "Ortograafinen projektio on sukua perspektiiviprojektiolle, mutta "
 "perspektiivipiste on asetettu äärettömän kauas."
 
-#: src/core/StelProjectorClasses.cpp:852
+#: src/core/StelProjectorClasses.cpp:793
 msgid "Sinusoidal"
 msgstr "Sinusoidaalinen"
 
-#: src/core/StelProjectorClasses.cpp:857
+#: src/core/StelProjectorClasses.cpp:798
 msgid ""
 "The sinusoidal projection is a <i>pseudocylindrical equal-area map "
 "projection</i>, sometimes called the Sanson-Flamsteed or the Mercator equal-"
@@ -3785,11 +3803,11 @@ msgstr ""
 " Se tunnetaan myös Sansonin-Flamsteedin projektiona tai Mercatorin "
 "oikeapintaisena projektiona."
 
-#: src/core/StelProjectorClasses.cpp:947
+#: src/core/StelProjectorClasses.cpp:888
 msgid "Miller cylindrical"
 msgstr "Miller"
 
-#: src/core/StelProjectorClasses.cpp:952
+#: src/core/StelProjectorClasses.cpp:893
 msgid ""
 "The Miller cylindrical projection is a modified Mercator projection, "
 "proposed by Osborn Maitland Miller (1897-1979) in 1942. The poles are no "
