@@ -26,100 +26,84 @@ class StelProjectorPerspective : public StelProjector
 {
 public:
 	StelProjectorPerspective(ModelViewTranformP func) : StelProjector(func) {}
-	virtual QString getNameI18() const Q_DECL_OVERRIDE;
-	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
-	virtual float getMaxFov() const  Q_DECL_OVERRIDE{return 120.f;}
-	virtual bool forward(Vec3f &v) const Q_DECL_OVERRIDE;
-	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
-	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
-	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
-	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
-	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
-	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
-protected:
-	virtual bool hasDiscontinuity() const  Q_DECL_OVERRIDE {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const  Q_DECL_OVERRIDE {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const Q_DECL_OVERRIDE {return false;}
+	QString getNameI18() const override;
+	QString getDescriptionI18() const override;
+	float getMaxFov() const override {return 120.f;}
+	bool forward(Vec3f &v) const override;
+	bool backward(Vec3d &v) const override;
+	float fovToViewScalingFactor(float fov) const override;
+	float viewScalingFactorToFov(float vsf) const override;
+	float deltaZoom(float fov) const override;
+	QByteArray getForwardTransformShader() const override;
+	QByteArray getBackwardTransformShader() const override;
 };
 
 class StelProjectorEqualArea : public StelProjector
 {
 public:
 	StelProjectorEqualArea(ModelViewTranformP func) : StelProjector(func) {}
-	virtual QString getNameI18() const Q_DECL_OVERRIDE;
-	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
-	virtual float getMaxFov() const  Q_DECL_OVERRIDE{return 360.f;}
-	virtual bool forward(Vec3f &v) const Q_DECL_OVERRIDE;
-	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
-	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
-	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
-	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
-	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
-	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
-protected:
-	virtual bool hasDiscontinuity() const  Q_DECL_OVERRIDE{return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const  Q_DECL_OVERRIDE {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const  Q_DECL_OVERRIDE {return false;}
+	QString getNameI18() const override;
+	QString getDescriptionI18() const override;
+	float getMaxFov() const override{return 360.f;}
+	bool forward(Vec3f &v) const override;
+	bool backward(Vec3d &v) const override;
+	float fovToViewScalingFactor(float fov) const override;
+	float viewScalingFactorToFov(float vsf) const override;
+	// float deltaZoom(float fov) const override;
+	QByteArray getForwardTransformShader() const override;
+	QByteArray getBackwardTransformShader() const override;
 };
 
 class StelProjectorStereographic : public StelProjector
 {
 public:
 	StelProjectorStereographic(ModelViewTranformP func) : StelProjector(func) {}
-	virtual QString getNameI18() const Q_DECL_OVERRIDE;
-	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
-	virtual float getMaxFov() const  Q_DECL_OVERRIDE {return 235.f;}
-	virtual bool forward(Vec3f &v) const Q_DECL_OVERRIDE;
-	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
-	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
-	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
-	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
-	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
-	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
-protected:
-	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const Q_DECL_OVERRIDE {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const Q_DECL_OVERRIDE {return false;}
+	QString getNameI18() const override;
+	QString getDescriptionI18() const override;
+	float getMaxFov() const  override {return 235.f;}
+	bool forward(Vec3f &v) const override;
+	bool backward(Vec3d &v) const override;
+	float fovToViewScalingFactor(float fov) const override;
+	float viewScalingFactorToFov(float vsf) const override;
+	float deltaZoom(float fov) const override;
+	QByteArray getForwardTransformShader() const override;
+	QByteArray getBackwardTransformShader() const override;
 };
 
 class StelProjectorFisheye : public StelProjector
 {
 public:
 	StelProjectorFisheye(ModelViewTranformP func) : StelProjector(func) {}
-	virtual QString getNameI18() const Q_DECL_OVERRIDE;
-	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
-	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 360.0f;}
-	virtual bool forward(Vec3f &v) const Q_DECL_OVERRIDE;
-	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
-	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
-	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
-	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
-	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
-	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
-protected:
-	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const Q_DECL_OVERRIDE {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const Q_DECL_OVERRIDE {return false;}
+	QString getNameI18() const override;
+	QString getDescriptionI18() const override;
+	float getMaxFov() const override {return 360.0f;}
+	bool forward(Vec3f &v) const override;
+	bool backward(Vec3d &v) const override;
+	//float fovToViewScalingFactor(float fov) const override;
+	//float viewScalingFactorToFov(float vsf) const override;
+	//float deltaZoom(float fov) const override;
+	QByteArray getForwardTransformShader() const override;
+	QByteArray getBackwardTransformShader() const override;
 };
 
 class StelProjectorHammer : public StelProjector
 {
 public:
 	StelProjectorHammer(ModelViewTranformP func) : StelProjector(func) {}
-	virtual QString getNameI18() const Q_DECL_OVERRIDE;
-	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
-	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 185.f;}
-	virtual bool forward(Vec3f &v) const Q_DECL_OVERRIDE;
-	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
-	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
-	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
-	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
-	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
-	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
+	QString getNameI18() const override;
+	QString getDescriptionI18() const override;
+	float getMaxFov() const override {return 185.f;}
+	bool forward(Vec3f &v) const override;
+	bool backward(Vec3d &v) const override;
+	//float fovToViewScalingFactor(float fov) const override;
+	//float viewScalingFactorToFov(float vsf) const override;
+	//float deltaZoom(float fov) const override;
+	QByteArray getForwardTransformShader() const override;
+	QByteArray getBackwardTransformShader() const override;
 protected:
-	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return true;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const Q_DECL_OVERRIDE {return p1[0]*p2[0]<0 && !(p1[2]<0 && p2[2]<0);}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const Q_DECL_OVERRIDE
+	bool hasDiscontinuity() const override {return true;}
+	bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const override {return p1[0]*p2[0]<0 && !(p1[2]<0 && p2[2]<0);}
+	bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const override
 	{
 		static const SphericalCap cap1(1,0,0);
 		static const SphericalCap cap2(-1,0,0);
@@ -133,23 +117,23 @@ class StelProjectorCylinder : public StelProjector
 {
 public:
 	StelProjectorCylinder(ModelViewTranformP func) : StelProjector(func) {}
-	virtual QString getNameI18() const Q_DECL_OVERRIDE;
-	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
-	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 200.f;} // slight overshoot
-	virtual bool forward(Vec3f &win) const Q_DECL_OVERRIDE;
-	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
-	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
-	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
-	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
-	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
-	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
+	QString getNameI18() const override;
+	QString getDescriptionI18() const override;
+	virtual float getMaxFov() const override {return 185.f;} // slight overshoot
+	bool forward(Vec3f &win) const override;
+	bool backward(Vec3d &v) const override;
+	//float fovToViewScalingFactor(float fov) const override;
+	//float viewScalingFactorToFov(float vsf) const override;
+	//float deltaZoom(float fov) const override;
+	QByteArray getForwardTransformShader() const override;
+	QByteArray getBackwardTransformShader() const override;
 protected:
-	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return true;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const Q_DECL_OVERRIDE
+	bool hasDiscontinuity() const override {return true;}
+	bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const override
 	{
 		return p1[0]*p2[0]<0 && !(p1[2]<0 && p2[2]<0);
 	}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const Q_DECL_OVERRIDE
+	bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const override
 	{
 		static const SphericalCap cap1(1,0,0);
 		static const SphericalCap cap2(-1,0,0);
@@ -159,27 +143,37 @@ protected:
 	}
 };
 
+// A variant which fills the viewport with a plate carrée, regardless of screen dimensions.
+class StelProjectorCylinderFill : public StelProjectorCylinder
+{
+public:
+	StelProjectorCylinderFill(ModelViewTranformP func) : StelProjectorCylinder(func) {}
+	QString getNameI18() const override;
+	QString getDescriptionI18() const override;
+	float getMaxFov() const override {return 180.f;} // vertical fov always max 180.
+};
+
 class StelProjectorMercator : public StelProjector
 {
 public:
 	StelProjectorMercator(ModelViewTranformP func) : StelProjector(func) {}
-	virtual QString getNameI18() const Q_DECL_OVERRIDE;
-	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
-	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 270.f; }
-	virtual bool forward(Vec3f &win) const Q_DECL_OVERRIDE;
-	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
-	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
-	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
-	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
-	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
-	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
+	QString getNameI18() const override;
+	QString getDescriptionI18() const override;
+	float getMaxFov() const override {return 270.f; } // Despite being named 270 degrees this does not even show the 180° VFoV.
+	bool forward(Vec3f &win) const override;
+	bool backward(Vec3d &v) const override;
+	//float fovToViewScalingFactor(float fov) const override;
+	//float viewScalingFactorToFov(float vsf) const override;
+	//float deltaZoom(float fov) const override;
+	QByteArray getForwardTransformShader() const override;
+	QByteArray getBackwardTransformShader() const override;
 protected:
-	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return true;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const Q_DECL_OVERRIDE
+	bool hasDiscontinuity() const override {return true;}
+	bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const override
 	{
 		return p1[0]*p2[0]<0 && !(p1[2]<0 && p2[2]<0);
 	}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const Q_DECL_OVERRIDE
+	bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const override
 	{
 		static const SphericalCap cap1(1,0,0);
 		static const SphericalCap cap2(-1,0,0);
@@ -193,68 +187,63 @@ class StelProjectorOrthographic : public StelProjector
 {
 public:
 	StelProjectorOrthographic(ModelViewTranformP func) : StelProjector(func) {}
-	virtual QString getNameI18() const Q_DECL_OVERRIDE;
-	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
-	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 179.9999f;}
-	virtual bool forward(Vec3f &win) const Q_DECL_OVERRIDE;
-	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
-	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
-	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
-	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
-	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
-	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
-protected:
-	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const Q_DECL_OVERRIDE {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const Q_DECL_OVERRIDE {return false;}
+	QString getNameI18() const override;
+	QString getDescriptionI18() const override;
+	float getMaxFov() const override {return 179.9999f;}
+	bool forward(Vec3f &win) const override;
+	bool backward(Vec3d &v) const override;
+	float fovToViewScalingFactor(float fov) const override;
+	float viewScalingFactorToFov(float vsf) const override;
+	//float deltaZoom(float fov) const override;
+	QByteArray getForwardTransformShader() const override;
+	QByteArray getBackwardTransformShader() const override;
 };
 
 class StelProjectorSinusoidal : public StelProjectorCylinder
 {
 public:
 	StelProjectorSinusoidal(ModelViewTranformP func) : StelProjectorCylinder(func) {}
-	virtual QString getNameI18() const Q_DECL_OVERRIDE;
-	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
-	virtual bool forward(Vec3f &win) const Q_DECL_OVERRIDE;
-	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
-	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
-	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
+	QString getNameI18() const override;
+	QString getDescriptionI18() const override;
+	bool forward(Vec3f &win) const override;
+	bool backward(Vec3d &v) const override;
+	QByteArray getForwardTransformShader() const override;
+	QByteArray getBackwardTransformShader() const override;
 };
 
 class StelProjectorMiller : public StelProjectorMercator
 {
 public:
 	StelProjectorMiller(ModelViewTranformP func) : StelProjectorMercator(func) {}
-	virtual QString getNameI18() const Q_DECL_OVERRIDE;
-	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
-	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 270.f; }
-	virtual bool forward(Vec3f &win) const Q_DECL_OVERRIDE;
-	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
-	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
-	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
+	QString getNameI18() const override;
+	QString getDescriptionI18() const override;
+	float getMaxFov() const override {return 270.f; } // Show a slight overshoot of the full map.
+	bool forward(Vec3f &win) const override;
+	bool backward(Vec3d &v) const override;
+	QByteArray getForwardTransformShader() const override;
+	QByteArray getBackwardTransformShader() const override;
 };
 
 class StelProjector2d : public StelProjector
 {
 public:
 	StelProjector2d() : StelProjector(ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity(),Mat4d::identity()))) {}
-	virtual QString getNameI18() const Q_DECL_OVERRIDE;
-	virtual QString getDescriptionI18() const Q_DECL_OVERRIDE;
-	virtual float getMaxFov() const Q_DECL_OVERRIDE {return 360.f;}
-	virtual bool forward(Vec3f &win) const Q_DECL_OVERRIDE;
-	virtual bool backward(Vec3d &v) const Q_DECL_OVERRIDE;
-	virtual float fovToViewScalingFactor(float fov) const Q_DECL_OVERRIDE;
-	virtual float viewScalingFactorToFov(float vsf) const Q_DECL_OVERRIDE;
-	virtual float deltaZoom(float fov) const Q_DECL_OVERRIDE;
-	virtual QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
-	virtual void setForwardTransformUniforms(QOpenGLShaderProgram& program) const Q_DECL_OVERRIDE;
-	virtual QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
-	virtual void setBackwardTransformUniforms(QOpenGLShaderProgram& program) const Q_DECL_OVERRIDE;
+	QString getNameI18() const override;
+	QString getDescriptionI18() const override;
+	float getMaxFov() const override {return 360.f;}
+	bool forward(Vec3f &win) const override;
+	bool backward(Vec3d &v) const override;
+	float fovToViewScalingFactor(float fov) const override;
+	float viewScalingFactorToFov(float vsf) const override;
+	float deltaZoom(float fov) const override;
+	QByteArray getForwardTransformShader() const override;
+	void setForwardTransformUniforms(QOpenGLShaderProgram& program) const override;
+	QByteArray getBackwardTransformShader() const override;
+	void setBackwardTransformUniforms(QOpenGLShaderProgram& program) const override;
 protected:
-	virtual bool hasDiscontinuity() const Q_DECL_OVERRIDE {return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const Q_DECL_OVERRIDE {Q_ASSERT(0); return false;}
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const Q_DECL_OVERRIDE {Q_ASSERT(0); return false;}
-	virtual void computeBoundingCap() Q_DECL_OVERRIDE {}
+	bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const override {Q_ASSERT(0); return false;}
+	bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const override {Q_ASSERT(0); return false;}
+	void computeBoundingCap() override {}
 };
 
 #endif // STELPROJECTIONS_HPP

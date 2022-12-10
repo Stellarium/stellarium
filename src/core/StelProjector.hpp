@@ -72,18 +72,18 @@ public:
 	class Mat4dTransform: public ModelViewTranform
 	{
 	public:
-        Mat4dTransform(const Mat4d& altAzToWorld, const Mat4d& vertexToAltAzPos);
-	void forward(Vec3d& v) const Q_DECL_OVERRIDE;
-	void backward(Vec3d& v) const Q_DECL_OVERRIDE;
-	void forward(Vec3f& v) const Q_DECL_OVERRIDE;
-	void backward(Vec3f& v) const Q_DECL_OVERRIDE;
-	void combine(const Mat4d& m) Q_DECL_OVERRIDE;
-	Mat4d getApproximateLinearTransfo() const Q_DECL_OVERRIDE;
-	ModelViewTranformP clone() const Q_DECL_OVERRIDE;
-	QByteArray getForwardTransformShader() const Q_DECL_OVERRIDE;
-	void setForwardTransformUniforms(QOpenGLShaderProgram& program) const Q_DECL_OVERRIDE;
-	QByteArray getBackwardTransformShader() const Q_DECL_OVERRIDE;
-	void setBackwardTransformUniforms(QOpenGLShaderProgram& program) const Q_DECL_OVERRIDE;
+		Mat4dTransform(const Mat4d& altAzToWorld, const Mat4d& vertexToAltAzPos);
+		void forward(Vec3d& v) const override;
+		void backward(Vec3d& v) const override;
+		void forward(Vec3f& v) const override;
+		void backward(Vec3f& v) const override;
+		void combine(const Mat4d& m) override;
+		Mat4d getApproximateLinearTransfo() const override;
+		ModelViewTranformP clone() const override;
+		QByteArray getForwardTransformShader() const override;
+		void setForwardTransformUniforms(QOpenGLShaderProgram& program) const override;
+		QByteArray getBackwardTransformShader() const override;
+		void setBackwardTransformUniforms(QOpenGLShaderProgram& program) const override;
 
 	private:
 		Mat4dTransform(const Mat4dTransform& src) = default;
@@ -126,7 +126,7 @@ public:
 			, devicePixelsPerPixel(1)
 			, widthStretch(1) {}
 
-		Vector4<int> viewportXywh;       //! posX, posY, width, height
+		Vec4i viewportXywh;              //! posX, posY, width, height
 		float fov;                       //! FOV in degrees
 		bool gravityLabels;              //! the flag to use gravity labels or not
 		float defaultAngleForGravityText;//! a rotation angle to apply to gravity text (only if gravityLabels is set to false)
@@ -145,7 +145,7 @@ public:
 	virtual ~StelProjector() {}
 
 	///////////////////////////////////////////////////////////////////////////
-	// Methods which must be reimplemented by all instance of StelProjector
+	// Methods which must be reimplemented by all subclasses of StelProjector
 	//! Get a human-readable name for this projection type
 	virtual QString getNameI18() const = 0;
 	//! Get a human-readable short description for this projection type
@@ -164,7 +164,7 @@ public:
 	//! Apply the transformation in the backward projection in place.
 	virtual bool backward(Vec3d& v) const = 0;
 	//! Return the small zoom increment to use at the given FOV for nice movements
-	virtual float deltaZoom(float fov) const = 0;
+	virtual float deltaZoom(float fov) const {return fov;}
 	//! Returns GLSL code that can be used in a shader to implement forward transformation
 	virtual QByteArray getForwardTransformShader() const = 0;
 	//! Sets the necessary uniforms so that the shader returned by getForwardTransformShader can work
@@ -181,9 +181,9 @@ public:
 	bool intersectViewportDiscontinuity(const SphericalCap& cap) const;
 
 	//! Convert a Field Of View radius value in radians in ViewScalingFactor (used internally)
-	virtual float fovToViewScalingFactor(float fov) const = 0;
+	virtual float fovToViewScalingFactor(float fov) const {return fov;}
 	//! Convert a ViewScalingFactor value (used internally) in Field Of View radius in radians
-	virtual float viewScalingFactorToFov(float vsf) const = 0;
+	virtual float viewScalingFactorToFov(float vsf) const { return vsf;}
 
 	//! Get the current state of the flag which decides whether to
 	//! arrage labels so that they are aligned with the bottom of a 2d
@@ -347,19 +347,19 @@ protected:
 		  widthStretch(1.0) {}
 
 	//! Return whether the projection presents discontinuities. Used for optimization.
-	virtual bool hasDiscontinuity() const =0;
+	virtual bool hasDiscontinuity() const {return false;}
 	//! Determine whether a great circle connection p1 and p2 intersects with a projection discontinuity.
 	//! For many projections without discontinuity, this should return always false, but for other like
 	//! cylindrical projection it will return true if the line cuts the wrap-around line (i.e. at lon=180 if the observer look at lon=0).
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const = 0;
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& p1, const Vec3d& p2) const {return false;}
 
 	//! Determine whether a cap intersects with a projection discontinuity.
-	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const = 0;
+	virtual bool intersectViewportDiscontinuityInternal(const Vec3d& capN, double capD) const {return false;}
 
 	//! Initialize the bounding cap.
 	virtual void computeBoundingCap();
 
-	ModelViewTranformP modelViewTransform;	// Operator to apply (if not Q_NULLPTR) before the modelview projection step
+	ModelViewTranformP modelViewTransform;	// Operator to apply (if not nullptr) before the modelview projection step
 
 	float flipHorz,flipVert;            // Whether to flip in horizontal or vertical directions. Values only -1 (flip) or +1 (no flip).
 	float pixelPerRad;                  // pixel per rad at the center of the viewport disk

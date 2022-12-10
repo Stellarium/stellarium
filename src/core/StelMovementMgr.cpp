@@ -1542,6 +1542,24 @@ void StelMovementMgr::setViewDirectionJ2000(const Vec3d& v)
 
 void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 {
+	if (core->getCurrentProjectionType()==StelCore::ProjectionCylinderFill) // Inhibit any motion in this projection!
+	{
+		Vec3d tmp;
+		switch (mountMode){
+			case MountEquinoxEquatorial:
+				StelUtils::spheToRect(M_PI, 0., tmp);
+				break;
+			default:
+				StelUtils::spheToRect(0., 0., tmp);
+				break;
+		}
+
+		setViewDirectionJ2000(mountFrameToJ2000(tmp));
+		setViewUpVector(Vec3d(0., 0., 1.));
+
+		return;
+	}
+
 	// DONE 2016-12 FIX UP VECTOR PROBLEM
 	// The function is called in update loops, so make a quick check for exit.
 	if ((deltaAz==0.) && (deltaAlt==0.))
