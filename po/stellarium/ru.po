@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-10 19:11+0700\n"
+"POT-Creation-Date: 2022-12-10 23:21+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -31034,17 +31034,20 @@ msgid "A.P."
 msgstr "п.г."
 
 #: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:40
-msgctxt "Bahai day name"
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:50
+msgctxt "Bahai day/month name"
 msgid "Jalāl (Glory)"
 msgstr "Jalāl (Слава)"
 
 #: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:41
-msgctxt "Bahai day name"
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:51
+msgctxt "Bahai day/month name"
 msgid "Jamāl (Beauty)"
 msgstr "Jamāl (Красота)"
 
 #: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:42
-msgctxt "Bahai day name"
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:56
+msgctxt "Bahai day/month name"
 msgid "Kamāl (Perfection)"
 msgstr "Kamāl (Совершенство)"
 
@@ -31074,19 +31077,10 @@ msgid "Ayyām-i-Hā (Days of God)"
 msgstr "Ayyām-i-Hā (Дни Бога)"
 
 #: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:49
-msgctxt "Bahai day/month name"
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:77
+msgctxt "Bahai day/month and year-cycle (Vahid) name"
 msgid "Bahā’ (Splendor)"
 msgstr "Bahā’ (Великолепие)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:50
-msgctxt "Bahai day/month name"
-msgid "Jalāl (Glory)"
-msgstr "Jalāl (Слава)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:51
-msgctxt "Bahai day/month name"
-msgid "Jamāl (Beauty)"
-msgstr "Jamāl (Красота)"
 
 #: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:52
 msgctxt "Bahai day/month name"
@@ -31107,11 +31101,6 @@ msgstr "Raḥmat (Милосердие)"
 msgctxt "Bahai day/month name"
 msgid "Kalimāt (Words)"
 msgstr "Kalimāt (Слова)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:56
-msgctxt "Bahai day/month name"
-msgid "Kamāl (Perfection)"
-msgstr "Kamāl (Совершенство)"
 
 #: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:57
 msgctxt "Bahai day/month name"
@@ -31207,11 +31196,6 @@ msgstr "Abad (Вечность)"
 msgctxt "Bahai year-cycle (Vahid) name"
 msgid "Jād (Generosity)"
 msgstr "Jād (Щедрость)"
-
-#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:77
-msgctxt "Bahai year-cycle (Vahid) name"
-msgid "Bahā’ (Splendor)"
-msgstr "Bahā’ (Великолепие)"
 
 #: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:78
 msgctxt "Bahai year-cycle (Vahid) name"
