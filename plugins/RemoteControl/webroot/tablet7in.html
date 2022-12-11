@@ -37,7 +37,7 @@
         <li><a href="#tab_view_grids"><?= tr("Grids")?></a></li>
         <li><a href="#tab_dso"><?= tr("DSO")?></a></li>
         <li><a href="#tab_landscape"><?= tr("Landscape")?></a></li>
-        <li><a href="#tab_skyculture"><?= tr("Starlore")?></a></li>
+        <li><a href="#tab_skyculture"><?= tr("Sky Culture")?></a></li>
         <li><a href="#tab_actions"><?= tr("Actions")?></a></li>
         <li><a href="#tab_scripts"><?= tr("Scripts")?></a></li>
         <li><a href="#tab_location"><?= tr("Location")?></a></li>
@@ -373,8 +373,13 @@
 			</table>
             <label><input class="stelproperty" name="LandscapeMgr.flagLandscapeAutoSelection" type="checkbox"/><?= tr("Auto select landscapes")?></label>
             <label><input class="stelproperty" name="LandscapeMgr.flagEnvironmentAutoEnabling" type="checkbox"/><?= tr("Auto-enabling for the environment")?></label>
-            <label><input class="stelproperty" name="NomenclatureMgr.nomenclatureDisplayed" type="checkbox"/><?= tr("Show planetary nomenclature")?></label>
-            <label><input class="stelproperty" name="NomenclatureMgr.localNomenclatureHided" type="checkbox"/><?= tr("Hide nomenclature on the celestial body of observer")?></label>
+            <label><input class="stelproperty" name="NomenclatureMgr.flagShowNomenclature" type="checkbox"/><?= tr("Show planetary nomenclature")?></label>
+            <label><input class="stelproperty" name="NomenclatureMgr.flagHideLocalNomenclature" type="checkbox"/><?= tr("Hide nomenclature on the celestial body of observer")?></label>
+			<table><tr>
+            <td><label><input class="stelproperty" name="NomenclatureMgr.flagShowTerminatorZoneOnly" type="checkbox"/><?= tr("Only for Solar elevation")?></label></td> 
+			<td><input id="terminator_min" class="spinner stelproperty" name="NomenclatureMgr.terminatorMinAltitude" data-min="-90" data-max="20" data-step="1" data-numberformat="n0"/></td><td>...</td>
+			<td><input id="terminator_max" class="spinner stelproperty" name="NomenclatureMgr.terminatorMaxAltitude" data-min="0" data-max="90" data-step="1" data-numberformat="n0"/></td>
+			</tr></table>
             <label><input class="stelproperty" name="SolarSystem.flagUseObjModels" type="checkbox"/><?= tr("Use more accurate 3D models (where available)")?></label>
             <label><input class="stelproperty" name="SolarSystem.flagShowObjSelfShadows" type="checkbox"/><?= tr("Simulate self-shadowing")?></label>
           </div>
