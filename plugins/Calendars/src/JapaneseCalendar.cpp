@@ -125,7 +125,8 @@ QPair<QString,QString> JapaneseCalendar::getSolarTermStrings() const
 QString JapaneseCalendar::getFormattedSolarTermsString() const
 {
 	const int rd=fixedFromJapanese(parts);
-	return QString("Major: <strong>%1</strong> - Minor: %2").arg(
+	return QString("%1: <strong>%3</strong> - %2: %4").arg(
+		q_("Major"), q_("Minor"),
 		majorSolarTerms.value(currentMajorSolarTerm(rd)),
 		minorSolarTerms.value(currentMinorSolarTerm(rd)));
 }
