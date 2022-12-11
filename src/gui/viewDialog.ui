@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>760</width>
-    <height>565</height>
+    <width>900</width>
+    <height>676</height>
    </rect>
   </property>
   <property name="font">
@@ -1928,6 +1928,9 @@
                    <property name="toolTip">
                     <string>Minimum Solar altitude</string>
                    </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
                    <property name="minimum">
                     <number>-90</number>
                    </property>
@@ -1937,7 +1940,7 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLabel" name="label_2">
+                  <widget class="QLabel" name="labelTerminator">
                    <property name="text">
                     <string>...</string>
                    </property>
@@ -1947,6 +1950,9 @@
                   <widget class="QSpinBox" name="terminatorMaxAltSpinbox">
                    <property name="toolTip">
                     <string>Maximum Solar altitude</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                    </property>
                    <property name="maximum">
                     <number>90</number>
@@ -5396,15 +5402,15 @@
    <container>1</container>
   </customwidget>
   <customwidget>
+   <class>StelCloseButton</class>
+   <extends>QPushButton</extends>
+   <header>gui/StelCloseButton.hpp</header>
+  </customwidget>
+  <customwidget>
    <class>LightPollutionWidget</class>
    <extends>QWidget</extends>
    <header>LightPollutionWidget.hpp</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>
@@ -5512,12 +5518,12 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>

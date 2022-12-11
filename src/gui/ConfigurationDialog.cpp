@@ -902,10 +902,13 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_planets_native_names",		propMgr->getStelPropertyValue("SolarSystem.flagNativePlanetNames").toBool());
 	conf->setValue("astro/flag_use_obj_models",			propMgr->getStelPropertyValue("SolarSystem.flagUseObjModels").toBool());
 	conf->setValue("astro/flag_show_obj_self_shadows",		propMgr->getStelPropertyValue("SolarSystem.flagShowObjSelfShadows").toBool());
-	conf->setValue("astro/apparent_magnitude_algorithm",	Planet::getApparentMagnitudeAlgorithmString());
-	conf->setValue("astro/flag_planets_nomenclature",		propMgr->getStelPropertyValue("NomenclatureMgr.nomenclatureDisplayed").toBool());
-	conf->setValue("astro/flag_hide_local_nomenclature",		propMgr->getStelPropertyValue("NomenclatureMgr.localNomenclatureHided").toBool());
+	conf->setValue("astro/apparent_magnitude_algorithm",		Planet::getApparentMagnitudeAlgorithmString());
+	conf->setValue("astro/flag_planets_nomenclature",		propMgr->getStelPropertyValue("NomenclatureMgr.flagShowNomenclature").toBool());
+	conf->setValue("astro/flag_hide_local_nomenclature",		propMgr->getStelPropertyValue("NomenclatureMgr.flagHideLocalNomenclature").toBool());
 	conf->setValue("astro/flag_special_nomenclature_only",		propMgr->getStelPropertyValue("NomenclatureMgr.specialNomenclatureOnlyDisplayed").toBool());
+	conf->setValue("astro/flag_planets_nomenclature_terminator_only",propMgr->getStelPropertyValue("NomenclatureMgr.flagShowTerminatorZoneOnly").toBool());
+	conf->setValue("astro/planet_nomenclature_solar_altitude_min",	propMgr->getStelPropertyValue("NomenclatureMgr.terminatorMinAltitude").toInt());
+	conf->setValue("astro/planet_nomenclature_solar_altitude_max",	propMgr->getStelPropertyValue("NomenclatureMgr.terminatorMaxAltitude").toInt());
 
 	// view dialog / markings tab settings
 	conf->setValue("viewing/flag_gridlines",				propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool());
