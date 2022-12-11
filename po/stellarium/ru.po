@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-11 19:58+0700\n"
+"POT-Creation-Date: 2022-12-12 00:07+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -71,7 +71,7 @@ msgstr "астеризм"
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
 #: src/core/StelApp.cpp:648 src/core/StelCore.cpp:291
 #: src/core/StelSkyLayerMgr.cpp:85 src/core/StelSkyLayerMgr.cpp:86
-#: src/StelMainView.cpp:896
+#: src/StelMainView.cpp:926
 msgid "Display Options"
 msgstr "Параметры отображения"
 
@@ -2139,7 +2139,7 @@ msgid "Toggle DSO type filter"
 msgstr "Переключить фильтр типа ОГК"
 
 #: src/core/modules/NebulaMgr.cpp:1444 src/gui/StelDialog.cpp:336
-#: src/StelMainView.cpp:992
+#: src/StelMainView.cpp:1022
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:773
 msgid "Attention!"
 msgstr "Внимание!"
@@ -4267,7 +4267,7 @@ msgid "References / Further Reading"
 msgstr "Ссылки / Дополнительная литература"
 
 #: src/core/StelMovementMgr.cpp:231 src/gui/StelGui.cpp:220
-#: src/StelMainView.cpp:894 src/StelMainView.cpp:895
+#: src/StelMainView.cpp:924 src/StelMainView.cpp:925
 msgid "Miscellaneous"
 msgstr "Разное"
 
@@ -8032,19 +8032,19 @@ msgstr "Сценарии"
 msgid "Shortcut"
 msgstr "Сочетание клавиш"
 
-#: src/StelMainView.cpp:894
+#: src/StelMainView.cpp:924
 msgid "Save screenshot"
 msgstr "Сохранить снимок экрана"
 
-#: src/StelMainView.cpp:895
+#: src/StelMainView.cpp:925
 msgid "Reload shaders (for development)"
 msgstr "Перезагрузить шейдеры (для разработки)"
 
-#: src/StelMainView.cpp:896
+#: src/StelMainView.cpp:926
 msgid "Full-screen mode"
 msgstr "Полноэкранный режим"
 
-#: src/StelMainView.cpp:992
+#: src/StelMainView.cpp:1022
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
@@ -8052,7 +8052,7 @@ msgstr ""
 "Клавиатурные сокращения конфликтуют! Нажмите F7 после запуска программы и "
 "проверьте следующие клавиатурные сокращения"
 
-#: src/StelMainView.cpp:1075
+#: src/StelMainView.cpp:1105
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -8061,7 +8061,7 @@ msgstr ""
 "оборудование или используйте режим запуска с --angle-mode (или с --mesa-"
 "mode)."
 
-#: src/StelMainView.cpp:1077
+#: src/StelMainView.cpp:1107
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
@@ -8069,14 +8069,14 @@ msgstr ""
 "Недостаточная версия OpenGL. Пожалуйста, обновите драйвер, графическое "
 "оборудование или используйте режим запуска с --mesa-mode."
 
-#: src/StelMainView.cpp:1081
+#: src/StelMainView.cpp:1111
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Недостаточная версия OpenGL. Пожалуйста, обновите драйверы или графическое "
 "оборудование."
 
-#: src/StelMainView.cpp:1124
+#: src/StelMainView.cpp:1154
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8084,7 +8084,7 @@ msgstr ""
 "Ваша подсистема DirectX/OpenGL ES имеет проблемы. См. подробности в журнале.\n"
 "Игнорировать и не показывать это уведомление в будущем, и попытаться продолжить в ограниченном режиме в любом случае?"
 
-#: src/StelMainView.cpp:1175
+#: src/StelMainView.cpp:1205
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8092,7 +8092,7 @@ msgstr ""
 "Ваша подсистема OpenGL/Mesa имеет проблемы. См. подробности в журнале.\n"
 "Игнорировать и не показывать это уведомление в будущем, и попытаться продолжить в ограниченном режиме в любом случае?"
 
-#: src/StelMainView.cpp:1235
+#: src/StelMainView.cpp:1265
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8100,7 +8100,7 @@ msgstr ""
 "Ваша подсистема OpenGL имеет проблемы. См. подробности в журнале.\n"
 "Игнорировать и не показывать это уведомление в будущем, и попытаться продолжить в ограниченном режиме в любом случае?"
 
-#: src/StelMainView.cpp:1276
+#: src/StelMainView.cpp:1306
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -11918,8 +11918,8 @@ msgstr "Обозначения"
 
 #: src/ui_viewDialog.h:3453
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:230
-msgid "Starlore"
-msgstr "Знания о звёздах"
+msgid "Sky Culture"
+msgstr "Культура неба"
 
 #: src/ui_viewDialog.h:3455
 msgid "Surveys"
