@@ -396,7 +396,7 @@ StelMovementMgr.zoomTo(pick, 1);
 
 SolarSystem.setFlagOrbits(false);
 
-d1 = "Venus Visible During the Day durning Lincoln's Gettysburg Address 11/19/1863";
+d1 = "Venus Visible During the Day during Lincoln's Gettysburg Address 11/19/1863";
 c1 = "#152815"
  
 }
@@ -482,7 +482,7 @@ StelMovementMgr.setFlagTracking(true);
 var pick = Math.floor(Math.random()*4)+1
 StelMovementMgr.zoomTo(pick, 1);
 
-d1 = "And you flew your private jet up to Nova Scotia for the Total Eclispe of the Sun"
+d1 = "And you flew your private jet up to Nova Scotia for the Total Eclipse of the Sun"
 c1 = "#232323"
 
 d2 = "You're so vain - I bet you think this script is about you. Don't you."
@@ -1515,7 +1515,7 @@ core.selectObjectByName("Moon", pointer = true);
 StelMovementMgr.setFlagTracking(true);
 
 }
-var pick = pick *( Math.floor(Math.random()*9)+1);
+var pick = pick *( Math.floor(Math.random()*9)+1);
 pick = pick/5;
 StelMovementMgr.zoomTo(pick, 1);
 d1 = "Earth and Moon and Antares 0.082 degrees apart 04/15/2020"
@@ -1547,7 +1547,7 @@ if (pick == 0)
 {
 core.selectObjectByName("Earth", pointer = true);
 }
-StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.setFlagTracking(true);
 pick = Math.floor(Math.random()*6)+1;
 StelMovementMgr.zoomTo(pick, 1);
 
@@ -2743,7 +2743,7 @@ core.selectObjectByName("Moon", pointer = true);
 StelMovementMgr.setFlagTracking(true);
 
 }
-var pick = pick *( Math.floor(Math.random()*7)+1);
+var pick = pick *( Math.floor(Math.random()*7)+1);
 pick = pick/10 + 0.7;
 StelMovementMgr.zoomTo(pick, 1);
 d1 = "Earth in Orion's Nebula from Pallas 02/01/2029"
@@ -3050,7 +3050,7 @@ StelMovementMgr.zoomTo(pick, 0);
 
 StelMovementMgr.setFlagTracking(true);
 
-d1 = "Triple conjunction Saturn, Mars, Uranus during a Jupiter Eclispe";
+d1 = "Triple conjunction Saturn, Mars, Uranus during a Jupiter Eclipse";
 c1 = "#FFFFF4"
 
 d2 = " from Callisto 2/7/2032"
@@ -3134,7 +3134,7 @@ StelMovementMgr.setFlagTracking(true);
 
 StelMovementMgr.zoomTo(pick*7+7, 1);
 
-d1 = "Pleiades above a cresent Jupiter from Callisto 09/09/2032"
+d1 = "Pleiades above a crescent Jupiter from Callisto 09/09/2032"
 SolarSystem.setFlagMoonScale(0);   	
 c1 = "#FF0007"
 
@@ -3241,7 +3241,7 @@ core.setDate("2033-07-22T15:36:00", "utc");
 
 core.selectObjectByName("HIP 86742", pointer = true);
 StelMovementMgr.setFlagTracking(true);
-core.selectObjectByName("Mars", pointer = true);
+core.selectObjectByName("Mars", pointer = true);
 var pick = Math.floor(Math.random()*70)+70;
 StelMovementMgr.zoomTo(pick, 1);
 
@@ -3996,7 +3996,7 @@ core.setDate("2040-01-22T07:00:00", "utc");
 
 core.selectObjectByName("HIP 25606", pointer = true);
 StelMovementMgr.setFlagTracking(true);
-core.selectObjectByName("Mars", pointer = true);
+core.selectObjectByName("Mars", pointer = true);
 var pick = Math.floor(Math.random()*70)+100;
 StelMovementMgr.zoomTo(pick, 1);
 
@@ -5953,7 +5953,7 @@ c1 = "#FF22FF"
 if (id[r] == 206)
 {
 
-// Triton Eclispe
+// Triton Eclipse
 
 dir = 0
 long = -90
@@ -5973,7 +5973,7 @@ StelMovementMgr.setFlagTracking(true);
 var pick = Math.floor(Math.random()*3)+1;
 StelMovementMgr.zoomTo(pick/3 +1, 1);
 
-d1 = "Triton's next Eclispe from Nereid 3/23/2080"
+d1 = "Triton's next Eclipse from Nereid 3/23/2080"
 d2 = ""
 
 c1 = "#007FF7"
@@ -7626,7 +7626,7 @@ LandscapeMgr.setFlagAtmosphere(false);
 
 if (id[r] == 265)
 {
-// Nereid Eclispe 
+// Nereid Eclipse 
 
 dir = 4
 long = 0
@@ -7646,7 +7646,7 @@ StelMovementMgr.setFlagTracking(true);
 var pick = Math.floor(Math.random()*40)+1;
 StelMovementMgr.zoomTo(pick/10, 1);
 
-d1 = "Nereid's next Eclispe from Triton 12/15/2324"
+d1 = "Nereid's next Eclipse from Triton 12/15/2324"
 d2 = ""
 
 c1 = "#007FF7"
@@ -9771,7 +9771,7 @@ long = -179
 
 
 
-// Eclispe
+// Eclipse
 
 if (dir == 4)
 {
@@ -9861,7 +9861,7 @@ core.setObserverLocation(blong, lat, alt, 0, "", p1);
 
 
 
-// Eclispe
+// Eclipse
 
 
 

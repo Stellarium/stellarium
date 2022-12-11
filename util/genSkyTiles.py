@@ -119,7 +119,7 @@ def main():
 		# Try to read the provided FITS header file to extract the WCS
 		wcs = astWCS.WCS(options.fitsHeader)
 	else:
-		# Else try to generate the WCS from the xmp informations contained in the file header
+		# Else try to generate the WCS from the xmp information contained in the file header
 		import libxmp
 		print "Try to import WCS info from the XMP headers in the image"
 		libxmp.XMPFiles.initialize()
@@ -179,7 +179,7 @@ def main():
 	# Create the master level 0 tile, which recursively creates the subtiles
 	masterTile = createTile(0, nbLevels, 0, 0, wcs, im, options.makeImageTiles, options.tileSize)
 	
-	# Add some top-level informations
+	# Add some top-level information
 	masterTile.maxBrightness = options.maxBrightness
 	masterTile.alphaBlend = options.alphaBlend
 	masterTile.imageInfo.short = options.imgInfoShort

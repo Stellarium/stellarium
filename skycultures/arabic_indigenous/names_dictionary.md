@@ -4,7 +4,7 @@
 |	CON0100	|	الفرقدان	|	al-Farqadān	|	The two oryx calves	|	A simple asterism of the two stars: β UMi and γ UMi. They are stars of desert navigation, and an example of eternal compnionship.	|	1,2,3,4	|
 |	CON0200	|	فأس الرحى	|	Faʾs al-Raḥā	|	The axe of the grindstone	|	A figure of two arcs of stars making a shape similar to a fish. This shape is named the pole axe of the grindstone, which is an oval shaped iron piece that has the pole of the grindstone in its center.	|	1,2,3,4	|
 |	CON0300	|	بنات نعش	|	Banāt Naʿš	|	Daughters of na'sh	|	The 7 stars of the big dipper, representing 7 girls carrying the bier of their father who was killed by al-Jady (Polaris).	|	1,2,3,4	|
-|	CON0400, CON0410, CON0420, CON0430	|	الظباء وأولاد الظباء	|	al-Ẓibāʾ wa Awlād al-Ẓibāʾ	|	The gazelles and thier youngsters	|	A group of stars Where the brighter ones are the Gazelles and the obscure ones are the youngsters. Nearby, there is a group of stars forming a semi- circle shape (CON0500). It is imagined as a pool of water where the gazelles came to drink after they leaped from near the lion's tail lock of hair. In the same region of sky there are three star couples: (ν UMa and ξ UMa), ( λ UMa and μ UMa), and (ι UMa and κ UMa) . Each star couple is imagined as a trace of a leap of a gazelle. The Arabs said: The lion hit the earth by his tail and the gazelles leaped.	|	1,2,3,4	|
+|	CON0400, CON0410, CON0420, CON0430	|	الظباء وأولاد الظباء	|	al-Ẓibāʾ wa Awlād al-Ẓibāʾ	|	The gazelles and their youngsters	|	A group of stars Where the brighter ones are the Gazelles and the obscure ones are the youngsters. Nearby, there is a group of stars forming a semi- circle shape (CON0500). It is imagined as a pool of water where the gazelles came to drink after they leaped from near the lion's tail lock of hair. In the same region of sky there are three star couples: (ν UMa and ξ UMa), ( λ UMa and μ UMa), and (ι UMa and κ UMa) . Each star couple is imagined as a trace of a leap of a gazelle. The Arabs said: The lion hit the earth by his tail and the gazelles leaped.	|	1,2,3,4	|
 |	CON0410	|	 القفزة الأولى	|	al-Qafzah al-ʾŪlā	|	The first leap	|	See above	|		|
 |	CON0420	|	القفزة الثانية	|	al-Qafzah al-ṯāniyah	|	The second leap	|	See above	|		|
 |	CON0430	|	 القفزة الثالثة	|	al-Qafzah al-ṯāliṯah	|	The third leap	|	See above	|		|
@@ -33,7 +33,7 @@
 |	CON1902	|	عنق الناقة	|	ʿUnuq al-nāqah	|	Neck of the she-camel	|	See above	|	1,2,4	|
 |	CON1903	|	يدا الناقة	|	Yadā al-nāqah	|	Legs of the she-camel	|	See above	|	4	|
 |	CON2000	|	الثريا	|	al-Ṯurayyā	|	al-Thurayya	|	 al-Thurayyā is a proper name of the Pleiades. A figure of a woman head between two hands, an outstretched one and a short one, formed by the Pleiades and surrounding stars.	|	1,2,3,4	|
-|	CON2001	|	سنام الناقة - الكف الخضيب	|	Sanām al-nāqah - al-Kaff al-ḫaḍīb	|	The she-camel's hump - the henna tinted hand	|	The 5 bright stars of Cassiopeia. They are the hump of The she-camel (CON1900). Also they are part of al-Turayyā image (CON2000), representing her hand dyed with henna. These stars are bright ones against the Milky Way bacground, resembling the henna on the hand.	|	1,2,3,4	|
+|	CON2001	|	سنام الناقة - الكف الخضيب	|	Sanām al-nāqah - al-Kaff al-ḫaḍīb	|	The she-camel's hump - the henna tinted hand	|	The 5 bright stars of Cassiopeia. They are the hump of The she-camel (CON1900). Also they are part of al-Turayyā image (CON2000), representing her hand dyed with henna. These stars are bright ones against the Milky Way background, resembling the henna on the hand.	|	1,2,3,4	|
 |	CON2002	|	العاتق	|	al-ʿĀtiq	|	The shoulder blade	|	The shoulder blade of al-Thurayya (the Pleiades), These are the stars closest to al-Thurayya of a line of stars extending to Cassiopeia making the extended hand of al-Thurayya.	|	1,2,3,4	|
 |	CON2003	|	المنكب	|	al-Mankib	|	The shoulder	|	The shoulder of al-Thurayya	|	1,2,3,4	|
 |	CON2004	|	العضد	|	al-ʿĀḍud	|	The arm	|	The arm of al-Thurayya	|	1,2,3,4	|
@@ -63,7 +63,7 @@
 |	CON2800	|	الأسد	|	al-Asad	|	The lion	|	The figure of Arabic lion covers a great part of the sky and extends from Gemini across Cancer and Leo and ends in Virgo, covering some parts of Canis Minor and Coma Berenices.	|	1,2,3,4	|
 |	CON2801	|	الذراع المقبوضة	|	al-Ḏiraʿ al-maqbūḍah	|	The retracted arm	|	The two stars of Canis Minor are the retractd arm of the lion	|	1,2,3,4	|
 |	CON2802	|	الذراع المبسوطة	|	al-Ḏiraʿ al-mabsūṭah	|	The extended arm	|	The two heads of the twins are the extended arm of the lion.	|	1,2,3,4	|
-|	CON2803	|	النثرة	|	al-Naṯrah	|	The nostrils	|	M 44 and two adjacent stars representing the nose tip of the graet Arab lion.	|	1,2,3,4	|
+|	CON2803	|	النثرة	|	al-Naṯrah	|	The nostrils	|	M 44 and two adjacent stars representing the nose tip of the great Arab lion.	|	1,2,3,4	|
 |	CON2804	|	الطرف	|	al-Ṭarf	|	The eyes	|	Eyes of the lion	|	1,2,3,4	|
 |	CON2805	|	الجبهة	|	al-Ǧabhah	|	The forehead	|	Forehead of the lion	|	1,2,3,4	|
 |	CON2806	|	الزبرة	|	al-Zubrah	|	The mane	|	Mane of the lion	|	1,2,3,4	|

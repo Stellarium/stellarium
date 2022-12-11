@@ -736,7 +736,7 @@ int ReadTyc2SupplFile(const char *fname,Accumulator &accu) {
           exit(-1);
       }
       
-      //WTF? Tycho 2 contains stars for J2000.0 but suppliment 1 contains stars 
+      //WTF? Tycho 2 contains stars for J2000.0 but supplement 1 contains stars 
       //for J1991.25 (H; Hipparcos) and J2000.0 (T; Tycho 2)!
       //If it star from Hipparcos then don't add this star
       if (buff[13]!='H') {
