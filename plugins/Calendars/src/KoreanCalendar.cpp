@@ -181,7 +181,8 @@ QPair<QString,QString> KoreanCalendar::getSolarTermStrings() const
 QString KoreanCalendar::getFormattedSolarTermsString() const
 {
 	const int rd=fixedFromKorean(parts);
-	return QString("Major: <strong>%1</strong> - Minor: %2").arg(
+	return QString("%1: <strong>%3</strong> - %2: %4").arg(
+		qc_("Major", "Korean calendar: Major Solar Term"), qc_("Minor", "Korean calendar: Minor Solar Term"),
 		majorSolarTerms.value(currentMajorSolarTerm(rd)),
 		minorSolarTerms.value(currentMinorSolarTerm(rd)));
 }

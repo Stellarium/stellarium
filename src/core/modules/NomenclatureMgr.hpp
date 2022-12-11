@@ -36,22 +36,13 @@ typedef QSharedPointer<NomenclatureItem> NomenclatureItemP;
 class NomenclatureMgr : public StelObjectModule
 {
 	Q_OBJECT	
-	Q_PROPERTY(bool nomenclatureDisplayed
-		   READ getFlagLabels
-		   WRITE setFlagLabels
-		   NOTIFY nomenclatureDisplayedChanged)
-	Q_PROPERTY(bool localNomenclatureHided
-		   READ getFlagHideLocalNomenclature
-		   WRITE setFlagHideLocalNomenclature
-		   NOTIFY localNomenclatureHidingChanged)
-	Q_PROPERTY(bool specialNomenclatureOnlyDisplayed
-		   READ getFlagShowSpecialNomenclatureOnly
-		   WRITE setFlagShowSpecialNomenclatureOnly
-		   NOTIFY specialNomenclatureOnlyDisplayingChanged)
-	Q_PROPERTY(Vec3f nomenclatureColor
-		   READ getColor
-		   WRITE setColor
-		   NOTIFY nomenclatureColorChanged)
+	Q_PROPERTY(bool flagShowNomenclature             READ getFlagShowNomenclature            WRITE setFlagShowNomenclature            NOTIFY flagShowNomenclatureChanged)
+	Q_PROPERTY(bool flagShowTerminatorZoneOnly       READ getFlagShowTerminatorZoneOnly      WRITE setFlagShowTerminatorZoneOnly      NOTIFY flagShowTerminatorZoneOnlyChanged)
+	Q_PROPERTY(int terminatorMinAltitude             READ getTerminatorMinAltitude           WRITE setTerminatorMinAltitude           NOTIFY terminatorMinAltitudeChanged)
+	Q_PROPERTY(int terminatorMaxAltitude             READ getTerminatorMaxAltitude           WRITE setTerminatorMaxAltitude           NOTIFY terminatorMaxAltitudeChanged)
+	Q_PROPERTY(bool flagHideLocalNomenclature        READ getFlagHideLocalNomenclature       WRITE setFlagHideLocalNomenclature       NOTIFY localNomenclatureHidingChanged)
+	Q_PROPERTY(bool specialNomenclatureOnlyDisplayed READ getFlagShowSpecialNomenclatureOnly WRITE setFlagShowSpecialNomenclatureOnly NOTIFY specialNomenclatureOnlyDisplayingChanged)
+	Q_PROPERTY(Vec3f nomenclatureColor               READ getColor WRITE setColor NOTIFY nomenclatureColorChanged)
 
 public:
 	NomenclatureMgr();
@@ -109,9 +100,24 @@ public slots:
 	const Vec3f& getColor(void) const;
 
 	//! Set flag which determines if nomenclature labels are drawn or hidden.
-	void setFlagLabels(bool b);
+	void setFlagShowNomenclature(bool b);
 	//! Get the current value of the flag which determines if nomenclature labels are drawn or hidden.
-	bool getFlagLabels() const;
+	bool getFlagShowNomenclature() const;
+
+	//! Set flag which determines if only nomenclature along the terminator should be shown.
+	void setFlagShowTerminatorZoneOnly(bool b);
+	//! Get flag which determines if only nomenclature along the terminator should be shown.
+	bool getFlagShowTerminatorZoneOnly() const;
+
+	//! Set minimum solar altitude (degrees) to draw only nomenclature along the terminator.
+	void setTerminatorMinAltitude(int deg);
+	//! Get minimum solar altitude (degrees) to draw only nomenclature along the terminator.
+	int getTerminatorMinAltitude() const;
+
+	//! Set maximum solar altitude (degrees) to draw only nomenclature along the terminator.
+	void setTerminatorMaxAltitude(int deg);
+	//! Get maximum solar altitude (degrees) to draw only nomenclature along the terminator.
+	int getTerminatorMaxAltitude() const;
 
 	//! Set flag which determines if nomenclature labels are drawn or hidden on the celestial body of observer.
 	void setFlagHideLocalNomenclature(bool b);
@@ -129,7 +135,10 @@ public slots:
 	void updateNomenclatureData();
 
 signals:
-	void nomenclatureDisplayedChanged(bool b);
+	void flagShowNomenclatureChanged(bool b);
+	void flagShowTerminatorZoneOnlyChanged(bool b);
+	void terminatorMinAltitudeChanged(int deg);
+	void terminatorMaxAltitudeChanged(int deg);
 	void localNomenclatureHidingChanged(bool b);
 	void specialNomenclatureOnlyDisplayingChanged(bool b);
 	void nomenclatureColorChanged(const Vec3f & color) const;

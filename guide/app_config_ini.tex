@@ -63,7 +63,12 @@ flag\_planets\_orbits              & bool   & false & Set to \emph{true} to show
 flag\_permanent\_orbits            & bool   & false & Set to \emph{true} to show the orbit of planet, when planet is out of the viewport also.\\%\midrule
 flag\_planets\_pointers            & bool   & false & Set to \emph{true} to show the planet pointer markers on startup\\%\midrule
 flag\_planets\_nomenclature        & bool   & false & Set to \emph{true} to show the planetary nomenclature markers and labels\\%\midrule
-flag\_hide\_local\_nomenclature    & bool   & true & Set to \emph{true} to hide the planetary nomenclature items on the observer's celestial body\\\midrule
+flag\_planets\_nomenclature\_\ldots& bool   & false & Set to \emph{true} to show only items\\
+\hspace{12mm}terminator\_only       &        &       & along the terminator\\
+planet\_nomenclature\_\ldots       &        &       &\\
+\hspace{12mm}solar\_altitude\_min   & int    & -5    & minimum solar altitude for the terminator setting above\\
+\hspace{12mm}solar\_altitude\_max   & int    & 40 & maximum solar altitude for the terminator setting above\\
+flag\_hide\_local\_nomenclature    & bool   & true  & Set to \emph{true} to hide the planetary nomenclature items on the observer's celestial body\\\midrule
 %
 flag\_light\_travel\_time          & bool   & true  & Should be \emph{true} to improve accuracy in the movement of the planets by compensating 
                                            for the time it takes for light to travel. This has a slight impact on performance, 

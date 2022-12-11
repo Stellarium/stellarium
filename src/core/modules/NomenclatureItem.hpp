@@ -213,6 +213,9 @@ private:
 	mutable double jde;    // jde time of XYZ value
 	static Vec3f color;
 	static bool hideLocalNomenclature;
+	static bool showTerminatorZoneOnly;
+	static int terminatorMinAltitude;
+	static int terminatorMaxAltitude;
 	static bool showSpecialNomenclatureOnly;
 
 	// ratio of angular size of feature to the FOV

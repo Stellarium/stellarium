@@ -29,6 +29,9 @@
 const QString NomenclatureItem::NOMENCLATURE_TYPE = QStringLiteral("NomenclatureItem");
 Vec3f NomenclatureItem::color = Vec3f(0.1f,1.0f,0.1f);
 bool NomenclatureItem::hideLocalNomenclature = false;
+bool NomenclatureItem::showTerminatorZoneOnly = false;
+int NomenclatureItem::terminatorMinAltitude=-2;
+int NomenclatureItem::terminatorMaxAltitude=40;
 bool NomenclatureItem::showSpecialNomenclatureOnly = false;
 LinearFader NomenclatureItem::labelsFader;
 
@@ -383,7 +386,11 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.normSquared() >= XYZ.normSquared())
 	    && (scale>0.04f && (scale<0.5f || niType>=NomenclatureItem::niSpecialPointPole )))
 	{
-		float brightness=(getSolarAltitude(core)<0. ? 0.25f : 1.0f);
+		const float solarAltitude=getSolarAltitude(core);
+		// Throw out real items if not along the terminator?
+		if ( (niType<NomenclatureItem::niSpecialPointPole) && showTerminatorZoneOnly && (solarAltitude > terminatorMaxAltitude || solarAltitude < terminatorMinAltitude) )
+			return;
+		float brightness=(solarAltitude<0. ? 0.25f : 1.0f);
 		if (niType>=NomenclatureItem::niSpecialPointPole)
 			brightness = 0.5f;
 		painter->setColor(color*brightness, labelsFader.getInterstate());

@@ -181,7 +181,8 @@ QPair<QString,QString> ChineseCalendar::getSolarTermStrings() const
 QString ChineseCalendar::getFormattedSolarTermsString() const
 {
 	const int rd=fixedFromChinese(parts);
-	return QString("Major: <strong>%1</strong> - Minor: %2").arg(
+	return QString("%1: <strong>%3</strong> - %2: %4").arg(
+		qc_("Major", "Chinese calendar: Major Solar Term"), qc_("Minor", "Chinese calendar: Minor Solar Term"),
 		majorSolarTerms.value(currentMajorSolarTerm(rd)),
 		minorSolarTerms.value(currentMinorSolarTerm(rd)));
 }

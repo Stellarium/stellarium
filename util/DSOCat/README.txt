@@ -36,7 +36,7 @@ Consolidated DSO catalog was created from various data:
      Edited by Thomas Watson. Taken from CloudyNights
      http://www.cloudynights.com/page/articles/cat/articles/the-collinder-catalog-updated-r2467
 
-Cross-identification of objects in consolidated DSO catalog was maked with:
+Cross-identification of objects in consolidated DSO catalog was made with:
 [1]  SIMBAD Astronomical Database
      http://simbad.u-strasbg.fr
 [2]  Merged catalogue of reflection nebulae (Magakian, 2003)

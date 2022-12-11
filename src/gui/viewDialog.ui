@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>742</width>
-    <height>558</height>
+    <width>900</width>
+    <height>676</height>
    </rect>
   </property>
   <property name="font">
@@ -1910,6 +1910,69 @@
                   <string>Hide nomenclature on the celestial body of observer</string>
                  </property>
                 </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="terminatorHorizontalLayout">
+                 <item>
+                  <widget class="QCheckBox" name="showTerminatorNomenclatureOnlyCheckBox">
+                   <property name="toolTip">
+                    <string>Label only features along the terminator</string>
+                   </property>
+                   <property name="text">
+                    <string>Only for Solar elevation</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="terminatorMinAltSpinbox">
+                   <property name="toolTip">
+                    <string>Minimum Solar altitude</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="minimum">
+                    <number>-90</number>
+                   </property>
+                   <property name="maximum">
+                    <number>20</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="labelTerminator">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="terminatorMaxAltSpinbox">
+                   <property name="toolTip">
+                    <string>Maximum Solar altitude</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="maximum">
+                    <number>90</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_6">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
                </item>
                <item>
                 <widget class="QCheckBox" name="showSpecialNomenclatureOnlyCheckBox">
@@ -5339,15 +5402,15 @@
    <container>1</container>
   </customwidget>
   <customwidget>
+   <class>StelCloseButton</class>
+   <extends>QPushButton</extends>
+   <header>gui/StelCloseButton.hpp</header>
+  </customwidget>
+  <customwidget>
    <class>LightPollutionWidget</class>
    <extends>QWidget</extends>
    <header>LightPollutionWidget.hpp</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>StelCloseButton</class>
-   <extends>QPushButton</extends>
-   <header>gui/StelCloseButton.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>
@@ -5455,12 +5518,12 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>

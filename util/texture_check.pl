@@ -42,7 +42,7 @@ Usage:
 If any of the specified image files have dimensions which might be a problem for OpenGL,
 they are printed with a suitable warning message.
 
-Note: this program expects the ImageMagick binary "identify" to be availabale and in the
+Note: this program expects the ImageMagick binary "identify" to be available and in the
 PATH.
 EOD
 

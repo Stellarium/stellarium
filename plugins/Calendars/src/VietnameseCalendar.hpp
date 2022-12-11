@@ -64,9 +64,13 @@ public slots:
 	QString getFormattedDateString() const override;
 
 	//! get a pair of strings for the Solar Terms for a date
+	//! @note It is possible that these terms are not used in practice. Our source book does not give Vietnamese names.
+	//! The result equals Chinese strings, but computed for Hanoi.
 	QPair<QString,QString> getSolarTermStrings() const override;
 
 	//! get a formatted string of the Solar Terms for a date
+	//! @note It is possible that these terms are not used in practice. Our source book does not give Vietnamese names.
+	//! The result equals Chinese strings, but computed for Hanoi.
 	QString getFormattedSolarTermsString() const override;
 
 
