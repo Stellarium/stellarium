@@ -736,7 +736,6 @@ public slots:
 
 signals:
 	void labelsDisplayedChanged(bool b);
-	void nomenclatureDisplayedChanged(bool b);
 	void flagOrbitsChanged(bool b);
 	void flagHintsChanged(bool b);
 	void flagDrawMoonHaloChanged(bool b);
