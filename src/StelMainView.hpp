@@ -74,6 +74,7 @@ public:
 		QSurface* surface;
 		QOpenGLContext* mainContext;
 		QOpenGLFunctions* functions;
+		GLint maxAnisotropy = 0;
 		bool supportsLuminanceTextures = false;
 		bool isCoreProfile = false;
 		bool isGLES = false;

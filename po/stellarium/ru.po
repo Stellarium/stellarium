@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-11 18:32+0700\n"
+"POT-Creation-Date: 2022-12-11 19:58+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -28268,43 +28268,48 @@ msgctxt "calendar"
 msgid "Korean Solar Terms"
 msgstr "Корейский солнечный год"
 
-#: plugins/Calendars/src/Calendars.cpp:398
+#: plugins/Calendars/src/Calendars.cpp:399
 #: plugins/Calendars/src/ui_calendarsDialog.h:979
 msgctxt "calendar"
 msgid "Vietnamese"
 msgstr "Вьетнамский"
 
-#: plugins/Calendars/src/Calendars.cpp:399
+#: plugins/Calendars/src/Calendars.cpp:400
+msgctxt "calendar"
+msgid "Vietnamese Solar Terms"
+msgstr "Вьетнамский солнечный год"
+
+#: plugins/Calendars/src/Calendars.cpp:402
 #: plugins/Calendars/src/ui_calendarsDialog.h:957
 msgctxt "calendar"
 msgid "Balinese Pawukon"
 msgstr "Балийский павукон"
 
-#: plugins/Calendars/src/Calendars.cpp:400
+#: plugins/Calendars/src/Calendars.cpp:403
 #: plugins/Calendars/src/ui_calendarsDialog.h:964
 msgctxt "calendar"
 msgid "Maya Long Count"
 msgstr "Длинный счёт майя"
 
-#: plugins/Calendars/src/Calendars.cpp:401
+#: plugins/Calendars/src/Calendars.cpp:404
 #: plugins/Calendars/src/ui_calendarsDialog.h:978
 msgctxt "calendar"
 msgid "Maya Haab"
 msgstr "Хааб майя"
 
-#: plugins/Calendars/src/Calendars.cpp:402
+#: plugins/Calendars/src/Calendars.cpp:405
 #: plugins/Calendars/src/ui_calendarsDialog.h:954
 msgctxt "calendar"
 msgid "Maya Tzolkin"
 msgstr "Цолькин майя"
 
-#: plugins/Calendars/src/Calendars.cpp:403
+#: plugins/Calendars/src/Calendars.cpp:406
 #: plugins/Calendars/src/ui_calendarsDialog.h:975
 msgctxt "calendar"
 msgid "Aztec Xihuitl"
 msgstr "Шиупоуалли ацтеков"
 
-#: plugins/Calendars/src/Calendars.cpp:404
+#: plugins/Calendars/src/Calendars.cpp:407
 #: plugins/Calendars/src/ui_calendarsDialog.h:963
 msgctxt "calendar"
 msgid "Aztec Tonalpohualli"
@@ -31367,7 +31372,7 @@ msgstr "сяошу (малая жара)"
 #: plugins/Calendars/src/ChineseCalendar.cpp:62
 msgctxt "Chinese calendar minor Solar term"
 msgid "Lìqiū (Beginning of Autumn)"
-msgstr "лися (начало лета)"
+msgstr "лицю (начало осени)"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:63
 msgctxt "Chinese calendar minor Solar term"
@@ -31446,70 +31451,70 @@ msgstr "гуй"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:80
 #: plugins/Calendars/src/KoreanCalendar.cpp:81
-#: plugins/Calendars/src/VietnameseCalendar.cpp:66
+#: plugins/Calendars/src/VietnameseCalendar.cpp:94
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Tree, male"
 msgstr "дерево, ян"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:81
 #: plugins/Calendars/src/KoreanCalendar.cpp:82
-#: plugins/Calendars/src/VietnameseCalendar.cpp:67
+#: plugins/Calendars/src/VietnameseCalendar.cpp:95
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Tree, female"
 msgstr "дерево, инь"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:82
 #: plugins/Calendars/src/KoreanCalendar.cpp:83
-#: plugins/Calendars/src/VietnameseCalendar.cpp:68
+#: plugins/Calendars/src/VietnameseCalendar.cpp:96
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Fire, male"
 msgstr "огонь, ян"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:83
 #: plugins/Calendars/src/KoreanCalendar.cpp:84
-#: plugins/Calendars/src/VietnameseCalendar.cpp:69
+#: plugins/Calendars/src/VietnameseCalendar.cpp:97
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Fire, female"
 msgstr "огонь, инь"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:84
 #: plugins/Calendars/src/KoreanCalendar.cpp:85
-#: plugins/Calendars/src/VietnameseCalendar.cpp:70
+#: plugins/Calendars/src/VietnameseCalendar.cpp:98
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Earth, male"
 msgstr "земля, ян"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:85
 #: plugins/Calendars/src/KoreanCalendar.cpp:86
-#: plugins/Calendars/src/VietnameseCalendar.cpp:71
+#: plugins/Calendars/src/VietnameseCalendar.cpp:99
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Earth, female"
 msgstr "земля, инь"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:86
 #: plugins/Calendars/src/KoreanCalendar.cpp:87
-#: plugins/Calendars/src/VietnameseCalendar.cpp:72
+#: plugins/Calendars/src/VietnameseCalendar.cpp:100
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Metal, male"
 msgstr "металл, ян"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:87
 #: plugins/Calendars/src/KoreanCalendar.cpp:88
-#: plugins/Calendars/src/VietnameseCalendar.cpp:73
+#: plugins/Calendars/src/VietnameseCalendar.cpp:101
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Metal, female"
 msgstr "металл, инь"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:88
 #: plugins/Calendars/src/KoreanCalendar.cpp:89
-#: plugins/Calendars/src/VietnameseCalendar.cpp:74
+#: plugins/Calendars/src/VietnameseCalendar.cpp:102
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Water, male"
 msgstr "вода, ян"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:89
 #: plugins/Calendars/src/KoreanCalendar.cpp:90
-#: plugins/Calendars/src/VietnameseCalendar.cpp:75
+#: plugins/Calendars/src/VietnameseCalendar.cpp:103
 msgctxt "Chinese calendar, celestial stem element"
 msgid "Water, female"
 msgstr "вода, инь"
@@ -31576,7 +31581,7 @@ msgstr "хай"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:104
 #: plugins/Calendars/src/KoreanCalendar.cpp:106
-#: plugins/Calendars/src/VietnameseCalendar.cpp:91
+#: plugins/Calendars/src/VietnameseCalendar.cpp:119
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Rat"
 msgstr "крыса"
@@ -31589,7 +31594,7 @@ msgstr "бык"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:106
 #: plugins/Calendars/src/KoreanCalendar.cpp:108
-#: plugins/Calendars/src/VietnameseCalendar.cpp:93
+#: plugins/Calendars/src/VietnameseCalendar.cpp:121
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Tiger"
 msgstr "тигр"
@@ -31602,21 +31607,21 @@ msgstr "кролик"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:108
 #: plugins/Calendars/src/KoreanCalendar.cpp:110
-#: plugins/Calendars/src/VietnameseCalendar.cpp:95
+#: plugins/Calendars/src/VietnameseCalendar.cpp:123
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Dragon"
 msgstr "дракон"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:109
 #: plugins/Calendars/src/KoreanCalendar.cpp:111
-#: plugins/Calendars/src/VietnameseCalendar.cpp:96
+#: plugins/Calendars/src/VietnameseCalendar.cpp:124
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Snake"
 msgstr "змея"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:110
 #: plugins/Calendars/src/KoreanCalendar.cpp:112
-#: plugins/Calendars/src/VietnameseCalendar.cpp:97
+#: plugins/Calendars/src/VietnameseCalendar.cpp:125
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Horse"
 msgstr "лошадь"
@@ -31629,7 +31634,7 @@ msgstr "овца"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:112
 #: plugins/Calendars/src/KoreanCalendar.cpp:114
-#: plugins/Calendars/src/VietnameseCalendar.cpp:99
+#: plugins/Calendars/src/VietnameseCalendar.cpp:127
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Monkey"
 msgstr "обезьяна"
@@ -31642,14 +31647,14 @@ msgstr "петух"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:114
 #: plugins/Calendars/src/KoreanCalendar.cpp:116
-#: plugins/Calendars/src/VietnameseCalendar.cpp:101
+#: plugins/Calendars/src/VietnameseCalendar.cpp:129
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Dog"
 msgstr "собака"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:115
 #: plugins/Calendars/src/KoreanCalendar.cpp:117
-#: plugins/Calendars/src/VietnameseCalendar.cpp:102
+#: plugins/Calendars/src/VietnameseCalendar.cpp:130
 msgctxt "Chinese calendar, terrestrial branch animal totem"
 msgid "Pig"
 msgstr "свинья"
@@ -31657,7 +31662,7 @@ msgstr "свинья"
 #: plugins/Calendars/src/ChineseCalendar.cpp:146
 #: plugins/Calendars/src/JapaneseCalendar.cpp:94
 #: plugins/Calendars/src/KoreanCalendar.cpp:148
-#: plugins/Calendars/src/VietnameseCalendar.cpp:134
+#: plugins/Calendars/src/VietnameseCalendar.cpp:162
 msgctxt "calendar term like leap year or leap day"
 msgid "leap"
 msgstr "високосный"
@@ -32065,209 +32070,329 @@ msgctxt "Korean calendar: Minor Solar Term"
 msgid "Minor"
 msgstr "второстепенный"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:41
+#: plugins/Calendars/src/VietnameseCalendar.cpp:43
 msgctxt "Vietnamese calendar, month name"
 msgid "Tháng Giêng"
 msgstr "январь"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:42
+#: plugins/Calendars/src/VietnameseCalendar.cpp:44
 msgctxt "Vietnamese calendar, month name"
 msgid "Tháng Hai"
 msgstr "февраль"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:43
+#: plugins/Calendars/src/VietnameseCalendar.cpp:45
 msgctxt "Vietnamese calendar, month name"
 msgid "Tháng Ba"
 msgstr "март"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:44
+#: plugins/Calendars/src/VietnameseCalendar.cpp:46
 msgctxt "Vietnamese calendar, month name"
 msgid "Tháng Tư"
 msgstr "апрель"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:45
+#: plugins/Calendars/src/VietnameseCalendar.cpp:47
 msgctxt "Vietnamese calendar, month name"
 msgid "Tháng Năm"
 msgstr "май"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:46
+#: plugins/Calendars/src/VietnameseCalendar.cpp:48
 msgctxt "Vietnamese calendar, month name"
 msgid "Tháng Sáu"
 msgstr "июнь"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:47
+#: plugins/Calendars/src/VietnameseCalendar.cpp:49
 msgctxt "Vietnamese calendar, month name"
 msgid "Tháng Bảy"
 msgstr "июль"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:48
+#: plugins/Calendars/src/VietnameseCalendar.cpp:50
 msgctxt "Vietnamese calendar, month name"
 msgid "Tháng Tám"
 msgstr "август"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:49
+#: plugins/Calendars/src/VietnameseCalendar.cpp:51
 msgctxt "Vietnamese calendar, month name"
 msgid "Tháng Chín"
 msgstr "сентябрь"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:50
+#: plugins/Calendars/src/VietnameseCalendar.cpp:52
 msgctxt "Vietnamese calendar, month name"
 msgid "Tháng Mười"
 msgstr "октябрь"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:51
+#: plugins/Calendars/src/VietnameseCalendar.cpp:53
 msgctxt "Vietnamese calendar, month name"
 msgid "Tháng Một"
 msgstr "ноябрь"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:52
+#: plugins/Calendars/src/VietnameseCalendar.cpp:54
 msgctxt "Vietnamese calendar, month name"
 msgid "Tháng Chạp"
 msgstr "декабрь"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:54
+#: plugins/Calendars/src/VietnameseCalendar.cpp:56
+msgctxt "Vietnamese calendar major Solar term"
+msgid "Vũ thủy (Rain Water)"
+msgstr "ву тхюи (дождевая вода)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:57
+msgctxt "Vietnamese calendar major Solar term"
+msgid "Xuân phân (Spring Equinox)"
+msgstr "сюан фан (весеннее равноденствие)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:58
+msgctxt "Vietnamese calendar major Solar term"
+msgid "Cốc vũ (Grain Rain)"
+msgstr "кок ву (хлебные дожди)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:59
+msgctxt "Vietnamese calendar major Solar term"
+msgid "Tiểu mãn (Grain Full)"
+msgstr "тьеу ман (малое изобилие)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:60
+msgctxt "Vietnamese calendar major Solar term"
+msgid "Hạ chí (Summer Solstice)"
+msgstr "ха ти (летнее солнцестояние)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:61
+msgctxt "Vietnamese calendar major Solar term"
+msgid "Đại thử (Great Heat)"
+msgstr "дай тхы (большая жара)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:62
+msgctxt "Vietnamese calendar major Solar term"
+msgid "Xử thử (Limit of Heat)"
+msgstr "сьы тхы (прекращение жары)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:63
+msgctxt "Vietnamese calendar major Solar term"
+msgid "Thu phân (Autumnal Equinox)"
+msgstr "тху фан (осеннее равноденствие)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:64
+msgctxt "Vietnamese calendar major Solar term"
+msgid "Sương giáng (Descent of Frost)"
+msgstr "шыонг зянг (выпадение инея)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:65
+msgctxt "Vietnamese calendar major Solar term"
+msgid "Tiểu tuyết (Slight Snow)"
+msgstr "тьеу тует (малые снега)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:66
+msgctxt "Vietnamese calendar major Solar term"
+msgid "Đông chí (Winter Solstice)"
+msgstr "донг ти (зимнее солнцестояние)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:67
+msgctxt "Vietnamese calendar major Solar term"
+msgid "Đại hàn (Great Cold)"
+msgstr "дай хан (большие холода)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:69
+msgctxt "Vietnamese calendar minor Solar term"
+msgid "Lập xuân (Beginning of Spring)"
+msgstr "лэп сюан (начало весны)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:70
+msgctxt "Vietnamese calendar minor Solar term"
+msgid "Kinh trập (Waking of Insects)"
+msgstr "кинь чап (пробуждение насекомых)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:71
+msgctxt "Vietnamese calendar minor Solar term"
+msgid "Thanh minh (Pure Brightness)"
+msgstr "тхань минь (чистота и ясность)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:72
+msgctxt "Vietnamese calendar minor Solar term"
+msgid "Lập hạ (Beginning of Summer)"
+msgstr "лап ха (начало лета)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:73
+msgctxt "Vietnamese calendar minor Solar term"
+msgid "Mang chủng (Grain in Ear)"
+msgstr "манг тюнг (колошение хлебов)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:74
+msgctxt "Vietnamese calendar minor Solar term"
+msgid "Tiểu thử (Slight Heat)"
+msgstr "тьеу тхы (малая жара)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:75
+msgctxt "Vietnamese calendar minor Solar term"
+msgid "Lập thu (Beginning of Autumn)"
+msgstr "лап тху (начало осени)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:76
+msgctxt "Vietnamese calendar minor Solar term"
+msgid "Bạch lộ (White Dew)"
+msgstr "бать ло (белые росы)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:77
+msgctxt "Vietnamese calendar minor Solar term"
+msgid "Hàn lộ (Cold Dew)"
+msgstr "хан ло (холодные росы)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:78
+msgctxt "Vietnamese calendar minor Solar term"
+msgid "Lập đông (Beginning of Winter)"
+msgstr "лап донг (начало зимы)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:79
+msgctxt "Vietnamese calendar minor Solar term"
+msgid "Đại tuyết (Great Snow)"
+msgstr "дай тует (большие снега)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:80
+msgctxt "Vietnamese calendar minor Solar term"
+msgid "Tiểu hàn (Slight Cold)"
+msgstr "тьеу хан (малые холода)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:82
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Giáp"
 msgstr "зап"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:55
+#: plugins/Calendars/src/VietnameseCalendar.cpp:83
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Ất"
 msgstr "ат"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:56
+#: plugins/Calendars/src/VietnameseCalendar.cpp:84
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Bính"
 msgstr "бынь"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:57
+#: plugins/Calendars/src/VietnameseCalendar.cpp:85
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Đinh"
 msgstr "дынь"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:58
+#: plugins/Calendars/src/VietnameseCalendar.cpp:86
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Mậu"
 msgstr "мау"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:59
+#: plugins/Calendars/src/VietnameseCalendar.cpp:87
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Kỷ"
 msgstr "кии"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:60
+#: plugins/Calendars/src/VietnameseCalendar.cpp:88
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Canh"
 msgstr "кань"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:61
+#: plugins/Calendars/src/VietnameseCalendar.cpp:89
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Tân"
 msgstr "тан"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:62
+#: plugins/Calendars/src/VietnameseCalendar.cpp:90
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Nhâm"
 msgstr "ним"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:63
+#: plugins/Calendars/src/VietnameseCalendar.cpp:91
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Quý"
 msgstr "куй"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:77
+#: plugins/Calendars/src/VietnameseCalendar.cpp:105
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Tý"
 msgstr "тый"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:78
+#: plugins/Calendars/src/VietnameseCalendar.cpp:106
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Sửu"
 msgstr "шиу"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:79
+#: plugins/Calendars/src/VietnameseCalendar.cpp:107
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Dần"
 msgstr "зан"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:80
+#: plugins/Calendars/src/VietnameseCalendar.cpp:108
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Mão"
 msgstr "мао"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:81
+#: plugins/Calendars/src/VietnameseCalendar.cpp:109
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Thìn"
 msgstr "тын"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:82
+#: plugins/Calendars/src/VietnameseCalendar.cpp:110
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Tỵ"
 msgstr "ты"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:83
+#: plugins/Calendars/src/VietnameseCalendar.cpp:111
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Ngọ"
 msgstr "нго"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:84
+#: plugins/Calendars/src/VietnameseCalendar.cpp:112
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Mùi"
 msgstr "муй"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:85
+#: plugins/Calendars/src/VietnameseCalendar.cpp:113
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Thân"
 msgstr "тан"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:86
+#: plugins/Calendars/src/VietnameseCalendar.cpp:114
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Dậu"
 msgstr "зау"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:87
+#: plugins/Calendars/src/VietnameseCalendar.cpp:115
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Tuất"
 msgstr "туат"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:88
+#: plugins/Calendars/src/VietnameseCalendar.cpp:116
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Hợi"
 msgstr "хой"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:92
+#: plugins/Calendars/src/VietnameseCalendar.cpp:120
 msgctxt "Vietnamese calendar, terrestrial branch animal totem"
 msgid "Water buffalo"
 msgstr "буйвол"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:94
+#: plugins/Calendars/src/VietnameseCalendar.cpp:122
 msgctxt "Vietnamese calendar, terrestrial branch animal totem"
 msgid "Cat"
 msgstr "кошка"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:98
+#: plugins/Calendars/src/VietnameseCalendar.cpp:126
 msgctxt "Vietnamese calendar, terrestrial branch animal totem"
 msgid "Goat"
 msgstr "коза"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:100
+#: plugins/Calendars/src/VietnameseCalendar.cpp:128
 msgctxt "Vietnamese calendar, terrestrial branch animal totem"
 msgid "Chicken"
 msgstr "курица"
 
 #. TRANSLATORS: Vietnamese Calendar output string
-#: plugins/Calendars/src/VietnameseCalendar.cpp:147
+#: plugins/Calendars/src/VietnameseCalendar.cpp:175
 #, qt-format
 msgctxt "Vietnamese calendar output"
 msgid "Day %1 (%2) - Month %3 (%4)<sub>%5</sub> (%6) <br/>Year %7"
 msgstr "день %1 (%2) - месяц %3 (%4)<sub>%5</sub> (%6) <br/>год %7"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:171
+#: plugins/Calendars/src/VietnameseCalendar.cpp:199
 msgctxt "Vietnamese calendar: Major Solar Term"
 msgid "Major"
 msgstr "основной"
 
-#: plugins/Calendars/src/VietnameseCalendar.cpp:171
+#: plugins/Calendars/src/VietnameseCalendar.cpp:199
 msgctxt "Vietnamese calendar: Minor Solar Term"
 msgid "Minor"
 msgstr "второстепенный"
@@ -32459,7 +32584,7 @@ msgstr "Персидский (арифметический)"
 #: plugins/Calendars/src/ui_calendarsDialog.h:986
 msgctxt "calendar"
 msgid "ISO Week"
-msgstr "неделя ISO"
+msgstr "Неделя ISO"
 
 #: plugins/Calendars/src/ui_calendarsDialog.h:961
 msgctxt "calendar"
