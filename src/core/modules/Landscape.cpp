@@ -1412,6 +1412,14 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 	memorySize+=mapTex->getGlSize();
 	mapTex->bind(0);
 	gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	if(!StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER).contains("textureGrad_SUPPORTED"))
+	{
+		// Avoid mip mapping when we can't supply custom dFdx/dFdy to texture sampler.
+		// The noise that may appear due to linear filter is must less distracting than
+		// the seam that will appear due to wrong mip level computed from
+		// default-computed derivatives.
+		gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	}
 	mapTex->release();
 
 	if (_maptexIllum.length() && (!_maptexIllum.endsWith("/")))
