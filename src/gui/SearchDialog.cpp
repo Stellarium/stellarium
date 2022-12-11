@@ -465,7 +465,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(changeTab(int)));
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(refreshFocus(bool)));
 	connect(StelApp::getInstance().getCore(), SIGNAL(updateSearchLists()), this, SLOT(updateListTab()));
-	connect(GETSTELMODULE(NomenclatureMgr), SIGNAL(nomenclatureDisplayedChanged(bool)), this, SLOT(updateListTab()));
+	connect(GETSTELMODULE(NomenclatureMgr), SIGNAL(flagShowNomenclatureChanged(bool)), this, SLOT(updateListTab()));
 
 	// Get data from previous session
 	loadRecentSearches();

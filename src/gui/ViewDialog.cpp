@@ -258,7 +258,7 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->showSpecialNomenclatureOnlyCheckBox, "NomenclatureMgr.specialNomenclatureOnlyDisplayed");
 	StelModule* mnmgr = StelApp::getInstance().getModule("NomenclatureMgr");
 	populateNomenclatureControls(mnmgr->property("flagShowNomenclature").toBool());
-	connect(mnmgr,SIGNAL(nomenclatureDisplayedChanged(bool)), this, SLOT(populateNomenclatureControls(bool)));
+	connect(mnmgr, SIGNAL(flagShowNomenclatureChanged(bool)), this, SLOT(populateNomenclatureControls(bool)));
 
 	populatePlanetMagnitudeAlgorithmsList();
 	int idx = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::getApparentMagnitudeAlgorithm(), Qt::UserRole, Qt::MatchCaseSensitive);
