@@ -493,7 +493,7 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->viewportOffsetSpinBox, "StelMovementMgr.viewportVerticalOffsetTarget");
 	connectDoubleProperty(ui->userMaxFovSpinBox, "StelMovementMgr.userMaxFov");
 
-	// Starlore
+	// Sky Culture
 	connect(ui->useAsDefaultSkyCultureCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentCultureAsDefault()));
 	connect(&StelApp::getInstance().getSkyCultureMgr(), SIGNAL(defaultSkyCultureChanged(QString)),this,SLOT(updateDefaultSkyCulture()));
 	updateDefaultSkyCulture();

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-11 19:58+0700\n"
+"POT-Creation-Date: 2022-12-12 00:07+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Ilpo Kantonen, 2022\n"
 "Language-Team: Finnish (https://www.transifex.com/stellarium/teams/80998/fi/)\n"
@@ -74,7 +74,7 @@ msgstr "asterismi"
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
 #: src/core/StelApp.cpp:648 src/core/StelCore.cpp:291
 #: src/core/StelSkyLayerMgr.cpp:85 src/core/StelSkyLayerMgr.cpp:86
-#: src/StelMainView.cpp:896
+#: src/StelMainView.cpp:926
 msgid "Display Options"
 msgstr "Näyttöasetukset"
 
@@ -2146,7 +2146,7 @@ msgid "Toggle DSO type filter"
 msgstr "Suodata tyypin mukaan"
 
 #: src/core/modules/NebulaMgr.cpp:1444 src/gui/StelDialog.cpp:336
-#: src/StelMainView.cpp:992
+#: src/StelMainView.cpp:1022
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:773
 msgid "Attention!"
 msgstr "Huomio!"
@@ -4270,7 +4270,7 @@ msgid "References / Further Reading"
 msgstr "Viitteet / Lisälukemista"
 
 #: src/core/StelMovementMgr.cpp:231 src/gui/StelGui.cpp:220
-#: src/StelMainView.cpp:894 src/StelMainView.cpp:895
+#: src/StelMainView.cpp:924 src/StelMainView.cpp:925
 msgid "Miscellaneous"
 msgstr "Sekalaista"
 
@@ -8035,19 +8035,19 @@ msgstr "Komentosarjat"
 msgid "Shortcut"
 msgstr "Pikanäppäin"
 
-#: src/StelMainView.cpp:894
+#: src/StelMainView.cpp:924
 msgid "Save screenshot"
 msgstr "Tallenna kuvankaappaus"
 
-#: src/StelMainView.cpp:895
+#: src/StelMainView.cpp:925
 msgid "Reload shaders (for development)"
 msgstr "Lataa varjostimet uudelleen (kehittäjille)"
 
-#: src/StelMainView.cpp:896
+#: src/StelMainView.cpp:926
 msgid "Full-screen mode"
 msgstr "Kokonäyttötila"
 
-#: src/StelMainView.cpp:992
+#: src/StelMainView.cpp:1022
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
@@ -8055,7 +8055,7 @@ msgstr ""
 "Ristiriita pikanäppäimissä! Paina F7 ohjelman käynnistyksen jälkeen ja "
 "tarkasta seuraavat moninkertaiset määrittelyt"
 
-#: src/StelMainView.cpp:1075
+#: src/StelMainView.cpp:1105
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -8063,7 +8063,7 @@ msgstr ""
 "Riittämätön OpenGL:n versio. Ole hyvä ja päivitä ohjaimet tai "
 "grafiikkakortti. Vaihtoehtoisesti käytä angle- tai mesa-tilaa."
 
-#: src/StelMainView.cpp:1077
+#: src/StelMainView.cpp:1107
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
@@ -8071,14 +8071,14 @@ msgstr ""
 "Riittämätön OpenGL-versio. Päivitä ajurit, grafiikkalaitteisto tai käytä "
 "--mesa-mode-vaihtoehtoa."
 
-#: src/StelMainView.cpp:1081
+#: src/StelMainView.cpp:1111
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Puutteellinen OpenGL:n versio. Ole hyvä ja päivitä ajurit tai "
 "grafiikkalaitteisto."
 
-#: src/StelMainView.cpp:1124
+#: src/StelMainView.cpp:1154
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8086,7 +8086,7 @@ msgstr ""
 "DirectX/OpenGL ES -alijärjestelmässäsi on ongelmia. Katso yksityiskohdat lokista.\n"
 "Ohita tämä huomautus tulevaisuudessa ja yritä jatkaa vajaatoimintaisessa tilassa siitä huolimatta?"
 
-#: src/StelMainView.cpp:1175
+#: src/StelMainView.cpp:1205
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8094,7 +8094,7 @@ msgstr ""
 "OpenGL/Mesa-alijärjestelmässäsi on ongelmia. Katso yksityiskohdat lokista.\n"
 "Ohita tämä huomautus tulevaisuudessa ja yritä jatkaa vajaatoimintaisessa tilassa siitä huolimatta?"
 
-#: src/StelMainView.cpp:1235
+#: src/StelMainView.cpp:1265
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8102,7 +8102,7 @@ msgstr ""
 "OpenGL-alijärjestelmässäsi on ongelmia. Katso yksityiskohdat lokista.\n"
 "Ohita tämä huomautus tulevaisuudessa ja yritä jatkaa vajaatoimintaisessa tilassa siitä huolimatta?"
 
-#: src/StelMainView.cpp:1276
+#: src/StelMainView.cpp:1306
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -11922,7 +11922,7 @@ msgstr "Merkinnät"
 
 #: src/ui_viewDialog.h:3453
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:230
-msgid "Starlore"
+msgid "Sky Culture"
 msgstr "Tähtitarusto"
 
 #: src/ui_viewDialog.h:3455
