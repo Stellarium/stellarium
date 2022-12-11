@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-11 17:09+0700\n"
+"POT-Creation-Date: 2022-12-11 18:32+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29229,16 +29229,12 @@ msgid ""
 msgstr ""
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:185
-#: plugins/Calendars/src/JapaneseCalendar.cpp:129
-#: plugins/Calendars/src/KoreanCalendar.cpp:185
-#: plugins/Calendars/src/VietnameseCalendar.cpp:171
+msgctxt "Chinese calendar: Major Solar Term"
 msgid "Major"
 msgstr ""
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:185
-#: plugins/Calendars/src/JapaneseCalendar.cpp:129
-#: plugins/Calendars/src/KoreanCalendar.cpp:185
-#: plugins/Calendars/src/VietnameseCalendar.cpp:171
+msgctxt "Chinese calendar: Minor Solar Term"
 msgid "Minor"
 msgstr ""
 
@@ -29367,6 +29363,16 @@ msgstr ""
 #, qt-format
 msgctxt "Japanese Calendar output"
 msgid "Day %1 - Month %2<sub>%3</sub> - year %4 (kigen)"
+msgstr ""
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:129
+msgctxt "Japanese calendar: Major Solar Term"
+msgid "Major"
+msgstr ""
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:129
+msgctxt "Japanese calendar: Minor Solar Term"
+msgid "Minor"
 msgstr ""
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:43
@@ -29606,6 +29612,16 @@ msgctxt "Korean Calendar output"
 msgid "Day %1 (%2) - Month %3<sub>%4</sub> (%5) <br/>Danki Year %6 (%7)"
 msgstr ""
 
+#: plugins/Calendars/src/KoreanCalendar.cpp:185
+msgctxt "Korean calendar: Major Solar Term"
+msgid "Major"
+msgstr ""
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:185
+msgctxt "Korean calendar: Minor Solar Term"
+msgid "Minor"
+msgstr ""
+
 #: plugins/Calendars/src/VietnameseCalendar.cpp:41
 msgctxt "Vietnamese calendar, month name"
 msgid "Tháng Giêng"
@@ -29801,6 +29817,16 @@ msgstr ""
 #, qt-format
 msgctxt "Vietnamese calendar output"
 msgid "Day %1 (%2) - Month %3 (%4)<sub>%5</sub> (%6) <br/>Year %7"
+msgstr ""
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:171
+msgctxt "Vietnamese calendar: Major Solar Term"
+msgid "Major"
+msgstr ""
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:171
+msgctxt "Vietnamese calendar: Minor Solar Term"
+msgid "Minor"
 msgstr ""
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:184
