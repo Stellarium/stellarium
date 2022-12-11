@@ -182,7 +182,7 @@ QString ChineseCalendar::getFormattedSolarTermsString() const
 {
 	const int rd=fixedFromChinese(parts);
 	return QString("%1: <strong>%3</strong> - %2: %4").arg(
-		q_("Major"), q_("Minor"),
+		qc_("Major", "Chinese calendar: Major Solar Term"), qc_("Minor", "Chinese calendar: Minor Solar Term"),
 		majorSolarTerms.value(currentMajorSolarTerm(rd)),
 		minorSolarTerms.value(currentMinorSolarTerm(rd)));
 }

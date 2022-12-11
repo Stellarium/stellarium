@@ -168,7 +168,7 @@ QString VietnameseCalendar::getFormattedSolarTermsString() const
 {
 	const int rd=fixedFromVietnamese(parts);
 	return QString("%1: <strong>%3</strong> - %2: %4").arg(
-		q_("Major"), q_("Minor"),
+		qc_("Major", "Vietnamese calendar: Major Solar Term"), qc_("Minor", "Vietnamese calendar: Minor Solar Term"),
 		majorSolarTerms.value(currentMajorSolarTerm(rd)),
 		minorSolarTerms.value(currentMinorSolarTerm(rd)));
 }
