@@ -227,7 +227,7 @@ void TextUserInterface::init()
 	m3->setParent(this);
 	m2->setNextNode(m3);
 	StelSkyCultureMgr& skyCultureMgr = StelApp::getInstance().getSkyCultureMgr();
-	TuiNode* m3_1 = new TuiNodeEnum(N_("Starlore"),
+	TuiNode* m3_1 = new TuiNodeEnum(N_("Sky Culture"),
 	                                this, 
 	                                SLOT(setSkyCulture(QString)), 
 	                                skyCultureMgr.getSkyCultureListI18(),
