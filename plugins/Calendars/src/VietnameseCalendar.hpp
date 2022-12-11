@@ -64,13 +64,11 @@ public slots:
 	QString getFormattedDateString() const override;
 
 	//! get a pair of strings for the Solar Terms for a date
-	//! @note It is possible that these terms are not used in practice. Our source book does not give Vietnamese names.
-	//! The result equals Chinese strings, but computed for Hanoi.
+	//! @note Source: https://en.wikipedia.org/wiki/Solar_term (retrieved 2022-12-11)
 	QPair<QString,QString> getSolarTermStrings() const override;
 
 	//! get a formatted string of the Solar Terms for a date
-	//! @note It is possible that these terms are not used in practice. Our source book does not give Vietnamese names.
-	//! The result equals Chinese strings, but computed for Hanoi.
+	//! @note Source: https://en.wikipedia.org/wiki/Solar_term (retrieved 2022-12-11)
 	QString getFormattedSolarTermsString() const override;
 
 
@@ -176,6 +174,8 @@ public slots:
 
 protected:
 	static QMap<int, QString> countedMonthNames;
+	static QMap<int, QString> majorSolarTerms;
+	static QMap<int, QString> minorSolarTerms;
 	static QMap<int, QString> celestialStems;
 	static QMap<int, QString> celestialStemsElements;
 	static QMap<int, QString> terrestrialBranches;

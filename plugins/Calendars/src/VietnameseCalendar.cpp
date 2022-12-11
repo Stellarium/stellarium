@@ -29,6 +29,8 @@ VietnameseCalendar::VietnameseCalendar(double jd): ChineseCalendar(jd)
 }
 
 QMap<int, QString> VietnameseCalendar::countedMonthNames;
+QMap<int, QString> VietnameseCalendar::majorSolarTerms;
+QMap<int, QString> VietnameseCalendar::minorSolarTerms;
 QMap<int, QString> VietnameseCalendar::celestialStems;
 QMap<int, QString> VietnameseCalendar::celestialStemsElements;
 QMap<int, QString> VietnameseCalendar::terrestrialBranches;
@@ -50,6 +52,32 @@ void VietnameseCalendar::retranslate()
 		{10, qc_("Tháng Mười" , "Vietnamese calendar, month name")},
 		{11, qc_("Tháng Một"  , "Vietnamese calendar, month name")},
 		{12, qc_("Tháng Chạp" , "Vietnamese calendar, month name")}};
+	majorSolarTerms={
+		{ 1, qc_("Vũ thủy (Rain Water)"          , "Vietnamese calendar major Solar term")},
+		{ 2, qc_("Xuân phân (Spring Equinox)"    , "Vietnamese calendar major Solar term")},
+		{ 3, qc_("Cốc vũ (Grain Rain)"           , "Vietnamese calendar major Solar term")},
+		{ 4, qc_("Tiểu mãn (Grain Full)"         , "Vietnamese calendar major Solar term")},
+		{ 5, qc_("Hạ chí (Summer Solstice)"      , "Vietnamese calendar major Solar term")},
+		{ 6, qc_("Đại thử (Great Heat)"          , "Vietnamese calendar major Solar term")},
+		{ 7, qc_("Xử thử (Limit of Heat)"        , "Vietnamese calendar major Solar term")},
+		{ 8, qc_("Thu phân (Autumnal Equinox)"   , "Vietnamese calendar major Solar term")},
+		{ 9, qc_("Sương giáng (Descent of Frost)", "Vietnamese calendar major Solar term")},
+		{10, qc_("Tiểu tuyết (Slight Snow)"      , "Vietnamese calendar major Solar term")},
+		{11, qc_("Đông chí (Winter Solstice)"    , "Vietnamese calendar major Solar term")},
+		{12, qc_("Đại hàn (Great Cold)"          , "Vietnamese calendar major Solar term")}};
+	minorSolarTerms={
+		{ 1, qc_("Lập xuân (Beginning of Spring)", "Vietnamese calendar minor Solar term")},
+		{ 2, qc_("Kinh trập (Waking of Insects)" , "Vietnamese calendar minor Solar term")},
+		{ 3, qc_("Thanh minh (Pure Brightness)"  , "Vietnamese calendar minor Solar term")},
+		{ 4, qc_("Lập hạ (Beginning of Summer)"  , "Vietnamese calendar minor Solar term")},
+		{ 5, qc_("Mang chủng (Grain in Ear)"     , "Vietnamese calendar minor Solar term")},
+		{ 6, qc_("Tiểu thử (Slight Heat)"        , "Vietnamese calendar minor Solar term")},
+		{ 7, qc_("Lập thu (Beginning of Autumn)" , "Vietnamese calendar minor Solar term")},
+		{ 8, qc_("Bạch lộ (White Dew)"           , "Vietnamese calendar minor Solar term")},
+		{ 9, qc_("Hàn lộ (Cold Dew)"             , "Vietnamese calendar minor Solar term")},
+		{10, qc_("Lập đông (Beginning of Winter)", "Vietnamese calendar minor Solar term")},
+		{11, qc_("Đại tuyết (Great Snow)"        , "Vietnamese calendar minor Solar term")},
+		{12, qc_("Tiểu hàn (Slight Cold)"        , "Vietnamese calendar minor Solar term")}};
 	celestialStems={
 		{ 1, qc_("Giáp", "Vietnamese calendar, celestial stem name")},
 		{ 2, qc_("Ất"  , "Vietnamese calendar, celestial stem name")},

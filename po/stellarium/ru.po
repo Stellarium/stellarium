@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-11 17:09+0700\n"
+"POT-Creation-Date: 2022-12-11 18:32+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -31342,12 +31342,12 @@ msgstr "личунь (начало весны)"
 #: plugins/Calendars/src/ChineseCalendar.cpp:57
 msgctxt "Chinese calendar minor Solar term"
 msgid "Jīngzhé (Waking of Insects)"
-msgstr "цзинчжэ (пора пробуждения личинок)"
+msgstr "цзинчжэ (пробуждение насекомых)"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:58
 msgctxt "Chinese calendar minor Solar term"
 msgid "Qīngmíng (Pure Brightness)"
-msgstr "цинмин (ясно и светло)"
+msgstr "цинмин (чистота и ясность)"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:59
 msgctxt "Chinese calendar minor Solar term"
@@ -31672,18 +31672,14 @@ msgstr ""
 "День %1 (%2) - Месяц %3<sub>%4</sub> (%5) <br/>Год %6: %7 (%8) в цикле %9"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:185
-#: plugins/Calendars/src/JapaneseCalendar.cpp:129
-#: plugins/Calendars/src/KoreanCalendar.cpp:185
-#: plugins/Calendars/src/VietnameseCalendar.cpp:171
+msgctxt "Chinese calendar: Major Solar Term"
 msgid "Major"
-msgstr "большой"
+msgstr "чжунци"
 
 #: plugins/Calendars/src/ChineseCalendar.cpp:185
-#: plugins/Calendars/src/JapaneseCalendar.cpp:129
-#: plugins/Calendars/src/KoreanCalendar.cpp:185
-#: plugins/Calendars/src/VietnameseCalendar.cpp:171
+msgctxt "Chinese calendar: Minor Solar Term"
 msgid "Minor"
-msgstr "малый"
+msgstr "цзеци"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:43
 msgctxt "Japanese calendar major Solar term"
@@ -31753,12 +31749,12 @@ msgstr "риссюн (начало весны)"
 #: plugins/Calendars/src/JapaneseCalendar.cpp:57
 msgctxt "Japanese calendar minor Solar term"
 msgid "Keichitsu (Waking of Insects)"
-msgstr "кэйтицу (пора пробуждения личинок)"
+msgstr "кэйтицу (пробуждение насекомых)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:58
 msgctxt "Japanese calendar minor Solar term"
 msgid "Seimei (Pure Brightness)"
-msgstr "сэймэй (ясно и светло)"
+msgstr "сэймэй (чистота и ясность)"
 
 #: plugins/Calendars/src/JapaneseCalendar.cpp:59
 msgctxt "Japanese calendar minor Solar term"
@@ -31810,7 +31806,17 @@ msgstr "сё: кан (малые холода)"
 #, qt-format
 msgctxt "Japanese Calendar output"
 msgid "Day %1 - Month %2<sub>%3</sub> - year %4 (kigen)"
-msgstr "День %1 - Месяц %2<sub>%3</sub> - год %4 (kigen)"
+msgstr "день %1 - месяц %2<sub>%3</sub> - год %4 (имперский год)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:129
+msgctxt "Japanese calendar: Major Solar Term"
+msgid "Major"
+msgstr "основной"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:129
+msgctxt "Japanese calendar: Minor Solar Term"
+msgid "Minor"
+msgstr "второстепенный"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:43
 msgctxt "Korean calendar major Solar term"
@@ -31880,12 +31886,12 @@ msgstr "ипчхун (начало весны)"
 #: plugins/Calendars/src/KoreanCalendar.cpp:57
 msgctxt "Korean calendar minor Solar term"
 msgid "Kyung-Chip (Waking of Insects)"
-msgstr "кёнъчхип (пора пробуждения личинок)"
+msgstr "кёнъчхип (пробуждение насекомых)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:58
 msgctxt "Korean calendar minor Solar term"
 msgid "Chyng-Myung (Pure Brightness)"
-msgstr "чхёнъмён (ясно и светло)"
+msgstr "чхёнъмён (чистота и ясность)"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:59
 msgctxt "Korean calendar minor Solar term"
@@ -31980,7 +31986,7 @@ msgstr "им"
 #: plugins/Calendars/src/KoreanCalendar.cpp:78
 msgctxt "Korean calendar, celestial stem name"
 msgid "Gye"
-msgstr "Ке"
+msgstr "ке"
 
 #: plugins/Calendars/src/KoreanCalendar.cpp:92
 msgctxt "Korean calendar, terrestrial branch name"
@@ -32047,7 +32053,17 @@ msgstr "хэ"
 #, qt-format
 msgctxt "Korean Calendar output"
 msgid "Day %1 (%2) - Month %3<sub>%4</sub> (%5) <br/>Danki Year %6 (%7)"
-msgstr "День %1 (%2) - Месяц %3<sub>%4</sub> (%5) <br/>Данки год %6 (%7)"
+msgstr "день %1 (%2) - месяц %3<sub>%4</sub> (%5) <br/>Данки год %6 (%7)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:185
+msgctxt "Korean calendar: Major Solar Term"
+msgid "Major"
+msgstr "основной"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:185
+msgctxt "Korean calendar: Minor Solar Term"
+msgid "Minor"
+msgstr "второстепенный"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:41
 msgctxt "Vietnamese calendar, month name"
@@ -32112,112 +32128,112 @@ msgstr "декабрь"
 #: plugins/Calendars/src/VietnameseCalendar.cpp:54
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Giáp"
-msgstr "Зап"
+msgstr "зап"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:55
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Ất"
-msgstr "Ат"
+msgstr "ат"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:56
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Bính"
-msgstr "Бынь"
+msgstr "бынь"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:57
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Đinh"
-msgstr "Дынь"
+msgstr "дынь"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:58
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Mậu"
-msgstr "Мау"
+msgstr "мау"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:59
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Kỷ"
-msgstr "Кии"
+msgstr "кии"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:60
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Canh"
-msgstr "Кань"
+msgstr "кань"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:61
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Tân"
-msgstr "Тан"
+msgstr "тан"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:62
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Nhâm"
-msgstr "Ним"
+msgstr "ним"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:63
 msgctxt "Vietnamese calendar, celestial stem name"
 msgid "Quý"
-msgstr "Куй"
+msgstr "куй"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:77
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Tý"
-msgstr "Тый"
+msgstr "тый"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:78
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Sửu"
-msgstr "Шиу"
+msgstr "шиу"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:79
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Dần"
-msgstr "Зан"
+msgstr "зан"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:80
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Mão"
-msgstr "Мао"
+msgstr "мао"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:81
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Thìn"
-msgstr "Тын"
+msgstr "тын"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:82
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Tỵ"
-msgstr "Ты"
+msgstr "ты"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:83
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Ngọ"
-msgstr "Нго"
+msgstr "нго"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:84
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Mùi"
-msgstr "Муй"
+msgstr "муй"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:85
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Thân"
-msgstr "Тан"
+msgstr "тан"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:86
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Dậu"
-msgstr "Зау"
+msgstr "зау"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:87
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Tuất"
-msgstr "Туат"
+msgstr "туат"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:88
 msgctxt "Vietnamese calendar, terrestrial branch name"
 msgid "Hợi"
-msgstr "Хой"
+msgstr "хой"
 
 #: plugins/Calendars/src/VietnameseCalendar.cpp:92
 msgctxt "Vietnamese calendar, terrestrial branch animal totem"
@@ -32244,7 +32260,17 @@ msgstr "курица"
 #, qt-format
 msgctxt "Vietnamese calendar output"
 msgid "Day %1 (%2) - Month %3 (%4)<sub>%5</sub> (%6) <br/>Year %7"
-msgstr "День %1 (%2) - Месяц %3 (%4)<sub>%5</sub> (%6) <br/>Год %7"
+msgstr "день %1 (%2) - месяц %3 (%4)<sub>%5</sub> (%6) <br/>год %7"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:171
+msgctxt "Vietnamese calendar: Major Solar Term"
+msgid "Major"
+msgstr "основной"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:171
+msgctxt "Vietnamese calendar: Minor Solar Term"
+msgid "Minor"
+msgstr "второстепенный"
 
 #: plugins/Calendars/src/gui/CalendarsDialog.cpp:184
 msgid "Calendars Plug-in"
