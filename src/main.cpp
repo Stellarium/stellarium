@@ -354,14 +354,14 @@ int main(int argc, char **argv)
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
-	// Add the Noto fonts that we use everywhere in the program
-	const QStringList notoFonts = { "NotoSans-Regular.ttf", "NotoSansMono-Regular.ttf", "NotoSansCJK-Regular.ttc" };
-	QString notoFont;
-	for (auto font: qAsConst(notoFonts))
+	// Add the Noto & DejaVu fonts that we use everywhere in the program
+	const QStringList customFonts = { "NotoSans-Regular.ttf", "NotoSansMono-Regular.ttf", "NotoSansSC-Regular.otf", "DejaVuSans.ttf", "DejaVuSansMono.ttf" };
+	QString customFont;
+	for (auto font: qAsConst(customFonts))
 	{
-		notoFont = StelFileMgr::findFile(QString("data/%1").arg(font));
-		if (!notoFont.isEmpty())
-			QFontDatabase::addApplicationFont(notoFont);
+		customFont = StelFileMgr::findFile(QString("data/%1").arg(font));
+		if (!customFont.isEmpty())
+			QFontDatabase::addApplicationFont(customFont);
 	}
 	
 	QString fileFont = confSettings->value("gui/base_font_file", "").toString();
