@@ -97,6 +97,7 @@ private slots:
 
 	void populateOrbitsControls(bool flag);
 	void populateTrailsControls(bool flag);
+	void populateNomenclatureControls(bool flag);
 
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);

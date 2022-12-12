@@ -163,12 +163,21 @@ in some calendars) \emph{epagomenae} days, with different \emph{calendar eras}.
   Stellarium provides both versions:\newFeature{0.22.0} the algorithmic version and the
   astronomically specified one. They occasionally deviate from each
   other by 1 day.
+\item[Bahá’í] is a Solar calendar with years beginning on the day of
+  Vernal equinox. \newFeature{1.2} In the algorithmic version used in
+  the West, March 21 in the Gregorian calendar was used, but the
+  astronomical version used since 2015 uses Tehran as reference
+  location.  Days begin at sunset. The calendar uses a 7-day week but
+  is else based on cycles of the number 19: 19 named months of 19
+  named days plus 4-5 additional days after month 18. In addition,
+  years are structured in named 19-years (\emph{Vā\d{h}id}, ``unity'') and
+  numbered $19^2=361$-years (\emph{Kull-i-shay}) cycles.
 \end{description}
 
 \subsubsection{Near Eastern calendars}
 Several more calendars\newFeature{0.21.0} have been worked out in algorithmic forms:
 \begin{description}
-\item[Islamic] is a strict lunar calendar without observance of
+\item[Islamic] is a strict Lunar calendar without observance of
   seasons. Days begin at sunset, but we cannot currently show
   this. The date should be correct at Noon. The week begins on
   Sunday. Note that this algorithmic solution may deviate from the
@@ -275,6 +284,30 @@ Several more calendars\newFeature{0.21.0} have been worked out in algorithmic fo
   more complicated rules. A full cycle takes 210 days.  Due to space
   reasons this needs two lines on the display. Formatting may improve
   in later versions.
+\end{description}
+
+\subsubsection{Chinese calendars}\newFeature{1.2}
+The Chinese calendar (and related Japanese, Korean and Vietnamese)
+is a Lunisolar calendar based on astronomical events.
+Days begin at midnight. Lunar months begin on the day of New Moon.
+The position of the Sun along the Zodiac is given by Major (\emph{zh\={o}ngqì})
+and Minor (\emph{jiéqì}) Solar Terms.
+
+\begin{description}
+\item[Chinese] The version here is the 1645 version. Earlier dates may be wrong.
+  The calendar's location for astronomical computations is Beijing.
+\item[Japanese] The same principles of the Chinese calendar have been
+  followed since 1844, but with Tokyo as reference location. The years
+  given are in the \emph{kigen} count (years from 660~BCE).
+\item[Korean] Korea adopted the Gregorian calendar in 1896, but the
+  older Chinese-based calendar is still used for traditional
+  purposes. The reference location for computing Solar longitudes and
+  lunar phases is Seoul City Hall. Years are counted in the Danki
+  system starting in 2333~BCE.
+\item[Vietnamese] From 1813-1967 the Chinese calendar was used
+  directly. The currently used traditional calendar parallels the
+  Chinese, but with Saigon as reference location. Years are not counted, only named.
+  It also seems that Solar terms are not used.
 \end{description}
 
 \subsubsection{Mesoamerican calendars}
@@ -393,7 +426,9 @@ show\_zoroastrian            &bool & false\\
 show\_coptic                 &bool & false&
 show\_ethiopic               &bool & false\\
 show\_persian\_astronomical  &bool & false&
-show\_persian\_arithmetic    &bool & false\\\midrule
+show\_persian\_arithmetic    &bool & false\\
+show\_bahai\_astronomical    &bool & false&
+show\_bahai\_arithmetic      &bool & false\\\midrule
 show\_islamic                &bool & true&
 show\_hebrew                 &bool & true\\\midrule
 show\_old\_hindu\_solar      &bool & false&
@@ -404,6 +439,10 @@ show\_astro\_hindu\_solar    &bool & false&
 show\_astro\_hindu\_lunar    &bool & false\\
 show\_tibetan                &bool & false&
 show\_balinese\_pawukon      &bool & false\\\midrule
+show\_chinese                &bool & false&
+show\_japanese               &bool & false\\
+show\_korean                 &bool & false&
+show\_vietnamese             &bool & false\\\midrule
 show\_maya\_long\_count      &bool & true\\
 show\_maya\_haab             &bool & false&
 show\_maya\_tzolkin          &bool & false\\

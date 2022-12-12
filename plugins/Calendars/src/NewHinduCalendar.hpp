@@ -48,24 +48,24 @@ class NewHinduCalendar : public OldHinduLuniSolarCalendar
 public:
 	NewHinduCalendar(double jd);
 
-	virtual ~NewHinduCalendar() Q_DECL_OVERRIDE {}
+	~NewHinduCalendar() override {}
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 	//! Set a calendar date from the Julian day number
-	virtual void setJD(double JD) Q_DECL_OVERRIDE;
+	void setJD(double JD) override;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! Year-Month[1...12]-leap[0|1]-Day[1...30]
-	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+	void setDate(QVector<int> parts) override;
 
 	//! get a stringlist of calendar date elements for the New Hindu Solar calendar sorted from the largest to the smallest.
 	//! {Year, Month, MonthName, Day, WeekDayName}
-	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
+	QStringList getDateStrings() const override;
 
 	//! get a formatted complete string for the date in the New Hindu Solar calendar
-	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
+	QString getFormattedDateString() const override;
 
 	// 20.1 Hindu Astronomy
 	//! @return table value within [0...3438]/3438 for the sine of an angle (CC:UE 20.4)

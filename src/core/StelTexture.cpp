@@ -35,6 +35,10 @@
 #include <QFuture>
 #include <QtConcurrent>
 
+#ifndef GL_TEXTURE_MAX_ANISOTROPY
+# define GL_TEXTURE_MAX_ANISOTROPY 0x84FE
+#endif
+
 StelTexture::StelTexture(StelTextureMgr *mgr) : textureMgr(mgr), gl(Q_NULLPTR), networkReply(Q_NULLPTR), loader(Q_NULLPTR), errorOccured(false), alphaChannel(false), id(0),
 	width(-1), height(-1), glSize(0)
 {
@@ -411,8 +415,26 @@ bool StelTexture::glLoad(const GLData& data)
 	if (loadParams.generateMipmaps)
 	{
 		gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, loadParams.filterMipmaps ? GL_LINEAR_MIPMAP_LINEAR : GL_LINEAR_MIPMAP_NEAREST);
+
+		const auto conf = StelApp::getInstance().getSettings();
+		const GLint desiredAnisotropyLevel = conf->value("video/anisotropic_filtering", 16).toUInt();
+		const auto maxAnisotropy = StelMainView::getInstance().getGLInformation().maxAnisotropy;
+		if(maxAnisotropy > 0 && desiredAnisotropyLevel > 0)
+		{
+			const int anisotropy = std::min(maxAnisotropy, desiredAnisotropyLevel);
+			gl->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, anisotropy);
+
+			// Assuming maximum possible anisotropy, all mipmaps will require
+			// 4× the size of base mip level. Generally anisotropy may be
+			// lower, but we prefer to overestimate VRAM consumption than to
+			// underestimate it.
+			glSize *= 4;
+		}
+		else
+		{
+			glSize = glSize + glSize/3; //mipmaps require 1/3 more mem
+		}
 		gl->glGenerateMipmap(GL_TEXTURE_2D);
-		glSize = glSize + glSize/3; //mipmaps require 1/3 more mem
 	}
 
 	//register ID with textureMgr and increment size

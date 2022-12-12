@@ -250,14 +250,15 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->shadowEnlargementDanjonCheckBox, "SolarSystem.earthShadowEnlargementDanjon");
 	populateTrailsControls(ssmgr->getFlagTrails());
 	connect(ssmgr,SIGNAL(trailsDisplayedChanged(bool)), this, SLOT(populateTrailsControls(bool)));
-	connectBoolProperty(ui->hidePlanetNomenclatureCheckBox, "NomenclatureMgr.localNomenclatureHided");
+
+	connectBoolProperty(ui->hidePlanetNomenclatureCheckBox, "NomenclatureMgr.flagHideLocalNomenclature");
+	connectBoolProperty(ui->showTerminatorNomenclatureOnlyCheckBox, "NomenclatureMgr.flagShowTerminatorZoneOnly");
+	connectIntProperty(ui->terminatorMinAltSpinbox, "NomenclatureMgr.terminatorMinAltitude");
+	connectIntProperty(ui->terminatorMaxAltSpinbox, "NomenclatureMgr.terminatorMaxAltitude");
 	connectBoolProperty(ui->showSpecialNomenclatureOnlyCheckBox, "NomenclatureMgr.specialNomenclatureOnlyDisplayed");
 	StelModule* mnmgr = StelApp::getInstance().getModule("NomenclatureMgr");
-	bool state = mnmgr->property("nomenclatureDisplayed").toBool();
-	ui->hidePlanetNomenclatureCheckBox->setEnabled(state);
-	connect(mnmgr,SIGNAL(nomenclatureDisplayedChanged(bool)),ui->hidePlanetNomenclatureCheckBox, SLOT(setEnabled(bool)));
-	ui->showSpecialNomenclatureOnlyCheckBox->setEnabled(state);
-	connect(mnmgr,SIGNAL(nomenclatureDisplayedChanged(bool)),ui->showSpecialNomenclatureOnlyCheckBox, SLOT(setEnabled(bool)));
+	populateNomenclatureControls(mnmgr->property("flagShowNomenclature").toBool());
+	connect(mnmgr, SIGNAL(flagShowNomenclatureChanged(bool)), this, SLOT(populateNomenclatureControls(bool)));
 
 	populatePlanetMagnitudeAlgorithmsList();
 	int idx = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::getApparentMagnitudeAlgorithm(), Qt::UserRole, Qt::MatchCaseSensitive);
@@ -492,7 +493,7 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->viewportOffsetSpinBox, "StelMovementMgr.viewportVerticalOffsetTarget");
 	connectDoubleProperty(ui->userMaxFovSpinBox, "StelMovementMgr.userMaxFov");
 
-	// Starlore
+	// Sky Culture
 	connect(ui->useAsDefaultSkyCultureCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentCultureAsDefault()));
 	connect(&StelApp::getInstance().getSkyCultureMgr(), SIGNAL(defaultSkyCultureChanged(QString)),this,SLOT(updateDefaultSkyCulture()));
 	updateDefaultSkyCulture();
@@ -560,6 +561,16 @@ void ViewDialog::populateTrailsControls(bool flag)
 	ui->planetIsolatedTrailsCheckBox->setEnabled(flag);
 	ui->planetIsolatedTrailsSpinBox->setEnabled(flag);
 	ui->planetTrailsThicknessSpinBox->setEnabled(flag);
+}
+
+void ViewDialog::populateNomenclatureControls(bool flag)
+{
+	ui->hidePlanetNomenclatureCheckBox->setEnabled(flag);
+	ui->showSpecialNomenclatureOnlyCheckBox->setEnabled(flag);
+	ui->showTerminatorNomenclatureOnlyCheckBox->setEnabled(flag);
+	ui->terminatorMinAltSpinbox->setEnabled(flag);
+	ui->terminatorMaxAltSpinbox->setEnabled(flag);
+	ui->labelTerminator->setEnabled(flag);
 }
 
 // Heuristic function to decide in which group to put a survey.

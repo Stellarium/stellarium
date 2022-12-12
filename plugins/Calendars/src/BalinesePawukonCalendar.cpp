@@ -21,6 +21,7 @@
 #include "BalinesePawukonCalendar.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelTranslator.hpp"
 
 
 BalinesePawukonCalendar::BalinesePawukonCalendar(double jd): Calendar(jd)
@@ -82,32 +83,8 @@ QString BalinesePawukonCalendar::getFormattedDateString() const
 	for (int i=1; i<=10; i++)
 	{
 		str.append(QString("%1:%2 (%3) ").arg(QString::number(i), QString::number(parts.at(i-1)), dateStrings.at(i-1)));
-	}
-	return str;
-}
-
-// get a formatted string for the 5 first components of a date.
-QString BalinesePawukonCalendar::getFormattedDateString1to5() const
-{
-	QStringList dateStrings=getDateStrings();
-	QString str;
-	str.append(dateStrings.at(0)); // "Luang" or nothing.
-	if (str.length()>0) str.append(" ");
-	for (int i=2; i<=5; i++)
-	{
-		str.append(QString("%1:%2 (%3) ").arg(QString::number(i), QString::number(parts.at(i-1)), dateStrings.at(i-1)));
-	}
-	return str;
-}
-
-// get a formatted string for the 5 second components of a date.
-QString BalinesePawukonCalendar::getFormattedDateString6to10() const
-{
-	QStringList dateStrings=getDateStrings();
-	QString str;
-	for (int i=6; i<=10; i++)
-	{
-		str.append(QString("%1:%2 (%3) ").arg(QString::number(i), QString::number(parts.at(i-1)), dateStrings.at(i-1)));
+		if (i==5)
+			str.append("<br/>");
 	}
 	return str;
 }

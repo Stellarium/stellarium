@@ -407,6 +407,9 @@ StelProjectorP StelCore::getProjection(StelProjector::ModelViewTranformP modelVi
 		case ProjectionCylinder:
 			prj = StelProjectorP(new StelProjectorCylinder(modelViewTransform));
 			break;
+		case ProjectionCylinderFill:
+			prj = StelProjectorP(new StelProjectorCylinderFill(modelViewTransform));
+			break;
 		case ProjectionMercator:
 			prj = StelProjectorP(new StelProjectorMercator(modelViewTransform));
 			break;
@@ -479,6 +482,12 @@ void StelCore::windowHasBeenResized(qreal x, qreal y, qreal width, qreal height)
 	currentProjectorParams.viewportXywh.set(qRound(x), qRound(y), qRound(width), qRound(height));
 	currentProjectorParams.viewportCenter.set(x+(0.5+currentProjectorParams.viewportCenterOffset.v[0])*width, y+(0.5+currentProjectorParams.viewportCenterOffset.v[1])*height);
 	currentProjectorParams.viewportFovDiameter = qMin(width,height);
+
+	if (currentProjectionType==ProjectionType::ProjectionCylinderFill)
+	{
+		currentProjectorParams.widthStretch=0.5*width/height;
+		currentProjectorParams.viewportFovDiameter = height;
+	}
 }
 
 /*************************************************************************
@@ -544,8 +553,27 @@ void StelCore::setCurrentProjectionType(ProjectionType type)
 {
 	if(type!=currentProjectionType)
 	{
+		QSettings* conf = StelApp::getInstance().getSettings();
+
 		currentProjectionType=type;
 		updateMaximumFov();
+		if (currentProjectionType==ProjectionType::ProjectionCylinderFill)
+		{
+			// Save whatever stretch is present into config.ini. This value is saved just temporarily until switching back to another projection and will not be loaded on startup.
+			// (To configure a stretch at startup, use startup.ssc script.)
+			conf->setValue("projection/width_stretch", currentProjectorParams.widthStretch);
+			currentProjectorParams.fov=180.f;
+			currentProjectorParams.widthStretch=0.5*currentProjectorParams.viewportXywh[2]/currentProjectorParams.viewportXywh[3];
+			currentProjectorParams.viewportFovDiameter = currentProjectorParams.viewportXywh[3];
+			Q_ASSERT(movementMgr);
+			movementMgr->setViewportVerticalOffsetTarget(0.);
+			movementMgr->zoomTo(180., 0.5);
+		}
+		else
+		{
+			// reset to what is stored in config.ini
+			currentProjectorParams.widthStretch=conf->value("projection/width_stretch", 1.0).toDouble();
+		}
 
 		emit currentProjectionTypeChanged(type);
 		emit currentProjectionTypeKeyChanged(getCurrentProjectionTypeKey());
@@ -2954,5 +2982,5 @@ void StelCore::setAberrationUniforms(QOpenGLShaderProgram& program) const
 	{
 		velocity = Vec3d(0,0,0);
 	}
-	program.setUniformValue("STELCORE_currentPlanetHeliocentricEclipticVelocity", velocity.toQVector3D());
+	program.setUniformValue("STELCORE_currentPlanetHeliocentricEclipticVelocity", velocity.toQVector());
 }

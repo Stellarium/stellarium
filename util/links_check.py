@@ -54,7 +54,7 @@ for root, dirnames, filenames in os.walk(base):
 
 print "Got %d files" % len(files)
 
-# Retreive all the http links.
+# Retrieve all the http links.
 for f in files:
     soup = BeautifulSoup(open(f))
     for link in soup.findAll('a'):

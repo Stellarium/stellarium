@@ -160,7 +160,7 @@ QString Pulsar::getNameI18n(void) const
 	QString name = getEnglishName();
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	if (!pulsarName.isEmpty())
-		name = trans.qtranslate(pulsarName);
+		name = trans.qtranslate(pulsarName, "pulsar");
 
 	return name;
 }

@@ -45,6 +45,7 @@
 #include "../IslamicCalendar.hpp"
 #include "../HebrewCalendar.hpp"
 #include "../PersianArithmeticCalendar.hpp"
+#include "../BahaiArithmeticCalendar.hpp"
 #include "../OldHinduSolarCalendar.hpp"
 #include "../OldHinduLuniSolarCalendar.hpp"
 #include "../NewHinduCalendar.hpp"
@@ -1472,6 +1473,77 @@ void TestCalendars::testPersian()
 	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 728714)==QVector<int>({ 1374, 12,  6}));
 	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 744313)==QVector<int>({ 1417,  8, 19}));
 	QVERIFY(PersianArithmeticCalendar::persianArithmeticFromFixed( 764652)==QVector<int>({ 1473,  4, 28}));
+}
+
+void TestCalendars::testBahai()
+{
+	QVERIFY(-214193==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({ -6,  6,  3,  7, 12}));
+	QVERIFY( -61387==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({ -5,  9,  3, 14, 13}));
+	QVERIFY(  25469==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({ -4,  2, 13, 10, 17}));
+	QVERIFY(  49217==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({ -4,  6,  2, 11,  6}));
+	QVERIFY( 171307==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({ -3,  4, 13, 16,  9}));
+	QVERIFY( 210155==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({ -3, 10,  6,  4,  4}));
+	QVERIFY( 253427==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({ -3, 16, 10, 13,  7}));
+	QVERIFY( 369740==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({ -2, 14,  6,  2, 17}));
+	QVERIFY( 400085==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({ -2, 18, 13,  4,  8}));
+	QVERIFY( 434355==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({ -1,  4, 12,  1,  3}));
+	QVERIFY( 452605==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({ -1,  7,  4, 19,  9}));
+	QVERIFY( 470160==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({ -1,  9, 15,  1, 13}));
+	QVERIFY( 473837==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({ -1, 10,  6,  2, 19}));
+	QVERIFY( 507850==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({ -1, 15,  4,  5,  8}));
+	QVERIFY( 524156==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({ -1, 17, 10, 17, 16}));
+	QVERIFY( 544676==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({  0,  1, 10,  2,  1}));
+	QVERIFY( 567118==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({  0,  4, 14, 10, 12}));
+	QVERIFY( 569477==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({  0,  5,  1, 19,  4}));
+	QVERIFY( 601716==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({  0,  9, 14,  5,  6}));
+	QVERIFY( 613424==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({  0, 11,  8,  6,  7}));
+	QVERIFY( 626596==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({  0, 13,  6,  7, 12}));
+	QVERIFY( 645554==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({  0, 16,  1,  5, 15}));
+	QVERIFY( 664224==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({  0, 18, 14,  8,  2}));
+	QVERIFY( 671401==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({  0, 19, 15,  1,  7}));
+	QVERIFY( 694799==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({  1,  4,  3,  2, 11}));
+	QVERIFY( 704424==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({  1,  5, 10,  9,  6}));
+	QVERIFY( 708842==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({  1,  6,  3, 11,  3}));
+	QVERIFY( 709409==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({  1,  6,  5,  2, 11}));
+	QVERIFY( 709580==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({  1,  6,  5, 11, 11}));
+	QVERIFY( 727274==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({  1,  8, 15, 19, 16}));
+	QVERIFY( 728714==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({  1,  8, 19, 18, 19}));
+	QVERIFY( 744313==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({  1, 11,  5, 13,  7}));
+	QVERIFY( 764652==BahaiArithmeticCalendar::fixedFromBahaiArithmetic({  1, 14,  4,  7,  6}));
+
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed(-214193)==QVector<int>({ -6,  6,  3,  7, 12}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( -61387)==QVector<int>({ -5,  9,  3, 14, 13}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed(  25469)==QVector<int>({ -4,  2, 13, 10, 17}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed(  49217)==QVector<int>({ -4,  6,  2, 11,  6}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 171307)==QVector<int>({ -3,  4, 13, 16,  9}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 210155)==QVector<int>({ -3, 10,  6,  4,  4}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 253427)==QVector<int>({ -3, 16, 10, 13,  7}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 369740)==QVector<int>({ -2, 14,  6,  2, 17}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 400085)==QVector<int>({ -2, 18, 13,  4,  8}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 434355)==QVector<int>({ -1,  4, 12,  1,  3}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 452605)==QVector<int>({ -1,  7,  4, 19,  9}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 470160)==QVector<int>({ -1,  9, 15,  1, 13}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 473837)==QVector<int>({ -1, 10,  6,  2, 19}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 507850)==QVector<int>({ -1, 15,  4,  5,  8}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 524156)==QVector<int>({ -1, 17, 10, 17, 16}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 544676)==QVector<int>({  0,  1, 10,  2,  1}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 567118)==QVector<int>({  0,  4, 14, 10, 12}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 569477)==QVector<int>({  0,  5,  1, 19,  4}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 601716)==QVector<int>({  0,  9, 14,  5,  6}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 613424)==QVector<int>({  0, 11,  8,  6,  7}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 626596)==QVector<int>({  0, 13,  6,  7, 12}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 645554)==QVector<int>({  0, 16,  1,  5, 15}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 664224)==QVector<int>({  0, 18, 14,  8,  2}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 671401)==QVector<int>({  0, 19, 15,  1,  7}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 694799)==QVector<int>({  1,  4,  3,  2, 11}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 704424)==QVector<int>({  1,  5, 10,  9,  6}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 708842)==QVector<int>({  1,  6,  3, 11,  3}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 709409)==QVector<int>({  1,  6,  5,  2, 11}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 709580)==QVector<int>({  1,  6,  5, 11, 11}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 727274)==QVector<int>({  1,  8, 15, 19, 16}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 728714)==QVector<int>({  1,  8, 19, 18, 19}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 744313)==QVector<int>({  1, 11,  5, 13,  7}));
+	QVERIFY(BahaiArithmeticCalendar::bahaiArithmeticFromFixed( 764652)==QVector<int>({  1, 14,  4,  7,  6}));
 }
 
 void TestCalendars::testBalinesePawukon()

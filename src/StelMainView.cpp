@@ -77,6 +77,10 @@ Q_LOGGING_CATEGORY(mainview, "stel.MainView")
 
 #include <clocale>
 
+#ifndef GL_MAX_TEXTURE_MAX_ANISOTROPY
+# define GL_MAX_TEXTURE_MAX_ANISOTROPY 0x84FF
+#endif
+
 // Initialize static variables
 StelMainView* StelMainView::singleton = Q_NULLPTR;
 
@@ -784,6 +788,10 @@ QSurfaceFormat StelMainView::getDesiredGLFormat(QSettings* configuration)
 			qDebug() << "Setting OpenGL Compatibility profile from command line...";
 			fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
 		}
+		// FIXME: temporary hook for Qt5-based macOS bundles
+		#if defined(Q_OS_MACOS) && (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+		fmt.setProfile(QSurfaceFormat::CompatibilityProfile);
+		#endif
 	}
 
 	// Note: this only works if --mesa-mode was given on the command line. Auto-switch to Mesa or the driver name apparently cannot be detected at this early stage.
@@ -864,6 +872,32 @@ void StelMainView::init()
 	glInfo.isGLES = format.renderableType()==QSurfaceFormat::OpenGLES;
 	qDebug().nospace() << "Luminance textures are " << (glInfo.supportsLuminanceTextures ? "" : "not ") << "supported";
 	glInfo.isCoreProfile = format.profile() == QSurfaceFormat::CoreProfile;
+	if(format.majorVersion() * 1000 + format.minorVersion() >= 4006 ||
+	   glInfo.mainContext->hasExtension("GL_EXT_texture_filter_anisotropic") ||
+	   glInfo.mainContext->hasExtension("GL_ARB_texture_filter_anisotropic"))
+	{
+		StelOpenGL::clearGLErrors();
+		auto& gl = *QOpenGLContext::currentContext()->functions();
+		gl.glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY, &glInfo.maxAnisotropy);
+		const auto error = gl.glGetError();
+		if(error != GL_NO_ERROR)
+		{
+			qDebug() << "Failed to get maximum texture anisotropy:" << StelOpenGL::getGLErrorText(error);
+		}
+		else if(glInfo.maxAnisotropy > 0)
+		{
+			qDebug() << "Maximum texture anisotropy:" << glInfo.maxAnisotropy;
+		}
+		else
+		{
+			qDebug() << "Maximum texture anisotropy is not positive:" << glInfo.maxAnisotropy;
+			glInfo.maxAnisotropy = 0;
+		}
+	}
+	else
+	{
+		qDebug() << "Anisotropic filtering is not supported!";
+	}
 
 	gui = new StelGui();
 

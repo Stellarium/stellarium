@@ -1555,7 +1555,7 @@ void TestConversions::testVec3fToQVector3D()
 		float v1	= data.takeFirst().toFloat();
 		float v2	= data.takeFirst().toFloat();
 		float v3	= data.takeFirst().toFloat();
-		QVector3D vec	= Vec3f(v1, v2, v3).toQVector3D();
+		QVector3D vec	= Vec3f(v1, v2, v3).toQVector();
 		QVector3D v3d	= QVector3D(v1, v2, v3);
 
 		QVERIFY(vec==v3d);
@@ -1576,7 +1576,7 @@ void TestConversions::testVec3dToQVector3D()
 		double v1	= data.takeFirst().toDouble();
 		double v2	= data.takeFirst().toDouble();
 		double v3	= data.takeFirst().toDouble();
-		QVector3D vec	= Vec3d(v1, v2, v3).toQVector3D();
+		QVector3D vec	= Vec3d(v1, v2, v3).toQVector();
 		QVector3D v3d	= QVector3D(v1, v2, v3);
 
 		QVERIFY(vec==v3d);

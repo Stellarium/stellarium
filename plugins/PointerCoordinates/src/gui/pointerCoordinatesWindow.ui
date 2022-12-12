@@ -213,6 +213,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="checkBoxElongation">
+            <property name="text">
+             <string>Show elongation from the Sun in ecliptic longitude</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
              <widget class="QLabel" name="labelCoordinateSystem">
@@ -238,6 +245,16 @@
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QToolButton" name="textColorButton">
+              <property name="toolTip">
+               <string>The color of the screen text</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
             <item>
              <widget class="QLabel" name="labelFontSize">
               <property name="text">

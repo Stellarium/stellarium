@@ -42,7 +42,7 @@ itself.  See @ref scripting_api for more details.
 
 @section scripting_api Scripting API
 
-Interation with Stellarium-specific functionality is done by calling the
+Interaction with Stellarium-specific functionality is done by calling the
 <b>public slots</b> of instances of a group of Stellarium's core classes.
 
 - The public slots in the class StelMainScriptAPI are available via an object
@@ -124,7 +124,7 @@ ENABLE_SCRIPT_CONSOLE=1 or =0 option to cmake.
 
 The best source of examples is the \b scripts sub-directory of the main Stellarium 
 source tree.  This directory contains a sub-directory called \b tests which are not
-installed with Stellarium, but are nontheless useful sources of example code for
+installed with Stellarium, but are nonetheless useful sources of example code for
 various scripting features. (The directory can be <a href="https://github.com/Stellarium/stellarium/tree/master/scripts">browsed online</a>. Script files end in <tt>.ssc</tt> and <tt>.inc</tt>. Download links
 are to the right.)
 

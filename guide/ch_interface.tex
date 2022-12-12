@@ -161,7 +161,9 @@ entities to locations for identification purposes. In consequence to much
 unnecessary and unfriendly discussion we decided to completely drop the 
 petty-minded assignment of political country names to locations in favour 
 of geographical regions. There is only one known habitable planet, one 
-humankind, and one sky. Stellarium users should overcome borders!
+humankind, and one sky. Stellarium users should overcome borders! 
+
+For ``region'' classification of sky cultures we use same regions (see \ref{sec:skycultures:region}) and we follow UN M49 geoscheme\footnote{https://unstats.un.org/unsd/methodology/m49/} with extensions for other planets.
 
 \section{The Configuration Window}
 \label{sec:gui:configuration}
@@ -646,7 +648,10 @@ for changing the general appearance of the view of Solar system objects. Some hi
 \item[Show planetary nomenclature] displays positions and names of
   surface features officially named by the IAU (See
   Appendix~\ref{ch:Nomenclature}). When the sun is below the horizon
-  at the location of the feature, the label is attenuated.
+  at the location of the feature, the label is attenuated. Features like
+  craters are best visible when they are illuminated by a low sun. 
+  You can therefore limit the display\newFeature{1.2} to items along the
+  \indexterm{terminator} (the border between light and dark on the surface).
 \item[GRS details\ldots]: The Great Red Spot (GRS) is slowly
   drifting along Jupiter's System~II coordinate system. This button 
   opens a new dialog in which you can adjust the longitude (Jupiter system~II) 
@@ -666,7 +671,8 @@ for changing the general appearance of the view of Solar system objects. Some hi
 \item[Earth shadow enlargement after Danjon] \newFeature{0.21.0}
   Earth's shadow is enlarged by the atmosphere. You can select whether
   the 2\% enlargement used by the Astronomical Almanac should be
-  applied (default), or the formulation of Danjon.
+  applied (default), or the formulation of \name{Danjon}
+  (see section~\ref{sec:Eclipses:lunar}).
 \end{description}
 
 % Put these 3 on 1 page.

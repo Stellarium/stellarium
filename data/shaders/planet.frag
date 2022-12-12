@@ -352,6 +352,14 @@ void main()
     //litColor.xyz = clamp( litColor.xyz + vec3(outgas), 0.0, 1.0);
 
     lowp vec4 texColor = texture2D(tex, texc);
+#ifdef IS_MOON
+    // Undo the extraneous gamma encoded in the texture.
+    // FIXME: ideally, we want all the calculations to be done in linear scale,
+    // and then *in the end* apply the exact sRGB transfer function. Currently
+    // though, we don't do actual physically-correct simulation here, so we
+    // just apply the approximate sRGB gamma.
+    texColor = pow(texColor, vec4(2.8/2.2));
+#endif
 
     mediump vec4 finalColor = texColor;
 	// apply (currently only Martian) pole caps. texc.t=0 at south pole, 1 at north pole. 

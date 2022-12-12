@@ -141,7 +141,7 @@ Use C++ replacement for C functions and %Qt replacements for C++ functions/STL w
  - Use <a href="http://doc.qt.io/qt-5/qstring.html">QString</a>
  instead of @c std::string or <tt>char *</tt>
  - Use <a href="http://doc.qt.io/qt-5/qiodevice.html">QIODevice</a>
- instead of C file managment with @c fopen()
+ instead of C file management with @c fopen()
  - Pass objects as references when needed instead of using pointers.
  - Include standard headers the C++ way, it is more portable:
  @code
@@ -157,7 +157,7 @@ Use C++ replacement for C functions and %Qt replacements for C++ functions/STL w
 #define RADIUS 12 // Bad 
 static const int RADIUS = 12; // Good
  @endcode
- - Use stdc++ math functions instead of C ones. There are more portable and are also overrided for float, thus may be faster.
+ - Use stdc++ math functions instead of C ones. They're more portable and are also overridden for float, thus may be faster.
  @code
 double cosLat = cos(lat);     // Bad 
 double cosLat = std::cos(lat); // Good
@@ -181,7 +181,7 @@ A string literal can be marked for translation in with three different macros,
 
 Several guidelines:
  - Translatable text in sources or data files should be written in English, encoded in ASCII or UTF-8 if needed.
- - Translatable strings should be modified only if really necessary. Any modification to one of them means that all the translators for all the langages will have to re-translate the new string.
+ - Translatable strings should be modified only if really necessary. Any modification to one of them means that all the translators for all the languages will have to re-translate the new string.
  This also means that new strings should be chosen carefully, to avoid the need to modify them later.
  - Do not concatenate strings, use @c QString::arg() instead. Concatenated strings are very hard (or even impossible) to translate.
 @code
@@ -193,7 +193,7 @@ text = q_("Distance: %1AU").arg(distance);          // Good
 QString myTranslatedText(q_("Distance of the planet :")); // Bad
 QString myTranslatedText(q_("Distance of the planet:"));  // Good
 @endcode
- - In general no translated text should be output on the console because there are problems when string and wstring are output on the same console. This means that you should never use wcout, wcerr or wprintf(). Console output should be used for informations, errors and warnings which are not required by the user in nominal use.
+ - In general no translated text should be output on the console because there are problems when string and wstring are output on the same console. This means that you should never use wcout, wcerr or wprintf(). Console output should be used for information, errors and warnings which are not required by the user in nominal use.
  - Errors and warnings should be output in the stderr file, not stdout. [OBSOLETE? We use qDebug() and qWarning() now.]
 @code
 std::cout << "Error while opening file " << qPrintable(myFileName) << "." << std::endl; // Bad 

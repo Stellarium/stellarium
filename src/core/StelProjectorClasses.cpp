@@ -57,7 +57,7 @@ bool StelProjectorPerspective::forward(Vec3f &v) const
 
 bool StelProjectorPerspective::backward(Vec3d &v) const
 {
-	v[0] /= static_cast<double>(widthStretch);
+	v[0] /= widthStretch;
 	v[2] = std::sqrt(1.0/(1.0+v[0]*v[0]+v[1]*v[1]));
 	v[0] *= v[2];
 	v[1] *= v[2];
@@ -158,7 +158,7 @@ bool StelProjectorEqualArea::forward(Vec3f &v) const
 
 bool StelProjectorEqualArea::backward(Vec3d &v) const
 {
-	v[0] /= static_cast<double>(widthStretch);
+	v[0] /= widthStretch;
 	// FIXME: for high FoV, return false but don't cause crash with Mouse Pointer Coordinates.
 	const double dq = v[0]*v[0] + v[1]*v[1];
 	double l = 1.0 - 0.25*dq;
@@ -187,11 +187,6 @@ float StelProjectorEqualArea::fovToViewScalingFactor(float fov) const
 float StelProjectorEqualArea::viewScalingFactorToFov(float vsf) const
 {
 	return 2.f * std::asin(0.5f * vsf);
-}
-
-float StelProjectorEqualArea::deltaZoom(float fov) const
-{
-	return fov;
 }
 
 QByteArray StelProjectorEqualArea::getForwardTransformShader() const
@@ -272,7 +267,7 @@ bool StelProjectorStereographic::forward(Vec3f &v) const
 
 bool StelProjectorStereographic::backward(Vec3d &v) const
 {
-	v[0] /= static_cast<double>(widthStretch);
+	v[0] /= widthStretch;
 	const double lqq = 0.25*(v[0]*v[0] + v[1]*v[1]);
 	v[2] = lqq - 1.0;
 	v *= (1.0 / (lqq + 1.0));
@@ -378,28 +373,13 @@ bool StelProjectorFisheye::forward(Vec3f &v) const
 
 bool StelProjectorFisheye::backward(Vec3d &v) const
 {
-	v[0] /= static_cast<double>(widthStretch);
+	v[0] /= widthStretch;
 	const double a = std::sqrt(v[0]*v[0]+v[1]*v[1]);
 	const double f = (a > 0.0) ? (std::sin(a) / a) : 1.0;
 	v[0] *= f;
 	v[1] *= f;
 	v[2] = -std::cos(a);
 	return (a < M_PI);
-}
-
-float StelProjectorFisheye::fovToViewScalingFactor(float fov) const
-{
-	return fov;
-}
-
-float StelProjectorFisheye::viewScalingFactorToFov(float vsf) const
-{
-	return vsf;
-}
-
-float StelProjectorFisheye::deltaZoom(float fov) const
-{
-	return fov;
 }
 
 QByteArray StelProjectorFisheye::getForwardTransformShader() const
@@ -476,7 +456,7 @@ bool StelProjectorHammer::forward(Vec3f &v) const
 	const float alpha = std::atan2(v[0],-v[2]);
 	const float cosDelta = std::sqrt(1.f-v[1]*v[1]/(r*r));
 	float z = std::sqrt(1.f+cosDelta*cosf(alpha/2.f));
-	v[0] = 2.f*static_cast<float>(M_SQRT2)*cosDelta*std::sin(alpha/2.f)/z * widthStretch;
+	v[0] = 2.f*static_cast<float>(M_SQRT2)*cosDelta*std::sin(alpha*0.5f)/z * static_cast<float>(widthStretch);
 	v[1] = static_cast<float>(M_SQRT2)*v[1]/r/z;
 	v[2] = r;
 	return true;
@@ -484,7 +464,7 @@ bool StelProjectorHammer::forward(Vec3f &v) const
 
 bool StelProjectorHammer::backward(Vec3d &v) const
 {
-	v[0] /= static_cast<double>(widthStretch);
+	v[0] /= widthStretch;
 	const double zsq = 1.-0.25*0.25*v[0]*v[0]-0.5*0.5*v[1]*v[1];
 	const double z = zsq<0. ? 0. : std::sqrt(zsq);
 	const bool ret = 0.25*v[0]*v[0]+v[1]*v[1]<2.0; // This is stolen from glunatic
@@ -495,21 +475,6 @@ bool StelProjectorHammer::backward(Vec3d &v) const
 	v[0] = cd * std::sin(alpha);
 	v[1] = v[1]*z;
 	return ret;
-}
-
-float StelProjectorHammer::fovToViewScalingFactor(float fov) const
-{
-	return fov;
-}
-
-float StelProjectorHammer::viewScalingFactorToFov(float vsf) const
-{
-	return vsf;
-}
-
-float StelProjectorHammer::deltaZoom(float fov) const
-{
-	return fov;
 }
 
 QByteArray StelProjectorHammer::getForwardTransformShader() const
@@ -585,7 +550,7 @@ bool StelProjectorCylinder::forward(Vec3f &v) const
 
 bool StelProjectorCylinder::backward(Vec3d &v) const
 {
-	v[0] /= static_cast<double>(widthStretch);
+	v[0] /= widthStretch;
 	const bool rval = v[1]<M_PI_2 && v[1]>-M_PI_2 && v[0]>-M_PI && v[0]<M_PI;
 	const double cd = std::cos(v[1]);
 	const double alpha=v[0];
@@ -593,21 +558,6 @@ bool StelProjectorCylinder::backward(Vec3d &v) const
 	v[0] = cd * std::sin(alpha);
 	v[1] = std::sin(v[1]);
 	return rval;
-}
-
-float StelProjectorCylinder::fovToViewScalingFactor(float fov) const
-{
-	return fov;
-}
-
-float StelProjectorCylinder::viewScalingFactorToFov(float vsf) const
-{
-	return vsf;
-}
-
-float StelProjectorCylinder::deltaZoom(float fov) const
-{
-	return fov;
 }
 
 QByteArray StelProjectorCylinder::getForwardTransformShader() const
@@ -653,6 +603,18 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 )";
 }
 
+
+QString StelProjectorCylinderFill::getNameI18() const
+{
+	return q_("Equirectangular");
+}
+
+QString StelProjectorCylinderFill::getDescriptionI18() const
+{
+	return q_("Another name of this variant of the Cylindrical projection mode is <i>plate carr&eacute;e</i> (French, for 'flat square'). With this projection all parallels are equally spaced. "
+		  "The view is stretched to always show a 360x180° field of view in a fixed view direction. It is provided for specialized setups.");
+}
+
 QString StelProjectorMercator::getNameI18() const
 {
 	return q_("Mercator");
@@ -674,10 +636,9 @@ bool StelProjectorMercator::forward(Vec3f &v) const
 	return rval;
 }
 
-
 bool StelProjectorMercator::backward(Vec3d &v) const
 {
-	v[0] /= static_cast<double>(widthStretch);
+	v[0] /= widthStretch;
 	const bool rval = v[0]>-M_PI && v[0]<M_PI;
 	const double E = std::exp(v[1]);
 	const double h = E*E;
@@ -688,21 +649,6 @@ bool StelProjectorMercator::backward(Vec3d &v) const
 	v[0] = cos_delta * std::sin(v[0]);
 	v[1] = sin_delta;
 	return rval;
-}
-
-float StelProjectorMercator::fovToViewScalingFactor(float fov) const
-{
-	return fov;
-}
-
-float StelProjectorMercator::viewScalingFactorToFov(float vsf) const
-{
-	return vsf;
-}
-
-float StelProjectorMercator::deltaZoom(float fov) const
-{
-	return fov;
 }
 
 QByteArray StelProjectorMercator::getForwardTransformShader() const
@@ -773,7 +719,7 @@ bool StelProjectorOrthographic::forward(Vec3f &v) const
 
 bool StelProjectorOrthographic::backward(Vec3d &v) const
 {
-	v[0] /= static_cast<double>(widthStretch);
+	v[0] /= widthStretch;
 	const double dq = v[0]*v[0] + v[1]*v[1];
 	double h = 1.0 - dq;
 	if (h < 0) {
@@ -795,11 +741,6 @@ float StelProjectorOrthographic::fovToViewScalingFactor(float fov) const
 float StelProjectorOrthographic::viewScalingFactorToFov(float vsf) const
 {
 	return std::asin(vsf);
-}
-
-float StelProjectorOrthographic::deltaZoom(float fov) const
-{
-	return fov;
 }
 
 QByteArray StelProjectorOrthographic::getForwardTransformShader() const
@@ -871,7 +812,7 @@ bool StelProjectorSinusoidal::forward(Vec3f &v) const
 
 bool StelProjectorSinusoidal::backward(Vec3d &v) const
 {
-	v[0] /= static_cast<double>(widthStretch);
+	v[0] /= widthStretch;
 	const bool rval = v[1]<M_PI_2 && v[1]>-M_PI_2 && v[0]>-M_PI && v[0]<M_PI;
 	const double cd = std::cos(v[1]);
 	const double pcd = v[0]/cd;
@@ -966,7 +907,7 @@ bool StelProjectorMiller::forward(Vec3f &v) const
 
 bool StelProjectorMiller::backward(Vec3d &v) const
 {
-	v[0] /= static_cast<double>(widthStretch);
+	v[0] /= widthStretch;
 	const double yMax=1.25*asinh(tan(M_PI*2.0/5.0));
 	const bool rval = v[1]<yMax && v[1]>-yMax && v[0]>-M_PI && v[0]<M_PI;
 	const double lat = 1.25*atan(sinh(0.8*v[1]));

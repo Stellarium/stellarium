@@ -62,7 +62,7 @@ include the following:
 
 - **Documentation**: if you are adding new functionality, be sure to include a 
 description in the main documentation (in ``docs/``) or doxygen description/comments 
-for code in the ``*.hpp`` files (commenting the code may be extremelly helpful!).
+for code in the ``*.hpp`` files (commenting the code may be extremely helpful!).
 
 Thanks!
 

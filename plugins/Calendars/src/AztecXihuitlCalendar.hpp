@@ -33,25 +33,25 @@ class AztecXihuitlCalendar : public Calendar
 public:
 	AztecXihuitlCalendar(double jd);
 
-	virtual ~AztecXihuitlCalendar() Q_DECL_OVERRIDE {}
+	~AztecXihuitlCalendar() override {}
 
 public slots:
-	virtual void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 
 	//! Set a calendar date from the Julian day number
-	virtual void setJD(double JD) Q_DECL_OVERRIDE;
+	void setJD(double JD) override;
 
 	//! set date from a vector of calendar date elements sorted from the largest to the smallest.
 	//! month[1..19]-day[1..20]
 	//! We face a problem as the year is not counted. We can only find the date before current JD which matches the parts.
-	virtual void setDate(QVector<int> parts) Q_DECL_OVERRIDE;
+	void setDate(QVector<int> parts) override;
 
 	//! get a stringlist of calendar date elements sorted from the largest to the smallest.
 	//! monthName-day[1..20]
-	virtual QStringList getDateStrings() const Q_DECL_OVERRIDE;
+	QStringList getDateStrings() const override;
 
 	//! get a formatted complete string for a date
-	virtual QString getFormattedDateString() const Q_DECL_OVERRIDE;
+	QString getFormattedDateString() const override;
 
 	//! find number in sequence from a xihuitl date of {month[1...19], day[1...20]}
 	inline static int aztecXihuitlOrdinal(QVector<int> xihuitl) {return (xihuitl.at(0)-1)*20+xihuitl.at(1)-1;}

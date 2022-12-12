@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-11-20 13:47+0700\n"
+"POT-Creation-Date: 2022-12-10 23:21+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -71,7 +71,7 @@ msgstr "астеризм"
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
 #: src/core/StelApp.cpp:648 src/core/StelCore.cpp:291
 #: src/core/StelSkyLayerMgr.cpp:85 src/core/StelSkyLayerMgr.cpp:86
-#: src/StelMainView.cpp:892
+#: src/StelMainView.cpp:896
 msgid "Display Options"
 msgstr "Параметри показу"
 
@@ -314,7 +314,7 @@ msgstr "АСТ"
 
 #. TRANSLATORS: Center of the umbra
 #: src/core/modules/GridLinesMgr.cpp:1472
-#: plugins/Satellites/src/Satellites.cpp:2882
+#: plugins/Satellites/src/Satellites.cpp:2888
 msgid "C.U."
 msgstr "Ц.Т."
 
@@ -720,10 +720,10 @@ msgstr "Циклічна зміна у забрудненні світлом"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:88
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:196
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:120
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:455
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:215
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:183
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:187
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:182
 msgid "Author"
 msgstr "Автор"
@@ -830,7 +830,7 @@ msgstr "Діаметр"
 #: src/core/modules/Planet.cpp:1484 src/core/modules/Comet.cpp:157
 #: src/core/modules/Comet.cpp:167 src/gui/StelGuiItems.cpp:888
 #: src/gui/AstroCalcDialog.cpp:3133 src/gui/AstroCalcDialog.cpp:3648
-#: src/gui/AstroCalcDialog.cpp:9162 plugins/Satellites/src/Satellites.cpp:2882
+#: src/gui/AstroCalcDialog.cpp:9162 plugins/Satellites/src/Satellites.cpp:2888
 #: plugins/Satellites/src/Satellite.cpp:354
 #: plugins/Satellites/src/Satellite.cpp:397
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1151
@@ -2140,7 +2140,7 @@ msgid "Toggle DSO type filter"
 msgstr "Увімкнути або вимкнути фільтрування віддалених об’єктів за типом"
 
 #: src/core/modules/NebulaMgr.cpp:1444 src/gui/StelDialog.cpp:336
-#: src/StelMainView.cpp:988
+#: src/StelMainView.cpp:992
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:773
 msgid "Attention!"
 msgstr "Увага!"
@@ -2170,7 +2170,7 @@ msgstr "Настанови можна знайти у файлі журналу 
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=planet&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [Planet TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/planet.txt
-#: src/core/modules/Planet.cpp:126 plugins/Satellites/src/Satellites.cpp:3311
+#: src/core/modules/Planet.cpp:126 plugins/Satellites/src/Satellites.cpp:3317
 msgid "planet"
 msgstr "планета"
 
@@ -2336,6 +2336,7 @@ msgid "Illuminated"
 msgstr "Освітлено"
 
 #: src/core/modules/Planet.cpp:839
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:323
 msgid "Elong. in Ecl.Long."
 msgstr "Елонг. у екл. довг."
 
@@ -2554,7 +2555,7 @@ msgstr "Діаметр оболонки (оцінка)"
 msgid "Gas tail length (estimate)"
 msgstr "Довжина газового хвоста (оцінка)"
 
-#: src/core/modules/Comet.cpp:449 src/core/StelProjectorClasses.cpp:755
+#: src/core/modules/Comet.cpp:449 src/core/StelProjectorClasses.cpp:701
 msgid "Orthographic"
 msgstr "Ортографічна проєкція"
 
@@ -3236,13 +3237,13 @@ msgstr "Повернути горизонтально"
 msgid "Flip scene vertically"
 msgstr "Повернути вертикально"
 
-#: src/core/StelCore.cpp:2381
+#: src/core/StelCore.cpp:2409
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Виправлення вимкнено! Користуйтеся ним, лише якщо вам добре відомі наслідки "
 "ваших дій!"
 
-#: src/core/StelCore.cpp:2384
+#: src/core/StelCore.cpp:2412
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -3255,7 +3256,7 @@ msgstr ""
 "Айнштайна підтверджено на основі даних про сонячні затемнення, відомих з "
 "історії</em>). Докладніші відомості можна знайти %2тут%3."
 
-#: src/core/StelCore.cpp:2387
+#: src/core/StelCore.cpp:2415
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -3265,7 +3266,7 @@ msgstr ""
 "system of astronomical constants</em> (%1) (<em>Про систему астрономічних "
 "сталих</em>)."
 
-#: src/core/StelCore.cpp:2390
+#: src/core/StelCore.cpp:2418
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -3279,7 +3280,7 @@ msgstr ""
 "(<em>Астрономічні формули для обчислень</em>). Також цю формулу реалізовано "
 "у комп’ютерній програмі SunTracker Pro."
 
-#: src/core/StelCore.cpp:2394
+#: src/core/StelCore.cpp:2422
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
@@ -3290,7 +3291,7 @@ msgstr ""
 "у книзі <em>Canon of Solar Eclipses</em> (<em>Закони сонячних "
 "затемнень</em>), авторами якої є Mucke та Meeus (1983)."
 
-#: src/core/StelCore.cpp:2398
+#: src/core/StelCore.cpp:2426
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -3302,7 +3303,7 @@ msgstr ""
 "1649 р. н.е. Те саме співвідношення також неявно використано у таблицях "
 "Goldstine (1973)."
 
-#: src/core/StelCore.cpp:2402
+#: src/core/StelCore.cpp:2430
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -3314,7 +3315,7 @@ msgstr ""
 "observations</em> (%1) (<em>Прискорення Землі та Місяця на основі нещодавніх"
 " астрономічних спостережень</em>)."
 
-#: src/core/StelCore.cpp:2405
+#: src/core/StelCore.cpp:2433
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -3324,7 +3325,7 @@ msgstr ""
 "Astronomical Observations</em> (%1) (<em>Астрономічні спостереження до появи"
 " телескопів</em>)."
 
-#: src/core/StelCore.cpp:2408
+#: src/core/StelCore.cpp:2436
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -3338,7 +3339,7 @@ msgstr ""
 "in the period 1800-1975</em> (%1) як апроксимацію даних, опублікованих "
 "Brouwer (1952)."
 
-#: src/core/StelCore.cpp:2411
+#: src/core/StelCore.cpp:2439
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -3348,7 +3349,7 @@ msgstr ""
 " Programs and Tables from -4000 to +2800</em> (1986), а також у комп’ютерній"
 " програмі RedShift."
 
-#: src/core/StelCore.cpp:2414
+#: src/core/StelCore.cpp:2442
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3360,7 +3361,7 @@ msgstr ""
 "1980</em> (%1) (<em>Довготривалі зміни у обертанні Землі — від 700 р. до "
 "н.е. до 1980 р. н.е.</em>)."
 
-#: src/core/StelCore.cpp:2417
+#: src/core/StelCore.cpp:2445
 #, qt-format
 msgid ""
 "This algorithm was published by F. R. Stephenson and M. A. Houlden in the "
@@ -3371,7 +3372,7 @@ msgstr ""
 "<em>Atlas of Historical Eclipse Maps</em> (%1). Алгоритм використано у "
 "програмі-планетарії для персональних комп'ютерів Guide 7."
 
-#: src/core/StelCore.cpp:2420
+#: src/core/StelCore.cpp:2448
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -3381,7 +3382,7 @@ msgstr ""
 "Eclipses: 1986-2035</em> (1987) і <em>Fifty Year Canon of Lunar Eclipses: "
 "1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2423
+#: src/core/StelCore.cpp:2451
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -3390,7 +3391,7 @@ msgstr ""
 "Цю формулу було отримано K.M. Borkowski (%1) на основі аналізу записів щодо "
 "31 сонячного затемнення від 2137 р. до н.е. до 1715 р. н.е."
 
-#: src/core/StelCore.cpp:2426
+#: src/core/StelCore.cpp:2454
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -3403,7 +3404,7 @@ msgstr ""
 "1800-1988</em> (%1) як апроксимацію за даними, наведеними Stephenson і "
 "Morrison (1984)."
 
-#: src/core/StelCore.cpp:2429
+#: src/core/StelCore.cpp:2457
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -3413,7 +3414,7 @@ msgstr ""
 "версії надточної теорії місячного руху у період 2000-85 у праці <em>Lunar "
 "Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:2432
+#: src/core/StelCore.cpp:2460
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -3425,7 +3426,7 @@ msgstr ""
 "(%1) (<em>Довготривалі зміни у обертанні Землі — від 700 р. до н.е. до 1990 "
 "р. н.е.</em>)."
 
-#: src/core/StelCore.cpp:2435
+#: src/core/StelCore.cpp:2463
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -3435,7 +3436,7 @@ msgstr ""
 "Earth's Rotation</em> (%1) (<em>Історичні затемнення та обертання "
 "Землі</em>)."
 
-#: src/core/StelCore.cpp:2438
+#: src/core/StelCore.cpp:2466
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -3446,7 +3447,7 @@ msgstr ""
 "Chapront, Chapront-Touze та Francou (1997) для дат поза діапазоном "
 "1620–2000."
 
-#: src/core/StelCore.cpp:2441
+#: src/core/StelCore.cpp:2469
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -3456,7 +3457,7 @@ msgstr ""
 "реактивного руху NASA для показу даних на інтерактивному сайті %1JPL "
 "Horizons%2."
 
-#: src/core/StelCore.cpp:2444
+#: src/core/StelCore.cpp:2472
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -3465,7 +3466,7 @@ msgstr ""
 "Цей поліному було опубліковано J. Meeus і L. Simons у статті <em>Polynomial "
 "approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:2447
+#: src/core/StelCore.cpp:2475
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -3476,7 +3477,7 @@ msgstr ""
 "комп’ютері</em>) наведено просте поліноміальне наближення 3-го порядку "
 "точності лише для нещодавніх дат у минулому."
 
-#: src/core/StelCore.cpp:2450
+#: src/core/StelCore.cpp:2478
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
@@ -3488,7 +3489,7 @@ msgstr ""
 "<em>Calendrical Tabulations</em> (2002). Її засновано на даних книги Jean "
 "Meeus <em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:2453
+#: src/core/StelCore.cpp:2481
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -3499,7 +3500,7 @@ msgstr ""
 " статті <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) з додатковими даними у (%3)."
 
-#: src/core/StelCore.cpp:2456
+#: src/core/StelCore.cpp:2484
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -3513,7 +3514,7 @@ msgstr ""
 "можливій періодичності, описаній Stephenson (%2). Докладніші дані можна "
 "знайти %3тут%4."
 
-#: src/core/StelCore.cpp:2459
+#: src/core/StelCore.cpp:2487
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -3530,7 +3531,7 @@ msgstr ""
 "використано у програмі для обчислення ефемерид Сонця, Місяця та планет "
 "SOLEX."
 
-#: src/core/StelCore.cpp:2462
+#: src/core/StelCore.cpp:2490
 msgid ""
 "This solution is modified from F. Espenak and J. Meeus, based on Morrison & "
 "Stephenson (2004) and a polynomial fit through tabulated values for "
@@ -3542,15 +3543,15 @@ msgstr ""
 "1600-2000 років. Формулу для 2005-2050 років було видозмінено так, щоб вона "
 "краще відповідала спостережуваним даним та короткостроковим прогнозам."
 
-#: src/core/StelCore.cpp:2462
+#: src/core/StelCore.cpp:2490
 msgid "Used by default."
 msgstr "Використовується типово."
 
-#: src/core/StelCore.cpp:2465
+#: src/core/StelCore.cpp:2493
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "ЛАТАНА ВЕРСІЯ БЕЗ ДОДАТКОВОГО ПРИСКОРЕННЯ МІСЯЦЯ"
 
-#: src/core/StelCore.cpp:2465
+#: src/core/StelCore.cpp:2493
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
 "(2004) and a polynomial fit through tabulated values for 1600-2000."
@@ -3559,7 +3560,7 @@ msgstr ""
 "Morrison і Stephenson (2004) та поліноміальній апроксимації табличних даних "
 "за 1600-2000 роки."
 
-#: src/core/StelCore.cpp:2468
+#: src/core/StelCore.cpp:2496
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -3571,7 +3572,7 @@ msgstr ""
 "eclipses and dating the fall of Babylon</em> (затемнення у давнину та "
 "датування падіння Вавилона) (%1)."
 
-#: src/core/StelCore.cpp:2471
+#: src/core/StelCore.cpp:2499
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -3583,7 +3584,7 @@ msgstr ""
 "Polynomial Approximation of DeltaT</em> (%1), а потім уточнено Sana Islam у "
 "2013 році."
 
-#: src/core/StelCore.cpp:2474
+#: src/core/StelCore.cpp:2502
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -3594,7 +3595,7 @@ msgstr ""
 "Khalid, Mariam Sultana та Faheem Zaidi у роботі <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2477
+#: src/core/StelCore.cpp:2505
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -3613,7 +3614,7 @@ msgstr ""
 "діапазоном (моделювання за допомогою сплайнового наближення) він дає "
 "значення параболічного наближення."
 
-#: src/core/StelCore.cpp:2480
+#: src/core/StelCore.cpp:2508
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -3624,7 +3625,7 @@ msgstr ""
 "<em>The Acceleration of the Moon and the Universe - the Mass of the "
 "Graviton</em> (%1), його засновано на формулі К. Шоха (C. Schoch) (1931)."
 
-#: src/core/StelCore.cpp:2483
+#: src/core/StelCore.cpp:2511
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
@@ -3633,12 +3634,12 @@ msgstr ""
 "Це квадратична формула для обчислення %1T з коефіцієнтами, визначеними "
 "користувачем."
 
-#: src/core/StelCore.cpp:2486 src/core/SimbadSearcher.cpp:173
+#: src/core/StelCore.cpp:2514 src/core/SimbadSearcher.cpp:173
 #: plugins/OnlineQueries/src/HipOnlineQuery.cpp:91
 msgid "Error"
 msgstr "Помилка"
 
-#: src/core/StelCore.cpp:2494
+#: src/core/StelCore.cpp:2522
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -3647,16 +3648,16 @@ msgstr ""
 "Значення розв’язку %1 для %2 (секулярне прискорення Місяця) потребує "
 "адаптації, див. підручник, щоб дізнатися більше."
 
-#: src/core/StelCore.cpp:2538
+#: src/core/StelCore.cpp:2566
 msgid "with zero values outside this range"
 msgstr "з нульовими значеннями поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2541
+#: src/core/StelCore.cpp:2569
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "з типовою односекундною точністю та нульовими значеннями поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2544
+#: src/core/StelCore.cpp:2572
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -3664,16 +3665,16 @@ msgstr ""
 "із середньою похибкою у менше за одну секунду, макс. похибка 1.9 с, і "
 "значеннями років обмеження поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2551
+#: src/core/StelCore.cpp:2579
 msgid "with values for the limit years outside this range"
 msgstr "із значеннями років обмеження поза цим діапазоном"
 
-#: src/core/StelCore.cpp:2561
+#: src/core/StelCore.cpp:2589
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Коректний діапазон використання: від %1 до %2 року, %3."
 
-#: src/core/StelCore.cpp:2563
+#: src/core/StelCore.cpp:2591
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Коректний діапазон використання: від %1 до %2 року."
@@ -3708,11 +3709,11 @@ msgstr ""
 "Повна назва цього методу проєкції — <i>азимутальна рівновелика проєкція "
 "Ламберта</i>. Вона зберігає відношення площ, але спотворює кути."
 
-#: src/core/StelProjectorClasses.cpp:248
+#: src/core/StelProjectorClasses.cpp:243
 msgid "Stereographic"
 msgstr "Стереографічна проєкція"
 
-#: src/core/StelProjectorClasses.cpp:253
+#: src/core/StelProjectorClasses.cpp:248
 msgid ""
 "Stereographic projection is known since antiquity and was originally known "
 "as the planisphere projection. It preserves the angles at which curves cross"
@@ -3721,11 +3722,11 @@ msgstr ""
 "Стереографічна проєкція — проєкція відома ще з античних часів як планісферна"
 " проєкція. Вона зберігає величини кутів, але спотворює відношення площ."
 
-#: src/core/StelProjectorClasses.cpp:348
+#: src/core/StelProjectorClasses.cpp:343
 msgid "Fish-eye"
 msgstr "Проєкція «риб’яче око»"
 
-#: src/core/StelProjectorClasses.cpp:353
+#: src/core/StelProjectorClasses.cpp:348
 msgid ""
 "In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight"
 " lines become curves when they appear a large angular distance from the "
@@ -3736,11 +3737,11 @@ msgstr ""
 "проєкції</i>, прямі лінії стають кривими на великій кутовій відстані від "
 "центру поля зору (як спотворення в камері з ширококутовим об’єктивом)."
 
-#: src/core/StelProjectorClasses.cpp:464
+#: src/core/StelProjectorClasses.cpp:444
 msgid "Hammer-Aitoff"
 msgstr "Гаммера-Аїтова"
 
-#: src/core/StelProjectorClasses.cpp:469
+#: src/core/StelProjectorClasses.cpp:449
 msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
@@ -3749,11 +3750,11 @@ msgstr ""
 " Hammer) у 1892 році. Спосіб проєктування було розроблено на основі проєкції"
 " Аїтова."
 
-#: src/core/StelProjectorClasses.cpp:566
+#: src/core/StelProjectorClasses.cpp:531
 msgid "Cylinder"
 msgstr "Циліндр"
 
-#: src/core/StelProjectorClasses.cpp:571
+#: src/core/StelProjectorClasses.cpp:536
 msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
@@ -3761,11 +3762,29 @@ msgstr ""
 "Повна назва цієї проєкції — <i>циліндрична еквідистантна проєкція</i>. В цій"
 " проєкції всі паралельні прямі розташовані на однаковій відстані."
 
-#: src/core/StelProjectorClasses.cpp:658
+#: src/core/StelProjectorClasses.cpp:609
+msgid "Equirectangular"
+msgstr "Еквідистантна циліндрична"
+
+#: src/core/StelProjectorClasses.cpp:614
+msgid ""
+"Another name of this variant of the Cylindrical projection mode is <i>plate "
+"carr&eacute;e</i> (French, for 'flat square'). With this projection all "
+"parallels are equally spaced. The view is stretched to always show a "
+"360x180° field of view in a fixed view direction. It is provided for "
+"specialized setups."
+msgstr ""
+"Іншою назвою цього варіанта режиму циліндричної проєкції є <i>plate "
+"carr&eacute;e</i> (французькою «плоский квадрат»). У цьому режимі "
+"проєктування усі паралельні розташовано на одній відстані. Площину перегляду"
+" завжди розтягнуто, щоб показувати поле зору у 360x180° для фіксованого "
+"напрямку погляду. Надається для спеціалізованих варіантів роботи програми."
+
+#: src/core/StelProjectorClasses.cpp:620
 msgid "Mercator"
 msgstr "Меркатор"
 
-#: src/core/StelProjectorClasses.cpp:663
+#: src/core/StelProjectorClasses.cpp:625
 msgid ""
 "The Mercator projection is one of the most used world map projections. It "
 "preserves direction and shapes but distorts size, in an increasing degree "
@@ -3775,7 +3794,7 @@ msgstr ""
 "використання дає змогу зберегти напрямки і форми, але призводить до "
 "наростання похибок у обчисленні відстаней при віддаленні від екватора."
 
-#: src/core/StelProjectorClasses.cpp:760
+#: src/core/StelProjectorClasses.cpp:706
 msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
@@ -3783,11 +3802,11 @@ msgstr ""
 "Ортографічна проєкція дуже схожа на проєкцію перспективи, але точка "
 "перспективи розташована на нескінченній відстані."
 
-#: src/core/StelProjectorClasses.cpp:852
+#: src/core/StelProjectorClasses.cpp:793
 msgid "Sinusoidal"
 msgstr "Синусоїдальна"
 
-#: src/core/StelProjectorClasses.cpp:857
+#: src/core/StelProjectorClasses.cpp:798
 msgid ""
 "The sinusoidal projection is a <i>pseudocylindrical equal-area map "
 "projection</i>, sometimes called the Sanson-Flamsteed or the Mercator equal-"
@@ -3797,11 +3816,11 @@ msgstr ""
 "збереженням площі</i>, її також іноді називають проєкцією Сенсона–Флемстіда "
 "або Меркатора із збереженням площі."
 
-#: src/core/StelProjectorClasses.cpp:947
+#: src/core/StelProjectorClasses.cpp:888
 msgid "Miller cylindrical"
 msgstr "Циліндрична Міллера"
 
-#: src/core/StelProjectorClasses.cpp:952
+#: src/core/StelProjectorClasses.cpp:893
 msgid ""
 "The Miller cylindrical projection is a modified Mercator projection, "
 "proposed by Osborn Maitland Miller (1897-1979) in 1942. The poles are no "
@@ -4001,23 +4020,23 @@ msgstr "Завантаження «%1»"
 msgid "Loading '%1' from %2"
 msgstr "Завантаження «%1» з %2"
 
-#: src/core/StelSkyCultureMgr.cpp:174
+#: src/core/StelSkyCultureMgr.cpp:178
 msgctxt "sky culture classification"
 msgid "ethnographic"
 msgstr "етнографічні"
 
-#: src/core/StelSkyCultureMgr.cpp:175
+#: src/core/StelSkyCultureMgr.cpp:179
 msgid ""
 "Provided by ethnographic researchers based on interviews of indigenous "
 "people."
 msgstr "Надані дослідниками-етнографами на основі опитування тубільців."
 
-#: src/core/StelSkyCultureMgr.cpp:179
+#: src/core/StelSkyCultureMgr.cpp:183
 msgctxt "sky culture classification"
 msgid "historical"
 msgstr "історичні"
 
-#: src/core/StelSkyCultureMgr.cpp:180
+#: src/core/StelSkyCultureMgr.cpp:184
 msgid ""
 "Provided by historians based on historical written sources from a (usually "
 "short) period of the past."
@@ -4025,12 +4044,12 @@ msgstr ""
 "Надані дослідниками-істориками на основі письмових джерел (зазвичай "
 "короткого) періоду давнини."
 
-#: src/core/StelSkyCultureMgr.cpp:184
+#: src/core/StelSkyCultureMgr.cpp:188
 msgctxt "sky culture classification"
 msgid "single"
 msgstr "оригінальні"
 
-#: src/core/StelSkyCultureMgr.cpp:185
+#: src/core/StelSkyCultureMgr.cpp:189
 msgid ""
 "Represents a single source like a historical atlas, or publications of a "
 "single author."
@@ -4038,23 +4057,23 @@ msgstr ""
 "Отримані із одного джерела даних: давнього атласу або публікації одного "
 "автора."
 
-#: src/core/StelSkyCultureMgr.cpp:189
+#: src/core/StelSkyCultureMgr.cpp:193
 msgctxt "sky culture classification"
 msgid "comparative"
 msgstr "порівняльна"
 
-#: src/core/StelSkyCultureMgr.cpp:190
+#: src/core/StelSkyCultureMgr.cpp:194
 msgid ""
 "Compares and confronts elements from at least two sky cultures with each "
 "other."
 msgstr "Порівнює і зіставляє елементи з картин зоряного неба один з одним."
 
-#: src/core/StelSkyCultureMgr.cpp:194
+#: src/core/StelSkyCultureMgr.cpp:198
 msgctxt "sky culture classification"
 msgid "traditional"
 msgstr "традиційні"
 
-#: src/core/StelSkyCultureMgr.cpp:195
+#: src/core/StelSkyCultureMgr.cpp:199
 msgid ""
 "Content represents 'common' knowledge by several members of an ethnic "
 "community, and the sky culture has been developed by members of such "
@@ -4063,12 +4082,12 @@ msgstr ""
 "Дані відповідають «загальним» знанням декількох членів етнічної спільноти, а"
 " картину неба розроблено членами такої спільноти."
 
-#: src/core/StelSkyCultureMgr.cpp:199
+#: src/core/StelSkyCultureMgr.cpp:203
 msgctxt "sky culture classification"
 msgid "personal"
 msgstr "особисті"
 
-#: src/core/StelSkyCultureMgr.cpp:200
+#: src/core/StelSkyCultureMgr.cpp:204
 msgid ""
 "This is a personally developed sky culture which is not founded in published"
 " historical or ethnological research. Stellarium may include it when it is "
@@ -4078,12 +4097,12 @@ msgstr ""
 "оприлюднених історичних чи етнологічних даних. Stellarium може включити таку"
 " картину, якщо вона «достатньо цікава», ніяким чином не схвалюючи її вміст."
 
-#: src/core/StelSkyCultureMgr.cpp:204
+#: src/core/StelSkyCultureMgr.cpp:208
 msgctxt "sky culture classification"
 msgid "incomplete"
 msgstr "неповні"
 
-#: src/core/StelSkyCultureMgr.cpp:205
+#: src/core/StelSkyCultureMgr.cpp:209
 msgid ""
 "The accuracy of the sky culture description cannot be given, although it "
 "looks like it is built on a solid background. More work would be needed."
@@ -4092,20 +4111,20 @@ msgstr ""
 "засновано на надійних джерелах. Картина зоряного неба потребує допрацювання."
 " "
 
-#: src/core/StelSkyCultureMgr.cpp:209
+#: src/core/StelSkyCultureMgr.cpp:213
 msgctxt "sky culture classification"
 msgid "undefined"
 msgstr "не визначено"
 
-#: src/core/StelSkyCultureMgr.cpp:216
+#: src/core/StelSkyCultureMgr.cpp:220
 msgid "Classification"
 msgstr "Класифікація"
 
-#: src/core/StelSkyCultureMgr.cpp:228
+#: src/core/StelSkyCultureMgr.cpp:232
 msgid "unknown"
 msgstr "невідомий"
 
-#: src/core/StelSkyCultureMgr.cpp:229
+#: src/core/StelSkyCultureMgr.cpp:233
 msgid ""
 "This sky culture is provided under unknown license. Please ask authors for "
 "details about license for this sky culture."
@@ -4114,7 +4133,7 @@ msgstr ""
 "ласка, зверніться до авторів, щоб дізнатися більше про умови ліцензування "
 "цієї картини зоряного неба."
 
-#: src/core/StelSkyCultureMgr.cpp:236
+#: src/core/StelSkyCultureMgr.cpp:240
 msgid ""
 "This sky culture is provided under GNU General Public License. You can use "
 "it for commercial and non-commercial purposes, freely adapt it and share "
@@ -4125,12 +4144,12 @@ msgstr ""
 "некомерційних потреб, вільно адаптувати її і поширювати адаптовані "
 "результати."
 
-#: src/core/StelSkyCultureMgr.cpp:240
+#: src/core/StelSkyCultureMgr.cpp:244
 msgid "This sky culture is provided under Creative Commons License."
 msgstr ""
 "Цю картину зоряного неба надано за умов дотримання Creative Commons License."
 
-#: src/core/StelSkyCultureMgr.cpp:248
+#: src/core/StelSkyCultureMgr.cpp:252
 msgid ""
 "You may distribute, remix, adapt, and build upon this sky culture, even "
 "commercially, as long as you credit authors for the original creation."
@@ -4139,7 +4158,7 @@ msgstr ""
 "зоряного неба, навіть із комерційною метою, але результати мають містити "
 "подяку авторам початкової версії."
 
-#: src/core/StelSkyCultureMgr.cpp:249
+#: src/core/StelSkyCultureMgr.cpp:253
 msgid ""
 "You may remix, adapt, and build upon this sky culture even for commercial "
 "purposes, as long as you credit authors and license the new creations under "
@@ -4152,7 +4171,7 @@ msgstr ""
 "ліцензування часто вважають тотожними до вільних умов ліцензування з "
 "відкритим кодом для програмного забезпечення."
 
-#: src/core/StelSkyCultureMgr.cpp:250
+#: src/core/StelSkyCultureMgr.cpp:254
 msgid ""
 "You may reuse this sky culture for any purpose, including commercially; "
 "however, adapted work cannot be shared with others, and credit must be "
@@ -4162,7 +4181,7 @@ msgstr ""
 "зокрема комерційною; втім, змінами не можна ні з ким ділитися. Також "
 "результати мають містити подяку авторам."
 
-#: src/core/StelSkyCultureMgr.cpp:251
+#: src/core/StelSkyCultureMgr.cpp:255
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, and "
 "although your new works must also acknowledge authors and be non-commercial,"
@@ -4173,7 +4192,7 @@ msgstr ""
 " використовуватися із некомерційною метою, вас не зобов'язують поширювати їх"
 " із тими самими умовами ліцензування."
 
-#: src/core/StelSkyCultureMgr.cpp:252
+#: src/core/StelSkyCultureMgr.cpp:256
 msgid ""
 "You may remix, adapt, and build upon this sky culture non-commercially, as "
 "long as you credit authors and license your new creations under the "
@@ -4183,7 +4202,7 @@ msgstr ""
 "некомерційною метою, але результати мають містити подяку авторам та бути "
 "ліцензованими за тотожними до початкових умовами."
 
-#: src/core/StelSkyCultureMgr.cpp:253
+#: src/core/StelSkyCultureMgr.cpp:257
 msgid ""
 "You may use this sky culture and share them with others as long as you "
 "credit authors, but you can’t change it in any way or use it commercially."
@@ -4193,7 +4212,7 @@ msgstr ""
 "лишатися незмінними. Також результати не можна використовувати із "
 "комерційною метою."
 
-#: src/core/StelSkyCultureMgr.cpp:265
+#: src/core/StelSkyCultureMgr.cpp:269
 msgid "This sky culture is distributed as public domain."
 msgstr ""
 "Поширення цієї картини зоряного неба відбувається, як поширення громадського"
@@ -4201,11 +4220,11 @@ msgstr ""
 
 #. TRANSLATORS: A phrase like "Please credit: XY Museum". The creditee is in a
 #. skyculture's info.ini.
-#: src/core/StelSkyCultureMgr.cpp:271
+#: src/core/StelSkyCultureMgr.cpp:275
 msgid "Please credit:"
 msgstr "Будь ласка, подякуйте:"
 
-#: src/core/StelSkyCultureMgr.cpp:275
+#: src/core/StelSkyCultureMgr.cpp:279
 msgid ""
 "Illustrations are provided under Free Art License that grants the right to "
 "freely copy, distribute, and transform."
@@ -4213,7 +4232,7 @@ msgstr ""
 "Ілюстрації надано за умов дотримання Free Art License, яка надає вам право "
 "вільно копіювати, поширювати і перетворювати дані."
 
-#: src/core/StelSkyCultureMgr.cpp:280 src/gui/ConfigurationDialog.cpp:1307
+#: src/core/StelSkyCultureMgr.cpp:284 src/gui/ConfigurationDialog.cpp:1307
 #: src/scripting/StelScriptMgr.cpp:649
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:100
 #: plugins/Oculars/src/gui/OcularDialog.cpp:626
@@ -4231,49 +4250,48 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:87
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:195
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:125
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:214
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:182
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:186
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:181
 msgid "License"
 msgstr "Ліцензування"
 
-#: src/core/StelSkyCultureMgr.cpp:288
+#: src/core/StelSkyCultureMgr.cpp:292
 msgid ""
-"The region is understood as the geographical area of origin of a given "
-"culture of the sky."
+"The region indicates the geographical area of origin of a given sky culture."
 msgstr ""
-"Під регіоном ми розуміємо географічну область походження відповідної картини"
-" зоряного неба."
+"Під регіоном визначає географічну область походження відповідної картини "
+"зоряного неба."
 
-#: src/core/StelSkyCultureMgr.cpp:294
+#: src/core/StelSkyCultureMgr.cpp:298
 msgid "World"
 msgstr "Світ"
 
-#: src/core/StelSkyCultureMgr.cpp:295
+#: src/core/StelSkyCultureMgr.cpp:299
 msgid ""
-"All modern sky cultures are based on the IAU-approved 88 constellations with"
-" standardized boundaries and are used worldwide. The origins of all these "
+"All 'modern' sky cultures are based on the IAU-approved 88 constellations "
+"with standardized boundaries and are used worldwide. The origins of these "
 "constellations are pan-European."
 msgstr ""
 "Усі сучасні картини зоряного неба засновано на затверджених МАС 88 сузір'ях "
 "зі стандартизованими межами. Ці дані застосовують у всьому світі. Походження"
 " сузір'їв цієї картини є загальноєвропейським."
 
-#: src/core/StelSkyCultureMgr.cpp:299 src/ui_locationDialogGui.h:506
+#: src/core/StelSkyCultureMgr.cpp:303 src/ui_locationDialogGui.h:506
 msgid "Region:"
 msgstr "Регіон:"
 
-#: src/core/StelSkyCultureMgr.cpp:361
+#: src/core/StelSkyCultureMgr.cpp:365
 msgid "No description"
 msgstr "Немає опису"
 
-#: src/core/StelSkyCultureMgr.cpp:396
+#: src/core/StelSkyCultureMgr.cpp:400
 msgid "References / Further Reading"
 msgstr "Посилання/Додаткова інформація"
 
 #: src/core/StelMovementMgr.cpp:231 src/gui/StelGui.cpp:220
-#: src/StelMainView.cpp:890 src/StelMainView.cpp:891
+#: src/StelMainView.cpp:894 src/StelMainView.cpp:895
 msgid "Miscellaneous"
 msgstr "Інше"
 
@@ -4726,9 +4744,9 @@ msgstr "Контакти"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:86
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:194
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:124
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:213
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:181
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:185
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:180
 msgid "Version"
 msgstr "Версія"
@@ -5358,7 +5376,7 @@ msgstr "Розробник під OSX: %1"
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:280
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:197
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:127
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:121
 msgid "Contributors"
 msgstr "Учасники розробки"
 
@@ -8045,19 +8063,19 @@ msgstr "Скрипти"
 msgid "Shortcut"
 msgstr "Комбінація клавіш"
 
-#: src/StelMainView.cpp:890
+#: src/StelMainView.cpp:894
 msgid "Save screenshot"
 msgstr "Зберегти знімок екрана"
 
-#: src/StelMainView.cpp:891
+#: src/StelMainView.cpp:895
 msgid "Reload shaders (for development)"
 msgstr "Перезавантажити шейдери (для розробників)"
 
-#: src/StelMainView.cpp:892
+#: src/StelMainView.cpp:896
 msgid "Full-screen mode"
 msgstr "Повноекранний режим"
 
-#: src/StelMainView.cpp:988
+#: src/StelMainView.cpp:992
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
@@ -8066,7 +8084,7 @@ msgstr ""
 " запуску програми і перевірте, чи правильно призначено вказані нижче "
 "скорочення."
 
-#: src/StelMainView.cpp:1071
+#: src/StelMainView.cpp:1075
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -8075,7 +8093,7 @@ msgstr ""
 "графічної підсистеми або скористайтеся параметром --angle-mode (або --mesa-"
 "mode)."
 
-#: src/StelMainView.cpp:1073
+#: src/StelMainView.cpp:1077
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
@@ -8083,14 +8101,14 @@ msgstr ""
 "Недостатньо нова версія OpenGL. Будь ласка, оновіть драйвер, обладнання "
 "графічної підсистеми або скористайтеся параметром --mesa-mode."
 
-#: src/StelMainView.cpp:1077
+#: src/StelMainView.cpp:1081
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Недостатньо нова версія OpenGL. Будь ласка, оновіть драйвери або графічне "
 "обладнання."
 
-#: src/StelMainView.cpp:1120
+#: src/StelMainView.cpp:1124
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8098,7 +8116,7 @@ msgstr ""
 "У вашій підсистемі DirectX/OpenGL ES виявлено проблеми. Подробиці можна знайти у журналі.\n"
 "Проігнорувати і придушити це повідомлення надалі і спробувати продовжити роботу у звуженому режимі попри це?"
 
-#: src/StelMainView.cpp:1171
+#: src/StelMainView.cpp:1175
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8106,7 +8124,7 @@ msgstr ""
 "У вашій підсистемі OpenGL/Mesa виявлено проблеми. Подробиці можна знайти у журналі.\n"
 "Проігнорувати і придушити це повідомлення надалі і спробувати продовжити роботу у звуженому режимі попри це?"
 
-#: src/StelMainView.cpp:1231
+#: src/StelMainView.cpp:1235
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8114,7 +8132,7 @@ msgstr ""
 "У вашій підсистемі OpenGL виявлено проблеми. Подробиці можна знайти у журналі.\n"
 "Проігнорувати і придушити це повідомлення надалі і спробувати продовжити роботу у звуженому режимі попри це?"
 
-#: src/StelMainView.cpp:1272
+#: src/StelMainView.cpp:1276
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -11375,175 +11393,180 @@ msgstr "Грецька (Альмагест)"
 
 #: skycultures/translations_skycultures.fab:42
 msgctxt "sky culture"
+msgid "Greek (Dante)"
+msgstr "Грецька (Данте)"
+
+#: skycultures/translations_skycultures.fab:44
+msgctxt "sky culture"
 msgid "Greek (Farnese + Almagest)"
 msgstr "Грецька (Фарнезе + Альмагест)"
 
-#: skycultures/translations_skycultures.fab:44
+#: skycultures/translations_skycultures.fab:46
 msgctxt "sky culture"
 msgid "Greek (Leiden Aratea + Almagest)"
 msgstr "Грецька (Лейденський Арат + Альмагест)"
 
-#: skycultures/translations_skycultures.fab:46
+#: skycultures/translations_skycultures.fab:48
 msgctxt "sky culture"
 msgid "Hawaiian Starlines"
 msgstr "Гавайські зоряні лінії"
 
-#: skycultures/translations_skycultures.fab:48
+#: skycultures/translations_skycultures.fab:50
 msgctxt "sky culture"
 msgid "Inuit"
 msgstr "Ексімоська"
 
-#: skycultures/translations_skycultures.fab:50
+#: skycultures/translations_skycultures.fab:52
 msgctxt "sky culture"
 msgid "Indian Vedic"
 msgstr "Індійська ведична"
 
-#: skycultures/translations_skycultures.fab:52
+#: skycultures/translations_skycultures.fab:54
 msgctxt "sky culture"
 msgid "Japanese Moon Stations"
 msgstr "Японські місячні станції"
 
-#: skycultures/translations_skycultures.fab:54
+#: skycultures/translations_skycultures.fab:56
 msgctxt "sky culture"
 msgid "Kamilaroi/Euahlayi"
 msgstr "Каміларой/Юахлаї"
 
-#: skycultures/translations_skycultures.fab:56
+#: skycultures/translations_skycultures.fab:58
 msgctxt "sky culture"
 msgid "Khoikhoi and San"
 msgstr "Койкой і сан"
 
-#: skycultures/translations_skycultures.fab:58
+#: skycultures/translations_skycultures.fab:60
 msgctxt "sky culture"
 msgid "Korean"
 msgstr "Корейська"
 
-#: skycultures/translations_skycultures.fab:60
+#: skycultures/translations_skycultures.fab:62
 msgctxt "sky culture"
 msgid "Lokono"
 msgstr "Локоно"
 
-#: skycultures/translations_skycultures.fab:62
+#: skycultures/translations_skycultures.fab:64
 msgctxt "sky culture"
 msgid "Macedonian"
 msgstr "Македонська"
 
-#: skycultures/translations_skycultures.fab:64
+#: skycultures/translations_skycultures.fab:66
 msgctxt "sky culture"
 msgid "Maori"
 msgstr "Маорійська"
 
-#: skycultures/translations_skycultures.fab:66
+#: skycultures/translations_skycultures.fab:68
 msgctxt "sky culture"
 msgid "Maya"
 msgstr "Майянська"
 
-#: skycultures/translations_skycultures.fab:68
+#: skycultures/translations_skycultures.fab:70
 msgctxt "sky culture"
 msgid "Modern"
 msgstr "Сучасна"
 
-#: skycultures/translations_skycultures.fab:70
+#: skycultures/translations_skycultures.fab:72
 msgctxt "sky culture"
 msgid "Modern (Chinese)"
 msgstr "Сучасна (китайська)"
 
-#: skycultures/translations_skycultures.fab:72
+#: skycultures/translations_skycultures.fab:74
 msgctxt "sky culture"
 msgid "Modern (H.A. Rey)"
 msgstr "Сучасна (H.A. Rey)"
 
-#: skycultures/translations_skycultures.fab:74
+#: skycultures/translations_skycultures.fab:76
 msgctxt "sky culture"
 msgid "Modern (IAU)"
 msgstr "Сучасна (МАС)"
 
-#: skycultures/translations_skycultures.fab:76
+#: skycultures/translations_skycultures.fab:78
 msgctxt "sky culture"
 msgid "Modern (O. Hlad)"
 msgstr "Сучасна (O. Hlad)"
 
-#: skycultures/translations_skycultures.fab:78
+#: skycultures/translations_skycultures.fab:80
 msgctxt "sky culture"
 msgid "Modern (Sky & Telescope)"
 msgstr "Сучасна (Sky & Telescope)"
 
-#: skycultures/translations_skycultures.fab:80
+#: skycultures/translations_skycultures.fab:82
 msgctxt "sky culture"
 msgid "Modern (Sternenkarten)"
 msgstr "Сучасна (Sternenkarten)"
 
-#: skycultures/translations_skycultures.fab:82
+#: skycultures/translations_skycultures.fab:84
 msgctxt "sky culture"
 msgid "Mongolian"
 msgstr "Монгольська"
 
-#: skycultures/translations_skycultures.fab:84
+#: skycultures/translations_skycultures.fab:86
 msgctxt "sky culture"
 msgid "Navajo"
 msgstr "Навахо"
 
-#: skycultures/translations_skycultures.fab:86
+#: skycultures/translations_skycultures.fab:88
 msgctxt "sky culture"
 msgid "Norse"
 msgstr "Скандинавська"
 
-#: skycultures/translations_skycultures.fab:88
+#: skycultures/translations_skycultures.fab:90
 msgctxt "sky culture"
 msgid "Northern Andes"
 msgstr "Північні Анди"
 
-#: skycultures/translations_skycultures.fab:90
+#: skycultures/translations_skycultures.fab:92
 msgctxt "sky culture"
 msgid "Romanian"
 msgstr "Румунська"
 
-#: skycultures/translations_skycultures.fab:92
+#: skycultures/translations_skycultures.fab:94
 msgctxt "sky culture"
 msgid "Russian (Siberian)"
 msgstr "Російська (сибірська)"
 
-#: skycultures/translations_skycultures.fab:94
+#: skycultures/translations_skycultures.fab:96
 msgctxt "sky culture"
 msgid "Sami"
 msgstr "Саамська"
 
-#: skycultures/translations_skycultures.fab:96
+#: skycultures/translations_skycultures.fab:98
 msgctxt "sky culture"
 msgid "Samoan"
 msgstr "Самоанська"
 
-#: skycultures/translations_skycultures.fab:98
+#: skycultures/translations_skycultures.fab:100
 msgctxt "sky culture"
 msgid "Sardinian"
 msgstr "Сардинська"
 
-#: skycultures/translations_skycultures.fab:100
+#: skycultures/translations_skycultures.fab:102
 msgctxt "sky culture"
 msgid "Tongan"
 msgstr "Тонга"
 
-#: skycultures/translations_skycultures.fab:102
+#: skycultures/translations_skycultures.fab:104
 msgctxt "sky culture"
 msgid "Tukano"
 msgstr "Туканська"
 
-#: skycultures/translations_skycultures.fab:104
+#: skycultures/translations_skycultures.fab:106
 msgctxt "sky culture"
 msgid "Tupi-Guarani"
 msgstr "Тупі-Гуарані"
 
-#: skycultures/translations_skycultures.fab:106
+#: skycultures/translations_skycultures.fab:108
 msgctxt "sky culture"
 msgid "Vanuatu (Netwar)"
 msgstr "Вануату (Нетвар)"
 
-#: skycultures/translations_skycultures.fab:108
+#: skycultures/translations_skycultures.fab:110
 msgctxt "sky culture"
 msgid "Xhosa"
 msgstr "Коса"
 
-#: skycultures/translations_skycultures.fab:110
+#: skycultures/translations_skycultures.fab:112
 msgctxt "sky culture"
 msgid "Zulu"
 msgstr "Зулуська"
@@ -13411,7 +13434,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:601
 #: plugins/Observability/src/ui_ObservabilityDialog.h:346
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:261
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:321
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:339
 msgid "Save settings"
 msgstr "Зберегти параметри"
 
@@ -13434,9 +13457,9 @@ msgstr "Відновити типові значення параметрів St
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:260
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:439
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:320
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:338
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:748
-#: plugins/Calendars/src/ui_calendarsDialog.h:947
+#: plugins/Calendars/src/ui_calendarsDialog.h:982
 msgid "Restore defaults"
 msgstr "Відновити типові"
 
@@ -13513,7 +13536,7 @@ msgid "Equatorial coordinates, equinox of date"
 msgstr "Екваторіальні координати, рівнодення дати"
 
 #: src/ui_configurationDialog.h:1784
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:203
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
 msgid "Hour angle/Declination"
 msgstr "Годинний кут/Схилення"
 
@@ -13578,7 +13601,7 @@ msgid "Additional coordinates (from plugins)"
 msgstr "Додаткові координати (від додатків)"
 
 #: src/ui_configurationDialog.h:1821
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:299
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:312
 msgid "3-letter IAU constellation abbreviation"
 msgstr "3-літерне скорочення МАС для сузір’я"
 
@@ -15887,9 +15910,9 @@ msgstr "Дозволити прилипання до позначеного об
 #: plugins/Observability/src/ui_ObservabilityDialog.h:348
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:263
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:473
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:323
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:341
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:820
-#: plugins/Calendars/src/ui_calendarsDialog.h:999
+#: plugins/Calendars/src/ui_calendarsDialog.h:1034
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Про програму"
@@ -16007,10 +16030,10 @@ msgstr "Поле зору видошукача"
 #: plugins/Observability/src/Observability.cpp:198
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:92
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:151
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:100
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:102
 #: plugins/Scenery3d/src/Scenery3d.cpp:334
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:272
-#: plugins/Calendars/src/Calendars.cpp:183
+#: plugins/Calendars/src/Calendars.cpp:193
 msgid "Show settings dialog"
 msgstr "Показати діалогове вікно параметрів"
 
@@ -16860,13 +16883,14 @@ msgid "Enable autozoom when switching CCD"
 msgstr "Увімкнути автомасштабування при перемиканні ПЗЗ"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1553
-msgid "Show max time of exposure for Solar system objects when then selected"
+msgid ""
+"Show maximum exposure time for Solar system objects to avoid movement streak"
 msgstr ""
-"Показати максимальний час експонування для об'єктів Сонячної системи, якщо "
-"їх позначено"
+"Показувати максимальний час експонування для об'єктів Сонячної системи з "
+"метою уникнути смуги пересування"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1555
-msgid "Show max time of exposure for moving objects"
+msgid "Show max exposure time for moving objects"
 msgstr "Показувати максимальний час експонування для рухомих об'єктів"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1556
@@ -17221,38 +17245,38 @@ msgid "Loading TLE"
 msgstr "Завантажуємо TLE"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:3218
+#: plugins/Satellites/src/Satellites.cpp:3224
 msgid "communications"
 msgstr "комунікаційні"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:3220
+#: plugins/Satellites/src/Satellites.cpp:3226
 msgid "navigation"
 msgstr "навігаційні"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:3222
+#: plugins/Satellites/src/Satellites.cpp:3228
 msgid "scientific"
 msgstr "наукові"
 
 #. TRANSLATORS: Satellite group: Earth Resources satellites
-#: plugins/Satellites/src/Satellites.cpp:3224
+#: plugins/Satellites/src/Satellites.cpp:3230
 msgid "earth resources"
 msgstr "природно-ресурсні"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:3226
+#: plugins/Satellites/src/Satellites.cpp:3232
 msgid "geostationary"
 msgstr "геостаціонарні"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:3228
+#: plugins/Satellites/src/Satellites.cpp:3234
 msgid "non-operational"
 msgstr "недієздатні"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:3230
+#: plugins/Satellites/src/Satellites.cpp:3236
 msgid "observatory"
 msgstr "обсерваторії"
 
@@ -17260,7 +17284,7 @@ msgstr "обсерваторії"
 #. System (IRNSS) is an autonomous regional satellite navigation system being
 #. developed by the Indian Space Research Organisation (ISRO) which would be
 #. under complete control of the Indian government.
-#: plugins/Satellites/src/Satellites.cpp:3232
+#: plugins/Satellites/src/Satellites.cpp:3238
 msgid "irnss"
 msgstr "irnss"
 
@@ -17268,51 +17292,51 @@ msgstr "irnss"
 #. a proposed three-satellite regional time transfer system and Satellite
 #. Based Augmentation System for the Global Positioning System, that would be
 #. receivable within Japan.
-#: plugins/Satellites/src/Satellites.cpp:3234
+#: plugins/Satellites/src/Satellites.cpp:3240
 msgid "qzss"
 msgstr "qzss"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the COSMOS satellites
-#: plugins/Satellites/src/Satellites.cpp:3236
+#: plugins/Satellites/src/Satellites.cpp:3242
 msgid "cosmos"
 msgstr "космос"
 
 #. TRANSLATORS: Satellite group: Debris of satellites
-#: plugins/Satellites/src/Satellites.cpp:3238
+#: plugins/Satellites/src/Satellites.cpp:3244
 msgid "debris"
 msgstr "уламки"
 
 #. TRANSLATORS: Satellite group: Crewed satellites
-#: plugins/Satellites/src/Satellites.cpp:3240
+#: plugins/Satellites/src/Satellites.cpp:3246
 msgid "crewed"
 msgstr "пілотовані"
 
 #. TRANSLATORS: Satellite group: Satellites of ISS resupply missions
-#: plugins/Satellites/src/Satellites.cpp:3242
+#: plugins/Satellites/src/Satellites.cpp:3248
 msgid "resupply"
 msgstr "транспортні"
 
 #. TRANSLATORS: Satellite group: are known to broadcast TV signals
-#: plugins/Satellites/src/Satellites.cpp:3244
+#: plugins/Satellites/src/Satellites.cpp:3250
 msgid "tv"
 msgstr "телекомунікаційні"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GONETS satellites
-#: plugins/Satellites/src/Satellites.cpp:3246
+#: plugins/Satellites/src/Satellites.cpp:3252
 msgid "gonets"
 msgstr "гонец"
 
 #. TRANSLATORS: Satellite group: Last 30 Days' Launches
 #. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]:
 #. https://celestrak.org/NORAD/elements/tle-new.txt
-#: plugins/Satellites/src/Satellites.cpp:3252
+#: plugins/Satellites/src/Satellites.cpp:3258
 msgid "tle-new"
 msgstr "tle-нові"
 
 #. TRANSLATORS: Satellite group: Last 30 Days' Launches
 #. TRANSLATORS: CelesTrak source [Last 30 Days' Launches]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3255
+#: plugins/Satellites/src/Satellites.cpp:3261
 msgid "last-30-days"
 msgstr "останні 30 днів"
 
@@ -17321,7 +17345,7 @@ msgstr "останні 30 днів"
 #. https://celestrak.org/NORAD/elements/stations.txt
 #. TRANSLATORS: CelesTrak source [Space Stations]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3259
+#: plugins/Satellites/src/Satellites.cpp:3265
 msgid "stations"
 msgstr "станції"
 
@@ -17330,7 +17354,7 @@ msgstr "станції"
 #. https://celestrak.org/NORAD/elements/visual.txt
 #. TRANSLATORS: CelesTrak source [100 (or so) Brightest]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=visual&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3263
+#: plugins/Satellites/src/Satellites.cpp:3269
 msgid "visual"
 msgstr "видимі"
 
@@ -17339,7 +17363,7 @@ msgstr "видимі"
 #. https://celestrak.org/NORAD/elements/active.txt
 #. TRANSLATORS: CelesTrak source [Active Satellites]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3267
+#: plugins/Satellites/src/Satellites.cpp:3273
 msgid "active"
 msgstr "активні"
 
@@ -17348,7 +17372,7 @@ msgstr "активні"
 #. https://celestrak.org/NORAD/elements/analyst.txt
 #. TRANSLATORS: CelesTrak source [Analyst Satellites]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=analyst&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3271
+#: plugins/Satellites/src/Satellites.cpp:3277
 msgid "analyst"
 msgstr "аналітика"
 
@@ -17357,7 +17381,7 @@ msgstr "аналітика"
 #. https://celestrak.org/NORAD/elements/weather.txt
 #. TRANSLATORS: CelesTrak source [Weather]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=weather&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3278
+#: plugins/Satellites/src/Satellites.cpp:3284
 msgid "weather"
 msgstr "метеорологічні"
 
@@ -17366,7 +17390,7 @@ msgstr "метеорологічні"
 #. https://celestrak.org/NORAD/elements/noaa.txt
 #. TRANSLATORS: CelesTrak source [NOAA]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=noaa&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3282
+#: plugins/Satellites/src/Satellites.cpp:3288
 msgid "noaa"
 msgstr "noaa"
 
@@ -17375,7 +17399,7 @@ msgstr "noaa"
 #. https://celestrak.org/NORAD/elements/goes.txt
 #. TRANSLATORS: CelesTrak source [GOES]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=goes&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3286
+#: plugins/Satellites/src/Satellites.cpp:3292
 msgid "goes"
 msgstr "goes"
 
@@ -17384,7 +17408,7 @@ msgstr "goes"
 #. https://celestrak.org/NORAD/elements/resource.txt
 #. TRANSLATORS: CelesTrak source [Earth Resources]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=resource&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3290
+#: plugins/Satellites/src/Satellites.cpp:3296
 msgid "resource"
 msgstr "ресурсні"
 
@@ -17393,7 +17417,7 @@ msgstr "ресурсні"
 #. https://celestrak.org/NORAD/elements/sarsat.txt
 #. TRANSLATORS: CelesTrak source [Search & Rescue (SARSAT)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=sarsat&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3294
+#: plugins/Satellites/src/Satellites.cpp:3300
 msgid "sarsat"
 msgstr "sarsat"
 
@@ -17402,7 +17426,7 @@ msgstr "sarsat"
 #. https://celestrak.org/NORAD/elements/dmc.txt
 #. TRANSLATORS: CelesTrak source [Disaster Monitoring]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=dmc&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3298
+#: plugins/Satellites/src/Satellites.cpp:3304
 msgid "dmc"
 msgstr "dmc"
 
@@ -17414,7 +17438,7 @@ msgstr "dmc"
 #. TRANSLATORS: CelesTrak source [Tracking and Data Relay Satellite System
 #. (TDRSS)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=tdrss&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3302
+#: plugins/Satellites/src/Satellites.cpp:3308
 msgid "tdrss"
 msgstr "tdrss"
 
@@ -17423,7 +17447,7 @@ msgstr "tdrss"
 #. https://celestrak.org/NORAD/elements/argos.txt
 #. TRANSLATORS: CelesTrak source [ARGOS Data Collection System]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=argos&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3306
+#: plugins/Satellites/src/Satellites.cpp:3312
 msgid "argos"
 msgstr "argos"
 
@@ -17433,7 +17457,7 @@ msgstr "argos"
 #. https://celestrak.org/NORAD/elements/spire.txt
 #. TRANSLATORS: CelesTrak source [Spire]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=spire&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3315
+#: plugins/Satellites/src/Satellites.cpp:3321
 msgid "spire"
 msgstr "spire"
 
@@ -17442,7 +17466,7 @@ msgstr "spire"
 #. https://celestrak.org/NORAD/elements/geo.txt
 #. TRANSLATORS: CelesTrak source [Active Geosynchronous]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=geo&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3322
+#: plugins/Satellites/src/Satellites.cpp:3328
 msgid "geo"
 msgstr "гео"
 
@@ -17451,7 +17475,7 @@ msgstr "гео"
 #. https://celestrak.org/satcat/gpz.php
 #. TRANSLATORS: CelesTrak source [GEO Protected Zone]:
 #. https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3326
+#: plugins/Satellites/src/Satellites.cpp:3332
 msgid "gpz"
 msgstr "gpz"
 
@@ -17460,7 +17484,7 @@ msgstr "gpz"
 #. https://celestrak.org/satcat/gpz-plus.php
 #. TRANSLATORS: CelesTrak source [GEO Protected Zone Plus]:
 #. https://celestrak.org/NORAD/elements/gp.php?SPECIAL=gpz-plus&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3330
+#: plugins/Satellites/src/Satellites.cpp:3336
 msgid "gpz-plus"
 msgstr "gpz-плюс"
 
@@ -17472,7 +17496,7 @@ msgstr "gpz-плюс"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=intelsat&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [INTELSAT TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/intelsat.txt
-#: plugins/Satellites/src/Satellites.cpp:3335
+#: plugins/Satellites/src/Satellites.cpp:3341
 msgid "intelsat"
 msgstr "intelsat"
 
@@ -17483,7 +17507,7 @@ msgstr "intelsat"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=ses&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [SES TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/ses.txt
-#: plugins/Satellites/src/Satellites.cpp:3340
+#: plugins/Satellites/src/Satellites.cpp:3346
 msgid "ses"
 msgstr "ses"
 
@@ -17493,7 +17517,7 @@ msgstr "ses"
 #. https://celestrak.org/NORAD/elements/iridium.txt
 #. TRANSLATORS: CelesTrak source [Iridium]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3344
+#: plugins/Satellites/src/Satellites.cpp:3350
 msgid "iridium"
 msgstr "iridium"
 
@@ -17503,7 +17527,7 @@ msgstr "iridium"
 #. https://celestrak.org/NORAD/elements/iridium-NEXT.txt
 #. TRANSLATORS: CelesTrak source [Iridium NEXT]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium-NEXT&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3348
+#: plugins/Satellites/src/Satellites.cpp:3354
 msgid "iridium-NEXT"
 msgstr "iridium-NEXT"
 
@@ -17515,7 +17539,7 @@ msgstr "iridium-NEXT"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [Starlink TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/starlink.txt
-#: plugins/Satellites/src/Satellites.cpp:3353
+#: plugins/Satellites/src/Satellites.cpp:3359
 msgid "starlink"
 msgstr "starlink"
 
@@ -17527,7 +17551,7 @@ msgstr "starlink"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=oneweb&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [OneWeb TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/oneweb.txt
-#: plugins/Satellites/src/Satellites.cpp:3358
+#: plugins/Satellites/src/Satellites.cpp:3364
 msgid "oneweb"
 msgstr "oneweb"
 
@@ -17539,7 +17563,7 @@ msgstr "oneweb"
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=orbcomm&FORMAT=tle
 #. TRANSLATORS: CelesTrak supplemental source [ORBCOMM TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/orbcomm.txt
-#: plugins/Satellites/src/Satellites.cpp:3363
+#: plugins/Satellites/src/Satellites.cpp:3369
 msgid "orbcomm"
 msgstr "orbcomm"
 
@@ -17549,7 +17573,7 @@ msgstr "orbcomm"
 #. https://celestrak.org/NORAD/elements/globalstar.txt
 #. TRANSLATORS: CelesTrak source [Globalstar]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=globalstar&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3367
+#: plugins/Satellites/src/Satellites.cpp:3373
 msgid "globalstar"
 msgstr "globalstar"
 
@@ -17558,7 +17582,7 @@ msgstr "globalstar"
 #. https://celestrak.org/NORAD/elements/swarm.txt
 #. TRANSLATORS: CelesTrak source [Swarm]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=swarm&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3371
+#: plugins/Satellites/src/Satellites.cpp:3377
 msgid "swarm"
 msgstr "swarm"
 
@@ -17567,7 +17591,7 @@ msgstr "swarm"
 #. https://celestrak.org/NORAD/elements/amateur.txt
 #. TRANSLATORS: CelesTrak source [Amateur Radio]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=amateur&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3375
+#: plugins/Satellites/src/Satellites.cpp:3381
 msgid "amateur"
 msgstr "аматорське радіомовлення"
 
@@ -17576,7 +17600,7 @@ msgstr "аматорське радіомовлення"
 #. https://celestrak.org/NORAD/elements/x-comm.txt
 #. TRANSLATORS: CelesTrak source [Experimental]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=x-comm&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3379
+#: plugins/Satellites/src/Satellites.cpp:3385
 msgid "x-comm"
 msgstr "x-ком"
 
@@ -17585,7 +17609,7 @@ msgstr "x-ком"
 #. https://celestrak.org/NORAD/elements/other-comm.txt
 #. TRANSLATORS: CelesTrak source [Other Comm]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=other-comm&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3383
+#: plugins/Satellites/src/Satellites.cpp:3389
 msgid "other-comm"
 msgstr "інші-ком"
 
@@ -17595,7 +17619,7 @@ msgstr "інші-ком"
 #. https://celestrak.org/NORAD/elements/satnogs.txt
 #. TRANSLATORS: CelesTrak source [SatNOGS]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=satnogs&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3387
+#: plugins/Satellites/src/Satellites.cpp:3393
 msgid "satnogs"
 msgstr "satnogs"
 
@@ -17605,7 +17629,7 @@ msgstr "satnogs"
 #. https://celestrak.org/NORAD/elements/gorizont.txt
 #. TRANSLATORS: CelesTrak source [Gorizont]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gorizont&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3391
+#: plugins/Satellites/src/Satellites.cpp:3397
 msgid "gorizont"
 msgstr "горизонт"
 
@@ -17614,7 +17638,7 @@ msgstr "горизонт"
 #. https://celestrak.org/NORAD/elements/raduga.txt
 #. TRANSLATORS: CelesTrak source [Raduga]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=raduga&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3395
+#: plugins/Satellites/src/Satellites.cpp:3401
 msgid "raduga"
 msgstr "радуга"
 
@@ -17624,7 +17648,7 @@ msgstr "радуга"
 #. https://celestrak.org/NORAD/elements/molniya.txt
 #. TRANSLATORS: CelesTrak source [Molniya]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=molniya&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3399
+#: plugins/Satellites/src/Satellites.cpp:3405
 msgid "molniya"
 msgstr "молнія"
 
@@ -17633,7 +17657,7 @@ msgstr "молнія"
 #. https://celestrak.org/NORAD/elements/gnss.txt
 #. TRANSLATORS: CelesTrak source [GNSS]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gnss&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3406
+#: plugins/Satellites/src/Satellites.cpp:3412
 msgid "gnss"
 msgstr "gnss"
 
@@ -17641,7 +17665,7 @@ msgstr "gnss"
 #. (the Global Positioning System)
 #. TRANSLATORS: CelesTrak supplemental source [GPS TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/gps.txt
-#: plugins/Satellites/src/Satellites.cpp:3409
+#: plugins/Satellites/src/Satellites.cpp:3415
 msgid "gps"
 msgstr "gps"
 
@@ -17651,7 +17675,7 @@ msgstr "gps"
 #. https://celestrak.org/NORAD/elements/gps-ops.txt
 #. TRANSLATORS: CelesTrak source [GPS Operational]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=gps-ops&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3413
+#: plugins/Satellites/src/Satellites.cpp:3419
 msgid "gps-ops"
 msgstr "gps-ops"
 
@@ -17659,7 +17683,7 @@ msgstr "gps-ops"
 #. constellation (GLObal NAvigation Satellite System)
 #. TRANSLATORS: CelesTrak supplemental source [GLONASS TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/glonass.txt
-#: plugins/Satellites/src/Satellites.cpp:3416
+#: plugins/Satellites/src/Satellites.cpp:3422
 msgid "glonass"
 msgstr "глонасс"
 
@@ -17669,7 +17693,7 @@ msgstr "глонасс"
 #. https://celestrak.org/NORAD/elements/glo-ops.txt
 #. TRANSLATORS: CelesTrak supplemental source [GLONASS Operational]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=glo-ops&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3420
+#: plugins/Satellites/src/Satellites.cpp:3426
 msgid "glo-ops"
 msgstr "glo-ops"
 
@@ -17679,7 +17703,7 @@ msgstr "glo-ops"
 #. https://celestrak.org/NORAD/elements/galileo.txt
 #. TRANSLATORS: CelesTrak source [Galileo]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=galileo&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3424
+#: plugins/Satellites/src/Satellites.cpp:3430
 msgid "galileo"
 msgstr "галілео"
 
@@ -17689,7 +17713,7 @@ msgstr "галілео"
 #. https://celestrak.org/NORAD/elements/beidou.txt
 #. TRANSLATORS: CelesTrak source [Beidou]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=beidou&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3428
+#: plugins/Satellites/src/Satellites.cpp:3434
 msgid "beidou"
 msgstr "бейдоу"
 
@@ -17700,7 +17724,7 @@ msgstr "бейдоу"
 #. TRANSLATORS: CelesTrak source [Satellite-Based Augmentation System
 #. (WAAS/EGNOS/MSAS)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=sbas&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3432
+#: plugins/Satellites/src/Satellites.cpp:3438
 msgid "sbas"
 msgstr "sbas"
 
@@ -17709,7 +17733,7 @@ msgstr "sbas"
 #. https://celestrak.org/NORAD/elements/nnss.txt
 #. TRANSLATORS: CelesTrak source [Navy Navigation Satellite System (NNSS)]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=nnss&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3436
+#: plugins/Satellites/src/Satellites.cpp:3442
 msgid "nnss"
 msgstr "nnss"
 
@@ -17718,7 +17742,7 @@ msgstr "nnss"
 #. https://celestrak.org/NORAD/elements/musson.txt
 #. TRANSLATORS: CelesTrak source [Russian LEO Navigation]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=musson&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3440
+#: plugins/Satellites/src/Satellites.cpp:3446
 msgid "musson"
 msgstr "муссон"
 
@@ -17727,7 +17751,7 @@ msgstr "муссон"
 #. https://celestrak.org/NORAD/elements/science.txt
 #. TRANSLATORS: CelesTrak source [Space & Earth Science]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=science&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3447
+#: plugins/Satellites/src/Satellites.cpp:3453
 msgid "science"
 msgstr "наукові"
 
@@ -17736,7 +17760,7 @@ msgstr "наукові"
 #. https://celestrak.org/NORAD/elements/geodetic.txt
 #. TRANSLATORS: CelesTrak source [Geodetic]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=geodetic&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3451
+#: plugins/Satellites/src/Satellites.cpp:3457
 msgid "geodetic"
 msgstr "геодезичні"
 
@@ -17745,7 +17769,7 @@ msgstr "геодезичні"
 #. https://celestrak.org/NORAD/elements/engineering.txt
 #. TRANSLATORS: CelesTrak source [Engineering]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=engineering&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3455
+#: plugins/Satellites/src/Satellites.cpp:3461
 msgid "engineering"
 msgstr "інженерні"
 
@@ -17754,7 +17778,7 @@ msgstr "інженерні"
 #. https://celestrak.org/NORAD/elements/education.txt
 #. TRANSLATORS: CelesTrak source [Education]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=education&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3459
+#: plugins/Satellites/src/Satellites.cpp:3465
 msgid "education"
 msgstr "освітні"
 
@@ -17763,7 +17787,7 @@ msgstr "освітні"
 #. https://celestrak.org/NORAD/elements/military.txt
 #. TRANSLATORS: CelesTrak source [Miscellaneous Military]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=military&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3466
+#: plugins/Satellites/src/Satellites.cpp:3472
 msgid "military"
 msgstr "військові"
 
@@ -17772,7 +17796,7 @@ msgstr "військові"
 #. https://celestrak.org/NORAD/elements/radar.txt
 #. TRANSLATORS: CelesTrak source [Radar Calibration]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=radar&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3470
+#: plugins/Satellites/src/Satellites.cpp:3476
 msgid "radar"
 msgstr "радарні"
 
@@ -17781,7 +17805,7 @@ msgstr "радарні"
 #. https://celestrak.org/NORAD/elements/cubesat.txt
 #. TRANSLATORS: CelesTrak source [CubeSats]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=cubesat&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3474
+#: plugins/Satellites/src/Satellites.cpp:3480
 msgid "cubesat"
 msgstr "кубсат"
 
@@ -17790,99 +17814,99 @@ msgstr "кубсат"
 #. https://celestrak.org/NORAD/elements/other.txt
 #. TRANSLATORS: CelesTrak source [Other]:
 #. https://celestrak.org/NORAD/elements/gp.php?GROUP=other&FORMAT=tle
-#: plugins/Satellites/src/Satellites.cpp:3478
+#: plugins/Satellites/src/Satellites.cpp:3484
 msgid "other"
 msgstr "інші"
 
 #. TRANSLATORS: Satellite group: Meteosat
 #. TRANSLATORS: CelesTrak supplemental source [METEOSAT TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/meteosat.txt
-#: plugins/Satellites/src/Satellites.cpp:3485
+#: plugins/Satellites/src/Satellites.cpp:3491
 msgid "meteosat"
 msgstr "метеосупутник"
 
 #. TRANSLATORS: Satellite group: Telesat
 #. TRANSLATORS: CelesTrak supplemental source [Telesat TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/telesat.txt
-#: plugins/Satellites/src/Satellites.cpp:3489
+#: plugins/Satellites/src/Satellites.cpp:3495
 msgid "telesat"
 msgstr "телесупутник"
 
 #. TRANSLATORS: Satellite group: ISS Segments
 #. TRANSLATORS: CelesTrak supplemental source [ISS TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/iss.txt
-#: plugins/Satellites/src/Satellites.cpp:3492
+#: plugins/Satellites/src/Satellites.cpp:3498
 msgid "iss"
 msgstr "iss"
 
 #. TRANSLATORS: Satellite group: CPF
 #. TRANSLATORS: CelesTrak supplemental source [CPF TLEs]:
 #. https://celestrak.org/NORAD/elements/supplemental/cpf.txt
-#: plugins/Satellites/src/Satellites.cpp:3495
+#: plugins/Satellites/src/Satellites.cpp:3501
 msgid "cpf"
 msgstr "cpf"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3499
+#: plugins/Satellites/src/Satellites.cpp:3505
 msgid "ISS (ZARYA)"
 msgstr "МКС (Заря)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3501
+#: plugins/Satellites/src/Satellites.cpp:3507
 msgid "ISS (NAUKA)"
 msgstr "МКС (Наука)"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:3503
+#: plugins/Satellites/src/Satellites.cpp:3509
 msgid "ISS"
 msgstr "МКС"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:3505
+#: plugins/Satellites/src/Satellites.cpp:3511
 msgid "HST"
 msgstr "Космічний телескоп «Хаббл»"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:3507
+#: plugins/Satellites/src/Satellites.cpp:3513
 msgid "SPEKTR-R"
 msgstr "Спектр-Р"
 
 #. TRANSLATORS: Satellite name: Spektr-RG Space Observatory
-#: plugins/Satellites/src/Satellites.cpp:3509
+#: plugins/Satellites/src/Satellites.cpp:3515
 msgid "SPEKTR-RG"
 msgstr "СПЕКТР-РГ"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:3511
+#: plugins/Satellites/src/Satellites.cpp:3517
 msgid "INTEGRAL"
 msgstr "INTEGRAL"
 
 #. TRANSLATORS: Satellite name: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:3513
+#: plugins/Satellites/src/Satellites.cpp:3519
 msgid "TIANGONG 1"
 msgstr "Тянгунь 1"
 
 #. TRANSLATORS: Satellite name: name of China's space station module
-#: plugins/Satellites/src/Satellites.cpp:3515
+#: plugins/Satellites/src/Satellites.cpp:3521
 msgid "TIANHE"
 msgstr "ТЯНЬХЕ"
 
 #. TRANSLATORS: Satellite name: China's space station name (with name of base
 #. module)
-#: plugins/Satellites/src/Satellites.cpp:3517
+#: plugins/Satellites/src/Satellites.cpp:3523
 msgid "TIANGONG (TIANHE)"
 msgstr "ТЯНЬГУН (ТЯНЬХЕ)"
 
 #. TRANSLATORS: An uplink (UL or U/L) is the link from a ground station to a
 #. satellite
-#: plugins/Satellites/src/Satellites.cpp:3521
+#: plugins/Satellites/src/Satellites.cpp:3527
 msgid "uplink"
 msgstr "зв'язок Земля-ЛА"
 
 #. TRANSLATORS: A downlink (DL) is the link from a satellite to a ground
 #. station
-#: plugins/Satellites/src/Satellites.cpp:3523
+#: plugins/Satellites/src/Satellites.cpp:3529
 msgid "downlink"
 msgstr "зв'язок ЛА-Земля"
 
@@ -17890,30 +17914,30 @@ msgstr "зв'язок ЛА-Земля"
 #. which emit one or more signals (normally on a fixed frequency) whose
 #. purpose is twofold: station-keeping information (telemetry) and locates the
 #. satellite (determines its azimuth and elevation) in the sky
-#: plugins/Satellites/src/Satellites.cpp:3525
+#: plugins/Satellites/src/Satellites.cpp:3531
 msgid "beacon"
 msgstr "маяк"
 
 #. TRANSLATORS: Telemetry is the collection of measurements or other data at
 #. satellites and their automatic transmission to receiving equipment
 #. (telecommunication) for monitoring
-#: plugins/Satellites/src/Satellites.cpp:3527
+#: plugins/Satellites/src/Satellites.cpp:3533
 msgid "telemetry"
 msgstr "телеметрія"
 
 #. TRANSLATORS: The channel for transmission of video data
-#: plugins/Satellites/src/Satellites.cpp:3529
+#: plugins/Satellites/src/Satellites.cpp:3535
 msgid "video"
 msgstr "відео"
 
 #. TRANSLATORS: The broadband is wide bandwidth data transmission which
 #. transports multiple signals at a wide range of frequencies
-#: plugins/Satellites/src/Satellites.cpp:3531
+#: plugins/Satellites/src/Satellites.cpp:3537
 msgid "broadband"
 msgstr "широкосмуговий"
 
 #. TRANSLATORS: The channel for transmission of commands
-#: plugins/Satellites/src/Satellites.cpp:3533
+#: plugins/Satellites/src/Satellites.cpp:3539
 msgid "command"
 msgstr "командний"
 
@@ -21728,7 +21752,7 @@ msgid "Note:"
 msgstr "Нотатка:"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:535
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:309
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:327
 msgid "Place of the string with coordinates of the mouse pointer"
 msgstr "Розташування рядка координат вказівника миші"
 
@@ -22280,14 +22304,14 @@ msgstr ""
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:160
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:243
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:220
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:229
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:195
 msgid "Publications"
 msgstr "Публікації"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:161
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:244
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:221
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:230
 #: plugins/OnlineQueries/src/gui/OnlineQueriesDialog.cpp:196
 msgid "If you use this plugin in your publications, please cite:"
 msgstr ""
@@ -25710,40 +25734,39 @@ msgstr "Акронічний/Космічний/Сонячний схід/зах
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:160
 msgid ""
-"The days of Cosmical rise/set of an object are estimated as the days when "
-"the object rises (or sets) together with the rise/set of the Sun. The exact "
-"dates of these ephemeris depend on the Observer's location.  On the "
-"contrary, the Acronycal rise (or set) happens when the star rises/sets with "
-"the setting/rising of the Sun (i.e., opposite to the Sun). On the one hand, "
-"it is obvious that the source is hardly observable (or not observable at "
-"all) in the dates between Cosmical set and Cosmical rise. On the other hand,"
-" the dates around the Acronychal set and rise are those when the altitude of"
-" the celestial object uses to be high when the Sun is well below the horizon"
-" (hence the object can be well observed). The date of Heliacal rise is the "
+"The days of Cosmical rise/set of an object are defined as the days when the "
+"object rises (or sets) together with the rise/set of the Sun. The exact "
+"dates of these events depend on the Observer's location.  In contrast, the "
+"Acronychal rise (or set) happens when the star rises/sets with the "
+"setting/rising of the Sun (i.e., opposite to the Sun). On the one hand, it "
+"is obvious that the source is hardly observable (or not observable at all) "
+"in the dates between Cosmical set and Cosmical rise. On the other hand, the "
+"dates around the Acronychal set and rise are those when the altitude of the "
+"celestial object uses to be high when the Sun is well below the horizon "
+"(hence the object can be well observed). The date of Heliacal rise is the "
 "first day of the year when a star becomes visible. It happens when the star "
-"is close to the eastern horizon roughly before the end of the astronomical "
-"night (i.e., at the astronomical twilight). In the following nights, the "
-"star will be visible during longer periods of time, until it reaches its "
-"Heliacal set (i.e., the last night of the year when the star is still "
-"visible). At the Heliacal set, the star sets roughly after the beginning of "
-"the astronomical night."
+"rises along the eastern horizon before disappearing in the morning twilight."
+" In the following nights, the star will be visible during longer periods of "
+"time, until it reaches its Heliacal set (i.e., the last night of the year "
+"when the star is still visible). At the Heliacal set, the star sets after "
+"becoming visible for just a moment shortly after sunset."
 msgstr ""
 "Дні сонячного сходу та космічного заходу обчислюються як дні, коли об’єкт "
 "сходить (або заходить) разом із астрономічним сходом чи заходом Сонця. Точні"
-" дати цих ефемерид залежать від розташування спостерігача. Навпаки, "
-"акронічний схід (або захід) відбувається тоді, коли зірка сходить або "
-"заходить із заходом або сходом Сонця (тобто у протилежність Сонцю). З іншого"
-" боку, очевидно, що джерело світла важко спостерігати (або взагалі неможливо"
-" спостерігати) у дні між космічним заходом та космічним сходом. Також у дні,"
-" близькі до акронічного заходу та сходу, висота небесного об’єкта є доволі "
+" дати цих подій залежать від розташування спостерігача. Навпаки, акронічний "
+"схід (або захід) відбувається тоді, коли зірка сходить або заходить із "
+"заходом або сходом Сонця (тобто у протилежність Сонцю). З іншого боку, "
+"очевидно, що джерело світла важко спостерігати (або взагалі неможливо "
+"спостерігати) у дні між космічним заходом та космічним сходом. Також у дні, "
+"близькі до акронічного заходу та сходу, висота небесного об’єкта є доволі "
 "високою, коли Сонце перебуває на значній відстані під горизонтом (отже за "
 "об’єктом легко спостерігати). Дата сонячного сходу — перший день року, коли "
-"за зіркою можна спостерігати. Таке трапляється тоді, коли зірка перебуває "
-"близько від східної межі горизонту безпосередньо перед кінцем астрономічної "
-"ночі (тобто у астрономічні сутінки). У наступні ночі зірку буде видно "
-"протягом довших періодів часу, аж доки не станеться сонячний захід (остання "
-"ніч року, коли за зіркою все ще можна буде спостерігати). Під час сонячного "
-"заходу зірка заходить за горизонт приблизно на початку астрономічної ночі."
+"за зіркою можна спостерігати. Таке трапляється тоді, коли зірка сходить "
+"уздовж східної межі горизонту, перш ніж зникнути у ранкових сутінках. У "
+"наступні ночі зірку буде видно протягом довших періодів часу, аж доки не "
+"станеться сонячний захід (остання ніч року, коли за зіркою все ще можна буде"
+" спостерігати). Під час сонячного заходу зірка заходить за горизонт, перш "
+"ніж стати видимою лише на короткий момент після заходу сонця."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:161
 msgid "Largest Sun separation:"
@@ -25935,7 +25958,7 @@ msgid "Color of text"
 msgstr "Колір тексту"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:259
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:307
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:325
 msgid "Font size:"
 msgstr "Розмір шрифту:"
 
@@ -26922,157 +26945,165 @@ msgstr "Рік:"
 msgid "Results"
 msgstr "Результати"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:54
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:99
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:100
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:293
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:295
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:322
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:55
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:101
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:102
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:306
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:308
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:340
 msgid "Pointer Coordinates"
 msgstr "Координати вказівника"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:57
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:58
 msgid "This plugin shows the coordinates of the mouse pointer."
 msgstr ""
 "За допомогою цього додатка можна переглядати координати вказівника миші."
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:99
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:101
 msgid "Show coordinates of the mouse pointer"
 msgstr "Показувати координати вказівника миші"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:136
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:139
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
 msgstr "ПС/Схил (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:152
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:155
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
 msgstr "ПС/Схил"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:173
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:176
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
 msgstr "Аз/Вис"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:189
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:192
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
 msgstr "Гал. довг./шир."
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:205
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:208
 msgctxt "abbreviated in the plugin"
 msgid "Supergal. Long/Lat"
 msgstr "Супергал. довг./шир."
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:224
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:227
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
 msgstr "Екл. довг./шир."
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:243
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:246
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr "Екл. довг./шир. (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:261
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:264
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "ПС/Схил"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:123
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:117
 msgid "Pointer Coordinates plug-in"
 msgstr "Додаток координат вказівника"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:124
 msgid "Show coordinates of the mouse cursor on the screen."
 msgstr "Показувати координати вказівника миші на екрані."
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:176
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:170
 msgid "The top center of the screen"
 msgstr "Згори у центрі екрана"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:177
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:171
 msgid "In center of the top right half of the screen"
 msgstr "У центрі згори у правій половині екрана"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:178
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:172
 msgid "The right bottom corner of the screen"
 msgstr "У правому нижньому куті екрана"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:179
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:173
 msgid "Near mouse cursor"
 msgstr "Поряд із вказівником миші"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:180
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:174
 msgid "Custom position"
 msgstr "Нетипова позиція"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:195
 msgid "Right ascension/Declination (J2000.0)"
 msgstr "Пряме сходження/Схилення (J2000.0)"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:202
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:196
 msgid "Right ascension/Declination"
 msgstr "Пряме сходження/Схилення"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:204
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Ecliptic Longitude/Latitude"
 msgstr "Екліптична довгота/широта"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:205
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:199
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
 msgstr "Екліптична довгота/широта (J2000.0)"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:206
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:200
 msgid "Altitude/Azimuth"
 msgstr "Висота/Азимут"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:207
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:201
 msgid "Galactic Longitude/Latitude"
 msgstr "Галактична довгота/широта"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:208
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:202
 msgid "Supergalactic Longitude/Latitude"
 msgstr "Супергалактична довгота/широта"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:238
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:232
 msgid "Coordinates of custom position:"
 msgstr "Координати нетипової позиції:"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:296
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:309
 msgid "Enable display of coordinates at startup"
 msgstr "Увімкнути показ координат під час запуску"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:310
 msgid "Show plug-in button on toolbar"
 msgstr "Показувати кнопку додатка на панелі інструментів"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:301
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:314
 msgid "Show IAU constellation code"
 msgstr "Показувати код МАС сузір’я"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:315
 msgid "Show crossed lines under mouse cursor"
 msgstr "Показувати перехрестя під вказівником миші"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:304
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
+msgid "Show elongation from the Sun in ecliptic longitude"
+msgstr "Показувати елонгацію від Сонця у екліптичній довготі"
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:318
 msgid "Which coordinate system will be used for displaying"
 msgstr "Координатна система, яку буде використано для показу даних"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:306
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:320
 msgid "Coordinates:"
 msgstr "Координати:"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:311
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:322
+msgid "The color of the screen text"
+msgstr "Колір тексту на екрані"
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:329
 msgid "Place of the string:"
 msgstr "Розташування рядка:"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:313
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:331
 msgid "Coordinate X"
 msgstr "Координата X"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:317
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:335
 msgid "Coordinate Y"
 msgstr "Координата Y"
 
@@ -28064,202 +28095,252 @@ msgstr "VTS"
 msgid "Allow to use Stellarium as a plugin in CNES VTS."
 msgstr "Дозволити використання Stellarium як додатка у VTS CNES."
 
-#: plugins/Calendars/src/Calendars.cpp:84
-#: plugins/Calendars/src/Calendars.cpp:181
-#: plugins/Calendars/src/Calendars.cpp:182
+#: plugins/Calendars/src/Calendars.cpp:89
+#: plugins/Calendars/src/Calendars.cpp:191
+#: plugins/Calendars/src/Calendars.cpp:192
 msgid "Calendars"
 msgstr "Календарі"
 
-#: plugins/Calendars/src/Calendars.cpp:87
+#: plugins/Calendars/src/Calendars.cpp:92
 msgid "Calendars of the world"
 msgstr "Календарі світу"
 
-#: plugins/Calendars/src/Calendars.cpp:336
-#: plugins/Calendars/src/ui_calendarsDialog.h:924
-#: plugins/Calendars/src/ui_calendarsDialog.h:958
-msgctxt "calendar"
-msgid "Julian"
-msgstr "Юліанський"
-
-#: plugins/Calendars/src/Calendars.cpp:337
-#: plugins/Calendars/src/ui_calendarsDialog.h:929
-#: plugins/Calendars/src/ui_calendarsDialog.h:957
+#: plugins/Calendars/src/Calendars.cpp:357
+#: plugins/Calendars/src/ui_calendarsDialog.h:972
+#: plugins/Calendars/src/ui_calendarsDialog.h:992
 msgctxt "calendar"
 msgid "Gregorian"
 msgstr "Григоріанський"
 
-#: plugins/Calendars/src/Calendars.cpp:338
-#: plugins/Calendars/src/ui_calendarsDialog.h:934
-#: plugins/Calendars/src/ui_calendarsDialog.h:959
+#: plugins/Calendars/src/Calendars.cpp:358
+#: plugins/Calendars/src/ui_calendarsDialog.h:944
+#: plugins/Calendars/src/ui_calendarsDialog.h:993
+msgctxt "calendar"
+msgid "Julian"
+msgstr "Юліанський"
+
+#: plugins/Calendars/src/Calendars.cpp:359
+#: plugins/Calendars/src/ui_calendarsDialog.h:970
+#: plugins/Calendars/src/ui_calendarsDialog.h:994
 msgctxt "calendar"
 msgid "Revised Julian"
 msgstr "Новоюліанський"
 
-#: plugins/Calendars/src/Calendars.cpp:339
+#: plugins/Calendars/src/Calendars.cpp:360
 msgctxt "calendar"
 msgid "ISO week"
 msgstr "Тиждень ISO"
 
-#: plugins/Calendars/src/Calendars.cpp:340
-#: plugins/Calendars/src/ui_calendarsDialog.h:931
+#: plugins/Calendars/src/Calendars.cpp:361
+#: plugins/Calendars/src/ui_calendarsDialog.h:976
 msgctxt "calendar"
 msgid "Icelandic"
 msgstr "Ісландський"
 
-#: plugins/Calendars/src/Calendars.cpp:341
-#: plugins/Calendars/src/ui_calendarsDialog.h:933
+#: plugins/Calendars/src/Calendars.cpp:362
+#: plugins/Calendars/src/ui_calendarsDialog.h:969
 msgctxt "calendar"
 msgid "Roman"
 msgstr "Римський"
 
-#: plugins/Calendars/src/Calendars.cpp:342
-#: plugins/Calendars/src/ui_calendarsDialog.h:923
+#: plugins/Calendars/src/Calendars.cpp:363
+#: plugins/Calendars/src/ui_calendarsDialog.h:956
 msgctxt "calendar"
 msgid "Olympic"
 msgstr "Олімпійський"
 
-#: plugins/Calendars/src/Calendars.cpp:343
-#: plugins/Calendars/src/ui_calendarsDialog.h:928
+#: plugins/Calendars/src/Calendars.cpp:364
+#: plugins/Calendars/src/ui_calendarsDialog.h:945
 msgctxt "calendar"
 msgid "Egyptian"
 msgstr "Єгипетський"
 
-#: plugins/Calendars/src/Calendars.cpp:344
-#: plugins/Calendars/src/ui_calendarsDialog.h:919
+#: plugins/Calendars/src/Calendars.cpp:365
+#: plugins/Calendars/src/ui_calendarsDialog.h:948
 msgctxt "calendar"
 msgid "Armenian"
 msgstr "Вірменський"
 
-#: plugins/Calendars/src/Calendars.cpp:345
-#: plugins/Calendars/src/ui_calendarsDialog.h:930
+#: plugins/Calendars/src/Calendars.cpp:366
+#: plugins/Calendars/src/ui_calendarsDialog.h:962
 msgctxt "calendar"
 msgid "Zoroastrian"
 msgstr "Зороастрійський"
 
-#: plugins/Calendars/src/Calendars.cpp:346
-#: plugins/Calendars/src/ui_calendarsDialog.h:917
+#: plugins/Calendars/src/Calendars.cpp:367
+#: plugins/Calendars/src/ui_calendarsDialog.h:947
 msgctxt "calendar"
 msgid "Coptic"
 msgstr "Коптський"
 
-#: plugins/Calendars/src/Calendars.cpp:347
-#: plugins/Calendars/src/ui_calendarsDialog.h:913
+#: plugins/Calendars/src/Calendars.cpp:368
+#: plugins/Calendars/src/ui_calendarsDialog.h:946
 msgctxt "calendar"
 msgid "Ethiopic"
 msgstr "Ефіопський"
 
-#: plugins/Calendars/src/Calendars.cpp:348
+#: plugins/Calendars/src/Calendars.cpp:369
 msgctxt "calendar"
 msgid "French Rev. (Astron.)"
 msgstr "Французький рев. (астр.)"
 
-#: plugins/Calendars/src/Calendars.cpp:349
+#: plugins/Calendars/src/Calendars.cpp:370
 msgctxt "calendar"
 msgid "French Rev. (Arithm.)"
 msgstr "Французький революційний (арифметичний)"
 
-#: plugins/Calendars/src/Calendars.cpp:350
-#: plugins/Calendars/src/ui_calendarsDialog.h:926
+#: plugins/Calendars/src/Calendars.cpp:371
+#: plugins/Calendars/src/ui_calendarsDialog.h:943
 msgctxt "calendar"
 msgid "Islamic"
 msgstr "Ісламський"
 
-#: plugins/Calendars/src/Calendars.cpp:351
-#: plugins/Calendars/src/ui_calendarsDialog.h:935
+#: plugins/Calendars/src/Calendars.cpp:372
+#: plugins/Calendars/src/ui_calendarsDialog.h:953
 msgctxt "calendar"
 msgid "Hebrew"
 msgstr "Єврейський"
 
-#: plugins/Calendars/src/Calendars.cpp:352
+#: plugins/Calendars/src/Calendars.cpp:373
 msgctxt "calendar"
 msgid "Persian (Arithm.)"
 msgstr "Перський (арифметичний)"
 
-#: plugins/Calendars/src/Calendars.cpp:353
+#: plugins/Calendars/src/Calendars.cpp:374
 msgctxt "calendar"
 msgid "Persian (Astron.)"
 msgstr "Перський (астр.)"
 
-#: plugins/Calendars/src/Calendars.cpp:354
-#: plugins/Calendars/src/ui_calendarsDialog.h:921
+#: plugins/Calendars/src/Calendars.cpp:375
+msgctxt "calendar"
+msgid "Bahá’í (Arithm.)"
+msgstr "Бахаї (арифм.)"
+
+#: plugins/Calendars/src/Calendars.cpp:376
+msgctxt "calendar"
+msgid "Bahá’í (Astron.)"
+msgstr "Бахаї (астрон.)"
+
+#: plugins/Calendars/src/Calendars.cpp:377
+#: plugins/Calendars/src/ui_calendarsDialog.h:949
 msgctxt "calendar"
 msgid "Old Hindu Solar"
 msgstr "Давній індуїстський сонячний"
 
-#: plugins/Calendars/src/Calendars.cpp:355
+#: plugins/Calendars/src/Calendars.cpp:378
 msgctxt "calendar"
 msgid "Old Hindu Lunisolar"
 msgstr "Давній індуїстський місячно-сонячний"
 
-#: plugins/Calendars/src/Calendars.cpp:356
-#: plugins/Calendars/src/ui_calendarsDialog.h:942
+#: plugins/Calendars/src/Calendars.cpp:379
+#: plugins/Calendars/src/ui_calendarsDialog.h:952
 msgctxt "calendar"
 msgid "New Hindu Solar"
 msgstr "Новий індуїстський сонячний"
 
-#: plugins/Calendars/src/Calendars.cpp:357
+#: plugins/Calendars/src/Calendars.cpp:380
 msgctxt "calendar"
 msgid "New Hindu Lunisolar"
 msgstr "Новий індуїстський місячно-сонячний"
 
-#: plugins/Calendars/src/Calendars.cpp:358
+#: plugins/Calendars/src/Calendars.cpp:381
 msgctxt "calendar"
 msgid "New Hindu Panchang"
 msgstr "Новий індуїстський панчанга"
 
-#: plugins/Calendars/src/Calendars.cpp:360
-#: plugins/Calendars/src/ui_calendarsDialog.h:943
+#: plugins/Calendars/src/Calendars.cpp:383
+#: plugins/Calendars/src/ui_calendarsDialog.h:959
 msgctxt "calendar"
 msgid "Hindu Astro Solar"
 msgstr "Індуїстський астрономічний сонячний"
 
-#: plugins/Calendars/src/Calendars.cpp:361
-#: plugins/Calendars/src/ui_calendarsDialog.h:944
+#: plugins/Calendars/src/Calendars.cpp:384
+#: plugins/Calendars/src/ui_calendarsDialog.h:966
 msgctxt "calendar"
 msgid "Hindu Astro Lunisolar"
 msgstr "Індуїстський астрономічний місячно-сонячний"
 
-#: plugins/Calendars/src/Calendars.cpp:362
-#: plugins/Calendars/src/ui_calendarsDialog.h:940
+#: plugins/Calendars/src/Calendars.cpp:385
+#: plugins/Calendars/src/ui_calendarsDialog.h:968
 msgctxt "calendar"
 msgid "Tibetan"
 msgstr "Тибетський"
 
-#: plugins/Calendars/src/Calendars.cpp:363
-#: plugins/Calendars/src/ui_calendarsDialog.h:927
+#: plugins/Calendars/src/Calendars.cpp:387
+#: plugins/Calendars/src/ui_calendarsDialog.h:973
+#: plugins/Calendars/src/ui_calendarsDialog.h:996
+msgctxt "calendar"
+msgid "Chinese"
+msgstr "Китайський"
+
+#: plugins/Calendars/src/Calendars.cpp:388
+msgctxt "calendar"
+msgid "Chinese Solar Terms"
+msgstr "Солярні терміни китайською"
+
+#: plugins/Calendars/src/Calendars.cpp:391
+#: plugins/Calendars/src/ui_calendarsDialog.h:950
+msgctxt "calendar"
+msgid "Japanese"
+msgstr "Японською"
+
+#: plugins/Calendars/src/Calendars.cpp:392
+msgctxt "calendar"
+msgid "Japanese Solar Terms"
+msgstr "Солярні терміни японською"
+
+#: plugins/Calendars/src/Calendars.cpp:395
+#: plugins/Calendars/src/ui_calendarsDialog.h:977
+msgctxt "calendar"
+msgid "Korean"
+msgstr "Корейською"
+
+#: plugins/Calendars/src/Calendars.cpp:396
+msgctxt "calendar"
+msgid "Korean Solar Terms"
+msgstr "Солярні терміни корейською"
+
+#: plugins/Calendars/src/Calendars.cpp:398
+#: plugins/Calendars/src/ui_calendarsDialog.h:979
+msgctxt "calendar"
+msgid "Vietnamese"
+msgstr "В'єтнамською"
+
+#: plugins/Calendars/src/Calendars.cpp:399
+#: plugins/Calendars/src/ui_calendarsDialog.h:957
+msgctxt "calendar"
+msgid "Balinese Pawukon"
+msgstr "Балійський павукон"
+
+#: plugins/Calendars/src/Calendars.cpp:400
+#: plugins/Calendars/src/ui_calendarsDialog.h:964
 msgctxt "calendar"
 msgid "Maya Long Count"
 msgstr "Майя із довгим обліком"
 
-#: plugins/Calendars/src/Calendars.cpp:364
-#: plugins/Calendars/src/ui_calendarsDialog.h:922
+#: plugins/Calendars/src/Calendars.cpp:401
+#: plugins/Calendars/src/ui_calendarsDialog.h:978
 msgctxt "calendar"
 msgid "Maya Haab"
 msgstr "Хааб майя"
 
-#: plugins/Calendars/src/Calendars.cpp:365
-#: plugins/Calendars/src/ui_calendarsDialog.h:915
+#: plugins/Calendars/src/Calendars.cpp:402
+#: plugins/Calendars/src/ui_calendarsDialog.h:954
 msgctxt "calendar"
 msgid "Maya Tzolkin"
 msgstr "Цолкін майя"
 
-#: plugins/Calendars/src/Calendars.cpp:366
-#: plugins/Calendars/src/ui_calendarsDialog.h:920
+#: plugins/Calendars/src/Calendars.cpp:403
+#: plugins/Calendars/src/ui_calendarsDialog.h:975
 msgctxt "calendar"
 msgid "Aztec Xihuitl"
 msgstr "Шихуїтль ацтеків"
 
-#: plugins/Calendars/src/Calendars.cpp:367
-#: plugins/Calendars/src/ui_calendarsDialog.h:918
+#: plugins/Calendars/src/Calendars.cpp:404
+#: plugins/Calendars/src/ui_calendarsDialog.h:963
 msgctxt "calendar"
 msgid "Aztec Tonalpohualli"
 msgstr "Тоналпоуаллі ацтеків"
-
-#: plugins/Calendars/src/Calendars.cpp:369
-#: plugins/Calendars/src/ui_calendarsDialog.h:914
-msgctxt "calendar"
-msgid "Balinese Pawukon"
-msgstr "Балійський павукон"
 
 #: plugins/Calendars/src/ArmenianCalendar.cpp:40
 msgctxt "Armenian month name"
@@ -28525,419 +28606,419 @@ msgctxt "Aztec Xihuitl month name"
 msgid "Nemontemi (Full in vain)"
 msgstr "Немотемі (Повний марноти)"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:210
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:187
 msgctxt "Balinese Pawukon date name"
 msgid "Luang"
 msgstr "Луанг"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:211
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:188
 msgctxt "Balinese Pawukon date name"
 msgid "Menga"
 msgstr "Менга"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:212
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:189
 msgctxt "Balinese Pawukon date name"
 msgid "Pepet"
 msgstr "Пепет"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:213
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:190
 msgctxt "Balinese Pawukon date name"
 msgid "Pasah"
 msgstr "Пасах"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:214
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:191
 msgctxt "Balinese Pawukon date name"
 msgid "Beteng"
 msgstr "Бетенг"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:215
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:192
 msgctxt "Balinese Pawukon date name"
 msgid "Kajeng"
 msgstr "Кадженг"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:216
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:238
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:259
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:193
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:215
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:236
 msgctxt "Balinese Pawukon date name"
 msgid "Sri"
 msgstr "Срі"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:217
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:194
 msgctxt "Balinese Pawukon date name"
 msgid "Laba"
 msgstr "Лаба"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:218
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:195
 msgctxt "Balinese Pawukon date name"
 msgid "Jaya"
 msgstr "Джая"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:219
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:196
 msgctxt "Balinese Pawukon date name"
 msgid "Menala"
 msgstr "Меная"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:220
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:197
 msgctxt "Balinese Pawukon date name"
 msgid "Umanis"
 msgstr "Уманіс"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:221
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:198
 msgctxt "Balinese Pawukon date name"
 msgid "Paing"
 msgstr "Паїнг"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:222
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:199
 msgctxt "Balinese Pawukon date name"
 msgid "Pon"
 msgstr "Пон"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:223
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:200
 msgctxt "Balinese Pawukon date name"
 msgid "Wage"
 msgstr "Ваге"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:224
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:201
 msgctxt "Balinese Pawukon date name"
 msgid "Keliwon"
 msgstr "Келівон"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:225
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:202
 msgctxt "Balinese Pawukon date name"
 msgid "Tungleh"
 msgstr "Тунглех"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:226
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:203
 msgctxt "Balinese Pawukon date name"
 msgid "Aryang"
 msgstr "Арянг"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:227
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:204
 msgctxt "Balinese Pawukon date name"
 msgid "Urukung"
 msgstr "Урукунг"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:228
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:205
 msgctxt "Balinese Pawukon date name"
 msgid "Paniron"
 msgstr "Панірон"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:229
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:206
 msgctxt "Balinese Pawukon date name"
 msgid "Was"
 msgstr "Вас"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:230
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:207
 msgctxt "Balinese Pawukon date name"
 msgid "Maulu"
 msgstr "Маулу"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:231
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:208
 msgctxt "Balinese Pawukon date name"
 msgid "Redite"
 msgstr "Редіте"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:232
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:209
 msgctxt "Balinese Pawukon date name"
 msgid "Coma"
 msgstr "Кома"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:233
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:210
 msgctxt "Balinese Pawukon date name"
 msgid "Anggara"
 msgstr "Анггара"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:234
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:211
 msgctxt "Balinese Pawukon date name"
 msgid "Buda"
 msgstr "Буда"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:235
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:212
 msgctxt "Balinese Pawukon date name"
 msgid "Wraspati"
 msgstr "Враспаті"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:236
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:213
 msgctxt "Balinese Pawukon date name"
 msgid "Sukra"
 msgstr "Сукра"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:237
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:214
 msgctxt "Balinese Pawukon date name"
 msgid "Saniscara"
 msgstr "Саніскара"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:239
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:216
 msgctxt "Balinese Pawukon date name"
 msgid "Indra"
 msgstr "Індра"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:240
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:217
 msgctxt "Balinese Pawukon date name"
 msgid "Guru"
 msgstr "Гуру"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:241
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:218
 msgctxt "Balinese Pawukon date name"
 msgid "Yama"
 msgstr "Яма"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:242
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:219
 msgctxt "Balinese Pawukon date name"
 msgid "Ludra"
 msgstr "Лудра"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:243
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:220
 msgctxt "Balinese Pawukon date name"
 msgid "Brahma"
 msgstr "Брахма"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:244
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:221
 msgctxt "Balinese Pawukon date name"
 msgid "Kala"
 msgstr "Кала"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:245
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:222
 msgctxt "Balinese Pawukon date name"
 msgid "Uma"
 msgstr "Ума"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:246
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:223
 msgctxt "Balinese Pawukon date name"
 msgid "Dangu"
 msgstr "Дангу"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:247
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:224
 msgctxt "Balinese Pawukon date name"
 msgid "Jangur"
 msgstr "Джангур"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:248
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:225
 msgctxt "Balinese Pawukon date name"
 msgid "Gigis"
 msgstr "Гігіс"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:249
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:226
 msgctxt "Balinese Pawukon date name"
 msgid "Nohan"
 msgstr "Нохан"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:250
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:227
 msgctxt "Balinese Pawukon date name"
 msgid "Ogan"
 msgstr "Оган"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:251
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:228
 msgctxt "Balinese Pawukon date name"
 msgid "Erangan"
 msgstr "Еранган"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:252
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:229
 msgctxt "Balinese Pawukon date name"
 msgid "Urungan"
 msgstr "Урунган"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:253
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:230
 msgctxt "Balinese Pawukon date name"
 msgid "Tulus"
 msgstr "Тулус"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:254
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:231
 msgctxt "Balinese Pawukon date name"
 msgid "Dadi"
 msgstr "Даді"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:255
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:232
 msgctxt "Balinese Pawukon date name"
 msgid "Pandita"
 msgstr "Пандіта"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:256
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:233
 msgctxt "Balinese Pawukon date name"
 msgid "Pati"
 msgstr "Паті"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:257
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:234
 msgctxt "Balinese Pawukon date name"
 msgid "Suka"
 msgstr "Сука"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:258
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:235
 msgctxt "Balinese Pawukon date name"
 msgid "Duka"
 msgstr "Дука"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:260
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:237
 msgctxt "Balinese Pawukon date name"
 msgid "Manuh"
 msgstr "Манух"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:261
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:238
 msgctxt "Balinese Pawukon date name"
 msgid "Manusa"
 msgstr "Мануса"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:262
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:239
 msgctxt "Balinese Pawukon date name"
 msgid "Raja"
 msgstr "Раджа"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:263
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:240
 msgctxt "Balinese Pawukon date name"
 msgid "Dewa"
 msgstr "Дева"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:264
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:241
 msgctxt "Balinese Pawukon date name"
 msgid "Raksasa"
 msgstr "Раксаса"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:265
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:242
 msgctxt "Balinese Pawukon date name"
 msgid "Sinta"
 msgstr "Сінта"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:266
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:243
 msgctxt "Balinese Pawukon date name"
 msgid "Landep"
 msgstr "Ландеп"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:267
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:244
 msgctxt "Balinese Pawukon date name"
 msgid "Ukir"
 msgstr "Укір"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:268
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:245
 msgctxt "Balinese Pawukon date name"
 msgid "Kulantir"
 msgstr "Кулантір"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:269
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:246
 msgctxt "Balinese Pawukon date name"
 msgid "Taulu"
 msgstr "Таулу"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:270
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:247
 msgctxt "Balinese Pawukon date name"
 msgid "Gumbreg"
 msgstr "Гумбрег"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:271
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:248
 msgctxt "Balinese Pawukon date name"
 msgid "Wariga"
 msgstr "Варіга"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:272
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:249
 msgctxt "Balinese Pawukon date name"
 msgid "Warigadian"
 msgstr "Варігадіан"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:273
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:250
 msgctxt "Balinese Pawukon date name"
 msgid "Jukungwangi"
 msgstr "Джукунгвангі"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:274
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:251
 msgctxt "Balinese Pawukon date name"
 msgid "Sungsang"
 msgstr "Гунгсанг"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:275
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:252
 msgctxt "Balinese Pawukon date name"
 msgid "Dunggulan"
 msgstr "Дунггулан"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:276
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:253
 msgctxt "Balinese Pawukon date name"
 msgid "Kuningan"
 msgstr "Кунінган"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:277
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:254
 msgctxt "Balinese Pawukon date name"
 msgid "Langkir"
 msgstr "Лангкір"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:278
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:255
 msgctxt "Balinese Pawukon date name"
 msgid "Medangsia"
 msgstr "Медангсіа"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:279
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:256
 msgctxt "Balinese Pawukon date name"
 msgid "Pujut"
 msgstr "Пуджут"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:280
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:257
 msgctxt "Balinese Pawukon date name"
 msgid "Pahang"
 msgstr "Паханг"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:281
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:258
 msgctxt "Balinese Pawukon date name"
 msgid "Krulut"
 msgstr "Крулут"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:282
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:259
 msgctxt "Balinese Pawukon date name"
 msgid "Merakih"
 msgstr "Меракіх"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:283
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:260
 msgctxt "Balinese Pawukon date name"
 msgid "Tambir"
 msgstr "Тамбір"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:284
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:261
 msgctxt "Balinese Pawukon date name"
 msgid "Medangkungan"
 msgstr "Медангкунган"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:285
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:262
 msgctxt "Balinese Pawukon date name"
 msgid "Matal"
 msgstr "Матал"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:286
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:263
 msgctxt "Balinese Pawukon date name"
 msgid "Uye"
 msgstr "Ує"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:287
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:264
 msgctxt "Balinese Pawukon date name"
 msgid "Menail"
 msgstr "Менаїл"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:288
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:265
 msgctxt "Balinese Pawukon date name"
 msgid "Parangbakat"
 msgstr "Парангбакат"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:289
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:266
 msgctxt "Balinese Pawukon date name"
 msgid "Bala"
 msgstr "Бала"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:290
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:267
 msgctxt "Balinese Pawukon date name"
 msgid "Ugu"
 msgstr "Угу"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:291
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:268
 msgctxt "Balinese Pawukon date name"
 msgid "Wayang"
 msgstr "Ваянг"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:292
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:269
 msgctxt "Balinese Pawukon date name"
 msgid "Kelawu"
 msgstr "Кеяву"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:293
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:270
 msgctxt "Balinese Pawukon date name"
 msgid "Dukut"
 msgstr "Дукут"
 
-#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:294
+#: plugins/Calendars/src/BalinesePawukonCalendar.cpp:271
 msgctxt "Balinese Pawukon date name"
 msgid "Watugunung"
 msgstr "Ватугунунг"
@@ -29653,7 +29734,7 @@ msgctxt "Roman calendar term"
 msgid "ante diem"
 msgstr "ante diem"
 
-#: plugins/Calendars/src/RomanCalendar.cpp:104
+#: plugins/Calendars/src/RomanCalendar.cpp:105
 msgctxt "ab urbe condita"
 msgid "A.U.C."
 msgstr "A.U.C."
@@ -30899,112 +30980,1295 @@ msgstr "Кшая"
 msgid "%1, %2 - %3 (%4) - %5 K.Y. (Jovian %6:%7)"
 msgstr "%1, %2 - %3 (%4) - %5 К.Ю. (юпітеріанський %6:%7)"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:41
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:40
 msgctxt "Persian weekday name"
 msgid "Yek-shanbēh"
 msgstr "Єк-шанбех"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:42
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:41
 msgctxt "Persian weekday name"
 msgid "Do-shanbēh"
 msgstr "До-шанбех"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:43
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:42
 msgctxt "Persian weekday name"
 msgid "Se-shanbēh"
 msgstr "Се-шанбех"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:44
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:43
 msgctxt "Persian weekday name"
 msgid "Chār-shanbēh"
 msgstr "Чар-шанбех"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:45
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:44
 msgctxt "Persian weekday name"
 msgid "Panj-shanbēh"
 msgstr "Пандж-шанбех"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:46
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:45
 msgctxt "Persian weekday name"
 msgid "Jom`ēh"
 msgstr "Джомех"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:47
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:46
 msgctxt "Persian weekday name"
 msgid "Shanbēh"
 msgstr "Шанбех"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:49
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:48
 msgctxt "Persian month name"
 msgid "Farvardīn"
 msgstr "Фарвардін"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:50
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:49
 msgctxt "Persian month name"
 msgid "Ordībehesht"
 msgstr "Ордібехешт"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:51
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:50
 msgctxt "Persian month name"
 msgid "Xordād"
 msgstr "Шордад"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:52
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:51
 msgctxt "Persian month name"
 msgid "Tīr"
 msgstr "Тір"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:53
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:52
 msgctxt "Persian month name"
 msgid "Mordād"
 msgstr "Мордад"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:54
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:53
 msgctxt "Persian month name"
 msgid "Shahrīvar"
 msgstr "Шахрівар"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:55
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:54
 msgctxt "Persian month name"
 msgid "Mehr"
 msgstr "Мехр"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:56
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:55
 msgctxt "Persian month name"
 msgid "Ābān"
 msgstr "Абан"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:57
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:56
 msgctxt "Persian month name"
 msgid "Āzar"
 msgstr "Азар"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:58
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:57
 msgctxt "Persian month name"
 msgid "Dey"
 msgstr "Дей"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:59
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:58
 msgctxt "Persian month name"
 msgid "Bahman"
 msgstr "Бахман"
 
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:60
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:59
 msgctxt "Persian month name"
 msgid "Esfand"
 msgstr "Есфанд"
 
 #. TRANSLATORS: A.P. means Anno Persico/Anno Persarum = Persian year
-#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:96
+#: plugins/Calendars/src/PersianArithmeticCalendar.cpp:95
 msgctxt "epoch"
 msgid "A.P."
 msgstr "п.р."
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:180
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:40
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:50
+msgctxt "Bahai day/month name"
+msgid "Jalāl (Glory)"
+msgstr "Джалал (Слава)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:41
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:51
+msgctxt "Bahai day/month name"
+msgid "Jamāl (Beauty)"
+msgstr "Джамал (Краса)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:42
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:56
+msgctxt "Bahai day/month name"
+msgid "Kamāl (Perfection)"
+msgstr "Камал (Ідеальність)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:43
+msgctxt "Bahai day name"
+msgid "Fiḍāl (Grace)"
+msgstr "Фідал (Грація)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:44
+msgctxt "Bahai day name"
+msgid "‘Idāl (Justice)"
+msgstr "Ідал (Справедливість)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:45
+msgctxt "Bahai day name"
+msgid "Istijlāl (Majesty)"
+msgstr "Істіджлал (Велич)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:46
+msgctxt "Bahai day name"
+msgid "Istiqlāl (Independence)"
+msgstr "Істіклал (Незалежність)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:48
+msgctxt "Bahai day/month name"
+msgid "Ayyām-i-Hā (Days of God)"
+msgstr "Айям-і-ха (Дні Бога)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:49
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:77
+msgctxt "Bahai day/month and year-cycle (Vahid) name"
+msgid "Bahā’ (Splendor)"
+msgstr "Баха (Пишність)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:52
+msgctxt "Bahai day/month name"
+msgid "‘Aẓamat (Grandeur)"
+msgstr "Азамат (Величність)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:53
+msgctxt "Bahai day/month name"
+msgid "Nūr (Light)"
+msgstr "Нур (Світло)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:54
+msgctxt "Bahai day/month name"
+msgid "Raḥmat (Mercy)"
+msgstr "Рахмат (Милосердя)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:55
+msgctxt "Bahai day/month name"
+msgid "Kalimāt (Words)"
+msgstr "Калімат (Слова)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:57
+msgctxt "Bahai day/month name"
+msgid "Asmā’ (Names)"
+msgstr "Асма (Імена)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:58
+msgctxt "Bahai day/month name"
+msgid "‘Izzat (Might)"
+msgstr "Іззат (Могутність)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:59
+msgctxt "Bahai day/month name"
+msgid "Mashīyyat (Will)"
+msgstr "Машият (Воля)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:60
+msgctxt "Bahai day/month name"
+msgid "‘Ilm (Knowledge)"
+msgstr "Ільм (Знання)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:61
+msgctxt "Bahai day/month name"
+msgid "Qudrat (Power)"
+msgstr "Кудрат (Сила)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:62
+msgctxt "Bahai day/month name"
+msgid "Qawl (Speech)"
+msgstr "Каул (Промова)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:63
+msgctxt "Bahai day/month name"
+msgid "Masā’il (Questions)"
+msgstr "Масаїл (Питання)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:64
+msgctxt "Bahai day/month name"
+msgid "Sharaf (Honor)"
+msgstr "Шараф (Честь)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:65
+msgctxt "Bahai day/month name"
+msgid "Sulṭān (Sovereignty)"
+msgstr "Султан (Повноправність)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:66
+msgctxt "Bahai day/month name"
+msgid "Mulk (Dominion)"
+msgstr "Мульк (Зверхність)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:67
+msgctxt "Bahai day/month name"
+msgid "‘Alā’ (Loftiness)"
+msgstr "Ала (Піднесеність)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:69
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Alif (letter A)"
+msgstr "Аліф (літера «А»)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:70
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Bā’ (letter B)"
+msgstr "Ба (літера «Б»)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:71
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Ab (Father)"
+msgstr "Аб (Батько)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:72
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Dāl (letter D)"
+msgstr "Дал (літера «Д»)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:73
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Bāb (Gate)"
+msgstr "Баб (Ворота)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:74
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Vāv (letter V)"
+msgstr "Вав (літера «В»)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:75
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Abad (Eternity)"
+msgstr "Абад (Вічність)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:76
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Jād (Generosity)"
+msgstr "Джад (Щедрість)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:78
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Ḥubb (Love)"
+msgstr "Хабб (Любов)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:79
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Bahhāj (Delightful)"
+msgstr "Баххадж (Чарівність)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:80
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Javāb (Answer)"
+msgstr "Джаваб (Відповідь)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:81
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Aḥad (Single)"
+msgstr "Ахад (Самота)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:82
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Vahhāb (Bountiful)"
+msgstr "Ваххаб (Щедрість)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:83
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Vidād (Affection)"
+msgstr "Відад (Прихильність)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:84
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Badī’ (Beginning)"
+msgstr "Баді (Початок)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:85
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Bahī (Luminous)"
+msgstr "Бахі (Світла)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:86
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Abhā (Most Luminous)"
+msgstr "Абха (Найсвітліша)"
+
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:87
+msgctxt "Bahai year-cycle (Vahid) name"
+msgid "Vāḥid (Unity)"
+msgstr "Вахід (Єдність)"
+
+#. TRANSLATORS: Bahai Calendar output string
+#: plugins/Calendars/src/BahaiArithmeticCalendar.cpp:144
+#, qt-format
+msgctxt "Bahai calendar output"
+msgid ""
+"%1, day of %2 (%3) of the month of %4 (%5), <br/>of the year %6 (%7), of "
+"Vāḥid %8, of Kull-i-shay %9 of the Bahá’í Era"
+msgstr ""
+"%1, день %2 (%3) місяця %4 (%5), <br/>року %6 (%7), вахід %8, кулл-і-шай %9 "
+"ери бахаї"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:43
+msgctxt "Chinese calendar major Solar term"
+msgid "Yŭshuĭ (Rain Water)"
+msgstr "Юшуї (Дощова вода)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:44
+msgctxt "Chinese calendar major Solar term"
+msgid "Chūnfēn (Spring Equinox)"
+msgstr "Чунфен (Весняне рівнодення)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:45
+msgctxt "Chinese calendar major Solar term"
+msgid "Gŭyŭ (Grain Rain)"
+msgstr "Гую (Зерновий дощ)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:46
+msgctxt "Chinese calendar major Solar term"
+msgid "Xiăomăn (Grain Full)"
+msgstr "Сяоман (Зернова повнота)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:47
+msgctxt "Chinese calendar major Solar term"
+msgid "Xiàzhì (Summer Solstice)"
+msgstr "Сячжі (Літнє сонцестояння)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:48
+msgctxt "Chinese calendar major Solar term"
+msgid "Dàshŭ (Great Heat)"
+msgstr "Дашу (Велика спека)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:49
+msgctxt "Chinese calendar major Solar term"
+msgid "Chŭshŭ (Limit of Heat)"
+msgstr "Чушу (Межа спеки)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:50
+msgctxt "Chinese calendar major Solar term"
+msgid "Qiūfēn (Autumnal Equinox)"
+msgstr "Кюфен (Осіннє рівнодення)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:51
+msgctxt "Chinese calendar major Solar term"
+msgid "Shuāngjiàng (Descent of Frost)"
+msgstr "Шуанджан (Спадання паморозі)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:52
+msgctxt "Chinese calendar major Solar term"
+msgid "Xiăoxuĕ (Slight Snow)"
+msgstr "Сяосю (Легкий сніг)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:53
+msgctxt "Chinese calendar major Solar term"
+msgid "Dōngzhì (Winter Solstice)"
+msgstr "Дунджі (Зимове сонцестояння)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:54
+msgctxt "Chinese calendar major Solar term"
+msgid "Dàhán (Great Cold)"
+msgstr "Дахан (Великий холод)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:56
+msgctxt "Chinese calendar minor Solar term"
+msgid "Lìchūn (Beginning of Spring)"
+msgstr "Лічун (Початок весни)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:57
+msgctxt "Chinese calendar minor Solar term"
+msgid "Jīngzhé (Waking of Insects)"
+msgstr "Чжіньдже (Пробудження комах)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:58
+msgctxt "Chinese calendar minor Solar term"
+msgid "Qīngmíng (Pure Brightness)"
+msgstr "Кіньмінь (Чиста яскравість)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:59
+msgctxt "Chinese calendar minor Solar term"
+msgid "Lìxià (Beginning of Summer)"
+msgstr "Ліся (Початок літа)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:60
+msgctxt "Chinese calendar minor Solar term"
+msgid "Mángzhòng (Grain in Ear)"
+msgstr "Манджонг (Зерно у колосі)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:61
+msgctxt "Chinese calendar minor Solar term"
+msgid "Xiăoshŭ (Slight Heat)"
+msgstr "Сяошу (Легка спека)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:62
+msgctxt "Chinese calendar minor Solar term"
+msgid "Lìqiū (Beginning of Autumn)"
+msgstr "Лікю (Початок осені)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:63
+msgctxt "Chinese calendar minor Solar term"
+msgid "Báilù (White Dew)"
+msgstr "Байлу (Біла роса)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:64
+msgctxt "Chinese calendar minor Solar term"
+msgid "Hánlù (Cold Dew)"
+msgstr "Ханлу (Холодна роса)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:65
+msgctxt "Chinese calendar minor Solar term"
+msgid "Lìdōng (Beginning of Winter)"
+msgstr "Лідун (Початок зими)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:66
+msgctxt "Chinese calendar minor Solar term"
+msgid "Dàxuĕ (Great Snow)"
+msgstr "Дасю (Великий сніг)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:67
+msgctxt "Chinese calendar minor Solar term"
+msgid "Xiăohán (Slight Cold)"
+msgstr "Сяохан (Легкий холод)"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:69
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Jiă"
+msgstr "Чжя"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:70
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Yĭ"
+msgstr "Ї"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:71
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Bĭng"
+msgstr "Бінь"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:72
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Dīng"
+msgstr "Дінь"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:73
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Wù"
+msgstr "Ву"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:74
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Jĭ"
+msgstr "Чжі"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:75
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Gēng"
+msgstr "Гень"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:76
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Xīn"
+msgstr "Сін"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:77
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Rén"
+msgstr "Рен"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:78
+msgctxt "Chinese calendar, celestial stem name"
+msgid "Guĭ"
+msgstr "Гуї"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:80
+#: plugins/Calendars/src/KoreanCalendar.cpp:81
+#: plugins/Calendars/src/VietnameseCalendar.cpp:66
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Tree, male"
+msgstr "Дерево, чоловіче"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:81
+#: plugins/Calendars/src/KoreanCalendar.cpp:82
+#: plugins/Calendars/src/VietnameseCalendar.cpp:67
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Tree, female"
+msgstr "Дерево, жіноче"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:82
+#: plugins/Calendars/src/KoreanCalendar.cpp:83
+#: plugins/Calendars/src/VietnameseCalendar.cpp:68
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Fire, male"
+msgstr "Полум'я, чоловіче"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:83
+#: plugins/Calendars/src/KoreanCalendar.cpp:84
+#: plugins/Calendars/src/VietnameseCalendar.cpp:69
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Fire, female"
+msgstr "Полум'я, жіноче"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:84
+#: plugins/Calendars/src/KoreanCalendar.cpp:85
+#: plugins/Calendars/src/VietnameseCalendar.cpp:70
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Earth, male"
+msgstr "Земля, чоловіче"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:85
+#: plugins/Calendars/src/KoreanCalendar.cpp:86
+#: plugins/Calendars/src/VietnameseCalendar.cpp:71
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Earth, female"
+msgstr "Земля, жіноче"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:86
+#: plugins/Calendars/src/KoreanCalendar.cpp:87
+#: plugins/Calendars/src/VietnameseCalendar.cpp:72
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Metal, male"
+msgstr "Метал, чоловіче"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:87
+#: plugins/Calendars/src/KoreanCalendar.cpp:88
+#: plugins/Calendars/src/VietnameseCalendar.cpp:73
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Metal, female"
+msgstr "Метал, жіноче"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:88
+#: plugins/Calendars/src/KoreanCalendar.cpp:89
+#: plugins/Calendars/src/VietnameseCalendar.cpp:74
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Water, male"
+msgstr "Вода, чоловіче"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:89
+#: plugins/Calendars/src/KoreanCalendar.cpp:90
+#: plugins/Calendars/src/VietnameseCalendar.cpp:75
+msgctxt "Chinese calendar, celestial stem element"
+msgid "Water, female"
+msgstr "Вода, жіноче"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:91
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Zĭ"
+msgstr "Зі"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:92
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Chŏu"
+msgstr "Чоу"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:93
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Yín"
+msgstr "Їн"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:94
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Măo"
+msgstr "Мао"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:95
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Chén"
+msgstr "Чен"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:96
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Sì"
+msgstr "Сі"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:97
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Wŭ"
+msgstr "Ву"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:98
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Wèi"
+msgstr "Вей"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:99
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Shēn"
+msgstr "Шен"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:100
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Yŏu"
+msgstr "Ю"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:101
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Xū"
+msgstr "Сю"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:102
+msgctxt "Chinese calendar, terrestrial branch name"
+msgid "Hài"
+msgstr "Хай"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:104
+#: plugins/Calendars/src/KoreanCalendar.cpp:106
+#: plugins/Calendars/src/VietnameseCalendar.cpp:91
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Rat"
+msgstr "Щур"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:105
+#: plugins/Calendars/src/KoreanCalendar.cpp:107
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Ox"
+msgstr "Бик"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:106
+#: plugins/Calendars/src/KoreanCalendar.cpp:108
+#: plugins/Calendars/src/VietnameseCalendar.cpp:93
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Tiger"
+msgstr "Тигр"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:107
+#: plugins/Calendars/src/KoreanCalendar.cpp:109
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Hare"
+msgstr "Заєць"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:108
+#: plugins/Calendars/src/KoreanCalendar.cpp:110
+#: plugins/Calendars/src/VietnameseCalendar.cpp:95
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Dragon"
+msgstr "Дракон"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:109
+#: plugins/Calendars/src/KoreanCalendar.cpp:111
+#: plugins/Calendars/src/VietnameseCalendar.cpp:96
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Snake"
+msgstr "Змія"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:110
+#: plugins/Calendars/src/KoreanCalendar.cpp:112
+#: plugins/Calendars/src/VietnameseCalendar.cpp:97
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Horse"
+msgstr "Кінь"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:111
+#: plugins/Calendars/src/KoreanCalendar.cpp:113
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Sheep"
+msgstr "Вівця"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:112
+#: plugins/Calendars/src/KoreanCalendar.cpp:114
+#: plugins/Calendars/src/VietnameseCalendar.cpp:99
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Monkey"
+msgstr "Мавпа"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:113
+#: plugins/Calendars/src/KoreanCalendar.cpp:115
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Fowl"
+msgstr "Півень"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:114
+#: plugins/Calendars/src/KoreanCalendar.cpp:116
+#: plugins/Calendars/src/VietnameseCalendar.cpp:101
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Dog"
+msgstr "Собака"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:115
+#: plugins/Calendars/src/KoreanCalendar.cpp:117
+#: plugins/Calendars/src/VietnameseCalendar.cpp:102
+msgctxt "Chinese calendar, terrestrial branch animal totem"
+msgid "Pig"
+msgstr "Свиня"
+
+#: plugins/Calendars/src/ChineseCalendar.cpp:146
+#: plugins/Calendars/src/JapaneseCalendar.cpp:94
+#: plugins/Calendars/src/KoreanCalendar.cpp:148
+#: plugins/Calendars/src/VietnameseCalendar.cpp:134
+msgctxt "calendar term like leap year or leap day"
+msgid "leap"
+msgstr "високосний"
+
+#. TRANSLATORS: Chinese Calendar output string
+#: plugins/Calendars/src/ChineseCalendar.cpp:159
+#, qt-format
+msgctxt "Chinese calendar output"
+msgid ""
+"Day %1 (%2) - Month %3<sub>%4</sub> (%5) <br/>Year %6: %7 (%8) in cycle %9"
+msgstr ""
+"День %1 (%2) – місяць %3<sub>%4</sub> (%5) <br/>рік %6: %7 (%8) у циклі %9"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:43
+msgctxt "Japanese calendar major Solar term"
+msgid "Usui (Rain Water)"
+msgstr "Усуї (Дощова вода)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:44
+msgctxt "Japanese calendar major Solar term"
+msgid "Shunbun (Spring Equinox)"
+msgstr "Шунбун (Весняне рівнодення)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:45
+msgctxt "Japanese calendar major Solar term"
+msgid "Kokuu (Grain Rain)"
+msgstr "Кокуу (Зерновий дощ)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:46
+msgctxt "Japanese calendar major Solar term"
+msgid "Shōman (Grain Full)"
+msgstr "Шоман (Зернова повнота)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:47
+msgctxt "Japanese calendar major Solar term"
+msgid "Geshi (Summer Solstice)"
+msgstr "Геші (Літнє сонцестояння)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:48
+msgctxt "Japanese calendar major Solar term"
+msgid "Taisho (Great Heat)"
+msgstr "Тайшо (Велика спека)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:49
+msgctxt "Japanese calendar major Solar term"
+msgid "Shosho (Limit of Heat)"
+msgstr "Шошо (Межа спеки)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:50
+msgctxt "Japanese calendar major Solar term"
+msgid "Shūbun (Autumnal Equinox)"
+msgstr "Шубун (Осіннє рівнодення)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:51
+msgctxt "Japanese calendar major Solar term"
+msgid "Sōkō (Descent of Frost)"
+msgstr "Соко (Спадання паморозі)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:52
+msgctxt "Japanese calendar major Solar term"
+msgid "Shōsetsu (Slight Snow)"
+msgstr "Шосетсу (Легкий сніг)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:53
+msgctxt "Japanese calendar major Solar term"
+msgid "Tōji (Winter Solstice)"
+msgstr "Тоджі (Зимове сонцестояння)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:54
+msgctxt "Japanese calendar major Solar term"
+msgid "Taikan (Great Cold)"
+msgstr "Тайкан (Великий холод)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:56
+msgctxt "Japanese calendar minor Solar term"
+msgid "Risshun (Beginning of Spring)"
+msgstr "Рісшун (Початок весни)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:57
+msgctxt "Japanese calendar minor Solar term"
+msgid "Keichitsu (Waking of Insects)"
+msgstr "Кейчіцу (Пробудження комах)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:58
+msgctxt "Japanese calendar minor Solar term"
+msgid "Seimei (Pure Brightness)"
+msgstr "Сеймей (Чиста яскравість)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:59
+msgctxt "Japanese calendar minor Solar term"
+msgid "Rikka (Beginning of Summer)"
+msgstr "Рікка (Початок літа)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:60
+msgctxt "Japanese calendar minor Solar term"
+msgid "Bōshu (Grain in Ear)"
+msgstr "Бошу (Зерно у колосі)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:61
+msgctxt "Japanese calendar minor Solar term"
+msgid "Shōsho (Slight Heat)"
+msgstr "Шошо (Легка спека)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:62
+msgctxt "Japanese calendar minor Solar term"
+msgid "Risshū (Beginning of Autumn)"
+msgstr "Рісшу (Початок осені)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:63
+msgctxt "Japanese calendar minor Solar term"
+msgid "Hakuro (White Dew)"
+msgstr "Гакуро (Біла роса)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:64
+msgctxt "Japanese calendar minor Solar term"
+msgid "Kanro (Cold Dew)"
+msgstr "Канро (Холодна роса)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:65
+msgctxt "Japanese calendar minor Solar term"
+msgid "Rittō (Beginning of Winter)"
+msgstr "Рітто (Початок зими)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:66
+msgctxt "Japanese calendar minor Solar term"
+msgid "Taisetsu (Great Snow)"
+msgstr "Тайсетсу (Великий сніг)"
+
+#: plugins/Calendars/src/JapaneseCalendar.cpp:67
+msgctxt "Japanese calendar minor Solar term"
+msgid "Shōkan (Slight Cold)"
+msgstr "Шокан (Легкий холод)"
+
+#. TRANSLATORS: Japanese Calendar output string
+#: plugins/Calendars/src/JapaneseCalendar.cpp:108
+#, qt-format
+msgctxt "Japanese Calendar output"
+msgid "Day %1 - Month %2<sub>%3</sub> - year %4 (kigen)"
+msgstr "День %1 – місяць %2<sub>%3</sub> – рік %4 (кіген)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:43
+msgctxt "Korean calendar major Solar term"
+msgid "Woo-Soo (Rain Water)"
+msgstr "Ву-су (Дощова вода)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:44
+msgctxt "Korean calendar major Solar term"
+msgid "Chun-Bun (Spring Equinox)"
+msgstr "Чун-бун (Весняне рівнодення)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:45
+msgctxt "Korean calendar major Solar term"
+msgid "Gok-Woo (Grain Rain)"
+msgstr "Гок-ву (Зерновий дощ)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:46
+msgctxt "Korean calendar major Solar term"
+msgid "So-Man (Grain Full)"
+msgstr "Со-ман (Зернова повнота)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:47
+msgctxt "Korean calendar major Solar term"
+msgid "Ha-Ji (Summer Solstice)"
+msgstr "Ха-джі (Літнє сонцестояння)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:48
+msgctxt "Korean calendar major Solar term"
+msgid "Dae-Suh (Great Heat)"
+msgstr "Дай-су (Велика спека)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:49
+msgctxt "Korean calendar major Solar term"
+msgid "Chu-Suh (Limit of Heat)"
+msgstr "Чу-су (Межа спеки)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:50
+msgctxt "Korean calendar major Solar term"
+msgid "Chu-Bun (Autumnal Equinox)"
+msgstr "Чу-бун (Осіннє рівнодення)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:51
+msgctxt "Korean calendar major Solar term"
+msgid "Sang-Kang (Descent of Frost)"
+msgstr "Сан-кан (Спадання паморозі)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:52
+msgctxt "Korean calendar major Solar term"
+msgid "So-Sul (Slight Snow)"
+msgstr "Со-сул (Легкий сніг)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:53
+msgctxt "Korean calendar major Solar term"
+msgid "Dong-Ji (Winter Solstice)"
+msgstr "Дон-джі (Зимове сонцестояння)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:54
+msgctxt "Korean calendar major Solar term"
+msgid "Dae-Han (Great Cold)"
+msgstr "Дай-хан (Великий холод)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:56
+msgctxt "Korean calendar minor Solar term"
+msgid "Ip-Chun (Beginning of Spring)"
+msgstr "Іп-чун (Початок весни)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:57
+msgctxt "Korean calendar minor Solar term"
+msgid "Kyung-Chip (Waking of Insects)"
+msgstr "Кюн-чіп (Пробудження комах)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:58
+msgctxt "Korean calendar minor Solar term"
+msgid "Chyng-Myung (Pure Brightness)"
+msgstr "Чінь-мюнь (Чиста яскравість)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:59
+msgctxt "Korean calendar minor Solar term"
+msgid "Ip-Ha (Beginning of Summer)"
+msgstr "Іп-ха (Початок літа)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:60
+msgctxt "Korean calendar minor Solar term"
+msgid "Mang-Jong (Grain in Ear)"
+msgstr "Мань-джонь (Зерно у колосі)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:61
+msgctxt "Korean calendar minor Solar term"
+msgid "So-Suh (Slight Heat)"
+msgstr "Со-су (Легка спека)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:62
+msgctxt "Korean calendar minor Solar term"
+msgid "Ip-Choo (Beginning of Autumn)"
+msgstr "Іп-чу (Початок осені)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:63
+msgctxt "Korean calendar minor Solar term"
+msgid "Bak-Roo (White Dew)"
+msgstr "Бак-ру (Біла роса)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:64
+msgctxt "Korean calendar minor Solar term"
+msgid "Han-Roo (Cold Dew)"
+msgstr "Хан-ру (Холодна роса)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:65
+msgctxt "Korean calendar minor Solar term"
+msgid "Ip-Dong (Beginning of Winter)"
+msgstr "Іп-донь (Початок зими)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:66
+msgctxt "Korean calendar minor Solar term"
+msgid "Dae-Sul (Great Snow)"
+msgstr "Дай-сул (Великий сніг)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:67
+msgctxt "Korean calendar minor Solar term"
+msgid "So-Han (Slight Cold)"
+msgstr "Со-хан (Легкий холод)"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:69
+msgctxt "Korean calendar, celestial stem name"
+msgid "Kap"
+msgstr "Кап"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:70
+msgctxt "Korean calendar, celestial stem name"
+msgid "El"
+msgstr "Ел"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:71
+msgctxt "Korean calendar, celestial stem name"
+msgid "Byung"
+msgstr "Бюнь"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:72
+msgctxt "Korean calendar, celestial stem name"
+msgid "Jung"
+msgstr "Джунь"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:73
+msgctxt "Korean calendar, celestial stem name"
+msgid "Mu"
+msgstr "Му"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:74
+msgctxt "Korean calendar, celestial stem name"
+msgid "Ki"
+msgstr "Кі"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:75
+msgctxt "Korean calendar, celestial stem name"
+msgid "Kyung"
+msgstr "Кюнь"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:76
+msgctxt "Korean calendar, celestial stem name"
+msgid "Shin"
+msgstr "Шін"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:77
+msgctxt "Korean calendar, celestial stem name"
+msgid "Im"
+msgstr "Ім"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:78
+msgctxt "Korean calendar, celestial stem name"
+msgid "Gye"
+msgstr "Г'є"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:92
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Ja"
+msgstr "Джа"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:93
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Chuk"
+msgstr "Чук"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:94
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "In"
+msgstr "Ін"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:95
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Myo"
+msgstr "Мьо"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:96
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Jin"
+msgstr "Джін"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:97
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Sa"
+msgstr "Са"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:98
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Oh"
+msgstr "О"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:99
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Mi"
+msgstr "Мі"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:100
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Shin"
+msgstr "Шін"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:101
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Yoo"
+msgstr "Ю"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:102
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Sool"
+msgstr "Сул"
+
+#: plugins/Calendars/src/KoreanCalendar.cpp:103
+msgctxt "Korean calendar, terrestrial branch name"
+msgid "Hae"
+msgstr "Хай"
+
+#. TRANSLATORS: Korean Calendar output string
+#: plugins/Calendars/src/KoreanCalendar.cpp:161
+#, qt-format
+msgctxt "Korean Calendar output"
+msgid "Day %1 (%2) - Month %3<sub>%4</sub> (%5) <br/>Danki Year %6 (%7)"
+msgstr "День %1 (%2) – місяць %3<sub>%4</sub> (%5) <br/>рік Данкі %6 (%7)"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:41
+msgctxt "Vietnamese calendar, month name"
+msgid "Tháng Giêng"
+msgstr "Тань Г'єнь"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:42
+msgctxt "Vietnamese calendar, month name"
+msgid "Tháng Hai"
+msgstr "Тань Хай"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:43
+msgctxt "Vietnamese calendar, month name"
+msgid "Tháng Ba"
+msgstr "Тань Ба"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:44
+msgctxt "Vietnamese calendar, month name"
+msgid "Tháng Tư"
+msgstr "Тань Ту"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:45
+msgctxt "Vietnamese calendar, month name"
+msgid "Tháng Năm"
+msgstr "Тань Нам"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:46
+msgctxt "Vietnamese calendar, month name"
+msgid "Tháng Sáu"
+msgstr "Тань Сау"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:47
+msgctxt "Vietnamese calendar, month name"
+msgid "Tháng Bảy"
+msgstr "Тань Бай"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:48
+msgctxt "Vietnamese calendar, month name"
+msgid "Tháng Tám"
+msgstr "Тань Там"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:49
+msgctxt "Vietnamese calendar, month name"
+msgid "Tháng Chín"
+msgstr "Тань Чін"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:50
+msgctxt "Vietnamese calendar, month name"
+msgid "Tháng Mười"
+msgstr "Тань Муой"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:51
+msgctxt "Vietnamese calendar, month name"
+msgid "Tháng Một"
+msgstr "Тань Мот"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:52
+msgctxt "Vietnamese calendar, month name"
+msgid "Tháng Chạp"
+msgstr "Тань Чап"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:54
+msgctxt "Vietnamese calendar, celestial stem name"
+msgid "Giáp"
+msgstr "Г'яп"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:55
+msgctxt "Vietnamese calendar, celestial stem name"
+msgid "Ất"
+msgstr "Ат"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:56
+msgctxt "Vietnamese calendar, celestial stem name"
+msgid "Bính"
+msgstr "Бінь"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:57
+msgctxt "Vietnamese calendar, celestial stem name"
+msgid "Đinh"
+msgstr "Дінь"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:58
+msgctxt "Vietnamese calendar, celestial stem name"
+msgid "Mậu"
+msgstr "Мау"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:59
+msgctxt "Vietnamese calendar, celestial stem name"
+msgid "Kỷ"
+msgstr "Кю"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:60
+msgctxt "Vietnamese calendar, celestial stem name"
+msgid "Canh"
+msgstr "Цань"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:61
+msgctxt "Vietnamese calendar, celestial stem name"
+msgid "Tân"
+msgstr "Тан"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:62
+msgctxt "Vietnamese calendar, celestial stem name"
+msgid "Nhâm"
+msgstr "Нхам"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:63
+msgctxt "Vietnamese calendar, celestial stem name"
+msgid "Quý"
+msgstr "Куй"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:77
+msgctxt "Vietnamese calendar, terrestrial branch name"
+msgid "Tý"
+msgstr "Тю"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:78
+msgctxt "Vietnamese calendar, terrestrial branch name"
+msgid "Sửu"
+msgstr "Суу"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:79
+msgctxt "Vietnamese calendar, terrestrial branch name"
+msgid "Dần"
+msgstr "Дан"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:80
+msgctxt "Vietnamese calendar, terrestrial branch name"
+msgid "Mão"
+msgstr "Мао"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:81
+msgctxt "Vietnamese calendar, terrestrial branch name"
+msgid "Thìn"
+msgstr "Тін"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:82
+msgctxt "Vietnamese calendar, terrestrial branch name"
+msgid "Tỵ"
+msgstr "Тю"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:83
+msgctxt "Vietnamese calendar, terrestrial branch name"
+msgid "Ngọ"
+msgstr "Нго"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:84
+msgctxt "Vietnamese calendar, terrestrial branch name"
+msgid "Mùi"
+msgstr "Муй"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:85
+msgctxt "Vietnamese calendar, terrestrial branch name"
+msgid "Thân"
+msgstr "Тан"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:86
+msgctxt "Vietnamese calendar, terrestrial branch name"
+msgid "Dậu"
+msgstr "Дау"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:87
+msgctxt "Vietnamese calendar, terrestrial branch name"
+msgid "Tuất"
+msgstr "Туат"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:88
+msgctxt "Vietnamese calendar, terrestrial branch name"
+msgid "Hợi"
+msgstr "Хой"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:92
+msgctxt "Vietnamese calendar, terrestrial branch animal totem"
+msgid "Water buffalo"
+msgstr "Водяний бик"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:94
+msgctxt "Vietnamese calendar, terrestrial branch animal totem"
+msgid "Cat"
+msgstr "Кіт"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:98
+msgctxt "Vietnamese calendar, terrestrial branch animal totem"
+msgid "Goat"
+msgstr "Козел"
+
+#: plugins/Calendars/src/VietnameseCalendar.cpp:100
+msgctxt "Vietnamese calendar, terrestrial branch animal totem"
+msgid "Chicken"
+msgstr "Курка"
+
+#. TRANSLATORS: Vietnamese Calendar output string
+#: plugins/Calendars/src/VietnameseCalendar.cpp:147
+#, qt-format
+msgctxt "Vietnamese calendar output"
+msgid "Day %1 (%2) - Month %3 (%4)<sub>%5</sub> (%6) <br/>Year %7"
+msgstr "День %1 (%2) – місяць %3 (%4)<sub>%5</sub> (%6) <br/>рік %7"
+
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:184
 msgid "Calendars Plug-in"
 msgstr "Додаток календарів"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:187
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:191
 msgid ""
 "The Calendars plugin provides an interface to various calendars used around "
 "the world."
@@ -31012,115 +32276,139 @@ msgstr ""
 "Додаток календарів є інтерфейсом до різноманітних календарів, які "
 "використовуються у різних частинах світу."
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:188
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:192
 msgid "Julian Calendar"
 msgstr "Юліанський календар"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:189
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:193
 msgid "Gregorian Calendar"
 msgstr "Григоріанський календар"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:190
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:194
 msgid "Revised Julian Calendar (Milankovi&#x107;)"
 msgstr "Новоюліанський календар (Міланкович)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:191
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:195
 msgid "ISO Weeks"
 msgstr "Тижні ISO"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:192
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:196
 msgid "Icelandic calendar"
 msgstr "Ісландський календар"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:193
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:197
 msgid "Roman (Julian) calendar"
 msgstr "Римський (юліанський) календар"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:194
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:198
 msgid "Olympiad calendar"
 msgstr "Календар олімпіад"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:195
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:199
 msgid "Egyptian calendar"
 msgstr "Єгипетський календар"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:196
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:200
 msgid "Armenian calendar"
 msgstr "Вірменський календар"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:197
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:201
 msgid "Zoroastrian calendar"
 msgstr "Зороастрійський календар"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:198
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:202
 msgid "Coptic calendar"
 msgstr "Коптський календар"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:199
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:203
 msgid "Ethiopic calendar"
 msgstr "Ефіопський календар"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:201
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:205
 msgid "Islamic Calendar (algorithmic)"
 msgstr "Ісламський календар (алгоритмічний)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:202
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:206
 msgid "Hebrew Calendar"
 msgstr "Єврейський календар"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:203
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:207
 msgid "French Revolution calendar (astronomical version of 1793)"
 msgstr "Французький революційний календар (астрономічна версія 1793 року)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:204
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:208
 msgid "French Revolution calendar (arithmetic version of 1795)"
 msgstr "Французький революційний календар (арифметична версія 1795 року)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:205
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:209
 msgid "Persian calendar (arithmetic version)"
 msgstr "Перський календар (арифметична версія)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:206
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:210
 msgid "Persian calendar (astronomical version)"
 msgstr "Перський календар (астрономічна версія)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:209
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:211
+msgid "Bahá’í calendar (arithmetic version)"
+msgstr "Календар бахаї (арифметична версія)"
+
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:212
+msgid "Bahá’í calendar (astronomical version)"
+msgstr "Календар бахаї (астрономічна версія)"
+
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:214
 msgid "Old Hindu Solar and Lunar calendars"
 msgstr "Давній індуїстський сонячний і місячний календарі"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:210
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:215
 msgid "New Hindu Solar and Lunar calendars"
 msgstr "Новий індуїстський сонячний і місячний календарі"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:211
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:216
 msgid "Astronomically 'accurate' Hindu Solar and Lunar calendars"
 msgstr "Астрономічно «точні» індуїстський сонячний і місячний календарі"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:212
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:217
 msgid "Tibetan (Phuglugs, Phug-pa, K&#x101;lacakra) calendar"
 msgstr "Тибетський календар (Калачакра)"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:213
-msgid "Maya calendars"
-msgstr "Календарі майя"
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:218
+msgid "Chinese calendar"
+msgstr "Китайський календар"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:214
-msgid "Aztec calendars"
-msgstr "Календарі ацтеків"
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:219
+msgid "Japanese calendar"
+msgstr "Японський календар"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:215
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:220
+msgid "Korean calendar"
+msgstr "Корейський календар"
+
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:221
+msgid "Vietnamese calendar"
+msgstr "В'єтнамський календар"
+
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:222
 msgid "Balinese Pawukon calendar"
 msgstr "Балійський календар павукон"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:217
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:223
+msgid "Maya calendars"
+msgstr "Календарі майя"
+
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:224
+msgid "Aztec calendars"
+msgstr "Календарі ацтеків"
+
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:226
 msgid ""
-"The plugin is in an early stage of development. Please cross-check results "
-"and report errors."
+"The plugin is still under development. Please cross-check results and report"
+" errors."
 msgstr ""
 "Цей додаток перебуває на ранній стадії розробки. Будь ласка, перевіряйте "
-"результати із іншими джерелами і повідомляйте про виявлені помилки."
+"результати і повідомляйте про виявлені помилки."
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:218
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:227
 msgid ""
 "For some calendars, we welcome proper formatting suggestions by actual "
 "users."
@@ -31128,172 +32416,176 @@ msgstr ""
 "Ми будемо раді пропозиціям щодо належного форматування деяких з календарів "
 "від їхніх користувачів."
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:227
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:236
 msgid "References"
 msgstr "Посилання"
 
-#: plugins/Calendars/src/gui/CalendarsDialog.cpp:228
+#: plugins/Calendars/src/gui/CalendarsDialog.cpp:237
 msgid "This plugin is based on:"
 msgstr "Цей додаток засновано на:"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:910
+#: plugins/Calendars/src/ui_calendarsDialog.h:940
 msgid "Calendars Configuration"
 msgstr "Налаштування календарів"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:911
+#: plugins/Calendars/src/ui_calendarsDialog.h:941
 msgid "Calendars Plug-in Configuration"
 msgstr "Налаштовування додатка календарів"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:916
-msgctxt "calendar"
-msgid "New Hindu Lunar"
-msgstr "Новий індуїстський місячний"
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:925
-#: plugins/Calendars/src/ui_calendarsDialog.h:961
-msgctxt "calendar"
-msgid "Chinese"
-msgstr "Китайський"
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:932
 #: plugins/Calendars/src/ui_calendarsDialog.h:951
-msgctxt "calendar"
-msgid "ISO Week"
-msgstr "Тиждень ISO"
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:936
-msgctxt "calendar"
-msgid "Persian (arithmetic)"
-msgstr "Перський (арифметичний)"
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:937
-msgctxt "calendar"
-msgid "Persian (astronomical)"
-msgstr "Перський (астромічний)"
-
-#: plugins/Calendars/src/ui_calendarsDialog.h:938
 msgctxt "calendar"
 msgid "French Revolution (arithmetic)"
 msgstr "Французький революційний (арифметичний)"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:939
+#: plugins/Calendars/src/ui_calendarsDialog.h:955
+msgctxt "calendar"
+msgid "Persian (astronomical)"
+msgstr "Перський (астромічний)"
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:958
+msgctxt "calendar"
+msgid "Persian (arithmetic)"
+msgstr "Перський (арифметичний)"
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:960
+#: plugins/Calendars/src/ui_calendarsDialog.h:986
+msgctxt "calendar"
+msgid "ISO Week"
+msgstr "Тиждень ISO"
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:961
+msgctxt "calendar"
+msgid "Bahá’í (arithmetic)"
+msgstr "Бахаї (арифметичний)"
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:965
 msgctxt "calendar"
 msgid "French Revolution (astronomical)"
 msgstr "Французький революційний (астрономічний)"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:941
+#: plugins/Calendars/src/ui_calendarsDialog.h:967
 msgctxt "calendar"
 msgid "Old Hindu Lunar"
 msgstr "Давній індуїстський місячний"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:946
+#: plugins/Calendars/src/ui_calendarsDialog.h:971
+msgctxt "calendar"
+msgid "New Hindu Lunar"
+msgstr "Новий індуїстський місячний"
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:974
+msgctxt "calendar"
+msgid "Bahá’í (astronomical)"
+msgstr "Бахаї (астрономічний)"
+
+#: plugins/Calendars/src/ui_calendarsDialog.h:981
 msgid "Override automatic text color"
 msgstr "Перевизначити автоматичний колір тексту"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:948
+#: plugins/Calendars/src/ui_calendarsDialog.h:983
 msgid "Display"
 msgstr "Показ"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:949
+#: plugins/Calendars/src/ui_calendarsDialog.h:984
 msgid "Weekday"
 msgstr "День тижня"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:950
+#: plugins/Calendars/src/ui_calendarsDialog.h:985
 msgid "Month"
 msgstr "Місяць"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:952
+#: plugins/Calendars/src/ui_calendarsDialog.h:987
 msgid "Year"
 msgstr "Рік"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:953
+#: plugins/Calendars/src/ui_calendarsDialog.h:988
 msgid "Day"
 msgstr "Дей"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:955
+#: plugins/Calendars/src/ui_calendarsDialog.h:990
 msgctxt "calendar"
 msgid "Negative years here mark years B.C."
 msgstr "Тут від'ємні значення років позначають роки до нашої ери"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:960
+#: plugins/Calendars/src/ui_calendarsDialog.h:995
 msgid "Lunisolar"
 msgstr "Місячно-сонячний"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:962
+#: plugins/Calendars/src/ui_calendarsDialog.h:997
 msgctxt "calendar"
 msgid "Katun"
 msgstr "Катун"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:963
+#: plugins/Calendars/src/ui_calendarsDialog.h:998
 msgctxt "calendar"
 msgid "Xihuitl"
 msgstr "Шихуїтль"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:964
+#: plugins/Calendars/src/ui_calendarsDialog.h:999
 msgctxt "calendar"
 msgid "Maya"
 msgstr "Майянський"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:965
+#: plugins/Calendars/src/ui_calendarsDialog.h:1000
 msgctxt "calendar"
 msgid "Haab"
 msgstr "Хааб"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:966
+#: plugins/Calendars/src/ui_calendarsDialog.h:1001
 msgctxt "calendar"
 msgid "Tun"
 msgstr "Тун"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:967
+#: plugins/Calendars/src/ui_calendarsDialog.h:1002
 msgctxt "calendar"
 msgid "Kin"
 msgstr "Кін"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:968
+#: plugins/Calendars/src/ui_calendarsDialog.h:1003
 msgctxt "calendar"
 msgid "Uinal"
 msgstr "Уїналь"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:969
+#: plugins/Calendars/src/ui_calendarsDialog.h:1004
 msgctxt "calendar"
 msgid "Baktun"
 msgstr "Бактун"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:970
+#: plugins/Calendars/src/ui_calendarsDialog.h:1005
 msgctxt "calendar"
 msgid "Long Count"
 msgstr "Довгий облік"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:972
-#: plugins/Calendars/src/ui_calendarsDialog.h:975
-#: plugins/Calendars/src/ui_calendarsDialog.h:990
-#: plugins/Calendars/src/ui_calendarsDialog.h:996
+#: plugins/Calendars/src/ui_calendarsDialog.h:1007
+#: plugins/Calendars/src/ui_calendarsDialog.h:1010
+#: plugins/Calendars/src/ui_calendarsDialog.h:1025
+#: plugins/Calendars/src/ui_calendarsDialog.h:1031
 msgid "Step forward"
 msgstr "На крок вперед"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:978
-#: plugins/Calendars/src/ui_calendarsDialog.h:981
-#: plugins/Calendars/src/ui_calendarsDialog.h:987
-#: plugins/Calendars/src/ui_calendarsDialog.h:993
+#: plugins/Calendars/src/ui_calendarsDialog.h:1013
+#: plugins/Calendars/src/ui_calendarsDialog.h:1016
+#: plugins/Calendars/src/ui_calendarsDialog.h:1022
+#: plugins/Calendars/src/ui_calendarsDialog.h:1028
 msgid "Step backward"
 msgstr "На крок назад"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:983
+#: plugins/Calendars/src/ui_calendarsDialog.h:1018
 msgctxt "calendar"
 msgid "Aztec"
 msgstr "Ацтецький"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:984
+#: plugins/Calendars/src/ui_calendarsDialog.h:1019
 msgctxt "calendar"
 msgid "Tzolkin"
 msgstr "Цолкін"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:985
+#: plugins/Calendars/src/ui_calendarsDialog.h:1020
 msgctxt "calendar"
 msgid "Tonalpohualli"
 msgstr "Тоналпоуаллі"
 
-#: plugins/Calendars/src/ui_calendarsDialog.h:998
+#: plugins/Calendars/src/ui_calendarsDialog.h:1033
 msgctxt "calendar"
 msgid "Mesoamerica"
 msgstr "Мезоамерика"

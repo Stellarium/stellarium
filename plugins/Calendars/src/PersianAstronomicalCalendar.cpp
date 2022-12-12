@@ -16,11 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelTranslator.hpp"
 #include "PersianAstronomicalCalendar.hpp"
-#include "JulianCalendar.hpp"
 #include "GregorianCalendar.hpp"
-#include "RomanCalendar.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"

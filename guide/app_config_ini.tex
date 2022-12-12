@@ -63,7 +63,12 @@ flag\_planets\_orbits              & bool   & false & Set to \emph{true} to show
 flag\_permanent\_orbits            & bool   & false & Set to \emph{true} to show the orbit of planet, when planet is out of the viewport also.\\%\midrule
 flag\_planets\_pointers            & bool   & false & Set to \emph{true} to show the planet pointer markers on startup\\%\midrule
 flag\_planets\_nomenclature        & bool   & false & Set to \emph{true} to show the planetary nomenclature markers and labels\\%\midrule
-flag\_hide\_local\_nomenclature    & bool   & true & Set to \emph{true} to hide the planetary nomenclature items on the observer's celestial body\\\midrule
+flag\_planets\_nomenclature\_\ldots& bool   & false & Set to \emph{true} to show only items\\
+\hspace{12mm}terminator\_only       &        &       & along the terminator\\
+planet\_nomenclature\_\ldots       &        &       &\\
+\hspace{12mm}solar\_altitude\_min   & int    & -5    & minimum solar altitude for the terminator setting above\\
+\hspace{12mm}solar\_altitude\_max   & int    & 40 & maximum solar altitude for the terminator setting above\\
+flag\_hide\_local\_nomenclature    & bool   & true  & Set to \emph{true} to hide the planetary nomenclature items on the observer's celestial body\\\midrule
 %
 flag\_light\_travel\_time          & bool   & true  & Should be \emph{true} to improve accuracy in the movement of the planets by compensating 
                                            for the time it takes for light to travel. This has a slight impact on performance, 
@@ -846,7 +851,9 @@ screen\_y        & int    & Vertical   position of the top-left corner in window
 viewport\_effect & string & This is used when the spheric mirror display mode is activated. Values include \emph{none} and \emph{sphericMirrorDistorter}.\\%\midrule
 minimum\_fps     & int    & Sets the minimum number of frames per second to display at (hardware performance permitting)\\%\midrule
 maximum\_fps     & int    & Sets the maximum number of frames per second to display at. This is useful to reduce power consumption in laptops.\\%\midrule
-multisampling    & int    & Sets the number of samples to use for multisampling antialiasing. \emph{0} disables antialiasing, \emph{1} is no-op (single sample per pixel), higher values increase smoothness and degrade performance. Too high a value may result in excessive blurriness of the GUI. A good starting value to try is \emph{4}.\\\bottomrule
+multisampling    & int    & Sets the number of samples to use for multisampling antialiasing. \emph{0} disables antialiasing, \emph{1} is no-op (single sample per pixel), higher values increase smoothness and degrade performance. Too high a value may result in excessive blurriness of the GUI. A good starting value to try is \emph{4}.\\
+	anisotropic\_filtering & int & Improves quality of rendering of inclined textured surfaces like e.g. planetary surface near the limb. Modern (and even quite old, like from 2010) GPUs can handle high anisotropy with no noticeable performance drop, so it should be fine to set this value as high as 16. If this setting value is higher than the GPU is capable of, the maximum value supported is used. The default is 16. To disable anisotropic filtering, set this value to 0.\\
+\bottomrule
 \end{tabularx}
 
 \subsection{\big[viewing\big]}
