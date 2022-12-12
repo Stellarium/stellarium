@@ -988,7 +988,12 @@ ENDIF()
 
 ########### macOS Bundling ###############
 IF(APPLE)
+     MESSAGE(STATUS "macOS deployment target: ${CMAKE_OSX_DEPLOYMENT_TARGET} (${CMAKE_OSX_ARCHITECTURES})")
+     SET(PACKAGE_OSX_TARGET ${CMAKE_OSX_DEPLOYMENT_TARGET})
+     ADD_DEFINITIONS(-DPACKAGE_OSX_TARGET)
+
      CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/Info.plist.cmake ${CMAKE_SOURCE_DIR}/data/Info.plist @ONLY)
+
      GET_FILENAME_COMPONENT(_qt_bin_dir "${QMAKE_LOCATION}" DIRECTORY)
      FIND_PROGRAM(MACDEPLOYQT_COMMAND macdeployqt HINTS "${_qt_bin_dir}")
      IF(MACDEPLOYQT_COMMAND)
@@ -996,10 +1001,6 @@ IF(APPLE)
      ELSE()
 	  MESSAGE(STATUS "Could NOT find macdeployqt")
      ENDIF()
-
-     MESSAGE(STATUS "macOS deployment target: ${CMAKE_OSX_DEPLOYMENT_TARGET} (${CMAKE_OSX_ARCHITECTURES})")
-     SET(PACKAGE_OSX_TARGET ${CMAKE_OSX_DEPLOYMENT_TARGET})
-     ADD_DEFINITIONS(-DPACKAGE_OSX_TARGET)
 ENDIF()
 
 ########### Windows packaging ###############
