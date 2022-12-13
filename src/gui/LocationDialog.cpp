@@ -474,6 +474,36 @@ void LocationDialog::populateTimeZonesList()
 	}
 	tzNames.sort();
 
+	// Special sort for UTC+XX:YY time zones: we want them
+	// to go from the most negative to the most positive.
+	const auto utcRegEx = QRegularExpression("^UTC([+-])(\\d\\d):(\\d\\d)$");
+	std::vector<int> utcOffsets;
+	for(int n = 0; n < tzNames.size();)
+	{
+		const auto match = utcRegEx.match(tzNames[n]);
+		if(match.lastCapturedIndex() != 3)
+		{
+			++n;
+			continue;
+		}
+		tzNames.removeAt(n);
+		const int sign = match.captured(1)=="-" ? -1 : 1;
+		const int hour      = match.captured(2).toInt();
+		const int minute    = match.captured(3).toInt();
+		// Encode with a shift by ±1 to distinguish UTC±00:00
+		utcOffsets.push_back(sign * (100 * hour + minute + 1));
+	}
+	std::sort(utcOffsets.begin(), utcOffsets.end());
+	for(const auto offset : utcOffsets)
+	{
+		const auto hm = std::abs(offset) - 1;
+		const auto hour   = hm / 100;
+		const auto minute = hm % 100;
+		tzNames.push_back(QString("UTC%1%2:%3").arg(offset > 0 ? "+" : "-")
+											   .arg(hour  , 2, 10, QChar('0'))
+											   .arg(minute, 2, 10, QChar('0')));
+	}
+
 	//Save the current selection to be restored later
 	tzCombo->blockSignals(true);
 	int index = tzCombo->currentIndex();
