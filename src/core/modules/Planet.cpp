@@ -3032,7 +3032,10 @@ QOpenGLShaderProgram* Planet::createShader(const QString& name, PlanetShaderVars
 		QOpenGLShader* shd = new QOpenGLShader(QOpenGLShader::Vertex, program);
 		bool ok = shd->compileSourceCode(StelOpenGL::globalShaderPrefix(StelOpenGL::VERTEX_SHADER) + prefix + vSrc);
 		QString log = shd->log();
-		if (!log.isEmpty() && !log.contains("no warnings", Qt::CaseInsensitive)) { qWarning() << "Planet: Warnings/Errors while compiling" << name << "vertex shader: " << log; }
+		if (!log.isEmpty() && !log.contains("no warnings", Qt::CaseInsensitive))
+		{
+			qWarning().noquote() << "Planet: Warnings/Errors while compiling" << name << "vertex shader: " << log;
+		}
 		if(!ok)
 		{
 			qCritical()<<name<<"vertex shader could not be compiled";
@@ -3052,7 +3055,10 @@ QOpenGLShaderProgram* Planet::createShader(const QString& name, PlanetShaderVars
 		QOpenGLShader* shd = new QOpenGLShader(QOpenGLShader::Fragment, program);
 		bool ok = shd->compileSourceCode(StelOpenGL::globalShaderPrefix(StelOpenGL::FRAGMENT_SHADER) + prefix + fSrc);
 		QString log = shd->log();
-		if (!log.isEmpty() && !log.contains("no warnings", Qt::CaseInsensitive)) { qWarning() << "Planet: Warnings/Errors while compiling" << name << "fragment shader: " << log; }
+		if (!log.isEmpty() && !log.contains("no warnings", Qt::CaseInsensitive))
+		{
+			qWarning().noquote() << "Planet: Warnings/Errors while compiling" << name << "fragment shader: " << log;
+		}
 		if(!ok)
 		{
 			qCritical()<<name<<"fragment shader could not be compiled";
