@@ -4710,7 +4710,9 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 Ring::Ring(float radiusMin, float radiusMax, const QString &texname)
 	:radiusMin(radiusMin),radiusMax(radiusMax)
 {
-	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/"+texname);
+	auto& texMan = StelApp::getInstance().getTextureManager();
+	tex = texMan.createTexture(StelFileMgr::getInstallationDir()+"/textures/"+texname,
+							   StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE, true));
 }
 
 Vec3f Planet::getCurrentOrbitColor() const

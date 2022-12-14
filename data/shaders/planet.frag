@@ -199,12 +199,10 @@ void main()
             if(u > 0.0 && u < 1e10)
             {
                 mediump float ring_radius = length(P + u * ray);
+                mediump float s = (ring_radius - innerRadius) / (outerRadius - innerRadius);
+                lowp float ringAlpha = texture2D(ringS, vec2(s, 0.5)).w;
                 if(ring_radius > innerRadius && ring_radius < outerRadius)
-                {
-                    ring_radius = (ring_radius - innerRadius) / (outerRadius - innerRadius);
-                    lowp float ringAlpha = texture2D(ringS, vec2(ring_radius, 0.5)).w;
                     final_illumination = 1.0 - ringAlpha;
-                }
             }
         }
 #endif
