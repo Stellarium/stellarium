@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-11 19:58+0700\n"
+"POT-Creation-Date: 2022-12-12 15:08+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2022\n"
 "Language-Team: German (https://www.transifex.com/stellarium/teams/80998/de/)\n"
@@ -81,7 +81,7 @@ msgstr "Asterismus"
 #: src/core/modules/ToastMgr.cpp:62 src/core/modules/HipsMgr.cpp:156
 #: src/core/StelApp.cpp:648 src/core/StelCore.cpp:291
 #: src/core/StelSkyLayerMgr.cpp:85 src/core/StelSkyLayerMgr.cpp:86
-#: src/StelMainView.cpp:896
+#: src/StelMainView.cpp:926
 msgid "Display Options"
 msgstr "Anzeigeoptionen"
 
@@ -2149,7 +2149,7 @@ msgid "Toggle DSO type filter"
 msgstr "Deepsky-Filter umschalten"
 
 #: src/core/modules/NebulaMgr.cpp:1444 src/gui/StelDialog.cpp:336
-#: src/StelMainView.cpp:992
+#: src/StelMainView.cpp:1022
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:773
 msgid "Attention!"
 msgstr "Achtung!"
@@ -4290,7 +4290,7 @@ msgid "References / Further Reading"
 msgstr "Bibliographie"
 
 #: src/core/StelMovementMgr.cpp:231 src/gui/StelGui.cpp:220
-#: src/StelMainView.cpp:894 src/StelMainView.cpp:895
+#: src/StelMainView.cpp:924 src/StelMainView.cpp:925
 msgid "Miscellaneous"
 msgstr "Verschiedenes"
 
@@ -8073,26 +8073,26 @@ msgstr "Skripte"
 msgid "Shortcut"
 msgstr "Tastenkürzel"
 
-#: src/StelMainView.cpp:894
+#: src/StelMainView.cpp:924
 msgid "Save screenshot"
 msgstr "Bildschirmfoto speichern"
 
-#: src/StelMainView.cpp:895
+#: src/StelMainView.cpp:925
 msgid "Reload shaders (for development)"
 msgstr "Shader neu laden (Entwickler-Option)"
 
-#: src/StelMainView.cpp:896
+#: src/StelMainView.cpp:926
 msgid "Full-screen mode"
 msgstr "Vollbildmodus"
 
-#: src/StelMainView.cpp:992
+#: src/StelMainView.cpp:1022
 msgid ""
 "Shortcuts have conflicts! Please press F7 after program startup and check "
 "following multiple assignments"
 msgstr ""
 "Probleme bei Tastenkürzeln! Drücke F7 und behebe diese Mehrfachbelegungen: "
 
-#: src/StelMainView.cpp:1075
+#: src/StelMainView.cpp:1105
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -8100,7 +8100,7 @@ msgstr ""
 "Unzureichendes OpenGL-System. Bitte Treiber aktualisieren, Hardware "
 "aufrüsten, oder --angle-mode (oder --mesa-mode) probieren."
 
-#: src/StelMainView.cpp:1077
+#: src/StelMainView.cpp:1107
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --mesa-mode option."
@@ -8108,14 +8108,14 @@ msgstr ""
 "Unzureichendes OpenGL-System. Bitte Treiber aktualisieren, Hardware "
 "aufrüsten oder --mesa-mode probieren."
 
-#: src/StelMainView.cpp:1081
+#: src/StelMainView.cpp:1111
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Mangelhafte OpenGL-Unterstützung. Bitte Graphikkarten-Treiber aktualisieren "
 "oder andere Graphikkarte einbauen."
 
-#: src/StelMainView.cpp:1124
+#: src/StelMainView.cpp:1154
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8123,7 +8123,7 @@ msgstr ""
 "Das DirectX/OpenGL ES-Subsystem hat Probleme. Details im Logfile.\n"
 "Diese Meldung ignorieren und nicht wieder anzeigen, und versuchen trotz der Probleme fortzufahren?"
 
-#: src/StelMainView.cpp:1175
+#: src/StelMainView.cpp:1205
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8131,7 +8131,7 @@ msgstr ""
 "Das OpenGL/Mesa-Subsystem hat Probleme. Details im Logfile.\n"
 "Diese Meldung ignorieren und nicht wieder anzeigen, und versuchen trotz der Probleme fortzufahren?"
 
-#: src/StelMainView.cpp:1235
+#: src/StelMainView.cpp:1265
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -8139,7 +8139,7 @@ msgstr ""
 "Das OpenGL-Subsystem hat Probleme. Details im Logfile.\n"
 "Diese Meldung ignorieren und nicht wieder anzeigen, und versuchen trotz der Probleme fortzufahren?"
 
-#: src/StelMainView.cpp:1276
+#: src/StelMainView.cpp:1306
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -11552,30 +11552,35 @@ msgstr "Sardisch"
 
 #: skycultures/translations_skycultures.fab:102
 msgctxt "sky culture"
+msgid "Seri"
+msgstr "Seri"
+
+#: skycultures/translations_skycultures.fab:104
+msgctxt "sky culture"
 msgid "Tongan"
 msgstr "Tongaische Sprache"
 
-#: skycultures/translations_skycultures.fab:104
+#: skycultures/translations_skycultures.fab:106
 msgctxt "sky culture"
 msgid "Tukano"
 msgstr "Tukano"
 
-#: skycultures/translations_skycultures.fab:106
+#: skycultures/translations_skycultures.fab:108
 msgctxt "sky culture"
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
-#: skycultures/translations_skycultures.fab:108
+#: skycultures/translations_skycultures.fab:110
 msgctxt "sky culture"
 msgid "Vanuatu (Netwar)"
 msgstr "Vanuatu (Netwar)"
 
-#: skycultures/translations_skycultures.fab:110
+#: skycultures/translations_skycultures.fab:112
 msgctxt "sky culture"
 msgid "Xhosa"
 msgstr "Xhosa"
 
-#: skycultures/translations_skycultures.fab:112
+#: skycultures/translations_skycultures.fab:114
 msgctxt "sky culture"
 msgid "Zulu"
 msgstr "Zulu"
@@ -11968,8 +11973,8 @@ msgstr "Markierungen"
 
 #: src/ui_viewDialog.h:3453
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:230
-msgid "Starlore"
-msgstr "Sternsage"
+msgid "Sky Culture"
+msgstr "Himmelskultur"
 
 #: src/ui_viewDialog.h:3455
 msgid "Surveys"
