@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-12 15:08+0700\n"
+"POT-Creation-Date: 2022-12-17 08:14+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -627,9 +627,14 @@ msgctxt "compass direction"
 msgid "NNW"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:349
-#, qt-format
-msgid "Loading... %1% done"
+#: src/core/modules/LandscapeMgr.cpp:349 src/core/modules/LandscapeMgr.cpp:664
+#: src/gui/ViewDialog.cpp:605
+msgid "Loading..."
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:349 src/core/modules/LandscapeMgr.cpp:664
+msgctxt "percentage of done"
+msgid "done"
 msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:354
@@ -643,11 +648,6 @@ msgstr ""
 #: src/core/modules/LandscapeMgr.cpp:446
 msgid ""
 "ShowMySky atmosphere model crashed. Loading Preetham model as a fallback."
-msgstr ""
-
-#: src/core/modules/LandscapeMgr.cpp:664
-#, c-format
-msgid "Loading... 0% done"
 msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:778
@@ -5338,10 +5338,6 @@ msgstr ""
 
 #: src/gui/StelDialog.cpp:336
 msgid "Are you sure? This will delete your customized data."
-msgstr ""
-
-#: src/gui/ViewDialog.cpp:605
-msgid "Loading ..."
 msgstr ""
 
 #: src/gui/ViewDialog.cpp:658
