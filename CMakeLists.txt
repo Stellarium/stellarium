@@ -700,9 +700,8 @@ SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 IF(ENABLE_SHOWMYSKY)
     ADD_DEFINITIONS(-DENABLE_SHOWMYSKY)
     CPMFindPackage(NAME ShowMySky-Qt${QT_VERSION_MAJOR}
-        #URL https://github.com/10110111/CalcMySky/archive/74d234e614478017fb4519dd0c45573ebf4528cf.tar.gz
-        URL https://github.com/10110111/CalcMySky/archive/refs/tags/v0.2.1.tar.gz
-        URL_HASH SHA256=5e2290152424d358b1e8b3f31144fcf0f6e076520dd7c4dfc6b7b36cac91cde2
+        URL https://github.com/10110111/CalcMySky/archive/0fb93ef8e602c463f167f7727d4d80382033caca.tar.gz
+        URL_HASH SHA256=a4507529a6533545a505a226a68c8d770e99a62cb354ec8292b558898b0afe96
         EXCLUDE_FROM_ALL yes
         OPTIONS "QT_VERSION ${QT_VERSION_MAJOR}")
     IF(ShowMySky-Qt${QT_VERSION_MAJOR}_ADDED)
