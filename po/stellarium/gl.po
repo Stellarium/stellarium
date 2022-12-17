@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-12 15:08+0700\n"
+"POT-Creation-Date: 2022-12-17 08:14+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales.gr@gmail.com>, 2022\n"
 "Language-Team: Galician (https://www.transifex.com/stellarium/teams/80998/gl/)\n"
@@ -634,10 +634,15 @@ msgctxt "compass direction"
 msgid "NNW"
 msgstr "NNW"
 
-#: src/core/modules/LandscapeMgr.cpp:349
-#, qt-format
-msgid "Loading... %1% done"
-msgstr "Cargando... %1% feito"
+#: src/core/modules/LandscapeMgr.cpp:349 src/core/modules/LandscapeMgr.cpp:664
+#: src/gui/ViewDialog.cpp:605
+msgid "Loading..."
+msgstr "Cargando..."
+
+#: src/core/modules/LandscapeMgr.cpp:349 src/core/modules/LandscapeMgr.cpp:664
+msgctxt "percentage of done"
+msgid "done"
+msgstr "feito"
 
 #: src/core/modules/LandscapeMgr.cpp:354
 msgid "Switching models..."
@@ -653,11 +658,6 @@ msgid ""
 msgstr ""
 "O modelo de atmosfera ShowMySky fallou. Cargando o modelo Preetham como "
 "alternativa."
-
-#: src/core/modules/LandscapeMgr.cpp:664
-#, c-format
-msgid "Loading... 0% done"
-msgstr "Cargando... 0% feito"
 
 #: src/core/modules/LandscapeMgr.cpp:778
 msgid "Atmosphere"
@@ -5607,10 +5607,6 @@ msgstr "Fotogramas por segundo"
 #: src/gui/StelDialog.cpp:336
 msgid "Are you sure? This will delete your customized data."
 msgstr "Seguro? Isto borrará os teus datos personalizados."
-
-#: src/gui/ViewDialog.cpp:605
-msgid "Loading ..."
-msgstr "Cargando..."
 
 #: src/gui/ViewDialog.cpp:658
 msgid "properties"
