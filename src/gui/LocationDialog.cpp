@@ -504,6 +504,19 @@ void LocationDialog::populateTimeZonesList()
 											   .arg(minute, 2, 10, QChar('0')));
 	}
 
+	if(!utcOffsets.empty())
+	{
+		// If we have UTC offsets, the Etc/GMT±x time zones are not useful. In
+		// addition, they'd also need re-sorting, so let's just remove them.
+		for(int n = 0; n < tzNames.size();)
+		{
+			if(tzNames[n].startsWith("Etc/GMT"))
+				tzNames.removeAt(n);
+			else
+				++n;
+		}
+	}
+
 	//Save the current selection to be restored later
 	tzCombo->blockSignals(true);
 	int index = tzCombo->currentIndex();
