@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-12 15:08+0700\n"
+"POT-Creation-Date: 2022-12-17 08:14+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Ilpo Kantonen, 2022\n"
 "Language-Team: Finnish (https://www.transifex.com/stellarium/teams/80998/fi/)\n"
@@ -636,10 +636,15 @@ msgctxt "compass direction"
 msgid "NNW"
 msgstr "P-Lu"
 
-#: src/core/modules/LandscapeMgr.cpp:349
-#, qt-format
-msgid "Loading... %1% done"
-msgstr "Lataa... %1% valmis"
+#: src/core/modules/LandscapeMgr.cpp:349 src/core/modules/LandscapeMgr.cpp:664
+#: src/gui/ViewDialog.cpp:605
+msgid "Loading..."
+msgstr "Lataa..."
+
+#: src/core/modules/LandscapeMgr.cpp:349 src/core/modules/LandscapeMgr.cpp:664
+msgctxt "percentage of done"
+msgid "done"
+msgstr "valmis"
 
 #: src/core/modules/LandscapeMgr.cpp:354
 msgid "Switching models..."
@@ -654,11 +659,6 @@ msgid ""
 "ShowMySky atmosphere model crashed. Loading Preetham model as a fallback."
 msgstr ""
 "ShowMySky-ilmakehämalli kaatui. Ladataan Preetham-mallia varavaihtoehtona."
-
-#: src/core/modules/LandscapeMgr.cpp:664
-#, c-format
-msgid "Loading... 0% done"
-msgstr "Lataa... 0% valmis"
 
 #: src/core/modules/LandscapeMgr.cpp:778
 msgid "Atmosphere"
@@ -5617,10 +5617,6 @@ msgstr "Kuvataajuus"
 #: src/gui/StelDialog.cpp:336
 msgid "Are you sure? This will delete your customized data."
 msgstr "Oletko varma? Tämä poistaa mukauttamasi tiedot."
-
-#: src/gui/ViewDialog.cpp:605
-msgid "Loading ..."
-msgstr "Ladataan..."
 
 #: src/gui/ViewDialog.cpp:658
 msgid "properties"
