@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-12 15:08+0700\n"
+"POT-Creation-Date: 2022-12-17 08:14+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Ilpo Kantonen, 2022\n"
 "Language-Team: Finnish (https://www.transifex.com/stellarium/teams/80998/fi/)\n"
@@ -165,7 +165,7 @@ msgstr "Ekliptika"
 
 #: src/core/modules/GridLinesMgr.cpp:697
 msgid "Equator of J2000.0"
-msgstr "Ekvaattori (J2000.0)"
+msgstr "Ekvaattori J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:701
 msgid "Equator"
@@ -366,7 +366,7 @@ msgstr "Ekliptika"
 
 #: src/core/modules/GridLinesMgr.cpp:1891
 msgid "Ecliptic J2000 line"
-msgstr "Ekliptika (J2000)"
+msgstr "Ekliptikaviiva J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1892
 msgid "Invariable Plane line"
@@ -383,7 +383,7 @@ msgstr "Ekvaattori"
 
 #: src/core/modules/GridLinesMgr.cpp:1895
 msgid "Equator J2000 line"
-msgstr "Ekvaattori (J2000)"
+msgstr "Ekvaattoriviiva J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1896
 msgid "Fixed Equator line"
@@ -402,11 +402,11 @@ msgstr "Horisontti"
 #: src/core/modules/GridLinesMgr.cpp:1899
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:376
 msgid "Equatorial J2000 grid"
-msgstr "Ekvatoriaaliasteikko (J2000)"
+msgstr "Ekvatoriaaliasteikko J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1900
 msgid "Ecliptic J2000 grid"
-msgstr "Ekliptikaalinen asteikko (J2000)"
+msgstr "Ekliptikaalinen asteikko J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1901 src/ui_configurationDialog.h:1872
 msgid "Ecliptic grid"
@@ -465,7 +465,7 @@ msgstr "Puolivarjoympyrä"
 
 #: src/core/modules/GridLinesMgr.cpp:1915
 msgid "Celestial J2000 poles"
-msgstr "Taivaannavat (J2000)"
+msgstr "Taivaannavat J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1916
 msgid "Celestial poles"
@@ -477,7 +477,7 @@ msgstr "Zeniitti ja nadiiri"
 
 #: src/core/modules/GridLinesMgr.cpp:1918
 msgid "Ecliptic J2000 poles"
-msgstr "Ekliptikaaliset navat (J2000)"
+msgstr "Ekliptikaaliset navat J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1919
 msgid "Ecliptic poles"
@@ -497,7 +497,7 @@ msgstr "Supergalaktiset navat"
 
 #: src/core/modules/GridLinesMgr.cpp:1923
 msgid "Equinox J2000 points"
-msgstr "Tasauspisteet (J2000)"
+msgstr "Tasauspisteet J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1924
 msgid "Equinox points"
@@ -505,7 +505,7 @@ msgstr "Tasauspisteet"
 
 #: src/core/modules/GridLinesMgr.cpp:1925
 msgid "Solstice J2000 points"
-msgstr "Seisauspisteet (J2000)"
+msgstr "Seisauspisteet J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1926
 msgid "Solstice points"
@@ -636,10 +636,15 @@ msgctxt "compass direction"
 msgid "NNW"
 msgstr "P-Lu"
 
-#: src/core/modules/LandscapeMgr.cpp:349
-#, qt-format
-msgid "Loading... %1% done"
-msgstr "Lataa... %1% valmis"
+#: src/core/modules/LandscapeMgr.cpp:349 src/core/modules/LandscapeMgr.cpp:664
+#: src/gui/ViewDialog.cpp:605
+msgid "Loading..."
+msgstr "Lataa..."
+
+#: src/core/modules/LandscapeMgr.cpp:349 src/core/modules/LandscapeMgr.cpp:664
+msgctxt "percentage of done"
+msgid "done"
+msgstr "valmis"
 
 #: src/core/modules/LandscapeMgr.cpp:354
 msgid "Switching models..."
@@ -654,11 +659,6 @@ msgid ""
 "ShowMySky atmosphere model crashed. Loading Preetham model as a fallback."
 msgstr ""
 "ShowMySky-ilmakehämalli kaatui. Ladataan Preetham-mallia varavaihtoehtona."
-
-#: src/core/modules/LandscapeMgr.cpp:664
-#, c-format
-msgid "Loading... 0% done"
-msgstr "Lataa... 0% valmis"
 
 #: src/core/modules/LandscapeMgr.cpp:778
 msgid "Atmosphere"
@@ -5618,10 +5618,6 @@ msgstr "Kuvataajuus"
 msgid "Are you sure? This will delete your customized data."
 msgstr "Oletko varma? Tämä poistaa mukauttamasi tiedot."
 
-#: src/gui/ViewDialog.cpp:605
-msgid "Loading ..."
-msgstr "Ladataan..."
-
 #: src/gui/ViewDialog.cpp:658
 msgid "properties"
 msgstr "ominaisuudet"
@@ -6696,7 +6692,7 @@ msgstr "Kokonais- tai rengasvaiheen kesto suurimmassa pimennyksessä"
 #: src/gui/ObsListDialog.cpp:211 src/gui/ObsListCreateEditDialog.cpp:183
 #: src/ui_obsListCreateEditDialog.h:325
 msgid "Date"
-msgstr "Päivämäärä"
+msgstr "Päiväys"
 
 #. TRANSLATORS: The name of column in AstroCalc/Eclipses tool
 #: src/gui/AstroCalcDialog.cpp:3318
@@ -26028,7 +26024,7 @@ msgstr "Huhtikuun Lyridit"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:37
 msgid "α-Centaurids"
-msgstr "α-centauridit"
+msgstr "α-Kentauridit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:39
@@ -26218,7 +26214,7 @@ msgstr "κ-serpentidit"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:113
 msgid "θ-Centaurids"
-msgstr "θ-centauridit"
+msgstr "θ-Kentauridit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:115

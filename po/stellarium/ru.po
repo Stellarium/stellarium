@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-12 15:08+0700\n"
+"POT-Creation-Date: 2022-12-17 08:14+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -633,10 +633,15 @@ msgctxt "compass direction"
 msgid "NNW"
 msgstr "ССЗ"
 
-#: src/core/modules/LandscapeMgr.cpp:349
-#, qt-format
-msgid "Loading... %1% done"
-msgstr "Загрузка... %1% готово"
+#: src/core/modules/LandscapeMgr.cpp:349 src/core/modules/LandscapeMgr.cpp:664
+#: src/gui/ViewDialog.cpp:605
+msgid "Loading..."
+msgstr "Загрузка..."
+
+#: src/core/modules/LandscapeMgr.cpp:349 src/core/modules/LandscapeMgr.cpp:664
+msgctxt "percentage of done"
+msgid "done"
+msgstr "готово"
 
 #: src/core/modules/LandscapeMgr.cpp:354
 msgid "Switching models..."
@@ -652,11 +657,6 @@ msgid ""
 msgstr ""
 "Модель атмосферы ShowMySky вылетела. Загрузка модели Preetham в качестве "
 "запасного варианта."
-
-#: src/core/modules/LandscapeMgr.cpp:664
-#, c-format
-msgid "Loading... 0% done"
-msgstr "Загрузка... 0% готово"
 
 #: src/core/modules/LandscapeMgr.cpp:778
 msgid "Atmosphere"
@@ -5615,10 +5615,6 @@ msgstr "Кадров в секунду"
 #: src/gui/StelDialog.cpp:336
 msgid "Are you sure? This will delete your customized data."
 msgstr "Вы уверены? Это приведет к удалению ваших пользовательских данных."
-
-#: src/gui/ViewDialog.cpp:605
-msgid "Loading ..."
-msgstr "Загрузка ..."
 
 #: src/gui/ViewDialog.cpp:658
 msgid "properties"
