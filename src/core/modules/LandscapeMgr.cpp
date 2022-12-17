@@ -346,7 +346,7 @@ void LandscapeMgr::update(double deltaTime)
 			{
 				setAtmosphereShowMySkyStoppedWithError(false);
 				const auto percentDone = std::lround(100.*status.stepsDone/status.stepsToDo);
-				setAtmosphereShowMySkyStatusText(q_("Loading... %1% done").arg(percentDone));
+				setAtmosphereShowMySkyStatusText(QString("%1 %2% %3").arg(q_("Loading..."), QString::number(percentDone), qc_("done","percentage of done")));
 				qDebug() << "Finished this batch of loading at" << percentDone << "%, will continue in the next frame";
 			}
 			else
@@ -661,7 +661,7 @@ void LandscapeMgr::createAtmosphere()
 			else
 			{
 				setAtmosphereShowMySkyStoppedWithError(false);
-				setAtmosphereShowMySkyStatusText(q_("Loading... 0% done"));
+				setAtmosphereShowMySkyStatusText(QString("%1 0% %2").arg(q_("Loading..."), qc_("done","percentage of done")));
 			}
 		}
 		catch(AtmosphereShowMySky::InitFailure const& error)

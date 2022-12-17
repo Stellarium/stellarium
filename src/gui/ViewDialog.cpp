@@ -602,7 +602,7 @@ void ViewDialog::updateHips()
 	if (!hipsmgr->property("loaded").toBool())
 	{
 		l->clear();
-		new QListWidgetItem(q_("Loading ..."), l);
+		new QListWidgetItem(q_("Loading..."), l);
 		return;
 	}
 
