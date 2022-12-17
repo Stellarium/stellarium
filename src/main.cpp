@@ -354,13 +354,15 @@ int main(int argc, char **argv)
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
-	// Add the DejaVu fonts that we use everywhere in the program
-	const QString& dejaVuSansFont = StelFileMgr::findFile("data/DejaVuSans.ttf");
-	if (!dejaVuSansFont.isEmpty())
-		QFontDatabase::addApplicationFont(dejaVuSansFont);
-	const QString& dejaVuSansMonoFont = StelFileMgr::findFile("data/DejaVuSansMono.ttf");
-	if (!dejaVuSansMonoFont.isEmpty())
-		QFontDatabase::addApplicationFont(dejaVuSansMonoFont);
+	// Add the Noto & DejaVu fonts that we use everywhere in the program
+	const QStringList customFonts = { "NotoSans-Regular.ttf", "NotoSansMono-Regular.ttf", "NotoSansSC-Regular.otf", "DejaVuSans.ttf", "DejaVuSansMono.ttf" };
+	QString customFont;
+	for (auto font: qAsConst(customFonts))
+	{
+		customFont = StelFileMgr::findFile(QString("data/%1").arg(font));
+		if (!customFont.isEmpty())
+			QFontDatabase::addApplicationFont(customFont);
+	}
 	
 	QString fileFont = confSettings->value("gui/base_font_file", "").toString();
 	if (!fileFont.isEmpty())
@@ -374,7 +376,7 @@ int main(int argc, char **argv)
 
 	// Set the default application font and font size.
 	// Note that style sheet will possibly override this setting.
-	QString baseFont = confSettings->value("gui/base_font_name", "DejaVu Sans").toString();
+	QString baseFont = confSettings->value("gui/base_font_name", "Noto Sans").toString();
 	QFont tmpFont(baseFont);
 	tmpFont.setPixelSize(confSettings->value("gui/gui_font_size", 13).toInt());
 	QGuiApplication::setFont(tmpFont);

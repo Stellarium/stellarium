@@ -1,10 +1,15 @@
 
 ########### install files ###############
-INSTALL(FILES ssystem_major.ini ssystem_minor.ini ssystem_1000comets.ini base_locations.bin.gz default_cfg.ini DejaVuSans.ttf DejaVuSansMono.ttf languages.tab iso3166.tab regions-geoscheme.tab 
-              constellation_boundaries.dat constellations_spans.dat nomenclature.dat DESTINATION ${SDATALOC}/data)
+INSTALL(FILES ssystem_major.ini ssystem_minor.ini ssystem_1000comets.ini 
+	base_locations.bin.gz default_cfg.ini languages.tab iso3166.tab 
+	regions-geoscheme.tab constellation_boundaries.dat constellations_spans.dat 
+        nomenclature.dat DESTINATION ${SDATALOC}/data)
+# install fonts
+INSTALL(FILES NotoSans-Regular.ttf NotoSansMono-Regular.ttf NotoSansSC-Regular.otf 
+	DejaVuSans.ttf DejaVuSansMono.ttf DESTINATION ${SDATALOC}/data)
+# install shaders
 INSTALL(DIRECTORY shaders/ DESTINATION ${SDATALOC}/data/shaders FILES_MATCHING
-	PATTERN "planet*" 
-	)
+	PATTERN "planet*")
 
 ########### splash target ##############
 ADD_CUSTOM_TARGET(splash ALL)

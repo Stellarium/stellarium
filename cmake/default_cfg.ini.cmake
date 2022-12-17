@@ -108,9 +108,7 @@ screen_font_size                    = 13
 gui_font_size                       = 13
 #Name of custom font file for some languages, like Thai.
 #This file should be stored into data/ folder.
-#base_font_file                      = DejaVuSans.ttf
-#base_font_name                      = DejaVu Sans
-flag_font_selection                 = false
+flag_font_selection                 = true
 mouse_cursor_timeout                = 10
 flag_mouse_cursor_timeout           = false
 selected_object_info                = all
