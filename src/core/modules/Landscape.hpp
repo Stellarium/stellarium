@@ -304,10 +304,10 @@ protected:
 	} landscapeTexCoord;
 
 private:
-	void drawFog(StelCore* core, StelPainter&) const;
+	void drawFog(StelCore* core, int firstFreeTexSampler) const;
 	// drawLight==true for illumination layer, it then selects only the self-illuminating panels.
-	void drawDecor(StelCore* core, StelPainter&, const bool drawLight=false) const;
-	void drawGround(StelCore* core, StelPainter&) const;
+	void drawDecor(StelCore* core, int firstFreeTexSampler, bool drawLight = false) const;
+	void drawGround(StelCore* core, int firstFreeTexSampler) const;
 	QVector<Vec3d> groundVertexArr;
 	QVector<Vec2f> groundTexCoordArr;
 	StelTextureSP* sideTexs;
@@ -335,6 +335,24 @@ private:
 	};
 
 	QList<LOSSide> precomputedSides;
+
+	struct
+	{
+		int mapTex;
+		int vshift;
+		int tanMode;
+		int calibrated;
+		int brightness;
+		int rgbMaxValue;
+		int sideToRender;
+		int numberOfSides;
+		int sideTexCoords;
+		int ditherPattern;
+		int decorAngleShift;
+		int sideAngularHeight;
+		int fogCylinderHeight;
+		int projectionMatrixInverse;
+	} shaderVars;
 };
 
 /////////////////////////////////////////////////////////
