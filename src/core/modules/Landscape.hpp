@@ -310,10 +310,19 @@ protected:
 	} landscapeTexCoord;
 
 private:
-	void drawFog(StelCore* core, StelPainter&) const;
+	// Low-GL versions draw in the bad old way, suitable for low OpenGL versions like GL<3 or GLES2.
+	// This makes polygons stick in all directions on large FoV in some projections.
+	void drawLowGL(StelCore* core, bool onlyPolygon);
+	void drawFogLowGL(StelCore* core, StelPainter&) const;
 	// drawLight==true for illumination layer, it then selects only the self-illuminating panels.
-	void drawDecor(StelCore* core, StelPainter&, const bool drawLight=false) const;
-	void drawGround(StelCore* core, StelPainter&) const;
+	void drawDecorLowGL(StelCore* core, StelPainter&, bool drawLight = false) const;
+	void drawGroundLowGL(StelCore* core, StelPainter&) const;
+
+	void drawFog(StelCore* core, int firstFreeTexSampler) const;
+	// drawLight==true for illumination layer, it then selects only the self-illuminating panels.
+	void drawDecor(StelCore* core, int firstFreeTexSampler, bool drawLight = false) const;
+	void drawGround(StelCore* core, int firstFreeTexSampler) const;
+
 	QVector<Vec3d> groundVertexArr;
 	QVector<Vec2f> groundTexCoordArr;
 	StelTextureSP* sideTexs;
@@ -341,6 +350,29 @@ private:
 	};
 
 	QList<LOSSide> precomputedSides;
+
+	static constexpr unsigned SIDES_BATCH_SIZE = 8;
+	struct
+	{
+		int mapTex;
+		int vshift;
+		int tanMode;
+		int calibrated;
+		int brightness;
+		int rgbMaxValue;
+		int whatToRender;
+		int ditherPattern;
+		int decorAngleShift;
+		int firstSideInBatch;
+		int sidePresenceMask;
+		int sideAngularHeight;
+		int fogCylinderHeight;
+		int totalNumberOfSides;
+		int numberOfSidesInBatch;
+		int projectionMatrixInverse;
+		int sideTexN[SIDES_BATCH_SIZE];
+		int perSideTexCoords[SIDES_BATCH_SIZE];
+	} shaderVars;
 };
 
 /////////////////////////////////////////////////////////
