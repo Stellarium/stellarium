@@ -5482,28 +5482,6 @@
 			"RA": "13h16m46.9s",
 			"DE": "9d25m27.1s"
 		},
-		"GJ 514":
-		{
-			"exoplanets":
-			[
-				{
-					"period": 140.43,
-					"semiAxis": 0.422,
-					"eccentricity": 0.45,
-					"discovered": 2022,
-					"detectionMethod": "Radial Velocity",
-					"planetName": "b"
-				}
-			],
-			"distance": 7.618,
-			"stype": "M0.5V",
-			"smass": 0.51,
-			"smetal": -0.14,
-			"sradius": 0.5,
-			"effectiveTemp": 3728.0,
-			"RA": "13h30m1s",
-			"DE": "10d22m21s"
-		},
 		"GJ 536":
 		{
 			"exoplanets":
@@ -32843,10 +32821,10 @@
 			"exoplanets":
 			[
 				{
-					"radius": 0.0678,
+					"radius": 0.067794,
 					"period": 0.8094,
-					"semiAxis": 0.017,
-					"inclination": 89.95,
+					"semiAxis": 0.0117,
+					"inclination": 89.9518,
 					"discovered": 2022,
 					"detectionMethod": "Primary Transit",
 					"planetName": "b"
@@ -32855,14 +32833,14 @@
 					"radius": 0.109975,
 					"period": 5.3301,
 					"semiAxis": 0.0426,
-					"inclination": 89.99,
+					"inclination": 89.9985,
 					"discovered": 2022,
 					"detectionMethod": "Primary Transit",
 					"planetName": "c"
 				}
 			],
-			"distance": 285.0,
-			"smass": 0.8,
+			"distance": 292.52,
+			"smass": 0.808,
 			"smetal": -0.205,
 			"sradius": 0.7,
 			"effectiveTemp": 4116.0,
@@ -47263,6 +47241,13 @@
 					"discovered": 2014,
 					"detectionMethod": "Primary Transit",
 					"planetName": "d"
+				},
+				{
+					"mass": 0.00135,
+					"period": 4.0,
+					"discovered": 2022,
+					"detectionMethod": "Radial Velocity",
+					"planetName": "e"
 				}
 			],
 			"distance": 66.99,
@@ -86009,6 +85994,38 @@
 			"RA": "20h39m53s",
 			"DE": "-65d26m58s"
 		},
+		"TOI-1097":
+		{
+			"exoplanets":
+			[
+				{
+					"radius": 0.25765,
+					"period": 9.188526,
+					"eccentricity": 0.18,
+					"inclination": 88.13,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "b"
+				},
+				{
+					"radius": 0.2311,
+					"period": 13.900148,
+					"eccentricity": 0.3,
+					"inclination": 88.24,
+					"discovered": 2022,
+					"detectionMethod": "Primary Transit",
+					"planetName": "c"
+				}
+			],
+			"distance": 79.56,
+			"smass": 1.08,
+			"smetal": -0.07,
+			"sradius": 1.0,
+			"effectiveTemp": 5881.0,
+			"starAltNames": "HD  109833",
+			"RA": "12h39m6.1s",
+			"DE": "-74d34m26.4s"
+		},
 		"TOI-1098":
 		{
 			"exoplanets":
@@ -88325,23 +88342,23 @@
 			"exoplanets":
 			[
 				{
-					"mass": 0.059,
+					"mass": 0.0558,
 					"radius": 0.6861,
-					"period": 17.0968,
+					"period": 17.0991,
 					"semiAxis": 0.1293,
-					"eccentricity": 0.16,
-					"inclination": 88.6,
+					"eccentricity": 0.161,
+					"inclination": 88.588,
 					"discovered": 2019,
 					"detectionMethod": "Primary Transit",
 					"planetName": "b"
 				},
 				{
-					"mass": 0.56,
+					"mass": 0.528,
 					"radius": 0.901,
-					"period": 34.5516,
+					"period": 34.5507,
 					"semiAxis": 0.2068,
-					"eccentricity": 0.0046,
-					"inclination": 89.84,
+					"eccentricity": 0.0062,
+					"inclination": 89.792,
 					"discovered": 2019,
 					"detectionMethod": "Primary Transit",
 					"planetName": "c"
