@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-12 15:08+0700\n"
+"POT-Creation-Date: 2022-12-17 08:14+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2022\n"
 "Language-Team: Ukrainian (https://www.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -633,10 +633,15 @@ msgctxt "compass direction"
 msgid "NNW"
 msgstr "Пн-Пн-Зх"
 
-#: src/core/modules/LandscapeMgr.cpp:349
-#, qt-format
-msgid "Loading... %1% done"
-msgstr "Завантаження... Виконано на %1%"
+#: src/core/modules/LandscapeMgr.cpp:349 src/core/modules/LandscapeMgr.cpp:664
+#: src/gui/ViewDialog.cpp:605
+msgid "Loading..."
+msgstr "Завантаження…"
+
+#: src/core/modules/LandscapeMgr.cpp:349 src/core/modules/LandscapeMgr.cpp:664
+msgctxt "percentage of done"
+msgid "done"
+msgstr "виконано"
 
 #: src/core/modules/LandscapeMgr.cpp:354
 msgid "Switching models..."
@@ -652,11 +657,6 @@ msgid ""
 msgstr ""
 "Обробка моделі атмосфери ShowMySky завершилася аварійно. Завантажуємо "
 "резервну модель Прітгема."
-
-#: src/core/modules/LandscapeMgr.cpp:664
-#, c-format
-msgid "Loading... 0% done"
-msgstr "Завантаження... Виконано на 0%"
 
 #: src/core/modules/LandscapeMgr.cpp:778
 msgid "Atmosphere"
@@ -5645,10 +5645,6 @@ msgstr "Кадрів в секунду"
 #: src/gui/StelDialog.cpp:336
 msgid "Are you sure? This will delete your customized data."
 msgstr "Ви певні? У результаті виконання дії буде вилучено усі нетипові дані."
-
-#: src/gui/ViewDialog.cpp:605
-msgid "Loading ..."
-msgstr "Завантаження…"
 
 #: src/gui/ViewDialog.cpp:658
 msgid "properties"
