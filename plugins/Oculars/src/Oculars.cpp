@@ -2034,9 +2034,7 @@ void Oculars::paintText(const StelCore* core)
 	{
 		QString ocularNumberLabel;
 		QString name = ocular->name();
-		QString ocularI18n = q_("Ocular");
-		if (ocular->isBinoculars())
-			ocularI18n = q_("Binocular");
+		QString ocularI18n = ocular->isBinoculars() ? q_("Binocular") : q_("Ocular");
 		if (name.isEmpty())
 		{
 			ocularNumberLabel = QString("%1 #%2").arg(ocularI18n).arg(selectedOcularIndex);
@@ -2316,12 +2314,12 @@ void Oculars::zoom(bool zoomedIn)
 			if (flagHideGridsLines)
 			{
 				// Store current state for later resetting
-				flagGridLinesDisplayedMain		= propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool();
-				flagCardinalPointsMain			= propMgr->getStelPropertyValue("LandscapeMgr.cardinalPointsDisplayed").toBool();
-				flagConstellationLinesMain		= propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool();
+				flagGridLinesDisplayedMain      = propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool();
+				flagCardinalPointsMain          = propMgr->getStelPropertyValue("LandscapeMgr.cardinalPointsDisplayed").toBool();
+				flagConstellationLinesMain      = propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool();
 				flagConstellationBoundariesMain	= propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool();
-				flagAsterismLinesMain			= propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool();
-				flagRayHelpersLinesMain		= propMgr->getStelPropertyValue("AsterismMgr.rayHelpersDisplayed").toBool();
+				flagAsterismLinesMain           = propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool();
+				flagRayHelpersLinesMain         = propMgr->getStelPropertyValue("AsterismMgr.rayHelpersDisplayed").toBool();
 			}
 
 			StelSkyDrawer *skyDrawer = core->getSkyDrawer();
@@ -2336,10 +2334,10 @@ void Oculars::zoom(bool zoomedIn)
 			relativeStarScaleMain	= skyDrawer->getRelativeStarScale();
 			absoluteStarScaleMain	= skyDrawer->getAbsoluteStarScale();
 
-			flagMoonScaleMain	= propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool();
+			flagMoonScaleMain        = propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool();
 			flagMinorBodiesScaleMain = propMgr->getStelPropertyValue("SolarSystem.flagMinorBodyScale").toBool();
-			flagSunScaleMain	= propMgr->getStelPropertyValue("SolarSystem.flagSunScale").toBool();
-			flagPlanetsScaleMain	= propMgr->getStelPropertyValue("SolarSystem.flagPlanetScale").toBool();
+			flagSunScaleMain         = propMgr->getStelPropertyValue("SolarSystem.flagSunScale").toBool();
+			flagPlanetsScaleMain     = propMgr->getStelPropertyValue("SolarSystem.flagPlanetScale").toBool();
 
 			flagDSOPropHintMain	= propMgr->getStelPropertyValue("NebulaMgr.hintsProportional").toBool();
 			milkyWaySaturation	= propMgr->getStelPropertyValue("MilkyWay.saturation").toDouble();

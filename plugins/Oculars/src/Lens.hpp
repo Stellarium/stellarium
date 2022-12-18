@@ -31,7 +31,7 @@ class QSettings;
 class Lens : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(QString name READ getName WRITE setName)
+	Q_PROPERTY(QString name     READ getName      WRITE setName)
 	Q_PROPERTY(double multipler READ getMultipler WRITE setMultipler)
 
 public:
@@ -51,6 +51,7 @@ public:
 private:
 	QString m_name;
 	double m_multipler;
+	static const QMap<int, QString> mapping;
 };
 
 #endif

@@ -23,9 +23,10 @@
 Ocular::Ocular()
 	: m_binoculars(false),
 	  m_permanentCrosshair(false),
-	  m_apparentFOV(0.0),
-	  m_effectiveFocalLength(0.0),
-	  m_fieldStop(0.0)
+	  m_apparentFOV(68.0),
+	  m_effectiveFocalLength(32.0),
+	  m_fieldStop(0.0),
+	  m_reticlePath("")
 {
 }
 
@@ -44,19 +45,17 @@ Ocular::~Ocular()
 {
 }
 
-static QMap<int, QString> mapping;
+const QMap<int, QString> Ocular::mapping={
+	{0, "name"},
+	{1, "apparentFOV"},
+	{2, "effectiveFocalLength"},
+	{3, "fieldStop"},
+	{4, "binoculars"},
+	{5, "permanentCrosshair"},
+	{6, "reticlePath"}};
+
 QMap<int, QString> Ocular::propertyMap(void)
 {
-	if(mapping.isEmpty()) {
-		mapping = QMap<int, QString>();
-		mapping[0] = "name";
-		mapping[1] = "apparentFOV";
-		mapping[2] = "effectiveFocalLength";
-		mapping[3] = "fieldStop";
-		mapping[4] = "binoculars";
-		mapping[5] = "permanentCrosshair";
-		mapping[6] = "reticlePath";
-	}
 	return mapping;
 }
 
@@ -197,11 +196,5 @@ Ocular * Ocular::ocularModel(void)
 {
 	Ocular* model = new Ocular();
 	model->setName("My Ocular");
-	model->setApparentFOV(68);
-	model->setEffectiveFocalLength(32);
-	model->setFieldStop(0);
-	model->setBinoculars(false);
-	model->setPermanentCrosshair(false);
-	model->setReticlePath("");
 	return model;
 }

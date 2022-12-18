@@ -31,13 +31,13 @@ class Lens;
 class Ocular : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(bool binoculars READ isBinoculars WRITE setBinoculars)
-	Q_PROPERTY(bool permanentCrosshair READ hasPermanentCrosshair WRITE setPermanentCrosshair)
-	Q_PROPERTY(double apparentFOV READ apparentFOV WRITE setApparentFOV)
-	Q_PROPERTY(double effectiveFocalLength READ effectiveFocalLength WRITE setEffectiveFocalLength)
-	Q_PROPERTY(double fieldStop READ fieldStop WRITE setFieldStop)
-	Q_PROPERTY(QString name READ name WRITE setName)
-	Q_PROPERTY(QString reticlePath READ reticlePath WRITE setReticlePath)
+	Q_PROPERTY(bool binoculars             READ isBinoculars          WRITE setBinoculars)
+	Q_PROPERTY(bool permanentCrosshair     READ hasPermanentCrosshair WRITE setPermanentCrosshair)
+	Q_PROPERTY(double apparentFOV          READ apparentFOV           WRITE setApparentFOV)
+	Q_PROPERTY(double effectiveFocalLength READ effectiveFocalLength  WRITE setEffectiveFocalLength)
+	Q_PROPERTY(double fieldStop            READ fieldStop             WRITE setFieldStop)
+	Q_PROPERTY(QString name                READ name                  WRITE setName)
+	Q_PROPERTY(QString reticlePath         READ reticlePath           WRITE setReticlePath)
 public:
 	Ocular();
 	Q_INVOKABLE Ocular(const QObject& other);
@@ -73,6 +73,7 @@ private:
 	double m_fieldStop;
 	QString m_name;
 	QString m_reticlePath;
+	static const QMap<int, QString> mapping;
 };
 
 
