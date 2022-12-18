@@ -5,10 +5,23 @@
 
 \chapter{Adding Sky Cultures}
 \label{ch:SkyCultures}
-\chapterauthor*{Georg Zotti, with additions by Alexander Wolf}
+\chapterauthor*{Georg Zotti, with additions by Alexander Wolf and Susanne M. Hoffmann}
 
 
-\noindent Stellarium comes with a nice set of skycultures from all
+A \indexterm{sky culture} in Stellarium is the entity that consists of 
+\begin{itemize}
+\item a set of names for constellations 
+\item a description of the role these constellations and other celestial features (clouds, polar lights (aurorae), meteors, comets, \ldots) 
+      had or still have for the human culture that used or use these constellations, including some relevant background on the culture.
+\item stick figure definitions connecting stars into those constellations
+\item (optional) a list of names for individual stars
+\item (optional) artwork supporting the stick figures
+\item (optional) a description of boundaries or borders between the constellations
+\item (optional) names and stick figure definitions of additional figures of lesser importance, termed \indexterm{asterisms}.
+\end{itemize}
+\noindent The CC-licence that the author of the SC chooses, is valid for the entire set of files, i.e. all texts and images provided.
+
+Stellarium comes with a nice set of sky cultures from all
 over the world (see section~\ref{sec:gui:view:starlore}). For ethnographers or
 historians of science it may be a worthwhile consideration to
 illustrate the sky culture of the people they are studying. It is not
@@ -16,16 +29,16 @@ very hard to do so, but depending on your data, may require some
 skills in image processing.
 
 Some features regarding translation and multilinguality have evolved
-over the years, and not all skycultures currently included in
-Stellarium adhere to the standards described in the following
-sections. Skycultures will also see continuous development in the
-coming versions. If you add a new skyculture, please adhere to this
+over the years, and not all sky cultures currently included in
+Stellarium adhere to the standards described above and in the following
+sections. Sky cultures will also see continuous development in the
+coming versions. If you add a new sky culture, please adhere to this
 description for an optimal result!
 
 
 In the Stellarium program folder you can see a folder
 \file{skycultures}. Let us assume you work on Windows and want to create a
-new Skyculture, say, \emph{myCulture}.
+new sky culture, say, \emph{myCulture}.
 
 You can take the \file{inuit} directory as template to start with. Just copy the folder 
 \file{C:\textbackslash{}Program Files\textbackslash{}Stellarium\textbackslash{}skycultures\textbackslash{}inuit} to
@@ -59,21 +72,21 @@ The optional \texttt{credits} \newFeature{0.22.2} can be used to mention other i
 The option ``boundaries'' is optional and may contain the following values:
 \begin{description}
 \item[none] --- (default) designates that this culture doesn't have constellation boundaries.
-\item[iau] --- use this value for variants of ``modern'' skycultures to enable use of IAU boundaries.
+\item[iau] --- use this value for variants of ``modern'' sky cultures to enable use of IAU boundaries.
 \item[own] --- used for cultures which have their own set of constellation boundaries.
 \end{description}
 
 \subsection{Classification}
 The option ``classification'' is also optional. \newFeature{0.19.0} It allows some form of quality control:
 \begin{description}
-  \item[personal] -- this is a personally developed skyculture which
+  \item[personal] -- this is a personally developed sky culture which
     is not founded in published historical or ethnological research. Stellarium
     may include it when it is ``pretty enough'' without really
     approving its contents.
   \item[traditional] -- (default value) content represents ``common'' knowledge by
-    several members of an ethnic community, and the skyculture has
+    several members of an ethnic community, and the sky culture has
     been developed by members of such community. Our ``Modern''
-    skyculture is a key example: it has evolved for about 2500 years in the ``western'' world,
+    sky culture is a key example: it has evolved for about 2500 years in the ``western'' world,
     and modern astronomers use it.
   \item[ethnographic] -- provided by ethnographic researchers based on
     interviews of indigenous people.
@@ -82,7 +95,7 @@ The option ``classification'' is also optional. \newFeature{0.19.0} It allows so
   \item[single] -- represents a single source like a historical atlas,
     or publications of a single author.
   \item[comparative] -- special-purpose compositions \newFeature{0.21.2} of e.g.\ artwork
-    from one and stick figures from another skyculture, and optionally
+    from one and stick figures from another sky culture, and optionally
     asterisms as representations of a third. Or comparison of two
     stick figure sets in constellations and asterisms. These figures
     sometimes will appear not to fit together well. This may be
@@ -96,7 +109,7 @@ The option ``classification'' is also optional. \newFeature{0.19.0} It allows so
 The option ``license'' \newFeature{0.22.2} is technically optional
 (for backward compatibility; it defaults to ``unknown''), but we
 highly recommend to define it for your sky culture, and it is
-mandatory if you want your skyculture to be distributed with
+mandatory if you want your sky culture to be distributed with
 Stellarium to prevent ``unexpected'' distribution of your content to other
 software or applications out of our hands.  The license info will be decoded for human
 readable hints about allowed permissions for sky culture in the GUI.
@@ -105,17 +118,25 @@ We recommend to use one of the following possible licenses in this section:
 \begin{description}
   \item[GNU GPL v2.0 (or later)] -- this is the most famous ``copyleft'' license for code and it may be acceptable also for text and data.
   \item[CC0] (No Rights Reserved) -- this is a ``don't care'' license. Content may be freely distributed without attribution for all purposes. 
-  \item[CC BY] (Creative Commons Attribution License) -- this license lets others distribute, remix, adapt, and build upon your work, even commercially, as long as they credit you for the original creation.
+  \item[CC BY] (Creative Commons Attribution License) -- this license lets others distribute, remix, adapt, and build upon your work, even commercially, 
+    as long as they credit you for the original creation.
     This is the most accommodating of licenses offered. Recommended for maximum dissemination and use of licensed materials.
-  \item[CC BY-SA] (Creative Commons Attribution-ShareAlike License) -- this license lets others remix, adapt, and build upon your work even for commercial purposes, as long as they credit you and license their new creations under the identical terms.
-    This license is often compared to ``copyleft'' free and open source software licenses. All new works based on yours will carry the same license, so any derivatives will also allow commercial use.
+  \item[CC BY-SA] (Creative Commons Attribution-ShareAlike License) -- this license lets others remix, adapt, and build upon your work even for commercial purposes, 
+    as long as they credit you and license their new creations under the identical terms.
+    This license is often compared to ``copyleft'' free and open source software licenses. 
+	All new works based on yours will carry the same license, so any derivatives will also allow commercial use.
     This is the license used by Wikipedia, and is recommended for materials that would benefit from incorporating content from Wikipedia and similarly licensed projects.
-  \item[CC BY-ND] (Creative Commons Attribution-NoDerivatives License) -- this license lets others reuse the work for any purpose, including commercially; however, it cannot be shared with others in adapted form, and credit must be provided to you.
-  \item[CC BY-NC] (Creative Commons Attribution-NonCommercial License) -- this license lets others remix, adapt, and build upon your work non-commercially, and although their new works must also acknowledge you and be non-commercial, they don’t have to license their derivative works on the same terms.
-  \item[CC BY-NC-SA] (Creative Commons Attribution-NonCommercial-ShareAlike License) -- this license lets others remix, adapt, and build upon your work non-commercially, as long as they credit you and license their new creations under the identical terms.
-  \item[CC BY-NC-ND] (Creative Commons Attribution-NonCommercial-NoDerivatives License) -- this license is the most restrictive of the six main Creative Commons licenses, only allowing others to download your works and share them with others as long as they credit you, but they can’t change them in any way or use them commercially.
-  \item[FAL] For illustrations we also expect usage of the \textbf{Free Art License}\footnote{\url{https://artlibre.org/licence/lal/en/}} (in addition to any other licenses) ---
-    it is a ``copyleft'' license that grants the right to freely copy, distribute, and transform creative works. You can specify, e.g., ``GPL2, FAL'' to indicate that the images are additionally released under Free Art License.
+  \item[CC BY-ND] (Creative Commons Attribution-NoDerivatives License) -- this license lets others reuse the work for any purpose, including commercially; 
+    however, it cannot be shared with others in adapted form, and credit must be provided to you.
+  \item[CC BY-NC] (Creative Commons Attribution-NonCommercial License) -- this license lets others remix, adapt, and build upon your work non-commercially, 
+    and although their new works must also acknowledge you and be non-commercial, they don’t have to license their derivative works on the same terms.
+  \item[CC BY-NC-SA] (Creative Commons Attribution-NonCommercial-ShareAlike License) -- this license lets others remix, adapt, and build upon your work non-commercially, 
+    as long as they credit you and license their new creations under the identical terms.
+  \item[CC BY-NC-ND] (Creative Commons Attribution-NonCommercial-NoDerivatives License) -- this license is the most restrictive of the six main Creative Commons licenses, 
+    only allowing others to download your works and share them with others as long as they credit you, but they can’t change them in any way or use them commercially.
+  \item[FAL] For illustrations we also expect usage of the \textbf{Free Art License}\footnote{\url{https://artlibre.org/licence/lal/en/}} (in addition to any other licenses) --
+    it is a ``copyleft'' license that grants the right to freely copy, distribute, and transform creative works. You can specify, e.g., ``GPL2, FAL'' to 
+	indicate that the images are additionally released under Free Art License.
 \end{description}
 
 \noindent Creative Commons provides a range of licenses\footnote{Creative
@@ -128,7 +149,7 @@ non-free. For example you can apply only the most permissive of its
 licenses (\textbf{CC0}, \textbf{CC BY} and \textbf{CC BY-SA}) to
 material you create, to meets the Freedom Defined definition of a
 ``Free Cultural Work''.\footnote{See Creative Commons website to
-  details ---
+  details --
   \url{https://creativecommons.org/share-your-work/public-domain/freeworks}}
 
 If you have used one of the keys above in your \texttt{license} entry,
@@ -139,7 +160,7 @@ please describe the conditions sufficiently well in a dedicated
 \file{description.en.utf8}.
 
 \paragraph{Caution for users!} While Stellarium is provided under the free GPL v2.0 licence which allows for commercial use,
-some of our skycultures have been contributed under CC NC/ND licenses,
+some of our sky cultures have been contributed under CC NC/ND licenses,
 i.e., are for noncommercial use only.  Please respect their heritage
 holders and check-out the CC licence version in the description before
 you use sky cultures in public events like TV documentaries, YouTube
@@ -148,9 +169,9 @@ contact the respective authors.
 
 \subsection{Region}
 \label{sec:skycultures:region}
-The option ``region'' is also optional and marks the origin region of the respective skyculture. \newFeature{1.2}
+The option ``region'' is also optional and marks the origin region of the respective sky culture. \newFeature{1.2}
 It allows some form of additional grouping. The names of regions are following the United Nations
-geoscheme UN~M49\footnote{Standard country or area codes for statistical use (M49) --- \url{https://unstats.un.org/unsd/methodology/m49/}}:
+geoscheme UN~M49\footnote{Standard country or area codes for statistical use (M49) -- \url{https://unstats.un.org/unsd/methodology/m49/}}:
 \begin{description}
 	\item[Northern Africa] -- Algeria, Egypt, Libya, Morocco, Sudan, Tunisia, Western Sahara.
 	\item[Eastern Africa] -- British Indian Ocean Territory, Burundi, Comoros, Djibouti, Eritrea, Ethiopia, French Southern Territories, Kenya,
@@ -189,7 +210,7 @@ geoscheme UN~M49\footnote{Standard country or area codes for statistical use (M4
 	\item[Polynesia] -- American Samoa, Cook Islands, French Polynesia, Niue, Pitcairn, Samoa, Tokelau, Tonga, Tuvalu, Wallis and Futuna Islands.
 \end{description}
 
-For ``modern'' sky cultures we use the special region name \textbf{World} to define worldwide applicable data.
+\noindent For ``modern'' sky cultures we use the special region name \textbf{World} to define worldwide applicable data.
 
 \begin{figure}[htbp]
 	\centering\includegraphics[width=0.75\textwidth]{Africa-regions.png}
@@ -228,7 +249,7 @@ For ``modern'' sky cultures we use the special region name \textbf{World} to def
 	\label{fig:skycultures:OceaniaRegions}
 \end{figure}
 
-\section{Skyculture Description Files}
+\section{Sky culture Description Files}
 \label{sec:skycultures:description}
 
 
@@ -236,16 +257,16 @@ In order to have translated texts, Stellarium uses files
 \file{description.<LANG>.utf8}, where \file{<LANG>} is the two-letter
 ISO~639-1 language code, or its extension which contains language and
 country code, like \file{pt\_BR} for Brazilian Portuguese. A minimum
-skyculture must contain the file \file{description.en.utf8}, this is
+sky culture must contain the file \file{description.en.utf8}, this is
 \texttt{en=English} text with HTML tags for sections, tables,
 etc. You can also have embedded images in the HTML (your book cover?
 Views of sacred landscapes/buildings/artwork/\ldots?), just make them
 PNG or JPG format please. The length of the description texts is not limited.
 You should provide a good description in the interest of future users:
-some cultural/ethnographical background of the users of this skyculture,
-history of skyculture research that provided this work, tables of names/translations,
+some cultural/ethnographical background of the users of this sky culture,
+history of sky culture research that provided this work, tables of names/translations,
 links to external resources, whatever seems suitable. When you started
-from a copied skyculture, delete the other \file{description.*.utf8}
+from a copied sky culture, delete the other \file{description.*.utf8}
 files.
 
 If you can provide other languages supported by Stellarium, you can
@@ -275,26 +296,26 @@ of numerical references to the books listed in \file{reference.fab}.
 The first column (abbreviation) in the Modern sky culture provides
 the canonical 3-letter abbreviation for constellations as used by the
 International Astronomical Union. Such abbreviations may not be
-available for the skyculture you are working with, so you must invent
+available for the sky culture you are working with, so you must invent
 your own. These abbreviations are used as keys in the other files, so
-they must be unique within your skyculture. It is not necessary to have
+they must be unique within your sky culture. It is not necessary to have
 3-letter keys, but they should act as mnemonic support, so numerical keys are not recommended. 
 
 The keys can be displayed on screen when labels are requested in the
 Starlore GUI (section~\ref{sec:gui:view:starlore}). If you want to prevent
 certain abbreviations from being displayed, let them start with a
-dot. See the effect in the \file{Modern (H.A.Rey)} skyculture: In
+dot. See the effect in the \file{Modern (H.A.Rey)} sky culture: In
 \menu{Abbreviated} mode, only the official abbreviations are
 displayed. In \menu{Native} mode, the second column of
 \file{constellation\_names.eng.fab} is shown. Only with setting
 \menu{Translated}, the text translated from the text shown in the
-third column is shown. If your skyculture is a variant of the \file{Modern}
-skyculture, please use the canonical Latin names, they have all been translated already.
+third column is shown. If your sky culture is a variant of the \file{Modern}
+sky culture, please use the canonical Latin names, they have all been translated already.
 
-If your skyculture is not a variant of the generally known \file{Modern} (western)
-skyculture, please include an English translation to the name given in
+If your sky culture is not a variant of the generally known \file{Modern} (western)
+sky culture, please include an English translation to the name given in
 the native language. Else translators will not be able to translate
-the name. See a good example in the \file{Mongolian} skyculture.
+the name. See a good example in the \file{Mongolian} sky culture.
 
 \subsection{Star Names}
 \label{sec:skycultures:starnames}
@@ -316,7 +337,7 @@ to the source of the information about this name, e.g:
 
 In the sample you can see 3 lines: the first line is a comment, the 
 second line has 3 fields and the third line has 2 fields. Both lines 
-with data have the same Hipparcos number of the star --- \textit{Fomalhaut} is 
+with data have the same Hipparcos number of the star: \textit{Fomalhaut} is 
 the well-known name of HIP 113368, and \textit{Thalim} is an additional 
 (not well-known) name of this star for which a source reference is unfortunately missing.
 
@@ -330,7 +351,7 @@ English name of the planet, the second is the native name of the
 planet (can be in the native language, but please for maximum
 utability use an English transliteration) and the third is the
 translatable version of the native name of the planet (translated into
-English). Here is an example from the \file{Egyptian} skyculture:
+English). Here is an example from the \file{Egyptian} sky culture:
 
 \begin{configfile}
 Mars	"Horus-Desher"	_("Red Horus")
@@ -383,10 +404,9 @@ Comments can be given in lines starting with \texttt{\#} signs. Empty lines are 
 \section{Constellation Boundaries}
 \label{sec:skycultures:boundaries}
 
-The optional file\footnote{Please define \texttt{boundaries = own} in the file \file{info.ini} to enable using custom boundaries.} 
-\file{constellation\_boundaries.dat} includes data for the boundary lines drawn between constellations. 
-The boundaries for the IAU constellations are defined in the \file{data/constellation\_boundaries.dat} file.
-
+An optional file\footnote{Please define \texttt{boundaries = own} in the file \file{info.ini} to enable using custom boundaries.} 
+\file{constellation\_boundaries.dat} can provide data for the boundary lines drawn between constellations. 
+The boundaries for the IAU constellations are defined in the file named \file{data/constellation\_boundaries.dat}.
 The format for this file is a bit more difficult than the other files. It contains sections which may consist of multiple lines, of the format:
 
 \begin{configfile}
@@ -403,9 +423,9 @@ where
 \section{Constellation Artwork}
 \label{sec:skycultures:artwork}
 
-Constellation artwork is optional, but may give your skyculture the
+Constellation artwork is optional, but may give your sky culture the
 final touch, if it requires artwork at all. E.g., H. A. Rey's variant
-of the \file{Modern} skyculture deliberately does not contain artwork
+of the \file{Modern} sky culture deliberately does not contain artwork
 other than his new set of stick figures.
 
 Each constellation artwork is linked to 3 stars in its constellation. This
@@ -437,7 +457,7 @@ aligning, you should switch Stellarium to Stereographic projection for
 optimal results.
 
 You don't have to shutdown and restart Stellarium during
-creation/matching, just switch skyculture to something else and back
+creation/matching, just switch sky culture to something else and back
 to the new one to reload.
 
 \section{Seasonal Rules}
@@ -470,7 +490,7 @@ description of source and optional URL, e.g.:
 \end{configfile}
 
 This file will be used in future versions. It is most important for ``traditional'' 
-skycultures collected from various sources to provide traceable references. 
+sky cultures collected from various sources to provide traceable references. 
 
 \section{Asterisms and help rays}
 \label{sec:skycultures:asterisms}
@@ -480,10 +500,10 @@ constellation into a figure in its own right, or to merge parts from different
 constellations into one big figure --- e.g. ``Big Dipper'' as part of Ursa Major or the 
 ``Summer Triangle'' consisting of 3 stars from the constellations Cygnus, Lyra and Aquila. 
 After the codification of the official 88 constellations by the IAU, those additional figures
-are called ``asterisms''.\footnote{In a more generalized context when describing the sky of
+are called \indexterm{asterisms}.\footnote{In a more generalized context when describing the sky of
   other cultures, the distinction may be less strict.}
 
-Other simple figures might be used as navigation helpers --- the help rays. 
+Other simple figures might be used as navigation helpers: the \indexterm{help rays}. 
 As example to help in orientation in the sky the additional lines between constellations 
 Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and help rays are listed in
 \file{asterism\_names.eng.fab}. This file consists of 2 simple columns:
@@ -502,11 +522,11 @@ The stick figures of asterisms are coded in \file{asterism\_lines.fab}
 which looks similar to the entries for the constellation
 figures. Lines look like:
 
-\begin{configfile}
+\begin{configfile}[\scriptsize]
 Abbr type pairs pair1_star1 pair1_star2 pair2_star1 pair2_star2 ...
 \end{configfile}
 or
-\begin{configfile}
+\begin{configfile}[\scriptsize]
 Abbr 2 pairs pair1_RA1 pair1_DE1 pair1_RA2 pair1_DE2 pair2_RA1 ...
 \end{configfile}
 In this file,
@@ -530,7 +550,7 @@ benefit of our users.
 
 Please be prepared to put the imagery and text
 under some compatible open-source license (Creative Commons).
-Else the skyculture cannot be hosted by us.
+Else the sky culture cannot be hosted by us.
 While we cannot be held responsible for legal problems, it seems that
 CC BY 4.0 International\footnote{\url{https://creativecommons.org/licenses/by/4.0/}} or
 CC BY-SA 4.0 International\footnote{\url{https://creativecommons.org/licenses/by-sa/4.0/}}
