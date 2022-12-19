@@ -1,7 +1,7 @@
 # 
 # Translators:
-# cardinot <mcardinot@gmail.com>, 2022
-# freemanli <freeman.tam@gmail.com>, 2022
+# Alexander V. Wolf <alex.v.wolf@gmail.com>, 2022
+# Julius Tilvikas, 2022
 # 
 msgid ""
 msgstr ""
@@ -9,55 +9,55 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2022-10-21 16:56+0700\n"
 "PO-Revision-Date: 2022-10-21 17:46+0000\n"
-"Last-Translator: freemanli <freeman.tam@gmail.com>, 2022\n"
-"Language-Team: Chinese (Taiwan) (https://www.transifex.com/stellarium/teams/80998/zh_TW/)\n"
+"Last-Translator: Julius Tilvikas, 2022\n"
+"Language-Team: Lithuanian (https://www.transifex.com/stellarium/teams/80998/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_TW\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: lt\n"
+"Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);\n"
 
 #: ../../data/org.stellarium.Stellarium.desktop
 msgctxt "Name"
 msgid "Stellarium"
-msgstr "Stellarium"
+msgstr "Stellarium planetariumas"
 
 #: ../../data/org.stellarium.Stellarium.desktop
 msgctxt "GenericName"
 msgid "Desktop planetarium"
-msgstr "桌機型星象儀"
+msgstr "Darbastalio planetariumas"
 
 #: ../../data/org.stellarium.Stellarium.desktop
 msgctxt "Comment"
 msgid "Planetarium"
-msgstr "星象儀"
+msgstr "Planetariumas"
 
 #: ../../data/org.stellarium.Stellarium.desktop
 msgctxt "Name"
 msgid "Open in window"
-msgstr "以視窗模式開啟"
+msgstr "Atverti lange"
 
 #: ../../data/org.stellarium.Stellarium.desktop
 msgctxt "Name"
 msgid "Open in fullscreen"
-msgstr "以全螢幕開啟"
+msgstr "Atverti visame ekrane"
 
 #: ../../data/org.stellarium.Stellarium.desktop
 msgctxt "Name"
 msgid "Open with QPA platform XCB"
-msgstr "使用 QPA 平台的外掛 XCB 開啟"
+msgstr "Atverti QPA platformoje XCB"
 
 #: ../../data/org.stellarium.Stellarium.desktop
 msgctxt "Name"
 msgid "Open with QPA platform theme XCB"
-msgstr "使用 QPA 平台的外掛主題 XCB 開啟"
+msgstr "Atverti QPA platformoje taikant XCB temą"
 
 #: ../../data/org.stellarium.Stellarium.desktop
 msgctxt "Name"
 msgid "Open in debug mode"
-msgstr "以除錯模式開啟"
+msgstr "Atverti derinimo režime"
 
 #: ../../data/org.stellarium.Stellarium.desktop
 msgctxt "Name"
 msgid "Open in scale 200%"
-msgstr "以縮放 200% 開啟"
+msgstr "Atverti 200% masteliu"
