@@ -832,7 +832,7 @@ IF(ENABLE_XLSX)
          MESSAGE(STATUS "Using system-provided QXlsx ${QXlsx_VERSION}")
      ELSE()
          CPMAddPackage(NAME QXlsxQt${QT_VERSION_MAJOR}
-             URL https://github.com/QtExcel/QXlsx/archive/bdda6568230ae8fc199ffcc88c598ce42d77a311.zip
+             URL https://github.com/QtExcel/QXlsx/archive/5488bedb65b80fb938b7ca8c00c9be75ad32e2a2.zip
              #URL_HASH SHA256=3efbd6f63a1ffd521c535dce7b5a5a7e9ebd23db51e6ae8e3e2eb89796e57675
              EXCLUDE_FROM_ALL ON
              SOURCE_SUBDIR QXlsx)
