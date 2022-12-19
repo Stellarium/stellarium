@@ -29,10 +29,10 @@
 #define RADIAN_TO_DEGREES 57.2957795131
 
 CCD::CCD()
-	: m_resolutionX(0)
-	, m_resolutionY(0)
-	, m_chipWidth(0.)
-	, m_chipHeight(0.)
+	: m_resolutionX(4096)
+	, m_resolutionY(4096)
+	, m_chipWidth(36.8)
+	, m_chipHeight(36.8)
 	, m_chipRotAngle(0.)
 	, m_binningX(1)
 	, m_binningY(1)
@@ -40,7 +40,7 @@ CCD::CCD()
 	, m_oag_prismHeight(0.)
 	, m_oag_prismWidth(0.)
 	, m_oag_prismDistance(0.)
-	, m_oag_prismPosAngle(0.)	
+	, m_oag_prismPosAngle(0.)
 {
 }
 
@@ -65,27 +65,23 @@ CCD::~CCD()
 {
 }
 
-
-static QMap<int, QString> mapping;
+const QMap<int, QString> CCD::mapping = {
+	{0 , "name"},
+	{1 , "chipHeight"},
+	{2 , "chipWidth"},
+	{3 , "resolutionX"},
+	{4 , "resolutionY"},
+	{5 , "chipRotAngle"},
+	{6 , "binningX"},
+	{7 , "binningY"},
+	{8 , "hasOAG"},
+	{9 , "prismHeight"},
+	{10, "prismWidth"},
+	{11, "prismDistance"},
+	{12, "prismPosAngle"}};
 
 QMap<int, QString> CCD::propertyMap()
 {
-	if(mapping.isEmpty()) {
-	mapping = {
-		{0 , "name"},
-		{1 , "chipHeight"},
-		{2 , "chipWidth"},
-		{3 , "resolutionX"},
-		{4 , "resolutionY"},
-		{5 , "chipRotAngle"},
-		{6 , "binningX"},
-		{7 , "binningY"},
-		{8 , "hasOAG"},
-		{9 , "prismHeight"},
-		{10, "prismWidth"},
-		{11, "prismDistance"},
-		{12, "prismPosAngle"}};
-	}
 	return mapping;
 }
 
@@ -277,7 +273,7 @@ void CCD::writeToSettings(QSettings * settings, const int index)
 	settings->setValue(prefix + "prism_height", this->prismHeight());
 	settings->setValue(prefix + "prism_width", this->prismWidth());
 	settings->setValue(prefix + "prism_distance", this->prismDistance());
-	settings->setValue(prefix + "prism_pos_angle", this->prismPosAngle());	
+	settings->setValue(prefix + "prism_pos_angle", this->prismPosAngle());
 }
 
 CCD* CCD::ccdFromSettings(QSettings* settings, int ccdIndex)
@@ -285,10 +281,10 @@ CCD* CCD::ccdFromSettings(QSettings* settings, int ccdIndex)
 	CCD* ccd = new CCD();
 	QString prefix = "ccd/" + QVariant(ccdIndex).toString() + "/";
 	ccd->setName(settings->value(prefix + "name", "").toString());
-	ccd->setResolutionX(settings->value(prefix + "resolutionX", 0).toInt());
-	ccd->setResolutionY(settings->value(prefix + "resolutionY", 0).toInt());
-	ccd->setChipWidth(settings->value(prefix + "chip_width", 0.0).toDouble());
-	ccd->setChipHeight(settings->value(prefix + "chip_height", 0.0).toDouble());
+	ccd->setResolutionX(settings->value(prefix + "resolutionX", 4096).toInt());
+	ccd->setResolutionY(settings->value(prefix + "resolutionY", 4096).toInt());
+	ccd->setChipWidth(settings->value(prefix + "chip_width", 36.8).toDouble());
+	ccd->setChipHeight(settings->value(prefix + "chip_height", 36.8).toDouble());
 	ccd->setChipRotAngle(settings->value(prefix + "chip_rot_angle", 0.0).toDouble());
 	ccd->setBinningX(settings->value(prefix + "binningX", 1).toInt());
 	ccd->setBinningY(settings->value(prefix + "binningY", 1).toInt());
@@ -304,17 +300,5 @@ CCD* CCD::ccdModel()
 {
 	CCD* model = new CCD();
 	model->setName("My CCD");
-	model->setChipHeight(36.8);
-	model->setChipWidth(36.8);
-	model->setResolutionX(4096);
-	model->setResolutionY(4096);
-	model->setChipRotAngle(0);
-	model->setBinningX(1);
-	model->setBinningY(1);
-	model->setHasOAG(false);
-	model->setPrismHeight(0);
-	model->setPrismWidth(0);
-	model->setPrismDistance(0);
-	model->setPrismPosAngle(0);
 	return model;
 }

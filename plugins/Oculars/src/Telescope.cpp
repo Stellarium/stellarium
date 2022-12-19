@@ -22,11 +22,11 @@
 #include <QSettings>
 
 Telescope::Telescope()
-	: m_diameter(0.)
-	, m_focalLength(0.)
-	, m_hFlipped(false)
-	, m_vFlipped(false)
-	, m_equatorial(false)
+	: m_diameter(80.)
+	, m_focalLength(500.)
+	, m_hFlipped(true)
+	, m_vFlipped(true)
+	, m_equatorial(true)
 {
 }
 
@@ -44,18 +44,16 @@ Telescope::~Telescope()
 {
 }
 
-static QMap<int, QString> mapping;
+const QMap<int, QString> Telescope::mapping = {
+	{0, "name"},
+	{1, "diameter"},
+	{2, "focalLength"},
+	{3, "hFlipped"},
+	{4, "vFlipped"},
+	{5, "equatorial"}};
+
 QMap<int, QString> Telescope::propertyMap()
 {
-	if(mapping.isEmpty()) {
-	mapping = {
-		    {0, "name"},
-		    {1, "diameter"},
-		    {2, "focalLength"},
-		    {3, "hFlipped"},
-		    {4, "vFlipped"},
-		    {5, "equatorial"}};
-	}
 	return mapping;
 }
 
@@ -136,11 +134,11 @@ Telescope* Telescope::telescopeFromSettings(QSettings* theSettings, int telescop
 	QString prefix = "telescope/" + QVariant(telescopeIndex).toString() + "/";
 	
 	telescope->setName(theSettings->value(prefix + "name", "").toString());
-	telescope->setFocalLength(theSettings->value(prefix + "focalLength", "0").toDouble());
-	telescope->setDiameter(theSettings->value(prefix + "diameter", "0").toDouble());
-	telescope->setHFlipped(theSettings->value(prefix + "hFlip").toBool());
-	telescope->setVFlipped(theSettings->value(prefix + "vFlip").toBool());
-	telescope->setEquatorial(theSettings->value(prefix + "equatorial").toBool());
+	telescope->setFocalLength(theSettings->value(prefix + "focalLength", 500.0).toDouble());
+	telescope->setDiameter(theSettings->value(prefix + "diameter", 80.0).toDouble());
+	telescope->setHFlipped(theSettings->value(prefix + "hFlip", true).toBool());
+	telescope->setVFlipped(theSettings->value(prefix + "vFlip", true).toBool());
+	telescope->setEquatorial(theSettings->value(prefix + "equatorial", true).toBool());
 	return telescope;
 }
 
@@ -148,10 +146,5 @@ Telescope* Telescope::telescopeModel()
 {
 	Telescope* model = new Telescope();
 	model->setName("My Telescope");
-	model->setDiameter(80);
-	model->setFocalLength(500);
-	model->setHFlipped(true);
-	model->setVFlipped(true);
-	model->setEquatorial(true);
 	return model;
 }
