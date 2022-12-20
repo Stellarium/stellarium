@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-12 15:08+0700\n"
+"POT-Creation-Date: 2022-12-18 15:46+0700\n"
 "PO-Revision-Date: 2022-10-05 14:25+0000\n"
 "Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2022\n"
 "Language-Team: German (https://www.transifex.com/stellarium/teams/80998/de/)\n"
@@ -643,10 +643,15 @@ msgctxt "compass direction"
 msgid "NNW"
 msgstr "NNW"
 
-#: src/core/modules/LandscapeMgr.cpp:349
-#, qt-format
-msgid "Loading... %1% done"
-msgstr "Lade... %1% fertig"
+#: src/core/modules/LandscapeMgr.cpp:349 src/core/modules/LandscapeMgr.cpp:664
+#: src/gui/ViewDialog.cpp:605
+msgid "Loading..."
+msgstr "Lade..."
+
+#: src/core/modules/LandscapeMgr.cpp:349 src/core/modules/LandscapeMgr.cpp:664
+msgctxt "percentage of done"
+msgid "done"
+msgstr "fertig"
 
 #: src/core/modules/LandscapeMgr.cpp:354
 msgid "Switching models..."
@@ -662,11 +667,6 @@ msgid ""
 msgstr ""
 "Das ShowMySky-Atmosphärenmodell ist abgestürzt. Lade Preetham-Modell als "
 "Ersatz."
-
-#: src/core/modules/LandscapeMgr.cpp:664
-#, c-format
-msgid "Loading... 0% done"
-msgstr "Lade... 0% fertig"
 
 #: src/core/modules/LandscapeMgr.cpp:778
 msgid "Atmosphere"
@@ -5644,10 +5644,6 @@ msgstr "Bilder pro Sekunde"
 #: src/gui/StelDialog.cpp:336
 msgid "Are you sure? This will delete your customized data."
 msgstr "Sind Sie sicher? Das löscht alle Anpassungen!"
-
-#: src/gui/ViewDialog.cpp:605
-msgid "Loading ..."
-msgstr "Lade..."
 
 #: src/gui/ViewDialog.cpp:658
 msgid "properties"
@@ -11567,20 +11563,25 @@ msgstr "Tukano"
 
 #: skycultures/translations_skycultures.fab:108
 msgctxt "sky culture"
+msgid "Tikuna"
+msgstr "Tikuna"
+
+#: skycultures/translations_skycultures.fab:110
+msgctxt "sky culture"
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
-#: skycultures/translations_skycultures.fab:110
+#: skycultures/translations_skycultures.fab:112
 msgctxt "sky culture"
 msgid "Vanuatu (Netwar)"
 msgstr "Vanuatu (Netwar)"
 
-#: skycultures/translations_skycultures.fab:112
+#: skycultures/translations_skycultures.fab:114
 msgctxt "sky culture"
 msgid "Xhosa"
 msgstr "Xhosa"
 
-#: skycultures/translations_skycultures.fab:114
+#: skycultures/translations_skycultures.fab:116
 msgctxt "sky culture"
 msgid "Zulu"
 msgstr "Zulu"
