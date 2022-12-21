@@ -1527,14 +1527,8 @@ void main(void)
 											 dot(modelPos, modelPos);
 	float texTdx = dFdx(texc.t);
 	float texTdy = dFdy(texc.t);
-	vec2 texDx = vec2(gradLongitude.s/(2.*PI), texTdx);
-	vec2 texDy = vec2(gradLongitude.t/(2.*PI), texTdy);
-	vec4 color = textureGrad(mapTex, texc, texDx, texDy);
-#else
-	vec4 color = texture2D(mapTex, texc);
-#endif
 
-	// These "early" returns must be done *after* dFdx/dFdy are computed above
+	// Now that all dFdx/dFdy are computed, we can early return if needed.
 	if(!unprojectSuccess)
 	{
 		FRAG_COLOR = vec4(0);
@@ -1550,6 +1544,31 @@ void main(void)
 		FRAG_COLOR = vec4(0);
 		return;
 	}
+
+	vec2 texDx = vec2(gradLongitude.s/(2.*PI), texTdx);
+	vec2 texDy = vec2(gradLongitude.t/(2.*PI), texTdy);
+	vec4 color = textureGrad(mapTex, texc, texDx, texDy);
+#else
+	// Here we can do an early return because we don't use mip mapping.
+	if(!unprojectSuccess)
+	{
+		FRAG_COLOR = vec4(0);
+		return;
+	}
+	if(modelZenithAngle > mapTexBottom)
+	{
+		FRAG_COLOR = dither(bottomCapColor);
+		return;
+	}
+	if(modelZenithAngle < mapTexTop)
+	{
+		FRAG_COLOR = vec4(0);
+		return;
+	}
+
+	vec4 color = texture2D(mapTex, texc);
+#endif
+
 
 	FRAG_COLOR = dither(color * brightness);
 }
