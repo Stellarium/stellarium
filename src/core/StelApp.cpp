@@ -95,6 +95,9 @@
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 #include <QRandomGenerator>
 #endif
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QImageReader>
+#endif
 #ifdef ENABLE_SPOUT
 #include <QMessageBox>
 #include "SpoutSender.hpp"
