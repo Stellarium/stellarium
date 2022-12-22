@@ -86,6 +86,7 @@ float StelProjectorPerspective::deltaZoom(float fov) const
 QByteArray StelProjectorPerspective::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
+#line 1 102
 uniform float PROJECTOR_FWD_widthStretch;
 vec3 projectorForwardTransform(vec3 v)
 {
@@ -113,12 +114,14 @@ vec3 projectorForwardTransform(vec3 v)
 
 	return v;
 }
+#line 1 0
 )";
 }
 
 QByteArray StelProjectorPerspective::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
+#line 1 103
 uniform float PROJECTOR_FWD_widthStretch;
 vec3 projectorBackwardTransform(vec3 v, out bool ok)
 {
@@ -133,6 +136,7 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 
 	return v;
 }
+#line 1 0
 )";
 }
 
@@ -192,6 +196,7 @@ float StelProjectorEqualArea::viewScalingFactorToFov(float vsf) const
 QByteArray StelProjectorEqualArea::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
+#line 1 102
 uniform float PROJECTOR_FWD_widthStretch;
 vec3 projectorForwardTransform(vec3 v)
 {
@@ -204,12 +209,14 @@ vec3 projectorForwardTransform(vec3 v)
 	v[2] = r;
 	return v;
 }
+#line 1 0
 )";
 }
 
 QByteArray StelProjectorEqualArea::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
+#line 1 103
 uniform float PROJECTOR_FWD_widthStretch;
 vec3 projectorBackwardTransform(vec3 v, out bool ok)
 {
@@ -235,6 +242,7 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 	}
 	return v;
 }
+#line 1 0
 )";
 }
 
@@ -293,6 +301,7 @@ float StelProjectorStereographic::deltaZoom(float fov) const
 QByteArray StelProjectorStereographic::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
+#line 1 102
 uniform float PROJECTOR_FWD_widthStretch;
 vec3 projectorForwardTransform(vec3 v)
 {
@@ -314,12 +323,14 @@ vec3 projectorForwardTransform(vec3 v)
 	v[2] = r;
 	return v;
 }
+#line 1 0
 )";
 }
 
 QByteArray StelProjectorStereographic::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
+#line 1 103
 uniform float PROJECTOR_FWD_widthStretch;
 vec3 projectorBackwardTransform(vec3 v, out bool ok)
 {
@@ -333,6 +344,7 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 
 	return v;
 }
+#line 1 0
 )";
 }
 
@@ -385,6 +397,7 @@ bool StelProjectorFisheye::backward(Vec3d &v) const
 QByteArray StelProjectorFisheye::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
+#line 1 102
 uniform float PROJECTOR_FWD_widthStretch;
 vec3 projectorForwardTransform(vec3 v)
 {
@@ -412,12 +425,14 @@ vec3 projectorForwardTransform(vec3 v)
 	v[2] = FLT_MIN;
 	return v;
 }
+#line 1 0
 )";
 }
 
 QByteArray StelProjectorFisheye::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
+#line 1 103
 uniform float PROJECTOR_FWD_widthStretch;
 vec3 projectorBackwardTransform(vec3 v, out bool ok)
 {
@@ -434,6 +449,7 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 
 	return v;
 }
+#line 1 0
 )";
 }
 
@@ -480,6 +496,7 @@ bool StelProjectorHammer::backward(Vec3d &v) const
 QByteArray StelProjectorHammer::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
+#line 1 102
 uniform float PROJECTOR_FWD_widthStretch;
 vec3 projectorForwardTransform(vec3 v)
 {
@@ -497,12 +514,14 @@ vec3 projectorForwardTransform(vec3 v)
 
 	return v;
 }
+#line 1 0
 )";
 }
 
 QByteArray StelProjectorHammer::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
+#line 1 103
 uniform float PROJECTOR_FWD_widthStretch;
 vec3 projectorBackwardTransform(vec3 v, out bool ok)
 {
@@ -521,6 +540,7 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 
 	return v;
 }
+#line 1 0
 )";
 }
 
@@ -563,6 +583,7 @@ bool StelProjectorCylinder::backward(Vec3d &v) const
 QByteArray StelProjectorCylinder::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
+#line 1 102
 uniform float PROJECTOR_FWD_widthStretch;
 vec3 projectorForwardTransform(vec3 v)
 {
@@ -578,12 +599,14 @@ vec3 projectorForwardTransform(vec3 v)
 
 	return v;
 }
+#line 1 0
 )";
 }
 
 QByteArray StelProjectorCylinder::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
+#line 1 103
 uniform float PROJECTOR_FWD_widthStretch;
 vec3 projectorBackwardTransform(vec3 v, out bool ok)
 {
@@ -600,6 +623,7 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 
 	return v;
 }
+#line 1 0
 )";
 }
 
@@ -654,6 +678,7 @@ bool StelProjectorMercator::backward(Vec3d &v) const
 QByteArray StelProjectorMercator::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
+#line 1 102
 uniform float PROJECTOR_FWD_widthStretch;
 vec3 projectorForwardTransform(vec3 v)
 {
@@ -668,12 +693,14 @@ vec3 projectorForwardTransform(vec3 v)
 
 	return v;
 }
+#line 1 0
 )";
 }
 
 QByteArray StelProjectorMercator::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
+#line 1 103
 uniform float PROJECTOR_FWD_widthStretch;
 vec3 projectorBackwardTransform(vec3 v, out bool ok)
 {
@@ -693,6 +720,7 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 
 	return v;
 }
+#line 1 0
 )";
 }
 
@@ -746,6 +774,7 @@ float StelProjectorOrthographic::viewScalingFactorToFov(float vsf) const
 QByteArray StelProjectorOrthographic::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
+#line 1 102
 uniform float PROJECTOR_FWD_widthStretch;
 vec3 projectorForwardTransform(vec3 v)
 {
@@ -758,12 +787,14 @@ vec3 projectorForwardTransform(vec3 v)
 	v[2] = r;
 	return v;
 }
+#line 1 0
 )";
 }
 
 QByteArray StelProjectorOrthographic::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
+#line 1 103
 uniform float PROJECTOR_FWD_widthStretch;
 vec3 projectorBackwardTransform(vec3 v, out bool ok)
 {
@@ -785,6 +816,7 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 	ok = true;
 	return v;
 }
+#line 1 0
 )";
 }
 
@@ -833,6 +865,7 @@ bool StelProjectorSinusoidal::backward(Vec3d &v) const
 QByteArray StelProjectorSinusoidal::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
+#line 1 102
 uniform float PROJECTOR_FWD_widthStretch;
 vec3 projectorForwardTransform(vec3 v)
 {
@@ -848,12 +881,14 @@ vec3 projectorForwardTransform(vec3 v)
 
 	return v;
 }
+#line 1 0
 )";
 }
 
 QByteArray StelProjectorSinusoidal::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
+#line 1 103
 uniform float PROJECTOR_FWD_widthStretch;
 vec3 projectorBackwardTransform(vec3 v, out bool ok)
 {
@@ -880,6 +915,7 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 	ok = true;
 	return v;
 }
+#line 1 0
 )";
 }
 
@@ -922,6 +958,7 @@ bool StelProjectorMiller::backward(Vec3d &v) const
 QByteArray StelProjectorMiller::getForwardTransformShader() const
 {
 	return modelViewTransform->getForwardTransformShader() + R"(
+#line 1 102
 uniform float PROJECTOR_FWD_widthStretch;
 
 float asinh(float x)
@@ -943,12 +980,14 @@ vec3 projectorForwardTransform(vec3 v)
 
 	return v;
 }
+#line 1 0
 )";
 }
 
 QByteArray StelProjectorMiller::getBackwardTransformShader() const
 {
 	return modelViewTransform->getBackwardTransformShader() + R"(
+#line 1 103
 uniform float PROJECTOR_FWD_widthStretch;
 
 float asinh(float x)
@@ -979,6 +1018,7 @@ vec3 projectorBackwardTransform(vec3 v, out bool ok)
 
 	return v;
 }
+#line 1 0
 )";
 }
 
