@@ -286,6 +286,10 @@ StelApp::StelApp(StelMainView *parent)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
 	randomGenerator = new QRandomGenerator(static_cast<quint32>(QDateTime::currentMSecsSinceEpoch()));
 #endif
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+	// QImageReader has a new limitation. For super-large landscapes or other textures, we need to circumvent this.
+	QImageReader::setAllocationLimit(1024); // Allow max texture size 16k x 16k
+#endif
 }
 
 /*************************************************************************
