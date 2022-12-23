@@ -25,6 +25,7 @@
 
 struct observingListItem
 {
+public:
 	QString name;
 	QString nameI18n;
 	QString type;         // type oriented on Stellarium's object class: Star, Planet (also for sun and moons!), Nebula, ...
@@ -38,8 +39,24 @@ struct observingListItem
 	QString landscapeID; // landscapeID of landscape at moment of item creation.
 	double fov;
 	bool isVisibleMarker;
-};
 
+	//! constructor
+	observingListItem():
+	name(""),
+	nameI18n(""),
+	type(""),
+	objtype(""),
+	ra(""),
+	dec(""),
+	magnitude(""),
+	constellation(""),
+	jd(0.0),
+	location(""),
+	landscapeID(""),
+	fov(0.0),
+	isVisibleMarker(false)
+	{}
+};
 Q_DECLARE_METATYPE(observingListItem)
 
 enum ObsListColumns {
@@ -113,36 +130,18 @@ static constexpr int COLUMN_NUMBER_LANDSCAPE = 10;
 
 static constexpr char const *CUSTOM_OBJECT = "CustomObject";
 
-static const QString dash = QChar(0x2014);
+static const QChar dash = QChar(0x2014);
 
 class ObservingListUtil {
 public:
 
-    //! Init item
-    void initItem(observingListItem &item) {
-
-        item.jd = 0.0;
-        item.type = "";
-        item.objtype = "";
-        item.ra = "";
-        item.dec = "";
-        item.name = "";
-        item.nameI18n = "";
-        item.location = "";
-	item.landscapeID = "";
-	item.fov = 0.0;
-        item.constellation = "";
-        item.magnitude = "";
-        item.isVisibleMarker = false;
-    }
-
     //! Get the magnitude from selected object (or a dash if unavailable)
-    QString getMagnitude(const QList<StelObjectP> &selectedObject, StelCore *core) {
+    static QString getMagnitude(const QList<StelObjectP> &selectedObject, StelCore *core) {
 
 	if (!core)
-	    return dash;
+	    return QString(dash);
 
-	QString objectMagnitudeStr = dash;
+	QString objectMagnitudeStr(dash);
 	const float objectMagnitude = selectedObject[0]->getVMagnitude(core);
 	if (objectMagnitude > 98.f)
 	{
