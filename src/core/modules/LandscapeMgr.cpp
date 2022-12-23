@@ -866,6 +866,10 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 		core->moveObserverTo(landscape->getLocation(), changeLocationDuration);
 		StelSkyDrawer* drawer=core->getSkyDrawer();
 
+		if (landscape->getLocation().ianaTimeZone.length())
+		{
+			core->setCurrentTimeZone(landscape->getLocation().ianaTimeZone);
+		}
 		if (landscape->getDefaultFogSetting() >-1)
 		{
 			setFlagFog(static_cast<bool>(landscape->getDefaultFogSetting()));
