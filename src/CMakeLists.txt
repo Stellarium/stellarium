@@ -393,6 +393,7 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/astroCalcCustomStepsDialog.ui
           gui/obsListDialog.ui
           gui/obsListCreateEditDialog.ui
+          gui/obsListUnifiedDialog.ui
           gui/addRemoveLandscapesDialog.ui
           gui/dsoColorsDialog.ui
           gui/orbitColorsDialog.ui

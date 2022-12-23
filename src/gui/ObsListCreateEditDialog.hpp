@@ -64,7 +64,6 @@ private:
 
 	QString listOlud_;
 	QString observingListJsonPath;
-	ObservingListUtil util;
 
 	// Data for observed objects
 	QHash<QString, observingListItem> observingListItemCollection;

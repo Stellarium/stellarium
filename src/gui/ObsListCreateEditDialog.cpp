@@ -17,6 +17,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+// FOR REFERENCE ONLY: CLASS IS NO LONGER USED!
+
 #include <QDir>
 #include <QFileDialog>
 #include <QUuid>
@@ -191,6 +193,7 @@ void ObsListCreateEditDialog::setObservingListHeaderNames()
 /*
  * Add row in the obsListListModel
  */
+// IDENT
 void ObsListCreateEditDialog::addModelRow(const QString &olud,
                                           const QString &name,
                                           const QString &nameI18n,
@@ -254,6 +257,7 @@ void ObsListCreateEditDialog::addModelRow(const QString &olud,
 		ui->obsListCreationEditionTreeView->resizeColumnToContents(i);
 }
 
+
 /*
  * Slot for button obsListAddObjectButton.
  * Save selected object into the list of observed objects.
@@ -290,7 +294,6 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
 //		if (!is_already_in_list)
 //		{
 			observingListItem item;
-			util.initItem(item);
 
 			const QString objectOlud = QUuid::createUuid().toString();
 
@@ -298,7 +301,7 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
 			item.name = selectedObject[0]->getEnglishName();
 			item.nameI18n = selectedObject[0]->getNameI18n();
 			if(item.nameI18n.isEmpty())
-				item.nameI18n = dash;
+				item.nameI18n = QString(dash);
 			// Check if the object name is empty.
 			if (item.name.isEmpty())
 			{
@@ -324,7 +327,7 @@ void ObsListCreateEditDialog::obsListAddObjectButtonPressed()
 				item.dec = StelUtils::radToDmsStr(dec, false).trimmed();
 			}
 			item.isVisibleMarker=!item.name.contains("marker", Qt::CaseInsensitive);
-			item.magnitude = util.getMagnitude(selectedObject, core);
+			item.magnitude = ObservingListUtil::getMagnitude(selectedObject, core);
 
 			// Constellation
 			const Vec3d posNow = selectedObject[0]->getEquinoxEquatorialPos(core);
@@ -694,7 +697,6 @@ void ObsListCreateEditDialog::loadObservingList()
 				{
 					objectMap = object.value<QVariantMap>();
 					observingListItem item;
-					util.initItem(item);
 
 					//int lastRow = obsListListModel->rowCount();
 					QString objectOlud = QUuid::createUuid().toString();
@@ -785,7 +787,6 @@ void ObsListCreateEditDialog::loadBookmarksInObservingList() {
 
 				QVariantMap bookmarkData = it.value().toMap();
 				observingListItem item;
-				util.initItem(item);
 				QString objectUuid = QUuid::createUuid().toString();
 				//const int lastRow = obsListListModel->rowCount();
 
@@ -814,7 +815,7 @@ void ObsListCreateEditDialog::loadBookmarksInObservingList() {
 						item.ra = StelUtils::radToHmsStr(ra, false).trimmed();
 						item.dec = StelUtils::radToDmsStr(dec, false).trimmed();
 					}
-					item.magnitude = util.getMagnitude(selectedObject, core);
+					item.magnitude = ObservingListUtil::getMagnitude(selectedObject, core);
 					// Several data items were not part of the original bookmarks, so we have no entry.
 					const Vec3d posNow = selectedObject[0]->getEquinoxEquatorialPos(core);
 					item.constellation=core->getIAUConstellation(posNow);
