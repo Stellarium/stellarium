@@ -1302,43 +1302,16 @@ static void initl(int satn,      gravconsttype whichconst,
 *    vallado, crawford, hujsak, kelso  2006
   ----------------------------------------------------------------------------*/
 
-bool sgp4init(gravconsttype whichconst, char opsmode,   const int satn,     const double epoch,
+bool sgp4init(gravconsttype whichconst, char opsmode,   const int satn, const double epoch,
 	      const double xbstar,  const double xecco, const double xargpo,
 	      const double xinclo,  const double xmo,   const double xno,
 	      const double xnodeo,  elsetrec& satrec)
 {
-	/* --------------------- local variables ------------------------ */
-	double ao    , ainv  , con42 , cosio , sinio , cosio2, eccsq ,
-	       omeosq, posq  , rp    , rteosq,
-	       cnodm , snodm , cosim , sinim , cosomm, sinomm, cc1sq ,
-	       cc2   , cc3   , coef  , coef1 , cosio4, day   , dndt  ,
-	       em    , emsq  , eeta  , etasq , gam   , argpm , nodem ,
-	       inclm , mm    , nm    , perige, pinvsq, psisq , qzms24,
-	       rtemsq, s1    , s2    , s3    , s4    , s5    , s6    ,
-	       s7    , sfour , ss1   , ss2   , ss3   , ss4   , ss5   ,
-	       ss6   , ss7   , sz1   , sz2   , sz3   , sz11  , sz12  ,
-	       sz13  , sz21  , sz22  , sz23  , sz31  , sz32  , sz33  ,
-	       tc    , temp  , temp1 , temp2 , temp3 , tsi   , xpidot,
-	       xhdot1, z1    , z2    , z3    , z11   , z12   , z13   ,
-	       z21   , z22   , z23   , z31   , z32   , z33   , qzms2t,
-	       ss    , j2    , j3oj2 , j4    , x2o3  , r[3]  , v[3]  ,
-	       tumin , mu    , radiusearthkm, xke, j3;
-
 	/* ------------------------ initialization --------------------- */
 	// sgp4fix divisor for divide by zero check on inclination
 	// the old check used 1.0 + cos(pi-1.0e-9), but then compared it to
 	// 1.5 e-12, so the threshold was changed to 1.5e-12 for consistency
-	const double temp4    =   1.5e-12;
-
-	ss1  = 0.0;	ss2  = 0.0;	ss3  = 0.0;
-	ss4  = 0.0;	ss5  = 0.0;	ss6  = 0.0;
-	ss7  = 0.0;
-	sz1  = 0.0;	sz2  = 0.0;	sz3  = 0.0;
-	sz11 = 0.0;	sz12 = 0.0;	sz13 = 0.0;
-	sz21 = 0.0;	sz22 = 0.0;	sz23 = 0.0;
-	sz31 = 0.0;	sz32 = 0.0;	sz33 = 0.0;
-	j2   = 0;      j3oj2 = 0;       j4   = 0;
-	radiusearthkm = 0;
+	static const double temp4    =   1.5e-12;
 
 	/* ----------- set all near earth variables to zero ------------ */
 	satrec.isimp   = 0;   satrec.method = 'n'; satrec.aycof    = 0.0;
@@ -1380,8 +1353,8 @@ bool sgp4init(gravconsttype whichconst, char opsmode,   const int satn,     cons
 	satrec.ecco    = xecco;
 	satrec.argpo   = xargpo;
 	satrec.inclo   = xinclo;
-	satrec.mo	    = xmo;
-	satrec.no	    = xno;
+	satrec.mo      = xmo;
+	satrec.no      = xno;
 	satrec.nodeo   = xnodeo;
 
 	// sgp4fix add opsmode
@@ -1389,14 +1362,16 @@ bool sgp4init(gravconsttype whichconst, char opsmode,   const int satn,     cons
 
 	/* ------------------------ earth constants ----------------------- */
 	// sgp4fix identify constants and allow alternate values
+	double tumin , mu, radiusearthkm=0., xke, j2=0., j3=0., j3oj2=0. , j4=0.;
 	getgravconst( whichconst, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2 );
-	ss     = 78.0 / radiusearthkm + 1.0;
-	qzms2t = std::pow(((120.0 - 78.0) / radiusearthkm), 4);
-	x2o3   =  2.0 / 3.0;
+	const double ss     = 78.0 / radiusearthkm + 1.0;
+	const double qzms2t = std::pow(((120.0 - 78.0) / radiusearthkm), 4);
+	static const double x2o3   =  2.0 / 3.0;
 
 	satrec.init = 'y';
-	satrec.t	 = 0.0;
+	satrec.t    = 0.0;
 
+	double ainv, ao, con42, cosio, cosio2, eccsq, omeosq, posq, rp, rteosq, sinio;
 	initl(satn, whichconst, satrec.ecco, epoch, satrec.inclo, satrec.no, satrec.method,
 	      ainv, ao, satrec.con41, con42, cosio, cosio2, eccsq, omeosq,
 	      posq, rp, rteosq, sinio, satrec.gsto, satrec.operationmode);
@@ -1416,9 +1391,9 @@ bool sgp4init(gravconsttype whichconst, char opsmode,   const int satn,     cons
 		satrec.isimp = 0;
 		if (rp < (220.0 / radiusearthkm + 1.0))
 			satrec.isimp = 1;
-		sfour  = ss;
-		qzms24 = qzms2t;
-		perige = (rp - 1.0) * radiusearthkm;
+		double sfour  = ss;
+		double qzms24 = qzms2t;
+		const double perige = (rp - 1.0) * radiusearthkm;
 
 		/* - for perigees below 156 km, s and qoms2t are altered - */
 		if (perige < 156.0)
@@ -1429,20 +1404,20 @@ bool sgp4init(gravconsttype whichconst, char opsmode,   const int satn,     cons
 			qzms24 = std::pow(((120.0 - sfour) / radiusearthkm), 4.0);
 			sfour  = sfour / radiusearthkm + 1.0;
 		}
-		pinvsq = 1.0 / posq;
+		const double pinvsq = 1.0 / posq;
 
-		tsi  = 1.0 / (ao - sfour);
+		const double tsi  = 1.0 / (ao - sfour);
 		satrec.eta  = ao * satrec.ecco * tsi;
-		etasq = satrec.eta * satrec.eta;
-		eeta  = satrec.ecco * satrec.eta;
-		psisq = std::fabs(1.0 - etasq);
-		coef  = qzms24 * std::pow(tsi, 4.0);
-		coef1 = coef / std::pow(psisq, 3.5);
-		cc2   = coef1 * satrec.no * (ao * (1.0 + 1.5 * etasq + eeta *
+		const double etasq = satrec.eta * satrec.eta;
+		const double eeta  = satrec.ecco * satrec.eta;
+		const double psisq = std::fabs(1.0 - etasq);
+		const double coef  = qzms24 * std::pow(tsi, 4.0);
+		const double coef1 = coef / std::pow(psisq, 3.5);
+		const double cc2   = coef1 * satrec.no * (ao * (1.0 + 1.5 * etasq + eeta *
 			(4.0 + etasq)) + 0.375 * j2 * tsi / psisq * satrec.con41 *
 			(8.0 + 3.0 * etasq * (8.0 + etasq)));
 		satrec.cc1   = satrec.bstar * cc2;
-		cc3   = 0.0;
+		double cc3   = 0.0;
 		if (satrec.ecco > 1.0e-4)
 			cc3 = -2.0 * coef * tsi * j3oj2 * satrec.no * sinio / satrec.ecco;
 		satrec.x1mth2 = 1.0 - cosio2;
@@ -1455,19 +1430,19 @@ bool sgp4init(gravconsttype whichconst, char opsmode,   const int satn,     cons
 		satrec.cc5    = 2.0 * coef1 * ao * omeosq * (1.0 + 2.75 *
 				(etasq + eeta) + eeta * etasq);
 
-		cosio4 = cosio2 * cosio2;
-		temp1  = 1.5 * j2 * pinvsq * satrec.no;
-		temp2  = 0.5 * temp1 * j2 * pinvsq;
-		temp3  = -0.46875 * j4 * pinvsq * pinvsq * satrec.no;
+		const double cosio4 = cosio2 * cosio2;
+		const double temp1  = 1.5 * j2 * pinvsq * satrec.no;
+		const double temp2  = 0.5 * temp1 * j2 * pinvsq;
+		const double temp3  = -0.46875 * j4 * pinvsq * pinvsq * satrec.no;
 		satrec.mdot     = satrec.no + 0.5 * temp1 * rteosq * satrec.con41 + 0.0625 *
 				  temp2 * rteosq * (13.0 - 78.0 * cosio2 + 137.0 * cosio4);
 		satrec.argpdot  = -0.5 * temp1 * con42 + 0.0625 * temp2 *
 				  (7.0 - 114.0 * cosio2 + 395.0 * cosio4) +
 				  temp3 * (3.0 - 36.0 * cosio2 + 49.0 * cosio4);
-		xhdot1          = -temp1 * cosio;
+		const double xhdot1 = -temp1 * cosio;
 		satrec.nodedot  = xhdot1 + (0.5 * temp2 * (4.0 - 19.0 * cosio2) +
 				  2.0 * temp3 * (3.0 - 7.0 * cosio2)) * cosio;
-		xpidot          =  satrec.argpdot+ satrec.nodedot;
+		double xpidot =  satrec.argpdot+ satrec.nodedot;
 		satrec.omgcof   = satrec.bstar * cc3 * std::cos(satrec.argpo);
 		satrec.xmcof    = 0.0;
 		if (satrec.ecco > 1.0e-4)
@@ -1489,8 +1464,15 @@ bool sgp4init(gravconsttype whichconst, char opsmode,   const int satn,     cons
 		{
 			satrec.method = 'd';
 			satrec.isimp  = 1;
-			tc    =  0.0;
-			inclm = satrec.inclo;
+			double tc = 0.0;
+			double inclm = satrec.inclo;
+			double ss1  = 0.0, ss2  = 0.0, ss3  = 0.0, ss4  = 0.0, ss5  = 0.0, ss6  = 0.0, ss7  = 0.0, sz1  = 0.0, sz2  = 0.0, sz3 = 0.0,
+			       sz11 = 0.0, sz12 = 0.0, sz13 = 0.0, sz21 = 0.0, sz22 = 0.0, sz23 = 0.0, sz31 = 0.0, sz32 = 0.0, sz33 = 0.0,
+					s1    , s2    , s3    , s4    , s5    , s6    , s7,
+					z1    , z2    , z3    , z11   , z12   , z13   ,
+					z21   , z22   , z23   , z31   , z32   , z33   , rtemsq,
+					cnodm , snodm , cosim , sinim , cosomm, sinomm, day,
+					em    , emsq  , gam   , nm;
 
 			dscom(epoch, satrec.ecco, satrec.argpo, tc, satrec.inclo, satrec.nodeo,
 			      satrec.no, snodm, cnodm, sinim, cosim,sinomm, cosomm,
@@ -1518,9 +1500,7 @@ bool sgp4init(gravconsttype whichconst, char opsmode,   const int satn,     cons
 			      satrec.ecco, satrec.inclo, satrec.nodeo, satrec.argpo, satrec.mo,
 			      satrec.operationmode);
 
-			argpm  = 0.0;
-			nodem  = 0.0;
-			mm     = 0.0;
+			double argpm = 0.0, mm = 0.0, nodem  = 0.0, dndt;
 
 			dsinit(whichconst,
 			       cosim, emsq, satrec.argpo, s1, s2, s3, s4, s5, sinim, ss1, ss2, ss3, ss4,
@@ -1540,9 +1520,9 @@ bool sgp4init(gravconsttype whichconst, char opsmode,   const int satn,     cons
 		/* ----------- set variables if not deep space ----------- */
 		if (satrec.isimp != 1)
 		{
-			cc1sq        = satrec.cc1 * satrec.cc1;
+			const double cc1sq = satrec.cc1 * satrec.cc1;
 			satrec.d2    = 4.0 * ao * tsi * cc1sq;
-			temp         = satrec.d2 * tsi * satrec.cc1 / 3.0;
+			const double temp = satrec.d2 * tsi * satrec.cc1 / 3.0;
 			satrec.d3    = (17.0 * ao + sfour) * temp;
 			satrec.d4    = 0.5 * temp * ao * tsi * (221.0 * ao + 31.0 * sfour) * satrec.cc1;
 			satrec.t3cof = satrec.d2 + 2.0 * cc1sq;
@@ -1555,6 +1535,7 @@ bool sgp4init(gravconsttype whichconst, char opsmode,   const int satn,     cons
 	/* finally propagate to zero epoch to initialize all others. */
 	// sgp4fix take out check to let satellites process until they are actually below earth surface
 	//       if(satrec.error == 0)
+	double r[3], v[3];
 	sgp4(whichconst, satrec, 0.0, r, v);
 
 	satrec.init = 'n';
@@ -1652,76 +1633,61 @@ bool sgp4init(gravconsttype whichconst, char opsmode,   const int satn,     cons
 
 bool sgp4(gravconsttype whichconst, elsetrec& satrec,  double tsince, double r[3],  double v[3])
 {
-	double am   , axnl  , aynl , betal , cosim , cnod  ,
-	       cos2u, coseo1, cosi , cosip , cosisq, cossu , cosu,
-	       delm , delomg, em   , ecose , el2   , eo1   ,
-	       ep   , esine , argpm, argpp , argpdf, pl    , mrt ,
-	       mvt  , rdotl , rl   , rvdot , rvdotl, sinim ,
-	       sin2u, sineo1, sini , sinip , sinsu , sinu  ,
-	       snod , su    , t2   , t3    , t4    , tem5  , temp,
-	       temp1, temp2 , tempa, tempe , templ , u     , ux  ,
-	       uy   , uz    , vx   , vy    , vz    , inclm , mm  ,
-	       nm   , nodem , xinc , xincp , xl    , xlm   , mp  ,
-	       xmdf , xmx   , xmy  , nodedf, xnode , nodep , tc  , dndt ,
-	       twopi, x2o3  , j2   , j3    , tumin , j4    , xke , j3oj2,
-	       radiusearthkm, mu, vkmpersec;
-	int ktr;
-	coseo1 = 0.0;
-	mrt    = 0.0;
-	sineo1 = 0.0;
-	j2     = 0;
-	j4     = 0;
-	xke    = 0;
-	j3oj2  = 0;
-	radiusearthkm = 0;
-
 	/* ------------------ set mathematical constants --------------- */
 	// sgp4fix divisor for divide by zero check on inclination
 	// the old check used 1.0 + cos(pi-1.0e-9), but then compared it to
 	// 1.5 e-12, so the threshold was changed to 1.5e-12 for consistency
-	const double temp4 =   1.5e-12;
-	twopi = 2.0 * M_PI;
-	x2o3  = 2.0 / 3.0;
+	static const double temp4 =   1.5e-12;
+	static const double twopi = 2.0 * M_PI;
+	static const double x2o3  = 2.0 / 3.0;
 	// sgp4fix identify constants and allow alternate values
+	double tumin , mu;
+	double j2     = 0;
+	double j3     = 0;
+	double j4     = 0;
+	double xke    = 0;
+	double j3oj2  = 0;
+	double radiusearthkm = 0;
 	getgravconst( whichconst, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2 );
-	vkmpersec     = radiusearthkm * xke/60.0;
+	static const double vkmpersec     = radiusearthkm * xke/60.0;
 
 	/* --------------------- clear sgp4 error flag ----------------- */
 	satrec.t     = tsince;
 	satrec.error = 0;
 
 	/* ------- update for secular gravity and atmospheric drag ----- */
-	xmdf    = satrec.mo + satrec.mdot * satrec.t;
-	argpdf  = satrec.argpo + satrec.argpdot * satrec.t;
-	nodedf  = satrec.nodeo + satrec.nodedot * satrec.t;
-	argpm   = argpdf;
-	mm      = xmdf;
-	t2      = satrec.t * satrec.t;
-	nodem   = nodedf + satrec.nodecf * t2;
-	tempa   = 1.0 - satrec.cc1 * satrec.t;
-	tempe   = satrec.bstar * satrec.cc4 * satrec.t;
-	templ   = satrec.t2cof * t2;
+	double xmdf    = satrec.mo + satrec.mdot * satrec.t;
+	double argpdf  = satrec.argpo + satrec.argpdot * satrec.t;
+	double nodedf  = satrec.nodeo + satrec.nodedot * satrec.t;
+	double argpm   = argpdf;
+	double mm      = xmdf;
+	double t2      = satrec.t * satrec.t;
+	double nodem   = nodedf + satrec.nodecf * t2;
+	double tempa   = 1.0 - satrec.cc1 * satrec.t;
+	double tempe   = satrec.bstar * satrec.cc4 * satrec.t;
+	double templ   = satrec.t2cof * t2;
 
 	if (satrec.isimp != 1)
 	{
-		delomg = satrec.omgcof * satrec.t;
-		delm   = satrec.xmcof * (std::pow((1.0 + satrec.eta * std::cos(xmdf)), 3) - satrec.delmo);
-		temp   = delomg + delm;
+		const double delomg = satrec.omgcof * satrec.t;
+		const double delm   = satrec.xmcof * (std::pow((1.0 + satrec.eta * std::cos(xmdf)), 3) - satrec.delmo);
+		double temp   = delomg + delm;
 		mm     = xmdf + temp;
 		argpm  = argpdf - temp;
-		t3     = t2 * satrec.t;
-		t4     = t3 * satrec.t;
+		const double t3     = t2 * satrec.t;
+		const double t4     = t3 * satrec.t;
 		tempa  = tempa - satrec.d2 * t2 - satrec.d3 * t3 - satrec.d4 * t4;
 		tempe  = tempe + satrec.bstar * satrec.cc5 * (std::sin(mm) - satrec.sinmao);
 		templ  = templ + satrec.t3cof * t3 + t4 * (satrec.t4cof + satrec.t * satrec.t5cof);
 	}
 
-	nm    = satrec.no;
-	em    = satrec.ecco;
-	inclm = satrec.inclo;
+	double nm    = satrec.no;
+	double em    = satrec.ecco;
+	double inclm = satrec.inclo;
 	if (satrec.method == 'd')
 	{
-		tc = satrec.t;
+		double tc = satrec.t;
+		double dndt; // unused?
 		dspace(satrec.irez,
 		       satrec.d2201, satrec.d2211, satrec.d3210,
 		       satrec.d3222, satrec.d4410, satrec.d4422,
@@ -1743,7 +1709,7 @@ bool sgp4(gravconsttype whichconst, elsetrec& satrec,  double tsince, double r[3
 		// sgp4fix add return
 		return false;
 	}
-	am = std::pow((xke / nm),x2o3) * tempa * tempa;
+	double am = std::pow((xke / nm),x2o3) * tempa * tempa;
 	nm = xke / std::pow(am, 1.5);
 	em = em - tempe;
 	// fix tolerance for error recognition
@@ -1759,28 +1725,27 @@ bool sgp4(gravconsttype whichconst, elsetrec& satrec,  double tsince, double r[3
 	if (em < 1.0e-6)
 		em  = 1.0e-6;
 	mm     = mm + satrec.no * templ;
-	xlm    = mm + argpm + nodem;
+	const double xlm    = std::fmod(mm + argpm + nodem, twopi);
 	// NOTE: Never read!
 	// emsq   = em * em;
 	// temp   = 1.0 - emsq;
 
 	nodem  = std::fmod(nodem, twopi);
 	argpm  = std::fmod(argpm, twopi);
-	xlm    = std::fmod(xlm, twopi);
 	mm     = std::fmod(xlm - argpm - nodem, twopi);
 
 	/* ----------------- compute extra mean quantities ------------- */
-	sinim = std::sin(inclm);
-	cosim = std::cos(inclm);
+	const double sinim = std::sin(inclm);
+	const double cosim = std::cos(inclm);
 
 	/* -------------------- add lunar-solar periodics -------------- */
-	ep     = em;
-	xincp  = inclm;
-	argpp  = argpm;
-	nodep  = nodem;
-	mp     = mm;
-	sinip  = sinim;
-	cosip  = cosim;
+	double ep     = em;
+	double mp     = mm;
+	double xincp  = inclm;
+	double argpp  = argpm;
+	double nodep  = nodem;
+	double sinip  = sinim;
+	double cosip  = cosim;
 	if (satrec.method == 'd')
 	{
 		dpper(satrec.e3,   satrec.ee2,  satrec.peo,
@@ -1822,16 +1787,18 @@ bool sgp4(gravconsttype whichconst, elsetrec& satrec,  double tsince, double r[3
 		else
 			satrec.xlcof = -0.25 * j3oj2 * sinip * (3.0 + 5.0 * cosip) / temp4;
 	}
-	axnl = ep * std::cos(argpp);
-	temp = 1.0 / (am * (1.0 - ep * ep));
-	aynl = ep* std::sin(argpp) + temp * satrec.aycof;
-	xl   = mp + argpp + nodep + temp * satrec.xlcof * axnl;
+	const double axnl = ep * std::cos(argpp);
+	const double temp = 1.0 / (am * (1.0 - ep * ep));
+	const double aynl = ep* std::sin(argpp) + temp * satrec.aycof;
+	const double xl   = mp + argpp + nodep + temp * satrec.xlcof * axnl;
 
 	/* --------------------- solve kepler's equation --------------- */
-	u    = std::fmod(xl - nodep, twopi);
-	eo1  = u;
-	tem5 = 9999.9;
-	ktr = 1;
+	const double u    = std::fmod(xl - nodep, twopi);
+	double eo1  = u;
+	double tem5 = 9999.9;
+	int ktr = 1;
+	double coseo1 = 0.0;
+	double sineo1 = 0.0;
 	//   sgp4fix for kepler iteration
 	//   the following iteration needs better limits on corrections
 	while (( std::fabs(tem5) >= 1.0e-12) && (ktr <= 10) )
@@ -1843,14 +1810,15 @@ bool sgp4(gravconsttype whichconst, elsetrec& satrec,  double tsince, double r[3
 		if(std::fabs(tem5) >= 0.95)
 			tem5 = tem5 > 0.0 ? 0.95 : -0.95;
 		eo1    = eo1 + tem5;
-		ktr = ktr + 1;
+		ktr++;
 	}
 
 	/* ------------- short period preliminary quantities ----------- */
-	ecose = axnl*coseo1 + aynl*sineo1;
-	esine = axnl*sineo1 - aynl*coseo1;
-	el2   = axnl*axnl + aynl*aynl;
-	pl    = am*(1.0-el2);
+	double mrt;
+	const double ecose = axnl*coseo1 + aynl*sineo1;
+	const double esine = axnl*sineo1 - aynl*coseo1;
+	const double el2   = axnl*axnl + aynl*aynl;
+	const double pl    = am*(1.0-el2);
 	if (pl < 0.0)
 	{
 		//         printf("# error pl %f\n", pl);
@@ -1860,24 +1828,24 @@ bool sgp4(gravconsttype whichconst, elsetrec& satrec,  double tsince, double r[3
 	}
 	else
 	{
-		rl     = am * (1.0 - ecose);
-		rdotl  = std::sqrt(am) * esine/rl;
-		rvdotl = std::sqrt(pl) / rl;
-		betal  = std::sqrt(1.0 - el2);
-		temp   = esine / (1.0 + betal);
-		sinu   = am / rl * (sineo1 - aynl - axnl * temp);
-		cosu   = am / rl * (coseo1 - axnl + aynl * temp);
-		su     = std::atan2(sinu, cosu);
-		sin2u  = (cosu + cosu) * sinu;
-		cos2u  = 1.0 - 2.0 * sinu * sinu;
+		double rl     = am * (1.0 - ecose);
+		double rdotl  = std::sqrt(am) * esine/rl;
+		double rvdotl = std::sqrt(pl) / rl;
+		double betal  = std::sqrt(1.0 - el2);
+		double temp   = esine / (1.0 + betal);
+		double sinu   = am / rl * (sineo1 - aynl - axnl * temp);
+		double cosu   = am / rl * (coseo1 - axnl + aynl * temp);
+		double su     = std::atan2(sinu, cosu);
+		double sin2u  = (cosu + cosu) * sinu;
+		double cos2u  = 1.0 - 2.0 * sinu * sinu;
 		temp   = 1.0 / pl;
-		temp1  = 0.5 * j2 * temp;
-		temp2  = temp1 * temp;
+		double temp1  = 0.5 * j2 * temp;
+		double temp2  = temp1 * temp;
 
 		/* -------------- update for short period periodics ------------ */
 		if (satrec.method == 'd')
 		{
-			cosisq                 = cosip * cosip;
+			const double cosisq = cosip * cosip;
 			satrec.con41  = 3.0*cosisq - 1.0;
 			satrec.x1mth2 = 1.0 - cosisq;
 			satrec.x7thm1 = 7.0*cosisq - 1.0;
@@ -1885,26 +1853,26 @@ bool sgp4(gravconsttype whichconst, elsetrec& satrec,  double tsince, double r[3
 		mrt   = rl * (1.0 - 1.5 * temp2 * betal * satrec.con41) +
 			0.5 * temp1 * satrec.x1mth2 * cos2u;
 		su    = su - 0.25 * temp2 * satrec.x7thm1 * sin2u;
-		xnode = nodep + 1.5 * temp2 * cosip * sin2u;
-		xinc  = xincp + 1.5 * temp2 * cosip * sinip * cos2u;
-		mvt   = rdotl - nm * temp1 * satrec.x1mth2 * sin2u / xke;
-		rvdot = rvdotl + nm * temp1 * (satrec.x1mth2 * cos2u + 1.5 * satrec.con41) / xke;
+		const double xnode = nodep + 1.5 * temp2 * cosip * sin2u;
+		const double xinc  = xincp + 1.5 * temp2 * cosip * sinip * cos2u;
+		const double mvt   = rdotl - nm * temp1 * satrec.x1mth2 * sin2u / xke;
+		const double rvdot = rvdotl + nm * temp1 * (satrec.x1mth2 * cos2u + 1.5 * satrec.con41) / xke;
 
 		/* --------------------- orientation vectors ------------------- */
-		sinsu = std::sin(su);
-		cossu = std::cos(su);
-		snod  = std::sin(xnode);
-		cnod  = std::cos(xnode);
-		sini  = std::sin(xinc);
-		cosi  = std::cos(xinc);
-		xmx   = -snod * cosi;
-		xmy   =  cnod * cosi;
-		ux    =  xmx * sinsu + cnod * cossu;
-		uy    =  xmy * sinsu + snod * cossu;
-		uz    =  sini * sinsu;
-		vx    =  xmx * cossu - cnod * sinsu;
-		vy    =  xmy * cossu - snod * sinsu;
-		vz    =  sini * cossu;
+		const double sinsu = std::sin(su);
+		const double cossu = std::cos(su);
+		const double snod  = std::sin(xnode);
+		const double cnod  = std::cos(xnode);
+		const double sini  = std::sin(xinc);
+		const double cosi  = std::cos(xinc);
+		const double xmx   = -snod * cosi;
+		const double xmy   =  cnod * cosi;
+		const double ux    =  xmx * sinsu + cnod * cossu;
+		const double uy    =  xmy * sinsu + snod * cossu;
+		const double uz    =  sini * sinsu;
+		const double vx    =  xmx * cossu - cnod * sinsu;
+		const double vy    =  xmy * cossu - snod * sinsu;
+		const double vz    =  sini * cossu;
 
 		/* --------- position and velocity (in km and km/sec) ---------- */
 		r[0] = (mrt * ux)* radiusearthkm;
@@ -1955,8 +1923,8 @@ bool sgp4(gravconsttype whichconst, elsetrec& satrec,  double tsince, double r[3
 
 double gstime(double jdut1)
 {
-	const double twopi = 2.0 * M_PI;
-	const double deg2rad = M_PI / 180.0;
+	static const double twopi = 2.0 * M_PI;
+	static const double deg2rad = M_PI / 180.0;
 	double       temp, tut1;
 
 	tut1 = (jdut1 - 2451545.0) / 36525.0;

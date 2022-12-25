@@ -56,8 +56,6 @@
 gSatTEME::gSatTEME(const char *pstrName, char *pstrTleLine1, char *pstrTleLine2)
 {
 	double startmfe, stopmfe, deltamin;
-	double ro[3] = {};
-	double vo[3] = {};
 
 	m_SatName = pstrName;
 
@@ -69,14 +67,7 @@ gSatTEME::gSatTEME(const char *pstrName, char *pstrTleLine1, char *pstrTleLine2)
 	           startmfe, stopmfe, deltamin, satrec);
 
 	// call the propagator to get the initial state vector value
-	sgp4(CONSTANTS_SET, satrec,  0.0, ro,  vo);
-
-	m_Position[ 0]= ro[ 0];
-	m_Position[ 1]= ro[ 1];
-	m_Position[ 2]= ro[ 2];
-	m_Vel[ 0]     = vo[ 0];
-	m_Vel[ 1]     = vo[ 1];
-	m_Vel[ 2]     = vo[ 2];
+	sgp4(CONSTANTS_SET, satrec,  0.0, m_Position.v,  m_Vel.v);
 }
 
 void gSatTEME::setEpoch(gTime ai_time)
@@ -84,37 +75,21 @@ void gSatTEME::setEpoch(gTime ai_time)
 	gTime     kepEpoch(satrec.jdsatepoch);
 	gTimeSpan tSince = ai_time - kepEpoch;
 
-	double ro[3] = {};
-	double vo[3] = {};
 	double dtsince = tSince.getDblSeconds()/KSEC_PER_MIN;
 	// call the propagator to get the initial state vector value
-	sgp4(CONSTANTS_SET, satrec,  dtsince, ro,  vo);
+	sgp4(CONSTANTS_SET, satrec,  dtsince, m_Position.v,  m_Vel.v);
 
-	m_Position[ 0]= ro[ 0];
-	m_Position[ 1]= ro[ 1];
-	m_Position[ 2]= ro[ 2];
-	m_Vel[ 0]     = vo[ 0];
-	m_Vel[ 1]     = vo[ 1];
-	m_Vel[ 2]     = vo[ 2];
 	m_SubPoint    = computeSubPoint( ai_time);
 }
 
 void gSatTEME::setMinSinceKepEpoch(double ai_minSinceKepEpoch)
 {
-	double ro[3];
-	double vo[3];
 	gTimeSpan tSince( ai_minSinceKepEpoch/KMIN_PER_DAY);
 	gTime     Epoch(satrec.jdsatepoch);
 	Epoch += tSince;
 	// call the propagator to get the initial state vector value
-	sgp4(CONSTANTS_SET, satrec,  ai_minSinceKepEpoch, ro,  vo);
+	sgp4(CONSTANTS_SET, satrec,  ai_minSinceKepEpoch, m_Position.v,  m_Vel.v);
 
-	m_Position[ 0]= ro[ 0];
-	m_Position[ 1]= ro[ 1];
-	m_Position[ 2]= ro[ 2];
-	m_Vel[ 0]     = vo[ 0];
-	m_Vel[ 1]     = vo[ 1];
-	m_Vel[ 2]     = vo[ 2];
 	m_SubPoint    = computeSubPoint( Epoch);
 }
 
@@ -128,13 +103,13 @@ Vec3d gSatTEME::computeSubPoint(gTime ai_Time)
 
 
 	r = std::sqrt(Sqr(m_Position[0]) + Sqr(m_Position[1]));
-	e2 = __f*(2 - __f);
+	e2 = __f*(2. - __f);
 	resultVector[ LATITUDE] = atan2(m_Position[2],r); /*radians*/
 
 	do
 	{
 		phi = resultVector[ LATITUDE];
-		c = 1/std::sqrt(1 - e2*Sqr(sin(phi)));
+		c = 1./std::sqrt(1. - e2*Sqr(sin(phi)));
 		resultVector[ LATITUDE] = atan2(m_Position[2] + KEARTHRADIUS*c*e2*sin(phi),r);
 	}
 	while(fabs(resultVector[ LATITUDE] - phi) >= 1E-10);

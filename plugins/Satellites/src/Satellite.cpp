@@ -64,7 +64,7 @@ bool Satellite::coloredInvisibleSatellitesFlag = true;
 Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2f,0.2f,0.2f);
 Vec3f Satellite::transitSatelliteColor = Vec3f(0.f,0.f,0.f);
 double Satellite::timeRateLimit = 1.0; // one JD per second by default
-int Satellite::tleEpochAge = 30; // default age of TLE's epoch to mark TLE as outdated (using for filters)
+int Satellite::tleEpochAge = 30; // default age of TLE's epoch to mark TLE as outdated (used for filters)
 
 bool Satellite::flagCFKnownStdMagnitude = false;
 bool Satellite::flagCFApogee = false;
