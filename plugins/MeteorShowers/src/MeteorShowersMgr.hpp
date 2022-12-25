@@ -20,6 +20,7 @@
 #ifndef METEORSHOWERSMGR_HPP
 #define METEORSHOWERSMGR_HPP
 
+#include <QDateTime>
 #include <QNetworkReply>
 #include <QNetworkAccessManager>
 
