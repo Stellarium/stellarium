@@ -38,6 +38,7 @@
 #include "gSatTEME.hpp"
 #include <iostream>
 #include <iomanip>
+#include <math.h>
 
 #include "mathUtils.hpp"
 #include "sgp4io.h"
@@ -122,19 +123,19 @@ Vec3d gSatTEME::computeSubPoint(gTime ai_Time)
 	Vec3d resultVector; // (0) Latitude, (1) Longitude, (2) altitude
 	double theta, r, e2, phi, c;
 
-	theta = AcTan(m_Position[1], m_Position[0]); // radians
+	theta = atan2(m_Position[1], m_Position[0]); // radians
 	resultVector[ LONGITUDE] = fmod((theta - ai_Time.toThetaGMST()), K2PI);  //radians
 
 
 	r = std::sqrt(Sqr(m_Position[0]) + Sqr(m_Position[1]));
 	e2 = __f*(2 - __f);
-	resultVector[ LATITUDE] = AcTan(m_Position[2],r); /*radians*/
+	resultVector[ LATITUDE] = atan2(m_Position[2],r); /*radians*/
 
 	do
 	{
 		phi = resultVector[ LATITUDE];
 		c = 1/std::sqrt(1 - e2*Sqr(sin(phi)));
-		resultVector[ LATITUDE] = AcTan(m_Position[2] + KEARTHRADIUS*c*e2*sin(phi),r);
+		resultVector[ LATITUDE] = atan2(m_Position[2] + KEARTHRADIUS*c*e2*sin(phi),r);
 	}
 	while(fabs(resultVector[ LATITUDE] - phi) >= 1E-10);
 

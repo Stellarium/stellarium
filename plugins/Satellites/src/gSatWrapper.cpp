@@ -91,7 +91,7 @@ Vec3d gSatWrapper::getSubPoint() const
 	if (pSatellite != Q_NULLPTR)
 		returnedVector = pSatellite->getSubPoint();
 	else
-		qWarning() << "gSatWrapper::getTEMEVel Method called without pSatellite initialized";
+		qWarning() << "gSatWrapper::getSubPoint Method called without pSatellite initialized";
 
 	return returnedVector;
 }

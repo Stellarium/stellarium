@@ -12,7 +12,6 @@ SET(Satellites_SRCS
      gsatellite/gException.hpp
      gsatellite/gSatTEME.cpp
      gsatellite/gSatTEME.hpp
-     gsatellite/mathUtils.cpp
      gsatellite/mathUtils.hpp
      gsatellite/gTime.cpp
      gsatellite/gTime.hpp
