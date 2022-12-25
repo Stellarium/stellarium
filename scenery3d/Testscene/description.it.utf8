@@ -1,0 +1,38 @@
+<h2>Scena di prova</h2>
+
+<p>Questa scena è utile, per lo più, come banco di prova per i tuoi
+sviluppi. Dovresti fare una copia della cartella della scena e modificarla a
+tuo piacimento, provare le impostazioni del materiale o altri dettagli per
+scoprire come si comporta questo plugin. Quindi costruisci e presenta il tuo
+lavoro!</p>
+
+<h4>Test sulla gestione delle coordinate e l'orientamento</h4>
+
+<p>I pilastri qui ben visibili sono visti dal centro della struttura e
+forniscono una vista approssimativa (non ad alta precisione!) delle
+posizioni di alba/tramonto ai solstizi/equinozio alle latitudini dell'Europa
+centrale. I pilastri centrali forniscono un allineamento lungo la linea
+est-ovest. La griglia delle coordinate topografiche visibili sul pavimento
+non è allineata con il nord geografico. Una rotazione di compensazione di
+-4,2 gradi (test di convergenza del meridiano) deve essere applicata, cioè,
+mentre i pilastri centrali devono assolutamente e sempre puntare lungo la
+linea ovest-est, le linee della griglia attraversano leggermente l'orizzonte
+nord  spostate di 4,2 gradi a sinistra!</p>
+
+<p>Le coordinate perimetrali del terreno (Ctrl-R, T) dovrebbero visualizzare le
+coordinate lungo il confine sud e ovest del terreno stesso.</p>
+
+<h4>Test sul materiale</h4>
+
+<p>Questo modello viene utilizzato anche per testare le capacità grafiche del
+plugin. Puoi giocare con i parametri dei materiali per creare effetti
+divertenti come sfere di mattoni semitrasparenti o che si illuminano al
+buio.</p>
+
+<p>Per testare le caratteristiche temporali, i pilastri e le sfere sono
+visibili solo dagli anni 2000 fino al 2020. Modifica il file materiale per
+cambiarlo!</p>
+
+<h4>Modello</h4>
+<p>Scena di prova per lo sviluppo di Stellarium/scenario3d. Esporta da
+SU8-Kerkythea-KT2OBJ.</p>

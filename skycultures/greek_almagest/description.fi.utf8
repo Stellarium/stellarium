@@ -1,0 +1,528 @@
+<h1>Kreikkalainen (Almagest)</h1>
+
+<p>Tämä antiikin Kreikan taivaskulttuuri on koottu kirjaan, joka tunnetaan
+nykyään arabiankielisellä nimellä "Almagest". Tämä kirja on kirjoitettu
+Rooman aikana (Rooman keisari Hadrianuksen aikana) Aleksandriassa (Afrikka)
+kreikan kielellä, päivämäärät on annettu egyptiläisillä kuukausien nimillä
+ja vuodet laskettu Babylonian kuninkaan mukaan, joten se on selvästi
+monikulttuurinen kokoelma tietoa. Se on kokoelma entisten
+tähtitieteilijöiden tähtitieteellisestä tiedosta, mukaan lukien havaintojen
+ja matemaattisen tähtitieteen tulokset. Claudius Ptolemaios koonnut sen,
+käyttäen vanhoja ja hänen omia havaintojaan, kirjoitettiin kreikaksi,
+julkaistiin toisella vuosisadalla ja pysyi tärkeimpänä tähtitieteenä
+seuraavat 1500 vuotta. Se kirjoitettiin alun perin otsikolla <i>Mathematike
+Syntaxis</i>, muinaisessa Kreikassa.  Nimi <i>Almagest</i>, tarlpottaa
+&ldquo;Laajin [Kirja]&rdquo;, kehitettiin arabiankielisistä
+käännöksistä. Tämän taivaskulttuurin luomiseen käytimme Toomerin (1984)
+englanninkielistä käännöstä, muokkasimme sitä joissakin yksityiskohdissa
+(esim. käyttämällä kirjaimellisia käännöksiä kreikasta nykyään yleisten
+latinan termien sijaan) ja käytimme Ernie Wrightin laatimia tietokoneella
+luettavia taulukoita. .</p>
+
+<p>Almagest koostuu 13 osasta, joita kutsutaan kirjoiksi. Seitsemännessä ja
+kahdeksannessa kirjassa Ptolemaios luetteli yhteensä 1022 tähteä 48
+tähdistössä (joiden joukossa on noin 5 tähden kaltaista esinettä, kuten
+pallomaisia tähtijoukkoja). Se on tähtien koordinaattitaulukko, jossa on
+kuvaus niiden sijainnista tähdistössä (kuten "tähti X:n kyynärpäässä,
+pituusaste, leveysaste, magnitudi"). Precession suhteen Ptolemaios käytti
+ekliptisiä koordinaatteja. Ensimmäisenä aikanaan Ptolemaios sisällytti
+magnitudin, tähtien kirkkauden kvantitatiivisen asteikon, joka on
+luultavasti otettu Hipparchukselta (mikä ei ole varmaa, koska Hipparchuksen
+luetteloa ei ole säilytetty). Asteikko alkaa kirkkaimmasta tähdestä, jonka
+magnitudi on 1, ja laskee magnitudiin 6 himmeimmille näkyville tähdille.</p>
+
+<p>Planeettojen paikkojen laskemiseen Ptolemaios käytti geosentristä mallia
+(mikä on sallittua, koska tarkkailija seisoo aina maan päällä) ja näin ollen
+myötävaikutti tieteelliseen uskomukseen, että Aristarkksen heliosentristä
+mallia ei tarvita. Kuitenkin tähtiluetteloon<i>Almagest</i> tällä ei ole
+mitään väliä, koska tähtiluettelo edustaa aina eräänlaista luetteloa taivaan
+kiinteistä pisteistä ja Ptolemaioksen julistama tavoite luettelossa on
+tarjota luettelo taivaanpallon tekemiseksi (katso Alm., VIII, 3). Koska hän
+on tietoinen precessiosta, hän haluaa helpottaa tulevien maapallontekijöiden
+liiketoimintaa käyttämällä ekliptisiä koordinaatteja: Precessio, jonka
+Ptolemaios tiesi, siirtää kaikki tähdet rinnakkain ekliptiikan kanssa, joten
+kyseisen maapallontekijän aikakauden päivityksiä voidaan soveltaa
+yksinkertaisesti vähentämällä arvo ekliptiselle pituudelle.</p>
+
+<h2>Kuinka tämä taivaskulttuuri syntyi</h2>
+
+<h3>Tähtien nimet</h3>
+
+Yli 1000 tähdestä Ptolemaios mainitsee oikean nimen vain 15:lle. Loput
+tunnistetaan melko pitkillä kuvauksilla, kuten "tähti hännän päässä"
+Polarisille. Välttääksemme näin pitkien merkkijonojen näyttämisen
+Stellariumin näytöllä, keksimme kaikille Almagest-tähdille lyhyet tarrat,
+jotka perustuvat tähdistykseen ja järjestykseen, jossa ne esiintyvät
+luettelossa. Esimerkiksi Polaris on saanut nimen "UMi 1", koska se on
+ensimmäinen tähti Pienen karhun (UMi) tähdistössä. Katso alla olevasta
+taulukosta Ptolemaioksen tähtikuvioiden ja IAU-lyhenteiden välinen
+vastaavuus. Lisäksi, kun Ptolemaios kuvailee tähden olevan kuvion
+ulkopuolella, käytämme pieniä kirjaimia vastaavassa etiketissä. Nähdäkseen
+tietyn tähden pitkän kuvauksen käyttäjien tulee ottaa käyttöön "Käytä muita
+tähtien nimiä" "Näytä [F4]/Taivas" -asetuksissa ja klikata tähteä. Pitkä
+kuvaus tulee sitten näkyviin näytön yläosaan.
+
+<h3>Tähdistöviivat</h3>
+
+<p>Prosessi voidaan kuvata tässä luonnosteltuna Corvuksen esimerkillä:</p>
+
+<p>Corvuksen (korpin) tähdistössä &alpha; Crv on tähti "korpin päässä". Se
+liittyy "tähdellä kaulassa", "epsilon; Crv. Tämä liittyy &quot;tähteen
+rinnassa&quot; &zeta; Crv. Sieltä kaksi riviä menee siipien kärkiin. &gamma;
+Crv on edistyneen siiven tähti ja &delta; Crv tähti takasiivessä. Rinnassa
+olevasta tähdestä toinen viiva menee "korpin jalkaan", tähti "beta; Crv.</p>
+
+<p><img width="800" src="corvus_s.png" /></p>
+
+<p>Kun tähdet oli tunnistettu niiden koordinaattien ja nimien perusteella,
+liitimme tähdet uudelleen taulukon kuvausten mukaisesti <i>Almagestissa</i>.</p>
+
+<p>Tähtien ja syvän taivaan objektien nimet perustuvat vain Almagestiin,
+esim. Ptolemaios käyttää nimeä
+&quot;&lambda;&alpha;&mu;&pi;&alpha;&delta;&#943;&alpha;&sigmaf; (Soihdun
+kaltainen)&quot; Aldebaranille hänen toisessa työssään, <i>Tetrabiblos</i>,
+mutta tätä ei toteuteta tässä taivaskulttuurissa, koska se ei näy
+Almagestissa.</p>
+
+<p>The following table displays the original constellation name in Greek and
+its English translation (column 2 and 3) and denotes our uncertainties in
+the reconstruction (column 6).</p>
+
+<table class="nomenclature">
+<tr valign="top">
+	<td><b>Lyhenne</b></td>
+	<td><b>Alkuperäinen nimi</b></td>
+	<td><b>Käännös</b> (suora)</td>
+	<td><b>IAU (latinalainen) nimi</b></td>
+	<td><b>vihjeitä tähdistöön</b></td>
+	<td><b>taiteen vapaus</b></td>
+</tr>
+<tr valign="top">
+	<td><notr>UMi</notr></td>
+	<td><notr>&Mu;&iota;&kappa;&rho;&#942; &#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;</notr></td>
+	<td>Pieni naaraskarhu</td>
+	<td><notr>Ursa Minor</notr></td>
+	<td>kuin IAU-tähdistö</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>UMa</notr></td>
+	<td><notr>&Mu;&epsilon;&gamma;&alpha;&lambda;&#942; &#702;&#714;&Alpha;&rho;&kappa;&tau;&omicron;&sigmaf;</notr></td>
+	<td>Iso naaraskarhu</td>
+	<td><notr>Ursa Major</notr></td>
+	<td>kuin IAU-tähdistö</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Dra</notr></td>
+	<td><notr>&Delta;&rho;&#940;&kappa;&omega;&nu;</notr></td>
+	<td>Lohikäärme</td>
+	<td><notr>Draco</notr></td>
+	<td>kaikki kolmiot tai neliöt ovat nikamia tai kehon osia; linja päässä on kieli</td>
+	<td></td>
+</tr>
+	<tr valign="top">
+	<td><notr>Cep</notr></td>
+	<td><notr>&Kappa;&eta;&phi;&epsilon;&#973;&sigmaf;</notr></td>
+	<td>Kefeus</td>
+	<td><notr>Cepheus</notr></td>
+	<td>kuningas, ylösalaisin </td>
+	<td>kolme päätähteä ovat tiara; &beeta; nähdään osana vyötä, vaikka Almagest
+sanoo vyön alla</td>
+</tr>
+<tr valign="top">
+	<td><notr>Boo</notr></td>
+	<td><notr>&Beta;&omicron;&#974;&tau;&eta;&sigmaf;</notr></td>
+	<td>Kyntömies</td>
+	<td><notr>Bo&ouml;tes</notr></td>
+	<td>hänellä on paimensauva kädessään (&omega;)</td>
+	<td>tähti HIP 72582 lisätty kaulatähdeksi</td>
+</tr>
+<tr valign="top">
+	<td><notr>CrB</notr></td>
+	<td><notr>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf;</notr></td>
+	<td>Kruunu</td>
+	<td><notr>Corona Borealis</notr></td>
+	<td>kuten IAU tähdistö; ei yksityiskohtia tekstin riveistä</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Her</notr></td>
+	<td><notr>&#703;&Epsilon;&nu;&gamma;&#972;&nu;&alpha;&sigma;&iota;&nu;</notr></td>
+	<td>Polvistuva</td>
+	<td><notr>Hercules</notr></td>
+	<td>yksi jalkatähteistä on Bootesin henkilökunta</td>
+	<td>tähti HIP 82764 lisätty kaulatähdeksi</td>
+</tr>
+<tr valign="top">
+	<td><notr>Lyr</notr></td>
+	<td><notr>&Lambda;&#973;&rho;&alpha;</notr></td>
+	<td>Lyyra</td>
+	<td><notr>Lyra</notr></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Cyg</notr></td>
+	<td><notr>&#702;&#714;&Omicron;&rho;&nu;&iota;&sigmaf;</notr></td>
+	<td>Lintu</td>
+	<td><notr>Cygnus</notr></td>
+	<td>joutsen jaloilla</td>
+	<td>Siipien kärjet liittyvät häntään</td>
+</tr>
+<tr valign="top">
+	<td><notr>Cas</notr></td>
+	<td><notr>&Kappa;&alpha;&sigma;&sigma;&iota;&#941;&pi;&epsilon;&iota;&alpha;</notr></td>
+	<td>Kassiepeia</td>
+	<td><notr>Cassiopeia</notr></td>
+	<td>Kuningatar istuu valtaistuimella</td>
+	<td>hämmennyksen välttämiseksi emme piirtäneet valtaistuinta</td>
+</tr>
+<tr valign="top">
+	<td><notr>Per</notr></td>
+	<td><notr>&Pi;&epsilon;&rho;&sigma;&epsilon;&#973;&sigmaf;</notr></td>
+	<td>Perseus</td>
+	<td><notr>Perseus</notr></td>
+	<td>Kaksoistähtijoukko NGC 869 ja NGC 884 syvän taivaan kohteena - &gt;yksi
+tähtijoukon tähdistä käytettiin piirtämiseen</td>
+	<td>yksi Gorgon-headin tähdistä on lisätty, jotta pää näyttää pallomaisemmalta</td>
+</tr>
+<tr valign="top">
+	<td><notr>Aur</notr></td>
+	<td><notr>&#703;&Eta;&nu;&#943;&omicron;&chi;&omicron;&sigmaf;</notr></td>
+	<td>Sotavaunujen ajaja</td>
+	<td><notr>Auriga</notr></td>
+	<td>käyttää pitkää vaatetta; olkapäiden ja helman kautta rajoitettu vaate</td>
+	<td>o Aur lisätty kaulatähdeksi; yksi Aur lisätty helmatähdeksi</td>
+</tr>
+<tr valign="top">
+	<td><notr>Oph</notr></td>
+	<td><notr>&#702;&Omicron;&phi;&iota;&omicron;&#973;&chi;&omicron;&sigmaf;</notr></td>
+	<td>Käärmeen kantaja</td>
+	<td><notr>Ophiuchus</notr></td>
+	<td>on käärme kädessään</td>
+	<td>tähti lisätty kaulatähdeksi</td>
+</tr>
+<tr valign="top">
+	<td><notr>Ser</notr></td>
+	<td><notr>&#702;&#714;&Omicron;&phi;&iota;&sigmaf;</notr></td>
+	<td>Käärme</td>
+	<td><notr>Serpens</notr></td>
+	<td>kaksi erillistä käärmeen osaa (pää ja häntä); neliö on pää</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Sge</notr></td>
+	<td><notr>&#702;&Omicron;&iota;&sigma;&tau;&#972;&sigmaf;</notr></td>
+	<td>Nuoli</td>
+	<td><notr>Sagitta</notr></td>
+	<td>Kuten IAU-tähdistö, &eta; Sge puuttuu </td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Aql</notr></td>
+	<td><notr>&#702;&Alpha;&epsilon;&tau;&#972;&sigmaf;</notr></td>
+	<td>Kotka</td>
+	<td><notr>Aquila</notr></td>
+	<td>&tau; Aql päätähtenä, &beta; kaulana, Altair on olkapäiden välissä, &gamma;
+ja &mu; ovat olkapäät</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Del</notr></td>
+	<td><notr>&Delta;&epsilon;&lambda;&phi;&#943;&sigmaf;</notr></td>
+	<td>Delfiini</td>
+	<td><notr>Delphinus</notr></td>
+	<td></td>
+	<td>hienostunut muoto</td>
+</tr>
+<tr valign="top">
+	<td><notr>Equ</notr></td>
+	<td><notr>&Pi;&rho;&omicron;&tau;&omicron;&mu;&#942;</notr></td>
+	<td>[hevosen] rintakuva</td>
+	<td><notr>Equuleus</notr></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Peg</notr></td>
+	<td><notr>&#703;&#714;&Iota;&pi;&pi;&omicron;&sigmaf;</notr></td>
+	<td>Hevonen</td>
+	<td><notr>Pegasus</notr></td>
+	<td>harjalla ja yhdellä siivellä</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>And</notr></td>
+	<td><notr>&#702;&Alpha;&nu;&delta;&rho;&omicron;&mu;&#941;&delta;&alpha;</notr></td>
+	<td>Andromeda</td>
+	<td class='latin'><notr>Andromeda</notr></td>
+	<td>mekko ja vyö</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Tri</notr></td>
+	<td><notr>&Tau;&rho;&#943;&gamma;&omega;&nu;&omicron;&sigmaf;</notr></td>
+	<td>Kolmio</td>
+	<td><notr>Triangulum</notr></td>
+	<td>neljä annettua tähteä &#61664; keskimmäinen tähti toisella puolella</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Ari</notr></td>
+	<td><notr>&Kappa;&rho;&iota;&#972;&sigmaf;</notr></td>
+	<td>Ram</td>
+	<td><notr>Aries</notr></td>
+	<td>käännetty pää; vain yksi sarvi</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Tau</notr></td>
+	<td><notr>&Tau;&alpha;&upsilon;&#771;&rho;&omicron;&sigmaf;</notr></td>
+	<td>Sonni</td>
+	<td><notr>Taurus</notr></td>
+	<td>puolivartalo, vain kaksi jalkaa näkyvissä; katseen suunta tarkkailijalle</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Gem</notr></td>
+	<td><notr>&Delta;&#943;&delta;&upsilon;&mu;&omicron;&iota;</notr></td>
+	<td>Kaksoset</td>
+	<td><notr>Gemini</notr></td>
+	<td>yksi yhteinen tähti; koskettavat toisiaan käsin</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Cnc</notr></td>
+	<td><notr>&Kappa;&alpha;&rho;&kappa;&#943;&nu;&omicron;&sigmaf;</notr></td>
+	<td>Rapu</td>
+	<td><notr>Cancer</notr></td>
+	<td>neliömäinen ruumis</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Leo</notr></td>
+	<td><notr>&Lambda;&#941;&omega;&nu;</notr></td>
+	<td>Leijona</td>
+	<td><notr>Leo</notr></td>
+	<td>avaa leuan</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Vir</notr></td>
+	<td><notr>&Pi;&alpha;&rho;&theta;&#941;&nu;&omicron;&sigmaf;</notr></td>
+	<td>Neito</td>
+	<td><notr>Virgo</notr></td>
+	<td>ei erillistä päätä</td>
+	<td>himmeämpiä tähtiä lisätty siipien piirtämiseen</td>
+</tr>
+<tr valign="top">
+	<td><notr>Lib</notr></td>
+	<td><notr>&Chi;&eta;&lambda;&alpha;&#943;</notr></td>
+	<td>[Skorpionin] kynnet</td>
+	<td><notr>Libra</notr></td>
+	<td>Ptolemaios käyttää aina termiä &quot;claws&quot;, ei koskaan
+&quot;tasapaino&quot;.</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Sco</notr></td>
+	<td><notr>&Sigma;&kappa;&omicron;&rho;&pi;&#943;&omicron;&sigmaf;</notr></td>
+	<td>Skorpioni</td>
+	<td><notr>Scorpius</notr></td>
+	<td></td>
+	<td>kädet lisätty pään ympärille: &nu; ja &rho;</td>
+</tr>
+<tr valign="top">
+	<td><notr>Sgr</notr></td>
+	<td><notr>&Tau;&omicron;&xi;&#972;&tau;&eta;&sigmaf;</notr></td>
+	<td>Jousimies</td>
+	<td><notr>Sagittarius</notr></td>
+	<td>kentauri jousi edessä; &bdquo;viitta&ldquo; takana</td>
+	<td>lisäsimme tikkuhahmoon monia himmeitä tähtiä, jotta kuva olisi selkeä.</td>
+</tr>
+<tr valign="top">
+	<td><notr>Cap</notr></td>
+	<td><notr>&Alpha;&#943;&gamma;&#972;&kappa;&epsilon;&rho;&omicron;&sigmaf;</notr></td>
+	<td>Se jolla on Vuohensarvi</td>
+	<td><notr>Capricornus</notr></td>
+	<td>kalan häntä; kaksi jalkaa näkyvissä</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Aqr</notr></td>
+	<td><notr>&#703;&Upsilon;&delta;&rho;&omicron;&chi;&#972;&omicron;&sigmaf;</notr></td>
+	<td>Vedenkantaja</td>
+	<td><notr>Aquarius</notr></td>
+	<td>vettä kannusta</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Psc</notr></td>
+	<td><notr>&#702;&Iota;&chi;&theta;&#973;&epsilon;&sigmaf;</notr></td>
+	<td>[2] Kala</td>
+	<td><notr>Pisces</notr></td>
+	<td></td>
+	<td>pohjoiset kalat: 68(h), 67(k) ja 65(i) kuvattu päänä Almagestissa, mutta
+otimme ne eväksi, koska suun pitäisi olla kohdassa g ja &tau;
+Psc. Lisämuutos häntäevässä: laajennettu &rho;</td>
+</tr>
+<tr valign="top">
+	<td><notr>Cet</notr></td>
+	<td><notr>&Kappa;&eta;&#771;&tau;&omicron;&sigmaf;</notr></td>
+	<td>Merihirviö</td>
+	<td><notr>Cetus</notr></td>
+	<td></td>
+	<td>Keho ei kulje tähden &tau;n, vaan tähden &upsilon;</td>
+</tr>
+<tr valign="top">
+	<td><notr>Ori</notr></td>
+	<td><notr>&#702;&Omega;&rho;&#943;&omega;&nu;</notr></td>
+	<td>Orion</td>
+	<td class='latin'><notr>Orion</notr></td>
+	<td></td>
+	<td>&quot;pää&quot; on merkitty "sumuiseksi"; mikä tarkoittaa, että Ptolemaios
+tulkitsi &phi;<sub>1</sub>, &phi;<sub>2</sub>, ja "lambda" sekä niiden
+välissä olevat himmeämmät tähdet "klusterina"; (tai assosiaatio, joka on
+laajempi kuin moderni "lambda; Ori Assoc."). Päällä ei ole enää suoraa
+yhteyttä olkatähtiin, vaan olkapäissä olevien tähtien välissä olevaan
+tähteen.</td>
+</tr>
+<tr valign="top">
+	<td><notr>Eri</notr></td>
+	<td><notr>&Pi;&omicron;&tau;&alpha;&mu;&omicron;&#972;&sigmaf;</notr></td>
+	<td>[Nimetön] joki</td>
+	<td><notr>Eridanus</notr></td>
+	<td>Kuten IAU-tähdistö, mutta lyhyempi</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Lep</notr></td>
+	<td><notr>&Lambda;&alpha;&gamma;&omega;&#771;&sigmaf;</notr></td>
+	<td>Jänis</td>
+	<td><notr>Lepus</notr></td>
+	<td></td>
+	<td>otti korvana "4 tähteä yli korvan".</td>
+</tr>
+<tr valign="top">
+	<td><notr>CMa</notr></td>
+	<td><notr>&Kappa;&#973;&omega;&nu;</notr></td>
+	<td>Koira</td>
+	<td><notr>Canis Major</notr></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>CMi</notr></td>
+	<td><notr>&Pi;&rho;&omicron;&kappa;&#973;&omega;&nu;</notr></td>
+	<td>Yksi ennen koiraa</td>
+	<td><notr>Canis Minor</notr></td>
+	<td></td>
+	<td>Almagestissa tähdistön nimi on &quot;Ei koiraa edeltävä. tai "Harbinger of
+Sirius"; kuten Toomer sen sanoo. Kuitenkin &beta; CMi:tä kutsutaan
+"kaulaksi"; (joista ei tiedetä). Piirsimme pienen koiran &gamma; ja
+&epsilon; päänä; &alpha;, &beta;, &eta; ja HIP36889 runkoon; eturaajat,
+joissa HIP 35509 ja HIP 35614; takajaloissa &delta;<sub>2</sub> ja
+&delta;<sub>3</sub>; häntä HIP 37634 kanssa</td>
+</tr>
+<tr valign="top">
+	<td><notr>Arg</notr></td>
+	<td><notr>&#702;&Alpha;&rho;&gamma;&omega;</notr></td>
+	<td>Laiva &quot;Argo&quot;</td>
+	<td><notr>Argo</notr></td>
+	<td>pienempi kuin IAU-tähdistöjen summa Pup+Pyx+Car+Vel</td>
+	<td>Monet tähdet, joita ei ole integroitu tähdistöön, luovat veneen kaltaisen
+muodon; monissa kuvissa (mukaan lukien muinainen Farnesen maapallo) on
+maalattu vain puolikas laivasta.</td>
+</tr>
+<tr valign="top">
+	<td><notr>Hya</notr></td>
+	<td><notr>&#703;&#714;&Upsilon;&delta;&rho;&omicron;&sigmaf;</notr></td>
+	<td>Vesikäärme</td>
+	<td><notr>Hydra</notr></td>
+	<td>kuin IAU-tähdistö</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Crt</notr></td>
+	<td><notr>&Kappa;&rho;&alpha;&tau;&#768;&eta;&rho;</notr></td>
+	<td>Kraatteri (alus)</td>
+	<td><notr>Crater</notr></td>
+	<td></td>
+	<td>Krater on erityinen kreikkalainen viininsekoitusastia, joka näyttää
+amforalta tai maljakolta: <a
+href="https://en.wikipedia.org/wiki/Krater">https://en.wikipedia.org/wiki/Krater</a>
+Ptolemaios kuvaa vain yhtä tähteä jalassa (&alpha; Crt) ja kahta kädensijaa
+(&eta;, &theta; Crt)</td>
+</tr>
+<tr valign="top">
+	<td><notr>Crv</notr></td>
+	<td><notr>&Kappa;&oacute;&rho;&alpha;&xi;</notr></td>
+	<td>Korppi</td>
+	<td><notr>Corvus</notr></td>
+	<td>kuin IAU-tähdistö</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>Cen</notr></td>
+	<td><notr>&Kappa;&#941;&nu;&tau;&alpha;&upsilon;&rho;&omicron;&sigmaf;</notr></td>
+	<td>Kentauri</td>
+	<td><notr>Centaurus</notr></td>
+	<td></td>
+	<td>poikkeama kuvauksesta: HIP 65373 &omega; Cen (klusteri) otettu tähtenä
+takana. &lsquo;Thyrsus&lsquo; ei piirretty (sekaannusten välttämiseksi),
+takavarsi lisätty.</td>
+</tr>
+<tr valign="top">
+	<td><notr>Lup</notr></td>
+	<td><notr>&Theta;&eta;&rho;&#943;&omicron;&nu;</notr></td>
+	<td>Peto</td>
+	<td><notr>Lupus</notr></td>
+	<td></td>
+	<td>&beta; kuvataan nimellä "Takajalan loppu"; -> otettu tähtenä vatsassa;
+&tau;<sub>1</sub> takajalkana &Chi; poistettu päästä, koska muuten syntyy
+muodottomuutta; HIP 73493 otettu etujalaksi</td>
+</tr>
+<tr valign="top">
+	<td><notr>Ara</notr></td>
+	<td><notr>&Theta;&upsilon;&mu;&iota;&alpha;&tau;&#942;&rho;&iota;&omicron;&nu;</notr></td>
+	<td>Alttari</td>
+	<td><notr>Ara</notr></td>
+	<td>kuin IAU-tähdistö</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>CrA</notr></td>
+	<td><notr>&Sigma;&tau;&#941;&phi;&alpha;&nu;&omicron;&sigmaf; &Nu;&#972;&tau;&iota;&omicron;&sigmaf;</notr></td>
+	<td>Eteläinen kruunu</td>
+	<td><notr>Corona Australis</notr></td>
+	<td>kuten IAU tähdistö; vain epävarmuus tähtien kanssa, jotka saivat vain
+BSC-numeron Almagestissa, koska niitä ei voida selvästi tunnistaa
+Stellariumissa</td>
+	<td></td>
+</tr>
+<tr valign="top">
+	<td><notr>PsA</notr></td>
+	<td><notr>&Nu;&#972;&tau;&iota;&omicron;&sigmaf; &#702;&Iota;&chi;&theta;&#973;&sigmaf;</notr></td>
+	<td>Eteläinen kala</td>
+	<td><notr>Piscis Austrinus</notr></td>
+	<td>kala makaa selällään</td>
+	<td>lisäsimme muutaman tähden merkitsemään häntää sellaisenaan (&beta; pitäisi
+olla hännän kärki, mutta käytimme sitä sen juurena)</td>
+</tr>
+</table>
+
+<h2>Reilu käyttö</h2>
+<p>Tämä taivaskulttuuri on peräisin opiskelijan tutkimusvuodesta. Tarjoamme
+tämän ilmaiseksi, mutta kirjoitusten kirjoittajat ansaitsevat ehdottomasti
+maininnan yhteisten sääntöjen mukaisesti. Kiitos!</p>
+
+<h2>Kiitos</h2>
+<p>Kirjoittajat kiittävät Patrick Gleasonia ja Georg Zottia englanninkielisistä
+oikolukuista ja mielenkiintoisista keskusteluista.</p>
+
+<h2>Tekijät</h2>
+<p>Tämän taivaskulttuurin ovat koonneet ja lisänneet Stellariumiin Alina
+Schmidt, Lea Jabschinski, Marie von Seggern ja Susanne M. Hoffmann:
+service@uhura-uraniae.com</p>
+<p>Kirjoitettu englanniksi: kirjoittajat</p>

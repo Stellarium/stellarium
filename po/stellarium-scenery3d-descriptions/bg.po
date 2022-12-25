@@ -4,16 +4,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Georgi Georgiev (Жоро) <g.georgiev.shumen@gmail.com>, 2021
+# Georgi Georgiev (Жоро) <g.georgiev.shumen@gmail.com>, 2022
+# Alexander Shopov <ash@kambanaria.org>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2021-09-19 19:50+0700\n"
-"PO-Revision-Date: 2020-11-24 18:28+0000\n"
-"Last-Translator: Georgi Georgiev (Жоро) <g.georgiev.shumen@gmail.com>, 2021\n"
+"POT-Creation-Date: 2022-10-06 00:11+0700\n"
+"PO-Revision-Date: 2022-10-05 17:03+0000\n"
+"Last-Translator: Alexander Shopov <ash@kambanaria.org>, 2022\n"
 "Language-Team: Bulgarian (https://www.transifex.com/stellarium/teams/80998/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,6 +35,10 @@ msgid ""
 "or some other details to find out how this plugin behaves. Then build and "
 "present your own work!"
 msgstr ""
+"Сцената е полезна най-вече за тестване на разработките ви. Копирайте папката"
+" на пейзажа и я редактирате както желаете. Пробвайте различни настройки на "
+"материалите, за да видите какво е поведението. Не забравяйте да представите "
+"и споделите постигнатото!"
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:8
@@ -52,6 +57,14 @@ msgid ""
 "absolutely and always point west-east, the grid lines hit the northern "
 "horizon slightly (4.2 deg) left of north!"
 msgstr ""
+"Стълбовете, представени тук както се виждат от центъра на структурата, "
+"указват приблизително (не с висока точност) позициите на изгрев/залез по "
+"време на слънцестояния/равноденствия на централните широчини в Европа. "
+"Централните стълбове указват линията изток-запад. Мрежата на кадастралната "
+"координатна система, която се вижда на земята, не съвпада с географския "
+"север. Трябва да се компенсират -4,2° (тествайте за сливане на меридиана), "
+"т.е. въпреки, че централните стълбове абсолютно сочат изток-запад, линиите "
+"на мрежата срещат северния хоризонт леко вляво (4,2°) от севера!"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:19
@@ -59,6 +72,8 @@ msgid ""
 "Walkaround ground coordinates (Ctrl-R, T) should display the coordinates "
 "visible along the south and west border of the ground."
 msgstr ""
+"Наземните координати (Ctrl-R, T) при разходка трябва да указват координатите"
+" на южната и западната граници на терена."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:23
@@ -72,6 +87,9 @@ msgid ""
 " can play with material parameters to create funny effects like "
 "semitransparent or glow-in-the-dark brick spheres."
 msgstr ""
+"Този модел се ползва и за тестване на графичните възможности на приставката."
+" Може да си поиграете с параметрите на материалите, за да създадете весели "
+"ефекти като полупрозрачни или светещи в тъмното сфери от тухли."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Testscene/description.en.utf8:29
@@ -79,6 +97,9 @@ msgid ""
 "To test temporal features, the pillars and spheres are visible only from the"
 " years 2000 until 2020.  Edit the material file to change that!"
 msgstr ""
+"За да тествате времевите възможности, стълбовете и сферите са видими само за"
+" годините от 2000 до 2020. Редактирайте файла с настройките на материалите, "
+"за да промените това."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Testscene/description.en.utf8:32
@@ -91,7 +112,8 @@ msgstr "Модел"
 msgid ""
 "Testscene for Stellarium/scenery3d development. Export from SU8-Kerkythea-"
 "KT2OBJ."
-msgstr "Пробна 3D сцена за Stellarium. Експортирана от SU8-Kerkythea-KT2OBJ."
+msgstr ""
+"Пробна тримерна сцена за Stellarium. Изнесена от SU8-Kerkythea-KT2OBJ."
 
 #. type: Content of: <h2>
 #: ../../scenery3d/Sterngarten/description.en.utf8:1
@@ -141,6 +163,14 @@ msgid ""
 "Calendar)  and the monthly journal \"Der Sternenbote\" (The Starry "
 "Messenger)."
 msgstr ""
+"Щернгартен („Звездна градина“) е построена от ученика на Томас и приемника "
+"му като ръководител на Астрономическото бюро проф. Херман Муке (1935-2019) и"
+" сътрудници. Муке е и секретар на Австрийското астрономическо общество "
+"(1963-2018), директор на Виенския планетариум (1963-2001) и публичната "
+"обсерватория във Виена Урания (1971-2001). Над 60 години Муке и "
+"астрономическото общество публикуват „Австрийския небесен календар“ "
+"(Österreichischer Himmelskalender) и месечното списание „Звезден вестител“ "
+"(Der Sternenbote)."
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:22
@@ -148,7 +178,7 @@ msgid ""
 "It was built 1997-2001 by the Austrian Astronomical Society, supported by "
 "public and private sponsors."
 msgstr ""
-"Построен е в периода 1997-2001 г. от Австрийското астрономическо общество, "
+"Построена е в периода 1997-2001 г. от Австрийското астрономическо общество, "
 "чрез дарения от различни организации."
 
 #. type: Content of: <h4>
@@ -165,6 +195,10 @@ msgid ""
 "southwest of Vienna; always open privately for everybody free of charge. "
 "Frequently guided tours."
 msgstr ""
+"Обогатяване на основните астрономически познания у широката публика. Нашата "
+"инсталация в крайната южна част на Виена предлага наблюдения на небесни "
+"събития с невъоръжено око или бинокъл — и е отворена безплатно (със заявка) "
+"за всички. Често има лектор."
 
 #. type: Content of: <h4>
 #: ../../scenery3d/Sterngarten/description.en.utf8:32
@@ -177,17 +211,21 @@ msgid ""
 "Pyramid with platform 7x7m. Seen from 1.5m above Center Plate all angles "
 "fit."
 msgstr ""
+"Пирамида с платформа 7×7m. Видяна 1,5m над централната плоскост, всички ъгли"
+" са видими."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:36
 msgid "Horizon Railing, representing the mathematical horizon."
-msgstr ""
+msgstr "Перило на хоризонта, указва математическия хоризонт."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:37
 msgid ""
 "Surrounding Steps; 200 seats. Entrance by staircase and wheelchair ramp."
 msgstr ""
+"Обиколни стъпала, 200 места. Влиза се по стълбището и рампата за инвалидни "
+"столове."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:38
@@ -198,6 +236,11 @@ msgid ""
 "rising/setting on the mathematical horizon is not possible in the field due "
 "to vegetation and landscape)."
 msgstr ""
+"Стълбове за изгревите и залезите в началото на сезоните. Позициите на "
+"стълбовете са точно на азимутите на равноденствията и слънцестоенията. "
+"Стрелките указват хоризонта и ефекта на изместването поради рефракцията. "
+"(Наблюденията на изгрева/залеза на математическия хоризонт не е възможно "
+"поради растителността и релефа.)"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:42
@@ -205,6 +248,8 @@ msgid ""
 "South Pillar, marked (10&deg;/10&deg; altitude); Transit marks for sun at "
 "seasons' beginning."
 msgstr ""
+"Южен стълб, отбелязан (височина 10°/10°). Отбелязани са преминаванията на "
+"Слънцето в началото на сезоните."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:43
@@ -212,6 +257,8 @@ msgid ""
 "North Pillar, marked (10&deg;/10&deg; altitude); on top Shadow Disc with "
 "central hole: North celestial Pole."
 msgstr ""
+"Южен стълб, отбелязан (височина 10°/10°). Отгоре е дискът на сенките, а "
+"централната дупка е за северния небесен полюс."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:44
@@ -221,11 +268,15 @@ msgid ""
 " longitude, with zodiacal signs. Ascending part serves as polar gnomon for "
 "the"
 msgstr ""
+"Огъната аналема, разделена. Датите през пролетта и лятото са на "
+"хоризонталната част, а датите на есента и зимата са на издигащата се част, "
+"отбелязани (10°/10°) слънчева дължина, със знаци от Зодиака. Издигащата се "
+"част служи като полярен гномон за"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:45
 msgid "Sundial, full hours Vh to VIIh marked."
-msgstr ""
+msgstr "слънчевия часовник, отбелязани са кръглите часове от Vh до VIIh."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:46
@@ -240,7 +291,7 @@ msgstr "Допълнителна информация"
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:50
 msgid "Websites in German only."
-msgstr "Сайтовете са на немски език."
+msgstr "Сайтовете са само на немски език."
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:52
@@ -249,7 +300,7 @@ msgid ""
 "href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
 msgstr ""
 "Österreichischer Astronomischer Verein: <a "
-"href=\"https://www.astroverein.at\">https://www.astroverein.at</a>"
+"href='https://www.astroverein.at'>https://www.astroverein.at</a>"
 
 #. type: Content of: <ul><li>
 #: ../../scenery3d/Sterngarten/description.en.utf8:53
@@ -258,7 +309,7 @@ msgid ""
 "href=\"https://de.wikipedia.org/wiki/Sterngarten\">Sterngarten</a>"
 msgstr ""
 "Статия на немски в Уикипедия, относно <a "
-"href=\"https://de.wikipedia.org/wiki/Sterngarten\">Щернгартен</a>"
+"href='https://de.wikipedia.org/wiki/Sterngarten'>Sterngarten</a>"
 
 #. type: Content of: <p>
 #: ../../scenery3d/Sterngarten/description.en.utf8:57

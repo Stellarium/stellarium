@@ -1,0 +1,36 @@
+<h2>Test Sahnesi</h2>
+
+<p>Bu sahne çoğunlukla kendi geliştirmeleriniz için test ortamı olarak
+kullanışlıdır. Bu eklentinin nasıl çalıştığını öğrenmek için sahne
+klasörünün bir kopyasını oluşturmalı ve isteğinize göre değiştirmeli,
+materyal ayarlarını veya diğer bazı ayrıntıları denemelisiniz. O halde kendi
+çalışmanızı yapın ve sunun!</p>
+
+<h4>Koordinat ve oryantasyon testleri</h4>
+
+<p>Burada gösterilen sütunlar, yapının merkezinden görüldüğü gibi, orta Avrupa
+enlemlerinde gündönümü/ekinoks gün doğumu/gün batımı konumlarına yaklaşık
+bir görünüm (yüksek hassasiyette değil!) sağlar. Merkezi sütunlar bir
+doğu-batı hattı sağlar. Zeminde görünen anket koordinat ızgarası, coğrafi
+kuzey ile aynı hizada değil. -4.2 derecelik bir dönüş (meridyen yakınsama
+testi) telafi edilmelidir, yani merkezi sütunlar kesinlikle ve her zaman
+batı-doğuyu işaret etmelidir, ızgara çizgileri kuzey ufkuna kuzeyin hafifçe
+(4,2 derece) soluna çarpar!</p>
+
+<p>Gezinme zemin koordinatları (Ctrl-R, T), zeminin güney ve batı sınırı
+boyunca görünen koordinatları göstermelidir.</p>
+
+<h4>Materyal testi</h4>
+
+<p>Bu model, eklentinin grafik yeteneklerini test etmek için de
+kullanılır. Yarı saydam veya karanlıkta parlayan tuğla küreler gibi
+eğlenceli efektler oluşturmak için malzeme parametreleriyle
+oynayabilirsiniz.</p>
+
+<p>Zamansal özellikleri test etmek için sütunlar ve küreler yalnızca 2000'den
+2020'ye kadar görülebilir. Bunu değiştirmek için materyal dosyasını
+düzenleyin!</p>
+
+<h4>Model</h4>
+<p>Stellarium/scenery3d geliştirme için test sahnesi. SU8-Kerkythea-KT2OBJ'den
+dışa aktarın.</p>
