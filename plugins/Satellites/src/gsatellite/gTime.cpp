@@ -78,13 +78,6 @@ gTime gTime::getCurrentTime()
 	return gTime(timeinfo);
 }
 
-
-
-gTime::gTime(int year, double day)
-{
-	setTime(year, day);
-}
-
 gTime::gTime(double ai_jDays)
 {
 	m_time= ai_jDays;
@@ -297,48 +290,30 @@ const gTime& gTime::operator-=(gTimeSpan ai_timeSpan)
 
 bool gTime::operator==(gTime ai_time) const
 {
-	if(m_time == ai_time.m_time)
-		return true;
-
-	return false;
+	return (m_time == ai_time.m_time);
 }
 
 bool gTime::operator!=(gTime ai_time) const
 {
-	if(m_time != ai_time.m_time)
-		return true;
-
-	return false;
+	return (m_time != ai_time.m_time);
 }
 
 bool gTime::operator<(gTime ai_time) const
 {
-	if(m_time < ai_time.m_time)
-		return true;
-
-	return false;
+	return (m_time < ai_time.m_time);
 }
 
 bool gTime::operator>(gTime ai_time) const
 {
-	if(m_time > ai_time.m_time)
-		return true;
-
-	return false;
+	return (m_time > ai_time.m_time);
 }
 
 bool gTime::operator<=(gTime ai_time) const
 {
-	if(m_time <= ai_time.m_time)
-		return true;
-
-	return false;
+	return (m_time <= ai_time.m_time);
 }
 
 bool gTime::operator>=(gTime ai_time) const
 {
-	if(m_time >= ai_time.m_time)
-		return true;
-
-	return false;
+	return (m_time >= ai_time.m_time);
 }

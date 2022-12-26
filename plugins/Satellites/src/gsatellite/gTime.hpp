@@ -140,7 +140,7 @@ class gTime
 public:
 	// Constructors
 	gTime(double ai_jDays = 0);
-	gTime(int year, double day);
+	inline gTime(int year, double day){setTime(year, day);};
 	gTime(int nYear, int nMonth, int nDay, int nHour, int nMin, double nSec);
 	gTime(struct tm ai_timestruct);
 
