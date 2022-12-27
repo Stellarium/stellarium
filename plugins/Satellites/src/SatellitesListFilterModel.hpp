@@ -35,7 +35,8 @@ class SatellitesListFilterModel : public QSortFilterProxyModel
 	//! will cause the model to be re-filtered.
 	Q_PROPERTY(SatFlag filterFlag
 	           READ getFilterFlag
-	           WRITE setFilterFlag)
+		   WRITE setFilterFlag
+		   NOTIFY filterFlagChanged)
 	
 	//! Only satellites belonging to this group will be returned.
 	//! Use an empty group ID for no filtering.
@@ -43,10 +44,10 @@ class SatellitesListFilterModel : public QSortFilterProxyModel
 	//! will cause the model to be re-filtered.
 	Q_PROPERTY(QString filterGroup
 	           READ getFilterGroup
-	           WRITE setFilterGroup)
-	
+		   WRITE setFilterGroup
+		   NOTIFY filterGroupChanged)
 public:
-	SatellitesListFilterModel(QObject *parent = Q_NULLPTR);
+	SatellitesListFilterModel(QObject *parent = nullptr);
 	
 	SatFlag getFilterFlag() const { return filterFlag; }
 	void setFilterFlag(const SatFlag& flag);
@@ -58,13 +59,15 @@ public:
 	                         const SatFlag& flag);
 	
 signals:
+	void filterFlagChanged(SatFlag&);
+	void filterGroupChanged(QString&);
 	
 public slots:
 	
 protected:
 	//! Reimplementation of the filtering method.
 	bool filterAcceptsRow(int source_row,
-			      const QModelIndex& source_parent) const Q_DECL_OVERRIDE;
+			      const QModelIndex& source_parent) const override;
 	
 private:
 	SatFlag filterFlag;
