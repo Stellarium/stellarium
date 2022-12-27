@@ -202,7 +202,7 @@ void SatellitesCommDialog::addCommData()
 void SatellitesCommDialog::removeCommData()
 {
 	QTreeWidgetItem* linkItem = ui->communicationsTreeWidget->currentItem();
-	if (linkItem != Q_NULLPTR)
+	if (linkItem)
 	{
 		CommLink c;
 		QString modulation = linkItem->data(CommsModulation, Qt::DisplayRole).toString();

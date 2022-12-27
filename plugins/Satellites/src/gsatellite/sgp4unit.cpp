@@ -198,7 +198,7 @@ static void dpper(double e3,     double ee2,    double peo,     double pgho,   d
 		  char opsmode)
 {
 	/* --------------------- local variables ------------------------ */
-	const double twopi = 2.0 * M_PI;
+	static const double twopi = 2.0 * M_PI;
 	double alfdp, betdp, cosip, cosop, dalf, dbet, dls,
 	       f2,    f3,    pe,    pgh,   ph,   pinc, pl ,
 	       sel,   ses,   sghl,  sghs,  shll, shs,  sil,

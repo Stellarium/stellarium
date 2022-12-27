@@ -56,11 +56,11 @@ const QString SatellitesDialog::dash = QChar(0x2014);
 SatellitesDialog::SatellitesDialog()
 	: StelDialog("Satellites")
 	, satelliteModified(false)
-	, updateTimer(Q_NULLPTR)
-	, importWindow(Q_NULLPTR)
-	, filterWindow(Q_NULLPTR)
-	, commWindow(Q_NULLPTR)
-	, filterModel(Q_NULLPTR)
+	, updateTimer(nullptr)
+	, importWindow(nullptr)
+	, filterWindow(nullptr)
+	, commWindow(nullptr)
+	, filterModel(nullptr)
 	, checkStateRole(Qt::UserRole)
 	, delimiter(", ")	
 {
@@ -76,25 +76,25 @@ SatellitesDialog::~SatellitesDialog()
 	{
 		updateTimer->stop();
 		delete updateTimer;
-		updateTimer = Q_NULLPTR;
+		updateTimer = nullptr;
 	}
 
 	if (importWindow)
 	{
 		delete importWindow;
-		importWindow = Q_NULLPTR;
+		importWindow = nullptr;
 	}
 
 	if (filterWindow)
 	{
 		delete filterWindow;
-		filterWindow = Q_NULLPTR;
+		filterWindow = nullptr;
 	}
 
 	if (commWindow)
 	{
 		delete commWindow;
-		commWindow = Q_NULLPTR;
+		commWindow = nullptr;
 	}
 
 	delete ui;
@@ -922,7 +922,7 @@ void SatellitesDialog::saveEditedSource()
 
 	// Changes to item data (text or check state) are connected to
 	// saveSourceList(), so there's no need to call it explicitly.
-	if (ui->sourceList->currentItem()!=Q_NULLPTR)
+	if (ui->sourceList->currentItem()!=nullptr)
 		ui->sourceList->currentItem()->setText(u);
 	else if (ui->sourceList->findItems(u, Qt::MatchExactly).count() <= 0)
 	{
@@ -987,7 +987,7 @@ void SatellitesDialog::addSourceRow(void)
 	ui->sourceEdit->selectAll();
 	ui->sourceEdit->setFocus();
 	ui->sourceList->blockSignals(true);
-	ui->sourceList->setCurrentItem(Q_NULLPTR);
+	ui->sourceList->setCurrentItem(nullptr);
 	ui->sourceList->blockSignals(false);
 }
 
@@ -1469,7 +1469,7 @@ void SatellitesDialog::updateTLEs(void)
 	}
 	else
 	{
-		QStringList updateFiles = QFileDialog::getOpenFileNames(Q_NULLPTR,
+		QStringList updateFiles = QFileDialog::getOpenFileNames(nullptr,
 									q_("Select TLE Update File"),
 									StelFileMgr::getDesktopDir(),
 									"*.*");
@@ -1583,7 +1583,7 @@ void SatellitesDialog::savePredictedIridiumFlares()
 
 	QString defaultFilter = QString("(*.%1)").arg(defaultExtension);
 	QString dir = QString("%1/iridium_flares.%2").arg(QDir::homePath(), defaultExtension);
-	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Save predicted Iridium flares as..."), dir, filter, &defaultFilter);
+	QString filePath = QFileDialog::getSaveFileName(nullptr, q_("Save predicted Iridium flares as..."), dir, filter, &defaultFilter);
 
 	int count = ui->iridiumFlaresTreeWidget->topLevelItemCount();
 	int columns = iridiumFlaresHeader.size();

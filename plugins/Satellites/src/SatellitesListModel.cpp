@@ -24,7 +24,7 @@
 SatellitesListModel::SatellitesListModel(QList<SatelliteP>* satellites,
 					 QObject* parent) :
 	QAbstractTableModel(parent),
-	satelliteList(Q_NULLPTR),
+	satelliteList(nullptr),
 	coloredNames(true)
 {
 	Q_ASSERT(satellites);

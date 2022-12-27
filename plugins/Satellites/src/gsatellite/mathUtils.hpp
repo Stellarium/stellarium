@@ -32,7 +32,7 @@
 #define MATHUTILS_HPP
 
 /*
-#include <math.h>
+#include <cmath>
 
 //! Four-quadrant arctan function
 //! @ingroup satellites

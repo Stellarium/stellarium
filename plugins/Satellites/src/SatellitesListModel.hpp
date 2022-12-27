@@ -44,17 +44,17 @@ class SatellitesListModel : public QAbstractTableModel
 {
 	Q_OBJECT
 public:
-	SatellitesListModel(QList<SatelliteP>* satellites, QObject *parent = Q_NULLPTR);
+	SatellitesListModel(QList<SatelliteP>* satellites, QObject *parent = nullptr);
 	
 	void setSatelliteList(QList<SatelliteP>* satellites);
 	
 	//! @name Reimplemented model handling methods.
 	//@{
-	Qt::ItemFlags flags(const QModelIndex& index) const Q_DECL_OVERRIDE;
-	QVariant data(const QModelIndex& index, int role) const Q_DECL_OVERRIDE;
-	bool setData(const QModelIndex& index, const QVariant& value, int role) Q_DECL_OVERRIDE;
-	int rowCount(const QModelIndex& parent) const Q_DECL_OVERRIDE;
-	int columnCount(const QModelIndex& parent) const Q_DECL_OVERRIDE;
+	Qt::ItemFlags flags(const QModelIndex& index) const override;
+	QVariant data(const QModelIndex& index, int role) const override;
+	bool setData(const QModelIndex& index, const QVariant& value, int role) override;
+	int rowCount(const QModelIndex& parent) const override;
+	int columnCount(const QModelIndex& parent) const override;
 	//@}
 	
 signals:

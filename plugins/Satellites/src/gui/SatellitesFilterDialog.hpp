@@ -31,11 +31,11 @@ class SatellitesFilterDialog : public StelDialog
 	
 public:
 	SatellitesFilterDialog();
-	~SatellitesFilterDialog() Q_DECL_OVERRIDE;
+	~SatellitesFilterDialog() override;
 	
 public slots:
-	void retranslate() Q_DECL_OVERRIDE;
-	void setVisible(bool visible = true) Q_DECL_OVERRIDE;
+	void retranslate() override;
+	void setVisible(bool visible = true) override;
 
 private slots:
 	void populateTexts();
@@ -47,7 +47,7 @@ private slots:
 	void updateMinMaxRCS(bool state);
 	
 private:
-	void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 	Ui_satellitesFilterDialog* ui;
 };
 
