@@ -83,15 +83,15 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 QString Satellites::SatellitesCatalogVersion = "0.12.0";
 
 Satellites::Satellites()
-	: satelliteListModel(Q_NULLPTR)
-	, toolbarButton(Q_NULLPTR)
-	, earth(Q_NULLPTR)
+	: satelliteListModel(nullptr)
+	, toolbarButton(nullptr)
+	, earth(nullptr)
 	, defaultHintColor(0.7f, 0.7f, 0.7f)
 	, updateState(CompleteNoUpdates)
-	, downloadMgr(Q_NULLPTR)
-	, progressBar(Q_NULLPTR)
+	, downloadMgr(nullptr)
+	, progressBar(nullptr)
 	, numberDownloadsComplete(0)
-	, updateTimer(Q_NULLPTR)
+	, updateTimer(nullptr)
 	, updatesEnabled(false)
 	, autoAddEnabled(false)
 	, autoRemoveEnabled(false)
@@ -99,7 +99,7 @@ Satellites::Satellites()
 	, flagUmbraVisible(false)
 	, flagUmbraAtFixedDistance(false)
 	, umbraColor(1.0f, 0.0f, 0.0f)
-	, umbraDistance(1000.0)
+	, fixedUmbraDistance(1000.0)
 	, flagPenumbraVisible(false)
 	, penumbraColor(1.0f, 0.0f, 0.0f)
 	, earthShadowEnlargementDanjon(false)
@@ -167,9 +167,9 @@ void Satellites::init()
 
 		// Gui toolbar button
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		if (gui!=Q_NULLPTR)
+		if (gui)
 		{
-			toolbarButton = new StelButton(Q_NULLPTR,
+			toolbarButton = new StelButton(nullptr,
 						       QPixmap(":/satellites/bt_satellites_on.png"),
 						       QPixmap(":/satellites/bt_satellites_off.png"),
 						       QPixmap(":/graphicGui/miscGlow32x32.png"),
@@ -263,7 +263,7 @@ void Satellites::bindingGroups()
 		QString actionShowName = QString("actionShow_Satellite_Group_%1").arg(groupId);
 		QString actionShowDescription = QString("%1 \"%2\"").arg(showSatGroup, q_(groupId));
 		StelAction* actionShow = actionMgr->findAction(actionShowName);
-		if (actionShow!=Q_NULLPTR)
+		if (actionShow)
 			actionMgr->findAction(actionShowName)->setText(actionShowDescription);
 		else
 			addAction(actionShowName, satGroup, actionShowDescription, this, [=](){setSatGroupVisible(groupId, true);});
@@ -271,7 +271,7 @@ void Satellites::bindingGroups()
 		QString actionHideName = QString("actionHide_Satellite_Group_%1").arg(groupId);
 		QString actionHideDescription = QString("%1 \"%2\"").arg(hideSatGroup, q_(groupId));
 		StelAction* actionHide = actionMgr->findAction(actionHideName);
-		if (actionHide!=Q_NULLPTR)
+		if (actionHide)
 			actionMgr->findAction(actionHideName)->setText(actionHideDescription);
 		else
 			addAction(actionHideName, satGroup, actionHideDescription, this, [=](){setSatGroupVisible(groupId, false);});
@@ -368,15 +368,15 @@ QList<StelObjectP> Satellites::searchAround(const Vec3d& av, double limitFov, co
 StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 {
 	if (!hintFader)
-		return Q_NULLPTR;
+		return nullptr;
 
 	StelCore* core = StelApp::getInstance().getCore();
 
 	if (qAbs(core->getTimeRate())>=Satellite::timeRateLimit) // Do not show satellites when time rate is over limit
-		return Q_NULLPTR;
+		return nullptr;
 
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
-		return Q_NULLPTR;
+		return nullptr;
 	
 	QString objw = nameI18n.toUpper();
 	
@@ -397,21 +397,21 @@ StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 StelObjectP Satellites::searchByName(const QString& englishName) const
 {
 	if (!hintFader)
-		return Q_NULLPTR;
+		return nullptr;
 
 	StelCore* core = StelApp::getInstance().getCore();
 
 	if (qAbs(core->getTimeRate())>=Satellite::timeRateLimit) // Do not show satellites when time rate is over limit
-		return Q_NULLPTR;
+		return nullptr;
 
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
-		return Q_NULLPTR;
+		return nullptr;
 
 	QString objw = englishName.toUpper();
 	
@@ -432,7 +432,7 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 		}
 	}
 
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 StelObjectP Satellites::searchByID(const QString &id) const
@@ -445,24 +445,24 @@ StelObjectP Satellites::searchByID(const QString &id) const
 		}
 	}
 
-	return Q_NULLPTR;
+	return nullptr;
 }
 
 StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 {
 	if (!hintFader)
-		return Q_NULLPTR;
+		return nullptr;
 
 	StelCore* core = StelApp::getInstance().getCore();
 
 	if (qAbs(core->getTimeRate())>=Satellite::timeRateLimit) // Do not show satellites when time rate is over limit
-		return Q_NULLPTR;
+		return nullptr;
 
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
-		return Q_NULLPTR;
+		return nullptr;
 	
 	// If the search string is a catalogue number...
-	QRegularExpression regExp("^(NORAD)\\s*(\\d+)\\s*$");
+	static const QRegularExpression regExp("^(NORAD)\\s*(\\d+)\\s*$");
 	QRegularExpressionMatch match=regExp.match(noradNumber);
 	if (match.hasMatch())
 	{
@@ -484,15 +484,15 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 StelObjectP Satellites::searchByInternationalDesignator(const QString &intlDesignator) const
 {
 	if (!hintFader)
-		return Q_NULLPTR;
+		return nullptr;
 
 	StelCore* core = StelApp::getInstance().getCore();
 
 	if (qAbs(core->getTimeRate())>=Satellite::timeRateLimit) // Do not show satellites when time rate is over limit
-		return Q_NULLPTR;
+		return nullptr;
 
 	if (core->getCurrentPlanet()!=earth || !isValidRangeDates(core))
-		return Q_NULLPTR;
+		return nullptr;
 
 	// If the search string is an international designator...
 	static const QRegularExpression regExp("^(\\d+)-(\\w*)\\s*$");
@@ -1131,9 +1131,10 @@ void Satellites::setDataMap(const QVariantMap& map)
 	satellites.clear();
 	groups.clear();
 	QVariantMap satMap = map.value("satellites").toMap();
-	for (const auto& satId : satMap.keys())
+	QMap<QString, QVariant>::const_iterator smit=satMap.constBegin();
+	while (smit != satMap.constEnd())
 	{
-		QVariantMap satData = satMap.value(satId).toMap();
+		QVariantMap satData = smit.value().toMap();
 
 		if (!satData.contains("hintColor"))
 			satData["hintColor"] = defaultHintColorMap;
@@ -1144,19 +1145,20 @@ void Satellites::setDataMap(const QVariantMap& map)
 		if (!satData.contains("infoColor"))
 			satData["infoColor"] = satData["hintColor"];
 
-		int sid = satId.toInt();
+		int sid = smit.key().toInt();
 		if (!satData.contains("stdMag") && qsMagList.contains(sid))
 			satData["stdMag"] = qsMagList[sid];
 
 		if (!satData.contains("rcs") && rcsList.contains(sid))
 			satData["rcs"] = rcsList[sid];
 
-		SatelliteP sat(new Satellite(satId, satData));
+		SatelliteP sat(new Satellite(smit.key(), satData));
 		if (sat->initialized)
 		{
 			satellites.append(sat);
 			groups.unite(sat->groups);			
 		}
+		smit++;
 	}
 	std::sort(satellites.begin(), satellites.end());
 	
@@ -1288,7 +1290,7 @@ bool Satellites::add(const TleData& tleData)
 		return false;
 
 	// Duplicates check
-	if (searchByID(getSatIdFromLine2(tleData.second.trimmed()))!=Q_NULLPTR)
+	if (searchByID(getSatIdFromLine2(tleData.second.trimmed()))!=nullptr)
 		return false;
 
 	QVariantList hintColor;
@@ -1910,7 +1912,7 @@ void Satellites::setUmbraColor(const Vec3f &c)
 
 void Satellites::setUmbraDistance(double d)
 {
-	umbraDistance = d;
+	fixedUmbraDistance = d;
 	emit umbraDistanceChanged(d);
 }
 
@@ -2242,7 +2244,7 @@ void Satellites::updateFromOnlineSources()
 	updateSources.clear();
 	numberDownloadsComplete = 0;
 
-	if (progressBar==Q_NULLPTR)
+	if (progressBar==nullptr)
 		progressBar = StelApp::getInstance().addProgressBar();
 
 	progressBar->setValue(0);
@@ -2253,7 +2255,7 @@ void Satellites::updateFromOnlineSources()
 	for (auto url : qAsConst(updateUrls))
 	{
 		TleSource source;
-		source.file = Q_NULLPTR;
+		source.file = nullptr;
 		source.addNew = false;
 		if (url.startsWith("1,"))
 		{
@@ -2332,7 +2334,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 				if (updateSources[i].url == url)
 				{
 					updateSources[i].file = tmpFile;
-					tmpFile = Q_NULLPTR;
+					tmpFile = nullptr;
 					break;
 				}
 			}
@@ -2364,7 +2366,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	if (progressBar)
 	{
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = Q_NULLPTR;
+		progressBar = nullptr;
 	}
 
 	// All files have been downloaded, finish the update
@@ -2378,7 +2380,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			parseTleFile(*updateSources[i].file, newData, updateSources[i].addNew, updateSources[i].url.toString(QUrl::None));
 			updateSources[i].file->close();
 			delete updateSources[i].file;
-			updateSources[i].file = Q_NULLPTR;
+			updateSources[i].file = nullptr;
 		}
 	}
 	updateSources.clear();
@@ -2620,7 +2622,8 @@ void Satellites::parseTleFile(QFile& openFile, TleDataHash& tleList, bool addFla
 
 			//TODO: We need to think of some kind of escaping these
 			//characters in the JSON parser. --BM
-			line.replace(QRegularExpression("\\s*\\[([^\\]])*\\]\\s*$"),"");  // remove "status code" from name
+			static const QRegularExpression statusCodeRx("\\s*\\[([^\\]])*\\]\\s*$");
+			line.replace(statusCodeRx,"");  // remove "status code" from name
 			lastData.name = line;
 		}
 		else
@@ -2674,7 +2677,8 @@ QString Satellites::getSatIdFromLine2(const QString& line)
 	if (!id.isEmpty())
 	{
 		// Strip any leading zeros as they should be unique ints as strings.
-		id.remove(QRegularExpression("^[0]*"));
+		static const QRegularExpression re("^[0]*");
+		id.remove(re);
 	}
 	return id;
 }
@@ -2724,13 +2728,20 @@ void Satellites::loadExtraData()
 
 		// Communications data for individual satellites
 		QVariantMap satellitesCommLink = commMap.value("satellites").toMap();
-		for (const auto& satId : satellitesCommLink.keys())
-			satComms.insert(satId.toInt(), satellitesCommLink.value(satId).toMap());
-
+		QMap<QString, QVariant>::const_iterator cit=satellitesCommLink.constBegin();
+		while (cit != satellitesCommLink.constEnd())
+		{
+			satComms.insert(cit.key().toInt(), cit.value().toMap());
+			cit++;
+		}
 		// Communications data for groups of satellites
 		QVariantMap groupsCommLink = commMap.value("groups").toMap();
-		for (const auto& groupId : groupsCommLink.keys())
-			groupComms.insert(groupId, groupsCommLink.value(groupId).toMap());
+		QMap<QString, QVariant>::const_iterator grit=groupsCommLink.constBegin();
+		while (grit != groupsCommLink.constEnd())
+		{
+			groupComms.insert(grit.key(), grit.value().toMap());
+			grit++;
+		}
 	}
 }
 
@@ -2828,64 +2839,72 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 	painter.setLineSmooth(true);
 	painter.setFont(labelFont);
 
-	double lambda, beta, satDistance;
+	double lambda, beta, umbraDistance_AU, umbraRadius_AU, penumbraDistance_AU, penumbraRadius_AU;
 	const Vec3d pos = earth->getEclipticPos();
 	const Vec3d dir = - sun->getAberrationPush() + pos;
 	StelUtils::rectToSphe(&lambda, &beta, dir);
 	const Mat4d rot=Mat4d::zrotation(lambda)*Mat4d::yrotation(-beta);
 
-	SatelliteP sat = Q_NULLPTR;
+	SatelliteP sat = nullptr;
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Satellite");
 	if (!newSelected.empty())
 		sat = getById(newSelected[0].staticCast<Satellite>()->getCatalogNumberString());
 
 	if (flagUmbraAtFixedDistance)
-		satDistance = umbraDistance/AU; // Satellite distance [AU]
+	{
+		umbraDistance_AU = penumbraDistance_AU = fixedUmbraDistance/AU+earth->getEquatorialRadius(); // geocentric circle distance [AU]
+		const double earthDistance=earth->getHeliocentricEclipticPos().norm(); // Earth distance [AU]
+		const double sunHP = asin(earth->getEquatorialRadius()/earthDistance)    * (M_180_PI*3600.); // arcsec.
+		const double satHP = asin(earth->getEquatorialRadius()/umbraDistance_AU) * (M_180_PI*3600.); // arcsec.
+		const double sunSD = atan(sun->getEquatorialRadius()/earthDistance)      * (M_180_PI*3600.); // arcsec.
+
+		//Classical Bessel elements
+		double f1, f2;
+		if (earthShadowEnlargementDanjon)
+		{
+			static const double danjonScale=1+1./85.-1./594.; // ~1.01, shadow magnification factor (see Espenak 5000 years Canon)
+			f1=danjonScale*satHP + sunHP + sunSD; // penumbra radius, arcsec
+			f2=danjonScale*satHP + sunHP - sunSD; // umbra radius, arcsec
+		}
+		else
+		{
+			const double mHP1=0.998340*satHP;
+			f1=1.02*(mHP1 + sunHP + sunSD); // penumbra radius, arcsec
+			f2=1.02*(mHP1 + sunHP - sunSD); // umbra radius, arcsec
+		}
+		penumbraRadius_AU=tan(f1/3600.*M_PI_180)*umbraDistance_AU;
+		umbraRadius_AU=tan(f2/3600.*M_PI_180)*umbraDistance_AU;
+	}
 	else if (!sat.isNull())
-		satDistance = sat->getInfoMap(core)["height"].toDouble()/AU;
+	{
+		Vec4d umbraData=sat->getUmbraData();
+		umbraDistance_AU    = umbraData[0]/AU;
+		umbraRadius_AU      = umbraData[1]/AU;
+		penumbraDistance_AU = umbraData[2]/AU;
+		penumbraRadius_AU   = umbraData[3]/AU;
+	}
 	else
 		return;
 
-	satDistance += earth->getEquatorialRadius();
-	texCross->bind();
-	const float shift = 8.f;
-	const double earthDistance=earth->getHeliocentricEclipticPos().norm(); // Earth distance [AU]
-	const double sunHP = asin(earth->getEquatorialRadius()/earthDistance) * M_180_PI*3600.; // arcsec.
-	const double satHP = asin(earth->getEquatorialRadius()/satDistance) * M_180_PI*3600.; // arcsec.
-	const double sunSD = atan(sun->getEquatorialRadius()/earthDistance) * M_180_PI*3600.; // arcsec.
-
-	//Classical Bessel elements instead
-	double f1, f2;
-	if (earthShadowEnlargementDanjon)
-	{
-		static const double danjonScale=1+1./85.-1./594.; // ~1.01, shadow magnification factor (see Espenak 5000 years Canon)
-		f1=danjonScale*satHP + sunHP + sunSD; // penumbra radius, arcsec
-		f2=danjonScale*satHP + sunHP - sunSD; // umbra radius, arcsec
-	}
-	else
-	{
-		const double mHP1=0.998340*satHP;
-		f1=1.02*(mHP1 + sunHP + sunSD); // penumbra radius, arcsec
-		f2=1.02*(mHP1 + sunHP - sunSD); // umbra radius, arcsec
-	}
-	const double f1_AU=tan(f1/3600.*M_PI_180)*satDistance;
-	const double f2_AU=tan(f2/3600.*M_PI_180)*satDistance;
 
 	StelVertexArray umbra(StelVertexArray::LineLoop);
 	for (int i=0; i<360; ++i)
 	{
-		Vec3d point(satDistance, cos(i*M_PI_180)*f2_AU, sin(i*M_PI_180)*f2_AU);
+		Vec3d point(umbraDistance_AU, cos(i*M_PI_180)*umbraRadius_AU, sin(i*M_PI_180)*umbraRadius_AU);
 		rot.transfo(point);
 		umbra.vertex.append(pos+point);
 	}
 	painter.setColor(getUmbraColor(), 1.f);
 	painter.drawStelVertexArray(umbra, false);
 
-	Vec3d point(satDistance, 0.0, 0.0);
+	// plot a center cross mark
+	texCross->bind();
+	Vec3d point(umbraDistance_AU, 0.0, 0.0);
 	rot.transfo(point);
 	Vec3d coord = pos+point;
 	painter.drawSprite2dMode(coord, 5.f);
-	QString cuLabel = QString("%1 (h=%2 %3)").arg(q_("C.U."), QString::number(AU*(satDistance - earth->getEquatorialRadius()), 'f', 1), qc_("km","distance"));
+	QString cuLabel = QString("%1 (h=%2 %3)").arg(q_("C.U."), QString::number(AU*(umbraDistance_AU - earth->getEquatorialRadius()), 'f', 1), qc_("km","distance"));
+	const float shift = 8.f;
 	painter.drawText(coord, cuLabel, 0, shift, shift, false);
 
 	if (getFlagPenumbraVisible())
@@ -2893,7 +2912,7 @@ void Satellites::drawCircles(StelCore* core, StelPainter &painter)
 		StelVertexArray penumbra(StelVertexArray::LineLoop);
 		for (int i=0; i<360; ++i)
 		{
-			Vec3d point(satDistance, cos(i*M_PI_180)*f1_AU, sin(i*M_PI_180)*f1_AU);
+			Vec3d point(penumbraDistance_AU, cos(i*M_PI_180)*penumbraRadius_AU, sin(i*M_PI_180)*penumbraRadius_AU);
 			rot.transfo(point);
 			penumbra.vertex.append(pos+point);
 		}

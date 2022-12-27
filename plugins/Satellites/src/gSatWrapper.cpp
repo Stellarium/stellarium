@@ -59,14 +59,14 @@ gSatWrapper::gSatWrapper(QString designation, QString tle1,QString tle2)
 
 gSatWrapper::~gSatWrapper()
 {
-	if (pSatellite != Q_NULLPTR)
+	if (pSatellite)
 		delete pSatellite;
 }
 
 Vec3d gSatWrapper::getTEMEPos() const
 {
 	Vec3d returnedVector;
-	if (pSatellite != Q_NULLPTR)
+	if (pSatellite)
 		returnedVector = pSatellite->getPos();
 	else
 		qWarning() << "gSatWrapper::getTEMEPos Method called without pSatellite initialized";
@@ -77,7 +77,7 @@ Vec3d gSatWrapper::getTEMEPos() const
 Vec3d gSatWrapper::getTEMEVel() const
 {
 	Vec3d returnedVector;
-	if (pSatellite != Q_NULLPTR)
+	if (pSatellite)
 		returnedVector = pSatellite->getVel();
 	else
 		qWarning() << "gSatWrapper::getTEMEVel Method called without pSatellite initialized";
@@ -88,7 +88,7 @@ Vec3d gSatWrapper::getTEMEVel() const
 Vec3d gSatWrapper::getSubPoint() const
 {
 	Vec3d returnedVector;
-	if (pSatellite != Q_NULLPTR)
+	if (pSatellite)
 		returnedVector = pSatellite->getSubPoint();
 	else
 		qWarning() << "gSatWrapper::getSubPoint Method called without pSatellite initialized";
@@ -113,15 +113,15 @@ void gSatWrapper::calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_velocity
 		double theta		= epoch.toThetaLMST(loc.longitude * KDEG2RAD);
 
 		/* Reference:  Explanatory supplement to the Astronomical Almanac 1992, page 209-210. */
-		/* Elipsoid earth model*/
-		/* c = Nlat/a */
-		double c = 1/std::sqrt(1 + __f*(__f - 2)*Sqr(sin(radLatitude)));
-		double sq = Sqr(1 - __f)*c;
+		/* Ellipsoid earth model*/
+		/* C = Nlat/a */
+		const double C = 1/std::sqrt(1 + __f*(__f - 2.)*Sqr(sin(radLatitude)));
+		const double S = Sqr(1 - __f)*C;
 
-		double r = (KEARTHRADIUS*c + (loc.altitude/1000.))*cos(radLatitude);
+		double r = (KEARTHRADIUS*C + (loc.altitude/1000.))*cos(radLatitude);
 		ao_position[0] = r * cos(theta);/*kilometers*/
 		ao_position[1] = r * sin(theta);
-		ao_position[2] = (KEARTHRADIUS*sq + (loc.altitude/1000.))*sin(radLatitude);
+		ao_position[2] = (KEARTHRADIUS*S + (loc.altitude/1000.))*sin(radLatitude);
 		ao_velocity[0] = -KMFACTOR*ao_position[1];/*kilometers/second*/
 		ao_velocity[1] =  KMFACTOR*ao_position[0];
 		ao_velocity[2] =  0;
@@ -187,8 +187,7 @@ void gSatWrapper::updateSunECIPos()
 	Vec3d sunEquinoxEqPos = solsystem->getSun()->getEquinoxEquatorialPos(StelApp::getInstance().getCore());
 
 	//sunEquinoxEqPos is measured in AU. we need measure it in Km
-	sunECIPos.set(sunEquinoxEqPos[0]*AU, sunEquinoxEqPos[1]*AU, sunEquinoxEqPos[2]*AU);
-	sunECIPos = sunECIPos + observerECIPos; //Change ref system centre
+	sunECIPos=sunEquinoxEqPos*AU + observerECIPos; //Change ref system centre
 }
 
 Vec3d gSatWrapper::getSunECIPos()

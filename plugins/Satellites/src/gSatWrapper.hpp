@@ -140,6 +140,8 @@ public:
         //! @param[out] ao_vel Observer ECI velocity vector measured in Km/s
 	static void calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_vel) ;
 
+	static Vec3d getObserverECIPos() {return observerECIPos;}
+
 private:
 	//! do the actual work to compute a cached value.
 	static void updateSunECIPos();
@@ -149,7 +151,7 @@ private:
 
 	// GZ We can avoid many computations (solar and observer positions for every satellite) by computing them only once for all objects.
 	static gTime lastSunECIepoch; // store last time of computation to avoid all-1 computations.
-	static Vec3d sunECIPos;       // enough to have these once.
+	static Vec3d sunECIPos;       // Observercentric ECI Solar position
 	static Vec3d observerECIPos;
 	static Vec3d observerECIVel;
 	static gTime lastCalcObserverECIPosition;

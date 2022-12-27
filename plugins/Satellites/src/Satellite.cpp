@@ -19,6 +19,7 @@
 
 #include "Satellite.hpp"
 #include "StelObject.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -114,7 +115,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	, hintColor(0.f,0.f,0.f)
 	, lastUpdated()	
 	, isISS(false)	
-	, pSatWrapper(Q_NULLPTR)
+	, pSatWrapper(nullptr)
 	, visibility(gSatWrapper::UNKNOWN)
 	, phaseAngle(0.)
 	, infoColor(0.f,0.f,0.f)
@@ -226,10 +227,10 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 
 Satellite::~Satellite()
 {
-	if (pSatWrapper != Q_NULLPTR)
+	if (pSatWrapper)
 	{
 		delete pSatWrapper;
-		pSatWrapper = Q_NULLPTR;
+		pSatWrapper = nullptr;
 	}
 }
 
@@ -454,6 +455,9 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 				oss << getCommLinkInfo(c);
 			}
 		}
+		// Umbra circle info. May not generally be interesting.
+		//oss << QString("%1: %2 km, %3: %4 km").arg(q_("Umbra distance"), QString::number(umbraDistance, 'f', 3), q_("Radius"), QString::number(umbraRadius, 'f', 3)) << "<br/>";
+		//oss << QString("%1: %2 km, %3: %4 km").arg(q_("Penumbra distance"), QString::number(penumbraDistance, 'f', 3), q_("Radius"), QString::number(penumbraRadius, 'f', 3)) << "<br/>";
 	}
 
 	postProcessInfoString(str, flags);
@@ -477,8 +481,7 @@ QString Satellite::getCommLinkInfo(CommLink comm) const
 
 	// Translate some specific communications terms
 	// See end of Satellites.cpp file to define translatable terms
-	QStringList commTerms;
-	commTerms << "uplink" << "downlink" << "beacon" << "telemetry" << "video" << "broadband" << "command";
+	static const QStringList commTerms={ "uplink", "downlink", "beacon", "telemetry", "video", "broadband", "command" };
 	for (auto& term: commTerms)
 	{
 		commLinkData.replace(term, q_(term));
@@ -784,7 +787,7 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 	if (pSatWrapper)
 	{
 		gSatWrapper *old = pSatWrapper;
-		pSatWrapper = Q_NULLPTR;
+		pSatWrapper = nullptr;
 		delete old;
 	}
 
@@ -843,6 +846,71 @@ void Satellite::update(double)
 		if (orbitDisplayed) computeOrbitPoints();
 	}
 }
+
+// Get radii and distances of shadow circles
+Vec4d Satellite::getUmbraData()
+{
+	static PlanetP earth=GETSTELMODULE(SolarSystem)->getEarth();
+	// Compute altitudes of umbra and penumbra circles. These should show where the satellite enters/exits umbra/penumbra.
+	// The computation follows ideas from https://celestrak.org/columns/v03n01/
+	// These sources mention ECI coordinates (Earth Centered Intertial). Presumably TEME (True Equator Mean Equinox) are equivalent, at least for our purposes.
+	const double rhoE=position.norm(); // geocentric Satellite distance, km
+	const double rS=earth->getHeliocentricEclipticPos().norm()*AU; // distance earth...sun
+	const double thetaE=asin((earth->getEquatorialRadius()*AU)/(rhoE));
+	// Accurate distance sat...sun from ECI sunpos
+	Vec3d sunTEME=pSatWrapper->getSunECIPos() - pSatWrapper->getObserverECIPos(); // km
+	const double thetaS=asin((sun->getEquatorialRadius()*AU)/(sunTEME.norm()));
+	Q_ASSERT(thetaE>thetaS);
+	const double theta=thetaE-thetaS; // angle so that satellite dives into umbra
+	// angle at Sun:
+	const double sigma=asin(sin(theta)*rhoE/rS);
+	// angle in geocenter
+	const double eta=M_PI-sigma-theta;
+	// complement
+	const double mu=M_PI-eta;
+	// geocentric distance of shadow circle towards antisun
+	umbraDistance=rhoE*cos(mu);
+	// radius of shadow circle
+	umbraRadius=rhoE*sin(mu);
+	// Repeat for penumbra
+	const double thetaP=thetaE+thetaS; // angle so that satellite touches penumbra
+	// angle at Sun:
+	const double sigmaP=asin(sin(thetaP)*rhoE/rS);
+	// angle in geocenter
+	const double etaP=M_PI-sigmaP-thetaP;
+	// complement
+	const double muP=M_PI-etaP;
+	// geocentric distance of shadow circle towards antisun
+	penumbraDistance=rhoE*cos(muP);
+	// radius of shadow circle
+	penumbraRadius=rhoE*sin(muP);
+	//StelObjectMgr *om=GETSTELMODULE(StelObjectMgr);
+	//om->setExtraInfoString(StelObject::DebugAid, QString("&rho;<sub>E</sub> %1, r<sub>S</sub> %2, &theta;<sub>E</sub> %3°, &theta;<sub>S</sub> %4° <br/>")
+	//		       .arg(QString::number(rhoE, 'f', 3),
+	//			    QString::number(rS, 'f', 3),
+	//			    QString::number(thetaE*M_180_PI, 'f', 3),
+	//			    QString::number(thetaS*M_180_PI, 'f', 3)
+	//			    )
+	//		       );
+	//om->addToExtraInfoString(StelObject::DebugAid, QString("&theta; %1°, &sigma; %2°, &eta; %3°, &mu; %4° <br/>")
+	//		       .arg(
+	//			    QString::number(theta*M_180_PI, 'f', 3),
+	//			    QString::number(sigma*M_180_PI, 'f', 3),
+	//			    QString::number(eta*M_180_PI, 'f', 3),
+	//			    QString::number(mu*M_180_PI, 'f', 3)
+	//			    )
+	//		       );
+	//om->addToExtraInfoString(StelObject::DebugAid, QString("&theta;<sub>P</sub> %1°, &sigma; %2°, &eta; %3°, &mu; %4° <br/>")
+	//		       .arg(
+	//			    QString::number(thetaP*M_180_PI, 'f', 3),
+	//			    QString::number(sigmaP*M_180_PI, 'f', 3),
+	//			    QString::number(etaP*M_180_PI, 'f', 3),
+	//			    QString::number(muP*M_180_PI, 'f', 3)
+	//			    )
+	//		       );
+	return Vec4d(umbraDistance, umbraRadius, penumbraDistance, penumbraRadius);
+}
+
 
 double Satellite::getDoppler(double freq) const
 {
