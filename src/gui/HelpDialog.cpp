@@ -360,6 +360,7 @@ void HelpDialog::updateHelpText(void) const
 	// Append all StelAction shortcuts.
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	typedef QPair<QString, QString> KeyDescription;
+	QString keydelimiter = QString("</b> %1 <b>").arg(q_("or"));
 	QVector<KeyDescription> groups;
 	const QStringList groupList = actionMgr->getGroupList();
 	for (const auto &group : groupList)
@@ -374,11 +375,12 @@ void HelpDialog::updateHelpText(void) const
 		const QList<StelAction *>actionList = actionMgr->getActionList(group.second);
 		for (auto* action : actionList)
 		{
-			if (action->getShortcut().isEmpty())
-				continue;
 			QString text = action->getText();
-			QString key =  action->getShortcut().toString(QKeySequence::NativeText);
-			descriptions.append(KeyDescription(text, key));
+			QStringList keys = { action->getShortcut().toString(QKeySequence::NativeText), action->getAltShortcut().toString(QKeySequence::NativeText)};
+			keys.removeAll(QString("")); // remove empty shortcuts
+			if (keys.count()==0)
+				continue;
+			descriptions.append(KeyDescription(text, keys.join(keydelimiter)));
 		}
 		std::sort(descriptions.begin(), descriptions.end());
 		if (descriptions.count()>0)
@@ -388,7 +390,7 @@ void HelpDialog::updateHelpText(void) const
 			for (const auto& desc : descriptions)
 			{
 				htmlText += "<tr><td>" + desc.first.toHtmlEscaped() + "</td>";
-				htmlText += "<td><b>" + desc.second.toHtmlEscaped() + "</b></td></tr>\n";
+				htmlText += "<td><b>" + desc.second + "</b></td></tr>\n";
 			}
 		}
 		if (group.second=="TUI") // Special case: TUI
