@@ -378,9 +378,8 @@ void HelpDialog::updateHelpText(void) const
 			QString text = action->getText();
 			QStringList keys = { action->getShortcut().toString(QKeySequence::NativeText), action->getAltShortcut().toString(QKeySequence::NativeText)};
 			keys.removeAll(QString("")); // remove empty shortcuts
-			if (keys.count()==0)
-				continue;
-			descriptions.append(KeyDescription(text, keys.join(keydelimiter)));
+			if (keys.count()>0)
+				descriptions.append(KeyDescription(text, keys.join(keydelimiter)));
 		}
 		std::sort(descriptions.begin(), descriptions.end());
 		if (descriptions.count()>0)
