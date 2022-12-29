@@ -25,8 +25,6 @@
 
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
-#include "ObsListCreateEditDialog.hpp"
-#include "ObservingListCommon.hpp"
 
 //! @class ObsListDialog
 //! Since V0.21.2, this class manages the ObservingLists, successor of the Bookmarks feature available since 0.15.
@@ -43,7 +41,11 @@
 //! Obviously, a list of favourite DSOs would not need those data (but maybe FoV is still meaningful).
 //! On retrieval, the same optional elements can again be selected, so you can retrieve an object without stored time or location, if that is meaningful.
 //! If location or landscape IDs cannot be found, they are not changed.
-
+//!
+//! Updated for 23.1: Integrated functions of extra edit dialog, deep refactoring.
+//! You cannot delete the default list. Choose another list as default before deleting the displayed one.
+//! You cannot delete the last list.
+//! Importing a JSON file with observingLists will import all lists and unconditionally overwrite existing lists with the same OLUD.
 
 
 class Ui_obsListUnifiedDialogForm;
@@ -60,35 +62,115 @@ class ObsListDialog : public StelDialog
 public:
 	explicit ObsListDialog(QObject *parent);
 
-	~ObsListDialog() Q_DECL_OVERRIDE;
+	~ObsListDialog() override;
 
+	struct observingListItem
+	{
+	public:
+		QString name;
+		QString nameI18n;
+		QString type;         // type oriented on Stellarium's object class: Star, Planet (also for sun and moons!), Nebula, ...
+		QString objtype;      // More physical type description: star (also Sun!), planet, moon, open cluster, galaxy, region in the sky, ...
+		QString ra;
+		QString dec;
+		QString magnitude;
+		QString constellation;
+		double jd;
+		QString location; // a full location encoded with StelLocation::serializeToLine()
+		QString landscapeID; // landscapeID of landscape at moment of item creation.
+		double fov;
+		bool isVisibleMarker;
+
+		//! constructor
+		observingListItem():
+		name(""),
+		nameI18n(""),
+		type(""),
+		objtype(""),
+		ra(""),
+		dec(""),
+		magnitude(""),
+		constellation(""),
+		jd(0.0),
+		location(""),
+		landscapeID(""),
+		fov(0.0),
+		isVisibleMarker(false)
+		{}
+		//! Convert to QVariantMap
+		QVariantMap toVariantMap(){
+			return {
+				{QString(KEY_DESIGNATION)      , name},
+				{QString(KEY_NAME_I18N)        , nameI18n},
+				{QString(KEY_TYPE)             , type},
+				{QString(KEY_OBJECTS_TYPE)     , objtype},
+				{QString(KEY_RA)               , ra},
+				{QString(KEY_DEC)              , dec},
+				{QString(KEY_MAGNITUDE)        , magnitude},
+				{QString(KEY_CONSTELLATION)    , constellation},
+				{QString(KEY_JD)               , jd},
+				{QString(KEY_LOCATION)         , location},
+				{QString(KEY_LANDSCAPE_ID)     , landscapeID},
+				{QString(KEY_FOV)              , fov},
+				{QString(KEY_IS_VISIBLE_MARKER), isVisibleMarker}};
+		}
+	};
+
+	enum ObsListColumns {
+		ColumnUUID,          //! UUID of object
+		ColumnName,          //! Name or designation of object
+		ColumnNameI18n,      //! Localized name of object
+		ColumnType,          //! Type of the object
+		ColumnRa,            //! Right ascension of the object
+		ColumnDec,           //! Declination of the object
+		ColumnMagnitude,     //! Magnitude of the object
+		ColumnConstellation, //! Constellation in which the object is located
+		ColumnDate,          //! Date
+		ColumnLocation,      //! Location where the object is observed
+		ColumnLandscapeID,   //! LandscapeID linked to object observation
+		ColumnCount          //! Total number of columns
+	};
+	Q_ENUM(ObsListColumns)
 	// Notify that the application style changed
-	//void styleChanged() Q_DECL_OVERRIDE;
+	//void styleChanged() override;
 
-	void setVisible(bool v) Q_DECL_OVERRIDE;
+	//void setVisible(bool v) override;
 
 protected:
 	Ui_obsListUnifiedDialogForm *ui;
 
 	//! Initialize the dialog widgets and connect the signals/slots.
-	void createDialogContent() Q_DECL_OVERRIDE;
+	void createDialogContent() override;
 
 private:
-	QStandardItemModel *obsListListModel;
 	class StelCore *core;
 	class StelObjectMgr *objectMgr;
 	class LandscapeMgr *landscapeMgr;
 	class LabelMgr *labelMgr;
 
-	QString observingListJsonPath; // set once in constructor. CURRENTLY reset in loading methods which is nonsense!
-	QString bookmarksJsonPath;     // set once in constructor. INSTEAD: use file name as loading argument!
-	QString selectedObservingListUuid;
+	QStandardItemModel *itemModel; //!< Data for the table display.
+	QString observingListJsonPath; //!< Path to observingList.json file, set once in constructor. CURRENTLY reset in loading methods which is nonsense!
+	QString bookmarksJsonPath;     //!< Path to bookmarks.json, set once in constructor. INSTEAD: use file name as loading argument!
+
+	//! NEW: Represents the contents of the observingList.json file. Read ONCE at start. Contains 4 key/value pairs:
+	//! - defaultListOlud: The OLUD of the currently configured default list. If empty or invalid, the first list is used as default.
+	//! - observingLists:  QVariantMap of OLUD/ObsList pairs
+	//! - shortName: "Observing list for Stellarium"
+	//! - version: "2.0"
+	//! The other methods can load, add, delete, or edit lists from the observingLists list.
+	QVariantMap jsonMap;
+	QVariantMap observingLists; //!< Contains the observingLists map from the JSON file
+
+	QString defaultOlud;  //!< OLUD (UUID) of default list
+	QString selectedOlud; //!< UUID has to be set before calling loadSelectedObservingList. Could be called currentListOlud
+
+	//! filled when loading a selected observing list. This is needed for the interaction with the table in GUI
 	QHash<QString, observingListItem> observingListItemCollection;
-	QList<int> highlightLabelIDs; //! int label IDs for addressing labels by the HighlightMgr
-	QString defaultListOlud_;
-	//List names
-	QList<QString> listNames_;
-	//QStringList listNamesModel; // only used in 2 methods. Allowed replacing by local vars!
+
+	QList<int> highlightLabelIDs; //!< int label IDs for addressing labels by the HighlightMgr
+
+	//List names, used for the ComboBox
+	QList<QString> listNames;
 
 	//properties:
 	bool flagUseJD;
@@ -113,8 +195,6 @@ private:
 	// OLD Replace this by "switch to EDIT mode"
 	//void invokeObsListCreateEditDialog(QString listOlud);
 
-	//ObsListCreateEditDialog *createEditDialog_instance;
-
 	//! Append row in the obsListListModel (the table to display/select list entries)
 	//! @param olud id of the record
 	//! @param name name or the designation of the object
@@ -130,38 +210,31 @@ private:
 			 const QString &ra, const QString &dec, const QString &magnitude, const QString &constellation,
 			 const QString &date, const QString &location, const QString &landscapeID);
 
-	//! Load the selected observing list from Json file into dialog.
-	//! @param listOlud the olud (id) of the list
-	void loadSelectedObservingListFromJsonFile(const QString &listOlud);
+	//! Load the selected observing list (selectedObservingListOlud) from the jsonMap.
+	void loadSelectedObservingList();
 
-	//! Load the lists names from Json file to populate the combo box and get the default list olud
-	void loadListsNameFromJsonFile();
+	//! Load the lists names from jsonMap,
+	//! Populate the list names into combo box and extract defaultOlud
+	void loadListNames();
 
 	//! Load the default list
 	void loadDefaultList();
 
-	//! Load the bookmarks of bookmarks.json file into a temporary structure
-	QHash<QString, observingListItem> loadBookmarksInObservingList();
+	//! Load the bookmarks of a file (usually bookmarks.json) file into a temporary structure
+	QHash<QString, observingListItem> loadBookmarksFile(QFile &file);
 
-	void saveBookmarksInObsListJsonFile(QVariantMap &allListsMap, const QHash<QString, observingListItem> &bookmarksCollection);
-
-	//! Load list from JSON file
-	QVariantList loadListFromJson(const QVariantMap &map, const QString& listOlud);
-
-	// Populate list names into combo box
-	//! Populate combo box with list name/olud
-	void populateListNameInComboBox(QVariantMap map, const QString &defaultListOlud);
-
-	//// Populate data into combo box
-	//void populateDataInComboBox(QVariantMap map, const QString &defaultListOlud);
+	//! Save the old bookmarks loaded in bookmarksCollection under the name "bookmarks list"
+	void saveBookmarksInObservingLists(const QHash<QString, observingListItem> &bookmarksCollection);
 
 	//! Sort the obsListTreeView by the column name given in parameter
 	void sortObsListTreeViewByColumnName(const QString &columnName);
 
-	//! get the defaultListOlud from Json file
-	QString extractDefaultListOludFromJsonFile();
+	//! Returns the defaultListOlud from the jsonMap, or an empty QString.
+	QString extractDefaultOlud();
 
-	static bool checkIfBookmarksListExists(const QVariantMap &allListsMap);
+	//! Check if bookmarks list already exists in observing list file,
+	//! i.e., if the old bookmarks file has already be loaded.
+	bool checkIfBookmarksListExists();
 
 	//! NEW: Switch between regular and edit modes.
 	void switchEditMode(bool enableEditMode);
@@ -173,15 +246,8 @@ private:
 	//! Load the observing list in case of edit mode
 	void loadObservingList();
 
-	//! Load bookmark in observing list for import.
-	void loadBookmarksInObservingList_old();
-
-	//! Initialize the error message (obsListErrorMessage).
-	void initErrorMessage();
-
-	//! Display the error message.
-	void displayErrorMessage(const QString &message);
-
+	//! Get the magnitude from selected object (or a dash if unavailable)
+	static QString getMagnitude(const QList<StelObjectP> &selectedObject, StelCore *core);
 
 
 
@@ -198,7 +264,7 @@ signals:
 
 public slots:
 
-	void retranslate() Q_DECL_OVERRIDE;
+	void retranslate() override;
 	bool getFlagUseJD() {return flagUseJD;}
 	bool getFlagUseLandscape() {return flagUseLandscape;}
 	bool getFlagUseLocation() {return flagUseLocation;}
@@ -215,15 +281,15 @@ private slots:
 	//! Clear highlights (remove screen labels)
 	void clearHighlights();
 
-	void obsListNewListButtonPressed();
+	void newListButtonPressed();
 
 	//! Initiate edit mode: Enable/disable GUI elements and initiate editing
-	void obsListEditButtonPressed();
+	void editButtonPressed();
 
 	//! This used to be called on closing the extra dialog.
 	void finishEditMode();
 
-	void obsListDeleteButtonPressed();
+	void deleteButtonPressed();
 
 
 	//! Method called when a list name is selected in the combobox
@@ -242,7 +308,7 @@ private slots:
 
 	void obsListExportListButtonPressed();
 
-	void obsListImportListButtonPresssed();
+	void obsListImportListButtonPressed();
 
 	void obsListSaveButtonPressed();
 
@@ -250,7 +316,57 @@ private slots:
 
 	void headerClicked(int index);
 
-	void nameOfListTextChange(const QString &newText);
+	//! Called when text in listName lineEdit changes.
+	//! Prepare a rename of the currently edited list. Deactivates save button if name is empty.
+	void listNameTextChange(const QString &newText);
+
+private:
+	static constexpr char const *JSON_FILE_NAME = "observingList.json";
+	static constexpr char const *FILE_VERSION = "2.0";
+
+	static constexpr char const *JSON_BOOKMARKS_FILE_NAME = "bookmarks.json";
+	static constexpr char const *BOOKMARKS_LIST_NAME = "bookmarks list";
+	static constexpr char const *BOOKMARKS_LIST_DESCRIPTION = "Bookmarks of previous Stellarium version.";
+	static constexpr char const *SHORT_NAME_VALUE = "Observing list for Stellarium";
+
+	static constexpr char const *KEY_DEFAULT_LIST_OLUD = "defaultListOlud";
+	static constexpr char const *KEY_OBSERVING_LISTS = "observingLists";
+	static constexpr char const *KEY_CREATION_DATE = "creation date";
+	static constexpr char const *KEY_BOOKMARKS = "bookmarks";
+	static constexpr char const *KEY_NAME = "name";
+	static constexpr char const *KEY_NAME_I18N = "nameI18n";
+	static constexpr char const *KEY_JD = "jd";
+	static constexpr char const *KEY_RA = "ra";
+	static constexpr char const *KEY_DEC = "dec";
+	static constexpr char const *KEY_FOV = "fov";
+	static constexpr char const *KEY_DESCRIPTION = "description";
+	static constexpr char const *KEY_LANDSCAPE_ID = "landscapeID";
+	static constexpr char const *KEY_OBJECTS = "objects";
+	static constexpr char const *KEY_OBJECTS_TYPE = "objtype";
+	static constexpr char const *KEY_TYPE = "type";
+	static constexpr char const *KEY_DESIGNATION = "designation";
+	static constexpr char const *KEY_SORTING = "sorting";
+	static constexpr char const *KEY_LOCATION = "location";
+	static constexpr char const *KEY_MAGNITUDE = "magnitude";
+	static constexpr char const *KEY_CONSTELLATION = "constellation";
+	static constexpr char const *KEY_VERSION = "version";
+	static constexpr char const *KEY_SHORT_NAME = "shortName";
+	static constexpr char const *KEY_IS_VISIBLE_MARKER = "isVisibleMarker";
+
+	static constexpr char const *SORTING_BY_NAME = "name";
+	static constexpr char const *SORTING_BY_NAMEI18N = "nameI18n";
+	static constexpr char const *SORTING_BY_TYPE = "type";
+	static constexpr char const *SORTING_BY_RA = "right ascension";
+	static constexpr char const *SORTING_BY_DEC = "declination";
+	static constexpr char const *SORTING_BY_MAGNITUDE = "magnitude";
+	static constexpr char const *SORTING_BY_CONSTELLATION = "constellation";
+	static constexpr char const *SORTING_BY_DATE = "date";
+	static constexpr char const *SORTING_BY_LOCATION = "location";
+	static constexpr char const *SORTING_BY_LANDSCAPE_ID = "landscapeID";
+
+	static constexpr char const *CUSTOM_OBJECT = "CustomObject";
+
+	constexpr static const QChar dash = QChar(0x2014);
 
 };
 
