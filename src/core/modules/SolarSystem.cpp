@@ -1414,12 +1414,15 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 	QString info = "";
 	Vec3d win;
 	Vec3f markerColor;
+	bool skipFlag = false;
 
 	if (getFlagEphemerisLine() && getFlagEphemerisScaleMarkers())
 		baseSize = 3.f; // The line lies through center of marker
 
 	for (int i =0; i < fsize; i++)
 	{
+		skipFlag = (((i + 1)%dataStep)!=1 && dataStep!=1);
+
 		// Check visibility of pointer
 		if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisList[i].coord, win)))
 			continue;
@@ -1437,18 +1440,17 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 			size = baseSize;
 		}
 		if (isComet) size += 16.f;
-		size += sizeCoeff; //
+		size += sizeCoeff;
 		sPainter.setColor(markerColor);
 		sPainter.setBlending(true, GL_ONE, GL_ONE);
 		if (isComet)
 			texEphemerisCometMarker->bind();
 		else
 			texEphemerisMarker->bind();
-		if (skipMarkers)
-		{
-			if ((showDates || showMagnitudes) && showSkippedData && ((i + 1)%dataStep)!=1 && dataStep!=1)
-				continue;
-		}
+
+		if (skipMarkers && skipFlag)
+			continue;
+
 		Vec3f win;
 		float solarAngle=0.f; // Angle to possibly rotate the texture. Degrees.
 		if (prj->project(AstroCalcDialog::EphemerisList[i].coord, win))
@@ -1470,7 +1472,7 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 
 		if (showDates || showMagnitudes)
 		{
-			if (showSkippedData && ((i + 1)%dataStep)!=1 && dataStep!=1)
+			if (showSkippedData && skipFlag)
 				continue;
 
 			shift = 3.f + size/1.6f;
