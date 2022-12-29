@@ -23,6 +23,8 @@
 #include "Nebula.hpp"
 #include <QStringList>
 
+// DEAD CODE! ONLY FOR REFERENCE; DELETE BEFORE 23.1!
+
 struct observingListItem
 {
 public:
@@ -132,11 +134,14 @@ static constexpr char const *CUSTOM_OBJECT = "CustomObject";
 
 static const QChar dash = QChar(0x2014);
 
+
 class ObservingListUtil {
 public:
 
     //! Get the magnitude from selected object (or a dash if unavailable)
     static QString getMagnitude(const QList<StelObjectP> &selectedObject, StelCore *core) {
+
+	    qDebug() << "ERROR THIS IS DEAD CODE!";
 
 	if (!core)
 	    return QString(dash);
@@ -159,5 +164,4 @@ public:
 	return objectMagnitudeStr;
     }
 };
-
 #endif // OBSERVINGLISTCOMMON_H

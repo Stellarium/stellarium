@@ -215,6 +215,8 @@ protected:
 
 protected slots:
 	bool askConfirmation();
+	void messageBox(QString title, QString message);
+
 	//! To be called by a connected QToolButton with a color background.
 	//! This QToolButton needs properties "propName" and "iniName" which should be prepared using connectColorButton().
 	void askColor();
