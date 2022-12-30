@@ -2,15 +2,12 @@
 <ui version="4.0">
  <class>obsListDialogForm</class>
  <widget class="QWidget" name="obsListDialogForm">
-  <property name="enabled">
-   <bool>true</bool>
-  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>677</width>
-    <height>442</height>
+    <height>448</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
@@ -130,190 +127,117 @@
    <item row="1" column="0">
     <widget class="QWidget" name="widget" native="true">
      <layout class="QGridLayout" name="gridLayout">
-      <item row="5" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayoutCombo">
-        <item>
-         <widget class="QLabel" name="obsListComboLabel">
-          <property name="maximumSize">
-           <size>
-            <width>50</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>List:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="obsListComboBox"/>
-        </item>
-       </layout>
-      </item>
-      <item row="14" column="0">
-       <widget class="QFrame" name="frame">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_4">
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayoutButtons">
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QPushButton" name="obsListHighlightAllButton">
-             <property name="toolTip">
-              <string>Highlight all the objects of the selected list</string>
-             </property>
-             <property name="toolTipDuration">
-              <number>3</number>
-             </property>
-             <property name="text">
-              <string>Highlight all</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="obsListClearHighlightButton">
-             <property name="toolTip">
-              <string>Clear all the highlight objects</string>
-             </property>
-             <property name="toolTipDuration">
-              <number>3</number>
-             </property>
-             <property name="text">
-              <string>Clear highlight(s)</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="obsListNewListButton">
-             <property name="toolTip">
-              <string>Create a new observing list</string>
-             </property>
-             <property name="toolTipDuration">
-              <number>3</number>
-             </property>
-             <property name="text">
-              <string>New list</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="obsListEditListButton">
-             <property name="toolTip">
-              <string>Edit the selected list</string>
-             </property>
-             <property name="toolTipDuration">
-              <number>3</number>
-             </property>
-             <property name="text">
-              <string>Edit list</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="obsListDeleteButton">
-             <property name="toolTip">
-              <string>Delete the selected list</string>
-             </property>
-             <property name="text">
-              <string>Delete list</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="12" column="0">
-       <widget class="QLabel" name="obsListTextEditLabel">
-        <property name="text">
-         <string>Observing list description:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="10" column="0">
-       <widget class="QTreeView" name="obsListTreeView">
+      <item row="6" column="0">
+       <widget class="QTreeView" name="treeView">
         <property name="toolTipDuration">
          <number>-1</number>
         </property>
        </widget>
       </item>
-      <item row="6" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayoutDate">
+      <item row="9" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_editButtons">
         <item>
-         <widget class="QCheckBox" name="obsListIsDefaultListCheckBox">
-          <property name="enabled">
-           <bool>false</bool>
+         <widget class="QPushButton" name="addObjectButton">
+          <property name="toolTip">
+           <string>Highlight all the objects of the selected list</string>
           </property>
-          <property name="palette">
-           <palette>
-            <active>
-             <colorrole role="WindowText">
-              <brush brushstyle="SolidPattern">
-               <color alpha="255">
-                <red>35</red>
-                <green>38</green>
-                <blue>39</blue>
-               </color>
-              </brush>
-             </colorrole>
-            </active>
-            <inactive>
-             <colorrole role="WindowText">
-              <brush brushstyle="SolidPattern">
-               <color alpha="255">
-                <red>35</red>
-                <green>38</green>
-                <blue>39</blue>
-               </color>
-              </brush>
-             </colorrole>
-            </inactive>
-            <disabled>
-             <colorrole role="WindowText">
-              <brush brushstyle="SolidPattern">
-               <color alpha="255">
-                <red>0</red>
-                <green>0</green>
-                <blue>0</blue>
-               </color>
-              </brush>
-             </colorrole>
-            </disabled>
-           </palette>
+          <property name="toolTipDuration">
+           <number>3</number>
           </property>
           <property name="text">
-           <string>Defined as default list</string>
+           <string>Add object</string>
           </property>
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer_3">
+         <widget class="QPushButton" name="removeObjectButton">
+          <property name="toolTip">
+           <string>Clear all the highlight objects</string>
+          </property>
+          <property name="toolTipDuration">
+           <number>3</number>
+          </property>
+          <property name="text">
+           <string>Remove object</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="saveButton">
+          <property name="text">
+           <string>Save list</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_edit">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="cancelButton">
+          <property name="text">
+           <string>Cancel</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="4" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_Description">
+        <item>
+         <widget class="QLabel" name="descriptionLineLabel">
+          <property name="text">
+           <string>Description:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_description">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>62</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="descriptionLineEdit"/>
+        </item>
+       </layout>
+      </item>
+      <item row="5" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_checkBoxDefault">
+        <item>
+         <widget class="QCheckBox" name="defaultListCheckBox">
+          <property name="toolTip">
+           <string>Activate to set list as default</string>
+          </property>
+          <property name="toolTipDuration">
+           <number>3</number>
+          </property>
+          <property name="text">
+           <string>Default list</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_default_date">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -333,59 +257,198 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="obsListCreationDateLineEdit">
-          <property name="readOnly">
-           <bool>true</bool>
+         <widget class="QLineEdit" name="creationDateLineEdit"/>
+        </item>
+       </layout>
+      </item>
+      <item row="3" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_listName">
+        <item>
+         <widget class="QLabel" name="listNameLabel">
+          <property name="text">
+           <string>List name:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_listName">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>39</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="listNameLineEdit"/>
+        </item>
+       </layout>
+      </item>
+      <item row="2" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_listCombo">
+        <item>
+         <widget class="QLabel" name="obsListComboLabel">
+          <property name="maximumSize">
+           <size>
+            <width>50</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>List:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="obsListComboBox"/>
+        </item>
+       </layout>
+      </item>
+      <item row="8" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_Buttons">
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="highlightAllButton">
+          <property name="toolTip">
+           <string>Highlight all the objects of the selected list</string>
+          </property>
+          <property name="toolTipDuration">
+           <number>3</number>
+          </property>
+          <property name="text">
+           <string>Highlight all</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="clearHighlightButton">
+          <property name="toolTip">
+           <string>Clear all the highlight objects</string>
+          </property>
+          <property name="toolTipDuration">
+           <number>3</number>
+          </property>
+          <property name="text">
+           <string>Clear highlight(s)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="newListButton">
+          <property name="toolTip">
+           <string>Create a new observing list</string>
+          </property>
+          <property name="toolTipDuration">
+           <number>3</number>
+          </property>
+          <property name="text">
+           <string>New list</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="editListButton">
+          <property name="toolTip">
+           <string>Edit the selected list</string>
+          </property>
+          <property name="toolTipDuration">
+           <number>3</number>
+          </property>
+          <property name="text">
+           <string>Edit list</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="exportListButton">
+          <property name="toolTip">
+           <string>Export list</string>
+          </property>
+          <property name="toolTipDuration">
+           <number>3</number>
+          </property>
+          <property name="text">
+           <string>Export list...</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="importListButton">
+          <property name="toolTip">
+           <string>Import list</string>
+          </property>
+          <property name="toolTipDuration">
+           <number>3</number>
+          </property>
+          <property name="text">
+           <string>Import list...</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="deleteListButton">
+          <property name="toolTip">
+           <string>Delete the selected list</string>
+          </property>
+          <property name="text">
+           <string>Delete list</string>
           </property>
          </widget>
         </item>
        </layout>
       </item>
-      <item row="13" column="0">
-       <widget class="QPlainTextEdit" name="obsListDescriptionTextEdit">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="11" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayoutLJdLocation">
+      <item row="7" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_options">
         <item>
-         <widget class="QLabel" name="useOptionalElementsLabel">
+         <widget class="QLabel" name="alsoLoadLabel">
           <property name="text">
            <string>Also load:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="obsListJdCheckBox">
-          <property name="toolTip">
-           <string>Retrieve stored Julian Day</string>
-          </property>
+         <widget class="QLabel" name="alsoStoreLabel">
           <property name="text">
-           <string notr="true">Date</string>
+           <string>Also store:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="obsListLocationCheckBox">
+         <widget class="QCheckBox" name="coordinatesCheckBox">
           <property name="toolTip">
-           <string>Retrieve stored location</string>
+           <string>Store/load equatorial coordinates (J2000.0)</string>
+          </property>
+          <property name="toolTipDuration">
+           <number>3</number>
+          </property>
+          <property name="text">
+           <string>Coordinates (RA and DEC)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="jdCheckBox">
+          <property name="toolTip">
+           <string>Store/load with date/time (JD)</string>
+          </property>
+          <property name="text">
+           <string>Date</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="locationCheckBox">
+          <property name="toolTip">
+           <string>Store/load with location</string>
           </property>
           <property name="text">
            <string>Location</string>
@@ -393,9 +456,12 @@
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="obsListLandscapeCheckBox">
+         <widget class="QCheckBox" name="landscapeCheckBox">
           <property name="toolTip">
-           <string>Retrieve stored landscape</string>
+           <string>Store/load with landscape</string>
+          </property>
+          <property name="toolTipDuration">
+           <number>3</number>
           </property>
           <property name="text">
            <string>Landscape</string>
@@ -403,17 +469,20 @@
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="obsListFovCheckBox">
+         <widget class="QCheckBox" name="fovCheckBox">
           <property name="toolTip">
-           <string>Retrieve stored field of view</string>
+           <string>Store/load with field of view</string>
+          </property>
+          <property name="toolTipDuration">
+           <number>3</number>
           </property>
           <property name="text">
-           <string>FoV</string>
+           <string>FOV</string>
           </property>
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer_2">
+         <spacer name="horizontalSpacer_options">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
