@@ -150,8 +150,8 @@ private:
 	class LabelMgr *labelMgr;
 
 	QStandardItemModel *itemModel; //!< Data for the table display.
-	QString observingListJsonPath; //!< Path to observingList.json file, set once in constructor. CURRENTLY reset in loading methods which is nonsense!
-	QString bookmarksJsonPath;     //!< Path to bookmarks.json, set once in constructor. INSTEAD: use file name as loading argument!
+	const QString observingListJsonPath; //!< Path to observingList.json file, set once in constructor.
+	const QString bookmarksJsonPath;     //!< Path to bookmarks.json, set once in constructor.
 
 	//! This QVariantMap represents the contents of the observingList.json file. Read ONCE at start. Contains 4 key/value pairs:
 	//! - defaultListOlud: The OLUD of the currently configured default list. If empty or invalid, the first list is used as default.
@@ -165,7 +165,7 @@ private:
 	QString defaultOlud;  //!< OLUD (UUID) of default list
 	QString selectedOlud; //!< OLUD has to be set before calling loadSelectedObservingList. Could be called currentListOlud
 
-	//! filled when loading a selected observing list. This is needed for the interaction with the table in GUI
+	//! filled when loading a selected observing list. This is needed for the interaction with the table/itemModel in GUI
 	QHash<QString, observingListItem> currentItemCollection;
 
 	QList<int> highlightLabelIDs; //!< int label IDs for addressing labels by the HighlightMgr

@@ -53,6 +53,8 @@ ObsListDialog::ObsListDialog(QObject *parent) :
 	landscapeMgr(GETSTELMODULE(LandscapeMgr)),
 	labelMgr(GETSTELMODULE(LabelMgr)),
 	itemModel(new QStandardItemModel(0, ColumnCount)),
+	observingListJsonPath(StelFileMgr::findFile("data", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory | StelFileMgr::Writable)) + "/" + QString(JSON_FILE_NAME)),
+	bookmarksJsonPath(    StelFileMgr::findFile("data", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory | StelFileMgr::Writable)) + "/" + QString(JSON_BOOKMARKS_FILE_NAME)),
 	tainted(false),
 	isEditMode(false),
 	isCreationMode(false)
@@ -62,16 +64,6 @@ ObsListDialog::ObsListDialog(QObject *parent) :
 	//Initialize the list of observing lists
 	setObservingListHeaderNames();
 
-	observingListJsonPath =
-			StelFileMgr::findFile("data",
-					      static_cast<StelFileMgr::Flags>(StelFileMgr::Directory | StelFileMgr::Writable)) +
-			"/" +
-			QString(JSON_FILE_NAME);
-	bookmarksJsonPath =
-			StelFileMgr::findFile("data",
-					      static_cast<StelFileMgr::Flags>(StelFileMgr::Directory | StelFileMgr::Writable)) +
-			"/" +
-			QString(JSON_BOOKMARKS_FILE_NAME);
 	QSettings* conf  = StelApp::getInstance().getSettings();
 	flagUseJD        = conf->value("bookmarks/useJD", false).toBool();
 	flagUseLandscape = conf->value("bookmarks/useLandscape", false).toBool();
