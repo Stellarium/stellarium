@@ -46,9 +46,10 @@
 //! You cannot delete the default list. Choose another list as default before deleting the displayed one.
 //! You cannot delete the last list.
 //! Importing a JSON file with observingLists will import all lists and unconditionally overwrite existing lists with the same OLUD.
+//! Exporting writes an observingList file with only the currently displayed list.
 
 
-class Ui_obsListUnifiedDialogForm;
+class Ui_obsListDialogForm;
 
 class ObsListDialog : public StelDialog
 {
@@ -111,7 +112,7 @@ public:
 				{QString(KEY_JD)               , jd},
 				{QString(KEY_LOCATION)         , location},
 				{QString(KEY_LANDSCAPE_ID)     , landscapeID},
-				{QString(KEY_FOV)              , fov},
+				{QString(KEY_FOV)              , fov>1.e-6 ? fov : 0},
 				{QString(KEY_IS_VISIBLE_MARKER), isVisibleMarker}};
 		}
 	};
@@ -137,7 +138,7 @@ public:
 	//void setVisible(bool v) override;
 
 protected:
-	Ui_obsListUnifiedDialogForm *ui;
+	Ui_obsListDialogForm *ui;
 
 	//! Initialize the dialog widgets and connect the signals/slots.
 	void createDialogContent() override;
@@ -152,7 +153,7 @@ private:
 	QString observingListJsonPath; //!< Path to observingList.json file, set once in constructor. CURRENTLY reset in loading methods which is nonsense!
 	QString bookmarksJsonPath;     //!< Path to bookmarks.json, set once in constructor. INSTEAD: use file name as loading argument!
 
-	//! NEW: Represents the contents of the observingList.json file. Read ONCE at start. Contains 4 key/value pairs:
+	//! This QVariantMap represents the contents of the observingList.json file. Read ONCE at start. Contains 4 key/value pairs:
 	//! - defaultListOlud: The OLUD of the currently configured default list. If empty or invalid, the first list is used as default.
 	//! - observingLists:  QVariantMap of OLUD/ObsList pairs
 	//! - shortName: "Observing list for Stellarium"
@@ -162,15 +163,17 @@ private:
 	QVariantMap observingLists; //!< Contains the observingLists map from the JSON file
 
 	QString defaultOlud;  //!< OLUD (UUID) of default list
-	QString selectedOlud; //!< UUID has to be set before calling loadSelectedObservingList. Could be called currentListOlud
+	QString selectedOlud; //!< OLUD has to be set before calling loadSelectedObservingList. Could be called currentListOlud
 
 	//! filled when loading a selected observing list. This is needed for the interaction with the table in GUI
-	QHash<QString, observingListItem> observingListItemCollection;
+	QHash<QString, observingListItem> currentItemCollection;
 
 	QList<int> highlightLabelIDs; //!< int label IDs for addressing labels by the HighlightMgr
 
-	//List names, used for the ComboBox
+	//!List names, used for the ComboBox
 	QList<QString> listNames;
+	QString currentListName;
+	QString sorting;	//!< Sorting of the list ex: right ascension
 
 	//properties:
 	bool flagUseJD;
@@ -178,22 +181,12 @@ private:
 	bool flagUseLocation;
 	bool flagUseFov;
 
-	bool isEditMode;          //! NEW: true if in Edit/Create New mode.
-	// FROM OLD EDIT EXTRA DIALOG
-	bool isCreationMode;    //! if true we are in creation mode otherwise in edit mode
-	bool isSaveAs;
-	QString listOlud_;
-	//Current list name
-	QString currentListName;
-	//! Sorting of the list ex: right ascension
-	QString sorting;
-
+	bool tainted;           //!< Needs write on exit
+	bool isEditMode;        //!< true if in Edit/Create New mode.
+	bool isCreationMode;    //!< if true we are in creation mode otherwise in edit mode. We ONLY need this to decide what to do in case of a CANCEL during EDIT.
 
 	//! Set header names for observing list table
 	void setObservingListHeaderNames();
-
-	// OLD Replace this by "switch to EDIT mode"
-	//void invokeObsListCreateEditDialog(QString listOlud);
 
 	//! Append row in the obsListListModel (the table to display/select list entries)
 	//! @param olud id of the record
@@ -210,57 +203,52 @@ private:
 			 const QString &ra, const QString &dec, const QString &magnitude, const QString &constellation,
 			 const QString &date, const QString &location, const QString &landscapeID);
 
-	//! Load the selected observing list (selectedObservingListOlud) from the jsonMap.
-	void loadSelectedObservingList();
+	//! Returns the defaultListOlud from the jsonMap, or an empty QString.
+	QString extractDefaultOlud();
 
 	//! Load the lists names from jsonMap,
 	//! Populate the list names into combo box and extract defaultOlud
 	void loadListNames();
 
-	//! Load the default list
+	//! Load the selected observing list (selectedOlud) from the jsonMap.
+	void loadSelectedList();
+
+	//! Load the default list. If no default has been defined, current or first list (from comboBox) is loaded and are made default.
 	void loadDefaultList();
 
-	//! Load the bookmarks of a file (usually bookmarks.json) file into a temporary structure
+	//! Load the bookmarks of a file (usually bookmarks.json) into a temporary structure
 	QHash<QString, observingListItem> loadBookmarksFile(QFile &file);
 
-	//! Save the old bookmarks loaded in bookmarksCollection under the name "bookmarks list"
-	void saveBookmarksInObservingLists(const QHash<QString, observingListItem> &bookmarksCollection);
+	//! Prepare the currently displayed/edited list for storage
+	//! Returns QVariantList with keys={creation date, description, name, objects, sorting}
+	QVariantMap prepareCurrentList(QHash<QString, observingListItem> &itemHash);
+
+	//! Put the bookmarks in bookmarksHash into observingLists under the listname "bookmarks list". Does not write JSON!
+	void saveBookmarksHashInObservingLists(const QHash<QString, observingListItem> &bookmarksHash);
 
 	//! Sort the obsListTreeView by the column name given in parameter
 	void sortObsListTreeViewByColumnName(const QString &columnName);
 
-	//! Returns the defaultListOlud from the jsonMap, or an empty QString.
-	QString extractDefaultOlud();
 
 	//! Check if bookmarks list already exists in observing list file,
 	//! i.e., if the old bookmarks file has already be loaded.
 	bool checkIfBookmarksListExists();
 
 	//! NEW: Switch between regular and edit modes.
-	void switchEditMode(bool enableEditMode);
+	//! @param newList activate creation mode. This is only relevant to aborts
+	void switchEditMode(bool enableEditMode, bool newList);
 
-	// EDITING MODE METHODS
 	//! Save the object information into json file
 	void saveObservedObjectsInJsonFile();
 
-	//! Load the observing list in case of edit mode
-	void loadObservingList();
-
 	//! Get the magnitude from selected object (or a dash if unavailable)
 	static QString getMagnitude(const QList<StelObjectP> &selectedObject, StelCore *core);
-
-
-
 
 signals:
 	void flagUseJDChanged(bool b);
 	void flagUseLandscapeChanged(bool b);
 	void flagUseLocationChanged(bool b);
 	void flagUseFovChanged(bool b);
-
-	//EDIT METHOD: To notify that the exit button was clicked
-	void exitButtonClicked();
-
 
 public slots:
 
@@ -281,17 +269,6 @@ private slots:
 	//! Clear highlights (remove screen labels)
 	void clearHighlights();
 
-	void newListButtonPressed();
-
-	//! Initiate edit mode: Enable/disable GUI elements and initiate editing
-	void editButtonPressed();
-
-	//! This used to be called on closing the extra dialog.
-	void finishEditMode();
-
-	void deleteButtonPressed();
-
-
 	//! Method called when a list name is selected in the combobox
 	//! @param selectedIndex the index of the list name in the combo box
 	void loadSelectedObservingList(int selectedIndex);
@@ -300,28 +277,34 @@ private slots:
 	//! @param index the QModelIndex of the list
 	void selectAndGoToObject(QModelIndex index);
 
+	//! Create a new empty list (new OLUD), make it the active list and enable editing
+	void newListButtonPressed();
 
-	// MOVED EDITING METHODS
-	void obsListAddObjectButtonPressed();
+	//! Initiate edit mode: Enable/disable GUI elements and initiate editing
+	void editListButtonPressed();
 
-	void obsListRemoveObjectButtonPressed();
+	void deleteListButtonPressed();
 
-	void obsListExportListButtonPressed();
+	void addObjectButtonPressed();
 
-	void obsListImportListButtonPressed();
+	void removeObjectButtonPressed();
 
-	void obsListSaveButtonPressed();
+	void exportListButtonPressed();
 
-	void obsListCancelButtonPressed();
+	void importListButtonPressed();
+
+	void saveButtonPressed();
+
+	void cancelButtonPressed();
 
 	void headerClicked(int index);
 
-	//! Called when text in listName lineEdit changes.
-	//! Prepare a rename of the currently edited list. Deactivates save button if name is empty.
-	void listNameTextChange(const QString &newText);
+	//! Connected to the defaultList checkbox
+	void defaultClicked(bool b);
 
 private:
 	static constexpr char const *JSON_FILE_NAME = "observingList.json";
+	static constexpr char const *JSON_FILE_BASENAME = "observingList";
 	static constexpr char const *FILE_VERSION = "2.0";
 
 	static constexpr char const *JSON_BOOKMARKS_FILE_NAME = "bookmarks.json";
@@ -367,7 +350,6 @@ private:
 	static constexpr char const *CUSTOM_OBJECT = "CustomObject";
 
 	constexpr static const QChar dash = QChar(0x2014);
-
 };
 
 #endif // OBSLISTDIALOG_H
